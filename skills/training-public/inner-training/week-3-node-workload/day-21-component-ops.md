@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -157,7 +162,8 @@ K8s 组件通过 HTTP 端点暴露健康状态：
 
 ### 任务 1: 集群组件总览与状态检查 (40min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-system 命名空间中的所有 Pod
 kubectl get pods -n kube-system -o wide
 
@@ -207,14 +213,14 @@ kubectl cluster-info
 # Kubernetes control plane is running at https://xxx.cn-hangzhou.alicontainer.com:6443
 # CoreDNS is running at https://xxx.cn-hangzhou.alicontainer.com:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
-
 ### 任务 2: CoreDNS 检查与排查 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CoreDNS 运行状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 # 预期输出:
@@ -278,13 +284,13 @@ kubectl get configmap coredns -n kube-system -o yaml | \
 # 等待 CoreDNS 重载配置
 kubectl rollout restart deployment coredns -n kube-system
 ```
-
 ### 任务 3: kube-proxy 与网络插件检查 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 kube-proxy 运行状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 # 预期输出:
@@ -322,7 +328,6 @@ kubectl get pods -n kube-system | grep csi
 # csi-plugin-fghij                        4/4     Running   0          2d
 # csi-provisioner-0                       1/1     Running   0          2d
 ```
-
 ### 任务 4: ACK 集群组件（Addon）管理 (30min)
 
 ```bash
@@ -365,7 +370,8 @@ aliyun cs GET /clusters/<cluster_id>/components --body '{"name":"coredns"}'
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景 1: CoreDNS Pod 异常
 # 模拟 CoreDNS 问题
 kubectl scale deployment coredns -n kube-system --replicas=0
@@ -392,7 +398,6 @@ kubectl describe node <problem-node> | grep -A 10 "Conditions"
 # 查看节点事件
 kubectl get events -A --field-selector reason=NodeNotReady
 ```
-
 ---
 
 ## 配置示例
@@ -483,7 +488,8 @@ data:
 
 ### 组件状态检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # component-health-check.sh - K8s 组件健康检查脚本
 
@@ -542,7 +548,6 @@ echo "=========================================="
 echo "  检查完成"
 echo "=========================================="
 ```
-
 ---
 
 ## 常见问题
@@ -599,3 +604,5 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 - [kube-proxy 排障指南](../../domain-10-troubleshooting-diagnostics/10-kube-proxy-troubleshooting.md)
 
 ```
+
+<!-- risk-assessed -->

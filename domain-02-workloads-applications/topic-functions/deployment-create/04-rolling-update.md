@@ -28,6 +28,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 滚动更新源码分析
@@ -379,7 +384,8 @@ Step 11: RS-v2 replicas=10, RS-v1 replicas=0 (总 10 Pod，滚动完成)
 
 ## 暂停与恢复滚动更新
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 暂停滚动更新
 kubectl rollout pause deployment/nginx
 
@@ -389,7 +395,6 @@ kubectl get deployment nginx -o jsonpath='{.spec.paused}'
 # 恢复滚动更新
 kubectl rollout resume deployment/nginx
 ```
-
 **源码中的暂停处理**：
 ```go
 // pkg/controller/deployment/sync.go
@@ -440,3 +445,6 @@ func (dc *DeploymentController) syncRolloutStatus(ctx context.Context, allRSs []
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]
+
+
+<!-- risk-assessed -->

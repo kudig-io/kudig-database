@@ -21,6 +21,11 @@ related:
 - '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 云原生存储系统对比
@@ -105,9 +110,9 @@ related:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.x/deploy/longhorn.yaml
 ```
-
 - Longhorn 支持滚动升级，引擎逐卷升级（engine image 前后兼容）
 - 升级前确保所有卷 healthy，无正在进行的重建
 - 可通过 Longhorn UI 或 `kubectl` 触发 volume engine 升级
@@ -437,3 +442,5 @@ volumeBindingMode: WaitForFirstConsumer   # 拓扑感知
 - [[concepts/storage-data-protection.md|storage data protection]] — 存储数据保护与灾备
 
 ```
+
+<!-- risk-assessed -->

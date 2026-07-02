@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 加固指南 - 认证机制
@@ -133,3 +138,6 @@ Webhook 令牌认证允许通过 webhook 联系内部或外部的认证服务进
 - [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
 - [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
 - [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]
+
+
+<!-- risk-assessed -->

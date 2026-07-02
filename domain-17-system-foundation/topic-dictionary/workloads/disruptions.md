@@ -36,6 +36,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Disruptions
@@ -184,7 +189,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看所有 PDB 状态
 kubectl get pdb -A
 
@@ -200,7 +215,6 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --d
 # 检查特定 Pod 是否受 PDB 保护
 kubectl get pdb -n <namespace> -o wide
 ```
-
 ## 交叉引用
 
 - [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
@@ -219,3 +233,5 @@ kubectl get pdb -n <namespace> -o wide
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
+
+<!-- risk-assessed -->

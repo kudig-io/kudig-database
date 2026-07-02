@@ -61,6 +61,11 @@ cross_refs:
   label: '相关知识域: domain-05-security-compliance'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Istio|Istio]] Ambient Mesh 与 L7 策略深度实践
@@ -244,7 +249,8 @@ spec:
 
 ## 2.1 Ambient 模式安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 istioctl install --set profile=ambient \
   --set values.global.proxy.holdApplicationUntilProxyStarts=true \
   --set meshConfig.accessLogEncoding=JSON \
@@ -254,10 +260,10 @@ istioctl install --set profile=ambient \
 
 istioctl verify-install
 ```
-
 ## 2.2 Ambient 安装验证输出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ istioctl verify-install
 
 ✔ Istio control plane "default" is installed in namespace "istio-system"
@@ -292,13 +298,13 @@ istio-system      Active   30d
 kube-system       Active   30d   
 monitoring        Active   30d   
 ```
-
 ## 2.2 命名空间加入 Ambient 数据平面
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl label namespace default istio.io/dataplane-mode=ambient
 
 kubectl label namespace production istio.io/dataplane-mode=ambient
@@ -307,7 +313,6 @@ kubectl label namespace production istio.io/use-waypoint=namespace-waypoint
 
 kubectl label namespace staging istio.io/dataplane-mode=ambient istio.io/use-waypoint=none
 ```
-
 ## 2.3 按服务级别控制 Waypoint 使用
 
 ```yaml
@@ -656,7 +661,8 @@ graph LR
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Phase 2: 安装 Ambient 组件 (与现有 Sidecar 共存)
 istioctl install --set profile=ambient -y
 
@@ -680,13 +686,13 @@ istioctl analyze -n default
 # Step 6: 性能对比测试
 fortio load -t 60s -qps 1000 http://reviews:9080/reviews/0
 ```
-
 ## 5.3 迁移验证输出
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 $ kubectl rollout restart deployment -n default
 deployment.apps/productpage-v1 restarted
 deployment.apps/reviews-v1 restarted
@@ -707,7 +713,6 @@ $ istioctl analyze -n default
 ✔ Ambient mode configuration is valid.
 ✔ All ztunnel pods are synced and healthy.
 ```
-
 ## 5.4 迁移注意事项
 
 ```yaml
@@ -928,7 +933,8 @@ Sidecar vs Ambient 性能基准:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== ztunnel 状态检查 ==="
@@ -959,10 +965,10 @@ kubectl exec -n istio-system daemonset/ztunnel -- nslookup reviews.default.svc.c
 echo "=== 分析配置问题 ==="
 istioctl analyze -A
 ```
-
 ## 8.2 ztunnel 日志分析输出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
 
 2026-04-24T10:00:01.123Z INFO ztunnel::proxy::inbound: accepted inbound connection src=10.0.1.5:38214 dst=10.0.2.10:9080
@@ -974,7 +980,6 @@ $ kubectl logs -n istio-system daemonset/ztunnel --tail=30
 2026-04-24T10:00:10.456Z INFO ztunnel::proxy::inbound: accepted inbound connection src=10.0.1.8:42156 dst=10.0.2.11:9080
 
 ```
-
 ## 8.3 常见问题与解决
 
 | 问题 | 原因 | 诊断命令 | 解决方案 |
@@ -1078,7 +1083,8 @@ Ambient_Mesh_生产检查清单:
 
 ## Ambient Mesh 端到端验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -e
 
@@ -1147,7 +1153,6 @@ else
   exit 0
 fi
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->## 参考链接
@@ -1208,3 +1213,5 @@ Istio 的 Sidecar 模式和 Ambient 模式代表了服务网格架构的两个�
 - 10-api-gateway-service-mesh-integration
 
 ```
+
+<!-- risk-assessed -->

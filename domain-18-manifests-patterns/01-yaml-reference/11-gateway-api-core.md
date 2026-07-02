@@ -57,6 +57,11 @@ cross_refs:
   label: '故障树: gateway-api'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 11 - Gateway API 核心资源 YAML 配置参考
@@ -2034,7 +2039,8 @@ spec:
 ## Q3: 如何调试 HTTPRoute 不生效?
 
 **A:** 诊断步骤:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Gateway 状态
 kubectl get gateway -A
 kubectl describe gateway <gateway-name> -n <namespace>
@@ -2052,7 +2058,6 @@ kubectl get gateway <gateway-name> -n <namespace> -o jsonpath='{.spec.listeners[
 # 5. 检查控制器日志
 kubectl logs -n gateway-system -l app=gateway-controller
 ```
-
 ## Q4: 权重路由的流量分配精确吗?
 
 **A:** 权重是**目标比例**, 不是绝对保证:
@@ -2117,3 +2122,6 @@ kubectl logs -n gateway-system -l app=gateway-controller
 - 10-ingress-ingressclass
 - 12-gateway-api-advanced-routes
 - 13-configmap-reference
+
+
+<!-- risk-assessed -->

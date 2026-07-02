@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Backstage|Backstage]] 内部开发者平台 (IDP) 构建指南
@@ -523,7 +528,8 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 社区 Helm Chart (非官方)
 helm repo add backstage https://backstage.github.io/charts
 helm install backstage backstage/backstage \
@@ -532,7 +538,6 @@ helm install backstage backstage/backstage \
   --set backstage.image.tag=latest \
   --set postgresql.enabled=true
 ```
-
 ## 8.3 生产 Checklist
 
 | 检查项 | 建议 |
@@ -583,3 +588,6 @@ helm install backstage backstage/backstage \
 - 11-vercel-frontend-deployment-platform
 - 01-platform-engineering-overview
 - 02-idp-design-principles
+
+
+<!-- risk-assessed -->

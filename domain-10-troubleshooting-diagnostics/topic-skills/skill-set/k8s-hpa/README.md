@@ -15,6 +15,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skill: HPA 不扩容的诊断和修复
@@ -32,7 +37,8 @@ HPA（Horizontal Pod Autoscaler）在负载上升时未按预期扩容，导致�
 ## 诊断步骤
 
 ### 步骤1: 确认 Metrics Server 正常运行
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l k8s-app=metrics-server
 kubectl top nodes
 kubectl top pods -n <namespace>
@@ -40,13 +46,15 @@ kubectl top pods -n <namespace>
 > 如果无法执行，替代方案：询问用户是否能通过监控面板（如 Prometheus Grafana）查看 Pod CPU/内存使用率，确认指标数据是否可达。
 
 ### 步骤2: 检查 HPA 配置与当前状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe hpa <hpa-name> -n <namespace>
 ```
 > 关注 `Metrics` 段落中的 current 与 target 值，`Conditions` 中的 `ScalingLimited` 和 `ScalingActive` 状态，以及 Events 中的时间线。
 
 ### 步骤3: 验证资源 request 与配额限制
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment <deployment-name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[*].resources.requests}'
 kubectl get resourcequota -n <namespace>
 kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
@@ -74,3 +82,6 @@ kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

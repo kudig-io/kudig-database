@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 自动化运维与SRE实践 (Automation and SRE Practices)
@@ -673,7 +678,8 @@ if __name__ == "__main__":
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # sre-automation-scripts.sh
 
@@ -862,7 +868,6 @@ main() {
 
 main "$@"
 ```
-
 <!-- chunk: 4. 问题响应与恢复 -->## 4. 问题响应与恢复
 
 ## 4.1 问题响应流程
@@ -1444,3 +1449,6 @@ SRE智能化趋势:
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

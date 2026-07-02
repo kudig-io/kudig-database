@@ -66,6 +66,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 021：Ingress 控制器 Pod 异常导致业务访问 404/502
@@ -88,7 +93,8 @@ relationships:
 
 ### 3.1 确认 Ingress Controller Pod 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ingress-nginx namespace 下所有 Pod
 kubectl get pod -n ingress-nginx -o wide
 
@@ -99,10 +105,10 @@ kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl describe deployment ingress-nginx-controller -n ingress-nginx
 kubectl get events -n ingress-nginx --sort-by='.lastTimestamp' | tail -50
 ```
-
 ### 3.2 检查 SLB 与后端 Endpoint 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Ingress 控制器 Service 的 EXTERNAL-IP 与后端
 kubectl get svc -n ingress-nginx
 kubectl describe svc ingress-nginx-controller -n ingress-nginx
@@ -114,10 +120,10 @@ kubectl get endpoints ingress-nginx-controller -n ingress-nginx -o yaml
 aliyun slb DescribeLoadBalancerAttribute --LoadBalancerId lb-2zeXXXXXXXXXXXXXX
 aliyun slb DescribeHealthStatus --LoadBalancerId lb-2zeXXXXXXXXXXXXXX --ListenerPort 443
 ```
-
 ### 3.3 查看控制器日志定位 502/404 来源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看异常 Pod 日志
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=500 --previous=false
 
@@ -127,10 +133,10 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --previous
 # 过滤 upstream 连接错误与 502 条目
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=1000 | grep -E "502|upstream|error|failed"
 ```
-
 ### 3.4 检查 Ingress 规则与 Backend Service
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 列出业务 namespace 的 Ingress
 kubectl get ingress -n mall-prod
 kubectl describe ingress mall-frontend -n mall-prod
@@ -144,10 +150,10 @@ kubectl get endpoints -n mall-prod
 kubectl run curl-test --rm -it --restart=Never -n mall-prod --image=registry-vpc.cn-shanghai.aliyuncs.com/acs/curlimages/curl:latest -- \
   curl -s -o /dev/null -w "%{http_code}" http://mall-frontend.mall-prod.svc.cluster.local:8080/health
 ```
-
 ### 3.5 检查节点资源与 Pod 调度
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ingress-nginx Pod 所在节点
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.nodeName}{"\n"}{end}'
 
@@ -157,10 +163,10 @@ kubectl top node $(kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=in
 # 查看节点状态与污点
 kubectl describe node $(kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{.items[0].spec.nodeName}')
 ```
-
 ### 3.6 检查 Nginx Ingress 配置与 ConfigMap
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ingress-nginx 配置
 kubectl get configmap -n ingress-nginx
 kubectl get configmap ingress-nginx-controller -n ingress-prod -o yaml
@@ -168,7 +174,6 @@ kubectl get configmap ingress-nginx-controller -n ingress-prod -o yaml
 # 查看是否启用强制 SSL 重定向、proxy-body-size 等参数
 kubectl get configmap ingress-nginx-controller -n ingress-nginx -o yaml | grep -E "ssl-redirect|proxy-body-size|proxy-connect-timeout|worker-processes"
 ```
-
 ### 3.7 诊断过程补充说明
 
 Ingress 控制器作为集群七层入口网关，其稳定性直接影响所有依赖它的业务。排查 404/502 时需要区分问题是来自 Ingress 控制器本身，还是来自后端业务服务。一个简单的方法是：如果所有 Ingress 域名都返回 502/404，则很可能是控制器或 SLB 后端异常；如果只有部分域名异常，则更可能是对应后端 Service 或 Ingress 规则的问题。
@@ -201,7 +206,8 @@ Nginx Ingress 的 `worker-processes` 参数控制 Nginx worker 进程数。设�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 立即扩容控制器副本数
 kubectl scale deployment ingress-nginx-controller --replicas=6 -n ingress-nginx
 
@@ -233,13 +239,13 @@ spec:
                 topologyKey: kubernetes.io/hostname
 EOF
 ```
-
 ### 5.2 调整控制器资源配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改控制器 Deployment 的资源请求与限制
 cat <<'EOF' | kubectl patch deployment ingress-nginx-controller -n ingress-nginx --patch-file=/dev/stdin
 spec:
@@ -256,13 +262,13 @@ spec:
               memory: "8Gi"
 EOF
 ```
-
 ### 5.3 优化 Nginx Ingress ConfigMap
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
@@ -280,23 +286,23 @@ data:
   enable-access-log: "true"
 EOF
 ```
-
 ### 5.4 重启控制器使配置生效
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 滚动重启
 kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
 
 # 等待滚动完成
 kubectl rollout status deployment ingress-nginx-controller -n ingress-nginx --timeout=300s
 ```
-
 ## 6. 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认所有控制器 Pod 运行正常且分布均匀
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o wide
 
@@ -318,7 +324,6 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=500
 kubectl run curl-test --rm -it --restart=Never -n mall-prod --image=registry-vpc.cn-shanghai.aliyuncs.com/acs/curlimages/curl:latest -- \
   curl -s -o /dev/null -w "%{http_code}" http://mall-order.mall-prod.svc.cluster.local:8080/health
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-021 已紧急处理完成。
@@ -365,3 +370,6 @@ kubectl run curl-test --rm -it --restart=Never -n mall-prod --image=registry-vpc
 - Ingress
 - Ingress 控制器 Pod 异常导致 404/502
 - Ingress 控制器 Pod 异常导致业务访问 404/502
+
+
+<!-- risk-assessed -->

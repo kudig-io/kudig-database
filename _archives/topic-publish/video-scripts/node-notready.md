@@ -36,6 +36,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — 数字人播报脚本
 
 > **生成时间**: 2026-05-18 20:57
@@ -116,28 +121,31 @@ authors:
 
 **修复命令**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有节点状态，统计 NotReady 数量
 kubectl get nodes --no-headers | awk '{print $2}' | sort | uniq -c
 # 或更精确的统计
 echo "NotReady nodes:" && kubectl get nodes --no-headers | grep -c "NotReady" && \
 echo "Total nodes:" && kubectl get nodes --no-headers | wc -l
 ```
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 NotReady 节点是否包含 control-plane/master 角色
 kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master"
 ```
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 NotReady 节点上运行的 Pod 数量和关键 namespace
 NODE_NAME="<notready-node>"
 kubectl get pods --all-namespaces --field-selector spec.nodeName=${NODE_NAME} --no-headers | \
   awk '{print $1}' | sort | uniq -c | sort -rn
 ```
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点 Ready condition 的 lastTransitionTime
 kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.conditions[-1].type,LAST_TRANSITION:.status.conditions[-1].lastTransitionTime | grep -v "NAME"
 ```
-
 **主播台词**：
 > 修复操作需要谨慎，请确保已备份配置。
 
@@ -188,3 +196,6 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 - domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
 - 数字人视频输出建议
 - Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
+
+
+<!-- risk-assessed -->

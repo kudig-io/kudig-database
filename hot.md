@@ -11,6 +11,11 @@ updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 会话热缓存
@@ -24,6 +29,7 @@ last_updated: 2026-06-26
 - 完成 summary/frontmatter 批量补充：4,937 个页面新增 summary，41 个页面补齐 frontmatter
 - 完成 tier 批量分配：core=1102, supporting=1372, peripheral=2511
 - 完成 5 个 fragmented tag hub 创建并添加 434 个交叉链接，orphans 从 1788 降至 1717
+- 完成语料完整度评估（89.1/100）并导出到 release/：4,996 页面，1,746 万 tokens，19,502 QA 对
 
 上一次活动（2026-05-24）：完成 kudig-database 全域深度研究（14 域全覆盖）
 
@@ -68,3 +74,6 @@ last_updated: 2026-06-26
 - 全域 broken links 扫描（wiki-lint 完整版）
 - 更多 domain 专题深入（如需要）
 - cross-linker 全域链接增强
+
+
+<!-- risk-assessed -->

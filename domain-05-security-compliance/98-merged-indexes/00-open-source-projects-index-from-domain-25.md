@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain-25 云原生安全 — 开源项目索引
@@ -459,14 +464,14 @@ Trivy Operator 是 Trivy 的 K8s 原生版本，以 Operator 模式运行在集�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm install trivy-operator aqua/trivy-operator \
   --namespace trivy-system \
   --create-namespace \
   --set trivy.ignoreUnfixed=true \
   --set trivy.severity=HIGH,CRITICAL
 ```
-
 **GitHub**: https://github.com/aquasecurity/trivy
 
 ## 7.2 Grype (Anchore)
@@ -1051,3 +1056,5 @@ sequenceDiagram
 - [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

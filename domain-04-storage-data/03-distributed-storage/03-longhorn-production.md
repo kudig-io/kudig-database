@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Longhorn Kubernetes 生产部署与运维
@@ -134,7 +139,8 @@ authors:
 
 ### 2.2 安装 open-iscsi
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CentOS/RHEL
 yum install -y iscsi-initiator-utils
 systemctl enable --now iscsid
@@ -147,7 +153,6 @@ systemctl enable --now iscsid
 systemctl status iscsid
 iscsiadm -m session
 ```
-
 ### 2.3 检查挂载
 
 ```bash
@@ -165,7 +170,8 @@ mount | grep /var/lib/longhorn
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add longhorn https://charts.longhorn.io
 helm repo update
 
@@ -177,13 +183,13 @@ helm install longhorn longhorn/longhorn \
   --set defaultSettings.backupTarget="s3://longhorn-backup-bucket@oss-cn-hangzhou/" \
   --set defaultSettings.backupTargetCredentialSecret="oss-backup-secret"
 ```
-
 ### 3.2 配置 OSS 备份 Secret
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 export ALIBABA_CLOUD_ACCESS_KEY_ID="LTAIxxxxxxxxxxxxxxxx"   # 替换为实际 AccessKey ID
 export ALIBABA_CLOUD_ACCESS_KEY_SECRET="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"   # 替换为实际 AccessKey Secret
 
@@ -201,23 +207,23 @@ stringData:
   AWS_REGION: cn-hangzhou
 EOF
 ```
-
 ### 3.3 验证安装
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get pods -n longhorn-system
 kubectl get svc -n longhorn-system
 
 # 访问 UI
 kubectl port-forward svc/longhorn-frontend 8080:80 -n longhorn-system
 ```
-
 ### 3.4 专有云安装调整
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm install longhorn ./longhorn \
   --namespace longhorn-system \
   --create-namespace \
@@ -226,7 +232,6 @@ helm install longhorn ./longhorn \
   --set defaultSettings.backupTarget="s3://longhorn-backup-bucket@oss-private-region/" \
   --set defaultSettings.backupTargetCredentialSecret="oss-backup-secret"
 ```
-
 ---
 
 <!-- chunk: 4. 卷管理 -->
@@ -269,19 +274,19 @@ spec:
 
 ### 4.3 查看卷状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc -n production
 kubectl get pv
 kubectl get volume -n longhorn-system
 ```
-
 ### 4.4 通过 Longhorn UI 管理卷
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl port-forward svc/longhorn-frontend 8080:80 -n longhorn-system
 # 浏览器访问 http://localhost:8080
 ```
-
 ---
 
 <!-- chunk: 5. 快照与备份 -->
@@ -292,7 +297,8 @@ kubectl port-forward svc/longhorn-frontend 8080:80 -n longhorn-system
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
@@ -305,13 +311,13 @@ spec:
     persistentVolumeClaimName: longhorn-pvc
 EOF
 ```
-
 ### 5.2 创建备份
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
@@ -327,13 +333,13 @@ spec:
   concurrency: 2
 EOF
 ```
-
 ### 5.3 从备份恢复
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -353,7 +359,6 @@ spec:
       storage: 10Gi
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 节点故障恢复 -->
@@ -380,7 +385,17 @@ Longhorn 标记该节点为 NotReady
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认节点已不可恢复
 kubectl get nodes
 
@@ -394,14 +409,13 @@ kubectl delete node node-worker-03
 # 4. Longhorn 自动在其他节点重建 Replica
 # 等待 Degraded 卷恢复健康
 ```
-
 ### 6.3 验证卷健康
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volume -n longhorn-system
 # 确认 state: attached, robustness: healthy
 ```
-
 ---
 
 <!-- chunk: 7. CSI 集成与扩容 -->
@@ -409,24 +423,33 @@ kubectl get volume -n longhorn-system
 
 ### 7.1 CSI Snapshot 支持
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumesnapshotclass
 # 预期输出
 NAME                DRIVER                   DELETIONPOLICY
 longhorn-snapshot   driver.longhorn.io       Delete
 ```
-
 ### 7.2 CSI 扩容
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑 PVC，增大 storage 请求
 kubectl edit pvc longhorn-pvc -n production
 # Longhorn 自动扩容文件系统
 ```
-
 ### 7.3 StorageClass 参数
 
 | 参数 | 默认值 | 说明 |
@@ -447,7 +470,8 @@ kubectl edit pvc longhorn-pvc -n production
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前版本
 helm list -n longhorn-system
 
@@ -469,13 +493,13 @@ EOF
 # 3. 确认所有卷 Healthy
 kubectl get volume -n longhorn-system
 ```
-
 ### 8.2 执行升级
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm upgrade longhorn longhorn/longhorn \
   --namespace longhorn-system \
   --version 1.7.0 \
@@ -483,15 +507,14 @@ helm upgrade longhorn longhorn/longhorn \
   --wait \
   --timeout 10m
 ```
-
 ### 8.3 升级后验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n longhorn-system
 kubectl get volume -n longhorn-system
 kubectl get settings -n longhorn-system
 ```
-
 ---
 
 <!-- chunk: 9. 生产注意事项 -->
@@ -651,7 +674,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前版本
 helm -n longhorn-system list
 
@@ -672,7 +696,6 @@ helm upgrade longhorn longhorn/longhorn \
 kubectl -n longhorn-system get pods
 kubectl -n longhorn-system get volumes
 ```
-
 ---
 
 ## Longhorn 数据本地化与副本自动平衡
@@ -714,7 +737,8 @@ allowVolumeExpansion: true
 
 日常巡检命令：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点磁盘使用情况
 kubectl -n longhorn-system get nodes.longhorn.io -o yaml | grep -A5 diskStatus
 
@@ -724,5 +748,6 @@ kubectl -n longhorn-system get volumes
 # 查看最近备份
 kubectl -n longhorn-system get backups
 ```
-
 ```
+
+<!-- risk-assessed -->

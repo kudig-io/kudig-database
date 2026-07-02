@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Node 注册与 kubeadm token 详解
@@ -424,7 +429,8 @@ timeouts:
 
 ### Token 管理全流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 Token（默认 24h TTL）
 kubeadm token create
 #abcdef.0123456789abcdef
@@ -450,10 +456,10 @@ kubeadm token delete abcdef
 # 查看 Token 对应的 Secret
 kubectl get secret bootstrap-token-ghijkl -n kube-system -o yaml
 ```
-
 ### 节点加入完整流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在控制面节点生成 join 命令
 kubeadm token create --print-join-command
 # kubeadm join 192.168.1.10:6443 --token xxx --discovery-token-ca-cert-hash sha256:yyy
@@ -476,10 +482,10 @@ kubectl get nodes
 # worker-1   Ready    <none>          10m   v1.28.0
 # worker-2   Ready    <none>          5m    v1.28.0
 ```
-
 ### 查看 Node 对象
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node worker-1 -o yaml
 # apiVersion: v1
 # kind: Node
@@ -511,7 +517,6 @@ kubectl get node worker-1 -o yaml
 #     containerRuntimeVersion: containerd://1.7.0
 #     osImage: Ubuntu 22.04.3 LTS
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -541,3 +546,6 @@ kubectl get node worker-1 -o yaml
 - 02-cluster-lifecycle-management
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
+
+
+<!-- risk-assessed -->

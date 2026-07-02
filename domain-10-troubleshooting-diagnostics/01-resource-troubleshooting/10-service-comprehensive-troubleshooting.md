@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 10 - [[Service|Service]] 全面故障排查 (Service Comprehensive Troubleshooting)
@@ -105,6 +110,7 @@ cross_refs:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        Service 故障排查流程                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -153,7 +159,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 常见问题速查
 
 | 症状 | 可能原因 | 排查命令 | 解决方案 |
@@ -189,7 +194,8 @@ kubectl get endpoints <service-name> -n <namespace>
 ```
 
 #### 场景2：LoadBalancer服务长时间处于Pending状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ❌ 问题现象
 # Service类型为LoadBalancer但EXTERNAL-IP一直显示<pending>
 
@@ -208,7 +214,6 @@ kubectl get secrets -n kube-system | grep cloud
 # 检查云配额和权限
 # 验证网络ACL和安全组配置
 ```
-
 #### 场景3：NodePort服务外部访问异常
 ```bash
 # ❌ 问题现象
@@ -237,7 +242,8 @@ ss -tlnp | grep <nodeport>
 
 ### 2.1 Endpoints 为空的原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查Endpoints ===
 kubectl get endpoints <svc-name> -n <namespace>
 kubectl describe endpoints <svc-name> -n <namespace>
@@ -254,13 +260,13 @@ kubectl get pods -n <namespace> -l <label-selector>
 kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.ports}'
 kubectl get pods -n <namespace> -o jsonpath='{.items[0].spec.containers[0].ports}'
 ```
-
 ### 2.2 Selector 问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 获取Service selector ===
 kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.selector}'
 # 输出: {"app":"nginx"}
@@ -275,10 +281,10 @@ kubectl get pods -n <namespace> --show-labels
 # 2. 修复selector或Pod标签
 kubectl label pod <pod-name> app=nginx --overwrite
 ```
-
 ### 2.3 Pod未Ready
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查Pod Ready状态 ===
 kubectl get pods -n <namespace> -l <label> -o custom-columns=NAME:.metadata.name,READY:.status.conditions[?(@.type=="Ready")].status
 
@@ -292,7 +298,6 @@ kubectl describe pod <pod-name> -n <namespace> | grep -A10 "Readiness"
 # 3. 容器CrashLoopBackOff
 kubectl logs <pod-name> -n <namespace>
 ```
-
 ---
 
 <!-- chunk: 3. ClusterIP Service 排查 (ClusterIP Troubleshooting) -->
@@ -300,7 +305,8 @@ kubectl logs <pod-name> -n <namespace>
 
 ### 3.1 连通性测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 从集群内测试 ===
 kubectl run test --rm -it --image=busybox --restart=Never -- wget -qO- http://<svc-name>.<namespace>.svc.cluster.local:<port>
 
@@ -313,10 +319,10 @@ kubectl run test --rm -it --image=busybox --restart=Never -- wget -qO- http://<c
 # === 测试Pod直连 ===
 kubectl run test --rm -it --image=busybox --restart=Never -- wget -qO- http://<pod-ip>:<target-port>
 ```
-
 ### 3.2 kube-proxy 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查kube-proxy Pod ===
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 
@@ -334,7 +340,6 @@ iptables -t nat -L KUBE-SVC-<hash> -n
 ipvsadm -Ln | grep <cluster-ip>
 ipvsadm -Ln -t <cluster-ip>:<port>
 ```
-
 ### 3.3 iptables 规则分析
 
 ```bash
@@ -360,7 +365,8 @@ iptables -t nat -L KUBE-SVC-XXXX -n
 
 ### 4.1 基本检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 获取NodePort ===
 kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.ports[0].nodePort}'
 
@@ -372,7 +378,6 @@ curl http://<node-ip>:<node-port>
 ss -tlnp | grep <node-port>
 netstat -tlnp | grep <node-port>
 ```
-
 ### 4.2 NodePort 不通原因
 
 | 原因 | 检查方法 | 解决方案 |
@@ -407,7 +412,8 @@ firewall-cmd --reload
 
 ### 5.1 Pending 状态排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查LB状态 ===
 kubectl get svc <svc-name> -n <namespace>
 kubectl describe svc <svc-name> -n <namespace>
@@ -421,7 +427,6 @@ kubectl describe svc <svc-name> -n <namespace> | grep -A10 Events
 # 3. 配额不足
 # 4. 注解配置错误
 ```
-
 ### 5.2 云平台LB问题
 
 | 云平台 | 常见问题 | 检查方法 |
@@ -433,7 +438,8 @@ kubectl describe svc <svc-name> -n <namespace> | grep -A10 Events
 
 ### 5.3 阿里云SLB问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查cloud-controller-manager ===
 kubectl get pods -n kube-system -l app=cloud-controller-manager
 kubectl logs -n kube-system -l app=cloud-controller-manager --tail=100
@@ -445,7 +451,6 @@ kubectl get svc <svc-name> -n <namespace> -o yaml | grep annotations -A20
 # service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
 # service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
 ```
-
 ---
 
 <!-- chunk: 6. Headless Service 排查 (Headless Troubleshooting) -->
@@ -453,7 +458,8 @@ kubectl get svc <svc-name> -n <namespace> -o yaml | grep annotations -A20
 
 ### 6.1 Headless Service 特点
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === Headless Service (ClusterIP: None) ===
 kubectl get svc <svc-name> -n <namespace>
 # CLUSTER-IP应该显示None
@@ -462,7 +468,6 @@ kubectl get svc <svc-name> -n <namespace>
 kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>
 # 应返回所有Pod的IP
 ```
-
 ### 6.2 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -478,7 +483,8 @@ kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>
 
 ### 7.1 DNS解析测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 检查Service配置 ===
 kubectl get svc <svc-name> -n <namespace> -o yaml
 
@@ -486,7 +492,6 @@ kubectl get svc <svc-name> -n <namespace> -o yaml
 kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>.<namespace>.svc.cluster.local
 # 应返回CNAME记录指向externalName
 ```
-
 ### 7.2 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -502,7 +507,8 @@ kubectl run test --rm -it --image=busybox --restart=Never -- nslookup <svc-name>
 
 ### 8.1 检查Session Affinity配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看配置 ===
 kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.sessionAffinity}'
 kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.sessionAffinityConfig}'
@@ -510,7 +516,6 @@ kubectl get svc <svc-name> -n <namespace> -o jsonpath='{.spec.sessionAffinityCon
 # === 测试会话保持 ===
 for i in {1..10}; do curl http://<svc-ip>:<port> 2>/dev/null | grep hostname; done
 ```
-
 ### 8.2 配置Session Affinity
 
 ```yaml
@@ -537,7 +542,8 @@ spec:
 
 ### 9.1 检查NetworkPolicy
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看命名空间的NetworkPolicy ===
 kubectl get networkpolicy -n <namespace>
 
@@ -547,7 +553,6 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 # === 检查是否阻断Service流量 ===
 # NetworkPolicy默认是增量的，确保允许必要的ingress/egress
 ```
-
 ### 9.2 允许Service流量示例
 
 ```yaml
@@ -575,7 +580,8 @@ spec:
 <!-- chunk: 10. 诊断命令速查 (Quick Reference) -->
 ## 10. 诊断命令速查 (Quick Reference)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === Service基本信息 ===
 kubectl get svc -n <namespace>
 kubectl describe svc <svc-name> -n <namespace>
@@ -596,7 +602,6 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 # === iptables规则 ===
 iptables -t nat -L KUBE-SERVICES -n | grep <svc-name>
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -630,3 +635,5 @@ iptables -t nat -L KUBE-SERVICES -n | grep <svc-name>
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/12-rbac-quota-troubleshooting.md|12-rbac-quota-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

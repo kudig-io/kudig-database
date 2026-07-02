@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 25: Flannel 网络实操
@@ -78,7 +83,8 @@ Pod A (10.244.1.2) → cni0 (10.244.1.1) → flannel.1 (VXLAN) → eth0 → Node
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 CNI 插件
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 
@@ -88,13 +94,22 @@ kubectl get pods -n kube-flannel
 # 确认节点有 flannel 接口
 ip addr | grep flannel
 ```
-
 ### 2.2 自定义 CIDR
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 通过 kubeadm 配置 Pod CIDR
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
@@ -104,14 +119,14 @@ kubectl edit configmap -n kube-system kubelet-config
 # 修改 Flannel 配置
 kubectl edit configmap -n kube-flannel kube-flannel-cfg
 ```
-
 ---
 
 ## 3. Flannel 网络诊断
 
 ### 3.1 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Flannel Pod
 kubectl get pods -n kube-flannel -o wide
 
@@ -124,10 +139,10 @@ ip addr | grep flannel
 # 检查 Flannel 网络信息
 cat /var/run/flannel/subnet.env
 ```
-
 ### 3.2 Pod 间通信故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Flannel 接口是否存在
 ip addr show flannel.1
 
@@ -140,7 +155,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 # 4. 检查 etcd 中的网络配置
 etcdctl get /coreos.com/network/subnets
 ```
-
 ---
 
 ## 4. Flannel 问题场景
@@ -150,7 +164,8 @@ etcdctl get /coreos.com/network/subnets
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Flannel 是否在所有节点运行
 kubectl get pods -n kube-flannel -o wide
 
@@ -166,13 +181,13 @@ iptables -L -n -t nat | grep flannel
 # 5. 重启 Flannel
 kubectl delete pod -n kube-flannel -l app=flannel
 ```
-
 ### 4.2 Flannel 启动失败
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Flannel 日志
 kubectl logs -n kube-flannel -l app=flannel --previous
 
@@ -182,10 +197,10 @@ kubectl exec -it -n kube-flannel flannel-xxx -- etcdctl get /coreos.com/network/
 # 3. 确认 kube-apiserver 可达
 kubectl exec -it -n kube-flannel flannel-xxx -- curl -sk https://kubernetes.default.svc.cluster.local/healthz
 ```
-
 ### 4.3 网络分段问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod CIDR 分配
 kubectl get pods -o wide | awk '{print $1, $2, $NF}' | head -20
 
@@ -195,7 +210,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 # 3. 检查路由表
 route -n | grep flannel
 ```
-
 ---
 
 ## 5. Flannel 与 [[NetworkPolicy|NetworkPolicy]]
@@ -205,27 +219,27 @@ route -n | grep flannel
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 如需 NetworkPolicy，使用 Calico
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # 检查 Calico 组件
 kubectl get pods -n kube-system -l k8s-app=calico-node
 ```
-
 ### 5.2 Flannel + Calico 混合
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Flannel（基础网络）
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 
 # 安装 Calico（策略）
 kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico-policy-only.yaml
 ```
-
 ---
 
 ## 6. Flannel 性能调优
@@ -235,7 +249,17 @@ kubectl apply -f https://docs.projectcalico.org/v3.25/manifests/calico-policy-on
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 检查当前 MTU
 ip link show flannel.1 | grep mtu
 
@@ -247,19 +271,18 @@ ip link set flannel.1 mtu 1400
 kubectl edit configmap -n kube-flannel kube-flannel-cfg
 # 添加: "Backend": {"Type": "vxlan", "VNI": 1, "MTU": 1400}
 ```
-
 ### 6.2 网络延迟优化
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 VXLAN 性能
 # 在两个节点上分别运行
 kubectl exec -it <pod-a> -- iperf3 -s &
 kubectl exec -it <pod-b> -- iperf3 -c <pod-a-ip>
 ```
-
 ---
 
 ## 7. 实战练习
@@ -372,3 +395,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -35,6 +35,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Taints and Tolerations
@@ -54,10 +59,19 @@ prerequisites:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl taint nodes node1 key1=value1:NoSchedule
 ```
-
 污点由 key、value 和 effect 组成。除非 Pod 具有匹配的容忍度，否则无法调度到带有污点的节点上。
 
 ### Toleration（容忍度）
@@ -271,7 +285,17 @@ spec:
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 为节点添加污点
 kubectl taint nodes <node-name> key=value:NoSchedule
 
@@ -294,7 +318,6 @@ kubectl get events --field-selector reason=TaintManagerEviction --all-namespaces
 kubectl cordon <node-name>
 
 ```
-
 ## 交叉引用
 
 - [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — nodeSelector / nodeAffinity 与污点互补
@@ -312,3 +335,5 @@ kubectl cordon <node-name>
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

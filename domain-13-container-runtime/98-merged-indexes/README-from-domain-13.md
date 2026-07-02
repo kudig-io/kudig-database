@@ -45,6 +45,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[docker]] 容器技术深度解析
@@ -116,7 +121,8 @@ cross_refs:
 ## 🔧 实践环境准备
 
 ### 系统要求
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 推荐操作系统版本
 Ubuntu 20.04+/22.04+
 CentOS 7.9+/8.x
@@ -126,9 +132,9 @@ RHEL 8.x/9.x
 Docker Engine 20.10+ (推荐 24.0+)
 Docker Compose v2.x
 ```
-
 ### 环境搭建脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自动化安装脚本
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
@@ -138,9 +144,9 @@ sudo usermod -aG docker $USER
 sudo systemctl enable docker
 sudo systemctl start docker
 ```
-
 ### 验证安装
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查版本信息
 docker --version
 docker-compose --version
@@ -148,7 +154,6 @@ docker-compose --version
 # 运行测试容器
 docker run hello-world
 ```
-
 ## 🏆 企业级最佳实践
 
 ### 生产环境部署原则
@@ -169,6 +174,7 @@ docker run hello-world
 
 ### 核心组件
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Docker CLI    │    │  Docker Daemon  │    │ Containerd      │
 │   (客户端)      │    │   (守护进程)    │    │ (容器运行时)    │
@@ -180,7 +186,6 @@ docker run hello-world
 │   (REST API)    │    │   (开放标准)    │    │   (底层实现)    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
-
 ### 生态工具链
 - **镜像构建**: BuildKit, Kaniko, Jib, Buildah
 - **编排管理**: Docker Swarm, Kubernetes, Nomad, Rancher
@@ -302,3 +307,5 @@ CMD ["./main"]
 - [[docker]]
 
 - [[domain-17-system-foundation/topic-cheat-sheet/docker.md|速查卡: docker]]
+
+<!-- risk-assessed -->

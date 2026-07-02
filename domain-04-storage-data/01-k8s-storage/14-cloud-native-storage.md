@@ -39,6 +39,11 @@ prerequisites:
 - iac-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 14 - 云原生存储与多云策略
@@ -112,6 +117,7 @@ k8s_versions:
 ### 多云存储架构模式
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 应用层 (微服务)
     ↓
 Kubernetes存储抽象层 (PV/PVC/StorageClass)
@@ -124,7 +130,6 @@ Kubernetes存储抽象层 (PV/PVC/StorageClass)
     ↑             ↑             ↑             ↑
 统一策略引擎 ← 成本优化器 ← 多云协调器 ← 监控告警系统
 ```
-
 ### 多云统一抽象配置
 
 ```yaml
@@ -277,7 +282,8 @@ spec:
 
 ### 同步监控脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cross-cloud-sync-monitor.sh
 
@@ -309,7 +315,6 @@ while true; do
   sleep 900
 done
 ```
-
 ---
 
 <!-- chunk: 存储成本优化 -->
@@ -476,7 +481,8 @@ spec:
 
 ### 跨云管理脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # multi-cloud-manager.sh
 
@@ -509,7 +515,6 @@ while true; do
   sleep 3600  # 每小时执行一次
 done
 ```
-
 ---
 
 <!-- chunk: 混合云灾备方案 -->
@@ -559,7 +564,17 @@ spec:
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # dr-drill-script.sh
 
@@ -623,7 +638,6 @@ EOF
 # 执行灾备演练
 perform_dr_drill
 ```
-
 ---
 
 <!-- chunk: 云原生存储最佳实践 -->
@@ -668,7 +682,8 @@ spec:
 ```
 
 ### 3. 自动化运维
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 自动化存储扩容脚本
 #!/bin/bash
 check_and_scale() {
@@ -684,7 +699,6 @@ check_and_scale() {
   fi
 }
 ```
-
 ### 4. 监控告警一体化
 ```yaml
 # Prometheus告警规则
@@ -897,3 +911,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

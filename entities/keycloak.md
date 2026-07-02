@@ -34,6 +34,11 @@ prerequisites:
 - gitops-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Keycloak
@@ -98,3 +103,6 @@ Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点�
 - [[entities/06-containerd-observability.md|containerd 可观测性]]
 - [[entities/kubeelasti.md|KubeElastic]]
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+
+
+<!-- risk-assessed -->

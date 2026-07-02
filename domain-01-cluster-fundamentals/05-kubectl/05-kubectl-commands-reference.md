@@ -78,6 +78,11 @@ related_docs:
   desc: 故障排查专题
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
@@ -119,6 +124,7 @@ kubectl 是 Kubernetes 集群的命令行工具，用于对集群执行命令和
 ### 1.1 kubectl 工作原理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                           kubectl 架构                                   │
 ├─────────────────────────────────────────────────────────────────────────┤
@@ -134,7 +140,6 @@ kubectl 是 Kubernetes 集群的命令行工具，用于对集群执行命令和
 │  └──────────────┘     └──────────────┘     └──────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 版本兼容性矩阵
 
 | kubectl 版本 | 支持的集群版本 | 重要特性变更 |
@@ -191,10 +196,10 @@ kubectl 是 Kubernetes 集群的命令行工具，用于对集群执行命令和
 
 #### 基础语法
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get <resource> [name] [options]
 ```
-
 #### 常用资源缩写
 
 | 资源类型 | 缩写 | API 组 | 作用域 |
@@ -226,7 +231,8 @@ kubectl get <resource> [name] [options]
 
 #### 生产环境常用查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Pod 及其详细信息
 kubectl get pods -A -o wide
 
@@ -278,10 +284,10 @@ kubectl get pods -o custom-columns=\
 'OWNER_KIND:.metadata.ownerReferences[0].kind,'\
 'OWNER_NAME:.metadata.ownerReferences[0].name'
 ```
-
 #### 高级 JSONPath 表达式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有节点 IP
 kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
 
@@ -297,10 +303,10 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .sta
 # 获取使用特定镜像的 Pod
 kubectl get pods -A -o jsonpath='{range .items[?(@.spec.containers[*].image=="nginx:1.25")]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}'
 ```
-
 ### 2.2 kubectl describe - 详细信息查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基础语法
 kubectl describe <resource> <name> [-n namespace]
 
@@ -323,10 +329,10 @@ kubectl describe deploy <deployment-name>
 # 查看 Ingress 规则和后端
 kubectl describe ingress <ingress-name>
 ```
-
 ### 2.3 kubectl explain - API 文档查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基础语法
 kubectl explain <resource>[.field] [--api-version=<version>]
 
@@ -348,10 +354,10 @@ kubectl explain prometheusrules.spec
 # v1.30+ 支持 OpenAPI v3
 kubectl explain pod.spec.containers --output=plaintext-openapiv2
 ```
-
 ### 2.4 kubectl api-resources - API 资源查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 API 资源
 kubectl api-resources
 
@@ -370,10 +376,10 @@ kubectl api-resources --sort-by=name
 # 输出宽格式 (包含 SHORTNAMES、APIVERSION、NAMESPACED、KIND)
 kubectl api-resources -o wide
 ```
-
 ### 2.5 kubectl events - 事件查询 (v1.26+ GA)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前命名空间事件
 kubectl events
 
@@ -395,7 +401,6 @@ kubectl events --for=pod/nginx
 # 组合过滤
 kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 ```
-
 ---
 
 <!-- chunk: 3. 资源创建与管理 -->
@@ -421,7 +426,8 @@ kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从文件创建
 kubectl create configmap nginx-conf --from-file=nginx.conf
 
@@ -441,13 +447,13 @@ kubectl create configmap app-config \
   --from-literal=key=value \
   --dry-run=client -o yaml > configmap.yaml
 ```
-
 #### Secret 创建详解
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 generic Secret
 kubectl create secret generic db-secret \
   --from-literal=username=admin \
@@ -470,13 +476,13 @@ kubectl create secret generic ssh-key \
   --from-file=ssh-privatekey=~/.ssh/id_rsa \
   --from-file=ssh-publickey=~/.ssh/id_rsa.pub
 ```
-
 #### Token 创建 (v1.24+)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ServiceAccount Token (v1.24+ 推荐方式)
 kubectl create token <service-account-name>
 
@@ -489,7 +495,6 @@ kubectl create token <sa-name> --audience=api
 # 绑定到特定 Pod
 kubectl create token <sa-name> --bound-object-kind=Pod --bound-object-name=<pod-name>
 ```
-
 ### 3.2 kubectl apply - 声明式管理
 
 #### 基础用法
@@ -498,7 +503,8 @@ kubectl create token <sa-name> --bound-object-kind=Pod --bound-object-name=<pod-
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用单个文件
 kubectl apply -f deployment.yaml
 
@@ -528,13 +534,13 @@ kubectl apply -f deployment.yaml --record  # 已废弃
 # v1.24+ 使用 annotation
 kubectl annotate deployment/nginx kubernetes.io/change-cause="Update nginx to 1.25"
 ```
-
 #### 服务端 Apply (Server-Side Apply) 详解
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 服务端 Apply 优势:
 # 1. 更精确的字段所有权管理
 # 2. 支持多个管理器
@@ -549,7 +555,6 @@ kubectl get deployment nginx -o yaml | grep -A 20 'managedFields'
 # 强制获取字段所有权
 kubectl apply --server-side --force-conflicts -f deployment.yaml
 ```
-
 ### 3.3 kubectl delete - 资源删除
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -557,7 +562,17 @@ kubectl apply --server-side --force-conflicts -f deployment.yaml
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除单个资源
 kubectl delete pod nginx
 
@@ -596,10 +611,10 @@ kubectl delete pods --field-selector=status.phase==Failed -A
 # 删除 Evicted Pod
 kubectl get pods -A | grep Evicted | awk '{print $2 " -n " $1}' | xargs -L1 kubectl delete pod
 ```
-
 ### 3.4 kubectl run - 快速创建 Pod
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建简单 Pod
 kubectl run nginx --image=nginx:1.25
 
@@ -631,10 +646,10 @@ kubectl run nginx --image=nginx:1.25 --dry-run=client -o yaml > pod.yaml
 # 覆盖 entrypoint
 kubectl run debug --image=alpine --restart=Never --command -- tail -f /dev/null
 ```
-
 ### 3.5 kubectl expose - 服务暴露
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 暴露 Deployment 为 ClusterIP Service
 kubectl expose deployment nginx --port=80 --target-port=80
 
@@ -659,7 +674,6 @@ kubectl expose deployment nginx --port=80 --cluster-ip=10.96.0.100
 # 指定外部 IP
 kubectl expose deployment nginx --port=80 --external-ip=192.168.1.100
 ```
-
 ---
 
 <!-- chunk: 4. Pod 调试与交互 -->
@@ -670,7 +684,8 @@ kubectl expose deployment nginx --port=80 --external-ip=192.168.1.100
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 中执行命令
 kubectl exec <pod-name> -- <command>
 
@@ -705,10 +720,10 @@ kubectl exec <pod-name> -- df -h
 # 批量执行
 kubectl get pods -l app=nginx -o name | xargs -I {} kubectl exec {} -- nginx -v
 ```
-
 ### 4.2 kubectl logs - 日志查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 日志
 kubectl logs <pod-name>
 
@@ -750,10 +765,10 @@ kubectl logs -f --tail=50 --timestamps <pod-name>
 # 多 Pod 日志聚合 (需要 stern 工具)
 # stern "nginx.*" --tail=10
 ```
-
 ### 4.3 kubectl cp - 文件复制
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Pod 复制到本地
 kubectl cp <namespace>/<pod-name>:<path> <local-path>
 kubectl cp default/nginx:/etc/nginx/nginx.conf ./nginx.conf
@@ -773,10 +788,10 @@ kubectl cp default/nginx:/var/log/ ./logs/
 # 2. 大文件传输可能超时
 # 3. 符号链接可能有问题
 ```
-
 ### 4.4 kubectl attach - 容器附加
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 附加到运行中的容器
 kubectl attach <pod-name> -i
 
@@ -786,10 +801,10 @@ kubectl attach <pod-name> -c <container-name> -it
 # 获取 TTY
 kubectl attach <pod-name> -it
 ```
-
 ### 4.5 kubectl debug - 调试容器 (v1.25+ GA)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建调试容器 (Ephemeral Container)
 kubectl debug -it <pod-name> --image=busybox --target=<container-name>
 
@@ -819,7 +834,6 @@ kubectl debug node/<node-name> -it --image=ubuntu
 # - ubuntu: 完整工具链
 # - gcr.io/kubernetes-e2e-test-images/jessie-dnsutils: DNS 调试
 ```
-
 #### 调试 Profile 详解
 
 | Profile | 用途 | 权限级别 |
@@ -840,7 +854,17 @@ kubectl debug node/<node-name> -it --image=ubuntu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑资源
 kubectl edit deployment nginx
 
@@ -857,7 +881,6 @@ kubectl edit deployment nginx --subresource=status
 # 输出格式
 kubectl edit deployment nginx -o json
 ```
-
 ### 5.2 kubectl patch - 资源补丁
 
 #### 三种补丁类型
@@ -873,7 +896,8 @@ kubectl edit deployment nginx -o json
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像
 kubectl patch deployment nginx -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx","image":"nginx:1.26"}]}}}}'
 
@@ -901,13 +925,13 @@ kubectl patch deployment nginx -p '{"metadata":{"annotations":{"description":"Up
 # 更新 NodeSelector
 kubectl patch deployment nginx -p '{"spec":{"template":{"spec":{"nodeSelector":{"disktype":"ssd"}}}}}'
 ```
-
 #### JSON Patch
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 替换镜像
 kubectl patch deployment nginx --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"nginx:1.26"}]'
 
@@ -920,39 +944,39 @@ kubectl patch deployment nginx --type='json' -p='[{"op":"remove","path":"/metada
 # 添加 init 容器
 kubectl patch deployment nginx --type='json' -p='[{"op":"add","path":"/spec/template/spec/initContainers","value":[{"name":"init","image":"busybox","command":["sh","-c","echo init"]}]}]'
 ```
-
 #### Merge Patch
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 简单字段更新
 kubectl patch configmap mycm --type=merge -p '{"data":{"key":"new_value"}}'
 
 # 删除字段 (设为 null)
 kubectl patch deployment nginx --type=merge -p '{"spec":{"template":{"spec":{"nodeSelector":null}}}}'
 ```
-
 #### 子资源补丁 (v1.28+)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新 Deployment status
 kubectl patch deployment nginx --subresource=status -p '{"status":{"readyReplicas":3}}'
 
 # 更新 scale 子资源
 kubectl patch deployment nginx --subresource=scale -p '{"spec":{"replicas":10}}'
 ```
-
 ### 5.3 kubectl replace - 资源替换
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 替换资源
 kubectl replace -f deployment.yaml
 
@@ -962,10 +986,10 @@ kubectl replace --force -f deployment.yaml
 # 从 stdin 替换
 cat deployment.yaml | kubectl replace -f -
 ```
-
 ### 5.4 kubectl set - 快速设置
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像
 kubectl set image deployment/nginx nginx=nginx:1.26
 
@@ -1005,13 +1029,13 @@ kubectl set selector service nginx 'app=nginx,version=v2'
 # 设置 subject (RBAC)
 kubectl set subject rolebinding admin --user=alice
 ```
-
 ### 5.5 kubectl label - 标签管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加标签
 kubectl label pods nginx env=prod
 
@@ -1039,13 +1063,13 @@ kubectl get pods -l 'env notin (dev)'
 kubectl get pods -l 'env'        # 有此标签
 kubectl get pods -l '!env'       # 无此标签
 ```
-
 ### 5.6 kubectl annotate - 注解管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加注解
 kubectl annotate pods nginx description="Web server"
 
@@ -1061,7 +1085,6 @@ kubectl annotate pods -l app=nginx team=platform
 # 记录变更原因
 kubectl annotate deployment nginx kubernetes.io/change-cause="Update to v1.26"
 ```
-
 ---
 
 <!-- chunk: 6. 部署管理 -->
@@ -1071,7 +1094,8 @@ kubectl annotate deployment nginx kubernetes.io/change-cause="Update to v1.26"
 
 #### 状态查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看部署状态
 kubectl rollout status deployment/nginx
 
@@ -1084,13 +1108,13 @@ kubectl rollout status statefulset/mysql
 # 带超时
 kubectl rollout status deployment/nginx --timeout=5m
 ```
-
 #### 历史与回滚
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看部署历史
 kubectl rollout history deployment/nginx
 
@@ -1106,10 +1130,10 @@ kubectl rollout undo deployment/nginx --to-revision=2
 # 查看回滚预览
 kubectl rollout undo deployment/nginx --dry-run=client -o yaml
 ```
-
 #### 暂停与恢复
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 暂停部署 (批量修改时)
 kubectl rollout pause deployment/nginx
 
@@ -1121,13 +1145,13 @@ kubectl set resources deployment/nginx --limits=cpu=500m
 # 恢复部署 (触发一次滚动更新)
 kubectl rollout resume deployment/nginx
 ```
-
 #### 重启
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 滚动重启 (v1.15+)
 kubectl rollout restart deployment/nginx
 
@@ -1140,10 +1164,10 @@ kubectl rollout restart statefulset/mysql
 # 批量重启
 kubectl rollout restart deployment -l app=myapp
 ```
-
 ### 6.2 kubectl scale - 扩缩容
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扩展副本数
 kubectl scale deployment nginx --replicas=5
 
@@ -1165,13 +1189,13 @@ kubectl scale statefulset mysql --replicas=3
 # 扩缩 ReplicaSet
 kubectl scale rs nginx-abc123 --replicas=5
 ```
-
 ### 6.3 kubectl autoscale - 自动扩缩容
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 HPA
 kubectl autoscale deployment nginx --min=2 --max=10 --cpu-percent=80
 
@@ -1188,7 +1212,6 @@ kubectl delete hpa nginx
 kubectl autoscale deployment nginx --min=2 --max=10 --cpu-percent=80 \
   --dry-run=client -o yaml
 ```
-
 #### HPA v2 YAML 示例
 
 ```yaml
@@ -1242,7 +1265,8 @@ spec:
 
 ### 7.1 kubectl cluster-info - 集群信息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 显示集群信息
 kubectl cluster-info
 
@@ -1255,10 +1279,10 @@ kubectl cluster-info dump --output-directory=/path/to/dump/
 # 指定命名空间
 kubectl cluster-info dump --namespaces=kube-system,default
 ```
-
 ### 7.2 kubectl top - 资源使用情况
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源使用
 kubectl top nodes
 
@@ -1281,13 +1305,22 @@ kubectl top pods --containers
 kubectl top pods -l app=nginx
 
 ```
-
 ### 7.3 kubectl cordon/uncordon - 节点调度控制
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标记节点不可调度
 kubectl cordon <node-name>
 
@@ -1302,13 +1335,22 @@ kubectl get nodes
 # 输出: node1   Ready,SchedulingDisabled   ...
 
 ```
-
 ### 7.4 kubectl drain - 节点排空
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 排空节点 (基础)
 kubectl drain <node-name>
 
@@ -1341,13 +1383,22 @@ kubectl drain <node-name> \
 # 排空后恢复调度
 kubectl uncordon <node-name>
 ```
-
 ### 7.5 kubectl taint - 节点污点管理
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 添加污点
 kubectl taint nodes <node-name> key=value:NoSchedule
 
@@ -1373,7 +1424,6 @@ kubectl taint nodes <node-name> node.kubernetes.io/maintenance:NoSchedule
 # 查看节点污点
 kubectl describe node <node-name> | grep Taints
 ```
-
 ---
 
 <!-- chunk: 8. 配置与上下文 -->
@@ -1440,7 +1490,8 @@ current-context: prod-admin@prod
 
 ### 8.2 kubectl config - 配置管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前配置
 kubectl config view
 
@@ -1497,10 +1548,10 @@ kubectl config view --flatten > ~/.kube/config-merged
 # 指定配置文件
 kubectl --kubeconfig=/path/to/config get pods
 ```
-
 ### 8.3 生产环境配置最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 使用独立的 kubeconfig 文件
 mkdir -p ~/.kube/configs
 # 每个集群一个文件
@@ -1522,7 +1573,6 @@ kubens production       # 切换命名空间
 # 5. 防止误操作生产环境
 # 使用 kubectl-safe 插件或设置提示
 ```
-
 ---
 
 <!-- chunk: 9. 高级调试 -->
@@ -1530,7 +1580,8 @@ kubens production       # 切换命名空间
 
 ### 9.1 kubectl port-forward - 端口转发
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 转发 Pod 端口
 kubectl port-forward pod/nginx 8080:80
 
@@ -1552,10 +1603,10 @@ kubectl port-forward pod/nginx 8080:80 8443:443
 # 随机本地端口
 kubectl port-forward pod/nginx :80
 ```
-
 ### 9.2 kubectl proxy - API 代理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启动 API 代理
 kubectl proxy
 
@@ -1574,10 +1625,10 @@ curl http://localhost:8001/api/v1/namespaces/default/pods
 # 访问服务
 curl http://localhost:8001/api/v1/namespaces/default/services/nginx/proxy/
 ```
-
 ### 9.3 kubectl wait - 等待条件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 等待 Pod Ready
 kubectl wait --for=condition=Ready pod/nginx --timeout=60s
 
@@ -1605,10 +1656,10 @@ kubectl wait --for=condition=Established crd/myresources.example.com
 # 使用 JSONPath 条件 (v1.23+)
 kubectl wait --for=jsonpath='{.status.phase}'=Running pod/nginx
 ```
-
 ### 9.4 kubectl debug 高级用法
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建节点调试 Pod
 kubectl debug node/<node-name> -it --image=ubuntu
 
@@ -1629,7 +1680,6 @@ kubectl debug <pod-name> -it --copy-to=debug-pod \
 kubectl debug <pod-name> -it --image=busybox --share-processes
 # 在 Pod 中: ps aux
 ```
-
 ---
 
 <!-- chunk: 10. 认证与授权 -->
@@ -1637,7 +1687,8 @@ kubectl debug <pod-name> -it --image=busybox --share-processes
 
 ### 10.1 kubectl auth - 认证授权检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否有权限
 kubectl auth can-i create pods
 kubectl auth can-i delete deployments
@@ -1667,13 +1718,13 @@ kubectl auth reconcile -f rbac.yaml
 kubectl auth can-i get pods/nginx
 kubectl auth can-i get pods --subresource=logs
 ```
-
 ### 10.2 kubectl certificate - 证书管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 批准 CSR
 kubectl certificate approve <csr-name>
 
@@ -1702,13 +1753,13 @@ EOF
 # 获取已签名证书
 kubectl get csr myuser -o jsonpath='{.status.certificate}' | base64 -d > myuser.crt
 ```
-
 ### 10.3 RBAC 资源管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Role
 kubectl create role pod-reader \
   --verb=get,list,watch \
@@ -1747,7 +1798,6 @@ kubectl describe role pod-reader
 kubectl get rolebindings
 kubectl describe rolebinding pod-reader-binding
 ```
-
 ---
 
 <!-- chunk: 11. 插件与扩展 -->
@@ -1755,7 +1805,8 @@ kubectl describe rolebinding pod-reader-binding
 
 ### 11.1 kubectl plugin - 插件机制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出已安装插件
 kubectl plugin list
 
@@ -1775,10 +1826,10 @@ chmod +x /usr/local/bin/kubectl-hello
 # 验证
 kubectl hello
 ```
-
 ### 11.2 Krew - 插件管理器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Krew (Linux/macOS)
 (
   set -x; cd "$(mktemp -d)" &&
@@ -1811,7 +1862,6 @@ kubectl krew list
 # 卸载插件
 kubectl krew uninstall <plugin-name>
 ```
-
 ### 11.3 推荐生产插件
 
 | 插件 | 说明 | 安装命令 |
@@ -1832,7 +1882,8 @@ kubectl krew uninstall <plugin-name>
 | `deprecations` | 废弃 API 检查 | `kubectl krew install deprecations` |
 | `score` | 资源配置评分 | `kubectl krew install score` |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用示例
 kubectl ctx           # 列出/切换上下文
 kubectl ns            # 列出/切换命名空间
@@ -1843,7 +1894,6 @@ kubectl resource-capacity  # 集群资源容量
 kubectl view-secret <secret-name> -a  # 解码显示 Secret
 kubectl deprecations  # 检查废弃 API
 ```
-
 ---
 
 <!-- chunk: 12. 性能优化与最佳实践 -->
@@ -1867,7 +1917,8 @@ kubectl deprecations  # 检查废弃 API
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ~/.bashrc 或 ~/.zshrc
 
 # 基础别名
@@ -1918,10 +1969,10 @@ alias kdebug='kubectl run --rm -it --restart=Never --image=nicolaka/netshoot deb
 alias kdelpf='kubectl delete pods --field-selector=status.phase==Failed -A'
 alias kdelpe='kubectl get pods -A | grep Evicted | awk '\''{print "kubectl delete pod " $2 " -n " $1}'\'' | sh'
 ```
-
 ### 12.3 kubectl 自动补全
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Bash
 source <(kubectl completion bash)
 echo 'source <(kubectl completion bash)' >> ~/.bashrc
@@ -1942,7 +1993,6 @@ kubectl completion powershell >> $PROFILE
 kubectl completion fish | source
 kubectl completion fish > ~/.config/fish/completions/kubectl.fish
 ```
-
 ### 12.4 安全最佳实践
 
 | 实践 | 说明 | 实施方法 |
@@ -1962,7 +2012,8 @@ kubectl completion fish > ~/.config/fish/completions/kubectl.fish
 
 ### 13.1 集群巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cluster-health-check.sh - 集群健康检查脚本
 
@@ -2027,10 +2078,10 @@ echo -e "\n=========================================="
 echo "检查完成"
 echo "=========================================="
 ```
-
 ### 13.2 Pod 批量诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-diagnose.sh - Pod 诊断脚本
 
@@ -2089,13 +2140,13 @@ kubectl logs "$POD_NAME" -n "$NAMESPACE" --tail=50 2>/dev/null || echo "无法�
 echo -e "\n[7] 描述信息"
 kubectl describe pod "$POD_NAME" -n "$NAMESPACE"
 ```
-
 ### 13.3 资源清理脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cleanup-resources.sh - 资源清理脚本
 
@@ -2126,10 +2177,10 @@ echo -e "\n=========================================="
 echo "清理完成"
 echo "=========================================="
 ```
-
 ### 13.4 备份脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # backup-resources.sh - 资源备份脚本
 
@@ -2175,7 +2226,6 @@ echo "文件数: $(find "$BACKUP_DIR" -name "*.yaml" | wc -l)"
 echo "总大小: $(du -sh "$BACKUP_DIR" | cut -f1)"
 echo "=========================================="
 ```
-
 ---
 
 <!-- chunk: 14. 故障排查速查表 -->
@@ -2199,7 +2249,8 @@ echo "=========================================="
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 相关
 kubectl get pods -A -o wide                    # 查看所有 Pod
 kubectl describe pod <name>                    # 查看 Pod 详情
@@ -2233,7 +2284,6 @@ kubectl get events --field-selector=involvedObject.name=<pod>  # 指定资源事
 kubectl auth can-i --list                      # 列出当前用户权限
 kubectl auth can-i <verb> <resource> --as=<user>  # 检查用户权限
 ```
-
 ### 14.3 紧急操作速查
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -2242,7 +2292,17 @@ kubectl auth can-i <verb> <resource> --as=<user>  # 检查用户权限
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急回滚
 kubectl rollout undo deployment/<name>
 
@@ -2268,7 +2328,6 @@ kubectl get --raw='/healthz?verbose'
 kubectl get --raw='/healthz/etcd'
 
 ```
-
 ---
 
 <!-- chunk: 附录 A: kubectl 命令完整列表 -->
@@ -2464,3 +2523,5 @@ kubectl get --raw='/healthz/etcd'
 - 07-upgrade-paths-strategy
 
 ```
+
+<!-- risk-assessed -->

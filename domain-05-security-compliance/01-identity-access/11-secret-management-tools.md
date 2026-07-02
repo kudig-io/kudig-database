@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 11 - 密钥与敏感信息管理工具
@@ -74,6 +79,7 @@ cross_refs:
 ### 1.1 企业级密钥管理架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                      Enterprise Secret Management Architecture                       │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -130,7 +136,6 @@ cross_refs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 密钥管理方案全面对比
 
 | 方案 | 架构模式 | 多云支持 | 动态密钥 | GitOps | 审计 | 复杂度 | 适用场景 |
@@ -1094,7 +1099,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # sealed-secrets-workflow.sh - Sealed Secrets工作流
 
@@ -1150,7 +1156,6 @@ kubectl apply -f sealed-my-secret.yaml
 # 6. 验证Secret已创建
 kubectl get secret my-secret -n production -o yaml
 ```
-
 ### 4.3 SealedSecret配置选项
 
 ```yaml
@@ -1209,7 +1214,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # sealed-secrets-key-rotation.sh - 密钥轮换
 
@@ -1241,7 +1247,6 @@ done
 # 4. 清理临时文件
 rm /tmp/secret.yaml /tmp/sealed-secret.yaml
 ```
-
 ---
 
 <!-- chunk: 五、SOPS加密 -->
@@ -1271,7 +1276,8 @@ creation_rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # sops-workflow.sh - SOPS工作流
 
@@ -1312,7 +1318,6 @@ sops --decrypt secret.enc.yaml
 # 8. 轮换密钥
 sops --rotate --in-place secret.enc.yaml
 ```
-
 ### 5.2 SOPS与GitOps集成
 
 ```yaml
@@ -1602,6 +1607,7 @@ spec:
 ### 9.1 方案选择决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 需要密钥管理方案?
     │
     ├─ 多云/混合云环境?
@@ -1619,13 +1625,13 @@ spec:
     └─ 单一云环境?
         └─ YES → 云原生方案 (AWS SM/Azure KV/GCP SM)
 ```
-
 ### 9.2 常用命令速查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # External Secrets
 kubectl get externalsecrets -A
 kubectl describe externalsecret <name> -n <namespace>
@@ -1646,7 +1652,6 @@ sops --decrypt secret.enc.yaml | kubectl apply -f -
 # 检查Secret
 kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metadata.name'
 ```
-
 ---
 
 <!-- chunk: 十、最佳实践总结 -->
@@ -1701,3 +1706,6 @@ kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metad
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

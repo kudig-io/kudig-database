@@ -45,6 +45,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 网络核心组件
@@ -303,7 +308,8 @@ spec:
 | **Local** | 保留客户端IP | 仅本节点Pod | 无 | 审计日志、IP白名单 |
 
 **生产实践**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证源IP保留
 kubectl logs -f nginx-pod | grep "X-Forwarded-For"
 # externalTrafficPolicy=Local 时应显示真实客户端IP
@@ -312,7 +318,6 @@ kubectl logs -f nginx-pod | grep "X-Forwarded-For"
 kubectl get endpoints test-service -o jsonpath='{.subsets[*].addresses[*].ip}'
 # Local策略下仅返回本节点Pod，可能导致负载不均
 ```
-
 ---
 
 ### 3. LoadBalancer - 云原生负载均衡
@@ -490,6 +495,7 @@ mysql-2.mysql.database.svc.cluster.local -> 10.244.3.15
 ### 方案选型决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 是否需要南北向流量管理?
 ├─ 否 → 使用 ClusterIP + Service Mesh(Istio)
 └─ 是 → 继续
@@ -502,7 +508,6 @@ mysql-2.mysql.database.svc.cluster.local -> 10.244.3.15
         ├─ 复杂治理 → Gateway API + Envoy Gateway
         └─ 高性能场景 → Traefik / Caddy
 ```
-
 ### 1. Nginx Ingress Controller
 
 #### 生产部署架构
@@ -904,7 +909,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Helm安装
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium --version 1.14.5 \
@@ -915,7 +921,6 @@ helm install cilium cilium/cilium --version 1.14.5 \
   --set hubble.relay.enabled=true \
   --set hubble.ui.enabled=true
 ```
-
 #### NetworkPolicy L7示例
 
 ```yaml
@@ -1183,7 +1188,8 @@ spec:
 
 ### 网络诊断工具
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看Service Endpoints
 kubectl get endpoints -A
 
@@ -1199,7 +1205,6 @@ kubectl debug node/node-1 -it --image=nicolaka/netshoot -- tcpdump -i any -w /tm
 # 5. 查看iptables规则(Service实现)
 kubectl debug node/node-1 -it --image=nicolaka/netshoot -- iptables-save | grep backend-service
 ```
-
 ---
 
 <!-- chunk: 生产环境网络运维最佳实践 -->
@@ -1267,7 +1272,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # network-emergency-response.sh - 生产环境网络问题应急脚本
 
@@ -1466,7 +1472,6 @@ echo "1. DNS问题: 重启CoreDNS Pod"
 echo "2. 网络插件问题: 检查CNI配置和节点状态"
 echo "3. Service问题: 检查Endpoints和后端Pod状态"
 ```
-
 ### 网络容量规划指南
 
 ```markdown
@@ -1566,3 +1571,6 @@ echo "3. Service问题: 检查Endpoints和后端Pod状态"
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

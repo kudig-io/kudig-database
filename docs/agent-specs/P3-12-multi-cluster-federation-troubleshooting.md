@@ -35,6 +35,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 多集群/联邦场景问题排查
@@ -56,7 +61,8 @@ prerequisites:
 | 资源未同步到成员集群 | `kubectl -n kube-federation-system get pods` | 控制器未运行 | 检查控制器日志 |
 | 成员集群无法注册 | `kubectl get kubefedclusters` | 网络不通/凭证问题 | 检查 kubeconfig |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubefed 状态检查
 kubectl get kubefedclusters -n kube-federation-system
 kubectl get federatedtypeconfigs -A
@@ -71,13 +77,13 @@ kubectl logs -n kube-federation-system deployment/<controller> --tail=100
 # 重新注册成员集群
 kubefed join <cluster-name> --cluster-context <context> --host-cluster-context <host>
 ```
-
 ### 1.2 资源同步问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查资源同步状态
 kubectl describe federateddeployment <name> -n <ns>
 
@@ -91,7 +97,6 @@ kubectl get pods -n kube-federation-system | grep sync
 # 手动触发同步
 kubectl annotate federateddeployment <name> -n <ns> kubefed.io/sync-time=$(date +%s)
 ```
-
 ---
 
 ## 2. GitOps 多集群冲突
@@ -154,7 +159,8 @@ flux reconcile kustomization <name> -n <ns>
 
 ### 2.3 多集群配置冲突检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检测资源差异
 for cluster in cluster-1 cluster-2 cluster-3; do
   kubectl --context $cluster get deployment -A -o yaml > /tmp/$cluster-deploy.yaml
@@ -169,7 +175,6 @@ for cluster in cluster-1 cluster-2; do
   kubectl --context $cluster get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containers[0].image}'
 done
 ```
-
 ---
 
 ## 3. 多集群网络打通
@@ -184,7 +189,8 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Submariner 状态检查
 submarinerctl status
 submarinerctl clusters list
@@ -199,13 +205,13 @@ kubectl get serviceexports -A
 # 手动测试跨集群访问
 kubectl exec -it <pod> -- nc -vz <svc>.<ns>.svc.cluster.local 443
 ```
-
 ### 3.2 跨集群网络连通性
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查网络路径
 kubectl exec -it <pod> -- traceroute <target-svc>.<target-ns>.svc.cluster.local
 
@@ -220,14 +226,14 @@ kubectl get networkpolicy -A | grep -v "default-deny"
 # "packet loss" → 检查 CNI 插件和 MTU 设置
 # "timeout" → 检查 firewall rules 和 CNI plugin status
 ```
-
 ---
 
 ## 4. 联邦学习/多租户场景
 
 ### 4.1 多集群资源配额问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ResourceQuota
 kubectl get resourcequota -n <ns>
 kubectl describe resourcequota -n <ns>
@@ -240,10 +246,10 @@ kubectl describe limitrange -n <ns>
 # "exceeded quota" → 检查请求的资源量是否合理
 # "limit not set" → 设置 LimitRange 自动注入默认值
 ```
-
 ### 4.2 集群联邦网络隔离
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 NetworkPolicy 跨集群影响
 kubectl get networkpolicy -A -o json | jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name)"'
 
@@ -252,14 +258,14 @@ kubectl get networkpolicy -A -o json | jq -r '.items[] | "\(.metadata.namespace)
 # - 跨集群流量需要明确配置
 # - 默认 deny 策略可能阻止跨集群通信
 ```
-
 ---
 
 ## 5. 快速检查清单
 
 ### 多集群 on-call 速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有集群健康
 for cluster in cluster-a cluster-b cluster-c; do
   echo "=== $cluster ==="
@@ -276,7 +282,6 @@ submarinerctl status 2>/dev/null || echo "Submariner not configured"
 # 检查 Kubefed
 kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubefed not installed"
 ```
-
 ---
 
 ## 6. 升级条件
@@ -295,3 +300,5 @@ kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubef
 - [domain-15-specialized-tech/](../domain-15-specialized-tech/) — 边缘计算
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 运维 Skill
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)
+
+<!-- risk-assessed -->

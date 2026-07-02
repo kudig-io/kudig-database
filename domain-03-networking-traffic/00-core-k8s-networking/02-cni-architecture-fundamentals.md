@@ -80,6 +80,11 @@ related_docs:
   desc: CSI 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
@@ -416,7 +421,8 @@ spec:
 
 ### 8.1 常用诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CNI 配置
 ls -la /etc/cni/net.d/
 cat /etc/cni/net.d/10-calico.conflist
@@ -443,7 +449,6 @@ bridge fdb show dev flannel.1
 tcpdump -i eth0 -n port 4789  # VXLAN
 tcpdump -i cali+ -n           # Calico 接口
 ```
-
 ### 8.2 常见问题
 
 | 问题 | 可能原因 | 解决方案 |
@@ -588,7 +593,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # cni-troubleshooting.sh - CNI故障诊断脚本
 
@@ -817,7 +832,6 @@ echo "=== 诊断完成 ==="
 echo "诊断报告: /tmp/cni-diagnosis-report.txt"
 echo "各检查项日志已分别保存"
 ```
-
 ### 10.4 CNI安全加固配置
 
 ```yaml
@@ -984,3 +998,5 @@ kubectl apply -f calico-old-version.yaml
 - 04-flannel-complete-guide
 
 ```
+
+<!-- risk-assessed -->

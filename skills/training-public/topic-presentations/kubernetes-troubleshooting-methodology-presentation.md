@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 故障排查方法论全栈培训
@@ -145,6 +150,7 @@ Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 �
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌────────────────────────────────────────────────┐
 │  Layer 5: 应用层 (Application)                   │  代码 Bug、配置错误、依赖超时
 │  排查工具: kubectl logs, kubectl exec           │
@@ -165,7 +171,6 @@ Kubernetes 问题可以从多个层级排查，建议从上到下（应用层 �
 │  排查工具: kubectl -n kube-system, etcdctl      │
 └────────────────────────────────────────────────┘
 ```
-
 ## Pod 层常见问题
 
 **Pod 生命周期与问题点：**
@@ -220,7 +225,8 @@ kubectl logs <pod> --previous
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: DNS 是否正常？
 kubectl exec <pod> -- nslookup kubernetes.default
 # 不通 → 检查 CoreDNS: kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -241,12 +247,12 @@ kubectl exec <pod> -- curl -v http://<service-ip>:<port>
 curl -H "Host: xxx" http://<ingress-ip>
 # 不通 → 检查 Ingress Controller: kubectl describe ingress <name>
 ```
-
 ## Node 层排查
 
 **Node NotReady 排查清单：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 查看 Node 状态
 kubectl describe node <node-name>
 # 关注 Conditions 部分
@@ -284,7 +290,6 @@ dmesg | tail -50
 crictl ps
 crictl logs <container-id>
 ```
-
 ## Control Plane 排查
 
 **API Server 不可用的症状：**
@@ -295,7 +300,8 @@ crictl logs <container-id>
 
 **排查步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 API Server Pod
 kubectl get pods -n kube-system -l component=kube-apiserver
 # 预期输出:
@@ -320,7 +326,6 @@ kubectl logs -n kube-system kube-apiserver-<master> --tail=100
 # 3. 内存不足（API Server OOM）
 # 4. 防火墙规则变更
 ```
-
 ---
 
 <!-- chunk: 架构图 -->## 架构图
@@ -429,7 +434,8 @@ graph LR
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: Pod 处于 CrashLoopBackOff
 
 # 步骤 1: 查看 Pod 状态
@@ -462,13 +468,13 @@ kubectl exec -it my-app-xxx -- /bin/sh
 kubectl debug my-app-xxx -it --image=busybox
 # 在临时容器中检查网络和文件系统
 ```
-
 ## 演示 2：网络故障排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: Pod A 无法访问 Pod B
 
 # 步骤 1: 确认两个 Pod 都在运行
@@ -502,13 +508,22 @@ kubectl get networkpolicy -A
 # 步骤 7: 抓包分析（高级）
 kubectl exec -it <pod-a> -- tcpdump -i any -nn port <port> -c 10
 ```
-
 ## 演示 3：Node 故障排查
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景: Node NotReady
 
 # 步骤 1: 查看 Node 详细状态
@@ -546,13 +561,13 @@ systemctl status containerd  # 检查 containerd 状态
 # 步骤 7: 驱赶 Pod（如果需要维修）
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 ```
-
 ## 演示 4：DNS 故障排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: DNS 解析失败
 
 # 步骤 1: 创建调试 Pod
@@ -582,14 +597,23 @@ kubectl get configmap coredns -n kube-system -o yaml
 # 步骤 6: 直接查询 CoreDNS
 kubectl exec dns-debug -- dig @10.96.0.10 <domain> +short +timeout=2
 ```
-
 ## 演示 5：应急响应演练
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景: 大量 5xx 错误，需要快速恢复
 
 # 步骤 1: 确认影响范围
@@ -622,7 +646,6 @@ kubectl drain <problem-node> --ignore-daemonsets --delete-emptydir-data
 # 步骤 7: 验证服务恢复
 curl -s http://my-critical-app.example.com/healthz
 ```
-
 ---
 
 <!-- chunk: 动手实验 -->## 动手实验
@@ -631,7 +654,17 @@ curl -s http://my-critical-app.example.com/healthz
 
 **目标**：在限定时间内排查并解决模拟的复合问题
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 问题场景模拟（讲师执行）:
 # 1. 将一个 Deployment 的镜像改为不存在的版本
 # 2. 给一个 Node 添加 NoSchedule 污点
@@ -658,7 +691,6 @@ kubectl describe pod <pending-pod>
 # 解决: kubectl taint node <node> <taint-key>-
 
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -837,3 +869,5 @@ kubectl describe pod <pending-pod>
 - presentation-template
 
 ```
+
+<!-- risk-assessed -->

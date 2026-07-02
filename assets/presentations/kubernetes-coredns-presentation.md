@@ -40,6 +40,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes CoreDNS 全栈进阶培训 (从入门到专家)
@@ -418,7 +423,8 @@ graph TB
 
 ### 演示 1：CoreDNS 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 # 预期输出:
@@ -445,13 +451,13 @@ kubectl top pods -n kube-system -l k8s-app=kube-dns
 # coredns-5d78c9869d-abc12   5m           25Mi
 # coredns-5d78c9869d-def34   3m           22Mi
 ```
-
 ### 演示 2：DNS 解析验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建一个临时调试 Pod
 kubectl run dnsutils --image=registry.k8s.io/e2e-test-images/jessie-dnsutils:1.3 --command -- sleep infinity
 # 等待 Pod Running
@@ -496,13 +502,13 @@ nslookup kubernetes.default
 # Name:	kubernetes.default.svc.cluster.local
 # Address: 10.96.0.1
 ```
-
 ### 演示 3：CoreDNS 性能调优
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 查看当前 Corefile
 kubectl get configmap coredns -n kube-system -o yaml
 
@@ -550,14 +556,14 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=10 | grep -i reload
 kubectl scale deployment coredns --replicas=3 -n kube-system
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 ```
-
 ### 演示 4：优化 Pod DNS 配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 调整 ndots（减少搜索域查询）
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -623,14 +629,14 @@ kubectl exec custom-dns -- cat /etc/resolv.conf
 # search mycompany.internal
 # options ndots:1 timeout:2 attempts:2
 ```
-
 ### 演示 5：NodeLocal DNSCache 部署
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 下载 NodeLocal DNSCache YAML
 curl -sLO https://github.com/kubernetes/kubernetes/raw/master/cluster/addons/dns/nodelocaldns/nodelocaldns.yaml
 
@@ -669,7 +675,6 @@ kubectl exec -it dnsutils -- bash -c \
   "for i in \$(seq 1 1000); do dig @169.254.20.10 kubernetes.default.svc.cluster.local +short > /dev/null; done"
 # 对比时间（NodeLocal 应该快 3-5 倍）
 ```
-
 ---
 
 ## 动手实验
@@ -682,7 +687,8 @@ kubectl exec -it dnsutils -- bash -c \
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建默认 ndots:5 的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -726,7 +732,6 @@ kubectl exec ndots-1 -- nslookup www.google.com
 # 在 CoreDNS Pod 上抓包查看查询量
 
 ```
-
 ---
 
 ## 常见问题与回答
@@ -860,3 +865,5 @@ CoreDNS
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

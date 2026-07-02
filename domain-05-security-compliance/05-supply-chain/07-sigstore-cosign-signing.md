@@ -44,6 +44,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -197,7 +202,8 @@ graph LR
 
 ## 2.1 安装方式 (Installation Methods)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1: Go install（推荐开发环境）
 go install github.com/sigstore/cosign/v2/cmd/cosign@latest
 
@@ -242,7 +248,6 @@ cosign version
 # Compiler:      gc
 # Platform:      linux/amd64
 ```
-
 ## 2.2 环境变量配置 (Environment Variable Configuration)
 
 ```bash
@@ -397,7 +402,8 @@ jobs:
 
 ## 3.2 基于密钥的签名 (Key-based Signing)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 生成密钥对
 cosign generate-key-pair
 # 生成文件：cosign.key（私钥）和 cosign.pub（公钥）
@@ -430,7 +436,6 @@ cosign sign \
   --key "awskms:///arn:aws:kms:us-east-1:123456789:key/abc-def-ghi" \
   ghcr.io/your-org/your-app:v1.0.0
 ```
-
 ## 3.3 GitHub Actions 中使用 KMS 签名 (KMS Signing in GitHub Actions)
 
 ```yaml
@@ -1164,7 +1169,8 @@ jobs:
 
 ## 8.1 跨注册表镜像复制与签名 (Cross-Registry Image Copy and Signing)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 将签名随镜像一起复制到另一个注册表
 # 使用 crane 复制（保留所有 OCI 引用）
 crane copy \
@@ -1182,7 +1188,6 @@ cosign verify \
   --certificate-identity-regexp ".*" \
   docker.io/yourorg/your-app:v1.0.0
 ```
-
 ## 8.2 镜像签名转移工作流 (Image Signing Transfer Workflow)
 
 ```yaml
@@ -1267,7 +1272,8 @@ jobs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 克隆 Sigstore 部署工具
 git clone https://github.com/sigstore/scaffolding.git
 cd scaffolding
@@ -1296,7 +1302,6 @@ helm install fulcio sigstore/fulcio \
 helm install ctlog sigstore/ctlog \
   --namespace sigstore-system
 ```
-
 ## 9.2 私有实例配置文件 (Private Instance Configuration Files)
 
 ```yaml
@@ -1592,7 +1597,8 @@ rekor-cli search \
 
 ## 12.2 常见错误与解决方案 (Common Errors and Solutions)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 错误 1: "no signatures found"
 # 原因：镜像从未被签名，或签名存储在不同的 OCI 命名空间
 cosign tree ghcr.io/your-org/your-app:v1.0.0
@@ -1631,7 +1637,6 @@ crane ls ghcr.io/your-org/your-app  # 检查镜像是否存在
 # 调试模式
 COSIGN_VERBOSE=1 cosign verify ...
 ```
-
 ---
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
@@ -1684,3 +1689,6 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

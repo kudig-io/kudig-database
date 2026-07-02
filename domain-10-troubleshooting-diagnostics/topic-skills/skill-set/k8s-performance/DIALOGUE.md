@@ -25,6 +25,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Performance Bottleneck 远程顾问对话脚本
 
@@ -74,11 +79,11 @@ relationships:
 
 顾问："现在开始第一轮诊断。请执行以下命令并粘贴完整输出：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top nodes
 kubectl top pods --all-namespaces --sort-by=cpu | head -20
 ```
-
 > **如果无法执行 kubectl top**：说明集群可能没有安装 metrics-server。请尝试以下替代方案：
 > **替代方案 A**：通过 Prometheus / Grafana 查看节点和 Pod 的 CPU、内存使用率
 > **替代方案 B**：通过集群管理控制台（如 Rancher、OpenShift Console、ACK 控制台）查看资源使用
@@ -90,11 +95,11 @@ kubectl top pods --all-namespaces --sort-by=cpu | head -20
 
 顾问："单个 Pod 资源使用高，当前为 P2 优先级（2 小时内修复）。下一步请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Limits|Requests"
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 "resources:"
 ```
-
 > **如果无法执行 describe**：请执行 `kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].resources}'` 获取资源限制信息。如果连 jsonpath 也无法使用，请直接告诉我该 Pod 的 CPU limit 和 memory limit 设置值。"
 
 ### 分支 1.2：多个 Pod 同时高负载
@@ -103,11 +108,11 @@ kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 "resources:"
 
 顾问："多个 Pod 同时高负载，这可能是集群级或应用级的问题。请**立即**执行以下命令确认节点状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o wide
 kubectl describe node <高负载节点名> | grep -A 15 "Allocated resources"
 ```
-
 > **如果无法执行 describe node**：请通过控制台查看高负载节点的资源分配情况。如果多个节点同时高负载且超过节点容量的 80%，这个问题可能升级到 P1（30 分钟内修复）。"
 
 ### 分支 1.3：节点整体高负载
@@ -116,11 +121,11 @@ kubectl describe node <高负载节点名> | grep -A 15 "Allocated resources"
 
 顾问："节点整体高负载会影响该节点上所有 Pod 的性能。请执行以下检查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> -o wide
 kubectl describe node <node-name> | grep -E "Pressure|DiskPressure|MemoryPressure|PIDPressure"
 ```
-
 > **如果无法执行**：请通过集群控制台查看该节点的 Pod 列表和节点状态。如果节点有 Pressure 类污点，说明资源已饱和。"
 
 ### 分支 1.4：工程师无法执行任何命令
@@ -151,7 +156,8 @@ kubectl describe node <node-name> | grep -E "Pressure|DiskPressure|MemoryPressur
 
 顾问："CPU 瓶颈已确认。请执行以下命令深入分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的 CPU 节流情况
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].name}'
 
@@ -161,7 +167,6 @@ kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 # 查看该 Pod 的 CPU 使用历史（如有 metrics-server 或 Prometheus）
 kubectl top pod <pod-name> -n <namespace>
 ```
-
 > **如果无法执行 top**：请通过 Prometheus 查询 `container_cpu_usage_seconds_total` 和 `container_cpu_cfs_throttled_seconds_total` 指标。如果没有 Prometheus，请告诉我该 Pod 的 CPU request 和 limit 值，以及节点总 CPU 核心数。
 
 同时请确认：
@@ -175,7 +180,8 @@ kubectl top pod <pod-name> -n <namespace>
 
 顾问："内存瓶颈已确认。请执行以下命令深入分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的内存限制和重启次数
 kubectl describe pod <pod-name> -n <namespace> | grep -E "OOMKilled|Restart Count|Limits"
 
@@ -185,7 +191,6 @@ kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 # 查看该 Pod 的内存使用趋势
 kubectl top pod <pod-name> -n <namespace>
 ```
-
 > **如果无法执行 top**：请通过 Prometheus 查询 `container_memory_working_set_bytes` 和 `container_memory_usage_bytes` 指标。如果没有监控，请告诉我该 Pod 的 memory limit 值和节点总内存大小。
 
 同时请确认：
@@ -216,7 +221,8 @@ mount | grep -E 'csi|nfs|ceph|ebs|disk'
 
 > **如果无法 SSH**：请执行以下 kubectl 替代命令：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看存储类和相关 PVC
 kubectl get pvc -n <namespace>
 kubectl get pv | grep <pvc-name>
@@ -224,7 +230,6 @@ kubectl get pv | grep <pvc-name>
 # 查看 StorageClass 的 provisioner
 kubectl get storageclass
 ```
-
 同时请确认：
 1. 使用的是本地存储还是网络存储（NFS / Ceph / EBS / NAS）？
 2. 磁盘使用率是否接近 100%？
@@ -239,7 +244,8 @@ kubectl get storageclass
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 的网络连接状态
 kubectl exec -it <pod-name> -n <namespace> -- netstat -s | grep -E 'drop|error|timeout'
 
@@ -249,7 +255,6 @@ kubectl get endpoints <service-name> -n <namespace>
 # 查看 CNI Pod 状态
 kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 ```
-
 > **如果无法 kubectl exec**：请尝试以下替代方案：
 > **替代方案 A**：在节点上执行 `ss -s` 或 `netstat -s` 查看网络统计
 > **替代方案 B**：通过监控查看节点网络带宽使用率（rx/tx 字节数）
@@ -266,7 +271,8 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 顾问："基础设施资源正常，问题可能出在应用内部。请执行以下分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看应用日志中的性能相关错误
 kubectl logs <pod-name> -n <namespace> --tail=200 | grep -iE 'timeout|slow|latency|queue|pool|thread'
 
@@ -276,7 +282,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].live
 # 查看 HPA 状态（如果配置了自动扩缩容）
 kubectl get hpa -n <namespace>
 ```
-
 > **如果无法获取日志**：请通过日志聚合系统（ELK / Loki / SLS）查询该 Pod 的性能相关日志。
 
 同时请确认：
@@ -301,33 +306,42 @@ kubectl get hpa -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit deployment/<deployment-name> -n <namespace>
 # 修改 resources.limits.cpu 为当前值的 1.5-2 倍
 ```
-
 > **如果无法执行 edit**：请准备一个新的 YAML 文件，增加 `resources.limits.cpu` 值，然后执行 `kubectl apply -f <new-deployment.yaml>`。如果不知道应该设置多少，请告诉我当前 limit 值和节点总 CPU，我来帮你计算。
 
 > **如果无法修改 Deployment**：请确认你是否有该命名空间的 edit 权限。如果没有，请联系有权限的同事执行，或提交变更工单。
 
 步骤 2：观察滚动更新
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment/<deployment-name> -n <namespace>
 ```
-
 > **如果无法执行 rollout status**：请执行 `kubectl get pods -n <namespace> -w` 观察新 Pod 是否成功 Running。
 
 步骤 3：验证 CPU 节流是否消失
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CPU 节流指标（如有 Prometheus）
 # rate(container_cpu_cfs_throttled_seconds_total[5m])
 
 # 或使用 top 观察
 kubectl top pod <pod-name> -n <namespace>
 ```
-
 > **警告**：提高 CPU limit 可能导致节点上其他 Pod 的 CPU 分配减少。请确认节点整体 CPU 使用率不超过 80%。"
 
 #### 分支 3.2：内存 Limit 过低导致 OOM（RC-002）
@@ -341,22 +355,31 @@ kubectl top pod <pod-name> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit deployment/<deployment-name> -n <namespace>
 # 修改 resources.limits.memory 为当前值的 1.5-2 倍
 ```
-
 > **如果无法执行 edit**：请准备新的 YAML 文件，增加 `resources.limits.memory` 值，然后 `kubectl apply -f <new-deployment.yaml>`。如果不确定设置多少，请告诉我当前 limit 值和节点总内存。
 
 > **如果无法修改 Deployment**：请联系有权限的同事执行，或提交变更工单。
 
 步骤 2：如果节点整体内存不足
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点内存分配
 kubectl describe node <node-name> | grep -A 15 "Allocated resources"
 ```
-
 > **如果节点内存已饱和**：请考虑以下方案：
 > 1. 水平扩容节点（增加新节点到集群）
 > 2. 清理非必要 Pod：`kubectl delete pod <old-pod> -n <namespace>`（仅删除可重建的 Pod）
@@ -364,10 +387,10 @@ kubectl describe node <node-name> | grep -A 15 "Allocated resources"
 
 步骤 3：验证 OOM 是否消失
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].restartCount}'
 ```
-
 > **如果 Restart Count 仍在增加**：说明内存仍然不够或存在内存泄漏。请进一步增加 limit 或检查应用代码。"
 
 #### 分支 3.3：节点资源饱和（RC-003）
@@ -382,35 +405,44 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标记节点不可调度，防止新 Pod 调度上来
 kubectl cordon <node-name>
 
 # 驱逐节点上的 Pod（保留 DaemonSet）
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
 ```
-
 > **如果 drain 卡住**：添加 `--grace-period=30 --timeout=120s --force` 参数，或手动删除无法驱逐的 Pod。
 > **如果无法 drain**：请手动 cordon 节点后，逐个删除该节点上的业务 Pod（控制器会自动在其他节点重建）。
 
 步骤 2：扩容节点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前节点池
 kubectl get nodes -l <node-pool-label>
 
 # 触发节点扩容（如使用 Cluster Autoscaler，检查 CA Pod 状态）
 kubectl get pods -n kube-system | grep cluster-autoscaler
 ```
-
 > **如果无法自动扩容**：请通过云厂商控制台或基础设施团队手动添加新节点。
 
 步骤 3：恢复节点调度
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl uncordon <node-name>
 ```
-
 > **注意**：节点资源饱和可能是容量规划不足的信号。建议后续评估是否需要增加节点规格或数量。"
 
 #### 分支 3.4：磁盘 IO 饱和（RC-005）
@@ -421,13 +453,13 @@ kubectl uncordon <node-name>
 
 步骤 1：清理磁盘空间
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果能 SSH 到节点
 crictl rmi --prune
 find /var/log -name '*.log' -size +100M -exec ls -lh {} \;
 # 手动清理过大的日志文件
 ```
-
 > **如果无法 SSH**：请通过以下方式清理：
 > 1. 删除旧 Pod 日志：`kubectl logs` 确认日志已采集到外部系统后，清理节点日志
 > 2. 调整 logrotate 策略，配置更激进的日志轮转
@@ -435,12 +467,12 @@ find /var/log -name '*.log' -size +100M -exec ls -lh {} \;
 
 步骤 2：优化存储配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果使用 PVC，检查 StorageClass 是否有更快存储选项
 kubectl get storageclass
 # 考虑将高性能应用的存储迁移到 SSD / 本地盘类型
 ```
-
 > **如果无法更换 StorageClass**：请考虑将应用的临时文件写入内存（emptyDir with medium: Memory）或调整应用减少磁盘 IO。
 
 步骤 3：验证 IO 是否恢复
@@ -460,21 +492,21 @@ iostat -x 1 5
 
 步骤 1：检查 CNI Pod 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 kubectl logs -n kube-system <cni-pod-name> --tail=100
 ```
-
 > **如果无法查看 CNI 日志**：请检查云厂商控制台是否有网络相关告警，或检查节点上的网络接口状态。
 
 步骤 2：检查 Service Mesh（如使用）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Istio sidecar 资源使用
 kubectl top pod <pod-name> -n <namespace> -c istio-proxy
 # 或检查 Linkerd proxy
 ```
-
 > **如果 sidecar 资源不足**：请增加 sidecar 的 CPU/memory limit。
 
 步骤 3：优化网络配置
@@ -482,14 +514,14 @@ kubectl top pod <pod-name> -n <namespace> -c istio-proxy
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Service 的 Endpoints 分布
 kubectl get endpoints <service-name> -n <namespace>
 
 # 考虑使用拓扑感知路由（Topology Aware Routing）
 kubectl annotate service <service-name> service.kubernetes.io/topology-mode=Auto
 ```
-
 > **如果无法优化网络**：请考虑在业务层增加缓存、减少跨可用区调用、或使用本地缓存替代远程调用。"
 
 ---
@@ -567,7 +599,8 @@ aliyun slb DescribeLoadBalancerHTTPListenerAttribute --LoadBalancerId <id>
 > 3. 是否有性能瓶颈告警？
 
 **步骤 2：ACK节点性能检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点规格是否匹配负载
 kubectl describe node <node> | grep -A 5 "Allocated resources"
 
@@ -577,7 +610,6 @@ kubectl top pod -A --sort-by=cpu | head -20
 # 检查节点磁盘IO
 kubectl debug node/<node> -it --image=busybox -- df -h
 ```
-
 **步骤 3：专有云性能特殊考虑**
 - 专有云底层资源由飞天调度
 - 检查飞天资源池状态
@@ -635,3 +667,6 @@ aliyun ess ExecuteScalingRule --ScalingRuleId <rule-id>
 
 - [[entities/deployment.md|Deployment]]
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
+
+
+<!-- risk-assessed -->

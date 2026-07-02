@@ -62,6 +62,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -167,7 +172,8 @@ agent_execution_mode: L2-semi-auto
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计受影响 Pod 数量和影响范围（10s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 统计所有 namespace 中处于 ImagePullBackOff/ErrImagePull 状态的 Pod
 kubectl get pods --all-namespaces --no-headers | grep -E "ImagePullBackOff|ErrImagePull" | wc -l
 
@@ -181,7 +187,8 @@ kubectl get pods --all-namespaces --no-headers | grep -E "ImagePullBackOff|ErrIm
 > - 新部署的测试 Pod → **P3**
 
 **Step T2**: 检查是否为同一镜像问题（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 提取受影响 Pod 的镜像列表
 kubectl get pods --all-namespaces -o jsonpath='{range .items[?(@.status.phase!="Running")]}{.spec.containers[*].image}{"\n"}{end}' | sort | uniq -c | sort -rn | head -10
 ```
@@ -190,7 +197,8 @@ kubectl get pods --all-namespaces -o jsonpath='{range .items[?(@.status.phase!="
 > - 多个不同镜像均失败 → 可能是仓库/网络/认证基础设施问题
 
 **Step T3**: 快速测试镜像拉取能力（60s）
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在任一节点上测试拉取公共镜像（验证基础网络）
 kubectl run test-pull --image=docker.io/library/busybox:latest --rm -it --restart=Never --command -- echo "Pull succeeded"
 # 或使用 kubectl debug
@@ -1275,7 +1283,8 @@ kubectl debug node/<node-name> -it --image=busybox:latest -- echo "Pull succeede
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认 Pod 状态恢复正常
 kubectl get pods -n <namespace> -l <selector>
 # 预期: STATUS 列显示 Running 或 Completed（对于 Job）
@@ -1297,7 +1306,6 @@ NODE=$(kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeName}')
 kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-keyword>"
 # 预期: 镜像存在于本地缓存
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1349,6 +1357,7 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 ### 8.2 升级消息模板
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【{severity}】镜像拉取问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 - 问题概述: {affected_pod_count} 个 Pod 无法拉取镜像，持续 {duration}
@@ -1371,7 +1380,6 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 - Skill 版本: SKILL-IMAGE-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
-
 ### 8.3 交接信息包
 
 升级时，Agent 需准备以下完整信息供人工接手：
@@ -1491,3 +1499,6 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 4. **仓库高可用问题**: Harbor/Registry HA 集群故障诊断
 5. **GPU 容器镜像**: NVIDIA Container Toolkit 相关的镜像问题
 6. **Windows 容器镜像**: Windows 节点特有的镜像拉取问题
+
+
+<!-- risk-assessed -->

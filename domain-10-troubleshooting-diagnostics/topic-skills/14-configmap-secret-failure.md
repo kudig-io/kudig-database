@@ -63,6 +63,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl describe pod <pod> -n <ns> | grep -E 'ConfigMap.*not found|Secret.*not found|mount failed' 显示配置挂载错误 -->
@@ -155,7 +160,8 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查受影响 Pod 数量和状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找因配置问题无法启动的 Pod
 kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeeded | grep -E "CreateContainerConfigError|Error|Init" | wc -l
 # 或更精确地检查特定 ConfigMap/Secret
@@ -168,7 +174,8 @@ kubectl get pods -A -o json | jq -r ".items[] | select(.spec.volumes[]?.configMa
 > - 受影响 Pod 1-2 个 → **P3**
 
 **Step T2**: 确认受影响的 Namespace 和工作负载类型
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查受影响的 namespace 分布
 kubectl get pods -A --field-selector status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.namespace}{"\n"}{end}' | sort | uniq -c | sort -rn | head -10
 ```
@@ -178,7 +185,8 @@ kubectl get pods -A --field-selector status.phase=Pending -o jsonpath='{range .i
 > - 仅影响开发/测试 namespace → 保持 T1 分级
 
 **Step T3**: 检查 ConfigMap/Secret 引用的关键程度
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看问题 Pod 的事件
 POD_NAME="<pod-name>"
 NS="<namespace>"
@@ -1187,7 +1195,8 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 确认 ConfigMap/Secret 存在且内容正确
 kubectl get configmap <cm-name> -n <namespace>
 kubectl get secret <secret-name> -n <namespace>
@@ -1214,7 +1223,6 @@ kubectl exec <pod-name> -n <namespace> -- printenv | grep <ENV_KEY>
 kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 # 预期: 应用日志显示配置加载成功
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1414,3 +1422,5 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Admission Webhook 证书体系
@@ -272,7 +277,8 @@ mgr.GetWebhookServer().Register("/validate", &webhook.Admission{Handler: validat
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 生成 CA
 openssl genrsa -out webhook-ca.key 2048
 openssl req -x509 -new -nodes -key webhook-ca.key -subj "/CN=webhook-ca" -days 3650 -out webhook-ca.crt
@@ -293,7 +299,6 @@ CA_BUNDLE=$(base64 -w0 webhook-ca.crt)
 kubectl patch validatingwebhookconfiguration pod-security-policy \
   --type='json' -p='[{"op": "replace", "path": "/webhooks/0/clientConfig/caBundle", "value":"'${CA_BUNDLE}'"}]'
 ```
-
 ---
 
 ## caBundle 的自动更新问题
@@ -371,7 +376,8 @@ func (r *WebhookReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 配置的 caBundle
 kubectl get validatingwebhookconfiguration -o yaml | grep -A2 caBundle
 
@@ -394,7 +400,6 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep -i "webhook|x509"
 kubectl patch validatingwebhookconfiguration my-webhook \
   --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value":"Ignore"}]'
 ```
-
 ---
 
 ## Webhook 证书常见问题
@@ -445,3 +450,6 @@ Kubernetes v1.30+ 引入 **ValidatingAdmissionPolicy**（内置 CEL 表达式验
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cert-manager.md|cert-manager]]
 - [[entities/kserve.md|kserve]]
+
+
+<!-- risk-assessed -->

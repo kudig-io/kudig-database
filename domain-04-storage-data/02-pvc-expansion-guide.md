@@ -20,6 +20,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # PVC 扩容指南
@@ -64,7 +69,8 @@ Pod 无需重启，存储层直接扩展容量：
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 修改 PVC 的 spec.resources.requests.storage
 kubectl patch pvc my-pvc -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
 
@@ -74,7 +80,6 @@ kubectl get pvc my-pvc -w
 # 3. 进入 Pod 扩展文件系统（ext4/xfs）
 kubectl exec -it my-pod -- resize2fs /dev/sda
 ```
-
 **条件**：
 - StorageClass 支持在线扩容
 - CSI 驱动实现了 `ExpandVolume` 接口
@@ -88,7 +93,8 @@ kubectl exec -it my-pod -- resize2fs /dev/sda
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 缩容 StatefulSet 至 0
 kubectl scale sts my-app --replicas=0
 
@@ -101,7 +107,6 @@ resize2fs /dev/vdb
 # 4. 恢复 Pod
 kubectl scale sts my-app --replicas=1
 ```
-
 适用场景：CSI 驱动不支持在线扩容，或存储类型限制。
 
 ## 阿里云 ACK 扩容
@@ -128,11 +133,11 @@ NAS 扩容本质是修改文件系统配额：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # NAS PVC 扩容后无需 resize 文件系统
 kubectl patch pvc nas-pvc -p '{"spec":{"resources":{"requests":{"storage":"500Gi"}}}}'
 ```
-
 NAS 扩容通常即时生效，但受限于 NAS 实例的总容量规格。
 
 ## 扩容失败排查
@@ -152,7 +157,8 @@ NAS 扩容通常即时生效，但受限于 NAS 实例的总容量规格。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建新 PVC（更大容量）
 kubectl apply -f new-larger-pvc.yaml
 
@@ -161,7 +167,6 @@ kubectl apply -f new-larger-pvc.yaml
 # 4. 更新 StatefulSet/Deployment 使用新 PVC
 # 5. 验证数据完整性后删除旧 PVC
 ```
-
 > 数据迁移期间建议暂停写入或切换至只读模式，避免数据不一致。
 
 ## 远程顾问指导要点
@@ -185,3 +190,6 @@ kubectl apply -f new-larger-pvc.yaml
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

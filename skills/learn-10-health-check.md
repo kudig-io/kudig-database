@@ -32,6 +32,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第八课：健康检查 - Probe 详解
@@ -509,6 +514,7 @@ spec:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 Pod 一直处于 CrashLoopBackOff 或 Error 状态。
@@ -537,13 +543,13 @@ LivenessProbe 连续失败达到阈值，K8s 不断重启容器。
    如果应用启动时间较长，增加 initialDelaySeconds。
    规则：initialDelaySeconds > 应用实际启动时间
 ```
-
 ### 6.2 ReadinessProbe 失败导致无流量
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 Pod 是 Running，但 Service 没有流量过来。
@@ -575,10 +581,10 @@ ReadinessProbe 失败，Pod 被从 Service 中摘除。
    如果应用启动确实需要时间，增加 initialDelaySeconds。
    如果依赖服务恢复较慢，增加 failureThreshold。
 ```
-
 ### 6.3 StartupProbe 超时
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 Pod 一直处于 ContainerCreating 或 Initializing 状态。
@@ -606,13 +612,13 @@ StartupProbe 失败次数达到 failureThreshold。
 4. 检查应用启动日志
    kubectl describe pod <pod-name> | grep -A20 "Events"
 ```
-
 ### 6.4 健康检查端点返回错误
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 健康检查端点返回 500 或其他错误。
@@ -652,7 +658,6 @@ func readyHandler(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusOK)
 }
 ```
-
 ---
 
 ## 7. 数字人 Q&A 场景
@@ -660,6 +665,7 @@ func readyHandler(w http.ResponseWriter, r *http.Request) {
 ### 7.1 用户问：Pod 一直在重启怎么办？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【回复】
 
 "Pod 一直重启，很有可能是 LivenessProbe 失败导致的。
@@ -689,13 +695,13 @@ kubectl logs <pod-name> -n <namespace> --previous
 
 有其他问题吗？"
 ```
-
 ### 7.2 用户问：应用明明 Running 为什么没流量？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【回复】
 
 "好问题！Pod 是 Running，但没流量，通常是 ReadinessProbe 的问题。
@@ -726,7 +732,6 @@ kubectl exec -it <pod-name> -- curl http://localhost:8080/ready
 
 有其他问题吗？"
 ```
-
 ---
 
 ## 8. 快速参考
@@ -735,6 +740,7 @@ kubectl exec -it <pod-name> -- curl http://localhost:8080/ready
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 查看 Pod 健康检查配置：
@@ -759,7 +765,6 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 • failureThreshold：根据业务容忍度设置，通常 3-5 次
 • timeoutSeconds：设为正常响应时间的 2-3 倍
 ```
-
 ---
 
 ## 9. 总结
@@ -804,3 +809,6 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 - [[skills/learn-03-oncall-handoff.md|learn-03-oncall-handoff]] — Day 3: 值班交接 SOP
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
+
+
+<!-- risk-assessed -->

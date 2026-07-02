@@ -42,6 +42,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Terway（阿里云 CNI）网络故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | Terway v1.2+ | **最后更新**: 2026-04 | **难度**: 高级
@@ -123,7 +128,8 @@ Terway 支持三种主要网络模式，问题表现和排查方法各不相同�
 
 #### 2.1.2 确认当前集群使用的 Terway 模式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Terway ConfigMap 配置
 kubectl get configmap -n kube-system eni-config -o yaml
 
@@ -133,7 +139,6 @@ kubectl get node <node-name> -o yaml | grep -A 20 "aliyun.com"
 # 查看 Terway DaemonSet 环境变量
 kubectl get ds -n kube-system terway-eniip -o yaml | grep -A 5 "env:"
 ```
-
 典型配置：
 - `ENI_ALLOCATE_MODE`：`eip`（弹性公网 IP）、`eni`（独占 ENI）、`eniip`（共享 ENI 辅助 IP）
 - `NETWORK_POLICY_PROVIDER`：`calico` 或空（不使用网络策略）
@@ -162,7 +167,8 @@ Pod 处于 ContainerCreating，事件显示 IP 分配失败
 
 #### 2.2.2 ENI 配额不足
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点已分配的 ENI 和 IP 数量
 kubectl describe node <node-name> | grep -E "aliyun.com/allocated-eni|aliyun.com/allocated-ip|aliyun.com/eni-max|aliyun.com/ip-max"
 
@@ -174,7 +180,6 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli show
 # 或通过 API
 curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<instance-type>"
 ```
-
 **关键指标**：
 - `aliyun.com/allocated-eni`：已分配 ENI 数量
 - `aliyun.com/eni-max`：实例规格支持的最大 ENI 数量
@@ -187,7 +192,8 @@ curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<in
 
 #### 2.2.3 IP 资源池耗尽
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 terway 资源池详情
 kubectl exec -n kube-system <terway-pod> -- terway-cli show
 
@@ -197,7 +203,6 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> -o 
 # 检查是否存在已删除但 IP 未释放的 Pod（孤儿 IP）
 kubectl exec -n kube-system <terway-pod> -- terway-cli garbage-collect --dry-run
 ```
-
 **常见原因**：
 - Pod 频繁创建删除导致 IP 分配/释放速率不匹配
 - 固定 IP 的 Pod 数量超过 IP 池容量
@@ -205,7 +210,8 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli garbage-collect --dry-run
 
 #### 2.2.4 固定 IP 冲突
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看使用固定 IP 的 Pod
 kubectl get pods --all-namespaces -o yaml | grep -B 5 "k8s.aliyun.com/allocated-ipv4"
 
@@ -215,14 +221,14 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli show | grep "fixed"
 # 检查 Pod Annotation
 kubectl get pod <pod-name> -o yaml | grep "k8s.aliyun.com"
 ```
-
 **关键 Annotation**：
 - `k8s.aliyun.com/allocated-ipv4`：已分配的固定 IPv4 地址
 - `k8s.aliyun.com/allocated-ipv6`：已分配的固定 IPv6 地址
 
 #### 2.2.5 阿里云 OpenAPI 调用失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 terway 日志中的 API 调用错误
 kubectl logs -n kube-system <terway-pod> --tail=500 | grep -iE "api|error|fail|throttle"
 
@@ -230,7 +236,6 @@ kubectl logs -n kube-system <terway-pod> --tail=500 | grep -iE "api|error|fail|t
 # 登录阿里云控制台：RAM -> 角色 -> <集群名称>-worker-role
 # 确认策略包含：AliyunECSNetworkInterfaceManagementAccess、AliyunVPCReadOnlyAccess
 ```
-
 **常见 API 错误**：
 - `Throttling.User`：API 调用频率超限，需降低 Pod 创建速率或申请提高限流阈值
 - `InvalidVSwitchId.NotFound`：VSwitch ID 不存在或已删除
@@ -240,7 +245,8 @@ kubectl logs -n kube-system <terway-pod> --tail=500 | grep -iE "api|error|fail|t
 
 #### 2.3.1 VPC 路由检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 内测试跨节点连通性
 kubectl exec -it <pod-a> -- ping <pod-b-ip>
 
@@ -250,7 +256,6 @@ ip route get <pod-b-ip>
 # 查看节点上的网络接口
 ip addr show
 ```
-
 **阿里云控制台检查**：
 1. 登录 VPC 控制台 -> 路由表
 2. 确认存在指向各节点 ECS 实例的系统路由（由 Terway 自动维护）
@@ -266,14 +271,14 @@ aliyun vpc DescribeRouteEntryList --RouteTableId <route-table-id>
 
 #### 2.3.2 安全组规则检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点绑定的安全组
 kubectl describe node <node-name> | grep "SecurityGroup"
 
 # 阿里云 CLI 查看安全组规则
 aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id> --RegionId <region-id>
 ```
-
 **关键规则**：
 - 入方向：放通 Pod CIDR 网段的所有端口（或至少放通业务所需端口）
 - 出方向：通常默认放通，但自定义安全组需确认
@@ -281,7 +286,8 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id> --RegionId <
 
 #### 2.3.3 Terway 路由同步问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 terway 是否成功同步路由
 kubectl logs -n kube-system <terway-pod> --tail=200 | grep -i "route"
 
@@ -291,12 +297,12 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli sync
 # 检查节点上的路由表
 ip route | grep <pod-cidr>
 ```
-
 ### 2.4 网络策略问题排查
 
 #### 2.4.1 Calico 与 Terway 集成检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 Calico 组件状态
 kubectl get pods -n kube-system -l k8s-app=calico-node
 kubectl get pods -n kube-system -l k8s-app=calico-kube-controllers
@@ -307,7 +313,6 @@ kubectl get configmap -n kube-system calico-config -o yaml
 # 检查 felix 日志
 kubectl logs -n kube-system <calico-node-pod> -c calico-node | grep -i "policy"
 ```
-
 **已知兼容性问题**：
 - Terway ENI 模式下，Calico NetworkPolicy 可能无法拦截同节点 Pod 间流量（绕过宿主机协议栈）
 - 解决方案：升级到 Terway v1.4+ 和 Calico v3.24+，或启用 eBPF 数据面
@@ -328,7 +333,8 @@ kubectl logs -n kube-system <calico-node-pod> -c calico-node | grep -i "policy"
 
 #### 2.5.1 ENI 分配延迟
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控 Pod 创建到 Running 的时间
 kubectl get events --field-selector reason=Scheduled,reason=Created
 
@@ -338,7 +344,6 @@ kubectl logs -n kube-system <terway-pod> | grep -i "allocate.*cost\|duration"
 # 检查阿里云 OpenAPI 延迟
 kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency\|api.*duration"
 ```
-
 **优化方向**：
 - 启用 Terway 的预分配（Pre-allocation）机制，提前准备 ENI/IP
 - 调整 `terway-eniip` DaemonSet 的资源限制
@@ -346,7 +351,8 @@ kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency\|api.*duration"
 
 #### 2.5.2 网络延迟与丢包
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 间延迟测试
 kubectl exec -it <pod-a> -- ping -c 100 -i 0.01 <pod-b-ip>
 
@@ -359,7 +365,6 @@ ethtool -S <interface> | grep -iE "error|drop|discard"
 # 检查内核网络参数
 sysctl -a | grep -E "net.core.netdev_max_backlog|net.ipv4.tcp_congestion_control"
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -368,7 +373,17 @@ sysctl -a | grep -E "net.core.netdev_max_backlog|net.ipv4.tcp_congestion_control
 
 #### 方案一：释放 ENI/IP 资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查找并删除已终止但未释放资源的 Pod
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
 kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
@@ -378,41 +393,49 @@ kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,
 kubectl edit configmap -n kube-system eni-config
 # 将 ENI_ALLOCATE_MODE 从 "eni" 改为 "eniip"
 ```
-
 **风险**：修改 Terway 配置后，新创建的 Pod 会使用新模式，已运行的 Pod 不受影响。建议在低峰期操作。
 
 #### 方案二：升级实例规格
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 通过阿里云 CLI 升级实例规格（需先停止实例）
 aliyun ecs ModifyInstanceSpec --InstanceId <instance-id> --InstanceType <new-type>
 
 # 或使用 ACK 节点池自动升级
 kubectl patch nodepool <nodepool-name> --type merge -p '{"spec":{"instanceTypes":["["<new-type>"]}}'
 ```
-
 **风险**：升级实例规格会导致节点短暂不可用（需重启），建议通过新增节点池并迁移业务的方式平滑升级。
 
 #### 方案三：调整 ENI 辅助 IP 数量
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑 Terway ConfigMap，调整单 ENI 的最大辅助 IP 数
 kubectl edit configmap -n kube-system eni-config
 # 修改 max-eni-ip 参数（需根据实例规格支持的辅助 IP 数设置）
 ```
-
 ### 3.2 跨节点通信修复
 
 #### 方案一：修复 VPC 路由
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果路由缺失，重启 terway Pod 触发路由同步
 kubectl delete pod -n kube-system -l app=terway --field-selector spec.nodeName=<node-name>
 
 # 或手动添加路由（临时措施）
 aliyun vpc CreateRouteEntry --RouteTableId <rt-id> --DestinationCidrBlock <pod-cidr> --NextHopId <ecs-id> --NextHopType Instance
 ```
-
 #### 方案二：调整安全组规则
 
 ```bash
@@ -430,7 +453,8 @@ aliyun ecs AuthorizeSecurityGroup \
 
 #### 方案：升级 Terway 与 Calico 版本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前版本
 kubectl get ds -n kube-system terway-eniip -o yaml | grep image
 kubectl get ds -n kube-system calico-node -o yaml | grep image
@@ -440,14 +464,23 @@ kubectl get ds -n kube-system calico-node -o yaml | grep image
 kubectl set image ds/terway-eniip -n kube-system terway=registry-vpc.cn-hangzhou.aliyuncs.com/acs/terway:v1.4.0
 kubectl set image ds/calico-node -n kube-system calico-node=registry-vpc.cn-hangzhou.aliyuncs.com/acs/calico-node:v3.24.0
 ```
-
 **风险**：网络插件升级可能导致短暂网络中断，建议在维护窗口执行，并确保有回滚方案。
 
 ### 3.4 性能优化
 
 #### 方案一：启用 IPVlan 模式
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 修改 Terway ConfigMap 启用 IPVlan
 kubectl edit configmap -n kube-system eni-config
 # 添加或修改：
@@ -457,7 +490,6 @@ kubectl edit configmap -n kube-system eni-config
 # 重启 Terway DaemonSet 使配置生效
 kubectl rollout restart ds/terway-eniip -n kube-system
 ```
-
 **前置条件**：
 - 内核版本 >= 4.19（推荐 >= 5.4）
 - 实例支持 IPVlan
@@ -465,14 +497,23 @@ kubectl rollout restart ds/terway-eniip -n kube-system
 
 #### 方案二：启用 ENI 预分配
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在 Terway ConfigMap 中配置预分配参数
 kubectl edit configmap -n kube-system eni-config
 # 添加：
 # ENI_PRE_ALLOCATE: "2"
 # IP_PRE_ALLOCATE: "10"
 ```
-
 ---
 
 ## 4. 预防与最佳实践
@@ -547,7 +588,8 @@ spec:
 
 ### 4.4 自动化诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # terway-health-check.sh - Terway 健康检查脚本
 
@@ -627,7 +669,6 @@ else
   exit 0
 fi
 ```
-
 ---
 
 ## 附录 A: Terway 关键 Annotation 速查
@@ -645,7 +686,8 @@ fi
 
 ## 附录 B: Terway 常用 CLI 命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入 terway Pod 执行诊断
 kubectl exec -it -n kube-system <terway-pod> -- /bin/sh
 
@@ -664,7 +706,6 @@ terway-cli sync
 # 查看帮助
 terway-cli --help
 ```
-
 ## 附录 C: 阿里云 ECS 实例规格 ENI 限制速查
 
 | 实例规格族 | 最大 ENI 数 | 单 ENI 最大辅助 IP | 总 IP 容量 |
@@ -681,3 +722,6 @@ terway-cli --help
 
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

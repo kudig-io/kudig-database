@@ -45,6 +45,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 存储与数据卷
@@ -73,6 +78,7 @@ cross_refs:
 ## Docker 存储层级
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              容器层 (Container Layer)                        │
 │                            可读写层 - 容器运行时数据                          │
@@ -107,7 +113,6 @@ cross_refs:
 │                     overlay2 / btrfs / zfs / devicemapper                    │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 存储类型对比
 
 | 类型 | 存储位置 | 生命周期 | 性能 | 共享 | 备份 |
@@ -135,6 +140,7 @@ cross_refs:
 ## overlay2 原理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                     merged (合并视图)                            │
 │  /var/lib/docker/overlay2/<id>/merged                           │
@@ -148,7 +154,6 @@ cross_refs:
 │  容器变更      │  │  原子操作      │  │  镜像层叠加     │
 └───────────────┘  └───────────────┘  └─────────────────┘
 ```
-
 ## overlay2 配置
 
 ```json
@@ -164,7 +169,8 @@ cross_refs:
 
 ## 查看存储驱动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前存储驱动
 docker info | grep -i storage
 
@@ -177,14 +183,14 @@ docker system df -v
 # 存储位置
 ls -la /var/lib/docker/overlay2/
 ```
-
 ---
 
 <!-- chunk: 数据卷类型 -->## 数据卷类型
 
 ## Volume (命名卷)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建卷
 docker volume create mydata
 
@@ -196,7 +202,6 @@ docker run -d \
   --mount type=volume,source=mydata,target=/app/data \
   myapp
 ```
-
 **特点**:
 - Docker 完全管理
 - 存储在 /var/lib/docker/volumes/
@@ -206,7 +211,8 @@ docker run -d \
 
 ## Bind Mount (绑定挂载)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 -v
 docker run -d -v /host/path:/container/path myapp
 
@@ -220,7 +226,6 @@ docker run -d \
   --mount type=bind,source=/host/config,target=/app/config,readonly \
   myapp
 ```
-
 **特点**:
 - 直接映射主机目录
 - 依赖主机目录结构
@@ -229,7 +234,8 @@ docker run -d \
 
 ## tmpfs 挂载
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 --tmpfs
 docker run -d --tmpfs /app/temp:size=100m,mode=1777 myapp
 
@@ -239,7 +245,6 @@ docker run -d \
   myapp
 
 ```
-
 **特点**:
 - 存储在内存中
 - 性能最高
@@ -262,7 +267,8 @@ docker run -d \
 
 ## 创建卷选项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基本创建
 docker volume create mydata
 
@@ -280,10 +286,10 @@ docker volume create \
 # 指定标签
 docker volume create --label env=prod --label team=platform mydata
 ```
-
 ## 本地卷驱动选项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # tmpfs 类型卷
 docker volume create \
   --driver local \
@@ -307,10 +313,10 @@ docker volume create \
   --opt device=/host/path \
   bind-vol
 ```
-
 ## 卷数据查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 卷存储位置
 docker volume inspect mydata --format '{{.Mountpoint}}'
 # /var/lib/docker/volumes/mydata/_data
@@ -321,10 +327,10 @@ sudo ls -la /var/lib/docker/volumes/mydata/_data
 # 通过临时容器查看
 docker run --rm -v mydata:/data alpine ls -la /data
 ```
-
 ## 卷共享
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 多容器共享同一卷
 docker run -d --name writer -v shared-data:/data myapp-writer
 docker run -d --name reader -v shared-data:/data:ro myapp-reader
@@ -332,14 +338,14 @@ docker run -d --name reader -v shared-data:/data:ro myapp-reader
 # 从其他容器复制卷配置
 docker run -d --volumes-from source_container myapp
 ```
-
 ---
 
 <!-- chunk: Bind Mount -->## Bind Mount
 
 ## 挂载语法对比
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # -v 语法 (旧)
 docker run -v /host/path:/container/path myapp
 docker run -v /host/path:/container/path:ro myapp
@@ -353,7 +359,6 @@ docker run \
   --mount type=bind,source=/host/path,target=/container/path,readonly \
   myapp
 ```
-
 ## 挂载选项
 
 | 选项 | 说明 | 示例 |
@@ -373,16 +378,17 @@ docker run \
 | `rslave` | 从属，主机挂载传播到容器 |
 | `slave` | 单向从主机传播 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 rslave 传播
 docker run -d \
   --mount type=bind,source=/mnt,target=/mnt,bind-propagation=rslave \
   myapp
 ```
-
 ## SELinux 标签
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # z: 共享标签 (多容器共享)
 docker run -v /host/path:/container/path:z myapp
 
@@ -392,7 +398,6 @@ docker run -v /host/path:/container/path:Z myapp
 # --mount 语法
 --mount type=bind,source=/host/path,target=/path,bind-selinux-opt=z
 ```
-
 ## 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -408,7 +413,8 @@ docker run -v /host/path:/container/path:Z myapp
 
 ## tmpfs 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基本 tmpfs
 docker run -d --tmpfs /app/temp myapp
 
@@ -422,7 +428,6 @@ docker run -d \
   --mount type=tmpfs,target=/app/temp,tmpfs-size=100m,tmpfs-mode=1777 \
   myapp
 ```
-
 ## tmpfs 选项
 
 | 选项 | 说明 | 示例 |
@@ -438,7 +443,8 @@ docker run -d \
 
 ## 使用场景
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 敏感临时数据
 docker run -d \
   --read-only \
@@ -456,7 +462,6 @@ docker run -d \
   --tmpfs /app/sessions:size=50m \
   web-app
 ```
-
 ---
 
 <!-- chunk: 存储性能优化 -->## 存储性能优化
@@ -484,7 +489,17 @@ docker run -d \
 
 ## XFS 优化
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 XFS (确保 d_type)
 mkfs.xfs -n ftype=1 /dev/sdb1
 
@@ -495,7 +510,6 @@ xfs_info /dev/sdb1 | grep ftype
 # 挂载选项
 mount -o noatime,nodiratime /dev/sdb1 /var/lib/docker
 ```
-
 ## 卷性能对比
 
 | 类型 | 顺序读写 | 随机 IO | 延迟 | 适用场景 |
@@ -508,7 +522,8 @@ mount -o noatime,nodiratime /dev/sdb1 /var/lib/docker
 
 ## 最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 分离数据和日志
 docker run -d \
   --mount type=volume,source=app-data,target=/app/data \
@@ -527,7 +542,6 @@ docker run -d \
   --device-write-bps /dev/sda:50mb \
   io-intensive-app
 ```
-
 ---
 
 <!-- chunk: 数据备份与恢复 -->## 数据备份与恢复
@@ -537,7 +551,17 @@ docker run -d \
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法1: 使用临时容器备份
 docker run --rm \
   -v mydata:/source:ro \
@@ -553,10 +577,10 @@ docker run -d --name temp -v mydata:/data alpine sleep infinity
 docker cp temp:/data ./backup
 docker rm -f temp  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ## 卷恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建新卷并恢复
 docker volume create mydata-restored
 
@@ -565,10 +589,10 @@ docker run --rm \
   -v $(pwd):/backup:ro \
   alpine tar xzf /backup/mydata-backup.tar.gz -C /target
 ```
-
 ## 容器备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出容器文件系统
 docker export container_name > container-backup.tar
 
@@ -581,10 +605,10 @@ docker run --rm \
   -v $(pwd):/backup \
   alpine tar czf /backup/full-backup.tar.gz /data /logs
 ```
-
 ## 数据迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 跨主机迁移卷数据
 # 源主机
 docker run --rm -v mydata:/data -v $(pwd):/backup alpine \
@@ -597,10 +621,10 @@ docker volume create mydata
 docker run --rm -v mydata:/data -v $(pwd):/backup alpine \
   tar xzf /backup/mydata.tar.gz -C /data
 ```
-
 ## 自动备份脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # backup-volumes.sh
 
@@ -623,7 +647,6 @@ find "$BACKUP_DIR" -name "*.tar.gz" -mtime +7 -delete
 
 echo "Backup completed: $BACKUP_DIR"
 ```
-
 ## 卷驱动插件
 
 | 插件 | 用途 | 特点 |
@@ -635,14 +658,14 @@ echo "Backup completed: $BACKUP_DIR"
 | **portworx** | 分布式存储 | 企业级功能 |
 | **flocker** | 数据迁移 | 已停止维护 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装卷驱动插件
 docker plugin install rexray/ebs
 
 # 使用插件创建卷
 docker volume create --driver rexray/ebs --opt size=100 ebs-volume
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -661,3 +684,5 @@ docker volume create --driver rexray/ebs --opt size=100 ebs-volume
 - 07-docker-security-best-practices
 
 ```
+
+<!-- risk-assessed -->

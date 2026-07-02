@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v4.0 Release Notes
@@ -113,3 +118,5 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 - fix: assign KUBECONFIG environment variable value to env.Kubeconfig b456e274652c84316d5bfcf06d6a8b648e3cc23b (LinPr)
 - fix(rollback): `errors.Is` instead of string comp e2021f8818d2cf20c118d91fdba8fba5c472c3bb (Hidde Beydals)
 - fix(uninstall): supersede deployed releases af7c15303ace3c506c5c790c41186a09df1c8a54 (Hidde Beydals)
+
+<!-- risk-assessed -->

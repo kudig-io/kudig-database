@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Service|Service]] Internal Traffic Policy
@@ -167,7 +172,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Service 的流量策略
 kubectl get svc <name> -o jsonpath='{.spec.internalTrafficPolicy}'
 
@@ -180,7 +186,6 @@ iptables-save | grep <service-clusterip>
 # 验证同节点 Pod 是否能访问 Service
 kubectl exec <pod-on-same-node> -- curl -s http://<service>:<port>/healthz
 ```
-
 ## 交叉引用
 
 - [Service](service.md) — Service 类型和流量策略全局概览
@@ -197,3 +202,6 @@ kubectl exec <pod-on-same-node> -- curl -s http://<service>:<port>/healthz
 - [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
 - [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
 - [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+
+
+<!-- risk-assessed -->

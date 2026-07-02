@@ -8,6 +8,11 @@ tier: supporting
 created: '2026-07-01'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Kubernetes Observability 2025-2026: Research Findings
 
 ## 1. OpenTelemetry (OTel) Evolution
@@ -241,3 +246,6 @@ The recommended Grafana observability stack:
 6. **SLO tooling matures**: Pyrra and Sloth provide Kubernetes-native SLO management with Prometheus integration.
 
 7. **GenAI observability**: OTel now supports instrumenting LLM/AI workloads for performance and cost monitoring.
+
+
+<!-- risk-assessed -->

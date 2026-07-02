@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # OCI 运行时对比与生产实践
@@ -163,12 +168,21 @@ containerd 的 runtime handler 在 `/etc/containerd/config.toml` 中声明。下
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重启 containerd 使 runtime handler 生效
 sudo systemctl restart containerd
 sudo crictl info | grep -A 5 kata
 ```
-
 ### 5.2 创建 RuntimeClass 对象
 
 ```yaml
@@ -186,12 +200,12 @@ scheduling:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 RuntimeClass，供业务 Pod 通过 runtimeClassName 引用
 kubectl apply -f runtimeclass-kata.yaml
 kubectl get runtimeclass
 ```
-
 ### 5.3 在 Pod 中指定运行时
 
 ```yaml
@@ -206,12 +220,12 @@ spec:
       image: registry.cn-hangzhou.aliyuncs.com/demo/app:v1.0
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 Pod 是否运行在 kata 沙箱中
 kubectl get pod secure-app -o jsonpath='{.spec.runtimeClassName}'
 sudo crictl inspect <container-id> | jq '.info.runtimeType'
 ```
-
 ## 6. 安全容器场景实践
 
 ### 6.1 金融/政务合规场景
@@ -250,22 +264,22 @@ spec:
 4. 节点池就绪后，节点会自动打上 `k8s.io/runtime-class: kata` 等标签；
 5. 业务 Pod 通过 `runtimeClassName: kata` 调度到该节点池。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点是否具备 Kata 运行时能力
 kubectl get nodes -L alibabacloud.com/runtime-class
 
 # 查看节点 kata 相关标签与可分配资源
 kubectl describe node <kata-node> | grep -iE " kata|runtime|allocatable"
 ```
-
 创建 Pod 后，可以通过以下命令确认其运行在 VM 内：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 使用的 RuntimeClass 与底层 handler
 kubectl get pod <pod-name> -o jsonpath='{.spec.runtimeClassName}'
 sudo crictl inspect <container-id> | jq -r '.info.runtimeType'
 ```
-
 ## 8. 性能与成本参考
 
 安全容器带来隔离增强的同时，也会引入额外开销。下表给出大致参考：
@@ -283,11 +297,11 @@ sudo crictl inspect <container-id> | jq -r '.info.runtimeType'
 
 ### 9.1 查看当前节点支持的 runtime
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 crictl 查看 containerd/CRI-O 注册的 runtime handler
 sudo crictl info | jq '.config.runtimeHandlers'
 ```
-
 ### 9.2 Kata Pod 启动失败排查
 
 常见原因包括：节点未开启虚拟化、kata 二进制缺失、Guest OS image 未预置。排查步骤：
@@ -331,3 +345,6 @@ sudo runsc --debug logs list
 - [[domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md|CRI-O 生产指南]]
 - [[domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md|RuntimeClass 配置]]
 - Falco 运行时安全指南
+
+
+<!-- risk-assessed -->

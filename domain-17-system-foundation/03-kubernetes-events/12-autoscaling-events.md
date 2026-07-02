@@ -52,6 +52,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
@@ -132,7 +137,8 @@ From: horizontal-pod-autoscaler
 **示例场景**
 
 **场景 1: CPU 使用率超过目标触发扩容**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 事件
 kubectl describe hpa web-app
 
@@ -141,7 +147,6 @@ Events:
   ----    ------             ----  -------
   Normal  SuccessfulRescale  45s   New size: 5; reason: cpu resource utilization (percentage of request) above target
 ```
-
 **场景 2: 自定义指标触发扩容**
 ```bash
 Events:
@@ -206,7 +211,8 @@ From: horizontal-pod-autoscaler
 **常见原因**
 
 **原因 1: 资源配额限制**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ResourceQuota
 kubectl get resourcequota -n production
 
@@ -223,7 +229,6 @@ Status:
   Used:
     pods: 50
 ```
-
 **原因 2: PodDisruptionBudget 阻止缩容**
 ```yaml
 apiVersion: policy/v1
@@ -245,7 +250,8 @@ Events:
 ```
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 HPA 状态
 kubectl get hpa web-app -o yaml | grep -A 10 conditions
 
@@ -258,13 +264,22 @@ kubectl logs -n kube-system kube-apiserver-master-1 | grep "web-app"
 # 4. 检查 ResourceQuota
 kubectl describe resourcequota -n production
 ```
-
 **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 调整 ResourceQuota
 kubectl edit resourcequota compute-quota
 # 增加 pods 限制
@@ -276,7 +291,6 @@ kubectl edit pdb web-app-pdb
 # 方案 3: 等待并发冲突解决
 # HPA 会自动重试
 ```
-
 ---
 
 ## 3. DesiredReplicasComputed
@@ -334,7 +348,8 @@ Events:
 ```
 
 **调试信息**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看详细计算过程
 kubectl get hpa web-app -o yaml
 
@@ -349,7 +364,6 @@ status:
   desiredReplicas: 8
   currentReplicas: 5
 ```
-
 ---
 
 ## 4. FailedGetResourceMetric
@@ -384,7 +398,8 @@ From: horizontal-pod-autoscaler
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Metrics Server
 kubectl get deployment metrics-server -n kube-system
 
@@ -393,7 +408,6 @@ Error: deployments.apps "metrics-server" not found
 # 安装 Metrics Server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
-
 **原因 2: Pod 未定义 resources.requests**
 ```yaml
 # 错误配置 - 缺少 resources.requests
@@ -431,15 +445,16 @@ spec:
 ```
 
 **原因 3: Metrics Server API 异常**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Metrics Server 日志
 kubectl logs -n kube-system deployment/metrics-server
 
 E0210 10:15:30.123456       1 manager.go:111] unable to fully collect metrics: [unable to fully scrape metrics from source kubelet_summary:node1: unable to fetch metrics from Kubelet node1 (node1): Get "https://node1:10250/stats/summary?only_cpu_and_memory=true": x509: certificate signed by unknown authority]
 ```
-
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Metrics Server 状态
 kubectl get apiservice v1beta1.metrics.k8s.io
 NAME                     SERVICE                      AVAILABLE   AGE
@@ -455,14 +470,23 @@ kubectl get deployment web-app -o yaml | grep -A 10 resources
 # 4. 查看 HPA 状态
 kubectl get hpa web-app -o yaml | grep -A 20 conditions
 ```
-
 **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 修复 Metrics Server
 kubectl edit deployment metrics-server -n kube-system
 # 添加 --kubelet-insecure-tls 参数
@@ -473,7 +497,6 @@ kubectl set resources deployment web-app --requests=cpu=100m,memory=128Mi
 # 方案 3: 重启 Metrics Server
 kubectl rollout restart deployment metrics-server -n kube-system
 ```
-
 ---
 
 ## 5. FailedComputeMetricsReplicas
@@ -526,12 +549,12 @@ spec:
 ```
 
 **排查建议**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查每个指标源
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/namespaces/production/pods
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/namespaces/production/pods/*/http_requests
 ```
-
 ---
 
 ## 6-9. 指标获取失败事件
@@ -769,7 +792,8 @@ spec:
 ```
 
 **排查建议**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VPA 推荐值
 kubectl describe vpa web-app-vpa
 
@@ -786,7 +810,6 @@ Recommendation:
       Cpu:     500m
       Memory:  500Mi
 ```
-
 ---
 
 ## 18. RecommendationProvided
@@ -897,7 +920,8 @@ From: cluster-autoscaler
 - 成功向云供应商请求增加节点
 
 **示例场景**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Pod Pending
 kubectl get pods
 
@@ -927,7 +951,6 @@ node-3    Ready    worker   10d
 node-4    Ready    worker   2m   # 新节点
 node-5    Ready    worker   2m   # 新节点
 ```
-
 **配置参数**
 ```yaml
 # CA Deployment 配置
@@ -1137,7 +1160,8 @@ From: cluster-autoscaler
 - CA 评估增加节点可以调度该 Pod
 
 **示例**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 事件
 kubectl describe pod web-app-pending
 
@@ -1153,7 +1177,6 @@ kubectl get events --field-selector reason=ScaledUpGroup
 Type    Reason         Message
 Normal  ScaledUpGroup  Scale-up: group node-group-1 size increased from 3 to 5
 ```
-
 ---
 
 ## 27. ScaleDownDisabledAnnotation
@@ -1226,7 +1249,8 @@ From: cluster-autoscaler
 - 网络、安全组问题
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 CA 日志
 kubectl logs -n kube-system deployment/cluster-autoscaler
 
@@ -1236,7 +1260,6 @@ aws ec2 describe-account-attributes --attribute-names max-instances
 # 3. 验证节点组配置
 aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names node-group-1
 ```
-
 ---
 
 <!-- chunk: HPA 决策算法 -->## HPA 决策算法
@@ -1431,7 +1454,8 @@ spec:
 - **不会**驱逐或重启 Pod
 
 **查看建议**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe vpa web-app-vpa
 
 Status:
@@ -1448,7 +1472,6 @@ Status:
         Cpu:     500m
         Memory:  512Mi
 ```
-
 **适用场景**
 - 初次部署 VPA，评估推荐值是否合理
 - 生产环境观察期
@@ -1468,7 +1491,8 @@ updatePolicy:
 - 不会驱逐现有 Pod
 
 **示例**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 初始 Deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -1494,7 +1518,6 @@ resources:
     cpu: 200m      # VPA 推荐值
     memory: 256Mi
 ```
-
 **适用场景**
 - 新部署的应用，想逐步应用 VPA 推荐
 - 避免现有 Pod 被驱逐，但希望新 Pod 使用优化配置
@@ -1522,7 +1545,8 @@ updatePolicy:
 ```
 
 **事件流**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. VPA 生成新推荐值
 Events:
   Normal  RecommendationProvided  5m  new recommendation: cpu=400m, memory=512Mi
@@ -1543,7 +1567,6 @@ resources:
     cpu: 400m      # VPA 更新后的值
     memory: 512Mi
 ```
-
 **限制和保护**
 ```yaml
 # 1. PodDisruptionBudget 保护
@@ -1597,7 +1620,8 @@ updatePolicy:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. VPA 更新 Deployment spec
 kubectl get deployment web-app -o yaml | grep -A 5 resources
 
@@ -1626,7 +1650,6 @@ kubectl get pods
 NAME         STATUS    RESTARTS   AGE
 web-app-new  Running   0          1m   # 使用新配置
 ```
-
 **适用场景**
 - 有状态应用（[[StatefulSet|StatefulSet]]）
 - 需要控制重启时间窗口
@@ -1694,6 +1717,7 @@ spec:
 ## 扩容决策流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────┐
 │ 1. 检测 Pending Pods                     │
 │    kubectl get pods --field-selector=   │
@@ -1737,7 +1761,6 @@ spec:
 │    - 生成 TriggeredScaleUp 事件          │
 └─────────────────────────────────────────┘
 ```
-
 ## 缩容决策流程
 
 ```
@@ -2109,13 +2132,13 @@ behavior:
 ## 场景 1: HPA 无法获取指标
 
 **症状**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa
 
 NAME      REFERENCE          TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 web-app   Deployment/web-app <unknown>/70%   2         10        2          5m
 ```
-
 **事件**
 ```
 Type: Warning
@@ -2124,7 +2147,8 @@ Message: failed to get cpu utilization: unable to get metrics for resource cpu
 ```
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Metrics Server
 kubectl get apiservice v1beta1.metrics.k8s.io
 NAME                     SERVICE                      AVAILABLE
@@ -2138,20 +2162,19 @@ kubectl get deployment web-app -o yaml | grep -A 5 resources
 # 3. 测试指标获取
 kubectl top pods -n production
 ```
-
 **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装/修复 Metrics Server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # 添加 resources.requests
 kubectl set resources deployment web-app --requests=cpu=100m,memory=128Mi
 ```
-
 ---
 
 ## 场景 2: HPA 频繁扩缩容
@@ -2197,13 +2220,13 @@ spec:
 ## 场景 3: Cluster Autoscaler 不扩容
 
 **症状**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods
 
 NAME         STATUS    RESTARTS   AGE
 web-app-1    Pending   0          10m  # 一直 Pending
 ```
-
 **事件**
 ```
 Type: Warning
@@ -2212,7 +2235,8 @@ Message: pod didn't trigger scale-up: 2 max node group size reached
 ```
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点组配置
 kubectl logs -n kube-system deployment/cluster-autoscaler | grep "max node group size"
 
@@ -2222,18 +2246,26 @@ kubectl describe pod web-app-1 | grep -A 5 "Requests"
 # 3. 检查节点组状态
 aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names node-group-1
 ```
-
 **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 增加节点组最大值
 kubectl edit deployment cluster-autoscaler -n kube-system
 # 修改 --nodes=1:10:node-group-1 为 --nodes=1:20:node-group-1
 ```
-
 ---
 
 ## 场景 4: VPA 驱逐 Pod 失败
@@ -2250,14 +2282,14 @@ Message: failed to evict pod: PodDisruptionBudget violation
 - 没有足够的可用副本
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PDB
 kubectl get pdb
 
 NAME          MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
 web-app-pdb   5               N/A               0                     10d
 ```
-
 **解决方案**
 ```yaml
 # 调整 PDB
@@ -2423,7 +2455,8 @@ metadata:
 
 ## 相关命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # HPA
 kubectl get hpa
 kubectl describe hpa <name>
@@ -2441,7 +2474,6 @@ kubectl describe node <name>
 # 事件查询
 kubectl get events --sort-by='.lastTimestamp' | grep -E 'HorizontalPodAutoscaler|VPA|cluster-autoscaler'
 ```
-
 ---
 
 > **KUDIG-DATABASE** | Domain-33: Kubernetes Events 全域事件大全 | 文档 12/15
@@ -2474,3 +2506,6 @@ kubectl get events --sort-by='.lastTimestamp' | grep -E 'HorizontalPodAutoscaler
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

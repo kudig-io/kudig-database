@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单回复话术：请求信息
@@ -102,7 +107,7 @@ authors:
 这些命令均为只读操作，不会修改您的集群配置。
 如您无法直接执行，请告知原因，我们会提供替代方案。
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 **适用场景**：需要用户执行 kubectl 等只读命令获取现场数据。
 
 ---
@@ -258,10 +263,10 @@ kubectl logs <pod-name> -n production --previous
 
 请协助在集群中执行以下命令，并将输出结果贴回：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc -n production
 ```
-
 这些命令均为只读操作，不会修改您的集群配置。
 如您无法直接执行，请告知原因，我们会提供替代方案。
 ```
@@ -350,3 +355,6 @@ kubectl get svc -n production
 
 - [[domain-11-production-operations/reply-templates/01-acknowledgment.md|确认收到话术]]
 - [[domain-11-production-operations/reply-templates/03-solution-proposal.md|给出方案话术]]
+
+
+<!-- risk-assessed -->

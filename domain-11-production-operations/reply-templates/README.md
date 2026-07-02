@@ -45,6 +45,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单回复话术索引
@@ -168,13 +173,13 @@ authors:
 
 **请求信息**：
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 请协助执行以下命令并提供输出：
 
 kubectl get pods -n production -l app=order-service
 kubectl describe pod <pod-name> -n production
 kubectl logs <pod-name> -n production --previous
 ```
-
 **给出方案**：
 ```
 根据日志，根因为容器启动时无法连接数据库，导致退出码 1。
@@ -218,3 +223,6 @@ kubectl logs <pod-name> -n production --previous
 
 - 工单闭环样本库 `domain-11-production-operations/ticket-cases/`
 - [[domain-11-production-operations/README.md|Production Operations Domain]]
+
+
+<!-- risk-assessed -->

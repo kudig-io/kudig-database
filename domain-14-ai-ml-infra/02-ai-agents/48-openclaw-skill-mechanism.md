@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw [[SKILL|SKILL]].md 机制深度解析
@@ -127,6 +132,7 @@ Level 3: 资源（按需加载）
 | **知识图谱范式** | 实体-关系网络 | 复杂关联分析 | 第 8 章知识库关联表 |
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 三种范式在 SKILL.md 中的协作:
 
 用户描述症状
@@ -149,10 +155,10 @@ Level 3: 资源（按需加载）
   │
   ▼ 输出结论
 ```
-
 ## 1.3 TOOLS.md vs SKILL.md 的边界
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 清晰的职责分离:
 
 TOOLS.md = "能力"（Agent 能做什么）
@@ -170,7 +176,6 @@ SKILL.md = "知识"（Agent 怎么做）
   SKILL.md: "Pod Pending 诊断 Step 2 → 执行 kubectl describe pod 查看 Events，
              关注 FailedScheduling/Insufficient 等关键字"
 ```
-
 ---
 
 <!-- chunk: 2. Harness Engineering 映射 -->## 2. Harness Engineering 映射
@@ -200,6 +205,7 @@ SKILL.md      │  ◐   │       │    ●    │         │        │     
 ## 2.3 Loop 层映射
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 SOP 驱动的执行逻辑:
 
 SKILL.md 的 SOP 直接影响 Agent 在 DIAGNOSE 阶段的行为:
@@ -217,7 +223,6 @@ Agent 识别问题类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
 
   Agent 将 SOP 转化为 Loop 中的执行步骤
 ```
-
 ---
 
 <!-- chunk: 3. K8S 运维实战案例 -->## 3. K8S 运维实战案例
@@ -225,6 +230,7 @@ Agent 识别问题类型 → 从 SKILL.md 加载对应 SOP → 按步骤执行
 ## 3.1 案例：SOP 驱动的 Pod Pending 诊断
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 用户输入: "Pod nginx-xxx 一直 Pending"
 
 SKILL.md 匹配: Pod 故障域 → Pending（调度失败）
@@ -253,7 +259,6 @@ Step 5: 输出诊断结论
   根因: 20 个 worker 节点 CPU 已满，另 20 个 GPU 节点有 taint 不匹配
   修复: 扩容 worker 节点 或 调整 Pod 的 resource requests
 ```
-
 ## 3.2 案例：kudig-database 知识注入
 
 ```
@@ -553,3 +558,6 @@ SKILL.md 配置验证:
 - 47-openclaw-tools-mechanism
 - 49-openclaw-memory-mechanism
 - 50-openclaw-identity-mechanism
+
+
+<!-- risk-assessed -->

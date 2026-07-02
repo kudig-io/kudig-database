@@ -38,6 +38,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 集群网络（Cluster Networking）
@@ -183,7 +188,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点分配的 Pod CIDR
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
 
@@ -197,7 +203,6 @@ kubectl get ds -n kube-system
 kubectl exec <pod> -- ip addr
 kubectl exec <pod> -- ip route
 ```
-
 ## 交叉引用
 
 - [eBPF 与 Cilium](ebpf-and-cilium-networking.md) — 基于 eBPF 的 CNI 方案
@@ -214,3 +219,6 @@ kubectl exec <pod> -- ip route
 - [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
 - [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
 - [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+
+
+<!-- risk-assessed -->

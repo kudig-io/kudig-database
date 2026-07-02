@@ -33,6 +33,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 26: 存储卷创建 & 删除
@@ -147,7 +152,8 @@ K8s 的存储体系采用"供给-消费"模式：
 
 ### 任务 1: 查看默认 StorageClass (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看已有的 StorageClass
 kubectl get sc
 # 预期输出:
@@ -184,14 +190,14 @@ kubectl get csidrivers
 kubectl get pv
 # 预期输出: 列出所有 PV（如果有）
 ```
-
 ### 任务 2: 动态创建云盘 PVC (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 PVC（动态供给，自动创建云盘）
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -262,14 +268,14 @@ kubectl exec disk-pod-demo -- df -h /data
 kubectl exec disk-pod-demo -- sh -c 'echo "test data written at $(date)" > /data/test.txt && cat /data/test.txt'
 # 预期输出: test data written at Mon Jan 15 10:30:00 UTC 2024
 ```
-
 ### 任务 3: 静态创建 NAS PV (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 NAS 类型 PV（静态方式，需要已有 NAS 文件系统）
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -355,13 +361,22 @@ kubectl exec nas-test-abc12 -- cat /data/shared.log
 # Hello from nas-test-abc12
 # Hello from nas-test-def34
 ```
-
 ### 任务 4: 存储卷删除与回收策略 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前 PV 的回收策略
 kubectl get pv -o custom-columns='NAME:.metadata.name,RECLAIM:.spec.persistentVolumeReclaimPolicy,STATUS:.status.phase,CLAIM:.spec.claimRef.name'
 # 预期输出:
@@ -396,7 +411,6 @@ kubectl delete pv nas-pv-demo
 # 1. 手动清除 PV 的 claimRef
 # 2. 或者创建新的 PV 指向同一底层存储
 ```
-
 ---
 
 ## 配置示例
@@ -456,7 +470,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 前提: StorageClass 的 allowVolumeExpansion 必须为 true
 kubectl get sc alicloud-disk-essd -o jsonpath='{.allowVolumeExpansion}'
 # true
@@ -472,7 +487,6 @@ kubectl get pvc disk-pvc-demo
 # 云盘只支持扩容不支持缩容
 
 ```
-
 ---
 
 ## 常见问题
@@ -526,3 +540,5 @@ volumeClaimTemplates 为 StatefulSet 的每个 Pod 自动创建独立的 PVC。P
 - index/pvc-index|PVC 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

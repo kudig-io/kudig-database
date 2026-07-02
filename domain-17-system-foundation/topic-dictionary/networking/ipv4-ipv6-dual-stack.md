@@ -36,6 +36,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # IPv4/IPv6 dual-stack
@@ -166,7 +171,8 @@ spec:
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 双栈 IP
 kubectl get pod <name> -o jsonpath='{.status.podIPs}'
 
@@ -182,7 +188,6 @@ kubectl patch svc <name> -p '{"spec":{"ipFamilyPolicy":"PreferDualStack","ipFami
 # 测试 IPv6 连通性
 kubectl exec <pod> -- curl -6 http://[<ipv6-addr>]:80
 ```
-
 ## 交叉引用
 
 - [Service](service.md) — Service 类型和 ClusterIP 分配
@@ -199,3 +204,6 @@ kubectl exec <pod> -- curl -6 http://[<ipv6-addr>]:80
 - [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
 - [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
 - [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+
+
+<!-- risk-assessed -->

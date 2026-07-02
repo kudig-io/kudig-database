@@ -39,6 +39,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -165,7 +170,8 @@ K8s 支持三种探针来检查容器的健康状态：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建带资源限制和探针的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -237,14 +243,14 @@ kubectl describe pod nginx-demo
 # 查看 Pod YAML（完整定义）
 kubectl get pod nginx-demo -o yaml
 ```
-
 ### 任务 2: Pod 日志与调试 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 日志
 kubectl logs nginx-demo
 # 预期输出: nginx 访问日志
@@ -289,14 +295,14 @@ kubectl get pod nginx-demo -o jsonpath='{.metadata.annotations}'
 kubectl label pod nginx-demo version=v1
 kubectl get pod nginx-demo --show-labels
 ```
-
 ### 任务 3: 多容器 Pod（Sidecar 模式）(40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建带 Sidecar 日志采集器的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -368,14 +374,14 @@ kubectl exec sidecar-demo -c log-collector -- wget -qO- http://localhost:80
 kubectl logs sidecar-demo -c log-collector --tail=5
 # 预期输出: 新的 access.log 条目
 ```
-
 ### 任务 4: Init Container 与 Pod 生命周期观察 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建带多个 Init Container 的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -454,7 +460,6 @@ kubectl delete pod nginx-demo sidecar-demo init-demo
 # pod "sidecar-demo" deleted
 # pod "init-demo" deleted
 ```
-
 ---
 
 ## 配置示例
@@ -602,3 +607,5 @@ Init Container 失败后，Pod 不会继续启动主容器。如果 restartPolic
 - [ACK 工作负载管理](../../domain-12-cloud-providers/04-alicloud-ack/250-ack-workload.md)
 
 ```
+
+<!-- risk-assessed -->

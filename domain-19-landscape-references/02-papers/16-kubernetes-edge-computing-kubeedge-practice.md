@@ -57,6 +57,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 边缘计算与KubeEdge实践 (Edge Computing and [[KubeEdge|KubeEdge]] Practice)
@@ -285,7 +290,8 @@ data:
 
 ## 2.2 边缘节点部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # edge-node-installer.sh
 
@@ -332,7 +338,6 @@ kubectl get nodes -o wide | grep $EDGE_NODE_NAME
 
 echo "边缘节点 $EDGE_NODE_NAME 安装完成!"
 ```
-
 <!-- chunk: 3. 边缘应用部署管理 -->## 3. 边缘应用部署管理
 
 ## 3.1 边缘应用部署策略
@@ -1604,3 +1609,6 @@ if __name__ == "__main__":
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

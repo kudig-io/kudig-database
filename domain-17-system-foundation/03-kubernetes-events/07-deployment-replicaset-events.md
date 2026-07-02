@@ -42,6 +42,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -191,7 +196,8 @@ Scaled up replica set myapp-7d4f8c9b5d to 5 from 3
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Deployment 扩缩容事件序列
 kubectl describe deployment <deployment-name>
 
@@ -204,7 +210,6 @@ kubectl get deployment <deployment-name> -o jsonpath='{.spec.strategy}'
 # 4. 实时监控扩缩容过程
 kubectl get pods -w -l app=<app-name>
 ```
-
 ## 解决建议
 
 **正常场景**：无需处理，这是 Deployment 正常工作流程
@@ -266,7 +271,8 @@ Created new replica set "myapp-7d4f8c9b5d"
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ReplicaSet 创建事件
 kubectl describe deployment <deployment-name> | grep "Created new replica set"
 
@@ -279,7 +285,6 @@ kubectl get rs -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name}{
 # 4. 对比新旧 ReplicaSet 的差异
 kubectl diff -f deployment.yaml
 ```
-
 ## 解决建议
 
 **正常场景**：这是正常的更新流程
@@ -341,7 +346,8 @@ ReplicaSet "myapp-7d4f8c9b5d" has timed out progressing.
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==========================================
 # 阶段 1: 快速诊断 - 确定卡在哪个阶段
 # ==========================================
@@ -401,7 +407,6 @@ kubectl get deployment <deployment-name> -o jsonpath='{.spec.template.spec.conta
 # 11. 检查 progressDeadlineSeconds 配置
 kubectl get deployment <deployment-name> -o jsonpath='{.spec.progressDeadlineSeconds}'
 ```
-
 ## 解决建议
 
 ## **根本原因分类与解决方案**
@@ -410,14 +415,14 @@ kubectl get deployment <deployment-name> -o jsonpath='{.spec.progressDeadlineSec
 
 **症状**：Pod 状态为 Running，但 Readiness Probe 一直失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断命令
 kubectl get pods -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\t"}{.status.containerStatuses[0].ready}{"\n"}{end}'
 
 # 查看 Readiness Probe 失败原因
 kubectl describe pod <pod-name> | grep -A 10 "Readiness"
 ```
-
 **解决方案**：
 
 ```yaml
@@ -450,13 +455,13 @@ spec:
 
 **症状**：Pod 状态一直是 Pending
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl describe pod <pod-name> | grep -A 5 "Events:"
 # 错误示例：
 # 0/5 nodes are available: 3 Insufficient cpu, 2 Insufficient memory.
 ```
-
 **解决方案**：
 
 ```yaml
@@ -488,16 +493,17 @@ spec:
 
 **症状**：Pod 状态为 ImagePullBackOff 或 ErrImagePull
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl describe pod <pod-name> | grep "Image"
 # 错误示例：
 # Failed to pull image "myapp:v2": rpc error: code = NotFound desc = failed to pull and unpack image
 ```
-
 **解决方案**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: 检查镜像是否存在
 docker pull myapp:v2
 
@@ -516,39 +522,38 @@ spec:
         image: myapp:v2
         imagePullPolicy: IfNotPresent  # 或 Always
 ```
-
 ## 原因 4: 应用启动后立即崩溃（占 10%）
 
 **症状**：Pod 状态为 CrashLoopBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl logs <pod-name> --previous
 kubectl describe pod <pod-name>
 ```
-
 **解决方案**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 立即回滚到稳定版本
 kubectl rollout undo deployment/<deployment-name>
 
 # 2. 修复应用代码后重新部署
 # 3. 使用 Canary 部署策略逐步验证
 ```
-
 ## 原因 5: PreStop Hook 或优雅终止时间过长（占 5%）
 
 **症状**：旧 Pod 终止缓慢，阻塞新 Pod 扩容
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl get pods -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.deletionTimestamp}{"\t"}{.status.phase}{"\n"}{end}'
 ```
-
 **解决方案**：
 
 ```yaml
@@ -569,12 +574,12 @@ spec:
 
 **症状**：旧 Pod 无法被驱逐
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl get pdb
 kubectl describe pdb <pdb-name>
 ```
-
 **解决方案**：
 
 ```yaml
@@ -594,17 +599,18 @@ spec:
 
 **症状**：Pod 创建请求被拦截
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl describe rs $NEW_RS | grep "admission webhook"
 ```
-
 **解决方案**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查并修复 Webhook 策略
 kubectl get validatingwebhookconfiguration
 kubectl get mutatingwebhookconfiguration
@@ -612,7 +618,6 @@ kubectl get mutatingwebhookconfiguration
 # 临时禁用有问题的 Webhook（谨慎操作）
 kubectl delete validatingwebhookconfiguration <webhook-name>
 ```
-
 ---
 
 ## 生产最佳实践
@@ -787,7 +792,8 @@ Deployment "myapp" has minimum availability (2/3 replicas available).
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前可用副本数
 kubectl get deployment <deployment-name> -o jsonpath='{.status.availableReplicas}/{.spec.replicas}'
 
@@ -797,7 +803,6 @@ kubectl get pods -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name
 # 3. 查看滚动更新进度
 kubectl rollout status deployment/<deployment-name>
 ```
-
 ## 解决建议
 
 **正常场景**：这是健康的滚动更新信号，无需处理
@@ -855,7 +860,8 @@ Deployment "myapp" does not have minimum availability (1/3 replicas available, n
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 快速查看问题 Pod
 kubectl get pods -l app=<app-name> -o wide | grep -v Running
 
@@ -868,13 +874,13 @@ kubectl get events --field-selector involvedObject.kind=Pod --sort-by='.lastTime
 # 4. 查看 ReplicaSet 状态
 kubectl get rs -l app=<app-name>
 ```
-
 ## 解决建议
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景 1: 新版本 Pod 启动失败
 # 立即回滚
 kubectl rollout undo deployment/<deployment-name>
@@ -895,7 +901,6 @@ kubectl set probe deployment/<deployment-name> --readiness --failure-threshold=5
 kubectl logs -l app=<app-name> --tail=100
 
 ```
-
 ---
 
 ## `DeploymentRollback` - 回滚部署
@@ -929,7 +934,8 @@ Rolled back deployment "myapp" to revision 3
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看回滚历史
 kubectl rollout history deployment/<deployment-name>
 
@@ -944,14 +950,14 @@ diff /tmp/rev3.yaml /tmp/rev2.yaml
 # 4. 查看回滚进度
 kubectl rollout status deployment/<deployment-name>
 ```
-
 ## 解决建议
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景 1: 回滚到上一个版本（最常用）
 kubectl rollout undo deployment/<deployment-name>
 
@@ -971,7 +977,6 @@ kubectl rollout history deployment/<deployment-name> --revision=2
 # 增加历史版本保留数量
 kubectl patch deployment <deployment-name> -p '{"spec":{"revisionHistoryLimit":20}}'
 ```
-
 ---
 
 ## `DeploymentRollbackRevisionNotFound` - 回滚版本不存在
@@ -1001,7 +1006,8 @@ Unable to find the revision 5 for deployment "myapp"
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前可用的历史版本
 kubectl rollout history deployment/<deployment-name>
 
@@ -1011,7 +1017,6 @@ kubectl get deployment <deployment-name> -o jsonpath='{.spec.revisionHistoryLimi
 # 3. 查看所有 ReplicaSet（包括已删除的）
 kubectl get rs -l app=<app-name> --show-labels
 ```
-
 ## 解决建议
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1019,7 +1024,8 @@ kubectl get rs -l app=<app-name> --show-labels
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景 1: 回滚到最近的可用版本
 kubectl rollout history deployment/<deployment-name>  # 查看可用版本
 kubectl rollout undo deployment/<deployment-name> --to-revision=<available-revision>
@@ -1037,7 +1043,6 @@ kubectl patch deployment <deployment-name> -p '{"spec":{"revisionHistoryLimit":2
 # ArgoCD: 自动保留完整历史
 # Flux: Git 仓库即历史记录
 ```
-
 ---
 
 ## `DeploymentPaused` - 部署已暂停
@@ -1068,7 +1073,8 @@ Deployment myapp paused
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Deployment 是否被暂停
 kubectl get deployment <deployment-name> -o jsonpath='{.spec.paused}'
 
@@ -1078,10 +1084,10 @@ kubectl describe deployment <deployment-name> | grep -A 5 "Conditions:"
 # 3. 查看暂停期间累积的配置变更
 kubectl diff -f deployment.yaml
 ```
-
 ## 解决建议
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用场景: 批量修改配置，一次性部署
 
 # 步骤 1: 暂停 Deployment
@@ -1103,7 +1109,6 @@ kubectl rollout resume deployment/<deployment-name>
 # - 如果忘记 resume，应用将无法更新（常见生产事故）
 # - 建议设置自动化检查，防止长期暂停
 ```
-
 ---
 
 ## `DeploymentResumed` - 部署已恢复
@@ -1133,7 +1138,8 @@ Deployment myapp resumed
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Deployment 已恢复
 kubectl get deployment <deployment-name> -o jsonpath='{.spec.paused}'
 
@@ -1143,7 +1149,6 @@ kubectl rollout status deployment/<deployment-name>
 # 3. 查看新创建的 ReplicaSet
 kubectl get rs -l app=<app-name> --sort-by=.metadata.creationTimestamp
 ```
-
 ## 解决建议
 
 **正常场景**：这是 pause/resume 工作流的正常结束，无需处理
@@ -1178,7 +1183,8 @@ Found new replica set "myapp-7d4f8c9b5d"
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ReplicaSet 的创建时间（判断是新建还是复用）
 kubectl get rs -l app=<app-name> --sort-by=.metadata.creationTimestamp
 
@@ -1188,20 +1194,19 @@ kubectl get rs -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name}{
 # 3. 对比 Deployment 的 Pod 模板 hash
 kubectl get deployment <deployment-name> -o jsonpath='{.spec.template.metadata.labels.pod-template-hash}'
 ```
-
 ## 解决建议
 
 **正常场景**：这是正常的版本管理机制，无需处理
 
 **使用案例**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: 回滚后再次更新到同一版本
 kubectl set image deployment/myapp app=myapp:v2  # 创建新 RS: myapp-abc123
 kubectl set image deployment/myapp app=myapp:v1  # 回滚，复用旧 RS: myapp-def456
 kubectl set image deployment/myapp app=myapp:v2  # 再次更新，复用 RS: myapp-abc123 (触发 FoundNewReplicaSet)
 ```
-
 ---
 
 ## `NewReplicaSetAvailable` - 新 ReplicaSet 可用
@@ -1235,7 +1240,8 @@ Deployment "myapp" has successfully progressed.
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认所有 Pod 都是新版本
 kubectl get pods -l app=<app-name> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.pod-template-hash}{"\n"}{end}'
 
@@ -1245,7 +1251,6 @@ kubectl get rs -l app=<app-name>
 # 3. 查看更新耗时
 kubectl describe deployment <deployment-name> | grep "NewReplicaSetAvailable"
 ```
-
 ## 解决建议
 
 **正常场景**：这是滚动更新成功的标志，无需处理
@@ -1255,7 +1260,8 @@ kubectl describe deployment <deployment-name> | grep "NewReplicaSetAvailable"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 验证新版本功能
 curl http://<service-endpoint>/health
 
@@ -1265,7 +1271,6 @@ kubectl top pods -l app=<app-name>
 # 3. 清理过多的历史 ReplicaSet（可选）
 kubectl get rs -l app=<app-name> --sort-by=.metadata.creationTimestamp | head -n -10 | awk '{print $1}' | xargs kubectl delete rs
 ```
-
 ---
 
 ## `ReplicaSetUpdated` - 更新 ReplicaSet
@@ -1295,7 +1300,8 @@ Updated replica set "myapp-7d4f8c9b5d"
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ReplicaSet 最近的修改
 kubectl describe rs <replicaset-name>
 
@@ -1304,7 +1310,6 @@ kubectl get deployment <deployment-name> -o yaml > /tmp/deploy.yaml
 kubectl get rs <replicaset-name> -o yaml > /tmp/rs.yaml
 diff /tmp/deploy.yaml /tmp/rs.yaml
 ```
-
 ## 解决建议
 
 **正常场景**：这是正常的配置同步，无需处理
@@ -1341,7 +1346,8 @@ Created pod: myapp-7d4f8c9b5d-x8k2l
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看新创建的 Pod 状态
 kubectl get pods <pod-name> -o wide
 
@@ -1354,22 +1360,22 @@ kubectl describe pod <pod-name> | grep -A 10 "Events:"
 # 4. 查看 ReplicaSet 的扩容事件序列
 kubectl describe rs <replicaset-name>
 ```
-
 ## 解决建议
 
 **正常场景**：Pod 创建成功后会经历以下阶段：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 生命周期
 SuccessfulCreate -> Pending -> Scheduled -> ContainerCreating -> Running -> Ready
 
 # 监控整个流程
 kubectl get pods -w -l pod-template-hash=<hash>
 ```
-
 **异常场景**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景 1: Pod 创建后一直 Pending
 # 原因: 资源不足、节点选择器不匹配、污点容忍度不匹配
 kubectl describe pod <pod-name>
@@ -1384,7 +1390,6 @@ kubectl get rs <replicaset-name> -o jsonpath='{.spec.replicas}'
 # 通常是 etcd 数据不一致或 controller 重复操作
 # 检查 etcd 健康状态
 ```
-
 ---
 
 ## `SuccessfulDelete` - 删除 Pod 成功
@@ -1415,7 +1420,8 @@ Deleted pod: myapp-7d4f8c9b5d-x8k2l
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 删除原因（查看 ReplicaSet 事件）
 kubectl describe rs <replicaset-name>
 
@@ -1428,25 +1434,34 @@ kubectl describe pod <pod-name>
 # 4. 查看 Pod 终止日志
 kubectl logs <pod-name> --previous
 ```
-
 ## 解决建议
 
 **正常场景**：Pod 删除后会经历以下阶段：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 终止流程
 SuccessfulDelete -> Terminating -> PreStop Hook -> SIGTERM -> SIGKILL -> Deleted
 
 # 监控终止过程
 kubectl get pods -w -l pod-template-hash=<hash>
 ```
-
 **异常场景**：
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景 1: Pod 长时间 Terminating（超过 terminationGracePeriodSeconds）
 # 原因: preStop Hook 执行超时、进程不响应 SIGTERM、finalizer 阻塞
 
@@ -1466,7 +1481,6 @@ kubectl get rs <replicaset-name> -o jsonpath='{.spec.replicas}'
 kubectl get nodes
 kubectl describe deployment <deployment-name>
 ```
-
 ---
 
 ## `FailedCreate` - ⚠️ 创建 Pod 失败
@@ -1523,7 +1537,8 @@ Error creating: serviceaccounts "myapp-sa" not found
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==========================================
 # 阶段 1: 快速定位失败原因
 # ==========================================
@@ -1565,7 +1580,6 @@ kubectl get ns <namespace> -o jsonpath='{.metadata.labels}'
 kubectl get ns <namespace>
 kubectl get sa <serviceaccount> -n <namespace>
 ```
-
 ## 解决建议
 
 ## **根据错误类型分类解决**
@@ -1574,14 +1588,14 @@ kubectl get sa <serviceaccount> -n <namespace>
 
 **症状**：`exceeded quota: compute-quota`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl describe quota -n <namespace>
 
 # 查看当前使用情况
 kubectl get resourcequota -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.used}{"\t"}{.status.hard}{"\n"}{end}'
 ```
-
 **解决方案**：
 
 ```yaml
@@ -1619,11 +1633,11 @@ kubectl delete deployment <unused-deployment>
 
 **症状**：`maximum cpu usage per Container is 2, but limit is 4`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl describe limitrange -n <namespace>
 ```
-
 **解决方案**：
 
 ```yaml
@@ -1665,7 +1679,8 @@ spec:
 
 **症状**：`admission webhook "xxx" denied the request`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl get validatingwebhookconfigurations
 kubectl describe validatingwebhookconfiguration <webhook-name>
@@ -1673,7 +1688,6 @@ kubectl describe validatingwebhookconfiguration <webhook-name>
 # 查看 Webhook 具体拒绝原因
 kubectl get events --field-selector reason=FailedCreate -n <namespace>
 ```
-
 **解决方案**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1681,7 +1695,8 @@ kubectl get events --field-selector reason=FailedCreate -n <namespace>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: 修复 Pod 配置以符合 Webhook 策略
 # 例如: Webhook 拒绝使用 latest 标签
 kubectl set image deployment/<deployment-name> app=myapp:v1.2.3  # 使用明确版本号
@@ -1699,19 +1714,18 @@ kubectl delete validatingwebhookconfiguration <webhook-name>
 # 方案 D: 调整 Webhook 的 failurePolicy
 kubectl patch validatingwebhookconfiguration <webhook-name> -p '{"webhooks":[{"name":"webhook.example.com","failurePolicy":"Ignore"}]}'
 ```
-
 ## 错误类型 4: RBAC 权限不足（占 10%）
 
 **症状**：`User "system:serviceaccount:default:default" cannot create resource "pods"`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl auth can-i create pods --as=system:serviceaccount:<namespace>:<serviceaccount>
 
 # 查看 ServiceAccount 的权限
 kubectl get rolebinding,clusterrolebinding -n <namespace> -o json | jq '.items[] | select(.subjects[]?.name=="<serviceaccount>")'
 ```
-
 **解决方案**：
 
 ```yaml
@@ -1755,14 +1769,14 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 诊断
 kubectl get ns <namespace> -o jsonpath='{.metadata.labels}'
 
 # 查看命名空间的 PodSecurity 配置
 kubectl label namespace <namespace> --list | grep pod-security
 ```
-
 **解决方案**：
 
 ```yaml
@@ -1803,20 +1817,21 @@ kubectl label namespace <namespace> \
 
 **症状**：`serviceaccounts "myapp-sa" not found`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl get sa <serviceaccount> -n <namespace>
 kubectl get secret <secret-name> -n <namespace>
 kubectl get configmap <configmap-name> -n <namespace>
 ```
-
 **解决方案**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: 创建缺失的资源
 kubectl create serviceaccount myapp-sa -n <namespace>
 
@@ -1825,22 +1840,22 @@ kubectl patch deployment <deployment-name> -p '{"spec":{"template":{"spec":{"ser
 
 # 方案 C: 确保资源创建顺序（使用 Helm、Kustomize 等工具）
 ```
-
 ## 错误类型 7: API Server 限流或问题（占 3%）
 
 **症状**：`too many requests` 或 `connection refused`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断
 kubectl get --raw /metrics | grep apiserver_request_total
 
 # 查看 API Server 日志
 kubectl logs -n kube-system kube-apiserver-<node-name>
 ```
-
 **解决方案**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 A: 降低 ReplicaSet Controller 的并发操作
 # 调整 kube-controller-manager 的 --concurrent-replicaset-syncs 参数（需要管理员权限）
 
@@ -1855,7 +1870,6 @@ spec:
 # 方案 C: 检查 API Server 健康状态
 kubectl get componentstatus
 ```
-
 ---
 
 ## 监控与告警
@@ -1924,7 +1938,8 @@ This replica set is selecting all pods. A non-empty selector is required.
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ReplicaSet 的 selector
 kubectl get rs <replicaset-name> -o jsonpath='{.spec.selector}'
 
@@ -1934,13 +1949,13 @@ kubectl get pods -n <namespace> --selector=<selector> --show-labels
 # 3. 查看 ReplicaSet 的完整配置
 kubectl get rs <replicaset-name> -o yaml
 ```
-
 ## 解决建议
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 立即删除有问题的 ReplicaSet（高危操作，需谨慎）
 kubectl delete rs <replicaset-name> --cascade=false  # 不删除 Pod
 
@@ -1959,7 +1974,6 @@ spec:
         app: myapp        # 必须与 selector 匹配
         version: v1       # 必须与 selector 匹配
 ```
-
 ---
 
 <!-- chunk: 📈 滚动更新事件流程图 -->## 📈 滚动更新事件流程图
@@ -1967,6 +1981,7 @@ spec:
 ## 完整滚动更新事件序列（RollingUpdate 策略）
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 时间轴    Deployment Controller 事件           ReplicaSet Controller 事件          Pod 状态
 ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -2041,7 +2056,6 @@ T10       NewReplicaSetAvailable
           - 新 RS (myapp-v2-abc123): 3 副本 (全部 Ready)
           - 旧 RS (myapp-v1-def456): 0 副本
 ```
-
 ---
 
 ## 滚动更新配置对事件流程的影响
@@ -2131,14 +2145,14 @@ T7   更新阻塞，等待人工干预
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 立即回滚
 kubectl rollout undo deployment/myapp
 
 # 或修复问题后继续
 kubectl set image deployment/myapp app=myapp:v2-fixed
 ```
-
 ---
 
 ## 场景 B: Pod 创建失败（FailedCreate）
@@ -2159,14 +2173,23 @@ T6   FailedCreate (重试失败)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看详细错误
 kubectl describe rs myapp-v2-abc123
 
 # 修复 Quota 或降低资源请求
 kubectl edit deployment myapp
 ```
-
 ---
 
 <!-- chunk: 🔀 部署策略对比 -->## 🔀 部署策略对比
@@ -2197,6 +2220,7 @@ spec:
 **事件流程**：
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 T1   用户执行: kubectl set image deployment/myapp app=myapp:v2
 T2   ScalingReplicaSet "Scaled down replica set myapp-v1-def456 to 0 from 3"
      ├─> SuccessfulDelete "Deleted pod: myapp-v1-def456-pod1"
@@ -2216,7 +2240,6 @@ T6   等待所有新 Pod Ready
 T7   NewReplicaSetAvailable "Deployment has successfully progressed"
 T8   ✅ 更新完成，服务恢复
 ```
-
 **中断时间**：T3 到 T8（通常 30s - 2min）
 
 ---
@@ -2298,7 +2321,8 @@ histogram_quantile(0.95, rate(deployment_rollout_duration_seconds_bucket[5m]))
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自动回滚（使用 CI/CD 工具实现）
 # 示例: 如果新版本 5 分钟内错误率 > 5%，自动回滚
 
@@ -2311,14 +2335,14 @@ fi
 # 金丝雀部署（Canary Deployment）
 # 使用 Flagger、Argo Rollouts 等工具实现自动渐进式发布
 ```
-
 ---
 
 ## 4. 常见问题排查清单
 
 ## ✅ Deployment 更新卡住
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Deployment 状态
 kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progressing")]}'
 
@@ -2335,10 +2359,10 @@ kubectl describe rs <replicaset-name>
 # 5. 查看 Pod 日志
 kubectl logs <pod-name>
 ```
-
 ## ✅ Pod 创建失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 FailedCreate 事件
 kubectl describe rs <replicaset-name> | grep FailedCreate
 
@@ -2348,10 +2372,10 @@ kubectl describe rs <replicaset-name> | grep FailedCreate
 # - Admission Webhook: kubectl get validatingwebhookconfigurations
 # - RBAC: kubectl auth can-i create pods --as=system:serviceaccount:ns:sa
 ```
-
 ## ✅ Pod 启动缓慢
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查镜像拉取时间
 kubectl describe pod <pod-name> | grep "Pulling image"
 
@@ -2366,7 +2390,6 @@ kubectl logs <pod-name>
 # - 增加 readinessProbe.initialDelaySeconds
 # - 使用 startupProbe
 ```
-
 ---
 
 <!-- chunk: 📚 相关文档 -->## 📚 相关文档
@@ -2419,3 +2442,5 @@ kubectl logs <pod-name>
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

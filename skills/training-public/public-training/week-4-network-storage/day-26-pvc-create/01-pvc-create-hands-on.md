@@ -38,6 +38,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 26: 存储卷创建与删除实操
@@ -129,7 +134,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用配置
 kubectl apply -f pv-static.yaml
 
@@ -149,7 +155,6 @@ kubectl get pv,pvc
 # 3. 找到后建立双向绑定关系
 # 4. 如果使用 volumeName 则直接绑定指定 PV
 ```
-
 ### 2.2 Dynamic Provisioning（动态）
 
 ```yaml
@@ -184,7 +189,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用配置
 kubectl apply -f storageclass.yaml
 kubectl apply -f dynamic-pvc.yaml
@@ -206,7 +212,6 @@ kubectl get storageclass
 # standard (default)   kubernetes.io/gce-pd    Delete          WaitForFirstConsumer   true
 # slow                 kubernetes.io/no-provisioner   Retain   Immediate              false
 ```
-
 ### 2.3 使用 PVC
 
 ```yaml
@@ -234,7 +239,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f pod-pvc.yaml
 
 # 验证数据持久化
@@ -247,7 +253,6 @@ kubectl apply -f pod-pvc.yaml
 kubectl exec app-with-pvc -- cat /data/test.txt
 # 输出: Data stored (数据持久化成功)
 ```
-
 ---
 
 ## 3. 常见存储配置
@@ -381,7 +386,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认没有 Pod 使用 PVC
 kubectl get pods -A -o json | jq -r '.items[] |
   select(.spec.volumes[]?.persistentVolumeClaim?.claimName == "pvc-name") |
@@ -408,10 +423,10 @@ kubectl patch pv <pv-name> -p '{"metadata":{"finalizers":null}}' --type=merge
 kubectl delete pv <pv-name>
 # 底层存储需要手动到云控制台删除
 ```
-
 ### 4.2 PV reclaimPolicy 处理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PV reclaimPolicy
 kubectl get pv -o custom-columns='NAME:.metadata.name,POLICY:.spec.persistentVolumeReclaimPolicy,STATUS:.status.phase,CLAIM:.spec.claimRef.name'
 
@@ -431,14 +446,14 @@ kubectl get pv -o custom-columns='NAME:.metadata.name,POLICY:.spec.persistentVol
 # 2. 数据不可恢复！
 # 3. 适合临时数据、缓存等
 ```
-
 ---
 
 ## 5. 存储故障排查
 
 ### 5.1 PVC Pending
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 状态和事件
 kubectl describe pvc <pvc-name>
 
@@ -466,10 +481,10 @@ kubectl describe storageclass <sc-name>
 kubectl get resourcequota -A
 kubectl describe resourcequota -n <namespace>
 ```
-
 ### 5.2 挂载失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod 事件
 kubectl describe pod <pod-name> | grep -A10 "Events:"
 
@@ -498,10 +513,10 @@ kubectl get pods -n kube-system | grep csi
 kubectl logs -n kube-system csi-driver-xxx --tail=50
 kubectl get csinode
 ```
-
 ### 5.3 云盘常见问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS EBS 常见问题
 # 1. Volume 已 attached 到其他实例
 aws ec2 describe-volumes --volume-ids vol-xxx | jq '.Volumes[0].Attachments'
@@ -516,7 +531,6 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 # 检查 Node IAM Role 是否包含 EBS 操作权限
 aws iam get-role-policy --role-name <node-role> --policy-name <policy-name>
 ```
-
 ---
 
 ## 6. 存储扩容
@@ -527,7 +541,8 @@ aws iam get-role-policy --role-name <node-role> --policy-name <policy-name>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # StorageClass 需支持 allowVolumeExpansion: true
 kubectl get storageclass <sc-name> -o jsonpath='{.allowVolumeExpansion}'
 
@@ -548,7 +563,6 @@ kubectl exec <pod-name> -- df -h /data
 # Filesystem      Size  Used Avail Use% Mounted on
 # /dev/xvda1       50G   10G   40G  20% /data
 ```
-
 ### 6.2 扩容限制
 
 ```yaml
@@ -584,14 +598,14 @@ parameters:
 
 **练习 2**: 模拟 PVC Pending，排查 StorageClass 问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤:
 # 1. 创建使用不存在 StorageClass 的 PVC
 # 2. kubectl describe pvc 查看错误
 # 3. 创建正确的 StorageClass
 # 4. 验证 PVC 自动绑定
 ```
-
 **练习 3**: 验证 PVC 在线扩容功能
 
 ```bash
@@ -709,3 +723,6 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+
+<!-- risk-assessed -->

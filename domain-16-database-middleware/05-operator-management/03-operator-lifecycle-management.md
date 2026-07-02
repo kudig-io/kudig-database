@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Operator 生命周期管理：OLM、升级与 Day-2 运维
@@ -125,14 +130,14 @@ curl -L https://github.com/operator-framework/operator-lifecycle-manager/release
 
 安装完成后验证核心组件：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 olm-operator 与 catalog-operator 已运行
 kubectl get pods -n olm
 
 # 查看默认 catalog source
 kubectl get catalogsources -n olm
 ```
-
 ### 3.2 在专有云 ASO 中的注意事项
 
 专有云 ASO 通常为离线环境，无法直接访问 Red Hat / OperatorHub 公网源。需要：
@@ -177,14 +182,14 @@ podman push registry.internal.aso/olm/catalog:v20260629
 
 ### 4.2 CatalogSource 健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CatalogSource 状态，确保状态为 CONNECTED
 kubectl get catalogsource internal-operators -n olm -o jsonpath='{.status.connectionState.lastObservedState}'
 
 # 查看 catalog Pod 日志
 kubectl logs -n olm deployment/internal-operators --tail=100
 ```
-
 ## 5. 订阅与自动升级
 
 ### 5.1 创建 OperatorGroup 与 Subscription
@@ -216,11 +221,11 @@ spec:
 
 创建后检查安装计划状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 InstallPlan 是否已完成
 kubectl get installplan -n database-operators -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}'
 ```
-
 ### 5.2 升级通道选择
 
 | 通道类型 | 适用场景 | 风险 |
@@ -245,7 +250,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看待审批的 InstallPlan
 kubectl get installplan -n database-operators
 
@@ -253,7 +259,6 @@ kubectl get installplan -n database-operators
 kubectl patch installplan <plan-name> -n database-operators --type merge \
   -p '{"spec":{"approved":true}}'
 ```
-
 ### 6.2 回滚 Operator
 
 OLM 不直接支持一键回滚 CSV，但可通过重新安装旧版本实现回滚。步骤如下：
@@ -262,7 +267,8 @@ OLM 不直接支持一键回滚 CSV，但可通过重新安装旧版本实现回
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 删除当前 Subscription 与 CSV（保留 CRD，避免数据丢失）
 kubectl delete subscription cloudnative-pg -n database-operators
 kubectl delete csv cloudnative-pg.v1.22.0 -n database-operators
@@ -283,7 +289,6 @@ spec:
   installPlanApproval: Manual
 EOF
 ```
-
 > 注意：回滚前需确认旧版本 CSV 支持的 CRD 版本与当前 CR 兼容，否则可能导致 CR 被丢弃。建议先在测试命名空间验证旧版本 CSV 能否正常协调现有 CR。
 
 ## 7. Day-2 运维
@@ -292,46 +297,46 @@ EOF
 
 Operator 自身也是 Pod，应纳入集群监控体系：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Operator Pod 资源使用与重启情况
 kubectl top pod -n database-operators -l app=cloudnative-pg
 kubectl get pods -n database-operators -l app=cloudnative-pg
 ```
-
 ### 7.2 CRD 版本管理
 
 Operator 升级常伴随 CRD 版本升级。升级前需检查 CRD 的 `storedVersions`：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CRD 当前存储版本与可服务版本
 kubectl get crd postgresqls.postgresql.cnpg.io -o jsonpath='{.status.storedVersions}{"\n"}{.status.conditions}'
 
 ```
-
 若 `storedVersions` 包含旧版本，应在确认所有 CR 已迁移到新版本后，使用 `kubectl edit crd` 移除旧版本。否则 CRD 中会一直保留旧版本存储格式，影响升级与新特性使用。
 
 ### 7.3 备份 Subscription 与 CSV
 
 在重大变更前备份 OLM 资源，便于快速恢复：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出 Subscription 与 CSV 配置
 kubectl get subscription -n database-operators -o yaml > backup-subscriptions.yaml
 kubectl get csv -n database-operators -o yaml > backup-csvs.yaml
 ```
-
 建议将备份文件纳入 Git 版本控制，并通过 ACK 配置审计功能追踪变更历史。对于关键 Operator，还应定期演练从备份中恢复 Subscription 与 CSV 的流程，确保在控制平面异常时能够快速恢复。
 
 ### 7.4 Webhook 与证书管理
 
 部分 Operator 会注册 admission webhook，OLM 通过 `Operator Lifecycle Manager` 自动注入证书。若 webhook Pod 无法启动，可能导致集群 API 请求被阻塞。排查方法：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ValidatingWebhookConfiguration 与 MutatingWebhookConfiguration
 kubectl get validatingwebhookconfiguration,mutatingwebhookconfiguration
 kubectl describe deployment <operator-name> -n <namespace>
 ```
-
 ## 8. 多租户与权限隔离
 
 在多团队共享 ACK 集群时，应通过 `OperatorGroup` 限制每个 Operator 的作用域：
@@ -365,11 +370,11 @@ spec:
 
 ### 10.1 InstallPlan 卡住
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 InstallPlan 事件与失败原因
 kubectl describe installplan <plan-name> -n database-operators
 ```
-
 常见原因：
 
 - CatalogSource 不可达或镜像拉取失败。
@@ -378,11 +383,11 @@ kubectl describe installplan <plan-name> -n database-operators
 
 ### 10.2 CSV 状态失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSV 详细状态
 kubectl describe csv cloudnative-pg.v1.22.0 -n database-operators
 ```
-
 重点关注 `Status.Phase` 与 `Status.Message`，常见问题包括：
 
 - `DeploymentNotReady`：Operator Pod 未就绪，检查镜像与资源限制。
@@ -432,7 +437,8 @@ Operator 升级虽然由 OLM 自动管理，但仍存在 CRD schema 变更、依
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份当前 CSV 与 Subscription
 kubectl get csv <csv-name> -n <namespace> -o yaml > /backup/csv.yaml
 kubectl get subscription <sub-name> -n <namespace> -o yaml > /backup/sub.yaml
@@ -443,7 +449,6 @@ kubectl delete subscription <sub-name> -n <namespace>
 kubectl apply -f /backup/sub.yaml
 # 将 sub.yaml 中的 startingCSV 指向旧版本
 ```
-
 > 回滚演练应在非生产环境定期执行，确保升级窗口内有明确的回退方案。
 
 ### 权限扩大监控
@@ -476,3 +481,5 @@ spec:
 - [[domain-16-database-middleware/05-operator-management/02-operator-comparison-mysql-postgres-redis.md|MySQL/PostgreSQL/Redis Operator 对比]]
 
 ```
+
+<!-- risk-assessed -->

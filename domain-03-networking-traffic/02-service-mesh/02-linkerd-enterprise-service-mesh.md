@@ -64,6 +64,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Linkerd|Linkerd]] 企业级服务网格深度实践
@@ -150,7 +155,8 @@ metadata:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 linkerd install \
   --ha \
   --controller-replicas 3 \
@@ -166,10 +172,10 @@ linkerd install \
 
 linkerd check
 ```
-
 ## Linkerd 安装验证输出示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ linkerd check
 
 kubernetes-api
@@ -228,7 +234,6 @@ linkerd-version
 
 Status check results are √
 ```
-
 ## 控制平面资源配置
 
 ```yaml
@@ -688,12 +693,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 linkerd viz install | kubectl apply -f -
 linkerd viz check
 linkerd viz dashboard
 ```
-
 ## Prometheus ServiceMonitor
 
 ```yaml
@@ -876,7 +881,8 @@ spec:
 
 ## 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 
 echo "=== 1. Linkerd 安装检查 ==="
@@ -920,7 +926,6 @@ echo ""
 echo "=== 10. 性能分析 ==="
 linkerd viz top deploy/webapp -n production --max-rps 100
 ```
-
 ## linkerd viz stat 输出示例
 
 ```bash
@@ -1025,7 +1030,8 @@ req id=0:3 proxy=out src=10.0.2.10:45678 dst=10.0.3.5:8080  tls=true :method=GET
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Cluster East: 安装多集群组件
 linkerd multicluster install | kubectl apply --context east -f -
 linkerd multicluster check --context east
@@ -1055,7 +1061,6 @@ linkerd multicluster gateways --context west
 kubectl exec -n production deploy/test-client --context west -- \
   curl -s http://webapp-east:80/health
 ```
-
 ## 多集群网络策略
 
 ```yaml
@@ -1136,7 +1141,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 fortio 进行基准测试
 kubectl run fortio --image=fortio/fortio --restart=Never --context east
 
@@ -1151,7 +1157,6 @@ kubectl exec fortio -- fortio load -t 30s -qps 500 http://webapp:80/api/users
 # Linkerd: P50=1.5ms (+0.3ms), P99=5.2ms (+0.7ms)
 # 开销: P50 +25%, P99 +16% (远低于Istio的+100%/+65%)
 ```
-
 ## Linkerd vs Istio 性能对比表
 
 | 指标 | Linkerd | Istio (Sidecar) | Istio (Ambient L4) |
@@ -1178,7 +1183,8 @@ kubectl exec fortio -- fortio load -t 30s -qps 500 http://webapp:80/api/users
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 echo "=== Linkerd 故障注入测试 ==="
 
@@ -1249,7 +1255,6 @@ echo "--- Cleanup: 移除故障注入 ---"
 kubectl delete faultinjection webapp-abort-test -n production
 echo "Fault injection test completed successfully"
 ```
-
 ## 故障注入输出示例
 
 ```bash
@@ -1344,3 +1349,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+
+<!-- risk-assessed -->

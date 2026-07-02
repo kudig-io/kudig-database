@@ -48,6 +48,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 04 - 生产环境部署 (Production Environment Deployment)
@@ -220,7 +225,8 @@ sudo apt-get install -y haproxy keepalived
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在所有 Master 节点配置 (内容相同)
 sudo tee /etc/haproxy/haproxy.cfg << 'EOF'
 global
@@ -271,13 +277,13 @@ sudo systemctl status haproxy
 
 # 查看监控页面: http://10.0.1.10:9000/stats
 ```
-
 ## 2.3 配置 Keepalived (VIP 浮动)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== master-1 (MASTER 角色，优先级最高) =====
 sudo tee /etc/keepalived/keepalived.conf << 'EOF'
 vrrp_script check_haproxy {
@@ -330,7 +336,6 @@ ip addr show eth0 | grep 10.0.1.100
 curl -k https://10.0.1.100:8443/healthz
 # 预期: ok (API Server 还没部署前会连接失败，这是正常的)
 ```
-
 ---
 
 <!-- chunk: 三、部署 HA 控制平面 (kubeadm) -->## 三、部署 HA 控制平面 (kubeadm)
@@ -449,7 +454,8 @@ nodeRegistration:
 EOF
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 master-1 上初始化
 sudo kubeadm init --config kubeadm-config-ha.yaml --upload-certs
 
@@ -475,10 +481,10 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 # 验证 (此时只有 1 个 Master，状态 NotReady 等 CNI)
 kubectl get nodes
 ```
-
 ## 3.3 加入其他 Master 节点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 master-2 和 master-3 上执行 (使用 kubeadm init 输出的 control-plane join 命令)
 sudo kubeadm join 10.0.1.100:8443 \
   --token <token> \
@@ -494,7 +500,6 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-
 ## 3.4 加入 Worker 节点
 
 ```bash
@@ -509,7 +514,8 @@ sudo kubeadm join 10.0.1.100:8443 \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Tigera Operator 安装 Calico (推荐的生产安装方式)
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/tigera-operator.yaml
 
@@ -558,7 +564,6 @@ sudo etcdctl --endpoints=https://127.0.0.1:2379 \
 curl -k https://10.0.1.100:8443/healthz
 # 预期: ok
 ```
-
 ---
 
 <!-- chunk: 四、安全合规部署 -->## 四、安全合规部署
@@ -679,7 +684,8 @@ roleRef:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 对生产 namespace 启用 restricted 安全级别
 kubectl label namespace production \
   pod-security.kubernetes.io/enforce=restricted \
@@ -693,7 +699,6 @@ kubectl label namespace production \
 # - 只能使用受限的 capabilities
 # - 使用只读根文件系统 (readOnlyRootFilesystem: true)
 ```
-
 ## 4.4 审计日志策略
 
 ```yaml
@@ -893,7 +898,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生产环境使用更详细的配置
 helm install monitoring prometheus-community/kube-prometheus-stack \
   --namespace monitoring --create-namespace \
@@ -914,7 +920,6 @@ helm install monitoring prometheus-community/kube-prometheus-stack \
 # replicas=2            - Prometheus 双副本 (高可用)
 # alertmanager replicas=3 - Alertmanager 3 副本
 ```
-
 ## 6.2 关键告警规则
 
 ```yaml
@@ -990,7 +995,8 @@ spec:
 
 ## 7.1 etcd 自动备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # /usr/local/bin/etcd-backup.sh - etcd 定时备份脚本
 set -euo pipefail
@@ -1022,7 +1028,6 @@ find ${BACKUP_DIR} -name "etcd-snapshot-*.db" -mtime +${RETENTION_DAYS} -delete
 
 echo "[$(date)] etcd 备份完成: ${SNAPSHOT_NAME}"
 ```
-
 ```bash
 # 设置 cron 定时任务 (每天凌晨 2 点)
 sudo chmod +x /usr/local/bin/etcd-backup.sh
@@ -1031,7 +1036,8 @@ echo "0 2 * * * /usr/local/bin/etcd-backup.sh >> /var/log/etcd-backup.log 2>&1" 
 
 ## 7.2 Velero 集群备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Velero CLI
 # macOS: brew install velero
 # Linux:
@@ -1067,7 +1073,6 @@ velero backup describe daily-backup-xxxx
 # 恢复
 velero restore create --from-backup daily-backup-xxxx
 ```
-
 ---
 
 <!-- chunk: 八、证书管理与轮转 -->## 八、证书管理与轮转
@@ -1075,7 +1080,17 @@ velero restore create --from-backup daily-backup-xxxx
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看证书过期时间
 sudo kubeadm certs check-expiration
 # 预期输出: 各组件证书的过期日期 (默认 1 年)
@@ -1094,7 +1109,6 @@ sudo systemctl restart kubelet
 # 检查: cat /var/lib/kubelet/config.yaml | grep rotateCertificates
 # 应为: rotateCertificates: true
 ```
-
 ---
 
 <!-- chunk: 九、集群升级流程 -->## 九、集群升级流程
@@ -1105,7 +1119,17 @@ sudo systemctl restart kubelet
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ===== 1. 升级前准备 =====
 # 备份 etcd
 /usr/local/bin/etcd-backup.sh
@@ -1154,7 +1178,6 @@ kubectl get nodes
 kubectl get pods -A | grep -v Running | grep -v Completed
 # 预期: 无异常 Pod
 ```
-
 ---
 
 <!-- chunk: 十、成本优化 -->## 十、成本优化
@@ -1289,3 +1312,5 @@ nodeGroups:
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ```
+
+<!-- risk-assessed -->

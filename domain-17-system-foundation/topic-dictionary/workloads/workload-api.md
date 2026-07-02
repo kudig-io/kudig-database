@@ -35,6 +35,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Workload API
@@ -169,7 +174,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 API 组是否可用
 kubectl api-versions | grep scheduling.k8s.io
 
@@ -185,7 +191,6 @@ kubectl get pods -n ml-platform -o custom-columns='NAME:.metadata.name,WORKLOAD:
 # 检查调度器对 gang 组的处理
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload|gang"
 ```
-
 ## 交叉引用
 
 - [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference.md|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
@@ -203,3 +208,5 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload|gang
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
+
+<!-- risk-assessed -->

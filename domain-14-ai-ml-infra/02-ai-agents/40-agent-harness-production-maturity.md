@@ -42,6 +42,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent Harness 生产运维与成熟度模型
@@ -105,6 +110,7 @@ k8s_versions:
 ## 1.1 部署拓扑
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Agent Harness 生产部署拓扑:
 
 ┌─────────────────────────────────────────────────────────┐
@@ -130,7 +136,6 @@ Agent Harness 生产部署拓扑:
 │  OTel Collector │ Prometheus │ Grafana │ Langfuse        │
 └─────────────────────────────────────────────────────────┘
 ```
-
 ## 1.2 K8S 部署清单
 
 ```yaml
@@ -961,3 +966,6 @@ class MaturityAssessment:
 - 39-agent-harness-testing-benchmark
 - 41-react-harness-identification-guide
 - 42-model-harness-compatibility-matrix
+
+
+<!-- risk-assessed -->

@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Argo|Argo]] CD 企业级 GitOps 实践指南
@@ -312,7 +317,8 @@ redis:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd \
   --namespace argocd \
@@ -332,7 +338,6 @@ argocd login argocd.example.com
 argocd version
 kubectl get pods -n argocd
 ```
-
 ---
 
 <!-- chunk: 四、核心配置 -->## 四、核心配置
@@ -527,7 +532,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Sealed Secrets 控制器
 helm install sealed-secrets sealed-secrets/sealed-secrets \
   --namespace kube-system
@@ -539,7 +545,6 @@ kubeseal --controller-namespace=kube-system \
 
 # sealed-secret.yaml 可安全提交到 Git
 ```
-
 ## 5.3 RBAC 配置
 
 ```yaml
@@ -728,7 +733,8 @@ argocd admin import < argocd-backup.yaml
 
 ## 9.1 常用排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 应用状态检查
 argocd app get <app> --refresh
 argocd app diff <app>
@@ -746,7 +752,6 @@ argocd app get <app> --refresh --hard
 # 资源事件
 kubectl describe application <app> -n argocd
 ```
-
 ## 9.2 常见问题
 
 ```yaml
@@ -858,7 +863,8 @@ Argo CD 的升级遵循 N-1 路径，即可以从前一个 minor 版本直接升
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 升级步骤
 # 1. 备份
 argocd admin export > argocd-backup.yaml
@@ -873,7 +879,6 @@ helm upgrade argocd argo/argo-cd \
 argocd version
 kubectl get applications -n argocd
 ```
-
 ---
 
 <!-- chunk: 十一、Argo CD 多集群管理 -->## 十一、Argo CD 多集群管理
@@ -1175,3 +1180,6 @@ Argo CD 生产环境部署检查清单:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

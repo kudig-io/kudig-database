@@ -22,6 +22,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Autoscaling Failure 远程顾问对话脚本
 
@@ -71,7 +76,8 @@ relationships:
 
 **顾问**：请执行以下命令，获取自动扩缩容组件的基本状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 HPA 状态
 kubectl get hpa --all-namespaces
 
@@ -81,7 +87,6 @@ kubectl get vpa --all-namespaces
 # 3. 查看 Cluster Autoscaler Pod 状态
 kubectl get pods -n kube-system | grep -E 'autoscaler|metrics-server'
 ```
-
 > **如果无法执行 kubectl**：请通过集群管理控制台（如 Rancher、ACK Console、OpenShift Console）查看 HPA/VPA 列表和 autoscaler Pod 状态，或者告诉我你当前能访问的界面和看到的信息。
 > 
 > **如果无法查看所有命名空间**：请指定你怀疑出问题的命名空间执行：`kubectl get hpa -n <namespace>`
@@ -92,7 +97,8 @@ kubectl get pods -n kube-system | grep -E 'autoscaler|metrics-server'
 
 **顾问**：HPA 无法获取指标，这是最常见的根因。请继续执行以下命令确认指标来源：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 详情和事件
 kubectl describe hpa <hpa-name> -n <namespace>
 
@@ -100,7 +106,6 @@ kubectl describe hpa <hpa-name> -n <namespace>
 kubectl get pods -n kube-system | grep metrics-server
 kubectl logs -n kube-system deployment/metrics-server --tail=50
 ```
-
 > **如果无法执行 logs**：请尝试 `kubectl get deployment metrics-server -n kube-system`，确认 metrics-server 是否正常运行。如果连 deployment 也查不到，说明 metrics-server 可能未安装。
 > 
 > **如果无法查看 kube-system**：请确认你是否有查看 kube-system 命名空间的权限。如果没有，请告诉我集群是否使用外部监控系统（如 Prometheus + prometheus-adapter）提供指标。
@@ -116,7 +121,8 @@ kubectl logs -n kube-system deployment/metrics-server --tail=50
 
 **顾问**：HPA 能获取指标但行为不符合预期。请执行以下命令确认配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 详细配置
 kubectl get hpa <hpa-name> -n <namespace> -o yaml | grep -A 20 'metrics:'
 
@@ -126,7 +132,6 @@ kubectl get deployment <deployment-name> -n <namespace>
 # 查看 HPA Events 中的扩缩容记录
 kubectl describe hpa <hpa-name> -n <namespace> | grep -A 5 'Events'
 ```
-
 > **如果无法执行 `-o yaml`**：请使用 `kubectl edit hpa <hpa-name> -n <namespace>` 查看配置（不要保存），或者通过 Dashboard 查看 HPA 详情页的配置参数。
 > 
 > **如果无法查看 Events**：请告诉我 HPA 的 minReplicas、maxReplicas、targetCPUUtilizationPercentage（或 target.type/target.averageUtilization）的值是多少。
@@ -142,7 +147,8 @@ kubectl describe hpa <hpa-name> -n <namespace> | grep -A 5 'Events'
 
 **顾问**：Cluster Autoscaler 不扩容节点。请执行以下命令确认状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CA Pod 状态和日志
 kubectl get pods -n kube-system | grep cluster-autoscaler
 kubectl logs -n kube-system deployment/cluster-autoscaler --tail=100
@@ -154,7 +160,6 @@ kubectl get pods --all-namespaces --field-selector status.phase=Pending
 kubectl top nodes
 kubectl describe node <node-name> | grep -A 5 'Allocated resources'
 ```
-
 > **如果无法执行 CA logs**：请确认 CA 的部署名称，可能是 `deployment/cluster-autoscaler` 或 `deployment/cluster-autoscaler-aws-cluster-autoscaler` 等。请执行 `kubectl get deployment -n kube-system` 列出所有 deployment。
 > 
 > **如果无法查看 Pending Pod**：请告诉我当前是否有 Pod 处于 Pending 状态，如果有，Pending 的原因是什么（资源不足、污点不匹配、节点选择器不匹配等）。
@@ -171,7 +176,8 @@ kubectl describe node <node-name> | grep -A 5 'Allocated resources'
 
 **顾问**：VPA 推荐未生成。请执行以下命令确认：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VPA 详情
 kubectl get vpa <vpa-name> -n <namespace> -o yaml
 
@@ -179,7 +185,6 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml
 kubectl get pods -n kube-system | grep vpa
 kubectl logs -n kube-system deployment/vpa-admission-controller --tail=50
 ```
-
 > **如果无法查看 VPA 详情**：请确认 VPA 是否已正确安装。VPA 需要三个组件：admission-controller、recommender、updater。请执行 `kubectl get pods -n kube-system | grep vpa` 查看是否都有运行。
 > 
 > **如果 VPA 未安装**：请告诉我你们的集群是否计划使用 VPA，或者当前是否仅使用了 HPA。
@@ -197,14 +202,14 @@ kubectl logs -n kube-system deployment/vpa-admission-controller --tail=50
 
 **顾问**：metrics-server 是 HPA 获取指标的关键依赖。请执行以下命令诊断：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 metrics-server Pod 详情
 kubectl describe pod -n kube-system -l k8s-app=metrics-server
 
 # 查看 metrics-server 部署配置
 kubectl get deployment metrics-server -n kube-system -o yaml | grep -A 10 'args:'
 ```
-
 > **如果无法查看 Pod 详情**：请告诉我 metrics-server Pod 的状态（Running / Pending / CrashLoopBackOff）。如果是 Pending，可能是节点资源不足或调度约束导致。
 > 
 > **如果无法查看 deployment 配置**：请通过 Dashboard 查看 metrics-server 的启动参数，特别关注 `--[[entities/kubelet.md|kubelet]]-preferred-address-types` 和 `--kubelet-insecure-tls` 等参数。
@@ -218,7 +223,8 @@ kubectl get deployment metrics-server -n kube-system -o yaml | grep -A 10 'args:
 
 **顾问**：HPA 配置可能有误。请执行以下命令确认配置细节：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取完整 HPA 配置
 kubectl get hpa <hpa-name> -n <namespace> -o yaml
 
@@ -228,7 +234,6 @@ kubectl get deployment <deployment-name> -n <namespace> -o yaml | grep -A 10 're
 # 确认当前 Pod 的 CPU/内存实际使用
 kubectl top pods -n <namespace> -l app=<app-label>
 ```
-
 > **如果无法执行 `kubectl top pods`**：请检查 `kubectl top nodes` 是否正常。如果 top 命令全部不可用，说明 metrics-server 有问题，回到 2-A 分支诊断。
 > 
 > **如果无法查看 Deployment 配置**：请确认 Deployment 的 Pod template 中是否设置了 `resources.requests.cpu` 和 `resources.requests.memory`。HPA 基于 CPU 扩缩容时，**必须设置 requests.cpu**，否则 HPA 无法计算利用率。
@@ -242,7 +247,8 @@ kubectl top pods -n <namespace> -l app=<app-label>
 
 **顾问**：CA 无法操作云资源。请执行以下命令确认：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CA 的 ServiceAccount 和权限
 kubectl get serviceaccount -n kube-system | grep autoscaler
 kubectl get clusterrolebinding | grep autoscaler
@@ -251,7 +257,6 @@ kubectl describe clusterrole cluster-autoscaler
 # 查看 CA 启动参数
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A 20 'args:'
 ```
-
 > **如果无法查看 clusterrole**：请确认你是否有查看 RBAC 配置的权限。如果没有，请告诉我你们使用的集群类型（EKS/AKS/GKE/ACK/自建），以及 CA 的安装方式（[[entities/helm.md|helm]] chart / 云厂商插件 / 手动部署）。
 > 
 > **如果 CA 部署在命名空间之外**：请确认 CA 的实际部署位置和配置方式。有些集群的 CA 作为云厂商的托管组件运行，不在 kube-system 中。
@@ -269,7 +274,8 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A 20 'a
 **顾问**：阿里云 ACK 的弹性伸缩通过 **节点池（NodePool）** 和 **Cluster Autoscaler（CA）** 配合实现，与自建集群有很大差异。请按以下步骤排查：
 
 **步骤 1：ACK节点池状态检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ACK节点池列表和状态
 kubectl get nodes -o custom-columns=NAME:.metadata.name,POOL:.metadata.labels["alibabacloud.com/nodepool-id"],ROLE:.metadata.labels["node-role.kubernetes.io/worker"]
 
@@ -283,7 +289,8 @@ kubectl get events --field-selector reason=ScaleGroupActivity --sort-by='.lastTi
 > 4. 节点池的 **伸缩活动** 中是否有失败记录？失败原因是什么？
 
 **步骤 2：ACK Cluster Autoscaler组件状态**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ACK CA Pod状态（ACK托管版中CA由阿里云托管，但Pro版可见）
 kubectl get pods -n kube-system | grep -E 'cluster-autoscaler|autoscaler'
 
@@ -310,7 +317,8 @@ aliyun ess DescribeScalingActivities --RegionId <region-id> --ScalingGroupId <sc
 > 4. **伸缩配置** 中的实例规格在目标可用区是否有库存？
 
 **步骤 4：ACK节点自动伸缩特有配置检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点池的label和taint配置
 kubectl get nodepool -n kube-system 2>/dev/null || echo "ACK NodePool CRD未安装"
 
@@ -355,7 +363,8 @@ kubectl get pod <pending-pod> -n <ns> -o yaml | grep -A 10 "nodeAffinity|nodeSel
 
 **顾问**：HPA/CA 行为受限可能是资源上限导致。请执行以下命令：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间资源配额
 kubectl get resourcequota -n <namespace>
 kubectl describe resourcequota -n <namespace>
@@ -366,7 +375,6 @@ kubectl get limitrange -n <namespace>
 # 查看节点可分配资源
 kubectl describe node <node-name> | grep -A 10 'Allocated resources'
 ```
-
 > **如果无法查看 resourcequota**：请确认该命名空间是否设置了 ResourceQuota。HPA 扩容时如果会超出 ResourceQuota 的 limits，扩容请求会被拒绝。
 > 
 > **如果节点资源充足但 Pod 仍 Pending**：请检查 Pod 的亲和性/反亲和性规则、污点容忍度、节点选择器等调度约束。
@@ -385,10 +393,10 @@ kubectl describe node <node-name> | grep -A 10 'Allocated resources'
 **顾问**：根因已定位到 metrics-server。请按以下步骤修复：
 
 **步骤 1**：确认 metrics-server 的部署方式
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment metrics-server -n kube-system -o yaml > /tmp/metrics-server-backup.yaml
 ```
-
 > **如果无法备份**：请确保你有修改 kube-system 命名空间资源的权限。如果没有，请告诉我，我需要提供无需修改 kube-system 的替代方案。
 
 **步骤 2**：如果是证书问题（常见于自签证书集群），添加 insecure-tls 参数：
@@ -396,23 +404,23 @@ kubectl get deployment metrics-server -n kube-system -o yaml > /tmp/metrics-serv
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-insecure-tls"}
 ]'
 ```
-
 > **如果无法执行 patch**：请使用 `kubectl edit deployment metrics-server -n kube-system` 手动在 args 中添加 `--kubelet-insecure-tls`，保存后退出。
 > 
 > **如果 edit 也无法使用**：请准备修改后的 YAML 文件，执行 `kubectl apply -f <fixed-metrics-server.yaml>`。如果你不确定如何修改，请把当前的 metrics-server deployment YAML 发给我，我帮你生成正确的版本。
 
 **步骤 3**：验证修复
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment/metrics-server -n kube-system
 kubectl top nodes
 kubectl get hpa -n <namespace>
 ```
-
 > **如果 rollout status 卡住**：请执行 `kubectl get pods -n kube-system -l k8s-app=metrics-server` 查看新 Pod 状态。如果新 Pod 无法启动，请执行 `kubectl rollout undo deployment/metrics-server -n kube-system` 回滚。
 
 ### 3-B 分支：修正 HPA 配置
@@ -424,12 +432,12 @@ kubectl get hpa -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/containers/0/resources", "value": {"requests": {"cpu": "100m", "memory": "128Mi"}}}
 ]'
 ```
-
 > **如果无法执行 patch**：请使用 `kubectl edit deployment <deployment-name> -n <namespace>` 在 `containers[].resources` 下添加 `requests: {cpu: "100m", memory: "128Mi"}`。请根据应用实际需求调整 CPU 和内存值。
 > 
 > **如果 edit 也无法使用**：请告诉我当前的 Deployment YAML 内容，或准备一个新的 YAML 文件执行 `kubectl apply`。
@@ -439,7 +447,8 @@ kubectl patch deployment <deployment-name> -n <namespace> --type='json' -p='[
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{
   "spec": {
     "scaleTargetRef": {
@@ -450,15 +459,14 @@ kubectl patch hpa <hpa-name> -n <namespace> --type='merge' -p='{
   }
 }'
 ```
-
 > **如果无法确定正确的 target**：请执行 `kubectl get deployment -n <namespace>` 列出所有 Deployment，告诉我目标应用的 Deployment 名称。
 
 **步骤 3**：验证 HPA 开始工作
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa -n <namespace> -w
 # 等待 1-2 分钟，确认 TARGET 列从 unknown 变为正常百分比
 ```
-
 > **如果 TARGET 仍然 unknown**：请检查 metrics-server 是否正常工作（回到 3-A 分支），或检查是否有自定义指标适配器异常。
 
 ### 3-C 分支：修复 Cluster Autoscaler 配置/权限
@@ -466,11 +474,11 @@ kubectl get hpa -n <namespace> -w
 **顾问**：根因是 CA 配置或权限问题。请按以下步骤修复：
 
 **步骤 1**：检查并修正 CA 启动参数
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前参数
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep 'args:' -A 30
 ```
-
 > **如果 CA 不在 kube-system**：请告诉我 CA 的实际部署位置和名称。
 > 
 > **如果无法查看 deployment**：请通过集群控制台或云厂商管理界面查看 CA 的配置参数。
@@ -478,7 +486,8 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep 'args:' 
 **步骤 2**：根据集群类型修复权限
 
 - **AWS EKS**：确认 CA ServiceAccount 已关联正确的 IAM Role（IRSA）：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get sa cluster-autoscaler -n kube-system -o yaml | grep 'eks.amazonaws.com/role-arn'
 ```
 > **如果无法执行**：请通过 AWS Console 确认 IAM Role 的 Trust Policy 和 Autoscaling 权限是否正确。
@@ -494,11 +503,11 @@ kubectl get sa cluster-autoscaler -n kube-system -o yaml | grep 'eks.amazonaws.c
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/cluster-autoscaler -n kube-system
 kubectl rollout status deployment/cluster-autoscaler -n kube-system
 ```
-
 > **如果无法 restart**：请执行 `kubectl delete pod -n kube-system -l app=cluster-autoscaler` 让 Deployment 自动重建 Pod。
 
 ### 3-D 分支：调整资源配额或节点限制
@@ -510,7 +519,8 @@ kubectl rollout status deployment/cluster-autoscaler -n kube-system
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前配额
 kubectl get resourcequota <quota-name> -n <namespace> -o yaml
 
@@ -519,7 +529,6 @@ kubectl patch resourcequota <quota-name> -n <namespace> --type='merge' -p='{
   "spec": {"hard": {"pods": "100", "requests.cpu": "50", "requests.memory": "100Gi"}}
 }'
 ```
-
 > **如果无法修改 ResourceQuota**：请确认你是否有修改 ResourceQuota 的权限。如果没有，请联系集群管理员调整配额，或临时将部分非关键应用的副本数减少以释放配额。
 > 
 > **如果不确定应该设置多少**：请告诉我当前命名空间下的 Pod 总数、CPU 和内存请求总量，以及你希望扩容到的目标副本数，我来帮你计算合适的配额。
@@ -532,12 +541,12 @@ kubectl patch resourcequota <quota-name> -n <namespace> --type='merge' -p='{
 > **如果无法修改节点组**：请考虑临时降低非关键应用的副本数以释放资源，或手动添加新节点到集群。
 
 **步骤 3**：验证扩容成功
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -w
 kubectl get nodes -w
 # 观察新 Pod 是否被创建并调度到新节点
 ```
-
 ---
 
 ## Round 4：验证修复与升级决策
@@ -546,35 +555,35 @@ kubectl get nodes -w
 
 ### 检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 HPA 状态正常
 kubectl get hpa -n <namespace>
 ```
-
 > **如果无法执行**：请通过 Dashboard 或其他运维平台确认 HPA 状态，TARGET 列应显示为百分比而非 unknown。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 2. 确认 metrics-server 正常工作
 kubectl top nodes
 kubectl top pods -n <namespace>
 ```
-
 > **如果无法执行 top**：请等待 1-2 分钟后再次尝试。metrics-server 收集指标需要一定时间。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 3. 对应用施加负载测试，观察 HPA 是否扩容
 kubectl get hpa -n <namespace> -w
 # 同时观察 Pod 数量变化
 kubectl get pods -n <namespace> -w
 ```
-
 > **如果无法施加负载**：请告诉我当前业务是否已经有自然流量。如果有，请观察 5-10 分钟看 HPA 是否有扩缩容动作。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 4. 确认 Cluster Autoscaler 正常（如涉及）
 kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 'scale up|scale down|failed'
 ```
-
 > **如果无法查看 CA 日志**：请观察节点数量是否在负载增加后增长，在负载降低后减少。
 
 ---
@@ -620,11 +629,11 @@ kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 's
 
 **顾问**：修复后出现新的问题，可能是修复操作带来的副作用。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe hpa <hpa-name> -n <namespace> | grep -i "Events" -A 20
 kubectl get events -n <namespace> --field-selector reason=ScalingReplicaSet
 ```
-
 > **如果无法执行**：请把你能看到的最新 HPA 行为描述给我。
 
 **顾问判断**：
@@ -638,7 +647,8 @@ kubectl get events -n <namespace> --field-selector reason=ScalingReplicaSet
 
 > 以下命令供现场工程师快速复制使用，顾问可根据实际情况选择性提供。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速查看所有 HPA 状态
 kubectl get hpa --all-namespaces
 
@@ -675,7 +685,6 @@ kubectl run load-generator --rm -i --restart=Never --image=busybox -- /bin/sh -c
 # 查看 VPA 推荐
 kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 ```
-
 ---
 
 ## 对话结束语
@@ -697,3 +706,6 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 
 - [[entities/deployment.md|Deployment]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+
+
+<!-- risk-assessed -->

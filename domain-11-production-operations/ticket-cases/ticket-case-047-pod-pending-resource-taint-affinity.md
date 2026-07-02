@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看 Pending 原因摘要，再逐项拆解资源/Taint/亲和性”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 列表与状态
 kubectl get pod -n risk-engine -l app=risk-engine | grep Pending
 kubectl get deployment risk-engine -n risk-engine -o wide
@@ -121,7 +127,6 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=200 | grep -i "ri
 # 9. 通过 ACK 控制台查看节点池与伸缩组状态
 ack-cli nodepool list --cluster ack-zyy-prod-05
 ```
-
 ## 根因分析
 
 通过批量 describe Pod 与节点状态，发现 Pending 原因分为三类：
@@ -157,7 +162,8 @@ Deployment 中配置了 `podAntiAffinity`，要求同一个 `app=risk-engine` �
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment risk-engine -n risk-engine --type='json' -p='[
   {
     "op": "add",
@@ -173,17 +179,16 @@ kubectl patch deployment risk-engine -n risk-engine --type='json' -p='[
   }
 ]'
 ```
-
 **第二步：临时降低非核心 Pod 优先级，释放通用节点资源**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 将通用节点上一些低优先级、可中断的 Job Pod 缩容
 kubectl scale deployment data-sync-batch -n data-platform --replicas=0
 ```
-
 **第三步：为风险引擎节点池扩容 4 台节点**
 
 ```bash
@@ -202,7 +207,8 @@ aliyun cs POST /clusters/ack-zyy-prod-05/nodes \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment risk-engine -n risk-engine --type='json' -p='[
   {
     "op": "replace",
@@ -223,20 +229,20 @@ kubectl patch deployment risk-engine -n risk-engine --type='json' -p='[
   }
 ]'
 ```
-
 **第五步：触发滚动重启，应用新的 Toleration 与亲和性**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment risk-engine -n risk-engine
 kubectl rollout status deployment risk-engine -n risk-engine --timeout=600s
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 Pending Pod 全部 Running
 kubectl get pod -n risk-engine -l app=risk-engine | grep -v Running
 kubectl get deployment risk-engine -n risk-engine
@@ -256,7 +262,6 @@ kubectl describe resourcequota -n risk-engine
 # 6. 业务层面验证风控接口可用性
 kubectl run risk-test --image=registry.aliyuncs.com/acs/busybox -n risk-engine --rm -it --restart=Never -- wget -qO- http://risk-engine:8080/healthz
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 `risk-engine` 发布大量 Pod Pending 的根因是 **三类调度约束叠加**：部分节点 **CPU 资源不足**、新版本 Deployment **缺失专用节点 Toleration**、以及 **Pod 反亲和性阈值与当前节点实际分布冲突**。我们已完成以下处置：
@@ -310,3 +315,6 @@ kubectl run risk-test --image=registry.aliyuncs.com/acs/busybox -n risk-engine -
 - Ingress 控制器 Pod 异常导致 404/502
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

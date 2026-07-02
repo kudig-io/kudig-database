@@ -69,6 +69,11 @@ cross_refs:
   label: '速查卡: promql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 13 - 集群健康检查指南 (Cluster Health Check Guide)
@@ -79,6 +84,7 @@ cross_refs:
 ## 集群健康检查架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                     Kubernetes 集群健康检查体系                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -136,7 +142,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 控制平面健康检查 -->
 ## 控制平面健康检查
 
@@ -153,7 +158,8 @@ cross_refs:
 
 ### 控制平面检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # control-plane-health-check.sh
 
@@ -216,10 +222,10 @@ kubectl get componentstatuses 2>/dev/null || echo "componentstatuses API已弃�
 echo -e "\n=== 6. kube-system核心Pod状态 ==="
 kubectl get pods -n kube-system -o wide | grep -E "etcd|apiserver|scheduler|controller"
 ```
-
 ### etcd深度健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-health-check.sh
 
@@ -265,7 +271,6 @@ echo "总键数: $(etcdctl $ETCD_OPTS get / --prefix --keys-only 2>/dev/null | w
 echo -e "\n=== 8. 性能检查(读写延迟) ==="
 etcdctl $ETCD_OPTS check perf --load="s" 2>/dev/null || echo "性能检查不可用"
 ```
-
 <!-- chunk: 节点健康检查 -->
 ## 节点健康检查
 
@@ -281,7 +286,8 @@ etcdctl $ETCD_OPTS check perf --load="s" 2>/dev/null || echo "性能检查不可
 
 ### 节点健康检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-health-check.sh
 
@@ -326,10 +332,10 @@ for node in $(kubectl get nodes --no-headers | grep -v " Ready" | awk '{print $1
     kubectl describe node $node | grep -A 20 "Conditions:"
 done
 ```
-
 ### 节点内部健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-internal-health.sh (在节点上执行)
 
@@ -381,7 +387,6 @@ timedatectl status | grep -E "Local time|System clock|NTP"
 echo -e "\n=== 8. 最近内核错误 ==="
 dmesg | tail -50 | grep -iE "error|fail|warn|oom" | tail -10
 ```
-
 <!-- chunk: Pod健康检查 -->
 ## Pod健康检查
 
@@ -400,7 +405,8 @@ dmesg | tail -50 | grep -iE "error|fail|warn|oom" | tail -10
 
 ### Pod健康检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-health-check.sh
 
@@ -450,10 +456,10 @@ done
 echo -e "\n=== 6. 最近Pod Warning事件 ==="
 kubectl get events $NAMESPACE --field-selector=type=Warning --sort-by='.lastTimestamp' 2>/dev/null | tail -20
 ```
-
 ### Pod资源使用检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-resource-check.sh
 
@@ -490,13 +496,13 @@ select(.status.phase == "Running") |
 select(.spec.containers[].resources.limits.memory == null) |
 "\(.metadata.namespace)/\(.metadata.name)"' | head -20
 ```
-
 <!-- chunk: 网络健康检查 -->
 ## 网络健康检查
 
 ### 网络组件检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # network-health-check.sh
 
@@ -539,7 +545,6 @@ kubectl run dns-test --image=busybox:1.36 --rm -it --restart=Never --timeout=60s
 echo -e "\n=== 6. NetworkPolicy统计 ==="
 kubectl get networkpolicy -A --no-headers 2>/dev/null | wc -l
 ```
-
 ### 网络连通性测试
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -547,7 +552,17 @@ kubectl get networkpolicy -A --no-headers 2>/dev/null | wc -l
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # network-connectivity-test.sh
 
@@ -594,13 +609,13 @@ fi
 # 清理
 kubectl delete pod network-test --force --grace-period=0 2>/dev/null  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 <!-- chunk: 存储健康检查 -->
 ## 存储健康检查
 
 ### 存储组件检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-health-check.sh
 
@@ -645,13 +660,13 @@ kubectl get csidrivers 2>/dev/null || echo "无CSI Driver"
 echo -e "\n=== 7. VolumeAttachment状态 ==="
 kubectl get volumeattachment 2>/dev/null | head -10
 ```
-
 <!-- chunk: 安全健康检查 -->
 ## 安全健康检查
 
 ### 安全配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # security-health-check.sh
 
@@ -700,13 +715,13 @@ TOTAL_NS=$(kubectl get ns --no-headers | wc -l)
 NS_WITH_NP=$(kubectl get networkpolicy -A -o json | jq -r '.items[].metadata.namespace' | sort -u | wc -l)
 echo "有NetworkPolicy的命名空间: $NS_WITH_NP / $TOTAL_NS"
 ```
-
 <!-- chunk: 自动化健康检查脚本 -->
 ## 自动化健康检查脚本
 
 ### 完整健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-full-health-check.sh - Kubernetes集群完整健康检查
 
@@ -928,7 +943,6 @@ fi
 echo ""
 echo "报告已保存到: $OUTPUT_FILE"
 ```
-
 <!-- chunk: Prometheus监控指标 -->
 ## Prometheus监控指标
 
@@ -1160,3 +1174,5 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

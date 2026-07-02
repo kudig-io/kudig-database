@@ -38,6 +38,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 03-边缘计算生产部署
@@ -324,7 +329,8 @@ spec:
 ## 镜像预推送到边缘
 
 ## 1. 镜像预加载脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 边缘节点镜像预加载脚本
 
@@ -344,7 +350,6 @@ done
 scp /tmp/*.tar.gz edge-node:/tmp/
 ssh edge-node "for file in /tmp/*.tar.gz; do docker load -i \$file; done"
 ```
-
 ## 2. 镜像仓库边缘缓存
 ```yaml
 # Registry边缘缓存配置
@@ -798,7 +803,8 @@ spec:
 ```
 
 ## 2. 远程诊断工具
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 边缘节点诊断脚本
 
@@ -828,7 +834,6 @@ top -bn1 | head -20 >> $DIAG_DIR/resources.txt
 tar -czf "${DIAG_DIR}.tar.gz" $DIAG_DIR
 echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 ```
-
 <!-- chunk: 🔧 部署实施检查清单 -->## 🔧 部署实施检查清单
 
 ## 预部署准备
@@ -885,3 +890,6 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

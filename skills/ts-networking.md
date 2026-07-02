@@ -38,6 +38,11 @@ prerequisites:
 - kafka-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 网络故障排查
@@ -429,7 +434,8 @@ Pod 处于 ContainerCreating，事件显示 IP 分配失败
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点已分配的 ENI 和 IP 数量
 kubectl describe node <node-name> | grep -E "aliyun.com/allocated-eni|aliyun.com/allocated-ip|aliyun.com/eni-max|aliyun.com/ip-max"
 
@@ -441,7 +447,6 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli show
 # 或通过 API
 curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<instance-type>"
 ```
-
 **关键指标**：
 - `aliyun.com/allocated-eni`：已分配 ENI 数量
 - `aliyun.com/eni-max`：实例规格支持的最大 ENI 数量
@@ -457,7 +462,8 @@ curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<in
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 terway 资源池详情
 kubectl exec -n kube-system <terway-pod> -- terway-cli show
 
@@ -514,7 +520,7 @@ Pod 处于 ContainerCreating，无 IP 地址
             ├─ host-local IPAM 池耗尽 → 大量 Pod 创建/删除
             └─ 其他错误 → 查看 CNI 日志
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 #### 2.2.2 子网分配失败
 
 ```bash
@@ -548,3 +554,5 @@ cat /run/flannel/subnet.env
 - [[skills/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
 
 ```
+
+<!-- risk-assessed -->

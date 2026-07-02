@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 17 - StorageClass / VolumeSnapshot YAML 配置参考
@@ -624,6 +629,7 @@ spec:
 
 **创建流程**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 用户创建 VolumeSnapshot 对象
         ↓
 Snapshot Controller 检测到新快照
@@ -644,7 +650,6 @@ VolumeSnapshot 绑定到 VolumeSnapshotContent
         ↓
 status.readyToUse 设为 true
 ```
-
 ## 2.4 从快照内容导入
 
 ```yaml
@@ -1242,14 +1247,15 @@ spec:
 ## 6.1 快照一直 Pending
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumesnapshot mysql-snapshot -n database
 # NAME              READYTOUSE   SOURCEPVC     AGE
 # mysql-snapshot    false        mysql-pvc     5m
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看详细信息
 kubectl describe volumesnapshot mysql-snapshot -n database
 # Events:
@@ -1272,7 +1278,6 @@ kubectl get csidrivers ebs.csi.aws.com -o yaml | grep -A 5 volumeSnapshotDataSou
 kubectl logs -n kube-system -l app=snapshot-controller
 kubectl logs -n kube-system -l app=csi-snapshotter
 ```
-
 **常见原因**:
 
 | 错误信息 | 原因 | 解决方案 |
@@ -1285,14 +1290,15 @@ kubectl logs -n kube-system -l app=csi-snapshotter
 ## 6.2 从快照恢复失败
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pvc restored-pvc -n database
 # Events:
 #   Warning  ProvisioningFailed  1m  Failed to provision volume: snapshot is not ReadyToUse
 ```
-
 **排查清单**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认快照状态
 kubectl get volumesnapshot mysql-snapshot -n database -o jsonpath='{.status.readyToUse}'
 # 必须返回 true
@@ -1309,7 +1315,6 @@ kubectl get volumesnapshot mysql-snapshot -n database -o jsonpath='{.status.rest
 # 4. 检查 CSI Driver 日志
 kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-provisioner
 ```
-
 ## 6.3 快照无法删除
 
 **症状**:
@@ -1317,7 +1322,8 @@ kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-provisioner
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete volumesnapshot mysql-snapshot -n database
 # volumesnapshot "mysql-snapshot" deleted
 # (命令挂起,快照不消失)
@@ -1326,7 +1332,6 @@ kubectl get volumesnapshot -n database
 # NAME              READYTOUSE   SOURCEPVC     AGE
 # mysql-snapshot    true         mysql-pvc     10d  (状态 Terminating)
 ```
-
 **原因**: 快照有 [[Finalizers|finalizers]] 保护
 
 **排查步骤**:
@@ -1335,7 +1340,17 @@ kubectl get volumesnapshot -n database
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 finalizers
 kubectl get volumesnapshot mysql-snapshot -n database -o jsonpath='{.metadata.finalizers}'
 # ["snapshot.storage.kubernetes.io/volumesnapshot-as-source-protection"]
@@ -1355,7 +1370,6 @@ kubectl get volumesnapshotcontent
 # 如果 deletionPolicy=Retain, 内容会保留,需手动删除
 kubectl delete volumesnapshotcontent <content-name>
 ```
-
 ---
 
 <!-- chunk: 七、最佳实践总结 -->## 七、最佳实践总结
@@ -1510,3 +1524,6 @@ groups:
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -25,6 +25,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # Terway CNI网络
 
@@ -247,7 +252,8 @@ IPvlan 模式使用内核 IPvlan 驱动实现容器网络：
 
 **症状**：Pod 创建失败，事件显示 IP 分配失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 远程诊断：检查Pod事件
 kubectl describe pod <pending-pod>
 # Events: "Failed to allocate IP address: no available IP"
@@ -256,7 +262,6 @@ kubectl describe pod <pending-pod>
 kubectl get pods -n kube-system -l app=terway-eniip -o wide
 kubectl logs -n kube-system -l app=terway-eniip --tail=200
 ```
-
 **根因与解决方案**：
 
 | 根因 | 检查方法 | 解决方案 |
@@ -269,19 +274,20 @@ kubectl logs -n kube-system -l app=terway-eniip --tail=200
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查VSwitch IP余量
 aliyun vpc DescribeVSwitchAttributes --VSwitchId vsw-apsara-xxx --RegionId cn-apsara-local
 # 检查Terway IP分配
 kubectl exec -n kube-system terway-eniip-xxxx -- terway-cli show
 ```
-
 ### 3.2 ENI配额问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查ECS实例规格的ENI配额
 # 典型规格配额参考：
 # ecs.g7.large: 2 ENI, 10 IPs/ENI = 20 Pod/节点
@@ -295,7 +301,6 @@ kubectl exec -n kube-system terway-eniip-xxxx -- terway-cli show | grep ENI
 # 公式：Pod容量 = (ENI数量 - 1) × 每个ENI的IP数 + 1
 # 减1是因为主ENI占用一个，加1是主ENI本身也可分配IP
 ```
-
 **ENI配额计算公式**：
 
 | 实例规格 | ENI数 | IP数/ENI | 理论Pod上限 | 实际可用（保留1ENI） |
@@ -322,13 +327,13 @@ kubectl exec -n kube-system terway-eniip-xxxx -- terway-cli show | grep ENI
 
 **排查步骤**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 跨VPC排查
 aliyun vpc DescribeRouteTableList --RouteTableId vtb-apsara-xxx --RegionId cn-apsara-local
 kubectl run -it --rm debug --image=busybox:1.36 --restart=Never -- traceroute <target-ip>
 aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId sg-apsara-xxx --RegionId cn-apsara-local
 ```
-
 ---
 
 ## 4. Terway 排查命令
@@ -340,7 +345,8 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId sg-apsara-xxx --Regi
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入Terway Pod执行诊断
 kubectl exec -it -n kube-system terway-eniip-xxxx -- /bin/sh
 
@@ -353,12 +359,12 @@ terway-cli show --eni
 # 手动释放IP（Pod已删除但IP未释放时）
 terway-cli release --ip <ip-address>
 ```
-
 ### 4.2 IPAM 诊断
 
 IP 地址管理（IPAM）是 Terway 的核心组件，负责 IP 分配与回收：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Terway IPAM CRD
 kubectl get crd | grep terway
 # 输出：
@@ -390,10 +396,10 @@ kubectl get node <node-name> -o yaml | grep -A 20 allocatable
 #     aliyun/eni: "10"
 #     aliyun/eniip: "100"
 ```
-
 ### 4.3 网络连通性诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === Pod网络诊断 ===
 kubectl run -it --rm network-debug --image=nicolaka/netshoot --restart=Never
 ip addr show; cat /etc/resolv.conf; ip route
@@ -407,7 +413,6 @@ ip link show | grep veth
 ip route show table all | grep 172.16
 ip link show | grep terway
 ```
-
 ### 4.4 远程诊断检查清单
 
 远程顾问通过工单指导客户执行以下检查：
@@ -415,7 +420,8 @@ ip link show | grep terway
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Terway 远程诊断脚本
 
@@ -449,7 +455,6 @@ for pod in $(kubectl get pods -n kube-system -l app=terway-eniip -o name); do
   kubectl exec -n kube-system $pod -- terway-cli show 2>/dev/null || echo "terway-cli 不可用"
 done
 ```
-
 ---
 
 ## 5. Terway 配置调优
@@ -524,3 +529,6 @@ containerLogMaxFiles: 5
 - [[domain-03-networking-traffic/00-core-k8s-networking/19-ingress-fundamentals.md|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
 - [[domain-03-networking-traffic/00-core-k8s-networking/20-ingress-controller-deep-dive.md|128 - Ingress Controller 深入剖析]]
 - [[domain-03-networking-traffic/00-core-k8s-networking/21-nginx-ingress-complete-guide.md|129 - NGINX Ingress 完整配置指南]]
+
+
+<!-- risk-assessed -->

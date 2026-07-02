@@ -30,6 +30,11 @@ prerequisites:
 - sre-practices
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 可用性计算模型
@@ -737,6 +742,7 @@ groups:
 ### 1. 识别真正的串联路径
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ❌ 错误: 认为所有组件都是串联的
   A_total = A1 × A2 × A3 × A4 × A5 × A6 ... (越来越低)
 
@@ -745,7 +751,6 @@ groups:
   - 多个可用区可以容忍单 AZ 问题
   - 异步处理可以容忍消息队列短暂中断
 ```
-
 ### 2. 聚焦最薄弱环节
 
 ```
@@ -809,3 +814,6 @@ groups:
 
 - [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]]
 - [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
+
+
+<!-- risk-assessed -->

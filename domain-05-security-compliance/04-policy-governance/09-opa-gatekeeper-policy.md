@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # OPA Gatekeeper 策略即代码深度实践
@@ -738,7 +743,8 @@ spec:
 
 ## 合规报告生成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # generate_compliance_report.sh
 
@@ -771,7 +777,6 @@ done
 
 echo "Report generated: $REPORT_DIR/$DATE/report.md"
 ```
-
 ## OPA vs Kyverno 对比与选型
 
 企业在选择策略引擎时需要综合考虑多个因素。OPA Gatekeeper 使用 Rego 语言定义策略，Rego 是一种功能强大的声明式策略语言，支持复杂的逻辑表达、集合运算和递归查询，适合处理复杂的策略场景。缺点是学习曲线陡峭，需要专门的 Rego 知识。
@@ -1022,7 +1027,8 @@ spec:
 
 **审计扫描不完整**：检查 Config 资源的 sync 配置，确保需要审计的资源类型已包含在 syncOnly 列表中。查看 Audit Pod 日志是否有错误信息。确认 `auditChunkSize` 和 `constraintViolationsLimit` 参数是否合理。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # gatekeeper_diagnostics.sh
 
@@ -1049,7 +1055,6 @@ echo ""
 echo "=== Controller Logs (last 50 lines) ==="
 kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 ```
-
 ## 性能优化
 
 在高规模集群中，Gatekeeper 的性能表现至关重要。建议将 Rego 策略保持在简洁高效的水平，避免在单条规则中进行大量集合运算。使用 `auditFromCache: true` 减少审计期间的 API Server 压力。合理设置 `auditChunkSize` 控制审计扫描的批量大小。对于复杂的策略场景，考虑使用 External Data Provider 将部分计算卸载到专用服务。
@@ -1088,3 +1093,6 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 
 - [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.22.md|gatekeeper v3.22 Release Notes]]
 - [[domain-19-landscape-references/_archived-release-notes/security/gatekeeper/RELEASE-NOTES-3.21.md|gatekeeper v3.21 Release Notes]]
+
+
+<!-- risk-assessed -->

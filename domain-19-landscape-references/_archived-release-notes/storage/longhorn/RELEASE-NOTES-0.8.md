@@ -32,6 +32,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Longhorn|longhorn]] v0.8 Release Notes
@@ -50,3 +55,5 @@ The minimal Kubernetes version supported is v1.14.0.
 1. **Live upgrade is supported from v0.8.0 to v0.8.1**. You can follow the instruction [here](https://longhorn.io/docs/0.8.1/deploy/upgrade/) to upgrade from v0.8.0. To perform the non-disruptive upgrade for Longhorn engine from v0.8.0 to v0.8.1, follow the instruction [here](https://longhorn.io/docs/0.8.1/deploy/upgrade/upgrade-engine/#live-upgrade) after you upgraded the Longhorn manager.
 1. **Longhorn v0.8.1 supports upgrading from v0.8.0 only**. Please upgrade to v0.8.0 first before upgrading to v0.8.1.
 1. **Driver name migration**. During the upgrade from v0.6.2 to v0.7.0, we've changed our Kubernetes driver name from `io.rancher.longhorn` to `driver.longhorn.io`. In v0.7.0, we've deployed a compatible CSI plugin to accommodate the old `io.rancher.longhorn` driver provisioned volume. **We're going to remove the compatible CSI plugin in the GA release.** So we highly recommended the users that still using PVs provisioned by `io.rancher.longhorn` to convert the PVs to the new driver name. You can follow the steps [here](https://longhorn.io/docs/0.8.1/deploy/upgrade/longhorn-manager/#migrate-pvs-and-pvcs-for-the-volumes-launched-in-v062-or-older) to convert your old PVs.
+
+<!-- risk-assessed -->

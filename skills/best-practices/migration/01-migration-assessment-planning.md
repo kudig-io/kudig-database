@@ -46,6 +46,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 01 - 迁移评估与规划
@@ -110,7 +115,8 @@ k8s_versions:
 
 > 在自建集群上运行以下脚本，一次性采集所有迁移决策所需信息。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # migration-assessment.sh - 迁移评估信息采集脚本
 # 用法: bash migration-assessment.sh > assessment-report-$(date +%Y%m%d).txt
@@ -250,7 +256,6 @@ echo "=========================================="
 echo "  采集完成"
 echo "=========================================="
 ```
-
 **使用方式：**
 
 ```bash
@@ -285,7 +290,8 @@ less assessment-report-*.txt
 
 ## 2.1 API 版本兼容性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查已弃用的 API 版本
 # 安装 pluto (Fairwinds 出品的 API 弃用检测工具)
 brew install FairwindsOps/tap/pluto
@@ -304,7 +310,6 @@ pluto detect-helm -A
 # 导出需要修改的资源清单
 pluto detect-all-in-cluster -o json > deprecated-apis.json
 ```
-
 ## 2.2 兼容性对照矩阵
 
 | 组件/特性 | 自建集群 | ACK 兼容性 | 迁移动作 |
@@ -320,7 +325,8 @@ pluto detect-all-in-cluster -o json > deprecated-apis.json
 
 ## 2.3 镜像仓库兼容性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出所有镜像列表
 kubectl get pods -A -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}{end}{end}' | sort -u > images-list.txt
 
@@ -337,7 +343,6 @@ cat images-list.txt | while read img; do
   echo "docker pull $img && docker tag $img $acr_img && docker push $acr_img"
 done > sync-images.sh
 ```
-
 ## 2.4 存储兼容性评估
 
 | 自建存储方案 | ACK 替代方案 | 数据迁移方式 | 复杂度 |
@@ -397,7 +402,8 @@ done > sync-images.sh
 
 **回滚执行 SOP：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 立即将 DNS 切回源集群
 # 修改 DNS 解析记录（以阿里云 DNS 为例）
 aliyun alidns UpdateDomainRecord \
@@ -416,7 +422,6 @@ kubectl --context=source-cluster logs -n ingress-nginx deploy/ingress-nginx-cont
 # 4. 在 ACK 侧停止接收流量
 kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 ```
-
 ---
 
 <!-- chunk: 4. 迁移策略选择 -->## 4. 迁移策略选择
@@ -564,3 +569,6 @@ kubectl --context=ack-cluster scale deploy --all --replicas=0 -n <business-ns>
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

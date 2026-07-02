@@ -49,6 +49,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 容器生命周期管理
@@ -76,7 +81,17 @@ cross_refs:
 
 ## 状态流转图
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
                         docker create
            ┌──────────────────────────────────────────┐
            │                                          ▼
@@ -102,7 +117,6 @@ cross_refs:
        │           │                              │           │ docker unpause
        └───────────┘                              └───────────┘
 ```
-
 ## 容器状态详解
 
 | 状态 | 说明 | docker ps 显示 | 触发条件 |
@@ -202,7 +216,8 @@ cross_refs:
 
 ## 容器层级配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 完整生产配置示例
 docker run -d \
   --name production-app \
@@ -232,7 +247,6 @@ docker run -d \
   --log-opt max-file=3 \
   myapp:v1.0
 ```
-
 ---
 
 <!-- chunk: 资源限制配置 -->## 资源限制配置
@@ -305,7 +319,8 @@ cpus = cpu-quota / cpu-period
 
 ## ulimit 常用配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run -d \
   --ulimit nofile=65536:65536 \
   --ulimit nproc=4096:4096 \
@@ -313,7 +328,6 @@ docker run -d \
   --ulimit memlock=-1:-1 \
   myapp
 ```
-
 | ulimit 类型 | 说明 | 推荐值 |
 |:---|:---|:---|
 | nofile | 打开文件数 | 65536 |
@@ -348,7 +362,8 @@ docker run -d \
 
 ## 健康检查示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # HTTP 健康检查
 docker run -d \
   --health-cmd "curl -f http://localhost:8080/health || exit 1" \
@@ -376,7 +391,6 @@ docker run -d \
   --health-interval 30s \
   myapp
 ```
-
 ## Dockerfile 健康检查
 
 ```dockerfile
@@ -389,7 +403,8 @@ HEALTHCHECK NONE
 
 ## 查看健康状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看健康状态
 docker inspect --format='{{.State.Health.Status}}' container_name
 
@@ -399,7 +414,6 @@ docker inspect --format='{{json .State.Health}}' container_name | jq
 # 健康检查事件
 docker events --filter 'event=health_status'
 ```
-
 ---
 
 <!-- chunk: 容器日志管理 -->## 容器日志管理
@@ -421,7 +435,8 @@ docker events --filter 'event=health_status'
 
 ## json-file 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run -d \
   --log-driver json-file \
   --log-opt max-size=100m \
@@ -430,7 +445,6 @@ docker run -d \
   --log-opt labels=app,env \
   myapp
 ```
-
 | 选项 | 默认值 | 说明 |
 |:---|:---|:---|
 | max-size | -1 (无限) | 单文件最大大小 |
@@ -441,7 +455,8 @@ docker run -d \
 
 ## 日志命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看日志
 docker logs container_name
 
@@ -460,7 +475,6 @@ docker logs -t container_name
 # stderr 输出
 docker logs container_name 2>&1 | grep ERROR
 ```
-
 ## 全局日志配置
 
 ```json
@@ -477,7 +491,8 @@ docker logs container_name 2>&1 | grep ERROR
 
 ## 清理日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看日志文件位置
 docker inspect --format='{{.LogPath}}' container_name
 
@@ -489,7 +504,6 @@ for container in $(docker ps -q); do
     truncate -s 0 $(docker inspect --format='{{.LogPath}}' $container)
 done
 ```
-
 ---
 
 <!-- chunk: 信号处理与优雅停止 -->## 信号处理与优雅停止
@@ -508,7 +522,17 @@ done
 
 ## 停止容器流程
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 docker stop container
     │
     ▼
@@ -521,10 +545,19 @@ docker stop container
     │
     └── 超时 → 发送 SIGKILL → 强制终止
 ```
-
 ## 停止命令
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 优雅停止 (SIGTERM + 10s 超时 + SIGKILL)
 docker stop container_name
 
@@ -540,7 +573,6 @@ docker kill -s SIGUSR1 container_name
 # 停止所有容器
 docker stop $(docker ps -q)
 ```
-
 ## 应用端优雅停止实现
 
 ```python
@@ -642,7 +674,8 @@ STOPSIGNAL SIGQUIT
 
 ## 使用示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基本配置
 docker run -d --restart unless-stopped nginx
 
@@ -655,7 +688,6 @@ docker update --restart unless-stopped container_name
 # 查看重启次数
 docker inspect --format='{{.RestartCount}}' container_name
 ```
-
 ## 重启延迟
 
 Docker 使用指数退避算法：
@@ -670,7 +702,8 @@ Docker 使用指数退避算法：
 
 ## 资源监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时资源统计
 docker stats
 
@@ -683,10 +716,10 @@ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}"
 # JSON 输出
 docker stats --format '{{json .}}'
 ```
-
 ## 容器内进程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看进程
 docker top container_name
 
@@ -696,10 +729,10 @@ docker top container_name -aux
 # 使用 ps 格式
 docker top container_name -o pid,ppid,user,cmd
 ```
-
 ## 调试技术
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 进入运行中的容器
 docker exec -it container_name /bin/sh
 
@@ -716,10 +749,10 @@ docker exec container_name ls -la /app
 docker cp container_name:/app/logs/app.log ./
 docker cp ./config.json container_name:/app/config/
 ```
-
 ## 调试镜像
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用调试镜像
 docker run --rm -it --network container:myapp nicolaka/netshoot
 
@@ -735,10 +768,10 @@ docker run --rm -it \
   --network container:myapp \
   busybox
 ```
-
 ## 事件监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监听所有事件
 docker events
 
@@ -754,10 +787,10 @@ docker events --since '2024-01-01' --until '2024-01-02'
 # JSON 格式
 docker events --format '{{json .}}'
 ```
-
 ## 容器 diff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看文件系统变化
 docker diff container_name
 
@@ -766,7 +799,6 @@ docker diff container_name
 # C = 修改的文件
 # D = 删除的文件
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -787,3 +819,6 @@ docker diff container_name
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

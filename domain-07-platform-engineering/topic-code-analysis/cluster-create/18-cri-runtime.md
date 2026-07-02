@@ -43,6 +43,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: CRI 运行时管理 (Container Runtime Interface)
@@ -670,7 +675,8 @@ spec:
 
 ### 场景 4: 离线环境镜像预拉取
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 导出镜像
 docker pull registry.k8s.io/pause:3.9
 docker pull registry.k8s.io/kube-apiserver:v1.28.0
@@ -699,13 +705,22 @@ ctr -n=k8s.io images import /tmp/k8s-images.tar
 # 5. 验证镜像
 crictl images
 ```
-
 ### 场景 5: containerd 降级问题排除
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd 不可用时，查看状态
 systemctl status containerd
 
@@ -731,7 +746,6 @@ crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock info
 #   }
 # }
 ```
-
 ## 配置示例
 
 ### kubeadm 使用 containerd
@@ -795,7 +809,8 @@ version = 2
 
 ### crictl 常用命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CRI 运行时信息
 crictl info
 # 输出:
@@ -858,10 +873,10 @@ crictl stats
 # CONTAINER ID   NAME       CPU %   MEM USAGE / LIMIT   MEM %   IO
 # abc123def456   nginx      0.05%   5.2MiB / 1GiB      0.51%   12kB / 0B
 ```
-
 ### kubeadm 镜像管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看需要的镜像列表
 kubeadm config images list --kubernetes-version v1.28.0
 # 输出:
@@ -884,10 +899,10 @@ kubeadm config images pull \
 # 查看已拉取的镜像
 crictl images | grep registry.k8s.io
 ```
-
 ### RuntimeClass 管理
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 列出所有 RuntimeClass
 kubectl get runtimeclasses
 # NAME              HANDLER            AGE
@@ -909,7 +924,6 @@ kubectl describe runtimeclass gvisor
 # 创建使用 RuntimeClass 的 Pod
 kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":"gvisor"}}'
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -950,6 +964,7 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 ## CRI 架构图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────┐
 │                          Kubernetes Node                            │
 │                                                                     │
@@ -984,7 +999,6 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 │  └──────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
@@ -994,3 +1008,6 @@ kubectl run gvisor-nginx --image=nginx --overrides='{"spec":{"runtimeClassName":
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+
+
+<!-- risk-assessed -->

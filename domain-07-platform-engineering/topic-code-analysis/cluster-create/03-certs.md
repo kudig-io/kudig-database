@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 证书管理 PKI Infrastructure
@@ -615,7 +620,17 @@ kubeadm certs check-expiration
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 续签所有证书
 kubeadm certs renew all
 # [renew] Certificate apiserver renewed successfully
@@ -635,10 +650,10 @@ kill -SIGHUP $(pidof kube-scheduler)
 # 或者重启 kubelet (更彻底)
 systemctl restart kubelet
 ```
-
 ### 场景 3: 添加 API Server SAN
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 需要添加新 IP 或域名到 API Server 证书
 # 1. 备份现有证书
 cp /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.crt.bak
@@ -653,7 +668,6 @@ kubeadm certs generate apiserver \
 crictl stop $(crictl ps --name kube-apiserver -q)
 # kubelet 会自动用新证书重启
 ```
-
 ### 场景 4: 使用外部 CA
 
 ```yaml
@@ -845,3 +859,6 @@ done
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
+
+
+<!-- risk-assessed -->

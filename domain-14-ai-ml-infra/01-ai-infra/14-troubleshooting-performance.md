@@ -64,6 +64,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI平台故障排查与性能优化
@@ -234,7 +239,8 @@ else:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GPU驱动问题
 # 重启nvidia驱动
 sudo systemctl restart nvidia-persistenced
@@ -252,7 +258,6 @@ nvidia-settings -q [gpu:0]/GPUFanControlState
 # 设置风扇策略
 nvidia-settings -a [gpu:0]/GPUFanControlState=1 -a [fan:0]/GPUTargetFanSpeed=80
 ```
-
 ### 2.2 存储性能问题排查
 
 ```bash
@@ -314,7 +319,8 @@ fi
 
 ### 3.1 模型服务故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # model_service_diagnostics.sh - 模型服务诊断脚本
 
@@ -366,7 +372,6 @@ echo
 echo "8. 健康检查状态:"
 kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$SERVICE_NAME --sort-by='.lastTimestamp' | tail -10
 ```
-
 **模型加载失败常见原因**：
 
 ```python
@@ -1340,7 +1345,17 @@ if __name__ == "__main__":
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # system_optimization.sh - 系统性能优化脚本
 
@@ -1417,7 +1432,6 @@ EOF
 
 echo "系统优化完成！请重启相关服务使配置生效。"
 ```
-
 ### 5.2 应用级优化清单
 
 ✅ **模型优化**
@@ -1472,3 +1486,5 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 - 16-llm-finetuning
 
 ```
+
+<!-- risk-assessed -->

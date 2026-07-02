@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 10 - Wasm 插件生态与开发实践
@@ -391,7 +396,8 @@ func computeHMAC(message, key string) string {
 
 ## 4.3 构建步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 初始化 Go 模块
 go mod init wasm-auth-plugin
 go mod tidy
@@ -419,7 +425,6 @@ docker buildx build \
   --push \
   -f Dockerfile.wasm .
 ```
-
 ## 4.4 Dockerfile.wasm 示例
 
 ```dockerfile
@@ -602,7 +607,8 @@ strip = true
 
 ## 5.4 构建步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 编译 Wasm
 cargo build --target wasm32-wasi --release
 
@@ -624,7 +630,6 @@ docker buildx build \
   -t registry.cn-hangzhou.aliyuncs.com/myorg/wasm-stat-plugin:v1.0.0 \
   --push -f Dockerfile.wasm .
 ```
-
 ---
 
 <!-- chunk: 6. 插件生命周期管理 -->## 6. 插件生命周期管理
@@ -632,6 +637,7 @@ docker buildx build \
 ## 6.1 OCI 镜像分发架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 开发者工作站                   CI/CD 流水线               生产集群
 ┌──────────────┐              ┌────────────────┐          ┌──────────────────────────┐
 │              │  git push    │                │  docker  │                          │
@@ -653,7 +659,6 @@ docker buildx build \
                                                           │  ④ 旧版本实例平滑退出     │
                                                           └──────────────────────────┘
 ```
-
 ## 6.2 版本管理策略
 
 ```yaml
@@ -829,3 +834,6 @@ spec:
 - 09-nginx-ingress-migration-guide
 - 11-api-gateway-security-practices
 - 12-api-gateway-observability
+
+
+<!-- risk-assessed -->

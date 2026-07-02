@@ -72,6 +72,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -97,7 +102,8 @@ relationships:
 
 按“先看 PVC/PV 状态、再看 CSI 日志、最后看可用区拓扑”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 StatefulSet 与 Pod 状态
 kubectl get sts mysql -n middleware
 kubectl get pod mysql-0 -n middleware -o wide
@@ -129,7 +135,6 @@ aliyun ecs DescribeDisks \
   --ZoneId cn-beijing-c \
   --output cols=DiskId,Status,Size rows=Disks.Disk[]
 ```
-
 ## 根因分析
 
 综合 PVC 事件、CSI 日志与可用区资源查询，判定根因为 **StatefulSet 的 Pod 被调度至 c 区，但 c 区当前无 ESSD 云盘库存，导致 alicloud-disk-csi 无法动态创建 PV**，置信度 **高**。
@@ -145,19 +150,28 @@ aliyun ecs DescribeDisks \
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon cn-beijing.172.16.4.30
 ```
-
 **第二步：删除 StatefulSet（孤儿模式保留 Pod，避免数据丢失）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete sts mysql -n middleware --cascade=orphan
 ```
-
 **第三步：删除无法绑定的 Pending PVC**
 
 > 注：此 PVC 尚未绑定，无数据，可直接删除；若已存在数据请先备份。
@@ -165,10 +179,19 @@ kubectl delete sts mysql -n middleware --cascade=orphan
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pvc data-mysql-0 -n middleware
 ```
-
 **第四步：为 Pod 增加可用区亲和性，强制调度到 a/b 区**
 
 修改 StatefulSet YAML 后重新 apply：
@@ -176,7 +199,8 @@ kubectl delete pvc data-mysql-0 -n middleware
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: apps/v1
 kind: StatefulSet
@@ -227,14 +251,13 @@ spec:
             storage: 100Gi
 EOF
 ```
-
 **第五步：验证新 PVC 自动创建并绑定**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc -n middleware -w
 kubectl get pod mysql-0 -n middleware -o wide
 ```
-
 **备选长期方案：为 c 区扩容 ESSD 库存**
 
 若业务要求三可用区部署，可在 c 区提交 ESSD 扩容工单，库存恢复后去除 nodeAffinity 限制。
@@ -244,7 +267,8 @@ kubectl get pod mysql-0 -n middleware -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 全部 Bound
 kubectl get pvc -n middleware -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}'
 
@@ -261,7 +285,6 @@ kubectl run mysql-client --rm -it --restart=Never -n middleware --image=mysql:8.
 # 5. CSI 无新 provision 错误
 kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=100 | grep -i error || echo "无新错误"
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-033 已处理完成。
@@ -314,3 +337,6 @@ kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=100 | grep -i
 - StatefulSet
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

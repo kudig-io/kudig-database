@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
@@ -390,7 +395,8 @@ Kubernetes 默认提供以下内置 FlowSchema(v1.29):
 
 ## 4.2 查看内置配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 FlowSchema(按优先级排序)
 kubectl get flowschemas --sort-by=.spec.matchingPrecedence
 
@@ -403,7 +409,6 @@ kubectl get flowschema system-nodes -o yaml
 # 查看特定 PriorityLevel 详情
 kubectl get prioritylevelconfiguration workload-high -o yaml
 ```
-
 ---
 
 <!-- chunk: 5. 内部原理 -->## 5. 内部原理
@@ -854,7 +859,8 @@ spec:
 
 **症状**: 客户端频繁收到 429 响应
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 APF 指标
 kubectl get --raw /metrics | grep apiserver_flowcontrol
 
@@ -869,7 +875,6 @@ kubectl get prioritylevelconfiguration workload-low -o yaml
 # 检查 FlowSchema 匹配
 kubectl get flowschemas --sort-by=.spec.matchingPrecedence
 ```
-
 **解决方案**:
 
 1. **提高并发份额**:
@@ -877,23 +882,23 @@ kubectl get flowschemas --sort-by=.spec.matchingPrecedence
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch prioritylevelconfiguration workload-low --type=json -p='[
   {"op": "replace", "path": "/spec/limited/nominalConcurrencyShares", "value": 150}
 ]'
 ```
-
 2. **增加队列长度**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch prioritylevelconfiguration workload-low --type=json -p='[
   {"op": "replace", "path": "/spec/limited/limitResponse/queuing/queueLengthLimit", "value": 100}
 ]'
 ```
-
 3. **创建专用 FlowSchema**(如果特定用户需要更高优先级):
 
 ```yaml
@@ -950,7 +955,8 @@ spec:
 
 **症状**: 创建了 FlowSchema 但请求仍匹配到 `global-default`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 FlowSchema 状态
 kubectl get flowschema my-flowschema -o yaml
 
@@ -972,10 +978,10 @@ resourceRules:
 
 # 如果上述配置生效,再逐步添加具体限制
 ```
-
 ## 7.4 监控 APF 性能
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 APF 相关指标
 kubectl get --raw /metrics | grep apiserver_flowcontrol
 
@@ -998,7 +1004,6 @@ kubectl get --raw /metrics | grep apiserver_flowcontrol
 # apiserver_flowcontrol_request_execution_seconds_bucket{priority_level="xxx"}
 #   → 请求执行时间分布(直方图)
 ```
-
 **Prometheus 告警规则示例**:
 
 ```yaml
@@ -1037,7 +1042,8 @@ groups:
 
 如果集群仍使用旧的 `--max-requests-inflight` 参数:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前配置
 kubectl -n kube-system describe pod kube-apiserver-xxx | grep max-requests-inflight
 
@@ -1050,7 +1056,6 @@ kubectl -n kube-system describe pod kube-apiserver-xxx | grep max-requests-infli
 # 2. 移除旧参数(逐步移除,观察影响)
 # 3. 根据监控数据调整 PriorityLevelConfiguration
 ```
-
 ---
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
@@ -1101,3 +1106,6 @@ kubectl -n kube-system describe pod kube-apiserver-xxx | grep max-requests-infli
 - 30-apiservice-aggregation
 - 32-lease-event-node
 - 33-kubeadm-cluster-bootstrap
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点弹性伸缩 Cluster Autoscaler 源码分析
@@ -249,7 +254,8 @@ spec:
 
 GKE 默认内置了 Cluster Autoscaler，可以通过 gcloud 命令启用：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 GKE Cluster Autoscaler
 gcloud container clusters update my-cluster \
   --enable-autoscaling \
@@ -261,10 +267,10 @@ gcloud container clusters update my-cluster \
 gcloud container clusters update my-cluster \
   --autoscaling-profile=optimize-utilization  # 优化资源利用率
 ```
-
 ### 2.3 Azure AKS 部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 AKS Cluster Autoscaler
 az aks update \
   --resource-group myResourceGroup \
@@ -282,7 +288,6 @@ az aks nodepool update \
   --min-count 1 \
   --max-count 10
 ```
-
 ---
 
 ## 三、节点组（Node Group）配置
@@ -298,7 +303,8 @@ az aks nodepool update \
 
 ### 3.2 多节点组配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS 多 ASG 配置
 --nodes=1:10:cpu-asg          # CPU 节点组
 --nodes=0:5:gpu-asg           # GPU 节点组（允许缩容到 0）
@@ -310,7 +316,6 @@ gcloud container clusters update my-cluster \
 gcloud container clusters update my-cluster \
   --node-pool=gpu-pool --enable-autoscaling --min-nodes=0 --max-nodes=5
 ```
-
 ### 3.3 Expander 策略
 
 Cluster Autoscaler 支持多种扩容策略（`--expander` 参数）：
@@ -385,7 +390,8 @@ globalDefault: false
 
 ### 5.1 Cluster Autoscaler 日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CA 日志
 kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100
 
@@ -399,17 +405,16 @@ kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100
 # "Scale down: removing node xxx"        → 缩容决策
 # "No pod can be moved from node xxx"    → 缩容被阻止
 ```
-
 ### 5.2 Cluster Autoscaler 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CA 配置
 kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 
 # 查看 CA 当前状态（写在 ConfigMap 中）
 kubectl describe configmap cluster-autoscaler-status -n kube-system
 ```
-
 ### 5.3 关键指标
 
 ```bash
@@ -457,3 +462,6 @@ cluster_autoscaler_last_activity                          # 最后一次活动�
 - [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]
+
+
+<!-- risk-assessed -->

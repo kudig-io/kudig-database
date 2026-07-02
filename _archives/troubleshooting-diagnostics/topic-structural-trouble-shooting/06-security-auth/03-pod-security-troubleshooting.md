@@ -39,6 +39,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Pod 安全与 SecurityContext 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
@@ -168,7 +173,8 @@ Pod 安全问题
 
 #### 2.2.1 PSA 配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间的 PSA 配置
 kubectl get namespace <namespace> -o yaml | grep -A5 "labels:"
 
@@ -183,10 +189,10 @@ kubectl get namespace <namespace> -o jsonpath='{.metadata.labels}' | jq
 # 列出所有有 PSA 配置的命名空间
 kubectl get namespaces -L pod-security.kubernetes.io/enforce
 ```
-
 #### 2.2.2 SecurityContext 检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 的 SecurityContext
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}' | jq
 
@@ -204,10 +210,10 @@ kubectl exec <pod-name> -- cat /proc/1/status | grep Cap
 # 解码 capabilities
 capsh --decode=<hex-value>
 ```
-
 #### 2.2.3 文件权限检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查挂载卷的权限
 kubectl exec <pod-name> -- ls -la /path/to/volume
 
@@ -217,10 +223,10 @@ kubectl exec <pod-name> -- stat /path/to/file
 # 检查进程运行用户
 kubectl exec <pod-name> -- ps aux
 ```
-
 #### 2.2.4 安全审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 安全相关事件
 kubectl get events --field-selector reason=FailedCreate | grep -i security
 
@@ -231,7 +237,6 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep -i "pod-security"
 kubectl get constraints
 kubectl describe constraint <name>
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -260,7 +265,8 @@ Error: pods "myapp" is forbidden: violates PodSecurity "restricted:latest":
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看命名空间 PSA 配置
 kubectl get namespace <namespace> -o yaml | grep pod-security
 
@@ -301,12 +307,12 @@ kubectl label namespace <namespace> \
   pod-security.kubernetes.io/audit=restricted \
   --overwrite
 ```
-
 #### 场景 2：系统组件需要特权
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为系统命名空间设置 privileged 级别
 kubectl label namespace kube-system \
   pod-security.kubernetes.io/enforce=privileged \
@@ -336,7 +342,6 @@ plugins:
       - monitoring
 EOF
 ```
-
 ### 3.2 权限问题
 
 #### 场景 1：文件访问权限不足
@@ -348,7 +353,8 @@ Error: cannot open /data/config.json: permission denied
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前运行用户
 kubectl exec <pod-name> -- id
 
@@ -381,7 +387,6 @@ kubectl patch deployment <name> --type='json' -p='[
 #   securityContext:
 #     fsGroup: 1000  # 挂载卷的组所有权
 ```
-
 #### 场景 2：需要特定 Capabilities
 
 **问题现象：**
@@ -391,7 +396,8 @@ Error: operation not permitted (binding to port 80)
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认需要哪个 capability
 # 绑定低端口: NET_BIND_SERVICE
 # 网络操作: NET_ADMIN, NET_RAW
@@ -430,7 +436,6 @@ EOF
 # DAC_OVERRIDE: 绕过文件权限检查
 # SETUID/SETGID: 改变 UID/GID
 ```
-
 ### 3.3 只读文件系统问题
 
 #### 场景 1：readOnlyRootFilesystem 导致写入失败
@@ -442,7 +447,8 @@ Error: read-only file system
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查是否设置了 readOnlyRootFilesystem
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].securityContext.readOnlyRootFilesystem}'
 
@@ -485,7 +491,6 @@ EOF
 # /var/run - PID 文件
 # /home/<user> - 用户目录
 ```
-
 ### 3.4 Seccomp 配置
 
 #### 场景 1：Seccomp 阻止系统调用
@@ -495,7 +500,8 @@ EOF
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前 seccomp 配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.seccompProfile}'
 
@@ -524,7 +530,6 @@ EOF
 #   type: Localhost
 #   localhostProfile: myprofile.json
 ```
-
 ### 3.5 特权容器场景
 
 #### 场景 1：需要特权容器的正确配置
@@ -652,7 +657,8 @@ metadata:
 
 ### 3.7 安全最佳实践检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查是否使用 root 运行
 kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.securityContext.runAsUser}{"\n"}{end}' | grep -E "\t0$|\t$"
 
@@ -668,7 +674,6 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 # 5. 检查命名空间 PSA 配置
 kubectl get namespaces -L pod-security.kubernetes.io/enforce
 ```
-
 ---
 
 ### 3.8 安全生产风险提示
@@ -688,7 +693,8 @@ kubectl get namespaces -L pod-security.kubernetes.io/enforce
 
 ### 常用命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 PSA 配置
 kubectl get namespace <ns> -L pod-security.kubernetes.io/enforce
 
@@ -706,7 +712,6 @@ kubectl exec <pod> -- cat /proc/1/status | grep Cap
 # 解码 Capabilities
 capsh --decode=<hex>
 ```
-
 ### 相关文档
 
 - [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
@@ -717,3 +722,6 @@ capsh --decode=<hex>
 
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

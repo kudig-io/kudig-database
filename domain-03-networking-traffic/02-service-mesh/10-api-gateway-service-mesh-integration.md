@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # API 网关与服务网格集成深度实践
@@ -909,7 +914,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== API 网关健康检查 ==="
@@ -936,10 +942,10 @@ kubectl get secrets -n istio-system | grep cacerts
 echo "=== 流量追踪 ==="
 kubectl exec -n production deploy/sleep -- curl -v http://user-service:8080/health
 ```
-
 ## 7.2 网关日志分析输出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
 
 2026/04/24 10:00:01 [info] 42#42: *123456 client 10.0.1.5 connected to 0.0.0.0:9080
@@ -951,7 +957,6 @@ $ kubectl logs -n ingress-apisix deploy/apisix --tail=10
 2026/04/24 10:00:05 [warn] 42#42: *123460 [lua] cors.lua:89: phase_func(): CORS origin not allowed: https://evil.example.com
 2026/04/24 10:00:06 [info] 42#42: *123461 opentelemetry trace propagated: trace_id=abc123, span_id=def456
 ```
-
 ## 7.3 常见问题
 
 | 问题 | 原因 | 解决 |
@@ -1336,3 +1341,6 @@ spec:
 - 09-microservice-resilience-patterns
 - 99-istio-service-mesh-guide
 - 99-linkerd-service-mesh-guide
+
+
+<!-- risk-assessed -->

@@ -55,6 +55,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - Linux 运维基础与应急响应：生产环境运维专家实践指南
@@ -86,7 +91,8 @@ cross_refs:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 系统安全加固
 # 禁用不必要的服务
 systemctl disable cups bluetooth firewalld 2>/dev/null
@@ -130,7 +136,6 @@ cat > /etc/sudoers.d/ops-users << EOF
 Defaults:opsuser !requiretty
 EOF
 ```
-
 ## 性能基线配置
 ```bash
 # 1. 文件系统优化
@@ -223,7 +228,8 @@ groups:
 ```
 
 ## 自动化监控部署脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 生产环境监控部署脚本
 
@@ -318,7 +324,6 @@ EOF
 #    DEPLOY_MONITORING $host
 #done
 ```
-
 ## 应急响应流程
 
 ## 标准化故障处理SOP
@@ -357,7 +362,8 @@ EOF
 ```
 
 ## 常见故障处理手册
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 系统问题快速诊断脚本
 cat > /usr/local/bin/system-diagnostic.sh << 'EOF'
 #!/bin/bash
@@ -407,7 +413,6 @@ EOF
 
 chmod +x /usr/local/bin/system-diagnostic.sh
 ```
-
 ---
 
 ## 常用监控命令
@@ -440,7 +445,8 @@ chmod +x /usr/local/bin/system-diagnostic.sh
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Systemd 服务管理
 systemctl start <service>      # 启动服务
 systemctl stop <service>       # 停止服务
@@ -455,7 +461,6 @@ service <service> start        # 启动服务
 service <service> stop         # 停止服务
 chkconfig <service> on         # 设置开机自启
 ```
-
 ## 进程管理
 
 ```bash
@@ -588,7 +593,8 @@ journalctl -b             # 仅显示本次启动日志
 
 ## 日志轮转(logrotate)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # logrotate 配置示例 (/etc/logrotate.d/myapp)
 /path/to/app.log {
     daily                   # 每天轮转
@@ -603,7 +609,6 @@ journalctl -b             # 仅显示本次启动日志
     endscript
 }
 ```
-
 <!-- chunk: 安全运维基础 -->## 安全运维基础
 
 ## 用户和权限管理
@@ -731,7 +736,8 @@ rsync --dry-run -avz /source/ /destination/  # 预览操作
 
 ## 监控脚本示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 系统健康检查脚本
 check_disk_usage() {
@@ -766,7 +772,6 @@ check_services() {
 # 执行检查
 check_disk_usage && check_memory_usage && check_services
 ```
-
 ## 定期任务(cron)
 
 ```bash
@@ -809,7 +814,17 @@ Linux 运维技能直接关系到 Kubernetes 集群的稳定性。以下是关�
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 节点维护模式 (驱离 Pod)
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 
@@ -828,13 +843,13 @@ kubectl uncordon <node>
 kubectl get nodes
 kubectl describe node <node> | grep -A5 "Conditions"
 ```
-
 ## 常见 K8s 节点级故障排查
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点 NotReady
 kubectl describe node <node> | grep -A10 "Conditions"
 # 检查 kubelet 状态
@@ -858,7 +873,6 @@ crictl ps                          # 查看容器
 crictl pods                        # 查看 Pod
 journalctl -u containerd -f        # 日志
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -882,7 +896,8 @@ journalctl -u containerd -f        # 日志
 
 ## 系统诊断快速命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 快速系统诊断 - k8s-node-diagnostic.sh
 
@@ -915,7 +930,6 @@ ss -s
 
 echo "=== 诊断完成 ==="
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -949,3 +963,5 @@ echo "=== 诊断完成 ==="
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # PV/PVC 存储深度排查与持久化治理指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 资深专家级
@@ -212,7 +217,8 @@ K8s 存储系统遵循高度解耦的 CSI（Container Storage Interface）标准
 
 **2. Binding（绑定阶段）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看绑定状态
 kubectl get pvc,pv
 # NAME                     STATUS   VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS
@@ -222,7 +228,6 @@ kubectl get pvc,pv
 kubectl get pvc data-pvc -o jsonpath='{.spec.volumeName}'  # 绑定的 PV 名称
 kubectl get pv pv-12345 -o jsonpath='{.spec.claimRef}'     # PV 的所有者
 ```
-
 **3. Attaching（附着阶段）**
 
 ```
@@ -237,7 +242,8 @@ Pod 调度到节点 node-1
 
 **VolumeAttachment 状态检查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有附着记录
 kubectl get volumeattachment -o wide
 # NAME                                   ATTACHER        PV        NODE      ATTACHED
@@ -250,7 +256,6 @@ kubectl get volumeattachment csi-123abc -o yaml
 #   attachmentMetadata:
 #     devicePath: "/dev/vdb"  # 节点上的设备路径
 ```
-
 **4. Mounting（挂载阶段）**
 
 ```
@@ -267,7 +272,8 @@ kubectl get volumeattachment csi-123abc -o yaml
 
 **挂载点层级关系**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点上查看挂载链
 findmnt -t ext4 | grep pv-12345
 # TARGET                                SOURCE      FSTYPE
@@ -275,10 +281,10 @@ findmnt -t ext4 | grep pv-12345
 # /var/lib/kubelet/pods/.../volumes/.../mount  /dev/vdb   ext4  ← Pod 挂载（bind）
 # /var/lib/docker/containers/.../mounts/data  /dev/vdb   ext4  ← 容器挂载（bind）
 ```
-
 **5. Using（使用阶段）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控卷使用情况
 kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[] | select(.name=="<pv-name>")'
 # {
@@ -293,7 +299,6 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
 # 设置告警阈值（Prometheus）
 (kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes) > 0.8
 ```
-
 **6. Reclaiming（回收阶段）**
 
 ```
@@ -314,7 +319,8 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
 
 **Retain 策略手动回收流程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 删除后，PV 状态变为 Released
 kubectl get pv pv-12345
 # NAME       STATUS     CLAIM            CAPACITY   RECLAIM POLICY
@@ -328,7 +334,6 @@ kubectl get pv pv-12345
 # NAME       STATUS      CLAIM   CAPACITY   RECLAIM POLICY
 # pv-12345   Available   <none>  10Gi       Retain
 ```
-
 ---
 
 ### 1.2 生命周期详解
@@ -385,7 +390,8 @@ allowedTopologies:
 
 **调试延迟绑定问题**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 长时间 Pending
 kubectl describe pvc data-pvc
 # Events:
@@ -411,7 +417,6 @@ kubectl patch sc fast-ssd --type=json -p='[
   {"op":"add","path":"/allowedTopologies/0/matchLabelExpressions/0/values/-","value":"us-west-2c"}
 ]'
 ```
-
 ---
 
 #### 1.2.2 Access Mode 深度解析
@@ -437,7 +442,8 @@ kubectl patch sc fast-ssd --type=json -p='[
 
 **错误信息示例**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod app-pod
 # Events:
 #   Type     Reason              Age   Message
@@ -450,10 +456,19 @@ kubectl get volumeattachment
 # csi-old-attach-node-a       csi.aws.com     pv-abc123  node-a  true   ← 旧附着未清理
 # csi-new-attach-node-b       csi.aws.com     pv-abc123  node-b  false  ← 新附着失败
 ```
-
 **解决步骤**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认旧节点状态
 kubectl get node node-a
 # NAME     STATUS     ROLES    AGE   VERSION
@@ -475,7 +490,6 @@ kubectl get pod app-pod-new
 # NAME           READY   STATUS    RESTARTS   AGE
 # app-pod-new    1/1     Running   0          30s
 ```
-
 ---
 
 #### 1.2.3 Volume Expansion（在线扩容）机制
@@ -498,7 +512,8 @@ kubectl get pod app-pod-new
 
 **前置条件检查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. StorageClass 必须允许扩容
 kubectl get sc fast-ssd -o jsonpath='{.allowVolumeExpansion}'
 # true  # ✅ 支持扩容
@@ -511,10 +526,10 @@ kubectl get csidriver ebs.csi.aws.com -o jsonpath='{.spec.volumeExpansion}'
 kubectl get pvc data-pvc -o jsonpath='{.status.phase}'
 # Bound  # ✅ 已绑定
 ```
-
 **扩容操作**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 修改 PVC 容量（声明式）
 kubectl patch pvc data-pvc -p '{"spec":{"resources":{"requests":{"storage":"10Gi"}}}}'
 
@@ -535,10 +550,10 @@ kubectl exec app-pod -- df -h /data
 # Filesystem      Size  Used Avail Use% Mounted on
 # /dev/vdb        9.8G  100M  9.2G   2% /data  # ✅ 文件系统已扩容
 ```
-
 **扩容失败排查**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景：PV 容量已更新，但 Pod 内容量未变
 
 # 1. 检查文件系统类型
@@ -563,7 +578,6 @@ kubectl exec app-pod-new -- df -h /data
 # Filesystem      Size  Used Avail Use% Mounted on
 # /dev/vdb        9.8G  100M  9.2G   2% /data  # ✅ 扩容成功
 ```
-
 ---
 
 ## 2. 专家级问题矩阵与观测工具
@@ -579,7 +593,8 @@ kubectl exec app-pod-new -- df -h /data
 
 ### 2.2 专家工具箱
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 追踪卷在节点上的真实状态 (通过容器查看)
 kubectl run debug --rm -it --privileged --image=busybox -- nsenter -t 1 -m -- lsblk
 
@@ -593,7 +608,6 @@ kubectl logs -n kube-system <csi-controller-pod> -c csi-provisioner
 # 4. 在节点上调试挂载点 (Findmnt 专家用法)
 findmnt -lo source,target,fstype,label,options -t csi
 ```
-
 ---
 
 ## 3. 深度排查路径
@@ -601,7 +615,8 @@ findmnt -lo source,target,fstype,label,options -t csi
 ### 3.1 第一阶段：生命周期状态验证
 确认问题点是在"创建"、"关联"还是"挂载"阶段。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PV 是否成功创建 (控制面第 1 步)
 kubectl get pv -l kubernetes.io/created-by=external-provisioner
 
@@ -609,7 +624,6 @@ kubectl get pv -l kubernetes.io/created-by=external-provisioner
 # 只要 Programmed 状态为 True，说明云平台已完成 Attach
 kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,ATTACHED:.status.attached,NODE:.spec.nodeName
 ```
-
 ### 3.2 第二阶段：节点侧 IO 链路分析
 如果控制面正常但 Pod 无法启动，需进入节点检查。
 
@@ -675,7 +689,8 @@ ls -R /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pv-name>/
 
 **排查过程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod 状态
 kubectl get pods -l app=mysql
 # NAME      READY   STATUS              RESTARTS   AGE
@@ -731,10 +746,19 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
 # - 新 Pod 调度到新节点，尝试附着同一云盘时被拒绝（RWO 限制）
 # - kubelet 默认等待 6 分钟后强制删除 Pod，但云端卸载未触发
 ```
-
 **应急措施**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 A：清理僵尸 VolumeAttachment（推荐）
 
 # 1. 强制删除旧 Pod（触发删除流程）
@@ -775,7 +799,6 @@ kubectl exec mysql-0 -- df -h /var/lib/mysql
 # Filesystem      Size  Used Avail Use% Mounted on
 # /dev/xvdf       100G   20G   80G  20% /var/lib/mysql  ✅
 ```
-
 **长期优化**
 
 ```yaml
@@ -992,7 +1015,8 @@ subjects:
 
 **排查过程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 资源使用
 kubectl top pod log-collector-abc123
 # NAME                     CPU   MEMORY
@@ -1054,10 +1078,10 @@ journalctl -u kubelet | grep -i "expand\|resize" | tail -20
 # - XFS 文件系统在某些内核版本不支持在线收缩（仅支持扩展）
 # - 扩容操作卡在 FileSystemResizePending 状态
 ```
-
 **应急措施**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A：重启 Pod 触发离线扩容（推荐）
 
 # 1. 临时清理磁盘空间（紧急）
@@ -1116,7 +1140,6 @@ kubectl get pod -l app=log-collector
 # NAME                        READY   STATUS    AGE
 # log-collector-new-xyz456    1/1     Running   10s  ✅
 ```
-
 **长期优化**
 
 ```yaml
@@ -1340,3 +1363,6 @@ spec:
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

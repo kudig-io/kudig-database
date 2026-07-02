@@ -31,6 +31,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -97,7 +102,8 @@ related_topics:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1.1 创建 Namespace 隔离
 kubectl create namespace team-dev
 kubectl create namespace team-ops
@@ -147,7 +153,6 @@ kubectl create clusterrolebinding ops-binding --clusterrole=ops-readonly --user=
 kubectl auth can-i create pods -n team-dev --as=dev-user@example.com
 kubectl auth can-i delete nodes --as=ops-user@example.com
 ```
-
 ### Step 2: RAM 账号与 ACK 集成 (30min)
 
 ```bash
@@ -182,7 +187,8 @@ aliyun cs GET /clusters/<cluster_id>/grant_permissions
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 3.1 确认 ARMS Prometheus 已安装
 kubectl get pods -n arms-prom 2>/dev/null || kubectl get pods -n monitoring 2>/dev/null
 
@@ -238,7 +244,6 @@ echo "CPU 使用率: sum(rate(container_cpu_usage_seconds_total[5m])) by (pod)"
 echo "内存使用: sum(container_memory_working_set_bytes) by (pod)"
 echo "Pod 重启: kube_pod_container_status_restarts_total"
 ```
-
 ### Step 4: 审计日志配置 (30min)
 
 ```bash
@@ -260,7 +265,8 @@ aliyun cs GET /clusters/<cluster_id> | grep audit
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 5.1 设置 Namespace 配额
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -301,7 +307,6 @@ EOF
 kubectl describe quota team-dev-quota -n team-dev
 kubectl describe limitrange team-dev-limits -n team-dev
 ```
-
 ---
 
 ## 验收清单
@@ -321,8 +326,20 @@ kubectl describe limitrange team-dev-limits -n team-dev
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete namespace team-dev team-ops  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete clusterrole ops-readonly
 kubectl delete clusterrolebinding ops-binding
 ```
+
+<!-- risk-assessed -->

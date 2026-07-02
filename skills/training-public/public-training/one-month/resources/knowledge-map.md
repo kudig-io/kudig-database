@@ -58,6 +58,11 @@ related_topics:
 - domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 知识图谱模板
@@ -83,6 +88,7 @@ related_topics:
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Docker 是容器化平台，核心是 Linux Namespace（隔离）和 Cgroup（资源限制）。
 镜像通过分层存储实现高效复用，容器运行时共享宿主机内核。
 
@@ -93,7 +99,6 @@ docker exec -it <id> sh          # 进入容器
 docker logs <id>                 # 查看日志
 docker system prune -a           # 清理资源  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 **还需加强:**
 ```
 (记录需要进一步学习的领域)
@@ -168,7 +173,7 @@ cat /proc/<pid>/cgroup               # 查看 cgroup 信息
         │  Pod Pod   │   │  Pod Pod   │   │  Pod Pod   │
         └────────────┘   └────────────┘   └────────────┘
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 **我的理解:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -400,3 +405,5 @@ Pod → Prometheus (采集+存储) → Grafana (可视化)
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

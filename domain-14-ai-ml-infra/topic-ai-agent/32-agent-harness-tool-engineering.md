@@ -37,6 +37,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent Harness 工具工程：从设计到精简的完整实践
@@ -597,6 +602,7 @@ class DynamicToolLoader:
 ## 4.1 五种编排模式
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工具编排模式:
 
 1. 顺序编排（Sequential）
@@ -626,7 +632,6 @@ class DynamicToolLoader:
    中间有数据清洗/转换步骤
    示例: kubectl get -o json → jq 提取 → prometheus query
 ```
-
 ## 4.2 工具链构建器
 
 ```python
@@ -1139,3 +1144,6 @@ class MCPToolAdapter:
 - 31-agent-harness-loop-execution
 - 33-agent-harness-context-memory
 - 34-agent-harness-verification-quality
+
+
+<!-- risk-assessed -->

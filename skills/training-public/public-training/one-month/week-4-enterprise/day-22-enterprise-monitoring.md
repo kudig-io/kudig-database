@@ -39,6 +39,11 @@ prerequisites:
 - monitoring-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -183,7 +188,8 @@ Alertmanager 提供了多种告警优化机制：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 SLO 告警规则
 cat > slo-rules.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
@@ -264,10 +270,10 @@ EOF
 
 kubectl apply -f slo-recording-rules.yaml
 ```
-
 ### 任务 2: 高级 Grafana Dashboard (1.5h)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 访问 Grafana
 kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 
@@ -293,13 +299,13 @@ kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 # Panel 4: 饱和度 (Saturation)
 # Query: (1 - (sum(kube_node_status_allocatable{resource="cpu"}) - sum(node_cpu_seconds_total{mode!="idle"})) / sum(kube_node_status_allocatable{resource="cpu"})) * 100
 ```
-
 ### 任务 3: Alertmanager 告警路由配置 (1h)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Alertmanager 配置
 kubectl get secret -n monitoring alertmanager-prometheus-kube-prometheus-alertmanager \
   -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
@@ -354,7 +360,6 @@ EOF
 
 kubectl apply -f alertmanager-config.yaml
 ```
-
 ---
 
 ## 常见问题
@@ -396,3 +401,6 @@ SLO 不是越高越好。过高的 SLO 意味着几乎不允许出错，这会�
 - [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
 - [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
+
+
+<!-- risk-assessed -->

@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-06-25] ResourceQuota CPU 超限导致 CI/CD 部署全部失败
@@ -43,7 +48,8 @@ Error from server (Forbidden): error when creating "deployment.yaml":
 ## 诊断过程
 
 **13:12** — 检查 ResourceQuota：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get resourcequota team-a-quota -n dev-team-a -o yaml
 # spec:
 #   hard:
@@ -56,9 +62,9 @@ kubectl get resourcequota team-a-quota -n dev-team-a -o yaml
 #     memory: 28Gi
 #     pods: "42"
 ```
-
 **13:14** — 检查近期变更：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 13:05，开发团队为压测环境部署了 10 个临时 Pod
 kubectl get pods -n dev-team-a | grep load-test
 # load-test-xxx   1/1   Running   0   10m
@@ -68,7 +74,6 @@ kubectl get pods -n dev-team-a | grep load-test
 kubectl get pod load-test-xxx -n dev-team-a -o jsonpath='{.spec.containers[0].resources.requests.cpu}'
 # 2
 ```
-
 **13:16** — 计算：
 - 原有 Pod CPU 请求：18
 - load-test Pod CPU 请求：10 × 2 = 20
@@ -94,35 +99,36 @@ kubectl get pod load-test-xxx -n dev-team-a -o jsonpath='{.spec.containers[0].re
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete pods -n dev-team-a -l app=load-test
 kubectl get resourcequota team-a-quota -n dev-team-a
 # NAME          AGE
 # team-a-quota  cpu: 18/20, memory: 28Gi/40Gi, pods: 32/50
 ```
-
 **13:20** — 触发卡住的 Deployment 继续滚动更新：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout resume deployment api -n dev-team-a
 kubectl get deployment api -n dev-team-a
 # NAME   READY   UP-TO-DATE   AVAILABLE
 # api    5/5     5            5
 ```
-
 **13:22** — 部署紧急修复：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CI/CD Pipeline 恢复，新部署成功
 kubectl get pods -n dev-team-a -l app=api
 # NAME                    READY   STATUS
 # api-7d9f4b8c5a-new12   1/1     Running
 ```
-
 **13:25** — 调整临时环境的 ResourceQuota：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch resourcequota team-a-quota -n dev-team-a --type='merge' -p '
 {
   "spec": {
@@ -134,7 +140,6 @@ kubectl patch resourcequota team-a-quota -n dev-team-a --type='merge' -p '
   }
 }'
 ```
-
 ## 验证
 - 13:26 — CI/CD Pipeline 全部恢复
 - 13:28 — 紧急 Bug 修复部署成功，业务验证通过
@@ -149,3 +154,6 @@ kubectl patch resourcequota team-a-quota -n dev-team-a --type='merge' -p '
   4. 为开发 namespace 设置 LimitRange，防止单个 Pod 请求过大资源
 - **相关 Skill**: [[ts-resources-scheduling]]
 - **相关 FTA**: [[resource-quota-fta]]
+
+
+<!-- risk-assessed -->

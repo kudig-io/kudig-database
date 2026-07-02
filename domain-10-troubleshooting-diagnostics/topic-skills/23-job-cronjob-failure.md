@@ -48,6 +48,11 @@ skill_name: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis 
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -165,6 +170,7 @@ Job 和 CronJob 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 批处�
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -200,7 +206,6 @@ Job 和 CronJob 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 批处�
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -239,7 +244,8 @@ Job 和 CronJob 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 批处�
 ### 3.1 影响评估
 
 **Step T1**: 检查 Job/CronJob 整体状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Job 状态
 kubectl get job <name> -n <namespace> -o jsonpath='{
   "succeeded": .status.succeeded,
@@ -256,14 +262,16 @@ kubectl get cronjob <name> -n <namespace> -o jsonpath='{
 > **判断规则**: failed > 0 或 active 长时间不结束 → 有问题
 
 **Step T2**: 检查 Job 历史堆积
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get jobs -n <namespace> | wc -l
 kubectl get jobs -n <namespace> --sort-by=.metadata.creationTimestamp | head -5
 ```
 > **判断规则**: Job 数量 > 100（或异常多）→ RC-009（历史堆积）
 
 **Step T3**: 检查 CronJob 调度时间
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cronjob <name> -n <namespace> -o jsonpath='{.spec.schedule}'
 kubectl get cronjob <name> -n <namespace> -o jsonpath='{.status.lastScheduleTime}'
 date -u
@@ -271,7 +279,8 @@ date -u
 > **判断规则**: lastScheduleTime 远早于当前时间 → RC-002/003（未触发/错过调度）
 
 **Step T4**: 检查最近 Events
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events -n <namespace> --field-selector involvedObject.kind=Job --sort-by=.lastTimestamp | tail -15
 kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob --sort-by=.lastTimestamp | tail -15
 ```
@@ -697,7 +706,8 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=CronJob -
 
 ### 7.1 即时验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: Job 状态
 kubectl get job <name> -n <namespace>
 # 预期: succeeded == completions（对于一次性 Job）
@@ -714,7 +724,6 @@ kubectl get jobs -n <namespace> -l cronjob.kubernetes.io/is-created-by=<cronjob-
 kubectl get pods -n <namespace> --selector=job-name=<job-name>
 # 预期: Completed 或 Running 正常
 ```
-
 ### 7.2 短期监控
 
 | 监控项 | 指标 | 预期 | 异常 |
@@ -777,3 +786,6 @@ kubectl get pods -n <namespace> --selector=job-name=<job-name>
 *Skill ID: SKILL-WORK-004*  
 *创建时间: 2026-05*  
 *维护者: Kudig Team*
+
+
+<!-- risk-assessed -->

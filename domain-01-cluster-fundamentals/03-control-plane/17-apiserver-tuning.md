@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: API Server 性能调优
@@ -545,7 +550,8 @@ spec:
 
 ### APF监控和调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # apf-debug.sh - APF调试脚本
 
@@ -578,7 +584,6 @@ kubectl get --raw /metrics 2>/dev/null | grep "apiserver_flowcontrol_rejected_re
 echo -e "\n=== 7. 队列等待时间 ==="
 kubectl get --raw /metrics 2>/dev/null | grep "apiserver_flowcontrol_request_queue_length_after_enqueue"
 ```
-
 <!-- chunk: 审计策略配置 -->
 ## 审计策略配置
 
@@ -816,7 +821,8 @@ command:
 
 ### 健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # apiserver-health-check.sh
 
@@ -840,10 +846,10 @@ kubectl get --raw /healthz/etcd 2>/dev/null || echo "etcd检查失败"
 echo -e "\n=== 4. API版本 ==="
 kubectl version --short 2>/dev/null || kubectl version -o json | jq -r '.serverVersion.gitVersion'
 ```
-
 ### 性能指标查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # apiserver-metrics.sh
 
@@ -881,7 +887,6 @@ kubectl get --raw /metrics 2>/dev/null | grep "authentication_duration_seconds" 
 echo -e "\n=== 8. 授权延迟 ==="
 kubectl get --raw /metrics 2>/dev/null | grep "authorization_duration_seconds" | head -5
 ```
-
 <!-- chunk: 性能监控告警 -->
 ## 性能监控告警
 
@@ -1065,7 +1070,8 @@ spec:
 <!-- chunk: ACK API Server配置 -->
 ## ACK API Server配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看托管API Server状态
 kubectl get cs
 
@@ -1082,7 +1088,6 @@ kubectl get cs
 # 4. 查看API Server事件
 kubectl get events -n kube-system --field-selector source=kube-apiserver
 ```
-
 <!-- chunk: 版本变更记录 -->
 ## 版本变更记录
 
@@ -1134,3 +1139,6 @@ kubectl get events -n kube-system --field-selector source=kube-apiserver
 - 16-kube-proxy-deep-dive
 - 18-api-priority-fairness
 - 19-etcd-operations
+
+
+<!-- risk-assessed -->

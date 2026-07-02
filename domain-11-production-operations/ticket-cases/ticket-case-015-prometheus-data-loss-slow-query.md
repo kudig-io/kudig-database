@@ -57,6 +57,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Prometheus Pod 状态与资源使用
 kubectl get pod -n monitoring -l app=prometheus
 kubectl describe pod -n monitoring -l app=prometheus | grep -A 20 Events
@@ -112,7 +118,6 @@ kubectl get prometheusrules -n monitoring --no-headers | wc -l
 kubectl get servicemonitor -A --no-headers | wc -l
 kubectl get podmonitor -A --no-headers | wc -l
 ```
-
 ## 根因分析
 
 Prometheus Server 运行在单副本 StatefulSet 中，PVC 容量为 100Gi，当前已使用 96Gi。TSDB 日志中出现以下错误：
@@ -136,32 +141,33 @@ level=warn ts=... caller=wal.go:... msg="WAL truncation completed", duration=...
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pvc prometheus-data-prometheus-0 -n monitoring -p '{"spec":{"resources":{"requests":{"storage":"300Gi"}}}}'
 # 若存储类不支持在线扩容，需滚动重启 StatefulSet
 kubectl rollout restart statefulset/prometheus -n monitoring
 kubectl rollout status statefulset/prometheus -n monitoring --timeout=600s
 ```
-
 **第二步：调整 Prometheus 保留时间与压缩参数**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch prometheus prometheus -n monitoring --type='json' -p='[
   {"op": "replace", "path": "/spec/retention", "value": "10d"},
   {"op": "add", "path": "/spec/retentionSize", "value": "250GB"}
 ]'
 ```
-
 **第三步：识别并过滤高基数指标**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查询 top10 高基数指标
 kubectl exec -n monitoring prometheus-0 -- wget -qO- 'http://localhost:9090/api/v1/status/tsdb' | jq '.data.headStats'
 
@@ -182,13 +188,13 @@ spec:
       action: labeldrop
 EOF
 ```
-
 **第四步：提升 Prometheus 资源限制**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch prometheus prometheus -n monitoring --type='json' -p='[
   {"op": "replace", "path": "/spec/resources/limits/memory", "value": "16Gi"},
   {"op": "replace", "path": "/spec/resources/limits/cpu", "value": "8"},
@@ -196,13 +202,13 @@ kubectl patch prometheus prometheus -n monitoring --type='json' -p='[
   {"op": "replace", "path": "/spec/resources/requests/cpu", "value": "4"}
 ]'
 ```
-
 **第五步：启用 Thanos Sidecar 实现长期存储与查询分流（可选长期方案）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -n monitoring -f - <<EOF
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
@@ -216,13 +222,13 @@ spec:
       name: thanos-objstore-config
 EOF
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 扩容成功
 kubectl get pvc prometheus-data-prometheus-0 -n monitoring
 kubectl exec -n monitoring prometheus-0 -- df -h /prometheus
@@ -239,7 +245,6 @@ kubectl exec -n monitoring prometheus-0 -- wget -qO- 'http://localhost:9090/api/
 
 # 5. Grafana 大盘刷新后无断点
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，Prometheus 数据丢失与查询缓慢的根因是 **TSDB 存储空间不足，加上高基数指标导致索引膨胀**。当前 Prometheus PVC 100Gi 已使用 96Gi，compaction 因磁盘满失败，WAL 文件持续增长；同时部分业务指标带有 `user_id`、`request_id` 等无边界 label，查询时消耗大量内存与 CPU。我们已完成以下处置：
@@ -298,3 +303,6 @@ Prometheus 数据丢失往往并非 Prometheus 本身崩溃，而是存储或资
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - Observability
 - [[concepts/bp-observability.md|最佳实践：Observability]]
+
+
+<!-- risk-assessed -->

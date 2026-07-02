@@ -35,6 +35,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Troubleshoot Node Issues
@@ -43,12 +48,12 @@ prerequisites:
 
 ### Step 1: Check Node Status
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes
 kubectl describe node <node-name>
 kubectl get node <node-name> -o jsonpath='{.status.conditions}'
 ```
-
 Key conditions:
 - **Ready**: Node is healthy and accepting [[Pods|Pods]]
 - **MemoryPressure**: [[kubelet|kubelet]] will evict Pods
@@ -57,11 +62,11 @@ Key conditions:
 
 ### Step 2: Check kubelet
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl status kubelet
 journalctl -u kubelet --since "10 minutes ago"
 ```
-
 Common kubelet issues:
 - Certificate expiration (check `--tls-cert-file`)
 - API Server connectivity failure
@@ -70,15 +75,16 @@ Common kubelet issues:
 
 ### Step 3: Check Container Runtime
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl status containerd
 crictl ps    # Check running containers
 crictl images  # Check available images
 ```
-
 ### Step 4: Check Networking
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Verify CNI plugin is running
 kubectl get pods -n kube-system | grep <cni-name>
 
@@ -86,7 +92,6 @@ kubectl get pods -n kube-system | grep <cni-name>
 ping <other-node-ip>
 curl -k https://<apiserver-ip>:6443/healthz
 ```
-
 ### Step 5: Check Resources
 
 ```bash
@@ -119,13 +124,22 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -text -noout | 
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon <node-name>        # Mark unschedulable
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 # Fix the issue, then:
 kubectl uncordon <node-name>
 ```
-
 ## Related
 
 - [[entities/kubelet.md|kubelet]] — kubelet
@@ -140,3 +154,6 @@ kubectl uncordon <node-name>
 - [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[skills/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[skills/node-fta.md|Node 异常故障树分析]] — Cross-reference
+
+
+<!-- risk-assessed -->

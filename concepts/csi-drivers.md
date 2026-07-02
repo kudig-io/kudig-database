@@ -15,6 +15,11 @@ last_updated: 2026-05-24
 status: active
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CSI 驱动
@@ -86,13 +91,13 @@ Kubernetes 早期将 AWS EBS、GCE PD 等存储驱动直接编译在 kubelet 和
 ### 迁移注意事项
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CSI Migration 是否已启用
 kubectl get csinode <node-name> -o jsonpath='{.spec.drivers[*].name}'
 
 # 验证 PV 实际使用的驱动
 kubectl get pv <pv-name> -o jsonpath='{.spec.csi.driver}'
 ```
-
 ---
 
 ## 3. CSI 核心能力
@@ -343,7 +348,8 @@ ls -Z /var/lib/kubelet/pods/<pod-uid>/volumes/
 
 ### 7.1 PVC 停留在 Pending
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 事件
 kubectl describe pvc <pvc-name>
 
@@ -356,10 +362,10 @@ kubectl describe pvc <pvc-name>
 # 3. 检查 CSI Controller 日志
 kubectl logs -n kube-system deployment/ebs-csi-controller -c ebs-plugin
 ```
-
 ### 7.2 Pod 挂载卷失败（MountVolume）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CSI Node Driver 是否在目标节点运行
 kubectl get pods -n kube-system -l app=ebs-csi-node -o wide
 
@@ -375,10 +381,10 @@ kubectl get volumeattachment | grep <pv-name>
 #    - 设备路径冲突（/dev/sdX 命名冲突）
 #    - CSIDriver 对象的 attachRequired 配置错误
 ```
-
 ### 7.3 快照创建失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 snapshot-controller 和 CSI snapshotter sidecar 已部署
 kubectl get pods -n kube-system | grep snapshot
 
@@ -390,10 +396,10 @@ kubectl get volumesnapshot <name> -o yaml
 # 4. 检查 external-snapshotter 日志
 kubectl logs -n kube-system deployment/snapshot-controller
 ```
-
 ### 7.4 卷扩容卡住
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC conditions
 kubectl get pvc <pvc-name> -o yaml | grep -A5 conditions
 
@@ -407,10 +413,10 @@ kubectl get pvc <pvc-name> -o yaml | grep -A5 conditions
 # 4. 检查 CSI Controller 日志中的 resizer 侧车
 kubectl logs -n kube-system deploy/ebs-csi-controller -c csi-resizer
 ```
-
 ### 7.5 CSI Migration 导致的问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 in-tree PV 是否已迁移
 kubectl get pv <pv-name> -o jsonpath='{.spec}'
 
@@ -420,7 +426,6 @@ kubectl get pv <pv-name> -o jsonpath='{.spec}'
 # 3. 降级场景需注意：CSI Migration 启用后创建的 PV
 #    在降级版本中可能无法识别
 ```
-
 ---
 
 ## 8. 最佳实践
@@ -486,3 +491,6 @@ parameters:
 - [[concepts/cloud-native-storage-systems.md|cloud native storage systems]] — 云原生存储系统架构
 - [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化策略
 - [[concepts/storage-data-protection.md|storage data protection]] — 存储数据保护与灾备
+
+
+<!-- risk-assessed -->

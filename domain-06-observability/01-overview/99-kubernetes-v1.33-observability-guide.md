@@ -42,6 +42,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] v1.29-v1.33 可观测性新特性指南
@@ -166,14 +171,14 @@ tracing:
 
 ### 1.4 验证追踪数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Kubelet 是否导出追踪
 curl -s http://localhost:10248/healthz?verbose | grep tracing
 
 # 查看追踪端点配置
 kubectl get --raw /api/v1/nodes/NODE_NAME/proxy/configz | jq '.kubeletconfig.tracing'
 ```
-
 ### 1.5 追踪上下文传播
 
 ```yaml
@@ -349,7 +354,8 @@ featureGates:
 
 ### 4.3 查询命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询所有节点的 kubelet 日志
 kubectl node-logs --all-nodes --query="kubelet"
 
@@ -362,7 +368,6 @@ kubectl node-logs node-1 --query="kernel"
 # 查询容器运行时日志
 kubectl node-logs node-1 --service=containerd
 ```
-
 ### 4.4 RBAC 配置
 
 ```yaml
@@ -477,7 +482,8 @@ v1.29+ 优化了 Event API 的性能，支持更高效的流式传输。
 
 ### 6.2 Event 查询优化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 field-selector 高效筛选
 kubectl get events --field-selector reason=FailedScheduling
 
@@ -487,7 +493,6 @@ kubectl get events --sort-by='.lastTimestamp' | tail -50
 # 使用 watch 流式监控
 kubectl get events --watch --field-selector type=Warning
 ```
-
 ### 6.3 Event 持久化建议
 
 ```yaml
@@ -591,7 +596,8 @@ data:
 
 ### 7.3 版本特性启用检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # check-observability-features.sh
 
@@ -615,7 +621,6 @@ kubectl get --raw /api/v1/nodes/$(kubectl get nodes -o jsonpath='{.items[0].meta
 
 echo "=== 检查完成 ==="
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -658,3 +663,6 @@ echo "=== 检查完成 ==="
 - 99-java-observability-kubernetes-guide
 - FINAL-QUALITY-ASSESSMENT
 - QUALITY-REPORT
+
+
+<!-- risk-assessed -->

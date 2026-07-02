@@ -63,6 +63,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 27 - 镜像仓库故障排查 (Image Registry Troubleshooting)
@@ -85,6 +90,7 @@ cross_refs:
 ### 1.2 镜像仓库架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                   镜像仓库故障诊断架构                                        │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -135,7 +141,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 镜像拉取失败问题排查 (Image Pull Failure Troubleshooting) -->
@@ -143,7 +148,8 @@ cross_refs:
 
 ### 2.1 基础状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Pod状态检查 ==========
 # 查看镜像拉取失败的Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending -o jsonpath='{
@@ -188,13 +194,13 @@ kubectl get deployment <deployment-name> -n <namespace> -o jsonpath='{
     .spec.template.spec.containers[*].image
 }'
 ```
-
 ### 2.2 认证和权限问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 镜像仓库认证检查 ==========
 # 查看imagePullSecrets配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{
@@ -258,7 +264,6 @@ data:
   }' | base64)
 EOF
 ```
-
 ---
 
 <!-- chunk: 3. 网络连接问题排查 (Network Connectivity Issues) -->
@@ -266,7 +271,8 @@ EOF
 
 ### 3.1 网络连通性测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 基础网络测试 ==========
 # 测试到镜像仓库的网络连通性
 kubectl run network-test --image=busybox -n <namespace> -it --rm -- sh
@@ -326,14 +332,14 @@ kubectl get networkpolicy -n <namespace> -o jsonpath='{
     end
 }'
 ```
-
 ### 3.2 镜像拉取超时问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 超时配置优化 ==========
 # 调整kubelet镜像拉取超时设置
 cat <<EOF > kubelet-config-patch.yaml
@@ -435,7 +441,6 @@ spec:
     targetPort: 5000
 EOF
 ```
-
 ---
 
 <!-- chunk: 4. 镜像安全和合规问题 (Image Security and Compliance) -->
@@ -443,7 +448,8 @@ EOF
 
 ### 4.1 镜像安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 静态安全扫描 ==========
 # 使用Trivy扫描镜像
 trivy image <image-name>:<tag>
@@ -518,13 +524,13 @@ spec:
   minimumSeverity: "HIGH"
 EOF
 ```
-
 ### 4.2 镜像漏洞管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 漏洞监控告警 ==========
 # 配置漏洞扫描CronJob
 cat <<EOF | kubectl apply -f -
@@ -623,7 +629,6 @@ EOF
 
 chmod +x auto-vulnerability-fix.sh
 ```
-
 ---
 
 <!-- chunk: 5. 镜像仓库性能优化 (Image Registry Performance Optimization) -->
@@ -631,7 +636,8 @@ chmod +x auto-vulnerability-fix.sh
 
 ### 5.1 镜像拉取性能监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 性能指标收集 ==========
 # 监控镜像拉取时间
 cat <<'EOF' > image-pull-monitor.sh
@@ -719,10 +725,10 @@ EOF
 
 chmod +x image-size-analyzer.sh
 ```
-
 ### 5.2 镜像缓存和分发优化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 镜像缓存配置 ==========
 # 配置节点级镜像缓存
 cat <<EOF > node-image-cache.yaml
@@ -864,7 +870,6 @@ spec:
       port: 80
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -875,7 +880,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 镜像拉取监控配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -949,14 +955,14 @@ spec:
         summary: "Image registry authentication failures ({{ \$value }}/min)"
 EOF
 ```
-
 ### 6.2 镜像仓库健康检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 仓库健康检查脚本 ==========
 cat <<'EOF' > registry-health-check.sh
 #!/bin/bash
@@ -1060,7 +1066,6 @@ EOF
 
 chmod +x image-availability-check.sh
 ```
-
 ---
 
 ---
@@ -1090,3 +1095,6 @@ chmod +x image-availability-check.sh
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|26-dns-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/28-cluster-autoscaler-troubleshooting.md|28-cluster-autoscaler-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/29-cloud-provider-troubleshooting.md|29-cloud-provider-troubleshooting]]
+
+
+<!-- risk-assessed -->

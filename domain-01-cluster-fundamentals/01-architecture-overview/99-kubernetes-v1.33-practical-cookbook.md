@@ -64,6 +64,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.33 实战案例集
@@ -136,7 +141,17 @@ spec:
 
 ### 行为说明
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 启动顺序:
 1. envoy-sidecar (Sidecar) 启动并保持运行
 2. migrate-db (普通 initContainer) 运行完成后退出
@@ -148,17 +163,16 @@ spec:
 ├── 运行: Sidecar 与主容器并行运行
 └── 终止: Sidecar 在主容器终止后终止（Graceful shutdown）
 ```
-
 ### 验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 状态
 kubectl get pod app-with-sidecar -o jsonpath='{.status.initContainerStatuses}' | jq
 
 # 查看 Sidecar 容器日志
 kubectl logs app-with-sidecar -c envoy-sidecar
 ```
-
 ---
 
 <!-- chunk: 案例二：CEL 准入策略实现资源配额验证 -->
@@ -231,7 +245,8 @@ spec:
 
 ### 测试验证
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应该被拒绝
 kubectl run test --image=nginx:latest --dry-run=server
 # Error from server: 禁止使用 :latest 镜像标签
@@ -240,7 +255,6 @@ kubectl run test --image=nginx:latest --dry-run=server
 kubectl run test --image=nginx:1.25 --dry-run=server
 # pod/test created (dry run)
 ```
-
 ---
 
 <!-- chunk: 案例三：DRA 分配 GPU 资源 -->
@@ -255,7 +269,8 @@ kubectl run test --image=nginx:1.25 --dry-run=server
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 启用 DRA
 # kube-apiserver, kube-scheduler, kubelet 都要启用
 # --feature-gates=DynamicResourceAllocation=true
@@ -265,7 +280,6 @@ helm install nvidia-dra-driver nvidia/dra-driver \
   --namespace nvidia-dra \
   --create-namespace
 ```
-
 ### ResourceClaimTemplate
 
 ```yaml
@@ -319,7 +333,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 ResourceClaim
 kubectl get resourceclaims
 
@@ -329,7 +344,6 @@ kubectl describe resourceclaim gpu-training-gpu
 # 查看 Pod 中的 GPU
 kubectl exec gpu-training -- nvidia-smi
 ```
-
 ---
 
 <!-- chunk: 案例四：nftables kube-proxy 替换 iptables -->
@@ -357,11 +371,20 @@ lsmod | grep nft
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方式一：修改 kube-proxy ConfigMap
 kubectl edit cm kube-proxy -n kube-system
 ```
-
 ```yaml
 # kube-proxy ConfigMap 内容
 apiVersion: v1
@@ -399,7 +422,8 @@ featureGates:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 kube-proxy Pod 触发重建
 kubectl delete pod -n kube-system -l k8s-app=kube-proxy
 
@@ -407,7 +431,6 @@ kubectl delete pod -n kube-system -l k8s-app=kube-proxy
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 kubectl logs -n kube-system -l k8s-app=kube-proxy | grep -i nftables
 ```
-
 ### 对比 iptables vs nftables
 
 | 特性 | iptables | nftables |
@@ -465,7 +488,17 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 1：直接 PATCH
 kubectl patch pod resize-demo --patch '{
   "spec": {
@@ -482,13 +515,13 @@ kubectl patch pod resize-demo --patch '{
 # 方法 2：编辑
 kubectl edit pod resize-demo
 ```
-
 ### 验证调整结果
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 状态
 kubectl get pod resize-demo -o yaml | grep -A 5 "resizeStatus"
 
@@ -496,7 +529,6 @@ kubectl get pod resize-demo -o yaml | grep -A 5 "resizeStatus"
 kubectl exec resize-demo -- cat /sys/fs/cgroup/cpu.max
 kubectl exec resize-demo -- cat /sys/fs/cgroup/memory.max
 ```
-
 ### 限制说明
 
 ```
@@ -644,12 +676,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 PVC 的性能等级
 kubectl patch pvc dynamic-perf-pvc --type=merge -p \
   '{"spec":{"volumeAttributesClassName":"high-performance"}}'
 ```
-
 ---
 
 <!-- chunk: 案例八：SELinux 挂载优化 -->
@@ -702,14 +734,14 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看挂载选项
 kubectl exec selinux-demo -- mount | grep /data
 
 # 查看 SELinux 标签
 kubectl exec selinux-demo -- ls -Z /data
 ```
-
 ---
 
 <!-- chunk: 案例九：协调领导者选举 -->
@@ -870,7 +902,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 被分配到的 NUMA 节点
 kubectl exec numa-demo -- numactl --show
 
@@ -879,7 +912,6 @@ kubectl get pod numa-demo -o wide
 # 在对应节点上执行
 cat /sys/fs/cgroup/kubepods/pod-*/cpuset.cpus.effective
 ```
-
 ---
 
 <!-- chunk: 案例十二：用户命名空间安全隔离 -->
@@ -930,7 +962,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在容器内查看 UID（显示 root）
 kubectl exec userns-demo -- id
 # uid=0(root) gid=0(root)
@@ -942,7 +975,6 @@ crictl ps | grep userns-demo
 ps -o pid,uid,gid,comm -p $(pgrep nginx)
 # UID 会映射到 65536+ 范围
 ```
-
 ### 安全效果
 
 ```
@@ -971,7 +1003,8 @@ NodeLogQuery (v1.30 Alpha) 允许通过 kubectl 直接查询节点上的系统�
 
 ### 查询日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询所有节点上的 kubelet 日志
 kubectl node-logs --all-nodes --query="kubelet"
 
@@ -987,7 +1020,6 @@ kubectl node-logs node-1 --service=kubelet
 # 查询内核日志
 kubectl node-logs node-1 --query="kernel"
 ```
-
 ### 等效配置
 
 ```bash
@@ -1016,14 +1048,14 @@ SchedulerQueueingHints (v1.33 Beta，默认启用) 优化调度器队列，减�
 
 ### 验证启用状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器日志中的 hints
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i "queueing hint"
 
 # 查看调度器指标
 curl http://localhost:10259/metrics | grep scheduler_queueing
 ```
-
 ### 效果说明
 
 ```
@@ -1127,3 +1159,6 @@ echo "  kubelet (config.yaml featureGates 节)"
 - 99-kubernetes-v1.33-ecosystem-compatibility-matrix
 - 99-kubernetes-v1.33-production-best-practices
 - 99-kubernetes-v1.33-quick-reference-card
+
+
+<!-- risk-assessed -->

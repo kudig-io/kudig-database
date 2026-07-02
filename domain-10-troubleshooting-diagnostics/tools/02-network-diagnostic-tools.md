@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 网络诊断工具实战指南
@@ -79,7 +84,8 @@ authors:
 
 ### 1.2 常用检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 与 Endpoint
 kubectl get svc -n production
 kubectl get endpoints -n production
@@ -90,37 +96,36 @@ kubectl get pod -n production -o wide
 # 查看 NetworkPolicy
 kubectl get networkpolicies -n production
 ```
-
 ---
 
 ## 2. ping / traceroute
 
 ### 2.1 Pod 内 ping 测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启动临时 Pod 测试网络连通性
 kubectl run ping-test --rm -it --image=busybox --restart=Never -- \
   ping -c 4 <target-ip>
 ```
-
 ### 2.2 traceroute 路径追踪
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run trace-test --rm -it --image=nicolaka/netshoot --restart=Never -- \
   traceroute <target-ip>
 ```
-
 ---
 
 ## 3. netshoot 全能诊断容器
 
 ### 3.1 进入 netshoot 容器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 以 netshoot 镜像启动调试 Pod
 kubectl run netshoot --rm -it --image=nicolaka/netshoot --restart=Never -- bash
 ```
-
 ### 3.2 netshoot 内置工具
 
 | 工具 | 用途 |
@@ -136,32 +141,32 @@ kubectl run netshoot --rm -it --image=nicolaka/netshoot --restart=Never -- bash
 
 ### 3.3 测试 Service 连通性
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 netshoot 中测试 Service
 kubectl run netshoot --rm -it --image=nicolaka/netshoot --restart=Never -- \
   curl -v http://order-service.production.svc.cluster.local:8080/health
 ```
-
 ---
 
 ## 4. ksniff 抓包
 
 ### 4.1 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install sniff
 ```
-
 ### 4.2 抓取 Pod 流量
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 抓取指定 Pod 的所有流量
 kubectl sniff <pod-name> -n <namespace>
 
 # 抓取指定容器与端口的流量
 kubectl sniff <pod-name> -n <namespace> -c <container> -p -o /tmp/capture.pcap
 ```
-
 ### 4.3 分析抓包文件
 
 ```bash
@@ -217,17 +222,18 @@ cilium endpoint get <endpoint-id>
 
 ### 6.1 CoreDNS 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CoreDNS Pod
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
 # 查看 CoreDNS 日志
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100
 ```
-
 ### 6.2 dig 测试 DNS
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试集群内部 DNS
 kubectl run dig-test --rm -it --image=nicolaka/netshoot --restart=Never -- \
   dig order-service.production.svc.cluster.local
@@ -236,14 +242,14 @@ kubectl run dig-test --rm -it --image=nicolaka/netshoot --restart=Never -- \
 kubectl run dig-test --rm -it --image=nicolaka/netshoot --restart=Never -- \
   dig @<core-dns-ip> example.com
 ```
-
 ---
 
 ## 7. 典型场景排查
 
 ### 7.1 Service 无法访问
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Service 与 Endpoint
 kubectl get svc, endpoints -n production
 
@@ -260,10 +266,10 @@ kubectl run netshoot --rm -it --image=nicolaka/netshoot --restart=Never -n produ
 # 5. 抓包分析
 kubectl sniff order-service-xxx -n production -o /tmp/service.pcap
 ```
-
 ### 7.2 Pod 跨节点不通
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CNI Pod
 kubectl get pods -n kube-system -l k8s-app=calico-node
 
@@ -273,7 +279,6 @@ kubectl node-shell <node-name> -- ip route
 # 3. 使用 cilium connectivity test
 cilium connectivity test
 ```
-
 ---
 
 ## 8. 最佳实践检查清单
@@ -332,7 +337,8 @@ cilium connectivity test
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Service 后端
 kubectl get endpoints <svc> -n production
 
@@ -345,7 +351,6 @@ kubectl debug node/<node-name> -it --image=nicolaka/netshoot -- ip route
 # Pod 间连通性测试
 kubectl run tmp --rm -i --tty --image=nicolaka/netshoot --restart=Never -- /bin/bash
 ```
-
 ## 典型工单场景与处理
 
 **场景**：Pod 无法访问外部 HTTPS 服务。
@@ -403,7 +408,8 @@ Pod 无法访问外部
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Terway 分配的 Pod IP
 kubectl get pod <pod> -o jsonpath='{.status.podIP}'
 
@@ -413,7 +419,6 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli show
 # 检查安全组规则
 aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id>
 ```
-
 ## 网络诊断实战：Service 不可达
 
 以 `production/order-service` 无法访问为例：
@@ -421,7 +426,8 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Service 与 Endpoint
 kubectl get svc order-service -n production
 kubectl get endpoints order-service -n production
@@ -439,7 +445,6 @@ kubectl get networkpolicies -n production
 # 5. 必要时抓包
 kubectl sniff -n production <pod> -f "tcp port 80" -o /tmp/order-service.pcap
 ```
-
 ### 网络诊断工具选型
 
 | 工具 | 适用场景 |
@@ -478,3 +483,6 @@ tshark -r /tmp/order-service.pcap -q -z io,stat,1
 
 - [[domain-10-troubleshooting-diagnostics/tools/01-kubectl-plugins-guide.md|kubectl 插件指南]]
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
+
+
+<!-- risk-assessed -->

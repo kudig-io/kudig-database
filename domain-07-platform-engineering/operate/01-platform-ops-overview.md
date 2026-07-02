@@ -50,6 +50,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -252,13 +257,13 @@ observability_stack:
 
 ### 底层基础设施层
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 物理服务器/虚拟机 → 网络 → 存储 → 操作系统
 ├── IaaS资源管理 (AWS/GCP/Azure)
 ├── 网络虚拟化 (CNI插件)
 ├── 存储抽象 (CSI驱动)
 └── OS优化 (内核参数调优)
 ```
-
 ### 容器编排层
 ```
 容器运行时 → Kubernetes核心组件 → 网络插件 → 存储插件
@@ -407,3 +412,6 @@ CI/CD → 监控告警 → 日志收集 → 服务网格
 - 99-kubernetes-v1.33-platform-ops-guide
 - 02-cluster-lifecycle-management
 - 03-capacity-planning-resource-assessment
+
+
+<!-- risk-assessed -->

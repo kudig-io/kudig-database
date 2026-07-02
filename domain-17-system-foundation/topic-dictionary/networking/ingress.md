@@ -29,6 +29,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Ingress
@@ -202,7 +207,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Ingress 列表和 ADDRESS
 kubectl get ingress -n production
 
@@ -219,7 +225,6 @@ curl -v -H "Host: app.example.com" https://<ingress-ip>/api
 # 检查后端 Service 端点
 kubectl get endpointslices -l kubernetes.io/service-name=api-server -n production
 ```
-
 ## 交叉引用
 
 - [[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]](ingress-controllers.md) — 控制器选型和 IngressClass 配置
@@ -236,3 +241,6 @@ kubectl get endpointslices -l kubernetes.io/service-name=api-server -n productio
 - [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
 - [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
 - [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+
+
+<!-- risk-assessed -->

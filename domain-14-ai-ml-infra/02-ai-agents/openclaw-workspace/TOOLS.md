@@ -42,6 +42,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 工具授权注册表
@@ -134,6 +139,7 @@ k8s_versions:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断场景的工具调用顺序:
 
 Level 1: 宏观状态（必做）
@@ -153,7 +159,6 @@ Level 3: 监控数据（深度分析）
 Level 4: 写操作（仅在用户确认后）
   kubectl apply/scale/rollout
 ```
-
 ## 3. 参数规范
 
 ### 3.1 kubectl 通用参数
@@ -215,7 +220,17 @@ sum(increase(kube_pod_container_status_restarts_total{namespace="<ns>"}[1h])) by
 
 ### 4.1 命令黑名单
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 绝对禁止的命令模式（正则匹配）:
 
 kubectl\s+delete\s+(namespace|ns|node|pv)\b
@@ -229,7 +244,6 @@ kubectl\s+create\s+clusterrolebinding
 helm\s+uninstall\b
 etcdctl\s+del\b
 ```
-
 ### 4.2 Namespace 白名单模式
 
 ```
@@ -250,6 +264,7 @@ etcdctl\s+del\b
 ### 4.3 输出脱敏规则
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 自动脱敏的内容:
 
 Secret 类型:
@@ -262,12 +277,12 @@ Secret 类型:
 ConfigMap:
   包含连接字符串、密码、API Key 的值 → 部分脱敏（保留前 4 位）
 ```
-
 ## 5. 工具组合模板
 
 ### 5.1 Pod Pending 诊断工具链
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认状态
 kubectl get pod <pod> -n <ns> -o wide
 
@@ -282,10 +297,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,CPU:.status.allocatable.
 kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.nodeSelector}'
 kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.affinity}'
 ```
-
 ### 5.2 Node NotReady 诊断工具链
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认节点状态
 kubectl get nodes -o wide
 kubectl describe node <node> | grep -A 10 "Conditions:"
@@ -300,10 +315,10 @@ kubectl describe node <node> | grep -A 5 "Allocated resources:"
 # Step 4: 查看节点事件
 kubectl get events --field-selector involvedObject.name=<node> --sort-by=.lastTimestamp
 ```
-
 ### 5.3 OOM 诊断工具链
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认 OOM
 kubectl describe pod <pod> -n <ns> | grep -A 5 "Last State:"
 kubectl get events -n <ns> --field-selector reason=OOMKilling
@@ -317,7 +332,6 @@ kubectl top pod <pod> -n <ns> --containers
 # Step 4: 查看历史趋势（Prometheus）
 # sum(container_memory_working_set_bytes{namespace="<ns>", pod="<pod>"}) by (container)
 ```
-
 ## 6. MCP 工具集成
 
 ### 6.1 MCP Server 配置
@@ -385,3 +399,5 @@ toolkit.register_agent_skill("openclaw-workspace")
 - AGENTS
 
 ```
+
+<!-- risk-assessed -->

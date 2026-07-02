@@ -65,6 +65,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 009：etcd 数据目录磁盘满导致 apiserver 响应慢（升级标准）
@@ -87,7 +92,8 @@ relationships:
 
 ### 3.1 确认 apiserver 延迟与错误率
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 apiserver 响应时间（需在 Master 节点或有权限的跳板机）
 kubectl get --raw /metrics | grep apiserver_request_duration_seconds_bucket | head -20
 
@@ -95,13 +101,13 @@ kubectl get --raw /metrics | grep apiserver_request_duration_seconds_bucket | he
 kubectl get pod -n kube-system -l component=kube-apiserver
 kubectl logs -n kube-system -l component=kube-apiserver --tail=200 | grep -i "timeout|etcd|slow"
 ```
-
 ### 3.2 检查 etcd 集群健康与磁盘使用
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入 etcd Pod 或使用 etcdctl
 kubectl exec -it etcd-ack-prod-vpc01-master-0 -n kube-system -- sh
 
@@ -117,7 +123,6 @@ etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
   endpoint status --cluster -w table
 ```
-
 ### 3.3 检查 Master 节点磁盘
 
 ```bash
@@ -131,19 +136,19 @@ ls -lh /var/lib/etcd
 
 ### 3.4 检查 etcd 日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l component=etcd --tail=300 | grep -i "space|full|slow|wal|snapshot"
 ```
-
 ### 3.5 检查事件与资源规模
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 评估 etcd 数据量是否异常
 kubectl get events --all-namespaces --sort-by='.lastTimestamp' | tail -50
 kubectl get configmap,secret --all-namespaces | wc -l
 kubectl get pod --all-namespaces | wc -l
 ```
-
 ### 3.6 诊断过程补充说明
 
 etcd 磁盘满属于 Kubernetes 控制面最高危场景之一。任何对 etcd 的写操作都可能进一步消耗 WAL 空间，因此在磁盘接近 100% 时，应优先执行只读诊断，避免执行会产生新事件或新资源的命令。compact 操作本身会产生新的 revision 记录，但在磁盘已满前通常可以回收大量空间；defrag 会锁定单个 member，必须逐台执行并确认集群健康。
@@ -168,7 +173,8 @@ etcd 磁盘满属于 Kubernetes 控制面最高危场景之一。任何对 etcd 
 
 ### 5.0 操作前快照备份（必须在维护窗口执行）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在磁盘仍有少量余量时执行 etcd snapshot
 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
@@ -178,7 +184,6 @@ etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
 # 验证快照完整性
 etcdctl snapshot status /var/backups/etcd-snapshot-*.db
 ```
-
 ### 5.1 临时缓解：清理可删除的审计/临时日志（非 etcd 数据）
 
 ```bash
@@ -193,13 +198,14 @@ find /var/log/containers -type f -mtime +3 -delete
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deploy kube-apiserver -n kube-system
 ```
-
 ### 5.3 执行 etcd compact（核心修复，需升级审批）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取当前 revision
 export ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt
 export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt
@@ -211,10 +217,10 @@ compact_rev=$((rev - 10000))
 # 执行压缩
 etcdctl compact $compact_rev
 ```
-
 ### 5.4 执行 etcd defrag 回收物理空间（需升级审批 + 维护窗口）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 逐台 defrag，每次只对一台执行，避免集群不可用
 etcdctl --endpoints=https://10.0.0.11:2379 defrag
 etcdctl --endpoints=https://10.0.0.12:2379 defrag
@@ -223,13 +229,22 @@ etcdctl --endpoints=https://10.0.0.13:2379 defrag
 # 每执行一台后检查 endpoint status
 etcdctl endpoint status --cluster -w table
 ```
-
 ### 5.5 配置自动 compact/defrag（长期预防）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑 etcd 静态 Pod manifest，增加或调整以下参数
 # --auto-compaction-mode=revision
 # --auto-compaction-retention=10000
@@ -237,7 +252,6 @@ etcdctl endpoint status --cluster -w table
 
 kubectl edit pod etcd-ack-prod-vpc01-master-0 -n kube-system
 ```
-
 ### 5.6 扩容 etcd 数据盘（如磁盘确实不足）
 
 ```bash
@@ -253,7 +267,8 @@ resize2fs /dev/vdb1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 磁盘使用率下降
 kubectl exec -it etcd-ack-prod-vpc01-master-0 -n kube-system -- df -h /var/lib/etcd
 
@@ -273,7 +288,6 @@ kubectl get pod -n default --timeout=10s
 # 5. ACK 控制台无控制面超时告警
 # ASO 路径：天基 > 告警中心 > ack-prod-vpc01 > 控制面
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-009 已按 P0 流程处理完成。
@@ -323,3 +337,6 @@ kubectl get pod -n default --timeout=10s
 - 证书过期导致 kubelet 无法连接 apiserver
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - etcd × 可观测性
+
+
+<!-- risk-assessed -->

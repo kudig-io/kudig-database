@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[containerd|containerd]] v1.1 Release Notes
@@ -108,3 +113,6 @@ Previous release can be found at [v1.1.7](https://github.com/containerd/containe
 * **github.com/containerd/cri**          f8171b4530bed8992973cc4a2f24efe53b821d53 -> f213a05fa6700e49f77468fcfd5af10788565eee
 * **github.com/opencontainers/runc**     029124da7af7360afa781a0234d1b083550f797c -> 3e425f80a8c931f88e6d94a8c831b9d5aa481657
 * **github.com/opencontainers/selinux**  v1.2.1 -> v1.2.2
+
+
+<!-- risk-assessed -->

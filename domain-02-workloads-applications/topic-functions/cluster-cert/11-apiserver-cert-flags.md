@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: API Server 证书相关启动参数汇总
@@ -246,6 +251,7 @@ kube-apiserver 是 Kubernetes 的核心组件，所有与证书相关的启动�
 API Server 同时使用多个 CA 证书，形成独立的信任域：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                     ┌──────────────────┐
                     │   API Server     │
                     │                  │
@@ -281,7 +287,6 @@ API Server 同时使用多个 CA 证书，形成独立的信任域：
                    │  cluster  │
                    └───────────┘
 ```
-
 ### 参数验证检查脚本
 
 ```bash
@@ -428,7 +433,8 @@ spec:
 
 ### 常见配置错误排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 错误: client-ca-file 指向错误的 CA
 # 现象: kubectl 返回 Unauthorized
 openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -subject
@@ -445,7 +451,6 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 #     DNS:master-1, DNS:kubernetes, DNS:kubernetes.default, ...
 #     IP Address:192.168.1.10, IP Address:10.96.0.1, IP Address:127.0.0.1
 ```
-
 ## 常见错误
 
 | 错误配置 | 现象 | 修复 |
@@ -474,3 +479,6 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
+
+
+<!-- risk-assessed -->

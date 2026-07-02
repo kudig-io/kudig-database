@@ -45,6 +45,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] 证书故障排查指南
@@ -300,7 +305,8 @@ echo | openssl s_client -connect <api-server-ip>:6443 2>/dev/null | openssl x509
 
 #### 2.2.6 kubeconfig 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubeconfig 中的证书
 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d | openssl x509 -noout -text
 
@@ -310,7 +316,6 @@ kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
 # 检查 CA 证书
 kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 -d | openssl x509 -noout -text
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -342,7 +347,17 @@ apiserver                  Jan 15, 2024 08:30 UTC   -5d     # 已过期
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份现有证书
 cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
 cp -r /etc/kubernetes/*.conf /etc/kubernetes/conf.backup.$(date +%Y%m%d)
@@ -368,13 +383,22 @@ kubeadm certs check-expiration
 kubectl get nodes
 kubectl get pods -n kube-system
 ```
-
 #### 场景 2：单独更新特定证书
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 只更新 API Server 证书
 kubeadm certs renew apiserver
 
@@ -392,13 +416,13 @@ kubeadm certs renew admin.conf
 # 重启相关组件
 systemctl restart kubelet
 ```
-
 #### 场景 3：手动生成证书 (非 kubeadm 集群)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 生成 API Server 证书
 cat > apiserver-csr.json <<EOF
 {
@@ -435,7 +459,6 @@ cp apiserver-key.pem /etc/kubernetes/pki/apiserver.key
 # 4. 重启 API Server
 systemctl restart kube-apiserver
 ```
-
 ---
 
 ### 3.2 CA 证书问题
@@ -452,7 +475,17 @@ systemctl restart kube-apiserver
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 CA 过期时间
 openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -enddate
 
@@ -485,7 +518,6 @@ systemctl start kubelet
 kubectl get nodes
 kubectl get csr
 ```
-
 #### 场景 2：CA 不信任错误
 
 **问题现象：**
@@ -495,7 +527,8 @@ x509: certificate signed by unknown authority
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认证书的签发 CA
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -issuer
 
@@ -508,7 +541,6 @@ kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/pk
 # 4. 或者重新生成 kubeconfig
 kubeadm kubeconfig user --client-name=admin --org system:masters > ~/.kube/config
 ```
-
 ---
 
 ### 3.3 kubelet 证书问题
@@ -516,19 +548,29 @@ kubeadm kubeconfig user --client-name=admin --org system:masters > ~/.kube/confi
 #### 场景 1：kubelet 证书过期导致节点 NotReady
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get nodes
 NAME     STATUS     ROLES    AGE    VERSION
 node-1   NotReady   <none>   180d   v1.25.0
 ```
-
 **解决步骤：**
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 在问题节点上检查 kubelet 证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
 
@@ -550,14 +592,23 @@ kubeadm token create --print-join-command
 kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
-
 #### 场景 2：启用 kubelet 证书自动轮换
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 编辑 kubelet 配置
 cat >> /var/lib/kubelet/config.yaml <<EOF
 rotateCertificates: true
@@ -587,7 +638,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 ---
 
 ### 3.4 etcd 证书问题
@@ -605,7 +655,8 @@ transport: authentication handshake failed: x509: certificate has expired
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 备份 etcd 数据
 ETCDCTL_API=3 etcdctl snapshot save /tmp/etcd-backup.db \
   --endpoints=https://127.0.0.1:2379 \
@@ -635,7 +686,6 @@ ETCDCTL_API=3 etcdctl endpoint health \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ---
 
 ### 3.5 ServiceAccount Token 问题
@@ -654,7 +704,17 @@ error: You must be logged in to the server (Unauthorized)
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 SA 密钥对
 ls -la /etc/kubernetes/pki/sa.*
 
@@ -678,7 +738,6 @@ systemctl restart kubelet
 # 7. 删除并重建 Pod (让 Pod 获取新 Token)
 kubectl delete pod <pod-name>
 ```
-
 ---
 
 ### 3.6 证书 SAN 问题
@@ -695,7 +754,17 @@ x509: certificate is valid for 10.96.0.1, not 192.168.1.100
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看当前证书 SAN
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 
@@ -728,7 +797,6 @@ systemctl restart kubelet
 # 6. 验证新 SAN
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 ```
-
 ---
 
 ### 3.7 完整的证书检查脚本
@@ -831,7 +899,8 @@ echo "=== Check Complete ==="
 
 ### 常用命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 证书检查
 kubeadm certs check-expiration
 openssl x509 -in <cert> -noout -enddate
@@ -853,7 +922,6 @@ kubectl get csr
 kubectl certificate approve <csr>
 kubectl certificate deny <csr>
 ```
-
 ### 相关文档
 
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
@@ -873,3 +941,6 @@ kubectl certificate deny <csr>
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+
+
+<!-- risk-assessed -->

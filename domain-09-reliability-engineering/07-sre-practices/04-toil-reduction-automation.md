@@ -32,6 +32,11 @@ prerequisites:
 - sre-practices
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Toil 削减与自动化
@@ -114,7 +119,8 @@ Toil 占比 = (Toil 工单数 / 总工单数) × 100%
 
 ### 系统扫描法
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 扫描过去 30 天的告警，识别高频重复问题
 kubectl logs -n monitoring alertmanager-xxx | \
   grep " firing" | \
@@ -127,7 +133,6 @@ last | grep "$(date +%b)" | awk '{print $1, $3}' | sort | uniq -c | sort -rn
 # 扫描 CronJob 手动执行记录
 kubectl get events --all-namespaces | grep "manual" | wc -l
 ```
-
 ### Toil 热力图
 
 ```
@@ -479,7 +484,8 @@ spec:
 
 **K8s 内部证书轮换**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-certs-auto-renew.sh
 # kubeadm 集群证书自动轮换
@@ -520,7 +526,6 @@ if ! check_certs; then
     renew_certs
 fi
 ```
-
 **证书监控告警**:
 
 ```yaml
@@ -633,7 +638,8 @@ spec:
 
 **etcd 自动备份脚本**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-autobackup.sh
 
@@ -678,7 +684,6 @@ aws s3 ls $S3_BUCKET/ | awk '{print $4}' | sort | head -n -$RETENTION_DAYS | \
 
 echo "✅ 备份完成: $BACKUP_FILE"
 ```
-
 **备份验证自动化 (备份恢复测试)**:
 
 ```yaml
@@ -1232,3 +1237,6 @@ Level 5 - 自优化 (Self-Optimizing)
 ## 相关
 
 - domain-07-platform-engineering/02-platform-ops/01-platform-capabilities-map
+
+
+<!-- risk-assessed -->

@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 企业级多云治理与成本优化深度实践
@@ -908,7 +913,8 @@ if __name__ == '__main__':
 
 ## 资源标签合规检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -973,7 +979,6 @@ check_rds_tags
 
 echo -e "\n=== 标签合规检查完成 ==="
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 治理最佳实践
@@ -1041,3 +1046,6 @@ echo -e "\n=== 标签合规检查完成 ==="
 - 02-azure-aks-enterprise-multicloud
 - 04-google-gke-enterprise-multicloud
 - 05-ibm-cloud-kubernetes-service-enterprise
+
+
+<!-- risk-assessed -->

@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 trigger_keywords:
@@ -53,7 +58,8 @@ trigger_keywords:
 
 ### 1.1 工具安装清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl - Kubernetes CLI
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
@@ -73,10 +79,10 @@ kubectl krew install switch
 sudo apt-get install -y jq  # Ubuntu
 brew install jq              # macOS
 ```
-
 ### 1.2 配置 kubeconfig
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取集群 kubeconfig（联系组长提供）
 mkdir -p ~/.kube
 cp /path/to/cluster-config ~/.kube/config
@@ -90,14 +96,14 @@ kubectl get nodes
 kubectl ctx production
 kubectl ctx staging
 ```
-
 ---
 
 ## 2. 集群概览
 
 ### 2.1 快速了解集群状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群基本信息
 kubectl cluster-info
 kubectl version --short
@@ -111,7 +117,6 @@ kubectl get pods -n kube-system
 # 查看所有命名空间
 kubectl get namespaces
 ```
-
 ### 2.2 理解集群架构
 
 | 组件 | 查看命令 | 说明 |
@@ -144,7 +149,8 @@ kubectl get namespaces
 
 ### 3.2 验证基本操作权限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 测试常用权限（应该全部返回 allowed）
 kubectl auth can-i get pods --namespace=default
 kubectl auth can-i create pods --namespace=default
@@ -154,7 +160,6 @@ kubectl auth can-i get services --namespace=kube-system
 
 # 如果有 forbidden，联系组长补充权限
 ```
-
 ---
 
 ## 4. Day 1 自检清单
@@ -209,7 +214,8 @@ kubectl auth can-i get services --namespace=kube-system
 ## 6. 常见问题
 
 ### Q: kubectl 连接超时
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubeconfig 配置
 kubectl config view
 
@@ -219,19 +225,18 @@ grep server ~/.kube/config
 # 测试 API Server 连通性
 curl -sk https://<api-server-ip>:6443/healthz
 ```
-
 ### Q: 没有集群访问权限
 - 联系组长/导师提供 kubeconfig
 - 确认 IAM 角色配置正确
 
 ### Q: 权限不足（Forbidden）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前用户
 kubectl auth whoami
 
 # 联系组长补充 RBAC 权限
 ```
-
 ---
 
 ```yaml
@@ -271,3 +276,6 @@ tags: [onboarding, day-1, setup, new-engineer, quick-start, k8s-1.28-1.33]
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

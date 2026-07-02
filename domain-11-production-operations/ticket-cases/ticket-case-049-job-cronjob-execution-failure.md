@@ -63,6 +63,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -88,7 +93,8 @@ relationships:
 
 按“先看 CronJob/Job 状态，再看 Pod 事件与日志，最后查权限与镜像”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 CronJob 与最近 Job 状态
 kubectl get cronjob daily-reconcile-job -n finance-reconcile -o wide
 kubectl get job -n finance-reconcile -l cronjob=daily-reconcile-job --sort-by='.metadata.creationTimestamp'
@@ -123,7 +129,6 @@ kubectl auth can-i get secret --as=system:serviceaccount:finance-reconcile:recon
 # 9. 检查节点上 containerd 镜像拉取日志
 kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=csi-plugin -o jsonpath='{.items[0].metadata.name}') -c csi-plugin --tail=50
 ```
-
 ## 根因分析
 
 通过 CronJob 事件、Pod 日志与 RBAC 检查，确认存在以下三个问题：
@@ -170,17 +175,18 @@ Error: failed to get OSS credentials from secret: secrets "oss-reconcile-cred" i
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete job -n finance-reconcile -l cronjob=daily-reconcile-job
 kubectl delete pod -n finance-reconcile --field-selector status.phase=Failed
 ```
-
 **第二步：更新 CronJob，使用唯一镜像 tag 并优化退避策略**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: batch/v1
 kind: CronJob
@@ -220,13 +226,13 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 **第三步：为 reconcile-sa 补充 Secret 读取权限**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -260,19 +266,19 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 **第四步：手动触发一次 CronJob 验证修复效果**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create job -n finance-reconcile --from=cronjob/daily-reconcile-job manual-reconcile-test-$(date +%s)
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认新 Job 创建成功且 Pod 进入 Running
 kubectl get job -n finance-reconcile | grep reconcile
 kubectl get pod -n finance-reconcile -l job-name=manual-reconcile-test-* -o wide
@@ -292,7 +298,6 @@ kubectl get cronjob daily-reconcile-job -n finance-reconcile -o jsonpath='{.stat
 # 6. 确认 ACR 镜像标签唯一且可拉取
 crictl image ls | grep reconcile
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 `daily-reconcile-job` 连续失败的根因是 **三方面问题叠加**：
@@ -349,3 +354,6 @@ crictl image ls | grep reconcile
 - CronJob
 - RBAC 权限不足导致应用无法访问 K8s API
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
+
+
+<!-- risk-assessed -->

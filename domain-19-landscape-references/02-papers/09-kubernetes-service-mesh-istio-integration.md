@@ -63,6 +63,11 @@ cross_refs:
   label: '故障树: service-mesh-istio'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 服务网格深度实践与Istio集成 ([[Service|Service]]Service Mesh）|Service Mesh]] Deep Practice and [[Istio|Istio]] Integration)
@@ -878,7 +883,8 @@ spec:
 
 ## 7.1 服务网格诊断工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # istio-troubleshooting.sh
 
@@ -925,7 +931,6 @@ kubectl get virtualservices.networking.istio.io --all-namespaces
 
 echo "=== 诊断完成 ==="
 ```
-
 ## 7.2 流量调试
 
 ```yaml
@@ -1508,3 +1513,6 @@ Istio性能基准测试(2025年发布):
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+
+<!-- risk-assessed -->

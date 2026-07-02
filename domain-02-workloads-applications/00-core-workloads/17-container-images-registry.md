@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 51 - 容器镜像管理与仓库 (Container Images & Registry)
@@ -71,6 +76,7 @@ cross_refs:
 ## 容器镜像生态架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        容器镜像全生命周期管理                                         │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -138,7 +144,6 @@ cross_refs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 镜像命名规范与最佳实践 -->
 ## 镜像命名规范与最佳实践
 
@@ -236,7 +241,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==================== 命令行创建 ====================
 
 # 基础创建
@@ -286,7 +292,6 @@ stringData:
     }
 EOF
 ```
-
 ### 2. ServiceAccount 关联 (推荐)
 
 ```yaml
@@ -323,7 +328,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为命名空间设置默认 imagePullSecrets
 kubectl patch serviceaccount default \
   -n production \
@@ -332,7 +338,6 @@ kubectl patch serviceaccount default \
 # 验证配置
 kubectl get serviceaccount default -n production -o yaml
 ```
-
 <!-- chunk: 多架构镜像 (Multi-arch Images) -->
 ## 多架构镜像 (Multi-arch Images)
 
@@ -348,7 +353,8 @@ kubectl get serviceaccount default -n production -o yaml
 
 ### 多架构镜像构建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== Docker Buildx ====================
 
 # 创建多平台 builder
@@ -387,7 +393,6 @@ docker manifest push registry.cn-hangzhou.aliyuncs.com/myns/myapp:v1.0.0
 # 检查 manifest
 docker manifest inspect registry.cn-hangzhou.aliyuncs.com/myns/myapp:v1.0.0
 ```
-
 ### 多架构 Dockerfile 示例
 
 ```dockerfile
@@ -435,7 +440,8 @@ ENTRYPOINT ["/server"]
 
 ### 基础扫描命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== 镜像漏洞扫描 ====================
 
 # 基础扫描
@@ -503,7 +509,6 @@ trivy image --ignorefile .trivyignore myapp:v1.0
 # 扫描特定层
 trivy image --list-all-pkgs myapp:v1.0
 ```
-
 ### Trivy Operator 部署
 
 ```yaml
@@ -548,7 +553,8 @@ serviceMonitor:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 Trivy Operator
 helm repo add aqua https://aquasecurity.github.io/helm-charts/
 helm repo update
@@ -565,7 +571,6 @@ kubectl get configauditreports -A
 # 查看特定报告
 kubectl get vulnerabilityreport -n production -o yaml
 ```
-
 <!-- chunk: 镜像签名与验证 (Cosign) -->
 ## 镜像签名与验证 (Cosign)
 
@@ -742,7 +747,8 @@ dfdaemon:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 Dragonfly
 helm repo add dragonfly https://dragonflyoss.github.io/helm-charts/
 helm install dragonfly dragonfly/dragonfly \
@@ -755,7 +761,6 @@ helm install dragonfly dragonfly/dragonfly \
 # [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
 #   endpoint = ["http://127.0.0.1:65001"]
 ```
-
 ### 镜像预热 Job
 
 ```yaml
@@ -993,3 +998,6 @@ groups:
 - 16-runtime-class-configuration
 - 18-node-management-operations
 - 19-scheduler-configuration
+
+
+<!-- risk-assessed -->

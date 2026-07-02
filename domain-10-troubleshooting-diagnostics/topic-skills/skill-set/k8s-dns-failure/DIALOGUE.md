@@ -27,6 +27,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # DNS 解析问题诊断 — 远程顾问对话脚本
 
@@ -561,7 +566,8 @@ relationships:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 内 DNS 测试
 kubectl exec -it <pod> -n <ns> -- nslookup <domain>
 kubectl run dns-test --image=busybox:1.36 --rm -it --restart=Never -- nslookup <domain>
@@ -579,7 +585,9 @@ kubectl rollout restart deployment coredns -n kube-system
 kubectl scale deployment coredns -n kube-system --replicas=3
 kubectl patch deployment <deploy> -n <ns> --type merge -p '{"spec":{"template":{"spec":{"dnsPolicy":"ClusterFirst"}}}}'
 ```
-
 ---
 
 *对话脚本版本: 1.0.0 | 技能: DNS 解析问题诊断与修复 | 模式: L2-semi-auto*
+
+
+<!-- risk-assessed -->

@@ -52,6 +52,11 @@ cross_refs:
   label: '深度文档: 21-hpa-vpa-autoscaling'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get hpa -A -o jsonpath='{range .items[?(@.status.currentReplicas != @.status.desiredReplicas)]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示副本数不匹配 -->
 
 # HPA 异常 FTA 树
@@ -765,3 +770,6 @@ flowchart TD
 - **1.24–1.27**：HPA v2 GA；自定义指标适配器与 API 版本对齐，避免指标读取失败；behavior 策略成为标准配置。
 - **1.28–1.30**：稳定 API 为主，需确保指标链路与审计一致性；ContainerResource 指标类型可用。
 - **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
+
+
+<!-- risk-assessed -->

@@ -65,6 +65,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kind / [[k3s|K3s]] 单机集群故障排查
@@ -83,6 +88,7 @@ Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每�
 
 **架构**：
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 宿主机（物理/虚拟机）
   └── Docker Daemon
        ├── kind-control-plane (容器)
@@ -96,16 +102,15 @@ Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每�
        │    └── containerd
        └── kind-worker-2 (容器, 可选)
 ```
-
 **kind 基本命令**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kind create cluster --name=dev  # 创建名为 dev 的集群
 kind get clusters               # 列出所有集群
 kind delete cluster --name=dev  # 删除集群
 kind get kubeconfig --name=dev  # 获取 kubeconfig
 kind load docker-image <image> --name=dev  # 加载镜像到节点
 ```
-
 ---
 
 ### 1.2 Kind 端口冲突导致创建失败
@@ -117,7 +122,17 @@ kind load docker-image <image> --name=dev  # 加载镜像到节点
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看占用端口的进程
 ss -tlnp | grep 6443
 # 或
@@ -143,7 +158,6 @@ nodes:
 EOF
 kind create cluster --config kind-config.yaml --name=dev
 ```
-
 ---
 
 ### 1.3 Kind 镜像加载失败
@@ -151,7 +165,8 @@ kind create cluster --config kind-config.yaml --name=dev
 **问题现象**: `kind load docker-image myapp:v1.0` 报错 "image not found" 或超时
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认镜像存在
 docker images | grep myapp
 
@@ -175,7 +190,6 @@ nodes:
 EOF
 kind create cluster --config registry-config.yaml --name=dev
 ```
-
 ---
 
 ### 1.4 Kind 存储路径问题（Pod 数据丢失）
@@ -185,7 +199,8 @@ kind create cluster --config registry-config.yaml --name=dev
 **根因**: Kind 节点的 `/var/lib/kubelet` 等目录是容器内的匿名卷，重启后数据丢失
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 kind 控制平面容器的挂载
 docker inspect kind-control-plane --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
 
@@ -217,7 +232,6 @@ spec:
     path: /tmp/kind-pv  # 在宿主机上
 EOF
 ```
-
 ---
 
 ### 1.5 Kind 多节点集群网络问题
@@ -225,7 +239,8 @@ EOF
 **问题现象**: Worker 节点无法与 Control Plane 通信，Pod 之间跨节点不通
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查容器网络
 docker network inspect kind
 
@@ -251,7 +266,6 @@ kind create cluster --config kind-multi.yaml --name=dev
 # 5. 查看节点状态
 kubectl get nodes -o wide
 ```
-
 ---
 
 ### 1.6 Kind 集群无法删除（残留）
@@ -264,7 +278,17 @@ kubectl get nodes -o wide
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 强制删除容器
 docker rm -f $(docker ps -a | grep kind | awk '{print $1}')  # ⚠️ 强制清理，可能杀运行中容器
 
@@ -280,7 +304,6 @@ docker volume ls | grep kind
 kind get clusters  # 应无输出
 docker ps -a | grep kind  # 应无输出
 ```
-
 ---
 
 <!-- chunk: 2. K3s 单机集群问题 -->
@@ -317,7 +340,8 @@ K3s 是轻量级 K8s，二进制运行，无需 Docker（默认使用 containerd
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 K3s 日志
 journalctl -u k3s --since "5 minutes ago" | tail -50
 
@@ -335,7 +359,6 @@ sudo cp /var/lib/rancher/k3s/server/db/state.db.bak /var/lib/rancher/k3s/server/
 # 5. 重启 K3s
 sudo systemctl start k3s
 ```
-
 **预防措施**：
 ```bash
 # 使用外部数据库替代 SQLite（生产级）
@@ -350,7 +373,8 @@ sudo systemctl start k3s
 **问题现象**: K3s agent 节点无法注册到 server，日志报 "connection refused" 或 "node not found"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在 agent 节点查看日志
 journalctl -u k3s-agent --since "5 minutes ago" | tail -50
 
@@ -374,7 +398,6 @@ sudo k3s agent --server https://<server-ip>:6443 \
   --token-file=/var/lib/rancher/k3s/agent/node-token \
   --node-name=<hostname>
 ```
-
 ---
 
 ### 2.4 K3s 单机多容器网络问题
@@ -387,7 +410,8 @@ sudo k3s agent --server https://<server-ip>:6443 \
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CNI 配置
 cat /var/lib/rancher/k3s/agent/etc/cni/net.d/10-flannel.conflist
 
@@ -409,7 +433,6 @@ sudo systemctl restart k3s
 kubectl delete pods -n kube-system -l app=flannel
 # K3s 会自动重建 flannel pod
 ```
-
 ---
 
 ### 2.5 K3s 资源不足导致组件崩溃
@@ -451,7 +474,17 @@ htop
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止 K3s
 sudo systemctl stop k3s
 sudo systemctl disable k3s
@@ -471,7 +504,6 @@ ipvsadm -C
 # 4. 重新安装
 curl -sfL https://get.k3s.io | sh -
 ```
-
 ---
 
 <!-- chunk: 3. Kind vs K3s 问题对比 -->
@@ -552,3 +584,5 @@ related:
 - [[domain-10-troubleshooting-diagnostics/04-jvm-tuning/99-jvm-gc-container-tuning-guide.md|99-jvm-gc-container-tuning-guide]]
 
 ```
+
+<!-- risk-assessed -->

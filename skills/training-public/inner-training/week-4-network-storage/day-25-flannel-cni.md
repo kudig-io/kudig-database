@@ -33,6 +33,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 25: Flannel 网络
@@ -121,7 +126,8 @@ tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
 
 ### 任务 1: Flannel 组件检查 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Flannel 组件 (如集群使用 Flannel)
 kubectl get ds -n kube-system kube-flannel-ds 2>/dev/null || echo "未安装 Flannel"
 
@@ -137,14 +143,14 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 # 查看集群 CIDR 配置
 kubectl cluster-info dump | grep -m 1 "cluster-cidr" 2>/dev/null
 ```
-
 ### 任务 2: Flannel 网络连通性验证 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在不同节点创建测试 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -189,14 +195,14 @@ kubectl exec flannel-test-1 -- wget -qO- --timeout=5 http://kubernetes.default.s
 # DNS 解析测试
 kubectl exec flannel-test-1 -- nslookup kubernetes.default
 ```
-
 ### 任务 3: VxLAN 封装分析 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点上的 flannel.1 接口 (需要 exec 到节点或使用特权 Pod)
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -225,13 +231,13 @@ kubectl exec net-debug -- bridge fdb show dev flannel.1 2>/dev/null | head -10
 # 路由表分析
 kubectl exec net-debug -- ip route | grep flannel 2>/dev/null
 ```
-
 ### 任务 4: Terway vs Flannel 对比实验 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 网络性能对比参考 (概念理解)
 # Flannel 特点:
 echo "=== Flannel 网络特点 ==="
@@ -249,7 +255,6 @@ echo "4. Pod IP 可路由性: VPC 内全局可路由"
 # 清理
 kubectl delete pod flannel-test-1 flannel-test-2 net-debug
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -292,3 +297,6 @@ Day 26 将学习存储卷 (PV/PVC) 的创建与删除。
 
 - index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

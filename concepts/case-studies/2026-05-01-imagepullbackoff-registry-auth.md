@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-05-01] 镜像仓库认证 Secret 过期导致全量 Pod ImagePullBackOff
@@ -33,17 +38,18 @@ last_updated: 2026-05-23
 
 ## 问题现象
 09:00，CI/CD 流水线大量失败，ArgoCD 显示大量 Pod 状态为 `ImagePullBackOff`：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A | grep ImagePullBackOff | wc -l
 # 156
 ```
-
 Dev 团队反馈：任何新的部署都无法启动，已有 Deployment 的滚动更新也卡住。
 
 ## 诊断过程
 
 **09:02** — 查看一个问题 Pod：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod order-api-7d9f4b8c5a-abc12 -n prod-order
 # Events:
 #   Warning  Failed     5m    kubelet  
@@ -54,9 +60,9 @@ kubectl describe pod order-api-7d9f4b8c5a-abc12 -n prod-order
 #     repository does not exist or may require authorization: 
 #     authorization failed: no basic auth credentials
 ```
-
 **09:04** — 检查 imagePullSecrets：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get sa default -n prod-order -o yaml | grep -A5 imagePullSecrets
 # imagePullSecrets:
 # - name: regcred
@@ -71,9 +77,9 @@ kubectl get secret regcred -n prod-order -o json | jq '.data.".dockerconfigjson"
 #   }
 # }
 ```
-
 **09:06** — 验证认证信息：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 解码 auth 字段
 echo "..." | base64 -d
 # k8s-pull:expired_token_xxx
@@ -83,7 +89,6 @@ docker login registry.example.com -u k8s-pull -p expired_token_xxx
 # Error response from daemon: Get "https://registry.example.com/v2/": 
 #   unauthorized: authentication required
 ```
-
 **09:08** — 检查仓库 token 有效期：
 ```bash
 # Harbor 管理员后台显示：
@@ -108,7 +113,8 @@ Harbor 机器人账户 `k8s-pull` 的 token 于 2026-05-01 00:00 UTC 过期。�
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建新的 dockerconfigjson
 kubectl create secret docker-registry regcred \
   --docker-server=registry.example.com \
@@ -128,9 +134,9 @@ for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n'
     -n $ns
 done
 ```
-
 **09:13** — 验证拉取：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A | grep ImagePullBackOff | wc -l
 # 0
 
@@ -138,7 +144,6 @@ kubectl get pods -n prod-order -l app=order-api
 # NAME                          READY   STATUS    RESTARTS   AGE
 # order-api-7d9f4b8c5a-abc12   1/1     Running   0          2m
 ```
-
 ## 验证
 - 09:14 — 所有 ImagePullBackOff Pod 恢复 Running
 - 09:15 — CI/CD 流水线恢复正常，新部署成功
@@ -153,3 +158,6 @@ kubectl get pods -n prod-order -l app=order-api
   4. 所有私有镜像仓库认证统一通过 ServiceAccount 的 imagePullSecrets 管理，禁止 Pod 级别硬编码
 - **相关 Skill**: [[k8s-pod-security-guide]]
 - **相关 FTA**: [[pod-fta]]
+
+
+<!-- risk-assessed -->

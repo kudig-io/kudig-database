@@ -36,6 +36,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -104,7 +109,8 @@ related_topics:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1.1 创建 Namespace
 kubectl create namespace microservice-demo
 
@@ -142,13 +148,13 @@ kubectl create secret generic db-credentials -n microservice-demo \
   --from-literal=MYSQL_ROOT_PASSWORD=training2024 \
   --from-literal=MYSQL_DATABASE=appdb
 ```
-
 ### Step 2: 部署后端服务 (数据库 + 缓存) (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 2.1 部署数据库 (StatefulSet + PVC)
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -246,13 +252,13 @@ spec:
   - port: 6379
 EOF
 ```
-
 ### Step 3: 部署前端 Web 应用 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 3.1 部署 Web 前端 (多副本 + 反亲和)
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -321,13 +327,13 @@ spec:
     targetPort: 80
 EOF
 ```
-
 ### Step 4: 配置 Ingress 路由 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 4.1 创建 Ingress 规则
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -358,10 +364,10 @@ kubectl get ingress -n microservice-demo
 INGRESS_IP=$(kubectl get svc -n kube-system nginx-ingress-lb -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 curl -H "Host: app.training.local" http://${INGRESS_IP}/
 ```
-
 ### Step 5: 网络连通性验证 (20min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 5.1 服务发现测试
 kubectl run net-test -n microservice-demo \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
@@ -393,7 +399,6 @@ kubectl get pvc -n microservice-demo
 echo "=== Ingress ==="
 kubectl get ingress -n microservice-demo
 ```
-
 ---
 
 ## 验收清单
@@ -412,10 +417,22 @@ kubectl get ingress -n microservice-demo
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete namespace microservice-demo  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ## Related
 
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

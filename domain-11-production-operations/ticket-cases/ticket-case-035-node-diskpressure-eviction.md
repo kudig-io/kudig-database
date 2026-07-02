@@ -68,6 +68,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -93,7 +98,8 @@ relationships:
 
 按“先看节点状态、再上节点看磁盘占用、再看日志与 kubelet 事件”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认节点状态与条件
 kubectl get node cn-zhangjiakou.172.16.5.40 -o wide
 kubectl describe node cn-zhangjiakou.172.16.5.40 | grep -A 20 Conditions
@@ -119,7 +125,6 @@ journalctl -u kubelet -n 500 --no-pager | grep -i 'eviction|DiskPressure|thresho
 # 6. 查看 Pod 日志是否异常暴增
 kubectl logs -n rec-service deploy/recommend-v2 --tail=200 | wc -c
 ```
-
 ## 根因分析
 
 综合节点状态、磁盘占用与 kubelet 日志，判定根因为 **`/var/log/pods` 下容器标准输出日志与 journal 日志未设置大小上限，长期累积占满系统盘，触发 kubelet DiskPressure 驱逐**，置信度 **高**。
@@ -137,7 +142,17 @@ kubectl logs -n rec-service deploy/recommend-v2 --tail=200 | wc -c
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon cn-zhangjiakou.172.16.5.40
 kubectl drain cn-zhangjiakou.172.16.5.40 \
   --ignore-daemonsets \
@@ -145,10 +160,10 @@ kubectl drain cn-zhangjiakou.172.16.5.40 \
   --force \
   --timeout=300s
 ```
-
 **第二步：登录节点清理容器日志与镜像缓存**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ssh root@172.16.5.40 '
   # 压缩并清空超过 100MB 的容器日志
   find /var/log/pods -type f -size +100M -exec sh -c "> {}" \;
@@ -164,7 +179,6 @@ ssh root@172.16.5.40 '
   crictl rmi --prune 2>/dev/null || true
 '
 ```
-
 **第三步：扩容系统盘**
 
 ```bash
@@ -183,7 +197,17 @@ aliyun ecs ResizeDisk \
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在节点上编辑 /etc/kubernetes/kubelet-config.json 后重启 kubelet（推荐通过 ACK 节点池运维脚本下发）
 cat <<'EOF' >> /etc/kubernetes/kubelet-config.json
 {
@@ -204,16 +228,16 @@ cat <<'EOF' >> /etc/kubernetes/kubelet-config.json
 EOF
 systemctl restart kubelet
 ```
-
 **第五步：恢复节点调度**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl uncordon cn-zhangjiakou.172.16.5.40
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 节点 DiskPressure 条件消失
 kubectl get node cn-zhangjiakou.172.16.5.40 -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")].status}'
 
@@ -229,7 +253,6 @@ kubectl get events --field-selector reason=Evicted --sort-by='.lastTimestamp' | 
 # 5. 推荐服务 Pod 恢复 Running
 kubectl get pod -n rec-service -o wide | grep -v Running
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-035 已处理完成。
@@ -279,3 +302,6 @@ kubectl get pod -n rec-service -o wide | grep -v Running
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
 - [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+
+
+<!-- risk-assessed -->

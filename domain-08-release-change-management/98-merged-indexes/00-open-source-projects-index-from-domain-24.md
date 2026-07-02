@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain-24 基础设施即代码 — 开源项目索引
@@ -117,7 +122,8 @@ authors:
 - **兼容性**: 兼容 Terraform v1.5.x 语法与模块
 - **Registry**: OpenTofu Registry (opentofu.org)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh
 
@@ -126,7 +132,6 @@ tofu init
 tofu plan
 tofu apply
 ```
-
 **GitHub**: https://github.com/opentofu/opentofu
 
 ---
@@ -283,6 +288,7 @@ spec:
 ## 八、IaC 选型指南
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────┐
 │                    IaC 技术选型决策树                          │
 └─────────────────────────────────────────────────────────────┘
@@ -315,7 +321,6 @@ spec:
    └─ Yes ──► OpenTofu (直接迁移) 或 Pulumi Terraform Bridge
    └─ No  ──► 自由选择
 ```
-
 ---
 
 ## 参考链接
@@ -339,3 +344,6 @@ spec:
 - Azure Resource Manager (ARM) Enterprise 深度实践
 - Crossplane Enterprise Infrastructure Orchestration 深度实践
 - Crossplane 平台工程实践指南
+
+
+<!-- risk-assessed -->

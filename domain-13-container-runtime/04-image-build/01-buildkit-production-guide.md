@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # BuildKit 生产指南
@@ -136,15 +141,16 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 BuildKit daemon 并暴露 ClusterIP 服务
 kubectl apply -f buildkitd-deployment.yaml
 kubectl expose deployment buildkitd --port=12345 --target-port=12345 -n ci
 ```
-
 ### 2.3 创建 buildx builder
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建指向远程 BuildKit daemon 的 buildx builder
 docker buildx create \
   --name remote-buildkit \
@@ -154,7 +160,6 @@ docker buildx create \
 
 docker buildx inspect remote-buildkit --bootstrap
 ```
-
 ## 3. Dockerfile 多阶段构建
 
 多阶段构建是减小镜像体积、避免构建依赖泄露到运行镜像的核心手段。下面的示例将 Maven 构建与 JRE 运行分离，最终镜像仅保留 jar 与 JRE。
@@ -178,14 +183,14 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 多阶段构建不仅降低攻击面，还能显著减少镜像层数。配合 BuildKit 的并发执行，多个独立阶段可同时推进。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 buildx 构建并直接推送到 ACR
 DOCKER_BUILDKIT=1 docker buildx build \
   --platform linux/amd64,linux/arm64 \
   -t registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
   --push .
 ```
-
 ## 4. 缓存策略
 
 BuildKit 支持多种缓存后端，选择合适的缓存策略可以将重复构建时间降低 50%-90%。
@@ -201,7 +206,8 @@ BuildKit 支持多种缓存后端，选择合适的缓存策略可以将重复�
 
 Registry 缓存是专有云多构建机场景的首选。缓存镜像与业务镜像分开存储，便于清理与权限控制。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出缓存到 ACR 独立仓库，供下次构建复用
 DOCKER_BUILDKIT=1 docker buildx build \
   --platform linux/amd64 \
@@ -210,12 +216,12 @@ DOCKER_BUILDKIT=1 docker buildx build \
   --cache-from type=registry,ref=registry.cn-hangzhou.aliyuncs.com/demo/app-cache:latest \
   --push .
 ```
-
 ### 4.2 Inline 缓存示例
 
 Inline 缓存适合简单项目或临时分支构建，缓存元数据随镜像 tag 一起推送。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 inline 缓存，将缓存元数据写入镜像 manifest
 DOCKER_BUILDKIT=1 docker buildx build \
   -t registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
@@ -223,12 +229,12 @@ DOCKER_BUILDKIT=1 docker buildx build \
   --cache-from type=registry,ref=registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
   --push .
 ```
-
 ## 5. 并行构建与资源控制
 
 BuildKit 默认会尽可能并行执行 Dockerfile 中无依赖关系的阶段。但在 CI 环境中，需要对并发度与资源占用做限制，避免影响同节点其他构建。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 限制构建并发度与最大内存，避免 CI 节点被单任务占满
 DOCKER_BUILDKIT=1 docker buildx build \
   --build-arg BUILDKIT_INLINE_CACHE=1 \
@@ -236,14 +242,13 @@ DOCKER_BUILDKIT=1 docker buildx build \
   -t registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
   --push .
 ```
-
 在 Kubernetes 中部署 BuildKit Daemon 时，通过 `resources.requests/limits` 限制其 CPU 与内存，并配合 HPA 在高峰期扩容。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 为 CI 命名空间下的 buildkitd Deployment 配置 HPA
 kubectl autoscale deployment buildkitd --min=2 --max=6 --cpu-percent=70 -n ci
 ```
-
 ## 6. 安全扫描与 SBOM
 
 ### 6.1 集成 Trivy 镜像扫描
@@ -274,27 +279,27 @@ aliyun cr ScanRepoImage \
 
 BuildKit 支持生成并导出 SPDX 格式的 SBOM，便于供应链审计。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建时同时生成 SBOM 并推送到 ACR
 DOCKER_BUILDKIT=1 docker buildx build \
   -t registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
   --sbom=true \
   --push .
 ```
-
 ## 7. Rootless 与 Secrets
 
 ### 7.1 Rootless BuildKit
 
 为降低构建过程中的容器逃逸风险，可使用 rootless BuildKit。它以非 root 用户运行 daemon，并通过 user namespace 隔离。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 rootless 模式启动 BuildKit daemon
 docker run -d --name buildkitd-rootless \
   --security-opt seccomp=unconfined --security-opt apparmor=unconfined \
   moby/buildkit:rootless
 ```
-
 ### 7.2 安全传递构建 Secret
 
 不要在 Dockerfile 中通过 `ARG` 或 `ENV` 传递密码、私钥。BuildKit 提供 `RUN --mount=type=secret`，仅在构建阶段临时挂载 Secret。
@@ -305,25 +310,25 @@ RUN --mount=type=secret,id=maven_settings,dst=/root/.m2/settings.xml \
     mvn clean package -DskipTests
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建时将本地文件作为 secret 传入，不会出现在镜像历史中
 DOCKER_BUILDKIT=1 docker buildx build \
   --secret id=maven_settings,src=$HOME/.m2/settings.xml \
   -t registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3 \
   --push .
 ```
-
 ## 8. 阿里云 ACR 企业版镜像分发
 
 在专有云环境中，ACR 企业版（ACR EE）提供高可用、多地域同步、P2P 分发等能力。BuildKit 构建的镜像推送到 ACR EE 后，可通过实例 ID 与加速域名提升拉取速度。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 ACR EE 实例地址作为构建目标
 DOCKER_BUILDKIT=1 docker buildx build \
   -t <instance-id>.registry.cn-hangzhou.cr.aliyuncs.com/demo/app:v1.2.3 \
   --push .
 ```
-
 ACR EE 支持镜像复制规则，可将镜像自动同步到灾备 Region 的实例，满足跨 Region 高可用需求。在 ASO 控制台中，进入 **容器镜像服务 ACR** → **企业版实例** → **分发同步** 配置规则。
 
 ## 9. BuildKit 与镜像签名
@@ -352,7 +357,8 @@ cosign verify --key cosign.pub \
 - 在构建脚本中使用 `docker buildx build --push` 直接推送镜像；
 - 构建完成后调用 ACR 镜像扫描或 Trivy 步骤作为质量门禁。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 云效流水线示例脚本片段：构建、推送并扫描
 export DOCKER_BUILDKIT=1
 docker buildx build \
@@ -363,7 +369,6 @@ docker buildx build \
 trivy image --severity HIGH,CRITICAL --exit-code 1 \
   registry.cn-hangzhou.aliyuncs.com/demo/app:${CI_COMMIT_SHA}
 ```
-
 ## 11. 性能优化实战案例
 
 某金融客户将 Java 应用从单阶段 Dockerfile 迁移到 BuildKit 多阶段构建后，构建时间从 12 分钟降至 3 分钟，镜像体积从 1.2 GB 降至 220 MB。关键优化点：
@@ -406,3 +411,6 @@ dive registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3
 - [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 - [[domain-13-container-runtime/04-image-build/03-kaniko-ko-build-guide.md|Kaniko 与 ko 构建指南]]
 - [[domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
+
+
+<!-- risk-assessed -->

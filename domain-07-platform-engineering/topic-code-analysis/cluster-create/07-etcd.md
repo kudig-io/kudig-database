@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: etcd 静态 Pod 管理
@@ -437,6 +442,7 @@ func CheckEtcdHealth(cfg *kubeadmapi.InitConfiguration) error {
 ### etcd 启动流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 步骤 1: kubeadm 写入 etcd manifest
     → /etc/kubernetes/manifests/etcd.yaml
     ↓
@@ -468,7 +474,6 @@ func CheckEtcdHealth(cfg *kubeadmapi.InitConfiguration) error {
     → etcdctl endpoint health
     → etcdctl member list
 ```
-
 ### HA etcd 加入流程
 
 ```
@@ -496,7 +501,8 @@ func CheckEtcdHealth(cfg *kubeadmapi.InitConfiguration) error {
 
 ### 场景 1: 备份 etcd 数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 etcd 快照
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot-$(date +%Y%m%d).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -512,14 +518,23 @@ ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-snapshot-20240101.db --write-
 # | 12345678 | 1234     | 5.6 MB     | 1234567890 |
 # +----------+----------+------------+------------+
 ```
-
 ### 场景 2: 从快照恢复 etcd
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止所有控制面组件
 crictl stop $(crictl ps --name etcd -q)
 crictl stop $(crictl ps --name kube-apiserver -q)
@@ -546,7 +561,6 @@ ETCDCTL_API=3 etcdctl endpoint health \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ### 场景 3: 自定义 etcd 参数
 
 ```yaml
@@ -656,7 +670,8 @@ spec:
 
 ### etcd 日常运维命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看成员列表
 ETCDCTL_API=3 etcdctl member list \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -692,7 +707,6 @@ ETCDCTL_API=3 etcdctl endpoint status -w json \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key | jq '.[0].Status.dbSize'
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -736,7 +750,8 @@ etcd:
 
 ## 相关函数
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在线碎片整理 (不中断服务)
 ETCDCTL_API=3 etcdctl defrag \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -760,7 +775,6 @@ ETCDCTL_API=3 etcdctl get / --prefix --keys-only \
 # auto-compaction-mode: periodic
 # auto-compaction-retention: 1h
 ```
-
 ### etcd 监控指标
 
 ```bash
@@ -806,3 +820,6 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 - [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

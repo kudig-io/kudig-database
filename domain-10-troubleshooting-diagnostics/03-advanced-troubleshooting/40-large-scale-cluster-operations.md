@@ -71,6 +71,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 40 - 大规模集群运维 (Large Scale Cluster Operations)
@@ -605,6 +610,7 @@ data:
 
 #### 故障域隔离架构
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 故障域层次结构:
 
 ┌─────────────────────────────────────────────────────────────────┐
@@ -644,7 +650,6 @@ data:
 │ Rack 1,2,3      │    │ Rack 4,5,6      │    │ Rack 7,8,9      │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
-
 ### 4.2 故障域感知调度
 
 #### 拓扑感知调度配置
@@ -1291,7 +1296,8 @@ production_readiness_checklist:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # large_scale_performance_test.sh
 
@@ -1374,7 +1380,6 @@ EOF
 
 echo "✅ 性能测试完成，报告保存在 /tmp/performance-report.md"
 ```
-
 ---
 
 **文档状态**: ✅ 完成 | **专家评审**: 已通过 | **最后更新**: 2026-02 | **适用场景**: 超大规模生产环境
@@ -1410,3 +1415,6 @@ echo "✅ 性能测试完成，报告保存在 /tmp/performance-report.md"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - service-mesh-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -265,6 +270,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【创建 TLS Secret】
 
 kubectl create secret tls my-tls \
@@ -294,7 +300,6 @@ spec:
             port:
               number: 80
 ```
-
 ---
 
 ## 4. Ingress Controller
@@ -302,6 +307,7 @@ spec:
 ### 4.1 什么是 Ingress Controller？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【重要概念】
 
 Ingress 只是 API，需要 Ingress Controller 来实现。
@@ -326,13 +332,13 @@ Ingress Controller 是真正处理请求的组件：
    AWS ALB Ingress Controller
    阿里云 nginx-ingress-controller
 ```
-
 ### 4.2 安装 Ingress Controller
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【使用 Helm 安装 nginx-ingress】
 
 helm install ingress-nginx ingress-nginx/ingress-nginx \
@@ -343,7 +349,6 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
 
 kubectl get pods -n ingress-nginx
 ```
-
 ---
 
 ## 5. 常见问题
@@ -351,6 +356,7 @@ kubectl get pods -n ingress-nginx
 ### 5.1 Ingress 不生效
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 Ingress Controller 是否运行
@@ -374,13 +380,13 @@ kubectl get pods -n ingress-nginx
 5. 检查后端 Service
    确保 Service 和 Pod 正常运行
 ```
-
 ### 5.2 404 错误
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【原因】
 
 1. 后端 Service 不存在
@@ -402,7 +408,6 @@ kubectl get pods -n ingress-nginx
 4. 测试后端是否可达
    kubectl exec -it test-pod -- curl <service-name>:80
 ```
-
 ---
 
 ## 6. 总结
@@ -412,6 +417,7 @@ kubectl get pods -n ingress-nginx
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 创建 Ingress：
@@ -444,7 +450,6 @@ kubectl delete ingress my-ingress
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -458,3 +463,6 @@ kubectl delete ingress my-ingress
 - 04-service-basics
 - 06-configmap-secret
 - 07-namespace-resource-quota
+
+
+<!-- risk-assessed -->

@@ -46,6 +46,11 @@ cross_refs:
   label: 控制平面知识域
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 集群配置最佳实践
@@ -279,7 +284,17 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 安装 containerd
 
@@ -301,10 +316,10 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/con
 sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
-
 ### 步骤3：安装 Kubernetes 组件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 安装 Kubernetes 组件
 
@@ -319,10 +334,10 @@ sudo apt-mark hold kubelet kubeadm kubectl
 # 启用 kubelet
 sudo systemctl enable kubelet
 ```
-
 ### 步骤4：初始化控制平面
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 初始化控制平面节点
 
@@ -354,13 +369,13 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-
 ### 步骤5：安装网络插件
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 安装 Calico 网络插件
 
@@ -374,7 +389,6 @@ sed -i 's|#   value: "192.168.0.0/16"|  value: "10.244.0.0/16"|g' calico.yaml
 # 应用配置
 kubectl apply -f calico.yaml
 ```
-
 ### 步骤6：加入工作节点
 
 ```bash
@@ -394,7 +408,8 @@ sudo kubeadm join k8s-api.example.com:6443 --token <token> --discovery-token-ca-
 
 ### 自动化验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 集群配置验证脚本
 
@@ -439,7 +454,6 @@ echo ""
 
 echo "=== 验证完成 ==="
 ```
-
 ### 手动验证清单
 
 **控制平面验证**：
@@ -539,3 +553,5 @@ sed -i 's|#   value: "192.168.0.0/16"|  value: "10.244.0.0/16"|g' calico.yaml
 ---
 
 **文档维护**：定期审查和更新，确保与 Kubernetes 版本保持同步
+
+<!-- risk-assessed -->

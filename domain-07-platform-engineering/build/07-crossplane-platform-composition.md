@@ -45,6 +45,11 @@ prerequisites:
 - kafka-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Crossplane|Crossplane]] 平台组合 (Crossplane Platform Composition)
@@ -451,7 +456,8 @@ spec:
 
 ## Managed Resource 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查资源状态
 kubectl get instances.rds.aws.upbound.io -A
 kubectl describe instance prod-postgresql
@@ -460,7 +466,6 @@ kubectl describe instance prod-postgresql
 # - Synced: True  -> Crossplane 与云端同步正常
 # - Ready: True   -> 资源在云端已就绪
 ```
-
 ```yaml
 # 典型 Status 结构
 status:
@@ -1523,7 +1528,8 @@ spec:
 
 ## 资源状态检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Claim 状态
 kubectl get postgresqlclaims -A
 
@@ -1542,7 +1548,6 @@ kubectl get events --field-selector involvedObject.kind=XPostgreSQL
 # 跟踪资源树
 crossplane beta trace postgresqlclaim payments-db -n team-payments
 ```
-
 ## 常见问题排查
 
 ```mermaid
@@ -1768,7 +1773,8 @@ flowchart TD
 
 ## 迁移路径：Terraform → Crossplane
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 导入已有云资源到 Crossplane（不重建）
 # 创建 Managed Resource 并设置 externalName 为已有资源 ID
 apiVersion: rds.aws.upbound.io/v1beta1
@@ -1795,7 +1801,6 @@ spec:
     - Delete
     # 注意：不加 Create，避免重复创建
 ```
-
 ---
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
@@ -1864,3 +1869,6 @@ quadrantChart
 - 06-kratix-platform-as-code
 - 08-golden-paths-design
 - 09-developer-experience-metrics
+
+
+<!-- risk-assessed -->

@@ -63,6 +63,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.33 升级实操指南
@@ -91,7 +96,8 @@ cross_refs:
 
 ### 1.1 版本兼容性确认
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # upgrade-check.sh
 
@@ -136,13 +142,13 @@ kubectl get nodes -o jsonpath='{.items[0].status.nodeInfo.containerRuntimeVersio
 
 echo -e "\n=== 检查完成 ==="
 ```
-
 ### 1.2 备份
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份 etcd
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n kube-system $ETCD_POD -- etcdctl \
@@ -157,7 +163,6 @@ kubectl get all --all-namespaces -o yaml > /backup/k8s-$(date +%Y%m%d)/all-resou
 kubectl get cm,secret --all-namespaces -o yaml > /backup/k8s-$(date +%Y%m%d)/configs.yaml
 kubectl get crd -o yaml > /backup/k8s-$(date +%Y%m%d)/crds.yaml
 ```
-
 ---
 
 <!-- chunk: 二、控制平面升级 -->
@@ -168,7 +173,17 @@ kubectl get crd -o yaml > /backup/k8s-$(date +%Y%m%d)/crds.yaml
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm && \
 apt-get update && \
@@ -193,7 +208,6 @@ apt-mark hold kubelet kubectl
 systemctl daemon-reload
 systemctl restart kubelet
 ```
-
 ### 2.2 高可用控制平面
 
 ```bash
@@ -215,7 +229,17 @@ kubeadm upgrade node
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # upgrade-node.sh NODE_NAME
 
@@ -249,10 +273,10 @@ kubectl uncordon $NODE
 
 echo "节点 $NODE 升级完成"
 ```
-
 ### 3.2 批量升级脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # upgrade-all-workers.sh
 
@@ -270,7 +294,6 @@ for node in $(kubectl get nodes -l '!node-role.kubernetes.io/control-plane' -o j
   sleep 30
 done
 ```
-
 ---
 
 <!-- chunk: 四、升级后验证 -->
@@ -281,7 +304,8 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 升级后验证 ==="
 
 # 集群版本
@@ -306,13 +330,13 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
   --key=/etc/kubernetes/pki/etcd/server.key \
   endpoint health
 ```
-
 ### 4.2 功能验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Sidecar 容器 (v1.33 GA)
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -344,7 +368,6 @@ kubectl get resourceslices 2>/dev/null || echo "DRA 未启用"
 echo "v1.33 新增 API:"
 kubectl api-versions | grep -E "v1\.33|v1alpha3" | head -10
 ```
-
 ---
 
 <!-- chunk: 五、启用 v1.33 新特性 -->
@@ -374,7 +397,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 修改 kube-apiserver 和 kube-scheduler 的 Feature Gate
 # /etc/kubernetes/manifests/kube-apiserver.yaml
 # - --feature-gates=DynamicResourceAllocation=true
@@ -387,7 +420,6 @@ featureGates:
 # 3. 重启组件
 systemctl restart kubelet
 ```
-
 ### 5.3 Scheduler Queueing Hints (Beta, 默认启用 v1.33)
 
 ```bash
@@ -403,7 +435,17 @@ systemctl restart kubelet
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 启用 Feature Gate
 # /var/lib/kubelet/config.yaml
 featureGates:
@@ -447,14 +489,23 @@ kubectl patch pod resize-test --patch '
   }
 }'
 ```
-
 ### 5.5 nftables kube-proxy (Beta, 实验性)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 修改 kube-proxy ConfigMap
 kubectl edit cm kube-proxy -n kube-system
 
@@ -464,7 +515,6 @@ kubectl edit cm kube-proxy -n kube-system
 # 2. 重启 kube-proxy
 kubectl rollout restart ds kube-proxy -n kube-system
 ```
-
 ---
 
 <!-- chunk: 六、回滚预案 -->
@@ -475,7 +525,17 @@ kubectl rollout restart ds kube-proxy -n kube-system
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果升级失败，回滚到 v1.32
 kubeadm upgrade apply v1.32.x --yes
 
@@ -485,13 +545,13 @@ apt-get install -y kubelet=1.32.x-1.1 kubeadm=1.32.x-1.1 kubectl=1.32.x-1.1
 apt-mark hold kubelet kubeadm kubectl
 systemctl restart kubelet
 ```
-
 ### 6.2 etcd 回滚
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用升级前快照恢复
 kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
   snapshot restore /var/lib/etcd/snapshot-pre-upgrade.db \
@@ -501,7 +561,6 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
 # 编辑 /etc/kubernetes/manifests/etcd.yaml
 # - --data-dir=/var/lib/etcd-restored
 ```
-
 ---
 
 <!-- chunk: 七、常见问题排查 -->
@@ -553,3 +612,5 @@ kubectl exec -n kube-system etcd-$(hostname) -- etcdctl \
 - 01-kubernetes-architecture-overview
 
 ```
+
+<!-- risk-assessed -->

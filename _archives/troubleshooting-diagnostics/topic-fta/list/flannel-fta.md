@@ -57,6 +57,11 @@ cross_refs:
   label: '索引文档: flannel-index'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Flannel 网络异常 FTA 树
 
 ## 适用范围与说明
@@ -158,6 +163,7 @@ flowchart TD
 **顶事件**: Pod 启动卡在 Pending，Events 显示 "Failed to allocate IP"
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 诊断路径:
 1. 检查 Flannel ConfigMap
    kubectl get configmap -n kube-system flannel -o yaml
@@ -172,12 +178,12 @@ flowchart TD
 4. 检查是否有残留的 stale 资源
    kubectl get pods -A | grep -v Running | grep -v Completed
 ```
-
 ### 场景 3: Flannel DaemonSet 不正常
 
 **顶事件**: flannel Pod 持续重启或处于 CrashLoopBackOff
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断路径:
 1. 检查 flannel 日志
    kubectl logs -n kube-system -l app=flannel --tail=100
@@ -191,12 +197,12 @@ flowchart TD
 4. 检查 CNI 配置
    cat /etc/cni/net.d/10-flannel.conflist
 ```
-
 ---
 
 ## 故障排查命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 flannel 接口状态
 ip addr show flannel.1
 ip link show flannel.1
@@ -226,7 +232,6 @@ ip neigh show | grep flannel
 # 9. MTU 测试
 ping -M do -s 1400 <target-ip>
 ```
-
 ---
 
 ## 相关文档
@@ -241,3 +246,6 @@ ping -M do -s 1400 <target-ip>
 - [[skills/ts-command-output|命令输出根因解析]] — Cross-reference
 - [[skills/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -37,6 +37,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # GitOps/DevOps 排查
@@ -70,7 +75,8 @@ prerequisites:
 
 #### GitOps 状态检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ArgoCD 状态检查
 echo "=== ArgoCD 状态检查 ==="
 kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-application-controller
@@ -93,7 +99,6 @@ echo "=== CI/CD 流水线状态 ==="
 kubectl get pipelineruns,taskruns -A 2>/dev/null || echo "Tekton 未部署"
 # 或者检查 Jenkins/GitLab CI 等其他 CI 系统状态
 ```
-
 ---
 
 ### 02 Tekton Troubleshooting
@@ -228,7 +233,8 @@ ImageUpdateAutomation
 
 #### Step 1: 检查 Velero 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Velero Pod 状态
 kubectl get pods -n velero
 
@@ -238,10 +244,10 @@ kubectl describe backup -n velero {backup-name}
 # 查看 Velero Pod 日志
 kubectl logs -n velero deployment/velero --tail=100 | grep -i error
 ```
-
 #### Step 2: 检查存储后端
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 BackupStorageLocation 状态
 kubectl get backupstoragelocation -n velero
 
@@ -251,10 +257,10 @@ kubectl describe backupstoragelocation -n velero default
 # 检查凭据 Secret
 kubectl get secret -n velero velero-backup-creds
 ```
-
 #### Step 3: 检查 Volume 快照
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 VolumeSnapshotClass
 kubectl get volumesnapshotclass
 
@@ -265,7 +271,6 @@ kubectl get volumesnapshot -n {namespace}
 kubectl get csidriver
 kubectl get pods -n kube-system | grep csi
 ```
-
 ## 相关链接
 
 - [[skills/develop-crd-operator.md|CRD/Operator 开发]]
@@ -277,3 +282,6 @@ kubectl get pods -n kube-system | grep csi
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[entities/argocd.md|argocd]] — ArgoCD
+
+
+<!-- risk-assessed -->

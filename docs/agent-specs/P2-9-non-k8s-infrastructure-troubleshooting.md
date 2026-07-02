@@ -27,6 +27,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 非 Kubernetes 基础设施问题排查
@@ -78,7 +83,8 @@ rndc flush  # 清除缓存
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Dnsmasq 日志
 journalctl -u dnsmasq --since "10m" | grep -i error
 
@@ -91,7 +97,6 @@ systemctl restart dnsmasq
 # 查看 leases
 cat /var/lib/dhcpd/dhcpd.leases
 ```
-
 ### 1.3 企业 DNS 架构问题
 
 ```bash
@@ -151,7 +156,8 @@ tmsh modify ltm virtual <name> enabled
 | Azure LB | `az network lb show --resource-group <rg> --name <name>` | 检查 LB 配置 |
 | 阿里云 SLB | `aliyun slb DescribeLoadBalancers --RegionId <id>` | 检查 SLB 状态 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS ALB 健康检查
 aws elbv2 describe-target-health --target-group-arn <arn>
 
@@ -164,7 +170,6 @@ aws elbv2 describe-target-health --target-group-arn <arn>
 gcloud compute backend-services get-health <name> --global
 gcloud compute forwarding-rules list
 ```
-
 ### 2.3 Nginx/HAProxy 负载均衡
 
 | 症状 | 诊断命令 | 根因 | 修复 |
@@ -173,7 +178,8 @@ gcloud compute forwarding-rules list
 | 502 Bad Gateway | `curl -v http://localhost/<path>` | 后端服务未运行 | 检查后端服务 |
 | 连接数满 | `netstat -an | grep :80 | wc -l` | worker_connections 不足 | 增加 worker_connections |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Nginx 健康检查
 nginx -t
 systemctl reload nginx
@@ -188,7 +194,6 @@ systemctl reload haproxy
 # 查看 HAProxy 统计
 curl -s http://localhost:9000/stats
 ```
-
 ---
 
 ## 3. VPN 与隧道问题排查
@@ -231,7 +236,8 @@ journalctl -u wg-quick@wg0 --since "10m"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # StrongSwan 诊断
 ipsec status
 ipsec statusall
@@ -251,7 +257,6 @@ ipsec status | grep -E "CHILD_SA|IPsec"
 systemctl restart strongswan
 ipsec restart
 ```
-
 ### 3.3 GRE/IPSec 隧道问题
 
 ```bash
@@ -393,3 +398,5 @@ echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -d
 - [domain-17-system-foundation/](../domain-17-system-foundation/) — Linux 系统基础
 - [domain-03-networking-traffic/](../domain-03-networking-traffic/) — 网络基础
 - [domain-03-networking-traffic/](../domain-03-networking-traffic/) — Kubernetes 网络
+
+<!-- risk-assessed -->

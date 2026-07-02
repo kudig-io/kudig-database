@@ -68,6 +68,11 @@ cross_refs:
   label: '故障树: pod'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 08 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
@@ -128,6 +133,7 @@ cross_refs:
 ### 2.1 排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         Pod Pending 排查流程                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -161,7 +167,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 Pending 原因分类
 
 | 原因类型 | 事件关键字 | 排查命令 | 解决方案 |
@@ -176,7 +181,8 @@ cross_refs:
 
 ### 2.3 常用排查命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 查看Pod详情和Events ===
 kubectl describe pod <pod-name> -n <namespace>
 
@@ -201,7 +207,6 @@ kubectl describe quota -n <namespace>
 # === 模拟调度 (dry-run) ===
 kubectl run test-pod --image=nginx --dry-run=server -o yaml
 ```
-
 ---
 
 <!-- chunk: 3. ContainerCreating 排查 (ContainerCreating Troubleshooting) -->
@@ -219,7 +224,8 @@ kubectl run test-pod --image=nginx --dry-run=server -o yaml
 
 ### 3.2 CNI 问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查CNI Pod状态 ===
 kubectl get pods -n kube-system -l k8s-app=calico-node  # Calico
 kubectl get pods -n kube-system -l app=flannel          # Flannel
@@ -235,10 +241,10 @@ cat /etc/cni/net.d/10-calico.conflist
 # === 检查kubelet日志 ===
 journalctl -u kubelet --since "10 minutes ago" | grep -i cni
 ```
-
 ### 3.3 存储挂载问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查PVC状态 ===
 kubectl get pvc -n <namespace>
 kubectl describe pvc <pvc-name> -n <namespace>
@@ -255,7 +261,6 @@ kubectl get pods -n kube-system -l app=csi-provisioner
 lsblk
 df -h
 ```
-
 ---
 
 <!-- chunk: 4. CrashLoopBackOff 排查 (CrashLoopBackOff Troubleshooting) -->
@@ -264,6 +269,7 @@ df -h
 ### 4.1 排查流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                     CrashLoopBackOff 排查流程                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -297,13 +303,13 @@ df -h
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 4.2 常用排查命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 查看当前日志 ===
 kubectl logs <pod-name> -n <namespace>
 
@@ -325,7 +331,6 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/sh
 # === 使用临时调试容器 (K8s 1.25+) ===
 kubectl debug <pod-name> -n <namespace> -it --image=busybox --target=<container-name>
 ```
-
 ### 4.3 退出码含义
 
 | 退出码 | 含义 | 常见原因 | 解决方案 |
@@ -356,7 +361,8 @@ kubectl debug <pod-name> -n <namespace> -it --image=busybox --target=<container-
 
 ### 5.2 排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看拉取错误详情 ===
 kubectl describe pod <pod-name> -n <namespace> | grep -A10 "Events"
 
@@ -373,13 +379,13 @@ crictl pull <image-name>
 # === 检查ServiceAccount的imagePullSecrets ===
 kubectl get sa <sa-name> -n <namespace> -o jsonpath='{.imagePullSecrets}'
 ```
-
 ### 5.3 创建镜像拉取Secret
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 创建docker-registry类型Secret ===
 kubectl create secret docker-registry <secret-name> \
   --docker-server=<registry-server> \
@@ -393,7 +399,6 @@ spec:
   imagePullSecrets:
   - name: <secret-name>
 ```
-
 ---
 
 <!-- chunk: 6. Terminating 状态排查 (Terminating Troubleshooting) -->
@@ -416,7 +421,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 标准删除 ===
 kubectl delete pod <pod-name> -n <namespace>
 
@@ -433,7 +448,6 @@ kubectl delete pod <pod-name> -n <namespace>
 # === 检查是否有Finalizers ===
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.finalizers}'
 ```
-
 ---
 
 <!-- chunk: 7. Init Container 故障排查 (Init Container Troubleshooting) -->
@@ -450,7 +464,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.finalizers}'
 
 ### 7.2 排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看Init Container日志 ===
 kubectl logs <pod-name> -c <init-container-name> -n <namespace>
 
@@ -463,7 +478,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.initContainers[*].
 # === 查看Init Container状态 ===
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.initContainerStatuses}'
 ```
-
 ---
 
 <!-- chunk: 8. 资源相关问题 (Resource Issues) -->
@@ -471,7 +485,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.initContainerSta
 
 ### 8.1 OOMKilled 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查是否OOMKilled ===
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].lastState.terminated.reason}'
 
@@ -484,10 +499,10 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].reso
 # === 查看节点内存压力 ===
 kubectl describe node <node-name> | grep -A5 "Conditions"
 ```
-
 ### 8.2 CPU Throttling 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看CPU使用 ===
 kubectl top pod <pod-name> -n <namespace>
 
@@ -499,7 +514,6 @@ cat /sys/fs/cgroup/cpu/kubepods/pod<pod-uid>/<container-id>/cpu.cfs_period_us
 # === 查看throttle统计 ===
 cat /sys/fs/cgroup/cpu/kubepods/pod<pod-uid>/<container-id>/cpu.stat
 ```
-
 ### 8.3 资源问题解决方案
 
 | 问题 | 症状 | 解决方案 |
@@ -519,7 +533,8 @@ cat /sys/fs/cgroup/cpu/kubepods/pod<pod-uid>/<container-id>/cpu.stat
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 检查Pod IP ===
 kubectl get pod <pod-name> -n <namespace> -o wide
 
@@ -535,7 +550,6 @@ kubectl exec -it <pod-name> -n <namespace> -- wget -qO- http://<service-name>:<p
 # === 检查NetworkPolicy ===
 kubectl get networkpolicy -n <namespace>
 ```
-
 ### 9.2 常见网络问题
 
 | 问题 | 症状 | 排查方法 |
@@ -572,7 +586,8 @@ kubectl debug <pod-name> -it --copy-to=debug-pod --container=debug --image=busyb
 
 ### 10.3 一键诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 POD=$1
 NS=${2:-default}
@@ -592,7 +607,6 @@ kubectl logs $POD -n $NS --tail=50 2>/dev/null || echo "No logs available"
 echo -e "\n=== Resource Usage ==="
 kubectl top pod $POD -n $NS 2>/dev/null || echo "Metrics not available"
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -631,3 +645,5 @@ kubectl top pod $POD -n $NS 2>/dev/null || echo "Metrics not available"
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

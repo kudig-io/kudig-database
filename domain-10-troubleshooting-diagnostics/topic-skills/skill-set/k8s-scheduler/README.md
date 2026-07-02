@@ -16,6 +16,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skill: Pod Pending/调度失败的诊断和修复
@@ -33,14 +38,16 @@ Pod 长时间处于 Pending 状态，无法被调度到任何节点运行。远�
 ## 诊断步骤
 
 ### 步骤1: 查看 Pod Events 定位调度失败原因
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace>
 ```
 > 在 Events 段落查找 `FailedScheduling` 事件，记录具体原因（资源不足、污点、亲和性、卷延迟等）。
 > 如果无法执行，替代方案：请用户截取 Pod 详情页面中 Events 部分的截图，或提供 Pending Pod 的名称和命名空间。
 
 ### 步骤2: 检查集群资源与节点状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top nodes
 kubectl describe node <node-name>
 kubectl get nodes -o wide
@@ -48,7 +55,8 @@ kubectl get nodes -o wide
 > 查看节点的 Allocatable 与 Requested 资源对比，确认是否有节点处于 NotReady 或 Cordoned 状态。
 
 ### 步骤3: 核对约束条件与污点容忍
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeSelector}{.spec.affinity}{.spec.tolerations}'
 kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 ```
@@ -76,3 +84,6 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

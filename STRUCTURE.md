@@ -26,6 +26,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # KUDIG-DATABASE 目录结构规范
@@ -149,3 +154,6 @@ exclude:
 | 2026-05-21 | 创建本文档；`metadata/` 移入 `_meta/metadata/`；`reports/` 改名为 `_reports/`；所有 profile 添加工具目录排除 |
 | 2026-06-24 | 站点构建从 mdBook/mkDocs 迁移至 Astro（`web/`）；移除 `gitbook/`、`mkdocs.yml`；域结构确认为 20 个 Domain；工程工具层用 `web/` 取代 `gitbook/` |
 | 2026-06-24 | **目录精简收编**: 24 个非 domain 目录精简至 10 个。`references/`→`entities/`、`synthesis/`→`concepts/`、`best-practices/`→`skills/`、`research/`→`entities/research/`；`corpus-config/`+`journal/`+`projects/`→`_meta/`；`templates/`+`prompts/`+`man/`+`video-scripts/`→`scripts/`；`visualizations/`→`web/`；`release-notes/`→`_reports/`；根目录散落文件归位；~1547 条 wikilink 批量重写 |
+
+
+<!-- risk-assessed -->

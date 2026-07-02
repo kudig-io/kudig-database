@@ -64,6 +64,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Istio|Istio]] 企业级服务网格架构与实践
@@ -953,7 +958,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== 1. Istio 组件状态 ==="
@@ -1017,10 +1023,10 @@ echo "=== 14. 性能指标 ==="
 kubectl exec -n default deploy/productpage-v1 -c istio-proxy -- \
   curl -s http://localhost:15090/stats/prometheus | grep -E "upstream_rq_time|downstream_cx_active"
 ```
-
 ## Istio 安装验证 — Shell 输出示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ istioctl verify-install
 1 Istio control planes detected, checking --revision "default" only
 ✔ Istio control plane "default" is installed in namespace "istio-system"
@@ -1040,10 +1046,10 @@ reviews-v1-545db77b95-def56.default                   Kubernetes  SYNCED SYNCED 
 reviews-v2-7bf8f9696f-ghi78.default                   Kubernetes  SYNCED SYNCED SYNCED SYNCED SYNCED istiod-6f9c6b7b4c-2xk8j     1.29.0
 ratings-v1-5745f4bdfc-jkl90.default                   Kubernetes  SYNCED SYNCED SYNCED SYNCED SYNCED istiod-6f9c6b7b4c-5mnpq     1.29.0
 ```
-
 ## istioctl analyze — 配置验证输出示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ istioctl analyze -A
 
 ✔ No validation issues found when analyzing all namespaces.
@@ -1060,7 +1066,6 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 ✔ Configuration analysis completed with 0 errors, 1 warning, 2 informational messages.
 
 ```
-
 ## 常见问题速查
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
@@ -1170,7 +1175,8 @@ Istio 多集群部署是企业级服务网格的关键能力之一。在多集�
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 export CTX_EAST="east-cluster"
 export CTX_WEST="west-cluster"
 
@@ -1218,7 +1224,6 @@ kubectl apply --context $CTX_WEST -f samples/multicluster/expose-services.yaml
 kubectl exec --context $CTX_WEST -n sample deploy/sleep -- \
   curl -s http://helloworld.sample.svc.cluster.local:5000/hello
 ```
-
 ## 多集群流量管理配置
 
 ```yaml
@@ -1319,7 +1324,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== WasmPlugin 状态检查 ==="
 kubectl get wasmplugin -A
 
@@ -1334,7 +1340,6 @@ echo "=== Envoy 配置中的 WASM 过滤器 ==="
 istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --json | \
   jq '.[].filterChains[].filters[].typed_config.http_filters[] | select(.name | contains("wasm"))'
 ```
-
 ---
 
 **文档版本**: v2.0
@@ -1375,3 +1380,5 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 
 ```
+
+<!-- risk-assessed -->

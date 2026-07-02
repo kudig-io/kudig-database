@@ -71,6 +71,11 @@ cross_refs:
   label: '运维技能: 15-monitoring-alerting-failure'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 30 - 监控告警故障排查 (Monitoring and Alerting Troubleshooting)
@@ -157,7 +162,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Prometheus Pod状态 ==========
 # 检查Prometheus组件状态
 kubectl get pods -n monitoring -l app=prometheus
@@ -200,10 +206,10 @@ curl -s http://localhost:9090/api/v1/query?query=up | jq '.status'
 # 清理端口转发
 kill %1 2>/dev/null
 ```
-
 ### 2.2 Grafana可视化检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Grafana状态验证 ==========
 # 检查Grafana Pod状态
 kubectl get pods -n monitoring -l app=grafana
@@ -236,7 +242,6 @@ for dashboard in "${CORE_DASHBOARDS[@]}"; do
     kubectl get configmap -n monitoring | grep -i "$dashboard" && echo "  ✓ Found" || echo "  ✗ Missing"
 done
 ```
-
 ---
 
 <!-- chunk: 3. 指标采集问题排查 (Metrics Collection Issues) -->
@@ -244,7 +249,8 @@ done
 
 ### 3.1 指标缺失问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Exporter状态检查 ==========
 # 检查Node Exporter状态
 kubectl get daemonset -n monitoring node-exporter
@@ -300,10 +306,10 @@ sleep 3
 curl -s http://localhost:<port>/metrics | head -10
 kill %1
 ```
-
 ### 3.2 采集配置问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 采集规则验证 ==========
 # 检查Prometheus配置
 kubectl get configmap -n monitoring prometheus-k8s -o yaml | grep -A50 "scrape_configs"
@@ -333,7 +339,6 @@ kubectl run network-test --image=busybox -n monitoring -it --rm -- sh -c "
 wget -q -O - http://prometheus-k8s:9090/-/healthy || echo 'Cannot reach Prometheus'
 "
 ```
-
 ---
 
 <!-- chunk: 4. 告警系统故障排查 (Alerting System Issues) -->
@@ -341,7 +346,8 @@ wget -q -O - http://prometheus-k8s:9090/-/healthy || echo 'Cannot reach Promethe
 
 ### 4.1 Alertmanager状态检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Alertmanager基础状态 ==========
 # 检查Alertmanager Pod状态
 kubectl get pods -n monitoring -l alertmanager=main
@@ -382,10 +388,10 @@ curl -s "http://localhost:9090/api/v1/alerts" | jq
 # 清理端口转发
 kill %1 2>/dev/null
 ```
-
 ### 4.2 告警不触发问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 告警条件验证 ==========
 # 测试告警表达式
 ALERT_EXPRESSION='up == 0'
@@ -418,7 +424,6 @@ kubectl get configmap -n monitoring alertmanager-main -o yaml | grep -A20 "recei
 # 测试通知通道
 curl -s http://localhost:9093/api/v2/receivers | jq
 ```
-
 ---
 
 <!-- chunk: 5. 告警风暴和误报问题 (Alert Storm and False Positive Issues) -->
@@ -426,7 +431,8 @@ curl -s http://localhost:9093/api/v2/receivers | jq
 
 ### 5.1 告警频率分析
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 告警统计分析 ==========
 # 收集告警历史数据
 kubectl port-forward -n monitoring svc/alertmanager-main 9093:9093 &
@@ -499,7 +505,6 @@ EOF
 
 chmod +x alert-correlation-analyzer.sh
 ```
-
 ### 5.2 告警规则优化
 
 ```bash
@@ -608,7 +613,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 性能指标收集 ==========
 # 监控Prometheus性能
 cat <<'EOF' > prometheus-performance-monitor.sh
@@ -691,13 +697,13 @@ EOF
 
 chmod +x monitoring-capacity-planner.sh
 ```
-
 ### 6.2 监控系统高可用配置
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 高可用Prometheus配置 ==========
 # 配置Prometheus联邦
 cat <<EOF > prometheus-federation.yaml
@@ -811,7 +817,6 @@ EOF
 
 chmod +x monitoring-recovery-plan.sh
 ```
-
 ---
 
 <!-- chunk: 7. 监控告警最佳实践 (Monitoring and Alerting Best Practices) -->
@@ -1016,3 +1021,6 @@ EOF
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

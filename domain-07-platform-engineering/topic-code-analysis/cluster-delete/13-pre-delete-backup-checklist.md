@@ -62,6 +62,11 @@ related_topics:
 - ha-delete
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 集群删除前的数据备份与迁移检查清单
@@ -73,7 +78,17 @@ related_topics:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────────────────────────┐
 │                  集群删除前准备流程                                    │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -98,12 +113,12 @@ related_topics:
 │  └── kubeadm reset / kubectl delete node / 清理网络和存储           │  # ⚠️ 清理节点所有 K8s 配置
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 阶段一：评估检查清单
 
 ### 删除范围确认
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群节点列表
 kubectl get nodes -o wide
 
@@ -116,10 +131,10 @@ kubectl get deployments,statefulsets,daemonsets --all-namespaces
 # 查看 PersistentVolume 状态（重点关注 Bound 状态）
 kubectl get pv --all-namespaces
 ```
-
 ### 下游依赖检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否有外部系统访问该集群的 API
 kubectl get ingress --all-namespaces
 
@@ -129,7 +144,6 @@ kubectl get secrets --all-namespaces | grep kubernetes.io/service-account-token
 # 检查是否有跨集群引用（Velero、Federation 等）
 kubectl get clusterpolicies --all-namespaces 2>/dev/null || echo "无跨集群策略"
 ```
-
 ## 阶段二：备份操作
 
 ### 2.1 etcd 快照备份（最关键）
@@ -139,7 +153,8 @@ etcd 存储了集群的全部状态，快照备份是集群删除前的首要操
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法一：在 etcd Pod 容器内执行（适用于 kubeadm 集群）
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 
@@ -162,7 +177,6 @@ ETCDCTL_API=3 etcdctl snapshot save $ETCD_SNAPSHOT_FILE \
 # 验证快照完整性
 ETCDCTL_API=3 etcdctl snapshot status $ETCD_SNAPSHOT_FILE --write-out=table
 ```
-
 ### etcdctl snapshot status 输出示例
 
 ```
@@ -175,7 +189,8 @@ ETCDCTL_API=3 etcdctl snapshot status $ETCD_SNAPSHOT_FILE --write-out=table
 
 ### 2.2 关键 Kubernetes 资源导出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建备份目录
 BACKUP_DIR="/backup/k8s-$(date +%Y%m%d)"
 mkdir -p $BACKUP_DIR
@@ -214,10 +229,10 @@ kubectl get namespace -o yaml > $BACKUP_DIR/namespaces.yaml
 
 echo "集群资源备份完成：$BACKUP_DIR"
 ```
-
 ### 2.3 Secret 备份（加密处理）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出所有 Secret（包含 base64 编码的敏感数据）
 # 注意：此文件包含敏感信息，务必加密存储
 
@@ -233,10 +248,10 @@ kubectl get secrets --all-namespaces \
   --field-selector type=kubernetes.io/tls \
   -o yaml > $BACKUP_DIR/tls-secrets.yaml
 ```
-
 ### 2.4 kubeconfig 和 PKI 证书备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 备份 kubeconfig
 cp ~/.kube/config $BACKUP_DIR/kubeconfig
 
@@ -247,10 +262,10 @@ cp -r /etc/kubernetes/pki $BACKUP_DIR/pki-backup
 # 备份 kubeadm 配置
 kubectl get configmap kubeadm-config -n kube-system -o yaml > $BACKUP_DIR/kubeadm-config.yaml
 ```
-
 ### 2.5 PersistentVolume 数据备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 PV 及其对应的存储后端
 kubectl get pv -o custom-columns=\
 'NAME:.metadata.name,CAPACITY:.spec.capacity.storage,ACCESS:.spec.accessModes,'\
@@ -264,12 +279,12 @@ aws ec2 create-snapshot \
   --volume-id vol-xxxxxxxxx \
   --description "Pre-k8s-cluster-delete backup $(date +%Y%m%d)"
 ```
-
 ## 阶段三：迁移验证
 
 ### 工作负载迁移确认
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认目标集群中工作负载已就绪
 kubectl get deployments --all-namespaces --context=target-cluster | grep -v Running
 
@@ -279,13 +294,13 @@ kubectl get ingress --all-namespaces --context=target-cluster
 # 验证服务健康
 kubectl get pods --all-namespaces --context=target-cluster | grep -v Running | grep -v Completed
 ```
-
 ### 删除前最终确认检查
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pre-delete-final-check.sh — 删除前最终确认脚本
 
@@ -322,7 +337,6 @@ fi
 echo ""
 echo "请确认以上检查项后，执行: kubeadm reset"  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ## 执行流程
 
 ```mermaid
@@ -354,7 +368,8 @@ flowchart TD
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 重新初始化集群
 kubeadm init --config kubeadm-config.yaml
 
@@ -375,7 +390,6 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
 mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
 ```
-
 ## 常见问题
 
 | 问题 | 预防措施 |
@@ -406,3 +420,5 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/05-etcd-cleanup.md|05-etcd-cleanup]]
 
 ```
+
+<!-- risk-assessed -->

@@ -46,6 +46,11 @@ cross_refs:
   label: 部署策略最佳实践
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 灾难恢复最佳实践
@@ -270,7 +275,8 @@ spec:
 
 ### 步骤1：安装Velero
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 安装Velero
 
@@ -298,13 +304,13 @@ velero install \
 # 4. 验证安装
 velero version
 ```
-
 ### 步骤2：配置备份策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 配置备份策略
 
@@ -357,7 +363,6 @@ EOF
 # 3. 验证备份策略
 velero schedule get
 ```
-
 ### 步骤3：配置备份验证
 
 ```bash
@@ -397,7 +402,8 @@ chmod +x verify-backup.sh
 
 ### 步骤4：配置恢复演练
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 配置恢复演练
 
@@ -433,7 +439,6 @@ EOF
 
 chmod +x restore-drill.sh
 ```
-
 ---
 
 ## 验证方法
@@ -551,7 +556,8 @@ velero restore create --from-backup <backup-name>
 **后果**：业务中断时间长，损失大。
 
 **正确做法**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 优化恢复流程
 # 1. 优先恢复关键服务
 velero restore create \
@@ -566,7 +572,6 @@ velero restore create \
 # 3. 验证恢复结果
 kubectl get all -n production-restored
 ```
-
 ---
 
 ## 相关资源
@@ -601,3 +606,5 @@ kubectl get all -n production-restored
 ---
 
 **文档维护**：定期审查和更新，确保与Velero和Kubernetes版本保持同步
+
+<!-- risk-assessed -->

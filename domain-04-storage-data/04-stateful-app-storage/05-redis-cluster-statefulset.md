@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Redis Cluster on K8s 生产部署指南
@@ -223,7 +228,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 收集所有 Pod 的地址
 PODS=$(kubectl get pods -n production -l app=redis-cluster -o jsonpath='{range .items[*]}{.metadata.name}.redis-cluster.production.svc.cluster.local:6379 {end}')
 echo $PODS
@@ -238,20 +244,19 @@ kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster create \
   redis-cluster-5.redis-cluster.production.svc.cluster.local:6379 \
   --cluster-replicas 1 --cluster-yes
 ```
-
 ### 3.2 查看集群状态
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点、槽位、主从关系
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster nodes
 
 # 查看集群整体健康状态
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster info
 ```
-
 ---
 
 ## 4. 故障转移机制
@@ -266,7 +271,8 @@ Redis Cluster 使用 gossip 协议检测节点状态。当主节点超时未响�
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前主节点
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster nodes
 
@@ -276,17 +282,16 @@ kubectl delete pod redis-cluster-1 -n production
 # 3. 等待一段时间后再次查看，原从节点应提升为主
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster nodes
 ```
-
 ### 4.3 手动故障转移
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在从节点上执行手动切换，切换期间几乎无中断
 kubectl exec -it redis-cluster-4 -n production -- redis-cli CLUSTER FAILOVER
 ```
-
 ---
 
 ## 5. 数据迁移与再平衡
@@ -295,27 +300,28 @@ kubectl exec -it redis-cluster-4 -n production -- redis-cli CLUSTER FAILOVER
 
 从 6 节点扩容到 8 节点：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale sts redis-cluster -n production --replicas=8
 ```
-
 新节点加入集群：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster add-node \
   redis-cluster-6.redis-cluster.production.svc.cluster.local:6379 \
   redis-cluster-0.redis-cluster.production.svc.cluster.local:6379
 ```
-
 ### 5.2 重新分配槽位
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 执行重分配，将所有槽位重新平衡
 kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster reshard \
   redis-cluster-0.redis-cluster.production.svc.cluster.local:6379 \
@@ -324,13 +330,13 @@ kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster reshard \
   --cluster-slots 4096 \
   --cluster-yes
 ```
-
 ### 5.3 缩容前迁移槽位
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 将下线节点的槽位迁出
 kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster reshard \
   redis-cluster-0.redis-cluster.production.svc.cluster.local:6379 \
@@ -343,7 +349,6 @@ kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster reshard \
 kubectl exec -it redis-cluster-0 -n production -- redis-cli --cluster del-node \
   redis-cluster-0.redis-cluster.production.svc.cluster.local:6379 <node-id-to-remove>
 ```
-
 ---
 
 ## 6. 持久化与备份
@@ -448,14 +453,14 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看具体失败的槽位
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster info
 
 # 查看节点状态
 kubectl exec -it redis-cluster-0 -n production -- redis-cli cluster nodes
 ```
-
 常见原因包括节点宕机、网络分区或槽位未分配。解决方法包括重启故障节点、修复网络或重新分配槽位。
 
 ### 8.2 内存使用率高
@@ -473,11 +478,11 @@ Redis 是内存数据库，内存使用率过高会导致 OOM 或性能下降。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看连接数
 kubectl exec -it redis-cluster-0 -n production -- redis-cli INFO clients
 ```
-
 优化建议：
 - 应用端使用连接池。
 - 设置 `timeout` 自动关闭空闲连接。
@@ -523,7 +528,8 @@ Redis Cluster 的节点应分布在多个可用区，以提升集群的整体可
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看集群节点与槽位
 kubectl exec -it -n production redis-cluster-0 -- redis-cli cluster nodes
 
@@ -539,7 +545,6 @@ kubectl exec -it -n production redis-cluster-3 -- redis-cli CLUSTER FAILOVER
 # 添加新节点到集群
 kubectl exec -it -n production redis-cluster-0 -- redis-cli --cluster add-node   redis-cluster-6.redis-cluster-headless.production.svc.cluster.local:6379   redis-cluster-0.redis-cluster-headless.production.svc.cluster.local:6379
 ```
-
 ### Redis 与阿里云产品集成
 
 | 阿里云产品 | 用途 |
@@ -558,3 +563,6 @@ kubectl exec -it -n production redis-cluster-0 -- redis-cli --cluster add-node  
 
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
+
+
+<!-- risk-assessed -->

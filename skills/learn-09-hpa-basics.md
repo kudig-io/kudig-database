@@ -30,6 +30,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第九课：HPA - 自动伸缩
@@ -192,6 +197,7 @@ spec:
 ### 2.4 命令行创建
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【快速创建 HPA】
 
 kubectl autoscale deployment my-app \
@@ -207,7 +213,6 @@ kubectl get hpa
 
 kubectl describe hpa my-app-hpa
 ```
-
 ---
 
 ## 3. HPA 原理
@@ -273,6 +278,7 @@ spec:
 ### 4.1 HPA 不触发扩容
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 HPA 是否存在
@@ -296,7 +302,6 @@ spec:
 
    kubectl describe pod <pod-name> | grep -A5 "Requests"
 ```
-
 ### 4.2 HPA 一直处于 Scaling 状态
 
 ```
@@ -316,6 +321,7 @@ HPA 在等待冷却时间结束，或者正在执行扩缩容操作。
 ### 4.3 如何验证 HPA 工作
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【测试方法】
 
 1. 创建 HPA
@@ -334,7 +340,6 @@ HPA 在等待冷却时间结束，或者正在执行扩缩容操作。
 
 5. 停止负载，观察缩容
 ```
-
 ---
 
 ## 5. 总结
@@ -343,7 +348,17 @@ HPA 在等待冷却时间结束，或者正在执行扩缩容操作。
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【命令速查】
 
 创建 HPA：
@@ -378,7 +393,6 @@ kubectl edit hpa <name>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -393,3 +407,6 @@ kubectl edit hpa <name>
 - [[skills/learn-11-job-cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
+
+
+<!-- risk-assessed -->

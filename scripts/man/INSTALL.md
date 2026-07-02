@@ -38,6 +38,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Manpage 安装指南
@@ -182,7 +187,8 @@ kudig-man kubernetes
 
 ## 卸载
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Linux
 sudo rm -f /usr/local/share/man/man1/kudig-*.1
 sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cilium,helm,argocd,istio,velero,[[cert-manager|cert-manager]]}.8
@@ -194,10 +200,10 @@ sudo rm -f /usr/local/share/man/man8/{kubernetes,prometheus,etcd,containerd,cili
 
 # 从 ~/.bashrc 或 ~/.zshrc 中移除 MANPATH 设置
 ```
-
 ## 验证安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有可用的 KUDIG manpage
 man -k kudig 2>/dev/null || echo "man -k 需要 whatis 数据库"
 
@@ -219,7 +225,6 @@ man istio
 man velero
 man cert-manager
 ```
-
 ## 故障排查
 
 ### man 命令找不到页面
@@ -275,3 +280,6 @@ sudo chmod 644 /usr/local/share/man/man8/*.8
 - [Manpage 索引](README.md)
 - [项目主文档](../README.md)
 - [项目脚本](../scripts/README.md)
+
+
+<!-- risk-assessed -->

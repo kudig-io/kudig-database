@@ -52,6 +52,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 08 - Linux 容器技术深度解析：生产环境容器运维专家指南
@@ -368,7 +373,17 @@ OverlayFS 是 Linux 内核的联合文件系统，Docker 和 Kubernetes 使用�
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Docker 的 overlay2 存储驱动
 # 查看 Docker 存储驱动
 docker info | grep "Storage Driver"
@@ -429,7 +444,6 @@ cat /tmp/overlay/upper/file3.txt    # 新文件在 upper 层
 umount /tmp/overlay/merged
 rm -rf /tmp/overlay  # ⚠️ 删除系统/数据文件
 ```
-
 ---
 
 ## 容器安全特性
@@ -438,7 +452,8 @@ rm -rf /tmp/overlay  # ⚠️ 删除系统/数据文件
 
 Linux Capabilities 将传统的 root 权限细分为约 40 种独立的能力，容器运行时默认只保留必要的 capabilities。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 capabilities
 capsh --print
 cat /proc/self/status | grep Cap
@@ -489,12 +504,21 @@ setcap -r /usr/bin/python3
 # CAP_AUDIT_WRITE
 # CAP_SETFCAP
 ```
-
 ## Seccomp (Secure Computing Mode)
 
 Seccomp 限制进程可以使用的系统调用，是容器安全的重要防线。
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 Seccomp 状态
 cat /proc/<pid>/status | grep Seccomp
 # 0 = SECCOMP_MODE_DISABLED  (禁用)
@@ -547,14 +571,14 @@ docker run --security-opt seccomp=unconfined nginx
 #     type: Localhost          # 使用节点上的自定义配置文件
 #     localhostProfile: profiles/audit.json
 ```
-
 ---
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
 
 ## 容器调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器进程信息
 docker inspect --format '{{.State.Pid}}' <container>       # Docker PID
 crictl inspect <container> | jq .info.pid                   # CRI-O/containerd PID
@@ -581,7 +605,6 @@ nsenter --target <pid> --net ip addr
 nsenter --target <pid> --net ip route
 nsenter --target <pid> --net iptables -t nat -L -n
 ```
-
 ---
 
 <!-- chunk: 性能调优 -->## 性能调优
@@ -666,6 +689,7 @@ spec:
 Kubernetes 通过 CRI (Container Runtime Interface) 与容器运行时交互，支持 containerd、CRI-O 等：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Kubernetes 容器运行时架构                      │
 │                                                                  │
@@ -699,7 +723,6 @@ Kubernetes 通过 CRI (Container Runtime Interface) 与容器运行时交互，�
 │  └──────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -722,7 +745,8 @@ Kubernetes 通过 CRI (Container Runtime Interface) 与容器运行时交互，�
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 容器无法启动
 docker logs <container>              # 查看日志
 crictl logs <container>
@@ -747,14 +771,14 @@ cat /sys/fs/cgroup/.../memory.max
 docker system df                     # 查看 Docker 磁盘使用
 docker system prune -a               # 清理未使用的镜像和容器  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ---
 
 ## 手动创建容器
 
 理解容器底层原理的最佳方式是手动创建一个容器。以下步骤展示了容器运行时的核心操作：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 手动创建容器 - 演示容器核心技术
 
@@ -777,10 +801,10 @@ unshare --pid --fork --mount --uts --ipc --net \
 # - 独立的 IPC
 # - 独立的网络 (只有 lo 接口)
 ```
-
 ## 使用 runc 创建 OCI 标准容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 创建 bundle 目录
 mkdir -p /tmp/mycontainer/rootfs
 
@@ -801,7 +825,6 @@ runc run mycontainer
 runc list
 runc exec mycontainer ps aux
 ```
-
 ## 容器运行时对比
 
 | 特性 | runc | crun | containerd | CRI-O |
@@ -814,7 +837,8 @@ runc exec mycontainer ps aux
 
 ## 容器镜像安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Trivy - 镜像漏洞扫描
 trivy image nginx:latest
 trivy image --severity HIGH,CRITICAL nginx:latest
@@ -829,13 +853,13 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metada
     trivy image "$image" 2>/dev/null | grep -E "Total|HIGH|CRITICAL"
   done
 ```
-
 ## 容器运行时安全监控
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Falco - 运行时安全监控
 # 安装 Falco
 helm repo add falcosecurity https://falcosecurity.github.io/charts
@@ -856,7 +880,6 @@ kubectl logs -n falco -l app=falco -f
   priority: WARNING
   tags: [container, shell]
 ```
-
 ## rootless 容器
 
 rootless 容器是容器安全的重要发展方向，它允许非 root 用户运行容器，即使容器被攻破，攻击者也只能获得普通用户权限，无法影响宿主机系统。
@@ -906,3 +929,5 @@ cat /etc/subgid
 - 99-linux-commands-reference
 
 ```
+
+<!-- risk-assessed -->

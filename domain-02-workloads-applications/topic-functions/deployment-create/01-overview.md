@@ -56,6 +56,11 @@ related_topics:
 - rolling-update
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Deployment 控制器架构总览
@@ -165,6 +170,7 @@ Kubernetes Deployment 是最核心的工作负载控制器之一，它通过管�
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Deployment 控制器链                                │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -202,7 +208,6 @@ Kubernetes Deployment 是最核心的工作负载控制器之一，它通过管�
 │  kubelet + 调度器 → Pod 运行在节点上                                │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 控制器启动源码
 
 ```go
@@ -510,7 +515,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建
 kubectl apply -f deployment.yaml
 # deployment.apps/web-frontend created
@@ -535,10 +541,10 @@ kubectl describe deployment web-frontend
 #   Normal  NewReplicaSetCreated  7s  deployment-controller  Created new replica set web-frontend-7b9d6c8f5d
 #   Normal  ScalingReplicaSet    7s   deployment-controller  Scaled up replica set web-frontend-7b9d6c8f5d to 5
 ```
-
 ### 滚动更新过程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set image deployment/web-frontend web=registry.example.com/web-frontend:v2.2.0
 # deployment.apps/web-frontend image updated
 
@@ -554,7 +560,6 @@ kubectl get pods -l app=web-frontend -w
 # web-frontend-7b9d6c8f5d-abcde   1/1     Terminating         0  5m  ← 旧 Pod 退出
 # web-frontend-8c0e7d9g6e-12345   1/1     Running             0  3s
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -572,3 +577,6 @@ kubectl get pods -l app=web-frontend -w
 - [`rolloutRecreate`]([[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|[[KUDIG Database|README]]]].md) — Recreate 策略
 - [`calculateStatus`](05-deployment-status.md) — Status 计算
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚
+
+
+<!-- risk-assessed -->

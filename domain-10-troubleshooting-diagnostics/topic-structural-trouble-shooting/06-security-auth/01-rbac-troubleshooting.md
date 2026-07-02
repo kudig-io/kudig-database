@@ -40,6 +40,11 @@ prerequisites:
 - troubleshooting-methodology
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: RBAC 与认证故障排查指南
@@ -143,7 +148,8 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 测试认证
 kubectl auth whoami
 kubectl get pods  # 如果失败会显示认证/授权错误
@@ -167,7 +173,6 @@ kubectl config current-context
 # 查看 API Server 审计日志
 cat /var/log/kubernetes/audit/audit.log | grep "403|401"
 ```
-
 ### 1.3 影响面分析
 
 | 问题类型 | 影响范围 | 影响描述 |
@@ -183,7 +188,8 @@ cat /var/log/kubernetes/audit/audit.log | grep "403|401"
 
 ### 2.1 认证问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认当前身份
 kubectl auth whoami
 # 或者
@@ -207,10 +213,10 @@ curl -k -H "Authorization: Bearer $TOKEN" https://<api-server>:6443/api/v1/names
 # 步骤 5：检查 API Server 认证配置
 cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -E "authentication|authorization"
 ```
-
 ### 2.2 RBAC 权限排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查是否有权限
 kubectl auth can-i <verb> <resource>
 # 例如
@@ -235,13 +241,13 @@ kubectl describe clusterrole <clusterrole-name>
 kubectl auth can-i --list
 kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
 ```
-
 ### 2.3 ServiceAccount 排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 Pod 使用的 ServiceAccount
 kubectl get pod <pod-name> -o jsonpath='{.spec.serviceAccountName}'
 
@@ -258,7 +264,6 @@ kubectl get rolebindings,clusterrolebindings -A -o json | \
 # 步骤 5：测试 ServiceAccount 权限
 kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa>
 ```
-
 ---
 
 ## 解决方案与风险控制
@@ -270,7 +275,8 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Role（命名空间级别）
 cat << EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
@@ -329,13 +335,13 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 #### 3.1.2 为 ServiceAccount 授予权限
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ServiceAccount
 kubectl create serviceaccount <sa-name> -n <namespace>
 
@@ -362,7 +368,6 @@ kubectl create rolebinding <sa-name>-view \
   --serviceaccount=<namespace>:<sa-name> \
   -n <namespace>
 ```
-
 #### 3.1.3 安全生产风险提示
 
 ```
@@ -381,7 +386,8 @@ kubectl create rolebinding <sa-name>-view \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：从 admin.conf 复制最新证书
 sudo cp /etc/kubernetes/admin.conf ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
@@ -421,7 +427,6 @@ kubectl config set-context <username>-context \
   --namespace=default \
   --user=<username>
 ```
-
 #### 3.2.2 安全生产风险提示
 
 ```
@@ -437,7 +442,8 @@ kubectl config set-context <username>-context \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 只读访问 Pod 和日志
 cat << EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
@@ -479,7 +485,6 @@ rules:
   verbs: ["*"]
 EOF
 ```
-
 ---
 
 ## 附录
@@ -532,3 +537,6 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+
+
+<!-- risk-assessed -->

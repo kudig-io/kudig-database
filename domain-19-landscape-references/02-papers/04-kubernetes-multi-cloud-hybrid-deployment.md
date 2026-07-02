@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: deployment'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
@@ -848,7 +853,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 电商平台多云部署脚本
 #!/bin/bash
 # ecommerce-multi-cloud-deploy.sh
@@ -888,7 +894,6 @@ helm upgrade --install ecommerce ./charts/ecommerce \
 echo "配置全局负载均衡..."
 kubectl apply -f global-loadbalancer.yaml
 ```
-
 <!-- chunk: 8. 最佳实践总结 -->## 8. 最佳实践总结
 
 ## 8.1 实施建议
@@ -1013,3 +1018,6 @@ vCluster作为跨云统一租户层，在不同云的Host集群上创建虚拟�
 - [[papers|#papers Hub]] — tag hub
 
 - [[research|#research Hub]] — tag hub
+
+
+<!-- risk-assessed -->

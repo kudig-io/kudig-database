@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -84,7 +89,8 @@ relationships:
 
 ## 诊断步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 状态与事件
 kubectl get pod -n app-data -l app=mysql -o wide
 kubectl describe pod -n app-data mysql-slave-0 | tail -60
@@ -112,7 +118,6 @@ aliyun cs GET /clusters/ack-zyy-prod-04/nodepools/np-data-ssd
 # 7. 查看 CSI 相关事件
 kubectl get events -n app-data --field-selector reason=FailedMount --sort-by='.lastTimestamp' | tail -30
 ```
-
 ## 根因分析
 
 节点池 `np-data-ssd` 昨晚扩容时使用了新镜像 `aliyun_3_x64_20G_alibase_20240618.vhd`，但该镜像模板中未预装 ACK 云盘 CSI 插件。现有 `csi-plugin` DaemonSet 的 nodeSelector 为 `alibabacloud.com/csi-plugin: "true"`，扩容脚本仅给老节点打了该标签，新节点缺少标签，导致 CSI DaemonSet 未调度到新节点。
@@ -131,38 +136,47 @@ kubectl get events -n app-data --field-selector reason=FailedMount --sort-by='.l
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl label node cn-zhangjiakou.172.16.4.21 alibabacloud.com/csi-plugin=true --overwrite
 kubectl label node cn-zhangjiakou.172.16.4.22 alibabacloud.com/csi-plugin=true --overwrite
 ```
-
 **第二步：检查 CSI 插件 Pod 调度到新节点**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -n kube-system -l app=csi-plugin -o wide -w
 kubectl wait --for=condition=Ready pod -l app=csi-plugin -n kube-system --timeout=120s
 ```
-
 **第三步：若仍未调度，检查并放宽 DaemonSet 的 nodeSelector/tolerations**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch ds csi-plugin -n kube-system --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/nodeSelector", "value": {"kubernetes.io/os":"linux"}}
 ]'
 ```
-
 **第四步：重启 kubelet 以重新触发卷挂载（必要时）**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl debug node/cn-zhangjiakou.172.16.4.21 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host systemctl restart kubelet
 ```
-
 **第五步：对节点池进行修复，确保后续扩容自动安装 CSI**
 
 在 ACK 控制台 → 节点池 `np-data-ssd` → 节点配置 → 开启 **自动安装 CSI 插件**，或执行：
@@ -177,7 +191,8 @@ aliyun cs POST /clusters/ack-zyy-prod-04/nodepools/np-data-ssd/operation/install
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. CSI 插件 Pod 在新节点 Running
 kubectl get pod -n kube-system -l app=csi-plugin -o wide | grep -E "4.21|4.22"
 
@@ -194,7 +209,6 @@ kubectl get pv
 # 5. 在 Pod 内验证挂载点
 kubectl exec -it -n app-data mysql-slave-0 -- df -h | grep mysql-data
 ```
-
 ## 回复客户话术
 
 > 您好，`app-data/mysql-slave-0` PVC 挂载失败的根因已确认：**新扩容节点未安装云盘 CSI 插件**。
@@ -251,3 +265,6 @@ CSI 插件是 Kubernetes 与底层云存储之间的桥梁。在 ACK 专有云�
 - StatefulSet Pod 启动失败：PVC 未绑定
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - StatefulSet Pod 启动失败：PVC 未绑定
+
+
+<!-- risk-assessed -->

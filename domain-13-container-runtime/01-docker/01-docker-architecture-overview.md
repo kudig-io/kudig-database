@@ -36,6 +36,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Docker 架构概述与核心概念
@@ -137,6 +142,7 @@ k8s_versions:
 ## 架构概览图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              Docker Client                                   │
 │                    (docker CLI / Docker Desktop / SDKs)                      │
@@ -175,10 +181,10 @@ k8s_versions:
 │     Namespaces | Cgroups | OverlayFS | Netfilter | Seccomp | AppArmor       │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 组件交互流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run nginx:latest
 
 [1] Docker CLI → dockerd (REST API over Unix Socket)
@@ -193,7 +199,6 @@ docker run nginx:latest
     ↓
 [6] runc 退出，containerd-shim 接管容器生命周期
 ```
-
 ---
 
 <!-- chunk: Docker Engine 核心组件 -->## Docker Engine 核心组件
@@ -588,6 +593,7 @@ Image Index (多架构索引)
 ## 演进历史
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 2014-2020: K8s 使用 dockershim 集成 Docker
               (docker CLI 接口)
 
@@ -599,7 +605,6 @@ Image Index (多架构索引)
 2022+: K8s 节点直接使用 containerd/CRI-O
        Docker 镜像仍然兼容 (OCI 标准)
 ```
-
 ## 当前最佳实践
 
 | 环境 | 推荐运行时 | 说明 |
@@ -714,3 +719,5 @@ Image Index (多架构索引)
 - 03-docker-container-lifecycle
 
 ```
+
+<!-- risk-assessed -->

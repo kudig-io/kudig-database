@@ -37,6 +37,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点注册流程 TLS Bootstrap 源码分析
@@ -231,7 +236,8 @@ func (kl *Kubelet) initializeNodeStatus() {
 
 ### 2.1 Token 格式与生命周期
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Bootstrap Token 格式: <token-id>.<token-secret>
 # token-id:     6 位 alphanumeric (如 abcdef)
 # token-secret: 16 位 alphanumeric (如 0123456789abcdef)
@@ -248,7 +254,6 @@ kubeadm token list
 # Token 默认 24 小时过期
 # 过期后节点无法使用该 Token 加入集群
 ```
-
 ### 2.2 Token 管理
 
 ```bash
@@ -329,7 +334,8 @@ status:
 
 ### 3.2 CSR 管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 CSR
 kubectl get csr
 # NAME        AGE   SIGNERNAME                                    REQUESTOR          CONDITION
@@ -353,7 +359,6 @@ kubectl certificate deny <csr-name>
 kubectl get csr <csr-name> -o jsonpath='{.spec.request}' | \
   base64 -d | openssl req -text -noout
 ```
-
 ### 3.3 自动审批源码
 
 ```go
@@ -503,7 +508,8 @@ status:
 
 ### 6.1 CIDR 分配机制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubeadm init 时指定 Pod CIDR
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
@@ -517,7 +523,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 # node-2    10.244.1.0/24
 # node-3    10.244.2.0/24
 ```
-
 ### 6.2 --node-name 与 --hostname-override
 
 ```bash
@@ -576,3 +581,5 @@ hostname
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]
 
 ```
+
+<!-- risk-assessed -->

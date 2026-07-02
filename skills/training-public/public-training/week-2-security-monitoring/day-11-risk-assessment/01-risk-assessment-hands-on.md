@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 11: K8s 安全风险识别与防护实操
@@ -83,7 +88,8 @@ prerequisites:
 
 **检查 system:masters 组滥用**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找所有 system:masters 绑定
 kubectl get clusterrolebindings -A | grep -i "system:masters"
 
@@ -92,10 +98,10 @@ kubectl get clusterrolebindings -A -o json | jq -r '.items[] |
   select(.subjects[].name == "system:masters") |
   {name: .metadata.name, subjects: .subjects}'
 ```
-
 **检测 ServiceAccount 权限过大**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找绑定到 system:authenticated 组的 ClusterRole
 kubectl get clusterrolebindings -A | grep "system:authenticated"
 
@@ -103,10 +109,10 @@ kubectl get clusterrolebindings -A | grep "system:authenticated"
 kubectl auth can-i create pods --as=system:serviceaccount:default:default
 kubectl auth can-i delete pods --as=system:serviceaccount:default:default
 ```
-
 ### 2.2 最小权限检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > check-rbac.sh <<'EOF'
 #!/bin/bash
 echo "=== RBAC 安全检查 ==="
@@ -133,7 +139,6 @@ EOF
 chmod +x check-rbac.sh
 ./check-rbac.sh
 ```
-
 ---
 
 ## 3. Pod 安全风险
@@ -143,7 +148,8 @@ chmod +x check-rbac.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查找 privileged Pod
 kubectl get pods -A -o yaml | grep -E "privileged: true" | head -20
 
@@ -155,7 +161,6 @@ helm repo add doktorlenz https://doktorlenz.github.io/charts
 helm install popeye doktorlenz/popeye -n popeye --create-namespace
 kubectl port-forward -n popeye svc/popeye 8080:80
 ```
-
 ### 3.2 常见高危 Pod 配置
 
 | 配置 | 风险 | 正确做法 |
@@ -205,7 +210,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查命名空间是否有 NetworkPolicy
 kubectl get networkpolicy -A
 
@@ -219,17 +225,16 @@ done
 # 对所有 namespace 应用默认拒绝（危险！先在测试环境验证）
 kubectl label namespace default 'kubernetes.io/metadata.name=default'
 ```
-
 ### 4.2 检测不安全的 Service 类型
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找 NodePort/LoadBalancer 类型 Service（暴露风险）
 kubectl get svc -A | grep -E "NodePort|LoadBalancer" | grep -v "ingress"
 
 # 检测 ClusterIP 是否泄漏到外部
 kubectl get svc -A | awk '{print $1, $2, $4}' | grep -v "ClusterIP" | head -20
 ```
-
 ### 4.3 安全 NetworkPolicy 模板
 
 ```yaml
@@ -281,7 +286,8 @@ spec:
 
 ### 5.1 检测使用 latest 标签
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找所有使用 latest 标签的 Pod
 kubectl get pods -A -o json | jq -r '.items[] |
   select(.spec.containers[].image | contains(":latest")) |
@@ -291,7 +297,6 @@ kubectl get pods -A -o json | jq -r '.items[] |
 docker run --rm aquasec/trivy image nginx:latest
 docker run --rm aquasec/trivy image --severity HIGH,CRITICAL myapp:v1.0
 ```
-
 ### 5.2 使用 ImagePolicyWebhook 强制签名验证
 
 ```yaml
@@ -306,7 +311,8 @@ docker run --rm aquasec/trivy image --severity HIGH,CRITICAL myapp:v1.0
 
 ### 6.1 检测直接挂载 secrets 到 Pod
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找挂载了 secret 的 Pod
 kubectl get pods -A -o json | jq -r '.items[] |
   select(.spec.volumes[].secret != null) |
@@ -317,7 +323,6 @@ kubectl get pods -A -o json | jq -r '.items[] |
   select(.spec.containers[].env[] | select(.valueFrom?.secretKeyRef != null)) |
   "\(.metadata.namespace)/\(.metadata.name) in env vars"
 ```
-
 ### 6.2 使用 Vault 管理密钥
 
 ```yaml
@@ -352,7 +357,8 @@ spec:
 
 ### 7.1 快速安全评估脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > security-check.sh <<'EOF'
 #!/bin/bash
 echo "=== K8s 安全快速评估 ==="
@@ -386,7 +392,6 @@ EOF
 chmod +x security-check.sh
 ./security-check.sh
 ```
-
 ### 7.2 安全修复优先级
 
 | 优先级 | 问题 | 修复方案 |
@@ -463,3 +468,5 @@ related:
 ---
 ```
 ```
+
+<!-- risk-assessed -->

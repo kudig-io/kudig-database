@@ -38,6 +38,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 新人上手快速路径（Quick Start）
@@ -134,7 +139,8 @@ quick-start/
 
 **详细步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 安装 kubectl (macOS)
 brew install kubectl
 kubectl version --client
@@ -175,7 +181,6 @@ kubectl get pods -A
 # kube-system   kube-proxy-worker-xxxxx                   1/1     Running   0          30d
 # monitoring    prometheus-k8s-0                          2/2     Running   0          15d
 ```
-
 ---
 
 ### Day 2: 工单处理（第二天）
@@ -195,7 +200,8 @@ kubectl get pods -A
 
 **工单处理标准流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 工单类型: Pod CrashLoopBackOff ===
 
 # Step 1: 查看Pod状态
@@ -243,7 +249,6 @@ kubectl get pods -n <namespace> --show-labels
 
 # Step 4: 修正selector或Pod标签使其匹配
 ```
-
 ---
 
 ### Day 3: 值班交接（第三天）
@@ -306,7 +311,8 @@ kubectl get pods -n <namespace> --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === kubectl 别名和自动补全 ===
 cat >> ~/.zshrc << 'EOF'
 # kubectl aliases
@@ -379,7 +385,6 @@ popeye
 #  │ Namespaces  : OK                             │
 #  └─────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 配置参考
@@ -491,7 +496,8 @@ kubectx -
 
 ### Q6: 如何确认我的权限范围？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前身份
 kubectl auth whoami
 
@@ -503,7 +509,6 @@ kubectl auth can-i create pods -n default
 kubectl auth can-i delete deployments -n production
 kubectl auth can-i get secrets -n kube-system
 ```
-
 ---
 
 ## 推荐阅读顺序
@@ -630,3 +635,5 @@ tags: [onboarding, quick-start, day-1-4, new-engineer, k8s-1.28-1.33]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

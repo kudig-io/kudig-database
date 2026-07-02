@@ -46,6 +46,11 @@ cross_refs:
   label: '知识域: domain-03-networking-traffic'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get pods -A -o json | jq '.items[] | select(.metadata.labels.app == "calico-node" or .metadata.labels.k8s-app == "calico-node") | {name: .metadata.name, status: .status.phase}' 显示 Calico Pod 异常 -->
 
 # calico FTA 树：Calico CNI 故障诊断
@@ -150,7 +155,8 @@ flowchart TD
 - Typha 数量配置错误导致资源配置不足
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 calico-node pod 状态
 kubectl get pods -n kube-system -l k8s-app=calico-node
 # 2. 查看 init container 日志
@@ -162,13 +168,13 @@ kubectl logs -n kube-system <calico-node-pod> --tail=100
 # 5. 确认 K8s 版本对应的 Calico 最低版本要求
 # K8s 1.28+ 需要 Calico v3.24+
 ```
-
 ### A2. CNI 二进制文件未找到
 
 **问题现象**: kubelet 日志显示 `stat /opt/cni/bin/calico: no such file or directory`
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CNI bin 目录
 ls -la /opt/cni/bin/
 # 2. 如缺少 calico，使用以下方式安装
@@ -180,13 +186,13 @@ mv calico /opt/cni/bin/calico && chmod +x /opt/cni/bin/calico
 # 3. 确认 calico 配置存在
 ls /etc/cni/net.d/
 ```
-
 ### A3. 容器镜像拉取失败
 
 **问题现象**: calico-node pod 卡在 ImagePullBackOff
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查镜像地址
 kubectl get pods -n kube-system -l k8s-app=calico-node -o jsonpath='{.items[*].spec.containers[*].image}'
 # 2. 在节点上手动拉取
@@ -195,7 +201,6 @@ crictl pull calico/kube-controllers:v3.24.0
 # 3. 如有认证问题，配置 imagePullSecrets
 # 4. 或使用内网镜像仓库
 ```
-
 ---
 
 ## B. Calico CNI 配置加载失败
@@ -205,7 +210,17 @@ crictl pull calico/kube-controllers:v3.24.0
 **问题现象**: kubelet 日志显示使用了错误的 CNI 插件（flannel 而非 calico）
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 CNI 配置目录顺序
 ls -la /etc/cni/net.d/
 # 2. Calico 要求配置文件名以字母顺序排在最前面或后缀为 .conflist/.conf
@@ -216,13 +231,13 @@ rm /etc/cni/net.d/10-flannel.conflist
 # 5. 重启 kubelet
 systemctl restart kubelet
 ```
-
 ### B2. IPAM 配置错误
 
 **问题现象**: Pod 分配到的 IP 不在预期的 CIDR 范围内，或分配失败
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Calico IPPool 配置
 kubectl get ippool -o yaml
 # 2. 查看 Calico 默认 IPPool 的 CIDR
@@ -233,7 +248,6 @@ calicoctl ipam show --show-blocks
 # 5. 如需修改 CIDR（谨慎）
 # 先禁用 IPPool，再新建，再重启 calico-node
 ```
-
 ---
 
 ## C. Felix/Bird BGP 会话异常
@@ -243,7 +257,8 @@ calicoctl ipam show --show-blocks
 **问题现象**: `kubectl exec <calico-node-pod> -- calico-node node-status` 报错
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Felix 状态
 kubectl exec -n kube-system <calico-node-pod> -- calico-node status
 # 2. 查看 Bird 会话状态
@@ -254,13 +269,13 @@ kubectl exec -n kube-system <calico-node-pod> -- netstat -tlnp | grep 5473
 kubectl exec -n kube-system <calico-node-pod> -- sed -i 's/LOG_LEVEL=info/LOG_LEVEL=debug/' /etc/calico/confd/config-node.env
 kubectl exec -n kube-system <calico-node-pod> -- kill -HUP 1  # 重新加载配置
 ```
-
 ### C2. Bird BGP 会话建立失败
 
 **问题现象**: `birdcl show protocols` 显示 BGP 会话 down
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 AS number 是否冲突
 # 两个节点不能使用相同的 AS number（除非使用 Route Reflector）
 kubectl exec -n kube-system <calico-node-pod> -- birdcl show protocols | grep -i bgp
@@ -272,13 +287,13 @@ kubectl exec -n kube-system <calico-node-pod> -- birdcl show bfd session
 kubectl exec -n kube-system <calico-node-pod> -- birdc show log
 # 5. 常见原因：节点间路由不可达、AS 号冲突、防火墙阻止 179 端口
 ```
-
 ### C3. BGP Route Reflector 配置错误
 
 **问题现象**: 超过 50 节点的全网状 BGP 连接数爆炸，新节点之间无法互通
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 BGP 会话数
 kubectl exec -n kube-system <calico-node-pod> -- birdcl show protocols | grep BGP | wc -l
 # 2. 配置 Route Reflector（用于大规模集群）
@@ -288,7 +303,6 @@ kubectl exec -n kube-system <calico-node-pod> -- birdcl show protocols | grep BG
 kubectl get bgppeer -o yaml
 # 4. 减少全局 BGP 会话数（改用 node-to-node mesh = false + RR）
 ```
-
 ---
 
 ## D. NetworkPolicy 不生效
@@ -298,7 +312,8 @@ kubectl get bgppeer -o yaml
 **问题现象**: 配置了 allow 规则但流量仍然被阻止，或配置了 deny-all 后整个命名空间流量中断
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Calico NetworkPolicy 顺序
 kubectl get networkpolicy -o yaml
 # 2. Calico 的 NetworkPolicy 按 creationTimestamp 顺序评估
@@ -310,13 +325,13 @@ kubectl label namespace <ns> projectcalico.org/namespace-kind=production
 # 5. 确认 namespace 有正确的 Calico profile
 kubectl get profile
 ```
-
 ### D2. selector scope 不匹配
 
 **问题现象**: Policy 选择器配置正确但流量未被正确允许/阻止
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Pod 的 labels 与 selector 匹配
 kubectl get pod <pod-name> --show-labels
 # 2. 检查 namespaceSelector vs podSelector 的区别
@@ -327,13 +342,13 @@ calicoctl get policy -o yaml
 # 4. 在 workload 端点查看实际生效的策略
 calicoctl get workloadendpoint -o yaml | grep -A10 policy
 ```
-
 ### D3. HostEndpoint 策略未生效
 
 **问题现象**: 配置了针对 HostEndpoint 的 policy 但不生效
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认节点已创建 HostEndpoint 资源
 kubectl get hostendpoint
 # 2. 如 HostEndpoint 不存在，手动创建
@@ -355,7 +370,6 @@ kubectl get nodes <node-name> --show-labels | grep calico
 # 4. 查看 Felix 的 policy 匹配情况
 calicoctl policy ls | grep -i <policy-name>
 ```
-
 ---
 
 ## E. IPIP/VXLAN 隧道问题
@@ -365,7 +379,8 @@ calicoctl policy ls | grep -i <policy-name>
 **问题现象**: 跨节点 Pod 通信失败，`tcpdump` 显示 IPIP 包但无响应
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 tunnel 配置
 cat /etc/calico/confd/config/bird.cfg | grep -i tunnel
 # 2. 确认 encapMode
@@ -377,7 +392,6 @@ cat /proc/net/ipip  # 存在则支持
 # 5. 如内核不支持，切换到 VXLAN 模式
 kubectl patch felixconfiguration default -p '{"spec":{"vxlanEnabled":true}}'
 ```
-
 ### E2. VXLAN 隧道无法建立
 
 **问题现象**: 使用 VXLAN 模式时跨节点 Pod 不通，`calicoctl show wireshark` 无数据
@@ -404,7 +418,8 @@ ip neigh show | grep vxlan
 **问题现象**: 新建 Pod 无法分配 IP，`calicoctl ipam show` 显示无可用 IP
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 IP 池使用情况
 calicoctl ipam show --show-blocks
 # 2. 检查是否有 IP 未释放（已分配但 Pod 已删除）
@@ -422,7 +437,6 @@ spec:
   natOutgoing: true
 EOF
 ```
-
 ### F2. IP 冲突（双鸟现象）
 
 **问题现象**: 两个 Pod 使用相同 IP，互相 ping 不通对方
@@ -448,7 +462,8 @@ ip neigh show | grep <ip-address>
 **问题现象**: calico-node pod 日志中频繁出现 "Typha connection reset"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Typha pod 状态
 kubectl get pods -n kube-system -l k8s-app=calico-typha
 # 2. 查看 Typha 日志
@@ -458,7 +473,6 @@ kubectl get configmap -n kube-system calico-config -o yaml | grep typha
 # 4. 调整 Typha 副本数（大规模集群建议 2-3 个）
 kubectl scale deployment calico-typha -n kube-system --replicas=3
 ```
-
 ---
 
 ## 附录：关键命令索引
@@ -507,3 +521,6 @@ knowledge_refs:
 - [[domain-19-landscape-references/_archived-release-notes/networking/calico/RELEASE-NOTES-3.25|calico v3.25 Release Notes]]
 - [[domain-19-landscape-references/_archived-release-notes/networking/calico/RELEASE-NOTES-3.31|calico v3.31 Release Notes]]
 - [[domain-19-landscape-references/_archived-release-notes/networking/calico/RELEASE-NOTES-3.21|calico v3.21 Release Notes]]
+
+
+<!-- risk-assessed -->

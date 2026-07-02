@@ -1,0 +1,126 @@
+{
+  "summary": {
+    "total_io_pairs": 5159,
+    "all_passed": false,
+    "checks_passed": 2,
+    "checks_total": 5
+  },
+  "details": {
+    "skill_coverage": {
+      "total_skills": 32,
+      "skills_covered": 32,
+      "skills_with_min_3": 32,
+      "coverage": 1.0,
+      "target": 0.8,
+      "passed": true,
+      "gaps": []
+    },
+    "fta_coverage": {
+      "total_ftas": 44,
+      "ftas_covered": 44,
+      "ftas_with_min_2": 44,
+      "coverage": 1.0,
+      "target": 0.6,
+      "passed": true,
+      "gaps": []
+    },
+    "severity_balance": {
+      "total": 5159,
+      "distribution": {
+        "medium": "65.9%",
+        "high": "33.7%",
+        "critical": "0.4%"
+      },
+      "counts": {
+        "medium": 3399,
+        "high": 1738,
+        "critical": 22
+      },
+      "max_deviation": "45.9%",
+      "passed": false
+    },
+    "command_diversity": {
+      "total_commands": 5159,
+      "unique_commands": 425,
+      "ratio": 0.08238030626090327,
+      "target": 0.9,
+      "passed": false,
+      "top_duplicates": [
+        {
+          "command": "kubectl get nodes",
+          "count": 77
+        },
+        {
+          "command": "kubectl get pods -n <name> -l <name>",
+          "count": 66
+        },
+        {
+          "command": "kubectl exec",
+          "count": 55
+        },
+        {
+          "command": "kubectl get pods -n <name> -l <name> -o wide",
+          "count": 55
+        },
+        {
+          "command": "kubectl debug node/",
+          "count": 44
+        }
+      ]
+    },
+    "domain_coverage": {
+      "expected_domains": [
+        "NODE",
+        "POD",
+        "DNS",
+        "NET",
+        "CERT",
+        "CP",
+        "ETCD",
+        "WORK",
+        "STORAGE",
+        "INGRESS",
+        "SEC",
+        "UPGRADE",
+        "OBS",
+        "SCALE",
+        "GPU",
+        "HELM",
+        "WEBHOOK",
+        "CONFIG"
+      ],
+      "found_domains": [
+        "CERT",
+        "CONFIG",
+        "CP",
+        "DNS",
+        "ETCD",
+        "GENERAL",
+        "IMAGE",
+        "INGRESS",
+        "NET",
+        "NODE",
+        "OBS",
+        "POD",
+        "SCALE",
+        "SEC",
+        "STORAGE",
+        "UPGRADE",
+        "WORK"
+      ],
+      "covered": 15,
+      "total_expected": 18,
+      "coverage": 0.8333333333333334,
+      "target": 0.85,
+      "passed": false,
+      "missing": [
+        "GPU",
+        "HELM",
+        "WEBHOOK"
+      ]
+    }
+  },
+  "recommendations": [
+    "补充 Domain 语料: 缺失 GPU, HELM, WEBHOOK"
+  ]
+}

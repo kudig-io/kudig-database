@@ -45,6 +45,11 @@ component: Problem Solving Architecture
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 问题排查体系架构文档
@@ -492,3 +497,6 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 - [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md|symptom-vector-matcher]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
+
+
+<!-- risk-assessed -->

@@ -52,6 +52,11 @@ updated: "2026-06-26"
 summary: '2. [StatefulSet + Headless Service 模式](#statefulset--headless-service-模式)'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 有状态应用 Kubernetes 存储模式
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **最后更新**: 2026-06
@@ -529,3 +534,6 @@ volumeClaimTemplates:
 | Kafka | 本地 SSD / ESSD | 顺序写性能优先 |
 | Elasticsearch | ESSD PL2/PL3 | 索引吞吐 |
 | Redis | 本地 SSD / ESSD | AOF 持久化低延迟 |
+
+
+<!-- risk-assessed -->

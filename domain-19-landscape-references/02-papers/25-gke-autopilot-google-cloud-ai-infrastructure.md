@@ -46,6 +46,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: GKE Autopilot 与 Google Cloud AI 基础设施 (GKE Autopilot and Google Cloud AI Infrastructure)
@@ -846,7 +851,8 @@ ray.get(coordinate_training.remote())
 
 Gemini CLI 将大语言模型能力集成到 Kubernetes 运维工作流，2026 年 3 月 GA：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Gemini CLI 安装
 gcloud components install gemini
 
@@ -867,13 +873,13 @@ gcloud gemini kubectl -- \
 # 3. 对找到的 Pod 执行 kubectl logs --since=1h | grep -i error
 # 4. 整合结果并以可读格式展示
 ```
-
 ## 5.2 上下文感知故障诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景：服务延迟突然升高，AI 辅助排查
 gcloud gemini diagnose --cluster=production-cluster \
   "order-service 在过去 30 分钟内 P99 延迟从 50ms 升至 2000ms，请帮我诊断原因"
@@ -904,10 +910,10 @@ gcloud gemini diagnose --cluster=production-cluster \
 #   2. 查看 PR #1234 数据库查询变更
 #   3. 添加数据库 N+1 监控告警
 ```
-
 ## 5.3 Gemini 辅助 YAML 生成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自然语言生成 Kubernetes YAML
 gcloud gemini create -- \
   "创建一个 GPU 训练 Job：使用 PyTorch，4 个 L4 GPU，从 GCS bucket my-data 读取训练数据，
@@ -933,7 +939,6 @@ gcloud gemini create -- \
 #
 # Apply this configuration? [y/N]
 ```
-
 ---
 
 <!-- chunk: 6. Autopilot GPU 工作负载 -->## 6. Autopilot GPU 工作负载
@@ -1314,6 +1319,7 @@ spec:
 ## 8.4 成本优化检查清单
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 💰 Autopilot 成本优化
 [ ] 精确设置 Pod resource requests (避免过度申请)
 [ ] 配置 VPA 自动优化资源请求
@@ -1345,7 +1351,6 @@ spec:
 [ ] Cloud CDN 缓存静态内容
 [ ] Private Service Connect 替代 NAT Gateway
 ```
-
 ---
 
 <!-- chunk: 9. 未来趋势 -->## 9. 未来趋势
@@ -1457,3 +1462,6 @@ spec:
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

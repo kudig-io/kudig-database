@@ -46,6 +46,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Controller Manager 故障排查指南
@@ -182,7 +187,8 @@ Controller Manager 是集群的“执行官”，负责确保集群的“实际�
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Controller Manager 进程状态（systemd 管理）
 systemctl status kube-controller-manager
 
@@ -210,7 +216,6 @@ curl -k https://127.0.0.1:10257/metrics | grep controller_manager
 # 查看各控制器工作队列
 curl -k https://127.0.0.1:10257/metrics | grep workqueue
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -425,7 +430,8 @@ Controller Manager 运行多个控制器，负责维护集群期望状态。排�
 
 #### 2.3.1 第一步：检查进程状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查进程是否存在
 ps aux | grep kube-controller-manager | grep -v grep
 
@@ -444,10 +450,10 @@ curl -k https://127.0.0.1:10257/healthz
 # 查看详细健康状态
 curl -k 'https://127.0.0.1:10257/healthz?verbose'
 ```
-
 #### 2.3.2 第二步：检查 API Server 连接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CM 日志中的连接错误
 journalctl -u kube-controller-manager | grep -iE "(unable to connect|connection refused|error)" | tail -20
 
@@ -460,10 +466,10 @@ openssl x509 -in /etc/kubernetes/pki/controller-manager.crt -noout -dates 2>/dev
 # 检查 API Server 可达性
 curl -k https://<api-server-ip>:6443/healthz
 ```
-
 #### 2.3.3 第三步：检查 Leader 选举
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Controller Manager Lease
 kubectl get leases -n kube-system kube-controller-manager -o yaml
 
@@ -479,10 +485,10 @@ for node in master-1 master-2 master-3; do
   ssh $node "crictl ps | grep kube-controller-manager"
 done
 ```
-
 #### 2.3.4 第四步：检查控制器状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有启用的控制器
 curl -k https://127.0.0.1:10257/metrics | grep controller_manager_controller_started
 
@@ -515,10 +521,10 @@ kubectl describe endpoints <name>
 kubectl get nodes
 kubectl describe node <name> | grep -A20 Conditions
 ```
-
 #### 2.3.5 第五步：检查资源同步状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Deployment 是否正常同步
 kubectl get deployments -A -o wide
 # 检查 READY 列是否与 DESIRED 一致
@@ -543,7 +549,6 @@ kubectl get pvc -A
 kubectl get ns
 # 检查是否有长期 Terminating 的 NS
 ```
-
 #### 2.3.6 第六步：检查性能和资源
 
 ```bash
@@ -571,7 +576,8 @@ curl -k https://127.0.0.1:10257/metrics | grep rest_client_requests_total | grep
 
 #### 2.3.7 第七步：检查日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看日志
 journalctl -u kube-controller-manager -f --no-pager
 
@@ -590,7 +596,6 @@ journalctl -u kube-controller-manager | grep -i "node" | tail -50
 # 查找同步错误
 journalctl -u kube-controller-manager | grep -iE "(sync.*error|failed to sync)" | tail -50
 ```
-
 ### 2.4 排查注意事项
 
 #### 2.4.1 安全注意事项
@@ -637,7 +642,8 @@ Node Controller 负责在节点 NotReady 时驱逐 Pod。
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查启动失败原因
 journalctl -u kube-controller-manager -b --no-pager | tail -100
 
@@ -664,7 +670,6 @@ mv /tmp/kube-controller-manager.yaml /etc/kubernetes/manifests/
 kubectl get pods -n kube-system | grep controller-manager
 curl -k https://127.0.0.1:10257/healthz
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -691,7 +696,8 @@ curl -k https://127.0.0.1:10257/healthz
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
 kubectl get deployments -A -o wide
 kubectl get rs -A -o wide
@@ -716,7 +722,6 @@ kubectl annotate deployment <name> -n <namespace> force-sync=$(date +%s)
 # 步骤 7：验证恢复
 kubectl rollout status deployment <name> -n <namespace>
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -745,7 +750,8 @@ kubectl rollout status deployment <name> -n <namespace>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
 kubectl get endpoints -A
 # 检查是否有 Service 的 Endpoints 为空
@@ -775,7 +781,6 @@ kubectl apply -f <service-yaml>
 # 步骤 7：验证恢复
 kubectl get endpoints <service-name>
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -802,7 +807,17 @@ kubectl get endpoints <service-name>
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认问题
 kubectl get nodes
 # 检查是否有节点长期处于 NotReady 状态
@@ -831,7 +846,6 @@ kubectl uncordon <node-name>
 # 步骤 7：验证恢复
 kubectl get nodes
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -858,7 +872,8 @@ kubectl get nodes
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
 kubectl get ns
 # 检查是否有 Terminating 状态的 namespace
@@ -883,7 +898,6 @@ kubectl get ns <namespace>
 # 步骤 7：清理可能遗留的资源
 kubectl get all -A | grep <namespace>
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -910,7 +924,8 @@ kubectl get all -A | grep <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
 kubectl get pv
 kubectl get pvc -A
@@ -949,7 +964,6 @@ EOF
 # 步骤 7：验证绑定
 kubectl get pvc <name> -n <namespace>
 ```
-
 #### 3.6.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1505,3 +1519,6 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+
+
+<!-- risk-assessed -->

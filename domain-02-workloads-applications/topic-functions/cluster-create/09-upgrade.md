@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 集群升级流程 kubeadm upgrade
@@ -345,7 +350,17 @@ func RunNode(flags *NodeFlags) error {
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看升级计划
 kubeadm upgrade plan
 # Components that must be upgraded manually:
@@ -376,14 +391,23 @@ kubectl get nodes
 # master    Ready    v1.29.0
 # worker-1  Ready    v1.29.0
 ```
-
 ### 场景 2: HA 滚动升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 逐个升级 control-plane 节点
 for node in master-1 master-2 master-3; do
     echo "Upgrading $node..."
@@ -402,14 +426,23 @@ for node in worker-1 worker-2 worker-3; do
     kubectl uncordon $node
 done
 ```
-
 ### 场景 3: 升级失败回滚
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查找备份
 ls /etc/kubernetes/tmp/
 # kubeadm-backup-1704067200
@@ -423,10 +456,10 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db --data-dir=/var/
 # 重启 kubelet
 systemctl restart kubelet
 ```
-
 ### 场景 4: etcd 备份脚本 (升级前必须)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -437,7 +470,6 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db \
 # 验证快照
 ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-20240101.db --write-table
 ```
-
 ## 配置示例
 
 ### 升级兼容性矩阵
@@ -676,7 +708,8 @@ func RunApplyPreflights(client clientset.Interface, plan *UpgradePlan) error {
 
 ### kube-proxy 升级 (DaemonSet)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kube-proxy 在升级 apply 时自动更新
 kubectl get ds kube-proxy -n kube-system -o jsonpath='{.spec.template.spec.containers[0].image}'
 # registry.k8s.io/kube-proxy:v1.28.0
@@ -687,7 +720,6 @@ kubectl get ds kube-proxy -n kube-system -o jsonpath='{.spec.template.spec.conta
 # 手动更新 (如果需要)
 kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.29.0 -n kube-system
 ```
-
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
@@ -696,3 +728,6 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]
+
+
+<!-- risk-assessed -->

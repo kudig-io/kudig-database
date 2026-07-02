@@ -66,6 +66,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - DNS 服务发现与 [[CoreDNS|CoreDNS]] 调优
@@ -275,7 +280,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # CoreDNS 插件链分析脚本
 
@@ -300,7 +306,6 @@ echo -e "\n4. 缓存命中率:"
 kubectl exec -n kube-system $COREDNS_POD -- curl -s http://localhost:9153/metrics | \
   grep coredns_cache_hits_total
 ```
-
 ---
 
 <!-- chunk: 2. 高性能配置优化 -->
@@ -529,7 +534,8 @@ data:
 
 ### 3.1 A/AAAA 记录生成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # DNS 服务发现机制验证脚本
 
@@ -576,7 +582,6 @@ for svc in $HEADLESS_SVCS; do
   echo "    解析到 $POD_RECORDS 个 Pod IP"
 done
 ```
-
 ### 3.2 Pod DNS 记录
 
 ```yaml
@@ -619,7 +624,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod DNS 测试脚本
 kubectl exec -it dns-test-pod -- sh -c '
 echo "=== Pod DNS 测试 ==="
@@ -647,7 +653,6 @@ MY_IP=$(hostname -i)
 nslookup $MY_IP
 '
 ```
-
 ---
 
 <!-- chunk: 4. 故障诊断与排错 -->
@@ -658,7 +663,8 @@ nslookup $MY_IP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # CoreDNS 故障诊断脚本
 
@@ -702,7 +708,6 @@ else
   echo "未检测到 Prometheus 监控"
 fi
 ```
-
 ### 4.2 性能瓶颈诊断
 
 ```yaml
@@ -1258,3 +1263,6 @@ spec:
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+
+<!-- risk-assessed -->

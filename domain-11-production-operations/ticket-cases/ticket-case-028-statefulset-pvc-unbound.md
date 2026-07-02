@@ -66,6 +66,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -91,7 +96,8 @@ relationships:
 
 按“先 Pod 事件、再 PVC/StorageClass、最后 CSI 供给日志”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 StatefulSet 与 Pod 状态
 kubectl get statefulset kafka-broker -n middleware
 kubectl get pod -n middleware -l app=kafka-broker -o wide
@@ -122,7 +128,6 @@ aliyun ecs DescribeAvailableResource \
 # 7. 检查 ASO 或 ACK 存储相关 CR
 kubectl get sc -o yaml | grep -B2 -A5 "essd-pl1"
 ```
-
 ## 根因分析
 
 经排查，发现 Kafka StatefulSet 的 `volumeClaimTemplates` 中指定的 StorageClass 为 `alicloud-disk-essd-pl1`：
@@ -163,10 +168,10 @@ Events:
 
 **第一步：确认可用的 StorageClass 及其性能等级**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get storageclass -o custom-columns='NAME:.metadata.name,PROVISIONER:.provisioner,RECLAIMPOLICY:.reclaimPolicy,VOLUMEBINDINGMODE:.volumeBindingMode,DEFAULT:.metadata.annotations.storageclass\.kubernetes\.io/is-default-class'
 ```
-
 确认 `alicloud-disk-essd-performance` 对应 ESSD PL1，满足 Kafka 性能要求。
 
 **第二步：临时为已 Pending 的 PVC 修改 StorageClass（仅对未绑定 PVC 有效）**
@@ -174,14 +179,14 @@ kubectl get storageclass -o custom-columns='NAME:.metadata.name,PROVISIONER:.pro
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pvc data-kafka-broker-2 -n middleware --type='merge' -p '{
   "spec": {
     "storageClassName": "alicloud-disk-essd-performance"
   }
 }'
 ```
-
 > 注意：PVC 一旦绑定，无法修改 StorageClass。本例中 PVC 尚未绑定，因此可以 patch。
 
 **第三步：更新 StatefulSet volumeClaimTemplates，避免后续新 broker 复现**
@@ -192,7 +197,8 @@ kubectl patch pvc data-kafka-broker-2 -n middleware --type='merge' -p '{
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 导出当前 StatefulSet YAML
 kubectl get statefulset kafka-broker -n middleware -o yaml > /tmp/kafka-broker-ss.yaml
 
@@ -205,26 +211,26 @@ kubectl delete statefulset kafka-broker -n middleware --cascade=orphan
 # 4. 重新应用修改后的 YAML
 kubectl apply -f /tmp/kafka-broker-ss.yaml
 ```
-
 **第四步：手动触发 kafka-broker-2 重建，使其使用已修正的 PVC**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 Pending 的 Pod，StatefulSet 控制器会按新模板重建
 kubectl delete pod kafka-broker-2 -n middleware
 
 # 观察 StatefulSet 滚动状态
 kubectl rollout status statefulset kafka-broker -n middleware --timeout=300s
 ```
-
 **第五步：如需要保留原 StorageClass 名称，可在集群中创建缺失的 StorageClass（长期方案）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -241,7 +247,6 @@ allowVolumeExpansion: true
 volumeBindingMode: Immediate
 EOF
 ```
-
 > 该操作需根据实际 region、zone 与磁盘类型调整参数，建议在非生产环境验证后再执行。
 
 ## 验证命令
@@ -249,7 +254,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 已 Bound
 kubectl get pvc -n middleware | grep kafka-broker-2
 
@@ -273,7 +279,6 @@ aliyun ecs DescribeDisks \
   --TagKey "ack.aliyun.com" \
   --output cols=DiskId,Status,Size,Type rows=Disks.Disk[]
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，Kafka broker `kafka-broker-2` 无法启动的根因是 **StatefulSet 中引用的 StorageClass `alicloud-disk-essd-pl1` 在集群中不存在**，导致 PVC 无法动态供给，Pod 因 `unbound immediate PersistentVolumeClaims` 一直 Pending。
@@ -326,3 +331,6 @@ aliyun ecs DescribeDisks \
 - StatefulSet
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

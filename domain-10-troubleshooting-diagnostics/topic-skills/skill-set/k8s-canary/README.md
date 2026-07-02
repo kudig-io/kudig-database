@@ -15,6 +15,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skill: 金丝雀发布异常的诊断和修复
@@ -32,7 +37,8 @@ status: reviewed
 ## 诊断步骤
 
 ### 步骤1: 确认金丝雀流量比例与路由规则
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l version=canary
 kubectl get ingress <ingress-name> -n <namespace> -o yaml | grep -A5 canary
 kubectl get virtualservice <vs-name> -n <namespace> -o yaml
@@ -41,7 +47,8 @@ kubectl get virtualservice <vs-name> -n <namespace> -o yaml
 > 如果无法执行，替代方案：请用户提供当前金丝雀与稳定版本的 Pod 数量，以及 Ingress/Service Mesh 控制台中的权重截图。
 
 ### 步骤2: 对比金丝雀与稳定版本的关键指标
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -l version=canary -n <namespace> --tail=100 | grep -i error
 kubectl top pods -n <namespace> -l version=canary
 kubectl top pods -n <namespace> -l version=stable
@@ -49,7 +56,8 @@ kubectl top pods -n <namespace> -l version=stable
 > 收集金丝雀版本的错误日志、资源消耗，并与稳定版本进行对比，确认异常是资源相关还是代码逻辑相关。
 
 ### 步骤3: 检查金丝雀 Pod 健康与配置差异
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <canary-pod> -n <namespace>
 kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 env
 ```
@@ -72,3 +80,6 @@ kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 en
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

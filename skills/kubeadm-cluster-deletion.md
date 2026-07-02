@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kubeadm 集群删除操作
@@ -48,13 +53,22 @@ prerequisites:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 步骤 1: 驱逐 Pod     → kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 步骤 2: 删除 Node    → kubectl delete node <node>
 步骤 3: reset 节点   → kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 步骤 4: 手动清理     → iptables/ipvs/CNI/证书/数据目录
 ```
-
 ## kubeadm reset 的三个阶段
 
 | Phase | 说明 | 关键操作 |
@@ -98,7 +112,17 @@ kubeadm reset 不会自动清理以下内容，需要手动处理：
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在可达的控制面节点上
 kubectl delete node <unreachable-node>
 
@@ -108,7 +132,6 @@ etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 # 节点恢复后执行
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ### etcd 仲裁丢失
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -150,7 +173,17 @@ umount -l $(mount | grep kubelet | awk '{print $3}')
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 NODE_NAME=$(hostname)
 
@@ -176,7 +209,6 @@ ipvsadm -C 2>/dev/null || true
 ip link delete cni0 2>/dev/null || true
 ip link delete flannel.1 2>/dev/null || true
 ```
-
 ## 相关技能
 
 - [[skills/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
@@ -194,3 +226,5 @@ ip link delete flannel.1 2>/dev/null || true
 - [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
+
+<!-- risk-assessed -->

@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v2.2 Release Notes
@@ -62,10 +67,10 @@ cd etcd-v2.2.5-darwin-amd64
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ./etcdctl set mykey "this is awesome"
 ./etcdctl get mykey
 ```
-
 #### Linux
 
 To get started on Linux run the following in a terminal:
@@ -80,19 +85,19 @@ cd etcd-v2.2.5-linux-amd64
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ./etcdctl set mykey "this is awesome"
 ./etcdctl get mykey
 ```
-
 #### Docker
 
 To get started with Docker on Linux run the following in a terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --name etcd quay.io/coreos/etcd:v2.2.5
 docker exec etcd /etcdctl set foo bar
 ```
-
 For advanced usage, please check [our docker guide](https://github.com/coreos/etcd/blob/master/Documentation/docker_guide.md).
 
 #### ACI/rkt
@@ -103,3 +108,6 @@ To get started with rkt on Linux run the following in a terminal:
 # for more info about rkt command line, see related doc at https://github.com/coreos/rkt/blob/master/Documentation/commands.md#rkt-run
 rkt run --volume data-dir,kind=host,source=/tmp --mds-register=false coreos.com/etcd:v2.2.5
 ```
+
+
+<!-- risk-assessed -->

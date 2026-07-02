@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: '节点加入进阶: Discovery 与 TLS Bootstrap 详解'
@@ -607,7 +612,8 @@ func JoinControlPlane(cfg *kubeadmapi.JoinConfiguration) error {
 
 ### 场景 1: 标准节点加入
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 control-plane 获取 join 命令
 kubeadm token create --print-join-command
 # kubeadm join 192.168.1.10:6443 --token abc123.def4567890abcdef --discovery-token-ca-cert-hash sha256:1234567890abcdef
@@ -623,7 +629,6 @@ kubectl get nodes
 # master    Ready    control-plane   1h    v1.28.0
 # worker-1  Ready    <none>          30s   v1.28.0
 ```
-
 ### 场景 2: 使用配置文件 join
 
 ```yaml
@@ -652,7 +657,8 @@ kubeadm join --config=join-config.yaml
 
 ### 场景 3: control-plane 节点加入
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 加入新的 control-plane 节点
 kubeadm join lb.example.com:6443 \
   --token abc123.def4567890abcdef \
@@ -666,7 +672,6 @@ kubectl get nodes -l node-role.kubernetes.io/control-plane
 # master-1   Ready    control-plane   1h    v1.28.0
 # master-2   Ready    control-plane   30s   v1.28.0
 ```
-
 ### 场景 4: Token 过期后重新生成
 
 ```bash
@@ -693,7 +698,8 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | \
 
 ### 场景 5: 文件发现模式 (离线环境)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在 control-plane 导出 cluster-info
 kubectl -n kube-system get configmap cluster-info -o yaml > cluster-info.yaml
 
@@ -707,7 +713,6 @@ kubeadm join --discovery-file=/etc/kubernetes/cluster-info.yaml
 scp /etc/kubernetes/admin.conf worker-1:/etc/kubernetes/bootstrap-kubelet.conf
 kubeadm join --discovery-file=/etc/kubernetes/bootstrap-kubelet.conf
 ```
-
 ## 配置示例
 
 ### Bootstrap Token RBAC 配置
@@ -796,7 +801,8 @@ kubeadm token create --description "for worker node join"
 
 ### 查看 CSR 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSR 列表
 kubectl get csr
 # NAME        AGE   SIGNERNAME                                    REQUESTOR                 REQUESTEDDURATION   CONDITION
@@ -809,7 +815,6 @@ kubectl certificate approve node-csr-2
 # 查看 CSR 详情
 kubectl describe csr node-csr-1
 ```
-
 ### 获取 CA 证书哈希
 
 ```bash
@@ -863,3 +868,5 @@ kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
 
 ```
+
+<!-- risk-assessed -->

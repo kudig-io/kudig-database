@@ -52,6 +52,11 @@ cross_refs:
   label: '相关知识域: domain-04-storage-data'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - 存储日常运维操作手册
@@ -77,7 +82,8 @@ cross_refs:
 
 ### 基础资源查询命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看所有StorageClass
 kubectl get storageclass
 kubectl get sc -o wide
@@ -97,17 +103,16 @@ kubectl get csinode
 # 5. 查看VolumeAttachment状态
 kubectl get volumeattachment
 ```
-
 ### 存储使用率监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看PVC使用详情
 kubectl get pvc -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,USAGE:.status.capacity.storage,REQUEST:.spec.resources.requests.storage
 
 # 查看节点存储分配
 kubectl describe nodes | grep -A 5 "Allocated resources" | grep ephemeral-storage
 ```
-
 ---
 
 <!-- chunk: PVC创建与管理 -->
@@ -143,7 +148,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # batch-create-pvc.sh
 
@@ -174,14 +180,23 @@ EOF
   echo "Created PVC: $PVC_NAME"
 done
 ```
-
 ### PVC状态管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看Pending状态的PVC及其原因
 kubectl get pvc --all-namespaces --field-selector=status.phase=Pending -o wide
 
@@ -192,7 +207,6 @@ kubectl describe pvc <pvc-name> -n <namespace> | grep -A 20 "Events:"
 kubectl patch pvc <pvc-name> -p '{"metadata":{"finalizers":null}}' -n <namespace>
 kubectl delete pvc <pvc-name> -n <namespace> --force --grace-period=0
 ```
-
 ---
 
 <!-- chunk: 存储扩容操作 -->
@@ -200,7 +214,8 @@ kubectl delete pvc <pvc-name> -n <namespace> --force --grace-period=0
 
 ### 在线扩容前提检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查StorageClass是否支持扩容
 kubectl get sc <storage-class-name> -o jsonpath='{.allowVolumeExpansion}'
 
@@ -210,14 +225,23 @@ kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.status.phase}'
 # 3. 检查PV是否支持扩容
 kubectl get pv <pv-name> -o jsonpath='{.spec.csi.driver}'
 ```
-
 ### 执行扩容操作
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法1: 直接编辑PVC
 kubectl edit pvc <pvc-name> -n <namespace>
 # 修改 spec.resources.requests.storage 字段
@@ -238,14 +262,14 @@ spec:
       storage: 200Gi
 EOF
 ```
-
 ### 扩容验证步骤
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 监控扩容过程
 kubectl get pvc <pvc-name> -n <namespace> -w
 
@@ -258,7 +282,6 @@ kubectl exec -it <pod-name> -n <namespace> -- df -h | grep <mount-path>
 # 4. 某些情况下需要重启Pod完成文件系统扩容
 kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ```
-
 ---
 
 <!-- chunk: 存储备份与恢复 -->
@@ -298,7 +321,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # backup-management.sh
 
@@ -354,7 +378,6 @@ case "$1" in
     ;;
 esac
 ```
-
 ### 从快照恢复数据
 
 ```yaml
@@ -384,7 +407,8 @@ spec:
 
 ### CSI组件状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查CSI驱动注册状态
 kubectl get csidriver
 
@@ -397,10 +421,10 @@ kubectl get pods -n kube-system | grep csi
 # 4. 检查CSI节点插件Pod状态
 kubectl get daemonset -n kube-system | grep csi
 ```
-
 ### CSI日志查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看CSI控制器日志
 kubectl logs -n kube-system -l app=csi-controller -c csi-provisioner
 
@@ -411,10 +435,10 @@ kubectl logs -n kube-system -l app=csi-node -c csi-driver
 NODE_NAME="worker-node-1"
 kubectl logs -n kube-system ds/csi-node -c csi-driver --tail=100 -n kube-system --selector kubernetes.io/hostname=$NODE_NAME
 ```
-
 ### CSI驱动升级流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查当前版本
 kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver -o jsonpath='{.items[*].spec.containers[*].image}'
 
@@ -428,7 +452,6 @@ kubectl get csidriver -o yaml > csi-driver-backup.yaml
 kubectl get csidriver
 kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
 ```
-
 ---
 
 <!-- chunk: 存储性能调优 -->
@@ -439,7 +462,8 @@ kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 收集I/O统计信息
 kubectl exec -it <pod-name> -n <namespace> -- iostat -x 1 5
 
@@ -449,7 +473,6 @@ kubectl exec -it <pod-name> -n <namespace> -- dd if=/dev/zero of=/data/testfile 
 # 3. 监控网络存储延迟
 kubectl exec -it <pod-name> -n <namespace> -- ping <storage-endpoint>
 ```
-
 ### 挂载参数优化
 
 ```yaml
@@ -477,7 +500,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # storage-performance-test.sh
 
@@ -513,13 +537,13 @@ kubectl exec -it $POD_NAME -n $NAMESPACE -- rm -f $TEST_FILE
 echo ""
 echo "性能测试完成"
 ```
-
 ---
 
 <!-- chunk: 日常巡检脚本 -->
 ## 日常巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # daily-storage-inspection.sh
 
@@ -589,7 +613,6 @@ echo "=========================================="
 echo "巡检完成，请查看详细报告: $REPORT_FILE"
 echo "=========================================="
 ```
-
 ---
 
 <!-- chunk: 应急处理流程 -->
@@ -601,7 +624,8 @@ echo "=========================================="
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # storage-emergency-response.sh
 
@@ -667,7 +691,6 @@ handle_data_loss() {
 
 emergency_response
 ```
-
 ### 故障排查检查清单
 
 ```markdown
@@ -729,3 +752,6 @@ emergency_response
 ## Related
 
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

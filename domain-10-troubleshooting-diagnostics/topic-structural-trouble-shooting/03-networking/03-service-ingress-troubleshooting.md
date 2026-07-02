@@ -47,6 +47,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Service|Service]] 与 [[Ingress|Ingress]] 故障排查指南
@@ -150,7 +155,8 @@ k8s_versions:
 
 ### 1.3 报错查看方式汇总
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Service 相关
 kubectl get svc -A
 kubectl describe svc <service-name>
@@ -170,7 +176,6 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 # 测试 Ingress
 curl -v http://<ingress-ip> -H "Host: <hostname>"
 ```
-
 ### 1.4 影响面分析
 
 | 问题类型 | 影响范围 | 影响描述 |
@@ -584,13 +589,13 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create secret tls tls-secret --cert=new.crt --key=new.key --dry-run=client -o yaml | kubectl apply -f -
   └─> Secret 更新
        └─> Controller 检测变更
             └─> 重新加载证书（nginx -s reload）
                  └─> 新连接使用新证书（旧连接继续）
 ```
-
 ---
 
 **Ingress 路径匹配规则**
@@ -664,7 +669,8 @@ spec:
 
 #### 2.2.1 检查 Service 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 详情
 kubectl get svc <service-name> -o yaml
 
@@ -678,10 +684,10 @@ kubectl get svc <service-name> -o jsonpath='{.spec.ports}'
 # 检查 Service 类型
 kubectl get svc <service-name> -o jsonpath='{.spec.type}'
 ```
-
 #### 2.2.2 检查 Endpoints
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Endpoints
 kubectl get endpoints <service-name> -o yaml
 
@@ -694,10 +700,10 @@ kubectl get pods -l <selector> -o wide
 # 检查 Pod 是否 Ready
 kubectl get pods -l <selector> -o jsonpath='{.items[*].status.conditions}'
 ```
-
 #### 2.2.3 测试连通性
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 ClusterIP
 kubectl run test --rm -it --image=busybox -- sh
 # 在 Pod 内
@@ -711,12 +717,12 @@ curl http://<node-ip>:<node-port>
 iptables -t nat -L -n | grep <cluster-ip>
 ipvsadm -Ln -t <cluster-ip>:<port>
 ```
-
 ### 2.3 Ingress 排查步骤
 
 #### 2.3.1 检查 Ingress Controller
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Controller Pod 状态
 kubectl get pods -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
 
@@ -726,10 +732,10 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=200
 # 检查 Controller Service
 kubectl get svc -n ingress-nginx
 ```
-
 #### 2.3.2 检查 Ingress 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Ingress 详情
 kubectl get ingress <ingress-name> -o yaml
 
@@ -742,10 +748,10 @@ kubectl get ingress <ingress-name> -o jsonpath='{.spec.tls}'
 # 验证 Secret 存在
 kubectl get secret <tls-secret-name>
 ```
-
 #### 2.3.3 测试 Ingress
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取 Ingress IP
 kubectl get ingress <ingress-name> -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
@@ -758,7 +764,6 @@ curl -vk https://<ingress-ip> -H "Host: <hostname>"
 # 检查证书
 openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 ```
-
 ---
 
 ## 解决方案与风险控制
@@ -771,7 +776,8 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 selector 匹配
 SERVICE_SELECTOR=$(kubectl get svc <service-name> -o jsonpath='{.spec.selector}')
 echo "Service selector: $SERVICE_SELECTOR"
@@ -798,7 +804,6 @@ kubectl label pod <pod-name> app=correct-label
 # 步骤 6：验证 Endpoints
 kubectl get endpoints <service-name>
 ```
-
 #### 3.1.2 安全生产风险提示
 
 ```
@@ -816,7 +821,8 @@ kubectl get endpoints <service-name>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 Service 状态
 kubectl get svc <service-name>
 kubectl describe svc <service-name>
@@ -843,7 +849,6 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/config/m
 # 步骤 7：验证 External IP 分配
 kubectl get svc <service-name>
 ```
-
 #### 3.2.2 安全生产风险提示
 
 ```
@@ -862,7 +867,8 @@ kubectl get svc <service-name>
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查后端 Service
 kubectl get svc <backend-service>
 kubectl get endpoints <backend-service>
@@ -887,7 +893,6 @@ kubectl annotate ingress <ingress-name> nginx.ingress.kubernetes.io/proxy-read-t
 # 步骤 7：验证修复
 curl -v http://<ingress-ip> -H "Host: <hostname>"
 ```
-
 #### 3.3.2 安全生产风险提示
 
 ```
@@ -906,7 +911,8 @@ curl -v http://<ingress-ip> -H "Host: <hostname>"
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 TLS Secret 存在
 kubectl get secret <tls-secret-name>
 
@@ -935,7 +941,6 @@ kubectl patch ingress <ingress-name> -p '{
 curl -vk https://<ingress-ip> -H "Host: <hostname>"
 openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 ```
-
 #### 3.4.2 安全生产风险提示
 
 ```
@@ -997,7 +1002,8 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 
 **排查过程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认问题范围
 kubectl run test --rm -it --image=busybox -- sh
 # 在 Pod 内测试
@@ -1047,14 +1053,23 @@ dmesg | grep -i ipvs
 # - kube-proxy 未回退到 iptables 模式（配置未设置回退）
 # - 30% 节点因内核版本过低不支持 IPVS（CentOS 7.4，kernel 3.10.0-693）
 ```
-
 **应急措施**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 A：紧急回退到 iptables 模式（10 分钟恢复）
 kubectl edit cm -n kube-system kube-proxy
 # 修改 mode: "iptables"
@@ -1091,7 +1106,6 @@ lsmod | grep ip_vs
 # ip_vs                 145458  6 ip_vs_rr,ip_vs_sh,ip_vs_wrr
 # ✅ IPVS 模块加载成功
 ```
-
 **长期优化**
 
 ```yaml
@@ -1195,7 +1209,17 @@ EOF
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 阶段 1：金丝雀测试（1 周）
 # 选择 5% 节点切换 IPVS，验证稳定性
 kubectl label node node-1 node-2 proxy-mode=ipvs
@@ -1234,7 +1258,6 @@ kubectl edit cm -n kube-system kube-proxy
 # mode: "ipvs"
 kubectl rollout restart daemonset -n kube-system kube-proxy
 ```
-
 **效果评估**
 
 | 指标 | iptables 模式 | IPVS 模式 | 改善 |
@@ -1259,7 +1282,8 @@ kubectl rollout restart daemonset -n kube-system kube-proxy
 
 **排查过程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 用户反馈验证
 curl -v https://api.example.com
 # * SSL certificate problem: certificate has expired
@@ -1300,7 +1324,6 @@ kubectl logs -n cert-manager -l app=cert-manager --tail=100 | grep -i error
 # - cert-manager 无法完成自动续期
 # - 证书到期后未触发告警
 ```
-
 **应急措施**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1309,7 +1332,8 @@ kubectl logs -n cert-manager -l app=cert-manager --tail=100 | grep -i error
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A：使用备用证书（5 分钟恢复）
 # 从备份恢复上次有效证书（或申请临时证书）
 kubectl create secret tls tls-secret-backup \
@@ -1377,7 +1401,6 @@ kubectl get secret tls-secret -o jsonpath='{.data.tls\.crt}' | base64 -d | opens
 # notAfter=Mar 31 23:59:59 2024 GMT  # ← 新证书有效期 90 天
 # ✅ 证书更新成功
 ```
-
 **长期优化**
 
 ```yaml
@@ -1572,7 +1595,8 @@ spec:
 
 **排查过程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod 负载分布
 kubectl top pods -l app=web | sort -k3 -rn | head -10
 # NAME              CPU     MEMORY
@@ -1612,14 +1636,14 @@ kubectl get pods -l app=web -o wide | awk '{print $7}' | sort | uniq -c
 # - 但实际 Pod 分布 60:30:10，导致 Node1 上 Pod 过载
 # - Node3 健康检查失败后，流量全部集中到 Node1/Node2（60:30），负载更不均
 ```
-
 **应急措施**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A：切换回 Cluster 模式（立即生效）
 kubectl patch svc web -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'
 
@@ -1661,7 +1685,6 @@ kubectl get pods -l app=web -o wide | awk '{print $7}' | sort | uniq -c
 #  33 node-2
 #  34 node-3
 ```
-
 **长期优化**
 
 ```yaml
@@ -1839,3 +1862,6 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+
+
+<!-- risk-assessed -->

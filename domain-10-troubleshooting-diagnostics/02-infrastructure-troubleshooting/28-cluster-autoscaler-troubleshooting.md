@@ -65,6 +65,11 @@ cross_refs:
   label: '故障树: cluster-autoscaler'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 28 - 集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)
@@ -87,6 +92,7 @@ cross_refs:
 ### 1.2 集群自动扩缩容架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                集群自动扩缩容故障诊断架构                                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -143,7 +149,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. Cluster Autoscaler 基础状态检查 (Basic Status Check) -->
@@ -151,7 +156,8 @@ cross_refs:
 
 ### 2.1 组件状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Autoscaler部署检查 ==========
 # 检查Cluster Autoscaler Pod状态
 kubectl get pods -n kube-system | grep cluster-autoscaler
@@ -193,10 +199,10 @@ kubectl get nodes -o jsonpath='{
 # 检查节点标签
 kubectl get nodes --show-labels | grep -E "(node-group|min|max)"
 ```
-
 ### 2.2 扩缩容状态监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 当前扩缩容状态 ==========
 # 查看Autoscaler状态
 kubectl get configmap cluster-autoscaler-status -n kube-system -o jsonpath='{.data.status}'
@@ -257,7 +263,6 @@ kubectl get pods --all-namespaces -o jsonpath='{
     end
 }' | tr ' ' '\n' | grep -v '^$' | awk '{sum+=$1} END {print "Total CPU requests:", sum}'
 ```
-
 ---
 
 <!-- chunk: 3. 扩缩容不触发问题排查 (Scale Not Triggering Troubleshooting) -->
@@ -265,7 +270,8 @@ kubectl get pods --all-namespaces -o jsonpath='{
 
 ### 3.1 扩容不触发问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Pending Pod分析 ==========
 # 查看Pending Pod的详细信息
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending -o jsonpath='{
@@ -347,10 +353,10 @@ kubectl get pods --all-namespaces -o jsonpath='{
     end
 }' | grep -E "(podAntiAffinity|nodeAffinity)"
 ```
-
 ### 3.2 缩容不触发问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 节点利用情况检查 ==========
 # 查找低利用率节点
 kubectl get nodes -o jsonpath='{
@@ -444,7 +450,6 @@ kubectl get pdb --all-namespaces -o jsonpath='{
     end
 }'
 ```
-
 ---
 
 <!-- chunk: 4. 扩缩容震荡问题排查 (Scale Oscillation Troubleshooting) -->
@@ -452,7 +457,8 @@ kubectl get pdb --all-namespaces -o jsonpath='{
 
 ### 4.1 震荡检测和分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 历史扩缩容事件分析 ==========
 # 查看Autoscaler历史决策
 kubectl logs -n kube-system -l app=cluster-autoscaler --since=24h | grep -E "(scale up|scale down|removing node|adding node)"
@@ -489,10 +495,10 @@ kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{
     .spec.template.spec.containers[0].command
 }' | grep -E "(threshold|utilization)"
 ```
-
 ### 4.2 震荡缓解策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 参数优化配置 ==========
 # 调整扩缩容延迟参数
 cat <<EOF > autoscaler-optimized-config.yaml
@@ -591,7 +597,6 @@ spec:
                 topologyKey: kubernetes.io/hostname
 EOF
 ```
-
 ---
 
 <!-- chunk: 5. 节点驱逐和迁移问题 (Node Draining and Migration Issues) -->
@@ -602,7 +607,17 @@ EOF
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 1. 驱逐障碍分析 ==========
 # 查看无法驱逐的Pod
 kubectl get pods --all-namespaces -o jsonpath='{
@@ -669,10 +684,10 @@ kubectl get pods --field-selector=spec.nodeName=$NODE_TO_DRAIN
 # 恢复节点
 kubectl uncordon $NODE_TO_DRAIN
 ```
-
 ### 5.2 Pod迁移性能优化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 迁移时间监控 ==========
 # 监控Pod驱逐和重新调度时间
 cat <<'EOF' > pod-migration-monitor.sh
@@ -768,7 +783,6 @@ spec:
       k8s-app: kube-dns
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 云提供商集成问题 (Cloud Provider Integration Issues) -->
@@ -776,7 +790,8 @@ EOF
 
 ### 6.1 云API调用问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 云提供商配置检查 ==========
 # 检查云提供商凭据
 kubectl get secrets -n kube-system | grep -E "(aws|azure|gcp)"
@@ -823,10 +838,10 @@ kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "cloud.*api|fail
 # 检查API速率限制
 kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "rate.*limit|throttle" --color=never
 ```
-
 ### 6.2 成本优化配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 混合实例策略 ==========
 # Spot实例配置示例
 cat <<EOF > spot-instance-config.yaml
@@ -916,7 +931,6 @@ EOF
 
 chmod +x resource-optimization-analyzer.sh
 ```
-
 ---
 
 <!-- chunk: 7. 监控和告警配置 (Monitoring and Alerting) -->
@@ -927,7 +941,8 @@ chmod +x resource-optimization-analyzer.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -1005,10 +1020,10 @@ spec:
         summary: "High autoscaling cost detected (${{ \$value }}/hour)"
 EOF
 ```
-
 ### 7.2 性能分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Autoscaler性能分析 ==========
 cat <<'EOF' > autoscaler-performance-analyzer.sh
 #!/bin/bash
@@ -1096,7 +1111,6 @@ EOF
 
 chmod +x cost-benefit-analyzer.sh
 ```
-
 ---
 
 ---
@@ -1130,3 +1144,6 @@ chmod +x cost-benefit-analyzer.sh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

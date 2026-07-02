@@ -38,6 +38,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # StorageClass 配置与动态供给故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | CSI Spec v1.8+ | **最后更新**: 2026-04 | **难度**: 中级
@@ -128,7 +133,8 @@ prerequisites:
 | **WaitForFirstConsumer** | Pod 调度后绑定 | 有 | 拓扑敏感存储（如 AWS EBS、阿里云盘） | PVC 长期 Pending，直到 Pod 被调度 |
 
 **排查 `WaitForFirstConsumer` 延迟**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 状态
 kubectl get pvc <name> -o yaml | grep -A 5 volumeBindingMode
 
@@ -138,12 +144,12 @@ kubectl describe pvc <name> | grep -i "wait\|first\|consumer\|schedul"
 # 检查 Pod 调度状态
 kubectl get pods --all-namespaces -o wide | grep <claim-name>
 ```
-
 ### 2.2 动态供给失败排查
 
 #### 2.2.1 排查逻辑决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 PVC 处于 Pending，事件显示 ProvisioningFailed
     │
     ├─ 1. 检查 StorageClass 存在性
@@ -167,10 +173,10 @@ PVC 处于 Pending，事件显示 ProvisioningFailed
     └─ 5. 检查 CSI Controller 日志
             └─ 具体错误信息 → 针对性修复
 ```
-
 #### 2.2.2 Provisioner 注册检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CSIDriver 是否存在（CSI 场景）
 kubectl get csidriver
 # 预期输出：
@@ -187,7 +193,6 @@ kubectl logs -n kube-system <csi-controller-pod> -c csi-provisioner --tail=200
 # 对于内置 Provisioner（非 CSI），检查云厂商控制器
 kubectl get pods -n kube-system | grep -E "cloud-controller|aws-ebs"
 ```
-
 #### 2.2.3 参数验证（云厂商特定）
 
 **AWS EBS**：
@@ -255,7 +260,8 @@ volumeBindingMode: WaitForFirstConsumer
 
 #### 2.2.4 后端配额检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS 检查 EBS 卷配额
 aws service-quotas get-service-quota \
   --service-code ec2 \
@@ -270,12 +276,12 @@ gcloud compute project-info describe --project <project-id>
 # 通用：查看 CSI provisioner 日志中的配额错误
 kubectl logs -n kube-system <csi-controller> -c csi-provisioner | grep -iE "quota|limit|exceed"
 ```
-
 ### 2.3 绑定模式与拓扑问题排查
 
 #### 2.3.1 `WaitForFirstConsumer` 延迟分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 详细信息
 kubectl get pvc <name> -o yaml
 
@@ -293,7 +299,6 @@ kubectl get nodes --show-labels | grep -E "topology.kubernetes.io/zone|topology.
 # 查看 StorageClass 的拓扑限制
 kubectl get storageclass <name> -o yaml | grep -A 20 "allowedTopologies"
 ```
-
 **常见问题**：
 - Pod 被调度到某个可用区，但 StorageClass 的 `allowedTopologies` 排除了该可用区
 - 使用 `WaitForFirstConsumer` 时，Pod 因资源不足无法调度，导致 PVC 一直 Pending
@@ -301,7 +306,8 @@ kubectl get storageclass <name> -o yaml | grep -A 20 "allowedTopologies"
 
 #### 2.3.2 `Immediate` 模式导致的调度失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景：PVC 立即绑定到 us-east-1a 的卷，但 Pod 被调度到 us-east-1b
 # 结果：Pod 因卷在错误可用区而无法调度
 
@@ -313,9 +319,9 @@ kubectl describe pod <pod-name> | grep -i "volume\|zone\|affinity"
 
 # 修复：删除 PVC 重新创建（数据会丢失），或修改为 WaitForFirstConsumer
 ```
-
 **修复方案**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：修改 StorageClass 为 WaitForFirstConsumer（仅影响新 PVC）
 kubectl patch storageclass <name> --type merge -p \
   '{"volumeBindingMode": "WaitForFirstConsumer"}'
@@ -323,12 +329,12 @@ kubectl patch storageclass <name> --type merge -p \
 # 方案 2：为现有 PVC 手动创建匹配的 PV（保留数据，操作复杂）
 # 方案 3：使用 volume topology aware scheduling
 ```
-
 ### 2.4 扩容失败排查
 
 #### 2.4.1 扩容条件检查清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. StorageClass 允许扩容
 kubectl get storageclass <name> -o jsonpath='{.allowVolumeExpansion}'
 # 必须返回 true
@@ -346,7 +352,6 @@ kubectl describe pvc <name> | grep -i "resize\|expand"
 # 5. 检查文件系统是否已扩展（进入 Pod 验证）
 kubectl exec -it <pod-name> -- df -h
 ```
-
 **扩容失败常见原因**：
 
 | 原因 | 判断方法 | 解决方案 |
@@ -359,7 +364,8 @@ kubectl exec -it <pod-name> -- df -h
 
 #### 2.4.2 文件系统手动扩展
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 对于 ext4 文件系统
 kubectl exec -it <pod-name> -- resize2fs /dev/<device>
 
@@ -371,21 +377,21 @@ kubectl exec -it <pod-name> -- xfs_growfs /mount/point
 # 2. 直接对设备执行文件系统扩展
 # 注意：操作前确保卷已卸载或 Pod 已停止
 ```
-
 ### 2.5 默认 StorageClass 问题排查
 
 #### 2.5.1 默认类冲突检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否有多个默认 StorageClass
 kubectl get storageclass -o json | \
   jq -r '.items[] | select(.metadata.annotations["storageclass.kubernetes.io/is-default-class"] == "true") | .metadata.name'
 
 # 如果返回多个名称，说明存在冲突
 ```
-
 **修复**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 移除多余的默认标记（保留一个）
 kubectl patch storageclass <sc-name> --type json -p \
   '[{"op": "remove", "path": "/metadata/annotations/storageclass.kubernetes.io~1is-default-class"}]'
@@ -394,16 +400,15 @@ kubectl patch storageclass <sc-name> --type json -p \
 kubectl annotate storageclass <sc-name> \
   storageclass.kubernetes.io/is-default-class="true" --overwrite
 ```
-
 #### 2.5.2 PVC 未指定 storageClassName 的行为
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 的 storageClassName 字段
 kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
 # 空值表示使用默认 StorageClass
 # "" 表示绑定到静态 PV（不使用动态供给）
 ```
-
 **三种场景**：
 
 | `storageClassName` | 行为 | 排查重点 |
@@ -431,7 +436,8 @@ kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
 
 #### 2.6.2 性能不达标排查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 PVC 使用的 StorageClass 类型
 SC=$(kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}')
 kubectl get storageclass $SC -o yaml | grep -A 10 "parameters:"
@@ -451,14 +457,14 @@ kubectl exec -it <pod-name> -- fio --name=test --filename=/data/test \
 # - 云厂商侧未正确创建（如降级到默认类型）
 # - 存储后端性能瓶颈
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
 
 ### 3.1 StorageClass 参数修正
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 StorageClass 参数（注意：已有 PV 不受影响，仅影响新供给）
 kubectl patch storageclass <name> --type merge -p \
   '{"parameters":{"type":"gp3","iopsPerGB":"3000"}}'
@@ -468,10 +474,10 @@ kubectl patch storageclass <name> --type merge -p \
 # 2. 删除 Pending 的 PVC（数据未创建，无丢失风险）
 # 3. 修改应用使用新的 StorageClass
 ```
-
 ### 3.2 扩容流程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 StorageClass 允许扩容
 kubectl get storageclass <sc-name> -o jsonpath='{.allowVolumeExpansion}'
 
@@ -485,7 +491,6 @@ kubectl get pvc <name> -w
 # 4. 如果文件系统未自动扩展，重启 Pod 或手动扩展
 kubectl rollout restart deployment/<app>
 ```
-
 **风险**：
 - 在线扩容需要 CSI 驱动和底层存储同时支持
 - 扩容过程中可能出现短暂 I/O 中断
@@ -493,7 +498,17 @@ kubectl rollout restart deployment/<app>
 
 ### 3.3 切换 StorageClass（数据迁移）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景：从低速 StorageClass 迁移到高速 StorageClass
 
 # 步骤 1：创建新的 PVC（使用新 StorageClass）
@@ -523,7 +538,6 @@ kubectl patch deployment/<app> --type json -p \
 # 步骤 4：验证后删除旧 PVC
 kubectl delete pvc <old-pvc>
 ```
-
 **风险**：
 - 数据复制期间可能出现数据不一致，建议在应用停止或只读状态下操作
 - 对于数据库等有状态应用，应使用原生备份恢复机制而非文件级复制
@@ -535,6 +549,7 @@ kubectl delete pvc <old-pvc>
 ### 4.1 StorageClass 命名规范
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 <云厂商>-<存储类型>-<性能等级>-<特性>
 
 示例：
@@ -544,7 +559,6 @@ kubectl delete pvc <old-pvc>
 - local-nvme               # 本地 NVMe
 - nfs-standard             # NFS 标准
 ```
-
 ### 4.2 分层存储策略
 
 ```yaml
@@ -666,7 +680,8 @@ spec:
 
 ### 4.5 自动化诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storageclass-health-check.sh - StorageClass 健康检查脚本
 
@@ -750,7 +765,6 @@ else
   exit 0
 fi
 ```
-
 ---
 
 ## 附录 A: 主流 CSI 驱动速查表
@@ -790,3 +804,6 @@ fi
 - [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

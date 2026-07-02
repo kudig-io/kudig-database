@@ -65,6 +65,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -93,7 +98,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Service 与 Endpoints 状态
 kubectl get svc -n order-service
 kubectl get endpoints -n order-service
@@ -119,7 +125,6 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | head -50
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- conntrack -L | wc -l
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- sysctl net.netfilter.nf_conntrack_count net.netfilter.nf_conntrack_max
 ```
-
 ## 根因分析
 
 节点 `cn-zhangjiakou.172.16.4.15` 上的 kube-proxy 在 14:05 被运维人员手动修改 ConfigMap 时触发了滚动更新，但新的 kube-proxy ConfigMap 中 `iptables.minSyncPeriod` 被误设置为 `0s`，同时 `mode` 字段被从 `iptables` 改为 `ipvs` 后未清理旧的 iptables 规则。部分节点上的 kube-proxy 使用 ipvs 模式启动失败，回退到 iptables 模式但规则损坏：
@@ -137,40 +142,40 @@ iptables: Failed to execute iptables-restore: exit status 4 (Resource temporaril
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份当前 ConfigMap
 kubectl get configmap kube-proxy -n kube-system -o yaml > /tmp/kube-proxy-config-backup.yaml
 
 # 恢复 mode 为 iptables 并设置合理的 minSyncPeriod
 kubectl patch configmap kube-proxy -n kube-system --type merge -p '{"data":{"config.conf":"apiVersion: kubeproxy.config.k8s.io/v1alpha1\nkind: KubeProxyConfiguration\nmode: iptables\niptables:\n  minSyncPeriod: 10s\n  syncPeriod: 30s\n"}}'
 ```
-
 **第二步：清理节点上残留的 ipvs 规则与损坏的 iptables 规则**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在异常节点上执行
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- ipvsadm --clear
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t nat -F KUBE-SERVICES
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t nat -F KUBE-POSTROUTING
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t filter -F KUBE-FORWARD
 ```
-
 **第三步：重启所有 kube-proxy Pod 重新生成规则**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart daemonset/kube-proxy -n kube-system
 kubectl rollout status daemonset/kube-proxy -n kube-system --timeout=180s
 ```
-
 **第四步：验证 iptables 规则恢复完整**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t nat -L KUBE-SERVICES -n | grep -c "order-service"
 ```
-
 若规则恢复后仍有部分 Service 不通，可针对异常 Service 单独检查其 Endpoints 与 `KUBE-SEP-*` 链，必要时清理该 Service 对应的 iptables 子链并重启 kube-proxy，避免全量规则 flush 造成二次影响。
 
 ## 验证命令
@@ -178,7 +183,8 @@ kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t nat -L KUBE-SERVICE
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. kube-proxy Pod 全部 Running
 kubectl get pod -n kube-system -l k8s-app=kube-proxy -o wide
 
@@ -194,7 +200,6 @@ kubectl node-shell cn-zhangjiakou.172.16.4.15 -- iptables -t nat -L KUBE-SERVICE
 # 5. 业务接口端到端调用成功
 kubectl exec -n order-service deploy/order-api -- wget -qO- --timeout=10 http://order-svc.order-service:8080/actuator/health
 ```
-
 验证时不能只检查单一 Service，而应在多个命名空间与多个节点上交叉验证，因为 kube-proxy 规则是按节点生成的，可能存在部分节点规则生成失败而其他节点正常的情况。建议从每个节点上随机抽取一个 Pod 执行 ClusterIP 连通性测试，确保全集群规则一致。
 
 ## 回复客户话术
@@ -244,3 +249,6 @@ kubectl exec -n order-service deploy/order-api -- wget -qO- --timeout=10 http://
 - Service
 - Ingress 控制器 Pod 异常导致 404/502
 - Ingress 控制器 Pod 异常导致业务访问 404/502
+
+
+<!-- risk-assessed -->

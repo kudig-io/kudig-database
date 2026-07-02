@@ -74,6 +74,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
@@ -178,7 +183,8 @@ version_compatibility:
 
 ### 3.1 升级前准备
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 升级前检查脚本
 
@@ -250,7 +256,6 @@ assess_resource_capacity
 
 echo "=== Pre-Upgrade Checks Complete ==="
 ```
-
 ### 3.2 升级执行步骤
 
 ```yaml
@@ -290,7 +295,8 @@ upgrade_process:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd滚动升级脚本
 
@@ -357,7 +363,6 @@ perform_rolling_upgrade() {
 create_backup
 perform_rolling_upgrade
 ```
-
 ---
 
 <!-- chunk: 5. 零停机升级方案 -->
@@ -436,7 +441,8 @@ progressive_upgrade:
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 快速回滚脚本
 
@@ -525,7 +531,6 @@ verify_rollback
 
 echo "Rollback completed successfully!"
 ```
-
 ---
 
 <!-- chunk: 7. 迁移场景处理 -->
@@ -551,7 +556,8 @@ cloud_migration:
 
 ### 7.2 版本跳跃迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 跨版本迁移脚本
 
@@ -601,7 +607,6 @@ handle_api_migrations() {
     echo "API migration report generated at /tmp/api-migration-report.txt"
 }
 ```
-
 ---
 
 <!-- chunk: 8. 自动化升级工具 -->
@@ -613,7 +618,17 @@ handle_api_migrations() {
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 使用kubeadm进行升级
 #!/bin/bash
 
@@ -665,7 +680,6 @@ upgrade_control_plane
 upgrade_worker_nodes
 verify_upgrade
 ```
-
 ### 8.2 自定义升级Operator
 
 ```yaml
@@ -799,3 +813,6 @@ upgrade_validation_checklist:
 - 06-plane-troubleshooting
 - 08-plane-performance-benchmarking
 - 09-plane-scalability-guide
+
+
+<!-- risk-assessed -->

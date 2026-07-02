@@ -48,6 +48,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: CSI 存储驱动深度排查与架构优化指南
@@ -271,6 +276,7 @@ Kubernetes **不直接**与 CSI 驱动通信，而是通过一组官方维护的
 
 **调用链示例（PVC 创建流程）**：
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. User 创建 PVC
    ↓
 2. csi-provisioner 监听到 PVC（status: Pending）
@@ -285,7 +291,6 @@ Kubernetes **不直接**与 CSI 驱动通信，而是通过一组官方维护的
    ↓
 7. PVC 状态变为 Bound
 ```
-
 #### 1.2.2 节点侧 Sidecar 容器（运行在 CSI Node DaemonSet）
 
 | Sidecar 名称 | 职责 | 关键配置 |
@@ -309,6 +314,7 @@ Kubernetes **不直接**与 CSI 驱动通信，而是通过一组官方维护的
 #### 1.2.3 完整架构图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        Kubernetes Control Plane                          │
 │                                                                           │
@@ -390,7 +396,6 @@ Kubernetes **不直接**与 CSI 驱动通信，而是通过一组官方维护的
 │  └──────────────────────────────────────────────────────────────        │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ### 1.3 Socket 通信机制与故障隔离
@@ -417,7 +422,8 @@ Kubernetes **不直接**与 CSI 驱动通信，而是通过一组官方维护的
 | 多驱动共存 | 命名空间隔离 | 每个驱动使用独立的 Socket 文件和注册路径 |
 
 **高级调试**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Socket 权限和所有者
 ls -laZ /var/lib/kubelet/plugins/*/csi.sock
 
@@ -429,7 +435,6 @@ csc identity plugin-info \
 kubectl logs -n kube-system csi-ebs-controller -c csi-provisioner \
   | grep "CreateVolume" | tail -20
 ```
-
 ---
 
 ## 1.4 CSI 完整生命周期流程
@@ -447,7 +452,8 @@ kubectl logs -n kube-system csi-ebs-controller -c csi-provisioner \
 | **7. Running** | kubelet | Pod: Running | - | <1s |
 
 **关键观测点**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 处于哪个阶段
 kubectl describe pvc <name> | grep -A5 Events
 
@@ -457,7 +463,6 @@ kubectl get volumeattachment -o jsonpath='{range .items[*]}{.metadata.name}{"\t"
 # 查看 kubelet 日志（Staging/Publishing 阶段）
 journalctl -u kubelet -f | grep -i "csi|volume"
 ```
-
 ### 1.4.2 从 Pod 删除到卷释放的 5 个阶段
 
 | 阶段 | 执行组件 | K8s 对象变化 | CSI gRPC 调用 | 问题风险点 |
@@ -592,7 +597,8 @@ User                API Server         Scheduler          kubelet            CSI
 
 #### 2.2.1 CSI 驱动直接测试工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 使用 csc 工具绕过 K8s 直接测试 CSI Socket
 # 安装 csc（需在节点或 CSI Pod 内执行）
 go install github.com/rexray/gocsi/csc@latest
@@ -609,10 +615,10 @@ csc identity plugin-capabilities \
 csc node get-info \
   --endpoint unix:///var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock
 ```
-
 #### 2.2.2 gRPC 调用抓包工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 grpcurl 访问 UDS（需安装 grpcurl）
 # 查看支持的服务
 grpcurl -unix -plaintext \
@@ -630,10 +636,10 @@ grpcurl -unix -plaintext \
   /var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock \
   csi.v1.Node/NodeGetVolumeStats
 ```
-
 #### 2.2.3 CSI 对象巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 巡检所有 CSI 组件状态
 
@@ -675,7 +681,6 @@ for pod in $(kubectl get pods -n kube-system -l app=csi-controller -o name); do
   kubectl logs -n kube-system $pod --tail=50 | grep -i "error|failed|timeout" | tail -5
 done
 ```
-
 #### 2.2.4 监控告警规则
 
 ```yaml
@@ -750,7 +755,17 @@ groups:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 自动清理卡住的 VolumeAttachment（谨慎使用！）
 
@@ -772,7 +787,6 @@ done
 
 echo "Cleanup completed. Verify with: kubectl get volumeattachment"
 ```
-
 ---
 
 ## 3. 深度排查路径
@@ -781,7 +795,8 @@ echo "Cleanup completed. Verify with: kubectl get volumeattachment"
 
 **目标**：确认 API Server 的变更（PVC/VA/Snapshot）是否被 Sidecar 正确捕获并转换为 CSI 调用。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Provisioner 是否捕获了创建请求
 kubectl logs -n kube-system <csi-controller> -c csi-provisioner \
   | grep "CreateVolume" | tail -20
@@ -806,7 +821,6 @@ kubectl logs -n kube-system <csi-controller> -c csi-resizer \
 kubectl get lease -n kube-system | grep csi
 # 预期：只有一个 Holder 持有锁
 ```
-
 **常见异常信号**：
 - `"failed to create volume: Unauthorized"` → CSI 驱动的云平台凭证过期
 - `"quota exceeded"` → 存储后端配额不足
@@ -818,7 +832,8 @@ kubectl get lease -n kube-system | grep csi
 
 **目标**：确认 kubelet 是否能通过 Socket 与驱动"对话"，以及挂载操作是否成功。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 验证驱动是否成功注册到 kubelet
 kubectl get csinode <node-name> -o yaml | grep -A5 drivers:
 
@@ -850,7 +865,6 @@ journalctl -u kubelet -f | grep -i "csi|operationexecutor"
 
 # 预期：看到 MountVolume.MountDevice、MountVolume.SetUp 等操作
 ```
-
 **常见异常信号**：
 - `"driver name ebs.csi.aws.com not found in the list of registered CSI drivers"` → 注册失败
 - `"socket file /var/lib/kubelet/plugins/.../csi.sock does not exist"` → DaemonSet hostPath 配置错误
@@ -862,7 +876,8 @@ journalctl -u kubelet -f | grep -i "csi|operationexecutor"
 
 **目标**：排查底层块设备、文件系统和云平台 API 层面的问题。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看节点上的块设备列表
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,FSTYPE
 # 预期：看到 CSI 卷对应的块设备（如 /dev/nvme1n1）
@@ -896,7 +911,6 @@ aws ec2 describe-volumes --volume-ids vol-abc123 \
   --output text
 # 预期：available 或 in-use, attached
 ```
-
 **云平台常见问题**：
 - **AWS EBS**：
   - `VolumeInUse` 错误：卷已附着到其他实例，需手动 Detach
@@ -914,7 +928,8 @@ aws ec2 describe-volumes --volume-ids vol-abc123 \
 
 **目标**：重建从 PVC 创建到 Pod 运行的完整时间线，定位耗时瓶颈。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 脚本：csi-timeline.sh
 # 用法：./csi-timeline.sh <pvc-name> <namespace>
@@ -954,7 +969,6 @@ if [ -n "$POD_NAME" ]; then
     -o custom-columns=TIME:.lastTimestamp,TYPE:.type,REASON:.reason,MESSAGE:.message
 fi
 ```
-
 **示例输出解读**：
 ```
 === PVC Timeline ===
@@ -993,7 +1007,8 @@ TIME                        TYPE     REASON                MESSAGE
 **对策**：
 
 1. **查找节点的 kubelet 根目录**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1：查看 kubelet 启动参数
 ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*'
 # 输出示例：--root-dir=/var/data/kubelet
@@ -1001,7 +1016,6 @@ ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*'
 # 方法 2：查看现有 CSI 插件的挂载点
 kubectl get csinode <node> -o yaml | grep allocatableVolumes -A5
 ```
-
 2. **修改 CSI Node DaemonSet**：
 ```yaml
 apiVersion: apps/v1
@@ -1032,7 +1046,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Socket 文件是否存在
 kubectl exec -n kube-system <csi-node-pod> -c node-driver-registrar -- \
   ls -la /var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock
@@ -1040,7 +1055,6 @@ kubectl exec -n kube-system <csi-node-pod> -c node-driver-registrar -- \
 # 检查 CSINode 对象是否更新
 kubectl get csinode <node> -o yaml | grep -A3 drivers:
 ```
-
 ---
 
 ### 4.2 处理"CSI 驱动升级引发的挂载点残留"
@@ -1054,7 +1068,8 @@ kubectl get csinode <node> -o yaml | grep -A3 drivers:
 **对策**：
 
 1. **升级前检查驱动名称**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前驱动名称
 kubectl get csidriver -o custom-columns=NAME:.metadata.name
 
@@ -1062,14 +1077,23 @@ kubectl get csidriver -o custom-columns=NAME:.metadata.name
 kubectl run tmp --rm -it --image=<new-csi-image> -- \
   /csi-driver --version
 ```
-
 2. **优雅升级流程**（适用于有状态应用）：
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: Cordon 节点，停止新 Pod 调度
 kubectl cordon node-1
 
@@ -1087,14 +1111,23 @@ kubectl rollout status daemonset/csi-node -n kube-system
 # Step 5: Uncordon 节点
 kubectl uncordon node-1
 ```
-
 3. **强制清理残留挂载点**（风险操作！仅限紧急情况）：
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在节点上执行（需 root 权限）
 # 1. 查找残留挂载点
 mount | grep "/var/lib/kubelet/pods" | grep csi
@@ -1108,7 +1141,6 @@ kubectl delete volumeattachment csi-<hash> --force --grace-period=0
 # 4. 清理 Pod
 kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ### 4.3 开启"存储容量感知调度"（Storage Capacity Tracking）
@@ -1159,7 +1191,8 @@ spec:
 ```
 
 4. **验证容量信息**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSIStorageCapacity 对象
 kubectl get csistoragecapacities -o wide
 
@@ -1168,7 +1201,6 @@ kubectl get csistoragecapacities -o wide
 # local-storage-node-1      local-path     100Gi      node-1   5m
 # local-storage-node-2      local-path     50Gi       node-2   5m
 ```
-
 ---
 
 ### 4.4 配置"延迟绑定"（Late Binding）削峰填谷
@@ -1214,7 +1246,8 @@ parameters:
 #### 5.1.2 深度排查过程
 
 **Step 1：检查 CSINode 对象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 正常节点（节点池 A）
 kubectl get csinode node-a-1 -o yaml
 # spec:
@@ -1228,22 +1261,22 @@ kubectl get csinode node-b-1 -o yaml
 # spec:
 #   drivers: []  # ❌ 驱动列表为空
 ```
-
 **Step 2：检查 node-driver-registrar 日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system csi-ebs-node-xxx -c node-driver-registrar
 
 # 错误日志：
 # E1210 10:25:03 main.go:71] Failed to register driver: 
 #   open /var/lib/kubelet/plugins_registry/ebs.csi.aws.com-reg.sock: no such file or directory
 ```
-
 **Step 3：检查节点的 kubelet 根目录**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在问题节点上执行
 ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*'
 # --root-dir=/opt/rancher/kubelet  # ❌ 非默认路径
@@ -1257,7 +1290,6 @@ kubectl exec -n kube-system csi-ebs-node-xxx -c ebs-plugin -- \
   ls /var/lib/kubelet/plugins_registry/
 # （Pod 内路径正确，但主机路径错误）
 ```
-
 **Step 4：定位根因**
 - CSI Node DaemonSet 使用硬编码的 `/var/lib/kubelet`
 - 节点池 B 的 kubelet 使用 `/opt/rancher/kubelet`
@@ -1271,7 +1303,8 @@ kubectl exec -n kube-system csi-ebs-node-xxx -c ebs-plugin -- \
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为节点池 B 创建专用的 CSI Node DaemonSet
 kubectl apply -f - <<EOF
 apiVersion: apps/v1
@@ -1326,7 +1359,6 @@ EOF
 # 2. 删除原有的 CSI Node Pod（触发重建）
 kubectl delete pod -n kube-system -l app=ebs-csi-node --field-selector spec.nodeName=node-b-1
 ```
-
 **长期优化**（自动检测 kubelet 路径）：
 ```yaml
 # 使用 Init Container 动态获取 kubelet 路径
@@ -1374,7 +1406,8 @@ spec:
 #### 5.1.4 防护措施
 
 **1. 部署前检查清单**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 脚本：check-kubelet-paths.sh
 
@@ -1385,7 +1418,6 @@ for node in $(kubectl get nodes -o name | cut -d/ -f2); do
     chroot /host sh -c "ps aux | grep kubelet | grep -o -- '--root-dir=[^ ]*' || echo 'Using default: /var/lib/kubelet'"
 done
 ```
-
 **2. 监控告警**：
 ```yaml
 # Prometheus 告警
@@ -1467,7 +1499,8 @@ spec:
 #### 5.2.2 深度排查过程
 
 **Step 1：检查 Pod 事件**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod mysql-0 -n production
 
 # Events:
@@ -1477,7 +1510,6 @@ kubectl describe pod mysql-0 -n production
 #   desc = Volume /var/lib/kubelet/pods/.../volumes/kubernetes.io~csi/pv-abc123/mount 
 #   is still mounted on node node-5
 ```
-
 **Step 2：检查节点挂载点**
 ```bash
 # 在节点 node-5 上执行
@@ -1500,7 +1532,8 @@ lsof +D /var/lib/kubelet/pods/<uid>/volumes/kubernetes.io~csi/pv-abc123
 ```
 
 **Step 4：检查 CSI Node Pod 日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system csi-ebs-node-xxx -c ebs-plugin
 
 # 错误日志：
@@ -1510,13 +1543,13 @@ kubectl logs -n kube-system csi-ebs-node-xxx -c ebs-plugin
 
 # ❌ 关键发现：新版本驱动认为挂载点"不存在"，但实际仍然挂载
 ```
-
 **Step 5：对比新旧版本差异**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看旧版本的挂载点格式
 kubectl exec -n kube-system <old-csi-pod> -- mount | grep pv-abc123
 # /dev/nvme1n1 on /var/lib/kubelet/plugins/kubernetes.io~csi/pv-abc123/globalmount
@@ -1526,7 +1559,6 @@ kubectl exec -n kube-system <new-csi-pod> -- mount | grep pv-abc123
 # /dev/nvme1n1 on /var/lib/kubelet/plugins/kubernetes.io~csi/pv/pv-abc123/globalmount
 #                                                        ^^^  # ❌ 路径多了 "/pv/" 前缀
 ```
-
 **根因分析**：
 - v1.10 → v1.15 升级过程中，CSI 驱动修改了内部挂载路径格式
 - 旧版本创建的挂载点路径：`.../pv-abc123/globalmount`
@@ -1541,7 +1573,17 @@ kubectl exec -n kube-system <new-csi-pod> -- mount | grep pv-abc123
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 脚本：cleanup-legacy-mounts.sh
 
@@ -1586,14 +1628,14 @@ while read pod ns node; do
   kubectl delete pod $pod -n $ns --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 done
 ```
-
 **彻底修复**（回滚 + 重新升级，6 小时完成）：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 回滚到 v1.10.0
 helm rollback aws-ebs-csi-driver
 
@@ -1614,7 +1656,6 @@ helm upgrade aws-ebs-csi-driver \
   --set image.tag=v1.15.0 \
   --set controller.podAnnotations."cluster-autoscaler\.kubernetes\.io/safe-to-evict"="false"
 ```
-
 #### 5.2.4 防护措施
 
 **1. 升级前完整测试**：
@@ -1646,7 +1687,8 @@ spec:
 ```
 
 **3. 自动兼容性检查**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 升级前检查脚本：check-mount-compatibility.sh
 
@@ -1666,7 +1708,6 @@ for node in $(kubectl get nodes -o name | cut -d/ -f2); do
   "
 done
 ```
-
 **成果**：
 - ✅ 所有 150 个卡死 Pod 恢复
 - ✅ 建立 CSI 驱动升级 Runbook（包含回滚计划）
@@ -1695,7 +1736,8 @@ done
 #### 5.2.2 深度排查过程
 
 **Step 1：检查 VolumeSnapshot 状态**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumesnapshot -n production
 
 # NAME                  READYTOUSE   SOURCEPVC   RESTORESIZE   SNAPSHOTCLASS   AGE
@@ -1712,9 +1754,9 @@ kubectl describe volumesnapshot mysql-snapshot-0210 -n production
 #     Failed to check and update snapshot content: rpc error: code = DeadlineExceeded 
 #     desc = context deadline exceeded
 ```
-
 **Step 2：检查 VolumeSnapshotContent**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumesnapshotcontent snapcontent-abc123 -o yaml
 
 # spec:
@@ -1730,9 +1772,9 @@ kubectl get volumesnapshotcontent snapcontent-abc123 -o yaml
 #   readyToUse: false
 #   creationTime: null
 ```
-
 **Step 3：检查 CSI Snapshotter 日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <csi-controller> -c csi-snapshotter
 
 # 错误日志：
@@ -1740,9 +1782,9 @@ kubectl logs -n kube-system <csi-controller> -c csi-snapshotter
 #   rpc error: code = DeadlineExceeded desc = context deadline exceeded
 # E1210 02:10:25 snapshot_controller.go:245] Retrying CreateSnapshot (attempt 5/5)
 ```
-
 **Step 4：检查 CSI Driver 日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <csi-controller> -c ebs-plugin | grep CreateSnapshot
 
 # 日志：
@@ -1751,9 +1793,9 @@ kubectl logs -n kube-system <csi-controller> -c ebs-plugin | grep CreateSnapshot
 # I1210 02:06:45 ec2_interface.go:125] AWS API response: snapshot_id="snap-0x9y8z7w6v5u4t3"  # ✅ API 调用成功
 # E1210 02:10:15 controllerserver.go:367] CreateSnapshot timeout: context deadline exceeded  # ❌ 但 gRPC 超时
 ```
-
 **Step 5：验证 AWS 后端状态**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询 AWS EBS 快照
 aws ec2 describe-snapshots \
   --snapshot-ids snap-0x9y8z7w6v5u4t3 \
@@ -1763,7 +1805,6 @@ aws ec2 describe-snapshots \
 # 输出：
 # snap-0x9y8z7w6v5u4t3  completed  100%  # ✅ 快照已创建成功
 ```
-
 **根因分析**：
 - AWS `CreateSnapshot` API 是**异步**操作，返回快照 ID 后需等待快照状态变为 `completed`
 - CSI 驱动的 `CreateSnapshot` 方法默认超时时间为 **5 分钟**
@@ -1777,7 +1818,8 @@ aws ec2 describe-snapshots \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 脚本：sync-snapshot-status.sh
 
@@ -1814,7 +1856,6 @@ while read snap ns content; do
   fi
 done
 ```
-
 **长期优化**（增加超时时间，配置异步等待）：
 ```yaml
 # 方案 1：增加 CSI Snapshotter 的超时时间
@@ -2147,7 +2188,8 @@ spec:
 | node-driver-registrar | v2.9+ | 支持 Kubelet 插件监控 |
 
 **版本检查脚本**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 echo "=== CSI Sidecar Versions ==="
 kubectl get pods -n kube-system -l app=csi-controller -o json | \
@@ -2157,7 +2199,6 @@ while read name image; do
   echo "$name: $version"
 done
 ```
-
 ---
 
 ### H. 常用诊断命令速查
@@ -2165,7 +2206,17 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 快速查看 CSI 系统状态
 kubectl get csidriver,csinode,csistoragecapacity,volumeattachment -A
 
@@ -2195,7 +2246,6 @@ kubectl get csidriver,storageclass,volumesnapshotclass -o yaml > csi-config-back
 kubectl logs -n kube-system -l app=csi-controller --all-containers=true -f | \
   grep -E "CreateVolume|DeleteVolume|ControllerPublish|ControllerUnpublish"
 ```
-
 ---
 
 ### I. 参考资源
@@ -2244,3 +2294,5 @@ kubectl logs -n kube-system -l app=csi-controller --all-containers=true -f | \
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

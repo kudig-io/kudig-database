@@ -69,6 +69,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -94,7 +99,8 @@ relationships:
 
 按“先看 Pod 事件、再看节点资源与标签、最后看调度器日志”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Pod 当前状态与事件
 kubectl get pod -n data-platform -l spark-role=driver
 kubectl describe pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform | tail -60
@@ -120,7 +126,6 @@ ack-cli scheduler diagnose --cluster ack-zyy-prod-01 --namespace data-platform -
 kubectl get nodepool -A
 aliyun cs GET /clusters/ack-zyy-prod-01/nodepools
 ```
-
 ## 根因分析
 
 综合 Pod 事件、节点资源与调度器日志，判定根因为 **Spark driver Pod 资源请求超出当前节点池可用容量，同时缺少对 `dedicated=bigdata:NoSchedule` 污点的容忍，且 podAntiAffinity 与同任务 executor 冲突**，置信度 **高**。
@@ -145,7 +150,8 @@ aliyun cs POST /clusters/ack-zyy-prod-01/nodes \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform --type=merge --patch '{
   "spec": {
     "nodeSelector": {"dedicated": "bigdata"},
@@ -155,7 +161,6 @@ kubectl patch pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform --type=merge
   }
 }'
 ```
-
 > 注：由于 Pod spec 在创建后不可变，更推荐修改 SparkApplication/Deployment 模板后重新提交。上述 patch 仅用于说明字段，实际应删除旧 Pod 并由控制器重建。
 
 **第三步：降低 driver 内存请求以适应当前节点（临时止血）**
@@ -165,7 +170,8 @@ kubectl patch pod spark-driver-etl-7d9c4f8b5-xk2z9 -n data-platform --type=merge
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 假设通过 SparkApplication CRD 提交
 kubectl patch sparkapplication etl-daily -n data-platform --type=merge --patch '{
   "spec": {
@@ -176,7 +182,6 @@ kubectl patch sparkapplication etl-daily -n data-platform --type=merge --patch '
   }
 }'
 ```
-
 **第四步：放宽反亲和性或拆分任务**
 
 若业务允许 driver 与 executor 同节点，可移除 `podAntiAffinity` 中的 driver-executor 互斥规则；否则应扩容节点池并保留反亲和性：
@@ -184,16 +189,17 @@ kubectl patch sparkapplication etl-daily -n data-platform --type=merge --patch '
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get sparkapplication etl-daily -n data-platform -o yaml | sed '/podAntiAffinity/,/requiredDuringSchedulingIgnoredDuringExecution/d' | kubectl apply -f -
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 新 Pod 已调度并 Running
 kubectl get pod -n data-platform -l spark-role=driver -o wide
 
@@ -209,7 +215,6 @@ kubectl logs -n data-platform -l spark-role=driver --tail=50
 # 5. 报表输出文件生成
 kubectl exec -n data-platform deploy/spark-history-server -- hdfs dfs -ls /etl/output/daily/$(date +%Y%m%d)
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-032 已处理完成。
@@ -256,3 +261,6 @@ Spark 等大数据任务对节点污点、资源请求和反亲和性的组合�
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

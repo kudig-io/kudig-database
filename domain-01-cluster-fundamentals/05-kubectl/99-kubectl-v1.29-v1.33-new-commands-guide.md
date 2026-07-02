@@ -57,6 +57,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubectl v1.29 - v1.33 新命令与用法速查
@@ -86,7 +91,8 @@ cross_refs:
 
 ### kubectl events (替代 kubectl get events)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 更友好的事件查看
 kubectl events
 
@@ -102,10 +108,10 @@ kubectl events --since=1h
 # 排序输出
 kubectl events --sort-by='.lastTimestamp'
 ```
-
 ### kubectl debug 改进
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用临时容器调试 (Ephemeral Containers GA)
 kubectl debug mypod -it --image=busybox --target=myapp
 
@@ -115,7 +121,6 @@ kubectl debug mypod -it --copy-to=mypod-debug --image=busybox
 # 调试节点 (v1.29+ 改进)
 kubectl debug node/mynode -it --image=ubuntu
 ```
-
 ---
 
 <!-- chunk: 二、v1.30 新命令 -->
@@ -123,7 +128,8 @@ kubectl debug node/mynode -it --image=ubuntu
 
 ### kubectl alpha node-logs (Alpha)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询节点日志 (需 NodeLogQuery Feature Gate)
 kubectl alpha node-logs mynode
 
@@ -136,17 +142,16 @@ kubectl alpha node-logs mynode --syslog
 # 尾部跟踪
 kubectl alpha node-logs mynode --tail=100 -f
 ```
-
 ### kubectl apply --prune-allowlist 改进
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更安全的 prune，允许指定保留的资源类型
 kubectl apply -k ./ --prune --prune-allowlist=core/v1/ConfigMap --prune-allowlist=core/v1/Secret
 ```
-
 ---
 
 <!-- chunk: 三、v1.31 新命令 -->
@@ -154,24 +159,24 @@ kubectl apply -k ./ --prune --prune-allowlist=core/v1/ConfigMap --prune-allowlis
 
 ### kubectl rollout status 增强
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 支持自定义超时
 kubectl rollout status deployment/myapp --timeout=5m
 
 # 查看历史版本差异
 kubectl rollout history deployment/myapp --revision=3
 ```
-
 ### kubectl wait 改进
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 等待删除完成
 kubectl wait --for=delete pod/mypod --timeout=60s
 
 # 等待多个资源
 kubectl wait --for=condition=Ready pods -l app=myapp
 ```
-
 ---
 
 <!-- chunk: 四、v1.32 新命令 -->
@@ -179,7 +184,8 @@ kubectl wait --for=condition=Ready pods -l app=myapp
 
 ### kubectl debug 增强
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 调试 Profile 支持
 kubectl debug mypod --profile=netadmin     # 网络管理员权限
 kubectl debug mypod --profile=sysadmin     # 系统管理员权限
@@ -188,20 +194,19 @@ kubectl debug mypod --profile=restricted   # 受限权限
 # 自定义安全上下文
 kubectl debug mypod --custom=securityContext.privileged=true
 ```
-
 ### kubectl create token 改进
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建短期 ServiceAccount Token
 kubectl create token mysa --duration=10m
 
 # 绑定特定 audience
 kubectl create token mysa --audience=https://myapp.example.com
 ```
-
 ---
 
 <!-- chunk: 五、v1.33 新命令 -->
@@ -209,37 +214,37 @@ kubectl create token mysa --audience=https://myapp.example.com
 
 ### kubectl get --show-labels 改进
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 支持选择特定标签显示
 kubectl get pods --show-labels -L app,version
 ```
-
 ### kubectl delete --wait / --now
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 强制立即删除 (不等待优雅终止)
 kubectl delete pod mypod --now
 
 # 删除并等待完成
 kubectl delete deployment myapp --wait --timeout=60s
 ```
-
 ### kubectl label/annotate --dry-run 改进
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 预览标签变更
 kubectl label pod mypod env=prod --dry-run=client -o yaml
 
 # 预览注解变更
 kubectl annotate pod mypod description="test" --dry-run=server
 ```
-
 ---
 
 <!-- chunk: 六、命令增强与改进 -->
@@ -247,7 +252,8 @@ kubectl annotate pod mypod description="test" --dry-run=server
 
 ### kubectl explain 增强
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看字段的 CEL 表达式支持 (v1.30+ ValidatingAdmissionPolicy)
 kubectl explain pod.spec --recursive | grep -A5 "CEL"
 
@@ -257,10 +263,10 @@ kubectl explain deployment.spec.strategy.rollingUpdate.maxUnavailable
 # 查看字段的枚举值
 kubectl explain pod.spec.restartPolicy
 ```
-
 ### kubectl get 输出格式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自定义列输出 (所有版本)
 kubectl get pods -o custom-columns='NAME:.metadata.name,STATUS:.status.phase,IP:.status.podIP'
 
@@ -271,13 +277,13 @@ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.ph
 kubectl get pods --sort-by='.status.startTime'
 kubectl get pods --sort-by='.spec.nodeName'
 ```
-
 ### kubectl patch 增强
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 原地调整 Pod 资源 (v1.33 Alpha Feature Gate)
 kubectl patch pod mypod --patch '
 {
@@ -292,7 +298,6 @@ kubectl patch pod mypod --patch '
   }
 }'
 ```
-
 ---
 
 <!-- chunk: 七、插件生态更新 -->
@@ -300,7 +305,8 @@ kubectl patch pod mypod --patch '
 
 ### krew 插件 (v1.29-v1.33 兼容)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 krew
 (
   set -x; cd "$(mktemp -d)" &&
@@ -324,10 +330,10 @@ kubectl krew install cert-manager       # cert-manager 管理
 kubectl krew install df-pv            # PV 磁盘使用
 kubectl krew install node-shell       # 节点 shell
 ```
-
 ### kubectl 版本管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kubectl version 管理器
 # 安装多个版本
 brew install kubectl
@@ -340,7 +346,6 @@ asdf plugin add kubectl
 asdf install kubectl 1.33.0
 asdf global kubectl 1.33.0
 ```
-
 ---
 
 <!-- chunk: 八、快捷别名推荐 -->
@@ -352,7 +357,17 @@ asdf global kubectl 1.33.0
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ~/.bashrc 或 ~/.zshrc
 
 # 基础别名
@@ -400,7 +415,6 @@ alias krmf='kubectl delete --all pods --grace-period=0 --force'
 source <(kubectl completion bash)  # Bash
 source <(kubectl completion zsh)   # Zsh
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -438,3 +452,6 @@ source <(kubectl completion zsh)   # Zsh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

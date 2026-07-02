@@ -66,6 +66,11 @@ cross_refs:
   label: '相关知识域: domain-05-security-compliance'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Traefik Mesh Enterprise [[Service|Service]]Service Mesh）|Service Mesh]] 深度实践
@@ -243,7 +248,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm 仓库
 helm repo add traefik-mesh https://helm.traefik.io/mesh
 helm repo update
@@ -273,7 +279,6 @@ kubectl get pods -n traefik-mesh -o wide
 kubectl get meshes -A
 kubectl get traefikservices -A
 ```
-
 ---
 
 <!-- chunk: 流量管理实战 -->## 流量管理实战
@@ -962,7 +967,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== 1. Pod 状态 ==="
@@ -1016,7 +1022,6 @@ kubectl exec -n traefik-mesh deploy/traefik-mesh-proxy -- \
 echo "=== 12. Endpoint 检查 ==="
 kubectl get endpoints -n production
 ```
-
 ## 常见问题速查
 
 | 症状 | 可能原因 | 解决方案 |
@@ -1121,3 +1126,6 @@ kubectl get endpoints -n production
 ## Related
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+
+<!-- risk-assessed -->

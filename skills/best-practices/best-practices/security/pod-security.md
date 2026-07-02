@@ -44,6 +44,11 @@ cross_refs:
   label: 云原生安全知识域
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes Pod安全最佳实践
@@ -255,7 +260,8 @@ roleRef:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 启用Pod安全标准
 
@@ -274,7 +280,6 @@ kubectl label namespace development \
 # 3. 验证PSS配置
 kubectl get namespace -L pod-security.kubernetes.io/enforce
 ```
-
 ### 步骤2：配置安全上下文
 
 ```bash
@@ -328,7 +333,8 @@ echo "安全Pod模板已创建: secure-pod-template.yaml"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 配置RBAC
 
@@ -378,13 +384,13 @@ EOF
 # 4. 验证RBAC
 kubectl auth can-i list configmaps --as=system:serviceaccount:production:app-sa
 ```
-
 ### 步骤4：配置镜像安全
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 配置镜像安全
 
@@ -423,14 +429,14 @@ EOF
 
 echo "镜像安全策略已配置"
 ```
-
 ---
 
 ## 验证方法
 
 ### 自动化验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Pod安全配置验证脚本
 
@@ -465,7 +471,6 @@ echo ""
 
 echo "=== 验证完成 ==="
 ```
-
 ### 手动验证清单
 
 **Pod安全标准验证**：
@@ -609,3 +614,5 @@ spec:
 ---
 
 **文档维护**：定期审查和更新，确保与Kubernetes版本和安全标准保持同步
+
+<!-- risk-assessed -->

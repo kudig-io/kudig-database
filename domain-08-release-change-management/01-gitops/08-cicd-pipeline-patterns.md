@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CI/CD 流水线模式与渐进式交付深度实践
@@ -581,7 +586,8 @@ spec:
 
 ## 6.2 回滚操作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Argo Rollouts 回滚
 kubectl argo rollouts undo myapp -n production
 
@@ -597,7 +603,6 @@ kubectl argo rollouts abort myapp -n production
 # 重试金丝雀发布
 kubectl argo rollouts retry myapp -n production
 ```
-
 ---
 
 <!-- chunk: 七、最佳实践 -->## 七、最佳实践
@@ -645,7 +650,8 @@ kubectl argo rollouts retry myapp -n production
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Rollout 状态
 kubectl argo rollouts get rollout myapp -n production
 kubectl describe rollout myapp -n production
@@ -660,7 +666,6 @@ kubectl logs -l app=myapp,rollouts-pod-template-hash=<canary-hash> -n production
 # 查看流量分配
 kubectl get virtualservice myapp-vsvc -n production -o yaml
 ```
-
 ```yaml
 常见问题:
   Rollout 卡住:
@@ -1054,3 +1059,5 @@ release_policy:
 - 99-flux-gitops-guide
 
 ```
+
+<!-- risk-assessed -->

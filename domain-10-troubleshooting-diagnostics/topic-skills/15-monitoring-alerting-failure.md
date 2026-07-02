@@ -66,6 +66,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get [[Pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示监控组件异常 -->
@@ -165,7 +170,8 @@ agent_execution_mode: L2-semi-auto
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查监控核心组件健康状态 (15s)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查监控命名空间下所有 Pod 状态
 kubectl get pods -n monitoring --no-headers | awk '{print $3}' | sort | uniq -c
 # 检查是否有核心组件异常
@@ -178,7 +184,8 @@ kubectl get pods -n monitoring | grep -E "prometheus|alertmanager|grafana" | gre
 > - 仅附属组件异常（如 kube-state-metrics） → **P2/P3**
 
 **Step T2**: 检查 Prometheus Target 健康状态 (30s)
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 通过 API 获取 Target 状态（假设 Prometheus 可访问）
 kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090 &
 sleep 2
@@ -192,7 +199,8 @@ curl -s http://localhost:9090/api/v1/targets | jq '.data.activeTargets | group_b
 > - 仅个别非关键 Target Down → **P3**
 
 **Step T3**: 检查 AlertManager 和告警触发状态 (60s)
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Prometheus 中的 firing alerts
 curl -s http://localhost:9090/api/v1/alerts | jq '.data.alerts | length'
 # 检查 AlertManager 中的 active alerts
@@ -1483,3 +1491,6 @@ curl -s http://localhost:3000/api/health
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

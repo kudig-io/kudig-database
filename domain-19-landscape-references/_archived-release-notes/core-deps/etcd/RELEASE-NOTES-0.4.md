@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v0.4 Release Notes
@@ -61,11 +66,11 @@ cd etcd-v0.4.9-darwin-amd64
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Press enter to background etcd
 ./etcdctl set mykey "this is awesome"
 ./etcdctl get mykey
 ```
-
 #### Linux
 
 To get started on Linux run the following in a terminal:
@@ -80,22 +85,25 @@ cd etcd-v0.4.9-linux-amd64
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Press enter to background etcd
 ./etcdctl set mykey "this is awesome"
 ./etcdctl get mykey
 ```
-
 #### Docker
 
 To get started with Docker on Linux run the following in a terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run -p 4001:4001 -v /etc/ssl/certs/:/etc/ssl/certs/  quay.io/coreos/etcd:v0.4.9
 ```
-
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --net=host quay.io/coreos/etcd:v0.4.9 /etcdctl set mykey "this is awesome"
 docker run --net=host quay.io/coreos/etcd:v0.4.9 /etcdctl get mykey
 ```
+
+<!-- risk-assessed -->

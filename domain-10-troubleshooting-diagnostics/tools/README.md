@@ -51,6 +51,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain-12 故障排查工具套件使用说明
@@ -62,7 +67,8 @@ cross_refs:
 ## 🚀 快速开始
 
 ### 安装依赖
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确保以下工具已安装
 kubectl
 jq
@@ -71,7 +77,6 @@ curl
 awk
 grep
 ```
-
 ### 运行工具
 ```bash
 # 交互式运行
@@ -233,12 +238,12 @@ export MEMORY_THRESHOLD="85"
 ### 常见问题
 
 **1. 权限不足**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确保有足够的RBAC权限
 kubectl auth can-i get nodes
 kubectl auth can-i get pods --all-namespaces
 ```
-
 **2. 工具依赖缺失**
 ```bash
 # Ubuntu/Debian
@@ -249,12 +254,12 @@ yum install jq curl yq
 ```
 
 **3. metrics-server不可用**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查metrics-server状态
 kubectl get pods -n kube-system | grep metrics-server
 # 如果不存在，需要部署metrics-server
 ```
-
 ## 📈 最佳实践
 
 ### 1. 定期执行
@@ -314,3 +319,6 @@ fi
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

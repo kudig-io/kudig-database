@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 容量规划框架
@@ -126,7 +131,8 @@ increase(kube_pod_container_status_restarts_total[1h])
 
 ### 3.1 集群资源盘点脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cluster-capacity-audit.sh
 # 用途：快速盘点集群资源现状，输出容量基线报告
@@ -154,7 +160,6 @@ kubectl top pods --all-namespaces --sort-by=cpu | head -10
 echo -e "\n[PVC 使用]"
 kubectl get pvc --all-namespaces | awk '{print $1,$2,$3,$4}' | column -t
 ```
-
 ### 3.2 容量基线表
 
 | 资源 | 总容量 | 已分配 | 分配率 | 实际使用 | 使用率 |
@@ -389,3 +394,6 @@ spec:
 
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 - [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩缩容指南]]
+
+
+<!-- risk-assessed -->

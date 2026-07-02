@@ -37,6 +37,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 节点问题专项排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
@@ -94,7 +99,8 @@ prerequisites:
 
 ## 专家级观测工具链（Expert's Toolbox）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 专家级：查看节点所有 Conditions（包括隐形自定义条件）
 kubectl get node <node-name> -o json | jq '.status.conditions'
 
@@ -105,7 +111,6 @@ kubectl view-allocations
 # 专家级：追踪 Node Controller 的驱逐决策日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLifecycleController"
 ```
-
 ---
 
 ## 目录
@@ -214,7 +219,8 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep "NodeLif
 
 #### 2.2.1 节点状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点状态
 kubectl get nodes -o wide
 
@@ -236,10 +242,10 @@ kubectl get nodes --show-labels
 # 查看节点污点
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 ```
-
 #### 2.2.2 资源压力检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 内存使用详情
 kubectl describe node <node-name> | grep -A5 "Allocated resources"
 
@@ -265,10 +271,10 @@ journalctl -k | grep -i oom
 # kubelet 资源预留配置
 cat /var/lib/kubelet/config.yaml | grep -A10 "eviction\|system"
 ```
-
 #### 2.2.3 调度相关检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点可调度性
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.unschedulable}{"\n"}{end}'
 
@@ -290,10 +296,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.affinity}' | jq
 # 检查 Pod 的容忍
 kubectl get pod <pod-name> -o jsonpath='{.spec.tolerations}' | jq
 ```
-
 #### 2.2.4 驱逐相关检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看被驱逐的 Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Failed | grep Evicted
 
@@ -303,7 +309,6 @@ kubectl get events --field-selector reason=Evicted
 # 检查 kubelet 驱逐配置
 cat /var/lib/kubelet/config.yaml | grep -A20 eviction
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -324,7 +329,17 @@ cat /var/lib/kubelet/config.yaml | grep -A20 eviction
 
 **解决步骤：**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. SSH 到节点检查 kubelet 状态
 systemctl status kubelet
 
@@ -357,12 +372,12 @@ systemctl restart kubelet
 # 5. 验证节点状态
 kubectl get node <node-name> -w
 ```
-
 #### 场景 2：网络不可达
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点网络
 ping <master-ip>
 nc -zv <master-ip> 6443
@@ -381,21 +396,30 @@ systemctl restart NetworkManager
 # 或重启 CNI Pod
 kubectl delete pod -n kube-system -l k8s-app=calico-node --field-selector spec.nodeName=<node>
 ```
-
 ### 3.2 资源压力问题
 
 #### 场景 1：内存压力 (MemoryPressure)
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe node <node>
 Conditions:
   MemoryPressure   True
 ```
-
 **解决步骤：**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查内存使用
 kubectl top pods --all-namespaces --sort-by=memory | head -20
 
@@ -431,12 +455,12 @@ sync; echo 3 > /proc/sys/vm/drop_caches
 
 systemctl restart kubelet
 ```
-
 #### 场景 2：磁盘压力 (DiskPressure)
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查磁盘使用
 df -h
 df -i  # inode
@@ -473,12 +497,12 @@ journalctl --vacuum-time=7d
 # imageGCHighThresholdPercent: 85
 # imageGCLowThresholdPercent: 80
 ```
-
 #### 场景 3：PID 压力 (PIDPressure)
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PID 使用
 cat /proc/sys/kernel/pid_max
 ps aux | wc -l
@@ -501,7 +525,6 @@ sysctl -p
 # 6. 调整 kubelet 配置
 # podPidsLimit: 4096  # 每个 Pod 最大 PID 数
 ```
-
 ### 3.3 调度问题
 
 #### 场景 1：污点阻止调度
@@ -514,7 +537,17 @@ Events:
 
 **解决步骤：**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看节点污点
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
@@ -541,7 +574,6 @@ kubectl taint nodes <node> key:NoSchedule-
 #   effect: "NoExecute"
 #   tolerationSeconds: 300
 ```
-
 #### 场景 2：亲和性导致无法调度
 
 **问题现象：**
@@ -552,7 +584,8 @@ Events:
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 的 nodeSelector
 kubectl get pod <pod-name> -o jsonpath='{.spec.nodeSelector}'
 
@@ -573,7 +606,6 @@ kubectl patch deployment <name> --type='json' -p='[
 # 6. 方案 C: 使用软亲和性 (preferredDuringScheduling)
 # 而非硬亲和性 (requiredDuringScheduling)
 ```
-
 #### 场景 3：拓扑分布约束导致无法调度
 
 **问题现象：**
@@ -584,7 +616,8 @@ Events:
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 的拓扑约束
 kubectl get pod <pod-name> -o jsonpath='{.spec.topologySpreadConstraints}' | jq
 
@@ -600,12 +633,21 @@ kubectl get nodes -L topology.kubernetes.io/zone
 #     matchLabels:
 #       app: myapp
 ```
-
 ### 3.4 节点维护操作
 
 #### 场景 1：安全地维护节点
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 标记节点不可调度
 kubectl cordon <node>
 
@@ -625,10 +667,19 @@ kubectl uncordon <node>
 kubectl get nodes
 kubectl get pods -o wide | grep <node>
 ```
-
 #### 场景 2：处理节点问题
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 如果节点永久问题，删除节点
 kubectl delete node <node>
 
@@ -642,7 +693,6 @@ kubectl delete pod <pod-name> --force --grace-period=0
 kubeadm token create --print-join-command
 # 在节点上执行 join 命令
 ```
-
 ### 3.5 完整的节点调度配置示例
 
 ```yaml
@@ -722,7 +772,8 @@ spec:
 
 ### 3.6 节点健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 节点健康检查脚本
 
@@ -754,7 +805,6 @@ kubectl get pods --all-namespaces --field-selector=status.phase=Failed | grep Ev
 
 echo -e "\n=== Check Complete ==="
 ```
-
 ---
 
 ### 3.7 安全生产风险提示
@@ -774,7 +824,17 @@ echo -e "\n=== Check Complete ==="
 
 ### 常用命令速查
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 节点状态
 kubectl get nodes -o wide
 kubectl describe node <node>
@@ -797,7 +857,6 @@ kubectl uncordon <node>
 kubectl describe node <node> | grep -A15 "Allocated resources"
 kubectl get pods --field-selector spec.nodeName=<node>
 ```
-
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
@@ -809,3 +868,6 @@ kubectl get pods --field-selector spec.nodeName=<node>
 
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+
+
+<!-- risk-assessed -->

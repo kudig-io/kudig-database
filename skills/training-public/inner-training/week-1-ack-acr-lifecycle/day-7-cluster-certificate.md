@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -163,7 +168,8 @@ etcd CA (etcd-ca.crt, 10年有效期)
 
 ### 任务 1: 检查集群证书状态 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 提取 kubeconfig 中的客户端证书并查看过期时间
 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | \
   base64 -d | openssl x509 -text -noout | grep -A2 "Validity"
@@ -204,10 +210,10 @@ echo | openssl s_client -connect ${APISERVER#https://} 2>/dev/null | \
 kubectl get validatingwebhookconfigurations -o yaml | grep -A2 caBundle
 kubectl get mutatingwebhookconfigurations -o yaml | grep -A2 caBundle
 ```
-
 ### 任务 2: kubeconfig 管理 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 通过 ACK API 获取新的 kubeconfig
 aliyun cs GET /k8s/<cluster_id>/user_config
 # 预期输出: 完整的 kubeconfig YAML 内容
@@ -253,10 +259,10 @@ kubectl config set-context --current --namespace=default
 # 查看 kubeconfig 中的集群列表
 kubectl config get-clusters
 ```
-
 ### 任务 3: 证书轮换操作 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ACK 托管版证书轮换（通过 API）
 # 触发管控面证书轮换
 aliyun cs POST /clusters/<cluster_id>/certrenew
@@ -287,10 +293,10 @@ kubectl get csr
 # 手动批准 CSR（如果未自动批准）
 kubectl certificate approve <csr-name>
 ```
-
 ### 任务 4: 证书过期场景模拟与排查 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景: kubectl 连接失败，疑似证书过期
 
 # 排查步骤 1: 检查错误信息
@@ -319,7 +325,6 @@ kubectl get pods -n kube-system
 # 排查: 检查 Webhook 配置中的 caBundle
 kubectl get validatingwebhookconfiguration <name> -o yaml | grep caBundle | head -1 | awk '{print $2}' | base64 -d | openssl x509 -noout -dates
 ```
-
 ---
 
 ## 配置示例
@@ -389,7 +394,8 @@ webhooks:
 
 ### 证书过期检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # check-certs.sh - 检查 K8s 相关证书过期时间
 
@@ -439,7 +445,6 @@ echo "=========================================="
 echo "  检查完成"
 echo "=========================================="
 ```
-
 ---
 
 ## 常见问题
@@ -494,3 +499,6 @@ ACK 托管版的管控面证书轮换是滚动进行的，不会导致服务中�
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

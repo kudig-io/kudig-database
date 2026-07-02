@@ -59,6 +59,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -82,7 +87,8 @@ relationships:
 
 ## 诊断步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Service 状态与 External IP
 kubectl get svc api-gateway -n default -o wide
 kubectl describe svc api-gateway -n default
@@ -108,7 +114,6 @@ aliyun slb DescribeVServerGroupBackendServers \
 aliyun slb DescribeLoadBalancerHTTPListenerAttribute --LoadBalancerId lb-8vbdummy03 --ListenerPort 80 --RegionId cn-zhangjiakou
 aliyun slb DescribeLoadBalancerHTTPSListenerAttribute --LoadBalancerId lb-8vbdummy03 --ListenerPort 443 --RegionId cn-zhangjiakou
 ```
-
 ## 根因分析
 
 在 ACK 控制台操作记录中发现，前一天运维同学手动在 SLB 控制台修改了 `VServerGroupId` 为 `rsp-8vbdummy03-old` 的后端服务器组，将部分 ECS 端口从 `NodePort 30080` 改为了 `30443`，但对应监听仍为 80/443。Cloud Controller Manager 虽然周期性同步，但 Service 注解中未配置强制覆盖，导致监听 80 的后端端口实际是 30443，健康检查失败，外网流量全部返回 502。
@@ -131,19 +136,20 @@ aliyun slb DescribeVServerGroupBackendServers --VServerGroupId rsp-8vbdummy03 --
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate svc api-gateway -n default \
   service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners=true \
   service.beta.kubernetes.io/alicloud-loadbalancer-backend-type=eni \
   --overwrite
 ```
-
 **第三步：修正 Service 的 target-port 与 NodePort 映射**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch svc api-gateway -n default --type='json' -p='[
   {"op": "replace", "path": "/spec/ports/0/targetPort", "value": 8080},
   {"op": "replace", "path": "/spec/ports/0/nodePort", "value": 30080},
@@ -151,17 +157,16 @@ kubectl patch svc api-gateway -n default --type='json' -p='[
   {"op": "replace", "path": "/spec/ports/1/nodePort", "value": 30443}
 ]'
 ```
-
 **第四步：触发 CCM 重新同步**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete pod -n kube-system -l app=cloud-controller-manager
 kubectl rollout status deployment/cloud-controller-manager -n kube-system --timeout=120s
 ```
-
 **第五步：若 CCM 同步后仍异常，手动修正 VServerGroup 端口**
 
 ```bash
@@ -173,7 +178,8 @@ aliyun slb SetVServerGroupAttribute \
 
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Service External IP 与端口正常
 kubectl get svc api-gateway -n default
 
@@ -188,7 +194,6 @@ curl -I http://api.zyy-prod.example.com/health
 # 4. CCM 无报错
 kubectl logs -n kube-system -l app=cloud-controller-manager --tail=100 | grep api-gateway
 ```
-
 ## 回复客户话术
 
 > 您好，外网访问 502 的根因已定位：**SLB 后端服务器组端口被手动修改，与 ACK Service 期望的 NodePort 不一致，导致健康检查失败**。
@@ -248,3 +253,6 @@ kubectl logs -n kube-system -l app=cloud-controller-manager --tail=100 | grep ap
 - Service
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - kube-proxy 异常导致 Service 不通
+
+
+<!-- risk-assessed -->

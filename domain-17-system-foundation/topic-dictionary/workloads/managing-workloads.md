@@ -34,6 +34,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Managing Workloads
@@ -268,7 +273,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 预览变更（不实际应用）
 kubectl diff -f manifests/
 
@@ -288,7 +294,6 @@ kubectl rollout restart deployment -n production
 # 使用 xargs 批量缩容
 kubectl get deploy -n production -o name | xargs -I{} kubectl scale {} --replicas=0 -n production
 ```
-
 ## 交叉引用
 
 - [Deployments](deployments.md) — 滚动更新和回滚的详细机制
@@ -305,3 +310,5 @@ kubectl get deploy -n production -o name | xargs -I{} kubectl scale {} --replica
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

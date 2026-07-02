@@ -61,6 +61,11 @@ cross_refs:
   label: '故障树: crd-operator'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 31 - CRD与Operator开发
@@ -299,7 +304,8 @@ spec:
 <!-- chunk: Kubebuilder开发流程 -->
 ## Kubebuilder开发流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 初始化项目
 kubebuilder init --domain example.com --repo github.com/example/app-operator
 
@@ -332,7 +338,6 @@ make deploy IMG=<registry>/app-operator:v1
 make undeploy
 make uninstall
 ```
-
 <!-- chunk: Controller核心代码结构 -->
 ## Controller核心代码结构
 
@@ -1121,3 +1126,6 @@ var _ = Describe("Application Controller", func() {
 - 19-lease-leader-election
 - 21-api-aggregation
 - 22-client-libraries
+
+
+<!-- risk-assessed -->

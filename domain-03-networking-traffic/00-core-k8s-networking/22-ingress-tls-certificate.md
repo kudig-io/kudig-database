@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 130 - [[Ingress|Ingress]] TLS 与证书管理
@@ -180,7 +185,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式2: kubectl 命令创建
 kubectl create secret tls example-tls \
   --cert=./tls.crt \
@@ -202,7 +208,6 @@ kubectl create secret generic mtls-secret \
 # 查看 Secret 内容
 kubectl get secret example-tls -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text -noout
 ```
-
 ### 2.3 证书链顺序
 
 ```
@@ -494,7 +499,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 CA 私钥和证书
 openssl genrsa -out ca.key 4096
 openssl req -new -x509 -days 3650 -key ca.key -out ca.crt \
@@ -522,7 +528,6 @@ kubectl create secret generic client-ca-secret --from-file=ca.crt=ca.crt
 # 5. 测试 mTLS
 curl -v --cert client.crt --key client.key --cacert ca.crt https://secure.example.com
 ```
-
 ---
 
 <!-- chunk: 五、cert-manager 自动化证书管理 -->
@@ -597,7 +602,8 @@ curl -v --cert client.crt --key client.key --cacert ca.crt https://secure.exampl
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式1: Helm 安装
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
@@ -614,7 +620,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 kubectl get pods -n cert-manager
 kubectl get crds | grep cert-manager
 ```
-
 ### 5.3 配置 Issuer/ClusterIssuer
 
 ```yaml
@@ -844,7 +849,8 @@ spec:
 
 ### 6.1 证书查看与验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看证书 Secret
 kubectl get secrets -l cert-manager.io/certificate-name
 
@@ -872,10 +878,10 @@ kubectl describe certificaterequest app-tls-cert-xxxxx
 kubectl get challenges -A
 kubectl describe challenge app-tls-cert-xxxxx
 ```
-
 ### 6.2 证书续期
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动触发证书续期
 kubectl cert-manager renew app-tls-cert -n default
 
@@ -889,7 +895,6 @@ kubectl describe certificate app-tls-cert | grep -A5 "Status:"
 kubectl get certificate -A -o custom-columns=\
 'NAMESPACE:.metadata.namespace,NAME:.metadata.name,READY:.status.conditions[?(@.type=="Ready")].status,EXPIRY:.status.notAfter,RENEWAL:.status.renewalTime'
 ```
-
 ### 6.3 证书问题排查
 
 | 问题 | 症状 | 诊断 | 解决方案 |
@@ -904,7 +909,8 @@ kubectl get certificate -A -o custom-columns=\
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 调试 cert-manager
 kubectl logs -n cert-manager -l app=cert-manager -f
 
@@ -920,7 +926,6 @@ curl -vI https://app.example.com 2>&1 | grep -E "SSL|certificate|subject|issuer|
 # 检查证书链
 echo | openssl s_client -connect app.example.com:443 -servername app.example.com 2>/dev/null | openssl x509 -text -noout
 ```
-
 ---
 
 <!-- chunk: 七、TLS 最佳实践 -->
@@ -1061,3 +1066,6 @@ spec:
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

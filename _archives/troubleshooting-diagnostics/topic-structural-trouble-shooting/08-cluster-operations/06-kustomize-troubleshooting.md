@@ -37,6 +37,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Kustomize 部署故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, Kustomize v5.0+ | **最后更新**: 2026-01 | **难度**: 中级
@@ -73,6 +78,7 @@ prerequisites:
 ### Kustomize 工作原理
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                       Kustomize 构建流程                                 │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -145,7 +151,6 @@ Kustomize 处理阶段:
 │  的 YAML     │
 └──────────────┘
 ```
-
 ### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息 | 查看方式 |
@@ -173,6 +178,7 @@ Kustomize 处理阶段:
 ### 排查决策树
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 Kustomize 问题
         │
         ▼
@@ -231,12 +237,12 @@ Kustomize 问题
                                                        │ 完成       │
                                                        └────────────┘
 ```
-
 ### 排查命令集
 
 #### 构建和验证
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 基本构建并查看输出
 kustomize build <path>
 kubectl kustomize <path>
@@ -254,10 +260,10 @@ kubectl version --client | grep Kustomize
 # 检查 kustomization.yaml 语法
 kustomize cfg fmt <path>/kustomization.yaml
 ```
-
 #### 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看合并后特定资源
 kustomize build <path> | kubectl get -f - -o yaml --dry-run=client
 
@@ -273,10 +279,10 @@ kustomize build <path> | grep "^kind:"
 # 验证 YAML 语法
 yamllint kustomization.yaml
 ```
-
 #### 应用检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用并查看变更
 kustomize build <path> | kubectl apply -f - --dry-run=server
 
@@ -293,7 +299,6 @@ kustomize build <path> | kubectl delete -f -
 # 或
 kubectl delete -k <path>
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
@@ -787,7 +792,8 @@ components:
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ===== Kustomize 一键诊断脚本 =====
 
 echo "=== Kustomize 版本 ==="
@@ -814,7 +820,6 @@ if [ -f "kustomization.yaml" ]; then
   kustomize build . 2>/dev/null | kubectl apply --dry-run=client -f - 2>&1 | head -20
 fi
 ```
-
 ### 附录：常用 Kustomize 模式
 
 ```yaml
@@ -902,3 +907,6 @@ configMapGenerator:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

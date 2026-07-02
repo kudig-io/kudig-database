@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 证书身份到 RBAC 的映射关系
@@ -470,7 +475,8 @@ current-context: ci-pipeline@production
 
 ### 身份验证调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前用户的证书身份
 kubectl config view --raw -o jsonpath='{.users[?(@.name=="kubernetes-admin")].user.client-certificate-data}' | \
   base64 -d | openssl x509 -noout -subject -issuer
@@ -500,10 +506,10 @@ kubectl get csr node-csr-xxx -o jsonpath='{.spec.username}'
 kubectl get csr node-csr-xxx -o jsonpath='{.spec.groups}'
 # ["system:bootstrappers:kubeadm:default-node-token","system:authenticated"]
 ```
-
 ### 查看 RBAC 绑定关系
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 system:masters 绑定
 kubectl get clusterrolebinding cluster-admin -o yaml
 # apiVersion: rbac.authorization.k8s.io/v1
@@ -522,7 +528,6 @@ kubectl get clusterrolebinding -o wide | grep system:nodes
 # 查看所有 ClusterRoleBinding
 kubectl get clusterrolebinding -o wide
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -626,3 +631,6 @@ subjects:
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - USER
+
+
+<!-- risk-assessed -->

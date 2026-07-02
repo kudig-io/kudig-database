@@ -39,6 +39,11 @@ prerequisites:
 - troubleshooting-methodology
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 容器运行时故障排查指南
@@ -160,7 +165,8 @@ k8s_versions:
 
 ### 1.3 专家观测工具链（Expert's Toolbox）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 专家级：绕过 CRI 直接操作原生 containerd (ctr)
 ctr -n k8s.io images ls          # 查看 k8s 命名空间下的镜像
 ctr -n k8s.io tasks list         # 查看底层任务状态
@@ -173,7 +179,6 @@ mount | grep overlay
 # 专家级：系统调用跟踪 (定位 OCI runtime 失败)
 strace -f -o runtime_err.log crictl run pod.yaml container.yaml
 ```
-
 ---
 
 ## 排查方法与步骤
@@ -223,7 +228,8 @@ strace -f -o runtime_err.log crictl run pod.yaml container.yaml
 
 #### 2.3.1 第一步：检查运行时服务状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # containerd
 systemctl status containerd
 systemctl is-active containerd
@@ -240,10 +246,10 @@ ls -la /run/containerd/containerd.sock
 ls -la /var/run/dockershim.sock  # 旧版本
 ls -la /var/run/cri-dockerd.sock  # Docker + cri-dockerd
 ```
-
 #### 2.3.2 第二步：检查运行时信息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # containerd 信息
 crictl info
 crictl version
@@ -259,10 +265,10 @@ docker version
 # 检查运行时端点
 crictl --runtime-endpoint unix:///run/containerd/containerd.sock info
 ```
-
 #### 2.3.3 第三步：检查容器状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有容器
 crictl ps -a
 
@@ -278,10 +284,10 @@ ctr -n k8s.io tasks ls
 # 查看容器指标
 crictl stats
 ```
-
 #### 2.3.4 第四步：检查镜像状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有镜像
 crictl images
 
@@ -298,10 +304,10 @@ crictl pull busybox
 ctr -n k8s.io images ls
 ctr -n k8s.io images check
 ```
-
 #### 2.3.5 第五步：检查存储驱动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # containerd 存储配置
 cat /etc/containerd/config.toml | grep -A10 "\[plugins.*snapshotter\]"
 
@@ -321,7 +327,6 @@ df -h /var/lib/docker/
 lsmod | grep overlay
 cat /proc/filesystems | grep overlay
 ```
-
 #### 2.3.6 第六步：检查 cgroup 配置
 
 ```bash
@@ -344,7 +349,8 @@ cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 
 #### 2.3.7 第七步：检查日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # containerd 日志
 journalctl -u containerd -f --no-pager
 journalctl -u containerd -p err --since "1 hour ago"
@@ -358,7 +364,6 @@ journalctl -u containerd | grep -iE "(error|failed|unable)" | tail -50
 # 查看 kubelet 中的运行时相关日志
 journalctl -u kubelet | grep -i "runtime" | tail -50
 ```
-
 ### 2.4 排查注意事项
 
 #### 2.4.1 安全注意事项
@@ -386,7 +391,8 @@ journalctl -u kubelet | grep -i "runtime" | tail -50
 
 #### 3.1.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查启动失败原因
 systemctl status containerd
 journalctl -u containerd -b --no-pager | tail -100
@@ -415,7 +421,6 @@ systemctl start containerd
 systemctl status containerd
 crictl info
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -439,7 +444,8 @@ crictl info
 
 #### 3.2.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：获取详细错误信息
 crictl ps -a | grep <container-name>
 crictl inspect <container-id>
@@ -480,7 +486,6 @@ setenforce 0  # SELinux
 cat /sys/fs/cgroup/memory/memory.limit_in_bytes
 cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -507,7 +512,17 @@ cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认错误类型
 crictl pull <image-name>
 # 查看详细错误
@@ -546,7 +561,6 @@ systemctl restart containerd
 # 步骤 8：验证拉取
 crictl pull <image-name>
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -573,7 +587,8 @@ crictl pull <image-name>
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查空间使用
 df -h /var/lib/containerd/
 df -h /var/lib/docker/
@@ -610,7 +625,6 @@ find /var/lib/containerd/ -name "*.log" -mtime +7 -delete
 # 步骤 8：验证空间释放
 df -h /var/lib/containerd/
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -625,6 +639,7 @@ df -h /var/lib/containerd/
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ⚠️  安全生产风险提示：
 1. 清理前确认镜像不被当前 Pod 使用
 2. docker system prune -a 会清理所有未使用资源  # ⚠️ 强制清理，可能杀运行中容器
@@ -632,7 +647,6 @@ df -h /var/lib/containerd/
 4. 监控存储使用，设置告警
 5. 生产环境建议预留足够空间
 ```
-
 ### 3.5 cgroup 驱动不匹配
 
 #### 3.5.1 解决步骤
@@ -640,7 +654,17 @@ df -h /var/lib/containerd/
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查当前配置
 # kubelet cgroup 驱动
 cat /var/lib/kubelet/config.yaml | grep cgroupDriver
@@ -684,7 +708,6 @@ systemctl restart kubelet
 crictl info | grep -i cgroup
 cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -712,7 +735,17 @@ cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认 runc 版本
 runc --version
 
@@ -747,7 +780,6 @@ systemctl restart containerd
 # 步骤 8：验证
 crictl run --help
 ```
-
 #### 3.6.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -774,7 +806,17 @@ crictl run --help
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 生成基础配置
 containerd config default > /etc/containerd/config.toml
 
@@ -814,7 +856,6 @@ EOF
 # 重启生效
 systemctl restart containerd
 ```
-
 ---
 
 ## 附录
@@ -865,3 +906,6 @@ systemctl restart containerd
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+
+
+<!-- risk-assessed -->

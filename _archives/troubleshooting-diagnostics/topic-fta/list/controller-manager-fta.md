@@ -57,6 +57,11 @@ cross_refs:
   label: '结构化排障: 04-controller-manager-troubleshooting'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get pods -n kube-system -l component=kube-controller-manager -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示 Controller Manager 异常 -->
 
 # Controller Manager 异常 FTA 树
@@ -345,3 +350,5 @@ flowchart TD
 - **1.24–1.27**：安全准入迁移后，控制器创建对象的权限链路需补充 PSA/OPA 分支；关注 EndpointSlice 控制器迁移。
 - **1.28–1.30**：只使用稳定 API，控制器与对象状态同步需保证证据闭环；关注新增控制器如 ValidatingAdmissionPolicy 控制器。
 - **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
+
+<!-- risk-assessed -->

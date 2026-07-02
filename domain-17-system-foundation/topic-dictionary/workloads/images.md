@@ -33,6 +33,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 容器镜像（Images）
@@ -238,7 +243,8 @@ ENTRYPOINT ["/server"]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点上的镜像列表
 crictl images
 kubectl get nodes -o json | jq '.items[].status.images[:5]'
@@ -264,7 +270,6 @@ kubectl get pod <name> -o jsonpath='{.spec.containers[*].imagePullPolicy}'
 # 节点磁盘使用（镜像占用）
 crictl imagefsinfo
 ```
-
 ## 交叉引用
 
 - [容器运行时接口](container-runtime-interface-cri.md) — CRI ImageService 的底层拉取机制
@@ -283,3 +288,6 @@ crictl imagefsinfo
 - [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+
+<!-- risk-assessed -->

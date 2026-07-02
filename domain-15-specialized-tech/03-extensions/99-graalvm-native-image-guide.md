@@ -53,6 +53,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # GraalVM Native Image 云原生实践指南
@@ -248,7 +253,8 @@ sudo dnf install gcc glibc-devel zlib-devel
 
 ### 3.3 构建命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 本地编译原生二进制
 ./mvnw -Pnative native:compile
 
@@ -261,7 +267,6 @@ sudo dnf install gcc glibc-devel zlib-devel
 # 运行原生容器
 docker run --rm -p 8080:8080 registry.example.com/my-spring-app:latest
 ```
-
 ### 3.4 Gradle Kotlin DSL 配置
 
 ```kotlin
@@ -358,7 +363,8 @@ class MyAppRuntimeHints implements RuntimeHintsRegistrar {
 
 ### 4.2 构建与容器化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # JVM 模式构建
 ./mvnw package -Dquarkus.package.type=fast-jar
 
@@ -374,7 +380,6 @@ class MyAppRuntimeHints implements RuntimeHintsRegistrar {
     -Dquarkus.container-image.name=my-quarkus-app \
     -Dquarkus.container-image.tag=v1.0.0
 ```
-
 ### 4.3 Quarkus Dockerfile
 
 ```dockerfile
@@ -554,14 +559,14 @@ ENTRYPOINT ["/app/my-spring-app"]
 
 ### 7.2 多架构构建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AMD64 + ARM64 多架构
 docker buildx build --push \
     --platform linux/amd64,linux/arm64 \
     -t registry.example.com/my-spring-app:native-v1.0.0 \
     .
 ```
-
 ---
 
 <!-- chunk: 八、Kubernetes 部署实践 -->
@@ -766,7 +771,8 @@ native-image -pgo=default.iprof -jar myapp.jar
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看编译时初始化报告
 native-image -H:+PrintClassInitialization -jar myapp.jar
 
@@ -784,7 +790,6 @@ native-image -H:+PrintImageElementTree -jar myapp.jar
 # 在 K8s 中诊断
 kubectl exec -it deployment/my-spring-app-native -- /app/my-spring-app -XX:+PrintGCSummary
 ```
-
 ---
 
 <!-- chunk: 📊 框架选型对比 -->
@@ -836,3 +841,6 @@ kubectl exec -it deployment/my-spring-app-native -- /app/my-spring-app -XX:+Prin
 - 16-security-compliance-management
 - 99-quarkus-micronaut-cloud-native-java-guide
 - 99-serverless-faas-guide
+
+
+<!-- risk-assessed -->

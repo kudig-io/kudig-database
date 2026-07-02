@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Flannel 多集群场景与子网冲突处理
@@ -103,7 +108,8 @@ failed to allocate subnet: lease already exists for subnet
 
 #### 2.2.1 检查 etcd 中的子网记录
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 etcd 后端时
 ETCDCTL_API=3 etcdctl \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -114,7 +120,6 @@ ETCDCTL_API=3 etcdctl \
 # 查看所有子网分配
 # 格式：/coreos.com/network/subnets/<subnet-cidr>
 ```
-
 #### 2.2.2 使用 flannel kubectl 插件
 
 ```bash
@@ -131,7 +136,8 @@ flannelctl subnet list
 
 #### 2.2.3 检测跨集群冲突
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # check-subnet-conflict.sh
 
@@ -161,7 +167,6 @@ for base in "${!COUNT[@]}"; do
   fi
 done
 ```
-
 ---
 
 <!-- chunk: 3. etcd 脏数据清理 -->
@@ -169,7 +174,8 @@ done
 
 ### 3.1 识别脏数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有子网记录
 ETCDCTL_API=3 etcdctl --endpoints=$ETCD_HOST \
   get /coreos.com/network/subnets --prefix
@@ -180,10 +186,10 @@ kubectl get nodes
 
 # 对比 etcd 中的子网与实际节点
 ```
-
 ### 3.2 清理孤立子网
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cleanup-orphan-subnets.sh
 
@@ -199,13 +205,22 @@ for subnet in "${STALE_SUBNETS[@]}"; do
     del "$subnet"
 done
 ```
-
 ### 3.3 完全重置子网分配
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # reset-all-subnets.sh
 # ⚠️ 警告：此操作会导致所有 Pod 网络中断，仅在紧急情况下使用
@@ -233,7 +248,6 @@ echo "完成，等待子网重新分配..."
 sleep 30
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}'
 ```
-
 ---
 
 <!-- chunk: 4. 多集群 etcd 配置最佳实践 -->
@@ -281,7 +295,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用不同的 etcd 键前缀
 # 集群 A
 kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
@@ -291,7 +306,6 @@ kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
 kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
   '{"data":{"net-conf.json":"{\"Network\":\"10.245.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"},\"EtcdPrefix\":\"/cluster-b/network\"}"}}'
 ```
-
 ### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 后端
 
 **推荐方案**：避免使用 etcd 后端，改用 Kubernetes API 后端
@@ -319,7 +333,17 @@ args:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # kubeadm 初始化时指定
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
@@ -329,7 +353,6 @@ kubectl edit cm -n kube-system kubelet-config
 
 # 方式二：重启 controller-manager 使配置生效
 ```
-
 ### 5.2 使用 PodCIDR 策略
 
 ```yaml
@@ -346,7 +369,8 @@ spec:
 
 ### 5.3 定期巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # flannel-subnet-audit.sh
 # 建议每日运行
@@ -386,7 +410,6 @@ fi
 
 echo "巡检完成" >> $LOG_FILE
 ```
-
 ---
 
 <!-- chunk: 6. 集群迁移场景 -->
@@ -398,7 +421,8 @@ echo "巡检完成" >> $LOG_FILE
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 备份当前配置
 kubectl get configmap -n kube-system kube-flannel-cfg -o yaml > flannel-config-backup.yaml
 
@@ -423,7 +447,6 @@ sleep 30
 # 7. 验证
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}'
 ```
-
 ### 6.2 集群合并流程
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -431,7 +454,17 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ⚠️ 警告：集群合并是高风险操作
 
 # 假设集群 A (10.244.0.0/16) 和集群 B (10.244.0.0/16) 需合并
@@ -455,13 +488,22 @@ kubectl delete pod -n kube-system -l app=flannel
 # 5. 重建所有 Pod（Pod IP 会变更）
 kubectl delete pod -A --all  # ⚠️ 批量删除，波及面大
 ```
-
 ---
 
 <!-- chunk: 7. 故障排查命令速查 -->
 ## 7. 故障排查命令速查
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 etcd 中的所有子网
 ETCDCTL_API=3 etcdctl get /coreos.com/network/subnets --prefix
 
@@ -483,7 +525,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pod
 # 7. 使用 flannelctl 检查
 flannelctl subnet list
 ```
-
 ---
 
 <!-- chunk: Obsidian 相关文档 -->
@@ -514,3 +555,5 @@ flannelctl subnet list
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

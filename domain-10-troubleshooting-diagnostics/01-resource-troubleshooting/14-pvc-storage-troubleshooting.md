@@ -67,6 +67,11 @@ cross_refs:
   label: '运维技能: 07-pvc-storage-failure'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)
@@ -97,6 +102,7 @@ cross_refs:
 ### 1.3 存储故障排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                     ┌─────────────────────────────────────┐
                     │         PVC 故障排查入口              │
                     └─────────────────┬───────────────────┘
@@ -125,7 +131,6 @@ cross_refs:
                         └────────┘  │错误信息   │
                                     └──────────┘
 ```
-
 ---
 
 <!-- chunk: 2. PVC Pending 问题排查 (PVC Pending Diagnosis) -->
@@ -146,7 +151,8 @@ cross_refs:
 
 ### 2.2 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 基础检查 ==========
 
 # 1. 获取PVC状态和详情
@@ -191,12 +197,12 @@ kubectl describe resourcequota -n <namespace>
 # 10. 检查LimitRange
 kubectl get limitrange -n <namespace>
 ```
-
 ### 2.3 StorageClass 配置问题
 
 #### 动态Provisioner检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查StorageClass是否配置正确
 kubectl get sc -o yaml
 
@@ -206,7 +212,6 @@ kubectl get deployment -n kube-system | grep -E 'csi|provisioner|storage'
 # 检查provisioner RBAC权限
 kubectl get clusterrolebinding | grep -E 'csi|provisioner'
 ```
-
 #### 常见StorageClass问题
 
 | 问题 | 症状 | 检查方法 | 解决方案 |
@@ -221,14 +226,14 @@ kubectl get clusterrolebinding | grep -E 'csi|provisioner'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 设置默认StorageClass
 kubectl patch storageclass <sc-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 # 取消默认StorageClass
 kubectl patch storageclass <old-default-sc> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
-
 ---
 
 <!-- chunk: 3. CSI驱动故障排查 (CSI Driver Troubleshooting) -->
@@ -262,7 +267,8 @@ kubectl patch storageclass <old-default-sc> -p '{"metadata": {"annotations":{"st
 
 ### 3.2 CSI组件健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== CSI Controller 检查 ==========
 
 # 检查CSI Controller Deployment
@@ -299,7 +305,6 @@ kubectl logs -n kube-system -l app=csi-controller -c csi-attacher --tail=200
 # Node Driver日志
 kubectl logs -n kube-system <csi-node-pod> -c csi-driver --tail=200
 ```
-
 ### 3.3 常见CSI问题
 
 | 问题 | 症状 | 原因 | 解决方案 |
@@ -313,7 +318,8 @@ kubectl logs -n kube-system <csi-node-pod> -c csi-driver --tail=200
 
 ### 3.4 VolumeAttachment诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查VolumeAttachment状态
 kubectl get volumeattachments
 kubectl get volumeattachments -o custom-columns='NAME:.metadata.name,ATTACHER:.spec.attacher,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName,ATTACHED:.status.attached'
@@ -324,7 +330,6 @@ kubectl describe volumeattachment <va-name>
 # 查找卡住的VolumeAttachment
 kubectl get volumeattachments -o json | jq '.items[] | select(.status.attached==false) | .metadata.name'
 ```
-
 ---
 
 <!-- chunk: 4. 挂载故障排查 (Mount Troubleshooting) -->
@@ -332,7 +337,8 @@ kubectl get volumeattachments -o json | jq '.items[] | select(.status.attached==
 
 ### 4.1 Pod挂载失败诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Pod Events检查 ==========
 
 # 查看Pod Events
@@ -361,7 +367,6 @@ ls -la /var/lib/kubelet/pods/<pod-uid>/volumes/
 # 检查kubelet日志
 journalctl -u kubelet | grep -i "mount|volume|attach" | tail -100
 ```
-
 ### 4.2 常见挂载错误与解决
 
 | 错误信息 | 原因 | 解决方案 |
@@ -378,7 +383,8 @@ journalctl -u kubelet | grep -i "mount|volume|attach" | tail -100
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景: RWO卷被多个节点挂载导致挂载失败
 
 # 1. 查找哪些Pod在使用这个PVC
@@ -396,7 +402,6 @@ kubectl delete volumeattachment <va-name>
 
 # 5. 或者修改PV的nodeAffinity让新Pod调度到同一节点
 ```
-
 ### 4.4 文件系统问题诊断
 
 ```bash
@@ -431,7 +436,8 @@ mount <device> <mount-point>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查StorageClass是否支持扩容
 kubectl get sc <sc-name> -o jsonpath='{.allowVolumeExpansion}'
 
@@ -444,7 +450,6 @@ kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.status.conditions}'
 # 查看扩容Events
 kubectl describe pvc <pvc-name> -n <namespace> | grep -A 5 "Conditions"
 ```
-
 ### 5.2 扩容问题诊断
 
 | 扩容状态 | 含义 | 可能原因 | 解决方案 |
@@ -460,7 +465,8 @@ kubectl describe pvc <pvc-name> -n <namespace> | grep -A 5 "Conditions"
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 停止使用该PVC的Pod
 kubectl scale deployment <deploy> --replicas=0 -n <namespace>
 
@@ -473,7 +479,6 @@ kubectl get pvc <pvc-name> -n <namespace> -w
 # 4. 恢复Pod
 kubectl scale deployment <deploy> --replicas=<original-count> -n <namespace>
 ```
-
 ---
 
 <!-- chunk: 6. 存储性能问题 (Storage Performance Issues) -->
@@ -512,7 +517,8 @@ fio --name=iops --ioengine=libaio --direct=1 --bs=4k --iodepth=32 --size=1G --rw
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查PVC使用量(需要kubelet启用volume stats)
 kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[] | select(.pvcRef.name=="<pvc-name>")'
 
@@ -522,7 +528,6 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
 # Pod内检查
 kubectl exec -it <pod> -- df -h /mnt/data
 ```
-
 ---
 
 <!-- chunk: 7. 快照与备份问题 (Snapshot & Backup Issues) -->
@@ -530,7 +535,8 @@ kubectl exec -it <pod> -- df -h /mnt/data
 
 ### 7.1 VolumeSnapshot诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查VolumeSnapshotClass
 kubectl get volumesnapshotclass
 kubectl describe volumesnapshotclass <vsc-name>
@@ -543,7 +549,6 @@ kubectl describe volumesnapshot <snapshot-name> -n <namespace>
 kubectl get volumesnapshotcontent
 kubectl describe volumesnapshotcontent <vsc-name>
 ```
-
 ### 7.2 快照常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -581,7 +586,8 @@ spec:
 
 ### 8.1 阿里云ACK存储
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 阿里云磁盘CSI检查 ==========
 
 # 检查云盘CSI驱动
@@ -605,10 +611,10 @@ kubectl get pods -n kube-system -l app=csi-nas-controller
 # 检查NAS挂载点
 aliyun nas DescribeMountTargets --FileSystemId <fs-id>
 ```
-
 ### 8.2 AWS EKS存储
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== AWS EBS CSI检查 ==========
 
 # 检查EBS CSI驱动
@@ -633,10 +639,10 @@ kubectl get pods -n kube-system -l app=efs-csi-controller
 aws efs describe-file-systems --file-system-id fs-xxx
 aws efs describe-mount-targets --file-system-id fs-xxx
 ```
-
 ### 8.3 GCP GKE存储
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== GCE PD CSI检查 ==========
 
 # 检查GCE PD CSI驱动
@@ -649,7 +655,6 @@ kubectl logs -n kube-system -l k8s-app=gcp-compute-persistent-disk-csi-driver -c
 gcloud compute disks describe <disk-name> --zone <zone>
 gcloud compute instances describe <instance-name> --zone <zone> --format='get(disks)'
 ```
-
 ---
 
 <!-- chunk: 9. PV回收与数据保护 (PV Reclaim & Data Protection) -->
@@ -666,21 +671,31 @@ gcloud compute instances describe <instance-name> --zone <zone> --format='get(di
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查PV回收策略
 kubectl get pv <pv-name> -o jsonpath='{.spec.persistentVolumeReclaimPolicy}'
 
 # 修改回收策略
 kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
-
 ### 9.2 Released状态PV处理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查找Released状态的PV
 kubectl get pv | grep Released
 
@@ -692,13 +707,13 @@ kubectl delete pv <pv-name>
 
 # 方案3: 手动清理数据后重新创建PV
 ```
-
 ### 9.3 Finalizer阻塞删除
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查PVC/PV的finalizers
 kubectl get pvc <pvc-name> -o jsonpath='{.metadata.finalizers}'
 kubectl get pv <pv-name> -o jsonpath='{.metadata.finalizers}'
@@ -707,7 +722,6 @@ kubectl get pv <pv-name> -o jsonpath='{.metadata.finalizers}'
 kubectl patch pvc <pvc-name> -p '{"metadata":{"finalizers":null}}'
 kubectl patch pv <pv-name> -p '{"metadata":{"finalizers":null}}'
 ```
-
 ---
 
 <!-- chunk: 10. 存储监控与告警 (Storage Monitoring & Alerting) -->
@@ -806,7 +820,8 @@ spec:
 
 ### 11.1 一键PVC诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # PVC故障诊断脚本
 
@@ -856,10 +871,10 @@ echo -e "\n=========================================="
 echo "诊断完成"
 echo "=========================================="
 ```
-
 ### 11.2 存储健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 存储系统健康检查
 
@@ -902,7 +917,6 @@ echo "健康检查完成"
 echo "=========================================="
 
 ```
-
 ---
 
 <!-- chunk: 十二、常见问题速查 (FAQ Quick Reference) -->
@@ -967,3 +981,5 @@ echo "=========================================="
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

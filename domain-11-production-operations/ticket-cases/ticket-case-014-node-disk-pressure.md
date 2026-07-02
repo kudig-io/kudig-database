@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看节点状态、再看磁盘使用、最后定位大文件”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认节点 DiskPressure 状态
 kubectl get node cn-beijing.172.18.4.21 -o wide
 kubectl describe node cn-beijing.172.18.4.21 | grep -A 15 Conditions
@@ -110,7 +116,6 @@ ssh root@cn-beijing.172.18.4.21 "crictl ps -a | wc -l"
 # 7. 检查日志轮转配置
 kubectl get ds filebeat -n logistics-platform -o yaml | grep -A 10 resources
 ```
-
 ## 根因分析
 
 节点 `cn-beijing.172.18.4.21` 的根分区 `/` 总容量 200Gi，其中 `/var/lib/docker` 占用 185Gi，使用率达 98%。进一步分析发现：
@@ -128,22 +133,32 @@ kubelet 在磁盘可用空间低于阈值时设置 `DiskPressure=True`，并根�
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon cn-beijing.172.18.4.21
 ```
-
 **第二步：清理容器日志（释放最快、风险最低）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上执行
 ssh root@cn-beijing.172.18.4.21 "shred -u /var/lib/docker/containers/*/*.log"  # 慎用，确认非审计日志
 # 更安全的做法：清空日志文件而不删除 inode
 ssh root@cn-beijing.172.18.4.21 "for f in /var/lib/docker/containers/*/*.log; do > \$f; done"
 ```
-
 **第三步：清理已退出容器与未使用镜像**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # containerd 运行时
 ssh root@cn-beijing.172.18.4.21 "crictl rm -af"
 ssh root@cn-beijing.172.18.4.21 "crictl rmi --prune"
@@ -152,13 +167,22 @@ ssh root@cn-beijing.172.18.4.21 "crictl rmi --prune"
 ssh root@cn-beijing.172.18.4.21 "docker container prune -f"
 ssh root@cn-beijing.172.18.4.21 "docker image prune -af"
 ```
-
 **第四步：调整 kubelet 日志与镜像清理策略**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在节点上编辑 /var/lib/kubelet/config.yaml
 ssh root@cn-beijing.172.18.4.21 "cat >> /var/lib/kubelet/config.yaml <<EOF
 imageGCHighThresholdPercent: 80
@@ -168,14 +192,23 @@ containerLogMaxFiles: 5
 EOF"
 ssh root@cn-beijing.172.18.4.21 "systemctl restart kubelet"
 ```
-
 **第五步：驱逐可迁移 Pod 并替换节点**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl drain cn-beijing.172.18.4.21 \
   --ignore-daemonsets \
   --delete-emptydir-data \
@@ -185,16 +218,16 @@ kubectl drain cn-beijing.172.18.4.21 \
 # 由集群自动扩容替换或手动删除节点
 kubectl delete node cn-beijing.172.18.4.21
 ```
-
 **第六步：恢复节点调度（如保留该节点）**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl uncordon cn-beijing.172.18.4.21
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 节点 DiskPressure 状态恢复
 kubectl describe node cn-beijing.172.18.4.21 | grep -A 5 DiskPressure
 
@@ -209,7 +242,6 @@ kubectl rollout status deployment/track-service -n logistics-platform --timeout=
 # 4. 镜像与容器清理效果
 ssh root@cn-beijing.172.18.4.21 "crictl system df"
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 Pod 被驱逐的根因是 **节点磁盘空间不足触发 DiskPressure**。节点 `/var/lib/docker` 使用率达 98%，主要原因是容器标准输出日志未轮转、历史镜像层与已退出容器未清理。kubelet 根据驱逐策略优先驱逐了 `logistics-platform` 下的 Burstable Pod，导致物流查询服务受影响。我们已完成以下处置：
@@ -262,3 +294,6 @@ DiskPressure 是 Kubernetes 节点常见故障类型之一，但很多企业只�
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

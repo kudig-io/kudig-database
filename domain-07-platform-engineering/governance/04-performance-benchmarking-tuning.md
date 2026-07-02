@@ -42,6 +42,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 性能基准测试与调优 (Performance Benchmarking & Tuning)
@@ -234,7 +239,8 @@ api_server_metrics:
 ### 2. etcd性能测试
 
 #### etcd基准测试工具
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd性能测试脚本
 
@@ -268,7 +274,6 @@ test_etcd_performance() {
 # 使用示例
 test_etcd_performance "https://etcd-0:2379,https://etcd-1:2379,https://etcd-2:2379"
 ```
-
 #### etcd性能优化参数
 ```yaml
 etcd_optimization_params:
@@ -439,7 +444,17 @@ network_plugin_benchmark:
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 网络性能基准测试
 
@@ -515,7 +530,6 @@ EOF
 
 test_network_performance
 ```
-
 <!-- chunk: 存储性能调优 -->
 ## 存储性能调优
 
@@ -525,7 +539,17 @@ test_network_performance
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 存储性能基准测试
 
@@ -599,7 +623,6 @@ EOF
 test_storage_performance "alicloud-disk-essd" "2G"
 test_storage_performance "alicloud-disk-efficiency" "2G"
 ```
-
 ### 存储性能优化建议
 ```yaml
 storage_optimization_guide:
@@ -700,7 +723,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # Linux系统性能调优脚本
 
@@ -753,7 +786,6 @@ EOF
 
 optimize_system_performance
 ```
-
 ### 2. Kubernetes组件调优
 ```yaml
 # 组件性能调优配置
@@ -883,3 +915,6 @@ performance_tuning_checklist
 - 03-capacity-planning-resource-assessment
 - 05-operations-metrics-system
 - 06-monitoring-alerting-system
+
+
+<!-- risk-assessed -->

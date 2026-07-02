@@ -43,6 +43,11 @@ component: 02 Mathematical Foundations
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第二章：FTA 数学基础与理论模型
@@ -377,3 +382,6 @@ FTA 分析的最终目标是量化和提升系统可靠性。以下是核心可�
 - [[domain-10-troubleshooting-diagnostics/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md|04-fta-core-principles]]
+
+
+<!-- risk-assessed -->

@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SBOM 生成与管理 (SBOM Generation and Management)
@@ -154,7 +159,8 @@ graph TD
 
 ## 1.4 PURL (Package URL) 规范
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # PURL 格式: scheme:type/namespace/name@version?qualifiers#subpath
 
 # npm 包
@@ -188,7 +194,6 @@ print(f'Name: {purl.name}')
 print(f'Version: {purl.version}')
 "
 ```
-
 ---
 
 <!-- chunk: 2. SBOM 标准格式对比 -->## 2. SBOM 标准格式对比
@@ -454,7 +459,8 @@ EOF
 
 ## 3.2 扫描目标类型
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============ 容器镜像扫描 ============
 
 # 扫描本地 Docker 镜像
@@ -504,7 +510,6 @@ syft file:./package.rpm
 # 扫描 Debian 包
 syft file:./package.deb
 ```
-
 ## 3.3 输出格式详解
 
 ```bash
@@ -935,7 +940,8 @@ cyclonedx validate sbom.cdx.json --spec-version 1.5
 
 ## 5.3 cdxgen
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 cdxgen - 支持40+语言/框架
 npm install -g @cyclonedx/cdxgen
 
@@ -966,7 +972,6 @@ cdxgen -t go \
   -o sbom-with-build.cdx.json \
   /path/to/project
 ```
-
 ## 5.4 SBOM 格式转换
 
 ```bash
@@ -1024,7 +1029,8 @@ graph LR
 
 ## 6.2 SBOM 版本管理策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # SBOM 版本命名约定
 # 格式: {product}-{version}-{build_date}-{commit_sha}.{format}.{extension}
 
@@ -1070,7 +1076,6 @@ store_sbom() {
   echo "SBOM stored: $DEST_DIR/sbom.${EXT}"
 }
 ```
-
 ## 6.3 SBOM 完整性保护
 
 ```bash
@@ -1531,7 +1536,8 @@ oras pull \
 
 ## 8.2 Dependency Track 平台
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Dependency Track - 开源 SBOM 管理平台
 # 安装（使用 Docker Compose）
 
@@ -1594,10 +1600,10 @@ curl -s "$DT_API_URL/api/v1/vulnerability/project/${PROJECT_UUID}" \
   -H "X-Api-Key: $DT_API_KEY" | \
   jq '[.[] | select(.severity == "CRITICAL")] | length'
 ```
-
 ## 8.3 S3 SBOM 归档策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # sbom-archival.sh - SBOM S3 归档管理
 
@@ -1682,7 +1688,6 @@ EOF
     --lifecycle-configuration file://sbom-lifecycle-policy.json
 }
 ```
-
 ---
 
 <!-- chunk: 9. 依赖图谱分析 -->## 9. 依赖图谱分析
@@ -2426,3 +2431,5 @@ if __name__ == "__main__":
 - 05-slsa-levels-implementation
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

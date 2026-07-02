@@ -34,6 +34,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 22: [[Service|Service]] 基础
@@ -147,7 +152,8 @@ kube-proxy 负责在节点上实现 Service 的转发规则。有两种主要模
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl create deployment web --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24 --replicas=3
 # 预期输出: deployment.apps/web created
@@ -217,13 +223,13 @@ kubectl run dns-test --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybo
 # Name:      web-clusterip
 # Address 1: 10.96.123.456 web-clusterip.default.svc.cluster.local
 ```
-
 ### 任务 2: NodePort Service (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 NodePort Service
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -256,13 +262,13 @@ curl http://${NODE_IP}:30080
 # 注意: 任意节点的 IP + NodePort 都可以访问
 # 即使该节点上没有运行目标 Pod，kube-proxy 也会将流量转发到其他节点
 ```
-
 ### 任务 3: LoadBalancer Service（ACK + SLB）(40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 LoadBalancer Service（ACK 自动创建 SLB）
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -316,14 +322,14 @@ kubectl describe svc web-lb | grep -A 10 "Events:"
 #   Normal  EnsuringLoadBalancer  60s   service-controller  Ensuring load balancer
 #   Normal  EnsuredLoadBalancer   30s   service-controller  Ensured load balancer
 ```
-
 ### 任务 4: Headless Service 与 DNS (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Headless Service
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -368,7 +374,6 @@ kubectl run dns-test --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybo
 kubectl delete svc web-clusterip web-nodeport web-lb web-headless
 kubectl delete deploy web
 ```
-
 ---
 
 ## 配置示例
@@ -475,3 +480,6 @@ Endpoints 的更新依赖 kube-proxy 的 Watch 机制，通常在几秒内完成
 - [kube-proxy 模式详解](../../domain-06-service-networking/02-kube-proxy.md)
 - [ACK 网络管理](../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md)
 - [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
+
+
+<!-- risk-assessed -->

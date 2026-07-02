@@ -21,6 +21,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # ConfigMap/Secret配置错误问题 — 远程顾问对话脚本
 
@@ -119,7 +124,8 @@ relationships:
 顾问："阿里云环境有额外的配置管理维度，请按以下顺序排查：
 
 **步骤 1：阿里云KMS加密检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否使用阿里云KMS加密Secret
 kubectl get secrets -A -o yaml | grep kms
 
@@ -129,13 +135,13 @@ kubectl get pods -n kube-system | grep kms
 # 检查KMS密钥版本
 aliyun kms DescribeKey --KeyId <key-id>
 ```
-
 > **如果无法执行aliyun CLI**：请登录阿里云控制台，进入KMS密钥管理服务，告诉我：
 > 1. 密钥状态是否为启用？
 > 2. 密钥版本是否正常？
 
 **步骤 2：ACK配置中心检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否使用阿里云ACM/Nacos
 kubectl get configmap -A | grep acm
 
@@ -145,7 +151,6 @@ kubectl logs <acm-agent-pod> -n kube-system
 # 检查RAM权限（KMS解密需要）
 aliyun ram ListPoliciesForUser --UserName <user>
 ```
-
 **步骤 3：专有云配置特殊考虑**
 - 专有云可能使用内部配置中心而非ACM
 - 检查天基配置分发状态
@@ -158,7 +163,8 @@ aliyun ram ListPoliciesForUser --UserName <user>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 禁用旧密钥，启用新密钥
 aliyun kms DisableKey --KeyId <old-key-id>
 aliyun kms EnableKey --KeyId <new-key-id>
@@ -166,7 +172,6 @@ aliyun kms EnableKey --KeyId <new-key-id>
 # 更新Secret加密注解
 kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 ```
-
 如ACM配置不同步：
 1. 检查ACM Agent日志
 2. 重启ACM Agent Pod
@@ -285,3 +290,6 @@ kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 - [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
 - [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps 速查卡]]
+
+
+<!-- risk-assessed -->

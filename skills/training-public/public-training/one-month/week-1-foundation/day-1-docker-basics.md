@@ -32,6 +32,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 1: Docker 容器基础
@@ -185,7 +190,17 @@ CMD ["nginx", "-g", "daemon off;"]  # 默认启动命令
 
 ### 任务 1: 基础容器操作 (45min)
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 拉取镜像
 docker pull nginx:latest
 docker pull alpine:latest
@@ -222,10 +237,10 @@ docker rm my-nginx
 # 清理所有停止的容器
 docker container prune -f
 ```
-
 ### 任务 2: 构建自定义镜像 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建练习目录
 mkdir -p ~/docker-practice && cd ~/docker-practice
 
@@ -296,13 +311,13 @@ curl http://localhost:8080/health
 # 查看健康检查状态
 docker inspect my-app | jq '.[0].State.Health'
 ```
-
 ### 任务 3: 镜像管理 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 镜像标签管理
 docker tag my-nginx:v1 my-nginx:latest
 docker tag my-nginx:v1 registry.cn-hangzhou.aliyuncs.com/my-namespace/my-nginx:v1
@@ -322,10 +337,10 @@ docker system df
 docker system prune -f  # ⚠️ 强制清理，可能杀运行中容器
 docker image prune -a -f
 ```
-
 ### 任务 4: 容器资源查看与调试 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时监控容器资源使用
 docker stats
 docker stats --no-stream
@@ -347,7 +362,6 @@ docker port my-app
 docker exec my-app wget -qO- http://localhost/health
 docker exec my-app netstat -tlnp 2>/dev/null || docker exec my-app ss -tlnp
 ```
-
 ---
 
 ## 常见问题
@@ -392,3 +406,5 @@ containerd 是从 Docker 中拆分出来的容器运行时组件。Docker 的架
 - [Docker 命令参考](../../domain-13-container-runtime/99-docker-commands-reference.md)
 
 ```
+
+<!-- risk-assessed -->

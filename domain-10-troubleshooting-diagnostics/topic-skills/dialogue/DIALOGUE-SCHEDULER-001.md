@@ -19,6 +19,11 @@ status: reviewed
 last_updated: 2026-05-21
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod 一直 Pending，无法调度 — 远程顾问对话脚本
@@ -40,16 +45,16 @@ last_updated: 2026-05-21
 
 **顾问**：请查看该 Pod 的详细事件信息：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace>
 ```
-
 > **如果无法执行**：请通过控制台查看 Pod 详情页的 Events 标签，或提供 describe 输出的截图。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events -n <namespace> --field-selector involvedObject.name=<pod-name> --sort-by='.lastTimestamp'
 ```
-
 > **如果无法执行**：请搜索该命名空间下最近 1 小时内与目标 Pod 相关的所有 Events。
 
 **预期用户回复**：Events 中出现 `FailedScheduling`、`0/3 nodes are available`、`Insufficient cpu/memory`、`Taint` 或 `Affinity` 相关错误。
@@ -66,16 +71,16 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<pod-name
 
 **顾问**：请检查集群节点的资源使用情况：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe nodes
 ```
-
 > **如果无法执行**：请通过控制台查看节点资源监控，或执行 `kubectl get nodes -o yaml` 查看 allocatable 和 allocated 资源。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top nodes
 ```
-
 > **如果无法执行**：请查看集群监控大盘中的节点 CPU 和内存使用率，确认是否有节点的资源已耗尽。
 
 **预期用户回复**：所有节点的 `Allocated resources` 中 CPU 或内存已接近 `Allocatable` 上限，或节点处于 NotReady 状态。
@@ -91,16 +96,16 @@ kubectl top nodes
 
 **顾问**：请检查集群节点的 Taints 配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 ```
-
 > **如果无法执行**：请逐个执行 `kubectl describe node <node-name>` 并查看 Taints 字段。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.tolerations}'
 ```
-
 > **如果无法执行**：请执行 `kubectl describe pod <pod-name> -n <namespace>` 查看 Tolerations 字段。
 
 **预期用户回复**：节点上存在 NoSchedule Taint（如 `node-role.kubernetes.io/master:NoSchedule`），但 Pod 未配置对应的 toleration。
@@ -115,16 +120,16 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.tolerations}'
 
 **顾问**：请检查 Pod 的亲和性配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 20 affinity
 ```
-
 > **如果无法执行**：请执行 `kubectl describe pod <pod-name> -n <namespace>` 查看 NodeSelector、NodeAffinity、PodAffinity 和 PodAntiAffinity 配置。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes --show-labels | grep <required-label-key>
 ```
-
 > **如果无法执行**：请逐个检查节点标签是否满足 Pod 的 nodeSelector 或 nodeAffinity 要求。
 
 **预期用户回复**：Pod 配置了 `requiredDuringSchedulingIgnoredDuringExecution` 的 nodeAffinity，但集群中没有节点匹配所需标签；或 PodAntiAffinity 导致同一拓扑域下无法共存。
@@ -139,22 +144,22 @@ kubectl get nodes --show-labels | grep <required-label-key>
 
 **顾问**：请检查 Pod 引用的 PVC 状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc -n <namespace>
 ```
-
 > **如果无法执行**：请执行 `kubectl describe pod <pod-name> -n <namespace>` 查看 Volumes 部分引用的 PVC 名称，然后单独检查该 PVC。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc <pvc-name> -n <namespace> -o jsonpath='{.status.phase}'
 ```
-
 > **如果无法执行**：请查看 PVC 的 STATUS 列是否为 `Pending`，以及 Events 中是否有绑定失败的错误。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pv | grep <pvc-name>
 ```
-
 > **如果无法执行**：请检查集群中是否有可用的 PV 可以匹配该 PVC 的 storageClass 和容量要求。
 
 **预期用户回复**：PVC 处于 Pending 状态，没有匹配的 PV；或 StorageClass 的 provisioner 配置错误导致无法动态供应。
@@ -171,19 +176,28 @@ kubectl get pv | grep <pvc-name>
 
 #### 方案 A：增加节点或清理资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top pods -n <namespace> --sort-by=cpu
 ```
-
 > **如果无法执行**：请通过控制台或监控系统找出资源占用高的 Pod，评估是否可以删除或缩容。
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon <node-name> && kubectl drain <node-name> --ignore-daemonsets
 ```
-
 > **如果无法执行**：请向集群管理员申请扩容节点，或通过云厂商控制台添加新的工作节点。
 
 #### 方案 B：添加 Toleration
@@ -191,10 +205,10 @@ kubectl cordon <node-name> && kubectl drain <node-name> --ignore-daemonsets
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"tolerations":[{"key":"<taint-key>","operator":"Equal","value":"<taint-value>","effect":"NoSchedule"}]}}'
 ```
-
 > **如果无法执行**：请修改 Deployment/StatefulSet 的 Pod 模板，在 spec.template.spec.tolerations 中添加对应的 toleration 后重新部署。
 
 #### 方案 C：放宽 Affinity
@@ -202,26 +216,26 @@ kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"tolerat
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment <deployment-name> -n <namespace> --type='merge' -p='{"spec":{"template":{"spec":{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":null}}}}}}'
 ```
-
 > **如果无法执行**：请使用 `kubectl edit deployment <deployment-name> -n <namespace>` 将 `requiredDuringSchedulingIgnoredDuringExecution` 改为 `preferredDuringSchedulingIgnoredDuringExecution`，或删除不必要的 nodeSelector。
 
 #### 方案 D：等待 PVC 绑定
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc <pvc-name> -n <namespace> -w
 ```
-
 > **如果无法执行**：请检查 StorageClass 的 provisioner 是否正常运行，或手动创建匹配的 PV 后观察 PVC 是否自动绑定。
 
 **验证修复**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -w
 ```
-
 > **如果无法执行**：请间歇性执行 `kubectl get pod <pod-name> -n <namespace>`，确认 Pod 状态从 Pending 变为 Running。
 
 ---
@@ -235,3 +249,6 @@ kubectl get pod <pod-name> -n <namespace> -w
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

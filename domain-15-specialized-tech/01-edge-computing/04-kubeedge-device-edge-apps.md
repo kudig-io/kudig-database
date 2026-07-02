@@ -52,6 +52,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[KubeEdge|KubeEdge]] 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
@@ -2279,7 +2284,8 @@ class RFIDWarehouseEdgeApp:
 
 ## 12.1 设备连接问题排查 (Device Connection Troubleshooting)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ====== 设备连接排查 ======
 
 # 1. 检查 Device 状态
@@ -2324,13 +2330,13 @@ SELECT * FROM device_twin WHERE deviceid = 'factory-a-temp-sensor-001';
 # 5. 检查 Mapper 配置
 kubectl get device factory-a-temp-sensor-001 -o yaml | grep -A 20 "protocol:"
 ```
-
 ## 12.2 边缘应用问题排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ====== 边缘应用排查 ======
 
 # 1. 查看边缘节点上运行的 Pod
@@ -2368,13 +2374,13 @@ journalctl -u edgecore --since "30 minutes ago" | grep -E "ERROR|WARN"
 # 检查 MetaManager 缓存
 sqlite3 /var/lib/kubeedge/edgecore.db "SELECT key, type FROM meta WHERE type='pod';"
 ```
-
 ## 12.3 网络问题排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ====== 网络连接排查 ======
 
 # 1. 检查 EdgeCore 到 CloudCore 连接
@@ -2400,7 +2406,6 @@ kubectl describe networkpolicy -n edge-production
 kubectl get pods -n kubeedge -l app=edgemesh-agent
 kubectl logs -n kubeedge -l app=edgemesh-agent | grep ERROR
 ```
-
 ## 12.4 常见错误码 (Common Error Codes)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -2408,6 +2413,7 @@ kubectl logs -n kubeedge -l app=edgemesh-agent | grep ERROR
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 KubeEdge 常见错误及解决方案:
 
 Error: "edge node xxx not found"
@@ -2441,7 +2447,6 @@ Error: "pod stuck in Pending state"
 原因2: 节点 Taint 未容忍 → 添加 tolerations
 原因3: nodeSelector 不匹配 → 检查节点标签
 ```
-
 ---
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
@@ -2508,3 +2513,6 @@ AI 推理:
 - 03-kubeedge-architecture-deployment
 - 05-openyurt-architecture
 - 06-superedge-architecture
+
+
+<!-- risk-assessed -->

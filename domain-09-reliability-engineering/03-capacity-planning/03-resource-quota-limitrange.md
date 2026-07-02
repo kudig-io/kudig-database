@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # ResourceQuota 与 LimitRange 设计与治理
@@ -122,11 +127,11 @@ spec:
 
 ### 2.3 查看配额使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 production 命名空间配额使用情况
 kubectl describe resourcequota production-quota -n production
 ```
-
 ---
 
 ## 3. LimitRange 设计
@@ -252,11 +257,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kubectl apply 预览变更
 diff -u <(kubectl get resourcequota team-platform-prod-quota -n team-platform-prod -o yaml) team-platform-prod-quota.yaml
 ```
-
 ---
 
 ## 6. 配额监控与告警
@@ -393,11 +398,11 @@ spec:
 
 通过 namespace 与 label 将资源成本归属到团队或项目：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间资源使用排名
 kubectl top pods --all-namespaces | awk '{print $1}' | sort | uniq -c | sort -nr
 ```
-
 结合 OpenCost 或 ACK 成本分析，生成月度成本报告。
 
 ## 典型工单场景与处理
@@ -443,7 +448,8 @@ kube_resourcequota{resource="requests.cpu", type="hard"}
 
 当 Pod 创建失败并提示 `exceeded quota` 时，按以下步骤排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看命名空间下所有 ResourceQuota
 kubectl get resourcequota -n <namespace>
 
@@ -456,7 +462,6 @@ kubectl top pods -n <namespace>
 # 4. 检查 LimitRange 是否导致 Pod 规格超限
 kubectl describe limitrange -n <namespace>
 ```
-
 ### 配额治理案例
 
 某团队频繁触发 CPU 配额告警，经分析发现大量测试 Pod 未设置合理 request。通过 LimitRange 设置默认 request 与 max limit，并在 CI 中增加配额检查，最终将 CPU 请求降低 35%。
@@ -470,3 +475,6 @@ kubectl describe limitrange -n <namespace>
 
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|ResourceQuota/LimitRange 故障诊断]]
 - [[domain-08-release-change-management/01-gitops/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
+
+
+<!-- risk-assessed -->

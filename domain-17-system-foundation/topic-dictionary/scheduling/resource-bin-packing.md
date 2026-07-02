@@ -32,6 +32,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Resource Bin Packing
@@ -239,7 +244,8 @@ profiles:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源利用率
 kubectl top nodes
 
@@ -258,7 +264,6 @@ kubectl top nodes --sort-by=cpu
 # 验证调度器使用的配置文件
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strategy"
 ```
-
 ## 交叉引用
 
 - [[entities/kubernetes.md|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
@@ -276,3 +281,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 - [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+
+
+<!-- risk-assessed -->

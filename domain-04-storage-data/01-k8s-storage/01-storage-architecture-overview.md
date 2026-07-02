@@ -71,6 +71,11 @@ related_docs:
   desc: 持久化存储故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - 存储架构概览与核心组件
@@ -431,7 +436,17 @@ spec:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 修改PVC大小
 kubectl edit pvc data-pvc
 # 修改 spec.resources.requests.storage: 200Gi
@@ -446,7 +461,6 @@ kubectl rollout restart deployment/myapp
 # 4. 验证扩容
 kubectl exec -it myapp-pod -- df -h
 ```
-
 #### 扩容注意事项
 
 | 注意事项 | 说明 |
@@ -675,7 +689,8 @@ Pod无法启动
 
 ### 存储问题排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查PVC状态
 kubectl get pvc -A
 kubectl describe pvc <pvc-name>
@@ -709,7 +724,6 @@ lsblk
 df -h
 mount | grep /var/lib/kubelet
 ```
-
 ### 常见错误与解决方案
 
 | 错误信息 | 原因 | 解决方案 |
@@ -728,7 +742,17 @@ mount | grep /var/lib/kubelet
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 删除Pod
 kubectl delete pod <pod-name> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
@@ -745,7 +769,6 @@ umount /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pvc-name>/moun
 # 5. 重新创建Pod
 kubectl apply -f pod.yaml
 ```
-
 ---
 
 <!-- chunk: 云原生存储方案 -->
@@ -823,7 +846,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装Longhorn
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml
 
@@ -833,7 +857,6 @@ kubectl get pods -n longhorn-system -w
 # 访问UI
 kubectl port-forward -n longhorn-system svc/longhorn-frontend 8080:80
 ```
-
 ```yaml
 # Longhorn StorageClass
 apiVersion: storage.k8s.io/v1
@@ -1278,7 +1301,8 @@ print(f"建议容量: {result['recommended_capacity']} GB")
 
 #### 1. 存储健康检查自动化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-health-check.sh
 
@@ -1328,7 +1352,6 @@ while true; do
     sleep $HEALTH_CHECK_INTERVAL
 done
 ```
-
 #### 2. 自动扩容策略
 
 ```yaml
@@ -1480,7 +1503,8 @@ optimization_plan = manager.optimize_storage_costs(active_pvcs)
 
 #### 自动化成本控制脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cost-optimization-automation.sh
 
@@ -1531,7 +1555,6 @@ optimize_storage_costs() {
 # 定期执行
 optimize_storage_costs
 ```
-
 ---
 <!-- chunk: 监控告警体系 -->
 ## 监控告警体系
@@ -1777,3 +1800,6 @@ graph TD
 - quality-check-report
 - 02-pv-architecture-fundamentals
 - 03-pvc-patterns-practices
+
+
+<!-- risk-assessed -->

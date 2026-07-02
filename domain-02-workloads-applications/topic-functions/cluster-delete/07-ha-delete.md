@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: HA 集群删除注意事项
@@ -183,7 +188,8 @@ k8s_versions:
 
 ### 1.3 etcd Leader 处理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前 leader
 etcdctl endpoint status --write-out=table \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -197,7 +203,6 @@ etcdctl move-leader <target-member-id> \
   --key=/etc/kubernetes/pki/etcd/peer.key \
   --endpoints=https://<non-leader-ip>:2379
 ```
-
 ---
 
 ## 2. 负载均衡器处理
@@ -308,7 +313,17 @@ kubelet 停止
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 列出所有 etcd 成员
 ETCDCTL_API=3 etcdctl member list \
   --endpoints=https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 \
@@ -327,7 +342,6 @@ for etcd in etcd1 etcd2 etcd3; do
     ssh $etcd "systemctl stop etcd && rm -rf /var/lib/etcd"  # ⚠️ 删除系统/数据文件
 done
 ```
-
 ---
 
 ## 5. 部分删除（缩小控制面规模）
@@ -339,7 +353,17 @@ done
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认当前 etcd 健康
 etcdctl endpoint health --cluster
 
@@ -361,7 +385,6 @@ for node in cp4 cp5; do
     etcdctl endpoint health --cluster
 done
 ```
-
 ### 5.2 更新 Load Balancer
 
 ```
@@ -382,7 +405,17 @@ done
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 set -e
 
@@ -436,7 +469,6 @@ echo ">>> 清理 Load Balancer"
 
 echo "=== HA 集群已完全销毁 ==="
 ```
-
 ---
 
 ## 7. 常见问题
@@ -446,12 +478,12 @@ echo "=== HA 集群已完全销毁 ==="
 **原因**: etcd 仲裁丢失或 LB 后端池配置不正确。
 
 **处理**: 在剩余控制面节点上直接操作 etcd：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 etcdctl 绕过 API Server
 etcdctl member list
 etcdctl endpoint health --cluster
 ```
-
 ### 7.2 upload-certs 清理
 
 HA 初始化时使用 `kubeadm init --upload-certs` 上传证书到 Secret。reset 不会自动清理这些 Secret：
@@ -459,11 +491,11 @@ HA 初始化时使用 `kubeadm init --upload-certs` 上传证书到 Secret。res
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动清理（在集群仍可用时）
 kubectl delete secret -n kube-system kubeadm-certs
 ```
-
 ### 7.3 kubeadm-config ConfigMap
 
 reset 不删除 `kubeadm-config` ConfigMap，需要手动清理：
@@ -471,11 +503,11 @@ reset 不删除 `kubeadm-config` ConfigMap，需要手动清理：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete configmap -n kube-system kubeadm-config
 
 ```
-
 ---
 
 ## 参考
@@ -495,3 +527,5 @@ kubectl delete configmap -n kube-system kubeadm-config
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
 
 ```
+
+<!-- risk-assessed -->

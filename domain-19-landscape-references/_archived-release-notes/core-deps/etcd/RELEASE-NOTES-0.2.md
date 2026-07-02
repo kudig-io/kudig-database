@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v0.2 Release Notes
@@ -50,9 +55,9 @@ For full details see the [0.2.0 blog post](http://coreos.com/blog/etcd-0.2.0-rel
 To run it it in a docker container on CoreOS:
 
 ``` sh
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run -i -t -p 4002:4001 coreos/etcd
 ```
-
 ```
 curl -L http://127.0.0.1:4002/v2/keys/mykey -XPUT -d value="this is awesome"
 curl -L http://127.0.0.1:4002/v2/keys/mykey
@@ -72,7 +77,10 @@ cd etcd-v0.2.0-Darwin-x86_64
 Open another terminal:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Press enter to background etcd
 ./etcdctl set mykey "this is awesome"
 ./etcdctl get mykey
 ```
+
+<!-- risk-assessed -->

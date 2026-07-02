@@ -45,6 +45,11 @@ prerequisites:
 - service-mesh-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Gateway API 深度排查与下一代流量治理指南
@@ -187,7 +192,8 @@ Gateway API 彻底解决了 Ingress 注解（Annotations）爆炸的问题，通
 
 ### 2.2 专家工具箱
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 追踪 Gateway 的完整状态机
 kubectl get gateway -o custom-columns=NAME:.metadata.name,ACCEPTED:.status.conditions[?(@.type=="Accepted")].status,PROGRAMMED:.status.conditions[?(@.type=="Programmed")].status
 
@@ -201,7 +207,6 @@ egctl dashboard  # 开启 Envoy Gateway 专用调试控制台
 # 4. 验证 BackendTLSPolicy (全链路加密)
 kubectl get backendtlspolicy -A
 ```
-
 ---
 
 ## 3. 深度排查路径
@@ -209,14 +214,14 @@ kubectl get backendtlspolicy -A
 ### 3.1 第一阶段：资源链路完整性验证
 确认 GatewayClass -> Gateway -> Route -> Service 这条链是否断裂。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 GatewayClass 是否被控制器 Accepted
 kubectl get gatewayclass -o jsonpath='{.items[*].status.conditions[?(@.type=="Accepted")]}'
 
 # 检查 Route 是否成功绑定到特定的 Parent
 kubectl get httproute <name> -o jsonpath='{.status.parents[*].conditions[?(@.type=="Accepted")]}'
 ```
-
 ### 3.2 第二阶段：跨 Namespace 授权检查 (The ReferenceGrant)
 **现象**：Route 状态正常，但后端指向一直失败。
 **专家提示**：检查目标 Namespace 是否存在 `ReferenceGrant` 且配置正确。
@@ -297,3 +302,6 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+
+
+<!-- risk-assessed -->

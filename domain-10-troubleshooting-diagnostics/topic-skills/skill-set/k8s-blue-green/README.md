@@ -16,6 +16,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skill: 蓝绿部署切换失败的诊断和修复
@@ -33,7 +38,8 @@ status: reviewed
 ## 诊断步骤
 
 ### 步骤1: 验证 Service selector 是否已更新
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get service <service-name> -n <namespace> -o jsonpath='{.spec.selector}'
 kubectl get endpoints <service-name> -n <namespace>
 ```
@@ -41,14 +47,16 @@ kubectl get endpoints <service-name> -n <namespace>
 > 如果无法执行，替代方案：请用户提供 Service 的 YAML 截图，或描述当前流量表现（如返回的版本号、日志特征）。
 
 ### 步骤2: 检查目标环境 Pod 就绪状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l version=green -o wide
 kubectl describe pod <green-pod-name> -n <namespace>
 ```
 > 确认绿环境所有 Pod 均为 Running 且 Ready，readinessProbe 通过，无 CrashLoopBackOff 或 ImagePullBackOff。
 
 ### 步骤3: 验证负载均衡器及外部访问路径
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get service <service-name> -n <namespace> -o jsonpath='{.status.loadBalancer.ingress}'
 curl -H "Host: <domain>" http://<lb-ip>/version
 ```
@@ -76,3 +84,6 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

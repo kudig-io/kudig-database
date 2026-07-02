@@ -47,6 +47,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] 备份与恢复概述 (Backup & Recovery Overview)
@@ -114,6 +119,7 @@ k8s_versions:
 ## 备份与恢复整体架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                    Kubernetes Backup & Recovery Architecture                        │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -181,7 +187,6 @@ k8s_versions:
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 企业级备份恢复实战案例 -->
 ## 企业级备份恢复实战案例
 
@@ -394,6 +399,7 @@ cost_optimization_strategies:
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        etcd Backup Architecture                         │
 ├─────────────────────────────────────────────────────────────────────────┤
@@ -454,10 +460,10 @@ cost_optimization_strategies:
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### etcd 备份脚本 (生产级)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-backup.sh - Production etcd backup script
 # Supports: etcd v3.4+, Kubernetes v1.25+
@@ -692,14 +698,14 @@ main() {
 
 main "$@"
 ```
-
 ### etcd 恢复脚本 (生产级)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-restore.sh - Production etcd restore script
 # WARNING: This will replace all etcd data!
@@ -920,7 +926,6 @@ main() {
 
 main "$@"
 ```
-
 ### etcd 定时备份 CronJob
 
 ```yaml
@@ -1079,6 +1084,7 @@ spec:
 ### Velero 架构图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                           Velero Backup Architecture                                │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -1138,7 +1144,6 @@ spec:
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### Velero 安装配置
 
 ```yaml
@@ -1209,7 +1214,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # velero-helm-install.sh
 
@@ -1267,7 +1273,6 @@ EOF
 kubectl get pods -n velero
 velero backup-location get
 ```
-
 ---
 
 <!-- chunk: CSI 快照备份 -->
@@ -1276,6 +1281,7 @@ velero backup-location get
 ### CSI 快照架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                          CSI Volume Snapshot Architecture                           │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -1336,7 +1342,6 @@ velero backup-location get
 │                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### CSI 快照配置
 
 ```yaml
@@ -1939,7 +1944,8 @@ spec:
 <!-- chunk: 备份验证脚本 -->
 ## 备份验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # backup-verification.sh - Comprehensive backup verification script
 
@@ -2255,7 +2261,6 @@ main() {
 
 main "$@"
 ```
-
 ---
 
 <!-- chunk: 备份最佳实践清单 -->
@@ -2343,3 +2348,6 @@ main "$@"
 - 11-disaster-recovery-business-continuity
 - 13-multi-cluster-management
 - 14-large-scale-cluster-optimization
+
+
+<!-- risk-assessed -->

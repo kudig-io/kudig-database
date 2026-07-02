@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 5: [[Kubernetes|Kubernetes]] 架构全貌
@@ -142,6 +147,7 @@ Kubernetes 采用 Master-Node（也叫控制平面-数据平面）架构。Maste
 理解组件间的通信方式对于排障至关重要：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl → API Server (HTTPS) → etcd (gRPC)
 API Server ← Watch ← Scheduler (获取待调度 Pod)
 API Server ← Watch ← Controller Manager (监听资源变化)
@@ -150,7 +156,6 @@ kubelet → containerd (gRPC/CRI) → 容器
 kube-proxy ← Watch ← API Server (Service/Endpoints 变化) → iptables/IPVS
 
 ```
-
 ### kubectl apply 的完整事件链
 
 当你执行 `kubectl apply -f deployment.yaml` 时：
@@ -178,7 +183,8 @@ kube-proxy ← Watch ← API Server (Service/Endpoints 变化) → iptables/IPVS
 
 **方式 A: 使用 kind（推荐，轻量）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 kind
 # macOS
 brew install kind
@@ -217,10 +223,10 @@ kubectl get nodes
 # learn-k8s-worker       Ready   <none>          1m    v1.28.0
 # learn-k8s-worker2      Ready   <none>          1m    v1.28.0
 ```
-
 **方式 B: 使用 minikube**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 minikube
 # macOS
 brew install minikube
@@ -239,10 +245,10 @@ minikube start --driver=docker --nodes=3
 # 验证
 kubectl get nodes
 ```
-
 ### 任务 2: 探索集群组件 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看系统组件
 kubectl get pods -n kube-system
 # 预期输出:
@@ -298,7 +304,6 @@ kubectl api-resources | head -20
 kubectl api-versions
 # 预期输出: 所有注册的 APIGroup/Version 组合
 ```
-
 ### 任务 3: kubectl 基础命令 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -306,7 +311,8 @@ kubectl api-versions
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 基础查询
 kubectl get pods                       # 查看 Pod
 kubectl get pods -o wide              # 详细信息（含 IP、节点）
@@ -349,7 +355,6 @@ kubectl get pods -o jsonpath='{.items[*].metadata.name}'
 kubectl get pods -o custom-columns='NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName'
 # 预期输出: 自定义列格式
 ```
-
 ---
 
 ## 配置示例
@@ -496,3 +501,5 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

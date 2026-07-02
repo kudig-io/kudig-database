@@ -44,6 +44,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 08 - [[Service|Service]] 全类型 YAML 配置参考
@@ -969,7 +974,8 @@ spec:
 ```
 
 **自动分配的 IP**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc modern-web -o yaml
 # status:
 #   clusterIPs:
@@ -980,7 +986,6 @@ kubectl get svc modern-web -o yaml
 #     - ip: 203.0.113.50
 #     - ip: 2001:db8::1234
 ```
-
 ## 示例 6：外部服务代理（无 Selector + 手动 Endpoints）
 
 ```yaml
@@ -1405,7 +1410,8 @@ metadata:
 ## Q1: ClusterIP 无法访问？
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Service 是否存在
 kubectl get svc my-service -n namespace
 
@@ -1431,7 +1437,6 @@ kubectl logs -n kube-system kube-proxy-xxxxx
 # 8. 检查网络策略（NetworkPolicy）
 kubectl get networkpolicy -n namespace
 ```
-
 ## Q2: NodePort 无法从外部访问？
 
 **常见原因**：
@@ -1440,7 +1445,8 @@ kubectl get networkpolicy -n namespace
 3. **externalTrafficPolicy=Local** 但节点无 Pod
 
 **解决方案**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Service
 kubectl get svc my-service -o yaml
 
@@ -1454,7 +1460,6 @@ iptables -t nat -L KUBE-NODEPORTS -n
 # 4. 检查云安全组（AWS 示例）
 aws ec2 describe-security-groups --group-ids sg-xxxxx
 ```
-
 ## Q3: LoadBalancer 一直 Pending？
 
 **原因**：
@@ -1463,7 +1468,8 @@ aws ec2 describe-security-groups --group-ids sg-xxxxx
 - 子网配置错误
 
 **检查**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 事件
 kubectl describe svc my-lb
 
@@ -1473,7 +1479,6 @@ kubectl logs -n kube-system -l app=cloud-controller-manager
 # 手动测试（AWS 示例）
 aws elbv2 describe-load-balancers
 ```
-
 **裸金属集群解决方案**：
 - 使用 [MetalLB](https://metallb.universe.tf/)
 - 使用 [Cilium LB IPAM](https://docs.cilium.io/en/stable/network/lb-ipam/)
@@ -1593,7 +1598,8 @@ spec:
 
 ## Q6: 如何查看 Service 背后的 Pod IP？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1：查看 Endpoints
 kubectl get endpoints my-service -n namespace
 
@@ -1606,7 +1612,6 @@ kubectl get endpoints my-service -n namespace -o yaml
 # 方法 4：查看 EndpointSlice（v1.21+）
 kubectl get endpointslices -n namespace -l kubernetes.io/service-name=my-service
 ```
-
 ## Q7: Service 的 sessionAffinity 不生效？
 
 **检查点**：
@@ -1630,7 +1635,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 正常删除
 kubectl delete svc my-service -n namespace
 
@@ -1641,7 +1656,6 @@ kubectl patch svc my-service -n namespace -p '{"metadata":{"finalizers":null}}'
 kubectl edit svc my-service -n namespace
 # 删除 metadata.finalizers 字段
 ```
-
 ---
 
 <!-- chunk: 生产案例 -->## 生产案例
@@ -1839,7 +1853,8 @@ spec:
 ```
 
 **验证双栈配置**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看分配的 IP
 kubectl get svc dual-stack-web -o yaml | grep -A 5 clusterIPs
 # 输出：
@@ -1856,7 +1871,6 @@ curl -g -6 "http://[fd00:10:96::5064]"
 # DNS 解析（返回 A 和 AAAA 记录）
 kubectl run -it --rm debug --image=busybox -- nslookup dual-stack-web.frontend.svc.cluster.local
 ```
-
 **Pod 配置（确保容器支持双栈）**：
 ```yaml
 apiVersion: v1
@@ -1942,7 +1956,8 @@ spec:
 ```
 
 **验证配置**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 LB 状态
 kubectl get svc secure-web -o wide
 
@@ -1957,7 +1972,6 @@ curl -I https://$LB_DNS
 # 查看访问日志（S3）
 aws s3 ls s3://my-lb-logs/prod/secure-web/
 ```
-
 ---
 
 <!-- chunk: 相关资源 -->## 相关资源
@@ -2026,3 +2040,6 @@ aws s3 ls s3://my-lb-logs/prod/secure-web/
 - [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+
+<!-- risk-assessed -->

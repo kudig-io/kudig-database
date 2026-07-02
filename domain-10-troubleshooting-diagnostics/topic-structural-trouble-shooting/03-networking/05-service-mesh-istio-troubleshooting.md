@@ -53,6 +53,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Service|Service]]Service Mesh）|Service Mesh]] ([[Istio|Istio]]) 深度排查与性能调优指南
@@ -206,7 +211,8 @@ Istio 的控制面 `istiod` 与数据面 `Envoy` 之间通过 xDS（Discovery Se
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 一键收集诊断包 (专家必备)
 istioctl bug-report --namespace istio-system --duration 5m
 
@@ -219,7 +225,6 @@ istioctl proxy-config cluster <pod-name> -o json > clusters.json
 # 4. 进入 Ambient Mesh ztunnel 诊断模式
 kubectl exec -n istio-system <ztunnel-pod> -- ztunnel-config dump
 ```
-
 ---
 
 ## 3. 深度排查路径
@@ -227,14 +232,14 @@ kubectl exec -n istio-system <ztunnel-pod> -- ztunnel-config dump
 ### 3.1 第一阶段：控制面健康与同步状态
 确认配置是否“到家”。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 istiod 是否有大面积推送错误
 kubectl logs -n istio-system -l app=istiod | grep -E "push error|cache failure"
 
 # 分析当前 Namespace 的配置风险
 istioctl analyze -n my-ns --suppress "IST0102" # 抑制已知次要警告
 ```
-
 ### 3.2 第二阶段：Envoy 状态码深度解析 (Response Flags)
 从 Envoy 访问日志中解读流量真相：
 - **UH**: Upstream unhealthy (上游没 Ready Pod)。
@@ -596,7 +601,8 @@ func (p *PilotServer) OnConfigChange(event ConfigEvent) {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 证书轮换过程 (无需重启 Pod)
 
 # 时间线:
@@ -633,7 +639,6 @@ kubectl exec -c istio-proxy <pod> -- \
 
 # 输出: /etc/certs/cert-chain.pem: OK
 ```
-
 **mTLS 握手过程**
 
 ```
@@ -933,7 +938,8 @@ def connect_database():
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: istio-health-check.sh
 # 用途: 全面检查 Istio 集群健康状态
@@ -1038,13 +1044,13 @@ fi
 
 echo -e "\n=== Health Check Complete ==="
 ```
-
 ### 3.3.2 Envoy 配置调试脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: envoy-config-debug.sh
 # 用途: 深度分析 Envoy 配置
@@ -1103,13 +1109,13 @@ kubectl exec -n $POD_NS $POD_NAME -c istio-proxy -- \
 echo -e "\n=== Debug Complete ==="
 echo "Full config dumps saved to /tmp/*.json"
 ```
-
 ### 3.3.3 流量追踪脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: istio-traffic-trace.sh
 # 用途: 追踪请求在 Service Mesh 中的完整路径
@@ -1167,7 +1173,6 @@ fi
 
 echo -e "\n=== Trace Complete ==="
 ```
-
 ---
 
 ## 4.5 大规模集群性能优化
@@ -1325,6 +1330,7 @@ spec:
 **问题过程**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 时间线:
 10:00 - 执行 istioctl upgrade
 10:05 - Istiod 新版本部署完成
@@ -1335,13 +1341,13 @@ spec:
 10:40 - 服务逐步恢复
 11:30 - 问题完全解决
 ```
-
 **根因分析**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Envoy 重启原因
 kubectl get pods -A -l security.istio.io/tlsMode=istio \
   -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[?(@.name=="istio-proxy")].lastState.terminated.reason}{"\n"}{end}' | \
@@ -1367,7 +1373,6 @@ istioctl pc cluster <pod> --fqdn '*' | wc -l
 # Istio 1.20 默认启用了"全局服务发现"
 # 每个 Sidecar 接收所有命名空间的 Service 配置
 ```
-
 **修复方案**
 
 ```yaml
@@ -1453,7 +1458,8 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 升级前配置审计
 istioctl experimental precheck
 
@@ -1482,7 +1488,6 @@ spec:
 # 5. 定期清理无用配置
 istioctl pc cluster <pod> --fqdn '*' | grep -E "BlackHoleCluster|PassthroughCluster" | wc -l
 ```
-
 **业务影响**
 
 - **影响时间**: 30 分钟
@@ -1499,7 +1504,8 @@ istioctl pc cluster <pod> --fqdn '*' | grep -E "BlackHoleCluster|PassthroughClus
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: istio-daily-check.sh
 
@@ -1544,7 +1550,6 @@ kubectl logs -n istio-system -l app=istio-ingressgateway --tail=1000 | \
 
 echo -e "\n=== Check Complete ==="
 ```
-
 ### 每周手动巡检
 
 - [ ] **配置审计**: 导出所有 VirtualService/DestinationRule, 检查过期规则
@@ -1585,7 +1590,8 @@ Terway ENI 模式使用阿里云弹性网卡（ENI）直接挂载到 Pod，网�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 确认 Pod 使用 Terway ENI 模式
 kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/eni-mode}'
 
@@ -1598,7 +1604,6 @@ kubectl exec -it {pod-name} -n {namespace} -- sh -c 'ip link show'
 # Step 4: 检查 iptables 规则是否正确
 kubectl exec -it {pod-name} -n {namespace} -c istio-proxy -- iptables -L -t nat | grep ISTIO
 ```
-
 #### 解决方案
 
 **方案 A: 启用 Istio eBPF 模式（推荐）**
@@ -1659,7 +1664,8 @@ Terway ENI 模式下的 Pod 可以直接绑定 EIP（阿里云弹性公网 IP）
 
 #### 排查步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 Pod 是否有 EIP 直接绑定
 kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/eip}'
 
@@ -1672,7 +1678,6 @@ aliyun vpc describeRouteEntries --VpcId {vpc-id} --RouteTableId {rt-id}
 # Step 4: 查看 Ingress Gateway 日志
 kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip|eni"
 ```
-
 #### 解决方案
 
 **方案 A: 移除 Pod EIP 绑定，统一通过 Ingress Gateway 入口**
@@ -1680,14 +1685,14 @@ kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "ei
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 移除 Pod 的 EIP 直接绑定
 kubectl annotate pod {pod-name} -n {namespace} k8s.aliyun.com/eip-
 
 # 确认 Ingress Gateway CLB 后端已更新
 aliyun slb describebackendservers --region {region} --loadbalancer-id {lb-id}
 ```
-
 **方案 B: 配置 Service 对齐到 Gateway**
 
 确保应用 Service 类型为 ClusterIP/NodePort，由 Istio Ingress Gateway 统一处理入口流量：
@@ -1726,7 +1731,8 @@ Terway IPVLAN 模式使用内核 IPVLAN 驱动，在 L2 或 L3 模式下工作�
 
 #### 排查步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 Pod 使用 IPVLAN 模式
 kubectl get pod {pod-name} -n {namespace} -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/network-mode}'
 # 期望输出: ipvlan
@@ -1742,7 +1748,6 @@ ip link show | grep ipvlan
 bpftool net show
 cat /proc/sys/net/core/bpf_jit_enable
 ```
-
 #### 解决方案
 
 **方案 A: 降级到标准 Veth 模式**
@@ -1780,7 +1785,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Terway + ASM 交互问题快速检测
 
@@ -1814,7 +1820,6 @@ kubectl exec -it istiod-0 -n istio-system -- pilot-agent status 2>/dev/null | gr
 
 echo -e "\n=== 检测完成 ==="
 ```
-
 ---
 
 ## 7. 多集群服务网格
@@ -2398,7 +2403,8 @@ benchmark_suite:
 
 ### 13.1 自动化巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Istio 服务网格每日巡检
 
@@ -2459,7 +2465,6 @@ echo "配置冲突数: $CONFLICTS"
 
 echo -e "\n=== 巡检完成 ==="
 ```
-
 ---
 
 ## 14. 生产问题案例库
@@ -2538,3 +2543,5 @@ verification: |
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

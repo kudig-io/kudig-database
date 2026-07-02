@@ -31,6 +31,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CronJob
@@ -203,7 +208,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CronJob 列表和上次调度时间
 kubectl get cronjob -n prod
 
@@ -222,7 +228,6 @@ kubectl get jobs -n prod -l app=db-backup --sort-by=.status.startTime
 # 查看最近一次 Job 的日志
 kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.startTime -o jsonpath='{.items[-1].metadata.name}') -n prod
 ```
-
 ## 交叉引用
 
 - [Job/CronJob 高级用法](../../domain-02-workloads-applications/05-job-cronjob-advanced.md)
@@ -239,3 +244,6 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 - [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+
+<!-- risk-assessed -->

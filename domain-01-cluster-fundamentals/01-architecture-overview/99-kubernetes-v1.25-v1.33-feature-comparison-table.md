@@ -65,6 +65,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.25 - v1.33 特性对比总表
@@ -238,7 +243,8 @@ cross_refs:
 <!-- chunk: 快速参考 -->
 ## 快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查当前版本
 kubectl version
 
@@ -257,7 +263,6 @@ kubectl get psp 2>/dev/null || echo "PSP 已移除"
 # 检查 CSI 驱动
 kubectl get csidrivers
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -291,3 +296,6 @@ kubectl get csidrivers
 - 99-kubernetes-core-features-mermaid-diagrams
 - 99-kubernetes-v1.29-v1.33-complete-feature-gates-reference
 - 99-kubernetes-v1.29-v1.33-features-guide
+
+
+<!-- risk-assessed -->

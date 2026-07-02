@@ -78,6 +78,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 29 - 原地 Pod 资源调整 (In-Place Pod Resize)
@@ -319,7 +324,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1: 使用 kubectl patch
 kubectl patch pod nginx-inplace-resize --patch "
 {
@@ -366,10 +372,10 @@ spec:
       restartPolicy: RestartNotRequired
 EOF
 ```
-
 ### 5.3 查看调整状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 详细状态
 kubectl get pod nginx-inplace-resize -o yaml
 
@@ -382,7 +388,6 @@ kubectl get pod nginx-inplace-resize -o jsonpath="
 调整状态:             {.status.resize}{\n}
 "
 ```
-
 ### 5.4 多容器 Pod 示例
 
 ```yaml
@@ -678,7 +683,8 @@ cat /sys/fs/cgroup/kubepods.slice/.../memory.max
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 白天开发高峰期扩容
 kubectl patch pod dev-app --patch "
 {
@@ -723,7 +729,6 @@ kubectl patch pod dev-app --patch "
   }
 }"
 ```
-
 ### 8.3 场景三：VPA 的 in-place 模式
 
 详见第 9 节 [与 VPA 集成](#9-与-vpa-集成)。
@@ -829,7 +834,8 @@ spec:
 
 ### 10.2 排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Feature Gate 已启用
 kubectl get nodes -o jsonpath="{.items[0].status.nodeInfo.kubeletVersion}"
 
@@ -845,10 +851,10 @@ crictl inspect <container-id> | grep -A 5 linux.resources
 # 5. 查看节点资源压力
 kubectl describe node <node-name> | grep -A 10 Allocated
 ```
-
 ### 10.3 事件分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看与资源调整相关的事件
 kubectl get events --field-selector reason=ContainerResizePending
 kubectl get events --field-selector reason=ContainerResizeInProgress
@@ -856,7 +862,6 @@ kubectl get events --field-selector reason=ContainerResizeInProgress
 # 查看 Pod 事件
 kubectl describe pod <pod-name> | grep -A 5 Events
 ```
-
 ### 10.4 调试清单
 
 | 检查项 | 命令 | 预期结果 |
@@ -902,3 +907,6 @@ kubectl describe pod <pod-name> | grep -A 5 Events
 ## Related
 
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+
+
+<!-- risk-assessed -->

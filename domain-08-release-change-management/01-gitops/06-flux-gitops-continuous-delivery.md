@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Flux|Flux]] v2 GitOps 持续交付深度实践
@@ -470,7 +475,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成 age 密钥
 age-keygen -o age.key
 kubectl create secret generic sops-age-key \
@@ -482,7 +488,6 @@ SOPS_AGE_KEY_FILE=age.key sops --encrypt \
   --age age1xxxxxxxxx \
   secret.yaml > secret.enc.yaml
 ```
-
 ```yaml
 # Kustomization 启用解密
 spec:
@@ -693,7 +698,8 @@ flux-gitops/
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 全局检查
 flux check
 flux get all -A
@@ -717,7 +723,6 @@ flux get images update
 flux get alerts -A
 flux get providers -A
 ```
-
 ```yaml
 常见问题:
   Kustomization 同步失败:
@@ -1158,3 +1163,6 @@ spec:
 - 05-tekton-cloud-native-cicd
 - 07-gitops-security-compliance
 - 08-cicd-pipeline-patterns
+
+
+<!-- risk-assessed -->

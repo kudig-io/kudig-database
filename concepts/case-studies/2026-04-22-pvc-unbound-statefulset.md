@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-04-22] StorageClass 删除后 PVC 无法绑定，MySQL StatefulSet 启动失败
@@ -33,50 +38,50 @@ last_updated: 2026-05-23
 
 ## 问题现象
 07:30，`mysql-primary-0` Pod 状态为 `Pending`，已持续 25 分钟：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n prod-data -l app=mysql-primary
 # NAME              READY   STATUS    RESTARTS   AGE
 # mysql-primary-0   0/1     Pending   0          25m
 ```
-
 数据库告警：`mysql_primary_connection_count` 为 0，从库复制延迟持续增长。
 
 ## 诊断过程
 
 **07:32** — 查看 Pod 事件：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod mysql-primary-0 -n prod-data
 # Events:
 #   Warning  FailedScheduling  25m  ...  
 #     0/20 nodes are available: 
 #     20 pod has unbound immediate PersistentVolumeClaims.
 ```
-
 **07:34** — 检查 PVC：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc -n prod-data
 # NAME                         STATUS    VOLUME   CAPACITY   STORAGECLASS
 # data-mysql-primary-0         Pending                                    gp3
 ```
-
 **07:35** — 查看 PVC 详情：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pvc data-mysql-primary-0 -n prod-data
 # Events:
 #   Warning  ProvisioningFailed  25m  ...  
 #     failed to provision volume with StorageClass "gp3": 
 #     storageclass.storage.k8s.io "gp3" not found
 ```
-
 **07:37** — 检查 StorageClass：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get storageclass
 # NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE
 # gp2             kubernetes.io/aws-ebs   Delete          Immediate
 # fast-ssd        ebs.csi.aws.com         Delete          WaitForFirstConsumer
 # （gp3 StorageClass 已不存在）
 ```
-
 **07:39** — 查看变更历史：
 ```bash
 # 检查 ArgoCD 同步记录
@@ -85,7 +90,8 @@ kubectl get storageclass
 ```
 
 **07:41** — 进一步排查：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 原来 StatefulSet 的 volumeClaimTemplates 仍引用 gp3
 kubectl get statefulset mysql-primary -n prod-data -o yaml | grep -A10 volumeClaimTemplates
 # volumeClaimTemplates:
@@ -98,7 +104,6 @@ kubectl get statefulset mysql-primary -n prod-data -o yaml | grep -A10 volumeCla
 #       requests:
 #         storage: 100Gi
 ```
-
 ## 根因
 1. `mysql-primary` StatefulSet 的 `volumeClaimTemplates` 使用 `storageClassName: gp3`
 2. 04-21 23:00，运维团队清理未使用资源时删除了 `gp3` StorageClass
@@ -113,7 +118,8 @@ kubectl get statefulset mysql-primary -n prod-data -o yaml | grep -A10 volumeCla
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -128,27 +134,27 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
-
 **07:50** — 观察 PVC 绑定：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc data-mysql-primary-0 -n prod-data -w
 # NAME                         STATUS    VOLUME                                     CAPACITY
 # data-mysql-primary-0         Bound     pvc-abc123-def456-ghi789                  100Gi
 ```
-
 **07:52** — Pod 启动：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod mysql-primary-0 -n prod-data
 # NAME              READY   STATUS    RESTARTS   AGE
 # mysql-primary-0   1/1     Running   0          2m
 ```
-
 **07:55** — 验证 MySQL 健康：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-data mysql-primary-0 -- mysql -u root -p$PASSWORD -e "SHOW STATUS LIKE 'Uptime';"
 # +---------------+-------+
 # | Variable_name | Value |
@@ -156,27 +162,26 @@ kubectl exec -n prod-data mysql-primary-0 -- mysql -u root -p$PASSWORD -e "SHOW 
 # | Uptime        | 120   |
 # +---------------+-------+
 ```
-
 **08:00** — 检查从库复制延迟：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-data mysql-replica-0 -- mysql -u root -p$PASSWORD -e "SHOW SLAVE STATUS\G" | grep Seconds_Behind_Master
 # Seconds_Behind_Master: 1800
 ```
-
 **08:05** — 延迟恢复正常：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-data mysql-replica-0 -- mysql -u root -p$PASSWORD -e "SHOW SLAVE STATUS\G" | grep Seconds_Behind_Master
 # Seconds_Behind_Master: 0
 ```
-
 ## 验证
 - 08:08 — 写服务全部恢复，订单写入正常
 - 08:10 — MySQL 主从复制延迟归零，数据一致性验证通过
@@ -191,3 +196,6 @@ kubectl exec -n prod-data mysql-replica-0 -- mysql -u root -p$PASSWORD -e "SHOW 
   4. 删除任何集群级资源前必须经过 SRE 变更评审
 - **相关 Skill**: [[manage-persistent-storage]]
 - **相关 FTA**: [[csi-fta]]
+
+
+<!-- risk-assessed -->

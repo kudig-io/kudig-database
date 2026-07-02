@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 核心组件 v1.29 - v1.33 新特性速查
@@ -245,7 +250,8 @@ tracing:
 
 ### Kubelet Resource Metrics Endpoint (v1.33 Beta)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 新端点: /metrics/resource
 kubectl get --raw /api/v1/nodes/NODE_NAME/proxy/metrics/resource
 
@@ -254,7 +260,6 @@ kubectl get --raw /api/v1/nodes/NODE_NAME/proxy/metrics/resource
 # node_cpu_usage_seconds_total 12345.67
 # node_memory_working_set_bytes 8589934592
 ```
-
 ### In-Place Pod Vertical Scaling (v1.33 Alpha)
 
 ```bash
@@ -272,7 +277,8 @@ metadata:
 
 ### 弃用 --cloud-provider flag (v1.31)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 旧方式 (已弃用)
 kubelet --cloud-provider=aws
 
@@ -281,7 +287,6 @@ kubelet --cloud-provider=aws
 # 单独部署 CCM
 kubectl get pods -n kube-system | grep cloud-controller
 ```
-
 ---
 
 <!-- chunk: 四、Controller Manager -->
@@ -550,11 +555,11 @@ spec:
 
 ### PersistentVolume Last Phase Transition Time (v1.31 GA)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PV 最后状态转换时间
 kubectl get pv PV_NAME -o jsonpath='{.status.lastPhaseTransitionTime}'
 ```
-
 ---
 
 <!-- chunk: 十、Security -->
@@ -577,14 +582,14 @@ spec:
 
 ### BoundServiceAccountTokenVolume GA (v1.30)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # v1.30 起 ServiceAccount Token 默认 1 小时过期
 # 检查 Token 绑定
 kubectl get pod POD_NAME -o jsonpath='{.spec.volumes[?(@.name=="kube-api-access")].projected.sources[0].serviceAccountToken.expirationSeconds}'
 
 # 输出: 3607 (约1小时)
 ```
-
 ### Pod Security Admission (稳定)
 
 ```yaml
@@ -601,19 +606,20 @@ metadata:
 
 ### 匿名用户安全加固 (v1.30)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # v1.30 起禁止 system:anonymous 绑定 cluster-admin
 # 检查现有绑定
 kubectl get clusterrolebindings -o json | \
   jq '.items[] | select(.subjects[]?.name == "system:anonymous") | .metadata.name'
 ```
-
 ---
 
 <!-- chunk: 快速命令参考 -->
 ## 快速命令参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查当前 K8s 版本
 kubectl version
 
@@ -636,7 +642,6 @@ cat /sys/kernel/security/apparmor/profiles | head
 # 检查 Sidecar 容器
 kubectl get pods -A -o json | jq '.items[].spec.initContainers[]? | select(.restartPolicy == "Always") | .name'
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -672,3 +677,6 @@ kubectl get pods -A -o json | jq '.items[].spec.initContainers[]? | select(.rest
 - 99-kubernetes-api-version-matrix
 - 99-kubernetes-core-features-mermaid-diagrams
 - 99-kubernetes-v1.25-v1.33-feature-comparison-table
+
+
+<!-- risk-assessed -->

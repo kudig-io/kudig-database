@@ -66,6 +66,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - OOM和内存问题诊断
@@ -182,7 +187,8 @@ cross_refs:
 
 ### 第一阶段: 快速定位
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # oom-quick-diagnosis.sh - OOM快速诊断
 
@@ -225,10 +231,10 @@ fi
 echo -e "\n=== 6. 内存使用Top10 Pod ==="
 kubectl top pods -A --sort-by=memory 2>/dev/null | head -11
 ```
-
 ### 第二阶段: 详细分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # oom-detailed-analysis.sh - OOM详细分析
 
@@ -310,10 +316,10 @@ if [ -n "$NODE" ]; then
     kubectl describe node "$NODE" | grep -A 10 "Allocated resources:"
 fi
 ```
-
 ### 第三阶段: 节点级分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-memory-analysis.sh - 节点内存深度分析(需SSH到节点)
 
@@ -383,13 +389,13 @@ fi
 echo ""
 cat /proc/vmstat | grep -E "pgfault|pgmajfault|pswpin|pswpout|oom_kill"
 ```
-
 <!-- chunk: 容器OOM诊断 -->
 ## 容器OOM诊断
 
 ### 识别OOMKilled容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查找所有OOMKilled的Pod
 kubectl get pods -A -o json | jq -r '
 .items[] | 
@@ -421,10 +427,10 @@ cat /sys/fs/cgroup/memory/kubepods/*/*/$CONTAINER_ID/memory.failcnt
 # cgroup v2
 cat /sys/fs/cgroup/kubepods.slice/*/cri-containerd-$CONTAINER_ID.scope/memory.events
 ```
-
 ### 容器内存使用分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # container-memory-analysis.sh
 
@@ -483,7 +489,6 @@ if [ -n "$PID" ] && [ "$PID" != "null" ]; then
     done | sort -t: -k2 -nr | head -10
 fi
 ```
-
 <!-- chunk: 节点OOM诊断 -->
 ## 节点OOM诊断
 
@@ -537,7 +542,8 @@ done
 
 ### kubelet驱逐分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kubelet-eviction-analysis.sh
 
@@ -572,7 +578,6 @@ kubectl get pods -A --field-selector=status.phase=Failed -o json 2>/dev/null | j
 select(.status.reason == "Evicted") |
 "\(.metadata.namespace)/\(.metadata.name): \(.status.message)"' | head -20
 ```
-
 <!-- chunk: 内存配置最佳实践 -->
 ## 内存配置最佳实践
 
@@ -905,7 +910,8 @@ spec:
 
 ### 查看VPA推荐
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看VPA推荐值
 kubectl get vpa app-vpa -o jsonpath='{.status.recommendation.containerRecommendations[*]}' | jq
 
@@ -918,7 +924,6 @@ kubectl get vpa app-vpa -o jsonpath='{.status.recommendation.containerRecommenda
 #   "uncappedTarget": {"cpu": "100m", "memory": "256Mi"}
 # }
 ```
-
 ### LimitRange设置
 
 ```yaml
@@ -1326,15 +1331,16 @@ spec:
 ```
 
 **驱逐顺序控制：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 驱逐顺序验证
 kubectl describe node <node-name> | grep -A 10 "Eviction"
 ```
-
 #### 4.2.2 集群容量规划
 
 **容量评估脚本：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cluster_capacity_check.sh
 
@@ -1352,7 +1358,6 @@ kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.spec.container
 echo -e "\n=== 驱逐风险评估 ==="
 kubectl top nodes | awk '$4 > 85 {print "高风险节点:", $1, "内存使用率:", $4"%"}'
 ```
-
 ### 4.3 系统OOM防护机制
 
 #### 4.3.1 内核参数调优
@@ -1377,7 +1382,17 @@ sysctl -p
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 保护kubelet进程
 echo -999 > /proc/$(pidof kubelet)/oom_score_adj
 
@@ -1385,7 +1400,6 @@ echo -999 > /proc/$(pidof kubelet)/oom_score_adj
 systemctl daemon-reload
 systemctl restart kubelet
 ```
-
 ### 4.4 监控告警与自动化响应
 
 #### 4.4.1 完整监控体系
@@ -1416,7 +1430,8 @@ groups:
 #### 4.4.2 自动化响应机制
 
 **自动扩容脚本：**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # auto_scale_memory.sh
 
@@ -1436,13 +1451,13 @@ elif [ $CURRENT_USAGE -lt 30 ]; then
     echo "已触发自动缩容: $DEPLOYMENT"
 fi
 ```
-
 ### 4.5 故障演练与预案
 
 #### 4.5.1 模拟故障演练
 
 **OOM问题模拟：**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 模拟容器内存泄漏
 kubectl run oom-test --image=busybox --restart=Never \
   --limits=memory=100Mi \
@@ -1451,7 +1466,6 @@ kubectl run oom-test --image=busybox --restart=Never \
 # 监控驱逐过程
 watch -n 1 'kubectl get pods -o wide | grep oom-test'
 ```
-
 #### 4.5.2 应急响应预案
 
 **分级响应流程：**
@@ -1500,3 +1514,6 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
 - [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/06-node-notready-diagnosis.md|06-node-notready-diagnosis]]
 - [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/08-pod-comprehensive-troubleshooting.md|08-pod-comprehensive-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/09-node-comprehensive-troubleshooting.md|09-node-comprehensive-troubleshooting]]
+
+
+<!-- risk-assessed -->

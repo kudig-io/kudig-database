@@ -27,6 +27,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Image Pull Failure — 远程顾问对话脚本
 
@@ -419,7 +424,8 @@ relationships:
 顾问："阿里云环境镜像仓库有特殊性，请按以下顺序排查：
 
 **步骤 1：阿里云ACR状态检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认镜像仓库类型
 kubectl get pod <pod> -o yaml | grep -A 2 image
 
@@ -430,14 +436,14 @@ aliyun cr GET /repos/<namespace>/<repo>
 # 公网ACR：节点需有公网访问
 # 专有云ACR：检查VPC连通性
 ```
-
 > **如果无法执行aliyun CLI**：请登录ACR控制台，告诉我：
 > 1. 镜像仓库和Tag是否存在？
 > 2. 镜像构建状态是否成功？
 > 3. 是否有访问控制限制？
 
 **步骤 2：ACK镜像拉取Secret检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查默认Secret
 kubectl get secret -n <ns> | grep docker
 
@@ -447,7 +453,6 @@ kubectl get pods -n kube-system | grep acr-credential
 # 检查ServiceAccount绑定
 kubectl get sa default -n <ns> -o yaml | grep imagePullSecrets
 ```
-
 **步骤 3：专有云镜像特殊考虑**
 - 专有云可能使用内部Harbor而非ACR
 - 检查Harbor服务状态
@@ -462,14 +467,14 @@ kubectl get sa default -n <ns> -o yaml | grep imagePullSecrets
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 重启ACR免密插件
 kubectl delete pod -n kube-system -l app=acr-credential-helper
 
 # 手动创建拉取Secret
 kubectl create secret docker-registry acr-secret   --docker-server=registry.<region>.aliyuncs.com   --docker-username=<ram-user>   --docker-password=<password>
 ```
-
 如专有云Harbor无法访问：
 1. 检查Harbor Pod状态
 2. 检查Harbor [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
@@ -505,7 +510,8 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速查看镜像拉取失败的 Pod
 kubectl get pods --all-namespaces | grep -E "ImagePullBackOff|ErrImagePull"
 # 查看 Pod 镜像地址
@@ -526,7 +532,9 @@ kubectl describe node <node> | grep -A 10 "Allocated resources"
 # 重启 Deployment
 kubectl rollout restart deployment/<name> -n <ns>
 ```
-
 ---
 
 *对话脚本版本: 1.0.0 | 技能: K8s Image Pull Failure 诊断与修复 | 模式: L2-semi-auto*
+
+
+<!-- risk-assessed -->

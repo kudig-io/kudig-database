@@ -65,6 +65,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook)
@@ -114,7 +119,8 @@ graph TD
 
 #### 2.2 常见问题类型识别
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题类型快速识别脚本
 #!/bin/bash
 
@@ -143,7 +149,6 @@ kubectl get deployments,statefulsets,daemonsets -n ${NAMESPACE} | grep -E "0/[1-
 echo "📝 最近异常事件..."
 kubectl get events -n ${NAMESPACE} --sort-by='.lastTimestamp' | tail -10 | grep -E "(Warning|Error)"
 ```
-
 ### 3. 系统性故障排查方法论
 
 #### 3.1 LAYERED 分层诊断法
@@ -193,7 +198,8 @@ diagnose_layer() {
 
 ##### Pod Pending 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断Pending状态的Pod
 debug_pending_pod() {
     local pod_name=$1
@@ -224,10 +230,10 @@ debug_pending_pod() {
 # 使用示例
 debug_pending_pod "my-app-7d5b8c9f4-xl2v9" "production"
 ```
-
 ##### Pod CrashLoopBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断崩溃重启的Pod
 debug_crashloop_pod() {
     local pod_name=$1
@@ -256,7 +262,6 @@ debug_crashloop_pod() {
     echo "   - 权限问题"
 }
 ```
-
 #### 4.2 Deployment 相关问题
 
 ##### 滚动更新卡住
@@ -265,7 +270,8 @@ debug_crashloop_pod() {
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 诊断卡住的滚动更新
 debug_stuck_rollout() {
     local deployment_name=$1
@@ -292,10 +298,10 @@ debug_stuck_rollout() {
     echo "   kubectl scale deployment/${deployment_name} --replicas=0 -n ${namespace} && sleep 10 && kubectl scale deployment/${deployment_name} --replicas=N -n ${namespace}"
 }
 ```
-
 ##### 副本数不匹配
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断副本数异常
 debug_replica_mismatch() {
     local deployment_name=$1
@@ -323,12 +329,12 @@ debug_replica_mismatch() {
     echo "   - 重新调度Pod"
 }
 ```
-
 #### 4.3 资源相关问题
 
 ##### CPU/Memory 资源不足
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断资源不足问题
 debug_resource_pressure() {
     local namespace=$1
@@ -357,12 +363,12 @@ debug_resource_pressure() {
     echo "   - 优化应用内存使用"
 }
 ```
-
 ### 5. 应急响应工具箱
 
 #### 5.1 快速诊断脚本集合
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # emergency_toolkit.sh - 生产环境应急诊断工具
 
@@ -430,7 +436,6 @@ performance_analysis() {
         sort -k2 -nr | head -5
 }
 ```
-
 #### 5.2 应急响应检查清单
 
 ✅ **问题确认阶段**
@@ -461,7 +466,8 @@ performance_analysis() {
 
 #### 6.1 定期健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # scheduled_health_check.sh - 定期健康检查
 
@@ -499,7 +505,6 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' | \
 
 echo "✅ 健康检查完成: $(date '+%Y-%m-%d %H:%M:%S')"
 ```
-
 #### 6.2 自动化巡检配置
 
 ```yaml
@@ -577,3 +582,6 @@ spec:
 - 06-workload-monitoring-alerting
 - 08-multi-cloud-workload-strategy
 - 09-edge-computing-deployment
+
+
+<!-- risk-assessed -->

@@ -10,6 +10,11 @@ tier: supporting
 created: '2026-07-01'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Kubernetes Specialized Technologies 2025-2026
 
 ## Research Date: 2026-05-24
@@ -383,3 +388,6 @@ created: '2026-07-01'
 6. **ARM64**: Full parity with x86 across ecosystem. Cloud ARM adoption driving investment. Edge AI (NVIDIA Jetson) creates new ARM64 use cases.
 
 7. **Windows Containers**: Stable but niche. Best in cloud-managed K8s. Mixed Linux/Windows clusters require careful networking and scheduling.
+
+
+<!-- risk-assessed -->

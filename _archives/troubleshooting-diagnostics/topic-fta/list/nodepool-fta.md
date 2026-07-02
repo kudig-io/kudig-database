@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get events -A | grep -E 'NodePool|ScaleUpError|NodeGroup' 显示节点池异常 -->
 
 # NodePool 异常 FTA 树
@@ -383,3 +388,6 @@ flowchart TD
 | 1.25-1.27 | kubelet flag 清理 | user-data 脚本中 kubelet 参数需验证 |
 | 1.28+ | kubelet 版本偏差 N-3 | 节点池混合版本容忍度提升 |
 | 1.29-1.30 | 持续 API 清理 | 关注 cloud-controller-manager 变化 |
+
+
+<!-- risk-assessed -->

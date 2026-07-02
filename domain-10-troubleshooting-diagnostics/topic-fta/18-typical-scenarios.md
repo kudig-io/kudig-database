@@ -42,6 +42,11 @@ component: 18 Typical Scenarios
 severity: high
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第十八章：典型场景完整方案
@@ -93,6 +98,7 @@ k8s_versions:
 ## 18.1 多云 Kubernetes 集群故障管理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景: 企业运行 AWS EKS + Azure AKS + 自建 K8s 多云环境
 
 FTA 设计 (多云扩展):
@@ -126,7 +132,6 @@ Agent 方案:
   - 调用 kubectl (自建集群)
   - 跨云问题关联分析
 ```
-
 ## 18.2 有状态服务故障自愈
 
 ```
@@ -187,3 +192,6 @@ Agent 自愈流程:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/17-industry-benchmarks.md|17-industry-benchmarks]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/19-pitfalls-and-best-practices.md|19-pitfalls-and-best-practices]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/20-fta-llm-opportunities.md|20-fta-llm-opportunities]]
+
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kops v1.22 Release Notes
@@ -222,3 +227,5 @@ For file assets, it means adding an explicit path as shown below:
 * Update Go to v1.16.15 for kOps 1.22 [@hakman](https://github.com/hakman) [#13998](https://github.com/kubernetes/kops/pull/13998)
 * Switch to latest MacOS version for CI [@hakman](https://github.com/hakman) [#14015](https://github.com/kubernetes/kops/pull/14015)
 *  Check keyset existence before attempting to distrust [@yurrriq](https://github.com/yurrriq) [#14041](https://github.com/kubernetes/kops/pull/14041)
+
+<!-- risk-assessed -->

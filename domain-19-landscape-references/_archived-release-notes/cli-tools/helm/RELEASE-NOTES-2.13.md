@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.13 Release Notes
@@ -78,3 +83,6 @@ The [Quickstart Guide](https://docs.helm.sh/using_helm/#quickstart-guide) will g
 - pkg/chartutil: fix SaveDir for nested templates directories 618447cbf203d147601b4b9bd7f8c37a5d39fbb4 (Joe Lanford)
 - Fix #5046 compatible with MacOS (#5406) a6ccbdaa9e47d61111c88dae259a155bc1540f02 (Marc Khouzam)
 - restore klog flags (#5411) 20c949f1215402a7d9898a004fc77bd0e169f95f (Matthew Fisher)
+
+
+<!-- risk-assessed -->

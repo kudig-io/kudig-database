@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.29 - v1.33 完整 Feature Gate 与特性参考手册
@@ -413,7 +418,8 @@ data:
 
 ### 验证 Feature Gate 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubelet 的 Feature Gates
 kubectl get --raw /api/v1/nodes/NODE_NAME/proxy/configz | jq '.kubeletconfig.featureGates'
 
@@ -425,7 +431,6 @@ kubectl get pods -n kube-system -l component=kube-apiserver -o json | \
 kubectl get pods -n kube-system -l component=kube-scheduler -o json | \
   jq '.items[0].spec.containers[0].command | map(select(contains("feature-gates")))'
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -459,3 +464,6 @@ kubectl get pods -n kube-system -l component=kube-scheduler -o json | \
 - 99-kubernetes-v1.25-v1.33-feature-comparison-table
 - 99-kubernetes-v1.29-v1.33-features-guide
 - 99-kubernetes-v1.33-deprecation-migration-guide
+
+
+<!-- risk-assessed -->

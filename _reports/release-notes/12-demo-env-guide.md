@@ -35,6 +35,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kudig-database Demo 环境搭建指南
@@ -91,7 +96,8 @@ prerequisites:
 
 ### Step 1: 准备 K8s 集群 (30 分钟)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 A: 使用现有集群
 kubectl cluster-info
 kubectl get nodes
@@ -111,13 +117,13 @@ kind create cluster --config kind-config.yaml --name kudig-demo
 # 方案 C: 使用 k3d 创建轻量集群
 k3d cluster create kudig-demo --agents 3 --memory 8192
 ```
-
 ### Step 2: 部署向量数据库 (20 分钟)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: Milvus (推荐)
 helm repo add milvus https://milvus-io.github.io/milvus-helm/
 helm install milvus milvus/milvus \
@@ -133,7 +139,6 @@ helm install qdrant qdrant/qdrant \
   --set replicaCount=1 \
   -n kudig-system --create-namespace
 ```
-
 ### Step 3: 导入知识库数据 (60 分钟)
 
 ```bash
@@ -168,7 +173,8 @@ python scripts/verify.py --collection kudig_v1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署 RAG API 服务
 kubectl apply -f deploy/rag-api.yaml
 
@@ -184,13 +190,13 @@ curl -X POST http://localhost:8080/query \
   -H "Content-Type: application/json" \
   -d '{"question": "etcd 备份恢复怎么做", "top_k": 5}'
 ```
-
 ### Step 5: 部署 AI Agent (30 分钟)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署 Agent 服务
 kubectl apply -f deploy/agent.yaml
 
@@ -205,13 +211,13 @@ curl -X POST http://localhost:8081/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Pod CrashLoopBackOff 帮我排查"}'
 ```
-
 ### Step 6: 部署演示前端 (20 分钟)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署 Web 前端
 kubectl apply -f deploy/frontend.yaml
 
@@ -221,7 +227,6 @@ kubectl apply -f deploy/ingress.yaml
 # 3. 验证前端访问
 # 浏览器打开 https://demo.kudig.io
 ```
-
 ---
 
 ## 三、演示数据准备
@@ -417,7 +422,8 @@ scenarios:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # demo-recovery.sh — 一键恢复演示环境
 
@@ -462,7 +468,6 @@ echo "Test response: $RESPONSE"
 
 echo "=== Recovery complete ==="
 ```
-
 ---
 
 ## 七、联系人
@@ -475,3 +480,5 @@ echo "=== Recovery complete ==="
 | 主持人 | [待填写] | [待填写] |
 
 ```
+
+<!-- risk-assessed -->

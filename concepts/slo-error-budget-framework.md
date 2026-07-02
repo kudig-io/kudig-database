@@ -16,6 +16,11 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SLO/Error Budget 框架
@@ -374,7 +379,8 @@ sloth/prometheus/v1:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CLI 生成 Prometheus 规则
 sloth generate -i slo.yaml -o prometheus-rules.yaml
 
@@ -382,7 +388,6 @@ sloth generate -i slo.yaml -o prometheus-rules.yaml
 # 自动将 Sloth CRD 转换为 PrometheusRule
 kubectl apply -f slo.yaml
 ```
-
 **优势：**
 - 学习成本最低，5 分钟上手
 - 自动生成多窗口 Burn-Rate 告警规则
@@ -661,3 +666,6 @@ Level 5：组织级治理
 - [[concepts/incident-management-patterns.md|incident management patterns]] — 事件管理与响应模式
 - [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台
 - [[concepts/k8s-observability-stack.md|k8s observability stack]] — K8S 可观测性技术栈
+
+
+<!-- risk-assessed -->

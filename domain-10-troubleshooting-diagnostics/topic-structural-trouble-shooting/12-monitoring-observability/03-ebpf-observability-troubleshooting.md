@@ -47,6 +47,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: eBPF 可观测性故障排查指南
@@ -345,7 +350,8 @@ ulimit -l 2>/dev/null | xargs -I {} echo "  max locked memory={} KB"
 
 #### Cilium Hubble 深度诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Cilium Hubble 深度诊断脚本
 
@@ -393,13 +399,13 @@ else
   echo "  hubble CLI 未安装"
 fi
 ```
-
 #### Tetragon 深度诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Tetragon 深度诊断脚本
 
@@ -439,7 +445,6 @@ echo "5. 事件丢失检查:"
 kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout --tail=100 2>/dev/null | \
   grep -i "lost" | tail -5 || echo "  未发现事件丢失记录"
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -644,7 +649,8 @@ spec:
 
 #### eBPF 健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # eBPF 可观测性健康检查脚本
 
@@ -685,7 +691,6 @@ else
   echo "  hubble CLI 未安装"
 fi
 ```
-
 #### Prometheus 监控告警
 
 ```yaml
@@ -806,3 +811,5 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

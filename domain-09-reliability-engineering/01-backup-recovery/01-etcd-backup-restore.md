@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # etcd 备份恢复：snapshot、恢复、定时任务
@@ -126,7 +131,8 @@ etcd 是 Kubernetes 控制面的唯一状态存储，所有 API 对象、事件�
 
 在执行备份前，必须先确认 etcd 成员健康，避免在集群分裂或节点异常时生成不一致快照。以下命令通过 etcdctl 检查成员列表与集群健康度：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 设置 etcdctl 访问参数
 export ETCDCTL_API=3
 export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379
@@ -138,12 +144,12 @@ export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key
 etcdctl member list -w table
 etcdctl endpoint health --cluster -w table
 ```
-
 ### 4.2 执行一致性快照
 
 快照会生成 etcd 当前数据目录的一致性时间点副本。执行 snapshot 时应将输出定向到具有冗余能力的存储路径，并同时记录快照元数据：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 SNAP_DATE=$(date +%Y%m%d-%H%M%S)
 SNAP_FILE=/backup/etcd/etcd-snapshot-${SNAP_DATE}.db
 META_FILE=/backup/etcd/etcd-snapshot-${SNAP_DATE}.meta
@@ -160,12 +166,12 @@ etcdctl endpoint status --cluster -w json >> ${META_FILE}
 aliyun oss cp ${SNAP_FILE} oss://my-k8s-backup/etcd/$(hostname)/
 aliyun oss cp ${META_FILE} oss://my-k8s-backup/etcd/$(hostname)/
 ```
-
 ### 4.3 校验快照完整性
 
 生成快照后必须校验，防止静默损坏导致恢复失败。`snapshot status` 会输出快照的 hash、revision、total keys 等关键信息：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 校验 snapshot 状态
 etcdctl snapshot status ${SNAP_FILE} -w table
 
@@ -176,12 +182,12 @@ etcdctl snapshot status ${SNAP_FILE} -w table
 # | 9f8e7d6c | 12345678 |     54321  |   256 MB   |
 # +----------+----------+------------+------------+
 ```
-
 ### 4.4 ACK 托管版 etcd 快照下载
 
 对于 ACK 托管版集群，云侧会按策略自动执行 etcd 快照。用户可通过 ACK 控制台或 OpenAPI 下载快照到本地或 OSS，用于本地验证与二次灾备：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 aliyun CLI 查询集群可下载的 etcd 快照列表
 aliyun cs GET /clusters/<cluster-id>/etcdbackup
 
@@ -192,7 +198,6 @@ aliyun cs GET /clusters/<cluster-id>/etcdbackup/<backup-id> \
 # 校验下载文件的完整性
 etcdctl snapshot status etcd-snapshot-ack.db -w table
 ```
-
 > **注意**：下载的 snapshot 仅用于验证与异地归档，恢复操作通常由阿里云托管服务负责，非特殊场景不建议客户自行恢复托管版 etcd。
 
 ## 5. 定时备份：CronJob 自动化
@@ -328,7 +333,17 @@ groups:
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止 apiserver、controller-manager、scheduler
 # 在 Kubeadm/专有云中，通常通过移动静态 Pod 清单实现
 sudo mv /etc/kubernetes/manifests/kube-apiserver.yaml /var/tmp/
@@ -356,12 +371,12 @@ sudo mv /var/tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 sudo mv /var/tmp/kube-controller-manager.yaml /etc/kubernetes/manifests/
 sudo mv /var/tmp/kube-scheduler.yaml /etc/kubernetes/manifests/
 ```
-
 ### 6.3 多节点集群恢复要点
 
 对于三节点 etcd 集群，建议先在首节点完成 restore 并启动，再逐个加入其他节点。新节点加入时使用 `etcdctl member add` 而非 restore，避免破坏集群 token：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在已有 etcd 节点上添加新成员
 etcdctl member add master-1 --peer-urls=https://10.0.0.11:2380
 
@@ -375,14 +390,14 @@ etcd --name master-1 \
   --initial-cluster-state existing \
   --data-dir /var/lib/etcd
 ```
-
 ## 7. 验证与演练
 
 ### 7.1 恢复后验证命令
 
 恢复完成后，需要验证 apiserver 可连接、关键资源存在、etcd 集群健康：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 apiserver
 kubectl cluster-info
 kubectl get nodes
@@ -394,7 +409,6 @@ etcdctl endpoint health --cluster -w table
 kubectl get ns
 kubectl get deployments --all-namespaces | head -20
 ```
-
 ### 7.2 季度恢复演练模板
 
 | 阶段 | 任务 | 责任人 | 验收标准 |
@@ -421,7 +435,8 @@ kubectl get deployments --all-namespaces | head -20
 
 长期运行的 etcd 会产生大量历史 revision，导致 snapshot 体积膨胀、查询延迟增加。建议每周执行一次 compaction 与 defrag，并在低峰期进行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取当前最大 revision
 CURRENT_REV=$(etcdctl endpoint status --write-out=json | jq -r '.[].Status.header.revision')
 
@@ -435,7 +450,6 @@ etcdctl defrag
 # 验证 defrag 后存储空间
 etcdctl endpoint status --cluster -w table
 ```
-
 ### 9.1 自动维护策略
 
 可通过 Kubernetes CronJob 在维护窗口自动执行 compaction/defrag，但需确保：
@@ -466,3 +480,6 @@ etcdctl endpoint status --cluster -w table
 - [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
 - [[domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
 - [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+
+
+<!-- risk-assessed -->

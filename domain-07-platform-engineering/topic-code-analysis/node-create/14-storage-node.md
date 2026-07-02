@@ -37,6 +37,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点存储
@@ -253,7 +258,17 @@ mountOptions:
   - nodiratime
 ```
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 自动发现 Local PV 的 sig-storage-local-static-provisioner
 # 1. 准备挂载点目录
 mkdir -p /mnt/disks/ssd0
@@ -266,7 +281,6 @@ kubectl get pv -o wide | grep local
 # 3. 检查节点存储拓扑标签
 kubectl get nodes -o jsonpath='{.items[*].metadata.labels}' | jq 'keys' | grep topology
 ```
-
 ---
 
 ## CSI Node 插件
@@ -304,7 +318,8 @@ CSI Node 插件以 DaemonSet 方式运行在每个节点上，负责卷的挂载
                                               Pod 容器 /data
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSI Node 插件 Pod
 kubectl get pods -n kube-system -l app=csi-plugin -o wide
 
@@ -322,7 +337,6 @@ kubectl get csidriver -o jsonpath='{.items[*].spec.podInfoOnMount}'
 # 查看 CSI Node 插件日志
 kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=100
 ```
-
 ### CSI Driver / CSINode API
 
 ```yaml
@@ -344,14 +358,14 @@ spec:
       expirationSeconds: 3600
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群中已注册的 CSI 驱动
 kubectl get csidriver
 
 # 查看各节点的 CSI 驱动信息
 kubectl get csinodes -o wide
 ```
-
 ---
 
 ## 卷挂载传播
@@ -418,7 +432,8 @@ allowedTopologies:
 
 ### 节点卷数量限制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点卷限制
 kubectl get csinodes -o jsonpath='{.items[*].spec.drivers[*].allocatable.count}'
 
@@ -428,7 +443,6 @@ kubectl get csinodes -o jsonpath='{.items[*].spec.drivers[*].allocatable.count}'
 # GCP GKE: 单节点最大 128 Persistent Disk
 # Azure AKS: 单节点最大 64 托管磁盘
 ```
-
 ---
 
 ## 节点存储排障
@@ -501,3 +515,6 @@ echo "  CSI mounters: $(ls /var/lib/kubelet/plugins/kubernetes.io/csi/ 2>/dev/nu
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - 22-container-storage-deep-dive
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

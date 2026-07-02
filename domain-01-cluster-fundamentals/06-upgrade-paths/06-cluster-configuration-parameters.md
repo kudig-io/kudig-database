@@ -64,6 +64,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - 集群配置参数完全参考
@@ -469,7 +474,8 @@ election-timeout >= 5 × heartbeat-interval
 
 **自动备份脚本** (生产必备):
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-backup.sh - 定时备份脚本
 set -e
@@ -497,7 +503,6 @@ find "${BACKUP_DIR}" -name "etcd-snapshot-*.db" -mtime +${RETENTION_DAYS} -delet
 
 echo "Backup completed: ${BACKUP_FILE}"
 ```
-
 **恢复流程**:
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -505,7 +510,17 @@ echo "Backup completed: ${BACKUP_FILE}"
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止所有etcd节点
 systemctl stop etcd
 
@@ -528,7 +543,6 @@ systemctl start etcd
 etcdctl endpoint health --cluster
 etcdctl member list
 ```
-
 ### 2.8 监控指标
 
 | 指标 | 告警阈值 | 说明 |
@@ -1706,7 +1720,8 @@ data:
 
 **AKS节点池kubelet配置**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Azure CLI
 az aks nodepool add \
   --resource-group myResourceGroup \
@@ -1723,7 +1738,6 @@ az aks nodepool add \
   "containerLogMaxFiles": 5
 }
 ```
-
 ### 9.4 GCP GKE配置
 
 | 配置项 | Autopilot | Standard |
@@ -1743,7 +1757,8 @@ az aks nodepool add \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看API Server参数
 kubectl get pods -n kube-system -l component=kube-apiserver -o yaml | grep -A 100 'command:'
 
@@ -1771,7 +1786,6 @@ kubectl exec -n kube-system etcd-master -- etcdctl endpoint health --cluster
 kubectl cluster-info
 kubectl get componentstatuses  # 已弃用但仍可用
 ```
-
 ### 10.2 配置验证清单
 
 | 检查项 | 命令 | 期望结果 |
@@ -1815,3 +1829,6 @@ kubectl get componentstatuses  # 已弃用但仍可用
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

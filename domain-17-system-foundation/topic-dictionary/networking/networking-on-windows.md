@@ -32,6 +32,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Networking on Windows
@@ -160,7 +165,8 @@ spec:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Windows 节点 PowerShell 诊断
 Get-HnsNetwork                     # 查看 HNS 网络
 Get-HnsEndpoint                    # 查看 HNS 端点
@@ -173,7 +179,6 @@ curl http://my-service:80
 # 检查 kube-proxy Windows 模式
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20
 ```
-
 ## 交叉引用
 
 - [Service](service.md) — Service 类型和流量策略在 Windows 上的支持
@@ -190,3 +195,6 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20
 - [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
 - [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
 - [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+
+
+<!-- risk-assessed -->

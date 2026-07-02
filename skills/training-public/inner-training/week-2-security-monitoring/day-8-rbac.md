@@ -36,6 +36,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 8: K8S 集群 RBAC
@@ -163,7 +168,8 @@ ServiceAccount 是 K8s 为 Pod 提供的身份标识。每个 Namespace 创建�
 
 ### 任务 1: 查看现有 RBAC 配置 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看预置 ClusterRole（过滤系统角色，只看用户可用的）
 kubectl get clusterroles | grep -v "system:"
 # 预期输出:
@@ -213,13 +219,13 @@ kubectl auth can-i delete nodes
 kubectl auth can-i get secrets -n kube-system
 # 预期输出: yes / no
 ```
-
 ### 任务 2: 创建自定义 RBAC (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 Namespace
 kubectl create namespace rbac-test
 # 预期输出: namespace/rbac-test created
@@ -276,13 +282,13 @@ kubectl get role,rolebinding -n rbac-test
 # NAME                                                ROLE                AGE
 # rolebinding.rbac.authorization.k8s.io/dev-user-pod-reader   Role/pod-reader   10s
 ```
-
 ### 任务 3: 验证 RBAC 权限 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 dev-user 身份测试权限（模拟 ServiceAccount 访问）
 kubectl auth can-i get pods -n rbac-test --as=system:serviceaccount:rbac-test:dev-user
 # 预期输出: yes
@@ -366,7 +372,6 @@ kubectl auth can-i get nodes --as=system:serviceaccount:rbac-test:dev-user
 kubectl auth can-i get pods -n default --as=system:serviceaccount:rbac-test:dev-user
 # 预期输出: yes
 ```
-
 ### 任务 4: ACK RBAC 最佳实践 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -374,7 +379,17 @@ kubectl auth can-i get pods -n default --as=system:serviceaccount:rbac-test:dev-
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 ACK 集群中的自定义 ClusterRole
 kubectl get clusterroles | grep -v "system:" | grep -v "kubernetes"
 
@@ -453,7 +468,6 @@ kubectl delete namespace rbac-test  # ⚠️ 不可逆：永久删除命名空�
 kubectl delete clusterrole ops-engineer
 kubectl delete clusterrolebinding ops-engineer-binding
 ```
-
 ---
 
 ## 配置示例
@@ -574,3 +588,6 @@ cluster-admin 拥有集群的完全控制权，包括删除 Namespace、修改 R
 - [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
 - [安全架构总览](../../domain-01-cluster-fundamentals/14-security-architecture.md)
 - [ACK 安全管理](../../domain-12-cloud-providers/04-alicloud-ack/270-ack-security.md)
+
+
+<!-- risk-assessed -->

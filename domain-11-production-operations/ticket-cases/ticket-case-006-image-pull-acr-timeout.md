@@ -64,6 +64,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 006：Deployment 滚动更新失败（ACR 镜像拉取超时）
@@ -86,7 +91,8 @@ relationships:
 
 ### 3.1 快速确认异常 Pod 与事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 trade-core 命名空间内异常 Pod
 kubectl get pod -n trade-core -l app=order-service \
   --field-selector=status.phase!=Running
@@ -94,33 +100,32 @@ kubectl get pod -n trade-core -l app=order-service \
 # 查看具体 Pod 事件与状态
 kubectl describe pod -n trade-core <stuck-pod-name>
 ```
-
 ### 3.2 检查 Deployment 滚动更新状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deploy order-service -n trade-core
 kubectl rollout status deploy/order-service -n trade-core --timeout=30s
 kubectl rollout history deploy/order-service -n trade-core
 ```
-
 ### 3.3 验证镜像仓库与 ACR 专线连通性
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在节点上测试 ACR VPC 域名解析与端口连通
 kubectl run net-debug --rm -it --image=registry-vpc.cn-shanghai.aliyuncs.com/acs/busybox:latest --restart=Never -- /bin/sh
 # 容器内执行
 nc -vz registry-vpc.cn-shanghai.aliyuncs.com 443
 nslookup registry-vpc.cn-shanghai.aliyuncs.com
 ```
-
 ### 3.4 检查 imagePullSecret 与 ServiceAccount 权限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get sa default -n trade-core -o yaml
 kubectl get secret -n trade-core | grep acr
 kubectl get secret <acr-secret-name> -n trade-core -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d
 ```
-
 ### 3.5 阿里云 ASO/ACK 控制台侧检查
 
 ```bash
@@ -156,7 +161,8 @@ aliyun cr GET /repos/{RepoNamespace}/{RepoName}/tags --RegionId cn-shanghai
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若 Secret 不存在，使用 ACR 企业版固定密码或临时凭证创建
 kubectl create secret docker-registry acr-credential-trade \
   --docker-server=registry-vpc.cn-shanghai.aliyuncs.com \
@@ -164,24 +170,24 @@ kubectl create secret docker-registry acr-credential-trade \
   --docker-password=<acr-password> \
   -n trade-core --dry-run=client -o yaml | kubectl apply -f -
 ```
-
 ### 5.2 修改 Deployment 挂载 imagePullSecret
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deploy order-service -n trade-core --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/imagePullSecrets", "value": [{"name": "acr-credential-trade"}]}
 ]'
 ```
-
 ### 5.3 调整滚动更新策略以加速恢复
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deploy order-service -n trade-core --type='merge' -p '
 spec:
   strategy:
@@ -191,29 +197,29 @@ spec:
     type: RollingUpdate
 '
 ```
-
 ### 5.4 若 ACR 专线仍不稳定，切换至内网 VIP 或 OSS 中转
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时将镜像地址切到同 Region OSS 中转域名（需预先配置镜像同步）
 kubectl set image deploy/order-service order-service=registry-vpc-internal.cn-shanghai.aliyuncs.com/trade/order-service:v2.4.0 -n trade-core
 ```
-
 ### 5.5 重启拉取以清除退避
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete pod -n trade-core -l app=order-service,version=v2.4.0 --field-selector=status.phase=Pending
 ```
-
 ### 5.6 回滚方案（如修复失败）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 若镜像问题无法快速解决，先回滚到上一版本恢复业务
 kubectl rollout undo deploy/order-service -n trade-core
 kubectl rollout status deploy/order-service -n trade-core --timeout=300s
@@ -221,10 +227,10 @@ kubectl rollout status deploy/order-service -n trade-core --timeout=300s
 # 回滚后再次确认老版本 Pod 镜像可正常拉取
 kubectl get pod -n trade-core -l app=order-service -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[0].image}{"\n"}{end}'
 ```
-
 ## 6. 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 Deployment 滚动更新完成
 kubectl rollout status deploy/order-service -n trade-core --timeout=300s
 
@@ -237,7 +243,6 @@ kubectl get events -n trade-core --field-selector reason=ImagePullBackOff --sort
 # 业务验证：调用健康检查接口
 curl -s http://order-service.trade-core.svc.cluster.local:8080/actuator/health | jq .
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-006 已处理完成。
@@ -288,3 +293,6 @@ curl -s http://order-service.trade-core.svc.cluster.local:8080/actuator/health |
 - 滚动更新
 - [[skills/deployment-rolling-update.md|Deployment 滚动更新策略]]
 - 阿里云专有云 etcd 数据目录磁盘满导致 apiserver 响应慢
+
+
+<!-- risk-assessed -->

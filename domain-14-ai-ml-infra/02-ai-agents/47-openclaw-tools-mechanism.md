@@ -39,6 +39,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw TOOLS.md 机制深度解析
@@ -105,7 +110,17 @@ TOOLS.md 与 SOUL.md 构成**双重安全检查**：SOUL.md 约束"绝不能做�
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 TOOLS.md 四级权限模型:
 
 Level 0: 只读（默认授权，无需确认）
@@ -129,7 +144,6 @@ Level 3: 禁止（绝对不可执行）
 原则: 默认只授权 Level 0
       Level 1+ 需在 TOOLS.md 中显式声明
 ```
-
 ### 1.2 最小权限原则
 
 | 原则 | 说明 | 反面案例（Vercel 教训） |
@@ -143,6 +157,7 @@ Level 3: 禁止（绝对不可执行）
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 Vercel 教训:
   Before: 15 个工具注册 → Agent 准确率 40%
   After:  2 个核心工具 → Agent 准确率 85%
@@ -153,13 +168,13 @@ K8S Agent 推荐:
   有限写入: kubectl apply/scale/rollout (3 个，需确认)
   总计: 10 个工具 ← 精简且覆盖 95% 诊断场景
 ```
-
 ### 1.3 工具使用优先级
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断场景的工具调用金字塔:
 
          ┌──────────┐
@@ -178,7 +193,6 @@ K8S Agent 推荐:
 
 原则: 从底向上，先宏观后微观，先只读后写入
 ```
-
 ---
 
 ## 2. Harness Engineering 映射
@@ -235,6 +249,7 @@ TOOLS.md      │      │   ●   │         │         │        │     �
 ### 3.1 案例：工具链模板执行
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景: Pod Pending 诊断
 
 TOOLS.md 定义的工具链模板:
@@ -254,13 +269,13 @@ Step 4: 检查调度约束（Level 2 - get jsonpath）
 
 Agent 按模板顺序执行，避免遗漏关键步骤
 ```
-
 ### 3.2 案例：权限检查拦截
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 场景: Agent 判断需要重启 Deployment 来解决问题
 
 Agent 决策: kubectl rollout restart deployment/nginx -n production
@@ -276,7 +291,6 @@ Agent 输出:
    风险: 低（滚动更新不影响服务可用性）
    确认执行？[Y/N]"
 ```
-
 ### 3.3 案例：命令黑名单拦截
 
 ```yaml
@@ -304,6 +318,7 @@ command_blacklist:
 ### 4.1 TOOLS.md 与其他文件的协作
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 TOOLS.md 在配置体系中的角色:
 
 SOUL.md ──→ TOOLS.md
@@ -322,7 +337,6 @@ TOOLS.md ──→ MCP Server
               通过 MCP 协议集成远程工具
               kubectl-mcp / prometheus-mcp / loki-mcp
 ```
-
 ### 4.2 工具注册与发现
 
 ```
@@ -521,3 +535,5 @@ TOOLS.md 配置验证:
 - 49-openclaw-memory-mechanism
 
 ```
+
+<!-- risk-assessed -->

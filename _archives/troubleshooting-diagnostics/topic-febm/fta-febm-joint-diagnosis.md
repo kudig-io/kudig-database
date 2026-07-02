@@ -32,6 +32,11 @@ prerequisites:
 - service-mesh-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # FTA-FEBM 联合诊断最佳实践
 
 > **版本**: v1.0
@@ -214,6 +219,7 @@ prerequisites:
 **Phase 1: FTA 快速匹配**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 输入: "部分用户登录超时"
 匹配 TE: TE-2 应用服务不可用
 
@@ -237,7 +243,6 @@ FTA 置信度评估:
 
 结论: FTA 置信度不足，需要 FEBM 深度推理
 ```
-
 **Phase 2: FEBM 深度推理**
 
 ```
@@ -299,6 +304,7 @@ FEBM 案例存档:
 **Phase 1: FTA 快速匹配**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 匹配 TE: TE-10 ASM 服务网格问题
 
 FTA 路径遍历:
@@ -319,7 +325,6 @@ FTA 判断:
   - 但这只是表面原因
   - 需要深挖 "为什么 Istiod OOM"
 ```
-
 **Phase 2: FEBM 深度推理**
 
 ```
@@ -374,6 +379,7 @@ FTA 更新:
 **Phase 1: FTA 快速匹配**
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 匹配 TE: TE-9 Terway 网络问题
 
 FTA 路径遍历:
@@ -393,10 +399,10 @@ FTA 路径遍历:
   - BE-9.2.1: VPC CIDR 即将耗尽
   - BE-9.5.1: IP 泄漏导致提前耗尽
 ```
-
 **Phase 2: FEBM 验证**
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 FEBM 证据:
   - 泄漏 IP 大部分是 3 天前被删除的 Pod
   - Terway GC 配置: gc_interval = 6h
@@ -412,7 +418,6 @@ FEBM 证据:
   2. 短期: 检查 GC 配置，确保 6h 间隔生效
   3. 长期: 增加 IP 泄漏监控告警
 ```
-
 ---
 
 ## 四、联合诊断检查清单
@@ -587,7 +592,8 @@ incident_record:
 
 ### 6.2 常用命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # FTA 快速匹配
 kubectl get events --sort-by=.lastTimestamp | grep -E "Failed|Crash|OOM|Error"
 
@@ -604,7 +610,6 @@ kubectl logs <pod> --timestamps --tail=200
 # 根因验证
 kubectl exec <pod> -- <diagnostic-command>
 ```
-
 ---
 
 ## 七、总结
@@ -654,3 +659,5 @@ FTA + FEBM 联合:
 > **版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
 > **下次更新**: 每次重大问题后补充新案例
+
+<!-- risk-assessed -->

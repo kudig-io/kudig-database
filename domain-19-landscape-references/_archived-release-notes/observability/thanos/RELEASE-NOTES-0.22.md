@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Thanos|thanos]] v0.22 Release Notes
@@ -77,3 +82,5 @@ This release contains improvements from 28 authors (`git log --pretty="%ae" orig
 - [#4354](https://github.com/thanos-io/thanos/pull/4354) Receive: use the S2 library for decoding Snappy data; saves about 5-7% of CPU time in the Receive component when handling incoming remote write requests
 - [#4369](https://github.com/thanos-io/thanos/pull/4354) Build: Pin upgrade Alpine's version.
 - [#4404](https://github.com/thanos-io/thanos/pull/4404) Receive: added extra validation for the tenant's label name. Some unsupported formats could have passed before.
+
+<!-- risk-assessed -->

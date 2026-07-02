@@ -13,6 +13,11 @@ updated: '2026-05-23'
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s运维工程师学习路线
@@ -47,7 +52,8 @@ last_updated: 2026-05-23
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 完成以下操作至少3次
 kubectl get pods --all-namespaces
 kubectl describe node <node-name>
@@ -55,7 +61,6 @@ kubectl logs <pod> --previous
 kubectl exec -it <pod> -- /bin/sh
 kubectl top pod -n <namespace>
 ```
-
 ### 1.3 阿里云ACK基础
 - [ ] ACK集群类型（专有版、托管版、Serverless）
 - [ ] ACK控制台基础操作
@@ -335,3 +340,6 @@ kubectl top pod -n <namespace>
 - [ ] 5.2 工单处理流程
 - [ ] 5.3 阿里云专有云专项
 ```
+
+
+<!-- risk-assessed -->

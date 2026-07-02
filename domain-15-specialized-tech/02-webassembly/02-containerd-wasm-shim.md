@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[containerd|containerd]] Wasm 运行时
@@ -561,7 +566,8 @@ fn sha256(data: &[u8]) -> String {
 
 ## 4.1 前置要求 / Prerequisites
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 containerd 版本（需要 1.7+）
 containerd --version
 # containerd containerd.io 1.7.x
@@ -574,7 +580,6 @@ kubectl version --client
 uname -m
 # x86_64 或 aarch64
 ```
-
 ## 4.2 安装 runwasi Shim / Install runwasi Shim
 
 ```bash
@@ -667,7 +672,17 @@ version = 2
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重启 containerd 使配置生效
 sudo systemctl restart containerd
 
@@ -683,7 +698,6 @@ sudo ctr run \
   ghcr.io/containerd/runwasi/wasi-demo-app:latest \
   wasm-demo-test
 ```
-
 ## 4.4 安装 Spin Shim（可选）/ Install Spin Shim
 
 ```bash
@@ -764,7 +778,17 @@ scheduling:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 为 Wasm 节点添加标签
 kubectl label node worker-node-1 runtime.wasm/enabled=true
 kubectl label node worker-node-1 spin.fermyon.com/enabled=true
@@ -779,7 +803,6 @@ kubectl get nodes --show-labels | grep wasm
 # 查看节点详情
 kubectl describe node worker-node-1 | grep -A5 "Labels:"
 ```
-
 ## 5.3 多运行时 RuntimeClass / Multi-runtime RuntimeClass
 
 ```yaml
@@ -1317,7 +1340,8 @@ COPY spin.toml /spin.toml
 ENTRYPOINT ["/app.wasm"]
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建并推送 Wasm OCI 镜像
 # 构建
 docker build -t ghcr.io/myorg/myapp:v1.0.0 .
@@ -1334,7 +1358,6 @@ docker push ghcr.io/myorg/myapp:v1.0.0
 # 验证
 docker manifest inspect ghcr.io/myorg/myapp:v1.0.0
 ```
-
 ## 8.3 使用 spin registry / Spin Registry Push
 
 ```bash
@@ -1631,7 +1654,17 @@ fn extract_trace_context(req: &Request) -> opentelemetry::Context {
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 问题 1: containerd 无法找到 shim
 # 错误: failed to run containerd-shim-wasmtime-v1: executable not found
 
@@ -1679,8 +1712,8 @@ sudo ctr run \
 kubectl get events --field-selector reason=OOMKilling
 dmesg | grep -i oom
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 调试工具脚本
 #!/bin/bash
 # debug-wasm.sh - Wasm 工作负载调试脚本
@@ -1722,7 +1755,6 @@ if [ -n "$POD" ]; then
   kubectl logs "$POD" -n "$NAMESPACE"
 fi
 ```
-
 ## 11.2 性能分析 / Performance Profiling
 
 ```bash
@@ -1994,3 +2026,6 @@ spec:
 - 01-wasm-fundamentals-cloud-native
 - 03-spinkube-framework
 - 04-wasmcloud-platform
+
+
+<!-- risk-assessed -->

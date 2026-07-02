@@ -56,6 +56,11 @@ cross_refs:
   label: '结构化排障: 02-certificate-troubleshooting'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubeadm certs check-expiration | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
 
 # 证书异常 FTA 树
@@ -1529,3 +1534,6 @@ flowchart TD
   - 证书到期是集群最常见的问题原因之一
   - 时间同步是证书验证的前提条件
   - 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"
+
+
+<!-- risk-assessed -->

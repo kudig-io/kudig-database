@@ -72,6 +72,11 @@ related_docs:
   desc: Pod 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 37 - Pod生命周期事件表
@@ -138,7 +143,8 @@ related_docs:
 <!-- chunk: 事件查看命令 -->
 ## 事件查看命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name>
 
@@ -157,7 +163,6 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp'
 # 持续监控事件
 kubectl get events -w
 ```
-
 <!-- chunk: Pod重启原因分析 -->
 ## Pod重启原因分析
 
@@ -276,7 +281,8 @@ spec:
 <!-- chunk: Pod状态监控 -->
 ## Pod状态监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控Pod状态变化
 kubectl get pods -w
 
@@ -286,7 +292,6 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 # 检查OOMKilled的Pod
 kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{range .status.containerStatuses[*]}{.lastState.terminated.reason}{"\t"}{end}{"\n"}{end}' | grep OOMKilled
 ```
-
 ---
 
 **生命周期原则**: 正确配置探针，设置PDB，处理优雅终止
@@ -333,3 +338,5 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 - 13-container-lifecycle-hooks
 
 ```
+
+<!-- risk-assessed -->

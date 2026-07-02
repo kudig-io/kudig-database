@@ -34,6 +34,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Node-specific Volume Limits（节点特定卷限制）
@@ -109,14 +114,14 @@ Kubernetes v1.35 [alpha]（默认禁用）
 
 ### 查看节点卷限制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点的可附加卷上限
 kubectl get csinode <node-name> -o yaml
 
 # 查看节点 Allocatable 中的 attachable-volumes
 kubectl describe node <node-name> | grep attachable-volumes
 ```
-
 ## 故障排查
 
 | 症状 | 可能原因 | 排查步骤 |
@@ -133,14 +138,14 @@ kubectl describe node <node-name> | grep attachable-volumes
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看各节点的卷限制
 kubectl get nodes -o custom-columns='NAME:.metadata.name,VOLUMES:.status.allocatable.attachable-volumes-csi-ebs\.csi\.aws\.com'
 
 # 查看 CSINode 信息
 kubectl get csinodes -o wide
 ```
-
 ## 交叉引用
 
 - [存储容量](./storage-capacity.md) — 容量维度的调度约束
@@ -156,3 +161,6 @@ kubectl get csinodes -o wide
 - [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
 - [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
 - [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+
+
+<!-- risk-assessed -->

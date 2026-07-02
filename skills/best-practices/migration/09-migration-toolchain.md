@@ -41,6 +41,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 09 - 迁移工具链参考
@@ -120,7 +125,8 @@ k8s_versions:
 
 ### 一键安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # macOS 一键安装所有迁移工具
 brew install kubectl helm velero skopeo yq jq wrk aliyun-cli
 brew install FairwindsOps/tap/pluto
@@ -141,7 +147,6 @@ kubectl krew install neat
 kubectl krew install ctx
 kubectl krew install ns
 ```
-
 ---
 
 ## 2. Velero 完整指南
@@ -251,7 +256,8 @@ velero schedule create daily-backup \
 
 ### 3.1 skopeo 批量同步
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # skopeo 不需要 Docker Daemon，效率更高
 
 # 单镜像复制
@@ -273,7 +279,6 @@ skopeo sync --src docker --dest docker \
 # 检查镜像信息（不拉取）
 skopeo inspect docker://registry.cn-hangzhou.aliyuncs.com/myns/web:v1.2
 ```
-
 ### 3.2 ACR 镜像仓库同步
 
 ```bash
@@ -308,7 +313,8 @@ image-syncer --auth sync-config.yaml --images sync-images.yaml --retries 3
 
 ### 4.1 kubectl-neat
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清洗 YAML（去除 K8s 自动添加的元数据）
 kubectl get deploy web -o yaml | kubectl neat
 
@@ -318,7 +324,6 @@ kubectl get deploy web -o yaml | kubectl neat > web-deploy.yaml
 # 批量导出整个 Namespace
 kubectl get all -n production -o yaml | kubectl neat > production-all.yaml
 ```
-
 ### 4.2 yq 常用操作
 
 ```bash
@@ -350,7 +355,8 @@ yq eval '.items[].metadata.name' deployments.yaml
 
 ### 5.1 pluto — API 弃用检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 扫描集群
 pluto detect-all-in-cluster
 
@@ -366,10 +372,10 @@ pluto detect-files -d ./migration-export/
 # JSON 输出（便于自动化处理）
 pluto detect-all-in-cluster -o json | jq '.[] | select(.removed == true)'
 ```
-
 ### 5.2 kubent — 弃用 API 检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 替代 pluto 的选择
 kubent
 
@@ -379,7 +385,6 @@ kubent --kubeconfig ~/.kube/source-cluster.yaml
 # 扫描 Helm
 kubent --helm3
 ```
-
 ---
 
 ## 6. 数据迁移工具
@@ -408,21 +413,22 @@ rsync -avz --partial --progress /source/ /target/
 
 ### 6.2 redis-shake — Redis 数据同步
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Docker 方式运行
 docker run --rm -v $(pwd)/shake.toml:/etc/redis-shake.toml \
   redisshake/redis-shake:latest /etc/redis-shake.toml
 
 # 支持模式: sync (实时同步), restore (RDB恢复), scan (扫描同步)
 ```
-
 ---
 
 ## 7. 迁移脚本集合
 
 ### 7.1 完整迁移工具箱
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # migration-toolkit.sh
 # 迁移工具箱 - 统一入口
@@ -490,10 +496,10 @@ case "${1:-}" in
     ;;
 esac
 ```
-
 ### 7.2 kubeconfig 多集群管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 设置多集群 kubeconfig
 export KUBECONFIG=~/.kube/source-cluster.yaml:~/.kube/ack-cluster.yaml
 
@@ -516,7 +522,6 @@ alias kack="kubectl --context=ack-cluster"
 ksrc get pods -A
 kack get pods -A
 ```
-
 ---
 
 **上一步**: ← [08-验收、切换与旧集群退役](./08-validation-cutover-decommission.md)
@@ -548,3 +553,6 @@ kack get pods -A
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

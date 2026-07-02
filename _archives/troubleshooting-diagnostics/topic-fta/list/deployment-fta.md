@@ -58,6 +58,11 @@ cross_refs:
   label: '结构化排障: 02-deployment-troubleshooting'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get rs -n <ns> -o jsonpath='{range .items[?(@.spec.replicas != @.status.readyReplicas)]} {.metadata.name}{\"\n\"}{end}' 显示副本数不匹配 -->
 
 # Deployment 异常 FTA 树
@@ -683,3 +688,6 @@ flowchart TD
 - **1.24–1.27**：PSP 移除后安全策略迁移影响准入链路，需补充 PSA/OPA 分支；progressDeadlineSeconds 默认值变化。
 - **1.28–1.30**：使用稳定 API 与策略，版本差异主要体现在准入与审计链路；建议使用 Gateway API 替代部分 Ingress 场景。
 - **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
+
+
+<!-- risk-assessed -->

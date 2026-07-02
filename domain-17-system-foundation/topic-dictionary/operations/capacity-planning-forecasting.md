@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 13 - 容量规划与资源预测
@@ -238,7 +243,8 @@ capacityPlanningMethods:
 
 ### 2.1 集群资源全景视图
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cluster-capacity-report.sh - 生成集群容量报告
 
@@ -328,7 +334,6 @@ kubectl describe nodes | awk '
   }
 }'
 ```
-
 ### 2.2 资源使用趋势分析
 
 ```promql
@@ -1510,7 +1515,8 @@ kube_resourcequota{resource="requests.memory", type="hard"} * 100
 
 ### 6.1 成本归因分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cost-attribution.sh - 成本归因分析脚本
 
@@ -1546,7 +1552,6 @@ kubectl get namespaces -o json | jq -r '.items[].metadata.name' | while read ns;
   echo "  总成本: \$$total_cost/月"
 done
 ```
-
 ### 6.2 成本优化建议
 
 | 优化策略 | 节省潜力 | 实施难度 | 风险等级 | 适用场景 |
@@ -1728,7 +1733,8 @@ gpu-capacity-planning:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群节点资源分配
 kubectl describe nodes | grep -A 8 "Allocated resources"
 
@@ -1744,7 +1750,6 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,CPU:.status.allocatable.
 # etcd 数据库大小
 etcdctl endpoint status --write-out=table
 ```
-
 ## 交叉引用
 
 - 相关主题：[FinOps 与成本优化](finops-and-cost-optimization.md) · [Node Autoscaling](node-autoscaling.md) · [运维最佳实践](operations-best-practices.md) · [性能调优](performance-tuning-expert.md)
@@ -1762,3 +1767,6 @@ etcdctl endpoint status --write-out=table
 - [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
 - [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
 - [[domain-17-system-foundation/topic-dictionary/operations/cert-manager.md|cert-manager]]
+
+
+<!-- risk-assessed -->

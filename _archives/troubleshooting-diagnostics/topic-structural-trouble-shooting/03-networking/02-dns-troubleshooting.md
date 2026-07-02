@@ -40,6 +40,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # CoreDNS/DNS 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, CoreDNS v1.9+ | **最后更新**: 2026-01 | **难度**: 中级-高级
@@ -102,7 +107,8 @@ prerequisites:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
@@ -131,7 +137,6 @@ dig @10.96.0.10 kubernetes.default.svc.cluster.local
 # 查看 Pod 的 DNS 配置
 kubectl exec <pod-name> -- cat /etc/resolv.conf
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -385,7 +390,8 @@ data:
 
 **CoreDNS 水平扩展策略**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 根据集群规模设置副本数
 # 小集群（<50 节点）: 2 副本
 # 中型集群（50-200 节点）: 3-5 副本
@@ -421,7 +427,6 @@ resources:
     cpu: 2000m     # 留足突发容量
     memory: 512Mi
 ```
-
 #### 2.1.3 生产环境最佳实践
 
 **企业级 Corefile 配置模板**
@@ -517,7 +522,8 @@ groups:
 
 #### 2.2.1 第一步：检查 CoreDNS 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 
@@ -533,10 +539,10 @@ kubectl get svc -n kube-system kube-dns -o yaml
 # 验证 Endpoints 存在
 kubectl get endpoints -n kube-system kube-dns
 ```
-
 #### 2.2.2 第二步：检查 CoreDNS 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CoreDNS ConfigMap
 kubectl get configmap -n kube-system coredns -o yaml
 
@@ -566,10 +572,10 @@ kubectl get configmap -n kube-system coredns -o yaml
 # 查看 CoreDNS 日志检查配置错误
 kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "error"
 ```
-
 #### 2.2.3 第三步：测试 DNS 解析
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 Pod
 kubectl run test-dns --rm -it --image=busybox:1.28 -- sh
 
@@ -589,10 +595,10 @@ kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dns
 dig kubernetes.default.svc.cluster.local
 dig +trace google.com
 ```
-
 #### 2.2.4 第四步：检查网络连通性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在测试 Pod 内检查到 CoreDNS 的连通性
 # 获取 kube-dns ClusterIP
 kubectl get svc -n kube-system kube-dns -o jsonpath='{.spec.clusterIP}'
@@ -608,10 +614,10 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 # 直接 ping CoreDNS Pod IP
 ping <coredns-pod-ip>
 ```
-
 #### 2.2.5 第五步：检查上游 DNS
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点的 DNS 配置
 cat /etc/resolv.conf
 
@@ -625,10 +631,10 @@ kubectl get configmap -n kube-system coredns -o yaml | grep -A5 forward
 # 检查 CoreDNS 日志中的上游错误
 kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "forward"
 ```
-
 #### 2.2.6 第六步：检查 DNS 性能
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CoreDNS 指标
 kubectl port-forward -n kube-system svc/kube-dns 9153:9153 &
 curl http://localhost:9153/metrics
@@ -646,7 +652,6 @@ kubectl top pods -n kube-system -l k8s-app=kube-dns
 kubectl logs -n kube-system -l k8s-app=kube-dns | grep -c "NXDOMAIN"
 kubectl logs -n kube-system -l k8s-app=kube-dns | grep -c "SERVFAIL"
 ```
-
 ### 2.3 排查注意事项
 
 | 注意项 | 说明 | 建议 |
@@ -664,7 +669,17 @@ kubectl logs -n kube-system -l k8s-app=kube-dns | grep -c "SERVFAIL"
 
 #### 3.1.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查 Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl describe pod -n kube-system <coredns-pod>
@@ -695,7 +710,6 @@ kubectl rollout restart deployment -n kube-system coredns
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl run test --rm -it --image=busybox -- nslookup kubernetes
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -718,7 +732,17 @@ kubectl run test --rm -it --image=busybox -- nslookup kubernetes
 
 #### 3.2.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认问题范围
 # 测试集群内域名
 kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
@@ -755,7 +779,6 @@ kubectl rollout restart deployment -n kube-system coredns
 kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 kubectl run test --rm -it --image=busybox -- nslookup google.com
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -778,7 +801,17 @@ kubectl run test --rm -it --image=busybox -- nslookup google.com
 
 #### 3.3.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查当前性能
 kubectl top pods -n kube-system -l k8s-app=kube-dns
 
@@ -834,7 +867,6 @@ kubectl rollout restart deployment -n kube-system coredns
 # 测试解析延迟
 time kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -858,7 +890,8 @@ time kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 
 #### 3.4.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 Pod 的 DNS 配置
 kubectl exec <pod-name> -- cat /etc/resolv.conf
 
@@ -897,7 +930,6 @@ kubectl patch pod <pod-name> -p '{
 kubectl exec <pod-name> -- cat /etc/resolv.conf
 kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -962,7 +994,8 @@ kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 
 **排查过程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 抓取 Pod 内 DNS 查询日志
 kubectl exec -it payment-api-7d8f4 -- tcpdump -i any -n port 53 -A
 # 发现查询 pay.example.com 时进行了 5 次 DNS 查询：
@@ -987,7 +1020,6 @@ curl http://coredns-svc:9153/metrics | grep coredns_dns_requests_total
 # ndots:5 导致外部域名（点数 < 5）先进行 search 域扩展
 # 每次查询 pay.example.com 浪费 3 次集群内域名查询
 ```
-
 **应急措施**
 
 ```yaml
@@ -1009,7 +1041,8 @@ spec:
 # 在代码中使用 FQDN：pay.example.com.（末尾加点）
 ```
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 执行滚动更新
 kubectl set env deployment/payment-api DNS_FQDN="pay.example.com."  # 应用层方案
 kubectl patch deployment payment-api --patch "$(cat <<EOF
@@ -1027,7 +1060,6 @@ EOF
 kubectl exec payment-api-new-pod -- time nslookup pay.example.com
 # 查询次数降为 1 次，延迟 50ms
 ```
-
 **长期优化**
 
 ```yaml
@@ -1106,7 +1138,8 @@ EOF
 
 **排查过程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 验证问题范围
 kubectl run test --rm -it --image=busybox -- nslookup google.com
 # ;; connection timed out; no servers could be reached
@@ -1153,10 +1186,19 @@ kubectl get cm -n kube-system coredns -o yaml | grep -A3 forward
 # - CoreDNS 未配置备用上游 DNS
 # - 缓存机制无法覆盖未查询过的域名
 ```
-
 **应急措施**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急切换到公网 DNS（3 分钟内恢复）
 kubectl edit cm -n kube-system coredns
 # 修改 forward 配置：
@@ -1177,7 +1219,6 @@ kubectl run test --rm -it --image=busybox -- nslookup google.com
 # Address 1: 142.250.185.46
 # ✅ 外部域名解析恢复
 ```
-
 **长期优化**
 
 ```yaml
@@ -1385,7 +1426,8 @@ EOF
 
 **排查过程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 OOMKilled
 kubectl describe pod -n kube-system coredns-7d8f4b6c9-5xqhz | grep -A5 "Last State"
 # Last State:     Terminated
@@ -1432,10 +1474,19 @@ kubectl logs -n kube-system coredns-7d8f4b6c9-5xqhz | awk '{print $NF}' | sort |
 # - 内存持续增长，最终触发 OOM
 # - 可能原因：应用 bug 或恶意攻击
 ```
-
 **应急措施**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 临时提高内存 limit
 kubectl patch deployment -n kube-system coredns -p '{
   "spec": {
@@ -1475,7 +1526,6 @@ kubectl edit cm -n kube-system coredns
 # 4. 扩展副本应对负载
 kubectl scale deployment -n kube-system coredns --replicas=5
 ```
-
 **长期优化**
 
 ```yaml
@@ -1597,3 +1647,6 @@ EOF
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

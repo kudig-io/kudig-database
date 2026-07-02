@@ -36,6 +36,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent Harness Loop 与执行引擎深度设计
@@ -421,6 +426,7 @@ class AsyncExecutionEngine:
 Agent 在执行过程中可能陷入多种漂移模式：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Agent 漂移类型分类:
 
 1. 动作重复漂移（Action Repetition Drift）
@@ -448,7 +454,6 @@ Agent 漂移类型分类:
    示例: 诊断 Pod 问题时开始优化节点网络
    检测: 动作与目标的语义距离增加
 ```
-
 ## 3.2 多维度漂移检测器
 
 ```python
@@ -1149,3 +1154,6 @@ class IncidentExecutionEngine:
 - 30-agent-harness-engineering
 - 32-agent-harness-tool-engineering
 - 33-agent-harness-context-memory
+
+
+<!-- risk-assessed -->

@@ -44,6 +44,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Google GKE 企业级多云管理深度实践
@@ -1375,7 +1380,8 @@ spec:
 
 ## 备份与恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1446,10 +1452,10 @@ restore_cluster() {
 
 echo "=== 备份管理完成 ==="
 ```
-
 ## 集群升级脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1523,10 +1529,10 @@ kubectl get pods -n monitoring -o wide
 
 echo "=== 升级完成 ==="
 ```
-
 ## 日常运维检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1587,7 +1593,6 @@ gcloud container binauthz attestations list \
 
 echo "=== 运维检查完成 ==="
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 | 类别 | 最佳实践 | 说明 |
@@ -1629,7 +1634,8 @@ echo "=== 运维检查完成 ==="
 
 ## 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1675,7 +1681,6 @@ kubectl get pvc -A -o json | \
 
 echo "=== 诊断完成 ==="
 ```
-
 <!-- chunk: 参考资源 -->## 参考资源
 
 - [GKE 官方文档](https://cloud.google.com/kubernetes-engine/docs)
@@ -1714,3 +1719,6 @@ echo "=== 诊断完成 ==="
 - 03-enterprise-multicloud-governance
 - 05-ibm-cloud-kubernetes-service-enterprise
 - 06-alibaba-ack-enterprise-hybrid
+
+
+<!-- risk-assessed -->

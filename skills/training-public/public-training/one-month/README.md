@@ -43,6 +43,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 生产运维 1 个月学习计划
@@ -119,6 +124,7 @@ tags: [training, 28-days, k8s, learning-path, sre, devops, k8s-1.28-1.33]
 ## 整体学习路径
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Week 1: 地基建设期     Week 2: 核心技术构建期    Week 3: 运维作战能力期    Week 4: 企业级进阶期
 ├─ Docker 基础        ├─ 控制平面精读           ├─ 安全合规体系           ├─ 企业监控/日志平台
 ├─ Linux 基础         ├─ 工作负载深潜           ├─ 可观测性构建           ├─ GitOps & CI/CD
@@ -128,7 +134,6 @@ Week 1: 地基建设期     Week 2: 核心技术构建期    Week 3: 运维作�
     v                     v                         v                         v
  产出: K8s 集群搭建    产出: 生产级应用编排      产出: 监控大盘+排障手册   产出: GitOps 流水线
 ```
-
 ### 每周详细内容
 
 | 周次 | Day | 主题 | 核心技能 | 对应 Domain |
@@ -167,6 +172,7 @@ Week 1: 地基建设期     Week 2: 核心技术构建期    Week 3: 运维作�
 ## 知识依赖关系
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Domain13(Docker) ─┐
 Domain14(Linux)  ─┼─> Domain1(架构) ─> Domain3(控制平面) ─> Domain9(平台运维)
 Domain15(网络基础)┘       │                 │                     │
@@ -180,7 +186,6 @@ Domain15(网络基础)┘       │                 │                     │
                           v
                  Domain18-33(企业级专题)
 ```
-
 ### Domain 学习优先级
 
 | 优先级 | Domain | 说明 | 学习周次 |
@@ -318,3 +323,6 @@ Domain15(网络基础)┘       │                 │                     │
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

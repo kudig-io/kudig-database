@@ -59,6 +59,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 21 - 多集群安全管理与联邦认证
@@ -908,7 +913,8 @@ spec:
 
 #### 多集群安全检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 10-multicluster-security-check.sh
 
@@ -981,7 +987,6 @@ generate_unified_report
 echo "Multi-cluster security check completed!"
 echo "Report saved to: /reports/security_report_$(date +%Y%m%d).txt"
 ```
-
 这份多集群安全管理与联邦认证文档提供了企业级的多集群安全解决方案，涵盖了身份联合、策略同步、密钥管理和统一监控等核心要素。
 
 ---
@@ -1010,3 +1015,5 @@ echo "Report saved to: /reports/security_report_$(date +%Y%m%d).txt"
 - 02-network-security-policies
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

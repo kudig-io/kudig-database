@@ -58,6 +58,11 @@ cross_refs:
   label: '故障树: ingress'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 10 - [[Ingress|Ingress]] / IngressClass YAML 配置参考
@@ -442,13 +447,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create secret tls example-tls \
   --cert=path/to/tls.crt \
   --key=path/to/tls.key \
   -n production
 ```
-
 **方法 2: YAML 定义**
 ```yaml
 apiVersion: v1
@@ -515,10 +520,10 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml
 ```
-
 **配置 Let's Encrypt Issuer**:
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -565,7 +570,8 @@ spec:
 ```
 
 **验证证书状态**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Certificate 资源
 kubectl get certificate -n namespace
 
@@ -575,7 +581,6 @@ kubectl describe certificate example-tls -n namespace
 # 查看 Secret 是否创建
 kubectl get secret example-tls -n namespace
 ```
-
 ---
 
 <!-- chunk: 最小配置示例 -->## 最小配置示例
@@ -857,7 +862,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成密码文件
 htpasswd -c auth admin
 # 输入密码: ***
@@ -870,7 +876,6 @@ kubectl create secret generic basic-auth \
 # 验证
 kubectl get secret basic-auth -n admin -o yaml
 ```
-
 ## OAuth2 认证(外部认证服务)
 
 ```yaml
@@ -1467,7 +1472,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证 YAML 语法
 kubectl apply --dry-run=client -f ingress.yaml
 
@@ -1478,7 +1484,6 @@ kubectl describe ingress ingress-name -n namespace
 # 检查 Ingress Controller 日志
 kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ```
-
 ## 10. 渐进式部署
 
 **金丝雀发布流程**:
@@ -1495,7 +1500,8 @@ kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ## Q1: Ingress 创建后无法访问?
 
 **排查步骤**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Ingress 是否创建
 kubectl get ingress -n namespace
 
@@ -1523,7 +1529,6 @@ nslookup example.com
 # 9. 检查 Ingress Controller Service
 kubectl get svc -n ingress-nginx ingress-nginx-controller
 ```
-
 **常见问题**:
 - Ingress Controller 未部署
 - IngressClass 不匹配
@@ -1626,7 +1631,8 @@ spec:
 
 ## Q5: 如何查看 Ingress 分配的 IP 地址?
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Ingress 状态
 kubectl get ingress -n namespace
 
@@ -1637,16 +1643,15 @@ kubectl get ingress -n namespace
 # 详细信息
 kubectl describe ingress example -n namespace | grep Address
 ```
-
 **获取 Ingress Controller Service 的 IP**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc -n ingress-nginx ingress-nginx-controller
 
 # LoadBalancer 类型会显示 EXTERNAL-IP
 # NAME                       TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)
 # ingress-nginx-controller   LoadBalancer   10.96.100.50   203.0.113.50   80:30080/TCP,443:30443/TCP
 ```
-
 ## Q6: Ingress 支持 TCP/UDP 服务吗?
 
 **答案**: 标准 Ingress 仅支持 HTTP/HTTPS(七层)。
@@ -1679,7 +1684,17 @@ args:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 正常删除
 kubectl delete ingress ingress-name -n namespace
 
@@ -1691,7 +1706,6 @@ kubectl patch ingress ingress-name -n namespace \
 kubectl edit ingress ingress-name -n namespace
 # 删除 metadata.finalizers 字段
 ```
-
 ## Q8: Ingress 与 Gateway API 的区别?
 
 | 特性 | Ingress | Gateway API |
@@ -1892,7 +1906,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署绿色环境
 kubectl apply -f deployment-green.yaml
 
@@ -1911,7 +1926,6 @@ curl https://app.example.com/
 # 5. 观察一段时间后,删除蓝色环境
 kubectl delete deployment app-blue -n production
 ```
-
 ---
 
 ## 案例 3: 多租户 SaaS 平台
@@ -2064,3 +2078,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

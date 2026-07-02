@@ -64,6 +64,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -89,7 +94,8 @@ relationships:
 
 按“先控制器状态、再资源配置、后流量链路”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Ingress Controller Pod 状态与重启原因
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl describe pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx | grep -A 20 "Last State"
@@ -111,7 +117,6 @@ aliyun slb DescribeLoadBalancerHTTPListenerAttribute --LoadBalancerId lb-8vbdumm
 # 6. 检查 ASO/天基侧 Pod 事件与节点资源
 kubectl get events -n ingress-nginx --sort-by='.lastTimestamp' | tail -50
 ```
-
 ## 根因分析
 
 `ingress-nginx-controller` Deployment 的内存限制为 `limit.memory=512Mi`，而实际业务 Ingress 规则数量较多，且部分规则使用了复杂的 rewrite 注解与 Lua 插件。Nginx 在 reload 配置时会短暂占用双倍内存，导致 Pod 频繁触发 OOMKilled：
@@ -128,50 +133,51 @@ Last State: Terminated
 
 **第一步：临时扩容控制器副本数并添加节点亲和，分散压力**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment ingress-nginx-controller -n ingress-nginx --replicas=4
 ```
-
 **第二步：调整控制器内存限制至合理值**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set resources deployment ingress-nginx-controller -n ingress-nginx \
   --limits=memory=2Gi,cpu=2000m \
   --requests=memory=1Gi,cpu=1000m
 ```
-
 **第三步：检查并清理无效或冗余的 Ingress 注解，降低 Nginx 配置复杂度**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ingress -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{"\n"}{range .metadata.annotations}{@key}{": "}{@value}{"\n"}{end}{end}' | grep -E "rewrite|lua|configuration-snippet"
 ```
-
 **第四步：为关键业务 Ingress 配置会话保持与健康检查，减少异常重试**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate ingress mall-web-ingress -n mall-web nginx.ingress.kubernetes.io/session-cookie-name=route --overwrite
 kubectl annotate ingress mall-order-ingress -n mall-order nginx.ingress.kubernetes.io/session-cookie-name=route --overwrite
 ```
-
 **第五步：滚动重启控制器使资源限制生效**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
 kubectl rollout status deployment ingress-nginx-controller -n ingress-nginx --timeout=300s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 控制器 Pod 全部 Running 且没有 OOMKilled
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl describe pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx | grep -A 5 "Last State"
@@ -188,7 +194,6 @@ curl -I https://order.example.com/api/health
 # 4. 控制器内存使用趋势
 kubectl top pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次业务入口 404/502 的根因是 **Ingress Controller 内存限制过低导致频繁 OOM 重启**。控制器在处理大量 Ingress 规则与 reload 配置时超出 512Mi 内存限制，Pod 反复重启期间出现配置未加载与连接异常关闭，从而表现为 404 与 502。我们已完成以下处置：
@@ -241,3 +246,6 @@ kubectl top pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
 - Ingress
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

@@ -25,6 +25,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Logging Pipeline Failure 诊断 — 远程顾问对话脚本
 
@@ -582,7 +587,8 @@ relationships:
 顾问："阿里云环境有额外的日志管理维度，请按以下顺序排查：
 
 **步骤 1：阿里云SLS日志服务检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否使用阿里云SLS
 kubectl get pods -n kube-system | grep logtail
 
@@ -592,14 +598,14 @@ aliyun log ListProject
 # 检查SLS采集配置
 aliyun log GetMachineGroup --project=<project> --machineGroup=<group>
 ```
-
 > **如果无法执行aliyun CLI**：请登录SLS控制台，告诉我：
 > 1. Project和Logstore是否存在？
 > 2. 采集配置是否包含目标Pod？
 > 3. 是否有日志投递异常告警？
 
 **步骤 2：ACK日志组件检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Logtail DaemonSet状态
 kubectl get ds -n kube-system logtail-ds
 
@@ -609,7 +615,6 @@ kubectl logs -n kube-system -l k8s-app=logtail --tail=100
 # 检查日志采集配置CRD
 kubectl get aliyunlogconfigs -A
 ```
-
 **步骤 3：专有云日志特殊考虑**
 - 专有云可能未接入SLS，使用自建ELK
 - 检查ELK集群状态
@@ -624,7 +629,8 @@ kubectl get aliyunlogconfigs -A
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 重启Logtail
 kubectl rollout restart ds/logtail-ds -n kube-system
 
@@ -654,7 +660,6 @@ spec:
             FilePattern: '*.log'
 EOF
 ```
-
 如自建ELK异常：
 1. 检查Elasticsearch集群健康状态
 2. 检查Fluentd/Fluent-bit采集状态
@@ -690,7 +695,8 @@ EOF
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 日志代理状态
 kubectl get pods -n logging -l app=fluent-bit
 kubectl logs <fluent-pod> -n logging --tail=50
@@ -719,10 +725,12 @@ kubectl exec <es-pod> -n logging -- curl -X DELETE http://localhost:9200/<old-in
 kubectl rollout restart ds fluent-bit -n logging
 kubectl delete pod -n logging -l app=fluent-bit
 ```
-
 ---
 
 *对话脚本版本: 1.0.0 | 技能: K8s Logging Pipeline Failure 诊断与修复 | 模式: L2-semi-auto*
 ## Related
 
 - [[entities/cilium.md|Cilium (entities)]]
+
+
+<!-- risk-assessed -->

@@ -34,6 +34,11 @@ prerequisites:
 - troubleshooting-methodology
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # PodDisruptionBudget (PDB) 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
@@ -69,6 +74,7 @@ prerequisites:
 ### PodDisruptionBudget 工作原理
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                    PodDisruptionBudget 机制                              │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -160,7 +166,6 @@ PDB 状态计算:
 │                                                                        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息 | 查看方式 |
@@ -188,6 +193,7 @@ PDB 状态计算:
 ### 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 PDB 问题
     │
     ▼
@@ -254,12 +260,12 @@ PDB 问题
                                                        │ 完成       │
                                                        └────────────┘
 ```
-
 ### 2.2 排查命令集
 
 #### PDB 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 PDB
 kubectl get pdb -A
 
@@ -283,10 +289,10 @@ CURRENT-HEALTHY:.status.currentHealthy,\
 DESIRED-HEALTHY:.status.desiredHealthy,\
 EXPECTED-PODS:.status.expectedPods
 ```
-
 #### Pod 匹配检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PDB 匹配的 Pod
 kubectl get pods -n <namespace> -l <selector-from-pdb>
 
@@ -299,10 +305,19 @@ kubectl get pods -n <namespace> -o wide
 # 查看不健康的 Pod
 kubectl get pods -n <namespace> | grep -v "Running\|Completed"
 ```
-
 #### 驱逐检查
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 模拟驱逐 (dry-run)
 kubectl drain <node> --dry-run=client --ignore-daemonsets --delete-emptydir-data
 
@@ -315,7 +330,6 @@ kubectl get pods -A --field-selector spec.nodeName=<node>
 # 强制驱逐 (忽略 PDB，危险)
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --disable-eviction
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
@@ -334,7 +348,17 @@ kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --disable-evicti
 
 **解决步骤**：
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 确认阻止驱逐的 Pod
 kubectl drain <node> --dry-run=client --ignore-daemonsets --delete-emptydir-data 2>&1
 
@@ -356,10 +380,10 @@ kubectl get pods -n <namespace> -l <selector> | grep -v Running
 
 # 步骤 6: 修复不健康的 Pod 后，PDB 应该允许驱逐
 ```
-
 **常见原因与解决**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 原因 1: Pod 不健康导致 currentHealthy < minAvailable
 # 解决: 修复不健康的 Pod
 kubectl get pods -n <namespace> -o wide
@@ -373,14 +397,14 @@ kubectl logs <unhealthy-pod>
 # 原因 3: 只有 1 个副本且 minAvailable: 1
 # 解决: 增加副本数到至少 2，或使用 maxUnavailable: 1
 ```
-
 ### PDB selector 不匹配
 
 **问题现象**：PDB 创建但未保护任何 Pod，expectedPods = 0。
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 PDB 的 selector
 kubectl get pdb <name> -n <namespace> -o yaml | grep -A10 selector
 
@@ -392,7 +416,6 @@ kubectl get pods -n <namespace> -l <selector-from-pdb>
 
 # 步骤 4: 修正 PDB selector 或 Pod 标签
 ```
-
 **正确配置示例**：
 
 ```yaml
@@ -434,7 +457,8 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 Deployment 状态
 kubectl rollout status deployment <name> -n <namespace>
 
@@ -444,7 +468,6 @@ kubectl get pdb -n <namespace>
 # 步骤 3: 分析配置兼容性
 # 关键: Deployment 的 maxUnavailable + PDB 的 minAvailable
 ```
-
 **配置兼容性分析**：
 
 ```yaml
@@ -490,7 +513,8 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 评估当前 PDB 配置是否合理
 kubectl get pdb -A -o wide
 
@@ -506,7 +530,6 @@ kubectl patch pdb <name> -n <namespace> --type='json' \
 kubectl delete pdb <name> -n <namespace>
 # 维护后重新创建
 ```
-
 **最佳实践配置**：
 
 ```yaml
@@ -532,7 +555,8 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 找出匹配同一 Pod 的所有 PDB
 kubectl get pdb -A -o json | jq '.items[] | {name: .metadata.name, namespace: .metadata.namespace, selector: .spec.selector}'
 
@@ -545,7 +569,6 @@ kubectl get pod <pod-name> -n <namespace> --show-labels
 # 步骤 4: 调整 selector 避免重叠
 # 使用更具体的标签
 ```
-
 **避免重叠的配置**：
 
 ```yaml
@@ -582,7 +605,17 @@ spec:
 
 **解决步骤**：
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 1: 强制驱逐 (绕过 PDB，高风险)
 kubectl drain <node> \
   --ignore-daemonsets \
@@ -606,14 +639,14 @@ kubectl patch pdb <name> -n <namespace> --type='json' \
 kubectl delete pod <pod-name> -n <namespace>
 # 注意: 这不会触发 PDB 检查，但也不会优雅终止
 ```
-
 ### PDB 与 Cluster Autoscaler 冲突
 
 **问题现象**：CA 无法缩容节点，因为 PDB 阻止驱逐。
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 CA 日志
 kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i pdb
 
@@ -624,7 +657,6 @@ kubectl get pdb -A
 # 步骤 3: 确保 PDB 配置允许缩容
 # Pod 数量应该大于 minAvailable
 ```
-
 **适合缩容的 PDB 配置**：
 
 ```yaml
@@ -656,7 +688,8 @@ spec:
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== PDB 一键诊断脚本 =====
 
 echo "=== 所有 PDB 状态 ==="
@@ -681,7 +714,6 @@ kubectl get pods -A | grep -v "Running\|Completed" | head -20
 echo -e "\n=== 驱逐事件 ==="
 kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp' | tail -10
 ```
-
 ### 附录：常用 PDB 配置模板
 
 ```yaml
@@ -739,3 +771,6 @@ spec:
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

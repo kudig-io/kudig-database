@@ -69,6 +69,11 @@ cross_refs:
   label: '运维技能: 06-certificate-expiry'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 13 - 证书故障排查 (Certificate Troubleshooting)
@@ -180,7 +185,17 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === kubeadm续期所有证书 ===
 kubeadm certs renew all
 
@@ -202,7 +217,6 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 # 或者重启kubelet
 systemctl restart kubelet
 ```
-
 ---
 
 <!-- chunk: 3. kubelet证书问题 (Kubelet Certificate Issues) -->
@@ -229,7 +243,17 @@ journalctl -u kubelet | grep -i "certificate|tls|x509"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 检查自动轮换配置 ===
 cat /var/lib/kubelet/config.yaml | grep -i rotate
 
@@ -250,10 +274,10 @@ systemctl restart kubelet
 kubectl get csr
 kubectl certificate approve <csr-name>
 ```
-
 ### 3.3 CSR问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看待处理的CSR ===
 kubectl get csr
 kubectl get csr -o wide
@@ -270,7 +294,6 @@ kubectl certificate deny <csr-name>
 # === 批量批准 ===
 kubectl get csr | grep Pending | awk '{print $1}' | xargs kubectl certificate approve
 ```
-
 ---
 
 <!-- chunk: 4. API Server 证书问题 (API Server Certificate Issues) -->
@@ -314,7 +337,17 @@ curl -k -v https://<api-server>:6443/healthz
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 如果需要添加新的SAN (主机名/IP) ===
 # 1. 创建kubeadm配置
 cat > kubeadm-config.yaml <<EOF
@@ -342,7 +375,6 @@ kubeadm certs renew apiserver --config kubeadm-config.yaml
 # 4. 重启API Server
 systemctl restart kubelet
 ```
-
 ---
 
 <!-- chunk: 5. etcd 证书问题 (etcd Certificate Issues) -->
@@ -350,7 +382,8 @@ systemctl restart kubelet
 
 ### 5.1 etcd证书检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查etcd证书 ===
 openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -dates
 openssl x509 -in /etc/kubernetes/pki/etcd/peer.crt -noout -dates
@@ -370,13 +403,13 @@ ETCDCTL_API=3 etcdctl \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
   endpoint health
 ```
-
 ### 5.2 etcd证书续期
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 续期etcd证书 ===
 kubeadm certs renew etcd-server
 kubeadm certs renew etcd-peer
@@ -391,7 +424,6 @@ mv /tmp/etcd.yaml /etc/kubernetes/manifests/
 # 或者systemd方式
 systemctl restart etcd
 ```
-
 ---
 
 <!-- chunk: 6. kubeconfig 证书问题 (kubeconfig Issues) -->
@@ -399,7 +431,8 @@ systemctl restart etcd
 
 ### 6.1 检查kubeconfig证书
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 提取kubeconfig中的证书 ===
 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d > /tmp/client.crt
 openssl x509 -in /tmp/client.crt -noout -dates
@@ -414,7 +447,6 @@ openssl x509 -in <(cat /etc/kubernetes/admin.conf | grep client-certificate-data
 # /etc/kubernetes/controller-manager.conf
 # ~/.kube/config
 ```
-
 ### 6.2 更新kubeconfig
 
 ```bash
@@ -438,7 +470,8 @@ kubeadm certs renew controller-manager.conf
 
 ### 7.1 快速诊断清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 echo "=== 证书过期检查 ==="
 kubeadm certs check-expiration 2>/dev/null || echo "kubeadm不可用,手动检查"
@@ -458,7 +491,6 @@ kubectl get csr 2>/dev/null | grep -v "Approved"
 echo -e "\n=== 证书相关错误日志 ==="
 journalctl -u kubelet --since "1 hour ago" | grep -i "certificate|x509|tls" | tail -10
 ```
-
 ### 7.2 常见问题解决方案
 
 | 问题 | 症状 | 解决方案 |
@@ -543,7 +575,8 @@ check_cert "/var/lib/kubelet/pki/kubelet-client-current.pem" "Kubelet Client"
 <!-- chunk: 9. 命令速查 (Quick Reference) -->
 ## 9. 命令速查 (Quick Reference)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 证书检查 ===
 kubeadm certs check-expiration
 openssl x509 -in <cert> -noout -dates
@@ -571,7 +604,6 @@ journalctl -u kubelet | grep -i cert
 kubectl config view --raw
 kubeadm certs renew admin.conf
 ```
-
 ---
 
 <!-- chunk: 4. 证书问题解决方案 (Certificate Solutions) -->
@@ -687,7 +719,8 @@ kubeadm certs renew admin.conf
 
 #### 证书健康检查脚本：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # certificate_health_check.sh
 
@@ -722,13 +755,22 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --key=/etc/kubernetes/pki/etcd/server.key \
   endpoint health
 ```
-
 #### 证书自动续期脚本：
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # auto_renew_certificates.sh
 
@@ -812,7 +854,6 @@ main() {
 # 执行主函数
 main
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -851,3 +892,5 @@ main
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

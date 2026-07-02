@@ -38,6 +38,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 19 - ServiceAccount / Token 管理 YAML 配置参考
@@ -340,7 +345,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 TokenRequest
 kubectl create token my-service-account \
   --namespace default \
@@ -355,7 +361,6 @@ kubectl create token my-service-account \
   --bound-object-name my-pod \
   --bound-object-uid "a7f3d9e2-5c1b-4e8f-9a2d-3f7e8c1b4a6d"
 ```
-
 ## 3.3 在 Pod 中使用 TokenRequest
 
 ```yaml
@@ -525,7 +530,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证 token
 TOKEN="eyJhbGciOiJSUzI1NiIsImtpZCI6Ii..."
 kubectl create -f - <<EOF
@@ -537,7 +543,6 @@ spec:
     - "https://kubernetes.default.svc.cluster.local"
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. CertificateSigningRequest (CSR) -->## 6. CertificateSigningRequest (CSR)
@@ -661,7 +666,8 @@ spec:
 
 ## 6.4 批准和拒绝 CSR
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 批准 CSR
 kubectl certificate approve my-app-csr
 
@@ -674,7 +680,6 @@ kubectl get csr
 # 获取签名后的证书
 kubectl get csr my-app-csr -o jsonpath='{.status.certificate}' | base64 -d > client.crt
 ```
-
 ---
 
 <!-- chunk: 7. 内部原理: Bound Service Account Token (v1.22+) -->## 7. 内部原理: Bound Service Account Token (v1.22+)
@@ -1374,7 +1379,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 debug pod
 kubectl apply -f debug-pod.yaml
 
@@ -1392,7 +1398,6 @@ kubectl get pods --all-namespaces
 
 # 5. 2小时后 token 自动失效,kubeconfig 无法使用
 ```
-
 ---
 
 <!-- chunk: 9. 最佳实践 -->## 9. 最佳实践
@@ -1496,7 +1501,8 @@ error: You must be logged in to the server (Unauthorized)
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 token 是否存在
 kubectl exec -it <pod> -- ls -la /var/run/secrets/kubernetes.io/serviceaccount/
 
@@ -1518,7 +1524,6 @@ kubectl get pod <pod> -o jsonpath='{.spec.serviceAccountName}'
 # 5. 检查 ServiceAccount 是否存在
 kubectl get sa <serviceaccount> -o yaml
 ```
-
 ## 10.2 Token 未自动挂载
 
 **症状**:
@@ -1528,7 +1533,8 @@ kubectl get sa <serviceaccount> -o yaml
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 ServiceAccount 的 automountServiceAccountToken
 kubectl get sa <serviceaccount> -o jsonpath='{.automountServiceAccountToken}'
 
@@ -1542,7 +1548,6 @@ kubectl get pod <pod> -o jsonpath='{.spec.volumes}' | jq .
 # 在节点上执行
 journalctl -u kubelet | grep -i "serviceaccount"
 ```
-
 ## 10.3 CSR 未被批准
 
 **症状**:
@@ -1552,7 +1557,8 @@ certificatesigningrequests.certificates.k8s.io "my-csr" is forbidden
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 CSR 状态
 kubectl get csr <csr-name> -o yaml
 
@@ -1565,7 +1571,6 @@ kubectl certificate approve <csr-name>
 # 4. 检查 CSR 签名者权限
 kubectl auth can-i approve certificatesigningrequests --as=system:serviceaccount:<namespace>:<sa-name>
 ```
-
 ---
 
 <!-- chunk: 11. 参考资料 -->## 11. 参考资料
@@ -1612,3 +1617,6 @@ kubectl auth can-i approve certificatesigningrequests --as=system:serviceaccount
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

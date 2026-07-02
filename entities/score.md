@@ -28,6 +28,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Score
@@ -75,3 +80,6 @@ Score 是一个与平台无关的工作负载规范，使开发者能够用统�
 - [[skills/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
 - [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+
+
+<!-- risk-assessed -->

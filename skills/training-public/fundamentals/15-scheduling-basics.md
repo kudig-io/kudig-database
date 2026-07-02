@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -127,6 +132,7 @@ K8s 调度器可以：
 ### 1.2 调度器工作原理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【调度流程】
 
 Pod 创建请求 → API Server → 调度器 → 选择节点 → 绑定 Pod
@@ -153,7 +159,6 @@ Pod 创建请求 → API Server → 调度器 → 选择节点 → 绑定 Pod
 kubectl describe pod <pod-name> | grep -A10 "Node Selectors"
 kubectl describe pod <pod-name> | grep -A10 "Tolerations"
 ```
-
 ---
 
 ## 2. 污点（Taints）与容忍（Tolerations）
@@ -193,7 +198,17 @@ NoExecute：
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【给节点添加污点】
 
 kubectl taint nodes node1 dedicated=gpu:NoSchedule
@@ -219,7 +234,6 @@ kubectl describe node node1 | grep Taints
 输出示例：
 Taints: dedicated=gpu:NoSchedule, disk=ssd:NoExecute
 ```
-
 ### 2.3 Pod 添加容忍
 
 ```
@@ -271,7 +285,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【场景一：专用 GPU 节点】
 
 # 节点添加污点
@@ -297,7 +321,6 @@ spec:
     effect: "NoExecute"
     tolerationSeconds: 300
 ```
-
 ---
 
 ## 3. 节点亲和性
@@ -330,6 +353,7 @@ preferredDuringSchedulingIgnoredDuringExecution：
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【最简单的节点选择】
 
 spec:
@@ -344,7 +368,6 @@ kubectl label nodes node1 disktype=ssd
 
 kubectl get nodes --show-labels | grep disktype
 ```
-
 ### 3.3 nodeAffinity 详细配置
 
 ```
@@ -518,7 +541,17 @@ topologyKey 可以是：
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【节点配置】
 
 # GPU 节点标记标签
@@ -541,7 +574,6 @@ spec:
   nodeSelector:
     gpu: "true"
 ```
-
 ### 5.2 场景二：多副本高可用
 
 ```
@@ -592,6 +624,7 @@ spec:
 ### 6.1 Pod 无法调度到任何节点
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查节点状态
@@ -609,13 +642,22 @@ spec:
 5. 查看调度失败原因
    kubectl get events --sort-by=.lastTimestamp | tail -20
 ```
-
 ### 6.2 污点容忍不生效
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【排查步骤】
 
 1. 检查污点名称是否正确
@@ -632,13 +674,13 @@ spec:
    operator: Equal → key=value 必须完全匹配
    operator: Exists → 只检查 key 是否存在
 ```
-
 ### 6.3 亲和性规则冲突
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【场景】
 
 Pod 同时有 nodeSelector 和 nodeAffinity：
@@ -658,7 +700,6 @@ Pod 同时有 nodeSelector 和 nodeAffinity：
 3. 或者放宽亲和性要求
    从 required 改为 preferred
 ```
-
 ---
 
 ## 7. 数字人 Q&A 场景
@@ -668,7 +709,17 @@ Pod 同时有 nodeSelector 和 nodeAffinity：
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【回复】
 
 "好问题！让我来解释一下区别：
@@ -706,7 +757,6 @@ kubectl taint nodes node1 dedicated=gpu:NoSchedule
 
 有其他问题吗？"
 ```
-
 ### 7.2 用户问：如何让 Pod 分散到不同节点？
 
 ```
@@ -772,7 +822,17 @@ spec:
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【命令速查】
 
 添加污点：
@@ -816,7 +876,6 @@ kubectl label nodes <node> key=value
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -831,3 +890,6 @@ kubectl label nodes <node> key=value
 - 14-statefulset-basics
 - inner-one-month-training
 - p1-ack-cluster-lifecycle
+
+
+<!-- risk-assessed -->

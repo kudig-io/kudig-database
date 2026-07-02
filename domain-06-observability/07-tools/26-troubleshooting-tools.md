@@ -43,6 +43,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 100 - 故障排查增强工具
@@ -113,6 +118,7 @@ k8s_versions:
 ### 1.1 Kubernetes故障排查工具全景
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                     Kubernetes Troubleshooting Tools Ecosystem                       │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -183,7 +189,6 @@ k8s_versions:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 故障排查工具对比
 
 | 工具 | 类型 | 主要功能 | 学习曲线 | 适用场景 | 安装方式 |
@@ -519,7 +524,8 @@ plugins:
 
 ### 3.1 Netshoot部署方式
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # netshoot-debug.sh - Netshoot网络诊断
 
@@ -554,7 +560,6 @@ kubectl debug node/<node-name> \
     -it \
     --image=nicolaka/netshoot
 ```
-
 ### 3.2 Netshoot诊断命令大全
 
 ```bash
@@ -716,7 +721,8 @@ curl --http2 -v https://myservice:443/
 
 ### 3.3 常见网络问题诊断流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # network-troubleshoot.sh - 网络故障排查流程
 
@@ -800,7 +806,6 @@ diagnose_network() {
 # 使用示例
 # diagnose_network "myservice" "production" "8080"
 ```
-
 ---
 
 <!-- chunk: 四、kubectl-debug深度调试 -->
@@ -811,7 +816,8 @@ diagnose_network() {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # ephemeral-debug.sh - Ephemeral Container调试
 
@@ -858,10 +864,10 @@ kubectl debug node/<node-name> \
 # 进入节点后访问主机文件系统
 # chroot /host
 ```
-
 ### 4.2 krew插件安装与使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # krew-plugins.sh - krew插件管理
 
@@ -917,10 +923,10 @@ kubectl whoami                      # 当前用户
 kubectl get-all -n production       # 获取所有资源
 kubectl df-pv                       # PV使用情况
 ```
-
 ### 4.3 kubectl-trace eBPF追踪
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kubectl-trace.sh - eBPF追踪
 
@@ -959,7 +965,6 @@ kubectl trace run <pod-name> \
     --timeout=60s \
     -e 'tracepoint:syscalls:sys_enter_read { @[comm] = count(); }'
 ```
-
 ---
 
 <!-- chunk: 五、Stern多Pod日志 -->
@@ -1209,6 +1214,7 @@ telepresence quit
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    Kubernetes Troubleshooting Flowchart                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -1259,10 +1265,10 @@ telepresence quit
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 7.2 一键诊断脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # k8s-diagnose.sh - Kubernetes一键诊断脚本
 
@@ -1464,7 +1470,6 @@ case "$1" in
         ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 八、快速参考 -->
@@ -1477,7 +1482,8 @@ esac
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod诊断
 kubectl describe pod <pod> -n <ns>
 kubectl logs <pod> -n <ns> --previous
@@ -1507,7 +1513,6 @@ kubectl get events --field-selector type=Warning
 stern <pod-pattern> -n <ns>
 kubectl logs -l app=<label> --all-containers
 ```
-
 ### 8.2 快速诊断检查清单
 
 | 问题类型 | 检查项 | 命令 |
@@ -1579,3 +1584,6 @@ kubectl logs -l app=<label> --all-containers
 - 25-troubleshooting-overview
 - 27-performance-profiling-tools
 - 99-java-observability-kubernetes-guide
+
+
+<!-- risk-assessed -->

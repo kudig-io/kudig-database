@@ -46,6 +46,11 @@ related_docs:
   desc: Linux 速查卡
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Go 生产环境速查卡
@@ -2353,6 +2358,7 @@ decoded, _ := base64.StdEncoding.DecodeString(encoded)
 ### 项目结构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 myproject/
 ├── cmd/
 │   └── myapp/
@@ -2385,7 +2391,6 @@ myproject/
 ├── Makefile
 └── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md
 ```
-
 ### 配置管理
 
 ```go
@@ -2654,3 +2659,6 @@ build-darwin:
 **文档维护**: 建议每季度更新一次  
 **兼容性**: 代码已在 Go 1.20-1.22 上测试  
 **反馈渠道**: 如有错误或建议，请提交 Issue
+
+
+<!-- risk-assessed -->

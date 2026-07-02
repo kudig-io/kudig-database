@@ -43,6 +43,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -141,6 +146,7 @@ related_topics:
 **Week 1 核心概念复述**:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. 容器和虚拟机的区别是什么？为什么 K8s 选择容器？
    提示: 从隔离方式、启动速度、资源开销、适用场景四个角度解释
 
@@ -153,7 +159,6 @@ related_topics:
 4. kubectl 常用的命令有哪些？各自的使用场景？
    提示: get/describe/logs/exec/apply/delete
 ```
-
 **Week 2 核心概念复述**:
 
 ```
@@ -186,6 +191,7 @@ related_topics:
 **Week 4 核心概念复述**:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. GitOps 的核心理念是什么？与传统 CI/CD 有什么区别？
    提示: Git 作为唯一真实来源、Pull vs Push 模式
 
@@ -195,7 +201,6 @@ related_topics:
 3. Helm Chart 的核心组成部分？
    提示: Chart.yaml、values.yaml、templates/
 ```
-
 ### 第二部分: 知识图谱绘制 (30min)
 
 在纸上或白板上画出完整的 K8s 知识图谱：
@@ -232,7 +237,8 @@ K8s 知识图谱框架:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间
 kubectl create namespace production
 kubectl create namespace monitoring
@@ -288,13 +294,13 @@ EOF
 
 kubectl apply -f app-deployment.yaml
 ```
-
 #### Step 2: 存储配置 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 StorageClass 和 PVC
 cat > storage.yaml << 'EOF'
 apiVersion: storage.k8s.io/v1
@@ -324,13 +330,13 @@ EOF
 
 kubectl apply -f storage.yaml
 ```
-
 #### Step 3: 网络暴露 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Ingress + TLS
 cat > ingress.yaml << 'EOF'
 apiVersion: networking.k8s.io/v1
@@ -374,14 +380,14 @@ EOF
 
 kubectl apply -f ingress.yaml
 ```
-
 #### Step 4: 监控告警 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 Prometheus + Grafana（如果尚未部署）
 helm install prometheus prometheus-community/kube-prometheus-stack \
   --namespace monitoring --create-namespace
@@ -408,10 +414,10 @@ EOF
 
 kubectl apply -f alert-rules.yaml
 ```
-
 #### Step 5: 验收检查 (30min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证应用运行
 kubectl get pods -n production
 kubectl get svc -n production
@@ -432,7 +438,6 @@ echo "PVC bound: $(kubectl get pvc data-pvc -n production -o jsonpath='{.status.
 echo "Ingress created: $(kubectl get ingress -n production --no-headers | wc -l | tr -d ' ')"
 echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/name=prometheus --no-headers | grep Running | wc -l | tr -d ' ')"
 ```
-
 ---
 
 ## 常见问题
@@ -477,3 +482,6 @@ echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/
 ---
 
 恭喜完成一个月的 Kubernetes 全栈运维学习！
+
+
+<!-- risk-assessed -->

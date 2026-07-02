@@ -82,6 +82,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
@@ -241,7 +246,17 @@ Phase 5: 附加组件 (addon)
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # kubeadm 初始化前系统配置脚本
 # 适用于 Ubuntu 20.04/22.04, RHEL 8/9, CentOS 7/8
@@ -311,7 +326,6 @@ systemctl enable --now kubelet
 
 echo "=== Pre-flight configuration completed ==="
 ```
-
 ---
 
 ### 2.2 完整配置示例 (kubeadm Config v1beta3/v1beta4)
@@ -696,7 +710,8 @@ imageRepository: "mycustomregistry.io/kubernetes"
 
 **离线环境镜像准备脚本**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 离线环境镜像准备脚本
 
@@ -729,13 +744,22 @@ done
 
 echo "All images pushed to ${REGISTRY}"
 ```
-
 #### 配置镜像仓库 CA 证书
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 获取私有仓库 CA 证书
 openssl s_client -showcerts -connect harbor.example.com:443 < /dev/null \
     | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \
@@ -752,7 +776,6 @@ HOSTEOF
 
 systemctl restart containerd
 ```
-
 ---
 
 ### 2.5 初始化输出和证书管理
@@ -1147,7 +1170,17 @@ done
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份现有证书
 mkdir -p /etc/kubernetes/pki/backup-$(date +%Y%m%d)
 cp -r /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/*.key /etc/kubernetes/pki/backup-$(date +%Y%m%d)/
@@ -1181,7 +1214,6 @@ systemctl restart kubelet
 # 6. 验证证书更新
 kubeadm certs check-expiration
 ```
-
 ### 5.3 自动轮换配置
 
 #### 使用 kubeadm 自动轮换
@@ -1269,7 +1301,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份所有证书
 mkdir -p /etc/kubernetes/pki/backup-ca-$(date +%Y%m%d)
 cp -r /etc/kubernetes/pki/* /etc/kubernetes/pki/backup-ca-$(date +%Y%m%d)/
@@ -1298,7 +1340,6 @@ systemctl restart kubelet
 kubectl get nodes
 kubectl get pods -n kube-system
 ```
-
 ---
 
 <!-- chunk: 6. 令牌管理 (kubeadm token) -->
@@ -1341,7 +1382,8 @@ kubeadm token delete --all
 | **长期 Token** | 8760 小时 (1年) | 无限制 | 自动化/CI 环境 |
 | **永久 Token** | 永久 | 永久 | 仅用于测试环境 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安全 Token 管理策略
 
 # 1. 创建短期 Token 用于手动加入
@@ -1364,7 +1406,6 @@ done
 kubectl get secret -n kube-system | grep bootstrap-token
 kubectl get secret bootstrap-token-abcdef -n kube-system -o yaml
 ```
-
 ---
 
 <!-- chunk: 7. 集群升级 (kubeadm upgrade) -->
@@ -1372,7 +1413,8 @@ kubectl get secret bootstrap-token-abcdef -n kube-system -o yaml
 
 ### 7.1 升级前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 升级前检查脚本
 
@@ -1415,14 +1457,23 @@ kubectl get --raw /api/v1 | grep -E '"name":' | grep -i deprecated || true
 
 echo "=== Pre-Upgrade Checks Complete ==="
 ```
-
 ### 7.2 控制平面升级步骤
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 控制平面升级顺序 (重要!):
 
 1. 第一个控制平面节点 (持有 kubeadm-certs)
@@ -1443,13 +1494,22 @@ echo "=== Pre-Upgrade Checks Complete ==="
    ├─ systemctl restart kubelet
    └─ kubectl uncordon <node>
 ```
-
 **第一个控制平面节点升级**:
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm
 apt-get update
@@ -1472,13 +1532,22 @@ apt-mark hold kubelet kubectl
 systemctl daemon-reload
 systemctl restart kubelet
 ```
-
 **其他控制平面节点升级**:
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm
 apt-get update
@@ -1495,14 +1564,23 @@ apt-mark hold kubelet kubectl
 systemctl daemon-reload
 systemctl restart kubelet
 ```
-
 ### 7.3 kubelet/kubectl 升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Worker 节点升级 (逐个进行)
 
 # 1. 驱逐节点上的 Pod
@@ -1532,13 +1610,13 @@ systemctl restart kubelet
 # 6. 恢复节点可调度
 kubectl uncordon worker-1
 ```
-
 ### 7.4 CNI 插件兼容性检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前 CNI 版本
 kubectl get daemonset -n kube-system | grep -E 'calico|cilium|flannel|weave'
 
@@ -1556,10 +1634,10 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 # 5. 验证 CNI 状态
 kubectl get pods -n kube-system -l k8s-app=calico-node
 ```
-
 ### 7.5 升级后验证
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 升级后验证脚本
 
@@ -1595,14 +1673,23 @@ kubectl get sc,pvc,pv
 
 echo "=== Verification Complete ==="
 ```
-
 ### 7.6 回滚策略
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 升级回滚脚本
 
@@ -1640,7 +1727,6 @@ kubectl get pods -n kube-system
 echo "=== Rollback Complete ==="
 
 ```
-
 ---
 
 <!-- chunk: 8. 节点重置与清理 (kubeadm reset) -->
@@ -1654,7 +1740,17 @@ echo "=== Rollback Complete ==="
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 驱逐节点上的工作负载 (在控制平面执行)
 kubectl drain worker-1 \
   --ignore-daemonsets \
@@ -1686,13 +1782,13 @@ ctr -n k8s.io images list | awk '{print $1}' | xargs -r ctr -n k8s.io images del
 rm -rf /var/lib/kubelet/*  # ⚠️ 删除系统/数据文件
 rm -rf /var/lib/cni/  # ⚠️ 删除系统/数据文件
 ```
-
 ### 8.2 清理 etcd 成员
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在控制平面节点查看 etcd 成员列表
 ETCDCTL_API=3 etcdctl member list \
     --endpoints=https://127.0.0.1:2379 \
@@ -1725,7 +1821,6 @@ ETCDCTL_API=3 etcdctl endpoint health --cluster \
     --cert=/etc/kubernetes/pki/etcd/server.crt \
     --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 ### 8.3 保留/删除数据选项
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -1814,7 +1909,17 @@ kubeadm join 192.168.1.100:6443 \
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认集群至少有 3 个控制平面节点
 kubectl get nodes -l node-role.kubernetes.io/control-plane
 
@@ -1840,13 +1945,13 @@ kubectl delete node <node-name>
 
 # 5. 更新负载均衡器配置，移除该节点
 ```
-
 ### 9.2 etcd 成员管理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd 成员管理脚本
 
@@ -1909,7 +2014,6 @@ case "$1" in
     *) echo "Usage: $0 {status|members|add <peer_url>|remove <member_id>|health}" ;;
 esac
 ```
-
 ### 9.3 负载均衡器配置
 
 #### HAProxy 配置示例
@@ -2026,7 +2130,8 @@ stream {
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 kubeadm 详细日志
 kubeadm init --v=5  # 日志级别 0-9
 
@@ -2050,10 +2155,10 @@ kubeadm init --ignore-preflight-errors=Swap,NumCPU
 kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 kubeadm init --config=kubeadm-config.yaml
 ```
-
 ### 10.2 加入失败排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 验证 Token 有效性
 kubeadm token list
 
@@ -2075,14 +2180,14 @@ kubeadm join 192.168.1.100:6443 --token xxx --discovery-token-ca-cert-hash sha25
 # 6. 检查节点防火墙
 iptables -L -n | grep 6443
 ```
-
 ### 10.3 网络插件安装问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CNI 插件是否安装
 ls -la /opt/cni/bin/
 
@@ -2110,10 +2215,10 @@ helm install cilium cilium/cilium --version 1.15.0 --namespace kube-system
 # Flannel
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
-
 ### 10.4 证书问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 证书过期诊断
 kubeadm certs check-expiration
 
@@ -2136,7 +2241,6 @@ chmod 644 /etc/kubernetes/pki/*.crt
 kubeadm kubeconfig user --client-name kubernetes-admin \
   --config /etc/kubernetes/admin.conf > /tmp/admin.conf
 ```
-
 ---
 
 <!-- chunk: 11. 生产环境 Checklist -->
@@ -2300,3 +2404,5 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

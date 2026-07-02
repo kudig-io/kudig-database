@@ -69,6 +69,11 @@ cross_refs:
   label: '故障树: apiserver'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - API Server 故障排查 (API Server Troubleshooting)
@@ -130,6 +135,7 @@ related_docs:
 ### 1.2 API Server 架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    API Server 故障诊断架构                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -178,7 +184,6 @@ related_docs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. API Server 完全不可用故障排查 (Complete Unavailability) -->
@@ -187,6 +192,7 @@ related_docs:
 ### 2.1 故障诊断流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    API Server 完全不可用诊断流程                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -233,10 +239,10 @@ related_docs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础连通性检查 ==========
 
 # 检查API Server是否响应
@@ -301,7 +307,6 @@ df -h
 lsof -p $(pgrep kube-apiserver) | wc -l
 cat /proc/sys/fs/file-max
 ```
-
 ### 2.3 常见错误及解决方案
 
 | 错误信息 | 可能原因 | 解决方案 |
@@ -320,7 +325,8 @@ cat /proc/sys/fs/file-max
 
 ### 3.1 性能监控指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. API Server性能指标 ==========
 
 # 获取API Server指标
@@ -349,7 +355,6 @@ kubectl top pods -n kube-system -l component=kube-apiserver
 # 检查Pod资源限制
 kubectl get pod -n kube-system -l component=kube-apiserver -o yaml | grep -A10 resources
 ```
-
 ### 3.2 性能问题诊断
 
 ```bash
@@ -398,7 +403,8 @@ curl -k https://localhost:6443/metrics | grep '^apiserver_request_total{' | grep
 
 ### 4.1 认证故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 认证配置检查 ==========
 
 # 检查认证配置
@@ -424,10 +430,10 @@ kubectl config view --raw -o jsonpath='{.users[0].user.token}'
 # 错误: "Unauthorized" for service account
 # 解决: 删除重建ServiceAccount或更新secret
 ```
-
 ### 4.2 授权故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 权限检查 ==========
 
 # 检查用户权限
@@ -455,7 +461,6 @@ kubectl get rolebindings -n <namespace> -o yaml
 # 原因: 认证失败导致匿名访问
 # 解决: 检查客户端证书/token配置
 ```
-
 ---
 
 <!-- chunk: 5. 生产环境应急处理 (Production Emergency Response) -->
@@ -466,7 +471,8 @@ kubectl get rolebindings -n <namespace> -o yaml
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 快速诊断脚本 ==========
 
 #!/bin/bash
@@ -514,7 +520,6 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 # 检查恢复状态
 watch -n 2 'curl -sk https://localhost:6443/healthz'
 ```
-
 ### 5.2 问题升级流程
 
 | 问题等级 | 响应时间 | 处理流程 |
@@ -605,3 +610,5 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

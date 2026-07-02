@@ -58,6 +58,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -83,7 +88,8 @@ relationships:
 
 按“先状态、后日志、再资源配额”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认节点状态与容器运行时版本
 kubectl get node cn-zhangjiakou.172.16.1.87 -o wide
 kubectl describe node cn-zhangjiakou.172.16.1.87 | grep -A 20 Conditions
@@ -109,7 +115,6 @@ ack-cli node diagnose cn-zhangjiakou.172.16.1.87 --cluster ack-zyy-prod-01 --mod
 # 7. 通过 ASO 检查该节点 ENI 关联的 PrivatePool 状态
 kubectl get eni -n kube-system cn-zhangjiakou.172.16.1.87 -o yaml
 ```
-
 ## 根因分析
 
 节点 `cn-zhangjiakou.172.16.1.87` 为 `ecs.c7.xlarge` 规格，单节点默认最多挂载 3 张 ENI，每张 ENI 最多分配 10 个辅助私网 IP。该节点承载了 28 个 Pod（含 DaemonSet 与业务 Pod），Terway 按 Pod 粒度独占 IP。当业务突发扩容时，Terway 请求分配新的辅助 IP 失败：
@@ -127,16 +132,26 @@ assignPodIPv4 fail: no available private ip for pod order-service/order-api-7d9c
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon cn-zhangjiakou.172.16.1.87
 ```
-
 **第二步：将可迁移业务 Pod 驱逐到其他节点，释放部分 ENI IP**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl drain cn-zhangjiakou.172.16.1.87 \
   --ignore-daemonsets \
   --delete-emptydir-data \
@@ -144,7 +159,6 @@ kubectl drain cn-zhangjiakou.172.16.1.87 \
   --pod-selector='app notin (node-exporter,terway)' \
   --timeout=300s
 ```
-
 **第三步：临时扩容节点池，增加可承载 Pod 的节点数**
 
 ```bash
@@ -159,20 +173,30 @@ aliyun cs POST /clusters/ack-zyy-prod-01/nodes \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete node cn-zhangjiakou.172.16.1.87
 # 由集群自动缩容/扩容完成替换
 ```
-
 **第五步：恢复节点可调度**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl uncordon cn-zhangjiakou.172.16.1.87
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 节点恢复 Ready
 kubectl get node cn-zhangjiakou.172.16.1.87 -o jsonpath='{.status.conditions[?(@.type=="Ready")].status}'
 
@@ -187,7 +211,6 @@ kubectl get pod -n order-service -o wide | grep -v Running
 # 4. ENI 配额检查
 aliyun ecs DescribeNetworkInterfaces --RegionId cn-zhangjiakou --InstanceId i-8vbdummy87
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次节点 NotReady 的根因是 **Terway ENI 辅助 IP 配额耗尽**。该节点上 Pod 数量接近 ENI IP 上限，扩容时 CNI 无法为新 Pod 分配 IP，进而触发节点状态异常。我们已完成以下处置：
@@ -237,3 +260,6 @@ aliyun ecs DescribeNetworkInterfaces --RegionId cn-zhangjiakou --InstanceId i-8v
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - RBAC 权限不足导致应用无法访问 K8s API
 - 阿里云专有云 NetworkPolicy 误拦截导致服务间调用 503
+
+
+<!-- risk-assessed -->

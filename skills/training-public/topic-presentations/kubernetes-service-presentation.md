@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] [[Service|Service]] 全栈进阶培训 (从入门到专家)
@@ -543,7 +548,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 Deployment
 kubectl create deployment demo-app --image=nginx --replicas=3
 # 预期输出: deployment.apps/demo-app created
@@ -581,14 +587,14 @@ kubectl get svc demo-nodeport
 curl http://<node-ip>:30080
 # 预期输出: Nginx 欢迎页面
 ```
-
 ## 演示 2：kube-proxy 模式检查与切换
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 查看当前 kube-proxy 模式
 kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
 # 预期输出: mode: "ipvs" 或 mode: ""
@@ -619,13 +625,13 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
 sudo ipvsadm -Ln | head -5
 # 应该能看到 IPVS 规则
 ```
-
 ## 演示 3：Headless Service + StatefulSet
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
@@ -682,13 +688,13 @@ kubectl run test-dns --image=busybox --rm -it --restart=Never -- \
   nslookup postgres-headless.default.svc.cluster.local
 # 预期: 返回所有 3 个 Pod 的 IP
 ```
-
 ## 演示 4：ExternalTrafficPolicy 对比
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 LoadBalancer Service (Cluster 模式)
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -730,10 +736,10 @@ kubectl get endpoints lb-local
 # Cluster 模式：看到的是节点 IP（经过 SNAT）
 # Local 模式：看到的是真实客户端 IP
 ```
-
 ## 演示 5：性能诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 conntrack 状态
 cat /proc/sys/net/netfilter/nf_conntrack_count
 # 预期输出: 12345
@@ -760,7 +766,6 @@ kubectl get endpointslice -l kubernetes.io/service-name=demo-clusterip
 # 检查 kube-proxy 日志
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 ```
-
 ---
 
 <!-- chunk: 动手实验 -->## 动手实验
@@ -772,7 +777,8 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 Deployment 和 Service
 kubectl create deployment discover-test --image=nginx --replicas=3
 kubectl expose deployment discover-test --port=80 --target-port=80 --name=discover-svc
@@ -798,7 +804,6 @@ kubectl scale deployment discover-test --replicas=3
 kubectl get endpoints discover-svc
 # 预期: 恢复为 3 个 Pod IP
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -965,3 +970,5 @@ Service
 - kubernetes-terway-presentation
 
 ```
+
+<!-- risk-assessed -->

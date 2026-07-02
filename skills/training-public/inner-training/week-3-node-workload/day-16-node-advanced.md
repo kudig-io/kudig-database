@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -174,7 +179,8 @@ cordon → drain → 维护 → uncordon
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 查看所有节点标签
 kubectl get nodes --show-labels
 
@@ -282,14 +288,23 @@ kubectl label node node-worker-1 team-
 # node/node-worker-1 labeled
 # node/node-worker-1 unlabeled
 ```
-
 ### 任务 2: 污点与容忍 (45min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 查看节点污点
 kubectl describe node node-worker-1 | grep -A 5 Taints
 
@@ -362,7 +377,6 @@ kubectl taint nodes node-worker-2 test=noexecute:NoExecute-
 # node/node-worker-1 untainted
 # node/node-worker-2 untainted
 ```
-
 ### 任务 3: 节点维护操作 (45min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -370,7 +384,17 @@ kubectl taint nodes node-worker-2 test=noexecute:NoExecute-
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 标记节点不可调度 (cordon)
 kubectl cordon node-worker-1
 
@@ -435,7 +459,6 @@ kubectl get nodes
 # Deployment 管理的 Pod 会在节点恢复后自动调度
 kubectl get pods -A -o wide
 ```
-
 ### 任务 4: ACK 节点运维操作 (30min)
 
 ```bash
@@ -621,3 +644,5 @@ data:
 Day 17 将学习 ACK 节点池的基础概念与创建配置。
 
 ```
+
+<!-- risk-assessed -->

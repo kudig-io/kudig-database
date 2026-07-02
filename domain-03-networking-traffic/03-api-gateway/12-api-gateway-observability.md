@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - API 网关可观测性：指标、日志与链路追踪
@@ -211,6 +216,7 @@ Google SRE 定义的四大黄金信号在 API 网关场景的具体含义：
 ## 3.1 Higress 核心指标
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Higress 指标端点
 # kubectl port-forward svc/higress-gateway 15020:15020 -n higress-system
 # curl http://localhost:15020/stats/prometheus
@@ -251,7 +257,6 @@ envoy_cluster_membership_healthy{
 }
 envoy_cluster_membership_total{...}
 ```
-
 ## 3.2 APISIX 核心指标
 
 ```
@@ -1155,3 +1160,6 @@ data:
 - 11-api-gateway-security-practices
 - 13-api-gateway-performance-benchmarks
 - 14-api-gateway-production-operations
+
+
+<!-- risk-assessed -->

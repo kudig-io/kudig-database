@@ -1,0 +1,420 @@
+---
+title: 工单回复话术：给出方案
+description: 面向阿里云专有云 K8s 运维工单智能体的给出方案话术库，提供 5-8 个不同场景的变体模板。
+summary: 面向阿里云专有云 K8s 运维工单智能体的给出方案话术库，提供 5-8 个不同场景的变体模板。
+category: domain-11-production-operations
+tags:
+- reply-templates
+- solution-proposal
+- ticket-agent
+- ai-agent
+- customer-service
+- alicloud
+- apsara-stack
+- communication
+tier: supporting
+created: '2026-06-29'
+updated: '2026-06-29'
+last_updated: 2026-06
+difficulty: beginner
+reading_level: beginner
+audience:
+- 客服/技术支持
+- AI 工程师
+- SRE
+estimated_read_time: 10min
+intent_queries:
+- 工单给出方案话术
+- 解决方案模板
+- K8s 工单修复方案回复
+trigger_keywords:
+- 给出方案
+- 解决方案
+- 修复步骤
+- 建议执行
+- solution proposal
+prerequisites:
+- ticket-routing-basics
+- customer-service-basics
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+authors:
+- name: KUDIG Team
+  role: contributor
+---
+
+
+
+# 工单回复话术：给出方案
+
+> **适用版本**: 阿里云 / 专有云 K8s 运维工单 | **最后更新**: 2026-06-29
+> **文档定位**: 为工单智能体提供标准化的“给出方案”话术变体，覆盖临时缓解、完整修复、自助修复等场景。
+
+---
+
+## 变量说明
+
+| 变量 | 含义 |
+|:---|:---|
+| `{{user_name}}` | 用户称呼 |
+| `{{issue_summary}}` | 问题摘要 |
+| `{{root_cause}}` | 根因 |
+| `{{command}}` | 建议执行的命令 |
+| `{{mitigation_command}}` | 临时缓解命令 |
+| `{{verification_step}}` | 验证步骤 |
+| `{{impact_scope}}` | 影响范围 |
+| `{{solution_a}}` / `{{solution_b}}` | 可选方案 |
+| `{{step_1}}` / `{{step_2}}` / `{{step_3}}` | 步骤说明 |
+
+---
+
+## 模板 1：临时缓解方案
+
+```
+{{user_name}} 您好，
+
+经初步分析，【{{issue_summary}}】可能的根因是：{{suspected_root_cause}}。
+
+为快速恢复业务，建议先执行以下临时缓解操作：
+
+```bash
+{{mitigation_command}}
+```
+
+执行后请通过以下命令验证：
+
+```bash
+{{verification_step}}
+```
+
+注意：该方案为临时措施，后续我们仍会跟进彻底修复。
+```
+
+**适用场景**：需要快速止血，但根因尚未完全确认。
+
+---
+
+## 模板 2：完整修复方案
+
+```
+{{user_name}} 您好，
+
+问题已定位，根因为：{{root_cause}}。
+
+请按以下步骤执行修复：
+
+1. {{step_1}}
+2. {{step_2}}
+3. {{step_3}}
+
+完整命令如下：
+
+```bash
+{{command}}
+```
+
+修复后请执行以下验证：
+
+```bash
+{{verification_step}}
+```
+
+如有任何异常，请立即反馈。
+```
+
+**适用场景**：根因明确，可提供完整修复步骤。
+
+---
+
+## 模板 3：低风险自助修复
+
+```
+{{user_name}} 您好，
+
+该问题可以通过自助操作修复，具体步骤如下：
+
+```bash
+{{command}}
+```
+
+此操作为低风险变更，主要影响范围为【{{impact_scope}}】。
+修复后请确认业务恢复正常，并将结果反馈给我们。
+```
+
+**适用场景**：操作简单、风险低，适合用户自助执行。
+
+---
+
+## 模板 4：需要审批的修复方案
+
+```
+{{user_name}} 您好，
+
+建议的修复方案为：
+
+```bash
+{{command}}
+```
+
+该方案涉及【{{impact_scope}}】，存在一定风险。
+为保障安全，请您或贵司负责人确认后，我们再指导您执行。
+确认后请回复“同意执行”，谢谢。
+```
+
+**适用场景**：修复操作风险较高，需用户授权。
+
+---
+
+## 模板 5：多个可选方案
+
+```
+{{user_name}} 您好，
+
+针对【{{issue_summary}}】，现有以下处理方案供您选择：
+
+方案 A（推荐）：{{solution_a}}
+- 优点：{{advantage_a}}
+- 风险：{{risk_a}}
+
+方案 B：{{solution_b}}
+- 优点：{{advantage_b}}
+- 风险：{{risk_b}}
+
+请根据业务情况选择合适的方案，我们可进一步提供详细执行步骤。
+```
+
+**适用场景**：存在多种可行方案，需用户决策。
+
+---
+
+## 模板 6：建议升级底座/厂商处理
+
+```
+{{user_name}} 您好，
+
+经分析，【{{issue_summary}}】涉及阿里云/专有云底层组件，
+建议通过阿里云控制台提交工单或联系底座团队处理。
+
+您可以先临时执行以下缓解操作：
+
+```bash
+{{mitigation_command}}
+```
+
+同时，请在阿里云控制台提交工单并附上以下信息：
+1. 集群 ID
+2. 问题发生时间
+3. 受影响资源
+4. 上述命令输出
+
+如有需要，我们也可以协助您整理材料。
+```
+
+**适用场景**：问题超出用户自身集群范围，需底座支持。
+
+---
+
+## 模板 7：需进一步验证的方案
+
+```
+{{user_name}} 您好，
+
+基于当前信息，我们建议尝试以下方案：
+
+```bash
+{{command}}
+```
+
+该方案预期可解决【{{issue_summary}}】，但由于现场环境差异，
+建议先在非核心 Pod 或测试环境验证，确认无误后再应用到生产环境。
+
+验证后请告知结果，我们会继续跟进。
+```
+
+**适用场景**：方案有一定不确定性，需谨慎验证。
+
+---
+
+## 模板 8：已代执行的修复确认
+
+```
+{{user_name}} 您好，
+
+经您授权，我们已执行以下修复操作：
+
+```bash
+{{command}}
+```
+
+修复结果：{{verification_result}}
+
+当前受影响资源状态已恢复正常，请您确认业务是否恢复。
+如有任何异常，请立即反馈。
+```
+
+**适用场景**：工程师已直接执行修复，需向用户确认。
+
+---
+
+## 使用提示
+
+1. 所有命令应包含 namespace、label 等上下文，可直接复制执行。
+2. 涉及写操作必须说明影响范围与回滚方式。
+3. 优先给出风险最低的方案，复杂方案提供分步说明。
+
+---
+
+## 方案选择建议
+
+| 场景 | 推荐模板 |
+|:---|:---|
+| 根因不明但需快速恢复 | 模板 1：临时缓解 |
+| 根因已明确 | 模板 2：完整修复 |
+| 低风险且用户可自助 | 模板 3：低风险自助修复 |
+| 涉及写操作或影响面大 | 模板 4：需要审批 |
+| 存在多种处理方式 | 模板 5：多个可选方案 |
+| 由配置错误引起 | 模板 6：配置变更 |
+| 由已知漏洞引起 | 模板 7：补丁升级 |
+
+## 组合示例
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+
+```
+Step 3（给出方案）:
+根据日志，根因为容器启动时无法连接数据库，导致退出码 1。
+请检查 ConfigMap 中 DB_HOST 配置是否正确，并验证网络连通性：
+
+kubectl get configmap order-service-config -n production -o yaml
+kubectl exec -it <pod-name> -n production -- nc -zv mysql-primary 3306
+```
+
+## 变量渲染示例
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
+```
+{{user_name}} = 王先生
+{{issue_summary}} = 数据库连接失败
+{{root_cause}} = ConfigMap 中 DB_HOST 配置错误
+{{command}} = kubectl edit configmap order-config -n production
+{{verification_step}} = kubectl get pods -n production
+```
+
+渲染后示例：
+
+```
+王先生 您好，
+
+问题已定位，根因为：ConfigMap 中 DB_HOST 配置错误。
+
+请执行以下修复：
+
+```bash
+kubectl edit configmap order-config -n production
+```
+
+修复后请执行以下验证：
+
+```bash
+kubectl get pods -n production
+```
+
+如有任何异常，请立即反馈。
+```
+
+## 模板 8：回滚建议
+
+```
+{{user_name}} 您好，
+
+【{{issue_summary}}】与最近的变更高度相关，建议先回滚以快速恢复业务：
+
+```bash
+{{command}}
+```
+
+回滚后请执行以下验证：
+
+```bash
+{{verification_step}}
+```
+
+我们会继续分析根因并在修复后重新上线。
+```
+
+## 模板 9：文档与知识库指引
+
+```
+{{user_name}} 您好，
+
+该问题属于已知场景，您可以参考以下文档进行自助排查：
+
+- {{doc_link_1}}
+- {{doc_link_2}}
+
+如按文档操作后仍无法解决，请提供相关输出，我们将继续协助。
+```
+
+## 模板使用注意事项
+
+1. 给出方案前需确认根因，避免误导用户。
+2. 命令必须包含完整上下文，可直接复制执行。
+3. 涉及写操作必须说明影响范围与回滚方式。
+4. 多方案场景需标注推荐方案，并给出选择建议。
+
+## 模板 10：需要用户提供账号权限后执行
+
+```
+{{user_name}} 您好，
+
+修复方案已确定，但需要访问您的集群执行以下操作：
+
+```bash
+{{command}}
+```
+
+请提供临时只读运维账号或约定远程协助时间，
+我们会严格遵循最小权限原则并在操作前再次确认。
+```
+
+## 模板 11：观察与等待方案
+
+```
+{{user_name}} 您好，
+
+经分析，【{{issue_summary}}】当前影响较小，建议先观察 {{observation_period}}。
+
+观察期间请留意以下指标：
+
+1. 错误率是否持续上升
+2. 是否有新的告警产生
+3. 业务指标是否受到影响
+
+如观察期内问题加重，请立即联系我们，我们会进一步处理。
+```
+
+## 常见错误与避免
+
+| 错误做法 | 正确做法 |
+|:---|:---|
+| 未确认根因就给出方案 | 先说明分析依据 |
+| 命令缺少上下文 | 包含 namespace、label 等 |
+| 忽略风险说明 | 明确影响范围与回滚方式 |
+| 不提供验证步骤 | 给出可执行的验证命令 |
+
+## Related
+
+- [[domain-11-production-operations/reply-templates/README.md|工单回复话术库索引]]
+- [[domain-11-production-operations/ticket-routing-rules.md|工单分类与路由规则]]
+
+## See Also
+
+- [[domain-11-production-operations/reply-templates/02-information-request.md|请求信息话术]]
+- [[domain-11-production-operations/reply-templates/04-escalation-notice.md|升级通知话术]]

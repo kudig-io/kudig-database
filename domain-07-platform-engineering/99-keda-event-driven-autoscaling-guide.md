@@ -52,6 +52,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[KEDA|KEDA]] 事件驱动自动缩放实践指南
@@ -79,6 +84,7 @@ authors:
 <!-- chunk: 一、KEDA 架构 -->## 一、KEDA 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 KEDA 架构
 ├── KEDA Operator (Deployment)
 │   ├── ScaledObject Controller    ← 监听 ScaledObject CRD
@@ -99,7 +105,6 @@ KEDA 架构
     ├── 云事件: AWS CloudWatch, Azure Monitor
     └── 自定义: External, Metrics API
 ```
-
 ## KEDA vs 原生 HPA
 
 | 能力 | HPA v2 | KEDA |
@@ -119,7 +124,8 @@ KEDA 架构
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
 
@@ -128,15 +134,14 @@ helm install keda kedacore/keda \
   --create-namespace \
   --version 2.16.0
 ```
-
 ## 验证安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n keda
 kubectl get crd | grep keda
 # 应看到: scaledobjects.keda.sh, scaledjobs.keda.sh, triggerauthentications.keda.sh
 ```
-
 ---
 
 <!-- chunk: 三、ScaledObject 核心概念 -->## 三、ScaledObject 核心概念
@@ -482,7 +487,8 @@ Worker 层 (KEDA)
 
 ## 9.1 KEDA 指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ScaledObject 状态
 kubectl get scaledobject -n production
 kubectl describe scaledobject order-processor -n production
@@ -490,7 +496,6 @@ kubectl describe scaledobject order-processor -n production
 # 查看 HPA 状态 (KEDA 通过 Metrics Adapter 创建)
 kubectl get hpa -n production
 ```
-
 ## 9.2 Prometheus 告警
 
 ```yaml
@@ -561,3 +566,5 @@ kubectl get hpa -n production
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

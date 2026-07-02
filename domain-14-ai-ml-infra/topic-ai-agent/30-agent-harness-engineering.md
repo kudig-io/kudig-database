@@ -44,6 +44,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent Harness 工程：从模型包装到生产级 Agent 系统设计
@@ -634,6 +639,7 @@ Vercel 的案例完美诠释了这一原则：将 15 个工具精简为 2 个后
 Agent Harness 的配置通常分为两层：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 SOUL.md（角色定义 + 约束规则）:
   - 你是 K8S 运维诊断专家
   - 你只能使用 kubectl/prometheus/loki 三个工具
@@ -646,7 +652,6 @@ SKILL.md（标准操作流程 SOP）:
   - Node NotReady 诊断流程: kubelet → containerd → disk/memory → dmesg
   - OOM 诊断流程: describe → limits → top pods → oom-killer log
 ```
-
 SOUL.md 定义"你是谁"和"你不能做什么"（Constraints），SKILL.md 定义"你怎么做"（Loop + Tools 编排）。两者结合形成完整的 Harness 配置。
 
 ---
@@ -1081,6 +1086,7 @@ groups:
 ## 8.1 工单诊断智能体 Harness 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 K8S 工单诊断智能体 Harness 全景:
 
 ┌─────────────────────────────────────────────────────┐
@@ -1104,7 +1110,6 @@ K8S 工单诊断智能体 Harness 全景:
 │  → 安全评审 → [人工审批] → 执行 → 验证 → 闭环         │
 └─────────────────────────────────────────────────────┘
 ```
-
 ## 8.2 K8S Harness 完整实现
 
 ```python
@@ -1399,3 +1404,6 @@ L5 - 自进化 Harness
 - 29-agentscope-studio-skill-demo
 - 31-agent-harness-loop-execution
 - 32-agent-harness-tool-engineering
+
+
+<!-- risk-assessed -->

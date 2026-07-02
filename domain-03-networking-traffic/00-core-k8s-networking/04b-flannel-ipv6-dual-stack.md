@@ -65,6 +65,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Flannel IPv6 Dual Stack 支持
@@ -124,14 +129,14 @@ Flannel v0.20+ 支持 IPv6 Dual Stack，允许集群同时使用 IPv4 和 IPv6 �
 
 ### 3.1 Kubernetes 版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubernetes 1.16+ 支持双栈 Service
 kubectl version --short
 
 # 需要启用 --feature-gates=IPv6DualStack=true (k8s 1.21-1.23)
 # Kubernetes 1.24+ 默认启用
 ```
-
 ### 3.2 节点网络要求
 
 ```bash
@@ -216,7 +221,8 @@ data:
 
 ### 5.1 检查节点 CIDR 分配
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点分配的 Pod CIDR（双栈）
 kubectl get nodes -o jsonpath='{range .items[*]} {
   name: {.metadata.name}
@@ -226,7 +232,6 @@ kubectl get nodes -o jsonpath='{range .items[*]} {
 
 # 预期输出包含 IPv4 和 IPv6 CIDR
 ```
-
 ### 5.2 检查 Flannel 子网环境
 
 ```bash
@@ -259,7 +264,8 @@ ip -d link show flannel.1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 IPv4 连通性
 kubectl exec -it <pod-a> -- ping -c 3 <pod-b-ipv4>
 
@@ -270,7 +276,6 @@ kubectl exec -it <pod-a> -- ping -6 -c 3 <pod-b-ipv6>
 kubectl exec -it <pod-a> -- curl -4 http://kubernetes.default.svc.cluster.local
 kubectl exec -it <pod-a> -- curl -6 http://kubernetes.default.svc.cluster.local
 ```
-
 ---
 
 <!-- chunk: 6. 路由表 -->
@@ -312,7 +317,8 @@ bridge -6 fdb show dev flannel.1
 
 ### 7.2 排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 IPv6 模块加载
 lsmod | grep vxlan
 
@@ -328,7 +334,6 @@ tcpdump -i flannel.1 ip6 -nn
 # 5. 检查 ND (Neighbor Discovery)
 ip -6 neigh show dev flannel.1
 ```
-
 ---
 
 <!-- chunk: 8. 已知限制 -->
@@ -407,3 +412,6 @@ net-conf.json: |
 ## Related
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

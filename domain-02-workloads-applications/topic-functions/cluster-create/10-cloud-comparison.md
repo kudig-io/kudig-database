@@ -44,6 +44,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 云厂商方案与 kubeadm 对比
@@ -142,6 +147,7 @@ k8s_versions:
 ## EKS 架构 (AWS)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                     ┌──────────────────┐
                     │   EKS Control Plane │
                     │   (AWS 托管)        │
@@ -156,7 +162,6 @@ k8s_versions:
   │ (EC2/ASG)│      │ (EC2/ASG)│      │ (EC2/ASG)│
   └──────────┘      └──────────┘      └──────────┘
 ```
-
 **kubeadm 在 AWS**: 可用 EKS Anywhere 或手动 kubeadm 搭建
 
 ---
@@ -320,14 +325,14 @@ type EKSAnywhereConfig struct {
 kubeadm 管理的 Worker 节点 (特殊需求节点/GPU 节点)
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加 kubeadm 节点到 EKS
 aws eks update-kubeconfig --name my-cluster
 # 生成 worker join 命令
 kubeadm token create --print-join-command
 # 在 worker 节点执行 join
 ```
-
 ---
 
 ## 迁移: kubeadm → 云厂商托管
@@ -390,3 +395,6 @@ kubeadm token create --print-join-command
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+
+<!-- risk-assessed -->

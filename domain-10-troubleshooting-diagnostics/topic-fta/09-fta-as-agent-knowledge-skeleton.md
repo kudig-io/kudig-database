@@ -48,6 +48,11 @@ component: 09 As Agent Knowledge Skeleton
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第九章：FTA 作为 AI Agent 的知识骨架
@@ -384,6 +389,7 @@ class FTADrivenAgent:
 > - `kubectl edit/patch`：修改运行中的资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ═══════════════════════════════════════════════════════════════
   完整自愈流程 (MTTD: 30s, MTTR: 3min 20s, 总计: 3min 50s)
 ═══════════════════════════════════════════════════════════════
@@ -482,7 +488,6 @@ class FTADrivenAgent:
   → 修复动作 HA-2.3.1 成功率更新: 90% → 91%
   → 生成长期建议: "order-service 近期 OOM 频率上升，建议排查内存泄漏"
 ```
-
 ---
 
 > **导航**: [<< 上一章 - AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) | [下一章 - Agent 编排模式与 FTA 逻辑门映射 >>](./10-agent-orchestration-patterns.md)
@@ -510,3 +515,6 @@ class FTADrivenAgent:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md|10-agent-orchestration-patterns]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
+
+
+<!-- risk-assessed -->

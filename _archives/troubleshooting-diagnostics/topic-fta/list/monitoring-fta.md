@@ -58,6 +58,11 @@ cross_refs:
   label: '结构化排障: 01-monitoring-observability-troubleshooting'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get pods -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示监控组件异常 -->
 
 # 监控与告警异常 FTA 树
@@ -774,3 +779,6 @@ flowchart TD
 | **1.26–1.28** | 稳定 API 为主；kube-state-metrics 需更新以支持新资源类型 |
 | **1.29–1.30** | 新增资源类型的监控（如 Gateway API 资源）需补充 ServiceMonitor |
 | **共性** | 遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"；**必须配置 Watchdog 告警和 DeadMansSnitch 验证告警链路完整性** |
+
+
+<!-- risk-assessed -->

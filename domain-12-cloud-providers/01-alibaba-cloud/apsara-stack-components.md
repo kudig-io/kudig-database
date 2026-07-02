@@ -62,6 +62,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # 阿里云专有云（Apsara Stack）组件与 K8s 运维关联索引
 
@@ -227,7 +232,8 @@ ACK 专有云版由三部分组成：
 
 ## 6. 常用命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群状态
 kubectl get nodes -o wide
 kubectl get pods -n kube-system
@@ -242,7 +248,6 @@ aliyun nas DescribeFileSystems --RegionId cn-stack-xxx --endpoint nas.aliyuncs.c
 aliyun ram GetRole --RoleName KubernetesWorkerRole-xxx
 aliyun actiontrail LookupEvents --LookupAttributes '[{"Key":"EventName","Value":"CreateCluster"}]'
 ```
-
 ### ASO 控制台快速路径
 
 | 场景 | ASO 控制台路径 |
@@ -296,3 +301,6 @@ aliyun actiontrail LookupEvents --LookupAttributes '[{"Key":"EventName","Value":
 - K8s 标准诊断工作流
 - Prometheus 排障指南
 - RRSA 配置指南
+
+
+<!-- risk-assessed -->

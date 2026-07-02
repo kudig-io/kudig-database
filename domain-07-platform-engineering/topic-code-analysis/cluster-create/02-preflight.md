@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 预检流程 (kubeadm preflight)
@@ -343,7 +348,17 @@ kubeadm init --ignore-preflight-errors=all
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 关闭 swap
 swapoff -a
 sed -i '/swap/d' /etc/fstab
@@ -374,7 +389,6 @@ systemctl restart containerd
 apt-get install -y kubeadm=1.28.0-1.1 kubelet=1.28.0-1.1 kubectl=1.28.0-1.1
 systemctl enable kubelet
 ```
-
 ### 场景 3: 检查预检结果
 
 ```bash
@@ -415,7 +429,17 @@ nodeRegistration:
 > - `sysctl -w`：实时修改内核参数，全局生效
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # [ERROR Swap]: running with swap on is not supported
 swapoff -a
 sed -i '/swap/d' /etc/fstab
@@ -438,13 +462,22 @@ sysctl -w net.bridge.bridge-nf-call-iptables=1
 # [ERROR NumCPU]: the number of available CPUs 1 is less than the required 2
 kubeadm init --ignore-preflight-errors=NumCPU
 ```
-
 ### 完整系统准备脚本
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 完整的 Kubernetes 节点准备脚本 (Ubuntu/Debian)
 # 解决所有 kubeadm preflight 检查
@@ -506,7 +539,6 @@ echo "sysctl ip_forward: $(sysctl -n net.ipv4.ip_forward)"
 echo "swap: $(free -h | grep Swap | awk '{print $2}')"
 echo "=== 节点准备完成 ==="
 ```
-
 ### 预检输出详解
 
 ```bash
@@ -683,3 +715,5 @@ func (c DirAvailableCheck) Check() error {
 - [[entities/containerd.md|containerd]]
 
 ```
+
+<!-- risk-assessed -->

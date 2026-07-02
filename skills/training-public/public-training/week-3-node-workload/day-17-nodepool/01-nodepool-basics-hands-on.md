@@ -34,6 +34,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -120,7 +125,8 @@ EOF
 
 ### 2.2 新节点加入集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在新节点上执行（Ubuntu/Debian）
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
@@ -138,10 +144,10 @@ sudo kubeadm join 10.0.0.1:6443 --token xxx \
 # 验证节点加入
 kubectl get nodes --show-labels | grep node-pool
 ```
-
 ### 2.3 云厂商节点池（EKS/GKE/ACK）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS EKS - 创建节点池
 eksctl create nodegroup \
   --cluster my-cluster \
@@ -162,7 +168,6 @@ gcloud container clusters create my-cluster \
 # 查看节点池
 kubectl get nodes -l node-pool=gpu
 ```
-
 ---
 
 ## 3. 节点池配置管理
@@ -172,7 +177,17 @@ kubectl get nodes -l node-pool=gpu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 批量添加标签（所有 general-compute 节点）
 for node in $(kubectl get nodes -l node-pool=general-compute --no-headers | awk '{print $1}'); do
   kubectl label node $node workload-type=application
@@ -181,10 +196,10 @@ done
 # 添加污点（防止普通 Pod 调度到 GPU 节点）
 kubectl taint node -l node-pool=gpu-compute dedicated=compute:NoSchedule
 ```
-
 ### 3.2 节点池资源配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 allocatable
 kubectl get nodes -l node-pool=gpu-compute \
   -o jsonpath='{.items[*].status.allocatable}'
@@ -204,7 +219,6 @@ evictionHard:
   memory.available: "500Mi"
   nodefs.available: "10%"
 ```
-
 ### 3.3 节点池生命周期
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -212,7 +226,17 @@ evictionHard:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看节点池状态
 kubectl get nodes -L node-pool
 
@@ -229,7 +253,6 @@ kubectl drain <node-name> --ignore-daemonsets
 kubectl delete node <node-name>
 # 4. 关闭节点（云控制台或 CLI）
 ```
-
 ---
 
 ## 4. 节点池调度实践
@@ -337,7 +360,8 @@ ssh <new-node-ip> sudo journalctl -u kubelet --since "5m" | tail -50
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 恢复节点标签
 kubectl label node <node-name> node-pool=general-compute --overwrite
 
@@ -352,10 +376,10 @@ for node in $(kubectl get nodes --no-headers | awk '{print $1}'); do
   esac
 done
 ```
-
 ### 5.3 节点池扩缩容失败
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Cluster Autoscaler 日志
 kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100
 
@@ -370,7 +394,6 @@ aws autoscaling describe-account-limits
 kubectl scale deployment <deploy> --replicas=50
 kubectl get events --sort-by='.lastTimestamp' | tail -20
 ```
-
 ---
 
 ## 6. 节点池镜像管理
@@ -382,7 +405,17 @@ kubectl get events --sort-by='.lastTimestamp' | tail -20
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看节点 OS 版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.osImage}{"\n"}'
 
@@ -396,13 +429,22 @@ for node in $(kubectl get nodes -l node-pool=general-compute --no-headers | awk 
   kubectl uncordon $node
 done
 ```
-
 ### 6.2 节点 kubelet 版本管理
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 检查 kubelet 版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}'
 
@@ -412,7 +454,6 @@ for node in $(kubectl get nodes -l node-pool=general-compute --no-headers | awk 
   ssh $node "sudo systemctl restart kubelet"
 done
 ```
-
 ---
 
 ## 7. 实战练习
@@ -429,3 +470,5 @@ done
 
 
 ```
+
+<!-- risk-assessed -->

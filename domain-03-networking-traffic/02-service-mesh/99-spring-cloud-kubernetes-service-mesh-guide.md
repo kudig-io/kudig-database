@@ -68,6 +68,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Spring Cloud [[Kubernetes|Kubernetes]] 与服务网格集成指南
@@ -520,7 +525,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 $ kubectl get pods -n production -o wide
 NAME                             READY   STATUS    RESTARTS   AGE   IP           NODE
 order-service-7b9f8c6d4f-abc12   2/2     Running   0          5m    10.0.1.10   node-1
@@ -540,7 +546,6 @@ order-service-7b9f8c6d4f-ghi56.production              Kubernetes  SYNCED SYNCED
 user-service-5c8d7e9f1a-jkl78.production               Kubernetes  SYNCED SYNCED SYNCED SYNCED SYNCED istiod-6f9c6b7b4c-2xk8j     1.29.0
 user-service-5c8d7e9f1a-mno90.production               Kubernetes  SYNCED SYNCED SYNCED SYNCED SYNCED istiod-6f9c6b7b4c-5mnpq     1.29.0
 ```
-
 ---
 
 <!-- chunk: 七、混合模式最佳实践 -->## 七、混合模式最佳实践
@@ -1075,7 +1080,8 @@ Phase_4_生产验证:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== 1. Pod 状态检查 ==="
@@ -1120,7 +1126,6 @@ echo ""
 echo "=== 10. Resilience4j 状态 ==="
 kubectl exec -n production deploy/order-service -c order-service -- curl -s http://localhost:8081/actuator/health | jq '.components.circuitBreakers'
 ```
-
 ---
 
 <!-- chunk: 十四、Spring Boot 3.x + Istio 集成常见问题 -->## 十四、Spring Boot 3.x + Istio 集成常见问题
@@ -1208,3 +1213,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+
+
+<!-- risk-assessed -->

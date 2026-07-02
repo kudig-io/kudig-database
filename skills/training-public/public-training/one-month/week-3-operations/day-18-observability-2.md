@@ -42,6 +42,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -162,7 +167,8 @@ Prometheus ──> Alertmanager ──> Route ──> Receiver (钉钉/企微/Sl
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 添加 Grafana Helm repo
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
@@ -254,10 +260,10 @@ kubectl get svc -n monitoring -l app=loki
 # NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 # loki    ClusterIP   10.96.200.50    <none>        3100/TCP   3m
 ```
-
 ### 任务 2: 配置 Grafana Loki 数据源 (30min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 访问 Grafana
 kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 
@@ -318,14 +324,14 @@ EOF
 # 聚合查询: 按Pod统计错误数
 # sum(count_over_time({app="nginx"} |= "error" [1h])) by (pod)
 ```
-
 ### 任务 3: Alertmanager 路由配置 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 查看当前 Alertmanager 配置
 kubectl get secret -n monitoring \
   alertmanager-prometheus-kube-prometheus-alertmanager \
@@ -443,13 +449,22 @@ kubectl rollout restart statefulset -n monitoring \
 # Step 6: 验证 Alertmanager 运行状态
 kubectl get pods -n monitoring -l app.kubernetes.io/name=alertmanager
 ```
-
 ### 任务 4: 日志查询实践 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 生成测试日志
 kubectl run log-test --image=busybox --restart=Never -- sh -c 'for i in $(seq 1 1000); do echo "[$(date '+%Y-%m-%d %H:%M:%S')] Log message $i - status: $([ $((i % 10)) -eq 0 ] && echo ERROR || echo INFO)"; sleep 1; done'
 
@@ -485,7 +500,6 @@ kubectl get pod log-test
 # Step 4: 清理
 kubectl delete pod log-test --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ## 配置参考
@@ -726,3 +740,5 @@ amtool silence expire <silence-id>
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

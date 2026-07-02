@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -229,7 +234,8 @@ Allocatable:     CPU=3.7, Memory=13884Mi
 
 ### 任务 1: 节点信息查看与分析 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点基本信息
 kubectl get nodes -o wide
 
@@ -273,10 +279,10 @@ kubectl get nodes --show-labels
 kubectl get nodes -l node-role=system
 kubectl get nodes -l workload=frontend
 ```
-
 ### 任务 2: 节点 Conditions 监控 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的 Conditions
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{range .status.conditions[*]}  {.type}={.status} ({.reason}){"\n"}{end}{"\n"}{end}'
 
@@ -310,10 +316,10 @@ kubectl get nodes -o json | jq -r '.items[] | {
   arch: .status.nodeInfo.architecture
 }'
 ```
-
 ### 任务 3: 节点资源分配分析 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源分配详情
 kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 
@@ -363,10 +369,10 @@ kubectl top pods -A --sort-by=cpu | head -20
 # kube-system   coredns-7d8f9c6b5-xk2lm     12m          128Mi
 # default       frontend-app-7d9f8c6b5-xk   85m          256Mi
 ```
-
 ### 任务 4: 节点核心进程检查 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kubectl debug 进入节点（K8s 1.18+）
 kubectl debug node/<node-name> -it --image=busybox
 
@@ -393,7 +399,6 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20
 # 检查 kubelet 版本和配置
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig'
 ```
-
 ### 任务 5: 节点标签和污点管理 (30min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -401,7 +406,17 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig'
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看节点标签
 kubectl get nodes --show-labels
 
@@ -464,7 +479,6 @@ EOF
 kubectl apply -f labeled-deployment.yaml
 kubectl get pods -l app=frontend -o wide
 ```
-
 ---
 
 ## 配置参考
@@ -508,7 +522,8 @@ evictionPressureTransitionPeriod: "5m"
 
 ### 节点状态检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-health-check.sh - 节点健康状态检查脚本
 
@@ -552,7 +567,6 @@ echo "========================================"
 echo "  Health Check Complete"
 echo "========================================"
 ```
-
 ---
 
 ## 常见问题
@@ -600,3 +614,5 @@ echo "========================================"
 - [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
 
 ```
+
+<!-- risk-assessed -->

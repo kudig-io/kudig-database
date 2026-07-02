@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - 调度与抢占事件
@@ -566,13 +571,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kubectl patch 移除特定 gate
 kubectl patch pod gated-pod --type=json -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
 
 # 使用 client-go 或自定义 controller 自动化管理
 ```
-
 ## 典型事件消息
 ```yaml
 Type:    Normal
@@ -924,7 +929,8 @@ Message: Failed to bind pod: node "worker-node-99" not found
 <!-- chunk: 🔍 跨场景排查建议 -->## 🔍 跨场景排查建议
 
 ## 1. 大规模 Pod 调度失败排查
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 统计所有 Pending Pod 的失败原因分布
 kubectl get pods -A --field-selector status.phase=Pending -o json | \
   jq -r '.items[] | [.metadata.namespace, .metadata.name] | @tsv' | \
@@ -937,9 +943,9 @@ kubectl describe nodes | grep -A5 "Allocated resources" | grep -E "cpu|memory" |
   awk '{print $2, $3}' | sed 's/[()]//g' | \
   awk '{sum+=$1; count++} END {print "平均资源使用率:", sum/count "%"}'
 ```
-
 ## 2. 调度延迟分析
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 计算 Pod 调度耗时(创建到调度成功)
 kubectl get events --field-selector involvedObject.name=<pod-name> \
   --sort-by='.firstTimestamp' -o json | \
@@ -948,9 +954,9 @@ kubectl get events --field-selector involvedObject.name=<pod-name> \
     .[-1].lastTimestamp as $end | 
     "\($start) -> \($end)"'
 ```
-
 ## 3. 节点调度能力评估
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 计算每个节点还能调度多少 Pod(基于 CPU)
 kubectl get nodes -o json | jq -r '.items[] | 
   .metadata.name as $name | 
@@ -958,7 +964,6 @@ kubectl get nodes -o json | jq -r '.items[] |
   (.status.capacity.cpu | tonumber) as $capacity | 
   "\($name): 可用 CPU \($allocatable) cores, 容量 \($capacity) cores"'
 ```
-
 ---
 
 <!-- chunk: 📚 相关文档交叉引用 -->## 📚 相关文档交叉引用
@@ -1011,3 +1016,6 @@ kubectl get nodes -o json | jq -r '.items[] |
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -58,6 +58,11 @@ cross_refs:
   label: '故障树: pod'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - Pod 与容器生命周期事件
@@ -212,13 +217,13 @@ Pod 生命周期阶段               产生的主要事件
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. [用户删除] kubectl delete pod xxx --grace-period=30
 2. [kubelet]   → Killing             # 发送 SIGTERM
 3. [等待 30s]
 4. [kubelet]   → Killing             # (可选) 发送 SIGKILL (如超时)
 5. [kubelet]   → ExceededGracePeriod # (可选) 如容器未终止
 ```
-
 ---
 
 <!-- chunk: 三、容器状态与事件映射 -->## 三、容器状态与事件映射
@@ -275,7 +280,8 @@ Kubernetes 中容器有三种状态，每种状态对应不同的事件触发时
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -285,7 +291,6 @@ Events:
   Normal  Created  30s   kubelet  Created container nginx
   Normal  Started  29s   kubelet  Started container nginx
 ```
-
 ## 影响面说明
 
 - **用户影响**: 无，这是正常操作的一部分
@@ -297,7 +302,8 @@ Events:
 
 **该事件本身不需要排查，但如果看到 `Created` 但没有后续 `Started` 事件，说明容器启动阶段失败。**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 状态
 kubectl get pod my-app-7d5bc-xyz12 -o wide
 
@@ -307,7 +313,6 @@ kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.containerStatuses[*]}'
 # 检查是否有后续失败事件
 kubectl get events --field-selector involvedObject.name=my-app-7d5bc-xyz12,type=Warning
 ```
-
 ## 解决建议
 
 | 问题场景 | 可能原因 | 解决方案 |
@@ -343,7 +348,8 @@ kubectl get events --field-selector involvedObject.name=my-app-7d5bc-xyz12,type=
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -352,7 +358,6 @@ Events:
   Normal  Created  30s   kubelet  Created container app
   Normal  Started  29s   kubelet  Started container app
 ```
-
 ## 影响面说明
 
 - **用户影响**: 无，容器已启动，等待健康检查通过
@@ -362,7 +367,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查容器是否真正运行中
 kubectl get pod my-app -o jsonpath='{.status.containerStatuses[?(@.name=="app")].state}'
 
@@ -378,7 +384,6 @@ kubectl logs my-app -c app --previous
 # 检查健康检查状态
 kubectl get pod my-app -o jsonpath='{.status.containerStatuses[?(@.name=="app")]}'
 ```
-
 ## 解决建议
 
 | 问题场景 | 可能原因 | 解决方案 |
@@ -419,7 +424,8 @@ kubelet 正在向容器发送终止信号，开始优雅终止流程。这是容
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -428,7 +434,6 @@ Events:
   Normal  Killing  10s   kubelet  Stopping container app
   Normal  Killing  10s   kubelet  Killing container with id docker://abc123:Need to kill Pod
 ```
-
 **message 格式变体**:
 - `"Stopping container <container-name>"` - 标准终止
 - `"Killing container with id <cri>://<container-id>:<reason>"` - 带原因的终止
@@ -450,7 +455,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的删除原因
 kubectl get pod my-app -o jsonpath='{.status.reason}' 
 # 可能的值: Evicted, NodeLost, UnexpectedAdmissionError 等
@@ -470,7 +476,6 @@ kubectl get events --field-selector involvedObject.name=my-app,reason=Evicted
 # 查看容器退出码和原因
 kubectl get pod my-app -o jsonpath='{.status.containerStatuses[*].lastState.terminated}'
 ```
-
 ## 解决建议
 
 | 问题场景 | 可能原因 | 解决方案 |
@@ -520,7 +525,8 @@ kubectl get pod my-app -o jsonpath='{.status.containerStatuses[*].lastState.term
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -536,20 +542,19 @@ Events:
   Warning  BackOff  4m20s (x2 over 4m50s) kubelet  Back-off restarting failed container app in pod my-app-7d5bc-xyz12_default(abc-123)
   Warning  BackOff  3m50s (x3 over 4m50s) kubelet  Back-off restarting failed container app in pod my-app-7d5bc-xyz12_default(abc-123)
 ```
-
 **message 格式**:
 ```
 Back-off restarting failed container <container-name> in pod <pod-name>_<namespace>(<pod-uid>)
 ```
 
 **Pod 状态显示**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pod my-app-7d5bc-xyz12
 
 NAME                 READY   STATUS             RESTARTS      AGE
 my-app-7d5bc-xyz12   0/1     CrashLoopBackOff   5 (2m ago)    10m
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - 服务完全不可用，Pod 无法正常运行
@@ -561,7 +566,8 @@ my-app-7d5bc-xyz12   0/1     CrashLoopBackOff   5 (2m ago)    10m
 
 **1. 查看容器日志（最关键）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前容器日志
 kubectl logs my-app-7d5bc-xyz12 -c app
 
@@ -574,10 +580,10 @@ kubectl logs my-app-7d5bc-xyz12 -c app --previous --tail=20
 # 持续监控日志（如果容器短暂运行）
 kubectl logs my-app-7d5bc-xyz12 -c app -f
 ```
-
 **2. 检查容器退出码**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器上一次终止的退出码和原因
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.containerStatuses[?(@.name=="app")].lastState.terminated}'
 
@@ -592,10 +598,10 @@ kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.containerStatuses[?(@.n
 # 139 - 段错误 (SIGSEGV)
 # 143 - 容器被 SIGTERM 终止
 ```
-
 **3. 检查容器配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器 command 和 args
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.containers[?(@.name=="app")].command}'
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.containers[?(@.name=="app")].args}'
@@ -609,20 +615,20 @@ kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.containers[?(@.name=="app
 # 查看资源限制
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.containers[?(@.name=="app")].resources}'
 ```
-
 **4. 检查 PostStart 钩子**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果配置了 PostStart 钩子，检查是否失败
 kubectl get events --field-selector involvedObject.name=my-app-7d5bc-xyz12,reason=FailedPostStartHook
 
 # 查看 PostStart 钩子配置
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.containers[?(@.name=="app")].lifecycle.postStart}'
 ```
-
 **5. 快速诊断脚本**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 POD="my-app-7d5bc-xyz12"
 CONTAINER="app"
@@ -650,7 +656,6 @@ echo ""
 echo "=== 上一个容器日志（最后 30 行）==="
 kubectl logs $POD -c $CONTAINER --previous --tail=30
 ```
-
 ## 解决建议
 
 | 退出码/原因 | 常见场景 | 排查方向 | 解决方案 |
@@ -672,30 +677,30 @@ kubectl logs $POD -c $CONTAINER --previous --tail=30
 **典型案例解决方案**:
 
 **案例 1: 应用配置文件路径错误**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 现象: 容器日志显示 "config file not found"
 # 解决: 检查 ConfigMap 挂载路径和应用读取路径是否一致
 
 kubectl get pod my-app -o jsonpath='{.spec.containers[0].volumeMounts}'
 kubectl get pod my-app -o jsonpath='{.spec.volumes}'
 ```
-
 **案例 2: 数据库密码错误**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 现象: 容器日志显示 "authentication failed"
 # 解决: 检查 Secret 内容是否正确
 
 kubectl get secret db-password -o jsonpath='{.data.password}' | base64 -d
 ```
-
 **案例 3: 端口冲突**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 现象: 容器日志显示 "address already in use"
 # 解决: 检查同一个 Pod 中是否有多个容器监听相同端口
 
 kubectl get pod my-app -o jsonpath='{.spec.containers[*].ports}'
 ```
-
 ---
 
 ## 5.2 `Failed` - 容器创建或启动失败
@@ -726,7 +731,8 @@ kubectl get pod my-app -o jsonpath='{.spec.containers[*].ports}'
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -736,7 +742,6 @@ Events:
   Warning  Failed   10s   kubelet  Error: failed to start container "app": Error response from daemon: OCI runtime create failed: ...
   Warning  Failed   10s   kubelet  Failed to create container: rpc error: code = Unknown desc = failed to start container ...
 ```
-
 **message 格式变体（常见）**:
 
 | message 前缀 | 含义 | 典型场景 |
@@ -762,17 +767,18 @@ Events:
 
 **1. 查看完整错误消息**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 事件，重点看 Failed 事件的 message
 kubectl describe pod my-app-7d5bc-xyz12 | grep -A 5 "Failed"
 
 # 查看容器状态中的错误信息
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.containerStatuses[?(@.name=="app")].state.waiting.message}'
 ```
-
 **2. 检查容器配置引用**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ConfigMap 是否存在
 kubectl get pod my-app -o jsonpath='{.spec.volumes[*].configMap.name}' | xargs -n1 kubectl get configmap
 
@@ -782,10 +788,10 @@ kubectl get pod my-app -o jsonpath='{.spec.volumes[*].secret.secretName}' | xarg
 # 检查环境变量引用的 ConfigMap/Secret
 kubectl get pod my-app -o jsonpath='{.spec.containers[*].env[?(@.valueFrom)]}' | jq .
 ```
-
 **3. 检查安全上下文**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 级别安全上下文
 kubectl get pod my-app -o jsonpath='{.spec.securityContext}' | jq .
 
@@ -795,10 +801,10 @@ kubectl get pod my-app -o jsonpath='{.spec.containers[?(@.name=="app")].security
 # 检查是否有 PodSecurityPolicy 限制（已废弃，v1.25+）
 kubectl get psp
 ```
-
 **4. 检查节点容器运行时日志**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果是 containerd
 ssh <node> "sudo journalctl -u containerd -n 100 | grep my-app"
 
@@ -808,7 +814,6 @@ ssh <node> "sudo journalctl -u docker -n 100 | grep my-app"
 # 如果是 CRI-O
 ssh <node> "sudo journalctl -u crio -n 100 | grep my-app"
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 问题原因 | 排查方向 | 解决方案 |
@@ -831,7 +836,8 @@ ssh <node> "sudo journalctl -u crio -n 100 | grep my-app"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 错误: Error: CreateContainerConfigError: configmap "app-config" not found
 # 排查:
 kubectl get configmap app-config -n <namespace>
@@ -839,7 +845,6 @@ kubectl get configmap app-config -n <namespace>
 # 解决: 创建 ConfigMap
 kubectl create configmap app-config --from-literal=APP_ENV=production
 ```
-
 **案例 2: CreateContainerConfigError - Secret key 不存在**
 ```yaml
 # 错误: Error: CreateContainerConfigError: couldn't find key "DB_PASSWORD" in Secret "db-secret"
@@ -895,7 +900,8 @@ securityContext:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -904,7 +910,6 @@ Events:
   Normal   Killing             45s   kubelet  Stopping container app
   Warning  ExceededGracePeriod 15s   kubelet  Container app exceeded grace period
 ```
-
 **message 格式**:
 ```
 Container <container-name> exceeded grace period
@@ -916,12 +921,12 @@ Container <container-name> exceeded grace period
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 T+0s   [User] kubectl delete pod my-app --grace-period=30
 T+0s   [kubelet] Killing (发送 SIGTERM)
 T+30s  [kubelet] ExceededGracePeriod (容器未退出，发送 SIGKILL)
 T+30s  [容器] 进程被强制终止
 ```
-
 ## 影响面说明
 
 - **用户影响**: **中** - 容器被强制终止，可能导致数据丢失或状态不一致
@@ -934,7 +939,17 @@ T+30s  [容器] 进程被强制终止
 
 ## 排查建议
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 Pod 的优雅终止期设置
 kubectl get pod my-app -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 
@@ -955,7 +970,6 @@ kill -TERM $PID  # 发送 SIGTERM
 sleep 5
 kill -0 $PID && echo "Process still running" || echo "Process terminated"
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 | 代码示例 |
@@ -1123,7 +1137,8 @@ kubelet 无法创建 Pod 沙箱（Sandbox），导致 Pod 无法启动。**Pod �
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1133,7 +1148,6 @@ Events:
   Warning  FailedCreatePodSandBox  10s   kubelet  Failed to create pod sandbox: rpc error: code = Unknown desc = failed to reserve sandbox name "my-app_default_abc-123_0": name "my-app_default_abc-123_0" is reserved for "def456"
   Warning  FailedCreatePodSandBox  10s   kubelet  Failed to create pod sandbox: rpc error: code = Unknown desc = failed to create containerd task: too many open files
 ```
-
 **message 格式变体**:
 
 | message 关键词 | 根本原因 | 典型触发场景 |
@@ -1158,7 +1172,8 @@ Events:
 
 **1. 查看完整错误信息**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 事件
 kubectl describe pod my-app-7d5bc-xyz12 | grep -A 5 "FailedCreatePodSandBox"
 
@@ -1169,10 +1184,10 @@ kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.phase}'
 # 查看 Pod 的 Conditions
 kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.conditions}' | jq .
 ```
-
 **2. 检查节点上的 CNI 配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 登录到 Pod 所在节点
 NODE=$(kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.spec.nodeName}')
 ssh $NODE
@@ -1192,10 +1207,10 @@ sudo ls -la /opt/cni/bin/
 # 检查 CNI 插件日志（Calico 示例）
 sudo journalctl -u calico-node -n 50
 ```
-
 **3. 检查容器运行时状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 containerd 状态
 sudo systemctl status containerd
 
@@ -1206,7 +1221,6 @@ sudo journalctl -u containerd -n 100 | grep -i "sandbox|error"
 sudo crictl version
 sudo crictl pods | head
 ```
-
 **4. 检查节点资源**
 
 ```bash
@@ -1228,7 +1242,8 @@ ps aux | wc -l
 
 **5. 检查 pause 容器镜像**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubelet 配置的 pause 镜像
 ps aux | grep kubelet | grep pod-infra-container-image
 
@@ -1239,7 +1254,6 @@ ps aux | grep kubelet | grep pod-infra-container-image
 # 手动拉取 pause 镜像测试
 sudo crictl pull registry.k8s.io/pause:3.9
 ```
-
 **6. 检查网络配置**
 
 ```bash
@@ -1276,7 +1290,8 @@ sudo modprobe br_netfilter
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 错误: failed to setup network for sandbox: plugin type="calico" failed
 
 # 排查:
@@ -1289,13 +1304,13 @@ kubectl logs -n kube-system calico-node-xyz12 -c calico-node
 # 解决: 重启 calico-node DaemonSet
 kubectl rollout restart daemonset/calico-node -n kube-system
 ```
-
 **案例 2: 沙箱名称冲突**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 错误: failed to reserve sandbox name "my-app_default_abc-123_0": name is reserved
 
 # 排查:
@@ -1308,14 +1323,23 @@ sudo crictl rmsandbox <sandbox-id>
 # 验证
 kubectl delete pod my-app-7d5bc-xyz12  # 让控制器重建 Pod
 ```
-
 **案例 3: 文件描述符耗尽**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `sysctl -w`：实时修改内核参数，全局生效
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 错误: too many open files
 
 # 排查:
@@ -1340,7 +1364,6 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl restart containerd
 ```
-
 **案例 4: IP forwarding 未开启**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -1385,7 +1408,8 @@ kubelet 无法从容器运行时获取 Pod 沙箱的状态信息。这通常表�
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1394,7 +1418,6 @@ Events:
   Warning  FailedPodSandBoxStatus   10s   kubelet  Failed to get pod sandbox status: rpc error: code = Unavailable desc = connection error: ...
   Warning  FailedPodSandBoxStatus   10s   kubelet  Failed to get pod sandbox status: rpc error: code = DeadlineExceeded desc = context deadline exceeded
 ```
-
 ## 影响面说明
 
 - **用户影响**: 中 - Pod 可能仍在运行，但 kubelet 无法管理
@@ -1404,7 +1427,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查容器运行时状态
 ssh <node>
 sudo systemctl status containerd
@@ -1421,7 +1445,6 @@ top
 df -h
 
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 |
@@ -1454,7 +1477,8 @@ kubelet 检测到 Pod 的沙箱配置发生变化（如网络模式、IPC 模式
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1462,7 +1486,6 @@ Events:
   ----    ------         ----  ----     -------
   Normal  SandboxChanged 10s   kubelet  Pod sandbox changed, it will be killed and re-created.
 ```
-
 ## 影响面说明
 
 - **用户影响**: 中 - Pod 中所有容器会重启
@@ -1472,7 +1495,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 这是正常的运维操作，通常不需要特别处理
 # 如果频繁出现，检查:
 
@@ -1485,7 +1509,6 @@ kubectl get pods -n kube-system | grep cni
 # 3. 容器运行时是否频繁重启
 ssh <node> "systemctl status containerd"
 ```
-
 ## 解决建议
 
 | 问题场景 | 可能原因 | 解决方案 |
@@ -1554,7 +1577,8 @@ Events:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1564,7 +1588,6 @@ Events:
   Warning  FailedPostStartHook   30s   kubelet  Exec lifecycle hook ([/app/init.sh]) for Container "app" in Pod "my-app_default(abc-123)" failed - error: command '/app/init.sh' exited with 1: ...
   Warning  FailedPostStartHook   30s   kubelet  PostStart handler failed: HTTPGet http://localhost:8080/_poststart: dial tcp 127.0.0.1:8080: connect: connection refused
 ```
-
 **message 格式变体**:
 
 | 钩子类型 | message 格式 | 示例 |
@@ -1584,7 +1607,8 @@ Events:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 PostStart 钩子配置
 kubectl get pod my-app -o jsonpath='{.spec.containers[?(@.name=="app")].lifecycle.postStart}'
 
@@ -1603,7 +1627,6 @@ kubectl logs my-app -c app
 kubectl exec my-app -c app -- curl -v http://localhost:8080/_poststart
 
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 排查方法 | 解决方案 |
@@ -1717,7 +1740,8 @@ lifecycle:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1726,7 +1750,6 @@ Events:
   Normal   Killing            30s   kubelet  Stopping container app
   Warning  FailedPreStopHook  30s   kubelet  PreStop lifecycle hook ([/app/cleanup.sh]) for Container "app" in Pod "my-app_default(abc-123)" failed - error: command '/app/cleanup.sh' exited with 1: ...
 ```
-
 ## 影响面说明
 
 - **用户影响**: 低 - 容器仍会正常终止
@@ -1736,7 +1759,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 PreStop 钩子配置
 kubectl get pod my-app -o jsonpath='{.spec.containers[?(@.name=="app")].lifecycle.preStop}'
 
@@ -1747,7 +1771,6 @@ kubectl logs my-app -c app --previous
 # PreStop 钩子必须在 terminationGracePeriodSeconds 内完成
 kubectl get pod my-app -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 |
@@ -1818,7 +1841,8 @@ Pod 被 kubelet 的**驱逐管理器（Eviction Manager）**主动终止，通�
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-app-7d5bc-xyz12
 
 Events:
@@ -1828,7 +1852,6 @@ Events:
   Warning  Evicted  30s   kubelet  The node had condition: [DiskPressure].
   Warning  Evicted  30s   kubelet  Pod ephemeral local storage usage exceeds the total limit of containers 1Gi.
 ```
-
 **message 格式变体**:
 
 | 驱逐原因 | message 关键词 | 说明 |
@@ -1840,7 +1863,8 @@ Events:
 | **临时存储超限** | `ephemeral local storage usage exceeds` | Pod 使用的临时存储超过限制 |
 
 **Pod 状态变化**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pod my-app-7d5bc-xyz12
 
 NAME                 READY   STATUS    RESTARTS   AGE
@@ -1853,7 +1877,6 @@ Evicted
 $ kubectl get pod my-app-7d5bc-xyz12 -o jsonpath='{.status.message}'
 The node was low on resource: memory.
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - Pod 被强制终止，服务中断
@@ -1867,7 +1890,8 @@ The node was low on resource: memory.
 
 **1. 查看 Pod 的驱逐原因**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 状态中的详细驱逐原因
 kubectl get pod my-app -o jsonpath='{.status.message}'
 
@@ -1877,10 +1901,10 @@ kubectl top pod my-app
 # 查看 Pod 的资源配置
 kubectl get pod my-app -o jsonpath='{.spec.containers[*].resources}'
 ```
-
 **2. 查看节点资源状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源使用情况
 kubectl top node <node-name>
 
@@ -1891,17 +1915,16 @@ kubectl describe node <node-name> | grep -A 5 "Conditions:"
 # 查看节点的驱逐阈值配置
 kubectl get --raw "/api/v1/nodes/<node-name>/proxy/configz" | jq .kubeletconfig.evictionHard
 ```
-
 **3. 查看节点上的所有被驱逐 Pod**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群中所有 Evicted 状态的 Pod
 kubectl get pods -A --field-selector status.phase=Failed | grep Evicted
 
 # 按节点统计驱逐的 Pod 数量
 kubectl get pods -A -o json | jq -r '.items[] | select(.status.reason=="Evicted") | .spec.nodeName' | sort | uniq -c
 ```
-
 **4. 登录节点检查资源**
 
 ```bash
@@ -1928,7 +1951,8 @@ ps aux | wc -l
 
 **5. 分析驱逐历史**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点最近的驱逐事件
 kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name=<node-name>,reason=EvictionThresholdMet
 
@@ -1936,7 +1960,6 @@ kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name
 ssh <node> "sudo journalctl -u kubelet -n 200 | grep -i evict"
 
 ```
-
 ## 解决建议
 
 | 驱逐原因 | 根本原因 | 排查方法 | 短期解决方案 | 长期解决方案 |
@@ -1960,7 +1983,17 @@ ssh <node> "sudo journalctl -u kubelet -n 200 | grep -i evict"
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 现象: 节点频繁驱逐 BestEffort Pod
 # 排查:
 kubectl describe node <node> | grep -A 10 "Allocated resources"
@@ -1998,9 +2031,9 @@ spec:
 
 # 3. 添加更多节点或增加节点内存
 ```
-
 **案例 2: 磁盘压力导致驱逐**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: 节点 DiskPressure，大量 Pod 被驱逐
 # 排查:
 ssh <node>
@@ -2038,13 +2071,13 @@ volumes:
     emptyDir:
       sizeLimit: "1Gi"
 ```
-
 **案例 3: 临时存储超限**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: Pod 消息显示 "ephemeral local storage usage exceeds the total limit"
 # 排查:
 kubectl get pod my-app -o jsonpath='{.spec.containers[*].resources.limits}'
@@ -2079,13 +2112,13 @@ spec:
 
 # 3. 清理应用临时文件（在代码中定期清理）
 ```
-
 **清理被驱逐的 Pod**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 被驱逐的 Pod 不会自动删除，会占用 etcd 空间，需要手动清理
 
 # 删除当前命名空间的所有 Evicted Pod
@@ -2123,7 +2156,6 @@ spec:
                   xargs -n2 sh -c 'kubectl delete pod -n $0 $1 --ignore-not-found'
           restartPolicy: OnFailure
 ```
-
 ---
 
 ## 8.2 `Preempting` - 抢占低优先级容器
@@ -2171,7 +2203,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的优先级配置
 kubectl get pod <pod> -o jsonpath='{.spec.priorityClassName}'
 
@@ -2181,7 +2214,6 @@ kubectl get priorityclass
 # 查看哪些 Pod 被抢占
 kubectl get events --field-selector reason=Preempting -A
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 |
@@ -2221,18 +2253,28 @@ spec:
 ## 案例 1: CrashLoopBackOff 完整排查
 
 **现象**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods
 NAME                 READY   STATUS             RESTARTS      AGE
 web-app-7d5bc-xyz    0/1     CrashLoopBackOff   5 (2m ago)    10m
 ```
-
 **排查步骤**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 Pod 事件
 kubectl describe pod web-app-7d5bc-xyz | grep -A 10 "Events:"
 # 输出: Warning BackOff Back-off restarting failed container
@@ -2257,23 +2299,23 @@ kubectl edit deployment web-app
 kubectl rollout status deployment web-app
 kubectl get pods
 ```
-
 ## 案例 2: FailedCreatePodSandBox 网络问题
 
 **现象**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods
 NAME                 READY   STATUS    RESTARTS   AGE
 api-server-abc123    0/1     Pending   0          5m
 ```
-
 **排查步骤**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 事件
 kubectl describe pod api-server-abc123 | grep -A 5 "FailedCreatePodSandBox"
 # 输出: failed to setup network for sandbox: plugin type="calico" failed
@@ -2302,7 +2344,6 @@ kubectl rollout restart daemonset/calico-node -n kube-system
 kubectl delete pod api-server-abc123  # 让控制器重建
 kubectl get pods
 ```
-
 ---
 
 <!-- chunk: 十、生产环境最佳实践 -->## 十、生产环境最佳实践
@@ -2435,7 +2476,8 @@ evictionSoftGracePeriod:
 ## 10.4 快速诊断工具
 
 **Pod 生命周期事件诊断脚本**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-lifecycle-diagnosis.sh
 
@@ -2482,7 +2524,6 @@ if [ -n "$NODE" ]; then
   kubectl top node $NODE 2>/dev/null || echo "metrics-server 未安装"
 fi
 ```
-
 **使用方法**:
 ```bash
 chmod +x pod-lifecycle-diagnosis.sh
@@ -2536,3 +2577,5 @@ chmod +x pod-lifecycle-diagnosis.sh
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

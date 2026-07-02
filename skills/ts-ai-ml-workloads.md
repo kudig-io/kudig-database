@@ -38,6 +38,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI/ML 工作负载排查
@@ -71,7 +76,8 @@ prerequisites:
 
 #### AI/ML 工作负载状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GPU 资源状态检查
 echo "=== GPU 资源状态检查 ==="
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.nvidia\.com/gpu}{"\n"}{end}'
@@ -94,7 +100,6 @@ echo "=== 模型服务状态 ==="
 kubectl get services -l app=model-serving --all-namespaces
 kubectl get deployments -l app=model-serving --all-namespaces
 ```
-
 ---
 
 ### 02 Kubeflow Troubleshooting
@@ -213,3 +218,6 @@ MPI Operator 基于 Kubernetes CRD 实现 MPI 作业调度，其核心架构：
 - [[cert-manager]] — cert-manager
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
+
+
+<!-- risk-assessed -->

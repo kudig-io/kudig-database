@@ -70,6 +70,11 @@ related_docs:
   desc: Helm 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 101 - 包管理与应用分发工具 (Package Management & [[Distribution|Distribution]])
@@ -80,6 +85,7 @@ related_docs:
 ## 包管理工具生态架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                      Kubernetes 应用包管理与分发生态                                  │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -147,7 +153,6 @@ related_docs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 核心工具对比矩阵 -->
 ## 核心工具对比矩阵
 
@@ -168,6 +173,7 @@ related_docs:
 ### 1. Chart 仓库管理架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Helm Chart 仓库架构                                    │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -199,13 +205,13 @@ related_docs:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2. Chart 仓库操作大全
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==================== 仓库管理 ====================
 
 # 添加公共仓库
@@ -314,7 +320,6 @@ helm dependency build ./mychart
 # 列出依赖
 helm dependency list ./mychart
 ```
-
 ### 3. 生产级 Values 文件策略
 
 ```yaml
@@ -643,7 +648,17 @@ secrets:
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ==================== 部署管理 ====================
 
 # 安装 Release
@@ -753,7 +768,6 @@ helm diff rollback myapp 2 -n production
 # 查看与指定版本的差异
 helm diff revision myapp 2 3 -n production
 ```
-
 ### 5. Helm 模板高级技巧
 
 ```yaml
@@ -1302,7 +1316,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==================== 构建与预览 ====================
 
 # 构建并输出 YAML
@@ -1367,7 +1382,6 @@ kustomize build overlays/prod | kubeval --strict
 # 使用 kubeconform 验证
 kustomize build overlays/prod | kubeconform -strict -summary
 ```
-
 <!-- chunk: Operator 开发模式 -->
 ## Operator 开发模式
 
@@ -1945,7 +1959,8 @@ spec:
 
 ### 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # package-troubleshoot.sh - 包管理诊断脚本
 
@@ -1980,7 +1995,6 @@ if [ -d "overlays/$NAMESPACE" ]; then
     kustomize build overlays/$NAMESPACE 2>&1 | head -50
 fi
 ```
-
 <!-- chunk: 速查表 -->
 ## 速查表
 
@@ -1990,7 +2004,17 @@ fi
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 仓库管理
 helm repo add NAME URL          # 添加仓库
 helm repo update                # 更新索引
@@ -2014,13 +2038,13 @@ helm status NAME                # 查看状态
 helm history NAME               # 查看历史
 helm get values NAME            # 获取 Values
 ```
-
 ### Kustomize 命令速查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 构建
 kustomize build DIR             # 构建 manifests
 kubectl apply -k DIR            # 构建并应用
@@ -2031,7 +2055,6 @@ kustomize edit set image        # 设置镜像
 kustomize edit add resource     # 添加资源
 kustomize edit set namespace    # 设置命名空间
 ```
-
 <!-- chunk: 最佳实践清单 -->
 ## 最佳实践清单
 
@@ -2106,3 +2129,5 @@ kustomize edit set namespace    # 设置命名空间
 - 07-helm-advanced-operations
 
 ```
+
+<!-- risk-assessed -->

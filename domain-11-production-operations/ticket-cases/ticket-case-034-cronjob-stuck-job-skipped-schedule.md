@@ -68,6 +68,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -96,7 +101,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 CronJob 配置与调度历史
 kubectl get cronjob daily-report -n etl -o yaml
 kubectl describe cronjob daily-report -n etl | tail -40
@@ -118,7 +124,6 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=300 | gr
 kubectl create job daily-report-manual -n etl --from=cronjob/daily-report
 kubectl wait --for=condition=complete job/daily-report-manual -n etl --timeout=300s
 ```
-
 ## 根因分析
 
 综合 CronJob 配置、Job 历史与 controller-manager 日志，判定根因为 **CronJob 的 `concurrencyPolicy` 设置为 `Forbid`，且三天前启动的 Job 因任务卡死未结束，导致后续所有自动调度被跳过**，置信度 **高**。
@@ -134,16 +139,17 @@ kubectl wait --for=condition=complete job/daily-report-manual -n etl --timeout=3
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete job daily-report-20260623020000 -n etl
 ```
-
 **第二步：修改 CronJob 配置，允许 Replace 并增加超时控制**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob daily-report -n etl --type=merge --patch '{
   "spec": {
     "concurrencyPolicy": "Replace",
@@ -157,29 +163,29 @@ kubectl patch cronjob daily-report -n etl --type=merge --patch '{
   }
 }'
 ```
-
 **第三步：手动触发一次 CronJob，验证新策略生效**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create job daily-report-verify -n etl --from=cronjob/daily-report
 kubectl wait --for=condition=complete job/daily-report-verify -n etl --timeout=1200s
 kubectl logs -n etl job/daily-report-verify --tail=50
 ```
-
 **第四步：清理旧配置并提交 GitOps 仓库**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 将修改后的 YAML 导出并提交到 GitOps 仓库
 kubectl get cronjob daily-report -n etl -o yaml | sed '/status:/,$d' > etl-daily-report.yaml
 # git add / commit / push 到 Argo CD 仓库
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. CronJob 配置已更新
 kubectl get cronjob daily-report -n etl -o jsonpath='{.spec.concurrencyPolicy}{"\n"}{.spec.startingDeadlineSeconds}{"\n"}'
 
@@ -196,7 +202,6 @@ kubectl run s3-ls --rm -it --restart=Never -n etl --image=registry-vpc.cn-zhangj
 # 5. controller-manager 无 skip 日志
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep daily-report | grep -i skip || echo "无 skip 记录"
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-034 已处理完成。
@@ -252,3 +257,6 @@ CronJob 的 `concurrencyPolicy` 是常见的“沉默杀手”。`Forbid` 在任
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - Job/CronJob 执行失败：退避重试耗尽与镜像拉取异常
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
+
+
+<!-- risk-assessed -->

@@ -56,6 +56,11 @@ cross_refs:
   label: '故障树: deployment'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Backstage|Backstage]] 部署与配置
@@ -1357,7 +1362,8 @@ spec:
 
 ## 5.2 数据库备份与恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # scripts/postgres-backup.sh
 # PostgreSQL 备份脚本
@@ -1411,7 +1417,6 @@ done
 
 echo "✅ 备份流程完成"
 ```
-
 ---
 
 <!-- chunk: 6. 认证配置：OAuth 与 OIDC -->## 6. 认证配置：OAuth 与 OIDC
@@ -2591,7 +2596,8 @@ spec:
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 蓝绿切换脚本
 
@@ -2632,7 +2638,6 @@ rollback_to_blue() {
   echo "✅ 已回滚到蓝色部署"
 }
 ```
-
 ---
 
 <!-- chunk: 13. 故障排查指南 -->## 13. 故障排查指南
@@ -2642,7 +2647,8 @@ rollback_to_blue() {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 常见故障排查命令
 
 <!-- chunk: 1. 检查 Backstage Pod 状态 -->## 1. 检查 Backstage Pod 状态
@@ -2679,13 +2685,13 @@ kubectl top pods -n backstage
 kubectl exec -it backstage-xxx -n backstage -- \
   curl -s localhost:7007/metrics | grep http_request
 ```
-
 ## 13.2 健康检查脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # scripts/backstage-health-check.sh
 # Backstage 全面健康检查脚本
@@ -2739,7 +2745,6 @@ if [ "${FAIL}" -gt 0 ]; then
   exit 1
 fi
 ```
-
 ---
 
 <!-- chunk: 总结 | Summary -->## 总结 | Summary
@@ -2792,3 +2797,6 @@ Backstage 的成功部署需要关注以下关键领域：
 - 02-idp-design-principles
 - 04-backstage-catalog-techdocs
 - 05-backstage-scaffolder-templates
+
+
+<!-- risk-assessed -->

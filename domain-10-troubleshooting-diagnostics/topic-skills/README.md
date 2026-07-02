@@ -45,6 +45,11 @@ skill_name: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # topic-skills — 工单智能体 [[Kubernetes|Kubernetes]] 诊断 [[SKILL|Skill]] 库
@@ -400,6 +405,7 @@ bash teardown.sh                # 清理
 ### skill-set/k8s-node-notready/
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 skill-set/k8s-node-notready/
 ├── SKILL.md                        # 入口: Skill 定义 + Agent 执行指令
 ├── reference/
@@ -419,7 +425,6 @@ skill-set/k8s-node-notready/
     ├── root-cause-map.yaml         # 根因决策树数据
     └── escalation-template.md      # 升级消息模板
 ```
-
 ---
 
 ## 9. 后续规划
@@ -466,3 +471,5 @@ skill-set/k8s-node-notready/
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

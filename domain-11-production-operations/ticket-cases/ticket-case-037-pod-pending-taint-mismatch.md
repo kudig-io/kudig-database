@@ -66,6 +66,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -91,7 +96,8 @@ relationships:
 
 按“先 Pod 事件、后节点污点、再工作负载配置”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 状态与事件
 kubectl get pod -n ai-inference -o wide
 kubectl describe pod -n ai-inference llm-inference-7d9c4f8b5-xk2z9 | grep -A 30 Events
@@ -117,7 +123,6 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "ll
 kubectl get resourcequota -n ai-inference
 kubectl describe resourcequota -n ai-inference
 ```
-
 ## 根因分析
 
 GPU 节点池在创建时被平台团队打上了 `dedicated=gpu-inference:NoSchedule` 的 taint，用于隔离 GPU 推理负载与普通计算负载。客户提交的 `llm-inference` Deployment 中只配置了 `nodeSelector: {node-type: gpu-inference}`，但未配置对应的 `tolerations`，因此 scheduler 无法将 Pod 调度到 GPU 节点。
@@ -144,7 +149,8 @@ GPU 节点池在创建时被平台团队打上了 `dedicated=gpu-inference:NoSch
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment llm-inference -n ai-inference --type=json -p='[
   {
     "op": "add",
@@ -160,23 +166,31 @@ kubectl patch deployment llm-inference -n ai-inference --type=json -p='[
   }
 ]'
 ```
-
 **第二步：等待滚动更新完成**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment llm-inference -n ai-inference --timeout=300s
 ```
-
 **第三步：如果业务急需，可临时移除节点 taint（不推荐长期保留）**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 仅在紧急测试时使用，生产环境应优先使用 toleration
 # kubectl taint nodes -l node-type=gpu-inference dedicated=gpu-inference:NoSchedule-
 ```
-
 **第四步：将 toleration 固化到 GitOps 仓库**
 
 ```bash
@@ -201,7 +215,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 Pod 已调度并 Running
 kubectl get pod -n ai-inference -o wide
 
@@ -221,7 +236,6 @@ kubectl run scheduler-test --rm -it --restart=Never -n default --image=registry.
 # 6. 检查调度事件无 FailedScheduling
 kubectl get events -n ai-inference --field-selector reason=FailedScheduling --sort-by='.lastTimestamp' | tail -10
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-037 已处理完成。
@@ -285,3 +299,6 @@ kubectl get events -n ai-inference --field-selector reason=FailedScheduling --so
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

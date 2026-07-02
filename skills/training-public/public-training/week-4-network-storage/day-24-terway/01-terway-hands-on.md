@@ -40,6 +40,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 24: Terway 网络实操
@@ -80,7 +85,8 @@ Pod → Terway CNI → Veth Pair → Host Bridge → ENI (云网络)
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Alibaba Cloud ACK
 # 集群创建时选择 Terway 网络插件
 
@@ -92,7 +98,6 @@ kubectl apply -f terway.yaml
 # 或使用 Helm
 helm install terway -n kube-system ./charts/terway
 ```
-
 ### 2.2 Terway 配置
 
 ```yaml
@@ -114,7 +119,8 @@ helm install terway -n kube-system ./charts/terway
 
 ### 3.1 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Terway Pod
 kubectl get pods -n kube-system -l app=terway
 
@@ -124,13 +130,13 @@ kubectl logs -n kube-system -l app=terway --tail=50
 # 查看节点网络接口
 ip addr | grep -E "veth|eth"
 ```
-
 ### 3.2 Pod 网络问题排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 是否获得 ENI IP
 kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.tencentvpc~2Fpod-ip}'
 
@@ -145,10 +151,10 @@ kubectl exec -it <pod-name> -- ping -c 3 <other-pod-ip>
 # 4. 检查安全组
 # 在云控制台检查 Pod 所属安全组是否允许流量
 ```
-
 ### 3.3 Terway 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Pod 无法分配 IP
 # 检查 Terway Agent 日志
 kubectl logs -n kube-system -l app=terway --tail=100 | grep -i "ip allocation"
@@ -164,7 +170,6 @@ ip route show
 # 3. 安全组不生效
 # Terway ENI 模式需要正确配置安全组规则
 ```
-
 ---
 
 ## 4. Terway 网络策略
@@ -216,7 +221,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Terway ENI 模式
 cat /etc/terway/config.json | grep ENIMode
 
@@ -226,14 +232,14 @@ kubectl get node <node-name> -o jsonpath='{.metadata.annotations.cni~2F Alibaba~
 # 测试跨节点 Pod 通信
 kubectl exec -it <pod-a> -- ping -c 3 <pod-b-ip>
 ```
-
 ---
 
 ## 5. Terway 与 Service
 
 ### 5.1 Terway 模式下 Service 访问
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Terway ENI 模式下 Service 流量路径
 # Pod → Terway CNI → Host Bridge → ENI → 云负载均衡 → Service
 
@@ -243,7 +249,6 @@ kubectl get endpoints <service-name>
 # 检查 kube-proxy 状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 ```
-
 ---
 
 ## 6. Terway 性能优化
@@ -382,3 +387,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 
 ```
+
+<!-- risk-assessed -->

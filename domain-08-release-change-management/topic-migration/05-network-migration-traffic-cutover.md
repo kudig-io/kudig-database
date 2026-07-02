@@ -42,6 +42,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 05 - 网络迁移与流量切换
@@ -116,7 +121,8 @@ k8s_versions:
 
 ## 1.2 迁移注意事项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认自建集群 CNI 类型
 kubectl --context=source-cluster get pods -n kube-system | grep -iE "(calico|flannel|cilium|weave)"
 
@@ -133,7 +139,6 @@ kubectl --context=source-cluster get bgppeers 2>/dev/null
 # 这意味着在迁移期间，如果通过 VPN/CEN 互联
 # ACK Pod 可以直接访问自建集群的 Service ClusterIP（需路由打通）
 ```
-
 ---
 
 <!-- chunk: 2. Service 与负载均衡迁移 -->## 2. Service 与负载均衡迁移
@@ -233,7 +238,8 @@ spec:
 
 ## 3.2 nginx-ingress 迁移（最常见）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自建集群和 ACK 都使用 nginx-ingress 时，Ingress 资源几乎无需改动
 
 # 确认 ACK nginx-ingress 已安装
@@ -250,13 +256,13 @@ echo "ACK Ingress IP: $ACK_INGRESS_IP"
 curl -H "Host: api.example.com" http://$ACK_INGRESS_IP/health
 # 预期: 返回应用健康检查响应
 ```
-
 ## 3.3 TLS 证书迁移
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 导出自建集群的 TLS Secret
 kubectl --context=source-cluster get secret tls-cert -n production -o yaml | kubectl neat > tls-secret.yaml
 
@@ -286,7 +292,6 @@ spec:
           class: nginx
 EOF
 ```
-
 ---
 
 <!-- chunk: 4. DNS 灰度切流 -->## 4. DNS 灰度切流
@@ -467,7 +472,8 @@ spec:
 
 ## 5.2 批量转换脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出所有 Calico NetworkPolicy 并转换
 kubectl --context=source-cluster get networkpolicies -A -o yaml > source-netpol.yaml
 
@@ -478,12 +484,12 @@ kubectl --context=ack-cluster apply -f source-netpol.yaml
 kubectl --context=source-cluster get globalnetworkpolicies -o yaml 2>/dev/null > calico-gnp.yaml
 # 需要逐条手动转换为 K8s NetworkPolicy（每个 Namespace 一份）
 ```
-
 ---
 
 <!-- chunk: 6. 网络连通性验证 -->## 6. 网络连通性验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # verify-network.sh
 # ACK 网络全面验证
@@ -519,14 +525,14 @@ kubectl --context=$ACK_CONTEXT exec net-test-1 -- ping -c 3 <source-cluster-pod-
 # 清理
 kubectl --context=$ACK_CONTEXT delete pod net-test-1 net-test-2
 ```
-
 ---
 
 <!-- chunk: 7. 流量回滚方案 -->## 7. 流量回滚方案
 
 ## 7.1 紧急回滚 SOP
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # emergency-rollback.sh
 # 紧急将流量切回源集群
@@ -564,7 +570,6 @@ echo "kubectl --context=source-cluster logs -n ingress-nginx deploy/ingress-ngin
 echo ""
 echo "回滚执行完成，请持续观察源集群状态"
 ```
-
 ## 7.2 DNS TTL 建议
 
 | 阶段 | TTL 设置 | 说明 |
@@ -620,3 +625,6 @@ echo "回滚执行完成，请持续观察源集群状态"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

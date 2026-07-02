@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI平台可观测性体系
@@ -695,7 +700,8 @@ data:
 ### 7.2 常见问题排查
 
 **GPU监控无数据**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查DCGM Exporter状态
 kubectl get pods -n ai-monitoring -l app=dcgm-exporter
 kubectl logs -n ai-monitoring -l app=dcgm-exporter
@@ -704,9 +710,9 @@ kubectl logs -n ai-monitoring -l app=dcgm-exporter
 kubectl port-forward svc/dcgm-exporter 9400:9400
 curl http://localhost:9400/metrics | grep DCGM_FI
 ```
-
 **推理延迟告警频繁**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查推理服务资源使用
 kubectl top pods -n ai-inference -l app=vllm
 kubectl describe nodes | grep -A 10 "Allocated resources"
@@ -714,16 +720,15 @@ kubectl describe nodes | grep -A 10 "Allocated resources"
 # 分析慢查询日志
 kubectl logs -n ai-inference -l app=vllm --since=1h | grep "slow"
 ```
-
 **成本超出预算**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看实时成本
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/namespaces/ai-training/pods
 
 # 分析资源浪费
 kubectl get pods -n ai-training -o wide | grep -E "(Pending|Evicted)"
 ```
-
 ---
 
 ---
@@ -755,3 +760,6 @@ kubectl get pods -n ai-training -o wide | grep -E "(Pending|Evicted)"
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+
+
+<!-- risk-assessed -->

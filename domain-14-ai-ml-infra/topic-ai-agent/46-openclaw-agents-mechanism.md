@@ -33,6 +33,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw AGENTS.md 机制深度解析
@@ -135,6 +140,7 @@ AGENTS.md 定义的状态机:
 ### 1.3 五阶段工作流
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 诊断工作流五阶段与资源分配:
 
 Phase 1: 信息采集（30% Token 预算）
@@ -159,7 +165,6 @@ Phase 5: 输出与闭环（10% Token 预算）
      格式: 现象→根因→修复→验证→预防
      记忆: 关键发现写入 memory/
 ```
-
 ---
 
 ## 2. Harness Engineering 映射
@@ -192,6 +197,7 @@ AGENTS.md     │  ●   │       │    ◐    │         │   ◐    │   
 ### 2.3 反漂移检测机制
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 反漂移检测（Anti-Drift Detection）:
 
 问题: Agent 在 DIAGNOSE 阶段可能陷入循环
@@ -214,7 +220,6 @@ AGENTS.md     │  ●   │       │    ◐    │         │   ◐    │   
       raise DriftDetected("连续3次相同操作")
     command_history.append(h)
 ```
-
 ---
 
 ## 3. K8S 运维实战案例
@@ -261,6 +266,7 @@ Agent 确认:
 ### 3.3 案例：异常处理 — 信息不足
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Phase 1 信息采集:
   kubectl get pods -n kube-system | grep coredns
   → 错误: "Error from server (Forbidden): pods is forbidden"
@@ -275,7 +281,6 @@ Phase 1 信息采集:
 
 状态: DIAGNOSE → ASK_INFO → 等待用户补充 → 恢复到 DIAGNOSE
 ```
-
 ---
 
 ## 4. 配置协作机制
@@ -498,3 +503,6 @@ AGENTS.md 配置验证:
 - 45-openclaw-user-mechanism
 - 47-openclaw-tools-mechanism
 - 48-openclaw-skill-mechanism
+
+
+<!-- risk-assessed -->

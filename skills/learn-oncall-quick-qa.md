@@ -37,6 +37,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单数字人快速问答 - On-Call 速查
@@ -48,6 +53,7 @@ prerequisites:
 ## 数字人定位
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【使用场景】
 
 本速查用于"工单数字人"（Ticket Digital Human）。
@@ -66,7 +72,6 @@ prerequisites:
 ✗ 不给危险操作建议 → "生产环境执行前一定要备份！"
 ✗ 不替代人工判断 → "这个需要人工确认"
 ```
-
 ---
 
 ## 一、Pod 问题（最高频）
@@ -74,6 +79,7 @@ prerequisites:
 ### Q1: Pod 一直 Pending 怎么办？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【回复】
 
 "Pod 处于 Pending，说明调度器无法分配节点。排查步骤：
@@ -107,10 +113,10 @@ kubectl describe node <node-name> | grep Taints
 还有问题吗？
 "
 ```
-
 ### Q2: Pod 一直 CrashLoopBackOff 怎么办？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【回复】
 
 "CrashLoopBackOff 意味着容器持续崩溃重启。排查步骤：
@@ -149,10 +155,10 @@ kubectl describe pod <pod-name> | grep -A10 "Container Config"
 还有问题吗？
 "
 ```
-
 ### Q3: Pod ImagePullBackOff 怎么办？
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【回复】
 
 "ImagePullBackOff 说明镜像拉取失败。排查步骤：
@@ -179,7 +185,6 @@ kubectl create secret docker-registry my-secret \
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
-
 然后在 Pod spec 里添加：
 imagePullSecrets:
 - name: my-secret
@@ -204,7 +209,7 @@ kubectl exec -it <pod-name> -- ping <registry-host>
 还有问题吗？
 "
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### Q4: Pod Evicted 怎么办？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -303,7 +308,7 @@ NetworkPolicy 可能阻止了流量。
 还有问题吗？
 "
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ### Q6: DNS 解析失败怎么办？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -401,7 +406,7 @@ Ingress Controller 必须在 Running 状态。
 还有问题吗？
 "
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### Q8: NetworkPolicy 导致无法访问怎么办？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -457,8 +462,17 @@ spec:
 
 还有问题吗？
 "
-```
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
 
+```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ---
 
 ## 三、资源问题（高频）
@@ -512,8 +526,17 @@ kubectl describe limitrange -n <namespace>
 
 还有问题吗？
 "
-```
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
 
+```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ### Q10: Pod OOMKilled 怎么办？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -664,7 +687,7 @@ kubectl describe pod <pod-name> | grep -A10 "Affinity"
 还有问题吗？
 "
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ---
 
 ## 四、节点问题（中频）
@@ -723,8 +746,17 @@ kubectl get nodes
 
 还有问题吗？
 "
-```
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
 
+```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ### Q14: 节点上有个 Pod 一直无法删除怎么办？
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -773,10 +805,19 @@ kubectl exec -it <pod-name> -n kube-system -- etcdctl endpoint health
 3. 是否已尝试正常删除
 
 强制删除命令：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ```
-
 如果还不行再查 Finalizers："
 
 还有问题吗？
@@ -836,7 +877,7 @@ CSI driver 应该在 Running 状态。
 还有问题吗？
 "
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ### Q16: Pod 无法挂载 Volume 怎么办？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -881,7 +922,7 @@ kubectl describe pvc <pvc-name> | grep -A5 "Mounted By"
 还有问题吗？
 "
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ---
 
 ## 六、安全问题（中频）
@@ -1010,7 +1051,7 @@ Secret 只是 base64 编码，不是加密！
 还有问题吗？
 "
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ---
 
 ## 七、应用问题（中频）
@@ -1134,7 +1175,7 @@ kubectl get nodes -o jsonpath='{.items[*].status.conditions[?(@.type=="Ready")].
 还有问题吗？
 "
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ---
 
 ## 八、命令速查
@@ -1164,7 +1205,6 @@ kubectl top pods -n <namespace>
 kubectl describe resourcequota -n <namespace>
 kubectl describe limitrange -n <namespace>
 ```
-
 ### 快速修复命令
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -1172,7 +1212,17 @@ kubectl describe limitrange -n <namespace>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重启 Deployment
 kubectl rollout restart deployment <name> -n <namespace>
 
@@ -1191,12 +1241,12 @@ kubectl delete pods -n <namespace> --field-selector=status.phase=Evicted
 # 重启 CoreDNS
 kubectl rollout restart deployment/coredns -n kube-system
 ```
-
 ---
 
 ## 九、升级人工触发条件
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【需要升级人工的情况】
 
 1. 生产环境问题（P0/P1 级别）
@@ -1219,7 +1269,6 @@ kubectl rollout restart deployment/coredns -n kube-system
 • 复现步骤：什么时候开始出问题
 • 已尝试的解决方案：什么命令/方法
 ```
-
 ---
 
 ## 十、场景化对眸
@@ -1250,3 +1299,6 @@ kubectl rollout restart deployment/coredns -n kube-system
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

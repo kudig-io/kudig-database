@@ -16,6 +16,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skill: NetworkPolicy 不生效的诊断和修复
@@ -33,7 +38,8 @@ NetworkPolicy 已创建但流量未被正确拦截或放行，表现为应用间
 ## 诊断步骤
 
 ### 步骤1: 确认 CNI 是否支持 NetworkPolicy
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l k8s-app=calico-node
 kubectl get pods -n kube-system -l k8s-app=cilium
 kubectl get pods -n kube-system -l app=flannel
@@ -41,14 +47,16 @@ kubectl get pods -n kube-system -l app=flannel
 > 如果无法执行，替代方案：询问集群管理员使用的 CNI 插件名称和版本。若使用 Flannel，则 NetworkPolicy 完全不生效。
 
 ### 步骤2: 检查策略规则与标签匹配
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n <namespace> -o yaml
 kubectl get pods -n <namespace> --show-labels
 ```
 > 重点核对 `podSelector` 是否匹配目标 Pod 标签，`namespaceSelector` 匹配的是来源命名空间的标签而非名称。
 
 ### 步骤3: 验证端口、协议与方向配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe networkpolicy <policy-name> -n <namespace>
 ```
 > 确认 `policyTypes` 包含所需方向（Ingress/Egress），端口协议是否为 TCP/UDP/SCTP，并检查 egress 中是否放行了 CoreDNS 的 53/UDP 和 53/TCP。
@@ -74,3 +82,6 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

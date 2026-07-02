@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 基础设施即代码（IaC）
@@ -146,6 +151,7 @@ Cluster API 是 Kubernetes 官方的声明式集群生命周期管理项目（�
 2026 年的最佳实践通常采用三层 IaC 架构：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Layer 3: 应用配置（Application Config）
     └── Helm / Kustomize / Plain YAML（由 ArgoCD / Flux 管理）
     
@@ -155,7 +161,6 @@ Layer 2: 平台资源（Platform Resources）
 Layer 1: 基础设施（Foundation Infrastructure）
     └── Terraform / Pulumi / Cluster API（创建 VPC、K8s 集群、节点池）
 ```
-
 ### State 管理与协作
 
 - **Terraform Cloud / Enterprise**：提供远程 State 存储、状态锁定、RBAC 和审批工作流
@@ -220,7 +225,8 @@ Layer 1: 基础设施（Foundation Infrastructure）
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # --- Terraform ---
 # 初始化工作区
 terraform init
@@ -289,7 +295,6 @@ tfsec .
 # Snyk IaC 扫描
 snyk iac test
 ```
-
 ## 交叉引用
 
 - [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — GitOps 与 IaC 的分层协作
@@ -308,3 +313,6 @@ snyk iac test
 
 ## Related
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

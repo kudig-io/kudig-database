@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubeadm reset 源码分析
@@ -469,7 +474,8 @@ kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景：etcd 成员移除超时（网络延迟或 etcd 响应慢）
 kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # [reset] Failed to remove etcd member: context deadline exceeded
@@ -487,7 +493,6 @@ kubeadm reset --force --skip-phases=remove-etcd-member  # ⚠️ 清理节点所
 etcdctl member list
 etcdctl member remove <member-id> --endpoints=https://cp1:2379  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
-
 ### 配置文件指定非默认证书目录
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -523,7 +528,17 @@ kubeadm reset --force --skip-phases=remove-etcd-member  # ⚠️ 清理节点所
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubeadm reset --force  # ⚠️ 清理节点所有 K8s 配置
 # ... reset 输出 ...
 
@@ -538,7 +553,6 @@ rm -rf /etc/systemd/system/kubelet.service.d/  # ⚠️ 删除系统/数据文�
 systemctl daemon-reload
 
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -570,3 +584,5 @@ systemctl daemon-reload
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ```
+
+<!-- risk-assessed -->

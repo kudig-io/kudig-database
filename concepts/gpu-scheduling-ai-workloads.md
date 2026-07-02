@@ -33,6 +33,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # GPU 调度与 AI 工作负载
@@ -203,14 +208,14 @@ data:
     mig-strategy: mixed  # mixed | single | none
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点上的 MIG 设备
 kubectl describe node gpu-node-1 | grep -A 20 "Allocated resources"
 # nvidia.com/gpu:          0/1
 # nvidia.com/mig-1g.5gb:   3/7
 # nvidia.com/mig-2g.10gb:  1/3
 ```
-
 ```yaml
 # Pod 请求 MIG 资源
 apiVersion: v1
@@ -560,3 +565,6 @@ spec:
 
 - [[entities/kserve.md|KServe (entities)]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+
+
+<!-- risk-assessed -->

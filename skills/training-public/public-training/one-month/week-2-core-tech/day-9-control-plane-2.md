@@ -38,6 +38,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 9: 控制平面 - Scheduler + Controller Manager
@@ -130,7 +135,8 @@ related:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Pod 并观察调度事件
 kubectl run scheduler-test --image=nginx:alpine
 kubectl describe pod scheduler-test | grep -A20 Events
@@ -144,7 +150,6 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100
 # 清理
 kubectl delete pod scheduler-test
 ```
-
 ### 任务 2: nodeSelector 实践 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -152,7 +157,8 @@ kubectl delete pod scheduler-test
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点标签
 kubectl get nodes --show-labels
 
@@ -182,14 +188,14 @@ kubectl get pod nodeselector-test -o wide
 kubectl delete pod nodeselector-test
 kubectl label node <node-name> disktype-
 ```
-
 ### 任务 3: Affinity 实践 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Node Affinity
 cat > node-affinity.yaml << 'EOF'
 apiVersion: v1
@@ -262,7 +268,6 @@ kubectl get pods -l app=web-spread -o wide
 kubectl delete -f node-affinity.yaml
 kubectl delete -f pod-antiaffinity.yaml
 ```
-
 ### 任务 4: Taints 和 Tolerations (30min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -270,7 +275,17 @@ kubectl delete -f pod-antiaffinity.yaml
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看节点的 Taints
 kubectl describe nodes | grep Taints
 
@@ -305,14 +320,14 @@ kubectl get pod toleration-test -o wide
 kubectl delete pod taint-test toleration-test
 kubectl taint nodes <node-name> dedicated-
 ```
-
 ### 任务 5: Controller 行为观察 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl create deployment controller-test --image=nginx:alpine --replicas=3
 
@@ -333,7 +348,6 @@ kubectl get replicaset -l app=controller-test
 # 清理
 kubectl delete deployment controller-test
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -381,3 +395,6 @@ kubectl delete deployment controller-test
 ## 明日预告
 
 Day 10 将学习工作负载资源: Deployment、[[StatefulSet|StatefulSet]]、[[DaemonSet|DaemonSet]]，理解不同应用类型的管理方式。
+
+
+<!-- risk-assessed -->

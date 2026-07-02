@@ -63,6 +63,11 @@ related_topics:
 - troubleshooting
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 集群删除逻辑 — 基于官方代码分析
@@ -328,7 +333,17 @@ func (r *Runner) Run(args []string) error {
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     集群删除方式                                      │
 ├──────────────────────┬──────────────────────────────────────────────┤
@@ -338,7 +353,6 @@ func (r *Runner) Run(args []string) error {
 │ 手动清理             │ iptables、CNI、/var/lib/kubelet 等             │
 └──────────────────────┴──────────────────────────────────────────────┘
 ```
-
 ## 执行流程
 
 ```mermaid
@@ -411,7 +425,17 @@ timeouts:
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 驱逐节点上的 Pod
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
 # node/worker-1 cordoned
@@ -448,13 +472,13 @@ ipvsadm -C
 rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 rm -rf $HOME/.kube/config  # ⚠️ 删除系统/数据文件
 ```
-
 ### 仅移除 etcd 成员
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前 etcd 成员
 ETCDCTL_API=3 etcdctl member list \
   --endpoints=https://127.0.0.1:2379 \
@@ -479,7 +503,6 @@ ETCDCTL_API=3 etcdctl member remove 7c4c8d5d4f000003 \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 # Member 7c4c8d5d4f000003 removed from cluster xxxxxxx
 ```
-
 ### DryRun 模式
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -517,3 +540,5 @@ kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认操作
 
 ```
+
+<!-- risk-assessed -->

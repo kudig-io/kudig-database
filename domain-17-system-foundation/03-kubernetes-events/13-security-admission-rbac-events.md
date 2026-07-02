@@ -43,6 +43,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 13 - 安全、准入控制与 RBAC 事件
@@ -237,7 +242,8 @@ LAST SEEN   TYPE     REASON                        OBJECT                MESSAGE
 3. **策略批准**: 自定义 Approver 批准
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 CSR 状态
 kubectl get csr
 kubectl describe csr <csr-name>
@@ -248,7 +254,6 @@ kubectl get csr <csr-name> -o jsonpath='{.status.conditions[*]}'
 # 3. 查看签发的证书
 kubectl get csr <csr-name> -o jsonpath='{.status.certificate}' | base64 -d | openssl x509 -text -noout
 ```
-
 **解决方案**:
 - ✅ **正常事件**: 证书请求正常批准,无需处理
 - 📝 **审计建议**: 记录批准历史用于安全审计
@@ -295,7 +300,8 @@ LAST SEEN   TYPE      REASON                     OBJECT                MESSAGE
 4. **CN/SAN 异常**: Subject 或 SAN 不符合规范
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看拒绝原因
 kubectl get csr <csr-name> -o jsonpath='{.status.conditions[?(@.type=="Denied")].message}'
 
@@ -305,13 +311,13 @@ kubectl get csr <csr-name> -o jsonpath='{.spec.request}' | base64 -d | openssl r
 # 3. 验证 signerName 和 usages
 kubectl get csr <csr-name> -o yaml
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 1: 修正 usages (需删除重建)
 kubectl delete csr <csr-name>
 # 创建正确的 CSR
@@ -322,7 +328,6 @@ kubectl certificate approve <csr-name>  # 需要管理员权限
 # 方案 3: 检查 signer 配置
 kubectl get --raw /apis/certificates.k8s.io/v1/signers
 ```
-
 ---
 
 ## 1.3 CertificateRequestFailed
@@ -365,7 +370,8 @@ LAST SEEN   TYPE      REASON                      OBJECT                MESSAGE
 4. **配置错误**: Controller Manager 签名配置错误
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Controller Manager 日志
 kubectl logs -n kube-system kube-controller-manager-xxx | grep -i certificate
 
@@ -378,13 +384,13 @@ kubectl get --raw /apis/certificates.k8s.io/v1/signers
 # 4. 查看 Controller Manager 启动参数
 ps aux | grep kube-controller-manager | grep -o '\-\-cluster-signing.*'
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 1: 重启 Controller Manager (CA 配置已修复)
 kubectl delete pod -n kube-system -l component=kube-controller-manager
 
@@ -399,7 +405,6 @@ kubeadm certs renew all
 # 方案 4: 使用外部 Signer
 # 配置 external signer (如 cert-manager)
 ```
-
 ---
 
 <!-- chunk: 🔑 2. ServiceAccount Controller Events -->## 🔑 2. ServiceAccount Controller Events
@@ -440,7 +445,8 @@ LAST SEEN   TYPE      REASON         OBJECT                   MESSAGE
 4. **ResourceQuota 限制**: Namespace 配额已满
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 ServiceAccount 状态
 kubectl get sa -A
 kubectl describe sa <sa-name> -n <namespace>
@@ -454,7 +460,6 @@ kubectl auth can-i create secrets --as=system:serviceaccount:kube-system:service
 # 4. 检查 Namespace ResourceQuota
 kubectl describe quota -n <namespace>
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -462,7 +467,17 @@ kubectl describe quota -n <namespace>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 修复 RBAC (极少需要,应预检查)
 kubectl get clusterrolebinding system:controller:service-account-controller -o yaml
 
@@ -476,7 +491,6 @@ kubectl create token <sa-name> -n <namespace> --duration=8760h
 # 方案 4: 调整 ResourceQuota
 kubectl edit quota <quota-name> -n <namespace>
 ```
-
 **版本差异**:
 - **v1.24+**: Bound Token 自动创建,不再默认生成 Secret
 - **v1.24-**: 自动为每个 SA 创建 Secret Token
@@ -524,7 +538,8 @@ LAST SEEN   TYPE      REASON                  OBJECT           MESSAGE
 4. **拼写错误**: serviceAccountName 字段拼写错误
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 ServiceAccount 是否存在
 kubectl get sa -n <namespace>
 
@@ -537,14 +552,14 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.serviceAccountName
 # 4. 检查 SA 状态
 kubectl get sa <sa-name> -n <namespace> -o yaml
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 创建缺失的 ServiceAccount
 kubectl create sa <sa-name> -n <namespace>
 
@@ -558,7 +573,6 @@ kubectl delete pod <pod-name> -n <namespace>
 # 方案 4: 恢复被删除的 SA
 kubectl apply -f serviceaccount.yaml
 ```
-
 ---
 
 <!-- chunk: 🎫 3. Token Controller Events -->## 🎫 3. Token Controller Events
@@ -599,7 +613,8 @@ LAST SEEN   TYPE    REASON              OBJECT                  MESSAGE
 4. **自动维护**: TokenController 定期清理
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ServiceAccount Token 历史
 kubectl get secrets -A | grep token
 
@@ -612,7 +627,6 @@ kubectl get sa -A
 # 4. 查看 Secret 清理历史
 kubectl get events -A --field-selector reason=DeletedTokenSecret
 ```
-
 **解决方案**:
 - ✅ **正常事件**: Token Secret 自动清理,无需处理
 - 📝 **审计建议**: 监控异常清理频率
@@ -658,7 +672,8 @@ LAST SEEN   TYPE      REASON                     OBJECT                  MESSAGE
 4. **etcd 问题**: etcd 存储异常
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Token Secret 状态
 kubectl get secret <secret-name> -n <namespace> -o yaml
 
@@ -671,14 +686,14 @@ kubectl auth can-i delete secrets --as=system:serviceaccount:kube-system:token-c
 # 4. 查看 Controller Manager 日志
 kubectl logs -n kube-system kube-controller-manager-xxx | grep -i "failed.*delete.*token"
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 手动删除 Token Secret
 kubectl delete secret <secret-name> -n <namespace>
 
@@ -691,7 +706,6 @@ kubectl delete pod -n kube-system -l component=kube-controller-manager
 # 方案 4: 检查 RBAC (极少需要)
 kubectl get clusterrolebinding | grep token-controller
 ```
-
 ---
 
 <!-- chunk: 👥 4. ClusterRole Aggregation Events -->## 👥 4. ClusterRole Aggregation Events
@@ -748,7 +762,8 @@ LAST SEEN   TYPE    REASON              OBJECT                       MESSAGE
 4. **CRD 安装**: 安装 Operator 时添加聚合权限
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看聚合 ClusterRole
 kubectl get clusterrole <role-name> -o yaml
 
@@ -761,7 +776,6 @@ kubectl describe clusterrole <role-name>
 # 4. 查看聚合事件历史
 kubectl get events --all-namespaces --field-selector reason=ClusterRoleUpdated
 ```
-
 **解决方案**:
 - ✅ **正常事件**: ClusterRole 聚合正常工作
 - 📝 **最佳实践**: 使用聚合管理复杂 RBAC
@@ -843,7 +857,8 @@ LAST SEEN   TYPE      REASON          OBJECT              MESSAGE
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Webhook 配置
 kubectl get validatingwebhookconfigurations
 kubectl get mutatingwebhookconfigurations
@@ -859,14 +874,14 @@ kubectl apply --dry-run=server -f pod.yaml
 # 4. 查看 Webhook 服务日志
 kubectl logs -n <webhook-namespace> <webhook-pod>
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 修复资源配置符合策略
 # 示例: 修改镜像标签
 spec:
@@ -894,9 +909,9 @@ kubectl delete validatingwebhookconfiguration <webhook-name>
 kubectl patch validatingwebhookconfiguration <webhook-name> \
   --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value":"Ignore"}]'
 ```
-
 **Webhook 调试技巧**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Webhook 超时配置
 kubectl get validatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].timeoutSeconds}'
 
@@ -906,7 +921,6 @@ kubectl get validatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].fai
 # 查看 Webhook 匹配规则
 kubectl get validatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].rules}'
 ```
-
 ---
 
 ## 5.2 ValidatingAdmissionPolicyViolation
@@ -965,7 +979,8 @@ LAST SEEN   TYPE      REASON                               OBJECT               
 4. **表达式错误**: CEL 表达式本身有误
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ValidatingAdmissionPolicy 配置
 kubectl get validatingadmissionpolicies
 kubectl describe validatingadmissionpolicy <policy-name>
@@ -980,13 +995,22 @@ kubectl get events -A --field-selector reason=ValidatingAdmissionPolicyViolation
 # 4. 测试 CEL 表达式 (使用 kubectl-validate-cel 插件)
 kubectl validate-cel --expression="has(object.metadata.labels.owner)" --object=deployment.yaml
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 修复资源配置满足策略
 # 示例: 添加缺失的标签
 metadata:
@@ -1017,7 +1041,6 @@ spec:
 spec:
   validationActions: ["Warn"]  # 不阻止,仅警告
 ```
-
 **CEL 策略示例**:
 ```yaml
 ---
@@ -1108,7 +1131,8 @@ LAST SEEN   TYPE      REASON                         OBJECT          MESSAGE
 5. **Webhook Panic**: Webhook 代码崩溃
 
 **排查步骤**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 服务状态
 kubectl get mutatingwebhookconfigurations
 kubectl describe mutatingwebhookconfiguration <webhook-name>
@@ -1128,7 +1152,6 @@ kubectl get secret -n <webhook-namespace> <webhook-cert-secret> -o jsonpath='{.d
 # 5. 查看 API Server 日志
 journalctl -u kubelet | grep -i "webhook"
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1136,7 +1159,8 @@ journalctl -u kubelet | grep -i "webhook"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 重启 Webhook Pod
 kubectl rollout restart deployment/<webhook-deployment> -n <webhook-namespace>
 
@@ -1160,7 +1184,6 @@ kubectl delete mutatingwebhookconfiguration <webhook-name>
 # 检查 Webhook 返回的 JSON Patch 格式
 kubectl logs -n <webhook-namespace> <webhook-pod> | grep -i "patch"
 ```
-
 **Webhook 最佳实践**:
 ```yaml
 ---
@@ -1273,7 +1296,8 @@ LAST SEEN   TYPE      REASON                OBJECT          MESSAGE
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Namespace Pod Security 配置
 kubectl get namespace <namespace> -o jsonpath='{.metadata.labels}' | grep pod-security
 
@@ -1292,13 +1316,13 @@ kubectl label namespace <namespace> \
   pod-security.kubernetes.io/audit=restricted \
   pod-security.kubernetes.io/warn=restricted
 ```
-
 **解决方案**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 修复 Pod 配置符合安全标准
 # 示例 1: 移除 hostPath
 spec:
@@ -1349,7 +1373,6 @@ kubectl label namespace <namespace> \
   pod-security.kubernetes.io/audit=restricted \
   pod-security.kubernetes.io/warn=restricted
 ```
-
 **安全加固示例**:
 ```yaml
 ---
@@ -1421,7 +1444,8 @@ LAST SEEN   TYPE      REASON            OBJECT       MESSAGE
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查集群是否仍使用 PSP (v1.25+ 应为空)
 kubectl get psp
 
@@ -1430,7 +1454,6 @@ kubectl label namespace <namespace> \
   pod-security.kubernetes.io/enforce=baseline \
   pod-security.kubernetes.io/enforce-version=v1.32
 ```
-
 ---
 
 ## 6.3 PodSecurityExemption
@@ -1500,7 +1523,8 @@ plugins:
 ```
 
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Admission Configuration
 kubectl get --raw /api/v1/namespaces/kube-system/configmaps/pod-security-configuration
 
@@ -1510,7 +1534,6 @@ kubectl describe namespace <namespace>
 # 3. 查看豁免事件
 kubectl get events -A --field-selector reason=PodSecurityExemption
 ```
-
 **解决方案**:
 - ✅ **正常事件**: 豁免按预期工作
 - 📝 **审计建议**: 定期审查豁免配置,最小化豁免范围
@@ -1523,6 +1546,7 @@ kubectl get events -A --field-selector reason=PodSecurityExemption
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌──────────────────────────────────────────────────────────────┐
 │                 Certificate Lifecycle                         │
 └──────────────────────────────────────────────────────────────┘
@@ -1562,7 +1586,6 @@ kubectl get events -A --field-selector reason=PodSecurityExemption
    └─ Certificate expiry
       └─ Client auth fails, new CSR required
 ```
-
 **证书类型与用途**:
 
 | Signer Name | 用途 | 自动批准 | 有效期 |
@@ -1578,7 +1601,8 @@ kubectl get events -A --field-selector reason=PodSecurityExemption
 
 ## 1. 权限验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证当前用户权限
 kubectl auth can-i create pods
 kubectl auth can-i '*' '*' --all-namespaces
@@ -1593,10 +1617,10 @@ kubectl auth can-i delete deployments \
   --as=user1 \
   --as-group=developers
 ```
-
 ## 2. Role/ClusterRole 分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看用户绑定的角色
 kubectl get rolebindings,clusterrolebindings -A \
   -o json | jq '.items[] | select(.subjects[]?.name=="user1") | {name: .metadata.name, role: .roleRef.name}'
@@ -1609,7 +1633,6 @@ kubectl get rolebindings,clusterrolebindings -A \
 kubectl describe clusterrole <role-name>
 kubectl describe role <role-name> -n <namespace>
 ```
-
 ## 3. 审计日志分析
 
 ```bash
@@ -1772,7 +1795,8 @@ rate(serviceaccount_controller_token_secret_create_errors_total[5m])
 
 ## kubectl 事件查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有安全相关事件
 kubectl get events -A --field-selector type=Warning | \
   grep -E "FailedAdmission|PodSecurityViolation|FailedValidation|CertificateRequest"
@@ -1789,7 +1813,6 @@ kubectl get events -A --field-selector reason=FailedAdmission \
 kubectl get events -A --field-selector reason=PodSecurityViolation \
   -o json | jq '.items | group_by(.involvedObject.namespace) | map({namespace: .[0].involvedObject.namespace, count: length})'
 ```
-
 ---
 
 <!-- chunk: 📝 总结 -->## 📝 总结
@@ -1843,3 +1866,6 @@ kubectl get events -A --field-selector reason=PodSecurityViolation \
 - 12-autoscaling-events
 - 14-namespace-resource-gc-events
 - 15-ecosystem-addon-events
+
+
+<!-- risk-assessed -->

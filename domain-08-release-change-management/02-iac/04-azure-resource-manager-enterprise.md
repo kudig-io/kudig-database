@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Azure Resource Manager (ARM) Enterprise 深度实践
@@ -544,7 +549,8 @@ graph TB
 
 ## 4.2 Key Vault Integration
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # azure_key_vault_integration.sh
 
@@ -600,7 +606,6 @@ cat > vm_template.json << 'EOF'
 }
 EOF
 ```
-
 <!-- chunk: 5. Monitoring and Cost Optimization -->## 5. Monitoring and Cost Optimization
 
 ## 5.1 Azure Monitor Integration
@@ -885,7 +890,8 @@ jobs:
 
 ## 7.2 Common Troubleshooting Commands
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # arm_troubleshooting.sh
 
@@ -919,7 +925,6 @@ az group export \
   --include-parameter-default-value \
   --output-file "exported-template.json"
 ```
-
 ---
 *This document is based on enterprise-level Azure Resource Manager practice experience and continuously updated with the latest technologies and best practices.*
 
@@ -942,3 +947,6 @@ az group export \
 - 03-pulumi-enterprise-iac
 - 05-crossplane-enterprise-orchestration
 - 99-crossplane-platform-guide
+
+
+<!-- risk-assessed -->

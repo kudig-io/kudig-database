@@ -46,6 +46,11 @@ component: 10 Agent Orchestration Patterns
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第十章：Agent 编排模式与 FTA 逻辑门映射
@@ -214,6 +219,7 @@ Agent 行为:
 对于大规模生产环境，推荐采用分层 Agent 架构：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌──────────────────────────────────────────────────────────────────────┐
 │                      层次化 Agent 架构                                │
 ├──────────────────────────────────────────────────────────────────────┤
@@ -279,7 +285,6 @@ Agent 间通信协议:
       "rollback_on_failure": true
     }
 ```
-
 ## 10.5 Agent 冲突解决机制
 
 ```
@@ -333,3 +338,6 @@ Agent 间通信协议:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/12-fta-aiops-integration.md|12-fta-aiops-integration]]
+
+
+<!-- risk-assessed -->

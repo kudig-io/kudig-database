@@ -38,6 +38,11 @@ prerequisites:
 - iac-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent CLI 开发工作流与最佳实践
@@ -149,6 +154,7 @@ k8s_versions:
 ## 1.3 指令文件分层策略
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 项目根目录/
 ├── CLAUDE.md                    # 全局规范 (架构/代码风格)
 ├── src/
@@ -160,7 +166,6 @@ k8s_versions:
 └── infrastructure/
     └── CLAUDE.md                # 基础设施规范 (Terraform/K8s)
 ```
-
 **加载规则**（Claude Code）：
 - Agent 在某目录工作时，自动加载该目录到根目录路径上的所有 CLAUDE.md
 - 子目录 CLAUDE.md 内容追加到父级之后
@@ -591,3 +596,6 @@ Agent CLI 的最佳实践可归纳为三个层次：
 - 25-agent-cli-mcp-integration
 - 27-agent-cli-security-governance
 - 28-agent-cli-enterprise-automation
+
+
+<!-- risk-assessed -->

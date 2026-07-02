@@ -65,6 +65,11 @@ cross_refs:
   label: '运维技能: 18-security-incident-response'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 32 - 安全相关故障排查 (Security Troubleshooting)
@@ -146,7 +151,8 @@ cross_refs:
 
 ### 2.1 认证失败问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 认证配置检查 ==========
 # 检查API Server认证配置
 kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].spec.containers[0].command}' | jq
@@ -177,10 +183,10 @@ kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
 # 检查CA证书
 kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | base64 -d | openssl x509 -text -noout
 ```
-
 ### 2.2 RBAC授权问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 权限验证 ==========
 # 检查用户权限
 kubectl auth can-i get pods --as=<user-name>
@@ -230,7 +236,6 @@ kubectl get rolebinding -n <namespace> -o jsonpath='{
     end
 }'
 ```
-
 ---
 
 <!-- chunk: 3. 网络安全问题排查 (Network Security Troubleshooting) -->
@@ -241,7 +246,8 @@ kubectl get rolebinding -n <namespace> -o jsonpath='{
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 策略配置验证 ==========
 # 检查NetworkPolicy支持
 kubectl api-versions | grep networking.k8s.io
@@ -281,10 +287,10 @@ kubectl get pods -n <namespace> --show-labels | grep <selector-label>
 # 检查策略方向
 kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.policyTypes}'
 ```
-
 ### 3.2 TLS证书问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 证书状态检查 ==========
 # 检查API Server证书
 openssl s_client -connect <api-server-endpoint>:6443 -servername <api-server-host> 2>/dev/null | openssl x509 -noout -dates
@@ -315,7 +321,6 @@ openssl verify -CAfile ca.crt <server-cert.pem>
 # 测试证书信任链
 curl -v --cacert ca.crt https://<api-server>:6443
 ```
-
 ---
 
 <!-- chunk: 4. 镜像和运行时安全 (Image and Runtime Security) -->
@@ -323,7 +328,8 @@ curl -v --cacert ca.crt https://<api-server>:6443
 
 ### 4.1 镜像安全扫描
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 镜像漏洞扫描 ==========
 # 使用Trivy扫描镜像
 trivy image <image-name>:<tag>
@@ -362,10 +368,10 @@ kubectl get secret <pull-secret-name> -n <namespace> -o jsonpath='{.data.\.docke
 # 测试镜像仓库访问
 kubectl run test-pull --image=<private-registry>/<image>:<tag> -n <namespace> --restart=Never
 ```
-
 ### 4.2 容器安全配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 安全上下文检查 ==========
 # 检查Pod安全上下文
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext}'
@@ -421,7 +427,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext.se
 # 检查AppArmor配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.annotations.container\.apparmor\.security\.beta\.kubernetes\.io/*}'
 ```
-
 ---
 
 <!-- chunk: 5. 安全监控和审计 (Security Monitoring and Auditing) -->
@@ -429,7 +434,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.annotations.co
 
 ### 5.1 审计日志配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 审计策略检查 ==========
 # 查看审计策略配置
 kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].spec.containers[0].command}' | grep audit
@@ -479,13 +485,13 @@ kubectl get pods --all-namespaces -o jsonpath='{
     end
 }' | grep true
 ```
-
 ### 5.2 威胁检测配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Falco配置检查 ==========
 # 检查Falco安装状态
 kubectl get pods -n falco
@@ -536,7 +542,6 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 应急响应和修复 (Incident Response and Remediation) -->
@@ -549,7 +554,17 @@ EOF
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 1. 立即响应措施 ==========
 # 隔离受感染Pod
 kubectl delete pod <compromised-pod> -n <namespace>
@@ -603,13 +618,13 @@ kubeadm certs renew all
 kubectl delete secret <compromised-secret> -n <namespace>
 kubectl create secret generic <new-secret> --from-literal=key=value -n <namespace>
 ```
-
 ### 6.2 安全加固最佳实践
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 推荐安全配置模板 ==========
 cat <<EOF > secure-pod-template.yaml
 apiVersion: v1
@@ -700,7 +715,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 ---
 
 ---
@@ -734,3 +748,6 @@ EOF
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

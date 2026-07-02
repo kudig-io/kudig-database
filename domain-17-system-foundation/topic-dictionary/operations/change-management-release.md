@@ -40,6 +40,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 14 - 变更管理与发布策略
@@ -821,7 +826,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # blue-green-switch.sh - 蓝绿切换脚本
 
@@ -875,7 +881,6 @@ echo "   请密切监控错误率、延迟等指标"
 echo "   如需回滚，请运行:"
 echo "   kubectl patch service user-service -p '{\"spec\":{\"selector\":{\"version\":\"$CURRENT_ENV\"}}}'"
 ```
-
 ---
 
 **蓝绿部署 vs 金丝雀发布**：
@@ -1576,7 +1581,8 @@ rollbackStrategy:
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # rollback-execution.sh - 回滚执行脚本
 
@@ -1686,7 +1692,6 @@ fi
 
 echo "=== 回滚操作完成 ==="
 ```
-
 ---
 
 ## 5. 发布自动化
@@ -1720,6 +1725,7 @@ echo "=== 回滚操作完成 ==="
 **典型的 CI/CD Pipeline 阶段**：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 阶段 1: 代码提交
   ↓
 阶段 2: 代码检查（Lint）
@@ -1757,7 +1763,6 @@ echo "=== 回滚操作完成 ==="
   ├─ 自动回滚监控
   └─ 发送通知
 ```
-
 **实际案例：电商平台的 CI/CD Pipeline**
 
 ```yaml
@@ -2209,7 +2214,8 @@ spec:
 
 ### 5.2 发布门禁检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # release-gate-checks.sh - 发布门禁检查脚本
 
@@ -2296,7 +2302,6 @@ fi
 echo "✅ 所有发布门禁检查通过！"
 echo "🚀 可以安全发布 $IMAGE_TAG 到 $ENVIRONMENT 环境"
 ```
-
 ---
 
 ## 6. 风险评估与控制
@@ -2379,7 +2384,8 @@ riskMitigation:
 
 ### 7.1 发布后验证清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # post-deployment-validation.sh - 发布后验证脚本
 
@@ -2445,7 +2451,6 @@ kubectl run prom-check --image=curlimages/curl --restart=Never --rm -i -- \
 echo "=== 发布验证完成: $DEPLOYMENT_NAME ==="
 echo "🎉 所有验证通过，发布成功！"
 ```
-
 ### 7.2 变更影响监控
 
 ```promql
@@ -2590,7 +2595,8 @@ microserviceRelease:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 发布状态
 kubectl rollout status deployment/<name> -n <namespace>
 
@@ -2610,7 +2616,6 @@ kubectl rollout resume deployment/<name> -n <namespace>
 # 金丝雀验证 - 查看新旧 ReplicaSet
 kubectl get rs -n <namespace> -l app=<name>
 ```
-
 ## 交叉引用
 
 - 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [GitOps and Continuous Delivery](../platform-engineering/gitops-and-continuous-delivery.md) · [Deployments](../workloads/deployments.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md)
@@ -2628,3 +2633,5 @@ kubectl get rs -n <namespace> -l app=<name>
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

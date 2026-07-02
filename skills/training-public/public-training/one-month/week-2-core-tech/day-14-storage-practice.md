@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 14: 存储体系 + 综合实践
@@ -124,7 +129,17 @@ related:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 PV (hostPath 类型，仅用于测试)
 cat > pv-static.yaml << 'EOF'
 apiVersion: v1
@@ -195,14 +210,23 @@ kubectl delete pod pod-pvc-test
 kubectl delete pvc pvc-static
 kubectl delete pv pv-static
 ```
-
 ### 任务 2: StorageClass 动态供应 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看现有 StorageClass
 kubectl get storageclass
 
@@ -243,7 +267,6 @@ kubectl get pv,pvc
 # 清理
 kubectl delete pvc pvc-dynamic
 ```
-
 ### 任务 3: 综合实践项目 P2 (1.5h)
 
 **项目: 生产级应用全栈编排**
@@ -253,7 +276,8 @@ kubectl delete pvc pvc-dynamic
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 namespace
 kubectl create namespace production-app
 
@@ -483,7 +507,6 @@ kubectl get pvc -n production-app
 kubectl get ingress -n production-app
 kubectl get networkpolicy -n production-app
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -537,8 +560,20 @@ Day 14:   存储体系 (PV, PVC, StorageClass) + 综合实践
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 恭喜完成 Week 2 的学习!
+
+
+<!-- risk-assessed -->

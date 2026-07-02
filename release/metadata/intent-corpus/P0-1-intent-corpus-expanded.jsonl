@@ -1,0 +1,320 @@
+{"text": "节点 NotReady，Pod 被驱逐", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["NotReady", "驱逐", "节点"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Node is not ready, kubelet stopped posting status", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["NotReady", "kubelet", "node"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "节点状态显示 Unknown，kubelet 无法连接 apiserver", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["Unknown", "kubelet", "apiserver"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Node status flapping between Ready and NotReady", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["flapping", "Ready", "NotReady"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点磁盘压力告警，DiskPressure 为 True", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["DiskPressure", "磁盘压力", "节点"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "节点内存压力，MemoryPressure 导致 Pod 被驱逐", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["MemoryPressure", "内存压力", "驱逐"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "kubelet 进程崩溃，节点显示 NotReady", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["kubelet", "崩溃", "NotReady"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "containerd 异常，节点上容器创建失败", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["containerd", "容器创建失败", "节点"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "Node has disk pressure, pods being evicted", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["disk pressure", "evicted", "node"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "多个工作节点同时 NotReady，集群可用性受影响", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["多个节点", "NotReady", "可用性"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "控制平面节点 NotReady，集群 API 响应异常", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["控制平面", "NotReady", "API响应"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "节点 SSH 无法连接，但 kubelet 仍在运行", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["SSH", "无法连接", "kubelet"], "severity_hint": "P1", "confidence": 0.75}
+{"text": "Node Lease object not renewed for 5 minutes", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["Lease", "not renewed", "5min"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Kubelet not ready due to PLEG issues", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["PLEG", "KubeletNotReady"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点网络分区，与 apiserver 通信中断", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["网络分区", "通信中断", "apiserver"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "节点 PID 压力告警，进程数超限", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["PIDPressure", "进程数", "超限"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Node has too many processes, PIDPressure true", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["PIDPressure", "too many processes"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点网络接口 down，集群网络不通", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["网络接口", "down", "集群网络"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "etcd 节点宕机，集群控制平面受影响", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["etcd", "宕机", "控制平面"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Control plane node unresponsive, API server down", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["control plane", "unresponsive", "API server"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "节点 swap 空间不足，OOM killer 被触发", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["swap", "OOM killer", "节点"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Node clock skew detected, time sync issue", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["clock skew", "time sync", "node"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "节点文件系统只读，无法写入", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["文件系统", "只读", "写入失败"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Node filesystem read-only, cannot write", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["read-only", "filesystem", "write"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "节点 iptables 规则异常，导致网络不通", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["iptables", "规则异常", "网络不通"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "Kubelet certificate expired, cannot connect to API server", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["kubelet", "certificate expired", "API server"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "节点启动时卡在 kubelet 拉取证书阶段", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["启动卡住", "kubelet", "证书拉取"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Node not registered, kubelet not starting properly", "lang": "en", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["not registered", "kubelet", "starting"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点资源不足，但无明确告警", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["资源不足", "无告警", "节点"], "severity_hint": "P2", "confidence": 0.70}
+{"text": "混合气压力异常，硬件传感器故障", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["硬件传感器", "压力异常", "节点"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Pod 处于 CrashLoopBackOff 状态，无法正常运行", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["CrashLoopBackOff", "无法运行", "Pod"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "Pod OOMKilled，内存限制不足导致被 kill", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["OOMKilled", "内存限制", "OOM"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "Pod 一直处于 Pending 状态，调度失败", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["Pending", "调度失败", "Pod"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "Pod image pull failure, ErrImagePull", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["ImagePullBackOff", "ErrImagePull", "镜像"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "容器启动后立即退出，exit code 137", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["exit code 137", "立即退出", "OOM"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Pod 不断重启，每次运行几秒就崩溃", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["不断重启", "崩溃", "CrashLoop"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "application container repeatedly crashing", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["repeatedly crashing", "container", "CrashLoop"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Pod 被 OOMKilled (exit code 137)", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["OOMKilled", "exit code 137", "内存"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "多个 Pod 同时 Pending，资源不足", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["Pending", "资源不足", "多个Pod"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "Failed to schedule pod, no nodes matching affinity rules", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["FailedScheduling", "affinity", "no nodes"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "Pod 处于 ImagePullBackOff 状态", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["ImagePullBackOff", "镜像拉取", "Pod"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "容器健康检查失败，liveness probe 报错", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["liveness probe", "健康检查", "失败"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Liveness probe failed, container restarting", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["liveness probe", "failed", "restarting"], "severity_hint": "P1", "confidence": 0.90}
+{"text": " Readiness probe failed, pod not receiving traffic", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["readiness probe", "failed", "traffic"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Pod 启动命令超时，无法完成初始化", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["启动超时", "初始化", "Pod"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "容器 entrypoint 脚本执行失败", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["entrypoint", "脚本失败", "容器"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod 处于 Terminating 状态，无法正常删除", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["Terminating", "无法删除", "Pod"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Container is in Terminating state, stuck", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["Terminating", "stuck", "container"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 安全策略拒绝容器创建", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["安全策略", "拒绝创建", "Pod"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Pod 创建成功但立即被删除", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["创建后删除", "生命周期", "Pod"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Init container 失败，主容器无法启动", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["init container", "失败", "主容器"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Init container failed, main container cannot start", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["init container", "failed", "main container"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Pod 使用 hostPort 后端口冲突", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["hostPort", "端口冲突", "Pod"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "hostPort port conflict on node", "lang": "en", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["hostPort", "conflict", "node"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 调度到 master 节点被拒绝", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["master", "调度拒绝", "污点"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 亲和性规则无法满足，无合适节点", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["亲和性", "无法满足", "节点"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 反亲和性冲突，同位置其他 Pod 过多", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["反亲和性", "冲突", "Pod"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Pod 拓扑分布约束无法满足", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["拓扑分布", "约束", "无法满足"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "DNS 解析失败，服务无法发现", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["DNS解析失败", "服务发现", "NXDOMAIN"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "CoreDNS Pod 不健康，DNS 解析异常", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["CoreDNS", "不健康", "DNS异常"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "DNS resolution timeout, pods cannot reach external services", "lang": "en", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["DNS timeout", "resolution", "external"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Service 没有 Endpoints，Pod selector 不匹配", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["无Endpoints", "selector", "不匹配"], "severity_hint": "P2", "confidence": 0.90}
+{"text": "Service cluster IP cannot be accessed", "lang": "en", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["ClusterIP", "cannot access", "Service"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "Ingress 返回 404，路由配置错误", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["404", "Ingress", "路由错误"], "severity_hint": "P2", "confidence": 0.90}
+{"text": "Ingress gateway 503 error, backend service unavailable", "lang": "en", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["503", "gateway", "unavailable"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "NetworkPolicy 导致 Pod 之间无法通信", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["NetworkPolicy", "无法通信", "隔离"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "跨节点的 Pod 网络不通", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["跨节点", "网络不通", "Pod"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod cannot resolve internal cluster domain", "lang": "en", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["cannot resolve", "cluster domain", "DNS"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "集群内 DNS 解析缓慢，偶尔超时", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["DNS缓慢", "偶尔超时", "集群内"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "ExternalName Service DNS 查询异常", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["ExternalName", "DNS异常", "Service"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Headless Service 无负载均衡效果", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["Headless", "无负载均衡", "Service"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "NodePort 端口范围外部无法访问", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["NodePort", "无法访问", "端口范围"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "LoadBalancer 创建超时，始终处于 pending", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["LoadBalancer", "pending", "超时"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "LoadBalancer service stuck in pending state", "lang": "en", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["pending", "LoadBalancer", "stuck"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Ingress TLS 证书配置错误，握手失败", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["TLS", "握手失败", "Ingress"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Ingress 路径重写规则不生效", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["路径重写", "不生效", "Ingress"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Ingress 基于 Header 的路由规则失效", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["Header路由", "失效", "Ingress"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "CNI 插件初始化失败，节点网络异常", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["CNI", "初始化失败", "网络异常"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "CNI plugin failed to initialize, node networking broken", "lang": "en", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["CNI", "failed to initialize", "networking"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Pod 网络 MTU 问题，大包传输失败", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["MTU", "大包传输", "失败"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "VLAN/Overlay 网络配置错误，导致网络分区", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["VLAN", "Overlay", "网络分区"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "证书过期，TLS 握手失败", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["证书过期", "TLS握手失败", "x509"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "x509: certificate has expired", "lang": "en", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["expired", "certificate", "x509"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "RBAC 权限不足，Forbidden 错误", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["Forbidden", "RBAC", "权限不足"], "severity_hint": "P2", "confidence": 0.90}
+{"text": "ServiceAccount 没有足够权限执行操作", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["ServiceAccount", "权限", "Forbidden"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "ResourceQuota exceeded，资源配额超限", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["ResourceQuota", "exceeded", "配额"], "severity_hint": "P2", "confidence": 0.90}
+{"text": "疑似入侵行为，异常 Pod 创建", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["入侵", "异常Pod", "异常创建"], "severity_hint": "P0", "confidence": 0.85}
+{"text": "Security event: unauthorized access attempt detected", "lang": "en", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["unauthorized", "access", "security"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Audit log shows suspicious API calls", "lang": "en", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["audit", "suspicious", "API calls"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "kubelet serving certificate expired", "lang": "en", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["kubelet", "serving certificate", "expired"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "API server client certificate about to expire", "lang": "en", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["client certificate", "about to expire", "API server"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "证书签名请求 CSR 被拒绝", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["CSR", "被拒绝", "证书签名"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "证书链不完整，信任验证失败", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["证书链", "不完整", "信任验证"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "ClusterIAM role 权限边界模糊", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["IAM", "权限边界", "模糊"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Pod 使用默认 ServiceAccount，权限过大", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["默认ServiceAccount", "权限过大", "安全"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "ClusterRoleBinding 授权范围过大", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["ClusterRoleBinding", "授权过大", "范围"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "RoleBinding 跨命名空间授权异常", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["RoleBinding", "跨命名空间", "授权"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "PSP (PodSecurityPolicy) 拒绝 Pod 创建", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["PSP", "拒绝创建", "Pod"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "PSA (PodSecurityAdmission) 告警命名空间违反基线策略", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["PSA", "违反基线", "命名空间"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "异常进程在容器内执行，疑似挖矿", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["挖矿", "异常进程", "容器内"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "容器内发现恶意进程，CPU 占用异常高", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["恶意进程", "CPU异常", "容器"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "敏感 ConfigMap/Secret 未加密存储", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["未加密", "ConfigMap", "Secret"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "etcd 数据未加密，审计日志发现泄露风险", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["etcd", "未加密", "数据泄露"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "PVC 一直处于 Pending 状态", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["Pending", "PVC", "存储"], "severity_hint": "P1", "confidence": 0.95}
+{"text": "PersistentVolumeClaim not bound, storage class missing", "lang": "en", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["not bound", "StorageClass", "PVC"], "severity_hint": "P2", "confidence": 0.90}
+{"text": "CSI driver 异常，卷挂载失败", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["CSI", "挂载失败", "卷"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "存储卷只读，无法写入数据", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["只读", "存储卷", "写入"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "VolumeAttachment 创建卡住，存储操作超时", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["VolumeAttachment", "卡住", "超时"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "PVC 删除后 PV 状态卡在 Released", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["PV", "Released", "删除卡住"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "存储类 StorageClass 参数配置错误", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["StorageClass", "参数错误", "配置"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "云盘存储卷扩容失败，空间不足", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["扩容失败", "云盘", "空间不足"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "NFS 存储挂载超时，NFS server 无响应", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["NFS", "挂载超时", "无响应"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "快照恢复操作失败，数据一致性检查未通过", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["快照恢复", "失败", "一致性检查"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Storage volume resize not working, PVC still same size", "lang": "en", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["resize", "PVC", "same size"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "emptyDir 卷内存不足，Pod 被驱逐", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["emptyDir", "内存不足", "驱逐"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "跨可用区存储卷调度失败，拓扑限制", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["跨可用区", "拓扑限制", "调度失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Deployment 滚动更新卡住，迟迟无法完成", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["滚动更新", "卡住", "Deployment"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Deployment rollout stuck, new pods not coming up", "lang": "en", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["rollout stuck", "new pods", "Deployment"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "StatefulSet 有序部署失败，序号异常", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["StatefulSet", "有序部署", "失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "DaemonSet 在新节点上调度失败", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["DaemonSet", "调度失败", "新节点"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "ReplicaSet 副本数不一致，实际 Pod 数少于期望", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["ReplicaSet", "副本数不一致", "少于期望"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "HPA 无法扩展副本，目标指标获取失败", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["HPA", "无法扩展", "指标失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "HPA scaling failed, metric client not available", "lang": "en", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["HPA", "scaling failed", "metric"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "VPA 推荐值与当前资源限制差距过大", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["VPA", "推荐值", "差距过大"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Cluster Autoscaler 无法扩展节点，cloud provider 限流", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["Autoscaler", "无法扩展", "限流"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "etcd 空间不足，数据库告警", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd", "空间不足", "数据库告警"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "etcd disk space low, db size alert", "lang": "en", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd", "disk space", "low"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "API Server 无法处理请求，持续 5xx 错误", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["API Server", "5xx", "无法处理"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "API server too many requests, rate limit triggered", "lang": "en", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["API server", "rate limit", "too many"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Scheduler 调度失败，节点资源准确性问题", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["Scheduler", "调度失败", "资源准确"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Controller Manager 不健康，控制器循环异常", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["Controller Manager", "不健康", "异常"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "集群升级失败，etcd 数据目录损坏", "lang": "zh", "category": "TC-INFRA-UPGRADE", "skill_id": "SKILL-CP-001", "keywords": ["升级失败", "etcd", "损坏"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "节点升级后 kubelet 无法启动", "lang": "zh", "category": "TC-INFRA-UPGRADE", "skill_id": "SKILL-NODE-001", "keywords": ["升级后", "kubelet", "无法启动"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "ConfigMap 更新后应用未生效，滚动重启无效", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["ConfigMap", "未生效", "滚动重启"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "ConfigMap subpath 挂载，配置变更不生效", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["subpath", "挂载", "配置变更"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "Secret 动态更新后 Pod 无法读取新值", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["Secret", "动态更新", "无法读取"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "ConfigMap/Secret base64 编码问题，特殊字符处理失败", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["base64", "特殊字符", "编码问题"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "环境变量引用 ConfigMap key 不存在", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["环境变量", "key不存在", "ConfigMap"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 无法挂载 ConfigMap，volume 权限问题", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["挂载失败", "volume权限", "ConfigMap"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "CronJob 未按时执行，下次执行时间异常", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["CronJob", "未执行", "时间异常"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "CronJob 重复执行，任务并发冲突", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["CronJob", "重复执行", "并发冲突"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Job 并发策略未生效，同时运行任务过多", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["Job", "并发策略", "过多"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Job 执行成功但未清理，产生大量僵尸 Pod", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["Job", "未清理", "僵尸Pod"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Pod Disruption Budget (PDB) 阻止了驱逐操作", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["PDB", "阻止驱逐", "Pod"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Eviction API 被 PDB 拒绝", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["Eviction", "PDB拒绝", "API"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Ingress 证书到期，HTTPS 降级", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["证书到期", "HTTPS降级", "Ingress"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Ingress 访问日志发现大量 499 状态码", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["499", "客户端断开", "Ingress"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Ingress websocket 连接不稳定，断连频繁", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["websocket", "断连", "Ingress"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Gateway API 资源创建失败，CRD 未安装", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["Gateway API", "CRD未安装", "失败"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Service mesh sidecar 注入失败，Pod 无法启动", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["sidecar", "注入失败", "Service mesh"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "mTLS 双向认证失败，服务间无法通信", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["mTLS", "双向认证", "失败"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Service mesh 流量镜像未生效", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["流量镜像", "未生效", "mesh"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "金丝雀发布路由规则异常，流量比例不对", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["金丝雀", "流量比例", "异常"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "跨集群 Service DNS 解析失败", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["跨集群", "DNS解析", "失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "ServiceExport/ServiceImport 跨集群服务发现异常", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["ServiceExport", "跨集群", "服务发现"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "网络策略命名空间隔离测试未通过", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["网络策略", "命名空间隔离", "测试"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Egress 策略导致 Pod 无法访问外部 API", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["Egress", "无法访问", "外部API"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "IPVS 负载均衡模式异常，连接被重置", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["IPVS", "连接重置", "负载均衡"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "kube-proxy iptables 规则不一致", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["kube-proxy", "iptables", "规则不一致"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点间网络延迟异常高", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["网络延迟", "异常高", "节点间"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod 间网络抖动，偶发性超时", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["网络抖动", "偶发超时", "Pod间"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "集群出口流量异常，疑似数据泄露", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["出口流量", "异常", "数据泄露"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "ServiceAccount token 被挂载到不受信的 Pod", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["ServiceAccount", "token", "不受信"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "容器使用特权模式，SecurityContext 违规", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["特权模式", "SecurityContext", "违规"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod 容器以 root 用户运行", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["root用户", "容器", "安全问题"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "容器允许 privilege escalation", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["privilege escalation", "允许", "容器"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "敏感端口未授权暴露在公网", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["敏感端口", "公网暴露", "未授权"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "etcd 端口 2379/2380 未授权访问", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["etcd", "未授权", "端口"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Kubernetes dashboard 被非法访问", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["dashboard", "非法访问", "Kubernetes"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "审计日志发现大量认证失败尝试", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["审计日志", "认证失败", "大量"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "异常 IP 段在扫描集群 API Server", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["异常IP", "扫描", "API Server"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "证书过期前 30 天未自动续期", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["证书", "30天", "未自动续期"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "外部 Issuer 的证书续期失败", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["外部Issuer", "续期失败", "证书"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "聚合 API Aggregator 证书配置错误", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["Aggregator", "聚合API", "证书错误"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点无法加入集群，bootstrap 证书签发失败", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["bootstrap", "证书签发", "加入集群"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "CSI driver 需要 node authorizer 权限", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["CSI driver", "node authorizer", "权限"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "LimitRange 设置导致容器启动失败", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["LimitRange", "启动失败", "资源限制"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Namespace quota 不足，新资源无法创建", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["Namespace quota", "不足", "无法创建"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "PriorityClass 整数溢出，调度异常", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["PriorityClass", "整数溢出", "调度异常"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "MySQL 主从复制中断，连接超时", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["MySQL", "主从复制", "中断"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "PostgreSQL 查询缓慢，慢 SQL 日志暴增", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["PostgreSQL", "慢SQL", "查询缓慢"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Database connection pool exhausted", "lang": "en", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["connection pool", "exhausted", "database"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Redis 集群 slot 迁移失败，集群不可用", "lang": "zh", "category": "TC-DATA-CACHE", "skill_id": "SKILL-DB-001", "keywords": ["Redis", "slot迁移", "集群不可用"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Redis OOM，内存耗尽导致数据丢失", "lang": "zh", "category": "TC-DATA-CACHE", "skill_id": "SKILL-DB-001", "keywords": ["Redis", "OOM", "内存耗尽"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Kafka 消费者 lag 严重，消息积压", "lang": "zh", "category": "TC-DATA-MQ", "skill_id": "SKILL-DB-001", "keywords": ["Kafka", "消费者lag", "消息积压"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "RabbitMQ 队列不可用，无法创建新连接", "lang": "zh", "category": "TC-DATA-MQ", "skill_id": "SKILL-DB-001", "keywords": ["RabbitMQ", "队列不可用", "新连接"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "备份任务失败，Velero restore 卡在 Creating 状态", "lang": "zh", "category": "TC-DATA-BACKUP", "skill_id": "SKILL-DB-001", "keywords": ["Velero", "restore", "卡住"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "快照损坏无法恢复，数据完整性校验失败", "lang": "zh", "category": "TC-DATA-BACKUP", "skill_id": "SKILL-DB-001", "keywords": ["快照损坏", "无法恢复", "校验失败"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Pod 启动时读取 ConfigMap 失败，key 不存在", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["ConfigMap", "key不存在", "启动失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Secret 引用不存在的 key，环境变量注入失败", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["Secret", "不存在的key", "注入失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 挂载的 Secret 发生静默更新，旧值仍被使用", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["Secret", "静默更新", "旧值"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "ConfigMap 通过 volume 挂载时使用 subpath 导致更新无效", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["subpath", "ConfigMap", "更新无效"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "集群升级后 etcd 启动失败，wal 日志损坏", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd", "wal日志", "损坏"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "API Server watch 事件积压，内存持续增长", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["watch事件", "积压", "内存增长"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Controller Manager 持续重启，控制器死循环", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["Controller Manager", "持续重启", "死循环"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Scheduler 调度不均，热点节点 CPU 使用率 100%", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["Scheduler", "调度不均", "热点节点"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "Kubelet 无法清理过期镜像，磁盘空间持续下降", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["过期镜像", "无法清理", "磁盘空间"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点内存泄漏，kubelet 进程 RSS 持续增长", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["内存泄漏", "kubelet", "RSS增长"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "containerd shim 进程异常，容器无法清理", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["containerd shim", "进程异常", "无法清理"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "nvidia-docker2 插件失效，GPU Pod 无法调度", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["nvidia-docker2", "GPU调度", "失效"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点内核版本过旧，不支持某些 CNI 特性", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["内核版本", "CNI特性", "不支持"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "节点系统文件句柄 FD 耗尽", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["文件句柄", "FD耗尽", "系统"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "容器运行时版本不兼容，containerd 1.6 无法创建沙箱 Pod", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["containerd", "版本不兼容", "沙箱"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "镜像仓库认证失败，registry credentials 配置错误", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["镜像仓库", "认证失败", "credentials"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "私有镜像仓库连接超时，防火墙阻断", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["私有镜像", "连接超时", "防火墙"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "镜像 tag 不存在，latest tag 被覆盖", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["镜像tag", "不存在", "latest"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "镜像层解压失败，存储驱动异常", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-IMAGE-001", "keywords": ["镜像层解压", "失败", "存储驱动"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "HPA 指标获取正常但副本数不调整", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["HPA", "指标正常", "副本数不调"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "VPA 与 HPA 同时启用导致资源震荡", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["VPA", "HPA", "资源震荡"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Karpenter provisioner 无法创建节点，AWS API 限流", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["Karpenter", "AWS API", "限流"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "节点池弹性伸缩正常，但 Pod 调度到新节点后卡住", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["节点池", "Pod调度", "卡住"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 设置了 scale-down 禁用标记，但资源仍被释放", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["scale-down", "禁用标记", "资源释放"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "CronJob 启用 concurrency-forbid，但历史 Job 仍在运行", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["CronJob", "concurrency-forbid", "仍在运行"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Job 完成后残留 Pod 未被清理，namespace Pod 数量超限", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["Job残留", "Pod未清理", "数量超限"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Deployment 的 paused 标记导致滚动更新不生效", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["paused", "滚动更新", "不生效"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "StatefulSet 删除后 PVC 残留，数据未清理", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["PVC残留", "数据未清理", "StatefulSet"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "多个 Ingress 共用同一端口导致路由冲突", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["Ingress", "端口冲突", "路由冲突"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Ingress 启用 gzip 压缩后后端响应变大", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["gzip", "压缩", "Ingress"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "Ingress 灰度发布时 cookie 亲和不生效", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["cookie亲和", "灰度发布", "Ingress"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "cert-manager ACME HTTP01 挑战验证超时", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["ACME", "HTTP01", "挑战超时"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "cert-manager DNS01 挑战 TXT 记录被覆盖", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["DNS01", "TXT记录", "被覆盖"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "证书签发请求 CSR 一直 pending 未被签发", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["CSR", "pending", "未签发"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "ClusterIssuer 配置了错误的 solver，证书续期失败", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["ClusterIssuer", "solver", "续期失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Webhook 回调失败，admission webhook 配置错误", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["Webhook", "回调失败", "配置错误"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "ValidatingWebhook 阻止了合法的资源创建", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["ValidatingWebhook", "阻止", "合法"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "MutatingWebhook 修改了 Pod spec，但应用未生效", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["MutatingWebhook", "修改", "未生效"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "OPA Gatekeeper 策略拒绝资源创建", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["Gatekeeper", "策略拒绝", "OPA"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Kyverno 策略审计模式正常但 enforce 模式异常", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["Kyverno", "enforce", "审计模式"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "PVC 拓扑感知调度失败，storage class 区域不匹配", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["拓扑感知", "storage class", "区域不匹配"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "数据卷扩容在线扩容失败，需要重启 Pod", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["在线扩容", "重启Pod", "数据卷"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "CSI snapshotter 创建快照失败，CRD 未找到", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["snapshotter", "CRD", "未找到"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "LocalPV 本地存储 Pod 调度到错误节点", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["LocalPV", "调度错误", "节点"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "存储卷在多个 Pod 间共享导致数据不一致", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["共享存储", "数据不一致", "多个Pod"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "etcd 快照恢复后集群组件状态不一致", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd快照", "恢复后", "状态不一致"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "API Server 启动参数错误，secure port 无法监听", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["API Server", "secure port", "无法监听"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "etcd 选主失败，cluster id 不匹配", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd选主", "cluster id", "不匹配"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Kube-apiserver 日志出现大量 etcd watch reset", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd watch reset", "日志", "Kube-apiserver"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "集群 DNS 服务（CoreDNS）CPU 占用 100%", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["CoreDNS", "CPU 100%", "DNS服务"], "severity_hint": "P1", "confidence": 0.90}
+{"text": "Service 修改 clusterIP 后旧 IP 仍有流量", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["clusterIP", "旧IP", "仍有流量"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "EndpointSlice 同步延迟，导致 Service 端点信息过期", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["EndpointSlice", "同步延迟", "端点过期"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "MetalLB L2 模式 ARP 公告失败", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-002", "keywords": ["MetalLB", "L2", "ARP公告"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Cilium BGP 邻居关系断开，路由撤销", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-001", "keywords": ["Cilium", "BGP", "邻居断开"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod 使用 hostNetwork 导致端口冲突", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["hostNetwork", "端口冲突", "Pod"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Pod 设置了多个 volume mount 指向同一路径", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["volume mount", "同一路径", "冲突"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Init container 和主容器使用相同的 HTTP port", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["Init container", "HTTP port", "冲突"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Liveness probe 配置过于激进导致误杀", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["liveness probe", "过于激进", "误杀"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Readiness probe 返回 503 但 Pod 未被从 Endpoints 移除", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["readiness probe", "503", "Endpoints"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Startup probe 超时过长导致容器启动期间无法拦截流量", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["startup probe", "超时", "无法拦截"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "容器使用 root 挂载宿主机的根文件系统", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["rootfs", "根文件系统", "挂载"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "容器内发现隐藏的 cron job 任务", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["隐藏cron", "容器内", "安全事件"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Pod security context allowPrivilegeEscalation 未设置", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["allowPrivilegeEscalation", "未设置", "安全"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "容器可以访问宿主机 /etc/shadow 文件", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["/etc/shadow", "访问", "容器"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "Falco 告警：容器内执行异常 shell 脚本", "lang": "zh", "category": "TC-SEC-INCIDENT", "skill_id": "SKILL-SECURITY-001", "keywords": ["Falco", "异常shell", "告警"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "网络策略配置后集群内服务互相访问失败", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["网络策略", "访问失败", "互相"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Egress 网络策略允许所有流量，未起到隔离作用", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["Egress", "允许所有", "隔离失效"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "网络策略使用 named port 但服务未定义 named port", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["named port", "未定义", "网络策略"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Namespace 隔离正常，但同命名空间内 Pod 无法通信", "lang": "zh", "category": "TC-INFRA-NET", "skill_id": "SKILL-NET-004", "keywords": ["同命名空间", "无法通信", "Pod"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "集群内存使用率持续 90%+，但 Pod 未被驱逐", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["内存使用率", "90%", "未驱逐"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "eviction manager 驱逐阈值配置异常", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["eviction manager", "阈值", "配置异常"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "节点存在影子资源报告，实际资源与 kubelet 报告不符", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["影子资源", "报告不符", "kubelet"], "severity_hint": "P2", "confidence": 0.70}
+{"text": "device plugin 报告 GPU 可用，但调度到该节点后无法使用", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["device plugin", "GPU", "无法使用"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "RuntimeClass 配置错误，handler 不存在", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["RuntimeClass", "handler", "不存在"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Pod topology spread constraints 导致调度失败", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["topology spread", "调度失败", "constraints"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Taint 节点未被 Pod 容忍，导致持续 Pending", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["Taint", "不容忍", "Pending"], "severity_hint": "P2", "confidence": 0.85}
+{"text": "NoSchedule taint 被绕过，Pod 仍被调度到该节点", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-002", "keywords": ["NoSchedule", "绕过", "调度"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "集群证书即将到期，集群可用性受影响", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["证书即将到期", "集群可用性", "影响"], "severity_hint": "P0", "confidence": 0.95}
+{"text": "ServiceAccount token 被挂载但未使用", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["ServiceAccount", "token", "未使用"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "kubelet 启动时指定了错误的 cgroup driver", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["cgroup driver", "错误", "kubelet"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "containerd 配置了错误的 snapshotter", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["snapshotter", "配置错误", "containerd"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "存储 CSI driver 长时间占用 mount.recursive 信号", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["mount.recursive", "CSI driver", "信号占用"], "severity_hint": "P1", "confidence": 0.80}
+{"text": "RWO 存储卷被多个 Pod 同时挂载导致写入异常", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["RWO", "同时挂载", "写入异常"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "CSI ephemeral volume 跨越 Pod 生命周期持久化数据丢失", "lang": "zh", "category": "TC-INFRA-STORE", "skill_id": "SKILL-STORE-001", "keywords": ["CSI ephemeral", "生命周期", "数据丢失"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "HPA 目标指标下降后副本数未 scale down", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["scale down", "未执行", "HPA"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "KEDA ScaledObject 配置正确但未触发扩容", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["KEDA", "未触发", "ScaledObject"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Cluster Autoscaler 扩展节点后立即被删除，形成震荡", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["Autoscaler", "震荡", "扩展删除"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Deployment 滚动更新时 maxSurge 设置过大导致资源浪费", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["maxSurge", "资源浪费", "滚动更新"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "StatefulSet 删除时 PVC 保护导致删除卡住", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["PVC保护", "删除卡住", "StatefulSet"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Deployment 升级时历史 ReplicaSet 未被清理", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["历史ReplicaSet", "未清理", "Deployment"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "Job 并发执行导致数据库锁竞争", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["Job并发", "数据库锁", "竞争"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "CronJob scheduled time 与集群时区不一致", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["时区不一致", "scheduled time", "CronJob"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "Ingress-nginx 仅配置了 HTTP 未启用 HTTPS", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["HTTP", "未启用HTTPS", "Ingress"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Ingress 使用默认证书，浏览器显示不安全", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["默认证书", "不安全", "Ingress"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "Ingress annotation 配置了不兼容的插件", "lang": "zh", "category": "TC-APP-INGRESS", "skill_id": "SKILL-NET-003", "keywords": ["annotation", "不兼容", "Ingress"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Service 使用 type: ExternalName 指向集群外服务但 DNS 解析异常", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["ExternalName", "DNS异常", "集群外"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Session Affinity 设置为 ClientIP 但无效", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["Session Affinity", "ClientIP", "无效"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "Pod 设置了 topologyKeys 但 Endpoints 分布不均", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["topologyKeys", "分布不均", "Endpoints"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "etcd 集群有 member 被移除但未彻底清理", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd member", "移除未清理", "集群"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "API Server 启动时 WAL fsync 延迟过高", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["WAL fsync", "延迟过高", "API Server"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "etcd 磁盘 I/O 饱和导致写入超时", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["etcd", "磁盘I/O", "写入超时"], "severity_hint": "P0", "confidence": 0.90}
+{"text": "Scheduler 调度队列堆积，大量 Pod 等待调度", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["调度队列", "堆积", "等待调度"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Controller Manager 资源版本过旧，CRUD 操作失败", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["资源版本", "过旧", "CRUD失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "API Server 认证鉴权插件冲突", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["认证插件", "冲突", "API Server"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "RBAC 角色继承链过深，权限传播不清晰", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["RBAC继承", "过深", "权限传播"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "证书签名者 CRD 未安装，Certificate 资源无法创建", "lang": "zh", "category": "TC-SEC-CERT", "skill_id": "SKILL-SEC-001", "keywords": ["Certificate CRD", "未安装", "签名者"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Prometheus 无法抓取 kube-state-metrics", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["Prometheus", "kube-state-metrics", "抓取失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "监控指标缺失，HPA 无法获取目标指标", "lang": "zh", "category": "TC-INFRA-SCALE", "skill_id": "SKILL-SCALE-001", "keywords": ["监控指标", "缺失", "HPA"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "Alertmanager 告警抑制规则不生效", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["Alertmanager", "抑制规则", "不生效"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "日志收集延迟过高，Elasticsearch 写入阻塞", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["日志延迟", "Elasticsearch", "写入阻塞"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "Fluentd/Fluent-bit 缓冲区满，日志丢失", "lang": "zh", "category": "TC-DATA-DB", "skill_id": "SKILL-DB-001", "keywords": ["缓冲区满", "日志丢失", "Fluentd"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl exec 进入容器失败，RBAC 权限不足", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["kubectl exec", "权限不足", "RBAC"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl cp 从容器复制文件失败，tar 进程崩溃", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["kubectl cp", "tar崩溃", "复制失败"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl port-forward 转发端口被占用", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["port-forward", "端口占用", "转发"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "kubectl top node 显示数据不准确", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["kubectl top", "数据不准", "node"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl logs --previous 获取历史日志失败", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["previous logs", "历史日志", "获取失败"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl describe pod 显示事件与实际不符", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["describe", "事件不符", "Pod"], "severity_hint": "P2", "confidence": 0.70}
+{"text": "kubectl apply --dry-run=server 报错但资源仍被创建", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["dry-run", "报错", "仍创建"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl scale 命令执行成功但副本数未变", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["scale", "副本数未变", "命令成功"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl rollout status 一直等待，滚动更新卡住", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["rollout status", "卡住", "等待"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "kubectl rollout undo 回滚失败，版本历史丢失", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["rollout undo", "回滚失败", "历史丢失"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "kubectl label 更新标签成功但未同步到 Endpoints", "lang": "zh", "category": "TC-APP-SVC", "skill_id": "SKILL-NET-002", "keywords": ["label", "未同步", "Endpoints"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl annotate 更新注解成功但应用未读取", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["annotate", "未读取", "注解"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl patch 使用 JSON patch 格式错误", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["JSON patch", "格式错误", "patch"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl replace 替换资源失败，uid 不匹配", "lang": "zh", "category": "TC-APP-CONFIG", "skill_id": "SKILL-CONFIG-001", "keywords": ["replace", "uid不匹配", "替换失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl drain 驱逐节点失败，PDBs 阻止", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["drain", "PDBs阻止", "驱逐失败"], "severity_hint": "P1", "confidence": 0.85}
+{"text": "kubectl cordon 标记节点后仍有新 Pod 被调度", "lang": "zh", "category": "TC-APP-WORKLOAD", "skill_id": "SKILL-WORK-001", "keywords": ["cordon", "新Pod调度", "标记后"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl debug 创建调试容器失败，镜像拉取错误", "lang": "zh", "category": "TC-APP-POD", "skill_id": "SKILL-POD-001", "keywords": ["kubectl debug", "镜像拉取", "失败"], "severity_hint": "P2", "confidence": 0.80}
+{"text": "kubectl top pod 显示指标与 Prometheus 查询结果不一致", "lang": "zh", "category": "TC-INFRA-NODE", "skill_id": "SKILL-NODE-001", "keywords": ["top pod", "指标不一致", "Prometheus"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl auth can-i 查询结果与实际 RBAC 不符", "lang": "zh", "category": "TC-SEC-RBAC", "skill_id": "SKILL-SEC-002", "keywords": ["can-i", "RBAC不符", "查询"], "severity_hint": "P2", "confidence": 0.75}
+{"text": "kubectl api-resources 显示资源数量与实际不符", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["api-resources", "数量不符", "资源"], "severity_hint": "P3", "confidence": 0.70}
+{"text": "kubectl get events 按时间排序异常", "lang": "zh", "category": "TC-INFRA-CP", "skill_id": "SKILL-CP-001", "keywords": ["get events", "排序异常", "时间"], "severity_hint": "P3", "confidence": 0.65}

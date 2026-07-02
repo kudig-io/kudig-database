@@ -44,6 +44,11 @@ prerequisites:
 - service-mesh-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Higress 网关故障排查指南
@@ -112,7 +117,8 @@ k8s_versions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Higress 系统组件状态
 kubectl get pods -n higress-system
 
@@ -138,7 +144,6 @@ kubectl get wasmplugin -A
 # 8. 查看 Envoy 配置
 kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_dump
 ```
-
 ---
 
 ## 架构与核心组件
@@ -181,7 +186,8 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_d
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Ingress 配置
 kubectl get ingress <name> -n <namespace> -o yaml
 
@@ -203,7 +209,6 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 kubectl exec -it <higress-gateway-pod> -c envoy -- \
   curl localhost:15000/config_dump?resource=dynamic_routes
 ```
-
 **常见原因**:
 - IngressClass 未指定或不存在
 - Host/path 匹配规则错误
@@ -220,7 +225,8 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Istiod 状态
 kubectl get pods -n istio-system
 
@@ -241,7 +247,6 @@ curl localhost:15000/config_dump?resource=dynamic_clusters
 # Step 6: 检查 EDS (Endpoint Discovery Service)
 curl localhost:15000/config_dump?resource=dynamic_endpoints
 ```
-
 **常见原因**:
 - Istiod 未正常运行
 - McpBridge 配置错误
@@ -258,7 +263,8 @@ curl localhost:15000/config_dump?resource=dynamic_endpoints
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 McpBridge CR 状态
 kubectl get mcphbridge -A -o yaml
 
@@ -277,7 +283,6 @@ kubectl get endpoints <service> -n <namespace> -o yaml
 # Ingress 的 host/path 是否与服务标签匹配
 kubectl get svc <service> -n <namespace> --show-labels
 ```
-
 **常见原因**:
 - Nacos 连接配置错误
 - 服务实例列表为空
@@ -294,7 +299,8 @@ kubectl get svc <service> -n <namespace> --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查插件 OCI 镜像可访问性
 crictl images | grep <plugin-image>
 
@@ -312,7 +318,6 @@ kubectl get wasmplugin <name> -o jsonpath='{.spec.config}' | jq
 kubectl exec -it <higress-gateway-pod> -c envoy -- \
   curl localhost:15000/stats | grep wasm
 ```
-
 **常见原因**:
 - OCI 镜像无法下载
 - 插件配置格式错误
@@ -329,7 +334,8 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 TLS Secret
 kubectl get secret -n higress-system | grep -E "tls|cert"
 
@@ -347,7 +353,6 @@ kubectl describe pod <higress-gateway-pod> -n higress-system | grep -A10 "Mounts
 # Step 5: 测试 TLS 连接
 curl -v --insecure https://<higress-gateway>:443 -H "Host: <host>"
 ```
-
 **常见原因**:
 - 证书过期
 - 证书与 host 不匹配
@@ -361,7 +366,8 @@ curl -v --insecure https://<higress-gateway>:443 -H "Host: <host>"
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 AI Provider 连接
 curl -X POST http://<higress-gateway>:80/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -379,7 +385,6 @@ kubectl logs -n higress-system <pod> | grep -i "openai|llm"
 # Step 5: 检查 AI 路由规则
 kubectl get aiportal -A
 ```
-
 **常见原因**:
 - LLM Provider API Key 配置错误
 - Token 限流触发
@@ -492,3 +497,5 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

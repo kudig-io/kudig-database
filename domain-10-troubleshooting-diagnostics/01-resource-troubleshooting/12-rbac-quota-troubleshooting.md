@@ -72,6 +72,11 @@ cross_refs:
   label: '运维技能: 09-rbac-quota-failure'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)
@@ -93,6 +98,7 @@ Error from server (Forbidden): deployments.apps is forbidden: User "system:servi
 ### 1.2 RBAC 排查流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         RBAC 权限排查流程                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -127,10 +133,10 @@ Error from server (Forbidden): deployments.apps is forbidden: User "system:servi
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.3 常用排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查特定用户的权限 ===
 kubectl auth can-i list pods --as=user@example.com
 kubectl auth can-i create deployments --as=user@example.com -n production
@@ -156,7 +162,6 @@ kubectl get clusterrolebinding -o yaml | grep -A5 "serviceAccount"
 kubectl describe role <role-name> -n <namespace>
 kubectl describe clusterrole <clusterrole-name>
 ```
-
 ### 1.4 RBAC 问题分类
 
 | 问题类型 | 错误特征 | 解决方案 |
@@ -173,7 +178,17 @@ kubectl describe clusterrole <clusterrole-name>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 为用户绑定角色 ===
 kubectl create rolebinding user-admin --clusterrole=admin --user=user@example.com -n production
 
@@ -200,7 +215,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 ---
 
 <!-- chunk: 2. ServiceAccount 问题排查 (ServiceAccount Issues) -->
@@ -211,7 +225,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 检查Pod使用的ServiceAccount ===
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.serviceAccountName}'
 
@@ -229,14 +244,14 @@ kubectl exec -it <pod-name> -n <namespace> -- \
   curl -k -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
   https://kubernetes.default.svc/api/v1/namespaces/default/pods
 ```
-
 ### 2.2 Token 问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === K8s 1.24+ Token投射 ===
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A20 "serviceAccountToken"
 
@@ -249,7 +264,6 @@ kubectl exec -it <pod-name> -n <namespace> -- cat /var/run/secrets/kubernetes.io
 # === 手动创建Token (K8s 1.24+) ===
 kubectl create token <sa-name> -n <namespace> --duration=3600s
 ```
-
 ---
 
 <!-- chunk: 3. ResourceQuota 问题排查 (ResourceQuota Troubleshooting) -->
@@ -266,7 +280,8 @@ Error from server (Forbidden): persistentvolumeclaims "my-pvc" is forbidden: exc
 
 ### 3.2 配额排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看命名空间配额 ===
 kubectl get resourcequota -n <namespace>
 kubectl describe resourcequota -n <namespace>
@@ -288,7 +303,6 @@ kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,CPU:.spec.
 # === 计算剩余配额 ===
 kubectl describe quota -n <namespace> | grep -E "^(cpu|memory|pods)"
 ```
-
 ### 3.3 配额类型说明
 
 | 配额类型 | 资源名称 | 说明 |
@@ -305,7 +319,8 @@ kubectl describe quota -n <namespace> | grep -E "^(cpu|memory|pods)"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 方案1: 调整配额 ===
 kubectl patch resourcequota <quota-name> -n <namespace> --patch '{"spec":{"hard":{"cpu":"2","memory":"8Gi"}}}'
 
@@ -319,7 +334,6 @@ kubectl get pods -n <namespace> --field-selector=status.phase=Failed -o name | x
 # === 方案4: 申请更多配额 ===
 # 联系管理员调整ResourceQuota
 ```
-
 ---
 
 <!-- chunk: 4. LimitRange 问题排查 (LimitRange Troubleshooting) -->
@@ -336,7 +350,8 @@ Error from server (Forbidden): pods "my-pod" is forbidden: maximum memory usage 
 
 ### 4.2 排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看LimitRange ===
 kubectl get limitrange -n <namespace>
 kubectl describe limitrange -n <namespace>
@@ -349,7 +364,6 @@ kubectl describe limitrange -n <namespace>
 # Pod         cpu       -      4000m  -                -
 # Pod         memory    -      8Gi    -                -
 ```
-
 ### 4.3 LimitRange 问题解决
 
 | 错误类型 | 原因 | 解决方案 |
@@ -379,20 +393,21 @@ cat /var/log/kubernetes/audit/audit.log | jq 'select(.responseStatus.code==403)'
 
 ### 5.2 使用kubectl who-can
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 需要安装kubectl-who-can插件 ===
 # 查看谁可以执行特定操作
 kubectl who-can create pods -n production
 kubectl who-can delete deployments -n production
 kubectl who-can '*' '*' --all-namespaces  # 查看集群管理员
 ```
-
 ### 5.3 RBAC 调试技巧
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 模拟用户操作 ===
 kubectl get pods --as=user@example.com
 kubectl create deployment test --image=nginx --as=user@example.com --dry-run=server
@@ -406,7 +421,6 @@ kubectl get pods --as=user@example.com --as-group=developers
 # === 详细输出权限检查 ===
 kubectl auth can-i create pods --as=user@example.com -v=8
 ```
-
 ---
 
 <!-- chunk: 6. 常见RBAC配置模板 (Common RBAC Templates) -->
@@ -502,7 +516,8 @@ roleRef:
 <!-- chunk: 7. 诊断命令速查 (Quick Reference) -->
 ## 7. 诊断命令速查 (Quick Reference)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === RBAC检查 ===
 kubectl auth can-i <verb> <resource> --as=<user>
 kubectl auth can-i --list --as=<user>
@@ -530,7 +545,6 @@ kubectl describe limitrange <name> -n <namespace>
 kubectl get sa -n <namespace>
 kubectl get secret -n <namespace> | grep <sa-name>
 ```
-
 ---
 
 <!-- chunk: 深度解决方案与最佳实践体系 -->
@@ -565,7 +579,8 @@ rules:
 ```
 
 **权限审计与清理脚本：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # rbac_audit.sh
 
@@ -587,7 +602,6 @@ kubectl get rolebindings --all-namespaces -o jsonpath='{range .items[*]}{.metada
     fi
   done
 ```
-
 #### 4.1.2 动态权限管理系统
 
 **基于标签的权限自动分配：**
@@ -614,7 +628,8 @@ roleRef:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # auto_rbac_manager.sh
 
@@ -639,7 +654,6 @@ case $ACTION in
     ;;
 esac
 ```
-
 ### 4.2 ResourceQuota优化策略
 
 #### 4.2.1 分层配额管理体系
@@ -679,7 +693,8 @@ spec:
 ```
 
 **配额使用监控仪表板：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # quota_monitor.sh
 
@@ -692,7 +707,6 @@ kubectl get resourcequota --all-namespaces -o custom-columns=NAMESPACE:.metadata
     printf "%s/%s - CPU: %.1f%%, Memory: %.1f%%\n", $1, $2, cpu_util, mem_util
   }' | sort -k5 -nr
 ```
-
 #### 4.2.2 动态配额调整机制
 
 **基于使用率的自动配额调整：**
@@ -700,7 +714,8 @@ kubectl get resourcequota --all-namespaces -o custom-columns=NAMESPACE:.metadata
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # dynamic_quota_adjustment.sh
 
@@ -726,7 +741,6 @@ elif [ $USAGE_PERCENT -lt $THRESHOLD_LOW ]; then
   echo "已缩容CPU配额至 ${NEW_LIMIT}"
 fi
 ```
-
 ### 4.3 LimitRange标准化配置
 
 #### 4.3.1 应用类型差异化限制
@@ -779,7 +793,8 @@ spec:
 #### 4.3.2 限制范围验证工具
 
 **LimitRange合规性检查：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # limitrange_validator.sh
 
@@ -798,7 +813,6 @@ kubectl get limitrange --all-namespaces -o jsonpath='{range .items[*]}{.metadata
     fi
   done
 ```
-
 ### 4.4 综合治理平台
 
 #### 4.4.1 统一权限管理中心
@@ -893,3 +907,5 @@ fi
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 存储体系全栈进阶培训 (从入门到专家)
@@ -432,7 +437,17 @@ graph TB
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 查看可用 StorageClass
 kubectl get sc
 # 预期输出:
@@ -521,10 +536,10 @@ EOF
 kubectl exec lab-pod-2 -- cat /data/test-file
 # 预期输出: Hello K8s Storage ← 数据还在！
 ```
-
 ## 演示 2：验证 CSI 挂载流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 获取 Pod UID 和 PV 名称
 POD_UID=$(kubectl get pod lab-pod-2 -o jsonpath='{.metadata.uid}')
 PV_NAME=$(kubectl get pvc lab-pvc -o jsonpath='{.spec.volumeName}')
@@ -553,14 +568,14 @@ ls /var/lib/kubelet/pods/$POD_UID/volumes/kubernetes.io~csi/$PV_NAME/
 # 查看实际挂载
 mount | grep $PV_NAME
 ```
-
 ## 演示 3：卷在线扩容
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 确认 StorageClass 允许扩容
 kubectl get sc -o yaml | grep allowVolumeExpansion
 # 预期输出: allowVolumeExpansion: true
@@ -589,14 +604,14 @@ kubectl exec lab-pod-2 -- df -h /data
 
 # 重要: 扩容不能缩容！从 20Gi 无法缩回 5Gi
 ```
-
 ## 演示 4：VolumeSnapshot 快照与恢复
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 写入重要数据
 kubectl exec lab-pod-2 -- sh -c "echo 'Important data before snapshot' > /data/important.txt"
 
@@ -673,10 +688,10 @@ EOF
 kubectl exec verify-pod -- cat /data/important.txt
 # 预期输出: Important data before snapshot ← 数据恢复成功！
 ```
-
 ## 演示 5：备份与恢复 (Velero)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 安装 Velero
 velero install \
   --provider aws \
@@ -713,7 +728,6 @@ velero schedule create daily-prod-backup \
   --snapshot-volumes \
   --ttl 168h
 ```
-
 ---
 
 <!-- chunk: 动手实验 -->## 动手实验
@@ -726,7 +740,8 @@ velero schedule create daily-prod-backup \
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 StatefulSet 使用 PVC
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -822,7 +837,6 @@ EOF
 kubectl exec verify-restored -- cat /data/version.txt
 # 预期: v1 data
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -884,6 +898,7 @@ kubectl exec verify-restored -- cat /data/version.txt
 ## 存储知识图谱
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Kubernetes 存储
 ├── 核心概念
 │   ├── PV (集群级存储资源)
@@ -913,7 +928,6 @@ Kubernetes 存储
     └── 卷挂载失败告警
 
 ```
-
 ## 存储问题速查表
 
 | 现象 | 可能原因 | 排查命令 | 解决方案 |
@@ -1011,3 +1025,5 @@ Kubernetes 存储
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

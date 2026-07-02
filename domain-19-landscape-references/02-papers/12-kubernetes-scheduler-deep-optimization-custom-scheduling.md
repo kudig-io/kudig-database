@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: scheduler'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
@@ -1098,7 +1103,8 @@ histogram_quantile(0.99, rate(scheduler_binding_duration_seconds_bucket[5m])) > 
 
 ## 6.3 调度分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # scheduler-performance-analyzer.sh
 
@@ -1155,7 +1161,6 @@ kubectl get events --all-namespaces --field-selector involvedObject.kind=Pod -o 
     jq -r '.items[] | select(.reason == "Scheduled") | "\(.firstTimestamp) \(.involvedObject.namespace)/\(.involvedObject.name) \(.message)"' | \
     tail -20
 ```
-
 <!-- chunk: 7. 最佳实践与优化策略 -->## 7. 最佳实践与优化策略
 
 ## 7.1 调度优化原则
@@ -1517,3 +1522,6 @@ spec:
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

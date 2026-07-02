@@ -33,6 +33,11 @@ prerequisites:
 - gitops-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # argo-cd v2.4 Release Notes
@@ -43,18 +48,18 @@ Source: [v2.4.28](https://github.com/argoproj/argo-cd/releases/tag/v2.4.28)
 
 ### Non-HA:
 
-```shell
+``` shell
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.28/manifests/install.yaml
 ```
-
 ### HA:
 
-```shell
+``` shell
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.28/manifests/ha/install.yaml
 ```
-
 ## 2.4.x has reached EOL
 
 This is the **last patch release in the 2.4 series**. Please upgrade to >=2.5 to continue to receive security updates. Read the [upgrading](https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/overview/) documentation before upgrading.
@@ -92,3 +97,6 @@ This release includes 1 contributions from 1 contributors with 0 features and 0 
 
 - MODERATE: Authenticated but unauthorized users may enumerate Application names via the API (https://github.com/argoproj/argo-cd/security/advisories/GHSA-2q5c-qw9c-fmvq)
 
+
+
+<!-- risk-assessed -->

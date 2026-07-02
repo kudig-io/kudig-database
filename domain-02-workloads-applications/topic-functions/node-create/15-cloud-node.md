@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 云厂商节点集成
@@ -139,7 +144,8 @@ k8s_versions:
 
 ### 1.2 AWS EC2 元数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # IMDSv1 (不推荐，存在 SSRF 风险)
 curl http://169.254.169.254/latest/meta-data/
 
@@ -163,7 +169,6 @@ curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-da
 curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/local-ipv4
 # 10.0.1.100
 ```
-
 ### 1.3 GCP GCE 元数据
 
 ```bash
@@ -231,7 +236,8 @@ providerID 是 Kubernetes Node 对象中用于唯一标识云实例的字段。�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubelet 自动设置 providerID (通过 cloud provider)
 # 查看 providerID
 kubectl get node <node> -o jsonpath='{.spec.providerID}'
@@ -242,7 +248,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.pro
 # 手动设置 providerID (不使用 cloud provider 时)
 kubectl patch node <node> -p '{"spec":{"providerID":"aws:///us-east-1a/i-0abc123"}}'
 ```
-
 ### 2.3 providerID 在控制器中的作用
 
 providerID 是多个 Kubernetes 控制器的关键输入：
@@ -354,7 +359,8 @@ spec:
 
 ### 4.1 云厂商自动添加的污点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS EKS 污点 (Spot 实例)
 node.kubernetes.io/instance-type=p3.2xlarge:NoSchedule  # 特定实例类型
 
@@ -366,13 +372,22 @@ cloud.google.com/gke-provisioner:NoSchedule               # GKE 自动调配
 kubernetes.azure.com/scalesetpriority=spot:NoSchedule     # Spot VM
 kubernetes.azure.com/agentpool=spot:NoSchedule            # Spot 节点池
 ```
-
 ### 4.2 自定义污点管理
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 添加污点
 kubectl taint nodes <node> dedicated=gpu:NoSchedule
 
@@ -382,7 +397,6 @@ kubectl taint nodes <node> dedicated=gpu:NoSchedule-
 # 查看污点
 kubectl describe node <node> | grep Taints
 ```
-
 ### 4.3 Pod 容忍云厂商污点
 
 ```yaml
@@ -454,7 +468,8 @@ metadata:
 
 ### 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 cloud-controller-manager 状态
 kubectl get pods -n kube-system -l component=cloud-controller-manager
 
@@ -474,7 +489,6 @@ curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMeta
 # Azure: 检查实例元数据
 curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | jq .
 ```
-
 ---
 
 ## 相关函数
@@ -498,3 +512,5 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]
 
 ```
+
+<!-- risk-assessed -->

@@ -30,6 +30,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -122,7 +127,8 @@ related_topics:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 给节点打标签
 kubectl label nodes <node-name> workload=web
 
@@ -164,13 +170,13 @@ EOF
 # 验证调度结果
 kubectl get pod selector-demo affinity-demo -o wide
 ```
-
 ### 任务 2: Pod 反亲和性 (高可用部署) (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment 并配置反亲和性 (Pod 分散到不同节点)
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -206,14 +212,14 @@ EOF
 # 查看 Pod 分布
 kubectl get pod -l app=ha-app -o wide
 ```
-
 ### 任务 3: 健康探针配置 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建带三种探针的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -258,14 +264,14 @@ kubectl describe pod probe-demo | grep -A 5 "Liveness|Readiness|Startup"
 kubectl exec probe-demo -- rm /usr/share/nginx/html/index.html
 kubectl get pod probe-demo -w   # 观察 READY 变化
 ```
-
 ### 任务 4: 资源请求与限制 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建带资源配置的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -296,7 +302,6 @@ kubectl describe node <node-name> | grep -A 10 "Allocated resources"
 kubectl delete pod selector-demo affinity-demo probe-demo resource-demo
 kubectl delete deploy ha-app
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -337,3 +342,6 @@ kubectl delete deploy ha-app
 ## 明日预告
 
 Day 21 将学习 K8S 核心组件的状态检查与故障处理。
+
+
+<!-- risk-assessed -->

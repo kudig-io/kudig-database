@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -86,7 +91,8 @@ relationships:
 
 按“先 Pod 事件、再节点资源与污点、最后调度约束”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 状态与事件
 kubectl get pod -n ai-training -l job-name=tf-resnet50-pretrain -o wide
 kubectl describe pod -n ai-training tf-resnet50-pretrain-worker-0 | tail -80
@@ -112,7 +118,6 @@ kubectl describe resourcequota -n ai-training
 # 7. 查看 kube-scheduler 审计日志（如权限允许）
 kubectl logs -n kube-system -l component=kube-scheduler --tail=200 | grep tf-resnet50-pretrain
 ```
-
 ## 根因分析
 
 经排查，Pending 原因由两个因素叠加导致：
@@ -143,10 +148,10 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=200 | grep tf-res
 
 **第一步：确认节点真实 allocatable，避免资源请求超过单节点上限**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node cn-beijing.192.168.10.21 -o jsonpath='{.status.allocatable}'
 ```
-
 输出显示该节点 allocatable CPU 约 7800m、内存约 58Gi，因此将每个 worker 请求调整为 `cpu: 6`、`memory: 48Gi`，Limit 保持 `cpu: 8`、`memory: 64Gi`。
 
 **第二步：为训练 Job 添加 GPU 节点污点容忍**
@@ -154,7 +159,8 @@ kubectl get node cn-beijing.192.168.10.21 -o jsonpath='{.status.allocatable}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch job tf-resnet50-pretrain -n ai-training --type='merge' -p '{
   "spec": {
     "template": {
@@ -172,7 +178,6 @@ kubectl patch job tf-resnet50-pretrain -n ai-training --type='merge' -p '{
   }
 }'
 ```
-
 > 注意：Job 的 PodTemplate 字段不可直接 patch，实际操作建议编辑 YAML 后重新 apply，或删除 Job 后重新创建。
 
 **第三步：修改资源请求并重新提交训练 Job**
@@ -181,7 +186,8 @@ kubectl patch job tf-resnet50-pretrain -n ai-training --type='merge' -p '{
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 导出当前 Job YAML
 kubectl get job tf-resnet50-pretrain -n ai-training -o yaml > /tmp/tf-resnet50-pretrain.yaml
 
@@ -190,7 +196,6 @@ kubectl get job tf-resnet50-pretrain -n ai-training -o yaml > /tmp/tf-resnet50-p
 kubectl delete job tf-resnet50-pretrain -n ai-training
 kubectl apply -f /tmp/tf-resnet50-pretrain.yaml
 ```
-
 **第四步：如业务确实需要 8 核 64Gi，临时扩容 GPU 节点池**
 
 ```bash
@@ -208,7 +213,8 @@ aliyun cs POST /clusters/ack-zyy-prod-04/nodes \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch job tf-resnet50-pretrain -n ai-training --type='merge' -p '{
   "spec": {
     "template": {
@@ -231,10 +237,10 @@ kubectl patch job tf-resnet50-pretrain -n ai-training --type='merge' -p '{
   }
 }'
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Pending Pod 全部 Running
 kubectl get pod -n ai-training -l job-name=tf-resnet50-pretrain -o wide
 
@@ -251,7 +257,6 @@ kubectl logs -n ai-training -l job-name=tf-resnet50-pretrain --tail=100
 aliyun cs GET /clusters/ack-zyy-prod-04/nodes \
   --output cols=InstanceId,InstanceType,NodeStatus rows=nodes.node[]
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，训练任务 `tf-resnet50-pretrain` 长时间 Pending 的根因有两个：
@@ -303,3 +308,6 @@ aliyun cs GET /clusters/ack-zyy-prod-04/nodes \
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

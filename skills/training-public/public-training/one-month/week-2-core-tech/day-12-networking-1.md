@@ -34,6 +34,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 12: 网络栈 - CNI + [[Service|Service]] + DNS
@@ -128,7 +133,8 @@ related:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建两个 Pod
 kubectl run pod1 --image=nginx:alpine
 kubectl run pod2 --image=busybox --command -- sleep 3600
@@ -148,14 +154,14 @@ kubectl exec pod1 -- cat /etc/resolv.conf
 # 清理
 kubectl delete pod pod1 pod2
 ```
-
 ### 任务 2: Service 类型实践 (1h)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 Deployment
 kubectl create deployment web --image=nginx:alpine --replicas=3
 
@@ -194,14 +200,14 @@ kubectl describe svc web-clusterip
 kubectl delete deployment web
 kubectl delete svc web-clusterip web-nodeport web-lb external-db
 ```
-
 ### 任务 3: Service 实现原理 - iptables (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Service
 kubectl create deployment nginx --image=nginx:alpine --replicas=2
 kubectl expose deployment nginx --port=80 --type=ClusterIP
@@ -229,14 +235,23 @@ sudo iptables -t nat -L -n | grep $SVC_IP
 kubectl delete deployment nginx
 kubectl delete svc nginx
 ```
-
 ### 任务 4: CoreDNS 服务发现 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 CoreDNS 配置
 kubectl get configmap coredns -n kube-system -o yaml
 
@@ -285,7 +300,6 @@ kubectl run dns-test2 --image=busybox -it --rm -- nslookup web-headless.dns-test
 # 清理
 kubectl delete namespace dns-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -336,3 +350,6 @@ Day 13 将学习 [[Ingress|Ingress]] 和 [[NetworkPolicy|NetworkPolicy]]，实�
 ## Related
 
 - index/dns-index|DNS 知识图谱索引]]
+
+
+<!-- risk-assessed -->

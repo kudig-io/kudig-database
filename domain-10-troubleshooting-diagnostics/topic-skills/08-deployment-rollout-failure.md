@@ -66,6 +66,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -168,7 +173,8 @@ Deployment 滚动更新问题是 [[Kubernetes|Kubernetes]] 生产环境中**最�
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查 Deployment 滚动更新状态（10s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速检查 Deployment 状态，确认是否卡住
 kubectl rollout status deployment/NAME -n NS --timeout=10s
 # 输出解读:
@@ -181,7 +187,8 @@ kubectl rollout status deployment/NAME -n NS --timeout=10s
 > - 成功完成 → 检查是否为历史问题或已自动恢复
 
 **Step T2**: 检查 ReplicaSet 演进状态（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ReplicaSet 历史和当前状态
 kubectl get rs -n NS -l app=NAME --sort-by=.metadata.creationTimestamp -o wide
 # 关注：
@@ -195,7 +202,8 @@ kubectl get rs -n NS -l app=NAME --sort-by=.metadata.creationTimestamp -o wide
 > - 仅旧 RS 有 READY → 可能回滚已发生或新 RS 被删除
 
 **Step T3**: 检查 Deployment Conditions（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取详细的 Deployment 条件
 kubectl describe deployment NAME -n NS | grep -A10 "Conditions:"
 # 或使用 JSON 格式
@@ -1215,7 +1223,8 @@ kubectl get deployment NAME -n NS -o jsonpath='{range .status.conditions[*]}{.ty
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认 rollout 状态
 kubectl rollout status deployment/NAME -n NS --timeout=60s
 # 预期: "deployment NAME successfully rolled out"
@@ -1238,7 +1247,6 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 # Available: True
 # Progressing: True
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1466,3 +1474,5 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

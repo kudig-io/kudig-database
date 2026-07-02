@@ -61,6 +61,11 @@ cross_refs:
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 安全合规管理 ([[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Management)
@@ -535,7 +540,8 @@ spec:
 ```
 
 ### 安全基线检查
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安全配置检查脚本
 #!/bin/bash
 
@@ -574,7 +580,6 @@ kubectl get pods --all-namespaces -o json | jq -r '
   "\(.metadata.namespace)/\(.metadata.name) - privileged container"
 '
 ```
-
 <!-- chunk: 安全监控告警 -->
 ## 安全监控告警
 
@@ -798,3 +803,6 @@ class AuditAnalyzer:
 - 09-cost-optimization-finops
 - 11-disaster-recovery-business-continuity
 - 12-backup-recovery-strategy
+
+
+<!-- risk-assessed -->

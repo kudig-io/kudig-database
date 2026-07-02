@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SLSA 级别与实施 (SLSA Levels and Implementation)
@@ -782,7 +787,8 @@ capture_build_context "build-context.json"
 
 ## 4.1 Git 提交完整性保护
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 源码完整性保护措施
 
 # ============ 1. 强制 GPG 签名 ============
@@ -849,7 +855,6 @@ terraform/ @security-team @platform-team
 kubernetes/ @security-team @platform-team
 EOF
 ```
-
 ## 4.2 源码审计追踪
 
 ```python
@@ -1347,7 +1352,8 @@ USER 65534:65534
 ENTRYPOINT ["/app"]
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建可重现镜像
 SOURCE_DATE_EPOCH=$(git log -1 --format=%ct HEAD)
 
@@ -1381,7 +1387,6 @@ else
   docker image inspect myapp:v1.0.0-verify --format '{{.RootFS.Layers}}' | tr ' ' '\n'
 fi
 ```
-
 ---
 
 <!-- chunk: 7. GitHub Actions 实施指南 -->## 7. GitHub Actions 实施指南
@@ -1682,7 +1687,8 @@ graph TD
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Tekton Pipelines
 kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
 
@@ -1714,7 +1720,6 @@ cosign generate-key-pair k8s://tekton-chains/signing-secrets
 kubectl get pods -n tekton-chains
 kubectl get configmap chains-config -n tekton-chains -o yaml
 ```
-
 ## 8.3 Tekton Pipeline 配置
 
 ```yaml
@@ -2612,3 +2617,6 @@ trivy --version 2>/dev/null | head -1
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

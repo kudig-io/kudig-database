@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 07 - 监控和指标表
@@ -336,7 +341,8 @@ groups:
 ---
 
 **指标获取命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取组件指标
 kubectl get --raw /metrics
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
@@ -348,7 +354,6 @@ curl -k https://<node-ip>:10250/metrics
 # etcd指标
 etcdctl endpoint status --cluster
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -383,3 +388,6 @@ etcdctl endpoint status --cluster
 - 09-events-audit-logs
 - 11-custom-metrics-adapter
 - 12-logging-auditing
+
+
+<!-- risk-assessed -->

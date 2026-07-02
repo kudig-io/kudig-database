@@ -70,6 +70,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get [[Pods|pods]] -n logging -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示日志组件异常 -->
@@ -166,7 +171,8 @@ agent_execution_mode: L2-semi-auto
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 检查日志采集 DaemonSet 状态（15 秒）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取日志采集 DaemonSet 状态
 kubectl get ds -n logging -o wide
 # 或者在 kube-system 命名空间
@@ -182,7 +188,8 @@ kubectl get pods -n logging -o wide | head -20
 > - 所有 Pod Ready → 继续 T2
 
 **Step T2**: 检查采集器资源使用和日志（30 秒）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查采集器 Pod 资源使用
 kubectl top pods -n logging --sort-by=memory
 
@@ -203,7 +210,8 @@ kubectl logs -n logging -l app=vector --tail=30 --since=5m 2>/dev/null | grep -i
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Elasticsearch 健康检查
 kubectl exec -n logging $(kubectl get pod -n logging -l app=elasticsearch -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:9200/_cluster/health?pretty 2>/dev/null
 # 或直接访问
@@ -1418,7 +1426,8 @@ curl -s "http://elasticsearch.logging:9200/_cat/indices?v&s=store.size:desc" | h
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 确认所有采集器 Pod Running
 kubectl get pods -n logging -o wide
 # 预期: 所有 Pod STATUS 为 Running，且 READY 为 1/1
@@ -1447,7 +1456,6 @@ curl -s http://loki.logging:3100/ready
 kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpath='{.items[0].metadata.name}') -- curl -s localhost:2020/api/v1/metrics | grep -E 'storage|buffer'
 # 预期: buffer 指标稳定，无持续增长
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1650,3 +1658,6 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

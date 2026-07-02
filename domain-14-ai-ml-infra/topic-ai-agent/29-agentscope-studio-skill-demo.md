@@ -40,6 +40,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: AgentScope Studio 与 Agent [[SKILL|Skill]] 实战指南
@@ -579,7 +584,8 @@ kubectl describe pod <pod-name> -n <namespace>
 
 ## Step 3：收集环境信息（如需进一步分析）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群资源总览
 kubectl top nodes
 kubectl get nodes -o wide
@@ -588,7 +594,6 @@ kubectl get nodes -o wide
 kubectl get resourcequota -n <namespace>
 kubectl get limitrange -n <namespace>
 ```
-
 <!-- chunk: 输出格式 -->## 输出格式
 
 诊断结果请严格按以下格式输出：
@@ -599,7 +604,7 @@ kubectl get limitrange -n <namespace>
 4. **验证方法**：修复后如何确认问题已解决
 5. **预防建议**：如何避免类似问题再次发生
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ## skills/k8s-node-diagnosis/SKILL.md
 
 ```markdown
@@ -622,13 +627,12 @@ description: Kubernetes 节点故障诊断技能，涵盖 NotReady/MemoryPressur
 kubectl get nodes -o wide
 kubectl describe node <node-name>
 ```
-
 ## Step 2：检查节点 Conditions
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name> -o jsonpath='{.status.conditions}' | python3 -m json.tool
 ```
-
 重点关注的 Condition：
 
 | Condition | 正常值 | 异常值 | 含义 |
@@ -655,7 +659,7 @@ top -bn1 | head -20
 
 同 Pod 诊断：现象 → 根因 → 修复方案 → 验证方法 → 预防建议
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ## skills/k8s-network-diagnosis/SKILL.md
 
 ```markdown
@@ -678,10 +682,10 @@ description: Kubernetes 网络故障诊断技能，涵盖 Service 不通、DNS �
 kubectl get svc <service-name> -n <namespace>
 kubectl get endpoints <service-name> -n <namespace>
 ```
-
 ## Step 2：DNS 诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用临时 Pod 测试 DNS
 kubectl run dns-test --image=busybox:1.36 --rm -it --restart=Never -- nslookup <service-name>.<namespace>.svc.cluster.local
 
@@ -689,17 +693,16 @@ kubectl run dns-test --image=busybox:1.36 --rm -it --restart=Never -- nslookup <
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
 ```
-
 ## Step 3：连通性测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 到 Service 连通性
 kubectl run net-test --image=busybox:1.36 --rm -it --restart=Never -- wget -qO- --timeout=5 http://<service-name>.<namespace>:port
 
 # 检查 NetworkPolicy
 kubectl get networkpolicy -n <namespace>
 ```
-
 <!-- chunk: 输出格式 -->## 输出格式
 
 同 Pod 诊断：现象 → 根因 → 修复方案 → 验证方法 → 预防建议
@@ -848,7 +851,8 @@ WantedBy=multi-user.target
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用并启动
 sudo systemctl daemon-reload
 sudo systemctl enable --now agentscope-k8s-doctor
@@ -860,7 +864,6 @@ journalctl -u agentscope-k8s-doctor -f
 # 停止
 sudo systemctl stop agentscope-k8s-doctor
 ```
-
 > **提示**：后台运行时，用户输入通过 Studio Web 界面（`http://localhost:3000`）进行，
 > 无需终端交互。Agent 的 `UserAgent` 会自动由 Studio 托管输入。
 
@@ -906,6 +909,7 @@ user: production 命名空间的 nginx-7d5b8c9f-x2k4j Pod 一直 Pending，帮�
 Agent 执行流程：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Agent 决策路径
 │
 ├── 1. 识别问题类型：Pod Pending → 匹配 k8s-pod-diagnosis Skill
@@ -928,7 +932,6 @@ Agent 决策路径
     ├── 验证方法：kubectl get pod -n production -w
     └── 预防建议：配置 ResourceQuota + HPA
 ```
-
 ---
 
 <!-- chunk: 6. 生产模式：AgentApp + WebUI -->## 6. 生产模式：AgentApp + WebUI
@@ -1200,3 +1203,6 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 - 28-agent-cli-enterprise-automation
 - 30-agent-harness-engineering
 - 31-agent-harness-loop-execution
+
+
+<!-- risk-assessed -->

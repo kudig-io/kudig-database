@@ -36,6 +36,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -178,7 +183,8 @@ default   AK           LTAI5t***********   cn-hangzhou
 
 #### 1.2 集群管理 API
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群列表
 aliyun cs GET /api/v1/clusters
 
@@ -213,7 +219,6 @@ mv ~/.kube/config.merged ~/.kube/config
 # 查看集群创建日志
 aliyun cs GET /clusters/<cluster_id>/logs
 ```
-
 #### 1.3 集群列表 jq 过滤
 
 ```bash
@@ -292,7 +297,8 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id>/nodes
 
 ### 任务 3: 组件管理 API (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群已安装组件
 aliyun cs GET /clusters/<cluster_id>/components
 
@@ -323,7 +329,6 @@ aliyun cs GET /clusters/<cluster_id>/components/upgradestatus
 # | arms-prometheus | ARMS Prometheus 监控 | 可选 |
 # | logtail-ds | 日志采集 | 可选 |
 ```
-
 ---
 
 ### 任务 4: SDK 调用实践 (30min)
@@ -565,3 +570,6 @@ Day 3 将学习 ACK/ACR 控制台操作，熟悉界面功能入口和核心操�
 - [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 - [ACK RAM 授权](../../domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md)
 - [ACK OpenAPI 文档](https://help.aliyun.com/document_detail/260907.html)
+
+
+<!-- risk-assessed -->

@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
@@ -267,7 +272,8 @@ Kubernetes 集群包含 4 个默认命名空间：
 | **kube-public** | 公共资源 | ❌ 否 | 所有用户可读（含未认证用户） |
 | **kube-node-lease** | 节点心跳 | ❌ 否 | 存放 Lease 对象（节点心跳机制，v1.14+） |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有命名空间
 kubectl get namespaces
 
@@ -278,7 +284,6 @@ kube-public       Active   30d
 kube-node-lease   Active   30d
 production        Active   10d
 ```
-
 ## 2.5.2 Finalizer 保护机制
 
 Finalizer 是删除前置钩子，防止命名空间被意外删除时丢失关键资源。
@@ -298,7 +303,17 @@ metadata:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 删除命名空间
 kubectl delete namespace protected-namespace  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
@@ -323,12 +338,12 @@ metadata:
 # Error from server (NotFound): namespaces "protected-namespace" not found
 
 ```
-
 ## 2.5.3 命名空间卡住（Stuck Namespace）问题排除
 
 **症状**：`kubectl delete namespace <name>` 无法完成，命名空间长期处于 `Terminating` 状态。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间状态
 kubectl get namespace stuck-ns -o yaml
 
@@ -342,7 +357,6 @@ metadata:
 status:
   phase: Terminating
 ```
-
 **原因分析**：
 
 1. **资源无法删除**：命名空间内有资源无法删除（如 PVC 被 Pod 使用）
@@ -356,7 +370,17 @@ status:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1：检查残留资源
 kubectl api-resources --verbs=list --namespaced -o name | \
   xargs -n 1 kubectl get --show-kind --ignore-not-found -n stuck-ns
@@ -376,7 +400,6 @@ kubectl get namespace stuck-ns -o json | \
 kubectl edit namespace stuck-ns
 # 删除 metadata.finalizers 字段，保存退出
 ```
-
 ## 2.5.4 Pod Security Standards（v1.23+）
 
 Kubernetes 1.23+ 引入 Pod Security Admission (PSA)，通过标签在命名空间级别强制执行安全策略。
@@ -442,7 +465,17 @@ Namespace Controller 监听命名空间的生命周期事件，负责清理资�
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────┐
 │  1. 用户执行删除命令                             │
 │     kubectl delete namespace production         │  # ⚠️ 不可逆：永久删除命名空间及全部资源
@@ -475,7 +508,6 @@ Namespace Controller 监听命名空间的生命周期事件，负责清理资�
 │  6. API Server 真正删除命名空间对象              │
 └─────────────────────────────────────────────────┘
 ```
-
 ## 2.6.2 Namespace Scoping 工作机制
 
 API Server 如何实现命名空间隔离：
@@ -847,6 +879,7 @@ ResourceQuota 由 **Admission Controller** 在 Pod 创建时强制执行。
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────┐
 │  1. 用户提交 Pod 创建请求                        │
 │     kubectl apply -f pod.yaml                   │
@@ -877,10 +910,10 @@ ResourceQuota 由 **Admission Controller** 在 Pod 创建时强制执行。
 │  更新 used 值    │ │  返回错误信息         │
 └──────────────────┘ └──────────────────────┘
 ```
-
 **配额计算示例**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ResourceQuota 使用情况
 kubectl describe resourcequota production-quota -n production
 
@@ -899,7 +932,6 @@ Error from server (Forbidden): error when creating "pod.yaml":
 pods "large-pod" is forbidden: exceeded quota: production-quota, 
 requested: requests.cpu=30, used: requests.cpu=75, limited: requests.cpu=100
 ```
-
 ## 3.6.2 配额更新机制
 
 ```go
@@ -1288,6 +1320,7 @@ LimitRange 由 **LimitRanger Admission Plugin** 在资源创建时自动注入�
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────┐
 │  1. 用户提交 Pod 创建请求                        │
 │     kubectl apply -f pod.yaml                   │
@@ -1317,7 +1350,6 @@ LimitRange 由 **LimitRanger Admission Plugin** 在资源创建时自动注入�
 │  (已注入默认值)  │ │  返回错误信息         │
 └──────────────────┘ └──────────────────────┘
 ```
-
 ## 4.6.2 默认值注入逻辑
 
 ```go
@@ -1397,7 +1429,8 @@ func (l *LimitRanger) Admit(pod *Pod) error {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建环境命名空间
 kubectl create namespace development
 kubectl create namespace staging
@@ -1428,14 +1461,14 @@ spec:
     pods: "200"
 EOF
 ```
-
 ## 按团队隔离
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建团队命名空间
 kubectl create namespace team-frontend
 kubectl create namespace team-backend
@@ -1445,7 +1478,6 @@ kubectl create namespace team-data
 kubectl label namespace team-frontend team=frontend owner=frontend-team@example.com
 kubectl label namespace team-backend team=backend owner=backend-team@example.com
 ```
-
 ## 6.2 ResourceQuota 设计模式
 
 ## 模式 1：总量配额 + 优先级配额
@@ -1606,7 +1638,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看配额使用情况
 kubectl describe quota -n <namespace>
 
@@ -1616,10 +1658,10 @@ kubectl delete pod <pod-name> -n <namespace>
 # 解决方案 2：增加配额（需管理员权限）
 kubectl edit resourcequota <quota-name> -n <namespace>
 ```
-
 ## Q2: 如何查看 LimitRange 为 Pod 注入了哪些默认值？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 Pod 后查看实际值
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 10 resources:
 
@@ -1632,7 +1674,6 @@ resources:
     cpu: 200m             # 来自 LimitRange.defaultRequest
     memory: 512Mi
 ```
-
 ## Q3: 一个命名空间可以有多个 LimitRange 吗？
 
 **答案**：可以，但**不推荐**。多个 LimitRange 会导致行为不可预测。
@@ -1674,7 +1715,8 @@ spec:
 
 ## Q5: 如何监控 ResourceQuota 使用情况？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1：kubectl describe
 kubectl describe quota -n production
 
@@ -1688,7 +1730,6 @@ kube_resourcequota{resource="requests.cpu",namespace="production"}
   annotations:
     summary: "Namespace {{ $labels.namespace }} quota usage > 90%"
 ```
-
 ---
 
 <!-- chunk: 8. 生产案例 -->## 8. 生产案例
@@ -1934,3 +1975,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

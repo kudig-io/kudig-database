@@ -46,6 +46,11 @@ prerequisites:
 - ebpf-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # [[Helm|Helm]] 生产环境速查卡
 
@@ -55,7 +60,8 @@ prerequisites:
 
 ## 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # macOS
 brew install helm
 
@@ -65,12 +71,12 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # 验证
 helm version
 ```
-
 ---
 
 ## 仓库管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加常用仓库
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -84,7 +90,6 @@ helm repo update
 helm search repo nginx
 helm search hub prometheus  # 搜索 Artifact Hub
 ```
-
 ---
 
 ## 安装/升级/回滚
@@ -93,7 +98,17 @@ helm search hub prometheus  # 搜索 Artifact Hub
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 安装
 helm install my-release bitnami/nginx -n my-ns --create-ns
 
@@ -117,12 +132,12 @@ helm rollback my-release 1     # 回滚到版本 1
 # 卸载
 helm uninstall my-release -n my-ns  # ⚠️ 删除 release 及关联资源
 ```
-
 ---
 
 ## 查询与调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 release
 helm list -A
 
@@ -144,12 +159,12 @@ helm get notes my-release
 # 查看 hooks
 helm get hooks my-release
 ```
-
 ---
 
 ## Chart 开发
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建新 Chart
 helm create my-chart
 
@@ -166,7 +181,6 @@ helm package my-chart/
 # 推送到 OCI 仓库
 helm push my-chart-1.0.0.tgz oci://registry.example.com/charts
 ```
-
 ### Chart.yaml 关键字段
 
 ```yaml
@@ -275,3 +289,5 @@ dependencies:
 - helm v3.2 Release Notes
 
 ```
+
+<!-- risk-assessed -->

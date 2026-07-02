@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -466,7 +471,8 @@ spec:
 ```
 
 ## 2. Etcd存储优化
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Etcd存储性能优化
 
@@ -529,7 +535,6 @@ cat > /etc/cron.d/etcd-maintenance << EOF
 0 2 * * * root /usr/local/bin/etcd-maintenance.sh >> /var/log/etcd-maintenance.log 2>&1
 EOF
 ```
-
 ## Controller Manager优化
 
 ## 1. Controller Manager配置
@@ -1198,3 +1203,6 @@ if __name__ == "__main__":
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+
+<!-- risk-assessed -->

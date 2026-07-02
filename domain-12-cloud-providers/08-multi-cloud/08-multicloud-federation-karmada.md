@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Karmada|Karmada]] 多集群联邦深度实践
@@ -287,7 +292,8 @@ spec:
 
 ## 注册成员集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -347,7 +353,6 @@ kubectl --kubeconfig $KARMADA_KUBECONFIG get clusters -o wide
 
 echo "=== 集群注册完成 ==="
 ```
-
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
 ## PropagationPolicy 资源分发策略
@@ -893,7 +898,8 @@ spec:
 
 ## Karmada 日常运维脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -947,10 +953,10 @@ echo "Work 资源总数"
 
 echo "=== 运维检查完成 ==="
 ```
-
 ## 工作负载迁移脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1005,7 +1011,6 @@ karmadactl get deployment $WORKLOAD_NAME -n $NAMESPACE \
 
 echo "=== 迁移完成 ==="
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 调度策略最佳实践
@@ -1051,7 +1056,8 @@ echo "=== 迁移完成 ==="
 
 ## 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 KARMADA_KUBECONFIG="/etc/karmada/karmada-apiserver.config"
 
 echo "=== Karmada 调试命令集合 ==="
@@ -1077,7 +1083,6 @@ echo "[6] 查看策略详情"
 kubectl --kubeconfig $KARMADA_KUBECONFIG get propagationpolicies -A -o yaml
 kubectl --kubeconfig $KARMADA_KUBECONFIG get overridepolicies -A -o yaml
 ```
-
 <!-- chunk: 参考资源 -->## 参考资源
 
 - [Karmada 官方文档](https://karmada.io/docs/)
@@ -1116,3 +1121,6 @@ kubectl --kubeconfig $KARMADA_KUBECONFIG get overridepolicies -A -o yaml
 - 07-huawei-cce-enterprise
 - 09-multicloud-network-interconnect
 - 10-multicloud-disaster-recovery
+
+
+<!-- risk-assessed -->

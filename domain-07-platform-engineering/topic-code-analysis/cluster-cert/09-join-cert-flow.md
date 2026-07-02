@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubeadm join 证书分发流程
@@ -436,6 +441,7 @@ func DownloadCerts(...) error {
 ## 完整排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                 kubeadm join 失败排查流程                         │
 ├─────────────────────────────────────────────────────────────────┤
@@ -519,7 +525,6 @@ func DownloadCerts(...) error {
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 | 阶段 | 现象 | 排查命令 | 解决方案 |
 |-----|------|---------|----------|
 | CA 发现失败 | `failed to retrieve CA cert` | `kubectl get cm cluster-info -n kube-public` | 确保 API Server 可达，检查 Token |
@@ -529,7 +534,8 @@ func DownloadCerts(...) error {
 | 证书下载失败 | `unable to fetch client cert` | `journalctl -u kubelet` | 检查 API Server 日志 |
 | 网络不通 | `connection refused` | `curl -k https://<api-server>:6443/healthz` | 检查网络/防火墙/负载均衡器 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 join 过程中的 CSR
 kubectl get csr -w
 
@@ -545,7 +551,6 @@ kubeadm token list
 # 重新生成 join 命令
 kubeadm token create --print-join-command
 ```
-
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
@@ -554,3 +559,6 @@ kubeadm token create --print-join-command
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]
+
+
+<!-- risk-assessed -->

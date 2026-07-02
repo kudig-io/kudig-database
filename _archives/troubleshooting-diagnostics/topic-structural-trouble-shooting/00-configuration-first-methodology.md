@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 疑难问题系统性排查方法论：配置优先（Configuration-First）
 
 > **适用版本**: [[entities/kubernetes|kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级 | **定位**: 跨组件方法论
@@ -192,11 +197,11 @@ Step 1: 配置验证 ──→ Step 2: 版本兼容 ──→ Step 3: 运行状�
 
 #### 3.1.1 检查 Corefile（CoreDNS 核心配置）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取 CoreDNS 配置
 kubectl get configmap coredns -n kube-system -o yaml
 ```
-
 **必须验证的配置项**：
 
 | # | 配置项 | 正确示例 | 常见错误 | 影响 |
@@ -236,11 +241,11 @@ kubectl get configmap coredns -n kube-system -o yaml
 
 #### 3.1.2 检查 Pod DNS 配置（resolv.conf）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查目标 Pod 的 DNS 配置
 kubectl exec <problem-pod> -- cat /etc/resolv.conf
 ```
-
 **必须验证的配置项**：
 
 | # | 配置项 | 正确值 | 常见错误 | 影响 |
@@ -249,14 +254,15 @@ kubectl exec <problem-pod> -- cat /etc/resolv.conf
 | RC2 | `search` | `<ns>.svc.cluster.local svc.cluster.local cluster.local` | search 域缺失或错误 | 短域名无法解析 |
 | RC3 | `ndots` | `ndots:5`（默认）或自定义值 | ndots 设置不当 | 外部域名解析多余查询导致慢 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 kube-dns Service ClusterIP
 kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 ```
-
 #### 3.1.3 检查 Deployment/Service 配置一致性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CoreDNS Deployment 配置
 kubectl get deployment coredns -n kube-system -o yaml | grep -A 5 'args\|configMap\|resources\|replicas'
 
@@ -267,10 +273,10 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns --show-labels
 # 检查 Endpoints 是否正常填充
 kubectl get endpoints kube-dns -n kube-system
 ```
-
 #### 3.1.4 检查近期配置变更
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CoreDNS ConfigMap 最后修改时间
 kubectl get configmap coredns -n kube-system -o jsonpath='{.metadata.resourceVersion}'
 
@@ -280,7 +286,6 @@ kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i dns
 # 如果有 Git 管理的集群配置，检查近期变更
 # git log --since="24 hours ago" -- '**/coredns*' '**/dns*'
 ```
-
 #### 3.1.5 Step 1 检查结论模板
 
 完成 Step 1 后，填写以下结论：
@@ -301,14 +306,14 @@ kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i dns
 
 仅当 Step 1 未发现配置问题时，进入此步骤。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CoreDNS 版本
 kubectl get deployment coredns -n kube-system -o jsonpath='{.spec.template.spec.containers[0].image}'
 
 # 检查 Kubernetes 版本
 kubectl version --short
 ```
-
 **版本兼容矩阵**：
 
 | K8s 版本 | 推荐 CoreDNS 版本 | 关键变更 |
@@ -328,7 +333,8 @@ kubectl version --short
 
 仅当 Step 1-2 未发现问题时，进入此步骤。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CoreDNS Pod 资源使用情况
 kubectl top pods -n kube-system -l k8s-app=kube-dns
 
@@ -342,7 +348,6 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=500 | grep -iE "error|war
 # 检查 SERVFAIL 率、延迟、请求量
 kubectl exec -n kube-system <coredns-pod> -- wget -qO- http://localhost:9153/metrics 2>/dev/null | grep -E "coredns_dns_responses_total|coredns_dns_request_duration"
 ```
-
 **检查要点**：
 - CoreDNS 是否 CPU/内存资源不足（throttling / OOM 风险）
 - CoreDNS 副本数是否足够（建议至少 2 副本）
@@ -353,7 +358,8 @@ kubectl exec -n kube-system <coredns-pod> -- wget -qO- http://localhost:9153/met
 
 **仅当 Step 1-3 均未发现问题时，才进入网络链路排查。**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从问题 Pod 直接测试到 CoreDNS Pod IP 的连通性
 COREDNS_POD_IP=$(kubectl get pods -n kube-system -l k8s-app=kube-dns -o jsonpath='{.items[0].status.podIP}')
 kubectl exec <problem-pod> -- nslookup kubernetes.default $COREDNS_POD_IP
@@ -372,7 +378,6 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 # conntrack -S | grep drop
 # sysctl net.netfilter.nf_conntrack_count net.netfilter.nf_conntrack_max
 ```
-
 ### 3.5 Step 5：系统深层排查
 
 **仅当 Step 1-4 均未发现问题时，才进入系统深层排查。**
@@ -596,3 +601,6 @@ Agent 在执行配置检查时可使用以下结构化输出：
 | 版本 | 日期 | 变更内容 |
 |------|------|---------|
 | 1.0 | 2026-04 | 初始版本：配置优先方法论、CoreDNS 完整示例、Agent 集成指南 |
+
+
+<!-- risk-assessed -->

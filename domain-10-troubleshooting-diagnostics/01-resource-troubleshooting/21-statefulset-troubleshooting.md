@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: statefulset'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 21 - [[StatefulSet|StatefulSet]] 故障排查 (StatefulSet Troubleshooting)
@@ -141,7 +146,8 @@ cross_refs:
 
 ### 2.1 StatefulSet 资源状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础信息检查 ==========
 # 查看所有StatefulSet
 kubectl get statefulsets --all-namespaces
@@ -189,10 +195,10 @@ kubectl get pvc -n <namespace> | grep <statefulset-name>
 # 验证PV绑定关系
 kubectl get pv | grep -E "$(kubectl get pvc -n <namespace> -o jsonpath='{.items[*].spec.volumeName}')"
 ```
-
 ### 2.2 网络和服务检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Headless Service检查 ==========
 # 检查Headless Service是否存在
 kubectl get service <service-name> -n <namespace>
@@ -213,7 +219,6 @@ kubectl run dns-test --image=busybox -n <namespace> -it --rm -- sh
 # 检查CoreDNS状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 ```
-
 ---
 
 <!-- chunk: 3. 存储相关问题排查 (Storage储问题排查|Storage Issues]] Troubleshooting) -->
@@ -221,7 +226,8 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns
 
 ### 3.1 PVC绑定失败问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. PVC状态检查 ==========
 # 查看PVC详细状态
 kubectl describe pvc -n <namespace> <pvc-name>
@@ -263,14 +269,14 @@ kubectl get pv -o jsonpath='{
     .items[?(@.spec.claimRef.name=="<pvc-name>")].spec.capacity.storage
 }'
 ```
-
 ### 3.2 数据持久化验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 数据一致性检查 ==========
 # 在Pod中写入测试数据
 kubectl exec -n <namespace> <pod-name> -- sh -c "echo 'test-data-$(date)' > /data/test-file"
@@ -291,7 +297,6 @@ for i in {0..2}; do
     kubectl exec -n <namespace> <statefulset-name>-$i -- cat /data/pod-$i-file
 done
 ```
-
 ---
 
 <!-- chunk: 4. 网络标识问题排查 (Network Identity Issues) -->
@@ -302,7 +307,8 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. DNS配置检查 ==========
 # 检查Pod DNS策略
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsPolicy}'
@@ -330,10 +336,10 @@ kubectl get service <service-name> -n <namespace> -o jsonpath='{.spec.selector}'
 # 检查Endpoints更新
 kubectl get endpoints <service-name> -n <namespace> -w
 ```
-
 ### 4.2 网络策略影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 网络策略检查 ==========
 # 查看相关NetworkPolicy
 kubectl get networkpolicy -n <namespace>
@@ -345,7 +351,6 @@ kubectl describe networkpolicy -n <namespace> <policy-name>
 kubectl run network-test --image=busybox -n <namespace> -it --rm -- sh
 # 测试到StatefulSet Pod的连接
 ```
-
 ---
 
 <!-- chunk: 5. 更新和扩缩容问题 (Update and Scale Issues) -->
@@ -353,7 +358,8 @@ kubectl run network-test --image=busybox -n <namespace> -it --rm -- sh
 
 ### 5.1 滚动更新卡住
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 更新状态检查 ==========
 # 查看更新进度
 kubectl get statefulset <statefulset-name> -n <namespace> -o jsonpath='{
@@ -402,13 +408,13 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod,reaso
 # 检查存储挂载问题
 kubectl describe pod -n <namespace> <pod-name> | grep -A10 "Volumes:"
 ```
-
 ### 5.2 扩缩容问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 扩容验证 ==========
 # 执行扩容
 kubectl scale statefulset <statefulset-name> -n <namespace> --replicas=5
@@ -429,7 +435,6 @@ kubectl exec -n <namespace> <pod-name> -- sh -c "mysql -e 'SHOW MASTER STATUS;'"
 # 确认数据同步状态
 kubectl exec -n <namespace> <pod-name> -- sh -c "mysql -e 'SHOW SLAVE STATUS\G'"
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -440,7 +445,8 @@ kubectl exec -n <namespace> <pod-name> -- sh -c "mysql -e 'SHOW SLAVE STATUS\G'"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== StatefulSet状态监控 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -506,13 +512,13 @@ spec:
         summary: "StatefulSet PVC is not bound (namespace {{ \$labels.namespace }} pvc {{ \$labels.persistentvolumeclaim }})"
 EOF
 ```
-
 ### 6.2 健康检查脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== StatefulSet健康检查脚本 ==========
 cat <<'EOF' > statefulset-health-check.sh
 #!/bin/bash
@@ -636,7 +642,6 @@ EOF
 
 chmod +x data-consistency-check.sh
 ```
-
 ---
 
 ---
@@ -670,3 +675,6 @@ chmod +x data-consistency-check.sh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

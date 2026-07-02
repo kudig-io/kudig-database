@@ -35,6 +35,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点资源压力与 Eviction 源码分析
@@ -321,7 +326,8 @@ func sortPods(pods []*v1.Pod, sorter func(*v1.Pod) float64) {
 
 ### 3.2 OOM Kill 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 OOM 事件
 dmesg | grep -i "oom"
 dmesg | grep -i "out of memory"
@@ -344,13 +350,13 @@ cat /proc/<pid>/oom_score_adj
 # Burstable: varies (基于内存使用)
 # BestEffort: 1000 (最容易被 OOM)
 ```
-
 ### 3.3 OOM 保护配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubelet 会为不同 QoS 的 Pod 设置不同的 oom_score_adj:
 # Guaranteed:   -997  (最低，最后被 OOM Kill)
 # Burstable:    min(max(0, 1000 - (1000 * memoryRequest) / memoryCapacity), 999)
@@ -359,7 +365,6 @@ cat /proc/<pid>/oom_score_adj
 # 查看容器 oom_score_adj
 kubectl exec -it <pod> -- cat /proc/1/oom_score_adj
 ```
-
 ---
 
 ## 四、本地临时存储
@@ -471,7 +476,8 @@ groups:
 
 ### 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看被驱逐的 Pod
 kubectl get pods --all-namespaces | grep Evicted
 
@@ -488,7 +494,6 @@ journalctl -u kubelet | grep -i eviction
 kubectl top nodes
 kubectl top pods --all-namespaces --sort-by=memory
 ```
-
 ---
 
 ## 相关函数
@@ -511,3 +516,6 @@ kubectl top pods --all-namespaces --sort-by=memory
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

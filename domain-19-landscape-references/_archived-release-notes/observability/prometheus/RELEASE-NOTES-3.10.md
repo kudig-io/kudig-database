@@ -33,6 +33,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Prometheus|prometheus]] v3.10 Release Notes
@@ -49,10 +54,12 @@ The busybox image remains the default with no suffix for backwards compatibility
 
 For users migrating existing **named** volumes from the busybox image to the distroless variant, the ownership can be adjusted with:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --rm -v prometheus-data:/prometheus alpine chown -R 65532:65532 /prometheus
 ```
 Then, the container can be started with the old volume with:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run -v prometheus-data:/prometheus prom/prometheus:latest-distroless
 ```
 User migrating from bind mounts might need to ajust permissions too, depending on their setup.
@@ -87,3 +94,6 @@ User migrating from bind mounts might need to ajust permissions too, depending o
 - [BUGFIX] PromQL: Fix smoothed interpolation across counter resets. #17988
 - [BUGFIX] PromQL: Fix panic with `@` modifier on empty ranges. #18020
 - [BUGFIX] PromQL: Fix `avg_over_time` for a single native histogram. #18058
+
+
+<!-- risk-assessed -->

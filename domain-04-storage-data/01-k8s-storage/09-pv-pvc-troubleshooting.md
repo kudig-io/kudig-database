@@ -59,6 +59,11 @@ cross_refs:
   label: '相关知识域: domain-04-storage-data'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - PV/PVC故障排查与解决方案
@@ -145,6 +150,7 @@ cross_refs:
 ### CSI 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                              CSI (Container Storage Interface) 架构                  │
 │                                                                                      │
@@ -218,7 +224,6 @@ cross_refs:
 │                                                                                      │
 └──────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 状态详解 -->
 ## 状态详解
 
@@ -310,7 +315,8 @@ cross_refs:
 
 ### 综合诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pv-pvc-diagnostics.sh
 # PV/PVC 综合诊断脚本
@@ -541,7 +547,6 @@ echo "=========================================="
 echo "       诊断报告结束"
 echo "=========================================="
 ```
-
 <!-- chunk: 常见问题与解决方案 -->
 ## 常见问题与解决方案
 
@@ -566,7 +571,8 @@ echo "=========================================="
 
 ### Mount 失败诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # mount-failure-diagnostics.sh
 # Pod 挂载失败诊断脚本
@@ -633,13 +639,13 @@ echo ""
 echo "--- Kubelet 日志 (需要节点访问权限) ---"
 echo "请在节点上运行: journalctl -u kubelet | grep -i 'volume\|mount\|attach' | tail -50"
 ```
-
 ### 存储扩容故障排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # volume-expansion-diagnostics.sh
 # 卷扩容诊断脚本
@@ -709,7 +715,6 @@ if [ -n "$CSI_CONTROLLER" ]; then
     kubectl logs $CSI_CONTROLLER -n $CSI_NS -c csi-resizer --tail=20 2>/dev/null || echo "无法获取 CSI resizer 日志"
 fi
 ```
-
 <!-- chunk: StorageClass 配置 -->
 ## StorageClass 配置
 
@@ -963,7 +968,8 @@ spec:
 
 ### 快照故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # snapshot-diagnostics.sh
 # 快照诊断脚本
@@ -1004,7 +1010,6 @@ echo ""
 echo "--- 相关事件 ---"
 kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$SNAPSHOT_NAME --sort-by='.lastTimestamp'
 ```
-
 <!-- chunk: 监控告警 -->
 ## 监控告警
 
@@ -1199,7 +1204,8 @@ spec:
 
 ### 常用监控命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-monitoring-commands.sh
 # 存储监控常用命令集合
@@ -1236,7 +1242,6 @@ jq -r '.pods[].volume[]? | select(.usedBytes != null and .capacityBytes != null)
   "PVC: \(.pvcRef.name // .name) Usage: \((.usedBytes / .capacityBytes * 100 | floor))%"' 2>/dev/null || \
 echo "无法获取卷使用率数据"
 ```
-
 <!-- chunk: 版本变更记录 -->
 ## 版本变更记录
 
@@ -1625,7 +1630,8 @@ if __name__ == "__main__":
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-auto-healing.sh
 
@@ -1763,7 +1769,6 @@ trap 'log_message "收到停止信号，正在退出..."; AUTO_HEALING_ENABLED=f
 # 启动主程序
 main
 ```
-
 ---
 <!-- chunk: 最佳实践总结 -->
 ## 最佳实践总结
@@ -1852,3 +1857,5 @@ main
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

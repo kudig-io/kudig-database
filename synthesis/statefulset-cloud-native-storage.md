@@ -27,6 +27,11 @@ lifecycle: draft
 lifecycle_changed: '2026-06-26'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # StatefulSet × 云原生存储
 
@@ -68,3 +73,6 @@ StatefulSet 解决的是"身份"问题（稳定网络标识、有序部署），
 - [[domain-04-storage-data/04-stateful-app-storage/04-kafka-statefulset-production.md|04 kafka statefulset production]]
 - [[domain-04-storage-data/04-stateful-app-storage/05-redis-cluster-statefulset.md|05 redis cluster statefulset]]
 - [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|01 velero backup recovery]]
+
+
+<!-- risk-assessed -->

@@ -60,6 +60,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CNCF 集成实践指南
@@ -82,6 +87,7 @@ authors:
 ## 1.2 典型技术栈
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                      应用层 (Application)                        │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐          │
@@ -119,7 +125,6 @@ authors:
 │  └─────────┘  └─────────┘  └─────────┘  └─────────┘          │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 监控与可观测性集成 -->## 2. 监控与可观测性集成
@@ -340,7 +345,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add cilium https://helm.cilium.io/
 
 helm install cilium cilium/cilium \
@@ -351,7 +357,6 @@ helm install cilium cilium/cilium \
   --set prometheus.enabled=true \
   --set operator.prometheus.enabled=true
 ```
-
 ## 3.2 Istio + Kiali + Prometheus 集成
 
 ```yaml
@@ -912,7 +917,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 完整技术栈一键部署
 
@@ -959,7 +965,6 @@ helm install keda kedacore/keda \
 
 echo "Installation complete!"
 ```
-
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
@@ -977,3 +982,6 @@ echo "Installation complete!"
 - 04-cncf-fta-index
 - 02-cncf-learning-paths
 - 03-cncf-selection-guide
+
+
+<!-- risk-assessed -->

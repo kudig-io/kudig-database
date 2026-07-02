@@ -56,6 +56,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # HashiCorp Vault 企业级密钥管理深度实践
@@ -910,7 +915,17 @@ spec:
 
 ## 备份与灾难恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # vault_backup.sh
 
@@ -944,7 +959,6 @@ aws s3 cp "$BACKUP_DIR/$DATE.tar.gz" s3://company-vault-backups/
 # Cleanup local backups older than 30 days
 find "$BACKUP_DIR" -type d -mtime +30 -exec rm -rf {} \;
 ```
-
 <!-- chunk: 故障排查 -->## 故障排查
 
 ## 常见问题
@@ -1036,3 +1050,6 @@ vault audit list -detailed
 
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

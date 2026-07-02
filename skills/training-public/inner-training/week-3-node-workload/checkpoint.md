@@ -38,6 +38,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -209,7 +214,17 @@ Taint（污点）和 Toleration（容忍）是 Kubernetes 中实现节点专用�
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 标记节点不可调度
 kubectl cordon node-1
 
@@ -248,7 +263,6 @@ kubectl uncordon node-1
 # 预期输出:
 # node/node-1 uncordoned
 ```
-
 ---
 
 ### 2. 写出查看节点池列表和指定节点池详情的 aliyun CLI 命令:
@@ -339,7 +353,8 @@ spec:
 
 **参考答案**:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 查看 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 
@@ -373,7 +388,6 @@ kubectl run dns-test2 --image=busybox:1.36 --rm -it --restart=Never -- nslookup 
 # Step 6: 查看 CoreDNS 日志
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
 ```
-
 ---
 
 ### 5. 写出为 Pod 配置 resources.requests 和 resources.limits 的 YAML 片段:
@@ -414,7 +428,8 @@ spec:
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 Pod Pending 原因
 kubectl describe pod <pending-pod> | grep -A 10 Events
 
@@ -447,7 +462,6 @@ aliyun ecs DescribeAccountAttributes --RegionId cn-hangzhou
 # Step 5: 检查 vSwitch 可用 IP
 aliyun vpc DescribeVSwitchAttributes --VSwitchId <vswitch-id>
 ```
-
 **常见原因和解决方案**：
 
 | 原因 | 症状 | 解决方案 |
@@ -464,7 +478,8 @@ aliyun vpc DescribeVSwitchAttributes --VSwitchId <vswitch-id>
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 Pod 状态和重启次数
 kubectl get pods -A | grep CrashLoopBackOff
 
@@ -497,14 +512,14 @@ kubectl logs my-app-7d9f8b6c4-xyz12 -n default --previous
 # Step 5: 验证修复
 kubectl get pods -w
 ```
-
 ---
 
 ### 场景 3: 节点资源不足
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看节点资源分配情况
 kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 
@@ -531,14 +546,14 @@ kubectl top pods -A --sort-by=cpu | head -10
 # 方案C: 调整 PriorityClass（优先级调度）
 # 方案D: 清理不必要的工作负载
 ```
-
 ---
 
 ### 场景 4: kube-system 组件异常
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: Pod 之间无法通过 Service 名称访问，但 IP 直连正常
 # -> 典型的 DNS 解析问题
 
@@ -569,7 +584,6 @@ kubectl get pods -n kube-system -l app=flannel
 
 # 分层排查路径: DNS -> kube-proxy -> CNI -> 节点网络
 ```
-
 ---
 
 ## 四、评分统计
@@ -639,3 +653,5 @@ kubectl get pods -n kube-system -l app=flannel
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

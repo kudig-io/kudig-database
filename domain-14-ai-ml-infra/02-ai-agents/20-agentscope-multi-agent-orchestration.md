@@ -40,6 +40,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: AgentScope 多 Agent 编排与工作流
@@ -687,6 +692,7 @@ async def concurrent_agents():
 ## 9.1 Supervisor-Worker 模式
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 生产级 K8s 运维多 Agent 系统
 │
 ├── Supervisor Agent（调度者）
@@ -707,7 +713,6 @@ async def concurrent_agents():
     ├── Redis Session（状态持久化）
     └── 知识库（RAG 检索）
 ```
-
 ## 9.2 实现示例
 
 ```python
@@ -852,3 +857,6 @@ asyncio.run(supervisor_worker_system())
 - 19-agentscope-memory-context
 - 21-agentscope-advanced-features
 - 22-agentscope-production-deployment
+
+
+<!-- risk-assessed -->

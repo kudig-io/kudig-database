@@ -49,6 +49,11 @@ cross_refs:
   label: '相关知识域: domain-04-storage-data'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - 存储基础概念详解
@@ -497,7 +502,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看当前回收策略
 kubectl get sc -o custom-columns=NAME:.metadata.name,POLICY:.reclaimPolicy
 
@@ -520,7 +535,6 @@ kubectl patch pv <pv-name> -p '{"spec":{"claimRef": null}}'
 
 # PV变回Available状态，可重新绑定
 ```
-
 ---
 
 <!-- chunk: 存储生命周期管理 -->
@@ -641,7 +655,8 @@ production_storage_config:
 
 ### PVC 全链路诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pvc-diagnostic.sh - PVC 存储全链路诊断工具
 # 用法: ./pvc-diagnostic.sh <namespace> <pvc-name>
@@ -726,10 +741,10 @@ echo "=========================================="
 echo "诊断完成"
 echo "=========================================="
 ```
-
 ### 存储容量巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-capacity-check.sh - 存储容量巡检工具
 # 用法: ./storage-capacity-check.sh [--namespace <ns>] [--threshold 80]
@@ -794,7 +809,6 @@ echo "=========================================="
 echo "巡检完成"
 echo "=========================================="
 ```
-
 ---
 
 <!-- chunk: 端到端快速入门（SC → PVC → Pod 三步走） -->
@@ -821,11 +835,11 @@ allowVolumeExpansion: true
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f storageclass.yaml
 kubectl get sc quick-start-sc
 ```
-
 ### 第 2 步: 创建 PVC（引用 StorageClass）
 
 ```yaml
@@ -844,12 +858,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f pvc.yaml
 kubectl get pvc quick-start-pvc
 # 注意: 使用 WaitForFirstConsumer 时 PVC 会保持 Pending 直到 Pod 调度
 ```
-
 ### 第 3 步: 创建 Pod（引用 PVC）
 
 ```yaml
@@ -874,7 +888,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f pod.yaml
 
 # 验证：PVC 应该已绑定
@@ -890,18 +905,26 @@ kubectl exec quick-start-pod -- df -h /usr/share/nginx/html
 kubectl exec quick-start-pod -- sh -c 'echo "Hello from PVC!" > /usr/share/nginx/html/index.html'
 kubectl exec quick-start-pod -- cat /usr/share/nginx/html/index.html
 ```
-
 ### 清理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod quick-start-pod
 kubectl delete pvc quick-start-pvc
 kubectl delete sc quick-start-sc
 ```
-
 > **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` [[gRPC|gRPC]] 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
 
 ---
@@ -917,7 +940,17 @@ kubectl delete sc quick-start-sc
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 创建静态 PV
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -958,7 +991,6 @@ kubectl get pvc lab-static-pvc -o jsonpath='{.status.phase}'
 kubectl delete pvc lab-static-pvc
 kubectl delete pv lab-static-pv
 ```
-
 ### 练习 2: 访问模式验证
 
 **目标**: 验证 RWO 卷的多节点挂载限制。
@@ -968,7 +1000,17 @@ kubectl delete pv lab-static-pv
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 PVC (RWO)
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -1008,7 +1050,6 @@ EOF
 kubectl delete pod lab-pod-a --force  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete pvc lab-rwo-pvc
 ```
-
 ### 练习 3: 回收策略行为验证
 
 **目标**: 对比 Retain 和 Delete 策略在 PVC 删除后的行为差异。
@@ -1017,7 +1058,8 @@ kubectl delete pvc lab-rwo-pvc
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建两种 StorageClass
 cat <<EOF | kubectl apply -f -
 apiVersion: storage.k8s.io/v1
@@ -1043,7 +1085,6 @@ EOF
 # 清理
 kubectl delete sc lab-retain lab-delete
 ```
-
 ---
 
 <!-- chunk: 常见问题速查表 -->
@@ -1086,3 +1127,6 @@ kubectl delete sc lab-retain lab-delete
 
 - index/storage-index|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
+
+
+<!-- risk-assessed -->

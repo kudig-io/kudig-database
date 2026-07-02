@@ -56,6 +56,11 @@ cross_refs:
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 110 - CLI 增强与效率工具 (CLI Enhancement)
@@ -130,7 +135,8 @@ node-2            1200m (30%)    2400m (60%)   5Gi (31%)         10Gi (62%)
 ## kubectl-tree 资源依赖
 
 ### 查看资源树
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 依赖
 kubectl tree deployment myapp
 
@@ -144,19 +150,18 @@ default    ├─ReplicaSet/myapp-7d8f9c      -              5d
 default    │ ├─Pod/myapp-7d8f9c-abc       True           5d
 default    │ └─Pod/myapp-7d8f9c-def       True           5d
 ```
-
 <!-- chunk: kubectl-neat 清理输出 -->
 ## kubectl-neat 清理输出
 
 ### 清理 YAML
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清理 managedFields 等冗余字段
 kubectl get pod myapp -o yaml | kubectl neat
 
 # 清理并保存
 kubectl get deployment myapp -o yaml | kubectl neat > myapp-clean.yaml
 ```
-
 <!-- chunk: kubectl 别名与函数 -->
 ## kubectl 别名与函数
 
@@ -167,7 +172,8 @@ kubectl get deployment myapp -o yaml | kubectl neat > myapp-clean.yaml
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ~/.bashrc 或 ~/.zshrc
 alias k='kubectl'
 alias kg='kubectl get'
@@ -187,14 +193,14 @@ alias kgs='kubectl get svc'
 # 快速查看 Node
 alias kgn='kubectl get nodes'
 ```
-
 ### 实用函数
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速进入 Pod Shell
 ksh() {
   kubectl exec -it $1 -- /bin/bash
@@ -210,7 +216,6 @@ kdele() {
   kubectl get pods --all-namespaces | grep Evicted | awk '{print $2, "-n", $1}' | xargs kubectl delete pod
 }
 ```
-
 <!-- chunk: kubectl 插件管理 (Krew) -->
 ## kubectl 插件管理 (Krew)
 
@@ -228,7 +233,8 @@ kdele() {
 ```
 
 ### 推荐插件
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install ctx        # kubectx
 kubectl krew install ns         # kubens
 kubectl krew install tree       # 资源树
@@ -237,7 +243,6 @@ kubectl krew install capacity   # 容量查看
 kubectl krew install debug      # 调试工具
 kubectl krew install tail       # 日志追踪
 ```
-
 <!-- chunk: 效率提升技巧 -->
 ## 效率提升技巧
 
@@ -278,3 +283,6 @@ kubectl krew install tail       # 日志追踪
 - 22-client-libraries
 - 24-addons-extensions
 - 25-virtual-clusters
+
+
+<!-- risk-assessed -->

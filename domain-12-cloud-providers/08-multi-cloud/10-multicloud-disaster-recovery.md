@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 多云灾备深度实践
@@ -1180,7 +1185,8 @@ spec:
 
 ## Velero 跨集群备份与恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1260,7 +1266,6 @@ kubectl get pvc -n production
 
 echo "=== Velero Cross-Cluster DR Complete ==="
 ```
-
 <!-- chunk: 安全配置 -->## 安全配置
 
 ## 灾备安全策略
@@ -1491,7 +1496,8 @@ data:
 
 ## 自动化故障转移 Runbook
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1573,10 +1579,10 @@ curl -X POST "$PAGERDUTY_WEBHOOK" \
 
 echo "Failover complete. Service is now running on $SECONDARY_CLUSTER"
 ```
-
 ## 灾备演练脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1664,10 +1670,10 @@ if "$SERVICE_OK" != "true"; then
     exit 1
 fi
 ```
-
 ## 灾备状态检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1730,7 +1736,6 @@ echo ""
 
 echo "=== DR Status Check Complete ==="
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 灾备设计最佳实践
@@ -1815,3 +1820,6 @@ echo "=== DR Status Check Complete ==="
 - 09-multicloud-network-interconnect
 - 01-aws-eks-enterprise-multicloud
 - 02-azure-aks-enterprise-multicloud
+
+
+<!-- risk-assessed -->

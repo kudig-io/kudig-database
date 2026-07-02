@@ -57,6 +57,11 @@ cross_refs:
   label: '故障树: job-cronjob'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - Job / [[CronJob|CronJob]] YAML 配置参考
@@ -227,7 +232,8 @@ spec:
 ```
 
 **执行结果**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 状态
 kubectl get job hello-job
 # NAME        COMPLETIONS   DURATION   AGE
@@ -239,7 +245,6 @@ kubectl logs job/hello-job
 # Current time: Mon Feb 10 10:00:00 UTC 2026
 # Job completed successfully
 ```
-
 ---
 
 <!-- chunk: Job 生产级配置示例 -->## Job 生产级配置示例
@@ -1229,7 +1234,8 @@ spec:
 ## 7. 监控与告警
 
 ✅ **监控 Job 状态**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 状态
 kubectl get job
 
@@ -1243,7 +1249,6 @@ kubectl describe job my-job
 # 查看 Pod 日志
 kubectl logs job/my-job
 ```
-
 ✅ **配置 [[Prometheus|Prometheus]] 告警**:
 ```yaml
 # Prometheus Alert 规则
@@ -1287,7 +1292,8 @@ groups:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1: 从 CronJob 创建 Job (推荐)
 kubectl create job my-manual-job --from=cronjob/my-cronjob
 
@@ -1296,13 +1302,22 @@ kubectl patch cronjob my-cronjob -p '{"spec":{"schedule":"*/1 * * * *"}}'  # 改
 # 等待执行后恢复
 kubectl patch cronjob my-cronjob -p '{"spec":{"schedule":"0 3 * * *"}}'  # 恢复原调度
 ```
-
 ## Q3: 如何暂停 CronJob?
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 1: 修改 suspend 字段
 kubectl patch cronjob my-cronjob -p '{"spec":{"suspend":true}}'
 
@@ -1313,7 +1328,6 @@ kubectl patch cronjob my-cronjob -p '{"spec":{"suspend":false}}'
 kubectl edit cronjob my-cronjob
 # 修改 spec.suspend: true
 ```
-
 ## Q4: 为什么 CronJob 没有按时执行?
 
 **可能原因**:
@@ -1338,7 +1352,8 @@ kubectl edit cronjob my-cronjob
 
 ## Q5: 如何查看 Job 失败原因?
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Job 状态
 kubectl describe job my-job
 
@@ -1352,13 +1367,13 @@ kubectl describe pod my-job-xxx
 # 4. 查看容器退出码
 kubectl get pod my-job-xxx -o jsonpath='{.status.containerStatuses[0].state.terminated.exitCode}'
 ```
-
 ## Q6: 如何删除所有完成的 Job?
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除所有成功的 Job
 kubectl delete jobs --field-selector status.successful=1
 
@@ -1370,7 +1385,6 @@ kubectl get jobs -o json | \
   jq -r '.items[] | select(.status.succeeded!=null or .status.failed!=null) | .metadata.name' | \
   xargs kubectl delete job
 ```
-
 ## Q7: 如何在 Job 中共享数据 (多 Pod 协作)?
 
 **方法 1: 使用 PVC 共享存储**:
@@ -1465,11 +1479,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建一次性恢复 Job
 kubectl create job postgres-restore-$(date +%s) --from=cronjob/postgres-backup -- /scripts/restore.sh s3://backup-bucket/postgres-backup-20260210.sql.gz
 ```
-
 ## 案例 2: 大规模数据处理 (索引式任务)
 
 **场景**: 处理 100 万条记录,分为 100 个分片并行处理
@@ -1664,3 +1678,6 @@ spec:
 - 06-daemonset-reference
 - 08-service-all-types
 - 09-endpoints-endpointslice
+
+
+<!-- risk-assessed -->

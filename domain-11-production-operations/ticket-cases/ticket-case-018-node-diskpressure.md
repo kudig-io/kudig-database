@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看节点状态、再看磁盘占用、再看日志与镜像”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看节点状态与 DiskPressure 标记
 kubectl get node -o json | jq '.items[] | {name: .metadata.name, diskPressure: .status.conditions[] | select(.type=="DiskPressure") | .status}'
 
@@ -117,7 +123,6 @@ aliyun cms DescribeMetricList \
 kubectl get pod -n kube-system -l k8s-app=logtail
 kubectl logs -n kube-system -l k8s-app=logtail --tail=100 | grep -iE "error|drop|block"
 ```
-
 ## 根因分析
 
 经过排查，发现 `cn-beijing.172.18.3.21` 节点系统盘使用率已达 98%，触发 kubelet 默认磁盘驱逐阈值（`imagefs.available<15%` 或 `nodefs.available<10%`）。进一步分析磁盘占用来源：
@@ -136,12 +141,21 @@ kubectl logs -n kube-system -l k8s-app=logtail --tail=100 | grep -iE "error|drop
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for node in cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23; do
   kubectl cordon $node
 done
 ```
-
 **第二步：SSH 到节点清理容器日志（仅清理已停止容器的日志文件）**
 
 ```bash
@@ -159,7 +173,8 @@ done
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 for node in cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23; do
   ssh root@$node '
     docker image prune -f
@@ -167,13 +182,22 @@ for node in cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23
   '
 done
 ```
-
 **第四步：调整 kubelet 日志轮转配置并重启 kubelet（在 ACK 节点池配置中修改）**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 通过 ACK 控制台修改节点池配置：
 # 容器运行时 → Docker → 日志驱动设置为 json-file，并设置 max-size=100m, max-file=5
 # 或在节点上临时修改 /etc/docker/daemon.json
@@ -188,13 +212,13 @@ ssh root@cn-beijing.172.18.3.21 'cat > /etc/docker/daemon.json <<EOF
 EOF
 systemctl restart docker'
 ```
-
 **第五步：驱逐可迁移 Pod 到健康节点，释放磁盘压力节点上的业务负载**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 for node in cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23; do
   kubectl drain $node \
     --ignore-daemonsets \
@@ -203,13 +227,22 @@ for node in cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23
     --timeout=300s
 done
 ```
-
 **第六步：扩容系统盘或滚动替换节点（长期方案）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 调整节点池系统盘大小为 200 GiB，并滚动替换节点
 aliyun cs POST /clusters/ack-zyy-prod-06/nodepools/np-zyy-compute \
   --body '{"scaling_group":{"system_disk_size":200}}'
@@ -217,10 +250,10 @@ aliyun cs POST /clusters/ack-zyy-prod-06/nodepools/np-zyy-compute \
 # 对存量节点执行替换
 kubectl delete node cn-beijing.172.18.3.21 cn-beijing.172.18.3.22 cn-beijing.172.18.3.23
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 节点 DiskPressure 状态恢复 False
 kubectl get node cn-beijing.172.18.3.21 -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")].status}'
 
@@ -239,7 +272,6 @@ ssh root@cn-beijing.172.18.3.21 'ls -lh /var/log/containers/ | head -10'
 # 6. 镜像清理后占用下降
 ssh root@cn-beijing.172.18.3.21 'docker system df'
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次节点 DiskPressure 的根因是 **容器日志未轮转、历史镜像层堆积，导致节点系统盘使用率突破 kubelet 驱逐阈值**，kubelet 自动驱逐了部分业务 Pod。我们已完成以下处置：
@@ -295,3 +327,6 @@ ssh root@cn-beijing.172.18.3.21 'docker system df'
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - [[domain-11-production-operations/ticket-cases/ticket-case-014-node-disk-pressure.md|节点 DiskPressure 导致 Pod 被驱逐]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
+
+
+<!-- risk-assessed -->

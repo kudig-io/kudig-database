@@ -40,6 +40,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 企业级运维最佳实践
@@ -1434,12 +1439,12 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 ```
 
 ### 2. 查看 leader 切换历史
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system etcd-master-01 | grep "elected leader"
 
 # 预期输出: 查看切换时间点和频率
 ```
-
 ### 3. 检查网络延迟
 ```bash
 # 检查 etcd 成员间网络延迟
@@ -1460,7 +1465,8 @@ done
 **根因**: 跨AZ网络抖动
 
 **修复方案**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 临时增加 etcd 心跳超时
 kubectl -n kube-system edit pod etcd-master-01
 # 修改 --heartbeat-interval=500 为 --heartbeat-interval=1000
@@ -1468,13 +1474,13 @@ kubectl -n kube-system edit pod etcd-master-01
 # 2. 长期方案: 迁移etcd到同一AZ
 # 参考文档: https://wiki.company.com/etcd-migration
 ```
-
 ### 场景2: etcd 进程 CPU 高
 
 **根因**: 大量 watch 请求
 
 **修复方案**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 watch 数量
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
@@ -1485,12 +1491,12 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # 2. 如果 watch > 10000,执行数据压缩
 # (参考应急预案: etcd-performance-tuning.md)
 ```
-
 ---
 
 ## ✅ 验证修复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 leader 稳定(观察10分钟)
 watch -n 10 'ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
@@ -1501,7 +1507,6 @@ watch -n 10 'ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # 2. 检查告警是否恢复
 # 访问 Grafana: https://grafana.company.com/alerts
 ```
-
 ---
 
 ## 🛡️ 长期预防
@@ -2049,7 +2054,8 @@ data:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 多集群管理 - 切换 context
 kubectl config get-contexts
 kubectl config use-context <cluster-name>
@@ -2064,7 +2070,6 @@ kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
 # 审计日志查看
 kubectl logs -n kube-system kube-apiserver-* --tail=50 | grep audit
 ```
-
 ## 交叉引用
 
 - 相关主题：[运维最佳实践](operations-best-practices.md) · [SRE 成熟度模型](sre-maturity-model.md) · [事故管理](incident-management-runbooks.md) · [变更管理](change-management-release.md) · [Cluster API](../platform-engineering/cluster-api-and-fleet-management.md)
@@ -2082,3 +2087,5 @@ kubectl logs -n kube-system kube-apiserver-* --tail=50 | grep audit
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

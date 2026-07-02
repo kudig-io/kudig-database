@@ -57,6 +57,11 @@ cross_refs:
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kubectl 插件生态知识手册
@@ -80,7 +85,8 @@ kubectl 从 v1.14 开始支持插件机制，插件本质是名为 `kubectl-<nam
 
 ### 1.2 krew 基本使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 krew（只执行一次）
 (
   set -x; cd "$(mktemp -d)" &&
@@ -99,7 +105,6 @@ kubectl krew uninstall <plugin>       # 卸载插件
 kubectl krew list                      # 列出已安装插件
 kubectl krew search <keyword>          # 搜索插件
 ```
-
 ---
 
 <!-- chunk: 2. 高频生产插件详解 -->
@@ -123,7 +128,8 @@ SYSTEM:masters   (system:master-group)
 ```
 
 **典型故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题：kubectl 执行报 not authorized
 kubectl whoami
 # 检查当前身份是否正确
@@ -131,7 +137,6 @@ kubectl whoami
 # 问题：使用了错误的 kubeconfig context
 kubectl whoami --context prod-cluster
 ```
-
 ### 2.2 kubectl-neat（输出清理）
 
 **用途**: 清理 kubectl 输出中的冗余字段（managedFields、creationTimestamp 等）
@@ -143,20 +148,20 @@ kubectl whoami --context prod-cluster
 - "生成干净的 YAML 配置用于 Git"
 
 **输出示例**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 原始输出（kubectl get pod -o yaml）
 # 包含大量 metadata.managedFields, metadata.resourceVersion 等
 
 # 使用 neat 后
 # 仅保留关键字段：apiVersion, kind, metadata, spec, status
 ```
-
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod nginx -o yaml | kubectl neat
 kubectl get deployment -o yaml | kubectl neat > clean-deployment.yaml
 ```
-
 ### 2.3 kubectl-tree（资源层级视图）
 
 **用途**: 显示资源之间的层级关系（如 [[ReplicaSet|ReplicaSet]] 包含哪些 Pod，Service 引用哪些 Endpoints）
@@ -178,7 +183,8 @@ deployment/nginx
 ```
 
 **典型故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题：某个 Pod 不属于 Service，找到该 Pod 所属的 ReplicaSet
 kubectl tree deployment/my-app
 # 在输出中找到异常的 Pod
@@ -186,7 +192,6 @@ kubectl tree deployment/my-app
 # 问题：ReplicaSet 数量与预期不符
 kubectl tree replicaset -n <namespace>
 ```
-
 ### 2.4 kubectl-debug（安全调试，已 GA in K8s 1.28+）
 
 **用途**: 替代已废弃的 `kubectl exec` / debug 方式，安全地在 Pod/容器中添加 debug 工具或sidecar
@@ -200,7 +205,8 @@ kubectl tree replicaset -n <namespace>
 - "复制 Pod 到新容器并加 debug 工具"
 
 **主要命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 Pod 的主容器旁边启动一个 debug 容器（ephemeral debug container）
 kubectl debug <pod> -it --image=busybox --share-processes --copy-to=debug-pod
 
@@ -219,17 +225,17 @@ kubectl get pods | grep debug
 # 清理 debug Pod
 kubectl debug --clean
 ```
-
 **K8s 1.28+ 内置（无需 krew）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # K8s 1.28+ 内置 kubectl debug（无需插件）
 # 临时容器（Ephemeral Container）
 kubectl debug <pod> -it --image=busybox --target=<container-name>
 # --target 指定要附加到的目标容器
 ```
-
 **典型故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题：无法 exec 进入容器（容器运行时问题）
 kubectl debug <pod> -it --image=busybox --share-processes
 # 启动一个临时 debug 容器
@@ -238,7 +244,6 @@ kubectl debug <pod> -it --image=busybox --share-processes
 kubectl debug node/<node-name> -it --image=busybox
 # 在节点级别启动 debug 容器进行排查
 ```
-
 ### 2.5 kubectl-exec-all（批量 exec）
 
 **用途**: 在同一 Deployment/ReplicaSet/StatefulSet 的所有 Pod 中同时执行命令
@@ -255,7 +260,8 @@ kubectl debug node/<node-name> -it --image=busybox
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在所有 nginx Pod 中执行 ls /app
 kubectl exec-all -l app=nginx -- ls /app
 
@@ -267,20 +273,19 @@ kubectl exec-all -l app=nginx -- ls /app
 # [nginx-7d9f6b8c5-xk2r2] ls /app
 # application
 ```
-
 **典型故障排查**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 问题：需要同时查看多个 Pod 的日志
 kubectl exec-all -l app=nginx -- tail -f /var/log/nginx/access.log
 
 # 问题：所有 Pod 配置不一致，需要逐个检查
 kubectl exec-all -l app=nginx -- cat /etc/nginx/nginx.conf
 ```
-
 ### 2.6 kubectl-cost（成本估算）
 
 **用途**: 按命名空间/Deployment/StatefulSet 估算 Kubernetes 资源成本
@@ -300,7 +305,8 @@ kube-system  coredns               200m            100Mi           $8.90
 ```
 
 **典型故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题：资源使用率低但成本高
 kubectl cost --show-cost-details
 # 找到浪费资源的 Deployment
@@ -308,7 +314,6 @@ kubectl cost --show-cost-details
 # 问题：优化后想看节省了多少
 kubectl cost --historical
 ```
-
 ### 2.7 kubectl-ns（命名空间快速切换）
 
 **用途**: 快速切换/查看当前命名空间，无需每次输入 `-n <namespace>`
@@ -325,12 +330,12 @@ Current namespace: default
 ```
 
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl ns my-namespace  # 切换到 my-namespace
 kubectl ns               # 查看当前命名空间
 kubectl ns -             # 返回上一个命名空间
 ```
-
 ### 2.8 kubectl-ctx（Context 切换）
 
 **用途**: 快速切换 kubectl context（集群）
@@ -350,11 +355,11 @@ CURRENT   NAME             CLUSTER          NAMESPACE
 ```
 
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl ctx prod-cluster  # 切换到生产集群
 kubectl ctx               # 查看所有 context
 ```
-
 ---
 
 <!-- chunk: 3. 其他常用插件 -->
@@ -371,11 +376,11 @@ kubectl ctx               # 查看所有 context
 - "调试微服务间网络问题"
 
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl sniff <pod-name> -n <namespace>
 # 生成 wireshark-compatible pcap 文件
 ```
-
 ### 3.2 kubectl-view-secret（查看 Secret 内容）
 
 **用途**: 解码并查看 Secret 内容（替代 base64 -d）
@@ -387,11 +392,11 @@ kubectl sniff <pod-name> -n <namespace>
 - "调试 Secret 挂载问题"
 
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl view-secret <secret-name> <key-name> -n <namespace>
 kubectl view-secret <secret-name> -n <namespace>  # 列出所有 key
 ```
-
 ### 3.3 kubectl-purge（清理已终止资源）
 
 **用途**: 批量删除已终止的 Pod、Job、CronJob
@@ -403,11 +408,11 @@ kubectl view-secret <secret-name> -n <namespace>  # 列出所有 key
 - "清理 Evicted 的 Pod"
 
 **典型用法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl purge jobs,deployments -n <namespace> --older-than=24h
 # 删除 24 小时前已完成的资源
 ```
-
 ### 3.4 kubectl-image-pull-secret（管理镜像拉取凭证）
 
 **用途**: 快速创建 imagePullSecrets 或查看现有的凭证
@@ -437,7 +442,17 @@ kubectl purge jobs,deployments -n <namespace> --older-than=24h
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重置 krew（如果 krew 命令本身出错）
 kubectl krew version
 # 如版本显示正常但安装插件失败：
@@ -446,17 +461,16 @@ kubectl krew version
 rm -rf ~/.krew  # ⚠️ 删除系统/数据文件
 # 重新执行 krew 安装脚本
 ```
-
 ### 4.3 验证插件可用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有已安装插件
 kubectl plugin list
 
 # 或直接运行（会显示错误）
 kubectl-whoami
 ```
-
 ---
 
 <!-- chunk: 5. 插件与 RBAC -->
@@ -501,7 +515,8 @@ kubectl-whoami
 <!-- chunk: 附录：手动安装（非 krew）示例 -->
 ## 附录：手动安装（非 krew）示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 下载二进制
 wget https://github.com/hjacobs/kubectl-whoami/releases/download/v1.0.0/kubectl-whoami-linux-amd64
 mv kubectl-whoami-linux-amd64 /usr/local/bin/kubectl-whoami
@@ -513,7 +528,6 @@ kubectl whoami
 # 卸载
 rm /usr/local/bin/kubectl-whoami
 ```
-
 ---
 
 ```yaml
@@ -563,3 +577,5 @@ related:
 - 99-kubernetes-v1.33-platform-ops-guide
 
 ```
+
+<!-- risk-assessed -->

@@ -47,6 +47,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
 
 > **目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队  
@@ -73,7 +78,8 @@ prerequisites:
 
 #### 步骤 1: 部署 Falco
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Falco Helm repo
 helm repo add falcosecurity https://falcosecurity.github.io/charts
 helm repo update
@@ -90,10 +96,10 @@ helm install falco falcosecurity/falco \
   --set json_include_output_property=true \
   --set log_level=info
 ```
-
 #### 步骤 2: 验证部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Falco pods 运行状态
 kubectl get pods -n falco -o wide
 
@@ -108,17 +114,16 @@ kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=50
 # 应该看到类似输出：
 # {"output":"Notice A shell was spawned in a container...","priority":"Notice",...}
 ```
-
 #### 步骤 3: 触发测试事件
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在测试 pod 中执行 shell（应触发 Falco 规则）
 kubectl run test-pod --image=nginx --rm -it -- /bin/bash
 
 # 在另一个终端查看 Falco 告警
 kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=5 | grep "Notice A shell"
 ```
-
 **成功标准**：
 - ✅ 所有节点的 Falco pod 状态为 Running
 - ✅ 能在日志中看到 JSON 格式的告警
@@ -202,7 +207,8 @@ sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
 
 #### 步骤 3: 验证审计日志
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 等待 API Server 重启（约 30 秒）
 watch kubectl get pods -n kube-system | grep kube-apiserver
 
@@ -219,7 +225,6 @@ kubectl delete pod audit-test
 # 在审计日志中搜索该事件
 sudo grep "audit-test" /var/log/kubernetes/audit.log | jq '.verb,.objectRef.resource'
 ```
-
 **成功标准**：
 - ✅ audit.log 文件存在且持续增长
 - ✅ 可以看到 JSON 格式的审计事件
@@ -235,7 +240,8 @@ sudo grep "audit-test" /var/log/kubernetes/audit.log | jq '.verb,.objectRef.reso
 
 #### 步骤 1: 部署 Loki
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Grafana Helm repo
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
@@ -253,10 +259,10 @@ helm install loki grafana/loki \
   --set singleBinary.persistence.enabled=true \
   --set singleBinary.persistence.size=50Gi
 ```
-
 #### 步骤 2: 部署 Fluent Bit
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Fluent Bit 配置 ConfigMap
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
@@ -322,10 +328,10 @@ helm install fluent-bit grafana/fluent-bit \
   --set config.customParsers="$(kubectl get cm -n logging fluent-bit-config -o jsonpath='{.data.parsers\.conf}')" \
   --set config.outputs="$(kubectl get cm -n logging fluent-bit-config -o jsonpath='{.data.fluent-bit\.conf}' | grep -A 10 '\[OUTPUT\]')"
 ```
-
 #### 步骤 3: 验证日志流
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Fluent Bit pods
 kubectl get pods -n logging -l app.kubernetes.io/name=fluent-bit
 
@@ -342,7 +348,6 @@ kubectl port-forward -n logging svc/loki 3100:3100 &
 # 查询最近的日志
 logcli query '{job="fluentbit"}' --since=5m --limit=10
 ```
-
 **成功标准**：
 - ✅ Loki 和 Fluent Bit pods 状态为 Running
 - ✅ logcli 可以查询到容器日志和审计日志
@@ -360,7 +365,8 @@ logcli query '{job="fluentbit"}' --since=5m --limit=10
 
 #### 步骤 1: 部署 kube-prometheus-stack
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署完整的监控栈（Prometheus + Grafana + Alertmanager + Node Exporter）
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
   --namespace monitoring \
@@ -371,10 +377,10 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
   --set grafana.persistence.enabled=true \
   --set grafana.persistence.size=10Gi
 ```
-
 #### 步骤 2: 配置 Grafana 数据源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 暴露 Grafana 服务
 kubectl port-forward -n monitoring svc/kube-prometheus-stack-grafana 3000:80 &
 
@@ -404,10 +410,10 @@ EOF
 # 重启 Grafana 以加载新数据源
 kubectl rollout restart -n monitoring deployment/kube-prometheus-stack-grafana
 ```
-
 #### 步骤 3: 导入 FEBM 仪表板
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 FEBM 基础仪表板 ConfigMap
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
@@ -454,10 +460,10 @@ data:
     }
 EOF
 ```
-
 #### 步骤 4: 验证监控栈
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查所有组件状态
 kubectl get pods -n monitoring
 
@@ -472,7 +478,6 @@ curl http://localhost:9090/api/v1/query?query=up | jq '.data.result | length'
 
 # 应该返回 > 0 的数字（表示有监控目标）
 ```
-
 **成功标准**：
 - ✅ Prometheus、Grafana、Alertmanager pods 运行正常
 - ✅ Grafana 可以访问且显示 Prometheus 和 Loki 数据源
@@ -490,7 +495,8 @@ curl http://localhost:9090/api/v1/query?query=up | jq '.data.result | length'
 
 #### 步骤 1: 升级 Falco 并启用 Falcosidekick
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 升级 Falco 并启用 Falcosidekick
 helm upgrade falco falcosecurity/falco \
   --namespace falco \
@@ -500,10 +506,10 @@ helm upgrade falco falcosecurity/falco \
   --set falcosidekick.config.slack.webhookurl="YOUR_SLACK_WEBHOOK_URL" \
   --set falcosidekick.config.slack.minimumpriority=warning
 ```
-
 #### 步骤 2: 配置告警路由规则
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建高级路由配置
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
@@ -540,10 +546,10 @@ EOF
 # 重启 Falcosidekick 加载新配置
 kubectl rollout restart -n falco deployment/falco-falcosidekick
 ```
-
 #### 步骤 3: 测试告警流
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 触发高优先级告警（修改 /etc/passwd）
 kubectl run alert-test --image=nginx --rm -it -- sh -c "echo test >> /etc/passwd"
 
@@ -559,10 +565,10 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=20
 # 检查 Loki 中的 Falco 事件
 logcli query '{app="falco"}' --since=10m | grep "Write below binary dir"
 ```
-
 #### 步骤 4: 配置告警静默规则（可选）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为已知的合规操作配置静默
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
@@ -582,7 +588,6 @@ data:
       priority: info
 EOF
 ```
-
 **成功标准**：
 - ✅ Falcosidekick pod 运行正常
 - ✅ 测试告警成功路由到 Slack
@@ -597,7 +602,8 @@ EOF
 
 #### Day 6: 端到端测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # febm-e2e-test.sh - FEBM 端到端验证脚本
 
@@ -644,7 +650,6 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=20 | \
 
 echo "=== FEBM E2E 测试完成 ==="
 ```
-
 #### Day 7: 性能调优检查清单
 
 ```yaml
@@ -713,7 +718,8 @@ Prometheus 调优:
 
 ### 8.2.1 一键部署脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy-febm-minimal.sh - FEBM 最小化工具栈一键部署脚本
 
@@ -875,10 +881,10 @@ echo "                  http://localhost:2802"
 echo "  Prometheus:     kubectl port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9090:9090"
 echo "                  http://localhost:9090"
 ```
-
 ### 8.2.2 资源开销明细
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                FEBM 最小化工具栈资源开销                         │
 ├──────────────────┬──────────┬──────────┬───────────┬────────────┤
@@ -906,14 +912,14 @@ echo "                  http://localhost:9090"
   2. 配置 Prometheus 远程写入到 Thanos，降低本地存储需求
   3. 生产环境使用对象存储（S3/GCS）+ 分层存储策略
 ```
-
 ### 8.2.3 NTP 时钟同步验证
 
 **为什么 NTP 对 FEBM 至关重要？**
 
 FEBM 需要精确关联来自不同数据源的证据（Falco 告警、审计日志、指标），时钟偏差 > 1 秒会导致证据链断裂。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # verify-ntp-sync.sh - 验证集群时钟同步
 
@@ -970,7 +976,6 @@ systemctl enable --now chronyd
 chronyc tracking
 NTP_CONFIG
 ```
-
 ---
 
 ## 8.3 Kubernetes 常见问题 FEBM 取证 Runbook
@@ -1136,7 +1141,8 @@ Pod 被 Kubernetes 终止，状态显示 `OOMKilled`（Out of Memory），需要
 
 #### 自动化取证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # oom-forensics.sh - Pod OOMKilled 自动化取证脚本
 
@@ -1243,7 +1249,6 @@ echo ""
 echo "=== 取证报告结束 ==="
 echo "下一步: 根据决策树进行详细分析"
 ```
-
 #### 处置建议模板
 
 ```markdown
@@ -1358,7 +1363,8 @@ Pod 启动后反复崩溃，Kubernetes 以指数退避方式重启容器，状�
 
 #### 证据采集清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 容器状态和退出码
 kubectl describe pod <POD_NAME> -n <NAMESPACE> | grep -A 10 "State:\|Last State:"
 
@@ -1392,7 +1398,6 @@ logcli query '{app="falco",pod="<POD_NAME>"}' --since=30m
 # 8. 依赖服务健康状态（数据库、缓存等）
 kubectl get pods -n <DEPENDENCY_NAMESPACE> | grep -i <SERVICE_NAME>
 ```
-
 #### 常见原因检查表
 
 ```yaml
@@ -1468,7 +1473,8 @@ CrashLoopBackOff 常见原因及证据映射:
 
 #### 自动化取证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crashloop-forensics.sh - CrashLoopBackOff 自动化取证
 
@@ -1604,10 +1610,10 @@ fi
 echo ""
 echo "=== 取证报告结束 ==="
 ```
-
 #### 快速修复检查表
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CrashLoopBackOff 快速修复流程
 
 # Step 1: 查看退出码和最后几行日志
@@ -1652,7 +1658,6 @@ kubectl rollout undo deployment/<DEPLOY> -n <NAMESPACE>
 kubectl run debug-pod --image=<SAME_IMAGE> -it --rm -- /bin/sh
 # 在交互式 shell 中手动执行启动命令，观察错误
 ```
-
 ---
 
 ### 8.3.3 Node NotReady 取证 Runbook
@@ -1663,7 +1668,8 @@ kubectl run debug-pod --image=<SAME_IMAGE> -it --rm -- /bin/sh
 
 #### 证据采集清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 节点状态和条件
 kubectl describe node <NODE_NAME> | grep -A 20 "Conditions:"
 
@@ -1713,7 +1719,6 @@ kubectl get events --all-namespaces --field-selector source=kubelet \
 logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
   | grep -i "error\|critical"
 ```
-
 #### 时间线重建模板
 
 ```markdown
@@ -1763,7 +1768,17 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
 
 #### 根因分类决策树
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────────────────────┐
 │              Node NotReady 根因分类决策树                        │
 └─────────────────────────────────────────────────────────────────┘
@@ -1862,10 +1877,10 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
                     2. 检查 CNI 配置文件 /etc/cni/net.d/
                     3. 验证 CNI 插件二进制文件完整性
 ```
-
 #### 自动化取证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-notready-forensics.sh - Node NotReady 自动化取证
 
@@ -1985,7 +2000,6 @@ echo "  kubectl debug node/$NODE_NAME -it --image=alpine -- sh -c 'chroot /host 
 echo ""
 echo "=== 取证报告结束 ==="
 ```
-
 ---
 
 ### 8.3.4 Service 间歇性超时取证 Runbook
@@ -1996,7 +2010,8 @@ Service 间歇性出现请求超时（非 100% 失败），用户报告服务不
 
 #### 证据采集清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Service 和 Endpoint 状态
 kubectl get svc <SERVICE_NAME> -n <NAMESPACE> -o yaml
 kubectl get endpoints <SERVICE_NAME> -n <NAMESPACE>
@@ -2056,7 +2071,6 @@ kubectl top pods -n <NAMESPACE> -l <SELECTOR>
 # 从 Prometheus 查询 CPU 节流
 sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"<POD_PATTERN>"}[5m])) by (pod)
 ```
-
 #### 跨层证据关联技术
 
 ```yaml
@@ -2263,7 +2277,7 @@ resources:
     cpu: "2000m"  # 允许突发，或移除 limits
 ```
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ---
 
 ### 8.3.5 证书过期导致服务中断取证 Runbook
@@ -2312,7 +2326,6 @@ logcli query '{app="falco"}' --since=24h | grep -i "certificate\|tls"
 curl -s http://localhost:9090/api/v1/alerts | \
   jq '.data.alerts[] | select(.labels.alertname | contains("Certificate"))'
 ```
-
 #### 证书链验证命令
 
 ```bash
@@ -2387,7 +2400,17 @@ echo "=== 证书验证完成 ==="
 
 #### 证书续期操作指南
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 1: 使用 kubeadm 自动续期（推荐）
 
 # 检查哪些证书即将过期
@@ -2510,7 +2533,6 @@ spec:
         description: "{{ $labels.job }} 的证书即将过期，请立即处理"
 EOF
 ```
-
 ---
 
 ### 8.3.6 配置漂移（静默失败）取证 Runbook
@@ -2521,7 +2543,8 @@ EOF
 
 #### 证据采集清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 获取当前配置快照
 kubectl get cm <CONFIG_NAME> -n <NAMESPACE> -o yaml > config-current.yaml
 kubectl get secret <SECRET_NAME> -n <NAMESPACE> -o yaml > secret-current.yaml
@@ -2569,10 +2592,10 @@ kubectl exec <POD> -- env | grep <KEY_NAME>
 # 查看应用是否检测到配置变更
 kubectl logs <POD> | grep -i "config\|reload"
 ```
-
 #### 配置漂移检测脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # config-drift-detection.sh - 检测配置漂移
 
@@ -2641,7 +2664,6 @@ sudo grep "configmaps\|secrets" /var/log/kubernetes/audit.log | \
 echo ""
 echo "=== 检测完成 ==="
 ```
-
 #### GitOps 最佳实践
 
 ```yaml
@@ -2824,7 +2846,8 @@ spec:
 
 #### 第 1 阶段：FTA 快速筛查（0-5 分钟）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 收集基础症状
 kubectl get pods -n production | grep -v "Running\|Completed"
 
@@ -2850,10 +2873,10 @@ kubectl describe pod order-service-abc | grep -i "oom"
 
 # FTA 结论: 确认是 OOMKilled，但需要进一步判断是内存泄漏还是流量突增
 ```
-
 #### 第 2 阶段：FEBM 深度取证（5-20 分钟）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 4: 采集多层证据
 
 # 证据 1: 内存使用趋势 (Prometheus)
@@ -2889,10 +2912,10 @@ kubectl get deploy order-service -o yaml | yq '.spec.template.spec.containers[0]
 # FEBM 结论: 
 # 根因: 促销流量激增 + 缓存失效 → 大量数据库查询 → 内存中堆积未处理的结果集
 ```
-
 #### 第 3 阶段：根因确认和修复（20-30 分钟）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 5: 关联证据形成证据链
 
 证据链:
@@ -2930,7 +2953,6 @@ kubectl set env deploy order-service RATE_LIMIT_QPS=500
 # 3. 实现多级缓存（本地缓存 + Redis）
 # 4. 配置服务降级策略
 ```
-
 #### 第 4 阶段：反馈到 FTA（30+ 分钟）
 
 ```yaml
@@ -3828,7 +3850,8 @@ SOC 2 Trust Service Criteria - FEBM 控制映射:
 
 ### 8.6.3 合规检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # compliance-check.sh - FEBM 合规快速检查脚本
 
@@ -4005,7 +4028,6 @@ echo ""
 echo "=== 合规检查完成 ==="
 echo "报告生成时间: $(date)"
 ```
-
 ---
 
 ## 8.7 章节总结与导航
@@ -4013,6 +4035,7 @@ echo "报告生成时间: $(date)"
 ### 本章要点回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │        第八章：FEBM 生产环境快速启动与 K8s 问题取证手册        │
 ├─────────────────────────────────────────────────────────────────┤
@@ -4076,7 +4099,6 @@ echo "报告生成时间: $(date)"
   4. 进行首次模拟故障演练
   5. 启动 FTA + FEBM 联合诊断流程
 ```
-
 ### 章节导航
 
 ```
@@ -4179,7 +4201,17 @@ OPA Gatekeeper:
 
 ## 附录：常用命令速查表
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ============================================================
 #              FEBM 常用命令速查表
 # ============================================================
@@ -4322,7 +4354,6 @@ kubectl port-forward -n falco svc/falco-falcosidekick-ui 2802:2802
 #                      END OF CHEAT SHEET
 # ============================================================
 ```
-
 ---
 
 **本章完**
@@ -4344,3 +4375,5 @@ kubectl port-forward -n falco svc/falco-falcosidekick-ui 2802:2802
 ⭐ 如果本章对你有帮助，请给我们一个 Star！
 
 </div>
+
+<!-- risk-assessed -->

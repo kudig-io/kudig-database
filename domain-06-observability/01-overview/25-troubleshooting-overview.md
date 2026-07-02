@@ -43,6 +43,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 10 - [[Kubernetes|Kubernetes]] 生产环境故障排查全攻略 (Production Troubleshooting Guide)
@@ -209,7 +214,8 @@ Pod状态流转:
 
 #### Pending诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pending-pod-diagnose.sh - Pod Pending深度诊断
 
@@ -249,7 +255,6 @@ echo -e "\n=== 节点Taint ==="
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 ```
-
 ### Pod CrashLoopBackOff 深度排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -267,7 +272,8 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 #### CrashLoopBackOff诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crashloop-diagnose.sh - CrashLoopBackOff深度诊断
 
@@ -313,7 +319,6 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{range .spec.containers[*]}
   ReadinessProbe: {.readinessProbe}
 {end}'
 ```
-
 ### Pod OOMKilled 深度排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -358,7 +363,8 @@ spec:
 
 #### ImagePull诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # imagepull-diagnose.sh - 镜像拉取问题诊断
 
@@ -396,7 +402,6 @@ if [ -n "$NODE" ]; then
 fi
 
 ```
-
 ### Pod网络故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -439,7 +444,8 @@ NetworkUnavailable: # 节点网络配置不正确
 
 #### Node NotReady诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-notready-diagnose.sh - Node NotReady深度诊断
 
@@ -488,7 +494,6 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates 2
 curl -k https://<API_SERVER>:6443/healthz
 EOF
 ```
-
 ### Node资源压力排查
 
 | 压力类型 | 触发条件 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -502,7 +507,17 @@ EOF
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # node-pressure-relief.sh - 节点资源压力缓解
 
@@ -545,7 +560,6 @@ ps aux | awk '{if ($8 == "Z") print $0}'
 ps -eo user | sort | uniq -c | sort -rn | head -10
 EOF
 ```
-
 ---
 
 <!-- chunk: Service/网络故障排查 -->
@@ -566,7 +580,8 @@ EOF
 
 #### Service诊断脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # service-diagnose.sh - Service深度诊断
 
@@ -600,7 +615,6 @@ SVC_PORT=$(kubectl get svc $SVC_NAME -n $NAMESPACE -o jsonpath='{.spec.ports[0].
 echo "kubectl run test-conn --rm -it --image=curlimages/curl --restart=Never -- curl -v http://$SVC_IP:$SVC_PORT"
 
 ```
-
 ### DNS故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -614,7 +628,8 @@ echo "kubectl run test-conn --rm -it --image=curlimages/curl --restart=Never -- 
 
 #### DNS诊断脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # dns-diagnose.sh - DNS深度诊断
 
@@ -653,7 +668,6 @@ kubectl run dnstest --rm -it --image=busybox:1.36 --restart=Never -- nslookup go
 kubectl run dnstest --rm -it --image=tutum/dnsutils --restart=Never -- dig kubernetes.default.svc.cluster.local
 EOF
 ```
-
 ### NetworkPolicy排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -705,7 +719,8 @@ spec:
 
 #### 存储诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-diagnose.sh - 存储深度诊断
 
@@ -747,7 +762,6 @@ if [ -n "$1" ]; then
   kubectl get pods -n $NAMESPACE -o json | jq -r ".items[] | select(.spec.volumes[]?.persistentVolumeClaim.claimName==\"$PVC_NAME\") | .metadata.name"
 fi
 ```
-
 ### CSI驱动故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -776,7 +790,8 @@ fi
 
 #### API Server诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # apiserver-diagnose.sh - API Server深度诊断
 
@@ -809,7 +824,6 @@ kubectl get prioritylevelconfigurations
 echo -e "\n=== API Resources ==="
 kubectl api-resources --verbs=list --namespaced=false | head -20
 ```
-
 ### etcd故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -823,7 +837,8 @@ kubectl api-resources --verbs=list --namespaced=false | head -20
 
 #### etcd诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-diagnose.sh - etcd深度诊断
 
@@ -871,7 +886,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --key=/etc/kubernetes/pki/etcd/server.key \
   alarm list
 ```
-
 ### Controller Manager故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -900,7 +914,8 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 #### 调度诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # scheduler-diagnose.sh - 调度器深度诊断
 
@@ -949,7 +964,6 @@ else
   echo "无nodeSelector限制"
 fi
 ```
-
 ---
 
 <!-- chunk: 应用部署故障排查 -->
@@ -967,7 +981,8 @@ fi
 
 #### Deployment诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # deployment-diagnose.sh - Deployment深度诊断
 
@@ -1005,7 +1020,6 @@ kubectl rollout history deployment/$DEPLOY_NAME -n $NAMESPACE
 echo -e "\n=== Events ==="
 kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOY_NAME --sort-by='.lastTimestamp'
 ```
-
 ### HPA故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -1031,7 +1045,8 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOY_NA
 
 #### RBAC诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # rbac-diagnose.sh - RBAC深度诊断
 
@@ -1067,7 +1082,6 @@ for resource in pods deployments services configmaps secrets; do
   done
 done
 ```
-
 ### Pod Security Standards故障排查
 
 | 问题症状 | 根因分类 | 诊断命令 | 版本特性 | 解决方案 | 生产预防措施 |
@@ -1095,7 +1109,8 @@ done
 
 #### 性能诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # performance-diagnose.sh - 性能问题诊断
 
@@ -1128,7 +1143,6 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 echo -e "\n=== 最近1小时高频事件 ==="
 kubectl get events -A --sort-by='.count' | tail -20
 ```
-
 ---
 
 <!-- chunk: 集群升级故障排查 -->
@@ -1147,7 +1161,8 @@ kubectl get events -A --sort-by='.count' | tail -20
 
 #### 升级前检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # upgrade-precheck.sh - 升级前检查
 
@@ -1187,7 +1202,6 @@ for node in $(kubectl get nodes -o name | cut -d'/' -f2); do
   echo "$node: $count pods"
 done
 ```
-
 ---
 
 <!-- chunk: 版本特定已知问题 -->
@@ -1258,7 +1272,8 @@ done
 
 ### 综合诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-full-diagnose.sh - Kubernetes生产环境综合诊断
 
@@ -1388,10 +1403,10 @@ tar -czf $OUTPUT_DIR.tar.gz -C /tmp $(basename $OUTPUT_DIR)
 echo "压缩包: $OUTPUT_DIR.tar.gz"
 echo "完成时间: $(date)"
 ```
-
 ### 实时监控脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-realtime-monitor.sh - 实时监控脚本
 
@@ -1410,10 +1425,10 @@ echo "=== 最近事件 ==="
 kubectl get events -A --field-selector type=Warning --sort-by=".lastTimestamp" --no-headers | tail -5
 '
 ```
-
 ### kubectl debug高级用法
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 调试运行中的Pod(临时容器)
 kubectl debug <pod-name> -it --image=busybox --target=<container-name>
 
@@ -1429,7 +1444,6 @@ kubectl debug <pod-name> -it --copy-to=debug-pod --container=app -- sh
 # 5. 使用网络诊断镜像
 kubectl debug <pod-name> -it --image=nicolaka/netshoot --target=<container-name>
 ```
-
 ---
 
 <!-- chunk: 监控告警集成 -->
@@ -1635,6 +1649,7 @@ spec:
 ### 问题响应流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           问题响应SOP流程                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -1669,7 +1684,6 @@ spec:
 └─────────────────────────────────────────────────────────────────────────────┘
 
 ```
-
 ### 快速恢复Checklist
 
 | 场景 | 快速恢复操作 | 预估恢复时间 |
@@ -1689,7 +1703,17 @@ spec:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 紧急问题快速诊断命令 ==========
 
 # 1. 快速检查集群状态
@@ -1723,7 +1747,6 @@ kubectl delete pod <pod> -n <namespace> --grace-period=0 --force  # ⚠️ 跳�
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 kubectl uncordon <node>
 ```
-
 ---
 
 **排查黄金法则**:
@@ -1779,3 +1802,5 @@ kubectl uncordon <node>
 - 27-performance-profiling-tools
 
 ```
+
+<!-- risk-assessed -->

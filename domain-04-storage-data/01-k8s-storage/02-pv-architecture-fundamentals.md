@@ -70,6 +70,11 @@ related_docs:
   desc: 持久化存储故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - PV/PVC核心概念与企业级实践
@@ -297,7 +302,8 @@ PV 与 PVC 绑定后，Kubernetes 会自动添加以下保护机制：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看绑定保护 annotation
 kubectl get pvc <name> -o jsonpath='{.metadata.annotations}'
 
@@ -308,7 +314,6 @@ kubectl get pvc <name> -o jsonpath='{.metadata.finalizers}'
 # 强制删除卡住的 PVC（谨慎使用）
 kubectl patch pvc <name> -p '{"metadata":{"finalizers":null}}'
 ```
-
 > **运维注意**: 不要手动删除 `bind-completed` annotation，否则 PVC 可能被错误地重新绑定到其他 PV，导致数据访问异常。
 
 ### 绑定延迟模式 (VolumeBindingMode)
@@ -484,7 +489,8 @@ groups:
 
 ### 问题诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PV 状态
 kubectl get pv -o wide
 
@@ -501,7 +507,6 @@ kubectl logs -n kube-system -l app=csi-provisioner --tail=100
 kubectl get csinodes
 kubectl describe csinode <node-name>
 ```
-
 ### 常见问题与解决
 
 | 问题 | 可能原因 | 解决方案 |
@@ -743,7 +748,8 @@ print(f"数据库12个月后需要容量: {result['required_capacity']} GB")
 
 ### 自动化健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # enterprise-pv-health-check.sh
 
@@ -801,7 +807,6 @@ while true; do
     sleep 1800
 done
 ```
-
 ### 存储资源配额管理
 
 ```yaml
@@ -882,7 +887,8 @@ for candidate in candidates:
 
 ### 容量优化自动化脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-optimization-automation.sh
 
@@ -934,7 +940,6 @@ optimize_storage_capacity() {
 # 执行优化
 optimize_storage_capacity
 ```
-
 ---
 <!-- chunk: 监控与告警配置 -->
 ## 监控与告警配置
@@ -1007,7 +1012,8 @@ storage_monitoring_config:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # storage-monitoring-deployment.sh
 
@@ -1073,7 +1079,6 @@ EOF
 # 执行部署
 deploy_storage_monitoring
 ```
-
 ---
 <!-- chunk: 问题预防与自愈 -->
 ## 问题预防与自愈
@@ -1211,3 +1216,6 @@ spec:
 - 01-storage-architecture-overview
 - 03-pvc-patterns-practices
 - 04-storageclass-dynamic-provisioning
+
+
+<!-- risk-assessed -->

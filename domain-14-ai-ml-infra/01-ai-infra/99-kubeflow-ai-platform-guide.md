@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubeflow|Kubeflow]] AI 平台部署与实践指南
@@ -116,7 +121,8 @@ Kubeflow 平台
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 设置环境变量
 export KUBEFLOW_VERSION=v1.10.0
 
@@ -131,18 +137,17 @@ while ! kustomize build example | kubectl apply -f -; do
   sleep 20
 done
 ```
-
 ### 2.2 组件选择性安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 仅安装核心 + Pipelines + Training
 kustomize build apps/pipeline/upstream | kubectl apply -f -
 kustomize build apps/training-operator/upstream | kubectl apply -f -
 ```
-
 ### 2.3 重要前置条件
 
 | 组件 | 要求 |
@@ -452,3 +457,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

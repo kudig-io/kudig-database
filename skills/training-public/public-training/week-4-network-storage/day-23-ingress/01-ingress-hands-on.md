@@ -41,6 +41,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
@@ -78,7 +83,8 @@ prerequisites:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: Helm 安装
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -91,10 +97,10 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
 # 方式 2: 手动部署
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 ```
-
 ### 2.2 验证安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Ingress Controller Pod
 kubectl get pods -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
 
@@ -104,7 +110,6 @@ kubectl get ingressclass
 # 获取 LoadBalancer IP
 kubectl get svc -n ingress-nginx
 ```
-
 ---
 
 ## 3. Ingress 路由配置
@@ -260,7 +265,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从证书文件创建
 kubectl create secret tls api-tls-secret \
   --cert=api.crt \
@@ -274,7 +280,6 @@ kubectl create secret tls api-tls-secret \
 # 查看 secret
 kubectl get secret api-tls-secret -o yaml
 ```
-
 ---
 
 ## 5. 流量控制
@@ -344,7 +349,8 @@ spec:
 
 ### 6.1 常见问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Ingress 返回 404
 # 检查 Ingress 规则是否匹配
 kubectl describe ingress web-ingress
@@ -361,10 +367,10 @@ kubectl get secret api-tls-secret
 # 3. 路径匹配问题
 # 检查 pathType 是否正确（Prefix / Exact / ImplementationSpecific）
 ```
-
 ### 6.2 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Ingress 状态
 kubectl get ingress -A
 
@@ -380,7 +386,6 @@ openssl s_client -connect api.example.com:443 -servername api.example.com
 # 查看 Controller 日志
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -f
 ```
-
 ---
 
 ## 7. 实战练习
@@ -487,3 +492,5 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 
 ```
+
+<!-- risk-assessed -->

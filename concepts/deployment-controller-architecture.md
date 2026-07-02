@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Deployment 控制器架构
@@ -123,6 +128,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 1. 用户执行 kubectl apply -f deployment.yaml
 2. API Server 接收请求，验证并写入 etcd
 3. Deployment Informer 通过 Watch 机制捕获新增事件
@@ -135,7 +141,6 @@ spec:
 10. RS Controller 创建/删除 Pod
 11. Deployment Controller 更新 Deployment Status
 ```
-
 ## ReplicaSet 版本管理
 
 每次 Deployment 更新 Pod 模板时：
@@ -179,3 +184,5 @@ spec:
 - [[deployment]] — Deployment
 
 - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]
+
+<!-- risk-assessed -->

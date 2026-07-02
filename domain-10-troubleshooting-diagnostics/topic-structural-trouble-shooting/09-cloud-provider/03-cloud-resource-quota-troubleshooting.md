@@ -48,6 +48,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 云资源配额与 API 限流故障排查指南
@@ -166,7 +171,8 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Cloud Controller Manager 日志筛查
 kubectl logs -n kube-system deployment/cloud-controller-manager --tail=500 | \
   grep -iE "quota|rate|limit|throttle|exceeded|capacity"
@@ -187,7 +193,6 @@ kubectl get svc --all-namespaces -o json | \
 # 查看 FailedScheduling 事件
 kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTimestamp'
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -197,6 +202,7 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
 云资源配额管理是一个多层级体系：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────┐
 │          组织/账户级配额 (Organization)        │
 │  总 vCPU | 总内存 | 总存储 | 总网络资源        │
@@ -211,7 +217,6 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
 │  每秒请求数 (QPS) | 并发请求数 | 令牌桶速率     │
 └─────────────────────────────────────────────┘
 ```
-
 **关键概念**：
 - **On-Demand Quota**：标准实例配额，适用于大多数场景
 - **Spot/Preemptible Quota**：竞价实例独立配额，通常更高
@@ -221,6 +226,7 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
 ### 2.2 排查逻辑决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 云资源配额/API 问题
     ├── 资源创建失败
     │   ├── 计算资源（实例/节点）
@@ -250,12 +256,12 @@ kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTime
         └── 预留实例到期
             └── 续费预留实例或切换到按需实例
 ```
-
 ### 2.3 详细诊断命令
 
 #### 多云配额统一诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 多云配额统一诊断脚本
 # 根据当前环境自动检测云厂商并执行对应检查
@@ -336,10 +342,10 @@ case $CLOUD in
     ;;
 esac
 ```
-
 #### Kubernetes 控制器限流诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubernetes 控制器 API 限流诊断
 
@@ -381,7 +387,6 @@ echo "4. 近期配额/限流相关事件:"
 kubectl get events --all-namespaces --sort-by='.lastTimestamp' | \
   grep -iE "quota|limit|exceed|throttl|capacity|Insufficient" | tail -15
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -390,7 +395,8 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' | \
 
 #### 方案一：AWS 配额监控与自动告警
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # AWS 配额监控脚本（建议作为 CronJob 运行）
 
@@ -408,10 +414,19 @@ aws support describe-trusted-advisor-checks --language zh 2>/dev/null | \
 
 echo "配额报告已保存: $REPORT_FILE"
 ```
-
 #### 方案二：资源清理自动化脚本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 云资源自动清理脚本（用于释放配额）
 # ⚠️ 请在使用前仔细审查，避免误删生产资源
@@ -470,7 +485,6 @@ echo ""
 echo "清理检查完成"
 [ "$DRY_RUN" = "true" ] && echo "本次为模拟运行，未实际删除资源。如需实际执行请传入参数 'false'"
 ```
-
 #### 方案三：Cluster Autoscaler 限流缓解配置
 
 ```yaml
@@ -599,7 +613,8 @@ groups:
 
 #### 配额使用率检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 配额使用率检查脚本（用于监控集成）
 
@@ -637,7 +652,6 @@ fi
 
 echo "✓ 配额检查通过"
 ```
-
 ### 3.5 最佳实践
 
 1. **配额基线规划**：在集群设计阶段，根据预期节点数、Service 数、PVC 数计算所需配额，提前申请 2-3 倍余量
@@ -698,3 +712,6 @@ echo "✓ 配额检查通过"
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
+
+
+<!-- risk-assessed -->

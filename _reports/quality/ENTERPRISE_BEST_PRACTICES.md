@@ -36,6 +36,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes扩展生态企业级最佳实践
@@ -444,7 +449,8 @@ func getSecureContainerSpec() corev1.Container {
 
 ### 3.1 Helm Chart安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # helm-security-scan.sh - Helm Chart安全扫描脚本
 
@@ -478,7 +484,6 @@ trivy config --severity HIGH,CRITICAL ${CHART_PATH}/ > ${REPORT_DIR}/trivy-confi
 
 echo "✅ 安全扫描完成，报告保存在: ${REPORT_DIR}/"
 ```
-
 ### 3.2 多环境配置管理
 
 ```yaml
@@ -908,7 +913,8 @@ spec:
 
 ### 6.2 合规检查与审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # compliance-check.sh - 合规性检查脚本
 
@@ -942,9 +948,10 @@ kubectl get pods -n kube-system | grep apiserver | tee -a ${REPORT_FILE}
 
 echo "✅ 合规性检查完成，报告保存在: ${REPORT_FILE}"
 ```
-
 ---
 
 **维护团队**: Kusheet Extensions Team  
 **联系方式**: allen.galler@example.com  
 **许可证**: MIT
+
+<!-- risk-assessed -->

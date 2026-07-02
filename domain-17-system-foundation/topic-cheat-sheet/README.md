@@ -40,6 +40,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 速查卡 (Cheat Sheet)
@@ -67,14 +72,14 @@ prerequisites:
 ## 使用场景
 
 ### 日常运维速查
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速查找 kubectl 命令
 open domain-17-system-foundation/topic-cheat-sheet/k8s.md
 
 # Linux 性能排查命令
 open domain-17-system-foundation/topic-cheat-sheet/linux.md
 ```
-
 ### 导入 AI 知识库
 - **NotebookLM**: 导入整个目录作为速查参考源
 - **IMA / 豆包**: 适合日常术语和命令查询
@@ -127,3 +132,6 @@ open domain-17-system-foundation/topic-cheat-sheet/linux.md
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

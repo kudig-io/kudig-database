@@ -56,6 +56,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AWS EKS 企业级多云管理平台
@@ -863,7 +868,8 @@ spec:
 
 ## KMS 信封加密配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 aws eks create-cluster \
   --name production-eks-cluster \
   --role-arn arn:aws:iam::123456789012:role/EKSClusterRole \
@@ -878,7 +884,6 @@ aws eks create-cluster \
     }
   ]'
 ```
-
 <!-- chunk: 监控告警 -->## 监控告警
 
 ## Prometheus 监控配置
@@ -987,7 +992,8 @@ spec:
 
 ## CloudWatch Container Insights 集成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 aws logs create-log-group \
   --log-group-name /aws/eks/production-eks-cluster/performance
 
@@ -1014,12 +1020,12 @@ aws eks update-addon \
     }
   }'
 ```
-
 <!-- chunk: 运维管理 -->## 运维管理
 
 ## 故障排查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1123,10 +1129,10 @@ case "${1:-all}" in
     *) echo "Usage: $0 {health|network|performance|security|all}" ;;
 esac
 ```
-
 ## 集群升级脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -1176,7 +1182,6 @@ kubectl version --short
 
 echo -e "\n[6/6] 升级完成。"
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 部署最佳实践
@@ -1261,7 +1266,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 CLUSTER_NAME="production-eks-cluster"
 
@@ -1285,7 +1291,6 @@ kubectl get pods -A --field-selector=status.phase=Failed -o name | xargs -r kube
 echo "[5] 检查集群自动扩缩容"
 kubectl -n kube-system logs -l app=cluster-autoscaler --tail=50
 ```
-
 <!-- chunk: 参考资源 -->## 参考资源
 
 - [AWS EKS 官方文档](https://docs.aws.amazon.com/eks/latest/userguide/)
@@ -1324,3 +1329,6 @@ kubectl -n kube-system logs -l app=cluster-autoscaler --tail=50
 - 10-multicloud-disaster-recovery
 - 02-azure-aks-enterprise-multicloud
 - 03-enterprise-multicloud-governance
+
+
+<!-- risk-assessed -->

@@ -57,6 +57,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - 准入控制器(Webhook)配置与实现
@@ -255,7 +260,17 @@ func getSecureContainerSpec() corev1.Container {
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # cert-manager.sh - Webhook证书管理脚本
 
@@ -453,7 +468,6 @@ main() {
 
 main "$@"
 ```
-
 ### 4. 性能优化与监控
 
 ```go
@@ -551,7 +565,8 @@ data:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # webhook-debug.sh - Webhook故障诊断脚本
 
@@ -630,7 +645,6 @@ perform_complete_diagnostics() {
 
 perform_complete_diagnostics
 ```
-
 ### 6. 生产环境部署清单
 
 ```markdown
@@ -1162,7 +1176,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # generate-certs.sh
 
@@ -1212,14 +1227,14 @@ echo "✅ 证书生成完成!"
 echo "🔐 证书文件位置: ${TMP_DIR}"
 echo "🔑 Secret名称: ${SECRET_NAME}"
 ```
-
 ### 3. 部署脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy-webhook.sh
 
@@ -1263,7 +1278,6 @@ kubectl delete mysqlcluster test-webhook
 
 echo "✅ Webhook部署完成!"
 ```
-
 <!-- chunk: 高级Webhook特性 -->
 ## 高级Webhook特性
 
@@ -1476,7 +1490,8 @@ func init() {
 
 ### 2. 问题排除工具
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # webhook-debug.sh
 
@@ -1509,7 +1524,6 @@ kubectl get events -n ${NAMESPACE} --field-selector reason=AdmissionWebhook
 
 echo "=== Debug Complete ==="
 ```
-
 ### 3. 性能测试
 
 ```bash
@@ -1571,3 +1585,6 @@ echo "✅ 性能测试完成!"
 - 02-operator-development-patterns
 - 04-api-aggregation-extension
 - 05-package-management-tools
+
+
+<!-- risk-assessed -->

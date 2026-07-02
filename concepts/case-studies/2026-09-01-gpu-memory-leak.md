@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-09-01] PyTorch 显存泄漏导致 GPU 训练节点全部 OOM，任务队列积压
@@ -33,18 +38,19 @@ last_updated: 2026-05-23
 
 ## 问题现象
 02:00，ML 平台告警 GPU 训练任务失败率 > 80%。训练 Pod 状态显示 `Error` 或 `OOMKilled`：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n ml-training
 # NAME              READY   STATUS      RESTARTS
 # train-resnet-0    0/1     OOMKilled   0
 # train-bert-1      0/1     Error       0
 # ...
 ```
-
 ## 诊断过程
 
 **02:05** — 查看 GPU 节点状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -l nvidia.com/gpu.present=true
 # NAME                         STATUS   GPU
 # ip-10-0-10-10.ec2.internal   Ready    4/4
@@ -52,7 +58,6 @@ kubectl get nodes -l nvidia.com/gpu.present=true
 # ip-10-0-10-12.ec2.internal   Ready    0/4
 # ip-10-0-10-13.ec2.internal   Ready    0/4
 ```
-
 3 个节点的 GPU 全部不可用。
 
 **02:07** — 检查 GPU 显存使用：
@@ -60,7 +65,8 @@ kubectl get nodes -l nvidia.com/gpu.present=true
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ml-training nvidia-device-plugin-xxx -- \
   nvidia-smi
 # +---------------------------------------------------------------------------------------+
@@ -77,7 +83,6 @@ kubectl exec -n ml-training nvidia-device-plugin-xxx -- \
 # | N/A   36C    P0              62W / 400W |  39985MiB / 40960MiB |      0%      Default |
 # ...
 ```
-
 显存几乎 100% 占用，但 GPU 利用率为 0%（无活跃进程）。
 
 **02:10** — 检查僵尸进程：
@@ -85,29 +90,29 @@ kubectl exec -n ml-training nvidia-device-plugin-xxx -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ml-training nvidia-device-plugin-xxx -- \
   nvidia-smi pids -i 0
 # No running processes found
 ```
-
 显存被占用但没有运行进程，典型的显存泄漏。
 
 **02:12** — 查看之前完成的训练 Job：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get jobs -n ml-training
 # NAME              COMPLETIONS   DURATION   AGE
 # train-resnet-0    1/1           45m        2h
 # train-bert-1      1/1           120m       3h
 # ...
 ```
-
 已完成的 Job 的 Pod 仍在节点上：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n ml-training -o wide | grep Completed
 # train-resnet-0-xxx   0/1   Completed   ip-10-0-10-11.ec2.internal
 ```
-
 **02:14** — 检查训练代码：
 ```python
 # 训练脚本片段（来自 Git）
@@ -135,35 +140,35 @@ for epoch in range(num_epochs):
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete pods -n ml-training --field-selector status.phase=Succeeded
 # Pod 删除后，kubelet 清理容器，显存释放
 ```
-
 **02:22** — 验证显存释放：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ml-training nvidia-device-plugin-xxx -- nvidia-smi
 # |   0  NVIDIA A100-SXM4-40GB            ... |    512MiB / 40960MiB |      0%      Default |
 # |   1  NVIDIA A100-SXM4-40GB            ... |    512MiB / 40960MiB |      0%      Default |
 ```
-
 **02:25** — 重新提交训练任务：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f training-jobs/resume-20260901.yaml
 kubectl get pods -n ml-training
 # NAME              READY   STATUS
 # train-resnet-0    1/1     Running
 # train-bert-1      1/1     Running
 ```
-
 **02:30** — 修复训练脚本，添加显存清理：
 ```python
 # 修复后的训练脚本
@@ -186,7 +191,8 @@ torch.cuda.empty_cache()
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob training-batch -n ml-training --type='merge' -p '
 {
   "spec": {
@@ -198,7 +204,6 @@ kubectl patch cronjob training-batch -n ml-training --type='merge' -p '
   }
 }'
 ```
-
 ## 验证
 - 02:38 — 训练任务正常运行，GPU 利用率为 95%+
 - 02:40 — 模型训练进度正常，无显存泄漏
@@ -219,3 +224,5 @@ kubectl patch cronjob training-batch -n ml-training --type='merge' -p '
 - **相关 FTA**: [[gpu-fta]]
 
 ```
+
+<!-- risk-assessed -->

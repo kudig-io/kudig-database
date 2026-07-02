@@ -64,6 +64,11 @@ cross_refs:
   label: '故障树: cilium'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Cilium|Cilium]] CNI 架构与部署 (Cilium CNI Architecture and Deployment)
@@ -1219,7 +1224,8 @@ rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
 
 ## 5.1.2 快速安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基础安装（自动检测 K8s 环境）
 cilium install --version 1.16.0
 
@@ -1238,16 +1244,15 @@ cilium status --wait
 # 运行连通性测试
 cilium connectivity test
 ```
-
 ## 5.2 使用 Helm 部署 (Deploy with Helm)
 
 ## 5.2.1 添加 Helm Repository
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm repo add cilium https://helm.cilium.io/
 helm repo update
 ```
-
 ## 5.2.2 生产级 values.yaml
 
 ```yaml
@@ -1432,7 +1437,8 @@ bpf:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装命令
 helm install cilium cilium/cilium \
   --version 1.16.0 \
@@ -1449,12 +1455,12 @@ helm upgrade cilium cilium/cilium \
 # 查看已安装的配置
 helm get values cilium -n kube-system
 ```
-
 ## 5.3 在不同 K8s 发行版上的部署 (Deployment on Different K8s Distributions)
 
 ## 5.3.1 EKS (AWS)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # EKS 需要启用 ENI IPAM 模式（可选，或使用 overlay）
 cilium install \
   --version 1.16.0 \
@@ -1471,13 +1477,13 @@ cilium install \
 #   subnetTagsFilter:
 #   - "kubernetes.io/cluster/<cluster-name>=owned"
 ```
-
 ## 5.3.2 GKE (Google Cloud)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # GKE 需要特殊配置（DatapathV2 是 Cilium 的商业版本）
 helm install cilium cilium/cilium \
   --version 1.16.0 \
@@ -1491,10 +1497,10 @@ helm install cilium cilium/cilium \
   --set ipv4.enabled=true \
   --set nodePort.directRoutingDevice=eth0
 ```
-
 ## 5.3.3 Kind (本地开发)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 Kind 集群（禁用默认 CNI）
 cat <<EOF > kind-config.yaml
 kind: Cluster
@@ -1520,7 +1526,6 @@ cilium install \
 cilium status --wait
 cilium connectivity test
 ```
-
 ---
 
 <!-- chunk: 6. 从传统 CNI 迁移到 Cilium -->## 6. 从传统 CNI 迁移到 Cilium
@@ -1565,7 +1570,17 @@ flowchart TD
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 备份当前 Flannel 配置
 kubectl get configmap kube-flannel-cfg -n kube-flannel -o yaml > flannel-backup.yaml
 kubectl get pods -n kube-flannel -o yaml > flannel-pods-backup.yaml
@@ -1601,7 +1616,6 @@ kubectl uncordon node-1
 kubectl delete daemonset kube-flannel-ds -n kube-flannel
 kubectl delete namespace kube-flannel  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ## 6.3 CNI 链式模式 (CNI Chaining Mode)
 
 对于不支持完全替换的场景，Cilium 可以作为链式 CNI 插件：
@@ -1691,7 +1705,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 前提条件:
 # - 每个集群有唯一的 cluster ID (1-255)
@@ -1735,7 +1750,6 @@ cilium clustermesh connect \
 # 验证连接
 cilium clustermesh status
 ```
-
 ## 7.3 Global Service 配置 (Global Service Configuration)
 
 ```yaml
@@ -1909,7 +1923,8 @@ encryption:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 基础状态检查
 # ============================================
@@ -1931,7 +1946,6 @@ kubectl logs -n kube-system -l k8s-app=cilium --tail=100
 CILIUM_POD=$(kubectl get pods -n kube-system -l k8s-app=cilium -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -it -n kube-system $CILIUM_POD -- cilium status
 ```
-
 ## 9.2 网络连通性排查 (Network Connectivity Troubleshooting)
 
 ```bash
@@ -2220,7 +2234,8 @@ operator:
 
 ## 10.5 网络策略编辑器 (Network Policy Editor)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 2026 年 Cilium 引入内置策略编辑器和可视化工具
 # 通过 Hubble UI 集成
 
@@ -2241,7 +2256,6 @@ cilium policy impact \
   --policy-file new-policy.yaml \
   --namespace production
 ```
-
 ---
 
 <!-- chunk: 附录 A: Cilium 版本兼容性矩阵 -->## 附录 A: Cilium 版本兼容性矩阵
@@ -2334,3 +2348,6 @@ cilium debuginfo                       # 调试信息
 - 02-ebpf-map-types-data-structures
 - 04-cilium-network-policy
 - 05-cilium-service-mesh
+
+
+<!-- risk-assessed -->

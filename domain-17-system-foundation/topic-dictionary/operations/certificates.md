@@ -36,6 +36,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Certificates（PKI 证书与要求）
@@ -178,7 +183,8 @@ etcd 集群内部节点之间以及对客户端（主要是 API Server）都采�
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查证书过期时间
 kubeadm certs check-expiration
 
@@ -204,7 +210,6 @@ openssl req -new -key server.key -out server.csr -subj "/CN=kube-apiserver"
 # 使用 cfssl 签发证书
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json server-csr.json | cfssljson -bare server
 ```
-
 ## 交叉引用
 
 - [PKI Certificates and Requirements - Kubernetes Best Practices](https://kubernetes.io/docs/setup/best-practices/certificates/)
@@ -220,3 +225,6 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json server-csr.js
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+
+
+<!-- risk-assessed -->

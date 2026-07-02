@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kube-scheduler 调度详解
@@ -564,7 +569,8 @@ profiles:
 
 ### 查看调度失败原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> | grep -A 10 "Events"
 # Events:
 #   Type     Reason            From                  Message
@@ -573,13 +579,13 @@ kubectl describe pod <pod-name> | grep -A 10 "Events"
 #     1 Insufficient cpu, 1 node(s) had taints that the pod didn't tolerate,
 #     1 node(s) didn't match Pod's node affinity/selector.
 ```
-
 ### Pod 优先级与抢占
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 PriorityClass
 kubectl apply -f - <<EOF
 apiVersion: scheduling.k8s.io/v1
@@ -595,7 +601,6 @@ EOF
 # 在 Pod 中使用
 kubectl run critical-app --image=nginx --overrides='{"spec":{"priorityClassName":"high-priority"}}'
 ```
-
 ### 拓扑分布约束
 
 ```yaml
@@ -627,7 +632,8 @@ spec:
 
 ### kubectl 输出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -o wide -l app=web-app
 # NAME                       READY   STATUS    RESTARTS   AGE   IP            NODE       ZONE
 # web-app-7b9d6c8f5d-abcde   1/1     Running   0          1m    10.244.0.10   worker-1   us-east-1a
@@ -637,7 +643,6 @@ kubectl get pods -o wide -l app=web-app
 # web-app-7b9d6c8f5d-uvwxy   1/1     Running   0          1m    10.244.4.10   worker-5   us-east-1a
 # web-app-7b9d6c8f5d-z1234   1/1     Running   0          1m    10.244.5.10   worker-6   us-east-1b
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -666,3 +671,6 @@ kubectl get pods -o wide -l app=web-app
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

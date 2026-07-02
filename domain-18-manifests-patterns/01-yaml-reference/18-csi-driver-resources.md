@@ -57,6 +57,11 @@ cross_refs:
   label: '故障树: csi'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 18 - CSI 驱动资源 YAML 配置参考
@@ -112,7 +117,17 @@ cross_refs:
 
 ## 1.2 CSI 三阶段挂载流程
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ========== 阶段 1: Controller Publish (控制平面) ==========
 External Attacher 调用 CSI Driver 的 ControllerPublishVolume
     ↓
@@ -139,7 +154,6 @@ Pod 容器内可见 (volumeMounts.mountPath)
 ========== 卸载流程 (反向) ==========
 NodeUnpublishVolume → NodeUnstageVolume → ControllerUnpublishVolume
 ```
-
 **关键特性**:
 - **Stage/Unstage**: 全局挂载,多个 Pod 可共享(同一节点)
 - **Publish/Unpublish**: Pod 独占挂载,生命周期跟随 Pod
@@ -680,7 +694,8 @@ spec:
 ```
 
 **查看命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 CSINode
 kubectl get csinode
 # NAME                                            DRIVERS   AGE
@@ -689,7 +704,6 @@ kubectl get csinode
 # 查看详情
 kubectl get csinode ip-10-0-1-100.us-west-2.compute.internal -o yaml
 ```
-
 ## 示例 2: 多驱动节点
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -1128,7 +1142,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CSI Driver 注册
 kubectl get csidriver
 # NAME              ATTACHREQUIRED   PODINFOONMOUNT   MODES        AGE
@@ -1165,7 +1180,6 @@ kubectl exec test-pod -- df -h /data
 # Filesystem      Size  Used Avail Use% Mounted on
 # /dev/nvme1n1    9.8G   24M  9.7G   1% /data
 ```
-
 ## 5.2 案例 2: 监控 CSI Driver
 
 **[[Prometheus|Prometheus]] 监控配置**:
@@ -1256,15 +1270,16 @@ groups:
 ## 6.1 PV 无法 Attach
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod my-pod
 # Events:
 #   Warning  FailedAttachVolume  1m  attachdetach-controller  
 #            AttachVolume.Attach failed for volume "pvc-abc123": rpc error: code = Internal
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 VolumeAttachment 对象
 kubectl get volumeattachment
 # NAME                                                        ATTACHER          PV          NODE      ATTACHED   AGE
@@ -1289,19 +1304,19 @@ kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-attacher
 # - 将 Pod 调度到其他节点
 # - 使用 NVMe 实例类型(更高卷限制)
 ```
-
 ## 6.2 挂载失败
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod my-pod
 # Events:
 #   Warning  FailedMount  1m  kubelet  
 #            MountVolume.SetUp failed for volume "pvc-abc123": rpc error: code = Internal desc = Could not mount
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Node Plugin 日志
 kubectl logs -n kube-system -l app=ebs-csi-node -c ebs-plugin --tail=100 | grep pvc-abc123
 
@@ -1338,19 +1353,19 @@ csc node stage \
   pvc-abc123 \
   /var/lib/kubelet/plugins/kubernetes.io/csi/pv/pvc-abc123/globalmount
 ```
-
 ## 6.3 容量不足调度失败
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod my-pod
 # Events:
 #   Warning  FailedScheduling  1m  default-scheduler  
 #            0/3 nodes are available: 3 node(s) did not have enough local storage.
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CSIStorageCapacity
 kubectl get csistoragecapacity -A
 # NAMESPACE      NAME                              STORAGECLASS    CAPACITY
@@ -1371,7 +1386,6 @@ kubectl logs -n kube-system -l app=local-csi-controller -c csi-provisioner
 # - 清理节点上未使用的数据
 # - 添加更多节点或更大容量的磁盘
 ```
-
 ---
 
 <!-- chunk: 七、最佳实践总结 -->## 七、最佳实践总结
@@ -1514,3 +1528,6 @@ parameters:
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -50,6 +50,11 @@ skill_name: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -173,6 +178,7 @@ tier: peripheral---
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -208,7 +214,6 @@ tier: peripheral---
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -245,7 +250,8 @@ tier: peripheral---
 ### 3.1 影响评估
 
 **Step T1**: 统计压力节点数量与比例
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o json | jq -r '
   .items[] |
   select(.status.conditions[]?.status == "True" and
@@ -255,14 +261,16 @@ kubectl get nodes -o json | jq -r '
 > **判断规则**: 若数量 > 总节点数 30% → 影响范围集群级，立即升级
 
 **Step T2**: 检查被驱逐 Pod 的数量和命名空间
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A --field-selector=status.phase=Failed | grep Evicted | \
   awk '{print $1}' | sort | uniq -c | sort -rn
 ```
 > **判断规则**: 若 kube-system 命名空间有 Evicted Pod → 核心服务受影响，P0
 
 **Step T3**: 检查压力节点的运行 Pod 数量和关键度
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A --field-selector spec.nodeName=<node-name> \
   -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name | \
   grep -v kube-system | wc -l
@@ -808,7 +816,8 @@ echo 'query: predict_linear(node_filesystem_avail_bytes[1h], 3600) < 0'
 
 ### 7.1 即时验证（修复后 1 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 检查节点 Pressure 条件是否清除
 kubectl get node <node-name> -o jsonpath='{range .status.conditions[*]}{.type}={.status}{"\n"}{end}' | grep Pressure
 # 预期: 所有 Pressure 条件为 False
@@ -825,7 +834,6 @@ ssh <node-ip> "free -m | grep 'Mem:'"
 ssh <node-ip> "ps aux --no-heading | wc -l && cat /proc/sys/kernel/pid_max"
 # 预期: 当前 PID 远低于上限
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1029,3 +1037,5 @@ receivers:
 *维护者: Kudig Team*
 
 ```
+
+<!-- risk-assessed -->

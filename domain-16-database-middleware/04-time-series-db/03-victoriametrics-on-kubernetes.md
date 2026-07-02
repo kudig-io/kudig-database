@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # VictoriaMetrics 集群版 on Kubernetes
@@ -120,7 +125,8 @@ vmoperator 是 VictoriaMetrics 官方 Kubernetes Operator，推荐使用 Helm �
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 VictoriaMetrics Helm 仓库并更新，确保使用官方最新 chart
 helm repo add vm https://victoriametrics.github.io/helm-charts/
 helm repo update
@@ -130,7 +136,6 @@ kubectl create namespace vm
 helm install vmoperator vm/victoria-metrics-operator -n vm \
   --set operator.enable_converter_ownership=false
 ```
-
 ### 3.2 创建 VMCluster 自定义资源
 
 VMCluster CR 声明了 vminsert、vmselect、vmstorage 的副本数与资源规格。以下示例适用于日均写入 100 万样本的生产环境：
@@ -183,14 +188,14 @@ spec:
 
 创建后通过以下命令确认组件状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VMCluster 状态，确保 phase 为 Running
 kubectl get vmcluster -n vm prod-vmcluster -o jsonpath='{.status.status}'
 
 # 检查 vminsert、vmselect、vmstorage Pod 是否全部就绪
 kubectl get pods -n vm -l app.kubernetes.io/name=vmcluster
 ```
-
 ### 3.3 配置 remote write
 
 将 Prometheus 或 vmagent 的 remote write 指向 vminsert 的 Service：
@@ -261,11 +266,11 @@ vmstorage 对磁盘延迟与吞吐量均敏感，磁盘选型直接影响写入�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前 vmstorage 数据目录大小，评估保留周期是否需要调整
 kubectl exec -n vm vmstorage-prod-vmcluster-0 -- du -sh /vmstorage-data
 ```
-
 ### 5.3 vminsert 写入并发调优
 
 当采集端数量超过 5000 时，需调整 vminsert 的并发参数：
@@ -298,31 +303,31 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 编辑 VMCluster，将 vmstorage.replicaCount 从 3 改为 5
 kubectl patch vmcluster prod-vmcluster -n vm --type merge \
   -p '{"spec":{"vmstorage":{"replicaCount":5}}}'
 ```
-
 扩容后 vminsert 会自动感知新节点，但建议重启 vminsert 以刷新一致性哈希环，避免数据分布不均：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 滚动重启 vminsert，重新加载 storage node 列表
 kubectl rollout restart deployment vminsert-prod-vmcluster -n vm
 ```
-
 ### 6.2 垂直扩容 vmselect
 
 查询高峰期 CPU 利用率持续高于 80% 时，优先增加 vmselect 副本数：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时扩容 vmselect 应对查询高峰
 kubectl scale deployment vmselect-prod-vmcluster -n vm --replicas=4
 ```
-
 ## 7. 高可用与多可用区
 
 在 ACK 多可用区集群中，应通过 Pod 反亲和性将 vmstorage 副本分散到不同可用区。多可用区部署虽然能提升可用性，但也会引入跨可用区网络延迟，可能影响 vminsert 到 vmstorage 的写入延迟以及 vmselect 的查询聚合效率。因此，在延迟敏感场景下，可以选择将 vmstorage 集中在同一可用区，同时通过 replicationFactor 与跨可用区备份策略保证数据安全。
@@ -379,11 +384,11 @@ spec:
 
 建议将 vminsert、vmselect、vmstorage 的日志统一采集到阿里云 SLS 或自研日志平台，便于排查慢查询与写入失败：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 vmstorage 最近错误日志
 kubectl logs -n vm statefulset/vmstorage-prod-vmcluster --tail=200 | grep -iE "error|warn|oom"
 ```
-
 ### 9.2 成本优化
 
 | 优化手段 | 效果 | 风险 |
@@ -399,12 +404,12 @@ kubectl logs -n vm statefulset/vmstorage-prod-vmcluster --tail=200 | grep -iE "e
 
 vmstorage 在数据合并（merge）时会消耗大量内存。若频繁 OOM，可先检查内存使用趋势：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 vmstorage Pod 的内存使用与重启次数
 kubectl top pod -n vm -l app.kubernetes.io/component=vmstorage
 kubectl get pods -n vm -l app.kubernetes.io/component=vmstorage
 ```
-
 常见缓解措施：
 
 1. 增加 `-memory.allowedPercent` 限制，避免占用全部节点内存。
@@ -414,11 +419,11 @@ kubectl get pods -n vm -l app.kubernetes.io/component=vmstorage
 
 ### 10.2 查询返回慢或超时
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 vmselect 日志，定位慢查询来源
 kubectl logs -n vm deployment/vmselect-prod-vmcluster --tail=200 | grep -i "slow"
 ```
-
 优先排查：
 
 - 查询时间窗口是否过大（> 7d）。
@@ -428,11 +433,11 @@ kubectl logs -n vm deployment/vmselect-prod-vmcluster --tail=200 | grep -i "slow
 
 ### 10.3 vminsert 返回 4xx/5xx
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 vminsert 实时错误统计
 kubectl logs -n vm deployment/vminsert-prod-vmcluster --tail=500 | grep -i error
 ```
-
 常见原因包括：tenantID 格式错误、标签值超长、样本乱序（out-of-order）。
 
 ## 11. 生产检查清单
@@ -488,3 +493,5 @@ ossutil cp -r /vm-data/snapshots/20240629 oss://victoria-backups/snapshots/
 - [[domain-06-observability/02-metrics/02-monitoring-metrics-system.md|监控指标体系]]
 
 ```
+
+<!-- risk-assessed -->

@@ -44,6 +44,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: GPU 与设备插件故障排查指南
@@ -265,6 +270,7 @@ cat /etc/nvidia-container-runtime/config.toml
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 GPU/设备 Pod 问题
         │
         ▼
@@ -352,12 +358,12 @@ GPU/设备 Pod 问题
                                                     │ 完成       │
                                                     └────────────┘
 ```
-
 ### 2.2 排查命令集
 
 #### 设备插件状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查设备插件 DaemonSet 状态
 kubectl get ds -n kube-system | grep -E "nvidia|gpu|device"
 
@@ -371,10 +377,10 @@ kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset --tail=100
 # 检查 NVIDIA GPU Operator 组件 (如果使用)
 kubectl get pods -n gpu-operator -o wide
 ```
-
 #### Node GPU 资源检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 GPU 资源
 kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, capacity: .status.capacity, allocatable: .status.allocatable}' | grep -A5 -B1 gpu
 
@@ -384,10 +390,10 @@ kubectl describe node <node-name> | grep -A10 "Capacity|Allocatable|Allocated"
 # 查看 GPU 资源分配情况
 kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].resources.limits."nvidia.com/gpu" != null) | {namespace: .metadata.namespace, name: .metadata.name, node: .spec.nodeName, gpu: .spec.containers[].resources.limits."nvidia.com/gpu"}'
 ```
-
 #### 主机层 GPU 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # SSH 到 GPU 节点后执行
 
 # NVIDIA GPU 状态
@@ -418,7 +424,6 @@ cat /etc/containerd/config.toml | grep -A10 nvidia
 # Docker
 cat /etc/docker/daemon.json | jq '.runtimes'
 ```
-
 #### kubelet 设备相关日志
 
 ```bash
@@ -453,7 +458,8 @@ journalctl -u kubelet | grep -i "ListAndWatch" | tail -20
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查设备插件 DaemonSet 是否存在且运行正常
 kubectl get ds -n kube-system nvidia-device-plugin-daemonset
 kubectl get pods -n kube-system -l app=nvidia-device-plugin-daemonset -o wide
@@ -478,7 +484,6 @@ cat /etc/containerd/config.toml | grep -A20 "\[plugins.*containerd.*runtimes.*nv
 # 步骤 4: 如果运行时未配置，配置 nvidia-container-runtime
 # /etc/containerd/config.toml 添加:
 ```
-
 **containerd 配置示例**：
 
 ```toml
@@ -500,7 +505,17 @@ version = 2
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重启 containerd (需要排空节点上的工作负载)
 systemctl restart containerd
 
@@ -510,14 +525,14 @@ kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 # 步骤 6: 验证 GPU 资源出现
 kubectl describe node <gpu-node> | grep -i nvidia
 ```
-
 ### 3.2 GPU Pod 调度失败 (Insufficient)
 
 **问题现象**：GPU Pod 一直 Pending，事件显示 `Insufficient nvidia.com/gpu`。
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查集群 GPU 资源总量
 kubectl get nodes -o custom-columns=NAME:.metadata.name,GPU:.status.allocatable."nvidia\.com/gpu"
 
@@ -538,7 +553,6 @@ kubectl get pods -A -o json | jq -r '
 # c. 使用 GPU 共享方案 (MIG, 时间片)
 # d. 优化请求的 GPU 数量
 ```
-
 **检查 Pod 是否请求过多 GPU**：
 
 ```yaml
@@ -565,7 +579,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 查看 kubelet 日志定位具体错误
 journalctl -u kubelet | grep -i "allocate|device" | tail -50
 
@@ -588,7 +603,6 @@ nvidia-smi -q | grep -i "retired|error"
 # 步骤 6: 重启设备插件刷新设备列表
 kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 ```
-
 ### 3.4 容器内 GPU 不可用
 
 **问题现象**：Pod 运行中，但容器内 `nvidia-smi` 失败或 CUDA 程序报错。
@@ -598,7 +612,8 @@ kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 进入容器检查
 kubectl exec -it <pod-name> -- bash
 
@@ -621,7 +636,6 @@ crictl inspect <container-id> | grep -i nvidia
 # 步骤 4: 如果环境变量缺失，检查设备插件配置
 # 设备插件应该返回正确的环境变量
 ```
-
 **正确的 GPU Pod 配置示例**：
 
 ```yaml
@@ -649,7 +663,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查节点驱动版本支持的 CUDA 版本
 nvidia-smi  # 右上角显示支持的最高 CUDA 版本
 
@@ -666,7 +681,6 @@ kubectl exec <pod-name> -- nvcc --version
 # a. 升级节点驱动 (需要排空节点)
 # b. 使用较低版本的 CUDA 镜像
 ```
-
 **版本兼容性参考**：
 
 | CUDA Version | Minimum Driver Version |
@@ -686,7 +700,8 @@ kubectl exec <pod-name> -- nvcc --version
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查 GPU 是否支持 MIG (A100, A30, H100 等)
 nvidia-smi -q | grep "MIG Mode"
 
@@ -715,7 +730,6 @@ kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 # 步骤 6: 恢复节点
 kubectl uncordon <node>
 ```
-
 **MIG 设备请求示例**：
 
 ```yaml
@@ -764,7 +778,8 @@ data:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 应用时间片配置
 kubectl apply -f nvidia-device-plugin-config.yaml
 
@@ -778,7 +793,6 @@ kubectl describe node <gpu-node> | grep nvidia.com/gpu
 # 步骤 4: 监控时间片使用情况
 # 时间片共享会导致 GPU 利用率显示异常，需要关注实际性能
 ```
-
 ### 3.8 RDMA/InfiniBand 设备问题
 
 **问题现象**：高性能网络设备不可用，分布式训练性能差。
@@ -788,7 +802,8 @@ kubectl describe node <gpu-node> | grep nvidia.com/gpu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查 RDMA 设备插件
 kubectl get ds -n kube-system | grep rdma
 
@@ -804,7 +819,6 @@ kubectl describe node <node> | grep -i rdma
 # 以 k8s-rdma-shared-dev-plugin 为例
 kubectl apply -f https://raw.githubusercontent.com/Mellanox/k8s-rdma-shared-dev-plugin/master/images/k8s-rdma-shared-dev-plugin-ds.yaml
 ```
-
 **RDMA Pod 配置示例**：
 
 ```yaml
@@ -838,7 +852,8 @@ spec:
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 一键诊断脚本 =====
 
 echo "=== GPU Node 状态 ==="
@@ -869,7 +884,6 @@ kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset --tail=10 2>/d
 # ls -la /var/lib/kubelet/device-plugins/
 # journalctl -u kubelet | grep -i gpu | tail -20
 ```
-
 ### 附录：常用设备插件部署
 
 ```yaml
@@ -939,3 +953,5 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

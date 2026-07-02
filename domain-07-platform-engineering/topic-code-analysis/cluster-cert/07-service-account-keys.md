@@ -32,6 +32,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: ServiceAccount 密钥对源码分析
@@ -287,7 +292,17 @@ diff /etc/kubernetes/pki/sa.pub /tmp/sa.key.pub
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 确保两个组件使用同一密钥对
 # 方式 1: 从私钥重新导出公钥
 sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.pub
@@ -301,7 +316,6 @@ sudo systemctl restart kubelet
 # 然后删除所有 Pod 使其重新获取 Token
 kubectl delete pods --all -n <namespace>  # ⚠️ 批量删除，波及面大
 ```
-
 ---
 
 ## 组件间的密钥共享
@@ -408,7 +422,17 @@ SA 密钥轮换是 Kubernetes 证书体系中最困难的操作，因为：
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份当前密钥
 sudo cp /etc/kubernetes/pki/sa.key /etc/kubernetes/pki/sa.key.backup
 sudo cp /etc/kubernetes/pki/sa.pub /etc/kubernetes/pki/sa.pub.backup
@@ -433,7 +457,6 @@ kubectl rollout restart deployment/<name> -n <namespace>
 # 7. 验证
 kubectl auth can-i --list --as=system:serviceaccount:default:default
 ```
-
 ---
 
 ## SA 密钥的安全最佳实践
@@ -467,7 +490,8 @@ spec:
 
 ### 3. 监控 Token 验证失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # API Server 日志中监控 Token 验证失败
 kubectl logs -n kube-system kube-apiserver-<node> | grep "invalid token"
 
@@ -475,7 +499,6 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep "invalid token"
 # apiserver_authentication_token_cache_active_fetch_count
 # authentication_duration_seconds
 ```
-
 ### 4. 使用外部 KMS 保护 sa.key
 
 ```bash
@@ -487,7 +510,8 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep "invalid token"
 
 ## 验证 SA 密钥一致性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 验证公钥是否从私钥派生
 openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /tmp/sa.pub.check
 diff /etc/kubernetes/pki/sa.pub /tmp/sa.pub.check
@@ -505,7 +529,6 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 # 5. 手动验证 JWT 签名
 # 提取 JWT 的 header.payload，使用 sa.pub 验证 signature
 ```
-
 ---
 
 ## 故障排查
@@ -565,3 +588,6 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/vault.md|vault]]
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+
+
+<!-- risk-assessed -->

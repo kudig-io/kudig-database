@@ -60,6 +60,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain 23: GitOps与CI/CD (GitOps & CI/CD)
@@ -719,7 +724,8 @@ DORA指标:
 
 ### 11.2 回滚策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Argo CD Rollback
 argocd app rollback <app> <revision>
 
@@ -735,7 +741,6 @@ kubectl argo rollouts undo <rollout>
 # 3. Conduct root cause analysis after rollback
 # 4. Document rollback reason and blast radius
 ```
-
 ### 11.3 监控告警配置
 
 ```yaml
@@ -852,7 +857,8 @@ Tekton Specific:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -893,7 +899,6 @@ echo ""
 echo "Port-forward command:"
 echo "  kubectl port-forward svc/argocd-server -n argocd 8080:443"
 ```
-
 ---
 
 ## 十五、社区与生态
@@ -933,3 +938,5 @@ CNCF项目状态:
 - 相关知识域: domain-24-infrastructure-as-code
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|速查卡: git]]
 ```
+
+<!-- risk-assessed -->

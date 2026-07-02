@@ -38,6 +38,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - Terway 测试验证 (Testing & Validation)
@@ -50,7 +55,8 @@ prerequisites:
 
 ### 1.1 创建测试 Pod
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run terway-test-1 \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --command -- sleep 3600
@@ -62,45 +68,45 @@ kubectl run terway-test-2 \
 kubectl wait --for=condition=Ready pod/terway-test-1 --timeout=60s
 kubectl wait --for=condition=Ready pod/terway-test-2 --timeout=60s
 ```
-
 ### 1.2 验证 Pod IP (ENIIP 模式)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -o wide
 ```
-
 ENIIP 模式下 Pod IP 应属于 VPC 子网网段，可通过以下命令比对：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 VPC_CIDR=$(kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' | grep -o '"vswitches":{[^}]*}' | head -1)
 echo "vSwitch 配置: $VPC_CIDR"
 
 kubectl get pod terway-test-1 -o wide --no-headers | awk '{print "Pod IP:", $6}'
 ```
-
 ### 1.3 验证 Pod Annotation (已分配 IP)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod terway-test-1 -o yaml | grep k8s.aliyun.com
 ```
-
 关键字段：
 - `k8s.aliyun.com/allocated-ipv4`: Terway 分配给 Pod 的 IPv4 地址，应与 `kubectl get pod -o wide` 显示的 IP 一致
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ALLOCATED_IP=$(kubectl get pod terway-test-1 -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/allocated-ipv4}')
 POD_IP=$(kubectl get pod terway-test-1 -o jsonpath='{.status.podIP}')
 echo "Annotation IP: $ALLOCATED_IP"
 echo "Status PodIP:  $POD_IP"
 [ "$ALLOCATED_IP" = "$POD_IP" ] && echo "PASS: IP 一致" || echo "FAIL: IP 不一致"
 ```
-
 ### 1.4 Pod 内网络接口检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 网络接口 ==="
 kubectl exec terway-test-1 -- ip addr show
 
@@ -113,7 +119,6 @@ kubectl exec terway-test-1 -- cat /etc/resolv.conf
 echo "=== 网卡详情 ==="
 kubectl exec terway-test-1 -- ip link show
 ```
-
 预期结果：
 
 | 检查项 | 预期值 |
@@ -128,14 +133,14 @@ kubectl exec terway-test-1 -- ip link show
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若 Pod 内无 eth0 或 IP 异常，检查 Terway 日志
 kubectl logs -n kube-system -l app=terway --tail=200 | grep -i "error|fail"
 
 # 检查 ENI 分配状态
 kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show
 ```
-
 ---
 
 ## 2. 跨节点连通性测试
@@ -145,13 +150,13 @@ kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o j
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 TEST1_IP=$(kubectl get pod terway-test-1 -o jsonpath='{.status.podIP}')
 TEST2_IP=$(kubectl get pod terway-test-2 -o jsonpath='{.status.podIP}')
 
 kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST2_IP
 ```
-
 **预期**: 0% 丢包，延迟 < 1ms。
 **异常排查**: 若同节点 Pod 不通，检查 veth pair 是否正确创建：`ip link show type veth`（在节点上执行）。
 
@@ -160,7 +165,8 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST2_IP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 获取节点列表，在第二个节点上创建测试 Pod
 NODE1=$(kubectl get pod terway-test-1 -o jsonpath='{.spec.nodeName}')
 NODE2=$(kubectl get nodes -o jsonpath='{.items[1].metadata.name}')
@@ -177,7 +183,6 @@ echo "terway-test-1 @ $NODE1 → terway-test-3 @ $NODE2 ($TEST3_IP)"
 
 kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST3_IP
 ```
-
 **预期**: 0% 丢包，延迟 < 5ms（同可用区）或 < 10ms（跨可用区）。
 **异常排查**: 若跨节点不通，检查 VPC 安全组是否放行 Pod 网段，以及 vSwitch 路由配置。
 
@@ -186,13 +191,13 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $TEST3_IP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 NODE_IP=$(kubectl get node $NODE1 -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}')
 echo "Node IP: $NODE_IP"
 
 kubectl exec terway-test-1 -- ping -c 3 -W 2 $NODE_IP
 ```
-
 **预期**: 成功，延迟 < 1ms。
 
 ### 2.4 Pod → 外网通信
@@ -200,7 +205,8 @@ kubectl exec terway-test-1 -- ping -c 3 -W 2 $NODE_IP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== ICMP 测试 ==="
 kubectl exec terway-test-1 -- ping -c 3 -W 5 8.8.8.8
 
@@ -208,7 +214,6 @@ echo "=== HTTP 出口 IP 测试 ==="
 kubectl exec terway-test-1 -- wget -q -O- http://ifconfig.me 2>/dev/null || \
   echo "注意: 需要配置 NAT Gateway 或 EIP 才能访问外网"
 ```
-
 **预期**: ping 成功（若允许 ICMP）；wget 返回节点 EIP 或 NAT Gateway 出口 IP。
 **异常排查**: 外网不通时检查：NAT Gateway 是否配置、安全组是否放行出方向、是否存在 0.0.0.0/0 路由。
 
@@ -217,14 +222,14 @@ kubectl exec terway-test-1 -- wget -q -O- http://ifconfig.me 2>/dev/null || \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 元数据服务 ==="
 kubectl exec terway-test-1 -- wget -q -O- http://100.100.100.200/latest/meta-data/instance-id
 
 echo "=== RAM 角色 (如有) ==="
 kubectl exec terway-test-1 -- wget -q -O- http://100.100.100.200/latest/meta-data/ram/security-credentials/
 ```
-
 **预期**: 返回 ECS 实例 ID 和角色信息。
 **异常排查**: 若无法访问 100.100.100.200，检查 vSwitch 是否在正确 VPC 内，以及安全组是否阻断。
 
@@ -233,7 +238,8 @@ kubectl exec terway-test-1 -- wget -q -O- http://100.100.100.200/latest/meta-dat
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 PASS=0; FAIL=0
 report() {
@@ -264,7 +270,6 @@ report $? "VPC 元数据服务"
 echo ""
 echo "结果: PASS=$PASS  FAIL=$FAIL"
 ```
-
 ---
 
 ## 3. [[NetworkPolicy|NetworkPolicy]] 测试
@@ -273,7 +278,8 @@ echo "结果: PASS=$PASS  FAIL=$FAIL"
 
 先创建一个带 HTTP 服务的测试目标：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run np-server \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:alpine \
   --labels app=np-server
@@ -281,23 +287,23 @@ kubectl run np-server \
 kubectl wait --for=condition=Ready pod/np-server --timeout=60s
 NP_SERVER_IP=$(kubectl get pod np-server -o jsonpath='{.status.podIP}')
 ```
-
 验证无策略时可访问：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec terway-test-1 -- wget -q -T 3 -O- http://$NP_SERVER_IP:80
 echo "无策略时应返回 0: $?"
 ```
-
 应用默认拒绝策略：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -310,24 +316,24 @@ spec:
   - Ingress
 EOF
 ```
-
 验证策略生效：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec terway-test-1 -- wget -T 5 -q -O- http://$NP_SERVER_IP:80
 echo "策略生效后应超时(exit!=0): $?"
 ```
-
 **预期**: wget 超时退出（exit code 非零），说明入站流量被拒绝。
 
 ### 3.2 放行特定标签 Pod
 
 创建带标签的前端 Pod：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run np-frontend \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --labels app=frontend \
@@ -338,7 +344,6 @@ kubectl run np-other \
   --labels app=other \
   --command -- sleep 3600
 ```
-
 应用放行策略：
 
 ```yaml
@@ -364,7 +369,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -385,13 +391,13 @@ spec:
       port: 80
 EOF
 ```
-
 验证：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 前端 Pod (app=frontend) 访问 ==="
 kubectl exec np-frontend -- wget -T 5 -q -O- http://$NP_SERVER_IP:80
 echo "预期: 成功 (exit 0)"
@@ -400,7 +406,6 @@ echo "=== 无标签/其他 Pod (app=other) 访问 ==="
 kubectl exec np-other -- wget -T 5 -q -O- http://$NP_SERVER_IP:80
 echo "预期: 超时 (exit != 0)"
 ```
-
 ### 3.3 出站策略 (Egress)
 
 ```yaml
@@ -440,7 +445,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -479,25 +485,34 @@ echo "=== 外网访问 (应超时) ==="
 kubectl exec np-server -- wget -T 5 -q -O- http://8.8.8.8
 echo "预期: 超时"
 ```
-
 ### 3.4 清理所有测试策略和 Pod
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete networkpolicy deny-all-ingress allow-frontend-to-server egress-allow-dns-only --ignore-not-found
 kubectl delete pod np-server np-frontend np-other --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ## 4. ENI 配额验证
 
 ### 4.1 节点级配额查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 NODE_NAME=$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')
 kubectl describe node $NODE_NAME | grep -E "aliyun.com|Allocatable|Capacity" -A 5
 
@@ -515,7 +530,6 @@ kubectl get node $NODE_NAME -o json | jq '{
   }
 }'
 ```
-
 关键 Annotation 字段说明：
 
 | 字段 | 含义 |
@@ -527,14 +541,15 @@ kubectl get node $NODE_NAME -o json | jq '{
 | `node.k8s.alibabacloud.com/allocated-ip` | 已分配辅助 IP 数 |
 | `node.k8s.alibabacloud.com/ip-max` | 辅助 IP 上限 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "=== Annotation 详情 ==="
 kubectl get node $NODE_NAME -o json | jq '.metadata.annotations | to_entries[] | select(.key | contains("k8s.alibabacloud"))'
 ```
-
 ### 4.2 所有节点配额总览
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o custom-columns=\
 "NODE:.metadata.name,\
 ENI-ALLOC:.metadata.annotations.node\.k8s\.alibabacloud\.com/allocated-eni,\
@@ -542,10 +557,10 @@ ENI-MAX:.metadata.annotations.node\.k8s\.alibabacloud\.com/eni-max,\
 IP-ALLOC:.metadata.annotations.node\.k8s\.alibabacloud\.com/allocated-ip,\
 IP-MAX:.metadata.annotations.node\.k8s\.alibabacloud\.com/ip-max"
 ```
-
 ### 4.3 密度压力测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 echo "开始创建 50 个 Pod 进行密度测试..."
 for i in $(seq 1 50); do
@@ -569,7 +584,6 @@ echo ""
 echo "=== IP 分配详情 ==="
 kubectl get pods -l run -o wide --no-headers | grep "density-test" | awk '{print $6}' | sort | uniq -c | sort -rn | head -20
 ```
-
 结果解读：
 
 | 现象 | 可能原因 | 处理建议 |
@@ -584,10 +598,19 @@ kubectl get pods -l run -o wide --no-headers | grep "density-test" | awk '{print
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for i in $(seq 1 50); do kubectl delete pod density-test-$i --force --grace-period=0 & done; wait  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ## 5. 固定 IP 验证
@@ -613,10 +636,10 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f podnetworking-fixed-ip.yaml
 ```
-
 ### 5.2 创建使用固定 IP 的 Pod
 
 ```yaml
@@ -636,21 +659,31 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f fixed-ip-pod.yaml
 kubectl wait --for=condition=Ready pod/fixed-ip-pod --timeout=60s
 
 ORIGINAL_IP=$(kubectl get pod fixed-ip-pod -o jsonpath='{.status.podIP}')
 echo "Pod 首次 IP: $ORIGINAL_IP"
 ```
-
 ### 5.3 删除 Pod 并验证 IP 保留
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod fixed-ip-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 
 echo "=== 检查 PodENI 资源保留 ==="
@@ -663,13 +696,13 @@ echo "=== Terway 视角 ==="
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n kube-system $TERWAY_POD -- terway-cli show | grep -i "fixed"
 ```
-
 ### 5.4 重建 Pod 验证 IP 一致性
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f fixed-ip-pod.yaml
 kubectl wait --for=condition=Ready pod/fixed-ip-pod --timeout=60s
 
@@ -679,18 +712,26 @@ echo "原始 IP:       $ORIGINAL_IP"
 
 [ "$ORIGINAL_IP" = "$NEW_IP" ] && echo "PASS: IP 保持不变" || echo "FAIL: IP 发生变化"
 ```
-
 清理：
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod fixed-ip-pod --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl delete podnetworking fixed-ip-test --ignore-not-found
 ```
-
 ---
 
 ## 6. GC (垃圾回收) 验证
@@ -700,7 +741,8 @@ kubectl delete podnetworking fixed-ip-test --ignore-not-found
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}')
 
 echo "=== GC 前 IP 分配 ==="
@@ -709,13 +751,22 @@ kubectl exec -n kube-system $TERWAY_POD -- terway-cli show
 echo "=== GC 前 IPInstance CRD ==="
 kubectl get ipinstance -A -o wide
 ```
-
 ### 6.2 创建并删除测试 Pod
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl run gc-test-1 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 --command -- sleep 60
 kubectl run gc-test-2 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 --command -- sleep 60
 kubectl wait --for=condition=Ready pod/gc-test-1 --timeout=60s
@@ -728,13 +779,13 @@ echo "gc-test-2 IP: $GC_IP2"
 
 kubectl delete pod gc-test-1 gc-test-2 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ### 6.3 等待 GC 周期并验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "等待 GC 周期 (约 120s)..."
 sleep 120
 
@@ -744,13 +795,13 @@ kubectl exec -n kube-system $TERWAY_POD -- terway-cli garbage-collect --dry-run
 echo "=== 执行 GC ==="
 kubectl exec -n kube-system $TERWAY_POD -- terway-cli garbage-collect
 ```
-
 ### 6.4 验证 IP 已回收
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== GC 后 IP 分配 ==="
 kubectl exec -n kube-system $TERWAY_POD -- terway-cli show
 
@@ -761,7 +812,6 @@ echo "=== 验证已删除 Pod 的 IPInstance 已清理 ==="
 kubectl get ipinstance -A -o json | jq -r '.items[] | select(.status.podName | test("gc-test")) | .metadata.name'
 echo "预期: 无输出 (已清理)"
 ```
-
 > GC 机制详解参考: [04-operations.md](./04-operations.md) 第 2 节 | [domain-03-networking-traffic/38-terway-gc-mechanism.md](../domain-03-networking-traffic/38-terway-gc-mechanism.md)
 
 ---
@@ -770,7 +820,8 @@ echo "预期: 无输出 (已清理)"
 
 ### 7.1 节点安全组规则检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "=== 集群安全组信息 ==="
 kubectl get configmap -n kube-system eni-config -o yaml | grep security_group
 
@@ -779,10 +830,10 @@ echo "=== 节点绑定的安全组 ==="
 NODE_ID=$(kubectl get node $NODE_NAME -o jsonpath='{.spec.providerID}' | grep -o 'i-[a-z0-9]*')
 aliyun ecs DescribeInstanceAttribute --InstanceId $NODE_ID | jq '.Data.SecurityGroupIds.SecurityGroupId[]'
 ```
-
 ### 7.2 安全组规则详情
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 SG_ID=$(kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' | grep -o '"security_group":"[^"]*"' | cut -d'"' -f4)
 echo "安全组 ID: $SG_ID"
 
@@ -794,12 +845,12 @@ echo "=== 出方向规则 ==="
 aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId $SG_ID --Direction egress | \
   jq '.Permissions.Permission[] | {IpProtocol, PortRange, DestCidrIp, Policy, Description}'
 ```
-
 ### 7.3 Pod 级安全组隔离测试
 
 如果配置了 Pod 级安全组（Trunk ENI 模式）：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "=== Pod ENI 安全组 ==="
 kubectl get podeni -A -o wide
 
@@ -809,13 +860,13 @@ kubectl get podeni -A -o json | jq '.items[] | {
   securityGroupIDs: .status.securityGroupIDs
 }'
 ```
-
 ### 7.4 安全组连通性验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 测试安全组是否放行 Pod 网段 ==="
 POD_CIDR=$(kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' | grep -o '"vswitches":{[^}]*}')
 echo "Pod 网段配置: $POD_CIDR"
@@ -824,7 +875,6 @@ echo "Pod 网段配置: $POD_CIDR"
 kubectl exec terway-test-1 -- ping -c 1 -W 2 $TEST3_IP
 echo "若跨节点 Pod 不通，检查安全组是否放行 Pod CIDR 互访"
 ```
-
 > 安全组配置参考: [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) 第 2 节
 
 ---
@@ -835,7 +885,8 @@ echo "若跨节点 Pod 不通，检查安全组是否放行 Pod CIDR 互访"
 
 ### 8.1 iperf3 吞吐量测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run iperf3-server \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest \
   --command -- iperf3 -s
@@ -847,7 +898,6 @@ kubectl run iperf3-client --rm -it --restart=Never \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest -- \
   iperf3 -c $IPERF_SERVER_IP -t 30 -P 4 -J
 ```
-
 预期吞吐量参考值：
 
 | 模式 | 单流吞吐 | 4 并发吞吐 |
@@ -861,11 +911,11 @@ kubectl run iperf3-client --rm -it --restart=Never \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== Pod 间延迟 (100 次) ==="
 kubectl exec terway-test-1 -- ping -c 100 -i 0.1 $TEST3_IP
 ```
-
 预期延迟参考值：
 
 | 场景 | 平均延迟 | P99 延迟 |
@@ -876,12 +926,12 @@ kubectl exec terway-test-1 -- ping -c 100 -i 0.1 $TEST3_IP
 
 ### 8.3 连接速率测试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run hping3-client --rm -it --restart=Never \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/hping3 -- \
   hping3 -S -p 80 -c 1000 --faster $IPERF_SERVER_IP
 ```
-
 预期：ENIIP 模式下 SYN 连接速率 > 50,000 pps。
 
 ### 8.4 DNS 解析性能测试
@@ -889,7 +939,8 @@ kubectl run hping3-client --rm -it --restart=Never \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== CoreDNS 解析延迟 ==="
 kubectl exec terway-test-1 -- nslookup kubernetes.default.svc.cluster.local
 
@@ -901,16 +952,24 @@ done
 echo "=== 外部域名解析 ==="
 kubectl exec terway-test-1 -- nslookup aliyun.com
 ```
-
 清理性能测试 Pod：
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod iperf3-server --force --grace-period=0 --ignore-not-found  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ## 9. MTU 测试
@@ -920,7 +979,8 @@ kubectl delete pod iperf3-server --force --grace-period=0 --ignore-not-found  # 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 节点接口 MTU ==="
 for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
   echo "--- $node ---"
@@ -932,7 +992,6 @@ echo ""
 echo "=== Pod 内接口 MTU ==="
 kubectl exec terway-test-1 -- ip link show | grep mtu
 ```
-
 ### 9.2 各模式预期 MTU 值
 
 | 模式 | 节点 eth0 | Pod eth0 | 说明 |
@@ -947,7 +1006,8 @@ kubectl exec terway-test-1 -- ip link show | grep mtu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 echo "=== 1500 字节 (预期: ENIIP 成功, VPC 路由失败) ==="
 kubectl exec terway-test-1 -- ping -c 3 -s 1472 -M do $TEST3_IP
 
@@ -958,7 +1018,6 @@ echo "=== 探测路径 MTU ==="
 kubectl exec terway-test-1 -- ping -c 3 -M do -s 1472 $TEST3_IP 2>&1
 echo "若出现 'local error: message too long', 说明 MTU 需要调低"
 ```
-
 MTU 异常排查：
 
 ```bash
@@ -979,7 +1038,17 @@ ip link set eth0 mtu 1500
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 set -euo pipefail
 
@@ -1129,7 +1198,6 @@ else
   exit 0
 fi
 ```
-
 将脚本保存后执行：
 
 ```bash
@@ -1175,3 +1243,5 @@ chmod +x terway-e2e-test.sh
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

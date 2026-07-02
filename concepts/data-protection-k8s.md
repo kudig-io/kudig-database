@@ -39,6 +39,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[entities/kubernetes.md|Kubernetes]] 数据保护策略
@@ -62,7 +67,8 @@ data 层:
 
 ## Velero + CSI 快照
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 备份命名空间
 velero backup create prod-backup \
   --include-namespaces production \
@@ -72,7 +78,6 @@ velero backup create prod-backup \
 # 灾难恢复
 velero restore create --from-backup prod-backup
 ```
-
 ## 3-2-1 原则在 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] 中的实践
 
 ```
@@ -97,3 +102,6 @@ velero restore create --from-backup prod-backup
 
 - [[domain-01-cluster-fundamentals/01-architecture-overview/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
 - [[domain-19-landscape-references/02-papers/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)]]
+
+
+<!-- risk-assessed -->

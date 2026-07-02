@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - [[DaemonSet|DaemonSet]] 管理策略与最佳实践 (DaemonSet Management Strategies)
@@ -512,7 +517,17 @@ dashboard:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 DaemonSet 状态
 kubectl describe daemonset <daemonset-name> -n <namespace>
 
@@ -531,10 +546,10 @@ kubectl delete pod -l app=<app-name> -n <namespace> --grace-period=0 --force  # 
 # 6. 检查污点容忍配置
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 ```
-
 #### 6.2 自动化运维脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # DaemonSet 健康检查脚本
 
@@ -568,7 +583,6 @@ fi
 echo "DaemonSet 状态正常 ✓"
 exit 0
 ```
-
 ### 7. 安全加固配置
 
 #### 7.1 完整安全配置示例
@@ -701,3 +715,6 @@ spec:
 - 03-statefulset-advanced-operations
 - 05-job-cronjob-advanced
 - 06-workload-monitoring-alerting
+
+
+<!-- risk-assessed -->

@@ -31,6 +31,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # velero v1.10 Release Notes
@@ -58,3 +63,6 @@ https://velero.io/docs/v1.10/upgrade-to-1.10/
   * Ignore not found error during patching managedFields (#6135, @ywk253100)
   * Fix issue #5972, don't assume errorField as error type when dealing with logger.WithError (#6086, @Lyndon-Li)
   * Restore Services before Clusters (#6058, @ywk253100)
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Week 4 自测: 网络与存储
@@ -301,7 +306,8 @@ spec:
 
 **参考答案**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法1: 查看节点的 PodCIDR
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
 
@@ -320,7 +326,6 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,POD_CIDR:.spec.podCIDR'
 # 方法3: 在 Terway 集群中查看 vSwitch 分配
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations["flannel\.alpha\.coreos\.com/public-ip"]}{"\n"}{end}'
 ```
-
 ---
 
 ### 4. 写出动态创建 20Gi 云盘 PVC 的 YAML:
@@ -347,7 +352,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f pvc.yaml
 kubectl get pvc data-pvc
 
@@ -355,7 +361,6 @@ kubectl get pvc data-pvc
 # NAME       STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
 # data-pvc   Bound    pvc-abc123-def456-ghi789                   20Gi       RWO            alicloud-disk-ssd   10s
 ```
-
 ---
 
 ### 5. 写出扩容 PVC 到 40Gi 的命令:
@@ -366,7 +371,8 @@ kubectl get pvc data-pvc
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 StorageClass 是否允许扩容
 kubectl get storageclass alicloud-disk-ssd -o yaml | grep allowVolumeExpansion
 
@@ -392,7 +398,6 @@ kubectl get pvc data-pvc
 # Step 4: 验证 Pod 内文件系统已扩展
 kubectl exec <pod-name> -- df -h /data
 ```
-
 ---
 
 ## 三、场景分析 (4 题, 每题 5 分, 共 20 分)
@@ -403,7 +408,8 @@ kubectl exec <pod-name> -- df -h /data
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Service selector 是否匹配 Pod 标签
 kubectl describe svc <service-name> -n <ns> | grep Selector
 kubectl get pods -n <ns> --show-labels
@@ -434,14 +440,14 @@ kubectl get networkpolicy -n <ns>
 # Step 6: 测试 Service 连通性
 kubectl run test --image=busybox:1.36 --rm -it --restart=Never -- wget -qO- http://<service-name>:<port>
 ```
-
 ---
 
 ### 场景 2: Ingress 路由不生效
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认 Ingress Controller 正常运行
 kubectl get pods -n ingress-nginx
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50
@@ -464,14 +470,14 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=100
 # Step 6: 测试路由
 curl -H "Host: app.example.com" http://<ingress-ip>/api
 ```
-
 ---
 
 ### 场景 3: Pod IP 分配失败 (Terway)
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 Pod Events
 kubectl describe pod <pod-name> -n <ns>
 # 关注 Events 中的错误信息
@@ -495,14 +501,14 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id>
 # 方案B: 在节点池中添加新的 vSwitch
 # 方案C: 使用 Terway 的 vPC 模式减少 ENI 消耗
 ```
-
 ---
 
 ### 场景 4: PVC 一直处于 Pending
 
 **参考答案 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 PVC Events
 kubectl describe pvc <pvc-name> -n <ns>
 
@@ -531,7 +537,6 @@ kubectl logs -n kube-system -l app=csi-plugin --tail=50
 # 如果 PVC 请求 ReadWriteMany (RWX)，会永远 Pending
 kubectl get pvc <pvc-name> -o jsonpath='{.spec.accessModes}'
 ```
-
 ---
 
 ## 四、评分统计
@@ -650,3 +655,6 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

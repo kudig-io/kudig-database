@@ -36,6 +36,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.11 Release Notes
@@ -83,3 +88,5 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 - chore(deps): bump github.com/docker/docker 88b2db4a07f4ea9a11751e8c3de615d6e080301a (dependabot[bot])
 - chore(deps): bump github.com/containerd/containerd from 1.6.15 to 1.7.0 b6a8417daca5fe1458d8a9394164494afe410a23 (dependabot[bot])
 - Fixes Readiness Check for statefulsets using partitioned rolling update. (#11774) 7994bb4d357a3846263dfb22b97da867159253fe (Aman Nijhawan)
+
+<!-- risk-assessed -->

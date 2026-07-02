@@ -31,6 +31,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 4: Linux 网络 + 性能调优
@@ -179,7 +184,17 @@ sudo ip netns delete ns2
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 iptables 规则
 sudo iptables -L -n -v
 sudo iptables -t nat -L -n -v
@@ -194,7 +209,6 @@ sudo iptables -t nat -L DOCKER -n -v
 # 清理
 docker rm -f iptables-test  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ### 任务 4: 内核参数调优 (30min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -298,3 +312,6 @@ ss -ant | awk '{print $1}' | sort | uniq -c | sort -rn
 ## 明日预告
 
 Day 5 将正式进入 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。
+
+
+<!-- risk-assessed -->

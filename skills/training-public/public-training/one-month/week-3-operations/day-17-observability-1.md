@@ -42,6 +42,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -226,7 +231,8 @@ Alertmanager 处理 Prometheus 发送的告警，负责去重、分组、路由�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm repo
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -250,10 +256,10 @@ kubectl get svc -n monitoring
 kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 # 浏览器访问 http://localhost:9090/targets
 ```
-
 ### 任务 2: PromQL 查询实践 (45min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 访问 Prometheus UI
 kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 
@@ -283,13 +289,13 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 # 8. 资源请求 vs 实际使用（集群级别）
 # sum(kube_resourcequota{type="hard", resource="requests.cpu"}) - sum(kube_node_status_allocatable{resource="cpu"})
 ```
-
 ### 任务 3: 告警规则配置 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建自定义告警规则
 cat > alert-rules.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
@@ -366,10 +372,10 @@ kubectl apply -f alert-rules.yaml
 # 验证规则已加载
 kubectl get prometheusrule -n monitoring
 ```
-
 ### 任务 4: Grafana Dashboard (30min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 访问 Grafana
 kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 
@@ -386,7 +392,6 @@ kubectl port-forward -n monitoring svc/prometheus-grafana 3000:80
 #    - 15760: Kubernetes Views Pods (Pod 概览)
 # 3. 选择 Prometheus 数据源 → Import
 ```
-
 ---
 
 ## 常见问题
@@ -432,3 +437,6 @@ Target down 意味着 Prometheus 无法从目标拉取指标。排查步骤：1)
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

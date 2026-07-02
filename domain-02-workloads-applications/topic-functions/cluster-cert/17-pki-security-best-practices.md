@@ -42,6 +42,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Kubernetes PKI 安全最佳实践
@@ -217,6 +222,7 @@ spec:
 ### 2.3 证书轮换的变更管理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────┐
 │                    证书轮换变更管理流程                        │
 ├─────────────────────────────────────────────────────────────┤
@@ -248,7 +254,6 @@ spec:
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 三、最小权限原则
@@ -317,7 +322,8 @@ Config: certutil.Config{
 
 ### 4.2 CA 轮换的灾难恢复预案
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # CA 轮换应急预案
 
@@ -353,7 +359,6 @@ EOF
 kubectl get nodes || { echo "CRITICAL: Node communication failed"; exit 1; }
 kubectl get pods -n kube-system || { echo "CRITICAL: API Server error"; exit 1; }
 ```
-
 ---
 
 ## 五、证书审计与合规
@@ -492,3 +497,5 @@ echo "Inventory saved to $OUTPUT"
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

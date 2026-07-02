@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 供应链安全事件响应：镜像篡改与 CVE
@@ -94,23 +99,23 @@ authors:
 
 ### 2.1 镜像摘要比对
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取本地运行镜像的 digest
 kubectl get pod <pod> -n <ns> -o jsonpath='{.status.containerStatuses[0].imageID}'
 
 # 与 Registry 中的 digest 比对
 aliyun cr GetRepoTag --RepoName <repo> --Tag <tag>
 ```
-
 ### 2.2 Trivy 镜像扫描
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扫描镜像是否存在恶意软件与已知漏洞
 kubectl run trivy-scan --rm -it --image=aquasec/trivy -- \
   image --severity HIGH,CRITICAL \
   registry.cn-hangzhou.aliyuncs.com/app/order-service:v1.2.0
 ```
-
 ### 2.3 异常镜像启动告警
 
 ```yaml
@@ -167,7 +172,8 @@ spec:
 
 ### 3.3 快速定位受影响 Pod
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扫描所有运行镜像，输出 CVE 列表
 for img in $(kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.containers[*].image}' | tr ' ' '\n' | sort -u); do
   echo "Scanning: $img"
@@ -175,20 +181,19 @@ for img in $(kubectl get pods --all-namespaces -o jsonpath='{.items[*].spec.cont
     image --severity CRITICAL "$img" 2>/dev/null | grep -E "^|" || true
 done
 ```
-
 ---
 
 ## 4. SBOM 与溯源
 
 ### 4.1 生成 SBOM
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Syft 生成镜像 SBOM
 kubectl run syft-sbom --rm -it --image=anchore/syft -- \
   registry.cn-hangzhou.aliyuncs.com/app/order-service:v1.2.0 -o spdx-json \
   > order-service-v1.2.0.sbom.json
 ```
-
 ### 4.2 SBOM 存储与查询
 
 ```bash
@@ -293,7 +298,8 @@ webhooks:
 
 ### 7.1 镜像修复流程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 更新基础镜像
 sed -i 's/FROM alpine:3.17/FROM alpine:3.20/' Dockerfile
 
@@ -305,7 +311,6 @@ cosign sign --key cosign.key registry.cn-hangzhou.aliyuncs.com/app/order-service
 # 3. 更新 K8s 资源
 kubectl set image deployment/order-service order-service=registry.cn-hangzhou.aliyuncs.com/app/order-service:v1.2.1 -n production
 ```
-
 ### 7.2 供应链加固清单
 
 | 加固项 | 说明 |
@@ -442,3 +447,6 @@ SLSA（Supply-chain Levels for Software Artifacts）提供从源码到交付的�
 
 - [[domain-05-security-compliance/05-supply-chain/07-sigstore-cosign-signing.md|Sigstore Cosign 镜像签名]]
 - [[domain-05-security-compliance/05-supply-chain/04-sbom-vulnerability-analysis.md|SBOM 与漏洞分析]]
+
+
+<!-- risk-assessed -->

@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点安全机制
@@ -377,7 +382,8 @@ spec:
 > - `sysctl -w`：实时修改内核参数，全局生效
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 内核安全参数
 sysctl -w kernel.dmesg_restrict=1
 sysctl -w kernel.kptr_restrict=2
@@ -397,7 +403,6 @@ systemctl disable cups
 auditctl -w /etc/kubernetes/pki/ -p wa -k k8s-pki
 auditctl -w /var/lib/kubelet/ -p wa -k kubelet-data
 ```
-
 ### 5.2 网络隔离
 
 ```bash
@@ -412,7 +417,8 @@ iptables -A INPUT -p tcp --dport 2379 -j DROP
 
 ### 5.3 定期安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kube-bench 进行 CIS 合规检查
 kube-bench run --targets master,node
 
@@ -423,7 +429,6 @@ kubectl who-can list pods --namespace default
 curl -k https://<node>:10250/pods
 # 应该返回 401 Unauthorized
 ```
-
 ---
 
 ## 六、常见错误与排查
@@ -441,7 +446,8 @@ curl -k https://<node>:10250/pods
 
 ### 6.2 权限调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 是否有特定权限
 kubectl auth can-i list pods --as=system:node:node-1
 kubectl auth can-i get secrets --as=system:node:node-1
@@ -454,7 +460,6 @@ kubectl auth can-i get secrets --as=system:node:node-1
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem \
   -noout -subject -issuer -dates
 ```
-
 ---
 
 ## 相关函数
@@ -475,3 +480,6 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem \
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

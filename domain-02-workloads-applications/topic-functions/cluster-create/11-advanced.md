@@ -41,6 +41,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 集群新建进阶关键机制详解
@@ -213,7 +218,8 @@ type NodeRestrictionAdmission struct {
 // 4. 更新 /etc/resolv.conf (节点 DNS 指向 CoreDNS)
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CoreDNS Pod 规格:
 kubectl -n kube-system get pods -l k8s-app=kube-dns
 # 输出:
@@ -221,7 +227,6 @@ kubectl -n kube-system get pods -l k8s-app=kube-dns
 # coredns-5d7c7b8b5d-abcde   1/1     Running   0          10m
 # coredns-5d7c7b8b5d-fghij   1/1     Running   0          10m
 ```
-
 ---
 
 ## CoreDNS 配置文件
@@ -344,3 +349,6 @@ spec:
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
 - [[entities/cilium.md|Cilium]]
+
+
+<!-- risk-assessed -->

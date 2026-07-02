@@ -31,6 +31,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[kubelet|kubelet]] 资源驱逐机制
@@ -192,7 +197,8 @@ groups:
 
 ## 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看被驱逐的 Pod
 kubectl get pods --all-namespaces | grep Evicted
 
@@ -209,7 +215,6 @@ journalctl -u kubelet | grep -i eviction
 dmesg | grep -i "oom"
 kubectl describe pod <pod> | grep -A 5 "Last State"
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -234,3 +239,5 @@ kubectl describe pod <pod> | grep -A 5 "Last State"
 
 - [[pod-lifecycle|pod-lifecycle]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+
+<!-- risk-assessed -->

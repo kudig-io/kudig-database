@@ -87,6 +87,11 @@ related_docs:
   desc: Controller Manager 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kube-controller-manager 深度解析 (KCM Deep Dive)
@@ -631,6 +636,7 @@ NodeLifecycle Controller 工作流程:
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Namespace Controller 终止流程:
 
 1. 用户执行 kubectl delete ns <name>  # ⚠️ 不可逆：永久删除命名空间及全部资源
@@ -655,7 +661,6 @@ Namespace Controller 终止流程:
        └─ 移除 Namespace Finalizer
            └─ Namespace 对象被GC删除
 ```
-
 ---
 
 ### 3.5 安全与配置控制器 (Security & Configuration Controllers)
@@ -836,7 +841,8 @@ kubectl delete deployment web --cascade=orphan
 
 #### 4.2.1 通用诊断流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认KCM Leader状态
 kubectl get lease -n kube-system kube-controller-manager -o yaml
 
@@ -852,7 +858,6 @@ journalctl -u kube-controller-manager -f --no-pager | grep -i <controller-name>
 # 5. 检查API Server连接
 curl -sk https://localhost:10257/healthz
 ```
-
 #### 4.2.2 按类别诊断速查表
 
 | 症状 | 涉及控制器 | 诊断命令 | 常见原因 |
@@ -1018,7 +1023,8 @@ Leader Election 流程:
 
 ### 6.2 查看 Leader 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Leader Lease
 kubectl get lease -n kube-system kube-controller-manager -o yaml
 
@@ -1035,7 +1041,6 @@ spec:
   renewTime: "2024-01-01T00:05:00.000000Z"
   leaseTransitions: 1
 ```
-
 ---
 
 <!-- chunk: 7. 监控指标 (Monitoring Metrics) -->
@@ -1137,7 +1142,8 @@ groups:
 
 ### 8.2 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 KCM 状态
 systemctl status kube-controller-manager
 journalctl -u kube-controller-manager -f --no-pager
@@ -1178,7 +1184,6 @@ curl -k https://localhost:10257/metrics | grep node_lifecycle_controller
 curl -k https://localhost:10257/metrics | grep attachdetach_controller
 curl -k https://localhost:10257/metrics | grep persistentvolume_controller
 ```
-
 ---
 
 <!-- chunk: 9. 性能优化 (Performance Tuning) -->
@@ -1345,3 +1350,6 @@ token
 - 12-apiserver-deep-dive
 - 14-cloud-controller-manager-deep-dive
 - 15-kubelet-deep-dive
+
+
+<!-- risk-assessed -->

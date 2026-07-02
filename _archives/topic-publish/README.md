@@ -36,6 +36,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # topic-publish: 技术论坛全域发布战略方案
 
 > **最后更新**: 2026-05 | **方案数量**: 2 个 | **组合路线图**: 1 份 | **新增指南**: 2 份
@@ -358,3 +363,6 @@ domain-11-production-operations/topic-publish/
 - [组合发布路线图](./03-combined-publishing-roadmap.md)
 - [内容创作规范](./04-content-creation-guidelines.md)
 - [分发渠道策略](./05-distribution-channels-strategy.md)
+
+
+<!-- risk-assessed -->

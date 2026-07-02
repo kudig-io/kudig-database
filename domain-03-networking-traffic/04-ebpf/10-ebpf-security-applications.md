@@ -60,6 +60,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # eBPF 安全应用案例 (eBPF Security Applications and Use Cases)
@@ -3994,7 +3999,8 @@ spec:
 
 ## 10.6 故障排查与性能调优 (Troubleshooting and Performance Tuning)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # File: ebpf-security-health-check.sh
 # eBPF 安全组件健康检查脚本
@@ -4083,7 +4089,6 @@ echo -e "\n======================================"
 echo " 健康检查完成"
 echo "======================================"
 ```
-
 ## 10.7 学习路径与参考资源 (Learning Path and References)
 
 ```mermaid
@@ -4221,3 +4226,6 @@ eBPF 技术正在深刻重塑企业安全运营的方式：
 - 09-ebpf-performance-optimization
 - 01-ebpf-architecture-fundamentals
 - 02-ebpf-map-types-data-structures
+
+
+<!-- risk-assessed -->

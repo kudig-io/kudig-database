@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 11 - 存储与卷事件
@@ -452,6 +457,7 @@ status:
 
 **正常流程**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. Pod 调度到节点
 2. AD Controller 检测到需要 Attach 的卷
 3. 调用云 API (如 AWS AttachVolume)
@@ -459,7 +465,6 @@ status:
 5. 触发 SuccessfulAttachVolume 事件
 6. kubelet 继续执行 Mount 操作
 ```
-
 **性能优化**:
 - **Attach 时间过长** → 检查云 API 响应时间、配额限制
 - **频繁 Attach/Detach** → 考虑使用本地存储 (Local PV/HostPath)
@@ -511,13 +516,14 @@ is already being used by 'projects/my-project/zones/us-central1-b/instances/node
 ## **排查步骤**
 
 **步骤 1: 检查 VolumeAttachment 对象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumeattachment -o wide
 kubectl describe volumeattachment csi-<hash>
 ```
-
 **步骤 2: 检查卷状态 (云控制台)**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS
 aws ec2 describe-volumes --volume-ids vol-0abc123
 
@@ -530,25 +536,24 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
   }
 ]
 ```
-
 **步骤 3: 强制 Detach (谨慎操作)**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS
 aws ec2 detach-volume --volume-id vol-0abc123 --force
 
 # 等待 Detach 完成
 aws ec2 describe-volumes --volume-ids vol-0abc123 --query 'Volumes[0].State'
 ```
-
 **步骤 4: 检查节点卷数限制**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点已附加卷数
 kubectl get node <node> -o json | jq '.status.volumesAttached | length'
 
 # 查看节点最大卷数限制
 kubectl get node <node> -o json | jq '.status.allocatable."attachable-volumes-aws-ebs"'
 ```
-
 ## **生产案例: 节点异常导致卷泄漏**
 
 **现象**:
@@ -564,7 +569,17 @@ kubectl get node <node> -o json | jq '.status.allocatable."attachable-volumes-aw
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 强制删除旧 Pod (如果存在)
 kubectl delete pod <old-pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 
@@ -573,7 +588,6 @@ aws ec2 detach-volume --volume-id vol-xxx --force
 
 # 3. 等待 30s 后,新 Pod 自动重试 Attach
 ```
-
 **预防措施**:
 - 配置节点优雅终止 (Node Draining)
 - 监控 `VolumeAttachment` 对象泄漏
@@ -679,10 +693,10 @@ timed out waiting for the condition
 ## **排查步骤**
 
 **步骤 1: 检查 Pod 事件**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod> | grep -A 10 "Events:"
 ```
-
 **步骤 2: 检查节点挂载状态**
 ```bash
 # 查看全局挂载
@@ -698,10 +712,10 @@ dmesg | grep -i xvdba
 ```
 
 **步骤 3: 检查 CSI Node 插件日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <csi-node-pod> -c csi-driver
 ```
-
 **步骤 4: 检查文件系统**
 ```bash
 # 检查设备文件系统类型
@@ -728,13 +742,13 @@ file -s /dev/xvdba
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ConfigMap
 kubectl create configmap app-config --from-file=config.yaml
 
 # Pod 自动重试挂载
 ```
-
 ---
 
 ## 4.5 FailedUnmount - 卷卸载失败
@@ -779,7 +793,17 @@ target is busy: [/var/lib/kubelet/pods/<pod-uid>/volumes/...]
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查占用进程
 lsof +D /var/lib/kubelet/pods/<pod-uid>/volumes/<volume>
 
@@ -792,7 +816,6 @@ umount -l /var/lib/kubelet/pods/<pod-uid>/volumes/<volume>
 # 4. 如果仍失败,重启 kubelet
 systemctl restart kubelet
 ```
-
 ---
 
 ## 4.6 FailedMapVolume - 块设备映射失败
@@ -876,12 +899,13 @@ PV Controller 检测到 PVC 需要动态供应,正在等待外部 Provisioner (�
 ## **典型事件消息**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 waiting for a volume to be created, either by external provisioner "ebs.csi.aws.com" or manually created by system administrator
 ```
-
 ## **流程说明**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. 用户创建 PVC
 2. PV Controller 检查 StorageClass.provisioner
 3. 触发 ExternalProvisioning 事件
@@ -892,12 +916,12 @@ waiting for a volume to be created, either by external provisioner "ebs.csi.aws.
 8. PV Controller 绑定 PV 和 PVC
 9. 触发 ProvisioningSucceeded 事件
 ```
-
 ## **排查超时问题**
 
 如果 PVC 长时间停留在此状态:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CSI Controller 组件状态
 kubectl get pod -n kube-system -l app=ebs-csi-controller
 
@@ -910,7 +934,6 @@ kubectl get storageclass <storageclass-name>
 # 4. 检查 CSI Driver 是否注册
 kubectl get csidrivers
 ```
-
 ---
 
 ## 5.2 ProvisioningFailed - 动态供应失败
@@ -955,7 +978,8 @@ InvalidParameterValue: The availability zone 'us-east-1d' does not exist
 
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 详细信息
 kubectl describe pvc <pvc-name>
 
@@ -968,7 +992,6 @@ aws ec2 describe-volumes --filters "Name=tag:kubernetes.io/cluster/<cluster-name
 # 4. 检查 IAM 权限
 aws iam get-role-policy --role-name <csi-controller-role> --policy-name <policy-name>
 ```
-
 ## **生产案例: 云配额不足导致 StatefulSet 扩容失败**
 
 **现象**:
@@ -983,7 +1006,17 @@ AWS 账号 EBS 卷数量达到配额上限 (默认 5000)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 清理未使用的 PV
 kubectl get pv | grep Released | awk '{print $1}' | xargs kubectl delete pv
 
@@ -995,7 +1028,6 @@ aws service-quotas request-service-quota-increase \
 
 # 3. 临时方案: 使用 Local PV
 ```
-
 ---
 
 ## 5.3 ProvisioningSucceeded - 动态供应成功
@@ -1017,9 +1049,9 @@ aws service-quotas request-service-quota-increase \
 ## **典型事件消息**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Successfully provisioned volume pvc-abc123 using ebs.csi.aws.com
 ```
-
 ## **关联对象**
 
 ```yaml
@@ -1081,7 +1113,8 @@ Failed to bind volumes: timeout expired waiting for volumes to bind
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查可用 PV
 kubectl get pv -o wide
 
@@ -1103,7 +1136,6 @@ spec:
     path: /mnt/data
 EOF
 ```
-
 ---
 
 ## 5.5 WaitForFirstConsumer - 等待首次消费者
@@ -1131,6 +1163,7 @@ waiting for first consumer to be created before binding
 ## **延迟绑定的优势**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 传统 Immediate 绑定模式:
 1. PVC 创建 → PV 立即供应 (假设在 us-east-1a)
 2. Pod 创建 → 调度器选择节点 (可能在 us-east-1b)
@@ -1142,7 +1175,6 @@ WaitForFirstConsumer 模式:
 3. PV 供应 → 在 Pod 所在 AZ 创建卷 (us-east-1a)
 4. ✅ Pod 正常启动
 ```
-
 ## **配置示例**
 
 ```yaml
@@ -1183,12 +1215,12 @@ allowedTopologies:
 ## **典型事件消息**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 resize volume "pvc-abc123" by resizer "ebs.csi.aws.com" failed: 
 rpc error: code = Internal desc = 
 Could not resize volume "vol-0abc123": 
 InvalidParameterValue: Volume vol-0abc123 is not in a state that allows modification
 ```
-
 ## **常见原因**
 
 | 错误消息 | 根因 | 解决方案 |
@@ -1216,7 +1248,8 @@ InvalidParameterValue: Volume vol-0abc123 is not in a state that allows modifica
 
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 状态
 kubectl get pvc <pvc-name> -o yaml
 
@@ -1235,7 +1268,6 @@ kubectl logs -n kube-system <csi-controller-pod> -c csi-resizer
 # 3. 检查云卷状态
 aws ec2 describe-volumes-modifications --volume-ids vol-0abc123
 ```
-
 ---
 
 ## 6.2 VolumeResizeSuccessful - 卷扩容成功
@@ -1257,9 +1289,9 @@ aws ec2 describe-volumes-modifications --volume-ids vol-0abc123
 ## **典型事件消息**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 External resizer ebs.csi.aws.com has successfully resized volume pvc-abc123
 ```
-
 ## **注意事项**
 
 ⚠️ **卷扩容成功 ≠ 可用空间增加**
@@ -1267,7 +1299,8 @@ External resizer ebs.csi.aws.com has successfully resized volume pvc-abc123
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 控制平面扩容完成
 aws ec2 describe-volumes --volume-ids vol-0abc123
 # Size: 20 GB (已扩容)
@@ -1278,7 +1311,6 @@ kubectl exec <pod> -- df -h /data
 
 # 需等待 FileSystemResizeSuccessful 事件
 ```
-
 ---
 
 ## 6.3 FileSystemResizeFailed - 文件系统扩容失败
@@ -1316,7 +1348,8 @@ resize2fs: Bad magic number in super-block while trying to open /dev/xvdba
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查文件系统类型
 kubectl exec <pod> -- df -T /data
 # /dev/xvdba ext4 ...  # ✅ ext4 支持在线扩容
@@ -1329,7 +1362,6 @@ resize2fs /dev/xvdba
 kubectl exec <pod> -- df -h /data
 # /dev/xvdba  20G  9.5G  10.5G  48% /data  ✅ 已扩容
 ```
-
 ---
 
 ## 6.4 FileSystemResizeSuccessful - 文件系统扩容成功
@@ -1360,7 +1392,8 @@ MountVolume.NodeExpandVolume succeeded for volume "pvc-abc123"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 编辑 PVC
 kubectl patch pvc data-db-0 -p '{"spec":{"resources":{"requests":{"storage":"20Gi"}}}}'
 
@@ -1382,7 +1415,6 @@ kubectl get pvc data-db-0 -o jsonpath='{.status.capacity.storage}'
 kubectl exec db-0 -- df -h /var/lib/postgresql/data
 # /dev/xvdba  20G  ...  ✅
 ```
-
 ---
 
 ## 6.5 ExternalExpanding 和 Resizing - 扩容进行中
@@ -1440,10 +1472,10 @@ Require file system resize of volume on node
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart statefulset <name>
 ```
-
 ---
 
 <!-- chunk: 七、卷回收与删除事件 -->## 七、卷回收与删除事件
@@ -1490,7 +1522,17 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 1. kubectl delete pvc data-db-0
 2. PVC 状态 → Terminating
 3. PV 状态 → Released
@@ -1499,7 +1541,6 @@ spec:
 6. 触发 VolumeDeleted 事件
 7. PV 对象被删除
 ```
-
 ---
 
 ## 7.2 VolumeFailedDelete - 卷删除失败
@@ -1542,7 +1583,17 @@ VolumeInUse: Volume vol-0abc123 is currently attached to i-0def456
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 PV 状态
 kubectl get pv pvc-abc123 -o yaml
 
@@ -1556,7 +1607,6 @@ aws ec2 delete-volume --volume-id vol-0abc123
 kubectl delete pv pvc-abc123
 
 ```
-
 ---
 
 ## 7.3 VolumeRecycleFailed - 卷回收失败 (已弃用)
@@ -1589,15 +1639,16 @@ kubectl delete pv pvc-abc123
 
 ## **现象**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod
 # NAME   READY   STATUS              RESTARTS   AGE
 # web-0  0/1     ContainerCreating   0          5m
 ```
-
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查事件
 kubectl describe pod web-0 | grep -A 20 "Events:"
 
@@ -1608,7 +1659,6 @@ kubectl describe pod web-0 | grep -A 20 "Events:"
 
 # 2. 诊断: 磁盘未格式化或文件系统损坏
 ```
-
 ## **解决方案**
 
 **方法 1: 重新格式化 (⚠️ 数据丢失)**
@@ -1616,7 +1666,17 @@ kubectl describe pod web-0 | grep -A 20 "Events:"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 进入节点
 ssh <node>
 
@@ -1630,7 +1690,6 @@ mkfs.ext4 /dev/xvdba
 # 重启 Pod
 kubectl delete pod web-0
 ```
-
 **方法 2: 修复文件系统**
 
 ```bash
@@ -1647,7 +1706,8 @@ mount /dev/xvdba /mnt/test
 
 ## **现象**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale sts db --replicas=5
 
 # 新 Pod 一直 Pending
@@ -1659,10 +1719,10 @@ kubectl get pvc data-db-4
 # NAME         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS
 # data-db-4    Pending                                      fast-ssd
 ```
-
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 事件
 kubectl describe pvc data-db-4
 
@@ -1679,7 +1739,6 @@ aws service-quotas get-service-quota \
 # 输出:
 # Value: 5000 (已达上限)
 ```
-
 ## **解决方案**
 
 **临时方案**: 清理未使用卷
@@ -1687,7 +1746,17 @@ aws service-quotas get-service-quota \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查找 Released 状态的 PV
 kubectl get pv | grep Released
 
@@ -1698,17 +1767,16 @@ kubectl delete pv <pv-name>
 aws ec2 describe-volumes --filters "Name=status,Values=available"
 aws ec2 delete-volume --volume-id vol-xxx
 ```
-
 **长期方案**: 提高配额
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 请求提高配额到 10000
 aws service-quotas request-service-quota-increase \
   --service-code ebs \
   --quota-code L-D18FCD1D \
   --desired-value 10000
 ```
-
 ---
 
 ## 案例 3: PVC 扩容后容器内空间未增加
@@ -1719,7 +1787,8 @@ aws service-quotas request-service-quota-increase \
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扩容 PVC
 kubectl patch pvc data-db-0 -p '{"spec":{"resources":{"requests":{"storage":"20Gi"}}}}'
 
@@ -1732,10 +1801,10 @@ kubectl get pvc data-db-0
 kubectl exec db-0 -- df -h /var/lib/postgresql/data
 # /dev/xvdba  10G  9.5G  500M  96% /data  ❌
 ```
-
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 事件
 kubectl get events --field-selector involvedObject.name=data-db-0
 
@@ -1745,14 +1814,14 @@ kubectl get events --field-selector involvedObject.name=data-db-0
 
 # 2. 诊断: 文件系统扩容未触发 (需要 Pod 重启)
 ```
-
 ## **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 滚动重启 StatefulSet
 kubectl rollout restart sts db
 
@@ -1763,7 +1832,6 @@ kubectl rollout status sts db
 kubectl exec db-0 -- df -h /var/lib/postgresql/data
 # /dev/xvdba  20G  9.5G  10.5G  48% /data  ✅
 ```
-
 ---
 
 ## 案例 4: PVC 删除后卷未自动删除 (VolumeFailedDelete)
@@ -1773,7 +1841,17 @@ kubectl exec db-0 -- df -h /var/lib/postgresql/data
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除 PVC
 kubectl delete pvc data-test
 
@@ -1787,10 +1865,10 @@ kubectl get pv pvc-xyz789
 # NAME         STATUS     CLAIM   ...
 # pvc-xyz789   Released   ...
 ```
-
 ## **排查步骤**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PV 事件
 kubectl describe pv pvc-xyz789
 
@@ -1805,14 +1883,23 @@ aws ec2 describe-volumes --volume-ids vol-xyz789
 # "State": "in-use",
 # "Attachments": [{"InstanceId": "i-terminated-instance"}]  ❌
 ```
-
 ## **解决方案**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 强制 Detach 卷
 aws ec2 detach-volume --volume-id vol-xyz789 --force
 
@@ -1827,7 +1914,6 @@ kubectl patch pv pvc-xyz789 -p '{"metadata":{"finalizers":null}}'
 kubectl delete pv pvc-xyz789
 kubectl delete pvc data-test --grace-period=0 --force
 ```
-
 ---
 
 <!-- chunk: 九、生产环境最佳实践 -->## 九、生产环境最佳实践
@@ -1979,7 +2065,8 @@ parameters:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入 Pod
 kubectl exec -it <pod> -- bash
 
@@ -1995,7 +2082,6 @@ fio --name=randwrite --ioengine=libaio --iodepth=32 \
     --size=1G --numjobs=4 --runtime=60 \
     --filename=/data/test
 ```
-
 ---
 
 ## 9.4 卷容量管理
@@ -2024,7 +2110,8 @@ spec:
 
 ## **容量规划**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 PVC 使用率
 kubectl get pvc -A -o json | jq -r '
   .items[] | 
@@ -2035,7 +2122,6 @@ kubectl get pvc -A -o json | jq -r '
 # 统计总卷容量
 kubectl get pv -o json | jq '[.items[].spec.capacity.storage | rtrimstr("Gi") | tonumber] | add'
 ```
-
 ---
 
 ## 9.5 卷备份与恢复
@@ -2159,7 +2245,17 @@ spec:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认原 Pod 已删除
 kubectl get pod -A -o wide | grep <node-name>
 
@@ -2175,13 +2271,13 @@ aws ec2 detach-volume --volume-id <volume-id> --force
 # 5. 等待 30s,观察 Pod 是否自动恢复
 kubectl get pod <pod> -w
 ```
-
 ## **卷挂载失败 (FailedMount)**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查事件详细错误
 kubectl describe pod <pod> | grep -A 10 FailedMount
 
@@ -2201,14 +2297,23 @@ e2fsck -f /dev/<device>
 # 5. 删除 Pod 重新挂载
 kubectl delete pod <pod>
 ```
-
 ## **PVC 无法删除 (Terminating)**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查是否有 Pod 使用 PVC
 kubectl get pod -A -o json | \
   jq -r '.items[] | select(.spec.volumes[]?.persistentVolumeClaim.claimName == "<pvc-name>") | .metadata.name'
@@ -2222,7 +2327,6 @@ kubectl patch pvc <pvc-name> -p '{"metadata":{"finalizers":null}}'
 # 4. 强制删除
 kubectl delete pvc <pvc-name> --grace-period=0 --force
 ```
-
 ---
 
 <!-- chunk: 十、相关文档参考 -->## 十、相关文档参考
@@ -2283,3 +2387,5 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

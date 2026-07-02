@@ -70,6 +70,11 @@ cross_refs:
   label: '故障树: helm'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 36 - [[Helm|Helm]] Chart 故障排查 (Helm Chart Troubleshooting)
@@ -92,6 +97,7 @@ cross_refs:
 ### 1.2 Helm架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      Helm故障诊断架构                                        │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -145,7 +151,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. Chart渲染和模板问题排查 (Chart Rendering and Template Issues) -->
@@ -153,7 +158,8 @@ cross_refs:
 
 ### 2.1 模板语法错误诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 模板渲染测试 ==========
 # 语法检查
 helm lint <chart-path>
@@ -184,10 +190,10 @@ helm template test-release ./mychart --set condition=true --debug
 # 循环遍历问题
 helm template test-release ./mychart --set 'items={item1,item2,item3}' --debug
 ```
-
 ### 2.2 Values配置验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 配置结构验证 ==========
 # 检查values.yaml结构
 helm show values <chart-name>
@@ -279,7 +285,6 @@ EOF
 
 chmod +x schema-validator.sh
 ```
-
 ---
 
 <!-- chunk: 3. 依赖管理问题排查 (Dependency Management Issues) -->
@@ -290,7 +295,17 @@ chmod +x schema-validator.sh
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 1. 依赖状态检查 ==========
 # 查看依赖列表
 helm dependency list <chart-path>
@@ -345,10 +360,10 @@ helm dependency list <chart-path> | while read line; do
     fi
 done
 ```
-
 ### 3.2 私有仓库和认证问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 私有仓库配置 ==========
 # 配置OCI仓库
 helm registry login registry.example.com \
@@ -389,7 +404,6 @@ export HTTP_PROXY=http://proxy.example.com:8080
 export HTTPS_PROXY=https://proxy.example.com:8080
 export NO_PROXY=localhost,127.0.0.1,.example.com
 ```
-
 ---
 
 <!-- chunk: 4. Release状态异常排查 (Release Status Issues) -->
@@ -401,7 +415,17 @@ export NO_PROXY=localhost,127.0.0.1,.example.com
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 1. Release状态分析 ==========
 # 查看所有Release状态
 helm list --all-namespaces
@@ -439,7 +463,6 @@ helm rollback <release-name> -n <namespace>
 helm uninstall <release-name> -n <namespace>  # ⚠️ 删除 release 及关联资源
 helm install <release-name> <chart-path> -n <namespace>
 ```
-
 ### 4.2 资源冲突和清理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -447,7 +470,17 @@ helm install <release-name> <chart-path> -n <namespace>
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 资源冲突检测 ==========
 # 检查名称冲突
 kubectl get all -A | grep <release-name>
@@ -557,7 +590,6 @@ EOF
 
 chmod +x release-state-fixer.sh
 ```
-
 ---
 
 <!-- chunk: 5. 版本兼容性问题排查 (Version Compatibility Issues) -->
@@ -565,7 +597,8 @@ chmod +x release-state-fixer.sh
 
 ### 5.1 Kubernetes API版本兼容性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== API版本检查 ==========
 # 检查集群版本
 kubectl version --short
@@ -643,10 +676,10 @@ helm template <release-name> <chart-path> --debug |& grep -i "deprecated|depreca
 # 使用kubeval验证
 kubeval --kubernetes-version $(kubectl version --short | grep Server | awk '{print $3}' | tr -d 'v') <chart-path>/templates/*.yaml
 ```
-
 ### 5.2 Helm版本兼容性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Helm客户端版本检查 ==========
 # 检查Helm版本
 helm version
@@ -675,7 +708,6 @@ for version in "3.8.0" "3.9.0" "3.10.0"; do
     # 这里可以添加具体的测试逻辑
 done
 ```
-
 ---
 
 <!-- chunk: 6. 监控和调试工具 (Monitoring and Debugging Tools) -->
@@ -687,7 +719,17 @@ done
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 调试模式启用 ==========
 # 启用详细调试输出
 helm install <release-name> <chart-path> --debug --dry-run
@@ -764,13 +806,13 @@ EOF
 
 chmod +x helm-debug-collector.sh
 ```
-
 ### 6.2 监控告警配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Helm监控集成 ==========
 # 创建Helm监控ServiceMonitor
 cat <<EOF | kubectl apply -f -
@@ -909,7 +951,6 @@ cat <<'EOF' > helm-dashboard.json
 }
 EOF
 ```
-
 ---
 
 <!-- chunk: 7. 最佳实践和预防措施 (Best Practices and Prevention) -->
@@ -921,7 +962,17 @@ EOF
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== Chart结构验证 ==========
 # 创建Chart验证脚本
 cat <<'EOF' > chart-validator.sh
@@ -1030,10 +1081,10 @@ release-chart:
     - tags
 EOF
 ```
-
 ### 7.2 生产环境部署策略
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 蓝绿部署配置 ==========
 # 创建蓝绿部署values
 cat <<EOF > blue-green-values.yaml
@@ -1136,7 +1187,6 @@ EOF
 
 chmod +x auto-rollback.sh
 ```
-
 ---
 
 ---
@@ -1166,3 +1216,6 @@ chmod +x auto-rollback.sh
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/35-node-component-troubleshooting.md|35-node-component-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/37-multi-cluster-management-troubleshooting.md|37-multi-cluster-management-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+
+
+<!-- risk-assessed -->

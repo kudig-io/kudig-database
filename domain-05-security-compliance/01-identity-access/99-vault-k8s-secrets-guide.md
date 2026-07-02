@@ -57,6 +57,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Vault K8s 密钥管理集成深度实践
@@ -144,7 +149,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add hashicorp https://helm.releases.hashicorp.com
 
 helm install vault hashicorp/vault \
@@ -159,7 +165,6 @@ helm install vault hashicorp/vault \
   --set server.resources.requests.memory=256Mi \
   --set server.resources.limits.memory=1Gi
 ```
-
 ```yaml
 # values-vault-production.yaml
 global:
@@ -296,7 +301,8 @@ Vault 的 Kubernetes 认证方法允许 Pod 使用其 ServiceAccount JWT Token �
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # vault_k8s_auth_setup.sh
 
@@ -387,7 +393,6 @@ kubectl exec -it vault-0 -n vault -- vault write auth/kubernetes/role/eso-global
 kubectl create serviceaccount myapp-sa -n production
 kubectl create serviceaccount external-secrets-sa -n external-secrets
 ```
-
 <!-- chunk: 安全策略实战 -->## 安全策略实战
 
 ## Vault Agent Injector 密钥注入
@@ -606,7 +611,8 @@ Vault 的动态密钥引擎是区分于其他密钥管理工具的核心功能�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用数据库引擎
 kubectl exec -it vault-0 -n vault -- vault secrets enable database
 
@@ -644,13 +650,13 @@ kubectl exec -it vault-0 -n vault -- vault write database/roles/myapp-audit \
 # 测试获取动态凭证
 kubectl exec -it vault-0 -n vault -- vault read database/creds/myapp
 ```
-
 ## PKI 引擎自动 TLS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用 PKI 引擎
 kubectl exec -it vault-0 -n vault -- vault secrets enable pki
 kubectl exec -it vault-0 -n vault -- vault secrets tune -max-lease-ttl=8760h pki
@@ -688,13 +694,13 @@ kubectl exec -it vault-0 -n vault -- vault write pki/issue/myapp \
   common_name="myapp.production.svc.cluster.local" \
   ttl=24h
 ```
-
 ## Transit 引擎加密即服务
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用 Transit 引擎
 kubectl exec -it vault-0 -n vault -- vault secrets enable transit
 
@@ -715,7 +721,6 @@ kubectl exec -it vault-0 -n vault -- vault write transit/decrypt/myapp-encryptio
 # 轮换密钥
 kubectl exec -it vault-0 -n vault -- vault write -f transit/keys/myapp-encryption/rotate
 ```
-
 <!-- chunk: 合规与审计 -->## 合规与审计
 
 ## Vault 审计日志
@@ -725,7 +730,8 @@ Vault 的审计日志记录了所有操作，包括认证请求、密钥访问�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用文件审计
 kubectl exec -it vault-0 -n vault -- vault audit enable file file_path=/vault/logs/audit.log
 
@@ -738,7 +744,6 @@ kubectl exec -it vault-0 -n vault -- vault audit enable syslog \
 # 查看审计设备
 kubectl exec -it vault-0 -n vault -- vault audit list -detailed
 ```
-
 ## 审计日志分析
 
 ```bash
@@ -791,7 +796,8 @@ jq 'select(.request.path | test("pki/issue"))' "$AUDIT_LOG" | \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # vault_compliance_check.sh
 
@@ -829,7 +835,6 @@ echo ""
 echo "8. HA Status"
 kubectl exec -it vault-0 -n vault -- vault operator raft list-peers
 ```
-
 <!-- chunk: 监控与告警 -->## 监控与告警
 
 ## Prometheus 监控
@@ -1005,7 +1010,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # vault_k8s_diagnostics.sh
 
@@ -1066,7 +1072,6 @@ echo ""
 echo "=== Certificate Expiry ==="
 kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not Before|Not After"
 ```
-
 ---
 
 *本文档基于 Vault 与 Kubernetes 密钥管理集成实践经验编写，持续更新最新技术和最佳实践。*
@@ -1096,3 +1101,5 @@ kubectl exec -it vault-0 -n vault -- vault read pki/cert/ca-chain | grep -E "Not
 - 02-sysdig-enterprise-container-security
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

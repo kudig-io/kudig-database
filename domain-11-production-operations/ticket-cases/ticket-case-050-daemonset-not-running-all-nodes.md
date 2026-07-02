@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看 DaemonSet 状态，再看未调度节点特征，最后查 Pod 事件”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 DaemonSet 整体状态
 kubectl get daemonset logtail-ds -n kube-system -o wide
 kubectl describe daemonset logtail-ds -n kube-system | head -60
@@ -125,7 +131,6 @@ kubectl get daemonset logtail-ds -n kube-system -o jsonpath='{.spec.template.spe
 # 10. 通过 ACK 控制台查看节点池与组件状态
 ack-cli node diagnose $(comm -23 <(sort /tmp/all_nodes.txt) /tmp/logtail_nodes.txt | head -1) --cluster ack-zyy-prod-08 --module daemonset
 ```
-
 ## 根因分析
 
 通过对比有/无 Logtail Pod 的节点特征，确认存在以下三类原因：
@@ -168,7 +173,8 @@ Warning  FailedToPullImage  ...  rpc error: code = DeadlineExceeded desc = faile
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   {
     "op": "add",
@@ -182,13 +188,13 @@ kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   }
 ]'
 ```
-
 若希望 Logtail 在任何节点都运行，也可补充通用 toleration：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   {
     "op": "add",
@@ -200,13 +206,22 @@ kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   }
 ]'
 ```
-
 **第二步：清理磁盘压力节点上的过期日志，恢复 kubelet 调度能力**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 登录到问题节点（假设节点名为 cn-zhangjiakou.172.16.8.12）
 ssh root@cn-zhangjiakou.172.16.8.12
 
@@ -219,19 +234,19 @@ crictl system prune -f
 # 重启 kubelet 以尽快刷新 DiskPressure 状态
 systemctl restart kubelet
 ```
-
 在 Kubernetes 侧确认节点状态恢复：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node cn-zhangjiakou.172.16.8.12 | grep -A 5 Conditions
 ```
-
 **第三步：为 Logtail 设置镜像拉取超时与重试策略**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   {
     "op": "add",
@@ -240,42 +255,51 @@ kubectl patch daemonset logtail-ds -n kube-system --type='json' -p='[
   }
 ]'
 ```
-
 同时在容器运行时层面增加镜像拉取超时：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在 containerd 配置中增加 registry 超时
 kubectl edit configmap -n kube-system coredns  # 仅示例，实际需修改 containerd 配置
 ```
-
 更稳妥的做法是为 Logtail 镜像在节点上预加载：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 for node in $(kubectl get node -o jsonpath='{.items[*].metadata.name}'); do
   kubectl debug node/$node -it --image=registry.aliyuncs.com/acs/busybox -- \
     sh -c "crictl pull registry-vpc.cn-zhangjiakou.aliyuncs.com/acs/logtail:latest"
 done
 ```
-
 **第四步：强制滚动更新 DaemonSet，确保所有节点覆盖**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart daemonset logtail-ds -n kube-system
 kubectl rollout status daemonset logtail-ds -n kube-system --timeout=300s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 DaemonSet desired == current == ready
 kubectl get daemonset logtail-ds -n kube-system -o wide
 
@@ -297,7 +321,6 @@ aliyun log GetMachineGroup --ProjectName k8s-prod-logs --GroupName logtail-ds-gr
 # 6. 检查 DiskPressure 节点已恢复 Ready
 kubectl get node cn-zhangjiakou.172.16.8.12 -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")].status}'
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 Logtail DaemonSet 未覆盖全部节点的根因是 **三类节点差异**：
@@ -354,3 +377,6 @@ kubectl get node cn-zhangjiakou.172.16.8.12 -o jsonpath='{.status.conditions[?(@
 - DaemonSet
 - Pod Pending：资源不足与 Taint 不匹配
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
+
+
+<!-- risk-assessed -->

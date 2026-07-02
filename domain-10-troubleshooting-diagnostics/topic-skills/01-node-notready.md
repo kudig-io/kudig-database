@@ -56,6 +56,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
@@ -159,7 +164,8 @@ Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的�
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计 NotReady 节点数量和总节点数
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有节点状态，统计 NotReady 数量
 kubectl get nodes --no-headers | awk '{print $2}' | sort | uniq -c
 # 或更精确的统计
@@ -173,7 +179,8 @@ echo "Total nodes:" && kubectl get nodes --no-headers | wc -l
 > - NotReady 节点数 == 1 → **P2**（待 T2 进一步确认）
 
 **Step T2**: 确认 NotReady 节点是否为控制平面节点
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 NotReady 节点是否包含 control-plane/master 角色
 kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master"
 ```
@@ -182,7 +189,8 @@ kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master
 > - 如果仅工作节点 NotReady → 保持 T1 的分级
 
 **Step T3**: 评估工作负载影响
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 NotReady 节点上运行的 Pod 数量和关键 namespace
 NODE_NAME="<notready-node>"
 kubectl get pods --all-namespaces --field-selector spec.nodeName=${NODE_NAME} --no-headers | \
@@ -194,7 +202,8 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=${NODE_NAME} --
 > - 仅有 DaemonSet Pod → 影响相对有限
 
 **Step T4**: 检查 NotReady 持续时间
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点 Ready condition 的 lastTransitionTime
 kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.conditions[-1].type,LAST_TRANSITION:.status.conditions[-1].lastTransitionTime | grep -v "NAME"
 ```
@@ -1240,7 +1249,8 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认节点状态恢复为 Ready
 kubectl get node <node-name>
 # 预期: STATUS 列显示 Ready
@@ -1265,7 +1275,6 @@ kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces
 kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersion} runtime={.status.nodeInfo.containerRuntimeVersion}'
 # 预期: 版本信息与集群其他节点一致
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1534,7 +1543,8 @@ danger_operations:
 
 ### 通用验证步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认节点恢复 Ready
 kubectl get node <node-name>
 
@@ -1547,9 +1557,10 @@ kubectl get lease -n kube-node-lease <node-name> -o jsonpath='{.spec.renewTime}'
 # 4. 确认 Pod 恢复正常运行
 kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces
 ```
-
 ## Related
 
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

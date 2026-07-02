@@ -21,6 +21,11 @@ trigger_keywords:
 - 开源项目索引模板
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 开源项目索引模板
@@ -140,3 +145,6 @@ trigger_keywords:
 | domain-05-security-compliance 云原生安全 | `domain-05-security-compliance/00-open-source-projects-index.md` |
 | domain-03-networking-traffic 服务网格 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
 | domain-12-cloud-providers 多云混合 | `domain-12-cloud-providers/00-open-source-projects-index.md` |
+
+
+<!-- risk-assessed -->

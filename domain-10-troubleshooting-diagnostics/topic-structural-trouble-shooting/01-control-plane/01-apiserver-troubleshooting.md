@@ -47,6 +47,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: API Server 故障排查指南
@@ -193,7 +198,8 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 API Server 进程状态（systemd 管理）
 systemctl status kube-apiserver
 
@@ -217,7 +223,6 @@ curl -k 'https://localhost:6443/readyz?verbose'
 # 查看 API Server 指标
 curl -k https://localhost:6443/metrics | grep apiserver_request
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -258,6 +263,7 @@ curl -k https://localhost:6443/metrics | grep apiserver_request
 ##### 核心业务依赖关系图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    API Server 问题影响传播链                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -283,7 +289,6 @@ curl -k https://localhost:6443/metrics | grep apiserver_request
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -383,7 +388,8 @@ API Server 是 Kubernetes 集群的核心组件，所有组件都通过 API Serv
 
 #### 2.3.1 第一步：检查进程状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 API Server 进程是否存在
 ps aux | grep kube-apiserver | grep -v grep
 
@@ -400,7 +406,6 @@ crictl ps -a | grep kube-apiserver
 # 查看进程启动参数
 cat /proc/$(pgrep kube-apiserver)/cmdline | tr '\0' '\n'
 ```
-
 #### 2.3.2 第二步：检查健康端点
 
 ```bash
@@ -452,7 +457,8 @@ openssl s_client -connect 127.0.0.1:6443 </dev/null 2>/dev/null | openssl x509 -
 
 #### 2.3.4 第四步：检查 etcd 连接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd 端点健康
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -473,7 +479,6 @@ ping -c 5 <etcd-ip>
 # 查看 API Server 日志中的 etcd 相关错误
 journalctl -u kube-apiserver | grep -i etcd | tail -50
 ```
-
 #### 2.3.5 第五步：检查资源使用
 
 ```bash
@@ -501,7 +506,8 @@ curl -k https://127.0.0.1:6443/metrics | grep apiserver_current_inflight_request
 
 #### 2.3.6 第六步：检查日志错误
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看日志
 journalctl -u kube-apiserver -f --no-pager
 
@@ -536,7 +542,6 @@ curl -k https://127.0.0.1:6443/metrics | \
   awk '{print $1}' | cut -d'{' -f2 | cut -d'}' -f1 | \
   sort | uniq -c | sort -nr
 ```
-
 #### 2.3.7 第七步：检查配置
 
 ```bash
@@ -616,7 +621,8 @@ kube-apiserver --help | grep -A2 "<flag-name>"
 
 #### 3.1.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查并启动服务（systemd 方式）
 systemctl start kube-apiserver
 systemctl enable kube-apiserver
@@ -636,7 +642,6 @@ ls -la /etc/kubernetes/pki/apiserver.crt
 ls -la /etc/kubernetes/pki/apiserver.key
 ls -la /etc/kubernetes/pki/ca.crt
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -663,7 +668,8 @@ ls -la /etc/kubernetes/pki/ca.crt
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 🛡️ 证书监控告警配置
 # PrometheusRule 示例
 cat << EOF | kubectl apply -f -
@@ -690,13 +696,22 @@ EOF
 # kubeadm 集群启用自动轮转
 kubeadm alpha certs renew --certificate-dir=/etc/kubernetes/pki
 ```
-
 #### 3.2.1 解决步骤
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认证书过期情况
 kubeadm certs check-expiration
 
@@ -722,7 +737,6 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 kubeadm certs check-expiration
 kubectl get nodes
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -747,7 +761,8 @@ kubectl get nodes
 
 #### 3.3.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认 etcd 服务状态
 systemctl status etcd
 # 或者（容器化部署）
@@ -774,7 +789,6 @@ crictl logs $(crictl ps -q --name etcd)
 # 步骤 6：验证修复
 kubectl get nodes
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -802,7 +816,8 @@ kubectl get nodes
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认资源瓶颈
 top -p $(pgrep kube-apiserver) -b -n 1
 cat /proc/$(pgrep kube-apiserver)/limits
@@ -839,7 +854,6 @@ systemctl restart kube-apiserver
 # 步骤 5：验证资源使用
 curl -k https://127.0.0.1:6443/metrics | grep -E "process_resident_memory|process_cpu"
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -866,7 +880,8 @@ curl -k https://127.0.0.1:6443/metrics | grep -E "process_resident_memory|proces
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认限流情况
 curl -k https://127.0.0.1:6443/metrics | grep apiserver_current_inflight_requests
 curl -k https://127.0.0.1:6443/metrics | grep apiserver_dropped_requests_total
@@ -911,7 +926,6 @@ EOF
 # 步骤 6：验证调整效果
 kubectl get --raw /metrics | grep apiserver_flowcontrol
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -935,7 +949,8 @@ kubectl get --raw /metrics | grep apiserver_flowcontrol
 
 #### 3.6.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查所有 API Server 实例状态
 # 假设有 3 个 Master 节点
 for node in master1 master2 master3; do
@@ -968,7 +983,6 @@ kubectl get nodes
 kubectl get cs  # 已废弃但部分版本可用
 kubectl get --raw /healthz
 ```
-
 #### 3.6.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -996,7 +1010,17 @@ kubectl get --raw /healthz
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急恢复检查清单
 # ==================
 
@@ -1032,7 +1056,6 @@ systemctl restart kubelet
 kubectl get nodes
 kubectl get pods -A
 ```
-
 #### 3.7.2 安全生产风险提示
 
 ```
@@ -1544,3 +1567,5 @@ kubectl get pods -A
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

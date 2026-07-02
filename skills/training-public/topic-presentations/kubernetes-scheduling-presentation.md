@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 调度与编排策略全栈培训
@@ -176,7 +181,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 给节点打标签
 kubectl label node <node-name> disktype=ssd
 # 预期输出: node/<node-name> labeled
@@ -185,7 +191,6 @@ kubectl label node <node-name> disktype=ssd
 kubectl get nodes --show-labels
 kubectl describe node <node-name> | grep -A 20 Labels
 ```
-
 **nodeName — 强制指定节点（绕过调度器）：**
 
 ```yaml
@@ -356,7 +361,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 给节点添加污点
 kubectl taint nodes worker-1 dedicated=db:NoSchedule
 # 预期输出: node/worker-1 tainted
@@ -371,7 +386,6 @@ kubectl describe node worker-1 | grep Taints
 kubectl taint nodes worker-1 dedicated=db:NoSchedule-
 # 预期输出: node/worker-1 untainted
 ```
-
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -606,7 +620,8 @@ sequenceDiagram
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 查看节点资源和标签
 kubectl get nodes -o wide
 kubectl describe node <node-1> | grep -A 15 "Capacity"
@@ -655,14 +670,14 @@ kubectl describe pod big-pod | grep -A 10 Events
 #   Warning  FailedScheduling  5s    default-scheduler  0/3 nodes are available...
 #   cpu 4 insufficient on 3 nodes, memory 8Gi insufficient on 2 nodes.
 ```
-
 ## 演示 2：nodeSelector 与 NodeAffinity
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 给节点打标签
 kubectl label node <node-1> disktype=ssd
 kubectl label node <node-2> disktype=hdd
@@ -721,13 +736,13 @@ EOF
 # 步骤 5: 验证调度到指定可用区的节点
 kubectl get pod affinity-demo -o wide
 ```
-
 ## 演示 3：Pod 反亲和性（防单点问题）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建强制反亲和的 Deployment
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -772,7 +787,6 @@ kubectl scale deployment web-ha --replicas=5
 kubectl get pods -l app=web-ha -o wide
 # 预期: 3 个 Running，2 个 Pending（因为只有 3 个节点）
 ```
-
 ## 演示 4：污点与容忍（专用节点）
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -780,7 +794,17 @@ kubectl get pods -l app=web-ha -o wide
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 为数据库创建专用节点
 kubectl taint nodes <node-name> dedicated=db:NoSchedule
 # 预期输出: node/<node-name> tainted
@@ -851,13 +875,13 @@ kubectl get pod no-tolerations-pod
 kubectl describe pod no-tolerations-pod | grep -A 5 Events
 # 预期: 0/1 nodes are available: 1 node(s) had taint {dedicated: db}, that the pod didn't tolerate.
 ```
-
 ## 演示 5：优先级与抢占
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 PriorityClass
 cat <<EOF | kubectl apply -f -
 apiVersion: scheduling.k8s.io/v1
@@ -925,13 +949,13 @@ kubectl get events --sort-by=.lastTimestamp | grep -i preempt
 kubectl get pods -o wide
 # critical-pod 应该是 Running，low-priority-job 的 Pod 被终止
 ```
-
 ## 演示 6：QoS 类别验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建三种 QoS 的 Pod
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -986,10 +1010,10 @@ kubectl get pod burstable-pod -o jsonpath='{.status.qosClass}'
 kubectl get pod besteffort-pod -o jsonpath='{.status.qosClass}'
 # 预期输出: BestEffort
 ```
-
 ## 演示 7：调度器性能监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器指标
 kubectl -n kube-system exec -it kube-scheduler-<master> -- \
   wget -qO- http://localhost:10259/metrics 2>/dev/null | grep scheduler_
@@ -1006,7 +1030,6 @@ kubectl logs -n kube-system kube-scheduler-<master> --tail=50
 # 查看当前 Pending 的 Pod
 kubectl get pods -A --field-selector status.phase=Pending
 ```
-
 ---
 
 <!-- chunk: 动手实验 -->## 动手实验
@@ -1020,7 +1043,17 @@ kubectl get pods -A --field-selector status.phase=Pending
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 给节点打可用区标签（如果还没有）
 kubectl label node <node-1> topology.kubernetes.io/zone=cn-hangzhou-a
 kubectl label node <node-2> topology.kubernetes.io/zone=cn-hangzhou-b
@@ -1064,7 +1097,6 @@ kubectl cordon <node-1>
 # 5. 观察 Pod 重调度
 kubectl get pods -l app=ha-app -o wide -w
 ```
-
 ## 实验 2：调度失败排查演练
 
 **目标**：模拟多种调度失败场景并排查
@@ -1073,7 +1105,17 @@ kubectl get pods -l app=ha-app -o wide -w
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景 1: 资源不足
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -1132,7 +1174,6 @@ kubectl describe pod pvc-pod | grep -A 5 Events
 # 预期: persistentvolumeclaim "non-existent-pvc" not found
 kubectl delete pod pvc-pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -1281,3 +1322,5 @@ affinity:
 - kubernetes-service-presentation
 
 ```
+
+<!-- risk-assessed -->

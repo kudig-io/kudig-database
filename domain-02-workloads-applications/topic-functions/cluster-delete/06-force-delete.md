@@ -34,6 +34,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 强制删除与异常场景处理
@@ -158,6 +163,7 @@ echo "y" | kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 `kubeadm reset` 采用 **"best effort"** 策略：每个步骤失败后仅 **warning**，不中断后续步骤。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌──────────────────────────────────────────────────────────────┐
 │  reset 容错设计                                                │
 ├──────────────────────────────────────────────────────────────┤
@@ -178,7 +184,6 @@ echo "y" | kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
 │  移除用户/组失败     → Warning: 继续执行                       │
 └──────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 各阶段错误处理源码
 
 **kubelet 停止**:
@@ -277,7 +282,17 @@ force: true
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在可达的控制面节点上
 kubectl delete node <unreachable-node>
 
@@ -288,7 +303,6 @@ etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 # 如果节点恢复可达后，在节点上执行
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ### 4.2 API Server 不可用
 
 **场景**: 所有控制面节点宕机，API Server 无法启动
@@ -330,16 +344,26 @@ rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 **症状**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 [reset] Failed to remove etcd member: etcdserver: unhealthy cluster, please manually remove this etcd member using etcdctl
 ```
-
 **处理**:
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在剩余节点上强制恢复（会丢失数据共识）
 # 停止 etcd
 crictl stop $(crictl ps --name etcd -q)
@@ -355,7 +379,6 @@ etcdctl --endpoints=https://127.0.0.1:2379 \
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 ```
-
 ### 4.4 容器运行时异常
 
 **场景**: containerd/docker 崩溃，无法通过 CRI 删除容器
@@ -373,7 +396,17 @@ if err := removeContainers(r.CRISocketPath()); err != nil {
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd
 ctr -n k8s.io containers rm $(ctr -n k8s.io containers -q)
 ctr -n k8s.io tasks kill $(ctr -n k8s.io tasks -q)
@@ -384,7 +417,6 @@ systemctl restart containerd
 # 然后重新执行 reset
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ### 4.5 卸载挂载点失败
 
 **场景**: `/var/lib/kubelet/pods/...` 下的挂载点 busy 无法卸载
@@ -442,7 +474,17 @@ if certsDir != kubeadmapiv1.DefaultCertificatesDir {
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 set -e
 
@@ -492,7 +534,6 @@ done
 echo "=== Node ${NODE_NAME} has been fully reset ==="
 
 ```
-
 ---
 
 ## 参考
@@ -512,3 +553,5 @@ echo "=== Node ${NODE_NAME} has been fully reset ==="
 - [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
 
 ```
+
+<!-- risk-assessed -->

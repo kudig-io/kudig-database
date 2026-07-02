@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # minikube v0.4 Release Notes
@@ -93,3 +98,6 @@ SHA1(out/minikube-linux-amd64)= c0108e135a472a0c9bae7dbc979b5340a989c8c2
 $ openssl sha1 deploy/iso/minikube.iso
 SHA1(deploy/iso/minikube.iso)= cc981db81012fcb20f0d22dcf535ee86bac8b33c
 ```
+
+
+<!-- risk-assessed -->

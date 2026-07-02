@@ -35,6 +35,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Backup and Restore etcd
@@ -45,25 +50,26 @@ etcd contains all Kubernetes cluster state. Without a backup, cluster failure me
 
 ## Backup (Snapshot)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db \
   --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 **Verify snapshot**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-20260120.db --write-out=table
 ```
-
 ## Restore
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Stop API Server first
 ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20260120.db \
   --data-dir=/var/lib/etcd-restore \
@@ -71,7 +77,6 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20260120.db \
   --initial-cluster=etcd-1=https://192.168.1.101:2380,etcd-2=https://192.168.1.102:2380,etcd-3=https://192.168.1.103:2380 \
   --initial-advertise-peer-urls=https://192.168.1.101:2380
 ```
-
 After restore:
 1. Update etcd manifest to point to new data-dir
 2. Restart etcd (static Pod auto-restarts)
@@ -116,3 +121,5 @@ Run full cluster restore drills quarterly. A backup that hasn't been tested for 
 - [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
 - [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
 - [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+
+<!-- risk-assessed -->

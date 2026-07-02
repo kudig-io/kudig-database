@@ -57,6 +57,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 容器镜像安全扫描深度实践
@@ -276,7 +281,8 @@ serviceMonitor:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Trivy Operator
 helm repo add aqua https://aquasecurity.github.io/helm-charts
 helm repo update
@@ -298,7 +304,6 @@ kubectl get vulnerabilityreport \
 # 查看合规报告
 kubectl get compliance.report -o yaml
 ```
-
 ## Grype 扫描配置
 
 Grype 是 Anchore 公司开发的漏洞扫描工具，以 SBOM 为驱动进行漏洞匹配，与 Syft SBOM 生成工具配合使用：
@@ -653,7 +658,8 @@ grype "$IMAGE" --only-fixed --severity critical
 
 ## 合规报告自动化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # compliance_report.sh
 
@@ -691,7 +697,6 @@ kubectl get pods --all-namespaces -o json | \
   jq -r '.items[] | .spec.containers[] | select(.image | endswith(":latest")) |
     "- \(.image) in \(.metadata.namespace // "unknown")"' >> "$REPORT_FILE"
 ```
-
 <!-- chunk: 监控与告警 -->## 监控与告警
 
 ## Trivy Operator Prometheus 指标
@@ -875,7 +880,8 @@ SBOM 应作为镜像构建流程的标准产出物，与镜像一同存储在 OC
 
 **准入控制阻止合法部署**：临时使用 `audit` 模式观察策略影响。检查排除列表是否包含必要系统组件。使用 `kyverno apply` 或 `conftest` 在本地测试策略。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # image_security_diagnostics.sh
 
@@ -909,7 +915,6 @@ kubectl get pods --all-namespaces -o json | \
   jq -r '.items[] | .spec.containers[] | select(.image | test ":latest$|^[^:]+$") |
     "- \(.image)"' | sort -u
 ```
-
 ---
 
 *本文档基于容器镜像安全扫描实践经验编写，持续更新最新技术和最佳实践。*
@@ -939,3 +944,5 @@ kubectl get pods --all-namespaces -o json | \
 - 17-gvisor-container-sandbox
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

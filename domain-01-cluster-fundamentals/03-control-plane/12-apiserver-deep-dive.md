@@ -90,6 +90,11 @@ related_docs:
   desc: API Server 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kube-apiserver 深度解析 (kube-apiserver Deep Dive)
@@ -116,6 +121,7 @@ related_docs:
 ### 1.2 请求处理流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                                    ┌─────────────────────────────────────────────────────┐
                                    │                  kube-apiserver                      │
                                    │                                                      │
@@ -147,7 +153,6 @@ related_docs:
                                                         │   etcd   │
                                                         └──────────┘
 ```
-
 ### 1.3 API 组织结构
 
 | API组 | 路径前缀 | 包含资源 | 说明 |
@@ -243,7 +248,8 @@ spec:
 
 ### 2.4 OIDC 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # API Server OIDC 参数
 --oidc-issuer-url=https://accounts.google.com  # OIDC Provider URL
 --oidc-client-id=kubernetes                     # Client ID
@@ -261,7 +267,6 @@ kubectl config set-credentials oidc-user \
   --auth-provider-arg=refresh-token=<refresh_token> \
   --auth-provider-arg=id-token=<id_token>
 ```
-
 ### 2.5 Webhook Token 认证配置
 
 ```bash
@@ -494,7 +499,8 @@ anonymous:
 
 **1. 证书轮换管理**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 准备新 CA 证书
 # 更新 auth-config.yaml 中的 certificateAuthority 字段
 
@@ -505,10 +511,10 @@ kubectl get --raw /metrics | grep apiserver_authentication_config_controller
 # 3. 验证新配置生效
 kubectl auth can-i get pods --as=user@enterprise.example.com
 ```
-
 **2. 配置验证**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kubectl 验证配置文件格式 (需 1.30+)
 kubectl auth reconcile --authentication-config=auth-config.yaml --dry-run=client
 
@@ -518,7 +524,6 @@ curl -k https://localhost:6443/apis/apiserver.config.k8s.io/v1beta1/authenticati
   --cert /etc/kubernetes/pki/admin.crt \
   --key /etc/kubernetes/pki/admin.key
 ```
-
 **3. 多租户场景建议**
 
 | 场景 | 推荐配置 |
@@ -586,6 +591,7 @@ journalctl -u kube-apiserver -g "authentication" --no-pager
 | **验证阶段** | Validating Admission | 第 2 阶段 | 只读验证，不修改对象（安全策略检查、配额校验等） | 任一插件拒绝则请求终止 |
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────┐   ┌─────────────┐   ┌─────────────────────────────┐   ┌──────────────────────────────┐   ┌──────────┐
 │   客户端    │──▶│   认证      │──▶│      Mutating Admission      │──▶│    Validating Admission      │──▶│  etcd    │
 │  (kubectl)  │   │  (AuthN)    │   │  (变更准入: 修改请求对象)     │   │  (验证准入: 只读校验)         │   │ 持久化   │
@@ -600,7 +606,6 @@ journalctl -u kube-apiserver -g "authentication" --no-pager
                                     │  DefaultStorageClass│               │  NodeRestriction    │
                                     └─────────────────────┘               └─────────────────────┘
 ```
-
 #### 关键设计原则
 
 | 原则 | 说明 |
@@ -634,14 +639,14 @@ Kubernetes 各版本默认启用的内置准入控制器如下（以 1.30+ 为�
 | **TaintNodesByCondition** | Mutating | 根据节点条件自动添加/移除 Taint | GA，默认启用 |
 | **PersistentVolumeClaimResize** | Mutating | 处理 PVC 扩容请求，验证扩容条件 | GA，默认启用 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前 API Server 启用的准入插件列表（kube-apiserver 启动参数）
 grep "enable-admission-plugins" /etc/kubernetes/manifests/kube-apiserver.yaml
 
 # 或使用 API 查看支持的准入插件版本
 kubectl get --raw /apis/admissionregistration.k8s.io/v1/
 ```
-
 ---
 
 ### 3.3 安全类准入插件
@@ -781,14 +786,14 @@ spec:
 | **SecurityContextDeny** | Validating | 拒绝包含特定安全上下文的 Pod | ❌ **1.27 已弃用** | PodSecurity | 直接使用 PodSecurity 的 `restricted` 级别 |
 | **ServiceAccount** | Mutating | 自动为 Pod 挂载 ServiceAccount Token 和 ImagePullSecret | ✅ **已内置化** | 无需配置 | 1.24+ 此功能已内置于 API Server，不再作为独立插件暴露，始终启用 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否还在使用已弃用的插件
 kubectl logs -n kube-system kube-apiserver-<node> | grep -i "deprecated|removed|unrecognized"
 
 # kubeadm 集群检查启动参数
 grep "enable-admission-plugins|disable-admission-plugins" /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
-
 ---
 
 ### 3.6 生产环境推荐启用插件组合
@@ -913,12 +918,12 @@ plugins:
 
 #### 3.8.2 性能优化建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控准入控制延迟
 kubectl get --raw /metrics | grep apiserver_admission_controller_admission_duration_seconds
 kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration_seconds
 ```
-
 | 优化策略 | 具体操作 |
 |:---|:---|
 | **缩短 Webhook 超时** | 非关键 Webhook 设置 `timeoutSeconds: 5`；关键 Webhook 不超过 `10s` |
@@ -970,6 +975,7 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 请求被拒绝 (403/500)
     │
     ├── 检查 API Server 日志 ───────────────────────────┐
@@ -993,7 +999,6 @@ kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
         kubectl -v=8 <command>  # 查看完整请求/响应
 
 ```
-
 #### 3.9.2 常见问题场景
 
 | 症状 | 可能原因 | 诊断命令 | 解决方案 |
@@ -1027,7 +1032,8 @@ journalctl -u kube-apiserver -f | grep -E "admission|webhook|denied|rejected"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景：某个 Mutating Webhook 问题导致所有 Pod 无法创建
 
 # 1. 查看当前 Webhook 配置
@@ -1047,7 +1053,6 @@ vim /etc/kubernetes/manifests/kube-apiserver.yaml
 # 修改 --enable-admission-plugins 参数，移除问题插件
 # kubelet 会自动重启 API Server
 ```
-
 ---
 
 **准入控制插件总结**: 准入控制是 Kubernetes 安全架构的最后一道关卡。生产环境应始终启用 `NamespaceLifecycle`, `NodeRestriction`, `PodSecurity`, `ResourceQuota`, `LimitRanger` 等核心插件，并根据场景补充 `DenyServiceExternalIPs`, `EventRateLimit`, `ValidatingAdmissionPolicy` 等高级插件。定期检查废弃插件列表，及时迁移到官方推荐的替代方案。
@@ -1624,7 +1629,8 @@ curl -k https://localhost:6443/healthz?verbose
 
 ### 11.2 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 API Server 状态
 systemctl status kube-apiserver
 journalctl -u kube-apiserver -f --no-pager
@@ -1653,13 +1659,13 @@ kubectl -v=9 get pods  # 详细输出
 kubectl api-resources
 kubectl api-versions
 ```
-
 ### 11.3 证书轮换
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubeadm 管理的集群
 kubeadm certs renew all
 
@@ -1677,7 +1683,6 @@ cp apiserver-key.pem /etc/kubernetes/pki/apiserver.key
 # 4. 重启 API Server
 systemctl restart kube-apiserver
 ```
-
 ---
 
 <!-- chunk: 12. 生产环境 Checklist -->
@@ -1791,3 +1796,5 @@ systemctl restart kube-apiserver
 - 14-cloud-controller-manager-deep-dive
 
 ```
+
+<!-- risk-assessed -->

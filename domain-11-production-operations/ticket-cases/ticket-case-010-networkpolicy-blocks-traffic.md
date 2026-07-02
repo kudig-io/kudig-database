@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 010：NetworkPolicy 误拦截导致服务间调用 503
@@ -80,7 +85,8 @@ authors:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get pod -n risk-engine
 kubectl get svc -n risk-engine
 
@@ -88,17 +94,17 @@ kubectl get svc -n risk-engine
 kubectl exec -it deploy/score-service -n risk-engine -- /bin/sh
 wget -qO- http://rule-engine.risk-engine.svc.cluster.local:8080/health || echo "FAILED"
 ```
-
 ### 3.2 列出并检查 NetworkPolicy
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n risk-engine -o yaml
 kubectl describe networkpolicy -n risk-engine
 ```
-
 ### 3.3 检查 CNI 与 NetworkPolicy 实现
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 ACK 集群网络插件为 Terway + Calico Policy Controller
 kubectl get daemonset -n kube-system | grep -E "terway|calico"
 kubectl get pod -n kube-system -l app=calico-policy-controller
@@ -106,25 +112,24 @@ kubectl get pod -n kube-system -l app=calico-policy-controller
 # 查看 Calico 全局网络策略（如有）
 kubectl get globalnetworkpolicy
 ```
-
 ### 3.4 检查 Pod 标签与选择器匹配
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -n risk-engine --show-labels
 kubectl get pod -n risk-engine -l app=rule-engine --show-labels
 kubectl get pod -n risk-engine -l app=config-service --show-labels
 ```
-
 ### 3.5 抓包与 Calico 日志排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 rule-engine Pod 所在节点上抓包
 tcpdump -i any -nn host <rule-engine-pod-ip> and port 8080
 
 # 查看 Calico Felix 日志
 kubectl logs -n kube-system -l k8s-app=calico-node --tail=200 | grep -i "policy|deny|drop"
 ```
-
 ### 3.6 诊断过程补充说明
 
 NetworkPolicy 的排障难点在于其默认行为与直观理解存在差异。很多人误以为只写 Ingress 规则就不会影响出向流量，但实际上一旦声明了某个 policyType 而无具体规则，该方向就会被默认拒绝。因此诊断时应先确认 `policyTypes` 字段，再看每个方向是否有明确的 allow 规则。
@@ -153,7 +158,8 @@ NetworkPolicy 的排障难点在于其默认行为与直观理解存在差异。
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若业务影响严重，先删除该策略恢复默认放行
 kubectl delete networkpolicy score-service-ingress-only -n risk-engine
 
@@ -161,13 +167,13 @@ kubectl delete networkpolicy score-service-ingress-only -n risk-engine
 kubectl exec -it deploy/score-service -n risk-engine -- \
   wget -qO- http://rule-engine.risk-engine.svc.cluster.local:8080/health
 ```
-
 ### 5.2 编写最小权限 NetworkPolicy（推荐）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -211,13 +217,13 @@ spec:
           port: 53
 EOF
 ```
-
 ### 5.3 针对 score-service 单独放行的精细化策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -250,26 +256,26 @@ spec:
           port: 53
 EOF
 ```
-
 ### 5.4 验证策略生效
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Calico 策略是否同步
 kubectl exec -it calico-node-xxxxx -n kube-system -- calicoctl get networkpolicy -n risk-engine
 
 # 在 Terway 模式下，也可检查 Pod 网络标识
 kubectl exec -it deploy/score-service -n risk-engine -- ip addr
 ```
-
 ## 6. 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 NetworkPolicy 已应用
 kubectl get networkpolicy -n risk-engine -o yaml
 
@@ -297,7 +303,6 @@ kubectl run api-gateway-test --rm -it --restart=Never -n api-gateway --image=reg
 # 5. 确认 Calico Felix 日志无新 drop
 kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i "drop|deny" || echo "无拦截日志"
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-010 已处理完成。
@@ -342,3 +347,6 @@ kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i "drop|de
 ---
 
 *更新时间：2026-06-26 | 责任域：domain-11-production-operations/ticket-cases*
+
+
+<!-- risk-assessed -->

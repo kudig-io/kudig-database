@@ -16,6 +16,11 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # GitOps 与生产运维
@@ -282,14 +287,14 @@ CNCF 沙箱项目，Kubernetes 成本分配与分析。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 OpenCost
 helm install opencost opencost/opencost \
   --namespace opencost --create-namespace \
   --set opencost.prometheus.internal.enabled=false \
   --set opencost.prometheus.external.url=http://prometheus:9090
 ```
-
 **核心能力：** namespace/workload/node 级成本分摊、Idle 成本识别、与 Kubecost 商业版兼容。
 
 ### 4.5 CVE 扫描
@@ -392,7 +397,8 @@ spec:
 
 ### 6.2 安装与管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Krew
 (
   set -x; cd "$(mktemp -d)" &&
@@ -408,7 +414,6 @@ spec:
 kubectl krew install tree who-can images resource-capacity
 kubectl krew update && kubectl krew upgrade
 ```
-
 ---
 
 ## 7. AI 运维
@@ -484,3 +489,6 @@ GitOps 已从"声明式部署"演进为完整的生产运维体系：
 - [[concepts/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付策略
 - [[concepts/platform-engineering-idp.md|platform engineering idp]] — 平台工程与 IDP
 - [[concepts/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规
+
+
+<!-- risk-assessed -->

@@ -68,6 +68,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl top nodes -o jsonpath='{range .items[?(@.usage.cpu!="<none>" && @.usage.memory!="<none>")]} {.metadata.name}{"\n"}{end}' 显示节点资源使用率超过 80% -->
@@ -184,7 +189,8 @@ agent_execution_mode: L2-semi-auto
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 快速获取集群资源使用概览
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有节点的资源使用情况
 kubectl top nodes --sort-by=cpu 2>/dev/null || echo "Metrics server not available"
 
@@ -197,7 +203,8 @@ kubectl top pods -n <namespace> --sort-by=cpu 2>/dev/null | head -10
 > - Pod CPU 接近 limit → 可能存在 throttling，继续 T2
 
 **Step T2**: 检查近期性能相关事件
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查性能相关事件（OOM、Eviction、Throttling）
 kubectl get events -A --sort-by=.lastTimestamp | grep -iE 'oom|evict|throttl|fail|error' | tail -20
 ```
@@ -1309,7 +1316,8 @@ EOF"
 
 ### 7.1 即时验证（修复后 1-5 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 验证 CPU throttling 消除
 kubectl top pods -n <namespace> | grep <pod-name>
 # CPU 使用应低于 limit
@@ -1329,7 +1337,6 @@ kubectl get events -n <namespace> --field-selector reason=OOMKilled --sort-by=.l
 kubectl get --raw /healthz?verbose
 # 所有组件应返回 ok
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1729,7 +1736,8 @@ success "基线采集完成"
 
 ### A.2 容器 CPU Throttling 分析 (analyze-throttling.sh)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # =============================================================================
 # 容器 CPU Throttling 分析脚本
@@ -1871,10 +1879,10 @@ EOF
 
 echo -e "\n${GREEN}Throttling 分析完成${NC}"
 ```
-
 ### A.3 性能验证脚本 (verify-performance.sh)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # =============================================================================
 # 性能修复后验证脚本
@@ -2064,5 +2072,6 @@ else
     exit 1
 fi
 ```
-
 ```
+
+<!-- risk-assessed -->

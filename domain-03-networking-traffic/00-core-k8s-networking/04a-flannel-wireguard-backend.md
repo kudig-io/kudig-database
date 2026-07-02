@@ -64,6 +64,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Flannel WireGuard 加密后端配置
@@ -176,13 +181,13 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在每个节点上设置密钥
 kubectl create secret generic flannel-keys \
   --from-literal=private-key=<base64-encoded-private-key> \
   --namespace=kube-flannel
 ```
-
 **方式二：使用 Kubernetes Secret（生产推荐）**
 
 ```yaml
@@ -315,7 +320,8 @@ ip route | grep 10.244
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 iperf3 测试（需在两个 Pod 中运行）
 kubectl exec -it <pod-a> -- iperf3 -s -D
 kubectl exec -it <pod-b> -- iperf3 -c <pod-a-ip> -P 4
@@ -324,13 +330,13 @@ kubectl exec -it <pod-b> -- iperf3 -c <pod-a-ip> -P 4
 # VXLAN: ~2.8 Gbps
 # WireGuard: ~3.5 Gbps (受益于加密硬件加速)
 ```
-
 ### 6.2 延迟对比
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 qperf 测试
 kubectl exec -it <pod-a> -- qperf <pod-b-ip> tcp_lat
 
@@ -338,7 +344,6 @@ kubectl exec -it <pod-a> -- qperf <pod-b-ip> tcp_lat
 # VXLAN: ~0.15 ms
 # WireGuard: ~0.12 ms
 ```
-
 ---
 
 <!-- chunk: 7. 故障排查 -->
@@ -408,7 +413,17 @@ iptables-save > /etc/iptables/rules.v4
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit configmap -n kube-flannel kube-flannel-cfg
 
 # 修改 net-conf.json
@@ -423,7 +438,6 @@ kubectl edit configmap -n kube-flannel kube-flannel-cfg
 # 重启 flannel
 kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 ```
-
 ---
 
 <!-- chunk: Obsidian 相关文档 -->
@@ -452,3 +466,6 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 ## Related
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

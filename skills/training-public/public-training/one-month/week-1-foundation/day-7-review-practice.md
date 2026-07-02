@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 7: 周复习 + 综合实践
@@ -165,7 +170,8 @@ related:
 
 #### Step 1: 创建集群 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kind 创建集群（多节点模拟生产环境）
 kind create cluster --name production-sim --config - <<EOF
 kind: Cluster
@@ -212,13 +218,13 @@ kubectl get nodes
 kubectl get pods -n kube-system
 # 预期输出: 所有系统 Pod 为 Running 状态
 ```
-
 #### Step 2: 创建 Namespace (10min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建项目 namespace
 kubectl create namespace web-app
 # 预期输出: namespace/web-app created
@@ -233,13 +239,13 @@ kubectl get namespace web-app
 # NAME      STATUS   AGE
 # web-app   Active   30s
 ```
-
 #### Step 3: 部署 Deployment (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建完整的 Deployment YAML
 cat > deployment.yaml << 'EOF'
 apiVersion: apps/v1
@@ -344,13 +350,13 @@ kubectl get deployment nginx-web -o wide
 kubectl get replicaset
 # 预期输出: 一个 ReplicaSet，3 个 Pod
 ```
-
 #### Step 4: 创建 Service (20min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ClusterIP 和 NodePort 两种 Service
 cat > service.yaml << 'EOF'
 apiVersion: v1
@@ -404,7 +410,6 @@ kubectl get endpoints nginx-service
 # NAME            ENDPOINTS                                      AGE
 # nginx-service   10.244.1.2:80,10.244.2.2:80,10.244.1.3:80     1m
 ```
-
 #### Step 5: 测试和调试 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -413,7 +418,8 @@ kubectl get endpoints nginx-service
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 ClusterIP Service（集群内部访问）
 kubectl run curl-test --image=curlimages/curl -it --rm --restart=Never -- \
   curl -s http://nginx-clusterip.web-app.svc.cluster.local
@@ -486,7 +492,6 @@ kubectl describe pod resource-hog | grep -A 5 "Events:"
 # 清理测试 Pod
 kubectl delete pod resource-hog
 ```
-
 #### Step 6: 产出文档 (30min)
 
 创建 `~/k8s-setup-doc.md`，记录以下内容：
@@ -649,7 +654,17 @@ spec:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除命名空间（会删除其中所有资源）
 kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
@@ -659,7 +674,6 @@ kind delete cluster --name production-sim
 # 查看 kind 管理的所有集群
 kind get clusters
 ```
-
 ---
 
 ## 要点总结
@@ -695,3 +709,5 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

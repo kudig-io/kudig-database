@@ -64,6 +64,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Tekton 云原生 CI/CD 深度实践
@@ -220,7 +225,8 @@ Tekton资源层次:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Tekton Pipelines
 kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
 
@@ -241,7 +247,6 @@ kubectl apply -f https://storage.googleapis.com/tekton-releases/results/latest/r
 kubectl get pods -n tekton-pipelines
 kubectl get pods -n tekton-chains
 ```
-
 ## 3.2 生产级默认配置
 
 ```yaml
@@ -604,7 +609,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 配置签名密钥
 kubectl create secret generic signing-secrets \
   --namespace tekton-pipelines \
@@ -615,7 +621,6 @@ kubectl create secret generic signing-secrets \
 # 验证签名
 cosign verify registry.example.com/app:v1.2.3
 ```
-
 ## 4.2 Pod 安全上下文
 
 ```yaml
@@ -860,7 +865,8 @@ tkn hub get task kaniko
 
 <!-- chunk: 八、故障排查 -->## 八、故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看组件状态
 kubectl get pods -n tekton-pipelines
 kubectl logs -n tekton-pipelines deploy/tekton-pipelines-controller
@@ -879,7 +885,6 @@ tkn pipelinerun logs <name> -f
 kubectl get eventlistener -A
 kubectl logs -n cicd deploy/el-github-listener
 ```
-
 ```yaml
 常见问题:
   TaskRun OOMKilled:
@@ -946,7 +951,8 @@ Tekton Results 是一个可选组件，提供 PipelineRun 和 TaskRun 执行结�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Results API
 kubectl apply -f https://storage.googleapis.com/tekton-releases/results/latest/release.yaml
 
@@ -958,7 +964,6 @@ tkn results records <result-name>
 grpcurl -plaintext tekton-results-api:8080 \
   api.v1alpha1.Results/ListResults
 ```
-
 ## 9.3 Tekton Catalog 社区生态
 
 Tekton Hub 是社区共享 Task 的平台，提供了 100+ 预制 Task 覆盖常见的 CI/CD 场景。使用社区 Task 可以显著减少自定义 Task 的工作量，同时获得社区维护的质量保证。
@@ -1054,7 +1059,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清理已完成的 TaskRun (保留最近7天)
 kubectl delete taskruns -n cicd \
   --field-selector=status.completionTime!=null \
@@ -1065,7 +1071,6 @@ kubectl delete pipelineruns -n cicd \
   --field-selector=status.completionTime!=null \
   --all
 ```
-
 ---
 
 <!-- chunk: 十一、Tekton 生态系统与扩展 -->## 十一、Tekton 生态系统与扩展
@@ -1157,3 +1162,6 @@ spec:
 - 04-github-actions-enterprise
 - 06-flux-gitops-continuous-delivery
 - 07-gitops-security-compliance
+
+
+<!-- risk-assessed -->

@@ -58,6 +58,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 72 - 服务拓扑与端点切片
@@ -218,7 +223,8 @@ spec:
 <!-- chunk: 端点切片查看 -->
 ## 端点切片查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出EndpointSlice
 kubectl get endpointslices -l kubernetes.io/service-name=myservice
 
@@ -232,7 +238,6 @@ kubectl get endpointslices -l kubernetes.io/service-name=myservice \
 # 检查拓扑感知状态
 kubectl get service myservice -o yaml | grep topology
 ```
-
 <!-- chunk: 端点控制器配置 -->
 ## 端点控制器配置
 
@@ -313,3 +318,6 @@ kubectl get service myservice -o yaml | grep topology
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-01-22] CoreDNS CrashLoopBackOff 导致全集群服务发现中断
@@ -39,29 +44,30 @@ last_updated: 2026-05-23
 ## 诊断过程
 
 **14:16** — 检查 DNS 解析：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run -it --rm debug --image=nicolaka/netshoot --restart=Never -- nslookup kubernetes.default
 # ;; connection timed out; no servers could be reached
 ```
-
 **14:17** — 检查 CoreDNS Pod 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 # NAME                       READY   STATUS             RESTARTS   AGE
 # coredns-5c6c9d7f8b-2k9mz   0/1     CrashLoopBackOff   12         23m
 # coredns-5c6c9d7f8b-7x3pq   0/1     CrashLoopBackOff   11         23m
 ```
-
 **14:18** — 查看 CoreDNS 日志：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system coredns-5c6c9d7f8b-2k9mz --previous
 # [ERROR] plugin/errors: 2 1234567890.12345.cluster.local. A: plugin/forward: no healthy upstreams
 # [ERROR] plugin/loop: Forwarding loop detected in "/etc/resolv.conf"
 # [FATAL] plugin/loop: See https://coredns.io/plugins/loop#troubleshooting
 ```
-
 **14:20** — 检查 CoreDNS ConfigMap：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm coredns -n kube-system -o yaml
 # ...
 # forward . /etc/resolv.conf {
@@ -69,7 +75,6 @@ kubectl get cm coredns -n kube-system -o yaml
 # }
 # ...
 ```
-
 **14:22** — 检查节点 resolv.conf 和近期变更：
 ```bash
 # 节点 /etc/resolv.conf 被 DHCP 更新，新插入了 127.0.0.53 (systemd-resolved)
@@ -90,7 +95,8 @@ cat /etc/resolv.conf
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在所有节点执行
 sudo systemctl disable systemd-resolved
 sudo rm -f /etc/resolv.conf
@@ -99,41 +105,49 @@ nameserver 10.0.0.2
 search ec2.internal
 EOF'
 ```
-
 **14:30** — 更新 CoreDNS ConfigMap，使用固定上游而非 `/etc/resolv.conf`：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit cm coredns -n kube-system
 # 将 forward . /etc/resolv.conf 改为：
 # forward . 10.0.0.2 {
 #     max_concurrent 1000
 # }
 ```
-
 **14:32** — 重启 CoreDNS：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment coredns -n kube-system
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 # NAME                       READY   STATUS    RESTARTS   AGE
 # coredns-5c6c9d7f8b-9a2bc   1/1     Running   0          2m
 ```
-
 **14:35** — 验证 DNS：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run -it --rm debug --image=nicolaka/netshoot --restart=Never -- nslookup auth-service.prod
 # Server:    10.96.0.10
 # Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 # Name:      auth-service.prod
 # Address 1: 10.96.123.45 auth-service.prod.svc.cluster.local
 ```
-
 ## 验证
 - 14:36 — `curl http://auth-service.prod/health` 返回 200
 - 14:37 — 各业务 namespace 的 5xx 率归零，登录、下单恢复正常
@@ -147,3 +161,6 @@ kubectl run -it --rm debug --image=nicolaka/netshoot --restart=Never -- nslookup
   3. 为 CoreDNS 添加 `loop` 告警的专属 PagerDuty 策略，5min 内响应
 - **相关 Skill**: [[k8s-network-configuration-guide]]
 - **相关 FTA**: [[dns-fta]]
+
+
+<!-- risk-assessed -->

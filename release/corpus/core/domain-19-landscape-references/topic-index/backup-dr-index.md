@@ -1,0 +1,139 @@
+---
+title: Backup & DR 备份与灾备知识图谱索引
+description: '## 知识图谱'
+summary: '## 知识图谱'
+category: index
+tags:
+- k8s
+- index
+- catalog
+- backup
+- disaster-recovery
+- velero
+- etcd
+- rag
+tier: core
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 20min
+intent_queries:
+- Backup DR 备份灾备知识图谱 是什么
+- 如何 Backup DR 备份灾备知识图谱
+trigger_keywords:
+- Backup
+- DR
+- 备份
+- 灾备
+- 知识图谱
+- velero
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+- etcd-basics
+- backup-basics
+---
+
+
+
+# Backup & DR 备份与灾备知识图谱索引
+
+> 知识图谱：按主题 **Backup & DR** 聚合相关文档，按关联度分层级组织。
+
+---
+
+## 一、核心文档 (直接相关)
+
+> 这些文档以备份与灾备为主题或直接面向备份运维场景。
+
+### 灾备方案
+
+- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]佳实践|Disaster Recovery]])]]
+- 存储备份与灾难恢复
+- 存储灾备与迁移策略
+
+### 灾备工具
+
+- Velero 企业级备份恢复实践指南
+- VMware vSphere 企业级灾备与业务连续性
+- Veeam Backup & Replication 企业级备份恢复解决方案]]
+- Commvault 企业级灾备与业务连续性深度实践
+- Rubrik 企业级灾备与业务连续性深度实践
+
+### CSI 存储备份
+
+- CSI驱动集成与运维管理
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+
+### YAML 配置
+
+- StorageClass / VolumeSnapshot YAML 配置参考
+- CSI 驱动资源 YAML 配置参考
+
+---
+
+## 二、关联文档 (K8s 集成)
+
+> 这些文档涉及备份与灾备但以其他 K8s 组件为主题。
+
+### etcd 备份
+
+- [[domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md|etcd 集群初始化细节]]
+- [[domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常 FTA 树]]
+
+### 存储相关
+
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+
+### 故障排查
+
+- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/31-backup-restore-troubleshooting.md|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
+
+### FTA 故障树
+
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|CSI 存储异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常 FTA 树]]
+
+---
+
+## 三、扩展参考
+
+> 以下为运维相关参考，备份与灾备可参考存储、平台运维等章节。
+
+### 生产运维
+
+- [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
+- 企业级备份策略
+- 灾难恢复演练
+- 跨区域容灾部署
+
+### 术语词典
+
+- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|[[备份与灾难恢复（Backup & Disaster Recovery）|备份与灾难恢复（Backup & Disaster Recovery）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes（持久卷）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots（卷快照）]]
+- [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshot-classes.md|[[Volume Snapshot Classes（卷快照类）|Volume Snapshot Classes（卷快照类）]]]]
+- [[domain-17-system-foundation/topic-dictionary/storage/csi-volume-cloning.md|CSI Volume Cloning（CSI 卷克隆）]]
+
+### CNCF 生态
+
+- etcd
+- Longhorn
+- K8up
+- Kanister
+- OpenEBS
+
+### 迁移相关
+
+- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|存储与数据迁移]]
+- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|有状态服务迁移]]

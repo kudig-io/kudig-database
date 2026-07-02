@@ -40,6 +40,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Agent Orchestration Patterns for FTA
@@ -101,7 +106,17 @@ Timeline for "Service unavailable":
 
 **Use when**: AND gate connected conditions, fault requires multiple conditions simultaneously, need causal chain verification.
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 Alert → Agent-1 (check condition 1) → Agent-2 (check condition 2) → Repair
 
 Example: Database cluster split-brain [AND gate]
@@ -115,12 +130,12 @@ Example: Database cluster split-brain [AND gate]
   Both conditions met -> Confirm split-brain
   Execute split-brain recovery (shutdown old primary, elect new)
 ```
-
 ## Pattern 4: Hierarchical Agent Architecture (Production Scale)
 
 For large-scale production environments:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Layer 1: Meta Agent (Global Coordinator)
   - Receives all alerts and tickets
   - Classifies and dispatches based on FTA top events
@@ -140,7 +155,6 @@ Layer 3: Action Agents (Executors)
   ├── ansible executor  -> Node-level operations
   └── terraform executor-> Infrastructure changes
 ```
-
 ## Conflict Resolution
 
 When multiple agents produce conflicting diagnoses:
@@ -180,3 +194,6 @@ Domain Agent -> Meta Agent:
 - [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+
+
+<!-- risk-assessed -->

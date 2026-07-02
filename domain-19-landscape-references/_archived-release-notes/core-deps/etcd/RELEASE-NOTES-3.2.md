@@ -34,6 +34,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v3.2 Release Notes
@@ -46,7 +51,17 @@ For installation guides, please check out [play.etcd.io](http://play.etcd.io) an
 
 ###### Linux
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ETCD_VER=v3.2.32
 
 # choose either URL
@@ -64,8 +79,8 @@ rm -f /tmp/etcd-${ETCD_VER}-linux-amd64.tar.gz
 /tmp/etcd-download-test/etcd --version
 ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl version
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # start a local etcd server
 /tmp/etcd-download-test/etcd
 
@@ -73,10 +88,19 @@ ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl version
 ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl --endpoints=localhost:2379 put foo bar
 ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl --endpoints=localhost:2379 get foo
 ```
-
 ###### macOS (Darwin)
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ETCD_VER=v3.2.32
 
 # choose either URL
@@ -94,12 +118,21 @@ mv /tmp/etcd-${ETCD_VER}-darwin-amd64/* /tmp/etcd-download-test && rm -rf mv /tm
 /tmp/etcd-download-test/etcd --version
 ETCDCTL_API=3 /tmp/etcd-download-test/etcdctl version
 ```
-
 ###### Docker
 
 etcd uses [`gcr.io/etcd-development/etcd`](https://gcr.io/etcd-development/etcd) as a primary container registry, and [`quay.io/coreos/etcd`](https://quay.io/coreos/etcd) as secondary.
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:v3.2.32 || true && \
   docker run \
@@ -125,3 +158,5 @@ docker exec etcd-gcr-v3.2.32 /bin/sh -c "ETCDCTL_API=3 /usr/local/bin/etcdctl en
 docker exec etcd-gcr-v3.2.32 /bin/sh -c "ETCDCTL_API=3 /usr/local/bin/etcdctl put foo bar"
 docker exec etcd-gcr-v3.2.32 /bin/sh -c "ETCDCTL_API=3 /usr/local/bin/etcdctl get foo"
 ```
+
+<!-- risk-assessed -->

@@ -53,6 +53,11 @@ cross_refs:
   label: '故障树: job-cronjob'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - Job 与 [[CronJob|CronJob]] 批处理事件
@@ -142,14 +147,14 @@ Count: 1
 - 🔍 配合 `.spec.completions` 监控完成度
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job Pod 创建事件
 kubectl describe job batch-processor | grep SuccessfulCreate
 
 # 统计已创建 Pod 数量
 kubectl get pods -l job-name=batch-processor --no-headers | wc -l
 ```
-
 **关联配置:**
 ```yaml
 apiVersion: batch/v1
@@ -202,14 +207,14 @@ Count: 1
 - ⚠️ 如果频繁出现可能是 Job 被意外删除
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 删除事件
 kubectl describe job batch-processor | grep SuccessfulDelete
 
 # 检查 TTL 配置
 kubectl get job batch-processor -o jsonpath='{.spec.ttlSecondsAfterFinished}'
 ```
-
 **关联配置:**
 ```yaml
 apiVersion: batch/v1
@@ -272,7 +277,8 @@ Error creating: No nodes are available that match all of the following predicate
 - 📈 可能导致 CronJob 积压
 
 **故障排查:**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查详细错误
 kubectl describe job <job-name>
 
@@ -290,7 +296,6 @@ kubectl get sa <sa-name> -n <namespace>
 # 5. 模拟 Pod 创建
 kubectl run test-pod --image=busybox --dry-run=server
 ```
-
 **修复方案:**
 ```yaml
 # 方案 1: 调整 ResourceQuota
@@ -362,7 +367,8 @@ Count: 1
 - 🔄 触发后续流程（如 CronJob 下次调度）
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 完成状态
 kubectl get job batch-processor -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}'
 
@@ -372,7 +378,6 @@ kubectl get job batch-processor -o jsonpath='{.status.completionTime}'
 # 查看成功 Pod 数量
 kubectl get job batch-processor -o jsonpath='{.status.succeeded}'
 ```
-
 **状态检查:**
 ```yaml
 # Job 完成后的状态
@@ -433,7 +438,8 @@ Pod 失败次数与退避时间:
 ```
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看失败原因
 kubectl describe job batch-processor
 
@@ -446,16 +452,15 @@ kubectl get pods -l job-name=batch-processor -o wide
 # 查看重试次数
 kubectl get job batch-processor -o jsonpath='{.status.failed}'
 ```
-
 **深度分析:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 分析所有失败 Pod 的退出码
 kubectl get pods -l job-name=batch-processor -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].state.terminated.exitCode}{"\n"}{end}'
 
 # 查看 Pod 失败时间线
 kubectl get events --field-selector involvedObject.kind=Pod --sort-by='.lastTimestamp' | grep batch-processor
 ```
-
 **故障排查模式:**
 ```yaml
 # 常见失败原因与解决方案
@@ -579,7 +584,8 @@ Count: 1
 - ⏱️ 需要评估合理的超时时间
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 运行时长
 kubectl get job batch-processor -o jsonpath='{.status.startTime}'
 kubectl get job batch-processor -o jsonpath='{.status.completionTime}'
@@ -587,7 +593,6 @@ kubectl get job batch-processor -o jsonpath='{.status.completionTime}'
 # 查看超时配置
 kubectl get job batch-processor -o jsonpath='{.spec.activeDeadlineSeconds}'
 ```
-
 **配置建议:**
 ```yaml
 # 示例: 批量数据处理 Job
@@ -644,7 +649,8 @@ Count: 10
 - 🐛 可能是系统 Bug
 
 **故障排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查活跃 Pod 数量
 kubectl get pods -l job-name=batch-processor --field-selector=status.phase=Running --no-headers | wc -l
 
@@ -654,7 +660,6 @@ kubectl get job batch-processor -o jsonpath='{.spec.parallelism}'
 # 检查 Job Controller 日志
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | grep job-controller
 ```
-
 ---
 
 ## 8. TooManySucceededPods (成功 Pod 过多)
@@ -721,7 +726,8 @@ Count: 1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 暂停 Job
 kubectl patch job batch-processor -p '{"spec":{"suspend":true}}'
 
@@ -731,7 +737,6 @@ kubectl get job batch-processor -o jsonpath='{.spec.suspend}'
 # 3. 查看活跃 Pod（应为 0）
 kubectl get pods -l job-name=batch-processor --field-selector=status.phase=Running
 ```
-
 **应用场景:**
 ```yaml
 # 场景 1: 维护窗口期暂停批处理
@@ -791,14 +796,14 @@ Count: 1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 恢复 Job
 kubectl patch job batch-processor -p '{"spec":{"suspend":false}}'
 
 # 查看恢复后 Pod 创建
 kubectl get events --field-selector involvedObject.name=batch-processor --sort-by='.lastTimestamp'
 ```
-
 ---
 
 ## 11. FailedJob (Indexed Job 失败)
@@ -942,7 +947,8 @@ Count: 1
 - 🔍 用于审计和监控
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CronJob 最近创建的 Job
 kubectl get jobs -l cronjob-name=hourly-backup --sort-by=.metadata.creationTimestamp
 
@@ -952,7 +958,6 @@ kubectl describe cronjob hourly-backup | grep "Last Schedule Time"
 # 查看活跃 Job
 kubectl get cronjob hourly-backup -o jsonpath='{.status.active}'
 ```
-
 ---
 
 ## 14. SuccessfulDelete (Job 删除成功)
@@ -1067,7 +1072,8 @@ Count: 1
 - 🐛 可能是控制器同步问题
 
 **故障排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有相关 Job
 kubectl get jobs -l cronjob-name=hourly-backup
 
@@ -1077,7 +1083,6 @@ kubectl get job <job-name> -o jsonpath='{.metadata.ownerReferences}'
 # 检查 CronJob 状态
 kubectl get cronjob hourly-backup -o yaml
 ```
-
 ---
 
 ## 17. MissingJob (预期 Job 未找到)
@@ -1140,7 +1145,8 @@ Count: 1
 - ⏰ 可能错过重要任务
 
 **故障排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CronJob 最后调度时间
 kubectl get cronjob hourly-backup -o jsonpath='{.status.lastScheduleTime}'
 
@@ -1154,7 +1160,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.c
 # 4. 检查 startingDeadlineSeconds
 kubectl get cronjob hourly-backup -o jsonpath='{.spec.startingDeadlineSeconds}'
 ```
-
 **配置优化:**
 ```yaml
 apiVersion: batch/v1
@@ -1231,7 +1236,8 @@ Error creating job: admission webhook "validate.job" denied the request: invalid
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 验证 Job 模板
 kubectl create job test-job --from=cronjob/hourly-backup --dry-run=server
 
@@ -1244,7 +1250,6 @@ kubectl describe resourcequota -A
 # 4. 检查 ValidatingWebhookConfiguration
 kubectl get validatingwebhookconfiguration
 ```
-
 **修复方案:**
 ```yaml
 # 常见错误修复
@@ -1348,7 +1353,8 @@ spec:
 ```
 
 **观测示例:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看活跃 Job
 kubectl get jobs -l cronjob-name=data-sync --field-selector=status.successful!=1
 
@@ -1358,7 +1364,6 @@ kubectl get jobs -l cronjob-name=data-sync -o jsonpath='{range .items[*]}{.metad
 # 统计跳过次数
 kubectl get events --field-selector reason=ForbidConcurrent,involvedObject.name=data-sync --sort-by='.lastTimestamp'
 ```
-
 **优化方案:**
 ```yaml
 # 方案 1: 优化 Job 执行时间
@@ -1419,6 +1424,7 @@ spec:
 > - `kubectl edit/patch`：修改运行中的资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────┐
 │                     Job Execution Lifecycle                      │
 └─────────────────────────────────────────────────────────────────┘
@@ -1508,7 +1514,6 @@ spec:
               [Resumed Event]
               重新创建 Pod
 ```
-
 ## CronJob 调度流程
 
 ```
@@ -1879,7 +1884,8 @@ spec:
 ```
 
 **状态变化跟踪:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控 suspend 状态变化
 kubectl get events --watch | grep -E 'Suspended|Resumed'
 
@@ -1889,7 +1895,6 @@ kubectl describe job db-migration | grep -A 5 "Suspended|Resumed"
 # 统计暂停时长
 # 使用自定义脚本或 Prometheus 查询
 ```
-
 **限制和注意事项:**
 - 暂停时所有活跃 Pod 将被删除（数据可能丢失）
 - 恢复后从头开始执行（非断点续传）
@@ -2047,7 +2052,8 @@ spec:
 ```
 
 **监控 Indexed Jobs:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看各索引完成情况
 kubectl get pods -l job-name=data-processor -o custom-columns=\
   NAME:.metadata.name,\
@@ -2069,7 +2075,6 @@ kubectl get job data-processor -o jsonpath='{.status.succeeded}/{.spec.completio
 INDEX=5
 kubectl logs -l job-name=data-processor,batch.kubernetes.io/job-completion-index=$INDEX
 ```
-
 ---
 
 ## 4. CronJob 时区支持 (v1.25+)
@@ -2111,7 +2116,8 @@ spec:
 ## 问题 1: Job 长时间不创建 Pod
 
 **症状:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get job my-job
 # NAME     COMPLETIONS   DURATION   AGE
 # my-job   0/5           0s         5m
@@ -2119,13 +2125,13 @@ kubectl get job my-job
 kubectl get pods -l job-name=my-job
 # No resources found
 ```
-
 **排查步骤:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Job 事件
 kubectl describe job my-job | grep Events -A 20
 
@@ -2145,7 +2151,6 @@ kubectl top nodes
 # 5. 模拟创建
 kubectl create job test --image=busybox --dry-run=server
 ```
-
 **解决方案:**
 - 增加 ResourceQuota 限制
 - 降低 Job 资源请求
@@ -2157,16 +2162,17 @@ kubectl create job test --image=busybox --dry-run=server
 ## 问题 2: CronJob 不按时执行
 
 **症状:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cronjob hourly-backup
 # NAME            SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 # hourly-backup   0 * * * *     False     0        62m             5h
 
 # 最后调度时间是 62 分钟前（应该是最近 1 小时内）
 ```
-
 **排查步骤:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CronJob 事件
 kubectl describe cronjob hourly-backup | grep Events -A 20
 
@@ -2188,14 +2194,14 @@ kubectl get cronjob hourly-backup -o jsonpath='{.spec.startingDeadlineSeconds}'
 kubectl get pods -n kube-system -l component=kube-controller-manager
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep cronjob
 ```
-
 **解决方案:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 清理卡住的 Job
 kubectl delete job -l cronjob-name=hourly-backup --field-selector=status.successful!=1
 
@@ -2208,13 +2214,13 @@ kubectl patch cronjob hourly-backup -p '{"spec":{"startingDeadlineSeconds":600}}
 # 方案 4: 优化 Job 执行时间
 kubectl patch cronjob hourly-backup -p '{"spec":{"jobTemplate":{"spec":{"activeDeadlineSeconds":1800}}}}'
 ```
-
 ---
 
 ## 问题 3: Job 频繁达到 BackoffLimitExceeded
 
 **症状:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get job data-import
 # NAME          COMPLETIONS   DURATION   AGE
 # data-import   0/1           5m         5m
@@ -2223,9 +2229,9 @@ kubectl describe job data-import
 # Type     Reason                  Message
 # Warning  BackoffLimitExceeded    Job has reached the specified backoff limit
 ```
-
 **深度分析:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看所有失败 Pod 的退出码
 kubectl get pods -l job-name=data-import \
   -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].state.terminated.exitCode}{"\t"}{.status.containerStatuses[0].state.terminated.reason}{"\n"}{end}'
@@ -2243,7 +2249,6 @@ kubectl logs -l job-name=data-import --tail=100 --prefix=true
 # 退出码 1: 应用错误 - 检查代码逻辑
 # 退出码 143: SIGTERM - 检查超时配置
 ```
-
 **针对性解决:**
 ```yaml
 # 场景 1: OOM 导致失败
@@ -2515,3 +2520,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

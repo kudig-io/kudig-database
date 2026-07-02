@@ -59,6 +59,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -87,7 +92,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 ConfigMap 与 Secret 当前值
 kubectl get configmap app-config -n scm-platform -o yaml
 kubectl get secret tls-cert -n scm-platform -o jsonpath='{.data.tls\.crt}' | base64 -d
@@ -111,7 +117,6 @@ kubectl rollout history deployment/order-sync -n scm-platform
 kubectl get deployment order-sync -n scm-platform -o jsonpath='{.spec.template.spec.initContainers[*].name}'
 kubectl get deployment order-sync -n scm-platform -o jsonpath='{.spec.template.spec.containers[*].name}'
 ```
-
 ## 根因分析
 
 `order-sync` Deployment 将 `app-config` 以 `envFrom` 方式注入为环境变量，将 `tls-cert` 以 Volume 方式挂载到 `/etc/ssl`。客户通过 ACK 控制台修改 ConfigMap 和 Secret 后，仅执行了 `kubectl rollout restart deployment/order-sync`，但新 Pod 创建后仍然读取到旧值。进一步检查发现：
@@ -129,7 +134,8 @@ kubectl get deployment order-sync -n scm-platform -o jsonpath='{.spec.template.s
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -n scm-platform -f - <<EOF
 apiVersion: v1
 kind: ConfigMap
@@ -141,13 +147,13 @@ data:
   DB_PORT: "5432"
 EOF
 ```
-
 **第二步：更新 Secret（证书内容已存在，确认命名空间正确）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get secret tls-cert -n scm-platform -o yaml
 # 若证书确实已更新但 subPath 未刷新，需重新创建 Secret 并触发 Pod 重建
 kubectl create secret tls tls-cert-new \
@@ -155,34 +161,34 @@ kubectl create secret tls tls-cert-new \
   --key=/path/to/new.key \
   -n scm-platform --dry-run=client -o yaml | kubectl apply -f -
 ```
-
 **第三步：修改 Deployment，将 subPath 挂载改为常规卷挂载，或变更卷名触发重建**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment order-sync -n scm-platform --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/volumes/0/secret/secretName", "value": "tls-cert-new"}
 ]'
 ```
-
 **第四步：触发新的滚动更新，确保 Pod 重建而非原地重启**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/order-sync -n scm-platform
 kubectl rollout status deployment/order-sync -n scm-platform --timeout=300s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 ConfigMap 与 Secret 值正确
 kubectl get configmap app-config -n scm-platform -o jsonpath='{.data.DB_HOST}'
 kubectl get secret tls-cert-new -n scm-platform -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -subject -dates
@@ -197,7 +203,6 @@ kubectl exec -n scm-platform deploy/order-sync -- cat /etc/ssl/tls.crt | openssl
 # 4. 业务功能验证
 kubectl logs -n scm-platform -l app=order-sync --tail=100 | grep -iE "connected|database|sync"
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，配置更新未生效存在两个原因：
@@ -256,3 +261,6 @@ ConfigMap 与 Secret 更新未生效是 Kubernetes 运维中的高频问题，�
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - 密钥
 - 阿里云专有云 DNS 解析异常：CoreDNS 配置被 ConfigMap 误改 + VPC DNS 转发
+
+
+<!-- risk-assessed -->

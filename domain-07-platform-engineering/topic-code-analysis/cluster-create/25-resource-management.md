@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 资源管理与配额控制 (Resource Management)
@@ -352,6 +357,7 @@ func applyDefaults(container *v1.Container, limit v1.LimitRangeItem) {
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 步骤 1: 用户创建 Pod (kubectl apply)
     ↓
 步骤 2: API Server 接收请求
@@ -369,7 +375,6 @@ func applyDefaults(container *v1.Container, limit v1.LimitRangeItem) {
 步骤 8: 通过 → 写入 etcd
     失败 → 返回 403 Forbidden
 ```
-
 ### LimitRange 检查流程
 
 ```
@@ -585,7 +590,8 @@ spec:
 
 ### 查看配额使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出命名空间的 ResourceQuota
 kubectl get resourcequota -n dev
 # NAME         AGE   REQUEST                                    LIMIT
@@ -614,10 +620,10 @@ kubectl describe limitrange default-limits -n dev
 # Container   cpu       50m   2    100m             500m           4
 # Container   memory    64Mi  4Gi  128Mi            256Mi          3
 ```
-
 ### 创建超出配额的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建超出配额的 Pod
 kubectl run test --image=nginx --requests=cpu=6,memory=12Gi -n dev
 # Error from server (Forbidden): error when creating "STDIN": pods "test" is forbidden:
@@ -626,10 +632,10 @@ kubectl run test --image=nginx --requests=cpu=6,memory=12Gi -n dev
 # 查看哪些 Pod 占用了配额
 kubectl get pods -n dev -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[0].resources.requests}{"\n"}{end}'
 ```
-
 ### 验证 LimitRange 默认值
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建不设置资源的 Pod
 kubectl run test-no-resources --image=nginx -n dev
 
@@ -638,7 +644,6 @@ kubectl get pod test-no-resources -n dev -o jsonpath='{.spec.containers[0].resou
 # {"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}
 # 注意: 自动应用了 LimitRange 的默认值
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -652,7 +657,8 @@ kubectl get pod test-no-resources -n dev -o jsonpath='{.spec.containers[0].resou
 
 ### 节点资源管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点可分配资源
 kubectl describe node master | grep -A5 "Allocated resources"
 # Allocated resources:
@@ -670,7 +676,6 @@ kubectl get node master -o jsonpath='{.status.capacity}'
 kubectl get node master -o jsonpath='{.status.allocatable}'
 # {"cpu":"7500m","ephemeral-storage":"90Gi","memory":"30Gi","pods":"110"}
 ```
-
 ### kubelet 资源预留配置
 
 ```yaml
@@ -785,7 +790,8 @@ description: "Low priority batch jobs"
 preemptionPolicy: PreemptLowerPriority
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PriorityClass
 kubectl get priorityclasses
 # NAME                      VALUE        GLOBAL-DEFAULT   AGE
@@ -794,7 +800,6 @@ kubectl get priorityclasses
 # high-priority             1000000      false            30d
 # low-priority              100          false            30d
 ```
-
 ## 相关函数
 
 - [集群概览](01-overview.md) — kubeadm init 不创建 ResourceQuota
@@ -812,3 +817,6 @@ kubectl get priorityclasses
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/storage/volumes.md|volumes]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]]
+
+
+<!-- risk-assessed -->

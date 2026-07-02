@@ -31,6 +31,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Node-pressure Eviction
@@ -217,7 +222,8 @@ spec:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点压力条件
 kubectl get nodes -o custom-columns='NAME:.metadata.name,MEM_PRESSURE:.status.conditions[?(@.type=="MemoryPressure")].status,DISK_PRESSURE:.status.conditions[?(@.type=="DiskPressure")].status'
 
@@ -239,7 +245,6 @@ kubectl get pods -o custom-columns='NAME:.metadata.name,QOS:.status.qosClass'
 # 查看节点内存使用详情
 kubectl describe node <node-name> | grep -A 5 "Allocated resources"
 ```
-
 ## 交叉引用
 
 - [API 发起驱逐](./api-initiated-eviction.md) — API 驱逐尊重 PDB，节点压力驱逐不尊重
@@ -254,3 +259,6 @@ kubectl describe node <node-name> | grep -A 5 "Allocated resources"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

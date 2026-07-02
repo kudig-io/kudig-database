@@ -34,6 +34,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 证书格式与编码详解
@@ -331,7 +336,8 @@ SEQUENCE {                        ← Tag: 0x30
 
 ### 3. PEM 与 DER 互转
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # PEM → DER
 openssl x509 -in ca.pem -out ca.der -outform DER
 
@@ -343,7 +349,6 @@ kubectl config view --raw \
   -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | \
   base64 -d > ca-from-kubeconfig.crt
 ```
-
 ---
 
 ## X.509 v3 扩展字段
@@ -448,14 +453,14 @@ func (config *Config) getClientcert() ([]byte, error) {
 
 ### 2. CSR (Certificate Signing Request) 格式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Kubernetes CSR 资源中的请求内容
 kubectl get csr <csr-name> -o jsonpath='{.spec.request}' | base64 -d
 
 # 解析 CSR 内容
 kubectl get csr <csr-name> -o jsonpath='{.spec.request}' | base64 -d | openssl req -noout -text
 ```
-
 **CSR 结构**：
 ```
 Certificate Request:
@@ -559,12 +564,12 @@ kubeadm 证书生成
 
 ### 场景 1：从 kubeconfig 提取 CA 证书
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | \
   base64 -d > /tmp/ca.crt
 openssl x509 -in /tmp/ca.crt -noout -text
 ```
-
 ### 场景 2：将 PEM 证书转换为 Java KeyStore (JKS)
 
 ```bash
@@ -620,11 +625,11 @@ done
 
 ### 示例 2：提取 kubeconfig 中的客户端证书
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | \
   base64 -d | openssl x509 -noout -text
 ```
-
 ### 示例 3：PEM 转 DER 并计算指纹
 
 ```bash
@@ -634,11 +639,11 @@ sha256sum /tmp/ca.der
 
 ### 示例 4：验证 Secret 中 TLS 证书格式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get secret my-tls-secret -o jsonpath='{.data.tls\.crt}' | \
   base64 -d | openssl x509 -noout -text
 ```
-
 ---
 
 ## 常见错误
@@ -674,3 +679,6 @@ kubectl get secret my-tls-secret -o jsonpath='{.data.tls\.crt}' | \
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

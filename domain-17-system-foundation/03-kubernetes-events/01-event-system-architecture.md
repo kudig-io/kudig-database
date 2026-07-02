@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - [[Kubernetes|Kubernetes]] 事件系统架构与 API 参考
@@ -203,6 +208,7 @@ related:                                   # 关联的第二个对象（可选�
 ## 3.2 版本演进时间线
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 v1.0  ─── core/v1 Event 引入（基础事件系统）
   │
 v1.8  ─── events.k8s.io/v1beta1 引入（新事件 API，增加精确时间和聚合）
@@ -215,7 +221,6 @@ v1.26 ─── kubectl events 子命令引入（替代 kubectl get events）
   │
 v1.32 ─── 当前最新稳定版本
 ```
-
 ## 3.3 events.k8s.io/v1 示例
 
 ```yaml
@@ -346,7 +351,8 @@ type: Normal
 
 ## 6.1 kubectl 命令参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 基础查看 ==========
 
 # 查看当前命名空间的所有事件（按时间排序）
@@ -404,10 +410,10 @@ kubectl get events -A -w
 # 实时监控 Warning 事件
 kubectl get events -A -w --field-selector type=Warning
 ```
-
 ## 6.2 API 直接查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 API 查询事件
 kubectl get --raw '/api/v1/namespaces/default/events' | jq '.items | length'
 
@@ -417,7 +423,6 @@ kubectl get --raw '/apis/events.k8s.io/v1/namespaces/default/events' | jq .
 # 统计各 Reason 的事件数量
 kubectl get events -A -o json | jq '[.items[].reason] | group_by(.) | map({reason: .[0], count: length}) | sort_by(-.count)'
 ```
-
 ## 6.3 Prometheus 监控事件
 
 ```yaml
@@ -558,7 +563,8 @@ data:
 
 ## 8.3 常用诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 事件诊断快速脚本
 
@@ -575,7 +581,6 @@ echo "=== 事件总数统计 ==="
 echo "Normal: $(kubectl get events -A --field-selector type=Normal --no-headers 2>/dev/null | wc -l)"
 echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-headers 2>/dev/null | wc -l)"
 ```
-
 ---
 
 <!-- chunk: 相关文档交叉引用 -->## 相关文档交叉引用
@@ -616,3 +621,6 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

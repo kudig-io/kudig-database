@@ -34,6 +34,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第八课：存储 - PV 和 PVC
@@ -213,6 +218,7 @@ spec:
 ### 3.1 查看存储资源
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【查看 PV】
 
 kubectl get persistentvolume
@@ -235,7 +241,6 @@ my-pvc    Bound    my-pv    10Gi       RWO
 
 kubectl describe pod <pod-name> | grep -A10 "Volumes"
 ```
-
 ### 3.2 存储生命周期
 
 ```
@@ -259,6 +264,7 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 ### 4.1 PVC 一直 Pending
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 PVC 详情
@@ -275,10 +281,10 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 4. 如果是云存储，检查 CSI driver 是否正常运行
    kubectl get pods -n kube-system | grep csi
 ```
-
 ### 4.2 Pod 无法挂载 Volume
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 PVC 是否已绑定
@@ -298,7 +304,6 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 5. 检查节点的存储驱动
    不同存储类型需要不同的 CSI 驱动
 ```
-
 ### 4.3 存储空间不足
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -306,6 +311,7 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【排查】
 
 1. 查看节点磁盘使用
@@ -317,7 +323,6 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 3. 扩容 PVC（如果支持）
    kubectl patch pvc <pvc-name> -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
 ```
-
 ---
 
 ## 5. 总结
@@ -326,7 +331,17 @@ PVC 一旦绑定，PV 就被这个 PVC 独占。
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【命令速查】
 
 查看 PV：
@@ -361,10 +376,12 @@ kubectl delete pvc <pvc-name>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
 - [../08-scaling/08-hpa-basics.md](../08-scaling/08-hpa-basics.md) — HPA 自动伸缩
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/06-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
 - [../../domain-04-storage-data/](../../domain-04-storage-data/) — K8s 存储文档
+
+
+<!-- risk-assessed -->

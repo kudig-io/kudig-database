@@ -38,6 +38,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -167,7 +172,8 @@ Liveness Probe（存活探针）失败表明容器内的主进程虽然在运行
 ## 典型事件消息
 
 **HTTP 探针失败**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod myapp-76d8f9c5d-xk2lp
 
 Events:
@@ -177,7 +183,6 @@ Events:
   Warning  Unhealthy  1m (x3 over 2m)    kubelet            Liveness probe failed: Get "http://10.244.1.5:8080/healthz": dial tcp 10.244.1.5:8080: connect: connection refused
   Normal   Killing    30s                kubelet            Container myapp failed liveness probe, will be restarted
 ```
-
 **TCP 探针失败**：
 ```bash
 Warning  Unhealthy  1m    kubelet  Liveness probe failed: dial tcp 10.244.1.5:6379: connect: connection refused
@@ -225,20 +230,21 @@ Warning  Unhealthy  1m    kubelet  Liveness probe failed: gRPC probe failed: rpc
 ## 排查建议
 
 **1. 查看探针配置**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的探针配置
 kubectl get pod myapp-76d8f9c5d-xk2lp -o jsonpath='{.spec.containers[*].livenessProbe}' | jq
 
 # 查看完整的容器配置
 kubectl get pod myapp-76d8f9c5d-xk2lp -o yaml | grep -A 15 livenessProbe
 ```
-
 **2. 检查探针端点/命令**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 对于 HTTP 探针，手动测试端点
 kubectl exec myapp-76d8f9c5d-xk2lp -- wget -O- http://localhost:8080/healthz
 kubectl exec myapp-76d8f9c5d-xk2lp -- curl -v http://localhost:8080/healthz
@@ -249,9 +255,9 @@ kubectl exec myapp-76d8f9c5d-xk2lp -- nc -zv localhost 6379
 # 对于 Exec 探针，手动执行命令
 kubectl exec myapp-76d8f9c5d-xk2lp -- /bin/check-health.sh
 ```
-
 **3. 查看应用日志**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前容器日志
 kubectl logs myapp-76d8f9c5d-xk2lp
 
@@ -261,18 +267,18 @@ kubectl logs myapp-76d8f9c5d-xk2lp --previous
 # 实时跟踪日志
 kubectl logs -f myapp-76d8f9c5d-xk2lp
 ```
-
 **4. 检查资源使用**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器资源使用情况
 kubectl top pod myapp-76d8f9c5d-xk2lp
 
 # 查看资源限制配置
 kubectl get pod myapp-76d8f9c5d-xk2lp -o jsonpath='{.spec.containers[*].resources}'
 ```
-
 **5. 分析重启历史**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 重启次数和状态
 kubectl get pod myapp-76d8f9c5d-xk2lp -o wide
 
@@ -282,7 +288,6 @@ kubectl describe pod myapp-76d8f9c5d-xk2lp | grep -A 50 Events
 # 查看所有容器的重启情况
 kubectl get pods -o custom-columns='NAME:.metadata.name,RESTARTS:.status.containerStatuses[*].restartCount'
 ```
-
 ## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 预防措施 |
@@ -320,7 +325,8 @@ Readiness Probe（就绪探针）失败表明容器虽然在运行，但暂时�
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod backend-api-7d9c8f-zx4mp
 
 Events:
@@ -330,7 +336,6 @@ Events:
   Warning  Unhealthy  2m (x8 over 5m)      kubelet            Readiness probe failed: Get "http://10.244.2.10:8080/ready": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
   Warning  Unhealthy  1m                   kubelet            Readiness probe failed: {"status":"unhealthy","dependencies":{"database":"disconnected","redis":"timeout"}}
 ```
-
 **Exec 探针示例**：
 ```bash
 Warning  Unhealthy  45s   kubelet  Readiness probe failed: command "/app/readiness-check" exited with code 1: output: "Database connection pool exhausted"
@@ -366,7 +371,8 @@ Warning  Unhealthy  45s   kubelet  Readiness probe failed: command "/app/readine
 ## 排查建议
 
 **1. 检查 Service Endpoints**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 的后端 Pod 列表
 kubectl get endpoints myservice
 
@@ -377,9 +383,9 @@ kubectl get endpoints myservice -o yaml
 kubectl describe service myservice
 kubectl get pods -l app=myapp --show-labels
 ```
-
 **2. 对比 Liveness 和 Readiness**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的探针状态
 kubectl get pod backend-api-7d9c8f-zx4mp -o jsonpath='{.status.conditions[?(@.type=="Ready")]}' | jq
 kubectl get pod backend-api-7d9c8f-zx4mp -o jsonpath='{.status.containerStatuses[*].ready}'
@@ -387,13 +393,13 @@ kubectl get pod backend-api-7d9c8f-zx4mp -o jsonpath='{.status.containerStatuses
 # 同时查看 Liveness 和 Readiness 配置
 kubectl get pod backend-api-7d9c8f-zx4mp -o yaml | grep -A 10 -E '(liveness|readiness)Probe'
 ```
-
 **3. 测试依赖连接**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入容器测试数据库连接
 kubectl exec backend-api-7d9c8f-zx4mp -- nc -zv mysql-service 3306
 
@@ -403,20 +409,19 @@ kubectl exec backend-api-7d9c8f-zx4mp -- redis-cli -h redis-service ping
 # 测试 HTTP 依赖服务
 kubectl exec backend-api-7d9c8f-zx4mp -- curl -v http://auth-service/health
 ```
-
 **4. 分析探针响应内容**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动执行 HTTP Readiness 探针
 kubectl exec backend-api-7d9c8f-zx4mp -- curl -i http://localhost:8080/ready
 
 # 查看探针返回的详细信息
 kubectl exec backend-api-7d9c8f-zx4mp -- wget -O- -S http://localhost:8080/ready
 ```
-
 ## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 最佳实践 |
@@ -461,7 +466,8 @@ Startup Probe（启动探针）是 v1.20 正式引入的 GA 功能，专门用�
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod java-app-5d8c9f-kl3mp
 
 Events:
@@ -471,7 +477,6 @@ Events:
   Warning  Unhealthy  4m (x20 over 9m)   kubelet            Startup probe failed: Get "http://10.244.1.15:8080/startup": dial tcp 10.244.1.15:8080: connect: connection refused
   Normal   Killing    3m                 kubelet            Container java-app failed startup probe, will be restarted
 ```
-
 **与 Liveness 失败的区别**：
 ```bash
 # Startup 失败
@@ -512,7 +517,8 @@ Normal   Killing    1m   kubelet  Container app failed liveness probe, will be r
 ## 排查建议
 
 **1. 检查启动时间预算**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Startup Probe 配置
 kubectl get pod java-app-5d8c9f-kl3mp -o jsonpath='{.spec.containers[*].startupProbe}' | jq
 
@@ -520,13 +526,13 @@ kubectl get pod java-app-5d8c9f-kl3mp -o jsonpath='{.spec.containers[*].startupP
 # 公式：initialDelaySeconds + (failureThreshold × periodSeconds)
 # 示例：0 + (30 × 10) = 300 秒（5 分钟）
 ```
-
 **2. 手动测试启动过程**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看容器启动日志
 kubectl logs java-app-5d8c9f-kl3mp
 
@@ -536,22 +542,21 @@ kubectl logs -f java-app-5d8c9f-kl3mp --timestamps
 # 测试启动端点
 kubectl exec java-app-5d8c9f-kl3mp -- curl http://localhost:8080/startup
 ```
-
 **3. 对比配置**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有探针配置
 kubectl get pod java-app-5d8c9f-kl3mp -o yaml | yq '.spec.containers[0] | {startupProbe, livenessProbe, readinessProbe}'
 ```
-
 **4. 检查资源限制**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 资源不足会延长启动时间
 kubectl describe pod java-app-5d8c9f-kl3mp | grep -A 5 "Limits|Requests"
 
 # 查看实际资源使用
 kubectl top pod java-app-5d8c9f-kl3mp
 ```
-
 ## 解决建议
 
 | 常见原因 | 症状特征 | 解决方案 | 配置示例 |
@@ -611,7 +616,8 @@ readinessProbe:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod api-server-6d7c8f-pm9kl
 
 Events:
@@ -620,7 +626,6 @@ Events:
   Warning  ProbeWarning  5m (x10 over 15m)  kubelet            Readiness probe succeeded with warnings: {"status":"degraded","cache":"disconnected","primary_db":"healthy"}
   Warning  ProbeWarning  3m                 kubelet            Liveness probe succeeded with warnings: memory usage at 85%, approaching limit
 ```
-
 ## 影响面说明
 
 - **用户影响**: 
@@ -644,40 +649,40 @@ Events:
 ## 排查建议
 
 **1. 查看警告详情**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看完整事件消息
 kubectl describe pod api-server-6d7c8f-pm9kl | grep ProbeWarning -A 2
 
 # 查看探针输出
 kubectl logs api-server-6d7c8f-pm9kl | grep -i warning
 ```
-
 **2. 手动执行探针**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 获取探针返回的警告信息
 kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:8080/health
 
 # 输出示例：
 # {"status":"pass","warnings":["cache_hit_rate_low","db_connection_pool_75%"]}
 ```
-
 **3. 检查指标**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看资源使用情况
 kubectl top pod api-server-6d7c8f-pm9kl
 
 # 查看应用指标（如果暴露 Prometheus metrics）
 kubectl exec api-server-6d7c8f-pm9kl -- curl http://localhost:9090/metrics | grep -i warning
 ```
-
 ## 解决建议
 
 | 警告类型 | 处理建议 | 预防措施 |
@@ -1536,3 +1541,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

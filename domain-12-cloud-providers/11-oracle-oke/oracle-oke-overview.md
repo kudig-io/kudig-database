@@ -41,6 +41,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Oracle OKE (Oracle Container Engine for [[Kubernetes|Kubernetes]]) 企业级深度解析
@@ -723,7 +728,8 @@ spec:
 ```
 
 **企业级成本分析脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Oracle OKE 企业级成本分析和优化工具
 
@@ -838,13 +844,13 @@ EOF
 echo "企业级成本优化方案已生成: oracle-enterprise-cost-optimization.yaml"
 echo "预计可节省成本: 30-40%"
 ```
-
 ## 企业级故障排查与应急响应
 
 ### 金融级故障诊断流程
 
 **企业级故障诊断脚本**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Oracle OKE 企业级故障诊断工具 - 金融级标准
 
@@ -915,7 +921,6 @@ fi
 echo
 echo "诊断报告已保存到: $REPORT_FILE"
 ```
-
 ### 企业级应急响应预案
 
 **一级问题响应流程 (Critical - 金融级服务中断)**
@@ -1041,3 +1046,6 @@ Oracle OKE凭借其企业级架构设计、金融级安全特性和卓越的性�
 - [[entities/oracle-oke-overview.md|Oracle Container Engine for Kubernetes (OKE)]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

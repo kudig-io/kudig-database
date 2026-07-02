@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 33 - 服务发现与 DNS 配置 ([[Service|Service]] Discovery & DNS)
@@ -78,6 +83,7 @@ cross_refs:
 ## Kubernetes DNS 架构概览
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        Kubernetes DNS 服务发现架构                                   │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -133,7 +139,6 @@ cross_refs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: CoreDNS 配置详解 -->
 ## CoreDNS 配置详解
 
@@ -410,7 +415,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==================== ClusterIP Service ====================
 
 # Service 定义
@@ -484,7 +490,6 @@ dig SRV _http._tcp.nginx.default.svc.cluster.local
 # 结果:
 # _http._tcp.nginx.default.svc.cluster.local. 30 IN SRV 0 100 80 nginx.default.svc.cluster.local.
 ```
-
 <!-- chunk: NodeLocal DNSCache -->
 ## NodeLocal DNSCache
 
@@ -898,7 +903,8 @@ groups:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ==================== 基础检查 ====================
 
 # 检查 CoreDNS Pod 状态
@@ -964,13 +970,13 @@ kubectl exec <pod-name> -- sh -c 'for i in $(seq 1 100); do
   echo "$end - $start" | bc
 done'
 ```
-
 ### DNS 诊断脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # dns-diagnose.sh - Kubernetes DNS 诊断脚本
 
@@ -1011,7 +1017,6 @@ echo ""
 echo "=== 最近 DNS 错误日志 ==="
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=20 | grep -i error
 ```
-
 <!-- chunk: ACK DNS 增强功能 -->
 ## ACK DNS 增强功能
 
@@ -1080,3 +1085,6 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=20 | grep -i error
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+
+<!-- risk-assessed -->

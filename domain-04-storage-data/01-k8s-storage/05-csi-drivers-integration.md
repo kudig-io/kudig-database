@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: csi'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - CSI驱动集成与运维管理
@@ -512,7 +517,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 CSI 驱动注册状态
 kubectl get csidrivers
 
@@ -535,7 +541,6 @@ kubectl exec -n kube-system csi-node-xxxxx -c csi-plugin -- ls -la /csi/csi.sock
 kubectl logs -n kube-system -l app=csi-provisioner -c csi-plugin --tail=100
 kubectl logs -n kube-system -l app=csi-node -c csi-plugin --tail=100
 ```
-
 ### 7.2 常见问题诊断
 
 | 问题 | 可能原因 | 诊断命令 |
@@ -553,7 +558,8 @@ kubectl logs -n kube-system -l app=csi-node -c csi-plugin --tail=100
 
 ### CSI组件健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # csi-health-check.sh
 
@@ -594,7 +600,6 @@ check_csi_health() {
 # 执行健康检查
 check_csi_health
 ```
-
 ### 常见故障处理流程
 
 ```yaml
@@ -799,7 +804,17 @@ parameters:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # csi-performance-benchmark.sh
 
@@ -885,7 +900,6 @@ EOF
 # 执行测试
 run_csi_performance_test
 ```
-
 ---
 <!-- chunk: 监控与告警体系 -->
 ## 监控与告警体系
@@ -1072,7 +1086,17 @@ csi_upgrade_management:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # csi-auto-upgrade.sh
 
@@ -1169,7 +1193,6 @@ EOF
 # 使用示例
 # upgrade_csi_driver "v1.20.0"
 ```
-
 ---
 <!-- chunk: 安全加固措施 -->
 ## 安全加固措施
@@ -1442,3 +1465,6 @@ platform.run_continuous_monitoring()
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

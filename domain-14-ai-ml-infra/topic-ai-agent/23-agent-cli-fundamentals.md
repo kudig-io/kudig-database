@@ -33,6 +33,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent CLI 基础概念与架构模式
@@ -327,7 +332,8 @@ $ echo "添加 retry 逻辑到所有 HTTP 客户端调用" | aider --yes --model
 
 将 Agent CLI 嵌入 Unix 管道，实现与其他工具的组合：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 分析 Git diff 并生成 commit message
 $ git diff --staged | claude -p "根据这些变更生成规范的 commit message"
 
@@ -338,7 +344,6 @@ $ kubectl logs deployment/api-server --tail=200 | claude -p "分析这些日志�
 $ find . -name "*.go" -exec grep -l "deprecated" {} \; | \
     claude -p "列出这些文件中已废弃的 API 调用并建议替代方案"
 ```
-
 ---
 
 ## 5. 核心技术栈
@@ -447,3 +452,6 @@ Agent CLI 是 LLM 能力与开发者工作流深度融合的产物。其核心�
 - 22-agentscope-production-deployment
 - 24-agent-cli-tools-comparison
 - 25-agent-cli-mcp-integration
+
+
+<!-- risk-assessed -->

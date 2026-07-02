@@ -64,6 +64,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)
@@ -182,7 +187,8 @@ veth pair (宿主机侧: caliXXXX / vethXXXX)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Pod网络基本信息检查 ==========
 # 检查Pod IP分配和所在节点
 kubectl get pods -n <namespace> -o wide
@@ -203,7 +209,6 @@ kubectl exec -n <namespace> <pod-name> -- ip route show
 # 检查DNS配置
 kubectl exec -n <namespace> <pod-name> -- cat /etc/resolv.conf
 ```
-
 ### 2.3 同节点 Pod-to-Pod 排查
 
 同节点 Pod 通过 veth pair → bridge/路由表 → veth pair 通信，不经过物理网络。
@@ -211,7 +216,8 @@ kubectl exec -n <namespace> <pod-name> -- cat /etc/resolv.conf
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 确认两个 Pod 在同一节点 ==========
 kubectl get pod <pod-a> <pod-b> -n <namespace> -o wide
 # 确认 NODE 列相同
@@ -237,12 +243,12 @@ bridge fdb show br cni0
 ip route get <pod-b-ip>
 # 应返回类似: <pod-b-ip> dev caliXXXX scope link
 ```
-
 ### 2.4 跨节点 Pod-to-Pod 排查
 
 跨节点 Pod 通信涉及 overlay/underlay 网络，排查需要在两个节点同时进行。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 确认 Pod 在不同节点 ==========
 kubectl get pod <pod-a> <pod-b> -n <namespace> -o wide
 # 记录: Pod A IP, Pod A Node, Pod B IP, Pod B Node
@@ -278,7 +284,6 @@ tcpdump -i <veth-b> -nn host <pod-a-ip> -c 20
 # - Node A eth0 有出包但 Node B eth0 没有 → 底层网络/安全组/防火墙问题
 # - Node B eth0 有入包但 veth-b 没有 → 解封装或 CNI 转发问题
 ```
-
 ### 2.5 Pod-to-Node 排查
 
 Pod 访问自身所在节点或其他节点的 IP。
@@ -287,7 +292,8 @@ Pod 访问自身所在节点或其他节点的 IP。
 > - `sysctl -w`：实时修改内核参数，全局生效
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Pod 访问自身所在节点 ==========
 NODE_IP=$(kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.hostIP}')
 kubectl exec -it <pod-name> -n <namespace> -- ping -c 3 $NODE_IP
@@ -314,7 +320,6 @@ iptables -t filter -L FORWARD -n -v | head -20
 # 3) 检查 ip_forward 是否开启
 sysctl net.ipv4.ip_forward
 ```
-
 ### 2.6 Node-to-Node 排查
 
 节点间通信问题直接影响所有跨节点的 Pod 通信。
@@ -362,7 +367,8 @@ Pod 访问集群外部网络的排查。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 测试外网连通性 ==========
 kubectl exec -it <pod-name> -n <namespace> -- ping -c 3 8.8.8.8
 kubectl exec -it <pod-name> -n <namespace> -- wget -qO- --timeout=5 http://httpbin.org/ip
@@ -386,7 +392,6 @@ kubectl exec -it <pod-name> -- nslookup google.com
 # 若 DNS 失败，检查 CoreDNS 上游 forward 配置
 kubectl get configmap coredns -n kube-system -o yaml | grep -A3 forward
 ```
-
 ---
 
 <!-- chunk: 3. Pod间通信问题排查 (Inter-Pod Communication Issues) -->
@@ -397,7 +402,8 @@ kubectl get configmap coredns -n kube-system -o yaml | grep -A3 forward
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 基础连通性测试 ==========
 # 使用 netshoot 工具箱
 kubectl run netshoot --image=nicolaka/netshoot -n <namespace> -it --rm -- sh
@@ -413,20 +419,19 @@ kubectl exec -n <namespace> <pod-name> -- wget -qO- http://<service-name>.<names
 # ========== 3. DNS解析测试 ==========
 kubectl exec -n <namespace> <pod-name> -- nslookup <service-name>.<namespace>.svc.cluster.local
 ```
-
 ### 3.2 跨Namespace通信测试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试跨Namespace Service访问
 kubectl exec -n <ns-a> <pod-name> -- wget -qO- http://<service-name>.<ns-b>.svc.cluster.local
 
 # 验证网络策略是否阻断跨 Namespace 流量
 kubectl get networkpolicy --all-namespaces -o wide
 ```
-
 ---
 
 <!-- chunk: 4. Service网络问题排查 (Service Network Issues) -->
@@ -434,7 +439,8 @@ kubectl get networkpolicy --all-namespaces -o wide
 
 ### 4.1 ClusterIP服务问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Service配置检查 ==========
 kubectl describe service <service-name> -n <namespace>
 
@@ -462,10 +468,10 @@ ipvsadm -Ln | grep -A5 <service-cluster-ip>
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -i "error|warn"
 ```
-
 ### 4.2 NodePort / LoadBalancer 问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # NodePort 检查
 iptables -t nat -L KUBE-NODEPORTS -n -v | grep <node-port>
 
@@ -477,7 +483,6 @@ kubectl get svc <service-name> -n <namespace> -o jsonpath='{.spec.externalTraffi
 # Local: 只转发到本节点 Pod（源 IP 保留，但可能返回空）
 # Cluster: 可转发到任意节点 Pod（默认）
 ```
-
 ---
 
 <!-- chunk: 5. DNS解析问题排查 (DNS Resolution Issues) -->
@@ -488,7 +493,8 @@ kubectl get svc <service-name> -n <namespace> -o jsonpath='{.spec.externalTraffi
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查CoreDNS Pod状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 
@@ -504,7 +510,6 @@ kubectl exec -n <namespace> <pod-name> -- nslookup kubernetes.default.svc.cluste
 # 测试外部域名解析
 kubectl exec -n <namespace> <pod-name> -- nslookup google.com
 ```
-
 ### 5.2 DNS性能与常见问题
 
 | 问题 | 症状 | 排查 | 解决 |
@@ -524,7 +529,17 @@ kubectl exec -n <namespace> <pod-name> -- nslookup google.com
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看所有网络策略
 kubectl get networkpolicy --all-namespaces -o wide
 
@@ -535,7 +550,6 @@ kubectl get networkpolicy -n <namespace> -o yaml
 # ⚠️ 仅在测试环境执行
 kubectl delete networkpolicy --all -n <namespace>  # ⚠️ 批量删除，波及面大
 ```
-
 ### 6.2 策略调试工具
 
 ```bash
@@ -759,7 +773,8 @@ groups:
 
 ### 10.2 全链路网络健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # network-connectivity-full-check.sh
 
@@ -795,7 +810,6 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns --no-headers | awk '{printf 
 
 echo -e "\n=== 检查完成 ==="
 ```
-
 ---
 
 <!-- chunk: Obsidian 相关文档 -->
@@ -830,3 +844,5 @@ echo -e "\n=== 检查完成 ==="
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -32,6 +32,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -78,7 +83,8 @@ related_topics:
 
 ### 1.1 Pod 状态与 Conditions
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 完整状态
 kubectl get pod <pod-name> -o yaml | grep -A20 "status:"
 
@@ -91,7 +97,6 @@ kubectl get pod <pod-name> -o jsonpath='{.status.conditions[*].type}'
 # - Initialized: Init 容器已完成
 # - ContainersReady: 所有容器已就绪
 ```
-
 ### 1.2 Pod 阶段（Phase）
 
 | Phase | 含义 | 正常 |
@@ -219,7 +224,8 @@ spec:
 
 ### 3.1 查看 Pod 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 列表
 kubectl get pods
 
@@ -238,13 +244,13 @@ kubectl logs <pod-name> -c <container-name>
 # 实时跟踪日志
 kubectl logs -f <pod-name> --tail=100
 ```
-
 ### 3.2 进入容器调试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入容器（如有 shell）
 kubectl exec -it <pod-name> -- /bin/sh
 
@@ -258,10 +264,10 @@ kubectl exec <pod-name> -- ls /app
 kubectl cp <pod-name>:/app/log.txt ./log.txt
 kubectl cp ./config.yaml <pod-name>:/app/config.yaml
 ```
-
 ### 3.3 Pod 扩缩容
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 通过 Deployment 管理（推荐）
 kubectl scale deployment <deploy-name> --replicas=3
 
@@ -272,14 +278,14 @@ kubectl autoscale deployment <deploy-name> --cpu-percent=80 --min=2 --max=10
 kubectl get hpa
 kubectl describe hpa <hpa-name>
 ```
-
 ---
 
 ## 4. Pod 故障排查
 
 ### 4.1 CrashLoopBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看容器状态
 kubectl get pod <pod-name> -o wide
 
@@ -298,10 +304,10 @@ kubectl describe pod <pod-name> | grep -A10 "Events:"
 # - 依赖服务不可达
 # - OOM（内存限制过低）
 ```
-
 ### 4.2 ImagePullBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看拉取错误
 kubectl describe pod <pod-name> | grep -A5 "ImagePull"
 
@@ -320,10 +326,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.imagePullSecrets}'
 # - 没有 ImagePullSecrets（私有仓库）
 # - 网络问题无法拉取
 ```
-
 ### 4.3 Pending（调度失败）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看调度原因
 kubectl describe pod <pod-name> | grep -A20 "Events:"
 
@@ -336,7 +342,6 @@ kubectl describe pod <pod-name> | grep -A20 "Events:"
 kubectl describe nodes | grep -A5 "Allocated resources"
 kubectl top nodes
 ```
-
 ---
 
 ## 5. Pod 资源管理
@@ -382,7 +387,8 @@ spec:
 
 ### 5.3 资源监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 资源使用
 kubectl top pods -n production
 
@@ -395,7 +401,6 @@ kubectl top pods -n production --sort-by=cpu
 # 查看所有命名空间
 kubectl top pods -A
 ```
-
 ---
 
 ## 6. Pod 安全配置
@@ -444,3 +449,6 @@ spec:
 
 ---
 
+
+
+<!-- risk-assessed -->

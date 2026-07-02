@@ -64,6 +64,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -89,7 +94,8 @@ relationships:
 
 按“先控制器状态、再 SLB 后端、最后配置与资源”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Ingress-Nginx 控制器 Pod 状态
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 
@@ -120,7 +126,6 @@ kubectl get deployment ingress-nginx-controller -n kube-system -o yaml | grep -A
 # 7. 使用 ACK 控制台网络诊断或 ack-cli 检查 Ingress 路由
 ack-cli ingress diagnose -n e-commerce --cluster ack-zyy-prod-03
 ```
-
 ## 根因分析
 
 `ack-zyy-prod-03` 集群使用 ACK 托管版默认安装的 **Ingress-Nginx Controller**，以 Deployment 形式运行在 `kube-system` 命名空间，副本数为 2，默认内存限制为 **1Gi**。近期大促预热导致业务 Ingress 数量从 120 个增加到 380 个，SSL 证书数量也同步增加。Nginx 每次 reload 时需要将大量 Ingress 配置加载到内存，控制器实际内存占用峰值超过 1Gi，触发 OOMKilled：
@@ -142,18 +147,19 @@ Exit Code:      137
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时扩容到 4 个副本，并滚动重启
 kubectl scale deployment ingress-nginx-controller -n kube-system --replicas=4
 kubectl rollout restart deployment ingress-nginx-controller -n kube-system
 ```
-
 **第二步：调整控制器内存限制，从 1Gi 提升到 2Gi，并预留足够 request**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment ingress-nginx-controller -n kube-system --type='merge' -p '{
   "spec": {
     "template": {
@@ -172,21 +178,21 @@ kubectl patch deployment ingress-nginx-controller -n kube-system --type='merge' 
   }
 }'
 ```
-
 **第三步：为控制器启用 HPA，根据 CPU/内存自动伸缩**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl autoscale deployment ingress-nginx-controller -n kube-system \
   --min=4 --max=8 --cpu-percent=70 \
   --name=ingress-nginx-controller-hpa
 ```
-
 **第四步：清理无效或过期 Ingress 规则，降低 nginx 配置规模**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 找出 30 天内没有 Endpoint 的 Ingress
 kubectl get ingress -A -o json | jq -r '
   .items[] | select(.status.loadBalancer.ingress | length == 0) |
@@ -196,17 +202,17 @@ kubectl get ingress -A -o json | jq -r '
 # 在业务侧确认后删除废弃规则（示例）
 # kubectl delete ingress old-campaign-2025 -n e-commerce
 ```
-
 **第五步：等待滚动更新完成并观察内存使用**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment ingress-nginx-controller -n kube-system --timeout=300s
 kubectl top pod -n kube-system -l app.kubernetes.io/name=ingress-nginx
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 控制器 Pod 全部 Running 且 Ready
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 
@@ -227,7 +233,6 @@ kubectl get ingress -n e-commerce -o json | jq '.items[].status.loadBalancer'
 # 6. HPA 已生效
 kubectl get hpa ingress-nginx-controller-hpa -n kube-system
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次业务入口 404/502 的根因是 **Ingress-Nginx 控制器 Pod 因内存限制不足触发 OOM 反复重启**。大促预热期间 Ingress 数量与 SSL 配置增加，控制器内存峰值超过默认 1Gi Limit，导致 Readiness 探针失败、SLB 后端被摘除。我们已完成以下处置：
@@ -280,3 +285,6 @@ kubectl get hpa ingress-nginx-controller-hpa -n kube-system
 - Ingress
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

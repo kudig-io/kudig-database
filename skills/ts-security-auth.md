@@ -31,6 +31,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 安全认证故障排查
@@ -57,7 +62,8 @@ prerequisites:
 
 #### 2.1 认证问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认当前身份
 kubectl auth whoami
 # 或者
@@ -81,7 +87,6 @@ curl -k -H "Authorization: Bearer $TOKEN" https://<api-server>:6443/api/v1/names
 # 步骤 5：检查 API Server 认证配置
 cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -E "authentication|authorization"
 ```
-
 ---
 
 ### 02 Certificate Troubleshooting
@@ -246,3 +251,6 @@ Pod 安全问题
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

@@ -68,6 +68,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -96,7 +101,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 Ingress Controller Pod 状态与重启次数
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
@@ -129,7 +135,6 @@ kubectl exec -n kube-system -it $(kubectl get pod -n kube-system -l app.kubernet
 # 9. 检查 Controller 资源使用是否触发了 OOM
 kubectl top pod -n kube-system -l app.kubernetes.io/name=ingress-nginx
 ```
-
 ## 根因分析
 
 通过日志与现场状态确认，Nginx Ingress Controller 的 `nginx-ingress-controller` 容器持续触发 **OOMKilled**，并伴随配置模板渲染异常：
@@ -150,37 +155,38 @@ kubectl top pod -n kube-system -l app.kubernetes.io/name=ingress-nginx
 
 **第一步：临时扩容 Ingress Controller 副本数，缓解入口压力**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment ingress-nginx-controller -n kube-system --replicas=5
 ```
-
 **第二步：调整 Ingress Controller 内存 Limit 至 4Gi，避免 OOM**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment ingress-nginx-controller -n kube-system --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/limits/memory", "value": "4Gi"},
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/memory", "value": "2Gi"}
 ]'
 ```
-
 **第三步：移除导致配置渲染失败的非法 Lua 注解**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate ingress shop-web-ingress -n shop-service nginx.ingress.kubernetes.io/configuration-snippet-
 ```
-
 若业务确实需要自定义片段，需先修正语法并重新应用：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -205,18 +211,17 @@ spec:
               number: 80
 EOF
 ```
-
 **第四步：修正 Service 会话亲和性与后端健康检查**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch svc order-api -n order-service --type='json' -p='[
   {"op": "replace", "path": "/spec/sessionAffinity", "value": "None"}
 ]'
 ```
-
 同时要求业务方将 `/healthz` 探针从 TCP 改为 HTTP，并在 Deployment 中显式声明：
 
 ```yaml
@@ -238,17 +243,18 @@ readinessProbe:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment ingress-nginx-controller -n kube-system
 kubectl rollout status deployment ingress-nginx-controller -n kube-system --timeout=300s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Ingress Controller Pod 全部 Running 且重启次数不再增长
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
@@ -271,7 +277,6 @@ kubectl get pod -n shop-service -l app=shop-web
 kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --since=5m | grep -c " 50[0-9] "
 
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次业务访问 404/502 的根因是 **Nginx Ingress Controller 内存不足被 OOM 重启**，叠加一条 **Ingress 注解语法错误导致 Nginx 配置重载异常**，以及 **后端 Service 会话亲和性与健康检查配置不一致**。我们已完成以下处置：
@@ -318,3 +323,5 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --since=5m |
 - Pod Pending：资源不足与 Taint 不匹配
 
 ```
+
+<!-- risk-assessed -->

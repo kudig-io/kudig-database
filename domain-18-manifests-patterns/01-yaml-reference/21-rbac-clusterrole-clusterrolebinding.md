@@ -53,6 +53,11 @@ cross_refs:
   label: '故障树: rbac'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
@@ -469,13 +474,13 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 授予用户 cluster-admin 权限
 kubectl create clusterrolebinding admin-binding \
   --clusterrole=cluster-admin \
   --user=admin@example.com
 ```
-
 ---
 
 ## 3.2 admin (Namespace 管理员)
@@ -533,14 +538,14 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 授予用户 namespace 管理员权限
 kubectl create rolebinding namespace-admin \
   --clusterrole=admin \
   --user=alice@example.com \
   --namespace=production
 ```
-
 ---
 
 ## 3.3 edit (编辑者)
@@ -607,14 +612,14 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 授予用户编辑权限
 kubectl create rolebinding developer \
   --clusterrole=edit \
   --user=dev@example.com \
   --namespace=dev
 ```
-
 ---
 
 ## 3.4 view (查看者)
@@ -674,14 +679,14 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 授予用户只读权限
 kubectl create rolebinding readonly-user \
   --clusterrole=view \
   --user=viewer@example.com \
   --namespace=production
 ```
-
 ---
 
 ## 3.5 内建 ClusterRole 对比表
@@ -830,7 +835,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查用户是否可以执行操作
 kubectl auth can-i get pods -n default --as alice@example.com
 # yes
@@ -854,7 +860,6 @@ spec:
     - developers
 EOF
 ```
-
 ---
 
 ## 4.2 SelfSubjectAccessReview (检查自己的权限)
@@ -884,7 +889,8 @@ status:
 
 **使用 kubectl 检查自己的权限**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查当前用户是否可以执行操作
 kubectl auth can-i create deployments -n production
 # no
@@ -903,7 +909,6 @@ kubectl auth can-i --list -n default
 # services                                        []                  []               [get list watch]
 # configmaps                                      []                  [app-config]     [get]
 ```
-
 ---
 
 ## 4.3 SelfSubjectRulesReview (列出自己的所有权限)
@@ -970,14 +975,14 @@ status:
 
 **使用 kubectl 列出自己的权限**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出当前用户在 default namespace 的所有权限
 kubectl auth can-i --list -n default
 
 # 列出集群级别的权限
 kubectl auth can-i --list
 ```
-
 ---
 
 ## 4.4 LocalSubjectAccessReview (Namespace 范围的权限检查)
@@ -1423,7 +1428,8 @@ roleRef:
 
 **权限验证**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 平台管理员: 可以做任何事
 kubectl auth can-i "*" "*" --as superadmin@example.com
 # yes
@@ -1446,7 +1452,6 @@ kubectl auth can-i get secrets --all-namespaces --as auditor@example.com
 kubectl auth can-i delete pods --all-namespaces --as auditor@example.com
 # no
 ```
-
 ---
 
 ## 5.3 案例 3: CI/CD 系统跨 Namespace 部署
@@ -1700,7 +1705,8 @@ rules:
 
 **验证**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看内建 view ClusterRole 的 rules (应该包含 Application)
 kubectl get clusterrole view -o yaml
 
@@ -1720,7 +1726,6 @@ kubectl get clusterrole view -o yaml
 kubectl auth can-i get applications -n default --as viewer@example.com
 # yes (假设 viewer@example.com 有 view ClusterRole)
 ```
-
 ---
 
 ## 5.5 案例 5: 节点维护权限 (Drain/Cordon)
@@ -1843,7 +1848,17 @@ automountServiceAccountToken: true
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # SRE 可以 cordon 节点 (标记为不可调度)
 kubectl cordon node-1 --as sre@example.com
 # node/node-1 cordoned
@@ -1860,7 +1875,6 @@ kubectl uncordon node-1 --as sre@example.com
 kubectl delete node node-1 --as sre@example.com
 # Error from server (Forbidden): nodes "node-1" is forbidden
 ```
-
 ---
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
@@ -2001,7 +2015,8 @@ roleRef:
 
 **检查是否有用户可以修改 RBAC**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找可以创建 ClusterRoleBindings 的用户
 kubectl get clusterrolebindings -o json | \
   jq -r '.items[] | select(.roleRef.name=="cluster-admin") | 
@@ -2011,7 +2026,6 @@ kubectl get clusterrolebindings -o json | \
 kubectl auth can-i create clusterrolebindings --as alice@example.com
 kubectl auth can-i update clusterroles --as system:serviceaccount:default:myapp-sa
 ```
-
 ## 7.2 ClusterRole 聚合不生效
 
 **症状**: 使用 `aggregationRule` 的 ClusterRole 的 rules 字段为空。
@@ -2022,7 +2036,17 @@ kubectl auth can-i update clusterroles --as system:serviceaccount:default:myapp-
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查父 ClusterRole
 kubectl get clusterrole monitoring-aggregate -o yaml
 
@@ -2039,7 +2063,6 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep -i "clus
 kubectl delete clusterrole monitoring-aggregate
 kubectl apply -f monitoring-aggregate.yaml
 ```
-
 ## 7.3 非资源 URL 访问被拒绝
 
 **症状**:
@@ -2053,7 +2076,8 @@ curl -k https://kubernetes.default.svc/healthz
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查是否有 ClusterRole 授权 /healthz
 kubectl get clusterroles -o json | \
   jq -r '.items[] | select(.rules[]?.nonResourceURLs[]? | contains("/healthz")) | .metadata.name'
@@ -2076,7 +2100,6 @@ spec:
   user: "system:anonymous"
 EOF
 ```
-
 ---
 
 <!-- chunk: 8. 参考资料 -->## 8. 参考资料
@@ -2121,3 +2144,6 @@ EOF
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

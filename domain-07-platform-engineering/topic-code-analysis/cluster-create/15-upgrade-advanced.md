@@ -43,6 +43,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 集群升级进阶滚动升级与回滚策略
@@ -614,7 +619,17 @@ func RunNode(flags *NodeFlags) error {
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 步骤 1: 升级第一个 control-plane 节点
     → kubeadm upgrade apply v1.29.0
     → 验证该节点所有组件正常
@@ -642,7 +657,6 @@ func RunNode(flags *NodeFlags) error {
     → kubectl get nodes (所有节点新版本)
     → kubectl get pods -A (所有 Pod Running)
 ```
-
 ## 使用场景
 
 ### 场景 1: 标准 minor 版本升级 (1.28 → 1.29)
@@ -650,7 +664,17 @@ func RunNode(flags *NodeFlags) error {
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查升级计划
 kubeadm upgrade plan
 # 输出:
@@ -684,14 +708,23 @@ kubectl get nodes
 # NAME      STATUS   ROLES           AGE   VERSION
 # master    Ready    control-plane   30d   v1.29.0
 ```
-
 ### 场景 2: HA 集群滚动升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 第一个 control-plane 节点
 kubeadm upgrade apply v1.29.0 --certificate-key=<key>
 
@@ -708,14 +741,23 @@ kubectl uncordon worker-1
 # 验证所有节点版本
 kubectl get nodes -o wide
 ```
-
 ### 场景 3: 升级失败回滚
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查找备份目录
 ls -la /etc/kubernetes/tmp/
 
@@ -741,7 +783,6 @@ systemctl restart kubelet
 # 6. 等待组件恢复
 kubectl get pods -n kube-system
 ```
-
 ### 场景 4: 使用配置文件升级
 
 ```yaml
@@ -850,7 +891,17 @@ data:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 升级前检查 ===
 
 # 当前版本
@@ -958,7 +1009,6 @@ kubectl get pods -A
 # kube-system   kube-proxy-abcde                  1/1     Running   10m
 # kube-system   kube-scheduler-master             1/1     Running   10m
 ```
-
 ### 查看升级差异
 
 ```bash
@@ -1008,3 +1058,6 @@ kubeadm upgrade diff v1.29.0
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

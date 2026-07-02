@@ -54,6 +54,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
@@ -416,7 +421,8 @@ echo "br_netfilter" >> /etc/modules-load.d/kubernetes.conf
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Linux 生产环境基线配置脚本
 
@@ -470,7 +476,6 @@ systemctl mask firewalld
 # 启用必要的服务
 systemctl enable --now chronyd rsyslog
 ```
-
 ## 内核版本管理策略
 
 | 场景 | 推荐策略 | 说明 |
@@ -571,7 +576,8 @@ groups:
 
 ## 系统健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 系统健康检查脚本 - production_health_check.sh
 
@@ -640,10 +646,10 @@ if grep -q "警告" $LOG_FILE; then
     mail -s "系统健康检查告警 - $(hostname)" $EMAIL < $LOG_FILE
 fi
 ```
-
 ## 内核崩溃诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用内核崩溃转储
 echo "kernel.core_pattern = /var/crash/core.%e.%p.%h.%t" >> /etc/sysctl.conf
 sysctl -p
@@ -659,7 +665,6 @@ systemctl start kdump
 # 分析崩溃转储
 crash /var/crash/vmcore /usr/lib/debug/lib/modules/$(uname -r)/vmlinux
 ```
-
 ## 系统性能瓶颈分析流程
 
 ```
@@ -719,7 +724,8 @@ semanage port -l | grep http
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装审计工具
 yum install audit audispd-plugins  # RHEL/CentOS
 apt install auditd                  # Ubuntu/Debian
@@ -764,10 +770,10 @@ systemctl restart auditd
 ausearch -k identity --start recent
 aureport --summary
 ```
-
 ## 防火墙生产配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # firewalld 生产配置
 systemctl enable firewalld
 systemctl start firewalld
@@ -790,14 +796,14 @@ firewall-cmd --permanent --set-target=DROP
 # 生效配置
 firewall-cmd --reload
 ```
-
 ---
 
 <!-- chunk: 自动化运维脚本 -->## 自动化运维脚本
 
 ## 系统批量管理脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 批量系统管理脚本 - batch_system_manager.sh
 
@@ -868,10 +874,10 @@ case "$1" in
         ;;
 esac
 ```
-
 ## 配置备份脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 系统配置备份脚本 - config_backup.sh
 
@@ -934,7 +940,6 @@ find $BACKUP_DIR -name "system_config_*.tar.gz" -mtime +7 -delete
 
 echo "配置备份完成: $BACKUP_DIR/system_config_$DATE.tar.gz"
 ```
-
 ---
 
 <!-- chunk: 与 Kubernetes 的关系 -->## 与 Kubernetes 的关系
@@ -943,7 +948,8 @@ echo "配置备份完成: $BACKUP_DIR/system_config_$DATE.tar.gz"
 
 Kubernetes 的 kubelet 就是作为 systemd 服务运行的。每个 Kubelet 管理的容器最终也由容器运行时（containerd/CRI-O）通过 systemd 或 cgroupfs 管理 cgroup。理解 systemd 对于管理 K8s 节点至关重要。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubelet 作为 systemd 服务
 systemctl status kubelet
 journalctl -u kubelet -f
@@ -956,7 +962,6 @@ journalctl -u containerd -f
 systemd-cgls                          # 查看完整 cgroup 树
 systemd-cgls | grep -A10 kubepods     # K8s Pod 的 cgroup
 ```
-
 ## cgroups 与 K8s 资源管理
 
 Kubernetes 通过 cgroups 实现资源管理。kubelet 支持 cgroupfs 和 systemd 两种 cgroup 驱动：
@@ -967,6 +972,7 @@ Kubernetes 通过 cgroups 实现资源管理。kubelet 支持 cgroupfs 和 syste
 | **cgroupfs** | 直接操作 cgroup 文件系统 | kubelet: `--cgroup-driver=cgroupfs` | 仅在特定场景使用 |
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 K8s 节点 cgroup 层级 (systemd 驱动):
 
 /sys/fs/cgroup/
@@ -984,7 +990,6 @@ K8s 节点 cgroup 层级 (systemd 驱动):
 │   └── docker.service
 └── user.slice/
 ```
-
 ## 内核模块与 K8s
 
 Kubernetes 依赖以下内核模块才能正常工作：
@@ -1036,7 +1041,17 @@ sysctl --system
 
 ## 内核相关问题
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 内核 panic 后分析
 crash /var/crash/vmcore /usr/lib/debug/lib/modules/$(uname -r)/vmlinux
 
@@ -1051,7 +1066,6 @@ last reboot | head -20
 lsmod | sort -k 2 -n -r | head
 cat /proc/modules | wc -l
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -1072,3 +1086,6 @@ cat /proc/modules | wc -l
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

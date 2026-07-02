@@ -28,6 +28,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Escalation Template
@@ -51,13 +56,13 @@ prerequisites:
 按时间顺序列出已执行的每个诊断步骤及每步输出摘要：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 {timestamp} - D1.1: kubectl get nodes -o wide → {output_summary}
 {timestamp} - D1.2: kubectl describe node {node_name} → {conditions_summary}
 {timestamp} - D1.3: kubectl get events → {events_summary}
 ...
 {timestamp} - D2.7: nc -zv {apiserver_ip} 6443 → {connectivity_result}
 ```
-
 ### 3.2 已排除的根因 / Excluded Root Causes
 
 列出已通过诊断排除的根因及排除依据：
@@ -91,3 +96,6 @@ prerequisites:
 - [[skills/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

@@ -43,6 +43,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03b - Terway CRD 深度操作指南 (CRD Operations Deep Dive)
@@ -110,10 +115,10 @@ prerequisites:
 | **ReservedIP** | `network.alibabacloud.com/v1beta1` | Cluster | 固定 IP 保留资源, 支持 IP 保留/回收/重新分配 |
 | **IPInstance** | `network.alibabacloud.com/v1beta1` | Cluster | IP 实例管理, 跟踪所有已分配的 IP 地址 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get crd | grep -E 'network.alibabacloud|terway'
 ```
-
 ```
 ipinstances.network.alibabacloud.com           2025-01-15T08:30:00Z
 nodenetworkings.network.alibabacloud.com       2025-01-15T08:30:00Z
@@ -288,7 +293,8 @@ spec:
 
 ### 3.3 Read
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get podenis -A
 
 kubectl get podenis -n production
@@ -313,10 +319,10 @@ kubectl get podenis -A -o yaml > podenis-backup.yaml
 
 kubectl describe podeni <podeni-name> -n <namespace>
 ```
-
 #### 状态监控脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'SCRIPT' > check-podeni-status.sh
 #!/bin/bash
 echo "=== PodENI Status Report ==="
@@ -343,7 +349,6 @@ SCRIPT
 chmod +x check-podeni-status.sh
 ./check-podeni-status.sh
 ```
-
 ### 3.4 Update
 
 #### 更新安全组
@@ -352,7 +357,17 @@ chmod +x check-podeni-status.sh
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit podeni <podeni-name> -n <namespace>
 
 kubectl patch podeni <podeni-name> -n <namespace> --type='json' -p='[
@@ -377,13 +392,13 @@ spec:
 EOF
 kubectl apply -f update-podeni.yaml
 ```
-
 #### 更新 vSwitch
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
 {
   "spec": {
@@ -393,13 +408,13 @@ kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
   }
 }'
 ```
-
 #### 通过 Annotation 更新 Pod 网络配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate pod <pod-name> -n <namespace> \
   k8s.aliyun.com/security-group="sg-xxxxx" \
   --overwrite
@@ -408,14 +423,23 @@ kubectl annotate pod <pod-name> -n <namespace> \
   k8s.aliyun.com/pod-ip-fixed- \
   --overwrite
 ```
-
 ### 3.5 Delete
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete podeni <podeni-name> -n <namespace>
 
 kubectl delete podenis -n <namespace> --all  # ⚠️ 批量删除，波及面大
@@ -430,13 +454,13 @@ kubectl get podenis -A -o json | \
   "-n \(.metadata.namespace) \(.metadata.name)"' | \
   xargs -r kubectl delete podeni
 ```
-
 #### Finalizer 清理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch podeni <podeni-name> -n <namespace> \
   -p '{"metadata":{"finalizers":[]}}' --type=merge
 
@@ -447,7 +471,6 @@ for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}'); do
   done
 done
 ```
-
 ---
 
 ## 4. NodeNetworking CRUD 操作
@@ -523,7 +546,8 @@ spec:
 
 ### 4.3 Read
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodenetworkings
 
 kubectl get nodenetworking <node-name> -o yaml
@@ -537,10 +561,10 @@ ENI_COUNT:.status.eniCount,\
 AVAILABLE_IP:.status.availableIPs,\
 ALLOCATED_IP:.status.allocatedIPs
 ```
-
 #### 节点 IP 利用率监控脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'SCRIPT' > check-node-networking.sh
 #!/bin/bash
 echo "=== Node Networking Status Report ==="
@@ -572,13 +596,13 @@ SCRIPT
 chmod +x check-node-networking.sh
 ./check-node-networking.sh
 ```
-
 ### 4.4 Update
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch nodenetworking <node-name> --type='merge' -p='
 {
   "spec": {
@@ -615,19 +639,27 @@ kubectl patch nodenetworking <node-name> --type='merge' -p='
   }
 }'
 ```
-
 ### 4.5 Delete
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete nodenetworking <node-name>
 
 kubectl delete nodenetworkings --all  # ⚠️ 批量删除，波及面大
 ```
-
 ---
 
 ## 5. PodNetworking CRUD 操作
@@ -733,7 +765,8 @@ spec:
 
 ### 5.3 Read
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get podnetworkings
 
 kubectl get podnetworking <name> -o yaml
@@ -742,13 +775,22 @@ kubectl get pods -l app=api-server,tier=backend
 
 kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/allocated-podnetworking}'
 ```
-
 ### 5.4 Update
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl patch podnetworking <name> --type='json' -p='[
   {
     "op": "add",
@@ -768,18 +810,17 @@ kubectl patch podnetworking <name> --type='merge' -p='
 
 kubectl edit podnetworking <name>
 ```
-
 ### 5.5 Delete
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete podnetworking <name>
 
 kubectl delete podnetworking <name1> <name2>
 ```
-
 ---
 
 ## 6. ReservedIP CRUD 操作
@@ -878,17 +919,18 @@ spec:
 
 ### 6.3 Read
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get reservedips -A
 
 kubectl get reservedip <name> -n <namespace> -o yaml
 
 kubectl get reservedips -l app=mysql -A
 ```
-
 #### 孤儿检测与过期监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'SCRIPT' > check-reserved-ips.sh
 #!/bin/bash
 echo "=== ReservedIP Status Report ==="
@@ -915,13 +957,13 @@ SCRIPT
 chmod +x check-reserved-ips.sh
 ./check-reserved-ips.sh
 ```
-
 ### 6.4 Update
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
 {
   "spec": {
@@ -940,13 +982,22 @@ kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
   }
 }'
 ```
-
 ### 6.5 Delete
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete reservedip <name> -n <namespace>
 
 kubectl get reservedips -A -o json | \
@@ -956,7 +1007,6 @@ kubectl get reservedips -A -o json | \
 
 kubectl delete reservedip <name> -n <namespace> --force
 ```
-
 ---
 
 ## 7. IPInstance CRUD 操作
@@ -1009,17 +1059,18 @@ spec:
 
 ### 7.2 Read
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipinstances -A
 
 kubectl get ipinstance <name> -o yaml
 
 kubectl get ipinstances -A --field-selector spec.nodeName=<node-name>
 ```
-
 #### IP 分布分析脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'SCRIPT' > analyze-ip-usage.sh
 #!/bin/bash
 echo "=== IP Instance Usage Analysis ==="
@@ -1052,7 +1103,6 @@ SCRIPT
 chmod +x analyze-ip-usage.sh
 ./analyze-ip-usage.sh
 ```
-
 ---
 
 ## 8. ConfigMap 配置管理
@@ -1105,32 +1155,33 @@ data:
 
 ### 8.3 ConfigMap CRUD
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm eni-config -n kube-system -o yaml
 
 kubectl get cm terway-config -n kube-system -o yaml
 
 kubectl get cm eni-config -n kube-system -o jsonpath='{.data.eni_conf}' | jq .
 ```
-
 #### 用 jq 添加 vSwitch
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get cm eni-config -n kube-system -o json | \
   jq '.data.eni_conf = (.data.eni_conf | fromjson |
   .vswitches["cn-hangzhou-h"] += ["vsw-new-xxx"] | tojson)' | \
   kubectl apply -f -
 ```
-
 #### 用 jq 更新 IP 池大小
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cm eni-config -n kube-system --type='json' -p='[
   {
     "op": "replace",
@@ -1139,26 +1190,35 @@ kubectl patch cm eni-config -n kube-system --type='json' -p='[
   }
 ]'
 ```
-
 ### 8.4 配置重载流程
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit cm eni-config -n kube-system
 
 kubectl delete pods -n kube-system -l app=terway-eniip
 
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=50 | grep -i config
 ```
-
 ---
 
 ## 9. 综合诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'SCRIPT' > terway-diagnose.sh
 #!/bin/bash
 
@@ -1213,7 +1273,6 @@ SCRIPT
 chmod +x terway-diagnose.sh
 ./terway-diagnose.sh
 ```
-
 **诊断步骤说明**:
 
 | 步骤 | 检查项 | 异常判断标准 |
@@ -1235,7 +1294,8 @@ chmod +x terway-diagnose.sh
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get podenis -A                           # 列出所有
 kubectl get podeni <name> -n <ns> -o yaml        # 查看详情
 kubectl delete podeni <name> -n <ns>             # 删除单个
@@ -1243,33 +1303,32 @@ kubectl delete podenis -l app=deprecated-app -A   # 按 Label 删除
 kubectl patch podeni <name> -n <ns> -p '...'     # 更新
 kubectl patch podeni <name> -n <ns> -p '{"metadata":{"finalizers":[]}}' --type=merge  # 清理 Finalizer
 ```
-
 ### NodeNetworking
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get nodenetworkings                      # 列出所有
 kubectl get nodenetworking <name> -o yaml        # 查看详情
 kubectl patch nodenetworking <name> -p '...'     # 更新 ENI/IPAM 配置
 kubectl delete nodenetworking <name>             # 删除
 ```
-
 ### PodNetworking
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get podnetworkings                       # 列出所有
 kubectl get podnetworking <name> -o yaml         # 查看详情
 kubectl patch podnetworking <name> -p '...'      # 更新 vSwitch/安全组
 kubectl delete podnetworking <name>              # 删除
 ```
-
 ### ReservedIP
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1277,41 +1336,59 @@ kubectl delete podnetworking <name>              # 删除
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl get reservedips -A                       # 列出所有固定 IP
 kubectl apply -f reservedip.yaml                 # 创建
 kubectl patch reservedip <name> -n <ns> -p '...' # 更新保留时长/关联
 kubectl delete reservedip <name> -n <ns>         # 删除
 kubectl delete reservedip <name> -n <ns> --force # 强制删除
 ```
-
 ### IPInstance
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipinstances -A                       # 列出所有 IP 实例
 kubectl get ipinstances -A --field-selector spec.nodeName=<node>  # 按节点筛选
 ```
-
 ### ConfigMap
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl get cm eni-config -n kube-system -o yaml # 查看 ENI 配置
 kubectl get cm terway-config -n kube-system -o yaml # 查看 Terway 配置
 kubectl edit cm eni-config -n kube-system        # 编辑配置
 kubectl delete pods -n kube-system -l app=terway-eniip  # 重载配置
 ```
-
 ### 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=200  # 查看日志
 kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 ```
-
 ### Annotation 速查
 
 | Annotation | 值 | 说明 |
@@ -1347,3 +1424,6 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

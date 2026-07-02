@@ -33,6 +33,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Karpenter 自动扩缩容
@@ -329,7 +334,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 NodePool 状态
 kubectl get nodepools
 
@@ -358,7 +364,6 @@ kubectl delete nodeclaim <nodeclaim-name>
 kubectl port-forward -n kube-system svc/karpenter 8080:8080
 curl localhost:8080/metrics | grep karpenter_nodes
 ```
-
 ## 交叉引用
 
 - [资源装箱](./resource-bin-packing.md) — 调度器侧的装箱策略与 Karpenter 整合互补
@@ -378,3 +383,6 @@ curl localhost:8080/metrics | grep karpenter_nodes
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -76,6 +76,11 @@ cross_refs:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
@@ -120,6 +125,7 @@ agent_execution_mode: L2-semi-auto
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -155,7 +161,6 @@ agent_execution_mode: L2-semi-auto
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -197,7 +202,8 @@ agent_execution_mode: L2-semi-auto
 ### 3.1 影响评估
 
 **Step T1**: 检查集群整体健康状态和版本分布
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 API Server 可用性
 kubectl get --raw /healthz
 kubectl get --raw /healthz/etcd
@@ -225,7 +231,8 @@ kubectl get nodes --no-headers | awk '
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 kube-system 中核心 Pod 状态
 kubectl get pods -n kube-system -o jsonpath='{
   range .items[*]
@@ -244,14 +251,14 @@ etcdctl endpoint health --cluster
 > **判断规则**: 如果 etcd 集群不健康或核心组件 CrashLoopBackOff → 升级为 P0
 
 **Step T3**: 检查升级进度和失败点
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看最近升级相关事件
 kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=NodeNotReady --sort-by='.lastTimestamp' | tail -20
 
 # 查看 kubeadm 日志（如在控制平面节点上）
 # journalctl -u kubelet -n 200 | grep -i "upgrade|version|deprecated"
 ```
-
 ### 3.2 严重性分级
 
 | 条件 | 级别 | 说明 |
@@ -889,7 +896,8 @@ kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=Nod
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 验证控制平面健康
 kubectl get --raw /healthz
 kubectl get --raw /healthz/etcd
@@ -920,7 +928,6 @@ kubectl wait --for=condition=Ready pod/upgrade-verify --timeout=60s
 kubectl delete pod upgrade-verify
 # 预期: Pod 成功创建并运行
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1130,3 +1137,5 @@ receivers:
 - [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|22-daemonset-failure]]
 
 ```
+
+<!-- risk-assessed -->

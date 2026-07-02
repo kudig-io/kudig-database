@@ -47,6 +47,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - [[Kubernetes|Kubernetes]] 生产环境运维最佳实践字典
@@ -459,7 +464,8 @@ spec:
 - **使用 PodDisruptionBudget**: 配合 Deployment 使用 PDB，确保滚动更新和节点维护时有最小可用副本数
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 为什么没有被调度
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 Events
 
@@ -472,7 +478,6 @@ kubectl top pods -n <namespace> --sort-by=memory
 # 检查 NetworkPolicy 是否生效
 kubectl get networkpolicy -n <namespace> -o yaml
 ```
-
 ---
 
 ## 2. 高可用架构模式
@@ -498,6 +503,7 @@ kubectl get networkpolicy -n <namespace> -o yaml
 
 **架构关系**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 外部 LB（VIP）
   ├── API Server #1（Master-1，AZ-a）
   ├── API Server #2（Master-2，AZ-b）
@@ -510,7 +516,6 @@ Worker 节点（跨 AZ 分布）
   ├── AZ-b: App Pod #3, #4
   └── AZ-c: App Pod #5, #6
 ```
-
 **关键参数**:
 | 参数 | 作用 | 推荐值 |
 |-----|------|--------|
@@ -703,7 +708,8 @@ spec:
 - **etcd 备份**: 即使有 HA，也要定期备份 etcd，因为数据损坏可能同步到所有节点
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 的拓扑分布情况
 kubectl get pods -l app=my-app -o wide
 
@@ -716,7 +722,6 @@ kubectl get pdb -n <namespace>
 # 查看 etcd 集群健康状态
 etcdctl --endpoints=https://127.0.0.1:2379 --cert=... --key=... --cacert=... endpoint health
 ```
-
 ---
 
 ## 3. 安全加固指南
@@ -952,7 +957,8 @@ roleRef:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 的安全上下文
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}' | jq .
 
@@ -965,7 +971,6 @@ kubectl get rolebindings,clusterrolebindings -A | grep <user-or-sa>
 # 测试网络策略是否生效
 kubectl exec -it test-pod -- curl -v <target-service>:8080
 ```
-
 ---
 
 ## 4. 监控告警最佳实践
@@ -1182,7 +1187,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Prometheus 是否正常抓取目标
 kubectl port-forward -n monitoring svc/prometheus 9090:9090
 # 浏览器访问 http://localhost:9090/targets
@@ -1193,7 +1199,6 @@ kubectl exec -n monitoring prometheus-0 -- promtool query instant http://localho
 # 检查 Alertmanager 路由配置
 kubectl get secret -n monitoring alertmanager-config -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 ```
-
 ---
 
 ## 5. 灾备恢复方案
@@ -1228,7 +1233,8 @@ kubectl get secret -n monitoring alertmanager-config -o jsonpath='{.data.alertma
 ### 渐进式示例
 
 **Level 1 - 基础用法（手动 etcd 快照）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 最简单的 etcd 备份：一条命令
 ETCDCTL_API=3 etcdctl snapshot save /tmp/etcd-backup.db \
   --endpoints=https://127.0.0.1:2379 \
@@ -1239,7 +1245,6 @@ ETCDCTL_API=3 etcdctl snapshot save /tmp/etcd-backup.db \
 # 验证备份文件
 etcdctl snapshot status /tmp/etcd-backup.db --write-out=table
 ```
-
 **Level 2 - 进阶配置（Velero 定时备份）**:
 ```yaml
 # 安装 Velero 后创建定时备份
@@ -1260,7 +1265,8 @@ spec:
 
 ### 5.1 etcd备份策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ========== etcd备份脚本 ==========
 set -euo pipefail
@@ -1291,7 +1297,6 @@ find ${BACKUP_DIR} -mindepth 1 -maxdepth 1 -type d -empty -delete
 
 echo "etcd backup completed: ${BACKUP_DIR}/${DATE}.tar.gz"
 ```
-
 ### 5.2 应用数据备份
 
 ```yaml
@@ -1610,7 +1615,8 @@ spec:
 - **监控扩缩容事件**: 创建告警规则监控 HPA 是否频繁触碰 maxReplicas（说明需要调整上限）
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 状态和指标
 kubectl get hpa -n <namespace> -o wide
 kubectl describe hpa <hpa-name> -n <namespace>
@@ -1622,7 +1628,6 @@ argocd app diff <app-name>
 # 查看 VPA 推荐值
 kubectl get vpa -n <namespace> -o yaml
 ```
-
 ---
 
 ## 7. 成本优化实践
@@ -1803,7 +1808,8 @@ groups:
 - **定期清理**: 每月清理未使用的 PV、过期的 CronJob、废弃的 ConfigMap/Secret
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群资源利用率
 kubectl top nodes
 kubectl top pods -A --sort-by=cpu | head -20
@@ -1817,7 +1823,6 @@ kubectl get pv | grep Available
 # 查看命名空间资源配额使用情况
 kubectl describe resourcequota -n <namespace>
 ```
-
 ---
 
 ## 8. 多集群管理规范
@@ -1844,7 +1849,8 @@ kubectl describe resourcequota -n <namespace>
 ### 渐进式示例
 
 **Level 1 - 基础用法（多 kubeconfig 管理）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 最简单的多集群管理：使用 kubeconfig 切换上下文
 # 查看所有集群上下文
 kubectl config get-contexts
@@ -1855,7 +1861,6 @@ kubectl config use-context production-cluster
 # 在指定集群执行命令（不切换上下文）
 kubectl --context=staging-cluster get pods
 ```
-
 **Level 2 - 进阶配置（跨集群服务发现）**:
 ```yaml
 # 集群 A：导出服务
@@ -1996,7 +2001,8 @@ spec:
 - **集群标准化**: 使用 Cluster API + GitOps 确保新集群与现有集群配置一致
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Cluster API 管理的集群状态
 kubectl get clusters -A
 kubectl describe cluster <cluster-name>
@@ -2008,7 +2014,6 @@ kubectl get serviceimports -A
 # Thanos 查询跨集群指标
 thanos query --store=<sidecar-grpc-address>
 ```
-
 ---
 
 ## 9. 生产环境问题应急响应
@@ -2036,7 +2041,8 @@ thanos query --store=<sidecar-grpc-address>
 ### 渐进式示例
 
 **Level 1 - 基础用法（简单的问题检查步骤）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题发生时的第一步：快速检查集群健康
 # 1. 检查节点状态
 kubectl get nodes
@@ -2050,9 +2056,9 @@ kubectl get events -A --sort-by='.lastTimestamp' | tail -20
 # 4. 检查系统组件
 kubectl get pods -n kube-system
 ```
-
 **Level 2 - 进阶配置（结构化问题记录）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题发生时创建结构化记录
 INCIDENT_ID="INC-$(date +%Y%m%d-%H%M%S)"
 mkdir -p /tmp/incidents/${INCIDENT_ID}
@@ -2065,7 +2071,6 @@ kubectl top pods -A > /tmp/incidents/${INCIDENT_ID}/pod-resources.txt
 
 echo "问题快照已保存到: /tmp/incidents/${INCIDENT_ID}/"
 ```
-
 **Level 3 - 生产最佳实践（完整应急响应体系）**:
 
 ### 9.1 问题分级响应机制
@@ -2083,7 +2088,8 @@ echo "问题快照已保存到: /tmp/incidents/${INCIDENT_ID}/"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # ========== 生产环境应急响应脚本 ==========
 set -euo pipefail
@@ -2155,7 +2161,6 @@ attempt_auto_recovery() {
 # diagnose_cluster_health
 # attempt_auto_recovery "coredns"
 ```
-
 ### 9.3 问题复盘与改进
 
 ```yaml
@@ -2237,7 +2242,8 @@ spec:
 - **Postmortem 模板化**: 使用统一模板记录时间线、根因、影响范围、改进措施
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速故障诊断一键脚本
 echo "=== 节点状态 ==="
 kubectl get nodes -o wide | grep -v " Ready"
@@ -2251,7 +2257,6 @@ kubectl describe nodes | grep -A 5 "Conditions:" | grep -E "True|False"
 echo "=== 最近告警事件 ==="
 kubectl get events -A --field-selector=type=Warning --sort-by='.lastTimestamp' | tail -10
 ```
-
 ---
 
 ## 10. 生产环境安全最佳实践
@@ -2435,7 +2440,8 @@ roleRef:
 
 ### 10.3 合规性自动化检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ========== Kubernetes安全合规检查脚本 ==========
 set -euo pipefail
@@ -2491,7 +2497,6 @@ check_gdpr_compliance
 
 echo -e "\n合规检查完成，详情请查看: ${COMPLIANCE_REPORT}"
 ```
-
 ### 常见误区与最佳实践
 
 **常见误区**:
@@ -2510,7 +2515,8 @@ echo -e "\n合规检查完成，详情请查看: ${COMPLIANCE_REPORT}"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod Security Admission 是否阻止了 Pod 创建
 kubectl get events -n <namespace> | grep "Forbidden"
 
@@ -2524,7 +2530,6 @@ kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
 kubectl logs job/kube-bench
 ```
-
 ---
 
 ## 11. 成本优化与资源管理
@@ -2659,7 +2664,8 @@ spec:
 
 ### 11.3 成本优化自动化脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ========== Kubernetes成本优化分析脚本 ==========
 set -euo pipefail
@@ -2733,7 +2739,6 @@ generate_optimization_recommendations
 
 echo "成本分析报告已生成: ${COST_ANALYSIS_DIR}/cost-report.txt"
 ```
-
 ### 常见误区与最佳实践
 
 **常见误区**:
@@ -2748,7 +2753,8 @@ echo "成本分析报告已生成: ${COST_ANALYSIS_DIR}/cost-report.txt"
 - **分级存储**: 热数据用 SSD，冷数据用 HDD/对象存储，降低存储成本
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看配额使用情况
 kubectl describe resourcequota -n <namespace>
 
@@ -2761,7 +2767,6 @@ kubectl describe limitrange -n <namespace>
 # 分析命名空间实际资源使用
 kubectl top pods -n <namespace> --sort-by=memory
 ```
-
 ---
 
 ## 12. 变更管理与发布策略
@@ -2997,7 +3002,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 滚动更新状态
 kubectl rollout status deployment/<name> -n <namespace>
 
@@ -3013,7 +3019,6 @@ kubectl rollout undo deployment/<name> --to-revision=<number> -n <namespace>
 # 查看 Argo Rollouts 状态
 kubectl argo rollouts get rollout <name> -n <namespace>
 ```
-
 ---
 
 ## 关联阅读
@@ -3050,7 +3055,8 @@ kubectl argo rollouts get rollout <name> -n <namespace>
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群健康概览
 kubectl cluster-info && kubectl get cs && kubectl get nodes
 
@@ -3066,7 +3072,6 @@ kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].resources
 # 查看 PDB 状态
 kubectl get pdb -A
 ```
-
 ## 交叉引用
 
 - 相关主题：[企业级运维实践](enterprise-ops-practices.md) · [容量规划](capacity-planning-forecasting.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [生产故障排查](production-troubleshooting-playbook.md) · [变更管理](change-management-release.md)
@@ -3084,3 +3089,5 @@ kubectl get pdb -A
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

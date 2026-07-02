@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 15 - 生态系统与插件事件
@@ -183,7 +188,8 @@ authors:
 ## 事件含义
 内核检测到严重错误(Oops),通常由内核模块 bug、硬件问题或内核版本不兼容导致。Oops 不会导致立即崩溃,但系统不稳定。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 dmesg -T | grep -i 'oops|bug'
 kubectl describe node <node-name> | grep -A 10 KernelOops
 ```
@@ -202,7 +208,8 @@ kubectl describe node <node-name> | grep -A 10 KernelOops
 ## 事件含义
 容器运行时守护进程无响应,通常由磁盘 I/O 瓶颈、并发操作过多或内存耗尽导致。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl status containerd
 df -h /var/lib/containerd
 crictl ps  # 测试是否挂起
@@ -242,7 +249,8 @@ smartctl -a /dev/sda
 ## 事件含义
 Docker overlay2 存储驱动元数据损坏,通常由意外断电或磁盘空间耗尽触发。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker info | grep "Storage Driver"
 dmesg | grep overlay
 ```
@@ -360,7 +368,8 @@ dmesg | grep -i 'ext4-fs error|corruption'
 ## 事件含义
 控制器成功将 Ingress 规则转换为 NGINX 配置并重载。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe ingress <ingress-name>
 kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ```
@@ -379,7 +388,8 @@ kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
 ## 事件含义
 Ingress 控制器检测到资源创建、更新或删除。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ingress -A
 kubectl get ingress <name> -o yaml
 ```
@@ -398,7 +408,8 @@ kubectl get ingress <name> -o yaml
 ## 事件含义
 Ingress 配置验证失败,常见原因: 无效注解语法、缺少 TLS 证书、与现有规则冲突。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe ingress <ingress-name>
 kubectl logs -n ingress-nginx deployment/ingress-nginx-admission
 ```
@@ -441,7 +452,8 @@ curl -H "Host: example.com" http://<ingress-ip>/path
 ## 事件含义
 cert-manager 开始向 Issuer 请求签发证书。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe certificate <cert-name>
 kubectl get certificaterequest
 ```
@@ -460,7 +472,8 @@ kubectl get certificaterequest
 ## 事件含义
 证书成功签发并存储到 Secret。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -text -noout
 ```
 ## 解决建议
@@ -478,7 +491,8 @@ kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}' | base64 -d | ope
 ## 事件含义
 证书已签发且尚未过期,可正常使用。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ```
 ## 解决建议
@@ -496,7 +510,8 @@ kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ## 事件含义
 证书签发失败、过期或被撤销。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe certificate <name>
 kubectl describe certificaterequest <request-name>
 ```
@@ -515,7 +530,8 @@ kubectl describe certificaterequest <request-name>
 ## 事件含义
 Issuer/ClusterIssuer 配置错误或依赖资源不可用。常见原因: ACME 服务器不可达、CA 证书 Secret 不存在、Vault 服务未认证。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe issuer <issuer-name>
 kubectl get secret <ca-secret>
 ```
@@ -534,7 +550,8 @@ ACME: 检查网络连通性,确认 ACME 账户 Secret。CA: 确保 CA 证书和�
 ## 事件含义
 使用 ACME 协议签发证书时,创建了 Order 资源,开始域名验证 Challenge。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get order
 kubectl describe challenge <challenge-name>
 ```
@@ -553,7 +570,8 @@ kubectl describe challenge <challenge-name>
 ## 事件含义
 ACME Order 的所有 Challenge 已完成,证书即将签发。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get certificate <name>
 ```
 ## 解决建议
@@ -571,7 +589,8 @@ kubectl get certificate <name>
 ## 事件含义
 证书即将到期,cert-manager 已调度自动续期任务(默认在生命周期 2/3 时)。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ```
 ## 解决建议
@@ -595,7 +614,8 @@ kubectl get certificate <name> -o jsonpath='{.status.notAfter}'
 ## 事件含义
 Mutating Admission Webhook 成功向 Pod 注入 Envoy Sidecar 容器。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].name}'
 kubectl get namespace <ns> -o jsonpath='{.metadata.labels.istio-injection}'
 ```
@@ -614,7 +634,8 @@ kubectl get namespace <ns> -o jsonpath='{.metadata.labels.istio-injection}'
 ## 事件含义
 Webhook 无法注入 Sidecar。常见原因: istio-sidecar-injector 服务不可达、Pod 定义不兼容 (如 hostNetwork)、资源限制。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get mutatingwebhookconfiguration istio-sidecar-injector -o yaml
 kubectl logs -n istio-system deployment/istio-sidecar-injector
 ```
@@ -633,7 +654,8 @@ Webhook 不可用: 重启 istiod。资源限制: 增加 Namespace ResourceQuota�
 ## 事件含义
 istiod 向 Envoy 代理下发了新的配置 (xDS)。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 istioctl proxy-config cluster <pod-name>.<namespace>
 istioctl proxy-status
 ```
@@ -652,7 +674,8 @@ istioctl proxy-status
 ## 事件含义
 Envoy Sidecar 容器已启动并完成初始化。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name> -c istio-proxy
 ```
 ## 解决建议
@@ -674,7 +697,8 @@ Envoy 容器启动失败或无法与 istiod 建立连接。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl logs <pod-name> -c istio-proxy
 kubectl exec <pod-name> -c istio-proxy -- curl http://istiod.istio-system:15010/ready
 ```
@@ -718,7 +742,8 @@ argocd app history <app-name>
 ## 事件含义
 ArgoCD 无法将 Git 资源应用到集群。常见原因: YAML 语法错误、ServiceAccount 权限不足、资源配额耗尽。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 argocd app get <app-name>
 kubectl logs -n argocd deployment/argocd-application-controller
 ```
@@ -737,7 +762,8 @@ YAML 错误: 修复 Git 仓库配置。权限不足: 授予 RBAC 权限。资源
 ## 事件含义
 应用健康检查失败,虽然同步成功但 Pod 不健康、Job 失败等。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 argocd app get <app-name>
 kubectl get all -l app.kubernetes.io/instance=<app-name>
 ```
@@ -772,7 +798,8 @@ kubectl get all -l app.kubernetes.io/instance=<app-name>
 ## 事件含义
 集群资源被手动修改,与 Git 仓库不一致,ArgoCD 检测到漂移。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 argocd app diff <app-name>
 kubectl get events --field-selector involvedObject.name=<resource-name>
 ```
@@ -809,7 +836,8 @@ argocd app get <app-name>
 ## 事件含义
 Git 中删除的资源已从集群清理 (需启用 `spec.syncOptions: [Prune=true]`)。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get application <app-name> -o jsonpath='{.spec.syncPolicy}'
 ```
 ## 解决建议
@@ -833,7 +861,8 @@ kubectl get application <app-name> -o jsonpath='{.spec.syncPolicy}'
 ## 事件含义
 Knative Revision (不可变部署版本) 的所有 Pod 已就绪,可接收流量。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get revision
 kubectl describe revision <revision-name>
 ```
@@ -852,7 +881,8 @@ kubectl describe revision <revision-name>
 ## 事件含义
 Configuration 的最新 Revision 已创建并就绪。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get configuration
 ```
 ## 解决建议
@@ -870,7 +900,8 @@ kubectl get configuration
 ## 事件含义
 Route 已将流量规则应用到底层 Ingress/Gateway。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get route
 kubectl get route <route-name> -o jsonpath='{.status.traffic}'
 ```
@@ -889,7 +920,8 @@ kubectl get route <route-name> -o jsonpath='{.status.traffic}'
 ## 事件含义
 Knative 无法创建或配置底层 Ingress 资源 (可能是 Istio Gateway 或 Contour HTTPProxy)。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ingress -n <namespace>
 kubectl get configmap config-network -n knative-serving -o yaml
 ```
@@ -908,7 +940,8 @@ Ingress Controller 未安装: 安装 Istio、Contour 或 Kourier。配置错误:
 ## 事件含义
 Knative 控制器遇到内部错误,无法协调资源。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n knative-serving deployment/controller
 ```
 ## 解决建议
@@ -932,7 +965,8 @@ kubectl logs -n knative-serving deployment/controller
 ## 事件含义
 Operator 成功将 PrometheusRule 转换为 Prometheus 配置。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get prometheusrule
 curl http://<prometheus-url>/api/v1/rules | jq .
 ```
@@ -951,7 +985,8 @@ curl http://<prometheus-url>/api/v1/rules | jq .
 ## 事件含义
 Alertmanager 配置 (告警路由、接收器) 已同步到 Alertmanager Pod。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get secret alertmanager-<name> -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 ```
 ## 解决建议
@@ -987,7 +1022,8 @@ curl http://<prometheus-url>/api/v1/status/config | jq .
 ## 事件含义
 Operator 无法生成有效 Prometheus 配置。常见原因: PrometheusRule PromQL 语法错误、ServiceMonitor 选择器无法匹配、资源引用不存在。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n monitoring deployment/prometheus-operator
 promtool check rules <rule-file.yaml>
 ```
@@ -1031,7 +1067,8 @@ velero backup logs <backup-name>
 ## 事件含义
 备份任务失败。常见原因: 对象存储凭证过期或权限不足、网络连接中断、资源选择器未匹配对象。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 velero backup describe <backup-name>
 kubectl logs -n velero deployment/velero
 ```
@@ -1050,7 +1087,8 @@ kubectl logs -n velero deployment/velero
 ## 事件含义
 从备份成功恢复资源到集群。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 velero restore describe <restore-name>
 kubectl get all -n <namespace>
 ```
@@ -1113,7 +1151,8 @@ velero backup get
 ## 事件含义
 External DNS 在外部 DNS 提供商创建了 A/CNAME 记录。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system deployment/external-dns
 dig <hostname>
 ```
@@ -1168,7 +1207,8 @@ dig <hostname>
 ## 事件含义
 External DNS 无法同步记录到 DNS 提供商。常见原因: API 凭证过期或权限不足、DNS Zone 不存在、达到 API 限流或配额。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system deployment/external-dns
 kubectl get secret external-dns -o yaml
 ```
@@ -1193,7 +1233,8 @@ kubectl get secret external-dns -o yaml
 ## 事件含义
 MetalLB 从 IP 地址池中为 Service 成功分配了外部 IP。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc <svc-name>
 kubectl get configmap -n metallb-system config -o yaml
 ```
@@ -1212,7 +1253,8 @@ kubectl get configmap -n metallb-system config -o yaml
 ## 事件含义
 MetalLB 无法分配 IP。常见原因: IP 地址池耗尽、Service 注解指定的池不存在、配置错误。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipaddresspool -n metallb-system
 kubectl get svc --all-namespaces -o wide | grep LoadBalancer
 ```
@@ -1231,7 +1273,8 @@ kubectl get svc --all-namespaces -o wide | grep LoadBalancer
 ## 事件含义
 MetalLB speaker 成功在节点上建立 BGP 会话并宣告路由。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n metallb-system daemonset/speaker | grep BGP
 ```
 ## 解决建议
@@ -1249,7 +1292,8 @@ kubectl logs -n metallb-system daemonset/speaker | grep BGP
 ## 事件含义
 MetalLB 控制器检测到 Service 应该有外部 IP,但未能分配。
 ## 排查建议
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe svc <svc-name>
 kubectl logs -n metallb-system deployment/controller
 ```
@@ -1408,3 +1452,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

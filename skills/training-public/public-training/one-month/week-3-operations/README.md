@@ -44,6 +44,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -232,13 +237,13 @@ FTA 核心元素:
 FEBM 流程:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. 收集证据 → kubectl describe, logs, events, Prometheus
 2. 分析证据 → 时间线重建、因果关系、排除法
 3. 形成假设 → 基于证据推理可能的根因
 4. 验证假设 → 设计实验验证
 5. 记录结论 → 根因、修复、预防
 ```
-
 这两种方法并非互斥，而是互补的：FTA 帮助你构建全面的排查框架，FEBM 帮助你在框架内的每一步做出准确的判断。
 
 ---
@@ -262,7 +267,8 @@ FEBM 流程:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确保集群正常运行
 kubectl get nodes
 kubectl get pods -A
@@ -280,7 +286,6 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 ```
-
 ### 本周自测
 
 完成本周学习后，请完成 [checkpoint.md](./checkpoint.md) 中的自测题。
@@ -297,14 +302,14 @@ helm repo update
 
 如果你不小心删除了关键的 ClusterRoleBinding，可能导致所有人都无法操作集群。预防措施：始终保留至少一个具有 cluster-admin 权限的 kubeconfig 文件。在 ACK 集群中，可以通过控制台重新获取 kubeconfig。恢复方法：使用 SSH 登录到 Master 节点（专有版），或通过 ACK 控制台执行紧急命令（托管版）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 预防: 保存 emergency kubeconfig
 aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config-emergency
 
 # 验证权限
 kubectl auth can-i '*' '*' --kubeconfig ~/.kube/config-emergency
 ```
-
 ### Q2: Prometheus 指标太多，存储空间不够怎么办？
 
 Prometheus 的存储占用与指标基数（Cardinality）直接相关。高基数指标（如包含用户 ID 的标签）会指数级增加存储需求。优化策略：使用 recording rules 预聚合高频查询、删除不需要的指标（通过 metric_relabel_configs）、设置合理的保留期（retention）。对于长期存储需求，考虑使用 Thanos 或 Cortex。
@@ -383,3 +388,5 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

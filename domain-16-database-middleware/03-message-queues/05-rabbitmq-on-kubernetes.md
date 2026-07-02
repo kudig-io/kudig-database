@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # RabbitMQ on Kubernetes 生产指南
@@ -89,12 +94,12 @@ RabbitMQ 官方提供 Kubernetes Operator，推荐在生产环境使用，避免
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 RabbitMQ Cluster Operator 到 rabbitmq-system 命名空间
 kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/download/v2.9.0/cluster-operator.yml
 kubectl get deployment rabbitmq-cluster-operator -n rabbitmq-system
 ```
-
 安装完成后，可在任意命名空间创建 `RabbitmqCluster` 自定义资源。
 
 ## 3. 部署 RabbitMQ 集群
@@ -132,23 +137,23 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 RabbitMQ 集群并等待就绪
 kubectl apply -f rabbitmq-cluster.yaml
 kubectl wait --for=condition=AllReplicasReady rabbitmqcluster/prod-rabbit -n middleware --timeout=300s
 kubectl get rabbitmqcluster prod-rabbit -n middleware
 ```
-
 Operator 会自动创建 StatefulSet、Service、Secret（用户名/密码）、ConfigMap 等资源。获取管理控制台凭据：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取默认用户名与密码
 kubectl get secret prod-rabbit-default-user -n middleware -o jsonpath='{.data.username}' | base64 -d
 echo ""
 kubectl get secret prod-rabbit-default-user -n middleware -o jsonpath='{.data.password}' | base64 -d
 echo ""
 ```
-
 ## 4. 高可用：镜像队列与 Quorum Queue
 
 ### 4.1 镜像队列（Mirrored Queues）
@@ -158,12 +163,12 @@ echo ""
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建镜像队列策略，所有队列在集群内 3 个节点同步
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl set_policy ha-all "^" '
   {"ha-mode":"all", "ha-sync-mode":"automatic"}' --priority 0 --apply-to queues
 ```
-
 镜像队列在 RabbitMQ 3.13+ 中已被标记为 deprecated，新集群应优先使用 Quorum Queue。
 
 ### 4.2 Quorum Queue（推荐）
@@ -173,13 +178,13 @@ Quorum Queue 基于 Raft 共识算法，提供更强的一致性与自动 Leader
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 声明 Quorum Queue 需要客户端在 queue 参数中指定 x-queue-type
 # 也可通过 policy 强制所有匹配队列使用 quorum
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl set_policy quorum-all "^" '
   {"queue-type":"quorum"}' --priority 0 --apply-to queues
 ```
-
 Quorum Queue 不支持某些经典队列特性（如优先级队列、独占队列），迁移前需评估业务兼容性。
 
 ## 5. 持久化与存储
@@ -193,12 +198,12 @@ RabbitMQ 将消息、元数据、日志持久化到 PVC 挂载目录 `/var/lib/r
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 RabbitMQ PVC 使用情况
 kubectl get pvc -n middleware -l app.kubernetes.io/name=prod-rabbit
 kubectl exec -it prod-rabbit-server-0 -n middleware -- df -h /var/lib/rabbitmq
 ```
-
 当需要扩容磁盘时，先确认 StorageClass 支持 `allowVolumeExpansion: true`，然后修改 `RabbitmqCluster` 的 `persistence.storage` 字段，Operator 会滚动更新节点。
 
 ## 6. 用户、权限与 TLS
@@ -210,13 +215,13 @@ kubectl exec -it prod-rabbit-server-0 -n middleware -- df -h /var/lib/rabbitmq
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建业务用户并设置 vhost 权限
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl add_user order-service Passw0rd
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl set_user_tags order-service monitoring
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl set_permissions -p /order order-service "^order-.*" "^order-.*" "^order-.*"
 ```
-
 ### 6.2 启用 TLS
 
 RabbitMQ Operator 支持通过 `tls` 字段自动挂载 Secret，启用 AMQPS 与管理界面 HTTPS。
@@ -237,11 +242,11 @@ RabbitMQ 内置 Prometheus metrics，可通过 `rabbitmq_prometheus` 插件暴�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用 Prometheus 插件（Operator 默认已启用）
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmq-plugins enable rabbitmq_prometheus
 ```
-
 创建 ServiceMonitor（假设已部署 Prometheus Operator）：
 
 ```yaml
@@ -281,20 +286,20 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查各节点 Erlang cookie 是否一致
 kubectl exec -it prod-rabbit-server-0 -n middleware -- cat /var/lib/rabbitmq/.erlang.cookie
 kubectl exec -it prod-rabbit-server-1 -n middleware -- cat /var/lib/rabbitmq/.erlang.cookie
 ```
-
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查节点间 DNS 解析与 25672 端口连通性
 kubectl exec -it prod-rabbit-server-0 -n middleware -- nslookup prod-rabbit-server-1.prod-rabbit-nodes.middleware.svc.cluster.local
 ```
-
 ### 8.2 内存或磁盘告警触发
 
 当 RabbitMQ 触发 `memory_alarm` 或 `disk_free_alarm` 时，会阻塞生产者。
@@ -302,12 +307,12 @@ kubectl exec -it prod-rabbit-server-0 -n middleware -- nslookup prod-rabbit-serv
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前告警状态与资源使用
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl status
 kubectl top pod -l app.kubernetes.io/name=prod-rabbit -n middleware
 ```
-
 处理措施：扩容 Pod 资源、扩容 PVC、增加队列 TTL/死信策略、增加消费者。
 
 ### 8.3 Quorum Queue 无 Leader
@@ -317,11 +322,11 @@ kubectl top pod -l app.kubernetes.io/name=prod-rabbit -n middleware
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Quorum Queue 状态与成员分布
 kubectl exec -it prod-rabbit-server-0 -n middleware -- rabbitmqctl quorum_status "order.quorum"
 ```
-
 ## 9. 生产检查清单
 
 - [ ] 使用 RabbitMQ Cluster Operator 部署，避免手写 StatefulSet；
@@ -370,3 +375,5 @@ RabbitMQ 在 Kubernetes 中的常见工单包括连接数告警、队列堆积�
 - 身份认证与授权系统
 
 ```
+
+<!-- risk-assessed -->

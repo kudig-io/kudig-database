@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 16 - 资源管理表
@@ -188,7 +193,8 @@ spec:
 
 ### 配额查看与监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看配额使用情况
 kubectl get resourcequota -n production
 kubectl describe resourcequota production-quota -n production
@@ -198,7 +204,6 @@ kubectl get resourcequota -A -o json | jq -r '.items[] | "\(.metadata.namespace)
 
 # 监控配额告警(Prometheus)
 ```
-
 <!-- chunk: LimitRange完整配置 -->
 ## LimitRange完整配置
 
@@ -370,7 +375,8 @@ spec:
 
 ### HPA监控与调试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看HPA状态
 kubectl get hpa -n production
 kubectl describe hpa web-app-hpa -n production
@@ -385,7 +391,6 @@ kubectl get hpa web-app-hpa -n production -o yaml | grep -A 10 currentMetrics
 kubectl run -it --rm load-generator --image=busybox /bin/sh
 while true; do wget -q -O- http://web-app.production.svc.cluster.local; done
 ```
-
 <!-- chunk: VPA完整配置 -->
 ## VPA完整配置
 
@@ -759,7 +764,8 @@ groups:
 
 ### 成本优化监控
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看各命名空间资源使用成本
 kubectl top nodes
 kubectl top pods -A --sort-by=cpu
@@ -775,7 +781,6 @@ kubectl get pods -A -o json | jq -r '
 # 使用Kubecost进行成本分析
 kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090
 ```
-
 ---
 
 **资源管理原则**: 设置合理配额，启用自动扩缩容，监控资源使用，持续优化成本
@@ -812,3 +817,6 @@ kubectl port-forward -n kubecost svc/kubecost-cost-analyzer 9090
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

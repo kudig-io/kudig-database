@@ -38,6 +38,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # minikube v1.36 Release Notes
@@ -161,3 +166,5 @@ windows-amd64.exe: `c7504d574a416a4dd4c948e8bab9c2c2028e12c06d038046d8728c96c7cf
 
 amd64: `61b2e2ae23792e477d03e662d853fc45bd3b61243c1471b2ab1f395f997f5a61`  
 arm64: `e54d8fe9adc41a0da69bbf5ce8dee6077718261e070d61d93c91677cb336dbdc`
+
+<!-- risk-assessed -->

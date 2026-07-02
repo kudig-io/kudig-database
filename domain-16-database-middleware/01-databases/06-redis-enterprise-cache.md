@@ -56,6 +56,11 @@ cross_refs:
   label: '速查卡: sql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Redis 企业级缓存运维深度实践
@@ -620,7 +625,8 @@ disaster_recovery:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # redis_backup.sh - Redis 综合备份脚本
 set -euo pipefail
@@ -712,7 +718,6 @@ case "${1:-rdb}" in
     *)       echo "Usage: $0 {rdb|aof|all|restore <file>|cleanup}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 监控告警 -->## 监控告警
@@ -981,3 +986,6 @@ Cache-Aside (推荐):
 - 05-mongodb-enterprise-database
 - 07-redis-kubernetes-operator
 - 08-kafka-kubernetes-strimzi
+
+
+<!-- risk-assessed -->

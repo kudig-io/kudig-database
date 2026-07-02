@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SuperEdge 架构实践 (SuperEdge Architecture Practice)
@@ -1181,7 +1186,8 @@ flowchart TD
 
 ## 9.2 完整部署示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # SuperEdge 边缘节点接入脚本
 
@@ -1210,7 +1216,6 @@ kubectl logs -n edge-system \
   $(kubectl get pods -n edge-system -l app=tunnel-cloud -o name) \
   | grep "${NODE_NAME}"
 ```
-
 ## 9.3 多区域部署示例
 
 ```yaml
@@ -1377,7 +1382,8 @@ rules:
 
 ## 问题 1: 边缘节点 NotReady
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点状态
 kubectl describe node edge-node-1
 
@@ -1395,10 +1401,10 @@ kubectl logs -n edge-system <tunnel-cloud-pod-name> | grep "edge-node-1"
 # 2. 网络端口被防火墙阻断 → 检查 9000/tcp 端口
 # 3. tunnel-cloud 地址配置错误 → 检查 ConfigMap
 ```
-
 ## 问题 2: edge-health 投票异常
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 NodeHealthz 对象
 kubectl get nodehealthz -o yaml
 
@@ -1412,10 +1418,10 @@ curl -k https://edge-node-2:10250/healthz
 # 检查 edge-controller 是否正常处理投票
 kubectl logs -n edge-system <edge-controller-pod-name> | grep -E "taint|healthz"
 ```
-
 ## 问题 3: ServiceGroup 流量未本地化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点是否有正确的 zone 标签
 kubectl get nodes --show-labels | grep zone
 
@@ -1429,10 +1435,10 @@ kubectl logs -n edge-system <app-grid-wrapper-pod> | grep "endpoint"
 # 查看 iptables 规则
 iptables -t nat -L KUBE-SERVICES | grep <service-cluster-ip>
 ```
-
 ## 10.2 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # SuperEdge 一键诊断脚本
 
@@ -1493,7 +1499,6 @@ kubectl get nodehealthz 2>/dev/null || echo "NodeHealthz CRD 未找到"
 echo ""
 echo "诊断完成"
 ```
-
 ## 10.3 监控指标
 
 ```yaml
@@ -1763,7 +1768,8 @@ mindmap
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # SuperEdge 滚动升级脚本
 #!/bin/bash
 
@@ -1813,7 +1819,6 @@ done
 
 echo "升级完成！"
 ```
-
 ---
 
 <!-- chunk: 总结 -->## 总结
@@ -1859,3 +1864,5 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 - 08-edge-storage-network
 
 ```
+
+<!-- risk-assessed -->

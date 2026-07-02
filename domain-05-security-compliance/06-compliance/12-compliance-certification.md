@@ -58,6 +58,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - 合规与认证表
@@ -91,7 +96,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 运行kube-bench
 # 使用Job运行
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
@@ -103,7 +109,6 @@ kubectl logs job/kube-bench
 docker run --rm -v /etc:/etc:ro -v /var:/var:ro \
   aquasec/kube-bench:latest run --targets=master,node
 ```
-
 <!-- chunk: CIS关键检查项 -->
 ## CIS关键检查项
 
@@ -278,3 +283,5 @@ rules:
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 ```
+
+<!-- risk-assessed -->

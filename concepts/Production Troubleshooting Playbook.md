@@ -43,6 +43,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Production Troubleshooting Playbook
@@ -54,6 +59,7 @@ This playbook synthesizes information from the [[entities/kubernetes.md|Kubernet
 ### Tier 1: Immediate Assessment (First 2 Minutes)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. Cluster accessible?
    YES -> kubectl get --raw='/readyz'  -> Continue to step 2
    NO  -> FTA path: TE-1 (Cluster Unavailable, P0)
@@ -65,7 +71,6 @@ This playbook synthesizes information from the [[entities/kubernetes.md|Kubernet
    Single service -> TE-2 or TE-4 (P1)
    Single Pod     -> TE-3 (P1)
 ```
-
 ### Tier 2: Pod-Level Diagnosis (5-15 Minutes)
 
 | Symptom | FTA Path | First Command | Common Root Cause |
@@ -148,3 +153,6 @@ After every P0/P1 incident:
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 - [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+
+
+<!-- risk-assessed -->

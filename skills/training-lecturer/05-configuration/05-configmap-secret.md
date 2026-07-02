@@ -35,6 +35,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第六课：ConfigMap 和 Secret - 配置管理
@@ -94,6 +99,7 @@ Secret：存储敏感信息（密码、密钥、证书）
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【方式一：从字面值创建】
 
 kubectl create configmap app-config \
@@ -115,7 +121,6 @@ data:
   database_url: "localhost:3306"
   log_level: "info"
 ```
-
 ### 2.2 在 Pod 中使用
 
 ```
@@ -195,6 +200,7 @@ ConfigMap 的值是明文存储的。
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【方式一：从字面值创建】
 
 kubectl create secret generic app-secret \
@@ -222,7 +228,6 @@ data:
 echo -n "admin" | base64
 # 输出：YWRtaW4=
 ```
-
 ### 3.3 在 Pod 中使用
 
 ```
@@ -266,6 +271,7 @@ volumeMounts:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【场景】
 
 如果需要从私有镜像仓库拉取镜像，
@@ -292,7 +298,6 @@ spec:
   - name: my-container
     image: registry.example.com/my-app:latest
 ```
-
 ---
 
 ## 5. 常见问题
@@ -304,6 +309,7 @@ spec:
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 修改了 ConfigMap 或 Secret，但 Pod 没有更新。
@@ -323,10 +329,10 @@ kubectl rollout restart deployment <name>
 
 方式三：如果是 Volume，可以配置 subPath 避免缓存问题
 ```
-
 ### 5.2 Secret 值查看
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【查看 Secret 内容】
 
 kubectl get secret app-secret -o jsonpath='{.data.password}' | base64 -d
@@ -336,7 +342,6 @@ kubectl get secret app-secret -o jsonpath='{.data.password}' | base64 -d
 kubectl get secret
 kubectl describe secret <name>
 ```
-
 ---
 
 ## 6. 总结
@@ -345,6 +350,7 @@ kubectl describe secret <name>
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 ConfigMap 创建：
@@ -377,10 +383,11 @@ kubectl describe secret <name>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
 - [../06-configuration/06-namespace-resource-quota.md](../06-configuration/06-namespace-resource-quota.md) — 命名空间与资源配额
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
 - [../../domain-05-security-compliance/](../../domain-05-security-compliance/) — K8s 安全文档
+
+<!-- risk-assessed -->

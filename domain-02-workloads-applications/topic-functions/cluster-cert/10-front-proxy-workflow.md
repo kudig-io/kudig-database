@@ -34,6 +34,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Front Proxy 聚合层证书工作流
@@ -108,6 +113,7 @@ Front Proxy（请求头代理）是 Kubernetes API 聚合层（Aggregation Layer
 ## 架构与信任模型
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                        Front Proxy 信任模型                               │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -141,7 +147,6 @@ Front Proxy（请求头代理）是 Kubernetes API 聚合层（Aggregation Layer
 │                                                                           │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 证书角色详解
@@ -395,7 +400,8 @@ func (a *requestHeaderAuthRequestHandler) AuthenticateRequest(req *http.Request)
 
 ### metrics-server 无法工作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 APIService 状态
 kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 
@@ -416,7 +422,6 @@ kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
 openssl x509 -in /etc/kubernetes/pki/front-proxy-client.crt -noout -enddate
 openssl x509 -in /etc/kubernetes/pki/front-proxy-ca.crt -noout -enddate
 ```
-
 ### 常见问题
 
 | 现象 | 根因 | 解决 |
@@ -462,3 +467,6 @@ openssl x509 -req \
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cert-manager.md|cert-manager]]
+
+
+<!-- risk-assessed -->

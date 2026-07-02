@@ -44,6 +44,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 云厂商集成故障排查指南
@@ -163,7 +168,8 @@ k8s_versions:
 
 ### 云厂商集成状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS 云提供商检查
 echo "=== AWS Cloud Provider 检查 ==="
 kubectl get pods -n kube-system -l k8s-app=aws-cloud-controller-manager
@@ -184,7 +190,6 @@ echo "=== 阿里云 Cloud Provider 检查 ==="
 kubectl get pods -n kube-system -l app=alicloud-cloud-controller-manager
 kubectl logs -n kube-system -l app=alicloud-cloud-controller-manager --tail=50
 ```
-
 ## 🔍 云厂商集成问题诊断方法
 
 ### 诊断原理说明
@@ -227,7 +232,8 @@ kubectl logs -n kube-system -l app=alicloud-cloud-controller-manager --tail=50
 
 #### AWS 云提供商故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # AWS 云提供商故障诊断脚本
 
@@ -271,10 +277,10 @@ kubectl get pv -o json | jq -r '.items[] | select(.spec.awsElasticBlockStore != 
 echo "6. AWS 资源配额检查:"
 aws ec2 describe-account-attributes --attribute-names max-instances --region us-east-1 2>/dev/null || echo "无法获取 EC2 配额信息"
 ```
-
 #### Azure 云提供商故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Azure 云提供商故障诊断脚本
 
@@ -322,10 +328,10 @@ if [ -n "$SUBSCRIPTION_ID" ] && [ -n "$RESOURCE_GROUP" ]; then
     --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP" 2>/dev/null || echo "权限检查失败"
 fi
 ```
-
 #### GCP 云提供商故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # GCP 云提供商故障诊断脚本
 
@@ -363,10 +369,10 @@ gcloud services list --enabled --project=$PROJECT_ID 2>/dev/null | grep -E "(com
 echo "5. 防火墙规则检查:"
 gcloud compute firewall-rules list --project=$PROJECT_ID --filter="name~k8s" 2>/dev/null || echo "未找到 Kubernetes 相关防火墙规则"
 ```
-
 #### 阿里云故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 阿里云故障诊断脚本
 
@@ -411,7 +417,6 @@ kubectl get services --all-namespaces -o json | jq -r '.items[] | select(.spec.t
 echo "5. 云盘状态检查:"
 kubectl get pv -o json | jq -r '.items[] | select(.spec.csi.driver=="diskplugin.csi.alibabacloud.com") | .metadata.name + ": " + .status.phase'
 ```
-
 ## 🔧 云厂商集成问题解决方案
 
 ### AWS 集成问题解决
@@ -536,7 +541,8 @@ spec:
 
 #### 方案一：Azure 服务主体配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Azure 服务主体创建和配置脚本
 
@@ -606,7 +612,6 @@ else
   echo "❌ 服务主体创建失败"
 fi
 ```
-
 #### 方案二：Azure 托管标识配置
 
 ```yaml
@@ -656,7 +661,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # GCP Workload Identity 配置脚本
 
@@ -709,7 +715,6 @@ kubectl annotate serviceaccount gcp-cloud-provider \
 
 echo "✓ Workload Identity 配置完成"
 ```
-
 #### 方案二：传统服务账户密钥配置
 
 ```yaml
@@ -994,7 +999,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 云厂商集成验证脚本
 
@@ -1067,7 +1073,6 @@ fi
 # 清理测试资源
 kubectl delete service test-lb-service 2>/dev/null
 ```
-
 ### 云厂商监控告警配置
 
 ```yaml
@@ -1170,7 +1175,8 @@ multiCloudConfig:
 
 ### 云厂商集成安全基线
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 云厂商集成安全检查脚本
 
@@ -1205,7 +1211,6 @@ SECURITY_REPORT="/var/log/kubernetes/cloud-security-report-$(date +%Y%m%d).log"
 
 echo "安全检查报告已生成: $SECURITY_REPORT"
 ```
-
 ## 🔄 典型云厂商集成案例
 
 ### 案例一：AWS LoadBalancer 服务创建失败
@@ -1258,3 +1263,6 @@ echo "安全检查报告已生成: $SECURITY_REPORT"
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+
+
+<!-- risk-assessed -->

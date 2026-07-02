@@ -42,6 +42,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Loggly Cloud Log Management Platform 深度实践
@@ -225,7 +230,17 @@ loggly_enterprise_patterns:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # Loggly Rsyslog 配置脚本
 
@@ -262,7 +277,6 @@ sudo systemctl enable rsyslog
 # 5. 验证配置
 logger "Test message sent to Loggly at $(date)"
 ```
-
 ## 2.2 Docker Logging Driver Configuration
 
 ```json
@@ -1049,3 +1063,5 @@ tag:application* contains:"personal_data"
 - 02-fluentd-enterprise-log-processing
 
 - [[domain-06-observability/README.md|返回目录]]
+
+<!-- risk-assessed -->

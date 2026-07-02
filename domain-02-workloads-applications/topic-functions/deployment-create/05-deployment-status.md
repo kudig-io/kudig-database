@@ -35,6 +35,11 @@ prerequisites:
 - gitops-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Deployment Status 计算逻辑
@@ -493,12 +498,12 @@ status:
 - `status.observedGeneration`：控制器已处理到的 Generation
 
 **用途**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment nginx -o jsonpath='{.metadata.generation} {.status.observedGeneration}'
 # 输出: 3 3  → 已同步
 # 输出: 4 3  → 新配置尚未处理完成
 ```
-
 **为什么需要这个字段**：
 - 控制器的同步是异步的
 - 用户 apply 新配置后，不能立即假设新配置已生效
@@ -566,7 +571,8 @@ syncDeployment 入口
 
 ### 场景 1：判断 Deployment 是否健康
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment nginx -o json | jq '
   if (.status.observedGeneration == .metadata.generation)
      and (.status.updatedReplicas == .spec.replicas)
@@ -578,7 +584,6 @@ kubectl get deployment nginx -o json | jq '
   end
 '
 ```
-
 ### 场景 2：HPA 与 Status 的交互
 
 HPA 读取 `Status.AvailableReplicas` 和 `Spec.Replicas` 来计算当前利用率：
@@ -590,7 +595,8 @@ desiredReplicas = ceil[currentReplicas * (currentMetric / desiredMetric)]
 
 ### HPA 扩缩容时的 Status 变化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # HPA 基于 CPU 扩缩容场景
 kubectl autoscale deployment web-app --cpu-percent=80 --min=3 --max=10
 
@@ -611,7 +617,6 @@ kubectl get deployment web-app -o jsonpath='{.status}'
 #   "observedGeneration": 5
 # }
 ```
-
 ### 场景 3：ArgoCD Rollout 判断
 
 ArgoCD 使用 `ObservedGeneration` 和 `Conditions` 判断是否完成同步：
@@ -673,7 +678,8 @@ spec:
 
 ### 示例 1：诊断 Deployment 卡在 Progressing
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment nginx -o jsonpath='{
   "replicas": .status.replicas,
   "updated": .status.updatedReplicas,
@@ -684,25 +690,24 @@ kubectl get deployment nginx -o jsonpath='{
   "observedGen": .status.observedGeneration
 }' | jq .
 ```
-
 ### 示例 2：监控 Status 变化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment nginx -o jsonpath='{.status.conditions}' | jq '.[] | {type, status, reason, message}'
 ```
-
 ### 示例 3：等待 Deployment 完成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment/nginx --timeout=300s
 ```
-
 ### 示例 4：获取详细的 Condition 时间线
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment nginx -o json | jq '.status.conditions[] | {type, lastTransitionTime, lastUpdateTime, reason}'
 ```
-
 ---
 
 ## 常见错误
@@ -740,3 +745,6 @@ kubectl get deployment nginx -o json | jq '.status.conditions[] | {type, lastTra
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/argo.md|argo]]
 - [[entities/argocd.md|argocd]]
+
+
+<!-- risk-assessed -->

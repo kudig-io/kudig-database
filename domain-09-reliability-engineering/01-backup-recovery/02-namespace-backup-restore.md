@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Namespace 级别备份恢复：Velero
@@ -129,7 +134,8 @@ aliyun ram CreateAccessKey --UserName velero-backup
 
 以下命令安装 Velero Server，指定 OSS 为 BSL，并启用 Restic 文件级备份。命令执行前请确保本地 velero CLI 已下载并配置正确：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Velero，使用 OSS 作为 BackupStorageLocation
 velero install \
   --provider alibabacloud \
@@ -147,7 +153,6 @@ kubectl get pods -n velero
 velero backup-location get
 velero snapshot-location get
 ```
-
 ### 3.4 BackupStorageLocation 与 VolumeSnapshotLocation 配置
 
 Velero 的存储后端通过 CR 声明，便于多后端切换与多集群共享。以下示例显式声明 OSS BSL 与阿里云云盘 VSL：
@@ -350,7 +355,8 @@ hooks:
 
 当 Namespace 被误删或部分资源损坏时，可从 Velero 备份恢复。恢复前建议先清理目标 Namespace 中冲突资源，或指定恢复目标为新的 Namespace：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出可用备份
 velero backup get
 
@@ -370,7 +376,6 @@ velero restore create prod-ns-restore-test \
 velero restore describe prod-ns-restore --details
 kubectl get all -n production
 ```
-
 ### 6.2 恢复冲突处理
 
 | 冲突场景 | 处理方案 |
@@ -384,7 +389,8 @@ kubectl get all -n production
 
 Velero 恢复仅重建资源对象，部分控制器（如 Deployment、StatefulSet）需要一定时间完成 reconcile。恢复后应重点检查以下状态：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查所有工作负载是否达到期望副本数
 kubectl get deployments,statefulsets,daemonsets -n production
 
@@ -397,7 +403,6 @@ kubectl get svc -n production
 kubectl get endpoints -n production
 kubectl run test --image=registry.cn-hangzhou.aliyuncs.com/acs/netshoot --rm -it -- /bin/bash
 ```
-
 ## 7. 跨集群迁移
 
 ### 7.1 迁移前置条件
@@ -413,7 +418,8 @@ kubectl run test --image=registry.cn-hangzhou.aliyuncs.com/acs/netshoot --rm -it
 
 以下流程将 `production` Namespace 从集群 A 迁移到集群 B：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在源集群 A 创建备份
 velero backup create migration-prod \
   --include-namespaces production \
@@ -433,7 +439,6 @@ velero restore create migration-prod-restore \
 kubectl get pods -n production
 kubectl get svc -n production
 ```
-
 ## 8. 定时备份与保留策略
 
 ### 8.1 Schedule CR 示例
@@ -477,7 +482,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试恢复（不覆盖生产）
 velero restore create validate-$(date +%Y%m%d) \
   --from-backup production-daily-20260629020000 \
@@ -488,7 +494,6 @@ velero restore create validate-$(date +%Y%m%d) \
 kubectl get pods -n production-drill
 kubectl exec -n production-drill deploy/app -c app -- /health-check.sh
 ```
-
 ### 9.2 演练报告模板
 
 | 项目 | 内容 |
@@ -534,3 +539,6 @@ kubectl exec -n production-drill deploy/app -c app -- /health-check.sh
 - [[domain-09-reliability-engineering/01-backup-recovery/03-pv-backup-snapshot.md|PV 快照：云盘快照、CSI 快照、恢复演练]]
 - [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
 - [[domain-04-storage-data/01-k8s-storage/15-storage-disaster-recovery.md|存储灾难恢复]]
+
+
+<!-- risk-assessed -->

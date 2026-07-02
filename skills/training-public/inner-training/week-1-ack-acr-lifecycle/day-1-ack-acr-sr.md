@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -193,7 +198,8 @@ ACK 管控层负责集群的全生命周期管理，核心组件包括：
 
 ### 任务 1: 了解 ACK 集群类型 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 配置 aliyun CLI
 aliyun configure
 # 输入 AccessKey ID 和 Secret
@@ -242,10 +248,10 @@ kubectl get nodes
 # node-worker-1   Ready    worker   30d   v1.30.1
 # node-worker-2   Ready    worker   30d   v1.30.1
 ```
-
 ### 任务 2: 了解 ACR 实例 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 ACR 个人版仓库列表
 aliyun cr GET /repos
 
@@ -290,10 +296,10 @@ docker login --username=xxx enterprise-registry-registry.cn-hangzhou.cr.aliyuncs
 docker tag nginx:1.25-alpine registry.cn-hangzhou.aliyuncs.com/my-team/my-app:v1.0
 docker push registry.cn-hangzhou.aliyuncs.com/my-team/my-app:v1.0
 ```
-
 ### 任务 3: 梳理管控层架构 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 kube-system 中的核心组件
 kubectl get pods -n kube-system
 
@@ -320,10 +326,10 @@ kubectl get pods -n kube-system -o custom-columns='NAME:.metadata.name,IMAGE:.sp
 # Step 4: 查看集群附加组件
 aliyun cs GET /clusters/<cluster_id>/components
 ```
-
 ### 任务 4: 内部 SR 流程熟悉 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === SR 分类与处理 ===
 
 # P1: 集群创建失败
@@ -350,7 +356,6 @@ kubectl get cs
 kubectl get pods -A | grep ImagePullBackOff
 kubectl describe pod <pod> | grep -A 10 Events
 ```
-
 ---
 
 ## 配置参考
@@ -433,7 +438,8 @@ kubectl describe pod <pod> | grep -A 10 Events
 ### Q4: 如何查看集群的管控面状态？
 
 **A**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ACK 控制台查看
 # 控制台 → 容器服务 → 集群列表 → 点击集群名 → 集群信息
 
@@ -444,7 +450,6 @@ aliyun cs GET /clusters/<cluster_id> | jq '{state, current_version, size}'
 kubectl get cs
 kubectl get pods -n kube-system
 ```
-
 ### Q5: kube-system 中的组件哪些由阿里云管理，哪些由用户管理？
 
 **A**: 在 ACK 托管版中：
@@ -479,3 +484,6 @@ kubectl get pods -n kube-system
 ## 明日预告
 
 Day 2 将学习 ACK SDK 和 API 的使用方式，掌握通过编程方式管理集群资源。
+
+
+<!-- risk-assessed -->

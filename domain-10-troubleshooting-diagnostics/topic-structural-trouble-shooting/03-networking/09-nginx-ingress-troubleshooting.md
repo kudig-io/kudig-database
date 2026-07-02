@@ -44,6 +44,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: nginx-ingress-controller 故障排查指南
@@ -113,7 +118,8 @@ k8s_versions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 nginx-ingress 状态
 kubectl get pods -n ingress-nginx
 
@@ -140,7 +146,6 @@ kubectl get secret -n <namespace>
 # 8. 测试配置重载
 kubectl exec -it <nginx-pod> -n ingress-nginx -- nginx -t
 ```
-
 ---
 
 ## 架构与核心组件
@@ -186,7 +191,8 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- nginx -t
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 upstream Pod 状态
 kubectl get pods -n <namespace> -o wide
 
@@ -210,7 +216,6 @@ kubectl describe pod <upstream-pod> -n <namespace> | grep -E "Conditions|Events"
 kubectl exec -it <nginx-pod> -n ingress-nginx -- \
   cat /etc/nginx/conf.d/<ingress-name>.conf | grep -A10 "upstream"
 ```
-
 **常见原因**:
 - 所有 Endpoints 不可用（Pod 未运行、健康检查失败）
 - 网络策略阻止访问
@@ -224,7 +229,8 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- \
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查所有 backend Pod 是否 Running
 kubectl get pods -n <namespace> -o wide
 
@@ -243,7 +249,6 @@ kubectl get pods -n <namespace> | grep Evicted
 # Step 6: 检查 Pod 是否在 Pending (资源不足)
 kubectl describe pod <pod> -n <namespace> | grep -E "Conditions|Pending"
 ```
-
 **常见原因**:
 - 所有 backend Pod 未运行
 - Service selector 配置错误
@@ -257,7 +262,8 @@ kubectl describe pod <pod> -n <namespace> | grep -E "Conditions|Pending"
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 IngressClass 配置
 kubectl get ingressclass
 kubectl describe ingressclass nginx
@@ -278,7 +284,6 @@ kubectl logs -n ingress-nginx <pod> -n ingress-nginx | grep -i "class"
 # Step 6: 检查 controller 是否指定了 --ingress-class 参数
 kubectl get deployment -n ingress-nginx -o yaml | grep -A5 "args"
 ```
-
 **常见原因**:
 - IngressClass 未创建
 - spec.ingressClassName 与 IngressClass name 不匹配
@@ -295,7 +300,8 @@ kubectl get deployment -n ingress-nginx -o yaml | grep -A5 "args"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Secret 是否存在且正确
 kubectl get secret <secret-name> -n <namespace>
 
@@ -317,7 +323,6 @@ curl -v --insecure https://<ingress-ip> -H "Host: <host>"
 # nginx-ingress 默认仅支持 TLS 1.2+
 openssl s_client -connect <ingress-ip>:443 -tls1_2
 ```
-
 **常见原因**:
 - 证书过期
 - 证书与 host 不匹配
@@ -335,7 +340,8 @@ openssl s_client -connect <ingress-ip>:443 -tls1_2
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 annotation 是否正确配置
 kubectl describe ingress <name> | grep -i rewrite
 
@@ -354,7 +360,6 @@ kubectl logs -n ingress-nginx <pod> | grep rewrite
 curl -v http://<ingress-ip>/foo/bar -H "Host: <host>"
 # 观察是否重写到 /bar
 ```
-
 **常见原因**:
 - path 未使用正则表达式匹配
 - rewrite-target 格式错误
@@ -371,7 +376,8 @@ curl -v http://<ingress-ip>/foo/bar -H "Host: <host>"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 upstream keepalive 配置
 kubectl exec -it <nginx-pod> -n ingress-nginx -- \
   cat /etc/nginx/conf.d/<ingress-name>.conf | grep -i keepalive
@@ -390,7 +396,6 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- \
 kubectl exec -it <nginx-pod> -n ingress-nginx -- \
   curl -X POST "http://localhost:8090/configuration/backend-keepalive-timeout"
 ```
-
 **常见原因**:
 - upstream keepalive connections 耗尽
 - 长连接超时设置过短
@@ -407,7 +412,8 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 metrics 端点
 curl http://<nginx-pod>:10254/metrics
 
@@ -425,7 +431,6 @@ kubectl auth can-i get pods --as=system:serviceaccount:prometheus:prometheus
 # Step 5: 检查 nginx-ingress 配置
 kubectl get configmap -n ingress-nginx ingress-controller-configuration -o yaml
 ```
-
 **常见原因**:
 - metrics 端口未开启
 - RBAC 权限不足
@@ -537,3 +542,5 @@ data:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

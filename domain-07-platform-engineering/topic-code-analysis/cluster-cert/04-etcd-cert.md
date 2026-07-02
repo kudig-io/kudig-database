@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: etcd 证书体系源码分析
@@ -418,7 +423,8 @@ etcd:
 
 ### etcd 证书验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 etcd Server 证书详情
 openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -text
 # Issuer: CN = etcd-ca
@@ -456,13 +462,22 @@ ETCDCTL_API=3 etcdctl member list \
 # | 7c4c8d5d4f000001 | started | master-1 | https://192.168.1.10:2380  |
 # +------------------+---------+----------+----------------------------+
 ```
-
 ### 续期 etcd 证书
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看证书有效期
 for cert in /etc/kubernetes/pki/etcd/*.crt; do
   echo "$cert: $(openssl x509 -in $cert -noout -enddate | cut -d= -f2)"
@@ -481,7 +496,6 @@ kubeadm certs renew apiserver-etcd-client
 # 重启 etcd（通过重启 kubelet 触发静态 Pod 重建）
 systemctl restart kubelet
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -511,3 +525,6 @@ systemctl restart kubelet
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/kcl.md|kcl]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

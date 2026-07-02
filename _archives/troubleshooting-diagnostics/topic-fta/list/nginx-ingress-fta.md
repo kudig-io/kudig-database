@@ -58,6 +58,11 @@ cross_refs:
   label: '索引文档: nginx-ingress-index'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # nginx-ingress-controller 异常 FTA 树
 
 ## 适用范围与说明
@@ -144,6 +149,7 @@ flowchart TD
 **顶事件**: 客户端请求返回 502
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断路径:
 1. 检查 upstream Pod 状态
    kubectl get pods -n <namespace> -l app=<app-name>
@@ -160,12 +166,12 @@ flowchart TD
 5. 检查网络策略
    kubectl get networkpolicy -n <namespace>
 ```
-
 ### 场景 2: 请求返回 503 Service Temporarily Unavailable
 
 **顶事件**: 客户端请求返回 503，所有后端不可用
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 诊断路径:
 1. 检查所有 backend Pod 是否 Running
    kubectl get pods -n <namespace> -o wide
@@ -182,12 +188,12 @@ flowchart TD
 5. 检查 Pod 是否被驱逐 (Evicted)
    kubectl get pods -n <namespace> | grep Evicted
 ```
-
 ### 场景 3: IngressClass 不生效
 
 **顶事件**: 创建了 Ingress 但未被 nginx-ingress 处理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 诊断路径:
 1. 检查 IngressClass 配置
    kubectl get ingressclass
@@ -203,12 +209,12 @@ flowchart TD
    - kubernetes.io/ingress.class: nginx (旧方式)
    - spec.ingressClassName: nginx (新方式)
 ```
-
 ### 场景 4: TLS 证书问题
 
 **顶事件**: HTTPS 请求返回 400 或握手失败
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断路径:
 1. 检查 Secret 是否存在且正确
    kubectl get secret <secret-name> -n <namespace>
@@ -224,12 +230,12 @@ flowchart TD
 4. 检查 secret 是否挂载到 Pod
    kubectl describe pod <nginx-pod> -n ingress-nginx | grep -A5 "Mounts"
 ```
-
 ### 场景 5: 路径重写规则不生效
 
 **顶事件**: 配置了 rewrite-target 但请求仍然 404
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 诊断路径:
 1. 检查 annotation 是否正确配置
    nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -243,12 +249,12 @@ flowchart TD
 4. 验证 nginx.conf 中的 location 块
    kubectl exec -it <nginx-pod> -n ingress-nginx -- cat /etc/nginx/nginx.conf
 ```
-
 ---
 
 ## 故障排查命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 nginx-ingress 状态
 kubectl get pods -n ingress-nginx
 
@@ -288,7 +294,6 @@ curl localhost:10254/metrics | grep nginx
 kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
   tail -f /var/log/nginx/access.log
 ```
-
 ---
 
 ## Prometheus 关键指标
@@ -324,3 +329,6 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 ## Related
 
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

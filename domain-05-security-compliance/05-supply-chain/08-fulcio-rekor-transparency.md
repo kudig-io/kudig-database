@@ -56,6 +56,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs)
@@ -1090,7 +1095,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Trillian 日志树
 kubectl run trillian-admin \
   --image gcr.io/projectsigstore/trillian_log_server:v1.5.3 \
@@ -1121,13 +1127,13 @@ kubectl run trillian-verify \
     --log_id 9876543210 \
     get_latest_signed_log_root
 ```
-
 ## 7.3 Rekor 签名密钥管理 (Rekor Signing Key Management)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成 Rekor 签名密钥（用于签名树根哈希）
 # 方法 1: 直接生成（开发/测试）
 openssl ecparam -name prime256v1 -genkey -noout -out rekor-key.pem
@@ -1157,7 +1163,6 @@ gcloud kms keys versions get-public-key 1 \
 # 发布公钥供验证使用
 cat rekor-public-key.pem
 ```
-
 ---
 
 <!-- chunk: 8. 透明日志监控与告警 (Transparency Log Monitoring and Alerting) -->## 8. 透明日志监控与告警 (Transparency Log Monitoring and Alerting)
@@ -1435,7 +1440,8 @@ rekor-cli upload \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 对 Helm Chart 进行签名（使用 Rekor 记录）
 # 首先，使用 cosign 签名 Helm Chart
 
@@ -1470,7 +1476,6 @@ cosign verify \
   ghcr.io/your-org/helm-charts/my-chart:1.0.0 && \
   helm install my-release oci://ghcr.io/your-org/helm-charts/my-chart --version 1.0.0
 ```
-
 ---
 
 <!-- chunk: 10. 企业级透明日志架构 (Enterprise Transparency Log Architecture) -->## 10. 企业级透明日志架构 (Enterprise Transparency Log Architecture)
@@ -1585,7 +1590,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # key_compromise_response.sh - 签名密钥泄露应急响应
 
@@ -1678,7 +1684,6 @@ echo "受损密钥: $COMPROMISED_KEY"
 echo "受影响签名数: ${SIGNATURE_COUNT}"
 echo "下一步: 通知安全团队并完成合规报告"
 ```
-
 ---
 
 <!-- chunk: 12. 参考资料 (References) -->## 12. 参考资料 (References)
@@ -1761,3 +1766,5 @@ Fulcio 和 Rekor 共同构成了 Sigstore 无密钥签名的信任基础：
 - 10-compliance-automation-audit
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

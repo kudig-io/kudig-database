@@ -40,6 +40,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -245,7 +250,8 @@ K8s 应用问题 (顶事件)
 
 ### 任务 2: FEBM 实战演练 - 应用间歇性超时 (1h)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === FEBM 完整案例: 应用间歇性超时 ===
 
 # Phase 1: 证据收集 (Evidence Collection)
@@ -313,7 +319,6 @@ kubectl logs -n kube-system terway-xxx --tail=200 | grep -i "error|warn"
 # 2026-05-18 10:26:10 ERROR Failed to setup network for sandbox abc123: timeout
 # 2026-05-18 10:27:05 WARN ENI attachment timeout for node node-worker-2
 ```
-
 **假设列表和验证结果**：
 
 | 序号 | 假设 | 验证方法 | 验证证据 | 结果 |
@@ -334,7 +339,17 @@ kubectl logs -n kube-system terway-xxx --tail=200 | grep -i "error|warn"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 临时缓解: 重启受影响的 Terway Pod
 kubectl delete pod -n kube-system terway-xxx
 
@@ -351,7 +366,6 @@ kubectl rollout restart daemonset terway -n kube-system
 kubectl get pods -n kube-system -l app=terway
 kubectl logs -n kube-system terway-xxx --tail=50 | grep -i "error"
 ```
-
 ### 任务 3: 为复杂问题构建完整 FTA + FEBM (30min)
 
 **练习: 构建你的故障分析案例**
@@ -565,3 +579,5 @@ spec:
 - [Google SRE Book - Understanding Outages](https://sre.google/sre-book/understanding-outages/)
 
 ```
+
+<!-- risk-assessed -->

@@ -43,6 +43,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 16 - 生产环境故障排查剧本
@@ -371,7 +376,17 @@ troubleshootingToolbox:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # troubleshooting-cheatsheet.sh - 故障排查速查
 
@@ -435,7 +450,6 @@ cat << 'EOF'
 
 EOF
 ```
-
 ### 1.3 故障排查金字塔
 
 ```mermaid
@@ -498,7 +512,8 @@ graph TD
 
 ### 1.3 故障排查最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # troubleshooting-best-practices.sh - 故障排查最佳实践脚本
 
@@ -552,7 +567,6 @@ echo "3. 先内后外：先检查集群内部再检查外部依赖"
 echo "4. 先恢复后分析：优先恢复服务再深入分析"
 echo "5. 记录过程：详细记录排查步骤和发现"
 ```
-
 ---
 
 ## 2. 系统级故障排查
@@ -572,7 +586,8 @@ echo "5. 记录过程：详细记录排查步骤和发现"
 #### 剧本1：节点 NotReady 问题
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点状态显示 NotReady
 $ kubectl get nodes
 NAME              STATUS     ROLES    AGE   VERSION
@@ -580,9 +595,9 @@ node-1            Ready      <none>   30d   v1.28.0
 node-2            NotReady   <none>   30d   v1.28.0  ← 问题节点
 node-3            Ready      <none>   30d   v1.28.0
 ```
-
 **快速诊断脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-troubleshooting.sh - 节点问题快速诊断
 
@@ -637,7 +652,6 @@ ssh $NODE_NAME "
   crictl ps -a | head -20
 "
 ```
-
 **常见原因及解决方案**
 
 | 原因 | 诊断命令 | 解决方案 |
@@ -655,7 +669,8 @@ ssh $NODE_NAME "
 OOMKilled (Out Of Memory Killed) 就像房间只能容纳10个人，但来了15个人，超出的5个人被保安赶出去。
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod状态显示OOMKilled
 $ kubectl get pods
 NAME                     READY   STATUS      RESTARTS   AGE
@@ -667,10 +682,10 @@ Last State:     Terminated
   Reason:       OOMKilled
   Exit Code:    137
 ```
-
 **快速诊断流程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # oomkilled-troubleshooting.sh - OOMKilled快速诊断
 
@@ -783,7 +798,6 @@ spec:
         averageUtilization: 80  # 内存使用超过80%时扩容
 YAML
 ```
-
 **常见OOM原因及解决方案**
 
 | 原因 | 特征 | 诊断方法 | 解决方案 |
@@ -799,7 +813,8 @@ YAML
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # java-memory-leak-diagnosis.sh - Java应用内存泄漏诊断
 
@@ -830,11 +845,11 @@ kubectl cp $NAMESPACE/$POD_NAME:/tmp/heap.hprof ./heap.hprof
 echo "✅ 堆转储已保存到 ./heap.hprof"
 echo "   使用 VisualVM 或 Eclipse MAT 分析"
 ```
-
 ### 2.3 节点资源耗尽
 
 **诊断脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # resource-starvation-troubleshooting.sh - 资源耗尽诊断
 
@@ -870,13 +885,13 @@ ssh $NODE_NAME "
   iostat -x 1 3
 "
 ```
-
 ### 2.2 系统性能问题排查
 
 #### 剧本3：CPU 使用率过高
 
 **快速诊断**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # high-cpu-troubleshooting.sh - 高CPU使用率诊断
 
@@ -906,7 +921,6 @@ kubectl get pods --all-namespaces -o json | \
   select(.resources.limits.cpu) | 
   $pod + " " + .name + " throttled: " + (.resources.resources.cpu.throttled // "unknown")'
 ```
-
 ---
 
 ## 3. 网络故障排查
@@ -924,7 +938,8 @@ DNS就像电话簿，服务名(my-service)是姓名，IP地址是电话号码。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 容器内无法解析服务名
 $ kubectl exec -it app-pod -- nslookup my-service
 Server:    10.96.0.10
@@ -932,10 +947,10 @@ Address 1: 10.96.0.10
 
 nslookup: can't resolve 'my-service'
 ```
-
 **快速诊断流程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # dns-troubleshooting.sh - DNS解析完整诊断
 
@@ -1003,7 +1018,6 @@ echo "[ ] 目标Service存在: $(kubectl get svc $SERVICE_NAME -n $NAMESPACE &>/
 echo "[ ] DNS可以解析kubernetes.default: (需手动检查上面测试结果)"
 echo "[ ] DNS可以解析目标服务: (需手动检查上面测试结果)"
 ```
-
 **常见DNS问题及解决方案**
 
 | 问题 | 症状 | 根因 | 解决方案 |
@@ -1047,15 +1061,16 @@ Service就像快递地址：
 - Endpoints是"实际收件人列表"
 
 **问题现象**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 服务无法访问
 $ kubectl run test --rm -it --image=busybox -- wget -qO- http://my-service
 wget: can't connect to remote host (10.96.5.10): Connection refused
 ```
-
 **快速诊断流程**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # service-connectivity-troubleshooting.sh - Service连通性完整诊断
 
@@ -1174,7 +1189,6 @@ if [ "$ENDPOINT_COUNT" -eq "0" ]; then
   echo "  3. Pod的端口名称与Service不匹配"
 fi
 ```
-
 **Service排查决策树**
 
 ```yaml
@@ -1226,18 +1240,19 @@ serviceToubleshootingDecisionTree:
 ### 3.3 网络策略故障排查
 
 **问题现象**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 服务无法访问
 $ kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://my-service:80
 wget: bad address 'my-service'
 ```
-
 **诊断脚本**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # service-connectivity-troubleshooting.sh - 服务连通性诊断
 
@@ -1281,11 +1296,11 @@ fi
 echo "7. NetworkPolicy 检查:"
 kubectl get networkpolicy -n $NAMESPACE
 ```
-
 #### 剧本5：DNS 解析失败
 
 **诊断脚本**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # dns-resolution-troubleshooting.sh - DNS解析诊断
 
@@ -1315,7 +1330,6 @@ kubectl run dns-test --image=nicolaka/netshoot --rm -it --restart=Never -- nsloo
 echo "6. Pod DNS 配置检查:"
 kubectl run debug-pod --image=nicolaka/netshoot --rm -it --restart=Never -- cat /etc/resolv.conf
 ```
-
 ### 3.2 网络策略故障排查
 
 #### 剧本6：NetworkPolicy 阻断流量
@@ -1325,7 +1339,8 @@ kubectl run debug-pod --image=nicolaka/netshoot --rm -it --restart=Never -- cat 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # network-policy-troubleshooting.sh - 网络策略诊断
 
@@ -1367,7 +1382,6 @@ done
 EOF
 chmod +x connectivity-test.sh
 ```
-
 ---
 
 ## 4. 存储故障排查
@@ -1377,15 +1391,16 @@ chmod +x connectivity-test.sh
 #### 剧本7：PVC 无法绑定
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # PVC 状态为 Pending
 $ kubectl get pvc
 NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 mysql-pvc        Pending                                      fast-ssd       10m
 ```
-
 **诊断脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pvc-troubleshooting.sh - PVC故障诊断
 
@@ -1434,7 +1449,6 @@ case $STORAGE_TYPE in
     ;;
 esac
 ```
-
 ### 4.2 存储性能问题排查
 
 #### 剧本8：存储性能下降
@@ -1444,7 +1458,8 @@ esac
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # storage-performance-troubleshooting.sh - 存储性能诊断
 
@@ -1483,7 +1498,6 @@ if [ ! -z "$PVC_NAME" ]; then
   kubectl get storageclass $SC -o yaml
 fi
 ```
-
 ---
 
 ## 5. 应用故障排查
@@ -1497,7 +1511,8 @@ fi
 CrashLoopBackOff就像电脑一开机就蓝屏，自动重启后又蓝屏，陷入死循环。Kubernetes发现容器启动后立即崩溃，会自动重启，但每次重启间隔会指数增长（1s, 2s, 4s, 8s... 最长5分钟）。
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod反复重启
 $ kubectl get pods
 NAME                     READY   STATUS             RESTARTS   AGE
@@ -1509,10 +1524,10 @@ app-7d5b7c9f8c-xyz12   0/1   Running            9      16m
 app-7d5b7c9f8c-xyz12   0/1   Error              9      16m
 app-7d5b7c9f8c-xyz12   0/1   CrashLoopBackOff   9      16m
 ```
-
 **快速诊断流程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crashloop-troubleshooting.sh - CrashLoopBackOff完整诊断
 
@@ -1629,7 +1644,6 @@ echo "[ ] 5. 权限问题 → 检查SecurityContext和文件权限"
 echo "[ ] 6. 启动命令错误 → 验证command和args"
 echo "[ ] 7. 健康检查失败 → 检查readinessProbe/livenessProbe"
 ```
-
 **常见CrashLoopBackOff原因**
 
 | 退出码 | 含义 | 常见原因 | 解决方案 |
@@ -1653,7 +1667,8 @@ ImagePullBackOff就像快递员找不到地址无法送货：
 - 仓库关门（镜像仓库不可用）
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod无法拉取镜像
 $ kubectl get pods
 NAME                     READY   STATUS             RESTARTS   AGE
@@ -1667,13 +1682,13 @@ Events:
   Warning  Failed     Failed to pull image "myapp:v1.0": rpc error: code = Unknown desc = Error response from daemon: pull access denied for myapp, repository does not exist or may require 'docker login'
   Warning  Failed     Error: ImagePullBackOff
 ```
-
 **快速诊断流程**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # imagepull-troubleshooting.sh - ImagePullBackOff完整诊断
 
@@ -1786,7 +1801,6 @@ echo "   - 使用认证凭据提高限额"
 echo "   - 切换到其他镜像仓库"
 echo "   - 使用镜像缓存"
 ```
-
 **ImagePullBackOff 决策树**
 
 ```yaml
@@ -1825,7 +1839,8 @@ imagePullTroubleshooting:
 ### 5.3 应用性能问题
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 状态异常
 $ kubectl get pods
 NAME                            READY   STATUS              RESTARTS   AGE
@@ -1833,13 +1848,13 @@ my-app-7d5b7c9f8c-xyz12        0/1     ImagePullBackOff    0          5m
 my-app-7d5b7c9f8c-abc34        0/1     CrashLoopBackOff    3          5m
 my-app-7d5b7c9f8c-def56        0/1     Pending             0          5m
 ```
-
 **综合诊断脚本**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # pod-troubleshooting.sh - Pod问题综合诊断
 
@@ -1890,7 +1905,6 @@ kubectl exec $POD_NAME -n $NAMESPACE -- nslookup kubernetes.default.svc.cluster.
 echo "9. 挂载卷检查:"
 kubectl exec $POD_NAME -n $NAMESPACE -- df -h
 ```
-
 ### 5.2 应用性能问题排查
 
 #### 剧本10：应用响应慢
@@ -1900,7 +1914,8 @@ kubectl exec $POD_NAME -n $NAMESPACE -- df -h
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # application-performance-troubleshooting.sh - 应用性能诊断
 
@@ -1951,7 +1966,6 @@ sleep 2
 curl -s http://localhost:8080/actuator/prometheus 2>/dev/null | head -20 || echo "无法获取应用指标"
 kill $PF_PID 2>/dev/null
 ```
-
 ---
 
 ## 6. 控制平面故障排查
@@ -1961,7 +1975,8 @@ kill $PF_PID 2>/dev/null
 #### 剧本11：API Server 不可用
 
 **快速诊断脚本**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # apiserver-troubleshooting.sh - API Server故障诊断
 
@@ -1996,7 +2011,6 @@ kubectl auth can-i '*' '*' --as=system:anonymous
 echo "7. 网络连通性:"
 kubectl run net-test --image=busybox --rm -it --restart=Never -- wget -qO- --timeout=5 https://kubernetes.default.svc.cluster.local
 ```
-
 ### 6.2 调度器故障排查
 
 #### 剧本12：Pod 调度失败
@@ -2006,7 +2020,8 @@ kubectl run net-test --image=busybox --rm -it --restart=Never -- wget -qO- --tim
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # scheduler-troubleshooting.sh - 调度器故障诊断
 
@@ -2044,7 +2059,6 @@ echo "7. 调度模拟:"
 kubectl run simulate-schedule --image=busybox --restart=Never --dry-run=client -o yaml | \
   kubectl create -f - --validate=false
 ```
-
 ---
 
 ## 7. 性能问题排查
@@ -2062,7 +2076,8 @@ CPU Throttling就像汽车装了限速器：
 - 感觉：车子明明还能跑快，但被限制了，很"卡顿"
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 应用响应慢，但CPU使用率不高
 $ kubectl top pods
 NAME                     CPU(cores)   MEMORY(bytes)
@@ -2070,10 +2085,10 @@ app-7d5b7c9f8c-xyz12    950m         256Mi
 
 # 配置的limit是1000m（1核），看起来快到上限了
 ```
-
 **快速诊断流程**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cpu-throttling-diagnosis.sh - CPU Throttling诊断
 
@@ -2176,7 +2191,6 @@ echo "3️⃣  扩容方案（增加副本）:"
 echo "   - 使用HPA根据CPU使用率自动扩容"
 echo "   - 手动增加Deployment副本数"
 ```
-
 **CPU Throttling 识别指标**
 
 ```yaml
@@ -2224,7 +2238,8 @@ cpuThrottlingIndicators:
 - 关键特征：内存只增不减
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 内存使用持续增长
 $ kubectl top pod app-pod
 NAME       CPU(cores)   MEMORY(bytes)
@@ -2245,14 +2260,14 @@ $ kubectl get pods
 NAME       READY   STATUS      RESTARTS   AGE
 app-pod    0/1     OOMKilled   3          25m
 ```
-
 **快速诊断流程**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # memory-leak-diagnosis.sh - 内存泄漏诊断
 
@@ -2379,7 +2394,6 @@ echo "     • 闭包引用导致无法GC"
 echo "     • 第三方库泄漏"
 echo "   - 修复代码后重新部署"
 ```
-
 **内存泄漏 vs 正常增长**
 
 ```yaml
@@ -2427,7 +2441,8 @@ memoryPatternComparison:
 ### 7.3 性能问题综合排查
 
 **综合诊断脚本**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # cluster-performance-troubleshooting.sh - 集群性能诊断
 
@@ -2470,7 +2485,6 @@ kubectl run network-test --image=praqma/network-multitool --rm -it --restart=Nev
   done
 "
 ```
-
 ### 7.2 监控指标异常排查
 
 #### 剧本14：监控指标异常
@@ -2480,7 +2494,8 @@ kubectl run network-test --image=praqma/network-multitool --rm -it --restart=Nev
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # monitoring-metrics-troubleshooting.sh - 监控指标异常诊断
 
@@ -2511,7 +2526,6 @@ kubectl get endpoints -n monitoring | grep prometheus
 echo "6. RBAC 权限检查:"
 kubectl auth can-i get pods --as=system:serviceaccount:monitoring:prometheus-k8s
 ```
-
 ---
 
 ## 8. 实战案例分析
@@ -2537,7 +2551,8 @@ incident:
 ```
 
 **2. 初步诊断**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Pod状态
 $ kubectl get pods -n production -l app=order-service
 NAME                             READY   STATUS      RESTARTS   AGE
@@ -2552,7 +2567,6 @@ NAME                             CPU     MEMORY
 order-service-7d5b7c9f8c-abc12  950m    1900Mi     # ❌ 内存高
 order-service-7d5b7c9f8c-ghi56  980m    1950Mi     # ❌ CPU和内存都高
 ```
-
 **3. 问题假设**
 ```yaml
 hypotheses:
@@ -2567,7 +2581,8 @@ hypotheses:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证H1: 流量激增
 $ kubectl top pods -n production -l app=order-service --use-protocol-buffers
 # 结果: QPS从1000增加到5000 ✅ 证实
@@ -2588,7 +2603,6 @@ REVISION  CHANGE-CAUSE
 2         Update image to v1.2.3
 3         Update image to v1.2.4 (2小时前)  # ❌ 可疑
 ```
-
 **5. 根因定位**
 ```yaml
 rootCause:
@@ -2609,7 +2623,8 @@ rootCause:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 紧急修复步骤
 
@@ -2634,7 +2649,6 @@ kubectl rollout status deployment/order-service -n production
 
 echo "✅ 紧急修复完成"
 ```
-
 **7. 修复验证**
 ```yaml
 verification:
@@ -2748,7 +2762,8 @@ postmortem:
 - 服务大面积不可用
 
 **排查步骤**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 快速评估影响范围
 kubectl get nodes --no-headers | awk '$2 == "NotReady" {count++} END {print "NotReady 节点数量:", count}'
 
@@ -2769,7 +2784,6 @@ for node in $(kubectl get nodes --no-headers | awk '$2 == "NotReady" {print $1}'
   ssh $node "timedatectl status" | grep -E "NTP|synchronized"
 done
 ```
-
 ### 8.2 案例2：存储性能瓶颈
 
 **问题场景**
@@ -2821,7 +2835,8 @@ storagePerformanceInvestigation:
 - 服务间通信异常
 
 **排查步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # network-partition-troubleshooting.sh - 网络分区诊断
 
@@ -2847,7 +2862,6 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
   ssh $node "sudo iptables -L -n | grep -E 'DROP|REJECT'"
 done
 ```
-
 ## 故障排查
 
 > 本文件本身即为完整的生产故障排查手册。详见上方各章节：1.故障排查方法论、2.系统级、3.网络、4.存储、5.应用、6.控制平面、7.性能问题排查。
@@ -2865,7 +2879,8 @@ done
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速诊断集群健康
 kubectl get cs && kubectl get nodes && kubectl top nodes
 
@@ -2884,7 +2899,6 @@ etcdctl endpoint health --cluster
 # 网络连通性快速测试
 kubectl run nettest --image=nicolaka/netshoot --rm -it -- bash
 ```
-
 ## 交叉引用
 
 - 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [故障模式分析](failure-patterns-analysis.md) · [运维最佳实践](operations-best-practices.md) · [性能调优](performance-tuning-expert.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md)
@@ -2900,3 +2914,6 @@ kubectl run nettest --image=nicolaka/netshoot --rm -it -- bash
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Helm 生产实践指南（阿里云专有云版）
@@ -168,7 +173,8 @@ dependencies:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 本地渲染检查
 helm template myapp ./myapp \
   -f ./myapp/values.yaml \
@@ -185,7 +191,6 @@ helm upgrade --install myapp ./myapp \
   --atomic \
   --timeout 10m
 ```
-
 ### 2.3 Values 示例
 
 ```yaml
@@ -223,10 +228,10 @@ podDisruptionBudget:
 
 ### 3.1 安装 helm-secrets
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm plugin install https://github.com/jkroepke/helm-secrets --version v4.5.1
 ```
-
 ### 3.2 SOPS 配置
 
 ```bash
@@ -248,13 +253,13 @@ git add secrets-prod.yaml
 
 ### 3.4 Helm 使用加密 values
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm secrets upgrade --install myapp ./myapp \
   -f ./myapp/values-prod.yaml \
   -f ./myapp/secrets/secrets-prod.yaml \
   --namespace production
 ```
-
 ---
 
 <!-- chunk: 4. Chart 测试 -->
@@ -262,18 +267,18 @@ helm secrets upgrade --install myapp ./myapp \
 
 ### 4.1 模板渲染测试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm lint ./myapp
 helm template myapp ./myapp -f ./myapp/values-prod.yaml > /tmp/rendered.yaml
 ```
-
 ### 4.2 单元测试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm plugin install https://github.com/helm-unittest/helm-unittest.git
 helm unittest ./myapp
 ```
-
 ### 4.3 测试 Pod 模板
 
 ```yaml
@@ -294,10 +299,10 @@ spec:
   restartPolicy: Never
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm test myapp --namespace production
 ```
-
 ---
 
 <!-- chunk: 5. 依赖管理 -->
@@ -320,21 +325,21 @@ dependencies:
 
 ### 5.2 更新依赖
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm dependency update ./myapp
 helm dependency build ./myapp
 ```
-
 ### 5.3 私有 Chart 仓库（阿里云/专有云 Harbor）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm repo add mycharts https://harbor.example.com/chartrepo/myrepo \
   --username <user> --password <pass>
 
 helm package ./myapp
 helm cm-push myapp-1.2.3.tgz mycharts
 ```
-
 ---
 
 <!-- chunk: 6. 与 ArgoCD/Flux 集成 -->
@@ -401,19 +406,20 @@ spec:
 
 ### 7.1 Helm 原生回滚
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm history myapp -n production
 helm rollback myapp 2 -n production --wait --timeout 10m
 helm status myapp -n production
 kubectl get pods -n production
 ```
-
 ### 7.2 升级时自动回滚
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm upgrade --install myapp ./myapp \
   -f ./myapp/values-prod.yaml \
   --namespace production \
@@ -421,7 +427,6 @@ helm upgrade --install myapp ./myapp \
   --cleanup-on-fail \
   --timeout 10m
 ```
-
 ### 7.3 GitOps 回滚
 
 | 场景 | 操作 |
@@ -480,10 +485,10 @@ ci.pipeline: {{ .Values.global.ciPipelineId | default "unknown" | quote }}
 
 ### 9.2 发布历史保留
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 helm history myapp -n production --max 20
 ```
-
 ---
 
 <!-- chunk: 10. 多集群与专有云发布流水线 -->
@@ -508,7 +513,8 @@ myapp/
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -e
 ENV=$1
@@ -529,7 +535,6 @@ helm upgrade --install myapp ./myapp \
 
 helm test myapp -n production
 ```
-
 ### 10.3 发布门禁
 
 | 阶段 | 检查项 | 失败处理 |
@@ -578,7 +583,8 @@ helm test myapp -n production
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 登录阿里云 ACR（杭州 VPC 域名）
 helm registry login registry-vpc.cn-hangzhou.aliyuncs.com \
   --username ${ALIBABA_CLOUD_ACCESS_KEY_ID} \
@@ -606,13 +612,13 @@ helm upgrade --install my-app \
 helm list -n production
 kubectl get pods -n production
 ```
-
 ### 专有云 Harbor 仓库示例
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Harbor chart 仓库
 helm repo add apsara-platform https://harbor.apsara.example.com/chartrepo/platform
 helm repo update
@@ -627,7 +633,6 @@ helm upgrade --install my-app apsara-platform/my-chart \
   -f values-prod.yaml -n production
 
 ```
-
 ---
 
 ## Helm 故障排查速查
@@ -649,7 +654,8 @@ helm upgrade --install my-app apsara-platform/my-chart \
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 本地验证
 helm lint ./my-chart
 helm template my-app ./my-chart -f ./my-chart/values-prod.yaml > /tmp/rendered.yaml
@@ -678,7 +684,6 @@ helm upgrade --install my-app \
 helm status my-app -n production
 kubectl rollout status deployment/my-app -n production
 ```
-
 ### 专有云发布注意事项
 
 - 镜像与 Chart 必须提前同步到专有云 Harbor/ACR。
@@ -785,7 +790,8 @@ Helm 默认保留所有 Release 历史，历史过多会导致 ConfigMap 超限�
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装时限制历史版本
 helm upgrade --install my-app ./my-chart --history-max 10
 
@@ -796,7 +802,6 @@ helm rollback my-app 5 -n production
 # 自动清理 Job 与测试 Pod
 kubectl delete pod -n production -l helm.sh/hook=test-success
 ```
-
 建议将 `--history-max` 写入 CI/CD 模板，避免默认无限制增长。
 
 ---
@@ -806,3 +811,5 @@ kubectl delete pod -n production -l helm.sh/hook=test-success
 本文档覆盖了 Helm Chart 开发、values 分层、Secret 加密、测试、依赖、GitOps 集成、回滚及阿里云/专有云发布实践。遵循这些规范可显著提升发布稳定性与可维护性。
 
 ```
+
+<!-- risk-assessed -->

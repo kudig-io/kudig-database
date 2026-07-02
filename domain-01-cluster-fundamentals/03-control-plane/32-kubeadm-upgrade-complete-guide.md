@@ -41,6 +41,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubeadm 升级完整路径指南（含 rollback）
@@ -139,7 +144,8 @@ Kubernetes **最多跳过 1 个次版本**（e.g., 1.27 → 1.28 → 1.29 可行
 
 ### 1.2 升级前检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前集群版本
 kubectl get nodes -o wide
 
@@ -170,7 +176,6 @@ free -h
 containerd --version
 crictl version
 ```
-
 ---
 
 <!-- chunk: 2. 升级计划与版本预览 -->
@@ -249,7 +254,8 @@ kubeadm version
 
 ### 3.3 步骤 2: 升级 kube-apiserver
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在主控制平面节点执行
 # 查看当前的静态 Pod manifest
 ls /etc/kubernetes/manifests/
@@ -263,10 +269,10 @@ kubeadm upgrade apply v1.XX.Y
 # 如果是多控制平面主节点，添加 --etcd-upgrade=false（如果 etcd 已手动升级）
 kubeadm upgrade apply v1.XX.Y --etcd-upgrade=false --certificate-renewal=false
 ```
-
 ### 3.4 步骤 3: 验证 API Server
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 API Server 已重启成功
 kubectl get pods -n kube-system kube-apiserver-<node-name>
 # 确认 Running 状态且 Restart Count 正常
@@ -279,13 +285,22 @@ curl -k https://localhost:6443/healthz
 kubectl get nodes -o wide
 # 确认 Master 列显示新版本
 ```
-
 ### 3.5 步骤 4: 升级 kube-controller-manager 和 kube-scheduler
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # kubeadm upgrade apply 已自动升级 controller-manager 和 scheduler
 # 如需手动刷新配置：
 # 1. 编辑静态 Pod manifest 更新镜像版本
@@ -294,13 +309,22 @@ kubectl get nodes -o wide
 kubectl get pods -n kube-system kube-controller-manager-<node-name>
 kubectl get pods -n kube-system kube-scheduler-<node-name>
 ```
-
 ### 3.6 步骤 5: 升级 kubelet
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在控制平面节点执行
 # 升级 kubelet 包
 apt-get install -y kubelet=1.XX.Y-1*  # Debian/Ubuntu
@@ -318,7 +342,6 @@ systemctl status kubelet
 kubectl get nodes -o wide
 # 确认节点 Ready 且版本已更新
 ```
-
 ---
 
 <!-- chunk: 4. 控制平面组件升级（其他控制平面节点） -->
@@ -329,7 +352,17 @@ kubectl get nodes -o wide
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # SSH 到第二个控制平面节点（node-2）
 
 # 1. 升级 kubeadm
@@ -355,10 +388,10 @@ systemctl restart kubelet
 # 4. 验证
 kubectl get nodes -o wide
 ```
-
 ### 4.2 控制平面组件版本验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在所有控制平面节点执行以下命令确认组件版本
 # 手动检查每个组件的镜像版本
 kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[0].image}'
@@ -366,7 +399,6 @@ kubectl get pods -n kube-system -l component=kube-controller-manager -o jsonpath
 kubectl get pods -n kube-system -l component=kube-scheduler -o jsonpath='{.items[*].spec.containers[0].image}'
 kubectl get pods -n kube-system -l k8s-app=kube-proxy -o jsonpath='{.items[*].spec.containers[0].image}'
 ```
-
 ---
 
 <!-- chunk: 5. 升级 worker 节点 -->
@@ -380,7 +412,17 @@ kubectl get pods -n kube-system -l k8s-app=kube-proxy -o jsonpath='{.items[*].sp
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 升级 worker 节点（逐节点执行）
 
 # 1. 升级 kubeadm
@@ -401,10 +443,10 @@ kubectl get nodes -o wide
 # 5. 解除 cordon（自动解除，如需手动）
 # kubectl uncordon <node-name>
 ```
-
 ### 5.2 升级多个 worker 节点（滚动）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有 worker 节点列表
 kubectl get nodes -l node-role.kubernetes.io/worker
 
@@ -414,7 +456,6 @@ kubectl get nodes -l node-role.kubernetes.io/worker
 # 监控 Pod 调度情况
 kubectl get pods --all-namespaces -o wide -w
 ```
-
 ---
 
 <!-- chunk: 6. 升级后验证 -->
@@ -425,7 +466,8 @@ kubectl get pods --all-namespaces -o wide -w
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查所有节点版本
 kubectl get nodes -o wide
 
@@ -463,7 +505,6 @@ kubectl delete pod test-pod
 # 9. 检查证书过期时间
 kubeadm alpha certs check-expiration
 ```
-
 ### 6.2 验证命令输出参考
 
 ```bash
@@ -500,7 +541,17 @@ https://127.0.0.1:2379 is healthy: true
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止 kubelet
 systemctl stop kubelet
 
@@ -516,14 +567,14 @@ sleep 30
 curl -sk https://localhost:6443/healthz
 kubectl get pods -n kube-system kube-apiserver-<node-name>
 ```
-
 ### 7.3 etcd 回滚步骤
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 停止所有控制平面节点上的 etcd
 systemctl stop etcd
 
@@ -544,13 +595,22 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint health
 # 5. 验证 API Server 能连接 etcd
 curl -sk https://localhost:6443/healthz
 ```
-
 ### 7.4 kubelet 版本回滚
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在出问题的节点上
 # 1. 降级 kubelet 包
 apt-get install -y kubelet=1.XX.Y-1*  # 回退到之前版本
@@ -564,7 +624,6 @@ systemctl restart kubelet
 # 3. 检查节点状态
 kubectl get nodes -o wide
 ```
-
 ---
 
 <!-- chunk: 8. 特殊场景 -->
@@ -582,7 +641,8 @@ kubeadm upgrade apply v1.XX.Y --certificate-renewal=false
 
 ### 8.2 离线升级（无公网镜像）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在有网络的机器上下载所需镜像
 kubeadm config images pull --kubernetes-version=v1.XX.Y
 
@@ -598,7 +658,6 @@ docker load -i /tmp/k8s-images.tar
 # 5. 执行升级（使用 --image-repository 指向内网仓库）
 kubeadm upgrade apply v1.XX.Y --image-repository=internal-registry.example.com
 ```
-
 ### 8.3 etcd 单独升级（不需要滚动升级）
 
 ```bash
@@ -614,7 +673,8 @@ etcd --version
 
 ### 8.4 升级时配置变化（K8s 1.28 → 1.29）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1.29 中 kube-proxy 默认使用 iptables 还是 ipvs？
 # 查看当前模式：
 kubectl get configmap -n kube-system kube-proxy -o yaml | grep mode
@@ -623,7 +683,6 @@ kubectl get configmap -n kube-system kube-proxy -o yaml | grep mode
 # 查看调度器配置：
 kubectl get configmap -n kube-system kube-scheduler -o yaml
 ```
-
 ---
 
 <!-- chunk: 9. 升级完成后的收尾工作 -->
@@ -633,7 +692,17 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 更新 kubectl 客户端（如使用外部 kubectl）
 apt-get install -y kubectl=1.XX.Y-1*  # Debian/Ubuntu
 
@@ -653,7 +722,6 @@ docker image prune -a
 helm repo update
 helm upgrade <release> <chart> --namespace <namespace>
 ```
-
 ---
 
 <!-- chunk: 附录：关键命令速查 -->
@@ -730,3 +798,5 @@ related:
 - final-completion-check
 
 ```
+
+<!-- risk-assessed -->

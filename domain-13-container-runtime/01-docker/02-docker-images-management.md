@@ -49,6 +49,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 镜像管理详解
@@ -105,7 +110,8 @@ cross_refs:
 
 ## 镜像层内容寻址
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 镜像 manifest
 docker manifest inspect nginx:1.25 --verbose
 
@@ -115,7 +121,6 @@ docker image inspect nginx:1.25 --format '{{range .RootFS.Layers}}{{.}}{{println
 # 层内容位置
 ls /var/lib/docker/overlay2/
 ```
-
 ## OCI 镜像结构
 
 | 组件 | 文件 | 说明 |
@@ -293,7 +298,8 @@ ENTRYPOINT ["/server"]
 
 ## 启用 BuildKit
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式1: 环境变量
 export DOCKER_BUILDKIT=1
 docker build .
@@ -308,7 +314,6 @@ docker buildx build .
   }
 }
 ```
-
 ## BuildKit 缓存挂载
 
 ```dockerfile
@@ -343,14 +348,14 @@ RUN --mount=type=ssh \
     git clone git@github.com:org/private-repo.git
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建时传入 secret
 docker buildx build --secret id=npmrc,src=$HOME/.npmrc .
 
 # 使用 SSH agent
 docker buildx build --ssh default .
 ```
-
 ## BuildKit 并行构建
 
 ```dockerfile
@@ -378,7 +383,8 @@ COPY --from=builder-cli /cli /usr/local/bin/
 
 ## 多平台构建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建多平台构建器
 docker buildx create --name multiarch --driver docker-container --use
 
@@ -391,10 +397,10 @@ docker buildx build \
 # 仅针对特定平台构建
 docker buildx build --platform linux/arm64 -t app:arm64 --load .
 ```
-
 ## 构建进度输出
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 纯文本输出 (CI 环境)
 docker buildx build --progress=plain .
 
@@ -404,7 +410,6 @@ docker buildx build --progress=tty .
 # 自动检测
 docker buildx build --progress=auto .
 ```
-
 ---
 
 <!-- chunk: 镜像仓库管理 -->## 镜像仓库管理
@@ -468,7 +473,17 @@ trivy:
 
 ## 镜像操作命令
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 登录仓库
 docker login registry.example.com
 docker login --username user --password-stdin <<< "password"
@@ -489,10 +504,10 @@ docker manifest inspect registry.example.com/project/myapp:v1.0
 # Harbor: 通过 API 或 Web UI
 # ECR: aws ecr batch-delete-image
 ```
-
 ## 镜像仓库认证配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ~/.docker/config.json
 {
   "auths": {
@@ -510,13 +525,13 @@ docker manifest inspect registry.example.com/project/myapp:v1.0
   }
 }
 ```
-
 ## Kubernetes 镜像拉取凭据
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Secret
 kubectl create secret docker-registry regcred \
   --docker-server=registry.example.com \
@@ -532,7 +547,6 @@ spec:
     - name: app
       image: registry.example.com/project/app:v1
 ```
-
 ---
 
 <!-- chunk: 镜像安全扫描 -->## 镜像安全扫描
@@ -639,7 +653,8 @@ jobs:
 
 ## Docker Content Trust (DCT)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 DCT
 export DOCKER_CONTENT_TRUST=1
 
@@ -659,7 +674,6 @@ docker trust signer remove alice myregistry/myimage
 # 撤销签名
 docker trust revoke myregistry/myimage:v1
 ```
-
 ## Cosign (Sigstore)
 
 ```bash
@@ -847,7 +861,8 @@ ENTRYPOINT ["python", "-m", "src.main"]
 
 ## 镜像分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Dive - 分析镜像层
 dive nginx:1.25
 # 显示每层内容变化，识别大文件
@@ -860,7 +875,6 @@ docker history --no-trunc nginx:1.25
 slim build --target nginx:1.25 --tag nginx:slim
 # 自动分析移除不必要文件
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -883,3 +897,5 @@ slim build --target nginx:1.25 --tag nginx:slim
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

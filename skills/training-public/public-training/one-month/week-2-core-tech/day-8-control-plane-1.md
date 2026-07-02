@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 8: 控制平面 - [[etcd|etcd]] + API Server
@@ -191,7 +196,8 @@ API Server 是 Kubernetes 的核心网关，所有对集群的访问都经过 AP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 获取 etcd Pod 名称
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 echo "etcd Pod: $ETCD_POD"
@@ -273,13 +279,13 @@ etcdctl snapshot status /var/lib/etcd/snapshot-20260518.db --write-table
 # | 12345678 | abcdef12 |   12340000 |       567  |
 # +----------+----------+------------+------------+
 ```
-
 ### 任务 2: API Server 请求追踪 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 使用 verbose 模式查看完整请求
 kubectl get pods -v=8
 
@@ -337,14 +343,14 @@ kubectl api-resources | head -30
 
 kill %1
 ```
-
 ### 任务 3: 准入控制实验 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 查看启用的准入控制器
 kubectl get pods -n kube-system -l component=kube-apiserver -o yaml | grep admission
 
@@ -440,7 +446,6 @@ kubectl delete pod test-limit
 kubectl delete limitrange default-limits
 kubectl delete resourcequota compute-quota
 ```
-
 ---
 
 ## 配置参考
@@ -496,7 +501,8 @@ kubectl delete resourcequota compute-quota
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 定期备份命令
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n kube-system $ETCD_POD -- \
@@ -508,7 +514,6 @@ kubectl exec -n kube-system $ETCD_POD -- \
 # - 测试备份的恢复能力
 # - ACK 托管版阿里云自动备份
 ```
-
 ### Q4: API Server 过载怎么排查？
 
 **A**:
@@ -552,3 +557,6 @@ kubectl exec -n kube-system $ETCD_POD -- \
 ## 明日预告
 
 Day 9 将学习 Scheduler 和 Controller Manager，理解 K8s 如何实现自动化管理。
+
+
+<!-- risk-assessed -->

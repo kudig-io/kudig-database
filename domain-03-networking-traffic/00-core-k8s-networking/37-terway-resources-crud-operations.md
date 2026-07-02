@@ -43,6 +43,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 37 - Terway 实例 CRUD 操作指南 (Terway Resources CRUD Operations)
@@ -175,7 +180,8 @@ Terway 是阿里云开源的 Container Network Interface (CNI) 插件，专为�
 
 ### 1.2 查看集群 CRD 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Terway 相关 CRD
 kubectl get crd | grep -E 'network.alibabacloud|terway'
 
@@ -190,7 +196,6 @@ kubectl get crd | grep -E 'network.alibabacloud|terway'
 kubectl explain podenis.network.alibabacloud.com
 kubectl explain nodenetworkings.network.alibabacloud.com
 ```
-
 ---
 
 <!-- chunk: 2. PodENI 资源 CRUD 操作 -->
@@ -375,7 +380,8 @@ spec:
 
 ### 2.3 Read - 查询 PodENI 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 基础查询命令
 # ============================================
@@ -449,7 +455,6 @@ EOF
 chmod +x check-podeni-status.sh
 ./check-podeni-status.sh
 ```
-
 ### 2.4 Update - 更新 PodENI 资源
 
 #### 2.4.1 更新安全组
@@ -458,7 +463,17 @@ chmod +x check-podeni-status.sh
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方式一: 直接编辑
 kubectl edit podeni <podeni-name> -n <namespace>
 
@@ -486,13 +501,13 @@ spec:
 EOF
 kubectl apply -f update-podeni.yaml
 ```
-
 #### 2.4.2 更新 vSwitch 配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新 PodENI 的 vSwitch
 kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
 {
@@ -503,13 +518,13 @@ kubectl patch podeni <podeni-name> -n <namespace> --type='merge' -p='
   }
 }'
 ```
-
 #### 2.4.3 通过 Annotation 更新 Pod 网络配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为现有 Pod 添加安全组 Annotation (需要 Pod 重建)
 kubectl annotate pod <pod-name> -n <namespace> \
   k8s.aliyun.com/security-group="sg-xxxxx" \
@@ -520,7 +535,6 @@ kubectl annotate pod <pod-name> -n <namespace> \
   k8s.aliyun.com/pod-ip-fixed- \
   --overwrite
 ```
-
 ### 2.5 Delete - 删除 PodENI 资源
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -528,7 +542,17 @@ kubectl annotate pod <pod-name> -n <namespace> \
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ============================================
 # 基础删除命令
 # ============================================
@@ -572,7 +596,6 @@ for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}'); do
   done
 done
 ```
-
 ---
 
 <!-- chunk: 3. NodeNetworking 资源 CRUD 操作 -->
@@ -655,7 +678,8 @@ spec:
 
 ### 3.3 Read - 查询 NodeNetworking 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 基础查询命令
 # ============================================
@@ -713,13 +737,13 @@ EOF
 chmod +x check-node-networking.sh
 ./check-node-networking.sh
 ```
-
 ### 3.4 Update - 更新 NodeNetworking 资源
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 更新 ENI 配置
 # ============================================
@@ -768,21 +792,29 @@ kubectl patch nodenetworking <node-name> --type='merge' -p='
   }
 }'
 ```
-
 ### 3.5 Delete - 删除 NodeNetworking 资源
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除 NodeNetworking (通常不需要手动删除)
 kubectl delete nodenetworking <node-name>
 
 # 删除所有 NodeNetworking (危险操作)
 kubectl delete nodenetworkings --all  # ⚠️ 批量删除，波及面大
 ```
-
 ---
 
 <!-- chunk: 4. PodNetworking 资源 CRUD 操作 -->
@@ -892,7 +924,8 @@ spec:
 
 ### 4.3 Read - 查询 PodNetworking 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 PodNetworking
 kubectl get podnetworkings
 
@@ -905,13 +938,22 @@ kubectl get pods -l app=api-server,tier=backend
 # 验证 Pod 是否使用了正确的网络配置
 kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.k8s\.aliyun\.com/allocated-podnetworking}'
 ```
-
 ### 4.4 Update - 更新 PodNetworking 资源
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 更新 PodNetworking 的 vSwitch
 kubectl patch podnetworking <name> --type='json' -p='[
   {
@@ -934,20 +976,19 @@ kubectl patch podnetworking <name> --type='merge' -p='
 # 编辑完整配置
 kubectl edit podnetworking <name>
 ```
-
 ### 4.5 Delete - 删除 PodNetworking 资源
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 PodNetworking
 kubectl delete podnetworking <name>
 
 # 删除多个 PodNetworking
 kubectl delete podnetworking <name1> <name2>
 ```
-
 ---
 
 <!-- chunk: 5. ReservedIP 资源 CRUD 操作 (固定 IP 管理) -->
@@ -1048,7 +1089,8 @@ spec:
 
 ### 5.3 Read - 查询 ReservedIP 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 基础查询命令
 # ============================================
@@ -1093,13 +1135,13 @@ EOF
 chmod +x check-reserved-ips.sh
 ./check-reserved-ips.sh
 ```
-
 ### 5.4 Update - 更新 ReservedIP 资源
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新 IP 保留时长
 kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
 {
@@ -1120,13 +1162,22 @@ kubectl patch reservedip <name> -n <namespace> --type='merge' -p='
   }
 }'
 ```
-
 ### 5.5 Delete - 删除 ReservedIP 资源
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除固定 IP (会释放 IP 地址)
 kubectl delete reservedip <name> -n <namespace>
 
@@ -1139,7 +1190,6 @@ kubectl get reservedips -A -o json | \
 # 强制删除 (忽略 reclaimPolicy)
 kubectl delete reservedip <name> -n <namespace> --force
 ```
-
 ---
 
 <!-- chunk: 6. IPInstance 资源 CRUD 操作 -->
@@ -1196,7 +1246,8 @@ spec:
 
 ### 6.2 Read - 查询 IPInstance 资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 基础查询命令
 # ============================================
@@ -1247,7 +1298,6 @@ EOF
 chmod +x analyze-ip-usage.sh
 ./analyze-ip-usage.sh
 ```
-
 ---
 
 <!-- chunk: 7. ConfigMap 配置管理 -->
@@ -1330,7 +1380,17 @@ data:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ============================================
 # 查询配置
 # ============================================
@@ -1376,7 +1436,6 @@ kubectl delete pods -n kube-system -l app=terway-eniip
 # 验证配置是否生效
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=50 | grep -i config
 ```
-
 ---
 
 <!-- chunk: 8. 常用 Annotation 速查表 -->
@@ -1412,7 +1471,8 @@ spec:
 
 ### 8.3 Node 级别 Annotation
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 ENI 信息
 kubectl get node <node-name> -o jsonpath='{.metadata.annotations}'
 
@@ -1421,7 +1481,6 @@ kubectl get node <node-name> -o jsonpath='{.metadata.annotations}'
 # k8s.aliyun.com/enipool-ip: ENI 池 IP 信息
 # k8s.aliyun.com/node-network-policy: 节点网络策略
 ```
-
 ---
 
 <!-- chunk: 9. 故障排查指南 -->
@@ -1429,7 +1488,8 @@ kubectl get node <node-name> -o jsonpath='{.metadata.annotations}'
 
 ### 9.1 常见问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # Pod 网络问题诊断
 # ============================================
@@ -1472,10 +1532,10 @@ kubectl get reservedip <name> -n <namespace> -o yaml
 # 检查 StatefulSet Pod 的 IP 绑定
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.metadata.annotations}'
 ```
-
 ### 9.2 故障排查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat << 'EOF' > terway-diagnose.sh
 #!/bin/bash
 
@@ -1536,7 +1596,6 @@ EOF
 chmod +x terway-diagnose.sh
 ./terway-diagnose.sh
 ```
-
 ---
 
 <!-- chunk: 10. 最佳实践 -->
@@ -1639,7 +1698,17 @@ data:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ============================================
 # PodENI 操作
 # ============================================
@@ -1681,7 +1750,6 @@ kubectl delete pods -n kube-system -l app=terway-eniip  # 重启 Terway
 kubectl logs -n kube-system -l app=terway-eniip -c terway --tail=200  # 查看日志
 kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)
@@ -1714,3 +1782,6 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

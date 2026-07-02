@@ -1,8 +1,8 @@
 ---
 title: Wiki 维护周期执行摘要（2026-06-26）
-description: 完成 cross-linker、wiki-lint、wiki-synthesize、wiki-status insights 四轮维护任务的执行摘要
-summary: 完成 cross-linker、wiki-lint、wiki-synthesize、wiki-status insights 四轮维护任务的执行摘要
+description: 完成 cross-linker、wiki-lint、wiki-synthesize、wiki-status insights 维护任务及语料导出
 category: reports
+summary: "完成全库维护、语料评估与导出：4,996 页面，89.1 分，release/ 目录可交付。"
 tags:
 - wiki-maintenance
 - cross-linker
@@ -16,13 +16,18 @@ updated: '2026-06-26'
 last_updated: 2026-06-26
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Wiki 维护周期执行摘要（2026-06-26）
 
-> **执行目标**：按 wiki-status 建议全面执行 wiki 维护任务  
-> **执行范围**：cross-linker、wiki-lint、wiki-synthesize、wiki-status insights、broken links 修复、summary/frontmatter 补充、tier 分配、fragmented tags cross-link  
-> **执行结果**：完成全部维护任务，核心内容 broken links = 0，typed relationship issues = 0，missing frontmatter = 0
+> **执行目标**：按 wiki-status 建议全面执行 wiki 维护任务，评估语料完整度并导出  
+> **执行范围**：cross-linker、wiki-lint、wiki-synthesize、wiki-status insights、broken links 修复、summary/frontmatter 补充、tier 分配、fragmented tags cross-link、语料评估与导出  
+> **执行结果**：完成全部维护任务；语料评估 89.1/100；已导出到 `release/` 目录
 
 ---
 
@@ -38,8 +43,10 @@ last_updated: 2026-06-26
 | Summary/Frontmatter | 4,937 个 summary，41 个 frontmatter |
 | Tier 分配 | core=1102, supporting=1372, peripheral=2511 |
 | Fragmented Tags | 5 个 tag hubs，434 个页面新增交叉链接 |
+| 语料评估 | 89.1/100，4,881 页面，1,725 万 tokens |
+| 语料导出 | `release/`：4,996 页面，1,746 万 tokens，19,502 QA 对，195M |
 | 日志更新 | 更新 `log.md`、`hot.md` |
-| 新增脚本 | 15 个自动化脚本 |
+| 新增脚本 | 16 个自动化脚本 |
 | 新增报告 | 12+ 份 |
 
 ---
@@ -334,6 +341,8 @@ last_updated: 2026-06-26
 | `scripts/bulk_assign_tiers.py` | 批量分配 tier |
 | `scripts/cross_link_fragmented_tags.py` | 为 fragmented tags 创建 hub 并交叉链接 |
 | `scripts/fix_escaped_wikilinks.py` | 修复错误转义的 wikilink |
+| `scripts/evaluate_corpus_completeness.py` | 评估语料完整度 |
+| `scripts/export_corpus_for_nas.py` | 导出语料到指定目录 |
 
 ---
 
@@ -346,11 +355,50 @@ last_updated: 2026-06-26
 - `_reports/summary-frontmatter-fill-2026-06-26.md` — summary/frontmatter 补充报告
 - `_reports/broken-links-final-fix-2026-06-26.md` — broken links 最终修复报告
 - `_reports/cross-linker-targeted-2026-06-26.md` — cross-link 报告
+- `_reports/corpus-completeness-evaluation-2026-06-26.md` — 语料完整度评估报告
 - `_reports/wiki-maintenance-cycle-summary-2026-06-26.md` — 本摘要
 
 ---
 
-## 13. 后续建议
+## 13. 语料评估与导出
+
+### 评估结果
+
+| 维度 | 得分 | 说明 |
+|---|---|---|
+| 综合评分 | **89.1/100** | 优秀，可导出 |
+| 规模 | 97.6 | 4,881 页面，1,725 万 tokens |
+| 结构健康度 | 100.0 | broken links=0，missing frontmatter=0 |
+| 概念覆盖度 | 98.0 | 49/50 关键 K8s/云原生概念 |
+| 工单智能体适配度 | 100.0 | 58 ticket 页，507 skill 文档 |
+| RAG 适配度 | 100.0 | 4,879 summary，4,881 tags/category |
+
+### 导出详情
+
+- **导出目录**: `release/`
+- **总页面数**: 4,996
+- **总 tokens**: 17,460,194
+- **QA 对**: 19,502
+- **目录大小**: 195M
+- **分层结构**:
+  - `corpus/core/` — 1,102 页
+  - `corpus/supporting/` — 1,382 页
+  - `corpus/peripheral/` — 2,512 页
+  - `corpus/all/` — 全部页面
+  - `qa/qa-corpus.jsonl` — QA 语料
+  - `index.json` — 页面索引
+  - `manifest.json` — 导出清单
+  - `metadata/page-stats.json` — 统计信息
+
+### 输出
+
+- `_reports/corpus-completeness-evaluation-2026-06-26.md`
+- `_reports/corpus-completeness-evaluation-2026-06-26.json`
+- `release/`
+
+---
+
+## 14. 后续建议
 
 ### 高优先级
 
@@ -371,3 +419,6 @@ last_updated: 2026-06-26
 ---
 
 *本摘要记录 2026-06-26 执行的完整 wiki 维护周期成果。*
+
+
+<!-- risk-assessed -->

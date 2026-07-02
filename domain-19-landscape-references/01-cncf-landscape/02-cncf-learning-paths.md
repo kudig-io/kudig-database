@@ -63,6 +63,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CNCF 学习路径
@@ -93,6 +98,7 @@ authors:
 ## 2.1 DevOps 工程师路径
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Week 1-4: 基础 (40h)
 ├── Docker 容器基础 (10h)
 │   ├── 容器概念与原理
@@ -130,7 +136,6 @@ Week 9-12: 运维实践 (40h)
 └── 故障排查 (10h)
     └── 常见问题处理
 ```
-
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
 - [[entities/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
@@ -208,6 +213,7 @@ Week 13-16: 生产实践 (40h)
 ## 2.3 架构师路径
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Month 1-2: 战略基础 (80h)
 ├── 云原生架构原则 (20h)
 │   ├── 12-Factor App
@@ -265,7 +271,6 @@ Month 7-8: 行业解决方案 (80h)
     ├── Cluster API
     └── GitOps 多集群
 ```
-
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
 - [Cilium](./graduated/cilium/cilium.md)
@@ -566,3 +571,6 @@ Month 3: 身份与零信任 (40h)
 - 01-cncf-integration-guide
 - 03-cncf-selection-guide
 - 04-cncf-fta-index
+
+
+<!-- risk-assessed -->

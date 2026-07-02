@@ -32,6 +32,11 @@ prerequisites:
 - iac-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -139,7 +144,8 @@ tier: peripheral---
 
 ## 🔧 核心技术栈
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 内部开发者平台
 Backstage (CNCF Incubating)     # 开发者门户
 Kratix                          # 平台即代码
@@ -158,7 +164,6 @@ Terraform                       # 基础设施即代码
 DORA Metrics                    # 交付效能
 SPACE Framework                 # 开发者体验
 ```
-
 ## 📚 相关领域链接
 
 - **[Domain-9: 平台运维](../domain-9-platform-operations)** - Kubernetes 平台运维
@@ -167,3 +172,6 @@ SPACE Framework                 # 开发者体验
 
 ---
 *本文档由云原生技术专家团队维护，内容基于 2026 年平台工程最新实践。*
+
+
+<!-- risk-assessed -->

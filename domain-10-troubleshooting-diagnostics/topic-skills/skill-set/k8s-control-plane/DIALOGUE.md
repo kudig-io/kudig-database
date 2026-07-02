@@ -25,6 +25,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # 控制平面组件问题 — 远程顾问对话脚本
 
@@ -132,7 +137,8 @@ relationships:
 顾问："阿里云环境控制平面有特殊架构，请按以下顺序排查：
 
 **步骤 1：ACK托管版与专有版区分**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查ACK类型
 kubectl get nodes -o wide
 # 托管版：Master节点由阿里云管理，不可见
@@ -141,14 +147,14 @@ kubectl get nodes -o wide
 # 检查ACK集群状态
 aliyun cs GET /clusters/<cluster-id>
 ```
-
 > **如果无法执行aliyun CLI**：请登录ACK控制台，告诉我：
 > 1. 集群类型是托管版还是专有版？
 > 2. 集群状态是否为运行中？
 
 **步骤 2：托管版控制平面检查**
 托管版Master由阿里云管理，排查重点：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查APIServer可用性
 kubectl cluster-info
 
@@ -158,12 +164,12 @@ kubectl top pod -n kube-system | grep apiserver
 # 检查ACK组件状态
 kubectl get pods -n kube-system | grep ack-
 ```
-
 > **如APIServer完全不可用**：立即联系阿里云技术支持（托管版Master不可直接修复）。
 
 **步骤 3：专有版控制平面检查**
 专有版Master可SSH访问：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # SSH到Master节点
 ssh root@<master-ip>
 
@@ -176,7 +182,6 @@ etcdctl endpoint health --endpoints=https://127.0.0.1:2379
 # 检查飞天组件状态
 curl http://localhost:7070/api/v1/status
 ```
-
 **步骤 4：专有云升级决策**
 
 | 场景 | 处理方式 |
@@ -441,3 +446,6 @@ kubectl无法连接
 ## Related
 
 - [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+
+
+<!-- risk-assessed -->

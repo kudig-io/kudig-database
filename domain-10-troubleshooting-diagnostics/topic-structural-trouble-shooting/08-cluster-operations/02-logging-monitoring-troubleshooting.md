@@ -48,6 +48,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 日志与监控故障排查指南
@@ -224,7 +229,8 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查采集器 DaemonSet 状态
 kubectl get ds -n logging
 kubectl get pods -n logging -o wide
@@ -245,13 +251,13 @@ kubectl get configmap -n logging fluentd-config -o yaml
 kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/containers/
 kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/pods/
 ```
-
 #### Elasticsearch/OpenSearch 检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查集群健康状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq
 
@@ -267,13 +273,13 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/allocation?v
 # 检查分片状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/shards?v | head -20
 ```
-
 #### Loki 检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Loki 状态
 kubectl get pods -n logging -l app=loki
 
@@ -290,12 +296,12 @@ kubectl exec -n logging <loki-pod> -- wget -qO- http://localhost:3100/metrics | 
 kubectl get pods -n logging -l app=promtail
 kubectl logs -n logging -l app=promtail --tail=100
 ```
-
 ### 监控系统排查命令
 
 #### Prometheus 检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Prometheus 状态
 kubectl get pods -n monitoring -l app=prometheus
 
@@ -317,10 +323,10 @@ curl -s http://localhost:9090/api/v1/rules | jq
 # 检查存储状态
 curl -s http://localhost:9090/api/v1/status/tsdb | jq
 ```
-
 #### AlertManager 检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 AlertManager 状态
 kubectl get pods -n monitoring -l app=alertmanager
 
@@ -339,10 +345,10 @@ curl -s http://localhost:9093/api/v2/silences | jq
 # 检查配置
 kubectl get secret -n monitoring alertmanager-<name> -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 ```
-
 #### Grafana 检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Grafana 状态
 kubectl get pods -n monitoring -l app.kubernetes.io/name=grafana
 
@@ -358,7 +364,6 @@ kubectl get configmap -n monitoring grafana-datasources -o yaml
 # 检查 Dashboard 配置
 kubectl get configmap -n monitoring -l grafana_dashboard=1
 ```
-
 ---
 
 ## 解决方案与风险控制
@@ -368,12 +373,12 @@ kubectl get configmap -n monitoring -l grafana_dashboard=1
 #### 场景 1：Fluent Bit 采集器崩溃
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -n logging
 NAME                READY   STATUS             RESTARTS   AGE
 fluent-bit-abc12    0/1     CrashLoopBackOff   5          10m
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -381,7 +386,8 @@ fluent-bit-abc12    0/1     CrashLoopBackOff   5          10m
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看崩溃日志
 kubectl logs -n logging <fluent-bit-pod> --previous
 
@@ -407,7 +413,6 @@ kubectl rollout restart daemonset fluent-bit -n logging
 # 4. 验证状态
 kubectl get pods -n logging -l app=fluent-bit -w
 ```
-
 #### 场景 2：日志丢失
 
 **解决步骤：**
@@ -415,7 +420,8 @@ kubectl get pods -n logging -l app=fluent-bit -w
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认日志在节点上存在
 kubectl debug node/<node> -it --image=busybox -- ls -la /host/var/log/containers/
 
@@ -437,7 +443,6 @@ kubectl logs -n logging <fluent-bit-pod> | grep -i "error|retry|failed"
 # 7. 如果是 ES 写入问题，检查索引状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep red
 ```
-
 #### 场景 3：日志延迟
 
 **解决步骤：**
@@ -445,7 +450,8 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查采集器队列状态
 kubectl logs -n logging <fluent-bit-pod> | grep -i "buffer|queue|backpressure"
 
@@ -493,7 +499,6 @@ kubectl top pods -n logging | grep elasticsearch
 
 # 5. 如果是 ES 慢，考虑扩容或优化
 ```
-
 ---
 
 ### Elasticsearch/Loki 后端问题
@@ -505,17 +510,18 @@ kubectl top pods -n logging | grep elasticsearch
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 $ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health
 {"status":"red",...}
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查未分配的分片
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/shards?v | grep UNASSIGNED
 
@@ -539,7 +545,6 @@ kubectl exec -n logging <es-pod> -- curl -X POST 'localhost:9200/_cluster/rerout
 # 4. 验证集群恢复
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq '.status'
 ```
-
 #### 场景 2：Loki 查询超时
 
 **解决步骤：**
@@ -547,7 +552,17 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Loki 资源使用
 kubectl top pods -n logging -l app=loki
 
@@ -566,7 +581,6 @@ kubectl logs -n logging -l app=loki | grep -i "storage|s3|gcs"
 
 # 5. 考虑部署 Loki 分布式模式
 ```
-
 ---
 
 ### Prometheus 问题
@@ -582,7 +596,17 @@ kubectl logs -n logging -l app=loki | grep -i "storage|s3|gcs"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Prometheus Targets
 kubectl port-forward -n monitoring svc/prometheus-server 9090:80
 # 访问 http://localhost:9090/targets
@@ -615,7 +639,6 @@ kubectl get clusterrole prometheus -o yaml
 # 4. 重新加载 Prometheus 配置
 curl -X POST http://localhost:9090/-/reload
 ```
-
 #### 场景 2：Prometheus OOM 或慢查询
 
 **解决步骤：**
@@ -623,7 +646,17 @@ curl -X POST http://localhost:9090/-/reload
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查资源使用
 kubectl top pods -n monitoring -l app.kubernetes.io/name=prometheus
 
@@ -651,7 +684,6 @@ kubectl patch statefulset prometheus-server -n monitoring --type='json' -p='[
 
 # 6. 考虑使用 Thanos/VictoriaMetrics 等方案进行扩展
 ```
-
 ---
 
 ### AlertManager 问题
@@ -660,7 +692,8 @@ kubectl patch statefulset prometheus-server -n monitoring --type='json' -p='[
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Prometheus 告警状态
 curl -s http://localhost:9090/api/v1/alerts | jq '.data.alerts[] | {alertname: .labels.alertname, state: .state}'
 
@@ -691,7 +724,6 @@ curl -X POST http://localhost:9093/api/v2/alerts -H 'Content-Type: application/j
   }
 ]'
 ```
-
 #### 场景 2：告警风暴
 
 **解决步骤：**
@@ -699,7 +731,17 @@ curl -X POST http://localhost:9093/api/v2/alerts -H 'Content-Type: application/j
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 配置告警分组
 kubectl edit secret alertmanager-<name> -n monitoring
 # route:
@@ -732,7 +774,6 @@ curl -X POST http://localhost:9093/api/v2/silences -H 'Content-Type: application
 kubectl get prometheusrule -n monitoring
 kubectl edit prometheusrule <name> -n monitoring
 ```
-
 ---
 
 ### Grafana 问题
@@ -745,7 +786,8 @@ kubectl edit prometheusrule <name> -n monitoring
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查数据源配置
 kubectl port-forward -n monitoring svc/grafana 3000:80
 # 访问 Settings -> Data Sources -> 测试连接
@@ -765,7 +807,6 @@ kubectl get configmap -n monitoring grafana-datasources -o yaml
 # 5. 重启 Grafana
 kubectl rollout restart deployment grafana -n monitoring
 ```
-
 #### 场景 2：Dashboard 加载缓慢
 
 **解决步骤：**
@@ -773,7 +814,17 @@ kubectl rollout restart deployment grafana -n monitoring
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Grafana 资源使用
 kubectl top pods -n monitoring -l app.kubernetes.io/name=grafana
 
@@ -792,7 +843,6 @@ kubectl edit configmap grafana-config -n monitoring
 # [database]
 # cache_mode = redis
 ```
-
 ---
 
 ### 日志系统配置示例
@@ -918,7 +968,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 日志系统
 kubectl get pods -n logging
 kubectl logs -n logging -l app=fluent-bit
@@ -938,7 +989,6 @@ curl -s http://localhost:9093/api/v2/alerts | jq
 kubectl top pods -n logging
 kubectl top pods -n monitoring
 ```
-
 ### 相关文档
 
 - [DaemonSet 故障排查](../05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
@@ -959,3 +1009,5 @@ kubectl top pods -n monitoring
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

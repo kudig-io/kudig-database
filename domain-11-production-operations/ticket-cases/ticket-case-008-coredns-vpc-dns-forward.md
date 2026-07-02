@@ -68,6 +68,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 008：DNS 解析异常（CoreDNS 配置被 ConfigMap 误改 + VPC DNS 转发）
@@ -93,7 +98,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入异常 Pod
 kubectl exec -it deploy/route-service -n logistics-platform -- /bin/sh
 
@@ -102,25 +108,25 @@ for i in $(seq 1 20); do nslookup inventory-service.logistics-platform.svc.clust
 # 或使用 dig
 dig @$(awk '/nameserver/{print $2}' /etc/resolv.conf) inventory-service.logistics-platform.svc.cluster.local
 ```
-
 ### 3.2 检查 CoreDNS Pod 与 ConfigMap
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -n kube-system -l k8s-app=kube-dns
 kubectl get cm coredns -n kube-system -o yaml
 kubectl get cm coredns-custom -n kube-system -o yaml
 ```
-
 ### 3.3 检查 CoreDNS 日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=300
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=300 | grep -i "SERVFAIL|NXDOMAIN|timeout"
 ```
-
 ### 3.4 检查 VPC DNS 与节点 /etc/resolv.conf
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点默认 DNS 配置
 kubectl run node-debug --rm -it --image=registry-vpc.cn-shanghai.aliyuncs.com/acs/busybox:latest --restart=Never --overrides='{"spec":{"hostNetwork":true}}' -- /bin/sh
 cat /etc/resolv.conf
@@ -129,15 +135,14 @@ cat /etc/resolv.conf
 nc -vz 100.100.2.136 53
 nc -vz 100.100.2.138 53
 ```
-
 ### 3.5 检查 EndpointSlice 与 Service 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc inventory-service -n logistics-platform -o yaml
 kubectl get endpointslice -n logistics-platform -l kubernetes.io/service-name=inventory-service
 kubectl get endpoints inventory-service -n logistics-platform
 ```
-
 ### 3.6 诊断过程补充说明
 
 DNS 间歇性失败是最具迷惑性的网络故障之一。排障时建议同时关注 CoreDNS 缓存、UDP 53 端口负载均衡以及节点 `/etc/resolv.conf` 中的 `ndots` 与 `search` 配置。ACK 专有云中，如果节点 `/etc/resolv.conf` 本身指向了 VPC DNS，而 CoreDNS 又将根域 forward 到同一 VPC DNS，可能形成循环或重复转发，进一步放大延迟。
@@ -162,16 +167,17 @@ DNS 间歇性失败是最具迷惑性的网络故障之一。排障时建议同�
 
 ### 5.1 备份当前 CoreDNS ConfigMap
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm coredns -n kube-system -o yaml > /tmp/coredns-backup-$(date +%Y%m%d-%H%M%S).yaml
 ```
-
 ### 5.2 恢复标准 Corefile，仅对外部域名 forward 到 VPC DNS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<'EOF'
 apiVersion: v1
 kind: ConfigMap
@@ -208,13 +214,13 @@ data:
     }
 EOF
 ```
-
 ### 5.3 使用 coredns-custom ConfigMap 进行更安全的增量修改
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 推荐：不直接改 coredns ConfigMap，而是通过 coredns-custom 覆盖
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
@@ -237,48 +243,48 @@ data:
     }
 EOF
 ```
-
 ### 5.4 重新加载 CoreDNS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deploy coredns -n kube-system
 kubectl rollout status deploy coredns -n kube-system --timeout=120s
 ```
-
 ### 5.5 清空 Pod DNS 缓存
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 route-service 与 inventory-service Pod，强制重新建立连接与 DNS 缓存
 kubectl delete pod -n logistics-platform -l app=route-service
 kubectl delete pod -n logistics-platform -l app=inventory-service
 ```
-
 ### 5.6 回滚方案（如修复失败）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若修改后问题加剧，立即从备份恢复 CoreDNS ConfigMap
 kubectl apply -f /tmp/coredns-backup-<timestamp>.yaml
 kubectl rollout restart deploy coredns -n kube-system
 
 # 紧急情况下，可临时在业务 Pod 所在节点上修改 /etc/resolv.conf 指向备用 DNS（不推荐长期）
 ```
-
 ## 6. 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 CoreDNS Pod 全部 Running
 kubectl get pod -n kube-system -l k8s-app=kube-dns
 
@@ -306,7 +312,6 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -c "NXDOMAIN|S
 kubectl exec -it deploy/route-service -n logistics-platform -- \
   curl -s -o /dev/null -w "%{http_code}" http://inventory-service.logistics-platform.svc.cluster.local:8080/health
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-008 已处理完成。
@@ -357,3 +362,6 @@ kubectl exec -it deploy/route-service -n logistics-platform -- \
 - [[domain-11-production-operations/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md|ConfigMap/Secret 更新后应用未生效]]
 - 配置映射
 - [[concepts/service-networking.md|Service Networking]]
+
+
+<!-- risk-assessed -->

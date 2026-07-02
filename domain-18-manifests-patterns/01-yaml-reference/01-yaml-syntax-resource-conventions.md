@@ -44,6 +44,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 01 - YAML 语法基础与 [[Kubernetes|Kubernetes]] 资源通用规范
@@ -1064,6 +1069,7 @@ status:                         # 实际状态（系统自动更新）
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────┐
 │  1. 用户通过 kubectl apply 提交 spec        │
 │     期望状态：replicas: 3                   │
@@ -1093,7 +1099,6 @@ status:                         # 实际状态（系统自动更新）
 │  5. 持续监控直到 spec = status              │
 └─────────────────────────────────────────────┘
 ```
-
 ## status 字段示例
 
 ```yaml
@@ -1169,7 +1174,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 命令式（Imperative）- 告诉系统"怎么做"
 kubectl scale deployment nginx --replicas=5
 kubectl expose deployment nginx --port=80
@@ -1177,7 +1183,6 @@ kubectl expose deployment nginx --port=80
 # 声明式（Declarative）- 告诉系统"期望什么结果"
 kubectl apply -f deployment.yaml  # 系统自动计算差异并执行
 ```
-
 **声明式优势**：
 - ✅ 配置即代码（Configuration as Code）
 - ✅ 幂等性（重复执行结果一致）
@@ -1420,7 +1425,8 @@ metadata:
 
 ## 标签选择器示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询特定团队的所有资源
 kubectl get pods -l team=payment-team
 
@@ -1433,7 +1439,6 @@ kubectl get all -l app.kubernetes.io/part-of=ecommerce-platform
 # 多标签联合查询
 kubectl get pods -l 'app.kubernetes.io/name=nginx,environment in (production,staging)'
 ```
-
 ## 5.3 注解用途
 
 注解（Annotations）用于存储任意非标识性元数据，不会被选择器使用。
@@ -1500,6 +1505,7 @@ metadata:
 ## 注解 vs 标签决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 是否需要通过 kubectl 选择器查询该字段？
 ├─ YES → 使用 Label
 │   ├─ 例如：app=nginx, env=prod
@@ -1509,7 +1515,6 @@ metadata:
     ├─ 例如：git.commit=abc123, prometheus.io/port=9090
     └─ 用途：存储元数据、工具配置、变更记录
 ```
-
 **规则总结**：
 - ✅ **标签**：用于**标识和选择**资源（键值简短、规范化）
 - ✅ **注解**：用于**描述和配置**资源（值可包含复杂数据）
@@ -1623,7 +1628,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl apply -f deployment.yaml
 
@@ -1642,7 +1648,6 @@ v1.LabelSelector{...}: field is immutable
 kubectl delete deployment nginx
 kubectl apply -f deployment.yaml
 ```
-
 ## 6.3 Server-side Field Validation (v1.25+)
 
 Kubernetes 1.25+ 引入**服务端字段验证**，提供三种严格级别。
@@ -1660,7 +1665,8 @@ Kubernetes 1.25+ 引入**服务端字段验证**，提供三种严格级别。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 严格验证（推荐生产环境）
 kubectl apply -f deployment.yaml --validate=strict
 # 效果：拒绝未知字段、重复字段、类型错误
@@ -1673,7 +1679,6 @@ kubectl apply -f deployment.yaml --validate=warn
 kubectl apply -f deployment.yaml --validate=false
 # 效果：跳过所有验证
 ```
-
 ## 实际案例
 
 ```yaml
@@ -1703,7 +1708,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用时触发严格验证
 $ kubectl apply -f deployment.yaml --validate=strict
 
@@ -1717,13 +1723,13 @@ $ kubectl apply -f deployment.yaml --validate=warn
 Warning: unknown field "spec.template.spec.containers[0].unknownField"
 deployment.apps/nginx created  # 仍然创建成功
 ```
-
 ## 最佳实践
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CI/CD 管道中启用严格验证
 kubectl apply -f manifests/ \
   --validate=strict \
@@ -1736,7 +1742,6 @@ kubectl apply -f dev-deployment.yaml --validate=warn
 kubectl apply -f prod-deployment.yaml --validate=strict
 
 ```
-
 ---
 
 <!-- chunk: 7. kubectl 操作与内部原理 -->## 7. kubectl 操作与内部原理
@@ -1761,7 +1766,8 @@ Kubernetes 提供三种主要的资源创建/更新命令，内部机制完全�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建资源（仅在不存在时成功）
 kubectl create -f deployment.yaml
 
@@ -1776,13 +1782,13 @@ kubectl create secret generic db-secret \ # 创建 Secret
   --from-literal=password=abc123
 
 ```
-
 ## 2. kubectl replace（命令式替换）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 完全替换现有资源（资源必须已存在）
 kubectl replace -f deployment.yaml
 
@@ -1807,13 +1813,13 @@ kubectl replace -f deployment.yaml --force
 # 执行 replace 后，strategy 字段会被删除！
 
 ```
-
 ## 3. kubectl apply（声明式更新）⭐ 推荐
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建或更新资源（幂等操作）
 kubectl apply -f deployment.yaml
 
@@ -1829,12 +1835,12 @@ kubectl apply -f manifests/        # 递归应用所有 YAML
 kubectl apply -f https://example.com/deployment.yaml
 
 ```
-
 ## 三方合并机制（Three-way Merge）
 
 `kubectl apply` 使用**三方合并**算法，对比三个版本的配置：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌──────────────────────────────────────────────────┐
 │  1. Last Applied Configuration (上次应用的配置)    │
 │     存储在注解中：                                 │
@@ -1863,7 +1869,6 @@ kubectl apply -f https://example.com/deployment.yaml
        │  应用变更到集群      │
        └──────────────────────┘
 ```
-
 ## 三方合并示例
 
 ```yaml
@@ -1884,7 +1889,8 @@ spec:
 # 结果：创建 Deployment，并在 annotations 中存储配置
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看存储的 last-applied-configuration
 kubectl get deployment nginx -o yaml | grep -A 20 last-applied-configuration
 
@@ -1892,7 +1898,6 @@ kubectl get deployment nginx -o yaml | grep -A 20 last-applied-configuration
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"apps/v1","kind":"Deployment",...,"replicas":2,...}
 ```
-
 ```yaml
 # === 第二次更新（second-apply.yaml）===
 apiVersion: apps/v1
@@ -1974,7 +1979,8 @@ Server-side Apply (SSA) 是 `kubectl apply` 的升级版本，由 API Server 执
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Server-side Apply
 kubectl apply -f deployment.yaml --server-side
 
@@ -1988,7 +1994,6 @@ kubectl apply -f deployment.yaml \
   --server-side \
   --force-conflicts
 ```
-
 ## 字段所有权（Field Ownership）
 
 ```yaml
@@ -2023,7 +2028,8 @@ metadata:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景：两个管理器尝试修改同一字段
 
 # 管理器 A 应用配置
@@ -2048,13 +2054,13 @@ kubectl apply -f deployment.yaml \
 
 # 解决方案 2：协调两个管理器，避免管理相同字段
 ```
-
 ## 实际应用场景
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. GitOps 场景：ArgoCD 使用 SSA
 kubectl apply -f application.yaml \
   --server-side \
@@ -2076,7 +2082,6 @@ kubectl apply -f app-config.yaml \
   --server-side \
   --field-manager=app-team
 ```
-
 ---
 
 <!-- chunk: 8. 资源版本演进 -->## 8. 资源版本演进
@@ -2129,7 +2134,8 @@ Alpha (v1alpha1) → Beta (v1beta1) → Stable (v1/v2)
 
 ## 1. 查看资源使用的 API 版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群中所有 API 版本
 kubectl api-versions
 
@@ -2142,13 +2148,13 @@ horizontalpodautoscalers  hpa          autoscaling/v2          true         Hori
 kubectl get hpa -o yaml | grep apiVersion
 apiVersion: autoscaling/v2beta2
 ```
-
 ## 2. 手动迁移步骤
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：导出现有资源
 kubectl get hpa my-hpa -o yaml > hpa-old.yaml
 
@@ -2165,13 +2171,13 @@ kubectl apply -f hpa-old.yaml
 kubectl get hpa my-hpa -o yaml | grep apiVersion
 apiVersion: autoscaling/v2  # ✅ 新版本
 ```
-
 ## 3. 批量迁移脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 批量迁移 HPA 从 v2beta2 到 v2
 
@@ -2188,7 +2194,6 @@ while read ns name; do
     kubectl apply -f -
 done
 ```
-
 ## 4. 版本差异处理
 
 某些 API 版本变更会引入**字段变化**，需要手动调整。
@@ -2241,7 +2246,8 @@ spec:
 
 ## 5. 使用 Pluto 检测弃用 API
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Pluto（API 弃用检测工具）
 brew install FairwindsOps/tap/pluto
 
@@ -2259,7 +2265,6 @@ pluto detect-helm --helm-version 3
 pluto detect-helm -owide --helm-version=3
 
 ```
-
 ---
 
 <!-- chunk: 9. 快速查询索引表 -->## 9. 快速查询索引表
@@ -2398,3 +2403,6 @@ pluto detect-helm -owide --helm-version=3
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

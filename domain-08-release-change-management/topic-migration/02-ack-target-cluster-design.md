@@ -46,6 +46,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 02 - ACK 目标集群设计与搭建
@@ -362,7 +367,8 @@ auto_scaling:
 
 ## 5.1 通过 API 创建 ACK Pro 集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 ACK Pro 托管版集群
 aliyun cs POST /clusters --body '{
   "name": "ack-migration-prod",
@@ -411,10 +417,10 @@ export KUBECONFIG=~/.kube/ack-migration.yaml
 kubectl cluster-info
 kubectl get nodes  # 此时应为空（尚未创建节点池）
 ```
-
 ## 5.2 创建节点池
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 系统节点池
 aliyun cs POST /clusters/$CLUSTER_ID/nodepools --body '{
   "nodepool_info": {
@@ -476,7 +482,6 @@ aliyun cs POST /clusters/$CLUSTER_ID/nodepools --body '{
 kubectl get nodes -w
 # 预期: 所有节点 STATUS=Ready
 ```
-
 ---
 
 <!-- chunk: 6. 基础设施验证 -->## 6. 基础设施验证
@@ -487,7 +492,17 @@ kubectl get nodes -w
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 全面健康检查脚本
 echo "=== 集群版本 ==="
 kubectl version --short
@@ -537,13 +552,13 @@ kubectl get svc -n kube-system | grep nginx-ingress
 
 echo "=== 健康检查完成 ==="
 ```
-
 ## 6.2 性能基线测试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署网络性能测试工具
 kubectl apply -f https://raw.githubusercontent.com/InfraBuilder/k8s-bench-suite/master/netperf.yaml
 
@@ -581,7 +596,6 @@ EOF
 kubectl logs job/fio-test
 # 记录: ESSD PL1 预期 IOPS > 50,000
 ```
-
 ---
 
 <!-- chunk: 7. 迁移前基线建立 -->## 7. 迁移前基线建立
@@ -591,7 +605,8 @@ kubectl logs job/fio-test
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 如果安装了 ARMS Prometheus，确认指标采集
 kubectl get pods -n arms-prom -l app=arms-prometheus
 
@@ -612,7 +627,6 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
 # - etcd 磁盘 IOPS
 # - 网络吞吐
 ```
-
 ## 7.2 日志采集配置
 
 ```yaml
@@ -691,3 +705,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

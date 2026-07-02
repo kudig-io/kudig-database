@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-09-15] 多集群联邦网络分区导致 DNS 服务漂移，订单重复扣款
@@ -41,7 +46,8 @@ last_updated: 2026-05-23
 ## 诊断过程
 
 **12:15** — 检查联邦集群状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl --context=fed get clusters
 # NAME            AGE   READY
 # cluster-ap-east  45d   True
@@ -52,11 +58,11 @@ kubectl --context=fed get kubefedclusters
 # cluster-ap-east  True    45d
 # cluster-ap-south True    45d
 ```
-
 联邦控制器显示两集群均 Ready，但实际网络已分区。
 
 **12:18** — 检查集群间网络连通性：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从 cluster-ap-east 测试到 cluster-ap-south 的 API Server
 kubectl --context=cluster-ap-east run -it --rm debug --image=nicolaka/netshoot \
   --restart=Never -- ping 10.0.100.15
@@ -66,7 +72,6 @@ kubectl --context=cluster-ap-east run -it --rm debug --image=nicolaka/netshoot \
 aws ec2 describe-vpc-peering-connections --filters Name=status-code,Values=active
 # （无 active peering，都被 deleted）
 ```
-
 **12:20** — 查看变更历史：
 ```bash
 # 09-14 22:00，网络团队执行了 "清理过期 VPC Peering" 的自动化任务
@@ -74,7 +79,8 @@ aws ec2 describe-vpc-peering-connections --filters Name=status-code,Values=activ
 ```
 
 **12:22** — 检查联邦 DNS 行为：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # cluster-ap-east 的 CoreDNS
 kubectl --context=cluster-ap-east get svc payment-service -n prod-payment
 # NAME             TYPE        CLUSTER-IP     EXTERNAL-IP
@@ -85,7 +91,6 @@ kubectl --context=cluster-ap-south get svc payment-service -n prod-payment
 # NAME             TYPE        CLUSTER-IP     EXTERNAL-IP
 # payment-service  ClusterIP   10.97.10.10    <none>
 ```
-
 两集群各自有独立的 `payment-service` EndpointSlice，联邦 DNS 因无法同步，两集群均认为本地服务是"主"服务。
 
 **12:25** — 检查订单数据一致性：
@@ -112,7 +117,8 @@ SELECT order_id, COUNT(*) FROM payments WHERE created_at > '2026-09-15 12:00:00'
 ## 修复动作
 
 **12:30** — 恢复 VPC Peering：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 aws ec2 create-vpc-peering-connection \
   --vpc-id vpc-ap-east \
   --peer-vpc-id vpc-ap-south \
@@ -127,16 +133,16 @@ aws ec2 create-route \
   --destination-cidr-block 10.97.0.0/16 \
   --vpc-peering-connection-id pcx-abc123
 ```
-
 **12:40** — 验证集群间连通性：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl --context=cluster-ap-east run -it --rm debug --image=nicolaka/netshoot \
   --restart=Never -- ping 10.0.100.15
 # 64 bytes from 10.0.100.15: icmp_seq=1 ttl=64 time=12.3 ms
 ```
-
 **12:42** — 联邦状态同步恢复：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl --context=fed get kubefedclusters
 # NAME             READY   AGE
 # cluster-ap-east  True    45d
@@ -147,7 +153,6 @@ kubectl --context=fed get multiclusterservicednsrecords -n prod-payment
 # NAME              AGE
 # payment-service   2m
 ```
-
 **12:45** — 处理重复扣款：
 ```bash
 # 标记重复交易为退款
@@ -158,7 +163,8 @@ curl -X POST http://payment-reconcile.prod/api/refund-duplicates \
 ```
 
 **12:55** — 更新 Global Load Balancer 健康检查：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 配置跨集群健康检查，当集群间网络不可达时，将流量切换至单一集群
 # AWS Global Accelerator 配置更新
 globalaccelerator update-endpoint-group \
@@ -167,7 +173,6 @@ globalaccelerator update-endpoint-group \
   --health-check-port 443 \
   --threshold-count 3
 ```
-
 ## 验证
 - 13:00 — 两集群间网络连通性恢复
 - 13:05 — 新订单无重复扣款
@@ -186,3 +191,6 @@ globalaccelerator update-endpoint-group \
   5. 每月执行多集群问题演练，模拟网络分区场景
 - **相关 Skill**: [[ts-cluster-operations]]
 - **相关 FTA**: [[ts-networking]]
+
+
+<!-- risk-assessed -->

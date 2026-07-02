@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.6 Release Notes
@@ -90,3 +95,6 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 - Added test for lint mode 9fbf594b800fe047db36113e650154914fe1ff4d (Marcus Speight)
 - Fail message is now the same as the required message. Fixed #8973 Helm function 'fail' should not fail when doing 'helm lint' bcee7a30fe97133ef4302354f06261abe1a8b917 (Marcus Speight)
 - fix helm dep build/update doesn't inherit --insecure-skip-tls-verify from helm repo add 80402dc078908408fb724395177093f358ee7dae (yxxhero)
+
+
+<!-- risk-assessed -->

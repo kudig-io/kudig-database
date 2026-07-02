@@ -29,6 +29,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Ephemeral Containers
@@ -66,7 +71,8 @@ Ephemeral（临时）容器是一种在现有 Pod 中临时运行的特殊容器
 
 ### 场景 1：为 Distroless 容器注入调试工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 向运行中的 Pod 注入一个带完整工具集的调试容器
 # --target 参数共享目标容器的进程命名空间
 kubectl debug -it myapp-pod \
@@ -80,10 +86,10 @@ kubectl debug -it myapp-pod \
 # - 抓包分析: tcpdump -i eth0 port 8080
 # - 检查 DNS: nslookup [[entities/kubernetes.md|kubernetes]].default
 ```
-
 ### 场景 2：调试已崩溃的容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 Pod 副本进行调试（不影响原 Pod）
 kubectl debug myapp-pod \
   --copy-to=myapp-debug \
@@ -98,7 +104,6 @@ kubectl debug myapp-pod \
   --set-image=app=busybox:1.36 \
   -n prod -- sleep 3600
 ```
-
 ### 场景 3：通过 API 创建临时容器（YAML）
 
 ```yaml
@@ -161,7 +166,8 @@ ephemeralContainers:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 注入调试容器到运行中的 Pod
 kubectl debug -it <pod-name> --image=busybox:1.36 --target=<container-name> -n <namespace>
 
@@ -177,7 +183,6 @@ kubectl logs <pod-name> -c <ephemeral-container-name> -n <namespace>
 # 节点级调试（创建特权 Pod 访问节点文件系统）
 kubectl debug node/<node-name> -it --image=ubuntu:22.04
 ```
-
 ## 交叉引用
 
 - [Pod 综合故障排查手册](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
@@ -194,3 +199,6 @@ kubectl debug node/<node-name> -it --image=ubuntu:22.04
 - [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+
+
+<!-- risk-assessed -->

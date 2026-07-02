@@ -53,6 +53,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 日志管理与分析
@@ -141,7 +146,8 @@ logging_sla:
 ## 原生日志驱动详解
 
 ## JSON File 驱动 (默认)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 配置文件方式
 {
   "log-driver": "json-file",
@@ -161,9 +167,9 @@ docker run \
   --log-opt labels=environment,service \
   nginx:latest
 ```
-
 ## Syslog 驱动配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # TCP syslog 配置
 docker run \
   --log-driver syslog \
@@ -179,9 +185,9 @@ docker run \
   --log-opt syslog-format=rfc5424 \
   app:latest
 ```
-
 ## Journald 驱动 (systemd 系统)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # journald 配置
 docker run \
   --log-driver journald \
@@ -192,11 +198,11 @@ docker run \
 # 查看 journal 日志
 journalctl -u docker CONTAINER_NAME=web-service -f
 ```
-
 ## 高级日志驱动配置
 
 ## Fluentd 驱动
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # fluentd 驱动配置
 docker run \
   --log-driver fluentd \
@@ -221,9 +227,9 @@ docker run \
   logstash_prefix docker-logs
 </match>
 ```
-
 ## AWS CloudWatch Logs
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS CloudWatch 配置
 docker run \
   --log-driver awslogs \
@@ -233,11 +239,11 @@ docker run \
   --log-opt awslogs-multiline-pattern='^\[\d{4}-\d{2}-\d{2}' \
   app:latest
 ```
-
 ## 动态日志配置管理
 
 ## 运行时修改日志配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 修改正在运行容器的日志配置
 docker update \
   --log-driver syslog \
@@ -247,9 +253,9 @@ docker update \
 # 批量更新多个容器
 docker ps --format "{{.Names}}" | xargs -I {} docker update --log-driver json-file {}
 ```
-
 ## 条件化日志配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基于环境的动态配置
 if [ "$ENVIRONMENT" = "production" ]; then
   LOG_DRIVER="--log-driver syslog --log-opt syslog-address=tcp://prod-logs:514"
@@ -259,7 +265,6 @@ fi
 
 docker run $LOG_DRIVER app:latest
 ```
-
 <!-- chunk: 集中式日志解决方案 -->## 集中式日志解决方案
 
 ## ELK Stack 企业级部署
@@ -556,7 +561,8 @@ services:
 ```
 
 ## Redis 作为缓冲队列
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Redis 配置用于日志缓冲
 docker run \
   --name redis-logs \
@@ -565,7 +571,6 @@ docker run \
   redis:7-alpine \
   redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
 ```
-
 ## 传输可靠性保障
 
 ## 重试机制配置
@@ -670,7 +675,8 @@ docker run \
 ## 数据压缩与归档
 
 ## 日志压缩策略
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 日志压缩和归档脚本
 
@@ -701,7 +707,6 @@ fi
 # 清理过期文件
 find $ARCHIVE_DIR -name "*.tar.gz" -mtime +$RETENTION_DAYS -delete
 ```
-
 <!-- chunk: 日志分析与可视化 -->## 日志分析与可视化
 
 ## Kibana 仪表板设计
@@ -974,7 +979,8 @@ PUT _security/user/app_team
 ## 典型问题诊断流程
 
 ## 日志收集问题排查
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 日志收集诊断脚本
 
@@ -993,7 +999,6 @@ df -h /var/lib/docker
 echo "=== 日志收集器状态 ==="
 systemctl status filebeat || systemctl status fluentd
 ```
-
 ## 性能瓶颈分析
 ```python
 # 日志分析性能诊断工具
@@ -1063,3 +1068,6 @@ print(analyzer.detect_anomalies())
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

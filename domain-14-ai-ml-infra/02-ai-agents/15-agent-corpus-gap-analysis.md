@@ -48,6 +48,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？
@@ -961,6 +966,7 @@ safety_guardrails:
 ## 补全路线图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Phase 1 (4-6 周) - 知识层基础设施                          总工作量: ~30 人天
 ├── 为全量文档添加 YAML front matter 元数据         ~15 人天
 │   ├── 脚本自动生成基础字段 (id, domain, title, tags)   ~3 天
@@ -992,7 +998,6 @@ Phase 4 (2-3 周) - 决策和验证层                          总工作量: ~1
 
 总计: ~126 人天 ≈ 1 人 6 个月 / 2 人 3 个月 / 3 人 2 个月
 ```
-
 ---
 
 ## 现有资产复用矩阵
@@ -1107,3 +1112,6 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 - 14-agent-kudig-design-strategy
 - 16-agentscope-overview-installation
 - 17-agentscope-core-concepts
+
+
+<!-- risk-assessed -->

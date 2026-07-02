@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 云原生安全事件响应手册
@@ -159,7 +164,8 @@ spec:
 
 ### 3.2 审计日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查询异常 API 调用
 kubectl audit-log search --verb=delete --user=system:anonymous --since=1h
 
@@ -167,7 +173,6 @@ kubectl audit-log search --verb=delete --user=system:anonymous --since=1h
 grep '"level":"Metadata"|"level":"RequestResponse"' /var/log/kubernetes/audit.log | \
   jq 'select(.verb | in({"create":1,"delete":1,"patch":1})) | {user:.user.username, verb, resource:.objectRef.resource, name:.objectRef.name, namespace:.objectRef.namespace, time:.requestReceivedTimestamp}'
 ```
-
 ---
 
 ## 4. 遏制措施
@@ -178,7 +183,8 @@ grep '"level":"Metadata"|"level":"RequestResponse"' /var/log/kubernetes/audit.lo
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为可疑 Pod 打上隔离标签
 kubectl label pod <suspicious-pod> -n <namespace> security.isolated=true
 
@@ -198,32 +204,49 @@ spec:
     - Egress
 EOF
 ```
-
 ### 4.2 暂停调度节点
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果怀疑节点被攻破，先禁止调度并驱逐工作负载
 kubectl cordon <node-name>
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 ```
-
 ### 4.3 撤销可疑凭证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除可疑 ServiceAccount token
 kubectl delete secret <token-name> -n <namespace>
 
 # 禁用可疑用户
 kubectl delete clusterrolebinding <suspicious-binding>
 ```
-
 ---
 
 ## 5. 根除与取证
@@ -233,7 +256,8 @@ kubectl delete clusterrolebinding <suspicious-binding>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # container-forensics.sh
 # 用途：收集可疑容器运行时的关键证据
@@ -263,10 +287,10 @@ find ${OUT} -type f -exec sha256sum {} \; > ${OUT}/checksums.txt
 
 echo "取证完成：${OUT}"
 ```
-
 ### 5.2 镜像分析
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 导出可疑镜像
 kubectl get pod <suspicious-pod> -n <namespace> -o jsonpath='{.spec.containers[0].image}'
 
@@ -274,7 +298,6 @@ kubectl get pod <suspicious-pod> -n <namespace> -o jsonpath='{.spec.containers[0
 kubectl run trivy-scan --rm -it --image=aquasec/trivy -- \
   image <suspicious-image>
 ```
-
 ---
 
 ## 6. 恢复与验证
@@ -289,7 +312,8 @@ kubectl run trivy-scan --rm -it --image=aquasec/trivy -- \
 
 ### 6.2 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查集群核心组件
 kubectl get nodes
 kubectl get pods -n kube-system
@@ -302,7 +326,6 @@ kubectl get psp 2>/dev/null || true
 # 验证网络连通性
 kubectl run debug --rm -it --image=busybox --restart=Never -- sh
 ```
-
 ---
 
 ## 7. 事后复盘
@@ -450,3 +473,6 @@ kubectl run debug --rm -it --image=busybox --restart=Never -- sh
 
 - [[domain-05-security-compliance/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概述]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/32-security-troubleshooting.md|安全故障诊断]]
+
+
+<!-- risk-assessed -->

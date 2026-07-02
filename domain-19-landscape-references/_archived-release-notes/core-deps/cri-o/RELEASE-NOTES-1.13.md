@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # cri-o v1.13 Release Notes
@@ -69,3 +74,5 @@ Previous release can be found at [v1.13.11](https://github.com/cri-o/cri-o/relea
 * **github.com/containers/image**  915c7e6d2070 -> 24693941df9d
 * **github.com/opencontainers/runtime-spec**   v1.0.0 -> 1722abf79c2f
 * **github.com/opencontainers/runtime-tools**  1c243a8a8eb4 -> d1bf3e66ff0a
+
+<!-- risk-assessed -->

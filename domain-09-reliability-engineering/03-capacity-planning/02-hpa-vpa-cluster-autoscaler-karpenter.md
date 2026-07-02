@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # HPA/VPA/Cluster Autoscaler/Karpenter 联合容量管理
@@ -164,10 +169,10 @@ spec:
 
 ### 3.2 查看 VPA 推荐
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe vpa web-vpa -n production
 ```
-
 ---
 
 ## 4. Cluster Autoscaler 节点自动伸缩
@@ -194,11 +199,11 @@ data:
 
 ### 4.2 查看 CA 事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Cluster Autoscaler 的扩缩容事件
 kubectl get events -n kube-system --field-selector source=cluster-autoscaler
 ```
-
 ---
 
 ## 5. Karpenter 智能节点供应
@@ -372,7 +377,8 @@ aliyun cs nodepool update   --ClusterId <cluster-id>   --NodepoolId <nodepool-id
 
 ### 命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 当前状态
 kubectl get hpa -n production
 
@@ -382,7 +388,6 @@ kubectl logs -n kube-system -l app=cluster-autoscaler --tail=50
 # 查看 Karpenter 日志
 kubectl logs -n karpenter -l app.kubernetes.io/name=karpenter --tail=50
 ```
-
 ### 容量管理常见误区
 
 | 误区 | 正确做法 |
@@ -442,3 +447,6 @@ aliyun cs nodepool create   --ClusterId <cluster-id>   --Name spot-pool   --Inst
 
 - [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩缩容指南]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障诊断]]
+
+
+<!-- risk-assessed -->

@@ -38,6 +38,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -126,7 +131,8 @@ related_topics:
 
 #### 1.2 集群创建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 aliyun CLI 创建集群
 # 要求:
 # - 托管版 ACK
@@ -169,10 +175,10 @@ export KUBECONFIG=~/.kube/config-graduation
 kubectl cluster-info
 kubectl get nodes
 ```
-
 #### 1.3 节点池设计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 3 个节点池
 # 1. system-pool: 系统组件专用 (2 节点)
 cat > system-pool.json << 'EOF'
@@ -240,7 +246,6 @@ EOF
 
 aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat data-pool.json)"
 ```
-
 ---
 
 ### Phase 2: 安全加固 (1h)
@@ -261,7 +266,8 @@ aliyun cs POST /clusters/<cluster_id>/nodepools --body "$(cat data-pool.json)"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间
 kubectl create namespace app-ns
 
@@ -349,13 +355,13 @@ kubectl auth can-i create pods -n app-ns --as=dev@example.com
 kubectl auth can-i delete pods -n app-ns --as=dev@example.com
 kubectl auth can-i create pods -n app-ns --as=test@example.com
 ```
-
 #### 2.2 资源配额
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > resource-quota.yaml << 'EOF'
 apiVersion: v1
 kind: ResourceQuota
@@ -399,13 +405,13 @@ EOF
 kubectl apply -f resource-quota.yaml
 kubectl get quota,limitrange -n app-ns
 ```
-
 #### 2.3 NetworkPolicy (如使用 Terway)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > network-policy.yaml << 'EOF'
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -459,7 +465,6 @@ EOF
 kubectl apply -f network-policy.yaml
 kubectl get networkpolicy -n app-ns
 ```
-
 ---
 
 ### Phase 3: 应用部署 (2h)
@@ -469,7 +474,8 @@ kubectl get networkpolicy -n app-ns
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > database.yaml << 'EOF'
 apiVersion: v1
 kind: Secret
@@ -578,13 +584,13 @@ EOF
 kubectl apply -f database.yaml
 kubectl get pods,svc,pvc -n app-ns -l tier=database
 ```
-
 #### 3.2 API 后端
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > backend.yaml << 'EOF'
 apiVersion: v1
 kind: ConfigMap
@@ -680,13 +686,13 @@ EOF
 
 kubectl apply -f backend.yaml
 ```
-
 #### 3.3 Web 前端
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > frontend.yaml << 'EOF'
 apiVersion: apps/v1
 kind: Deployment
@@ -795,10 +801,10 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/CN=app.graduation.local"
 kubectl create secret tls app-tls --key /tmp/tls.key --cert /tmp/tls.crt -n app-ns
 ```
-
 #### 3.4 架构验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证清单:
 echo "=== 架构总览 ==="
 kubectl get all -n app-ns -o wide
@@ -821,7 +827,6 @@ echo "=== 端到端测试 ==="
 INGRESS_IP=$(kubectl get svc -n kube-system nginx-ingress-lb -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 curl -k -H "Host: app.graduation.local" https://${INGRESS_IP}/
 ```
-
 ---
 
 ### Phase 4: 监控与运维 (1h)
@@ -832,7 +837,8 @@ curl -k -H "Host: app.graduation.local" https://${INGRESS_IP}/
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 Prometheus 监控可用
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -877,7 +883,6 @@ EOF
 kubectl apply -f alert-rules.yaml
 kubectl get prometheusrule -n monitoring
 ```
-
 #### 4.2 故障演练
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -886,7 +891,17 @@ kubectl get prometheusrule -n monitoring
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 演练 1: 模拟 Pod 问题
 kubectl delete pod <api-pod-name> -n app-ns
 # 观察: 自动恢复、readinessProbe 生效
@@ -907,7 +922,6 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=10
 # 演练 4: 模拟 PVC 问题
 kubectl describe pvc -n app-ns
 ```
-
 ---
 
 ### Phase 5: 文档输出 (0.5h)
@@ -946,7 +960,17 @@ kubectl describe pvc -n app-ns
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除应用
 kubectl delete namespace app-ns  # ⚠️ 不可逆：永久删除命名空间及全部资源
 
@@ -961,7 +985,6 @@ aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
 # aliyun vpc DeleteVSwitch --VSwitchId <vsw-id>
 # aliyun vpc DeleteVpc --VpcId <vpc-id>
 ```
-
 ---
 
 ## 恭喜毕业！
@@ -976,3 +999,6 @@ aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

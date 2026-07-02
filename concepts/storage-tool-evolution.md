@@ -33,6 +33,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 存储工具演进
@@ -147,3 +152,6 @@ Velero（前身为 Heptio Ark）是 Kubernetes 备份和灾难恢复工具。
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn
+
+
+<!-- risk-assessed -->

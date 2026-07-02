@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-07-20] Velero 备份 Job 因内存不足失败，删除操作后无法恢复关键 ConfigMap
@@ -36,10 +41,10 @@ last_updated: 2026-05-23
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete configmap app-config -n prod-config
 ```
-
 该 ConfigMap 包含核心数据库连接串和 API 密钥。删除后立即发现应用报错：
 ```
 Error: configmap "app-config" not found
@@ -66,7 +71,8 @@ velero backup get
 ```
 
 **09:17** — 查看失败原因：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 velero backup logs daily-backup-20260719 | tail -n 20
 # time="2026-07-19T02:00:15Z" level=error 
 #   msg="backup failed" error="error executing custom action: 
@@ -75,9 +81,9 @@ velero backup logs daily-backup-20260719 | tail -n 20
 #   error getting cloud provider credentials: 
 #   RequestLimitExceeded: Request limit exceeded."
 ```
-
 **09:19** — 进一步排查：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n velero
 # NAME                    READY   STATUS      RESTARTS
 # velero-xxx              1/1     Running     0
@@ -88,7 +94,6 @@ kubectl logs -n velero restic-xxx --previous | tail -n 10
 #   backup=velero/daily-backup-20260719 ...
 # time="2026-07-19T02:00:12Z" level=error msg="Out of memory"
 ```
-
 **09:21** — 发现根本原因：
 - Restic DaemonSet 的 memory limit 为 512Mi
 - 07-18 新部署的日志收集器在每个节点产生了大量小文件
@@ -100,7 +105,8 @@ kubectl logs -n velero restic-xxx --previous | tail -n 10
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 velero backup get daily-backup-20260718
 # NAME                    STATUS      ERRORS   WARNINGS
 # daily-backup-20260718   Completed   0        0
@@ -120,14 +126,13 @@ spec:
   - configmaps
 EOF
 ```
-
 **09:30** — 恢复成功：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get configmap app-config -n prod-config
 # NAME        DATA   AGE
 # app-config  5      2m
 ```
-
 但 07-18 至 07-20 期间的配置变更丢失。
 
 ## 根因
@@ -142,7 +147,8 @@ kubectl get configmap app-config -n prod-config
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Git 仓库恢复 07-19 和 07-20 的配置变更
 git log --oneline --since="2026-07-18" -- configs/prod-config/app-config.yaml
 # abc1234 feat: update db connection string
@@ -151,13 +157,13 @@ git log --oneline --since="2026-07-18" -- configs/prod-config/app-config.yaml
 git show abc1234:configs/prod-config/app-config.yaml | kubectl apply -f -
 git show def5678:configs/prod-config/app-config.yaml | kubectl apply -f -
 ```
-
 **09:45** — 提升 Restic 内存：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch daemonset restic -n velero --type='merge' -p '
 {
   "spec": {
@@ -175,7 +181,6 @@ kubectl patch daemonset restic -n velero --type='merge' -p '
   }
 }'
 ```
-
 **09:50** — 手动触发一次备份验证：
 ```bash
 velero backup create test-backup-20260720
@@ -201,3 +206,6 @@ velero backup get test-backup-20260720
   5. 禁止直接 `kubectl delete` 关键 ConfigMap，必须通过 GitOps 删除
 - **相关 Skill**: [[k8s-disaster-recovery-guide]]
 - **相关 FTA**: [[backup-restore-fta]]
+
+
+<!-- risk-assessed -->

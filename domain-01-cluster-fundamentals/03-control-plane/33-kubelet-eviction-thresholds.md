@@ -70,6 +70,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[kubelet|Kubelet]] 驱逐阈值量化完整文档
@@ -183,7 +188,8 @@ evictionPressureTransitionPeriod: "30s"  # 退出 eviction pressure 的等待时
 
 当 kubelet 判断节点资源不足时，会将节点设置为 `MemoryPressure` / `DiskPressure` condition：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 condition
 kubectl describe node <node-name> | grep -A10 "Conditions"
 
@@ -194,7 +200,6 @@ DiskPressure     False   # 磁盘正常
 PIDPressure      False   # PID 正常
 Ready            True    # 节点仍 Ready（但可能不再调度新 Pod）
 ```
-
 ### 3.2 驱逐压力状态转换
 
 ```
@@ -425,7 +430,8 @@ groups:
 
 ### 9.2 kubectl 查看节点资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 allocatable 和容量
 kubectl describe node <node-name> | grep -A10 "Allocatable"
 
@@ -435,7 +441,6 @@ kubectl top node <node-name>
 # 查看各 Pod 资源使用
 kubectl top pods -A --sort-by=memory | head -20
 ```
-
 ---
 
 <!-- chunk: 10. 配置示例 -->
@@ -490,7 +495,8 @@ evictionSoftGracePeriod:
 
 ### 11.1 如何判断 Pod 被 Eviction 的原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 状态
 kubectl get pod <pod-name> -o yaml | grep -i reason
 # 找 "Evicted" 或 "OutOfDisk"
@@ -504,7 +510,6 @@ kubectl describe node <node-name> | grep -i "Pressure"
 # 4. 查看 node 级 event
 kubectl get events --field-selector involvedObject.name=<node-name> --sort-by='.lastTimestamp' | tail -20
 ```
-
 ### 11.2 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -594,3 +599,6 @@ related:
 - 32-kubeadm-upgrade-complete-guide
 - final-completion-check
 - quality-report
+
+
+<!-- risk-assessed -->

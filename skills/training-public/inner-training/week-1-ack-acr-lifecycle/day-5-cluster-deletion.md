@@ -35,6 +35,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -160,7 +165,8 @@ related_topics:
 
 ### 任务 1: 删除前检查清单 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== 集群删除前检查 =========="
 echo "集群: $(kubectl config current-context)"
 echo "时间: $(date)"
@@ -205,7 +211,6 @@ echo "PVCs: $(kubectl get pvc -A --no-headers | wc -l)"
 echo ""
 echo "========== 检查完毕 =========="
 ```
-
 ---
 
 ### 任务 2: 业务资源清理 (45min)
@@ -214,7 +219,17 @@ echo "========== 检查完毕 =========="
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 列出所有业务 Namespace
 kubectl get namespaces --no-headers | awk '{print $1}' | grep -v -E 'kube-system|kube-public|default|kube-node-lease'
 
@@ -244,7 +259,6 @@ kubectl get pvc -A
 kubectl get all -A --no-headers | grep -v kube-system
 # 应该没有输出
 ```
-
 ---
 
 ### 任务 3: 通过控制台删除集群 (30min)
@@ -411,7 +425,8 @@ aliyun cs DELETE /clusters/<cluster_id>
 
 ### 删除前检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > pre-delete-check.sh << 'SCRIPT'
 #!/bin/bash
 CLUSTER_ID=${1:?"Usage: $0 <cluster_id>"}
@@ -450,7 +465,6 @@ SCRIPT
 
 chmod +x pre-delete-check.sh
 ```
-
 ---
 
 ## 常见问题
@@ -493,3 +507,6 @@ Day 6 将学习集群升级策略，掌握版本升级的操作步骤和风险�
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
 - [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+
+
+<!-- risk-assessed -->

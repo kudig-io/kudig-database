@@ -36,6 +36,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw USER.md 机制深度解析
@@ -133,6 +138,7 @@ USER.md 四象限模型:
 | **知识校准** | 声明用户已知概念 | 不需要解释的概念列表 → Pod、Node、Deployment |
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 去 AI 味效果对比:
 
 无 USER.md:
@@ -145,7 +151,6 @@ USER.md 四象限模型:
    当前集群 40 个 worker 节点中 38 个 CPU requests > 90%。
    修复: kubectl top nodes 确认后，扩容 2 个 ecs.g7.4xlarge 节点。"
 ```
-
 ### 1.3 上下文注入深度
 
 ```
@@ -222,6 +227,7 @@ USER.md       │      │       │    ●    │         │        │       
 ### 3.2 案例：输出风格适配
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 USER.md 中定义的风格偏好:
   - 结论前置
   - 短句优先
@@ -238,7 +244,6 @@ USER.md 中定义的风格偏好:
 | **修复** | 扩容节点内存或调整 eviction threshold |
 | **验证** | kubectl get nodes -o wide 确认 Ready |
 ```
-
 ### 3.3 案例：黑名单表达过滤
 
 ```yaml
@@ -477,3 +482,6 @@ USER.md 配置验证:
 - 44-openclaw-soul-mechanism
 - 46-openclaw-agents-mechanism
 - 47-openclaw-tools-mechanism
+
+
+<!-- risk-assessed -->

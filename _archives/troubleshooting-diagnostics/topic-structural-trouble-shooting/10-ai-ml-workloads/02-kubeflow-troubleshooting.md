@@ -44,6 +44,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Kubeflow 平台故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | Kubeflow v1.8+ | **最后更新**: 2026-04 | **难度**: 高级
@@ -119,7 +124,8 @@ prerequisites:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubeflow 核心组件状态
 kubectl get pods -n kubeflow -o wide
 
@@ -146,7 +152,6 @@ kubectl logs -n kubeflow deployment/katib-controller --tail=100
 kubectl logs -n kubeflow deployment/kserve-controller-manager --tail=100
 kubectl logs -n kubeflow deployment/notebook-controller-deployment --tail=100
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -218,7 +223,8 @@ Kubeflow 问题
 
 #### Kubeflow 全景诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubeflow 全景诊断脚本
 
@@ -284,10 +290,10 @@ echo ""
 echo "  Istio IngressGateway:"
 kubectl get pods -n istio-system -l app=istio-ingressgateway -o jsonpath='{.items[*].status.phase}'
 ```
-
 #### Pipeline 问题深度诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Pipeline 问题深度诊断脚本
 # 用法: ./diagnose-pipeline.sh <workflow-name> <namespace>
@@ -346,10 +352,10 @@ echo ""
 echo "5. Pipeline UI 服务状态:"
 kubectl get svc ml-pipeline-ui -n kubeflow -o json | jq -r '{clusterIP: .spec.clusterIP, ports: .spec.ports}'
 ```
-
 #### KServe 推理服务诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # KServe 推理服务诊断脚本
 # 用法: ./diagnose-kserve.sh <inferenceservice-name> <namespace>
@@ -424,7 +430,6 @@ else
   echo "  InferenceService URL 未生成"
 fi
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -782,7 +787,8 @@ spec:
 
 #### Kubeflow 健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubeflow 健康检查脚本
 
@@ -830,7 +836,6 @@ kubectl get notebooks -A -o json 2>/dev/null | jq -r '
 echo "" | tee -a $REPORT_FILE
 echo "报告已保存: $REPORT_FILE" | tee -a $REPORT_FILE
 ```
-
 #### Prometheus 监控告警
 
 ```yaml
@@ -939,3 +944,6 @@ groups:
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

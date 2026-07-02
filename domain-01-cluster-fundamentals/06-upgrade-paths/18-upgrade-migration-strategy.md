@@ -63,6 +63,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 18 - [[Kubernetes|Kubernetes]] 升级和迁移策略指南
@@ -100,7 +105,8 @@ version_support_policy:
 ```
 
 #### 版本兼容性矩阵
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubernetes 版本兼容性检查脚本
 #!/bin/bash
 
@@ -139,7 +145,6 @@ check_crds_compatibility() {
     done
 }
 ```
-
 ### 1.2 升级路径规划
 
 #### 版本跳跃限制
@@ -192,7 +197,8 @@ pre_upgrade_checklist:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # pre-upgrade-health-check.sh
 
@@ -262,7 +268,6 @@ kubectl get -A configmaps -o yaml > $BACKUP_DIR/all-configmaps.yaml
 
 echo "✅ 升级前检查完成，备份保存在: $BACKUP_DIR"
 ```
-
 ### 2.2 应用兼容性验证
 
 #### 应用版本兼容性测试
@@ -459,7 +464,17 @@ upgrade:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # control-plane-upgrade.sh
 
@@ -519,7 +534,6 @@ done
 
 echo "🎉 控制平面升级完成"
 ```
-
 #### Worker 节点滚动升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -527,7 +541,17 @@ echo "🎉 控制平面升级完成"
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # worker-nodes-upgrade.sh
 
@@ -589,7 +613,6 @@ done
 
 echo "🎉 所有 Worker 节点升级完成"
 ```
-
 ### 3.3 组件升级顺序
 
 #### 核心组件依赖关系
@@ -705,7 +728,8 @@ multi_cloud_migration:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # cross-cloud-migration.sh
 
@@ -778,7 +802,6 @@ kubectl get all --all-namespaces --context=$TARGET_CLUSTER
 
 echo "🎉 跨云平台迁移完成"
 ```
-
 ### 4.2 存储系统迁移
 
 #### CSI 迁移策略
@@ -967,7 +990,17 @@ rollback_triggers:
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # automated-rollback.sh
 
@@ -1062,7 +1095,6 @@ kubectl get pods --all-namespaces
 echo "🎉 回滚完成 - 结束时间: $(date)"
 echo "📝 回滚原因: $ROLLBACK_REASON"
 ```
-
 ### 5.2 灾难恢复预案
 
 #### 完全重建流程
@@ -1107,7 +1139,17 @@ disaster_recovery_plan:
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # disaster-recovery.sh
 
@@ -1177,7 +1219,6 @@ echo "📊 恢复统计:"
 echo "  - 恢复的命名空间: $(kubectl get namespaces --no-headers | wc -l)"
 echo "  - 恢复的 Pod: $(kubectl get pods --all-namespaces --no-headers | wc -l)"
 ```
-
 ---
 
 <!-- chunk: 六、升级后验证与监控 -->
@@ -1186,7 +1227,8 @@ echo "  - 恢复的 Pod: $(kubectl get pods --all-namespaces --no-headers | wc -
 ### 6.1 功能验证清单
 
 #### 升级后验证脚本
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # post-upgrade-validation.sh
 
@@ -1259,7 +1301,6 @@ kubectl get pods --all-namespaces -o jsonpath='{.items[*].status.phase}' | \
 
 echo "🎉 升级验证完成"
 ```
-
 ### 6.2 持续监控配置
 
 #### 升级后监控告警
@@ -1445,3 +1486,6 @@ version_governance:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

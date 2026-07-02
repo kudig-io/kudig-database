@@ -41,6 +41,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[OpenYurt|OpenYurt]] 边缘方案 (OpenYurt Edge Solution)
@@ -114,6 +119,7 @@ k8s_versions:
 OpenYurt 是阿里巴巴于 2020 年开源的 Kubernetes 边缘计算平台，其核心设计哲学是**"非侵入式"**地将标准 Kubernetes 集群改造为边缘就绪的集群，无需修改 K8s 核心代码。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 OpenYurt 设计哲学:
 
 "Kubernetes 原生 + 最小侵入"
@@ -124,7 +130,6 @@ OpenYurt 设计哲学:
 ✅ 完全兼容 kubectl/helm/Argo CD 等工具
 ✅ 边缘节点与 API Server 断连时自主运行
 ```
-
 ## 1.2 OpenYurt 发展历程
 
 ```
@@ -1141,6 +1146,7 @@ spec:
 ## 7.2 离线自治场景分析 (Offline Autonomy Scenarios)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景 1: 短暂断线 (< 30分钟)
 ────────────────────────────
 状态: YurtHub 使用本地缓存服务 kubelet
@@ -1168,7 +1174,6 @@ spec:
   - 建议: 延长缓存超时时间
     offline-cache-timeout: 720h  # 30天
 ```
-
 ## 7.3 节点重启后的状态恢复
 
 ```go
@@ -1213,7 +1218,8 @@ func (m *CacheManager) RecoverFromDisk() error {
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 K8s 版本 (需要 v1.20+)
 kubectl version --short
 
@@ -1229,13 +1235,13 @@ kubectl label node cloud-worker openyurt.io/is-edge-worker=false
 kubectl label node edge-node-001 openyurt.io/is-edge-worker=true
 kubectl label node edge-node-002 openyurt.io/is-edge-worker=true
 ```
-
 ## 8.2 Helm 安装 OpenYurt
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 OpenYurt Helm 仓库
 helm repo add openyurt https://openyurtio.github.io/openyurt-helm
 helm repo update
@@ -1253,7 +1259,6 @@ helm install openyurt openyurt/openyurt \
 # 验证安装
 kubectl get pods -n kube-system | grep yurt
 ```
-
 ## 8.3 yurtadm 命令行工具
 
 ```bash
@@ -1287,7 +1292,8 @@ yurtadm revert --nodes edge-node-001
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # OpenYurt 完整部署脚本
 
@@ -1374,7 +1380,6 @@ echo "=== 部署完成 ==="
 kubectl get pods -n kube-system | grep -E "yurt"
 kubectl get nodepool
 ```
-
 ---
 
 <!-- chunk: 9. 流量拓扑管理 -->## 9. 流量拓扑管理
@@ -1705,7 +1710,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ====== YurtHub 诊断 ======
 
 # 1. 检查 YurtHub Pod 状态
@@ -1738,10 +1744,10 @@ curl -k https://API_SERVER:6443/healthz
 kubectl delete pod -n kube-system -l app=yurt-hub
 # YurtHub 作为 DaemonSet 会自动重建
 ```
-
 ## 12.2 YurtTunnel 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ====== YurtTunnel 诊断 ======
 
 # 1. 检查隧道组件状态
@@ -1769,10 +1775,10 @@ kubectl get configmap -n kube-system tunnel-nodes-record -o yaml
 kubectl get gateways -A
 kubectl describe gateway factory-a-gw
 ```
-
 ## 12.3 NodePool 和 UnitedDeployment 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ====== NodePool/UnitedDeployment 诊断 ======
 
 # 1. 检查 NodePool 状态
@@ -1800,13 +1806,13 @@ kubectl rollout history uniteddeployment/store-app -n retail
 # 6. Yurt Manager 日志
 kubectl logs -n kube-system -l app=yurt-manager | grep -E "ERROR|nodepool|uniteddeployment"
 ```
-
 ## 12.4 边缘节点网络诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ====== 网络诊断 ======
 
 # 1. 检查边缘 Pod 内 DNS 解析
@@ -1837,14 +1843,14 @@ kubectl get configmap -n kube-system coredns -o yaml
 curl http://127.0.0.1:10262/healthz
 # 输出: {"RemoteServer": "Healthy", "YurtHub": "Healthy"}
 ```
-
 ## 12.5 运维最佳实践
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ====== 日常运维命令 ======
 
 # 查看所有 NodePool 汇总状态
@@ -1880,12 +1886,12 @@ kubectl exec -n kube-system \
 kubectl get nodes -l apps.openyurt.io/nodepool=factory-a \
   -o jsonpath='{range .items[*]}{.status.addresses[?(@.type=="InternalIP")].address}{"\n"}{end}'
 ```
-
 ---
 
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 OpenYurt 核心价值总结:
 
 非侵入性:
@@ -1911,7 +1917,6 @@ vs KubeEdge:
 OpenYurt 更适合: 大规模节点管理、存量改造、连锁门店
 KubeEdge 更适合: IoT 设备管理、工业场景、资源受限设备
 ```
-
 ---
 
 <!-- chunk: 参考资料 (References) -->## 参考资料 (References)
@@ -1950,3 +1955,6 @@ KubeEdge 更适合: IoT 设备管理、工业场景、资源受限设备
 - 04-kubeedge-device-edge-apps
 - 06-superedge-architecture
 - 07-edge-ai-inference-federated-learning
+
+
+<!-- risk-assessed -->

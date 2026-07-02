@@ -68,6 +68,11 @@ related_docs:
   desc: StorageClass 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - StorageClass动态供给与多租户管理
@@ -191,13 +196,13 @@ PVC 创建 ──▶ 等待 Pod 调度 ──▶ 根据 Pod 节点选择存储 �
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证：修改 SC 参数后已有 PV 不受影响
 kubectl patch sc fast-ssd -p '{"parameters":{"performanceLevel":"PL3"}}'
 # 已有 PV 的 performanceLevel 保持不变
 kubectl get pv -o custom-columns=NAME:.metadata.name,PL:.spec.csi.volumeAttributes.performanceLevel
 ```
-
 **运维建议**:
 - 如需对已有 PVC 应用新 SC 参数，需重建 PVC（先备份，删除 PVC，再从快照恢复）
 - 生产环境建议使用 SC 分层（platinum/gold/silver）而非修改现有 SC
@@ -442,7 +447,8 @@ allowedTopologies:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前默认
 kubectl get sc -o custom-columns='NAME:.metadata.name,DEFAULT:.metadata.annotations.storageclass\.kubernetes\.io/is-default-class'
 
@@ -452,7 +458,6 @@ kubectl patch storageclass alicloud-disk-essd -p '{"metadata": {"annotations":{"
 # 取消默认
 kubectl patch storageclass old-default -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
-
 ### 6.2 禁用动态供给
 
 ```yaml
@@ -647,7 +652,8 @@ groups:
 
 ### 9.2 运维命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 StorageClass
 kubectl get sc -o wide
 
@@ -663,7 +669,6 @@ kubectl get pvc -A --no-headers | awk '{print $6}' | sort | uniq -c
 # 查看失败的 PVC
 kubectl get pvc -A --field-selector status.phase=Pending
 ```
-
 ---
 ---
 <!-- chunk: 多租户存储策略 -->
@@ -1106,7 +1111,8 @@ dynamic_provisioning_optimization:
 
 ### 供给链路监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # provisioning-performance-monitor.sh
 
@@ -1148,7 +1154,6 @@ while true; do
     sleep 300  # 每5分钟检查一次
 done
 ```
-
 ---
 <!-- chunk: 成本控制与配额管理 -->
 ## 成本控制与配额管理
@@ -1327,7 +1332,8 @@ spec:
 
 ### 故障诊断工具包
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-provisioning-debugger.sh
 
@@ -1421,7 +1427,6 @@ EOF
 # 执行诊断
 debug_provisioning_issues
 ```
-
 ---
 <!-- chunk: 监控与运维最佳实践 -->
 ## 监控与运维最佳实践
@@ -1490,7 +1495,8 @@ provisioning_monitoring:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-operations-automation.sh
 
@@ -1554,7 +1560,6 @@ EOF
 # 定期执行
 automate_storage_operations
 ```
-
 ---
 
 <!-- chunk: 补充云厂商 CSI StorageClass 配置 -->
@@ -1580,7 +1585,8 @@ allowVolumeExpansion: true
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # vSphere CSI 部署
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/vsphere-csi-driver/master/manifests/vanilla/deploy/vsphere-csi-driver.yaml
 
@@ -1588,7 +1594,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/vsphere-csi-d
 kubectl get csidriver csi.vsphere.vmware.com
 kubectl get pods -n vmware-system-csi
 ```
-
 ### DigitalOcean CSI
 
 ```yaml
@@ -1609,14 +1614,14 @@ allowVolumeExpansion: true
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # DigitalOcean CSI 部署
 helm repo add digitalocean https://digitalocean.github.io/csi-digitalocean
 helm install csi-digitalocean digitalocean/csi-digitalocean \
   --namespace kube-system \
   --set digitalocean.token=<DO_API_TOKEN>
 ```
-
 ### Oracle Cloud Infrastructure (OCI) CSI
 
 ```yaml
@@ -1648,12 +1653,12 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # OKE 集群默认已安装 OCI CSI
 kubectl get csidriver blockvolume.csi.oraclecloud.com
 kubectl get pods -n kube-system -l app=oci-csi-controller
 ```
-
 ### IBM Cloud (VPC) CSI
 
 ```yaml
@@ -1688,12 +1693,12 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # IBM Cloud CSI 驱动
 kubectl get csidriver vpc.block.csi.ibm.io
 kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 ```
-
 ### 云厂商 CSI 对比矩阵
 
 | 云厂商 | CSI 驱动名 | 最大卷 | 最大单卷 | 扩容 | 快照 | 加密 |
@@ -1746,3 +1751,5 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 - 06-storage-fundamental-concepts
 
 ```
+
+<!-- risk-assessed -->

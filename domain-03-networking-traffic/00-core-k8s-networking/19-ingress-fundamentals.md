@@ -72,6 +72,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] 基础概念与核心原理 (Ingress Fundamentals)
@@ -87,6 +92,7 @@ cross_refs:
 ## Ingress 核心架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                              Kubernetes Ingress Architecture                                     │
 ├─────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -181,7 +187,6 @@ cross_refs:
 │                                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 一、Ingress 概念总览 -->
@@ -1601,7 +1606,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建简单 Ingress
 kubectl create ingress simple-ingress \
   --class=nginx \
@@ -1625,13 +1631,13 @@ kubectl create ingress default-backend-ingress \
   --default-backend=default-service:80 \
   --rule="app.example.com/*=app-service:8080"
 ```
-
 ### 8.3 调试和排障命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 IngressClass
 kubectl get ingressclass
 kubectl describe ingressclass nginx
@@ -1667,10 +1673,10 @@ kubectl get endpointslices -l kubernetes.io/service-name=<service-name>
 # 查看 Ingress Events
 kubectl get events --field-selector involvedObject.kind=Ingress
 ```
-
 ### 8.4 常用排障 Shell 脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ingress-debug.sh - Ingress 排障脚本
 
@@ -1713,7 +1719,6 @@ echo ""
 echo "=== 最近 Events ==="
 kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | grep -i ingress | tail -20
 ```
-
 ---
 
 <!-- chunk: 九、Ingress 设计原则与最佳实践 -->
@@ -1839,7 +1844,8 @@ kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | grep -i ingress | 
 
 ### 10.3 常用诊断命令集合
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ingress-troubleshoot.sh
 
@@ -1892,7 +1898,6 @@ if [ -n "$INGRESS_IP" ]; then
   curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" http://$INGRESS_IP/
 fi
 ```
-
 ---
 
 <!-- chunk: 十一、Ingress 与 Gateway API 对比 -->
@@ -2239,3 +2244,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

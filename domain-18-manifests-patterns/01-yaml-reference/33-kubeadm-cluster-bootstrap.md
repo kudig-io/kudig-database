@@ -55,6 +55,11 @@ cross_refs:
   label: '故障树: kubeadm'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 33 - kubeadm 集群引导配置 YAML 参考
@@ -848,7 +853,8 @@ nodeRegistration:
 
 **准备 bootstrap-kubelet.conf 文件**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在控制平面节点上
 kubectl config set-cluster kubernetes \
   --certificate-authority=/etc/kubernetes/pki/ca.crt \
@@ -871,7 +877,6 @@ kubectl config use-context tls-bootstrap-token-user@kubernetes \
 # 复制到工作节点
 scp /tmp/bootstrap-kubelet.conf worker01:/etc/kubernetes/
 ```
-
 ---
 
 <!-- chunk: 5. ResetConfiguration -->## 5. ResetConfiguration
@@ -955,7 +960,17 @@ unmountFlags:
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 驱逐 Pod（可选）
 kubectl drain <node-name> --delete-emptydir-data --force --ignore-daemonsets
 
@@ -981,7 +996,6 @@ crictl rmi -a
 systemctl restart containerd
 systemctl stop kubelet
 ```
-
 ---
 
 <!-- chunk: 6. 内部机制 -->## 6. 内部机制
@@ -1068,7 +1082,8 @@ kubeadm certs renew all
 
 ## 阶段 3: kubeconfig（生成 kubeconfig 文件）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 生成所有 kubeconfig
 kubeadm init phase kubeconfig all --config kubeadm-init-config.yaml
 
@@ -1085,7 +1100,6 @@ kubeadm init phase kubeconfig scheduler          # scheduler.conf
 # ├── controller-manager.conf    # Controller Manager 配置
 # └── scheduler.conf             # Scheduler 配置
 ```
-
 ## 阶段 4: control-plane（生成静态 Pod 清单）
 
 ```bash
@@ -1399,12 +1413,12 @@ priority 100  # master03 改为 99
 
 **启动服务**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl enable haproxy keepalived
 systemctl start haproxy keepalived
 systemctl status haproxy keepalived
 ```
-
 ## 步骤 2: 初始化第一个控制平面节点
 
 **kubeadm-init-config.yaml** (master01):
@@ -1482,7 +1496,8 @@ scheduler:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 初始化
 kubeadm init --config kubeadm-init-config.yaml --upload-certs
 
@@ -1498,7 +1513,6 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 # 安装 CNI（Calico）
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
-
 ## 步骤 3: 加入第二个控制平面节点
 
 **kubeadm-join-config.yaml** (master02):
@@ -1542,7 +1556,8 @@ kubeadm join --config kubeadm-join-config.yaml
 
 ## 步骤 5: 验证集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点
 kubectl get nodes -o wide
 
@@ -1561,7 +1576,6 @@ kubectl -n kube-system exec -it etcd-master01 -- etcdctl \
 kubectl get componentstatuses
 kubectl get --raw='/readyz?verbose'
 ```
-
 ---
 
 ## 7.2 案例 2: HA 控制平面（外部 etcd）
@@ -1710,7 +1724,8 @@ WantedBy=multi-user.target
 
 **启动 etcd**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl daemon-reload
 systemctl enable etcd
 systemctl start etcd
@@ -1723,7 +1738,6 @@ etcdctl --endpoints=https://10.0.2.10:2379,https://10.0.2.11:2379,https://10.0.2
   --key=/etc/etcd/etcd-key.pem \
   member list -w table
 ```
-
 ## 步骤 2: 初始化第一个控制平面节点
 
 **复制 etcd 证书到控制平面节点**:
@@ -1795,7 +1809,8 @@ kubeadm init --config kubeadm-init-config.yaml --upload-certs
 
 ## 步骤 1: 准备镜像
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在联网机器上导出镜像
 kubeadm config images list --kubernetes-version v1.32.0
 # registry.k8s.io/kube-apiserver:v1.32.0
@@ -1829,7 +1844,6 @@ docker save -o k8s-images-v1.32.0.tar \
 # 在离线环境导入
 docker load -i k8s-images-v1.32.0.tar
 ```
-
 ## 步骤 2: 配置 containerd 使用内网镜像仓库
 
 **/etc/containerd/config.toml**:
@@ -1861,10 +1875,19 @@ version = 2
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 systemctl restart containerd
 ```
-
 ## 步骤 3: kubeadm 配置
 
 **kubeadm-init-config.yaml**:
@@ -1977,3 +2000,5 @@ kubeadm init --config kubeadm-init-config.yaml
 - [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

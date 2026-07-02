@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - 块存储、文件存储、对象存储
@@ -114,7 +119,8 @@ lsblk  # 查看新设备
 
 ## 高可用配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 多路径配置 (multipath)
 cat > /etc/multipath.conf << EOF
 defaults {
@@ -141,7 +147,6 @@ systemctl enable multipathd
 systemctl start multipathd
 multipath -ll  # 查看多路径状态
 ```
-
 ## 性能监控与告警
 
 ```bash
@@ -222,7 +227,8 @@ chmod +x /usr/local/bin/block-storage-monitor.sh
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 服务端
 # /etc/exports
 /data/share 192.168.1.0/24(rw,sync,no_root_squash,fsid=0)
@@ -237,7 +243,6 @@ mount -t nfs 192.168.1.100:/data/share /mnt/nfs
 # /etc/fstab
 192.168.1.100:/data/share /mnt/nfs nfs defaults,_netdev,hard,intr 0 0
 ```
-
 ## NFS 版本对比
 
 | 版本 | 特点 |
@@ -333,7 +338,8 @@ groups:
 
 ## 故障诊断工具集
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # NFS故障诊断脚本
 cat > /usr/local/bin/nfs-diagnostic.sh << 'EOF'
 #!/bin/bash
@@ -370,7 +376,6 @@ EOF
 
 chmod +x /usr/local/bin/nfs-diagnostic.sh
 ```
-
 ---
 
 <!-- chunk: 对象存储详解 -->## 对象存储详解
@@ -397,7 +402,8 @@ chmod +x /usr/local/bin/nfs-diagnostic.sh
 
 ## MinIO 部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 单节点
 docker run -d \
   -p 9000:9000 \
@@ -412,7 +418,6 @@ mc alias set myminio http://localhost:9000 admin password
 mc mb myminio/mybucket
 mc cp file.txt myminio/mybucket/
 ```
-
 ## 对象存储场景
 
 | 场景 | 特点 |
@@ -683,3 +688,5 @@ chmod +x s3-benchmark_linux_amd64
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

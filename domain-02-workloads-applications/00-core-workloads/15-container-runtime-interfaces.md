@@ -55,6 +55,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 39 - 容器运行时对比表
@@ -192,7 +197,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Docker到containerd迁移检查
 # 1. 停止kubelet
 systemctl stop kubelet
@@ -219,7 +234,6 @@ systemctl start kubelet
 crictl info
 kubectl get nodes
 ```
-
 <!-- chunk: crictl命令参考 -->
 ## crictl命令参考
 
@@ -236,7 +250,8 @@ kubectl get nodes
 | **crictl rm** | 删除容器 | `crictl rm <id>` |
 | **crictl stats** | 资源统计 | `crictl stats` |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # crictl配置
 cat > /etc/crictl.yaml <<EOF
 runtime-endpoint: unix:///run/containerd/containerd.sock
@@ -245,7 +260,6 @@ timeout: 10
 debug: false
 EOF
 ```
-
 <!-- chunk: 镜像加速配置 -->
 ## 镜像加速配置
 
@@ -275,7 +289,8 @@ EOF
 | **运行时不响应** | 节点NotReady | `systemctl status containerd` | 重启运行时 |
 | **存储满** | 创建失败 | `df -h` | 清理未用镜像/容器 |
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 清理未使用镜像
 crictl rmi --prune
 
@@ -286,7 +301,6 @@ crictl rm $(crictl ps -a -q --state exited)
 systemctl status containerd
 journalctl -u containerd -f
 ```
-
 <!-- chunk: ACK容器运行时 -->
 ## ACK容器运行时
 
@@ -329,3 +343,5 @@ journalctl -u containerd -f
 - 17-container-images-registry
 
 ```
+
+<!-- risk-assessed -->

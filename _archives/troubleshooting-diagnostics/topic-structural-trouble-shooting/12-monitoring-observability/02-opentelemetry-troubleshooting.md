@@ -43,6 +43,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # OpenTelemetry Collector 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | OpenTelemetry Collector v0.90+ | **最后更新**: 2026-04 | **难度**: 高级
@@ -109,7 +114,8 @@ prerequisites:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Collector Pod 状态
 kubectl get pods -n observability -l app.kubernetes.io/name=opentelemetry-collector
 
@@ -131,7 +137,6 @@ curl -s http://opentelemetry-collector.observability.svc.cluster.local:8888/metr
 curl -s http://opentelemetry-collector.observability.svc.cluster.local:8888/metrics | \
   grep -E "otelcol_exporter_sent|otelcol_exporter_send_failed"
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -212,7 +217,8 @@ OpenTelemetry Collector 问题
 
 #### Collector 全景诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # OpenTelemetry Collector 全景诊断脚本
 
@@ -272,7 +278,6 @@ echo "6. 错误日志摘要:"
 kubectl logs -n $NAMESPACE -l app.kubernetes.io/name=opentelemetry-collector --tail=200 2>/dev/null | \
   grep -iE "error|fail|refused|dropped|timeout" | tail -15
 ```
-
 #### 客户端上报诊断
 
 ```bash
@@ -636,7 +641,8 @@ spec:
 
 #### Collector 健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Collector 健康检查脚本
 
@@ -663,7 +669,6 @@ echo ""
 echo "4. 丢弃统计:"
 curl -s http://$COLLECTOR_SVC/metrics 2>/dev/null | grep -E "otelcol_processor_dropped|otelcol_exporter_send_failed" | head -5
 ```
-
 #### Prometheus 监控告警
 
 ```yaml
@@ -771,3 +776,6 @@ groups:
 
 - [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

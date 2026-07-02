@@ -30,6 +30,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 27: 存储卷挂载
@@ -121,7 +126,8 @@ tags: [week-4, day-27, storage, volume, mount, k8s, k8s-1.28-1.33]
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ConfigMap 和 Secret
 kubectl create configmap app-config --from-literal=APP_ENV=production --from-literal=LOG_LEVEL=info
 kubectl create secret generic app-secret --from-literal=DB_PASSWORD=mypassword123
@@ -172,7 +178,6 @@ kubectl exec mount-demo -- cat /etc/app/config/APP_ENV
 kubectl exec mount-demo -- cat /etc/app/secrets/DB_PASSWORD
 kubectl exec mount-demo -- cat /etc/nginx/conf.d/custom.conf
 ```
-
 ### 任务 2: Deployment + PVC 持久化 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -180,7 +185,8 @@ kubectl exec mount-demo -- cat /etc/nginx/conf.d/custom.conf
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 PVC
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -231,14 +237,14 @@ kubectl exec deploy/app-with-storage -- sh -c 'echo "<h1>Persistent Data</h1>" >
 kubectl delete pod -l app=app-with-storage
 kubectl exec deploy/app-with-storage -- cat /usr/share/nginx/html/index.html
 ```
-
 ### 任务 3: StatefulSet + volumeClaimTemplates (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 StatefulSet (每个副本自动创建独立 PVC)
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -296,7 +302,6 @@ kubectl exec db-cluster-0 -- cat /data/identity.txt
 kubectl exec db-cluster-1 -- cat /data/identity.txt
 kubectl exec db-cluster-2 -- cat /data/identity.txt
 ```
-
 ### 任务 4: 云盘扩容 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -304,7 +309,17 @@ kubectl exec db-cluster-2 -- cat /data/identity.txt
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 StorageClass 是否支持扩容
 kubectl get sc alicloud-disk-ssd -o yaml | grep allowVolumeExpansion
 
@@ -328,7 +343,6 @@ kubectl delete pvc -l app=db-cluster
 kubectl delete configmap app-config
 kubectl delete secret app-secret
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -368,3 +382,6 @@ Day 28 将进行 4 周培训的综合复习与实践。
 ## Related
 
 - index/pvc-index|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

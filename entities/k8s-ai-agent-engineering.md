@@ -36,6 +36,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI Agent 工程
@@ -88,3 +93,6 @@ OWASP LLM Top 10 应对：
 - [[entities/kudig-rag-chunking-strategy.md|kudig-rag-chunking-strategy]] — RAG 分块策略指南与 Manpage 安装指南
 - [[entities/k8s-security-compliance.md|k8s-security-compliance]] — 安全合规：RBAC、网络安全策略、运行时安全与零信任架构
 - [[deployment]] — Deployment
+
+
+<!-- risk-assessed -->

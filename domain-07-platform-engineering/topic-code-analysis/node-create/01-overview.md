@@ -37,6 +37,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点生命周期总览
@@ -136,6 +141,7 @@ Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 节点生命周期:
   ┌─────────────────────────────────────────────────────────────┐
   │  阶段 1: 节点准备                                           │
@@ -176,7 +182,6 @@ Kubernetes 中的节点管理采用了"声明式"的设计哲学：用户通过 
   │  └── 释放: 云厂商释放实例资源                                 │
   └─────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 节点状态流转
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -361,7 +366,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看控制面节点
 kubectl get nodes -l node-role.kubernetes.io/control-plane
 
@@ -378,10 +384,19 @@ kubectl label node <node> node-role.kubernetes.io/worker=worker
 kubectl label node <node> environment=production
 kubectl label node <node> tier=frontend
 ```
-
 ### 4.2 污点管理
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看污点
 kubectl describe node <node> | grep Taints
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.taints}{"\n"}{end}'
@@ -400,14 +415,14 @@ kubectl taint node <node> key:NoSchedule-
 # node.kubernetes.io/unreachable:NoExecute            # 节点不可达
 # node.kubernetes.io/network-unavailable:NoSchedule   # 网络不可用
 ```
-
 ---
 
 ## 五、节点资源容量
 
 ### 5.1 Capacity 与 Allocatable
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Capacity: 节点总资源
 # Allocatable: 可分配给 Pod 的资源 = Capacity - Reserved
 
@@ -418,7 +433,6 @@ kubectl get node <node> -o jsonpath='{.status.allocatable}'
 # 资源预留公式:
 # Allocatable = Capacity - KubeReserved - SystemReserved - EvictionHard
 ```
-
 ### 5.2 资源预留配置
 
 ```bash
@@ -438,7 +452,17 @@ kubectl get node <node> -o jsonpath='{.status.allocatable}'
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看所有节点
 kubectl get nodes -o wide
 
@@ -467,7 +491,6 @@ kubectl taint node <node> key:NoSchedule-   # 删除污点
 # 节点调试
 kubectl debug node/<node> -it --image=busybox
 ```
-
 ---
 
 ## 七、常见问题
@@ -506,3 +529,5 @@ kubectl debug node/<node> -it --image=busybox
 - [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
 
 ```
+
+<!-- risk-assessed -->

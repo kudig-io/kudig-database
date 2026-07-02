@@ -56,6 +56,11 @@ related_topics:
 - deployment-status
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Recreate 策略源码分析
@@ -357,7 +362,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 设置 Recreate 策略并触发更新
 kubectl patch deployment db-migrator \
   -p '{"spec":{"strategy":{"type":"Recreate"}}}'
@@ -367,7 +373,6 @@ kubectl set image deployment/db-migrator app=myapp:v2.0.0
 # 观察 Pod 变化（先全部消失，再全部出现）
 kubectl get pods -l app=db-migrator -w
 ```
-
 ### kubectl get pods 输出（体现 Recreate 特征）
 
 ```
@@ -430,3 +435,6 @@ db-migrator-7c8e0d9g6-ij3kl   1/1     Running       0          10s
 - [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]
 - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/04-rolling-update.md|04-rolling-update]]
 - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/05-deployment-status.md|05-deployment-status]]
+
+
+<!-- risk-assessed -->

@@ -50,6 +50,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - Linux 文件系统深度解析：生产环境存储管理专家指南
@@ -388,7 +393,8 @@ locate filename
 
 ## 生产环境挂载参数优化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 数据库存储优化
 /dev/sdb1 /data/mysql xfs defaults,noatime,nobarrier,logbufs=8,logbsize=256k 0 2
 
@@ -401,7 +407,6 @@ tmpfs /tmp tmpfs defaults,size=2G,mode=1777 0 0
 # 容器存储优化
 /dev/sdd1 /var/lib/docker xfs defaults,noatime,nobarrier,inode64 0 2
 ```
-
 ## 文件系统性能监控脚本
 
 ```bash
@@ -794,7 +799,8 @@ Kubernetes 的容器存储建立在 Linux 文件系统之上，理解底层原�
 
 ## OverlayFS 与容器存储
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Kubernetes 使用的 overlay 挂载
 mount | grep overlay
 
@@ -808,12 +814,12 @@ docker inspect <image> --format '{{len .RootFS.Layers}}'
 du -sh /var/lib/docker/overlay2/
 docker system df -v
 ```
-
 ## inode 耗尽问题
 
 inode 耗尽是 Kubernetes 集群中常见的存储问题，特别是日志量大的场景：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 inode 使用
 df -i
 
@@ -843,7 +849,6 @@ lsof +L1 | grep deleted
 # 3. 小文件过多 (大量 ConfigMap/Secret 挂载)
 find /var/lib/kubelet/pods/ -type f | wc -l
 ```
-
 ---
 
 <!-- chunk: 性能调优 -->## 性能调优
@@ -996,3 +1001,6 @@ echo "=== 巡检完成 ==="
 ## Related
 
 - index/etcd-index|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -64,6 +64,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 23 - Namespace 故障排查 (Namespace Troubleshooting)
@@ -148,7 +153,8 @@ cross_refs:
 
 ### 2.1 Namespace 资源状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础信息检查 ==========
 # 查看所有Namespace
 kubectl get namespaces
@@ -179,10 +185,10 @@ kubectl get namespace <namespace-name> -o jsonpath='{.metadata.labels.pod-securi
 # 查看Namespace注解
 kubectl get namespace <namespace-name> -o jsonpath='{.metadata.annotations}'
 ```
-
 ### 2.2 资源配额状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== ResourceQuota检查 ==========
 # 查看Namespace中的资源配额
 kubectl get resourcequota -n <namespace-name>
@@ -205,7 +211,6 @@ kubectl describe limitrange -n <namespace-name>
 # 验证默认资源请求
 kubectl get limitrange -n <namespace-name> -o jsonpath='{.items[*].spec.limits[*].default}'
 ```
-
 ---
 
 <!-- chunk: 3. 资源配额超限问题排查 (Resource Quota Exceeded Troubleshooting) -->
@@ -213,7 +218,8 @@ kubectl get limitrange -n <namespace-name> -o jsonpath='{.items[*].spec.limits[*
 
 ### 3.1 配额使用情况分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 配额消耗检查 ==========
 # 查看所有资源配额使用情况
 kubectl get resourcequota -A -o jsonpath='{
@@ -281,13 +287,13 @@ kubectl get pods -n <namespace-name> -o jsonpath='{
     end
 }'
 ```
-
 ### 3.2 配额调整和优化
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 配额调整策略 ==========
 # 增加Pod配额
 kubectl patch resourcequota <quota-name> -n <namespace-name> -p '{
@@ -378,7 +384,6 @@ EOF
 
 chmod +x quota-usage-analyzer.sh
 ```
-
 ---
 
 <!-- chunk: 4. RBAC权限问题排查 (RBAC Permission Issues) -->
@@ -386,7 +391,8 @@ chmod +x quota-usage-analyzer.sh
 
 ### 4.1 权限配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 角色绑定检查 ==========
 # 查看Namespace中的RoleBindings
 kubectl get rolebindings -n <namespace-name>
@@ -447,13 +453,13 @@ kubectl get secret -n <namespace-name> -o jsonpath='{
     end
 }'
 ```
-
 ### 4.2 权限不足问题解决
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 权限问题诊断 ==========
 # 模拟权限测试
 USERS_TO_TEST=("developer" "operator" "admin")
@@ -565,7 +571,6 @@ EOF
 
 chmod +x permission-audit.sh
 ```
-
 ---
 
 <!-- chunk: 5. 网络策略冲突排查 (Network Policy Conflict Troubleshooting) -->
@@ -573,7 +578,8 @@ chmod +x permission-audit.sh
 
 ### 5.1 网络策略状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 策略配置检查 ==========
 # 查看Namespace中的NetworkPolicies
 kubectl get networkpolicies -n <namespace-name>
@@ -627,7 +633,6 @@ kubectl get networkpolicy -n <namespace-name> -o jsonpath='{
     end
 }'
 ```
-
 ### 5.2 网络连通性测试
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -635,7 +640,17 @@ kubectl get networkpolicy -n <namespace-name> -o jsonpath='{
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 连通性验证工具 ==========
 # 创建网络测试Pod
 cat <<EOF | kubectl apply -f -
@@ -672,7 +687,6 @@ kubectl exec -n <namespace-name> network-test-pod -- ping -c 3 <target-pod-ip>
 # 重新应用策略
 kubectl apply -f <original-policy-file.yaml>
 ```
-
 ---
 
 <!-- chunk: 6. Namespace清理和管理 (Namespace Cleanup and Management) -->
@@ -683,7 +697,8 @@ kubectl apply -f <original-policy-file.yaml>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 终止状态诊断 ==========
 # 查看卡住的Namespace
 kubectl get namespaces --field-selector status.phase=Terminating
@@ -729,7 +744,6 @@ spec:
   # 配置适当的资源限制防止清理问题
 EOF
 ```
-
 ### 6.2 Namespace生命周期管理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -737,7 +751,17 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 自动化清理脚本 ==========
 cat <<'EOF' > namespace-lifecycle-manager.sh
 #!/bin/bash
@@ -872,7 +896,6 @@ EOF
 
 chmod +x namespace-health-check.sh
 ```
-
 ---
 
 <!-- chunk: 7. 监控和告警配置 (Monitoring and Alerting) -->
@@ -883,7 +906,8 @@ chmod +x namespace-health-check.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -949,10 +973,10 @@ spec:
         summary: "Namespace {{ \$labels.namespace }} has been unused for 30 days"
 EOF
 ```
-
 ### 7.2 Namespace管理仪表板
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Grafana仪表板配置 ==========
 cat <<'EOF' > namespace-dashboard.json
 {
@@ -1103,7 +1127,6 @@ EOF
 
 chmod +x namespace-report-generator.sh
 ```
-
 ---
 
 ---
@@ -1133,3 +1156,6 @@ chmod +x namespace-report-generator.sh
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/22-job-troubleshooting.md|22-job-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|24-quota-limitrange-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|25-network-connectivity-troubleshooting]]
+
+
+<!-- risk-assessed -->

@@ -35,6 +35,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第七章：FTA 维护与演进策略
 
 > **所属部分**: 第二部分 - FTA 构建实践指南  
@@ -144,3 +149,6 @@ FTA 变更评审流程 (类比代码 Code Review):
 ---
 
 > **导航**: [<< 上一章 - FTA 验证与质量保证](./06-fta-verification-and-quality.md) | [下一章 - AI Agent 时代的运维范式革命 >>](./08-ai-agent-ops-revolution.md)
+
+
+<!-- risk-assessed -->

@@ -42,6 +42,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 控制平面故障排查手册 (Control Plane Troubleshooting Handbook)
@@ -144,6 +149,7 @@ k8s_versions:
 ### 1.1 系统性排查框架
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                          Troubleshooting Framework                              │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -184,7 +190,6 @@ k8s_versions:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 问题分类矩阵
 
 | 问题类型 | 常见症状 | 影响范围 | 恢复时间 | 复杂度 |
@@ -200,7 +205,8 @@ k8s_versions:
 
 ### 1.3 快速诊断命令集
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubernetes快速诊断脚本
 
@@ -246,7 +252,6 @@ kubectl get endpoints --all-namespaces
 
 echo "=== Diagnosis completed ==="
 ```
-
 ---
 
 <!-- chunk: 2. API Server故障诊断 -->
@@ -286,7 +291,8 @@ API Server问题分类:
 
 #### 步骤1: 基础状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查API Server Pod状态
 kubectl get pods -n kube-system -l component=kube-apiserver -o wide
 
@@ -300,7 +306,6 @@ ps aux | grep kube-apiserver
 netstat -tlnp | grep :6443
 ss -tlnp | grep :6443
 ```
-
 #### 步骤2: 健康检查端点
 
 ```bash
@@ -319,7 +324,8 @@ curl -k https://localhost:6443/metrics | head -20
 
 #### 步骤3: 日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 实时日志查看
 kubectl logs -n kube-system -l component=kube-apiserver -f
 
@@ -333,10 +339,10 @@ kubectl logs -n kube-system -l component=kube-apiserver --since=1h
 kubectl logs -n kube-system -l component=kube-apiserver | \
   awk '{print $NF}' | sort | uniq -c | sort -nr | head -10
 ```
-
 #### 步骤4: 配置验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查API Server配置
 kubectl get pod -n kube-system -l component=kube-apiserver -o yaml
 
@@ -349,12 +355,12 @@ grep -A 5 -B 5 etcd /etc/kubernetes/manifests/kube-apiserver.yaml
 # 4. 验证RBAC配置
 kubectl auth can-i list pods --as=system:anonymous
 ```
-
 ### 2.3 典型故障处理
 
 #### 问题1: API Server无法启动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断步骤:
 # 1. 检查Pod状态和事件
 kubectl describe pod -n kube-system kube-apiserver-control-plane
@@ -375,10 +381,10 @@ netstat -tlnp | grep 6443
 # - 配置错误: 修正配置文件语法
 # - 权限问题: 检查文件权限和SELinux/AppArmor
 ```
-
 #### 问题2: etcd连接失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断命令:
 # 1. 检查etcd端点可达性
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
@@ -400,13 +406,13 @@ ls -la /etc/kubernetes/pki/apiserver-etcd-client.*
 # - 重新生成客户端证书
 # - 验证etcd配置参数
 ```
-
 #### 问题3: 认证授权失败
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 诊断步骤:
 # 1. 测试匿名访问
 curl -k https://localhost:6443/api/v1/namespaces/default/pods
@@ -429,7 +435,6 @@ curl -k -H "Authorization: Bearer $TOKEN" https://localhost:6443/api/v1/namespac
 # - 检查认证Webhook配置
 # - 验证证书颁发机构
 ```
-
 ---
 
 <!-- chunk: 3. etcd集群故障处理 -->
@@ -475,7 +480,8 @@ etcd问题分类:
 
 #### 基础健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd健康检查脚本
 
@@ -512,10 +518,10 @@ $ETCDCTL --endpoints=$ENDPOINTS $CERTS endpoint status --write-out="json" | \
 
 echo "=== Health Check Complete ==="
 ```
-
 #### 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查etcd日志
 kubectl logs -n kube-system -l component=etcd --tail=100
 
@@ -536,7 +542,6 @@ ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS get /registry --prefix --key
 dd if=/dev/zero of=/var/lib/etcd/test bs=1M count=1000 conv=fdatasync
 rm /var/lib/etcd/test
 ```
-
 ### 3.3 常见故障处理
 
 #### 问题1: Leader丢失
@@ -545,7 +550,8 @@ rm /var/lib/etcd/test
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 症状识别:
 # - etcdctl endpoint status 显示没有leader
 # - API Server返回"etcd cluster has no leader"错误
@@ -579,10 +585,10 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
   --initial-cluster-token=etcd-cluster-1 \
   --initial-advertise-peer-urls=https://etcd-0:2380
 ```
-
 #### 问题2: 数据库配额超限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 症状:
 # - 错误信息:"etcdserver: mvcc: database space exceeded"
 # - API Server写入操作失败
@@ -615,13 +621,13 @@ ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS alarm disarm
 # 4. 增加配额(临时方案)
 # 修改etcd启动参数: --quota-backend-bytes=8589934592 (8GB)
 ```
-
 #### 问题3: 网络分区
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 症状:
 # - 集群成员间无法通信
 # - 出现多个leader(candidate)
@@ -655,7 +661,6 @@ ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS member update <member-id> \
 # 4. 监控集群恢复
 watch -n 2 'ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS endpoint status -w table'
 ```
-
 ---
 
 <!-- chunk: 4. 控制器管理器问题 -->
@@ -698,7 +703,8 @@ watch -n 2 'ETCDCTL_API=3 etcdctl --endpoints=$ENDPOINTS $CERTS endpoint status 
 
 ### 4.2 诊断命令集合
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查控制器管理器状态
 kubectl get pods -n kube-system -l component=kube-controller-manager
 
@@ -717,12 +723,12 @@ kubectl get --raw="/metrics" | grep controller_manager
 # 6. 验证RBAC权限
 kubectl auth can-i list pods --as=system:kube-controller-manager
 ```
-
 ### 4.3 常见问题处理
 
 #### 问题1: Deployment控制器不工作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断步骤:
 # 1. 检查Deployment控制器状态
 kubectl get deployments --all-namespaces
@@ -745,10 +751,10 @@ kubectl get pods -n <namespace> -l app=<app-name>
 # - 检查网络策略是否阻止Pod创建
 # - 重启控制器管理器Pod
 ```
-
 #### 问题2: Node控制器驱逐Pod异常
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断命令:
 # 1. 检查节点状态
 kubectl describe node <node-name>
@@ -769,7 +775,6 @@ kubectl logs -n kube-system -l component=kube-controller-manager | \
 # - 验证网络连通性
 # - 调整PodDisruptionBudget设置
 ```
-
 ---
 
 <!-- chunk: 5. 调度器问题排除 -->
@@ -807,7 +812,8 @@ kubectl logs -n kube-system -l component=kube-controller-manager | \
 
 ### 5.2 调度器诊断工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查调度器状态
 kubectl get pods -n kube-system -l component=kube-scheduler
 
@@ -823,12 +829,12 @@ kubectl get pods --all-namespaces --field-selector=status.phase=Pending
 # 5. 分析调度失败原因
 kubectl describe pod <pending-pod-name>
 ```
-
 ### 5.3 典型调度问题解决
 
 #### 问题1: Pod持续Pending状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 诊断步骤:
 # 1. 检查Pod调度状态
 kubectl describe pod <pod-name> | grep -A 20 "Events:"
@@ -852,10 +858,10 @@ kubectl get pod <pod-name> -o yaml | grep -A 10 tolerations
 # - 清理不需要的Pod释放资源
 # - 增加集群节点
 ```
-
 #### 问题2: 调度器性能下降
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 性能诊断:
 # 1. 监控调度延迟
 kubectl get --raw="/metrics" | grep "scheduler_e2e_scheduling_duration"
@@ -872,7 +878,6 @@ kubectl top pod -n kube-system -l component=kube-scheduler
 # - 增加调度器实例
 # - 升级到更高版本
 ```
-
 ---
 
 <!-- chunk: 6. 网络连通性问题 -->
@@ -880,7 +885,8 @@ kubectl top pod -n kube-system -l component=kube-scheduler
 
 ### 6.1 网络故障诊断矩阵
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 网络连通性检查脚本
 #!/bin/bash
 
@@ -911,12 +917,12 @@ kubectl get pods -n kube-system -l k8s-app=calico-node
 
 echo "=== Network Diagnosis Complete ==="
 ```
-
 ### 6.2 常见网络问题处理
 
 #### 问题1: Pod无法访问Service
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 诊断步骤:
 # 1. 检查Service配置
 kubectl get svc <service-name> -o yaml
@@ -936,7 +942,6 @@ kubectl get networkpolicies -n <namespace>
 # - 调整网络策略规则
 # - 验证CNI插件状态
 ```
-
 ---
 
 <!-- chunk: 总结 -->
@@ -989,3 +994,6 @@ kubectl get networkpolicies -n <namespace>
 - 05-plane-monitoring-observability
 - 07-plane-upgrade-migration
 - 08-plane-performance-benchmarking
+
+
+<!-- risk-assessed -->

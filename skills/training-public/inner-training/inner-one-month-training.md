@@ -40,6 +40,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # ACK/ACR/K8S 内部培训大纲
@@ -173,7 +178,8 @@ aliyun cs DELETE /clusters/<id>                         # 删除集群
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Day 8: RBAC 配置
 kubectl create role developer --verb=get,list,watch --resource=pods,deployments
 kubectl create rolebinding dev-binding --role=developer --user=dev@company.com -n dev
@@ -208,7 +214,6 @@ kubectl describe resourcequota -n <ns>     # 查看配额
 kubectl describe limitrange -n <ns>        # 查看限制范围
 # License: ACK Pro 版功能授权
 ```
-
 ---
 
 ## Week 3: 节点与工作负载管理 (Day 15-21)
@@ -235,7 +240,17 @@ kubectl describe limitrange -n <ns>        # 查看限制范围
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Day 15-16: 节点管理
 kubectl get nodes -o wide                        # 节点列表
 kubectl label node <node> env=production         # 添加标签
@@ -263,7 +278,6 @@ kubectl get cs                                   # 组件状态
 kubectl get pods -n kube-system                  # 系统Pod
 # CoreDNS/kube-proxy/CSI/CNI 组件检查与排障
 ```
-
 ---
 
 ## Week 4: 网络与存储 (Day 22-28)
@@ -284,7 +298,8 @@ kubectl get pods -n kube-system                  # 系统Pod
 
 ### Day 22-28 核心知识点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Day 22-23: Service & Ingress
 kubectl expose deployment <name> --port=80 --type=LoadBalancer  # 创建Service
 kubectl get svc,endpoints                                        # 验证
@@ -306,7 +321,6 @@ kubectl get storageclass                         # 存储类
 # Day 28: 综合复习
 # 全流程实操: 创建集群 → 部署应用 → 配置网络 → 挂载存储 → 监控告警
 ```
-
 ---
 
 ## 培训主题索引
@@ -358,3 +372,6 @@ kubectl get storageclass                         # 存储类
 - [ACR 产品文档](https://help.aliyun.com/product/60716.html)
 - [Kubernetes 官方文档](https://kubernetes.io/docs/home/)
 - [阿里云容器服务最佳实践](https://help.aliyun.com/document_detail/2627792.html)
+
+
+<!-- risk-assessed -->

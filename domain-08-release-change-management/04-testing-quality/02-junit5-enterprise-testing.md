@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # JUnit 5 企业级单元测试框架深度实践
@@ -1074,7 +1079,8 @@ check_dependency_conflicts() {
 
 ## 日常运维脚本 (Daily Operations Scripts)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # JUnit 5 日常运维脚本
 
@@ -1168,7 +1174,6 @@ test_environment_health() {
     fi
 }
 ```
-
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
 ## 测试设计最佳实践 (Test Design Best Practices)
@@ -1326,3 +1331,6 @@ test_environment_health() {
 - 01-selenium-enterprise-automation
 - 03-ai-testing-quality-assurance
 - 05-cypress-enterprise-automation
+
+
+<!-- risk-assessed -->

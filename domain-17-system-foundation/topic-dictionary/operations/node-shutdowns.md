@@ -33,6 +33,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 节点关闭（Node Shutdowns）
@@ -116,7 +121,17 @@ FEATURE STATE: `Kubernetes v1.28 [stable]`（默认启用）
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 优雅清空节点（计划内维护）
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 
@@ -135,7 +150,6 @@ journalctl -u kubelet | grep -i shutdown
 # 检查 systemd 抑制锁
 systemd-inhibit --list
 ```
-
 ## 交叉引用
 
 - [Node Shutdowns - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/)
@@ -150,3 +164,6 @@ systemd-inhibit --list
 - [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
 - [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
 - [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+
+
+<!-- risk-assessed -->

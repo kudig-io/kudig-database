@@ -48,6 +48,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: AWS EKS (Elastic [[Kubernetes|Kubernetes]] [[Service|Service]]) 概述
@@ -170,6 +175,7 @@ graph TD
 
 **多环境分层架构**
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ├── Development (dev-cluster)
 │   ├── Single AZ deployment
 │   ├── t3.medium worker nodes
@@ -187,7 +193,6 @@ graph TD
     ├── Advanced security controls
     └── Comprehensive observability
 ```
-
 **节点规格选型矩阵**
 
 | 工作负载类型 | 推荐实例类型 | 配置参数 | 适用场景 |
@@ -376,7 +381,8 @@ spec:
 ```
 
 **成本分析脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # EKS Cost Analysis Script
 
@@ -415,13 +421,13 @@ echo "2. Enable Spot instances for fault-tolerant applications"
 echo "3. Right-size your pods with proper resource requests/limits"
 echo "4. Use Horizontal Pod Autoscaler to scale based on demand"
 ```
-
 ## 故障排查与应急响应
 
 ### 常见问题诊断流程
 
 **节点加入集群失败**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点状态
 kubectl get nodes
 
@@ -440,9 +446,9 @@ aws sts get-caller-identity
 # 6. 检查节点IAM角色权限
 aws iam get-role --role-name <node-instance-role>
 ```
-
 **Pod调度失败分析**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看Pod调度事件
 kubectl describe pod <pod-name>
 
@@ -458,13 +464,13 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 # 5. 分析调度器日志
 kubectl logs -n kube-system -l component=kube-scheduler
 ```
-
 **网络连接问题排查**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查CNI插件状态
 kubectl get daemonset aws-node -n kube-system
 
@@ -480,7 +486,6 @@ aws ec2 describe-route-tables --route-table-ids <rtb-id>
 # 5. 检查网络ACL
 aws ec2 describe-network-acls --network-acl-ids <nacl-id>
 ```
-
 ### 应急响应预案
 
 **一级问题响应 (Critical)**
@@ -507,7 +512,8 @@ aws ec2 describe-network-acls --network-acl-ids <nacl-id>
 ### 自动化运维工具
 
 **集群健康检查脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # EKS Cluster Health Check
 
@@ -551,9 +557,9 @@ fi
 
 echo "=== Health Check Complete ==="
 ```
-
 **日志收集与分析工具**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # EKS Log Collection Script
 
@@ -583,7 +589,6 @@ kubectl get pods --all-namespaces -o wide > $LOG_DIR/pods-wide.txt
 
 echo "Logs collected to: $LOG_DIR"
 ```
-
 ## 版本升级与维护
 
 ### Kubernetes版本管理
@@ -595,7 +600,8 @@ echo "Logs collected to: $LOG_DIR"
 - 平滑版本升级路径
 
 **升级前检查清单**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Pre-upgrade validation script
 
@@ -619,7 +625,6 @@ echo "Checking application compatibility..."
 
 echo "=== Pre-flight Check Complete ==="
 ```
-
 ### 自动化升级流程
 
 ```yaml
@@ -975,3 +980,6 @@ phases:
 - [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

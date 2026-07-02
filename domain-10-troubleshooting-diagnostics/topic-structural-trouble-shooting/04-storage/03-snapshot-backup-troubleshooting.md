@@ -45,6 +45,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: CSI 快照与卷备份故障排查指南
@@ -153,7 +158,8 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VolumeSnapshot 状态
 kubectl get volumesnapshot -A -o wide
 
@@ -175,7 +181,6 @@ kubectl describe volumesnapshot <snapshot-name> -n <namespace>
 # 查看 VolumeSnapshotContent 的详细状态
 kubectl describe volumesnapshotcontent <content-name>
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -252,7 +257,8 @@ CSI 快照的工作流程涉及多个组件的协同：
 
 #### Snapshot 组件状态诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # CSI Snapshot 组件状态诊断
 
@@ -298,10 +304,10 @@ echo ""
 echo "5. VolumeSnapshotClass 列表:"
 kubectl get volumesnapshotclass -o json | jq -r '.items[] | "  \(.metadata.name): driver=\(.driver), deletionPolicy=\(.deletionPolicy)"'
 ```
-
 #### 快照创建故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 快照创建故障诊断脚本
 # 用法: ./diagnose-snapshot-creation.sh <volumesnapshot-name> <namespace>
@@ -373,10 +379,10 @@ else
   echo "  ⚠ 未找到 CSI driver pod"
 fi
 ```
-
 #### 快照恢复故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 快照恢复故障诊断脚本
 # 用法: ./diagnose-snapshot-restore.sh <pvc-name> <namespace>
@@ -443,7 +449,6 @@ else
   echo "  ✗ PVC 未指定 StorageClass"
 fi
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -522,7 +527,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 手动创建带验证的快照
 # 用法: ./create-verified-snapshot.sh <pvc-name> <namespace>
@@ -574,7 +580,6 @@ else
   exit 1
 fi
 ```
-
 ### 3.2 快照恢复解决方案
 
 #### 方案一：从快照恢复 PVC
@@ -626,7 +631,8 @@ parameters:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 强制清理卡住的 VolumeSnapshot/VolumeSnapshotContent
 # ⚠️ 警告：此脚本仅应在确认后端快照已安全删除后使用
@@ -661,7 +667,6 @@ fi
 echo "✓ 强制清理命令已执行"
 echo "请通过后端存储控制台确认物理快照已删除"
 ```
-
 ### 3.4 风险控制与回滚
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
@@ -676,7 +681,8 @@ echo "请通过后端存储控制台确认物理快照已删除"
 
 #### 快照健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 快照健康检查脚本
 
@@ -705,7 +711,6 @@ kubectl get volumesnapshot -A -o json | jq -r '
   group_by(.namespace)[] | "  \(.[0].namespace): \(length) 个快照"
 '
 ```
-
 #### Prometheus 监控告警规则
 
 ```yaml
@@ -797,3 +802,6 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+
+
+<!-- risk-assessed -->

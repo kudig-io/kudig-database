@@ -44,6 +44,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - Terway 使用指南 (Usage Guide)
@@ -60,27 +65,27 @@ prerequisites:
 
 验证安装状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ds -n kube-system terway-eniip -o wide
 kubectl get pods -n kube-system -l app=terway -o wide
 kubectl get clusterrole terway -o yaml
 kubectl get clusterrolebinding terway -o yaml
 ```
-
 确认所有节点上的 Terway Pod 均为 Running 且 Ready：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l app=terway --all-namespaces
 kubectl get pods -n kube-system -l app=terway -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.containerStatuses[0].ready}{"\n"}{end}'
 ```
-
 ### 1.2 查看当前配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get configmap -n kube-system eni-config -o yaml
 kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' | jq .
 ```
-
 关键配置字段说明：
 
 | 字段 | 说明 | 示例值 |
@@ -95,10 +100,10 @@ kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' |
 
 ### 1.3 查看 Terway 版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ds -n kube-system terway-eniip -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-
 ---
 
 ## 2. 网络模式配置
@@ -227,13 +232,22 @@ data:
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit configmap eni-config -n kube-system
 kubectl rollout restart ds terway-eniip -n kube-system
 kubectl rollout restart ds kube-proxy -n kube-system
 kubectl delete pods -A --all  # ⚠️ 批量删除，波及面大
 ```
-
 ### 2.5 ENIIP-Trunking 模式配置
 
 ENIIP-Trunking 模式通过 Trunk ENI 的 VLAN 子接口复用 ENI，单节点 Pod 密度可达 **500+**，适用于超大规模集群和 Serverless 场景。
@@ -285,7 +299,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 Trunk ENI 已启用
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
 # 输出中应包含 "trunk" 标识的 ENI
@@ -296,7 +311,6 @@ kubectl get nodenetworking <node-name> -o yaml | grep -A 5 trunk
 # 3. 确认 VLAN 子接口已创建
 kubectl exec -n kube-system <terway-pod> -c terway -- ip link show type ipvlan
 ```
-
 **注意事项:**
 - VLAN tag 由 Terway 自动管理，无需手动配置
 - Trunk ENI 上的安全组规则应用于所有子接口流量
@@ -343,11 +357,11 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get pods -n kube-system -l k8s-app=cilium -o wide
 kubectl exec -n kube-system -c cilium-agent $(kubectl get pods -n kube-system -l k8s-app=cilium -o jsonpath='{.items[0].metadata.name}') -- cilium status
 ```
-
 ### 3.3 禁止所有入口流量
 
 ```yaml
@@ -522,12 +536,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].metadata.name}') -- terway-cli show | grep "fixed"
 kubectl get podeni -A -o wide
 kubectl get ipinstance -A -o wide
 ```
-
 ---
 
 ## 5. Pod 安全组
@@ -678,7 +692,8 @@ spec:
 
 **验证命令:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 获得的 EIP 地址
 kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations["k8s.aliyun.com/allocated-eip"]}'
 
@@ -688,7 +703,6 @@ kubectl get pods -A -o json | jq -r '.items[] | select(.metadata.annotations["k8
 # 从外部验证 EIP 可达
 curl http://<eip-address>
 ```
-
 **注意事项:**
 - EIP 与 Pod 生命周期绑定，Pod 删除后 EIP 自动释放
 - 计费模式默认为按量付费 (PayByTraffic)
@@ -767,12 +781,12 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get pods -o wide
 kubectl exec <pod-name> -- ip addr show eth0
 kubectl exec <pod-name> -- ip -6 route
 ```
-
 双栈 Pod 将同时获得 IPv4 和 IPv6 地址。IPv6 地址可直接在 VPC 内通信，无需 NAT。
 
 前置要求：
@@ -819,61 +833,61 @@ kubectl exec <pod-name> -- ip -6 route
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get podeni -A
 kubectl get podeni <name> -n <namespace> -o yaml
 kubectl describe podeni <name> -n <namespace>
 kubectl delete podeni <name> -n <namespace>
 kubectl get podeni -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podName}{"\t"}{.status.status}{"\n"}{end}'
 ```
-
 ### 10.2 NodeNetworking
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get nodenetworking
 kubectl get nodenetworking <node-name> -o yaml
 kubectl describe nodenetworking <node-name>
 kubectl patch nodenetworking <node-name> --type merge -p '{"spec":{"eniConfig":{"maxENI":5}}}'
 ```
-
 ### 10.3 PodNetworking
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get podnetworking
 kubectl get podnetworking <name> -o yaml
 kubectl apply -f podnetworking.yaml
 kubectl delete podnetworking <name>
 ```
-
 ### 10.4 ReservedIP
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get reservedip
 kubectl get reservedip <name> -o yaml
 kubectl apply -f reservedip.yaml
 kubectl delete reservedip <name>
 ```
-
 ### 10.5 IPInstance
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipinstance -A
 kubectl get ipinstance -A -o wide
 kubectl get ipinstance <name> -n <namespace> -o yaml
 kubectl get ipinstance -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.ip}{"\t"}{.status.podName}{"\n"}{end}'
 ```
-
 ---
 
 ## 11. 容量规划参考
@@ -990,7 +1004,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 TC 规则是否已挂载
 kubectl exec -n kube-system <terway-pod> -- tc qdisc show dev eth0
 
@@ -1003,7 +1018,6 @@ kubectl run iperf3-client --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/i
 # 检查 Pod 的 bandwidth annotation 是否生效
 kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations}' | jq .
 ```
-
 ---
 
 ## 11. 多集群 Terway 网络方案
@@ -1044,10 +1058,10 @@ aliyun cen PublishRouteEntries --CenId cen-xxx --ChildInstanceId vpc-xxx1 --Chil
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 ```
-
 ### 11.3 多集群 Terway 配置对齐
 
 跨集群需对齐的关键配置：
@@ -1109,3 +1123,6 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

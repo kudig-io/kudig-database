@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: csi'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)
@@ -182,6 +187,7 @@ CSI (Container Storage Interface) 是Kubernetes的标准存储接口，允许存
 ### 2.1 故障诊断流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      PVC 创建失败诊断流程                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -220,10 +226,10 @@ CSI (Container Storage Interface) 是Kubernetes的标准存储接口，允许存
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. PVC状态检查 ==========
 
 # 查看PVC状态
@@ -271,7 +277,6 @@ kubectl describe quota -n <namespace>
 # 检查LimitRange
 kubectl get limitrange -n <namespace>
 ```
-
 ### 2.3 常见错误及解决方案
 
 | 错误信息 | 可能原因 | 解决方案 |
@@ -290,6 +295,7 @@ kubectl get limitrange -n <namespace>
 ### 3.1 挂载失败诊断流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      卷挂载失败诊断流程                                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -328,10 +334,10 @@ kubectl get limitrange -n <namespace>
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 3.2 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Pod挂载状态检查 ==========
 
 # 检查Pod状态
@@ -380,7 +386,6 @@ fsck -n /dev/<device-path>
 # 检查目录权限
 ls -ld /var/lib/kubelet/plugins/kubernetes.io/csi/
 ```
-
 ### 3.3 常见挂载错误
 
 | 错误信息 | 可能原因 | 解决方案 |
@@ -398,7 +403,8 @@ ls -ld /var/lib/kubelet/plugins/kubernetes.io/csi/
 
 ### 4.1 CSI Controller问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Controller组件检查 ==========
 
 # 检查Controller Pod状态
@@ -417,10 +423,10 @@ done
 kubectl port-forward -n kube-system svc/csi-controller 8080:8080
 curl localhost:8080/metrics | grep csi
 ```
-
 ### 4.2 CSI Node问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Node组件检查 ==========
 
 # 检查所有Node组件
@@ -438,7 +444,6 @@ done
 # Node组件日志分析
 kubectl logs -n kube-system -l app=csi-node --tail=100 --all-containers
 ```
-
 ---
 
 <!-- chunk: 5. 存储性能问题排查 (Storage Performance Issues) -->
@@ -449,7 +454,8 @@ kubectl logs -n kube-system -l app=csi-node --tail=100 --all-containers
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 存储性能指标收集 ==========
 
 # Pod级别IO统计
@@ -482,7 +488,6 @@ kubectl exec -it <pod> -- dstat -clmndst
 # 检查文件系统缓存命中率
 kubectl exec -it <pod> -- cat /proc/vmstat | grep -E "pgsteal|pgactivate"
 ```
-
 ### 5.2 性能优化建议
 
 | 优化方向 | 具体措施 | 适用场景 |
@@ -500,7 +505,8 @@ kubectl exec -it <pod> -- cat /proc/vmstat | grep -E "pgsteal|pgactivate"
 
 ### 6.1 存储问题紧急诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # csi-storage-emergency-check.sh
 
@@ -530,7 +536,6 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' | grep -i "volume
 
 echo -e "\n=== 诊断完成 ==="
 ```
-
 ### 6.2 故障处理优先级
 
 | 问题类型 | 响应时间 | 处理步骤 |
@@ -626,3 +631,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

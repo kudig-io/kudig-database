@@ -1,0 +1,75 @@
+---
+title: AI/ML 工作负载的可观测性
+description: '## GPU 监控'
+summary: '## GPU 监控'
+category: synthesis
+tags:
+- ai-ml
+- observability
+- gpu-monitoring
+- mLOps
+- metrics
+- gpu
+tier: supporting
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- AI/ML 工作负载的可观测性 是什么
+- 如何 AI/ML 工作负载的可观测性
+trigger_keywords:
+- AI
+- ML
+- 工作负载的可观测性
+prerequisites:
+- kubectl-basics
+- gpu-scheduling-basics
+relationships:
+- target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
+  type: related_to
+- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+  type: related_to
+---
+
+
+
+# AI/ML 工作负载的可观测性
+
+## GPU 监控
+
+```
+关键指标:
+├── dcgm_gpu_utilization        GPU 计算利用率
+├── dcgm_memory_used            GPU 显存使用
+├── dcgm_temperature            GPU 温度
+├── dcgm_power_usage            GPU 功耗
+├── dcgm_pcie_traffic           PCIe 带宽
+└── dcgm_xid_errors             GPU 错误
+```
+
+## 训练任务追踪
+
+```
+MLflow / WandB + Kubernetes:
+  → Pod 标签关联实验 ID
+  → 资源使用与实验结果关联
+  → 自动发现资源浪费的训练任务
+```
+
+## 推理服务监控
+
+```
+模型服务 SLO:
+  - P99 推理延迟 < 100ms
+  - 吞吐量 > 1000 QPS
+  - GPU 利用率 > 60%（避免浪费）
+```
+
+## 相关 Domain
+
+- domain-14-ai-ml-infra/03-gpu-scheduling/01-gpu-scheduling-management
+- [[domain-17-system-foundation/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]

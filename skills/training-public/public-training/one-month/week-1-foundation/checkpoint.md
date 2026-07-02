@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Week 1 Checkpoint: 自测检验
@@ -237,6 +242,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply → API Server → etcd
                    ↓
            Controller Manager → 创建 ReplicaSet → API Server → etcd
@@ -245,7 +251,6 @@ kubectl apply → API Server → etcd
                                                                             ↓
                                                                     kubelet → 创建容器
 ```
-
 ---
 
 ### 5. 某 Pod 一直处于 Pending 状态，你的排查步骤是什么？
@@ -263,6 +268,7 @@ kubectl apply → API Server → etcd
 Pending 排查决策树:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Pod Pending
 ├── 资源不足
 │   ├── CPU 不足 → kubectl describe pod → Insufficient cpu
@@ -280,10 +286,10 @@ Pod Pending
     ├── Scheduler 不可用 → kubectl get componentstatuses
     └── API Server 异常 → 检查 API Server 日志
 ```
-
 排查命令序列:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <name> | grep -A 20 Events
 kubectl get nodes -o wide
 kubectl describe node <node-name> | grep -A 5 Allocatable
@@ -291,7 +297,6 @@ kubectl get pvc
 kubectl get sc
 kubectl get clusterrolebindings -o wide
 ```
-
 ---
 
 ### 6. 解释 Docker 镜像分层原理及其优势
@@ -416,11 +421,11 @@ Client → Service ClusterIP:Port
 
 查看当前存储驱动:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker info | grep "Storage Driver"
 # Storage Driver: overlay2
 ```
-
 ---
 
 ### 10. K8s 中 Deployment、ReplicaSet、Pod 三者之间的关系是什么？
@@ -470,7 +475,8 @@ Deployment (声明期望状态)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout history deployment/nginx
 kubectl rollout undo deployment/nginx
 kubectl rollout undo deployment/nginx --to-revision=2
@@ -478,7 +484,6 @@ kubectl rollout status deployment/nginx
 kubectl rollout pause deployment/nginx
 kubectl rollout resume deployment/nginx
 ```
-
 ---
 
 ### 12. `kubectl port-forward pod/nginx 8080:80` 做什么？
@@ -492,13 +497,13 @@ kubectl rollout resume deployment/nginx
 
 **参考答案:** 将本地 8080 端口转发到 Pod 的 80 端口
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl port-forward pod/nginx 8080:80
 kubectl port-forward svc/nginx 8080:80
 kubectl port-forward deploy/nginx 8080:80
 kubectl port-forward pod/nginx 8080:80 9090:9090
 ```
-
 ---
 
 ### 13. `kubectl top node` 做什么？需要什么前置条件？
@@ -517,7 +522,8 @@ kubectl port-forward pod/nginx 8080:80 9090:9090
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 kubectl top nodes
@@ -525,7 +531,6 @@ kubectl top nodes
 # node-01    500m         25%    2048Mi          32%
 # node-02    300m         15%    1536Mi          24%
 ```
-
 ---
 
 ### 14. 如何查看 Pod 的实时日志？
@@ -539,7 +544,8 @@ kubectl top nodes
 
 **参考答案:** `kubectl logs -f <pod-name>`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -f nginx-pod
 kubectl logs -f nginx-pod -c sidecar
 kubectl logs nginx-pod --previous
@@ -547,7 +553,6 @@ kubectl logs nginx-pod --since=1h
 kubectl logs -l app=nginx --all-containers
 kubectl logs nginx-pod --tail=100
 ```
-
 ---
 
 ### 15. 如何进入一个正在运行的 Pod 执行命令？
@@ -587,10 +592,10 @@ kubectl logs nginx-pod --tail=100
 
 **参考答案:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.nodeName}{"\n"}{end}'
 ```
-
 ---
 
 ### 18. 如何查看 kubeconfig 中当前上下文的集群地址？
@@ -604,11 +609,11 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.n
 
 **参考答案:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
 
 ```
-
 ---
 
 ## 三、场景分析 (每题 5 分，共 20 分)
@@ -628,6 +633,7 @@ kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
 完整流程:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Step 1: kubectl 本地操作
   ├── 读取 YAML 文件
   ├── 校验 YAML 格式和字段合法性
@@ -660,7 +666,6 @@ Step 5: kubelet 执行
   ├── 配置网络 (CNI)
   └── 挂载存储 (CSI)
 ```
-
 ---
 
 ### 20. 设计一个 Nginx 应用的部署方案，要求: 高可用、滚动更新零宕机、资源限制合理。
@@ -776,14 +781,14 @@ spec:
 
 **参考要点:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <name> -o wide
 kubectl describe pod <name>
 kubectl logs <name> --previous
 kubectl logs <name> -c <container>
 kubectl get events --field-selector involvedObject.name=<name>
 ```
-
 常见原因:
 
 | 原因 | 症状 | 修复方法 |
@@ -865,10 +870,10 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl label namespace frontend name=frontend
 ```
-
 ---
 
 ## 五、评分统计
@@ -953,3 +958,5 @@ kubectl label namespace frontend name=frontend
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

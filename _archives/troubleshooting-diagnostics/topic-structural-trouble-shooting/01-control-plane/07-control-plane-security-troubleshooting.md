@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 控制平面安全加固故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境实战指南
@@ -56,7 +61,8 @@ prerequisites:
 
 ### 报错查看方式汇总
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 API Server 安全配置
 kubectl get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}' | jq '.'
 
@@ -72,7 +78,6 @@ done
 # 检查 RBAC 权限配置
 kubectl get clusterroles,clusterrolebindings -o wide
 ```
-
 ## 🎯 排查方法与步骤
 
 ### 排查原理说明
@@ -141,7 +146,8 @@ openssl s_client -connect localhost:6443 -tls1_3 2>/dev/null </dev/null && echo 
 
 #### 2. RBAC 权限配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 检查 RBAC 权限配置安全性
 
@@ -166,10 +172,10 @@ kubectl get rolebindings,clusterrolebindings -o json | jq -r '
 echo "4. 检查匿名认证配置:"
 kubectl get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}' | grep -o '\--anonymous-auth=[^ ]*' || echo "匿名认证: 未明确配置(默认启用)"
 ```
-
 #### 3. 审计日志配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 检查审计日志配置安全性
 
@@ -191,7 +197,6 @@ kubectl get pod -n kube-system -l component=kube-apiserver -o jsonpath='{.items[
 echo "3. 检查审计日志存储:"
 ls -la /var/log/kubernetes/audit*.log 2>/dev/null || echo "审计日志目录不存在"
 ```
-
 ## 🔧 解决方案与风险控制
 
 ### 解决步骤
@@ -290,7 +295,17 @@ rules:
 
 #### 方案四：禁用匿名认证和不安全配置
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 安全加固脚本
 
@@ -351,7 +366,6 @@ EOF
 # 重启控制平面组件
 systemctl restart kubelet
 ```
-
 ### 执行风险评估
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
@@ -374,7 +388,8 @@ systemctl restart kubelet
 
 ### 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 安全配置验证脚本
 
@@ -396,7 +411,6 @@ kubectl auth can-i list pods --as=system:anonymous 2>&1 | grep -q "no" && echo "
 echo "4. 审计日志验证:"
 ls -la /var/log/kubernetes/audit*.log && echo "✓ 审计日志文件存在" || echo "✗ 审计日志文件不存在"
 ```
-
 ### 监控告警配置
 
 ```yaml
@@ -466,7 +480,8 @@ securityBaseline:
 
 ### 定期安全检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 定期安全检查脚本
 
@@ -504,7 +519,6 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 #  mail -s "Kubernetes Security Check Report" "$ALERT_EMAIL" < "$LOG_FILE"
 #fi
 ```
-
 ## 🔄 问题案例分析
 
 ### 案例一：证书过期导致集群不可用
@@ -544,3 +558,6 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+
+
+<!-- risk-assessed -->

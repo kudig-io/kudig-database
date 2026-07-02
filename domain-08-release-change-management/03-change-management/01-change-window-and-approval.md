@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 变更窗口与审批流程
@@ -219,7 +224,7 @@ kubectl rollout undo deployment/ingress-nginx-controller -n ingress-nginx
 | 李四 | 技术负责人 | 已批准 | 2026-06-30 |
 | 王五 | SRE 负责人 | 已批准 | 2026-06-30 |
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ---
 
 ## 6. ASO/工单系统集成
@@ -235,7 +240,6 @@ kubectl annotate rfc upgrade-ingress-controller \
   ticket-id="TICKET-20260701-001" \
   aso-change-id="ASO-CHANGE-12345"
 ```
-
 ### 6.2 变更状态同步
 
 ```bash
@@ -261,17 +265,18 @@ aliyun oos StartExecution \
 
 ### 7.2 变更中监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看变更资源状态
 kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx --timeout=300s
 
 # 监控 Pod 重启与错误率
 kubectl get pods -n ingress-nginx -w
 ```
-
 ### 7.3 变更后验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证服务健康
 kubectl get pods -n ingress-nginx
 kubectl logs -l app.kubernetes.io/name=ingress-nginx -n ingress-nginx --tail=100
@@ -279,7 +284,6 @@ kubectl logs -l app.kubernetes.io/name=ingress-nginx -n ingress-nginx --tail=100
 # 验证业务入口
 for i in {1..10}; do curl -s -o /dev/null -w "%{http_code}\n" https://api.example.com/health; done
 ```
-
 ---
 
 ## 8. 最佳实践检查清单
@@ -396,3 +400,5 @@ for i in {1..10}; do curl -s -o /dev/null -w "%{http_code}\n" https://api.exampl
 - [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|变更回滚操作手册]]
 
 ```
+
+<!-- risk-assessed -->

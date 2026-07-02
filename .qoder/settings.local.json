@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/allengaller/Documents/GitHub/kudig-io/kudig-database/release/ 2>/dev/null || echo \"release/ is empty or doesn't exist\")"
+    ]
+  }
+}

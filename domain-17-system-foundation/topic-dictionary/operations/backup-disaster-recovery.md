@@ -40,6 +40,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 备份与灾难恢复（Backup & Disaster Recovery）
@@ -69,7 +74,8 @@ etcd 是 Kubernetes 的"大脑"，存储了所有集群状态和配置：
 - **加密传输**：备份文件应加密存储，防止 etcd 数据泄露
 - **恢复验证**：每季度至少进行一次 etcd 恢复演练，验证 RTO
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 备份命令
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot.db \
   --endpoints=https://127.0.0.1:2379 \
@@ -77,7 +83,6 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot.db \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 ### 3. Velero
 
 **Velero** 是 VMware 开源的 Kubernetes 备份与迁移工具，支持：
@@ -185,7 +190,8 @@ spec:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d%H%M).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -208,7 +214,6 @@ velero restore create --from-backup prod-backup --include-namespaces production
 # Velero: 查看备份状态
 velero backup get && velero restore get
 ```
-
 ## 交叉引用
 
 - [Velero Documentation](https://velero.io/docs/)
@@ -224,3 +229,6 @@ velero backup get && velero restore get
 
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

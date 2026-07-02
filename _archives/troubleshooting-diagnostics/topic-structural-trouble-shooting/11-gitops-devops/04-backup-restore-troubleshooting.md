@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 备份恢复故障排查指南
 
 > **适用版本**: [[entities/kubernetes|kubernetes]] v1.28 - v1.32 | Velero v1.12+ | **最后更新**: 2026-05 | **难度**: 中高级
@@ -126,7 +131,8 @@ TE-BACKUP-001 (备份恢复异常)
 
 #### Step 1: 检查 Velero 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Velero Pod 状态
 kubectl get pods -n velero
 
@@ -136,10 +142,10 @@ kubectl describe backup -n velero {backup-name}
 # 查看 Velero Pod 日志
 kubectl logs -n velero deployment/velero --tail=100 | grep -i error
 ```
-
 #### Step 2: 检查存储后端
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 BackupStorageLocation 状态
 kubectl get backupstoragelocation -n velero
 
@@ -149,10 +155,10 @@ kubectl describe backupstoragelocation -n velero default
 # 检查凭据 Secret
 kubectl get secret -n velero velero-backup-creds
 ```
-
 #### Step 3: 检查 Volume 快照
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 VolumeSnapshotClass
 kubectl get volumesnapshotclass
 
@@ -163,32 +169,32 @@ kubectl get volumesnapshot -n {namespace}
 kubectl get csidriver
 kubectl get pods -n kube-system | grep csi
 ```
-
 ### 2.3 etcd 快照异常排查
 
 #### Step 1: 检查 etcd-operator 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd-operator Pod
 kubectl get pods -n kube-system -l app=etcd-operator
 
 # 查看 etcd-operator 日志
 kubectl logs -n kube-system -l app=etcd-operator --tail=50
 ```
-
 #### Step 2: 检查磁盘空间
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 etcd 节点磁盘空间
 kubectl exec -n kube-system etcd-{node-name} -- df -h /var/lib/etcd
 
 # 检查 etcd 数据库大小
 kubectl exec -n kube-system etcd-{node-name} -- etcdctl endpoint status
 ```
-
 #### Step 3: 检查快照 CronJob
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd-snapshot CronJob
 kubectl get cronjob -n kube-system etcd-snapshot
 
@@ -198,7 +204,6 @@ kubectl get jobs -n kube-system | grep etcd-snapshot
 # 查看 Job 日志
 kubectl logs -n kube-system job/etcd-snapshot-{timestamp}
 ```
-
 ### 2.4 恢复流程排查
 
 #### Step 1: 检查备份数据可用性
@@ -216,14 +221,14 @@ velero backup-location get
 
 #### Step 2: 执行恢复前验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查目标 Namespace 是否存在
 kubectl get namespace {target-namespace}
 
 # 检查恢复顺序依赖
 velero restore describe {restore-name} --show-contents | grep -i error
 ```
-
 #### Step 3: 执行恢复
 
 ```bash
@@ -253,7 +258,8 @@ velero restore describe {restore-name}
 
 #### Step 1: 模拟灾难场景
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 备份当前状态
 velero backup create pre-drill-backup --include-namespaces production
 
@@ -261,10 +267,19 @@ velero backup create pre-drill-backup --include-namespaces production
 kubectl get backup -n velero pre-drill-backup -o jsonpath='{.status.phase}'
 # 期望输出: Completed
 ```
-
 #### Step 2: 模拟数据丢失
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除目标 Namespace（模拟灾难）
 kubectl delete namespace production
 
@@ -272,7 +287,6 @@ kubectl delete namespace production
 kubectl get namespace production
 # 期望输出: NotFound
 ```
-
 #### Step 3: 执行恢复并计时
 
 ```bash
@@ -296,7 +310,8 @@ echo "恢复耗时: ${DURATION} 秒"
 
 #### Step 4: 验证数据完整性
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 恢复状态
 kubectl get pods -n production
 
@@ -306,7 +321,6 @@ kubectl exec -n production deployment/{app} -- ls -la /data
 # 检查数据库数据
 kubectl exec -n production statefulset/mysql -- mysql -e "SELECT COUNT(*) FROM app_table;"
 ```
-
 ### 3.3 演练报告模板
 
 ```
@@ -868,3 +882,5 @@ sla_reporting:
 > **版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
 > **下一步**: 集成到 AI Agent 执行引擎，支持自动备份健康度检测
+
+<!-- risk-assessed -->

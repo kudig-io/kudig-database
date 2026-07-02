@@ -52,6 +52,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - 节点生命周期与状态事件
@@ -88,7 +93,17 @@ cross_refs:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Node Lifecycle State Machine                  │
 └─────────────────────────────────────────────────────────────────┘
@@ -143,7 +158,6 @@ cross_refs:
     (spec.unschedulable=false)      (spec.unschedulable=true)
                                     (kubectl cordon)
 ```
-
 ---
 
 <!-- chunk: 节点状态类型详解 -->## 节点状态类型详解
@@ -195,7 +209,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubelet 启动事件
 kubectl get events --field-selector involvedObject.kind=Node,reason=Starting
 
@@ -209,7 +224,6 @@ journalctl -u kubelet -n 100 --no-pager
 kubelet --version
 ps aux | grep kubelet
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -246,14 +260,14 @@ Message: Node node1.example.com status is now: NodeReady
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
   ----             ------  -----------------                 ------------------                ------                       -------
   Ready            True    Mon, 10 Feb 2026 10:30:00 +0800  Mon, 10 Feb 2026 10:25:00 +0800  KubeletReady                 kubelet is posting ready status
 ```
-
 ## 影响面说明
 
 - **集群影响**：增加集群的可用容量
@@ -262,7 +276,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点状态
 kubectl get nodes
 
@@ -278,7 +293,6 @@ kubectl get node <node-name> -o jsonpath='{.status.capacity}' | jq
 # 检查节点可分配资源
 kubectl get node <node-name> -o jsonpath='{.status.allocatable}' | jq
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -315,14 +329,14 @@ Message: Node node1.example.com status is now: NodeNotReady
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
   ----             ------  -----------------                 ------------------                ------                       -------
   Ready            False   Mon, 10 Feb 2026 10:30:00 +0800  Mon, 10 Feb 2026 10:35:00 +0800  KubeletNotReady              container runtime not responding
 ```
-
 或者由 node-controller 检测到心跳超时：
 
 ```yaml
@@ -343,7 +357,8 @@ Source:  node-controller
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点状态和条件
 kubectl get nodes
 kubectl describe node <node-name>
@@ -375,7 +390,6 @@ journalctl -n 200 --no-pager
 dmesg | tail -100
 
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -424,7 +438,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点可调度状态
 kubectl get nodes
 kubectl get node <node-name> -o jsonpath='{.spec.unschedulable}'
@@ -436,7 +451,6 @@ kubectl describe node <node-name>
 kubectl uncordon <node-name>
 
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -472,12 +486,12 @@ Message: Node node1.example.com status is now: NodeNotSchedulable
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl get nodes 输出
 NAME                 STATUS                     ROLES    AGE   VERSION
 node1.example.com    Ready,SchedulingDisabled   worker   10d   v1.28.0
 ```
-
 ## 影响面说明
 
 - **集群影响**：减少集群的可调度容量
@@ -490,7 +504,17 @@ node1.example.com    Ready,SchedulingDisabled   worker   10d   v1.28.0
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看不可调度的节点
 kubectl get nodes | grep SchedulingDisabled
 
@@ -509,7 +533,6 @@ kubectl cordon <node-name>
 # 恢复节点可调度
 kubectl uncordon <node-name>
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -546,14 +569,14 @@ Message: Node node1.example.com status is now: NodeHasSufficientMemory
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   MemoryPressure   False   KubeletHasSufficientMemory   kubelet has sufficient memory available
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
@@ -562,7 +585,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 MemoryPressure 状态
 kubectl get node <node-name> -o jsonpath='{.status.conditions[?(@.type=="MemoryPressure")]}'
 
@@ -576,7 +600,6 @@ vmstat 1 5
 # 查看节点上 Pod 的内存使用
 kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --sort-by=memory
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -612,14 +635,14 @@ Message: Node node1.example.com status is now: NodeHasNoDiskPressure
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   DiskPressure     False   KubeletHasNoDiskPressure   kubelet has no disk pressure
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
@@ -628,7 +651,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 DiskPressure 状态
 kubectl get node <node-name> -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")]}'
 
@@ -646,7 +670,6 @@ journalctl -u kubelet | grep -i "disk|eviction"
 crictl images
 du -sh /var/lib/containerd  # 或 /var/lib/docker
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -682,14 +705,14 @@ Message: Node node1.example.com status is now: NodeHasSufficientPID
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   PIDPressure      False   KubeletHasSufficientPID   kubelet has sufficient PID available
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点恢复正常服务能力
@@ -698,7 +721,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 PIDPressure 状态
 kubectl get node <node-name> -o jsonpath='{.status.conditions[?(@.type=="PIDPressure")]}'
 
@@ -714,7 +738,6 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> --n
 cat /sys/fs/cgroup/pids/kubepods/pids.current
 cat /sys/fs/cgroup/pids/kubepods/pids.max
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -755,14 +778,14 @@ Message: Node node1.example.com status is now: NodeHasInsufficientMemory
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   MemoryPressure   True    KubeletHasInsufficientMemory   kubelet has insufficient memory available
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点可用性降低，可能触发集群级别告警
@@ -775,7 +798,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点内存状态
 kubectl describe node <node-name> | grep -A 5 "Conditions|Allocated resources"
 
@@ -802,7 +826,6 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 # 查看驱逐相关事件
 kubectl get events --all-namespaces --field-selector reason=Evicted,involvedObject.kind=Pod
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -849,14 +872,14 @@ Message: Node node1.example.com status is now: NodeHasDiskPressure
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   DiskPressure     True    KubeletHasDiskPressure   kubelet has disk pressure
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点可用性降低，可能触发集群级别告警
@@ -868,7 +891,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点磁盘状态
 kubectl describe node <node-name> | grep -A 5 "Conditions|Capacity|Allocatable"
 
@@ -901,7 +925,6 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.i
 # 查看驱逐阈值
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.evictionHard, .kubeletconfig.evictionSoft'
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -948,14 +971,14 @@ Message: Node node1.example.com status is now: NodeHasInsufficientPID
 Source:  kubelet, node1.example.com
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl describe node 输出
 Conditions:
   Type             Status  Reason                  Message
   ----             ------  ------                  -------
   PIDPressure      True    KubeletHasInsufficientPID   kubelet has insufficient PID available
 ```
-
 ## 影响面说明
 
 - **集群影响**：节点无法创建新进程，严重影响可用性
@@ -966,7 +989,8 @@ Conditions:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 PID 压力状态
 kubectl describe node <node-name> | grep -A 2 PIDPressure
 
@@ -1002,7 +1026,6 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig.e
 kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name>
 
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -1076,7 +1099,17 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看节点重启事件
 kubectl get events --field-selector involvedObject.kind=Node,reason=Rebooted --all-namespaces
 
@@ -1108,7 +1141,6 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> -o 
 mount | grep kubelet
 kubectl get volumeattachments | grep <node-name>
 ```
-
 ## 解决建议
 
 | 重启原因 | 解决方案 |
@@ -1178,7 +1210,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点的 Capacity 和 Allocatable
 kubectl describe node <node-name> | grep -A 10 "Capacity|Allocatable"
 
@@ -1201,7 +1234,6 @@ kubectl top node <node-name>
 # 查看节点上所有 Pod 的资源 requests 总和
 kubectl describe node <node-name> | grep -A 15 "Allocated resources"
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -1284,7 +1316,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点磁盘相关事件
 kubectl get events --field-selector involvedObject.kind=Node,reason=InvalidDiskCapacity
 
@@ -1315,7 +1348,6 @@ dmesg | grep -i "disk|error|fail"
 smartctl -a /dev/sda  # 需要安装 smartmontools
 
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -1379,7 +1411,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看磁盘空间清理失败事件
 kubectl get events --field-selector reason=FreeDiskSpaceFailed --all-namespaces
 
@@ -1411,7 +1444,6 @@ journalctl -u kubelet | grep -i "garbage collect|image gc|container gc"
 # 查看 GC 配置
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig | {imageGCHighThresholdPercent, imageGCLowThresholdPercent, imageMinimumGCAge}'
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -1428,7 +1460,17 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/configz | jq '.kubeletconfig |
 
 **手动清理步骤**：
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 清理未使用的镜像（谨慎操作）
 crictl rmi --prune
 
@@ -1445,7 +1487,6 @@ journalctl --vacuum-time=7d
 apt-get clean  # Debian/Ubuntu
 yum clean all  # RHEL/CentOS
 ```
-
 ---
 
 ## `EvictionThresholdMet` - 驱逐阈值已达到
@@ -1508,7 +1549,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看驱逐阈值事件
 kubectl get events --field-selector reason=EvictionThresholdMet --all-namespaces --sort-by='.lastTimestamp'
 
@@ -1536,7 +1578,6 @@ journalctl -u kubelet | grep -i "evict|threshold"
 # 查看哪些 Pod 被驱逐了
 kubectl get pods --all-namespaces -o json | jq '.items[] | select(.status.reason=="Evicted") | {name: .metadata.name, namespace: .metadata.namespace, reason: .status.reason, message: .status.message}'
 ```
-
 ## 解决建议
 
 | 场景 | 解决方案 |
@@ -1626,7 +1667,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Container GC 失败事件
 kubectl get events --field-selector reason=ContainerGCFailed --all-namespaces
 
@@ -1662,7 +1704,6 @@ journalctl -u containerd | grep -i "remove|delete|error"
 iostat -x 1 5
 
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -1737,7 +1778,8 @@ Source:  kubelet, node1.example.com
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Image GC 失败事件
 kubectl get events --field-selector reason=ImageGCFailed --all-namespaces
 
@@ -1777,7 +1819,6 @@ journalctl -u containerd | grep -i "image|remove|delete"
 crictl rmi --prune
 
 ```
-
 ## 解决建议
 
 | 原因 | 解决方案 |
@@ -1793,7 +1834,8 @@ crictl rmi --prune
 
 **手动清理步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看镜像列表
 crictl images
 
@@ -1807,7 +1849,6 @@ crictl rmi <image-id>
 df -h
 crictl images
 ```
-
 ---
 
 <!-- chunk: Node Controller 事件 -->## Node Controller 事件
@@ -1854,7 +1895,8 @@ Source:  controllermanager
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点注册事件
 kubectl get events --field-selector reason=RegisteredNode --all-namespaces
 
@@ -1872,7 +1914,6 @@ kubectl get node <node-name> -o json | jq '.metadata.labels, .metadata.annotatio
 kubectl logs -n kube-system <controller-manager-pod> | grep -i "register|node"
 
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -1916,7 +1957,8 @@ Source:  node-controller
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点删除事件
 kubectl get events --field-selector reason=RemovingNode --all-namespaces
 
@@ -1926,7 +1968,6 @@ kubectl get nodes
 # 查看 node-controller 日志
 kubectl logs -n kube-system <controller-manager-pod> | grep -i "remove|delete"
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -1968,7 +2009,8 @@ Source:  node-controller
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点删除事件
 kubectl get events --field-selector reason=DeletingNode --all-namespaces
 
@@ -1978,7 +2020,6 @@ kubectl get nodes | grep <node-name>
 # 查看所有节点
 kubectl get nodes
 ```
-
 ## 解决建议
 
 | 场景 | 建议 |
@@ -2042,7 +2083,8 @@ Source:  node-controller
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DeletingAllPods 事件
 kubectl get events --field-selector reason=DeletingAllPods --all-namespaces
 
@@ -2073,7 +2115,6 @@ kubectl get svc --all-namespaces
 kubectl get endpoints --all-namespaces
 
 ```
-
 ## 解决建议
 
 | 场景 | 解决方案 |
@@ -2145,7 +2186,8 @@ Source:  node-controller
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 TerminatingEvictedPod 事件
 kubectl get events --field-selector reason=TerminatingEvictedPod --all-namespaces
 
@@ -2165,7 +2207,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeName}'
 kubectl describe node <node-name>
 
 ```
-
 ## 解决建议
 
 | 场景 | 解决方案 |
@@ -2586,3 +2627,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

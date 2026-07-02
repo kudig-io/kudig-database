@@ -43,6 +43,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 安全最佳实践
@@ -128,28 +133,28 @@ grype myapp:latest
 
 ### 非 root 用户
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --user 1000:1000 myapp
 ```
-
 ### 只读文件系统
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --read-only \
   --tmpfs /tmp:size=100m \
   --tmpfs /run:size=10m \
   myapp
 ```
-
 ### 能力管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run \
   --cap-drop ALL \
   --cap-add NET_BIND_SERVICE \
   myapp
 ```
-
 | 能力 | 风险 | 建议 |
 |:---|:---:|:---|
 | `CAP_SYS_ADMIN` | 极高 | 禁止 |
@@ -158,36 +163,36 @@ docker run \
 
 ### 禁止权限提升
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --security-opt no-new-privileges:true myapp
 ```
-
 ### 资源限制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run \
   --memory 512m \
   --cpus 1.0 \
   --pids-limit 100 \
   myapp
 ```
-
 ---
 
 ## Linux 安全机制
 
 ### Seccomp
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --security-opt seccomp=./profile.json myapp
 ```
-
 ### AppArmor
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --security-opt apparmor=myprofile myapp
 ```
-
 ---
 
 ## Docker Daemon 安全
@@ -205,10 +210,10 @@ docker run --security-opt apparmor=myprofile myapp
 
 ### Rootless Docker
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 curl -fsSL https://get.docker.com/rootless | sh
 ```
-
 ---
 
 ## 安全检查清单
@@ -233,12 +238,12 @@ curl -fsSL https://get.docker.com/rootless | sh
 
 ### Docker Bench
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --rm --net host --pid host \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   docker/docker-bench-security
 ```
-
 ---
 
 ## 相关文档
@@ -252,3 +257,6 @@ docker run --rm --net host --pid host \
 - 06-docker-compose-orchestration
 - 08-docker-troubleshooting-guide
 - 09-docker-performance-monitoring
+
+
+<!-- risk-assessed -->

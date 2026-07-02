@@ -63,6 +63,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -91,7 +96,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 ingress-nginx 控制器 Pod 状态
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o wide
 kubectl describe pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
@@ -116,7 +122,6 @@ kubectl exec -n ingress-nginx -it deploy/ingress-nginx-controller -- nginx -t
 # 7. 通过 ACK 控制台查看 SLB 监听与后端服务器组状态
 ack-cli ingress status --cluster ack-zyy-prod-04 --namespace mall-prod
 ```
-
 ## 根因分析
 
 控制器 Pod `ingress-nginx-controller-7c9d4b8f5-x2k4p` 在 14:08 因 OOM 被 Kill 后重启。重启后持续出现配置重载失败：
@@ -137,29 +142,30 @@ Unexpected error reloading NGINX: exit status 1
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份并删除冲突的重复路径 Ingress
 cd /tmp && kubectl get ingress mall-backend -n mall-prod -o yaml > mall-backend-ingress-backup.yaml
 kubectl annotate ingress mall-backend -n mall-prod kubectl.kubernetes.io/last-applied-configuration-
 kubectl delete ingress mall-backend -n mall-prod
 ```
-
 **第二步：强制触发控制器配置重载**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/ingress-nginx-controller -n ingress-nginx
 kubectl rollout status deployment/ingress-nginx-controller -n ingress-nginx --timeout=120s
 ```
-
 **第三步：将冲突路径合并到单一 Ingress 并指定优先级**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -n mall-prod -f -
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -189,22 +195,22 @@ spec:
               number: 80
 EOF
 ```
-
 **第四步：验证 nginx 语法与控制器状态**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ingress-nginx -it deploy/ingress-nginx-controller -- nginx -t
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -c controller --tail=50 | grep -i "reload"
 ```
-
 若合并后的 Ingress 仍无法通过校验，可立即回滚到备份的 `mall-backend-ingress-backup.yaml`，并临时将流量切换到备用集群或维护页面，避免大促期间入口长时间不可用。
 
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 控制器 Pod 全部 Running 且 Ready
 kubectl get pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\n"}{end}'
 
@@ -220,7 +226,6 @@ curl -I -m 10 https://mall.example.com/api/v1/promo/health
 # 5. mall-prod 业务 Pod 全部 Running
 kubectl get pod -n mall-prod -o wide | grep -v Running
 ```
-
 验证过程中需特别关注控制器是否仍输出 `nginx: [emerg]` 错误。若存在，则说明仍有其他未被发现的 Ingress 冲突，需要继续扫描所有 Ingress 的 host 与 path 组合。同时建议保留问题发生时的控制器日志与 nginx.conf 备份，便于后续复盘与故障定责。
 
 ## 回复客户话术
@@ -268,3 +273,6 @@ kubectl get pod -n mall-prod -o wide | grep -v Running
 - Ingress
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

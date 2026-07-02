@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: backup-restore'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 备份与恢复深度实践
@@ -262,7 +267,8 @@ spec:
 > - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd 灾难恢复脚本
 # 警告：此操作会替换整个 etcd 数据，仅在集群完全不可用时使用
@@ -330,7 +336,6 @@ systemctl start kube-scheduler
 echo "=== etcd 恢复完成 ==="
 echo "验证集群状态: kubectl get nodes"
 ```
-
 ## PV 持久卷备份策略
 
 ```yaml
@@ -653,7 +658,8 @@ data:
 
 ## 常见问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubernetes 备份系统诊断
 
@@ -685,7 +691,6 @@ kubectl get volumesnapshotcontent
 echo "[5] PVC 状态"
 kubectl get pvc -A | grep -v Bound
 ```
-
 ## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
@@ -870,7 +875,8 @@ func (s *CustomObjectStore) GetObject(bucket, key string) (io.ReadCloser, error)
 
 以下脚本实现了从集群不可用到完整恢复的自动化流程。它假设已经有一个预配置的灾备集群，Velero 已经安装并指向同一 BSL。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubernetes 完整灾难恢复自动化脚本
 set -euo pipefail
@@ -923,7 +929,6 @@ echo "请手动确认后执行 DNS 更新"
 echo "[8/8] 恢复完成"
 echo "请执行应用层验证测试"
 ```
-
 ---
 
 <!-- chunk: 安全最佳实践 -->## 安全最佳实践
@@ -995,3 +1000,6 @@ spec:
 - 06-rubrik-enterprise-disaster-recovery
 - 08-chaos-engineering-platforms
 - 09-application-level-disaster-recovery
+
+
+<!-- risk-assessed -->

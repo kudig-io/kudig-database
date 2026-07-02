@@ -50,6 +50,11 @@ skill_name: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Reme
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -168,6 +173,7 @@ DaemonSet 类型 + 影响范围
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -203,7 +209,6 @@ DaemonSet 类型 + 影响范围
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -241,14 +246,16 @@ DaemonSet 类型 + 影响范围
 ### 3.1 影响评估
 
 **Step T1**: 检查 DaemonSet 整体状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get daemonset <name> -n <namespace>
 # 关注: DESIRED, CURRENT, READY, UP-TO-DATE, AVAILABLE
 ```
 > **判断规则**: DESIRED > CURRENT → 有节点缺失；READY < CURRENT → 有 Pod 未就绪
 
 **Step T2**: 识别缺失 Pod 的节点
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l <selector> -o json | \
   jq -r '.items[].spec.nodeName' | sort | uniq > /tmp/has_pod_nodes.txt
 kubectl get nodes -o json | jq -r '.items[].metadata.name' | sort > /tmp/all_nodes.txt
@@ -257,14 +264,16 @@ comm -23 /tmp/all_nodes.txt /tmp/has_pod_nodes.txt
 > **判断规则**: 输出为缺失 DaemonSet Pod 的节点列表
 
 **Step T3**: 检查缺失 Pod 节点的状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes <missing-node> -o wide
 kubectl describe node <missing-node> | grep -A 10 "Taints:"
 ```
 > **判断规则**: 节点有 NoSchedule/NoExecute 污点 → RC-003/004
 
 **Step T4**: 统计问题范围
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get daemonset <name> -n <namespace> -o jsonpath='{
   "desired": .status.desiredNumberScheduled,
   "current": .status.currentNumberScheduled,
@@ -629,7 +638,8 @@ kubectl get daemonset <name> -n <namespace> -o jsonpath='{
 
 ### 7.1 即时验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: DaemonSet 状态
 kubectl get daemonset <name> -n <namespace>
 # 预期: DESIRED == CURRENT == READY == UP-TO-DATE
@@ -644,7 +654,6 @@ kubectl get pods -n <namespace> -l <selector> -o wide
 # 日志: 检查日志收集
 # 监控: 检查指标上报
 ```
-
 ### 7.2 短期监控
 
 | 监控项 | 指标 | 预期 | 异常 |
@@ -703,3 +712,6 @@ kubectl get pods -n <namespace> -l <selector> -o wide
 *Skill ID: SKILL-WORK-003*  
 *创建时间: 2026-05*  
 *维护者: Kudig Team*
+
+
+<!-- risk-assessed -->

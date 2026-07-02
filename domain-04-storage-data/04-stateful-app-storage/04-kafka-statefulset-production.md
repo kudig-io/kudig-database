@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kafka StatefulSet 生产部署指南
@@ -114,12 +119,12 @@ Kafka 3.x 引入 KRaft 模式，移除 ZooKeeper 依赖：
 
 在部署之前，需要生成一个 cluster ID，用于标识整个 Kafka 集群。cluster ID 只需生成一次，所有 Broker 和 Controller 节点共享同一个 ID。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 生成 cluster ID
 CLUSTER_ID=$(kubectl run kafka-kraft-init --rm -i --restart=Never --image=bitnami/kafka:3.6 -- kafka-storage.sh random-uuid)
 echo "Cluster ID: $CLUSTER_ID"
 ```
-
 ### 2.3 StatefulSet 示例
 
 ```yaml
@@ -227,7 +232,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建一个高可用 Topic：3 分区、3 副本
 kubectl exec -it kafka-kraft-0 -n production -- kafka-topics.sh \
   --bootstrap-server kafka-kraft-0.kafka-headless.production.svc.cluster.local:9092 \
@@ -236,19 +242,18 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-topics.sh \
   --config min.insync.replicas=2 \
   --config retention.ms=604800000
 ```
-
 ### 3.3 查看 Topic 分布
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看每个分区的 leader、replica、ISR
 kubectl exec -it kafka-kraft-0 -n production -- kafka-topics.sh \
   --bootstrap-server kafka-kraft-0.kafka-headless.production.svc.cluster.local:9092 \
   --describe --topic order-events
 ```
-
 ---
 
 ## 4. 扩容与缩容
@@ -257,11 +262,11 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-topics.sh \
 
 修改 StatefulSet replicas 即可扩容 Broker：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 将副本数从 3 扩容到 5
 kubectl scale sts kafka-kraft -n production --replicas=5
 ```
-
 扩容后新 Broker 没有数据，需要通过分区重分配平衡负载。
 
 ### 4.2 缩容前必须迁移数据
@@ -269,7 +274,8 @@ kubectl scale sts kafka-kraft -n production --replicas=5
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成重分配 JSON，将待下线 broker 的分区迁出
 kubectl exec -it kafka-kraft-0 -n production -- kafka-reassign-partitions.sh \
   --bootstrap-server kafka-kraft-0.kafka-headless.production.svc.cluster.local:9092 \
@@ -277,7 +283,6 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-reassign-partitions.sh \
   --topics-to-move-json-file /tmp/topics.json \
   --broker-list "0,1,2,3"
 ```
-
 ---
 
 ## 5. 数据迁移与再平衡
@@ -287,7 +292,8 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-reassign-partitions.sh \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 先生成重分配计划
 kubectl exec -it kafka-kraft-0 -n production -- kafka-reassign-partitions.sh \
   --bootstrap-server kafka-kraft-0.kafka-headless.production.svc.cluster.local:9092 \
@@ -300,7 +306,6 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-reassign-partitions.sh \
   --verify \
   --reassignment-json-file /tmp/reassign.json
 ```
-
 ### 5.2 再平衡注意事项
 
 - 重分配期间会占用网络与磁盘 IO，建议在低峰期执行。
@@ -399,14 +404,14 @@ replica.socket.timeout.ms=30000
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 日志
 kubectl logs kafka-kraft-0 -n production
 
 # 检查 Kraft 元数据初始化
 kubectl exec -it kafka-kraft-0 -n production -- kafka-storage.sh info /bitnami/kafka/data
 ```
-
 ### 8.2 消息写入延迟高
 
 常见原因包括：
@@ -426,13 +431,13 @@ kubectl exec -it kafka-kraft-0 -n production -- kafka-storage.sh info /bitnami/k
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看消费者组延迟
 kubectl exec -it kafka-kraft-0 -n production -- kafka-consumer-groups.sh \
   --bootstrap-server kafka-kraft-0.kafka-headless.production.svc.cluster.local:9092 \
   --describe --group order-consumer-group
 ```
-
 ---
 
 ## 9. 阿里云/专有云生产实践
@@ -502,3 +507,6 @@ Kafka 的数据备份通常不采用传统数据库的定期全量备份方式�
 
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
+
+
+<!-- risk-assessed -->

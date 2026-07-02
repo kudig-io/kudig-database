@@ -43,6 +43,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubeadm init 集群初始化概览
@@ -430,7 +435,17 @@ func (r *Runner) Run() error {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 步骤 1:  [preflight]      预检
     → 检查系统要求 (swap, ports, kernel, CRI)
     → 检查端口占用 (6443, 2379, 2380, 10250, 10259, 10257)
@@ -494,7 +509,6 @@ func (r *Runner) Run() error {
     → 打印 join 命令
     → 打印后续步骤 (安装 CNI 等)
 ```
-
 ## 使用场景
 
 ### 场景 1: 标准单节点集群初始化
@@ -502,7 +516,8 @@ func (r *Runner) Run() error {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 初始化集群
 kubeadm init \
   --apiserver-advertise-address=192.168.1.10 \
@@ -522,7 +537,6 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/
 kubectl get nodes
 kubectl get pods -A
 ```
-
 ### 场景 2: 使用配置文件初始化
 
 ```yaml
@@ -712,7 +726,8 @@ controllerManager:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubeadm init --pod-network-cidr=10.244.0.0/16
 # [init] Using Kubernetes version: v1.28.0
 # [preflight] Running pre-flight checks
@@ -771,7 +786,6 @@ kubeadm init --pod-network-cidr=10.244.0.0/16
 # kubeadm join 192.168.1.10:6443 --token abc123.def456 \
 #     --discovery-token-ca-cert-hash sha256:1234567890abcdef...
 ```
-
 ### 分阶段执行
 
 ```bash
@@ -828,3 +842,5 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 - [[entities/coredns.md|coredns]]
 
 ```
+
+<!-- risk-assessed -->

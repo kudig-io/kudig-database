@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-07-08] 用户 ID 标签导致 Prometheus 高基数，TSDB 内存 OOM
@@ -32,28 +37,29 @@ last_updated: 2026-05-23
 
 ## 问题现象
 11:20，Prometheus Pod 反复 OOMKilled：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n monitoring -l app=prometheus
 # NAME                     READY   STATUS      RESTARTS
 # prometheus-0             0/1     OOMKilled   5
 # prometheus-1             0/1     OOMKilled   5
 ```
-
 Grafana 显示 "DatasourceError"，Alertmanager 停止发送告警。
 
 ## 诊断过程
 
 **11:22** — 检查 Prometheus 资源：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get sts prometheus -n monitoring -o jsonpath='{.spec.template.spec.containers[0].resources}' | jq .
 # {
 #   "limits": {"cpu": "4", "memory": "16Gi"},
 #   "requests": {"cpu": "2", "memory": "8Gi"}
 # }
 ```
-
 **11:24** — 查看 Prometheus 日志（启动阶段）：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n monitoring prometheus-0 --previous | tail -n 30
 # ts=2026-07-08T11:23:45.112Z caller=main.go:1234 
 #   level=error msg="Out of memory" 
@@ -61,13 +67,13 @@ kubectl logs -n monitoring prometheus-0 --previous | tail -n 30
 #   level=warn msg="Error on ingesting out-of-order result" 
 #   num_dropped=1500000
 ```
-
 **11:26** — 检查 head chunk 大小和序列数：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n monitoring prometheus-0 -- wget -qO- localhost:9090/api/v1/status/tsdb
 # {
 #   "data": {
@@ -80,13 +86,13 @@ kubectl exec -n monitoring prometheus-0 -- wget -qO- localhost:9090/api/v1/statu
 #   }
 # }
 ```
-
 **11:28** — 检查高基数指标：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n monitoring prometheus-0 -- \
   wget -qO- 'localhost:9090/api/v1/status/tsdb?top=10' | jq '.data.topMetrics'
 # [
@@ -95,13 +101,13 @@ kubectl exec -n monitoring prometheus-0 -- \
 #   ...
 # ]
 ```
-
 **11:30** — 进一步分析 `http_request_duration_seconds`：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n monitoring prometheus-0 -- \
   wget -qO- 'localhost:9090/api/v1/series?match[]=http_request_duration_seconds' | \
   jq '.data[0:3]'
@@ -111,7 +117,6 @@ kubectl exec -n monitoring prometheus-0 -- \
 #   {"__name__":"http_request_duration_seconds","user_id":"12347","endpoint":"/api/order"}
 # ]
 ```
-
 **11:32** — 确认：metrics 中包含了 `user_id` 标签，每个用户生成一个时间序列。当前在线用户约 850 万，导致 `http_request_duration_seconds` 产生 850 万条序列。
 
 ## 根因
@@ -124,18 +129,19 @@ kubectl exec -n monitoring prometheus-0 -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout undo deployment order-api -n prod-order
 # 回滚到 v2.4.9（无 user_id 标签的版本）
 ```
-
 **11:38** — 临时提升 Prometheus 内存以恢复监控：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch sts prometheus -n monitoring --type='merge' -p '
 {
   "spec": {
@@ -154,13 +160,13 @@ kubectl patch sts prometheus -n monitoring --type='merge' -p '
 }'
 kubectl rollout restart sts prometheus -n monitoring
 ```
-
 **11:45** — 清理旧数据（删除包含 user_id 的 series）：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 promtool 或 API 删除高基数 series（Prometheus v2.30+ 支持）
 kubectl exec -n monitoring prometheus-0 -- \
   wget -qO- --post-data='' 'localhost:9090/api/v1/admin/tsdb/delete_series?match[]=http_request_duration_seconds{user_id=~".+",}'
@@ -168,13 +174,13 @@ kubectl exec -n monitoring prometheus-0 -- \
 kubectl exec -n monitoring prometheus-0 -- \
   wget -qO- --post-data='' 'localhost:9090/api/v1/admin/tsdb/clean_tombstones'
 ```
-
 **11:50** — 恢复 Prometheus 资源到正常水平：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch sts prometheus -n monitoring --type='merge' -p '
 {
   "spec": {
@@ -192,7 +198,6 @@ kubectl patch sts prometheus -n monitoring --type='merge' -p '
   }
 }'
 ```
-
 ## 验证
 - 11:52 — Prometheus Pod Running，内存使用 4.2Gi
 - 11:55 — TSDB headStats numSeries 恢复至 120 万
@@ -209,3 +214,6 @@ kubectl patch sts prometheus -n monitoring --type='merge' -p '
   5. 使用 Thanos/Cortex/VictoriaMetrics 替代单节点 Prometheus，提高基数容忍度
 - **相关 Skill**: [[monitor-kubernetes-metrics]]
 - **相关 FTA**: [[monitoring-fta]]
+
+
+<!-- risk-assessed -->

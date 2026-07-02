@@ -46,6 +46,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 10 - 生产迁移实战案例
@@ -179,7 +184,8 @@ Week 11:   Phase 4 — 稳定观察 + 源集群退役
 
 ### 3.1 评估发现
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 运行评估脚本后发现的关键问题:
 
 # 1. 弃用 API
@@ -205,10 +211,10 @@ Week 11:   Phase 4 — 稳定观察 + 源集群退役
 #   - prometheus-operator CRDs（需在 ACK 安装）
 #   - ArgoCD CRDs（需在 ACK 安装）
 ```
-
 ### 3.2 网络打通
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # IDC ↔ 阿里云 VPN 配置
 # IDC 侧: Cisco ASA 防火墙
 # 阿里云侧: VPN Gateway
@@ -219,7 +225,6 @@ ping 10.0.0.1  # ACK vSwitch gateway
 # 从 ACK Pod ping IDC MySQL
 kubectl run ping-test --rm -it --image=busybox -- ping 192.168.1.100
 ```
-
 ### 3.3 镜像同步
 
 ```bash
@@ -501,3 +506,6 @@ Phase 4: 退役
 - 09-migration-toolchain
 - logging
 - monitoring
+
+
+<!-- risk-assessed -->

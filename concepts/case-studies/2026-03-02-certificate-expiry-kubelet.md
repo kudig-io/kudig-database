@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-03-02] Kubelet 客户端证书过期导致 120+ Pod 被驱逐
@@ -33,7 +38,8 @@ last_updated: 2026-05-23
 ## 问题现象
 06:45，运维人员发现 `prod-logistics` namespace 大量 Pod 进入 `Terminating` 状态，新 Pod 卡在 `Pending`。Grafana 显示 4 个节点同时变为 `NotReady`。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes
 # NAME                        STATUS     ROLES    AGE   VERSION
 # ip-10-0-7-21.ec2.internal   NotReady   <none>   89d   v1.29.4
@@ -41,7 +47,6 @@ kubectl get nodes
 # ip-10-0-7-23.ec2.internal   NotReady   <none>   89d   v1.29.4
 # ip-10-0-7-24.ec2.internal   NotReady   <none>   89d   v1.29.4
 ```
-
 ## 诊断过程
 
 **06:47** — 检查 kubelet 日志：
@@ -74,13 +79,13 @@ ssh ip-10-0-7-21 "ps aux | grep kubelet | grep rotate-server-certificates"
 ```
 
 **06:52** — 检查 CSR 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get csr | grep Pending
 # NAME        AGE   SIGNERNAME                                    REQUESTOR            CONDITION
 # csr-7a2bc   5m    kubernetes.io/kube-apiserver-client-kubelet   system:node:ip-10-0-7-21   Pending
 # csr-9x3pq   5m    kubernetes.io/kube-apiserver-client-kubelet   system:node:ip-10-0-7-22   Pending
 ```
-
 发现 kubelet 客户端证书已于 06:42 过期，kubelet 尝试申请新的 CSR，但由于 `kube-controller-manager` 的 `--cluster-signing-cert-file` 和 `--cluster-signing-key-file` 参数在 01-15 的升级中被误移除，导致 CSR 无法自动批准。
 
 ## 根因
@@ -93,7 +98,8 @@ kubectl get csr | grep Pending
 ## 修复动作
 
 **06:55** — 临时手动批准 CSR：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 for csr in $(kubectl get csr | grep Pending | awk '{print $1}'); do
   kubectl certificate approve $csr
 done
@@ -102,15 +108,14 @@ kubectl get csr | grep Approved
 # csr-7a2bc   8m   ...   Approved,Issued
 # csr-9x3pq   8m   ...   Approved,Issued
 ```
-
 **06:58** — 节点恢复 Ready：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes
 # NAME                        STATUS   ROLES    AGE   VERSION
 # ip-10-0-7-21.ec2.internal   Ready    <none>   89d   v1.29.4
 # ...
 ```
-
 **07:00** — 修复 controller-manager 配置，恢复自动签名：
 ```bash
 # 编辑 kube-controller-manager 静态 Pod 清单
@@ -125,7 +130,17 @@ sudo vi /etc/kubernetes/manifests/kube-controller-manager.yaml
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除一个节点的 kubelet 客户端证书，触发轮换
 ssh ip-10-0-7-21 "rm /var/lib/kubelet/pki/kubelet-client-current.pem && systemctl restart kubelet"
 
@@ -133,19 +148,27 @@ ssh ip-10-0-7-21 "rm /var/lib/kubelet/pki/kubelet-client-current.pem && systemct
 kubectl get csr | grep system:node:ip-10-0-7-21
 # csr-xyz123   30s   ...   Approved,Issued
 ```
-
 **07:08** — 为所有节点提前轮换证书：
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for node in ip-10-0-7-21 ip-10-0-7-22 ip-10-0-7-23 ip-10-0-7-24; do
   ssh $node "rm /var/lib/kubelet/pki/kubelet-client-current.pem && systemctl restart kubelet"
   sleep 5
 done
 ```
-
 ## 验证
 - 07:09 — 所有节点 Ready，Pod 全部 Running
 - 07:10 — 物流追踪和 WMS 系统恢复，业务指标正常
@@ -162,3 +185,6 @@ done
   4. 为 kubelet 启用 `--rotate-server-certificates` 和 `--rotate-certificates`
 - **相关 Skill**: [[kubelet-certificate-rotation]]
 - **相关 FTA**: [[certificate-fta]]
+
+
+<!-- risk-assessed -->

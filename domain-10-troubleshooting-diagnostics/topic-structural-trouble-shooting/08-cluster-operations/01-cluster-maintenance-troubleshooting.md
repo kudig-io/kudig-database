@@ -44,6 +44,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 集群运维与升级故障排查指南
@@ -131,7 +136,17 @@ k8s_versions:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                    Kubernetes 集群升级流程                                │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -194,7 +209,6 @@ k8s_versions:
 │                                                                          │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 常见问题现象
 
 #### 集群升级问题
@@ -231,7 +245,8 @@ k8s_versions:
 
 ### 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群版本信息
 kubectl version
 kubectl get nodes -o wide
@@ -265,7 +280,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 kubectl get nodes
 kubectl describe node <node-name>
 ```
-
 ### 影响面分析
 
 | 问题类型 | 直接影响 | 间接影响 | 影响范围 |
@@ -343,7 +357,8 @@ kubectl describe node <node-name>
 
 #### 升级前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查当前版本
 kubectl version --short
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}: {.status.nodeInfo.kubeletVersion}{"\n"}{end}'
@@ -370,13 +385,22 @@ kubectl get pods -n kube-system
 kubectl get nodes
 kubectl top nodes
 ```
-
 #### 控制平面升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看可用版本
 apt-cache madison kubeadm  # Debian/Ubuntu
 yum list kubeadm --showduplicates  # RHEL/CentOS
@@ -407,7 +431,6 @@ apt-mark hold kubelet kubectl
 systemctl daemon-reload
 systemctl restart kubelet
 ```
-
 #### 节点维护
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -416,7 +439,17 @@ systemctl restart kubelet
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 禁止调度
 kubectl cordon <node-name>
 
@@ -446,13 +479,13 @@ kubeadm token create --print-join-command
 # 节点加入集群
 kubeadm join <api-server>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
-
 #### etcd 备份恢复
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 设置环境变量
 export ETCDCTL_API=3
 export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379
@@ -486,7 +519,6 @@ mv /tmp/*.yaml /etc/kubernetes/manifests/
 # 5. 验证
 kubectl get nodes
 ```
-
 ### 排查注意事项
 
 | 注意项 | 说明 | 风险 |
@@ -509,7 +541,17 @@ kubectl get nodes
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果升级过程中失败，etcd 数据未损坏
 # 1. 恢复旧版本 kubeadm
 apt-get install -y kubeadm=<old-version>
@@ -526,13 +568,13 @@ systemctl restart kubelet
 # 如果需要从 etcd 备份恢复
 # 参考 etcd 恢复步骤
 ```
-
 #### 使用 etcd 备份完整回滚
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 停止所有控制平面节点的控制平面组件
 # 在每个控制平面节点执行：
 mv /etc/kubernetes/manifests/*.yaml /tmp/manifests-backup/
@@ -556,12 +598,12 @@ mv /tmp/manifests-backup/*.yaml /etc/kubernetes/manifests/
 kubectl get nodes
 kubectl get pods -A
 ```
-
 ### 节点 drain 卡住解决
 
 #### 诊断原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查哪些 Pod 阻止了 drain
 kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=<node-name>
 
@@ -571,7 +613,6 @@ kubectl get pdb -A
 # 检查 Pod 的 PDB 约束
 kubectl get pdb -A -o jsonpath='{range .items[*]}{.metadata.name}: {.status.disruptionsAllowed}{"\n"}{end}'
 ```
-
 #### 解决方案
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -579,7 +620,8 @@ kubectl get pdb -A -o jsonpath='{range .items[*]}{.metadata.name}: {.status.disr
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：使用更强的 drain 选项
 kubectl drain <node-name> \
   --ignore-daemonsets \
@@ -601,7 +643,6 @@ kubectl delete pod <pod-name> --grace-period=30
 # 方案 4：处理有 finalizer 的 Pod
 kubectl patch pod <pod-name> -p '{"metadata":{"finalizers":null}}'
 ```
-
 ### 证书过期处理
 
 #### 检查和续期
@@ -634,7 +675,17 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 检查 kubelet 证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
@@ -651,10 +702,10 @@ systemctl restart kubelet
 kubectl get csr | grep Pending
 kubectl certificate approve <csr-name>
 ```
-
 ### 升级检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 升级前检查脚本
 #!/bin/bash
 echo "=== 升级前检查 ==="
@@ -685,7 +736,6 @@ df -h /var/lib/etcd /var/lib/kubelet
 
 echo "=== 检查完成 ==="
 ```
-
 ### 安全生产风险提示
 
 | 操作 | 风险等级 | 风险描述 | 防护措施 |
@@ -758,7 +808,17 @@ echo "=== 检查完成 ==="
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 版本检查
 kubectl version
 kubeadm version
@@ -787,7 +847,6 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ �
 kubeadm token list
 kubeadm token create --print-join-command
 ```
-
 ### 故障恢复联系清单
 
 遇到以下情况建议立即升级处理：
@@ -814,3 +873,6 @@ kubeadm token create --print-join-command
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: KuDig Doctor — 角色人格与绝对红线
@@ -151,7 +156,17 @@ k8s_versions:
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `kubectl cordon`：标记节点不可调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 永远禁止执行的命令模式:
 
 # 删除类
@@ -175,7 +190,6 @@ kubectl exec * -- rm -rf *
 kubectl create clusterrolebinding * --clusterrole=cluster-admin
 kubectl edit * （直接修改线上资源）
 ```
-
 ### 4.2 信息安全红线
 
 - **禁止输出 Secret 内容**：`kubectl get secret -o yaml` 的 data 字段必须脱敏
@@ -225,3 +239,6 @@ kubectl edit * （直接修改线上资源）
 - SKILL
 - TOOLS
 - USER
+
+
+<!-- risk-assessed -->

@@ -54,6 +54,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - Linux 网络配置与性能优化：生产环境网络运维专家指南
@@ -733,7 +738,8 @@ Kubernetes 的 kube-proxy 组件负责实现 Service 的负载均衡，它支持
 | **Weave** | VXLAN/Sleeve | Overlay | 简单跨云 |
 | **kube-router** | BPF/ipvs | 路由 | 轻量级 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上排查 CNI 网络
 # 查看节点上的 veth 设备
 ip link show type veth
@@ -751,7 +757,6 @@ nsenter --target <pid> --net iptables -t nat -L -n
 # 查看节点路由（Calico/BGP 模式）
 ip route show | grep -E "10.244|bird"
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -769,7 +774,8 @@ ip route show | grep -E "10.244|bird"
 
 ## 网络故障诊断流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查物理层
 ethtool eth0 | grep "Link detected"      # 链路状态
 ethtool -S eth0 | grep -i error          # 网卡错误计数
@@ -802,7 +808,6 @@ kubectl logs -n kube-system <cni-pod>    # CNI 日志
 kubectl get endpoints <service>          # Endpoints
 kubectl describe service <service>       # Service 详情
 ```
-
 ---
 
 ## 常见网络问题场景
@@ -811,7 +816,8 @@ kubectl describe service <service>       # Service 详情
 > - `sysctl -w`：实时修改内核参数，全局生效
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景 1: Pod 无法访问 Service
 # 排查步骤:
 kubectl get endpoints <service>      # 1. 检查 Endpoints 是否存在
@@ -841,7 +847,6 @@ cat /proc/sys/net/netfilter/nf_conntrack_max        # 最大值
 sysctl -w net.netfilter.nf_conntrack_max=2097152
 # 永久修复: 写入 /etc/sysctl.d/
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -860,3 +865,6 @@ sysctl -w net.netfilter.nf_conntrack_max=2097152
 - 03-linux-filesystem-deep-dive
 - 05-linux-storage-management
 - 06-linux-performance-tuning
+
+
+<!-- risk-assessed -->

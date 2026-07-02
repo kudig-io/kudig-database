@@ -45,6 +45,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 架构与基础概念全栈培训
@@ -138,14 +143,23 @@ Google 每周运行超过 20 亿个容器，Kubernetes 的设计灵感来源于 
 
 这是理解 Kubernetes 最关键的概念。传统的命令式（Imperative）做法是告诉系统"怎么做"：
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 命令式：告诉系统每一步怎么做
 docker run -d --name nginx -p 80:80 nginx:1.25
 docker stop nginx
 docker rm nginx
 docker run -d --name nginx -p 80:80 nginx:1.26
 ```
-
 而 Kubernetes 的声明式做法是告诉系统"我要什么"：
 
 ```yaml
@@ -404,7 +418,8 @@ sequenceDiagram
 
 ## 演示 1：集群信息探索
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群信息
 kubectl cluster-info
 # 预期输出:
@@ -460,13 +475,13 @@ kubectl get pods -n kube-system -o wide
 # kube-proxy-xxxxx                 1/1     Running   0          30d   172.16.0.101    node1
 # kube-scheduler-master            1/1     Running   0          30d   172.16.0.100    master
 ```
-
 ## 演示 2：部署第一个应用并追踪生命周期
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 Deployment
 kubectl create deployment nginx-demo --image=nginx:1.25 --replicas=3
 # 预期输出: deployment.apps/nginx-demo created
@@ -524,13 +539,13 @@ kubectl get events --field-selector reason=Scheduled
 kubectl get events --field-selector reason=Started
 kubectl get events --field-selector reason=Created
 ```
-
 ## 演示 3：声明式 API 验证——自愈能力
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 查看当前 Pod
 kubectl get pods -l app=nginx-demo
 # 预期输出: 3 个 Running Pod
@@ -557,10 +572,10 @@ kubectl describe rs nginx-demo-7c6b4f7d9b | grep -A 10 Events
 kubectl get pods -l app=nginx-demo --no-headers | wc -l
 # 预期输出: 3
 ```
-
 ## 演示 4：API Server 鉴权链追踪
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前用户权限
 kubectl auth can-i --list
 # 预期输出（部分）:
@@ -590,10 +605,10 @@ kubectl get --raw /livez
 # 查看 API Server 的指标
 kubectl get --raw /metrics | head -20
 ```
-
 ## 演示 5：etcd 状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 etcd 集群健康状态
 kubectl -n kube-system exec -it etcd-master -- \
   etcdctl endpoint health \
@@ -650,13 +665,13 @@ kubectl -n kube-system exec -it etcd-master -- \
 # | abc12345 |  1234567 |       8901 |      56 MB |
 # +----------+----------+------------+------------+
 ```
-
 ## 演示 6：资源隔离与配额
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试命名空间
 kubectl create namespace lab
 # 预期输出: namespace/lab created
@@ -739,7 +754,6 @@ kubectl create deployment test-over --image=nginx --replicas=25 -n lab
 kubectl describe resourcequota lab-quota -n lab
 # 可以看到 Used 数量增加
 ```
-
 ---
 
 <!-- chunk: 动手实验 -->## 动手实验
@@ -754,7 +768,17 @@ kubectl describe resourcequota lab-quota -n lab
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 清理环境
 kubectl delete deployment --all --force --grace-period=0 2>/dev/null  # ⚠️ 批量删除，波及面大
 
@@ -802,7 +826,6 @@ kubectl describe pod $POD_NAME | grep -A 20 Events
 # - Created: 容器被创建
 # - Started: 容器启动成功
 ```
-
 **验证问题**：从事件中找出 Pod 经历了哪些阶段？每个阶段的执行组件是什么？
 
 ## 实验 2：验证控制器自愈机制
@@ -816,7 +839,8 @@ kubectl describe pod $POD_NAME | grep -A 20 Events
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 Deployment
 kubectl apply -f - <<EOF
 apiVersion: apps/v1
@@ -864,7 +888,6 @@ kubectl get pods -l app=orphaned
 kubectl delete deployment self-heal-demo
 kubectl delete pod $REMAINING_POD
 ```
-
 **验证问题**：修改 Label 后为什么 ReplicaSet 会创建新 Pod？被改 Label 的 Pod 的命运是什么？
 
 ## 实验 3：etcd 数据探索
@@ -873,7 +896,8 @@ kubectl delete pod $REMAINING_POD
 
 **步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 etcd 中存储的所有键（前缀）
 kubectl -n kube-system exec -it etcd-master -- \
   etcdctl get / --prefix --keys-only \
@@ -907,7 +931,6 @@ kubectl -n kube-system exec -it etcd-master -- \
   etcdctl snapshot status /var/lib/etcd/lab-snapshot.db -w table
 
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -1097,3 +1120,5 @@ Kubernetes Architecture
 - kubernetes-ingress-presentation
 
 ```
+
+<!-- risk-assessed -->

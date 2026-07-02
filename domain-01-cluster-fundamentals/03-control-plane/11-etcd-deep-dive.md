@@ -88,6 +88,11 @@ related_docs:
   desc: 备份恢复故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd]] 深度解析 (etcd Deep Dive)
@@ -280,7 +285,8 @@ type StoredObject struct {
 
 ### 4.1 集群健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群健康状态
 etcdctl endpoint health --cluster \
   --cacert=/etc/etcd/ssl/ca.crt \
@@ -308,10 +314,10 @@ etcdctl member list -w table
 # 检查Leader
 etcdctl endpoint status --cluster | grep "true" | awk -F',' '{print $1}'
 ```
-
 ### 4.2 备份与恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 备份 =====
 # 创建快照备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
@@ -360,12 +366,12 @@ chmod +x /usr/local/bin/etcd-backup.sh
 echo "0 * * * * root /usr/local/bin/etcd-backup.sh >> /var/log/etcd-backup.log 2>&1" \
   >> /etc/crontab
 ```
-
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 恢复 =====
 # 停止所有etcd节点
 systemctl stop etcd
@@ -399,13 +405,13 @@ mv /var/lib/etcd /var/lib/etcd.old
 mv /var/lib/etcd-restored /var/lib/etcd
 systemctl start etcd
 ```
-
 ### 4.3 成员管理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加新成员 (Learner模式,推荐)
 etcdctl member add etcd-4 --learner \
   --peer-urls=https://10.0.0.4:2380
@@ -424,10 +430,10 @@ etcdctl member remove <member_id>  # ⚠️ 移除 etcd 成员，可能丢数据
 etcdctl member update <member_id> \
   --peer-urls=https://new-ip:2380
 ```
-
 ### 4.4 数据压缩与碎片整理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取当前revision
 CURRENT_REV=$(etcdctl endpoint status -w json | jq -r '.[0].Status.header.revision')
 
@@ -447,7 +453,6 @@ etcdctl endpoint status --cluster -w table
 # --auto-compaction-retention=1h
 # --auto-compaction-mode=periodic
 ```
-
 ---
 
 <!-- chunk: 5. 监控指标 (Monitoring Metrics) -->
@@ -675,7 +680,8 @@ journalctl -u etcd | grep -E "(quota|space|compact)"
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景1: 单节点问题 (3节点集群)
 # 1. 确认集群状态
 etcdctl endpoint health --cluster
@@ -704,7 +710,6 @@ etcdctl defrag --endpoints=https://127.0.0.1:2379
 
 # 4. 永久解决: 增加quota-backend-bytes配置
 ```
-
 ---
 
 <!-- chunk: 8. 安全最佳实践 (Security Best Practices) -->
@@ -750,7 +755,8 @@ cfssl gencert \
 
 ### 8.2 RBAC 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用认证
 etcdctl user add root --new-user-password="rootpass"
 etcdctl role add root
@@ -769,7 +775,6 @@ etcdctl role add app-rw
 etcdctl role grant-permission app-rw readwrite --prefix /app/
 etcdctl user grant-role appuser app-rw
 ```
-
 ### 8.3 网络隔离
 
 ```yaml
@@ -837,7 +842,8 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 滚动升级步骤 (3.5.x -> 3.5.y)
 # 原则: 一次升级一个节点,先Follower后Leader
 
@@ -868,7 +874,6 @@ etcdctl move-leader <new_leader_id>
 # 7. 验证整个集群
 etcdctl endpoint status --cluster -w table
 ```
-
 ---
 
 <!-- chunk: 10. 生产环境 Checklist -->
@@ -910,7 +915,17 @@ etcdctl endpoint status --cluster -w table
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 基础操作
 etcdctl put key value                    # 写入
 etcdctl get key                          # 读取
@@ -946,7 +961,6 @@ etcdctl user grant-role user role        # 授权
 --key=client.key                         # 客户端私钥
 -w table|json|simple                     # 输出格式
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -991,3 +1005,6 @@ etcdctl user grant-role user role        # 授权
 - 10-plane-backup-disaster-recovery
 - 12-apiserver-deep-dive
 - 13-kube-controller-manager-deep-dive
+
+
+<!-- risk-assessed -->

@@ -35,6 +35,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes PKI 证书体系
@@ -135,6 +140,7 @@ NewCertificateAuthority:
 ## 信任链验证
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl → 使用 ca.crt 验证 API Server 证书 → 建立 TLS 连接
        → 使用客户端证书（admin.conf）认证 → API Server 验证
 
@@ -144,7 +150,6 @@ API Server → 使用 etcd/ca.crt 验证 etcd 证书 → 建立 TLS 连接
 API Server → 使用 front-proxy-ca 验证前端代理请求
           → 使用 kubernetes-ca 验证 kubelet 客户端证书
 ```
-
 ## kubelet 证书（CSR 动态签发）
 
 kubelet 客户端证书不由 kubeadm 直接生成，而是通过 CSR 机制动态签发：
@@ -210,3 +215,6 @@ sudo ntpdate -u pool.ntp.org
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] 安全加固深度实践
@@ -348,7 +353,8 @@ resources:
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # setup_encryption.sh
 
@@ -391,7 +397,6 @@ ETCDCTL_API=3 etcdctl get / --prefix --keys-only \
   --key=/etc/kubernetes/pki/etcd/server.key | \
   grep -c "k8s:enc:aescbc:v1:key1"
 ```
-
 ## KMS 加密（生产级）
 
 对于生产环境，建议使用 KMS（Key Management Service）提供者进行 Secrets 加密，支持 AWS KMS、Azure Key Vault、Google Cloud KMS 等云服务：
@@ -1020,7 +1025,8 @@ Kubernetes 安全加固应采用分层防御策略。在基础设施层，确保
 
 **kube-bench 检查项大量失败**：区分自动修复项和手动修复项。对于托管 Kubernetes（EKS/GKE/AKS），部分控制平面检查由云服务商管理，可标记为不适用。优先修复 HIGH 和 CRITICAL 级别的失败项。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s_security_diagnostics.sh
 
@@ -1065,7 +1071,6 @@ echo "=== Recent Security Events ==="
 kubectl get events --all-namespaces --sort-by='.lastTimestamp' \
   --field-selector reason=FailedAdmission 2>/dev/null | tail -10
 ```
-
 ---
 
 *本文档基于 Kubernetes 安全加固实践经验编写，持续更新最新技术和最佳实践。*
@@ -1096,3 +1101,5 @@ kubectl get events --all-namespaces --sort-by='.lastTimestamp' \
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 ```
+
+<!-- risk-assessed -->

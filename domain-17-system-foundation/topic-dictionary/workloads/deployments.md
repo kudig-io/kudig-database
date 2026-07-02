@@ -31,6 +31,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Deployments
@@ -230,7 +235,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Deployment 状态
 kubectl rollout status deployment/web-api -n prod
 
@@ -255,7 +261,6 @@ kubectl scale deployment/web-api -n prod --replicas=5
 # 查看关联的 ReplicaSet
 kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 ```
-
 ## 交叉引用
 
 - [Deployment 生产模式详解](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
@@ -275,3 +280,5 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 - [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
+
+<!-- risk-assessed -->

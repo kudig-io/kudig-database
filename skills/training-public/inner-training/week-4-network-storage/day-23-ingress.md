@@ -30,6 +30,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 23: [[Ingress|Ingress]]
@@ -117,7 +122,8 @@ tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 Nginx Ingress Controller 已安装
 kubectl get pods -n kube-system | grep nginx-ingress
 kubectl get svc -n kube-system nginx-ingress-lb
@@ -167,13 +173,13 @@ INGRESS_IP=$(kubectl get svc -n kube-system nginx-ingress-lb -o jsonpath='{.stat
 curl -H "Host: demo.example.com" http://${INGRESS_IP}/v1
 curl -H "Host: demo.example.com" http://${INGRESS_IP}/v2
 ```
-
 ### 任务 2: TLS 证书配置 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建自签名证书 (测试用)
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout tls.key -out tls.crt \
@@ -212,13 +218,13 @@ EOF
 # 测试 HTTPS
 curl -k -H "Host: demo.example.com" https://${INGRESS_IP}/
 ```
-
 ### 任务 3: 灰度发布 (Canary) (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建灰度 Ingress (将 20% 流量导向 v2)
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -271,7 +277,6 @@ EOF
 # 测试灰度
 curl -H "Host: demo.example.com" -H "x-canary: true" http://${INGRESS_IP}/
 ```
-
 ### 任务 4: ALB Ingress Controller (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -279,7 +284,17 @@ curl -H "Host: demo.example.com" -H "x-canary: true" http://${INGRESS_IP}/
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 确认 ALB Ingress Controller 是否安装
 kubectl get pods -n kube-system | grep alb
 
@@ -314,7 +329,6 @@ kubectl delete svc app-v1 app-v2
 kubectl delete deploy app-v1 app-v2
 rm -f tls.key tls.crt
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -357,3 +371,6 @@ Day 24 将深入学习 Terway CNI 架构与配置。
 ## Related
 
 - index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -63,6 +63,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 024：CronJob 调度失败与 Job 反复重跑导致数据重复
@@ -85,7 +90,8 @@ relationships:
 
 ### 3.1 查看 CronJob 与 Job 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 CronJob
 kubectl get cronjob -n data-warehouse
 
@@ -96,10 +102,10 @@ kubectl describe cronjob etl-order-daily -n data-warehouse
 kubectl get job -n data-warehouse -l app=etl-order-daily
 kubectl describe job etl-order-daily-28763450 -n data-warehouse
 ```
-
 ### 3.2 查看 Pod 执行历史与日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有相关 Pod
 kubectl get pod -n data-warehouse -l app=etl-order-daily
 
@@ -109,23 +115,23 @@ kubectl logs -n data-warehouse job/etl-order-daily-28763450 --tail=200
 # 查看已完成 Pod 日志
 kubectl logs -n data-warehouse -l job-name=etl-order-daily-28763450 --tail=100
 ```
-
 ### 3.3 检查 CronJob 配置细节
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出 CronJob YAML
 kubectl get cronjob etl-order-daily -n data-warehouse -o yaml
 
 # 重点检查 schedule、concurrencyPolicy、startingDeadlineSeconds、successfulJobsHistoryLimit
 kubectl get cronjob etl-order-daily -n data-warehouse -o jsonpath='{.spec.schedule}{"\n"}{.spec.concurrencyPolicy}{"\n"}{.spec.startingDeadlineSeconds}{"\n"}{.spec.successfulJobsHistoryLimit}{"\n"}{.spec.failedJobsHistoryLimit}{"\n"}'
 ```
-
 ### 3.4 检查容器时区
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入最近一次运行的 Pod 查看容器时间
 kubectl exec -it $(kubectl get pod -n data-warehouse -l app=etl-order-daily --field-selector=status.phase=Succeeded -o jsonpath='{.items[-1].metadata.name}') -n data-warehouse -- date
 
@@ -133,17 +139,16 @@ kubectl exec -it $(kubectl get pod -n data-warehouse -l app=etl-order-daily --fi
 kubectl exec -it deploy/etl-order-daily -n data-warehouse -- date || true
 date
 ```
-
 ### 3.5 检查控制器日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-controller-manager 日志中 CronJob 相关事件
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=500 | grep -i "cronjob|etl-order"
 
 # 查看 data-warehouse namespace 事件
 kubectl get events -n data-warehouse --sort-by='.lastTimestamp' | tail -50
 ```
-
 ### 3.6 诊断过程补充说明
 
 CronJob 的排障需要区分 "调度时机异常" 与 "执行内容异常" 两类问题。调度时机异常通常表现为 Job 未按预期时间创建或同一时间点创建了多个 Job，这需要重点检查 `schedule`、`timeZone`、`concurrencyPolicy` 以及 `startingDeadlineSeconds`。执行内容异常则表现为 Job Pod 报错退出，需要查看 Pod 日志定位业务逻辑或环境问题。
@@ -182,7 +187,8 @@ CronJob 的排障需要区分 "调度时机异常" 与 "执行内容异常" 两�
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 暂停 CronJob 防止继续调度
 kubectl patch cronjob etl-order-daily -n data-warehouse -p '{"spec":{"suspend":true}}'
 
@@ -192,13 +198,13 @@ kubectl get job -n data-warehouse -l app=etl-order-daily --sort-by=.status.start
 # 3. 确认无运行中 Pod
 kubectl get pod -n data-warehouse -l app=etl-order-daily
 ```
-
 ### 5.2 修改 CronJob 配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份原配置
 kubectl get cronjob etl-order-daily -n data-warehouse -o yaml > /tmp/etl-order-daily-backup.yaml
 
@@ -242,13 +248,13 @@ spec:
                   memory: "4Gi"
 EOF
 ```
-
 ### 5.3 手动触发一次验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动创建一次 Job 验证配置
 kubectl create job etl-order-daily-manual-001 --from=cronjob/etl-order-daily -n data-warehouse
 
@@ -256,13 +262,13 @@ kubectl create job etl-order-daily-manual-001 --from=cronjob/etl-order-daily -n 
 kubectl get job etl-order-daily-manual-001 -n data-warehouse -w
 kubectl logs -n data-warehouse job/etl-order-daily-manual-001 --tail=100
 ```
-
 ## 6. 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 CronJob 配置正确
 kubectl get cronjob etl-order-daily -n data-warehouse -o yaml
 
@@ -287,7 +293,6 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | gr
 # 6. 确认历史 Job 清理策略生效
 kubectl get job -n data-warehouse -l app=etl-order-daily
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-024 已处理完成。
@@ -337,3 +342,6 @@ kubectl get job -n data-warehouse -l app=etl-order-daily
 - CronJob
 - Job/CronJob 执行失败：退避重试耗尽与镜像拉取异常
 - CronJob 任务执行失败：ETL 作业 OOM 与历史堆积
+
+
+<!-- risk-assessed -->

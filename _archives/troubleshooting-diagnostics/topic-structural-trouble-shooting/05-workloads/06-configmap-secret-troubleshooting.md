@@ -43,6 +43,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # ConfigMap 与 Secret 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
@@ -132,6 +137,7 @@ ConfigMap 和 Secret 是 Kubernetes 中管理配置数据和敏感信息的核�
 ### 2.1 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ConfigMap/Secret 问题
         │
         ├─── Pod 启动失败？
@@ -160,12 +166,12 @@ ConfigMap/Secret 问题
                   ├─ Secret 数据错误 ──→ 重新创建 docker-registry secret
                   └─ ServiceAccount 未关联 ──→ 配置 SA 的 imagePullSecrets
 ```
-
 ### 2.2 排查命令集
 
 #### 2.2.1 ConfigMap 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ConfigMap 列表
 kubectl get configmap -n <namespace>
 
@@ -181,10 +187,10 @@ kubectl get configmap <name> -n <namespace> -o jsonpath='{.data.<key>}'
 # 检查 ConfigMap 大小
 kubectl get configmap <name> -n <namespace> -o json | wc -c
 ```
-
 #### 2.2.2 Secret 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Secret 列表
 kubectl get secret -n <namespace>
 
@@ -203,10 +209,10 @@ kubectl get secret <name> -n <namespace> -o jsonpath='{.type}'
 # 检查 docker-registry secret
 kubectl get secret <name> -n <namespace> -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d | jq
 ```
-
 #### 2.2.3 Pod 引用检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 的环境变量配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].env}' | jq
 
@@ -225,10 +231,19 @@ kubectl exec <pod-name> -- cat /path/to/config/file
 # 检查挂载目录内容
 kubectl exec <pod-name> -- ls -la /path/to/config/
 ```
-
 #### 2.2.4 热更新检查
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 修改 ConfigMap 后检查 Pod 内文件更新时间
 kubectl exec <pod-name> -- stat /path/to/config/file
 
@@ -239,7 +254,6 @@ kubectl get configmap -n kube-system kubelet-config -o yaml | grep syncFrequency
 # 注意: 仅在必要时使用
 systemctl restart kubelet
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -267,7 +281,8 @@ Events:
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认资源是否存在
 kubectl get configmap app-config -n <namespace>
 kubectl get secret app-secret -n <namespace>
@@ -294,7 +309,6 @@ kubectl create secret generic app-secret \
 # 6. 验证 Pod 状态
 kubectl get pods -n <namespace> -w
 ```
-
 #### 场景 2：Key 不存在
 
 **问题现象：**
@@ -305,7 +319,17 @@ Events:
 
 **解决步骤：**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 ConfigMap 的所有 key
 kubectl get configmap app-config -n <namespace> -o jsonpath='{.data}' | jq 'keys'
 
@@ -320,7 +344,6 @@ kubectl edit configmap app-config -n <namespace>
 # 4. 如果是 optional: true，Pod 会继续启动但变量为空
 # 检查是否应该设置为 optional
 ```
-
 ### 3.2 配置更新问题
 
 #### 场景 1：环境变量不更新
@@ -330,7 +353,8 @@ kubectl edit configmap app-config -n <namespace>
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 重启 Pod (推荐用于无状态应用)
 kubectl rollout restart deployment <name> -n <namespace>
 
@@ -347,7 +371,6 @@ kubectl patch deployment <name> -n <namespace> -p \
 # annotations:
 #   reloader.stakater.com/auto: "true"
 ```
-
 #### 场景 2：卷挂载配置不更新
 
 **问题现象：**
@@ -355,7 +378,8 @@ kubectl patch deployment <name> -n <namespace> -p \
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认没有使用 subPath
 kubectl get pod <pod-name> -o yaml | grep -A10 volumeMounts
 # 如果有 subPath，则不支持热更新
@@ -375,12 +399,12 @@ kubectl exec <pod-name> -- ls -la /path/to/config/
 # 方案 B: 使用 sidecar 监听配置变化
 # 方案 C: 应用自身支持配置文件监听
 ```
-
 #### 场景 3：应用不重新加载配置
 
 **解决方案：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 应用支持 SIGHUP 信号重新加载
 kubectl exec <pod-name> -- kill -HUP 1
 
@@ -393,7 +417,6 @@ curl -X POST http://<pod-ip>:<port>/-/reload
 # 方案 4: 应用使用配置中心 (Consul/Apollo/Nacos)
 # 而非直接读取文件
 ```
-
 ### 3.3 Secret 数据问题
 
 #### 场景 1：Secret 数据编码问题
@@ -403,7 +426,8 @@ Secret 数据解码后是乱码或不完整
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前数据
 kubectl get secret <name> -o jsonpath='{.data.password}' | base64 -d
 
@@ -432,12 +456,12 @@ echo -n 'myP@ssw0rd' | base64
 # 5. 验证解码
 kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d && echo
 ```
-
 #### 场景 2：创建 Docker Registry Secret
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 docker-registry 类型的 Secret
 kubectl create secret docker-registry my-registry-secret \
   --docker-server=registry.example.com \
@@ -460,7 +484,6 @@ kubectl patch serviceaccount default -n <namespace> -p '{"imagePullSecrets": [{"
 # 5. 验证镜像拉取
 kubectl run test --image=registry.example.com/myapp:v1 --restart=Never
 ```
-
 ### 3.4 权限问题
 
 #### 场景 1：ServiceAccount 无权限访问 Secret
@@ -472,7 +495,8 @@ Error: secrets "my-secret" is forbidden: User "system:serviceaccount:default:mya
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 Role 允许访问特定 Secret
 cat <<EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
@@ -507,7 +531,6 @@ EOF
 # 3. 验证权限
 kubectl auth can-i get secrets/my-secret --as=system:serviceaccount:<namespace>:myapp -n <namespace>
 ```
-
 ### 3.5 完整配置示例
 
 #### ConfigMap 使用示例
@@ -669,7 +692,17 @@ data:
 
 ### 常用命令速查
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ConfigMap 操作
 kubectl create configmap <name> --from-file=<path>
 kubectl create configmap <name> --from-literal=key=value
@@ -690,7 +723,6 @@ kubectl exec <pod> -- cat /path/to/config
 # 触发 Pod 重启
 kubectl rollout restart deployment <name>
 ```
-
 ### 相关文档
 
 - [Pod 故障排查](./01-pod-troubleshooting.md)
@@ -701,3 +733,6 @@ kubectl rollout restart deployment <name>
 
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

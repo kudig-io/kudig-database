@@ -57,6 +57,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - Apache APISIX 企业级 API 网关实践
@@ -159,7 +164,8 @@ Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm 仓库
 helm repo add apisix https://charts.apiseven.com
 helm repo update
@@ -175,7 +181,6 @@ helm install apisix apisix/apisix \
 # 验证安装
 kubectl get pods -n apisix
 ```
-
 ## Docker Compose（开发/测试）
 
 ```yaml
@@ -595,3 +600,5 @@ apisix:
 - 07-envoy-gateway-enterprise
 
 ```
+
+<!-- risk-assessed -->

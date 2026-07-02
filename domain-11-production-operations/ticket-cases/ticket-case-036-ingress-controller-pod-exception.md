@@ -69,6 +69,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -94,7 +99,8 @@ relationships:
 
 按“先控制器状态、后配置、再后端服务”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Ingress Controller Pod 状态
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 
@@ -120,7 +126,6 @@ kubectl describe node $(kubectl get pod -n kube-system -l app.kubernetes.io/name
 # 7. 通过 ASO/ACK 控制台确认 SLB 与 Ingress Controller 的关联是否正常
 ack-cli ingress status --cluster ack-zyy-prod-03 --ingress-class nginx
 ```
-
 ## 根因分析
 
 Nginx Ingress Controller Pod `nginx-ingress-controller-6f8d9c4b5-xk7m2` 因配置文件语法错误导致启动失败，进入 CrashLoopBackOff。具体根因为：
@@ -145,7 +150,8 @@ Nginx Ingress Controller Pod `nginx-ingress-controller-6f8d9c4b5-xk7m2` 因配�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份当前问题 ConfigMap
 kubectl get configmap nginx-configuration -n kube-system -o yaml > /tmp/nginx-configuration-backup-$(date +%Y%m%d-%H%M%S).yaml
 
@@ -154,30 +160,30 @@ kubectl patch configmap nginx-configuration -n kube-system --type=json -p='[
   {"op": "remove", "path": "/data/server-snippet"}
 ]'
 ```
-
 **第二步：重启 Ingress Controller 以重新加载配置**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment nginx-ingress-controller -n kube-system
 kubectl rollout status deployment nginx-ingress-controller -n kube-system --timeout=180s
 ```
-
 **第三步：确认 Controller Pod 全部 Running**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o wide
 ```
-
 **第四步：修复 server-snippet 语法并重新应用（可选，变更窗口期执行）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
@@ -193,10 +199,10 @@ data:
 EOF
 kubectl rollout restart deployment nginx-ingress-controller -n kube-system
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Controller Pod 全部 Running 且重启次数不再增加
 kubectl get pod -n kube-system -l app.kubernetes.io/name=ingress-nginx -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
 
@@ -213,7 +219,6 @@ aliyun slb DescribeHealthStatus --LoadBalancerId lb-zyy-ingress-xxx --output col
 # 5. 查看 Controller 日志无 emerg 错误
 kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=100 | grep -i "emerg|error" || echo "无 emerg 错误"
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-036 已处理完成。
@@ -269,3 +274,6 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --tail=100 |
 - Ingress
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

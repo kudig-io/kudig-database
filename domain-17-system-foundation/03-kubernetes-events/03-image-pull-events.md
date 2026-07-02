@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - 镜像拉取事件
@@ -259,7 +264,8 @@ spec:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
 
 Events:
@@ -268,8 +274,8 @@ Events:
   Normal   Scheduled  30s   default-scheduler  Successfully assigned default/nginx-deployment-7d5bc-xyz12 to node-03
   Normal   Pulling    28s   kubelet            Pulling image "nginx:1.25.3"
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kubectl get events 查看
 $ kubectl get events --field-selector reason=Pulling
 
@@ -277,7 +283,6 @@ LAST SEEN   TYPE     REASON    OBJECT                             MESSAGE
 45s         Normal   Pulling   pod/nginx-deployment-7d5bc-xyz12   Pulling image "nginx:1.25.3"
 12s         Normal   Pulling   pod/redis-cluster-0                Pulling image "redis:7.2-alpine"
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 启动时间延长,取决于镜像大小和网络速度(通常几秒到几分钟)
@@ -291,7 +296,8 @@ LAST SEEN   TYPE     REASON    OBJECT                             MESSAGE
 
 1. **检查镜像大小和拉取进度**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点上正在拉取的镜像
 kubectl get events --field-selector reason=Pulling -A --sort-by='.lastTimestamp' | tail -10
 
@@ -304,10 +310,10 @@ sudo journalctl -u containerd -f | grep -i pull
 sudo docker images
 sudo journalctl -u docker -f | grep -i pull
 ```
-
 2. **检查镜像仓库连接性**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上测试镜像仓库连通性
 curl -I https://registry-1.docker.io/v2/
 
@@ -318,10 +324,10 @@ curl -I https://your-registry.example.com/v2/
 nslookup registry-1.docker.io
 dig registry-1.docker.io
 ```
-
 3. **检查网络带宽和延迟**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 测试到镜像仓库的网络速度
 time curl -o /dev/null https://registry-1.docker.io/v2/
 
@@ -329,7 +335,6 @@ time curl -o /dev/null https://registry-1.docker.io/v2/
 iftop -i eth0
 nethogs
 ```
-
 4. **检查 kubelet 配置和日志**
 
 ```bash
@@ -377,7 +382,8 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
 
 Events:
@@ -389,8 +395,8 @@ Events:
   Normal   Created    27s   kubelet            Created container nginx
   Normal   Started    26s   kubelet            Started container nginx
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有成功拉取的镜像事件
 $ kubectl get events --field-selector reason=Pulled -A
 
@@ -399,7 +405,6 @@ LAST SEEN   TYPE     REASON   OBJECT                             MESSAGE
 1m30s       Normal   Pulled   pod/redis-cluster-0                Successfully pulled image "redis:7.2-alpine" in 12.8s
 45s         Normal   Pulled   pod/mysql-statefulset-0            Successfully pulled image "mysql:8.0.35" in 25.6s
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 启动流程顺利进行,即将进入容器创建和启动阶段
@@ -413,7 +418,8 @@ LAST SEEN   TYPE     REASON   OBJECT                             MESSAGE
 
 1. **统计镜像拉取时间分布**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 提取拉取时间并统计
 kubectl get events -A --field-selector reason=Pulled -o json | \
   jq -r '.items[] | .message' | \
@@ -424,26 +430,25 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
 kubectl get events -A --field-selector reason=Pulled -o json | \
   jq -r '.items[] | select(.message | test("in [3-9][0-9]+\\.[0-9]+s|in [0-9]{3,}\\.[0-9]+s")) | "\(.involvedObject.namespace)/\(.involvedObject.name): \(.message)"'
 ```
-
 2. **分析慢拉取事件的镜像特征**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看慢拉取事件的完整信息
 kubectl get events -A --field-selector reason=Pulled --sort-by='.lastTimestamp' -o wide | tail -20
 
 # 检查对应镜像的大小
 crictl images | grep <image-name>
 ```
-
 3. **对比不同节点的拉取速度**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 按节点分组统计拉取事件
 kubectl get events -A --field-selector reason=Pulled -o json | \
   jq -r '.items[] | "\(.source.host)\t\(.message)"' | \
   sort
 ```
-
 ## 解决建议
 
 | 观察到的现象 | 优化方案 | 优先级 |
@@ -479,7 +484,8 @@ kubectl get events -A --field-selector reason=Pulled -o json | \
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod nginx-deployment-7d5bc-abc89
 
 Events:
@@ -490,8 +496,8 @@ Events:
   Normal   Created           3s    kubelet            Created container nginx
   Normal   Started           2s    kubelet            Started container nginx
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有使用本地镜像的事件
 $ kubectl get events --field-selector reason=AlreadyPresent -A
 
@@ -499,7 +505,6 @@ LAST SEEN   TYPE     REASON           OBJECT                             MESSAGE
 15s         Normal   AlreadyPresent   pod/nginx-deployment-7d5bc-abc89   Container image "nginx:1.25.3" already present on machine
 32s         Normal   AlreadyPresent   pod/redis-cluster-1                Container image "redis:7.2-alpine" already present on machine
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 启动速度最快,无镜像拉取延迟(通常 < 1秒进入容器创建阶段)
@@ -513,7 +518,8 @@ LAST SEEN   TYPE     REASON           OBJECT                             MESSAGE
 
 1. **验证镜像版本是否符合预期**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点上的镜像列表
 kubectl debug node/node-03 -it --image=busybox -- sh
 # 在调试容器中
@@ -525,20 +531,20 @@ ssh node-03 "crictl images | grep nginx"
 # 查看镜像详细信息(包括创建时间、digest)
 crictl inspecti <image-id>
 ```
-
 2. **确认 imagePullPolicy 配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 的 imagePullPolicy 设置
 kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].imagePullPolicy}'
 
 # 查看完整容器配置
 kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*]}' | jq .
 ```
-
 3. **检查镜像缓存策略**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点镜像磁盘使用情况
 kubectl get nodes -o wide
 kubectl describe node node-03 | grep -A 10 "Allocated resources"
@@ -546,10 +552,10 @@ kubectl describe node node-03 | grep -A 10 "Allocated resources"
 # 检查 kubelet 镜像垃圾回收配置
 ps aux | grep kubelet | grep -E "image-gc|image-minimum"
 ```
-
 4. **验证是否需要强制更新镜像**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果使用 :latest 标签但镜像未更新,可能需要强制拉取
 # 查看 Pod 镜像标签
 kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].image}'
@@ -557,7 +563,6 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 # 如果标签是 :latest 但仍显示 AlreadyPresent,检查 imagePullPolicy
 # 预期应该是 Always,但可能被错误设置为 IfNotPresent
 ```
-
 ## 解决建议
 
 | 场景 | 建议方案 | 优先级 |
@@ -597,7 +602,8 @@ kubectl get pod nginx-deployment-7d5bc-abc89 -o jsonpath='{.spec.containers[*].i
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
 
 Events:
@@ -608,16 +614,16 @@ Events:
   Warning  Failed          2m10s              kubelet            Failed to pull image "nginx:1.25.999": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:1.25.999": failed to resolve reference "docker.io/library/nginx:1.25.999": docker.io/library/nginx:1.25.999: not found
   Warning  Failed          2m10s              kubelet            Error: ErrImagePull
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 认证失败示例
 $ kubectl describe pod private-app-xyz12
 
 Events:
   Warning  Failed   10s   kubelet   Failed to pull image "myregistry.example.com/private/app:v1.0": rpc error: code = Unknown desc = failed to pull and unpack image "myregistry.example.com/private/app:v1.0": failed to resolve reference "myregistry.example.com/private/app:v1.0": pulling from host myregistry.example.com failed with status code [manifests v1.0]: 401 Unauthorized
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有镜像拉取失败事件
 $ kubectl get events --field-selector reason=Failed,type=Warning -A | grep -i "image"
 
@@ -625,7 +631,6 @@ NAMESPACE   LAST SEEN   TYPE      REASON   OBJECT                      MESSAGE
 default     2m10s       Warning   Failed   pod/nginx-deployment-...    Failed to pull image "nginx:1.25.999": rpc error...
 default     1m30s       Warning   Failed   pod/redis-cluster-0         Failed to pull image "redis:wrong-tag": rpc error...
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 无法启动,停留在 `ErrImagePull` 或 `ImagePullBackOff` 状态,服务不可用
@@ -637,7 +642,8 @@ default     1m30s       Warning   Failed   pod/redis-cluster-0         Failed to
 
 1. **分析错误消息确定失败原因**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看详细错误消息
 kubectl describe pod <pod-name> | grep -A 5 "Failed"
 
@@ -648,10 +654,10 @@ kubectl describe pod <pod-name> | grep -oP 'rpc error: code = \K\w+'
 #   Unknown - 通用错误,需看详细描述
 #   Unavailable - 镜像仓库不可达
 ```
-
 2. **验证镜像名称和标签**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 配置中的镜像名称
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].image}'
 
@@ -662,10 +668,10 @@ curl -s "https://hub.docker.com/v2/repositories/library/nginx/tags?page_size=100
 # 私有 Harbor 仓库
 curl -u username:password "https://harbor.example.com/v2/project/repo/tags/list"
 ```
-
 3. **测试镜像仓库连接性**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在对应节点上测试网络连接
 kubectl debug node/<node-name> -it --image=nicolaka/netshoot
 
@@ -677,10 +683,10 @@ curl -v https://your-private-registry.example.com/v2/
 nslookup registry-1.docker.io
 dig registry-1.docker.io
 ```
-
 4. **检查私有仓库认证配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 所在命名空间的 ImagePullSecrets
 kubectl get pod <pod-name> -o jsonpath='{.spec.imagePullSecrets[*].name}'
 
@@ -690,10 +696,10 @@ kubectl get secret <secret-name> -o jsonpath='{.data.\.dockerconfigjson}' | base
 # 检查 ServiceAccount 的 ImagePullSecrets
 kubectl get serviceaccount default -o jsonpath='{.imagePullSecrets[*].name}'
 ```
-
 5. **检查 kubelet 日志中的详细错误**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在对应节点上查看 kubelet 日志
 sudo journalctl -u kubelet -n 200 | grep -i "pull"
 
@@ -704,7 +710,6 @@ sudo journalctl -u containerd -n 200 | grep -E "pull|image"
 # docker
 sudo journalctl -u docker -n 200 | grep -E "pull|image"
 ```
-
 ## 解决建议
 
 | 错误原因 | 解决方案 | 优先级 |
@@ -746,7 +751,8 @@ sudo journalctl -u docker -n 200 | grep -E "pull|image"
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod nginx-deployment-7d5bc-xyz12
 
 Events:
@@ -759,16 +765,16 @@ Events:
   Normal   BackOff         9m30s (x4 over 10m)    kubelet            Back-off pulling image "nginx:wrong-tag"
   Warning  Failed          9m30s (x4 over 10m)    kubelet            Error: ImagePullBackOff
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 状态
 $ kubectl get pod nginx-deployment-7d5bc-xyz12
 
 NAME                               READY   STATUS             RESTARTS   AGE
 nginx-deployment-7d5bc-xyz12       0/1     ImagePullBackOff   0          10m
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有处于 ImagePullBackOff 的 Pod
 $ kubectl get pods -A --field-selector status.phase=Pending -o json | \
   jq -r '.items[] | select(.status.containerStatuses[]?.state.waiting.reason == "ImagePullBackOff") | "\(.metadata.namespace)/\(.metadata.name)"'
@@ -776,7 +782,6 @@ $ kubectl get pods -A --field-selector status.phase=Pending -o json | \
 default/nginx-deployment-7d5bc-xyz12
 production/api-server-abc123
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 长时间无法启动,服务持续不可用,用户请求失败
@@ -788,7 +793,8 @@ production/api-server-abc123
 
 1. **检查 Pod 状态和重试计数**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 详细状态
 kubectl get pod <pod-name> -o yaml | yq eval '.status.containerStatuses[].state.waiting' -
 
@@ -798,10 +804,10 @@ kubectl describe pod <pod-name> | grep -E "Back-off|Failed" | grep -oP '\(x\K\d+
 # 计算退避等待时间
 # 如果 count = 10,说明已重试多次,当前可能在等待最大退避时间(5分钟)
 ```
-
 2. **分析根本原因(同 ErrImagePull 排查)**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看最初的失败消息
 kubectl describe pod <pod-name> | grep -A 2 "ErrImagePull"
 
@@ -811,19 +817,19 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].image}'
 # 验证镜像是否存在
 skopeo inspect docker://nginx:1.25.3
 ```
-
 3. **检查是否有临时网络问题**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果怀疑是临时网络问题,可以查看重试时间线
 kubectl get events --field-selector involvedObject.name=<pod-name> --sort-by='.lastTimestamp'
 
 # 如果失败时间集中在某个时间段,可能是网络或仓库临时问题
 ```
-
 4. **检查 Deployment/ReplicaSet 状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 是否处于异常状态
 kubectl get deployment <deployment-name>
 kubectl describe deployment <deployment-name>
@@ -832,7 +838,6 @@ kubectl describe deployment <deployment-name>
 kubectl get replicaset -l app=<app-label>
 
 ```
-
 ## 解决建议
 
 | 场景 | 解决方案 | 优先级 |
@@ -870,7 +875,8 @@ kubectl get replicaset -l app=<app-label>
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod offline-app-xyz12
 
 Events:
@@ -880,23 +886,22 @@ Events:
   Warning  ErrImageNeverPull   28s   kubelet            Container image "myapp:v1.0" is not present with pull policy of Never
   Warning  Failed              28s   kubelet            Error: ErrImageNeverPull
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 状态
 $ kubectl get pod offline-app-xyz12
 
 NAME                 READY   STATUS              RESTARTS   AGE
 offline-app-xyz12    0/1     ErrImageNeverPull   0          45s
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 ErrImageNeverPull 事件
 $ kubectl get events --field-selector reason=ErrImageNeverPull -A
 
 NAMESPACE   LAST SEEN   TYPE      REASON              OBJECT                   MESSAGE
 default     2m15s       Warning   ErrImageNeverPull   pod/offline-app-xyz12    Container image "myapp:v1.0" is not present...
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 完全无法启动,服务不可用,且不会自动恢复
@@ -908,17 +913,18 @@ default     2m15s       Warning   ErrImageNeverPull   pod/offline-app-xyz12    C
 
 1. **验证 imagePullPolicy 配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 的 imagePullPolicy
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].imagePullPolicy}'
 
 # 查看完整容器配置
 kubectl get pod <pod-name> -o yaml | yq eval '.spec.containers[] | {"name": .name, "image": .image, "imagePullPolicy": .imagePullPolicy}' -
 ```
-
 2. **检查节点上的镜像列表**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法1: 使用 kubectl debug
 kubectl debug node/<node-name> -it --image=busybox
 # 在 debug 容器中
@@ -931,7 +937,6 @@ sudo crictl images | grep <image-name>
 # 方法3: 使用 kubectl get nodes 后查询
 kubectl get nodes <node-name> -o json | jq '.status.images[] | select(.names[] | contains("<image-name>"))'
 ```
-
 3. **检查镜像是否被 GC 删除**
 
 ```bash
@@ -947,14 +952,14 @@ ps aux | grep kubelet | grep -oP -- '--image-gc-[a-z-]+=\K[^ ]+'
 
 4. **验证是否为离线环境配置错误**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点网络连通性
 kubectl debug node/<node-name> -it --image=nicolaka/netshoot
 # 在 debug 容器中测试
 curl -v https://registry-1.docker.io/v2/
 # 如果无法连接,确认是否为预期的离线环境
 ```
-
 ## 解决建议
 
 | 问题原因 | 解决方案 | 优先级 |
@@ -993,7 +998,8 @@ curl -v https://registry-1.docker.io/v2/
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod corrupted-image-xyz12
 
 Events:
@@ -1005,23 +1011,22 @@ Events:
   Warning  InspectFailed  1m    kubelet            Failed to inspect image "myapp:v1.0": rpc error: code = Unknown desc = failed to resolve image "myapp:v1.0": unable to inspect image: reading manifest: unexpected EOF
   Warning  Failed         1m    kubelet            Error: InspectFailed
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 状态
 $ kubectl get pod corrupted-image-xyz12
 
 NAME                      READY   STATUS          RESTARTS   AGE
 corrupted-image-xyz12     0/1     InspectFailed   0          3m
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 InspectFailed 事件
 $ kubectl get events --field-selector reason=InspectFailed -A
 
 NAMESPACE   LAST SEEN   TYPE      REASON          OBJECT                         MESSAGE
 default     3m15s       Warning   InspectFailed   pod/corrupted-image-xyz12      Failed to inspect image "myapp:v1.0": rpc error...
 ```
-
 ## 影响面说明
 
 - **用户影响**: Pod 无法启动,即使镜像已拉取到节点
@@ -1033,7 +1038,8 @@ default     3m15s       Warning   InspectFailed   pod/corrupted-image-xyz12     
 
 1. **检查镜像完整性**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上验证镜像
 ssh <node-name>
 sudo crictl inspecti <image-id>
@@ -1044,10 +1050,10 @@ sudo crictl images | grep <image-name>
 # 查看容器运行时日志
 sudo journalctl -u containerd -n 100 | grep -i inspect
 ```
-
 2. **尝试手动拉取和检查镜像**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除可能损坏的镜像
 sudo crictl rmi <image-id>
 
@@ -1057,7 +1063,6 @@ sudo crictl pull <image-name>
 # 验证镜像
 sudo crictl inspecti <new-image-id>
 ```
-
 3. **检查节点存储健康状态**
 
 ```bash
@@ -1075,7 +1080,8 @@ df -i
 
 4. **检查容器运行时状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 containerd 服务状态
 systemctl status containerd
 
@@ -1085,10 +1091,10 @@ ls -lh /var/lib/containerd/io.containerd.metadata.v1.bolt/
 # 检查是否有进程卡死
 ps aux | grep containerd
 ```
-
 5. **检查镜像是否使用了不支持的特性**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从其他节点或环境检查镜像元数据
 skopeo inspect docker://<image-name> | jq .
 
@@ -1097,7 +1103,6 @@ crane manifest <image-name>
 crane config <image-name> | jq .
 
 ```
-
 ## 解决建议
 
 | 问题原因 | 解决方案 | 优先级 |
@@ -1123,7 +1128,8 @@ Kubernetes 使用 `imagePullSecrets` 机制为私有镜像仓库提供认证凭�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法1: 使用命令行创建(推荐)
 kubectl create secret docker-registry my-registry-secret \
   --docker-server=myregistry.example.com \
@@ -1150,7 +1156,6 @@ data:
   .dockerconfigjson: $(cat ~/.docker/config.json | base64 -w 0)
 EOF
 ```
-
 ## 5.1.2 在 Pod 中使用 ImagePullSecret
 
 ```yaml
@@ -1203,7 +1208,17 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法1: 使用 kubectl patch
 kubectl patch serviceaccount default -n default \
   -p '{"imagePullSecrets": [{"name": "my-registry-secret"}]}'
@@ -1217,12 +1232,12 @@ kubectl edit serviceaccount default -n default
 # 验证配置
 kubectl get serviceaccount default -n default -o yaml | grep -A 2 imagePullSecrets
 ```
-
 ## 5.2 常见认证错误排查
 
 ## 5.2.1 401 Unauthorized - 认证失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 错误消息示例
 Failed to pull image "myregistry.example.com/private/app:v1.0": rpc error: code = Unknown desc = failed to pull and unpack image "myregistry.example.com/private/app:v1.0": failed to resolve reference "myregistry.example.com/private/app:v1.0": pulling from host myregistry.example.com failed with status code [manifests v1.0]: 401 Unauthorized
 
@@ -1242,13 +1257,22 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.imagePullSecrets[*].name}'
 # 5. 检查 ServiceAccount 的 imagePullSecrets
 kubectl get serviceaccount default -o jsonpath='{.imagePullSecrets[*].name}'
 ```
-
 ## 5.2.2 Secret 未关联到 Pod
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 现象: Pod 描述中无 imagePullSecrets 信息
 kubectl get pod <pod-name> -o yaml | grep -A 5 imagePullSecrets
 # 如果输出为空,说明未关联
@@ -1268,14 +1292,14 @@ kubectl edit deployment <deployment-name>
 #   imagePullSecrets:
 #   - name: my-registry-secret
 ```
-
 ## 5.2.3 Secret 格式错误
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Secret 数据格式
 kubectl get secret my-registry-secret -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d | jq .
 
@@ -1304,13 +1328,13 @@ kubectl create secret docker-registry my-registry-secret \
   --docker-email=myemail@example.com \
   -n default
 ```
-
 ## 5.2.4 多仓库认证配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: Pod 需要从多个私有仓库拉取镜像
 
 # 方法1: 创建包含多个仓库的 Secret
@@ -1341,14 +1365,23 @@ imagePullSecrets:
   - name: registry1-secret
   - name: registry2-secret
 ```
-
 ## 5.3 Harbor 私有仓库集成
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Harbor 仓库认证配置示例
 
 # 1. 创建 Harbor Robot Account Secret
@@ -1383,13 +1416,13 @@ sudo cp harbor-ca.crt /usr/local/share/ca-certificates/
 sudo update-ca-certificates
 sudo systemctl restart containerd
 ```
-
 ## 5.4 云厂商容器镜像仓库集成
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== AWS ECR ==========
 # 创建 ECR 凭据(需要定期刷新,因为 token 有效期 12 小时)
 
@@ -1433,14 +1466,14 @@ kubectl create secret docker-registry acr-secret \
   --docker-password=<aliyun-password> \
   -n default
 ```
-
 ---
 
 <!-- chunk: 六、常见镜像拉取失败场景 -->## 六、常见镜像拉取失败场景
 
 ## 6.1 镜像名称或标签错误
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: NotFound 错误
 Failed to pull image "nginx:1.25.999": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/library/nginx:1.25.999": failed to resolve reference "docker.io/library/nginx:1.25.999": docker.io/library/nginx:1.25.999: not found
 
@@ -1458,14 +1491,23 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].image}'
 # 解决:
 kubectl set image deployment/<deployment-name> <container-name>=nginx:1.25.3
 ```
-
 ## 6.2 DNS 解析失败
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 现象: DNS 相关错误
 Failed to pull image "nginx:1.25.3": rpc error: code = Unknown desc = failed to pull and unpack image "docker.io/library/nginx:1.25.3": failed to resolve reference "docker.io/library/nginx:1.25.3": failed to do request: Head "https://registry-1.docker.io/v2/library/nginx/manifests/1.25.3": dial tcp: lookup registry-1.docker.io on 169.254.169.254:53: no such host
 
@@ -1496,13 +1538,22 @@ kubectl rollout restart deployment coredns -n kube-system
 # 3. 使用镜像 digest 引用(绕过域名解析,仅在镜像已缓存时有效)
 kubectl set image deployment/<name> <container>=nginx@sha256:xxxxx
 ```
-
 ## 6.3 网络连接超时
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 现象: Timeout 或 Connection refused
 Failed to pull image "nginx:1.25.3": rpc error: code = Unknown desc = failed to pull and unpack image "docker.io/library/nginx:1.25.3": failed to do request: Head "https://registry-1.docker.io/v2/library/nginx/manifests/1.25.3": dial tcp 52.54.232.21:443: i/o timeout
 
@@ -1535,13 +1586,22 @@ sudo systemctl restart containerd
 
 # 2. 使用本地镜像仓库或镜像
 ```
-
 ## 6.4 TLS 证书验证失败
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 现象: x509 证书错误
 Failed to pull image "myregistry.example.com/app:v1.0": rpc error: code = Unknown desc = failed to pull and unpack image "myregistry.example.com/app:v1.0": failed to resolve reference "myregistry.example.com/app:v1.0": failed to do request: Head "https://myregistry.example.com/v2/app/manifests/v1.0": x509: certificate signed by unknown authority
 
@@ -1571,10 +1631,10 @@ sudo systemctl restart containerd
   [plugins."io.containerd.grpc.v1.cri".registry.configs."myregistry.example.com".tls]
     insecure_skip_verify = true
 ```
-
 ## 6.5 镜像层下载中断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 现象: unexpected EOF 或 context canceled
 Failed to pull image "large-image:v1.0": rpc error: code = Unknown desc = failed to pull and unpack image "docker.io/library/large-image:v1.0": failed to copy: httpReadSeeker: failed open: unexpected EOF
 
@@ -1603,7 +1663,6 @@ imageMaximumGCAge: 0s
 
 # 3. 使用区域镜像缓存,缩短传输距离
 ```
-
 ---
 
 <!-- chunk: 七、Docker Hub 限流问题 -->## 七、Docker Hub 限流问题
@@ -1621,7 +1680,8 @@ imageMaximumGCAge: 0s
 
 ## 7.2 限流错误识别
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 典型限流错误消息
 Failed to pull image "nginx:1.25.3": rpc error: code = Unknown desc = failed to pull and unpack image "docker.io/library/nginx:1.25.3": failed to copy: httpReadSeeker: failed open: unexpected status code https://registry-1.docker.io/v2/library/nginx/blobs/sha256:xxxxx: 429 Too Many Requests - Server message: toomanyrequests: You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limit
 
@@ -1629,10 +1689,10 @@ Failed to pull image "nginx:1.25.3": rpc error: code = Unknown desc = failed to 
 # - status code: 429 Too Many Requests
 # - toomanyrequests: You have reached your pull rate limit
 ```
-
 ## 7.3 检查当前限流状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法1: 使用 curl 检查剩余配额(匿名)
 TOKEN=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 curl -s --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest | grep -i ratelimit
@@ -1647,7 +1707,6 @@ curl -s --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2
 # ratelimit-limit: 200;w=21600
 # ratelimit-remaining: 185;w=21600
 ```
-
 ## 7.4 解决 Docker Hub 限流问题
 
 ## 方案1: 使用 Docker Hub 认证(提高限额到 200 次)
@@ -1657,7 +1716,8 @@ curl -s --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 Docker Hub 账户凭据 Secret
 kubectl create secret docker-registry dockerhub-secret \
   --docker-server=https://index.docker.io/v1/ \
@@ -1676,13 +1736,22 @@ kubectl get serviceaccount default -o yaml | grep -A 2 imagePullSecrets
 # 4. 重启受影响的 Pod
 kubectl rollout restart deployment/<deployment-name>
 ```
-
 ## 方案2: 使用镜像仓库镜像(Mirror)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 配置 containerd 使用国内镜像(如阿里云/腾讯云/DaoCloud)
 
 # 编辑 /etc/containerd/config.toml
@@ -1701,10 +1770,10 @@ sudo systemctl restart containerd
 # 验证配置
 sudo crictl info | jq .config.registry
 ```
-
 ## 方案3: 迁移到私有镜像仓库
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 搭建 Harbor/Registry 私有仓库
 
 # 2. 同步 Docker Hub 镜像到私有仓库
@@ -1728,13 +1797,13 @@ images:
     newName: harbor.example.com/library/nginx
     newTag: 1.25.3
 ```
-
 ## 方案4: 使用镜像预热(减少拉取次数)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 DaemonSet 预热镜像到所有节点
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -1768,13 +1837,13 @@ spec:
               memory: 1Mi
 EOF
 ```
-
 ## 方案5: 使用镜像缓存代理(Pull-Through Cache)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 Registry 作为 Pull-Through Cache
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -1849,7 +1918,6 @@ EOF
 [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
   endpoint = ["http://docker-registry-proxy.kube-system.svc.cluster.local:5000"]
 ```
-
 ---
 
 <!-- chunk: 八、镜像仓库镜像与代理配置 -->## 八、镜像仓库镜像与代理配置
@@ -1910,7 +1978,17 @@ version = 2
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 应用配置
 sudo systemctl restart containerd
 
@@ -1920,7 +1998,6 @@ sudo crictl info | jq .config.registry
 # 测试拉取
 sudo crictl pull docker.io/library/nginx:1.25.3
 ```
-
 ## 8.2 国内镜像加速服务
 
 | 提供商 | Docker Hub 镜像地址 | 说明 |
@@ -1939,7 +2016,17 @@ sudo crictl pull docker.io/library/nginx:1.25.3
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== containerd 配置代理 ==========
 
 # 创建 systemd drop-in 配置
@@ -1983,14 +2070,14 @@ Environment="NO_PROXY=localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/1
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 ```
-
 ## 8.4 搭建 Harbor 私有仓库
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 部署 Harbor
 
 # 1. 添加 Harbor Helm 仓库
@@ -2067,7 +2154,6 @@ kubectl get pods -n harbor -w
   username = "admin"
   password = "HarborAdmin123"
 ```
-
 ---
 
 <!-- chunk: 九、生产环境最佳实践 -->## 九、生产环境最佳实践
@@ -2219,7 +2305,8 @@ groups:
           description: "剩余配额: {{ $value }}, 建议配置认证或使用镜像"
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自定义 Prometheus Exporter 监控 Docker Hub 限流
 # 部署一个简单的 exporter 定期检查 Docker Hub 配额
 
@@ -2248,10 +2335,10 @@ chmod +x dockerhub-ratelimit-exporter.sh
 
 # 部署为 Kubernetes CronJob,定期更新指标
 ```
-
 ## 9.4 镜像拉取故障排查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 快速诊断脚本 ==========
 
 #!/bin/bash
@@ -2334,10 +2421,10 @@ fi
 echo ""
 echo "=== Diagnostic Complete ==="
 ```
-
 ## 9.5 镜像拉取配置检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # image-pull-config-audit.sh
 # 审计集群中所有 Deployment 的镜像配置
@@ -2378,7 +2465,6 @@ echo ""
 
 echo "=== Audit Complete ==="
 ```
-
 ---
 
 <!-- chunk: 十、相关文档交叉引用 -->## 十、相关文档交叉引用
@@ -2454,3 +2540,5 @@ echo "=== Audit Complete ==="
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

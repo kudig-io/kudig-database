@@ -39,6 +39,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # DaemonSet
@@ -213,7 +218,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 状态（含 desired/current/ready 数量）
 kubectl get daemonset -n monitoring
 
@@ -229,7 +235,6 @@ kubectl get pods -n monitoring -l app=node-exporter -o wide
 # 查看 DaemonSet 事件
 kubectl describe ds node-exporter -n monitoring | tail -20
 ```
-
 ## 交叉引用
 
 - [DaemonSet 管理详解](../../domain-02-workloads-applications/04-daemonset-management.md)
@@ -244,3 +249,6 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

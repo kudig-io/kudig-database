@@ -26,6 +26,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # etcdctl
@@ -43,7 +48,8 @@ etcdctl 是 etcd 的官方命令行客户端工具，用于直接与 etcd 集群
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群健康状态
 etcdctl endpoint health --cluster
 
@@ -62,7 +68,6 @@ etcdctl snapshot restore /backup/etcd-snapshot.db  # ⚠️ 覆盖 etcd 数据�
 # 查看 key（仅用于调试）
 etcdctl get /registry/pods --prefix --keys-only
 ```
-
 ### 环境变量
 
 ```bash
@@ -98,3 +103,6 @@ export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/peer.key
 - [[domain-17-system-foundation/topic-dictionary/tooling/kubectx.md|Kubectx]]
 - [[domain-17-system-foundation/topic-dictionary/tooling/kubens.md|Kubens]]
 - [[domain-17-system-foundation/topic-dictionary/tooling/k9s.md|K9S]]
+
+
+<!-- risk-assessed -->

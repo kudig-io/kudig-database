@@ -34,6 +34,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点证书轮换源码分析
@@ -281,7 +286,8 @@ Kubernetes 内置了 `csrapproving` 控制器，自动审批 kubelet 发起的 C
 
 当自动审批失败时，可以手动审批：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 CSR
 kubectl get csr
 # NAME        AGE   SIGNERNAME                                    REQUESTOR          REQUESTEDDURATION   CONDITION
@@ -299,7 +305,6 @@ kubectl certificate deny csr-abc12
 # 查看 CSR 中的请求内容
 kubectl get csr csr-abc12 -o jsonpath='{.spec.request}' | base64 -d | openssl req -text -noout
 ```
-
 ---
 
 ## 四、证书配置
@@ -316,7 +321,8 @@ serverTLSBootstrap: true    # 启用服务端证书 Bootstrap（通过 CSR 签�
 
 ### 4.2 API Server 证书审批 RBAC
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # csrapproving 控制器需要的 ClusterRole（kubeadm 自动创建）
 kubectl get clusterrole system:certificates.k8s.io:certificatesigningrequests:nodeclient
 kubectl get clusterrole system:certificates.k8s.io:certificatesigningrequests:selfnodeclient
@@ -324,7 +330,6 @@ kubectl get clusterrole system:certificates.k8s.io:certificatesigningrequests:se
 # 检查 ClusterRoleBinding
 kubectl get clusterrolebinding -o wide | grep certificate
 ```
-
 ---
 
 ## 五、证书查看与调试
@@ -463,3 +468,6 @@ kubeadm join ...
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration.md|02-registration]]
+
+
+<!-- risk-assessed -->

@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -183,7 +188,8 @@ Kubernetes 原生的 Secret 存在以下安全局限：
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Kyverno
 kubectl create namespace kyverno
 helm repo add kyverno https://kyverno.github.io/kyverno/
@@ -312,13 +318,13 @@ EOF
 
 kubectl apply -f add-security-context.yaml
 ```
-
 ### 任务 2: Secret 管理实践 (1h)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Sealed Secrets Controller
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.0/controller.yaml
 
@@ -345,10 +351,10 @@ kubectl apply -f sealed-db-credentials.yaml
 kubectl get secret db-credentials -o yaml
 kubectl get secret db-credentials -o jsonpath='{.data.password}' | base64 -d
 ```
-
 ### 任务 3: 安全审计 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 RBAC 权限: 查看默认 ServiceAccount 的权限
 kubectl auth can-i --list --as=system:serviceaccount:default:default
 
@@ -371,7 +377,6 @@ kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[]? | .re
 kubectl get policyreport -A
 kubectl get clusterpolicyreport
 ```
-
 ---
 
 ## 常见问题
@@ -414,3 +419,6 @@ Kyverno 使用 Admission Webhook 机制，每个 API 请求都会经过策略验
 - [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
 - [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
 - [Secret 管理工具](../../domain-05-security-compliance/11-secret-management-tools.md)
+
+
+<!-- risk-assessed -->

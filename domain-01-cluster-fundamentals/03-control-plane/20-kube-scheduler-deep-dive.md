@@ -80,6 +80,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]]es Scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)
@@ -321,6 +326,7 @@ cross_refs:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Complete Scheduling Workflow                           │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -390,7 +396,6 @@ cross_refs:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 3.2 调度决策算法
 
 | 阶段 | 算法 | 复杂度 | 说明 |
@@ -1099,7 +1104,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Pod 调度状态 - PodSchedulingReadiness condition
 kubectl get pod gated-pod -o jsonpath='{.status.conditions[?(@.type=="PodSchedulingReady")]}'
 
@@ -1110,7 +1116,6 @@ kubectl patch pod gated-pod --type=merge -p \
 # 移除所有 gate
 kubectl patch pod gated-pod --type=merge -p '{"spec":{"schedulingGates":[]}}'
 ```
-
 #### 内部机制
 
 ```
@@ -1172,7 +1177,8 @@ kubectl patch pod gated-pod --type=merge -p '{"spec":{"schedulingGates":[]}}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看带 schedulingGates 的 Pod
 kubectl get pods -o custom-columns=NAME:.metadata.name,SCHEDULING_GATES:.spec.schedulingGates
 
@@ -1191,7 +1197,6 @@ kubectl patch pod <pod-name> --type=merge -p \
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scheduling gate"
 
 ```
-
 #### 故障排查
 
 **现象**: Pod 一直 `Pending`，但 `kubectl describe pod` 看不到 `FailedScheduling` 事件，节点资源充足且亲和性/污点配置正常。
@@ -1552,7 +1557,8 @@ groups:
 
 ### 9.5 日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器日志
 kubectl logs -n kube-system -l component=kube-scheduler --tail=1000
 
@@ -1565,7 +1571,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep "Unable to schedu
 # 启用详细日志 (调整日志级别)
 # 在调度器启动参数中添加 --v=4 或更高
 ```
-
 | 日志级别 | 内容 |
 |----------|------|
 | v=0 | 基本信息 |
@@ -1597,7 +1602,8 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep "Unable to schedu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 事件
 kubectl describe pod <pod-name> -n <namespace>
 
@@ -1616,10 +1622,10 @@ kubectl get pvc -n <namespace>
 # 6. 模拟调度 (Dry Run)
 kubectl create -f pod.yaml --dry-run=server -o yaml
 ```
-
 ### 10.3 调度事件分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度相关事件
 kubectl get events --field-selector reason=FailedScheduling
 kubectl get events --field-selector reason=Scheduled
@@ -1637,7 +1643,6 @@ Events:
   Warning  FailedScheduling  0/10 nodes are available: 10 Insufficient 
                              nvidia.com/gpu.
 ```
-
 ### 10.4 性能调优建议
 
 | 调优项 | 建议配置 | 适用场景 |
@@ -2043,7 +2048,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 调度结果
 kubectl get pod -o wide
 
@@ -2068,7 +2074,6 @@ kubectl get lease -n kube-system kube-scheduler
 # 强制重新调度 Pod
 kubectl delete pod <pod-name>
 ```
-
 ### C. 参考资源
 
 | 资源 | 链接 |
@@ -2119,3 +2124,5 @@ kubectl delete pod <pod-name>
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

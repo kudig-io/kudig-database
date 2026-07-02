@@ -67,6 +67,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get [[Pods|pods]] -n ingress-nginx -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示 [[Ingress|Ingress]] Controller 异常 -->
@@ -172,7 +177,8 @@ Ingress 和 Gateway API 是 [[Kubernetes|Kubernetes]] 集群中**南北向流量
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 确认 Ingress/Gateway 资源状态 (15s)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有 Ingress 资源状态
 kubectl get ingress -A -o wide
 
@@ -189,7 +195,8 @@ kubectl get httproute -A 2>/dev/null || echo "No HTTPRoute resources"
 > - 仅单个 Ingress 受影响 → **P2**（待 T2 进一步确认）
 
 **Step T2**: 外部连通性快速测试 (30s)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取 Ingress/Gateway 外部 IP
 INGRESS_IP=$(kubectl get ingress <ingress-name> -n <namespace> -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 # 或
@@ -207,7 +214,8 @@ curl -sk -o /dev/null -w "%{http_code}" https://<domain>/
 > - HTTP 000 或连接失败 → 网络层面问题或 Controller 完全不可用
 
 **Step T3**: Ingress Controller 状态检查 (30s)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Nginx Ingress Controller
 kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller
 
@@ -558,7 +566,8 @@ kubectl get pods -n envoy-gateway-system -l control-plane=envoy-gateway
 **Step D3.1**: 不同 Ingress Controller 的特异性诊断
 
 **Nginx Ingress Controller**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ConfigMap 配置
 kubectl get configmap -n ingress-nginx ingress-nginx-controller -o yaml
 
@@ -568,9 +577,9 @@ kubectl get ingressclass nginx -o yaml
 # 检查 admission webhook
 kubectl get validatingwebhookconfigurations | grep ingress
 ```
-
 **Traefik**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 IngressRoute（Traefik CRD）
 kubectl get ingressroute -A
 
@@ -578,9 +587,9 @@ kubectl get ingressroute -A
 kubectl port-forward -n traefik deploy/traefik 9000:9000
 # 然后访问 http://localhost:9000/dashboard/
 ```
-
 **AWS ALB Ingress Controller**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ALB 状态
 kubectl get ing <ingress-name> -n <namespace> -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 
@@ -590,9 +599,9 @@ kubectl logs -n kube-system deploy/aws-load-balancer-controller --tail=100
 # 检查 TargetGroupBinding
 kubectl get targetgroupbinding -A
 ```
-
 **Envoy Gateway**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 EnvoyProxy 配置
 kubectl get envoyproxy -A
 
@@ -1285,7 +1294,8 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 确认 Ingress/Gateway 状态正常
 kubectl get ingress <ingress-name> -n <namespace> -o wide
 # 预期: ADDRESS 列有值
@@ -1313,7 +1323,6 @@ kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- curl -s localho
 kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=2m | grep -iE "error|fail"
 # 预期: 无错误日志
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1516,3 +1525,6 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

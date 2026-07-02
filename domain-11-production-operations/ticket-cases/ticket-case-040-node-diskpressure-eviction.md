@@ -62,6 +62,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -87,7 +92,8 @@ relationships:
 
 按“先节点状态、后磁盘使用、再日志与镜像”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认节点状态与压力条件
 kubectl get node -o wide
 kubectl get node -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="DiskPressure")].status}{"\n"}{end}'
@@ -117,7 +123,6 @@ ack-cli node exec cn-zhangjiakou.172.16.7.31 -- ls -la /etc/logrotate.d/
 # 7. 通过 ASO 或 ACK 控制台查看节点磁盘告警
 ack-cli node diagnose cn-zhangjiakou.172.16.7.31 --cluster ack-zyy-prod-07 --module disk
 ```
-
 ## 根因分析
 
 节点 `/var/lib/docker/containers` 目录下容器日志文件未被有效轮转，单个日志文件膨胀至数十 GiB，占满系统盘。触发 kubelet 的 DiskPressure 条件后，kubelet 按照驱逐优先级开始驱逐 Pod。
@@ -142,7 +147,8 @@ ack-cli node diagnose cn-zhangjiakou.172.16.7.31 --cluster ack-zyy-prod-07 --mod
 
 **第一步：紧急清理大日志文件，释放磁盘空间（仅删除已 rotate 的旧日志）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在问题节点上执行，先清理已停止容器的日志与过期日志
 ack-cli node exec cn-zhangjiakou.172.16.7.31 -- sh -c '
 find /var/lib/docker/containers -name "*.log" -size +1G -mtime +1 -exec truncate -s 0 {} \;
@@ -150,20 +156,29 @@ find /var/log -type f -name "*.log-*" -mtime +7 -delete
 journalctl --vacuum-time=3d
 '
 ```
-
 **第二步：手动触发容器日志轮转**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 登录节点执行 logrotate
 ack-cli node exec cn-zhangjiakou.172.16.7.31 -- logrotate -f /etc/logrotate.d/docker-container-log
 ```
-
 **第三步：配置 kubelet 容器日志轮转参数**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 修改 kubelet 配置，启用容器日志轮转
 ack-cli node exec cn-zhangjiakou.172.16.7.31 -- sh -c '
 cat <<EOF >> /etc/kubernetes/kubelet-config.json
@@ -175,24 +190,24 @@ EOF
 systemctl restart kubelet
 '
 ```
-
 **第四步：清理未使用镜像（低峰期执行）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ack-cli node exec cn-zhangjiakou.172.16.7.31 -- docker image prune -a -f 2>/dev/null || crictl rmi --prune 2>/dev/null
 ```
-
 **第五步：对高日志量 Pod 增加临时 sidecar 日志限制或调整应用日志级别**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时调整应用日志级别为 WARN
 kubectl set env deployment/log-processor -n log-service LOG_LEVEL=WARN
 kubectl rollout status deployment/log-processor -n log-service --timeout=180s
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 节点 DiskPressure 条件恢复
 kubectl get node cn-zhangjiakou.172.16.7.31 -o jsonpath='{.status.conditions[?(@.type=="DiskPressure")].status}'
 
@@ -212,7 +227,6 @@ kubectl get pod -n log-service -o wide | grep -v Running
 # 6. kubelet 日志无新的驱逐记录
 ack-cli node exec cn-zhangjiakou.172.16.7.31 -- journalctl -u kubelet --since "30 minutes ago" | grep -i "eviction|diskpressure" | tail -20
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-040 已处理完成。
@@ -269,3 +283,6 @@ ack-cli node exec cn-zhangjiakou.172.16.7.31 -- journalctl -u kubelet --since "3
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
 - [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+
+
+<!-- risk-assessed -->

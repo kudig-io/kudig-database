@@ -57,6 +57,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 32 - Lease / Event / Node YAML 配置参考
@@ -837,7 +842,8 @@ subjects:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Lease 状态
 kubectl get lease my-controller -n default -o yaml
 
@@ -864,7 +870,6 @@ kubectl logs -n default -l app=my-controller --tail=20 -f
 # 输出:
 # Pod my-controller-7d8f9b5c6-def456: Became the leader!
 ```
-
 ## 4.2 案例 2: 通过 Event 调试 Pod 启动失败
 
 **场景**: Pod 一直处于 Pending 状态
@@ -872,7 +877,17 @@ kubectl logs -n default -l app=my-controller --tail=20 -f
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 Pod 基本信息
 kubectl get pod my-app -n production
 # 输出:
@@ -907,7 +922,6 @@ kubectl edit pod my-app -n production
 # 方案 2: 扩容集群节点
 # 或 方案 3: 驱逐低优先级 Pod
 ```
-
 ## 4.3 案例 3: 节点维护 - 添加污点驱逐 Pod
 
 **场景**: 需要维护 node2,将所有 Pod 迁移到其他节点
@@ -916,7 +930,17 @@ kubectl edit pod my-app -n production
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 标记节点为不可调度(禁止新 Pod 调度)
 kubectl cordon node2
 # 输出:
@@ -945,13 +969,22 @@ kubectl uncordon node2                                  # 恢复调度
 # node/node2 untainted
 # node/node2 uncordoned
 ```
-
 **优雅驱逐(Drain)**:
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 使用 kubectl drain 命令(相当于 cordon + taint + 等待 Pod 终止)
 kubectl drain node2 --ignore-daemonsets --delete-emptydir-data
 # 参数说明:
@@ -963,7 +996,6 @@ kubectl drain node2 --ignore-daemonsets --delete-emptydir-data
 # 恢复调度
 kubectl uncordon node2
 ```
-
 ## 4.4 案例 4: 节点标签管理 - 按硬件类型调度
 
 **场景**: 集群有 GPU 节点和 CPU 节点,AI 训练 Pod 需要调度到 GPU 节点
@@ -972,7 +1004,8 @@ kubectl uncordon node2
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为 GPU 节点添加标签
 kubectl label nodes gpu-node1 accelerator=nvidia-tesla-v100
 kubectl label nodes gpu-node2 accelerator=nvidia-tesla-v100
@@ -1007,7 +1040,6 @@ kubectl get pod ai-training -o wide
 # NAME          READY   STATUS    NODE
 # ai-training   1/1     Running   gpu-node1
 ```
-
 **使用 Node Affinity(更灵活)**:
 
 ```yaml
@@ -1055,7 +1087,8 @@ spec:
 
 **场景**: 监控节点是否在线(通过 Lease 比 Node Status 更实时)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的 Lease
 kubectl get leases -n kube-node-lease
 
@@ -1077,7 +1110,6 @@ kubectl get lease node1 -n kube-node-lease -o yaml
 # 当前时间 - renewTime < leaseDurationSeconds → 在线
 # 当前时间 - renewTime >= leaseDurationSeconds → 离线(NotReady)
 ```
-
 **Prometheus 监控查询(假设有 kube-state-metrics)**:
 
 ```promql
@@ -1099,7 +1131,8 @@ time() - kube_lease_renew_time{namespace="kube-node-lease"}
 
 **症状**: Lease.spec.leaseTransitions 不断增加,控制器日志频繁出现 "lost leadership"
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Lease 切换次数
 kubectl get lease my-controller -n default -o jsonpath='{.spec.leaseTransitions}'
 # 输出: 50 (异常高,正常应该 < 5)
@@ -1121,12 +1154,12 @@ kubectl get lease my-controller -n default -o jsonpath='{.spec.leaseDurationSeco
 # 2. 检查 Pod 健康检查配置
 # 3. 检查 API Server 负载(是否限流)
 ```
-
 ## 5.2 节点 NotReady 但 Lease 正常
 
 **症状**: Node Condition 为 NotReady,但 Lease 仍在更新
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点状态
 kubectl get nodes
 # 输出:
@@ -1157,7 +1190,6 @@ kubectl logs -n kube-system -l app=calico-node --field-selector spec.nodeName=no
 # 4. 检查 Kubelet 日志
 journalctl -u kubelet -n 100
 ```
-
 ## 5.3 Event 过多导致 etcd 压力
 
 **症状**: etcd 存储空间增长过快,大量 Event 对象
@@ -1166,7 +1198,17 @@ journalctl -u kubelet -n 100
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 Event 数量
 kubectl get events --all-namespaces | wc -l
 # 输出: 10000 (过多!)
@@ -1192,12 +1234,12 @@ limits:
 # 3. 清理历史 Event(临时方案)
 kubectl delete events --all-namespaces --field-selector reason=FailedScheduling,type=Warning  # ⚠️ 批量删除，波及面大
 ```
-
 ## 5.4 Pod 调度失败 - 无可用节点
 
 **症状**: Pod Pending,Event 显示 "0/5 nodes are available"
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Event 详细信息
 kubectl describe pod my-pod -n default | grep -A 10 "Events:"
 # 输出:
@@ -1227,13 +1269,13 @@ spec:
 
 # 方案 3: 扩容集群节点
 ```
-
 ## 5.5 调试技巧
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 实时监听 Event
 kubectl get events --all-namespaces --watch
 
@@ -1256,7 +1298,6 @@ kubectl describe nodes | grep -A 5 "Allocated resources:"
 kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 
 ```
-
 ---
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
@@ -1327,3 +1368,5 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

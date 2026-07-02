@@ -44,6 +44,11 @@ prerequisites:
 - kafka-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # CNI 网络插件故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-03 | **难度**: 高级
@@ -109,7 +114,8 @@ prerequisites:
 
 ### 1.3 专家观测工具链（Expert's Toolbox）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 专家级：在不进入 Pod 的情况下抓取 Pod 网卡流量
 # 先通过 crictl 找到 PID，再使用 nsenter
 pid=$(crictl inspect <container-id> | jq '.info.pid')
@@ -121,7 +127,6 @@ ip route get <TargetPodIP> from <SourcePodIP> iif <VethName>
 # 专家级：验证 VXLAN 封装报文
 tcpdump -i eth0 udp port 4789 -vv -X
 ```
-
 ---
 
 ## 问题现象与影响分析
@@ -158,7 +163,8 @@ tcpdump -i eth0 udp port 4789 -vv -X
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CNI 配置目录
 ls -la /etc/cni/net.d/
 cat /etc/cni/net.d/*.conf*
@@ -189,7 +195,6 @@ ip addr
 ip route
 bridge fdb show
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -453,7 +458,8 @@ CNI（Container Network Interface）负责为 Pod 配置网络。深入理解其
 
 #### 2.1.5 跨节点网络排查工具链
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 路径追踪
 # 查看数据包如何从源 Pod 到目标 Pod
 ip route get <dst-pod-ip> from <src-pod-ip>
@@ -475,7 +481,6 @@ for src in $(kubectl get pods -A -o jsonpath='{.items[*].status.podIP}'); do
   done
 done
 ```
-
 ### 2.2 排查步骤和具体命令
 
 #### 2.2.1 第一步：检查 CNI 安装
@@ -502,7 +507,8 @@ ps aux | grep kubelet | grep cni
 
 #### 2.2.2 第二步：检查 CNI 组件状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Calico
 kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
 kubectl get pods -n kube-system -l k8s-app=calico-kube-controllers -o wide
@@ -518,10 +524,10 @@ cilium status
 # 检查 DaemonSet 状态
 kubectl get daemonset -n kube-system
 ```
-
 #### 2.2.3 第三步：检查 Pod 网络
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod IP 分配
 kubectl get pods -A -o wide
 
@@ -540,7 +546,6 @@ kubectl exec -it <pod-a> -- ping <pod-b-ip>
 kubectl get pods -o wide -A | grep -v <current-node>
 kubectl exec -it <pod-a> -- ping <pod-on-other-node-ip>
 ```
-
 #### 2.2.4 第四步：检查网络底层
 
 ```bash
@@ -568,7 +573,8 @@ bridge fdb show dev flannel.1
 
 #### 2.2.5 第五步：检查 IPAM
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Calico IPAM
 calicoctl ipam show
 calicoctl ipam check
@@ -583,10 +589,10 @@ calicoctl get workloadendpoint -A
 cat /run/flannel/subnet.env
 etcdctl get /coreos.com/network/subnets --prefix
 ```
-
 #### 2.2.6 第六步：抓包分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上抓包
 tcpdump -i any host <pod-ip> -nn
 
@@ -601,7 +607,6 @@ tcpdump -i any port 4789 -nn  # VXLAN 端口
 pid=$(crictl inspect <container-id> | jq '.info.pid')
 nsenter -t $pid -n tcpdump -i eth0 -nn
 ```
-
 ### 2.3 排查注意事项
 
 | 注意项 | 说明 | 建议 |
@@ -619,7 +624,8 @@ nsenter -t $pid -n tcpdump -i eth0 -nn
 
 #### 3.1.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 CNI 配置目录
 ls -la /etc/cni/net.d/
 
@@ -645,7 +651,6 @@ kubectl rollout status daemonset -n kube-system calico-node
 # 步骤 6：验证配置生成
 ls -la /etc/cni/net.d/
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -668,7 +673,8 @@ ls -la /etc/cni/net.d/
 
 #### 3.2.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查 CNI 日志
 kubectl logs -n kube-system -l k8s-app=calico-node -c calico-node | grep -i "ip"
 
@@ -696,7 +702,6 @@ calicoctl ipam release --ip=<unused-ip>
 # 步骤 6：验证 IP 分配
 kubectl get pods -A -o wide | grep Pending
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -719,7 +724,8 @@ kubectl get pods -A -o wide | grep Pending
 
 #### 3.3.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题范围
 kubectl get pods -o wide -A
 # 找到不同节点的 Pod 测试
@@ -757,7 +763,6 @@ iptables -A INPUT -p tcp --dport 179 -j ACCEPT
 # 步骤 8：验证修复
 kubectl exec -it <pod-a> -- ping <pod-on-other-node-ip>
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -780,7 +785,17 @@ kubectl exec -it <pod-a> -- ping <pod-on-other-node-ip>
 
 #### 3.4.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认 MTU 问题
 # 大包测试
 kubectl exec -it <pod-a> -- ping -s 1400 <pod-b-ip>
@@ -809,7 +824,6 @@ kubectl rollout restart daemonset -n kube-system calico-node
 # 步骤 6：验证修复
 kubectl exec -it <pod-a> -- ping -s 1400 <pod-b-ip>
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1627,3 +1641,6 @@ sysctl -p /etc/sysctl.d/99-kubernetes.conf
 - [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

@@ -71,6 +71,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 33 - 网络故障诊断与链路排查 (Network Troubleshooting & Data Path Diagnosis)
@@ -178,7 +183,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试DNS解析
 kubectl exec -it netshoot -- nslookup kubernetes.default
 kubectl exec -it netshoot -- nslookup google.com
@@ -199,13 +205,13 @@ kubectl exec -it netshoot -- cat /etc/resolv.conf | grep ndots
 # ndots:5 会导致先尝试 search 域（最多4次超时后才查外部域名）
 # 解决: 使用 FQDN（末尾加 .）或设置 dnsConfig ndots:2
 ```
-
 ### 3.2 连通性诊断 - 按场景
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Pod-to-Pod（同节点）==========
 kubectl exec -it netshoot -- ping -c 3 <target-pod-ip>
 # 不通 → 检查 veth pair 状态和 bridge/路由
@@ -233,7 +239,6 @@ ping -c 5 <other-node-ip>
 traceroute -n <other-node-ip>
 # 不通 → 检查安全组和物理网络
 ```
-
 ### 3.3 CNI 诊断
 
 ```bash
@@ -256,7 +261,8 @@ ls /opt/cni/bin/
 
 ### 3.4 kube-proxy 与 Service 诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kube-proxy 模式
 kubectl get cm kube-proxy -n kube-system -o yaml | grep mode
 
@@ -272,10 +278,10 @@ ipvsadm -Ln --stats
 # Endpoints 检查
 kubectl get endpoints <svc-name> -n <namespace>
 ```
-
 ### 3.5 NetworkPolicy 诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看策略
 kubectl get networkpolicy -A -o wide
 kubectl describe networkpolicy <name> -n <namespace>
@@ -289,7 +295,6 @@ cilium policy get
 cilium monitor --type policy-verdict   # 实时策略判定
 hubble observe --verdict DROPPED       # 被策略丢弃的流量
 ```
-
 ---
 
 <!-- chunk: 4. 多跳抓包与 iptables TRACE (Multi-Hop Capture & TRACE) -->
@@ -302,7 +307,8 @@ hubble observe --verdict DROPPED       # 被策略丢弃的流量
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 源节点 ==========
 # 跳1: Pod 的 veth pair
 tcpdump -i <src-veth> -nn host <dst-pod-ip> -c 20 &
@@ -324,13 +330,13 @@ kubectl exec -it <src-pod> -- ping -c 5 <dst-pod-ip>
 
 # 对比: 哪一跳丢失 → 定位问题层
 ```
-
 ### 4.2 定位 Pod 对应的 veth
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法1: 通过 Pod 内 ifindex
 POD_IFINDEX=$(kubectl exec -it <pod> -- cat /sys/class/net/eth0/iflink 2>/dev/null | tr -d '\r')
 ip link show | grep "^${POD_IFINDEX}:"
@@ -340,7 +346,6 @@ CONTAINER_ID=$(crictl ps --name <container> -q)
 PID=$(crictl inspect $CONTAINER_ID | jq '.info.pid')
 nsenter -t $PID -n ip link show eth0
 ```
-
 ### 4.3 iptables TRACE
 
 ```bash
@@ -396,7 +401,8 @@ echo "conntrack: $CT_C / $CT_M ($((CT_C*100/CT_M))%)"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查各接口 MTU
 ip link show | grep mtu
 
@@ -412,13 +418,13 @@ kubectl exec -it netshoot -- ping -M do -s 1422 <target>  # 1450 MTU VXLAN
 kubectl exec -it netshoot -- ping -M do -s 1450 <target>
 kubectl exec -it netshoot -- ping -M do -s 1440 <target>
 ```
-
 ### 6.2 性能测试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 带宽测试 (iperf3)
 # 服务端:
 kubectl exec -it iperf-server -- iperf3 -s
@@ -433,7 +439,6 @@ kubectl exec -it netshoot -- hping3 -S -p 80 -c 10 <target>
 # 并发连接测试
 kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 ```
-
 ---
 
 <!-- chunk: 7. 常见问题速查表 (Quick Reference) -->
@@ -494,3 +499,6 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

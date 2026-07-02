@@ -55,6 +55,11 @@ cross_refs:
   label: '相关知识域: domain-04-storage-data'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 15 - 存储灾备与迁移策略
@@ -164,7 +169,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # automated-backup-manager.sh
 
@@ -199,7 +205,6 @@ case "$(date +%M)" in
     ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 灾难恢复流程 -->
@@ -233,7 +238,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # manual-recovery-workflow.sh
 
@@ -304,7 +310,6 @@ start_applications() {
 
 manual_recovery
 ```
-
 ---
 
 <!-- chunk: 存储迁移方案 -->
@@ -339,7 +344,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # storage-migration-executor.sh
 
@@ -380,7 +386,6 @@ kubectl get pvc -n production -o jsonpath='{.items[*].metadata.name}' | \
     migrate_pvc $pvc
   done
 ```
-
 ---
 
 <!-- chunk: 跨集群数据同步 -->
@@ -496,7 +501,17 @@ spec:
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # dr-drill-executor.sh
 
@@ -573,7 +588,6 @@ EOF
 
 execute_dr_drill
 ```
-
 ---
 
 <!-- chunk: RTO/RPO管理 -->
@@ -624,7 +638,8 @@ spec:
 
 ### SLA报告生成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # sla-report-generator.sh
 
@@ -686,7 +701,6 @@ EOF
 
 generate_sla_report
 ```
-
 ---
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)
 
@@ -719,3 +733,6 @@ generate_sla_report
 
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

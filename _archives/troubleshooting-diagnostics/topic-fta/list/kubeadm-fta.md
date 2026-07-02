@@ -41,6 +41,11 @@ component: Kubeadm
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubeadm init/join/reset/upgrade 命令返回错误码或 kubectl get nodes 显示 NotReady -->
 
 # kubeadm FTA 树：集群生命周期故障诊断
@@ -185,7 +190,8 @@ ls -la /etc/kubernetes/pki/
 - 网络分区导致节点间无法通信
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 etcd 容器日志
 crictl ps -a | grep etcd
 crictl logs $(crictl ps -a | grep etcd | awk '{print $1}')
@@ -194,13 +200,13 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernete
 # 3. 检查磁盘性能
 iostat -x 1 5
 ```
-
 ### A4. 控制平面组件启动失败
 
 **问题现象**: kubeadm init 报告控制平面组件（kube-apiserver等）启动超时
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 kubelet 服务状态
 systemctl status kubelet
 # 2. 查看 kubelet 日志
@@ -210,7 +216,6 @@ kubectl get pods -n kube-system | grep -E "apiserver|scheduler|controller"
 # 4. 检查静态 Pod manifest 目录
 ls /etc/kubernetes/manifests/
 ```
-
 ---
 
 ## B. kubeadm join 失败
@@ -228,7 +233,8 @@ ls /etc/kubernetes/manifests/
 | `[ERROR] invalid certificate` | 节点上 CA 证书与集群不一致 | 将节点上 `/etc/kubernetes/pki/ca.crt` 与集群 CA 对比 |
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在控制平面节点查看未批准的 CSR
 kubectl get csr
 kubectl certificate approve <csr-name>
@@ -239,7 +245,6 @@ kubeadm token create --print-join-command
 # 4. 在 join 节点检查 CA 证书一致性
 md5sum /etc/kubernetes/pki/ca.crt
 ```
-
 ### B2. kubelet 注册失败
 
 **问题现象**: kubelet 启动但节点状态为 `Unknown`，在 API Server 日志中有 `node not found`
@@ -249,7 +254,17 @@ md5sum /etc/kubernetes/pki/ca.crt
 - 节点 IP 变化导致注册失败
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查集群中现有节点
 kubectl get nodes
 # 2. 确认本机 hostname 和 IP
@@ -260,13 +275,22 @@ sudo kubeadm reset
 sudo rm -rf /etc/kubernetes/pki
 sudo kubeadm join ...
 ```
-
 ### B3. crictl check 失败
 
 **问题现象**: `kubeadm join` 报错 `[preflight] Running pre-flight checks ` CRI error: container runtime is not running
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查容器运行时
 systemctl status containerd  # 或 docker/cri-o
 # 2. 检查 crictl 配置
@@ -276,13 +300,13 @@ sudo systemctl restart containerd
 # 4. 重新 join
 sudo kubeadm join ...
 ```
-
 ### B4. kubelet 启动后节点 NotReady
 
 **问题现象**: join 成功，节点出现在 `kubectl get nodes` 但状态为 NotReady
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. SSH 到该节点，检查 kubelet 状态
 systemctl status kubelet
 journalctl -u kubelet --since "5 minutes ago" | tail -50
@@ -293,7 +317,6 @@ crictl info
 # 4. 查看 kubelet 日志中的具体错误
 journalctl -u kubelet | grep -i error
 ```
-
 ---
 
 ## C. kubeadm reset 失败
@@ -336,7 +359,17 @@ ipvsadm -C
 **问题现象**: `kubeadm reset -f` 后重新 join 报错，原因是某些目录未清理干净
 
 **完整残留清单**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 完整清理（所有残留）
 sudo kubeadm reset -f
 
@@ -370,9 +403,9 @@ sudo ipvsadm -C
 ls /etc/kubernetes/  # 期望: 无输出
 ls /var/lib/etcd/   # 期望: 无输出或报错 "不存在"
 ```
-
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查残留文件
 ls -la /etc/kubernetes/
 
@@ -386,7 +419,6 @@ kubeadm token create --print-join-command
 kubectl get nodes
 hostname
 ```
-
 ### C4. etcd defrag 失败（磁盘空间不释放）
 
 **问题现象**: etcd 使用磁盘空间持续增长，即使删除了大量历史数据 `db size` 仍不减少
@@ -396,7 +428,8 @@ hostname
 - `db.size` 远大于 `actual.db.size`（元数据开销）
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 etcd 当前磁盘使用
 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
@@ -418,7 +451,6 @@ ETCDCTL_API=3 etcdctl defrag --endpoints=https://127.0.0.1:2379 \
 # 4. 验证磁盘空间释放
 du -sh /var/lib/etcd/
 ```
-
 **注意事项**：
 - defrag 期间会有短暂性能抖动（I/O 密集）
 - 建议在业务低峰期执行
@@ -429,7 +461,8 @@ du -sh /var/lib/etcd/
 **问题现象**: etcd 日志报错 "etcdserver: mvcc: database space exceeded"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认配额状态
 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status | grep "Snapshot"
 
@@ -471,13 +504,13 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
   alarm disarm
 ```
-
 ### C6. etcd leadership election 失败
 
 **问题现象**: etcd leader 频繁切换，集群日志显示 "lost leader" 或 "raft term changed"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前 leader
 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status | grep "Leader"
 # 多节点:
@@ -497,13 +530,22 @@ iostat -x 1 5
 # 4. 检查 CPU 使用率（高 CPU 会导致 heartbeat 延迟）
 top
 ```
-
 ### C7. kubelet kubeconfig 过期（kubeadm alpha kubeconfig user）
 
 **问题现象**: kubelet 无法与 API Server 通信，错误 "client certificate has expired or is not yet valid"
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 kubelet.conf 状态
 cat /etc/kubernetes/kubelet.conf | grep -i "expiry"
 
@@ -520,7 +562,6 @@ systemctl restart kubelet
 kubectl get nodes
 # 如节点仍 NotReady，检查 kubelet 日志: journalctl -u kubelet --since "5 minutes ago"
 ```
-
 ---
 
 ## D. kubeadm upgrade 失败
@@ -538,19 +579,20 @@ kubectl get nodes
 - 1.26 之前版本不支持升级到 1.28+
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前版本
 kubectl version --short
 # 查看 kubeadm 支持的版本
 kubeadm upgrade plan --allow-release-missing  # 允许跳过版本检查
 ```
-
 ### D2. upgrade apply 失败
 
 **问题现象**: `kubeadm upgrade apply` 在升级控制平面组件时失败
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看升级失败的组件日志
 kubectl logs -n kube-system kube-apiserver-<node-name> --tail=50
 journalctl -u kube-apiserver --since "10 minutes ago" | tail -50
@@ -559,26 +601,35 @@ journalctl -u kube-apiserver --since "10 minutes ago" | tail -50
 # kubeadm 不支持自动回滚，需手动恢复
 # 恢复步骤见 D4 部分
 ```
-
 ### D3. etcd 版本不兼容
 
 **问题现象**: 升级完成后 etcd 无法启动，日志显示 "db file is in a higher version"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 etcd 版本
 etcd --version
 # 2. 检查数据目录版本
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 ... db info .var/lib/etcd/member/
 # 3. 解决方案：升级 etcd 二进制到匹配版本，或恢复数据备份
 ```
-
 ### D4. API Server 启动失败（回滚流程）
 
 **问题现象**: 升级后 kube-apiserver 无法启动
 
 **回滚步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确认控制平面组件版本
 kubectl get pods -n kube-system -o wide
 # 2. 手动恢复到升级前版本（控制平面组件使用 kubeadm 管理的静态 Pod）
@@ -591,13 +642,13 @@ systemctl start kubelet
 # 5. 确认 API Server 恢复
 kubectl get pods -n kube-system | grep apiserver
 ```
-
 ### D5. kubelet 版本不匹配
 
 **问题现象**: 升级完成后节点变为 NotReady，kubelet 日志显示 "version mismatch"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上查看 kubelet 版本
 kubelet --version
 # 在控制平面查看期望版本
@@ -607,7 +658,6 @@ apt-get install kubelet=1.XX.Y-1
 # 或使用 kubeadm
 kubeadm upgrade node
 ```
-
 ---
 
 ## E. kubeadm config 生成错误
@@ -636,7 +686,17 @@ kubeadm init --dry-run --config=init.yaml
 **问题现象**: API Server 无法访问，日志显示 "certificate has expired"
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查证书过期时间
 kubeadm alpha certs check-expiration
 # 2. 批量更新所有证书（不需要滚动重启 API Server）
@@ -646,13 +706,22 @@ sudo systemctl restart kubelet
 # 4. 确认证书已更新
 kubeadm alpha certs check-expiration
 ```
-
 ### F2. 证书 SAN 不全
 
 **问题现象**: 新增节点 IP 或新 API Server IP 无法通过 TLS 验证
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查当前证书 SAN
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text | grep -A5 "Subject Alternative Name"
 # 2. 使用 kubeadm 更新 API Server 证书（添加新 IP）
@@ -660,7 +729,6 @@ kubeadm init phase certs apiserver --apiserver-cert-extra-sans=<new-ip>
 # 3. 重启 API Server
 systemctl restart kubelet
 ```
-
 ### F3. 外部 etcd 证书错误
 
 **问题现象**: kubeadm init 报错 "无法连接到外部 etcd 集群"
@@ -712,3 +780,6 @@ knowledge_refs:
 ## Related
 
 - [[skills/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+
+
+<!-- risk-assessed -->

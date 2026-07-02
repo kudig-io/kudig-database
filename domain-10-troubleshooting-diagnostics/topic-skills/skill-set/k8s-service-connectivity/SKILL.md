@@ -44,6 +44,11 @@ related_skills:
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Service|Service]] 连通性问题诊断与修复
@@ -431,7 +436,8 @@ ip route show | grep flannel
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Envoy sidecar 配置
 istioctl proxy-config cluster <pod> -n <namespace>
 
@@ -450,7 +456,6 @@ istioctl authn tls-check <pod>.<namespace>.svc.cluster.local
 # 抓包 Envoy 流量
 kubectl exec <pod> -c istio-proxy -- tcpdump -i lo port 15001 -w /tmp/envoy.pcap
 ```
-
 ### Linkerd 常见问题
 
 ```bash
@@ -490,7 +495,8 @@ linkerd identity deployment/<name> -n <namespace>
 
 ### MetalLB 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 MetalLB speaker Pod 状态
 kubectl get pods -n metallb-system
 
@@ -509,7 +515,6 @@ kubectl logs -n metallb-system -l app=metallb -c speaker
 # 检查 ARP 响应（L2 模式）
 arping -I <iface> <lb-ip>
 ```
-
 **MetalLB 常见问题**：
 - **L2 模式**：多个 speaker 可能同时宣告 IP（需确保节点间二层可达）
 - **ARP 冲突**：同一网段其他设备可能占用 MetalLB 分配的 IP
@@ -560,3 +565,6 @@ arping -I <iface> <lb-ip>
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

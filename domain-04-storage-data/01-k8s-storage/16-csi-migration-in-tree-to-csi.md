@@ -61,6 +61,11 @@ cross_refs:
   label: '故障树: csi'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 16 - CSI 迁移：从 In-Tree 存储插件到 CSI
@@ -103,6 +108,7 @@ Kubernetes 自 v1.26 起正式移除了以下 In-Tree 存储插件：
 ### 迁移时间线
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 v1.14 (2019) ─── CSI Migration Alpha ─── feature gate: CSIMigration
      │
 v1.17 (2020) ─── CSI Migration Beta ─── 部分插件默认开启
@@ -115,7 +121,6 @@ v1.29 (2024) ─── Portworx/StorageOS 移除
      │
 v1.32 (2026) ─── 当前 ─── 所有主流存储均已 CSI 化
 ```
-
 ### 迁移的好处
 
 | 维度 | In-Tree 插件 | CSI 驱动 |
@@ -134,6 +139,7 @@ v1.32 (2026) ─── 当前 ─── 所有主流存储均已 CSI 化
 ### CSI Migration 工作流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                  迁移前 (In-Tree)
                  ═════════════════
     PVC ──→ StorageClass(provisioner: kubernetes.io/aws-ebs)
@@ -157,7 +163,6 @@ v1.32 (2026) ─── 当前 ─── 所有主流存储均已 CSI 化
                      ▼
                  AWS EBS Volume
 ```
-
 ### 关键特性门控
 
 | Feature Gate | 默认状态 | 说明 |
@@ -305,7 +310,8 @@ parameters:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # csi-migration-assessment.sh - CSI 迁移前评估工具
 
@@ -367,7 +373,6 @@ echo "=========================================="
 echo "评估完成"
 echo "=========================================="
 ```
-
 ---
 
 <!-- chunk: 迁移操作步骤 -->
@@ -393,7 +398,8 @@ bash csi-migration-assessment.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # AWS EBS CSI 驱动安装示例
 helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
 helm repo update
@@ -403,7 +409,6 @@ helm upgrade --install aws-ebs-csi-driver \
   --set controller.serviceAccount.create=true \
   --set node.serviceAccount.create=true
 ```
-
 #### 阶段 3: 确认 Feature Gate 已启用
 
 ```bash
@@ -438,7 +443,8 @@ allowVolumeExpansion: true
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: 新 PVC 使用新 SC（推荐渐进式）
 # 仅修改应用 Deployment 中的 storageClassName
 
@@ -449,7 +455,6 @@ kubectl annotate storageclass gp3-csi storageclass.kubernetes.io/is-default-clas
 # 已绑定的 PVC 无需修改（CSI Migration 自动翻译）
 # 仅新的 PVC 会使用新 StorageClass
 ```
-
 ---
 
 <!-- chunk: 回滚方案 -->
@@ -459,7 +464,17 @@ kubectl annotate storageclass gp3-csi storageclass.kubernetes.io/is-default-clas
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果迁移后出现问题，回滚步骤:
 
 # 1. 将新 PVC 切回 In-Tree StorageClass
@@ -478,7 +493,6 @@ systemctl restart kubelet
 # 注意: v1.26+ In-Tree 代码已移除，无法回滚到 In-Tree 插件
 # 必须确保 CSI 驱动正常运行
 ```
-
 ---
 
 <!-- chunk: 迁移验证脚本 -->
@@ -489,7 +503,17 @@ systemctl restart kubelet
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # csi-migration-verify.sh - 迁移后验证工具
 
@@ -584,7 +608,6 @@ echo "=========================================="
 echo "验证完成"
 echo "=========================================="
 ```
-
 ---
 
 <!-- chunk: 常见问题与排障 -->
@@ -602,7 +625,8 @@ echo "=========================================="
 
 ### In-Tree 到 CSI 参数映射
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS EBS 参数映射
 # In-Tree                    → CSI
 # type: gp2                  → type: gp2 (不变)
@@ -622,7 +646,6 @@ echo "=========================================="
 # type: pd-ssd               → type: pd-ssd (不变)
 # replication-type: none     → replication-type: none (不变)
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->
@@ -649,3 +672,6 @@ echo "=========================================="
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

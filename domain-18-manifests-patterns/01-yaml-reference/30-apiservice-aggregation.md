@@ -52,6 +52,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 30 - APIService YAML 配置参考
@@ -98,6 +103,7 @@ APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展
 ## 1.3 架构图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │ kubectl / 客户端                                                │
 └────────────────────┬────────────────────────────────────────────┘
@@ -123,7 +129,6 @@ APIService 是 Kubernetes 的**聚合层(Aggregation Layer)**机制,允许扩展
 │  - 自定义存储(内存、外部 DB、外部 API)                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 完整字段说明 -->## 2. 完整字段说明
@@ -361,6 +366,7 @@ kubectl get apiservices | grep -v '<none>'
 ## 4.1 API 聚合层路由
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 客户端请求 (kubectl top nodes)
     ▼
 ┌─────────────────────────────────────────────────────────────────┐
@@ -397,7 +403,6 @@ kubectl get apiservices | grep -v '<none>'
 │    - 透明代理(客户端无感知后端 Service 存在)                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ## 4.2 优先级解析
 
 当多个 APIService 定义相同的 group/version 时(极少见),优先级规则:
@@ -442,7 +447,8 @@ spec:
 
 APIService 会持续监控后端 Service 的可用性:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 APIService 状态
 kubectl get apiservices v1beta1.metrics.k8s.io -o yaml
 
@@ -465,7 +471,6 @@ status:
       reason: ServiceNotFound
       message: service/metrics-server in "kube-system" is not ready
 ```
-
 **健康检查流程**:
 
 1. **连接检查**: 每 10 秒尝试连接后端 Service 的 443 端口
@@ -484,7 +489,8 @@ status:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成 CA 证书
 openssl req -x509 -newkey rsa:4096 -nodes -keyout ca.key -out ca.crt \
   -subj "/CN=metrics-server-ca" -days 3650
@@ -517,7 +523,6 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
 kubectl create secret tls metrics-server-certs \
   --cert=server.crt --key=server.key -n kube-system
 ```
-
 **2. 部署 Metrics Server**
 
 ```yaml
@@ -744,7 +749,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用所有资源
 kubectl apply -f metrics-server-rbac.yaml
 kubectl apply -f metrics-server-deployment.yaml
@@ -767,7 +773,6 @@ kubectl top nodes
 # 测试 Pod 指标
 kubectl top pods -n kube-system
 ```
-
 ## 5.2 自定义 API Server - Task 资源示例
 
 **场景**: 创建一个自定义 API Server 管理异步任务
@@ -958,7 +963,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Task
 kubectl create -f - <<EOF
 apiVersion: tasks.example.com/v1
@@ -978,7 +984,6 @@ kubectl get tasks my-task -o yaml
 # API 直接访问
 kubectl get --raw /apis/tasks.example.com/v1/namespaces/default/tasks
 ```
-
 ---
 
 <!-- chunk: 6. 故障排查 -->## 6. 故障排查
@@ -987,7 +992,8 @@ kubectl get --raw /apis/tasks.example.com/v1/namespaces/default/tasks
 
 **症状**: `kubectl get apiservices` 显示 `Available=False`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 APIService 状态
 kubectl get apiservices v1beta1.metrics.k8s.io -o yaml
 
@@ -999,13 +1005,13 @@ status:
       reason: ServiceNotFound
       message: service/metrics-server in "kube-system" is not present
 ```
-
 **排查步骤:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查后端 Service 是否存在
 kubectl get svc metrics-server -n kube-system
 
@@ -1022,7 +1028,6 @@ kubectl logs -n kube-system -l k8s-app=metrics-server
 kubectl exec -n kube-system kube-apiserver-xxx -- \
   curl -k https://metrics-server.kube-system.svc:443/healthz
 ```
-
 ## 6.2 TLS 证书验证失败
 
 **症状**: `x509: certificate signed by unknown authority`
@@ -1040,7 +1045,8 @@ E0210 10:00:00.123456 1 controller.go:116] loading OpenAPI spec for "v1beta1.met
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 验证 caBundle 配置
 kubectl get apiservices v1beta1.metrics.k8s.io -o jsonpath='{.spec.caBundle}' | base64 -d | openssl x509 -text
 
@@ -1057,12 +1063,12 @@ kubectl patch apiservice v1beta1.metrics.k8s.io --type=json -p='[
   {"op": "remove", "path": "/spec/caBundle"}
 ]'
 ```
-
 ## 6.3 请求超时
 
 **症状**: `context deadline exceeded`
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查网络连通性
 kubectl run test-curl --image=curlimages/curl --rm -it -- \
   curl -m 5 -k https://metrics-server.kube-system.svc:443/healthz
@@ -1076,12 +1082,12 @@ kubectl get pods -n kube-system -l k8s-app=metrics-server -o jsonpath='{.items[*
 # 查看 kube-apiserver 日志
 kubectl logs -n kube-system kube-apiserver-xxx | grep metrics-server
 ```
-
 ## 6.4 认证失败
 
 **症状**: `User "system:anonymous" cannot get path "/apis/metrics.k8s.io/v1beta1"`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 RBAC 配置
 kubectl get clusterrolebinding | grep metrics-server
 
@@ -1094,10 +1100,10 @@ kubectl get role extension-apiserver-authentication-reader -n kube-system -o yam
 # 确保 RoleBinding 存在
 kubectl get rolebinding metrics-server-auth-reader -n kube-system
 ```
-
 ## 6.5 调试技巧
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 启用 kube-apiserver 详细日志
 # 在 kube-apiserver 启动参数中添加:
 --v=6  # 或更高级别
@@ -1114,7 +1120,6 @@ kubectl get apiservices -w
 # 5. 查看 kube-aggregator 日志
 kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 ```
-
 ---
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
@@ -1166,3 +1171,6 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 - 29-customresourcedefinition
 - 31-api-priority-fairness
 - 32-lease-event-node
+
+
+<!-- risk-assessed -->

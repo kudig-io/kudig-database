@@ -45,6 +45,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -230,7 +235,8 @@ subjects:
 ```
 
 #### 版本升级管理
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 升级前检查
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}{end}'
 kubectl get pods -A | grep -v Running | wc -l  # 检查异常Pod
@@ -242,7 +248,6 @@ kubectl get pods -A | grep -v Running | wc -l  # 检查异常Pod
 4. 验证集群功能
 5. 回滚计划准备
 ```
-
 #### 故障处理流程
 ```
 问题发现 → 影响评估 → 根因分析 → 解决方案制定 → 执行修复 → 验证恢复 → 文档记录
@@ -405,3 +410,6 @@ resource "aws_eks_cluster" "main" {
 - 01-platform-ops-overview
 - 03-capacity-planning-resource-assessment
 - 04-performance-benchmarking-tuning
+
+
+<!-- risk-assessed -->

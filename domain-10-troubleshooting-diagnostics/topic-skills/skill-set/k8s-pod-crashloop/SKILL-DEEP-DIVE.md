@@ -43,6 +43,11 @@ skill_name: Pod CrashLoopBackOff / OOMKilled 深度解析
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod CrashLoopBackOff / OOMKilled 深度解析
@@ -231,27 +236,27 @@ K8s 1.18 引入的 `startupProbe` 专门用于解决启动慢的应用被误判�
 以下命令用于快速定位 Exit Code 和内存问题。每个命令都附带执行目的，避免盲目复制。
 
 **查看容器 Last State 和 Exit Code**。`kubectl describe` 能在不进入容器的情况下告诉我们上一次退出的原因和退出码，是判断根因方向的第一步：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod> -n <ns> | grep -A 6 "Last State"
 ```
-
 **查看上一次崩溃容器的日志**。当前容器可能正在重启，看到的是新实例；`--previous` 才能拿到崩溃前的最后输出：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod> -n <ns> --previous --tail=100
 ```
-
 **对比内存 limits 和实际使用**。这条命令帮助我们判断 OOMKilled 是因为 limits 过低，还是应用内存异常增长：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[0].resources}'
 kubectl top pod <pod> -n <ns>
 ```
-
 **检查 ACR 免密组件状态**。在 ACK 中，镜像拉取失败经常被忽略为 CrashLoopBackOff 的上游原因：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system | grep acr
 kubectl get events -n <ns> --field-selector involvedObject.name=<pod>,reason=Failed | tail -5
 ```
-
 ## 9. 相关链接
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|Pod 异常 FTA 树]]
@@ -262,3 +267,6 @@ kubectl get events -n <ns> --field-selector involvedObject.name=<pod>,reason=Fai
 ## Related
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
+
+
+<!-- risk-assessed -->

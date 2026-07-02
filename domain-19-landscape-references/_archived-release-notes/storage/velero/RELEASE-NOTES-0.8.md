@@ -31,6 +31,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # velero v0.8 Release Notes
@@ -49,3 +54,5 @@ b4707139f0acabfbbc52b61c05dd1eaaf3c659d3f64c0b871f2d4bd998bc16f4  ark-v0.8.3-lin
 c5031f644411b5ba286540b9c742fe4569b0c629f44935e973e85e363b34e66a  ark-v0.8.3-windows-amd64.tar.gz
 7786e4efff3cf51569d1017068fb925d80bbae89fb418fce5c0db8d153d25a8e  CHECKSUM
 ```
+
+<!-- risk-assessed -->

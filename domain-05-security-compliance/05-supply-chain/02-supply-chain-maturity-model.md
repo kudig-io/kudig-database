@@ -55,6 +55,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
@@ -213,7 +218,8 @@ Level 2 能力要求:
 
 **Level 2 实施清单：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # L2 实施 - Dependabot 配置
 cat > .github/dependabot.yml << 'EOF'
 version: 2
@@ -282,7 +288,6 @@ jobs:
           exit-code: '1'
 EOF
 ```
-
 ## 2.3 Level 3 - 已定义级 (Defined)
 
 **特征描述：** 供应链安全实践标准化，在整个组织推广，有明确的流程文档和培训。
@@ -1574,7 +1579,8 @@ metrics:
 
 ## 9.1 L2 快速启动包
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # l2-quickstart.sh
 # 快速实施 L2 级别供应链安全控制
@@ -1678,7 +1684,6 @@ echo "2. 提交 .github/dependabot.yml 到版本控制"
 echo "3. 审查并修复发现的漏洞"
 echo "4. 在 GitHub 仓库设置中启用分支保护"
 ```
-
 ## 9.2 L3 实施检查清单
 
 ```yaml
@@ -1811,7 +1816,8 @@ Google 供应链安全关键实践:
 
 ## 10.2 Sigstore 社区实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Sigstore 在 Kubernetes 项目的实际应用
 
 # Kubernetes 从 v1.24 起所有发布制品经过 Cosign 签名
@@ -1833,7 +1839,6 @@ cosign verify-blob kubectl \
   --certificate-oidc-issuer https://accounts.google.com \
   --certificate-identity krel-staging@k8s-releng-prod.iam.gserviceaccount.com
 ```
-
 ## 10.3 金融行业实践案例
 
 ```yaml
@@ -2216,3 +2221,5 @@ if __name__ == "__main__":
 - 04-sbom-vulnerability-analysis
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

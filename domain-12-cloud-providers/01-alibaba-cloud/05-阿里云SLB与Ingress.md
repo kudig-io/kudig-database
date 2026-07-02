@@ -25,6 +25,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # 阿里云SLB与Ingress
 
@@ -329,7 +334,8 @@ spec:
 
 ### 3.3 健康检查排查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 健康检查远程诊断
 aliyun slb DescribeHealthStatus --LoadBalancerId lb-apsara-xxx --RegionId cn-apsara-local
 kubectl get pods -l app=health-checked-app -o wide
@@ -339,7 +345,6 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
   wget -qO- http://health-checked-app.default.svc.cluster.local:80/health
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
 ```
-
 ---
 
 ## 4. 多可用区SLB与高可用
@@ -437,7 +442,17 @@ spec:
 
 ### 4.4 故障切换流程
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # AZ故障切换
 kubectl cordon $(kubectl get nodes -l topology.kubernetes.io/zone=cn-apsara-local-a -o name)
 kubectl drain $(kubectl get nodes -l topology.kubernetes.io/zone=cn-apsara-local-a -o name) \
@@ -446,14 +461,14 @@ kubectl get pods -l app=multi-az-app -o wide
 aliyun slb DescribeHealthStatus --LoadBalancerId lb-apsara-xxx --RegionId cn-apsara-local
 kubectl uncordon $(kubectl get nodes -l topology.kubernetes.io/zone=cn-apsara-local-a -o name)
 ```
-
 ---
 
 ## 5. 远程诊断流程
 
 ### 5.1 Ingress问题排查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Ingress 远程诊断
 kubectl get pods -n kube-system -l app=nginx-ingress-controller
@@ -464,7 +479,6 @@ kubectl get secrets -A | grep tls
 kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
   wget -qO- http://ingress-nginx.kube-system.svc.cluster.local/healthz
 ```
-
 ### 5.2 常见SLB/Ingress问题
 
 | 症状 | 根因 | 远程处理 |
@@ -494,3 +508,6 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
 - [[entities/deployment.md|Deployment]]
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+
+
+<!-- risk-assessed -->

@@ -46,6 +46,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ﻿# [[Kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
@@ -119,7 +124,8 @@ prerequisites:
 
 ### 1.1 资源查看命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Pod 及其详细信息
 kubectl get pods -A -o wide
 # 执行方式: 在本地执行，通过API Server查询所有命名空间的Pod信息
@@ -226,10 +232,10 @@ kubectl get pods -o custom-columns=\
 # 注意事项: 独立Pod可能没有ownerReference
 # 风险说明: 无风险
 ```
-
 ### 1.2 高级 JSONPath 查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有节点 IP
 kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
 # 执行方式: 通过jsonpath表达式查询节点地址信息
@@ -270,10 +276,10 @@ kubectl get pods -A -o jsonpath='{range .items[?(@.spec.containers[*].image=="ng
 # 注意事项: 镜像名必须完全匹配，包括标签
 # 风险说明: 无风险
 ```
-
 ### 1.3 资源描述与解释
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 详情 (包含事件)
 kubectl describe pod <pod-name>
 
@@ -308,10 +314,10 @@ kubectl explain pod.spec --recursive
 # 查看 CRD 字段
 kubectl explain prometheusrules.spec
 ```
-
 ### 1.4 事件查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前命名空间事件
 kubectl events
 
@@ -333,7 +339,6 @@ kubectl events --for=pod/nginx
 # 组合过滤
 kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 ```
-
 ---
 
 ## 2. 集群管理命令
@@ -354,7 +359,8 @@ kubectl events -A --types=Warning --sort-by='.lastTimestamp' | head -50
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间
 kubectl create namespace <name>
 
@@ -397,7 +403,6 @@ kubectl apply --server-side --force-conflicts -f deployment.yaml
 # 查看差异但不应用
 kubectl diff -f deployment.yaml
 ```
-
 ### 2.2 资源删除命令
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -405,7 +410,17 @@ kubectl diff -f deployment.yaml
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除单个资源
 kubectl delete pod nginx
 
@@ -444,10 +459,10 @@ kubectl delete pods --field-selector=status.phase==Failed -A
 # 删除 Evicted Pod
 kubectl get pods -A | grep Evicted | awk '{print $2 " -n " $1}' | xargs -L1 kubectl delete pod
 ```
-
 ### 2.3 集群信息查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群信息
 kubectl cluster-info
 
@@ -472,7 +487,6 @@ kubectl api-resources --sort-by=name
 # 输出宽格式
 kubectl api-resources -o wide
 ```
-
 ---
 
 ## 3. Pod 调试与交互命令
@@ -494,7 +508,8 @@ kubectl api-resources -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 中执行命令
 kubectl exec <pod-name> -- <command>
 # 执行方式: 通过API Server连接到Pod所在节点的kubelet，再通过CRI与容器运行时通信
@@ -584,10 +599,10 @@ kubectl get pods -l app=nginx -o name | xargs -I {} kubectl exec {} -- nginx -v
 # 注意事项: 确保所有Pod都存在所需命令
 # 风险说明: 批量操作可能影响多个Pod
 ```
-
 ### 3.2 日志查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 日志
 kubectl logs <pod-name>
 
@@ -626,10 +641,10 @@ kubectl logs <pod-name> --limit-bytes=1048576
 # 组合使用
 kubectl logs -f --tail=50 --timestamps <pod-name>
 ```
-
 ### 3.3 文件复制与调试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Pod 复制到本地
 kubectl cp <namespace>/<pod-name>:<path> <local-path>
 kubectl cp default/nginx:/etc/nginx/nginx.conf ./nginx.conf
@@ -666,7 +681,6 @@ kubectl debug <pod-name> -it --image=busybox --share-processes
 # 调试节点
 kubectl debug node/<node-name> -it --image=ubuntu
 ```
-
 ---
 
 ## 4. 资源创建与管理命令
@@ -676,7 +690,17 @@ kubectl debug node/<node-name> -it --image=ubuntu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑资源
 kubectl edit deployment nginx
 # 执行方式: 在本地打开默认编辑器，修改后应用到API Server
@@ -775,13 +799,13 @@ kubectl patch deployment nginx --type='json' -p='[{"op":"add","path":"/spec/temp
 # 注意事项: 需要确保Pod资源足够
 # 风险说明: 添加容器会改变Pod配置，可能影响应用行为
 ```
-
 ### 4.2 资源设置命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像
 kubectl set image deployment/nginx nginx=nginx:1.26
 
@@ -857,7 +881,6 @@ kubectl annotate pods nginx description-
 # 批量添加
 kubectl annotate pods -l app=nginx team=platform
 ```
-
 ---
 
 ## 5. 集群配置参数
@@ -968,7 +991,8 @@ RuntimeClass
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署GPU Operator
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
 helm repo update
@@ -991,7 +1015,6 @@ kubectl get pods -n gpu-operator
 # 查看节点 GPU 标签
 kubectl get nodes -L nvidia.com/gpu.product,nvidia.com/gpu.count,nvidia.com/mig.config
 ```
-
 ### 6.2 GPU 诊断命令
 
 ```bash
@@ -1087,7 +1110,8 @@ nvidia-smi mig -lcip
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Time-Slicing 配置
 kubectl label node gpu-train-01 nvidia.com/device-plugin.config=none
 kubectl label node gpu-infer-01 nvidia.com/device-plugin.config=inference
@@ -1100,7 +1124,6 @@ kubectl label node gpu-node-01 nvidia.com/mig.config="all-1g.10gb"
 # 整卡资源: nvidia.com/gpu: 1
 # MIG 资源: nvidia.com/mig-1g.10gb: 1
 ```
-
 ---
 
 ## 7. AI/ML 工作负载命令
@@ -1110,7 +1133,8 @@ kubectl label node gpu-node-01 nvidia.com/mig.config="all-1g.10gb"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 提交 PyTorchJob
 kubectl apply -f pytorchjob.yaml
 
@@ -1127,13 +1151,13 @@ kubectl logs -f -l pytorch-job-name=<job-name> -c pytorch
 # 弹性训练配置
 # 在 PyTorchJob 中设置 elasticPolicy
 ```
-
 ### 7.2 模型推理服务
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 KServe InferenceService
 kubectl apply -f inference-service.yaml
 
@@ -1154,13 +1178,13 @@ curl -X POST \
   http://<ingress-gateway-ip>/v1/models/<model-name>:predict \
   -d '{"instances": 1.0, 2.0, 5.0}'
 ```
-
 ### 7.3 Spark 数据处理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 提交 Spark Application
 kubectl apply -f spark-application.yaml
 
@@ -1174,7 +1198,6 @@ kubectl get pods -l spark-app-selector=<app-selector>
 # 查看 Spark UI
 kubectl port-forward <driver-pod> 4040:4040
 ```
-
 ---
 
 ## 8. 故障排查工具命令
@@ -1194,7 +1217,8 @@ kubectl port-forward <driver-pod> 4040:4040
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启动 K9s
 k9s
 
@@ -1218,10 +1242,10 @@ kubectl logs <pod-name> -f
 # 进入 Pod 容器
 kubectl exec -it <pod-name> -- bash
 ```
-
 ### 8.2 Netshoot 网络诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时 Netshoot Pod
 kubectl run netshoot --rm -it \
     --image=nicolaka/netshoot \
@@ -1245,7 +1269,6 @@ curl -v http://<service-name>:<port>/healthz
 # 抓包分析
 tcpdump -i eth0 -nn port 80
 ```
-
 ### 8.3 Stern 多 Pod 日志
 
 ```bash
@@ -1273,7 +1296,8 @@ stern --timestamps myapp
 
 ### 8.4 kubectl 插件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 krew
 (
   set -x; cd "$(mktemp -d)" &&
@@ -1301,7 +1325,6 @@ kubectl neat get pod nginx -o yaml   # 清理YAML输出
 kubectl ctx production              # 切换context
 kubectl ns monitoring               # 切换namespace
 ```
-
 ---
 
 ## 9. 安全与认证命令
@@ -1323,7 +1346,8 @@ kubectl ns monitoring               # 切换namespace
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ServiceAccount
 kubectl create serviceaccount <sa-name>
 
@@ -1346,13 +1370,13 @@ kubectl auth can-i get pods --as=system:serviceaccount:default:my-service-accoun
 # 查看用户权限矩阵
 kubectl auth reconcile -f rbac.yaml
 ```
-
 ### 9.2 证书管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 CSR
 kubectl create -f csr.yaml
 
@@ -1374,14 +1398,14 @@ kubectl create token <service-account-name>
 # 指定过期时间
 kubectl create token <sa-name> --duration=24h
 ```
-
 ---
 
 ## 10. 监控与告警命令
 
 ### 10.1 资源监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源使用
 kubectl top nodes
 
@@ -1398,10 +1422,10 @@ kubectl top pods -n <namespace>
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
 kubectl get --raw /apis/metrics.k8s.io/v1beta1/pods
 ```
-
 ### 10.2 事件查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间事件
 kubectl get events -n <namespace>
 
@@ -1417,10 +1441,10 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<resource
 # 查看最近事件
 kubectl get events -n <namespace> --since=1h
 ```
-
 ### 10.3 健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群组件状态
 kubectl get componentstatuses
 
@@ -1437,7 +1461,6 @@ kubectl get pods -n kube-system
 # 检查 API 服务器连接
 kubectl version
 ```
-
 ---
 
 ## 11. 企业级运维命令
@@ -1447,7 +1470,17 @@ kubectl version
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看集群整体健康状态
 kubectl cluster-info dump --output-directory=/tmp/cluster-dump
 
@@ -1466,10 +1499,10 @@ kubectl top pods --all-namespaces | sort -k3 -nr | head -20
 # 集群容量规划分析
 kubectl describe nodes | grep -E "Allocated|Capacity" -A 5
 ```
-
 ### 11.2 GitOps 运维命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Argo CD 应用状态检查
 argocd app list
 argocd app sync <app-name>
@@ -1484,10 +1517,10 @@ flux reconcile kustomization <name>
 argocd app diff <app-name>
 kubectl diff -f <manifest-file>
 ```
-
 ### 11.3 SRE 运维命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # SLI/SLO 状态检查
 prometheus-query 'up{job="kubernetes-pods"}'
 prometheus-query 'histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))'
@@ -1498,12 +1531,12 @@ kubectl get pods -n <namespace> -l app=<app-name> --field-selector=status.phase=
 # 变更风险评估
 kubectl get pods -n <namespace> -o jsonpath='{.items[*].metadata.labels.version}' | tr ' ' '\n' | sort | uniq -c
 ```
-
 ## 12. 多云管理命令
 
 ### 12.1 多云集群管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Cluster API 多集群管理
 clusterctl config cluster multi-cloud-cluster --kubernetes-version v1.28.0
 clusterctl move --to-kubeconfig=./target-cluster.kubeconfig
@@ -1517,13 +1550,13 @@ kubectl get nodes --context=<cluster-context>
 kubectl cost namespace --show-all-resources
 kubectl cost deployment --show-all-resources
 ```
-
 ### 12.2 混合云运维命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 跨云网络连通性测试
 kubectl exec -it <pod-name> -- ping <external-ip>
 kubectl exec -it <pod-name> -- traceroute <destination>
@@ -1534,13 +1567,13 @@ kubectl get pv -o jsonpath='{.items[*].spec.storageClassName}' | tr ' ' '\n' | s
 # 多地域服务部署检查
 kubectl get services --all-namespaces -o jsonpath='{.items[*].metadata.annotations.cross-region}'
 ```
-
 ### 12.3 云资源管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Terraform 状态管理
 terraform state list
 terraform state show <resource-name>
@@ -1555,7 +1588,6 @@ az aks list
 kubectl apply -f multi-cloud-config.yaml --context=<primary-cluster>
 kubectl apply -f multi-cloud-config.yaml --context=<secondary-cluster>
 ```
-
 ## 13. 安全合规命令
 
 ### 13.1 容器安全扫描
@@ -1575,7 +1607,8 @@ anchore-cli image vuln <image-name>:<tag> all
 
 ### 13.2 运行时安全监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Falco 安全事件检查
 kubectl logs -n falco -l app=falco -f
 
@@ -1588,13 +1621,13 @@ sysdig evt.type=open and fd.name contains /etc
 kubectl get constrainttemplates
 kubectl get constraints -A
 ```
-
 ### 13.3 合规性检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CIS 基准检查
 kube-bench run --targets node,policies,managedservices
 
@@ -1605,14 +1638,14 @@ opa eval -i input.json -d policy.rego 'data.main.allow'
 kubectl apply -f compliance-scan.yaml
 kubectl get compliancescans -n compliance
 ```
-
 ### 13.4 密钥管理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # HashiCorp Vault 操作
 vault kv put secret/myapp/config username=admin password=secret
 vault kv get secret/myapp/config
@@ -1625,7 +1658,6 @@ kubectl get secrets -n <namespace> -o jsonpath='{.items[*].metadata.name}'
 # 密钥轮换
 kubectl patch secret <secret-name> -p='{"data":{"password":"'$(echo -n "new-password" | base64)'"}}'
 ```
-
 ### A.1 Pod 配置模板
 
 ```yaml
@@ -1778,7 +1810,8 @@ spec:
 
 ### 11.1 containerd 命令行工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ctr - containerd 原生 CLI
 # 列出命名空间
 ctr namespaces ls
@@ -1821,10 +1854,10 @@ crictl exec -it <container-id> sh
 # 注意事项: 需要在节点上执行，需要相应权限
 # 风险说明: 直接操作容器可能影响Pod状态
 ```
-
 ### 11.2 CRI-O 命令行工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # crictl - CRI 调试工具 (通用)
 export CONTAINER_RUNTIME_ENDPOINT=unix:///var/run/crio/crio.sock
 crictl ps
@@ -1858,7 +1891,6 @@ buildah commit nginx-working-container my-nginx:latest
 # 注意事项: 不受Kubernetes资源限制和策略约束
 # 风险说明: 可能绕过安全策略，影响节点稳定性
 ```
-
 ---
 
 ## 12. CLI 增强工具命令
@@ -1917,7 +1949,8 @@ kube-capacity -o json
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubectl tree - 查看资源依赖树
 kubectl tree deployment myapp
 kubectl tree statefulset mysql
@@ -1960,7 +1993,6 @@ kdele() {
 # 注意事项: 需要正确配置环境和权限
 # 风险说明: 简化操作可能导致误操作
 ```
-
 ---
 
 ## 13. 故障排查工具命令
@@ -1995,7 +2027,8 @@ k9s -c pods -n monitoring
 
 ### 13.2 Netshoot 网络诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 临时 Netshoot Pod
 kubectl run netshoot --rm -it \
     --image=nicolaka/netshoot \
@@ -2025,13 +2058,13 @@ tcpdump -i eth0 -nn port 80
 # 注意事项: 需要相应的网络权限
 # 风险说明: 抓包可能捕获敏感数据
 ```
-
 ### 13.3 DNS 诊断工具
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 基本查询 (在Pod中执行)
 dig @10.96.0.10 nginx.default.svc.cluster.local
 
@@ -2057,13 +2090,13 @@ kubectl exec <pod> -- cat /etc/resolv.conf
 # 注意事项: 需要在Pod网络上下文中执行
 # 风险说明: 无直接风险
 ```
-
 ### 13.4 网络故障排查命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 网络配置
 kubectl exec pod-a -- ip addr
 kubectl exec pod-a -- ip route
@@ -2102,7 +2135,6 @@ kubectl exec <pod> -- nslookup <service-name>.<namespace>
 # 注意事项: 需要有相应节点访问权限
 # 风险说明: 修改网络配置可能影响网络连通性
 ```
-
 ---
 
 ## 14. 集群组件诊断命令
@@ -2113,7 +2145,17 @@ kubectl exec <pod> -- nslookup <service-name>.<namespace>
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 基础操作
 etcdctl put key value                    # 写入
 etcdctl get key                          # 读取
@@ -2142,10 +2184,10 @@ etcdctl alarm disarm                     # 清除告警
 # 注意事项: 需要正确的证书和权限，操作需谨慎
 # 风险说明: 错误操作可能导致集群数据不一致或不可用
 ```
-
 ### 14.2 kubelet 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 状态
 systemctl status kubelet
 journalctl -u kubelet -f --no-pager
@@ -2174,10 +2216,10 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 # 注意事项: 需要节点访问权限
 # 风险说明: 检查操作一般无风险，但需注意API访问安全
 ```
-
 ### 14.3 通用诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 组件状态
 kubectl get --raw='/readyz?verbose'
 
@@ -2230,12 +2272,12 @@ kubectl logs "$POD_NAME" -n "$NAMESPACE" --tail=50 2>/dev/null || echo "无法�
 # 注意事项: 需要适当的API权限
 # 风险说明: 一般检查操作无风险
 ```
-
 ---
 
 ## 15. 存储与CSI诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PVC 状态
 kubectl get pvc -A
 kubectl describe pvc <pvc-name>
@@ -2280,7 +2322,6 @@ kubectl debug node/<node-name> -it --image=busybox -- ls -la /var/lib/kubelet/pl
 # 注意事项: 需要适当权限访问系统命名空间
 # 风险说明: 检查操作一般无风险，但挂载/卸载操作需谨慎
 ```
-
 ---
 
 ## 16. 包管理工具命令
@@ -2291,7 +2332,17 @@ kubectl debug node/<node-name> -it --image=busybox -- ls -la /var/lib/kubelet/pl
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 仓库管理
 helm repo add NAME URL          # 添加仓库
 helm repo update                # 更新索引
@@ -2321,13 +2372,13 @@ helm get values NAME            # 获取 Values
 # 注意事项: 需要适当的RBAC权限
 # 风险说明: 升级操作可能影响正在运行的应用
 ```
-
 ### 16.2 Kustomize 命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 构建
 kustomize build DIR             # 构建 manifests
 kubectl apply -k DIR            # 构建并应用
@@ -2349,7 +2400,6 @@ kustomize create --resources <resource-file>  # 创建kustomization.yaml
 # 注意事项: 需要正确的目录结构和kustomization.yaml文件
 # 风险说明: 无直接风险，但应用后会影响集群状态
 ```
-
 ---
 
 ## 17. 系统级运维命令
@@ -2427,7 +2477,17 @@ rsync --dry-run -avz /source/ /destination/  # 预览操作
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急回滚
 kubectl rollout undo deployment/<name>
 
@@ -2458,7 +2518,6 @@ kubectl get --raw='/healthz/etcd'
 # 注意事项: 这些操作可能影响服务可用性
 # 风险说明: 强制操作可能导致数据丢失或服务中断
 ```
-
 ### 18.2 Pod 故障诊断命令
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -2466,7 +2525,8 @@ kubectl get --raw='/healthz/etcd'
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod诊断
 kubectl describe pod <pod> -n <ns>
 kubectl logs <pod> -n <ns> --previous
@@ -2502,14 +2562,14 @@ kubectl logs -l app=<label> --all-containers
 # 注意事项: 需要适当的权限查看资源
 # 风险说明: 一般诊断操作无风险
 ```
-
 ---
 
 ## 19. 节点维护命令
 
 ### 19.1 节点维护命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查节点磁盘压力
 kubectl describe node <node-name> | grep -A 5 "Allocated resources"
 
@@ -2548,14 +2608,14 @@ ss -tlnp | grep -E "6443|10250|10251|10252"
 # 注意事项: 需要节点访问权限
 # 风险说明: 系统级操作可能影响节点稳定性
 ```
-
 ---
 
 ## 20. 安全扫描与监控命令
 
 ### 20.1 安全扫描工具命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Trivy 镜像扫描
 trivy image nginx:latest                    # 扫描镜像漏洞
 trivy image --severity HIGH,CRITICAL nginx:latest  # 只显示高危和严重漏洞
@@ -2585,7 +2645,6 @@ kubectl get nodes -o yaml | grep -E "(podSecurity|admission)"
 # 注意事项: 扫描可能消耗资源，避免在高峰期运行
 # 风险说明: 扫描本身一般无害，但可能暴露安全问题
 ```
-
 ### 20.2 Falco 运行时安全监控
 
 ```bash
@@ -2617,7 +2676,8 @@ sysdig -c "proc.name=nginx and fd.type=ipv4"      # 监控nginx网络活动
 
 ### 21.1 性能分析命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点性能分析
 kubectl top nodes                          # 查看节点资源使用
 kubectl top pods --all-namespaces        # 查看Pod资源使用
@@ -2639,10 +2699,10 @@ kubectl describe pod <pod-name> | grep -A 5 "Limits|Requests"
 # 注意事项: 需要metrics-server运行
 # 风险说明: 查询操作无风险
 ```
-
 ### 21.2 事件与日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 事件查询
 kubectl get events -A --sort-by='.lastTimestamp'  # 按时间排序查看事件
 kubectl get events --field-selector type=Warning  # 只查看警告事件
@@ -2668,7 +2728,6 @@ kubectl logs -l app=<app-name> --all-containers=true  # 查看带特定标签的
 # 注意事项: 大量日志可能影响性能
 # 风险说明: 查询操作无风险
 ```
-
 ---
 
 ## 常用命令工作流（场景化）
@@ -2680,7 +2739,8 @@ kubectl logs -l app=<app-name> --all-containers=true  # 查看带特定标签的
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署应用
 kubectl apply -f deployment.yaml
 
@@ -2696,13 +2756,13 @@ kubectl get endpoints <service名称>
 # 5. 测试服务连通性
 kubectl run test-curl --rm -it --image=curlimages/curl -- curl http://<service名称>:<端口>/health
 ```
-
 ### 场景2: Pod 故障排查完整流程
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 发现异常 Pod
 kubectl get pods -A | grep -v Running | grep -v Completed
 
@@ -2724,14 +2784,23 @@ kubectl exec <pod名> -- nslookup kubernetes.default
 # 7. 检查容器内网络连通
 kubectl exec <pod名> -- curl -s http://<目标service>:<端口>/health
 ```
-
 ### 场景3: 节点维护（安全驱逐）
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看节点上的 Pod
 kubectl get pods -A --field-selector spec.nodeName=<节点名>
 
@@ -2749,10 +2818,10 @@ kubectl uncordon <节点名>
 # 6. 验证节点状态
 kubectl get node <节点名> -o wide
 ```
-
 ### 场景4: 紧急扩容
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前副本数
 kubectl get deployment <名称> -o wide
 
@@ -2765,13 +2834,13 @@ kubectl rollout status deployment/<名称>
 # 4. 确认所有新 Pod 就绪
 kubectl get pods -l app=<名称> -w
 ```
-
 ### 场景5: 回滚发布
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看发布历史
 kubectl rollout history deployment/<名称>
 
@@ -2787,7 +2856,6 @@ kubectl rollout status deployment/<名称>
 # 5. 确认回滚成功
 kubectl get pods -l app=<名称> -o wide
 ```
-
 ---
 
 ## 22. 总结
@@ -2818,7 +2886,8 @@ kubectl get pods -l app=<名称> -o wide
 
 ### 23.1 kubectl 高级命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubectl events - 事件查询 (v1.26+ GA)
 kubectl events                           # 查看当前命名空间事件
 kubectl events -A                      # 查看所有命名空间事件
@@ -2879,10 +2948,10 @@ kubectl proxy --address=0.0.0.0 --accept-hosts='.*' # 监听所有接口
 # 注意事项: 需要相应的RBAC权限
 # 风险说明: 某些操作如删除、修改配置可能存在风险
 ```
-
 ### 23.2 容器运行时命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # runc 基本操作
 runc create mycontainer              # 创建容器
 runc start mycontainer               # 启动容器
@@ -2964,7 +3033,6 @@ cat /proc/<container-pid>/mountinfo  # 查看挂载信息
 # 注意事项: 需要在节点上执行，需要相应权限
 # 风险说明: 直接操作容器可能影响 Pod 状态
 ```
-
 ### 23.3 CLI 增强工具
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -2972,7 +3040,8 @@ cat /proc/<container-pid>/mountinfo  # 查看挂载信息
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubectx / kubens 快速切换
 kubectx                              # 列出所有上下文
 kubectx production                   # 切换上下文
@@ -3042,7 +3111,6 @@ kubectl krew install tail            # 日志追踪
 # 注意事项: 需要额外安装工具
 # 风险说明: 一般较低，但插件可能存在安全风险
 ```
-
 ### 23.4 生产环境运维脚本
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -3051,7 +3119,17 @@ kubectl krew install tail            # 日志追踪
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 集群健康检查脚本
 kubectl cluster-info                 # 集群基本信息
 kubectl get nodes -o wide            # 节点状态
@@ -3085,10 +3163,19 @@ kubectl get --raw='/healthz?verbose' # 查看 API Server 健康
 # 注意事项: 需要适当的权限和小心验证
 # 风险说明: 自动化脚本可能产生意外结果
 ```
-
 ### 23.5 故障排查工具命令
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # K9s 安装与使用
 # macOS 安装
 brew install derailed/k9s/k9s
@@ -3363,7 +3450,6 @@ kubectl get pods -l 'env notin (dev,test)' # 标签 notin 查询
 # 注意事项: 需要适当的RBAC权限
 # 风险说明: 查询操作一般无风险，但大量查询可能影响API Server性能
 ```
-
 ## 24. 容器运行时配置与管理
 
 ### 24.1 容器运行时配置命令
@@ -3371,7 +3457,17 @@ kubectl get pods -l 'env notin (dev,test)' # 标签 notin 查询
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd 配置管理
 containerd config default > /etc/containerd/config.toml  # 生成默认配置
 systemctl restart containerd                           # 重启 containerd
@@ -3422,10 +3518,10 @@ kubectl get nodes -o wide                           # 查看运行时版本
 # 注意事项: 需要节点访问权限，操作可能影响集群稳定性
 # 风险说明: 错误配置可能导致节点不可用
 ```
-
 ### 24.2 crictl 命令参考
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # crictl 基础命令
 crictl ps -a                           # 列出所有容器
 crictl pods                            # 列出 Pod
@@ -3452,7 +3548,6 @@ EOF
 # 注意事项: 需要在节点上执行，需要相应权限
 # 风险说明: 直接操作容器可能影响Pod状态
 ```
-
 ### 24.3 容器运行时性能对比
 
 | 指标 | containerd | CRI-O | Docker(历史) |
@@ -3512,7 +3607,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Docker到containerd迁移检查
 # 1. 停止kubelet
 systemctl stop kubelet
@@ -3545,8 +3650,6 @@ kubectl get nodes
 # 注意事项: 迁移前确保有备份和回滚方案
 # 风险说明: 迁移过程可能导致节点暂时不可用
 ```
-
-
 ## 总结
 
 本文档提供了全面的Kubernetes命令行参考，涵盖从基础的kubectl命令到高级的故障排查、安全扫描和性能分析工具。每条命令都包含了执行方式、用途、原理、注意事项和风险说明，帮助用户更好地理解和使用这些工具。
@@ -3650,3 +3753,5 @@ kubectl get nodes
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

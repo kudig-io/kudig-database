@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)
@@ -174,7 +179,8 @@ Events:
 
 ### 4.2 排查步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 CNI 配置文件
 ls -la /etc/cni/net.d/
 cat /etc/cni/net.d/10-calico.conflist
@@ -194,7 +200,6 @@ journalctl -u kubelet | grep -i cni
 # 5. 检查 kubelet 日志
 journalctl -u kubelet | grep -i "network plugin"
 ```
-
 ### 4.3 常见原因与解决
 
 | 原因 | 解决方案 |
@@ -211,7 +216,8 @@ journalctl -u kubelet | grep -i "network plugin"
 
 ### 5.1 Calico IPAM
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 IP 池
 kubectl get ippools -o yaml
 
@@ -227,30 +233,29 @@ calicoctl ipam check
 # 释放未使用的 IP
 calicoctl ipam release --ip=10.244.1.100
 ```
-
 ### 5.2 Flannel IPAM
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看子网分配
 cat /run/flannel/subnet.env
 
 # 检查节点子网注解
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.podCIDR}{"\n"}{end}'
 ```
-
 ### 5.3 Terway IPAM
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 ENI IP 分配
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
 
 # 查看节点 ENI 状态
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/allocated-eniips}{"\n"}{end}'
 ```
-
 ---
 
 <!-- chunk: 6. 同节点 Pod 通信问题 -->
@@ -269,7 +274,8 @@ Pod A ──▶ veth ──▶ Bridge/路由 ──▶ veth ──▶ Pod B
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 定位 Pod 对应的 veth ==========
 POD_IFINDEX=$(kubectl exec -it <pod-a> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
 VETH_A=$(ip link show | grep "^${POD_IFINDEX}:" | awk '{print $2}' | tr -d ':@')
@@ -289,13 +295,13 @@ bridge link show | grep $VETH_A
 # Calico:
 ip route show | grep $VETH_A
 ```
-
 ### 6.3 诊断命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 网络配置
 kubectl exec pod-a -- ip addr
 kubectl exec pod-a -- ip route
@@ -314,7 +320,6 @@ tcpdump -i cni0 -n host <pod-a-ip> and host <pod-b-ip>
 # 5. 检查 iptables
 iptables -t filter -L FORWARD -n -v
 ```
-
 ---
 
 <!-- chunk: 7. 跨节点 Pod 通信问题 -->
@@ -411,7 +416,8 @@ ethtool -S eth0 | grep -E "error|drop"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CoreDNS 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
@@ -428,7 +434,6 @@ kubectl exec <pod> -- nslookup <service-name>.<namespace>
 # 5. CoreDNS 日志
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100
 ```
-
 ### 8.2 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -701,3 +706,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

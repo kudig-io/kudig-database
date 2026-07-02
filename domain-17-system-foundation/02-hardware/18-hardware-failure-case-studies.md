@@ -36,6 +36,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -140,7 +145,8 @@ k8s_versions:
 
 ## 诊断过程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查节点状态
 kubectl describe node node-worker-07
 # 发现 Conditions 中 Ready 状态为 Unknown
@@ -175,7 +181,6 @@ ipmitool sel elist | grep -i cpu
 dmidecode -t processor
 # 确认 CPU 2 (物理插槽) 对应逻辑 CPU 12-23
 ```
-
 ## MCE 错误解析
 
 ```yaml
@@ -341,7 +346,8 @@ cat /sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_count
 
 ## 诊断过程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 常规 OOM 排查 (走了弯路)
 kubectl describe pod xxx
 # Reason: OOMKilled
@@ -383,7 +389,6 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
 # Manufacturer: Samsung
 # Serial Number: 123ABC
 ```
-
 ## 根因分析
 
 ```yaml
@@ -405,7 +410,17 @@ dmidecode -t memory | grep -A 16 "CPU0_DIMM_A2"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 临时措施: 隔离节点
 kubectl cordon node-worker-12
 
@@ -418,7 +433,6 @@ kubectl cordon node-worker-12
 # 恢复服务
 kubectl uncordon node-worker-12
 ```
-
 ## 监控改进
 
 ```yaml
@@ -462,7 +476,8 @@ kubectl uncordon node-worker-12
 
 ## 诊断过程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查 etcd 状态
 etcdctl endpoint status --cluster
 # 发现 master-01 的 etcd 无响应
@@ -492,7 +507,6 @@ dmesg | grep nvme
 
 # 结论: NVMe SSD 发生静默问题，导致部分数据损坏
 ```
-
 ## 解决方案
 
 ```yaml
@@ -840,3 +854,6 @@ K8s_硬件问题检查:
 - 17-hardware-error-codes-reference
 - 01-cloud-hardware-architecture
 - 02-server-architecture-principles
+
+
+<!-- risk-assessed -->

@@ -43,6 +43,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Secret 管理 × 存储模型
@@ -114,3 +119,6 @@ API Server → etcd（静态加密）→ kubelet 内存 → 节点 tmpfs → 容
 - [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 - [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
 - [[concepts/consolidation-2026-05-21.md|consolidation-2026-05-21]]
+
+
+<!-- risk-assessed -->

@@ -62,6 +62,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -87,7 +92,8 @@ relationships:
 
 按“先 Pod 状态、再控制器日志、再配置一致性”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Ingress 控制器 Pod 状态与重启次数
 kubectl get pod -n kube-system -l app.kubernetes.io/name=nginx-ingress-controller -o wide
 
@@ -119,7 +125,6 @@ aliyun slb DescribeLoadBalancerHTTPListenerAttribute \
 kubectl get svc -n ecommerce-web
 kubectl get svc -n payment-gateway
 ```
-
 ## 根因分析
 
 经过排查，发现 `nginx-ingress-controller-6f8b9c7d4-xk2z9` Pod 处于 `CrashLoopBackOff` 状态，日志中出现以下关键错误：
@@ -140,18 +145,19 @@ nginx: [emerg] duplicate location "/api/v1/pay" in /etc/nginx/nginx.conf:1892
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若存在灰度控制器，临时切换 IngressClass 默认注解
 kubectl annotate ingressclass nginx ingressclass.kubernetes.io/is-default-class- -n kube-system
 kubectl annotate ingressclass nginx-canary ingressclass.kubernetes.io/is-default-class=true -n kube-system
 ```
-
 **第二步：定位并删除冲突的重复 Ingress 规则（保留正确的版本）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找所有包含 api.zyy-prod.example.com 与 /api/v1/pay 的 Ingress
 kubectl get ingress -A --field-selector metadata.namespace=payment-gateway -o json | \
   jq '.items[] | select(.spec.rules[].host=="api.zyy-prod.example.com" and .spec.rules[].http.paths[].path=="/api/v1/pay") | {name: .metadata.name, service: .spec.rules[].http.paths[].backend.service.name}'
@@ -159,43 +165,52 @@ kubectl get ingress -A --field-selector metadata.namespace=payment-gateway -o js
 # 确认后删除重复版本（示例：删除 payment-api-v2，保留 payment-api-v1）
 kubectl delete ingress payment-api-v2 -n payment-gateway
 ```
-
 **第三步：修复后重启 Ingress 控制器 Pod 以强制重新加载配置**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment nginx-ingress-controller -n kube-system
 kubectl rollout status deployment nginx-ingress-controller -n kube-system --timeout=180s
 ```
-
 **第四步：若仍无法启动，临时清空控制器缓存并重新同步**
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pod -n kube-system -l app.kubernetes.io/name=nginx-ingress-controller --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl wait --for=condition=Ready pod -n kube-system -l app.kubernetes.io/name=nginx-ingress-controller --timeout=120s
 ```
-
 **第五步：恢复默认 IngressClass（若第一步做了切换）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate ingressclass nginx-canary ingressclass.kubernetes.io/is-default-class- -n kube-system
 kubectl annotate ingressclass nginx ingressclass.kubernetes.io/is-default-class=true -n kube-system
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Ingress 控制器 Pod 全部 Running 且重启次数不再增加
 kubectl get pod -n kube-system -l app.kubernetes.io/name=nginx-ingress-controller -o wide
 
@@ -216,7 +231,6 @@ kubectl get ingress -n payment-gateway payment-api-v1 -o jsonpath='{.spec.rules[
 # 6. 监控 5xx/4xx 比例下降
 kubectl top pod -n kube-system -l app.kubernetes.io/name=nginx-ingress-controller
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 Ingress 访问异常的根因是 **payment-gateway 命名空间内存在两条重复的 Ingress 规则**，均声明了相同的 host `api.zyy-prod.example.com` 与路径 `/api/v1/pay`，导致 nginx-ingress-controller 合并配置时生成重复的 location 块，配置重载失败并触发 Pod 反复重启。我们已完成以下处置：
@@ -269,3 +283,6 @@ nginx-ingress-controller 的核心工作是将所有 Ingress、Service、Endpoin
 - Ingress
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

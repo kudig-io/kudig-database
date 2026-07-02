@@ -41,6 +41,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第七章:附录
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
@@ -844,7 +849,17 @@ rules:
 
 ### F.1 初始响应 (0-15分钟)
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 □ 确认事件真实性
   □ 验证告警来源 (Falco/Prometheus/审计日志)
   □ 排除误报 (检查已知的 False Positive 模式)
@@ -867,10 +882,10 @@ rules:
   □ 冻结受影响的节点 (kubectl cordon)
   □ 撤销可疑账户权限
 ```
-
 ### F.2 证据收集 (15分钟 - 2小时)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 □ 日志证据
   □ 收集 Pod 日志 (kubectl logs --all-containers --timestamps)
   □ 收集 Kubernetes 事件 (kubectl get events --sort-by='.lastTimestamp')
@@ -901,7 +916,6 @@ rules:
   □ 进程列表与系统调用追踪 (strace)
   □ 镜像分析 (Trivy/Dive)
 ```
-
 ### F.3 分析与诊断 (2-6小时)
 
 ```
@@ -1195,7 +1209,8 @@ cd febm-examples
 ### H.3 虚拟实验环境
 
 **Kind 集群快速启动**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建取证就绪的 Kind 集群
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -1223,7 +1238,6 @@ EOF
 # 部署 OSDFIR 工具栈
 kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/osdfir-stack/all-in-one.yaml
 ```
-
 ---
 
 ## I. 版本历史
@@ -1308,3 +1322,6 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 感谢您阅读 FEBM 法医鉴定循证方法论系列文档!
 
 如有任何问题或建议,欢迎通过上述联系方式与我们交流。
+
+
+<!-- risk-assessed -->

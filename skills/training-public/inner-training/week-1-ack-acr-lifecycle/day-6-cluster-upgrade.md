@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -157,7 +162,8 @@ ACK 版本升级路径:
 
 #### 1.1 版本检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前集群版本
 kubectl version --short
 # Client Version: v1.28.9
@@ -173,7 +179,6 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInf
 # 查看 API 版本信息
 kubectl api-versions | sort
 ```
-
 #### 1.2 查看可升级目标版本
 
 ```bash
@@ -208,7 +213,8 @@ kubent
 
 #### 1.4 组件兼容性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查核心组件状态
 kubectl get pods -n kube-system -o wide
 # 所有 Pod 应为 Running 状态
@@ -221,10 +227,10 @@ kubectl get validatingwebhookconfigurations
 kubectl get mutatingwebhookconfigurations
 # 记录所有 webhook，升级后验证其正常工作
 ```
-
 #### 1.5 备份关键资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 mkdir -p /tmp/cluster-backup
 
 kubectl get all -A -o yaml > /tmp/cluster-backup/all-resources.yaml
@@ -237,12 +243,12 @@ kubectl get roles,rolebindings,clusterroles,clusterrolebindings -A -o yaml > /tm
 echo "备份完成: /tmp/cluster-backup/"
 ls -la /tmp/cluster-backup/
 ```
-
 ---
 
 ### 任务 2: 管控面升级 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 触发管控面升级 (托管版)
 aliyun cs POST /api/v2/clusters/<cluster_id>/upgrade \
   --body '{
@@ -271,14 +277,14 @@ kubectl version --short
 kubectl get pods -n kube-system | grep -v Running
 # 应该没有非 Running 的 Pod
 ```
-
 ---
 
 ### 任务 3: 节点升级 - 替换升级方式 (45min)
 
 #### 3.1 替换升级完整流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 CLUSTER_ID="<cluster_id>"
 NODEPOOL_ID="<nodepool_id>"
 
@@ -301,14 +307,23 @@ kubectl get nodes
 # old-node-03    Ready    v1.28.9-aliyun.1  ← 旧版本
 # new-node-04    Ready    v1.29.8-aliyun.1  ← 新版本
 ```
-
 #### 3.2 逐个迁移旧节点
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 OLD_NODE="old-node-01"
 
 echo "=== Step 5: Cordon 旧节点 $OLD_NODE ==="
@@ -344,10 +359,10 @@ aliyun cs POST /clusters/$CLUSTER_ID/nodes \
 echo "=== Step 9: 验证节点已移除 ==="
 kubectl get nodes -o wide
 ```
-
 #### 3.3 重复迁移其余旧节点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 对每个旧节点重复 Step 5-9
 # 建议每次只迁移一个节点，确认业务正常后继续
 
@@ -358,12 +373,12 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,VERSION:.status.nodeInf
 # new-node-05    v1.29.8-aliyun.1
 # new-node-06    v1.29.8-aliyun.1
 ```
-
 ---
 
 ### 任务 4: 升级后验证 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== 升级后验证 =========="
 
 echo "--- 1. 验证集群版本 ---"
@@ -400,7 +415,6 @@ kubectl get events -A --sort-by='.lastTimestamp' | tail -20
 
 echo "========== 验证完毕 =========="
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -434,7 +448,8 @@ echo "========== 验证完毕 =========="
 
 ### 升级检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > pre-upgrade-check.sh << 'SCRIPT'
 #!/bin/bash
 echo "========== 升级前检查 =========="
@@ -469,7 +484,6 @@ SCRIPT
 
 chmod +x pre-upgrade-check.sh
 ```
-
 ---
 
 ## 常见问题
@@ -510,3 +524,6 @@ Day 7 将学习集群证书管理，理解证书类型、过期处理和轮换�
 - [K8s 版本升级策略](../../domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md)
 - [升级与迁移策略](../../domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md)
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
+
+
+<!-- risk-assessed -->

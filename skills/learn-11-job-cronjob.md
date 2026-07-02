@@ -32,6 +32,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
@@ -105,6 +110,7 @@ CronJob = 周期性的定时任务
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【YAML 示例】
 
 apiVersion: batch/v1
@@ -138,7 +144,6 @@ kubectl get jobs
 
 kubectl get pods -n <namespace> | grep my-job
 ```
-
 ### 2.2 并行执行
 
 ```
@@ -324,6 +329,7 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 查看 Job 状态
@@ -349,10 +355,10 @@ spec:
    kubectl delete job <job-name>
    然后重新创建
 ```
-
 ### 4.2 CronJob 没有执行
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 查看 CronJob 状态
@@ -370,7 +376,6 @@ spec:
 5. 查看 CronJob 的 Events
    kubectl describe cronjob <name> | grep -A10 "Events"
 ```
-
 ### 4.3 Job 完成但 Pod 还在
 
 ```
@@ -405,6 +410,7 @@ spec:
 ### 5.1 用户问：如何让任务定时执行？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【回复】
 
 "好问题！定时任务用 CronJob 来实现。
@@ -442,7 +448,6 @@ kubectl describe cronjob <name>
 
 有其他问题吗？"
 ```
-
 ### 5.2 用户问：任务执行失败怎么重试？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -450,6 +455,7 @@ kubectl describe cronjob <name>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【回复】
 
 "Job 失败重试有两种方式：
@@ -491,7 +497,6 @@ kubectl logs <pod-name>
 
 有其他问题吗？"
 ```
-
 ---
 
 ## 6. 总结
@@ -501,6 +506,7 @@ kubectl logs <pod-name>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 创建 Job：
@@ -551,7 +557,6 @@ kubectl delete cronjob <name>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -566,3 +571,6 @@ kubectl delete cronjob <name>
 - [[skills/learn-root.md|learn-root]] — Kubernetes 培训：Root
 - [[skills/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
+
+
+<!-- risk-assessed -->

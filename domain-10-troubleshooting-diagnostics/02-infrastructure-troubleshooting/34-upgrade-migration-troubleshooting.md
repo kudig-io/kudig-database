@@ -65,6 +65,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)
@@ -148,7 +153,8 @@ cross_refs:
 
 ### 2.1 版本兼容性验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 当前版本检查 ==========
 # 检查集群当前版本
 kubectl version --short
@@ -221,13 +227,13 @@ if $CURRENT_VERSION == *"v1.22"* && $TARGET_VERSION == *"v1.24"*; then
     echo "⚠️  Risk of skipping versions detected"
 fi
 ```
-
 ### 2.2 备份和回滚准备
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== etcd备份 ==========
 # 执行etcd完整备份
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -302,7 +308,6 @@ EOF
 
 chmod +x full-cluster-backup.sh
 ```
-
 ---
 
 <!-- chunk: 3. Control Plane升级故障排查 (Control Plane Upgrade Troubleshooting) -->
@@ -313,7 +318,8 @@ chmod +x full-cluster-backup.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. API Server升级状态检查 ==========
 # 检查API Server Pod状态
 kubectl get pods -n kube-system -l component=kube-apiserver
@@ -361,7 +367,6 @@ kubectl exec -n kube-system $ETCD_POD -- openssl verify -CAfile /etc/kubernetes/
 kubectl auth can-i list pods --all-namespaces
 kubectl auth can-i create deployments --all-namespaces
 ```
-
 ### 3.2 etcd升级问题
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -369,7 +374,8 @@ kubectl auth can-i create deployments --all-namespaces
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== etcd升级状态检查 ==========
 # 检查etcd集群健康状态
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
@@ -478,7 +484,6 @@ EOF
 
 chmod +x etcd-rollback.sh
 ```
-
 ---
 
 <!-- chunk: 4. 节点组件升级故障排查 (Node Component Upgrade Troubleshooting) -->
@@ -486,7 +491,8 @@ chmod +x etcd-rollback.sh
 
 ### 4.1 kubelet升级问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. kubelet状态检查 ==========
 # 检查节点kubelet版本
 kubectl get nodes -o jsonpath='{
@@ -615,13 +621,13 @@ EOF
 
 chmod +x node-upgrade-monitor.sh
 ```
-
 ### 4.2 容器运行时兼容性
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 容器运行时状态检查 ==========
 # 检查容器运行时版本
 kubectl get nodes -o jsonpath='{
@@ -675,7 +681,6 @@ EOF
 kubectl logs runtime-compatibility-test -c test-container
 kubectl logs runtime-compatibility-test -c privileged-test
 ```
-
 ---
 
 <!-- chunk: 5. 工作负载迁移问题排查 (Workload Migration Troubleshooting) -->
@@ -683,7 +688,8 @@ kubectl logs runtime-compatibility-test -c privileged-test
 
 ### 5.1 应用兼容性验证
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. API兼容性检查 ==========
 # 检查应用使用的API版本
 kubectl get deployments --all-namespaces -o jsonpath='{
@@ -803,7 +809,6 @@ ping -c 3 8.8.8.8
 nslookup kubernetes.default
 "
 ```
-
 ### 5.2 滚动升级策略优化
 
 ```bash
@@ -938,7 +943,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 健康检查和回滚 ==========
 # 配置带有健康检查的Deployment
 cat <<EOF > self-healing-deployment.yaml
@@ -1049,14 +1055,23 @@ EOF
 
 chmod +x rollback-detector.sh
 ```
-
 ### 6.2 灾难恢复流程
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 完整集群恢复 ==========
 # 创建灾难恢复脚本
 cat <<'EOF' > disaster-recovery.sh
@@ -1206,7 +1221,6 @@ cat <<'EOF' > recovery-validation-checklist.md
 - [ ] 第三方集成服务正常
 EOF
 ```
-
 ---
 
 <!-- chunk: 7. 升级最佳实践 (Upgrade Best Practices) -->
@@ -1218,7 +1232,17 @@ EOF
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 金丝雀升级配置 ==========
 # 创建金丝雀升级部署
 cat <<EOF > canary-upgrade.yaml
@@ -1369,10 +1393,10 @@ EOF
 
 chmod +x phased-upgrade.sh
 ```
-
 ### 7.2 升级验证和监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 升级验证工具 ==========
 cat <<'EOF' > upgrade-validator.sh
 #!/bin/bash
@@ -1525,7 +1549,6 @@ cat <<'EOF' > upgrade-monitoring-dashboard.json
 }
 EOF
 ```
-
 ---
 
 ---
@@ -1559,3 +1582,6 @@ EOF
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+
+<!-- risk-assessed -->

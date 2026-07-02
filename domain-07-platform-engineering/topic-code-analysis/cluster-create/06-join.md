@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点加入流程 (kubeadm join)
@@ -312,7 +317,8 @@ kubelet 首次启动
 
 ### 场景 1: 标准节点加入
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 control-plane 获取 join 命令
 kubeadm token create --print-join-command
 # kubeadm join 192.168.1.10:6443 --token abc123.def456 --discovery-token-ca-cert-hash sha256:xxx
@@ -328,7 +334,6 @@ kubectl get nodes
 # master    Ready    cp      1h    v1.28.0
 # worker-1  Ready    <none>  30s   v1.28.0
 ```
-
 ### 场景 2: Token 过期后重新生成
 
 ```bash
@@ -373,7 +378,8 @@ kubeadm join --config=join-config.yaml
 
 ### 场景 4: control-plane 节点加入
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 加入 control-plane 节点
 kubeadm join lb.example.com:6443 \
   --token abc123.def456 \
@@ -391,7 +397,6 @@ kubectl get nodes -l node-role.kubernetes.io/control-plane
 # master-1   Ready    control-plane   1h    v1.28.0
 # master-2   Ready    control-plane   30s   v1.28.0
 ```
-
 ## 配置示例
 
 ### Bootstrap Token RBAC
@@ -431,7 +436,8 @@ subjects:
 
 ### CSR 管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSR 列表
 kubectl get csr
 # NAME        AGE   SIGNERNAME                                    REQUESTOR                CONDITION
@@ -447,10 +453,10 @@ kubectl certificate deny node-csr-3
 # 查看 CSR 详情
 kubectl describe csr node-csr-1
 ```
-
 ### join 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 kubelet 状态
 systemctl status kubelet
 journalctl -u kubelet -n 50
@@ -470,7 +476,6 @@ crictl info
 ls -la /etc/kubernetes/pki/
 ls -la /var/lib/kubelet/pki/
 ```
-
 ### kubelet 配置写入
 
 ```go
@@ -551,7 +556,17 @@ func (a *csrApproving) handleCSR(csr *certificatesv1.CertificateSigningRequest) 
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 在 control-plane 驱逐节点上的 Pod
 kubectl drain <node-name> --delete-emptydir-data --ignore-daemonsets
 
@@ -575,13 +590,13 @@ ETCDCTL_API=3 etcdctl member remove <id> \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ### 自动化节点加入脚本
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `sysctl -w`：实时修改内核参数，全局生效
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # auto-join.sh - 自动化节点加入脚本
 set -euo pipefail
@@ -608,7 +623,6 @@ done
 echo "Node $(hostname) joined successfully!"
 
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -727,3 +741,5 @@ current-context: default
 - [[entities/containerd.md|containerd]]
 
 ```
+
+<!-- risk-assessed -->

@@ -34,6 +34,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -413,7 +418,8 @@ webhooks:
 
 ### 认证问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查当前用户身份
 kubectl auth whoami
 
@@ -427,10 +433,10 @@ kubectl get pod -n kube-system -l component=kube-apiserver -o yaml | grep -A5 au
 TOKEN=$(kubectl get secret $(kubectl get serviceaccount default -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d)
 curl -k -H "Authorization: Bearer $TOKEN" https://<api-server>:6443/api/v1/namespaces
 ```
-
 ### 授权问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查具体权限
 kubectl auth can-i create pods --namespace production
 kubectl auth can-i '*' '*' --as system:serviceaccount:production:app-sa
@@ -444,13 +450,13 @@ kubectl get rolebindings,clusterrolebindings -A -o wide
 # 4. 查找cluster-admin绑定
 kubectl get clusterrolebindings -o json | jq '.items[] | select(.roleRef.name=="cluster-admin")'
 ```
-
 ### 准入控制排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查准入控制器状态
 kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
 
@@ -460,7 +466,6 @@ kubectl logs -n webhook-system deployment/webhook-server
 # 3. 临时禁用Webhook进行测试
 kubectl delete validatingwebhookconfiguration <webhook-name>
 ```
-
 <!-- chunk: 监控与告警 -->
 ## 监控与告警
 
@@ -527,3 +532,6 @@ groups:
 - 21-multicluster-security
 - 02-network-security-policies
 - 03-runtime-security-defense
+
+
+<!-- risk-assessed -->

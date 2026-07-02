@@ -28,6 +28,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # ACK集群运维
 
@@ -84,7 +89,17 @@ ACK 专有版（Dedicated）与托管版（Managed）的核心区别：专有版
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看当前节点规格
 kubectl get nodes -L alibabacloud.com/ecs-instance-type
 
@@ -110,10 +125,10 @@ kubectl get pods -A -o wide | grep <old-node-name>
 # 6. 从集群移除节点
 kubectl delete node <old-node-name>
 ```
-
 **水平扩容（增减节点数）**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法1: 通过 kubectl 直接调整节点池期望节点数
 # 需先获取节点池 ID
 aliyun cs GET /clusters/<cluster-id>/nodepools
@@ -130,7 +145,6 @@ aliyun cs PUT /clusters/<cluster-id>/nodepools/<np-id> \
 
 # 方法3: 使用 ACK 提供的 autoscaler（见2.2节）
 ```
-
 ### 1.3 集群升级
 
 ACK 专有版集群升级路径需严格遵循版本阶梯（如 1.26 → 1.28 不可跨级）。
@@ -279,7 +293,8 @@ spec:
 | 节点上有系统 Pod | 跳过缩容 | `--skip-nodes-with-system-pods` |
 | 节点带特定标签 | 保护不缩容 | `cluster-autoscaler.kubernetes.io/scale-down-disabled: true` |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 远程诊断 CA 状态
 kubectl get pods -n kube-system | grep cluster-autoscaler
 kubectl logs -n kube-system deployment/cluster-autoscaler --tail=200
@@ -290,14 +305,23 @@ kubectl get events -n kube-system | grep cluster-autoscaler
 # 检查节点池伸缩组状态
 aliyun cs GET /clusters/<cluster-id>/nodepools/<np-id>
 ```
-
 ### 2.3 节点池运维命令速查
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 节点池列表 ===
 aliyun cs GET /clusters/<cluster-id>/nodepools
 
@@ -323,7 +347,6 @@ kubectl label nodes <node-name> workload-type=batch --overwrite
 kubectl taint nodes <node-name> gpu=true:NoSchedule
 kubectl taint nodes <node-name> gpu=true:NoSchedule-
 ```
-
 ---
 
 ## 3. ACK日志与监控
@@ -332,13 +355,13 @@ kubectl taint nodes <node-name> gpu=true:NoSchedule-
 
 专有云场景下，日志采集通过 Logtail DaemonSet 部署：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 远程诊断 Logtail 状态
 kubectl get pods -n kube-system | grep logtail
 kubectl logs -n kube-system -l k8s-app=logtail --tail=100
 kubectl get aliyunlogconfigs -A
 ```
-
 ### 3.2 Prometheus监控
 
 ACK 专有版内置 Prometheus 监控体系：
@@ -375,7 +398,8 @@ spec:
 
 **远程诊断监控数据**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Prometheus 组件
 kubectl get pods -n monitoring
 kubectl logs -n monitoring prometheus-k8s-0 --tail=100
@@ -387,7 +411,6 @@ kubectl top pods -A
 # 检查 metrics-server
 kubectl get deployment metrics-server -n kube-system
 ```
-
 ---
 
 ## 4. ACK安全
@@ -473,7 +496,8 @@ aliyun ecs DescribeSecurityGroupAttribute \
 
 ### 5.1 日常巡检命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ACK专有版日常巡检脚本
 
@@ -502,7 +526,6 @@ ETCDCTL_API=3 etcdctl endpoint health \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 ### 5.2 常见问题快速处理
 
 | 症状 | 根因 | 远程处理步骤 |
@@ -529,3 +552,6 @@ ETCDCTL_API=3 etcdctl endpoint health \
 
 - [[entities/coredns.md|CoreDNS (entities)]]
 - [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+
+
+<!-- risk-assessed -->

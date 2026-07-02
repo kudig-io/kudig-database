@@ -33,6 +33,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Gang Scheduling
@@ -155,7 +160,8 @@ spec:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Workload 对象
 kubectl get workloads -n ml-platform
 
@@ -171,7 +177,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i gang
 # 查看 Pending Pod 的调度事件
 kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 ```
-
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度周期与绑定周期
@@ -186,3 +191,6 @@ kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 
 ## Related
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

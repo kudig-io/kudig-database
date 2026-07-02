@@ -57,6 +57,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl exec -it <pod> -n <ns> -- nslookup [[Kubernetes|kubernetes]].default 2>&1 | grep -E 'server can\'t find|NXDOMAIN' 显示 DNS 解析失败 -->
@@ -167,7 +172,8 @@ DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kube-system 中的任一 Pod 测试 DNS（kube-system 中总有可用的 Pod）
 # 测试集群内部 DNS（kubernetes.default 是始终存在的 Service）
 kubectl exec -n kube-system deploy/coredns -- nslookup kubernetes.default.svc.cluster.local 2>/dev/null || \
@@ -179,7 +185,8 @@ kubectl exec -n kube-system deploy/coredns -- nslookup kubernetes.default.svc.cl
 > - `kubectl exec` 本身超时 → 可能是 apiserver 或节点级问题，参考 SKILL-NODE-001
 
 **Step T2**: 检查 CoreDNS Pod 状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取 CoreDNS Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
 # 检查 kube-dns Service 和 Endpoints
@@ -197,7 +204,8 @@ kubectl get endpoints kube-dns -n kube-system
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从不同 namespace 的 Pod 中测试 DNS
 # 测试 1: 从 default namespace
 kubectl run dns-test-default --image=busybox:1.36 --rm -it --restart=Never -n default -- nslookup kubernetes.default.svc.cluster.local
@@ -216,7 +224,8 @@ kubectl run dns-test-ext --image=busybox:1.36 --rm -it --restart=Never -- sh -c 
 > - 外部解析失败、内部正常 → upstream DNS 问题，**P1-P2**
 
 **Step T4**: 评估业务影响
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查最近的 DNS 相关告警和事件
 kubectl get events -A --sort-by=.lastTimestamp | grep -i "dns|resolve|coredns" | tail -20
 # 检查是否有大量 Pod 报错
@@ -1773,7 +1782,8 @@ kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeed
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 确认 CoreDNS Pod 全部健康
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 # 预期: 所有 Pod Running 且 Ready 1/1，RESTARTS 不再增加
@@ -1798,7 +1808,6 @@ kubectl run dns-v5 --image=busybox:1.36 --rm -it --restart=Never -- nslookup <ta
 kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time nslookup kubernetes.default.svc.cluster.local"
 # 预期: 延迟 < 100ms (内部 DNS)
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -2077,7 +2086,8 @@ danger_operations:
 
 ### 通用验证步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 集群内部 DNS 验证
 kubectl run dns-verify --image=busybox:1.36 --rm -it --restart=Never -- nslookup kubernetes.default.svc.cluster.local
 
@@ -2090,9 +2100,10 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns
 # 4. DNS 延迟测试
 kubectl run dns-latency --image=busybox:1.36 --rm -it --restart=Never -- sh -c 'for i in 1 2 3; do time nslookup kubernetes.default; done'
 ```
-
 ## Related
 
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

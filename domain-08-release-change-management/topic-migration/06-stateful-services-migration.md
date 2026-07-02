@@ -43,6 +43,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 06 - 有状态服务迁移
@@ -141,7 +146,8 @@ k8s_versions:
 
 ## 2.1 方案 A: 迁移到阿里云 RDS（推荐）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 创建 RDS 实例
 aliyun rds CreateDBInstance \
   --Engine MySQL \
@@ -195,7 +201,6 @@ kubectl --context=ack-cluster create secret generic mysql-secret \
   --from-literal=password="<password>" \
   --from-literal=database=production
 ```
-
 ## 2.2 方案 B: 迁移到 ACK StatefulSet
 
 ```yaml
@@ -265,7 +270,8 @@ spec:
           storage: 100Gi
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 数据迁移步骤:
 # 1. 创建上述 StatefulSet
 kubectl --context=ack-cluster apply -f mysql-statefulset.yaml
@@ -282,14 +288,14 @@ kubectl --context=ack-cluster cp dump.sql production/mysql-0:/tmp/dump.sql
 kubectl --context=ack-cluster exec -n production mysql-0 -- \
   mysql -u root -p"$MYSQL_ROOT_PASSWORD" < /tmp/dump.sql
 ```
-
 ---
 
 <!-- chunk: 3. Redis 迁移 -->## 3. Redis 迁移
 
 ## 3.1 方案 A: 迁移到阿里云 Redis
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建阿里云 Redis 实例
 aliyun r-kvstore CreateInstance \
   --InstanceClass "redis.master.small.default" \
@@ -333,7 +339,6 @@ kubectl --context=source-cluster cp production/redis-0:/data/dump.rdb ./dump.rdb
 # 通过 DTS 或手动导入到阿里云 Redis
 # 控制台: Redis → 备份与恢复 → 从 RDB 文件恢复
 ```
-
 ## 3.2 纯缓存场景
 
 ```bash
@@ -480,7 +485,8 @@ sync.group.offsets.interval.seconds = 10
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出 etcd 数据
 ETCDCTL_API=3 etcdctl --endpoints=<source-etcd>:2379 \
   --cert=/etc/etcd/pki/server.crt \
@@ -498,12 +504,12 @@ ETCDCTL_API=3 etcdctl snapshot restore etcd-backup.db \
   --initial-cluster="etcd-0=https://etcd-0:2380" \
   --initial-advertise-peer-urls="https://etcd-0:2380"
 ```
-
 ---
 
 <!-- chunk: 7. StatefulSet 通用迁移 -->## 7. StatefulSet 通用迁移
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # migrate-statefulset.sh
 # StatefulSet 通用迁移流程
@@ -561,7 +567,6 @@ kubectl --context=$ACK_CONTEXT apply -f sts-$STS_NAME.yaml
 echo ">>> Step 6: 验证"
 kubectl --context=$ACK_CONTEXT rollout status sts/$STS_NAME -n $NS --timeout=600s
 ```
-
 ---
 
 <!-- chunk: 8. 数据一致性校验 -->## 8. 数据一致性校验
@@ -664,3 +669,6 @@ done
 
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -57,6 +57,11 @@ cross_refs:
   label: '故障树: hpa'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 27 - HorizontalPodAutoscaler v2 YAML 配置参考
@@ -682,7 +687,8 @@ spec:
 ## VPA 基础配置
 
 **安装 VPA** (社区项目):
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 克隆仓库
 git clone https://github.com/kubernetes/autoscaler.git
 cd autoscaler/vertical-pod-autoscaler
@@ -693,7 +699,6 @@ cd autoscaler/vertical-pod-autoscaler
 # 验证
 kubectl get crd | grep verticalpodautoscaler
 ```
-
 **VPA 配置示例**:
 
 ```yaml
@@ -1028,7 +1033,8 @@ spec:
 
 **监控验证**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看 HPA 状态
 kubectl get hpa ecommerce-api-hpa --watch
 
@@ -1040,7 +1046,6 @@ kubectl get hpa ecommerce-api-hpa --watch
 # 详细信息
 kubectl describe hpa ecommerce-api-hpa
 ```
-
 ## 案例2: 消息队列消费者 - 外部指标扩缩容
 
 **场景**: Kafka 消费者服务，根据消费延迟动态扩缩容。
@@ -1115,7 +1120,8 @@ data:
 
 **效果演示**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 模拟消息积压
 # Lag: 50000 条, 期望每个 Pod 处理 1000 条
 # desiredReplicas = 50000 / 1000 = 50 (达到 maxReplicas)
@@ -1129,7 +1135,6 @@ kubectl get hpa kafka-consumer-hpa
 # Lag: 500 条
 # desiredReplicas = 500 / 1000 = 0.5 → 3 (minReplicas)
 ```
-
 ## 案例3: 在线视频服务 - 多指标混合扩缩容
 
 **场景**: 视频转码服务，同时考虑 CPU、内存、队列长度。
@@ -1256,13 +1261,13 @@ containers:
 
 **问题场景**:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动修改副本数
 kubectl scale deployment myapp --replicas=20
 
 # HPA 会在下一个周期 (15s) 覆盖此值!
 ```
-
 **解决方案**:
 
 ```yaml
@@ -1332,7 +1337,8 @@ groups:
 
 **查看 HPA 事件**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 决策历史
 kubectl describe hpa myapp-hpa
 
@@ -1340,7 +1346,6 @@ kubectl describe hpa myapp-hpa
 #   Type     Reason             Message
 #   Normal   SuccessfulRescale  New size: 8; reason: cpu resource utilization (percentage of request) above target
 ```
-
 ## 5. 指标选择建议
 
 | 应用类型       | 推荐指标                          | 目标值建议        |
@@ -1356,7 +1361,8 @@ kubectl describe hpa myapp-hpa
 
 **负载测试**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 hey 压测
 hey -z 5m -c 100 -q 10 http://myapp.example.com/api
 
@@ -1366,7 +1372,6 @@ watch kubectl get hpa myapp-hpa
 # 验证扩缩容时间
 kubectl get events --sort-by='.lastTimestamp' | grep myapp
 ```
-
 ---
 
 <!-- chunk: 常见问题 -->## 常见问题
@@ -1375,15 +1380,16 @@ kubectl get events --sort-by='.lastTimestamp' | grep myapp
 
 **症状**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa
 # TARGETS        REPLICAS
 # <unknown>/70%  3/10
 ```
-
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Metrics Server 是否运行
 kubectl get deployment metrics-server -n kube-system
 kubectl logs -n kube-system deployment/metrics-server
@@ -1402,7 +1408,6 @@ kubectl describe hpa myapp-hpa
 #   Reason: FailedGetResourceMetric
 #   Message: missing request for cpu
 ```
-
 **解决方案**:
 - 确保 Metrics Server 正常运行
 - Pod 必须设置 `resources.requests`
@@ -1427,7 +1432,8 @@ behavior:
 
 **排查 Custom Metrics API**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 API 注册
 kubectl get apiservices | grep custom.metrics
 
@@ -1440,7 +1446,6 @@ kubectl get cm adapter-config -n monitoring -o yaml
 # 4. 查看 Adapter 日志
 kubectl logs -n monitoring deployment/prometheus-adapter
 ```
-
 ## Q4: HPA 达到 maxReplicas 但仍超负载?
 
 **临时解决**:
@@ -1448,11 +1453,11 @@ kubectl logs -n monitoring deployment/prometheus-adapter
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 提高 maxReplicas
 kubectl patch hpa myapp-hpa -p '{"spec":{"maxReplicas":200}}'
 ```
-
 **长期优化**:
 - 检查资源配置是否合理
 - 优化应用性能 (减少 CPU/Memory 消耗)
@@ -1528,3 +1533,6 @@ kubectl get events --field-selector reason=TriggeredScaleUp
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

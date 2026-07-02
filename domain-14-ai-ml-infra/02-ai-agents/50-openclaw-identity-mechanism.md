@@ -33,6 +33,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw IDENTITY.md 机制深度解析
@@ -224,6 +229,7 @@ IDENTITY.md 定义的问候模板:
 ### 3.2 案例：多渠道输出适配
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 同一诊断结果在不同渠道的输出:
 
 === CLI 终端 ===
@@ -241,12 +247,11 @@ Node CPU Allocatable 已用尽。当前 38/40 个 worker 节点 CPU requests 超
 ```bash
 kubectl scale nodepool app --replicas=42
 ```
-
 ### 验证
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top nodes | awk '$3>90'
 ```
-
 === API JSON ===
 {
   "diagnosis": {
@@ -332,7 +337,7 @@ Agent 3: KuDig Monitor（监控巡检）
 三者共享同一个 SOUL.md（核心人格一致）
 但各自有不同的 IDENTITY.md（外在表现不同）
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ---
 
 ## 5. AgentScope 集成代码
@@ -442,7 +447,6 @@ identity.set_channel(OutputChannel.WEB_UI)
 output = identity.format_output(diagnosis)
 # → 完整 Markdown 格式
 ```
-
 ---
 
 ## 6. 问题排除
@@ -511,3 +515,6 @@ IDENTITY.md 配置验证:
 - 49-openclaw-memory-mechanism
 - 01-ai-agent-fundamentals
 - 02-llm-foundation-models
+
+
+<!-- risk-assessed -->

@@ -40,6 +40,11 @@ prerequisites:
 - ebpf-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: GreenOps 可持续计算与碳足迹优化指南
@@ -143,7 +148,8 @@ GreenOps = FinOps + 可持续性
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add kepler https://sustainable-computing-io.github.io/kepler-helm-chart
 helm repo update
 
@@ -153,7 +159,6 @@ helm install kepler kepler/kepler \
   --set serviceMonitor.enabled=true \
   --set serviceMonitor.namespace=monitoring
 ```
-
 ### 2.2 工作原理
 
 ```
@@ -251,13 +256,13 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add kube-green https://kube-green.github.io/charts
 helm install kube-green kube-green/kube-green \
   --namespace kube-green \
   --create-namespace
 ```
-
 ### 4.2 SleepInfo 配置
 
 ```yaml
@@ -399,12 +404,12 @@ GreenOps + FinOps 协同效应
 
 ### 8.1 自动生成碳报告
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Kepler + kubectl 导出月度报告
 kubectl top pod --all-namespaces > pod-usage.txt
 # 结合 Kepler 指标计算碳排放
 ```
-
 ### 8.2 关键合规框架
 
 | 框架 | 要求 | K8s 相关 |
@@ -482,3 +487,5 @@ kubectl top pod --all-namespaces > pod-usage.txt
 - 99-keda-event-driven-autoscaling-guide
 
 ```
+
+<!-- risk-assessed -->

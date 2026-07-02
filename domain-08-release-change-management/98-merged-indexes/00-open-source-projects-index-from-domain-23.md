@@ -70,6 +70,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain-23 GitOps & CI/CD — 开源项目索引
@@ -188,12 +193,12 @@ Argo 生态是一套完整的云原生工作流与交付工具链，由 Akuity�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd --version 7.8.0 \
   --namespace argocd --create-namespace
 ```
-
 **GitHub**: https://github.com/argoproj/argo-cd
 **文档**: https://argo-cd.readthedocs.io/
 
@@ -966,3 +971,6 @@ Pipeline 卡住:
 - CI/CD 流水线模式与渐进式交付深度实践
 - Argo CD 企业级 GitOps 实践指南
 - Flux GitOps 实践指南
+
+
+<!-- risk-assessed -->

@@ -19,6 +19,11 @@ status: reviewed
 last_updated: 2026-05-21
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 蓝绿部署切换后服务不可用 — 远程顾问对话脚本
@@ -40,17 +45,17 @@ last_updated: 2026-05-21
 
 **顾问**：请确认蓝色和绿色两个版本的 Deployment 状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment -n <namespace>
 ```
-
 > **如果无法执行**：请通过控制台查看 Deployment 列表，确认蓝色和绿色版本的 READY 列是否均为 `<replicas>/<replicas>`。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l version=blue
 kubectl get pods -n <namespace> -l version=green
 ```
-
 > **如果无法执行**：请根据实际标签（如 `app=myapp,version=blue`）调整 selector 后重试，或提供所有 Pod 的列表。
 
 **预期用户回复**：绿色版本的 Pod 未全部就绪，或存在 CrashLoopBackOff 的 Pod。
@@ -65,16 +70,16 @@ kubectl get pods -n <namespace> -l version=green
 
 **顾问**：请确认 Service 的 selector 当前指向了哪个版本：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc <svc-name> -n <namespace> -o yaml | grep -A 5 'selector:'
 ```
-
 > **如果无法执行**：请将 Service YAML 中的 `spec.selector` 部分复制发给我。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get endpoints <svc-name> -n <namespace>
 ```
-
 > **如果无法执行**：请确认 Endpoints 中的 IP 是否属于绿色版本的 Pod。若 Endpoints 为空，说明 selector 未匹配到任何 Pod。
 
 **预期用户回复**：Service selector 已切换为 `version: green`，但 Endpoints 中缺少绿色 Pod 的 IP。
@@ -89,16 +94,16 @@ kubectl get endpoints <svc-name> -n <namespace>
 
 **顾问**：请验证绿色版本 Pod 的实际状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l version=green -o wide
 ```
-
 > **如果无法执行**：请提供绿色 Pod 的 STATUS 和 RESTARTS 列信息。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n <namespace> -l version=green --tail=50
 ```
-
 > **如果无法执行**：请选取单个绿色 Pod 执行 `kubectl logs <green-pod> -n <namespace> --tail=50`。
 
 **预期用户回复**：绿色 Pod 处于 Running 状态，但日志中有启动错误或连接数据库失败的记录。
@@ -113,16 +118,16 @@ kubectl logs -n <namespace> -l version=green --tail=50
 
 **顾问**：请检查绿色版本 Pod 的就绪探针配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <green-pod> -n <namespace> | grep -A 10 'Conditions:'
 ```
-
 > **如果无法执行**：请执行 `kubectl get pod <green-pod> -n <namespace> -o yaml | grep -A 15 'readinessProbe:'`。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <green-pod> -n <namespace> -o yaml | grep -A 15 'readinessProbe:'
 ```
-
 > **如果无法执行**：请将 Pod YAML 中的 readinessProbe 配置复制发给我，重点关注 `path`、`port`、`initialDelaySeconds` 和 `periodSeconds`。
 
 **预期用户回复**：readinessProbe 的 HTTP path 返回 404，或端口配置错误，或 `initialDelaySeconds` 太短导致应用尚未启动完成。
@@ -140,10 +145,10 @@ kubectl get pod <green-pod> -n <namespace> -o yaml | grep -A 15 'readinessProbe:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selector":{"version":"blue"}}}'
 ```
-
 > **如果无法执行 patch**：请使用 `kubectl edit svc <svc-name> -n <namespace>` 手动将 selector 改回 `version: blue`，保存后立即生效。
 
 **预期用户回复**：回滚后蓝色版本服务恢复正常，确认绿色版本存在问题。
@@ -163,10 +168,10 @@ kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selecto
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selector":{"version":"blue","app":"<app-name>"}}}'
 ```
-
 > **如果无法执行 patch**：请使用 `kubectl edit svc` 修改 selector，或通过 GitOps/ArgoCD 回滚到上一个版本。
 
 #### 方案 B：修复绿环境 ReadinessProbe
@@ -174,10 +179,10 @@ kubectl patch svc <svc-name> -n <namespace> --type='merge' -p='{"spec":{"selecto
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment <green-deployment> -n <namespace> --type='merge' -p='{"spec":{"template":{"spec":{"containers":[{"name":"<container>","readinessProbe":{"httpGet":{"path":"/health","port":8080},"initialDelaySeconds":30,"periodSeconds":10}}]}}}}'
 ```
-
 > **如果无法执行 patch**：请使用 `kubectl edit deployment <green-deployment>` 修改 readinessProbe 的配置（path、port、initialDelaySeconds）。
 
 #### 方案 C：重新部署绿版本
@@ -185,28 +190,28 @@ kubectl patch deployment <green-deployment> -n <namespace> --type='merge' -p='{"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment <green-deployment> -n <namespace>
 ```
-
 > **如果无法执行**：请先修正绿色版本的镜像或配置，然后执行 `kubectl rollout status deployment <green-deployment> -n <namespace>` 确认新版本就绪后再切换流量。
 
 #### 方案 D：修复代码后重新发布
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set image deployment/<green-deployment> <container>=<new-image>:<fixed-tag> -n <namespace>
 ```
-
 > **如果无法执行**：请通过 CI/CD 流水线重新构建并发布修复后的镜像，然后执行 rollout restart 或 apply 新 YAML。
 
 **验证修复**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l version=green
 kubectl get svc <svc-name> -n <namespace> -o yaml | grep selector -A 3
 curl -s http://<svc-ip>/health
 ```
-
 > **如果无法执行 curl**：请在 Pod 内执行 `wget -qO- http://<svc-name>.<namespace>.svc.cluster.local/health` 验证服务健康。
 
 ---
@@ -219,3 +224,6 @@ curl -s http://<svc-ip>/health
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

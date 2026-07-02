@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 03 - Pod 完整规格说明书
@@ -155,7 +160,8 @@ k8s_versions:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Pod
 kubectl apply -f pod.yaml
 
@@ -178,7 +184,6 @@ kubectl delete pod <name>
 # 调试 Pod
 kubectl debug <pod-name> -it --image=busybox
 ```
-
 ---
 
 <!-- chunk: 完整字段规格表 -->## 完整字段规格表
@@ -876,7 +881,8 @@ spec:
 
 ## 使用方法
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式1: kubectl debug 自动创建临时容器
 kubectl debug -it my-pod --image=busybox:1.36 --target=app
 
@@ -887,7 +893,6 @@ kubectl debug -it my-pod --image=nicolaka/netshoot:latest
 kubectl debug -it my-pod --image=busybox --target=app \
   --share-processes -- sh
 ```
-
 ## 手动添加临时容器(API)
 
 ```yaml
@@ -1527,10 +1532,10 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl label nodes node-1 disktype=ssd region=us-west
 ```
-
 ---
 
 ## 2. nodeName (直接指定节点)
@@ -1683,7 +1688,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 添加污点
 kubectl taint nodes node-1 key1=value1:NoSchedule
 
@@ -1693,7 +1708,6 @@ kubectl taint nodes node-1 key1:NoSchedule-
 # 查看节点污点
 kubectl describe node node-1 | grep Taints
 ```
-
 **effect 类型**:
 - `NoSchedule`: 不调度新 Pod(已存在的不受影响)
 - `PreferNoSchedule`: 尽量不调度(软性限制)
@@ -2430,6 +2444,7 @@ containers:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 1. kubectl apply
    │
    ↓
@@ -2460,7 +2475,6 @@ containers:
    ↓
 8. Pod 状态更新到 API Server
 ```
-
 ---
 
 ## 6. Pod 终止流程
@@ -2469,6 +2483,7 @@ containers:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. kubectl delete pod
    │
    ↓
@@ -2495,7 +2510,6 @@ containers:
    ↓
 6. API Server 从 etcd 删除 Pod 对象
 ```
-
 **优雅终止最佳实践**:
 1. 设置合理的 `terminationGracePeriodSeconds`(建议 60-120 秒)
 2. 实现 `preStop` 钩子停止接收新请求
@@ -2665,12 +2679,12 @@ securityContext:
 4. PVC 无法绑定
 
 **排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name>
 kubectl get events --sort-by=.metadata.creationTimestamp
 kubectl get nodes -o wide
 ```
-
 ---
 
 ## Q2: Pod 频繁重启?
@@ -2682,12 +2696,12 @@ kubectl get nodes -o wide
 4. 节点资源压力驱逐
 
 **排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name>
 kubectl logs <pod-name> --previous  # 查看上次容器日志
 kubectl get pod <pod-name> -o yaml | grep -A 10 "lastState:"
 ```
-
 ---
 
 ## Q3: Init 容器与 Sidecar 容器如何选择?
@@ -2737,15 +2751,15 @@ volumes:
 ## Q5: 如何调试 CrashLoopBackOff 的 Pod?
 
 **方法1**: 查看容器日志
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name> --previous
 ```
-
 **方法2**: 使用 Ephemeral Containers
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl debug -it <pod-name> --image=busybox --target=<container-name>
 ```
-
 **方法3**: 覆盖容器命令(阻止退出)
 ```yaml
 containers:
@@ -2755,10 +2769,10 @@ containers:
 ```
 
 **方法4**: 查看事件
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events --field-selector involvedObject.name=<pod-name>
 ```
-
 ---
 
 ## Q6: Pod 如何访问宿主机服务?
@@ -3138,3 +3152,5 @@ Pod 是 Kubernetes 中最核心的资源对象,理解其完整规格对于构建
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

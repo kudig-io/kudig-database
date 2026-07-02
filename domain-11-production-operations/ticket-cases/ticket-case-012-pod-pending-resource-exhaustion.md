@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看 Pod 事件、再看节点资源、最后看调度约束”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 列表与事件
 kubectl get pod -n fintech-core | grep Pending
 kubectl describe pod -n fintech-core risk-engine-xxx | grep -A 10 Events
@@ -109,7 +115,6 @@ aliyun cs GET /clusters/ack-zyy-prod-02/nodes
 kubectl get deployment risk-engine -n fintech-core -o yaml | grep -A 20 resources
 kubectl get pod -n fintech-core -o wide | grep risk-engine
 ```
-
 ## 根因分析
 
 `fintech-core` 命名空间内现有 Pod 的资源请求（requests）已接近节点可分配总量。本次 `risk-engine` 从 10 副本扩容到 25 副本，新增 15 个 Pod 每个请求 `cpu: 2`、`memory: 4Gi`，总计需要额外 30 核 CPU 与 60Gi 内存。而当前节点池 `np-fintech-compute` 中所有节点的 allocatable 资源已被占满：
@@ -125,22 +130,22 @@ Warning  FailedScheduling  12s  default-scheduler  0/12 nodes are available:
 
 **第一步：确认可低优先级业务 Pod，临时释放资源**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看非核心命名空间中资源占用较高的 Pod
 kubectl top pod -A --sort-by=cpu | head -30
 kubectl top pod -A --sort-by=memory | head -30
 ```
-
 **第二步：临时缩容开发/测试环境的低优先级负载（经客户确认后执行）**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment dev-dashboard -n dev-tools --replicas=0
 kubectl scale deployment test-data-generator -n qa --replicas=0
 ```
-
 **第三步：提升节点池最大节点数并触发扩容**
 
 ```bash
@@ -153,22 +158,23 @@ aliyun cs PUT /clusters/ack-zyy-prod-02/nodepools/np-fintech-compute \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl annotate deployment risk-engine -n fintech-core cluster-autoscaler.kubernetes.io/safe-to-evict="false" --overwrite
 # 等待 CA 识别 Pending Pod 并扩容
 kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100 -f
 ```
-
 **第五步：确认新节点加入并重新调度 Pending Pod**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node -l nodepool=fp-fintech-compute -o wide
 kubectl get pod -n fintech-core | grep Pending
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 新节点 Ready 且资源充足
 kubectl get node -l nodepool=np-fintech-compute -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'
 
@@ -183,7 +189,6 @@ kubectl top node -l nodepool=np-fintech-compute
 # 4. 自动伸缩器状态
 kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，`fintech-core` 命名空间内大量 Pod Pending 的根因是 **节点池 CPU/内存资源已分配完毕，且 cluster-autoscaler 达到最大节点数上限**。`risk-engine` 从 10 扩容到 25 副本需要额外 30 核 CPU 与 60Gi 内存，当前节点池已无法承载。我们已完成以下处置：
@@ -230,3 +235,6 @@ kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

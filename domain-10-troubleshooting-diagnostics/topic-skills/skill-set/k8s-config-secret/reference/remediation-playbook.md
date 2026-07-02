@@ -16,6 +16,11 @@ skill_set: k8s-config-secret
 last_updated: 2026-05-22
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 修复操作手册 / Remediation Playbook
@@ -221,7 +226,8 @@ last_updated: 2026-05-22
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: Pod 不在 CreateContainerConfigError
 kubectl get pod <pod> -n <namespace>
 
@@ -237,7 +243,6 @@ kubectl exec <pod> -n <namespace> -- cat <mount-path>/<key>
 kubectl exec <pod> -n <namespace> -- env | grep <ENV_NAME>
 # 预期: 值正确
 ```
-
 ### 解决确认标准
 
 - [ ] Pod 状态不为 CreateContainerConfigError
@@ -280,3 +285,6 @@ kubectl exec <pod> -n <namespace> -- env | grep <ENV_NAME>
 - [[reference|#reference Hub]] — tag hub
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

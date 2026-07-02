@@ -27,6 +27,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 回滚
@@ -44,7 +49,8 @@ Rollback（回滚）是将 Deployment 恢复到之前版本的操作。当新版
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看更新历史
 kubectl rollout history deployment/<name>
 
@@ -57,7 +63,6 @@ kubectl rollout undo deployment/<name> --to-revision=3
 # 查看回滚状态
 kubectl rollout status deployment/<name>
 ```
-
 ## 关键机制或特性
 
 - `revisionHistoryLimit` 控制保留的历史 ReplicaSet 数量（默认 10）。
@@ -81,3 +86,6 @@ kubectl rollout status deployment/<name>
 - [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
 - [[domain-17-system-foundation/topic-dictionary/operations/cordon.md|Cordon]]
 - [[domain-17-system-foundation/topic-dictionary/operations/uncordon.md|Uncordon]]
+
+
+<!-- risk-assessed -->

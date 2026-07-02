@@ -63,6 +63,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # GitOps 安全与合规深度实践
@@ -201,7 +206,8 @@ graph TB
 
 ## 3.1 Cosign 密钥管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Generate key pair (interactive, will prompt for password)
 cosign generate-key-pair
 # Output:
@@ -217,7 +223,6 @@ cosign generate-key-pair --kms awskms:///alias/cosign-key
 # Use HashiCorp Vault
 cosign generate-key-pair --kms hashivault://cosign-key
 ```
-
 ## 3.2 Cosign 签名完整流程 YAML
 
 ```yaml
@@ -361,7 +366,8 @@ data:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Install Sealed Secrets controller
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 helm install sealed-secrets sealed-secrets/sealed-secrets \
@@ -391,7 +397,6 @@ kubeseal --controller-namespace=kube-system \
 echo "sealed-secret.yaml is safe to commit to Git"
 cat sealed-secret.yaml
 ```
-
 ## 4.2 Sealed Secret 输出示例
 
 ```yaml
@@ -442,7 +447,8 @@ kubectl get secret -n kube-system sealed-secrets-key -o yaml > sealed-secrets-ke
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Install External Secrets Operator
 helm repo add external-secrets https://charts.external-secrets.io
 helm install external-secrets \
@@ -458,7 +464,6 @@ echo "external-secrets-certificate-store-xxx              1/1     Running   0   
 echo "external-secrets-controller-manager-xxx             1/1     Running   0          60s"
 echo "external-secrets-webhook-xxx                        1/1     Running   0          60s"
 ```
-
 ## 5.2 Vault 后端配置
 
 ```yaml
@@ -746,7 +751,8 @@ spec:
 
 ## 8.1 镜像签名审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # audit_image_signatures.sh - Audit all running container images
 set -euo pipefail
@@ -788,10 +794,10 @@ if [ "$UNVERIFIED" -gt 0 ]; then
     echo "WARNING: $UNVERIFIED images lack valid signatures!"
 fi
 ```
-
 ## 8.2 SBOM 审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # audit_sbom.sh - Verify SBOM for all images
 set -euo pipefail
@@ -816,10 +822,10 @@ for img in $IMAGES; do
     echo ""
 done
 ```
-
 ## 8.3 Kyverno 合规策略审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # audit_kyverno_compliance.sh - Check Kyverno policy compliance
 set -euo pipefail
@@ -846,7 +852,6 @@ echo ""
 echo "[4] Cluster Policy Status"
 kubectl get clusterpolicy -o wide 2>/dev/null || echo "No cluster policies found"
 ```
-
 ---
 
 <!-- chunk: 九、密钥管理方案对比 -->## 九、密钥管理方案对比
@@ -870,7 +875,8 @@ kubectl get clusterpolicy -o wide 2>/dev/null || echo "No cluster policies found
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Generate age key
 age-keygen -o age.key
 echo "Public key: $(age-keygen -y age.key)"
@@ -885,7 +891,6 @@ SOPS_AGE_KEY_FILE=age.key sops --encrypt \
   --age age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
   secret.yaml > secret.enc.yaml
 ```
-
 ```yaml
 # Flux Kustomization with SOPS decryption
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -1031,7 +1036,8 @@ groups:
 
 ## 11.2 签名验证审计脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # verify_all_signatures.sh - Verify all running images
 set -euo pipefail
@@ -1058,7 +1064,6 @@ kubectl get pods -A -o json | \
 echo ""
 echo "Verification complete"
 ```
-
 ---
 
 <!-- chunk: 十二、SOC 2 合规与 GitOps -->## 十二、SOC 2 合规与 GitOps
@@ -1181,3 +1186,6 @@ SOPS解密失败:
 - 06-flux-gitops-continuous-delivery
 - 08-cicd-pipeline-patterns
 - 99-argo-cd-gitops-guide
+
+
+<!-- risk-assessed -->

@@ -55,6 +55,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 版本生命周期与支持策略
@@ -209,7 +214,8 @@ Kubernetes 发布周期
 
 ### 云厂商升级策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS EKS
 eksctl upgrade cluster --name=my-cluster --version=1.33
 
@@ -219,7 +225,6 @@ gcloud container clusters upgrade my-cluster --cluster-version=1.33.0
 # Azure AKS
 az aks upgrade --resource-group myRG --name myAKS --kubernetes-version 1.33.0
 ```
-
 ---
 
 <!-- chunk: 六、升级窗口规划 -->
@@ -258,7 +263,8 @@ az aks upgrade --resource-group myRG --name myAKS --kubernetes-version 1.33.0
 
 ### EOL 预警检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-eol-check.sh
 
@@ -293,7 +299,6 @@ if [ $MINOR -lt $RECOMMENDED ]; then
   echo "📌 推荐升级至: v1.$RECOMMENDED"
 fi
 ```
-
 ### 紧急 EOL 迁移预案
 
 ```bash
@@ -352,3 +357,6 @@ fi
 - 99-kubernetes-v1.33-upgrade-guide
 - 01-kubernetes-architecture-overview
 - 02-core-components-deep-dive
+
+
+<!-- risk-assessed -->

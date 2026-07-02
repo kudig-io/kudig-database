@@ -75,6 +75,11 @@ related_docs:
   desc: 网络策略故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - 网络安全策略与零信任架构
@@ -463,7 +468,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # zero-trust-deployment.sh
 
@@ -495,7 +501,6 @@ kubectl apply -f 04-database-security.yaml
 echo "5. 验证网络策略..."
 kubectl get networkpolicies -A
 ```
-
 ### 安全监控与告警
 
 ```yaml
@@ -546,7 +551,8 @@ spec:
 
 ### 网络策略诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看所有网络策略
 kubectl get networkpolicies -A
 
@@ -566,7 +572,6 @@ cilium policy trace --src-pod <source-pod> --dst-pod <dest-pod>
 # 5. 查看网络策略日志
 kubectl logs -n kube-system -l k8s-app=cilium
 ```
-
 ### 常见问题解决
 
 | 问题现象 | 可能原因 | 解决方案 |
@@ -629,3 +634,6 @@ kubectl logs -n kube-system -l k8s-app=cilium
 - 01-authentication-authorization-system
 - 03-runtime-security-defense
 - 04-audit-logging-compliance
+
+
+<!-- risk-assessed -->

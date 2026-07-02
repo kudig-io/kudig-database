@@ -44,6 +44,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 22 - [[NetworkPolicy|NetworkPolicy]] YAML 配置参考
@@ -431,11 +436,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 给 namespace 添加标签
 kubectl label namespace monitoring name=monitoring
 ```
-
 ---
 
 ## 2.3 podSelector + namespaceSelector (AND 逻辑)
@@ -898,7 +903,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # v1.22+ 自动添加
 kubectl get namespace kube-system --show-labels
 # kubernetes.io/metadata.name=kube-system
@@ -906,7 +912,6 @@ kubectl get namespace kube-system --show-labels
 # 如果缺少,手动添加
 kubectl label namespace kube-system kubernetes.io/metadata.name=kube-system
 ```
-
 ---
 
 ## 4.2 三层应用架构 (Frontend → Backend → Database)
@@ -1479,7 +1484,8 @@ iptables -t filter -L cali-INPUT -n -v
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用 eBPF 模式
 kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"bpfEnabled":true}}'
 
@@ -1490,7 +1496,6 @@ bpftool prog show
 # 123: cgroup_skb  name cali_to_host_ep  tag abc123...
 # 124: cgroup_skb  name cali_from_host_ep  tag def456...
 ```
-
 **Calico 特性**:
 - ✅ 支持标准 NetworkPolicy
 - ✅ 支持 `ipBlock`, `podSelector`, `namespaceSelector`
@@ -1748,7 +1753,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试: Frontend → Backend (应该成功)
 kubectl exec -it frontend-pod -n zerotrust -- curl http://backend-service:8080
 # 200 OK
@@ -1761,7 +1767,6 @@ kubectl exec -it frontend-pod -n zerotrust -- curl http://database-service:5432
 kubectl exec -it backend-pod -n zerotrust -- psql -h database-service -p 5432
 # Connected
 ```
-
 ---
 
 ## 6.2 案例 2: 微分段 (Microsegmentation)
@@ -2066,7 +2071,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CNI 插件是否支持 NetworkPolicy
 kubectl get pods -n kube-system | grep -E "calico|cilium|weave"
 
@@ -2088,13 +2094,13 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 # 6. 测试网络连通性
 kubectl exec -it <source-pod> -n <namespace> -- curl <target-service>:8080
 ```
-
 ## 7.2 Calico 特定问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Calico 状态
 kubectl get pods -n kube-system -l k8s-app=calico-node
 
@@ -2112,7 +2118,6 @@ iptables-save | grep cali
 # 启用 Calico 调试日志
 kubectl patch felixconfiguration default -p '{"spec":{"logSeverityScreen":"Debug"}}'
 ```
-
 ## 7.3 Cilium 特定问题
 
 ```bash
@@ -2180,7 +2185,8 @@ cilium bpf policy list
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 使用 kubectl auth can-i (RBAC)
 kubectl auth can-i create networkpolicies -n production
 
@@ -2199,7 +2205,6 @@ hubble observe --from-pod frontend-pod --to-pod backend-pod
 # 5. 使用 tcpdump 抓包
 kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 ```
-
 ## 8.3 性能优化
 
 1. **选择高性能 CNI**:
@@ -2269,3 +2274,6 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+
+<!-- risk-assessed -->

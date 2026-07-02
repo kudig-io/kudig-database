@@ -42,6 +42,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 华为云 CCE (Cloud Container Engine) 企业级深度实战指南
@@ -469,7 +474,8 @@ spec:
 ### 国产化环境故障诊断
 
 **信创故障诊断脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 华为云CCE信创故障诊断工具
 
@@ -515,7 +521,6 @@ fi
 echo
 echo "诊断报告已保存到: $REPORT_FILE"
 ```
-
 ## 信创特性与优势
 
 ### 信创技术优势
@@ -589,3 +594,6 @@ echo "诊断报告已保存到: $REPORT_FILE"
 - [[entities/kubernetes.md|kubernetes]]
 - USER
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

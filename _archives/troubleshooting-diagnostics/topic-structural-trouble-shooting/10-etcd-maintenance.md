@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # etcd 维护专项文档
 
 > **文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05
@@ -59,7 +64,8 @@ prerequisites:
 
 ### 1.2 常用诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基本健康检查
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -91,7 +97,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # 查看 db 大小
 du -sh /var/lib/etcd/
 ```
-
 ---
 
 ## 2. 问题场景
@@ -103,7 +108,8 @@ du -sh /var/lib/etcd/
 **根因**: etcd 使用 B+tree 存储，删除操作只标记 tombstone，不立即压缩空间
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查当前 db 大小
 du -sh /var/lib/etcd/member/
 
@@ -125,9 +131,9 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # 4. 验证 defrag 效果
 du -sh /var/lib/etcd/member/
 ```
-
 **修复步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 多节点集群：逐节点 defrag（不要同时！）
 # 1. 在节点 1 执行 defrag
 ETCDCTL_API=3 etcdctl --endpoints=https://node-1:2379 defrag
@@ -137,7 +143,6 @@ du -sh /var/lib/etcd/
 
 # 3. 确认无异常后再处理下一个节点
 ```
-
 **自动 defrag 方案**：
 ```yaml
 # 使用 etcd-backup-restore 工具自动 defrag
@@ -151,7 +156,8 @@ du -sh /var/lib/etcd/
 **问题现象**: API Server 报 "etcdserver: mvcc: database space exceeded"，写入被拒绝
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认配额状态
 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status | grep -i quota
 
@@ -164,9 +170,9 @@ COMPACT_REV=$(ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 
 echo "Current revision: $COMPACT_REV"
 ```
-
 **修复步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 紧急扩容配额（不推荐长期使用）
 # 编辑 etcd 配置 /etc/kubernetes/etcd.config.yaml
 # 添加: quota-backend-bytes: 17179869184  (16GB)
@@ -202,14 +208,13 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # 4. 验证
 kubectl get pods -n kube-system | grep etcd  # 确认所有 etcd pod 健康
 ```
-
 **预防措施**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 配置定期 compact（建议每周一次）
 # 使用 cron 或 Kubernetes Job
 0 3 * * 0 ETCDCTL_API=3 etcdctl defrag --endpoints=https://127.0.0.1:2379 ...
 ```
-
 ---
 
 ### 2.3 Leadership election 失败（leader 频繁切换）
@@ -217,7 +222,8 @@ kubectl get pods -n kube-system | grep etcd  # 确认所有 etcd pod 健康
 **问题现象**: etcd 日志显示 "raft term changed" 或 "lost leader"，集群不稳定
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前 leader
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status -w json | jq '.leader'
 
@@ -233,9 +239,9 @@ iostat -x 1 10
 top
 # 高 CPU 导致 heartbeat 延迟
 ```
-
 **修复步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 1: 降低心跳间隔（临时）
 # 编辑 /etc/kubernetes/etcd.config.yaml
 # 添加: heartbeat-interval: 500  (默认 1000ms)
@@ -248,7 +254,6 @@ top
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   move-leader <new-leader-ip>
 ```
-
 ---
 
 ### 2.4 Member add 失败
@@ -256,7 +261,17 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 **问题现象**: `etcdctl member add` 成功但新节点无法加入，日志报 "conflicting cluster ID" 或 "peer cluster not found"
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看现有成员
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 member list -w table
 
@@ -269,9 +284,9 @@ cat /etc/kubernetes/etcd/etcd.conf.yaml | grep ETCD_INITIAL_CLUSTER
 sudo rm -rf /var/lib/etcd/
 sudo systemctl restart etcd
 ```
-
 **正确的 add member 流程**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在现有集群添加新成员
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -286,7 +301,6 @@ kubeadm join phase etcd https://<existing-ip>:2379 --token <token> \
   --discovery-token-ca-cert-hash sha256:<hash> \
   --control-plane --certificate-key <cert-key>
 ```
-
 ---
 
 ### 2.5 Member remove 失败（节点退役）
@@ -294,7 +308,17 @@ kubeadm join phase etcd https://<existing-ip>:2379 --token <token> \
 **问题现象**: `etcdctl member remove` 卡住或超时
 
 **排查步骤**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 member 状态
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 member list -w table
 
@@ -310,7 +334,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 sudo rm -rf /var/lib/etcd/
 sudo systemctl stop etcd
 ```
-
 ---
 
 ### 2.6 Snapshot backup 验证失败
@@ -318,7 +341,8 @@ sudo systemctl stop etcd
 **问题现象**: `etcdctl snapshot save` 成功，但 restore 时报错 "snapshot file is not valid"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 snapshot 文件完整性
 ls -lh /backup/etcd-*.db
 
@@ -334,9 +358,9 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status -w json
 
 # 5. 如 cluster ID 不匹配，说明 snapshot 来自不同的集群，不能直接 restore
 ```
-
 **正确的 backup/restore 流程**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== BACKUP ==========
 # 1. 创建 snapshot
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
@@ -370,7 +394,6 @@ systemctl start etcd
 # 7. 验证
 ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint health
 ```
-
 ---
 
 ## 3. 性能调优
@@ -506,3 +529,6 @@ related:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

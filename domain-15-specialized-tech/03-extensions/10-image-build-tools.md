@@ -53,6 +53,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 103 - 容器镜像构建工具 (Container Image Build)
@@ -63,6 +68,7 @@ cross_refs:
 ## 容器镜像构建生态架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        容器镜像构建与分发生态                                         │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -134,7 +140,6 @@ cross_refs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: 构建工具技术对比矩阵 -->
 ## 构建工具技术对比矩阵
 
@@ -155,6 +160,7 @@ cross_refs:
 ### 1. 架构与工作原理
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Kaniko 构建流程                                        │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -200,7 +206,6 @@ cross_refs:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2. 生产级 Kaniko 配置
 
 ```yaml
@@ -592,6 +597,7 @@ spec:
 ### 1. BuildKit 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           BuildKit 架构                                          │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -652,7 +658,6 @@ spec:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2. BuildKit 高级特性示例
 
 ```dockerfile
@@ -722,7 +727,8 @@ ENTRYPOINT ["/server"]
 
 ### 3. BuildKit 配置与使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== 启用 BuildKit ====================
 
 # Docker Desktop 默认已启用 BuildKit
@@ -818,7 +824,6 @@ docker buildx build \
   --tag myapp:latest \
   .
 ```
-
 ### 4. Kubernetes 中运行 BuildKit
 
 ```yaml
@@ -895,7 +900,8 @@ spec:
 
 ### 1. Buildah 完整使用指南
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== 基础构建 ====================
 
 # 从 Dockerfile 构建 (类似 docker build)
@@ -1000,7 +1006,6 @@ buildah prune -a
 # 指定存储位置
 export BUILDAH_ROOT=/var/lib/containers/storage
 ```
-
 ### 2. Buildah 在 Kubernetes 中使用
 
 ```yaml
@@ -1199,7 +1204,8 @@ spec:
 </project>
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Maven 构建命令
 # 构建并推送到 Registry
 mvn compile jib:build
@@ -1216,7 +1222,6 @@ mvn compile jib:build -DskipTests
 # 指定目标镜像
 mvn compile jib:build -Dimage=myregistry.com/myapp:v1.0
 ```
-
 ### 2. Gradle 集成
 
 ```groovy
@@ -1314,7 +1319,8 @@ baseImageOverrides:
   github.com/myorg/myapp/cmd/worker: gcr.io/distroless/base-debian12:nonroot
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== 基础使用 ====================
 
 # 设置默认 Registry
@@ -1353,7 +1359,6 @@ ko publish ./cmd/server --tags=$(git describe --tags --always)
 # 带基础镜像摘要
 ko publish ./cmd/server --image-refs=images.txt
 ```
-
 ```yaml
 # deployment.yaml - ko 自动替换镜像
 apiVersion: apps/v1
@@ -1764,7 +1769,8 @@ ENTRYPOINT ["/server"]
 
 ### 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # image-build-diagnose.sh
 
@@ -1796,7 +1802,6 @@ echo ""
 echo "=== SBOM 生成 ==="
 syft $IMAGE_NAME -o table | head -30
 ```
-
 <!-- chunk: 速查表 -->
 ## 速查表
 
@@ -1821,7 +1826,8 @@ syft $IMAGE_NAME -o table | head -30
 
 ### BuildKit/buildx 参数速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建
 docker buildx build
   --platform        # 目标平台
@@ -1833,7 +1839,6 @@ docker buildx build
   --push            # 推送到 Registry
   --load            # 加载到本地 Docker
 ```
-
 ### 镜像大小优化清单
 
 - [ ] 使用多阶段构建
@@ -1873,3 +1878,6 @@ docker buildx build
 - 09-gitops-workflow-argocd
 - 11-service-mesh-overview
 - 12-service-mesh-advanced
+
+
+<!-- risk-assessed -->

@@ -32,6 +32,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenSSL 证书操作速查手册
@@ -336,7 +341,8 @@ openssl crl2pkcs7 -nocrl -certfile fullchain.crt | \
 
 ## 五、kubeconfig 证书操作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从 kubeconfig 提取 CA 证书
 kubectl config view --raw \
   -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' | \
@@ -355,7 +361,6 @@ kubectl config view --raw \
 # 查看提取的证书信息
 openssl x509 -in extracted-client.crt -noout -text
 ```
-
 ---
 
 ## 六、CSR 操作
@@ -363,7 +368,8 @@ openssl x509 -in extracted-client.crt -noout -text
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Kubernetes CSR 中的请求内容
 kubectl get csr <csr-name> -o jsonpath='{.spec.request}' | base64 -d | openssl req -noout -text
 
@@ -383,7 +389,6 @@ spec:
     - client auth
 EOF
 ```
-
 ---
 
 ## 七、调试 TLS 握手
@@ -426,3 +431,6 @@ done
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

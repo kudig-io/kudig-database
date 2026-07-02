@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 证书管理与 TLS 配置
@@ -334,7 +339,17 @@ echo "=========================================="
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # certificate-renew.sh
 # kubeadm 证书更新脚本
@@ -413,7 +428,6 @@ echo ""
 
 echo "=== 证书更新完成 ==="
 ```
-
 <!-- chunk: cert-manager 部署 -->
 ## cert-manager 部署
 
@@ -423,7 +437,8 @@ echo "=== 证书更新完成 ==="
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy-cert-manager.sh
 # cert-manager 部署脚本
@@ -466,7 +481,6 @@ cmctl check api --wait=2m || echo "cmctl 未安装,跳过 API 检查"
 
 echo "=== cert-manager 部署完成 ==="
 ```
-
 ### cert-manager CRD 说明
 
 | CRD | 作用域 | 用途 | 说明 |
@@ -1293,3 +1307,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

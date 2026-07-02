@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 35 - 节点组件故障排查 (Node Component Troubleshooting)
@@ -161,7 +166,8 @@ cross_refs:
 
 ### 2.1 kubelet状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础状态验证 ==========
 # 检查kubelet服务状态
 systemctl status kubelet
@@ -193,10 +199,10 @@ kubectl get node <node-name> -o jsonpath='{.status.conditions}'
 # 分析节点事件
 kubectl get events --field-selector involvedObject.name=<node-name> --sort-by='.lastTimestamp'
 ```
-
 ### 2.2 kubelet日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 日志收集和分析 ==========
 # 查看kubelet系统日志
 journalctl -u kubelet --since "1 hour ago"
@@ -223,7 +229,6 @@ journalctl -u kubelet | grep -i "network|connection|timeout"
 # 容器运行时错误
 journalctl -u kubelet | grep -i "cri|container|docker|containerd"
 ```
-
 ### 2.3 kubelet性能监控
 
 ```bash
@@ -259,7 +264,8 @@ done
 
 ### 3.1 容器运行时状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 运行时基础检查 ==========
 # 检查containerd状态
 systemctl status containerd
@@ -298,10 +304,10 @@ docker inspect <container-id>
 crictl logs <container-id>
 docker logs <container-id>
 ```
-
 ### 3.2 容器运行时性能问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 性能监控 ==========
 # 监控容器运行时资源使用
 systemctl status containerd --no-pager
@@ -335,7 +341,6 @@ crictl exec <pod-id> ping -c 3 8.8.8.8
 docker run --rm -it busybox nslookup kubernetes.default
 crictl exec <pod-id> nslookup kubernetes.default
 ```
-
 ---
 
 <!-- chunk: 4. kube-proxy故障排查 (kube-proxy Troubleshooting) -->
@@ -346,7 +351,8 @@ crictl exec <pod-id> nslookup kubernetes.default
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 基础组件检查 ==========
 # 检查kube-proxy Pod状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
@@ -380,13 +386,13 @@ kubectl run debug-pod --image=busybox --rm -it -- sh
 # 验证NodePort访问
 curl http://<node-ip>:<node-port>
 ```
-
 ### 4.2 kube-proxy配置问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 配置验证 ==========
 # 检查kube-proxy模式
 kubectl get configmap -n kube-system kube-proxy -o jsonpath='{.data.config\.conf}' | grep mode
@@ -408,7 +414,6 @@ iptables -t nat -L KUBE-SERVICES -n | head -10
 # 检查规则同步日志
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "sync|update"
 ```
-
 ---
 
 <!-- chunk: 5. 节点资源压力故障排查 (Node Resource Pressure Troubleshooting) -->
@@ -416,7 +421,8 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -i "sync|upd
 
 ### 5.1 资源使用监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 实时资源监控 ==========
 # 监控节点资源使用
 watch -n 5 'kubectl top nodes'
@@ -449,13 +455,13 @@ kubectl get events --field-selector involvedObject.kind=Node --sort-by='.lastTim
 # 查看Pod驱逐历史
 kubectl get events --all-namespaces --field-selector reason=Evicted --sort-by='.lastTimestamp'
 ```
-
 ### 5.2 资源优化策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 资源预留配置 ==========
 # 检查系统预留配置
 cat /var/lib/kubelet/config.yaml | grep -A 5 "systemReserved|kubeReserved"
@@ -527,7 +533,6 @@ EOF
 
 chmod +x node-resource-cleaner.sh
 ```
-
 ---
 
 <!-- chunk: 6. 证书和认证故障排查 (Certificate and Authentication Troubleshooting) -->
@@ -535,7 +540,8 @@ chmod +x node-resource-cleaner.sh
 
 ### 6.1 证书状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 证书有效性验证 ==========
 # 检查kubelet证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet.crt -text -noout | grep -E "Subject:|Not After|X509v3 Subject Alternative Name"
@@ -556,10 +562,10 @@ kubectl get csr -A | grep -E "Approved|Pending"
 # 检查证书签名请求
 kubectl get csr | grep kubelet
 ```
-
 ### 6.2 认证和授权问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 节点认证检查 ==========
 # 验证节点认证状态
 kubectl get nodes -o jsonpath='{
@@ -592,7 +598,6 @@ kubectl run network-test --image=busybox --rm -it -- sh -c "
     telnet <api-server-ip> 6443
 "
 ```
-
 ---
 
 <!-- chunk: 7. 监控和告警配置 (Monitoring and Alerting) -->
@@ -603,7 +608,8 @@ kubectl run network-test --image=busybox --rm -it -- sh -c "
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -699,7 +705,6 @@ spec:
         summary: "High container restart rate ({{ \$value }}/sec) on node {{ \$labels.node }}"
 EOF
 ```
-
 ### 7.2 节点健康检查工具
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -707,7 +712,8 @@ EOF
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 自动化健康检查 ==========
 cat <<'EOF' > node-health-check.sh
 #!/bin/bash
@@ -825,7 +831,6 @@ EOF
 
 chmod +x node-performance-benchmark.sh
 ```
-
 ---
 
 ---
@@ -859,3 +864,6 @@ chmod +x node-performance-benchmark.sh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+
+<!-- risk-assessed -->

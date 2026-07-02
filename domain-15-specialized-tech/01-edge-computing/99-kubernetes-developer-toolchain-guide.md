@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s 开发者体验工具链指南
@@ -73,6 +78,7 @@ authors:
 ## 一、工具链全景
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 K8s 开发者工具链
 ├── 集群管理
 │   ├── k9s          ← 终端交互式管理
@@ -103,7 +109,6 @@ K8s 开发者工具链
     ├── ketall       ← 列出所有资源
     └── debug        ← 调试容器
 ```
-
 ---
 
 ## 二、k9s 终端交互式管理
@@ -175,18 +180,19 @@ k9s:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
 helm install headlamp headlamp/headlamp \
   --namespace kube-system
 ```
-
 ### 3.2 访问
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 端口转发
 kubectl port-forward -n kube-system svc/headlamp 4466:80
 
@@ -197,7 +203,6 @@ kubectl create clusterrolebinding headlamp-admin \
   --serviceaccount=kube-system:headlamp-admin
 kubectl create token headlamp-admin -n kube-system
 ```
-
 ### 3.3 插件系统
 
 ```bash
@@ -274,7 +279,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ### 5.2 必备插件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 上下文和命名空间快速切换
 kubectl krew install ctx
 kubectl krew install ns
@@ -303,10 +309,10 @@ kubectl krew install view-allocations
 # 证书过期检查
 kubectl krew install cert-manager
 ```
-
 ### 5.3 插件使用示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速切换上下文
 kubectl ctx production
 kubectl ctx -  # 切换回上一个
@@ -327,7 +333,6 @@ kubectl sniff myapp-pod -n production
 # 查看所有资源
 kubectl get-all -n production
 ```
-
 ---
 
 ## 六、本地开发工具
@@ -373,22 +378,22 @@ telepresence intercept myapp --port 8080:http
 
 ### 7.1 popeye (集群清理)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install popeye
 kubectl popeye
 # 扫描集群资源，给出优化建议
 ```
-
 ### 7.2 kube-bench (安全审计)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
 kubectl logs job/kube-bench
 ```
-
 ### 7.3 kube-ps1 (Shell 提示)
 
 ```bash
@@ -412,7 +417,17 @@ PROMPT='$(kube_ps1)'$PROMPT
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ~/.zshrc 或 ~/.bashrc
 alias k='kubectl'
 alias kg='kubectl get'
@@ -436,17 +451,16 @@ alias kns='kubectl ns'
 ksh() { kubectl exec -it $1 -- /bin/sh; }
 bash() { kubectl exec -it $1 -- /bin/bash; }
 ```
-
 ### 8.2 kubectl 自动补全
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Bash
 source <(kubectl completion bash)
 
 # Zsh
 source <(kubectl completion zsh)
 ```
-
 ---
 
 ## 参考链接
@@ -481,3 +495,6 @@ source <(kubectl completion zsh)
 - 10-edge-use-cases
 - 01-edge-computing-architecture
 - 02-cloud-edge-collaboration
+
+
+<!-- risk-assessed -->

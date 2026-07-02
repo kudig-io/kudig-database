@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # PV 快照：云盘快照、CSI 快照、恢复演练
@@ -138,7 +143,8 @@ aliyun ecs ApplyAutoSnapshotPolicy \
 
 在创建 VolumeSnapshot 前，需确认集群已部署支持快照的 CSI 驱动，并已启用 `VolumeSnapshotDataSource` 特性（v1.28+ 默认启用）：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CSI 驱动与 Snapshotter
 kubectl get csidriver
 kubectl get pods -n kube-system | grep csi
@@ -147,7 +153,6 @@ kubectl get pods -n kube-system | grep csi
 kubectl get crd | grep snapshot
 # 预期输出包含 volumesnapshotclasses.snapshot.storage.k8s.io
 ```
-
 ### 4.2 创建 VolumeSnapshotClass
 
 `VolumeSnapshotClass` 定义了快照的底层实现与参数。以下示例使用阿里云磁盘 CSI 驱动的 `alibabacloud-disk`：
@@ -184,7 +189,8 @@ spec:
 
 创建后可通过以下命令查看快照进度与状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VolumeSnapshot 状态
 kubectl get volumesnapshot -n production
 kubectl describe volumesnapshot mysql-data-snapshot-20260629 -n production
@@ -192,7 +198,6 @@ kubectl describe volumesnapshot mysql-data-snapshot-20260629 -n production
 # 查看底层 VolumeSnapshotContent
 kubectl get volumesnapshotcontent
 ```
-
 ### 4.4 快照类参数对比
 
 | 参数 | 取值 | 含义 |
@@ -209,7 +214,8 @@ kubectl get volumesnapshotcontent
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在数据库 Pod 内冻结文件系统（需特权容器）
 kubectl exec -n production mysql-0 -- fsfreeze -f /var/lib/mysql
 
@@ -220,7 +226,6 @@ kubectl apply -f volumesnapshot-mysql.yaml
 kubectl wait --for=jsonpath='{.status.readyToUse}'=true volumesnapshot/mysql-data-snapshot -n production --timeout=600s
 kubectl exec -n production mysql-0 -- fsfreeze -u /var/lib/mysql
 ```
-
 对于 MySQL，更推荐结合 Velero 备份钩子执行 `FLUSH TABLES WITH READ LOCK`；对于 PostgreSQL，可使用 `pg_start_backup` / `pg_stop_backup`。文件系统冻结适用于无数据库 hook 能力的通用有状态应用。
 
 ## 5. 从快照恢复 PVC/PV
@@ -250,14 +255,14 @@ spec:
 
 创建 PVC 后，CSI 驱动会自动生成 PV 并完成绑定。可通过以下命令验证：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 PVC 已绑定
 kubectl get pvc mysql-data-restore -n production-drill
 
 # 验证 Pod 可使用恢复后的 PVC
 kubectl get pods -n production-drill -l app=mysql
 ```
-
 ### 5.2 恢复到原 PVC 的注意事项
 
 如果需要覆盖原 PVC（例如回滚场景），必须先删除原 PVC 与 PV，并确保应用已停止写入，否则会造成数据不一致：
@@ -267,7 +272,17 @@ kubectl get pods -n production-drill -l app=mysql
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 缩容应用，停止写入
 kubectl scale statefulset/mysql --replicas=0 -n production
 
@@ -280,7 +295,6 @@ kubectl apply -f pvc-restore-same-name.yaml
 # 4. 扩容应用
 kubectl scale statefulset/mysql --replicas=1 -n production
 ```
-
 ### 5.3 PVC 扩容与快照恢复后的容量管理
 
 从快照恢复时，新 PVC 的容量必须大于或等于快照源 PVC 的容量。若需扩容，可在恢复后执行 PVC resize，但需确认 StorageClass 的 `allowVolumeExpansion: true`：
@@ -288,7 +302,8 @@ kubectl scale statefulset/mysql --replicas=1 -n production
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 StorageClass 是否支持扩容
 kubectl get storageclass alicloud-disk-ssd -o jsonpath='{.allowVolumeExpansion}'
 
@@ -315,7 +330,6 @@ EOF
 # 等待文件系统自动扩容
 kubectl wait --for=jsonpath='{.status.capacity.storage}'=200Gi pvc/mysql-data-restore-expanded -n production --timeout=300s
 ```
-
 ## 6. 恢复演练
 
 ### 6.1 演练场景设计
@@ -335,7 +349,8 @@ kubectl wait --for=jsonpath='{.status.capacity.storage}'=200Gi pvc/mysql-data-re
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -388,7 +403,6 @@ kubectl apply -n ${DRILL_NS} -f manifests/mysql-drill.yaml
 kubectl wait --for=condition=ready pod -l app=mysql -n ${DRILL_NS} --timeout=300s
 kubectl exec -n ${DRILL_NS} deploy/mysql -- mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "SHOW DATABASES;"
 ```
-
 ## 7. 跨可用区与跨区域复制
 
 ### 7.1 跨可用区恢复
@@ -502,3 +516,6 @@ spec:
 - [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
 - [[domain-09-reliability-engineering/01-backup-recovery/02-namespace-backup-restore.md|Namespace 级别备份恢复：Velero]]
 - [[domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+
+
+<!-- risk-assessed -->

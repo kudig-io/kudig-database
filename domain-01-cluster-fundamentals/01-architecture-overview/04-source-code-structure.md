@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - [[Kubernetes|Kubernetes]] 源码结构深度解析
@@ -361,7 +366,8 @@ staging 目录包含可独立发布为 Go 模块的代码，通过 `k8s.io/*` �
 
 ### 构建与测试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 构建相关 ==========
 # 构建所有组件（生产二进制）
 make all WHAT=cmd/kube-apiserver GOFLAGS=-v
@@ -458,7 +464,6 @@ go tool pprof -http=:8080 cpu.prof
 curl http://localhost:6443/debug/pprof/heap > heap.prof
 go tool pprof -http=:8080 heap.prof
 ```
-
 ### 开发环境搭建
 
 ```bash
@@ -548,7 +553,8 @@ dlv exec _output/bin/kube-scheduler -- --kubeconfig=/path/to/kubeconfig
 
 ### 定制化构建流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Fork 官方仓库
 git clone https://github.com/yourorg/kubernetes.git
 cd kubernetes
@@ -578,7 +584,6 @@ docker tag registry.k8s.io/kube-scheduler:latest yourregistry.com/kube-scheduler
 # 9. 推送到私有仓库
 docker push yourregistry.com/kube-scheduler:v1.32.0-custom
 ```
-
 ---
 
 <!-- chunk: YAML 示例：调度器插件配置 -->
@@ -835,3 +840,6 @@ type RuntimeServiceClient interface {
 - 03-api-versions-features
 - 05-kubectl-commands-reference
 - 06-cluster-configuration-parameters
+
+
+<!-- risk-assessed -->

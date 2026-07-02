@@ -19,6 +19,11 @@ last_updated: 2026-05-21
 status: reviewed
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # containerd 深度指南
@@ -30,6 +35,7 @@ containerd 是 Kubernetes 1.24+ 的标准容器运行时。理解其架构和工
 ## containerd 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Client (ctr/kubectl)
     ↓ CRI / containerd API
 containerd (守护进程)
@@ -40,7 +46,6 @@ runc (OCI 运行时)
     ↓
 Linux Namespace + Cgroups
 ```
-
 ### 核心组件
 
 | 组件 | 职责 | 对应进程 |
@@ -67,12 +72,12 @@ Kubernetes 1.24 正式移除 dockershim，containerd 成为唯一推荐运行时
 
 ### 常用命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ctr -n k8s.io images list      # 查看镜像列表
 crictl pull nginx:latest       # 拉取镜像
 crictl inspecti nginx:latest   # 查看镜像详情
 ```
-
 ### 命名空间
 
 containerd 使用命名空间隔离镜像：
@@ -181,3 +186,6 @@ data:
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Webhook 与准入控制故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
@@ -180,7 +185,8 @@ Webhook/准入控制问题
 
 #### 2.2.1 查看 Webhook 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 MutatingWebhookConfiguration
 kubectl get mutatingwebhookconfigurations
 
@@ -195,10 +201,10 @@ kubectl get validatingwebhookconfigurations <name> -o yaml
 kubectl describe mutatingwebhookconfigurations <name>
 kubectl describe validatingwebhookconfigurations <name>
 ```
-
 #### 2.2.2 检查 Webhook 服务状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Webhook 服务
 kubectl get svc -n <webhook-namespace>
 
@@ -214,10 +220,10 @@ kubectl logs -n <webhook-namespace> <pod-name>
 # 检查 Webhook 服务端口
 kubectl get svc -n <webhook-namespace> <service-name> -o jsonpath='{.spec.ports}'
 ```
-
 #### 2.2.3 证书检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Webhook 使用的 CA Bundle
 kubectl get mutatingwebhookconfigurations <name> -o jsonpath='{.webhooks[0].clientConfig.caBundle}' | base64 -d | openssl x509 -noout -text
 
@@ -227,10 +233,10 @@ kubectl get secret -n <namespace> <secret-name> -o jsonpath='{.data.tls\.crt}' |
 # 检查证书过期时间
 kubectl get secret -n <namespace> <secret-name> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -enddate
 ```
-
 #### 2.2.4 API Server 审计日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 API Server 日志中的 Webhook 调用
 kubectl logs -n kube-system kube-apiserver-<node> | grep -i webhook
 
@@ -240,10 +246,10 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep -i admission
 # 查看特定 Webhook 的调用记录
 kubectl logs -n kube-system kube-apiserver-<node> | grep <webhook-name>
 ```
-
 #### 2.2.5 测试 Webhook 连接
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从集群内部测试 Webhook 服务连接
 kubectl run curl-test --rm -it --image=curlimages/curl --restart=Never -- \
   curl -k https://<webhook-service>.<namespace>.svc:<port>/validate
@@ -254,7 +260,6 @@ kubectl get networkpolicy -n <webhook-namespace>
 # 检查 Service 到 Pod 的连通性
 kubectl exec -n <namespace> <pod> -- nc -zv <webhook-service> <port>
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -283,7 +288,8 @@ Post "https://webhook-service.default.svc:443/validate": dial tcp 10.96.x.x:443:
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 服务和 Pod 状态
 kubectl get svc,pods -n <webhook-namespace> -l <app-label>
 
@@ -303,7 +309,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 # 6. 或者直接删除 Webhook 配置 (谨慎!)
 kubectl delete mutatingwebhookconfiguration <name>
 ```
-
 **风险提示：**
 - 设置 `failurePolicy: Ignore` 会跳过 Webhook 验证，可能导致不合规资源被创建
 - 删除 Webhook 配置会完全禁用该 Webhook 的功能
@@ -317,7 +322,8 @@ failed calling webhook: x509: certificate signed by unknown authority
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 配置中的 CA Bundle
 kubectl get mutatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].clientConfig.caBundle}' | base64 -d | openssl x509 -noout -issuer
 
@@ -337,12 +343,12 @@ CA_BUNDLE=$(kubectl get secret -n <namespace> <ca-secret> -o jsonpath='{.data.ca
 # 更新 Webhook 配置
 kubectl patch mutatingwebhookconfiguration <name> --type='json' -p="[{\"op\": \"replace\", \"path\": \"/webhooks/0/clientConfig/caBundle\", \"value\": \"${CA_BUNDLE}\"}]"
 ```
-
 #### 场景 3：证书过期
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查证书过期时间
 kubectl get secret -n <namespace> <tls-secret> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -enddate
 
@@ -366,7 +372,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p="[{\"op\": \"
 # 5. 重启 Webhook Pod
 kubectl rollout restart deployment -n <namespace> <webhook-deployment>
 ```
-
 ---
 
 ### 3.2 Webhook 超时问题
@@ -380,7 +385,8 @@ timeout: request did not complete within requested timeout 10s
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前超时设置
 kubectl get mutatingwebhookconfiguration <name> -o jsonpath='{.webhooks[0].timeoutSeconds}'
 
@@ -400,7 +406,6 @@ kubectl scale deployment -n <namespace> <webhook-deployment> --replicas=3
 # - 增加资源限制
 kubectl patch deployment -n <namespace> <webhook-deployment> --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/resources/limits/cpu", "value": "500m"}]'
 ```
-
 ---
 
 ### 3.3 Webhook 配置问题
@@ -412,7 +417,8 @@ kubectl patch deployment -n <namespace> <webhook-deployment> --type='json' -p='[
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 规则配置
 kubectl get mutatingwebhookconfiguration <name> -o yaml
 
@@ -441,7 +447,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[
   ]}
 ]'
 ```
-
 #### 场景 2：排除系统命名空间
 
 **问题现象：**
@@ -449,7 +454,8 @@ Webhook 影响了 kube-system 等系统命名空间，导致系统组件无法�
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为系统命名空间添加排除标签
 kubectl label namespace kube-system webhook.example.com/exclude=true
 kubectl label namespace kube-node-lease webhook.example.com/exclude=true
@@ -485,7 +491,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[
   }}
 ]'
 ```
-
 ---
 
 ### 3.4 常见 Webhook 故障排查
@@ -497,7 +502,8 @@ Pod 创建后没有 istio-proxy sidecar 容器
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Istio Webhook 状态
 kubectl get mutatingwebhookconfiguration istio-sidecar-injector -o yaml
 
@@ -522,7 +528,6 @@ kubectl logs -n istio-system -l app=istiod | grep -i inject
 kubectl delete pod <pod-name>  # 重建 Pod
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].name}'
 ```
-
 #### 场景 2：OPA/Gatekeeper 策略拒绝
 
 **问题现象：**
@@ -533,7 +538,8 @@ admission webhook "validation.gatekeeper.sh" denied the request:
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Gatekeeper 约束
 kubectl get constraints
 
@@ -556,7 +562,6 @@ kubectl patch <constraint-kind> <constraint-name> --type='json' -p='[
   {"op": "replace", "path": "/spec/enforcementAction", "value": "warn"}
 ]'
 ```
-
 #### 场景 3：cert-manager Webhook 问题
 
 **问题现象：**
@@ -567,7 +572,8 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io"
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 cert-manager 组件状态
 kubectl get pods -n cert-manager
 
@@ -587,7 +593,6 @@ kubectl rollout restart deployment -n cert-manager cert-manager-webhook
 kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.x.x/cert-manager.yaml
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.x.x/cert-manager.yaml
 ```
-
 ---
 
 ### 3.5 紧急故障恢复
@@ -599,7 +604,17 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 **紧急恢复步骤：**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 删除问题 Webhook 配置
 kubectl delete mutatingwebhookconfiguration <name>
 kubectl delete validatingwebhookconfiguration <name>
@@ -619,7 +634,6 @@ ETCDCTL_API=3 etcdctl del /registry/admissionregistration.k8s.io/mutatingwebhook
 # 编辑 /etc/kubernetes/manifests/kube-apiserver.yaml
 # 添加: --disable-admission-plugins=MutatingAdmissionWebhook
 ```
-
 **风险提示：**
 - 删除 Webhook 会禁用所有相关的准入检查
 - 直接操作 etcd 可能导致数据不一致
@@ -732,7 +746,8 @@ webhooks:
 
 ### 常用排查命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Webhook 配置
 kubectl get mutatingwebhookconfigurations
 kubectl get validatingwebhookconfigurations
@@ -749,7 +764,6 @@ kubectl get secret -n <ns> <secret> -o jsonpath='{.data.tls\.crt}' | base64 -d |
 kubectl delete mutatingwebhookconfiguration <name>
 kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
 ```
-
 ### 相关文档
 
 - [API Server 故障排查](./01-apiserver-troubleshooting.md)
@@ -759,3 +773,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

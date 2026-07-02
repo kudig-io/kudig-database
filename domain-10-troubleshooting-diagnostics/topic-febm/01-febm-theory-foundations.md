@@ -46,6 +46,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第一章：FEBM 方法论原理与理论基础
@@ -215,6 +220,7 @@ NIST SP 800-61（计算机安全事件处理指南）定义的四阶段响应框
 FEBM 的发展经历了四个历史阶段：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 FEBM 演进时间线:
 
 Phase 1: 传统数字取证 (1990s-2000s)
@@ -263,7 +269,6 @@ Phase 4: 云原生取证 / FEBM 成熟 (2020-至今)
 │ 代表工具: Falco, Sysdig, OSDFIR, Container Explorer              │
 └────────────────────────────────────────────────────────────────┘
 ```
-
 这一演进的核心驱动力是**目标环境的根本性变化**：
 
 | 维度 | 传统环境 | 云原生/K8s 环境 |
@@ -795,3 +800,6 @@ FEBM 方法论明确识别并防范运维分析中常见的认知偏差：
 - [[domain-10-troubleshooting-diagnostics/topic-febm/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/03-febm-best-practices.md|03-febm-best-practices]]
+
+
+<!-- risk-assessed -->

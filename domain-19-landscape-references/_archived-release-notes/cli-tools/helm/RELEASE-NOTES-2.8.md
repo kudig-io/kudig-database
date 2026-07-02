@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.8 Release Notes
@@ -72,3 +77,6 @@ The [Quickstart Guide](https://docs.helm.sh/using_helm/#quickstart-guide) will g
 - Bump client side grpc max msg size fe1c052e879afd876831534297b817a622578106 (Johnny Bergström)
 - Keepalive config should be independent of TLS 6d6c41eb84c3b7c4a40c3a837c802ea7c688e385 (Ben Langfeld)
 - Tiller should only enforce what we expect from Helm 91dfe6cf4206efbe6fd40096216fe1fbe1408140 (Ben Langfeld)
+
+
+<!-- risk-assessed -->

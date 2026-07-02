@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[containerd|containerd]] v0.0 Release Notes
@@ -42,3 +47,6 @@ This release has support for runc by default and adds features such as detach wh
 You will need runc installed on your system to use conatinerd.
 
 You can find all the downloads you need to runc containerd on a linux amd64 system included in this release.   Just copy all binaries to your PATH and runc in your path under the name `runc`
+
+
+<!-- risk-assessed -->

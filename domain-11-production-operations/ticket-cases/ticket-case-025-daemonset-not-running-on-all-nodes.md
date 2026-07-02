@@ -63,6 +63,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 025：DaemonSet 未在所有节点运行（日志采集 Agent 缺失）
@@ -85,7 +90,8 @@ relationships:
 
 ### 3.1 查看 DaemonSet 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 logtail DaemonSet 整体状态
 kubectl get daemonset logtail-ds -n kube-system
 
@@ -95,10 +101,10 @@ kubectl describe daemonset logtail-ds -n kube-system
 # 查看所有 Pod 状态分布
 kubectl get pod -n kube-system -l app=logtail-ds -o wide
 ```
-
 ### 3.2 查看异常 Pod 详情
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ImagePullBackOff Pod 的事件
 kubectl describe pod logtail-ds-abcde -n kube-system
 
@@ -106,10 +112,10 @@ kubectl describe pod logtail-ds-abcde -n kube-system
 kubectl logs -n kube-system -l app=logtail-ds --tail=100
 kubectl logs -n kube-system -l app=logtail-ds --previous --tail=100
 ```
-
 ### 3.3 检查节点污点与标签
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点污点
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints,READY:.status.conditions[?(@.type=='Ready')].status
 
@@ -121,10 +127,10 @@ kubectl get node -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' | wh
   fi
 done
 ```
-
 ### 3.4 检查镜像拉取与仓库认证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看异常 Pod 使用的镜像
 kubectl get pod logtail-ds-abcde -n kube-system -o jsonpath='{.spec.containers[*].image}'
 
@@ -134,20 +140,20 @@ kubectl get events -n kube-system --field-selector reason=FailedPullImage --sort
 # 检查 imagePullSecret 是否存在
 kubectl get secret -n kube-system | grep regcred
 ```
-
 ### 3.5 检查节点资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看未运行 Pod 节点的资源
 kubectl top node
 
 # 查看节点 allocatable 与已分配资源
 kubectl describe node <problem-node>
 ```
-
 ### 3.6 检查阿里云 SLS 与 Logtail 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Logtail 配置 ConfigMap
 kubectl get configmap -n kube-system | grep logtail
 kubectl get configmap logtail-config -n kube-system -o yaml
@@ -155,7 +161,6 @@ kubectl get configmap logtail-config -n kube-system -o yaml
 # 通过阿里云 CLI 查看 SLS 项目状态
 aliyun log GetProject --project-name k8s-logs-prod
 ```
-
 ### 3.7 诊断过程补充说明
 
 DaemonSet 的调度逻辑与 Deployment 不同，它不是通过 ReplicaSet 控制副本数，而是为每个符合条件的节点创建一个 Pod。因此 DaemonSet 的 Desired 数量等于符合条件的节点数，而 Ready 数量表示实际成功运行的 Pod 数。当 Desired != Ready 时，需要分别排查 "为什么没调度" 与 "为什么调度后没运行成功" 两个方向。
@@ -189,7 +194,17 @@ DaemonSet 的调度逻辑与 Deployment 不同，它不是通过 ReplicaSet 控�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 A：给 logtail-ds 添加污点容忍（推荐）
 cat <<'EOF' | kubectl patch daemonset logtail-ds -n kube-system --type=merge --patch-file=/dev/stdin
 spec:
@@ -210,14 +225,14 @@ EOF
 # 方案 B：若污点误加，可删除污点（不推荐用于生产加固节点）
 # kubectl taint node <node-name> security-hardened=true:NoSchedule-
 ```
-
 ### 5.2 修复镜像拉取认证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 imagePullSecret（若缺失）
 kubectl create secret docker-registry aliyun-regcred \
   --docker-server=registry-vpc.cn-shanghai.aliyuncs.com \
@@ -237,14 +252,14 @@ spec:
         - name: aliyun-regcred
 EOF
 ```
-
 ### 5.3 提升 DaemonSet 资源优先级
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为 logtail-ds 设置较高 PriorityClass，减少被驱逐概率
 cat <<'EOF' | kubectl apply -f -
 apiVersion: scheduling.k8s.io/v1
@@ -264,23 +279,23 @@ spec:
       priorityClassName: system-logging-critical
 EOF
 ```
-
 ### 5.4 滚动重启 DaemonSet
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 滚动重启 logtail-ds
 kubectl rollout restart daemonset logtail-ds -n kube-system
 
 # 观察重启进度
 kubectl rollout status daemonset logtail-ds -n kube-system --timeout=300s
 ```
-
 ## 6. 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 DaemonSet 所有节点都有 Pod
 kubectl get daemonset logtail-ds -n kube-system
 
@@ -308,7 +323,6 @@ aliyun log GetLogs \
   --to=$(date -u +%s) \
   --query='* | select count(*) as total'
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-025 已处理完成。
@@ -358,3 +372,6 @@ aliyun log GetLogs \
 - DaemonSet 未在所有节点运行：Logtail 多架构与污点容忍缺失
 - DaemonSet 未在所有节点运行：日志采集 Agent 缺失
 - DaemonSet 未在所有节点运行：Logtail 多架构与污点容忍缺失
+
+
+<!-- risk-assessed -->

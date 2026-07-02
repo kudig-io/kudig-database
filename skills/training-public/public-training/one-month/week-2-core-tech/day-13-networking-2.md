@@ -35,6 +35,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 13: 网络栈 - [[Ingress|Ingress]] + [[NetworkPolicy|NetworkPolicy]]
@@ -131,7 +136,8 @@ related:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 使用 Helm (推荐)
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -150,13 +156,13 @@ kubectl wait --namespace ingress-nginx \
 kubectl get pods -n ingress-nginx
 kubectl get svc -n ingress-nginx
 ```
-
 ### 任务 2: 配置 Ingress 路由 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试应用
 kubectl create deployment app1 --image=nginx:alpine
 kubectl create deployment app2 --image=httpd:alpine
@@ -239,13 +245,13 @@ INGRESS_PORT=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o json
 curl -H "Host: demo.local" http://$INGRESS_IP/app1
 curl -H "Host: app1.local" http://$INGRESS_IP/
 ```
-
 ### 任务 3: 配置 TLS (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成自签名证书
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout tls.key -out tls.crt \
@@ -287,7 +293,6 @@ curl -k -H "Host: demo.local" https://$INGRESS_IP/
 # 清理测试文件
 rm tls.key tls.crt
 ```
-
 ### 任务 4: NetworkPolicy 实践 (45min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -295,7 +300,17 @@ rm tls.key tls.crt
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建测试 namespace
 kubectl create namespace netpol-test
 
@@ -388,7 +403,6 @@ kubectl exec -n netpol-test web -- wget -qO- --timeout=2 db
 # 清理
 kubectl delete namespace netpol-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -459,3 +473,6 @@ Day 14 将学习存储体系 (PV/PVC/StorageClass)，并完成本周综合实践
 ## Related
 
 - index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

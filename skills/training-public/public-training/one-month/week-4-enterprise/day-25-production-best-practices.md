@@ -36,6 +36,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -113,6 +118,7 @@ related_topics:
 #### 高可用架构层次
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
                     ┌─────────────────────────┐
                     │      DNS / CDN          │  ← 全球负载均衡
                     └────────────┬────────────┘
@@ -131,7 +137,6 @@ related_topics:
     │  └───────────┘ │  │  └───────────┘ │  │  └───────────┘ │
     └────────────────┘  └────────────────┘  └────────────────┘
 ```
-
 ### 变更管理流程
 
 变更管理是 ITIL（Information Technology Infrastructure Library）框架中的核心流程，目标是确保所有变更都经过评估、审批和验证，最小化变更对业务的影响。
@@ -355,7 +360,8 @@ kubectl scale deployment <low-priority-app> --replicas=0 -n <ns>
 
 ### Service 不可用
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Endpoints
 kubectl get endpoints <svc> -n <ns>
 # Step 2: 检查 Pod 状态
@@ -365,10 +371,10 @@ kubectl rollout restart deployment/<deploy> -n <ns>
 # 或回滚
 kubectl rollout undo deployment/<deploy> -n <ns>
 ```
-
 ### 数据库连接问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Secret 配置
 kubectl get secret <db-secret> -n <ns> -o yaml
 # Step 2: 检查网络策略
@@ -378,10 +384,19 @@ kubectl exec -it <app-pod> -n <ns> -- nc -zv <db-host> <db-port>
 # Step 4: 临时缓解: 重启应用 Pod 刷新连接池
 kubectl rollout restart deployment/<deploy> -n <ns>
 ```
-
 ### 节点 NotReady
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 检查节点状态
 kubectl describe node <node>
 # Step 2: 标记节点不可调度
@@ -395,7 +410,7 @@ aliyun cs DELETE /clusters/<id>/nodes/<node-id>
 aliyun cs POST /clusters/<id>/nodepools/<np-id>/nodes --body '{"count": 1}'
 ```
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### 任务 3: 容量规划 (30min)
 
 ```bash
@@ -454,7 +469,6 @@ SCRIPT
 chmod +x capacity-planning.sh
 ./capacity-planning.sh
 ```
-
 ---
 
 ## 配置参考
@@ -566,3 +580,5 @@ spec:
 - [文件: `../../domain-11-production-operations/24-capacity-planning-forecasting.md`](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
 
 ```
+
+<!-- risk-assessed -->

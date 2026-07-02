@@ -49,6 +49,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s Deployment Rollout Failure 诊断与修复
@@ -89,6 +94,7 @@ Deployment Rollout Failure 是 [[Kubernetes|Kubernetes]] 中最常见的发布�
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -120,7 +126,6 @@ Deployment Rollout Failure 是 [[Kubernetes|Kubernetes]] 中最常见的发布�
 │ 验证确认      │    检查: Rollout 状态/Pod 状态/RS 清理
 └──────────────┘
 ```
-
 ## 可用脚本
 
 | 脚本 | 用途 | 参数 | 风险 |
@@ -129,14 +134,14 @@ Deployment Rollout Failure 是 [[Kubernetes|Kubernetes]] 中最常见的发布�
 | `scripts/verify-deployment.sh` | 修复后验证 | `NAMESPACE` `DEPLOYMENT_NAME` | 只读 |
 
 **使用方式**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Phase 1: kubectl 快速诊断
 bash scripts/diagnose-quick.sh <namespace> <deployment-name>
 
 # 修复后验证
 bash scripts/verify-deployment.sh <namespace> <deployment-name>
 ```
-
 ## 根因概览 (7 种)
 
 | RC ID | 根因 | 概率 | 首选修复 | 风险 |
@@ -326,3 +331,6 @@ flowchart TD
 ## 相关概念
 
 - [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
+
+
+<!-- risk-assessed -->

@@ -38,6 +38,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 16 - PersistentVolumeClaim YAML 配置参考
@@ -239,7 +244,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看默认 StorageClass
 kubectl get storageclass
 # NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      AGE
@@ -251,9 +257,9 @@ kubectl patch storageclass gp2 -p '{"metadata":{"annotations":{"storageclass.kub
 # 取消默认
 kubectl patch storageclass gp2 -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
-
 **动态供给工作流程**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 PVC 创建 (storageClassName: fast-ssd)
          ↓
 检查 StorageClass "fast-ssd" 是否存在
@@ -268,7 +274,6 @@ PV 自动绑定到 PVC
          ↓
 PVC 状态变为 Bound
 ```
-
 ## 2.4 卷模式 (volumeMode)
 
 ```yaml
@@ -561,6 +566,7 @@ spec:
 
 **快照恢复原理**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 VolumeSnapshot 对象
         ↓
 CSI Driver 从快照创建卷
@@ -571,7 +577,6 @@ CSI Driver 从快照创建卷
         ↓
 PVC 绑定到新 PV
 ```
-
 **使用场景**:
 - 灾难恢复: 从定时快照恢复数据
 - 数据回滚: 恢复到已知良好状态
@@ -687,7 +692,8 @@ kubectl describe pvc mysql-pvc
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 实时监控扩容进度
 kubectl get pvc mysql-pvc -o jsonpath='{.status.conditions[?(@.type=="Resizing")]}' | jq
 
@@ -697,7 +703,6 @@ kubectl get events --field-selector involvedObject.name=mysql-pvc --sort-by='.la
 # 检查文件系统大小(Pod 内)
 kubectl exec mysql-0 -- df -h /var/lib/mysql
 ```
-
 ## 3.2 离线扩容
 
 某些存储系统需要 Pod 停止才能扩容:
@@ -740,7 +745,8 @@ spec:
 ```
 
 **错误处理**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 扩容失败常见原因
 kubectl describe pvc mysql-pvc
 # Events:
@@ -752,7 +758,6 @@ kubectl describe pvc mysql-pvc
 # 3. 检查 CSI 驱动日志
 kubectl logs -n kube-system -l app=ebs-csi-controller
 ```
-
 ---
 
 <!-- chunk: 四、内部原理 -->## 四、内部原理
@@ -807,6 +812,7 @@ status:
 
 **详细流程**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. 用户创建 PVC (storageClassName: ebs-gp3)
         ↓
 2. PVC Controller 检测到新 PVC
@@ -839,7 +845,6 @@ status:
         ↓
 12. Kubelet 挂载 PV 到 Pod
 ```
-
 **延迟绑定 (WaitForFirstConsumer)**:
 
 ```yaml
@@ -1159,7 +1164,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 增加 mysql-0 的数据卷容量
 kubectl patch pvc data-mysql-0 -n database -p '{"spec":{"resources":{"requests":{"storage":"300Gi"}}}}'
 
@@ -1168,7 +1174,6 @@ kubectl get pvc -n database data-mysql-0
 # NAME            STATUS   VOLUME        CAPACITY   ACCESS MODES   STORAGECLASS     AGE
 # data-mysql-0    Bound    pvc-abc123    300Gi      RWO            mysql-storage    10d
 ```
-
 ## 6.2 案例 2: 从快照恢复数据库
 
 **场景**: 生产数据库误删除数据,需要从昨天快照恢复
@@ -1506,14 +1511,15 @@ spec:
 ## 7.1 PVC 一直 Pending
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc
 # NAME      STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 # my-pvc    Pending   ""       ""         ""             ebs-gp3        5m
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看详细信息
 kubectl describe pvc my-pvc
 # Events:
@@ -1548,7 +1554,6 @@ kubectl run test-pod --image=nginx --overrides='
   }
 }'
 ```
-
 **常见原因**:
 
 | 错误信息 | 原因 | 解决方案 |
@@ -1562,14 +1567,15 @@ kubectl run test-pod --image=nginx --overrides='
 ## 7.2 克隆/快照恢复失败
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pvc cloned-pvc
 # Events:
 #   Warning  ProvisioningFailed  1m  Failed to provision volume: source PVC must be Bound
 ```
-
 **排查清单**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认源 PVC 状态
 kubectl get pvc source-pvc
 # STATUS 必须是 Bound
@@ -1590,11 +1596,11 @@ kubectl get volumesnapshot my-snapshot -o jsonpath='{.status.readyToUse}'
 # 5. 检查 CSI Snapshotter 日志
 kubectl logs -n kube-system -l app=ebs-csi-controller -c csi-snapshotter
 ```
-
 ## 7.3 PVC 扩容卡住
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc mysql-pvc
 # NAME        STATUS   VOLUME      CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 # mysql-pvc   Bound    pvc-abc123  100Gi      RWO            ebs-gp3        5d
@@ -1606,7 +1612,6 @@ kubectl describe pvc mysql-pvc
 #   ----                      ------  -------
 #   FileSystemResizePending   True    Waiting for user to restart Pod
 ```
-
 **原因**: 某些文件系统需要 Pod 重启才能识别新容量
 
 **解决方案**:
@@ -1616,7 +1621,8 @@ kubectl describe pvc mysql-pvc
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1: 滚动重启 Pod
 kubectl rollout restart statefulset mysql
 
@@ -1630,7 +1636,6 @@ kubectl exec mysql-0 -- xfs_growfs /data       # xfs
 # 验证
 kubectl exec mysql-0 -- df -h /var/lib/mysql
 ```
-
 ## 7.4 PVC 无法删除
 
 **症状**:
@@ -1638,7 +1643,17 @@ kubectl exec mysql-0 -- df -h /var/lib/mysql
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pvc my-pvc
 # pvc "my-pvc" deleted
 # (命令挂起,PVC 不消失)
@@ -1647,7 +1662,6 @@ kubectl get pvc
 # NAME      STATUS        VOLUME      CAPACITY   ACCESS MODES   AGE
 # my-pvc    Terminating   pvc-abc123  100Gi      RWO            10d
 ```
-
 **原因**: PVC 有 finalizers 保护,通常因为仍被 Pod 使用
 
 **排查步骤**:
@@ -1656,7 +1670,8 @@ kubectl get pvc
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 finalizers
 kubectl get pvc my-pvc -o jsonpath='{.metadata.finalizers}'
 # ["kubernetes.io/pvc-protection"]
@@ -1676,7 +1691,6 @@ kubectl get pv pvc-abc123 -o jsonpath='{.spec.persistentVolumeReclaimPolicy}'
 # 如果是 Delete, PV 会自动删除
 # 如果是 Retain, PV 变为 Released, 需要手动处理
 ```
-
 ---
 
 <!-- chunk: 八、最佳实践总结 -->## 八、最佳实践总结
@@ -1873,3 +1887,6 @@ groups:
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

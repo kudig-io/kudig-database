@@ -42,6 +42,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 'etcd 进阶: HA 集群管理与性能调优'
@@ -330,6 +335,7 @@ func DefragmentEtcd(
 ### etcd 成员变更流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 步骤 1: 准备新节点
     → 安装 kubeadm, kubelet, containerd
     → 确保网络连通
@@ -354,7 +360,6 @@ func DefragmentEtcd(
     → 新成员状态变为 started
     → 集群达到新的 quorum
 ```
-
 ## 使用场景
 
 ### 场景 1: etcd 定期备份脚本
@@ -444,7 +449,8 @@ etcd:
 
 ### 场景 3: etcd 数据压缩和碎片整理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前 revision
 ETCDCTL_API=3 etcdctl endpoint status -w json \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -470,14 +476,23 @@ ETCDCTL_API=3 etcdctl endpoint status -w table \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ### 场景 4: 移除问题 etcd 成员
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 列出成员
 ETCDCTL_API=3 etcdctl member list -w table \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -496,7 +511,6 @@ rm -rf /var/lib/etcd/*  # ⚠️ 删除系统/数据文件
 # 4. 重新加入
 kubeadm join --control-plane --certificate-key <key>
 ```
-
 ## 配置示例
 
 ### etcd Prometheus 监控
@@ -578,7 +592,8 @@ spec:
 
 ### etcd 集群状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 全面健康检查
 ETCDCTL_API=3 etcdctl check perf \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -606,7 +621,6 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table \
 # | https://192.168.1.12:2379 | d2b7c5b52164694e |   3.5.9 |  5.6 MB |     false |      false |         5 |    1234567 |            1234567 |        |
 # +---------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -621,7 +635,8 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table \
 
 ### etcd 数据查看与调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 key
 ETCDCTL_API=3 etcdctl get / --prefix --keys-only \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -655,7 +670,6 @@ curl -s http://127.0.0.1:2381/metrics | grep etcd_disk_wal_fsync_duration_second
 ps aux | grep etcd
 # root  12345  2.5  3.0  /usr/local/bin/etcd ...
 ```
-
 ### etcd 灾难恢复完整流程
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -663,7 +677,17 @@ ps aux | grep etcd
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 在所有 control-plane 节点执行 ===
 
 # 1. 停止所有控制面组件
@@ -701,7 +725,6 @@ ETCDCTL_API=3 etcdctl endpoint health \
 kubectl get nodes
 kubectl get pods -A
 ```
-
 ## 相关函数
 
 - [etcd 基础](07-etcd.md) — etcd 静态 Pod 创建
@@ -747,7 +770,8 @@ groups:
 
 ### etcd 数据一致性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有成员的 revision 是否一致
 ETCDCTL_API=3 etcdctl endpoint status --cluster -w json \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -772,7 +796,6 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 # 应该只有一个 IS LEADER = true
 ```
-
 ### etcd Learner 模式 (Kubernetes 1.27+)
 
 ```yaml
@@ -789,7 +812,8 @@ etcd:
       experimental-corrupt-check-time: "240m"
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看成员是否为 learner
 ETCDCTL_API=3 etcdctl member list -w table \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
@@ -798,7 +822,6 @@ ETCDCTL_API=3 etcdctl member list -w table \
 # IS LEARNER 列: 新成员可能显示 true (同步中)
 # 同步完成后自动变为 false (voting member)
 ```
-
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
@@ -810,3 +833,6 @@ ETCDCTL_API=3 etcdctl member list -w table \
 - [[entities/coredns.md|coredns]]
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

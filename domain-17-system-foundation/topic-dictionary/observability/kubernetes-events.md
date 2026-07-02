@@ -27,6 +27,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 事件
@@ -51,7 +56,8 @@ Kubernetes Events（事件）是集群中发生的操作和状态变更的记录
 
 ### 查看事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间事件
 kubectl get events -n default --sort-by='.lastTimestamp'
 
@@ -64,7 +70,6 @@ kubectl get events --field-selector type=Warning
 # 使用 --watch 实时监控
 kubectl get events -w
 ```
-
 ## 关键机制或特性
 
 - Event 默认 TTL 为 1 小时（可通过 `--event-ttl` 调整）。
@@ -90,3 +95,6 @@ kubectl get events -w
 - [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
 - [[domain-17-system-foundation/topic-dictionary/observability/metrics-server.md|Metrics Server]]
 - [[domain-17-system-foundation/topic-dictionary/observability/logging.md|Logging]]
+
+
+<!-- risk-assessed -->

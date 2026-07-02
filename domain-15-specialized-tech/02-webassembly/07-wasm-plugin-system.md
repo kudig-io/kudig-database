@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Wasm 插件系统 (Wasm Plugin System)
@@ -665,7 +670,8 @@ impl proxy_wasm::traits::HttpContext for HttpContext {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 构建 Wasm 插件
 cargo build --target wasm32-unknown-unknown --release
 
@@ -685,7 +691,6 @@ kubectl create configmap envoy-wasm-plugin \
   --from-file=plugin.wasm=plugin-optimized.wasm \
   -n default
 ```
-
 ---
 
 <!-- chunk: 4. Istio Wasm Plugin 配置 -->## 4. Istio Wasm Plugin 配置
@@ -831,7 +836,8 @@ LABEL org.opencontainers.image.version="1.0.0"
 LABEL org.opencontainers.image.description="JWT authentication plugin for Envoy/Istio"
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建并推送 OCI 镜像
 docker buildx build \
   --platform linux/amd64 \
@@ -848,7 +854,6 @@ crane push plugin-optimized.wasm \
 # 验证
 crane manifest ghcr.io/my-org/auth-wasm-plugin:1.0.0
 ```
-
 ---
 
 <!-- chunk: 5. HTTP 头部操作插件 -->## 5. HTTP 头部操作插件
@@ -2738,7 +2743,8 @@ spec:
 
 ## 14.2 多集群插件分发
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # deploy-wasm-plugin.sh - 多集群插件分发脚本
 
@@ -2789,7 +2795,6 @@ done
 
 echo "Deployment complete!"
 ```
-
 ## 14.3 插件监控告警
 
 ```yaml
@@ -2841,7 +2846,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Wasm 插件状态
 kubectl get wasmplugin -A
 
@@ -2874,7 +2880,6 @@ kubectl exec -n default deployment/my-service \
   -- curl -s http://localhost:15020/metrics \
   | grep plugin_
 ```
-
 ---
 
 <!-- chunk: 总结 -->## 总结
@@ -2928,3 +2933,6 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 - 06-wasm-component-model
 - 08-wasm-ai-inference
 - 09-wasm-serverless
+
+
+<!-- risk-assessed -->

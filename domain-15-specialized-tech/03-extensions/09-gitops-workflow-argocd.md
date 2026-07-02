@@ -52,6 +52,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 48 - GitOps工作流
@@ -492,7 +497,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ACK安装ArgoCD
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd -n argocd --create-namespace
@@ -509,7 +515,6 @@ argocd repo add https://github.com/org/repo.git \
   --username <username> \
   --password <token>
 ```
-
 <!-- chunk: 版本变更记录 -->
 ## 版本变更记录
 
@@ -557,3 +562,6 @@ argocd repo add https://github.com/org/repo.git \
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

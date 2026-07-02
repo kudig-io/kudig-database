@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: gateway-api'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - Gateway API 高级路由 YAML 配置参考
@@ -1548,7 +1553,8 @@ spec:
 
 ## 控制器支持检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查控制器支持的路由类型
 kubectl explain grpcroute
 kubectl explain tcproute
@@ -1557,7 +1563,6 @@ kubectl explain tlsroute
 # 查看 Gateway 支持的路由类型
 kubectl get gateway <gateway-name> -o yaml | grep -A 10 allowedRoutes
 ```
-
 ## 最佳实践
 
 ## 1. 选择合适的路由类型
@@ -1774,3 +1779,6 @@ spec:
 - 11-gateway-api-core
 - 13-configmap-reference
 - 14-secret-all-types
+
+
+<!-- risk-assessed -->

@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # eBPF 诊断工具实战指南
@@ -114,7 +119,8 @@ yum install bcc-tools kernel-devel-$(uname -r)
 
 ### 2.3 在 K8s 节点上使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 进入节点执行
 kubectl node-shell <node-name>
 
@@ -127,21 +133,20 @@ biolatency
 # 抓取 30 秒 CPU 火焰图
 profile -af 30 > /tmp/profile.out
 ```
-
 ---
 
 ## 3. bpftrace
 
 ### 3.1 安装 bpftrace
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Ubuntu
 apt-get install bpftrace
 
 # 容器方式
 kubectl run bpftrace --rm -it --privileged --image=quay.io/iovisor/bpftrace -- bpftrace -l
 ```
-
 ### 3.2 常用脚本
 
 ```bash
@@ -157,12 +162,12 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_execve { printf("%s: %s\n", comm, str
 
 ### 3.3 结合 kubectl-trace
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在指定 Pod 上运行 bpftrace 脚本
 kubectl trace run <pod-name> -n <namespace> \
   -e 'kprobe:do_sys_open { printf("%s: %s\n", comm, str(arg1)); }'
 ```
-
 ---
 
 ## 4. Pixie
@@ -230,18 +235,19 @@ ig snapshot process -n production
 
 ### 5.3 与 kubectl 集成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 作为 kubectl 插件使用
 kubectl gadget trace exec -n production
 ```
-
 ---
 
 ## 6. 典型诊断场景
 
 ### 6.1 高 CPU 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 使用 bcc profile 抓取火焰图
 kubectl node-shell <node-name>
 profile -af 60 > /tmp/cpu.flamegraph
@@ -249,7 +255,6 @@ profile -af 60 > /tmp/cpu.flamegraph
 # 2. 使用 Pixie 查看 CPU 火焰图
 px run px/perf_flamegraph --start_time -5m
 ```
-
 ### 6.2 高延迟排查
 
 ```bash
@@ -266,7 +271,8 @@ px run px/http_latency
 
 ### 6.3 网络问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Inspektor Gadget 追踪 TCP 重传
 ig trace tcp -n production --drop
 
@@ -274,7 +280,6 @@ ig trace tcp -n production --drop
 kubectl node-shell <node-name>
 tcpretrans
 ```
-
 ---
 
 ## 7. 性能与安全注意事项
@@ -415,7 +420,8 @@ eBPF 不是用来替代 Prometheus/日志/追踪，而是作为补充，提供�
 
 以某服务 P99 延迟突增为例：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 使用 bcc 抓取 CPU 火焰图
 kubectl run bcc-profile --rm -it --restart=Never   --image=quay.io/iovisor/bcc:latest   --overrides='{"spec":{"nodeName":"node-1","hostPID":true}}'   -- /usr/share/bcc/tools/profile -F 99 -p <pid> 30
 
@@ -425,7 +431,6 @@ kubectl gadget trace tcpconnect -n production -p <pod-name>
 # 3. 使用 bpftrace 跟踪慢系统调用
 bpftrace -e 'kprobe:tcp_sendmsg /pid == <pid>/ { @start[tid] = nsecs; } kretprobe:tcp_sendmsg /@start[tid]/ { @latency = hist((nsecs - @start[tid]) / 1000); delete(@start[tid]); }'
 ```
-
 ### eBPF 资源限制
 
 - 单节点同时加载的 eBPF 程序数量有限。
@@ -442,3 +447,6 @@ bpftrace -e 'kprobe:tcp_sendmsg /pid == <pid>/ { @start[tid] = nsecs; } kretprob
 
 - [[domain-10-troubleshooting-diagnostics/tools/01-kubectl-plugins-guide.md|kubectl 插件指南]]
 - [[domain-10-troubleshooting-diagnostics/tools/02-network-diagnostic-tools.md|网络诊断工具]]
+
+
+<!-- risk-assessed -->

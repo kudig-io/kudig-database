@@ -49,6 +49,11 @@ cross_refs:
   label: '知识域: domain-03-networking-traffic'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get pods -n kube-system -l k8s-app=cilium -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{\"\n\"}{end}' 显示 Cilium 异常 -->
 
 # cilium FTA 树：eBPF/Cilium CNI 故障诊断
@@ -161,7 +166,8 @@ flowchart TD
 | 挂载的 BPF 文件系统权限错误 | `mount | grep bpf` | 确保 `/sys/fs/bpf` 以 rw,relatime 挂载 |
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Agent Pod 状态
 kubectl get pods -n kube-system -l k8s-app=cilium
 # 2. 查看 Agent 日志
@@ -171,7 +177,6 @@ cilium status
 # 4. 检查 eBPF 文件系统挂载
 mount | grep bpf
 ```
-
 ### A2. Kubernetes Mode 初始化失败
 
 **问题现象**: Cilium 启动报错 "Kubernetes mode: unable to get Kubernetes node"
@@ -181,7 +186,8 @@ mount | grep bpf
 - Cilium 使用的 kubeconfig 无权读取节点资源
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点注解
 kubectl get node <node-name> -o jsonpath='{.metadata.annotations}' | jq 'keys'
 # 2. 检查 Cilium 服务账号权限
@@ -189,7 +195,6 @@ kubectl auth can-i get nodes --as=system:serviceaccount:kube-system:cilium
 # 3. 查看 operator 日志
 kubectl logs -n kube-system -l name=cilium-operator --tail=50
 ```
-
 ---
 
 ## B. Cilium 健康检查失败
@@ -242,7 +247,8 @@ iptables -L -n | grep 8472
 - 高并发连接数导致 map 满
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 BPF map 使用率
 cilium bpf map list
 # 2. 查看 dmesg 中的 map 错误
@@ -250,7 +256,6 @@ dmesg | grep -i "bpf.*map"
 # 3. 增大 map 大小（Helm upgrade）
 helm upgrade cilium cilium/cilium --set bpf.maps.size.max=2097152
 ```
-
 ### C2. eBPF Program 加载失败
 
 **问题现象**: `cilium status` 显示 BPF program 加载失败
@@ -260,7 +265,8 @@ helm upgrade cilium cilium/cilium --set bpf.maps.size.max=2097152
 - 内核模块缺失 (`CONFIG_BPF=y`, `CONFIG_BPF_SYSCALL=y`)
 
 **排查步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查内核版本
 uname -r
 # 2. 检查内核 BPF 支持
@@ -268,7 +274,6 @@ cat /proc/config.gz | grep -i bpf
 # 3. 查看 cilium-operator 日志中的 program 加载错误
 kubectl logs -n kube-system -l name=cilium-operator | grep -i "program"
 ```
-
 ---
 
 ## D. 网络连通性问题
@@ -330,7 +335,8 @@ cilium egress list
 **问题现象**: `hubble observe` 无输出或报错 "Hubble server not reachable"
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Hubber 服务是否开启
 cilium config | grep -i hubble
 # 2. 检查 Hubber pod 状态
@@ -340,7 +346,6 @@ netstat -tlnp | grep 4245
 # 4. 启用 Hubber（如未启用）
 helm upgrade cilium cilium/cilium --set hubble.enabled=true --set hubble.relay.enabled=true
 ```
-
 ### E2. Hubble Relay 无法聚合
 
 **问题现象**: `hubble observe --server=grpc://<relay>:443` 无响应
@@ -364,7 +369,8 @@ openssl x509 -in /var/run/cilium/hubble-relay.crt -noout -dates
 **问题现象**: 启用 Cilium kube-proxy replacement 后 ClusterIP Service 无法访问
 
 **排查步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 kubeProxyReplacement 状态
 cilium status | grep "kube-proxy replacement"
 # 2. 检查 Cilium 是否正确接管了 Service
@@ -374,7 +380,6 @@ iptables -L -n -t nat | grep KUBE
 # 4. 回退到 kube-proxy（如需要）
 helm upgrade cilium cilium/cilium --set kubeProxyReplacement=disabled
 ```
-
 ---
 
 ## G. BGP Peering 异常
@@ -426,3 +431,5 @@ knowledge_refs:
   - domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md
 ---
 ```
+
+<!-- risk-assessed -->

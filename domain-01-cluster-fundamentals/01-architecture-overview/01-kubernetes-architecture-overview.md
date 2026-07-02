@@ -54,6 +54,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -707,6 +712,7 @@ data:
 #### 运行时演进
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Docker (Monolithic) ──► containerd (Modular) ──► CRI-O (Lightweight)
         │                       │                       │
         ├─ dockerd              ├─ containerd           ├─ CRI-O
@@ -717,7 +723,6 @@ Kubernetes 1.24+ 移除 dockershim，推荐:
 - containerd (通用)
 - CRI-O (Kubernetes 专用)
 ```
-
 | 运行时 | 优点 | 缺点 | 适用场景 |
 |--------|------|------|----------|
 | **containerd** | 轻量、性能好、生态丰富 | 调试工具少 (需 nerdctl) | 通用生产 |
@@ -1117,7 +1122,8 @@ kubeadm join loadbalancer.example.com:6443 \
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 快照备份
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -1139,7 +1145,6 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20260120.db \
 # /etc/kubernetes/manifests/etcd.yaml
 # - --data-dir=/var/lib/etcd-restore
 ```
-
 ---
 
 <!-- chunk: 7. 扩展机制 -->
@@ -1757,7 +1762,17 @@ spec:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 集群信息
 kubectl cluster-info
 kubectl version
@@ -1788,7 +1803,6 @@ ETCDCTL_API=3 etcdctl endpoint health
 kubeadm certs check-expiration
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout
 ```
-
 <!-- chunk: 11. 生产环境运维专家增强指南 -->
 ## 11. 生产环境运维专家增强指南
 
@@ -1829,7 +1843,8 @@ multi_region_deployment:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生产环境安全加固脚本
 #!/bin/bash
 # production-security-hardening.sh
@@ -1874,7 +1889,6 @@ helm install falco falcosecurity/falco \
   --set falcosidekick.enabled=true \
   --set falcosidekick.webui.enabled=true
 ```
-
 ### 11.2 性能优化专家指南
 
 #### 集群性能基准测试矩阵
@@ -2076,7 +2090,8 @@ cost_optimized_scheduling:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # hybrid-cloud-cost-optimizer.sh
 
@@ -2146,7 +2161,6 @@ main() {
 
 main
 ```
-
 ### 11.4 问题应急响应专家手册
 
 #### SRE故障处理黄金法则
@@ -2181,7 +2195,8 @@ graph TD
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # automated-failure-recovery.sh
 
@@ -2252,7 +2267,6 @@ main() {
 main &
 echo "🎯 问题监控已启动 (PID: $!)"
 ```
-
 ---
 
 ---
@@ -2294,3 +2308,6 @@ echo "🎯 问题监控已启动 (PID: $!)"
 - 99-kubernetes-version-lifecycle-support-policy
 - 02-core-components-deep-dive
 - 03-api-versions-features
+
+
+<!-- risk-assessed -->

@@ -50,6 +50,11 @@ k8s_versions:
 - 1.32.x
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s Node NotReady 诊断与修复
@@ -90,6 +95,7 @@ NotReady 节点数 / 总节点数
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -128,7 +134,6 @@ NotReady 节点数 / 总节点数
 │ 验证确认      │    检查: 节点状态/Conditions/Lease/Pod
 └──────────────┘
 ```
-
 ## 可用脚本
 
 | 脚本 | 用途 | 参数 | 风险 |
@@ -140,7 +145,8 @@ NotReady 节点数 / 总节点数
 | `scripts/verify-node.sh` | 修复后节点健康验证 | `NODE_NAME` | 只读 |
 
 **使用方式**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Phase 1: kubectl 快速诊断
 bash scripts/diagnose-quick.sh <node-name>
 
@@ -156,7 +162,6 @@ bash scripts/cleanup-disk.sh <node-ip>
 # 修复后验证
 bash scripts/verify-node.sh <node-name>
 ```
-
 ## 根因概览 (12 种)
 
 | RC ID | 根因 | 概率 | 首选修复 | 风险 |
@@ -395,3 +400,6 @@ flowchart TD
 
 - [[concepts/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
 - [[concepts/node-lifecycle-management.md|节点生命周期管理]] — Kubernetes 节点状态管理与维护
+
+
+<!-- risk-assessed -->

@@ -52,6 +52,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - Linux 存储管理与RAID配置：生产环境存储架构专家指南
@@ -672,7 +677,17 @@ nfs-server:/export/data  /mnt/nfs  nfs  vers=4.1,rsize=1048576,wsize=1048576,har
 
 ## iSCSI 配置
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 安装 iSCSI 客户端
 yum install -y iscsi-initiator-utils
 systemctl enable --now iscsid
@@ -692,7 +707,6 @@ yum install -y device-mapper-multipath
 mpathconf --enable --with_multipathd y
 multipath -ll
 ```
-
 ---
 
 <!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
@@ -702,6 +716,7 @@ multipath -ll
 Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象存储管理，底层依赖 Linux 存储技术。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                    K8s 持久化存储映射                              │
 │                                                                  │
@@ -726,12 +741,12 @@ Kubernetes 使用 PV (PersistentVolume) 和 PVC (PersistentVolumeClaim) 抽象�
 │  └── TopoLVM CSI       →  LVM 动态供应                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ## etcd 存储要求
 
 etcd 是 Kubernetes 的核心数据存储，对磁盘 I/O 延迟极度敏感：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 磁盘性能要求
 # FSYNC 延迟 < 10ms (推荐 < 2ms)
 # IOPS > 300 (推荐 > 1000)
@@ -749,7 +764,6 @@ mount -o noatime,data=ordered /dev/nvme0n1p1 /var/lib/etcd
 du -sh /var/lib/etcd/
 etcdctl endpoint status --write-out=table
 ```
-
 ---
 
 <!-- chunk: 性能调优 -->## 性能调优
@@ -771,7 +785,8 @@ etcdctl endpoint status --write-out=table
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 TopoLVM CSI 实现 LVM 动态供应
 # 1. 在所有节点创建 VG
 pvcreate /dev/nvme0n1p3
@@ -796,7 +811,6 @@ allowedTopologies:
     values: ["true"]
 EOF
 ```
-
 ---
 
 <!-- chunk: 安全加固 -->## 安全加固
@@ -916,7 +930,8 @@ echo "=== 监控完成 ==="
 
 存储容量规划是避免磁盘空间耗尽导致服务中断的关键。在 Kubernetes 环境中，需要同时关注节点本地存储和持久化存储的容量趋势。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-capacity-check.sh - 存储容量检查
 
@@ -949,7 +964,6 @@ du -sh /* 2>/dev/null | sort -rh | head -10
 
 echo "=== 检查完成 ==="
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -974,3 +988,6 @@ echo "=== 检查完成 ==="
 - index/pvc-index|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+
+
+<!-- risk-assessed -->

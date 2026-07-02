@@ -62,6 +62,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # IBM Cloud Kubernetes Servicenetes]] [[Service|Service]] (IKS) 企业级深度实践
@@ -445,7 +450,8 @@ output "vpc_id" {
 
 ## 企业级集群部署脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -536,7 +542,6 @@ kubectl get nodes -o wide
 
 echo "=== IKS 集群部署完成 ==="
 ```
-
 <!-- chunk: 核心组件配置 -->## 核心组件配置
 
 ## 存储类配置
@@ -614,7 +619,8 @@ parameters:
 
 ## Watson AI 服务集成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -666,7 +672,6 @@ kubectl get secrets -n production -l 'service-binding in (watson-assistant,watso
 
 echo "=== Watson AI 服务集成完成 ==="
 ```
-
 ## AI 应用完整部署
 
 ```yaml
@@ -1377,7 +1382,8 @@ echo "=== Satellite 混合云部署完成 ==="
 
 ## 故障排查脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -1432,7 +1438,6 @@ kubectl get storageclass
 
 echo "=== 故障排查完成 ==="
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 部署最佳实践
@@ -1506,3 +1511,6 @@ echo "=== 故障排查完成 ==="
 - 04-google-gke-enterprise-multicloud
 - 06-alibaba-ack-enterprise-hybrid
 - 07-huawei-cce-enterprise
+
+
+<!-- risk-assessed -->

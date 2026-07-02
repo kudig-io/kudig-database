@@ -31,6 +31,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # OverlayFS Storage
@@ -85,7 +90,8 @@ This design enables:
 
 ## Debugging
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # View OverlayFS mounts
 mount | grep overlay
 
@@ -93,7 +99,6 @@ mount | grep overlay
 docker inspect --format='{{.GraphDriver}}' <container-id>
 crictl inspect <container-id>  # K8s nodes
 ```
-
 ## Related
 
 - [[concepts/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
@@ -104,3 +109,6 @@ crictl inspect <container-id>  # K8s nodes
 - [[concepts/docker-architecture.md|Docker Architecture]]
 - [[concepts/linux-container-foundation.md|Linux Container Foundation]]
 - [[concepts/block-file-object-storage.md|Block, File, and Object Storage]]
+
+
+<!-- risk-assessed -->

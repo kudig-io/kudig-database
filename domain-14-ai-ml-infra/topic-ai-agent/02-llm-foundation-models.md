@@ -39,6 +39,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: LLM 基座模型选型与评估
@@ -424,7 +429,8 @@ class ModelRouter:
 
 ## 7.2 vLLM 部署示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 部署 Qwen2.5-72B 的推荐配置
 docker run --gpus all \
   -v /data/models:/models \
@@ -441,7 +447,6 @@ docker run --gpus all \
   --dtype bfloat16 \
   --api-key "your-secret-key"
 ```
-
 ```yaml
 # K8s 部署 vLLM（对接生产环境）
 apiVersion: apps/v1
@@ -594,3 +599,6 @@ spec:
 - 01-ai-agent-fundamentals
 - 03-agent-frameworks-comparison
 - 04-rag-knowledge-retrieval
+
+
+<!-- risk-assessed -->

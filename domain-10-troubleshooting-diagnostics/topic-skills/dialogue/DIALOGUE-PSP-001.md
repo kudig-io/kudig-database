@@ -19,6 +19,11 @@ status: reviewed
 last_updated: 2026-05-21
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod Security Policy 咨询与迁移 — 远程顾问对话脚本
@@ -41,10 +46,10 @@ last_updated: 2026-05-21
 
 **顾问**：请执行以下命令确认版本：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl version --short
 ```
-
 > **如果无法执行**：请通过集群管理控制台查看版本信息，或提供 `kube-apiserver` 的镜像标签。
 
 **预期用户回复**：版本为 v1.24.x 或 v1.25+，或更早版本。
@@ -60,16 +65,16 @@ kubectl version --short
 
 **顾问**：v1.25+ 已移除 PSP，请检查是否启用了 PSA：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ns -o yaml | grep -A 5 pod-security
 ```
-
 > **如果无法执行**：请逐个检查关键命名空间：`kubectl get ns <name> -o yaml | grep pod-security`
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ns --show-labels
 ```
-
 > **如果无法执行**：请提供命名空间列表和标签信息。
 
 **预期用户回复**：命名空间带有 `pod-security.kubernetes.io/enforce: restricted` 等标签，或无任何 PSA 标签。
@@ -85,16 +90,16 @@ kubectl get ns --show-labels
 
 **顾问**：请检查集群中现有的 PSP 资源：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get psp
 ```
-
 > **如果无法执行**：如果 kubectl 提示 `psp` 资源类型不存在，说明当前环境不支持 PSP（可能已移除或未启用）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe psp <psp-name>
 ```
-
 > **如果无法执行**：请提供 `kubectl get psp -o yaml` 的输出。
 
 **预期用户回复**：PSP 存在，且某些策略字段（如 privileged=false、hostNetwork=false）阻止了 Pod 创建。
@@ -109,16 +114,16 @@ kubectl describe psp <psp-name>
 
 **顾问**：请确认 ServiceAccount 是否绑定了正确的 PSP：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get rolebinding,clusterrolebinding --all-namespaces | grep psp
 ```
-
 > **如果无法执行**：请检查目标命名空间下的 RoleBinding 和 ClusterRoleBinding。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl auth can-i use psp/<psp-name> --as=system:serviceaccount:<ns>:<sa>
 ```
-
 > **如果无法执行**：请确认 ServiceAccount 名称和命名空间，替换后重试。
 
 **预期用户回复**：ServiceAccount 未绑定任何 PSP，或绑定的 PSP 权限过于严格。
@@ -133,16 +138,16 @@ kubectl auth can-i use psp/<psp-name> --as=system:serviceaccount:<ns>:<sa>
 
 **顾问**：请检查失败 Pod 的安全上下文配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 20 securityContext
 ```
-
 > **如果无法执行**：请提供 Pod 的 YAML 配置文件中 `spec.containers[].securityContext` 和 `spec.securityContext` 部分。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events -n <namespace> | grep Forbidden
 ```
-
 > **如果无法执行**：请查看该命名空间下最近的事件，寻找 `unable to validate against any pod security policy` 或 `Forbidden` 关键字。
 
 **预期用户回复**：Pod 设置了 `privileged: true`、`hostNetwork: true` 或 `runAsRoot`，被 PSP/PSA 拒绝。
@@ -162,26 +167,26 @@ kubectl get events -n <namespace> | grep Forbidden
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl label ns <namespace> pod-security.kubernetes.io/enforce=baseline --overwrite
 ```
-
 > **如果无法执行**：请使用 `kubectl edit ns <namespace>` 手动修改标签。可选值：`privileged`（最宽松）、`baseline`（标准）、`restricted`（最严格）。
 
 验证：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ns <namespace> --show-labels
 ```
-
 #### 方案 B：v1.24 及以下创建 PSP 绑定
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create clusterrolebinding psp-<name> --clusterrole=psp:<psp-name> --serviceaccount=<ns>:<sa>
 ```
-
 > **如果无法执行**：请准备 ClusterRoleBinding YAML 文件并通过 `kubectl apply -f` 创建。
 
 #### 方案 C：创建兼容的 Pod Security Policy
@@ -239,3 +244,6 @@ spec:
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

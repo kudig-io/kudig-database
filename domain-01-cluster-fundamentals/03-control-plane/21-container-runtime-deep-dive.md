@@ -77,6 +77,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 容器运行时深度解析 ([[concepts/container-runtime.md|Container Runtime]] Interface Deep Dive)
@@ -104,6 +109,7 @@ cross_refs:
 ### 1.1 Docker 到 [[Kubernetes|Kubernetes]] 的演进
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                    Container Runtime Evolution Timeline                          │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -124,7 +130,6 @@ cross_refs:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 运行时演进里程碑
 
 | 时间 | 事件 | 影响 |
@@ -146,6 +151,7 @@ cross_refs:
 ### 1.3 Docker 架构演进
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                         Docker Architecture Evolution                            │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -183,7 +189,6 @@ cross_refs:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.4 dockershim 废弃详解
 
 | 方面 | 说明 |
@@ -451,6 +456,7 @@ PodSandboxConfig:
 ### 4.1 containerd 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                          containerd Architecture                                 │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -499,7 +505,6 @@ PodSandboxConfig:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 4.2 containerd 核心服务
 
 | 服务 | 功能 | 描述 |
@@ -649,14 +654,14 @@ oom_score = -999
 | **stargz** | 延迟拉取镜像层 | 大镜像快速启动 |
 | **nydus** | RAFS 格式，按需加载 | 大镜像，P2P 分发 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 snapshotter 信息
 ctr plugins ls | grep snapshotter
 
 # 使用特定 snapshotter
 ctr images pull --snapshotter=overlayfs docker.io/library/nginx:latest
 ```
-
 ### 4.5 containerd-shim 详解
 
 ```
@@ -706,7 +711,8 @@ ctr images pull --snapshotter=overlayfs docker.io/library/nginx:latest
 
 ### 4.6 containerd 命令行工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ctr - containerd 原生 CLI
 # 列出命名空间
 ctr namespaces ls
@@ -744,7 +750,6 @@ crictl images
 crictl logs <container-id>
 crictl exec -it <container-id> sh
 ```
-
 ---
 
 <!-- chunk: 5. CRI-O 深度解析 -->
@@ -955,7 +960,8 @@ plugin_dirs = ["/opt/cni/bin/", "/usr/libexec/cni/"]
 
 ### 5.5 CRI-O 命令行工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # crictl - CRI 调试工具 (通用)
 export CONTAINER_RUNTIME_ENDPOINT=unix:///var/run/crio/crio.sock
 crictl ps
@@ -988,7 +994,6 @@ buildah from nginx:latest
 buildah run nginx-working-container -- apt-get update
 buildah commit nginx-working-container my-nginx:latest
 ```
-
 ---
 
 <!-- chunk: 6. OCI 运行时详解 -->
@@ -1144,7 +1149,8 @@ buildah commit nginx-working-container my-nginx:latest
 
 ### 6.4 runc 详解
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # runc 基本操作
 # 创建 OCI bundle
 mkdir -p mycontainer/rootfs
@@ -1164,7 +1170,6 @@ runc delete mycontainer
 runc checkpoint --image-path=/tmp/checkpoint mycontainer
 runc restore --image-path=/tmp/checkpoint mycontainer-restored
 ```
-
 ### 6.5 crun 详解
 
 ```bash
@@ -1546,6 +1551,7 @@ spec:
 ### 8.2 镜像拉取流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           Image Pull Workflow                                    │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -1595,7 +1601,6 @@ spec:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 8.3 镜像加速与分发
 
 | 方案 | 描述 | 适用场景 |
@@ -1629,7 +1634,8 @@ server = "https://harbor.example.com"
 
 ### 8.4 镜像垃圾回收
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # containerd 镜像垃圾回收
 # 手动清理未使用的镜像
 ctr -n k8s.io images ls
@@ -1649,7 +1655,6 @@ imageMinimumGCAge: 2m            # 镜像最小存活时间
 [crio.image]
 image_volumes = "mkdir"
 ```
-
 ---
 
 <!-- chunk: 9. 运行时配置与调优 -->
@@ -1883,7 +1888,8 @@ journalctl -u crio -f
 
 ### 10.3 故障排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查运行时状态
 systemctl status containerd
 systemctl status crio
@@ -1934,7 +1940,6 @@ nsenter -t <container-pid> -n ip addr
 mount | grep overlay
 cat /proc/<container-pid>/mountinfo
 ```
-
 ### 10.4 常见问题排查
 
 | 问题 | 可能原因 | 排查方法 | 解决方案 |
@@ -1956,7 +1961,17 @@ cat /proc/<container-pid>/mountinfo
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 迁移步骤
 
 # 1. 安装 containerd
@@ -1993,7 +2008,6 @@ systemctl restart kubelet
 kubectl get nodes -o wide
 # CONTAINER-RUNTIME 列应显示 containerd://x.x.x
 ```
-
 ### 11.2 案例二: 多运行时配置 (安全容器)
 
 ```yaml
@@ -2230,3 +2244,6 @@ spec:
 - 20-kube-scheduler-deep-dive
 - 22-container-storage-deep-dive
 - 23-container-network-deep-dive
+
+
+<!-- risk-assessed -->

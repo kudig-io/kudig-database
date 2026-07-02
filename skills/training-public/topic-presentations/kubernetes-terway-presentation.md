@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] Terway (Aliyun) 全栈进阶培训 (从入门到专家)
@@ -350,7 +355,8 @@ graph TB
 
 ## 演示 1：验证 Terway 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 确认 Terway DaemonSet 运行状态
 kubectl -n kube-system get ds terway-eniip -o wide
 
@@ -367,13 +373,13 @@ kubectl get node <node-name> -o jsonpath='{.metadata.annotations}' | jq .
 kubectl get podeni -A
 kubectl get nodenetworking -A
 ```
-
 ## 演示 2：Pod 安全组配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 PodNetworking (指定安全组和 vSwitch)
 cat <<EOF | kubectl apply -f -
 apiVersion: network.alibabacloud.com/v1beta1
@@ -405,13 +411,13 @@ EOF
 # 步骤 3: 验证 Pod 使用了指定安全组
 kubectl get podeni -A | grep db-pod
 ```
-
 ## 演示 3：NetworkPolicy 实战
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 部署默认拒绝策略
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -468,14 +474,14 @@ EOF
 # 步骤 4: 验证 NetworkPolicy
 kubectl get networkpolicy -A
 ```
-
 ## 演示 4：StatefulSet 固定 IP
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 PodNetworking
 cat <<EOF | kubectl apply -f -
 apiVersion: network.alibabacloud.com/v1beta1
@@ -527,13 +533,13 @@ kubectl get pod postgres-0 -o wide
 # 步骤 5: 查看 ReservedIP 记录
 kubectl get reservedip -A
 ```
-
 ## 演示 5：故障排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景: Pod 卡在 ContainerCreating
 
 # 步骤 1: 查看 Pod 事件
@@ -557,7 +563,6 @@ kubectl get ipinstance -A | grep -v Running
 kubectl delete ipinstance <leaked-ip-instance> -n <ns>
 
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -713,3 +718,5 @@ Terway
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

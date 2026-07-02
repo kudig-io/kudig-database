@@ -41,6 +41,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点升级 kubeadm upgrade node 源码分析
@@ -157,7 +162,8 @@ kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过
 
 ### 1.2 版本兼容性规则
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubelet 版本偏差:
 # kubelet 版本可以比 API Server 旧最多 2 个 minor 版本
 # 例如: API Server 1.29 → kubelet 可以是 1.29/1.28/1.27
@@ -166,14 +172,14 @@ kubeadm 提供了 `kubeadm upgrade node` 命令来简化工作节点的升级过
 # kubectl 版本可以比 API Server 旧或新最多 1 个 minor 版本
 # 例如: API Server 1.29 → kubectl 可以是 1.30/1.29/1.28
 ```
-
 ---
 
 ## 二、kubeadm upgrade node
 
 ### 2.1 升级前准备
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认当前版本
 kubectl version --short
 kubeadm version
@@ -189,13 +195,22 @@ kubectl get nodes -o wide
 # 4. 确认所有节点 Ready
 kubectl get nodes
 ```
-
 ### 2.2 控制面节点升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在第一个控制面节点上执行
 # 1. 升级 kubeadm
 apt-get update && apt-get install -y kubeadm=1.29.0-*
@@ -212,13 +227,22 @@ apt-get install -y kubelet=1.29.0-* kubectl=1.29.0-*
 # 5. 重启 kubelet
 systemctl restart kubelet
 ```
-
 ### 2.3 工作节点升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在工作节点上执行
 # 1. 升级 kubeadm
 apt-get update && apt-get install -y kubeadm=1.29.0-*
@@ -239,7 +263,6 @@ apt-get install -y kubelet=1.29.0-* kubectl=1.29.0-*
 # 4. 重启 kubelet
 systemctl restart kubelet
 ```
-
 ### 2.4 kubeadm upgrade node 源码分析
 
 ```go
@@ -269,7 +292,8 @@ func runNodeUpgrade(data *upgradeData) error {
 
 ### 3.1 apt (Debian/Ubuntu)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看可升级版本
 apt-cache policy kubelet
 apt-cache madison kubelet
@@ -285,10 +309,10 @@ kubelet --version
 # 锁定版本（防止意外升级）
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
-
 ### 3.2 yum/dnf (RHEL/CentOS/Rocky)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看可升级版本
 yum list --showduplicates kubelet
 
@@ -298,10 +322,10 @@ sudo yum install -y kubelet-1.29.0 --disableexcludes=kubernetes
 # 锁定版本
 sudo yum versionlock add kubelet kubeadm kubectl
 ```
-
 ### 3.3 升级后验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 状态
 systemctl status kubelet
 
@@ -316,7 +340,6 @@ kubectl get nodes
 # 检查 kubelet 日志
 journalctl -u kubelet --no-pager -n 50
 ```
-
 ---
 
 ## 四、滚动升级策略
@@ -328,6 +351,7 @@ journalctl -u kubelet --no-pager -n 50
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 推荐升级顺序:
   ┌─────────────────────────────────────────────────────────────┐
   │  1. 升级 kubeadm (所有节点)                                  │
@@ -358,14 +382,23 @@ journalctl -u kubelet --no-pager -n 50
   │     └── metrics-server, CoreDNS, Ingress Controller         │
   └─────────────────────────────────────────────────────────────┘
 ```
-
 ### 4.2 工作节点滚动升级脚本
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 滚动升级工作节点
 
@@ -396,7 +429,6 @@ for NODE in $NODES; do
     echo "=== Node $NODE upgraded successfully ==="
 done
 ```
-
 ---
 
 ## 五、节点 OS 升级
@@ -406,7 +438,17 @@ done
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. Drain 节点
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
 
@@ -427,14 +469,14 @@ kubectl describe node <node> | grep -A 5 "Conditions"
 # 6. Uncordon 节点
 kubectl uncordon <node>
 ```
-
 ---
 
 ## 六、升级后验证
 
 ### 6.1 集群级验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 所有节点版本一致
 kubectl get nodes -o wide
 
@@ -455,10 +497,10 @@ kubectl get --raw /healthz?verbose
 # 检查组件状态
 kubectl get componentstatuses
 ```
-
 ### 6.2 节点级验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 版本
 kubelet --version
 
@@ -475,7 +517,6 @@ kubectl describe node <node> | grep -A 10 "Conditions"
 crictl info
 crictl ps
 ```
-
 ---
 
 ## 七、回滚（不推荐）
@@ -483,7 +524,17 @@ crictl ps
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 降级 kubelet（仅限紧急情况）
 sudo apt-get install kubelet=1.28.0-*
 sudo systemctl restart kubelet
@@ -497,7 +548,6 @@ sudo apt-get install kubeadm=1.28.0-*
 # - 仅在升级失败且无法前进时使用
 # - 建议从 etcd 备份恢复而非降级
 ```
-
 ---
 
 ## 八、常见错误与排查
@@ -534,3 +584,5 @@ sudo apt-get install kubeadm=1.28.0-*
 - [[entities/kubernetes.md|kubernetes]]
 
 ```
+
+<!-- risk-assessed -->

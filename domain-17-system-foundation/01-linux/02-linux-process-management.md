@@ -46,6 +46,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - Linux 进程管理与系统监控：生产环境运维专家实践
@@ -278,6 +283,7 @@ Kubernetes 在终止 Pod 时遵循以下信号流程：
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. kubectl delete pod / Pod 演进删除
    │
    ▼
@@ -297,7 +303,6 @@ Kubernetes 在终止 Pod 时遵循以下信号流程：
    ▼
 4. 进程被强制终止 (exit code 137 = 128 + 9)
 ```
-
 ```bash
 # 查看进程等待的信号
 cat /proc/<pid>/status | grep -i sig
@@ -567,7 +572,8 @@ sysctl vm.panic_on_oom
 | **Burstable** | 根据 memory limit 计算 | 中等 | 设置了部分 requests/limits |
 | **BestEffort** | 1000 | 最高 | 未设置任何 requests/limits |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器进程的 OOM 分数
 # 找到容器进程 PID
 docker inspect --format '{{.State.Pid}}' <container_id>
@@ -582,7 +588,6 @@ cat /proc/<pid>/oom_score_adj
 dmesg | grep -i "out of memory|oom-killer|killed process"
 journalctl -k | grep -i "oom"
 ```
-
 ---
 
 <!-- chunk: 常用命令参考 -->## 常用命令参考
@@ -801,7 +806,8 @@ getcap /usr/bin/ping
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入容器查看进程
 kubectl exec -it <pod> -- ps aux
 
@@ -817,7 +823,6 @@ nsenter --target <pid> --net /bin/bash
 # 方法 3: 直接通过 /proc
 PID=$(cat /proc/<pid>/task/<tid>/children 2>/dev/null || echo "N/A")
 ```
-
 ## Pod 生命周期与信号
 
 Kubernetes 通过信号控制 Pod 的生命周期：
@@ -882,10 +887,10 @@ lifecycle:
 
 5. **监控 OOM 事件**: 设置 Event 监控，及时发现 OOMKilled
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events --field-selector reason=OOMKilling
 ```
-
 ---
 
 <!-- chunk: 故障排查 -->## 故障排查
@@ -926,7 +931,8 @@ iostat -xz 1
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 处于 CrashLoopBackOff
 kubectl describe pod <pod>          # 查看 Events 和 Last State
 kubectl logs <pod> --previous       # 查看上一次容器的日志
@@ -945,7 +951,6 @@ kubectl exec -it <pod> -- ls /proc
 docker top <container_id>
 crictl ps
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -966,3 +971,5 @@ crictl ps
 - 04-linux-networking-configuration
 
 ```
+
+<!-- risk-assessed -->

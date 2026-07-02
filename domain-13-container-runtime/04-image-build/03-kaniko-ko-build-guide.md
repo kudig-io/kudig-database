@@ -47,6 +47,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kaniko 与 ko 构建指南
@@ -119,12 +124,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Kaniko 构建 Pod，观察构建日志
 kubectl apply -f kaniko-pod.yaml
 kubectl logs -f kaniko-build
 ```
-
 注意：Pod 中不需要 `securityContext.privileged: true`，也不需要挂载 `/var/run/docker.sock`。
 
 ## 3. Kaniko 生产配置
@@ -136,12 +141,12 @@ Kaniko 读取 `/kaniko/.docker/config.json` 完成仓库认证。该文件可通
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ACR 认证 Secret，供 Kaniko Pod 挂载
 kubectl create secret generic acr-docker-config \
   --from-file=config.json=$HOME/.docker/config.json
 ```
-
 ### 3.2 Dockerfile 兼容性
 
 Kaniko 支持绝大多数 Dockerfile 指令，但以下场景需要特别注意：
@@ -379,3 +384,6 @@ echo "Deploy image: ${IMAGE}"
 - [[domain-13-container-runtime/04-image-build/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks 指南]]
 - [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 - [[domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
+
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -92,6 +97,7 @@ tier: supporting---
 **核心洞察：IaC + GitOps + 多集群 = 平台工程的技术基石。** 这三者的组合产生了一个自洽的多集群管理模型：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 开发者请求 (Backstage Scaffolder)
        ↓
 IaC 声明 (Crossplane Composition / Helm + Kustomize)
@@ -102,7 +108,6 @@ GitOps 协调 (Flux/ArgoCD 跨 N 个集群同步)
        ↓
 集群状态 = Git 声明 (持续修复漂移)
 ```
-
 **这个模型解决了一个传统 IaC 无法解决的问题：漂移修复。** Terraform apply 是一次性的——apply 之后如果有人手动修改了资源，Terraform 不会自动修复。而 GitOps 的持续协调循环使集群状态始终趋近于 Git 声明，这是传统 IaC 在多集群场景下的根本性优势。
 
 **但 IaC 和 GitOps 的边界在多集群场景下变得模糊：**
@@ -155,3 +160,6 @@ GitOps 协调 (Flux/ArgoCD 跨 N 个集群同步)
 - [[entities/argocd.md|argocd]] — ArgoCD
 - [[entities/helm.md|Helm (entities)]]
 - [[entities/argo.md|Argo Workflows]]
+
+
+<!-- risk-assessed -->

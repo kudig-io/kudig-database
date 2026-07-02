@@ -46,6 +46,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - 分布式存储系统
@@ -318,7 +323,8 @@ groups:
 
 ## 分布式部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 4节点集群
 docker run -d \
   --name minio1 \
@@ -329,7 +335,6 @@ docker run -d \
   minio/minio server \
   http://node{1...4}/data --console-address ":9001"
 ```
-
 ## 纠删码配置
 
 ```bash
@@ -475,7 +480,8 @@ chmod +x /usr/local/bin/minio-monitor.py
 
 ## 快速部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装
 yum install glusterfs-server
 systemctl start glusterd
@@ -496,7 +502,6 @@ gluster volume start vol1
 # 客户端挂载
 mount -t glusterfs node1:/vol1 /mnt/glusterfs
 ```
-
 ## 企业级GlusterFS运维
 
 ## 高可用配置
@@ -612,3 +617,6 @@ chmod +x /usr/local/bin/gluster-monitor.sh
 - 03-raid-storage-redundancy
 - 05-storage-management-operations
 - 06-storage-performance-iops
+
+
+<!-- risk-assessed -->

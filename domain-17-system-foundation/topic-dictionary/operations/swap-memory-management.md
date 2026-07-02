@@ -30,6 +30,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Swap 内存管理
@@ -118,7 +123,8 @@ kubelet 通过 CRI 指示容器运行时在 cgroup 层面（如 cgroup v2 的 `m
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 swap 使用情况
 kubectl top nodes --show-swap
 
@@ -137,7 +143,6 @@ cat /var/lib/kubelet/config.yaml | grep -A 3 memorySwap
 # 查看 cgroup v2 swap 限制
 cat /sys/fs/cgroup/kubepods.slice/memory.swap.max
 ```
-
 ## 交叉引用
 
 - [Swap Memory Management - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/swap-memory-management/)
@@ -152,3 +157,6 @@ cat /sys/fs/cgroup/kubepods.slice/memory.swap.max
 - [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
 - [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
 - [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+
+
+<!-- risk-assessed -->

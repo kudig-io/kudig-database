@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Falco|Falco]] 运行时安全监控深度实践
@@ -217,7 +222,8 @@ extra:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 Falco
 helm repo add falcosecurity https://falcosecurity.github.io/charts
 helm repo update
@@ -237,7 +243,6 @@ helm install falcosidekick falcosecurity/falcosidekick \
   --set config.loki.hostport="http://loki.monitoring:3100" \
   --set config.elasticsearch.hostport="https://es.example.com:9200"
 ```
-
 <!-- chunk: 核心配置 -->## 核心配置
 
 ## 自定义安全规则
@@ -785,7 +790,8 @@ data:
 
 ## 合规报告生成
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # falco_compliance_report.sh
 
@@ -816,7 +822,6 @@ done
 
 echo "Report generated: $REPORT_DIR/$DATE/report.md"
 ```
-
 <!-- chunk: 监控与告警 -->## 监控与告警
 
 ## Prometheus 集成
@@ -976,7 +981,8 @@ Falco 规则开发应遵循渐进式流程。首先在 Audit 模式下部署新�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # falco_diagnostics.sh
 
@@ -1005,7 +1011,6 @@ echo "=== Sidekick Status ==="
 kubectl get pods -n falco -l app.kubernetes.io/name=falcosidekick
 kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=10
 ```
-
 ---
 
 *本文档基于 Falco 运行时安全监控实践经验编写，持续更新最新技术和最佳实践。*
@@ -1035,3 +1040,5 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=10
 - 99-kyverno-policy-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

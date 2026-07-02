@@ -74,6 +74,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.33 生态系统兼容性矩阵
@@ -106,6 +111,7 @@ cross_refs:
 ### 版本兼容性规则
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Kubernetes 版本兼容性
 ├── API Server / kubelet: ±1 小版本
 ├── kubectl: ±1 小版本 (推荐同版本)
@@ -118,7 +124,6 @@ Kubernetes 版本兼容性
 ├── 待验证 (新版本，等待反馈)
 └── 不兼容 (已知问题)
 ```
-
 ---
 
 <!-- chunk: 二、容器运行时 -->
@@ -132,14 +137,14 @@ Kubernetes 版本兼容性
 | **CRI-O** | 1.32.x | ✅ 兼容 | - | 建议升级 |
 | **docker** (cri-dockerd) | 0.3.15+ | ⚠️ 兼容 | 有限 | 不推荐新部署 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查容器运行时版本
 kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.containerRuntimeVersion}'
 
 # 推荐: containerd 1.7.18+
 # 注意: v1.33 需要 containerd 支持 CDI (Container Device Interface) 以配合 DRA
 ```
-
 ---
 
 <!-- chunk: 三、CNI 网络插件 -->
@@ -334,7 +339,8 @@ cert-manager 1.17+: 支持 K8s v1.33 的 Certificate API
 <!-- chunk: 快速检查命令 -->
 ## 快速检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有组件版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\t"}{.status.nodeInfo.containerRuntimeVersion}{"\n"}{end}'
 
@@ -358,7 +364,6 @@ helm version
 # 检查 cert-manager
 kubectl get pods -n cert-manager -l app=cert-manager -o jsonpath='{.items[0].spec.containers[0].image}'
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -393,3 +398,6 @@ kubectl get pods -n cert-manager -l app=cert-manager -o jsonpath='{.items[0].spe
 - 99-kubernetes-v1.33-deprecation-migration-guide
 - 99-kubernetes-v1.33-practical-cookbook
 - 99-kubernetes-v1.33-production-best-practices
+
+
+<!-- risk-assessed -->

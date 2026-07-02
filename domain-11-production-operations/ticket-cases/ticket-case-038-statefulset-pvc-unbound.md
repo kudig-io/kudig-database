@@ -70,6 +70,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -95,7 +100,8 @@ relationships:
 
 按“先 Pod 事件、后 PVC/PV、再存储后端”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 StatefulSet Pod 与 PVC 状态
 kubectl get pod -n middleware -l app=mysql
 kubectl get pvc -n middleware
@@ -123,7 +129,6 @@ ack-cli storage nas status --cluster ack-zyy-prod-05 --filesystem fs-zyy-mysql-x
 # 7. 检查 StatefulSet volumeClaimTemplates
 kubectl get statefulset mysql-slave -n middleware -o yaml | grep -A 30 volumeClaimTemplates
 ```
-
 ## 根因分析
 
 `mysql-data-mysql-slave-2` PVC 长期处于 Pending，根因为 StorageClass `alicloud-nas-subpath` 关联的 NAS 文件系统 `fs-zyy-mysql-xxx` 已达容量上限，无法创建新的 subpath 目录。具体链路如下：
@@ -164,45 +169,55 @@ aliyun nas DescribeFileSystems \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch storageclass alicloud-nas-subpath --patch='{"allowVolumeExpansion": true}'
 ```
-
 **第三步：删除 Pending PVC，让 StatefulSet 控制器重新创建**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete pvc mysql-data-mysql-slave-2 -n middleware
 # StatefulSet 控制器会自动重新创建 PVC
 sleep 30
 kubectl get pvc -n middleware mysql-data-mysql-slave-2
 ```
-
 **第四步：确认新 Pod 启动成功**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod -n middleware mysql-slave-2 -o wide
 kubectl describe pod -n middleware mysql-slave-2 | grep -A 20 Events
 ```
-
 **第五步：对历史 MySQL 数据卷进行扩容（可选，建议低峰期执行）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pvc mysql-data-mysql-slave-0 -n middleware -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
 kubectl patch pvc mysql-data-mysql-slave-1 -n middleware -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 已 Bound
 kubectl get pvc -n middleware mysql-data-mysql-slave-2 -o jsonpath='{.status.phase}'
 
@@ -221,7 +236,6 @@ aliyun nas DescribeFileSystems --FileSystemId fs-zyy-mysql-xxx --RegionId cn-zha
 # 6. CSI 日志无新的 provision 失败
 kubectl logs -n kube-system -l app=csi-plugin-nas --tail=100 | grep -i "mysql-slave-2|error" || echo "无新错误"
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-038 已处理完成。
@@ -278,3 +292,6 @@ kubectl logs -n kube-system -l app=csi-plugin-nas --tail=100 | grep -i "mysql-sl
 - StatefulSet
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

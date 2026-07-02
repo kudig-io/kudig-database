@@ -30,6 +30,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # cni-plugins v0.9 Release Notes
@@ -46,3 +51,6 @@ Fixes:
 - vlan: fix error message text by removing ptp references ([#566](https://github.com/containernetworking/plugins/pull/566)). Fixing a few error messages that the vlan plugin returns. These appear to be mistaken references to the ptp plugin.
 - vlan: Fix error handling for delegate IPAM plugin ([#568](https://github.com/containernetworking/plugins/pull/568)).
 - deps: bump coreos/go-iptables ([#563](https://github.com/containernetworking/plugins/pull/563)). Closes #544
+
+
+<!-- risk-assessed -->

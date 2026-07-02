@@ -31,6 +31,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Node Declared Features
@@ -74,11 +79,11 @@ prerequisites:
 
 ### 查看节点声明特性
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点的 declaredFeatures
 kubectl get node worker-01 -o jsonpath='{.status.declaredFeatures}' | jq .
 ```
-
 ### 启用 NodeDeclaredFeatures 特性门控
 
 ```yaml
@@ -135,7 +140,8 @@ profiles:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的 declaredFeatures
 kubectl get nodes -o custom-columns='NAME:.metadata.name,FEATURES:.status.declaredFeatures'
 
@@ -148,7 +154,6 @@ ssh <node> cat /var/lib/kubelet/config.yaml | grep -A 5 featureGates
 # 查看调度器插件状态
 kubectl logs -n kube-system -l component=kube-scheduler | grep NodeDeclaredFeatures
 ```
-
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器 Filter 阶段如何使用 NodeDeclaredFeatures
@@ -164,3 +169,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep NodeDeclaredFeatu
 - [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+
+
+<!-- risk-assessed -->

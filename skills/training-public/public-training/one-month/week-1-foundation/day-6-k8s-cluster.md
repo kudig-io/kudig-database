@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 6: K8s 架构深化 + 集群配置
@@ -176,7 +181,8 @@ maxSurge=1, maxUnavailable=0 意味着：先创建 1 个新 Pod，等新 Pod 就
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 namespace
 kubectl create namespace learn-k8s
 # 预期输出: namespace/learn-k8s created
@@ -259,14 +265,14 @@ kubectl describe deployment nginx-deployment -n learn-k8s
 # RollingUpdateStrategy:  max surge 1, max unavailable 0
 # Pod Template:        Image: nginx:alpine
 ```
-
 ### 任务 2: 体验声明式管理 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改副本数（命令式）
 kubectl scale deployment nginx-deployment --replicas=5 -n learn-k8s
 # 预期输出: deployment.apps/nginx-deployment scaled
@@ -324,13 +330,13 @@ kubectl rollout undo deployment/nginx-deployment -n learn-k8s
 kubectl get replicaset -n learn-k8s
 # 旧 ReplicaSet 重新变为 DESIRED=2
 ```
-
 ### 任务 3: 创建 Service 暴露应用 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Service
 cat > nginx-service.yaml << 'EOF'
 apiVersion: v1
@@ -371,13 +377,13 @@ kubectl run curl --image=curlimages/curl -it --rm --restart=Never -n learn-k8s -
   curl -s http://nginx-service.learn-k8s.svc.cluster.local
 # 预期输出: nginx 默认欢迎页面 HTML
 ```
-
 ### 任务 4: 查看集群事件 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 namespace 事件
 kubectl get events -n learn-k8s --sort-by='.lastTimestamp'
 # 预期输出:
@@ -409,13 +415,13 @@ kubectl get pods -n learn-k8s
 # 回滚修复
 kubectl rollout undo deployment/nginx-deployment -n learn-k8s
 ```
-
 ### 任务 5: API 资源探索 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有 API 资源
 kubectl api-resources | head -30
 
@@ -434,7 +440,6 @@ kubectl get deployment nginx-deployment -n learn-k8s -o yaml
 # 使用 --dry-run 预览
 kubectl create deployment test --image=nginx --dry-run=client -o yaml | head -30
 ```
-
 ---
 
 ## 配置示例
@@ -554,3 +559,5 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

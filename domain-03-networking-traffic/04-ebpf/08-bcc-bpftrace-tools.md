@@ -57,6 +57,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # bcc 与 bpftrace 工具链 (bcc and bpftrace Tools)
@@ -201,7 +206,8 @@ sudo yum install -y \
 
 **容器环境安装：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在特权容器中使用 bcc
 docker run --rm -it \
   --privileged \
@@ -216,7 +222,6 @@ docker run --rm -it \
 # Kubernetes DaemonSet 方式部署 bcc 工具
 # (详见第6章)
 ```
-
 ## 1.4 安装 bpftrace (Installing bpftrace)
 
 ```bash
@@ -323,7 +328,8 @@ execsnoop 追踪系统中所有新进程的创建，对于发现异常进程、�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 基本用法 - 追踪所有新进程
 sudo execsnoop
 
@@ -356,7 +362,6 @@ sudo execsnoop --json
 kubectl exec -n kube-system ds/node-exporter -- \
   /usr/share/bcc/tools/execsnoop
 ```
-
 **execsnoop 高级用法 - 检测异常进程：**
 
 ```bash
@@ -1440,7 +1445,8 @@ spec:
 
 ## 6.3 容器感知的 eBPF 追踪 (Container-Aware eBPF)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 找到容器在宿主机上的 PID
 CONTAINER_ID=$(kubectl get pod frontend-xxx -o jsonpath='{.status.containerStatuses[0].containerID}' | cut -d/ -f3)
 
@@ -1456,11 +1462,11 @@ find /proc -name "cgroup" 2>/dev/null | \
   xargs grep -l "$POD_UID" 2>/dev/null | \
   head -1 | cut -d/ -f3
 ```
-
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在宿主机上追踪特定容器内的系统调用
 # 先在 ebpf-tools DaemonSet Pod 中执行
 kubectl exec -n monitoring ds/ebpf-tools -- \
@@ -1474,7 +1480,6 @@ kubectl exec -n monitoring ds/ebpf-tools -- \
 kubectl exec -n monitoring ds/ebpf-tools -- \
   /usr/share/bcc/tools/profile -p $HOST_PID 30
 ```
-
 ## 6.4 cgroup 级别性能分析 (cgroup-Level Analysis)
 
 ```bpftrace
@@ -1508,7 +1513,8 @@ interval:s:5
 }
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 追踪特定 Kubernetes Pod 的网络延迟
 # Step 1: 获取 Pod 的网络命名空间
 POD_NS=$(kubectl get pod frontend-xxx -n production \
@@ -1520,10 +1526,10 @@ kubectl debug node/$NODE -it --image=ubuntu -- \
   nsenter -t $HOST_PID -n -- \
   /usr/sbin/tcpdump -i any -nn 'port 8080' -c 100
 ```
-
 ## 6.5 Kubernetes 节点性能诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-node-profile.sh: Kubernetes 节点性能快速诊断
 
@@ -1550,7 +1556,6 @@ kubectl debug node/$NODE -it --image=quay.io/iovisor/bcc:latest -- \
   timeout $DURATION /usr/share/bcc/tools/syscount -L 2>/dev/null | head -20
   "
 ```
-
 ---
 
 <!-- chunk: 7. 容器感知的 eBPF 工具 -->## 7. 容器感知的 eBPF 工具
@@ -1559,7 +1564,8 @@ kubectl debug node/$NODE -it --image=quay.io/iovisor/bcc:latest -- \
 
 kubectl-trace 是一个 kubectl 插件，可以直接在 Kubernetes 节点上运行 bpftrace 脚本。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 kubectl-trace
 kubectl krew install trace
 
@@ -1586,10 +1592,10 @@ kubectl trace delete my-trace-xxx
 # 查看 trace 输出
 kubectl trace logs my-trace-xxx
 ```
-
 ## 7.2 Inspektor Gadget (容器原生 eBPF 工具集)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Inspektor Gadget
 kubectl krew install gadget
 kubectl gadget deploy
@@ -1618,7 +1624,6 @@ kubectl gadget top block-io --namespace production
 # 块 I/O 延迟直方图
 kubectl gadget histogram block-io --namespace production
 ```
-
 ## 7.3 容器感知的网络追踪 (Container-Aware Network Tracing)
 
 ```bpftrace
@@ -2619,3 +2624,6 @@ ss -tnp | awk '{print $1}' | sort | uniq -c  # 按状态统计
 - 07-hubble-network-observability
 - 09-ebpf-performance-optimization
 - 10-ebpf-security-applications
+
+
+<!-- risk-assessed -->

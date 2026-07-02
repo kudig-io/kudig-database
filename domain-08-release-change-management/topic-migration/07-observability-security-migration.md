@@ -44,6 +44,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 07 - 可观测性与安全迁移
@@ -119,7 +124,8 @@ k8s_versions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 ACK 部署 kube-prometheus-stack（推荐 Helm 方式）
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -177,10 +183,10 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
 kubectl get pods -n monitoring
 kubectl get svc -n monitoring
 ```
-
 ## 1.3 自定义指标抓取配置迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出源集群的 Prometheus 额外抓取配置
 kubectl --context=source-cluster get secret -n monitoring \
   prometheus-kube-prometheus-stack-prometheus \
@@ -196,10 +202,10 @@ kubectl --context=source-cluster get servicemonitors -A -o yaml | kubectl neat >
 # 应用到 ACK
 kubectl --context=ack-cluster apply -f src-servicemonitors.yaml
 ```
-
 ## 1.4 PrometheusRule 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出自定义告警规则
 kubectl --context=source-cluster get prometheusrules -A -o yaml | kubectl neat > src-prometheus-rules.yaml
 
@@ -210,7 +216,6 @@ kubectl --context=ack-cluster apply -f src-prometheus-rules.yaml
 kubectl --context=ack-cluster port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9090:9090 &
 curl -s http://localhost:9090/api/v1/rules | jq '.data.groups | length'
 ```
-
 ---
 
 <!-- chunk: 2. 日志体系迁移 -->## 2. 日志体系迁移
@@ -276,7 +281,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 如果保持 EFK Stack，在 ACK 部署
 
 # Elasticsearch (使用阿里云 ES 或自建)
@@ -294,7 +300,6 @@ helm install kibana elastic/kibana \
   --set persistence.enabled=true \
   --set persistence.storageClass=alicloud-disk-essd
 ```
-
 ---
 
 <!-- chunk: 3. 链路追踪迁移 -->## 3. 链路追踪迁移
@@ -302,7 +307,8 @@ helm install kibana elastic/kibana \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A: 使用阿里云 ARMS（推荐）
 # ACK 安装 ARMS Agent
 # 控制台: ACK → 运维管理 → 应用实时监控服务 ARMS → 安装
@@ -320,14 +326,14 @@ helm install jaeger jaegertracing/jaeger \
 # 或
 # JAEGER_AGENT_HOST=jaeger-agent.tracing
 ```
-
 ---
 
 <!-- chunk: 4. 告警规则迁移 -->## 4. 告警规则迁移
 
 ## 4.1 Alertmanager 配置迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出源集群 Alertmanager 配置
 kubectl --context=source-cluster get secret -n monitoring \
   alertmanager-kube-prometheus-stack-alertmanager \
@@ -339,7 +345,6 @@ kubectl --context=ack-cluster create secret generic alertmanager-config \
   -n monitoring \
   --from-file=alertmanager.yaml=src-alertmanager.yaml
 ```
-
 ## 4.2 告警通道配置
 
 ```yaml
@@ -379,7 +384,8 @@ receivers:
 
 <!-- chunk: 5. Grafana Dashboard 迁移 -->## 5. Grafana Dashboard 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式 1: 使用 Grafana API 导出/导入
 # 导出所有 Dashboard
 SOURCE_GRAFANA="http://grafana.source-cluster:3000"
@@ -418,14 +424,14 @@ kubectl --context=ack-cluster create configmap grafana-dashboard-apps \
   yq eval '.metadata.labels.grafana_dashboard = "1"' - | \
   kubectl --context=ack-cluster apply -f -
 ```
-
 ---
 
 <!-- chunk: 6. RBAC 与权限迁移 -->## 6. RBAC 与权限迁移
 
 ## 6.1 RBAC 迁移清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出并迁移自定义 RBAC（已在 03 文档中覆盖）
 # 此处补充 ACK 特有的 RAM-RBAC 集成
 
@@ -449,7 +455,6 @@ subjects:
   name: "<ram-user-id>"    # RAM 用户 UID
 EOF
 ```
-
 ## 6.2 Pod Security Standards
 
 ```yaml
@@ -471,7 +476,8 @@ metadata:
 
 <!-- chunk: 7. 证书与 TLS 迁移 -->## 7. 证书与 TLS 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 导出自建集群的 TLS Secret
 kubectl --context=source-cluster get secrets -A \
   -o json | jq '.items[] | select(.type == "kubernetes.io/tls")' > tls-secrets.json
@@ -488,14 +494,14 @@ done
 # 3. 推荐: 在 ACK 部署 cert-manager 自动管理
 # 参考 05-network-migration-traffic-cutover.md cert-manager 部分
 ```
-
 ---
 
 <!-- chunk: 8. 安全基线建立 -->## 8. 安全基线建立
 
 ## 8.1 ACK 安全巡检
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 ACK 安全巡检
 # 控制台: ACK → 安全管理 → 安全巡检
 
@@ -535,7 +541,6 @@ EOF
 # 查看安全扫描结果
 kubectl logs job/kube-bench
 ```
-
 ## 8.2 安全迁移检查清单
 
 - [ ] 监控体系已部署（Prometheus/ARMS）
@@ -581,3 +586,5 @@ kubectl logs job/kube-bench
 - 09-migration-toolchain
 
 ```
+
+<!-- risk-assessed -->

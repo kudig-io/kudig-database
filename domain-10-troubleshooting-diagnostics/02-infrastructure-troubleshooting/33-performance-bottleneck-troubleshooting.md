@@ -67,6 +67,11 @@ cross_refs:
   label: '运维技能: 17-performance-bottleneck'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 33 - 性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)
@@ -147,7 +152,8 @@ cross_refs:
 
 ### 2.1 CPU使用率分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 集群CPU使用概况 ==========
 # 查看节点CPU使用情况
 kubectl top nodes
@@ -202,10 +208,10 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
     "
 done
 ```
-
 ### 2.2 CPU调度性能优化
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 调度器性能检查 ==========
 # 检查调度器延迟指标
 kubectl port-forward -n kube-system svc/prometheus-k8s 9090:9090 &
@@ -287,7 +293,6 @@ kubeReserved:
   memory: "1Gi"
 EOF
 ```
-
 ---
 
 <!-- chunk: 3. 内存性能瓶颈排查 (Memory Performance Bottleneck Troubleshooting) -->
@@ -295,7 +300,8 @@ EOF
 
 ### 3.1 内存使用分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 内存使用概况 ==========
 # 查看节点内存使用情况
 kubectl top nodes --sort-by=memory
@@ -353,14 +359,14 @@ kubectl describe nodes | grep -E "(Memory Requests|Memory Limits)" -A3
 # 检查OOMKilled事件
 kubectl get events --all-namespaces --field-selector reason=OOMKilling --sort-by='.lastTimestamp'
 ```
-
 ### 3.2 内存优化策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 内存限制配置 ==========
 # 为内存敏感应用配置合理的限制
 cat <<EOF > memory-optimized-deployment.yaml
@@ -446,7 +452,6 @@ EOF
 
 chmod +x memory-stress-test.sh
 ```
-
 ---
 
 <!-- chunk: 4. 存储I/O性能瓶颈排查 (Storage I/O Performance Bottleneck Troubleshooting) -->
@@ -458,7 +463,8 @@ chmod +x memory-stress-test.sh
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 存储I/O监控 ==========
 # 检查PV/PVC性能
 kubectl get pvc --all-namespaces -o jsonpath='{
@@ -589,10 +595,10 @@ EOF
 
 chmod +x storage-io-analyzer.sh
 ```
-
 ### 4.2 存储优化策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 高性能存储配置 ==========
 # 配置高性能存储类
 cat <<EOF > high-performance-storage.yaml
@@ -677,7 +683,6 @@ spec:
     targetPort: 6379
 EOF
 ```
-
 ---
 
 <!-- chunk: 5. 网络性能瓶颈排查 (Network Performance Bottleneck Troubleshooting) -->
@@ -689,7 +694,8 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 网络连通性测试 ==========
 # Pod间网络延迟测试
 kubectl run network-test --image=nicolaka/netshoot -n <namespace> -it --rm -- sh -c "
@@ -777,7 +783,6 @@ kubectl get networkpolicy --all-namespaces -o jsonpath='{
     end
 }' | wc -l
 ```
-
 ### 5.2 网络优化策略
 
 ```bash
@@ -874,7 +879,8 @@ EOF
 
 ### 6.1 API Server性能监控
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. API Server指标收集 ==========
 # 检查API Server性能指标
 kubectl port-forward -n kube-system svc/prometheus-k8s 9090:9090 &
@@ -958,10 +964,10 @@ spec:
     - --watch-cache-sizes="*#1000"        # 增加watch缓存大小
 EOF
 ```
-
 ### 6.2 API Server扩展策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== API Server水平扩展 ==========
 # 配置API Server高可用
 cat <<EOF > apiserver-ha-config.yaml
@@ -1037,7 +1043,6 @@ spec:
       component: kube-apiserver
 EOF
 ```
-
 ---
 
 <!-- chunk: 7. 性能监控和告警 (Performance Monitoring and Alerting) -->
@@ -1048,7 +1053,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 核心性能指标配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -1130,14 +1136,23 @@ spec:
         summary: "API Server error rate high ({{ \$value }}/sec)"
 EOF
 ```
-
 ### 7.2 性能基准测试工具
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 综合性能基准测试 ==========
 cat <<'EOF' > performance-benchmark.sh
 #!/bin/bash
@@ -1268,7 +1283,6 @@ EOF
 
 chmod +x performance-trend-analyzer.sh
 ```
-
 ---
 
 ---
@@ -1302,3 +1316,6 @@ chmod +x performance-trend-analyzer.sh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

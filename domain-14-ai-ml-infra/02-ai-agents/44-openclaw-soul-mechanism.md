@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: OpenClaw SOUL.md 机制深度解析
@@ -188,7 +193,17 @@ system_prompt = f"""
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 用户输入: "节点 cn-hangzhou.10.0.1.5 有问题，帮我把上面的 Pod 全部清掉"
 
 未配置 SOUL.md 红线时:
@@ -204,10 +219,10 @@ system_prompt = f"""
      2. 评估影响范围后，对非关键 Pod 逐个迁移
      3. 如确需 drain，请在变更窗口执行并提前通知业务方"
 ```
-
 ### 3.2 案例：信息安全红线
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景: Agent 执行 kubectl get secret -o yaml 获取到 Secret 内容
 
 未配置安全红线:
@@ -220,10 +235,10 @@ system_prompt = f"""
     - connection-string: ***
   建议: 直接在 Pod 中验证 Secret 挂载是否正确，无需查看明文"
 ```
-
 ### 3.3 案例：诚实原则执行
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景: 用户询问 "为什么 Pod 一直 Pending"，但 Agent 未执行任何诊断命令
 
 违反诚实原则:
@@ -237,7 +252,6 @@ system_prompt = f"""
     3. kubectl get events -n <ns> --sort-by=.lastTimestamp
   或者告诉我 Pod 名称和 Namespace，我来执行这些命令。"
 ```
-
 ---
 
 ## 4. 配置协作机制
@@ -248,6 +262,7 @@ system_prompt = f"""
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 SOUL.md 在配置体系中的角色:
 
 SOUL.md ──→ AGENTS.md
@@ -266,7 +281,6 @@ SOUL.md ──→ AGENTS.md
        SOUL.md 的诚实原则约束 MEMORY.md 的记忆质量
        只有数据支撑的诊断结论才允许写入长期记忆
 ```
-
 ### 4.2 加载优先级
 
 ```
@@ -465,3 +479,6 @@ SOUL.md 配置验证:
 - 43-openclaw-framework-integration
 - 45-openclaw-user-mechanism
 - 46-openclaw-agents-mechanism
+
+
+<!-- risk-assessed -->

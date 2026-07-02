@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Spot 与可抢占工作负载
@@ -286,6 +291,7 @@ spec:
 ## Spot 中断处理时间线
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 T=0s   云厂商发出中断通知
        ├─ AWS: 2 分钟（ITN）
        ├─ GCP: 30 秒
@@ -311,7 +317,6 @@ T+180s 新节点就绪，Pod 被重新调度
           │
 T+185s Pod 从 checkpoint 恢复，继续执行
 ```
-
 ## 故障排查
 
 | 症状 | 可能原因 | 排查步骤 |
@@ -340,7 +345,17 @@ T+185s Pod 从 checkpoint 恢复，继续执行
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 Spot 节点
 kubectl get nodes -l karpenter.sh/capacity-type=spot
 
@@ -360,7 +375,6 @@ kubectl describe nodepool spot-gpu-pool
 # 查看最近的节点驱逐事件
 kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp'
 ```
-
 ## 交叉引用
 
 - [Disruptions](disruptions.md) — PDB 在 Spot 中断时的保护作用
@@ -379,3 +393,6 @@ kubectl get events -A --field-selector reason=Evicted --sort-by='.lastTimestamp'
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

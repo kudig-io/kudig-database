@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 01 - 本机单机 Demo 部署
@@ -117,7 +122,8 @@ k8s_versions:
 > **关键**: kind 和 minikube (Docker 驱动) 都依赖 Docker，这是第一步。
 
 **macOS**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式 1: Homebrew 安装 (推荐)
 brew install --cask docker
 
@@ -126,9 +132,9 @@ brew install --cask docker
 
 # 安装后启动 Docker Desktop，等待状态栏图标变为 "Running"
 ```
-
 **Linux (Ubuntu/Debian)**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Docker Engine
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
@@ -142,9 +148,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 sudo usermod -aG docker $USER
 newgrp docker  # 立即生效，或重新登录
 ```
-
 **Windows**:
-```powershell
+``` powershell
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式 1: winget 安装
 winget install Docker.DockerDesktop
 
@@ -152,19 +158,19 @@ winget install Docker.DockerDesktop
 # 访问 https://www.docker.com/products/docker-desktop/ 下载安装
 # 安装后需重启系统，确保 WSL 2 已启用
 ```
-
 **Docker Desktop 资源配置** (macOS / Windows):
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 打开 Docker Desktop → Settings → Resources：
   - CPUs:     4 (至少 2)
   - Memory:   8 GB (至少 4 GB，多节点集群建议 8GB)
   - Disk:     30 GB (至少 20 GB)
   - 点击 "Apply & Restart"
 ```
-
 ## 验证 Docker 可用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Docker 版本和运行状态
 docker version
 
@@ -181,14 +187,14 @@ docker info | grep "Server Version"
 docker run --rm hello-world
 # 预期输出: Hello from Docker! This message shows that your installation appears to be working correctly.
 ```
-
 > **如果 docker version 报错 "Cannot connect to the Docker daemon"**:  
 > macOS/Windows: 确保 Docker Desktop 已启动 (状态栏有鲸鱼图标)  
 > Linux: 运行 `sudo systemctl start docker && sudo systemctl enable docker`
 
 ## 安装 kubectl
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # macOS
 brew install kubectl
 
@@ -205,7 +211,6 @@ winget install Kubernetes.kubectl
 kubectl version --client
 # 预期输出: Client Version: v1.28.x (版本号可能不同，只要有输出即可)
 ```
-
 ---
 
 <!-- chunk: 方案 A: 使用 kind (推荐，轻量) -->## 方案 A: 使用 kind (推荐，轻量)
@@ -240,7 +245,8 @@ kind version
 
 ## A2. 创建单节点集群 (最快体验)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 一键创建集群 (默认名称 "kind"，单节点)
 kind create cluster --name learn-k8s
 
@@ -267,12 +273,12 @@ kubectl get nodes
 # NAME                     STATUS   ROLES           AGE   VERSION
 # learn-k8s-control-plane  Ready    control-plane   1m    v1.27.3
 ```
-
 ## A3. 创建多节点集群 (1 Master + 2 Worker)
 
 > **备注**: 多节点集群可以体验 Pod 在不同节点间的调度，更接近真实场景。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 先创建配置文件
 cat > kind-config.yaml << 'EOF'
 # kind 多节点集群配置
@@ -300,7 +306,6 @@ kubectl get nodes
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 # 预期输出: 3 个 kindest/node 容器正在运行
 ```
-
 ## A4. 创建带 Ingress 支持的集群
 
 > **备注**: 如果你后续要测试 Ingress（HTTP 路由），需要在创建集群时映射端口。
@@ -308,7 +313,8 @@ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > kind-config-ingress.yaml << 'EOF'
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -343,12 +349,12 @@ kubectl wait --namespace ingress-nginx \
   --timeout=90s
 # 预期输出: pod/ingress-nginx-controller-xxxxx condition met
 ```
-
 ## A5. 加载本地镜像到 kind 集群
 
 > **实用技巧**: kind 集群运行在 Docker 内，默认无法访问本地构建的镜像。需要手动加载。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建本地镜像
 docker build -t my-app:v1.0 .
 
@@ -362,7 +368,6 @@ docker exec -it learn-k8s-control-plane crictl images | grep my-app
 # 在 Deployment 中使用时，设置 imagePullPolicy: Never 或 IfNotPresent
 # 避免 K8s 尝试从远程仓库拉取
 ```
-
 ---
 
 <!-- chunk: 方案 B: 使用 minikube -->## 方案 B: 使用 minikube
@@ -391,7 +396,8 @@ minikube version
 
 ## B2. 启动集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基础启动 (使用 Docker 驱动)
 minikube start --driver=docker
 # 备注: 首次启动会下载 K8s 节点镜像，约 500MB，耐心等待
@@ -415,10 +421,10 @@ kubectl get nodes
 # NAME       STATUS   ROLES           AGE   VERSION
 # minikube   Ready    control-plane   1m    v1.28.0
 ```
-
 ## B3. minikube 常用操作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群状态
 minikube status
 # 预期输出:
@@ -453,7 +459,6 @@ minikube stop       # 停止集群 (释放所有资源，保留数据)
 minikube start      # 重新启动已停止的集群
 minikube delete     # 彻底删除集群 (清除所有数据)
 ```
-
 ---
 
 <!-- chunk: Demo 实战：部署第一个应用 -->## Demo 实战：部署第一个应用
@@ -467,7 +472,8 @@ minikube delete     # 彻底删除集群 (清除所有数据)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 namespace
 kubectl create namespace web-app
 
@@ -487,7 +493,6 @@ kubectl config set-context --current --namespace=web-app
 kubectl config view --minify | grep namespace
 # 预期输出: namespace: web-app
 ```
-
 ## Step 2: 部署 Deployment
 
 > **Deployment 是什么？** 它管理一组相同的 Pod 副本，负责自动创建、扩缩容、滚动更新和回滚。
@@ -495,7 +500,8 @@ kubectl config view --minify | grep namespace
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > deployment.yaml << 'EOF'
 apiVersion: apps/v1        # API 版本 (Deployment 使用 apps/v1)
 kind: Deployment           # 资源类型
@@ -551,7 +557,6 @@ kubectl get pods -w
 kubectl get pods -o wide
 # 预期输出: 多了 IP、NODE、NOMINATED NODE 等列
 ```
-
 ## Step 3: 创建 Service
 
 > **Service 是什么？** Pod IP 是临时的（Pod 重启就变），Service 提供稳定的访问入口（固定 ClusterIP 或 NodePort），并自动负载均衡到后端 Pod。
@@ -559,7 +564,8 @@ kubectl get pods -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > service.yaml << 'EOF'
 apiVersion: v1
 kind: Service
@@ -594,13 +600,13 @@ kubectl get endpoints nginx-service
 # nginx-service   10.244.0.5:80,10.244.0.6:80,10.244.0.7:80     20s
 # 备注: 3 个 Endpoint 对应 3 个 Pod (副本数=3)
 ```
-
 ## Step 4: 测试和调试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ===== 方式 1: 集群内访问 (推荐，最可靠) =====
 # 启动一个临时的 curl Pod，测试 Service 内部连通性
 kubectl run curl-test --image=curlimages/curl --rm -it --restart=Never -- \
@@ -638,10 +644,10 @@ kubectl exec -it $(kubectl get pod -l app=nginx-web -o jsonpath='{.items[0].meta
 kubectl get events --sort-by='.lastTimestamp'
 # 预期输出: 显示 Pod 创建、调度、拉取镜像等事件
 ```
-
 ## Step 5: 扩缩容实战
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扩容到 5 个副本
 kubectl scale deployment nginx-web --replicas=5
 kubectl get pods -w   # 观察新 Pod 创建过程
@@ -655,13 +661,13 @@ kubectl get pods -w   # 观察多余 Pod 被终止
 # 恢复到 3 个副本
 kubectl scale deployment nginx-web --replicas=3
 ```
-
 ## Step 6: 滚动更新和回滚
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ===== 滚动更新: 将 nginx:alpine 升级到 nginx:latest =====
 kubectl set image deployment/nginx-web nginx=nginx:latest
 # 备注: 格式为 kubectl set image deployment/<name> <container-name>=<new-image>
@@ -706,14 +712,14 @@ kubectl get pods
 # 回滚到指定版本 (如果需要)
 # kubectl rollout undo deployment/nginx-web --to-revision=1
 ```
-
 ---
 
 <!-- chunk: 探索集群组件 -->## 探索集群组件
 
 > **目的**: 了解 K8s 集群背后运行了哪些系统组件，为后续深入学习打基础。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-system 命名空间下的系统 Pod
 kubectl get pods -n kube-system
 # 预期输出 (kind 集群):
@@ -746,7 +752,6 @@ kubectl api-resources --sort-by=name | head -30
 kubectl api-versions
 
 ```
-
 ---
 
 <!-- chunk: 验收清单 -->## 验收清单
@@ -773,7 +778,17 @@ kubectl api-versions
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ===== 清理应用资源 =====
 kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 备注: 删除 Namespace 会自动删除其下所有资源 (Deployment、Service、Pod 等)
@@ -793,7 +808,6 @@ kind get clusters       # 应无输出
 docker ps              # 应无 kindest/node 容器
 kubectl config get-contexts  # 查看是否还有残留的 context
 ```
-
 ---
 
 <!-- chunk: kind vs minikube 对比 -->## kind vs minikube 对比
@@ -838,7 +852,8 @@ kubectl config get-contexts  # 查看是否还有残留的 context
 
 ## Q1: kind 创建集群失败，提示 "Docker not running"
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Docker 状态
 docker info
 # 如果报错，说明 Docker 没启动
@@ -846,10 +861,10 @@ docker info
 # macOS/Windows: 启动 Docker Desktop 应用
 # Linux: sudo systemctl start docker
 ```
-
 ## Q2: minikube start 卡住或超时
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 删除旧集群重试
 minikube delete && minikube start --driver=docker
 
@@ -859,10 +874,10 @@ minikube start --driver=docker --image-mirror-country=cn
 # 3. 如果还是失败，查看详细日志
 minikube start --driver=docker --alsologtostderr -v=7
 ```
-
 ## Q3: kubectl 无法连接集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查当前 context 是否正确
 kubectl config current-context
 # 预期: kind-learn-k8s 或 minikube
@@ -875,20 +890,20 @@ kubectl config use-context kind-learn-k8s
 # 或
 kubectl config use-context minikube
 ```
-
 ## Q4: Pod 一直处于 Pending 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 事件，了解为什么没被调度
 kubectl describe pod <pod-name>
 # 常见原因:
 # - Insufficient cpu/memory: 节点资源不足 → 减少 replicas 或 降低 resource requests
 # - 0/1 nodes are available: 没有可用节点 → 检查节点状态 kubectl get nodes
 ```
-
 ## Q5: 国内拉取镜像慢或失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kind: 使用预下载的节点镜像
 kind create cluster --image kindest/node:v1.27.3
 
@@ -900,10 +915,10 @@ minikube start --image-mirror-country=cn --registry-mirror=https://docker.mirror
 #   "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
 # }
 ```
-
 ## Q6: kind 集群重启后 kubectl 无法连接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kind 集群在 Docker 重启后会自动恢复，但可能需要等待
 docker ps | grep kindest  # 确认容器在运行
 kubectl cluster-info      # 测试连接
@@ -911,7 +926,6 @@ kubectl cluster-info      # 测试连接
 # 如果 context 丢失
 kind export kubeconfig --name learn-k8s
 ```
-
 ---
 
 <!-- chunk: 附录 A：macOS 方案选型思考记录 -->## 附录 A：macOS 方案选型思考记录
@@ -982,14 +996,15 @@ kind create cluster --name my-k8s --image kindest/node:v1.32.0 --config kind-con
 
 ## 环境确认
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ docker -v
 Docker version 29.2.1, build a5c7197
 ```
-
 ## 安装 kind 和 kubectl
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ brew install kind kubectl
 
 # 实际安装版本:
@@ -1003,7 +1018,6 @@ $ kubectl version --client
 Client Version: v1.34.1
 Kustomize Version: v5.7.1
 ```
-
 ## 创建多节点集群配置
 
 ```bash
@@ -1018,7 +1032,8 @@ EOF
 
 ## 创建集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kind create cluster \
   --name my-k8s \
   --image kindest/node:v1.32.0 \
@@ -1037,16 +1052,15 @@ You can now use your cluster with:
 kubectl cluster-info --context kind-my-k8s
 Have a nice day! 👋
 ```
-
 ## 验证集群状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get nodes
 NAME                   STATUS   ROLES           AGE   VERSION
 my-k8s-control-plane   Ready    control-plane   34s   v1.32.0
 my-k8s-worker          Ready    <none>          25s   v1.32.0
 ```
-
 > **结果**: 1 Master + 1 Worker 全部 Ready，K8s v1.32.0 官方发行版，从 `brew install` 到集群就绪约 3 分钟。
 
 ---
@@ -1076,3 +1090,5 @@ my-k8s-worker          Ready    <none>          25s   v1.32.0
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ```
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ component: Fta Diagnosis Improvement
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: FTA 排查逻辑改进建议
@@ -671,6 +676,7 @@ class BayesianReasoningEngine:
 **贝叶斯推理示例**:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 场景: Pod CrashLoopBackOff，证据不确定
 
 FTA 先验概率:
@@ -694,7 +700,6 @@ FTA 先验概率:
   - 但未达 85% 阈值，需要进一步验证
   - 建议执行 kubectl top pod 确认
 ```
-
 ---
 
 <!-- chunk: 三、改进优先级 -->## 三、改进优先级
@@ -776,3 +781,6 @@ FTA 先验概率:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-d-templates.md|appendix-d-templates]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/fta-execution-engine.md|fta-execution-engine]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
+
+
+<!-- risk-assessed -->

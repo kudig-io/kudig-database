@@ -46,6 +46,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[kubelet|kubelet]] 故障排查指南
@@ -162,7 +167,8 @@ kubelet 是运行在每个节点上的“蜂群指令官”，它不直接运行
 
 ### 1.3 观测工具链（Expert's Toolbox）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 深度诊断：查看 kubelet 内部状态（需在节点执行）
 curl -s localhost:10248/healthz   # 基础健康检查
 curl -s localhost:10255/metrics   # 暴露大量内部监控指标（默认端口 10255 或 10250）
@@ -175,7 +181,6 @@ crictl stats                      # 查看实时资源占用
 # 专家级：内核级追踪（定位死锁或系统调用失败）
 strace -fp $(pgrep kubelet) -e trace=network,file
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -476,7 +481,8 @@ enforceNodeAllocatable: ["pods", "system-reserved", "kube-reserved"]
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubelet 服务状态
 systemctl status kubelet
 
@@ -505,7 +511,6 @@ curl -k https://localhost:10250/metrics
 # 查看 Pod 列表（kubelet API）
 curl -k https://localhost:10250/pods
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -611,7 +616,8 @@ kubelet 是节点上的核心代理，负责 Pod 生命周期管理。排查需�
 
 #### 2.3.1 第一步：检查 kubelet 进程状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 服务状态
 systemctl status kubelet
 
@@ -633,10 +639,10 @@ curl -k https://localhost:10250/healthz
 # 查看 kubelet 版本
 kubelet --version
 ```
-
 #### 2.3.2 第二步：检查容器运行时
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 containerd 状态
 systemctl status containerd
 
@@ -657,10 +663,10 @@ ls -la /var/run/cri-dockerd.sock
 # 测试容器运行时连接
 crictl version
 ```
-
 #### 2.3.3 第三步：检查 API Server 连接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 证书
 ls -la /var/lib/kubelet/pki/
 
@@ -676,10 +682,10 @@ journalctl -u kubelet | grep -iE "(unable to connect|connection refused)" | tail
 # 检查 API Server 地址配置
 grep server /etc/kubernetes/kubelet.conf
 ```
-
 #### 2.3.4 第四步：检查节点资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查磁盘空间
 df -h
 df -i  # inode 使用
@@ -702,10 +708,10 @@ du -sh /var/log/
 # 检查节点压力
 kubectl describe node $(hostname) | grep -A5 Conditions
 ```
-
 #### 2.3.5 第五步：检查 cgroup 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet cgroup 驱动配置
 cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 
@@ -720,10 +726,10 @@ docker info | grep "Cgroup Driver"
 mount | grep cgroup
 cat /sys/fs/cgroup/cgroup.controllers  # cgroup v2
 ```
-
 #### 2.3.6 第六步：检查 Pod 相关问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点上的 Pod 列表
 kubectl get pods --all-namespaces --field-selector=spec.nodeName=$(hostname)
 
@@ -742,7 +748,6 @@ curl -k https://localhost:10250/pods | jq '.items[].metadata.name'
 # 检查静态 Pod 目录
 ls -la /etc/kubernetes/manifests/
 ```
-
 #### 2.3.7 第七步：检查日志
 
 ```bash
@@ -799,7 +804,17 @@ journalctl -u kubelet | grep -i "probe" | tail -30
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查启动失败原因
 journalctl -u kubelet -b --no-pager | tail -100
 
@@ -822,7 +837,6 @@ systemctl restart kubelet
 systemctl status kubelet
 kubectl get node $(hostname)
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -849,7 +863,17 @@ kubectl get node $(hostname)
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认节点状态
 kubectl get node $(hostname) -o wide
 kubectl describe node $(hostname) | grep -A10 Conditions
@@ -875,7 +899,6 @@ systemctl restart kubelet
 # 步骤 7：验证恢复
 kubectl get node $(hostname)
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -902,7 +925,8 @@ kubectl get node $(hostname)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认压力类型
 kubectl describe node $(hostname) | grep -A10 Conditions
 
@@ -946,7 +970,6 @@ echo 65536 > /proc/sys/kernel/pid_max
 # 验证恢复
 kubectl describe node $(hostname) | grep -A10 Conditions
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -975,7 +998,8 @@ kubectl describe node $(hostname) | grep -A10 Conditions
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认错误类型
 kubectl describe pod <pod-name> | grep -A5 "Events:"
 
@@ -1009,7 +1033,6 @@ kubectl patch serviceaccount default -n <namespace> \
 # 步骤 7：重新创建 Pod
 kubectl delete pod <pod-name> -n <namespace>
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1037,7 +1060,8 @@ kubectl delete pod <pod-name> -n <namespace>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认探针配置
 kubectl get pod <pod-name> -o yaml | grep -A20 livenessProbe
 kubectl get pod <pod-name> -o yaml | grep -A20 readinessProbe
@@ -1082,7 +1106,6 @@ kubectl patch deployment <name> -p '{
 # 步骤 6：验证修复
 kubectl get pod <pod-name> -w
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1109,7 +1132,8 @@ kubectl get pod <pod-name> -w
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认错误类型
 kubectl describe pod <pod-name> | grep -A10 Events
 
@@ -1147,7 +1171,6 @@ umount /var/lib/kubelet/pods/<pod-uid>/volumes/<volume-type>/<volume-name>
 # 步骤 8：重启 Pod
 kubectl delete pod <pod-name> -n <namespace>
 ```
-
 #### 3.6.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1159,6 +1182,7 @@ kubectl delete pod <pod-name> -n <namespace>
 #### 3.6.3 安全生产风险提示
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ⚠️  安全生产风险提示：
 1. 卷挂载失败可能是云平台配额问题
 2. 强制卸载前确认没有写操作进行
@@ -1166,7 +1190,6 @@ kubectl delete pod <pod-name> -n <namespace>
 4. 多 AZ 场景注意卷和节点的 AZ 匹配
 5. 考虑使用卷快照进行数据保护
 ```
-
 ### 3.7 kubelet 证书问题
 
 #### 3.7.1 解决步骤
@@ -1175,7 +1198,17 @@ kubectl delete pod <pod-name> -n <namespace>
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查证书状态
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject
 
@@ -1202,7 +1235,6 @@ kubectl get node $(hostname)
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ```
-
 #### 3.7.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1801,3 +1833,5 @@ systemReserved:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

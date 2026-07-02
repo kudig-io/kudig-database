@@ -45,6 +45,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 02 - 单节点部署 (Single Node All-in-One)
@@ -183,7 +188,8 @@ free -h | grep Swap
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== Ubuntu/Debian =====
 sudo ufw disable
 sudo ufw status
@@ -210,7 +216,6 @@ sudo systemctl status firewalld
 # sudo firewall-cmd --permanent --add-port=30000-32767/tcp
 # sudo firewall-cmd --reload
 ```
-
 ## 4. 关闭 SELinux (CentOS/RHEL)
 
 > **为什么？** SELinux 的严格模式会阻止 kubelet 和容器的某些操作。可以设为 permissive (只记录不阻止)。
@@ -282,7 +287,8 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 
 > **为什么重要？** 证书验证、日志时间戳、etcd 一致性都依赖准确的时间。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Ubuntu/Debian
 sudo apt-get install -y chrony
 sudo systemctl enable chrony && sudo systemctl start chrony
@@ -297,7 +303,6 @@ chronyc tracking | grep "System time"
 timedatectl
 # 预期: NTP synchronized: yes (或 System clock synchronized: yes)
 ```
-
 ---
 
 <!-- chunk: 方案 A: k3s 单节点部署 (推荐) -->## 方案 A: k3s 单节点部署 (推荐)
@@ -308,7 +313,8 @@ timedatectl
 
 ## A1. 在线安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 最简安装 (一条命令) =====
 curl -sfL https://get.k3s.io | sh -
 
@@ -331,10 +337,10 @@ sudo k3s kubectl get nodes
 # NAME              STATUS   ROLES                  AGE   VERSION
 # k8s-single-node   Ready    control-plane,master   1m    v1.28.x+k3s1
 ```
-
 ## A2. 配置 kubectl (免 sudo)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 复制 kubeconfig 到用户目录
 mkdir -p ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
@@ -359,7 +365,6 @@ kubectl get pods -A
 # kube-system   svclb-traefik-xxx                         2/2     Running   0          2m  ← ServiceLB
 # kube-system   traefik-xxx                               1/1     Running   0          2m  ← Ingress Controller
 ```
-
 ## A3. 自定义安装选项
 
 ```bash
@@ -435,7 +440,8 @@ sudo k3s check-config
 
 > **场景**: 服务器没有互联网访问，需要提前下载安装包。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 在有网络的机器上准备 =====
 
 # 1. 下载 k3s 二进制文件
@@ -464,13 +470,13 @@ INSTALL_K3S_SKIP_DOWNLOAD=true ./install.sh
 # 验证
 sudo k3s kubectl get nodes
 ```
-
 ## A6. k3s 管理命令
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看服务状态
 sudo systemctl status k3s
 
@@ -496,7 +502,6 @@ ps aux | grep k3s  # 查看运行时参数
 /usr/local/bin/k3s-uninstall.sh
 # 备注: 此脚本会: 停止服务 → 删除二进制 → 清理数据目录 → 删除网络规则
 ```
-
 ---
 
 <!-- chunk: 方案 B: kubeadm 单节点部署 -->## 方案 B: kubeadm 单节点部署
@@ -514,7 +519,17 @@ ps aux | grep k3s  # 查看运行时参数
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 安装 containerd
 sudo apt-get update
 sudo apt-get install -y containerd
@@ -545,13 +560,22 @@ sudo systemctl status containerd
 containerd config dump | grep SystemdCgroup
 # 预期输出: SystemdCgroup = true
 ```
-
 **CentOS/RHEL/Rocky**:
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 添加 Docker 仓库 (containerd 在 Docker 仓库中)
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -566,11 +590,11 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 sudo systemctl restart containerd
 sudo systemctl enable containerd
 ```
-
 ## B2. 安装 kubeadm、kubelet、kubectl
 
 **Ubuntu/Debian**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装依赖
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 
@@ -596,9 +620,9 @@ kubeadm version
 kubelet --version
 kubectl version --client
 ```
-
 **CentOS/RHEL/Rocky**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加 Kubernetes YUM 仓库
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -616,10 +640,10 @@ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 # 启用 kubelet (kubeadm init 后会自动启动)
 sudo systemctl enable kubelet
 ```
-
 ## B3. 初始化集群
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 预检查 (可选但推荐) =====
 sudo kubeadm init --dry-run 2>&1 | head -30
 # 备注: --dry-run 模拟初始化，检查环境是否满足要求，不实际执行
@@ -663,7 +687,6 @@ kubectl get nodes
 # k8s-single-node   NotReady   control-plane   1m    v1.28.0
 # 备注: NotReady 是正常的! 安装 CNI 后会变为 Ready
 ```
-
 ## B4. 允许 Master 节点调度 Pod
 
 > **为什么？** 默认情况下，K8s 不允许在控制平面节点上运行用户 Pod (有 taint)。单节点模式必须移除这个限制。
@@ -671,7 +694,17 @@ kubectl get nodes
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 移除 control-plane 的 taint
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 # 预期输出:
@@ -681,7 +714,6 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 kubectl describe node | grep -A 3 Taints
 # 预期输出: Taints: <none>
 ```
-
 ## B5. 安装 CNI 网络插件
 
 > **CNI (Container Network Interface)** 负责为 Pod 分配 IP、实现 Pod 间通信。没有 CNI，Pod 无法联网。
@@ -689,7 +721,8 @@ kubectl describe node | grep -A 3 Taints
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ===== 方案 1: Flannel (简单、适合学习) =====
 # 备注: Flannel 只提供基本的网络互通，不支持 NetworkPolicy
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
@@ -718,7 +751,6 @@ kubectl get nodes
 # k8s-single-node   Ready    control-plane   5m    v1.28.0
 #                    ↑ 从 NotReady 变为 Ready
 ```
-
 ---
 
 <!-- chunk: 方案 C: MicroK8s 单节点部署 -->## 方案 C: MicroK8s 单节点部署
@@ -729,7 +761,8 @@ kubectl get nodes
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 (仅限支持 snap 的 Linux 发行版)
 sudo snap install microk8s --classic --channel=1.28/stable
 
@@ -770,7 +803,6 @@ microk8s dashboard-proxy
 # 卸载
 # sudo snap remove microk8s
 ```
-
 ---
 
 <!-- chunk: 部署后基础配置 (kubeadm 方案适用) -->## 部署后基础配置 (kubeadm 方案适用)
@@ -785,7 +817,8 @@ microk8s dashboard-proxy
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # 单节点/自签名证书需要添加 --kubelet-insecure-tls 参数
@@ -805,7 +838,6 @@ kubectl top nodes
 kubectl top pods -A
 # 预期: 显示所有 Pod 的 CPU/内存使用
 ```
-
 ## 安装本地存储 (StorageClass)
 
 > **作用**: 提供 PVC 动态供给能力，应用可以声明存储需求并自动创建 PV。
@@ -815,7 +847,17 @@ kubectl top pods -A
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 安装 local-path-provisioner (Rancher 出品，与 k3s 内置的相同)
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.26/deploy/local-path-storage.yaml
 
@@ -847,13 +889,13 @@ kubectl get pvc test-pvc
 # 清理测试
 kubectl delete pvc test-pvc
 ```
-
 ## 安装 Ingress Controller
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Nginx Ingress Controller (裸金属版本)
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
 
@@ -867,7 +909,6 @@ kubectl get pods -n ingress-nginx
 kubectl get svc -n ingress-nginx
 # 预期: 看到 NodePort 类型的 Service，记下端口号
 ```
-
 ---
 
 <!-- chunk: 方案对比 -->## 方案对比
@@ -934,7 +975,8 @@ sudo sysctl --system
 
 <!-- chunk: 单节点备份策略 -->## 单节点备份策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== k3s 备份 =====
 # k3s 使用内置 SQLite (单节点默认) 或 etcd
 
@@ -959,7 +1001,6 @@ ETCDCTL_API=3 sudo etcdctl snapshot status /backup/etcd-$(date +%Y%m%d).db --wri
 # sudo crontab -e
 # 0 2 * * * /usr/local/bin/k3s etcd-snapshot save --name auto-backup-$(date +\%Y\%m\%d)
 ```
-
 ---
 
 <!-- chunk: 验收清单 -->## 验收清单
@@ -982,7 +1023,17 @@ ETCDCTL_API=3 sudo etcdctl snapshot status /backup/etcd-$(date +%Y%m%d).db --wri
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd 配置问题，检查并修复
 sudo rm -f /etc/containerd/config.toml  # 删除可能有问题的配置
 sudo systemctl restart containerd
@@ -991,17 +1042,16 @@ containerd config default | sudo tee /etc/containerd/config.toml
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 sudo systemctl restart containerd
 ```
-
 ## Q2: 节点一直 NotReady
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通常是 CNI 未安装或安装失败
 kubectl get pods -A | grep -v Running  # 检查有没有非 Running 的 Pod
 kubectl describe node | grep -A 5 Conditions  # 查看 NotReady 原因
 sudo journalctl -u kubelet -n 50 --no-pager  # 查看 kubelet 日志
 # 常见原因: CNI 未安装 → 安装 Flannel 或 Calico
 ```
-
 ## Q3: k3s 安装后 kubectl 报权限错误
 
 ```bash
@@ -1015,17 +1065,27 @@ sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # kubeadm 单节点忘记移除 taint
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 ```
-
 ## Q5: 镜像拉取失败 (国内网络)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # k3s: 使用 /etc/rancher/k3s/registries.yaml 配置镜像代理
 sudo tee /etc/rancher/k3s/registries.yaml << 'EOF'
 mirrors:
@@ -1040,7 +1100,6 @@ sudo systemctl restart k3s
 
 # kubeadm/containerd: 编辑 /etc/containerd/config.toml 添加 mirror
 ```
-
 ---
 
 <!-- chunk: 清理/卸载 -->## 清理/卸载
@@ -1050,7 +1109,17 @@ sudo systemctl restart k3s
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ===== k3s 卸载 =====
 /usr/local/bin/k3s-uninstall.sh
 # 清理残留数据 (可选)
@@ -1074,7 +1143,6 @@ sudo snap remove microk8s
 # 重新启用防火墙 (如果需要)
 # sudo systemctl start firewalld
 ```
-
 ---
 
 **下一步**: 掌握单节点部署后，前往 → [03-development-environment-deployment.md](./03-development-environment-deployment.md) 学习多节点研发环境搭建。
@@ -1102,3 +1170,5 @@ sudo snap remove microk8s
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 
 ```
+
+<!-- risk-assessed -->

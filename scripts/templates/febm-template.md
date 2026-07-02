@@ -10,6 +10,11 @@ tier: supporting
 created: '2026-07-01'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # {{主题名称}} FEBM 法医取证分析
 
 > **文档类型**: FEBM 取证分析
@@ -112,7 +117,8 @@ L1: 基础设施层 ─────── 物理/虚拟资源、网络设备、�
 
 > 按顺序执行，采集顺序遵循易失性优先级。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === L1 极高优先级：内存与运行时状态 ===
 
 # 1. 容器内存转储（需 CRIU 支持，K8s 1.25+）
@@ -150,7 +156,6 @@ kubectl get --raw /log/apiserver/audit/v1/events?watch=false
 # 9. etcd 快照（如有权限）
 etcdctl snapshot save /tmp/etcd-snap-$(date +%Y%m%d%H%M%S).db
 ```
-
 ### 2.4 证据 Chain of Custody 记录表
 
 > 每条证据必须记录完整的保管链，确保可审计性和可辩护性。
@@ -456,3 +461,5 @@ FEBM-OODA 循环:
 ---
 
 > **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|README]].md)
+
+<!-- risk-assessed -->

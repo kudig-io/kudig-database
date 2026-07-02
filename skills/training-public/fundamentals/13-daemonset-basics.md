@@ -39,6 +39,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -203,7 +208,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【确保 DaemonSet 在所有节点运行】
 
 spec:
@@ -250,7 +265,6 @@ spec:
                 values:
                 - linux
 ```
-
 ---
 
 ## 3. 常见使用场景
@@ -258,6 +272,7 @@ spec:
 ### 3.1 日志收集
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【Fluentd 日志收集 DaemonSet】
 
 apiVersion: apps/v1
@@ -298,10 +313,10 @@ spec:
         hostPath:
           path: /var/lib/docker/containers
 ```
-
 ### 3.2 监控 exporter
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【node-exporter 监控 DaemonSet】
 
 apiVersion: apps/v1
@@ -342,7 +357,6 @@ spec:
         hostPath:
           path: /sys
 ```
-
 ### 3.3 存储插件
 
 ```
@@ -414,6 +428,7 @@ DaemonSet 适用：
 ### 5.1 DaemonSet Pod 没有在所有节点运行
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 DaemonSet 状态
@@ -435,13 +450,13 @@ DaemonSet 适用：
 
    看 Events 部分是否有调度失败的记录。
 ```
-
 ### 5.2 DaemonSet 更新
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【滚动更新策略】
 
 spec:
@@ -462,7 +477,6 @@ kubectl rollout status daemonset/<name>
 
 kubectl rollout undo daemonset/<name>
 ```
-
 ---
 
 ## 6. 数字人 Q&A 场景
@@ -513,6 +527,7 @@ DaemonSet = 每个教室一个日光灯
 ### 6.2 用户问：DaemonSet 不在某个节点上运行怎么办？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【回复】
 
 "DaemonSet 在某个节点没运行，按以下步骤排查：
@@ -552,7 +567,6 @@ spec:
 
 有其他问题吗？"
 ```
-
 ---
 
 ## 7. 总结
@@ -563,6 +577,7 @@ spec:
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 创建 DaemonSet：
@@ -600,7 +615,6 @@ kubectl delete daemonset <name> -n <namespace>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -614,3 +628,6 @@ kubectl delete daemonset <name> -n <namespace>
 - 12-common-problems
 - 14-statefulset-basics
 - 15-scheduling-basics
+
+
+<!-- risk-assessed -->

@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.16 Release Notes
@@ -77,3 +82,6 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 
 - Bump golang.org/x/crypto from 0.30.0 to 0.31.0 7877b45b63f95635153b29a42c0c2f4273ec45ca (dependabot[bot])
 - Bump the k8s-io group with 7 updates 848e586c27f05d84bc19d082f395098aba0b7619 (dependabot[bot])
+
+
+<!-- risk-assessed -->

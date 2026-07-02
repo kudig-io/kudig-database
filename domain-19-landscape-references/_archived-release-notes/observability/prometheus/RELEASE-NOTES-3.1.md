@@ -34,6 +34,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Prometheus|prometheus]] v3.1 Release Notes
@@ -87,3 +92,6 @@ Source: [v3.1.0](https://github.com/prometheus/prometheus/releases/tag/v3.1.0)
  * [BUGFIX] TSDB: Fix race on stale values in headAppender. #15322
  * [BUGFIX] UI: Fix selector / series formatting for empty metric names. #15340
  * [BUGFIX] OTLP receiver: Allow colons in non-standard units. #15710
+
+
+<!-- risk-assessed -->

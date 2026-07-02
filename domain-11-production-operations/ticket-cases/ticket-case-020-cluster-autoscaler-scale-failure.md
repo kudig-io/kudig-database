@@ -59,6 +59,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -84,7 +89,8 @@ relationships:
 
 按“先看 Pod 与节点状态、再看 CA 日志、再看节点池配置、最后看 IaaS 事件”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 与节点状态
 kubectl get pod -n recommendation-engine | grep Pending
 kubectl get node -o wide
@@ -115,7 +121,6 @@ ack-cli event list --cluster ack-zyy-prod-08 --resource nodepool/np-zyy-rec
 kubectl get pod -n recommendation-engine -l app=recommendation-api -o json | \
   jq '.items[].spec | {nodeSelector, affinity, tolerations}'
 ```
-
 ## 根因分析
 
 经过排查，Cluster Autoscaler 日志中出现以下关键信息：
@@ -161,7 +166,8 @@ aliyun cs POST /clusters/ack-zyy-prod-08/nodepools \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment recommendation-api -n recommendation-engine --type='json' -p='[
   {"op": "remove", "path": "/spec/template/spec/nodeSelector"},
   {"op": "add", "path": "/spec/template/spec/affinity", "value": {
@@ -173,18 +179,26 @@ kubectl patch deployment recommendation-api -n recommendation-engine --type='jso
   }}
 ]'
 ```
-
 **第三步：手动触发 Cluster Autoscaler 重新评估（或等待默认扫描周期）**
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 通过删除 CA Pod 强制重新启动并触发扫描
 kubectl delete pod -n kube-system -l app=cluster-autoscaler --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 kubectl wait --for=condition=Ready pod -n kube-system -l app=cluster-autoscaler --timeout=120s
 ```
-
 **第四步：若 CA 仍无法扩容，临时手动扩容节点池**
 
 ```bash
@@ -203,17 +217,18 @@ aliyun cs POST /clusters/ack-zyy-prod-08/nodes \
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch configmap cluster-autoscaler-config -n kube-system --type='json' -p='[
   {"op": "add", "path": "/data/expander", "value": "priority"},
   {"op": "add", "path": "/data/skip-nodes-with-local-storage", "value": "false"}
 ]'
 kubectl rollout restart deployment cluster-autoscaler -n kube-system
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 备用节点池创建成功
 aliyun cs GET /clusters/ack-zyy-prod-08/nodepools | jq '.nodepools[] | select(.nodepool_info.name=="np-zyy-rec-burst") | .nodepool_info.name'
 
@@ -234,7 +249,6 @@ kubectl get hpa -n recommendation-engine recommendation-api -o jsonpath='{.statu
 kubectl run rec-test -n recommendation-engine --rm -i --restart=Never --image=registry.aliyuncs.com/acs/busybox -- \
   wget -qO- http://recommendation-api:8080/healthz
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次自动扩容失败的根因是 **节点池 `np-zyy-rec` 绑定的实例类型 `ecs.g7.xlarge` 在当前可用区库存售罄**，Cluster Autoscaler 向 ESS 发起扩容请求后失败，导致 HPA 新增的 Pod 无法调度。我们已完成以下处置：
@@ -288,3 +302,6 @@ kubectl run rec-test -n recommendation-engine --rm -i --restart=Never --image=re
 - 集群自动扩缩容（Cluster Autoscaler）扩容失败
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - Service 访问异常：kube-proxy 未同步 Endpoint 导致 ClusterIP 不通
+
+
+<!-- risk-assessed -->

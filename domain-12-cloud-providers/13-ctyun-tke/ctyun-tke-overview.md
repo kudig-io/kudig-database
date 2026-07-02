@@ -42,6 +42,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 天翼云 TKE (Tianyi Cloud [[Kubernetes|Kubernetes]] Engine) 概述
@@ -723,7 +728,8 @@ spec:
 ```
 
 **成本分析和优化脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 天翼云TKE成本分析和优化工具
 
@@ -839,7 +845,6 @@ EOF
 echo "优化方案已生成: telecom-cost-optimization-plan.yaml"
 echo "预计可节省成本: 20-30%"
 ```
-
 ## 故障排查与应急响应
 
 ### 常见问题诊断流程
@@ -849,7 +854,8 @@ echo "预计可节省成本: 20-30%"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 天翼云TKE故障诊断工具 - 电信级标准
 
@@ -925,9 +931,9 @@ fi
 echo
 echo "诊断报告已保存到: $REPORT_FILE"
 ```
-
 **Pod调度失败分析工具**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 天翼云TKE Pod调度失败分析
 
@@ -980,7 +986,6 @@ fi
 
 echo "=== 分析完成 ==="
 ```
-
 ### 应急响应预案
 
 **一级问题响应流程 (Critical - 电信级服务中断)**
@@ -1078,7 +1083,8 @@ echo "=== 分析完成 ==="
 ### 自动化运维工具
 
 **集群健康检查自动化**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 天翼云TKE自动化健康检查 - 电信级标准
 
@@ -1186,9 +1192,9 @@ fi
 
 echo "检查报告已保存到: $LOG_FILE"
 ```
-
 **自动化故障恢复系统**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 天翼云TKE自动化故障恢复系统
 
@@ -1314,13 +1320,13 @@ send_telecom_alert() {
 # 执行主函数
 main_recovery "$@"
 ```
-
 ## 版本升级与维护
 
 ### 电信级版本管理
 
 **升级前合规性检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 天翼云TKE版本升级合规性检查
 
@@ -1418,7 +1424,6 @@ EOF
 
 echo "风险评估报告已生成: telecom-upgrade-risk-assessment.md"
 ```
-
 ## 核心特性与优势
 
 ### 电信级技术优势
@@ -1491,3 +1496,6 @@ echo "风险评估报告已生成: telecom-upgrade-risk-assessment.md"
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

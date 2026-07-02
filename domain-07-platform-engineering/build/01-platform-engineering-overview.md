@@ -56,6 +56,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 平台工程概述与成熟度模型
@@ -758,6 +763,7 @@ escalation_process:
 平台工程的核心价值之一是**降低开发者认知负载**：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 认知负载类型 (John Sweller 认知负载理论)
 
 内在认知负载 (Intrinsic Load)     - 任务本身的复杂性（业务逻辑）
@@ -788,7 +794,6 @@ escalation_process:
   ✅ 编写业务逻辑代码
   认知负载: 正常 ██████
 ```
-
 ---
 
 <!-- chunk: 7. 平台产品化思维 -->## 7. 平台产品化思维
@@ -1575,3 +1580,6 @@ Engineering Manager / Director (管理路径)
 - 99-backstage-idp-guide
 - 02-idp-design-principles
 - 03-backstage-deployment
+
+
+<!-- risk-assessed -->

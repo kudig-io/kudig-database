@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-03-15] Java 应用 OOMKilled 循环重启，促销期间订单服务崩溃
@@ -33,20 +38,21 @@ last_updated: 2026-05-23
 
 ## 问题现象
 08:00，促销活动开始，用户流量激增。`order-api` Pod 开始反复重启：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n prod-order -l app=order-api
 # NAME                          READY   STATUS      RESTARTS   AGE
 # order-api-7d9f4b8c5a-abc12   0/1     OOMKilled   5          12m
 # order-api-7d9f4b8c5a-def34   0/1     OOMKilled   5          12m
 # ...
 ```
-
 用户反馈：下单按钮点击后页面刷新，无响应或报错 "系统繁忙"。
 
 ## 诊断过程
 
 **08:05** — 检查 Pod 事件：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod order-api-7d9f4b8c5a-abc12 -n prod-order
 # ...
 # Last State: Terminated
@@ -56,9 +62,9 @@ kubectl describe pod order-api-7d9f4b8c5a-abc12 -n prod-order
 # Events:
 #   Warning  OOMKilling  5m    kubelet  Memory cgroup out of memory: Killed process 1234 (java) ...
 ```
-
 **08:07** — 检查资源限制：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment order-api -n prod-order -o jsonpath='{.spec.template.spec.containers[0].resources}' | jq .
 # {
 #   "limits": {
@@ -71,17 +77,16 @@ kubectl get deployment order-api -n prod-order -o jsonpath='{.spec.template.spec
 #   }
 # }
 ```
-
 **08:10** — 检查 JVM 参数：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-order order-api-7d9f4b8c5a-abc12 -- ps -ef | grep java
 # java -Xmx2048m -Xms2048m -XX:+UseG1GC -jar order-api.jar
 ```
-
 **08:12** — 问题定位：
 - Pod memory limit: 2Gi
 - JVM `-Xmx2048m` (2Gi)
@@ -111,7 +116,8 @@ Java 应用的 `-Xmx2048m` 与容器的 `memory limit: 2Gi` 相等，未预留 h
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -135,29 +141,28 @@ spec:
           value: "-Xmx1536m -Xms1536m -XX:+UseG1GC -XX:MaxRAMPercentage=75.0"
 EOF
 ```
-
 **08:22** — 验证 Pod 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n prod-order -l app=order-api
 # NAME                          READY   STATUS    RESTARTS   AGE
 # order-api-7d9f4b8c5a-ghi56   1/1     Running   0          3m
 # ...
 ```
-
 **08:25** — 监控内存使用：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top pods -n prod-order -l app=order-api
 # NAME                          CPU(cores)   MEMORY(bytes)
 # order-api-7d9f4b8c5a-ghi56   850m         1.8Gi
 # ...
 ```
-
 **08:30** — HPA 扩容应对促销流量：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment order-api -n prod-order --replicas=12
 # 同时调整 HPA maxReplicas: 20
 ```
-
 ## 验证
 - 08:32 — `kubectl get pods` 显示全部 Running，无 OOMKilled
 - 08:33 — 下单成功率恢复至 99.5%
@@ -173,3 +178,6 @@ kubectl scale deployment order-api -n prod-order --replicas=12
   4. 添加容器内存使用率告警：`container_memory_working_set_bytes / memory_limit > 0.85`
 - **相关 Skill**: [[ts-workloads]]
 - **相关 FTA**: [[pod-fta]]
+
+
+<!-- risk-assessed -->

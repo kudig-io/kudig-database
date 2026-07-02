@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Service 无法访问 深度解析
@@ -137,10 +142,10 @@ ALB 排障要点：
 
 无论 SLB、NLB 还是 ALB，出现问题时都应检查 `kube-system` 命名空间下的 cloud-controller-manager 日志：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l component=cloud-controller-manager --tail=100
 ```
-
 这条命令之所以关键，是因为云厂商控制器的报错通常直接指出问题：权限不足（RAM 角色缺少 SLB 操作权限）、配额耗尽（一个账号下的 SLB 实例数达到上限）、子网 IP 不足、或者 Annotation 配置错误。
 
 ## 3. Terway 网络下的 Service 特殊注意事项
@@ -166,11 +171,11 @@ Terway 模式下，Pod 的安全组规则与节点安全组是分离的。如果
 
 Terway 本身以 DaemonSet 形式运行在每个节点上。如果 Terway Pod 异常，可能导致节点上的 Pod 网络中断，进而影响 Service 转发。排查时应检查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l app=terway
 kubectl logs -n kube-system -l app=terway --tail=100
 ```
-
 Terway 异常通常与 ENI 配额、交换机 IP 耗尽、或者 RAM 角色权限有关。
 
 ## 4. 边界条件
@@ -243,31 +248,31 @@ sessionAffinity 的边界问题包括：
 以下命令用于快速区分 Service 不可达的三个层次：Endpoints 层、Service 数据平面层、外部 LB 层。
 
 **检查 Endpoints 是否为空**。Endpoints 是 Service 与 Pod 之间的桥梁，先确认桥是否存在，再排查桥后的路径：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get endpoints <svc> -n <ns>
 kubectl get endpointslice -n <ns> -l kubernetes.io/service-name=<svc>
 ```
-
 **对比 Pod IP 与 ClusterIP 访问**。如果 Pod IP 通但 ClusterIP 不通，问题在 kube-proxy/端口映射/NetworkPolicy；如果 Pod IP 也不通，问题在后端 Pod：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <test-pod> -- curl -s -o /dev/null -w "pod-ip: %{http_code}\n" --connect-timeout 5 http://<pod-ip>:<port>/
 kubectl exec <test-pod> -- curl -s -o /dev/null -w "cluster-ip: %{http_code}\n" --connect-timeout 5 http://<cluster-ip>:<port>/
 ```
-
 **检查 kube-proxy 是否同步规则**。kube-proxy Pod Running 不代表规则已同步，需要直接查看规则或日志：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -iE "error|failed|sync"
 ```
-
 **检查云厂商控制器日志**。对于 LoadBalancer Service，这是判断 SLB/NLB/ALB 为什么没有正确创建或同步后端的直接证据：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l component=cloud-controller-manager --tail=100
 ```
-
 ## 9. 相关链接
 
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|Service 异常 FTA 树]]
@@ -278,3 +283,6 @@ kubectl logs -n kube-system -l component=cloud-controller-manager --tail=100
 ## Related
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
+
+
+<!-- risk-assessed -->

@@ -21,6 +21,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-08-18] Cluster Autoscaler 缩容导致节点上 Pod 驱逐延迟 8 分钟
@@ -35,7 +40,8 @@ last_updated: 2026-05-23
 ## 问题现象
 03:20，夜间低峰期，Cluster Autoscaler 决定缩容节点 `ip-10-0-9-15.ec2.internal`。节点被标记为 `ToBeDeletedByClusterAutoscaler`，但节点上的 Pod 迟迟未被驱逐。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node ip-10-0-9-15.ec2.internal
 # NAME                        STATUS                     ROLES    AGE
 # ip-10-0-9-15.ec2.internal   Ready,SchedulingDisabled   <none>   3d
@@ -46,11 +52,11 @@ kubectl get pods -n prod-api --field-selector spec.nodeName=ip-10-0-9-15.ec2.int
 # worker-def34      1/1     Running   0          45m
 # ...（共 23 个 Pod，均未进入 Terminating）
 ```
-
 ## 诊断过程
 
 **03:22** — 检查 Cluster Autoscaler 日志：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system deployment/cluster-autoscaler | grep ip-10-0-9-15
 # I0818 03:15:45.112 ... scale_down.go:456] 
 #   Scale-down: removing node ip-10-0-9-15.ec2.internal
@@ -59,17 +65,17 @@ kubectl logs -n kube-system deployment/cluster-autoscaler | grep ip-10-0-9-15
 # I0818 03:23:45.114 ... scale_down.go:460] 
 #   Still waiting for pod eviction on ip-10-0-9-15.ec2.internal
 ```
-
 **03:25** — 检查节点上的 Pod，发现大量 `PodDisruptionBudget` 限制：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pdb -A
 # NAMESPACE   NAME        MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS
 # prod-api    api-pdb     4               N/A               0
 # prod-order  order-pdb   3               N/A               0
 ```
-
 **03:27** — 检查具体 PDB：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pdb api-pdb -n prod-api -o yaml
 # spec:
 #   minAvailable: 4
@@ -81,20 +87,20 @@ kubectl get pdb api-pdb -n prod-api -o yaml
 #   desiredHealthy: 4
 #   disruptionsAllowed: 0
 ```
-
 `api-pdb` 要求 `minAvailable: 4`，当前恰好 4 个 healthy。若驱逐节点上的 1 个 api Pod，`currentHealthy` 将降至 3 < 4，因此 PDB 拒绝驱逐。
 
 **03:29** — 检查 api Deployment 的副本数：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment api -n prod-api
 # NAME   READY   UP-TO-DATE   AVAILABLE
 # api    4/4     4            4
 ```
-
 Deployment 的 replicas 恰好等于 PDB 的 minAvailable，没有冗余副本。
 
 **03:31** — 检查 Cluster Autoscaler 配置：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A5 args
 # args:
 # - --scale-down-delay-after-add=10m
@@ -103,7 +109,6 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A5 args
 # - --skip-nodes-with-local-storage=false
 # （未配置 --scale-down-delay-after-delete）
 ```
-
 ## 根因
 1. `api` Deployment 的 replicas=4，PDB minAvailable=4，无冗余
 2. Cluster Autoscaler 缩容时，需要驱逐节点上的 Pod
@@ -115,7 +120,8 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A5 args
 ## 修复动作
 
 **03:35** — 临时增加 api Deployment 副本数：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment api -n prod-api --replicas=6
 # 新 Pod 调度到其他节点
 kubectl get pods -n prod-api -l app=api
@@ -124,28 +130,27 @@ kubectl get pods -n prod-api -l app=api
 # api-xxx-def34     1/1     Running
 # ...（共 6 个 Running）
 ```
-
 **03:38** — PDB 允许驱逐：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pdb api-pdb -n prod-api
 # NAME     MIN AVAILABLE   ALLOWED DISRUPTIONS
 # api-pdb  4               2
 ```
-
 **03:40** — Cluster Autoscaler 继续缩容：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n prod-api --field-selector spec.nodeName=ip-10-0-9-15.ec2.internal
 # （Pod 开始 Terminating）
 
 kubectl get node ip-10-0-9-15.ec2.internal
 # （节点已删除）
 ```
-
 **03:45** — 恢复 api Deployment 到正常副本数：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment api -n prod-api --replicas=4
 ```
-
 ## 验证
 - 03:48 — 节点缩容完成，集群节点数恢复正常
 - 03:50 — 所有 Pod 正常运行，无 Pending
@@ -162,3 +167,6 @@ kubectl scale deployment api -n prod-api --replicas=4
   5. 关键服务 Deployment replicas ≥ PDB minAvailable + 2（缩容冗余）
 - **相关 Skill**: [[ts-cluster-operations]]
 - **相关 FTA**: [[cluster-autoscaler-fta]]
+
+
+<!-- risk-assessed -->

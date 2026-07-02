@@ -38,6 +38,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 集群高可用与灾备故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, etcd v3.4 - v3.5 | **最后更新**: 2026-01 | **难度**: 高级
@@ -138,6 +143,7 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
 ### 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 高可用/灾备问题
       │
       ├─── API Server 不可用？
@@ -162,12 +168,12 @@ Kubernetes 集群的高可用 (HA) 和灾难恢复 (DR) 能力对于生产环境
                 ├─ 备份失败 ──→ 检查权限/存储空间
                 └─ 恢复失败 ──→ 检查备份完整性/版本兼容
 ```
-
 ### 排查命令集
 
 #### 控制平面状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有 Master 节点
 kubectl get nodes -l node-role.kubernetes.io/control-plane=
 
@@ -186,10 +192,10 @@ kubectl get componentstatuses  # 已废弃但仍可用
 kubectl get --raw='/readyz?verbose'
 kubectl get --raw='/healthz?verbose'
 ```
-
 #### etcd 集群检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 设置 etcdctl 环境变量
 export ETCDCTL_API=3
 export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379
@@ -215,10 +221,10 @@ etcdctl endpoint status --cluster -w table | awk '{print $1, $5}'
 # 检查数据库大小
 etcdctl endpoint status --cluster -w json | jq '.[].Status.dbSize'
 ```
-
 #### 选主状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Controller Manager Leader
 kubectl get lease kube-controller-manager -n kube-system -o yaml
 
@@ -229,7 +235,6 @@ kubectl get lease kube-scheduler -n kube-system -o yaml
 kubectl get endpoints kube-controller-manager -n kube-system -o yaml
 kubectl get endpoints kube-scheduler -n kube-system -o yaml
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 |
@@ -255,7 +260,8 @@ etcdserver: no leader
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查集群成员状态
 etcdctl member list -w table
 etcdctl endpoint status --cluster -w table
@@ -279,10 +285,10 @@ kubectl logs -n kube-system etcd-<node> --tail=100
 # 或
 journalctl -u etcd --tail=100
 ```
-
 #### 场景：etcd 成员故障恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景: 一个 etcd 成员永久问题，需要替换
 
 # 1. 移除问题成员
@@ -303,10 +309,10 @@ kubeadm join <control-plane-endpoint> \
 etcdctl member list -w table
 etcdctl endpoint health --cluster
 ```
-
 #### 场景：etcd 数据压缩和碎片整理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查数据库大小
 etcdctl endpoint status --cluster -w table
 
@@ -324,12 +330,12 @@ etcdctl defrag --endpoints=https://<etcd3>:2379
 # 验证
 etcdctl endpoint status --cluster -w table
 ```
-
 ### 备份与恢复
 
 #### 场景：创建 etcd 备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式 1: 使用 etcdctl snapshot
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -367,12 +373,12 @@ chmod +x /usr/local/bin/etcd-backup.sh
 # 添加定时任务
 echo "0 */6 * * * root /usr/local/bin/etcd-backup.sh" >> /etc/crontab
 ```
-
 #### 场景：从备份恢复 etcd
 
 **警告: 此操作会重置整个集群状态，请谨慎执行！**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 停止所有控制平面组件
 # 在所有 Master 节点执行
 mv /etc/kubernetes/manifests /etc/kubernetes/manifests.bak
@@ -407,12 +413,21 @@ sleep 60
 kubectl get nodes
 kubectl get pods -n kube-system
 ```
-
 ### 控制平面故障恢复
 
 #### 场景：单 Master 节点问题
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查问题节点状态
 kubectl get nodes
 
@@ -435,10 +450,19 @@ kubeadm join <lb-endpoint>:6443 \
   --control-plane \
   --certificate-key <cert-key>
 ```
-
 #### 场景：所有 Master 问题后恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 最严重的情况: 所有 Master 都不可用
 
 # 1. 选择一个 Master 节点尝试恢复
@@ -456,12 +480,12 @@ kubectl get nodes
 
 # 5. 逐个恢复其他 Master 节点
 ```
-
 ### 负载均衡器问题
 
 #### 场景：检查和修复 LB
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 LB 后端健康
 # HAProxy 示例
 echo "show stat" | socat stdio /var/run/haproxy.sock
@@ -492,10 +516,19 @@ EOF
 
 systemctl restart haproxy
 ```
-
 ### 灾难恢复演练
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 灾难恢复演练检查清单
 
@@ -530,7 +563,6 @@ kubeadm certs check-expiration
 
 echo -e "\n=== 检查完成 ==="
 ```
-
 ---
 
 ### 高可用最佳实践
@@ -591,7 +623,8 @@ spec:
 
 ### 常用命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 操作
 etcdctl endpoint health --cluster
 etcdctl endpoint status --cluster -w table
@@ -608,7 +641,6 @@ kubectl get lease -n kube-system
 kubeadm certs check-expiration
 kubeadm certs renew all
 ```
-
 ### 相关文档
 
 - [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
@@ -620,3 +652,6 @@ kubeadm certs renew all
 
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+
+
+<!-- risk-assessed -->

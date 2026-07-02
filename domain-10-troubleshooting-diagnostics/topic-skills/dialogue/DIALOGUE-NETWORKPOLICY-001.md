@@ -20,6 +20,11 @@ status: reviewed
 last_updated: 2026-05-21
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
@@ -41,10 +46,10 @@ last_updated: 2026-05-21
 
 **顾问**：请执行以下命令，确认集群 CNI 插件是否支持 NetworkPolicy：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system | grep -E 'calico|cilium|weave'
 ```
-
 > **如果无法执行**：请通过集群管理控制台查看 kube-system 命名空间下的 CNI 相关 Pod，或提供当前集群使用的 CNI 类型（如 Calico、Cilium、Flannel 等）。
 
 **预期用户回复**：CNI 为 Calico/Cilium/其他，或未发现相关 Pod。
@@ -59,16 +64,16 @@ kubectl get pods -n kube-system | grep -E 'calico|cilium|weave'
 
 **顾问**：请检查集群中所有命名空间的 NetworkPolicy 配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy --all-namespaces
 ```
-
 > **如果无法执行**：请提供目标命名空间下的 NetworkPolicy 列表，或确认是否部署了任何 NetworkPolicy 资源。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n <namespace> -o yaml
 ```
-
 > **如果无法执行**：请将 NetworkPolicy 的 YAML 配置截图或复制发给我。
 
 **预期用户回复**：存在 deny-all 或限制 ingress/egress 的 NetworkPolicy。
@@ -86,19 +91,19 @@ kubectl get networkpolicy -n <namespace> -o yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 ```
-
 > **如果无法执行**：请在目标 Pod 所在节点上执行 `ping <target-pod-ip>`，或提供源 Pod 到目标 Service 的连通性测试结果。
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <source-pod> -n <namespace> -- nc -zv <target-ip> <port>
 ```
-
 > **如果无法执行**：请使用 `telnet <target-ip> <port>` 或 `curl -v` 测试目标端口是否可达。
 
 **预期用户回复**：ping/nc 不通，确认网络被阻断。
@@ -113,10 +118,10 @@ kubectl exec <source-pod> -n <namespace> -- nc -zv <target-ip> <port>
 
 **顾问**：请查看具体 NetworkPolicy 的规则详情：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy <policy-name> -n <namespace> -o yaml
 ```
-
 > **如果无法执行**：请将 NetworkPolicy 的完整 YAML 配置复制给我，特别关注 `spec.ingress.from` 和 `spec.egress.to` 字段。
 
 **预期用户回复**：NetworkPolicy 中 podSelector 或 namespaceSelector 未匹配到目标 Pod。
@@ -131,16 +136,16 @@ kubectl get networkpolicy <policy-name> -n <namespace> -o yaml
 
 **顾问**：请检查 NetworkPolicy 中的 selector 是否匹配实际 Pod 标签：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> --show-labels
 ```
-
 > **如果无法执行**：请提供源 Pod 和目标 Pod 的 `metadata.labels` 内容。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingress[0].from}'
 ```
-
 > **如果无法执行**：请手动查看 NetworkPolicy YAML 中 `ingress.from` 和 `egress.to` 部分的 selector 配置，与 Pod 标签逐一比对。
 
 **预期用户回复**：Pod 标签与 selector 不匹配，或缺少必要的 namespaceSelector 配置。
@@ -160,10 +165,19 @@ kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingre
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit networkpolicy <policy-name> -n <namespace>
 ```
-
 修改 `spec.ingress.from` 或 `spec.egress.to` 中的 selector，确保匹配源/目标 Pod 的标签和命名空间。
 
 > **如果无法执行 edit**：请使用 `kubectl patch` 或准备修改后的 YAML 文件执行 `kubectl apply -f`。
@@ -173,7 +187,8 @@ kubectl edit networkpolicy <policy-name> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -191,15 +206,14 @@ spec:
     - {}
 EOF
 ```
-
 > **如果无法执行**：请手动在控制台创建允许所有流量的 NetworkPolicy，确认连通性后删除该临时策略。
 
 #### 方案 C：确认端口和协议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingress[*].ports}'
 ```
-
 > **如果无法执行**：请检查 NetworkPolicy 中 `ports` 字段的 `protocol` 和 `port` 是否与目标服务实际监听的一致。
 
 **验证修复**：
@@ -207,10 +221,10 @@ kubectl get networkpolicy <policy-name> -n <namespace> -o jsonpath='{.spec.ingre
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 ```
-
 > **如果无法执行**：请在应用层面验证功能是否正常，确认 Pod 间通信已恢复。
 
 ---
@@ -224,3 +238,6 @@ kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

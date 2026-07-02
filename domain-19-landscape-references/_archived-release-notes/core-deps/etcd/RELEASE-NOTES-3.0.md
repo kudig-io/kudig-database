@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v3.0 Release Notes
@@ -65,6 +70,7 @@ Go OS/Arch: linux/amd64
 ```
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # start a local etcd server
 /tmp/test-etcd/etcd
 
@@ -72,7 +78,6 @@ Go OS/Arch: linux/amd64
 ETCDCTL_API=3 /tmp/test-etcd/etcdctl --endpoints=localhost:2379 put foo "bar"
 ETCDCTL_API=3 /tmp/test-etcd/etcdctl --endpoints=localhost:2379 get foo
 ```
-
 ###### Mac OS (Darwin)
 
 ```
@@ -88,7 +93,17 @@ mkdir -p /tmp/test-etcd && unzip /tmp/etcd-${ETCD_VER}-darwin-amd64.zip -d /tmp 
 
 ###### rkt
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 RKT_VERSION=v1.23.0
 
 GITHUB_URL=https://github.com/coreos/rkt/releases/download
@@ -145,13 +160,15 @@ sudo /rkt \
     quay.io/coreos/etcd:v3.0.17 \
     --exec=/bin/sh -- -c "export ETCDCTL_API=3 && /usr/local/bin/etcdctl put foo bar"
 ```
-
 For more details, please check [rkt commands](https://github.com/coreos/rkt/blob/master/Documentation/commands.md#rkt-run).
 
 ###### Docker
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --name etcd quay.io/coreos/etcd:v3.0.17
 ```
-
 For more details, please check [Docker guide](https://github.com/coreos/etcd/blob/master/Documentation/op-guide/container.md#docker).
+
+
+<!-- risk-assessed -->

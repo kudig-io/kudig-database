@@ -32,6 +32,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Organizing Cluster Access Using kubeconfig Files
@@ -223,7 +228,8 @@ contexts:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前上下文
 kubectl config current-context
 
@@ -257,7 +263,6 @@ kubectl config delete-context old-context
 # 使用独立 kubeconfig 执行命令
 kubectl --kubeconfig=/path/to/config get pods
 ```
-
 ## 交叉引用
 
 - [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
@@ -272,3 +277,6 @@ kubectl --kubeconfig=/path/to/config get pods
 - [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]
+
+
+<!-- risk-assessed -->

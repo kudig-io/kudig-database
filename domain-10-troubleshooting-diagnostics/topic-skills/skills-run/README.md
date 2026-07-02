@@ -41,6 +41,11 @@ skill_name: Skills Demo — 本地运行工单诊断技能
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skills Demo — 本地运行工单诊断技能
@@ -111,6 +116,7 @@ bash teardown.sh
 每个 demo 场景严格按照 [skill-schema.md](../skill-schema.md) 定义的 Skill 执行闭环运行:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Phase 0: 故障注入 (Fault Injection)
     │
     ▼
@@ -138,7 +144,6 @@ Phase 6: 验证确认 (Verification)           ← Skill Section 7
     │   V1-V4 即时验证
     └── ✅ 完成
 ```
-
 ---
 
 ## 目录结构
@@ -169,7 +174,8 @@ skills-run/
 
 ### macOS (Homebrew)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Docker Desktop
 # 从 https://www.docker.com/products/docker-desktop/ 下载安装
 
@@ -184,10 +190,10 @@ docker version
 kind version
 kubectl version --client
 ```
-
 ### Linux
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kind
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.25.0/kind-linux-amd64
 chmod +x ./kind
@@ -198,7 +204,6 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 ```
-
 ---
 
 ## 与 Skill 文档的对应关系
@@ -312,3 +317,6 @@ sudo mv kubectl /usr/local/bin/kubectl
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

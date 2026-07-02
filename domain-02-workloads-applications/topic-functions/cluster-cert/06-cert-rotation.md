@@ -37,6 +37,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 证书轮换机制源码分析
@@ -264,6 +269,7 @@ front-proxy-ca          Jan 10, 2035 08:30 UTC   9y              no
 CA 证书轮换需要**同时更新所有由该 CA 签发的证书**，否则会导致信任链断裂。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 旧 CA (ca.crt.old)          新 CA (ca.crt.new)
      │                            │
      ├── apiserver.crt (旧)       ├── apiserver.crt (新)
@@ -273,7 +279,6 @@ CA 证书轮换需要**同时更新所有由该 CA 签发的证书**，否则会
 // 必须确保所有组件同时切换到新证书
 // 如果 API Server 使用新证书，但 kubectl 使用旧 CA，会导致 TLS 失败
 ```
-
 ### kubeadm 的 CA 轮换支持
 
 kubeadm **不直接支持 CA 轮换**，因为：
@@ -286,7 +291,17 @@ kubeadm **不直接支持 CA 轮换**，因为：
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份
 sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
 
@@ -316,7 +331,6 @@ sudo systemctl restart kubelet
 sudo rm /var/lib/kubelet/pki/kubelet-client-*
 sudo systemctl restart kubelet
 ```
-
 ---
 
 ## 自动化轮换方案
@@ -326,7 +340,17 @@ sudo systemctl restart kubelet
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # /etc/cron.monthly/k8s-cert-renew
 #!/bin/bash
 # 每月检查证书，如剩余 < 60 天则轮换
@@ -340,7 +364,6 @@ if "$EXPIRY" =~ ^[0-9]+d$; then
     fi
 fi
 ```
-
 ### 方案 2: 使用 kubeadm generate-csr（v1.29+ 外部 CA 场景）
 
 当使用外部 CA 时，kubeadm 提供生成 CSR 而非直接签发证书的功能：
@@ -414,7 +437,17 @@ kubeadm upgrade 不会自动更新证书
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查证书
 kubeadm certs check-expiration
 
@@ -426,7 +459,6 @@ systemctl restart kubelet
 kubeadm upgrade apply v1.32.0
 
 ```
-
 ---
 
 ## 证书轮换后的重启要求
@@ -451,20 +483,39 @@ kubeadm upgrade apply v1.32.0
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果还能通过某个 master 节点的本地连接执行命令
 sudo kubeadm certs renew apiserver
 sudo kubeadm init phase kubeconfig admin --config /etc/kubernetes/kubeadm-config.yaml
 sudo cp /etc/kubernetes/admin.conf ~/.kube/config
 sudo systemctl restart kubelet
 ```
-
 ### 场景 2: 所有控制面证书过期，API 完全不可用
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 在所有 master 节点上，将系统时间回拨到证书有效期内（临时措施）
 sudo date -s "2025-01-14 08:00:00"  # 假设证书 2025-01-15 过期
 
@@ -480,7 +531,6 @@ sudo ntpdate -u pool.ntp.org
 # 4. 验证
 kubectl get nodes
 ```
-
 **⚠️ 警告**：回拨系统时间是高风险的临时措施，只应在完全无法访问的紧急情况下使用，且应尽快恢复正确时间。
 
 ### 场景 3: CA 证书过期
@@ -519,3 +569,5 @@ kubectl get nodes
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

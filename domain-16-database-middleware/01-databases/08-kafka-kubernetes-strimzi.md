@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: sql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kafka [[Kubernetes|Kubernetes]] 企业级实践 — [[Strimzi|Strimzi]] Operator 深度指南
@@ -191,7 +196,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add strimzi https://strimzi.io/charts/
 helm install strimzi-kafka strimzi/strimzi-kafka-operator \
   --namespace kafka \
@@ -204,7 +210,6 @@ helm install strimzi-kafka strimzi/strimzi-kafka-operator \
   --set resources.limits.memory=512Mi \
   --set logLevel=INFO
 ```
-
 ## 生产级 Kafka 集群 (KRaft)
 
 ```yaml
@@ -461,7 +466,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # kafka_topic_ops.sh - Kafka Topic 管理脚本
 set -euo pipefail
@@ -500,7 +506,6 @@ case "${1:-list}" in
     *)              echo "Usage: $0 {list|describe <topic>|alter-partitions <topic> <n>}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: Consumer Group 监控 -->## Consumer Group 监控
@@ -510,7 +515,8 @@ esac
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # kafka_consumer_ops.sh - Consumer Group 管理
 set -euo pipefail
@@ -551,7 +557,6 @@ case "${1:-list}" in
     *)       echo "Usage: $0 {list|lag <group>|reset <group> <topic> <to>}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: Exactly-Once 语义 -->## Exactly-Once 语义
@@ -705,7 +710,8 @@ groups:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # strimzi_ops.sh - Strimzi Kafka 运维脚本
 set -euo pipefail
@@ -768,7 +774,6 @@ case "${1:-status}" in
     *)          echo "Usage: $0 {status|restart <pod>|rebalance}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -860,3 +865,6 @@ Partition 数量计算:
 - 07-redis-kubernetes-operator
 - 99-cloudnativepg-enterprise-guide
 - 01-mysql-enterprise-database
+
+
+<!-- risk-assessed -->

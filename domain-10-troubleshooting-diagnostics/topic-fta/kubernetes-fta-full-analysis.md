@@ -53,6 +53,11 @@ component: Kubernetes Full Analysis
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] 全量故障树分析(FTA)排查手册
@@ -373,7 +378,8 @@ IE-1.1 控制平面问题 [OR门]
 - 准入控制器Webhook配置错误导致启动失败
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查API Server Pod状态
 kubectl get pods -n kube-system | grep kube-apiserver
 
@@ -400,7 +406,6 @@ curl -k https://<apiserver-ip>:6443/healthz
 # 检查资源使用
 top -p $(pgrep kube-apiserver)
 ```
-
 **解决方案**:
 1. **证书过期**: 使用 `kubeadm certs renew all` 续期证书，重启API Server
 2. **etcd连接失败**: 检查etcd集群健康状态，修复etcd问题
@@ -427,7 +432,8 @@ top -p $(pgrep kube-apiserver)
 - etcd版本不兼容
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查etcd Pod状态
 kubectl get pods -n kube-system | grep etcd
 
@@ -457,7 +463,6 @@ df -h
 # 检查etcd证书有效期
 openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -dates
 ```
-
 **解决方案**:
 1. **失去quorum**: 从备份恢复etcd数据，或重新初始化集群
 2. **数据损坏**: 停止etcd，删除数据目录，从备份恢复
@@ -481,7 +486,8 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -dates
 - 调度器资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Scheduler Pod状态
 kubectl get pods -n kube-system | grep kube-scheduler
 
@@ -498,7 +504,6 @@ kubectl get leases -n kube-system kube-scheduler -o yaml
 # 检查Pending Pod的调度事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 ```
-
 **解决方案**:
 1. **配置错误**: 修正调度器配置文件
 2. **API Server连接**: 检查API Server可用性
@@ -522,7 +527,8 @@ kubectl describe pod <pod-name> | grep -A 10 Events
 - 控制器资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Controller Manager Pod状态
 kubectl get pods -n kube-system | grep kube-controller-manager
 
@@ -540,7 +546,6 @@ kubectl describe deployment <deployment-name>
 # 检查ReplicaSet
 kubectl get rs --all-namespaces
 ```
-
 **解决方案**:
 1. **配置错误**: 修正Controller Manager配置
 2. **重启控制器**: 删除Controller Manager Pod重新创建
@@ -578,7 +583,8 @@ IE-1.2 工作节点批量问题 [AND门 - 多数节点]
 - 节点PID压力(PIDPressure)
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Kubelet服务状态
 systemctl status kubelet
 
@@ -604,7 +610,6 @@ free -h
 # 检查Kubelet证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
-
 **解决方案**:
 1. **服务停止**: `systemctl restart kubelet`
 2. **配置错误**: 修正Kubelet配置文件后重启
@@ -628,7 +633,8 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 - 容器运行时资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Docker状态
 systemctl status docker
 
@@ -654,7 +660,6 @@ crictl pods
 du -sh /var/lib/docker
 du -sh /var/lib/containerd
 ```
-
 **解决方案**:
 1. **服务停止**: `systemctl restart docker` 或 `systemctl restart containerd`
 2. **配置错误**: 修正daemon.json配置后重启
@@ -678,7 +683,8 @@ du -sh /var/lib/containerd
 - IP地址池耗尽
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查网络接口
 ip addr
 ip link
@@ -708,7 +714,6 @@ brctl show
 # 检查Pod CIDR
 kubectl get node <node-name> -o jsonpath='{.spec.podCIDR}'
 ```
-
 **解决方案**:
 1. **网络接口**: 重启网络服务或接口
 2. **CNI问题**: 重新安装/配置CNI插件
@@ -744,7 +749,8 @@ IE-1.3 网络基础设施问题 [OR门]
 - 底层网络问题
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查CNI Pod状态(Calico/Flannel/Weave等)
 kubectl get pods -n kube-system | grep -E 'calico|flannel|weave|cilium'
 
@@ -764,7 +770,6 @@ calicoctl node status
 # 检查Flannel配置(Flannel场景)
 kubectl get configmap kube-flannel-cfg -n kube-system -o yaml
 ```
-
 **解决方案**:
 1. **CNI Pod异常**: 删除CNI Pod让其重新创建
 2. **配置错误**: 修正CNI配置并重新部署
@@ -787,7 +792,8 @@ kubectl get configmap kube-flannel-cfg -n kube-system -o yaml
 - 负载均衡器问题
 
 **排查命令**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试节点间连通性
 ping <node-ip>
 
@@ -807,7 +813,6 @@ traceroute <destination>
 kubectl get svc -n ingress-nginx
 kubectl get ingress --all-namespaces
 ```
-
 **解决方案**:
 1. **物理设备**: 联系网络团队或厂商修复
 2. **云服务**: 检查云厂商状态页面，提交工单
@@ -856,7 +861,8 @@ IE-2.1 Pod运行异常 [OR门]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod状态和重启次数
 kubectl get pod <pod-name> -o wide
 
@@ -881,7 +887,6 @@ kubectl get pod <pod-name> -o yaml
 # 检查Deployment配置
 kubectl get deployment <deployment-name> -o yaml
 ```
-
 **解决方案**:
 1. **应用错误**: 修复应用程序代码或配置
 2. **健康检查**: 调整livenessProbe/readinessProbe配置
@@ -907,7 +912,8 @@ kubectl get deployment <deployment-name> -o yaml
 - 私有仓库Secret配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name> | grep -A 5 Events
 
@@ -927,7 +933,6 @@ cat ~/.docker/config.json
 # 检查私有仓库认证
 echo <base64-encoded-auth> | base64 -d
 ```
-
 **解决方案**:
 1. **镜像名称错误**: 修正镜像名称和标签
 2. **镜像不存在**: 推送正确镜像到仓库
@@ -951,7 +956,8 @@ echo <base64-encoded-auth> | base64 -d
 - 未正确配置JVM/应用堆内存
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod状态
 kubectl get pod <pod-name> -o wide
 
@@ -971,7 +977,6 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 kubectl top node <node-name>
 free -h
 ```
-
 **解决方案**:
 1. **增加内存限制**: 提高Pod的memory limit
 2. **内存泄漏**: 修复应用程序内存泄漏问题
@@ -997,7 +1002,8 @@ free -h
 - 污点驱逐(Taint-based eviction)
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看被驱逐的Pod
 kubectl get pods --all-namespaces | grep Evicted
 
@@ -1018,7 +1024,6 @@ free -h
 # 查看Pod优先级
 kubectl get pod <pod-name> -o jsonpath='{.spec.priorityClassName}'
 ```
-
 **解决方案**:
 1. **磁盘压力**: 清理节点磁盘空间，删除无用镜像/日志
 2. **内存压力**: 释放内存或增加节点资源
@@ -1054,7 +1059,8 @@ IE-2.2 Service访问异常 [OR门]
 - 所有Pod都被驱逐或删除
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Service详情
 kubectl describe svc <service-name>
 
@@ -1074,7 +1080,6 @@ kubectl get pods --all-namespaces -o wide
 # 检查Pod健康检查
 kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
 ```
-
 **解决方案**:
 1. **Selector不匹配**: 修正Service的Selector或Pod的Label
 2. **Pod未就绪**: 检查Pod健康检查配置和状态
@@ -1099,7 +1104,8 @@ kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Service端口配置
 kubectl get svc <service-name> -o yaml | grep -A 10 ports
 
@@ -1112,7 +1118,6 @@ kubectl exec -it <pod-name> -- netstat -tlnp
 # 测试Service连通性
 kubectl run test --image=busybox --rm -it -- wget -O- <service-ip>:<port>
 ```
-
 **解决方案**:
 1. **修正targetPort**: 确保Service targetPort与Pod端口一致
 2. **修正Service端口**: 配置正确的Service端口
@@ -1134,7 +1139,8 @@ kubectl run test --image=busybox --rm -it -- wget -O- <service-ip>:<port>
 - IPVS模块未加载
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查kube-proxy Pod状态
 kubectl get pods -n kube-system | grep kube-proxy
 
@@ -1156,7 +1162,6 @@ lsmod | grep ip_vs
 # 检查kube-proxy模式
 kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
 ```
-
 **解决方案**:
 1. **重启kube-proxy**: 删除kube-proxy Pod重新创建
 2. **切换模式**: 在iptables和IPVS模式间切换
@@ -1191,7 +1196,8 @@ IE-2.3 Ingress访问异常 [OR门]
 - 与API Server连接失败
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Ingress Controller Pod状态
 kubectl get pods -n ingress-nginx | grep controller
 
@@ -1208,7 +1214,6 @@ kubectl describe ingress <ingress-name>
 # 检查Ingress Controller服务
 kubectl get svc -n ingress-nginx
 ```
-
 **解决方案**:
 1. **重启Controller**: 删除Ingress Controller Pod重新创建
 2. **修正配置**: 检查并修正Ingress Controller配置
@@ -1232,7 +1237,8 @@ kubectl get svc -n ingress-nginx
 - 注解配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Ingress配置
 kubectl get ingress <ingress-name> -o yaml
 
@@ -1249,7 +1255,6 @@ kubectl run test --image=busybox --rm -it -- wget -O- <service-ip>:<port>
 kubectl get secret <tls-secret> -o yaml
 openssl x509 -in <(kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}' | base64 -d) -noout -text
 ```
-
 **解决方案**:
 1. **修正host**: 确保host配置与访问域名一致
 2. **修正path**: 确保path配置正确
@@ -1273,7 +1278,8 @@ openssl x509 -in <(kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}
 - 云厂商服务异常
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Ingress Controller Service
 kubectl get svc -n ingress-nginx ingress-nginx-controller
 
@@ -1288,7 +1294,6 @@ kubectl describe svc -n ingress-nginx ingress-nginx-controller | grep -A 5 "Load
 # 检查安全组/防火墙规则
 # 确保80/443端口开放
 ```
-
 **解决方案**:
 1. **检查LB配置**: 在云控制台检查负载均衡器配置
 2. **健康检查**: 确保健康检查路径正确
@@ -1331,7 +1336,8 @@ IE-3.1 调度失败 [OR门]
 - 可调度Pod数量限制
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod调度事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 
@@ -1350,7 +1356,6 @@ kubectl get node <node-name> -o jsonpath='{.status.capacity}'
 # 计算资源使用率
 kubectl describe node | grep -E "Name:|Allocated resources:|pods|cpu|memory"
 ```
-
 **解决方案**:
 1. **增加节点**: 扩容集群添加新节点
 2. **降低资源请求**: 调整Pod的resource request
@@ -1372,7 +1377,8 @@ kubectl describe node | grep -E "Name:|Allocated resources:|pods|cpu|memory"
 - Pod的nodeAffinity配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod的nodeSelector
 kubectl get pod <pod-name> -o jsonpath='{.spec.nodeSelector}'
 
@@ -1388,7 +1394,6 @@ kubectl get node <node-name> --show-labels
 # 检查匹配的节点
 kubectl get nodes -l <selector-key>=<selector-value>
 ```
-
 **解决方案**:
 1. **修正nodeSelector**: 使用正确的节点Label
 2. **添加Label**: 给节点添加缺失的Label
@@ -1409,7 +1414,8 @@ kubectl get nodes -l <selector-key>=<selector-value>
 - 污点配置过于严格
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod的Tolerations
 kubectl get pod <pod-name> -o jsonpath='{.spec.tolerations}'
 
@@ -1422,7 +1428,6 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 # 查看Pod调度事件
 kubectl describe pod <pod-name> | grep -i taint
 ```
-
 **解决方案**:
 1. **添加Toleration**: 给Pod添加对应的Toleration
 2. **移除Taint**: 从节点移除不必要的Taint
@@ -1444,7 +1449,8 @@ kubectl describe pod <pod-name> | grep -i taint
 - 命名空间级别配额超限
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ResourceQuota
 kubectl get resourcequota -n <namespace>
 kubectl describe resourcequota <quota-name> -n <namespace>
@@ -1459,7 +1465,6 @@ kubectl describe namespace <namespace>
 # 查看配额事件
 kubectl get events -n <namespace> | grep -i quota
 ```
-
 **解决方案**:
 1. **增加配额**: 提高ResourceQuota限制
 2. **清理资源**: 删除无用资源释放配额
@@ -1493,7 +1498,8 @@ IE-3.2 镜像拉取失败 [OR门]
 - 镜像仓库路径错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod使用的镜像
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].image}'
 
@@ -1507,7 +1513,6 @@ docker pull <image>:<tag>  # 或 crictl pull
 # Docker Hub: https://hub.docker.com
 # Harbor: 登录Harbor查看
 ```
-
 **解决方案**:
 1. **修正镜像名**: 使用正确的镜像名称
 2. **修正标签**: 使用存在的镜像标签
@@ -1529,7 +1534,8 @@ docker pull <image>:<tag>  # 或 crictl pull
 - ServiceAccount未绑定imagePullSecret
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod的imagePullSecrets
 kubectl get pod <pod-name> -o jsonpath='{.spec.imagePullSecrets}'
 
@@ -1545,7 +1551,6 @@ kubectl get sa default -o yaml
 # 验证认证信息
 docker login <registry> -u <username> -p <password>
 ```
-
 **解决方案**:
 1. **创建Secret**: 创建正确的imagePullSecret
 2. **更新Secret**: 更新过期的认证信息
@@ -1567,7 +1572,8 @@ docker login <registry> -u <username> -p <password>
 - 代理配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 测试网络连通性(在节点上执行)
 ping <registry-host>
 curl -v <registry-url>
@@ -1587,7 +1593,6 @@ cat /etc/systemd/system/docker.service.d/proxy.conf
 # 检查CNI网络
 cat /etc/resolv.conf
 ```
-
 **解决方案**:
 1. **检查网络**: 确保节点能访问镜像仓库
 2. **配置防火墙**: 开放必要的出站端口
@@ -1623,7 +1628,8 @@ IE-3.3 容器创建失败 [OR门]
 - IP地址池耗尽
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 
@@ -1644,7 +1650,6 @@ kubectl get configmap kube-flannel-cfg -n kube-system -o yaml  # Flannel
 # 查看kubelet日志
 journalctl -u kubelet | grep -i cni
 ```
-
 **解决方案**:
 1. **安装CNI**: 安装CNI插件
 2. **修正配置**: 修复CNI配置文件
@@ -1668,7 +1673,8 @@ journalctl -u kubelet | grep -i cni
 - 权限不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 
@@ -1690,7 +1696,6 @@ kubectl get pods -n kube-system | grep csi
 # 查看CSI日志
 kubectl logs -n kube-system <csi-pod-name>
 ```
-
 **解决方案**:
 1. **绑定PVC**: 确保PVC正确绑定到PV
 2. **创建PV**: 手动创建或使用动态供应
@@ -1714,7 +1719,8 @@ kubectl logs -n kube-system <csi-pod-name>
 - Init容器资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod状态
 kubectl get pod <pod-name>
 
@@ -1730,7 +1736,6 @@ kubectl get pod <pod-name> -o jsonpath='{.status.initContainerStatuses}'
 # 检查Init容器配置
 kubectl get pod <pod-name> -o yaml | grep -A 30 initContainers
 ```
-
 **解决方案**:
 1. **修复命令**: 修正Init容器执行命令
 2. **检查依赖**: 确保依赖服务可用
@@ -1771,7 +1776,8 @@ IE-4.1 DNS解析异常 [OR门]
 - CoreDNS与上游DNS通信失败
 
 **排查命令**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查CoreDNS Pod状态
 kubectl get pods -n kube-system | grep coredns
 
@@ -1790,7 +1796,6 @@ kubectl get svc kube-dns -n kube-system
 # 查看DNS服务IP
 kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 ```
-
 **解决方案**:
 1. **重启CoreDNS**: 删除CoreDNS Pod重新创建
 2. **增加资源**: 增加CoreDNS资源限制
@@ -1817,7 +1822,8 @@ kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod的DNS配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.dnsPolicy}'
 kubectl get pod <pod-name> -o jsonpath='{.spec.dnsConfig}'
@@ -1832,7 +1838,6 @@ kubectl get configmap coredns -n kube-system -o yaml
 kubectl exec <pod-name> -- nslookup <domain>
 kubectl exec <pod-name> -- dig <domain>
 ```
-
 **解决方案**:
 1. **修正Corefile**: 修复CoreDNS Corefile配置
 2. **调整dnsPolicy**: 设置正确的DNS策略
@@ -1857,7 +1862,8 @@ kubectl exec <pod-name> -- dig <domain>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看NetworkPolicy
 kubectl get networkpolicy --all-namespaces
 
@@ -1870,7 +1876,6 @@ kubectl get networkpolicy -o yaml | grep -A 10 -B 5 53
 # 测试DNS连通性
 kubectl exec <pod-name> -- nc -zv <dns-ip> 53
 ```
-
 **解决方案**:
 1. **允许DNS流量**: 在NetworkPolicy中允许UDP/TCP 53端口
 2. **配置egress规则**: 添加允许访问DNS的egress规则
@@ -1908,7 +1913,8 @@ IE-4.2 Pod间通信异常 [OR门]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查CNI Pod状态
 kubectl get pods -n kube-system | grep -E 'calico|flannel|weave|cilium'
 
@@ -1927,7 +1933,6 @@ kubectl exec <pod-a> -- ping <pod-b-ip>
 # 检查路由
 ip route
 ```
-
 **解决方案**:
 1. **重启CNI**: 重启CNI插件Pod
 2. **修正配置**: 修复CNI配置
@@ -1952,7 +1957,8 @@ ip route
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有NetworkPolicy
 kubectl get networkpolicy --all-namespaces
 
@@ -1965,7 +1971,6 @@ kubectl get pod <pod-name> --show-labels
 # 测试连通性
 kubectl exec <source-pod> -- nc -zv <target-ip> <port>
 ```
-
 **解决方案**:
 1. **调整策略**: 放宽NetworkPolicy限制
 2. **修正选择器**: 确保选择器匹配正确
@@ -1988,7 +1993,8 @@ kubectl exec <source-pod> -- nc -zv <target-ip> <port>
 - iptables规则过多导致性能问题
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看iptables规则
 iptables -L -n -v
 iptables -t nat -L -n -v
@@ -2005,7 +2011,6 @@ kubectl logs -n kube-system kube-proxy-<node-name>
 # 检查IPVS规则
 ipvsadm -Ln
 ```
-
 **解决方案**:
 1. **清理规则**: 清理冲突的iptables规则
 2. **重启kube-proxy**: 重新生成规则
@@ -2043,7 +2048,8 @@ IE-4.3 集群外部访问异常 [OR门]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Egress NetworkPolicy
 kubectl get networkpolicy --all-namespaces
 
@@ -2057,7 +2063,6 @@ kubectl exec <pod-name> -- curl -v https://www.google.com
 # 检查节点路由
 ip route
 ```
-
 **解决方案**:
 1. **允许Egress**: 在NetworkPolicy中允许出站流量
 2. **配置Egress网关**: 设置Egress网关
@@ -2117,7 +2122,8 @@ ip addr
 - 外部防火墙阻止
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看iptables规则
 iptables -L -n -v
 
@@ -2134,7 +2140,6 @@ telnet <ip> <port>
 netstat -tlnp
 ss -tlnp
 ```
-
 **解决方案**:
 1. **配置安全组**: 开放必要的入站/出站端口
 2. **调整防火墙**: 修改iptables规则
@@ -2175,7 +2180,8 @@ IE-5.1 PVC绑定失败 [OR门]
 - provisioner配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看StorageClass
 kubectl get storageclass
 
@@ -2191,7 +2197,6 @@ kubectl get storageclass -o jsonpath='{.items[?(@.metadata.annotations.storagecl
 # 查看PVC事件
 kubectl describe pvc <pvc-name>
 ```
-
 **解决方案**:
 1. **创建StorageClass**: 创建缺失的StorageClass
 2. **修正配置**: 修复StorageClass配置
@@ -2214,7 +2219,8 @@ kubectl describe pvc <pvc-name>
 - 存储后端容量不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看PV列表
 kubectl get pv
 
@@ -2230,7 +2236,6 @@ kubectl get pvc <pvc-name> -o yaml | grep -A 5 resources
 # 检查存储后端容量
 # 根据存储类型检查(如NFS、iSCSI、云盘等)
 ```
-
 **解决方案**:
 1. **创建PV**: 手动创建新的PV
 2. **动态供应**: 启用动态卷供应
@@ -2253,7 +2258,8 @@ kubectl get pvc <pvc-name> -o yaml | grep -A 5 resources
 - CSI与存储后端通信失败
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看CSI Pod
 kubectl get pods -n kube-system | grep csi
 
@@ -2269,7 +2275,6 @@ kubectl get csidriver
 # 查看StorageClass使用的provisioner
 kubectl get storageclass <sc-name> -o jsonpath='{.provisioner}'
 ```
-
 **解决方案**:
 1. **重启CSI**: 重启CSI Pod
 2. **检查配置**: 验证CSI配置
@@ -2304,7 +2309,8 @@ IE-5.2 存储卷挂载失败 [OR门]
 - 不支持的挂载参数
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 
@@ -2317,7 +2323,6 @@ kubectl get storageclass <sc-name> -o yaml | grep mountOptions
 # 查看kubelet日志
 journalctl -u kubelet | grep -i mount
 ```
-
 **解决方案**:
 1. **修正mountOptions**: 使用正确的挂载选项
 2. **检查fsType**: 确保文件系统类型正确
@@ -2344,7 +2349,8 @@ journalctl -u kubelet | grep -i mount
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod securityContext
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
@@ -2360,7 +2366,6 @@ kubectl exec <pod-name> -- getenforce
 # 查看Pod UID/GID
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.fsGroup}'
 ```
-
 **解决方案**:
 1. **配置fsGroup**: 设置正确的fsGroup
 2. **配置runAsUser**: 设置正确的运行用户
@@ -2383,7 +2388,8 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.fsGroup}'
 - 文件系统类型不匹配
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod事件
 kubectl describe pod <pod-name> | grep -i filesystem
 
@@ -2396,7 +2402,6 @@ dmesg | grep -i error
 # 检查存储健康状态
 # 根据存储类型使用相应工具
 ```
-
 **解决方案**:
 1. **修复文件系统**: 使用fsck修复文件系统
 2. **重新格式化**: 备份数据后重新格式化
@@ -2431,7 +2436,8 @@ IE-5.3 存储性能/数据异常 [OR门]
 - 存储配置不当
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控存储性能指标
 # 使用Prometheus查询存储相关指标
 
@@ -2444,7 +2450,6 @@ iostat -x 1
 # 查看CSI指标
 kubectl top pod -n kube-system | grep csi
 ```
-
 **解决方案**:
 1. **扩容存储**: 增加存储资源
 2. **优化配置**: 调整存储配置参数
@@ -2467,7 +2472,8 @@ kubectl top pod -n kube-system | grep csi
 - 不完整的写入操作
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查应用日志
 kubectl logs <pod-name> | grep -i error
 
@@ -2480,7 +2486,6 @@ kubectl logs <pod-name> | grep -i error
 # 查看事件
 kubectl get events | grep -i data
 ```
-
 **解决方案**:
 1. **从备份恢复**: 使用最近的备份恢复数据
 2. **数据修复**: 使用数据修复工具
@@ -2503,7 +2508,8 @@ kubectl get events | grep -i data
 - 存储后端不支持快照恢复
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看VolumeSnapshot
 kubectl get volumesnapshot
 
@@ -2516,7 +2522,6 @@ kubectl logs -n kube-system <csi-snapshot-controller>
 # 检查快照状态
 kubectl describe volumesnapshot <snapshot-name>
 ```
-
 **解决方案**:
 1. **检查快照完整性**: 验证快照状态
 2. **更新CSI驱动**: 升级CSI快照驱动
@@ -2556,7 +2561,8 @@ IE-6.1 Pod无法调度 [OR门]
 - GPU等特殊资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod调度事件
 kubectl describe pod <pod-name> | grep -A 10 Events
 
@@ -2569,7 +2575,6 @@ kubectl top node
 # 查看Pod资源请求
 kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 ```
-
 **解决方案**:
 1. **增加节点**: 扩容集群
 2. **降低请求**: 调整Pod资源请求
@@ -2591,7 +2596,8 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 - 拓扑域配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod亲和性配置
 kubectl get pod <pod-name> -o yaml | grep -A 30 affinity
 
@@ -2604,7 +2610,6 @@ kubectl get pods --show-labels
 # 检查拓扑域
 kubectl get node <node-name> -o jsonpath='{.metadata.labels}'
 ```
-
 **解决方案**:
 1. **放宽规则**: 调整亲和性规则
 2. **添加标签**: 给节点/Pod添加匹配标签
@@ -2620,7 +2625,8 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}'
 - 调度事件显示污点容忍不匹配
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod Tolerations
 kubectl get pod <pod-name> -o jsonpath='{.spec.tolerations}'
 
@@ -2630,7 +2636,6 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}'
 # 查看调度事件
 kubectl describe pod <pod-name> | grep -i taint
 ```
-
 **解决方案**:
 1. **添加Toleration**: 给Pod添加对应的Toleration
 2. **移除Taint**: 从节点移除Taint
@@ -2663,7 +2668,8 @@ IE-6.2 调度结果不符合预期 [OR门]
 - 自定义调度器配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器配置
 kubectl get configmap scheduler-config -n kube-system -o yaml
 
@@ -2676,7 +2682,6 @@ kubectl describe pod <pod-name> | grep -A 5 Events
 # 检查调度器策略
 cat /etc/kubernetes/scheduler-policy-config.json
 ```
-
 **解决方案**:
 1. **修正配置**: 修复调度器配置
 2. **更新策略**: 调整调度策略
@@ -2699,7 +2704,8 @@ cat /etc/kubernetes/scheduler-policy-config.json
 - 资源不足无法抢占
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看PriorityClass
 kubectl get priorityclass
 
@@ -2712,7 +2718,6 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.priority}'
 # 查看抢占事件
 kubectl get events | grep -i preempt
 ```
-
 **解决方案**:
 1. **配置PriorityClass**: 创建/更新PriorityClass
 2. **指定优先级**: 在Pod中指定priorityClassName
@@ -2746,7 +2751,8 @@ IE-6.3 自定义调度器问题 [OR门]
 - 插件资源不足
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器配置
 kubectl get configmap scheduler-config -n kube-system -o yaml
 
@@ -2756,7 +2762,6 @@ kubectl logs -n kube-system kube-scheduler-<node-name>
 # 查看插件状态
 # 根据插件类型查看相应状态
 ```
-
 **解决方案**:
 1. **修正配置**: 修复插件配置
 2. **升级插件**: 升级到兼容版本
@@ -2779,7 +2784,8 @@ kubectl logs -n kube-system kube-scheduler-<node-name>
 - 扩展点超时
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度器扩展配置
 kubectl get configmap scheduler-config -n kube-system -o yaml
 
@@ -2792,7 +2798,6 @@ kubectl get pods -l app=<webhook-app>
 # 查看Webhook日志
 kubectl logs <webhook-pod>
 ```
-
 **解决方案**:
 1. **修正配置**: 修复扩展点配置
 2. **检查Webhook**: 确保Webhook服务可用
@@ -2962,7 +2967,8 @@ IE-7.2 RBAC权限问题 [OR门]
 - API组配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Role
 kubectl get role <role-name> -n <namespace> -o yaml
 
@@ -2975,7 +2981,6 @@ kubectl auth can-i <verb> <resource> --as=<user>
 # 检查ServiceAccount权限
 kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<namespace>:<sa-name>
 ```
-
 **解决方案**:
 1. **修正Role**: 添加缺失的权限规则
 2. **检查资源名**: 确保资源名称正确
@@ -2998,7 +3003,8 @@ kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<namespace>:<sa-
 - RoleBinding在错误的命名空间
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看RoleBinding
 kubectl get rolebinding -n <namespace>
 kubectl describe rolebinding <binding-name> -n <namespace>
@@ -3010,7 +3016,6 @@ kubectl describe clusterrolebinding <binding-name>
 # 检查绑定关系
 kubectl get rolebinding <binding-name> -o yaml
 ```
-
 **解决方案**:
 1. **创建Binding**: 创建缺失的RoleBinding
 2. **修正引用**: 确保引用正确的Role
@@ -3033,7 +3038,8 @@ kubectl get rolebinding <binding-name> -o yaml
 - 令牌过期
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ServiceAccount
 kubectl get sa -n <namespace>
 kubectl describe sa <sa-name> -n <namespace>
@@ -3047,7 +3053,6 @@ kubectl get secret <sa-secret> -n <namespace> -o jsonpath='{.data.token}' | base
 # 检查Pod的ServiceAccount
 kubectl get pod <pod-name> -o jsonpath='{.spec.serviceAccountName}'
 ```
-
 **解决方案**:
 1. **创建SA**: 创建缺失的ServiceAccount
 2. **挂载Token**: 确保Token正确挂载到Pod
@@ -3082,7 +3087,8 @@ IE-7.3 准入控制问题 [OR门]
 - 网络策略阻止Webhook
 
 **排查命令**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Webhook配置
 kubectl get validatingwebhookconfiguration
 kubectl get mutatingwebhookconfiguration
@@ -3102,7 +3108,6 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 # 测试Webhook连通性
 kubectl run test --image=busybox --rm -it -- wget -O- <webhook-service>.<namespace>.svc:443
 ```
-
 **解决方案**:
 1. **启动Webhook**: 启动停止的Webhook Pod
 2. **修复Service**: 确保Service配置正确
@@ -3126,7 +3131,8 @@ kubectl run test --image=busybox --rm -it -- wget -O- <webhook-service>.<namespa
 - 失败策略配置不当
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ValidatingWebhook配置
 kubectl get validatingwebhookconfiguration <webhook-name> -o yaml
 
@@ -3139,7 +3145,6 @@ kubectl get validatingwebhookconfiguration <webhook-name> -o jsonpath='{.webhook
 # 查看Webhook日志
 kubectl logs <webhook-pod> -n <webhook-namespace>
 ```
-
 **解决方案**:
 1. **修正规则**: 调整验证规则
 2. **调整范围**: 修正规则匹配范围
@@ -3162,7 +3167,8 @@ kubectl logs <webhook-pod> -n <webhook-namespace>
 - 变异顺序问题
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看MutatingWebhook配置
 kubectl get mutatingwebhookconfiguration <webhook-name> -o yaml
 
@@ -3175,7 +3181,6 @@ kubectl get mutatingwebhookconfiguration <webhook-name> -o jsonpath='{.webhooks[
 # 对比变异前后资源
 kubectl get pod <pod-name> -o yaml
 ```
-
 **解决方案**:
 1. **修正配置**: 调整MutatingWebhook配置
 2. **修复逻辑**: 修复变异逻辑
@@ -3217,7 +3222,8 @@ IE-8.1 监控数据采集异常 [OR门]
 - 内存不足OOM
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Prometheus Pod状态
 kubectl get pods -n monitoring | grep prometheus
 
@@ -3237,7 +3243,6 @@ kubectl describe pvc prometheus-data -n monitoring
 # 检查Prometheus规则
 kubectl get prometheusrules -n monitoring
 ```
-
 **解决方案**:
 1. **重启Prometheus**: 删除Pod重新创建
 2. **扩展存储**: 增加PVC容量
@@ -3261,7 +3266,8 @@ kubectl get prometheusrules -n monitoring
 - ServiceMonitor标签错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ServiceMonitor
 kubectl get servicemonitor -n monitoring
 kubectl describe servicemonitor <sm-name> -n monitoring
@@ -3278,7 +3284,6 @@ kubectl get endpoints <service-name>
 # 检查Pod标签
 kubectl get pods --show-labels
 ```
-
 **解决方案**:
 1. **修正Selector**: 确保Selector匹配正确的Service
 2. **修正端口**: 配置正确的端口名称
@@ -3306,7 +3311,8 @@ kubectl get pods --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查指标是否存在
 # 在Prometheus UI查询指标
 
@@ -3322,7 +3328,6 @@ curl http://<target>:<port>/metrics
 # 检查网络连通性
 kubectl exec -it prometheus-pod -- wget -O- <target>:<port>/metrics
 ```
-
 **解决方案**:
 1. **修复采集**: 确保采集端点正常
 2. **调整保留**: 增加数据保留时间
@@ -3357,7 +3362,8 @@ IE-8.2 告警系统异常 [OR门]
 - 高可用配置错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Alertmanager Pod状态
 kubectl get pods -n monitoring | grep alertmanager
 
@@ -3373,7 +3379,6 @@ kubectl get secret alertmanager-config -n monitoring -o jsonpath='{.data.alertma
 # 检查告警
 # 访问Alertmanager UI: Alerts
 ```
-
 **解决方案**:
 1. **重启Alertmanager**: 删除Pod重新创建
 2. **修正配置**: 修复Alertmanager配置
@@ -3396,7 +3401,8 @@ kubectl get secret alertmanager-config -n monitoring -o jsonpath='{.data.alertma
 - 标签匹配错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看PrometheusRule
 kubectl get prometheusrules -n monitoring
 kubectl describe prometheusrules <rule-name> -n monitoring
@@ -3413,7 +3419,6 @@ kubectl get prometheusrules <rule-name> -o yaml
 # 检查规则加载
 kubectl logs prometheus-pod | grep -i rule
 ```
-
 **解决方案**:
 1. **修正表达式**: 修复PromQL表达式
 2. **调整阈值**: 设置合理的告警阈值
@@ -3437,7 +3442,8 @@ kubectl logs prometheus-pod | grep -i rule
 - 限流导致丢弃
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Alertmanager配置
 kubectl get secret alertmanager-config -n monitoring -o jsonpath='{.data.alertmanager\.yaml}' | base64 -d
 
@@ -3450,7 +3456,6 @@ kubectl logs alertmanager-pod | grep -i notify
 # 查看告警历史
 # 访问Alertmanager UI: Silences / Status
 ```
-
 **解决方案**:
 1. **修正配置**: 修复通知渠道配置
 2. **检查接收方**: 确保接收方服务可用
@@ -3487,7 +3492,8 @@ IE-8.3 可视化系统异常 [OR门]
 - 插件问题
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Grafana Pod状态
 kubectl get pods -n monitoring | grep grafana
 
@@ -3503,7 +3509,6 @@ kubectl get svc grafana -n monitoring
 # 检查存储
 kubectl get pvc -n monitoring | grep grafana
 ```
-
 **解决方案**:
 1. **重启Grafana**: 删除Pod重新创建
 2. **检查数据库**: 确保数据库连接正常
@@ -3527,7 +3532,8 @@ kubectl get pvc -n monitoring | grep grafana
 - 模板变量错误
 
 **排查命令**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Dashboard ConfigMap
 kubectl get configmap -n monitoring | grep dashboard
 
@@ -3540,7 +3546,6 @@ kubectl get configmap -n monitoring | grep dashboard
 # 检查Panel查询
 # 在Grafana UI: Panel -> Edit -> Query
 ```
-
 **解决方案**:
 1. **修正JSON**: 修复Dashboard JSON配置
 2. **修正变量**: 修改变量定义
@@ -3568,7 +3573,8 @@ kubectl get configmap -n monitoring | grep dashboard
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Grafana数据源配置
 # 在Grafana UI: Configuration -> Data Sources
 
@@ -3581,7 +3587,6 @@ kubectl exec grafana-pod -- wget -O- prometheus.monitoring.svc:9090
 # 检查Grafana Secret
 kubectl get secret grafana-datasources -n monitoring -o yaml
 ```
-
 **解决方案**:
 1. **修正URL**: 配置正确的数据源URL
 2. **更新认证**: 更新认证信息
@@ -3595,7 +3600,8 @@ kubectl get secret grafana-datasources -n monitoring -o yaml
 
 ## 3.1 集群健康检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 集群健康检查命令速查表
 # ============================================
@@ -3630,10 +3636,10 @@ ectcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
         --key=/etc/kubernetes/pki/etcd/server.key \
         endpoint health --cluster
 ```
-
 ## 3.2 控制平面组件排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 控制平面组件排查命令速查表
 # ============================================
@@ -3660,10 +3666,10 @@ kubectl get pods -n kube-system | grep controller-manager
 kubectl logs -n kube-system kube-controller-manager-<node-name>
 kubectl get leases -n kube-system kube-controller-manager -o yaml
 ```
-
 ## 3.3 工作节点排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 工作节点排查命令速查表
 # ============================================
@@ -3690,10 +3696,10 @@ kubectl top node <node-name>
 # 节点压力检查
 kubectl describe node <node-name> | grep -A 10 Conditions
 ```
-
 ## 3.4 网络排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 网络排查命令速查表
 # ============================================
@@ -3738,10 +3744,10 @@ kubectl logs -n ingress-nginx ingress-nginx-controller-<pod-id>
 kubectl get networkpolicy --all-namespaces
 kubectl describe networkpolicy <policy-name>
 ```
-
 ## 3.5 存储排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 存储排查命令速查表
 # ============================================
@@ -3774,13 +3780,13 @@ df -h
 lsblk
 mount | grep <volume>
 ```
-
 ## 3.6 Pod排查命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # Pod排查命令速查表
 # ============================================
@@ -3812,10 +3818,10 @@ kubectl top pod --all-namespaces
 kubectl debug <pod-name> -it --image=busybox --target=<container-name>
 kubectl cp <pod-name>:<path> <local-path>
 ```
-
 ## 3.7 安全排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 安全排查命令速查表
 # ============================================
@@ -3849,7 +3855,6 @@ kubectl describe validatingwebhookconfiguration <name>
 kubectl get networkpolicy --all-namespaces
 kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 ```
-
 ---
 
 <!-- chunk: 四、故障处理优先级建议 -->## 四、故障处理优先级建议
@@ -3945,7 +3950,17 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        P0/P1级问题紧急恢复措施                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -3991,10 +4006,10 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 4.4 故障排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        故障排查决策树                                         │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -4059,7 +4074,6 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
                                 │ (IE-2.2/IE-2.3) │      │ (TE-8)          │
                                 └─────────────────┘      └─────────────────┘
 ```
-
 ## 4.5 关键指标监控阈值
 
 | 指标类别 | 指标名称 | 警告阈值 | 严重阈值 | 紧急阈值 | 说明 |
@@ -4090,6 +4104,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 ## 5.1 Kubernetes组件依赖关系图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    Kubernetes 组件依赖关系图                                  │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -4187,7 +4202,6 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
    - API Server: 获取存储相关资源
    - 存储后端: 实际存储操作
 ```
-
 ## 5.2 故障排查检查清单
 
 ```
@@ -4431,3 +4445,5 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 - [[domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md|symptom-vector-matcher]]
 
 ```
+
+<!-- risk-assessed -->

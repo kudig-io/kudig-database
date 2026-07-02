@@ -43,6 +43,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点状态与健康检查 Node Conditions 源码分析
@@ -154,7 +159,8 @@ type NodeCondition struct {
 
 ### 1.2 查看节点 Conditions
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的 Conditions
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .status.conditions[*]}{.type}={.status}{" "}{end}{"\n"}{end}'
 
@@ -164,7 +170,6 @@ kubectl describe node <node-name> | grep -A 10 "Conditions"
 # JSON 格式查看
 kubectl get node <node> -o jsonpath='{.status.conditions}' | jq .
 ```
-
 ### 1.3 Conditions 类型总览
 
 | Condition | 说明 | 正常值 | 异常影响 |
@@ -212,7 +217,8 @@ func NodeReadyCondition(now metav1.Time, ...) []v1.NodeCondition {
 
 ### 2.3 Ready=False 的常见原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubelet 进程异常
 systemctl status kubelet
 
@@ -230,7 +236,6 @@ ls /etc/cni/net.d/
 # 证书过期
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
-
 ### 2.4 Ready=Unknown 的处理
 
 ```bash
@@ -252,7 +257,8 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ### 3.1 内存压力检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 当节点可用内存低于驱逐阈值时，MemoryPressure=True
 # 默认阈值: memory.available < 100Mi (硬驱逐)
 
@@ -264,7 +270,6 @@ kubectl top node <node>
 free -h
 cat /proc/meminfo | grep -i "memavailable"
 ```
-
 ### 3.2 MemoryPressure 对调度的影响
 
 ```go
@@ -392,7 +397,8 @@ ip route
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CNI 插件负责将 NetworkUnavailable 设置为 False
 # 不同的 CNI 插件有不同的实现:
 # - Calico: calico-node DaemonSet
@@ -402,7 +408,6 @@ ip route
 # 手动清除 NetworkUnavailable (调试用)
 kubectl patch node <node> -p '{"status":{"conditions":[{"type":"NetworkUnavailable","status":"False","reason":"NetworkConfigured"}]}}'
 ```
-
 ---
 
 ## 七、节点就绪调度流程
@@ -451,7 +456,8 @@ API Server 收到 Pod 调度请求
 
 ### 8.1 Capacity 与 Allocatable
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源
 kubectl get node <node> -o jsonpath='{
   "Capacity CPU: "}{.status.capacity.cpu}{"\n"
@@ -465,10 +471,10 @@ kubectl get node <node> -o jsonpath='{
 # 计算公式:
 # Allocatable = Capacity - KubeReserved - SystemReserved - EvictionHard
 ```
-
 ### 8.2 资源使用查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点资源使用概览
 kubectl top nodes
 
@@ -478,7 +484,6 @@ kubectl describe node <node> | grep -A 20 "Allocated resources"
 # 查看请求量 vs 限制量
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.allocatable.cpu}{"\t"}{.status.allocatable.memory}{"\n"}{end}'
 ```
-
 ---
 
 ## 九、常见错误与排查
@@ -514,3 +519,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cni.md|cni]]
 - [[entities/containerd.md|containerd]]
+
+
+<!-- risk-assessed -->

@@ -42,6 +42,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -157,3 +162,6 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 - [[entities/kubernetes.md|kubernetes]]-events/13-security-admission-rbac-events|13 - 安全、准入控制与 RBAC 事件]] — Cross-reference
 - [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]] — Cross-reference
+
+
+<!-- risk-assessed -->

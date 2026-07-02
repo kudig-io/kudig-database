@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 08 - Traefik API 网关企业级实践
@@ -111,6 +116,7 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 ## Traefik 流量处理模型
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       Traefik 核心架构                               │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -150,7 +156,6 @@ Traefik 是由 Traefik Labs（前 Containous）开发的云原生反向代理和
 │  └──────────────────────────────────────────────────────┘           │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 自动服务发现流程
 
 ```
@@ -174,7 +179,8 @@ Kubernetes API
 
 ## Helm 安装（推荐）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加 Helm 仓库
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
@@ -182,7 +188,6 @@ helm repo update
 # 查看默认 values
 helm show values traefik/traefik > traefik-values.yaml
 ```
-
 ## 生产 values 配置
 
 ```yaml
@@ -260,7 +265,8 @@ affinity:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装
 helm install traefik traefik/traefik \
   --namespace traefik \
@@ -272,7 +278,6 @@ helm install traefik traefik/traefik \
 kubectl get pods -n traefik
 kubectl get svc -n traefik
 ```
-
 ---
 
 <!-- chunk: 4. Provider 模型 -->## 4. Provider 模型
@@ -665,7 +670,8 @@ certificatesResolvers:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 配置 DNS Provider 凭证（以阿里云为例）
 kubectl create secret generic traefik-dns-credentials \
   -n traefik \
@@ -673,7 +679,6 @@ kubectl create secret generic traefik-dns-credentials \
   --from-literal=ALICLOUD_SECRET_KEY=yyy \
   --from-literal=ALICLOUD_REGION_ID=cn-hangzhou
 ```
-
 ## 通配符证书配置
 
 ```yaml
@@ -847,7 +852,8 @@ Traefik Hub 是 Traefik Labs 提供的 API 管理和发布平台，分为免费�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 获取 Hub Token（在 hub.traefik.io 注册后获得）
 export HUB_TOKEN="your-hub-token"
 
@@ -857,7 +863,6 @@ helm upgrade traefik traefik/traefik \
   --set hub.token=$HUB_TOKEN \
   --set hub.enabled=true
 ```
-
 ## API 发布配置
 
 ```yaml
@@ -938,7 +943,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A：共享 PVC（ReadWriteMany）
 # 使用 NFS 或 CephFS 存储 acme.json
 
@@ -952,7 +958,6 @@ helm install cert-manager jetstack/cert-manager \
   --create-namespace \
   --set installCRDs=true
 ```
-
 ## 资源规划与 HPA
 
 ```yaml
@@ -1033,7 +1038,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ✅ 检查 Traefik 版本
 kubectl exec -n traefik -it deploy/traefik -- traefik version
 
@@ -1054,7 +1060,6 @@ kubectl logs -n traefik -l app.kubernetes.io/name=traefik -f --tail=100
 kubectl get middleware -A
 kubectl describe middleware rate-limit -n default
 ```
-
 ---
 
 <!-- chunk: 参考资料 -->## 参考资料
@@ -1094,3 +1099,6 @@ kubectl describe middleware rate-limit -n default
 - 07-envoy-gateway-enterprise
 - 09-nginx-ingress-migration-guide
 - 10-wasm-plugin-ecosystem
+
+
+<!-- risk-assessed -->

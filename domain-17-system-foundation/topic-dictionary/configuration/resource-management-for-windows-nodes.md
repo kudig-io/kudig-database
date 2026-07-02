@@ -33,6 +33,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Resource Management for Windows nodes
@@ -189,7 +194,8 @@ windowsPriorityClass: ABOVE_NORMAL_PRIORITY_CLASS  # 防止 kubelet 被饿死
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Windows 节点
 kubectl get nodes -l kubernetes.io/os=windows
 
@@ -209,7 +215,6 @@ kubectl get node <windows-node> -o jsonpath='{.status.allocatable}' | jq .
 # 查看 Windows 节点上运行的 Pod
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<windows-node>
 ```
-
 ## 交叉引用
 
 - [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — Linux 节点资源管理（对比参考）
@@ -224,3 +229,6 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<windows-node>
 - [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]
+
+
+<!-- risk-assessed -->

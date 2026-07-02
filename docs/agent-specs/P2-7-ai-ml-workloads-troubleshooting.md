@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI/ML 工作负载问题排查指南
@@ -64,7 +69,8 @@ prerequisites:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 NCCL 通信测试
 kubectl exec -it mpi-worker-0 -- bash -c "NCCL_DEBUG=INFO NCCL_TOPO_DUMP=1 ./nccl-tests/build/all_reduce_perf"
 
@@ -78,7 +84,6 @@ kubectl exec -it mpi-worker-0 -- bash -c "NCCL_DEBUG=INFO NCCL_TOPO_DUMP=1 ./ncc
 # NCCL WARN init.png: missing shield
 # → 多网卡时手动指定 NCCL_IB_PCI_RELAXED_ORDERING=1
 ```
-
 | 错误信息 | 根因 | 修复 |
 |---------|------|------|
 | NCCL_TIMEOUT | NCCL 通信超时 | 增加 NCCL_TIMEOUT 环境变量 |
@@ -96,7 +101,8 @@ kubectl exec -it mpi-worker-0 -- bash -c "NCCL_DEBUG=INFO NCCL_TOPO_DUMP=1 ./ncc
 
 ### 1.4 DeepSpeed 问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # DeepSpeed 日志检查
 kubectl logs -f deployment/<name> | grep -i "deepspeed|ZeRO"
 
@@ -107,7 +113,6 @@ kubectl logs -f deployment/<name> | grep -i "deepspeed|ZeRO"
 # ZeroOptimizer initialization error
 # → 检查 stage 配置与可用显存是否匹配
 ```
-
 ---
 
 ## 2. KServe/Triton 模型服务问题
@@ -125,7 +130,8 @@ kubectl logs -f deployment/<name> | grep -i "deepspeed|ZeRO"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查模型格式
 kubectl exec -it <pod> -- ls -la /mnt/models/
 
@@ -141,7 +147,6 @@ model = torch.jit.load('/mnt/models/model.pt')
 print('Model loaded successfully')
 "
 ```
-
 | 错误 | 根因 | 修复 |
 |------|------|------|
 | Failed to load model: Invalid archive | 模型文件损坏 | 重新上传模型到 PVC/S3 |
@@ -160,7 +165,8 @@ print('Model loaded successfully')
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # KServe 推理延迟监控
 kubectl exec -it <pod> -- curl localhost:8080/metrics | grep prediction_latency
 
@@ -169,13 +175,13 @@ kubectl exec -it <pod> -- curl localhost:8080/metrics | grep prediction_latency
 # 2. 使用连续批处理 (Continuous Batching)
 # 3. 启用 Flash Attention
 ```
-
 ### 2.4 Triton 推理服务
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Triton 日志
 kubectl logs -f <triton-pod> | tail -f
 
@@ -189,7 +195,6 @@ kubectl logs -f <triton-pod> | tail -f
 # 性能分析
 kubectl exec -it <triton-pod> -- tritonserver --model-repository=/models --metrics-port=8002
 ```
-
 ---
 
 ## 3. 数据处理问题 (Spark/Flink)
@@ -206,7 +211,8 @@ kubectl exec -it <triton-pod> -- tritonserver --model-repository=/models --metri
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Spark on K8s 常用命令
 kubectl exec -it spark-driver -- spark-submit \
   --master k8s://https://kubernetes.default.svc \
@@ -219,7 +225,6 @@ kubectl exec -it spark-driver -- spark-submit \
 # 检查 Spark UI
 kubectl port-forward spark-driver-ui 4040:4040
 ```
-
 ### 3.2 Flink 作业问题
 
 | 症状 | 诊断命令 | 根因 | 修复 |
@@ -232,13 +237,13 @@ kubectl port-forward spark-driver-ui 4040:4040
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Flink 常用诊断
 kubectl exec -it flink-jobmanager -- flink list   # 列出运行中的作业
 kubectl exec -it flink-jobmanager -- flink cancel <job_id>  # 取消作业
 kubectl exec -it flink-jobmanager -- flink savepoint  # 创建检查点
 ```
-
 ---
 
 ## 4. GPU 调度与分配问题
@@ -253,7 +258,8 @@ kubectl exec -it flink-jobmanager -- flink savepoint  # 创建检查点
 
 ### 4.2 DCGM 监控数据缺失
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # DCGM exporter 检查
 kubectl get pods -n monitoring -l app=dcgm-exporter
 kubectl logs dcgm-exporter-xxx -n monitoring
@@ -266,7 +272,6 @@ kubectl logs dcgm-exporter-xxx -n monitoring
 # 验证 DCGM 可用性
 docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi dmon -s u
 ```
-
 ---
 
 ## 5. Kubeflow Pipeline 问题
@@ -280,7 +285,8 @@ docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi dmon -s u
 | PVC 挂载失败 | `kubectl describe pvc -n kubeflow` | StorageClass 问题 |
 | Tekton PipelineRun 失败 | `kubectl get pr -n kubeflow` | Pipeline 定义错误 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubeflow Pipeline 日志
 kubectl logs -f <pod-name> -n kubeflow -c main
 
@@ -292,7 +298,6 @@ kubectl get pipelinerun <name> -n kubeflow -o yaml
 # 镜像拉取失败: 检查 imagePullSecrets
 # 资源不足: 调整 step resource limits
 ```
-
 ---
 
 ## 6. 快速检查清单
@@ -302,7 +307,8 @@ kubectl get pipelinerun <name> -n kubeflow -o yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 GPU 节点状态
 kubectl get nodes -o wide | grep nvidia
 
@@ -325,7 +331,6 @@ kubectl describe isvc <name>
 # 7. 检查模型加载日志
 kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded|error"
 ```
-
 ---
 
 ## 7. 升级条件
@@ -343,3 +348,5 @@ kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded|erro
 - [domain-14-ai-ml-infra/](../domain-14-ai-ml-infra/) — AI 基础设施完整文档
 - [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用问题排查
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill
+
+<!-- risk-assessed -->

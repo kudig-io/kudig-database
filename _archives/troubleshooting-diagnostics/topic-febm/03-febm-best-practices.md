@@ -39,6 +39,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第三章：FEBM 最佳实践
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
@@ -1419,7 +1424,8 @@ data:
 
 **验证时间同步状态**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在每个节点上验证 NTP 同步
 kubectl exec -n kube-system chrony-ntp-xxxxx -- chronyc tracking
 
@@ -1437,7 +1443,6 @@ kubectl exec -n kube-system chrony-ntp-xxxxx -- chronyc tracking
 # Root dispersion : 0.001234567 seconds
 # Update interval : 64.5 seconds
 ```
-
 **2. SHA-256 哈希计算（在采集时）**
 
 ```python
@@ -2429,6 +2434,7 @@ spec:
 **根因分析决策树**：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
               检测到容器中执行 /bin/bash
                         │
         ┌───────────────┴───────────────┐
@@ -2475,7 +2481,6 @@ spec:
                                     │ - 数据窃取？                │
                                     └────────────────────────────┘
 ```
-
 ---
 
 ### 3.3.4 Phase 3: Containment, Eradication & Recovery
@@ -3203,3 +3208,5 @@ WORM (Write-Once-Read-Many) 实施:
 ---
 
 > **导航**: [<< 上一章 - FEBM 技术实现体系](./02-febm-technical-implementation.md) | [下一章 - FEBM 对云平台工单智能体托管的意义 >>](./04-febm-agent-ticket-processing.md)
+
+<!-- risk-assessed -->

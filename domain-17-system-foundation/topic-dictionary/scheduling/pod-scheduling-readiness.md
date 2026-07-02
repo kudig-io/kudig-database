@@ -35,6 +35,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod Scheduling Readiness
@@ -109,13 +114,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 当数据集准备就绪时，外部控制器移除对应的 gate
 kubectl patch pod ml-training-worker-0 -n ml-platform \
   --type='json' \
   -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
 ```
-
 ## 故障排查
 
 | 症状 | 可能原因 | 排查步骤 |
@@ -140,7 +145,8 @@ kubectl patch pod ml-training-worker-0 -n ml-platform \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有 SchedulingGated 状态的 Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending \
   -o jsonpath='{range .items[?(@.spec.schedulingGates)]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}'
@@ -155,7 +161,6 @@ kubectl patch pod <pod-name> --type='json' \
 # 查看调度器指标中 gated Pod 数量
 curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 ```
-
 ## 交叉引用
 
 - [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度器如何处理 gated Pod
@@ -172,3 +177,6 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 - [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
 - [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+
+
+<!-- risk-assessed -->

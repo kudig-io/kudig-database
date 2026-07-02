@@ -68,6 +68,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
@@ -321,6 +326,7 @@ related_docs:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      Pod 网络不通诊断流程                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -369,13 +375,13 @@ related_docs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 详细诊断命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Pod网络状态检查 ==========
 
 # 检查Pod网络状态
@@ -436,7 +442,6 @@ journalctl -u kubelet | grep -i cni
 # 查看CNI调用错误
 grep "CNI failed" /var/log/messages
 ```
-
 ### 2.3 veth pair 深度诊断
 
 每个 Pod 通过 veth pair 连接到宿主机网络命名空间。当 Pod 网络异常时，需要逐层检查 veth pair 状态。
@@ -444,7 +449,8 @@ grep "CNI failed" /var/log/messages
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 定位 Pod 对应的宿主机 veth 接口 ==========
 
 # 方法一：通过 Pod 内 eth0 的 ifindex 找到宿主机侧 veth
@@ -478,7 +484,6 @@ bridge fdb show br cni0
 ip route show | grep <veth-name>
 # 应有类似: 10.244.1.5 dev caliXXXX scope link
 ```
-
 ### 2.4 iptables 链路追踪技术
 
 当 Pod 网络不通但 veth pair 状态正常时，问题可能出在 iptables 规则上。使用 TRACE 功能可以逐条追踪数据包经过的规则链。
@@ -607,7 +612,8 @@ sysctl -p /etc/sysctl.d/99-conntrack.conf
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. CoreDNS状态检查 ==========
 
 # 检查CoreDNS Pod状态
@@ -641,7 +647,6 @@ cat /var/lib/kubelet/config.yaml | grep -A5 dns
 # 检查集群DNS配置
 kubectl cluster-info | grep dns
 ```
-
 ### 3.2 常见DNS问题
 
 | 问题类型 | 症状 | 解决方案 |
@@ -658,7 +663,8 @@ kubectl cluster-info | grep dns
 
 ### 4.1 网络互通性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 隧道网络检查 (VXLAN/Overlay) ==========
 
 # 检查VXLAN接口
@@ -701,7 +707,6 @@ ping -M do -s 1500 <destination-ip>  # 可能分片
 # 检查iptables规则中的MTU处理
 iptables -t mangle -L -n -v
 ```
-
 ---
 
 <!-- chunk: 5. CNI IP地址管理问题 (IPAM Issues) -->
@@ -709,7 +714,8 @@ iptables -t mangle -L -n -v
 
 ### 5.1 IP地址耗尽问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. IP使用情况检查 ==========
 
 # 检查节点IP分配情况
@@ -746,7 +752,6 @@ spec:
   natOutgoing: true
 EOF
 ```
-
 ### 5.2 IPAM配置优化
 
 ```yaml
@@ -798,7 +803,8 @@ chmod +x calicoctl
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Flannel专用诊断 ==========
 
 # 检查Flannel Pod日志
@@ -813,7 +819,6 @@ ip link show flannel.1
 # 检查Flannel网络配置
 cat /etc/kube-flannel/net-conf.json
 ```
-
 ---
 
 <!-- chunk: 7. 生产环境应急处理 (Production Emergency Response) -->
@@ -821,7 +826,8 @@ cat /etc/kube-flannel/net-conf.json
 
 ### 7.1 网络问题紧急诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cni-network-emergency-check.sh
 
@@ -856,7 +862,6 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.a
 
 echo -e "\n=== 诊断完成 ==="
 ```
-
 ### 7.2 故障处理优先级
 
 | 问题类型 | 响应时间 | 处理步骤 |
@@ -952,3 +957,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

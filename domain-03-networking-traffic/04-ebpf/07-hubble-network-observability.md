@@ -61,6 +61,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Hubble 网络可观测性 (Hubble Network Observability)
@@ -262,7 +267,8 @@ data:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前 Hubble Server 状态
 kubectl exec -n kube-system ds/cilium -- hubble status
 
@@ -276,7 +282,6 @@ helm upgrade cilium cilium/cilium \
   --set hubble.enabled=true \
   --set hubble.bufferSize=16384
 ```
-
 ## 2.2 Hubble Relay (集群聚合组件)
 
 Hubble Relay 是一个独立部署的服务，负责聚合所有节点的 Hubble Server 数据流，提供集群级别的统一视图。
@@ -464,7 +469,8 @@ hubble:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: Port Forward
 kubectl port-forward -n kube-system svc/hubble-ui 12000:80 &
 open http://localhost:12000
@@ -476,7 +482,6 @@ cilium hubble ui
 kubectl patch svc hubble-ui -n kube-system \
   -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePort":30080}]}}'
 ```
-
 ## 2.4 Hubble CLI (命令行工具)
 
 Hubble CLI 是强大的命令行工具，支持实时流量观测和历史流量查询。
@@ -501,7 +506,8 @@ hubble version
 
 **CLI 基本用法：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 配置 Hubble CLI 连接
 export HUBBLE_SERVER=localhost:4245
 
@@ -547,7 +553,6 @@ hubble observe -o dict       # 字典格式
 hubble observe -o compact    # 紧凑格式 (默认)
 hubble observe -o table      # 表格格式
 ```
-
 **高级过滤示例：**
 
 ```bash
@@ -1064,7 +1069,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证策略效果: 从 frontend 访问 backend 应该成功
 kubectl exec -n production deploy/frontend -- \
   curl -s http://backend:8080/health
@@ -1084,7 +1090,6 @@ hubble observe \
   --to-label app=backend \
   --verdict DROPPED
 ```
-
 ---
 
 <!-- chunk: 6. Prometheus Metrics 导出 -->## 6. Prometheus Metrics 导出
@@ -1332,7 +1337,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Cilium Helm 仓库
 helm repo add cilium https://helm.cilium.io/
 helm repo update
@@ -1349,7 +1355,6 @@ helm install cilium cilium/cilium \
 kubectl -n kube-system get pods -l k8s-app=hubble-relay
 kubectl -n kube-system get pods -l k8s-app=cilium
 ```
-
 ## 7.2 完整生产级配置 (Full Production Config)
 
 ```yaml
@@ -1480,7 +1485,8 @@ hubble:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 应用完整配置
 helm upgrade --install cilium cilium/cilium \
   --namespace kube-system \
@@ -1498,14 +1504,14 @@ kubectl wait --for=condition=ready pod \
   -n kube-system \
   --timeout=60s
 ```
-
 ## 7.3 TLS 证书管理 (TLS Certificate Management)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: Helm 自动管理 (适合小集群)
 helm upgrade cilium cilium/cilium \
   --set hubble.tls.enabled=true \
@@ -1531,7 +1537,6 @@ helm upgrade cilium cilium/cilium \
   --set hubble.tls.auto.method=cronJob \
   --set hubble.tls.auto.schedule="0 0 1 */4 *"  # 每4个月轮换
 ```
-
 ## 7.4 多集群 Hubble 配置 (Multi-Cluster)
 
 ```yaml
@@ -1676,7 +1681,8 @@ data:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 导入官方 Hubble Dashboard (ID: 16611)
 # 在 Grafana UI 中: + > Import > 输入 Dashboard ID: 16611
 
@@ -1692,7 +1698,6 @@ kubectl patch configmap hubble-grafana-dashboard \
   --type merge \
   -p '{"metadata":{"labels":{"grafana_dashboard":"1"}}}'
 ```
-
 ## 8.4 服务级别指标仪表板 (Service-Level Dashboard)
 
 ```yaml
@@ -1737,7 +1742,8 @@ sum by (drop_reason) (
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kube-prometheus-stack + Cilium/Hubble 完整部署
 
 # 1. 部署 kube-prometheus-stack
@@ -1761,7 +1767,6 @@ helm upgrade --install cilium cilium/cilium \
 kubectl get servicemonitor -n kube-system
 kubectl get prometheusrule -n monitoring
 ```
-
 ---
 
 <!-- chunk: 9. 故障排查与网络诊断 -->## 9. 故障排查与网络诊断
@@ -1882,7 +1887,8 @@ hubble observe --protocol dns --since 1h -o json | \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 cilium CLI 进行诊断
 # 安装 cilium CLI
 curl -L --fail --remote-name-all \
@@ -1916,7 +1922,6 @@ kubectl exec -n kube-system ds/cilium -- \
 kubectl exec -n kube-system ds/cilium -- \
   cilium identity list | grep "app=frontend"
 ```
-
 ## 9.4 网络诊断脚本 (Network Diagnostic Scripts)
 
 ```bash
@@ -2132,7 +2137,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 按团队隔离 Hubble 访问权限
 # 使用 RBAC 控制 Hubble CLI 访问
 
@@ -2164,7 +2170,6 @@ EOF
 # dev-team 只能观察自己命名空间的流量
 hubble observe --namespace dev-namespace --follow
 ```
-
 ## 10.5 与分布式追踪集成 (Distributed Tracing Integration)
 
 ```mermaid
@@ -2226,7 +2231,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 评估 Hubble 资源需求的指导原则
 
 # 1. 估算每秒 Flow 数
@@ -2253,7 +2259,6 @@ kubectl top pod -n kube-system -l k8s-app=hubble-relay
 # 查看 Hubble 内部统计
 kubectl exec -n kube-system ds/cilium -- hubble status --all-nodes
 ```
-
 ## 10.7 安全加固 (Security Hardening)
 
 ```yaml
@@ -2357,3 +2362,6 @@ spec:
 - 06-tetragon-runtime-security
 - 08-bcc-bpftrace-tools
 - 09-ebpf-performance-optimization
+
+
+<!-- risk-assessed -->

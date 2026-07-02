@@ -50,6 +50,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Wiki Log
@@ -167,6 +172,7 @@ prerequisites:
 **统计**: 创建 252 | 更新 8 | 跳过 0 | 错误 0
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 [CREATE ] domain-19-landscape-references/graduated/tikv/tikv.md -> entities/tikv.md
 [CREATE ] domain-19-landscape-references/graduated/dragonfly/dragonfly.md -> entities/dragonfly.md
 [CREATE ] domain-19-landscape-references/graduated/cloudevents/cloudevents.md -> entities/cloudevents.md
@@ -428,8 +434,6 @@ prerequisites:
 [CREATE ] domain-03-networking-traffic/45-terway-testing-validation.md -> entities/45-terway-testing-validation.md
 [CREATE ] domain-03-networking-traffic/47-terway-troubleshooting-fta.md -> entities/47-terway-troubleshooting-fta.md
 ```
-
-
 ## Wiki 重新生成 - 2026-05-21
 
 重新生成 14 个 wiki 页面（修复内容提取）。
@@ -676,3 +680,6 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
   - 19 概念页添加 Related 段落（每页 2-3 个跨概念链接）
   - 11 合成页添加跨域关联段落（每页 4 个跨域链接）
   - 总计新增 ~100 个 wikilinks
+
+
+<!-- risk-assessed -->

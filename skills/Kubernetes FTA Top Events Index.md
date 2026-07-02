@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes FTA Top Events Index
@@ -64,6 +69,7 @@ prerequisites:
 ## Detailed Fault Tree: TE-1 Cluster Unavailable
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 TE-1: Cluster completely unavailable [OR gate] P0
 │
 ├── IE-1.1 Control plane failure [OR gate]
@@ -96,7 +102,6 @@ TE-1: Cluster completely unavailable [OR gate] P0
     ├── BE-1.11 SLB failure (backend server health, listener config)
     └── BE-1.12 VPC network failure (route table, security group)
 ```
-
 ## Detailed Fault Tree: TE-2 Application Unavailable
 
 ```
@@ -170,3 +175,6 @@ bottom_event:
 - [[docs/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
 - [[docs/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference
 - [[docs/API-DOC-MAP.md|KUDIG API → 文档映射]] — Cross-reference
+
+
+<!-- risk-assessed -->

@@ -37,6 +37,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 15 - SLI/SLO/SLA工程实践
@@ -1943,7 +1948,8 @@ print(f"发布窗口: {window_info}")
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 可用性 SLI（PromQL）
 # sum(rate(http_requests_total{code!~"5.."}[5m])) / sum(rate(http_requests_total[5m]))
 
@@ -1962,7 +1968,6 @@ kubectl get endpoints -n <namespace>
 # 查看 Prometheus 告警规则
 kubectl get prometheusrule -A
 ```
-
 ## 交叉引用
 
 - 相关主题：[事故管理与 Runbooks](incident-management-runbooks.md) · [变更管理](change-management-release.md) · [运维最佳实践](operations-best-practices.md) · [SRE 成熟度模型](sre-maturity-model.md)
@@ -1980,3 +1985,6 @@ kubectl get prometheusrule -A
 - [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
 - [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
 - [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+
+
+<!-- risk-assessed -->

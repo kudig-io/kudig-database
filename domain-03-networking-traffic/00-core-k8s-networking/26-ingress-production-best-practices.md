@@ -66,6 +66,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 134 - [[Ingress|Ingress]] 生产最佳实践
@@ -855,7 +860,8 @@ spec:
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 回滚 Ingress 配置
 kubectl rollout undo deployment/app-deployment -n production
 
@@ -871,13 +877,13 @@ kubectl patch ingress app-canary -n production -p '{"metadata":{"annotations":{"
 # 5. 临时禁用 Ingress
 kubectl annotate ingress app-ingress -n production nginx.ingress.kubernetes.io/server-snippet='return 503;'
 ```
-
 ### 5.3 证书更新操作
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看证书过期时间
 kubectl get secret app-tls -n production -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -dates -noout
 
@@ -891,7 +897,6 @@ kubectl create secret tls app-tls \
   -n production \
   --dry-run=client -o yaml | kubectl apply -f -
 ```
-
 ---
 
 <!-- chunk: 六、故障演练 -->
@@ -1040,7 +1045,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 备份当前配置
 kubectl get ingress -A -o yaml > ingress-backup.yaml
 kubectl get configmap -n ingress-nginx -o yaml > configmap-backup.yaml
@@ -1063,14 +1069,14 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller --tail=5
 # 5. 验证流量正常
 curl -I https://app.example.com
 ```
-
 ### 8.3 回滚步骤
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 回滚
 helm rollback ingress-nginx 1 -n ingress-nginx
 
@@ -1081,7 +1087,6 @@ kubectl rollout undo deployment/ingress-nginx-controller -n ingress-nginx
 kubectl apply -f configmap-backup.yaml
 kubectl apply -f ingress-backup.yaml
 ```
-
 ---
 
 <!-- chunk: 九、常见问题 FAQ -->
@@ -1148,3 +1153,5 @@ kubectl apply -f ingress-backup.yaml
 - 28-coredns-troubleshooting-optimization
 
 ```
+
+<!-- risk-assessed -->

@@ -34,6 +34,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Communication between Nodes and the Control Plane（节点与控制平面之间的通信）
@@ -88,3 +93,6 @@ Kubernetes 采用“轮毂-辐条（Hub-and-Spoke）”API 模式：
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+
+
+<!-- risk-assessed -->

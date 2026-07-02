@@ -51,6 +51,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -491,7 +496,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -536,10 +542,10 @@ kubectl get pods -A
 
 echo "=== AWS EKS cluster ready ==="
 ```
-
 ### Azure AKS 快速启动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -582,10 +588,10 @@ kubectl get pods -A
 
 echo "=== Azure AKS cluster ready ==="
 ```
-
 ### Google GKE 快速启动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -619,10 +625,10 @@ kubectl get pods -A
 
 echo "=== Google GKE cluster ready ==="
 ```
-
 ### 阿里云 ACK 快速启动
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -656,13 +662,13 @@ kubectl --kubeconfig ~/.kube/ack-config get nodes
 
 echo "=== Alibaba ACK cluster ready ==="
 ```
-
 ### Karmada 多集群联邦快速部署
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -753,7 +759,6 @@ karmadactl get pods -n production --kubeconfig $KARMADA_KUBECONFIG
 
 echo "=== Karmada federation deployment complete ==="
 ```
-
 ## 多云安全框架
 
 ```yaml
@@ -787,7 +792,8 @@ security_framework_layers:
 
 ### 环境准备
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -833,7 +839,6 @@ gcloud --version
 
 echo "=== All tools installed successfully ==="
 ```
-
 ## 文档贡献指南
 
 ### 文档结构规范
@@ -884,7 +889,8 @@ document_version_specification:
 
 ### 多云健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -929,7 +935,6 @@ done
 
 echo "=== Multi-Cloud Health Check Complete ==="
 ```
-
 ### 多云监控告警规则
 
 ```yaml
@@ -980,3 +985,5 @@ spec:
 **维护者**: 多云与混合云架构团队
 
 ```
+
+<!-- risk-assessed -->

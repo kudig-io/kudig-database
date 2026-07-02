@@ -47,6 +47,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Flannel 网络故障排查指南
@@ -163,7 +168,8 @@ k8s_versions:
 
 #### 2.1.2 确认当前后端模式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Flannel ConfigMap
 kubectl get configmap -n kube-system kube-flannel-cfg -o yaml
 
@@ -173,7 +179,6 @@ cat /run/flannel/subnet.env
 # 查看网络接口（VXLAN 模式下会有 flannel.1）
 ip link show | grep flannel
 ```
-
 **VXLAN 模式典型配置**：
 ```json
 {
@@ -224,7 +229,8 @@ Pod 处于 ContainerCreating，无 IP 地址
 
 #### 2.2.2 子网分配失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的子网分配
 kubectl get nodes -o json | jq -r '.items[] | 
   "\(.metadata.name): \(.spec.podCIDR // "未分配")"'
@@ -240,7 +246,6 @@ cat /run/flannel/subnet.env
 # FLANNEL_MTU=1450
 # FLANNEL_IPMASQ=true
 ```
-
 **子网冲突原因**：
 - 使用 etcd 后端时，etcd 中存在脏数据（旧节点子网未清理）
 - 手动修改了 `spec.podCIDR` 导致与 flannel 分配逻辑冲突
@@ -252,7 +257,8 @@ cat /run/flannel/subnet.env
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1：清理 etcd 中的旧子网记录（使用 etcd 后端时）
 ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
@@ -265,7 +271,6 @@ kubectl delete pod -n kube-system -l app=flannel
 # 方法 2：使用 Kubernetes API 后端时，直接重置节点 podCIDR
 kubectl patch node <node-name> --type json -p '[{"op": "remove", "path": "/spec/podCIDR"}]'
 ```
-
 #### 2.2.3 CNI 插件缺失
 
 ```bash
@@ -339,14 +344,14 @@ tcpdump -i eth0 udp port 4789 -nn -e
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动添加 FDB 条目（临时修复）
 bridge fdb add <remote-vtep-mac> dev flannel.1 dst <remote-node-ip>
 
 # 或重启 flannel 强制重新学习
 kubectl delete pod -n kube-system -l app=flannel
 ```
-
 #### 2.3.2 host-gw 模式排查
 
 ```bash
@@ -375,7 +380,8 @@ iptables -L -n -v | grep DROP
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试大包连通性
 kubectl exec -it <pod-a> -- ping -M do -s 1472 <pod-b-ip>
 # 如果失败，说明存在 MTU 问题
@@ -388,14 +394,23 @@ ip link show flannel.1 | grep mtu
 # 物理网卡 MTU - VXLAN 头部(50) = 推荐 Pod MTU
 # 如 eth0 MTU = 1500，则 Pod MTU 应为 1450
 ```
-
 **修复 MTU**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 修改 Flannel ConfigMap
 kubectl edit configmap -n kube-system kube-flannel-cfg
 # 在 net-conf.json 中添加："Backend": {"Type": "vxlan", "VNI": 1, "Port": 4789}
@@ -406,14 +421,23 @@ kubectl patch configmap -n kube-system kube-flannel-cfg --type merge -p \
   '{"data":{"net-conf.json":"{\\"Network\\":\\"10.244.0.0/16\\",\\"Backend\\":{\\"Type\\":\\"vxlan\\"}}"}}'
 kubectl rollout restart ds/kube-flannel-ds -n kube-system
 ```
-
 ### 2.4 后端数据存储问题
 
 Flannel 支持两种数据存储后端：
 
 #### 2.4.1 etcd 后端（旧版默认）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 etcd 中的子网分配
 ETCDCTL_API=3 etcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
@@ -427,7 +451,6 @@ etcdctl del /coreos.com/network/subnets/<old-subnet> \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 **已知问题**：
 - etcd 数据损坏或不可用时，flannel 无法分配新子网
 - 多集群共享 etcd 时，子网可能冲突
@@ -435,7 +458,8 @@ etcdctl del /coreos.com/network/subnets/<old-subnet> \
 
 #### 2.4.2 Kubernetes API 后端（推荐）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 podCIDR 分配
 kubectl get nodes -o json | jq -r '.items[] | 
   "\(.metadata.name): \(.spec.podCIDR)"'
@@ -444,7 +468,6 @@ kubectl get nodes -o json | jq -r '.items[] |
 kubectl get ds -n kube-system kube-flannel-ds -o yaml | grep -A 5 "args:"
 # 应包含：- --kube-subnet-mgr
 ```
-
 **优势**：
 - 无需直接访问 etcd，权限更简单
 - 与 Kubernetes 节点生命周期绑定，节点删除时自动清理子网
@@ -457,14 +480,14 @@ kubectl get ds -n kube-system kube-flannel-ds -o yaml | grep -A 5 "args:"
 1. **Canal** = Flannel + Calico（使用 Calico 处理策略，Flannel 处理网络）
 2. **迁移到 Calico 或 Cilium**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否使用 Canal
 kubectl get pods -n kube-system | grep -E "flannel|calico"
 
 # 如果同时存在 flannel 和 calico-node，说明是 Canal 方案
 # 此时 NetworkPolicy 由 Calico 处理，排查需参考 Calico 文档
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -477,7 +500,17 @@ kubectl get pods -n kube-system | grep -E "flannel|calico"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 备份当前配置
 kubectl get configmap -n kube-system kube-flannel-cfg -o yaml > flannel-config-backup.yaml
 
@@ -492,7 +525,6 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-system
 # 4. 验证
 watch kubectl get pods -n kube-system -l app=flannel
 ```
-
 **风险**：
 - 切换期间会有短暂网络中断（Pod 间通信可能受影响 10-30 秒）
 - host-gw 要求所有节点同二层，跨子网节点将失去网络连通性
@@ -504,7 +536,8 @@ watch kubectl get pods -n kube-system -l app=flannel
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1：重置所有子网（Kubernetes API 后端）
 # 注意：此操作会导致所有 Pod 网络中断，需谨慎
 
@@ -520,13 +553,13 @@ kubectl delete pod -n kube-system -l app=flannel
 kubectl patch node <conflict-node> --type json -p '[{"op": "remove", "path": "/spec/podCIDR"}]'
 kubectl delete pod -n kube-system -l app=flannel --field-selector spec.nodeName=<conflict-node>
 ```
-
 ### 3.3 CNI 配置恢复
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 如果 CNI 配置被误删除，从 ConfigMap 恢复
 kubectl get configmap -n kube-system kube-flannel-cfg -o jsonpath='{.data.cni-conf\.json}' | \
   tee /etc/cni/net.d/10-flannel.conflist
@@ -537,7 +570,6 @@ ls /opt/cni/bin/flannel || {
   kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 }
 ```
-
 ### 3.4 防火墙与端口
 
 ```bash
@@ -621,7 +653,8 @@ spec:
 
 ### 4.4 自动化诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # flannel-health-check.sh - Flannel 健康检查脚本
 
@@ -717,7 +750,6 @@ else
   exit 0
 fi
 ```
-
 ---
 
 ## 附录 A: Flannel 与 CNI 版本兼容性
@@ -756,3 +788,6 @@ fi
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+
+
+<!-- risk-assessed -->

@@ -16,6 +16,11 @@ skill_set: k8s-pod-crashloop
 last_updated: 2026-05-22
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod CrashLoopBackOff / OOMKilled 修复手册
@@ -46,7 +51,8 @@ last_updated: 2026-05-22
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查当前限制
 kubectl get pod <pod> -o jsonpath='{.spec.containers[0].resources}'
 
@@ -56,13 +62,13 @@ kubectl patch deployment <deployment> -p '{"spec":{"template":{"spec":{"containe
 # 验证
 kubectl get pod <new-pod> -o jsonpath='{.spec.containers[0].resources}'
 ```
-
 ### 修复 2：回滚到上一个版本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看历史版本
 kubectl rollout history deployment/<deployment>
 
@@ -72,13 +78,22 @@ kubectl rollout undo deployment/<deployment>
 # 验证
 kubectl rollout status deployment/<deployment>
 ```
-
 ### 修复 3：修正健康检查配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑 Deployment
 kubectl edit deployment <deployment>
 
@@ -90,7 +105,6 @@ startupProbe:
   failureThreshold: 30
   periodSeconds: 10
 ```
-
 ## 回滚方案
 
 所有修改均可通过 `kubectl rollout undo` 回滚。
@@ -107,3 +121,6 @@ startupProbe:
 - [[reference|#reference Hub]] — tag hub
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

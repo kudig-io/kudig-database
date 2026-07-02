@@ -45,6 +45,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 控制平面监控与可观测性 (Control Plane Monitoring & Observability)
@@ -678,7 +683,8 @@ data:
 
 ### 4.2 关键日志源配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 控制平面日志收集脚本
 
@@ -791,7 +797,6 @@ configure_log_rotation() {
 EOF
 }
 ```
-
 ### 4.3 日志分析规则
 
 ```yaml
@@ -1463,7 +1468,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 控制平面性能基准测试
 
@@ -1625,7 +1631,6 @@ main() {
 
 main "$@"
 ```
-
 ### 8.2 性能基线指标
 
 ```yaml
@@ -1677,7 +1682,8 @@ spec:
 
 ### 9.1 诊断脚本集合
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 控制平面故障诊断工具包
 
@@ -1828,7 +1834,6 @@ if "${BASH_SOURCE[0]}" == "${0}"; then
     main "$@"
 fi
 ```
-
 ### 9.2 实时监控脚本
 
 ```python
@@ -2076,3 +2081,6 @@ Level 5 - 自主运维 (Autonomous Operations)
 - 04-plane-security-hardening
 - 06-plane-troubleshooting
 - 07-plane-upgrade-migration
+
+
+<!-- risk-assessed -->

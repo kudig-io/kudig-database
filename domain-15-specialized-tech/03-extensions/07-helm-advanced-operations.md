@@ -59,6 +59,11 @@ cross_refs:
   label: '故障树: helm'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 129 - [[Helm|Helm]] 高级运维：复杂部署、CI/CD 集成与安全最佳实践
@@ -71,7 +76,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 环境特定值文件
 values.yaml              # 默认配置
 values-dev.yaml          # 开发环境配置
@@ -85,7 +91,6 @@ helm upgrade myapp . -f values-staging.yaml
 # 覆盖多个值文件
 helm install myapp . -f values.yaml -f values-prod.yaml
 ```
-
 ### 高级值引用
 
 | 模板语法 | 说明 | 示例 |
@@ -462,7 +467,8 @@ pipeline {
 
 ### Chart 安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 kubeval 验证 Kubernetes manifests
 helm template mychart/ | kubeval --strict
 
@@ -475,7 +481,6 @@ datree test . --schema-version 1.25.0
 # 使用 Trivy 扫描容器镜像
 trivy image nginx:latest
 ```
-
 ### 安全配置模板
 
 ```yaml
@@ -746,7 +751,8 @@ spec:
 
 ### Helm 部署监控
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 监控 Helm Release 状态
 helm list --all-namespaces
 helm status myrelease -n mynamespace
@@ -763,7 +769,6 @@ helm history myrelease -n mynamespace
 # Rollback 操作
 helm rollback myrelease 1 -n mynamespace
 ```
-
 ### 自定义资源验证
 
 ```yaml
@@ -802,7 +807,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 模板渲染调试
 helm template mychart/ --debug
 helm install myrelease . --debug --dry-run
@@ -822,7 +828,6 @@ helm install myrelease . --timeout=10m --wait=false
 kubectl describe pods -l app=myapp
 
 ```
-
 ### 常见问题解决
 
 | 问题 | 原因 | 解决方案 |
@@ -962,3 +967,5 @@ podLabels:
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

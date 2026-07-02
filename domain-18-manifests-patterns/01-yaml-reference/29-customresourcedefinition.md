@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 29 - CustomResourceDefinition (CRD) YAML 配置参考
@@ -687,7 +692,8 @@ func handleConvert(w http.ResponseWriter, r *http.Request) {
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 更新 CRD,将新版本设为 storage: true
 kubectl apply -f crd-v2.yaml
 
@@ -699,7 +705,6 @@ kubectl get myresources --all-namespaces -o json | \
 kubectl get myresources -o jsonpath='{.items[*].metadata.annotations.kubectl\.kubernetes\.io/last-applied-configuration}' | \
   jq '.apiVersion'
 ```
-
 **使用 StorageVersionMigration (v1.30 Alpha):**
 
 ```yaml
@@ -724,6 +729,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────┐
 │ 1. kubectl apply -f crd.yaml                                    │
 └────────────────────┬────────────────────────────────────────────┘
@@ -755,7 +761,6 @@ spec:
 │    - kubectl get crd myresources.example.com -o jsonpath='...'  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 **关键组件:**
 
 - **apiextensions-apiserver**: 内置在 kube-apiserver 中,专门处理 CRD 资源
@@ -765,6 +770,7 @@ spec:
 ## 6.2 Schema 验证引擎
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 客户端请求 (kubectl/API)
     ▼
 ┌─────────────────────────────────────────────────────────────────┐
@@ -794,7 +800,6 @@ spec:
 │    - 自动版本转换 (如果请求版本 ≠ 存储版本)                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ## 6.3 版本转换机制
 
 **场景**: 用户请求 v1,但 etcd 存储为 v2 (或反之)
@@ -1528,7 +1533,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 CRD 定义
 kubectl apply -f crd.yaml --dry-run=server -v=8
 
@@ -1542,20 +1548,19 @@ Error: spec.versions[0].schema.openAPIV3Schema: Invalid value: ...: must be a st
 # 3. 多个存储版本
 Error: spec.versions: Invalid value: ...: must have exactly one version marked as storage version
 ```
-
 **解决方案:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证 CRD 结构
 kubectl apply -f crd.yaml --validate=true
 
 # 检查 API Server 日志
 kubectl logs -n kube-system kube-apiserver-xxx | grep -i customresourcedefinition
 ```
-
 ## 8.2 CR 创建失败(Schema 验证)
 
 **症状**: CustomResource 无法创建,提示字段验证错误
@@ -1572,7 +1577,8 @@ Error from server (Invalid): error when creating "cr.yaml":
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 CRD Schema
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.versions[?(@.storage==true)].schema.openAPIV3Schema}' | jq
 
@@ -1582,7 +1588,6 @@ kubectl apply -f cr.yaml --dry-run=server -v=8
 # 3. 检查 CEL 验证规则
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.versions[0].schema.openAPIV3Schema.properties.spec.x-kubernetes-validations}'
 ```
-
 ## 8.3 版本转换失败
 
 **症状**: Webhook 转换错误
@@ -1596,7 +1601,8 @@ Error: conversion webhook for databases.db.example.com failed:
 
 **排查步骤:**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 服务
 kubectl get svc -n crd-system crd-conversion-webhook
 kubectl get endpoints -n crd-system crd-conversion-webhook
@@ -1615,7 +1621,6 @@ kubectl get crd databases.db.example.com -o jsonpath='{.spec.conversion}' | jq
 # 5. 检查证书
 kubectl get crd databases.db.example.com -o jsonpath='{.spec.conversion.webhook.clientConfig.caBundle}' | base64 -d | openssl x509 -text
 ```
-
 ## 8.4 CRD 更新失败
 
 **症状**: 无法更新 CRD Schema
@@ -1632,7 +1637,8 @@ Error: spec.versions[0].schema: Forbidden:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 添加新版本(不修改旧版本 Schema)
 # crd-v2.yaml
 spec:
@@ -1658,12 +1664,12 @@ kubectl patch crd databases.db.example.com --type=json -p='[
   {"op": "replace", "path": "/spec/versions/1/served", "value": false}
 ]'
 ```
-
 ## 8.5 性能问题
 
 **症状**: CR 列表查询缓慢
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CR 数量
 kubectl get databases --all-namespaces --no-headers | wc -l
 
@@ -1681,7 +1687,6 @@ spec:
 # 使用 FieldSelector 查询
 kubectl get databases --field-selector spec.engine=mysql
 ```
-
 ---
 
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
@@ -1735,3 +1740,5 @@ kubectl get databases --field-selector spec.engine=mysql
 - 31-api-priority-fairness
 
 ```
+
+<!-- risk-assessed -->

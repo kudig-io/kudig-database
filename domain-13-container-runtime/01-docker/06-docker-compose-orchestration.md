@@ -54,6 +54,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker Compose 编排
@@ -615,14 +620,14 @@ services:
 
 ## 多文件组合
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 基础 + 开发覆盖
 docker compose -f compose.yaml -f compose.dev.yaml up
 
 # 基础 + 生产覆盖
 docker compose -f compose.yaml -f compose.prod.yaml up
 ```
-
 ```yaml
 # compose.yaml (基础)
 services:
@@ -671,7 +676,8 @@ services:
       - debug
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 仅启动默认服务
 docker compose up
 
@@ -681,7 +687,6 @@ docker compose --profile debug up
 # 多个 profiles
 docker compose --profile debug --profile tools up
 ```
-
 ---
 
 <!-- chunk: 生产环境配置 -->## 生产环境配置
@@ -907,7 +912,8 @@ services:
 
 ## up 命令选项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 后台运行
 docker compose up -d
 
@@ -929,10 +935,10 @@ docker compose up -d --remove-orphans
 # 等待超时
 docker compose up -d --wait --wait-timeout 60
 ```
-
 ## down 命令选项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 停止并删除
 docker compose down
 
@@ -945,10 +951,10 @@ docker compose down --rmi all
 # 删除网络
 docker compose down --remove-orphans
 ```
-
 ## 查看状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 服务状态
 docker compose ps
 docker compose ps -a  # 包括已停止
@@ -966,10 +972,10 @@ docker compose config
 docker compose config --services
 docker compose config --volumes
 ```
-
 ## 执行与调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 执行命令
 docker compose exec app sh
 docker compose exec -u root app bash
@@ -985,7 +991,6 @@ docker compose build
 docker compose build --no-cache
 docker compose build --pull
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -1002,3 +1007,6 @@ docker compose build --pull
 - 05-docker-storage-volumes
 - 07-docker-security-best-practices
 - 08-docker-troubleshooting-guide
+
+
+<!-- risk-assessed -->

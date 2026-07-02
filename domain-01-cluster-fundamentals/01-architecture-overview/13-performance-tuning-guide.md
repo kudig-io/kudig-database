@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 13 - [[Kubernetes|Kubernetes]] 性能调优专项指南
@@ -150,7 +155,8 @@ clusterloader2 \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 iperf3 测试网络吞吐量
 kubectl run iperf-server --image=networkstatic/iperf3 --port=5201 \
   --expose --labels="app=iperf-server"
@@ -162,7 +168,6 @@ kubectl run iperf-client --image=networkstatic/iperf3 --restart=Never \
 kubectl exec -it netperf-pod -- netperf -H target-pod-ip \
   -t TCP_RR -- -r 64 -O MIN_LATENCY,MAX_LATENCY,MEAN_LATENCY
 ```
-
 ---
 
 <!-- chunk: 二、控制平面性能优化 -->
@@ -829,7 +834,8 @@ groups:
 ### 6.2 性能诊断工具
 
 #### 集群性能分析脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-performance-analyzer.sh
 
@@ -855,9 +861,9 @@ echo -e "\n--- 容器重启统计 ---"
 kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\t"}{.status.containerStatuses[*].restartCount}{"\n"}{end}' | \
   sort -k2 -nr | head -10
 ```
-
 #### 网络性能诊断
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 网络延迟测试
 kubectl run network-test --image=nixery.dev/shell/curl/iproute2/netperf --restart=Never -- \
   bash -c "
@@ -885,7 +891,6 @@ kubectl run curl-test --image=curlimages/curl --restart=Never -- \
     done
   "
 ```
-
 ---
 
 <!-- chunk: 七、性能优化最佳实践 -->
@@ -1337,3 +1342,6 @@ cilium_config:
 - 12-cluster-deployment-patterns
 - 14-security-architecture
 - 15-observability-architecture
+
+
+<!-- risk-assessed -->

@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 38 - Terway GC (垃圾回收) 机制详解 (Terway [[domain-17-system-foundation/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
@@ -288,11 +293,11 @@ data:
 
 ### 3.3 Terway [[DaemonSet|DaemonSet]] 启动参数 — GC 相关 Flag
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Terway DaemonSet 的 GC 相关启动参数
 kubectl get ds terway -n kube-system -o jsonpath='{.spec.template.spec.containers[?(@.name=="terway")].args}' | jq .
 ```
-
 | 参数 | 默认值 | 说明 |
 |:---|:---|:---|
 | `--gc-min-interval` | `300s` | GC 扫描最小间隔 |
@@ -656,7 +661,8 @@ IP 被判定为孤儿需同时满足以下所有条件:
 
 ### 6.1 GC 状态监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ============================================
 # 查看 Terway GC 日志
 # ============================================
@@ -676,10 +682,10 @@ kubectl logs -n kube-system ${TERWAY_POD} -c terway --tail=200 | \
 kubectl get events -n kube-system --field-selector \
   reason=GCSucceeded,reason=GCFailed --sort-by='.lastTimestamp'
 ```
-
 ### 6.2 IP 泄漏检测脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # detect-ip-leak.sh - 检测 Terway IP 泄漏
 # 用法: ./detect-ip-leak.sh [node-name]
@@ -743,14 +749,14 @@ kubectl get reservedips -A -o json | jq -r '
 echo ""
 echo "=== 检测完成 ==="
 ```
-
 ### 6.3 手动触发 GC
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 方法 1: 重启特定节点的 Terway Pod (触发启动对账)
 # ============================================
@@ -790,14 +796,14 @@ while IFS=$'\t' read -r name ns pod; do
   fi
 done
 ```
-
 ### 6.4 调整 GC 参数
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 场景 1: 加速 GC (IP 泄漏严重时临时调整)
 # ============================================
@@ -825,7 +831,6 @@ kubectl get cm eni-config -n kube-system -o json | \
 
 kubectl rollout restart ds/terway -n kube-system
 ```
-
 ---
 
 <!-- chunk: 7. 常见问题与处理方案 -->
@@ -849,7 +854,8 @@ kubectl rollout restart ds/terway -n kube-system
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # emergency-ip-gc.sh - IP 泄漏紧急处理
 # ⚠️ 仅在 IP 泄漏导致 Pod 大面积 Pending 时使用
@@ -909,13 +915,13 @@ kubectl get cm eni-config -n kube-system -o json | \
 kubectl rollout restart ds/terway -n kube-system
 CMDS
 ```
-
 ### 7.3 CRD Finalizer 阻塞处理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 检查被 Finalizer 阻塞的 CRD
 # ============================================
@@ -946,7 +952,6 @@ kubectl patch ipinstance <name> --type='json' \
 kubectl patch podeni <name> -n <namespace> --type='json' \
   -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
 ```
-
 ---
 
 <!-- chunk: 8. 监控与告警 -->
@@ -1065,3 +1070,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

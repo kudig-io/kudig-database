@@ -37,6 +37,11 @@ prerequisites:
 - platform-engineering-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubelet 进阶配置
@@ -217,7 +222,8 @@ cgroup driver 决定了 kubelet 如何管理容器的 cgroup 层级。它**必�
 
 ### 2.2 检查和配置 cgroup driver
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 当前 cgroup driver
 kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq '.kubeletconfig.cgroupDriver'
 
@@ -237,7 +243,6 @@ stat -fc %T /sys/fs/cgroup/
 [plugins."io.containerd.grpc.v1.cri".containerd]
   runc_options = { SystemdCgroup = true }
 ```
-
 ### 2.3 cgroup 版本
 
 ```bash
@@ -308,7 +313,8 @@ Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/boot
 
 ### 4.1 maxPods
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 默认 110 个 Pod
 # 可调整，但需要考虑:
 # 1. IP 地址空间 (每个 Pod 需要一个 IP)
@@ -328,7 +334,6 @@ kubectl get node <node> -o jsonpath='{.status.capacity.pods}'
 # 注意: maxPods 不能超过 PodCIDR 可用 IP 数
 # /24 = 254 IP → maxPods 最大约 250
 ```
-
 ### 4.2 podPidsLimit
 
 ```bash
@@ -412,7 +417,8 @@ Environment="KUBELET_EXTRA_ARGS=--max-pods=250"
 
 ### 6.2 查看当前 kubelet 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看运行中的 kubelet 配置
 kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq .
 
@@ -424,7 +430,6 @@ cat /proc/$(pidof kubelet)/cmdline | tr '\0' '\n'
 systemctl cat kubelet
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 ```
-
 ---
 
 ## 七、常见错误与排查
@@ -461,3 +466,6 @@ cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
+
+
+<!-- risk-assessed -->

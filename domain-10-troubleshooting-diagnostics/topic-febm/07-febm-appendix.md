@@ -49,6 +49,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第七章:附录
@@ -896,7 +901,17 @@ rules:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 □ 确认事件真实性
   □ 验证告警来源 (Falco/Prometheus/审计日志)
   □ 排除误报 (检查已知的 False Positive 模式)
@@ -919,10 +934,10 @@ rules:
   □ 冻结受影响的节点 (kubectl cordon)
   □ 撤销可疑账户权限
 ```
-
 ## F.2 证据收集 (15分钟 - 2小时)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 □ 日志证据
   □ 收集 Pod 日志 (kubectl logs --all-containers --timestamps)
   □ 收集 Kubernetes 事件 (kubectl get events --sort-by='.lastTimestamp')
@@ -953,7 +968,6 @@ rules:
   □ 进程列表与系统调用追踪 (strace)
   □ 镜像分析 (Trivy/Dive)
 ```
-
 ## F.3 分析与诊断 (2-6小时)
 
 ```
@@ -1251,7 +1265,8 @@ cd febm-examples
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建取证就绪的 Kind 集群
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
@@ -1279,7 +1294,6 @@ EOF
 # 部署 OSDFIR 工具栈
 kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/osdfir-stack/all-in-one.yaml
 ```
-
 ---
 
 <!-- chunk: I. 版本历史 -->## I. 版本历史
@@ -1387,3 +1401,6 @@ kubectl apply -f https://raw.githubusercontent.com/kudig-io/febm-examples/main/o
 - [[domain-10-troubleshooting-diagnostics/topic-febm/06-febm-future-evolution.md|06-febm-future-evolution]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
+
+
+<!-- risk-assessed -->

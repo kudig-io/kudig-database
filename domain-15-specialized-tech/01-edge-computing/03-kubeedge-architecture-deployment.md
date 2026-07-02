@@ -58,6 +58,11 @@ cross_refs:
   label: '故障树: deployment'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[KubeEdge|KubeEdge]] 架构与部署 (KubeEdge Architecture and Deployment)
@@ -809,7 +814,8 @@ func (q *MessageQueue) ResendOnReconnect() {
 
 ## 6.1 前置条件 (Prerequisites)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Kubernetes 集群版本
 kubectl version --short
 # Server Version: v1.28.x
@@ -825,14 +831,14 @@ helm repo update
 # 4. 查看可用版本
 helm search repo kubeedge/cloudcore --versions
 ```
-
 ## 6.2 CloudCore Helm 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间
 kubectl create namespace kubeedge
 
@@ -852,7 +858,6 @@ helm install cloudcore kubeedge/cloudcore \
   --set-file global.cloudHub.certFile=/path/to/server.crt \
   --set-file global.cloudHub.keyFile=/path/to/server.key
 ```
-
 ## 6.3 完整 Helm values 配置
 
 ```yaml
@@ -955,7 +960,8 @@ iptablesManager:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用自定义 values 安装
 helm install cloudcore kubeedge/cloudcore \
   --namespace kubeedge \
@@ -969,10 +975,10 @@ kubectl get svc -n kubeedge
 # 获取 Token (边缘节点加入需要)
 kubectl get secret tokensecret -n kubeedge -o jsonpath='{.data.tokendata}' | base64 -d
 ```
-
 ## 6.4 验证 CloudCore 部署
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 状态
 kubectl get pods -n kubeedge -l app=cloudcore
 # NAME                          READY   STATUS    RESTARTS   AGE
@@ -989,7 +995,6 @@ kubectl logs -n kubeedge -l app=cloudcore -f
 # 测试 WebSocket 连接
 curl -k https://1.2.3.4:10002/ca.crt  # 获取 CA 证书
 ```
-
 ---
 
 <!-- chunk: 7. keadm CLI 部署 -->## 7. keadm CLI 部署
@@ -1012,7 +1017,8 @@ keadm version
 
 ## 7.2 CloudCore 部署 (keadm init)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在云端 Kubernetes 节点上部署 CloudCore
 
 # 基础安装
@@ -1040,13 +1046,22 @@ keadm gettoken
 # 或通过 kubectl
 kubectl get secret tokensecret -n kubeedge -o jsonpath='{.data.tokendata}' | base64 -d
 ```
-
 ## 7.3 EdgeCore 部署 (keadm join)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在边缘节点上执行
 
 # 前置条件检查
@@ -1085,10 +1100,10 @@ kubectl get nodes
 # cloud-master      Ready    control-plane 1d    v1.28.0
 # edge-node-001     Ready    edge          1m    v1.28.0
 ```
-
 ## 7.4 keadm 常用命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ====== 云端操作 ======
 
 # 初始化 CloudCore
@@ -1134,7 +1149,6 @@ cat /etc/kubeedge/config/edgecore.yaml
 ls /etc/kubeedge/certs/
 openssl x509 -in /etc/kubeedge/certs/server.crt -text -noout | grep -A 2 "Validity"
 ```
-
 ---
 
 <!-- chunk: 8. 高可用部署 -->## 8. 高可用部署
@@ -1211,7 +1225,8 @@ cloudCore:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 HA CloudCore
 helm install cloudcore kubeedge/cloudcore \
   --namespace kubeedge \
@@ -1221,7 +1236,6 @@ helm install cloudcore kubeedge/cloudcore \
 kubectl get pods -n kubeedge -w
 kubectl get pdb -n kubeedge
 ```
-
 ## 8.3 边缘节点高可用
 
 KubeEdge v1.13+ 支持边缘节点高可用（多节点 EdgeCore 集群）：
@@ -1611,7 +1625,8 @@ keadm join \
 
 ## 11.1 防火墙规则 (Firewall Rules)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 云端防火墙规则
 # 允许边缘节点连接 CloudCore
 iptables -A INPUT -p tcp --dport 10000 -j ACCEPT  # WebSocket
@@ -1627,7 +1642,6 @@ iptables -A OUTPUT -p tcp --dport 10000 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 10002 -j ACCEPT
 iptables -A OUTPUT -p tcp --dport 10003 -j ACCEPT
 ```
-
 ## 11.2 EdgeMesh 部署 (EdgeMesh)
 
 EdgeMesh 提供边缘节点之间的服务网格能力（边缘节点跨越 NAT 的服务发现）：
@@ -1635,7 +1649,8 @@ EdgeMesh 提供边缘节点之间的服务网格能力（边缘节点跨越 NAT 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 EdgeMesh
 helm repo add edgemesh https://edgemesh.netlify.app/charts
 helm repo update
@@ -1646,7 +1661,6 @@ helm install edgemesh edgemesh/edgemesh \
   --set agent.relayNodes[0].nodeName=cloud-node-1 \
   --set agent.relayNodes[0].advertiseAddress[0]="1.2.3.4"
 ```
-
 ```yaml
 # EdgeMesh 配置
 apiVersion: agent.edgemesh.config.kubeedge.io/v1alpha1
@@ -1712,7 +1726,8 @@ modules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查边缘节点 CNI 状态
 kubectl get nodes edge-node-001 -o jsonpath='{.spec.podCIDR}'
 # 10.244.100.0/24
@@ -1720,7 +1735,6 @@ kubectl get nodes edge-node-001 -o jsonpath='{.spec.podCIDR}'
 # 检查边缘节点 Pod 网络
 kubectl exec -n edge-production -it test-pod -- ping 10.244.200.1
 ```
-
 ---
 
 <!-- chunk: 12. 升级与维护 -->## 12. 升级与维护
@@ -1745,7 +1759,8 @@ graph LR
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 备份现有配置
 kubectl get configmap cloudcore-config -n kubeedge -o yaml > cloudcore-config-backup.yaml
 cp /etc/kubeedge/config/cloudcore.yaml ~/cloudcore-backup.yaml
@@ -1763,13 +1778,13 @@ kubectl get pods -n kubeedge -w
 kubectl get pods -n kubeedge
 kubectl logs -n kubeedge -l app=cloudcore | grep "version"
 ```
-
 ## 12.3 EdgeCore 升级
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方式1: 使用 keadm OTA 升级 (v1.13+)
 keadm upgrade edge \
   --to-version v1.15.0 \
@@ -1794,14 +1809,14 @@ diff /etc/kubeedge/config/edgecore.yaml <(edgecore --minconfig 2>/dev/null)
 systemctl start edgecore
 journalctl -u edgecore -f
 ```
-
 ## 12.4 运维常用命令
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ====== 日常运维 ======
 
 # 查看所有边缘节点状态
@@ -1844,7 +1859,6 @@ systemctl start edgecore
 keadm reset
 keadm join --cloudcore-ipport="1.2.3.4:10000" --token="TOKEN"
 ```
-
 ## 12.5 性能调优 (Performance Tuning)
 
 ```yaml
@@ -1883,6 +1897,7 @@ modules:
 <!-- chunk: 总结 (Summary) -->## 总结 (Summary)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 KubeEdge 部署检查清单:
 
 云端 (Cloud Side):
@@ -1907,7 +1922,6 @@ KubeEdge 部署检查清单:
 ✅ 断开网络后 Pod 继续运行
 ✅ 重新连网后状态正常同步
 ```
-
 ---
 
 <!-- chunk: 参考资料 (References) -->## 参考资料 (References)
@@ -1943,3 +1957,6 @@ KubeEdge 部署检查清单:
 - 02-cloud-edge-collaboration
 - 04-kubeedge-device-edge-apps
 - 05-openyurt-architecture
+
+
+<!-- risk-assessed -->

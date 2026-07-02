@@ -30,6 +30,11 @@ prerequisites:
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Control Plane Failure
@@ -293,7 +298,8 @@ flowchart TD
 
 ### etcd 快照管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建快照（在线，无需停服）
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -307,7 +313,6 @@ ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-<timestamp>.db
 # 查看快照详情（Revision、Total Key、Hash）
 ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-<timestamp>.db -w json | jq .
 ```
-
 **快照策略**：
 | 类型 | 频率 | 保留 | 存储位置 |
 |:---|:---|:---|:---|
@@ -322,7 +327,17 @@ ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-<timestamp>.db -w json | jq .
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 停止所有 etcd 成员（确保数据一致性）
 systemctl stop etcd
 
@@ -345,13 +360,13 @@ systemctl start etcd
 # 5. 验证恢复
 ETCDCTL_API=3 etcdctl endpoint health
 ```
-
 ### etcd 成员管理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看成员列表
 ETCDCTL_API=3 etcdctl member list -w table
 
@@ -368,7 +383,6 @@ ETCDCTL_API=3 etcdctl move-leader <target-member-id>
 # 检查 leader 分布（避免单节点压力过大）
 ETCDCTL_API=3 etcdctl endpoint status --cluster -w table
 ```
-
 **成员变更注意事项**：
 - 永远不要同时添加或移除多个成员，这会改变 quorum 计算
 - 成员变更前必须确保快照已备份
@@ -393,7 +407,8 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table
 
 ### 性能监控指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 请求延迟分位数
 kubectl get --raw /metrics | grep 'apiserver_request_duration_seconds_bucket{verb="LIST"'
 
@@ -409,7 +424,6 @@ kubectl get --raw /metrics | grep 'apiserver_dropped_requests_total'
 # watch 缓存命中率
 kubectl get --raw /metrics | grep 'apiserver_cache_list_hit_total'
 ```
-
 ### 常见性能瓶颈
 
 1. **etcd 磁盘延迟过高**
@@ -430,7 +444,8 @@ kubectl get --raw /metrics | grep 'apiserver_cache_list_hit_total'
 
 ### 升级前检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认当前版本
 kubectl version
 kubeadm version
@@ -450,7 +465,6 @@ kubeadm upgrade plan
 kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 
 ```
-
 ### 升级步骤（滚动升级）
 
 **Master 节点逐个升级**：
@@ -484,7 +498,8 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 ## 预防性措施（扩展）
 
 ### 自动化运维
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 自动压缩和碎片整理（cron 任务）
 0 2 * * * ETCDCTL_API=3 etcdctl compact $(ETCDCTL_API=3 etcdctl endpoint status --write-out="json" | jq -r '.[0].Status.header.revision' | awk '{print $1 - 10000}') && ETCDCTL_API=3 etcdctl defrag
 
@@ -497,7 +512,6 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
   annotations:
     summary: "Kubernetes certificate expires in less than 7 days"
 ```
-
 ### 容量规划
 | 集群规模 | etcd 节点 | Master CPU | Master 内存 | 磁盘 IOPS |
 |:---|:---|:---|:---|:---|
@@ -536,3 +550,6 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

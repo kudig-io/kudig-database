@@ -46,6 +46,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - 云原生安全专家指南
@@ -192,7 +197,8 @@ roleRef:
 | ❌ ClusterRole用于命名空间级资源 | ✅ 优先使用命名空间级Role | ClusterRole权限作用全集群,风险更高 |
 
 **最佳实践检查清单**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 审计过度授权的角色
 kubectl get clusterrolebindings -o json | jq '.items[] | select(.subjects[]?.name=="default")'
 
@@ -202,7 +208,6 @@ kubectl get roles,clusterroles -A -o yaml | grep -E "resources:.*\*|verbs:.*\*"
 # 检查哪些SA绑定了cluster-admin
 kubectl get clusterrolebindings -o json | jq '.items[] | select(.roleRef.name=="cluster-admin") | .subjects'
 ```
-
 #### NetworkPolicy深度解析
 
 > **🔰 初学者理解**: NetworkPolicy是K8s的"内网防火墙规则"——默认情况下Pod之间可以随意通信,就像公司内网所有电脑互通。通过NetworkPolicy可以设置"只允许前端Pod访问后端API,禁止数据库被直接访问"这样的隔离规则。
@@ -328,7 +333,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试Pod间连通性
 kubectl run test-pod --rm -it --image=nicolaka/netshoot -- bash
 # 在容器内执行: curl http://<目标Pod IP>:8080
@@ -342,7 +348,6 @@ kubectl exec -n kube-system cilium-xxx -- cilium endpoint list
 # 查看NetworkPolicy详情
 kubectl get networkpolicy -A -o yaml
 ```
-
 ### 1.2 Service Mesh安全架构
 
 | 组件 | 安全功能 | 配置要点 | 监控指标 | 故障处理 |
@@ -594,7 +599,8 @@ spec:
 | ❌ 信任Docker Hub公开镜像 | ✅ 使用企业私有仓库,扫描后才允许使用 | 公开镜像可能被植入后门 |
 
 **镜像安全检查清单**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 扫描本地镜像
 trivy image nginx:1.21.0
 
@@ -610,7 +616,6 @@ syft packages nginx:1.21.0 -o cyclonedx-json > sbom.json
 # 验证镜像签名
 cosign verify --key cosign.pub registry.company.com/app:v1.0.0
 ```
-
 #### 运行时安全防护体系
 
 > **🔰 初学者理解**: 运行时安全就像安装在家里的监控摄像头——即使小偷进了门,摄像头也能发现异常行为并报警。Falco能监控容器的系统调用,当有人尝试在容器里执行`bash`反弹shell、读取`/etc/shadow`等危险操作时立即告警。
@@ -756,7 +761,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Falco告警
 kubectl logs -n falco -l app=falco --tail=100 | grep Priority
 
@@ -771,7 +777,6 @@ kubectl exec -it <pod> -- capsh --print
 kubectl exec -it <pod> -- touch /test.txt
 # 应该返回: Read-only file system
 ```
-
 ### 2.2 运行时安全防护
 
 | 防护机制 | 技术实现 | 检测能力 | 响应动作 | 性能影响 |
@@ -1123,7 +1128,8 @@ results:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Kyverno策略状态
 kubectl get clusterpolicy
 
@@ -1140,7 +1146,6 @@ kubectl describe policyreport <report-name> -n <namespace>
 kubectl get constraint -A
 kubectl describe constraint <constraint-name>
 ```
-
 #### CIS Benchmark自动化检查
 
 > **🔰 初学者理解**: CIS Benchmark是K8s的"建筑安全标准"——就像房屋需要符合消防规范一样,K8s集群也有一套安全基线标准。kube-bench工具会自动检查你的集群是否符合这些标准,给出不合格项和修复建议。
@@ -1943,7 +1948,8 @@ roleRef:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看过去7天的告警趋势
 promtool query range 'ALERTS{alertstate="firing"}' \
   --start=$(date -d '7 days ago' +%s) \
@@ -1960,7 +1966,6 @@ kubectl logs -n falco -l app=falco | jq -r '.priority' | sort | uniq -c
 # 测试响应动作(模拟攻击)
 kubectl exec -it test-pod -- bash  # 应触发Shell告警
 ```
-
 ### 4.2 安全事件响应流程
 
 ```mermaid
@@ -3069,7 +3074,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证Falco事件是否到达Kafka
 kubectl exec -n security security-events-kafka-0 -- \
   kafka-console-consumer.sh --bootstrap-server localhost:9092 \
@@ -3086,7 +3092,6 @@ kubectl run test-attack --image=alpine --command -- sh -c "cat /etc/shadow"
 kubectl exec -n monitoring prometheus-0 -- promtool query instant \
   'sum(security_alerts_routed_total) by (destination, severity)'
 ```
-
 #### CI/CD安全集成(DevSecOps)
 
 > **🔰 初学者理解**: CI/CD安全集成就像流水线上的质检站——在代码合并、镜像构建、部署发布的每个环节都自动进行安全检查,有问题立即拦截。"安全左移"意味着越早发现问题,修复成本越低。
@@ -3519,3 +3524,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

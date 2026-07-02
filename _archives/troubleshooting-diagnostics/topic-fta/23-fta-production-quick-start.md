@@ -40,6 +40,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第23章：FTA 生产环境快速启动与 SRE 集成指南
 
 > 本章面向需要在现有 [[entities/kubernetes|kubernetes]] 集群中快速落地 FTA 方法论的 SRE 和运维团队，提供从零到一的实施路线和日常工作流集成。
@@ -264,7 +269,8 @@ E8: Node NotReady
 
 **检测脚本示例**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # fta_service_unavailable_check.sh
 # FTA 底事件自动检测脚本
@@ -323,7 +329,6 @@ kubectl get nodes -o json | jq '.items[] | {
 echo ""
 echo "========== Diagnostic Complete =========="
 ```
-
 ### 第二周：配置监控告警
 
 **Week 2 Checklist**：
@@ -511,17 +516,18 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' | tail -20
 #### E4: ImagePullBackOff
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 ```
-
 **常见原因**：
 1. 镜像不存在或 Tag 错误
 2. 镜像仓库认证失败
 3. 镜像仓库网络不可达
 
 **修复步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Image 名称和 Tag
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].image}'
 
@@ -534,7 +540,6 @@ kubectl get secret <secret-name> -n <namespace>
 # 在 Node 上手动拉取镜像测试
 docker pull <image-name>
 ```
-
 **快速修复**：
 - 更正 Deployment 中的 image 字段
 - 重新创建 ImagePullSecret
@@ -543,18 +548,19 @@ docker pull <image-name>
 #### E5: CrashLoopBackOff
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name> -n <namespace> --previous  # 查看上一次运行的日志
 kubectl describe pod <pod-name> -n <namespace>
 ```
-
 **常见原因**：
 1. 应用启动失败（配置错误、依赖不可用）
 2. Liveness Probe 失败
 3. 应用代码 Bug
 
 **修复步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看容器启动日志
 kubectl logs <pod-name> -n <namespace> -c <container-name>
 
@@ -567,7 +573,6 @@ kubectl exec <pod-name> -n <namespace> -- env
 # 检查 Liveness Probe 配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].livenessProbe}'
 ```
-
 **快速修复**：
 - 修正 ConfigMap/Secret 配置
 - 调整 Liveness Probe 阈值
@@ -576,18 +581,19 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].live
 #### E6: OOMKilled
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -i "oom"
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].lastState.terminated.reason}'
 ```
-
 **常见原因**：
 1. Memory Limit 设置过低
 2. 内存泄漏
 3. 流量突增
 
 **修复步骤**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前内存限制
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].resources.limits.memory}'
 
@@ -597,7 +603,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].reso
 # 临时增加内存限制（紧急情况）
 kubectl set resources deployment/<deployment-name> -n <namespace> --limits=memory=2Gi
 ```
-
 **长期修复**：
 - 分析内存使用趋势，调整 Request/Limit
 - 排查内存泄漏（Heap Dump / Profiling）
@@ -606,18 +611,19 @@ kubectl set resources deployment/<deployment-name> -n <namespace> --limits=memor
 ### Step 3: Pod Pending 诊断（E7）
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 # 查找 "FailedScheduling" 事件
 ```
-
 **常见原因**：
 1. 集群资源不足（CPU/Memory）
 2. Node Selector / Affinity 无法满足
 3. PVC 无法绑定
 
 **修复步骤**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群可用资源
 kubectl top nodes
 kubectl describe nodes | grep -A 5 "Allocated resources"
@@ -629,7 +635,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].reso
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeSelector}'
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.affinity}'
 ```
-
 **快速修复**：
 - 删除不必要的 Pod 释放资源
 - 扩容集群（添加 Node）
@@ -641,7 +646,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.affinity}'
 #### E2: Service Selector 不匹配
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service Selector
 kubectl get svc <service-name> -n <namespace> -o jsonpath='{.spec.selector}'
 
@@ -650,30 +656,47 @@ kubectl get pods -n <namespace> --show-labels | grep <service-name>
 
 # 对比是否匹配
 ```
-
 **快速修复**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法1: 修正 Service Selector
 kubectl edit svc <service-name> -n <namespace>
 
 # 方法2: 修正 Pod Labels（修改 Deployment）
 kubectl edit deployment <deployment-name> -n <namespace>
 ```
-
 #### E1: Ingress Backend 未配置
 
 **检测**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe ingress <ingress-name> -n <namespace>
 # 查看 "Backend" 字段
 ```
-
 **快速修复**：
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit ingress <ingress-name> -n <namespace>
 # 确保 backend.service.name 和 backend.service.port 正确
 ```
-
 ## 升级路径
 
 如果以上步骤均无法解决问题：
@@ -900,7 +923,8 @@ E12: Network Policy / Firewall 阻断
 
 **快速诊断脚本**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # fta_diagnose_service_unavailable.sh
 # 基于 FTA 的自动化诊断脚本
@@ -1021,7 +1045,6 @@ echo "==========================================="
 echo "Diagnosis Complete"
 echo "==========================================="
 ```
-
 ---
 
 ## 23.3 FTA 与 SRE On-Call 工作流集成
@@ -1136,6 +1159,7 @@ route:
 
 FTA 聚合后（1 条综合告警）：
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 🔴 FTA Alert: Service Unavailable (service_unavailable)
    
    📊 Triggered Events:
@@ -1155,7 +1179,6 @@ FTA 聚合后（1 条综合告警）：
    2. Verify ConfigMap/Secret
    3. Check dependency services
 ```
-
 ### 23.3.4 On-Call Playbook 决策树
 
 **基于 FTA 的 On-Call 决策流程**：
@@ -1489,3 +1512,5 @@ OOMKilled? ✅ 是 (E6)
 | AI-2 | 对所有生产服务进行 Memory Limit 审计，识别类似风险 | Bob | 2024-01-25 | 预防 E6 |
 | AI-3 | 在 Runbook 中添加 "流量突增" 场景的快速扩容步骤 | Alice | 2024-01-20 | 改进 Runbook |
 | AI-4 | 配置 "内存使用率 > 80% 持续 5 分钟" 的预
+
+<!-- risk-assessed -->

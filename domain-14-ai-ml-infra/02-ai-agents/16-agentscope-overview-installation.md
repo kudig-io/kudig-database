@@ -38,6 +38,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: AgentScope 概述与安装入门
@@ -410,12 +415,12 @@ agentscope.init(
 
 **Docker 方式部署 Studio**（替代方案）：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 国内环境需要配置镜像加速，Docker Hub 直连可能超时
 # Podman 用户编辑 /etc/containers/registries.conf 添加 mirror
 docker run -p 3000:3000 agentscope/studio:latest
 ```
-
 **云服务器（ECS）远程访问排查**：
 
 如果在阿里云 ECS 上部署后浏览器无法访问，需检查三个层面：
@@ -747,3 +752,6 @@ python -c "import agentscope; print(agentscope.__version__)"
 ## Related
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
+
+
+<!-- risk-assessed -->

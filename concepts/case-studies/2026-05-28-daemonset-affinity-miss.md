@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-05-28] Fluent Bit DaemonSet 未在新节点部署导致日志丢失
@@ -34,7 +39,8 @@ last_updated: 2026-05-23
 ## 问题现象
 02:00，值班工程师在处理一起业务告警时，发现 Kibana 中搜索不到部分 Pod 的日志。进一步排查发现，新扩容的 3 个节点上的所有 Pod 均无日志输出到 ES。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 新节点
 kubectl get nodes
 # NAME                         STATUS   ROLES    AGE
@@ -49,20 +55,20 @@ kubectl get pods -n logging -l app=fluent-bit -o wide
 # fluent-bit-def34   0/1     Pending   <none>
 # ...
 ```
-
 ## 诊断过程
 
 **02:05** — 查看 Pending 的 Fluent Bit Pod：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod fluent-bit-def34 -n logging
 # Events:
 #   Warning  FailedScheduling  5m  ...  
 #     0/20 nodes are available: 
 #     3 node(s) didn't match Pod's node affinity/selector.
 ```
-
 **02:07** — 检查 DaemonSet 的 nodeAffinity：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get daemonset fluent-bit -n logging -o yaml | grep -A20 nodeAffinity
 # nodeAffinity:
 #   requiredDuringSchedulingIgnoredDuringExecution:
@@ -74,16 +80,15 @@ kubectl get daemonset fluent-bit -n logging -o yaml | grep -A20 nodeAffinity
 #         - worker
 #         - monitor
 ```
-
 **02:09** — 检查新节点的 label：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node ip-10-0-8-10.ec2.internal --show-labels
 # NAME                        STATUS   LABELS
 # ip-10-0-8-10.ec2.internal   Ready    beta.kubernetes.io/arch=amd64,...
 #                                       kubernetes.io/os=linux,...
 # （缺少 node-type=worker label）
 ```
-
 **02:11** — 检查节点扩容流程：
 ```bash
 # Cluster Autoscaler 扩容的节点使用新的 Launch Template (v3.2)
@@ -106,34 +111,34 @@ kubectl get node ip-10-0-8-10.ec2.internal --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 for node in ip-10-0-8-10.ec2.internal ip-10-0-8-11.ec2.internal ip-10-0-8-12.ec2.internal; do
   kubectl label node $node node-type=worker --overwrite
 done
 ```
-
 **02:18** — 验证 DaemonSet Pod 启动：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n logging -l app=fluent-bit -o wide
 # NAME               READY   STATUS    NODE
 # fluent-bit-abc12   1/1     Running   ip-10-0-8-10.ec2.internal
 # fluent-bit-def34   1/1     Running   ip-10-0-8-11.ec2.internal
 # fluent-bit-ghi56   1/1     Running   ip-10-0-8-12.ec2.internal
 ```
-
 **02:20** — 验证日志收集：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n logging fluent-bit-def34 -- ls /var/log/containers | head
 # order-api-xxx_prod-order_order-api-xxx.log
 # payment-api-xxx_prod-payment_payment-api-xxx.log
 
 # Kibana 查询确认日志已恢复
 ```
-
 **02:25** — 修复 Launch Template v3.2：
 ```bash
 # 在 user-data 中添加节点 label 初始化
@@ -159,3 +164,6 @@ EOF
   4. 添加告警：`fluent_bit_desired_pods != fluent_bit_current_pods`
 - **相关 Skill**: [[ts-node-components]]
 - **相关 FTA**: [[daemonset-fta]]
+
+
+<!-- risk-assessed -->

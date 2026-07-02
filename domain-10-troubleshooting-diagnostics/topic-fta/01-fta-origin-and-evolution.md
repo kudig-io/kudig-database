@@ -38,6 +38,11 @@ component: 01 Origin And Evolution
 severity: high
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第一章：FTA 起源与发展史
@@ -192,3 +197,6 @@ FTA 的工程应用受到一系列国际标准的规范和指导：
 - [[domain-10-troubleshooting-diagnostics/topic-fta/symptom-vector-matcher.md|symptom-vector-matcher]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
+
+
+<!-- risk-assessed -->

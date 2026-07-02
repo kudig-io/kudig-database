@@ -56,6 +56,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Flink on Kubernetes：部署、Checkpoint、Savepoint 与自动扩缩容
@@ -98,7 +103,8 @@ Application 模式的优势在于：Job 的 main 方法在 JobManager 中运行�
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Flink Operator Helm 仓库
 helm repo add flink-operator-repo https://downloads.apache.org/flink/flink-kubernetes-operator-1.8.0/
 helm repo update
@@ -107,15 +113,14 @@ helm repo update
 kubectl create namespace flink
 helm install flink-kubernetes-operator flink-operator-repo/flink-kubernetes-operator -n flink
 ```
-
 安装后检查 operator 与 webhook：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 operator Pod 与 webhook 服务正常
 kubectl get pods -n flink
 kubectl get svc -n flink
 ```
-
 ## 3. 应用模式部署
 
 ### 3.1 提交 Flink 应用
@@ -150,14 +155,14 @@ spec:
 
 创建后查看作业状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 FlinkDeployment 状态
 kubectl get flinkdeployment realtime-etl -n flink -o jsonpath='{.status.jobManagerDeploymentStatus}{"\n"}{.status.jobStatus.state}'
 
 # 查看 JobManager 与 TaskManager Pod
 kubectl get pods -n flink -l app=realtime-etl
 ```
-
 ### 3.2 使用阿里云 OSS 作为依赖存储
 
 在专有云 ASO 或 ACK 中，可将作业 JAR 与依赖存放在阿里云 OSS，并通过 `jarURI` 引用 OSS 路径。需在 Flink 镜像中集成 OSS Hadoop 依赖并配置 `fs.oss.endpoint`。
@@ -210,12 +215,12 @@ Savepoint 用于有计划地停止并恢复作业，例如版本升级或逻辑�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 触发 Savepoint，Flink Operator 会协调创建并记录路径
 kubectl annotate flinkdeployment realtime-etl -n flink \
   flink.apache.org/savepoint-trigger-id="upgrade-$(date +%s)"
 ```
-
 升级时通过 `initialSavepointPath` 从 Savepoint 恢复：
 
 ```yaml
@@ -259,12 +264,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 编辑 FlinkDeployment，修改 job.parallelism 与 taskManager.replicas
 kubectl patch flinkdeployment realtime-etl -n flink --type merge \
   -p '{"spec":{"job":{"parallelism":8},"taskManager":{"replicas":4}}}'
 ```
-
 ## 7. 状态后端与存储
 
 ### 7.1 RocksDB 调优
@@ -332,11 +337,11 @@ spec:
 
 建议将 Flink Pod 日志统一采集到阿里云 SLS 或 ELK，便于快速定位 Checkpoint 失败、反压与 OOM 等生产问题：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 JobManager 最近异常日志
 kubectl logs -n flink deployment/realtime-etl --tail=200 | grep -iE "error|exception|failed"
 ```
-
 ## 10. 升级与变更管理
 
 Flink 作业升级是高风险操作，任何镜像或配置变更都可能导致状态不兼容。升级前应先在测试环境使用相同数据量验证 Savepoint 恢复流程，确认业务指标无异常后再上生产。Flink 作业升级应遵循以下流程：
@@ -359,11 +364,11 @@ spec:
 
 ### 11.1 Checkpoint 超时
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Flink UI 或 Pod 日志定位具体失败原因
 kubectl logs -n flink deployment/realtime-etl --tail=500 | grep -i checkpoint
 ```
-
 常见原因：
 
 - 网络带宽不足，导致快照上传慢。
@@ -372,12 +377,12 @@ kubectl logs -n flink deployment/realtime-etl --tail=500 | grep -i checkpoint
 
 ### 11.2 TaskManager OOM
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 TaskManager 资源使用与重启次数
 kubectl top pod -n flink -l app=realtime-etl,component=taskmanager
 kubectl get pods -n flink -l app=realtime-etl,component=taskmanager
 ```
-
 处理措施：
 
 1. 增加 TaskManager 内存。
@@ -386,11 +391,11 @@ kubectl get pods -n flink -l app=realtime-etl,component=taskmanager
 
 ### 11.3 作业卡在 RECONCILING
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 FlinkDeployment 事件与状态
 kubectl describe flinkdeployment realtime-etl -n flink
 ```
-
 常见原因：CR 配置与现有状态冲突、Savepoint 路径不可达、资源配额不足。
 
 ### 11.4 Kafka 消费延迟持续增加
@@ -439,7 +444,8 @@ kubectl describe flinkdeployment realtime-etl -n flink
 
 ### 排查命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Flink Web UI 反压状态
 kubectl port-forward svc/wordcount-app-rest 8081:8081 -n flink
 
@@ -449,10 +455,11 @@ kubectl logs -f deployment/wordcount-app -n flink
 # 查看 TaskManager 资源使用
 kubectl top pod -l app=wordcount-app -n flink
 ```
-
 ## 14. 相关文档
 
 - [[domain-16-database-middleware/06-data-streaming/01-cdc-change-data-capture.md|CDC 变更数据捕获]]
 - [[domain-16-database-middleware/06-data-streaming/02-stream-processing-overview.md|流处理概述]]
 
 ```
+
+<!-- risk-assessed -->

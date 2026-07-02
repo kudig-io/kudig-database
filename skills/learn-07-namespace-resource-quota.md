@@ -30,6 +30,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第七课：Namespace 与资源隔离
@@ -105,6 +110,7 @@ Cluster = K8s 集群
 ### 2.1 查看 Namespace
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【查看所有 Namespace】
 
 kubectl get namespaces
@@ -124,13 +130,13 @@ kubectl get pods -n development
 kubectl get services -n staging
 kubectl get all -n production
 ```
-
 ### 2.2 创建 Namespace
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【方式一：命令行】
 
 kubectl create namespace development
@@ -158,10 +164,10 @@ spec:
   - name: nginx
     image: nginx:1.21
 ```
-
 ### 2.3 设置默认 Namespace
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【切换默认 Namespace】
 
 kubectl config set-context --current --namespace=development
@@ -174,7 +180,6 @@ kubectl config view --minify | grep namespace
 
 使用 kubecontext 插件或 zsh 插件可以快速切换命名空间。
 ```
-
 ---
 
 ## 3. 资源配额 (ResourceQuota)
@@ -216,6 +221,7 @@ spec:
 ### 3.3 查看配额使用
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【查看配额】
 
 kubectl describe resourcequota -n development
@@ -232,7 +238,6 @@ pods         15    50
 requests.cpu 2     10
 requests.memory   4Gi    20Gi
 ```
-
 ---
 
 ## 4. 限制范围 (LimitRange)
@@ -335,7 +340,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【错误信息】
 
 "exceeded quota" 或 "Cannot create <resource> in namespace"
@@ -356,7 +371,6 @@ spec:
    kubectl delete pod --field-selector=status.phase!=Running -n <namespace>
    kubectl delete deployment --field-selector=status.phase!=Running -n <namespace>
 ```
-
 ### 6.2 无法创建资源
 
 ```
@@ -381,6 +395,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【命令速查】
 
 查看 Namespace：
@@ -417,7 +432,6 @@ kubectl describe resourcequota -n <namespace>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -432,3 +446,6 @@ kubectl describe resourcequota -n <namespace>
 - [[skills/learn-09-hpa-basics.md|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
+
+
+<!-- risk-assessed -->

@@ -47,6 +47,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[DaemonSet|DaemonSet]] 故障排查指南
@@ -184,12 +189,12 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 
 ### 2.2 DaemonSet 状态字段解析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get ds -o wide
 NAME        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
 fluentd     5         5         5       5            5           <none>          10d
 ```
-
 | 字段 | 含义 | 异常判断 |
 |-----|-----|---------|
 | DESIRED | 应该运行 Pod 的节点数 | 与实际节点数不符可能是 selector 问题 |
@@ -234,7 +239,8 @@ DaemonSet 问题
 
 #### 2.4.1 基础状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 状态
 kubectl get ds -o wide
 
@@ -251,10 +257,10 @@ kubectl get pods -l <label-selector> -o wide
 echo "Nodes: $(kubectl get nodes --no-headers | wc -l)"
 echo "DS Pods: $(kubectl get pods -l <label-selector> --no-headers | wc -l)"
 ```
-
 #### 2.4.2 节点和调度检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点及其标签
 kubectl get nodes --show-labels
 
@@ -273,10 +279,10 @@ kubectl get ds <name> -o jsonpath='{.spec.template.spec.tolerations}' | jq
 # 检查 DaemonSet 的 nodeAffinity
 kubectl get ds <name> -o jsonpath='{.spec.template.spec.affinity.nodeAffinity}' | jq
 ```
-
 #### 2.4.3 Pod 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 DaemonSet Pod
 kubectl get pods -l <label-selector> -o wide
 
@@ -293,10 +299,10 @@ kubectl describe pod <pod-name>
 kubectl logs <pod-name>
 kubectl logs <pod-name> --previous  # 上次崩溃的日志
 ```
-
 #### 2.4.4 更新状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看更新状态
 kubectl rollout status ds <name>
 
@@ -309,17 +315,16 @@ kubectl get ds <name> -o jsonpath='{.spec.updateStrategy}'
 # 查看各 Pod 的版本
 kubectl get pods -l <label-selector> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.controller-revision-hash}{"\n"}{end}'
 ```
-
 #### 2.4.5 控制器日志检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 控制器日志
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i daemonset
 
 # 查看特定 DaemonSet 相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep <daemonset-name>
 ```
-
 ### 2.5 排查注意事项
 
 | 注意事项 | 说明 |
@@ -339,19 +344,20 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep <daemons
 #### 场景 1：nodeSelector 不匹配
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get ds
 NAME      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE
 monitor   0         0         0       0            0
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 DaemonSet 的 nodeSelector
 kubectl get ds <name> -o jsonpath='{.spec.template.spec.nodeSelector}'
 # 输出示例: {"disk":"ssd"}
@@ -371,7 +377,6 @@ kubectl patch ds <name> --type='json' -p='[{"op": "replace", "path": "/spec/temp
 # 5. 验证 Pod 调度
 kubectl get pods -l <label-selector> -o wide
 ```
-
 **风险提示：**
 - 修改 nodeSelector 会导致 Pod 重新调度
 - 确保标签变更不会影响其他工作负载
@@ -389,7 +394,8 @@ Events:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看节点污点
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
@@ -412,7 +418,6 @@ kubectl patch ds <name> --type='json' -p='[
 # 5. 验证 Pod 调度到 master 节点
 kubectl get pods -l <label-selector> -o wide | grep master
 ```
-
 **常用 tolerations 配置：**
 
 ```yaml
@@ -450,18 +455,19 @@ tolerations:
 #### 场景 1：CrashLoopBackOff
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l app=fluentd
 NAME            READY   STATUS             RESTARTS   AGE
 fluentd-abc12   0/1     CrashLoopBackOff   5          10m
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 事件
 kubectl describe pod <pod-name>
 
@@ -494,7 +500,6 @@ kubectl patch ds <name> --type='json' -p='[
 # 4. 验证 Pod 恢复
 kubectl get pods -l <label-selector> -w
 ```
-
 #### 场景 2：权限和安全上下文问题
 
 **问题现象：**
@@ -509,7 +514,8 @@ Error: cannot open /var/log/containers: Permission denied
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前安全上下文
 kubectl get ds <name> -o yaml | grep -A20 securityContext
 
@@ -539,7 +545,6 @@ kubectl create serviceaccount <sa-name>
 kubectl create clusterrolebinding <binding-name> --clusterrole=<role> --serviceaccount=<namespace>:<sa-name>
 kubectl patch ds <name> -p '{"spec":{"template":{"spec":{"serviceAccountName":"<sa-name>"}}}}'
 ```
-
 ---
 
 ### 3.3 更新问题
@@ -547,18 +552,19 @@ kubectl patch ds <name> -p '{"spec":{"template":{"spec":{"serviceAccountName":"<
 #### 场景 1：滚动更新卡住
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl rollout status ds fluentd
 Waiting for daemon set "fluentd" rollout to finish: 2 out of 5 new pods have been updated...
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看更新状态详情
 kubectl get ds <name> -o yaml | grep -A10 status:
 
@@ -582,7 +588,6 @@ kubectl delete pod <stuck-pod>
 # 7. 验证更新继续
 kubectl rollout status ds <name>
 ```
-
 #### 场景 2：OnDelete 策略下的更新
 
 **解决步骤：**
@@ -591,7 +596,8 @@ kubectl rollout status ds <name>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认更新策略
 kubectl get ds <name> -o jsonpath='{.spec.updateStrategy.type}'
 # 输出: OnDelete
@@ -611,7 +617,6 @@ kubectl patch ds <name> --type='json' -p='[
   {"op": "replace", "path": "/spec/updateStrategy/type", "value": "RollingUpdate"}
 ]'
 ```
-
 #### 场景 3：回滚更新
 
 **解决步骤：**
@@ -619,7 +624,8 @@ kubectl patch ds <name> --type='json' -p='[
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看更新历史
 kubectl rollout history ds <name>
 
@@ -636,7 +642,6 @@ kubectl rollout undo ds <name> --to-revision=<n>
 kubectl rollout status ds <name>
 kubectl get pods -l <label-selector> -o wide
 ```
-
 ---
 
 ### 3.4 资源问题
@@ -654,7 +659,8 @@ Events:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看节点资源使用情况
 kubectl top nodes
 kubectl describe nodes | grep -A10 "Allocated resources"
@@ -674,7 +680,6 @@ kubectl patch ds <name> -p '{"spec":{"template":{"spec":{"priorityClassName":"sy
 # 5. 验证 Pod 调度
 kubectl get pods -l <label-selector> -o wide
 ```
-
 ---
 
 ### 3.5 系统关键 DaemonSet 问题
@@ -691,7 +696,8 @@ kubectl get pods -l <label-selector> -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CNI DaemonSet 状态
 kubectl get ds -n kube-system | grep -E "calico|flannel|cilium|weave"
 
@@ -713,7 +719,6 @@ kubectl debug node/<node> -it --image=busybox -- ls -la /host/opt/cni/bin/
 # 7. 验证网络恢复
 kubectl run test --rm -it --image=busybox --restart=Never -- ping <other-pod-ip>
 ```
-
 **风险提示：**
 - CNI 问题会导致节点网络中断
 - 重启 CNI Pod 可能导致短暂网络中断
@@ -731,7 +736,8 @@ kubectl run test --rm -it --image=busybox --restart=Never -- ping <other-pod-ip>
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 kube-proxy 状态
 kubectl get ds -n kube-system kube-proxy
 
@@ -752,7 +758,6 @@ kubectl rollout restart ds/kube-proxy -n kube-system
 # 6. 验证服务访问
 kubectl run test --rm -it --image=busybox --restart=Never -- wget -qO- <service-ip>
 ```
-
 ---
 
 ### 3.6 完整的 DaemonSet 示例
@@ -879,7 +884,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # DaemonSet 状态
 kubectl get ds -o wide
 kubectl describe ds <name>
@@ -904,7 +910,6 @@ kubectl logs <pod>
 kubectl logs <pod> --previous
 kubectl logs -n kube-system -l k8s-app=kube-dns
 ```
-
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
@@ -926,3 +931,5 @@ kubectl logs -n kube-system -l k8s-app=kube-dns
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

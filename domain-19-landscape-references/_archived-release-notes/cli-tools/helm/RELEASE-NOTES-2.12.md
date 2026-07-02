@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.12 Release Notes
@@ -76,3 +81,5 @@ The [Quickstart Guide](https://docs.helm.sh/using_helm/#quickstart-guide) will g
 - bump version to v2.12.3 eecf22f77df5f65c823aacd2dbd30ae6c65f186e (Matthew Fisher)
 - fix: ignore pax header "file"s in chart validation 940400b5a635e9e7e0028786c3d58e3ce2ca4069 (Geoff Baskwill)
 - fix: use RFC 1123 subdomains for name verification (#5132) 4268e69a2a7fa69952c02dbc8ad7b77f0bbdc16a (Matthew Fisher)
+
+<!-- risk-assessed -->

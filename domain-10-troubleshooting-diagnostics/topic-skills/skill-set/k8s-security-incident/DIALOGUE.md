@@ -26,6 +26,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Security Incident Response 远程顾问对话脚本
 
@@ -79,7 +84,8 @@ relationships:
 
 顾问："现在开始第一轮诊断。在安全事件中，**证据保全优先于修复**。请执行以下只读命令并粘贴完整输出：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认当前安全上下文
 kubectl auth whoami
 
@@ -89,7 +95,6 @@ kubectl get pod <pod-name> -n <namespace> -o wide
 # 查看异常 Pod 的 SecurityContext
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext}{.spec.containers[0].securityContext}'
 ```
-
 > **如果无法执行 kubectl**：请通过集群管理控制台（如 Rancher、OpenShift Console）查看 Pod 详情，或者请有权限的同事执行并截图。
 
 > **⚠️ 关键提醒**：在收集证据前，**不要删除或重启**任何可疑 Pod，以免破坏取证线索。"
@@ -100,7 +105,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext}{.
 
 顾问："发现特权容器或 root 运行配置。这是高危配置。请**立即**执行证据收集：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 收集 Pod 完整配置
 kubectl get pod <pod-name> -n <namespace> -o yaml > /tmp/suspicious-pod-<pod-name>.yaml
 
@@ -110,7 +116,6 @@ kubectl get events --field-selector involvedObject.name=<pod-name> -n <namespace
 # 查看 Pod 的网络策略（如有）
 kubectl get networkpolicy -n <namespace>
 ```
-
 > **如果无法执行**：请通过控制台截图保存 Pod 配置页面，或请同事协助导出 YAML。
 
 当前优先级评估：
@@ -124,7 +129,8 @@ kubectl get networkpolicy -n <namespace>
 
 顾问："异常网络连接已确认。请**立即**收集网络证据：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的 ServiceAccount 和 RBAC 权限
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.serviceAccountName}'
 kubectl auth can-i --list --as=system:serviceaccount:<namespace>:<sa-name>
@@ -136,7 +142,6 @@ kubectl get networkpolicy -n <namespace> -o yaml
 # SSH 到节点后执行
 ss -ntp | grep <pod-ip>
 ```
-
 > **如果无法 SSH 到节点**：请尝试：
 > **替代方案 A**：通过云厂商控制台查看节点网络流日志（VPC Flow Logs）
 > **替代方案 B**：在集群内启动诊断 Pod 执行抓包：`kubectl run tcpdump --rm -it --image=nicolaka/netshoot -- tcpdump -i any host <pod-ip>`
@@ -153,7 +158,8 @@ ss -ntp | grep <pod-ip>
 
 顾问："可疑镜像已确认。请**立即**收集镜像证据：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看镜像完整信息
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].image}'
 
@@ -163,7 +169,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.imagePullSecrets}'
 # 查看使用的 ServiceAccount
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.serviceAccountName}'
 ```
-
 > **如果无法获取镜像详情**：请通过容器运行时命令检查：
 > **替代方案 A**：SSH 到节点执行 `crictl images | grep <image-name>` 或 `docker images | grep <image-name>`
 > **替代方案 B**：查看镜像仓库的审计日志，确认镜像推送者和推送时间
@@ -180,7 +185,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.serviceAccountName
 
 顾问："审计日志异常需要立即分析。请收集以下信息：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看审计日志中该用户的访问记录（如日志在集群内）
 kubectl logs -n kube-system <audit-log-pod> | grep <user/ip> | tail -50
 
@@ -190,7 +196,6 @@ kubectl get clusterrolebinding,rolebinding --all-namespaces | grep <user/sa>
 # 查看敏感资源访问
 kubectl get secrets --all-namespaces -o json | jq '.items[] | {name: .metadata.name, namespace: .metadata.namespace}'
 ```
-
 > **如果无法查看审计日志**：请尝试：
 > **替代方案 A**：通过日志聚合系统（ELK / Loki / SLS）查询审计日志
 > **替代方案 B**：查看 kube-apiserver 的审计日志文件（如可访问 master 节点）：`/var/log/kubernetes/audit.log`
@@ -215,7 +220,8 @@ kubectl get secrets --all-namespaces -o json | jq '.items[] | {name: .metadata.n
 
 顾问："容器逃逸风险极高。请**立即**执行风险评估：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 的挂载配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.volumes}' | jq .
 
@@ -229,7 +235,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].secu
 # crictl ps | grep <pod-name>
 # crictl inspect <container-id>
 ```
-
 > **如果无法 SSH**：请尝试 `kubectl debug node/<node-name> -it --image=busybox`，在节点命名空间中检查挂载信息。
 
 风险评估：
@@ -245,7 +250,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].secu
 
 顾问："权限提升是严重的横向移动风险。请执行以下分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看异常 ServiceAccount 的所有绑定
 kubectl get clusterrolebinding,rolebinding --all-namespaces -o yaml | grep -B 5 -A 5 '<sa-name>'
 
@@ -258,7 +264,6 @@ kubectl get secret -n <namespace> | grep <sa-name>
 # 查看 Token 的使用记录（如审计日志可用）
 kubectl logs -n kube-system <audit-pod> | grep '<sa-name>' | tail -30
 ```
-
 > **如果无法查看审计日志**：请通过以下方式评估：
 > **替代方案 A**：检查该 ServiceAccount 关联的 Pod 列表：`kubectl get pods --all-namespaces -o json | jq '.items[] | select(.spec.serviceAccountName=="<sa-name>") | {name: .metadata.name, namespace: .metadata.namespace}'`
 > **替代方案 B**：检查最近是否有新的 ClusterRoleBinding 创建：`kubectl get clusterrolebinding --sort-by='.metadata.creationTimestamp' | tail -20`
@@ -278,7 +283,8 @@ kubectl logs -n kube-system <audit-pod> | grep '<sa-name>' | tail -30
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看该 Pod 可访问的所有 secrets
 kubectl auth can-i list secrets --as=system:serviceaccount:<namespace>:<sa-name>
 kubectl auth can-i get secrets --as=system:serviceaccount:<namespace>:<sa-name>
@@ -301,7 +307,6 @@ spec:
   - Egress
 EOF
 ```
-
 > **如果无法创建 NetworkPolicy**：请尝试：
 > **替代方案 A**：通过云厂商安全组 / 防火墙规则限制该 Pod 所在节点的出网
 > **替代方案 B**：如果是 [[entities/cilium.md|Cilium]]，使用 Calico NetworkPolicy 或 CiliumNetworkPolicy 限制
@@ -318,7 +323,8 @@ EOF
 
 顾问："供应链攻击影响范围广，需要全面评估。请执行以下分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看使用该镜像的所有 Pod
 kubectl get pods --all-namespaces -o json | \
   jq '.items[] | select(.spec.containers[].image | contains("<image-name>")) | {name: .metadata.name, namespace: .metadata.namespace}'
@@ -329,7 +335,6 @@ kubectl get pods --all-namespaces -o json | \
 # 查看 Deployment/StatefulSet/DaemonSet 中使用该镜像的所有工作负载
 kubectl get deployment,statefulset,daemonset --all-namespaces -o yaml | grep -B 10 '<image-name>'
 ```
-
 > **如果无法分析镜像**：请尝试：
 > **替代方案 A**：通过镜像仓库 Web UI 查看镜像的构建历史和签名信息
 > **替代方案 B**：检查 CI/CD 流水线日志，确认最近是否有异常构建或推送
@@ -346,7 +351,8 @@ kubectl get deployment,statefulset,daemonset --all-namespaces -o yaml | grep -B 
 
 顾问："内部威胁或配置漂移需要追踪变更来源。请执行以下分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看最近 24 小时的 RBAC 变更
 kubectl get clusterrolebinding,rolebinding,clusterrole,role --all-namespaces -o yaml | grep -E 'creationTimestamp|uid'
 
@@ -356,7 +362,6 @@ kubectl get configmap,secret --all-namespaces -o yaml | grep -E 'creationTimesta
 # 查看最近的审计事件（如可用）
 kubectl logs -n kube-system <audit-log-pod> | grep -E 'create|update|delete|patch' | grep -E 'rbac|secret|configmap|networkpolicy' | tail -50
 ```
-
 > **如果无法查看审计日志**：请尝试：
 > **替代方案 A**：检查 GitOps 仓库（ArgoCD / Flux）的提交历史，确认最近是否有异常变更
 > **替代方案 B**：检查 CI/CD 流水线的最近执行记录
@@ -386,19 +391,29 @@ kubectl logs -n kube-system <audit-log-pod> | grep -E 'create|update|delete|patc
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标记节点不可调度
 kubectl cordon <node-name>
 
 # 如果确认已逃逸，考虑隔离节点网络
 # 通过云厂商安全组限制节点出网
 ```
-
 > **如果无法 cordon**：请立即联系集群管理员执行。如果管理员不可用，请通过云厂商控制台将节点从负载均衡器中移除。
 
 步骤 2：保存证据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出可疑 Pod 的完整信息
 kubectl get pod <pod-name> -n <namespace> -o yaml > /tmp/evidence-pod-<pod-name>.yaml
 
@@ -408,7 +423,6 @@ kubectl get node <node-name> -o yaml > /tmp/evidence-node-<node-name>.yaml
 # 保存容器日志
 kubectl logs <pod-name> -n <namespace> --previous > /tmp/evidence-pod-<pod-name>.log
 ```
-
 > **如果无法保存日志**：请确保日志已采集到外部系统（ELK / Loki），并标记保留。
 
 步骤 3：评估是否需要终止节点
@@ -431,14 +445,23 @@ kubectl logs <pod-name> -n <namespace> --previous > /tmp/evidence-pod-<pod-name>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除异常的 ClusterRoleBinding
 kubectl delete clusterrolebinding <suspicious-binding>
 
 # 删除异常的 RoleBinding
 kubectl delete rolebinding <suspicious-binding> -n <namespace>
 ```
-
 > **如果无法删除**：请立即联系集群管理员。删除前请确认：
 > 1. 该绑定不是生产必需的
 > 2. 已备份绑定配置（`kubectl get clusterrolebinding <name> -o yaml`）
@@ -449,25 +472,25 @@ kubectl delete rolebinding <suspicious-binding> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除可疑 ServiceAccount 的 Token Secret
 kubectl delete secret <sa-token-secret> -n <namespace>
 
 # 或重新创建 ServiceAccount
 kubectl delete sa <suspicious-sa> -n <namespace>
 ```
-
 > **如果无法删除 Token**：请考虑：
 > 1. 创建新的 ServiceAccount 并更新 Pod 引用
 > 2. 如果 Pod 无法直接更新，考虑重建 Deployment
 
 步骤 3：审计权限范围
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否还有其他过度授权
 kubectl get clusterrolebinding,rolebinding --all-namespaces -o yaml | grep -E 'cluster-admin|edit|admin'
 ```
-
 > **升级**：RBAC 滥用属于 **P1**，如果涉及 cluster-admin 或敏感数据访问，升级到 **P0**。"
 
 #### 分支 3.3：恶意镜像事件遏制
@@ -482,14 +505,14 @@ kubectl get clusterrolebinding,rolebinding --all-namespaces -o yaml | grep -E 'c
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 缩容受影响 Deployment（不删除，保留证据）
 kubectl scale deployment <deployment-name> -n <namespace> --replicas=0
 
 # 或暂停 DaemonSet
 kubectl patch daemonset <daemonset-name> -n <namespace> -p '{"spec":{"template":{"spec":{"nodeSelector":{"non-existing":"true"}}}}}'
 ```
-
 > **如果无法 scale**：请考虑：
 > 1. 通过 NetworkPolicy 阻断该 Pod 的网络通信
 > 2. 通过 PodDisruptionBudget 限制
@@ -506,11 +529,11 @@ kubectl patch daemonset <daemonset-name> -n <namespace> -p '{"spec":{"template":
 
 步骤 3：扫描和替换镜像
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用可信镜像替换
 kubectl set image deployment/<deployment-name> <container>=<trusted-image>:<tag> -n <namespace>
 ```
-
 > **升级**：恶意镜像属于 **P0-CRITICAL**，如果镜像是 DaemonSet 使用的，立即升级到最高优先级。"
 
 #### 分支 3.4：数据泄露事件遏制
@@ -524,7 +547,8 @@ kubectl set image deployment/<deployment-name> <container>=<trusted-image>:<tag>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建临时出网限制 NetworkPolicy
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -541,7 +565,6 @@ spec:
   egress: []
 EOF
 ```
-
 > **如果无法创建 NetworkPolicy**：请尝试：
 > 1. 通过云厂商安全组限制节点出网
 > 2. 通过 Calico GlobalNetworkPolicy 限制
@@ -552,12 +575,12 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果 secrets 可能被读取，立即更新
 kubectl delete secret <potentially-leaked-secret> -n <namespace>
 # 重新创建新的 secret，并更新引用它的所有 Pod
 ```
-
 > **如果无法立即轮换**：请评估泄露范围，优先轮换数据库密码、云厂商 API 密钥等高敏感凭证。
 
 步骤 3：通知相关方
@@ -652,7 +675,8 @@ aliyun sas DescribeCheckWarningSummary
 > 3. 是否有异常登录或操作记录？
 
 **步骤 2：ACK安全组件检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Security Center Agent
 kubectl get pods -n kube-system | grep security
 
@@ -665,7 +689,6 @@ kubectl get psp
 # 检查镜像扫描结果
 aliyun cr GET /repos/<ns>/<repo>/scanResults
 ```
-
 **步骤 3：专有云安全特殊考虑**
 - 专有云有独立的合规要求
 - 检查天基安全审计日志
@@ -720,3 +743,6 @@ aliyun cr GetRepoScanResult --RepoNamespace <ns> --RepoName <repo> --Tag <tag>
 ## Related
 
 - [[entities/deployment.md|Deployment]]
+
+
+<!-- risk-assessed -->

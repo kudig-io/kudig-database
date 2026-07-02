@@ -43,6 +43,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点驱逐与维护 kubectl drain
@@ -522,7 +527,17 @@ Delete API (不推荐):
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 驱逐节点上的 Pod
 kubectl drain node-1 \
   --delete-emptydir-data \
@@ -538,7 +553,6 @@ kubectl wait --for=condition=Ready node/node-1 --timeout=300s
 # 4. 恢复调度
 kubectl uncordon node-1
 ```
-
 ### 场景 2: 集群升级时 drain
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -546,7 +560,17 @@ kubectl uncordon node-1
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 逐个升级 worker 节点
 for node in $(kubectl get nodes -l node-role.kubernetes.io/worker -o name); do
     echo "Upgrading $node..."
@@ -571,7 +595,6 @@ for node in $(kubectl get nodes -l node-role.kubernetes.io/worker -o name); do
     kubectl wait --for=condition=Ready $node --timeout=120s
 done
 ```
-
 ### 场景 3: 配置 PodDisruptionBudget 保护关键应用
 
 ```yaml
@@ -613,7 +636,8 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # drain 所有 worker 节点
 kubectl drain -l node-role.kubernetes.io/worker= \
   --delete-emptydir-data \
@@ -624,13 +648,13 @@ kubectl drain -l topology.kubernetes.io/zone=us-west-2a \
   --delete-emptydir-data \
   --ignore-daemonsets
 ```
-
 ### 场景 5: 强制 drain (跳过 PDB)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 警告: 会违反 PDB 约束，仅在紧急情况使用
 kubectl drain node-1 \
   --delete-emptydir-data \
@@ -639,7 +663,6 @@ kubectl drain node-1 \
   --grace-period=0 \
   --force
 ```
-
 ## 配置示例
 
 ### 全面的 PDB 配置
@@ -738,7 +761,17 @@ data:
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # cordon 节点 (停止调度)
 kubectl cordon node-1
 # node/node-1 cordoned
@@ -775,13 +808,22 @@ kubectl get nodes
 # node-1    Ready    control-plane   30d   v1.28.0
 # node-2    Ready    <none>          30d   v1.28.0
 ```
-
 ### drain 时 PDB 阻止
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 设置 PDB: 最少 2 个 Pod 可用
 kubectl get pdb web-pdb -o yaml
 # apiVersion: policy/v1
@@ -814,10 +856,10 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 # pod/web-abc evicted
 # node/node-1 drained
 ```
-
 ### 查看 drain 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看哪些节点被 cordon
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.unschedulable}{"\n"}{end}'
 # node-1    false
@@ -829,7 +871,6 @@ kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=node-1
 # 查看事件 (drain 过程中的 eviction 事件)
 kubectl get events --field-selector reason=Evicted -A
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -861,3 +902,6 @@ kubectl get events --field-selector reason=Evicted -A
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

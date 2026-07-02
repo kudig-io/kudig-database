@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -85,7 +90,8 @@ relationships:
 
 按“先看 Pod 事件、再看节点资源、再看调度器日志”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 列表与状态
 kubectl get pod -n flashsale | grep Pending
 
@@ -111,7 +117,6 @@ kubectl get resourcequota -n flashsale -o yaml
 # 8. 查看 HPA 当前状态与目标副本数
 kubectl get hpa -n flashsale flashsale-api -o yaml
 ```
-
 ## 根因分析
 
 经过排查，发现 `flashsale` 命名空间内大量 Pod 的 Events 中出现以下信息：
@@ -158,7 +163,8 @@ aliyun cs POST /clusters/ack-zyy-prod-05/nodepools \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment flashsale-api -n flashsale --type='json' -p='[
   {"op": "add", "path": "/spec/template/spec/affinity", "value": {
     "nodeAffinity": {
@@ -169,29 +175,29 @@ kubectl patch deployment flashsale-api -n flashsale --type='json' -p='[
   }}
 ]'
 ```
-
 **第四步：优化 HPA 目标利用率与资源申请，避免过度申请**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment flashsale-api -n flashsale --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/cpu", "value": "300m"},
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/memory", "value": "512Mi"}
 ]'
 ```
-
 **第五步：临时缩减非核心副本数，为秒杀核心服务释放资源**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale deployment flashsale-log-collector -n flashsale --replicas=2
 kubectl scale deployment flashsale-report -n flashsale --replicas=1
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 节点池最大节点数已调整
 aliyun cs GET /clusters/ack-zyy-prod-05/nodepools/np-zyy-flashsale | jq '.auto_scaling.max_instances'
 
@@ -210,7 +216,6 @@ kubectl top pod -n flashsale -l app=flashsale-api
 # 6. HPA 已触发扩容且副本数稳定
 kubectl get hpa -n flashsale flashsale-api -o jsonpath='{.status.currentReplicas}/{.status.desiredReplicas}'
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 Pod 大量 Pending 的根因是 **flashsale 命名空间资源需求超过当前节点池可用容量**。当前节点池 `np-zyy-flashsale` 最大节点数为 8，且单节点规格较小（`ecs.c7.xlarge`），HPA 扩容 80 副本后无足够 CPU/内存 可供调度。我们已完成以下处置：
@@ -264,3 +269,6 @@ kubectl get hpa -n flashsale flashsale-api -o jsonpath='{.status.currentReplicas
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

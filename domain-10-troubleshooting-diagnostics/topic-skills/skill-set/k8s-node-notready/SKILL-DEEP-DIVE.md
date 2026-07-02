@@ -46,6 +46,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s Node NotReady 深度解析
@@ -206,20 +211,20 @@ GracefulNodeShutdown 在 1.21 引入，1.24+ 默认启用。它允许节点在�
 以下命令用于在远程顾问或半自动化场景下快速收集关键证据。每个命令前说明其目的，避免变成无意义的命令堆砌。
 
 **查看节点 Ready 状态和消息**。这条命令告诉我们节点是 NotReady 还是 Unknown，以及 kubelet 给出的原因摘要：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node> -o json | jq '.status.conditions[] | select(.type=="Ready") | {status, reason, message}'
 ```
-
 **检查 NodeLease 是否过期**。Lease 的 renewTime 超过 40 秒未更新，说明 kubelet 已经停止向 API Server 上报心跳，问题多半在节点侧或网络侧：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get lease -n kube-node-lease <node> -o json | jq '{renewTime: .spec.renewTime, holderIdentity: .spec.holderIdentity}'
 ```
-
 **检查 kubelet 和 containerd 状态**。如果 SSH 可达，这是确认节点上核心组件是否存活的最直接方式：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ssh <node> 'systemctl is-active kubelet containerd && journalctl -u kubelet --since "10 min ago" | grep -E "PLEG|eviction|x509|fatal" | tail -10'
 ```
-
 **检查证书有效期**。TLS 证书问题最容易被误判为网络问题，先排除证书可以少走很多弯路：
 ```bash
 ssh <node> 'openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates'
@@ -236,3 +241,6 @@ ssh <node> 'openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -no
 ## Related
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
+
+
+<!-- risk-assessed -->

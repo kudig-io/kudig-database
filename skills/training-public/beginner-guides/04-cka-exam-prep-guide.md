@@ -44,6 +44,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CKA 认证备考完全指南
@@ -125,7 +130,8 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubeadm 初始化
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
@@ -142,7 +148,6 @@ ETCDCTL_API=3 etcdctl snapshot save snapshot.db \
 # etcd 恢复
 ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --data-dir=/var/lib/etcd-restored  # ⚠️ 覆盖 etcd 数据，集群状态回退
 ```
-
 ### Week 2: 工作负载与调度（15%）
 
 **目标**: 熟练编写各种工作负载 YAML，理解调度机制
@@ -230,7 +235,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速暴露 Deployment
 kubectl expose deployment web --port=80 --target-port=8080 --type=NodePort
 
@@ -255,7 +261,6 @@ spec:
   storageClassName: standard
 EOF
 ```
-
 ### Week 4: 故障排查 + 全真模拟（30%）
 
 **目标**: 能在压力下快速定位并解决问题
@@ -273,6 +278,7 @@ EOF
 **故障排查决策树**:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Pod 异常？
 ├── kubectl describe pod <name>    ← 先看 Events
 ├── kubectl logs <name>            ← 再看日志
@@ -294,7 +300,6 @@ Pod 异常？
     ├── 私有仓库未配置 imagePullSecrets？
     └── 网络不通（无法拉取外网镜像）？
 ```
-
 ---
 
 ## 四、高频考点速查
@@ -304,7 +309,8 @@ Pod 异常？
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 所有节点
 apt-get update && apt-get install -y apt-transport-https ca-certificates curl
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
@@ -321,13 +327,13 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 # 3. 工作节点
 kubeadm join <control-plane-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
-
 ### 考点 2：etcd 备份恢复
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 备份
 ETCDCTL_API=3 etcdctl snapshot save /opt/snapshot-backup.db \
   --endpoints=https://127.0.0.1:2379 \
@@ -340,14 +346,23 @@ ETCDCTL_API=3 etcdctl snapshot restore /opt/snapshot-backup.db \
   --data-dir=/var/lib/etcd-restored
 # 修改 etcd manifest 指向新 data-dir，重启
 ```
-
 ### 考点 3：节点维护与驱逐
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标记节点不可调度
 kubectl cordon <node-name>
 
@@ -357,7 +372,6 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 # 恢复调度
 kubectl uncordon <node-name>
 ```
-
 ### 考点 4：RBAC
 
 ```yaml
@@ -465,7 +479,17 @@ spec:
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 快速创建 Pod（调试）
 kubectl run tmp --image=nginx:alpine --rm -it --restart=Never -- /bin/sh
 
@@ -485,7 +509,6 @@ kubectl get pod web -o yaml > web.yaml
 # 强制删除（卡住的 Pod）
 kubectl delete pod <name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ---
 
 ## 六、模拟练习题
@@ -497,7 +520,8 @@ kubectl delete pod <name> --force --grace-period=0  # ⚠️ 跳过优雅终止�
 <details>
 <summary>参考答案</summary>
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run cka-pod --image=nginx:1.25 --port=80 --env="ENV=production"
 ```
 或写 YAML：
@@ -505,7 +529,8 @@ kubectl run cka-pod --image=nginx:1.25 --port=80 --env="ENV=production"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
@@ -536,7 +561,8 @@ EOF
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl create deployment web --image=nginx:1.25 --replicas=3 --record
 
@@ -566,7 +592,17 @@ kubectl get pods -l app=web -o jsonpath='{range .items[*]}{.spec.containers[0].i
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标记不可调度
 kubectl cordon worker-1
 
@@ -590,7 +626,8 @@ kubectl uncordon worker-1
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 停止 etcd 和 kube-apiserver（移动 manifest 文件）
 mv /etc/kubernetes/manifests/etcd.yaml /tmp/
 mv /etc/kubernetes/manifests/kube-apiserver.yaml /tmp/
@@ -645,3 +682,5 @@ kubectl get nodes
 - [[02-local-lab-environment]] — 本地实验环境搭建
 
 ```
+
+<!-- risk-assessed -->

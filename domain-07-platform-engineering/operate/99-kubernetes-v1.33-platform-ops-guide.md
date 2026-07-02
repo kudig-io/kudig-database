@@ -41,6 +41,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] v1.29-v1.33 平台运维新特性指南
@@ -135,7 +140,8 @@ v1.29 → v1.30 → v1.31 → v1.32 → v1.33
 
 ### 1.2 升级前检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pre-upgrade-check.sh
 # v1.33 升级前完整检查
@@ -173,14 +179,23 @@ kubectl get nodes -o wide
 
 echo "=== 检查完成 ==="
 ```
-
 ### 1.3 kubeadm 升级步骤
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 升级 kubeadm
 apt-mark unhold kubeadm && \
 apt-get update && apt-get install -y kubeadm=1.33.0-1.1 && \
@@ -205,7 +220,6 @@ kubectl drain node-2 --ignore-daemonsets --delete-emptydir-data
 # 在 node-2 上执行上述 1,4,5 步骤
 kubectl uncordon node-2
 ```
-
 ---
 
 <!-- chunk: 二、Scheduler Queueing Hints (v1.33 Beta) -->
@@ -309,7 +323,8 @@ spec:
 
 ### 3.4 效果验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Lease 数量减少
 kubectl get leases -n kube-system | wc -l
 
@@ -319,7 +334,6 @@ kubectl get leasecandidates -n kube-system
 # 查看 Lease 详情
 kubectl get lease kube-controller-manager -n kube-system -o yaml
 ```
-
 ---
 
 <!-- chunk: 四、集群自动扩展新特性 -->
@@ -509,7 +523,8 @@ spec:
 
 ### 6.1 kubectl debug 增强
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建临时调试容器
 kubectl debug pod/myapp -it --image=nicolaka/netshoot --target=myapp
 
@@ -522,10 +537,10 @@ kubectl debug pod/myapp -it --copy-to=myapp-debug --image=myapp:debug
 # 使用临时容器调试（无需重启）
 kubectl debug pod/myapp --image=busybox --target=myapp
 ```
-
 ### 6.2 节点排障命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源压力
 kubectl top node
 
@@ -541,14 +556,23 @@ kubectl get --raw /api/v1/nodes/node-1/proxy/healthz
 # 查看节点上的 Pod 资源使用
 kubectl get --raw /api/v1/nodes/node-1/proxy/stats/summary
 ```
-
 ### 6.3 优雅节点维护
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 标记节点不可调度
 kubectl cordon node-1
 
@@ -564,7 +588,6 @@ kubectl uncordon node-1
 # 5. 验证 Pod 重新调度
 kubectl get pods --all-namespaces -o wide | grep node-1
 ```
-
 ---
 
 <!-- chunk: 七、平台运维检查清单 -->
@@ -572,7 +595,8 @@ kubectl get pods --all-namespaces -o wide | grep node-1
 
 ### 7.1 每日检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # daily-check.sh
 
@@ -602,13 +626,13 @@ kubectl get pvc --all-namespaces -o json | jq -r '
 
 echo "=== 检查完成 ==="
 ```
-
 ### 7.2 每周检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # weekly-check.sh
 
@@ -634,10 +658,10 @@ kubectl get secrets --all-namespaces -o json | jq '[.items[] | select(.metadata.
 
 echo "=== 检查完成 ==="
 ```
-
 ### 7.3 版本特性启用状态总览
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # check-all-features.sh
 
@@ -674,7 +698,6 @@ echo "  - SELinuxMount: $(echo $CONFIGZ | jq '.kubeletconfig.featureGates.SELinu
 echo ""
 echo "=== 检查完成 ==="
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -716,3 +739,5 @@ echo "=== 检查完成 ==="
 - 02-cluster-lifecycle-management
 
 ```
+
+<!-- risk-assessed -->

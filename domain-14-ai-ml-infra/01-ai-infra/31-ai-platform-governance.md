@@ -59,6 +59,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 31 - AI平台治理框架
@@ -373,7 +378,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署治理策略
 kubectl apply -f ai-governance-policy.yaml
 
@@ -387,7 +393,6 @@ kubectl logs -n governance deployment/governance-controller
 # 检查合规状态
 kubectl get compliancechecks -o wide
 ```
-
 ---
 
 <!-- chunk: 三、治理工具链集成 -->
@@ -711,3 +716,6 @@ A: 建立治理委员会，定期review和协调各团队需求
 - 30-ai-security-compliance
 - 32-mlops-pipeline
 - 33-model-explainability
+
+
+<!-- risk-assessed -->

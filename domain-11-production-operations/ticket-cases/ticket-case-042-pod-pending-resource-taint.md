@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -86,7 +91,8 @@ relationships:
 
 按“先 Pod 事件、后节点资源、再调度约束”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pending Pod 列表与状态
 kubectl get pod -n data-proc -o wide | grep Pending
 
@@ -108,7 +114,6 @@ kubectl get pod spark-executor-7d9c4f8b5-xk2z9 -n data-proc -o yaml | grep -A 20
 # 7. 检查 scheduler 日志
 kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "data-proc"
 ```
-
 ## 根因分析
 
 `data-proc` 命名空间内新版本的 Pod 资源请求从 `memory: 4Gi` 提升到了 `memory: 8Gi`，但未同步调整集群节点池规格。当前 `nodepool=data-compute` 的节点为 `ecs.r7.xlarge`，单节点可分配内存约 30Gi，已运行 3 个旧版 executor（每个 4Gi），剩余可分配内存约 18Gi，理论上可容纳 2 个新版 Pod。
@@ -121,10 +126,19 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i "da
 
 **第一步：移除遗留的 out-of-service taint，恢复 12 台可用节点**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl taint node cn-zhangjiakou.172.16.4.12 node.kubernetes.io/out-of-service:NoSchedule-
 ```
-
 **第二步：临时扩容节点池，增加可调度容量**
 
 ```bash
@@ -134,20 +148,21 @@ aliyun cs POST /clusters/ack-zyy-prod-04/nodes \
 
 **第三步：回滚 Pod 资源请求到合理基线（若业务允许）**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set resources deployment/spark-executor -n data-proc --requests=memory=4Gi,cpu=2 --limits=memory=8Gi,cpu=4
 kubectl rollout status deployment/spark-executor -n data-proc --timeout=300s
 ```
-
 **第四步：验证节点污点已清除且新节点加入**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node -l nodepool=data-compute -o custom-columns=NAME:.metadata.name,READY:.status.conditions[-1].status,TAINTS:.spec.taints
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Pending Pod 全部调度成功
 kubectl get pod -n data-proc --field-selector=status.phase=Pending -o json | jq '.items | length'
 
@@ -163,7 +178,6 @@ kubectl get pod -n data-proc -o wide | grep -E "Running|Pending"
 # 5. ACK 控制台查看节点池 np-data-compute 节点数量
 ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-data-compute
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 `data-proc` 命名空间大量 Pod Pending 的根因是 **资源请求突增叠加遗留节点污点**。新版本 Pod memory request 从 4Gi 提升到 8Gi，同时节点 `cn-zhangjiakou.172.16.4.12` 上遗留了前日排查时打上的 `out-of-service:NoSchedule` 污点，导致 scheduler 可用节点减少且分布约束无法满足。我们已完成以下处置：
@@ -210,3 +224,6 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-data-compute
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Ingress 控制器 Pod 异常导致 404/502
 - [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+
+
+<!-- risk-assessed -->

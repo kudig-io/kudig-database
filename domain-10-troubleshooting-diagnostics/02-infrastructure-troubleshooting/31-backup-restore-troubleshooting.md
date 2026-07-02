@@ -42,6 +42,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 备份恢复故障排查
@@ -188,7 +193,8 @@ authors:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Velero组件状态 ==========
 # 检查Velero部署状态
 kubectl get deployment -n velero
@@ -229,13 +235,13 @@ kubectl exec -n velero deploy/velero -- aws s3 ls s3://$BUCKET_NAME
 # 检查存储使用情况
 kubectl exec -n velero deploy/velero -- aws s3 ls s3://$BUCKET_NAME --recursive | wc -l
 ```
-
 ### 2.2 etcd备份状态检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== etcd备份组件状态 ==========
 # 检查etcd备份Pod状态
 kubectl get pods -n kube-system | grep etcd-backup
@@ -266,7 +272,6 @@ done
 # 检查备份压缩文件
 kubectl exec -n kube-system $ETCD_POD -- find /var/lib/etcd-backup/ -name "*.tar.gz" -exec ls -lh {} \;
 ```
-
 ---
 
 <!-- chunk: 3. 备份失败问题排查 (Backup Failure Troubleshooting) -->
@@ -277,7 +282,8 @@ kubectl exec -n kube-system $ETCD_POD -- find /var/lib/etcd-backup/ -name "*.tar
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 备份状态检查 ==========
 # 查看失败的备份
 kubectl get backups -n velero --field-selector=status.phase=Failed
@@ -319,13 +325,13 @@ echo 'test data' > /tmp/test-file
 aws s3 cp /tmp/test-file s3://$BUCKET_NAME/test-upload
 "
 ```
-
 ### 3.2 卷备份问题诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Restic备份状态 ==========
 # 检查Restic守护进程状态
 kubectl get pods -n velero -l name=restic
@@ -377,7 +383,6 @@ dd if=/dev/urandom of=/data/test-file bs=1M count=10
 ls -lh /data/test-file
 "
 ```
-
 ---
 
 <!-- chunk: 4. 恢复失败问题排查 (Restore Failure Troubleshooting) -->
@@ -385,7 +390,8 @@ ls -lh /data/test-file
 
 ### 4.1 恢复执行失败分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 恢复状态检查 ==========
 # 查看失败的恢复
 kubectl get restores -n velero --field-selector=status.phase=Failed
@@ -441,13 +447,13 @@ kubectl get secret -n <target-namespace>
 kubectl get storageclass
 kubectl get storageclass | grep "(default)"
 ```
-
 ### 4.2 数据一致性验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 恢复数据校验 ==========
 # 验证恢复的应用状态
 kubectl get deployments -n <target-namespace>
@@ -486,7 +492,6 @@ kubectl get configmap -n <target-namespace> -o jsonpath='{
     end
 }'
 ```
-
 ---
 
 <!-- chunk: 5. 备份数据完整性验证 (Backup Data Integrity Verification) -->
@@ -497,7 +502,8 @@ kubectl get configmap -n <target-namespace> -o jsonpath='{
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 校验和验证 ==========
 # 生成备份文件校验和
 kubectl exec -n velero deploy/velero -- sh -c "
@@ -558,7 +564,6 @@ kubectl get backupstoragelocation -n velero -o jsonpath='{
 # 验证复制延迟
 kubectl exec -n velero deploy/velero -- aws s3 ls s3://$BUCKET_NAME/ --recursive | tail -5
 ```
-
 ### 5.2 定期验证策略
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -566,7 +571,17 @@ kubectl exec -n velero deploy/velero -- aws s3 ls s3://$BUCKET_NAME/ --recursive
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 自动化验证脚本 ==========
 cat <<'EOF' > backup-validation-script.sh
 #!/bin/bash
@@ -668,7 +683,6 @@ EOF
 kubectl create configmap backup-validation-scripts -n velero \
     --from-file=backup-validation-script.sh=./backup-validation-script.sh
 ```
-
 ---
 
 <!-- chunk: 6. 灾难恢复演练 (Disaster Recovery Drills) -->
@@ -681,7 +695,17 @@ kubectl create configmap backup-validation-scripts -n velero \
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 完整恢复演练脚本 ==========
 cat <<'EOF' > disaster-recovery-drill.sh
 #!/bin/bash
@@ -838,7 +862,6 @@ EOF
 
 chmod +x rto-measurement.sh
 ```
-
 ### 6.2 恢复点目标(RPO)验证
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -847,7 +870,17 @@ chmod +x rto-measurement.sh
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== RPO验证工具 ==========
 cat <<'EOF' > rpo-validator.sh
 #!/bin/bash
@@ -972,7 +1005,6 @@ EOF
 
 chmod +x data-consistency-checker.sh
 ```
-
 ---
 
 <!-- chunk: 7. 备份策略优化 (Backup Strategy Optimization) -->
@@ -983,7 +1015,8 @@ chmod +x data-consistency-checker.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 分层备份策略 ==========
 cat <<EOF > tiered-backup-strategy.yaml
 apiVersion: velero.io/v1
@@ -1098,13 +1131,13 @@ EOF
 
 chmod +x incremental-backup-config.sh
 ```
-
 ### 7.2 备份存储优化
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 存储生命周期管理 ==========
 cat <<'EOF' > storage-lifecycle-manager.sh
 #!/bin/bash
@@ -1214,7 +1247,6 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 ---
 
 ---
@@ -1249,3 +1281,6 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|30-monitoring-alerting-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/32-security-troubleshooting.md|32-security-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/33-performance-bottleneck-troubleshooting.md|33-performance-bottleneck-troubleshooting]]
+
+
+<!-- risk-assessed -->

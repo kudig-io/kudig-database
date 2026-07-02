@@ -60,6 +60,11 @@ cross_refs:
   label: '速查卡: sql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[CloudNativePG|CloudNativePG]] 企业级 PostgreSQL 运维指南
@@ -186,7 +191,8 @@ graph TB
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f \
   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.25/releases/cnpg-1.25.0.yaml
 
@@ -201,7 +207,6 @@ helm install cnpg cnpg/cloudnative-pg \
   --set resources.limits.cpu=1 \
   --set resources.limits.memory=512Mi
 ```
-
 ## 生产级集群配置
 
 ```yaml
@@ -451,7 +456,8 @@ RPO: 近零（同步复制）/ < 1秒（异步复制）
 
 ## 手动管理操作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群状态
 kubectl cnpg status production-db -n database
 
@@ -473,7 +479,6 @@ kubectl cnpg logs production-db -n database --timestamps | grep "archive"
 # 重新加入失败的 Replica
 kubectl cnpg hibernate production-db -n database
 ```
-
 ---
 
 <!-- chunk: 备份恢复 -->## 备份恢复
@@ -500,7 +505,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
@@ -517,7 +523,6 @@ EOF
 kubectl get backups -n database
 kubectl describe backup manual-backup-$(date +%Y%m%d) -n database
 ```
-
 ## PITR 时间点恢复
 
 ```yaml
@@ -771,7 +776,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 imageName 触发滚动升级
 kubectl patch cluster production-db -n database --type merge -p \
   '{"spec":{"imageName":"ghcr.io/cloudnative-pg/postgresql:17.5"}}'
@@ -784,7 +790,6 @@ kubectl cnpg status production-db -n database
 # 2. 执行 switchover（将最新 Replica 提升为主）
 # 3. 升级旧主（现为 Replica）
 ```
-
 ## 维护窗口
 
 ```yaml
@@ -800,7 +805,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CNPG 支持 major 版本升级（如 15 → 17）
 # 通过 pg_upgrade 方式
 
@@ -833,14 +839,14 @@ spec:
             key: ACCESS_SECRET_KEY
 EOF
 ```
-
 ---
 
 <!-- chunk: 运维管理 -->## 运维管理
 
 ## 日常运维脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cnpg_ops.sh - CloudNativePG 运维脚本
 set -euo pipefail
@@ -903,7 +909,6 @@ case "${1:-status}" in
     *)          echo "Usage: $0 {status|backup|backups|switchover [pod]|logs [pod]}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -990,3 +995,6 @@ CloudNativePG (PostgreSQL)
 - 08-kafka-kubernetes-strimzi
 - 01-mysql-enterprise-database
 - 02-postgresql-enterprise-database
+
+
+<!-- risk-assessed -->

@@ -50,6 +50,11 @@ cross_refs:
   label: 监控最佳实践
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 日志管理最佳实践
@@ -317,7 +322,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 安装ECK Operator
 
@@ -330,13 +336,13 @@ kubectl apply -f https://download.elastic.co/downloads/eck/2.9.0/operator.yaml
 # 3. 验证安装
 kubectl get pods -n elastic-system
 ```
-
 ### 步骤2：部署Elasticsearch
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 部署Elasticsearch
 
@@ -383,13 +389,13 @@ EOF
 # 3. 验证部署
 kubectl get elasticsearch -n logging
 ```
-
 ### 步骤3：部署Fluent Bit
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 部署Fluent Bit
 
@@ -410,13 +416,13 @@ helm install fluent-bit fluent/fluent-bit \
 # 3. 验证部署
 kubectl get pods -n logging | grep fluent-bit
 ```
-
 ### 步骤4：部署Kibana
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 部署Kibana
 
@@ -448,7 +454,6 @@ EOF
 # 2. 验证部署
 kubectl get kibana -n logging
 ```
-
 ---
 
 ## 验证方法
@@ -458,7 +463,8 @@ kubectl get kibana -n logging
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 日志管理配置验证脚本
 
@@ -493,7 +499,6 @@ echo ""
 
 echo "=== 验证完成 ==="
 ```
-
 ### 手动验证清单
 
 **Elasticsearch验证**：
@@ -642,3 +647,5 @@ data:
 ---
 
 **文档维护**：定期审查和更新，确保与Elasticsearch和Kubernetes版本保持同步
+
+<!-- risk-assessed -->

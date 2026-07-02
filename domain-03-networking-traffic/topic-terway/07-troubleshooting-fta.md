@@ -45,6 +45,11 @@ component: 07 Troubleshooting
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - Terway 故障树速查 (FTA Troubleshooting Quick Reference)
@@ -232,7 +237,8 @@ Pod ContainerCreating, 事件含 IP/pool/address
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 NODE_NAME="${1:?用法: $0 <node-name>}"
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway \
@@ -251,7 +257,6 @@ if [ ${ALLOCATED} -gt ${RUNNING} ]; then
   echo "检测到 IP 泄漏, 建议执行: kubectl exec -n kube-system ${TERWAY_POD} -- terway-cli garbage-collect"
 fi
 ```
-
 ### 5.4 解决方案
 
 | 子事件 | 处置 |
@@ -393,6 +398,7 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 ### 9.1 决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 terway 日志含 Throttling / ServiceUnavailable / connection refused
     |
     +-- 检查 terway 日志
@@ -408,7 +414,6 @@ terway 日志含 Throttling / ServiceUnavailable / connection refused
             +-- kubectl get --raw /healthz 非 ok
                     --> 控制面不可用
 ```
-
 ### 9.2 诊断命令
 
 | 节点 ID | 名称 | 诊断命令 | 预期输出 | 判定 |
@@ -839,3 +844,5 @@ auto_heal_actions:
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

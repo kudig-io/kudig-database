@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)
@@ -90,12 +95,12 @@ cross_refs:
 
 ### 1.2 Node Conditions 详解
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点状态
 kubectl get nodes
 kubectl describe node <node-name> | grep -A20 "Conditions:"
 ```
-
 | Condition | True含义 | False含义 |
 |:---|:---|:---|
 | **Ready** | kubelet健康,可接收Pod | kubelet异常 |
@@ -112,6 +117,7 @@ kubectl describe node <node-name> | grep -A20 "Conditions:"
 ### 2.1 排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         Node NotReady 排查流程                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -156,13 +162,22 @@ kubectl describe node <node-name> | grep -A20 "Conditions:"
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 kubelet 排查命令
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 检查kubelet服务状态 ===
 systemctl status kubelet
 systemctl is-active kubelet
@@ -183,7 +198,6 @@ cat /etc/kubernetes/kubelet.conf
 ls -la /var/lib/kubelet/pki/
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
-
 ### 2.3 常见kubelet错误
 
 | 错误信息 | 原因 | 解决方案 |
@@ -202,7 +216,8 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ### 3.1 内存压力 (MemoryPressure)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查内存使用 ===
 free -h
 cat /proc/meminfo | grep -E "MemTotal|MemFree|MemAvailable|Buffers|Cached"
@@ -217,7 +232,6 @@ kubectl top pods --all-namespaces --sort-by=memory
 kubectl get node <node-name> -o jsonpath='{.status.allocatable.memory}'
 cat /var/lib/kubelet/config.yaml | grep -A10 evictionHard
 ```
-
 **内存压力解决方案**:
 
 | 方案 | 操作 | 风险 |
@@ -233,7 +247,8 @@ cat /var/lib/kubelet/config.yaml | grep -A10 evictionHard
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查磁盘使用 ===
 df -h
 df -i   # 检查inode
@@ -252,7 +267,6 @@ docker system prune -af      # Docker清理  # ⚠️ 强制清理，可能杀�
 find /var/log -name "*.log" -size +100M -exec truncate -s 0 {} \;
 journalctl --vacuum-size=500M
 ```
-
 **磁盘清理检查清单**:
 
 | 清理项 | 命令 | 释放空间 |
@@ -290,7 +304,8 @@ sysctl -w kernel.pid_max=131072
 
 ### 4.1 NetworkUnavailable 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查CNI状态 ===
 ls /etc/cni/net.d/
 cat /etc/cni/net.d/*.conf
@@ -307,7 +322,6 @@ ip route
 iptables -t nat -L -n | head -50
 iptables -L -n | head -50
 ```
-
 ### 4.2 节点网络连通性
 
 ```bash
@@ -347,7 +361,17 @@ ss -tlnp | grep -E "6443|10250|10251|10252"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 检查服务状态 ===
 systemctl status containerd
 systemctl is-active containerd
@@ -368,13 +392,13 @@ crictl pods
 # === 重启containerd ===
 systemctl restart containerd
 ```
-
 ### 5.2 Docker 排查 (如果使用)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查服务状态 ===
 systemctl status docker
 docker info
@@ -389,10 +413,10 @@ docker info | grep "Storage Driver"
 docker system prune -af  # ⚠️ 强制清理，可能杀运行中容器
 docker volume prune -f  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ### 5.3 PLEG (Pod Lifecycle Event Generator) 问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 症状 ===
 # kubelet日志: "PLEG is not healthy"
 # 节点变为NotReady
@@ -412,7 +436,6 @@ journalctl -u containerd | grep -i error
 # 2. 重启containerd
 # 3. 检查存储性能
 ```
-
 ---
 
 <!-- chunk: 6. 证书问题排查 (Certificate Troubleshooting) -->
@@ -442,7 +465,17 @@ kubeadm certs check-expiration
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === kubeadm管理的集群 ===
 kubeadm certs renew all
 
@@ -457,7 +490,6 @@ systemctl restart kubelet
 kubectl get csr
 kubectl certificate approve <csr-name>
 ```
-
 ---
 
 <!-- chunk: 7. 节点维护操作 (Node Maintenance) -->
@@ -469,7 +501,17 @@ kubectl certificate approve <csr-name>
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === Step 1: 标记不可调度 ===
 kubectl cordon <node-name>
 
@@ -482,14 +524,23 @@ kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 # === Step 4: 恢复调度 ===
 kubectl uncordon <node-name>
 ```
-
 ### 7.2 强制删除节点
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # === 删除节点 (节点已失联) ===
 kubectl delete node <node-name>
 
@@ -497,7 +548,6 @@ kubectl delete node <node-name>
 kubectl get pods --all-namespaces -o wide | grep <node-name>
 kubectl delete pod <pod-name> -n <namespace> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ### 7.3 节点重新加入集群
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -565,7 +615,8 @@ groups:
 <!-- chunk: 9. 一键诊断脚本 (Diagnostic Script) -->
 ## 9. 一键诊断脚本 (Diagnostic Script)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 NODE=$1
 
@@ -592,7 +643,6 @@ kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=$NODE
 echo -e "\n=== System Pods Status ==="
 kubectl get pods -n kube-system -o wide --field-selector spec.nodeName=$NODE
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -630,3 +680,5 @@ kubectl get pods -n kube-system -o wide --field-selector spec.nodeName=$NODE
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

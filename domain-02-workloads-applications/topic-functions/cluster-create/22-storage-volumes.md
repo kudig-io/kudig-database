@@ -36,6 +36,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 存储与卷管理
@@ -110,6 +115,7 @@ k8s_versions:
 ## 存储类型总览
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────┐
 │                    Storage in Kubernetes                      │
 ├─────────────────────────────────────────────────────────────┤
@@ -130,7 +136,6 @@ k8s_versions:
 │  └── CSI Driver           Container Storage Interface       │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## emptyDir
@@ -274,18 +279,19 @@ CSI 是 Kubernetes 与存储厂商对接的标准接口:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 CSI Driver (以 AWS EBS 为例)
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-ebs-csi-driver/master/deploy/kubernetes/base/
 ```
-
 ---
 
 ## kubeadm 与存储
 
 kubeadm init 不配置默认 StorageClass，但会配置一些 in-tree 插件:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前 StorageClass
 kubectl get storageclass
 
@@ -294,7 +300,6 @@ kubectl get storageclass
 # standard     ebs.csi.aws.com       Retain          WaitForFirstConsumer
 # fast         ebs.csi.aws.com       Delete          Immediate
 ```
-
 ---
 
 ## local PV (本地存储)
@@ -350,7 +355,8 @@ Pod 创建 → PVC → StorageClass → 等待调度决策 → 绑定到最优�
 
 节点存储容量限制:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubelet 配置 (--volume-stats-aggregation-period)
 # 查看节点存储能力
 kubectl get node <node> -o jsonpath='{.status.capacity}'
@@ -363,7 +369,6 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 #   "pods": "110"
 # }
 ```
-
 ---
 
 ## 常见问题
@@ -386,3 +391,6 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/fluentd.md|Fluentd]]
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

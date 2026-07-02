@@ -66,6 +66,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Domain-12 故障排查 — 开源项目索引
@@ -121,7 +126,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 核心排查命令速查
 kubectl get events --sort-by='.lastTimestamp' -A                    # 全局事件
 kubectl describe pod <pod> -n <ns>                                   # Pod 详情
@@ -133,7 +139,6 @@ kubectl top pod -n <ns>                                              # Pod 资�
 kubectl get pod -o yaml --export <pod>                               # 完整 YAML
 kubectl debug <pod> -it --image=busybox --target=<container>         # 临时调试容器 (ephemeral)
 ```
-
 ### 2.2 kubectx / kubens
 
 ```bash
@@ -259,7 +264,8 @@ kubeshark tap -n <namespace>
 
 ### 5.2 内置网络诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从集群内测试连通性
 kubectl run tmp --rm -i --tty --image=nicolaka/netshoot -- /bin/bash
 # 然后使用:
@@ -269,7 +275,6 @@ curl -v http://<svc>:<port>        # HTTP 测试
 iptables -t nat -L -n              # NAT 规则
 ss -tlnp                           # 监听端口
 ```
-
 ---
 
 <!-- chunk: 六、eBPF 与内核诊断 -->
@@ -288,7 +293,8 @@ ss -tlnp                           # 监听端口
 - profile cpu: CPU 性能分析
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装
 kubectl gadget deploy
 
@@ -298,24 +304,23 @@ kubectl gadget trace exec -n default -l app=myapp
 # 追踪 DNS 请求
 kubectl gadget trace dns -n default
 ```
-
 **GitHub**: https://github.com/inspektor-gadget/inspektor-gadget
 
 ### 6.2 kubectl-debug (临时容器)
 
 K8s v1.18+ 原生支持 Ephemeral Containers:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container>
 ```
-
 ### 6.3 kubectl-node-shell
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 进入节点 Shell (特权 DaemonSet)
 kubectl node-shell <node-name>
 ```
-
 ---
 
 <!-- chunk: 七、资源与容量分析 -->
@@ -323,7 +328,8 @@ kubectl node-shell <node-name>
 
 ### 7.1 kube-capacity
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群资源概览 (requests vs limits vs 实际使用)
 kubectl resource-capacity --util --sort cpu.util
 
@@ -331,7 +337,6 @@ kubectl resource-capacity --util --sort cpu.util
 NODE        CPU REQUESTS   CPU LIMITS   CPU UTIL   MEMORY REQUESTS   MEMORY LIMITS   MEMORY UTIL
 node-1      45%            80%          32%        60%               90%             45%
 ```
-
 **GitHub**: https://github.com/robscott/kube-capacity
 
 ### 7.2 ktop
@@ -363,6 +368,7 @@ node-1      45%            80%          32%        60%               90%        
 ## 九、排查工具链推荐
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────┐
 │                 分层排查工具链推荐                             │
 └─────────────────────────────────────────────────────────────┘
@@ -390,7 +396,6 @@ node-1      45%            80%          32%        60%               90%        
   ├── eBPF (bpftrace/bcc) ──► 自定义内核追踪
   └── Falco ──► 运行时行为审计
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->
@@ -425,3 +430,5 @@ node-1      45%            80%          32%        60%               90%        
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ```
+
+<!-- risk-assessed -->

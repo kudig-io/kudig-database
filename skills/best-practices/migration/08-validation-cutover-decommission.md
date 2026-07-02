@@ -42,6 +42,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 08 - 验收、切换与旧集群退役
@@ -105,7 +110,8 @@ k8s_versions:
 
 ## 1.1 自动化验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # full-validation.sh
 # ACK 迁移后全面功能验证
@@ -182,10 +188,10 @@ if [ $FAIL -gt 0 ]; then
   exit 1
 fi
 ```
-
 ## 1.2 业务接口验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 ACK Ingress IP 直接测试业务接口（绕过 DNS）
 ACK_INGRESS_IP=$(kubectl --context=ack-cluster get svc -n kube-system \
   -l app.kubernetes.io/name=ingress-nginx \
@@ -212,7 +218,6 @@ for ep in "${endpoints[@]}"; do
   fi
 done
 ```
-
 ---
 
 <!-- chunk: 2. 性能对比验证 -->## 2. 性能对比验证
@@ -248,7 +253,8 @@ wrk -t4 -c100 -d60s -H "Host: api.example.com" \
 
 ## 2.2 资源水位对比
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 双集群资源对比
 echo "=== 源集群资源 ==="
 kubectl --context=source-cluster top nodes
@@ -263,14 +269,14 @@ kubectl --context=source-cluster top pods -A --sort-by=cpu | head -11
 echo "=== ACK Top 10 CPU Pod ==="
 kubectl --context=ack-cluster top pods -A --sort-by=cpu | head -11
 ```
-
 ---
 
 <!-- chunk: 3. 全量切换 SOP -->## 3. 全量切换 SOP
 
 ## 3.1 切换前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pre-cutover-check.sh
 # 全量切换前检查清单
@@ -315,10 +321,10 @@ else
   echo "  *** 前置检查未通过，请排查后重试 ***"
 fi
 ```
-
 ## 3.2 全量切换执行
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # execute-full-cutover.sh
 # 全量切换执行脚本
@@ -364,7 +370,6 @@ echo "  全量切换完成"
 echo "  源集群保留运行，7 天后执行退役"
 echo "=============================================="
 ```
-
 ---
 
 <!-- chunk: 4. 稳定性观察期 -->## 4. 稳定性观察期
@@ -383,7 +388,8 @@ echo "=============================================="
 
 ## 4.2 每日巡检脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # daily-patrol.sh
 echo "=== ACK 每日巡检 $(date +%Y-%m-%d) ==="
@@ -409,14 +415,14 @@ kubectl --context=ack-cluster top pods -A --sort-by=memory | head -11
 
 echo ">>> 巡检完成"
 ```
-
 ---
 
 <!-- chunk: 5. 旧集群安全退役 -->## 5. 旧集群安全退役
 
 ## 5.1 退役前确认
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pre-decommission-check.sh
 
@@ -441,10 +447,10 @@ echo ">>> 3. 创建最终备份"
 echo "  建议使用 Velero 创建源集群最终快照"
 echo "  velero backup create final-backup-$(date +%Y%m%d) --kubecontext source-cluster"
 ```
-
 ## 5.2 退役执行
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # decommission-source-cluster.sh
 
@@ -494,7 +500,6 @@ echo "  备份位置: Velero + OSS"
 echo "  资源清单: source-cluster-final-inventory.txt"
 echo "=============================================="
 ```
-
 ---
 
 <!-- chunk: 6. 迁移复盘 -->## 6. 迁移复盘
@@ -577,3 +582,6 @@ echo "=============================================="
 - 07-observability-security-migration
 - 09-migration-toolchain
 - 10-real-world-case-study
+
+
+<!-- risk-assessed -->

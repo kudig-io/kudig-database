@@ -65,6 +65,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -90,7 +95,8 @@ relationships:
 
 按“先看 PVC/PV 状态，再查 StorageClass 与 CSI，最后看 Pod 事件”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 StatefulSet 与 Pod 状态
 kubectl get statefulset mysql-prod -n db-mysql
 kubectl get pod -n db-mysql -l app=mysql-prod -o wide
@@ -126,7 +132,6 @@ kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=csi-plugin -
 # 8. 通过 ASO 检查存储相关 CRD 状态
 kubectl get disk.csi.alibabacloud.com -n kube-system | head -10
 ```
-
 ## 根因分析
 
 通过 PVC 描述与 CSI 日志确认，存在以下三个问题：
@@ -168,11 +173,20 @@ StorageClass 中 `parameters.performanceLevel=PL1`，但当前可用区仅支持
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete statefulset mysql-prod -n db-mysql
 kubectl delete pvc -n db-mysql -l app=mysql-prod
 ```
-
 > 注意：若 PVC 中已有业务数据，不可直接删除，应先备份或手动创建 PV/PVC。
 
 **第二步：创建正确的 StorageClass，使用拓扑感知自动选择可用区**
@@ -180,7 +194,8 @@ kubectl delete pvc -n db-mysql -l app=mysql-prod
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -197,7 +212,6 @@ allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
-
 `volumeBindingMode: WaitForFirstConsumer` 可让 PVC 延迟到 Pod 调度完成后再绑定，从而自动选择 Pod 所在可用区的云盘。
 
 **第三步：更新 StatefulSet 的 volumeClaimTemplates**
@@ -205,7 +219,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: apps/v1
 kind: StatefulSet
@@ -248,19 +263,19 @@ spec:
           storage: 100Gi
 EOF
 ```
-
 **第四步：确认 StatefulSet 滚动创建成功**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status statefulset mysql-prod -n db-mysql --timeout=600s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 StatefulSet 与 Pod 状态
 kubectl get statefulset mysql-prod -n db-mysql
 kubectl get pod -n db-mysql -l app=mysql-prod -o wide
@@ -286,7 +301,6 @@ kubectl exec -n db-mysql -it mysql-prod-0 -- mysql -uroot -p$(kubectl get secret
 # 6. 检查 CSI 日志无新的报错
 kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=50 | grep -i "mysql-prod" | tail -10
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 `mysql-prod` StatefulSet Pod 持续 `ContainerCreating` 的根因是 **PVC 动态供给链路配置错误**，具体包括：
@@ -348,3 +362,6 @@ kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=50 
 - StatefulSet
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

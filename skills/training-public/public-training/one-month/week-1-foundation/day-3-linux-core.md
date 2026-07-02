@@ -35,6 +35,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 3: Linux 核心基础
@@ -269,7 +274,8 @@ lsof -p <PID>
 
 ### 任务 2: 系统资源监控 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 内存信息
 free -h
 # 预期输出:
@@ -341,13 +347,22 @@ lsof -p <PID>
 # 查看目录被哪些进程打开
 lsof +D /var/log
 ```
-
 ### 任务 3: Namespace 实验 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前 Shell 进程的 namespace
 ls -la /proc/$$/ns/
 # 预期输出:
@@ -405,13 +420,22 @@ sudo nsenter -t $CONTAINER_PID -p pstree -p
 sudo ip netns delete test-ns
 docker rm -f test-ns-container  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ### 任务 4: Cgroup 实验 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 cgroup 挂载点
 mount | grep cgroup
 # cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec)
@@ -459,10 +483,10 @@ docker exec cg-test sh -c 'while true; do :; done' &
 kill %1 2>/dev/null
 docker rm -f cg-test  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ### 任务 5: 排障命令练习 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # strace - 跟踪系统调用（理解程序底层行为）
 strace -p <PID> -e trace=open,read,write 2>&1 | head -20
 # 预期输出: 显示该进程的 open/read/write 系统调用
@@ -508,7 +532,6 @@ ps aux | awk '$8=="Z"'
 # 查看进程的环境变量
 cat /proc/<PID>/environ | tr '\0' '\n' | head -20
 ```
-
 ---
 
 ## 配置示例
@@ -596,3 +619,5 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 - [Linux 命令参考](../../domain-17-system-foundation/99-linux-commands-reference.md)
 
 ```
+
+<!-- risk-assessed -->

@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -86,7 +91,8 @@ relationships:
 
 按“先 PVC 状态、后 StorageClass、再 CSI 日志”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 StatefulSet Pod 与 PVC 状态
 kubectl get pod -n middleware -l app=redis -o wide
 kubectl get pvc -n middleware -l app=redis
@@ -109,7 +115,6 @@ aliyun ecs DescribeDisks --RegionId cn-zhangjiakou --ZoneId cn-zhangjiakou-a --D
 # 7. 通过 ASO 查看对应节点本地盘状态
 kubectl get nodestorage -n kube-system cn-zhangjiakou.172.16.4.21 -o yaml
 ```
-
 ## 根因分析
 
 PVC `redis-data-redis-2` 的 StorageClass `alicloud-disk-ssd` 设置了 `allowVolumeExpansion: true`，客户此前通过修改 StatefulSet volumeClaimTemplates 将每个 Redis 实例的存储从 50Gi 扩容到 100Gi。前两个 PVC 扩容成功，但 `redis-data-redis-2` 扩容时触发底层云盘操作失败：
@@ -128,7 +133,17 @@ ControllerExpandVolume failed: rpc error: code = ResourceExhausted desc = no eno
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 备份当前 PVC
 kubectl get pvc redis-data-redis-2 -n middleware -o yaml > /tmp/redis-data-redis-2-backup.yaml
 
@@ -139,22 +154,22 @@ kubectl delete pvc redis-data-redis-2 -n middleware
 # 等待 StatefulSet 重新创建 PVC 并绑定（此时使用原 50Gi 大小）
 kubectl rollout restart statefulset/redis -n middleware
 ```
-
 **第二步：修改 StorageClass 启用拓扑感知与多可用区调度**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch storageclass alicloud-disk-ssd -p '{"allowedTopologies":[{"matchLabelExpressions":[{"key":"topology.kubernetes.io/zone","values":["cn-zhangjiakou-a","cn-zhangjiakou-b","cn-zhangjiakou-c"]}]}]}'
 ```
-
 **第三步：切换到有库存的可用区扩容**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 cn-zhangjiakou-b 有 SSD 库存后，为该节点池增加可用区标签
 kubectl label node cn-zhangjiakou.172.16.4.31 topology.kubernetes.io/zone=cn-zhangjiakou-b --overwrite
 
@@ -162,13 +177,12 @@ kubectl label node cn-zhangjiakou.172.16.4.31 topology.kubernetes.io/zone=cn-zha
 kubectl set image statefulset/redis redis=redis:7.2-alpine -n middleware
 kubectl rollout status statefulset/redis -n middleware --timeout=600s
 ```
-
 **第四步：检查新 PVC 已绑定并扩容成功**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc redis-data-redis-2 -n middleware -o jsonpath='{.status.phase} {.spec.resources.requests.storage} {.status.capacity.storage}'
 ```
-
 若扩容后 Redis 节点数据异常，可立即从备份的 PVC YAML 与数据快照恢复，并暂停 StatefulSet 的滚动更新，优先保障集群主从拓扑稳定。
 
 ## 验证命令
@@ -176,7 +190,8 @@ kubectl get pvc redis-data-redis-2 -n middleware -o jsonpath='{.status.phase} {.
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. StatefulSet 所有 Pod Running
 kubectl get pod -n middleware -l app=redis -o wide
 
@@ -193,7 +208,6 @@ kubectl exec -n middleware redis-0 -- redis-cli cluster info | grep cluster_stat
 # 5. ACK 控制台查看云盘状态
 aliyun ecs DescribeDisks --RegionId cn-zhangjiakou --DiskIds '["d-8vbdummyredis2"]' --output cols=DiskId,Size,Status,ZoneId rows=Disks.Disk[]
 ```
-
 验证阶段需要同时关注 Redis Cluster 的节点状态与数据一致性。若扩容过程中节点长时间不可用，可能导致集群进入 fail 状态，需要手动执行 `cluster meet` 与重新分配槽位。建议在验证前先执行 `redis-cli cluster info` 与 `cluster nodes` 确认无迁移任务正在进行。
 
 ## 回复客户话术
@@ -242,3 +256,6 @@ aliyun ecs DescribeDisks --RegionId cn-zhangjiakou --DiskIds '["d-8vbdummyredis2
 - StatefulSet
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

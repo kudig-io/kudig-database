@@ -45,6 +45,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 10 - 多云混合云运维手册
@@ -2140,7 +2145,17 @@ output "kubeconfig_commands" {
 
 **实战操作指南:**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 初始化Terraform
 terraform init
 
@@ -2172,7 +2187,6 @@ terraform plan -refresh-only
 terraform workspace new production
 terraform workspace select production
 ```
-
 ### 4.3 GitOps多集群
 
 > **🔰 初学者理解**: 类比**连锁店统一配方** — 总部(Git仓库)定义标准配方,各分店(集群)自动同步执行,保证一致性。GitOps就是用Git作为唯一事实来源,集群自动同步代码状态。
@@ -4391,7 +4405,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看Pod资源使用情况
 kubectl top pods -n production --sort-by=cpu
 
@@ -4431,7 +4446,6 @@ kubectl set resources deployment my-app -n production \
 # 5. 监控调整后的效果
 watch kubectl top pods -n production -l app=my-app
 ```
-
 **成本节省案例:**
 - **案例1**: 某公司对200+微服务做Right Sizing,平均CPU request降低40%,**年节省$180,000**
 - **案例2**: 发现开发/测试环境过度配置,晚上和周末自动缩容,**年节省$75,000**
@@ -4640,3 +4654,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

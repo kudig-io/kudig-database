@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点故障排查手册
@@ -139,6 +144,7 @@ k8s_versions:
 ### 1.1 排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 节点 NotReady 排查:
   ┌─────────────────────────────────────────────────────────────┐
   │  1. kubectl get nodes                                       │
@@ -180,10 +186,10 @@ k8s_versions:
   │     curl -k https://127.0.0.1:2379/health                   │
   └─────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 详细排查步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认节点状态
 kubectl get nodes
 # NAME      STATUS     ROLES           AGE    VERSION
@@ -215,7 +221,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 # Step 7: 检查 kubelet 健康
 curl -k https://localhost:10250/healthz
 ```
-
 ---
 
 ## 二、kubelet 启动失败排查
@@ -246,7 +251,8 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ### 2.2 配置文件验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 kubelet 配置
 kubelet --validate --config=/var/lib/kubelet/config.yaml
 
@@ -264,14 +270,14 @@ crictl ps
 # 手动启动 kubelet (调试)
 kubelet --config=/var/lib/kubelet/config.yaml --v=4
 ```
-
 ---
 
 ## 三、容器启动失败排查
 
 ### 3.1 容器状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有容器状态
 crictl ps -a
 # CONTAINER ID   IMAGE         STATE    NAME       ATTEMPT
@@ -290,10 +296,10 @@ crictl inspect <container-id>
 # 查看 Pod 详情
 crictl inspectp <pod-id>
 ```
-
 ### 3.2 常见容器错误
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ImagePullBackOff
 kubectl describe pod <pod> | grep -A 5 "Events"
 # 原因: 镜像拉取失败
@@ -317,14 +323,14 @@ kubectl describe pod <pod> | grep -A 5 "Events"
 # 手动重启容器 (kubelet 会自动重建)
 crictl stop <container-id> && crictl rm <container-id>
 ```
-
 ---
 
 ## 四、网络问题排查
 
 ### 4.1 网络排查流程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CNI 配置
 ls /etc/cni/net.d/
 cat /etc/cni/net.d/*.conflist
@@ -356,10 +362,10 @@ kubectl run -it --rm debug --image=busybox -- nslookup kubernetes.default
 tcpdump -i any -n port 80 -w capture.pcap
 tcpdump -i cni0 -n host <target-ip>
 ```
-
 ### 4.2 常见网络问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 无法跨节点通信
 # 排查:
 ip route | grep -v default       # 检查跨节点路由
@@ -385,7 +391,6 @@ iptables -t nat -L KUBE-SERVICES -n
 iptables -t nat -L POSTROUTING -n
 # 解决: 检查 MASQUERADE 规则, 节点网络
 ```
-
 ---
 
 ## 五、磁盘问题排查
@@ -416,7 +421,8 @@ journalctl --disk-usage
 
 ### 5.2 磁盘清理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清理容器镜像 (containerd)
 crictl rmi --prune
 
@@ -433,14 +439,14 @@ crictl images | grep -v "$(crictl ps -a -q | xargs -I{} crictl inspect {} | jq -
 # 注意: 不要手动删除 /var/lib/kubelet/ 下的文件
 # 不要手动删除 /var/lib/containerd/ 下的文件（使用 crictl 命令）
 ```
-
 ---
 
 ## 六、内存不足（OOM）排查
 
 ### 6.1 内存检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 OOM 事件
 dmesg | grep -i "out of memory"
 dmesg | grep -i "killed process"
@@ -460,7 +466,6 @@ cat /sys/fs/cgroup/kubepods/memory.max
 # 查看被 OOM Kill 的 Pod
 kubectl get events --all-namespaces | grep OOMKilled
 ```
-
 ### 6.2 内存优化
 
 ```bash
@@ -491,7 +496,8 @@ evictionHard:
 
 ### 7.1 节点级命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点概览
 kubectl get node <node>
 kubectl describe node <node>
@@ -515,7 +521,6 @@ top -b -n 1 | head -20
 cat /proc/meminfo
 cat /proc/cpuinfo
 ```
-
 ### 7.2 网络命令
 
 ```bash
@@ -590,3 +595,6 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

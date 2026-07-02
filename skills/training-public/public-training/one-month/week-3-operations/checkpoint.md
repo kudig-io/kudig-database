@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -188,7 +193,8 @@ sum(kube_pod_container_resource_limits{resource="cpu"}) by (pod) * 100
 
 **参考要点 - 完整排查流程**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看节点状态和 Conditions
 kubectl describe node <node-name>
 
@@ -234,7 +240,6 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 # Step 9: 检查节点资源水位
 kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 ```
-
 ---
 
 ### 4. FTA 和 FEBM 分别适用于什么场景？两者如何协作？
@@ -274,7 +279,8 @@ kubectl describe node <node-name> | grep -A 20 "Allocated resources"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # etcd 备份命令
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 
@@ -295,7 +301,6 @@ kubectl exec -n kube-system $ETCD_POD -- \
 # |  12345678 |  abcdef12 |   12340000 |        567 |
 # +----------+----------+------------+------------+
 ```
-
 **备份策略**：
 
 | 频率 | 场景 | 原因 |
@@ -316,7 +321,7 @@ kubectl exec -n kube-system $ETCD_POD -- \
 **你的回答:**
 
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ```
 
 **参考答案:**
@@ -341,7 +346,6 @@ kubectl auth can-i --list
 # pods        []                  []               [get list watch]
 # deployments []                  []               [get list watch create update delete]
 ```
-
 ---
 
 ### 7. 如何查看 Pod 的上一次崩溃日志？
@@ -349,7 +353,7 @@ kubectl auth can-i --list
 **你的回答:**
 
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ```
 
 **参考答案:**
@@ -373,7 +377,6 @@ kubectl logs <pod-name> --previous --timestamps
 # 2026-05-18T10:25:30.456789012Z at com.app.Database.connect(Database.java:42)
 # 2026-05-18T10:25:30.789012345Z Caused by: java.net.ConnectException: Connection refused
 ```
-
 ---
 
 ### 8. 如何列出所有 firing 状态的告警？
@@ -381,7 +384,7 @@ kubectl logs <pod-name> --previous --timestamps
 **你的回答:**
 
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ```
 
 **参考答案:**
@@ -405,7 +408,6 @@ curl -s http://prometheus:9090/api/v1/alerts | jq '.data.alerts[] | select(.stat
 # 方法4: kubectl 查询 PrometheusRule
 kubectl get prometheusrules -A -o yaml | grep -A5 "alert:"
 ```
-
 ---
 
 ### 9. 如何查看某个 namespace 的所有事件并按时间排序？
@@ -413,7 +415,7 @@ kubectl get prometheusrules -A -o yaml | grep -A5 "alert:"
 **你的回答:**
 
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ```
 
 **参考答案:**
@@ -441,7 +443,6 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' --watch
 # 查看事件详情（YAML格式）
 kubectl get events -n <namespace> --sort-by='.lastTimestamp' -o yaml
 ```
-
 ---
 
 ### 10. 如何使用 ServiceAccount 的 Token 进行 API 调用？
@@ -449,7 +450,7 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' -o yaml
 **你的回答:**
 
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ```
 
 **参考答案:**
@@ -487,7 +488,6 @@ curl -k -H "Authorization: Bearer $TOKEN" \
 # Step 4: 清理
 kill %1  # 关闭 kubectl proxy
 ```
-
 ---
 
 ## 三、场景分析 (每题 5 分，共 20 分)
@@ -538,7 +538,8 @@ roleRef:
 
 **验证方案**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证开发人员的权限
 kubectl auth can-i create deployments --as=developer@company.com -n dev
 # 预期输出: yes
@@ -552,7 +553,6 @@ kubectl auth can-i delete pods --as=developer@company.com -n dev
 kubectl auth can-i get secrets --as=developer@company.com -n dev
 # 预期输出: no
 ```
-
 ---
 
 ### 12. 描述如何使用 Prometheus + Grafana + Alertmanager 构建完整的监控告警链路
@@ -619,7 +619,8 @@ spec:
 
 **参考要点:**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 确认 OOMKilled 状态
 kubectl describe pod <pod-name> -n <namespace>
 
@@ -662,7 +663,6 @@ kubectl set resources deployment/<deploy-name> \
 # - alert: MemoryUsageHigh
 #   expr: container_memory_working_set_bytes / kube_pod_container_resource_limits{resource="memory"} > 0.85
 ```
-
 ---
 
 ### 14. 解释 Pod Security Standards 的三个级别，以及如何在生产环境实施
@@ -680,7 +680,8 @@ kubectl set resources deployment/<deploy-name> \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 为不同命名空间设置 PSS 级别
 # kube-system: privileged（系统组件需要特权）
 kubectl label namespace kube-system pod-security.kubernetes.io/enforce=privileged
@@ -703,7 +704,6 @@ kubectl run test-privileged --image=nginx --restart=Never --overrides='{"spec":{
 # 预期输出:
 # Error from server (Forbidden): pods "test-privileged" is forbidden: violates PodSecurity "restricted:latest": ...
 ```
-
 ---
 
 ## 四、评分统计
@@ -759,3 +759,6 @@ kubectl run test-privileged --image=nginx --restart=Never --overrides='{"spec":{
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

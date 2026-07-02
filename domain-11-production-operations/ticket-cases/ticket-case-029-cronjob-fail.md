@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -86,7 +91,8 @@ relationships:
 
 按“先 CronJob 与 Job 状态、再 Pod 退出码与日志、最后资源与并发策略”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 CronJob 与最近 Job 列表
 kubectl get cronjob -n data-pipeline
 kubectl get jobs -n data-pipeline -l app=etl-daily --sort-by='.metadata.creationTimestamp'
@@ -114,7 +120,6 @@ kubectl get limitrange -n data-pipeline -o yaml
 # 8. 检查 controller-manager 是否有异常
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=200 | grep etl-daily
 ```
-
 ## 根因分析
 
 经排查，确认 CronJob `etl-daily` 的 Job Pod 因 **内存限制不足** 反复 OOMKilled：
@@ -162,7 +167,8 @@ jobTemplate:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除所有状态为 Failed 的 etl-daily Job
 kubectl get jobs -n data-pipeline -l app=etl-daily -o json | \
   jq -r '.items[] | select(.status.failed > 0) | .metadata.name' | \
@@ -172,13 +178,13 @@ kubectl get jobs -n data-pipeline -l app=etl-daily -o json | \
 kubectl get pod -n data-pipeline -l app=etl-daily --field-selector status.phase!=Running -o name | \
   xargs -I {} kubectl delete {} -n data-pipeline
 ```
-
 **第二步：调整 CronJob 内存限制与重试策略**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob etl-daily -n data-pipeline --type='merge' -p '{
   "spec": {
     "jobTemplate": {
@@ -205,17 +211,16 @@ kubectl patch cronjob etl-daily -n data-pipeline --type='merge' -p '{
   }
 }'
 ```
-
 **第三步：手动触发一次测试 Job 验证修复效果**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create job etl-daily-test-20260626 --from=cronjob/etl-daily -n data-pipeline
 kubectl wait --for=condition=complete job/etl-daily-test-20260626 -n data-pipeline --timeout=1800s
 ```
-
 **第四步：如数据量持续增长，考虑拆分任务或启用临时大规格节点**
 
 ```bash
@@ -234,7 +239,8 @@ aliyun cs POST /clusters/ack-zyy-prod-06/nodes \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob etl-daily -n data-pipeline --type='merge' -p '{
   "spec": {
     "jobTemplate": {
@@ -259,13 +265,13 @@ kubectl patch cronjob etl-daily -n data-pipeline --type='merge' -p '{
   }
 }'
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 历史失败 Job 已清理
 kubectl get jobs -n data-pipeline -l app=etl-daily
 
@@ -287,7 +293,6 @@ kubectl get cronjob etl-daily -n data-pipeline -o jsonpath='{.spec.jobTemplate.s
 # 7. 数仓目标表有新增数据（示例）
 kubectl exec -n data-pipeline deploy/dwh-cli -- psql -c "SELECT COUNT(*) FROM dw.fact_orders WHERE dt = CURRENT_DATE - 1;"
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，ETL 任务 `etl-daily` 连续失败的根因是 **数据量增长后，CronJob 容器内存 Limit（512Mi）不足，任务运行时触发 OOMKilled**。由于 `concurrencyPolicy: Forbid` 且历史失败 Job 未及时清理，后续调度也被阻塞。我们已完成以下处置：
@@ -339,3 +344,6 @@ kubectl exec -n data-pipeline deploy/dwh-cli -- psql -c "SELECT COUNT(*) FROM dw
 - CronJob
 - Job/CronJob 执行失败：退避重试耗尽与镜像拉取异常
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
+
+
+<!-- risk-assessed -->

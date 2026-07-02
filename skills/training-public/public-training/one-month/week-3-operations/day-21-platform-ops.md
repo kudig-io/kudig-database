@@ -41,6 +41,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -164,7 +169,8 @@ related_topics:
 
 ### Step 1: 确认监控栈 (15min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 Prometheus 和相关组件已部署
 kubectl get pods -n monitoring
 # NAME                                   READY   STATUS    RESTARTS   AGE
@@ -184,7 +190,6 @@ kubectl port-forward -n monitoring svc/grafana 3000:80
 kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090
 # 访问 http://localhost:9090/targets 确认所有 target UP
 ```
-
 ---
 
 ### Step 2: 配置核心告警规则 (30min)
@@ -192,7 +197,8 @@ kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > core-alerts.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -267,7 +273,6 @@ kubectl apply -f core-alerts.yaml
 kubectl get prometheusrules -n monitoring
 kubectl describe prometheusrule core-alerts -n monitoring
 ```
-
 ---
 
 ### Step 3: 配置 Grafana Dashboard (30min)
@@ -301,7 +306,8 @@ kubectl describe prometheusrule core-alerts -n monitoring
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create namespace fault-drill
 kubectl create deployment app --image=nginx:alpine -n fault-drill --replicas=3
 kubectl expose deployment app --port=80 -n fault-drill
@@ -310,14 +316,14 @@ kubectl expose deployment app --port=80 -n fault-drill
 kubectl get pods -n fault-drill
 kubectl get svc -n fault-drill
 ```
-
 #### 4.2 问题 1: 模拟 OOM
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > oom-inject.yaml << 'EOF'
 apiVersion: v1
 kind: Pod
@@ -361,13 +367,13 @@ kubectl describe pod oom-inject -n fault-drill | grep -A 5 "Last State"
 
 kubectl delete pod oom-inject -n fault-drill
 ```
-
 #### 4.3 问题 2: 模拟 Service 不可用
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 Endpoints (模拟 selector 不匹配)
 kubectl delete endpoints app -n fault-drill
 
@@ -395,14 +401,23 @@ kubectl get endpoints app -n fault-drill
 # NAME   ENDPOINTS                                AGE
 # app    10.244.1.x:80,10.244.2.x:80,10.244.3.x:80   5s
 ```
-
 #### 4.4 问题 3: 模拟节点问题
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 选择一个节点
 NODE=$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')
 echo "目标节点: $NODE"
@@ -424,7 +439,6 @@ kubectl uncordon $NODE
 kubectl get nodes
 kubectl get pods -n fault-drill -o wide
 ```
-
 ---
 
 ### Step 5: 产出故障排查手册 (30min)
@@ -556,3 +570,5 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 
 ```
+
+<!-- risk-assessed -->

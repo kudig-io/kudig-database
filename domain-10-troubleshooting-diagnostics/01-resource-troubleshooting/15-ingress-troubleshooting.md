@@ -42,6 +42,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Ingress|Ingress]] 故障排查
@@ -191,6 +196,7 @@ authors:
 ### 2.1 排查流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    Ingress Controller 故障排查流程                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -224,13 +230,13 @@ authors:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 详细诊断命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 基础状态检查 ==========
 # 检查Ingress Controller部署状态
 kubectl get deploy,sts -n ingress-nginx
@@ -277,7 +283,6 @@ kubectl top pods -n ingress-nginx
 # 检查节点资源
 kubectl describe nodes | grep -A5 "Allocated resources"
 ```
-
 ### 2.3 常见错误及解决方案
 
 | 错误信息 | 可能原因 | 解决方案 |
@@ -295,7 +300,8 @@ kubectl describe nodes | grep -A5 "Allocated resources"
 
 ### 3.1 路由不匹配问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 检查Ingress规则 ==========
 kubectl get ingress <ingress-name> -n <namespace> -o yaml
 
@@ -323,13 +329,13 @@ kubectl get ingress <ingress-name> -n <namespace> -o jsonpath='{.metadata.annota
 # nginx.ingress.kubernetes.io/ssl-redirect: "true"
 # kubernetes.io/ingress.class: nginx
 ```
-
 ### 3.2 路径匹配问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 路径类型检查 ==========
 # Exact路径匹配
 # path: /api
@@ -351,7 +357,6 @@ kubectl run temp-debug --image=busybox -it --rm -- sh
 # 检查生成的Nginx配置
 kubectl exec -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -- cat /etc/nginx/nginx.conf
 ```
-
 ---
 
 <!-- chunk: 4. TLS/SSL证书故障排查 (TLS Certificate Troubleshooting) -->
@@ -362,7 +367,8 @@ kubectl exec -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -- cat /et
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Secret检查 ==========
 # 检查TLS Secret是否存在
 kubectl get secret <tls-secret-name> -n <namespace>
@@ -386,10 +392,10 @@ kubectl delete pod -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx
 # 检查证书是否生效
 echo | openssl s_client -connect <hostname>:443 2>/dev/null | openssl x509 -noout -dates
 ```
-
 ### 4.2 Let's Encrypt证书问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== cert-manager检查 ==========
 # 检查Certificate资源
 kubectl get certificate --all-namespaces
@@ -411,7 +417,6 @@ kubectl describe challenge <challenge-name> -n <namespace>
 # DNS01挑战检查
 dig TXT _acme-challenge.<domain>
 ```
-
 ---
 
 <!-- chunk: 5. 性能优化与监控 (Performance Optimization & Monitoring) -->
@@ -423,7 +428,8 @@ dig TXT _acme-challenge.<domain>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 关键指标检查 ==========
 # 请求率和错误率
 kubectl exec -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx -- curl -s http://localhost:10254/metrics | grep nginx_ingress_controller_requests
@@ -444,13 +450,13 @@ kubectl patch cm nginx-configuration -n ingress-nginx -p '{"data":{"max-worker-c
 # 启用gzip压缩
 kubectl patch cm nginx-configuration -n ingress-nginx -p '{"data":{"enable-vts-status":"true","gzip-level":"6"}}'
 ```
-
 ### 5.2 负载测试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 压力测试工具 ==========
 # 使用hey进行负载测试
 hey -z 30s -c 50 http://<ingress-host>/path
@@ -468,7 +474,6 @@ kubectl scale deploy ingress-nginx-controller -n ingress-nginx --replicas=3
 # 调整资源限制
 kubectl patch deploy ingress-nginx-controller -n ingress-nginx -p '{"spec":{"template":{"spec":{"containers":[{"name":"controller","resources":{"requests":{"cpu":"100m","memory":"90Mi"},"limits":{"cpu":"1000m","memory":"1Gi"}}}]}}}}'
 ```
-
 ---
 
 <!-- chunk: 6. 云提供商集成问题 (Cloud Provider Integration) -->
@@ -476,7 +481,8 @@ kubectl patch deploy ingress-nginx-controller -n ingress-nginx -p '{"spec":{"tem
 
 ### 6.1 AWS ELB问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== ELB健康检查 ==========
 # 检查ELB目标组
 aws elb describe-target-groups --load-balancer-arn <lb-arn>
@@ -493,10 +499,10 @@ kubectl describe svc ingress-nginx-controller -n ingress-nginx
 # service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:region:account:certificate/cert-id
 ```
-
 ### 6.2 GCP LoadBalancer问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== GCP配置检查 ==========
 # 检查ForwardingRule
 gcloud compute forwarding-rules list
@@ -513,7 +519,6 @@ gcloud compute health-checks list
 # networking.gke.io/load-balancer-type: "External"
 # networking.gke.io/premium-tier: "true"
 ```
-
 ---
 
 <!-- chunk: 7. 紧急处理流程 (Emergency Response Process) -->
@@ -525,7 +530,8 @@ gcloud compute health-checks list
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 立即诊断 ==========
 # 快速检查所有关键组件
 ./ingress-health-check.sh
@@ -544,13 +550,13 @@ kubectl rollout undo deploy ingress-nginx-controller -n ingress-nginx
 # 恢复之前的ConfigMap
 kubectl apply -f backup/nginx-configmap.yaml
 ```
-
 ### 7.2 预防措施
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控告警配置 ==========
 # 配置关键指标告警
 cat <<EOF | kubectl apply -f -
@@ -589,7 +595,6 @@ kubectl get secrets --all-namespaces -o jsonpath='{range .items[*]}{.metadata.na
     kubectl get secret $secret -n $namespace -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates
 done
 ```
-
 ---
 
 ---
@@ -624,3 +629,6 @@ done
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+
+
+<!-- risk-assessed -->

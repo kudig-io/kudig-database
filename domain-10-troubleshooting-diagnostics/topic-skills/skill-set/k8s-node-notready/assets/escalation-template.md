@@ -40,6 +40,11 @@ skill_name: 升级消息模板 / Escalation Message Template
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 升级消息模板 / Escalation Message Template
@@ -140,13 +145,13 @@ Agent 在触发升级条件时，应使用此模板生成通知消息。
 按时间顺序列出已执行的每个诊断步骤及每步输出摘要：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 {timestamp} - D1.1: kubectl get nodes -o wide → {output_summary}
 {timestamp} - D1.2: kubectl describe node {node_name} → {conditions_summary}
 {timestamp} - D1.3: kubectl get events → {events_summary}
 ...
 {timestamp} - D2.7: nc -zv {apiserver_ip} 6443 → {connectivity_result}
 ```
-
 ### 3.2 已排除的根因 / Excluded Root Causes
 
 列出已通过诊断排除的根因及排除依据：
@@ -171,7 +176,8 @@ Agent 在触发升级条件时，应使用此模板生成通知消息。
 
 Agent 应在升级前收集以下快照文件：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点描述
 kubectl describe node {node_name} > node-describe.txt
 
@@ -184,7 +190,6 @@ kubectl get pods --field-selector spec.nodeName={node_name} --all-namespaces -o 
 # kubelet 日志（最近 1 小时）
 ssh {node_ip} "journalctl -u kubelet --since '1 hour ago' --no-pager" > kubelet-logs.txt
 ```
-
 ### 3.5 事件时间线 / Event Timeline
 
 最近 30 分钟内的关键事件按时间排列：
@@ -208,3 +213,6 @@ HH:MM:SS - 决定升级 / Escalation decided
 | 多个工作节点 NotReady（2-30%） | **P1** | 15min 内响应，30min 内修复 |
 | 单个工作节点 NotReady | **P2** | 30min 内响应，2h 内修复 |
 | 新加入的节点从未进入 Ready / 尚未承载业务流量 | **P3** | 4h 内处理 |
+
+
+<!-- risk-assessed -->

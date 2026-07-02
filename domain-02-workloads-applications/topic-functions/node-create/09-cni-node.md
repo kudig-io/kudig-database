@@ -42,6 +42,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点网络 CNI 配置详解
@@ -255,7 +260,8 @@ Pod 网络命名空间:
 
 ### 2.2 查看和调试 Pod 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的网络命名空间 ID
 kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].containerID}'
 # 输出: containerd://abc123...
@@ -277,7 +283,6 @@ kubectl debug node/<node> -it --image=nicolaka/netshoot
 crictl exec -i <container-id> ip addr
 crictl exec -i <container-id> ip route
 ```
-
 ---
 
 ## 三、veth pair 与网桥
@@ -382,7 +387,8 @@ hubble observe --since 1m
 
 ### 4.3 Flannel
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Flannel 架构:
 # - 简单的 VXLAN/VXLAN 网络
 # - 不支持 NetworkPolicy (需搭配 Calico)
@@ -398,7 +404,6 @@ ip route | grep flannel
 # Flannel etcd 配置
 etcdctl get /coreos.com/network/config
 ```
-
 ---
 
 ## 五、IPAM（IP 地址管理）
@@ -423,7 +428,8 @@ cat /var/lib/cni/networks/k8s-pod-network/10.244.1.10
 
 ### 5.2 IP 地址查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看已分配的 Pod IP
 kubectl get pods -o wide --all-namespaces
 
@@ -439,7 +445,6 @@ calicoctl get ippool -o yaml
 # Cilium IP 池
 cilium ip list
 ```
-
 ---
 
 ## 六、DNS 解析
@@ -466,7 +471,8 @@ cat /etc/resolv.conf
 
 ### 6.2 DNS 调试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 DNS 解析
 kubectl run -it --rm debug --image=busybox -- nslookup kubernetes.default
 kubectl run -it --rm debug --image=busybox -- nslookup my-svc.default.svc.cluster.local
@@ -480,7 +486,6 @@ kubectl get configmap coredns -n kube-system -o yaml
 # 检查 CoreDNS 端点
 kubectl get endpoints kube-dns -n kube-system
 ```
-
 ---
 
 ## 七、常见错误与排查
@@ -541,3 +546,6 @@ cat /var/lib/cni/*            # IPAM 记录
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[skills/ts-networking.md|ts-networking]]
+
+
+<!-- risk-assessed -->

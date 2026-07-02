@@ -53,6 +53,11 @@ cross_refs:
   label: '故障树: rbac'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 20 - Role / RoleBinding YAML 配置参考
@@ -536,10 +541,10 @@ kube-apiserver \
 
 **请求示例**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods mypod -n default
 ```
-
 **RBAC 评估过程**:
 
 ```yaml
@@ -908,7 +913,8 @@ roleRef:
 
 **验证权限**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 以 alice 身份测试
 kubectl auth can-i get pods -n dev --as alice@example.com
 # yes
@@ -922,7 +928,6 @@ kubectl auth can-i create deployments -n dev --as alice@example.com
 # 查看 alice 的所有权限
 kubectl auth can-i --list -n dev --as alice@example.com
 ```
-
 ---
 
 ## 5.2 案例 2: 运维管理权限
@@ -1030,7 +1035,8 @@ automountServiceAccountToken: true
 
 **验证权限**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 运维人员可以管理应用资源
 kubectl auth can-i create deployments -n production --as ops-user
 # yes
@@ -1045,7 +1051,6 @@ kubectl auth can-i create roles -n production --as ops-user
 kubectl auth can-i create rolebindings -n production --as ops-user
 # no
 ```
-
 ---
 
 ## 5.3 案例 3: CI/CD 部署权限
@@ -1241,7 +1246,8 @@ deploy:
 
 **验证权限**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CI/CD 可以更新 Deployment
 kubectl auth can-i update deployments -n production --as system:serviceaccount:production:gitlab-ci-deployer
 # yes
@@ -1254,7 +1260,6 @@ kubectl auth can-i delete pods -n production --as system:serviceaccount:producti
 kubectl auth can-i create statefulsets -n production --as system:serviceaccount:production:gitlab-ci-deployer
 # no
 ```
-
 ---
 
 ## 5.4 案例 4: 应用 ServiceAccount 最小权限
@@ -1640,7 +1645,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 租户 A 管理员可以管理自己的 namespace
 kubectl auth can-i create deployments -n tenant-a --as admin@tenant-a.com
 # yes
@@ -1658,7 +1664,6 @@ kubectl run test-pod --image=nginx -n tenant-a
 kubectl exec -it test-pod -n tenant-a -- curl http://service.tenant-b.svc.cluster.local
 # 应该失败 (network policy 阻止)
 ```
-
 ---
 
 <!-- chunk: 6. 最佳实践 -->## 6. 最佳实践
@@ -1726,7 +1731,8 @@ rules:
 
 ## 6.3 验证权限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查当前用户权限
 kubectl auth can-i create deployments -n default
 
@@ -1750,7 +1756,6 @@ kubectl describe rolebinding read-pods -n default
 kubectl get roles -n default
 kubectl describe role pod-reader -n default
 ```
-
 ## 6.4 RBAC 审计
 
 启用 Audit Logging 记录 RBAC 操作:
@@ -1798,7 +1803,8 @@ Error from server (Forbidden): pods is forbidden: User "alice" cannot list resou
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 验证用户身份
 kubectl auth whoami
 
@@ -1818,7 +1824,6 @@ kubectl auth can-i list pods -n default --as alice
 # 在 kube-apiserver 日志中搜索 "forbidden"
 kubectl logs -n kube-system kube-apiserver-master | grep -i forbidden
 ```
-
 ## 7.2 ServiceAccount 无权限
 
 **症状**:
@@ -1831,7 +1836,8 @@ Error from server (Forbidden): pods is forbidden: User "system:serviceaccount:de
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 ServiceAccount 是否存在
 kubectl get sa myapp-sa -n default
 
@@ -1850,7 +1856,6 @@ kubectl get pod <pod-name> -n default -o jsonpath='{.spec.serviceAccountName}'
 # 6. 检查 Pod 的 token
 kubectl exec <pod-name> -n default -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
 ```
-
 ## 7.3 RBAC 更新不生效
 
 **症状**: 更新 Role/RoleBinding 后,权限未生效。
@@ -1863,7 +1868,8 @@ kubectl exec <pod-name> -n default -- cat /var/run/secrets/kubernetes.io/service
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 等待 5-10 秒
 sleep 10
 
@@ -1874,7 +1880,6 @@ kubectl apply -f rolebinding.yaml
 # 3. 重启 kube-apiserver (不推荐,仅测试环境)
 # kubectl delete pod -n kube-system -l component=kube-apiserver
 ```
-
 ---
 
 <!-- chunk: 8. 参考资料 -->## 8. 参考资料
@@ -1918,3 +1923,6 @@ kubectl apply -f rolebinding.yaml
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

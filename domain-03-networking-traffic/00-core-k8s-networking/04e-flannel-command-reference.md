@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # flanneld 启动参数详解
@@ -76,7 +81,8 @@ flanneld 是 Flannel 的核心守护进程，负责子网分配、路由维护�
 
 ### 1.1 启动方式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 直接运行
 /opt/bin/flanneld [选项]
 
@@ -86,7 +92,6 @@ systemctl start flannel
 # Kubernetes DaemonSet 环境
 # 参数通过 ConfigMap 或环境变量传入
 ```
-
 ### 1.2 参数来源优先级
 
 1. **命令行参数**（最高优先级）
@@ -482,3 +487,6 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 - [[reference|#reference Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

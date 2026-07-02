@@ -63,6 +63,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)
@@ -1298,7 +1303,8 @@ spec:
 
 ### 9.2 常用命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Ray Data状态
 ray status
 
@@ -1315,7 +1321,6 @@ aws s3 ls --summarize --human-readable s3://llm-data/
 dvc status
 dvc dag
 ```
-
 ---
 
 **数据Pipeline原则**: 质量优先 → 去重彻底 → 格式统一 → 版本追踪 → 缓存加速
@@ -1348,3 +1353,6 @@ dvc dag
 - 14-troubleshooting-performance
 - 16-llm-finetuning
 - 17-llm-inference-serving
+
+
+<!-- risk-assessed -->

@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 'init 阶段详解: mark-control-plane 与 upload-config'
@@ -138,7 +143,8 @@ func MarkControlPlane(cfg *InitConfiguration) error {
 
 **效果**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 节点标签
 kubectl get nodes --show-labels | grep node-role
 # 输出:
@@ -150,7 +156,6 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 # 输出:
 # [{"effect":"NoSchedule","key":"node-role.kubernetes.io/control-plane"}]
 ```
-
 **注意**: 污点 `NoSchedule` 意味着除非 Pod 容忍该污点，否则不会被调度到 control-plane。
 
 ---
@@ -186,7 +191,8 @@ func UploadConfiguration(cfg *InitConfiguration) error {
 
 **ConfigMap 内容**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get configmap kubeadm-config -n kube-system -o yaml
 
 # 关键字段:
@@ -201,7 +207,6 @@ kubectl get configmap kubeadm-config -n kube-system -o yaml
 #       podSubnet: 10.244.0.0/16
 #       serviceSubnet: 10.96.0.0/12
 ```
-
 ---
 
 ## ClusterConfiguration vs InitConfiguration
@@ -247,7 +252,8 @@ nodeRegistration:
 
 ## kubeadm config 家族
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前集群配置
 kubectl get configmap kubeadm-config -n kube-system -o yaml
 
@@ -263,7 +269,6 @@ kubeadm config images pull
 # 配合配置文件
 kubeadm config images pull --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
 ```
-
 ---
 
 ## kubeadm join --config 详解
@@ -349,3 +354,6 @@ kubeadm certs list
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+
+
+<!-- risk-assessed -->

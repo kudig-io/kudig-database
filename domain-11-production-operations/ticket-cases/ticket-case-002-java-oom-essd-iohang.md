@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -83,7 +88,8 @@ relationships:
 
 ## 诊断步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 Pod 状态与重启次数
 kubectl get pod -n app-order -l app=order-api -o wide
 kubectl get pod -n app-order -l app=order-api -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.containerStatuses[0].restartCount}{"\t"}{.status.containerStatuses[0].lastState.terminated.reason}{"\n"}{end}'
@@ -113,7 +119,6 @@ kubectl describe node cn-zhangjiakou.172.16.2.14 | grep -A 5 Conditions
 # 7. 采集 JVM GC 日志（若已挂载）
 kubectl cp -n app-order order-api-7d9c4f8b5-xk2z9:/app/logs/gc.log /tmp/gc.log
 ```
-
 ## 根因分析
 
 `order-api` 容器配置为 JVM `-Xmx2g`，但容器 memory limit 仅设置为 `2Gi`。JVM 堆外内存（元空间、线程栈、JNI、JIT 缓存）加上业务对象导致实际使用超过 limit，触发容器被 OOMKilled（Exit Code 137）。OOM 时 JVM 启动 Full GC，产生大量磁盘 IO。
@@ -131,20 +136,21 @@ kubectl cp -n app-order order-api-7d9c4f8b5-xk2z9:/app/logs/gc.log /tmp/gc.log
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment order-api -n app-order --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/limits/memory", "value": "4Gi"},
   {"op": "replace", "path": "/spec/template/spec/containers/0/resources/requests/memory", "value": "2Gi"},
   {"op": "add", "path": "/spec/template/spec/containers/0/env/-", "value": {"name": "JAVA_OPTS", "value": "-Xmx2g -Xms2g -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heapdump.hprof"}}
 ]'
 ```
-
 **第二步：挂载 emptyDir 用于堆转储持久化**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment order-api -n app-order --type='merge' -p='{
   "spec": {
     "template": {
@@ -159,14 +165,23 @@ kubectl patch deployment order-api -n app-order --type='merge' -p='{
   }
 }'
 ```
-
 **第三步：将问题节点上的 Pod 驱赶到健康节点**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon cn-zhangjiakou.172.16.2.14
 kubectl drain cn-zhangjiakou.172.16.2.14 \
   --ignore-daemonsets \
@@ -174,7 +189,6 @@ kubectl drain cn-zhangjiakou.172.16.2.14 \
   --pod-selector='app=order-api' \
   --timeout=300s
 ```
-
 **第四步：对 ESSD 盘进行快照备份并提交工单给阿里云存储团队**
 
 ```bash
@@ -189,14 +203,15 @@ aliyun ecs CreateSnapshot \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/order-api -n app-order
 kubectl rollout status deployment/order-api -n app-order --timeout=300s
 ```
-
 ## 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Pod 全部 Running 且重启次数不再增加
 kubectl get pod -n app-order -l app=order-api -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
 
@@ -213,7 +228,6 @@ curl -s http://order-api.app-order.svc.cluster.local/health | head
 # 5. 查看是否再次 OOM
 kubectl logs -n app-order -l app=order-api --tail=100 | grep -i "OutOfMemoryError|OOMKilled"
 ```
-
 ## 回复客户话术
 
 > 您好，已定位 `app-order/order-api` 反复重启的根因：
@@ -271,3 +285,6 @@ ESSD 磁盘 IO hang 是云上偶发但危害极大的故障类型。ESSD 虽然�
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
+
+
+<!-- risk-assessed -->

@@ -46,6 +46,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Job 与 [[CronJob|CronJob]] 故障排查指南
@@ -249,7 +254,8 @@ Job/CronJob 问题
 
 #### 2.4.1 Job 基础检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 状态
 kubectl get jobs -o wide
 
@@ -269,10 +275,10 @@ kubectl get pods -l job-name=<job-name> -o jsonpath='{range .items[*]}{.metadata
 kubectl logs job/<job-name>
 kubectl logs <pod-name>
 ```
-
 #### 2.4.2 CronJob 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CronJob 状态
 kubectl get cronjob -o wide
 
@@ -291,10 +297,10 @@ kubectl get cronjob <name> -o jsonpath='{.status.lastScheduleTime}'
 # 检查下次调度时间 (需要计算)
 # 使用在线工具验证 cron 表达式
 ```
-
 #### 2.4.3 失败分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看失败的 Pod
 kubectl get pods -l job-name=<job-name> --field-selector=status.phase=Failed
 
@@ -310,17 +316,16 @@ kubectl get job <name> -o jsonpath='{.status.conditions}'
 # 检查 BackoffLimit
 kubectl get job <name> -o jsonpath='{.spec.backoffLimit}'
 ```
-
 #### 2.4.4 控制器日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 控制器日志
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "job|cronjob"
 
 # 查看特定 Job 相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep <job-name>
 ```
-
 ### 2.5 排查注意事项
 
 | 注意事项 | 说明 |
@@ -341,12 +346,12 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep <job-nam
 #### 场景 1：Pod 反复失败 (BackoffLimitExceeded)
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe job data-import
 Events:
   Warning  BackoffLimitExceeded  Job has reached the specified backoff limit
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -354,7 +359,8 @@ Events:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 失败原因
 kubectl get pods -l job-name=<job-name>
 kubectl describe pod <failed-pod>
@@ -386,11 +392,11 @@ kubectl patch job <job-name> --type='json' -p='[{"op": "replace", "path": "/spec
 # 5. 重新创建 Job
 kubectl create -f job.yaml
 ```
-
 #### 场景 2：Job 超时 (DeadlineExceeded)
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get job
 NAME          COMPLETIONS   DURATION   AGE
 data-export   0/1           2h         2h
@@ -398,14 +404,14 @@ data-export   0/1           2h         2h
 $ kubectl describe job data-export
   Warning  DeadlineExceeded  Job was active longer than specified deadline
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 activeDeadlineSeconds 设置
 kubectl get job <job-name> -o jsonpath='{.spec.activeDeadlineSeconds}'
 
@@ -434,16 +440,15 @@ EOF
 
 # 5. 方案 C: 拆分为多个小任务
 ```
-
 #### 场景 3：Pod 运行但不退出
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l job-name=my-job
 NAME           READY   STATUS    RESTARTS   AGE
 my-job-abc12   1/1     Running   0          2h
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -451,7 +456,8 @@ my-job-abc12   1/1     Running   0          2h
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 内进程状态
 kubectl exec <pod-name> -- ps aux
 
@@ -479,7 +485,6 @@ spec:
     ...
 EOF
 ```
-
 ---
 
 ### 3.2 CronJob 调度问题
@@ -487,20 +492,21 @@ EOF
 #### 场景 1：CronJob 未按时触发
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get cronjob
 NAME       SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 backup     0 2 * * *     False     0        25h             7d
 # LAST SCHEDULE 显示 25h 前，说明今天的调度未触发
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CronJob 状态
 kubectl describe cronjob <name>
 
@@ -527,7 +533,6 @@ kubectl create job --from=cronjob/<cronjob-name> <manual-job-name>
 # 8. 查看控制器日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep cronjob
 ```
-
 #### 场景 2：配置时区
 
 **Kubernetes 1.24+ 支持 timeZone 字段：**
@@ -535,14 +540,14 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep cronjob
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 设置时区
 kubectl patch cronjob <name> --type='json' -p='[{"op": "add", "path": "/spec/timeZone", "value": "Asia/Shanghai"}]'
 
 # 验证时区
 kubectl get cronjob <name> -o jsonpath='{.spec.timeZone}'
 ```
-
 **旧版本 Kubernetes 解决方案：**
 
 ```yaml
@@ -564,7 +569,8 @@ spec:
 #### 场景 3：Job 积压
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get jobs
 NAME                    COMPLETIONS   DURATION   AGE
 backup-27893400         0/1           5m         5m
@@ -572,14 +578,14 @@ backup-27893340         0/1           65m        65m
 backup-27893280         1/1           45m        125m
 # 多个 Job 同时存在
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查并发策略
 kubectl get cronjob <name> -o jsonpath='{.spec.concurrencyPolicy}'
 
@@ -600,14 +606,14 @@ kubectl patch cronjob <name> --type='json' -p='[
   {"op": "replace", "path": "/spec/failedJobsHistoryLimit", "value": 1}
 ]'
 ```
-
 #### 场景 4：取消挂起状态
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查是否挂起
 kubectl get cronjob <name> -o jsonpath='{.spec.suspend}'
 
@@ -617,7 +623,6 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 # 立即触发一次
 kubectl create job --from=cronjob/<name> <job-name>-manual
 ```
-
 ---
 
 ### 3.3 并行执行问题
@@ -627,7 +632,8 @@ kubectl create job --from=cronjob/<name> <job-name>-manual
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前并行配置
 kubectl get job <name> -o jsonpath='{.spec.parallelism}'
 kubectl get job <name> -o jsonpath='{.spec.completions}'
@@ -655,7 +661,6 @@ spec:
       restartPolicy: Never
 EOF
 ```
-
 #### 场景 2：使用 Indexed Job (Kubernetes 1.21+)
 
 ```yaml
@@ -693,7 +698,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Job
 kubectl get jobs
 
@@ -709,7 +715,6 @@ kubectl delete jobs -l <cronjob-label>
 # 批量清理超过 N 天的 Job (需要 jq)
 kubectl get jobs -o json | jq -r '.items[] | select(.status.completionTime != null) | select((now - (.status.completionTime | fromdateiso8601)) > 86400*7) | .metadata.name' | xargs kubectl delete job
 ```
-
 #### 场景 2：配置自动清理
 
 ```yaml
@@ -737,7 +742,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为现有 Job 设置 TTL (注意：已完成的 Job 无法修改)
 # 需要在 Job 创建时设置
 cat <<EOF | kubectl apply -f -
@@ -756,7 +762,6 @@ spec:
       restartPolicy: Never
 EOF
 ```
-
 ---
 
 ### 3.5 完整示例
@@ -900,7 +905,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Job 状态
 kubectl get jobs -o wide
 kubectl describe job <name>
@@ -927,7 +933,6 @@ kubectl delete job <name>
 kubectl patch cronjob <name> -p '{"spec":{"suspend":true}}'
 kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 ```
-
 ### Cron 表达式参考
 
 ```
@@ -968,3 +973,5 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

@@ -44,6 +44,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 部署方案指南 (Deployment Guide)
@@ -69,6 +74,7 @@ prerequisites:
 请根据以下问题快速定位你需要的文档：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Q1: 你的目标是什么？
 │
 ├── 学习 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] / 快速体验 → Q2
@@ -85,7 +91,6 @@ Q1: 你的目标是什么？
     ├── 自建机房？ → kubeadm HA + 裸金属方案
     └── 使用云厂商？ → 云托管 K8s (EKS/GKE/ACK) + 本文档安全/监控部分
 ```
-
 ---
 
 ## 部署场景总览
@@ -102,6 +107,7 @@ Q1: 你的目标是什么？
 ## 场景递进关系
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 本机 Demo (01)        →  在 Docker 里用容器模拟 K8s，零成本快速体验核心概念
   ↓                      学会 kubectl 基本操作、Pod/Deployment/Service 概念
 单节点部署 (02)       →  在真实 Linux 上跑 K8s，理解各组件实际协作方式
@@ -111,7 +117,6 @@ Q1: 你的目标是什么？
 生产环境部署 (04)     →  高可用 + 安全合规 + 灾备恢复 + 成本优化 + 升级策略
                          学会 HA etcd、HAProxy、零信任网络、Velero 备份
 ```
-
 > **备注**: 建议按顺序学习，每个阶段的技能是下一阶段的基础。
 
 ---
@@ -212,3 +217,6 @@ Q1: 你的目标是什么？
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

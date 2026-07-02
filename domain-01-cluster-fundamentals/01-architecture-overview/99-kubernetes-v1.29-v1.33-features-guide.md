@@ -67,6 +67,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.29 - v1.33 版本特性深度指南
@@ -230,23 +235,23 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 控制器确认条件满足后移除 gate
 kubectl patch pod gated-pod --type=json \
   -p='[{"op": "remove", "path": "/spec/schedulingGates/0"}]'
 ```
-
 **场景**: 外部依赖就绪后才调度 Pod (如网络配置、存储准备)。
 
 ### 3.3 安全加固
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # v1.30 起禁止匿名用户绑定 cluster-admin
 # 检查现有绑定
 kubectl get clusterrolebindings -o json | \
   jq '.items[] | select(.subjects[]?.name == "system:anonymous")'
 ```
-
 ---
 
 <!-- chunk: 四、v1.31 核心特性 -->
@@ -432,7 +437,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 原地调整资源 (无需重启 Pod)
 kubectl patch pod resizable-pod --patch '
 {
@@ -447,7 +453,6 @@ kubectl patch pod resizable-pod --patch '
   }
 }'
 ```
-
 **限制**: Alpha 阶段，需启用 `InPlacePodVerticalScaling` Feature Gate。
 
 ### 6.3 Scheduler Queueing Hints (Beta)
@@ -575,3 +580,6 @@ featureGates:
 - 99-kubernetes-v1.29-v1.33-complete-feature-gates-reference
 - 99-kubernetes-v1.33-deprecation-migration-guide
 - 99-kubernetes-v1.33-ecosystem-compatibility-matrix
+
+
+<!-- risk-assessed -->

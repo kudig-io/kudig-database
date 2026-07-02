@@ -35,6 +35,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # kube-proxy 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
@@ -207,7 +212,8 @@ conntrack -L -p tcp --dport <ServicePort> | grep <PodIP>
 
 #### 2.3.1 第一步：检查 kube-proxy Pod 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 kube-proxy Pod
 kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
 
@@ -223,10 +229,10 @@ curl http://localhost:10256/healthz
 # 检查 kube-proxy 配置
 kubectl get configmap -n kube-system kube-proxy -o yaml
 ```
-
 #### 2.3.2 第二步：确认代理模式
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从 ConfigMap 查看模式
 kubectl get configmap -n kube-system kube-proxy -o yaml | grep mode
 
@@ -239,10 +245,10 @@ lsmod | grep -E "ip_vs|nf_conntrack"
 # 检查 iptables 版本
 iptables --version
 ```
-
 #### 2.3.3 第三步：检查 Service 和 Endpoints
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 详情
 kubectl get svc <service-name> -n <namespace> -o yaml
 
@@ -258,7 +264,6 @@ kubectl get pods -n <namespace> -l <selector-key>=<selector-value>
 # 检查 Pod 是否 Ready
 kubectl get pods -n <namespace> -o wide | grep <service-related>
 ```
-
 #### 2.3.4 第四步：检查 iptables 规则（iptables 模式）
 
 ```bash
@@ -306,7 +311,8 @@ ip addr show kube-ipvs0
 
 #### 2.3.6 第六步：测试连通性
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Pod 内测试 ClusterIP
 kubectl run test-pod --rm -it --image=busybox -- sh
 # 在 Pod 内执行
@@ -325,10 +331,10 @@ conntrack -L -d <cluster-ip>
 # 抓包分析
 tcpdump -i any host <cluster-ip> -nn
 ```
-
 #### 2.3.7 第七步：检查日志和指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-proxy 同步日志
 kubectl logs -n kube-system -l k8s-app=kube-proxy | grep -i "sync"
 
@@ -343,7 +349,6 @@ curl http://localhost:10249/metrics | grep kubeproxy
 # kubeproxy_sync_proxy_rules_last_timestamp_seconds - 最后同步时间
 # kubeproxy_network_programming_duration_seconds - 网络编程延迟
 ```
-
 ### 2.4 排查注意事项
 
 #### 2.4.1 安全注意事项
@@ -370,7 +375,17 @@ curl http://localhost:10249/metrics | grep kubeproxy
 
 #### 3.1.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查 Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
 kubectl describe pod -n kube-system <kube-proxy-pod>
@@ -393,7 +408,6 @@ kubectl rollout restart daemonset -n kube-system kube-proxy
 # 步骤 7：验证恢复
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -417,7 +431,8 @@ kubectl get pods -n kube-system -l k8s-app=kube-proxy
 
 #### 3.2.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认 Service 和 Endpoints 存在
 kubectl get svc <service-name> -n <namespace>
 kubectl get endpoints <service-name> -n <namespace>
@@ -446,7 +461,6 @@ kubectl delete pod -n kube-system <kube-proxy-pod-on-node>
 # 步骤 7：测试连通性
 kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port>
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -470,7 +484,8 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 #### 3.3.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查规则是否存在
 iptables -t nat -L KUBE-SERVICES -n | grep <cluster-ip>
 
@@ -500,7 +515,6 @@ iptables -t nat -F KUBE-NODEPORTS
 # 步骤 5：验证规则恢复
 iptables -t nat -L KUBE-SERVICES -n --line-numbers
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -524,7 +538,17 @@ iptables -t nat -L KUBE-SERVICES -n --line-numbers
 
 #### 3.4.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：确认 IPVS 模式生效
 kubectl logs -n kube-system -l k8s-app=kube-proxy | grep "Using ipvs"
 
@@ -557,7 +581,6 @@ kubectl edit configmap -n kube-system kube-proxy
 # 步骤 8：重启 kube-proxy
 kubectl rollout restart daemonset -n kube-system kube-proxy
 ```
-
 #### 3.4.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -581,7 +604,17 @@ kubectl rollout restart daemonset -n kube-system kube-proxy
 
 #### 3.5.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：加载必要的内核模块
 cat > /etc/modules-load.d/ipvs.conf << EOF
 ip_vs
@@ -625,7 +658,6 @@ ipvsadm -Ln
 # 步骤 7：测试 Service 连通性
 kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port>
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -650,7 +682,8 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 #### 3.6.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 conntrack 表状态
 conntrack -C  # 当前连接数
 cat /proc/sys/net/netfilter/nf_conntrack_max  # 最大值
@@ -679,7 +712,6 @@ sysctl -w net.netfilter.nf_conntrack_tcp_timeout_time_wait=30
 # 步骤 7：验证连通性恢复
 kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port>
 ```
-
 #### 3.6.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -736,3 +768,6 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<cluster-ip>:<port
 
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

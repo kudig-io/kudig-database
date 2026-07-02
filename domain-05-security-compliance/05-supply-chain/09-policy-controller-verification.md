@@ -45,6 +45,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -182,7 +187,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 安装 Kyverno
 helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
@@ -208,7 +214,6 @@ helm install kyverno kyverno/kyverno \
 kubectl get pods -n kyverno
 kubectl get crd | grep kyverno
 ```
-
 ## 2.2 基础镜像签名验证策略 (Basic Image Signature Verification Policy)
 
 ```yaml
@@ -608,7 +613,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 安装
 helm repo add sigstore https://sigstore.github.io/helm-charts
 helm repo update
@@ -632,7 +638,6 @@ kubectl get validatingwebhookconfiguration | grep cosign
 # 检查 webhook 配置
 kubectl describe validatingwebhookconfiguration policy.sigstore.dev
 ```
-
 ## 3.2 ClusterImagePolicy 基础配置 (ClusterImagePolicy Basic Configuration)
 
 ```yaml
@@ -810,7 +815,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 安装 OPA Gatekeeper
 helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
 helm repo update
@@ -829,7 +835,6 @@ helm install gatekeeper gatekeeper/gatekeeper \
 kubectl get pods -n gatekeeper-system
 kubectl get constrainttemplate
 ```
-
 ## 4.2 外部数据提供者配置 (External Data Provider Configuration)
 
 ```yaml
@@ -1211,7 +1216,8 @@ rules:
 
 ## 6.1 Kyverno CLI 测试 (Kyverno CLI Testing)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 Kyverno CLI
 kubectl kyverno version  # 如果通过 kubectl plugin 安装
 # 或
@@ -1225,7 +1231,6 @@ kyverno apply verify-image-signatures.yaml \
   --resource test-pod.yaml \
   --verbose
 ```
-
 ```yaml
 # test/kyverno-test.yaml - Kyverno CLI 测试配置
 name: verify-image-signatures-test
@@ -1288,7 +1293,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kubectl dry-run 测试策略效果
 kubectl apply \
   --dry-run=server \
@@ -1324,7 +1330,6 @@ kubectl run test-unsigned \
 # Error from server: admission webhook "policy.sigstore.dev" denied the request:
 # image docker.io/library/nginx:latest not signed
 ```
-
 ---
 
 <!-- chunk: 7. 准入控制器调试与故障排查 (Admission Controller Debugging and Troubleshooting) -->## 7. 准入控制器调试与故障排查 (Admission Controller Debugging and Troubleshooting)
@@ -1334,7 +1339,8 @@ kubectl run test-unsigned \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Kyverno 准入控制器日志
 kubectl logs -n kyverno \
   -l app.kubernetes.io/component=admission-controller \
@@ -1376,14 +1382,14 @@ kubectl annotate ns production \
 # 检查 Kyverno 配置
 kubectl get cm kyverno -n kyverno -o yaml
 ```
-
 ## 7.2 Policy Controller 故障排查 (Policy Controller Troubleshooting)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Policy Controller 日志
 kubectl logs -n cosign-system \
   -l app=policy-controller-webhook \
@@ -1426,7 +1432,6 @@ kubectl patch validatingwebhookconfiguration \
   --type='json' \
   -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Fail"}]'
 ```
-
 ## 7.3 常见问题解决方案 (Common Issue Solutions)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -1435,7 +1440,8 @@ kubectl patch validatingwebhookconfiguration \
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 问题 1: webhook timeout
 # 症状：Pod 创建超时
 # 解决：
@@ -1483,7 +1489,6 @@ kubectl rollout restart deploy -n kyverno
 kubectl logs -n kyverno -l app.kubernetes.io/component=admission-controller \
   --tail=50 | grep -E "DENIED|ERROR|verifyImage"
 ```
-
 ---
 
 <!-- chunk: 8. 策略监控与报告 (Policy Monitoring and Reporting) -->## 8. 策略监控与报告 (Policy Monitoring and Reporting)
@@ -1757,7 +1762,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Git 工作流用于策略变更
 
 # 1. 创建策略分支
@@ -1788,7 +1794,6 @@ gh pr create --title "Add SBOM verification policy" \
 # 8. 策略变更记录
 git log --follow -p -- policies/verify-sbom.yaml
 ```
-
 ## 10.2 策略门控流水线 (Policy Gate Pipeline)
 
 ```yaml
@@ -1912,3 +1917,5 @@ Policy Controller 镜像验证是 Kubernetes 供应链安全的最后一道防�
 - 99-slsa-supply-chain-security-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

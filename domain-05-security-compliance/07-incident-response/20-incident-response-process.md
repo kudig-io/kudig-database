@@ -57,6 +57,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 20 - 安全事件响应与应急处理流程
@@ -332,7 +337,8 @@ data:
 
 #### 容器取证收集脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 04-container-forensics-collector.sh
 
@@ -387,7 +393,6 @@ find "$OUTPUT_DIR" -type f -exec sha256sum {} \; > "$OUTPUT_DIR/checksums.sha256
 echo "Forensics collection completed!"
 echo "Results stored in: $OUTPUT_DIR"
 ```
-
 ### 3.2 日志分析与关联
 
 #### 安全日志关联分析
@@ -603,7 +608,8 @@ graph TD
 
 #### 恢复后健康检查清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 07-post-incident-health-check.sh
 
@@ -661,7 +667,6 @@ EOF
 
 echo "Health check completed. Report saved to /reports/incident_${INCIDENT_ID}_recovery_report.txt"
 ```
-
 ### 5.2 事后总结与改进
 
 #### 事件复盘模板
@@ -792,3 +797,6 @@ echo "Health check completed. Report saved to /reports/incident_${INCIDENT_ID}_r
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

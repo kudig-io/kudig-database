@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 容器运行时威胁响应：Falco 与 Tetragon
@@ -98,7 +103,8 @@ authors:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Falco chart 仓库
 helm repo add falcosecurity https://falcosecurity.github.io/charts
 helm repo update
@@ -110,7 +116,6 @@ helm install falco falcosecurity/falco \
   --set driver.kind=modern_ebpf \
   --set tty=true
 ```
-
 ### 2.2 自定义规则示例
 
 ```yaml
@@ -146,7 +151,8 @@ helm install falco falcosecurity/falco \
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create configmap falco-custom-rules \
   --from-file=custom-rules.yaml -n falco
 
@@ -155,7 +161,6 @@ helm upgrade falco falcosecurity/falco \
   --set collectors.containerd.enabled=true \
   --set customRules."custom-rules\.yaml"=custom-rules.yaml
 ```
-
 ---
 
 ## 3. Tetragon 部署与策略
@@ -165,12 +170,12 @@ helm upgrade falco falcosecurity/falco \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add cilium https://helm.cilium.io
 helm install tetragon cilium/tetragon \
   --namespace kube-system
 ```
-
 ### 3.2 TracingPolicy 示例
 
 ```yaml
@@ -201,11 +206,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 实时查看事件
 kubectl exec -it -n kube-system ds/tetragon -c tetragon -- tetra getevents -o compact
 ```
-
 ---
 
 ## 4. 常见威胁检测场景
@@ -240,19 +245,20 @@ kubectl exec -it -n kube-system ds/tetragon -c tetragon -- tetra getevents -o co
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm install falcosidekick falcosecurity/falcosidekick \
   --namespace falco \
   --set config.slack.webhookurl=https://hooks.slack.com/...
 ```
-
 ### 5.2 自动响应 playbook
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # auto-respond.sh
 # 根据 Falco 告警自动隔离可疑 Pod
@@ -277,25 +283,24 @@ spec:
     - Egress
 EOF
 ```
-
 ---
 
 ## 6. 取证与溯源
 
 ### 6.1 收集 Falco 事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出最近 1 小时 Falco 事件
 kubectl logs -n falco -l app.kubernetes.io/name=falco --since=1h > /tmp/falco-events.log
 ```
-
 ### 6.2 关联审计日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 根据 Pod 名称关联 K8s 审计日志
 kubectl audit-log search --pod=<pod-name> --namespace=<ns> --since=1h
 ```
-
 ---
 
 ## 7. 性能与稳定性
@@ -474,3 +479,5 @@ Falco/Tetragon 规则需要定期维护，以适应业务变化并降低误报�
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
 
 ```
+
+<!-- risk-assessed -->

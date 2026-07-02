@@ -46,6 +46,11 @@ prerequisites:
 - tls-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: CRD 与 Operator 故障排查指南
@@ -246,6 +251,7 @@ Reconcile 循环详解:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 CRD/Operator 问题
         │
         ▼
@@ -345,12 +351,12 @@ CRD/Operator 问题
                                                       │ 完成       │
                                                       └────────────┘
 ```
-
 ### 排查命令集
 
 #### CRD 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 CRD
 kubectl get crd
 
@@ -369,10 +375,10 @@ kubectl get crd <crd-name> -o jsonpath='{.status.storedVersions}'
 # 检查 Conversion Webhook 配置
 kubectl get crd <crd-name> -o yaml | grep -A10 "conversion:"
 ```
-
 #### CR 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出自定义资源
 kubectl get <resource-type> -A
 
@@ -391,10 +397,10 @@ kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.deleti
 # 查看 CR 的事件
 kubectl get events -n <namespace> --field-selector involvedObject.name=<cr-name>
 ```
-
 #### Operator 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Operator 部署
 kubectl get deployment -n <operator-namespace>
 kubectl get pods -n <operator-namespace>
@@ -414,10 +420,10 @@ kubectl describe clusterrolebinding <operator-binding>
 kubectl get sa -n <operator-namespace>
 kubectl describe sa <operator-sa> -n <operator-namespace>
 ```
-
 #### Webhook 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出 Validating Webhooks
 kubectl get validatingwebhookconfigurations
 
@@ -434,7 +440,6 @@ kubectl get endpoints -n <webhook-namespace>
 # 检查 Webhook Pod 日志
 kubectl logs -n <webhook-namespace> <webhook-pod>
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
@@ -456,7 +461,8 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 确认 CRD 是否存在
 kubectl get crd | grep <expected-crd-name>
 
@@ -475,7 +481,6 @@ kubectl get crd <crd-name> -o jsonpath='{.spec.versions[*].name}'
 # 步骤 5: 验证
 kubectl apply -f <cr.yaml> --dry-run=client
 ```
-
 **CRD 版本示例**：
 
 ```yaml
@@ -497,7 +502,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 分析拒绝原因
 # 错误信息通常会说明拒绝原因
 
@@ -516,14 +522,14 @@ kubectl logs -n <namespace> -l app=<webhook-app> --tail=50
 # 步骤 5: 修复 CR 配置后重试
 kubectl apply -f <fixed-cr.yaml>
 ```
-
 **临时禁用 Webhook（紧急情况）**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ⚠️ 警告：这会跳过所有验证，仅在紧急情况使用
 
 # 方法 1: 添加 failurePolicy: Ignore
@@ -535,7 +541,6 @@ kubectl delete validatingwebhookconfiguration <name>
 
 # 恢复后务必重新启用
 ```
-
 ### Operator Reconcile 失败
 
 **问题现象**：CR 状态不更新，Operator 日志显示 reconcile 错误。
@@ -546,7 +551,8 @@ kubectl delete validatingwebhookconfiguration <name>
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 查看 Operator 日志定位错误
 kubectl logs -n <operator-ns> <operator-pod> -f | grep -i "error|reconcile"
 
@@ -573,7 +579,6 @@ kubectl annotate <resource-type> <name> force-reconcile=$(date +%s) -n <namespac
 # 方法 2: 重启 Operator (影响所有 CR)
 kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 ```
-
 ### RBAC 权限问题
 
 **问题现象**：Operator 日志显示 `forbidden` 或 `unauthorized` 错误。
@@ -583,7 +588,17 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 识别缺失的权限
 kubectl logs -n <operator-ns> <operator-pod> | grep -i "forbidden|cannot"
 # 示例输出: cannot create deployments.apps in namespace "xxx"
@@ -594,7 +609,6 @@ kubectl get clusterrole <operator-role> -o yaml
 # 步骤 3: 添加缺失的权限
 kubectl edit clusterrole <operator-role>
 ```
-
 **ClusterRole 权限示例**：
 
 ```yaml
@@ -627,11 +641,11 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 4: 重启 Operator 使新权限生效
 kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 ```
-
 ### Finalizer 导致资源删除卡住
 
 **问题现象**：CR 一直处于 `Terminating` 状态无法删除。
@@ -641,7 +655,8 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查 Finalizers
 kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.finalizers}'
 
@@ -663,7 +678,6 @@ kubectl logs -n <operator-ns> <operator-pod> | grep -i "finalizer|cleanup"
 kubectl patch <resource-type> <name> -n <namespace> --type='json' \
   -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
 ```
-
 **警告**：强制移除 Finalizer 可能导致：
 - 云资源 (如 EBS 卷、LoadBalancer) 未被清理
 - 相关的 Kubernetes 资源未被删除
@@ -678,7 +692,8 @@ kubectl patch <resource-type> <name> -n <namespace> --type='json' \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查 Pod 状态和事件
 kubectl describe pod <operator-pod> -n <operator-namespace>
 
@@ -706,7 +721,6 @@ kubectl get lease -n <operator-ns>
 # 步骤 4: 修复后重新部署
 kubectl rollout restart deployment <operator-deployment> -n <operator-ns>
 ```
-
 ### CRD 版本升级/迁移
 
 **问题现象**：CRD 版本升级后，旧版本 CR 不兼容。
@@ -716,7 +730,8 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-ns>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查当前存储版本
 kubectl get crd <crd-name> -o jsonpath='{.status.storedVersions}'
 
@@ -740,7 +755,6 @@ kubectl apply -f <new-crd-with-conversion.yaml>
 # 步骤 7: 移除旧版本 (可选，需谨慎)
 # 只有确认所有 CR 已迁移后才能移除
 ```
-
 **带 Conversion Webhook 的 CRD 示例**：
 
 ```yaml
@@ -789,7 +803,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 找出阻塞删除的资源
 kubectl api-resources --verbs=list --namespaced -o name | \
   xargs -n 1 kubectl get -n <namespace> --ignore-not-found --show-kind
@@ -814,7 +829,6 @@ done
 kubectl get namespace <namespace> -o json | jq '.spec.finalizers = []' | \
   kubectl replace --raw "/api/v1/namespaces/<namespace>/finalize" -f -
 ```
-
 ### 安全生产风险提示
 
 | 操作 | 风险等级 | 潜在风险 | 建议措施 |
@@ -828,7 +842,8 @@ kubectl get namespace <namespace> -o json | jq '.spec.finalizers = []' | \
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== CRD/Operator 一键诊断脚本 =====
 
 echo "=== CRD 列表 ==="
@@ -850,7 +865,6 @@ kubectl get all -A | grep Terminating
 echo -e "\n=== 最近的 Operator 事件 ==="
 kubectl get events -A --sort-by='.lastTimestamp' | grep -i operator | tail -10
 ```
-
 ### 附录：常见 Operator 框架
 
 | 框架 | 语言 | 特点 | 典型日志位置 |
@@ -916,3 +930,5 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

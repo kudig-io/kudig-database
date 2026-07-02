@@ -44,6 +44,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Backstage|Backstage]] 脚手架与模板系统
@@ -678,6 +683,7 @@ parameters:
 ## 3.1 模板库目录结构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 backstage-templates/
 ├── templates/
 │   ├── go-microservice/         # Go 微服务模板
@@ -715,7 +721,6 @@ backstage-templates/
 └── docs/
     └── template-development-guide.md
 ```
-
 ## 3.2 Go 微服务模板骨架
 
 ```
@@ -2729,3 +2734,6 @@ Backstage Scaffolder 是平台工程中**黄金路径**的核心实现工具。�
 - 04-backstage-catalog-techdocs
 - 06-kratix-platform-as-code
 - 07-crossplane-platform-composition
+
+
+<!-- risk-assessed -->

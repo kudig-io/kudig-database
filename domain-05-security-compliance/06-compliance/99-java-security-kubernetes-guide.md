@@ -59,6 +59,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Java 应用 [[Kubernetes|Kubernetes]]es 安全加固深度实践|Kubernetes 安全加固深度实践]]
@@ -571,7 +576,8 @@ logging:
 
 ## 依赖安全与 SBOM
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # java_security_scan.sh
 
@@ -618,7 +624,6 @@ echo "SBOM: target/sbom.json"
 echo "Dependency-Check: target/dependency-check-report.html"
 echo "Trivy Report: trivy-report.json"
 ```
-
 ```yaml
 # Tekton Pipeline 安全扫描
 apiVersion: tekton.dev/v1
@@ -837,7 +842,8 @@ rules:
 
 ## CIS Benchmark 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # java_cis_check.sh
 
@@ -885,7 +891,6 @@ kubectl get pods -n production -o json | \
     select(.spec.automountServiceAccountToken == true) |
     "WARN: \(.metadata.name) - auto-mounting SA token"'
 ```
-
 <!-- chunk: 监控与告警 -->## 监控与告警
 
 ```yaml
@@ -1039,7 +1044,8 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # java_security_diagnostics.sh
 
@@ -1092,7 +1098,6 @@ kubectl get pods -n production -o json | \
   jq -r '.items[] | select(.status.containerStatuses[0].restartCount > 3) |
     "\(.metadata.name): restarts=\(.status.containerStatuses[0].restartCount) lastState=\(.status.containerStatuses[0].lastState)"'
 ```
-
 ---
 
 *本文档基于 Java 应用 Kubernetes 安全加固实践经验编写，持续更新最新技术和最佳实践。*
@@ -1122,3 +1127,5 @@ kubectl get pods -n production -o json | \
 - 99-opa-gatekeeper-policy-guide
 
 - [[domain-05-security-compliance/README.md|返回目录]]
+
+<!-- risk-assessed -->

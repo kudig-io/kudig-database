@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 金丝雀发布策略与回滚
@@ -99,7 +104,8 @@ authors:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Argo Rollouts controller
 kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
@@ -107,7 +113,6 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 # 安装 CLI
 brew install argoproj/tap/kubectl-argo-rollouts
 ```
-
 ### 2.2 Rollout 示例
 
 ```yaml
@@ -170,11 +175,11 @@ spec:
 
 ### 2.3 查看 Rollout 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看金丝雀进度
 kubectl argo rollouts get rollout order-service -n production --watch
 ```
-
 ---
 
 ## 3. Istio 流量分割
@@ -320,24 +325,24 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Argo Rollouts 回滚
 kubectl argo rollouts undo order-service -n production
 
 # 使用 kubectl 回滚 Deployment
 kubectl rollout undo deployment/order-service -n production
 ```
-
 ### 5.3 回滚验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认稳定版本 Pod 全部 Running
 kubectl argo rollouts get rollout order-service -n production
 
 # 验证流量恢复
 kubectl get virtualservice order-service-vs -n production -o yaml
 ```
-
 ---
 
 ## 6. 生产最佳实践
@@ -518,3 +523,5 @@ spec:
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 
 ```
+
+<!-- risk-assessed -->

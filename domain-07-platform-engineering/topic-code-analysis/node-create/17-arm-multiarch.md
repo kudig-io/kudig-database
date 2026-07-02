@@ -60,6 +60,11 @@ related_topics:
 - cloud-node
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # ARM 节点与多架构混合集群
@@ -67,6 +72,7 @@ related_topics:
 ## 架构概述
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────┐
 │               多架构 Kubernetes 集群                                  │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -84,7 +90,6 @@ related_topics:
 │  关键优势：ARM arm64 的性价比通常比 x86 高 20%-40%                   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
-
 ## ARM 节点前置条件
 
 ### 检查节点架构
@@ -104,7 +109,8 @@ lscpu | grep Architecture
 
 ### 安装 ARM 版 kubelet/kubeadm/kubectl
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 以 Ubuntu/Debian ARM64 为例
 KUBE_VERSION="1.30.0"
 ARCH="arm64"
@@ -122,7 +128,6 @@ curl -LO "https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/arm64/kubectl"
 chmod +x kubelet kubeadm kubectl
 mv kubelet kubeadm kubectl /usr/local/bin/
 ```
-
 ### 安装 containerd（ARM64）
 
 ```bash
@@ -164,7 +169,8 @@ ARM 节点要运行应用，首要条件是镜像必须支持 arm64 架构。
 
 ### 使用 Docker Buildx 构建多架构镜像
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 buildx builder 并启用多平台支持
 docker buildx create --name multiarch-builder --use --platform linux/amd64,linux/arm64
 
@@ -178,14 +184,13 @@ docker buildx build \
 # 验证 manifest list（查看镜像支持的架构列表）
 docker buildx imagetools inspect myregistry/myapp:v1.0.0
 ```
-
 ### 查看镜像架构支持
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看镜像 manifest list
 docker manifest inspect nginx:latest | grep -A5 '"architecture"'
 ```
-
 ```json
 {
   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
@@ -306,29 +311,29 @@ spec:
 
 ## 验证多架构节点状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点的架构标签
 kubectl get nodes -o custom-columns=\
 'NAME:.metadata.name,ARCH:.metadata.labels.kubernetes\.io/arch,OS:.metadata.labels.kubernetes\.io/os,STATUS:.status.conditions[-1].type'
 ```
-
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 NAME              ARCH    OS      STATUS
 master-amd64      amd64   linux   Ready
 worker-amd64-1    amd64   linux   Ready
 worker-arm64-1    arm64   linux   Ready  ← AWS Graviton
 worker-arm64-2    arm64   linux   Ready  ← AWS Graviton
 ```
-
 ### 验证 Pod 运行在正确架构的节点上
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -o wide | awk '{print $1, $7}'
 # NAME              NODE
 # web-amd64-xxx     worker-amd64-1
 # web-arm64-yyy     worker-arm64-1
 ```
-
 ## ARM 常见兼容性问题
 
 | 问题 | 原因 | 解决方案 |
@@ -342,6 +347,7 @@ kubectl get pods -o wide | awk '{print $1, $7}'
 ## 成本优化参考
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 以 AWS 为例（2024 参考价格，实际以官网为准）：
 
 c6i.2xlarge (amd64)  : $0.34/h  8 vCPU 16GB
@@ -350,7 +356,6 @@ c6g.2xlarge (arm64)  : $0.272/h 8 vCPU 16GB
 Graviton 节省比例约 20%-40%（视工作负载特性）
 Spot 实例叠加 Graviton = 最高性价比组合
 ```
-
 ## 相关函数
 
 - [`节点注册`](02-registration.md) — kubelet 注册流程，自动检测架构
@@ -370,3 +375,6 @@ Spot 实例叠加 Graviton = 最高性价比组合
 - [[entities/containerd.md|containerd]]
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+
+
+<!-- risk-assessed -->

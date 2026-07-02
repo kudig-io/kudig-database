@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Graylog 企业级日志管理平台深度实践
@@ -677,7 +682,8 @@ alert_rules:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Graylog 日常运维维护脚本
 
@@ -851,7 +857,6 @@ main() {
 # 执行主函数
 main
 ```
-
 <!-- chunk: 最佳实践 (Best Practices) -->## 最佳实践 (Best Practices)
 
 ## 部署最佳实践 (Deployment Best Practices)
@@ -984,3 +989,6 @@ main
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

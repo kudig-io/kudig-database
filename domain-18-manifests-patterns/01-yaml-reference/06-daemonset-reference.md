@@ -42,6 +42,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 06 - [[DaemonSet|DaemonSet]] YAML 配置参考
@@ -583,14 +588,14 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为节点添加标签
 kubectl label nodes node1 node2 logging=enabled
 
 # 移除标签 (Pod 会自动从节点删除)
 kubectl label nodes node1 logging-
 ```
-
 ## 方法 2: nodeAffinity (复杂条件)
 
 ```yaml
@@ -679,7 +684,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新 DaemonSet 配置 (不会触发 Pod 更新)
 kubectl apply -f daemonset.yaml
 
@@ -687,7 +693,6 @@ kubectl apply -f daemonset.yaml
 kubectl delete pod fluentd-xxx -n kube-system
 # DaemonSet Controller 会创建新版本 Pod
 ```
-
 **优点**: 完全控制更新时机,可逐个节点验证
 **缺点**: 需要手动操作,容易遗漏节点
 
@@ -1052,11 +1057,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为节点添加标签
 kubectl label nodes node1 node2 node3 role=logging
 ```
-
 **方法 2: nodeAffinity**:
 ```yaml
 spec:
@@ -1097,7 +1102,8 @@ affinity:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看历史版本
 kubectl rollout history daemonset fluentd -n kube-system
 
@@ -1110,7 +1116,6 @@ kubectl rollout undo daemonset fluentd -n kube-system --to-revision=3
 # 查看回滚状态
 kubectl rollout status daemonset fluentd -n kube-system
 ```
-
 ## Q5: 如何手动触发 DaemonSet Pod 重启?
 
 **方法 1: 修改 Pod 模板 (触发滚动更新)**:
@@ -1118,25 +1123,25 @@ kubectl rollout status daemonset fluentd -n kube-system
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改注解触发更新
 kubectl patch daemonset fluentd -n kube-system -p \
   '{"spec":{"template":{"metadata":{"annotations":{"restart-at":"'$(date +%s)'"}}}}}'
 ```
-
 **方法 2: 手动删除 Pod (DaemonSet 会自动重建)**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除特定节点的 Pod
 kubectl delete pod fluentd-xxx -n kube-system
 
 # 删除所有 Pod (逐个重建)
 kubectl delete pods -l app=fluentd -n kube-system
 ```
-
 ## Q6: 节点资源不足时 DaemonSet Pod 会被驱逐吗?
 
 **取决于 PriorityClass**:
@@ -1156,7 +1161,8 @@ spec:
 
 ## Q7: 如何监控 DaemonSet 健康状态?
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 状态
 kubectl get daemonset fluentd -n kube-system
 
@@ -1173,7 +1179,6 @@ kubectl get pods -l app=fluentd -n kube-system -o wide
 # 监控滚动更新进度
 kubectl rollout status daemonset fluentd -n kube-system
 ```
-
 **关键指标**:
 - `DESIRED` = 应该运行的 Pod 数量 (符合条件的节点数)
 - `CURRENT` = 当前运行的 Pod 数量
@@ -1231,7 +1236,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看某节点的日志收集状态
 kubectl exec -n kube-system fluentd-xxx -- fluentd --dry-run
 
@@ -1241,7 +1247,6 @@ kubectl exec -n kube-system fluentd-xxx -- killall -USR1 fluentd
 # 热重载配置 (如果支持)
 kubectl exec -n kube-system fluentd-xxx -- killall -HUP fluentd
 ```
-
 ## 案例 2: Prometheus Node Exporter 监控
 
 **架构**:
@@ -1498,3 +1503,6 @@ spec:
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

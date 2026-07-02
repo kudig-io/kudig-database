@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-06-10] CronJob 并发策略 Forbid 导致对账任务堆积，数据库连接池耗尽
@@ -35,20 +40,21 @@ last_updated: 2026-05-23
 04:30，数据库监控告警 `postgres_active_connections` 达到 800/800（max_connections=800）。在线服务 `order-api`、`payment-api` 的 P99 延迟从 150ms 飙升至 4s。
 
 排查发现大量 `reconcile-job-*` Pod 处于 `Running` 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get jobs -n prod-batch | grep reconcile
 # reconcile-20260610-0000   1/1     170m   170m
 # reconcile-20260610-0100   1/1     110m   110m
 # reconcile-20260610-0200   1/1     50m    50m
 # reconcile-20260610-0300   1/1     Running   10m
 ```
-
 每个 Job 的 Pod 都持有大量数据库连接。
 
 ## 诊断过程
 
 **04:32** — 检查 CronJob 配置：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cronjob reconcile-job -n prod-batch -o yaml
 # spec:
 #   schedule: "0 * * * *"
@@ -65,9 +71,9 @@ kubectl get cronjob reconcile-job -n prod-batch -o yaml
 #                 cpu: "1"
 #                 memory: "2Gi"
 ```
-
 **04:34** — 查看 Job 运行时长：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get job reconcile-20260610-0000 -n prod-batch -o jsonpath='{.status.conditions[?(@.type=="Complete")].lastTransitionTime}'
 # （无 Complete 条件，Job 仍在运行）
 
@@ -76,7 +82,6 @@ kubectl logs -n prod-batch job/reconcile-20260610-0000 --tail -n 20
 # 2026-06-10 04:33:15 INFO  Current connection count: 120
 # ...
 ```
-
 **04:36** — 分析 Job 变慢原因：
 ```bash
 # 对账数据量从 5 月的 100 万条增长到 6 月的 200 万条
@@ -106,28 +111,29 @@ kubectl logs -n prod-batch job/reconcile-20260610-0000 --tail -n 20
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete job reconcile-20260610-0000 -n prod-batch --cascade=foreground
 # 释放数据库连接
 ```
-
 **04:42** — 手动触发一次对账：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create job --from=cronjob/reconcile-job reconcile-20260610-0430 -n prod-batch
 kubectl get job reconcile-20260610-0430 -n prod-batch
 # reconcile-20260610-0430   1/1     Running   2m
 ```
-
 **04:45** — 调整 `reconcile-job` 资源配置：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob reconcile-job -n prod-batch --type='merge' -p '
 {
   "spec": {
@@ -149,16 +155,15 @@ kubectl patch cronjob reconcile-job -n prod-batch --type='merge' -p '
   }
 }'
 ```
-
 **04:48** — 暂停有问题的 `daily-report` Job：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch cronjob daily-report -n prod-batch --type='merge' -p '{"spec":{"suspend":true}}'
 ```
-
 ## 验证
 - 04:50 — 数据库连接数从 800 降至 120
 - 04:51 — 在线服务 P99 延迟从 4s 恢复至 180ms
@@ -177,3 +182,6 @@ kubectl patch cronjob daily-report -n prod-batch --type='merge' -p '{"spec":{"su
   5. 添加告警：`cronjob_last_schedule_time - cronjob_last_successful_time > 2h`
 - **相关 Skill**: [[ts-workloads]]
 - **相关 FTA**: [[job-cronjob-fta]]
+
+
+<!-- risk-assessed -->

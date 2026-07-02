@@ -63,6 +63,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Linkerd|Linkerd]] 轻量级服务网格实践指南
@@ -181,7 +186,8 @@ linkerd check --pre
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 开发/测试环境
 linkerd install | kubectl apply -f -
 linkerd check
@@ -210,14 +216,14 @@ linkerd check
 # linkerd-identity: trust anchors are valid ................................ [ok]
 # linkerd-api: control plane pods are ready ................................ [ok]
 ```
-
 ## 2.3 生产级 Helm 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add linkerd https://helm.linkerd.io/stable
 helm repo update
 
@@ -245,13 +251,13 @@ helm install linkerd-control-plane linkerd/linkerd-control-plane \
   --set proxy.resources.memory.limit=128Mi \
   --wait
 ```
-
 ## 2.4 Viz 扩展 (监控)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 linkerd viz install | kubectl apply -f -
 linkerd viz check
 linkerd viz dashboard
@@ -264,13 +270,13 @@ kubectl get pods -n linkerd-viz
 # linkerd-tap-xxx                 2/2     Running   0          1m
 # linkerd-web-xxx                 2/2     Running   0          1m
 ```
-
 ## 2.5 多集群扩展
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Cluster A (east)
 linkerd multicluster install | kubectl apply -f -
 linkerd multicluster check
@@ -283,7 +289,6 @@ linkerd multicluster link --cluster-name east | kubectl apply -f -
 linkerd multicluster check
 linkerd multicluster gateways
 ```
-
 ---
 
 <!-- chunk: 三、自动 mTLS -->## 三、自动 mTLS
@@ -292,7 +297,8 @@ linkerd multicluster gateways
 
 Linkerd 安装后自动启用 mTLS，无需任何配置。Identity Controller 为每个 Pod 签发 SPIFFE 标准身份证书（24h TTL，自动轮换）。证书的格式为 `spiffe://<trust.domain>/<namespace>/<serviceaccount>`，为每个工作负载提供唯一的加密身份标识。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证 mTLS 状态
 linkerd identity deployment/myapp -n production
 # POD                      IDENTITY                                    NOT_AFTER
@@ -308,7 +314,6 @@ linkerd viz stat deployment -n production
 kubectl -n linkerd exec deploy/linkerd-identity -- \
   openssl x509 -in /var/run/linkerd/identity/issuer.crt -text -noout | head -20
 ```
-
 ## 外部 CA (cert-manager)
 
 ```yaml
@@ -729,7 +734,8 @@ Cluster A (east)                              Cluster B (west)
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Cluster A: 安装多集群组件并导出服务
 linkerd multicluster install | kubectl apply -f -
 linkerd multicluster check
@@ -749,7 +755,6 @@ kubectl get svc -n production
 # 验证跨集群通信
 kubectl exec -n production deploy/test-client -- curl -s http://myapp-east/health
 ```
-
 ---
 
 <!-- chunk: 七、Linkerd vs Istio 对比 -->## 七、Linkerd vs Istio 对比
@@ -1020,7 +1025,8 @@ spec:
 
 ## 9.1 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 
 echo "=== 1. 安装检查 ==="
@@ -1067,7 +1073,6 @@ kubectl logs -n linkerd deploy/linkerd-identity --tail=50
 kubectl logs -n linkerd deploy/linkerd-proxy-injector --tail=50
 
 ```
-
 ## 9.2 常见问题
 
 | 问题 | 原因 | 解决 |
@@ -1166,3 +1171,5 @@ Istio Ambient (L4 only):
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

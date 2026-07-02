@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 控制面组件部署 (Static Pod Manifests)
@@ -567,7 +572,8 @@ apiServer:
 
 ### 场景 2: 手动修改 static Pod
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 API Server manifest
 cat /etc/kubernetes/manifests/kube-apiserver.yaml
 
@@ -584,7 +590,6 @@ kubectl get pods -n kube-system -w
 # 查看容器日志
 crictl logs $(crictl ps --name kube-apiserver -q) --tail 50
 ```
-
 ### 场景 3: 使用补丁自定义 manifest
 
 ```yaml
@@ -715,7 +720,8 @@ spec:
 
 ### 查看控制面组件状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 static Pod
 crictl ps --name kube
 # CONTAINER ID   IMAGE                                    NAME                    STATE
@@ -743,10 +749,10 @@ kubectl get --raw /livez?verbose
 # [+]poststarthook/priority-and-fairness-config-consumer ok
 # healthz check passed
 ```
-
 ### 组件故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # API Server 日志
 crictl logs $(crictl ps --name kube-apiserver -q) --tail 100
 
@@ -766,7 +772,6 @@ ls -la /etc/kubernetes/manifests/
 # -rw------- 1 root root 3450 Jan  1 00:00 kube-controller-manager.yaml
 # -rw------- 1 root root 3010 Jan  1 00:00 kube-scheduler.yaml
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -796,3 +801,6 @@ ls -la /etc/kubernetes/manifests/
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
+
+
+<!-- risk-assessed -->

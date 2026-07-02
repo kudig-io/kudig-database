@@ -65,6 +65,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get hpa -A -o jsonpath='{range .items[?(@.status.currentReplicas != @.status.desiredReplicas)]} {.metadata.namespace}/{.metadata.name}{"\n"}{end}' 显示副本数不匹配 -->
@@ -165,7 +170,8 @@ agent_execution_mode: L2-semi-auto
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计异常 HPA 数量和生产环境占比（15s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有 HPA 状态，统计 targets 为 unknown 的数量
 kubectl get hpa -A 2>/dev/null | grep -c "unknown" && \
 echo "Total HPAs:" && kubectl get hpa -A --no-headers 2>/dev/null | wc -l
@@ -179,7 +185,8 @@ kubectl get hpa -A -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadat
 > - 生产环境关键服务的 HPA 异常 → 升级为 **P1**
 
 **Step T2**: 检查 Pending Pod 和 Cluster Autoscaler 状态（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否有 Pending Pod（可能需要 CA 扩容）
 kubectl get pods -A --field-selector=status.phase=Pending --no-headers | wc -l
 
@@ -192,7 +199,8 @@ kubectl get configmap -n kube-system cluster-autoscaler-status -o yaml 2>/dev/nu
 > - 无 Pending Pod 但缩容被阻止 → **P3**（成本影响）
 
 **Step T3**: 检查 Metrics Server 健康状态（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Metrics Server 部署状态
 kubectl get deploy -n kube-system metrics-server
 
@@ -1288,7 +1296,8 @@ kubectl top nodes --use-protocol-buffers 2>&1 | head -3
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认 HPA 可以获取指标
 kubectl get hpa -A
 # 预期: TARGETS 列显示实际百分比，不再是 <unknown>
@@ -1313,7 +1322,6 @@ kubectl get cm -n kube-system cluster-autoscaler-status -o yaml | grep -A5 "Heal
 kubectl get scaledobject -A
 # 预期: READY=True
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1519,3 +1527,5 @@ kubectl get scaledobject -A
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

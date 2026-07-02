@@ -35,6 +35,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.17 Release Notes
@@ -110,3 +115,5 @@ If a security issue is found in Helm v2.17.0 prior to the end of life a security
 - Add Apt (Deb/Ubuntu) installation instructions for Helm 2 628541e0976754a53492701899761460cbc83d01 (Matthew Fox)
 - fix(Makefile): disable go modules b6771ab6c4f297cb26092ff3fe507ae7b55e9d79 (Matthew Fisher)
 - fix(tiller): Avoid corrupting storage via a lock c32c9a510bce24278ff5c17cc8401e0ff5c32042 (Cristian Klein)
+
+<!-- risk-assessed -->

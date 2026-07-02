@@ -49,6 +49,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: kubeadm 不安装的组件 (What kubeadm Does Not Install)
@@ -229,7 +234,8 @@ spec: {}
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Calico
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
 
@@ -243,13 +249,13 @@ kubectl get pods -A -o wide
 # NAMESPACE   NAME       READY   STATUS    IP            NODE
 # default     nginx      1/1     Running   10.244.0.10   master
 ```
-
 ### 场景 2: 安装 Cilium CNI
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 安装 Cilium
 helm repo add cilium https://helm.cilium.io/
 helm install cilium cilium/cilium \
@@ -273,7 +279,6 @@ cilium status
 # DaemonSet         cilium             Desired: 3, Ready: 3/3
 # DaemonSet         cilium             Desired: 3, Ready: 3/3
 ```
-
 ### 场景 3: 安装 Nginx Ingress Controller
 
 ```yaml
@@ -298,7 +303,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Nginx Ingress
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 
@@ -311,7 +317,6 @@ kubectl get pods -n ingress-nginx
 kubectl expose deployment nginx --port=80 --target-port=80
 kubectl create ingress nginx --rule="nginx.example.com/*=nginx:80"
 ```
-
 ### 场景 4: 安装 Metrics Server
 
 ```yaml
@@ -344,7 +349,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Metrics Server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
@@ -363,7 +369,6 @@ kubectl top pods -A
 # kube-system   coredns-5d7c7b8b5d-abcde          5m           16Mi
 # kube-system   calico-node-abcde                 15m          48Mi
 ```
-
 ### 场景 5: 安装 local-path-provisioner
 
 ```yaml
@@ -385,7 +390,8 @@ reclaimPolicy: Delete
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml
 
@@ -408,7 +414,6 @@ spec:
       storage: 1Gi
 EOF
 ```
-
 ## 配置示例
 
 ### 完整集群初始化脚本
@@ -416,7 +421,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -453,7 +459,6 @@ echo "=== Cluster is ready! ==="
 echo "Join worker nodes with:"
 kubeadm token create --print-join-command
 ```
-
 ## 实战示例
 
 ### 检查集群缺失组件
@@ -461,7 +466,8 @@ kubeadm token create --print-join-command
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 CNI 是否安装
 kubectl get pods -A | grep -E "calico|cilium|flannel|weave"
 # 如果没有输出 → CNI 未安装，Pod 无法跨节点通信
@@ -485,7 +491,6 @@ kubectl exec test-dns -- nslookup kubernetes.default
 # Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
 # DNS 正常 → CoreDNS 已安装
 ```
-
 ## 常见错误
 
 | 错误 | 原因 | 解决方案 |
@@ -502,7 +507,8 @@ kubectl exec test-dns -- nslookup kubernetes.default
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 cert-manager
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml
 
@@ -513,7 +519,6 @@ kubectl get pods -n cert-manager
 # cert-manager-cainjector-abcde              1/1     Running   0          5m
 # cert-manager-webhook-abcde                 1/1     Running   0          5m
 ```
-
 ```yaml
 # 使用 Let's Encrypt 自动签发证书
 apiVersion: cert-manager.io/v1
@@ -560,7 +565,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Dashboard
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
@@ -577,13 +583,13 @@ kubectl create token dashboard-admin -n kubernetes-dashboard --duration=24h
 kubectl proxy
 # 浏览器打开: http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
-
 ### 场景 8: 安装 Prometheus 监控栈
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kube-prometheus-stack (包含 Prometheus + Grafana + Alertmanager)
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -609,7 +615,6 @@ kubectl get pods -n monitoring
 kubectl port-forward -n monitoring svc/monitoring-grafana 3000:80
 # 浏览器: http://localhost:3000 (admin/admin123)
 ```
-
 ### CNI 插件对比
 
 | CNI 插件 | 网络模式 | 性能 | NetworkPolicy | eBPF | 推荐场景 |
@@ -625,7 +630,8 @@ kubectl port-forward -n monitoring svc/monitoring-grafana 3000:80
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 生产环境完整部署流程
 set -euo pipefail
@@ -664,7 +670,6 @@ kubectl get storageclass
 echo "=== Cluster deployment complete! ==="
 echo "Join workers: kubeadm token create --print-join-command"
 ```
-
 ### 各 CNI 安装命令速查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -672,7 +677,8 @@ echo "Join workers: kubeadm token create --print-join-command"
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Calico
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
 
@@ -695,10 +701,10 @@ kubectl run test-2 --image=busybox --restart=Never -- sleep 3600
 # 等待 Pod Running
 kubectl exec test-2 -- wget -qO- http://test-1.default.svc.cluster.local
 ```
-
 ### 组件安装状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 一键检查所有组件安装状态
 echo "=== CNI ==="
 kubectl get pods -A -l k8s-app=calico-node -o wide 2>/dev/null || \
@@ -726,7 +732,6 @@ kubectl get pods -n kube-system -l component=etcd
 echo "=== All Components ==="
 kubectl get pods -A -o wide
 ```
-
 ## 相关函数
 
 - [集群概览](01-overview.md) — kubeadm init 安装内容
@@ -744,3 +749,6 @@ kubectl get pods -A -o wide
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+
+<!-- risk-assessed -->

@@ -64,6 +64,11 @@ cross_refs:
   label: '故障树: cilium'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Cilium|Cilium]] [[Service|Service]]Service Mesh）|Service Mesh]] 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
@@ -366,7 +371,8 @@ bandwidthManager:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 部署 Cilium Service Mesh
 helm repo add cilium https://helm.cilium.io/
 helm repo update
@@ -385,7 +391,6 @@ cilium connectivity test
 cilium hubble enable
 hubble observe --follow
 ```
-
 ---
 
 <!-- chunk: 3. eBPF 如何替代 Sidecar Proxy -->## 3. eBPF 如何替代 Sidecar Proxy
@@ -1515,6 +1520,7 @@ graph LR
 ## 9.1 测试环境与方法论 (Test Environment & Methodology)
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 测试集群配置:
 - Kubernetes: 1.29
 - 节点类型: c5.4xlarge (16 CPU, 32GB RAM)
@@ -1523,7 +1529,6 @@ graph LR
 - 测试工具: wrk2, fortio, iperf3, netperf
 - 测试场景: Pod-to-Pod (同节点/跨节点), Pod-to-Service
 ```
-
 ## 9.2 吞吐量对比 (Throughput Comparison)
 
 ```mermaid
@@ -1587,7 +1592,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # iperf3 跨节点 TCP 带宽测试脚本
 #!/bin/bash
 
@@ -1609,7 +1615,6 @@ kubectl annotate node worker-1 \
 kubectl run iperf-client-wg --image=networkstatic/iperf3 \
   -- -c iperf-server -t 30 -P 8 --json
 ```
-
 | 场景 | 带宽 (Gbps) | CPU 利用率 |
 |------|-----------|-----------|
 | 基线（无加密） | 9.8 | 15% |
@@ -1664,7 +1669,17 @@ flowchart TD
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # Istio → Cilium Service Mesh 迁移脚本
 
@@ -1710,7 +1725,6 @@ echo "=== 阶段5: 卸载 Istio ==="
 istioctl uninstall --purge -y
 kubectl delete namespace istio-system  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ## 10.3 迁移期间的策略兼容性配置
 
 ```yaml
@@ -1893,7 +1907,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Cilium Service Mesh 故障排查命令集
 
@@ -1938,7 +1953,6 @@ cilium connectivity test --test-namespace cilium-test --test=pod-to-pod
 echo "=== 10. 收集诊断信息 ==="
 cilium sysdump --output-filename cilium-sysdump-$(date +%Y%m%d)
 ```
-
 ## 10.6 总结：选型决策树 (Decision Tree)
 
 ```mermaid
@@ -2151,3 +2165,6 @@ cilium debuginfo                     # 调试信息
 - 04-cilium-network-policy
 - 06-tetragon-runtime-security
 - 07-hubble-network-observability
+
+
+<!-- risk-assessed -->

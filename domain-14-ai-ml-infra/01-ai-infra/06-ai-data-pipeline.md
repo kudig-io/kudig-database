@@ -60,6 +60,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI数据处理Pipeline与特征工程
@@ -369,7 +374,8 @@ trainer = TorchTrainer(
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装Spark Operator
 helm repo add spark-operator https://googlecloudplatform.github.io/spark-on-k8s-operator
 helm install spark-operator spark-operator/spark-operator \
@@ -378,7 +384,6 @@ helm install spark-operator spark-operator/spark-operator \
   --set webhook.enable=true \
   --set sparkJobNamespace=ai-platform
 ```
-
 ### 3.2 PySpark数据处理Job
 
 ```yaml
@@ -1473,3 +1478,6 @@ groups:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+
+
+<!-- risk-assessed -->

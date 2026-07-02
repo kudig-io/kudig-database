@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-02-05] etcd 数据不一致导致 API Server 503 ServiceUnavailable
@@ -39,33 +44,34 @@ last_updated: 2026-05-23
 ## 诊断过程
 
 **03:15** — 检查 API Server 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get --raw /healthz
 # [+]ping ok
 # [+]log ok
 # [-]etcd failed: reason withheld
 # healthz check failed
 ```
-
 **03:17** — 查看 etcd Pod 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l component=etcd
 # NAME             READY   STATUS    RESTARTS   AGE
 # etcd-master-0    1/1     Running   0          120d
 # etcd-master-1    1/1     Running   0          120d
 # etcd-master-2    1/1     Running   0          120d
 ```
-
 **03:19** — 查看 etcd 日志，发现大量 `mvcc: database space exceeded`：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system etcd-master-0 | tail -n 50
 # 2026-02-05T03:11:33.112Z ... mvcc: database space exceeded (quota: 8589934592)
 # 2026-02-05T03:11:33.113Z ... etcdserver: failed to apply request "..." with response "..." 
 #   took too long (2.345s) to execute
 ```
-
 **03:22** — 检查 etcd 数据库大小和一致性：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ETCDCTL_API=3 etcdctl --endpoints https://10.0.1.10:2379 \
   --cacert /etc/kubernetes/pki/etcd/ca.crt \
   --cert /etc/kubernetes/pki/etcd/server.crt \
@@ -79,7 +85,6 @@ ETCDCTL_API=3 etcdctl --endpoints https://10.0.1.10:2379 \
 # | 10.0.1.12:2379 | cb5c2394fae19a02 |  3.5.10 | 4.1 GB  |     false |      false |         7 |    892341 |             892341 |        |
 # +----------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 ```
-
 **03:25** — 发现 etcd-master-0 的 DB SIZE 为 8.2GB（超过 8GB quota），其余节点为 4.1GB。Leader 节点因空间超限拒绝写入，导致 API Server 503。差异原因：master-0 在 01-20 的维护窗口中曾短暂脱离集群，期间 compaction/defrag 未执行，导致历史版本堆积。
 
 ## 根因
@@ -91,7 +96,8 @@ etcd 数据库大小超过 quota（8GB），Leader 节点拒绝新写入请求�
 ## 修复动作
 
 **03:28** — 临时提升 quota 以恢复写入：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ETCDCTL_API=3 etcdctl --endpoints https://10.0.1.10:2379 \
   --cacert /etc/kubernetes/pki/etcd/ca.crt \
   --cert /etc/kubernetes/pki/etcd/server.crt \
@@ -105,9 +111,9 @@ ETCDCTL_API=3 etcdctl --endpoints https://10.0.1.10:2379 \
   --key /etc/kubernetes/pki/etcd/server.key \
   put /quota/bytes 17179869184
 ```
-
 **03:32** — 执行 compaction 和 defragmentation：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取当前 revision
 ETCDCTL_API=3 etcdctl --endpoints https://10.0.1.10:2379 \
   --cacert /etc/kubernetes/pki/etcd/ca.crt \
@@ -130,24 +136,32 @@ for node in 10.0.1.10 10.0.1.11 10.0.1.12; do
     defrag
 done
 ```
-
 **03:45** — 验证 etcd 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 ETCDCTL_API=3 etcdctl ... endpoint status -w table
 # | 10.0.1.10:2379 | ... |  3.5.10 | 2.1 GB  | ... |
 # | 10.0.1.11:2379 | ... |  3.5.10 | 2.1 GB  | ... |
 # | 10.0.1.12:2379 | ... |  3.5.10 | 2.1 GB  | ... |
 ```
-
 **03:50** — 清理历史 Event：
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete events --all-namespaces --field-selector type=Warning  # ⚠️ 批量删除，波及面大
 ```
-
 ## 验证
 - 03:52 — `kubectl get --raw /healthz` 全部通过
 - 03:55 — CI/CD 流水线恢复，新 Pod 正常创建
@@ -163,3 +177,6 @@ kubectl delete events --all-namespaces --field-selector type=Warning  # ⚠️ �
   4. 所有 etcd 维护操作前执行 `etcdctl endpoint hashkv` 验证一致性
 - **相关 Skill**: [[backup-restore-etcd]]
 - **相关 FTA**: [[etcd-fta]]
+
+
+<!-- risk-assessed -->

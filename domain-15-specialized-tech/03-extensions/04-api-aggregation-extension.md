@@ -53,6 +53,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合扩展机制详解
@@ -227,7 +232,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 生成服务证书
 openssl req -x509 -newkey rsa:4096 -keyout tls.key -out tls.crt -days 365 -nodes \
     -subj "/CN=metrics-apiserver.kube-system.svc" \
@@ -238,7 +244,6 @@ kubectl create secret tls metrics-apiserver-tls \
     --cert=tls.crt --key=tls.key \
     --namespace=kube-system
 ```
-
 #### 证书轮换配置
 ```yaml
 apiVersion: v1
@@ -385,7 +390,8 @@ func (s *APIServer) installHealthz() {
 ### 5.2 故障诊断方法
 
 #### 常见问题排查
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查APIService状态
 kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 
@@ -398,7 +404,6 @@ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodemetrics"
 # 检查证书有效性
 echo | openssl s_client -connect metrics-apiserver.kube-system.svc:443 2>/dev/null | openssl x509 -noout -dates
 ```
-
 #### 性能监控指标
 ```yaml
 # Prometheus监控配置
@@ -502,7 +507,8 @@ func (s *APIServer) setupConversion() error {
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署新版本服务
 kubectl apply -f metrics-apiserver-v2.yaml
 
@@ -516,7 +522,6 @@ kubectl get --raw "/apis/metrics.k8s.io/v1beta1/nodemetrics"
 # 4. 清理旧版本资源
 kubectl delete deployment metrics-apiserver-v1 -n kube-system
 ```
-
 <!-- chunk: 7. 实际应用案例 -->
 ## 7. 实际应用案例
 
@@ -609,3 +614,6 @@ API聚合机制为Kubernetes提供了强大的扩展能力，使开发者能够�
 - 03-admission-webhook-configuration
 - 05-package-management-tools
 - 06-helm-charts-management
+
+
+<!-- risk-assessed -->

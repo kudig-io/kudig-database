@@ -48,6 +48,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SLO 工程实践：定义、衡量与报告
@@ -248,12 +253,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看各服务 SLO 达成情况，优先改进不达标服务
 kubectl exec -it thanos-query -n monitoring -- curl -s \
   "http://prometheus:9090/api/v1/query?query=slo:availability_ratio_30d"
 ```
-
 ---
 
 ## 7. 阿里云/专有云场景
@@ -396,3 +401,6 @@ SLO 体系要真正落地，需要技术与业务团队共同认可。建议从�
 
 - [[domain-06-observability/06-slo-sli/02-error-budget-policy.md|错误预算政策与 burn rate alert]]
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
+
+
+<!-- risk-assessed -->

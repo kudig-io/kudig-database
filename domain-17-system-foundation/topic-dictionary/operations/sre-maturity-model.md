@@ -43,6 +43,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - SRE运维成熟度模型
@@ -304,26 +309,26 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 人工部署应用
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 kubectl apply -f configmap.yaml
 ```
-
 **Level 2 - 脚本化**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 部署脚本 deploy.sh
 kubectl apply -f k8s/
 kubectl rollout status deployment/app
 kubectl get pods -l app=app
 ```
-
 **Level 3 - 流水线化**
 ```yaml
 # CI/CD流水线配置
@@ -436,7 +441,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景:部署新版本应用(完全手工)
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
@@ -450,7 +456,8 @@ kubectl logs pod-name  # 手动查看日志确认
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy.sh - 封装部署步骤
 set -e
@@ -1169,7 +1176,17 @@ data:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 开发者直接操作生产环境
 kubectl delete pod xxx  # 随意重启Pod
 kubectl edit deployment yyy  # 直接修改配置
@@ -1890,7 +1907,8 @@ Year 3 - 卓越运营:
 **问题**: 主观性强,难以量化,不支持趋势分析
 
 **Level 2 - 半自动化评估**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 简单的脚本采集基础指标
 #!/bin/bash
 echo "Pod总数: $(kubectl get pods -A | wc -l)"
@@ -1904,7 +1922,8 @@ echo "ServiceMonitor数: $(kubectl get servicemonitors -A | wc -l)"
 
 ### 6.1 自动化评估脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ========== SRE成熟度自动评估工具 ==========
 set -euo pipefail
@@ -2193,7 +2212,6 @@ echo "SRE成熟度评估完成！"
 echo "详细报告: ${RESULTS_DIR}/maturity-report.md"
 cat ${RESULTS_DIR}/maturity-report.md
 ```
-
 ### 6.2 成熟度可视化仪表板
 
 ```yaml
@@ -2804,7 +2822,8 @@ Q5-Q6: 全面推广
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看自动化覆盖率 - 检查 HPA 覆盖
 kubectl get hpa -A | wc -l
 
@@ -2821,7 +2840,6 @@ kubectl get prometheusrule -A -o json | jq '[.items[].spec.groups[].rules | leng
 helm list -A | wc -l
 kubectl get crd | wc -l
 ```
-
 ## 交叉引用
 
 - 相关主题：[运维最佳实践](operations-best-practices.md) · [企业级运维实践](enterprise-ops-practices.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [事故管理](incident-management-runbooks.md) · [混沌工程](chaos-engineering.md)
@@ -2837,3 +2855,6 @@ kubectl get crd | wc -l
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

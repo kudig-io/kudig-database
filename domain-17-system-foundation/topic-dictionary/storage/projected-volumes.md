@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Projected Volumes（投射卷）
@@ -159,7 +164,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看投射卷中的文件
 kubectl exec <pod-name> -- ls -la /var/run/secrets/app/
 
@@ -169,7 +175,6 @@ kubectl exec <pod-name> -- cat /var/run/secrets/app/token
 # 查看 Pod 的 projected volume 配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[?(@.projected)]}' | jq .
 ```
-
 ## 交叉引用
 
 - [卷](./volumes.md) — 卷类型总览
@@ -184,3 +189,6 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[?(@.projected)]}' | jq .
 - [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
 - [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
 - [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+
+
+<!-- risk-assessed -->

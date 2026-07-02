@@ -44,6 +44,11 @@ skill_name: K8s 基础知识考核 - 答案解析
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s8s 基础知识考核|K8s 基础知识考核]] - 答案解析
@@ -134,7 +139,8 @@ Pod 创建后经历以下阶段：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 排查步骤：
 
 # 1. 确认 Pod 状态
@@ -175,7 +181,6 @@ kubectl describe pod | grep -A5 "ImagePull"
 # - Secret/ConfigMap 访问被拒绝
 # - RBAC 限制
 ```
-
 **评分标准**：
 - 正确使用 kubectl 命令（4 分）
 - 列出所有可能原因（4 分）
@@ -344,7 +349,8 @@ data:
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 排查步骤 ==========
 
 # 1. 确认问题（2 分）
@@ -413,7 +419,6 @@ curl -H "Host: api.example.com" http://<ingress-ip>/health
 kubectl describe ingress web-backend -n production
 # 预期：显示正确的 backend 配置
 ```
-
 **评分标准**：
 - 确认问题步骤完整（2 分）
 - 收集信息命令正确（4 分）
@@ -440,3 +445,5 @@ related:
 ---
 ```
 ```
+
+<!-- risk-assessed -->

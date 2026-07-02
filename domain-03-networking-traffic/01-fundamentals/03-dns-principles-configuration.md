@@ -53,6 +53,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # DNS 原理与配置
@@ -677,7 +682,8 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # DNS集群负载均衡配置
 configure_dns_load_balancing() {
     # 使用外部负载均衡器
@@ -770,7 +776,6 @@ dns_cluster_health_check() {
     done
 }
 ```
-
 ## DNS性能优化与调优
 
 ## CoreDNS高级性能调优
@@ -844,7 +849,8 @@ data:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # DNS查询性能优化脚本
 optimize_dns_queries() {
     # 1. 并行DNS查询优化
@@ -1302,3 +1308,6 @@ done
 ## Related
 
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -47,6 +47,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Cilium|Cilium]] 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
@@ -1768,7 +1773,8 @@ cilium endpoint list --output json | \
 
 ## 7.3 策略审计模式 (Policy Audit Mode)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 开启审计模式（不实际阻断，只记录）
 cilium config PolicyAuditMode=true
 
@@ -1793,10 +1799,10 @@ hubble observe --verdict AUDIT --output json | \
   jq -r '.flow | "\(.source.namespace)/\(.source.pod_name) -> \(.destination.namespace)/\(.destination.pod_name):\(.destination.port)"' | \
   sort | uniq -c | sort -rn
 ```
-
 ## 7.4 生成策略报告 (Generate Policy Reports)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出所有 CiliumNetworkPolicy
 kubectl get ciliumnetworkpolicies --all-namespaces -o yaml > all-cnp-backup.yaml
 
@@ -1827,7 +1833,6 @@ cilium endpoint list --output json | jq '
   }
 '
 ```
-
 ---
 
 <!-- chunk: 8. AdminNetworkPolicy 集成 -->## 8. AdminNetworkPolicy 集成
@@ -2123,7 +2128,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # 1. 先用审计模式验证策略
 # ============================================
@@ -2165,7 +2171,6 @@ sleep 60
 after=$(hubble observe --verdict DROPPED --namespace production 2>&1 | wc -l)
 echo "DROP count change: $before -> $after"
 ```
-
 ---
 
 <!-- chunk: 10. 企业级策略管理最佳实践 -->## 10. 企业级策略管理最佳实践
@@ -2364,7 +2369,8 @@ data:
       protocol: TCP
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 自动化策略验证脚本
 
 #!/bin/bash
@@ -2416,7 +2422,6 @@ else
   exit 1
 fi
 ```
-
 ## 10.4 Prometheus 告警规则 (Prometheus Alerting Rules)
 
 ```yaml
@@ -2518,7 +2523,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ============================================
 # Zero Trust 实施脚本
 # ============================================
@@ -2569,7 +2575,6 @@ cilium config PolicyAuditMode=false
 echo "策略现在严格执行，监控 DROP 事件..."
 hubble observe --verdict DROPPED --follow &
 ```
-
 ## 10.6 多租户策略架构 (Multi-Tenant Policy Architecture)
 
 ```yaml
@@ -2805,3 +2810,6 @@ hubble observe \
 - 03-cilium-cni-architecture
 - 05-cilium-service-mesh
 - 06-tetragon-runtime-security
+
+
+<!-- risk-assessed -->

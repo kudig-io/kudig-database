@@ -37,6 +37,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 03 - PVC使用模式与最佳实践
@@ -631,7 +636,8 @@ parameters:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扩容 PVC
 kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
 
@@ -641,7 +647,6 @@ kubectl get pvc mysql-data -o jsonpath='{.status.conditions}'
 # 等待扩容完成
 kubectl wait --for=condition=FileSystemResizePending pvc/mysql-data --timeout=300s
 ```
-
 ### 6.2 扩容状态检查
 
 | Condition | 含义 |
@@ -656,7 +661,8 @@ kubectl wait --for=condition=FileSystemResizePending pvc/mysql-data --timeout=30
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 如果扩容失败，需要恢复原始大小
 # 注意：不是所有存储都支持缩容
 
@@ -666,7 +672,6 @@ kubectl apply -f mysql-snapshot-restore.yaml
 # 方案二：手动清理（危险）
 kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
 ```
-
 ### 6.4 离线扩容（需要停止 Pod）
 
 部分场景下在线扩容不生效，必须执行离线扩容：
@@ -683,7 +688,8 @@ kubectl patch pvc mysql-data -p '{"spec":{"resources":{"requests":{"storage":"10
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 离线扩容操作步骤:
 
 # 1. 扩容 PVC（存储后端扩容）
@@ -708,7 +714,6 @@ kubectl scale statefulset mysql --replicas=3
 # 7. 验证扩容结果
 kubectl exec mysql-0 -- df -h /var/lib/mysql
 ```
-
 > **注意**: 离线扩容期间应用不可用。生产环境建议在维护窗口执行，并提前通知业务方。
 
 ---
@@ -907,6 +912,7 @@ spec:
 ### 9.1 PVC 状态诊断流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 PVC Pending?
     │
     ├── StorageClass 存在? ──No──▶ 创建 StorageClass 或修正名称
@@ -919,10 +925,10 @@ PVC Pending?
     │
     └── 检查 Events ──▶ kubectl describe pvc <name>
 ```
-
 ### 9.2 常用诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 状态
 kubectl get pvc -A -o wide
 
@@ -943,7 +949,6 @@ kubectl get csinodes
 kubectl get events --field-selector reason=ProvisioningFailed
 kubectl get events --field-selector reason=FailedMount
 ```
-
 ### 9.3 常见问题与解决
 
 | 问题 | 原因 | 解决方案 |
@@ -1096,7 +1101,8 @@ pvc_monitoring_alerts:
 
 ### 自动化运维脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pvc-management-automation.sh
 
@@ -1154,7 +1160,6 @@ EOF
 # 执行管理操作
 manage_pvc_operations
 ```
-
 ---
 <!-- chunk: 最佳实践总结 -->
 ## 最佳实践总结
@@ -1236,3 +1241,6 @@ manage_pvc_operations
 - 02-pv-architecture-fundamentals
 - 04-storageclass-dynamic-provisioning
 - 05-csi-drivers-integration
+
+
+<!-- risk-assessed -->

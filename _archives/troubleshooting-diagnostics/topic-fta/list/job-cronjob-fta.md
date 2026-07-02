@@ -54,6 +54,11 @@ cross_refs:
   label: '结构化排障: 05-job-cronjob-troubleshooting'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 <!-- condition: kubectl get jobs -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
 
 # Job/CronJob 异常 FTA 树
@@ -331,3 +336,6 @@ flowchart TD
 ## Related
 
 - [[skills/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+
+
+<!-- risk-assessed -->

@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Volume Attributes Classes（卷属性类）
@@ -148,12 +153,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 业务高峰期切换到 Gold 级别
 kubectl patch pvc db-data -n database \
   -p '{"spec":{"volumeAttributesClassName":"gold"}}'
 ```
-
 ## 故障排查
 
 | 症状 | 可能原因 | 排查步骤 |
@@ -172,7 +177,8 @@ kubectl patch pvc db-data -n database \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 VolumeAttributesClass
 kubectl get volumeattributesclasses
 
@@ -182,7 +188,6 @@ kubectl patch pvc <name> -n <ns> -p '{"spec":{"volumeAttributesClassName":"gold"
 # 查看 PVC 当前 VAC
 kubectl get pvc <name> -o jsonpath='{.spec.volumeAttributesClassName}'
 ```
-
 ## 交叉引用
 
 - [存储类](./storage-classes.md) — StorageClass 关注初始供给，VAC 关注运行时修改
@@ -199,3 +204,6 @@ kubectl get pvc <name> -o jsonpath='{.spec.volumeAttributesClassName}'
 - [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
 - [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
 - [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]
+
+
+<!-- risk-assessed -->

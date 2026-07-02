@@ -42,6 +42,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[kubelet|kubelet]] 深度解析 (kubelet Deep Dive)
@@ -139,6 +144,7 @@ k8s_versions:
 ### 1.2 整体架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌────────────────────────────────────────────────────────────────────────┐
 │                              kubelet                                    │
 │                                                                         │
@@ -186,7 +192,6 @@ k8s_versions:
 │                          runc / kata / gVisor                          │
 └────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.3 关键组件说明
 
 | 组件 | 英文名 | 职责 |
@@ -634,7 +639,8 @@ mount | grep cgroup
 | **Burstable** | requests < limits 或部分设置 | `/kubepods/burstable/pod<uid>` | 中等 |
 | **BestEffort** | 未设置requests和limits | `/kubepods/besteffort/pod<uid>` | 最先 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Pod的cgroup
 # systemd cgroup driver
 cat /sys/fs/cgroup/memory/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-pod<uid>.slice/memory.limit_in_bytes
@@ -642,7 +648,6 @@ cat /sys/fs/cgroup/memory/kubepods.slice/kubepods-burstable.slice/kubepods-burst
 # 或使用crictl
 crictl inspect <container-id> | jq .info.runtimeSpec.linux.cgroupsPath
 ```
-
 ---
 
 <!-- chunk: 7. 监控指标 (Monitoring Metrics) -->
@@ -752,7 +757,8 @@ groups:
 
 ### 8.2 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 状态
 systemctl status kubelet
 journalctl -u kubelet -f --no-pager
@@ -790,7 +796,6 @@ ls -la /etc/kubernetes/manifests/
 # 检查证书
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
-
 ### 8.3 常见日志模式
 
 ```bash
@@ -1031,7 +1036,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看静态 Pod 的 Mirror Pod
 kubectl get pods -n kube-system
 # NAME                               READY   STATUS
@@ -1043,7 +1049,6 @@ kubectl get pods -n kube-system
 kubectl delete pod kube-apiserver-master-1 -n kube-system
 
 ```
-
 ### 11.6 与 DaemonSet 的区别
 
 | 对比项 | 静态 Pod (Static Pod) | DaemonSet |
@@ -1348,3 +1353,5 @@ cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

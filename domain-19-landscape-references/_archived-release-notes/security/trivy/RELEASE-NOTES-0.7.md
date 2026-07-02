@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Trivy|trivy]] v0.7 Release Notes
@@ -45,17 +50,17 @@ An image directory compliant with "Open Container Image Layout Specification".
 Buildah:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ buildah push docker.io/library/alpine:3.11 oci:/path/to/alpine
 $ trivy --input /path/to/alpine
 ```
-
 Skopeo:
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ skopeo copy docker-daemon:alpine:3.11 oci:/path/to/alpine
 $ trivy --input /path/to/alpine
 ```
-
 ### [BREAKING] Override severity with vendor [[Score|score]] if exists
 
 Trivy displayed a severity from NVD, which is generic, but it's more accurate to use the severity from vendor such as Red Hat and Debian. Currently, the vendor's severity is preferred than NVD's severity.
@@ -87,3 +92,6 @@ ad0bb7c rpc: Fix output to use templates when in client server mode. (#469)
 
 - `docker pull docker.io/aquasec/trivy:0.7.0`
 - `docker pull docker.io/aquasec/trivy:latest`
+
+
+<!-- risk-assessed -->

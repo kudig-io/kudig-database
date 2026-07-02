@@ -62,6 +62,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -90,7 +95,8 @@ relationships:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 在异常 Pod 内测试 ClusterIP、Pod IP、DNS 解析
 kubectl exec -n order-platform -it $(kubectl get pod -n order-platform -l app=debug -o jsonpath='{.items[0].metadata.name}') -- sh -c '
   nslookup order-service
@@ -122,7 +128,6 @@ kubectl auth can-i list endpoints --as=system:serviceaccount:kube-system:kube-pr
 ssh root@cn-shanghai.172.20.4.11 'iptables -t nat -L | wc -l'
 ssh root@cn-shanghai.172.20.4.13 'iptables -t nat -L | wc -l'
 ```
-
 ## 根因分析
 
 经过排查，发现异常节点 `cn-shanghai.172.20.4.11` 与 `cn-shanghai.172.20.4.12` 上的 kube-proxy Pod 处于 `Running` 状态，但日志中持续出现以下错误：
@@ -144,7 +149,8 @@ E0626 15:42:12.234567       1 proxier.go:1234] Failed to execute iptables-restor
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f - <<EOF
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -156,36 +162,54 @@ rules:
   verbs: ["get", "list", "watch"]
 EOF
 ```
-
 **第二步：重启异常节点上的 kube-proxy Pod，重新建立 Endpoint watch**
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for pod in $(kubectl get pod -n kube-system -l k8s-app=kube-proxy -o jsonpath='{.items[?(@.spec.nodeName=="cn-shanghai.172.20.4.11")].metadata.name} {.items[?(@.spec.nodeName=="cn-shanghai.172.20.4.12")].metadata.name}'); do
   kubectl delete pod -n kube-system $pod --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 done
 ```
-
 **第三步：若 iptables 锁竞争严重，临时切换到 ipvs 模式（需评估后执行）**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 kube-proxy ConfigMap
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed 's/mode: "iptables"/mode: "ipvs"/' | kubectl apply -f -
 kubectl rollout restart daemonset kube-proxy -n kube-system
 ```
-
 **第四步：临时在异常节点上手动清理冲突的 iptables 链并重新同步**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 ssh root@cn-shanghai.172.20.4.11 '
   iptables-save > /tmp/iptables-backup-$(date +%s).txt
   iptables -t nat -F KUBE-SERVICES
@@ -194,26 +218,35 @@ ssh root@cn-shanghai.172.20.4.11 '
   systemctl restart kubelet
 '
 ```
-
 **第五步：隔离并驱逐异常节点上的关键业务 Pod，确保流量不再经过问题节点**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for node in cn-shanghai.172.20.4.11 cn-shanghai.172.20.4.12; do
   kubectl cordon $node
   kubectl drain $node --ignore-daemonsets --delete-emptydir-data --force --timeout=300s
 done
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. kube-proxy Pod 全部 Running 且日志无 watch 失败
 kubectl get pod -n kube-system -l k8s-app=kube-proxy -o wide
 kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100 | grep -iE "error|fail|watch" || echo "no errors"
@@ -235,7 +268,6 @@ kubectl run netshoot-$(date +%s) -n order-platform --rm -i --restart=Never --ima
 # 6. RBAC 权限校验通过
 kubectl auth can-i watch endpoints --as=system:serviceaccount:kube-system:kube-proxy -n default
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，本次 Service 访问异常的根因是 **部分节点上的 kube-proxy 因 RBAC 权限被意外移除，无法 watch Endpoints 变化，导致 iptables NAT 规则未同步最新后端 Pod IP**。因此 Pod IP 直接访问正常，但通过 ClusterIP/Service 域名访问失败。我们已完成以下处置：
@@ -289,3 +321,6 @@ kubectl auth can-i watch endpoints --as=system:serviceaccount:kube-system:kube-p
 - Service
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - kube-proxy 异常导致 Service 不通
+
+
+<!-- risk-assessed -->

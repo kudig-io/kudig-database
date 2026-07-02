@@ -41,6 +41,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent 作为技术赋能新方式：设计思路与落地路径
@@ -126,6 +131,7 @@ kudig-database 已覆盖 39+ 知识域（架构、网络、存储、故障排查
 **典型场景**：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工程师: "Pod 一直 Pending，怎么办？"
 
 Agent 工作流:
@@ -135,7 +141,6 @@ Agent 工作流:
   4. 逐步推理检查清单
   5. 给出精确的 kubectl 诊断命令和修复建议
 ```
-
 ### 2. 运维自动化 Agent
 
 从"告诉我怎么做"进化到"帮我做"：
@@ -194,6 +199,7 @@ Agent 执行层级:
 **交互示例**：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 开发者: "我需要部署一个 3 副本的 Node.js 服务，需要 Redis 缓存，
         对外暴露 HTTPS，限制 CPU 500m / 内存 512Mi"
 
@@ -204,12 +210,12 @@ Agent:
   4. 附加安全最佳实践（readOnlyRootFilesystem、runAsNonRoot 等）
   5. 输出 Helm Chart 或 Kustomize overlay 供选择
 ```
-
 ---
 
 ## 架构蓝图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌───────────────────────────────────────────────┐
 │               用户交互层                        │
 │    (Chat / CLI / IDE / Slack / 终端)           │
@@ -229,7 +235,6 @@ Agent:
 │   kubectl / Helm / ArgoCD / Terraform / API   │
 └───────────────────────────────────────────────┘
 ```
-
 ### 分层详解
 
 **用户交互层**：
@@ -325,3 +330,6 @@ Agent:
 - 13-trusted-agent-system-fiscal-plan
 - 15-agent-corpus-gap-analysis
 - 16-agentscope-overview-installation
+
+
+<!-- risk-assessed -->

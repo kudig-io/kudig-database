@@ -60,6 +60,11 @@ component: Kubernetes Full Analysis V2
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]]es 全量故障树分析(FTA)排查手册|Kubernetes 全量故障树分析(FTA)排查手册]] - 增强版
@@ -177,6 +182,7 @@ k8s_versions:
 ## 2.1 完整故障树（5 层深度 + ACK IaaS 层）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 TE-1: 集群完全不可用 [OR门] 🔴 P0
 │
 ├── IE-1.1 控制平面问题 [OR门]
@@ -263,7 +269,6 @@ TE-1: 集群完全不可用 [OR门] 🔴 P0
     ├── BE-1.13 误删除集群核心组件
     └── BE-1.14 错误的批量操作导致集群不可用
 ```
-
 ---
 
 <!-- chunk: 三、TE-2: 应用服务不可用 🔴 P0 -->## 三、TE-2: 应用服务不可用 🔴 P0
@@ -1191,3 +1196,6 @@ fta_metadata:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/problem-solving-architecture.md|problem-solving-architecture]]
+
+
+<!-- risk-assessed -->

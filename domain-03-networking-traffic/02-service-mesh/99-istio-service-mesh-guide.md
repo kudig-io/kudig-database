@@ -65,6 +65,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Istio|Istio]] 企业级服务网格入门指南
@@ -162,7 +167,8 @@ Pod (无 Sidecar — 零侵入)
 
 ## 2.1 istioctl 安装 (推荐)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 下载安装 istioctl
 curl -L https://istio.io/downloadIstio | sh -
 cd istio-1.29.0
@@ -203,14 +209,14 @@ istioctl verify-install
 # ✔ Ingress gateways installed
 # ✔ Installation complete
 ```
-
 ## 2.2 Helm 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm 仓库
 helm repo add istio https://istio-release.storage.googleapis.com/charts
 helm repo update
@@ -236,14 +242,14 @@ helm install istio-ingressgateway istio/gateway -n istio-system --wait \
 helm list -n istio-system
 kubectl get pods -n istio-system -o wide
 ```
-
 ## 2.3 命名空间注入
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Sidecar 自动注入
 kubectl label namespace default istio-injection=enabled
 kubectl label namespace production istio-injection=enabled
@@ -267,7 +273,6 @@ kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
 kubectl get pods -o wide
 kubectl get svc
 ```
-
 ---
 
 <!-- chunk: 三、流量管理 -->## 三、流量管理
@@ -666,7 +671,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装可观测性组件
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.29/samples/addons/kiali.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.29/samples/addons/prometheus.yaml
@@ -683,7 +689,6 @@ istioctl dashboard grafana
 # 启动 Jaeger Dashboard
 istioctl dashboard jaeger
 ```
-
 ## 5.3 关键 PromQL 查询
 
 ```promql
@@ -772,7 +777,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Cluster 1
 istioctl install --set profile=default \
   --set values.global.multiCluster.clusterName=cluster1 \
@@ -797,7 +803,6 @@ istioctl create-remote-secret \
 # 验证多集群
 istioctl proxy-status
 ```
-
 ## 6.2 多网络多集群 (Gateway 互连)
 
 ```yaml
@@ -918,7 +923,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 
 echo "=== 1. 全面配置分析 ==="
@@ -962,7 +968,6 @@ echo "=== 10. 证书检查 ==="
 istioctl proxy-config secret deployment/frontend -n production
 
 ```
-
 ## 8.2 常见问题
 
 | 问题 | 原因 | 诊断命令 | 解决方案 |
@@ -1018,3 +1023,5 @@ istioctl proxy-config secret deployment/frontend -n production
 - [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

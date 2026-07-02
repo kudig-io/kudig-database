@@ -78,6 +78,11 @@ related_docs:
   desc: etcd 深度解析
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 核心组件深度剖析 (Core Components Deep Dive)
@@ -619,7 +624,8 @@ spec:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 备份 ===
 # 创建快照
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
@@ -667,7 +673,6 @@ find ${BACKUP_DIR} -name "etcd-*.db" -mtime +${RETENTION_DAYS} -delete
 # aws s3 cp ${BACKUP_DIR}/etcd-${TIMESTAMP}.db s3://k8s-backup/etcd/
 
 ```
-
 ### 3.5 运维操作手册
 
 | 操作 | 命令 | 风险等级 | 说明 |
@@ -1504,7 +1509,8 @@ controllerManager:
 
 ### 12.1 快速诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # k8s-healthcheck.sh
 
@@ -1536,10 +1542,10 @@ kubeadm certs check-expiration 2>/dev/null || echo "需在master节点执行"
 echo -e "\n=== 8. 资源使用 ==="
 kubectl top nodes 2>/dev/null || echo "需安装metrics-server"
 ```
-
 ### 12.2 常用诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 组件状态
 kubectl get --raw='/readyz?verbose'
 kubectl get componentstatuses  # 已弃用但可用
@@ -1567,7 +1573,6 @@ ipvsadm -Ln  # IPVS模式
 iptables -t nat -L -n -v | grep KUBE  # iptables模式
 kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup kubernetes
 ```
-
 ---
 
 <!-- chunk: 13. 多角色视角专栏 -->
@@ -1596,7 +1601,8 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup kubernete
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 性能测试示例 - kube-burner
 kube-burner init -c cluster-density.yaml --uuid $(uuidgen)
 
@@ -1618,7 +1624,6 @@ spec:
     cron: "@every 10m"
 EOF
 ```
-
 ### 13.3 产品经理视角
 
 | 关注维度 | 关键指标 | 业务影响 | SLA承诺 |
@@ -1724,3 +1729,5 @@ resources:
 - 04-source-code-structure
 
 ```
+
+<!-- risk-assessed -->

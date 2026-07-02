@@ -67,6 +67,11 @@ cross_refs:
   label: '故障树: job-cronjob'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 18 - [[CronJob|CronJob]] 故障排查 (CronJob Troubleshooting)
@@ -149,7 +154,8 @@ cross_refs:
 
 ### 2.1 CronJob 资源检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础信息检查 ==========
 # 查看所有CronJob
 kubectl get cronjobs --all-namespaces
@@ -180,14 +186,14 @@ kubectl get jobs -n <namespace> -l cronjob.kubernetes.io/is-created-by=<cronjob-
 # 查看Job详细信息
 kubectl describe job <job-name> -n <namespace>
 ```
-
 ### 2.2 Cron表达式验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Cron表达式语法检查 ==========
 # 常见的Cron表达式格式
 # ┌───────────── minute (0 - 59)
@@ -232,7 +238,6 @@ else
     echo "Cron表达式语法错误"
 fi
 ```
-
 ---
 
 <!-- chunk: 3. 任务未触发问题排查 (Job Not Triggering Troubleshooting) -->
@@ -245,6 +250,7 @@ fi
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    CronJob 任务未触发排查流程                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -286,13 +292,13 @@ fi
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 3.2 详细诊断命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 控制器状态检查 ==========
 # 检查kube-controller-manager状态
 kubectl get pods -n kube-system | grep controller-manager
@@ -332,7 +338,6 @@ kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.spec.timeZone}'
 # 检查并发策略
 kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.spec.concurrencyPolicy}'
 ```
-
 ---
 
 <!-- chunk: 4. 任务执行失败问题排查 (Job Execution Failure Troubleshooting) -->
@@ -340,7 +345,8 @@ kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.spec.concurrenc
 
 ### 4.1 Job失败原因分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Job状态检查 ==========
 # 查看失败的Job
 kubectl get jobs -n <namespace> --field-selector=status.failed>0
@@ -371,10 +377,10 @@ kubectl get limitrange -n <namespace>
 # 检查Pod资源请求
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[*].resources}'
 ```
-
 ### 4.2 常见失败原因及解决方案
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 镜像拉取失败 ==========
 # 检查镜像仓库访问
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[*].image}'
@@ -407,7 +413,6 @@ kubectl get storageclass
 # 检查卷挂载配置
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.volumes}'
 ```
-
 ---
 
 <!-- chunk: 5. 并发控制问题排查 (Concurrency Control Troubleshooting) -->
@@ -418,7 +423,8 @@ kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.volu
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 并发策略检查 ==========
 # 查看当前并发策略
 kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.spec.concurrencyPolicy}'
@@ -493,13 +499,13 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 ### 5.2 并发冲突检测
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 并发冲突监控 ==========
 # 监控活跃Job数量
 watch -n 5 "kubectl get cronjob <cronjob-name> -n <namespace> -o jsonpath='{.status.active}'"
@@ -536,7 +542,6 @@ kubectl exec -n <namespace> <pod-name> -- netstat -an | grep :5432
 # 监控存储I/O竞争
 kubectl top pods -n <namespace> -l job-name=<job-name>
 ```
-
 ---
 
 <!-- chunk: 6. 资源清理和维护 (Resource Cleanup and Maintenance) -->
@@ -549,7 +554,8 @@ kubectl top pods -n <namespace> -l job-name=<job-name>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== TTL策略配置 ==========
 # 为现有CronJob添加TTL策略
 kubectl patch cronjob <cronjob-name> -n <namespace> -p '{
@@ -669,13 +675,13 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 ### 6.2 存储资源监控
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 存储使用监控 ==========
 # 监控Job相关的存储增长
 cat <<'EOF' > monitor-job-storage.sh
@@ -728,7 +734,6 @@ spec:
     limits.memory: 40Gi              # 内存限制总量
 EOF
 ```
-
 ---
 
 <!-- chunk: 7. 监控告警配置 (Monitoring and Alerting) -->
@@ -739,7 +744,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Job状态监控 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -805,10 +811,10 @@ spec:
         summary: "Too many active jobs in queue ({{ \$value }})"
 EOF
 ```
-
 ### 7.2 性能分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== CronJob性能分析 ==========
 # 创建性能监控脚本
 cat <<'EOF' > cronjob-performance-analyzer.sh
@@ -895,7 +901,6 @@ EOF
 
 chmod +x predict-next-execution.sh
 ```
-
 ---
 
 ---
@@ -925,3 +930,6 @@ chmod +x predict-next-execution.sh
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/17-hpa-vpa-troubleshooting.md|17-hpa-vpa-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/19-configmap-secret-troubleshooting.md|19-configmap-secret-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/20-daemonset-troubleshooting.md|20-daemonset-troubleshooting]]
+
+
+<!-- risk-assessed -->

@@ -41,6 +41,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点删除流程 — kubectl delete node 源码分析
@@ -399,7 +404,17 @@ func removeETCDMember(cfg *kubeadmapi.InitConfiguration) error {
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl drain <node>
   │
   ├── cordon: node.spec.unschedulable = true
@@ -431,7 +446,6 @@ kubeadm reset (在目标节点上)  # ⚠️ 清理节点所有 K8s 配置
   ├── 清理 /var/lib/kubelet/
   └── 清理 /var/lib/etcd/ (控制面节点)
 ```
-
 ---
 
 ## 使用场景
@@ -444,7 +458,17 @@ kubeadm reset (在目标节点上)  # ⚠️ 清理节点所有 K8s 配置
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
 kubectl delete node worker-1
 # 在 worker-1 上:
@@ -453,19 +477,27 @@ iptables -F && iptables -t nat -F && iptables -t mangle -F
 ipvsadm -C
 rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 ```
-
 ### 场景 2：不可达节点强制删除
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete node unreachable-node --force --grace-period=0
 # 节点恢复后执行:
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ### 场景 3：控制面节点删除（HA 集群）
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -474,7 +506,17 @@ kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-data
 kubectl delete node cp-2
 # 在 cp-2 上:
@@ -484,7 +526,6 @@ etcdctl member list
 # 如果未自动移除:
 etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
-
 ### 场景 4：大规模节点快速删除（滚动）
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -492,7 +533,17 @@ etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景：需要快速删除多个节点
 NODES=$(kubectl get nodes -l node-role=worker --no-headers | cut -d' ' -f1)
 
@@ -510,7 +561,6 @@ for node in $NODES; do
 done
 wait
 ```
-
 ### 场景 5：节点网络不可达但本地登录可执行 reset
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -519,7 +569,17 @@ wait
 > - `iptables -F/-P DROP`：清空/改防火墙规则，可能立即断网(含SSH)
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景：节点网络不可达，但可以通过 console/IPMI 登录
 
 # 在可达节点上删除 Node 对象
@@ -534,7 +594,6 @@ rm -rf /etc/cni/net.d  # ⚠️ 删除系统/数据文件
 iptables -F && iptables -t nat -F
 ipvsadm -C
 ```
-
 ---
 
 ## 配置示例 YAML
@@ -566,35 +625,44 @@ etcd:
 
 ### 示例 1：检查节点上运行的 Pod
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods --all-namespaces --field-selector spec.nodeName=worker-1 -o wide
 ```
-
 ### 示例 2：安全驱逐 Pod（带超时）
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data --timeout=120s --grace-period=60
 ```
-
 ### 示例 3：检查 etcd 集群健康
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 etcdctl endpoint health --cluster \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ### 示例 4：确认 Node 已删除
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes
 kubectl get pods --all-namespaces --field-selector spec.nodeName=deleted-node
 ```
-
 ### 示例 5：reset 后手动清理 CNI
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -648,3 +716,5 @@ ip link delete flannel.1
 - [[entities/cni.md|cni]]
 
 ```
+
+<!-- risk-assessed -->

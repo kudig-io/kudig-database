@@ -49,6 +49,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Deployment 故障排查指南
@@ -296,7 +301,8 @@ maxSurge: 0
 
 **ReplicaSet 历史管理**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Deployment 通过 ReplicaSet 实现版本管理
 # 每次 Pod 模板变更都会创建新的 ReplicaSet
 
@@ -312,7 +318,6 @@ kubectl get rs -l app=myapp --sort-by=.metadata.creationTimestamp
 # ReplicaSet 命名规则: <deployment-name>-<pod-template-hash>
 # pod-template-hash 由 Pod 模板内容计算而来，确保唯一性
 ```
-
 **Revision 追踪原理**
 
 ```yaml
@@ -349,7 +354,8 @@ metadata:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看历史版本
 kubectl rollout history deployment myapp
 # REVISION  CHANGE-CAUSE
@@ -380,7 +386,6 @@ kubectl rollout history deployment myapp
 # 4         kubectl create --filename=deployment.yaml --record=true
 # 注意: revision 1 消失了，因为被回滚后变成了 revision 4
 ```
-
 **revisionHistoryLimit 清理机制**
 
 ```yaml
@@ -406,7 +411,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 更新镜像并立即暂停
 kubectl set image deployment myapp myapp=myapp:v2
 kubectl rollout pause deployment myapp
@@ -424,7 +430,6 @@ kubectl rollout resume deployment myapp
 # 4. 如果发现问题立即回滚
 kubectl rollout undo deployment myapp
 ```
-
 **方案 2: 两套 Deployment (推荐生产环境)**
 
 ```yaml
@@ -494,7 +499,8 @@ spec:
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 阶段 1: 10% 流量到金丝雀
 kubectl scale deployment myapp-stable --replicas=9
 kubectl scale deployment myapp-canary --replicas=1
@@ -514,7 +520,6 @@ kubectl delete deployment myapp-stable
 kubectl scale deployment myapp-stable --replicas=10
 kubectl scale deployment myapp-canary --replicas=0
 ```
-
 #### 1.1.5 蓝绿部署 (Blue-Green Deployment)
 
 **实现方式: Service Label Selector 切换**
@@ -585,7 +590,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署绿环境 (不接收流量)
 kubectl apply -f myapp-green-deployment.yaml
 kubectl rollout status deployment myapp-green
@@ -613,7 +619,6 @@ kubectl delete deployment myapp-blue
 # 从 green 切换到 blue
 
 ```
-
 **蓝绿部署优缺点**
 
 | 优点 | 缺点 |
@@ -658,7 +663,8 @@ kubectl delete deployment myapp-blue
 
 ### 1.3 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 状态
 kubectl get deployment <name> -o wide
 kubectl describe deployment <name>
@@ -684,7 +690,6 @@ kubectl rollout history deployment <name>
 # 查看 Deployment YAML（含 status）
 kubectl get deployment <name> -o yaml
 ```
-
 ### 1.4 影响面分析
 
 | 问题类型 | 直接影响 | 间接影响 | 影响范围 |
@@ -754,7 +759,8 @@ Deployment 问题
 
 #### 2.2.1 Deployment 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 概览
 kubectl get deployment <name> -o wide
 
@@ -781,10 +787,10 @@ kubectl get deployment <name> -o jsonpath='{.spec.strategy}'
 kubectl rollout history deployment <name>
 kubectl rollout history deployment <name> --revision=<n>
 ```
-
 #### 2.2.2 ReplicaSet 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 RS，按时间排序
 kubectl get rs -l app=<label> --sort-by='.metadata.creationTimestamp'
 
@@ -797,10 +803,10 @@ kubectl get rs -l app=<label> -o jsonpath='{range .items[?(@.spec.replicas>0)]}{
 # 检查 RS 的 Pod 模板哈希
 kubectl get rs -l app=<label> -o jsonpath='{range .items[*]}{.metadata.name}: {.metadata.labels.pod-template-hash}{"\n"}{end}'
 ```
-
 #### 2.2.3 Pod 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 列表和状态
 kubectl get pods -l app=<label> -o wide
 
@@ -818,10 +824,10 @@ kubectl top pod <pod-name> --containers
 # 检查 Pod 的 owner reference
 kubectl get pod <pod-name> -o jsonpath='{.metadata.ownerReferences[*].name}'
 ```
-
 #### 2.2.4 滚动更新监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时监控更新状态
 kubectl rollout status deployment <name> -w
 
@@ -834,7 +840,6 @@ kubectl get pods -l app=<label> -w
 # 检查更新是否卡住
 kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progressing")].status}'
 ```
-
 ### 2.3 排查注意事项
 
 | 注意项 | 说明 | 风险 |
@@ -853,7 +858,8 @@ kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progre
 
 #### 3.1.1 诊断原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Deployment 条件
 kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progressing")]}'
 
@@ -867,14 +873,14 @@ kubectl describe rs $NEW_RS
 # 检查 Pod 为什么没有 Ready
 kubectl get pods -l app=<label> -o jsonpath='{range .items[?(@.status.phase!="Running")]}{.metadata.name}: {.status.phase}{"\n"}{end}'
 ```
-
 #### 3.1.2 解决方案
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：暂停更新，排查问题
 kubectl rollout pause deployment <name>
 # 排查并修复问题后恢复
@@ -907,12 +913,12 @@ kubectl patch deployment <name> -p '{
 kubectl patch deployment <name> -p '{"spec":{"strategy":{"type":"Recreate"}}}'
 # 注意：会导致服务中断
 ```
-
 ### 3.2 Pod 健康检查失败导致更新卡住
 
 #### 3.2.1 诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 readinessProbe 配置
 kubectl get deployment <name> -o jsonpath='{.spec.template.spec.containers[*].readinessProbe}' | jq
 
@@ -922,13 +928,13 @@ kubectl get pod <pod-name> -o jsonpath='{.status.conditions[?(@.type=="Ready")]}
 # 检查探针失败详情
 kubectl describe pod <pod-name> | grep -A5 "Readiness"
 ```
-
 #### 3.2.2 解决方案
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 调整探针参数
 kubectl patch deployment <name> --type='json' -p='[
   {
@@ -953,7 +959,6 @@ kubectl patch deployment <name> --type='json' -p='[
   {"op": "remove", "path": "/spec/template/spec/containers/0/readinessProbe"}
 ]'
 ```
-
 ### 3.3 资源不足导致 Pod Pending
 
 #### 3.3.1 解决方案
@@ -963,7 +968,8 @@ kubectl patch deployment <name> --type='json' -p='[
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：减少资源请求
 kubectl patch deployment <name> --type='json' -p='[
   {
@@ -990,7 +996,6 @@ EOF
 
 kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"priorityClassName":"high-priority"}}}}'
 ```
-
 ### 3.4 镜像拉取失败
 
 #### 3.4.1 解决方案
@@ -1000,7 +1005,8 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"priorityClassN
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查镜像名称是否正确
 kubectl get deployment <name> -o jsonpath='{.spec.template.spec.containers[*].image}'
 
@@ -1018,7 +1024,6 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"imagePullSecre
 kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"containers":[{"name":"<container>","imagePullPolicy":"Always"}]}}}}'
 kubectl rollout restart deployment <name>
 ```
-
 ### 3.5 常用更新策略配置
 
 ```yaml
@@ -1104,7 +1109,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像
 kubectl set image deployment/<name> <container>=<image>:<tag>
 
@@ -1131,7 +1137,6 @@ kubectl rollout restart deployment <name>
 # 查看更新原因
 kubectl describe deployment <name> | grep -A10 Conditions
 ```
-
 ### D. 排查清单
 
 - [ ] Deployment 状态条件 (Available, Progressing)
@@ -1218,6 +1223,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 **场景 1: 资源争抢导致滚动更新雪崩**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 触发条件:
   - 集群资源使用率 > 80%
   - 多个 Deployment 同时更新
@@ -1240,7 +1246,6 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 使用 PriorityClass 控制更新优先级
   - 分批次更新 Deployment
 ```
-
 **场景 2: PDB + 节点维护导致更新阻塞**
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -1248,6 +1253,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 > - `kubectl edit/patch`：修改运行中的资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 触发条件:
   - 配置了严格的 PodDisruptionBudget (minAvailable=100%)
   - 部分节点进入维护模式 (kubectl drain)
@@ -1269,14 +1275,23 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 临时调整 PDB: kubectl patch pdb <pdb> -p '{"spec":{"minAvailable":1}}'
   - 或先完成节点维护，再更新 Deployment
 ```
-
 **场景 3: 配置漂移导致回滚失败**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 触发条件:
   - 通过 kubectl edit 直接修改 ConfigMap/Secret
   - Deployment 回滚到旧版本
@@ -1299,7 +1314,6 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 在 Deployment 中引用特定版本: configMapRef: name: app-config-v1
   - 保留 ConfigMap 历史版本
 ```
-
 ---
 
 ## 排查方法与步骤（补充）
@@ -1356,7 +1370,8 @@ spec:
 
 #### 2.4.2 超时后的行为
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 超时后 Deployment 状态
 kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progressing")]}'
 
@@ -1373,7 +1388,6 @@ kubectl get deployment <name> -o jsonpath='{.status.conditions[?(@.type=="Progre
 # 2. 超时后 Deployment Controller 仍会继续尝试调协
 # 3. 如果后续 Pod 变为 Ready，状态会自动恢复
 ```
-
 ### 2.5 PodDisruptionBudget 交互深度分析
 
 #### 2.5.1 PDB 检查逻辑
@@ -1406,7 +1420,17 @@ spec:
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 检查 PDB 状态
 kubectl get pdb <pdb-name> -o yaml
 
@@ -1427,7 +1451,6 @@ kubectl delete pdb <pdb-name>
 # 或直接强制删除 Pod (跳过 Eviction API)
 kubectl delete pod <pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 #### 2.5.2 PDB 与滚动更新策略的冲突
 
 ```yaml
@@ -1468,7 +1491,8 @@ minAvailable: 80%    # 要求 8 个可用
 
 #### 2.6.1 滚动更新时间线重建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 文件: deployment-timeline.sh
 # 用途: 重建 Deployment 滚动更新的完整时间线
@@ -1532,10 +1556,10 @@ if [ "$PROGRESSING" == "False" ]; then
   echo "Reason: $REASON"
 fi
 ```
-
 #### 2.6.2 滚动更新并发分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 文件: deployment-concurrency-analyzer.sh
 # 用途: 分析滚动更新的并发行为
@@ -1613,7 +1637,6 @@ ESTIMATED_TIME=$(echo "scale=0; $BATCHES * $AVG_POD_START_TIME / 60" | bc)
 echo -e "\nEstimated update time: ~$ESTIMATED_TIME minutes"
 echo "(assuming 2min per pod start time)"
 ```
-
 ---
 
 ## 生产案例深度剖析（补充）
@@ -1647,7 +1670,8 @@ echo "(assuming 2min per pod start time)"
 
 **详细排查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Deployment 状态
 $ kubectl get deployment order-service -o jsonpath='{.status.conditions[?(@.type=="Progressing")]}'
 {
@@ -1683,7 +1707,6 @@ $ kubectl rollout history deployment order-service --revision=2 | grep REDIS
 $ kubectl rollout history deployment order-service --revision=1 | grep REDIS
     REDIS_PORT: 6379  # 旧版本配置正确
 ```
-
 **根因分析**
 
 1. **直接原因**: 新版本镜像的 Redis 端口配置错误 (6380 → 6379)
@@ -1699,7 +1722,8 @@ $ kubectl rollout history deployment order-service --revision=1 | grep REDIS
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 立即回滚 (选择此方案)
 $ kubectl rollout undo deployment order-service
 deployment.apps/order-service rolled back
@@ -1717,7 +1741,6 @@ $ kubectl set image deployment/order-service order-service=order-service:v2.2.1
 # 3. 延长超时时间 (避免再次超时)
 $ kubectl patch deployment order-service -p '{"spec":{"progressDeadlineSeconds":1200}}'
 ```
-
 **业务影响**
 
 - **影响时间**: 14:05 - 14:13 (8 分钟)
@@ -1788,7 +1811,17 @@ spec:
 
 **详细排查**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Pod 状态
 $ kubectl get pods -l app=recommendation-engine
 NAME                                   READY   STATUS        RESTARTS   AGE
@@ -1849,7 +1882,6 @@ $ journalctl -u kubelet | tail -50
 ... E1201 10:20:15 ... Failed to remove pod from network: CNI plugin error
 ... E1201 10:20:20 ... Pod sandbox stuck in removing state
 ```
-
 **根因分析**
 
 1. **直接原因**: 节点 kubelet 网络插件问题，导致 Pod 无法正常终止
@@ -1867,7 +1899,17 @@ $ journalctl -u kubelet | tail -50
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急修复: 强制删除 Terminating Pod
 $ kubectl delete pod recommendation-engine-old-xyz-20 --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 Warning: Immediate deletion does not wait for confirmation...
@@ -1888,7 +1930,6 @@ $ systemctl restart containerd
 $ kubectl patch pdb recommendation-engine-pdb -p '{"spec":{"minAvailable":"85%"}}'
 # minAvailable=85% → 17/20，允许最多 3 个 Pod 不可用
 ```
-
 **防护措施**
 
 ```yaml
@@ -1981,7 +2022,8 @@ spec:
 
 **详细排查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod 状态分布
 $ kubectl get pods -l app=api-gateway -o wide | grep ImagePullBackOff | wc -l
 42  # 42 个 Pod 卡在镜像拉取
@@ -2027,7 +2069,6 @@ $ docker history 012345678.dkr.ecr.us-west-2.amazonaws.com/api-gateway:v3.5
 $ docker history 012345678.dkr.ecr.us-west-2.amazonaws.com/api-gateway:v3.6
 # 发现: 基础层 SHA256 不同，无法复用缓存
 ```
-
 **根因分析**
 
 1. **直接原因**: 镜像构建未复用层，导致每次更新都是全新镜像
@@ -2044,7 +2085,8 @@ $ docker history 012345678.dkr.ecr.us-west-2.amazonaws.com/api-gateway:v3.6
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 镜像预拉取 (立即生效)
 cat << 'EOF' | kubectl apply -f -
 apiVersion: apps/v1
@@ -2078,7 +2120,6 @@ $ kubectl rollout resume deployment api-gateway
 # 清理 DaemonSet
 $ kubectl delete daemonset image-pre-puller
 ```
-
 **长期优化**
 
 ```dockerfile
@@ -2125,7 +2166,8 @@ registryBurst: 10
 
 **防护措施**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 镜像构建流水线检查
 # CI/CD 中添加镜像大小检查
 - name: Check image size
@@ -2156,7 +2198,6 @@ $ imgpkg copy -i myimage:v3.6 --to-repo myregistry.com/cache
 # 4. 配置镜像仓库缓存代理
 # 使用 Harbor/Dragonfly P2P 加速分发
 ```
-
 **业务影响**
 
 - **影响时间**: 2 小时
@@ -2172,7 +2213,8 @@ $ imgpkg copy -i myimage:v3.6 --to-repo myregistry.com/cache
 
 #### 每日巡检 (自动化)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 文件: deployment-daily-check.sh
 
@@ -2232,7 +2274,6 @@ kubectl top nodes --no-headers | awk '{
 
 echo -e "\n=== Check Complete ==="
 ```
-
 #### 每周巡检 (手动)
 
 - [ ] **检查滚动更新策略配置合理性**
@@ -2466,3 +2507,5 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

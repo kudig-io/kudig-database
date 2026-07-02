@@ -42,6 +42,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Agent 评测体系与可观测性
@@ -727,6 +732,7 @@ groups:
 ## 5.3 Grafana Dashboard 关键面板
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Agent 监控 Dashboard 推荐面板:
 
 ┌─────────────────────────────────────────┐
@@ -747,7 +753,6 @@ Agent 监控 Dashboard 推荐面板:
 │     最近失败任务列表（点击查看 Trace）      │
 └─────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 6. 自动化评估 CI/CD 集成 -->## 6. 自动化评估 CI/CD 集成
@@ -923,3 +928,6 @@ if __name__ == "__main__":
 - 07-memory-context-management
 - 09-production-deployment-guide
 - 10-security-guardrails
+
+
+<!-- risk-assessed -->

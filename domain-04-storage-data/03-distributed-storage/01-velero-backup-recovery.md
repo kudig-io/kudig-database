@@ -51,6 +51,11 @@ updated: "2026-06-26"
 summary: '4. [配置 BackupStorageLocation 与 VolumeSnapshotLocation](#配置-backupstoragelocation-与-volumesnapshotlocation)'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Velero 阿里云专有云备份恢复实战
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **Velero**: v1.12+ | **阿里云插件**: v1.8+ | **最后更新**: 2026-06
@@ -131,12 +136,12 @@ summary: '4. [配置 BackupStorageLocation 与 VolumeSnapshotLocation](#配置-b
 
 ### 2.1 确认 CSI 快照能力
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get crd volumesnapshotclasses.snapshot.storage.k8s.io
 kubectl get crd volumesnapshots.snapshot.storage.k8s.io
 kubectl get volumesnapshotclass
 ```
-
 ---
 
 <!-- chunk: 3. 安装 Velero -->
@@ -232,13 +237,13 @@ velero install \
 
 ### 3.5 安装验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n velero
 velero backup-location get
 velero snapshot-location get
 velero version
 ```
-
 ---
 
 <!-- chunk: 4. BSL 与 VSL 配置 -->
@@ -368,11 +373,11 @@ velero backup logs daily-critical-20260626-0200
 
 ### 6.1 确认 VolumeSnapshotClass
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get volumesnapshotclass
 # 预期输出包含 alicloud-disk-snapshot
 ```
-
 ### 6.2 备份时使用 CSI 快照
 
 ```bash
@@ -445,7 +450,8 @@ velero restore create restore-config-only \
 
 ### 7.4 恢复后验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 velero restore describe restore-prod-20260626-1432
 velero restore logs restore-prod-20260626-1432
 
@@ -453,7 +459,6 @@ kubectl get pods -n production
 kubectl get pvc -n production
 kubectl get pv | grep production
 ```
-
 ---
 
 <!-- chunk: 8. 定时备份策略 -->
@@ -556,7 +561,8 @@ velero install \
 
 ### 9.3 执行跨集群恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 velero backup get
 
 velero restore create dr-restore-$(date +%Y%m%d-%H%M) \
@@ -568,7 +574,6 @@ kubectl get pods -n production
 kubectl get pvc -n production
 kubectl get svc -n production
 ```
-
 ### 9.4 专有云灾备特别注意事项
 
 | 场景 | 风险 | 应对 |
@@ -714,3 +719,6 @@ aliyun oss lifecycle --method put oss://${BUCKET} lifecycle.xml
 - [[domain-04-storage-data/03-distributed-storage/02-rook-ceph-production|Rook-Ceph 生产指南]]
 - [[domain-04-storage-data/03-distributed-storage/03-longhorn-production|Longhorn 生产指南]]
 - [[domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns|有状态应用存储模式]]
+
+
+<!-- risk-assessed -->

@@ -42,6 +42,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -281,14 +286,14 @@ aliyun cs GET /clusters/<cluster_id>/logs
 
 可以通过 ACK 控制台重新生成 kubeconfig 文件。如果控制台也无法访问（极少见的情况），可以通过阿里云 CLI 执行 `aliyun cs GET /clusters/<cluster_id>/user_config` 获取新的 kubeconfig。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查证书过期时间
 kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}' | base64 -d | openssl x509 -noout -dates
 
 # 重新获取 kubeconfig
 aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 ```
-
 ---
 
 ## 要点总结
@@ -336,3 +341,6 @@ aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

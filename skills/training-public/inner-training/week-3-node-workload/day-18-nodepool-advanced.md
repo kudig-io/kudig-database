@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -264,7 +269,8 @@ Spot 实例最佳实践：
 
 ### 任务 1: 配置弹性节点池 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建弹性节点池（Spot + 按量混合）
 cat > elastic-nodepool.json << 'EOF'
 {
@@ -308,13 +314,13 @@ EOF
 aliyun cs POST /clusters/<cluster_id>/nodepools \
   --body "$(cat elastic-nodepool.json)"
 ```
-
 ### 任务 2: 配置应用使用弹性节点池 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署能容忍 Spot 污点的应用
 cat > spot-deployment.yaml << 'EOF'
 apiVersion: apps/v1
@@ -378,10 +384,10 @@ kubectl get pods -l app=batch-processor -o wide
 # 查看 CA 伸缩日志
 kubectl logs -n kube-system -l app=cluster-autoscaler --tail=50
 ```
-
 ### 任务 3: 监控和排查自动伸缩问题 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CA 状态
 kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 
@@ -412,14 +418,23 @@ kubectl describe pod <pending-pod-name> | grep -A10 Events
 # 查看伸缩活动历史
 aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '.status'
 ```
-
 ### 任务 4: 节点池升级演练 (30min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前集群版本
 kubectl version --short
 
@@ -449,7 +464,6 @@ kubectl uncordon <node-name>
 # 验证节点版本
 kubectl get nodes -o wide
 ```
-
 ---
 
 ## 配置参考
@@ -586,3 +600,6 @@ spec:
 - [ECS 计算资源](../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md)
 - [集群升级策略](../../domain-12-cloud-providers/04-alicloud-ack/220-ack-upgrade.md)
 - [K8s 调度策略](../../domain-09-workload/05-pod-scheduling.md)
+
+
+<!-- risk-assessed -->

@@ -76,6 +76,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kube-proxy 深度解析 (kube-proxy Deep Dive)
@@ -705,7 +710,8 @@ groups:
 
 ### 8.2 诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 kube-proxy 状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 kubectl logs -n kube-system -l k8s-app=kube-proxy -f
@@ -745,7 +751,6 @@ kubectl run test --rm -it --image=busybox -- wget -qO- http://<service-cluster-i
 curl http://<cluster-ip>:<port>
 curl http://<node-ip>:<node-port>
 ```
-
 ### 8.3 常见日志模式
 
 ```bash
@@ -797,7 +802,17 @@ sysctl -p
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 确保内核模块加载
 modprobe ip_vs
 modprobe ip_vs_rr
@@ -818,7 +833,6 @@ kubectl rollout restart daemonset kube-proxy -n kube-system
 # 5. 验证
 ipvsadm -Ln
 ```
-
 ---
 
 <!-- chunk: 10. 生产环境 Checklist -->
@@ -854,7 +868,8 @@ ipvsadm -Ln
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用Cilium替代kube-proxy
 # 1. 禁用kube-proxy
 kubectl -n kube-system delete daemonset kube-proxy
@@ -869,7 +884,6 @@ helm install cilium cilium/cilium --version 1.14.0 \
 # 3. 验证
 cilium status
 ```
-
 ### 优势
 
 | 特性 | kube-proxy | Cilium eBPF |
@@ -907,3 +921,6 @@ cilium status
 - 15-kubelet-deep-dive
 - 17-apiserver-tuning
 - 18-api-priority-fairness
+
+
+<!-- risk-assessed -->

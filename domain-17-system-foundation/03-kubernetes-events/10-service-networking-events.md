@@ -54,6 +54,11 @@ cross_refs:
   label: '故障树: service'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 10 - [[Service|Service]] 与网络事件
@@ -146,6 +151,7 @@ Kubernetes 中 Service 有多种类型,每种类型产生的事件不同:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 用户操作                          控制器事件                         外部资源状态
 ═══════════════════════════════════════════════════════════════════════════════════
 
@@ -220,7 +226,6 @@ Kubernetes 中 Service 有多种类型,每种类型产生的事件不同:
                                              ▼
                                       etcd 中 Service 对象被移除
 ```
-
 ## 2.3 Endpoint vs EndpointSlice
 
 | 对比维度 | Endpoints (v1.0+) | EndpointSlice (v1.17+ GA v1.21) |
@@ -348,7 +353,8 @@ Service 创建/更新
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-loadbalancer-svc
 
 Events:
@@ -361,7 +367,6 @@ $ kubectl get svc my-loadbalancer-svc
 NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
 my-loadbalancer-svc    LoadBalancer   10.96.100.50    203.0.113.10    80:30080/TCP   1m
 ```
-
 **Service 状态字段**:
 ```yaml
 status:
@@ -381,7 +386,8 @@ status:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Service 状态
 kubectl get svc my-loadbalancer-svc -o wide
 
@@ -398,7 +404,6 @@ az network lb show --resource-group <rg> --name <lb-name>
 # 4. 查看 service-controller 日志 (在 kube-controller-manager 中)
 kubectl logs -n kube-system kube-controller-manager-<node> | grep service-controller
 ```
-
 ## 解决建议
 
 **该事件为正常操作,无需处理。如果长时间停留在 `EnsuringLoadBalancer` 状态,参考后续的失败事件排查。**
@@ -431,7 +436,8 @@ kubectl logs -n kube-system kube-controller-manager-<node> | grep service-contro
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-new-lb-svc
 
 Events:
@@ -442,7 +448,6 @@ Events:
   Normal  CreatedLoadBalancer     10s   service-controller  Created load balancer
   Normal  EnsuredLoadBalancer     10s   service-controller  Ensured load balancer
 ```
-
 **AWS 云厂商示例 (ELB)**:
 ```bash
 Events:
@@ -466,7 +471,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Service 创建时间和事件
 kubectl describe service my-new-lb-svc
 
@@ -483,7 +489,6 @@ gcloud compute forwarding-rules list --filter="description~my-new-lb-svc"
 # 3. 检查 cloud-controller-manager 日志 (如果使用外部 CCM)
 kubectl logs -n kube-system cloud-controller-manager-<pod> | grep my-new-lb-svc
 ```
-
 ## 解决建议
 
 **该事件为正常操作。如果创建失败,会产生 `SyncLoadBalancerFailed` 事件,参考后续章节排查。**
@@ -519,7 +524,8 @@ LoadBalancer 配置已成功更新,通常是因为 Service 的 ports、sessionAf
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -528,7 +534,6 @@ Events:
   Normal  UpdatedLoadBalancer  10s   service-controller  Updated load balancer with new hosts
   Normal  UpdatedLoadBalancer  5s    service-controller  Updated load balancer with new ports
 ```
-
 ## 影响面说明
 
 - **用户影响**: 无 - 更新过程对流量影响极小
@@ -540,7 +545,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Service 配置变更历史
 kubectl describe service my-lb-svc
 
@@ -556,7 +562,6 @@ curl http://<EXTERNAL-IP>:<NEW-PORT>
 kubectl get nodes -o wide
 kubectl get svc my-lb-svc -o jsonpath='{.status.loadBalancer}'
 ```
-
 ## 解决建议
 
 **该事件为正常操作,表明 LoadBalancer 配置已同步成功。**
@@ -588,7 +593,8 @@ kubectl get svc my-lb-svc -o jsonpath='{.status.loadBalancer}'
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -597,7 +603,6 @@ Events:
   Normal  DeletingLoadBalancer    30s   service-controller  Deleting load balancer
   Normal  DeletedLoadBalancer     5s    service-controller  Deleted load balancer
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - External IP 不可用,外部流量无法访问
@@ -607,7 +612,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Service 是否被意外删除
 kubectl get svc -A | grep my-lb-svc
 
@@ -621,7 +627,6 @@ aws elb describe-load-balancers --query "LoadBalancerDescriptions[?contains(Load
 # 4. 检查审计日志,确认删除操作来源
 kubectl get events -A --field-selector involvedObject.kind=Service,involvedObject.name=my-lb-svc,reason=DeletingLoadBalancer
 ```
-
 ## 解决建议
 
 | 问题场景 | 可能原因 | 解决方案 |
@@ -635,7 +640,8 @@ kubectl get events -A --field-selector involvedObject.kind=Service,involvedObjec
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 重新创建 Service
 kubectl apply -f my-lb-svc.yaml
 
@@ -645,7 +651,6 @@ kubectl get svc my-lb-svc -w
 # 3. 验证 External IP 已分配
 kubectl get svc my-lb-svc -o jsonpath='{.status.loadBalancer.ingress}'
 ```
-
 ---
 
 ## 3.5 `UpdateLoadBalancerFailed` - LoadBalancer更新失败
@@ -671,7 +676,8 @@ service-controller 尝试更新 LoadBalancer 配置时失败,可能是云厂商 
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -681,7 +687,6 @@ Events:
   Warning  UpdateLoadBalancerFailed  30s   service-controller  Error updating load balancer with new hosts map[10.0.1.5:{}]: failed to ensure load balancer: RequestLimitExceeded: Request limit exceeded
   Warning  UpdateLoadBalancerFailed  10s   service-controller  Error updating load balancer: UnauthorizedOperation: You are not authorized to perform this operation
 ```
-
 **message 格式变体**:
 
 | message 关键词 | 根本原因 | 云厂商 |
@@ -703,7 +708,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看完整错误消息
 kubectl describe service my-lb-svc | grep -A 5 "UpdateLoadBalancerFailed"
 
@@ -724,7 +730,6 @@ az role assignment list --assignee <sp-id>
 # 5. 查看 Service annotations (云厂商特定配置)
 kubectl get svc my-lb-svc -o jsonpath='{.metadata.annotations}'
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 排查方法 | 解决方案 |
@@ -759,14 +764,14 @@ kubectl get svc my-lb-svc -o jsonpath='{.metadata.annotations}'
 ```
 
 **Azure Service Principal 权限配置**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 为 Service Principal 分配 Network Contributor 角色
 az role assignment create \
   --assignee <sp-id> \
   --role "Network Contributor" \
   --scope /subscriptions/<subscription-id>/resourceGroups/<rg>
 ```
-
 ---
 
 ## 3.6 `DeleteLoadBalancerFailed` - LoadBalancer删除失败
@@ -792,7 +797,8 @@ service-controller 尝试删除 LoadBalancer 资源时失败,可能导致云厂�
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -802,7 +808,6 @@ Events:
   Warning  DeleteLoadBalancerFailed  30s   service-controller  Error deleting load balancer: LoadBalancerNotFound: The specified load balancer does not exist
   Warning  DeleteLoadBalancerFailed  10s   service-controller  Error deleting load balancer: DependencyViolation: Cannot delete load balancer with active targets
 ```
-
 ## 影响面说明
 
 - **用户影响**: 低 - Service 删除流程受阻
@@ -812,7 +817,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看完整错误消息
 kubectl describe service my-lb-svc | grep -A 5 "DeleteLoadBalancerFailed"
 
@@ -832,7 +838,6 @@ kubectl get svc my-lb-svc -o jsonpath='{.metadata.finalizers}'
 # 输出示例: ["service.kubernetes.io/load-balancer-cleanup"]
 
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 解决方案 |
@@ -848,7 +853,17 @@ kubectl get svc my-lb-svc -o jsonpath='{.metadata.finalizers}'
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 移除 finalizer (允许 Kubernetes 删除 Service 对象)
 kubectl patch svc my-lb-svc -p '{"metadata":{"finalizers":[]}}' --type=merge
 
@@ -866,7 +881,6 @@ aws elbv2 delete-load-balancer --load-balancer-arn <lb-arn>
 aws elb describe-load-balancers --load-balancer-names <lb-name>
 # 输出: LoadBalancerNotFound (成功)
 ```
-
 ---
 
 ## 3.7 `UnAvailableLoadBalancer` - LoadBalancer无可用后端
@@ -891,7 +905,8 @@ LoadBalancer 的后端节点列表为空,或所有后端节点健康检查失败
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -900,7 +915,6 @@ Events:
   Warning  UnAvailableLoadBalancer  30s   service-controller  There are no available nodes for LoadBalancer
   Warning  UnAvailableLoadBalancer  10s   service-controller  All backend nodes are unhealthy
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - 服务完全不可用,外部流量无法访问
@@ -912,7 +926,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查集群节点状态
 kubectl get nodes
 # 查看是否有 Ready 状态的节点
@@ -935,7 +950,6 @@ NODE_PORT=$(kubectl get svc my-lb-svc -o jsonpath='{.spec.ports[0].nodePort}')
 NODE_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
 curl http://$NODE_IP:$NODE_PORT
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 排查方法 | 解决方案 |
@@ -952,7 +966,8 @@ curl http://$NODE_IP:$NODE_PORT
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: LoadBalancer 无可用后端
 kubectl get endpoints my-lb-svc
 # 输出: NAME         ENDPOINTS   AGE
@@ -974,13 +989,13 @@ kubectl get endpoints my-lb-svc
 # 输出: NAME         ENDPOINTS           AGE
 #       my-lb-svc    10.244.1.10:8080    5m
 ```
-
 **案例 2: externalTrafficPolicy: Local 无本地 Pod**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 现象: 某些节点的 LoadBalancer 后端显示 Unhealthy
 
 # 排查:
@@ -1014,7 +1029,6 @@ spec:
                     app: my-app
                 topologyKey: kubernetes.io/hostname
 ```
-
 ---
 
 ## 3.8 `SyncLoadBalancerFailed` - LoadBalancer同步失败
@@ -1039,7 +1053,8 @@ service-controller 无法同步 LoadBalancer 状态,这是一个通用错误,涵
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-lb-svc
 
 Events:
@@ -1048,7 +1063,6 @@ Events:
   Warning  SyncLoadBalancerFailed   30s   service-controller  Error syncing load balancer: failed to ensure load balancer: context deadline exceeded
   Warning  SyncLoadBalancerFailed   10s   service-controller  Error syncing load balancer: failed to ensure load balancer: unable to resolve endpoint
 ```
-
 ## 影响面说明
 
 - **用户影响**: 中高 - LoadBalancer 状态无法同步,可能导致配置不一致
@@ -1060,7 +1074,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看完整错误消息
 kubectl describe service my-lb-svc | grep -A 5 "SyncLoadBalancerFailed"
 
@@ -1081,7 +1096,6 @@ kubectl get cm -n kube-system cloud-config -o yaml
 # 6. 检查是否有网络策略阻止 control plane 访问云 API
 kubectl get networkpolicies -A
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 排查方法 | 解决方案 |
@@ -1092,7 +1106,8 @@ kubectl get networkpolicies -A
 | **connection refused** | cloud-controller-manager 未运行 | `kubectl get pods -n kube-system` | 启动 cloud-controller-manager |
 
 **检查 AWS 认证配置 (kube-controller-manager)**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-controller-manager 使用的 IAM Role
 kubectl get pods -n kube-system kube-controller-manager-<pod> -o yaml | grep -A 5 "AWS_"
 
@@ -1100,9 +1115,9 @@ kubectl get pods -n kube-system kube-controller-manager-<pod> -o yaml | grep -A 
 aws sts get-caller-identity
 aws elb describe-load-balancers --max-items 1
 ```
-
 **检查 Azure 认证配置**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 cloud-config Secret
 kubectl get secret -n kube-system azure-cloud-provider -o yaml
 
@@ -1112,7 +1127,6 @@ az login --service-principal \
   --password <password> \
   --tenant <tenantId>
 ```
-
 ---
 
 <!-- chunk: 四、Endpoint 与 EndpointSlice 事件 -->## 四、Endpoint 与 EndpointSlice 事件
@@ -1141,7 +1155,8 @@ az login --service-principal \
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-svc
 
 Events:
@@ -1150,7 +1165,6 @@ Events:
   Warning  FailedToCreateEndpoint   30s   endpoint-controller  Failed to create endpoint for service default/my-svc: endpoints "my-svc" already exists
   Warning  FailedToCreateEndpoint   10s   endpoint-controller  Failed to create endpoint: etcdserver: request timed out
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - Service 无法发现后端 Pod,流量无法转发
@@ -1160,7 +1174,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Endpoints 对象是否存在
 kubectl get endpoints my-svc
 kubectl describe endpoints my-svc
@@ -1182,7 +1197,6 @@ kubectl get --raw /healthz
 kubectl get --raw /healthz/etcd
 
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 解决方案 |
@@ -1197,7 +1211,8 @@ kubectl get --raw /healthz/etcd
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 endpoint-controller 使用的 ClusterRole
 kubectl get clusterrolebinding system:controller:endpoint-controller -o yaml
 
@@ -1211,7 +1226,6 @@ kubectl create clusterrolebinding endpoint-controller-admin \
   --clusterrole=cluster-admin \
   --serviceaccount=kube-system:endpoint-controller
 ```
-
 ---
 
 ## 4.2 `FailedToUpdateEndpoint` / `FailedToUpdateEndpointSlice` - Endpoint更新失败
@@ -1243,7 +1257,8 @@ kubectl create clusterrolebinding endpoint-controller-admin \
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-svc
 
 Events:
@@ -1252,7 +1267,6 @@ Events:
   Warning  FailedToUpdateEndpoint   30s   endpoint-controller  Failed to update endpoint default/my-svc: Operation cannot be fulfilled on endpoints "my-svc": the object has been modified; please apply your changes to the latest version and try again
   Warning  FailedToUpdateEndpoint   10s   endpoint-controller  Failed to update endpoint: etcdserver: request is too large
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - Service 路由到已删除的 Pod 或错过新 Pod
@@ -1264,7 +1278,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Endpoints 当前状态
 kubectl get endpoints my-svc -o yaml
 
@@ -1283,7 +1298,6 @@ kubectl logs -n kube-system kube-controller-manager-<pod> | grep "endpoint-contr
 kubectl get endpoints my-svc -o jsonpath='{.metadata.resourceVersion}'
 # 快速重复执行,如果版本号快速变化,说明有频繁更新
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 解决方案 |
@@ -1298,7 +1312,8 @@ kubectl get endpoints my-svc -o jsonpath='{.metadata.resourceVersion}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认集群版本支持 EndpointSlice (v1.17+)
 kubectl version --short
 
@@ -1317,7 +1332,6 @@ kubectl get endpointslice <slice-name> -o yaml
 # 如果确认所有组件都支持 EndpointSlice,可以删除 Endpoints
 kubectl delete endpoints my-svc
 ```
-
 **检查 Endpoints 大小并拆分 Service**:
 ```bash
 # 如果 Service 有数千个 Pod,考虑拆分为多个 Service
@@ -1381,7 +1395,8 @@ controller 无法删除 Endpoints 或 EndpointSlice 对象,通常发生在 Servi
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe service my-svc
 
 Events:
@@ -1389,7 +1404,6 @@ Events:
   ----     ------                   ----  ----                 -------
   Warning  FailedToDeleteEndpoint   30s   endpoint-controller  Failed to delete endpoint default/my-svc: endpoints "my-svc" not found
 ```
-
 ## 影响面说明
 
 - **用户影响**: 低 - Service 删除流程受阻
@@ -1403,7 +1417,17 @@ Events:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Endpoints 是否仍存在
 kubectl get endpoints my-svc
 
@@ -1414,7 +1438,6 @@ kubectl get endpoints my-svc -o jsonpath='{.metadata.finalizers}'
 kubectl patch endpoints my-svc -p '{"metadata":{"finalizers":[]}}' --type=merge
 kubectl delete endpoints my-svc --force --grace-period=0
 ```
-
 ## 解决建议
 
 | 问题场景 | 解决方案 |
@@ -1458,7 +1481,8 @@ Pod 配置的 `hostPort` 已被节点上的其他 Pod 或进程占用,导致 Pod
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-hostport-pod
 
 Events:
@@ -1467,7 +1491,6 @@ Events:
   Warning  HostPortConflict  30s   kubelet  hostPort 8080 is already in use by another pod or process
   Warning  FailedSync        30s   kubelet  error determining status: rpc error: code = Unknown desc = failed to check port availability: bind: address already in use
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - Pod 无法启动,卡在 Pending 状态
@@ -1477,7 +1500,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 的 hostPort 配置
 kubectl get pod my-hostport-pod -o jsonpath='{.spec.containers[*].ports[*]}'
 
@@ -1495,7 +1519,6 @@ sudo ss -tulnp | grep :8080
 sudo lsof -i :8080
 
 ```
-
 ## 解决建议
 
 | 问题场景 | 根本原因 | 解决方案 |
@@ -1592,7 +1615,8 @@ kubelet 无法为 Pod 生成正确的 DNS 配置 (/etc/resolv.conf),导致 Pod �
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe pod my-pod
 
 Events:
@@ -1601,7 +1625,6 @@ Events:
   Warning  DNSConfigForming  30s   kubelet  Forming DNS configmap with mode ClusterFirst failed: unable to read config path "/etc/resolv.conf": open /etc/resolv.conf: no such file or directory
   Warning  DNSConfigForming  10s   kubelet  Forming DNS configmap failed: cannot find service "kube-dns" in namespace "kube-system"
 ```
-
 ## 影响面说明
 
 - **用户影响**: **高** - Pod 无法解析域名,网络功能受限
@@ -1616,7 +1639,8 @@ Events:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 的 DNS 策略
 kubectl get pod my-pod -o jsonpath='{.spec.dnsPolicy}'
 # 输出: ClusterFirst (默认) / Default / None
@@ -1642,7 +1666,6 @@ ssh <node>
 ps aux | grep kubelet | grep "cluster-dns|cluster-domain"
 # 应包含: --cluster-dns=10.96.0.10 --cluster-domain=cluster.local
 ```
-
 ## 解决建议
 
 | 错误消息关键词 | 根本原因 | 解决方案 |
@@ -1652,7 +1675,8 @@ ps aux | grep kubelet | grep "cluster-dns|cluster-domain"
 | **lookup kube-dns.kube-system: no such host** | CoreDNS Pod 未运行 | 1. 检查 CoreDNS Pod 状态<br>2. 查看 CoreDNS 日志排查启动失败原因 |
 
 **修复 CoreDNS Service 缺失**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CoreDNS Service
 kubectl get svc -n kube-system kube-dns
 # 如果不存在,重新创建
@@ -1677,7 +1701,6 @@ spec:
       port: 53
       protocol: TCP
 ```
-
 **自定义 Pod DNS 配置 (绕过 CoreDNS)**:
 ```yaml
 apiVersion: v1
@@ -1727,7 +1750,8 @@ spec:
 
 ## 典型事件消息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod IP 分配成功
 $ kubectl describe pod my-pod
 Events:
@@ -1742,7 +1766,6 @@ Events:
   ----     ------          ----  ----                -------
   Warning  IPNotAllocated  30s   service-controller  Failed to allocate external IP: IP pool exhausted
 ```
-
 ## 影响面说明
 
 - **用户影响**: 
@@ -1759,7 +1782,8 @@ Events:
 
 ## 排查建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Pod CIDR 配置
 kubectl get nodes -o jsonpath='{.items[*].spec.podCIDR}'
 
@@ -1781,7 +1805,6 @@ aws ec2 describe-account-attributes --attribute-names vpc-max-elastic-ips
 # 6. 查看 kube-controller-manager 的 Service CIDR 配置
 kubectl get pods -n kube-system kube-controller-manager-<node> -o yaml | grep service-cluster-ip-range
 ```
-
 ## 解决建议
 
 | 分配失败场景 | 根本原因 | 解决方案 |
@@ -1797,7 +1820,8 @@ kubectl get pods -n kube-system kube-controller-manager-<node> -o yaml | grep se
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看当前 IP Pool
 kubectl get ippool -o yaml
 
@@ -1819,13 +1843,13 @@ EOF
 kubectl run test --image=nginx --restart=Never
 kubectl get pod test -o wide
 ```
-
 **扩大 Service CIDR**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ⚠️ 需要重启 kube-apiserver 和 kube-controller-manager
 
 # 1. 修改 kube-apiserver 启动参数
@@ -1843,7 +1867,6 @@ kubectl wait --for=condition=Ready pod/kube-apiserver-<node> -n kube-system --ti
 kubectl create svc clusterip test --tcp=80:80
 kubectl get svc test -o jsonpath='{.spec.clusterIP}'
 ```
-
 ---
 
 <!-- chunk: 六、综合排查案例 -->## 六、综合排查案例
@@ -1851,14 +1874,15 @@ kubectl get svc test -o jsonpath='{.spec.clusterIP}'
 ## 案例 1: LoadBalancer External IP 长时间 Pending
 
 **问题现象**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get svc my-lb-svc
 NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 my-lb-svc    LoadBalancer   10.96.100.50    <pending>     80:30080/TCP   10m
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Service 事件
 kubectl describe svc my-lb-svc
 # 输出: Warning SyncLoadBalancerFailed ... Error syncing load balancer: failed to ensure load balancer: RequestLimitExceeded
@@ -1877,7 +1901,6 @@ aws cloudwatch get-metric-statistics \
   --period 300 \
   --statistics Sum
 ```
-
 **根本原因**: AWS API 请求被限流,通常是因为短时间内创建/更新了大量 LoadBalancer Service。
 
 **解决方案**:
@@ -1885,7 +1908,17 @@ aws cloudwatch get-metric-statistics \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 增加 API 重试间隔 (修改 cloud-controller-manager 配置)
 kubectl edit deployment -n kube-system cloud-controller-manager
 # 添加环境变量:
@@ -1898,13 +1931,13 @@ env:
 
 # 方案 3: 联系 AWS 提升 API 限流配额
 ```
-
 ---
 
 ## 案例 2: Service 无流量但 Endpoints 正常
 
 **问题现象**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get svc my-svc
 NAME     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 my-svc   ClusterIP   10.96.100.100   <none>        80/TCP    5m
@@ -1916,9 +1949,9 @@ my-svc   10.244.1.10:8080,10.244.2.20:8080 5m
 $ curl 10.96.100.100
 # 超时无响应
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 测试直接访问 Pod IP
 curl 10.244.1.10:8080
 # 如果成功,说明 Pod 正常,问题在网络层
@@ -1939,7 +1972,6 @@ sudo iptables-save | grep my-svc
 # 5. 检查 kube-proxy Pod 状态
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 ```
-
 **根本原因**: kube-proxy 问题,未创建 Service 的 iptables/ipvs 规则。
 
 **解决方案**:
@@ -1947,7 +1979,8 @@ kubectl get pods -n kube-system -l k8s-app=kube-proxy
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 重启 kube-proxy DaemonSet
 kubectl rollout restart daemonset/kube-proxy -n kube-system
 
@@ -1959,7 +1992,6 @@ sudo iptables-save | grep -A 5 "my-svc"
 # 再次测试 ClusterIP
 curl 10.96.100.100
 ```
-
 ---
 
 ## 案例 3: EndpointSlice 未更新导致流量路由错误
@@ -1969,7 +2001,8 @@ curl 10.96.100.100
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除一个 Pod 后,流量仍路由到已删除的 Pod IP,导致部分请求失败
 
 $ kubectl get pods -l app=my-app -o wide
@@ -1982,9 +2015,9 @@ $ kubectl delete pod my-app-2
 $ kubectl get endpointslices -l kubernetes.io/service-name=my-svc -o yaml
 # 输出: endpoints 仍包含 10.244.2.20 (已删除的 Pod IP)
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 endpointslice-controller 日志
 kubectl logs -n kube-system kube-controller-manager-<pod> | grep endpointslice-controller
 # 输出: E0210 Failed to update EndpointSlice: conflict
@@ -1995,7 +2028,6 @@ kubectl get endpointslices <slice-name> -o jsonpath='{.metadata.resourceVersion}
 # 3. 检查是否有其他控制器修改 EndpointSlice
 kubectl get events --field-selector involvedObject.kind=EndpointSlice,involvedObject.name=<slice-name>
 ```
-
 **根本原因**: endpointslice-controller 遇到资源版本冲突,更新失败后未及时重试。
 
 **解决方案**:
@@ -2004,7 +2036,8 @@ kubectl get events --field-selector involvedObject.kind=EndpointSlice,involvedOb
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 手动触发 EndpointSlice 更新 (添加 annotation)
 kubectl annotate endpointslice <slice-name> force-sync="$(date +%s)"
 
@@ -2018,7 +2051,6 @@ kubectl delete pod -n kube-system kube-controller-manager-<node>
 kubectl get endpointslices <slice-name> -o yaml | grep -A 5 endpoints:
 # 应不再包含 10.244.2.20
 ```
-
 ---
 
 <!-- chunk: 七、生产环境最佳实践 -->## 七、生产环境最佳实践
@@ -2088,7 +2120,8 @@ spec:
 - ✅ 频繁的 Pod 变化 (如 HPA 扩缩容)
 
 **迁移检查清单**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认集群版本
 kubectl version --short | grep Server
 # 需要 v1.17+ (建议 v1.21+)
@@ -2105,7 +2138,6 @@ kubectl logs -n kube-system kube-proxy-<pod> | grep EndpointSlice
 # 修改 kube-controller-manager:
 --feature-gates=DisableEndpointsWatcher=true
 ```
-
 ## 7.4 Service 监控告警配置
 
 **Prometheus 告警规则**:
@@ -2214,7 +2246,8 @@ annotations:
 ## 7.6 Service 排查工具箱
 
 **快速诊断脚本**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # service-diagnostics.sh - Service 快速诊断脚本
 
@@ -2265,7 +2298,6 @@ echo ""
 echo "=== kube-proxy 状态检查 ==="
 kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
 ```
-
 **使用示例**:
 ```bash
 chmod +x service-diagnostics.sh
@@ -2317,3 +2349,5 @@ chmod +x service-diagnostics.sh
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

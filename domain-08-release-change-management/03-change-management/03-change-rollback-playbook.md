@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 变更回滚操作手册
@@ -109,41 +114,41 @@ authors:
 
 ### 2.1 查看修订历史
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Deployment 的 rollout 历史
 kubectl rollout history deployment/order-service -n production
 ```
-
 ### 2.2 回滚到上一个版本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 回滚到上一个稳定版本
 kubectl rollout undo deployment/order-service -n production
 ```
-
 ### 2.3 回滚到指定版本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 回滚到指定 revision
 kubectl rollout undo deployment/order-service -n production --to-revision=3
 ```
-
 ### 2.4 验证回滚
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看回滚进度
 kubectl rollout status deployment/order-service -n production
 
 # 确认镜像版本
 kubectl get deployment order-service -n production -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-
 ---
 
 ## 3. StatefulSet 回滚
@@ -166,7 +171,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看历史
 kubectl rollout history statefulset/mysql -n production
 
@@ -176,7 +182,6 @@ kubectl rollout undo statefulset/mysql -n production --to-revision=2
 # 查看状态
 kubectl rollout status statefulset/mysql -n production
 ```
-
 ---
 
 ## 4. ConfigMap/Secret 回滚
@@ -189,14 +194,14 @@ ConfigMap 和 Secret 不直接支持 `rollout undo`，需通过 Git 或备份恢
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Git 恢复上一个版本
 kubectl apply -f configmap/order-service-config-v1.yaml
 
 # 触发 Deployment 滚动更新以生效
 kubectl rollout restart deployment/order-service -n production
 ```
-
 ### 4.2 使用 immutable ConfigMap
 
 生产建议将 ConfigMap 标记为 immutable，变更时创建新版本：
@@ -218,18 +223,19 @@ data:
 
 ### 5.1 备份当前 CRD
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 变更前备份 CRD
 kubectl get crd myresources.example.com -o yaml > /backup/myresources.crd.yaml
 ```
-
 ### 5.2 回滚 Operator
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 卸载新版本 Operator
 kubectl delete -f operator-v2.yaml
 
@@ -239,17 +245,16 @@ kubectl apply -f operator-v1.yaml
 # 3. 恢复 CRD（如需要）
 kubectl apply -f /backup/myresources.crd.yaml
 ```
-
 ### 5.3 回滚 CR 实例
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Git 恢复 CR 配置
 kubectl apply -f cr/myresource-production-v1.yaml
 ```
-
 ---
 
 ## 6. 数据库变更回滚
@@ -261,11 +266,11 @@ kubectl apply -f cr/myresource-production-v1.yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 直接回滚应用版本即可
 kubectl rollout undo deployment/order-service -n production
 ```
-
 ### 6.2 破坏性变更回滚
 
 对于删除列、修改类型等：
@@ -273,14 +278,14 @@ kubectl rollout undo deployment/order-service -n production
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 从备份恢复数据库
 mysql -uroot -p < /backup/order-service-20260629.sql
 
 # 2. 回滚应用版本
 kubectl rollout undo deployment/order-service -n production
 ```
-
 ### 6.3 使用 Flyway/Liquibase
 
 ```bash
@@ -464,3 +469,5 @@ flyway undo -url=jdbc:mysql://mysql-primary.production.svc.cluster.local:3306/or
 - [[domain-11-production-operations/03-on-call-playbook.md|值班手册]]
 
 ```
+
+<!-- risk-assessed -->

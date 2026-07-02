@@ -46,6 +46,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 阿里云 ACK (Alibaba Cloud Container [[Service|Service]] for [[Kubernetes|Kubernetes]]) 概述
@@ -326,7 +331,8 @@ spec:
 ### 常见问题诊断
 
 **节点NotReady问题排查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点状态
 kubectl describe node <node-name>
 
@@ -342,9 +348,9 @@ ping apiserver-endpoint
 # 5. 验证证书有效性
 openssl x509 -in /etc/kubernetes/pki/kubelet.crt -text -noout
 ```
-
 **Pod调度失败分析**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看Pod调度事件
 kubectl describe pod <pod-name>
 
@@ -357,7 +363,6 @@ kubectl get nodes --show-labels
 # 4. 检查污点容忍
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 ```
-
 ### 应急响应流程
 
 **一级问题响应 (Critical)**
@@ -384,7 +389,8 @@ kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 ## 运维自动化工具
 
 ### 集群巡检脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ACK集群健康检查脚本
 
@@ -422,9 +428,9 @@ done
 
 echo "=== Health Check Complete ==="
 ```
-
 ### 日志收集与分析
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群日志收集脚本
 #!/bin/bash
 
@@ -447,7 +453,6 @@ kubectl get events --all-namespaces > $LOG_DIR/events.txt
 
 echo "Logs collected to: $LOG_DIR"
 ```
-
 ## 特色功能与创新
 
 ### Terway 网络插件
@@ -630,3 +635,6 @@ echo "Logs collected to: $LOG_DIR"
 - [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[domain-12-cloud-providers/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
 - [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+
+
+<!-- risk-assessed -->

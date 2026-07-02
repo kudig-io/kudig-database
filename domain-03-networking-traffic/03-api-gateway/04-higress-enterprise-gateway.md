@@ -60,6 +60,11 @@ cross_refs:
   label: '故障树: higress'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - Higress 云原生 API 网关企业级实践
@@ -232,7 +237,8 @@ xDS 资源类型:
 
 > **⚠️ 镜像仓库说明**: Higress all-in-one 镜像**仅托管在阿里云中国区镜像仓库** (`higress-registry.cn-hangzhou.cr.aliyuncs.com`)，Docker Hub 上不存在该镜像。海外网络环境拉取时可能遇到 EOF 错误，重试几次通常可解决。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 前提：已安装 Docker Desktop for Mac
 # 确认 Docker 运行中
 docker info
@@ -250,10 +256,10 @@ docker run -d --rm --name higress-ai -v ${PWD}:/data \
 docker logs -f higress-ai
 # 看到各组件启动完成的日志后，按 Ctrl+C 退出日志跟踪
 ```
-
 **拉取失败排查（常见于海外网络）：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 错误示例 1: EOF（网络中断，重试即可）
 # Error: failed to fetch anonymous token: ... EOF
 
@@ -263,10 +269,10 @@ docker logs -f higress-ai
 # 备选方案：使用官方安装脚本（自带重试机制）
 curl -fsSL https://higress.io/standalone/get-higress.sh | bash -s -- -a
 ```
-
 **验证安装成功（四步确认）：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认容器运行中
 docker ps --filter name=higress-ai
 # 确认 STATUS 列显示 Up，三个端口 (8001, 8080, 8443) 均已映射
@@ -285,7 +291,6 @@ curl -sk -o /dev/null -w "HTTP Status: %{http_code}\n" https://localhost:8443
 # 浏览器打开: http://localhost:8001
 # ⚠️ 首次访问需初始化管理员账号（设置用户名和密码），非默认 admin/admin
 ```
-
 **实测验证输出参考：**
 
 ```bash
@@ -309,7 +314,8 @@ $ curl -vk https://localhost:8443
 
 ## 方式二：Docker Compose（带后端服务完整 Demo）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 demo 目录
 mkdir -p ~/higress-demo && cd ~/higress-demo
 
@@ -354,7 +360,6 @@ docker compose up -d
 # 等待所有服务就绪
 docker compose ps
 ```
-
 **通过 Console 配置路由：**
 
 1. 浏览器打开 `http://localhost:8001`，使用 admin/admin 登录
@@ -396,7 +401,8 @@ curl -X POST -H "Host: demo.example.com" \
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 前提：安装 kind 和 helm
 brew install kind helm kubectl
 
@@ -460,7 +466,6 @@ curl http://demo.localdev.me/get
 # 清理
 kind delete cluster --name higress-demo
 ```
-
 ---
 
 <!-- chunk: 4. Kubernetes 集群部署 -->## 4. Kubernetes 集群部署
@@ -470,7 +475,8 @@ kind delete cluster --name higress-demo
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm 仓库
 helm repo add higress https://higress.io/helm-charts
 helm repo update
@@ -490,13 +496,13 @@ helm install higress higress/higress \
 helm install higress-console higress/higress-console \
   -n higress-system
 ```
-
 ## 验证安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 状态
 kubectl get pods -n higress-system
 # 预期输出:
@@ -516,7 +522,6 @@ echo "Gateway IP: $GATEWAY_IP"
 kubectl exec -n higress-system deploy/higress-gateway -- \
   curl -s localhost:15000/clusters | head -20
 ```
-
 ---
 
 <!-- chunk: 5. 路由配置详解 -->## 5. 路由配置详解
@@ -815,7 +820,8 @@ func (ctx *httpContext) OnHttpRequestHeaders(numHeaders int, endOfStream bool) t
 
 ## 编译与发布
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 TinyGo（Mac）
 brew install tinygo
 
@@ -826,7 +832,6 @@ tinygo build -o plugin.wasm -scheduler=none -target=wasi ./main.go
 docker buildx build --platform wasi/wasm -t registry.example.com/my-plugin:v1 .
 docker push registry.example.com/my-plugin:v1
 ```
-
 ---
 
 <!-- chunk: 9. AI 网关能力 -->## 9. AI 网关能力
@@ -922,7 +927,8 @@ spec:
 
 ## Mac 上体验 AI 网关 Demo
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Docker All-in-One
 docker run -d --name higress-ai \
   -p 8001:8001 -p 8080:8080 \
@@ -941,7 +947,6 @@ curl http://localhost:8080/v1/chat/completions \
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
-
 ---
 
 <!-- chunk: 10. Gateway API 集成 -->## 10. Gateway API 集成
@@ -1177,14 +1182,14 @@ Higress 基于 Istiod 构建控制平面，可与 Istio 服务网格无缝协同
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm install higress higress/higress \
   -n higress-system --create-namespace \
   --set global.local=false \
   --set global.enableIstioAPI=true \
   --set higress-core.pilot.replicaCount=0  # 不部署内置 Istiod，复用已有的
 ```
-
 ---
 
 <!-- chunk: 14. 常见故障排查 -->## 14. 常见故障排查
@@ -1194,7 +1199,8 @@ helm install higress higress/higress \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Gateway 配置（xDS dump）
 kubectl exec -n higress-system deploy/higress-gateway -- \
   curl -s localhost:15000/config_dump | python3 -m json.tool | less
@@ -1213,7 +1219,6 @@ kubectl logs -n higress-system -l app=higress-gateway -f
 # 5. 查看控制面日志
 kubectl logs -n higress-system -l app=higress-controller -f
 ```
-
 ## 常见问题
 
 | 症状 | 可能原因 | 排查方法 |
@@ -1288,3 +1293,5 @@ kubectl logs -n higress-system -l app=higress-controller -f
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

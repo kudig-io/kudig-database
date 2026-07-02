@@ -1,0 +1,220 @@
+# QA Corpus Schema v3.0
+# 用途: Agent 能力问答对测评语料库数据模型
+# 规范版本: 3.0
+# 最后更新: 2026-05-21
+# 关联: docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md
+
+---
+schema_version: "3.0"
+schema_name: "Agent QA Corpus Schema"
+description: >
+  定义 KUDIG Agent 测评语料库的数据结构规范。
+  所有 QA 文件必须遵循本 Schema，确保测评的自动化与一致性。
+
+# ============================================================================
+# 1. 顶层文件结构
+# ============================================================================
+file_structure:
+  required_fields:
+    - corpus_id          # 语料集唯一标识，如 "cap-knowledge-arch-v1"
+    - corpus_name        # 人类可读名称
+    - corpus_version     # 语义化版本，如 "1.0.0"
+    - capability_layer   # 能力层: knowledge | reasoning | tool_use | conversation | safety
+    - domain             # 知识域，如 "architecture-fundamentals"
+    - total_items        # 总条目数
+    - generated_at       # 生成日期 ISO-8601
+    - schema_version     # 本 Schema 版本
+    - qa_items           # QA 条目数组
+
+  optional_fields:
+    - description        # 语料集描述
+    - authors            # 作者列表
+    - source_docs        # 来源文档清单
+    - evaluation_config  # 测评配置覆盖
+    - tags               # 语义标签
+
+# ============================================================================
+# 2. QA 条目结构 (qa_items[])
+# ============================================================================
+qa_item:
+  required_fields:
+    - id                 # 条目唯一 ID，格式: {corpus_id}-{NNNN}
+    - question           # 问题文本（自然语言）
+    - expected_answer    # 预期答案（实质性内容，禁止仅引用）
+    - type               # 题型分类
+    - difficulty         # 难度等级
+    - evaluation         # 测评配置
+
+  optional_fields:
+    - variants           # 问题变体（鲁棒性测试）
+    - context            # 上下文信息（命令输出、日志片段、YAML 等）
+    - reasoning_chain    # 期望推理链（Agent 应展示的推理步骤）
+    - agent_config       # Agent 执行配置
+    - metadata           # 扩展元数据
+    - negative_examples  # 错误答案示例（幻觉检测）
+
+# ============================================================================
+# 3. 字段枚举定义
+# ============================================================================
+
+enums:
+  capability_layer:
+    - knowledge          # L1 知识层: 事实检索、概念理解
+    - reasoning          # L2 推理层: 根因分析、决策判断
+    - tool_use           # 工具层: 命令调用、YAML 生成、配置修改
+    - conversation       # L3 交互层: 多轮对话、澄清确认、工单闭环
+    - safety             # 安全层: 护栏触发、PII 保护、合规检查
+
+  qa_type:
+    # 知识层题型
+    - concept            # 概念解释
+    - fact_retrieval     # 事实检索
+    - comparison         # 技术对比
+    - procedure          # 标准流程/SOP
+    # 推理层题型
+    - diagnosis          # 故障诊断
+    - root_cause         # 根因分析
+    - decision           # 决策判断
+    - prediction         # 趋势预测
+    # 工具层题型
+    - command_generation # 命令生成
+    - yaml_generation    # YAML/配置生成
+    - log_analysis       # 日志/输出解读
+    - query_construction # 查询构建（PromQL/LogQL）
+    # 交互层题型
+    - multi_turn         # 多轮对话
+    - clarification      # 澄清确认
+    - escalation         # 升级判断
+    - teaching           # 教学解释
+    # 安全层题型
+    - guardrail          # 护栏触发判断
+    - compliance         # 合规检查
+    - pii_detection      # 敏感信息识别
+
+  difficulty:
+    - L1_beginner        # 单知识点，直接检索可得
+    - L2_intermediate    # 2-3 个知识点关联
+    - L3_advanced        # 跨域推理，需分析判断
+    - L4_expert          # 边界场景，需深度经验
+
+  cognitive_level:
+    - remember           # 记忆: 识别、回忆
+    - understand         # 理解: 解释、分类、总结
+    - apply              # 应用: 执行、实施
+    - analyze            # 分析: 区分、组织、归因
+    - evaluate           # 评价: 检查、批判、判断
+    - create             # 创造: 生成、计划、构建
+
+# ============================================================================
+# 4. 评分标准 (Rubric) 结构
+# ============================================================================
+
+evaluation:
+  required_fields:
+    - rubric_id          # 引用 _schema/rubric-definitions.yaml 中的标准
+    - scoring_method     # exact_match | semantic_similarity | llm_as_judge | human
+    - max_score          # 满分值
+
+  optional_fields:
+    - rubric_override    # 覆盖 rubric-definitions 中的默认标准
+    - passing_threshold  # 及格线
+    - weight             # 在组合评分中的权重
+    - check_items        # 细项检查点
+
+rubric_item:
+  fields:
+    - criterion          # 评分维度，如 "准确性"
+    - weight             # 权重 0.0-1.0
+    - description        # 评分标准描述
+    - levels:            # 分级描述
+        - score: 0        # 分值
+          description: "完全错误"
+        - score: 1
+          description: "部分正确但有严重错误"
+        - score: 2
+          description: "基本正确，细节有偏差"
+        - score: 3
+          description: "完全正确"
+
+# ============================================================================
+# 5. Agent 执行配置
+# ============================================================================
+
+agent_config:
+  optional_fields:
+    - max_turns          # 最大对话轮次（conversation 题型）
+    - required_tools     # 必须调用的工具列表
+    - forbidden_tools    # 禁止使用的工具列表
+    - context_window     # 上下文 token 限制
+    - response_format    # 期望输出格式: text | json | yaml | markdown_table
+    - time_limit_ms      # 响应时间限制
+    - allowed_knowledge_sources  # 允许的知识源
+
+# ============================================================================
+# 6. 上下文 (Context) 结构
+# ============================================================================
+
+context:
+  supported_types:
+    - command_output     # 命令输出文本
+    - log_snippet        # 日志片段
+    - event_stream       # K8s Events
+    - yaml_manifest      # YAML 配置
+    - metric_data        # 指标数据
+    - trace_data         # 链路追踪
+    - ticket_description # 工单描述
+    - conversation_history  # 对话历史
+
+  fields:
+    - type               # 上下文类型
+    - content            # 内容（支持多行字符串）
+    - source             # 来源标注
+    - encoding           # 编码说明（如 base64）
+
+# ============================================================================
+# 7. 校验规则
+# ============================================================================
+
+validation_rules:
+  - rule: "expected_answer 不得仅包含'参见'、'参考'等引用式表述"
+    severity: error
+    check: "not match regex ^(?:参见|参考|详见|见).*"
+
+  - rule: "id 必须全局唯一"
+    severity: error
+    check: "unique across all corpus files"
+
+  - rule: "difficulty 与 cognitive_level 必须逻辑一致"
+    severity: warning
+    check: >
+      L1_beginner → remember/understand;
+      L2_intermediate → understand/apply;
+      L3_advanced → analyze/evaluate;
+      L4_expert → evaluate/create
+
+  - rule: "reasoning_chain 在 reasoning 层为 recommended"
+    severity: warning
+
+  - rule: "agent_config.required_tools 在 tool_use 层为 required"
+    severity: error
+
+# ============================================================================
+# 8. 命名规范
+# ============================================================================
+
+naming_conventions:
+  corpus_id: "{capability}-{domain}-v{N}"
+    examples:
+      - "cap-knowledge-arch-v1"
+      - "cap-reasoning-troubleshoot-v2"
+      - "cap-tooluse-yaml-v1"
+
+  qa_id: "{corpus_id}-{NNNN}"
+    examples:
+      - "cap-knowledge-arch-v1-0001"
+      - "cap-reasoning-troubleshoot-v2-0050"
+
+  filename: "{corpus-id}.yaml"
+    examples:
+      - "cap-knowledge-arch-v1.yaml"
+      - "cap-reasoning-troubleshoot-v2.yaml"

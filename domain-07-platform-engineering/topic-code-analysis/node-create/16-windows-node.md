@@ -62,6 +62,11 @@ related_topics:
 - cni-node
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Windows 节点接入与管理
@@ -197,7 +202,17 @@ C:\k\kubeadm.exe join <control-plane-ip>:6443 `
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 在 Linux 控制面执行
 kubectl taint nodes windows-worker-1 \
   node.kubernetes.io/os=windows:NoSchedule
@@ -206,7 +221,6 @@ kubectl taint nodes windows-worker-1 \
 kubectl get nodes -l kubernetes.io/os=windows -o name | \
   xargs -I {} kubectl taint {} node.kubernetes.io/os=windows:NoSchedule
 ```
-
 ### Windows 工作负载配置（nodeSelector + toleration）
 
 ```yaml
@@ -309,12 +323,12 @@ spec:
 
 ### 验证 Windows 节点状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点列表和 OS 标签
 kubectl get nodes -o custom-columns=\
 'NAME:.metadata.name,STATUS:.status.conditions[-1].type,OS:.metadata.labels.kubernetes\.io/os,VERSION:.status.nodeInfo.kubeletVersion'
 ```
-
 ```
 NAME                STATUS   OS        VERSION
 linux-master-1      Ready    linux     v1.30.0
@@ -325,10 +339,10 @@ windows-worker-2    Ready    windows   v1.30.0
 
 ### 检查 Windows 节点详细信息
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node windows-worker-1 | grep -A5 "System Info"
 ```
-
 ```
 System Info:
   OS Image:                    Windows Server 2022 Datacenter
@@ -368,3 +382,6 @@ System Info:
 - [[entities/cri-o.md|CRI-O]]
 - [[entities/containerd.md|containerd]]
 - [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - service-mesh-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: FTA-FEBM 联合诊断最佳实践
@@ -261,6 +266,7 @@ k8s_versions:
 **Phase 1: FTA 快速匹配**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 输入: "部分用户登录超时"
 匹配 TE: TE-2 应用服务不可用
 
@@ -284,7 +290,6 @@ FTA 置信度评估:
 
 结论: FTA 置信度不足，需要 FEBM 深度推理
 ```
-
 **Phase 2: FEBM 深度推理**
 
 ```
@@ -346,6 +351,7 @@ FEBM 案例存档:
 **Phase 1: FTA 快速匹配**
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 匹配 TE: TE-10 ASM 服务网格问题
 
 FTA 路径遍历:
@@ -366,7 +372,6 @@ FTA 判断:
   - 但这只是表面原因
   - 需要深挖 "为什么 Istiod OOM"
 ```
-
 **Phase 2: FEBM 深度推理**
 
 ```
@@ -424,6 +429,7 @@ FTA 更新:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 匹配 TE: TE-9 Terway 网络问题
 
 FTA 路径遍历:
@@ -443,13 +449,13 @@ FTA 路径遍历:
   - BE-9.2.1: VPC CIDR 即将耗尽
   - BE-9.5.1: IP 泄漏导致提前耗尽
 ```
-
 **Phase 2: FEBM 验证**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 FEBM 证据:
   - 泄漏 IP 大部分是 3 天前被删除的 Pod
   - Terway GC 配置: gc_interval = 6h
@@ -465,7 +471,6 @@ FEBM 证据:
   2. 短期: 检查 GC 配置，确保 6h 间隔生效
   3. 长期: 增加 IP 泄漏监控告警
 ```
-
 ---
 
 <!-- chunk: 四、联合诊断检查清单 -->## 四、联合诊断检查清单
@@ -643,7 +648,8 @@ incident_record:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # FTA 快速匹配
 kubectl get events --sort-by=.lastTimestamp | grep -E "Failed|Crash|OOM|Error"
 
@@ -660,7 +666,6 @@ kubectl logs <pod> --timestamps --tail=200
 # 根因验证
 kubectl exec <pod> -- <diagnostic-command>
 ```
-
 ---
 
 <!-- chunk: 七、总结 -->## 七、总结
@@ -735,3 +740,5 @@ FTA + FEBM 联合:
 - [[domain-10-troubleshooting-diagnostics/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
 
 ```
+
+<!-- risk-assessed -->

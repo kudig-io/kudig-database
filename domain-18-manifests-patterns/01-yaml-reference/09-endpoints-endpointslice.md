@@ -52,6 +52,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - Endpoints / EndpointSlice YAML 配置参考
@@ -303,7 +308,8 @@ subsets:
 ```
 
 **验证**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Endpoints
 kubectl get endpoints external-database -n production
 
@@ -311,7 +317,6 @@ kubectl get endpoints external-database -n production
 kubectl run -it --rm mysql-client --image=mysql:8.0 --restart=Never -- \
   mysql -h external-database.production.svc.cluster.local -uroot -p
 ```
-
 ## 场景 2: 跨集群服务代理
 
 **需求**: 在集群 A 中访问集群 B 的服务
@@ -980,14 +985,14 @@ endpoints:
 - 未来的增强功能优先在 EndpointSlice 实现
 
 **迁移策略**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群是否启用 EndpointSlice
 kubectl get endpointslices -A
 
 # 检查 kube-proxy 配置
 kubectl get cm kube-proxy -n kube-system -o yaml | grep EndpointSlice
 ```
-
 ## 2. 手动 Endpoints 维护规范
 
 **命名一致性**:
@@ -1156,14 +1161,14 @@ endpoints:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点标签
 kubectl get nodes --show-labels | grep topology
 
 # 为节点添加区域标签
 kubectl label node node-1 topology.kubernetes.io/zone=us-east-1a
 ```
-
 **限制**:
 - 仅适用于无状态应用(不需要会话保持)
 - 端点数量需要足够(每个区域至少 2-3 个)
@@ -1198,7 +1203,8 @@ endpoints:
 ```
 
 **验证双栈解析**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有 EndpointSlice
 kubectl get endpointslices -l kubernetes.io/service-name=dual-stack-svc
 
@@ -1206,7 +1212,6 @@ kubectl get endpointslices -l kubernetes.io/service-name=dual-stack-svc
 kubectl run -it --rm debug --image=busybox -- nslookup dual-stack-svc
 # 应返回 A 和 AAAA 记录
 ```
-
 ## 8. 自动化管理工具
 
 **使用 Operator 管理外部端点**:
@@ -1250,7 +1255,8 @@ Operator 将:
 
 ## Q2: 如何查看 Service 的所有 EndpointSlice?
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1: 通过标签过滤
 kubectl get endpointslices -n namespace \
   -l kubernetes.io/service-name=my-service
@@ -1263,12 +1269,12 @@ kubectl get endpointslices -n namespace \
   -l kubernetes.io/service-name=my-service \
   -o yaml
 ```
-
 ## Q3: Endpoints 为空但 Pod 正常运行?
 
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Service selector
 kubectl get svc my-service -o yaml | grep -A 5 selector
 
@@ -1287,7 +1293,6 @@ kubectl describe pod pod-name -n namespace | grep -A 10 Readiness
 # 6. 检查 Pod IP 分配
 kubectl get pods -n namespace -o jsonpath='{.items[*].status.podIP}'
 ```
-
 **常见原因**:
 1. **标签不匹配**: Service selector 与 Pod labels 不一致
 2. **Pod 未就绪**: readinessProbe 失败
@@ -1301,7 +1306,8 @@ kubectl get pods -n namespace -o jsonpath='{.items[*].status.podIP}'
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1: 触发 Service 更新
 kubectl annotate svc my-service force-refresh="$(date)"
 
@@ -1311,16 +1317,15 @@ kubectl rollout restart deployment kube-controller-manager -n kube-system
 # 方法 3: 手动删除 Endpoints(会自动重建)
 kubectl delete endpoints my-service -n namespace
 ```
-
 ## Q5: EndpointSlice 和 Endpoints 数据不一致?
 
 **原因**: kube-proxy 可能同时监听两种资源
 
 **检查 kube-proxy 配置**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm kube-proxy -n kube-system -o yaml | grep -i endpoint
 ```
-
 **预期配置**(v1.21+):
 ```yaml
 mode: ""  # 或 iptables/ipvs
@@ -1752,7 +1757,8 @@ ports:
 - 跨区域访问仅在本地端点不可用时发生
 
 **验证拓扑路由**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在不同区域的 Pod 中测试
 kubectl run test-us -n global --image=curlimages/curl --rm -it \
   --overrides='{"spec":{"nodeSelector":{"topology.kubernetes.io/zone":"us-east-1a"}}}' \
@@ -1764,7 +1770,6 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
   -- curl -v https://global-api.global.svc.cluster.local
 # 应连接到 10.200.1.x
 ```
-
 ---
 
 <!-- chunk: 相关资源 -->## 相关资源
@@ -1825,3 +1830,6 @@ kubectl run test-eu -n global --image=curlimages/curl --rm -it \
 ## Related
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+
+<!-- risk-assessed -->

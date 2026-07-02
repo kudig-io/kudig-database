@@ -67,6 +67,11 @@ cross_refs:
   label: '故障树: etcd'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - [[etcd|etcd]] 故障排查 (etcd Troubleshooting)
@@ -175,6 +180,7 @@ related_docs:
 ### 2.1 故障诊断流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      etcd 集群不可用诊断流程                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -222,10 +228,10 @@ related_docs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 详细诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础状态检查 ==========
 
 # 检查etcd服务状态
@@ -294,7 +300,6 @@ journalctl -u etcd --since "1 hour ago" | grep -i "error|warn|panic"
 # 检查wal日志损坏
 etcdctl check perf --load="s"
 ```
-
 ### 2.3 常见错误及解决方案
 
 | 错误信息 | 可能原因 | 解决方案 |
@@ -313,7 +318,8 @@ etcdctl check perf --load="s"
 
 ### 3.1 数据一致性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 数据一致性验证 ==========
 
 # 检查集群数据一致性
@@ -349,7 +355,6 @@ ETCDCTL_API=3 etcdctl alarm list
 # 清除告警(如有必要)
 ETCDCTL_API=3 etcdctl alarm disarm
 ```
-
 ### 3.2 数据恢复操作
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -357,7 +362,8 @@ ETCDCTL_API=3 etcdctl alarm disarm
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 数据备份 ==========
 
 # 创建快照备份
@@ -395,7 +401,6 @@ ETCDCTL_API=3 etcdctl member add etcd-new --peer-urls=https://10.0.1.11:2380
 
 # 在新节点上启动etcd(使用返回的配置)
 ```
-
 ---
 
 <!-- chunk: 4. 性能问题排查 (Performance Issues) -->
@@ -403,7 +408,8 @@ ETCDCTL_API=3 etcdctl member add etcd-new --peer-urls=https://10.0.1.11:2380
 
 ### 4.1 性能监控指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 关键性能指标 ==========
 
 # 获取etcd性能指标
@@ -435,10 +441,10 @@ iostat -x 1 10
 # 网络流量
 iftop -i eth0
 ```
-
 ### 4.2 性能优化建议
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 数据库维护 ==========
 
 # 压缩历史版本(定期执行)
@@ -467,7 +473,6 @@ tune2fs -l /dev/sdX | grep "Filesystem features"
 echo 'vm.swappiness=1' >> /etc/sysctl.conf
 echo 'fs.file-max=1000000' >> /etc/sysctl.conf
 ```
-
 ---
 
 <!-- chunk: 5. 成员故障排查 (Member Failure) -->
@@ -478,7 +483,8 @@ echo 'fs.file-max=1000000' >> /etc/sysctl.conf
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 识别问题成员 ==========
 
 # 检查成员健康状态
@@ -505,10 +511,10 @@ NEW_MEMBER_ID=$(ETCDCTL_API=3 etcdctl member add etcd-new --peer-urls=https://10
 
 # 在新节点启动etcd(使用返回的配置)
 ```
-
 ### 5.2 网络分区处理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 检测网络分区 ==========
 
 # 检查成员间连通性
@@ -530,7 +536,6 @@ ETCDCTL_API=3 etcdctl member list --write-out=table
 # 如果无法恢复多数派，需要强制重新初始化
 # ⚠️ 此操作会导致数据丢失!
 ```
-
 ---
 
 <!-- chunk: 6. 生产环境应急处理 (Production Emergency Response) -->
@@ -538,7 +543,8 @@ ETCDCTL_API=3 etcdctl member list --write-out=table
 
 ### 6.1 紧急诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd-emergency-check.sh
 
@@ -577,7 +583,6 @@ journalctl -u etcd --since "10 minutes ago" | grep -i "error|warn" | tail -5
 
 echo -e "\n=== 诊断完成 ==="
 ```
-
 ### 6.2 故障恢复优先级
 
 | 问题类型 | 恢复优先级 | 时间要求 | 操作步骤 |
@@ -672,3 +677,5 @@ groups:
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

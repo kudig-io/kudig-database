@@ -31,6 +31,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Pod Topology Spread Constraints
@@ -207,7 +212,8 @@ spec:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 分布在各节点/区域的情况
 kubectl get pods -l app=web-frontend -o wide
 
@@ -224,7 +230,6 @@ kubectl get cm -n kube-system kube-scheduler-config -o yaml | grep -A 10 PodTopo
 # 查看节点的拓扑标签
 kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.topology\.kubernetes\.io/zone'
 ```
-
 ## 交叉引用
 
 - [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — podAntiAffinity 与拓扑分布约束的对比
@@ -238,3 +243,6 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 
 ## Related
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

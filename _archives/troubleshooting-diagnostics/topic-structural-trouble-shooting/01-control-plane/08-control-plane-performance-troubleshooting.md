@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 控制平面性能瓶颈分析与优化指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境性能优化实战
@@ -57,7 +62,8 @@ prerequisites:
 
 ### 性能监控指标查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # API Server 性能指标
 kubectl get --raw /metrics | grep apiserver_request_duration_seconds
 
@@ -74,7 +80,6 @@ kubectl get --raw /metrics | grep workqueue_depth
 kubectl top nodes
 kubectl top pods -n kube-system
 ```
-
 ## 排查方法与步骤
 
 ### 诊断原理说明
@@ -128,7 +133,8 @@ kubectl top pods -n kube-system
 
 #### 1. API Server 性能诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # API Server 性能诊断脚本
 
@@ -157,10 +163,10 @@ netstat -an | grep :6443 | grep ESTABLISHED | wc -l
 echo "5. API Server 资源使用情况:"
 kubectl top pod -n kube-system -l component=kube-apiserver
 ```
-
 #### 2. etcd 性能诊断
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # etcd 性能诊断脚本
 
@@ -193,10 +199,10 @@ for pod in $(kubectl get pods -n kube-system -l component=etcd -o name); do
   kubectl exec -n kube-system $pod -- ETCDCTL_API=3 etcdctl --endpoints=https://localhost:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt endpoint health
 done
 ```
-
 #### 3. 组件性能诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 控制平面组件性能诊断
 
@@ -218,7 +224,6 @@ echo "$CONTROLLER_METRICS" | grep workqueue_latency | head -5
 echo "3. 控制平面组件资源使用:"
 kubectl top pods -n kube-system -l tier=control-plane
 ```
-
 ## 解决方案与风险控制
 
 ### API Server 优化方案
@@ -288,7 +293,8 @@ spec:
 
 #### 方案一：硬件和配置优化
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # etcd 性能优化脚本
 
@@ -339,7 +345,6 @@ EOF
 
 chmod +x /usr/local/bin/etcd-maintenance.sh
 ```
-
 #### 方案二：etcd 集群优化配置
 
 ```yaml
@@ -449,7 +454,8 @@ spec:
 
 ### 性能验证脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 性能优化验证脚本
 
@@ -472,7 +478,6 @@ kubectl get --raw /metrics | grep workqueue_depth | awk '$2 < 100 {print $0}'
 echo "4. 控制平面资源使用情况:"
 kubectl top pods -n kube-system -l tier=control-plane
 ```
-
 ### 性能监控告警配置
 
 ```yaml
@@ -521,7 +526,8 @@ groups:
 
 ### 性能基线建立
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 性能基线建立脚本
 
@@ -551,10 +557,10 @@ mkdir -p "$BASELINE_DIR"
   
 } > "${BASELINE_DIR}/baseline-$(date +%Y%m%d-%H%M%S).log"
 ```
-
 ### 定期性能检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 定期性能检查脚本
 
@@ -578,7 +584,6 @@ mkdir -p "$LOG_DIR"
   
 } >> "${LOG_DIR}/performance-check-$(date +%Y%m%d).log"
 ```
-
 ## 🔄 典型性能问题案例
 
 ### 案例一：大规模集群 API Server 性能瓶颈
@@ -616,3 +621,6 @@ mkdir -p "$LOG_DIR"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

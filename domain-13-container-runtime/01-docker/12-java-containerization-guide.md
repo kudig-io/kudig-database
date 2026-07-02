@@ -46,6 +46,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Java 应用容器化最佳实践指南
@@ -126,11 +131,11 @@ graph TD
 | `cgr.dev/chainguard/jre` | ~65MB | 极佳 | 无 shell | 安全优先生产 |
 | `scratch` + Native Binary | ~50-80MB | 极佳 | 无 | GraalVM 原生镜像 |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 对比各镜像大小
 docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "temurin|distroless|chainguard"
 ```
-
 ## 2.2 JDK vs JRE 决策树
 
 ```
@@ -575,7 +580,8 @@ jib {
 
 ## 6.3 构建命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建到 Docker daemon
 ./mvnw compile jib:dockerBuild
 
@@ -590,7 +596,6 @@ jib {
 ./gradlew jib
 ./gradlew jibBuildTar
 ```
-
 ---
 
 <!-- chunk: 七、Buildpacks 自动构建 -->## 七、Buildpacks 自动构建
@@ -691,7 +696,8 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
 ## 9.1 Docker Buildx 多架构
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建多架构构建器
 docker buildx create --name multiarch --use
 
@@ -703,14 +709,14 @@ docker buildx build --push \
     -t registry.example.com/my-spring-app:v1.0.0 \
     .
 ```
-
 ## 9.2 Jib 多架构
 
 Jib 在 `configuration>from>platforms` 中配置多架构，构建时自动生成 manifest list。
 
 ## 9.3 ARM64 注意事项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证镜像架构
 docker manifest inspect registry.example.com/my-spring-app:v1.0.0 | \
     jq '.manifests[] | {platform: .platform.os + "/" + .platform.architecture, digest: .digest}'
@@ -719,7 +725,6 @@ docker manifest inspect registry.example.com/my-spring-app:v1.0.0 | \
 docker run --rm --platform linux/arm64 registry.example.com/my-spring-app:v1.0.0 \
     java -version
 ```
-
 ---
 
 <!-- chunk: 十、安全加固 -->## 十、安全加固
@@ -875,3 +880,5 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

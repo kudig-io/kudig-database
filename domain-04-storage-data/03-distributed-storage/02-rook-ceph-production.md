@@ -53,6 +53,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Rook-Ceph Kubernetes 生产部署与运维
@@ -172,13 +177,13 @@ cd rook/deploy/examples
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create -f crds.yaml -f common.yaml
 kubectl create -f operator.yaml
 
 kubectl get pods -n rook-ceph
 ```
-
 ### 3.3 创建 CephCluster
 
 ```yaml
@@ -228,24 +233,24 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f cluster.yaml
 kubectl get cephcluster -n rook-ceph
 # 等待 HEALTH_OK
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph status
 ```
-
 ### 3.4 部署 Toolbox
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f toolbox.yaml
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph status
 ```
-
 ---
 
 <!-- chunk: 4. Pool 与 StorageClass -->
@@ -323,12 +328,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph status
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph osd tree
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph osd df tree
 ```
-
 ### 5.2 OSD 常见故障
 
 | 现象 | 根因 | 修复命令 |
@@ -347,7 +352,17 @@ kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph osd df tree
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 标记 osd.0 为 out
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- ceph osd out osd.0
 
@@ -366,7 +381,6 @@ wipefs -a /dev/vdb
 # 5. 更新 CephCluster CR，触发 operator 重新创建 OSD
 kubectl edit cephcluster rook-ceph -n rook-ceph
 ```
-
 ---
 
 <!-- chunk: 6. 扩容 -->
@@ -377,11 +391,20 @@ kubectl edit cephcluster rook-ceph -n rook-ceph
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 新增节点 k8s-node-04，挂载 /dev/vdb
 kubectl edit cephcluster rook-ceph -n rook-ceph
 ```
-
 ```yaml
 spec:
   storage:
@@ -405,23 +428,32 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 增加 PG 数（谨慎操作）
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- \
   ceph osd pool set replicapool pg_num 256
 ```
-
 ### 6.3 扩容 PVC
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 编辑 PVC 增大 storage 请求
 kubectl edit pvc mysql-data -n production
 # RBD StorageClass 需开启 allowVolumeExpansion: true
 ```
-
 ---
 
 <!-- chunk: 7. 性能调优 -->
@@ -442,14 +474,14 @@ kubectl edit pvc mysql-data -n production
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- \
   ceph config set osd osd_memory_target 8589934592
 
 kubectl exec -it deploy/rook-ceph-tools -n rook-ceph -- \
   ceph config set osd osd_op_num_threads_per_shard 8
 ```
-
 ### 7.3 网络与调度优化
 
 | 优化项 | 配置 |
@@ -586,7 +618,8 @@ aliyun ecs DescribeDisks --RegionId cn-hangzhou \
 
 Rook 默认启用 Ceph Dashboard，可通过端口转发或阿里云 SLB 暴露。生产环境建议仅允许白名单 IP 或 VPN 访问，并修改默认 admin 密码。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 端口转发访问 Dashboard
 kubectl -n rook-ceph port-forward svc/rook-ceph-mgr-dashboard 8443:8443
 
@@ -594,7 +627,6 @@ kubectl -n rook-ceph port-forward svc/rook-ceph-mgr-dashboard 8443:8443
 kubectl -n rook-ceph get secret rook-ceph-dashboard-password \
   -o jsonpath="{.data.password}" | base64 -d
 ```
-
 ### Prometheus 抓取配置
 
 ```yaml
@@ -652,3 +684,6 @@ spec:
               memory: "4Gi"
               cpu: "1"
 ```
+
+
+<!-- risk-assessed -->

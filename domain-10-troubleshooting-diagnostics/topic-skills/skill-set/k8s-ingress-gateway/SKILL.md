@@ -53,6 +53,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s [[Ingress|Ingress]] Gateway Failure 诊断与修复
@@ -91,6 +96,7 @@ Ingress 和 Gateway 是 [[Kubernetes|Kubernetes]] 集群对外暴露服务的核
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -110,7 +116,6 @@ Ingress 和 Gateway 是 [[Kubernetes|Kubernetes]] 集群对外暴露服务的核
 │ 验证确认      │    检查: HTTP/HTTPS 可达性
 └──────────────┘
 ```
-
 ## 可用脚本
 
 | 脚本 | 用途 | 参数 | 风险 |
@@ -316,3 +321,5 @@ flowchart TD
 - [[concepts/ingress-controller.md|Ingress Controller]] — Ingress 控制器原理与配置
 
 ```
+
+<!-- risk-assessed -->

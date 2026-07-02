@@ -68,6 +68,11 @@ cross_refs:
   label: '故障树: hpa'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)
@@ -149,7 +154,8 @@ cross_refs:
 
 ### 2.1 HPA状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础状态检查 ==========
 # 查看所有HPA资源
 kubectl get hpa --all-namespaces
@@ -172,10 +178,10 @@ kubectl top pods --all-namespaces
 # 检查特定Pod指标
 kubectl get --raw "/apis/metrics.k8s.io/v1beta1/namespaces/<namespace>/pods/<pod-name>"
 ```
-
 ### 2.2 HPA配置验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 配置检查 ==========
 # 查看HPA配置详情
 kubectl get hpa <hpa-name> -n <namespace> -o yaml
@@ -196,10 +202,10 @@ kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.spec.metrics[*].type}'
 # 检查目标值配置
 kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.spec.metrics[*].resource.target}'
 ```
-
 ### 2.3 HPA不工作常见原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 指标类型问题 ==========
 # Resource指标检查 (CPU/Memory)
 kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.spec.metrics[?(@.type=="Resource")].resource}'
@@ -228,7 +234,6 @@ kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.metadata.annotations.au
 # --horizontal-pod-autoscaler-sync-period
 # --horizontal-pod-autoscaler-downscale-stabilization
 ```
-
 ---
 
 <!-- chunk: 3. VPA故障排查 (VPA Troubleshooting) -->
@@ -236,7 +241,8 @@ kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.metadata.annotations.au
 
 ### 3.1 VPA组件状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. VPA组件检查 ==========
 # 检查VPA相关Pod
 kubectl get pods -n kube-system | grep vpa
@@ -260,10 +266,10 @@ kubectl describe vpa <vpa-name> -n <namespace>
 # 检查VPA条件状态
 kubectl get vpa <vpa-name> -n <namespace> -o jsonpath='{.status.conditions}'
 ```
-
 ### 3.2 VPA配置验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== VPA配置检查 ==========
 # 查看VPA完整配置
 kubectl get vpa <vpa-name> -n <namespace> -o yaml
@@ -287,10 +293,10 @@ kubectl get vpa <vpa-name> -n <namespace> -o jsonpath='{.status.recommendation.c
 # 检查推荐的时间戳
 kubectl get vpa <vpa-name> -n <namespace> -o jsonpath='{.status.recommendation.containerRecommendations[*].lastRecommendationTime}'
 ```
-
 ### 3.3 VPA不工作常见原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 更新模式问题 ==========
 # 检查更新模式配置
 UPDATE_MODE=$(kubectl get vpa <vpa-name> -n <namespace> -o jsonpath='{.spec.updatePolicy.updateMode}')
@@ -320,7 +326,6 @@ echo "Target Workload Type: $WORKLOAD_TYPE"
 # Deployment, StatefulSet, ReplicaSet, ReplicationController
 # 不支持: DaemonSet, Job, CronJob
 ```
-
 ---
 
 <!-- chunk: 4. 指标相关问题 (Metrics Issues) -->
@@ -328,7 +333,8 @@ echo "Target Workload Type: $WORKLOAD_TYPE"
 
 ### 4.1 Metrics Server故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. Metrics Server状态检查 ==========
 # 检查Metrics Server Pod状态
 kubectl get pods -n kube-system | grep metrics-server
@@ -359,10 +365,10 @@ kubectl auth can-i get nodes/metrics --as=system:serviceaccount:kube-system:metr
 # 网络策略阻断
 kubectl get networkpolicy -n kube-system
 ```
-
 ### 4.2 自定义指标配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Custom Metrics Adapter检查 ==========
 # 检查Custom Metrics API服务
 kubectl get apiservice | grep custom.metrics
@@ -383,7 +389,6 @@ kubectl get cm -n monitoring adapter-config -o jsonpath='{.data.config\.yaml}' |
 # 验证特定指标存在
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta2/namespaces/<namespace>/pods/*/http_requests_per_second" | jq .
 ```
-
 ---
 
 <!-- chunk: 5. 扩缩容行为分析 (Scaling Behavior Analysis) -->
@@ -391,7 +396,8 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta2/namespaces/<namespace>/po
 
 ### 5.1 扩缩容算法验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== HPA计算过程分析 ==========
 # 获取HPA详细信息
 kubectl get hpa <hpa-name> -n <namespace> -o json
@@ -421,13 +427,13 @@ kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.metadata.annotations.au
 #   autoscaling.alpha.kubernetes.io/tolerance: "0.1"  # 容忍度
 #   autoscaling.alpha.kubernetes.io/downscale-stabilization: "5m"  # 缩容稳定期
 ```
-
 ### 5.2 扩缩容震荡问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 震荡检测 ==========
 # 监控副本数变化
 watch -n 5 "kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.status.currentReplicas} {.status.desiredReplicas}'"
@@ -448,7 +454,6 @@ kubectl patch hpa <hpa-name> -n <namespace> -p '{"metadata":{"annotations":{"aut
 # 设置合理的最小/最大副本数差距
 kubectl patch hpa <hpa-name> -n <namespace> -p '{"spec":{"minReplicas":3,"maxReplicas":10}}'
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -459,7 +464,8 @@ kubectl patch hpa <hpa-name> -n <namespace> -p '{"spec":{"minReplicas":3,"maxRep
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== HPA监控指标 ==========
 # HPA状态指标
 cat <<EOF | kubectl apply -f -
@@ -526,10 +532,10 @@ spec:
         summary: "Metrics Server is down"
 EOF
 ```
-
 ### 6.2 性能分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 扩缩容性能分析 ==========
 # 创建性能测试脚本
 cat <<'EOF' > autoscaling-perf-test.sh
@@ -601,7 +607,6 @@ EOF
 
 chmod +x resource-utilization-analyzer.sh
 ```
-
 ---
 
 <!-- chunk: 7. 最佳实践和优化建议 (Best Practices and Optimization) -->
@@ -738,3 +743,6 @@ EOF
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

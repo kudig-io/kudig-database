@@ -45,6 +45,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - [[Kubernetes|Kubernetes]] 性能调优专家指南
@@ -125,7 +130,8 @@ prerequisites:
 ### 渐进式示例
 
 **Level 1 - 基础诊断**: 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速检查集群资源使用情况
 kubectl top nodes
 kubectl top pods -A --sort-by=cpu | head -20
@@ -137,13 +143,13 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.c
 kubectl get --raw /healthz
 kubectl get componentstatuses
 ```
-
 **Level 2 - 进阶分析**: 
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用Prometheus查询API延迟
 kubectl port-forward -n monitoring svc/prometheus 9090:9090 &
 curl -s 'http://localhost:9090/api/v1/query?query=histogram_quantile(0.99,rate(apiserver_request_duration_seconds_bucket[5m]))' | jq '.data.result'
@@ -155,7 +161,6 @@ kubectl exec -n kube-system etcd-master1 -- etcdctl check perf
 # 检查磁盘IO详情
 kubectl debug node/worker-1 -it --image=nicolaka/netshoot -- iostat -xz 5 3
 ```
-
 **Level 3 - 生产最佳实践**: 参见本节1.2-1.3的完整性能诊断工具链和识别流程
 
 ### 1.1 性能瓶颈分类矩阵
@@ -176,7 +181,8 @@ kubectl debug node/worker-1 -it --image=nicolaka/netshoot -- iostat -xz 5 3
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # ========== 性能综合诊断脚本 ==========
 set -euo pipefail
@@ -297,7 +303,6 @@ profile_application
 echo -e "\n性能分析完成，报告位置: ${OUTPUT_DIR}"
 ls -la ${OUTPUT_DIR}
 ```
-
 ### 1.3 性能瓶颈识别流程
 
 ```mermaid
@@ -359,7 +364,8 @@ graph TD
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速定位瓶颈类型
 # 1. 检查是否为CPU瓶颈
 kubectl top nodes | awk 'NR>1 && $3+0>80 {print "CPU瓶颈节点:",$1,$3}'
@@ -373,7 +379,6 @@ kubectl get --raw /metrics | grep apiserver_request_duration_seconds | awk '/qua
 # 4. 检查是否为etcd瓶颈
 kubectl exec -n kube-system etcd-master1 -- etcdctl endpoint status | awk '{if($5+0>100) print "etcd延迟过高:",$5"ms"}'
 ```
-
 ---
 
 ## 2. 资源优化策略
@@ -699,7 +704,8 @@ spec:
 4. **应用层协同**: 调整GOMAXPROCS/GOMEMLIMIT/Java heap等参数,与容器limits协同工作
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查CPU throttling情况
 kubectl top pods -A | awk 'NR>1 && $3+0>80 {print "高CPU使用:",$1,$2,$3}'
 
@@ -712,7 +718,6 @@ kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[].resour
 # 检查节点资源碎片化
 kubectl describe nodes | grep -A 5 "Allocated resources"
 ```
-
 ---
 
 ## 3. 调度器调优参数
@@ -992,7 +997,8 @@ spec:
 4. **专用调度器**: 为GPU/大内存等特殊负载配置独立调度器,避免干扰普通负载
 
 **故障排查**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度失败的Pod
 kubectl get pods -A --field-selector status.phase=Pending
 
@@ -1005,7 +1011,6 @@ kubectl get --raw /metrics | grep scheduler_scheduling_duration_seconds
 # 查看节点可调度状态
 kubectl get nodes -o custom-columns=NAME:.metadata.name,SCHEDULABLE:.spec.unschedulable,TAINTS:.spec.taints
 ```
-
 ---
 
 ## 4. 网络性能优化
@@ -1286,7 +1291,8 @@ spec:
 4. **MTU优化**: 根据底层网络调整MTU值(通常Overlay网络设置为1450)
 
 **故障排查**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查网络延迟
 kubectl run netperf --rm -it --image=networkstatic/iperf3 -- iperf3 -c target-pod-ip
 
@@ -1303,7 +1309,6 @@ kubectl get endpoints -A | grep <service-name>
 kubectl get pods -n kube-system -l k8s-app=calico-node
 kubectl logs -n kube-system <calico-pod> | grep -i error
 ```
-
 ---
 
 ## 5. 存储IO调优
@@ -1545,7 +1550,17 @@ data:
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # ========== 存储性能基准测试 ==========
 set -euo pipefail
@@ -1623,7 +1638,6 @@ kubectl delete namespace ${TEST_NAMESPACE}  # ⚠️ 不可逆：永久删除命
 
 echo "存储性能测试完成"
 ```
-
 ### 常见误区与最佳实践
 
 **常见误区**:
@@ -1643,7 +1657,8 @@ echo "存储性能测试完成"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用FIO测试IOPS
 kubectl run fio-test --rm -it --image=ljishen/fio -- fio --name=test --rw=randread --bs=4k --iodepth=16 --size=1g --numjobs=4 --runtime=60 --group_reporting
 
@@ -1656,7 +1671,6 @@ kubectl exec -it <pod-name> -- iostat -x 5
 # 检查存储容量使用
 kubectl exec -it <pod-name> -- df -h
 ```
-
 ---
 
 ## 6. 应用层性能优化
@@ -1942,7 +1956,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Java应用堆内存分析
 kubectl exec <java-pod> -- jmap -heap 1
 
@@ -1960,7 +1975,6 @@ kubectl logs <pod-name> | grep "GC pause"
 # 检查OOM情况
 kubectl get events -A --field-selector reason=OOMKilling
 ```
-
 ---
 
 ## 7. 监控与基准测试
@@ -1994,7 +2008,8 @@ kubectl get events -A --field-selector reason=OOMKilling
 ### 渐进式示例
 
 **Level 1 - 基础监控查询**: 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点CPU使用率
 kubectl top nodes
 
@@ -2008,7 +2023,6 @@ kubectl get --raw /readyz
 # 查看集群事件
 kubectl get events -A --sort-by='.lastTimestamp' | tail -20
 ```
-
 **Level 2 - Prometheus查询**: 
 ```promql
 # API Server 99分位延迟
@@ -2092,7 +2106,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # ========== 自动化性能基准测试套件 ==========
 set -euo pipefail
@@ -2214,7 +2229,6 @@ EOF
 echo "基准测试完成，结果保存在: ${RESULTS_DIR}"
 ls -la ${RESULTS_DIR}
 ```
-
 ### 7.3 持续性能监控
 
 ```yaml
@@ -2301,7 +2315,8 @@ data:
 4. **性能回归检测**: 在发布前执行基准测试,防止性能退化进入生产环境
 
 **故障排查**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查Prometheus采集状态
 kubectl get --raw /api/v1/namespaces/monitoring/services/prometheus:9090/proxy/api/v1/targets | jq '.data.activeTargets[] | select(.health!="up")'
 
@@ -2314,7 +2329,6 @@ kubectl get --raw /api/v1/namespaces/monitoring/services/alertmanager:9093/proxy
 # 测试Grafana连接
 kubectl port-forward -n monitoring svc/grafana 3000:80
 ```
-
 ---
 ## 8. 性能优化实战案例库
 
@@ -2397,7 +2411,7 @@ clientset, err := kubernetes.NewForConfig(config)
 - QPS承载能力提升至5000+
 - etcd写入延迟降低60%
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 #### 案例2: 节点资源利用率优化
 ```markdown
 **优化背景**: 
@@ -2421,7 +2435,6 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.c
 kubectl describe nodes | grep -E "(Allocated|Requests)" | \
   awk '{print $2,$4}' | sort | uniq -c
 ```
-
 **优化策略**:
 
 1. **垂直Pod自动扩缩容(VPA)**:
@@ -2491,7 +2504,8 @@ spec:
 ```
 
 3. **节点资源优化脚本**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 节点资源优化自动化脚本
 
@@ -2554,7 +2568,6 @@ optimize_workload_distribution() {
     }'
 }
 ```
-
 **优化成果**:
 - 节点CPU平均利用率提升至65%
 - 内存利用率提升至70%
@@ -3048,7 +3061,8 @@ groups:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # CPU 性能分析
 kubectl top nodes --sort-by=cpu
 kubectl top pods -A --sort-by=cpu | head -20
@@ -3068,7 +3082,6 @@ kubectl get --raw /metrics | grep scheduler_scheduling_duration
 # conntrack 表使用率
 cat /proc/sys/net/netfilter/nf_conntrack_count && cat /proc/sys/net/netfilter/nf_conntrack_max
 ```
-
 ## 交叉引用
 
 - 相关主题：[运维最佳实践](operations-best-practices.md) · [容量规划](capacity-planning-forecasting.md) · [Scheduler Performance Tuning](../scheduling/scheduler-performance-tuning.md) · [eBPF and Cilium Networking](../networking/ebpf-and-cilium-networking.md)
@@ -3084,3 +3097,5 @@ cat /proc/sys/net/netfilter/nf_conntrack_count && cat /proc/sys/net/netfilter/nf
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

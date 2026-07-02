@@ -80,6 +80,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 控制平面安全加固指南 (Control Plane Security Hardening Guide)
@@ -289,7 +294,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 客户端证书生成和管理脚本
 
@@ -366,7 +372,6 @@ spec:
 EOF
 }
 ```
-
 ### 2.3 ServiceAccount安全配置
 
 ```yaml
@@ -795,7 +800,8 @@ spec:
 
 ### 5.3 数据备份加密
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 加密备份脚本
 
@@ -840,7 +846,6 @@ verify_backup() {
     rm /tmp/verify.db
 }
 ```
-
 ---
 
 <!-- chunk: 6. 审计日志配置 -->
@@ -1214,7 +1219,17 @@ graph TD
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 安全事件恢复脚本
 
@@ -1271,7 +1286,6 @@ verify_security_hardening() {
     kubectl auth can-i --list
 }
 ```
-
 通过实施这些安全加固措施，可以显著提升Kubernetes控制平面的安全性，有效防范各种安全威胁和攻击。
 ---
 
@@ -1305,3 +1319,6 @@ verify_security_hardening() {
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

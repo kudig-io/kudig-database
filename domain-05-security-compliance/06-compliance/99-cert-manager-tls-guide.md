@@ -60,6 +60,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # cert-manager 自动证书管理深度实践
@@ -178,7 +183,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 
@@ -190,7 +196,6 @@ helm install cert-manager jetstack/cert-manager \
   --set prometheus.enabled=true \
   --set prometheus.servicemonitor.enabled=true
 ```
-
 ```yaml
 # values-cert-manager-production.yaml
 replicaCount: 2
@@ -432,7 +437,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 CA 私钥和证书
 openssl genrsa -out ca.key 4096
 openssl req -x509 -new -nodes -key ca.key \
@@ -450,7 +456,6 @@ kubectl create secret tls ca-key-pair \
 kubectl get secret ca-key-pair -n cert-manager -o yaml | \
   kubectl neat > ca-secret-backup.yaml
 ```
-
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -789,7 +794,8 @@ spec:
 
 ## 证书生命周期审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # certificate_audit.sh - 证书合规审计脚本
 
@@ -854,7 +860,6 @@ kubectl get certificates --all-namespaces -o json | \
     select((.duration | test("h$")) and ((.duration | sub("h$";"") | tonumber) > 2160)) |
     "WARNING: \(.ns)/\(.name) duration > 90 days: \(.duration)"'
 ```
-
 ## 证书策略（Kyverno 集成）
 
 ```yaml
@@ -1089,7 +1094,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动触发证书轮换
 kubectl annotate certificate <name> -n <namespace> \
   cert-manager.io/issue-temporary-certificate=true \
@@ -1105,7 +1111,6 @@ kubectl get certificaterequests -n <namespace>
 kubectl get orders -n <namespace>
 kubectl get challenges -n <namespace>
 ```
-
 <!-- chunk: 最佳实践 -->## 最佳实践
 
 ## 证书策略建议
@@ -1215,7 +1220,8 @@ spec:
 
 ## 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cert-manager_diagnostics.sh
 
@@ -1274,7 +1280,6 @@ kubectl get ingress --all-namespaces -o json | \
   jq -r '.items[] | select(.spec.tls != null) |
     "\(.metadata.namespace)/\(.metadata.name): tls_hosts=\([.spec.tls[].hosts[]] | join(",")) secret=\(.spec.tls[].secretName)"'
 ```
-
 ---
 
 *本文档基于 cert-manager 证书管理实践经验编写，持续更新最新技术和最佳实践。*
@@ -1309,3 +1314,6 @@ kubectl get ingress --all-namespaces -o json | \
 
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

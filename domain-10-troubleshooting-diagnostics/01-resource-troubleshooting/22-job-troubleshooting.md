@@ -65,6 +65,11 @@ cross_refs:
   label: '故障树: job-cronjob'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 22 - Job 故障排查 (Job Troubleshooting)
@@ -138,7 +143,8 @@ cross_refs:
 
 ### 2.1 Job 资源状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础信息检查 ==========
 # 查看所有Job
 kubectl get jobs --all-namespaces
@@ -165,10 +171,10 @@ kubectl get pods -n <namespace> --selector=job-name=<job-name>
 # 查看Pod详细状态
 kubectl describe pods -n <namespace> --selector=job-name=<job-name>
 ```
-
 ### 2.2 并行和完成配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 并行配置检查 ==========
 # 检查并行度设置
 kubectl get job <job-name> -n <namespace> -o jsonpath='{
@@ -187,7 +193,6 @@ kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.completionMode}'
 SUCCESSFUL_PODS=$(kubectl get pods -n <namespace> --selector=job-name=<job-name> --field-selector=status.phase=Succeeded --no-headers | wc -l)
 echo "Successful pods: $SUCCESSFUL_PODS"
 ```
-
 ---
 
 <!-- chunk: 3. 执行失败问题排查 (Execution Failure Troubleshooting) -->
@@ -195,7 +200,8 @@ echo "Successful pods: $SUCCESSFUL_PODS"
 
 ### 3.1 Pod启动失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 调度失败分析 ==========
 # 查看调度失败事件
 kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod,reason=FailedScheduling
@@ -216,10 +222,10 @@ kubectl get secret -n <namespace> | grep pull
 # 查看镜像拉取事件
 kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod,reason=ErrImagePull
 ```
-
 ### 3.2 容器执行失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 退出码分析 ==========
 # 查看Pod退出码
 kubectl get pods -n <namespace> --selector=job-name=<job-name> -o jsonpath='{
@@ -262,7 +268,6 @@ kubectl get pods -n <namespace> --selector=job-name=<job-name> -o jsonpath='{
 # 验证资源请求
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[*].resources}'
 ```
-
 ---
 
 <!-- chunk: 4. 超时和性能问题 (Timeout and Performance Issues) -->
@@ -270,7 +275,8 @@ kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.template.spec.cont
 
 ### 4.1 执行时间监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 执行时间分析 ==========
 # 计算Job执行时间
 kubectl get job <job-name> -n <namespace> -o jsonpath='{
@@ -313,7 +319,6 @@ kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.activeDeadlineSeco
 # 验证Pod TTL设置
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.spec.ttlSecondsAfterFinished}'
 ```
-
 ### 4.2 性能优化建议
 
 ```bash
@@ -382,7 +387,8 @@ EOF
 
 ### 5.1 重试策略配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 重试限制检查 ==========
 # 查看当前重试次数
 kubectl get job <job-name> -n <namespace> -o jsonpath='{.status.failed}'
@@ -444,14 +450,14 @@ spec:
   ttlSecondsAfterFinished: 600
 EOF
 ```
-
 ### 5.2 失败分析工具
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Job失败分析脚本 ==========
 cat <<'EOF' > job-failure-analyzer.sh
 #!/bin/bash
@@ -548,7 +554,6 @@ EOF
 
 chmod +x auto-retry-job.sh
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -559,7 +564,8 @@ chmod +x auto-retry-job.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Job监控指标 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -625,10 +631,10 @@ spec:
         summary: "High job failure rate detected in namespace {{ \$labels.namespace }}"
 EOF
 ```
-
 ### 6.2 性能分析工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Job性能分析脚本 ==========
 cat <<'EOF' > job-performance-analyzer.sh
 #!/bin/bash
@@ -739,7 +745,6 @@ EOF
 
 chmod +x job-resource-monitor.sh
 ```
-
 ---
 
 ---
@@ -769,3 +774,6 @@ chmod +x job-resource-monitor.sh
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/23-namespace-troubleshooting.md|23-namespace-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|24-quota-limitrange-troubleshooting]]
+
+
+<!-- risk-assessed -->

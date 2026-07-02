@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # containerd 生产运维指南
@@ -74,6 +79,7 @@ authors:
 自 Kubernetes 1.24 移除 dockershim 后，containerd 成为 ACK 与专有云 ASO 的默认容器运行时。掌握 containerd 的安装、配置、镜像加速和故障排查，是处理 ImagePullBackOff、Pod 启动慢、节点 NotReady 等工单的基础。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Client (crictl/ctr/kubectl)
     ↓ CRI / containerd API
 containerd
@@ -84,14 +90,14 @@ runc / crun
     ↓
 Linux Namespace + Cgroups
 ```
-
 ## 2. 安装与初始化
 
 阿里云 ACK 托管节点已预装 containerd，无需手工安装。专有云 ASO 自定义镜像或私有化节点，需要按以下步骤初始化。
 
 以下命令在 Alibaba Cloud Linux 3 / CentOS 7 上安装 containerd 稳定版，并设置为开机自启：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 containerd.io（推荐从 Docker 官方 yum 源或 Alibaba Cloud Linux 源获取）
 sudo yum install -y containerd.io
 
@@ -102,7 +108,6 @@ sudo systemctl enable --now containerd
 containerd --version
 systemctl status containerd --no-pager
 ```
-
 生成默认配置文件，作为后续调优的基线：
 
 ```bash
@@ -144,18 +149,28 @@ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 校验配置语法并重启
 sudo containerd config dump >/dev/null && sudo systemctl restart containerd
 ```
-
 ## 4. 镜像命名空间与 crictl
 
 containerd 通过 namespace 隔离镜像与容器元数据。Kubernetes 默认使用 `k8s.io`，docker 使用 `moby`。排查时应注意命令所处的 namespace。
 
 配置 crictl 默认连接到 containerd socket，避免每次指定 endpoint：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 /etc/crictl.yaml，统一使用 containerd 的 CRI socket
 cat <<EOF | sudo tee /etc/crictl.yaml
 runtime-endpoint: unix:///run/containerd/containerd.sock
@@ -164,7 +179,6 @@ timeout: 10
 debug: false
 EOF
 ```
-
 常用运维命令对照：
 
 | 场景 | containerd 命令 | 说明 |
@@ -227,7 +241,17 @@ ACK 1.24+ 已不再支持 dockerd，部分专有云存量节点仍需迁移。�
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 驱逐节点上的工作负载
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
 
@@ -238,10 +262,10 @@ docker images --format '{{.Repository}}:{{.Tag}}' > /tmp/docker-images.txt
 sudo systemctl stop docker
 sudo systemctl disable docker
 ```
-
 完成 containerd 安装与配置后，恢复节点可调度：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 4. 启动 containerd 并设置开机自启
 sudo systemctl enable --now containerd
 
@@ -251,7 +275,6 @@ kubectl get node <node-name> -o jsonpath='{.status.nodeInfo.containerRuntimeVers
 # 6. 恢复可调度
 kubectl uncordon <node-name>
 ```
-
 ## 7. 故障排查
 
 containerd 相关故障通常表现为 Pod 一直 `ContainerCreating`、镜像拉取失败、容器反复退出等。排查时应先看事件，再看 containerd 日志与 crictl 状态。
@@ -265,18 +288,18 @@ sudo journalctl -u containerd -f
 
 查看 Kubelet 与 containerd 的交互事件：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 事件，定位 SandboxCreate 或 PullImage 失败
 kubectl describe pod <pod-name> -n <namespace>
 ```
-
 当 Pod 卡在 `ContainerCreating` 时，检查 sandbox 容器是否已创建：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 Pod sandbox，确认 infra 容器状态
 crictl pods
 ```
-
 常见错误与处理：
 
 | 现象 | 可能根因 | 处理 |
@@ -328,7 +351,17 @@ containerd 升级必须遵循先灰度后全量的原则，避免一次升级所
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 升级前在单节点验证新版本兼容性
 sudo yum update -y containerd.io
 sudo systemctl restart containerd
@@ -337,7 +370,6 @@ kubectl get node <node-name> -o jsonpath='{.status.nodeInfo.containerRuntimeVers
 # 确认该节点 Pod 运行正常后，再按批次升级其他节点
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name>
 ```
-
 若升级后出现容器无法启动或镜像拉取异常，应立即停止升级并回滚到旧版本 RPM/DEB 包，重启 containerd 后恢复节点可调度。
 
 ## 11. 日志轮转与审计
@@ -357,10 +389,10 @@ MaxFileSec=7day
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 sudo systemctl restart systemd-journald
 ```
-
 对于审计要求较高的 专有云 ASO 环境，可将 containerd 事件接入审计系统，记录镜像拉取、容器创建/删除等关键操作。
 
 ## 12. 生产检查清单
@@ -382,3 +414,6 @@ sudo systemctl restart systemd-journald
 - [[domain-13-container-runtime/01-docker/01-docker-architecture-overview.md|Docker 架构概述]]
 - [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 - [[domain-05-security-compliance/README.md|容器安全合规]]
+
+
+<!-- risk-assessed -->

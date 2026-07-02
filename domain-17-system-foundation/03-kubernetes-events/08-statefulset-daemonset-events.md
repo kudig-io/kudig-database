@@ -55,6 +55,11 @@ cross_refs:
   label: '故障树: statefulset'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 08 - [[StatefulSet|StatefulSet]] 与 [[DaemonSet|DaemonSet]] 控制器事件
@@ -147,20 +152,20 @@ create Pod web-1 in StatefulSet default/web successful
 ## 排查建议
 
 **查看 Pod 创建顺序:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 事件时间线
 kubectl describe statefulset web
 
 # 查看 Pod 创建时间
 kubectl get pods -l app=web -o custom-columns=NAME:.metadata.name,CREATED:.metadata.creationTimestamp
 ```
-
 **查看 PVC 自动创建:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # StatefulSet 会自动为每个 Pod 创建 PVC
 kubectl get pvc -l app=web
 ```
-
 ## 解决建议
 
 正常事件,无需处理。如需优化:
@@ -175,12 +180,12 @@ spec:
 ```
 
 **2. 监控创建速度:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 有序创建模式下,查看为什么前一个 Pod 未 Ready
 kubectl describe pod web-0
 kubectl logs web-0
 ```
-
 ---
 
 ## `SuccessfulDelete` - Pod 删除成功
@@ -214,20 +219,20 @@ delete Pod web-1 in StatefulSet default/web successful
 ## 排查建议
 
 **查看删除顺序:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看删除事件
 kubectl get events --field-selector involvedObject.kind=StatefulSet,involvedObject.name=web
 
 # 查看 Pod 删除时间戳
 kubectl get pods -l app=web -o yaml | grep deletionTimestamp
 ```
-
 **确认 PVC 保留:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # PVC 仍然存在
 kubectl get pvc -l app=web
 ```
-
 ## 解决建议
 
 正常事件,注意数据管理:
@@ -283,16 +288,17 @@ create Pod web-2 failed: Pod "web-2" is invalid: spec.containers[0].image: Requi
 ## 排查建议
 
 **1. 查看详细错误:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 事件
 kubectl describe statefulset web
 
 # 查看控制器日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep statefulset
 ```
-
 **2. 检查常见原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PVC 状态
 kubectl get pvc -l app=web
 kubectl describe pvc data-web-0
@@ -307,17 +313,16 @@ kubectl describe resourcequota -n default
 # 检查 LimitRange
 kubectl describe limitrange -n default
 ```
-
 **3. 验证 Pod 模板:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 模板有效性
 kubectl get statefulset web -o yaml | kubectl create --dry-run=server -f -
 ```
-
 ## 解决建议
 
 **1. PVC 问题 - 预创建 PVC:**
@@ -325,7 +330,8 @@ kubectl get statefulset web -o yaml | kubectl create --dry-run=server -f -
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动创建 PVC(如果自动创建失败)
 kubectl apply -f - <<EOF
 apiVersion: v1
@@ -340,33 +346,41 @@ spec:
       storage: 10Gi
 EOF
 ```
-
 **2. 配额问题 - 调整配额或请求:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前配额使用情况
 kubectl describe quota compute-quota
 
 # 调整 StatefulSet 资源请求
 kubectl edit statefulset web
 ```
-
 **3. 镜像问题 - 修复镜像引用:**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修复镜像地址
 kubectl set image statefulset/web app=nginx:1.21
 ```
-
 **4. 权限问题 - 检查 RBAC:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ServiceAccount 权限
 kubectl get serviceaccount default -o yaml
 kubectl describe rolebinding -n default
 ```
-
 ---
 
 ## `SuccessfulUpdate` - Pod 更新成功
@@ -400,7 +414,8 @@ update Pod web-1 in StatefulSet default/web successful
 ## 排查建议
 
 **查看更新进度:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 状态
 kubectl rollout status statefulset/web
 
@@ -410,12 +425,11 @@ kubectl describe statefulset web
 # 查看 Pod 版本分布
 kubectl get pods -l app=web -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image
 ```
-
 **查看更新策略:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get statefulset web -o jsonpath='{.spec.updateStrategy}'
 ```
-
 ## 解决建议
 
 正常事件,可优化更新策略:
@@ -488,7 +502,8 @@ update Pod web-2 failed: persistentvolumeclaim "data-web-2" not found
 ## 排查建议
 
 **1. 查看失败原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 事件
 kubectl describe statefulset web
 
@@ -496,23 +511,22 @@ kubectl describe statefulset web
 kubectl get pods -l app=web
 kubectl describe pod web-1
 ```
-
 **2. 检查 PVC 状态:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 绑定状态
 kubectl get pvc -l app=web
 kubectl describe pvc data-web-1
 ```
-
 **3. 检查 Pod 状态:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 详情
 kubectl get pod web-1 -o yaml
 
 # 查看 Pod 事件
 kubectl describe pod web-1
 ```
-
 ## 解决建议
 
 **1. Pod 卡在 Terminating 状态:**
@@ -520,16 +534,26 @@ kubectl describe pod web-1
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 Pod 终止状态
 kubectl get pod web-1 -o yaml | grep deletionTimestamp
 
 # 如果 Pod 长时间 Terminating,强制删除(谨慎操作)
 kubectl delete pod web-1 --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 **2. PVC 问题:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PVC 是否被其他 Pod 占用(ReadWriteOnce 模式)
 kubectl get pods -o wide | grep data-web-1
 
@@ -537,14 +561,23 @@ kubectl get pods -o wide | grep data-web-1
 kubectl get storageclass
 kubectl get pv | grep data-web-1
 ```
-
 **3. 回滚更新:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # StatefulSet 不支持自动回滚,需手动修改
 kubectl edit statefulset web
 # 或使用 kubectl apply 恢复旧版本配置
@@ -552,21 +585,20 @@ kubectl edit statefulset web
 # 如果使用了 partition,可调整 partition 值
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":3}}}}'
 ```
-
 **4. 重建 StatefulSet(保留 PVC):**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 删除 StatefulSet 但保留 Pod
 kubectl delete statefulset web --cascade=orphan
 
 # 重新创建 StatefulSet(会接管现有 Pod)
 kubectl apply -f statefulset.yaml
 ```
-
 ---
 
 ## `UnhealthyPodEviction` - 不健康 Pod 驱逐
@@ -600,16 +632,17 @@ evicting unhealthy pod web-2, reason: NodeShutdown
 ## 排查建议
 
 **1. 查看 Pod DisruptionTarget condition:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 的 Conditions
 kubectl get pod web-1 -o jsonpath='{.status.conditions[?(@.type=="DisruptionTarget")]}'
 
 # 查看完整 Pod 状态
 kubectl describe pod web-1
 ```
-
 **2. 检查节点状态:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点是否不可达
 kubectl get nodes
 kubectl describe node <node-name>
@@ -617,14 +650,13 @@ kubectl describe node <node-name>
 # 查看节点事件
 kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name=<node-name>
 ```
-
 **3. 查看 PDB 配置:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PodDisruptionBudget
 kubectl get pdb
 kubectl describe pdb web-pdb
 ```
-
 ## 解决建议
 
 **1. 节点故障恢复:**
@@ -632,14 +664,23 @@ kubectl describe pdb web-pdb
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 如果节点恢复,Pod 会自动重建
 kubectl get nodes
 
 # 如果节点永久下线,从集群移除
 kubectl delete node <node-name>
 ```
-
 **2. 配置 PodDisruptionBudget:**
 ```yaml
 apiVersion: policy/v1
@@ -697,7 +738,8 @@ Created pod: fluentd-def456
 ## 排查建议
 
 **查看 Pod 分布:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet Pod 分布
 kubectl get pods -l app=fluentd -o wide
 
@@ -712,16 +754,15 @@ kubectl get daemonset fluentd
 # UP-TO-DATE: 最新版本副本数
 # AVAILABLE: 可用副本数
 ```
-
 **检查节点选择:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 的节点选择器
 kubectl get daemonset fluentd -o jsonpath='{.spec.template.spec.nodeSelector}'
 
 # 查看节点标签
 kubectl get nodes --show-labels
 ```
-
 ## 解决建议
 
 正常事件,可优化调度策略:
@@ -798,7 +839,8 @@ Deleted pod: fluentd-def456
 ## 排查建议
 
 **查看删除原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 事件
 kubectl describe daemonset fluentd
 
@@ -808,16 +850,15 @@ kubectl get nodes
 # 查看 Pod 删除时间
 kubectl get events --field-selector involvedObject.kind=Pod,reason=Killing
 ```
-
 **检查节点选择器变更:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 配置变更历史
 kubectl rollout history daemonset fluentd
 
 # 查看当前节点选择器
 kubectl get daemonset fluentd -o yaml | grep -A 5 nodeSelector
 ```
-
 ## 解决建议
 
 正常事件,注意以下场景:
@@ -828,14 +869,23 @@ kubectl get daemonset fluentd -o yaml | grep -A 5 nodeSelector
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 给节点打污点但不驱逐 DaemonSet Pod
 kubectl taint nodes node1 maintenance=true:NoSchedule
 
 # DaemonSet 需配置容忍度
 kubectl patch daemonset fluentd -p '{"spec":{"template":{"spec":{"tolerations":[{"key":"maintenance","operator":"Exists"}]}}}}'
 ```
-
 **2. 滚动更新控制:**
 ```yaml
 apiVersion: apps/v1
@@ -881,7 +931,8 @@ Error creating: Pod "fluentd-def456" is invalid: spec.containers[0].ports[0].hos
 ## 排查建议
 
 **1. 查看详细错误:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 事件
 kubectl describe daemonset fluentd
 
@@ -891,9 +942,9 @@ kubectl get events --field-selector involvedObject.kind=Pod,type=Warning
 # 查看控制器日志(v1.12-)
 kubectl logs -n kube-system -l component=kube-controller-manager | grep daemon
 ```
-
 **2. 检查常见原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查资源配额
 kubectl describe resourcequota -n default
 
@@ -903,13 +954,13 @@ kubectl describe nodes | grep -A 5 "Allocated resources"
 # 检查端口冲突(hostPort)
 kubectl get pods --all-namespaces -o json | jq '.items[] | select(.spec.containers[].ports[]?.hostPort) | {name: .metadata.name, namespace: .metadata.namespace, hostPort: .spec.containers[].ports[].hostPort}'
 ```
-
 **3. 检查准入控制器:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看准入 webhook
 kubectl get validatingwebhookconfiguration
 kubectl get mutatingwebhookconfiguration
@@ -917,7 +968,6 @@ kubectl get mutatingwebhookconfiguration
 # 测试 Pod 创建(dry-run)
 kubectl create -f pod.yaml --dry-run=server
 ```
-
 ## 解决建议
 
 **1. 端口冲突 - 使用 hostNetwork 或修改端口:**
@@ -960,12 +1010,12 @@ kubectl label namespace kube-system admission.webhook/ignore=true
 ```
 
 **4. 调度失败(v1.12+) - 检查调度器事件:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 调度事件
 kubectl describe pod fluentd-abc123
 # 查找 "Failed to schedule" 或 "Unschedulable" 事件
 ```
-
 ---
 
 ## `FailedDaemonPod` - DaemonSet Pod 失败
@@ -998,7 +1048,8 @@ Found failed daemon pod fluentd-abc123 on node node1, will try to kill it
 ## 排查建议
 
 **1. 查看 Pod 失败原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 状态
 kubectl get pods -l app=fluentd -o wide
 
@@ -1009,9 +1060,9 @@ kubectl describe pod fluentd-abc123
 kubectl logs fluentd-abc123
 kubectl logs fluentd-abc123 --previous  # 查看上一次运行的日志
 ```
-
 **2. 检查节点状态:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点是否异常
 kubectl describe node node1
 
@@ -1019,16 +1070,15 @@ kubectl describe node node1
 kubectl top node node1
 kubectl top pod -l app=fluentd
 ```
-
 **3. 检查镜像和启动配置:**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看镜像拉取状态
 kubectl get events --field-selector involvedObject.name=fluentd-abc123,reason=Failed
 
 # 测试镜像拉取
 kubectl run test --image=fluentd/fluentd:v1.14 --rm -it --restart=Never -- /bin/sh
 ```
-
 ## 解决建议
 
 **1. 镜像问题 - 修复镜像地址:**
@@ -1036,14 +1086,14 @@ kubectl run test --image=fluentd/fluentd:v1.14 --rm -it --restart=Never -- /bin/
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 DaemonSet 镜像
 kubectl set image daemonset/fluentd fluentd=fluentd/fluentd:v1.14
 
 # 或配置镜像拉取策略
 kubectl patch daemonset fluentd -p '{"spec":{"template":{"spec":{"containers":[{"name":"fluentd","imagePullPolicy":"IfNotPresent"}]}}}}'
 ```
-
 **2. 启动失败 - 检查启动命令和健康检查:**
 ```yaml
 spec:
@@ -1111,7 +1161,8 @@ failed to place pod on node3: node had taint {key=special:NoSchedule}, and pod d
 ## 排查建议
 
 **1. 查看调度失败原因:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet 事件
 kubectl describe daemonset fluentd
 
@@ -1122,25 +1173,24 @@ kubectl describe pod fluentd-pending-pod
 # 查看调度器日志
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i daemonset
 ```
-
 **2. 检查节点资源:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点可分配资源
 kubectl describe nodes | grep -A 5 "Allocatable"
 
 # 查看 DaemonSet 资源请求
 kubectl get daemonset fluentd -o jsonpath='{.spec.template.spec.containers[0].resources}'
 ```
-
 **3. 检查节点污点和容忍度:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点污点
 kubectl describe nodes | grep Taints
 
 # 查看 DaemonSet 容忍度
 kubectl get daemonset fluentd -o jsonpath='{.spec.template.spec.tolerations}'
 ```
-
 ## 解决建议
 
 **1. 添加容忍度:**
@@ -1226,13 +1276,13 @@ This daemon set is selecting all pods. A non-empty selector is required.
 ## 排查建议
 
 **查看 DaemonSet 配置:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 selector 配置
 kubectl get daemonset fluentd -o yaml | grep -A 3 selector
 
 # 正确的配置应该包含 matchLabels
 ```
-
 ## 解决建议
 
 **添加正确的 selector:**
@@ -1290,14 +1340,14 @@ DaemonSet is missing selector
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 dry-run 验证配置
 kubectl apply -f daemonset.yaml --dry-run=server
 
 # 查看验证错误
 kubectl create -f daemonset.yaml
 ```
-
 ## 解决建议
 
 **添加 selector 字段:**
@@ -1415,7 +1465,17 @@ data-web-2
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除 StatefulSet 后,PVC 仍然存在
 kubectl delete statefulset web
 kubectl get pvc  # data-web-0, data-web-1, data-web-2 仍存在
@@ -1423,7 +1483,6 @@ kubectl get pvc  # data-web-0, data-web-1, data-web-2 仍存在
 # 需手动删除
 kubectl delete pvc data-web-0 data-web-1 data-web-2
 ```
-
 ## 滚动更新策略
 
 ## 1. RollingUpdate(默认)
@@ -1477,13 +1536,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动触发更新
 kubectl delete pod web-2  # 控制器会用新配置重建 web-2
 kubectl delete pod web-1
 kubectl delete pod web-0
 ```
-
 ## 稳定的网络标识
 
 StatefulSet 需要配合 Headless Service 使用,提供稳定的网络标识:
@@ -1524,13 +1583,13 @@ web-2.nginx.default.svc.cluster.local
 ```
 
 **验证:**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从集群内访问
 kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup web-0.nginx.default.svc.cluster.local
 
 # 稳定性: Pod 重建后,DNS 记录不变
 ```
-
 ---
 
 <!-- chunk: DaemonSet 特性说明 -->## DaemonSet 特性说明
@@ -1554,14 +1613,14 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup web-0.ngi
 - 调度失败会有调度器事件记录
 
 **查看调度器处理 DaemonSet:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 调度事件
 kubectl describe pod <daemonset-pod> | grep -A 5 "Events"
 
 # 查看调度器日志
 kubectl logs -n kube-system -l component=kube-scheduler | grep -i daemon
 ```
-
 ## 节点选择机制
 
 ## 1. nodeSelector(简单)
@@ -1734,13 +1793,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动按节点逐个更新
 kubectl delete pod fluentd-node1
 # 等待 Pod Ready 后继续
 kubectl delete pod fluentd-node2
 ```
-
 ## 主机资源访问
 
 DaemonSet 通常需要访问主机资源(文件系统、网络、进程等):
@@ -1809,20 +1868,21 @@ spec:
 ## 案例 1: StatefulSet 有序扩容卡住
 
 **现象:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l app=mysql
 NAME      READY   STATUS    RESTARTS   AGE
 mysql-0   1/1     Running   0          5m
 mysql-1   0/1     Pending   0          30s
 ```
-
 **事件:**
 ```
 FailedCreate: create Pod mysql-1 in StatefulSet default/mysql failed error: persistentvolumeclaim "data-mysql-1" not found
 ```
 
 **排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC 状态
 $ kubectl get pvc
 NAME          STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
@@ -1834,7 +1894,6 @@ $ kubectl describe pvc data-mysql-1
 Events:
   Warning  ProvisioningFailed  waiting for a volume to be created, either by external provisioner or by manual PV creation
 ```
-
 **原因:** StorageClass 没有配置动态供应,或 PV 资源不足。
 
 **解决:**
@@ -1843,7 +1902,8 @@ Events:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 手动创建 PV
 kubectl apply -f - <<EOF
 apiVersion: v1
@@ -1862,25 +1922,25 @@ EOF
 # 方案 2: 配置动态供应
 kubectl patch storageclass standard -p '{"provisioner": "kubernetes.io/gce-pd"}'
 ```
-
 ---
 
 ## 案例 2: StatefulSet 滚动更新回滚
 
 **现象:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl rollout status statefulset/web
 Waiting for 1 pods to be ready...
 Waiting for 1 pods to be ready...
 ```
-
 **事件:**
 ```
 FailedUpdate: update Pod web-2 in StatefulSet default/web failed
 ```
 
 **排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 状态
 $ kubectl get pods -l app=web
 NAME    READY   STATUS             RESTARTS   AGE
@@ -1892,7 +1952,6 @@ web-2   0/1     CrashLoopBackOff   5          3m
 $ kubectl logs web-2
 Error: Invalid configuration: missing required field "database.host"
 ```
-
 **原因:** 新版本配置错误,导致 Pod 无法启动。
 
 **解决:**
@@ -1901,7 +1960,17 @@ Error: Invalid configuration: missing required field "database.host"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 使用 partition 暂停更新
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
 # 现在只有 web-2 使用新版本,web-0 和 web-1 保持旧版本
@@ -1914,27 +1983,27 @@ kubectl edit statefulset web
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"type":"OnDelete"}}}'
 kubectl delete pod web-2  # 手动删除问题 Pod
 ```
-
 ---
 
 ## 案例 3: DaemonSet 未在 Master 节点运行
 
 **现象:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l app=node-exporter -o wide
 NAME                  READY   STATUS    RESTARTS   AGE   NODE
 node-exporter-abc12   1/1     Running   0          5m    worker-1
 node-exporter-def34   1/1     Running   0          5m    worker-2
 # master 节点上没有 Pod
 ```
-
 **事件:**
 ```
 FailedPlacement: failed to place pod on master-1: node had taint {node-role.kubernetes.io/control-plane:NoSchedule}
 ```
 
 **排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 master 节点污点
 $ kubectl describe node master-1 | grep Taints
 Taints: node-role.kubernetes.io/control-plane:NoSchedule
@@ -1943,7 +2012,6 @@ Taints: node-role.kubernetes.io/control-plane:NoSchedule
 $ kubectl get daemonset node-exporter -o jsonpath='{.spec.template.spec.tolerations}'
 []
 ```
-
 **原因:** DaemonSet 未配置容忍 master 节点污点。
 
 **解决:**
@@ -1951,7 +2019,8 @@ $ kubectl get daemonset node-exporter -o jsonpath='{.spec.template.spec.tolerati
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加容忍度
 kubectl patch daemonset node-exporter -p '
 {
@@ -1977,26 +2046,26 @@ node-exporter-abc12   1/1     Running   0          5m    worker-1
 node-exporter-def34   1/1     Running   0          5m    worker-2
 node-exporter-ghi56   1/1     Running   0          10s   master-1
 ```
-
 ---
 
 ## 案例 4: DaemonSet hostPort 冲突
 
 **现象:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l app=fluentd
 NAME            READY   STATUS    RESTARTS   AGE
 fluentd-abc12   1/1     Running   0          5m
 fluentd-def34   0/1     Pending   0          5m
 ```
-
 **事件:**
 ```
 FailedCreate: Error creating: pods "fluentd-def34" is forbidden: host port 24224 is already allocated
 ```
 
 **排查:**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 DaemonSet hostPort 配置
 $ kubectl get daemonset fluentd -o yaml | grep -A 5 hostPort
 ports:
@@ -2007,7 +2076,6 @@ ports:
 # 检查是否有其他 Pod 使用相同 hostPort
 $ kubectl get pods --all-namespaces -o json | jq -r '.items[] | select(.spec.containers[].ports[]?.hostPort==24224) | {name:.metadata.name, namespace:.metadata.namespace, node:.spec.nodeName}'
 ```
-
 **原因:** 
 1. 节点上已有其他 Pod 使用相同 hostPort
 2. 或 DaemonSet 配置错误导致同一节点创建多个 Pod
@@ -2017,7 +2085,8 @@ $ kubectl get pods --all-namespaces -o json | jq -r '.items[] | select(.spec.con
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 移除 hostPort,使用 hostNetwork
 kubectl patch daemonset fluentd --type json -p='[{"op": "remove", "path": "/spec/template/spec/containers/0/ports/0/hostPort"}]'
 kubectl patch daemonset fluentd -p '{"spec":{"template":{"spec":{"hostNetwork":true}}}}'
@@ -2028,7 +2097,6 @@ kubectl patch daemonset fluentd --type json -p='[{"op": "replace", "path": "/spe
 # 方案 3: 检查节点选择器,确保每节点只有一个 Pod
 kubectl get daemonset fluentd -o yaml | grep -A 3 nodeSelector
 ```
-
 ---
 
 ## 案例 5: StatefulSet PVC 遗留清理
@@ -2038,7 +2106,8 @@ kubectl get daemonset fluentd -o yaml | grep -A 3 nodeSelector
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 删除 StatefulSet 后缩容后,PVC 仍然存在
 $ kubectl delete statefulset web --cascade=orphan
 $ kubectl scale statefulset web --replicas=1
@@ -2050,7 +2119,6 @@ data-web-1  Bound    pv-002   10Gi       RWO            standard       10m
 data-web-2  Bound    pv-003   10Gi       RWO            standard       10m
 # web-1 和 web-2 已不存在,但 PVC 保留
 ```
-
 **影响:** PVC 继续占用存储配额和底层存储资源。
 
 **解决:**
@@ -2058,7 +2126,17 @@ data-web-2  Bound    pv-003   10Gi       RWO            standard       10m
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 手动删除不需要的 PVC
 kubectl delete pvc data-web-1 data-web-2
 
@@ -2089,7 +2167,6 @@ spec:
     whenDeleted: Delete  # StatefulSet 删除时删除 PVC
     whenScaled: Delete   # 缩容时删除 PVC
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -2163,7 +2240,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 设置 partition,先更新一个 Pod(最大序号)
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
 # replicas=3 时,只有 web-2 更新
@@ -2179,7 +2257,6 @@ kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"p
 # 4. 全部更新
 kubectl patch statefulset web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
-
 ## 5. PVC 管理策略
 
 ```yaml
@@ -2406,3 +2483,6 @@ kube_daemonset_status_updated_number_scheduled < kube_daemonset_status_desired_n
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

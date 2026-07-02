@@ -19,6 +19,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # Pod CrashLoopBackOff 远程顾问对话脚本
 
@@ -43,20 +48,20 @@ relationships:
 
 **顾问**：请执行以下命令，获取 Pod 的基本状态信息：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o wide
 ```
-
 > **如果无法执行**：请告诉我你无法执行 kubectl 命令的原因（权限不足？没有 kubeconfig？），我会提供替代方案。如果你能登录到 Dashboard 或运维平台，请截图或复制 Pod 状态页面的文本信息给我。
 
 ### 分支 1-A：Pod 状态为 CrashLoopBackOff，Restart Count > 0
 
 **顾问**：收到，Pod 确实在反复重启。请继续执行以下命令查看退出原因：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 5 "Last State"
 ```
-
 > **如果无法执行 `kubectl describe`**：请尝试 `kubectl get pod <pod-name> -n <namespace> -o yaml`，然后把 `containerStatuses` 部分的内容复制给我。如果连 `-o yaml` 也无法执行，请登录 Dashboard 查看 Pod 详情页的"容器状态"部分。
 
 **工程师回复选项**：
@@ -68,10 +73,10 @@ kubectl describe pod <pod-name> -n <namespace> | grep -A 5 "Last State"
 
 **顾问**：当前 Pod 状态不是 CrashLoopBackOff，而是其他状态。这通常意味着问题出在调度或镜像拉取阶段。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | tail -n 30
 ```
-
 > **如果无法执行**：请查看 Pod 的 Events 信息（Dashboard 中通常在 Pod 详情页下方），把最后 10 条 Event 的文本发给我。
 
 **工程师回复选项**：
@@ -83,10 +88,10 @@ kubectl describe pod <pod-name> -n <namespace> | tail -n 30
 
 **顾问**：多个 Pod 同时问题，这提示可能是集群级或应用级的问题，而非单个 Pod 的偶发问题。请先确认范围：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -o wide | grep -E "CrashLoopBackOff|Error|OOMKilled"
 ```
-
 > **如果无法执行**：请手动统计一下：有多少个 Pod 受影响？它们是否属于同一个 [[entities/deployment.md|Deployment]]/StatefulSet/DaemonSet？是否分布在不同的节点上？
 
 **工程师回复选项**：
@@ -102,10 +107,10 @@ kubectl get pods -n <namespace> -o wide | grep -E "CrashLoopBackOff|Error|OOMKil
 
 **顾问**：退出码 1 表示容器内的应用程序主动退出。请执行以下命令查看应用日志：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name> -n <namespace> --previous --tail=100
 ```
-
 > **如果无法执行 `--previous`**：请尝试 `kubectl logs <pod-name> -n <namespace> --tail=100`。注意：如果 Pod 当前正在运行但即将崩溃，这个命令看到的是当前容器的日志，不是崩溃前的日志。如果日志已经输出到文件系统，请尝试进入节点查看 `/var/log/containers/` 目录下的日志文件。
 > 
 > **如果无法执行 `kubectl logs`**：请检查集群是否配置了日志采集系统（如 Loki、EFK、阿里云 SLS 等），尝试通过日志平台查询该 Pod 的日志。
@@ -119,11 +124,11 @@ kubectl logs <pod-name> -n <namespace> --previous --tail=100
 
 **顾问**：OOMKilled 表示容器使用的内存超过了设定的 limit。请执行以下命令确认内存限制和实际使用：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 2 "Limits"
 kubectl top pod <pod-name> -n <namespace>
 ```
-
 > **如果无法执行 `kubectl top`**：说明集群可能没有安装 metrics-server。请尝试 `kubectl describe node <node-name>`，查看该节点上 Allocated resources 的内存分配情况，并估算该 Pod 的内存 limit 是否合理。
 > 
 > **如果 describe node 也无法执行**：请告诉我节点的规格（CPU/内存总量），以及该 Pod 的 YAML 中 resources.limits.memory 设置的值。
@@ -137,10 +142,10 @@ kubectl top pod <pod-name> -n <namespace>
 
 **顾问**：镜像拉取失败通常与镜像地址、凭证或网络有关。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -i "Failed to pull image|pulling|Back-off"
 ```
-
 > **如果无法执行**：请告诉我 Deployment/StatefulSet 中 `image` 字段的完整值（包含 registry 地址、tag）。同时确认：你们使用的镜像仓库是公网还是私网？是否需要 imagePullSecret？
 
 **工程师回复选项**：
@@ -152,7 +157,8 @@ kubectl describe pod <pod-name> -n <namespace> | grep -i "Failed to pull image|p
 
 **顾问**：如果使用的是阿里云容器镜像服务（ACR），ACK 集群有一些特有诊断维度。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ACR 免密插件状态（ACK默认安装 acr-credential-helper）
 kubectl get pods -n kube-system | grep acr
 
@@ -162,7 +168,6 @@ kubectl get secret -n <namespace> | grep acr
 # 查看 Pod 事件中的 ACR 特有错误
 kubectl describe pod <pod-name> -n <namespace> | grep -i "acr|aliyun|registry"
 ```
-
 > **如果无法执行 kubectl**：请通过以下方式排查：
 > 1. 登录 **阿里云控制台 > 容器镜像服务 ACR**，确认镜像仓库和 tag 是否存在
 > 2. 在 ACK 控制台 **集群信息 > 集群资源** 中确认 **acr-credential-helper** 组件是否正常运行
@@ -170,7 +175,8 @@ kubectl describe pod <pod-name> -n <namespace> | grep -i "acr|aliyun|registry"
 
 **阿里云ACR特有排查**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 验证节点到 ACR 的网络连通性（在节点上执行）
 ssh <node-ip> "curl -I https://registry.<region>.aliyuncs.com/v2/"
 
@@ -180,7 +186,6 @@ ssh <node-ip> "cat /root/.docker/config.json | grep aliyuncs"
 # 检查是否使用了 ACR 镜像加速（ACK Pro集群支持）
 kubectl get configmap -n kube-system ack-acr-acceleration -o yaml 2>/dev/null || echo "未启用镜像加速"
 ```
-
 > **如果无法 SSH**：请登录阿里云控制台，进入 **ACK 控制台 > 集群 > 运维管理 > 节点诊断**，对异常节点执行 **镜像拉取诊断**。
 
 **阿里云ACR常见根因与修复**：
@@ -208,10 +213,10 @@ kubectl get configmap -n kube-system ack-acr-acceleration -o yaml 2>/dev/null ||
 
 **顾问**：Pod 无法调度。请执行以下命令获取调度失败的详细原因：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 ```
-
 > **如果无法执行**：请告诉我当前集群的节点数量、节点规格，以及该 Pod 的 resources.requests 设置。如果使用了节点亲和性或污点，也请一并说明。
 
 **工程师回复选项**：
@@ -223,10 +228,10 @@ kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 
 **顾问**：多个 Pod 同时 CrashLoopBackOff，且属于同一个应用。请先获取该应用的配置：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment <deployment-name> -n <namespace> -o yaml | grep -A 20 "containers:"
 ```
-
 > **如果无法执行**：请告诉我该 Deployment 最近是否有过版本更新？如果有，上一个正常运行的镜像版本号是什么？
 
 **工程师回复选项**：
@@ -238,11 +243,11 @@ kubectl get deployment <deployment-name> -n <namespace> -o yaml | grep -A 20 "co
 
 **顾问**：Pod 集中在同一个节点问题，这提示可能是节点问题。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node <node-name>
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> | grep -E "CrashLoopBackOff|Error|OOMKilled"
 ```
-
 > **如果无法执行 `kubectl describe node`**：请尝试登录该节点执行 `systemctl status kubelet` 和 `docker ps`（或 `crictl ps`），把输出发给我。如果无法登录节点，请检查监控系统中该节点的 CPU、内存、磁盘、网络指标是否有异常。
 
 **工程师回复选项**：
@@ -259,10 +264,10 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> | g
 **顾问**：根因已定位到配置错误。请按以下步骤修复：
 
 **步骤 1**：确认当前配置内容
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get configmap <configmap-name> -n <namespace> -o yaml
 ```
-
 > **如果无法执行**：如果你知道配置错误在哪里，可以直接告诉我需要修改的值，我会帮你生成正确的配置内容。
 
 **步骤 2**：修复配置后重新加载
@@ -270,10 +275,10 @@ kubectl get configmap <configmap-name> -n <namespace> -o yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f <fixed-config.yaml> -n <namespace>
 ```
-
 > **如果无法执行 `kubectl apply`**：请使用 `kubectl edit configmap <configmap-name> -n <namespace>` 手动修改。如果 edit 也无法使用，请告诉我你平时如何修改配置（GitOps？Dashboard？），按你的流程操作即可，修改后告诉我已更新。
 
 **步骤 3**：重启 Pod 使配置生效
@@ -281,10 +286,10 @@ kubectl apply -f <fixed-config.yaml> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ```
-
 > **如果无法执行 rollout restart**：请使用 `kubectl delete pod <pod-name> -n <namespace>` 删除 Pod，让控制器自动重新创建。注意：对于 StatefulSet，建议逐个删除 Pod，等待前一个恢复后再删下一个。
 
 ### 3-B 分支：内存不足（OOMKilled）
@@ -296,17 +301,26 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit deployment <deployment-name> -n <namespace>
 ```
-
 > **如果无法执行 `kubectl edit`**：请准备一个新的 YAML 文件，将 `resources.limits.memory` 增加到合适的值（建议当前值的 1.5-2 倍，但不要超过节点可分配内存的 50%），然后执行 `kubectl apply -f <new-deployment.yaml>`。如果你不确定应该设置多少，请告诉我当前 limit 值和节点总内存，我来帮你计算。
 
 **步骤 2**：观察滚动更新是否成功
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment/<deployment-name> -n <namespace>
 ```
-
 > **如果无法执行 `rollout status`**：请执行 `kubectl get pods -n <namespace> -w` 观察新 Pod 是否成功进入 Running 状态。如果新 Pod 也 OOMKilled，说明内存仍然不够，需要进一步增加。
 
 **步骤 3**：如果节点整体内存不足
@@ -317,18 +331,18 @@ kubectl rollout status deployment/<deployment-name> -n <namespace>
 **顾问**：根因是镜像无法拉取。请按以下步骤排查：
 
 **步骤 1**：确认镜像地址是否正确
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在可以访问镜像仓库的机器上测试拉取
 docker pull <full-image-url>
 ```
-
 > **如果无法执行 `docker pull`**：请用 `crictl pull <full-image-url>` 测试。如果都没有权限执行，请手动在浏览器中访问镜像仓库的 Web UI，确认该 tag 是否存在。或者告诉我镜像地址，我帮你检查是否格式正确。
 
 **步骤 2**：如果是认证问题，检查 imagePullSecret
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get secret -n <namespace> | grep dockerconfigjson
 ```
-
 > **如果无法执行**：请确认你的镜像仓库是否需要认证。如果需要，请检查 Pod 的 spec.imagePullSecrets 是否正确引用了 Secret。如果不知道 Secret 名称，请告诉我你们使用的镜像仓库类型（Harbor? Docker Hub? ECR? ACR?），我来提供对应的配置方式。
 
 **步骤 3**：修复后重新创建 Pod
@@ -336,10 +350,10 @@ kubectl get secret -n <namespace> | grep dockerconfigjson
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl delete pod <pod-name> -n <namespace>
 ```
-
 > **如果删除后新 Pod 仍然 ImagePullBackOff**：请检查新 Pod 的 `image` 字段是否已经更新为正确的地址。如果 Deployment 的 image 是旧的错误地址，需要先修改 Deployment：`kubectl set image deployment/<name> <container>=<correct-image> -n <namespace>`。
 
 ### 3-D 分支：应用依赖未就绪（数据库连接失败等）
@@ -347,19 +361,19 @@ kubectl delete pod <pod-name> -n <namespace>
 **顾问**：根因是应用启动依赖的外部服务不可用。请按以下步骤处理：
 
 **步骤 1**：检查依赖服务状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果依赖服务也在集群内
 kubectl get svc -n <dependency-namespace> | grep <dependency-name>
 kubectl get endpoints <dependency-svc> -n <dependency-namespace>
 ```
-
 > **如果无法执行**：请确认依赖服务（数据库/Redis/Kafka 等）是否部署在同一个集群。如果是外部服务，请从应用节点尝试 `telnet <host> <port>` 或 `nc -vz <host> <port>` 测试连通性。如果连 nc 也没有，请尝试 `curl -v telnet://<host>:<port>`。
 
 **步骤 2**：如果是网络策略或防火墙问题
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n <namespace>
 ```
-
 > **如果无法执行**：请确认你们是否使用了 [[entities/cilium.md|Cilium]] 等网络策略。如果使用了，请检查是否有规则阻止了 Pod 访问依赖服务。如果无法确认，可以暂时将网络策略全部删除测试（仅限测试环境）。
 
 **步骤 3**：临时缓解方案
@@ -370,10 +384,10 @@ kubectl get networkpolicy -n <namespace>
 **顾问**：根因是新版本引入问题。建议立即回滚到上一个稳定版本。
 
 **步骤 1**：查看历史版本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout history deployment/<deployment-name> -n <namespace>
 ```
-
 > **如果无法执行**：请告诉我你记得的上一版本的镜像 tag，或者你们是否使用 GitOps（如 ArgoCD/Flux），可以通过 GitOps 回滚。
 
 **步骤 2**：执行回滚
@@ -381,20 +395,20 @@ kubectl rollout history deployment/<deployment-name> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout undo deployment/<deployment-name> -n <namespace>
 # 或者回滚到指定版本
 kubectl rollout undo deployment/<deployment-name> -n <namespace> --to-revision=<revision-number>
 ```
-
 > **如果无法执行 rollout undo**：请手动修改 Deployment 的 image 字段为上一个稳定版本的镜像地址，然后 `kubectl apply`。如果是 StatefulSet，回滚流程会更复杂，请先告诉我，我提供 StatefulSet 回滚的详细步骤。
 
 **步骤 3**：确认回滚成功
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace>
 kubectl rollout status deployment/<deployment-name> -n <namespace>
 ```
-
 > **回滚后如果仍然 CrashLoopBackOff**：说明问题可能不是版本引起的，请重新检查日志，看是否回滚过程中又触发了其他变更（如 ConfigMap 也被修改了）。
 
 ---
@@ -405,32 +419,32 @@ kubectl rollout status deployment/<deployment-name> -n <namespace>
 
 ### 检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Pod 状态正常
 kubectl get pod <pod-name> -n <namespace>
 ```
-
 > **如果无法执行**：请通过 Dashboard 或其他运维平台确认 Pod 状态。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 2. 确认容器 Ready
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].ready}'
 ```
-
 > **如果无法执行 jsonpath**：请告诉我 `kubectl get pod` 输出中 READY 列的值（如 `1/1` 还是 `0/1`）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 3. 确认重启次数不再增加
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].restartCount}'
 ```
-
 > **如果无法执行**：请等待 2 分钟后再次查看 Pod 状态，确认 Restart Count 是否增加。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 4. 查看最新日志无错误
 kubectl logs <pod-name> -n <namespace> --tail=50
 ```
-
 > **如果无法执行**：如果配置了日志平台，请通过日志平台查看最新 50 条日志。
 
 ---
@@ -476,11 +490,11 @@ kubectl logs <pod-name> -n <namespace> --tail=50
 
 **顾问**：修复后出现新的错误，这可能是修复操作带来的副作用。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -i "warning|error|fail"
 kubectl logs <pod-name> -n <namespace> --tail=100
 ```
-
 > **如果无法执行**：请把你能看到的最新错误信息发给我。
 
 **顾问判断**：
@@ -497,7 +511,8 @@ kubectl logs <pod-name> -n <namespace> --tail=100
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 快速查看 Pod 状态
 kubectl get pods -n <namespace> -o wide
 
@@ -527,7 +542,6 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/sh
 # 如果容器没有 /bin/sh，尝试：
 kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 ```
-
 ---
 
 ## 对话结束语
@@ -544,3 +558,6 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 
 - [[scripts/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
 - [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
+
+
+<!-- risk-assessed -->

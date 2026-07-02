@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 网络基础 Network in a Nutshell
@@ -860,7 +865,8 @@ flowchart LR
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 装工具（macOS，Linux 换成对应包管理器）
 brew install kind kubectl
 
@@ -890,7 +896,6 @@ kubectl port-forward svc/hello 8080:80
 # 10. 玩完清理
 kind delete cluster --name hello
 ```
-
 ```mermaid
 flowchart LR
   Browser["你的浏览器<br/>localhost:8080"] --> PF["kubectl port-forward<br/>(隧道)"]
@@ -905,7 +910,8 @@ flowchart LR
 
 ### 0. 准备环境
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # macOS
 brew install kind kubectl helm
 # 或 Linux
@@ -913,7 +919,6 @@ brew install kind kubectl helm
 
 docker --version && kind --version && kubectl version --client
 ```
-
 ### 1. 创建一个多节点集群（1 control-plane + 2 worker）
 
 新建 `kind-cluster.yaml`：
@@ -939,11 +944,11 @@ nodes:
 
 启动：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kind create cluster --config kind-cluster.yaml
 kubectl get nodes -o wide     # 节点此时是 NotReady（还没 CNI）
 ```
-
 ```mermaid
 flowchart TB
   subgraph Docker["你的宿主机 Docker"]
@@ -963,12 +968,12 @@ flowchart TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 kubectl get nodes -w          # 逐个变 Ready
 kubectl -n kube-system get pod -o wide
 ```
-
 > 想体验 NetworkPolicy/eBPF？把 Flannel 换成 Calico 或 Cilium（见下面 §7）。
 
 ### 3. 验证「模型 ①+②」：Pod 内 & Pod↔Pod
@@ -976,7 +981,8 @@ kubectl -n kube-system get pod -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 起三个 Pod，分散到不同节点
 kubectl create deploy web --image=nginx --replicas=3
 kubectl get pod -o wide       # 记下每个 Pod 的 IP 和所在 Node
@@ -988,16 +994,16 @@ kubectl run tmp --rm -it --image=busybox:1.36 --restart=Never -- sh
 #   wget -qO- <pod-ip-on-other-node>
 #   ping <pod-ip>              # 应全部通
 ```
-
 在宿主机抓包看真相（flannel VXLAN 端口 8472）：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker exec -it net-lab-worker tcpdump -i any -nn udp port 8472 -c 5
 ```
-
 ### 4. 验证「模型 ③」：Pod ↔ Service
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl expose deploy web --port=80 --target-port=80
 
 # 查看 kube-proxy 写入的规则
@@ -1008,7 +1014,6 @@ kubectl run tmp --rm -it --image=busybox:1.36 --restart=Never -- sh
 #   wget -qO- web.default.svc.cluster.local
 #   nslookup web.default.svc.cluster.local
 ```
-
 ### 5. 验证「模型 ④」：外部 → 集群
 
 #### 5.1 NodePort（最朴素）
@@ -1016,7 +1021,8 @@ kubectl run tmp --rm -it --image=busybox:1.36 --restart=Never -- sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch svc web -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePort":30080}]}}'
 
 # kind 节点是 docker 容器，要从宿主机直接到 NodePort，需要 extraPortMappings
@@ -1024,7 +1030,6 @@ kubectl patch svc web -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePo
 kubectl port-forward svc/web 8080:80
 curl http://localhost:8080
 ```
-
 #### 5.2 Ingress（生产标准）
 
 安装 ingress-nginx（已适配 kind）：
@@ -1032,14 +1037,14 @@ curl http://localhost:8080
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
 kubectl wait --namespace ingress-nginx \
   --for=condition=ready pod \
   --selector=app.kubernetes.io/component=controller \
   --timeout=120s
 ```
-
 创建 Ingress：
 
 ```yaml
@@ -1066,11 +1071,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f web-ingress.yaml
 curl http://demo.localtest.me     # 因为 kind 已映射宿主机 80，这里直接通
 ```
-
 完整链路：
 
 ```mermaid
@@ -1089,13 +1094,13 @@ Flannel 不支持策略，删集群换 Calico：
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kind delete cluster --name net-lab
 kind create cluster --config kind-cluster.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
 ```
-
 跑一个"默认拒绝"实验：
 
 ```yaml
@@ -1112,18 +1117,19 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f deny-all.yaml
 # 再去 curl Service，应全部超时
 # 放行特定 label 后再次 curl，应恢复
 ```
-
 ### 7. 进阶：换 Cilium，体验 eBPF + Hubble 可视化
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kind delete cluster --name net-lab
 kind create cluster --config kind-cluster.yaml   # 注意 disableDefaultCNI: true
 
@@ -1138,7 +1144,6 @@ helm install cilium cilium/cilium \
 cilium status --wait
 cilium hubble port-forward &      # 打开 Hubble UI
 ```
-
 ```mermaid
 flowchart LR
   Pods["业务 Pod 流量"] --> EBPF["eBPF 程序<br/>挂在网卡/veth"]
@@ -1322,12 +1327,12 @@ $ ip route get 8.8.8.8
 
 #### 在宿主机（Node）上看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 进入 kind 的 worker 节点
 docker exec -it net-lab-worker bash
 ip route
 ```
-
 你会看到**比普通机器多几条**，这些都是 CNI 插件加的：
 
 ```
@@ -1351,12 +1356,12 @@ flowchart TB
 
 #### 在 Pod 里看
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run tmp --rm -it --image=nicolaka/netshoot --restart=Never -- bash
 # 容器里：
 ip route
 ```
-
 通常你会看到简单得多的一张表：
 
 ```
@@ -1612,3 +1617,6 @@ flowchart LR
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+
+<!-- risk-assessed -->

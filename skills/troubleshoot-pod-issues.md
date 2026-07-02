@@ -32,6 +32,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Troubleshoot Pod Issues
@@ -40,12 +45,12 @@ prerequisites:
 
 ### Step 1: Check Pod Status
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -o wide
 kubectl describe pod <pod-name>
 kubectl get pod <pod-name> -o jsonpath='{.status.conditions}'
 ```
-
 Key indicators:
 - **Phase**: Pending, Running, Failed, Unknown
 - **Conditions**: PodScheduled, Initialized, ContainersReady, Ready
@@ -53,11 +58,11 @@ Key indicators:
 
 ### Step 2: Analyze Events
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> | grep -A5 Events
 kubectl get events --sort-by='.lastTimestamp'
 ```
-
 Common events and their meaning:
 - `FailedScheduling`: No suitable node found (check resources, taints, node selectors)
 - `PullBackOff` / `ErrImagePull`: Image pull failure (check image name, tag, registry credentials)
@@ -65,12 +70,12 @@ Common events and their meaning:
 
 ### Step 3: Check Logs
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name>                    # Current container
 kubectl logs <pod-name> --previous          # Previous crashed container
 kubectl logs <pod-name> -c <container-name> # Specific container
 ```
-
 ### Step 4: Common Issues
 
 | Symptom | Likely Cause | Fix |
@@ -83,10 +88,10 @@ kubectl logs <pod-name> -c <container-name> # Specific container
 
 ### Step 5: Debug with Ephemeral Containers
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl debug -it <pod-name> --image=busybox --target=<container-name>
 ```
-
 ## JVM-Specific Guidance
 
 For Java applications in containers:
@@ -107,3 +112,6 @@ For Java applications in containers:
 - [[skills/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
 - [[concepts/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+
+
+<!-- risk-assessed -->

@@ -48,6 +48,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: GitOps/DevOps 故障排查指南
@@ -134,7 +139,8 @@ k8s_versions:
 
 ### GitOps 状态检查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ArgoCD 状态检查
 echo "=== ArgoCD 状态检查 ==="
 kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-application-controller
@@ -157,7 +163,6 @@ echo "=== CI/CD 流水线状态 ==="
 kubectl get pipelineruns,taskruns -A 2>/dev/null || echo "Tekton 未部署"
 # 或者检查 Jenkins/GitLab CI 等其他 CI 系统状态
 ```
-
 ## 排查方法与步骤
 
 ### 诊断原理说明
@@ -173,6 +178,7 @@ GitOps 故障诊断需要从以下几个维度进行分析：
 ### GitOps 问题诊断决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 GitOps 问题
     ├── Git 仓库连接问题
     │   ├── SSH 密钥配置
@@ -195,12 +201,12 @@ GitOps 问题
         ├── 资源配额限制
         └── 执行环境状态
 ```
-
 ### 详细诊断命令
 
 #### ArgoCD 故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ArgoCD 故障诊断脚本
 
@@ -262,10 +268,10 @@ kubectl get configmap argocd-rbac-cm -n argocd -o yaml 2>/dev/null || echo "RBAC
 echo "6. 证书和 TLS 配置检查:"
 kubectl get secrets -n argocd -l argocd.argoproj.io/secret-type=repo-creds 2>/dev/null
 ```
-
 #### FluxCD 故障诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # FluxCD 故障诊断脚本
 
@@ -328,13 +334,13 @@ kubectl get kustomizations -A -o json | jq -r '
   (.spec.dependsOn[] | "  - \(.namespace // "default")/\(.name)")
 '
 ```
-
 #### CI/CD 流水线诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # CI/CD 流水线诊断脚本
 
@@ -387,10 +393,10 @@ kubectl get eventlisteners -A 2>/dev/null
 # 检查 Ingress/Webhook 配置
 kubectl get ingresses -A | grep -i webhook 2>/dev/null
 ```
-
 #### Secret 管理诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Secret 管理诊断脚本
 
@@ -449,7 +455,6 @@ kubectl get secrets --all-namespaces -o json | jq -r '
   "\(.metadata.namespace)/\(.metadata.name): \($size) bytes"
 '
 ```
-
 ## 解决方案与风险控制
 
 ### ArgoCD 问题解决
@@ -854,7 +859,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Sealed Secrets 配置脚本
 
@@ -897,7 +903,6 @@ echo "4. 验证加密结果:"
 kubectl apply -f sealed-secret.yaml
 kubectl get sealedsecret my-sensitive-data -n prod
 ```
-
 ### 安全生产风险提示
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
@@ -911,7 +916,8 @@ kubectl get sealedsecret my-sensitive-data -n prod
 
 ### GitOps 验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # GitOps 验证脚本
 
@@ -977,7 +983,6 @@ fi
 
 echo "GitOps 验证完成！"
 ```
-
 ### GitOps 监控告警配置
 
 ```yaml
@@ -1109,7 +1114,8 @@ gitopsBestPractices:
 
 ### CI/CD 流水线最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # CI/CD 流水线最佳实践检查脚本
 
@@ -1161,7 +1167,6 @@ BEST_PRACTICES_REPORT="/var/log/kubernetes/cicd-best-practices-$(date +%Y%m%d).l
 
 echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 ```
-
 ### 典型问题案例
 
 ### 案例一：ArgoCD 应用持续 OutOfSync
@@ -1216,3 +1221,5 @@ echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

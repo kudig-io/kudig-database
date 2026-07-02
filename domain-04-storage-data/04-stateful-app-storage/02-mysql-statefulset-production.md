@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # MySQL StatefulSet 生产部署指南
@@ -268,17 +273,18 @@ StatefulSet 启动后，每个 MySQL 实例都是独立的。需要手动或通�
 
 在配置复制之前，先查看 Pod 的有序网络标识，确认所有 Pod 已正常启动：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 MySQL Pod 的有序网络标识
 kubectl get pods -n production -l app=mysql -o wide
 ```
-
 将 `mysql-0` 作为主库，在其上创建复制用户：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在主库创建复制用户
 kubectl exec -it mysql-0 -n production -- mysql -uroot -p$ROOT_PWD -e "
 CREATE USER IF NOT EXISTS 'repl'@'%' IDENTIFIED WITH mysql_native_password BY '$REPL_PWD';
@@ -286,13 +292,13 @@ GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
 FLUSH PRIVILEGES;
 "
 ```
-
 然后在从库上配置主从复制。以 `mysql-1` 为例：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在从库配置主从复制（以 mysql-1 为例）
 kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "
 CHANGE MASTER TO
@@ -304,7 +310,6 @@ CHANGE MASTER TO
 START SLAVE;
 "
 ```
-
 ### 3.2 验证复制状态
 
 复制配置完成后，需要在从库上验证复制线程状态。以下命令可以检查 IO 线程和 SQL 线程是否正常运行，以及从库延迟情况：
@@ -312,11 +317,11 @@ START SLAVE;
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在从库查看 Slave_IO_Running 与 Slave_SQL_Running 是否为 Yes
 kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "SHOW SLAVE STATUS\G"
 ```
-
 关键字段检查：
 
 | 字段 | 期望值 | 说明 |
@@ -399,12 +404,12 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 每日归档 binlog 到 OSS，用于按时间点恢复
 kubectl exec -it mysql-0 -n production -- mysql -uroot -p$ROOT_PWD -e "FLUSH BINARY LOGS"
 ossutil cp -r /var/lib/mysql/mysql-bin.* oss://db-backup-bucket/mysql/binlog/
 ```
-
 ### 4.3 备份策略建议
 
 | 备份类型 | 频率 | 保留周期 | 存储位置 | 用途 |
@@ -425,7 +430,8 @@ ossutil cp -r /var/lib/mysql/mysql-bin.* oss://db-backup-bucket/mysql/binlog/
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 mysql-1 数据已同步完成
 kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "SHOW SLAVE STATUS\G" | grep Seconds_Behind_Master
 
@@ -435,7 +441,6 @@ kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "STOP SLAV
 # 3. 修改应用连接地址指向 mysql-1
 kubectl patch service mysql-write -n production -p '{"spec":{"selector":{"statefulset.kubernetes.io/pod-name":"mysql-1"}}}'
 ```
-
 ### 5.2 自动化故障切换
 
 手动切换在大规模生产环境中容易出错，建议结合 MySQL Operator（如 Oracle MySQL Operator 或 Percona XtraDB Cluster Operator）实现自动故障检测与切换。自动切换方案需要满足以下条件：
@@ -547,11 +552,11 @@ spec:
 
 排查命令：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod mysql-0 -n production
 kubectl logs mysql-0 -n production --previous
 ```
-
 ### 8.2 复制中断
 
 常见原因包括：
@@ -564,14 +569,14 @@ kubectl logs mysql-0 -n production --previous
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看具体错误
 kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "SHOW SLAVE STATUS\G" | grep -E "Last_.*_Error"
 
 # 若 GTID 一致，可尝试跳过错误事务后重新同步
 kubectl exec -it mysql-1 -n production -- mysql -uroot -p$ROOT_PWD -e "STOP SLAVE; SET GTID_NEXT='xxx'; BEGIN; COMMIT; SET GTID_NEXT='AUTOMATIC'; START SLAVE;"
 ```
-
 ### 8.3 磁盘空间不足
 
 MySQL 运行过程中 binlog、慢查询日志和临时文件可能快速增长。建议：
@@ -642,3 +647,6 @@ MySQL 运行过程中 binlog、慢查询日志和临时文件可能快速增长�
 
 - [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
+
+
+<!-- risk-assessed -->

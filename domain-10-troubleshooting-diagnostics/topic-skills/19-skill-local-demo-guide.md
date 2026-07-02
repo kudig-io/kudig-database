@@ -46,6 +46,11 @@ k8s_versions:
 - 1.32.x
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[SKILL|Skill]] 本地运行 Demo 指南
@@ -88,12 +93,12 @@ topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断
 
 ### 2.3 验证安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker version           # Docker 运行中
 kind version             # kind 已安装
 kubectl version --client # kubectl 已安装
 ```
-
 ---
 
 ## 3. 快速开始
@@ -287,7 +292,8 @@ Demo 的场景 01（节点 Cordon）完整映射到 [k8s-node-notready/](./skill
 
 ### Q: Kind 集群创建失败？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认 Docker 正在运行
 docker info
 
@@ -295,12 +301,12 @@ docker info
 kind delete cluster --name skill-demo
 bash setup-kind-cluster.sh
 ```
-
 ### Q: Pod 镜像拉取慢？
 
 Kind 集群需要从互联网拉取镜像。如果网络慢，可以：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 预加载镜像到 Kind 节点
 docker pull nginx:1.27-alpine
 kind load docker-image nginx:1.27-alpine --name skill-demo
@@ -308,7 +314,6 @@ kind load docker-image nginx:1.27-alpine --name skill-demo
 docker pull busybox:1.36
 kind load docker-image busybox:1.36 --name skill-demo
 ```
-
 ### Q: 如何修改集群的 K8s 版本？
 
 ```bash
@@ -340,3 +345,6 @@ KIND_IMAGE=kindest/node:v1.30.6 bash setup-kind-cluster.sh
 | IDE Skill 示例 | [k8s-node-notready/](./skill-set/k8s-node-notready/) | 完整 IDE 格式 Skill |
 | Skills 索引 | [README.md](./README.md) | Skill 库总索引 |
 | FTA 故障树 | [../domain-10-troubleshooting-diagnostics/topic-fta/](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障分析模型 |
+
+
+<!-- risk-assessed -->

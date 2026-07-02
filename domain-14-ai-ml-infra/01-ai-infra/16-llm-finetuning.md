@@ -60,6 +60,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 143 - LLM微调技术与实践 (LLM Fine-tuning Techniques & Practices)
@@ -1070,7 +1075,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看训练状态
 kubectl logs -f job/lora-training -n ml-training
 
@@ -1085,7 +1091,6 @@ model = PeftModel.from_pretrained(base_model, "path/to/lora")
 merged_model = model.merge_and_unload()
 merged_model.save_pretrained("merged_model")
 ```
-
 ---
 
 **微调最佳实践**: 从QLoRA开始 → 验证效果后升级LoRA → 必要时Full FT → 持续评估
@@ -1118,3 +1123,6 @@ merged_model.save_pretrained("merged_model")
 - 15-llm-data-pipeline
 - 17-llm-inference-serving
 - 18-llm-serving-architecture
+
+
+<!-- risk-assessed -->

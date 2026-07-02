@@ -66,6 +66,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 37 - 多集群管理故障排查 (Multi-Cluster Management Troubleshooting)
@@ -88,6 +93,7 @@ cross_refs:
 ### 1.2 多集群架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    多集群管理故障诊断架构                                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -148,7 +154,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 集群连接和认证故障排查 (Cluster Connection and Authentication Issues) -->
@@ -156,7 +161,8 @@ cross_refs:
 
 ### 2.1 集群连接状态检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 多集群连接验证 ==========
 # 检查当前上下文
 kubectl config current-context
@@ -257,14 +263,14 @@ EOF
 
 chmod +x cross-cluster-network-test.sh
 ```
-
 ### 2.2 身份认证和授权问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 认证配置检查 ==========
 # 检查kubeconfig配置
 kubectl config view --raw
@@ -332,7 +338,6 @@ kubectl get secret $TOKEN_SECRET -n <namespace> -o jsonpath='{.data.token}' | ba
 kubectl delete secret $TOKEN_SECRET -n <namespace>
 kubectl create serviceaccount default -n <namespace> --save-config=false
 ```
-
 ---
 
 <!-- chunk: 3. 资源同步和联邦控制故障排查 (Resource Sync and Federation Control Issues) -->
@@ -340,7 +345,8 @@ kubectl create serviceaccount default -n <namespace> --save-config=false
 
 ### 3.1 联邦控制器状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 联邦控制器验证 ==========
 # 检查联邦控制器部署
 kubectl get deployments -n federation-system
@@ -406,13 +412,22 @@ EOF
 
 chmod +x sync-latency-monitor.sh
 ```
-
 ### 3.2 联邦资源配置问题
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl cordon`：标记节点不可调度
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 配置模板验证 ==========
 # 检查联邦资源配置
 kubectl get federatedtypesconfigs -n federation-system
@@ -476,7 +491,6 @@ EOF
 
 chmod +x failover-test.sh
 ```
-
 ---
 
 <!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[domain-17-system-foundation/topic-dictionary/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[Service|Service]] Discovery Issues) -->
@@ -488,7 +502,8 @@ chmod +x failover-test.sh
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. DNS配置验证 ==========
 # 检查集群DNS配置
 for context in $(kubectl config get-contexts -o name); do
@@ -585,7 +600,6 @@ EOF
 
 chmod +x network-connectivity-test.sh
 ```
-
 ### 4.2 负载均衡和服务网格问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -593,7 +607,8 @@ chmod +x network-connectivity-test.sh
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 负载均衡器状态 ==========
 # 检查跨集群负载均衡
 kubectl get services -A --context=<context> | grep LoadBalancer
@@ -683,7 +698,6 @@ EOF
 
 chmod +x mesh-connectivity-test.sh
 ```
-
 ---
 
 <!-- chunk: 5. 监控和告警配置 (Monitoring and Alerting Configuration) -->
@@ -694,7 +708,8 @@ chmod +x mesh-connectivity-test.sh
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控配置 ==========
 # 创建多集群Prometheus配置
 cat <<EOF | kubectl apply -f -
@@ -773,13 +788,13 @@ spec:
     readRecent: true
 EOF
 ```
-
 ### 5.2 多集群告警规则
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 跨集群告警规则 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -900,7 +915,6 @@ spec:
           restartPolicy: OnFailure
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 灾难恢复和故障转移 (Disaster Recovery and Failover) -->
@@ -911,7 +925,17 @@ EOF
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 多集群备份配置 ==========
 # 创建备份脚本
 cat <<'EOF' > multi-cluster-backup.sh
@@ -1023,7 +1047,6 @@ EOF
 
 chmod +x restore-validation.sh
 ```
-
 ### 6.2 自动故障转移配置
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -1031,7 +1054,17 @@ chmod +x restore-validation.sh
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 故障检测和转移控制器 ==========
 # 创建自动故障转移控制器
 cat <<'EOF' > failover-controller.yaml
@@ -1192,7 +1225,6 @@ EOF
 
 chmod +x cluster-failover.sh
 ```
-
 ---
 
 ---
@@ -1222,3 +1254,6 @@ chmod +x cluster-failover.sh
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/39-enterprise-monitoring-alerting-system.md|39-enterprise-monitoring-alerting-system]]
+
+
+<!-- risk-assessed -->

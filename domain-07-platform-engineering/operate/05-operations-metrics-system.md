@@ -59,6 +59,11 @@ cross_refs:
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 运维指标体系建设 (Operations Metrics System)
@@ -613,7 +618,8 @@ capacity_planning_indicators:
 ```
 
 ### 2. 故障排查指标
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 故障排查指标检查脚本
 
@@ -644,7 +650,6 @@ troubleshooting_checklist() {
 
 troubleshooting_checklist
 ```
-
 ### 3. 性能优化指标
 ```yaml
 performance_optimization_metrics:
@@ -786,3 +791,6 @@ metrics_system_checklist
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

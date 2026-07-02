@@ -36,6 +36,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 14: K8S 集群配额 & License
@@ -164,7 +169,8 @@ tags: [week-2, day-14, quota, resource, limitrange, k8s, k8s-1.28-1.33]
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create namespace quota-test
 
 cat > resource-quota.yaml << 'EOF'
@@ -194,13 +200,12 @@ EOF
 
 kubectl apply -f resource-quota.yaml
 ```
-
 #### 1.2 查看配额使用情况
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe resourcequota team-quota -n quota-test
 ```
-
 示例输出:
 
 ```
@@ -223,7 +228,8 @@ services         0      10
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment 消耗资源
 cat > quota-test-deploy.yaml << 'EOF'
 apiVersion: apps/v1
@@ -261,7 +267,6 @@ kubectl describe resourcequota team-quota -n quota-test
 # requests.memory: 1536Mi / 8Gi
 # pods: 3 / 20
 ```
-
 ---
 
 ### 任务 2: LimitRange 配置 (45min)
@@ -271,7 +276,8 @@ kubectl describe resourcequota team-quota -n quota-test
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > limit-range.yaml << 'EOF'
 apiVersion: v1
 kind: LimitRange
@@ -312,7 +318,6 @@ kubectl apply -f limit-range.yaml
 # 查看 LimitRange
 kubectl describe limitrange default-limits -n quota-test
 ```
-
 示例输出:
 
 ```
@@ -329,7 +334,8 @@ PVC         storage   1Gi   50Gi -                -              -
 
 #### 2.2 测试默认值注入
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建不带 resources 的 Pod
 kubectl run test-limit --image=nginx:alpine -n quota-test
 
@@ -343,13 +349,13 @@ kubectl get pod test-limit -n quota-test -o yaml | grep -A 10 resources
 #     cpu: 100m
 #     memory: 128Mi
 ```
-
 #### 2.3 测试超限拒绝
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建超出最大限制的 Pod
 cat > over-limit-pod.yaml << 'EOF'
 apiVersion: v1
@@ -372,12 +378,12 @@ kubectl apply -f over-limit-pod.yaml
 # pods "over-limit" is forbidden: [maximum cpu per Pod is 4, but request is 3
 # maximum memory per Container is 4Gi, but request is 8Gi]
 ```
-
 ---
 
 ### 任务 3: ACK 集群配额检查 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== ACK 集群配额检查 =========="
 
 echo "--- 1. 节点 Pod 容量 ---"
@@ -406,7 +412,6 @@ kubectl cluster-info dump 2>/dev/null | grep service-cluster-ip-range || echo "�
 echo ""
 echo "========== 检查完毕 =========="
 ```
-
 ACK 集群级配额参考:
 
 | 配额项 | 托管版默认 | 说明 |
@@ -438,7 +443,17 @@ ACK 集群级配额参考:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建团队 Namespace + ResourceQuota + LimitRange
 for team in dev test prod; do
   # 创建 Namespace
@@ -506,7 +521,6 @@ done
 # 清理
 # kubectl delete namespace quota-test team-dev team-test team-prod  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -602,7 +616,8 @@ spec:
 
 ### Q1: Pod 创建报 "exceeded quota" 怎么办？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Namespace 配额使用
 kubectl describe resourcequota -n <namespace>
 
@@ -611,7 +626,6 @@ kubectl describe resourcequota -n <namespace>
 # - Pod 数量已达上限
 # - PVC 数量已达上限
 ```
-
 ### Q2: LimitRange 的 default 和 defaultRequest 有什么区别？
 
 - `default`: 容器未设置 limits 时自动注入的 limits 值
@@ -619,10 +633,10 @@ kubectl describe resourcequota -n <namespace>
 
 ### Q3: 如何查看 Pod 的 QoS 等级？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 ```
-
 ---
 
 ## 要点总结
@@ -655,3 +669,6 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 - [配额排障](../../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md)
 - [K8s Resource Quota 文档](https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
 - [K8s Limit Range 文档](https://kubernetes.io/docs/concepts/policy/limit-range/)
+
+
+<!-- risk-assessed -->

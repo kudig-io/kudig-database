@@ -39,6 +39,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # HPA 与 VPA 自动扩缩容故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, metrics-server v0.6+ | **最后更新**: 2026-01 | **难度**: 中级-高级
@@ -185,6 +190,7 @@ HPA 扩缩容决策流程
 ### 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 HPA/VPA 问题
      │
      ├─── HPA 显示 `<unknown>`？
@@ -219,12 +225,12 @@ HPA/VPA 问题
                ├─ 证书问题 ──→ 检查 --kubelet-insecure-tls
                └─ 资源不足 ──→ 检查 metrics-server 资源使用
 ```
-
 ### 排查命令集
 
 #### HPA 基础检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 HPA 状态
 kubectl get hpa -o wide
 
@@ -240,10 +246,10 @@ kubectl get events --field-selector involvedObject.kind=HorizontalPodAutoscaler
 # 检查目标工作负载
 kubectl get deployment <name> -o jsonpath='{.spec.replicas}'
 ```
-
 #### metrics-server 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 metrics-server 状态
 kubectl get pods -n kube-system -l k8s-app=metrics-server
 
@@ -261,10 +267,10 @@ kubectl top pods
 # 检查 API 服务注册
 kubectl get apiservices | grep metrics
 ```
-
 #### 自定义指标检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 custom metrics API
 kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1" | jq
 
@@ -275,10 +281,10 @@ kubectl get --raw "/apis/custom.metrics.k8s.io/v1beta1/namespaces/<ns>/pods/*/re
 kubectl get pods -n monitoring -l app=prometheus-adapter
 kubectl logs -n monitoring -l app=prometheus-adapter
 ```
-
 #### VPA 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 VPA 状态
 kubectl get vpa -o wide
 
@@ -297,7 +303,6 @@ kubectl logs -n kube-system -l app=vpa-recommender
 # 查看 VPA Updater 日志
 kubectl logs -n kube-system -l app=vpa-updater
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 |
@@ -318,15 +323,16 @@ kubectl logs -n kube-system -l app=vpa-updater
 #### 场景 1：HPA 显示 `<unknown>`
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get hpa
 NAME      REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 myapp     Deployment/myapp     `<unknown>`/50%   1         10        1          5m
 ```
-
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 metrics-server 状态
 kubectl get pods -n kube-system -l k8s-app=metrics-server
 kubectl logs -n kube-system -l k8s-app=metrics-server
@@ -355,12 +361,12 @@ kubectl patch deployment <name> --type='json' -p='[
 # 5. 等待 Pod 重建后再次检查 HPA
 kubectl get hpa -w
 ```
-
 #### 场景 2：修复 metrics-server
 
 **常见问题及解决：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 问题 1: metrics-server 无法启动 (证书问题)
 # 解决: 添加 --kubelet-insecure-tls 参数
 kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
@@ -384,7 +390,6 @@ kubectl patch deployment metrics-server -n kube-system --type='json' -p='[
 kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
-
 ---
 
 ### HPA 扩缩容问题
@@ -396,7 +401,8 @@ CPU 使用率超过目标但副本数不增加
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 HPA 状态和条件
 kubectl describe hpa <name>
 
@@ -433,12 +439,12 @@ kubectl top pods -l <selector>
 # 5. 手动计算期望副本数
 # desiredReplicas = currentReplicas * (currentMetric / targetMetric)
 ```
-
 #### 场景 2：HPA 不缩容
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查缩容稳定窗口
 kubectl get hpa <name> -o jsonpath='{.spec.behavior.scaleDown.stabilizationWindowSeconds}'
 # 默认是 300 秒 (5 分钟)
@@ -465,7 +471,6 @@ kubectl patch hpa <name> --type='json' -p='[
 # 5. 验证当前指标确实低于目标
 kubectl top pods -l <selector>
 ```
-
 #### 场景 3：HPA 扩容振荡
 
 **问题现象：**
@@ -473,7 +478,8 @@ kubectl top pods -l <selector>
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查事件历史
 kubectl describe hpa <name> | grep -A20 Events
 
@@ -509,7 +515,6 @@ kubectl patch hpa <name> --type='json' -p='[
   {"op": "replace", "path": "/spec/metrics/0/resource/target/averageUtilization", "value": 70}
 ]'
 ```
-
 ---
 
 ### VPA 问题排查
@@ -517,15 +522,16 @@ kubectl patch hpa <name> --type='json' -p='[
 #### 场景 1：VPA 无推荐值
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe vpa myapp-vpa
 Status:
   Recommendation:  # 空的
 ```
-
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 VPA Recommender 状态
 kubectl get pods -n kube-system -l app=vpa-recommender
 kubectl logs -n kube-system -l app=vpa-recommender
@@ -546,7 +552,6 @@ kubectl get vpa <name> -o jsonpath='{.spec.resourcePolicy}'
 # 6. 如果 Recommender 有问题，重启
 kubectl rollout restart deployment vpa-recommender -n kube-system
 ```
-
 #### 场景 2：VPA 不更新 Pod
 
 **问题现象：**
@@ -554,7 +559,8 @@ VPA 有推荐值但 Pod 资源未更新
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 updateMode
 kubectl get vpa <name> -o jsonpath='{.spec.updatePolicy.updateMode}'
 
@@ -579,12 +585,12 @@ kubectl delete pod <pod-name>
 # 5. 验证新 Pod 的资源配置
 kubectl get pod <new-pod-name> -o jsonpath='{.spec.containers[*].resources}'
 ```
-
 #### 场景 3：VPA 与 HPA 冲突
 
 **解决方案：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: HPA 使用 CPU，VPA 只管理内存
 # VPA 配置
 cat <<EOF | kubectl apply -f -
@@ -615,7 +621,6 @@ kubectl patch vpa <name> --type='json' -p='[
 # 方案 3: HPA 使用自定义指标，VPA 管理 CPU/内存
 # HPA 配置使用 requests_per_second 等业务指标
 ```
-
 ---
 
 ### 完整的 HPA 配置示例
@@ -719,7 +724,8 @@ spec:
 
 ### 监控和告警
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控 HPA 状态
 kubectl get hpa -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.currentReplicas}{"\t"}{.status.desiredReplicas}{"\n"}{end}'
 
@@ -750,7 +756,6 @@ groups:
       summary: "HPA {{ \$labels.horizontalpodautoscaler }} 扩缩容失效"
 EOF
 ```
-
 ---
 
 ### 安全生产风险提示
@@ -770,7 +775,8 @@ EOF
 
 ### 常用排查命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # HPA 检查
 kubectl get hpa -o wide
 kubectl describe hpa <name>
@@ -789,7 +795,6 @@ kubectl get pods -n kube-system | grep vpa
 # 手动扩缩容 (调试用)
 kubectl scale deployment <name> --replicas=<n>
 ```
-
 ### 相关文档
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
@@ -802,3 +807,6 @@ kubectl scale deployment <name> --replicas=<n>
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

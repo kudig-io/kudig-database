@@ -43,6 +43,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: API 优先级与公平性 (APF) 故障排查指南
@@ -216,6 +221,7 @@ k8s_versions:
 ### 2.1 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 APF 问题
     │
     ▼
@@ -282,12 +288,12 @@ APF 问题
                                                        │ 完成       │
                                                        └────────────┘
 ```
-
 ### 2.2 排查命令集
 
 #### APF 资源检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 FlowSchema
 kubectl get flowschema
 kubectl get flowschema -o wide
@@ -306,10 +312,10 @@ kubectl describe prioritylevelconfiguration <name>
 kubectl get flowschema <name> -o yaml
 kubectl get prioritylevelconfiguration <name> -o yaml
 ```
-
 #### APF 指标检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从 API Server 获取 APF 指标
 kubectl get --raw /metrics | grep apiserver_flowcontrol
 
@@ -327,10 +333,10 @@ kubectl get --raw /metrics | grep 'apiserver_flowcontrol_rejected_requests_total
 # 查看各优先级的执行情况
 kubectl get --raw /metrics | grep 'apiserver_flowcontrol_current_executing_requests'
 ```
-
 #### 调试 API
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前请求会匹配哪个 FlowSchema (调试)
 # 需要开启 API Server 的调试端点
 
@@ -340,7 +346,6 @@ kubectl get flowschema | grep -v "^NAME"
 # 检查系统级别的配置
 kubectl get flowschema -o json | jq '.items[] | {name: .metadata.name, priority: .spec.matchingPrecedence, plc: .spec.priorityLevelConfiguration.name}'
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
@@ -358,7 +363,8 @@ kubectl get flowschema -o json | jq '.items[] | {name: .metadata.name, priority:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 确认哪些请求被限流
 kubectl get --raw /metrics | grep 'apiserver_flowcontrol_rejected_requests_total' | grep -v "^#"
 
@@ -376,7 +382,6 @@ kubectl get prioritylevelconfiguration workload-low -o yaml
 # 方案 2: 增加队列长度
 # 方案 3: 将请求分配到更高优先级
 ```
-
 **调整优先级配置示例**：
 
 ```yaml
@@ -463,7 +468,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查系统组件的 FlowSchema
 kubectl get flowschema | grep -E "system|leader|workload"
 
@@ -478,7 +484,6 @@ kubectl get flowschema -o name | grep -v "system|exempt|catch-all" | xargs kubec
 # 步骤 4: 确保系统优先级配置正确
 kubectl get prioritylevelconfiguration
 ```
-
 **系统默认优先级顺序**：
 
 ```
@@ -496,7 +501,8 @@ global-default  - 默认兜底
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 查看 APF 分派指标
 kubectl get --raw /metrics | grep 'apiserver_flowcontrol_dispatched_requests_total' | head -20
 
@@ -513,7 +519,6 @@ kubectl get --raw /metrics | grep 'apiserver_flowcontrol_dispatched_requests_tot
 # 步骤 4: 检查 FlowSchema 匹配规则
 kubectl get flowschema -o json | jq '.items[] | {name: .metadata.name, precedence: .spec.matchingPrecedence, rules: .spec.rules}'
 ```
-
 ### 3.5 调整并发限制
 
 **问题现象**：需要增加整体或特定优先级的并发处理能力。
@@ -523,7 +528,17 @@ kubectl get flowschema -o json | jq '.items[] | {name: .metadata.name, precedenc
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 了解当前配置
 kubectl get prioritylevelconfiguration -o custom-columns=\
 NAME:.metadata.name,\
@@ -540,7 +555,6 @@ SHARES:.spec.limited.nominalConcurrencyShares
 # 步骤 3: 调整配置
 kubectl edit prioritylevelconfiguration workload-high
 ```
-
 **调整示例**：
 
 ```yaml
@@ -575,7 +589,17 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 检查队列状态指标
 kubectl get --raw /metrics | grep 'apiserver_flowcontrol_request_queue_length'
 
@@ -585,7 +609,6 @@ kubectl get prioritylevelconfiguration <name> -o jsonpath='{.spec.limited.limitR
 # 步骤 3: 调整队列参数
 kubectl edit prioritylevelconfiguration <name>
 ```
-
 **队列配置优化**：
 
 ```yaml
@@ -656,7 +679,8 @@ groups:
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== APF 一键诊断脚本 =====
 
 echo "=== FlowSchema 列表 ==="
@@ -684,7 +708,6 @@ echo -e "\n=== 请求分派统计 (Top 10) ==="
 kubectl get --raw /metrics 2>/dev/null | grep 'apiserver_flowcontrol_dispatched_requests_total' | \
   grep -oP 'flow_schema="[^"]+' | sort | uniq -c | sort -rn | head -10
 ```
-
 ### 附录：默认 APF 配置
 
 ```yaml
@@ -778,3 +801,6 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+
+
+<!-- risk-assessed -->

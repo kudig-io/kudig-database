@@ -33,6 +33,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 12: K8S 集群审计
@@ -168,7 +173,8 @@ K8S 定义了四个审计级别，从低到高记录的信息详细程度递增�
 
 ### 任务 1: 审计日志配置 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 ACK 集群审计配置
 aliyun cs GET /clusters/<cluster_id> | jq '.meta_data' | jq -r . | jq '.AuditProjectName'
 
@@ -197,7 +203,6 @@ kubectl get events -A --sort-by='.lastTimestamp' | tail -20
 kubectl get pods -n kube-system -l component=kube-apiserver -o yaml | grep -A 10 "audit"
 # 在 ACK 托管版中，审计配置由阿里云管理
 ```
-
 ### 任务 2: 审计日志查询 (45min)
 
 ```bash
@@ -474,3 +479,6 @@ rules:
 ## 明日预告
 
 Day 13 将学习集群监控体系搭建与告警配置。
+
+
+<!-- risk-assessed -->

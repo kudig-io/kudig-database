@@ -40,6 +40,11 @@ prerequisites:
 - redis-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 企业级实战案例
@@ -577,6 +582,7 @@ class K8sManifestReviewer:
 ## 4.2 规避的关键失败模式
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 失败模式1: "全部自动化" 的冒进设计
   问题: 初期直接部署全自动修复，绕过人工审批
   后果: Agent 错误判断导致生产事故，反而延长了 MTTR
@@ -597,7 +603,6 @@ class K8sManifestReviewer:
   后果: Agent 声称执行了 kubectl 命令但其实工具调用失败，错误地告知用户"已修复"
   正确做法: 工具调用结果必须验证，最终状态要通过工具实际确认而非 LLM 描述
 ```
-
 ## 4.3 企业 Agent 项目立项参考
 
 ```
@@ -702,3 +707,6 @@ Phase 4: Mature（持续）
 - 11-cost-latency-optimization
 - 13-trusted-agent-system-fiscal-plan
 - 14-agent-kudig-design-strategy
+
+
+<!-- risk-assessed -->

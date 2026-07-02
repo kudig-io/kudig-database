@@ -65,6 +65,11 @@ cross_refs:
   label: '速查卡: git'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Flux|Flux]] GitOps 实践指南
@@ -144,6 +149,7 @@ graph TB
 ## 2.2 组件职责
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Flux 核心组件
 ├── Source Controller
 │   ├── GitRepository     ← 从 Git 拉取清单
@@ -161,7 +167,6 @@ Flux 核心组件
 ├── Notification Controller ← 事件 Webhook 通知
 └── RBAC / ServiceAccount   ← 多租户权限隔离
 ```
-
 ---
 
 <!-- chunk: 三、Bootstrap 部署 -->## 三、Bootstrap 部署
@@ -399,7 +404,8 @@ spec:
 
 ## 5.1 SOPS 密钥加密
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 SOPS 加密 Secret
 sops --encrypt --kms arn:aws:kms:us-east-1:123456789012:key/xxx \
   secret.yaml > secret.enc.yaml
@@ -407,7 +413,6 @@ sops --encrypt --kms arn:aws:kms:us-east-1:123456789012:key/xxx \
 # Flux 原生解密配置
 # 在 Kustomization 中启用解密
 ```
-
 ```yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -641,7 +646,8 @@ spec:
 
 <!-- chunk: 九、故障排查 -->## 九、故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Flux 全局状态检查
 flux check
 flux get all -A
@@ -666,7 +672,6 @@ flux reconcile helmrelease <name> --force
 flux get alerts -A
 flux get providers -A
 ```
-
 ```yaml
 常见问题:
   Kustomization 同步失败:
@@ -846,7 +851,8 @@ spec:
 
 Flux 的灾难恢复策略以 Git 仓库为核心。只要 Git 仓库存在，就可以在任何新的 Kubernetes 集群上重新引导 Flux 并恢复所有配置。建议定期备份 Flux 的 CRD 和 Secret，并将 Flux 自身的配置也纳入 GitOps 管理。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Flux 灾难恢复步骤
 # 1. 在新集群上引导 Flux
 flux bootstrap github \
@@ -865,7 +871,6 @@ flux reconcile kustomization flux-system --with-source
 # 4. 验证应用健康
 kubectl get all -A | grep -E "Running|Completed"
 ```
-
 ---
 
 <!-- chunk: 十二、Flux 与 Terraform 集成 -->## 十二、Flux 与 Terraform 集成
@@ -1103,3 +1108,6 @@ Flux 生产环境部署检查清单:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

@@ -38,6 +38,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # JVM GC 容器调优深度指南
@@ -596,6 +601,7 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 症状: Pod 状态为 OOMKilled, lastState.terminated.reason = "OOMKilled"
 原因: JVM 堆 + 非堆内存总和超过 limits.memory
 
@@ -617,13 +623,13 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    b. 增大 limits.memory
    c. 限制非堆内存: -XX:MaxMetaspaceSize=128m -XX:MaxDirectMemorySize=64m
 ```
-
 #### 场景二：Metaspace 泄漏
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 症状: 容器内存持续增长，最终 OOMKilled
 原因: Metaspace 无上限（默认无限制），类加载器泄漏
 
@@ -642,13 +648,13 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    b. 排查动态代理/反射导致的类泄漏
    c. 检查 Spring Boot DevTools 是否在生产环境禁用
 ```
-
 #### 场景三：Direct Buffer 泄漏
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 症状: Native 内存持续增长，Heap 使用正常
 原因: NIO DirectByteBuffer 未释放
 
@@ -664,7 +670,6 @@ JAVA_OPTS="-XX:+UseContainerSupport \
    b. 排查 Netty / NIO 使用是否正确释放 buffer
    c. 添加 -Dio.netty.leakDetection.level=PARANOID（开发环境）
 ```
-
 ### 5.2 GC 问题诊断表
 
 | 症状 | 可能原因 | 诊断方法 | 解决方案 |
@@ -680,7 +685,8 @@ JAVA_OPTS="-XX:+UseContainerSupport \
 
 ### 5.3 GC 日志分析实战
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # G1GC 日志关键信息提取
 # 示例日志行:
 # [2026-04-30T10:15:32.456+0800][info ][gc,start    ] GC(42) Pause Young (Normal) (G1 Evacuation Pause)
@@ -704,13 +710,13 @@ echo "Total GC time in last hour: ${TOTAL_GC_TIME}ms"
 # 生成 GC 报告（需要 GC 日志文件）
 # 使用 GCEasy.io 或 JClarity Censum 分析
 ```
-
 ### 5.4 Native Memory Tracking
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用 NMT（注意有 5-10% 性能开销）
 JAVA_OPTS="-XX:NativeMemoryTracking=summary ..."
 
@@ -732,7 +738,6 @@ kubectl exec <pod> -- jcmd 1 VM.native_memory baseline
 # ... 等待一段时间 ...
 kubectl exec <pod> -- jcmd 1 VM.native_memory summary.diff
 ```
-
 ---
 
 ## 六、参考资源
@@ -745,3 +750,6 @@ kubectl exec <pod> -- jcmd 1 VM.native_memory summary.diff
 - [GCEasy GC Log Analyzer](https://gceasy.io/)
 - [JDK Mission Control](https://www.oracle.com/java/technologies/jdk-mission-control.html)
 - [Container Awareness in JDK](https://openjdk.org/jeps/387)
+
+
+<!-- risk-assessed -->

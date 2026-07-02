@@ -58,6 +58,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kyverno|Kyverno]] K8s 原生策略管理实践指南
@@ -195,7 +200,8 @@ Kyverno 的策略处理流程设计为高性能和可扩展。当 API Server 接
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
 
@@ -210,7 +216,6 @@ helm install kyverno kyverno/kyverno \
   --set admissionController.resources.limits.memory=1Gi \
   --version 3.3.0
 ```
-
 ## 3.2 生产级 Values 配置
 
 以下 Values 文件经过大规模生产环境验证，覆盖了资源管理、拓扑分布、命名空间排除等关键配置项。资源请求和限制需要根据集群规模和策略数量进行调整。在大规模集群（500+ 节点）中，Admission Controller 的内存限制可能需要调高到 2Gi 以上。
@@ -299,14 +304,14 @@ Kyverno 注册了以下 Webhook 到 K8s API Server，理解每个 Webhook 的作
 | Mutating Webhook | 变异策略执行 | 10s | Fail |
 | VerifyImages Webhook | 镜像签名验证 | 30s | Fail |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get validatingwebhookconfiguration -l app.kubernetes.io/name=kyverno -o yaml
 kubectl get mutatingwebhookconfiguration -l app.kubernetes.io/name=kyverno -o yaml
 
 kubectl get validatingwebhookconfiguration kyverno-resource-validating-webhook-cfg \
   -o jsonpath='{.webhooks[0].timeoutSeconds}'
 ```
-
 ---
 
 <!-- chunk: 四、安全策略实战 -->## 四、安全策略实战
@@ -964,7 +969,8 @@ Kyverno 自动为每个命名空间生成 PolicyReport，列出所有资源的�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get policyreport -A
 kubectl get clusterpolicyreport
 
@@ -975,10 +981,10 @@ helm install policy-reporter policy-reporter/policy-reporter \
   --set monitoring.enabled=true \
   --set grafana.dashboard.enabled=true
 ```
-
 ## 5.5 合规报告自动化脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kyverno_compliance_report.sh - 生成合规报告
 
@@ -1026,7 +1032,6 @@ done
 
 echo "Report generated: $REPORT_DIR/$DATE/report.md"
 ```
-
 ---
 
 <!-- chunk: 六、监控与告警 -->## 六、监控与告警
@@ -1184,7 +1189,8 @@ spec:
 
 ## 策略测试最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Kyverno CLI 在本地测试策略
 kyverno validate ./policies/
 
@@ -1197,7 +1203,6 @@ kyverno test ./policies/test/
 # CI/CD 集成示例
 helm template mychart | kyverno apply policies/ --resource -
 ```
-
 ## GitOps 集成
 
 ```yaml
@@ -1251,7 +1256,8 @@ Kyverno 在生产环境中运行时可能遇到各种问题，本节总结了最
 
 ## 8.2 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看策略详情和状态
 kubectl describe clusterpolicy pod-security-baseline
 
@@ -1288,7 +1294,6 @@ kubectl get clustercleanuppolicy
 kubectl logs -n kyverno -l app.kubernetes.io/component=cleanup-controller --tail=30
 
 ```
-
 ## 8.3 紧急恢复
 
 当 Kyverno 导致集群不可用时，可以通过以下步骤紧急恢复。首先，使用 kubectl patch 命令将所有 Kyverno Webhook 的 failurePolicy 改为 Ignore，使 API Server 在 Kyverno 不可达时仍然可以处理请求。然后，检查 Kyverno Pod 的状态和日志，定位问题根因。最后，修复问题后恢复 failurePolicy 为 Fail。
@@ -1297,7 +1302,17 @@ kubectl logs -n kyverno -l app.kubernetes.io/component=cleanup-controller --tail
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急恢复：将 Webhook failurePolicy 改为 Ignore
 kubectl patch validatingwebhookconfiguration kyverno-resource-validating-webhook-cfg \
   --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Ignore"}]'
@@ -1313,10 +1328,10 @@ kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg
 # 紧急卸载（最后手段）
 helm uninstall kyverno -n kyverno  # ⚠️ 删除 release 及关联资源
 ```
-
 ## 8.4 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kyverno_diagnostics.sh
 
@@ -1352,7 +1367,6 @@ echo ""
 echo "=== Cleanup Policies ==="
 kubectl get clustercleanuppolicy -o wide
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->## 参考链接
@@ -1395,3 +1409,5 @@ kubectl get clustercleanuppolicy -o wide
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 ```
+
+<!-- risk-assessed -->

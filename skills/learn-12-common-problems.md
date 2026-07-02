@@ -30,6 +30,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第十课：常见问题排查
@@ -52,6 +57,7 @@ prerequisites:
 ### 1.1 排查三板斧
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【场景】
 
 "遇到 K8s 问题不要慌，记住排查三板斧：
@@ -68,10 +74,10 @@ kubectl logs <pod-name> -n <namespace> --previous
 
 按照这个顺序，80% 的问题都能定位！"
 ```
-
 ### 1.2 问题分类速查
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【Pod 问题】
 
 | 状态 | 原因 | 排查命令 |
@@ -98,7 +104,6 @@ kubectl logs <pod-name> -n <namespace> --previous
 | OOMKilled | kubectl describe pod |
 | CPU Throttling | kubectl top pod |
 ```
-
 ---
 
 ## 2. Pod 状态问题
@@ -106,6 +111,7 @@ kubectl logs <pod-name> -n <namespace> --previous
 ### 2.1 Pod 处于 Pending
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "Pod 一直处于 Pending 状态，说明调度器无法把它调度到节点上。"
@@ -140,10 +146,10 @@ kubectl describe node <node-name> | grep Taints
 
 解决方案：给 Pod 添加污点容忍。
 ```
-
 ### 2.2 Pod 处于 CrashLoopBackOff
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "CrashLoopBackOff 意味着容器一直在崩溃、重启、崩溃..."
@@ -175,13 +181,13 @@ kubectl describe pod <pod-name> | grep -A5 "Limits"
 第四步：检查依赖
 如果应用需要连数据库，确认数据库是否可用。
 ```
-
 ### 2.3 Pod 处于 ImagePullBackOff
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 "ImagePullBackOff 说明拉取镜像失败了。"
@@ -211,7 +217,6 @@ kubectl create secret docker-registry my-registry-secret \
   --docker-username=user \
   --docker-password=password
 ```
-
 ---
 
 ## 3. 网络问题
@@ -219,6 +224,7 @@ kubectl create secret docker-registry my-registry-secret \
 ### 3.1 Service 无法访问
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "Service 无法访问，但 Pod 是 Running 的。"
@@ -247,13 +253,13 @@ kubectl get pods -n <namespace>
 2. Pod 没有匹配的 labels
 3. Pod 还没 Ready（ ReadinessProbe 失败）
 ```
-
 ### 3.2 DNS 解析失败
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【问题】
 
 "应用无法解析 Service 名称，比如 ping my-service 失败。"
@@ -284,10 +290,10 @@ kubectl exec -it <pod-name> -- cat /etc/resolv.conf
 2. 网络插件问题 → 检查 CNI 配置
 3. /etc/resolv.conf 配置错误
 ```
-
 ### 3.3 Ingress 404 错误
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "配置了 Ingress，但访问返回 404。"
@@ -316,7 +322,6 @@ ping myapp.example.com
 
 确认域名解析到 Ingress Controller 的 IP。
 ```
-
 ---
 
 ## 4. 资源问题
@@ -327,7 +332,17 @@ ping myapp.example.com
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【问题】
 
 "报错 'exceeded quota' 或 'Cannot create resource'。"
@@ -352,10 +367,10 @@ pods         50    50    ← 这里满了
 3. 申请增加配额
    kubectl edit resourcequota <name> -n <namespace>
 ```
-
 ### 4.2 OOMKilled
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "Pod 被 OOMKilled，说明内存超限了。"
@@ -376,10 +391,10 @@ kubectl describe pod <pod-name> | grep -A5 "Last State"
 2. 检查应用是否有内存泄漏
    查看应用的内存使用趋势
 ```
-
 ### 4.3 Pod 无法调度
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【问题】
 
 "Pod 一直处于 Pending，无法调度到节点。"
@@ -405,7 +420,6 @@ kubectl describe pod <pod-name>
    kubectl describe node <node-name> | grep Taints
    添加对应的 toleration
 ```
-
 ---
 
 ## 5. 快速诊断命令汇总
@@ -413,6 +427,7 @@ kubectl describe pod <pod-name>
 ### 5.1 一站式诊断
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【查看集群整体状态】
 
 kubectl get nodes                              # 节点状态
@@ -437,10 +452,10 @@ kubectl describe pod <pod-name> -n <namespace> > pod-desc.txt
 # 导出 Events
 kubectl get events -A -o yaml > events.yaml
 ```
-
 ### 5.2 网络诊断
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【测试连通性】
 
 kubectl run -it --rm debug --image=busybox -- /bin/sh
@@ -453,13 +468,13 @@ nslookup <service-name>
 kubectl get networkpolicy -n <namespace>
 kubectl describe networkpolicy <name> -n <namespace>
 ```
-
 ### 5.3 存储诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【查看 PV/PVC】
 
 kubectl get pv,pvc -n <namespace>
@@ -471,12 +486,12 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 df -h                  # 查看挂载
 ls -la <mount-path>    # 查看文件
 ```
-
 ---
 
 ## 6. 总结
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查口诀】
 
 Pod 不起来，三斧定生死：
@@ -516,7 +531,6 @@ kubectl top pods -n <namespace>
 
 有问题随时来找我！"
 ```
-
 ---
 
 **关联文档**:
@@ -531,3 +545,6 @@ kubectl top pods -n <namespace>
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

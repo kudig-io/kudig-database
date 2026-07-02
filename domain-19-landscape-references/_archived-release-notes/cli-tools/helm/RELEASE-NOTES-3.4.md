@@ -34,6 +34,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.4 Release Notes
@@ -75,3 +80,5 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 
 - Updating to Kubernetes 1.19.4 package versions 23dd3af5e19a02d4f4baa5b2f242645a1a3af629 (Matt Farina)
 - fix: ingress path issue 3ba833f5ad97c157a3a27b9985d6f0c660db901e (Salim Salaues)
+
+<!-- risk-assessed -->

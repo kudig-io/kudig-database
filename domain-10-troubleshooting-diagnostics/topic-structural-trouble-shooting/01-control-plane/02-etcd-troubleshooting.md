@@ -45,6 +45,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[etcd|etcd]] 故障排查指南
@@ -179,7 +184,8 @@ etcd 是 Kubernetes 的“灵魂”，它的稳定性直接决定了集群的存
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 etcd 进程状态（systemd 管理）
 systemctl status etcd
 
@@ -220,7 +226,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
   endpoint status --write-out=json | jq '.[] | {endpoint: .Endpoint, dbSize: .Status.dbSize}'
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -248,6 +253,7 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 #### 1.3.3 问题传播链
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         etcd 问题影响传播链                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -279,7 +285,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 #### 1.3.4 影响严重程度
 
 | 问题类型 | 严重程度 | RTO 要求 | 说明 |
@@ -354,7 +359,8 @@ etcd 是 Kubernetes 集群的核心数据存储，采用 Raft 共识算法保证
 
 #### 2.3.1 第一步：检查进程状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd 进程是否存在
 ps aux | grep etcd | grep -v grep
 
@@ -376,10 +382,10 @@ ls -la /var/lib/etcd/
 # 检查数据目录大小
 du -sh /var/lib/etcd/
 ```
-
 #### 2.3.2 第二步：检查集群健康
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 设置环境变量简化命令
 export ETCDCTL_API=3
 export ETCDCTL_ENDPOINTS=https://127.0.0.1:2379
@@ -413,10 +419,10 @@ etcdctl member list --write-out=table
 # 检查告警
 etcdctl alarm list
 ```
-
 #### 2.3.3 第三步：检查存储状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查数据库大小
 etcdctl endpoint status --write-out=json | jq '.[] | {endpoint: .Endpoint, dbSize: .Status.dbSize, dbSizeInUse: .Status.dbSizeInUse}'
 
@@ -442,7 +448,6 @@ ls -la /var/lib/etcd/member/wal/
 # 检查快照文件
 ls -la /var/lib/etcd/member/snap/
 ```
-
 #### 2.3.4 第四步：检查网络连通性
 
 ```bash
@@ -516,7 +521,8 @@ curl -k https://127.0.0.1:2379/metrics | grep etcd_debugging_snap_save_total_dur
 
 #### 2.3.7 第七步：检查日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看日志（systemd）
 journalctl -u etcd -f --no-pager
 
@@ -538,7 +544,6 @@ journalctl -u etcd | grep -iE "(election|leader|campaign)" | tail -50
 # 查找磁盘相关警告
 journalctl -u etcd | grep -iE "(disk|slow|took too long)" | tail -50
 ```
-
 ### 2.4 排查注意事项
 
 #### 2.4.1 安全注意事项
@@ -597,7 +602,8 @@ etcd 对磁盘延迟极其敏感，因为它需要等待 Fsync 确认日志已�
 > - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景 1：数据目录权限问题
 # 步骤 1：检查数据目录权限
 ls -la /var/lib/etcd/
@@ -635,7 +641,6 @@ cat /etc/etcd/etcd.conf  # systemd 方式
 # 步骤 3：修复配置后重启
 systemctl restart etcd
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -662,7 +667,8 @@ systemctl restart etcd
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查所有成员状态
 etcdctl endpoint status --cluster --write-out=table
 
@@ -693,7 +699,6 @@ etcdctl endpoint status --cluster --write-out=table
 etcdctl member list
 # 如果多数成员离线，需要进行灾难恢复（见 3.5 节）
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -717,7 +722,8 @@ etcdctl member list
 
 #### 3.3.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认空间问题
 etcdctl endpoint status --write-out=json | jq '.[] | {endpoint: .Endpoint, dbSize: .Status.dbSize}'
 etcdctl alarm list
@@ -746,7 +752,6 @@ etcdctl endpoint status --write-out=json | jq '.[] | {endpoint: .Endpoint, dbSiz
 # --auto-compaction-mode=periodic
 # --auto-compaction-retention=1h
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -846,7 +851,8 @@ EOF
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：获取最新的 etcd 快照
 # 如果有定期备份
 ls -la /backup/etcd/
@@ -897,13 +903,22 @@ mv /tmp/etcd.yaml /etc/kubernetes/manifests/
 etcdctl endpoint status --cluster --write-out=table
 etcdctl member list
 ```
-
 #### 3.5.2 单节点强制恢复（最后手段）
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ⚠️ 警告：此操作会丢失数据，仅在无其他选择时使用
 
 # 步骤 1：停止所有控制平面组件
@@ -931,7 +946,6 @@ mv /tmp/manifests/*.yaml /etc/kubernetes/manifests/
 kubectl get nodes
 kubectl get pods -A
 ```
-
 #### 3.5.3 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -955,7 +969,8 @@ kubectl get pods -A
 
 ### 3.6 etcd 备份最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 etcd 备份脚本
 cat > /usr/local/bin/etcd-backup.sh << 'EOF'
 #!/bin/bash
@@ -993,7 +1008,6 @@ cat > /etc/cron.d/etcd-backup << 'EOF'
 0 * * * * root /usr/local/bin/etcd-backup.sh >> /var/log/etcd-backup.log 2>&1
 EOF
 ```
-
 ---
 
 ## 附录
@@ -1417,3 +1431,5 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

@@ -67,6 +67,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 41 - 事件驱动架构故障排查 (Event-Driven Architecture Troubleshooting)
@@ -159,7 +164,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Kafka集群健康检查 ==========
 # 检查Kafka Pod状态
 kubectl get pods -n kafka -l app=kafka
@@ -188,7 +194,6 @@ kubectl exec -n kafka kafka-0 -- kafka-topics.sh --bootstrap-server localhost:90
 kubectl exec -n kafka kafka-0 -- kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 kubectl exec -n kafka kafka-0 -- kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-consumer-group
 ```
-
 #### 2.1.2 性能指标监控
 ```yaml
 # kafka_monitoring_rules.yaml
@@ -249,7 +254,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Knative组件状态 ==========
 # 检查Knative Serving
 kubectl get pods -n knative-serving
@@ -284,7 +290,6 @@ kubectl patch configmap config-tracing -n knative-eventing --type merge \
 kubectl port-forward -n istio-system svc/tracing 16686:16686
 # 访问 http://localhost:16686 查看事件追踪
 ```
-
 ### 2.3 Redis Streams故障排查
 
 #### 2.3.1 Redis实例健康检查
@@ -292,7 +297,8 @@ kubectl port-forward -n istio-system svc/tracing 16686:16686
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Redis连接和状态检查 ==========
 # 检查Redis Pod状态
 kubectl get pods -n redis -l app=redis
@@ -320,7 +326,6 @@ kubectl exec -n redis $REDIS_POD -- redis-cli xinfo groups mystream
 # 检查待处理消息
 kubectl exec -n redis $REDIS_POD -- redis-cli xpending mystream mygroup
 ```
-
 ---
 
 <!-- chunk: 3. 事件流问题诊断 -->
@@ -333,7 +338,8 @@ kubectl exec -n redis $REDIS_POD -- redis-cli xpending mystream mygroup
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 事件丢失诊断脚本 ==========
 cat <<'EOF' > event-loss-diagnostic.sh
 #!/bin/bash
@@ -390,7 +396,6 @@ EOF
 
 chmod +x event-loss-diagnostic.sh
 ```
-
 #### 3.1.2 常见根本原因
 | 原因类别 | 具体原因 | 解决方案 |
 |---------|---------|---------|
@@ -620,7 +625,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 事件延迟测量脚本 ==========
 cat <<'EOF' > event-latency-measurement.sh
 #!/bin/bash
@@ -709,7 +715,6 @@ EOF
 
 chmod +x event-latency-measurement.sh
 ```
-
 ---
 
 <!-- chunk: 5. 可靠性问题排查 -->
@@ -1212,3 +1217,5 @@ except Exception as e:
 - [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/43-symptom-sop-mapping.md|43-symptom-sop-mapping]]
 
 ```
+
+<!-- risk-assessed -->

@@ -20,6 +20,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-08-05] Istio mTLS STRICT 模式误配导致全集群服务间调用失败
@@ -37,40 +42,41 @@ last_updated: 2026-05-23
 - 已登录用户操作无响应
 - 移动端 App 白屏
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -A | grep -v Running | grep -v Completed
 # （大量 Pod 处于 Error 或 CrashLoopBackOff）
 ```
-
 ## 诊断过程
 
 **14:07** — 检查一个问题 Pod 的 sidecar 日志：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n prod-api order-api-xxx -c istio-proxy | tail -n 20
 # 2026-08-05T14:04:55.112Z warn    envoy filter ...
 #   tls_inspector: tls_error: TLS_ERROR_SECRET_NOT_FOUND
 # 2026-08-05T14:04:55.113Z error   envoy filter ...
 #   mcm TLS handshake error: 337047686:SSL routines:tls_process_client_certificate:certificate verify failed
 ```
-
 **14:09** — 检查 PeerAuthentication：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get peerauthentication -A
 # NAMESPACE     NAME           MODE         AGE
 # istio-system  default        STRICT       5m
 # prod-api      api-mtls       STRICT       5m
 ```
-
 **14:11** — 检查根配置：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get peerauthentication default -n istio-system -o yaml
 # spec:
 #   mtls:
 #     mode: STRICT
 ```
-
 **14:13** — 检查变更历史：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 14:00，安全团队执行了 "启用全集群 mTLS STRICT 模式" 的 GitOps 同步
 # 意图：提升集群安全性，强制所有服务间通信使用 mTLS
 
@@ -79,13 +85,13 @@ kubectl get pods -n prod-legacy -l app=legacy-billing --show-labels
 # NAME                    READY   STATUS
 # legacy-billing-xxx      1/1     Running   （无 sidecar）
 ```
-
 **14:15** — 验证：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 order-api（有 sidecar）调用 legacy-billing（无 sidecar）
 kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
   curl -v http://legacy-billing.prod-legacy.svc.cluster.local:8080/health
@@ -94,7 +100,6 @@ kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
 # * TLS error: error:00000000:lib(0)::reason(0)
 # * recv failure: Connection reset by peer
 ```
-
 有 sidecar 的服务尝试用 mTLS 连接，但无 sidecar 的服务不支持 TLS，连接被重置。
 
 ## 根因
@@ -110,7 +115,8 @@ kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch peerauthentication default -n istio-system --type='merge' -p '
 {
   "spec": {
@@ -120,13 +126,13 @@ kubectl patch peerauthentication default -n istio-system --type='merge' -p '
   }
 }'
 ```
-
 **14:20** — 为已注入 sidecar 的 namespace 单独配置 STRICT：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 for ns in prod-api prod-order prod-payment prod-inventory; do
   cat <<EOF | kubectl apply -f -
 apiVersion: security.istio.io/v1beta1
@@ -140,13 +146,13 @@ spec:
 EOF
 done
 ```
-
 **14:25** — 验证服务恢复：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
   curl -s http://legacy-billing.prod-legacy.svc.cluster.local:8080/health
 # {"status":"ok"}
@@ -155,19 +161,18 @@ kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
   curl -s http://auth-service.prod-auth.svc.cluster.local:8080/health
 # {"status":"ok"}
 ```
-
 **14:28** — 验证 mTLS 在已配置 namespace 中生效：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
   istioctl authn tls-check order-api.prod-api.svc.cluster.local
 # HOST:PORT                                    STATUS     SERVER     CLIENT     AUTHN POLICY
 # order-api.prod-api.svc.cluster.local:8080    OK         STRICT     -          prod-api/api-mtls
 ```
-
 ## 验证
 - 14:30 — 用户登录、下单、支付全部恢复
 - 14:32 — 5xx 错误率归零，业务指标正常
@@ -183,3 +188,6 @@ kubectl exec -n prod-api order-api-xxx -c istio-proxy -- \
   5. STRICT 模式启用前，先对单个 namespace 进行 24h 金丝雀验证
 - **相关 Skill**: [[k8s-network-security-guide]]
 - **相关 FTA**: [[service-mesh-istio-fta]]
+
+
+<!-- risk-assessed -->

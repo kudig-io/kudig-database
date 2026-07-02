@@ -76,6 +76,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 68 - API 优先级与公平性 (API Priority and Fairness)
@@ -86,6 +91,7 @@ cross_refs:
 ## APF 架构概览
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                    API Priority and Fairness (APF) 架构                             │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -152,7 +158,6 @@ cross_refs:
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 <!-- chunk: APF 核心概念 -->
 ## APF 核心概念
 
@@ -585,7 +590,8 @@ groups:
 <!-- chunk: APF 调试命令 -->
 ## APF 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ==================== 查看配置 ====================
 
 # 查看所有 PriorityLevel
@@ -632,10 +638,10 @@ watch -n 1 'kubectl get --raw /debug/api_priority_and_fairness/dump_priority_lev
 # 查看最近被拒绝的请求
 kubectl get --raw /metrics | grep apiserver_flowcontrol_rejected_requests_total
 ```
-
 ### APF 诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # apf-diagnose.sh - APF 诊断脚本
 
@@ -670,7 +676,6 @@ kubectl get --raw /metrics 2>/dev/null | \
   grep 'apiserver_flowcontrol_request_wait_duration_seconds_bucket{.*le="1"' | \
   head -5
 ```
-
 <!-- chunk: APF 最佳实践 -->
 ## APF 最佳实践
 
@@ -799,3 +804,6 @@ spec:
 - 17-apiserver-tuning
 - 19-etcd-operations
 - 20-kube-scheduler-deep-dive
+
+
+<!-- risk-assessed -->

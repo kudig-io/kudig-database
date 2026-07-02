@@ -57,6 +57,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - [[Envoy|Envoy]] Gateway 企业级实践
@@ -185,7 +190,8 @@ GatewayClass
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Kubernetes 版本（需要 1.26+）
 kubectl version --short
 
@@ -195,13 +201,13 @@ kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/downloa
 # 安装实验渠道 CRD（含 TCPRoute、TLSRoute、GRPCRoute 等）
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.0/experimental-install.yaml
 ```
-
 ## Helm 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Helm 仓库
 helm repo add envoy-gateway https://charts.envoyproxy.io
 helm repo update
@@ -219,13 +225,13 @@ helm install eg envoy-gateway/gateway-helm \
 # 验证安装
 kubectl get pods -n envoy-gateway-system
 ```
-
 ## 快速验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署示例应用
 kubectl apply -f https://raw.githubusercontent.com/envoyproxy/gateway/main/examples/kubernetes/quickstart.yaml
 
@@ -239,7 +245,6 @@ export GATEWAY_HOST=$(kubectl get gateway/eg -n default -o jsonpath='{.status.ad
 # 测试路由
 curl -H "Host: www.example.com" http://$GATEWAY_HOST/
 ```
-
 ## EnvoyProxy 自定义配置
 
 ```yaml
@@ -698,7 +703,8 @@ spec:
 
 ## 验证 Patch 效果
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 EnvoyPatchPolicy 状态
 kubectl get envoypatchpolicy -n default
 
@@ -711,7 +717,6 @@ curl http://localhost:19000/config_dump?resource=listener | jq '.configs[].dynam
 # 查看 Cluster 配置
 curl http://localhost:19000/config_dump?resource=cluster | jq '.configs[].dynamic_active_clusters'
 ```
-
 ---
 
 <!-- chunk: 7. Wasm 扩展 -->## 7. Wasm 扩展
@@ -802,7 +807,8 @@ func (ctx *httpContext) OnHttpRequestHeaders(numHeaders int, endOfStream bool) t
 }
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 编译 Wasm 模块
 tinygo build -o custom-auth.wasm -scheduler=none -target=wasi ./main.go
 
@@ -811,7 +817,6 @@ docker build -t registry.example.com/wasm-plugins/custom-auth:v1.2.0 \
   --build-arg WASM_FILE=custom-auth.wasm .
 docker push registry.example.com/wasm-plugins/custom-auth:v1.2.0
 ```
-
 ---
 
 <!-- chunk: 8. 可观测性 -->## 8. 可观测性
@@ -922,7 +927,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 导入 Envoy Gateway 官方 Grafana Dashboard
 # Dashboard ID: 20162（Envoy Gateway）
 
@@ -931,7 +937,6 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
   -n monitoring --create-namespace \
   -f https://raw.githubusercontent.com/envoyproxy/gateway/main/charts/gateway-addons-helm/values.yaml
 ```
-
 ---
 
 <!-- chunk: 9. 生产部署建议 -->## 9. 生产部署建议
@@ -1031,7 +1036,8 @@ spec:
 
 ## 生产检查清单
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ✅ 验证 GatewayClass 状态
 kubectl get gatewayclass eg -o jsonpath='{.status.conditions[?(@.type=="Accepted")].status}'
 
@@ -1051,7 +1057,6 @@ kubectl logs -n default -l gateway.envoyproxy.io/owning-gateway-name=eg -f
 kubectl port-forward -n envoy-gateway-system pod/eg-proxy-xxx 19000:19000
 curl http://localhost:19000/ready
 ```
-
 ---
 
 <!-- chunk: 10. 与其他网关对比 -->## 10. 与其他网关对比
@@ -1109,3 +1114,5 @@ curl http://localhost:19000/ready
 - 09-nginx-ingress-migration-guide
 
 ```
+
+<!-- risk-assessed -->

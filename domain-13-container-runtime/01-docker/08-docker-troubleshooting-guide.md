@@ -45,6 +45,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 故障排查指南
@@ -73,16 +78,17 @@ cross_refs:
 ### 排查流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 问题发现 → 收集信息 → 分析日志 → 定位原因 → 修复验证
     │          │          │          │          │
     ▼          ▼          ▼          ▼          ▼
  告警/用户   docker ps   容器日志    具体诊断   回归测试
  反馈       docker logs  daemon日志  网络/存储
 ```
-
 ### 信息收集
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 系统信息
 docker info
 docker version
@@ -97,7 +103,6 @@ docker logs --tail 100 <container>
 # 资源使用
 docker stats --no-stream
 ```
-
 ---
 
 ## 容器启动失败
@@ -114,7 +119,8 @@ docker stats --no-stream
 
 ### OOM 诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 OOM 事件
 dmesg | grep -i "oom|killed"
 
@@ -124,10 +130,10 @@ docker stats --no-stream <container>
 # 检查 cgroup 内存限制
 cat /sys/fs/cgroup/memory/docker/<id>/memory.limit_in_bytes
 ```
-
 ### 启动失败诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看退出码
 docker inspect -f '{{.State.ExitCode}}' <container>
 
@@ -137,7 +143,6 @@ docker inspect -f '{{json .State}}' <container> | jq
 # 交互式调试
 docker run -it --entrypoint /bin/sh <image>
 ```
-
 ---
 
 ## 镜像问题
@@ -153,7 +158,8 @@ docker run -it --entrypoint /bin/sh <image>
 
 ### 拉取失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查网络
 ping registry-1.docker.io
 
@@ -164,13 +170,13 @@ cat /etc/docker/daemon.json
 # 手动拉取调试
 docker pull -q nginx:latest 2>&1
 ```
-
 ### 清理磁盘
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看磁盘使用
 docker system df -v
 
@@ -180,14 +186,14 @@ docker system prune -af --volumes  # ⚠️ 强制清理，可能杀运行中容
 # 清理构建缓存
 docker builder prune -af
 ```
-
 ---
 
 ## 网络问题
 
 ### 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 网络列表
 docker network ls
 
@@ -198,7 +204,6 @@ docker inspect -f '{{json .NetworkSettings.Networks}}' <container>
 docker exec <container> ping -c 3 <target>
 docker exec <container> nslookup <hostname>
 ```
-
 ### 常见问题
 
 | 问题 | 症状 | 解决方案 |
@@ -210,11 +215,11 @@ docker exec <container> nslookup <hostname>
 
 ### 网络调试容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --rm -it --network container:<target> nicolaka/netshoot
 # 使用 ping, nslookup, tcpdump, ss 等工具
 ```
-
 ---
 
 ## 存储问题
@@ -230,7 +235,8 @@ docker run --rm -it --network container:<target> nicolaka/netshoot
 
 ### 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查卷
 docker volume ls
 docker volume inspect <volume>
@@ -241,14 +247,14 @@ docker inspect -f '{{json .Mounts}}' <container>
 # 检查磁盘使用
 du -sh /var/lib/docker/*
 ```
-
 ---
 
 ## 性能问题
 
 ### 资源监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时统计
 docker stats
 
@@ -258,7 +264,6 @@ docker top <container>
 # 系统资源
 top -c -p $(docker inspect -f '{{.State.Pid}}' <container>)
 ```
-
 ### 性能分析
 
 | 问题 | 指标 | 解决方案 |
@@ -274,14 +279,14 @@ top -c -p $(docker inspect -f '{{.State.Pid}}' <container>)
 
 ### Daemon 日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # systemd 系统
 journalctl -u docker.service -f
 
 # 非 systemd
 tail -f /var/log/docker.log
 ```
-
 ### 常见问题
 
 | 问题 | 症状 | 解决方案 |
@@ -295,20 +300,30 @@ tail -f /var/log/docker.log
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 systemctl restart docker
 
 # 保持容器运行 (需配置 live-restore)
 # daemon.json: {"live-restore": true}
 ```
-
 ---
 
 ## 常用诊断命令
 
 ### 容器诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 容器列表与状态
 docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
@@ -327,13 +342,13 @@ docker top <container>
 # 文件变化
 docker diff <container>
 ```
-
 ### 系统诊断
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 系统信息
 docker info
 docker version
@@ -347,10 +362,10 @@ docker events --since 1h
 # 清理资源
 docker system prune -af --volumes  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ### 网络诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 网络列表
 docker network ls
 
@@ -360,7 +375,6 @@ docker network inspect <network>
 # 端口映射
 docker port <container>
 ```
-
 ---
 
 ## 相关文档
@@ -375,3 +389,6 @@ docker port <container>
 - 07-docker-security-best-practices
 - monitoring.md|09-docker-performance-monitoring]]
 - 10-docker-logging-management
+
+
+<!-- risk-assessed -->

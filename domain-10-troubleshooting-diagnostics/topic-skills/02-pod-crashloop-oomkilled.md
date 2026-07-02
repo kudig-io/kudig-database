@@ -56,6 +56,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubectl get [[Pods|pods]] -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
@@ -162,11 +167,11 @@ Agent 可通过以下常见工单描述进行 NLP 意图匹配：
 
 **Step T1**: 统计受影响 Pod 数量和分布范围
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查同一 Deployment/StatefulSet 下所有 Pod 的状态
 kubectl get pods -n <namespace> -l <label-selector> -o wide
 ```
-
 > **判断规则**:
 > - 如果只有单个 Pod 受影响 → 单点问题，影响可控
 > - 如果同一 Deployment 的多个/全部副本受影响 → Deployment 级别问题
@@ -174,11 +179,11 @@ kubectl get pods -n <namespace> -l <label-selector> -o wide
 
 **Step T2**: 确认服务关键性等级
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Pod 所属的 Deployment 和 Namespace
 kubectl get pod <pod> -n <namespace> -o jsonpath='{.metadata.ownerReferences[0].kind}/{.metadata.ownerReferences[0].name}'
 ```
-
 > **判断规则**:
 > - 生产环境 + 面向客户的服务（customer-facing） → 高优先级
 > - 生产环境 + 内部服务（internal） → 中优先级
@@ -187,11 +192,11 @@ kubectl get pod <pod> -n <namespace> -o jsonpath='{.metadata.ownerReferences[0].
 
 **Step T3**: 检查是否存在健康副本（部分宕机 vs 全部宕机）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Deployment 的 ready 副本数
 kubectl get deployment <deployment> -n <namespace> -o jsonpath='Ready: {.status.readyReplicas}/{.status.replicas}'
 ```
-
 > **判断规则**:
 > - `readyReplicas > 0` → 部分宕机（Partial Outage），服务仍有容量
 > - `readyReplicas = 0` 或字段不存在 → 完全宕机（Total Outage），服务不可用
@@ -199,11 +204,11 @@ kubectl get deployment <deployment> -n <namespace> -o jsonpath='Ready: {.status.
 
 **Step T4**: 检查最近是否有部署变更
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Deployment 的最近 rollout 历史
 kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 ```
-
 > **判断规则**:
 > - 如果最近有新 revision → 很可能是部署变更引入的问题，回滚是快速修复路径
 > - 如果无最近变更 → 可能是运行时问题（内存泄漏、依赖问题等）
@@ -1269,7 +1274,8 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 ### 7.1 即时验证（修复后 1 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认 Pod 状态为 Running 且 READY
 kubectl get pod -n <namespace> -l <label-selector> -o wide
 # 预期: STATUS=Running, READY=1/1 (或 N/N), RESTARTS 不再增长
@@ -1286,7 +1292,6 @@ kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod --sor
 kubectl get deployment <deployment> -n <namespace> -o jsonpath='ready={.status.readyReplicas}/{.status.replicas} updated={.status.updatedReplicas}'
 # 预期: ready=N/N updated=N
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1297,11 +1302,11 @@ kubectl get deployment <deployment> -n <namespace> -o jsonpath='ready={.status.r
 | 应用请求成功率 | 应用的 HTTP 成功率指标（如 `http_requests_total{code=~"2.."}` / total） | 恢复到正常水平 | 成功率持续低于基线 → 可能有残余问题 |
 | Endpoint 数量 | `kubectl get endpoints <service> -n <ns>` | addresses 数量 = replicas 数量 | addresses < replicas → 部分 Pod 未 Ready |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 持续监控命令（5 分钟内观察）
 kubectl get pods -n <namespace> -l <label-selector> -w
 ```
-
 ### 7.3 解决确认标准
 
 以下条件**全部满足**时，可确认问题已解决：
@@ -1564,7 +1569,8 @@ danger_operations:
 
 ### 通用验证步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 Pod 状态恢复正常
 kubectl get pod <pod> -n <ns>
 
@@ -1577,10 +1583,11 @@ kubectl top pod <pod> -n <ns> --containers
 # 4. 确认 Deployment 滚动更新完成
 kubectl rollout status deployment/<deploy> -n <ns> --timeout=120s
 ```
-
 ---
 
 > **文档结束** — SKILL-POD-001 v1.0  
 > 如在使用过程中发现未覆盖的根因场景或误诊模式，请通过 Skill 改进记录（Section 10.4）提交反馈。
 
 ```
+
+<!-- risk-assessed -->

@@ -60,6 +60,11 @@ k8s_versions:
 - 1.32.x
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -160,7 +165,8 @@ PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持�
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 统计异常 PVC 数量和分布
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取所有非 Bound 状态的 PVC
 echo "=== Non-Bound PVCs ===" && \
 kubectl get pvc -A --no-headers | grep -v "Bound" | wc -l && \
@@ -172,7 +178,8 @@ kubectl get pvc -A | grep -v "Bound"
 > - Pending PVC 仅在测试/开发环境 → **P2**
 
 **Step T2**: 检查 CSI Driver 健康状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查所有 CSI 相关 Pod 状态
 kubectl get pods -A -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-headers 2>/dev/null || \
 kubectl get pods -n kube-system | grep -i csi
@@ -183,7 +190,8 @@ kubectl get pods -n kube-system | grep -i csi
 > - CSI Pod 全部 Running → 继续 T3
 
 **Step T3**: 评估受影响的工作负载
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看因存储问题而 Pending/ContainerCreating 的 Pod
 kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded --no-headers | \
   while read ns name rest; do
@@ -197,7 +205,8 @@ kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeed
 > - 仅单个 Pod 且非关键服务 → 影响有限
 
 **Step T4**: 检查是否存在数据丢失风险
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ReclaimPolicy 为 Delete 且 PV 状态异常的情况
 kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAIM:.spec.persistentVolumeReclaimPolicy | \
   grep -E "Released|Failed" | grep Delete
@@ -1227,7 +1236,8 @@ kubectl get pv -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,RECLAI
 
 ### 7.1 即时验证（修复后 1-2 分钟内）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # V1: 确认 PVC 状态恢复为 Bound
 kubectl get pvc <pvc-name> -n <namespace>
 # 预期: STATUS 列显示 Bound
@@ -1244,7 +1254,6 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<pod-name
 kubectl get volumeattachment -o json | jq '.items[] | select(.spec.source.persistentVolumeName == "<pv-name>") | {name: .metadata.name, attached: .status.attached}'
 # 预期: attached: true
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1272,7 +1281,8 @@ kubectl get volumeattachment -o json | jq '.items[] | select(.spec.source.persis
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V5: 读写测试
 kubectl exec -n <namespace> <pod-name> -- dd if=/dev/zero of=/data/test-file bs=1M count=100 conv=fsync
 # 预期: 成功写入 100MB 文件
@@ -1283,7 +1293,6 @@ kubectl exec -n <namespace> <pod-name> -- dd if=/data/test-file of=/dev/null bs=
 # 清理测试文件
 kubectl exec -n <namespace> <pod-name> -- rm /data/test-file
 ```
-
 ### 7.5 回归检测（24 小时内关注）
 
 | 关注项 | 检查方法 | 频率 | 异常行动 |
@@ -1429,7 +1438,8 @@ kubectl exec -n <namespace> <pod-name> -- rm /data/test-file
 ### 9.5 云厂商特异性
 
 #### 阿里云 ACK
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CSI Driver 版本检查
 kubectl get pods -n kube-system -l app=csi-plugin -o jsonpath='{.items[0].spec.containers[0].image}'
 
@@ -1441,9 +1451,9 @@ aliyun ecs DescribeDisks --RegionId <region> --DiskIds '["<disk-id>"]'
 # - 云盘挂载数量限制（基础型 16 个，企业型 64 个）
 # - 跨可用区限制（云盘必须与节点在同一可用区）
 ```
-
 #### AWS EKS
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # EBS CSI Driver 版本检查
 kubectl get pods -n kube-system -l app=ebs-csi-controller -o jsonpath='{.items[0].spec.containers[0].image}'
 
@@ -1455,9 +1465,9 @@ aws ec2 describe-volumes --volume-ids <vol-id>
 # - Nitro 实例 vs 非 Nitro 实例的 device name 差异
 # - gp2 vs gp3 的 IOPS 限制
 ```
-
 #### GCP GKE
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GCE PD CSI Driver 版本检查
 kubectl get pods -n kube-system -l k8s-app=gce-pd-csi-driver -o jsonpath='{.items[0].spec.containers[0].image}'
 
@@ -1469,7 +1479,6 @@ gcloud compute disks describe <disk-name> --zone <zone>
 # - Zonal PD 只能挂载到同一 Zone 的节点
 # - 并发挂载限制
 ```
-
 ---
 
 ## 10. 知识进化
@@ -1521,7 +1530,8 @@ gcloud compute disks describe <disk-name> --zone <zone>
 
 ### A.1 PVC/PV 快速诊断脚本 (diagnose-pvc-quick.sh)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # =============================================================================
 # PVC/PV 快速诊断脚本 - 诊断 Kubernetes 存储问题
@@ -1689,10 +1699,10 @@ EOF
 
 echo -e "\n${GREEN}诊断完成${NC}"
 ```
-
 ### A.2 CSI Driver 健康检查脚本 (check-csi-health.sh)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # =============================================================================
 # CSI Driver 健康检查脚本
@@ -1808,14 +1818,14 @@ fi
 
 echo -e "\n${GREEN}CSI 健康检查完成${NC}"
 ```
-
 ### A.3 修复后验证脚本 (verify-storage.sh)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # =============================================================================
 # PVC/PV 修复后验证脚本
@@ -1974,3 +1984,5 @@ else
     exit 1
 fi
 ```
+
+<!-- risk-assessed -->

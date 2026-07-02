@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kubectl 插件实战指南
@@ -88,7 +93,8 @@ authors:
 
 ### 1.2 Krew 常用命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 更新索引
 kubectl krew update
 
@@ -107,18 +113,17 @@ kubectl krew upgrade ktop
 # 卸载插件
 kubectl krew uninstall ktop
 ```
-
 ---
 
 ## 2. ktop：集群资源拓扑
 
 ### 2.1 安装与使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install ktop
 kubectl ktop
 ```
-
 ### 2.2 常用视图
 
 | 按键 | 视图 |
@@ -132,57 +137,57 @@ kubectl ktop
 
 ### 2.3 使用场景
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 快速定位高 CPU Pod
 kubectl ktop --namespace production
 ```
-
 ---
 
 ## 3. kubectl-trace：系统调用追踪
 
 ### 3.1 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install trace
 ```
-
 ### 3.2 追踪 Pod 系统调用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 bpftrace 脚本追踪 Pod 的文件打开操作
 kubectl trace run <pod-name> -n <namespace> \
   -e 'kprobe:do_sys_open { printf("%s: %s\n", comm, str(arg1)) }'
 ```
-
 ### 3.3 追踪节点内核事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 追踪节点上的 TCP 重传
 kubectl trace run node/<node-name> \
   -e 'kprobe:tcp_retransmit { printf("retransmit: %s -> %s\n", saddr, daddr) }'
 ```
-
 ---
 
 ## 4. kubectl-node-shell：节点 Shell
 
 ### 4.1 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install node-shell
 ```
-
 ### 4.2 进入节点调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 直接进入节点 Shell
 kubectl node-shell <node-name>
 
 # 在节点上执行一次性命令
 kubectl node-shell <node-name> -- crictl ps
 ```
-
 ### 4.3 使用场景
 
 - 节点磁盘、网络、kubelet 问题排查
@@ -195,40 +200,40 @@ kubectl node-shell <node-name> -- crictl ps
 
 ### 5.1 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install view-allocations
 ```
-
 ### 5.2 查看资源分配
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 按节点查看 CPU/Memory 分配
 kubectl view-allocations --utilization
 
 # 按命名空间汇总
 kubectl view-allocations --namespace --group-by namespace
 ```
-
 ---
 
 ## 6. kubectl-neat：YAML 清理
 
 ### 6.1 安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install neat
 ```
-
 ### 6.2 清理冗余字段
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出干净的资源 YAML
 kubectl get deployment order-service -n production -o yaml | kubectl neat
 
 # 直接获取干净 YAML
 kubectl neat get deployment order-service -n production -o yaml
 ```
-
 ---
 
 ## 7. 实用插件组合
@@ -250,7 +255,8 @@ kubectl neat get deployment order-service -n production -o yaml
 
 ### 7.2 批量安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > /tmp/krew-plugins.txt <<EOF
 ktop
 trace
@@ -269,7 +275,6 @@ for p in $(cat /tmp/krew-plugins.txt); do
   kubectl krew install $p
 done
 ```
-
 ---
 
 ## 8. 最佳实践检查清单
@@ -298,7 +303,8 @@ kubectl 插件执行时继承当前 kubeconfig 权限。生产环境应遵循最
 
 专有云或隔离网络无法访问 GitHub 时，可提前下载插件并托管到内部镜像仓库或文件服务器。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在有外网的环境下载插件包
 kubectl krew download <plugin>
 
@@ -308,7 +314,6 @@ ossutil cp <plugin>.tar.gz oss://internal-tools/krew-plugins/
 # 3. 在离线环境安装
 kubectl krew install --manifest=<plugin>.yaml --archive=<plugin>.tar.gz
 ```
-
 ### 插件使用审计
 
 建议记录关键插件的使用人、时间与目标资源，便于安全审计与故障追溯。
@@ -328,14 +333,14 @@ kubectl krew install --manifest=<plugin>.yaml --archive=<plugin>.tar.gz
 
 建议将插件版本与集群版本对应，避免不兼容：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出当前插件列表
 kubectl krew list > krew-plugins.txt
 
 # 在另一环境批量安装
 xargs -n1 kubectl krew install < krew-plugins.txt
 ```
-
 ## 典型工单场景与处理
 
 **场景**：用户报告某服务 Pod 日志分散，难以定位错误。
@@ -357,7 +362,8 @@ xargs -n1 kubectl krew install < krew-plugins.txt
 3. 在目标环境安装 Krew 并配置本地索引。
 4. 使用 `--manifest` 与 `--archive` 参数安装插件。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出已安装插件列表
 kubectl krew list > krew-plugins.txt
 
@@ -367,7 +373,6 @@ tar czvf krew-offline.tar.gz ~/.krew
 # 在目标环境解压并配置 PATH
 export PATH="$HOME/.krew/bin:$PATH"
 ```
-
 ### 插件权限最小化
 
 - 只读插件可配置给一线值班。
@@ -396,7 +401,8 @@ export PATH="$HOME/.krew/bin:$PATH"
 
 以排查 Pod 反复重启为例，演示插件组合使用：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 切换上下文与命名空间
 kubectl ctx prod
 kubectl ns production
@@ -414,7 +420,6 @@ kubectl neat get pod order-service-xxx -o yaml
 kubectl trace run node-1 -e 'kprobe:do_exit { printf("pid=%d comm=%s
 ", pid, comm); }'
 ```
-
 ### 插件维护建议
 
 - 每季度 review 一次插件版本，删除不再使用的插件。
@@ -432,10 +437,10 @@ kubectl trace run node-1 -e 'kprobe:do_exit { printf("pid=%d comm=%s
 
 ### 推荐插件安装清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl krew install ctx ns ktop stern cost neat trace sniff gadget
 ```
-
 ## 插件学习资源
 
 | 插件 | 官方文档 |
@@ -463,3 +468,6 @@ kubectl krew install ctx ns ktop stern cost neat trace sniff gadget
 
 - [[domain-10-troubleshooting-diagnostics/tools/02-network-diagnostic-tools.md|网络诊断工具]]
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
+
+
+<!-- risk-assessed -->

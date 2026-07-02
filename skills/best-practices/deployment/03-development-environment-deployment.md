@@ -51,6 +51,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 03 - 研发环境部署 (Development Environment Deployment)
@@ -182,7 +187,17 @@ network_plan:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ===== 在每个节点上执行 (可用 ansible/ssh 批量) =====
 
 # 1. 设置主机名 (每个节点不同)
@@ -237,7 +252,6 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo apt-get install -y chrony
 sudo systemctl enable chrony && sudo systemctl start chrony
 ```
-
 ## 1.2 Master 节点: 初始化控制平面
 
 ```yaml
@@ -276,7 +290,8 @@ scheduler:
 EOF
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在 Master 节点执行初始化
 sudo kubeadm init --config kubeadm-config.yaml
 
@@ -295,7 +310,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 # 预期: master-1 NotReady (等待 CNI 安装)
 ```
-
 ## 1.3 Worker 节点: 加入集群
 
 ```bash
@@ -321,7 +335,8 @@ kubeadm token create --print-join-command
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 推荐 Calico (支持 NetworkPolicy，研发环境需要权限隔离)
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
 
@@ -346,10 +361,10 @@ kubectl exec test-2 -- ping -c 3 $TEST1_IP
 # 预期: 3 packets transmitted, 3 received, 0% packet loss
 kubectl delete pod test-1 test-2  # 清理
 ```
-
 ## 1.5 安装 Helm (后续组件安装依赖)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # macOS
 brew install helm
 
@@ -368,7 +383,6 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 ```
-
 ---
 
 <!-- chunk: 二、CNI 网络插件选型 -->## 二、CNI 网络插件选型
@@ -396,7 +410,8 @@ helm repo update
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Helm 安装 Nginx Ingress Controller
 helm install ingress-nginx ingress-nginx/ingress-nginx \
   --namespace ingress-nginx \
@@ -447,7 +462,6 @@ EOF
 # 浏览器访问: http://test.dev.local:30080
 kubectl delete ingress test-ingress  # 清理
 ```
-
 ---
 
 <!-- chunk: 四、部署 Harbor 私有镜像仓库 -->## 四、部署 Harbor 私有镜像仓库
@@ -460,7 +474,8 @@ kubectl delete ingress test-ingress  # 清理
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Harbor 仓库
 helm repo add harbor https://helm.goharbor.io
 helm repo update
@@ -494,10 +509,10 @@ kubectl get pods -n harbor -w
 # 访问: https://192.168.10.11:30003
 # 用户名: admin  密码: Harbor12345
 ```
-
 ## 4.2 配置节点信任 Harbor (自签名证书)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在每个需要 push/pull 镜像的节点上执行:
 
 # 1. 获取 Harbor 的 CA 证书
@@ -521,7 +536,6 @@ docker tag nginx:alpine 192.168.10.11:30003/library/nginx:alpine
 docker push 192.168.10.11:30003/library/nginx:alpine
 # 预期: 推送成功
 ```
-
 ---
 
 <!-- chunk: 五、安全配置 - RBAC 多团队隔离 -->## 五、安全配置 - RBAC 多团队隔离
@@ -532,7 +546,8 @@ docker push 192.168.10.11:30003/library/nginx:alpine
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 为每个团队/环境创建独立 Namespace
 kubectl create namespace dev-team-a      # A 团队开发环境
 kubectl create namespace dev-team-b      # B 团队开发环境
@@ -545,7 +560,6 @@ kubectl label namespace dev-team-b env=dev team=team-b
 kubectl label namespace staging env=staging
 kubectl label namespace pre-production env=pre-prod
 ```
-
 ## 5.2 RBAC 角色定义
 
 ```yaml
@@ -669,7 +683,8 @@ kubectl describe resourcequota dev-team-a-quota -n dev-team-a
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 这是最主流的 K8s 监控方案，包含:
 # - Prometheus (指标采集和存储)
 # - Grafana (可视化仪表盘)
@@ -709,7 +724,6 @@ kubectl port-forward svc/monitoring-kube-prometheus-prometheus -n monitoring 909
 kubectl patch svc monitoring-grafana -n monitoring -p '{"spec":{"type":"NodePort","ports":[{"port":80,"nodePort":30300}]}}'
 # 访问: http://192.168.10.11:30300
 ```
-
 ## 6.2 内置仪表盘
 
 安装后自动包含的 Grafana 仪表盘:
@@ -724,7 +738,8 @@ kubectl patch svc monitoring-grafana -n monitoring -p '{"spec":{"type":"NodePort
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Loki + Promtail: 轻量级日志收集方案 (与 Grafana 完美集成)
 helm install loki grafana/loki-stack \
   --namespace monitoring \
@@ -749,7 +764,6 @@ kubectl get pods -n monitoring -l app=promtail
 # {namespace="dev-team-a", container="nginx"}   # 按容器名
 # {namespace="dev-team-a"} |= "error"           # 搜索关键词
 ```
-
 ---
 
 <!-- chunk: 七、GitOps 工作流 (ArgoCD) -->## 七、GitOps 工作流 (ArgoCD)
@@ -760,7 +774,8 @@ kubectl get pods -n monitoring -l app=promtail
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间
 kubectl create namespace argocd
 
@@ -785,7 +800,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 # macOS: brew install argocd
 # Linux: curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && chmod +x argocd && sudo mv argocd /usr/local/bin/
 ```
-
 ## 7.2 创建 ArgoCD Application
 
 ```yaml
@@ -924,7 +938,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 预览渲染结果 (不实际部署)
 kubectl kustomize environments/development/
 
@@ -934,14 +949,14 @@ kubectl apply -k environments/development/
 # ArgoCD + Kustomize 结合:
 # 在 ArgoCD Application 的 source.path 指向 environments/development
 ```
-
 ---
 
 <!-- chunk: 九、集群日常运维 -->## 九、集群日常运维
 
 ## 9.1 日常检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # daily-check.sh - 研发环境日常巡检脚本
 echo "===== 1. 节点状态 ====="
@@ -967,10 +982,10 @@ df -h | grep -E '^/dev'
 echo -e "\n===== 7. 近期告警 ====="
 kubectl get events -A --sort-by='.lastTimestamp' --field-selector type=Warning | tail -10
 ```
-
 ## 9.2 版本升级流程
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== 升级前检查 =====
 # 1. 查看当前版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}{end}'
@@ -992,7 +1007,6 @@ ETCDCTL_API=3 sudo etcdctl snapshot save /backup/etcd-pre-upgrade.db \
 # 3. kubeadm upgrade apply v1.29.0
 # 4. 逐个升级 kubelet (drain → upgrade → uncordon)
 ```
-
 ## 9.3 HPA 自动扩缩容
 
 ```yaml
@@ -1037,7 +1051,8 @@ spec:
 
 ## 10.1 获取集群访问权限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 管理员为开发者创建 kubeconfig
 # (通常通过 OIDC/LDAP 认证，这里演示手动方式)
 
@@ -1053,7 +1068,6 @@ cp developer-kubeconfig.yaml ~/.kube/config
 # 3. 验证
 kubectl get pods -n dev-team-a
 ```
-
 ## 10.2 推荐开发工具
 
 | 工具 | 类型 | 说明 |
@@ -1118,23 +1132,23 @@ sudo kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 
 ## Q2: Harbor Pod 一直 Pending
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通常是 StorageClass 问题
 kubectl describe pod -n harbor | grep -A 5 Events
 # 如果提示 PVC Pending，检查 StorageClass
 kubectl get storageclass
 # 需要先安装 StorageClass (如 local-path-provisioner)
 ```
-
 ## Q3: Prometheus 数据丢失 (Pod 重启后)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PVC 是否正常绑定
 kubectl get pvc -n monitoring
 # 如果 PVC 为 Pending，说明存储未配置
 # 确保安装时设置了 persistence 参数
 ```
-
 ---
 
 **下一步**: 掌握研发环境后，前往 → [04-production-environment-deployment.md](./04-production-environment-deployment.md) 学习生产级部署。
@@ -1160,3 +1174,6 @@ kubectl get pvc -n monitoring
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+
+
+<!-- risk-assessed -->

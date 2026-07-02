@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 10: K8s 集群监控体系搭建实操
@@ -78,7 +83,8 @@ Prometheus Operator (监控中枢)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加 Prometheus Community Helm repo
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -94,13 +100,13 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
   --set grafana.adminPassword=changeme \
   --set prometheusOperator.tls.enabled=true
 ```
-
 ### 2.2 关键组件验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查所有组件状态
 kubectl get pods -n monitoring
 
@@ -115,7 +121,6 @@ kubectl get pods -n monitoring
 # 查看 Prometheus targets
 kubectl exec -it -n monitoring prometheus-prometheus-0 -- wget -O- localhost:9090/targets | grep -i "health"
 ```
-
 ---
 
 ## 3. 核心监控指标解读
@@ -287,7 +292,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 常用仪表盘 ID（可直接在 Grafana UI 导入）
 # Kubernetes / Nodes - 15764
 # Kubernetes / Pods - 15765
@@ -307,7 +313,6 @@ data:
     {"default": {"path": "/var/lib/grafana/dashboards"}}
 EOF
 ```
-
 ### 5.2 自定义仪表盘指标
 
 | 视图 | 核心指标 | PromQL |
@@ -436,3 +441,5 @@ related:
 ---
 ```
 ```
+
+<!-- risk-assessed -->

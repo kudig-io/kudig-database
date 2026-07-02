@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: promql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Zabbix Enterprise Monitoring Platform 深度实践
@@ -171,7 +176,8 @@ zabbix_ha_architecture:
 
 ## 2.1 Multi-Tier Proxy Architecture
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Zabbix Proxy 部署脚本
 
@@ -225,7 +231,6 @@ EOF
 systemctl enable zabbix-proxy
 systemctl start zabbix-proxy
 ```
-
 ## 2.2 Database Optimization Configuration
 
 ```sql
@@ -581,7 +586,8 @@ zabbix_scaling_strategy:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Zabbix性能优化脚本
 
@@ -628,7 +634,6 @@ EOF
 # 重启服务
 systemctl restart mysqld zabbix-server
 ```
-
 <!-- chunk: 6. Security and Compliance -->## 6. Security and Compliance
 
 ## 6.1 Security Hardening Configuration
@@ -937,3 +942,6 @@ capacity_planning:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

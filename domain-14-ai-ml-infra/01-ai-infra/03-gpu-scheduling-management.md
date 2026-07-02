@@ -77,6 +77,11 @@ related_docs:
   desc: GPU 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 133 - GPU调度与管理 (GPU Scheduling & Management)
@@ -257,7 +262,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署GPU Operator
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
 helm repo update
@@ -268,7 +274,6 @@ helm install gpu-operator nvidia/gpu-operator \
   --version v23.9.1 \
   -f gpu-operator-values.yaml
 ```
-
 ---
 
 <!-- chunk: 三、Time-Slicing配置 (Time-Slicing Configuration) -->
@@ -842,7 +847,8 @@ spec:
 
 ### 6.3 故障诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 基础诊断 ==========
 
 # GPU状态概览
@@ -909,7 +915,6 @@ kubectl get pods -n gpu-operator
 # 节点GPU标签
 kubectl get nodes -L nvidia.com/gpu.product,nvidia.com/gpu.count,nvidia.com/mig.config
 ```
-
 ### 6.4 常见XID错误代码
 
 | XID | 错误类型 | 原因 | 解决方案 |
@@ -1097,7 +1102,8 @@ nvidia.com/gpu: 1  # 实际为1/N物理卡
 
 ### 8.2 常用kubectl命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看GPU节点
 kubectl get nodes -l nvidia.com/gpu.present=true
 
@@ -1116,7 +1122,6 @@ kubectl get nodes -L nvidia.com/mig.config
 # Device Plugin日志
 kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 ```
-
 ---
 
 **GPU管理原则**: 合理切分资源 → 监控利用率 → 及时处理XID错误 → 定期健康检查
@@ -1161,3 +1166,6 @@ kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 - 02-ai-ml-workloads
 - 04-gpu-monitoring-dcgm
 - 05-distributed-training-frameworks
+
+
+<!-- risk-assessed -->

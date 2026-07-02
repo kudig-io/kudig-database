@@ -40,6 +40,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - Terway 性能调优 (Performance Tuning)
@@ -105,15 +110,15 @@ prerequisites:
 
 ### 2.3 查询节点实际容量
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name> -o jsonpath='{.status.allocatable.pods}'
 kubectl describe node <node-name> | grep -A 5 "Capacity"
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name> -o jsonpath='{.status.capacity}' | jq .
 ```
-
 > 详细容量规划参考: [domain-03-networking-traffic/05-terway-advanced-guide.md](../domain-03-networking-traffic/05-terway-advanced-guide.md)
 
 ---
@@ -240,11 +245,11 @@ done
 
 使用 `irqbalance` 服务自动管理 (推荐):
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl enable irqbalance
 systemctl start irqbalance
 ```
-
 [[Kubernetes|Kubernetes]] NUMA 感知调度 (需要开启 Topology Manager):
 
 ```yaml
@@ -345,11 +350,11 @@ data:
 
 ### 5.3 IP 分配耗时分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <terway-pod> | grep "allocate.*cost"
 kubectl logs -n kube-system <terway-pod> | grep "api.*latency"
 ```
-
 正常基线: IP 分配 < 2s (池内 IP < 100ms，需新建 IP < 2s)。
 
 ---
@@ -393,11 +398,11 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -- \
   cilium bandwidth list
 ```
-
 要求: 内核 5.10+，Terway v1.5+。
 
 ### 6.4 iptables → eBPF 迁移指南
@@ -409,7 +414,17 @@ kubectl exec -n kube-system <terway-pod> -- \
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 Step 1: 确认前置条件
   - 内核 >= 4.19 (推荐 5.10+)
   - Terway >= v1.3 (推荐 v1.5+)
@@ -430,7 +445,6 @@ Step 4: 观察运行状态
   # 监控 24 小时，确认无网络异常
   kubectl logs -n kube-system -l k8s-app=cilium --since=1h | grep -iE "error|warn|drop"
 ```
-
 **Cilium 版本兼容性矩阵:**
 
 | Terway 版本 | 最低 Cilium 版本 | 推荐 Cilium 版本 | 说明 |
@@ -447,7 +461,17 @@ Step 4: 观察运行状态
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 切换回 iptables 模式
 kubectl edit cm terway-config -n kube-system
 # 将 network_policy 从 "ebpf" 改回 "iptables"
@@ -461,7 +485,6 @@ kubectl rollout status ds/terway-eniip -n kube-system --timeout=300s
 # 4. 确认 iptables 规则已恢复
 kubectl exec -n kube-system <terway-pod> -- iptables -L -n | grep -c terway
 ```
-
 > **注意**: 回滚期间 NetworkPolicy 会有短暂的未生效窗口，建议在维护窗口操作。
 
 **已知不兼容性:**
@@ -478,7 +501,8 @@ kubectl exec -n kube-system <terway-pod> -- iptables -L -n | grep -c terway
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 eBPF 数据面状态
 kubectl exec -n kube-system <cilium-pod> -- cilium status --verbose
 kubectl exec -n kube-system <cilium-pod> -- cilium bpf tunnel list
@@ -490,7 +514,6 @@ kubectl exec -n kube-system <terway-pod> -- iptables -t filter -L TERWAY -n 2>/d
 # 性能对比验证
 kubectl exec -n kube-system <cilium-pod> -- cilium metrics list | grep -E "drop|forward|policy"
 ```
-
 ---
 
 ## 7. ENI 预热
@@ -538,10 +561,10 @@ data:
 
 ### 7.3 监控预热状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <terway-pod> | grep "pool|pre-allocate|eni.*attach"
 ```
-
 ---
 
 ## 8. 监控与观测
@@ -559,60 +582,60 @@ kubectl logs -n kube-system <terway-pod> | grep "pool|pre-allocate|eni.*attach"
 
 ### 8.2 日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <terway-pod> | grep "allocate.*cost"
 kubectl logs -n kube-system <terway-pod> | grep "api.*latency"
 kubectl logs -n kube-system <terway-pod> | grep "error|fail|timeout"
 ```
-
 ### 8.3 iperf3 基准测试
 
 服务端:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run iperf3-server --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest -- -s
 kubectl expose pod iperf3-server --port 5201 --target-port=5201
 ```
-
 客户端 - 吞吐量测试:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run iperf3-client --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest -- \
   -c <server-ip> -t 30 -P 4 -i 5
 ```
-
 客户端 - UDP 吞吐量测试:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run iperf3-client-udp --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest -- \
   -c <server-ip> -u -b 10G -t 30 -P 4
 ```
-
 客户端 - 延迟测试 (JSON 输出):
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run iperf3-client-latency --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/iperf3:latest -- \
   -c <server-ip> -t 10 --json
 ```
-
 ### 8.4 Ping 延迟测试
 
 同节点 Pod 间延迟:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run ping-same-node \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --command -- ping -c 100 -i 0.1 <same-node-pod-ip>
 ```
-
 跨节点 Pod 间延迟:
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run ping-cross-node \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --command -- ping -c 100 -i 0.1 <cross-node-pod-ip>
 ```
-
 ---
 
 ## 9. 生产环境性能基线
@@ -645,14 +668,14 @@ kubectl run ping-cross-node \
 
 ### 10.1 ENI 分配延迟诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <terway-pod> --tail=500 | grep -E "allocate|eni|ip.*assign"
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep terway
 ```
-
 常见原因及处理:
 
 | 现象 | 可能原因 | 处理方法 |
@@ -710,10 +733,10 @@ netstat -s | grep -E "retransmit|segment"
 ss -ti
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 ```
-
 ---
 
 ## 11. 交叉引用
@@ -749,3 +772,5 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

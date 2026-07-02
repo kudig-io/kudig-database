@@ -77,6 +77,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] API扩展深度解析 (API Extensions Deep Dive)
@@ -459,6 +464,7 @@ API聚合允许将自定义API服务器注册到主API服务器，提供原生�
 #### 聚合架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           API Aggregation Flow                                  │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -485,7 +491,6 @@ API聚合允许将自定义API服务器注册到主API服务器，提供原生�
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 3.2 APIService配置
 
 ```yaml
@@ -866,7 +871,8 @@ func main() {
 
 ### 6.1 Operator SDK项目结构
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 初始化Operator项目
 mkdir my-operator && cd my-operator
 operator-sdk init --domain=example.com --repo=github.com/example/my-operator
@@ -886,7 +892,6 @@ make docker-build IMG=example/my-operator:v0.0.1
 # 部署
 make deploy IMG=example/my-operator:v0.0.1
 ```
-
 ### 6.2 完整Operator示例
 
 ```yaml
@@ -1372,7 +1377,8 @@ my-operator/
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看控制器日志
 kubectl logs -n operator-system deploy/app-operator-controller-manager -c manager -f
 
@@ -1406,7 +1412,6 @@ go tool pprof http://localhost:8080/debug/pprof/heap
 curl -s http://localhost:8080/metrics | grep workqueue_depth
 # workqueue_depth{name="application"} — 如果持续增长说明处理速度跟不上
 ```
-
 ### 10.3 Reconciler性能调优检查清单
 
 | 检查项 | 命令/方法 | 期望结果 |
@@ -1625,3 +1630,6 @@ groups:
 - 27-authz-authn-deep-dive
 - 29-in-place-pod-resize
 - 30-dynamic-resource-allocation
+
+
+<!-- risk-assessed -->

@@ -40,6 +40,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -135,7 +140,8 @@ related_topics:
 
 ### Step 1: 确认监控组件 (15min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Prometheus
 kubectl get pods -n monitoring -l app.kubernetes.io/name=prometheus
 # 预期输出:
@@ -171,13 +177,13 @@ kubectl get servicemonitors -n monitoring
 # monitoring-kube-prometheus-nodeexporter  1d
 # monitoring-kube-prometheus-prometheus    1d
 ```
-
 ### Step 2: 配置告警规则 (30min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > core-alerts.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -281,7 +287,6 @@ kubectl get prometheusrule -n monitoring
 kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 # 浏览器访问: http://localhost:9090/alerts
 ```
-
 ### Step 3: 配置 Grafana Dashboard (30min)
 
 在 Grafana 中导入以下 Dashboard（通过 "+" → "Import" 输入 ID）：
@@ -312,7 +317,8 @@ kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 namespace
 kubectl create namespace fault-drill
 # 预期输出: namespace/fault-drill created
@@ -335,7 +341,6 @@ kubectl get all -n fault-drill
 # NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 # service/app   ClusterIP   10.96.100.200   <none>        80/TCP    30s
 ```
-
 ### Step 5: 故障注入与排查 (45min)
 
 #### 问题 1: OOMKilled
@@ -343,7 +348,8 @@ kubectl get all -n fault-drill
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 注入问题：创建一个内存使用超过 limits 的 Pod
 cat > oom-inject.yaml << 'EOF'
 apiVersion: v1
@@ -388,10 +394,10 @@ kubectl describe pod oom-inject -n fault-drill
 # 4. 根因: limits.memory=100Mi < 应用实际需求 200M
 # 5. 修复: 增加内存限制到 256Mi
 ```
-
 #### 问题 2: CrashLoopBackOff
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 注入问题：创建一个启动即退出的容器
 kubectl run crash-app --image=busybox -n fault-drill -- /bin/sh -c "echo 'Error: something went wrong' >&2 && exit 1"
 # 预期输出: pod/crash-app created
@@ -420,13 +426,13 @@ kubectl describe pod crash-app -n fault-drill | grep -A 10 "Last State"
 # 5. 根因: 容器启动命令执行失败（exit code 1）
 # 6. 修复: 修正容器启动命令
 ```
-
 #### 问题 3: Service 不可访问
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 注入问题：删除 Endpoints（模拟 selector 不匹配）
 kubectl delete endpoints app -n fault-drill
 # 预期输出: endpoints "app" deleted
@@ -458,7 +464,6 @@ kubectl get networkpolicy -n fault-drill
 kubectl delete svc app -n fault-drill
 kubectl expose deployment app --port=80 -n fault-drill
 ```
-
 ### Step 6: 编写故障排查报告 (15min)
 
 使用 FEBM 方法记录排查过程：
@@ -594,11 +599,20 @@ Loki 使用 LogQL 查询语言。基本语法：`{label="value"}`（日志流选
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete namespace fault-drill  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kubectl delete prometheusrule core-alerts -n monitoring
 ```
-
 ---
 
 ## 延伸阅读
@@ -609,3 +623,5 @@ kubectl delete prometheusrule core-alerts -n monitoring
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 
 ```
+
+<!-- risk-assessed -->

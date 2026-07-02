@@ -55,6 +55,11 @@ cross_refs:
   label: '故障树: node'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Karpenter 节点自动扩展实践指南
@@ -82,6 +87,7 @@ cross_refs:
 <!-- chunk: 一、Karpenter vs Cluster Autoscaler -->## 一、Karpenter vs Cluster Autoscaler
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Cluster Autoscaler              Karpenter
 ├── 按节点组扩容                ├── 按工作负载需求直接选型
 ├── 预设实例类型                ├── 动态选择最优实例类型
@@ -90,7 +96,6 @@ Cluster Autoscaler              Karpenter
 ├── 云厂商适配有限              ├── 原生 AWS/Azure/GCP 集成
 └── 基于 Pod request 判断       └── 基于 Pod + 调度约束判断
 ```
-
 | 维度 | Cluster Autoscaler | Karpenter |
 |:---|:---|:---|
 | **架构** | 基于节点组 (ASG/MIG) | 无节点组，直接创建实例 |
@@ -109,7 +114,8 @@ Cluster Autoscaler              Karpenter
 
 ## 2.1 AWS 前置准备
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 IAM 角色 (OIDC 联邦)
 export CLUSTER_NAME=production
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -148,13 +154,13 @@ aws iam create-policy \
   --policy-name KarpenterControllerPolicy \
   --policy-document file://karpenter-policy.json
 ```
-
 ## 2.2 Helm 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add karpenter https://charts.karpenter.sh
 helm repo update
 
@@ -170,14 +176,13 @@ helm install karpenter oci://public.ecr.aws/karpenter/karpenter \
   --set controller.resources.limits.cpu=1 \
   --set controller.resources.limits.memory=1Gi
 ```
-
 ## 2.3 验证安装
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n karpenter
 kubectl logs -n karpenter -l app.kubernetes.io/name=karpenter
 ```
-
 ---
 
 <!-- chunk: 三、NodePool 配置 -->## 三、NodePool 配置
@@ -424,13 +429,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 启用中断处理 (节点终止前优雅驱逐)
 helm upgrade karpenter oci://public.ecr.aws/karpenter/karpenter \
   --namespace karpenter \
   --set settings.interruptionQueue=${CLUSTER_NAME}
 ```
-
 ## 6.2 Pod 优雅终止
 
 ```yaml
@@ -625,3 +630,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

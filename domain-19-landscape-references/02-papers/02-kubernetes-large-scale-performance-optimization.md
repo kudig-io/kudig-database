@@ -57,6 +57,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
@@ -97,7 +102,8 @@ authors:
 
 ## 1.2 核心性能瓶颈识别
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 性能瓶颈诊断命令
 # 1. API Server性能监控
 kubectl get --raw /metrics | grep apiserver_request_duration
@@ -108,7 +114,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status -w tabl
 # 3. 节点性能分析
 kubectl top nodes --sort-by=cpu
 ```
-
 <!-- chunk: 2. 控制平面优化策略 -->## 2. 控制平面优化策略
 
 ## 2.1 API Server性能优化
@@ -130,7 +135,8 @@ API Server配置优化:
 ```
 
 ## 资源对象优化
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 对象规模控制最佳实践
 # 1. 限制单个命名空间对象数量
 kubectl get all -n production | wc -l  # 应该 < 1000
@@ -139,7 +145,6 @@ kubectl get all -n production | wc -l  # 应该 < 1000
 # 避免在ConfigMap/Secret中存储大文件
 # 单个对象大小建议 < 1MB
 ```
-
 ## 2.2 etcd性能深度优化
 
 ## 存储引擎优化
@@ -349,7 +354,8 @@ mountOptions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 存储性能指标收集
 # 1. PVC使用率监控
 kubectl get pvc -A -o custom-columns=NAME:.metadata.name,USAGE:.status.capacity.storage
@@ -360,7 +366,6 @@ kubectl exec -it <pod> -- iostat -x 1
 # 3. CSI驱动性能指标
 curl http://<csi-driver-metrics-endpoint>/metrics | grep csi
 ```
-
 ## 4.2 本地存储优化
 
 ```yaml
@@ -487,7 +492,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 性能诊断工具集
 # 1. 集群性能概览
 kubectl top nodes
@@ -503,7 +509,6 @@ kubectl exec -it <pod> -- dd if=/dev/zero of=/tmp/test bs=1M count=1000
 # 4. API Server性能分析
 kubectl get --raw /metrics | grep apiserver
 ```
-
 <!-- chunk: 7. 实际案例分析 -->## 7. 实际案例分析
 
 ## 7.1 案例一：5000节点集群优化
@@ -853,3 +858,6 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

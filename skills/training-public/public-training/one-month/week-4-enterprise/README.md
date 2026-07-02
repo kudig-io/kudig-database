@@ -43,6 +43,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -227,7 +232,8 @@ spec:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确保你的集群正常运行
 kubectl get nodes
 # 预期输出: 所有节点 Ready
@@ -269,7 +275,6 @@ helm install monitoring prometheus-community/kube-prometheus-stack \
 # NAMESPACE: monitoring
 # STATUS: deployed
 ```
-
 ### 本周自测
 
 完成本周学习后，请完成 [checkpoint.md](./checkpoint.md) 中的终极自测题。
@@ -462,3 +467,6 @@ Kyverno 的优势在于使用 Kubernetes 原生资源定义策略，学习曲线
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

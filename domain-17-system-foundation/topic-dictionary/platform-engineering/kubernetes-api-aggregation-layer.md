@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合层
@@ -82,7 +87,8 @@ API 聚合层（Aggregation Layer）允许 Kubernetes 通过额外的 API 进行
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 APIService 状态
 kubectl get apiservice | grep -v Local
 
@@ -92,7 +98,6 @@ kubectl get apiservice | grep False
 # 查看 APIService 详情
 kubectl describe apiservice <name>
 ```
-
 ## 交叉引用
 
 - 扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
@@ -107,3 +112,6 @@ kubectl describe apiservice <name>
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+
+
+<!-- risk-assessed -->

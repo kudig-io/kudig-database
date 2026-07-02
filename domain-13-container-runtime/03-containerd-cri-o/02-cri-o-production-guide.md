@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CRI-O 生产指南
@@ -99,13 +104,13 @@ sudo yum install -y cri-o-1.30.*
 
 安装完成后，启用 systemd 服务并设置为开机自启。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启动并启用 crio 服务，检查其是否能正常监听 CRI socket
 sudo systemctl enable --now crio
 sudo systemctl status crio --no-pager
 ls -l /var/run/crio/crio.sock
 ```
-
 ### 2.2 配置 kubelet 使用 CRI-O
 
 在 ACK/ASO 节点池中切换运行时后，kubelet 需要指向 CRI-O 的 socket。若手工配置单节点，需要修改 kubelet 启动参数。
@@ -113,13 +118,22 @@ ls -l /var/run/crio/crio.sock
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 将 kubelet 的 CRI endpoint 指向 CRI-O socket
 KUBELET_EXTRA_ARGS="--container-runtime=remote --container-runtime-endpoint=unix:///var/run/crio/crio.sock"
 echo "KUBELET_EXTRA_ARGS=${KUBELET_EXTRA_ARGS}" | sudo tee /etc/sysconfig/kubelet
 sudo systemctl restart kubelet
 ```
-
 ## 3. 核心配置文件
 
 CRI-O 的配置分散在多个文件中，理解每个文件的作用有助于快速定位问题：
@@ -139,7 +153,17 @@ CRI-O 的配置分散在多个文件中，理解每个文件的作用有助于�
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 drop-in 配置，覆盖 pause 镜像与 cgroup 管理器
 sudo tee /etc/crio/crio.conf.d/99-ack-custom.conf <<'EOF'
 [crio.image]
@@ -156,12 +180,12 @@ metrics_port = 9537
 EOF
 sudo systemctl restart crio
 ```
-
 ### 3.2 配置镜像仓库与 mirror
 
 CRI-O 使用 `/etc/containers/registries.conf` 管理仓库。下面的配置为 Docker Hub 配置阿里云加速器，并将 `registry.example.com` 标记为 insecure（仅用于测试环境，生产应使用 TLS）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 配置 Docker Hub 镜像加速与私有 insecure 仓库
 sudo tee /etc/containers/registries.conf <<'EOF'
 unqualified-search-registries = ["docker.io"]
@@ -178,27 +202,26 @@ insecure = true
 EOF
 sudo systemctl reload crio
 ```
-
 ## 4. Pod 生命周期管理
 
 CRI-O 完全通过 CRI 与 kubelet 交互，日常运维主要使用 `crictl` 或 `oc`。下面的命令展示如何在节点上查看 Pod、容器、日志与事件。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CRI-O 节点上的 Pod、容器与日志，定位 Pod 状态异常
 sudo crictl pods
 sudo crictl ps -a
 sudo crictl logs <container-id>
 sudo crictl inspectp <pod-id>
 ```
-
 若需要手动创建沙箱或容器（例如做网络连通性测试），可以使用 CRI 原语。注意：这些操作不会受 Kubernetes 管理，仅用于排障。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动创建 Pod 沙箱，生成 sandbox-id 供后续创建容器使用
 POD_ID=$(sudo crictl runp /tmp/pod-config.json)
 echo "Pod sandbox id: ${POD_ID}"
 ```
-
 沙箱配置 `/tmp/pod-config.json` 示例：
 
 ```json
@@ -218,17 +241,18 @@ echo "Pod sandbox id: ${POD_ID}"
 
 CRI-O 的镜像默认存储在 `/var/lib/containers`，与 Podman 共享 storage。可以使用 `crictl images` 或 `podman images` 查看。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CRI-O/Podman 本地镜像列表与占用
 sudo crictl images
 sudo podman images --storage-driver overlay
 ```
-
 ### 5.2 镜像签名策略
 
 生产环境中，为防止供应链攻击，可对关键业务镜像开启签名验证。CRI-O 通过 `/etc/containers/policy.json` 配置策略。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 配置仅允许指定仓库的签名镜像，其余仓库默认拒绝
 sudo tee /etc/containers/policy.json <<'EOF'
 {
@@ -244,7 +268,6 @@ sudo tee /etc/containers/policy.json <<'EOF'
 EOF
 sudo systemctl reload crio
 ```
-
 开启签名验证后，未签名的镜像会触发 `ImagePullBackOff`，值班人员可通过 `crictl pull` 或 `journalctl -u crio` 查看签名校验失败的具体原因。
 
 ## 6. Runtime Handler 配置
@@ -254,7 +277,17 @@ CRI-O 支持通过 `runtime_handler` 字段为不同 Pod 选择不同 OCI runtim
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 runtime handler drop-in，注册 kata 作为可选运行时
 sudo tee /etc/crio/crio.conf.d/50-runtime-handler.conf <<'EOF'
 [crio.runtime.runtimes.runc]
@@ -267,7 +300,6 @@ runtime_type = "vm"
 EOF
 sudo systemctl restart crio
 ```
-
 在 Pod 中通过 `runtimeClassName: kata` 即可使用 Kata。详见 [[domain-13-container-runtime/03-containerd-cri-o/03-oci-runtimes-comparison.md|OCI 运行时对比]]。
 
 ## 7. 监控与日志
@@ -309,22 +341,22 @@ sudo journalctl -u crio -n 200 --no-pager | grep -i "sandbox"
 
 步骤二：检查 pause 镜像是否可拉取、CNI 插件是否就绪、runtime handler 是否存在。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 pause 镜像与 CNI 插件状态
 sudo crictl pull registry-vpc.cn-hangzhou.aliyuncs.com/acs/pause:3.9
 ls -l /opt/cni/bin/ | head
 ```
-
 ### 8.2 镜像拉取失败且提示 unauthorized
 
 可能是 `/etc/containers/registries.conf` 中的认证未配置，或 imagePullSecret 未下发到节点。可使用 `crictl pull` 复现。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动拉取镜像并查看 CRI-O 返回的认证错误详情
 sudo crictl pull registry.cn-hangzhou.aliyuncs.com/demo/app:v1.0
 sudo journalctl -u crio -n 50 --no-pager | grep -i "unauthorized"
 ```
-
 ### 8.3 存储损坏导致无法创建容器
 
 `/var/lib/containers` 异常卸载或磁盘损坏时，CRI-O 可能无法读取 storage metadata。此时应先停止 CRI-O，备份并重建存储目录（注意会丢失本地镜像）。
@@ -332,14 +364,23 @@ sudo journalctl -u crio -n 50 --no-pager | grep -i "unauthorized"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 备份并重建容器存储元数据，仅在存储损坏且无法修复时执行
 sudo systemctl stop crio
 sudo mv /var/lib/containers /var/lib/containers.bak.$(date +%Y%m%d%H%M)
 sudo mkdir -p /var/lib/containers
 sudo systemctl start crio
 ```
-
 ## 9. CRI-O 与 containerd 对比
 
 | 维度 | CRI-O | containerd |
@@ -377,14 +418,14 @@ sudo yum module enable -y container-tools:rhel8
 
 CRI-O 与 Podman 共享 `/var/lib/containers` storage 与 `/etc/containers` 配置。这意味着运维人员可以在同一节点上使用 Podman 做镜像预览、签名验证或本地调试，但需要注意权限差异：CRI-O 以 root 运行，Podman 默认使用当前用户。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Podman 查看 CRI-O 已拉取的镜像（需要 root 权限以访问同一 storage）
 sudo podman images --storage-driver overlay
 
 # 使用 skopeo 检查远程镜像的 layer 与签名信息
 skopeo inspect --tls-verify=false docker://registry.cn-hangzhou.aliyuncs.com/demo/app:v1.0
 ```
-
 在排障时，若 CRI-O 拉取镜像失败，可先用 Podman 或 skopeo 在同一节点上验证仓库连通性与镜像完整性，缩小问题范围。
 
 ## 12. 生产检查清单
@@ -407,3 +448,5 @@ skopeo inspect --tls-verify=false docker://registry.cn-hangzhou.aliyuncs.com/dem
 - [[domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md|容器运行时接口]]
 
 ```
+
+<!-- risk-assessed -->

@@ -47,6 +47,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Tekton CI/CD 流水线故障排查指南
@@ -160,7 +165,8 @@ k8s_versions:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Tekton CLI 查看状态
 tkn pipelinerun list -A
 tkn taskrun list -A
@@ -182,7 +188,6 @@ kubectl logs -n tekton-pipelines deployment/tekton-triggers-controller --tail=20
 # 查看事件
 kubectl get events --field-selector involvedObject.kind=PipelineRun --sort-by='.lastTimestamp'
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -251,7 +256,8 @@ Tekton 流水线问题
 
 #### Tekton 全景诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Tekton 全景诊断脚本
 
@@ -304,10 +310,10 @@ echo "6. 控制器错误日志 (最近 10 条):"
 kubectl logs -n tekton-pipelines deployment/tekton-pipelines-controller --tail=200 2>/dev/null | \
   grep -iE "error|fail|timeout" | tail -10
 ```
-
 #### PipelineRun 问题深度诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # PipelineRun 问题深度诊断
 # 用法: ./diagnose-pipelinerun.sh <pipelinerun-name> <namespace>
@@ -364,7 +370,6 @@ echo ""
 echo "5. 相关 Events:"
 kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$PR_NAME --sort-by='.lastTimestamp' | tail -10
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -607,7 +612,8 @@ spec:
 
 #### Tekton 健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Tekton 健康检查脚本
 
@@ -651,7 +657,6 @@ kubectl get pipelineruns --all-namespaces -o json 2>/dev/null | jq -r '
 echo "" | tee -a $REPORT_FILE
 echo "报告已保存: $REPORT_FILE" | tee -a $REPORT_FILE
 ```
-
 #### Prometheus 监控告警
 
 ```yaml
@@ -761,3 +766,6 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+
+
+<!-- risk-assessed -->

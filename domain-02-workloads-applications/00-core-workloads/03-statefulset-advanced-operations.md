@@ -66,6 +66,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 03 - [[StatefulSet|StatefulSet]] 高级运维指南 (StatefulSet Advanced Operations)
@@ -617,7 +622,17 @@ data:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 查看 StatefulSet 状态
 kubectl describe statefulset <statefulset-name> -n <namespace>
 
@@ -640,14 +655,14 @@ kubectl delete pod <statefulset-name>-<ordinal> -n <namespace>
 # 7. 扩容/缩容
 kubectl scale statefulset <statefulset-name> -n <namespace> --replicas=<number>
 ```
-
 #### 5.2 数据恢复流程
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # StatefulSet 数据恢复脚本
 
@@ -715,7 +730,6 @@ kubectl scale statefulset $STATEFULSET_NAME -n $NAMESPACE --replicas=3
 
 echo "数据恢复完成！"
 ```
-
 ### 6. 性能优化配置
 
 #### 6.1 存储优化
@@ -816,3 +830,6 @@ spec:
 - 02-deployment-production-patterns
 - 04-daemonset-management
 - 05-job-cronjob-advanced
+
+
+<!-- risk-assessed -->

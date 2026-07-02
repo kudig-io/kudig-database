@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 27: 存储卷挂载实操
@@ -292,7 +297,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. "MountVolume.Mount failed"
 kubectl describe pod <pod-name> | grep -A15 "Events:"
 
@@ -304,23 +310,23 @@ kubectl exec -it <pod-name> -- ls -la /data
 # subPath 不支持动态扩展
 # 检查 ConfigMap/Secret 更新是否生效
 ```
-
 ### 6.2 挂载传播问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查挂载传播配置
 kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*].mountPropagation}'
 
 # 常见问题：hostPath 挂载后容器内不可见
 # 解决：确认 mountPropagation 设置为 HostToContainer 或 Bidirectional
 ```
-
 ### 6.3 ConfigMap/Secret 更新不生效
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 重启 Pod（推荐）
 kubectl rollout restart deployment <deploy-name>
 
@@ -330,7 +336,6 @@ kubectl rollout restart deployment <deploy-name>
 # 方式 3: 监听挂载（推荐用于生产）
 # 使用 dirsync 或 inotifywait 监听文件变化
 ```
-
 ---
 
 ## 7. 存储性能优化
@@ -461,3 +466,6 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+
+<!-- risk-assessed -->

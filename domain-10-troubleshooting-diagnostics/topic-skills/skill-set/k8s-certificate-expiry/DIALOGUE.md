@@ -25,6 +25,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # 证书过期问题诊断与修复 — 对话脚本
 
@@ -452,7 +457,8 @@ relationships:
 **步骤 1：阿里云SSL证书服务检查**
 请登录阿里云控制台或使用CLI检查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查阿里云SSL证书列表和到期时间
 aliyun cas DescribeUserCertificateList --RegionId cn-hangzhou
 
@@ -462,13 +468,13 @@ kubectl get ingress -A -o yaml | grep -A 5 secretName
 # 检查SLB绑定的证书
 aliyun slb DescribeServerCertificates --RegionId <region>
 ```
-
 > **如果无法执行aliyun CLI**：请登录阿里云控制台，进入SSL证书控制台，告诉我：
 > 1. 即将过期的证书是否已在阿里云SSL证书服务中？
 > 2. 是否有已购买的续期证书？
 
 **步骤 2：ACK托管证书检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查ACK是否使用托管证书
 kubectl get secret -n kube-system | grep cert
 
@@ -478,7 +484,6 @@ kubectl get pods -n cert-manager
 # 检查证书自动续期配置
 kubectl get clusterissuer,certificate -A
 ```
-
 **步骤 3：专有云证书特殊考虑**
 - 专有云环境可能使用自签名证书或内部CA
 - 检查飞天/天基组件证书：`find /etc/aso -name "*.crt" -o -name "*.pem"`
@@ -495,15 +500,14 @@ kubectl get clusterissuer,certificate -A
 4. 验证：curl -v https://<domain> 确认新证书生效
 
 如使用cert-manager自动续期：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 强制触发续期
 kubectl cert-manager renew --all-namespaces
 
 # 检查续期状态
 kubectl get certificate -A -w
 ```
-
-
 ## 升级条件汇总
 
 | 场景 | 升级目标 | 原因 |
@@ -528,3 +532,6 @@ kubectl get certificate -A -w
 ## Related
 
 - [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+
+
+<!-- risk-assessed -->

@@ -59,6 +59,11 @@ related_topics:
 - revision-history
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Deployment Create — [[Kubernetes|Kubernetes]] Deployment 控制器源码分析
@@ -348,6 +353,7 @@ type RollingUpdateDeployment struct {
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 1. 用户执行 kubectl apply -f deployment.yaml
 2. API Server 接收请求，验证并写入 etcd
 3. Deployment Informer 通过 Watch 机制捕获到新增事件
@@ -363,7 +369,6 @@ type RollingUpdateDeployment struct {
 11. RS Controller 创建/删除 Pod
 12. Deployment Controller 更新 Deployment Status
 ```
-
 ## 使用场景
 
 1. **无状态应用部署**：Web 服务、API 服务、微服务等
@@ -439,7 +444,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl apply -f deployment.yaml --record
 
@@ -456,7 +462,6 @@ kubectl get pods -l app=nginx -o wide
 kubectl describe deployment nginx
 
 ```
-
 ### kubectl apply 输出
 
 ```
@@ -483,7 +488,8 @@ nginx-7c4c8d5d4f   5         5         5       2m
 
 ### 滚动更新过程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像触发滚动发布
 kubectl set image deployment/nginx nginx=nginx:1.26 --record
 
@@ -494,19 +500,18 @@ kubectl get rs -l app=nginx -w
 # 查看发布历史
 kubectl rollout history deployment/nginx
 ```
-
 ### kubectl rollout history 输出
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 deployment.apps/nginx
 REVISION  CHANGE-CAUSE
 1         kubectl apply --filename=deployment.yaml --record=true
 2         kubectl set image deployment/nginx nginx=nginx:1.26 --record=true
 ```
-
 ## 常见错误
 
 | 错误 | 现象 | 原因 | 解决方案 |
@@ -565,3 +570,5 @@ REVISION  CHANGE-CAUSE
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

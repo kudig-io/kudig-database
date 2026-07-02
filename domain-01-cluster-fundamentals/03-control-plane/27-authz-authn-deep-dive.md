@@ -74,6 +74,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 认证授权深度解析 (Authentication & Authorization Deep Dive)
@@ -694,7 +699,8 @@ rules:
 
 ### 6.1 常见认证问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 证书过期检查
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text -noout | grep -E "(Not Before|Not After)"
 
@@ -704,10 +710,10 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /etc/kubernetes/pki/apiserver.
 # 3. ServiceAccount Token验证
 kubectl get secret $(kubectl get sa default -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d
 ```
-
 ### 6.2 RBAC权限调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查用户权限
 kubectl auth can-i get pods --as=system:serviceaccount:default:default
 
@@ -720,13 +726,13 @@ kubectl get clusterrolebinding -o wide
 # 4. 调试RBAC规则
 kubectl auth reconcile -f role.yaml --remove-extra-permissions --confirm
 ```
-
 ### 6.3 准入控制问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查准入控制器状态
 kubectl get mutatingwebhookconfigurations
 kubectl get validatingwebhookconfigurations
@@ -737,7 +743,6 @@ kubectl logs -n webhook-system deployment/webhook-deployment
 # 3. 临时禁用Webhook进行调试
 kubectl delete mutatingwebhookconfiguration <webhook-name>
 ```
-
 <!-- chunk: 7. 企业级安全方案 -->
 ## 7. 企业级安全方案
 
@@ -797,7 +802,8 @@ spec:
 
 ### 7.3 安全合规检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # security-audit-checklist.sh
 
@@ -824,7 +830,6 @@ kubectl get clusterrolebindings --no-headers | wc -l
 echo "5. ServiceAccount配置检查:"
 kubectl get serviceaccounts --all-namespaces | grep -E "(default|system)"
 ```
-
 ---
 **文档维护**: Kusheet Security Team | **最后审查**: 2026-02 | **安全等级**: ★★★★★
 ---
@@ -855,3 +860,6 @@ kubectl get serviceaccounts --all-namespaces | grep -E "(default|system)"
 - 26-gitops-automation-operations
 - 28-api-extension-deep-dive
 - 29-in-place-pod-resize
+
+
+<!-- risk-assessed -->

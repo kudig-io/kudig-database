@@ -36,6 +36,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Cluster Autoscaler 节点自动扩缩容故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级
@@ -73,6 +78,7 @@ prerequisites:
 ### Cluster Autoscaler 架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                      Cluster Autoscaler                                  │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -172,7 +178,6 @@ prerequisites:
 │  删除节点      │
 └────────────────┘
 ```
-
 ### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息 | 查看方式 |
@@ -201,6 +206,7 @@ prerequisites:
 ### 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Cluster Autoscaler 问题
         │
         ▼
@@ -278,12 +284,12 @@ Cluster Autoscaler 问题
                                                         │ 完成       │
                                                         └────────────┘
 ```
-
 ### 排查命令集
 
 #### CA 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CA Pod 状态
 kubectl get pods -n kube-system -l app=cluster-autoscaler
 kubectl get pods -n kube-system | grep -i autoscaler
@@ -301,10 +307,10 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml
 # 查看 CA 版本
 kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-
 #### Pending Pod 分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找因资源不足 Pending 的 Pod
 kubectl get pods -A --field-selector=status.phase=Pending
 
@@ -320,10 +326,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,CPU:.status.allocatable.
 # 检查节点资源使用
 kubectl top nodes
 ```
-
 #### 节点组检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点及标签
 kubectl get nodes --show-labels
 
@@ -336,10 +342,10 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata
 # 查看节点的 CA 注解
 kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, annotations: .metadata.annotations | with_entries(select(.key | startswith("cluster-autoscaler")))}'
 ```
-
 #### 缩容检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点是否有阻止缩容的 annotation
 kubectl get nodes -o json | jq '.items[] | select(.metadata.annotations."cluster-autoscaler.kubernetes.io/scale-down-disabled" == "true") | .metadata.name'
 
@@ -352,7 +358,6 @@ kubectl get pdb -A
 # 查看节点资源利用率
 kubectl top node <node-name>
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 | 风险等级 |
@@ -371,7 +376,8 @@ kubectl top node <node-name>
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 确认 CA 正在运行
 kubectl get pods -n kube-system -l app=cluster-autoscaler
 
@@ -393,10 +399,10 @@ kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "max size\|targe
 # 步骤 6: 验证云 API 权限
 kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|failed\|unauthorized"
 ```
-
 **常见原因与解决**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 原因 1: Pod 有 nodeSelector 但无对应节点组
 # 解决: 创建带有对应标签的节点组
 
@@ -413,14 +419,14 @@ kubectl get pod <pod> -o yaml | grep -A5 "resources:"
 # 检查 CA 启动参数
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A20 "args:"
 ```
-
 ### 扩容到错误的节点组
 
 **问题现象**：Pod 被调度到非预期的节点组。
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 CA 的 expander 策略
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep expander
 # 默认是 random，可能导致随机选择节点组
@@ -428,7 +434,6 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep expander
 # 步骤 2: 配置合适的 expander 策略
 # 可选: random, most-pods, least-waste, price, priority
 ```
-
 **配置 priority expander**：
 
 ```yaml
@@ -451,11 +456,11 @@ data:
 # --expenderpriority-ds-config-map=cluster-autoscaler-priority-expander
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 3: 使用 nodeSelector 或 nodeAffinity 精确控制
 kubectl get pod <pod> -o yaml | grep -A10 "nodeSelector\|affinity"
 ```
-
 **Pod 节点亲和性示例**：
 
 ```yaml
@@ -479,7 +484,8 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查节点利用率
 kubectl top nodes
 # 默认缩容阈值是 50%
@@ -509,7 +515,6 @@ kubectl get pods -A -o json | jq '.items[] | select(.metadata.annotations."clust
 # 原因 5: 系统 Pod (kube-system) 阻止缩容
 # CA 默认不缩容有 kube-system Pod 的节点 (可配置)
 ```
-
 **允许缩容的 Pod annotation**：
 
 ```yaml
@@ -527,13 +532,13 @@ metadata:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 CA 日志中的错误
 kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|forbidden\|unauthorized"
 
 # 步骤 2: 根据云平台检查权限
 ```
-
 **AWS IAM 权限示例**：
 
 ```json
@@ -560,7 +565,8 @@ kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|forbidde
 
 **GCP IAM 角色**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 需要的角色
 # - roles/compute.instanceGroupManager
 # - roles/compute.instances.admin
@@ -568,7 +574,6 @@ kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|forbidde
 # 检查服务账号
 kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{.spec.template.spec.serviceAccountName}'
 ```
-
 **阿里云 RAM 权限**：
 
 ```json
@@ -594,7 +599,8 @@ kubectl get deployment cluster-autoscaler -n kube-system -o jsonpath='{.spec.tem
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 分析延迟来源
 # a. CA 检测到需要扩容的时间
 # b. 云 API 创建实例的时间
@@ -613,7 +619,6 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep scan-int
 # 步骤 4: 考虑 over-provisioning
 # 保持一些空闲节点用于快速调度
 ```
-
 **Over-provisioning 示例**：
 
 ```yaml
@@ -658,13 +663,13 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 确保有足够的副本数
 kubectl get deployment <name> -o jsonpath='{.spec.replicas}'
 
 # 步骤 2: 配置 PodDisruptionBudget
 ```
-
 **PDB 配置示例**：
 
 ```yaml
@@ -715,7 +720,8 @@ spec:
 
 **解决步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 CA 配置的节点组
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A5 "\-\-nodes"
 
@@ -726,7 +732,6 @@ kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A5 "\-\
 
 # 步骤 3: 使用 autodiscovery 模式 (推荐)
 ```
-
 **autodiscovery 配置示例**：
 
 ```yaml
@@ -754,7 +759,8 @@ containers:
 
 ### 附录：快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ===== Cluster Autoscaler 一键诊断脚本 =====
 
 echo "=== CA Pod 状态 ==="
@@ -778,7 +784,6 @@ kubectl get nodes -o json | jq -r '.items[] | select(.metadata.annotations["clus
 echo -e "\n=== PDB 配置 ==="
 kubectl get pdb -A
 ```
-
 ### 附录：CA 常用启动参数
 
 ```yaml
@@ -821,3 +826,6 @@ containers:
 - [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

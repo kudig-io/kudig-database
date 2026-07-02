@@ -62,6 +62,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 007：HPA 未生效（metrics-server 异常 + Prometheus adapter 配置错误）
@@ -84,15 +89,16 @@ relationships:
 
 ### 3.1 查看 HPA 状态与事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa -n pay-gateway
 kubectl describe hpa pay-gateway-hpa -n pay-gateway
 kubectl get events -n pay-gateway --field-selector involvedObject.kind=HorizontalPodAutoscaler
 ```
-
 ### 3.2 检查 metrics-server 组件状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deploy metrics-server -n kube-system
 kubectl get pod -n kube-system -l k8s-app=metrics-server
 kubectl logs -n kube-system -l k8s-app=metrics-server --tail=200
@@ -100,10 +106,10 @@ kubectl logs -n kube-system -l k8s-app=metrics-server --tail=200
 # 验证 metrics-server API 聚合层可用性
 kubectl get --raw /apis/metrics.k8s.io/v1beta1
 ```
-
 ### 3.3 检查 Prometheus adapter 与自定义指标 API
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deploy prometheus-adapter -n monitoring
 kubectl get pod -n monitoring -l name=prometheus-adapter
 kubectl logs -n monitoring -l name=prometheus-adapter --tail=300
@@ -112,13 +118,13 @@ kubectl logs -n monitoring -l name=prometheus-adapter --tail=300
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/namespaces/pay-gateway/services/*/gateway_qps
 ```
-
 ### 3.4 检查 Prometheus 目标与 ServiceMonitor
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get servicemonitor -n monitoring | grep gateway
 kubectl get servicemonitor pay-gateway-sm -n monitoring -o yaml
 
@@ -127,10 +133,10 @@ kubectl get servicemonitor pay-gateway-sm -n monitoring -o yaml
 kubectl exec -it prometheus-k8s-0 -n monitoring -- \
   wget -qO- 'http://localhost:9090/api/v1/query?query=gateway_qps'
 ```
-
 ### 3.5 检查证书与聚合层 APIService
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get apiservice | grep metrics
 kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 kubectl get apiservice v1beta1.custom.metrics.k8s.io -o yaml
@@ -138,7 +144,6 @@ kubectl get apiservice v1beta1.custom.metrics.k8s.io -o yaml
 # 检查 metrics-server 证书有效期
 kubectl get secret metrics-server-certs -n kube-system -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates
 ```
-
 ### 3.6 诊断过程补充说明
 
 HPA 出现 `<unknown>` 时，首要任务是区分是 "资源指标（metrics.k8s.io）" 不可用，还是 "自定义指标（custom.metrics.k8s.io）" 不可用。前者通常由 metrics-server 负责，后者由 Prometheus adapter 负责。如果两者同时不可用，往往意味着 apiserver 聚合层或证书链出现了问题，需要优先检查 APIService 的 `Available` 条件。
@@ -167,33 +172,34 @@ HPA 出现 `<unknown>` 时，首要任务是区分是 "资源指标（metrics.k8
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 删除旧证书 Secret，让 metrics-server 自动重新生成
 kubectl delete secret metrics-server-certs -n kube-system
 kubectl rollout restart deploy metrics-server -n kube-system
 kubectl rollout status deploy metrics-server -n kube-system --timeout=120s
 ```
-
 ### 5.2 刷新 APIService 状态
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl delete apiservice v1beta1.metrics.k8s.io
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/metrics-server/release-0.7/components.yaml
 # 若使用 ACK 托管组件，改用：
 # aliyun cs clusteraddon install metrics-server --cluster-id <ack-cluster-id>
 ```
-
 ### 5.3 修复 Prometheus adapter 规则
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 编辑 adapter ConfigMap，将规则中的标签选择器修正为新标签
 kubectl get cm adapter-config -n monitoring -o yaml > /tmp/adapter-config.yaml
 
@@ -202,32 +208,32 @@ kubectl get cm adapter-config -n monitoring -o yaml > /tmp/adapter-config.yaml
 kubectl apply -f /tmp/adapter-config.yaml
 kubectl rollout restart deploy prometheus-adapter -n monitoring
 ```
-
 ### 5.4 验证自定义指标返回
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 sleep 30
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/namespaces/pay-gateway/services/*/gateway_qps
 ```
-
 ### 5.5 触发 HPA 重新评估
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动 annotate 强制 HPA 立即重新计算
 kubectl annotate hpa pay-gateway-hpa -n pay-gateway kube-controller-manager.kubernetes.io/restart-
 kubectl patch hpa pay-gateway-hpa -n pay-gateway -p '{"metadata":{"annotations":{"manual-trigger":"'$(date +%s)'"}}}'
 ```
-
 ### 5.6 回滚方案（如修复失败）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若 metrics-server 无法快速恢复，可临时手动扩容 pay-gateway 以缓解业务压力
 kubectl scale deploy pay-gateway -n pay-gateway --replicas=10
 
@@ -243,10 +249,10 @@ spec:
           averageUtilization: 60
 '
 ```
-
 ## 6. 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 确认 HPA 能读取到当前指标
 kubectl get hpa pay-gateway-hpa -n pay-gateway -w
 
@@ -262,7 +268,6 @@ kubectl run load-test --rm -i --restart=Never -n pay-gateway --image=registry-vp
 # 观察 Pod 数量变化
 kubectl get deploy pay-gateway -n pay-gateway -w
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-007 已处理完成。
@@ -317,3 +322,6 @@ kubectl get deploy pay-gateway -n pay-gateway -w
 - Metrics Server
 - Prometheus (entities)
 - [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
+
+
+<!-- risk-assessed -->

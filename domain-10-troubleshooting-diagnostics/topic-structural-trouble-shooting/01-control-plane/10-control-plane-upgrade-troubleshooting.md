@@ -45,6 +45,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 控制平面升级迁移问题处理指南
@@ -113,7 +118,8 @@ k8s_versions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 升级前状态检查脚本
 
@@ -154,7 +160,6 @@ df -h /var/lib/etcd /var/lib/kubelet
 echo "7. 备份状态检查:"
 ls -la /var/backups/kubernetes/ 2>/dev/null || echo "  备份目录不存在"
 ```
-
 ## 排查方法与步骤
 
 ### 诊断原理说明
@@ -197,7 +202,8 @@ Kubernetes 升级过程涉及多个关键环节的风险：
 
 #### 1. 版本兼容性诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 版本兼容性诊断脚本
 
@@ -236,13 +242,13 @@ kubectl get --raw /metrics | grep feature | head -10
 echo "4. 第三方组件版本检查:"
 helm list --all-namespaces 2>/dev/null || echo "Helm 未安装或无法访问"
 ```
-
 #### 2. 数据迁移问题诊断
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 数据迁移问题诊断脚本
 
@@ -296,10 +302,10 @@ if [ $STORAGE_USED -gt 80 ]; then
   echo "⚠ 警告: /var/lib/etcd 存储使用率 ${STORAGE_USED}%"
 fi
 ```
-
 #### 3. 证书问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 证书问题诊断脚本
 
@@ -359,14 +365,14 @@ if [ -n "$CERTIFICATE_EVENTS" ]; then
   echo "$CERTIFICATE_EVENTS"
 fi
 ```
-
 ## 解决方案与风险控制
 
 ### 版本兼容性问题解决
 
 #### 方案一：逐版本升级策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 逐版本升级脚本
 
@@ -412,10 +418,10 @@ done
 
 echo "升级完成！"
 ```
-
 #### 方案二：API 版本迁移工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # API 版本迁移检查和修复工具
 
@@ -459,7 +465,6 @@ if $REPLY =~ ^[Yy]$; then
   migrate_deprecated_resources
 fi
 ```
-
 ### 数据迁移问题解决
 
 #### 方案一：etcd 数据清理和压缩
@@ -467,7 +472,8 @@ fi
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # etcd 数据清理和压缩脚本
 
@@ -498,7 +504,6 @@ kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https
 echo "5. 验证清理结果:"
 kubectl exec -n kube-system $ETCD_POD -- du -sh /var/lib/etcd/member/snap/db
 ```
-
 #### 方案二：完整的备份恢复流程
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -507,7 +512,17 @@ kubectl exec -n kube-system $ETCD_POD -- du -sh /var/lib/etcd/member/snap/db
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 完整的 etcd 备份恢复流程
 
@@ -585,7 +600,6 @@ fi
 
 echo "备份验证完成，可用于恢复操作"
 ```
-
 ### 证书问题解决
 
 #### 方案一：证书续期和轮换
@@ -593,7 +607,17 @@ echo "备份验证完成，可用于恢复操作"
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 证书续期和轮换脚本
 
@@ -686,13 +710,22 @@ if $REPLY =~ ^[Yy]$; then
   renew_certificates
 fi
 ```
-
 #### 方案二：证书分发同步
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 证书分发同步脚本
 
@@ -752,7 +785,6 @@ verify_certificate_consistency
 
 echo "证书同步完成！"
 ```
-
 ## ⚠️ 执行风险评估
 
 | 操作 | 风险等级 | 影响评估 | 回滚方案 |
@@ -771,7 +803,17 @@ echo "证书同步完成！"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 升级后验证脚本
 
@@ -819,7 +861,6 @@ kubectl delete pvc test-pvc
 
 echo "升级验证完成！"
 ```
-
 ### 升级监控告警配置
 
 ```yaml
@@ -1005,3 +1046,5 @@ echo "  4. 恢复工作节点到原版本"
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

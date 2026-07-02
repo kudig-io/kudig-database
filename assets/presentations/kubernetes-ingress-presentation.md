@@ -42,6 +42,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes Ingress 全栈进阶培训 (从入门到专家)
@@ -490,7 +495,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 使用 Helm 部署
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
@@ -527,13 +533,13 @@ kubectl get svc -n ingress-nginx
 kubectl get svc ingress-nginx-controller -n ingress-nginx
 # 记录 EXTERNAL-IP，后续测试使用
 ```
-
 ### 演示 2：创建第一个 Ingress
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 部署后端应用
 kubectl create deployment web-app --image=nginx --replicas=2
 # 预期输出: deployment.apps/web-app created
@@ -591,13 +597,13 @@ curl -H "Host: myapp.example.com" http://203.0.113.10/
 curl -H "Host: myapp.example.com" http://203.0.113.10/api
 # 预期输出: Nginx 欢迎页面（来自 api-app）
 ```
-
 ### 演示 3：配置 TLS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建自签名证书（测试用）
 openssl req -x509 -nodes -days 365 \
   -newkey rsa:2048 \
@@ -646,13 +652,13 @@ curl -k https://myapp.example.com
 curl -I http://myapp.example.com
 # 预期输出: 308 Permanent Redirect → Location: https://myapp.example.com/
 ```
-
 ### 演示 4：金丝雀发布实战
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 部署 v1 版本（稳定版）
 kubectl create deployment myapp-v1 --image=nginx:1.25 --replicas=2
 kubectl expose deployment myapp-v1 --port=80 --target-port=80 --name=myapp-v1
@@ -714,13 +720,13 @@ for i in $(seq 1 20); do
 done | sort | uniq -c
 # 预期输出: 大约 16 次 v1，4 次 v2（80%/20% 分配）
 ```
-
 ### 演示 5：性能调优配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 优化 Nginx Ingress ConfigMap
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -775,7 +781,6 @@ spec:
         averageUtilization: 80
 EOF
 ```
-
 ---
 
 ## 动手实验
@@ -788,7 +793,8 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署应用
 kubectl create deployment lab-app --image=nginx --replicas=2
 kubectl expose deployment lab-app --port=80 --target-port=80
@@ -825,7 +831,6 @@ kubectl annotate ingress lab-ingress \
 # 5. 压测验证
 # ab -n 1000 -c 50 -H "Host: lab.example.com" http://<EXTERNAL-IP>/
 ```
-
 ---
 
 ## 常见问题与回答
@@ -973,3 +978,6 @@ Ingress
 ---
 
 > **Kusheet Project** | 作者: Allen Galler (allengaller@gmail.com)
+
+
+<!-- risk-assessed -->

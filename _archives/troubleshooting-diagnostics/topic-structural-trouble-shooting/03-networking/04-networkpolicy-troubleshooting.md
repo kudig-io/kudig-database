@@ -44,6 +44,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # NetworkPolicy 深度排查与零信任安全治理指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 资深专家级
@@ -167,18 +172,19 @@ iptables -t filter -nvL KUBE-NWPLCY-XXXXXXXX
 ### 3.1 第一阶段：身份与标识验证
 确认“谁在影响谁”。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取受特定标签影响的所有策略
 kubectl get netpol -A -o json | jq '.items[] | select(.spec.podSelector.matchLabels.app=="my-app") | .metadata.name'
 
 # 检查 Namespace 是否具备必要的元数据标签 (K8s 1.21+ 自动注入)
 kubectl get ns <ns-name> --show-labels | grep "kubernetes.io/metadata.name"
 ```
-
 ### 3.2 第二阶段：流量向量分析
 模拟请求，区分“拒绝”还是“不可达”。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用带有完整工具链的镜像
 kubectl run debug --rm -it --image=nicolaka/netshoot -- /bin/bash
 
@@ -186,7 +192,6 @@ kubectl run debug --rm -it --image=nicolaka/netshoot -- /bin/bash
 # - "Connection timed out": 通常是防火墙/策略丢弃 (Drop)
 # - "Connection refused": 通常是后端没进程监听 (Reject/Not Running)
 ```
-
 ---
 
 ## 4. 深度解决方案与生产最佳实践
@@ -535,6 +540,7 @@ table=1, priority=0, actions=drop
 **场景 1: 零信任改造导致全局网络中断**
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 触发条件:
   - 在所有命名空间同时应用 Default Deny 策略
   - 未提前放行 CoreDNS/监控/日志采集流量
@@ -629,10 +635,19 @@ table=1, priority=0, actions=drop
         port: 9200  # Elasticsearch 端口
   EOF
 ```
-
 **场景 2: Calico 大规模策略导致性能雪崩**
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 触发条件:
   - 集群规模: 500 节点, 10000+ Pod
   - NetworkPolicy 数量: 2000+
@@ -706,10 +721,10 @@ table=1, priority=0, actions=drop
     iptablesMarkMask: 0xff000000
     # 使用 ipset 聚合减少规则数
 ```
-
 **场景 3: Cilium Identity 回收延迟导致策略失效**
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 触发条件:
   - 使用 Cilium 作为 CNI
   - 大量短生命周期 Job/CronJob (每分钟创建 50+ Pod)
@@ -774,14 +789,14 @@ table=1, priority=0, actions=drop
           job-type: batch         # 额外分类标签
           # 避免使用动态标签如: job-id: <timestamp>
 ```
-
 ---
 
 ## 3.3 深度排查脚本集
 
 ### 3.3.1 NetworkPolicy 连通性测试脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: netpol-connectivity-test.sh
 # 用途: 自动化测试 NetworkPolicy 连通性
@@ -922,10 +937,10 @@ fi
 
 echo -e "\n=== Test Complete ==="
 ```
-
 ### 3.3.2 Calico 策略调试脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: calico-policy-debug.sh
 # 用途: 深度分析 Calico NetworkPolicy 规则
@@ -993,10 +1008,10 @@ echo "2. Verify namespace labels for cross-namespace policies"
 echo "3. Look for 'DROP' actions in iptables rules"
 echo "4. Check Felix logs: kubectl logs -n kube-system $CALICO_NODE_POD -c calico-node"
 ```
-
 ### 3.3.3 Cilium 策略追踪脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: cilium-policy-trace.sh
 # 用途: 追踪 Cilium eBPF 策略决策过程
@@ -1074,7 +1089,6 @@ kubectl exec -n kube-system $CILIUM_SRC_POD -- \
 
 echo -e "\n=== Trace Complete ==="
 ```
-
 ---
 
 ## 4.4 零信任网络设计最佳实践
@@ -1248,7 +1262,8 @@ spec:
 
 ### 4.4.2 策略测试与验证流程
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: netpol-validation-suite.sh
 # 用途: 自动化验证 NetworkPolicy 配置
@@ -1338,7 +1353,6 @@ echo "Analyzing $POLICIES for conflicts..."
 
 echo -e "\n=== Validation Complete ==="
 ```
-
 ### 4.4.3 生产环境迁移策略
 
 **阶段 1: 观察模式 (1-2 周)**
@@ -1377,7 +1391,8 @@ spec:
 
 **阶段 3: 全面部署 (1-2 周)**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用脚本批量部署
 for ns in $(kubectl get ns -l environment=production -o jsonpath='{.items[*].metadata.name}'); do
   kubectl apply -f default-deny.yaml -n $ns
@@ -1387,10 +1402,10 @@ for ns in $(kubectl get ns -l environment=production -o jsonpath='{.items[*].met
   sleep 10  # 观察 10 秒
 done
 ```
-
 **阶段 4: 持续优化**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 定期审计策略
 kubectl get netpol -A -o yaml > netpol-audit-$(date +%Y%m%d).yaml
 
@@ -1400,7 +1415,6 @@ kubectl delete netpol -n <ns> <unused-policy>
 # 合并相似策略
 # 使用 Calico GlobalNetworkPolicy 或 Cilium CiliumNetworkPolicy
 ```
-
 ---
 
 ## 5.3 案例三: Cilium eBPF 与 iptables 模式冲突
@@ -1453,7 +1467,17 @@ ipset list | grep cali
 
 **修复方案**
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案: 蓝绿切换 (而非滚动升级)
 
 # 1. 创建新的节点池 (纯 Cilium)
@@ -1481,7 +1505,6 @@ cilium policy get
 # 6. 删除旧节点池
 eksctl delete nodegroup --cluster=mycluster --name=calico-nodes
 ```
-
 **防护措施**
 
 ```yaml
@@ -1535,7 +1558,8 @@ spec:
 
 ### 每日自动化巡检
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 文件: netpol-daily-check.sh
 
@@ -1585,7 +1609,6 @@ fi
 
 echo -e "\n=== Check Complete ==="
 ```
-
 ### 每周手动巡检
 
 - [ ] **策略审计**: 导出所有 NetworkPolicy,检查是否有过于宽松的规则
@@ -1619,3 +1642,6 @@ echo -e "\n=== Check Complete ==="
 - [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

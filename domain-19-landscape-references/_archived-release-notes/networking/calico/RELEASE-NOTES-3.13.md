@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.13 Release Notes
@@ -76,3 +81,6 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 - Updating Helm libraries for k8s 1.28.4 c8b948945e52abba22ff885446a1486cb5fd3474 (Matt Farina)
 - Remove excessive logging 2f03d01b7d29d65374838a8376644e2b12066c81 (Sean Mills)
 - chore(create): indent to spaces 2e6357665a4100eb8472902b693c8dfa50acc5aa (genofire)
+
+
+<!-- risk-assessed -->

@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 01-生产架构设计原则
@@ -146,7 +151,8 @@ spec:
 ## 数据持久化高可用
 
 ## 1. etcd备份策略
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd备份脚本
 ETCDCTL_API=3 etcdctl \
@@ -156,7 +162,6 @@ ETCDCTL_API=3 etcdctl \
   --cacert=/etc/kubernetes/pki/etcd/ca.crt \
   snapshot save /backup/etcd-snapshot-$(date +%Y%m%d-%H%M%S).db
 ```
-
 ## 2. 存储类高可用配置
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -627,3 +632,6 @@ autoscaling:
 - [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 03-edge-computing-production-deployment
+
+
+<!-- risk-assessed -->

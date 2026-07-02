@@ -69,6 +69,11 @@ cross_refs:
   label: '运维技能: 04-dns-resolution-failure'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 26 - DNS 故障排查 (DNS Troubleshooting)
@@ -153,7 +158,8 @@ cross_refs:
 
 ### 2.1 CoreDNS 服务状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. CoreDNS部署检查 ==========
 # 检查CoreDNS Pod状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -199,14 +205,14 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
     kubectl debug node/$node --image=busybox -it -- sh -c "cat /etc/resolv.conf"
 done
 ```
-
 ### 2.2 DNS解析基础测试
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 基础解析测试 ==========
 # 创建测试Pod
 cat <<EOF | kubectl apply -f -
@@ -244,7 +250,6 @@ kubectl exec dns-test -- cat /etc/resolv.conf | grep search
 # 检查DNS服务器配置
 kubectl exec dns-test -- cat /etc/resolv.conf | grep nameserver
 ```
-
 ---
 
 <!-- chunk: 3. 内部DNS解析问题排查 (Internal DNS Resolution Issues) -->
@@ -256,7 +261,8 @@ kubectl exec dns-test -- cat /etc/resolv.conf | grep nameserver
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Service发现检查 ==========
 # 查看所有Service
 kubectl get services --all-namespaces
@@ -319,14 +325,14 @@ for i in \$(seq 1 10); do
 done
 "
 ```
-
 ### 3.2 Pod DNS解析问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== Pod DNS记录检查 ==========
 # 查看Pod IP和DNS记录
 kubectl get pods -n default -o jsonpath='{
@@ -380,7 +386,6 @@ EOF
 # 测试自定义DNS配置
 kubectl exec dns-custom-test -- nslookup kubernetes.default.svc.cluster.local
 ```
-
 ---
 
 <!-- chunk: 4. 外部DNS解析问题排查 (External DNS Resolution Issues) -->
@@ -391,7 +396,8 @@ kubectl exec dns-custom-test -- nslookup kubernetes.default.svc.cluster.local
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. CoreDNS上游配置检查 ==========
 # 查看CoreDNS转发配置
 kubectl get configmap -n kube-system coredns -o jsonpath='{.data.Corefile}' | grep forward
@@ -426,7 +432,6 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
     "
 done
 ```
-
 ### 4.2 DNS转发和缓存问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -435,7 +440,8 @@ done
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 缓存问题诊断 ==========
 # 测试DNS缓存效果
 kubectl exec dns-test -- sh -c "
@@ -494,7 +500,6 @@ kubectl apply -f coredns-optimized-config.yaml
 # 重启CoreDNS以应用更改
 kubectl rollout restart deployment coredns -n kube-system
 ```
-
 ---
 
 <!-- chunk: 5. CoreDNS性能和稳定性问题 (CoreDNS Performance and Stability) -->
@@ -502,7 +507,8 @@ kubectl rollout restart deployment coredns -n kube-system
 
 ### 5.1 性能监控和指标
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== CoreDNS指标检查 ==========
 # 检查CoreDNS指标端点
 kubectl port-forward -n kube-system svc/kube-dns 9153:9153 &
@@ -532,13 +538,13 @@ COREDNS_REPLICAS=$(kubectl get deployment coredns -n kube-system -o jsonpath='{.
 NODE_COUNT=$(kubectl get nodes --no-headers | wc -l)
 echo "CoreDNS replicas: $COREDNS_REPLICAS, Node count: $NODE_COUNT"
 ```
-
 ### 5.2 高可用性配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 副本数量优化 ==========
 # 根据节点数量调整CoreDNS副本数
 RECOMMENDED_REPLICAS=$((NODE_COUNT > 3 ? NODE_COUNT/2 : NODE_COUNT))
@@ -598,7 +604,6 @@ EOF
 
 kubectl patch deployment coredns -n kube-system --patch "$(cat coredns-resources.yaml)"
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -609,7 +614,8 @@ kubectl patch deployment coredns -n kube-system --patch "$(cat coredns-resources
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== ServiceMonitor配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -679,7 +685,6 @@ spec:
         summary: "DNS cache hit rate low (< 80%)"
 EOF
 ```
-
 ### 6.2 DNS健康检查工具
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -687,7 +692,8 @@ EOF
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== DNS健康检查脚本 ==========
 cat <<'EOF' > dns-health-check.sh
 #!/bin/bash
@@ -843,7 +849,6 @@ EOF
 
 chmod +x dns-failure-test.sh
 ```
-
 ---
 
 <!-- chunk: 7. 故障恢复和预防措施 (Incident Recovery and Prevention) -->
@@ -856,7 +861,8 @@ chmod +x dns-failure-test.sh
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 紧急恢复步骤 ==========
 # 1. 立即诊断DNS问题
 echo "=== Emergency DNS Diagnosis ==="
@@ -897,7 +903,6 @@ sleep 30
 kubectl exec emergency-dns-test -- nslookup kubernetes.default.svc.cluster.local
 kubectl exec emergency-dns-test -- nslookup google.com
 ```
-
 ### 7.2 预防性配置
 
 ```bash
@@ -1069,3 +1074,6 @@ EOF
 
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+
+
+<!-- risk-assessed -->

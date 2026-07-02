@@ -40,6 +40,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 22: [[Service|Service]] 基础实操
@@ -138,7 +143,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Kube-proxy 在每个 Pod 中注入环境变量
 # 自动生成: {SVCNAME}_SERVICE_HOST, {SVCNAME}_SERVICE_PORT
 kubectl exec -it <pod-name> -- env | grep -E "_SERVICE_PORT|_SERVICE_HOST"
@@ -147,7 +153,6 @@ kubectl exec -it <pod-name> -- env | grep -E "_SERVICE_PORT|_SERVICE_HOST"
 # BACKEND_SVC_SERVICE_HOST=10.96.0.1
 # BACKEND_SVC_SERVICE_PORT=80
 ```
-
 ### 3.2 DNS 发现
 
 ```bash
@@ -164,7 +169,8 @@ curl http://backend-svc.other-namespace.svc.cluster.local
 
 ### 3.3 DNS 调试
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 DNS 解析
 kubectl run dnsutils --image=tutum/dnsutils --restart=Never -it -- nslookup backend-svc
 
@@ -174,14 +180,14 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns
 # 查看 CoreDNS 配置
 kubectl get configmap coredns -n kube-system -o yaml
 ```
-
 ---
 
 ## 4. Service 故障排查
 
 ### 4.1 无 Endpoints
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Service 是否有 selector 匹配的 Pod
 kubectl get svc backend-svc -o yaml
 kubectl get pods -l app=backend
@@ -194,13 +200,13 @@ kubectl get endpoints backend-svc
 # - 所有 Pod 都不是 Running 状态
 # - Pod 在不同 namespace
 ```
-
 ### 4.2 Service 无法访问
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 是否正常运行
 kubectl get pods -l app=backend
 
@@ -214,10 +220,10 @@ kubectl exec -it <pod-a> -- curl -s http://<pod-b-ip>:8080/health
 kubectl get pods -n kube-system -l k8s-app=kube-proxy
 kubectl logs -n kube-system kube-proxy-xxx --tail=20
 ```
-
 ### 4.3 LoadBalancer 无外部 IP
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Cloud Controller Manager
 kubectl get pods -n kube-system | grep cloud
 
@@ -228,7 +234,6 @@ kubectl describe svc web-svc | grep -A10 "Events:"
 # AWS: 检查 ELB 配额和安全组
 # GCE: 检查 quota 和防火墙规则
 ```
-
 ---
 
 ## 5. Service 高级配置
@@ -434,3 +439,6 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 </details>
 
+
+
+<!-- risk-assessed -->

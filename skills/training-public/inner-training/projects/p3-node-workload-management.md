@@ -35,6 +35,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -126,7 +131,8 @@ related_topics:
 
 ### Step 1: 多节点池架构设计与创建 (40min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1.1 设计节点池架构
 # ┌─────────────────────────────────────────┐
 # │           ACK 集群                       │
@@ -181,7 +187,6 @@ kubectl get nodes --show-labels | grep node-type
 # 预期输出:
 # node-1   Ready   ...   node-type=spot,...
 ```
-
 ### Step 2: 节点运维操作 (40min)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -190,7 +195,17 @@ kubectl get nodes --show-labels | grep node-type
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 2.1 获取 spot 节点名称
 NODE_NAME=$(kubectl get nodes -l node-type=spot -o jsonpath='{.items[0].metadata.name}' 2>/dev/null)
 echo "Spot node: ${NODE_NAME}"
@@ -254,13 +269,13 @@ kubectl get pods -o wide | grep ${NODE_NAME}
 kubectl taint nodes ${NODE_NAME} maintenance=true:NoExecute-
 # 预期输出: node/<node-name> untainted
 ```
-
 ### Step 3: 工作负载部署与调度 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 3.1 部署 Deployment（调度到 app-pool）
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -380,10 +395,10 @@ kubectl get job batch-job -n week3-practice
 # NAME        COMPLETIONS   DURATION   AGE
 # batch-job   5/5           2m         3m
 ```
-
 ### Step 4: 组件健康检查 (20min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 4.1 全面组件检查脚本
 echo "=========================================="
 echo "  集群组件健康检查"
@@ -442,7 +457,6 @@ kubectl top nodes
 # node-2    350m         8%     3584Mi          21%
 # node-3    200m         5%     2048Mi          12%
 ```
-
 ---
 
 ## 配置示例
@@ -628,14 +642,23 @@ spec:
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete deployment web-app -n week3-practice
 kubectl delete job batch-job -n week3-practice
 kubectl delete namespace week3-practice  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 删除 spot 节点池（可选）
 aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 ```
-
 ---
 
 ## 延伸阅读
@@ -646,3 +669,5 @@ aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
 
 ```
+
+<!-- risk-assessed -->

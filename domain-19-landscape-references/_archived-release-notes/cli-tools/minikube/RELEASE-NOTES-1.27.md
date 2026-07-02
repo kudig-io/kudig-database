@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # minikube v1.27 Release Notes
@@ -113,3 +118,5 @@ windows-amd64.exe: `d5957435f3a94a43ce0c764ecaf3b9c4f7c6f8bcafdc4ef7b2b86937ec5c
 
 amd64: `ccc432f3f60647fa050def9da98daf720266e87fd1ed1d3b60f60380e8dd291a`  
 arm64: `62f4f28634e78aa394c0f1d5aa735634b8c258c0cd40f7c30a156dca325c9a9f`
+
+<!-- risk-assessed -->

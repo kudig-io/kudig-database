@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 边缘安全架构 (Edge Security Architecture)
@@ -351,7 +356,8 @@ data:
 
 ## 2.3 边缘节点证书管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # edge-cert-manager.sh - 边缘节点证书自动化管理
 
@@ -429,7 +435,6 @@ if ! check_cert_expiry; then
     request_certificate
 fi
 ```
-
 ---
 
 <!-- chunk: 3. mTLS 通信安全 -->## 3. mTLS 通信安全
@@ -1174,7 +1179,8 @@ spec:
 
 ## 6.1 nftables 边缘防火墙
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # edge-firewall-setup.sh - 边缘节点 nftables 防火墙规则
 
@@ -1245,7 +1251,6 @@ nft list ruleset > /etc/nftables.conf
 systemctl enable --now nftables
 echo "✅ 边缘防火墙规则配置完成"
 ```
-
 ## 6.2 Kubernetes NetworkPolicy
 
 ```yaml
@@ -1967,7 +1972,8 @@ data:
 
 ## 10.1 镜像签名与验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cosign-image-signing.sh - 使用 Sigstore Cosign 签名镜像
 
@@ -2009,7 +2015,6 @@ cosign verify \
   --key cosign.pub \
   ${IMAGE} | jq .
 ```
-
 ```yaml
 # Kyverno 强制镜像签名验证策略
 apiVersion: kyverno.io/v1
@@ -2472,3 +2477,6 @@ flowchart TD
 - 08-edge-storage-network
 - 10-edge-use-cases
 - 99-kubernetes-developer-toolchain-guide
+
+
+<!-- risk-assessed -->

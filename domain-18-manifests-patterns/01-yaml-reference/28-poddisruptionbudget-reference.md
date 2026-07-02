@@ -39,6 +39,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 28 - PodDisruptionBudget YAML 配置参考
@@ -520,6 +525,7 @@ spec:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────┐
 │ kubectl drain node-01                                   │
 └────────────────────┬────────────────────────────────────┘
@@ -543,7 +549,6 @@ spec:
    ✅ 允许驱逐   ❌ 拒绝驱逐   ⏳ 等待重试
    └─> 删除 Pod  └─> 返回 429  └─> drain 等待
 ```
-
 ## disruptionsAllowed 计算
 
 **算法**:
@@ -738,13 +743,13 @@ kind: PodDisruptionBudget
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 批量转换 PDB
 kubectl get pdb -o yaml | \
   sed 's/policy\/v1beta1/policy\/v1/g' | \
   kubectl apply -f -
 ```
-
 ## unhealthyPodEvictionPolicy 兼容性
 
 **v1.26 启用 Alpha 特性**:
@@ -825,7 +830,17 @@ spec:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 逐个节点排空
 for node in $(kubectl get nodes -o name); do
   echo "升级节点: $node"
@@ -851,10 +866,10 @@ for node in $(kubectl get nodes -o name); do
   kubectl wait --for=condition=Ready node/$node --timeout=5m
 done
 ```
-
 **监控脚本**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PDB 状态
 watch 'kubectl get pdb --all-namespaces -o custom-columns=\
 NAMESPACE:.metadata.namespace,\
@@ -870,7 +885,6 @@ DESIRED:.status.desiredHealthy'
 # production   api-gateway-pdb  -    1    2        5        4
 # production   mysql-pdb        2    -    0        2        2  ← 阻止驱逐
 ```
-
 ## 案例2: 节点排空最佳实践
 
 **场景**: 节点维护前安全排空 Pod。
@@ -921,7 +935,8 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # safe-drain.sh
 
@@ -953,14 +968,23 @@ if $REPLY =~ ^[Yy]$; then
     --timeout=30m
 fi
 ```
-
 **Drain 被阻止时的处理**:
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看阻止原因
 kubectl get events --sort-by='.lastTimestamp' | grep -i evict
 
@@ -983,7 +1007,6 @@ kubectl patch pdb es-pdb -n logging -p '{"spec":{"minAvailable":3}}'
 # 3. 强制删除 (绕过 PDB, 危险!)
 kubectl delete pod es-2 -n logging --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ## 案例3: 高可用保障体系
 
 **场景**: 多层级应用的完整 PDB 配置。
@@ -1251,14 +1274,15 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl drain node-01 --ignore-daemonsets
 # 卡住,无输出
 ```
-
 **排查步骤**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PDB 状态
 kubectl get pdb --all-namespaces
 
@@ -1283,7 +1307,6 @@ NAME:.metadata.name,\
 STATUS:.status.phase,\
 READY:.status.conditions[?(@.type==\"Ready\")].status
 ```
-
 **解决方案**:
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -1291,7 +1314,17 @@ READY:.status.conditions[?(@.type==\"Ready\")].status
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案1: 等待 Pod 恢复健康 (推荐)
 kubectl get pods -l app=myapp --watch
 
@@ -1305,7 +1338,6 @@ kubectl delete pdb myapp-pdb
 # 方案4: 强制删除 Pod (危险!)
 kubectl delete pod myapp-abc123 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 ## Q2: PDB 与单副本服务的矛盾?
 
 **问题配置**:
@@ -1354,7 +1386,8 @@ spec:
 ## Q3: 滚动更新时 PDB 报错?
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status deployment/myapp
 # Waiting for deployment "myapp" rollout to finish: 0 out of 3 new replicas have been updated...
 # (长时间卡住)
@@ -1362,7 +1395,6 @@ kubectl rollout status deployment/myapp
 kubectl get events | grep -i evict
 # Cannot evict pod as it would violate the pod's disruption budget.
 ```
-
 **原因分析**:
 ```yaml
 # 配置冲突
@@ -1410,7 +1442,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # test-pdb.sh
 
@@ -1479,7 +1512,6 @@ echo "7. 清理资源"
 kubectl delete deployment $APP -n $NAMESPACE
 kubectl delete pdb $APP-pdb -n $NAMESPACE
 ```
-
 ## Q5: unhealthyPodEvictionPolicy 何时使用 AlwaysAllow?
 
 **使用场景**:
@@ -1552,3 +1584,6 @@ spec:
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

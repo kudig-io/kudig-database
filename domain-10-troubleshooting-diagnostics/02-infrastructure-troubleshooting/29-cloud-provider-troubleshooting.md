@@ -65,6 +65,11 @@ cross_refs:
   label: '故障树: cloud-provider'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 29 - 云提供商集成故障排查 (Cloud Provider Integration Troubleshooting)
@@ -145,7 +150,8 @@ cross_refs:
 
 ### 2.1 凭证状态检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 云提供商凭证验证 ==========
 # AWS凭证检查
 kubectl run aws-cli-test --image=amazon/aws-cli -n kube-system -it --rm -- sh -c "
@@ -207,10 +213,10 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
     "
 done
 ```
-
 ### 2.2 权限不足问题排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== AWS IAM权限检查 ==========
 # 检查必需的IAM策略
 cat <<'EOF' > aws-permissions-check.sh
@@ -330,7 +336,6 @@ EOF
 
 chmod +x azure-permissions-check.sh
 ```
-
 ---
 
 <!-- chunk: 3. LoadBalancer服务问题排查 (LoadBalancer Service Issues) -->
@@ -338,7 +343,8 @@ chmod +x azure-permissions-check.sh
 
 ### 3.1 LoadBalancer状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. LoadBalancer服务状态 ==========
 # 查看Pending状态的LoadBalancer服务
 kubectl get services --all-namespaces --field-selector=spec.type=LoadBalancer | grep -E "(pending|Pending)"
@@ -370,10 +376,10 @@ aws ec2 describe-security-groups --group-ids <sg-id> --query 'SecurityGroups[0].
 # 网络ACL检查
 aws ec2 describe-network-acls --filters Name=vpc-id,Values=<vpc-id>
 ```
-
 ### 3.2 LoadBalancer配置问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 注解配置检查 ==========
 # 查看服务注解配置
 kubectl get service <service-name> -n <namespace> -o jsonpath='{.metadata.annotations}'
@@ -464,7 +470,6 @@ EOF
 
 chmod +x loadbalancer-diagnostic.sh
 ```
-
 ---
 
 <!-- chunk: 4. 持久化存储问题排查 (Persistent Storage Issues) -->
@@ -472,7 +477,8 @@ chmod +x loadbalancer-diagnostic.sh
 
 ### 4.1 存储卷状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. PVC状态验证 ==========
 # 查看Pending状态的PVC
 kubectl get pvc --all-namespaces | grep -E "(pending|Pending)"
@@ -503,13 +509,13 @@ kubectl logs -n kube-system -l app=csi-driver --tail=100
 # 验证CSI节点插件
 kubectl get daemonset -n kube-system | grep csi
 ```
-
 ### 4.2 存储卷挂载问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 挂载失败诊断 ==========
 # 查看挂载失败的Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending -o jsonpath='{
@@ -643,7 +649,6 @@ spec:
       claimName: <pvc-name>
 EOF
 ```
-
 ---
 
 <!-- chunk: 5. 网络和路由问题排查 (Network and Routing Issues) -->
@@ -651,7 +656,8 @@ EOF
 
 ### 5.1 VPC和子网配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 网络配置验证 ==========
 # AWS VPC检查
 aws ec2 describe-vpcs --vpc-ids <vpc-id> --query 'Vpcs[0].[VpcId,CidrBlock,IsDefault]'
@@ -686,10 +692,10 @@ for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
     "
 done
 ```
-
 ### 5.2 DNS和域名解析问题
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 云DNS服务检查 ==========
 # AWS Route53检查
 aws route53 list-hosted-zones --query 'HostedZones[*].[Id,Name]'
@@ -717,7 +723,6 @@ nslookup kubernetes.default
 nslookup <external-domain>
 "
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -728,7 +733,8 @@ nslookup <external-domain>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 云监控集成 ==========
 # AWS CloudWatch监控
 cat <<EOF | kubectl apply -f -
@@ -816,10 +822,10 @@ spec:
         summary: "Node {{ \$labels.node }} disconnected from cloud provider"
 EOF
 ```
-
 ### 6.2 云成本监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 成本监控配置 ==========
 # AWS Cost Explorer集成
 cat <<'EOF' > aws-cost-monitor.sh
@@ -950,7 +956,6 @@ EOF
 
 chmod +x resource-optimization-recommender.sh
 ```
-
 ---
 
 ---
@@ -980,3 +985,6 @@ chmod +x resource-optimization-recommender.sh
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/28-cluster-autoscaler-troubleshooting.md|28-cluster-autoscaler-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|30-monitoring-alerting-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/31-backup-restore-troubleshooting.md|31-backup-restore-troubleshooting]]
+
+
+<!-- risk-assessed -->

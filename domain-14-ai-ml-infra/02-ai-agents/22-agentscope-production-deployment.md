@@ -42,6 +42,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: AgentScope 生产部署与可观测性
@@ -150,6 +155,7 @@ AgentScope 生产部署架构
 AgentScope Runtime（`agentscope-runtime`）是独立于核心框架的**生产运行时**，提供：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 AgentScope Runtime 核心能力
 │
 ├── Agent-as-a-Service（AaaS）
@@ -167,7 +173,6 @@ AgentScope Runtime 核心能力
 └── 框架兼容
     不仅支持 AgentScope，还兼容 LangGraph、AutoGen 等
 ```
-
 ## 2.2 安装
 
 ```bash
@@ -199,7 +204,17 @@ pip install --pre agentscope-runtime
 
 AgentApp 采用 **init → query → shutdown** 三阶段模式：
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 AgentApp 生命周期
 │
 ├── init（启动阶段）
@@ -219,7 +234,6 @@ AgentApp 生命周期
     ├── 关闭连接池
     └── 清理资源
 ```
-
 ## 3.2 完整示例
 
 ```python
@@ -687,12 +701,12 @@ nohup as_studio --host 0.0.0.0 > /tmp/as_studio.log 2>&1 &
 
 **方式二：Docker 部署**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 国内环境需配置镜像加速（Docker Hub 直连可能超时）
 # Podman 用户: 编辑 /etc/containers/registries.conf 添加 mirror
 docker run -d --name as-studio -p 3000:3000 agentscope/studio:latest
 ```
-
 **方式三：从源码运行（开发模式）**
 
 ```bash
@@ -919,7 +933,8 @@ groups:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Agent 服务健康
 curl http://agent-service:8090/health
 
@@ -935,7 +950,6 @@ kubectl exec -n agent-system agent-redis-0 -- redis-cli info memory
 # 查看 HPA 状态
 kubectl get hpa -n agent-system
 ```
-
 ---
 
 <!-- chunk: 10. 最佳实践与反模式 -->## 10. 最佳实践与反模式
@@ -999,3 +1013,6 @@ kubectl get hpa -n agent-system
 - 21-agentscope-advanced-features
 - 23-agent-cli-fundamentals
 - 24-agent-cli-tools-comparison
+
+
+<!-- risk-assessed -->

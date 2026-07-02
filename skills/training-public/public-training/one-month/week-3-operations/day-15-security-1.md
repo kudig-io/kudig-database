@@ -36,6 +36,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -212,7 +217,8 @@ ServiceAccount 是 K8s 中 Pod 的身份标识。每个 Pod 都关联一个 Serv
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试命名空间
 kubectl create namespace rbac-test
 
@@ -257,13 +263,13 @@ kubectl apply -f sa-pod.yaml
 kubectl exec -n rbac-test sa-test -- ls /var/run/secrets/kubernetes.io/serviceaccount/
 kubectl exec -n rbac-test sa-test -- cat /var/run/secrets/kubernetes.io/serviceaccount/token | cut -d. -f2 | base64 -d 2>/dev/null | jq '.iss, .sub, .exp'
 ```
-
 ### 任务 2: RBAC 配置实践 (1h)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Role（命名空间级别权限）
 cat > role.yaml << 'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
@@ -341,14 +347,23 @@ echo "Can dev-sa delete pods? $(kubectl auth can-i delete pods --as=system:servi
 echo "Can dev-sa get nodes? $(kubectl auth can-i get nodes --as=system:serviceaccount:rbac-test:dev-sa)"
 echo "Can dev-sa create deployments? $(kubectl auth can-i create deployments --as=system:serviceaccount:rbac-test:dev-sa -n rbac-test)"
 ```
-
 ### 任务 3: 权限排查与审计 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前用户的所有权限
 kubectl auth can-i --list
 
@@ -375,7 +390,6 @@ kubectl delete namespace rbac-test  # ⚠️ 不可逆：永久删除命名空�
 kubectl delete clusterrole node-reader
 kubectl delete clusterrolebinding dev-node-reader
 ```
-
 ---
 
 ## 常见问题
@@ -416,3 +430,6 @@ default ServiceAccount 默认没有任何权限（除了通过自动挂载的 To
 - [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
 - [证书管理](../../domain-05-security-compliance/10-certificate-management.md)
 - [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
+
+
+<!-- risk-assessed -->

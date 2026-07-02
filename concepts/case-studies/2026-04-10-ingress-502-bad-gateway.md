@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-04-10] Nginx Ingress 配置错误导致全站 502 Bad Gateway
@@ -39,7 +44,8 @@ last_updated: 2026-05-23
 ## 诊断过程
 
 **10:16** — 检查 Ingress 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ingress -A
 # NAMESPACE     NAME            CLASS    HOSTS              ADDRESS
 # prod-web      main-ingress    nginx    www.example.com    203.0.113.45
@@ -50,23 +56,22 @@ kubectl describe ingress main-ingress -n prod-web
 #   Warning  Sync    5m    nginx-ingress-controller  
 #     "Configuration error: upstream server not found"
 ```
-
 **10:18** — 检查 Nginx Ingress Controller Pod：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n ingress-nginx
 # NAME                                        READY   STATUS    RESTARTS   AGE
 # ingress-nginx-controller-7d9f4b8c5a-abc12  0/1     Error     0          5m
 # ingress-nginx-controller-7d9f4b8c5a-def34  0/1     Error     0          5m
 ```
-
 **10:19** — 查看 Ingress Controller 日志：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n ingress-nginx ingress-nginx-controller-7d9f4b8c5a-abc12
 # 2026/04/10 10:14:45 [emerg] 1234#1234: 
 #   invalid number of arguments in "proxy_pass" directive in /etc/nginx/nginx.conf:456
 # nginx: [emerg] invalid number of arguments in "proxy_pass" directive
 ```
-
 **10:21** — 检查近期 Ingress 变更：
 ```bash
 # 查看 Git 提交记录
@@ -79,11 +84,11 @@ git show a1b2c3d --stat
 ```
 
 **10:23** — 检查新添加的配置：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm ingress-nginx-controller -n ingress-nginx -o yaml | grep -A5 proxy-pass
 # proxy-pass-headers: "Upgrade Connection"
 ```
-
 问题定位：`proxy-pass-headers` 是 Nginx 配置项，但在 Ingress ConfigMap 中应使用 `proxy-pass-headers`（Ingress Nginx 特定注解），不应直接注入到 nginx.conf。实际上，Ingress Nginx Controller 的 ConfigMap 正确键应为 `proxy-pass-headers`，但本例中的错误是运维人员在 ConfigMap 中添加了非法的 `proxy-pass` 值（包含空格的无效参数）。
 
 更准确地说，经过排查，是以下变更导致：
@@ -105,45 +110,45 @@ Nginx Ingress Controller 将 ConfigMap 的数据作为 nginx 配置模板变量�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Git 回滚到上一个版本
 git checkout HEAD~1 -- ingress-nginx/configmap.yaml
 kubectl apply -f ingress-nginx/configmap.yaml
 ```
-
 **10:28** — 重启 Ingress Controller：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment ingress-nginx-controller -n ingress-nginx
 kubectl get pods -n ingress-nginx -w
 # ingress-nginx-controller-xxx  1/1   Running   0   30s
 ```
-
 **10:30** — 验证 Nginx 配置：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ingress-nginx ingress-nginx-controller-xxx -- nginx -t
 # nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 # nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
-
 **10:32** — 验证 Ingress 规则加载：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n ingress-nginx ingress-nginx-controller-xxx -- \
   cat /etc/nginx/nginx.conf | grep -c "server_name www.example.com"
 # 1
 ```
-
 **10:33** — 外部验证：
 ```bash
 curl -I https://www.example.com
@@ -165,3 +170,6 @@ curl -I https://www.example.com
   4. 为 Ingress Controller 添加 `nginx_config_test_fail` 告警，触发 P0
 - **相关 Skill**: [[k8s-network-configuration-guide]]
 - **相关 FTA**: [[ingress-fta]]
+
+
+<!-- risk-assessed -->

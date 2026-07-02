@@ -36,6 +36,11 @@ prerequisites:
 - monitoring-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 负载测试方法论
@@ -52,13 +57,13 @@ prerequisites:
 ## K8s 环境工具链
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工具选择:
 ├── 流量生成: k6, Locust, JMeter, Gatling
 ├── 监控: Prometheus + Grafana
 ├── 分布式执行: k6-operator, Locust Helm Chart
 └── 报告: k6 Cloud, Grafana Dashboard
 ```
-
 ## k6 示例
 
 ```javascript
@@ -93,3 +98,6 @@ export default function () {
 ## 相关
 
 - domain-09-reliability-engineering/03-capacity-planning/01-capacity-planning-guide
+
+
+<!-- risk-assessed -->

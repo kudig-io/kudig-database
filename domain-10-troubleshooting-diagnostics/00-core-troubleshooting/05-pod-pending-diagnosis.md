@@ -76,6 +76,11 @@ cross_refs:
   label: '运维技能: 03-pod-pending'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)
@@ -226,6 +231,7 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 <!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                        Pod Pending 快速诊断决策树                                    │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -290,7 +296,6 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 常见 FailedScheduling 消息速查
 
 | 错误消息 | 原因类别 | 快速诊断 | 解决方案 |
@@ -332,7 +337,8 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 
 ### 3.2 集群资源分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cluster-resource-analysis.sh - 集群资源深度分析
 
@@ -405,7 +411,6 @@ kubectl get pods -A --field-selector=status.phase=Pending -o json | jq -r '
   "\(.metadata.namespace)/\(.metadata.name): CPU=\(.spec.containers[].resources.requests.cpu // "未设置"), Memory=\(.spec.containers[].resources.requests.memory // "未设置")"
 '
 ```
-
 ### 3.3 资源不足解决方案
 
 | 解决方案 | 适用场景 | 操作复杂度 | 生效时间 | 风险等级 |
@@ -499,7 +504,8 @@ description: "低优先级批处理任务"
 
 ### 4.2 节点选择诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # node-selection-diagnose.sh - 节点选择问题诊断
 
@@ -566,7 +572,6 @@ else
     echo "NodeSelector: 未配置，所有节点可选"
 fi
 ```
-
 ### 4.3 常见节点选择问题解决
 
 ```yaml
@@ -657,7 +662,8 @@ spec:
 
 ### 5.2 存储诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-diagnose.sh - 存储问题诊断
 
@@ -727,10 +733,10 @@ echo ""
 echo "=== 9. 可用 PV 列表 ==="
 kubectl get pv --field-selector=status.phase=Available
 ```
-
 ### 5.3 ACK 存储特定诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ACK 云盘 CSI 诊断
 echo "=== ACK 云盘 CSI 状态 ==="
 kubectl get pods -n kube-system -l app=csi-plugin
@@ -745,7 +751,6 @@ kubectl get pods -n kube-system | grep nas
 # 检查云盘绑定状态
 kubectl get pv -o json | jq -r '.items[] | select(.spec.csi.driver=="diskplugin.csi.alibabacloud.com") | "\(.metadata.name): \(.status.phase), diskId=\(.spec.csi.volumeHandle)"'
 ```
-
 ### 5.4 存储问题解决方案
 
 ```yaml
@@ -825,7 +830,8 @@ spec:
 
 ### 6.2 配额诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # quota-diagnose.sh - 配额问题诊断
 
@@ -874,7 +880,6 @@ echo ""
 echo "--- MutatingAdmissionWebhook ---"
 kubectl get mutatingwebhookconfigurations -o custom-columns='NAME:.metadata.name,WEBHOOKS:.webhooks[*].name'
 ```
-
 ### 6.3 配额问题解决
 
 ```yaml
@@ -959,7 +964,8 @@ metadata:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # scheduler-diagnose.sh - 调度器问题诊断
 
@@ -1004,14 +1010,14 @@ echo ""
 echo "=== 8. 自定义调度器检查 ==="
 kubectl get pods -A -o json | jq -r '.items[] | select(.spec.schedulerName != null and .spec.schedulerName != "default-scheduler") | "\(.metadata.namespace)/\(.metadata.name): \(.spec.schedulerName)"' | head -10
 ```
-
 ### 7.3 调度器问题解决
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 调度器问题紧急处理
 
 # 1. 重启调度器 (kubeadm 集群)
@@ -1029,7 +1035,6 @@ kubectl top pod -n kube-system -l component=kube-scheduler
 # 5. 修改 Pod 使用默认调度器
 kubectl patch deployment <name> -n <namespace> -p '{"spec":{"template":{"spec":{"schedulerName":"default-scheduler"}}}}'
 ```
-
 ---
 
 <!-- chunk: 8. 高级调度场景 -->
@@ -1150,7 +1155,8 @@ spec:
 
 ### 9.2 ACK 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ack-pending-diagnose.sh - ACK 特定诊断
 
@@ -1191,7 +1197,6 @@ echo ""
 echo "=== 8. 抢占式实例状态 ==="
 kubectl get nodes -o json | jq -r '.items[] | select(.metadata.labels["alibabacloud.com/spot-instance"]=="true") | .metadata.name'
 ```
-
 ### 9.3 ACK 自动扩容配置
 
 ```yaml
@@ -1216,7 +1221,8 @@ kubectl get nodes -o json | jq -r '.items[] | select(.metadata.labels["alibabacl
 
 ### 10.1 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-pending-full-diagnose.sh - Pod Pending 完整诊断工具
 # 版本: 1.0 | 适用: Kubernetes v1.25-v1.32
@@ -1414,7 +1420,6 @@ main() {
 
 main "$@"
 ```
-
 ---
 
 <!-- chunk: 11. 监控告警配置 -->
@@ -1573,7 +1578,17 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # emergency-pod-pending.sh - Pod Pending 紧急处理
 
@@ -1627,13 +1642,13 @@ echo ""
 echo "# 8. 驱逐低优先级 Pod 释放资源"
 echo "kubectl get pods -A -o json | jq -r '.items[] | select(.spec.priority != null and .spec.priority < 0) | \"\\(.metadata.namespace) \\(.metadata.name)\"' | while read ns pod; do kubectl delete pod \$pod -n \$ns; done"
 ```
-
 ### 12.2 紧急处理流程图
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                           Pod Pending 紧急处理流程                                   │
 ├─────────────────────────────────────────────────────────────────────────────────────┤
@@ -1691,7 +1706,6 @@ echo "kubectl get pods -A -o json | jq -r '.items[] | select(.spec.priority != n
 │                                                                                      │
 └─────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 13. 版本特定变更 -->
@@ -1865,3 +1879,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+
+
+<!-- risk-assessed -->

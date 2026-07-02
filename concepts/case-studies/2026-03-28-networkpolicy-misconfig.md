@@ -18,6 +18,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-03-28] NetworkPolicy 默认拒绝规则误拦截支付回调流量
@@ -43,16 +48,17 @@ last_updated: 2026-05-23
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 payment-gateway Pod 测试到 order-api
 kubectl exec -n prod-payment payment-gateway-xxx -- \
   curl -v http://order-api.prod-order.svc.cluster.local/callback/payment
 # *   Trying 10.96.234.56...
 # * connect to 10.96.234.56 port 80 failed: Connection timed out
 ```
-
 **15:24** — 检查 Service 和 Endpoints：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc order-api -n prod-order
 # NAME       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 # order-api  ClusterIP   10.96.234.56   <none>        80/TCP    45d
@@ -61,11 +67,11 @@ kubectl get endpoints order-api -n prod-order
 # NAME       ENDPOINTS                           AGE
 # order-api  10.0.4.12:8080,10.0.4.13:8080       45d
 ```
-
 Service 和 Endpoints 正常，问题在网络层。
 
 **15:26** — 检查 `prod-order` namespace 的 NetworkPolicy：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n prod-order
 # NAME                    POD-SELECTOR   AGE
 # default-deny-all        <none>         25m
@@ -78,9 +84,9 @@ kubectl get networkpolicy default-deny-all -n prod-order -o yaml
 #   - Ingress
 #   - Egress
 ```
-
 **15:28** — 检查 `allow-payment-ns`：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy allow-payment-ns -n prod-order -o yaml
 # spec:
 #   podSelector:
@@ -97,16 +103,15 @@ kubectl get networkpolicy allow-payment-ns -n prod-order -o yaml
 #     - protocol: TCP
 #       port: 8080
 ```
-
 **15:30** — 发现 `allow-payment-ns` 只允许 `port: 8080`，但 `order-api` Service 的 `targetPort` 是 `8080`，而 `port` 是 `80`。NetworkPolicy 的 `port` 字段匹配的是容器端口（targetPort），即 `8080`。这个配置本身是对的。
 
 **15:32** — 进一步排查，发现 `order-api` Pod 的 label 缺少 `app: order-api`：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod order-api-xxx -n prod-order --show-labels
 # NAME           READY   STATUS    LABELS
 # order-api-xxx  1/1     Running   app=order-api-v2,version=2.3.1
 ```
-
 原来 14:55 部署的 v2.3.1 版本将 Pod label 从 `app: order-api` 改为 `app: order-api-v2`，导致 `allow-payment-ns` 的 `podSelector.matchLabels.app=order-api` 无法匹配到任何 Pod，支付回调流量被 `default-deny-all` 拦截。
 
 ## 根因
@@ -122,7 +127,8 @@ kubectl get pod order-api-xxx -n prod-order --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -147,18 +153,17 @@ spec:
       port: 8080
 EOF
 ```
-
 **15:40** — 验证连通性：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-payment payment-gateway-xxx -- \
   curl -s http://order-api.prod-order.svc.cluster.local/callback/payment -X POST -d '{"order_id":"12345"}'
 # {"status":"success","order_id":"12345"}
 ```
-
 **15:42** — 批量处理滞留订单：
 ```bash
 # 调用订单系统批量补偿接口
@@ -185,3 +190,6 @@ curl -s http://order-api.prod-order.svc.cluster.local/admin/reconcile-payments \
   4. CI 中禁止修改 `app` label 的自动校验规则
 - **相关 Skill**: [[k8s-network-security-guide]]
 - **相关 FTA**: [[networkpolicy-fta]]
+
+
+<!-- risk-assessed -->

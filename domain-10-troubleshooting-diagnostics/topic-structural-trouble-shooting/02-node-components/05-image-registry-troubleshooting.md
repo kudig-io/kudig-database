@@ -43,6 +43,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 镜像与镜像仓库故障排查指南
@@ -138,7 +143,8 @@ k8s_versions:
 
 # 专家级观测工具链（Expert's Toolbox）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 专家级：查看镜像各层的详细 Digest 和本地存储路径
 crictl inspecti <image-id> | jq '.status.size, .status.repoDigests'
 
@@ -149,7 +155,6 @@ curl -s localhost:13387/metrics | grep containerd_image_pull_duration
 # 专家级：手动验证镜像层完整性
 ctr -n k8s.io images check
 ```
-
 ---
 
 ## 目录
@@ -167,6 +172,7 @@ ctr -n k8s.io images check
 ### 1.1 镜像拉取流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                      镜像拉取流程                                │
 ├─────────────────────────────────────────────────────────────────┤
@@ -204,7 +210,6 @@ ctr -n k8s.io images check
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
@@ -278,7 +283,8 @@ ctr -n k8s.io images check
 
 #### 2.2.1 Pod 镜像状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 事件
 kubectl describe pod <pod-name> -n <namespace>
 
@@ -294,10 +300,10 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].imag
 # 查看 imagePullSecrets
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.imagePullSecrets}'
 ```
-
 #### 2.2.2 镜像仓库连通性检查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在节点上测试仓库连通性
 # 方式 1: 使用 curl
 curl -v https://registry.example.com/v2/
@@ -313,10 +319,10 @@ kubectl run test-registry --rm -it --image=curlimages/curl --restart=Never -- \
 nslookup registry.example.com
 dig registry.example.com
 ```
-
 #### 2.2.3 认证配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 imagePullSecret 内容
 kubectl get secret <secret-name> -n <namespace> -o jsonpath='{.data.\.dockerconfigjson}' | base64 -d | jq
 
@@ -332,10 +338,10 @@ cat /root/.docker/config.json
 # 或 containerd
 cat /etc/containerd/config.toml | grep -A10 registry
 ```
-
 #### 2.2.4 节点镜像缓存检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 crictl (containerd/CRI-O)
 crictl images
 crictl images | grep <image-name>
@@ -349,7 +355,6 @@ crictl rmi --prune
 # 检查磁盘空间
 df -h /var/lib/containerd
 ```
-
 ### 2.3 排查注意事项
 
 | 注意事项 | 说明 |
@@ -371,7 +376,8 @@ df -h /var/lib/containerd
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 从命令行创建
 kubectl create secret docker-registry my-registry-secret \
   --docker-server=registry.example.com \
@@ -398,7 +404,6 @@ data:
   .dockerconfigjson: $(echo -n '{"auths":{"registry.example.com":{"username":"myuser","password":"mypassword","auth":"'$(echo -n 'myuser:mypassword' | base64)'"}}}' | base64 -w0)
 EOF
 ```
-
 #### 场景 2：在 Pod 中使用 imagePullSecret
 
 ```yaml
@@ -420,7 +425,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 使用 kubectl patch
 kubectl patch serviceaccount default -n <namespace> \
   -p '{"imagePullSecrets": [{"name": "my-registry-secret"}]}'
@@ -436,7 +442,6 @@ imagePullSecrets:
 - name: my-registry-secret
 EOF
 ```
-
 ### 3.2 网络和 TLS 问题
 
 #### 场景 1：私有仓库使用自签名证书
@@ -444,7 +449,17 @@ EOF
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方式 1: 配置 containerd 信任证书
 # 在所有节点执行
 
@@ -473,13 +488,22 @@ server = "https://registry.example.com"
   skip_verify = true
 EOF
 ```
-
 #### 场景 2：配置镜像仓库代理/镜像
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd 配置镜像加速
 cat > /etc/containerd/certs.d/docker.io/hosts.toml << EOF
 server = "https://docker.io"
@@ -497,7 +521,6 @@ systemctl restart containerd
 # 验证配置
 crictl pull docker.io/library/nginx:latest
 ```
-
 ### 3.3 速率限制问题
 
 #### 场景 1：Docker Hub 速率限制
@@ -512,7 +535,8 @@ toomanyrequests: You have reached your pull rate limit
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 使用认证账户 (提升限额)
 kubectl create secret docker-registry dockerhub-secret \
   --docker-server=https://index.docker.io/v1/ \
@@ -529,7 +553,6 @@ skopeo copy docker://nginx:latest docker://registry.example.com/library/nginx:la
 # 方案 4: 预拉取镜像到节点
 # 在 DaemonSet 中预拉取
 ```
-
 ### 3.4 镜像版本和标签问题
 
 #### 场景 1：确保使用最新镜像
@@ -554,7 +577,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 删除 Pod 让其重建
 kubectl delete pod <pod-name> -n <namespace>
 
@@ -567,7 +591,6 @@ kubectl set image deployment/<name> <container>=<new-image>
 # 方式 4: 在节点上删除本地镜像缓存
 crictl rmi <image>
 ```
-
 ### 3.5 镜像架构问题
 
 #### 场景 1：架构不匹配
@@ -579,7 +602,8 @@ exec format error
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查节点架构
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.architecture}{"\n"}{end}'
 
@@ -600,12 +624,12 @@ docker manifest inspect nginx:latest
 #   nodeSelector:
 #     kubernetes.io/arch: amd64
 ```
-
 ### 3.6 磁盘空间问题
 
 #### 场景 1：节点磁盘空间不足
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查磁盘使用
 df -h /var/lib/containerd
 
@@ -623,7 +647,6 @@ crictl rm $(crictl ps -a -q --state exited)
 # 5. 设置镜像大小限制
 # 在 LimitRange 中设置
 ```
-
 ### 3.7 完整配置示例
 
 ```yaml
@@ -692,7 +715,8 @@ spec:
 
 ### 3.8 镜像仓库最佳实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 使用私有镜像仓库
 # - Harbor: 企业级镜像仓库
 # - Nexus: 多格式仓库
@@ -735,7 +759,6 @@ spec:
         image: registry.example.com/myapp:v1.2.3
         command: ["echo", "Image pulled"]
 ```
-
 ---
 
 ### 3.9 安全生产风险提示
@@ -757,7 +780,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 镜像检查
 kubectl describe pod <pod>
 kubectl get pod <pod> -o jsonpath='{.spec.containers[*].image}'
@@ -776,7 +800,6 @@ crictl rmi --prune
 # 调试
 kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 ```
-
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
@@ -798,3 +821,5 @@ kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

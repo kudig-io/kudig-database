@@ -32,6 +32,11 @@ prerequisites:
 - monitoring-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # grafana v8.0 Release Notes
@@ -45,3 +50,6 @@ Source: [v8.0.7](https://github.com/grafana/grafana/releases/tag/v8.0.7)
 Security: Fixes CVE-2021-43798. For more information, see our [blog](https://grafana.com/blog/2021/12/07/grafana-8.3.1-8.2.7-8.1.8-and-8.0.7-released-with-high-severity-security-fix/)
 
 
+
+
+<!-- risk-assessed -->

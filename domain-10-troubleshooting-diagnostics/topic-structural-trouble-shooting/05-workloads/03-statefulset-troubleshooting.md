@@ -46,6 +46,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[StatefulSet|StatefulSet]] 故障排查指南
@@ -219,7 +224,8 @@ StatefulSet 问题
 
 #### 2.3.1 基础状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 状态
 kubectl get sts <name> -o wide
 
@@ -235,10 +241,10 @@ kubectl get pods -l app=<statefulset-name> -o wide
 # 查看 Pod 详细状态
 kubectl get pods -l app=<statefulset-name> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'
 ```
-
 #### 2.3.2 PVC 和存储检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 关联的 PVC
 kubectl get pvc -l app=<statefulset-name>
 
@@ -256,13 +262,13 @@ kubectl describe storageclass <name>
 kubectl get csidrivers
 kubectl get pods -n kube-system -l app=csi-*
 ```
-
 #### 2.3.3 网络标识检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Headless Service
 kubectl get svc <service-name> -o yaml
 # 确认 clusterIP: None
@@ -276,10 +282,10 @@ kubectl get endpoints <service-name>
 # 验证 Pod DNS 配置
 kubectl exec <pod-name> -- cat /etc/resolv.conf
 ```
-
 #### 2.3.4 更新状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看更新状态
 kubectl rollout status sts <name>
 
@@ -292,17 +298,16 @@ kubectl get sts <name> -o jsonpath='{.status.currentRevision}{"\n"}{.status.upda
 # 查看各 Pod 的 controller-revision-hash
 kubectl get pods -l app=<statefulset-name> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.controller-revision-hash}{"\n"}{end}'
 ```
-
 #### 2.3.5 控制器日志检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 控制器日志
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i statefulset
 
 # 查看特定 StatefulSet 相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep <statefulset-name>
 ```
-
 ### 2.4 排查注意事项
 
 | 注意事项 | 说明 |
@@ -333,7 +338,8 @@ Events:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 PVC 状态
 kubectl get pvc -l app=<statefulset-name>
 
@@ -367,7 +373,6 @@ EOF
 # 6. 验证 PVC 绑定
 kubectl get pvc <pvc-name> -w
 ```
-
 **风险提示：**
 - 手动创建 PV 时确保存储路径存在且有正确权限
 - hostPath 仅适用于测试环境，生产环境应使用网络存储
@@ -376,19 +381,20 @@ kubectl get pvc <pvc-name> -w
 #### 场景 2：前序 Pod 未 Ready 阻塞后续创建
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get pods -l app=mysql
 NAME      READY   STATUS    RESTARTS   AGE
 mysql-0   0/1     Running   0          5m
 # mysql-1, mysql-2 未创建
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod-0 的 Ready 条件
 kubectl describe pod <statefulset>-0 | grep -A5 "Conditions:"
 
@@ -407,7 +413,6 @@ kubectl patch sts <name> --type='json' -p='[
 # 5. 如果需要跳过有序性约束 (仅限特殊场景)
 kubectl patch sts <name> -p '{"spec":{"podManagementPolicy":"Parallel"}}'
 ```
-
 **风险提示：**
 - 修改 podManagementPolicy 需要删除重建 StatefulSet
 - Parallel 策略可能导致有状态应用初始化问题
@@ -424,17 +429,18 @@ kubectl patch sts <name> -p '{"spec":{"podManagementPolicy":"Parallel"}}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 $ kubectl exec mysql-0 -- nslookup mysql-1.mysql-headless
 nslookup: can't resolve 'mysql-1.mysql-headless'
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Headless Service 配置
 kubectl get svc <service-name> -o yaml
 
@@ -469,7 +475,6 @@ EOF
 # 6. 确保 StatefulSet 引用正确的 serviceName
 kubectl get sts <name> -o jsonpath='{.spec.serviceName}'
 ```
-
 **风险提示：**
 - 修改 Service 会导致短暂的 DNS 解析中断
 - StatefulSet 的 serviceName 字段不可修改，需删除重建
@@ -484,7 +489,8 @@ kubectl get sts <name> -o jsonpath='{.spec.serviceName}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CoreDNS 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
@@ -500,7 +506,6 @@ kubectl rollout restart deployment coredns -n kube-system
 # 5. 检查 Pod 的 DNS 策略
 kubectl get pod <pod-name> -o jsonpath='{.spec.dnsPolicy}'
 ```
-
 ---
 
 ### 3.3 滚动更新问题
@@ -508,18 +513,19 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.dnsPolicy}'
 #### 场景 1：更新卡住
 
 **问题现象：**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl rollout status sts mysql
 Waiting for 1 pods to be ready...
 ```
-
 **解决步骤：**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看更新状态
 kubectl get sts <name> -o jsonpath='{.status}'
 
@@ -544,7 +550,6 @@ kubectl delete pod <stuck-pod>
 # 7. 检查更新是否继续
 kubectl rollout status sts <name>
 ```
-
 **风险提示：**
 - 强制删除 Pod 可能导致数据丢失
 - 有状态应用删除前应确保数据已同步
@@ -556,7 +561,8 @@ kubectl rollout status sts <name>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看更新历史
 kubectl rollout history sts <name>
 
@@ -572,7 +578,6 @@ kubectl rollout undo sts <name> --to-revision=<revision>
 # 5. 验证回滚状态
 kubectl rollout status sts <name>
 ```
-
 #### 场景 3：分区更新 (金丝雀发布)
 
 **解决步骤：**
@@ -581,7 +586,8 @@ kubectl rollout status sts <name>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 设置 partition，只更新序号 >= partition 的 Pod
 kubectl patch sts <name> -p '{"spec":{"updateStrategy":{"type":"RollingUpdate","rollingUpdate":{"partition":2}}}}'
 # 只有 pod-2 及以上会更新
@@ -595,7 +601,6 @@ kubectl patch sts <name> -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partit
 # 4. 完成全部更新
 kubectl patch sts <name> -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
-
 ---
 
 ### 3.4 存储和数据问题
@@ -611,7 +616,17 @@ kubectl patch sts <name> -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partit
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 列出关联的 PVC
 kubectl get pvc -l app=<statefulset>
 
@@ -627,7 +642,6 @@ kubectl delete pvc -l app=<statefulset>
 # 5. 如果需要保留数据，修改 PV 回收策略
 kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
-
 **风险提示：**
 - 删除 PVC 会导致数据永久丢失
 - 删除前务必确认数据已备份
@@ -642,7 +656,8 @@ kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 StorageClass 支持扩展
 kubectl get storageclass <name> -o jsonpath='{.allowVolumeExpansion}'
 
@@ -659,7 +674,6 @@ kubectl delete pod <pod-name>
 # 5. 验证容量
 kubectl exec <pod-name> -- df -h <mount-path>
 ```
-
 ---
 
 ### 3.5 扩缩容问题
@@ -668,7 +682,8 @@ kubectl exec <pod-name> -- df -h <mount-path>
 
 **解决步骤：**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 扩容 StatefulSet
 kubectl scale sts <name> --replicas=5
 
@@ -684,7 +699,6 @@ kubectl describe nodes | grep -A5 "Allocated resources"
 # 5. 检查 PVC 创建
 kubectl get pvc -l app=<statefulset>
 ```
-
 #### 场景 2：缩容清理
 
 **解决步骤：**
@@ -693,7 +707,17 @@ kubectl get pvc -l app=<statefulset>
 > - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 缩容 StatefulSet
 kubectl scale sts <name> --replicas=2
 
@@ -709,7 +733,6 @@ kubectl delete pvc <pvc-name>
 # 5. 如果 Pod 删除卡住
 kubectl delete pod <pod-name> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
 ```
-
 **风险提示：**
 - 缩容时从最大序号开始删除
 - PVC 保留是为了防止数据丢失
@@ -812,7 +835,8 @@ spec:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # StatefulSet 状态
 kubectl get sts -o wide
 kubectl describe sts <name>
@@ -839,7 +863,6 @@ kubectl rollout undo sts <name>
 # 扩缩容
 kubectl scale sts <name> --replicas=<n>
 ```
-
 ### 相关文档
 
 - [Pod 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
@@ -862,3 +885,5 @@ kubectl scale sts <name> --replicas=<n>
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

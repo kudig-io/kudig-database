@@ -51,6 +51,11 @@ component: 13 Intelligent Ticket Processing
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第十三章：智能工单处理的 AI Agent 架构
@@ -277,6 +282,7 @@ ChatOps 升级消息模板:
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ═══════════════════════════════════════════════════════════════
   工单自动处理全流程
 ═══════════════════════════════════════════════════════════════
@@ -401,7 +407,6 @@ ChatOps 升级消息模板:
   → BE-4.6 概率上调 (本月第 2 次)
   → 建议: 将 NetworkPolicy 变更纳入变更管理系统
 ```
-
 ---
 
 > **导航**: [<< 上一章 - FTA 与 AIOps 平台集成架构](./12-fta-aiops-integration.md) | [下一章 - 构建 FTA 系统的工程化方法 >>](./14-fta-system-engineering.md)
@@ -429,3 +434,6 @@ ChatOps 升级消息模板:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/12-fta-aiops-integration.md|12-fta-aiops-integration]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/14-fta-system-engineering.md|14-fta-system-engineering]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/15-fta-quality-assessment.md|15-fta-quality-assessment]]
+
+
+<!-- risk-assessed -->

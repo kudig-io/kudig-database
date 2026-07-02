@@ -42,6 +42,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 04 - Terway 运维手册 (Operations Manual)
@@ -69,22 +74,22 @@ prerequisites:
 
 ### 1.1 快速诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l app=terway -o wide
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node <node-name> | grep -A 5 aliyun.com
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system -l app=terway -c terway --tail=100
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ds terway-eniip -n kube-system -o wide
 ```
-
 ### 1.2 terway-cli 诊断工具
 
 `terway-cli` 是内嵌在 Terway Pod 中的命令行诊断工具，可直接进入 Pod 执行。
@@ -94,10 +99,10 @@ kubectl get ds terway-eniip -n kube-system -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
 ```
-
 输出包含: 本地 IP 池、已分配 IP、关联 Pod、ENI 辅助 IP 列表。
 
 **查看 ENI 详细信息:**
@@ -105,10 +110,10 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
 ```
-
 输出包含: 节点上所有 ENI 的 ID、状态、辅助 IP 数量、挂载状态。
 
 **GC 预演 (不实际清理):**
@@ -116,10 +121,10 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect --dry-run
 ```
-
 输出候选清理的孤儿 IP 列表，不执行实际释放。用于确认 GC 行为是否符合预期。
 
 **强制同步本地状态:**
@@ -127,10 +132,10 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 ```
-
 触发本地 IPAM 与 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 全量同步，适用于状态不一致场景。
 
 **查看帮助:**
@@ -138,13 +143,14 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli --help
 ```
-
 ### 1.3 完整健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 set -euo pipefail
 
@@ -239,7 +245,6 @@ fi
 echo "========================================="
 exit ${EXIT_CODE}
 ```
-
 ---
 
 ## 2. GC (垃圾回收) 机制
@@ -352,13 +357,13 @@ eni_idle_timeout --> ENI 空闲判定 --> ENI 回收 --> 完成
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 NODE="<node-name>"
 TERWAY_POD=$(kubectl get pods -n kube-system -l app=terway \
   --field-selector spec.nodeName=${NODE} -o jsonpath='{.items[0].metadata.name}')
 kubectl delete pod -n kube-system ${TERWAY_POD}
 ```
-
 Terway 重启后会执行一次全量对账 GC (源码中 `wait.PollUntilContextCancel` 的 `immediate=true`)。
 
 **方法二: 通过 terway-cli 手动清理**
@@ -366,14 +371,15 @@ Terway 重启后会执行一次全量对账 GC (源码中 `wait.PollUntilContext
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect --dry-run
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect
 ```
-
 **方法三: 手动清理孤儿 IPInstance CRD**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipinstances -A -o json | jq -r '
   .items[] | 
   select(.spec.pod.name != null) |
@@ -384,7 +390,6 @@ while IFS=$'\t' read -r name ns pod; do
   fi
 done
 ```
-
 ### 2.7 GC 参数调整场景
 
 **场景 A: 加速 GC (IP 泄漏严重时临时调整)**
@@ -393,7 +398,8 @@ done
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get cm eni-config -n kube-system -o json | \
   jq '.data.eni_conf = (.data.eni_conf | fromjson |
     .gc_min_interval = 60 |
@@ -403,14 +409,14 @@ kubectl get cm eni-config -n kube-system -o json | \
 
 kubectl rollout restart ds/terway-eniip -n kube-system
 ```
-
 **场景 B: 大规模集群优化 (减少 API 压力)**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get cm eni-config -n kube-system -o json | \
   jq '.data.eni_conf = (.data.eni_conf | fromjson |
     .gc_min_interval = 600 |
@@ -420,7 +426,6 @@ kubectl get cm eni-config -n kube-system -o json | \
 
 kubectl rollout restart ds/terway-eniip -n kube-system
 ```
-
 | 调整项 | 加速 GC | 大集群优化 |
 |:---|:---|:---|
 | `gc_min_interval` | 60s | 600s |
@@ -918,7 +923,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create configmap terway-grafana-dashboard \
   --from-literal='terway-overview.json=<粘贴上方 JSON 内容>' \
   -n monitoring
@@ -926,30 +932,29 @@ kubectl create configmap terway-grafana-dashboard \
 kubectl label configmap terway-grafana-dashboard \
   grafana_dashboard=1 -n monitoring
 ```
-
 ---
 
 ## 4. 升级策略
 
 ### 4.1 查看当前版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ds -n kube-system terway-eniip -o jsonpath='{.spec.template.spec.containers[?(@.name=="terway")].image}'
 ```
-
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system -l app=terway -o jsonpath='{.items[0].spec.containers[?(@.name=="terway")].image}'
 ```
-
 ### 4.2 滚动升级
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set image ds/terway-eniip -n kube-system \
   terway=registry-vpc.cn-hangzhou.aliyuncs.com/acs/terway:v1.5.6
 
 kubectl rollout status ds/terway-eniip -n kube-system --timeout=300s
 ```
-
 DaemonSet 滚动升级策略为逐节点更新，每节点 Terway Pod 重建后会触发启动对账 GC。
 
 ### 4.3 回滚
@@ -957,12 +962,12 @@ DaemonSet 滚动升级策略为逐节点更新，每节点 Terway Pod 重建后�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout history ds/terway-eniip -n kube-system
 kubectl rollout undo ds/terway-eniip -n kube-system
 kubectl rollout status ds/terway-eniip -n kube-system
 ```
-
 ### 4.4 升级前检查清单
 
 | 检查项 | 命令 | 通过标准 |
@@ -997,6 +1002,7 @@ kubectl rollout status ds/terway-eniip -n kube-system
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 Step 1: 检查 Terway Pod 状态
   kubectl get pods -n kube-system -l app=terway -o wide
   --> 如有非 Running Pod: kubectl describe / logs --previous
@@ -1019,12 +1025,12 @@ Step 5: 运行 terway-cli 诊断
   kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show eni
   kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect --dry-run
 ```
-
 ### 5.3 IP 分配失败
 
 #### 决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 IP 分配失败
   |
   +-- ENI 配额耗尽?
@@ -1049,7 +1055,6 @@ IP 分配失败
         |        检查节点到 VPC API 网络连通性
         +-- 否: 查看 Terway 日志获取具体错误信息
 ```
-
 #### 子场景详解
 
 **ENI 配额耗尽:**
@@ -1072,20 +1077,20 @@ IP 分配失败
 
 **固定 IP 冲突:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get ipinstances -A -o json | jq -r '
   .items | group_by(.spec.ip.ipv4) | .[] | select(length > 1) |
   "DUPLICATE IP: \(.[0].spec.ip.ipv4) -> instances: \([.[].metadata.name] | join(", "))"'
 ```
-
 解决方案: 确认哪个 IPInstance 属于已终止的 Pod，手动删除孤儿 CRD。
 
 **OpenAPI 调用失败:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system <terway-pod> -c terway --tail=200 | grep -iE 'api.*error|throttl|permission|forbidden'
 ```
-
 常见原因: RAM 角色权限不足、API 限流、网络抖动。
 
 ### 5.4 跨节点通信失败
@@ -1096,6 +1101,7 @@ kubectl logs -n kube-system <terway-pod> -c terway --tail=200 | grep -iE 'api.*e
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 跨节点 Pod 不通
   |
   +-- 1. 确认 Pod IP 是否正确分配
@@ -1114,7 +1120,6 @@ kubectl logs -n kube-system <terway-pod> -c terway --tail=200 | grep -iE 'api.*e
         kubectl exec -n kube-system <terway-pod> -- terway-cli show
         查看策略路由是否正确配置
 ```
-
 **VPC 路由检查要点:**
 
 - 路由表条目数是否达到配额上限 (默认 48 条)
@@ -1153,7 +1158,8 @@ kubectl logs -n kube-system <terway-pod> -c terway --tail=200 | grep -iE 'api.*e
 
 **检查步骤:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Calico 组件状态
 kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
 kubectl get pods -n kube-system -l k8s-app=calico-kube-controllers -o wide
@@ -1165,7 +1171,6 @@ kubectl logs -n kube-system <calico-node-pod> -c calico-node | grep -i "policy"
 # 3. 检查 Terway 模式
 kubectl get cm eni-config -n kube-system -o jsonpath='{.data.eni_conf}' | jq .network_type
 ```
-
 **已知问题: ENI 模式 + Calico 无法阻断同节点 Pod 流量**
 
 ENI 独占模式下，同节点 Pod 间流量直接通过 ENI 转发，不经过宿主机网络栈，Calico 的 iptables 规则无法拦截。
@@ -1231,7 +1236,8 @@ ENI 独占模式下，同节点 Pod 间流量直接通过 ENI 转发，不经过
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 set -euo pipefail
 
@@ -1285,13 +1291,13 @@ echo "  被删除但未清除的 IPInstance: ${BLOCKED}"
 echo ""
 echo "=== 处理完成 ==="
 ```
-
 ### 6.3 Finalizer 阻塞处理
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get ipinstances -A -o json | jq -r '
   .items[] | select(.metadata.deletionTimestamp != null) |
   "\(.metadata.name)\t\(.metadata.finalizers | join(","))"' | \
@@ -1300,7 +1306,6 @@ kubectl get ipinstances -A -o json | jq -r '
 kubectl patch ipinstance <name> --type='json' \
   -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
 ```
-
 ### 6.4 CRD Finalizer 阻塞深度排查
 
 #### 检测方法
@@ -1309,7 +1314,8 @@ CRD Finalizer 阻塞表现为 IPInstance 或 PodENI 长期处于 `Terminating` �
 
 **批量检测命令:**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找所有 Terminating 状态的 IPInstance (可能被 Finalizer 阻塞)
 kubectl get ipinstances -A -o json | jq -r '
   .items[] | select(.metadata.deletionTimestamp != null) |
@@ -1326,13 +1332,13 @@ kubectl get podenis -A -o json | jq -r '
 echo "阻塞的 IPInstance: $(kubectl get ipinstances -A -o json | jq '[.items[] | select(.metadata.deletionTimestamp != null)] | length')"
 echo "阻塞的 PodENI: $(kubectl get podenis -A -o json | jq '[.items[] | select(.metadata.deletionTimestamp != null)] | length')"
 ```
-
 **安全 Finalizer 移除步骤:**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 确认关联的 Pod 已真正不存在
 IPINSTANCE_NAME="<name>"
 POD_NAME=$(kubectl get ipinstance ${IPINSTANCE_NAME} -o jsonpath='{.spec.pod.name}')
@@ -1349,13 +1355,13 @@ kubectl patch ipinstance ${IPINSTANCE_NAME} --type='json' \
 # Step 4: 确认 CRD 已被删除
 kubectl get ipinstance ${IPINSTANCE_NAME} 2>&1 | grep "NotFound" || echo "WARNING: CRD still exists"
 ```
-
 **批量安全移除 (谨慎使用):**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 批量移除所有被阻塞超过 1 小时的 IPInstance Finalizer
 kubectl get ipinstances -A -o json | jq -r '
   .items[] | select(.metadata.deletionTimestamp != null) |
@@ -1367,7 +1373,6 @@ kubectl get ipinstances -A -o json | jq -r '
   done
 
 ```
-
 **预防措施:**
 
 | 措施 | 说明 |
@@ -1494,3 +1499,5 @@ kubectl get ipinstances -A -o json | jq -r '
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -45,6 +45,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Pod 故障排查与运行机制深度指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 资深专家级
@@ -144,7 +149,8 @@ kubelet 通过 **CRI (Container Runtime Interface)** 与容器运行时（contai
 | **7. 删除 Sandbox** | 清理 Pod 所有资源 | `RemovePodSandbox()` | 删除 Pause 容器 + 清理网络（调用 CNI DEL） |
 
 **关键观测点**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点上的 Pause 容器
 crictl pods | grep <pod-name>
 # 输出：POD ID, STATE, NAME, NAMESPACE, CREATED
@@ -156,7 +162,6 @@ crictl inspectp <pod-id> | jq '.info.runtimeSpec.linux.namespaces'
 crictl inspect <container-id> | jq '.info.runtimeSpec.linux.namespaces[] | select(.type=="network")'
 # 输出：{"type":"network","path":"/proc/<pause-pid>/ns/net"}
 ```
-
 ---
 
 ### 1.2 PID 1 治理与僵尸进程问题
@@ -182,7 +187,8 @@ crictl inspect <container-id> | jq '.info.runtimeSpec.linux.namespaces[] | selec
 | **Go** | `./main` 作为 PID 1 | 正常（Go runtime 内置处理） | ✅ Go 默认优雅处理信号 |
 
 **僵尸进程诊断**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入容器查看僵尸进程
 kubectl exec <pod> -- ps aux | grep defunct
 # 输出示例：
@@ -194,7 +200,6 @@ kubectl exec <pod> -- sh -c 'ps aux | grep defunct | wc -l'
 # 在节点上查看容器的 PID namespace
 nsenter -t $(crictl inspect <container-id> | jq .info.pid) -p ps aux
 ```
-
 #### 1.2.3 PID 1 治理方案
 
 **方案 1：使用 `tini` 作为 Init 系统**
@@ -353,7 +358,8 @@ process.wait()  # 阻塞直到子进程退出
 | **255** | - | 退出状态超出范围 | 应用程序返回值溢出（如 `exit(-1)`） |
 
 **查看退出码和信号**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方法 1：通过 kubectl
 kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].lastState.terminated}' | jq
 
@@ -369,7 +375,6 @@ kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].lastState.termi
 # 方法 2：通过 crictl（节点上）
 crictl inspect <container-id> | jq '.status'
 ```
-
 ---
 
 ### 1.4 容器运行时（CRI）深度解析
@@ -403,7 +408,8 @@ crictl inspect <container-id> | jq '.status'
 | | `Exec` | 异步执行命令 | `kubectl exec` |
 
 **监控 CRI 调用**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 containerd 的 CRI 调用日志
 cat /etc/containerd/config.toml
 # [plugins."io.containerd.grpc.v1.cri"]
@@ -420,7 +426,6 @@ crictl stats
 # 查看 CRI 调用延迟
 journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 ```
-
 ---
 
 ## 2. 专家级问题矩阵与观测工具
@@ -467,7 +472,8 @@ journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 
 #### 2.2.1 临时调试容器（Ephemeral Containers）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # K8s 1.25+ 推荐：在运行中的 Pod 注入调试容器
 kubectl debug <pod-name> -it \
   --image=nicolaka/netshoot \
@@ -483,10 +489,10 @@ kubectl debug <pod-name> -it \
 kubectl debug <pod> -it --image=nicolaka/netshoot --target=app -- \
   tcpdump -i any -w /tmp/capture.pcap port 8080
 ```
-
 #### 2.2.2 节点级容器诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看节点上所有容器
 crictl ps -a
 
@@ -503,10 +509,10 @@ strace -p $(crictl inspect <container-id> | jq .info.pid) -f
 cat /sys/fs/cgroup/memory/kubepods/pod<pod-uid>/<container-id>/memory.limit_in_bytes
 cat /sys/fs/cgroup/cpu/kubepods/pod<pod-uid>/<container-id>/cpu.cfs_quota_us
 ```
-
 #### 2.2.3 Pod 资源使用实时监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 级别资源使用
 kubectl top pod --containers --namespace=<ns>
 
@@ -525,10 +531,10 @@ cat /sys/fs/cgroup/memory/kubepods/pod${POD_UID}/memory.stat
 # inactive_anon 0          # 非活跃匿名页
 # active_anon 209715200    # 活跃匿名页
 ```
-
 #### 2.2.4 事件聚合分析脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 脚本：pod-event-analyzer.sh
 # 用法：./pod-event-analyzer.sh <pod-name> <namespace>
@@ -558,7 +564,6 @@ kubectl describe node $NODE | grep -A10 "Allocated resources"
 echo -e "\n=== 容器退出码 ==="
 kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status.containerStatuses[*].lastState.terminated}' | jq
 ```
-
 #### 2.2.5 监控告警规则
 
 ```yaml
@@ -625,18 +630,19 @@ groups:
 ### 3.1 第一阶段：控制面事件流分析
 确认“为什么 Pod 会在这里”。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看最近 10 分钟的所有异常事件
 kubectl get events -A --sort-by=.lastTimestamp | grep -E "Warning|Error"
 
 # 检查节点污点是否导致 Pod 被驱逐
 kubectl describe node <node-name> | grep Taints
 ```
-
 ### 3.2 第二阶段：容器内部环境诊断
 确认“环境是否如我所愿”。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证环境变量与配置挂载
 kubectl exec <pod-name> -- env
 kubectl exec <pod-name> -- ls -R /etc/config
@@ -644,7 +650,6 @@ kubectl exec <pod-name> -- ls -R /etc/config
 # 检查容器内网络连通性 (使用 netshoot)
 kubectl debug <pod-name> -it --image=nicolaka/netshoot -- /bin/bash
 ```
-
 ---
 
 ## 4. 深度解决方案与生产最佳实践
@@ -705,7 +710,8 @@ spec:
 
 **目标**：确认 Pod 为何被调度到特定节点（或为何无法调度）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看调度器事件
 kubectl get events -A --sort-by='.lastTimestamp' \
   --field-selector involvedObject.name=<pod-name> \
@@ -740,7 +746,6 @@ kubectl get pod <pod> -o yaml | grep -A5 tolerations
 #   value: "true"
 #   effect: "NoSchedule"
 ```
-
 **常见调度失败根因**：
 - **资源碎片化**：集群总资源充足，但单个节点资源不足（解决：Descheduler 或 Cluster Autoscaler）
 - **亲和性冲突**：`requiredDuringSchedulingIgnoredDuringExecution` 无法满足（解决：改为 `preferred`）
@@ -752,7 +757,8 @@ kubectl get pod <pod> -o yaml | grep -A5 tolerations
 
 **目标**：确认镜像拉取、Volume 挂载、容器创建的每个步骤是否成功。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Pod 事件时间线
 kubectl describe pod <pod> | tail -30
 
@@ -806,7 +812,6 @@ ls -la /var/lib/kubelet/pods/$POD_UID/volumes/
 # kubernetes.io~configmap/config/
 # kubernetes.io~csi/data-pvc/
 ```
-
 **常见创建阶段问题**：
 - **ImagePullBackOff**：镜像不存在、Registry 限流、网络超时（Docker Hub 免费用户限制 100 次/6h）
 - **CreateContainerConfigError**：ConfigMap/Secret 不存在、环境变量引用错误
@@ -818,7 +823,8 @@ ls -la /var/lib/kubelet/pods/$POD_UID/volumes/
 
 **目标**：深入容器内部，验证应用环境和网络连通性。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看容器日志（最近 100 行）
 kubectl logs <pod> -c <container> --tail=100
 
@@ -868,14 +874,14 @@ kubectl top pod <pod> --containers
 # my-pod nginx      50m         128Mi
 # my-pod sidecar    10m         64Mi
 ```
-
 ---
 
 ### 3.4 第四阶段：节点级底层诊断
 
 **目标**：在节点上直接检查容器运行时和内核层面的问题。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查找 Pod 对应的容器 ID
 crictl pods | grep <pod-name>
 # POD ID        CREATED        STATE    NAME
@@ -911,7 +917,6 @@ strace -p $(crictl inspect 1234567890ab | jq .info.pid) -c -f
 dmesg | grep -i "killed process"
 # [12345.678] Out of memory: Killed process 9876 (myapp) total-vm:600MB, anon-rss:550MB, file-rss:50MB
 ```
-
 ---
 
 ## 4. 深度解决方案与生产最佳实践
@@ -1172,7 +1177,8 @@ spec:
 - **T+5h**：第三次重启，运维介入排查
 
 **初步排查**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看退出原因
 kubectl get pod java-app -o jsonpath='{.status.containerStatuses[0].lastState.terminated}'
 # 输出：
@@ -1190,12 +1196,12 @@ kubectl get pod java-app -o jsonpath='{.spec.containers[0].resources.limits.memo
 jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"}
 # 结果：0.6 (60%)  # ❌ 堆内存使用正常，为何 OOM？
 ```
-
 #### 5.1.2 深度排查过程
 
 **Step 1：分析 JVM 内存布局**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 重启前执行（获取完整内存映射）
 kubectl exec java-app -- jcmd 1 VM.native_memory summary
 
@@ -1210,7 +1216,6 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 #   - GC:           reserved=80MB,   committed=75MB
 #   - Direct:       reserved=28MB,   committed=28MB    # ❌ 堆外内存
 ```
-
 **根因发现**：
 - 容器 limit = 2048MB
 - JVM 总内存 = 1850MB（已接近 limit 的 90%）
@@ -1218,7 +1223,8 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 
 **Step 2：定位堆外内存泄漏**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看堆外内存分配栈
 kubectl exec java-app -- jcmd 1 VM.native_memory detail | grep -A 20 "Direct"
 
@@ -1229,7 +1235,6 @@ kubectl exec java-app -- jcmd 1 VM.native_memory detail | grep -A 20 "Direct"
 
 # ❌ 根因：Apache HttpClient NIO 连接池未正确释放连接
 ```
-
 **Step 3：验证连接池配置**
 
 ```java
@@ -1378,7 +1383,8 @@ spec:
 
 **Step 1：检查 Pod 状态和 Finalizers**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 详情
 kubectl get pod nginx-abc123 -o yaml
 
@@ -1394,12 +1400,12 @@ kubectl get pod nginx-abc123 -o yaml
 #     persistentVolumeClaim:
 #       claimName: nginx-data-pvc
 ```
-
 **根因线索**：`pvc-protection` Finalizer 表示 PVC 仍在使用中，kubelet 无法删除 Pod。
 
 **Step 2：检查 PVC 状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC
 kubectl get pvc nginx-data-pvc
 
@@ -1414,10 +1420,10 @@ kubectl describe pvc nginx-data-pvc
 #     Failed to delete volume: rpc error: code = Internal 
 #     desc = failed to unmount volume: device is busy
 ```
-
 **Step 3：在节点上检查 Volume 挂载**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 找到 Pod 所在节点
 NODE=$(kubectl get pod nginx-abc123 -o jsonpath='{.spec.nodeName}')
 
@@ -1440,10 +1446,10 @@ lsof +D /var/lib/kubelet/pods/<uid>/volumes/kubernetes.io~nfs/nginx-data-pvc
 
 # ❌ 根因：nginx 进程仍在运行，持有 NFS 文件句柄
 ```
-
 **Step 4：检查容器进程状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器是否已停止
 crictl ps -a | grep nginx-abc123
 
@@ -1461,7 +1467,6 @@ journalctl -u kubelet -f | grep nginx-abc123
 # E0210 10:30:00 kubelet.go:1234] Failed to stop container 9876543210ab: 
 #   context deadline exceeded (timeout waiting for container to stop)
 ```
-
 **根因分析**：
 1. `kubectl delete pod` 发送 SIGTERM 给 nginx 主进程
 2. nginx 主进程捕获信号，但**未关闭打开的文件**（upload.dat）
@@ -1473,7 +1478,17 @@ journalctl -u kubelet -f | grep nginx-abc123
 
 **紧急止损**（强制清理，10 分钟）：
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1：在节点上强制杀死容器进程
 ssh $NODE
 PID=$(crictl inspect 9876543210ab | jq .info.pid)
@@ -1492,7 +1507,6 @@ kubectl delete pod nginx-abc123 --force --grace-period=0
 kubectl get pod nginx-abc123
 # Error from server (NotFound): pods "nginx-abc123" not found  # ✅ 已删除
 ```
-
 **根本修复**（优化 PreStop Hook，2 小时）：
 
 ```yaml
@@ -1669,7 +1683,8 @@ Span: user-service -> order-service
 
 **Step 1：验证 DNS 解析性能**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 内测试 DNS 解析
 kubectl exec user-service-abc123 -- time nslookup order-service.default.svc.cluster.local
 
@@ -1692,10 +1707,10 @@ kubectl exec user-service-abc123 -- cat /etc/resolv.conf
 # search default.svc.cluster.local svc.cluster.local cluster.local
 # options ndots:5  # ❌ 关键配置
 ```
-
 **Step 2：分析 DNS 查询链路**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 内抓包（使用 tcpdump）
 kubectl debug user-service-abc123 -it --image=nicolaka/netshoot --target=user-service -- \
   tcpdump -i any -n port 53 -w /tmp/dns.pcap
@@ -1713,7 +1728,6 @@ kubectl exec user-service-abc123 -- curl -v http://order-service:8080/api/orders
 
 # ❌ 总耗时：5s * 3 = 15s（但实际只需第 1 次查询）
 ```
-
 **根因分析**：
 - `ndots:5` 表示：域名中"点"数量 < 5 时，依次尝试 `search` 域
 - `order-service` 只有 1 个点 → 触发 4 次查询（search 域 + 原始域）
@@ -1962,7 +1976,8 @@ webhooks:
 
 ## 附录：常用诊断命令速查
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 完整状态
 kubectl get pod <pod> -o yaml
 
@@ -1995,7 +2010,6 @@ kubectl exec <pod> -- nslookup <service-name>
 kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
   tcpdump -i any -w /tmp/capture.pcap
 ```
-
 ---
 
 **文档维护**：
@@ -2012,3 +2026,6 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 - [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

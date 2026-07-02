@@ -58,6 +58,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kyverno|Kyverno]] 企业级策略管理深度实践
@@ -254,7 +259,8 @@ serviceMonitor:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add kyverno https://kyverno.github.io/kyverno/
 helm repo update
 
@@ -264,7 +270,6 @@ helm install kyverno kyverno/kyverno \
   --values values-kyverno-enterprise.yaml \
   --version v3.3.0
 ```
-
 <!-- chunk: 核心配置 -->## 核心配置
 
 ## 验证策略（Validate）
@@ -969,7 +974,8 @@ spec:
 
 Kyverno 自动生成 PolicyReport 和 ClusterPolicyReport 资源，记录所有策略的审计结果。每个命名空间一个 PolicyReport，集群级策略由 ClusterPolicyReport 记录。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群级策略报告
 kubectl get clusterpolicyreport -o yaml
 
@@ -985,13 +991,13 @@ kubectl get policyreport -n production -o json | \
 kubectl get policyreport -A -o json | \
   jq -r '.items[] | {ns: .metadata.namespace, pass: ([.results[] | select(.result=="pass")] | length), fail: ([.results[] | select(.result=="fail")] | length)} | "\(.ns): pass=\(.pass) fail=\(.fail)"'
 ```
-
 ## Policy Reporter UI
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add policy-reporter https://kyverno.github.io/policy-reporter
 helm repo update
 
@@ -1002,10 +1008,10 @@ helm install policy-reporter policy-reporter/policy-reporter \
   --set kyvernoPlugin.enabled=true \
   --set grafana.dashboard.enabled=true
 ```
-
 ## 合规报告自动化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kyverno_compliance_report.sh
 
@@ -1058,7 +1064,6 @@ kubectl get policyexception -A -o json | \
 
 echo "Report: $REPORT_DIR/$DATE/report.md"
 ```
-
 <!-- chunk: 监控与告警 -->## 监控与告警
 
 ```yaml
@@ -1192,7 +1197,8 @@ spec:
 
 ## 策略测试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Kyverno CLI 测试策略
 kyverno validate policies/
 kyverno test policies/test/ --manifests policies/test/resources/
@@ -1203,7 +1209,6 @@ helm template mychart | kyverno apply policies/ --resource -
 # 策略效果预览
 kyverno apply policies/ --resource manifests/deployment.yaml --policy-report
 ```
-
 ## 策略命名规范
 
 | 前缀 | 类别 | 示例 |
@@ -1230,7 +1235,8 @@ kyverno apply policies/ --resource manifests/deployment.yaml --policy-report
 
 ## 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kyverno_diagnostics.sh
 
@@ -1275,13 +1281,13 @@ for ns in $(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}'); do
   fi
 done
 ```
-
 ## 紧急恢复
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 紧急恢复：将 Webhook failurePolicy 改为 Ignore
 kubectl patch validatingwebhookconfiguration kyverno-resource-validating-webhook-cfg \
   --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Ignore"}]'
@@ -1294,7 +1300,6 @@ kubectl patch validatingwebhookconfiguration kyverno-resource-validating-webhook
 kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg \
   --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Fail"}]'
 ```
-
 ---
 
 *本文档基于企业级 Kyverno 策略管理实践经验编写，持续更新最新技术和最佳实践。*
@@ -1328,3 +1333,6 @@ kubectl patch mutatingwebhookconfiguration kyverno-resource-mutating-webhook-cfg
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

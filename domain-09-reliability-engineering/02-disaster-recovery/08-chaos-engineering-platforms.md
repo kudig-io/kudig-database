@@ -58,6 +58,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
@@ -221,7 +226,8 @@ dnsServer:
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Chaos Mesh
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 helm install chaos-mesh chaos-mesh/chaos-mesh \
@@ -236,13 +242,13 @@ kubectl label namespace production chaos-mesh.org/inject=enabled
 kubectl get pods -n chaos-mesh
 kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
 ```
-
 ## LitmusChaos 部署
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 LitmusChaos
 kubectl apply -f https://raw.githubusercontent.com/litmuschaos/litmus/master/litmus-portal/litmus-portal-crds.yml
 kubectl apply -f https://raw.githubusercontent.com/litmuschaos/litmus/master/litmus-portal/litmus-portal-namespaced.yml
@@ -253,7 +259,6 @@ kubectl apply -f https://litmuschaos.github.io/litmus/litmus-operator-v3.12.0.ya
 # 验证
 kubectl get pods -n litmus
 ```
-
 ## 稳态假设（Steady State Hypothesis）
 
 稳态假设是混沌实验的核心概念：在注入问题前，定义系统"正常"行为可测量的指标；注入问题后，持续监控这些指标是否仍在可接受范围内。如果超出范围，说明假设被证伪——系统在问题条件下无法维持正常服务水平。
@@ -529,7 +534,17 @@ chaos_experiment_gitops:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # 混沌实验紧急中止脚本
 
@@ -557,7 +572,6 @@ kubectl get chaos -A 2>/dev/null || echo "无活跃混沌实验"
 echo "所有混沌实验已中止"
 echo "建议检查系统状态: kubectl get pods -A | grep -v Running"
 ```
-
 ---
 
 <!-- chunk: 容灾演练方案 (Game Day) -->## 容灾演练方案 (Game Day)
@@ -714,7 +728,8 @@ chaos_monitoring:
 
 ## 常见问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 混沌工程故障排查
 
@@ -740,7 +755,6 @@ kubectl get pods -A -l chaos-mesh.org/inject=enabled | grep -v Running
 echo "[5] Chaos Daemon 日志"
 kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 ```
-
 ## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
@@ -1021,3 +1035,6 @@ experiment_safety_policy:
 - 07-kubernetes-backup-restore-deep-dive
 - 09-application-level-disaster-recovery
 - 99-velero-backup-recovery-guide
+
+
+<!-- risk-assessed -->

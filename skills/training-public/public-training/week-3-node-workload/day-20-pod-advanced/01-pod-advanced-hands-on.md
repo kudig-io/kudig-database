@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -219,7 +224,8 @@ startupProbe:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试探针端点
 kubectl exec -it <pod-name> -- curl -s http://localhost:8080/healthz
 
@@ -229,7 +235,6 @@ kubectl exec -it <pod-name> -- nc -zv localhost 5432
 # 查看探针失败原因
 kubectl describe pod <pod-name> | grep -A15 "Liveness"
 ```
-
 ---
 
 ## 3. Pod 资源优化
@@ -327,14 +332,14 @@ spec:
 
 ### 4.3 抢占与驱逐
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 低优先级 Pod 被高优先级 Pod 抢占
 kubectl get pods --sort-by='.spec.priority' | tail -20
 
 # 查看抢占事件
 kubectl describe pod <pod-name> | grep -A10 "Events:" | grep -i "preempt"
 ```
-
 ---
 
 ## 5. Pod 中断与容忍
@@ -481,7 +486,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看调度决策详情
 kubectl describe pod <pod-name> | grep -A30 "Events:"
 
@@ -491,13 +497,13 @@ kubectl create -f pod.yaml --dry-run=client
 # 查看调度器日志
 kubectl logs -n kube-system kube-scheduler-xxx --tail=50 | grep <pod-name>
 ```
-
 ### 8.2 网络异常
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试 Pod 间连通性
 kubectl exec -it <pod-a> -- ping -c 3 <service-b>
 
@@ -507,7 +513,6 @@ kubectl exec -it <pod-a> -- nslookup service-name.namespace.svc.cluster.local
 # 查看 Pod 网络接口
 kubectl exec -it <pod-a> -- ip addr
 ```
-
 ---
 
 ## 9. 实战练习
@@ -522,3 +527,6 @@ kubectl exec -it <pod-a> -- ip addr
 
 ---
 
+
+
+<!-- risk-assessed -->

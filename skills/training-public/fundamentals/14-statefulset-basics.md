@@ -40,6 +40,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -325,6 +330,7 @@ StatefulSet 根据 serviceName 找到对应的 Headless Service，
 ### 4.1 部署顺序
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【部署过程】
 
 StatefulSet 创建 Pod 时是严格有序的：
@@ -354,10 +360,19 @@ mysql-0  1/1     Running
 mysql-1  1/1     Running
 mysql-2  1/1     Running
 ```
-
 ### 4.2 扩缩容
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【扩容】
 
 kubectl scale statefulset mysql --replicas=4
@@ -382,7 +397,6 @@ mysql-3 → mysql-2
 # ⚠️ 危险！可能导致数据丢失
 kubectl delete pod mysql-2 -n <namespace> --grace-period=0 --force
 ```
-
 ⚠️ 风险提示：
 • 可能导致 StatefulSet 数据丢失
 • Pod 的 PVC 可能被回收
@@ -454,7 +468,7 @@ PVC 无法绑定（存储不足、StorageClass 不存在等）。
 4. 如果是云存储，检查 CSI driver
    kubectl get pods -n kube-system | grep csi
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### 6.2 StatefulSet 无法更新
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
@@ -594,7 +608,7 @@ StatefulSet 确保：
 
 有其他问题吗？"
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ---
 
 ## 8. 总结
@@ -657,3 +671,6 @@ kubectl delete statefulset <name>
 - 13-daemonset-basics
 - 15-scheduling-basics
 - inner-one-month-training
+
+
+<!-- risk-assessed -->

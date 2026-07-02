@@ -37,6 +37,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -111,7 +116,17 @@ topology.kubernetes.io/zone=us-east-1a        # 可用区
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 手动增加节点（使用云厂商 CLI）
 # AWS EKS
 eksctl scale nodegroup --cluster=my-cluster --name=ng-1 --nodes=5
@@ -121,7 +136,6 @@ kubectl cordon <node-name>
 kubectl drain <node-name> --ignore-daemonsets
 # 然后在云控制台删除节点
 ```
-
 ### 2.2 Cluster Autoscaler 配置
 
 ```yaml
@@ -143,7 +157,8 @@ data:
 
 ### 2.3 扩缩容监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控集群节点数变化
 kubectl get nodes -w &
 watch -n 5 'kubectl get nodes -l node-pool=gpu-compute'
@@ -155,7 +170,6 @@ kubectl describe hpa <hpa-name>
 # 监控 Cluster Autoscaler 日志
 kubectl logs -n kube-system -l app=cluster-autoscaler --tail=50
 ```
-
 ---
 
 ## 3. 节点调度策略
@@ -266,7 +280,8 @@ spec:
 
 ### 4.1 Pod Pending（调度失败）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 调度失败原因
 kubectl describe pod <pod-name> | grep -A20 "Events:"
 
@@ -281,13 +296,13 @@ kubectl describe node | grep -E "cpu|memory|allocatable"
 # 查看污点
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
 ```
-
 ### 4.2 调度器故障排查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查调度器是否运行
 kubectl get pods -n kube-system -l component=kube-scheduler
 
@@ -298,7 +313,6 @@ kubectl logs -n kube-system kube-scheduler-<pod> --tail=50
 kubectl create -f pod.yaml --dry-run=client -o json | \
   kubectl alpha scheduling probe --namespace=default
 ```
-
 ### 4.3 自定义调度器
 
 ```yaml
@@ -320,7 +334,8 @@ spec:
 
 ### 5.1 节点资源预留
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点 allocatable 资源
 kubectl get node <node-name> -o jsonpath='{.status.allocatable}'
 
@@ -332,10 +347,10 @@ kubectl get node <node-name> -o jsonpath='{.status.allocatable}'
 kubectl top nodes
 kubectl describe nodes | grep -A10 "Allocated resources"
 ```
-
 ### 5.2 节点健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 综合健康检查脚本
 cat > node-health-check.sh <<'EOF'
 #!/bin/bash
@@ -368,7 +383,6 @@ EOF
 chmod +x node-health-check.sh
 ./node-health-check.sh <node-name>
 ```
-
 ---
 
 ## 6. 节点维护深度实践
@@ -379,7 +393,17 @@ chmod +x node-health-check.sh
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 批量节点维护 SOP ==========
 CLUSTER="production"
 MAX_UNAVAILABLE=2  # 最大同时不可用节点数
@@ -423,10 +447,10 @@ done
 echo ">>> 批量维护完成"
 # ========== SOP 结束 ==========
 ```
-
 ### 6.2 维护期间服务保障
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Deployment 副本数是否满足可用性
 kubectl get deploy -A | grep -v "1/1"
 
@@ -436,7 +460,6 @@ kubectl get hpa -A
 # 确认 PDB（Pod 中断预算）
 kubectl get pdb -A
 ```
-
 ---
 
 ## 7. 实战练习
@@ -453,3 +476,5 @@ kubectl get pdb -A
 
 
 ```
+
+<!-- risk-assessed -->

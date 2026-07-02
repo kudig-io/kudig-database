@@ -19,6 +19,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]/网关问题 — 远程顾问对话脚本
 
@@ -80,7 +85,8 @@ relationships:
 **顾问**：如果集群运行在阿里云 ACK 上，Ingress 和外部访问涉及 **ACK Ingress Controller**、**SLB负载均衡**、**ALB应用型负载均衡** 等特有组件。请按以下步骤排查：
 
 **步骤 1：ACK Ingress Controller状态检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ACK Ingress Controller（nginx-ingress-controller或ALB Ingress Controller）
 kubectl get pods -n kube-system | grep -E 'ingress|alb'
 kubectl get deployment -n kube-system | grep -E 'ingress|alb'
@@ -96,7 +102,8 @@ kubectl logs -n kube-system -l app=alb-ingress-controller --tail=50
 > 3. 组件是否有异常事件或重启记录？
 
 **步骤 2：阿里云SLB与Ingress关联检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看Ingress注解中的SLB配置
 kubectl get ingress <ing> -n <ns> -o yaml | grep -E "slb-id|alibabacloud.com|ack.aliyun.com"
 
@@ -110,7 +117,8 @@ kubectl describe svc <ingress-svc> -n kube-system | grep -A10 Events
 > 3. SLB 后端服务器组中的 ECS 是否全部健康？
 
 **步骤 3：ALB Ingress特有排查（如使用ALB Ingress Controller）**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看ALB Ingress的AlbConfig
 kubectl get albconfig -n <ns>
 kubectl get albconfig <alb-name> -n <ns> -o yaml
@@ -124,7 +132,8 @@ kubectl get ingress <ing> -n <ns> -o yaml | grep -i "alb"
 > 3. ALB 虚拟服务器组中的后端 Pod IP 是否正确？
 
 **步骤 4：ACK专有网络与安全组检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Ingress Controller Pod所在节点的安全组
 kubectl get pod <ingress-pod> -n kube-system -o wide
 # 然后到控制台检查该节点ECS的安全组规则
@@ -308,3 +317,6 @@ kubectl get pod <ingress-pod> -n kube-system -o wide
 - [[domain-17-system-foundation/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
 - [[entities/argo.md|Argo Workflows]]
+
+
+<!-- risk-assessed -->

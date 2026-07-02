@@ -39,6 +39,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Cilium|cilium]] v1.14 Release Notes
@@ -153,3 +158,6 @@ Summary of Changes
 `docker.io/cilium/operator:v1.14.19@sha256:03ff2ea917a6de911acc3c42bc8bc33e7ae251c15b82851c1e8f222eb578fdca`
 `quay.io/cilium/operator:v1.14.19@sha256:03ff2ea917a6de911acc3c42bc8bc33e7ae251c15b82851c1e8f222eb578fdca`
 
+
+
+<!-- risk-assessed -->

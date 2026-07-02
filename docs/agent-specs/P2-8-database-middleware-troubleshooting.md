@@ -32,6 +32,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 数据库中间件问题排查指南
@@ -107,7 +112,8 @@ mysql -e "SHOW ENGINE INNODB STATUS\G"
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Percona Operator 检查
 kubectl get pods -n mysql-operator
 kubectl describe pxc db-cluster -n mysql
@@ -118,7 +124,6 @@ kubectl delete pod <pod> -n mysql --grace-period=0
 # 手动触发 failover
 kubectl patch pxc db-cluster -n mysql -p '{"spec":{"forceStandalone":true}}' --type=merge
 ```
-
 ---
 
 ## 2. PostgreSQL 问题排查
@@ -358,7 +363,8 @@ psql -h <host> -U postgres -d db_name < /backup/db.sql
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # RDB 备份
 redis-cli BGSAVE
 # 检查: redis-cli LASTSAVE
@@ -375,7 +381,6 @@ aws s3 cp s3://bucket/redis/dump-latest.rdb /var/lib/redis/dump.rdb
 chown redis:redis /var/lib/redis/dump.rdb
 systemctl restart redis
 ```
-
 ### 4.4 备份验证清单
 
 | 备份类型 | 验证方法 | 验证频率 |
@@ -425,3 +430,5 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 - [domain-16-database-middleware/](../domain-16-database-middleware/) — 数据库中间件完整文档
 - [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用问题排查
 - [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill
+
+<!-- risk-assessed -->

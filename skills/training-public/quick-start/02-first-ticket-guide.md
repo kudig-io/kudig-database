@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 2: 第一个工单处理指南
@@ -63,7 +68,8 @@ prerequisites:
 
 ### 1.2 分类问题清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 处理工单前，先快速确认
 1. "哪个集群/命名空间？" → kubectl get namespaces
 2. "哪个服务/Pod？" → kubectl get pods -n <ns>
@@ -71,10 +77,10 @@ prerequisites:
 4. "从什么时候开始的？" → kubectl get events --sort-by='.lastTimestamp'
 5. "有告警吗？" → 查看 Prometheus/Grafana
 ```
-
 ### 1.3 快速诊断命令集
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 集群级健康检查（30 秒完成）
 echo "=== Cluster Info ==="
 kubectl cluster-info
@@ -93,7 +99,6 @@ echo "=== Resource Usage ==="
 kubectl top nodes 2>/dev/null || echo "Metrics Server not available"
 kubectl top pods -A --sort-by=memory 2>/dev/null | head -15 || echo "Metrics Server not available"
 ```
-
 ---
 
 ## 2. 场景一：Pod 问题（最常见）
@@ -107,7 +112,17 @@ kubectl top pods -A --sort-by=memory 2>/dev/null | head -15 || echo "Metrics Ser
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 确认问题
 kubectl get pods -n <namespace> | grep -v Running
 
@@ -152,14 +167,14 @@ kubectl get pods -n <namespace> -l app=<app-name>  # 确认 Pod Running
 kubectl logs <pod-name> -n <namespace>             # 确认无新错误
 curl -s http://<service-name>.<namespace>.svc.cluster.local/health  # 确认服务恢复
 ```
-
 ### 常用修复命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 重启 Deployment（最常用）
 kubectl rollout restart deployment <name> -n <namespace>
 
@@ -184,7 +199,6 @@ kubectl rollout status deployment <name> -n <namespace>
 # 扩缩容
 kubectl scale deployment <name> -n <namespace> --replicas=5
 ```
-
 ---
 
 ## 3. 场景二：[[Service|Service]] 无法访问
@@ -197,7 +211,17 @@ kubectl scale deployment <name> -n <namespace> --replicas=5
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 确认问题
 kubectl get svc -n <namespace>                    # 查看 Service
 kubectl get endpoints -n <namespace> <svc-name>   # 查看 Endpoints（关键！）
@@ -247,7 +271,6 @@ kubectl run dns-test --rm -it --restart=Never --image=busybox:1.36 -- sh -c '
   wget -qO- --timeout=5 http://backend-svc:80/health || echo "Connection failed"
 '
 ```
-
 ### Service 排障流程图
 
 ```
@@ -281,7 +304,17 @@ Service 无法访问
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Step 1: 确认问题
 kubectl get nodes | grep -v Ready
 
@@ -311,13 +344,22 @@ kubectl uncordon <node-name>                     # 解封节点
 kubectl get nodes | grep <node-name>             # 确认 Ready
 kubectl get pods -o wide | grep <node-name>      # 确认 Pod 已调度回来
 ```
-
 ### 节点 NotReady 排障命令集
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查节点 Conditions
 kubectl describe node <node-name> | grep -A 5 "Conditions"
 
@@ -338,7 +380,6 @@ top -bn1       # CPU
 ping <api-server-ip>
 curl -k https://<api-server-ip>:6443/healthz
 ```
-
 ---
 
 ## 5. 工单处理记录模板
@@ -402,7 +443,8 @@ curl -k https://<api-server-ip>:6443/healthz
 
 ### 升级前准备
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 收集信息以便快速交接
 kubectl get nodes -o wide > /tmp/nodes.txt
 kubectl get pods -A > /tmp/pods.txt
@@ -414,7 +456,6 @@ kubectl top pods -A > /tmp/top-pods.txt 2>/dev/null
 # 打包
 tar czf /tmp/k8s-debug-$(date +%Y%m%d%H%M).tar.gz /tmp/nodes.txt /tmp/pods.txt /tmp/events.txt /tmp/services.txt /tmp/top-nodes.txt /tmp/top-pods.txt
 ```
-
 ---
 
 ## 7. 高频场景速查
@@ -483,3 +524,5 @@ tags: [onboarding, first-ticket, troubleshooting, sre, ops-engineer, k8s-1.28-1.
 ```
 
 ```
+
+<!-- risk-assessed -->

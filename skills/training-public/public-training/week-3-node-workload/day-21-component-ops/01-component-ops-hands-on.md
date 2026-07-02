@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -91,7 +96,8 @@ related_topics:
 
 ### 1.2 组件健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 一键检查所有控制平面组件
 for component in kube-apiserver kube-scheduler kube-controller-manager etcd; do
   echo "=== 检查 $component ==="
@@ -103,14 +109,14 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 kubectl logs -n kube-system -l component=kube-scheduler --tail=20
 kubectl logs -n kube-system -l component=kube-controller-manager --tail=20
 ```
-
 ---
 
 ## 2. API Server 运维
 
 ### 2.1 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 API Server Pod
 kubectl get pods -n kube-system -l component=kube-apiserver -o wide
 
@@ -124,10 +130,10 @@ ss -tlnp | grep 6443
 # 检查 API Server 日志
 kubectl logs -n kube-system kube-apiserver-<node-name> --tail=50 -f
 ```
-
 ### 2.2 API Server 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. API Server 无法启动
 # 检查静态 Pod manifest
 ls -la /etc/kubernetes/manifests/
@@ -147,7 +153,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 kubectl auth whoami
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
 ```
-
 ### 2.3 API Server 调优
 
 ```bash
@@ -166,7 +171,8 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Scheduler Pod
 kubectl get pods -n kube-system -l component=kube-scheduler
 
@@ -176,10 +182,10 @@ kubectl logs -n kube-system kube-scheduler-<pod> --tail=50
 # 测试调度
 kubectl create -f test-pod.yaml --dry-run=client -o yaml | kubectl apply -f -
 ```
-
 ### 3.2 调度延迟排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认调度器运行
 kubectl get configmap -n kube-system kube-scheduler-configuration
 
@@ -192,14 +198,14 @@ kubectl get events --sort-by='.lastTimestamp' | grep -i "schedul"
 # 4. 测试调度算法
 kubectl debug node/<node-name> -it --image=busybox -- ctr run
 ```
-
 ---
 
 ## 4. Controller Manager 运维
 
 ### 4.1 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Controller Manager Pod
 kubectl get pods -n kube-system -l component=kube-controller-manager
 
@@ -209,10 +215,10 @@ kubectl logs -n kube-system kube-controller-manager-<pod> --tail=50
 # 查看控制器循环延迟
 # (通过 Prometheus) namespace_sync_duration etc
 ```
-
 ### 4.2 控制器故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. Deployment 控制器问题
 kubectl get events --sort-by='.lastTimestamp' | grep -i "deployment"
 
@@ -227,14 +233,14 @@ kubectl describe node <node-name> | grep -A20 "Conditions"
 # 4. 控制器 Leader 选举
 kubectl get endpoints kube-controller-manager -n kube-system -o yaml | grep -i leader
 ```
-
 ---
 
 ## 5. Kubelet 运维
 
 ### 5.1 节点级别组件检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # SSH 到节点
 ssh <node-ip>
 
@@ -251,13 +257,22 @@ sudo systemctl status containerd  # containerd
 # 检查 kubelet 连接 API Server
 sudo crictl info
 ```
-
 ### 5.2 Kubelet 故障排查
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 节点 NotReady
 sudo journalctl -u kubelet --since "10m" | grep -E "error|failed|refused"
 
@@ -276,14 +291,14 @@ sudo docker system df
 sudo systemctl restart kubelet
 sudo systemctl status kubelet
 ```
-
 ---
 
 ## 6. etcd 运维
 
 ### 6.1 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd Pod
 kubectl get pods -n kube-system -l component=etcd -o wide
 
@@ -301,10 +316,10 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
   endpoint status
 ```
-
 ### 6.2 etcd 故障排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. etcd 无法启动
 sudo systemctl status etcd
 sudo journalctl -u etcd --since "10m" | tail -50
@@ -326,7 +341,6 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd.db \
   --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
   --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
 ```
-
 ---
 
 ## 7. 组件证书管理
@@ -336,7 +350,8 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd.db \
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查证书过期时间
 for cert in /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/etcd/server.crt; do
   echo "=== $cert ==="
@@ -354,7 +369,6 @@ sudo kubeadm certs renew all
 # 重启 API Server 加载新证书
 sudo systemctl restart kube-apiserver
 ```
-
 ---
 
 ## 8. 综合故障处理 SOP
@@ -364,7 +378,17 @@ sudo systemctl restart kube-apiserver
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 控制平面问题 SOP ==========
 
 echo "[1] 检查所有控制平面 Pod"
@@ -402,7 +426,6 @@ sudo kubeadm upgrade node
 sudo apt-get install -y kubelet=1.30.0-*
 sudo systemctl restart kubelet
 ```
-
 ---
 
 ## 9. 实战练习
@@ -417,3 +440,6 @@ sudo systemctl restart kubelet
 
 ---
 
+
+
+<!-- risk-assessed -->

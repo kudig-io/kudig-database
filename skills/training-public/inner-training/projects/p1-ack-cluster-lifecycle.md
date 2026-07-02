@@ -33,6 +33,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -235,7 +240,8 @@ aliyun cs GET /clusters/$CLUSTER_ID/logs | jq -r '.[] | "\(.created) \(.log)"'
 
 #### 2.3 获取 kubeconfig
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取 kubeconfig
 KC=$(aliyun cs GET /k8s/$CLUSTER_ID/user_config)
 echo "$KC" | jq -r '.config' > ~/.kube/config-training
@@ -250,7 +256,6 @@ kubectl cluster-info
 kubectl get nodes
 # (此时应该没有节点)
 ```
-
 ---
 
 ### Step 3: 添加节点池 (30min)
@@ -323,7 +328,8 @@ echo "业务节点池创建已提交: $APP_POOL_ID"
 
 #### 3.3 等待节点就绪
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 等待节点 Ready
 kubectl get nodes -w
 # NAME                                STATUS   ROLES    AGE   VERSION
@@ -336,19 +342,18 @@ kubectl get nodes -w
 kubectl get nodes --show-labels
 kubectl describe node <node-name> | grep Taints
 ```
-
 ---
 
 ### Step 4: 集群升级 (30min)
 
 #### 4.1 查看当前版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl version --short
 # Client Version: v1.28.9
 # Server Version: v1.28.9-aliyun.1
 ```
-
 #### 4.2 查看可升级版本
 
 ```bash
@@ -376,7 +381,17 @@ aliyun cs GET /clusters/$CLUSTER_ID/upgradestatus | jq '.status'
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 通过替换方式升级节点池 (推荐)
 # 在控制台: 集群 → 节点池 → 选择节点池 → 升级
 
@@ -390,14 +405,14 @@ kubectl cordon <old-node>
 kubectl drain <old-node> --ignore-daemonsets --delete-emptydir-data
 kubectl get pods -A -o wide | grep <old-node>
 ```
-
 ---
 
 ### Step 5: 集群删除与清理 (30min)
 
 #### 5.1 删除前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查业务工作负载
 kubectl get deployments -A
 kubectl get statefulsets -A
@@ -411,18 +426,26 @@ kubectl get pvc -A
 # 检查 Ingress
 kubectl get ingress -A
 ```
-
 #### 5.2 删除业务资源
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete all --all -n default  # ⚠️ 批量删除，波及面大
 kubectl delete namespace <business-ns> 2>/dev/null  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 #### 5.3 删除集群
 
 ```bash
@@ -494,7 +517,8 @@ aliyun cs GET /clusters/$CLUSTER_ID/logs
 
 ### Q2: 节点加入失败怎么办？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点状态
 kubectl describe node <name>
 
@@ -504,7 +528,6 @@ journalctl -u kubelet -n 100
 # 检查网络连通性
 curl -k https://<api-server>:6443/healthz
 ```
-
 ### Q3: 删除集群时部分资源残留？
 
 ```bash
@@ -535,3 +558,6 @@ aliyun slb DeleteLoadBalancer --LoadBalancerId <slb-id>
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 - K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
 - [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+
+
+<!-- risk-assessed -->

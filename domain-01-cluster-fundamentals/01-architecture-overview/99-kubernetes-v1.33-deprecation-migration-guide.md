@@ -63,6 +63,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.33 弃用功能与迁移指南
@@ -179,7 +184,8 @@ v1.25 → v1.33 移除/弃用时间线
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查现有 PSP
 kubectl get psp
 
@@ -197,14 +203,14 @@ kubectl label namespace production \
 kubectl auth can-i use podsecuritypolicies --as=system:serviceaccount:default:default
 # 预期: no (PSP 已移除)
 ```
-
 ### 4.2 in-tree 存储驱动 → CSI
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查当前存储类
 kubectl get sc
 
@@ -232,14 +238,23 @@ kubectl patch storageclass csi-gp3 -p '{"metadata": {"annotations":{"storageclas
 # 5. 迁移现有 PVC (需重建)
 # 注意: 无法直接迁移，需创建新 PVC 并复制数据
 ```
-
 ### 4.3 kubelet --cloud-provider → 外部 CCM
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查当前 kubelet 配置
 ps aux | grep kubelet | grep cloud-provider
 
@@ -255,10 +270,10 @@ systemctl restart kubelet
 # 4. 验证 CCM 运行
 kubectl get pods -n kube-system | grep cloud-controller
 ```
-
 ### 4.4 Node v1beta1 metrics → v1
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 Prometheus 规则
 grep -r "v1beta1/metrics" /etc/prometheus/rules/
 
@@ -270,7 +285,6 @@ grep -r "v1beta1/metrics" /etc/prometheus/rules/
 kubectl top nodes
 kubectl top pods
 ```
-
 ---
 
 <!-- chunk: 五、自动化检测脚本 -->
@@ -278,7 +292,8 @@ kubectl top pods
 
 ### 5.1 全面弃用检测
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # deprecation-check.sh
 
@@ -332,7 +347,6 @@ fi
 
 echo -e "\n=== 检测完成 ==="
 ```
-
 ### 5.2 自动修复脚本
 
 ```bash
@@ -420,3 +434,6 @@ done
 - 99-kubernetes-v1.29-v1.33-features-guide
 - 99-kubernetes-v1.33-ecosystem-compatibility-matrix
 - 99-kubernetes-v1.33-practical-cookbook
+
+
+<!-- risk-assessed -->

@@ -59,6 +59,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
@@ -285,7 +290,8 @@ Pod 名称重写示例：
 
 ## 3.1 CLI 快速创建 vCluster
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 vCluster CLI
 curl -L -o /usr/local/bin/vcluster \
   "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd64"
@@ -314,7 +320,6 @@ vcluster disconnect
 # 删除 vCluster
 vcluster delete my-vcluster --namespace team-a
 ```
-
 ## 3.2 Helm 生产部署
 
 ```yaml
@@ -415,7 +420,8 @@ telemetry:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Helm 部署 vCluster
 helm repo add loft-sh https://charts.loft.sh
 helm repo update
@@ -439,7 +445,6 @@ vcluster connect tenant-a-vcluster -n tenant-a \
   --server https://vcluster.tenant-a.example.com \
   --print > tenant-a-kubeconfig.yaml
 ```
-
 ## 3.3 存储配置
 
 ```yaml
@@ -705,7 +710,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 CAPI 自动化 vCluster 生命周期
 
 # 创建 vCluster (声明式)
@@ -733,7 +739,6 @@ kubectl patch vcluster tenant-prod-vcluster \
 kubectl delete cluster tenant-prod-cluster -n capi-system
 # CAPI 自动清理所有相关资源
 ```
-
 ---
 
 <!-- chunk: 6. 开发测试环境实践 -->## 6. 开发测试环境实践
@@ -1531,3 +1536,6 @@ Cluster API   ★★★★★   ★★★★★    ★★★☆☆  ★★★★
 - [[research|#research Hub]] — tag hub
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

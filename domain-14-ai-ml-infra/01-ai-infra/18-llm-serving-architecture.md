@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: go'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # LLM模型Serving架构与推理优化
@@ -484,7 +489,8 @@ spec:
 
 ### 3.3 TGI量化推理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GPTQ 4-bit量化推理
 docker run --gpus all \
   -p 8080:80 \
@@ -501,7 +507,6 @@ docker run --gpus all \
 # - INT4(GPTQ): 7GB显存, 25 tokens/s (速度-17%)
 # - NF4(bitsandbytes): 7GB显存, 22 tokens/s (速度-27%)
 ```
-
 ---
 
 <!-- chunk: 四、NVIDIA Triton Inference Server -->
@@ -1024,7 +1029,8 @@ outputs = llm.generate(prompts, sampling_params)
 
 ### 8.2 MIG配置实践
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # A100 80GB MIG配置
 # 切分为 3 * 3g.40gb 实例
 
@@ -1050,7 +1056,6 @@ nvidia-smi mig -lgi
 kubectl get node gpu-node-01 -o yaml | grep nvidia.com/mig
 #  nvidia.com/mig-3g.40gb: 3
 ```
-
 ```yaml
 # Pod使用MIG实例
 apiVersion: v1
@@ -1336,7 +1341,8 @@ groups:
 
 ### 11.2 日志分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # vLLM调试日志
 kubectl logs -f vllm-pod --namespace ai-platform | grep -E "ERROR|WARNING|OOM"
 
@@ -1350,7 +1356,6 @@ kubectl logs -f vllm-pod --namespace ai-platform | grep -E "ERROR|WARNING|OOM"
 # [INFO] Avg prompt throughput: 1234.5 tokens/s, generation: 45.6 tokens/s
 #   → 性能基准参考
 ```
-
 ---
 
 **相关表格：**
@@ -1396,3 +1401,6 @@ kubectl logs -f vllm-pod --namespace ai-platform | grep -E "ERROR|WARNING|OOM"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+
+
+<!-- risk-assessed -->

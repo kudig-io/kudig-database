@@ -70,6 +70,11 @@ cross_refs:
   label: '运维技能: 14-configmap-secret-failure'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 19 - ConfigMap/Secret 故障排查 (ConfigMap/Secret Troubleshooting)
@@ -92,6 +97,7 @@ cross_refs:
 ### 1.2 配置管理架构回顾
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                   ConfigMap/Secret 故障诊断架构                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -144,7 +150,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 基础配置检查 (Basic Configuration Check) -->
@@ -152,7 +157,8 @@ cross_refs:
 
 ### 2.1 配置资源状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 资源存在性检查 ==========
 # 检查ConfigMap是否存在
 kubectl get configmap <configmap-name> -n <namespace>
@@ -180,10 +186,10 @@ kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"
 # 查找引用特定Secret的Pod
 kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.volumes[*].secret.secretName}{"\n"}{end}' | grep <secret-name>
 ```
-
 ### 2.2 权限和访问控制检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== RBAC权限检查 ==========
 # 检查ServiceAccount权限
 kubectl auth can-i get configmaps --as=system:serviceaccount:<namespace>:<serviceaccount-name>
@@ -195,7 +201,6 @@ kubectl get rolebindings -n <namespace> -o jsonpath='{range .items[*]}{.metadata
 # 验证Pod Security Context
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext}'
 ```
-
 ---
 
 <!-- chunk: 3. 配置注入问题排查 (Configuration Injection Troubleshooting) -->
@@ -206,7 +211,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.securityContext}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. Pod配置检查 ==========
 # 查看Pod的环境变量配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].env}' | jq
@@ -231,13 +237,13 @@ kubectl get secret <secret-name> -n <namespace> -o jsonpath='{.data}' | jq 'keys
 # 检查大小写敏感性
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].env[*].name}'
 ```
-
 ### 3.2 文件挂载问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 卷挂载检查 ==========
 # 查看Pod卷配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.volumes}' | jq
@@ -262,7 +268,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[*].volu
 # 验证subPath文件存在性
 kubectl exec -n <namespace> <pod-name> -- ls -la <mount-path>/<subPath>
 ```
-
 ---
 
 <!-- chunk: 4. 热更新机制问题 (Hot Reload Issues) -->
@@ -274,7 +279,8 @@ kubectl exec -n <namespace> <pod-name> -- ls -la <mount-path>/<subPath>
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 更新传播检查 ==========
 # 修改ConfigMap
 kubectl patch configmap <configmap-name> -n <namespace> -p '{"data":{"test-key":"new-value"}}'
@@ -306,14 +312,14 @@ while true; do
     sleep 1
 done
 ```
-
 ### 4.2 不支持热更新的场景
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 环境变量不支持热更新 ==========
 # 验证环境变量在Pod生命周期内不变
 ORIGINAL_VALUE=$(kubectl exec -n <namespace> <pod-name> -- printenv <ENV_VAR>)
@@ -329,7 +335,6 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.volumes[?(@.projec
 
 # projected卷支持热更新，但有延迟
 ```
-
 ---
 
 <!-- chunk: 5. 安全性问题排查 (Security Issues Troubleshooting) -->
@@ -340,7 +345,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.volumes[?(@.projec
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 明文存储检查 ==========
 # 搜索可能包含敏感信息的ConfigMap
 kubectl get configmaps --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namespace}{"/"}{.metadata.name}{"\n"}{end}' | while read cm; do
@@ -367,13 +373,13 @@ kubectl get encryptionconfig -n kube-system
 ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}')
 kubectl exec -n kube-system $ETCD_POD -- sh -c "ETCDCTL_API=3 etcdctl get /registry/secrets/<namespace>/<secret-name> | strings | grep -E '(password|token)'"
 ```
-
 ### 5.2 安全最佳实践检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 推荐的安全配置模板 ==========
 cat <<EOF > secure-config-template.yaml
 apiVersion: v1
@@ -432,7 +438,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 性能和容量问题 (Performance and Capacity Issues) -->
@@ -443,7 +448,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 大小限制检查 ==========
 # ConfigMap/Secret大小限制: 1MB
 # 检查现有配置大小
@@ -512,13 +518,13 @@ spec:
           name: vault-agent-config
 EOF
 ```
-
 ### 6.2 监控和告警配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 配置资源监控 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -568,7 +574,6 @@ rules:
   verbs: ["create", "update", "patch", "delete"]
 EOF
 ```
-
 ---
 
 <!-- chunk: 7. CI/CD集成和自动化 (CI/CD Integration and Automation) -->
@@ -580,7 +585,8 @@ EOF
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 配置Linting脚本 ==========
 cat <<'EOF' > config-linter.sh
 #!/bin/bash
@@ -685,10 +691,10 @@ EOF
 
 chmod +x secret-rotation.sh
 ```
-
 ### 7.2 GitOps配置管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== ArgoCD配置同步检查 ==========
 # 检查应用同步状态
 kubectl get applications -n argocd -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.sync.status}{"\n"}{end}'
@@ -732,7 +738,6 @@ data:
 {{- end }}
 EOF
 ```
-
 ---
 
 ---
@@ -762,3 +767,6 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/18-cronjob-troubleshooting.md|18-cronjob-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/20-daemonset-troubleshooting.md|20-daemonset-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
+
+
+<!-- risk-assessed -->

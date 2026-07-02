@@ -54,6 +54,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 14 - Secret 全类型 YAML 配置参考
@@ -273,7 +278,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从字面量创建
 kubectl create secret generic db-secret \
   --from-literal=username=admin \
@@ -300,7 +306,6 @@ echo "secret2" > secrets/key2
 kubectl create secret generic dir-secret \
   --from-file=secrets/
 ```
-
 ---
 
 <!-- chunk: kubernetes.io/service-account-token -->## kubernetes.io/service-account-token
@@ -440,7 +445,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式1: 命令行参数
 kubectl create secret docker-registry docker-secret \
   --docker-server=registry.example.com \
@@ -470,7 +476,6 @@ kubectl create secret generic multi-registry-secret \
   --from-file=.dockerconfigjson=config.json \
   --type=kubernetes.io/dockerconfigjson
 ```
-
 ## Pod 使用镜像拉取凭证
 
 ```yaml
@@ -644,13 +649,13 @@ stringData:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 SSH 私钥文件创建
 kubectl create secret generic ssh-secret \
   --from-file=ssh-privatekey=$HOME/.ssh/id_rsa \
   --type=kubernetes.io/ssh-auth
 ```
-
 ## 使用示例: Git Clone
 
 ```yaml
@@ -767,7 +772,8 @@ data:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从证书文件创建
 kubectl create secret tls tls-secret \
   --cert=tls.crt \
@@ -791,7 +797,6 @@ stringData:
     -----END RSA PRIVATE KEY-----
 EOF
 ```
-
 ## 使用示例: Ingress TLS
 
 ```yaml
@@ -1013,7 +1018,8 @@ stringData:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kubeadm 创建 (推荐)
 kubeadm token create \
   --description "Node join token" \
@@ -1041,7 +1047,6 @@ stringData:
   auth-extra-groups: "system:bootstrappers:default-node-token"
 EOF
 ```
-
 ## 使用场景: 节点加入集群
 
 ```bash
@@ -1735,3 +1740,6 @@ metadata:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

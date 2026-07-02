@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Scheduler 故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
@@ -129,7 +134,8 @@ Scheduler 是集群的“大脑”，决定了资源的使用效率和应用的�
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Scheduler 进程状态（systemd 管理）
 systemctl status kube-scheduler
 
@@ -157,7 +163,6 @@ kubectl describe pod <pod-name> | grep -A20 Events
 # 查看 Scheduler 指标
 curl -k https://127.0.0.1:10259/metrics | grep scheduler
 ```
-
 ### 1.3 影响面分析
 
 #### 1.3.1 直接影响
@@ -297,7 +302,8 @@ Scheduler v1.19+ 采用插件化调度框架，核心扩展点：
 
 #### 2.3.1 第一步：检查 Scheduler 进程状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查进程是否存在
 ps aux | grep kube-scheduler | grep -v grep
 
@@ -316,10 +322,10 @@ curl -k https://127.0.0.1:10259/healthz
 # 查看详细健康状态
 curl -k 'https://127.0.0.1:10259/healthz?verbose'
 ```
-
 #### 2.3.2 第二步：检查 API Server 连接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Scheduler 日志中的连接错误
 journalctl -u kube-scheduler | grep -iE "(unable to connect|connection refused|error)"
 
@@ -333,10 +339,10 @@ openssl x509 -in /etc/kubernetes/scheduler.conf -noout -dates 2>/dev/null
 # 检查 API Server 可达性
 curl -k https://<api-server-ip>:6443/healthz
 ```
-
 #### 2.3.3 第三步：检查 Leader 选举
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Scheduler Lease
 kubectl get leases -n kube-system kube-scheduler -o yaml
 
@@ -358,10 +364,10 @@ for node in master-1 master-2 master-3; do
   ssh $node "crictl ps | grep kube-scheduler"
 done
 ```
-
 #### 2.3.4 第四步：检查调度失败原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Pending Pod
 kubectl get pods --all-namespaces --field-selector=status.phase=Pending
 
@@ -389,10 +395,10 @@ kubectl get pvc -n <namespace>
 # 查看调度器记录的失败原因
 kubectl get events --field-selector=reason=FailedScheduling --sort-by='.metadata.creationTimestamp'
 ```
-
 #### 2.3.5 第五步：检查调度配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Scheduler 配置文件
 cat /etc/kubernetes/scheduler-config.yaml
 
@@ -408,7 +414,6 @@ cat /etc/kubernetes/scheduler-config.yaml | grep -A50 profiles
 # 验证配置语法
 kube-scheduler --config=/etc/kubernetes/scheduler-config.yaml --dry-run
 ```
-
 #### 2.3.6 第六步：检查调度性能
 
 ```bash
@@ -436,7 +441,8 @@ curl -k https://127.0.0.1:10259/metrics | grep scheduler_plugin_execution_durati
 
 #### 2.3.7 第七步：检查日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 实时查看日志
 journalctl -u kube-scheduler -f --no-pager
 
@@ -455,7 +461,6 @@ journalctl -u kube-scheduler | grep -iE "(failed|unable|error|cannot)" | tail -5
 # 查看特定 Pod 的调度日志
 journalctl -u kube-scheduler | grep "<pod-name>" | tail -20
 ```
-
 ### 2.4 排查注意事项
 
 #### 2.4.1 安全注意事项
@@ -498,7 +503,8 @@ Scheduler 在做决定时并不会锁定节点，而是采用乐观锁（Optimis
 
 #### 3.1.1 解决步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查启动失败原因
 journalctl -u kube-scheduler -b --no-pager | tail -100
 
@@ -526,7 +532,6 @@ mv /tmp/kube-scheduler.yaml /etc/kubernetes/manifests/
 kubectl get pods -n kube-system | grep scheduler
 curl -k https://127.0.0.1:10259/healthz
 ```
-
 #### 3.1.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -550,7 +555,8 @@ curl -k https://127.0.0.1:10259/healthz
 
 #### 3.2.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认资源不足情况
 kubectl describe pod <pod-name> | grep -A10 Events
 
@@ -578,7 +584,6 @@ kubectl get pods -n kube-system | grep cluster-autoscaler
 # 步骤 5：验证调度成功
 kubectl get pod <pod-name> -w
 ```
-
 #### 3.2.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -602,7 +607,17 @@ kubectl get pod <pod-name> -w
 
 #### 3.3.1 解决步骤
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1：检查 Pod 亲和性配置
 kubectl get pod <pod-name> -o yaml | grep -A30 affinity
 
@@ -631,7 +646,6 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"tolerations":[
 # 步骤 6：验证调度
 kubectl get pod <pod-name> -w
 ```
-
 #### 3.3.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -711,7 +725,8 @@ curl -k https://127.0.0.1:10259/metrics | grep scheduler_scheduling_duration_sec
 
 #### 3.5.1 解决步骤
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认 Pod 使用的调度器
 kubectl get pod <pod-name> -o yaml | grep schedulerName
 
@@ -734,7 +749,6 @@ kubectl get clusterrolebinding | grep <custom-scheduler>
 # 步骤 6：恢复使用自定义调度器
 kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName":"<custom-scheduler>"}}}}'
 ```
-
 #### 3.5.2 执行风险
 
 | 风险等级 | 风险描述 | 缓解措施 |
@@ -1312,3 +1326,6 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 - [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 - [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

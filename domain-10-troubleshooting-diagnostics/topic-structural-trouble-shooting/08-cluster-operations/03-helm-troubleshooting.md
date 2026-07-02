@@ -45,6 +45,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Helm|Helm]] 部署故障排查指南
@@ -131,6 +136,7 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 > - `helm upgrade/install`：部署/升级 release
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────┐
 │                      Helm 3 架构                                 │
 ├─────────────────────────────────────────────────────────────────┤
@@ -157,7 +163,6 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ### 常见问题现象
 
 | 问题类型 | 现象描述 | 错误信息示例 | 查看方式 |
@@ -199,6 +204,7 @@ Helm 是 Kubernetes 的包管理工具，用于简化应用部署和管理。本
 ### 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Helm 部署问题
       │
       ├─── 安装/升级失败？
@@ -220,12 +226,12 @@ Helm 部署问题
                 ├─ 模板渲染 ──→ helm get manifest 检查
                 └─ 缓存问题 ──→ helm repo update
 ```
-
 ### 排查命令集
 
 #### Release 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出所有 Release
 helm list -A
 
@@ -241,10 +247,10 @@ helm status <release-name> -n <namespace>
 # 查看 Release 历史
 helm history <release-name> -n <namespace>
 ```
-
 #### 模板和配置检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 渲染模板但不安装 (检查模板语法)
 helm template <release-name> <chart> -n <namespace> --values values.yaml
 
@@ -266,10 +272,10 @@ helm get hooks <release-name> -n <namespace>
 # 查看 Release 的所有信息
 helm get all <release-name> -n <namespace>
 ```
-
 #### Chart 检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Chart 结构
 helm lint <chart-path>
 
@@ -288,13 +294,13 @@ helm repo update
 helm search repo <keyword>
 helm search hub <keyword>
 ```
-
 #### 调试模式
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装时启用调试
 helm install <release> <chart> -n <namespace> --debug --dry-run
 
@@ -304,7 +310,6 @@ helm upgrade <release> <chart> -n <namespace> --debug --dry-run
 # 详细输出
 helm install <release> <chart> -n <namespace> --debug 2>&1 | tee helm-debug.log
 ```
-
 ### 排查注意事项
 
 | 注意事项 | 说明 |
@@ -334,7 +339,8 @@ Error: INSTALLATION FAILED: template: mychart/templates/deployment.yaml:15:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 本地渲染检查模板
 helm template <release> <chart> --debug 2>&1 | head -50
 
@@ -364,7 +370,6 @@ name: {{ .Values.name | quote }}   # 字符串
 # 4. 使用 --dry-run 测试
 helm install <release> <chart> --dry-run --debug
 ```
-
 #### 场景 2：资源已存在冲突
 
 **问题现象：**
@@ -381,7 +386,17 @@ Error: rendered manifests contain a resource that already exists
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查是否有同名 Release
 helm list -A | grep <release-name>
 
@@ -406,7 +421,6 @@ kubectl annotate <resource> <name> \
   meta.helm.sh/release-name=<release> \
   meta.helm.sh/release-namespace=<namespace>
 ```
-
 #### 场景 3：安装超时
 
 **问题现象：**
@@ -419,7 +433,8 @@ Error: timed out waiting for the condition
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 增加超时时间
 helm install <release> <chart> -n <namespace> --timeout 10m
 
@@ -439,7 +454,6 @@ kubectl describe pod <pod-name> -n <namespace>
 # 5. 检查事件
 kubectl get events -n <namespace> --sort-by='.lastTimestamp'
 ```
-
 ### 升级失败
 
 #### 场景 1：升级失败后修复
@@ -458,7 +472,17 @@ Release status: failed
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查 Release 状态
 helm status <release> -n <namespace>
 helm history <release> -n <namespace>
@@ -478,13 +502,13 @@ kubectl delete secret -n <namespace> sh.helm.release.v1.<release>.v<version>
 helm uninstall <release> -n <namespace>  # ⚠️ 删除 release 及关联资源
 helm install <release> <chart> -n <namespace> -f values.yaml
 ```
-
 #### 场景 2：使用原子升级
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 --atomic 标志，失败时自动回滚
 helm upgrade <release> <chart> -n <namespace> \
   --atomic \
@@ -496,12 +520,12 @@ helm upgrade --install <release> <chart> -n <namespace> \
   --atomic \
   -f values.yaml
 ```
-
 ### 回滚问题
 
 #### 场景 1：回滚到指定版本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看历史版本
 helm history <release> -n <namespace>
 
@@ -517,14 +541,23 @@ helm rollback <release> <revision> -n <namespace> --debug
 # 5. 等待回滚完成
 helm rollback <release> <revision> -n <namespace> --wait --timeout 5m
 ```
-
 #### 场景 2：回滚失败处理
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 检查回滚目标版本的 manifest
 helm get manifest <release> -n <namespace> --revision <revision>
 
@@ -542,7 +575,6 @@ helm uninstall <release> -n <namespace> --keep-history  # ⚠️ 删除 release 
 # 重新安装
 helm install <release> <chart> -n <namespace> -f values-backup.yaml
 ```
-
 ### 配置问题
 
 #### 场景 1：Values 优先级
@@ -550,7 +582,8 @@ helm install <release> <chart> -n <namespace> -f values-backup.yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # values 优先级 (从低到高):
 # 1. Chart 默认 values.yaml
 # 2. 父 Chart 的 values
@@ -570,13 +603,13 @@ helm get values <release> -n <namespace> --all
 # 仅查看用户设置的 values
 helm get values <release> -n <namespace>
 ```
-
 #### 场景 2：复杂值设置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 设置嵌套值
 helm install myapp ./chart \
   --set 'server.config.database\.host=mysql.example.com'
@@ -594,7 +627,6 @@ helm install myapp ./chart \
 helm install myapp ./chart \
   --set-json 'resources={"limits":{"cpu":"1","memory":"512Mi"}}'
 ```
-
 ### Hooks 问题
 
 #### 场景 1：Hook 执行失败
@@ -608,7 +640,8 @@ helm install myapp ./chart \
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 hooks
 helm get hooks <release> -n <namespace>
 
@@ -625,7 +658,6 @@ helm upgrade <release> <chart> -n <namespace> --no-hooks
 # 5. 删除失败的 hook Job
 kubectl delete job -n <namespace> <hook-job-name>
 ```
-
 ### 仓库问题
 
 #### 场景 1：Chart 下载失败
@@ -633,7 +665,17 @@ kubectl delete job -n <namespace> <hook-job-name>
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 更新仓库索引
 helm repo update
 
@@ -651,14 +693,23 @@ rm -rf ~/.cache/helm/repository  # ⚠️ 删除系统/数据文件
 export HTTPS_PROXY=http://proxy:port
 helm repo update
 ```
-
 ### 完整的 Helm 操作示例
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 标准安装流程
 # 1. 添加仓库
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -700,7 +751,6 @@ helm rollback nginx 1 -n web
 # 10. 卸载
 helm uninstall nginx -n web  # ⚠️ 删除 release 及关联资源
 ```
-
 ---
 
 ### 安全生产风险提示
@@ -723,7 +773,17 @@ helm uninstall nginx -n web  # ⚠️ 删除 release 及关联资源
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 仓库管理
 helm repo add <name> <url>
 helm repo update
@@ -748,7 +808,6 @@ helm template <release> <chart> --debug
 helm lint <chart>
 helm install <release> <chart> --dry-run --debug
 ```
-
 ### 相关文档
 
 - [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
@@ -768,3 +827,6 @@ helm install <release> <chart> --dry-run --debug
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+
+
+<!-- risk-assessed -->

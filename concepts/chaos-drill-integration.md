@@ -25,6 +25,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 混沌工程与灾备演练的结合
@@ -80,3 +85,6 @@ prerequisites:
 - [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
 - [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
 - [[domain-09-reliability-engineering/08-performance-testing/02-chaos-load-integration.md|02 chaos load integration]]
+
+
+<!-- risk-assessed -->

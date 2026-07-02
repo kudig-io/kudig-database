@@ -33,6 +33,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 24: Terway 网络
@@ -122,7 +127,8 @@ tags: [week-4, day-24, terway, cni, networking, k8s, k8s-1.28-1.33]
 
 ### 任务 1: 确认 Terway 部署与模式 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Terway 组件状态
 kubectl get ds -n kube-system terway-eniip 2>/dev/null || \
 kubectl get ds -n kube-system terway 2>/dev/null || \
@@ -138,13 +144,13 @@ kubectl get configmap -n kube-system eni-config -o yaml 2>/dev/null
 kubectl get nodes -o wide
 kubectl describe node <node-name> | grep -A 5 "Allocatable" | grep -i eni
 ```
-
 ### 任务 2: Pod 网络验证 (ENIIP 模式) (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建测试 Pod
 kubectl run terway-test-1 --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --command -- sleep 3600
@@ -168,13 +174,13 @@ echo "检查此 IP 是否属于 Pod vSwitch CIDR"
 # 从 Pod 内访问外部
 kubectl exec terway-test-1 -- wget -qO- --timeout=5 http://100.100.100.200/latest/meta-data/instance-id 2>/dev/null || echo "非 ECS 环境"
 ```
-
 ### 任务 3: NetworkPolicy 实践 (40min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建命名空间隔离
 kubectl create namespace np-test
 kubectl run web --namespace=np-test \
@@ -229,7 +235,6 @@ kubectl run test3 --namespace=np-test --labels="access=true" \
   --image=registry.cn-hangzhou.aliyuncs.com/acs-sample/busybox:1.36 \
   --rm -it --restart=Never -- wget -qO- --timeout=5 http://web
 ```
-
 ### 任务 4: Terway 排障 (30min)
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -237,7 +242,17 @@ kubectl run test3 --namespace=np-test --labels="access=true" \
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 Terway 日志
 kubectl logs -n kube-system $(kubectl get pod -n kube-system -l app=terway-eniip -o jsonpath='{.items[0].metadata.name}') -c terway --tail=30
 
@@ -253,7 +268,6 @@ kubectl exec terway-test-1 -- ip route
 kubectl delete pod terway-test-1 terway-test-2
 kubectl delete namespace np-test  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -290,3 +304,6 @@ Day 25 将学习 Flannel CNI 方案，与 Terway 进行对比。
 ## Related
 
 - index/terway-index|Terway 知识图谱索引]]
+
+
+<!-- risk-assessed -->

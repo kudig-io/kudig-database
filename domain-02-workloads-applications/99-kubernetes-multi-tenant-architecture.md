@@ -47,6 +47,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[Kubernetes|Kubernetes]] 多租户与资源隔离生产架构
@@ -545,7 +550,8 @@ flowchart TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 vCluster CLI
 curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd64" && \
   sudo install -c -m 0755 vcluster /usr/local/bin
@@ -564,7 +570,6 @@ kubectl get nodes  # 只看到 vCluster 的虚拟节点
 kubectl create namespace production
 kubectl apply -f deployment.yaml
 ```
-
 ---
 
 <!-- chunk: 五、资源配额与限制架构 -->## 五、资源配额与限制架构
@@ -1008,7 +1013,8 @@ sequenceDiagram
 
 <!-- chunk: 附录：多租户检查清单 -->## 附录：多租户检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # multi-tenant-checklist.sh
 
@@ -1051,7 +1057,6 @@ kubectl get all -n ${NAMESPACE} -o json | jq '
 
 echo "=== 检查完成 ==="
 ```
-
 ---
 
 <!-- chunk: 参考链接 -->## 参考链接
@@ -1176,3 +1181,6 @@ echo "=== 检查完成 ==="
 - 99-kubernetes-deployment-patterns-architecture
 - [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+
+
+<!-- risk-assessed -->

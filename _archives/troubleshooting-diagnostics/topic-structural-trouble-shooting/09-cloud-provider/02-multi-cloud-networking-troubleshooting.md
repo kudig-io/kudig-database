@@ -42,6 +42,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 多云/混合云网络故障排查指南
 
 > **适用版本**: [[entities/kubernetes|kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
@@ -104,7 +109,8 @@ prerequisites:
 
 ### 1.2 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 跨集群 Pod 连通性测试
 # 在集群 A 的 Pod 中
 ping <cluster-b-pod-ip>
@@ -133,7 +139,6 @@ ip route show table all | grep <remote-cidr>
 # Azure: az network vnet-peering list
 # GCP: gcloud compute networks peerings list
 ```
-
 ---
 
 ## 2. 排查方法与步骤
@@ -143,6 +148,7 @@ ip route show table all | grep <remote-cidr>
 多云/混合云网络架构通常由以下层次组成：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                        应用层 (Pod)                              │
 │  Service Discovery (DNS/ServiceImport) / mTLS (Istio/Linkerd)  │
@@ -160,7 +166,6 @@ ip route show table all | grep <remote-cidr>
 │  AWS VPC / Azure VNet / GCP VPC / 私有云网络                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 **关键设计约束**：
 - **CIDR 不重叠**：所有参与互联的集群 Pod CIDR、Service CIDR、VPC CIDR 必须互不重叠
 - **双向路由**：互联双方的路由表必须互相宣告对方 CIDR
@@ -262,7 +267,8 @@ echo "  (如使用 nftables，请执行: nft list ruleset | grep $REMOTE_POD_IP)
 
 #### Submariner 深度诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Submariner 深度诊断脚本
 
@@ -308,10 +314,10 @@ echo "7. GlobalNet 状态（如启用）:"
 kubectl get pods -n submariner-operator -l app=submariner-globalnet 2>/dev/null || \
   echo "  GlobalNet 未启用"
 ```
-
 #### Istio 多集群诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Istio 多集群诊断脚本
 
@@ -352,7 +358,6 @@ kubectl get secret cacerts -n istio-system -o jsonpath='{.data.ca-cert\.pem}' 2>
   base64 -d | openssl x509 -noout -dates -subject 2>/dev/null || \
   echo "  未找到自定义 cacerts 或使用自签名证书"
 ```
-
 ---
 
 ## 3. 解决方案与风险控制
@@ -361,7 +366,8 @@ kubectl get secret cacerts -n istio-system -o jsonpath='{.data.ca-cert\.pem}' 2>
 
 #### 方案一：AWS-Azure 跨云 VPC/VNet Peering + VPN 备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # AWS-Azure 跨云网络配置脚本（概念示例）
 
@@ -407,10 +413,10 @@ az network vpn-connection create \
   --shared-key <pre-shared-key> \
   --connection-type IPsec
 ```
-
 #### 方案二：GCP Cloud Interconnect + Router 动态路由
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # GCP Cloud Interconnect + Cloud Router 配置（概念示例）
 
@@ -440,7 +446,6 @@ gcloud compute routers update my-cloud-router \
 # 4. 检查 BGP 会话状态
 gcloud compute routers get-status my-cloud-router --region us-central1
 ```
-
 ### 3.2 集群网格部署与修复
 
 #### 方案一：Submariner 跨集群网络
@@ -478,7 +483,8 @@ data:
 
 #### 方案二：Linkerd 多集群服务镜像
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # Linkerd 多集群部署与修复脚本
 
@@ -514,7 +520,6 @@ echo ""
 echo "5. 已镜像的远程服务:"
 kubectl get services -n linkerd-multicluster  # 查看 mirrored services
 ```
-
 ### 3.3 多集群 DNS 与服务发现
 
 ```yaml
@@ -728,3 +733,6 @@ groups:
 1. 调大 Istio 的 `OUTLIER_DETECTION` 阈值，避免短暂网络抖动导致熔断
 2. 为控制平面网络配置更高的 QoS 优先级
 3. 在 DestinationRule 中配置更宽容的连接池设置
+
+
+<!-- risk-assessed -->

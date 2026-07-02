@@ -62,6 +62,11 @@ cross_refs:
   label: '故障树: ingress'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 09 - 传统 [[Ingress|Ingress]] 控制器向云原生 API 网关迁移
@@ -304,7 +309,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Higress（使用 Helm）
 helm repo add higress.io https://higress.io/helm-charts
 helm install higress -n higress-system higress.io/higress \
@@ -313,7 +319,6 @@ helm install higress -n higress-system higress.io/higress \
   --set global.local=false \
   --set global.enableIstioAPI=false
 ```
-
 **步骤 2：转换路由配置（保留原 Ingress 兼容模式）**
 
 ```yaml
@@ -435,7 +440,8 @@ spec:
 
 **步骤 4：验证迁移**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 并行运行验证（两个 IngressClass 同时工作）
 kubectl get ingress -n production
 
@@ -450,7 +456,6 @@ curl -H "Host: api.example.com" \
 
 # 确认结果一致后，切换 DNS/LB 到 Higress
 ```
-
 ---
 
 <!-- chunk: 5. 迁移实战：nginx-ingress → APISIX -->## 5. 迁移实战：nginx-ingress → APISIX
@@ -496,7 +501,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 APISIX（含 Ingress Controller）
 helm repo add apisix https://charts.apiseven.com
 helm repo update
@@ -507,7 +513,6 @@ helm install apisix apisix/apisix \
   --set ingress-controller.enabled=true \
   --set ingress-controller.config.apisix.serviceNamespace=apisix
 ```
-
 **步骤 2：创建 APISIX 路由和插件**
 
 ```yaml
@@ -611,7 +616,8 @@ spec:
 
 **步骤 4：验证与切流**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 ApisixRoute 状态
 kubectl get apisixroute -n production
 
@@ -633,7 +639,6 @@ for i in $(seq 1 60); do
     http://<apisix-lb-ip>/api/test
 done
 ```
-
 ---
 
 <!-- chunk: 6. 迁移实战：nginx-ingress → Kong -->## 6. 迁移实战：nginx-ingress → Kong
@@ -677,7 +682,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Kong Ingress Controller（DB-less 模式）
 helm repo add kong https://charts.konghq.com
 helm repo update
@@ -686,7 +692,6 @@ helm install kong kong/ingress \
   --namespace kong \
   --create-namespace
 ```
-
 **步骤 2：创建 KongPlugin 资源**
 
 ```yaml
@@ -777,7 +782,8 @@ spec:
 
 **步骤 4：声明式配置验证**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 deck（Kong 声明式管理工具）
 brew install kong/tap/deck
 
@@ -804,14 +810,14 @@ curl -H "Host: api.example.com" \
      http://<kong-lb-ip>/api/v1/test
 # 期望返回 403
 ```
-
 ---
 
 <!-- chunk: 7. 零停机迁移清单 -->## 7. 零停机迁移清单
 
 ## 迁移前准备（Pre-Migration）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ─────────────────────────────────────────────────────────────────
 # 阶段 0：盘点与基线建立
 # ─────────────────────────────────────────────────────────────────
@@ -843,10 +849,10 @@ kubectl get cert -A -o wide
 kubectl get pods -n <target-gateway-namespace>
 kubectl get svc -n <target-gateway-namespace>
 ```
-
 ## 并行验证阶段
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ─────────────────────────────────────────────────────────────────
 # 阶段 1：并行部署验证（使用独立 LB 地址测试）
 # ─────────────────────────────────────────────────────────────────
@@ -882,10 +888,10 @@ for ep in "${endpoints[@]}"; do
   fi
 done
 ```
-
 ## 流量切换阶段
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ─────────────────────────────────────────────────────────────────
 # 阶段 2：流量切换（按比例灰度）
 # ─────────────────────────────────────────────────────────────────
@@ -903,14 +909,14 @@ done
 watch -n 5 'kubectl top pods -n <new-gateway-ns>; \
   curl -s "http://localhost:9090/api/v1/query?query=sum(rate(http_requests_total{status=~\"5..\"}[1m]))/sum(rate(http_requests_total[1m]))" | jq ".data.result"'
 ```
-
 ## 回滚预案
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ─────────────────────────────────────────────────────────────────
 # 紧急回滚步骤（< 5 分钟完成）
 # ─────────────────────────────────────────────────────────────────
@@ -930,14 +936,23 @@ kubectl patch ingress api-ingress -n production \
 kubectl annotate ingress api-ingress -n production \
   kubernetes.io/ingress.class=nginx --overwrite
 ```
-
 ## 迁移完成验证
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ─────────────────────────────────────────────────────────────────
 # 阶段 3：完成验证与清理
 # ─────────────────────────────────────────────────────────────────
@@ -960,7 +975,6 @@ done
 helm uninstall ingress-nginx -n ingress-nginx  # ⚠️ 删除 release 及关联资源
 kubectl delete ns ingress-nginx  # ⚠️ 不可逆：永久删除命名空间及全部资源
 ```
-
 ---
 
 <!-- chunk: 8. 常见问题与陷阱 -->## 8. 常见问题与陷阱
@@ -1095,7 +1109,8 @@ spec:
 
 ## 问题 6：IngressClass 迁移期间双路由冲突
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 现象：同一 Host 在两个 IngressController 中各有一条路由
 # 导致流量不确定性路由到其中一个
 
@@ -1109,7 +1124,6 @@ kubectl get ingress -A | grep "api.example.com"
 # 使用 DNS 加权（不同 IP，不同 IngressClass）
 # 不要在同一 K8s 集群内靠 IngressClass 区分同一 Host
 ```
-
 ## 迁移问题快速参考
 
 | 症状 | 可能原因 | 排查命令 |
@@ -1171,3 +1185,6 @@ kubectl get ingress -A | grep "api.example.com"
 
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

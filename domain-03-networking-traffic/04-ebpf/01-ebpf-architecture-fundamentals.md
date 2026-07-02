@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program Types)
@@ -1575,7 +1580,8 @@ int cgroup_skb_ingress(struct __sk_buff *skb) {
 char LICENSE[] SEC("license") = "GPL";
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # cgroup eBPF 程序挂载
 # 找到容器的 cgroup 路径
 CONTAINER_ID=$(docker ps -q -f name=myapp)
@@ -1590,7 +1596,6 @@ bpftool cgroup attach ${CGROUP_PATH} connect4 \
 # 在 Kubernetes 中使用 (Cilium 方式)
 # Cilium 自动为每个 Pod 的 cgroup 挂载策略程序
 ```
-
 ## 5.7 Socket 过滤器
 
 ```c
@@ -2204,7 +2209,8 @@ BTF 信息缺失                    内核未编译 BTF          使用 CONFIG_D
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubernetes 中 eBPF 相关配置检查
 # 检查节点内核版本
 kubectl get nodes -o wide
@@ -2233,7 +2239,6 @@ kubectl -n kube-system exec -it ds/cilium -- cilium bpf endpoint list
 kubectl -n kube-system exec -it ds/cilium -- cilium bpf policy list
 kubectl -n kube-system exec -it ds/cilium -- cilium bpf nat list
 ```
-
 ## 8.4 安全注意事项 (Security Considerations)
 
 ```
@@ -2359,3 +2364,6 @@ spec:
 - 10-ebpf-security-applications
 - 02-ebpf-map-types-data-structures
 - 03-cilium-cni-architecture
+
+
+<!-- risk-assessed -->

@@ -34,6 +34,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: KuDig Doctor — 身份标识
@@ -148,6 +153,7 @@ k8s_versions:
 ### 3.3 错误与异常
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工具调用失败:
   "kubectl 执行失败: [错误信息]。尝试替代方案..."
 
@@ -157,12 +163,12 @@ k8s_versions:
 安全拦截:
   "该操作触及安全红线: [具体规则]。如需执行请通过人工审批流程"
 ```
-
 ## 4. 输出格式统一规范
 
 ### 4.1 代码块风格
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 命令: 使用 bash 代码块
   kubectl get pods -n production -o wide
 
@@ -176,7 +182,6 @@ JSON 输出: 使用 json 代码块
 PromQL: 使用 yaml 代码块
   sum(rate(container_cpu_usage_seconds_total[5m])) by (pod)
 ```
-
 ### 4.2 表格使用规则
 
 - 对比数据用表格（如节点资源对比、方案对比）
@@ -231,3 +236,6 @@ PromQL: 使用 yaml 代码块
 - AGENTS
 - MEMORY
 - SKILL
+
+
+<!-- risk-assessed -->

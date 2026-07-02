@@ -61,6 +61,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -162,7 +167,8 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes
 按顺序执行以下命令，判断问题影响范围：
 
 **Step T1**: 确认 403 错误的主体和范围（10s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 从错误信息中提取主体（User/ServiceAccount/Group）
 # 示例错误: User "system:serviceaccount:production:cicd-sa" cannot create ...
 # 检查是否为关键 ServiceAccount
@@ -174,7 +180,8 @@ kubectl get sa -A | grep -E "(cicd|jenkins|argocd|flux|crossplane)"
 > - 受影响主体为普通用户 → **P2**
 
 **Step T2**: 检查 ResourceQuota 使用情况（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Namespace 的配额使用情况
 kubectl get resourcequota -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,USED_CPU:.status.used.requests\\.cpu,HARD_CPU:.status.hard.requests\\.cpu,USED_MEM:.status.used.requests\\.memory,HARD_MEM:.status.hard.requests\\.memory
 ```
@@ -184,7 +191,8 @@ kubectl get resourcequota -A -o custom-columns=NS:.metadata.namespace,NAME:.meta
 > - 单个非生产 Namespace 配额紧张 → **P2**
 
 **Step T3**: 检查 RoleBinding/ClusterRoleBinding 状态（60s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查找与问题主体相关的绑定
 SA_NAME="<serviceaccount-name>"
 NS="<namespace>"
@@ -196,7 +204,8 @@ kubectl get rolebinding,clusterrolebinding -A -o wide | grep -E "${SA_NAME}|${NS
 > - 存在绑定但权限不足 → 可能为 RC-002（Role 规则不完整）
 
 **Step T4**: 检查 Admission Webhook 状态（30s）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ValidatingWebhookConfiguration 是否存在拦截
 kubectl get validatingwebhookconfiguration -o name | wc -l
 kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied|rejected|forbidden" | head -10
@@ -1037,7 +1046,8 @@ kubectl get events -A --field-selector reason=FailedCreate | grep -i "denied|rej
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 确认权限已生效
 kubectl auth can-i VERB RESOURCE --as=system:serviceaccount:NS:SA -n TARGET_NS
 # 预期: yes
@@ -1060,7 +1070,6 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
   https://kubernetes.default.svc/api/v1/namespaces/NS
 # 预期: 返回 Namespace 详情
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1276,7 +1285,8 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 权限检查 ===
 # 检查特定操作权限
 kubectl auth can-i create pods --as=system:serviceaccount:NS:SA -n TARGET_NS
@@ -1320,13 +1330,13 @@ kubectl get pod POD_NAME -n NS -o jsonpath='{.spec.serviceAccountName}'
 # 创建临时 Token（K8s 1.24+）
 kubectl create token SA_NAME -n NS --duration=3600s
 ```
-
 ### A.2 Quota/LimitRange 诊断命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === ResourceQuota 检查 ===
 # 查看命名空间配额
 kubectl get resourcequota -n NS
@@ -1356,10 +1366,10 @@ kubectl get pods -n NS -o jsonpath='{range .items[*]}{.metadata.name}{" CPU: "}{
 kubectl delete pods -n NS --field-selector=status.phase=Succeeded
 kubectl delete pods -n NS --field-selector=status.phase=Failed
 ```
-
 ### A.3 Admission Controller 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === Webhook 配置检查 ===
 # 列出 ValidatingWebhook
 kubectl get validatingwebhookconfiguration
@@ -1397,7 +1407,6 @@ kubectl logs -n kyverno -l app=kyverno --tail=100
 kubectl get validatingadmissionpolicy
 kubectl get validatingadmissionpolicybinding
 ```
-
 ---
 
 ## 附录 B: RBAC 配置模板
@@ -1537,7 +1546,8 @@ spec:
 
 ### C.1 RBAC 权限审计脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # rbac_audit.sh - RBAC 权限审计工具
 
@@ -1571,10 +1581,10 @@ for sa in $(kubectl get sa -A -o jsonpath='{range .items[*]}{.metadata.namespace
   fi
 done
 ```
-
 ### C.2 Quota 使用率监控脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # quota_monitor.sh - ResourceQuota 使用率监控
 
@@ -1613,10 +1623,10 @@ kubectl get resourcequota -A -o json | jq -r '
   fi
 done
 ```
-
 ### C.3 策略冲突检测脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # policy_conflict_check.sh - 策略冲突检测
 
@@ -1649,9 +1659,10 @@ fi
 echo ""
 echo "检测完成"
 ```
-
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

@@ -44,6 +44,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 节点监控 metrics-server node-exporter kubelet metrics
@@ -151,7 +156,8 @@ kubelet 在 10250 端口上暴露了多个 metrics 端点，提供不同维度�
 
 ### 1.2 访问 kubelet metrics
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 kubelet API 直接访问 (需要 kubelet 客户端证书)
 curl -k --cert /var/lib/kubelet/pki/kubelet-client-current.pem \
      --key /var/lib/kubelet/pki/kubelet-client-current.pem \
@@ -165,7 +171,6 @@ curl http://localhost:8001/api/v1/nodes/<node-name>/proxy/metrics
 kubectl top nodes
 kubectl top pods --all-namespaces
 ```
-
 ### 1.3 核心 kubelet 指标详解
 
 #### 容器运行时指标
@@ -247,6 +252,7 @@ container_fs_inodes_free                   # 剩余 inode 数
 metrics-server 是 Kubernetes 集群核心指标管道（Core Metrics Pipeline）的实现。它从每个节点的 kubelet `/metrics/resource` 端点采集资源使用数据，通过 `metrics.k8s.io` API 在 API Server 中注册，供 `kubectl top` 和 HPA 使用。
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 指标采集流程:
   ┌──────────┐     ┌────────────────┐     ┌──────────────┐     ┌──────────┐
   │ kubelet  │────→│ metrics-server │────→│  API Server  │────→│ kubectl  │
@@ -254,20 +260,19 @@ metrics-server 是 Kubernetes 集群核心指标管道（Core Metrics Pipeline�
   │ /resource│     │                │     │  API)        │     │          │
   └──────────┘     └────────────────┘     └──────────────┘     └──────────┘
 ```
-
 ### 2.2 部署 metrics-server
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kubectl apply 部署
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 # 如果使用 kubeadm，可能需要添加 --kubelet-insecure-tls
 # (仅用于测试环境，生产环境应配置 kubelet 证书)
 ```
-
 生产环境推荐配置：
 
 ```yaml
@@ -299,7 +304,8 @@ spec:
 
 ### 2.3 使用 kubectl top
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点资源使用
 kubectl top nodes
 # NAME       CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
@@ -322,7 +328,6 @@ kubectl top pods --all-namespaces --sort-by=cpu
 # 查看单个 Pod 的容器级指标
 kubectl top pod <pod-name> --containers
 ```
-
 ### 2.4 metrics-server 与 HPA
 
 metrics-server 为 HPA（Horizontal Pod Autoscaler）提供资源指标数据：
@@ -593,7 +598,8 @@ groups:
 
 ### 调试命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 metrics-server 状态
 kubectl get deployment metrics-server -n kube-system
 kubectl logs -n kube-system -l k8s-app=metrics-server
@@ -612,7 +618,6 @@ curl http://<node-ip>:9100/metrics
 # 检查 kubelet stats
 curl -k https://localhost:10250/stats/summary
 ```
-
 ---
 
 ## 相关函数
@@ -638,3 +643,5 @@ curl -k https://localhost:10250/stats/summary
 - [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
 
 ```
+
+<!-- risk-assessed -->

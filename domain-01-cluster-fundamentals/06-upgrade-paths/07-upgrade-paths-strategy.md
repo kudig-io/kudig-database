@@ -62,6 +62,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - 升级路径与策略指南
@@ -142,7 +147,17 @@ cross_refs:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 升级第一个控制平面节点
 # 查看可用版本
 apt update
@@ -185,7 +200,6 @@ systemctl restart kubelet
 # 恢复调度
 kubectl uncordon <node-name>
 ```
-
 <!-- chunk: ACK升级方式 -->
 ## ACK升级方式
 
@@ -233,7 +247,8 @@ aliyun cs DescribeClusterDetail --ClusterId <cluster-id>
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd快照恢复
 etcdctl snapshot restore snapshot.db \
   --data-dir=/var/lib/etcd-restore \
@@ -241,7 +256,6 @@ etcdctl snapshot restore snapshot.db \
   --initial-cluster=<initial-cluster> \
   --initial-advertise-peer-urls=https://<ip>:2380
 ```
-
 <!-- chunk: 升级窗口规划 -->
 ## 升级窗口规划
 
@@ -404,7 +418,8 @@ print(json.dumps(report, indent=2))
 
 #### 8.2.2 资源健康度评估
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 集群健康度评估脚本
 
@@ -448,7 +463,6 @@ cat << EOF > upgrade_health_check_$(date +%Y%m%d_%H%M%S).txt
 建议: $(if [ $(kubectl get nodes --no-headers | grep -v Ready | wc -l) -eq 0 ] && [ $(kubectl get pods -n kube-system | grep -v Running | wc -l) -eq 0 ]; then echo "集群健康，可以进行升级"; else echo "发现异常，请先修复再升级"; fi)
 EOF
 ```
-
 ### 8.3 零停机升级实施方案
 
 #### 8.3.1 滚动升级优化配置
@@ -586,7 +600,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Kubernetes快速回滚脚本
 
@@ -659,7 +674,6 @@ else
     exit 1
 fi
 ```
-
 ### 8.5 升级监控与告警
 
 #### 8.5.1 升级过程监控面板
@@ -842,3 +856,5 @@ spec:
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

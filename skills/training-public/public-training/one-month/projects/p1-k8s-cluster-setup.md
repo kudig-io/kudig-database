@@ -37,6 +37,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -100,7 +105,8 @@ related_topics:
 
 ## Step 1: 安装 kind 并创建集群 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1.1: 安装 kind
 # macOS
 brew install kind
@@ -187,7 +193,6 @@ kubectl get nodes --show-labels
 # learn-k8s-worker           Ready    ...      ...   ...,env=production,tier=backend
 # learn-k8s-worker2          Ready    ...      ...   ...,env=staging,tier=frontend
 ```
-
 ---
 
 ## Step 2: 创建 Namespace (10min)
@@ -195,7 +200,8 @@ kubectl get nodes --show-labels
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 2.1: 创建 namespace
 kubectl create namespace web-app
 
@@ -223,7 +229,6 @@ kubectl config set-context --current --namespace=web-app
 # Step 2.4: 验证当前 context
 kubectl config current-context
 ```
-
 ---
 
 ## Step 3: 部署 Deployment (30min)
@@ -231,7 +236,8 @@ kubectl config current-context
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 3.1: 创建 Deployment YAML
 cat > deployment.yaml << 'EOF'
 apiVersion: apps/v1
@@ -347,7 +353,6 @@ kubectl get pods -n web-app -o wide
 # nginx-web-7d9f8b6c4-def34   1/1     Running   0          1m    10.244.2.3   learn-k8s-worker2
 # nginx-web-7d9f8b6c4-ghi56   1/1     Running   0          1m    10.244.1.4   learn-k8s-worker
 ```
-
 ---
 
 ## Step 4: 创建 Service (20min)
@@ -355,7 +360,8 @@ kubectl get pods -n web-app -o wide
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 4.1: 创建 Service YAML
 cat > service.yaml << 'EOF'
 apiVersion: v1
@@ -406,7 +412,6 @@ kubectl run curl-test --image=curlimages/curl -n web-app --rm -it --restart=Neve
 # <h1>Hello from Kubernetes!</h1>
 # ...
 ```
-
 ---
 
 ## Step 5: 测试和调试 (30min)
@@ -415,7 +420,8 @@ kubectl run curl-test --image=curlimages/curl -n web-app --rm -it --restart=Neve
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 5.1: 查看 Pod 日志
 kubectl logs -l app=nginx-web -n web-app --tail=10
 
@@ -489,7 +495,6 @@ kubectl rollout history deployment/nginx-web -n web-app
 # 2         <none>
 # 3         <none>
 ```
-
 ---
 
 ## Step 6: 文档输出 (30min)
@@ -600,22 +605,22 @@ nodes:
 ### Q2: Pod 一直处于 ContainerCreating 怎么办？
 
 **A**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod> -n web-app
 # 查看 Events 部分，常见原因:
 # - 镜像拉取慢/失败
 # - ConfigMap/Secret 不存在
 # - PVC 无法挂载
 ```
-
 ### Q3: Service 的 Endpoints 为空怎么办？
 
 **A**: 检查 Service selector 是否匹配 Pod 标签：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe svc nginx-service -n web-app | grep Selector
 kubectl get pods -n web-app --show-labels
 ```
-
 ---
 
 ## 要点总结
@@ -633,11 +638,20 @@ kubectl get pods -n web-app --show-labels
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl delete namespace web-app  # ⚠️ 不可逆：永久删除命名空间及全部资源
 kind delete cluster --name learn-k8s
 ```
-
 ---
 
 ## 延伸阅读
@@ -652,3 +666,5 @@ kind delete cluster --name learn-k8s
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

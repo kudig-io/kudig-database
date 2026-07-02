@@ -68,6 +68,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CSI / CNI 版本兼容矩阵
@@ -294,7 +299,8 @@ allowVolumeExpansion: "true"  # 字符串 "true"
 
 ### 6.1 CNI 升级前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前 CNI 版本
 kubectl get pods -n kube-system -l k8s-app=<cni-name> -o jsonpath='{.items[0].spec.containers[0].image}'
 
@@ -313,10 +319,10 @@ kubectl get crd | grep -i cilium
 # 5. 备份 CNI 配置
 cp -r /etc/cni/net.d /backup/cni-net.d-$(date +%Y%m%d)
 ```
-
 ### 6.2 CSI 升级前检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看当前 CSI driver 版本
 kubectl get pods -n kube-system -l app.kubernetes.io/name=<csi-driver> -o jsonpath='{.items[0].spec.containers[0].image}'
 
@@ -334,7 +340,6 @@ kubectl get pvc -A | grep -v Bound
 # 5. 备份 StorageClass 配置
 kubectl get StorageClass -o yaml > /backup/storageclass-$(date +%Y%m%d).yaml
 ```
-
 ---
 
 <!-- chunk: 附录：兼容性速查表 -->
@@ -396,3 +401,6 @@ related:
 - 38-terway-gc-mechanism
 - 40-terway-product-overview
 - 41-terway-architecture-deep-dive
+
+
+<!-- risk-assessed -->

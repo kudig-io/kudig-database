@@ -38,6 +38,11 @@ prerequisites:
 - monitoring-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -158,7 +163,8 @@ related_topics:
 
 ### 任务 1: ACK 监控组件检查 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 ARMS Prometheus 组件
 kubectl get pods -n arms-prom
 # NAME                                  READY   STATUS    RESTARTS   AGE
@@ -195,12 +201,12 @@ kubectl get podmonitors -A
 # 检查 kube-state-metrics
 kubectl get pods -n kube-system -l app=kube-state-metrics
 ```
-
 ---
 
 ### 任务 2: Grafana Dashboard 查看 (45min)
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 访问 Grafana (ACK 集成 ARMS)
 # 控制台路径: 阿里云控制台 → ACK → 集群 → 运维管理 → Prometheus 监控
 
@@ -233,7 +239,6 @@ kubectl port-forward -n monitoring svc/grafana 3000:80
 # - 请求延迟 P99: histogram_quantile(0.99, rate(apiserver_request_duration_seconds_bucket[5m]))
 # - 错误率: sum(rate(apiserver_request_total{code=~"5.."}[5m])) / sum(rate(apiserver_request_total[5m]))
 ```
-
 ---
 
 ### 任务 3: 自定义告警规则 (45min)
@@ -241,7 +246,8 @@ kubectl port-forward -n monitoring svc/grafana 3000:80
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > ack-alerts.yaml << 'EOF'
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -356,7 +362,6 @@ kubectl apply -f ack-alerts.yaml
 kubectl get prometheusrules -n arms-prom
 kubectl describe prometheusrule ack-custom-alerts -n arms-prom
 ```
-
 ---
 
 ### 任务 4: 常用 PromQL 查询 (30min)
@@ -530,3 +535,5 @@ Day 14 将学习集群资源配额与 License 管理。
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
 
 ```
+
+<!-- risk-assessed -->

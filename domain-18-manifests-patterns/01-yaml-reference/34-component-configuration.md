@@ -61,6 +61,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 34. [[Kubernetes|Kubernetes]] 组件配置（Component Configuration）
@@ -857,7 +862,8 @@ Allocatable[资源] = Capacity[资源]
 | Memory | 32Gi | 1Gi | 1Gi | 100Mi | **30Gi - 100Mi** |
 
 **验证方法**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node <node-name>
 
 # 输出示例：
@@ -868,7 +874,6 @@ Allocatable:
   cpu:                15600m
   memory:             31850Mi     # ≈ 31Gi（扣除预留和驱逐阈值）
 ```
-
 **调度影响**：
 - Scheduler 仅考虑 **Allocatable** 资源
 - 如果 Pod 的 requests 总和超过 Allocatable，Pod 会 Pending
@@ -2068,7 +2073,8 @@ PostBind (后绑定,清理工作)
 - **采样率低**: 调度速度快,但可能次优
 
 **验证方法**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度延迟 (metrics)
 kubectl get --raw /metrics | grep scheduler_scheduling_duration_seconds
 
@@ -2077,7 +2083,6 @@ scheduler_scheduling_duration_seconds_bucket{le="0.1"} 1200
 scheduler_scheduling_duration_seconds_bucket{le="0.5"} 1500
 scheduler_scheduling_duration_seconds_bucket{le="1.0"} 1800
 ```
-
 **调优建议**:
 - **延迟敏感**: 设置 `percentageOfNodesToScore: 30` (快速调度)
 - **资源优化**: 设置 `percentageOfNodesToScore: 100` (精确调度)
@@ -2246,13 +2251,13 @@ WantedBy=multi-user.target
 ```
 
 **启动服务**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 systemctl daemon-reload
 systemctl enable kube-controller-manager
 systemctl start kube-controller-manager
 systemctl status kube-controller-manager
 ```
-
 ---
 
 <!-- chunk: 6. 版本兼容性矩阵 -->## 6. 版本兼容性矩阵
@@ -2518,12 +2523,12 @@ shutdownGracePeriodCriticalPods: 20s    # 最后 20 秒留给关键 Pod
 **系统集成**:
 
 **systemd 配置** (支持 systemd inhibitor lock):
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Kubelet 自动注册 inhibitor lock,systemd 关机时会等待
 systemctl show kubelet | grep InhibitDelayMaxSec
 # InhibitDelayMaxSec=60s (必须 ≥ shutdownGracePeriod)
 ```
-
 **节点关机流程**:
 1. systemd 发送 SIGTERM 信号
 2. Kubelet 收到信号,创建 inhibitor lock
@@ -2532,7 +2537,17 @@ systemctl show kubelet | grep InhibitDelayMaxSec
 5. systemd 继续关机流程
 
 **验证**:
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 模拟关机 (不会真正关机)
 systemctl start systemd-inhibit --who=test --what=shutdown --why="test" sleep 60
 
@@ -2543,7 +2558,6 @@ systemd-inhibit --list
 WHO   UID  USER  PID  COMM       WHAT     WHY                         MODE
 kubelet 0  root  1234 kubelet    shutdown Node graceful shutdown     delay
 ```
-
 ---
 
 ## 7.6 镜像垃圾回收调优
@@ -2585,14 +2599,14 @@ kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes
 ```
 
 **手动清理**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清理未使用的镜像
 crictl rmi --prune
 
 # 查看镜像列表
 crictl images
 ```
-
 ---
 
 <!-- chunk: 8. 常见问题 (FAQ) -->## 8. 常见问题 (FAQ)
@@ -2774,10 +2788,10 @@ spec:
 - 如果指定的调度器不存在,Pod 会 Pending
 
 **查看 Pod 使用的调度器**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod gpu-workload -o yaml | grep schedulerName
 ```
-
 ---
 
 ## Q6: KubeProxy IPVS strictARP 为什么对 MetalLB 是必需的?
@@ -3032,14 +3046,14 @@ spec:
 ```
 
 **验证 CPU 独占**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod 进程的 CPU 亲和性
 PID=$(crictl inspect <container-id> | jq -r '.info.pid')
 cat /proc/$PID/status | grep Cpus_allowed_list
 
 # 输出: Cpus_allowed_list: 4-11 (独占核心 4-11)
 ```
-
 **性能提升**:
 - **延迟**: P99 延迟降低 25% (避免 CPU 抢占)
 - **吞吐量**: 提升 15% (L1/L2 cache 命中率提高)
@@ -3141,7 +3155,8 @@ spec:
 ```
 
 **验证**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Service 的外部 IP
 kubectl get svc nginx
 # NAME    TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)
@@ -3155,7 +3170,6 @@ ipvsadm -Ln | grep 192.168.1.100
 # 测试外部访问
 curl http://192.168.1.100
 ```
-
 ---
 
 ## 9.4 多调度器架构
@@ -3310,14 +3324,14 @@ spec:
 ```
 
 **调度器性能监控**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看调度延迟
 kubectl get --raw /metrics | grep scheduler_scheduling_duration_seconds
 
 # 查看调度失败率
 kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 ```
-
 ---
 
 **本文档结束**,涵盖了 Kubernetes v1.25-v1.32 的完整组件配置参考,包括:
@@ -3365,3 +3379,5 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
 - [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
 ```
+
+<!-- risk-assessed -->

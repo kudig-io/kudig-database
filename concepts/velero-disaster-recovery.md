@@ -34,6 +34,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Velero 灾难恢复策略
@@ -241,7 +246,8 @@ Velero 备份资源清单（来自 etcd）和 PV 快照（来自 CSI）不是原
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 备份验证流程
 velero backup describe production-critical --details
 # 检查: Phase: Completed, Items Backed Up: expected count
@@ -260,7 +266,6 @@ velero restore create drill-$(date +%Y%m%d) \
 kubectl exec -n payment-drill deploy/payment-service -- \
   psql -c "SELECT COUNT(*) FROM transactions;"
 ```
-
 ### 6. 成本优化
 
 | 优化手段 | 效果 | 实现方式 |
@@ -336,3 +341,6 @@ spec:
 
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|Kubernetes 生产环境速查卡]]
 - [[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md|多租户]]
+
+
+<!-- risk-assessed -->

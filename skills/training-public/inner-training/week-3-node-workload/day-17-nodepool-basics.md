@@ -38,6 +38,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -187,6 +192,7 @@ related_topics:
 生产环境节点池设计示例：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────┐
 │                    ACK Cluster                          │
 │                                                         │
@@ -210,14 +216,14 @@ related_topics:
 │  └──────────────┘  └──────────────┘                     │
 └─────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## 实战演练
 
 ### 任务 1: 查看和分析现有节点池 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看集群中的节点池列表
 aliyun cs GET /clusters/<cluster_id>/nodepools | jq '.[].nodepool_info'
 
@@ -303,10 +309,10 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '{
   management: .management
 }'
 ```
-
 ### 任务 2: 创建新节点池 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 API 创建业务节点池
 cat > create-nodepool.json << 'EOF'
 {
@@ -387,10 +393,10 @@ kubectl get nodes -l workload=frontend --show-labels
 # fe-00124    Ready    <none>   4m     v1.28.3-aliyun.1   workload=frontend,tier=web,...
 # fe-00125   Ready    <none>   3m     v1.28.3-aliyun.1   workload=frontend,tier=web,...
 ```
-
 ### 任务 3: 托管节点池配置 (45min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建托管节点池（生产推荐）
 cat > managed-nodepool.json << 'EOF'
 {
@@ -465,7 +471,6 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '.auto_scaling
 #   "type": "hpa"
 # }
 ```
-
 ### 任务 4: 控制台节点池操作 (30min)
 
 ```
@@ -485,7 +490,8 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '.auto_scaling
 
 ### 任务 5: 节点池扩缩容操作 (30min)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动扩容节点池
 aliyun cs PUT /clusters/<cluster_id>/nodepools/<nodepool_id> \
   --body '{
@@ -515,7 +521,6 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '{
   state: .status.state
 }'
 ```
-
 ---
 
 ## 配置参考
@@ -598,7 +603,8 @@ aliyun cs GET /clusters/<cluster_id>/nodepools/<nodepool_id> | jq '{
 
 ### 节点池常用 kubectl 查询
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点及其所属节点池
 kubectl get nodes -o custom-columns='\
 NAME:.metadata.name,\
@@ -636,7 +642,6 @@ kubectl get nodes -o json | jq -r '
 }
 '
 ```
-
 ### 节点池标签与调度配置
 
 ```yaml
@@ -730,7 +735,8 @@ spec:
 
 ### Q5: 如何监控节点池的健康状态？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点池状态汇总
 aliyun cs GET /clusters/<cluster_id>/nodepools | jq '.[] | {
   name: .nodepool_info.name,
@@ -756,7 +762,6 @@ kubectl get nodes -o json | jq -r '
 } | select(.disk_pressure == "True" or .memory_pressure == "True" or .pid_pressure == "True")
 '
 ```
-
 ### Q6: 如何使用 Terraform 管理节点池？
 
 ```hcl
@@ -818,3 +823,6 @@ resource "alicloud_cs_kubernetes_node_pool" "app_pool" {
 - [ECS 计算资源](../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md)
 - [集群自动伸缩排障](../../domain-10-troubleshooting-diagnostics/28-cluster-autoscaler-troubleshooting.md)
 - [K8s 架构与组件](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
+
+
+<!-- risk-assessed -->

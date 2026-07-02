@@ -10,6 +10,11 @@ tier: supporting
 created: '2026-07-01'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # {{主题名称}}
 
 > **模板版本**: 2.0
@@ -442,7 +447,8 @@ groups:
 
 **阶段一：快速检查（1 分钟内）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 资源状态检查
 kubectl get {{resource}} -n {{namespace}} -o wide
 kubectl describe {{resource}} {{name}} -n {{namespace}}
@@ -453,10 +459,10 @@ kubectl rollout status {{resource}} {{name}} -n {{namespace}}
 # 快速日志
 kubectl logs -n {{namespace}} {{pod-name}} --tail=50
 ```
-
 **阶段二：深度诊断（5 分钟内）**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 详细事件分析
 kubectl get events -n {{namespace}} --sort-by='.lastTimestamp' | tail -30
 
@@ -466,10 +472,10 @@ kubectl get {{resource}} {{name}} -n {{namespace}} -o yaml
 # 关联资源检查
 kubectl get all -n {{namespace}} -l {{label}}
 ```
-
 **阶段三：专家级诊断**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 网络诊断（如适用）
 kubectl exec -it {{pod}} -n {{namespace}} -- /bin/sh -c "netstat -tlnp"
 
@@ -479,7 +485,6 @@ kubectl logs -n {{namespace}} {{pod-name}} --tail=200 --all-containers | grep -E
 # 指标验证
 curl -s localhost:{{port}}/metrics | grep {{metric}}
 ```
-
 ### 7.3 FTA 故障树入口
 
 > 指向对应的 FTA 故障树文档，系统化排查。
@@ -661,3 +666,5 @@ securityContext:
 |:---:|:---:|:---|:---:|
 | YYYY-MM | v1.0 | 初始版本 | {{姓名}} |
 | YYYY-MM | v2.0 | {{变更描述}} | {{姓名}} |
+
+<!-- risk-assessed -->

@@ -47,6 +47,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 04 - Deployment / [[ReplicaSet|ReplicaSet]] YAML 配置参考
@@ -452,7 +457,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 Deployment
 kubectl apply -f nginx-deployment.yaml
 
@@ -475,7 +481,6 @@ kubectl rollout history deployment/nginx-deployment
 # 回滚到上一个版本
 kubectl rollout undo deployment/nginx-deployment
 ```
-
 ## 带资源限制的配置
 
 ```yaml
@@ -853,11 +858,11 @@ spec:
 
 ## 暂停 Deployment
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 暂停滚动更新
 kubectl rollout pause deployment/my-deployment
 ```
-
 **效果**：
 - 新的 Pod 模板更改不会触发滚动更新
 - 可以进行多次配置修改
@@ -865,7 +870,8 @@ kubectl rollout pause deployment/my-deployment
 
 ## 修改配置示例
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 暂停后进行多次修改
 kubectl rollout pause deployment/my-deployment
 
@@ -881,7 +887,6 @@ kubectl set env deployment/my-deployment APP_VERSION=v2.0
 # 恢复 Deployment,触发一次性滚动更新
 kubectl rollout resume deployment/my-deployment
 ```
-
 ## 在 YAML 中设置
 
 ```yaml
@@ -919,7 +924,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Deployment 的修订历史
 kubectl rollout history deployment/my-deployment
 
@@ -932,43 +938,42 @@ REVISION  CHANGE-CAUSE
 # 查看特定版本的详细信息
 kubectl rollout history deployment/my-deployment --revision=2
 ```
-
 **记录变更原因**：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 --record 标志记录命令 (已弃用,但仍可用)
 kubectl set image deployment/my-deployment app=nginx:1.22 --record
 
 # v1.27+ 推荐使用 annotation
 kubectl annotate deployment/my-deployment kubernetes.io/change-cause="升级到 nginx 1.22 修复安全漏洞"
 ```
-
 ## 回滚到上一版本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 回滚到上一个版本 (revision N-1)
 kubectl rollout undo deployment/my-deployment
 
 # 查看回滚状态
 kubectl rollout status deployment/my-deployment
 ```
-
 ## 回滚到指定版本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 回滚到特定版本 (如 revision 2)
 kubectl rollout undo deployment/my-deployment --to-revision=2
 ```
-
 ## 回滚原理
 
 ```
@@ -1007,14 +1012,14 @@ spec:
 
 每个版本的 ReplicaSet 名称包含 **pod-template-hash**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get rs
 NAME                          DESIRED   CURRENT   READY   AGE
 my-deployment-5d4b7c9f8d      10        10        10      5m   # 当前版本
 my-deployment-7c8a9b6d5f      0         0         0       15m  # 历史版本
 my-deployment-9f3e2d1c4a      0         0         0       30m  # 历史版本
 ```
-
 **Hash 计算逻辑**：
 ```go
 // pod-template-hash 由 PodTemplate 内容 (不含 labels) 的 hash 生成
@@ -1027,14 +1032,14 @@ hash := ComputeHash(&deployment.Spec.Template, deployment.Status.CollisionCount)
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动删除旧的 ReplicaSet
 kubectl delete rs my-deployment-9f3e2d1c4a
 
 # 或调整 revisionHistoryLimit 后,系统自动清理
 kubectl patch deployment my-deployment -p '{"spec":{"revisionHistoryLimit":2}}'
 ```
-
 ---
 
 <!-- chunk: 8. 内部原理 -->## 8. 内部原理
@@ -1311,7 +1316,8 @@ func (dc *DeploymentController) checkProgressDeadline(d *Deployment) {
 
 ## 状态示例
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl describe deployment my-deployment
 
 Conditions:
@@ -1324,7 +1330,6 @@ Events:
   Warning  ProgressDeadlineExceeded  5s  deployment-controller  
     Deployment "my-deployment" has timed out progressing.
 ```
-
 **触发超时的常见原因**：
 1. **镜像拉取失败**：ImagePullBackOff
 2. **资源不足**：节点无足够 CPU/内存
@@ -1407,7 +1412,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ReplicaSet
 kubectl apply -f frontend-rs.yaml
 
@@ -1424,7 +1430,6 @@ kubectl delete rs frontend-rs
 # 删除 ReplicaSet 但保留 Pod (orphan 模式)
 kubectl delete rs frontend-rs --cascade=orphan
 ```
-
 ## 9.4 为什么很少直接使用
 
 **ReplicaSet 的局限性**：
@@ -1442,7 +1447,8 @@ kubectl delete rs frontend-rs --cascade=orphan
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景:需要更新镜像版本
 # ❌ 错误做法:直接修改 ReplicaSet
 kubectl set image rs/frontend-rs nginx=nginx:1.22
@@ -1454,7 +1460,6 @@ kubectl delete pods -l app=frontend  # 服务中断!
 kubectl set image deployment/frontend nginx=nginx:1.22
 # Deployment 自动执行滚动更新,零宕机
 ```
-
 **推荐使用场景**：
 
 | 场景 | 推荐 | 理由 |
@@ -1534,11 +1539,11 @@ spec:
 
 **步骤 1：导出现有 RC 配置**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 导出 ReplicationController
 kubectl get rc my-app-rc -o yaml > my-app-rc.yaml
 ```
-
 **步骤 2：转换为 Deployment**
 
 ```yaml
@@ -1569,7 +1574,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 Deployment (不会立即删除 RC 管理的 Pod)
 kubectl apply -f my-app-deployment.yaml
 
@@ -1586,7 +1592,6 @@ kubectl rollout status deployment/my-app
 # 5. 删除 ReplicationController
 kubectl delete rc my-app-rc
 ```
-
 **自动迁移脚本**：
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -1594,7 +1599,8 @@ kubectl delete rc my-app-rc
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # rc-to-deployment.sh
 
@@ -1621,7 +1627,6 @@ kubectl scale rc $RC_NAME --replicas=0 -n $NAMESPACE
 
 echo "迁移完成,请验证后手动删除 RC: kubectl delete rc $RC_NAME -n $NAMESPACE"
 ```
-
 ---
 
 <!-- chunk: 11. 版本兼容性矩阵 -->## 11. 版本兼容性矩阵
@@ -1689,7 +1694,8 @@ spec:
 
 **迁移检查工具**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查集群中是否有旧版本 API
 kubectl get deployments.v1beta1.apps --all-namespaces
 kubectl get deployments.v1beta2.apps --all-namespaces
@@ -1697,7 +1703,6 @@ kubectl get deployments.v1beta2.apps --all-namespaces
 # 使用 kubectl convert 转换 (需要安装 convert 插件)
 kubectl convert -f old-deployment.yaml --output-version apps/v1
 ```
-
 ---
 
 <!-- chunk: 12. 生产最佳实践 -->## 12. 生产最佳实践
@@ -2006,15 +2011,16 @@ spec:
 
 **症状**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl rollout status deployment/myapp
 Waiting for deployment "myapp" rollout to finish: 2 out of 5 new replicas have been updated...
 # 长时间无进展
 ```
-
 **排查步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Deployment 事件
 kubectl describe deployment myapp
 
@@ -2029,7 +2035,6 @@ kubectl describe pod <pending-pod-name>
 # 4. 查看 Pod 日志
 kubectl logs <pod-name> -c <container-name>
 ```
-
 **常见原因及解决方案**：
 
 | 原因 | 症状 | 解决方案 |
@@ -2045,11 +2050,11 @@ kubectl logs <pod-name> -c <container-name>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果新版本有问题,立即回滚
 kubectl rollout undo deployment/myapp
 ```
-
 ## Q2: 如何实现零宕机更新？
 
 **配置要点**：
@@ -2088,7 +2093,8 @@ spec:
 
 **验证零宕机**：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在更新过程中持续发送请求
 while true; do
   curl -s http://myapp.example.com/healthz || echo "FAILED"
@@ -2098,7 +2104,6 @@ done
 # 同时执行滚动更新
 kubectl set image deployment/myapp app=myapp:v2.0
 ```
-
 ## Q3: Deployment 与 StatefulSet 如何选择？
 
 | 维度 | Deployment | StatefulSet |
@@ -2171,7 +2176,8 @@ spec:
 
 **场景**：需要进行多次配置更改,避免每次修改都触发滚动更新。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 暂停 Deployment
 kubectl rollout pause deployment/myapp
 
@@ -2186,14 +2192,14 @@ kubectl rollout resume deployment/myapp
 # 4. 监控更新进度
 kubectl rollout status deployment/myapp
 ```
-
 ## Q5: 如何查看和回滚到历史版本？
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看历史版本
 kubectl rollout history deployment/myapp
 # 输出:
@@ -2214,35 +2220,35 @@ kubectl rollout undo deployment/myapp --to-revision=2
 # 5. 验证回滚结果
 kubectl get pods -l app=myapp -o jsonpath='{.items[0].spec.containers[0].image}'
 ```
-
 **记录变更原因** (方便追溯)：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1: 使用 --record (已弃用但仍可用)
 kubectl set image deployment/myapp app=myapp:v2.0 --record
 
 # 方法 2: 使用 annotation (推荐)
 kubectl annotate deployment/myapp kubernetes.io/change-cause="升级到 v2.0 修复安全漏洞 CVE-2026-1234"
 ```
-
 ## Q6: Deployment 更新后 Pod 数量不符合预期
 
 **症状**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get deployment myapp
 NAME    READY   UP-TO-DATE   AVAILABLE   AGE
 myapp   8/10    5            8           10m
 
 # 期望 10 个 Pod,但实际只有 8 个可用
 ```
-
 **排查步骤**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 ReplicaSet
 kubectl get rs -l app=myapp
 # 输出:
@@ -2261,7 +2267,6 @@ kubectl describe deployment myapp | grep -A 5 "Resource Quotas"
 kubectl top nodes
 kubectl describe node <node-name> | grep -A 10 "Allocated resources"
 ```
-
 **常见原因**：
 
 1. **节点资源不足**：增加节点或降低资源 requests
@@ -2383,11 +2388,11 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f blue-deployment.yaml
 kubectl apply -f service.yaml
 ```
-
 **步骤 2：部署 Green 版本 (v2.0)**
 
 ```yaml
@@ -2420,7 +2425,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 部署 green 版本 (流量仍在 blue)
 kubectl apply -f green-deployment.yaml
 
@@ -2431,13 +2437,13 @@ kubectl rollout status deployment/myapp-green
 kubectl get pods -l version=green -o wide
 curl http://<green-pod-ip>:8080/healthz
 ```
-
 **步骤 3：切换流量到 Green**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 Service selector
 kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"green"}}}'
 
@@ -2445,14 +2451,14 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"green"}}
 kubectl describe service myapp-service | grep Selector
 # 输出: Selector: app=myapp,version=green
 ```
-
 **步骤 4：验证和清理**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 监控新版本运行状态
 kubectl top pods -l version=green
 kubectl logs -l version=green --tail=100
@@ -2463,7 +2469,6 @@ kubectl delete deployment myapp-blue
 # 如果新版本有问题,快速回滚到 blue
 kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"blue"}}}'
 ```
-
 **优点**：
 - ✅ **零宕机切换**：瞬时切换流量
 - ✅ **快速回滚**：修改 Service selector 即可
@@ -2568,7 +2573,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署稳定版本
 kubectl apply -f stable-deployment.yaml
 kubectl apply -f service.yaml
@@ -2598,7 +2604,6 @@ kubectl scale deployment myapp-stable --replicas=0   # 0%
 kubectl delete deployment myapp-stable
 kubectl patch deployment myapp-canary --patch '{"metadata":{"name":"myapp-stable"}}'
 ```
-
 ## 方式 2：使用 Flagger (自动化)
 
 **Flagger** 是 Weaveworks 开源的渐进式交付工具,支持自动化金丝雀发布。
@@ -2732,6 +2737,7 @@ spec:
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 滚动更新时:
 
 步骤 1: Deployment 尝试删除 2 个旧 Pod (maxUnavailable=2)
@@ -2752,7 +2758,6 @@ spec:
   → 仅允许驱逐 2 个 Pod (保留 8 个可用)
   → 管理员需等待新 Pod 调度到其他节点后再驱逐剩余 Pod
 ```
-
 **PDB 配置最佳实践**：
 
 ```yaml
@@ -2799,7 +2804,17 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看 PDB 状态
 kubectl get pdb myapp-pdb
 # 输出:
@@ -2812,7 +2827,6 @@ kubectl describe pdb myapp-pdb
 # 测试驱逐 (需要足够的 ALLOWED DISRUPTIONS)
 kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 ```
-
 ---
 
 <!-- chunk: 15. 相关资源 -->## 15. 相关资源
@@ -2908,3 +2922,6 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

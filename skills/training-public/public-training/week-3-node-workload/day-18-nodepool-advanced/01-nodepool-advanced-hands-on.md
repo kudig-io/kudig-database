@@ -36,6 +36,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -126,7 +131,8 @@ data:
 
 ### 1.3 节点池扩缩容触发条件
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动触发扩容（无 ASG 的集群）
 kubectl scale deployment <name> --replicas=20
 kubectl get events --sort-by='.lastTimestamp' | grep "Scaling"
@@ -140,7 +146,6 @@ kubectl logs -n kube-system cluster-autoscaler-xxx --tail=20 -f
 # 3. 可用区资源不足
 # 4. 节点池标签过滤导致无可用节点
 ```
-
 ---
 
 ## 2. 节点池生命周期管理
@@ -152,7 +157,17 @@ kubectl logs -n kube-system cluster-autoscaler-xxx --tail=20 -f
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看当前节点池版本
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.kubeletVersion}{"\n"}'
 
@@ -172,10 +187,10 @@ for node in $(kubectl get nodes -l node-pool=general-compute --no-headers | awk 
   echo "节点 $node 升级完成"
 done
 ```
-
 ### 2.2 节点池回滚
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 记录节点池状态快照
 kubectl get nodes -l node-pool=gpu-compute -o yaml > node-pool-snapshot.yaml
 
@@ -185,7 +200,6 @@ kubectl scale nodegroup --cluster=my-cluster --name=gpu-pool --nodes=0
 # 扩容新节点池
 kubectl scale nodegroup --cluster=my-cluster --name=gpu-pool --nodes=3
 ```
-
 ### 2.3 节点池销毁
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
@@ -193,7 +207,17 @@ kubectl scale nodegroup --cluster=my-cluster --name=gpu-pool --nodes=3
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 安全销毁节点池步骤
 # 1. 迁移工作负载
 kubectl cordon <node-name>
@@ -207,7 +231,6 @@ kubectl delete node <node-name>
 # 4. 验证清理
 kubectl get nodes | grep <node-pool>
 ```
-
 ---
 
 ## 3. 节点池调度优化
@@ -301,7 +324,8 @@ spec:
 
 ### 4.2 资源利用率分析
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 分析节点池资源使用
 kubectl top nodes -l node-pool=general-compute
 
@@ -314,7 +338,6 @@ kubectl get pods -n production -o json | jq -r '
 # - 设置 limits 但实际使用 < 30%
 # - 设置 requests 过高导致调度效率低
 ```
-
 ### 4.3 节点池成本可视化
 
 ```promql
@@ -363,7 +386,8 @@ kubectl get pods -o wide -A | awk '{print $NF}' | sort | uniq -c
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 主节点池问题时切换到备用
 kubectl label node <standby-node> failover-pool=standby
 
@@ -392,7 +416,6 @@ done
 echo ">>> 故障转移完成"
 EOF
 ```
-
 ---
 
 ## 6. 节点池监控与告警
@@ -445,3 +468,6 @@ EOF
 
 ---
 
+
+
+<!-- risk-assessed -->

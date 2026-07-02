@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # RocketMQ on Kubernetes 生产指南
@@ -94,13 +99,13 @@ Apache RocketMQ 的核心组件包括：
 
 以下命令使用 bitnami/apache-rocketmq chart（或社区 chart）在 `middleware` 命名空间部署一个最小可用集群。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加社区 Helm 仓库并拉取默认 values 文件
 helm repo add rocketmq-repo https://charts.apacherocketmq.ai/
 helm repo update
 helm show values rocketmq-repo/rocketmq-cluster > values.yaml
 ```
-
 ### 3.2 最小生产 values 示例
 
 ```yaml
@@ -135,22 +140,22 @@ broker:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 RocketMQ 集群并等待 Pod 就绪
 helm install rocketmq rocketmq-repo/rocketmq-cluster -n middleware --create-namespace -f values.yaml
 kubectl rollout status statefulset/rocketmq-nameserver -n middleware
 kubectl rollout status statefulset/rocketmq-broker-master -n middleware
 ```
-
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 NameServer 与 Broker 是否成功注册
 kubectl exec -it rocketmq-nameserver-0 -n middleware -- sh -c \
   "sh mqadmin clusterList -n 'rocketmq-nameserver-0.rocketmq-nameserver.middleware.svc.cluster.local:9876'"
 ```
-
 ## 4. 存储规划
 
 Broker 的 commitlog、consumequeue、index 文件对 IOPS 与延迟敏感，存储选型直接影响吞吐与稳定性。
@@ -191,12 +196,12 @@ NameServer 无状态，增加副本可提升路由查询可用性。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 将 NameServer 副本数从 3 扩到 5
 kubectl patch statefulset rocketmq-nameserver -n middleware \
   --type='json' -p='[{"op": "replace", "path": "/spec/replicas", "value": 5}]'
 ```
-
 扩缩容后，需要更新 Producer/Consumer 的 NameServer 地址列表，建议通过 Kubernetes Service 的 DNS 名（`rocketmq-nameserver.middleware.svc.cluster.local:9876`）或配置中心统一分发。
 
 ### 5.2 Broker 扩缩容
@@ -210,12 +215,12 @@ Broker 扩缩容涉及数据分片与 Topic 队列重新分配，不能简单修
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查询当前 Topic 队列分布
 kubectl exec -it rocketmq-broker-master-0 -n middleware -- \
   sh mqadmin topicStatus -n rocketmq-nameserver.middleware.svc.cluster.local:9876 -t ORDER_TOPIC
 ```
-
 ### 5.3 Controller 模式自动切换
 
 开启 DLedger Controller 后，当 Master 故障时，可自动从 Slave 中选举新 Master。
@@ -262,11 +267,11 @@ spec:
             - containerPort: 5557
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 暴露 exporter 服务并创建 ServiceMonitor
 kubectl expose deployment rocketmq-exporter --port=5557 -n middleware
 ```
-
 ### 6.2 关键告警指标
 
 | 指标 | 含义 | 告警阈值建议 |
@@ -286,12 +291,12 @@ kubectl expose deployment rocketmq-exporter --port=5557 -n middleware
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Topic 是否存在以及路由信息
 kubectl exec -it rocketmq-broker-master-0 -n middleware -- \
   sh mqadmin topicList -n rocketmq-nameserver.middleware.svc.cluster.local:9876
 ```
-
 ### 7.2 消费 lag 持续增长
 
 步骤一：检查 Consumer 实例数与消费线程数。
@@ -299,20 +304,20 @@ kubectl exec -it rocketmq-broker-master-0 -n middleware -- \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看消费者组连接情况与消费进度
 kubectl exec -it rocketmq-broker-master-0 -n middleware -- \
   sh mqadmin consumerProgress -n rocketmq-nameserver.middleware.svc.cluster.local:9876 -g order-consumer-group
 ```
-
 步骤二：检查 Consumer Pod CPU/内存是否受限，是否存在 Full GC 或网络抖动。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Consumer Pod 资源使用与重启次数
 kubectl top pod -l app=order-consumer -n middleware
 kubectl get pod -l app=order-consumer -n middleware
 ```
-
 ### 7.3 Broker 磁盘占满
 
 commitlog 默认 72 小时或磁盘 75% 触发清理。若业务消息量大，应：
@@ -324,11 +329,11 @@ commitlog 默认 72 小时或磁盘 75% 触发清理。若业务消息量大，�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Broker 磁盘使用情况
 kubectl exec -it rocketmq-broker-master-0 -n middleware -- df -h /root/store
 ```
-
 ## 8. 生产检查清单
 
 - [ ] NameServer 副本数 >= 3，跨可用区分布；
@@ -376,3 +381,6 @@ RocketMQ 在 Kubernetes 中的工单主要集中在消息发送失败、消费�
 - [[domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md|消息队列选型对比]]
 - [[domain-16-database-middleware/01-databases/08-kafka-kubernetes-strimzi.md|Kafka on Kubernetes Strimzi]]
 - Kubernetes 存储架构概述
+
+
+<!-- risk-assessed -->

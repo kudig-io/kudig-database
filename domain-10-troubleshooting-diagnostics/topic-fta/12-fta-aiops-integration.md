@@ -52,6 +52,11 @@ component: 12 Aiops Integration
 severity: critical
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第十二章：FTA 与 AIOps 平台集成架构
@@ -109,6 +114,7 @@ k8s_versions:
 ## 12.1 企业级 AIOps 架构设计
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                    FTA-Driven AIOps Platform Architecture                  │
 ├────────────────────────────────────────────────────────────────────────────┤
@@ -187,7 +193,6 @@ k8s_versions:
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ## 12.2 核心组件设计细节
 
 **FTA 推理引擎**：
@@ -460,3 +465,6 @@ ticket_workflow:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/13-intelligent-ticket-processing.md|13-intelligent-ticket-processing]]
 - [[domain-10-troubleshooting-diagnostics/topic-fta/14-fta-system-engineering.md|14-fta-system-engineering]]
+
+
+<!-- risk-assessed -->

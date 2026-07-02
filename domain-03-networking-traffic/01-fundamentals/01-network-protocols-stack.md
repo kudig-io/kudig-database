@@ -54,6 +54,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 网络协议栈详解
@@ -396,7 +401,8 @@ dmesg | grep "nf_conntrack: table full"
 
 Linux 网络命名空间是容器网络隔离的基础。每个命名空间拥有独立的网络接口、路由表、iptables 规则、conntrack 表。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建网络命名空间
 ip netns add test-ns
 
@@ -413,7 +419,6 @@ nsenter -t $PID -n ip addr show
 nsenter -t $PID -n ip route show
 nsenter -t $PID -n iptables -L -n -v
 ```
-
 ## veth pair (虚拟以太网对)
 
 veth pair 是成对存在的虚拟网络接口，一端在 Pod 命名空间，另一端在宿主机。这是 Pod 和宿主机通信的“虚拟网线”。
@@ -433,7 +438,8 @@ veth pair 是成对存在的虚拟网络接口，一端在 Pod 命名空间，�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 定位 Pod 对应的 veth
 POD_IFINDEX=$(kubectl exec -it <pod> -- cat /sys/class/net/eth0/iflink | tr -d '\r')
 ip link show | grep "^${POD_IFINDEX}:"
@@ -442,7 +448,6 @@ ip link show | grep "^${POD_IFINDEX}:"
 ip -s link show <veth-name>
 ethtool -S <veth-name>
 ```
-
 ## Linux bridge (虚拟交换机)
 
 Flannel 使用 cni0 bridge 连接同节点的 Pod。
@@ -943,7 +948,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景: Kubernetes集群中Pod网络性能不佳
 # 问题: CNI网络插件导致额外的网络开销
 
@@ -1014,7 +1020,6 @@ EOF
 # 执行优化
 # optimize_container_network
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -1029,3 +1034,6 @@ EOF
 - 99-cilium-ebpf-network-guide
 - 02-tcp-udp-deep-dive
 - 03-dns-principles-configuration
+
+
+<!-- risk-assessed -->

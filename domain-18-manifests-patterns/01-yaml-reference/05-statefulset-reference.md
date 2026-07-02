@@ -41,6 +41,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 05 - [[StatefulSet|StatefulSet]] YAML 配置参考
@@ -683,7 +688,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 初始状态: 3 个 Pod 运行 v1 版本
 kubectl get pods -l app=web
 # web-0, web-1, web-2 (都是 v1)
@@ -697,7 +703,6 @@ kubectl patch sts web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition
 # 最后更新 web-0
 kubectl patch sts web -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
-
 ## 4. Pod 序号起始值 (v1.27+)
 
 ```yaml
@@ -792,18 +797,18 @@ DNS 记录:
 ```
 
 **扩容流程**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale sts mysql --replicas=5
 # 创建 mysql-3 → mysql-4 (有序)
 ```
-
 **缩容流程**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl scale sts mysql --replicas=2
 # 删除 mysql-4 → mysql-3 (逆序)
 # PVC data-mysql-3, data-mysql-4 保留 (需手动删除)
 ```
-
 ## 3. PVC 绑定与保留
 
 **PVC 命名规则**:
@@ -950,7 +955,8 @@ updateStrategy:
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 更新镜像并设置高 partition (仅更新 1 个 Pod)
 kubectl patch sts mysql --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"mysql:5.7.42"},
@@ -965,7 +971,6 @@ kubectl exec mysql-2 -- mysql -uroot -p$PASSWORD -e "SELECT VERSION();"
 kubectl patch sts mysql -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":1}}}}'
 kubectl patch sts mysql -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":0}}}}'
 ```
-
 ## 4. 监控与可观测性
 
 ✅ **配置健康检查**:
@@ -996,14 +1001,14 @@ containers:
 ```
 
 ✅ **记录关键事件**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控 StatefulSet 事件
 kubectl get events --field-selector involvedObject.name=mysql --sort-by='.lastTimestamp'
 
 # 监控 Pod 状态变化
 kubectl get pods -l app=mysql -w
 ```
-
 ## 5. 高可用配置
 
 ✅ **配置 Pod 反亲和性**:
@@ -1077,11 +1082,11 @@ mysql -h mysql-1.mysql-headless.production.svc.cluster.local -uroot -p
 ```
 
 **方法 2: 通过 kubectl port-forward**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl port-forward mysql-0 3306:3306
 mysql -h 127.0.0.1 -P 3306 -uroot -p
 ```
-
 **方法 3: 创建针对特定 Pod 的 Service**:
 ```yaml
 apiVersion: v1
@@ -1112,14 +1117,23 @@ persistentVolumeClaimRetentionPolicy:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 缩容到 2 个副本
 kubectl scale sts mysql --replicas=2
 
 # 手动删除多余的 PVC
 kubectl delete pvc data-mysql-2 data-mysql-3
 ```
-
 ## Q4: 如何强制删除卡住的 Pod?
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -1127,7 +1141,17 @@ kubectl delete pvc data-mysql-2 data-mysql-3
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 尝试正常删除
 kubectl delete pod mysql-2
 
@@ -1137,7 +1161,6 @@ kubectl delete pod mysql-2 --force --grace-period=0  # ⚠️ 跳过优雅终止
 # 3. 如果依然卡住,编辑 Pod 移除 finalizers
 kubectl patch pod mysql-2 -p '{"metadata":{"finalizers":null}}'
 ```
-
 **警告**: 强制删除可能导致数据不一致,仅用于紧急情况。
 
 ## Q5: StatefulSet 滚动更新失败如何回滚?
@@ -1145,7 +1168,8 @@ kubectl patch pod mysql-2 -p '{"metadata":{"finalizers":null}}'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看历史版本
 kubectl rollout history sts mysql
 
@@ -1158,20 +1182,19 @@ kubectl rollout undo sts mysql --to-revision=3
 # 查看回滚状态
 kubectl rollout status sts mysql
 ```
-
 ## Q6: 如何临时停止 StatefulSet (保留 PVC)?
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 缩容到 0 副本
 kubectl scale sts mysql --replicas=0
 
 # PVC 保留,重新扩容会恢复数据
 kubectl scale sts mysql --replicas=3
 ```
-
 ## Q7: StatefulSet Pod 启动顺序依赖如何处理?
 
 **方法 1: 使用 initContainer 等待依赖**:
@@ -1241,7 +1264,8 @@ spec:
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 手动主从切换 (Failover)
 # 1. 将 mysql-1 提升为主库 (应用层操作)
 kubectl exec mysql-1 -- mysql -uroot -p$PASSWORD -e "STOP SLAVE; RESET MASTER;"
@@ -1252,7 +1276,6 @@ kubectl patch svc mysql-write -p '{"spec":{"selector":{"statefulset.kubernetes.i
 # 3. 将旧主库降级为从库
 kubectl exec mysql-0 -- mysql -uroot -p$PASSWORD -e "CHANGE MASTER TO MASTER_HOST='mysql-1.mysql-headless'..."
 ```
-
 ## 案例 2: Kafka 集群
 
 **架构**:
@@ -1300,14 +1323,14 @@ spec:
 ```
 
 **扩容操作**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Kafka 支持动态扩容
 kubectl scale sts kafka --replicas=5
 
 # 触发分区再平衡 (应用层操作)
 kafka-reassign-partitions.sh --zookeeper zk:2181 --generate --topics-to-move-json-file topics.json
 ```
-
 ## 案例 3: Elasticsearch 集群
 
 **架构**:
@@ -1381,7 +1404,8 @@ spec:
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 禁用分片分配 (避免数据迁移)
 kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
   -H 'Content-Type: application/json' -d'{"transient":{"cluster.routing.allocation.enable":"none"}}'
@@ -1393,7 +1417,6 @@ kubectl rollout restart sts es-data
 kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
   -H 'Content-Type: application/json' -d'{"transient":{"cluster.routing.allocation.enable":"all"}}'
 ```
-
 ---
 
 <!-- chunk: 相关资源 -->## 相关资源
@@ -1449,3 +1472,6 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
+
+
+<!-- risk-assessed -->

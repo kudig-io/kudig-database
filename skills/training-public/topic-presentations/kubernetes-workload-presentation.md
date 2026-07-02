@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] Workload 全栈进阶培训 (从入门到专家)
@@ -452,7 +457,8 @@ graph TB
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 Deployment
 kubectl create deployment web-app --image=nginx:1.24 --replicas=5
 
@@ -482,13 +488,13 @@ kubectl set image deployment/web-app nginx=nginx:1.26
 kubectl set resources deployment/web-app -c=nginx --limits=cpu=1,memory=512Mi
 kubectl rollout resume deployment/web-app
 ```
-
 ## 演示 2：StatefulSet 部署
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 创建 Headless Service
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -547,13 +553,13 @@ kubectl run test --image=busybox --rm -it --restart=Never -- \
 # 步骤 5: 验证独立 PVC
 kubectl get pvc -l app=nginx-sts
 ```
-
 ## 演示 3：DaemonSet 部署
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: DaemonSet
@@ -595,13 +601,13 @@ EOF
 kubectl get ds -n kube-system log-collector
 kubectl get pods -n kube-system -l app=log-collector -o wide
 ```
-
 ## 演示 4：CronJob 定时任务
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: batch/v1
 kind: CronJob
@@ -635,14 +641,14 @@ kubectl get jobs
 # 手动触发
 kubectl create job manual-report --from=cronjob/daily-report
 ```
-
 ## 演示 5：HPA 弹性伸缩
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 部署带资源请求的应用
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
@@ -684,7 +690,6 @@ kubectl exec -it deployment/stress-app -- stress --cpu 2 --timeout 120s
 kubectl get hpa -w
 kubectl get pods -l app=stress-app -w
 ```
-
 ---
 
 <!-- chunk: 常见问题与回答 -->## 常见问题与回答
@@ -837,3 +842,6 @@ Workload
 - kubernetes-troubleshooting-methodology-presentation
 - presentation-template
 - decision-tree-mermaid
+
+
+<!-- risk-assessed -->

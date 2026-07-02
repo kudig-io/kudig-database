@@ -41,6 +41,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 成本管理与 FinOps
@@ -108,6 +113,7 @@ Kubernetes 成本管理是确保云原生基础设施经济高效运行的关键
 ### Kubernetes 成本构成模型
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
 │                           Kubernetes 成本构成模型                                    │
 │                                                                                      │
@@ -149,7 +155,6 @@ Kubernetes 成本管理是确保云原生基础设施经济高效运行的关键
 │                                                                                      │
 └──────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 成本分配模型
 
 ```
@@ -224,7 +229,8 @@ Kubernetes 成本管理是确保云原生基础设施经济高效运行的关键
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy-kubecost.sh
 # Kubecost 完整部署脚本
@@ -367,7 +373,6 @@ echo "=== 部署完成 ==="
 echo "访问命令: kubectl port-forward -n $NAMESPACE svc/kubecost-cost-analyzer 9090:9090"
 echo "浏览器访问: http://localhost:9090"
 ```
-
 ### OpenCost 部署 (开源替代)
 
 ```yaml
@@ -1075,7 +1080,8 @@ spec:
 
 ### 检查命令集
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cost-optimization-checklist.sh
 # 成本优化检查脚本
@@ -1116,7 +1122,6 @@ echo ""
 
 echo "=== 检查完成 ==="
 ```
-
 <!-- chunk: FinOps 成熟度模型 -->
 ## FinOps 成熟度模型
 
@@ -1201,3 +1206,6 @@ echo "=== 检查完成 ==="
 ## Related
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
+
+
+<!-- risk-assessed -->

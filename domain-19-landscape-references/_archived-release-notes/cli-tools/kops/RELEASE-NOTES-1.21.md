@@ -36,6 +36,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # kops v1.21 Release Notes
@@ -124,3 +129,5 @@ See the [warm pool](https://kops.sigs.k8s.io/instance_groups/#warmpool-aws-only)
 * Simplify Flatcar containerd exec command [@pothos](https://github.com/pothos) [#12900](https://github.com/kubernetes/kops/pull/12900)
 * Update to etcd-manager v3.0.20220203 [@justinsb](https://github.com/justinsb) [#13196](https://github.com/kubernetes/kops/pull/13196)
 * Add support for ed25519 keys in AWS [@aclevername](https://github.com/aclevername) [#13304](https://github.com/kubernetes/kops/pull/13304)
+
+<!-- risk-assessed -->

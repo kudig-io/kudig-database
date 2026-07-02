@@ -54,6 +54,11 @@ skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota &
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -169,6 +174,7 @@ Namespace、ResourceQuota 和 LimitRange 是 [[Kubernetes|Kubernetes]] 多租户
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -204,7 +210,6 @@ Namespace、ResourceQuota 和 LimitRange 是 [[Kubernetes|Kubernetes]] 多租户
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -244,7 +249,8 @@ Namespace、ResourceQuota 和 LimitRange 是 [[Kubernetes|Kubernetes]] 多租户
 ### 3.1 影响评估
 
 **Step T1**: 检查受影响 Namespace 列表及规模
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 ResourceQuota 使用率
 kubectl get resourcequota --all-namespaces -o jsonpath='{
   range .items[*]
@@ -264,7 +270,8 @@ kubectl get events --all-namespaces --field-selector reason=FailedCreate -o json
 > - 如果仅单个 Namespace 且为非生产 → 影响范围有限
 
 **Step T2**: 确定是否为核心系统受影响
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kube-system 等核心 Namespace 的配额状态
 kubectl get resourcequota -n kube-system
 kubectl get events -n kube-system --field-selector reason=FailedCreate
@@ -275,7 +282,8 @@ kubectl get events --all-namespaces --field-selector reason=Evicted | grep -i qu
 > **判断规则**: 如果 kube-system、[[Ingress|ingress]]、monitoring 等核心 Namespace 受影响 → 升级为 P0
 
 **Step T3**: 检查 LimitRange 冲突范围
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 LimitRange
 kubectl get limitrange --all-namespaces
 
@@ -287,7 +295,6 @@ for ns in $(kubectl get ns -o jsonpath='{.items[*].metadata.name}'); do
   fi
 done
 ```
-
 ### 3.2 严重性分级
 
 | 条件 | 级别 | 说明 |
@@ -1020,7 +1027,8 @@ done
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 验证 ResourceQuota 状态正常
 kubectl get resourcequota -n <namespace> -o jsonpath='{
   .items[*].status.used}{"\n"}{.items[*].status.hard
@@ -1058,7 +1066,6 @@ kubectl describe limitrange -n <namespace>
 kubectl get namespace <namespace> -o jsonpath='{.status.phase}'
 # 预期: Active（如适用）
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1252,3 +1259,5 @@ receivers:
 - [[domain-10-troubleshooting-diagnostics/topic-fta/list/resource-quota-fta.md|Quota/LimitRange 故障树分析]]
 
 ```
+
+<!-- risk-assessed -->

@@ -40,6 +40,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Kubernetes 集群 PKI 架构总览
@@ -449,6 +454,7 @@ caCertificateValidityPeriod: "87600h" # CA 证书有效期
 ## 信任链验证关系
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 客户端 (kubectl/kubelet)                    API Server
      │                                         │
      │  1. 使用 ca.crt 验证 API Server 证书    │
@@ -463,7 +469,6 @@ caCertificateValidityPeriod: "87600h" # CA 证书有效期
  API Server ──────► etcd                      etcd
  使用 etcd/ca.crt 验证 etcd 证书      使用 etcd/ca.crt 验证 API Server 客户端证书
 ```
-
 ---
 
 ## 组件启动时的证书加载顺序
@@ -667,3 +672,6 @@ find /etc/kubernetes/pki/ -name "*.key" | wc -l
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
+
+
+<!-- risk-assessed -->

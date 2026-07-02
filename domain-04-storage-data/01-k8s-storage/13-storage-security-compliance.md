@@ -52,6 +52,11 @@ cross_refs:
   label: '相关知识域: domain-04-storage-data'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 13 - 存储安全与合规管理
@@ -100,7 +105,8 @@ allowVolumeExpansion: true
 
 ### 加密状态验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # encryption-validator.sh
 
@@ -220,7 +226,6 @@ EOF
 validate_encryption_status
 generate_compliance_report
 ```
-
 ### 传输加密配置
 
 ```yaml
@@ -369,7 +374,8 @@ spec:
 
 ### 存储访问审计
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-access-audit.sh
 
@@ -415,7 +421,6 @@ while true; do
   sleep 3600  # 每小时执行一次
 done
 ```
-
 ---
 
 <!-- chunk: 数据保护与备份 -->
@@ -492,7 +497,8 @@ data:
 
 ### 备份验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # backup-verifier.sh
 
@@ -584,7 +590,6 @@ EOF
 verify_backups
 generate_verification_report
 ```
-
 ---
 
 <!-- chunk: 安全审计与合规 -->
@@ -637,7 +642,8 @@ data:
 
 ### 合规性检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # compliance-checker.sh
 
@@ -761,7 +767,6 @@ EOF
 generate_compliance_report
 echo "📋 存储安全合规检查完成"
 ```
-
 ---
 
 <!-- chunk: 漏洞扫描与防护 -->
@@ -769,7 +774,8 @@ echo "📋 存储安全合规检查完成"
 
 ### 存储组件安全扫描
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # storage-security-scanner.sh
 
@@ -840,7 +846,6 @@ scan_storage_components() {
 # 定期安全扫描
 scan_storage_components
 ```
-
 ---
 
 <!-- chunk: 密钥管理最佳实践 -->
@@ -903,7 +908,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # key-rotation-manager.sh
 
@@ -966,7 +972,6 @@ else
   echo "ℹ️  未到密钥轮换时间"
 fi
 ```
-
 ---
 
 <!-- chunk: 合规性检查清单 -->
@@ -1036,7 +1041,17 @@ fi
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # data-breach-response.sh
 
@@ -1144,7 +1159,6 @@ main() {
 
 main
 ```
-
 ---
 **表格底部标记**: Kusheet Project | 作者: Allen Galler (allengaller@gmail.com)
 
@@ -1176,3 +1190,6 @@ main
 ## Related
 
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+
+
+<!-- risk-assessed -->

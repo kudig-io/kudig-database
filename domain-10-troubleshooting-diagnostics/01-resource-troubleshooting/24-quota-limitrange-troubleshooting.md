@@ -65,6 +65,11 @@ cross_refs:
   label: '相关知识域: domain-06-observability'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 24 - Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)
@@ -148,7 +153,8 @@ cross_refs:
 
 ### 2.1 配额资源配置验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 配额资源概览 ==========
 # 查看所有ResourceQuota
 kubectl get resourcequota --all-namespaces
@@ -236,10 +242,10 @@ kubectl get resourcequota -n <namespace-name> -o jsonpath='{
         .items[0].status.hard."persistentvolumeclaims"
 }'
 ```
-
 ### 2.2 配额超限问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 超限事件检查 ==========
 # 查看配额超限事件
 kubectl get events -n <namespace-name> --field-selector reason=FailedCreate
@@ -310,7 +316,6 @@ echo "Pods: $RECOMMENDED_PODS"
 echo "CPU requests: ${RECOMMENDED_CPU} cores"
 echo "Memory requests: ${RECOMMENDED_MEM}Gi"
 ```
-
 ---
 
 <!-- chunk: 3. LimitRange 配置问题排查 (LimitRange Configuration Issues) -->
@@ -321,7 +326,8 @@ echo "Memory requests: ${RECOMMENDED_MEM}Gi"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. LimitRange配置检查 ==========
 # 查看LimitRange资源
 kubectl get limitrange --all-namespaces
@@ -375,10 +381,10 @@ kubectl get pod test-defaults -n <namespace-name> -o jsonpath='{
     .spec.containers[0].resources
 }'
 ```
-
 ### 3.2 限制冲突问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 限制范围冲突检测 ==========
 # 检查最小值大于最大值的情况
 kubectl get limitrange -n <namespace-name> -o jsonpath='{
@@ -488,7 +494,6 @@ spec:
       storage: "100Gi"   # 最大100GB存储
 EOF
 ```
-
 ---
 
 <!-- chunk: 4. 配额超限问题处理 (Quota Exceeded Issue Handling) -->
@@ -500,7 +505,8 @@ EOF
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 临时配额调整 ==========
 # 增加Pod配额
 kubectl patch resourcequota <quota-name> -n <namespace-name> -p '{
@@ -568,13 +574,22 @@ kubectl patch deployment <critical-app> -n <namespace-name> -p '{
     }
 }'
 ```
-
 ### 4.2 根本原因分析
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ========== 资源使用趋势分析 ==========
 # 收集历史资源使用数据
 cat <<'EOF' > resource-usage-analyzer.sh
@@ -661,7 +676,6 @@ kubectl get deployments -n <namespace-name> -o jsonpath='{
 kubectl top pods -n <namespace-name> --sort-by=cpu | head -10
 kubectl top pods -n <namespace-name> --sort-by=memory | head -10
 ```
-
 ---
 
 <!-- chunk: 5. 监控和告警配置 (Monitoring and Alerting) -->
@@ -672,7 +686,8 @@ kubectl top pods -n <namespace-name> --sort-by=memory | head -10
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 监控指标配置 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -738,10 +753,10 @@ spec:
         summary: "Namespace {{ \$labels.namespace }} has no resource quota configured"
 EOF
 ```
-
 ### 5.2 配额使用仪表板
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== Grafana仪表板配置 ==========
 cat <<'EOF' > quota-dashboard.json
 {
@@ -923,7 +938,6 @@ EOF
 
 chmod +x quota-health-check.sh
 ```
-
 ---
 
 <!-- chunk: 6. 最佳实践和优化建议 (Best Practices and Optimization) -->
@@ -1048,7 +1062,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 配额自动调整脚本 ==========
 cat <<'EOF' > auto-quota-adjuster.sh
 #!/bin/bash
@@ -1310,7 +1325,6 @@ EOF
 
 chmod +x quota-report-generator.sh
 ```
-
 ---
 
 ---
@@ -1344,3 +1358,6 @@ chmod +x quota-report-generator.sh
 ## Related
 
 - [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+
+
+<!-- risk-assessed -->

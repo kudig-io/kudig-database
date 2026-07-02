@@ -73,6 +73,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - [[Kubernetes|Kubernetes]] 集群部署架构模式指南
@@ -149,7 +154,8 @@ graph TD
 ### 2.1 开发测试环境模式
 
 #### 单节点 All-in-One 模式
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Minikube 部署方案
 minikube start \
   --driver=docker \
@@ -161,7 +167,6 @@ minikube start \
 # Kind (Kubernetes in Docker) 方案
 kind create cluster --name dev-cluster --config=kind-config.yaml
 ```
-
 ```yaml
 # kind-config.yaml
 kind: Cluster
@@ -386,7 +391,8 @@ module "eks" {
 ```
 
 #### Google GKE 配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GKE Autopilot 集群创建
 gcloud container clusters create-auto production-cluster \
   --region=us-central1 \
@@ -397,7 +403,6 @@ gcloud container clusters create-auto production-cluster \
   --network=default \
   --subnetwork=default
 ```
-
 ### 3.2 混合云部署模式
 
 #### 多云统一管理架构
@@ -813,3 +818,6 @@ spec:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

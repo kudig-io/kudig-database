@@ -49,6 +49,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 开源项目快速选型指南
@@ -336,3 +341,6 @@ prerequisites:
 - 全景项目列表: [OPEN-SOURCE-ECOSYSTEM.md](./OPEN-SOURCE-ECOSYSTEM.md)
 - 各 Domain 详细索引: `domain-*/00-open-source-projects-index.md`
 - 独立深度指南: `domain-*/99-*-guide.md`
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -266,7 +271,8 @@ Node NotReady (顶事件)
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > pending-pod.yaml << 'EOF'
 apiVersion: v1
 kind: Pod
@@ -284,14 +290,14 @@ EOF
 
 kubectl apply -f pending-pod.yaml
 ```
-
 #### 2.2 按 FEBM 方法论排查
 
 ```
 Step 1: 收集证据
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 证据 1: Pod 状态
 kubectl get pod pending-test
 # NAME            STATUS    RESTARTS   AGE
@@ -307,7 +313,6 @@ kubectl describe pod pending-test | tail -20
 # 证据 3: 节点资源
 kubectl get nodes -o custom-columns='NAME:.metadata.name,CPU:.status.allocatable.cpu,MEMORY:.status.allocatable.memory'
 ```
-
 ```
 Step 2: 分析证据
 - 状态: Pending
@@ -320,7 +325,8 @@ Step 3: 形成假设
 Step 4: 验证假设
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点实际可用资源
 kubectl describe node <node-name> | grep -A 5 Allocatable
 # Allocatable:
@@ -329,7 +335,6 @@ kubectl describe node <node-name> | grep -A 5 Allocatable
 
 # 假设验证: 确认 Pod 请求远超节点容量
 ```
-
 ```
 Step 5: 修复
 ```
@@ -338,7 +343,8 @@ Step 5: 修复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl delete pod pending-test
 
 # 修改资源请求后重新创建
@@ -362,7 +368,6 @@ kubectl get pod fixed-test
 # NAME         STATUS   RESTARTS   AGE
 # fixed-test   Running  0          10s
 ```
-
 ---
 
 ### 任务 3: Node NotReady 排障 (45min)
@@ -371,7 +376,8 @@ kubectl get pod fixed-test
 
 按故障树路径逐层排查:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== Node NotReady 排查 =========="
 
 # 检查 1: 确认 NotReady 节点
@@ -419,7 +425,6 @@ dmesg | grep -i "kill" | tail -10
 
 echo "========== 排查完毕 =========="
 ```
-
 节点 Conditions 说明:
 
 | Condition | True 含义 | 影响 |
@@ -437,6 +442,7 @@ echo "========== 排查完毕 =========="
 #### 4.1 FEBM 核心流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────┐
 │ 1. 收集证据                          │
 │    - kubectl describe / get / logs   │
@@ -473,7 +479,6 @@ echo "========== 排查完毕 =========="
 │    - 预防措施                        │
 └─────────────────────────────────────┘
 ```
-
 #### 4.2 问题报告模板
 
 ```markdown
@@ -573,3 +578,5 @@ echo "========== 排查完毕 =========="
 - [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
 
 ```
+
+<!-- risk-assessed -->

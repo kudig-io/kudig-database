@@ -36,6 +36,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 推广文案 V1 — 朋友圈/即刻/技术社区版
@@ -76,3 +81,6 @@ AI 秒级扫描完全库，输出了一份《缺口分析报告》，然后**当
 **关联文档**:
 - [[skills/training-public/00-learning-gaps-analysis.md|00 learning gaps analysis]] — 缺口分析报告原文
 - [[skills/training-public/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 多路径学习路线图
+
+
+<!-- risk-assessed -->

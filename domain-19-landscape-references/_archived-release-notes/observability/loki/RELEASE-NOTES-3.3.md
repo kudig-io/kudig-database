@@ -34,6 +34,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # loki v3.3 Release Notes
@@ -50,3 +55,5 @@ Source: [v3.3.4](https://github.com/grafana/loki/releases/tag/v3.3.4)
 * **deps:** update module golang.org/x/crypto to v0.35.0 [security] (release-3.3.x) ([#16590](https://github.com/grafana/loki/issues/16590)) ([454cad2](https://github.com/grafana/loki/commit/454cad207b55e65e7b22c077eaedf84589860746))
 * **deps:** update module golang.org/x/oauth2 to v0.27.0 [security] (release-3.3.x) ([#16591](https://github.com/grafana/loki/issues/16591)) ([7b35a41](https://github.com/grafana/loki/commit/7b35a41c17be1326df4324188eb43e4e88d16f8d))
 * **docs:** add a note on docker configuration.md doc to explain accep… ([#16746](https://github.com/grafana/loki/issues/16746)) ([0102107](https://github.com/grafana/loki/commit/01021076ccc2bfe4812fc9116c66190334d3aa91))
+
+<!-- risk-assessed -->

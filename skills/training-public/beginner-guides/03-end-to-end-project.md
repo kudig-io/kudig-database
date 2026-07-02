@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 端到端项目实战——从代码到生产完整流水线
@@ -102,7 +107,8 @@ authors:
 
 ### 1.1 初始化项目
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 mkdir todo-app && cd todo-app
 git init
 
@@ -126,7 +132,6 @@ tree
 #     └── workflows/
 #         └── ci.yml      # GitHub Actions CI
 ```
-
 ### 1.2 核心代码
 
 `src/app.js`:
@@ -304,7 +309,8 @@ module.exports = pool;
 
 ### 1.3 本地运行验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装依赖
 npm init -y
 npm install express pg redis ejs
@@ -321,7 +327,6 @@ DB_HOST=localhost REDIS_HOST=localhost node src/app.js
 
 # 访问 http://localhost:3000，添加几个待办事项验证功能
 ```
-
 ---
 
 ## 阶段二：容器化（20 分钟）
@@ -352,7 +357,8 @@ CMD ["node", "src/app.js"]
 
 ### 2.2 构建并测试镜像
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 构建
 docker build -t todo-app:v1.0.0 .
 
@@ -368,7 +374,6 @@ docker run -d --name todo-app \
 
 # 访问 http://localhost:3000 验证
 ```
-
 ---
 
 ## 阶段三：K8s 原生部署（40 分钟）
@@ -659,7 +664,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 加载镜像到 kind 集群（如果用 kind）
 kind load docker-image todo-app:v1.0.0 --name k8s-lab
 
@@ -677,21 +683,29 @@ kubectl logs -n todo-app deployment/todo-web --tail=50 -f
 # 本地访问（配置 hosts: 127.0.0.1 todo.local）
 # http://todo.local
 ```
-
 ---
 
 ## 阶段四：Helm 打包（30 分钟）
 
 ### 4.1 初始化 Helm Chart
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 helm create helm/todo-app
 
 # 清理默认模板，保留核心结构
 rm helm/todo-app/templates/*.yaml
 rm -rf helm/todo-app/templates/tests
 ```
-
 ### 4.2 Chart.yaml
 
 `helm/todo-app/Chart.yaml`:
@@ -828,7 +842,17 @@ spec:
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 语法检查
 helm lint helm/todo-app
 
@@ -853,7 +877,6 @@ helm rollback todo-app 1
 # 卸载
 helm uninstall todo-app -n todo-app  # ⚠️ 删除 release 及关联资源
 ```
-
 ---
 
 ## 阶段五：GitOps 交付（20 分钟）
@@ -872,7 +895,8 @@ git push -u origin main
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ArgoCD 命名空间
 kubectl create namespace argocd
 
@@ -886,7 +910,6 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
 # 用户名: admin
 ```
-
 ### 5.3 配置 ArgoCD Application
 
 `argocd-application.yaml`:
@@ -919,13 +942,13 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl apply -f argocd-application.yaml
 
 # 访问 ArgoCD UI: https://localhost:8080
 # 登录后可以看到应用同步状态
 ```
-
 ### 5.4 体验 GitOps
 
 1. 修改代码（如改个前端颜色）
@@ -944,7 +967,8 @@ kubectl apply -f argocd-application.yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 kube-prometheus-stack Helm Chart
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
@@ -958,7 +982,6 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 kubectl port-forward svc/prometheus-grafana -n monitoring 3001:80
 # 访问 http://localhost:3001，默认账号 admin / prom-operator
 ```
-
 ### 6.2 配置应用监控
 
 创建 `ServiceMonitor` 让 Prometheus 抓取应用指标：
@@ -1028,20 +1051,21 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动删除一个 Pod
 kubectl delete pod -n todo-app -l app=todo-web --grace-period=0
 
 # 观察：Deployment 自动创建新 Pod
 kubectl get pods -n todo-app -w
 ```
-
 ### 场景 2：数据库连接断开
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 PostgreSQL Pod
 kubectl delete pod -n todo-app -l app=postgres
 
@@ -1049,10 +1073,10 @@ kubectl delete pod -n todo-app -l app=postgres
 # 等 PostgreSQL 恢复后，应用自动恢复
 kubectl logs -n todo-app deployment/todo-web -f
 ```
-
 ### 场景 3：HPA 弹性扩容
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 压力测试
 kubectl run -it --rm load-generator --image=busybox:1.36 --restart=Never -- /bin/sh -c "while true; do wget -q -O- http://todo-web.todo-app.svc.cluster.local; done"
 
@@ -1060,14 +1084,23 @@ kubectl run -it --rm load-generator --image=busybox:1.36 --restart=Never -- /bin
 kubectl get hpa -n todo-app -w
 # 看到副本数从 3 → 5 → 8 → 10
 ```
-
 ### 场景 4：配置变更（不重建镜像）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 修改 ConfigMap（如改页面标题）
 kubectl edit configmap todo-config -n todo-app
 
@@ -1076,7 +1109,6 @@ kubectl rollout restart deployment/todo-web -n todo-app
 
 # 验证：页面标题已更新，但镜像没变
 ```
-
 ---
 
 ## 项目总结
@@ -1111,7 +1143,17 @@ kubectl rollout restart deployment/todo-web -n todo-app
 > - `helm uninstall`：删除 release 及其释放的所有资源
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 卸载 Helm releases
 helm uninstall todo-app -n todo-app  # ⚠️ 删除 release 及关联资源
 helm uninstall prometheus -n monitoring  # ⚠️ 删除 release 及关联资源
@@ -1122,7 +1164,6 @@ kubectl delete ns todo-app monitoring argocd  # ⚠️ 不可逆：永久删除�
 # 删除 kind 集群（如需）
 kind delete cluster --name k8s-lab
 ```
-
 ---
 
 ## 下一步学习建议
@@ -1140,3 +1181,6 @@ kind delete cluster --name k8s-lab
 - [[04-cka-exam-prep-guide]] — 备考 CKA 时，本项目是很好的练习素材
 - ../fundamentals/03-deployment-basics.md — Deployment 基础概念
 - ../../domain-08-release-change-management/01-gitops/ — GitOps 深度解析
+
+
+<!-- risk-assessed -->

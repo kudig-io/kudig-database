@@ -32,6 +32,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.0 Release Notes
@@ -74,3 +79,6 @@ fix(helm): add trimSuffix to helper functions d8133cf9a88d4c95ffd83f207dedad3102
 fix(helm): fix broken --values flag 70256d812c924d682d4246fac875eb9c1562c162
 feat(tiller): update sprig to 2.7.0 8f2567ecb4f34efd5493da595fcb3154069f4c30
 fix(ci): do not push canary image on release 7d79406b95f99c2968999b59e8e9043ddfd61827
+
+
+<!-- risk-assessed -->

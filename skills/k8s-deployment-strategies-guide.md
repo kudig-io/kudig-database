@@ -27,6 +27,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 部署策略最佳实践
@@ -125,3 +130,5 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 - [[domain-07-platform-engineering/topic-code-analysis/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
 ```
+
+<!-- risk-assessed -->

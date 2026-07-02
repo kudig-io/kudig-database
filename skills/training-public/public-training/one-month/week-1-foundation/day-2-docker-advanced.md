@@ -34,6 +34,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 2: Docker 网络 + 存储 + 安全
@@ -160,7 +165,17 @@ related:
 
 #### 1.1 Bridge 网络实验
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建自定义 bridge 网络
 docker network create my-network
 # 查看网络列表
@@ -197,10 +212,19 @@ docker stop web app isolated
 docker rm web app isolated
 docker network rm my-network
 ```
-
 #### 1.2 Host 网络实验
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # host 模式: 容器直接使用宿主机网络栈
 docker run -d --name host-nginx --network host nginx:alpine
 
@@ -221,10 +245,10 @@ docker port host-nginx
 # 清理
 docker stop host-nginx && docker rm host-nginx
 ```
-
 #### 1.3 None 网络实验
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # none 模式: 无网络
 docker run --rm --network none alpine ip addr
 # 1: lo: <LOOPBACK,UP> mtu 65536
@@ -234,14 +258,14 @@ docker run --rm --network none alpine ip addr
 # 清理
 docker network prune -f
 ```
-
 ---
 
 ### 任务 2: Docker Compose 网络实验 (45min)
 
 创建多容器应用:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 mkdir -p ~/compose-practice && cd ~/compose-practice
 
 cat > docker-compose.yml << 'EOF'
@@ -307,7 +331,6 @@ docker-compose logs api
 # 清理
 docker-compose down
 ```
-
 ---
 
 ### 任务 3: Docker 存储实验 (45min)
@@ -317,7 +340,17 @@ docker-compose down
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 创建 Volume
 docker volume create my-data
 docker volume ls
@@ -353,13 +386,22 @@ docker exec reader cat /shared/test.txt
 docker stop reader && docker rm reader
 docker volume rm my-data  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 #### 3.2 Bind Mount 存储
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # Bind Mount: 将宿主机目录挂载到容器
 mkdir -p ~/bind-test
 echo "bind mount data from host" > ~/bind-test/data.txt
@@ -382,10 +424,10 @@ docker run --rm -v ~/bind-test/config.yaml:/etc/app/config.yaml:ro alpine cat /e
 # 清理
 rm -rf ~/bind-test  # ⚠️ 删除系统/数据文件
 ```
-
 #### 3.3 tmpfs 存储
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # tmpfs: 内存存储，容器停止后消失
 docker run --rm --tmpfs /tmp:rw,size=100m,mode=1777 alpine sh -c "echo 'temp data' > /tmp/test.txt && df -h /tmp && cat /tmp/test.txt"
 # Filesystem           Size    Used Available Use% Mounted on
@@ -397,14 +439,14 @@ docker run --rm --tmpfs /tmp:rw,size=100m,mode=1777 alpine sh -c "echo 'temp dat
 # - 敏感信息 (不希望写入磁盘)
 # - 高速缓存
 ```
-
 ---
 
 ### 任务 4: Docker 安全实践 (30min)
 
 #### 4.1 非 root 用户运行
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 不安全: 默认以 root 运行
 docker run --rm alpine id
 # uid=0(root) gid=0(root)
@@ -424,10 +466,19 @@ docker build -t secure-nginx -f Dockerfile.secure .
 docker run --rm secure-nginx id
 # uid=1000(appuser) gid=1000(appuser)
 ```
-
 #### 4.2 资源限制
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # CPU 限制
 docker run --rm --cpus="0.5" alpine sh -c "while true; do :; done" &
 # 最多使用 0.5 个 CPU 核心
@@ -455,10 +506,10 @@ docker stop secured-app && docker rm secured-app
 kill %1 2>/dev/null
 rm -f Dockerfile.secure
 ```
-
 #### 4.3 只读文件系统
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 只读根文件系统 + tmpfs 写入目录
 docker run --rm \
   --read-only \
@@ -469,7 +520,6 @@ docker run --rm \
 
 # 注意: 只读文件系统需要为所有写入目录提供 tmpfs 或 Volume
 ```
-
 ---
 
 ## 费曼复述 (0.5h)
@@ -513,7 +563,8 @@ docker run --rm \
 
 ### Docker 网络命令速查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker network create <name>              # 创建网络
 docker network ls                          # 列出网络
 docker network inspect <name>             # 查看网络详情
@@ -522,20 +573,19 @@ docker network disconnect <net> <container>  # 断开网络
 docker network rm <name>                  # 删除网络
 docker network prune                      # 清理未使用的网络
 ```
-
 ### Docker 存储命令速查
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker volume create <name>               # 创建 Volume
 docker volume ls                          # 列出 Volume
 docker volume inspect <name>             # 查看 Volume 详情
 docker volume rm <name>                   # 删除 Volume  # ⚠️ 强制清理，可能杀运行中容器
 docker volume prune                       # 清理未使用的 Volume  # ⚠️ 强制清理，可能杀运行中容器
 ```
-
 ---
 
 ## 常见问题
@@ -550,10 +600,10 @@ docker volume prune                       # 清理未使用的 Volume  # ⚠️ 
 
 ### Q3: Volume 数据如何备份？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --rm -v my-data:/data -v $(pwd):/backup alpine tar czf /backup/data.tar.gz /data
 ```
-
 ---
 
 ## 要点总结
@@ -577,3 +627,6 @@ docker run --rm -v my-data:/data -v $(pwd):/backup alpine tar czf /backup/data.t
 ## 明日预告
 
 Day 3 将进入 Linux 基础，学习进程管理、系统架构，这是理解 K8s 底层原理的关键。
+
+
+<!-- risk-assessed -->

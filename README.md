@@ -24,6 +24,22 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 
 覆盖 **20 个核心知识域**：集群基础、工作负载、网络、存储、安全、可观测性、平台工程、发布变更、可靠性工程、故障诊断、生产运维、云厂商（13+ 家）、容器运行时、AI/ML 基础设施、专项技术、数据库中间件、系统基础、清单模式、生态参考、应用模式。
 
+## 生产就绪快速入口
+
+每个编号 Domain 均提供入口级生产就绪运维指南，另有关键跨域 Runbook：
+
+- **Per-Domain 生产就绪指南**：`domain-01..20/99-production-readiness-operations-guide.md`
+- **证书 / PKI 生命周期 Runbook**：`domain-01-cluster-fundamentals/03-control-plane/34-certificate-pki-lifecycle-runbook.md`
+- **集群升级 Runbook**：`domain-01-cluster-fundamentals/03-control-plane/35-cluster-upgrade-runbook.md`
+- **灾难恢复与业务连续性 Runbook**：`domain-09-reliability-engineering/09-disaster-recovery-playbooks/03-disaster-recovery-bc-runbook.md`
+- **Fleet GitOps 操作指南**：`domain-08-release-change-management/01-gitops/08-fleet-gitops-operations-guide.md`
+- **事件响应 Runbook 模板**：`domain-11-production-operations/03-incident-response/24-incident-response-runbook-template.md`
+- **FinOps 成本治理 Runbook**：`domain-11-production-operations/01-finops/14-finops-cost-governance-runbook.md`
+- **AI/ML 运维 Runbook**：`domain-14-ai-ml-infra/01-ai-infra/45-ai-ml-ops-runbook.md`
+- **边缘生产运维 Runbook**：`domain-15-specialized-tech/01-edge-computing/14-edge-production-runbook.md`
+
+详细说明与缺口分析参见 `_reports/domain-production-readiness-content-push-2026-07-01.md` 与 `_reports/domain-content-gap-analysis-2026-07-01.md`。
+
 ## 快速开始
 
 ### 浏览在线站点

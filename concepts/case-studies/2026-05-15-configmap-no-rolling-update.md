@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-05-15] ConfigMap 更新后应用仍使用旧配置，数据库连接指向已下线实例
@@ -38,22 +43,22 @@ last_updated: 2026-05-23
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-api payment-api-xxx -- netstat -an | grep 10.0.20.45 | wc -l
 # 48
 ```
-
 ## 诊断过程
 
 **16:05** — 检查 ConfigMap：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get cm payment-db-config -n prod-api -o yaml
 # data:
 #   DB_HOST: "10.0.20.50"
 #   DB_PORT: "5432"
 #   DB_NAME: "payment"
 ```
-
 ConfigMap 已更新。
 
 **16:07** — 检查 Pod 环境变量：
@@ -61,15 +66,16 @@ ConfigMap 已更新。
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-api payment-api-xxx -- env | grep DB_HOST
 # DB_HOST=10.0.20.45
 ```
-
 Pod 仍在使用旧配置！
 
 **16:09** — 检查 Deployment：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment payment-api -n prod-api
 # NAME          READY   UP-TO-DATE   AVAILABLE   AGE
 # payment-api   6/6     6            6           120d
@@ -78,11 +84,11 @@ kubectl get rs -n prod-api -l app=payment-api
 # NAME                     DESIRED   CURRENT   READY   AGE
 # payment-api-7d9f4b8c5a   6         6         6       120d
 ```
-
 Deployment 的 ReplicaSet 未变化，说明 ConfigMap 更新未触发滚动更新。
 
 **16:11** — 检查 Deployment 的 Pod template：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment payment-api -n prod-api -o yaml | grep -A20 env
 # env:
 # - name: DB_HOST
@@ -91,7 +97,6 @@ kubectl get deployment payment-api -n prod-api -o yaml | grep -A20 env
 #       name: payment-db-config
 #       key: DB_HOST
 ```
-
 Deployment 确实引用了 ConfigMap，但 Pod template hash 未变化，因此 Deployment 控制器认为无需滚动更新。
 
 **16:13** — 根本原因：
@@ -109,26 +114,26 @@ ConfigMap 作为独立资源，其内容变更不会自动触发引用它的 Dep
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment payment-api -n prod-api
 kubectl get pods -n prod-api -l app=payment-api -w
 # payment-api-7d9f4b8c5a-xxx   1/1   Running   0   30s
 # ...
 ```
-
 **16:20** — 验证新 Pod 使用新配置：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n prod-api payment-api-new-xxx -- env | grep DB_HOST
 # DB_HOST=10.0.20.50
 
 kubectl exec -n prod-api payment-api-new-xxx -- netstat -an | grep 10.0.20.50 | wc -l
 # 8
 ```
-
 **16:25** — 压测验证支付接口：
 ```bash
 k6 run --vus 50 --duration 2m payment-api-smoke-test.js
@@ -157,3 +162,6 @@ k6 run --vus 50 --duration 2m payment-api-smoke-test.js
   4. SOP 更新：任何数据库连接配置变更后，必须执行 `kubectl rollout restart`
 - **相关 Skill**: [[k8s-deployment-strategies-guide]]
 - **相关 FTA**: [[deployment-fta]]
+
+
+<!-- risk-assessed -->

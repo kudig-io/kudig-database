@@ -59,6 +59,11 @@ cross_refs:
   label: '速查卡: k8s'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v1.29-v1.33 工作负载管理新特性指南
@@ -192,7 +197,8 @@ Pod 终止:
 
 ### 1.5 生产检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Sidecar 状态
 kubectl get pod webapp-with-sidecar -o jsonpath='{range .status.initContainerStatuses[*]}{.name}{"\t"}{.state}{"\n"}{end}'
 
@@ -200,7 +206,6 @@ kubectl get pod webapp-with-sidecar -o jsonpath='{range .status.initContainerSta
 # istio-proxy     map[running:map[startedAt:2026-04-24T10:00:00Z]]
 # db-migrate      map[terminated:map[exitCode:0 reason:Completed]]
 ```
-
 ---
 
 <!-- chunk: 二、原地 Pod 资源调整 (v1.33 Alpha) -->
@@ -255,7 +260,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 增加资源
 kubectl patch pod resize-demo --patch '{
   "spec": {
@@ -276,7 +282,6 @@ kubectl get pod resize-demo -o jsonpath='{.status.resizeStatus}'
 # 查看实际分配
 kubectl get pod resize-demo -o jsonpath='{.status.containerStatuses[0].allocatedResources}'
 ```
-
 ### 2.5 限制与注意事项
 
 ```
@@ -362,7 +367,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 处于 SchedulingGated 状态
 kubectl get pod gated-pod
 # NAME        READY   STATUS            RESTARTS   AGE
@@ -377,7 +383,6 @@ kubectl get pod gated-pod
 # NAME        READY   STATUS    RESTARTS   AGE
 # gated-pod   1/1     Running   0          5s
 ```
-
 ### 4.4 使用场景
 
 ```
@@ -592,18 +597,18 @@ spec:
         - jsonPath: .spec.region
 ```
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用字段选择器查询
 kubectl get myapps --field-selector spec.tier=premium
 ```
-
 ### 9.2 CRD 默认版本迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # v1.33 支持更平滑的 CRD 版本弃用
 kubectl deprecate crd myapps.example.com v1beta1 --to=v1
 ```
-
 ### 9.3 Operator 开发建议
 
 ```go
@@ -685,3 +690,6 @@ func (r *MyAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 - 23-resource-management
 - 99-spring-boot-kubernetes-guide
 - QUALITY_REPORT
+
+
+<!-- risk-assessed -->

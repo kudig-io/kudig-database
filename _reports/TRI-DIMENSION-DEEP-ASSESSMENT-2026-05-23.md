@@ -13,6 +13,11 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # KUDIG 远程顾问模式 — 三维度深度评估报告
@@ -63,6 +68,7 @@ last_updated: 2026-05-24
 
 #### A. Command字段高度统一（专有云设计特征）
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 命令动词分布:
   kubectl: 462/469 (98.5%)
   etcdctl: 7/469 (1.5%)
@@ -143,6 +149,7 @@ cluster-upgrade:       critical=1/11 (9.1%)   ← 合理
 #### A. 工单场景细分不足
 当前每个skill的QA条目数分布极度不均：
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 node-notready:        15条    ← 基础
 pod-crashloop:        15条    ← 基础
 dns-failure:          15条    ← 基础
@@ -151,7 +158,6 @@ daemonset-failure:     7条    ← 不足
 monitoring-alerting:   6条    ← 不足
 helm-chart-failure:    1条    ← 几乎缺失
 ```
-
 **问题**：生产环境中，一个skill（如node-notready）可能有**数十种细分场景**：
 - 磁盘压力（不同文件系统）
 - 内存压力（OOM/缓存/Slab）
@@ -346,3 +352,6 @@ helm-chart-failure:    1条    ← 几乎缺失
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

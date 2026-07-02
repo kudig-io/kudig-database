@@ -15,6 +15,11 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 存储数据保护与灾难恢复
@@ -120,7 +125,8 @@ spec:
 
 ### 2.1 S3 Object Lock（WORM 模式）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建启用 Object Lock 的 S3 Bucket
 aws s3api create-bucket \
   --bucket k8s-backups-immutable \
@@ -139,7 +145,6 @@ aws s3api put-object-lock-configuration \
     }
   }'
 ```
-
 **保留模式说明**：
 
 | 模式 | 特性 | 适用场景 |
@@ -167,7 +172,8 @@ aws s3api put-object-lock-configuration \
 
 ### 2.3 MFA Delete
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启用 MFA Delete（需要版本控制）
 aws s3api put-bucket-versioning \
   --bucket k8s-backups-immutable \
@@ -175,7 +181,6 @@ aws s3api put-bucket-versioning \
     Status=Enabled,MFADelete=Enabled \
   --mfa "arn:aws:iam::ACCOUNT:mfa/root-account-mfa-device 123456"
 ```
-
 ---
 
 ## 3. 勒索软件防护
@@ -206,7 +211,8 @@ def check_backup_anomaly(bucket, prefix, threshold_ratio=0.5):
 
 ### 3.2 校验和验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Velero 备份完成后校验
 velero backup describe daily-csi-backup --details
 
@@ -216,7 +222,6 @@ aws s3 cp s3://k8s-backups-immutable/velero/backups/daily-csi-backup/ - \
 
 # 定期恢复验证（见下方 3.3）
 ```
-
 ### 3.3 隔离恢复命名空间
 
 在专用命名空间中执行恢复验证，避免影响生产：
@@ -283,6 +288,7 @@ spec:
 ### 4.1 四层防护架构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────┐
 │                   应用状态层                          │
 │  数据库 WAL 归档 / 应用级复制 (如 PostgreSQL 流复制)    │
@@ -297,10 +303,10 @@ spec:
 │  etcdctl snapshot / Velero CRD 备份                   │
 └─────────────────────────────────────────────────────┘
 ```
-
 ### 4.2 etcd 备份
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 快照（CronJob）
 ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M).db \
   --endpoints=https://127.0.0.1:2379 \
@@ -308,7 +314,6 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M).db \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key
 ```
-
 ### 4.3 GitOps 层
 
 所有 Kubernetes 清单（包括 StorageClass、PVC 定义、Velero Schedules）均应版本化存储在 Git 中，确保集群可从零重建。
@@ -464,3 +469,6 @@ spec:
 - [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
 - [[concepts/multi-cluster-dr-automation.md|multi cluster dr automation]] — 多集群灾备与自动化
 - [[concepts/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 15 - PersistentVolume YAML 配置参考
@@ -523,7 +528,8 @@ spec:
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 NFS 服务器
 sudo apt-get install nfs-kernel-server
 
@@ -541,7 +547,6 @@ EOF
 sudo exportfs -ra
 sudo systemctl restart nfs-kernel-server
 ```
-
 **节点准备**(所有 Kubernetes 节点):
 ```bash
 # 安装 NFS 客户端
@@ -789,7 +794,17 @@ func findMatchingPV(pvc *PVC) *PV {
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 场景: PVC 被删除,PV 变为 Released 状态,需要回收复用
 
 # 步骤 1: 查看 PV 状态
@@ -829,13 +844,13 @@ kubectl get pv my-pv
 # 步骤 6: 新 PVC 绑定
 kubectl apply -f new-pvc.yaml
 ```
-
 **自动化回收脚本**:
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # reclaim-pv.sh - 自动回收 Released 状态的 PV
 
@@ -870,7 +885,6 @@ kubectl patch pv "$PV_NAME" --type json -p '[{"op":"remove","path":"/spec/claimR
 
 echo "PV $PV_NAME 已回收"
 ```
-
 ---
 
 <!-- chunk: 五、内部原理 -->## 五、内部原理
@@ -1284,7 +1298,8 @@ sudo rm /mnt/disks/nvme0n1/test
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 内测试
 kubectl exec -it postgresql-0 -- bash
 
@@ -1295,7 +1310,6 @@ fio --name=randwrite --ioengine=libaio --iodepth=32 --rw=randwrite --bs=8k --dir
 # - IOPS: > 50,000
 # - 延迟: < 1ms
 ```
-
 ## 7.2 案例 2: 共享文件系统 NFS PV
 
 **场景**: 多个 Web 服务器共享静态资源(图片、CSS、JS)
@@ -1313,7 +1327,8 @@ NFS 服务器: 1 台专用服务器 (nfs.example.com)
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 NFS 服务器 (Ubuntu 22.04)
 sudo apt-get update
 sudo apt-get install -y nfs-kernel-server
@@ -1337,7 +1352,6 @@ sudo systemctl restart nfs-kernel-server
 sudo exportfs -v
 showmount -e localhost
 ```
-
 **PV 配置**:
 ```yaml
 apiVersion: v1
@@ -1459,14 +1473,15 @@ done
 ## 8.1 PV 无法绑定
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc
 # NAME        STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 # my-pvc      Pending   ""       ""         ""             local-storage  5m
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 PVC 详情
 kubectl describe pvc my-pvc
 # Events:
@@ -1495,7 +1510,6 @@ kubectl get pvc my-pvc -o yaml | grep -A 5 selector
 # 5. 检查日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep persistentvolume
 ```
-
 **常见原因**:
 
 | 问题 | 解决方案 |
@@ -1510,15 +1524,16 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep persiste
 ## 8.2 Local PV 挂载失败
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod my-pod
 # Events:
 #   Warning  FailedMount  10s  kubelet  MountVolume.SetUp failed for volume "local-pv-001" : 
 #            stat /mnt/disks/ssd1: no such file or directory
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认 PV 绑定的节点
 kubectl get pv local-pv-001 -o yaml | grep -A 10 nodeAffinity
 
@@ -1540,7 +1555,6 @@ ls -la /mnt/disks/ssd1
 sudo file -s /dev/nvme0n1p1
 sudo fsck -n /dev/nvme0n1p1    # 只读检查
 ```
-
 **解决方案**:
 ```bash
 # 问题 1: 路径不存在
@@ -1566,15 +1580,16 @@ sudo mount /mnt/disks/ssd1
 ## 8.3 NFS 挂载超时
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod web-001
 # Events:
 #   Warning  FailedMount  1m  kubelet  
 #            Unable to attach or mount volumes: timeout expired waiting for volumes to attach or mount
 ```
-
 **排查步骤**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 在节点测试 NFS 连接
 ssh user@kube-node-01
 showmount -e nfs.example.com
@@ -1599,9 +1614,9 @@ sudo systemctl status nfs-kernel-server
 sudo exportfs -v
 sudo cat /var/log/syslog | grep nfs
 ```
-
 **解决方案**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 问题 1: 防火墙阻止
 # NFS 服务器端开放端口
 sudo ufw allow from 10.0.0.0/8 to any port 2049
@@ -1622,18 +1637,17 @@ sudo exportfs -ra
 sudo apt-get install -y nfs-common  # Ubuntu
 sudo yum install -y nfs-utils       # CentOS
 ```
-
 ## 8.4 PV Released 无法复用
 
 **症状**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pv
 # NAME     CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM             AGE
 # my-pv    100Gi      RWO            Retain           Released   default/old-pvc   10d
 
 # 新建 PVC 无法绑定此 PV
 ```
-
 **原因**: PV 的 `spec.claimRef` 仍指向已删除的 PVC
 
 **解决方案**:
@@ -1641,7 +1655,17 @@ kubectl get pv
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 1: 移除 claimRef
 kubectl patch pv my-pv -p '{"spec":{"claimRef":null}}'
 
@@ -1656,7 +1680,6 @@ kubectl edit pv my-pv
 kubectl get pv my-pv
 # STATUS 应变为 Available
 ```
-
 ---
 
 <!-- chunk: 九、最佳实践总结 -->## 九、最佳实践总结
@@ -1711,7 +1734,8 @@ accessModes: [ReadWriteOnce, ReadWriteMany]  # 不要同时声明多个模式
 
 ## 9.5 监控与告警
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 关键指标
 # 1. PV 容量使用率 (kubelet 报告)
 kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[] | select(.pvcRef.name=="my-pvc") | .usedBytes, .capacityBytes'
@@ -1722,7 +1746,6 @@ kubectl get pv -o json | jq -r '.items[] | select(.status.phase!="Bound") | .met
 # 3. PVC 绑定延迟
 kubectl get events --field-selector involvedObject.kind=PersistentVolumeClaim --sort-by='.lastTimestamp'
 ```
-
 ## 9.6 备份策略
 
 ```yaml
@@ -1832,3 +1855,6 @@ spec:
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

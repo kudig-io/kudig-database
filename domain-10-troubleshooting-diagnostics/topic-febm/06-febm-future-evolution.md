@@ -51,6 +51,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 第六章：未来演进方向
@@ -4032,3 +4037,6 @@ FEBM 不是静态的方法论,而是一个持续演进的生态系统。随着�
 - [[domain-10-troubleshooting-diagnostics/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/07-febm-appendix.md|07-febm-appendix]]
 - [[domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+
+
+<!-- risk-assessed -->

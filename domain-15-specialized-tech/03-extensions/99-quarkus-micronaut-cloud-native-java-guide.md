@@ -56,6 +56,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Quarkus / Micronaut 云原生 Java 框架实践指南
@@ -306,7 +311,8 @@ spec:
 
 ### 4.1 项目创建
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 Micronaut CLI
 mn create-app com.example.my-micronaut-app \
     --features data-jdbc,postgres,management,graalvm,kubernetes
@@ -315,7 +321,6 @@ mn create-app com.example.my-micronaut-app \
 sdk install micronaut
 mn create-function-app com.example.my-function --features aws-lambda
 ```
-
 ### 4.2 Controller
 
 ```java
@@ -560,7 +565,8 @@ public class ReactiveProductController {
 
 ### 8.1 Quarkus Native 编译
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # JVM 模式
 ./mvnw package -Dquarkus.package.type=fast-jar
 
@@ -577,10 +583,10 @@ public class ReactiveProductController {
 # JVM: 启动 1.2s, 内存 120MB, RSS 80MB
 # Native: 启动 0.015s, 内存 30MB, RSS 25MB
 ```
-
 ### 8.2 Micronaut Native 编译
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Native 编译
 ./gradlew nativeCompile
 
@@ -599,7 +605,6 @@ EXPOSE 8080
 USER nonroot:nonroot
 ENTRYPOINT ["/app/my-micronaut-app"]
 ```
-
 ---
 
 <!-- chunk: 九、迁移策略 -->
@@ -710,3 +715,6 @@ Phase 4: 测试与优化
 - 99-graalvm-native-image-guide
 - 99-serverless-faas-guide
 - 01-crd-development-guide
+
+
+<!-- risk-assessed -->

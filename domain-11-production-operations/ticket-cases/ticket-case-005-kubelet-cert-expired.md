@@ -60,6 +60,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -83,7 +88,8 @@ relationships:
 
 ## 诊断步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看节点状态
 kubectl get nodes -l kubernetes.io/hostname~cn-zhangjiakou.172.16.5.3 -o wide
 
@@ -106,7 +112,6 @@ kubectl get csr --all-namespaces | grep -i kubelet | head -20
 # 7. 检查 ACK 证书到期告警
 aliyun cms DescribeMetricList --Namespace acs_k8s --MetricName k8s_cert_expire_days --RegionId cn-zhangjiakou --Dimensions "{\"cluster_id\":\"ack-zyy-prod-05\"}"
 ```
-
 ## 根因分析
 
 kubelet 启动时使用 `/var/lib/kubelet/pki/kubelet-client-current.pem` 作为客户端证书与 apiserver 通信。该证书由 apiserver 的 `certificates.k8s.io` API 签发，默认有效期 1 年。受影响的 3 台节点证书已于 2026-06-25 23:59 过期。
@@ -125,40 +130,49 @@ kubelet 启动时使用 `/var/lib/kubelet/pki/kubelet-client-current.pem` 作为
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 for node in cn-zhangjiakou.172.16.5.31 cn-zhangjiakou.172.16.5.32 cn-zhangjiakou.172.16.5.33; do
   kubectl debug node/$node -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host rm -f /var/lib/kubelet/pki/kubelet-client-current.pem
   kubectl debug node/$node -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host systemctl restart kubelet
 done
 ```
-
 **第二步：批量批准 pending 的 kubelet CSR**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get csr --sort-by='.metadata.creationTimestamp' | grep Pending | awk '{print $1}' | xargs -I {} kubectl certificate approve {}
 ```
-
 **第三步：验证证书已更新**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 for node in cn-zhangjiakou.172.16.5.31 cn-zhangjiakou.172.16.5.32 cn-zhangjiakou.172.16.5.33; do
   echo "=== $node ==="
   kubectl debug node/$node -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates -subject
 done
 ```
-
 **第四步：恢复自动证书审批控制器**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment kube-controller-manager -n kube-system --type='json' -p='[
   {"op": "replace", "path": "/spec/template/spec/containers/0/command", "value": ["kube-controller-manager","--cluster-name=ack-zyy-prod-05","--controllers=*,bootstrapsigner,tokencleaner,csrapproving,csrcleaner","--allocate-node-cidrs=true","--cluster-cidr=10.244.0.0/16"]}
 ]'
 kubectl rollout status deployment/kube-controller-manager -n kube-system --timeout=300s
 ```
-
 **第五步：配置证书到期告警**
 
 ```bash
@@ -168,7 +182,8 @@ aliyun cms PutResourceMetricRule --Name k8s_cert_expire_alert --Namespace acs_k8
 
 ## 验证命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 节点恢复 Ready
 kubectl get nodes -l kubernetes.io/hostname~cn-zhangjiakou.172.16.5.3 -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}'
 
@@ -185,7 +200,6 @@ kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/
 # 5. 证书有效期大于 300 天
 kubectl debug node/cn-zhangjiakou.172.16.5.31 -it --image=registry.aliyuncs.com/acs/busybox -- chroot /host openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text | grep "Not After"
 ```
-
 ## 回复客户话术
 
 > 您好，集群 `ack-zyy-prod-05` 多节点 NotReady 的根因已确认：**kubelet 客户端证书过期，且自动 CSR 审批控制器被误关闭，导致证书未能自动轮转**。
@@ -245,3 +259,6 @@ Kubernetes 节点证书体系包括 kubelet 客户端证书、kubelet 服务器�
 - 节点 NotReady：Terway ENI IP 耗尽
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
+
+
+<!-- risk-assessed -->

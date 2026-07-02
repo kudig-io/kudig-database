@@ -19,6 +19,11 @@ status: resolved
 last_updated: 2026-05-23
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [2026-02-18] HPA Thrashing 导致订单服务 Pod 在 5min 内扩缩 12 次
@@ -40,7 +45,8 @@ last_updated: 2026-05-23
 ## 诊断过程
 
 **11:07** — 查看 HPA 状态：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa order-api-hpa -n prod-order -o yaml
 # ...
 # spec:
@@ -71,9 +77,9 @@ kubectl get hpa order-api-hpa -n prod-order -o yaml
 #         value: 100
 #         periodSeconds: 15
 ```
-
 **11:10** — 查看 HPA 事件：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe hpa order-api-hpa -n prod-order
 # ...
 # Normal  SuccessfulRescale  2m    horizontal-pod-autoscaler  New size: 15; reason: cpu resource utilization (percentage of request) above target
@@ -81,9 +87,9 @@ kubectl describe hpa order-api-hpa -n prod-order
 # Normal  SuccessfulRescale  2m30s horizontal-pod-autoscaler  New size: 15; reason: cpu resource utilization (percentage of request) above target
 # ...（共 12 次 rescale 事件）
 ```
-
 **11:12** — 分析 CPU 利用率波动原因：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top pods -n prod-order -l app=order-api
 # NAME                          CPU(cores)   MEMORY(bytes)
 # order-api-7d9f4b8c5a-abc12   450m         256Mi
@@ -98,7 +104,6 @@ kubectl get deployment order-api -n prod-order -o jsonpath='{.spec.template.spec
 # 扩容后新 Pod 启动，流量被稀释，单 Pod CPU 下降 → 缩容
 # 缩容后流量集中到剩余 Pod，CPU 再次飙升 → 扩容
 ```
-
 **11:15** — 确认 `stabilizationWindowSeconds: 0` 是问题根源。新 Pod 冷启动后 JVM 预热、连接池初始化需要时间，但 HPA 在 15 秒内就判定可以缩容，导致反复震荡。
 
 ## 根因
@@ -115,7 +120,8 @@ HPA `behavior.scaleDown.stabilizationWindowSeconds` 和 `scaleUp.stabilizationWi
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -155,9 +161,9 @@ spec:
       selectPolicy: Max
 EOF
 ```
-
 **11:25** — 验证 HPA 已稳定：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get hpa order-api-hpa -n prod-order
 # NAME            REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 # order-api-hpa   Deployment/order-api   45%/50%   3         15        8          20m
@@ -166,7 +172,6 @@ kubectl get hpa order-api-hpa -n prod-order
 kubectl get events -n prod-order --field-selector reason=SuccessfulRescale --sort-by='.lastTimestamp'
 # （无新事件）
 ```
-
 **11:30** — 压测验证：
 ```bash
 # 使用 k6 进行 5min 压测
@@ -189,3 +194,6 @@ k6 run --vus 100 --duration 5m order-api-smoke-test.js
   4. 编写 HPA 配置检查脚本：`kubectl get hpa --all-namespaces -o yaml | yq '.items[].spec.behavior.scaleDown.stabilizationWindowSeconds'`
 - **相关 Skill**: [[k8s-scaling-guide]]
 - **相关 FTA**: [[hpa-fta]]
+
+
+<!-- risk-assessed -->

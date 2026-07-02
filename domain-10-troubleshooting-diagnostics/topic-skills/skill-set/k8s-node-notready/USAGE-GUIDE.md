@@ -43,6 +43,11 @@ skill_name: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
@@ -355,6 +360,7 @@ SKILL.md Section 6 / reference/remediation-playbook.md
 ### 6.1 完整执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 1. 触发（TRIGGER）
    告警: kube_node_status_condition{condition="Ready",status="false"} > 0
    或
@@ -399,7 +405,6 @@ SKILL.md Section 6 / reference/remediation-playbook.md
    按第 7.2 节监控 5–15 分钟
    按第 7.4 节检查回归检测项
 ```
-
 ### 6.2 短路：直接进入 FTA
 
 当 Agent 有强先验证据时（如告警标签 = `disk_pressure`），可跳过完整诊断，直接进入 FTA：
@@ -636,3 +641,6 @@ fta_mapping:
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

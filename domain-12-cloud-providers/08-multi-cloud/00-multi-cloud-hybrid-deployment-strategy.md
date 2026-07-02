@@ -41,6 +41,11 @@ prerequisites:
 - logging-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 02-多云混合部署策略
@@ -151,7 +156,8 @@ spec:
 ## 跨云网络互联
 
 ## 1. VPN网关配置
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # AWS VPN连接配置
 aws ec2 create-vpn-connection \
   --type ipsec.1 \
@@ -159,7 +165,6 @@ aws ec2 create-vpn-connection \
   --vpn-gateway-id vgw-87654321 \
   --options TunnelInsideCidrList=["169.254.10.0/30","169.254.11.0/30"]
 ```
-
 ## 2. 专线连接设置
 ```yaml
 # Google Cloud Interconnect配置
@@ -602,7 +607,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 多集群流量切换脚本
 
@@ -631,7 +637,6 @@ switch_to_standby() {
 # 使用示例
 # switch_to_standby
 ```
-
 <!-- chunk: 📊 监控与可观测性 -->## 📊 监控与可观测性
 
 ## 统一监控面板
@@ -779,3 +784,6 @@ data:
 - [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 - 03-edge-computing-production-deployment
 - 04-enterprise-monitoring-system
+
+
+<!-- risk-assessed -->

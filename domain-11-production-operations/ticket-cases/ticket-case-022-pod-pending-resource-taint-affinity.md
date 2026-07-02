@@ -68,6 +68,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 022：Pod Pending（资源不足 / taint 不匹配 / 亲和性冲突）
@@ -90,7 +95,8 @@ relationships:
 
 ### 3.1 查看 Pending Pod 状态与事件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 列出 data-platform 下所有 Pod
 kubectl get pod -n data-platform
 
@@ -100,10 +106,10 @@ kubectl describe pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform
 # 同时查看所有 Pending Pod
 kubectl get pod -n data-platform --field-selector=status.phase=Pending
 ```
-
 ### 3.2 检查 Pod 资源请求与限制
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pod YAML
 kubectl get pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform -o yaml
 
@@ -111,10 +117,10 @@ kubectl get pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform -o yaml
 kubectl get deployment spark-etl-driver -n data-platform -o yaml
 kubectl get sparkapplication spark-etl -n data-platform -o yaml
 ```
-
 ### 3.3 检查节点资源与污点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有节点资源使用
 kubectl top node
 
@@ -125,10 +131,10 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints,LABE
 kubectl get node -l dedicated=bigdata
 kubectl describe node $(kubectl get node -l dedicated=bigdata -o jsonpath='{.items[0].metadata.name}')
 ```
-
 ### 3.4 检查命名空间 ResourceQuota 与 LimitRange
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ResourceQuota
 kubectl get resourcequota -n data-platform
 kubectl describe resourcequota -n data-platform
@@ -137,10 +143,10 @@ kubectl describe resourcequota -n data-platform
 kubectl get limitrange -n data-platform
 kubectl describe limitrange -n data-platform
 ```
-
 ### 3.5 查看调度器日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kube-scheduler Pod 日志（如使用 ACK 托管版，需通过 ASO 或专有云平台查看）
 kubectl logs -n kube-system -l component=kube-scheduler --tail=200
 
@@ -148,15 +154,14 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=200
 # aliyun cs k8s 命令行也可获取集群事件
 aliyun cs k8s GET /clusters/<cluster-id>/events
 ```
-
 ### 3.6 检查 Pod 亲和性与容忍配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 提取 Pod 的 affinity 与 tolerations
 kubectl get pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform -o jsonpath='{.spec.affinity}' | python -m json.tool
 kubectl get pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform -o jsonpath='{.spec.tolerations}' | python -m json.tool
 ```
-
 ### 3.7 诊断过程补充说明
 
 Pod Pending 的排障核心在于逐条解读 `kubectl describe pod` 输出的 Events 中 `FailedScheduling` 提示。在阿里云 ACK 专有云环境中，调度器通常采用默认的 kube-scheduler，其过滤阶段会依次检查 Predicates（节点资源、污点容忍、亲和性、卷拓扑等）。如果同一 Pod 同时命中多个失败原因，事件会按顺序列出最常见的一条或几条，因此不能仅看第一条提示就下结论，需要结合节点状态、Pod 规格与集群事件综合判断。
@@ -191,7 +196,8 @@ Pod Pending 的排障核心在于逐条解读 `kubectl describe pod` 输出的 E
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为当前 SparkApplication 添加 toleration
 cat <<'EOF' | kubectl patch sparkapplication spark-etl -n data-platform --type=merge --patch-file=/dev/stdin
 spec:
@@ -212,10 +218,10 @@ EOF
 # 2. 删除 Pending 的 Driver Pod，触发重新创建
 kubectl delete pod spark-etl-driver-7d9f4b8c5-x2k9m -n data-platform
 ```
-
 ### 5.2 扩容大数据节点池
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 通过 ACK 控制台或 aliyun CLI 扩容 bigdata 节点池
 aliyun cs k8s PUT /clusters/<cluster-id>/nodepools/<nodepool-id> \
   --header "Content-Type=application/json" \
@@ -224,13 +230,13 @@ aliyun cs k8s PUT /clusters/<cluster-id>/nodepools/<nodepool-id> \
 # 等待节点 Ready
 kubectl get node -l dedicated=bigdata -w
 ```
-
 ### 5.3 调整 Spark Driver 资源请求
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 若业务可接受，适当降低 Driver 资源请求以提升可调度性
 cat <<'EOF' | kubectl patch sparkapplication spark-etl -n data-platform --type=merge --patch-file=/dev/stdin
 spec:
@@ -242,13 +248,13 @@ spec:
     memory: "4096m"
 EOF
 ```
-
 ### 5.4 调整 Pod 反亲和性策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 将反亲和性从 required 改为 preferred，提升调度成功率
 cat <<'EOF' | kubectl patch sparkapplication spark-etl -n data-platform --type=merge --patch-file=/dev/stdin
 spec:
@@ -267,10 +273,10 @@ spec:
               topologyKey: kubernetes.io/hostname
 EOF
 ```
-
 ## 6. 验证命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 确认新 Driver Pod 已 Running
 kubectl get pod -n data-platform -l spark-role=driver
 
@@ -289,7 +295,6 @@ kubectl get pod -n data-platform --field-selector=status.phase=Pending
 # 6. 查看调度事件确认无冲突
 kubectl get events -n data-platform --sort-by='.lastTimestamp' | tail -30
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-022 已处理完成。
@@ -341,3 +346,6 @@ kubectl get events -n data-platform --sort-by='.lastTimestamp' | tail -30
 - Pod Pending：资源不足与 Taint 不匹配
 - [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 - Pod Pending：资源不足与污点不匹配
+
+
+<!-- risk-assessed -->

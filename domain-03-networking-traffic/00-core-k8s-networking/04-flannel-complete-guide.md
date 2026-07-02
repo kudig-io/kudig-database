@@ -79,6 +79,11 @@ cross_refs:
   label: flanneld 参数详解
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 142 - Flannel 完整指南 (Flannel Complete Guide)
@@ -455,7 +460,8 @@ spec:
 
 ### 6.1 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Flannel Pod 状态
 kubectl get pods -n kube-flannel -o wide
 
@@ -481,7 +487,6 @@ cat /etc/cni/net.d/10-flannel.conflist
 tcpdump -i flannel.1 -n
 tcpdump -i eth0 -n port 8472  # VXLAN UDP 端口
 ```
-
 ### 6.2 常见问题
 
 | 问题 | 原因 | 解决方案 |
@@ -514,11 +519,11 @@ Flannel 本身不支持 NetworkPolicy，需配合 Calico:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Canal (Flannel + Calico NetworkPolicy)
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/canal.yaml
 ```
-
 ---
 
 <!-- chunk: 9. 进阶专题 -->
@@ -563,3 +568,6 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -39,6 +39,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: Kubeconfig Generation 源码分析
@@ -292,7 +297,8 @@ users:
 
 **Controller Manager 权限**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 证书身份:
 # CN=system:kube-controller-manager
 # 绑定的 ClusterRole: system:kube-controller-manager
@@ -300,7 +306,6 @@ users:
 # 查看权限:
 kubectl auth can-i --list --as=system:kube-controller-manager
 ```
-
 ### 2.4 scheduler.conf
 
 ```yaml
@@ -440,7 +445,8 @@ openssl x509 -in <client-cert> -noout -subject
 
 ### 6.1 多集群管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前 context
 kubectl config current-context
 
@@ -462,7 +468,6 @@ kubectl config delete-context <context-name>
 kubectl config unset users.<user-name>
 kubectl config unset clusters.<cluster-name>
 ```
-
 ### 6.2 证书刷新
 
 ```bash
@@ -511,3 +516,6 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]
+
+
+<!-- risk-assessed -->

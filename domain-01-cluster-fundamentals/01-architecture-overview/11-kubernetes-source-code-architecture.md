@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 11 - [[Kubernetes|Kubernetes]] 源码架构深度分析
@@ -100,7 +105,8 @@ kubernetes/
 - **api/storage/v1/**: 存储相关 API
 
 #### 组件入口 (cmd/)
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cmd/
 ├── kube-apiserver/        # API Server 组件
 ├── kube-controller-manager/ # 控制器管理器
@@ -109,7 +115,6 @@ cmd/
 ├── kube-proxy/           # 网络代理
 └── kubectl/              # 命令行工具
 ```
-
 #### 核心功能包 (pkg/)
 ```bash
 pkg/
@@ -685,3 +690,6 @@ Signed-off-by: Your Name <email@example.com>
 - 10-windows-containers-support
 - 12-cluster-deployment-patterns
 - 13-performance-tuning-guide
+
+
+<!-- risk-assessed -->

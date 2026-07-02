@@ -75,6 +75,11 @@ cross_refs:
   label: '运维技能: 01-node-notready'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - Node NotReady 状态深度诊断 (Node NotReady Diagnosis)
@@ -262,6 +267,7 @@ cross_refs:
 ### 2.1 快速诊断流程图
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
 │                          Node NotReady 快速诊断决策树                                    │
 ├─────────────────────────────────────────────────────────────────────────────────────────┤
@@ -354,7 +360,6 @@ cross_refs:
 │                                                                                          │
 └─────────────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 2.2 问题原因分类矩阵
 
 | 原因类别 | 具体原因 | 发生频率 | 影响范围 | 诊断难度 | 恢复难度 |
@@ -391,7 +396,8 @@ cross_refs:
 
 ### 3.1 kubelet 状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # kubelet-diagnosis.sh - kubelet 完整诊断脚本
 
@@ -476,7 +482,6 @@ echo ""
 echo "=== 8. Node 状态同步 ==="
 journalctl -u kubelet --since "5 minutes ago" --no-pager 2>/dev/null | grep -E "node status|heartbeat" | tail -5
 ```
-
 ### 3.2 kubelet 常见错误及解决
 
 | 错误日志模式 | 原因 | 解决方案 |
@@ -591,7 +596,17 @@ shutdownGracePeriodCriticalPods: 20s
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # kubelet-recovery.sh - kubelet 恢复脚本
 
@@ -642,7 +657,6 @@ echo "检查节点状态 (从外部 kubectl):"
 echo "请在可访问 API Server 的机器上执行:"
 echo "  kubectl get node $(hostname) -o wide"
 ```
-
 ---
 
 <!-- chunk: 4. 容器运行时诊断 -->
@@ -650,7 +664,8 @@ echo "  kubectl get node $(hostname) -o wide"
 
 ### 4.1 containerd 完整诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # containerd-full-diagnosis.sh
 
@@ -736,7 +751,6 @@ echo "=== 10. CRI 响应时间测试 ==="
 echo "执行 crictl info..."
 time (crictl info > /dev/null 2>&1)
 ```
-
 ### 4.2 containerd 问题解决
 
 | 问题 | 症状 | 诊断命令 | 解决方案 |
@@ -752,7 +766,17 @@ time (crictl info > /dev/null 2>&1)
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # containerd 常见修复操作
 
 # 1. 重启 containerd
@@ -785,7 +809,6 @@ ctr -n k8s.io snapshots cleanup
 # systemctl start kubelet
 # # 需要重新拉取所有镜像
 ```
-
 ### 4.3 containerd 配置检查
 
 ```toml
@@ -992,7 +1015,17 @@ done
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # resource-cleanup.sh - 资源清理脚本
 
@@ -1062,7 +1095,6 @@ echo ""
 echo "内存使用:"
 free -h
 ```
-
 ---
 
 <!-- chunk: 6. 网络问题诊断 -->
@@ -1152,7 +1184,8 @@ fi
 
 ### 6.2 CNI 插件诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # cni-diagnosis.sh - CNI 插件诊断
 
@@ -1210,10 +1243,10 @@ echo ""
 echo "=== 4. CNI 相关日志 ==="
 journalctl -u kubelet --since "10 minutes ago" --no-pager 2>/dev/null | grep -i cni | tail -10
 ```
-
 ### 6.3 Calico 网络诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # calico-diagnosis.sh
 
@@ -1249,7 +1282,6 @@ echo ""
 echo "=== 6. Calico Pod 状态 ==="
 kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
 ```
-
 ---
 
 <!-- chunk: 7. 证书问题诊断 -->
@@ -1342,7 +1374,17 @@ fi
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # certificate-renewal.sh - 证书更新
 
@@ -1384,7 +1426,6 @@ echo "=== 5. 验证 ==="
 echo "验证节点状态: kubectl get nodes"
 echo "验证证书有效期: kubeadm certs check-expiration"
 ```
-
 ---
 
 <!-- chunk: 8. 内核与系统问题 -->
@@ -1392,7 +1433,17 @@ echo "验证证书有效期: kubeadm certs check-expiration"
 
 ### 8.1 内核问题诊断
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # kernel-diagnosis.sh - 内核问题诊断
 
@@ -1474,7 +1525,6 @@ sysctl net.netfilter.nf_conntrack_max 2>/dev/null
 sysctl fs.inotify.max_user_watches 2>/dev/null
 sysctl fs.inotify.max_user_instances 2>/dev/null
 ```
-
 ### 8.2 cgroup 问题诊断
 
 ```bash
@@ -1527,7 +1577,8 @@ grep -A 5 "SystemdCgroup" /etc/containerd/config.toml 2>/dev/null
 
 ### 9.1 ACK 节点诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ack-node-diagnosis.sh - ACK 节点诊断
 
@@ -1591,7 +1642,6 @@ echo ""
 echo "=== 7. 节点状态 ==="
 kubectl get node $(hostname) -o wide 2>/dev/null
 ```
-
 ### 9.2 ACK 特定问题解决
 
 | 问题 | 症状 | 原因 | 解决方案 |
@@ -1606,7 +1656,17 @@ kubectl get node $(hostname) -o wide 2>/dev/null
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # ACK 常用运维命令
 
 # 查看节点池
@@ -1626,7 +1686,6 @@ kubectl delete node <node-name>
 # bash installer.sh
 # ack-diagnose node --cluster-id <cluster-id> --node-name <node-name>
 ```
-
 ---
 
 <!-- chunk: 10. 自动化诊断工具 -->
@@ -1637,7 +1696,17 @@ kubectl delete node <node-name>
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # node-notready-full-diagnosis.sh - Node NotReady 完整诊断
 # 版本: 1.0 | 适用: Kubernetes v1.25-v1.32
@@ -1775,7 +1844,6 @@ diagnose() {
 diagnose 2>&1 | tee "$OUTPUT_FILE"
 log "诊断报告已保存: $OUTPUT_FILE"
 ```
-
 ---
 
 <!-- chunk: 11. 监控告警配置 -->
@@ -1921,7 +1989,17 @@ spec:
 > - `kubectl cordon`：标记节点不可调度
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # node-recovery.sh
 
@@ -1985,13 +2063,22 @@ echo "=== 5. 最终状态 ==="
 kubectl get node $NODE_NAME
 kubectl get pods -A -o wide --field-selector spec.nodeName=$NODE_NAME | head -20
 ```
-
 ### 12.2 紧急重启流程
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # emergency-reboot.sh
 
@@ -2019,7 +2106,6 @@ done
 kubectl uncordon $NODE_NAME
 kubectl get node $NODE_NAME
 ```
-
 ---
 
 <!-- chunk: 13. 版本特定变更 -->
@@ -2128,6 +2214,7 @@ shutdownGracePeriodByPodPriority:
 ### 15.2 快速诊断检查表
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 □ 能 SSH 登录节点?
   ├── Yes → 继续
   └── No  → 检查网络/云平台
@@ -2156,7 +2243,6 @@ shutdownGracePeriodByPodPriority:
   ├── 检查 CNI Pod 状态
   └── 异常 → 重启 CNI
 ```
-
 ### 15.3 相关文档
 
 | 主题 | 文档编号 | 说明 |
@@ -2203,3 +2289,6 @@ shutdownGracePeriodByPodPriority:
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+
+
+<!-- risk-assessed -->

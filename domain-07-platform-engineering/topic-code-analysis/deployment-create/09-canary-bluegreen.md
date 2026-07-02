@@ -63,6 +63,11 @@ related_topics:
 - revision-history
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
@@ -199,7 +204,8 @@ Service (selector: app=web)
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 当前稳定版本
 kubectl get deployment web-stable
 # NAME         READY   UP-TO-DATE   AVAILABLE
@@ -224,7 +230,6 @@ kubectl scale deployment web-stable --replicas=5
 kubectl scale deployment web-canary --replicas=10
 kubectl delete deployment web-stable
 ```
-
 ### 双 Deployment 配置
 
 ```yaml
@@ -300,7 +305,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 触发更新，立即暂停
 kubectl set image deployment/web web=myapp:v2.0.0
 kubectl rollout pause deployment/web
@@ -318,20 +324,19 @@ kubectl rollout resume deployment/web
 # 如发现问题立即回滚
 kubectl rollout undo deployment/web
 ```
-
 ### pause 命令的 API 操作
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # kubectl rollout pause 本质上执行的操作
 kubectl patch deployment web -p '{"spec":{"paused":true}}'
 
 # kubectl rollout resume 本质上执行的操作
 kubectl patch deployment web -p '{"spec":{"paused":false}}'
 ```
-
 ## 方案三：蓝绿发布（Service Selector 切换）
 
 ### 实现原理
@@ -350,7 +355,8 @@ Service (selector: 动态切换)
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 当前蓝版本生产中
 kubectl get deployment web-blue
 kubectl get svc web  # selector: version=blue
@@ -368,7 +374,6 @@ kubectl patch svc web -p '{"spec":{"selector":{"version":"green"}}}'
 # 5. 确认无误后清理蓝版本
 kubectl delete deployment web-blue
 ```
-
 ### 蓝绿发布配置
 
 ```yaml
@@ -504,3 +509,6 @@ flowchart TD
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/linkerd.md|Linkerd]]
 - [[entities/istio.md|Istio]]
+
+
+<!-- risk-assessed -->

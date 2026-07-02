@@ -38,6 +38,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: K8S 运维诊断技能库
@@ -127,7 +132,8 @@ k8s_versions:
 
 **触发条件**: Pod 状态为 Pending 超过 30 秒
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认状态
 kubectl get pod <pod> -n <ns> -o wide
 
@@ -137,7 +143,6 @@ kubectl get events -n <ns> --field-selector involvedObject.name=<pod> --sort-by=
 
 # Step 3: 根据事件分支诊断
 ```
-
 | 事件关键词 | 根因 | 修复方向 |
 |-----------|------|---------|
 | `Insufficient cpu/memory` | 节点资源不足 | 扩容节点 / 调整 requests |
@@ -151,7 +156,8 @@ kubectl get events -n <ns> --field-selector involvedObject.name=<pod> --sort-by=
 
 **触发条件**: Pod 状态为 CrashLoopBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看上一次日志（关键！）
 kubectl logs <pod> -n <ns> --previous --tail=100
 
@@ -161,7 +167,6 @@ kubectl get pod <pod> -n <ns> -o jsonpath='{.status.containerStatuses[*].lastSta
 # Step 3: 检查探针配置
 kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[*].livenessProbe}'
 ```
-
 | 退出码 | 含义 | 常见原因 |
 |--------|------|---------|
 | 0 | 正常退出 | 应用主动退出，检查 restartPolicy |
@@ -174,7 +179,8 @@ kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[*].livenessProbe}'
 
 **触发条件**: Pod 因 OOM 被终止
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认 OOM
 kubectl describe pod <pod> -n <ns> | grep -A 5 "Last State:"
 kubectl get events -n <ns> --field-selector reason=OOMKilling
@@ -186,7 +192,6 @@ kubectl top pod <pod> -n <ns> --containers
 # Step 3: 分析内存趋势（Prometheus）
 # sum(container_memory_working_set_bytes{namespace="<ns>",pod="<pod>"}) by (container)
 ```
-
 **修复决策树**:
 ```
 实际使用 > limits?
@@ -201,7 +206,8 @@ kubectl top pod <pod> -n <ns> --containers
 
 ### 2.4 ImagePullBackOff
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 检查镜像名称和 tag
 kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[*].image}'
 
@@ -212,7 +218,6 @@ kubectl get secret <secret> -n <ns> -o jsonpath='{.type}'
 # Step 3: 检查事件中的详细错误
 kubectl describe pod <pod> -n <ns> | grep -A 5 "Failed"
 ```
-
 | 错误信息 | 根因 | 修复 |
 |---------|------|------|
 | `repository does not exist` | 镜像名称错误 | 核实镜像地址 |
@@ -224,7 +229,8 @@ kubectl describe pod <pod> -n <ns> | grep -A 5 "Failed"
 
 ### 3.1 Node NotReady
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认状态和 Conditions
 kubectl get nodes -o wide
 kubectl get node <node> -o jsonpath='{.status.conditions}' | python3 -m json.tool
@@ -239,9 +245,9 @@ kubectl get events --field-selector involvedObject.name=<node> --sort-by=.lastTi
 kubectl top node <node>
 kubectl describe node <node> | grep -A 5 "Allocated resources:"
 ```
-
 **NotReady 根因决策树**:
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Node NotReady
 ├── kubelet 不响应
 │   ├── kubelet 进程挂了 → 重启 kubelet
@@ -258,12 +264,12 @@ Node NotReady
     ├── CNI 插件异常 → 检查 CNI Pod 状态
     └── 网络配置错误 → 检查路由和 iptables
 ```
-
 ## 4. Network 故障诊断 SOP
 
 ### 4.1 Service 不通
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 确认 Service 和 Endpoints
 kubectl get svc <svc> -n <ns>
 kubectl get endpoints <svc> -n <ns>
@@ -280,10 +286,10 @@ kubectl run net-test --image=busybox:1.36 --rm -it --restart=Never -- wget -qO- 
 # Step 5: 检查 NetworkPolicy
 kubectl get networkpolicy -n <ns>
 ```
-
 ### 4.2 DNS 解析失败
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: CoreDNS 状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
@@ -294,12 +300,12 @@ kubectl get configmap coredns -n kube-system -o yaml
 # Step 3: DNS 测试
 kubectl run dns-debug --image=busybox:1.36 --rm -it --restart=Never -- nslookup kubernetes.default
 ```
-
 ## 5. Storage 故障诊断 SOP
 
 ### 5.1 PVC Pending
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 查看 PVC 状态
 kubectl get pvc -n <ns>
 kubectl describe pvc <pvc> -n <ns>
@@ -314,12 +320,12 @@ kubectl get pv | grep <pvc>
 # Step 4: CSI 驱动状态
 kubectl get pods -n kube-system -l app=csi-*
 ```
-
 ## 6. Performance 诊断 SOP
 
 ### 6.1 API Server 延迟高
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Step 1: 确认延迟
 # histogram_quantile(0.99, sum(rate(apiserver_request_duration_seconds_bucket[5m])) by (le, verb))
 
@@ -332,7 +338,6 @@ kubectl get pods -n kube-system -l app=csi-*
 # Step 4: 检查审计日志量
 kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 ```
-
 ## 7. 输出格式模板
 
 所有诊断结果必须按以下格式输出：
@@ -395,3 +400,6 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 - MEMORY
 - SOUL
 - TOOLS
+
+
+<!-- risk-assessed -->

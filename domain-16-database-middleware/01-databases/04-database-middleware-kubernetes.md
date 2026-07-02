@@ -58,6 +58,11 @@ cross_refs:
   label: '速查卡: sql'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 数据库中间件 [[Kubernetes|Kubernetes]] 企业级实践
@@ -162,7 +167,8 @@ graph TB
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Install Vitess Operator
 kubectl apply -f https://raw.githubusercontent.com/vitessio/vitess/v21.0.0/deploy/operator.yaml
 
@@ -179,7 +185,6 @@ echo "Expected output:"
 echo "NAME                                      READY   STATUS    RESTARTS   AGE"
 echo "vitess-operator-controller-manager-xxx   1/1     Running   0          60s"
 ```
-
 ## Vitess 集群部署
 
 ```yaml
@@ -1065,7 +1070,8 @@ groups:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # vitess_ops.sh - Vitess Operations Management Script
 set -euo pipefail
@@ -1134,7 +1140,6 @@ case "${1:-status}" in
     *)       echo "Usage: $0 {status|split <table> <keyspace>|reshard <source> <target>}" ;;
 esac
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -1280,3 +1285,6 @@ echo "=== Diagnostic Complete ==="
 - 03-distributed-database-enterprise
 - 05-mongodb-enterprise-database
 - 06-redis-enterprise-cache
+
+
+<!-- risk-assessed -->

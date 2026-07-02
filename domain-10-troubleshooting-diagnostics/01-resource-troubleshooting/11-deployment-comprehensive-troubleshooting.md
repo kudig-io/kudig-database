@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: deployment'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 11 - Deployment 全面故障排查 (Deployment Comprehensive Troubleshooting)
@@ -114,6 +119,7 @@ cross_refs:
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      Deployment 故障排查流程                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -142,7 +148,6 @@ cross_refs:
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 2. 副本数异常排查 (Replica Issues) -->
@@ -150,7 +155,8 @@ cross_refs:
 
 ### 2.1 副本为0的原因
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查Deployment ===
 kubectl get deployment <name> -n <namespace>
 kubectl describe deployment <name> -n <namespace>
@@ -169,7 +175,6 @@ kubectl get hpa -n <namespace>
 # 3. 暂停状态
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.paused}'
 ```
-
 ### 2.2 副本数不足原因
 
 | 原因 | 检查方法 | 解决方案 |
@@ -209,7 +214,8 @@ kubectl get configmap cluster-autoscaler-status -n kube-system -o yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ❌ 问题现象
 # Deployment更新卡在50%进度，无法完成也无法回滚
 
@@ -228,10 +234,10 @@ kubectl logs -l app=my-app -n production --tail=100
 # 强制重启：kubectl rollout restart deployment/my-app -n production
 # 手动回滚：kubectl rollout undo deployment/my-app -n production --to-revision=3
 ```
-
 ### 2.4 副本数超出预期
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查HPA ===
 kubectl get hpa <name> -n <namespace>
 kubectl describe hpa <name> -n <namespace>
@@ -242,7 +248,6 @@ kubectl get deployment -n <namespace> -l app=<label>
 # === 检查ReplicaSet ===
 kubectl get rs -n <namespace> -l app=<label>
 ```
-
 ---
 
 <!-- chunk: 3. 滚动更新问题 (Rolling Update Issues) -->
@@ -250,7 +255,8 @@ kubectl get rs -n <namespace> -l app=<label>
 
 ### 3.1 更新卡住排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查rollout状态 ===
 kubectl rollout status deployment/<name> -n <namespace>
 
@@ -264,7 +270,6 @@ kubectl describe rs <new-rs> -n <namespace>
 # === 查看新Pod状态 ===
 kubectl get pods -n <namespace> -l app=<label> --sort-by=.metadata.creationTimestamp
 ```
-
 ### 3.2 更新卡住的原因
 
 | 原因 | 症状 | 解决方案 |
@@ -306,7 +311,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看历史版本 ===
 kubectl rollout history deployment/<name> -n <namespace>
 
@@ -322,13 +328,13 @@ kubectl rollout undo deployment/<name> -n <namespace> --to-revision=2
 # === 检查回滚状态 ===
 kubectl rollout status deployment/<name> -n <namespace>
 ```
-
 ### 4.2 回滚失败排查
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl scale --replicas=0`：缩容到 0，立即停服
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 检查回滚是否成功 ===
 kubectl rollout status deployment/<name> -n <namespace>
 
@@ -343,7 +349,6 @@ kubectl describe deployment <name> -n <namespace> | grep -A10 Events
 kubectl scale deployment <name> -n <namespace> --replicas=0
 kubectl scale deployment <name> -n <namespace> --replicas=3
 ```
-
 ---
 
 <!-- chunk: 5. 探针问题排查 (Probe Issues) -->
@@ -354,7 +359,8 @@ kubectl scale deployment <name> -n <namespace> --replicas=3
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 查看探针配置 ===
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[0].livenessProbe}'
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[0].readinessProbe}'
@@ -366,7 +372,6 @@ kubectl describe pod <pod-name> -n <namespace> | grep -E "Liveness|Readiness"
 kubectl exec -it <pod-name> -n <namespace> -- curl -v http://localhost:<port>/<path>
 kubectl exec -it <pod-name> -n <namespace> -- cat <file-path>  # exec探针
 ```
-
 ### 5.2 探针问题解决
 
 | 问题 | 症状 | 解决方案 |
@@ -415,7 +420,8 @@ spec:
 
 ### 6.1 配额检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查命名空间配额 ===
 kubectl describe quota -n <namespace>
 
@@ -425,10 +431,10 @@ kubectl describe limitrange -n <namespace>
 # === 检查Deployment资源请求 ===
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[0].resources}'
 ```
-
 ### 6.2 配额不足解决
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 查看当前使用量 ===
 kubectl describe quota -n <namespace>
 # Used vs Hard
@@ -439,7 +445,6 @@ kubectl describe quota -n <namespace>
 # 3. 降低资源requests
 # 4. 清理未使用资源
 ```
-
 ---
 
 <!-- chunk: 7. 亲和性与调度问题 (Affinity & Scheduling Issues) -->
@@ -447,7 +452,8 @@ kubectl describe quota -n <namespace>
 
 ### 7.1 调度失败排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查nodeSelector ===
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.nodeSelector}'
 
@@ -461,7 +467,6 @@ kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.t
 kubectl get nodes --show-labels
 kubectl describe nodes | grep -E "Taints|Labels"
 ```
-
 ### 7.2 常见调度问题
 
 | 问题 | 原因 | 解决方案 |
@@ -478,7 +483,8 @@ kubectl describe nodes | grep -E "Taints|Labels"
 
 ### 8.1 镜像拉取失败
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 检查镜像配置 ===
 kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.containers[0].image}'
 
@@ -491,7 +497,6 @@ kubectl get deployment <name> -n <namespace> -o jsonpath='{.spec.template.spec.i
 # === 手动测试拉取 ===
 crictl pull <image>
 ```
-
 ### 8.2 镜像问题解决
 
 | 问题 | 解决方案 |
@@ -509,7 +514,8 @@ crictl pull <image>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === Deployment状态 ===
 kubectl get deployment <name> -n <namespace> -o wide
 kubectl describe deployment <name> -n <namespace>
@@ -539,13 +545,13 @@ kubectl rollout restart deployment/<name> -n <namespace>
 # === 扩缩容 ===
 kubectl scale deployment <name> -n <namespace> --replicas=5
 ```
-
 ---
 
 <!-- chunk: 10. 一键诊断脚本 (Diagnostic Script) -->
 ## 10. 一键诊断脚本 (Diagnostic Script)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 DEPLOY=$1
 NS=${2:-default}
@@ -568,7 +574,6 @@ kubectl describe deployment $DEPLOY -n $NS | grep -A15 "Events:"
 echo -e "\n=== Rollout Status ==="
 kubectl rollout status deployment/$DEPLOY -n $NS --timeout=5s 2>&1 || true
 ```
-
 ---
 
 <!-- chunk: 4. 常见问题解决方案 (Common Solutions) -->
@@ -711,7 +716,8 @@ kubectl rollout status deployment/$DEPLOY -n $NS --timeout=5s 2>&1 || true
 
 ### 5.1 Deployment 健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # deployment_health_check.sh
 
@@ -743,10 +749,10 @@ kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$DEPLOYMEN
 echo -e "\n--- Resource Usage ---"
 kubectl top pods -n $NAMESPACE -l app=$DEPLOYMENT_NAME 2>/dev/null || echo "Metrics server not available"
 ```
-
 ### 5.2 快速故障诊断命令集合
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Deployment 故障诊断一键命令
 alias deploy_debug='
   echo "=== Deployment Debug Commands ===";
@@ -756,7 +762,6 @@ alias deploy_debug='
   kubectl get events --sort-by=".lastTimestamp"
 '
 ```
-
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)
@@ -790,3 +795,5 @@ alias deploy_debug='
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/13-certificate-troubleshooting.md|13-certificate-troubleshooting]]
 
 ```
+
+<!-- risk-assessed -->

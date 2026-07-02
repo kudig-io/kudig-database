@@ -56,6 +56,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Velero 企业级备份恢复实践指南
@@ -280,7 +285,8 @@ priorityClassName: "system-cluster-critical"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装命令
 helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
 helm install velero vmware-tanzu/velero \
@@ -294,7 +300,6 @@ velero version
 velero backup-location get
 velero snapshot-location get
 ```
-
 ## VolumeSnapshotClass 配置
 
 ```yaml
@@ -465,7 +470,8 @@ spec:
 
 ## 单命名空间恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 列出可用备份
 velero backup get
 
@@ -490,10 +496,10 @@ velero restore create production-restore-$(date +%s) \
   --existing-resource-policy update \
   --wait
 ```
-
 ## 完整集群灾难恢复
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # full_cluster_dr_recovery.sh - 完整集群灾难恢复脚本
 set -euo pipefail
@@ -546,10 +552,10 @@ done
 
 echo "=== 集群灾难恢复完成 ==="
 ```
-
 ## 跨集群迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 源集群: 创建迁移备份
 velero backup create migrate-app-$(date +%s) \
   --include-namespaces my-application \
@@ -572,7 +578,6 @@ velero restore create migrate-restore \
 # 验证
 kubectl get all -n my-application-new
 ```
-
 ---
 
 <!-- chunk: PV 持久卷备份策略 -->## PV 持久卷备份策略
@@ -633,7 +638,17 @@ velero_dr_drill:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 #!/bin/bash
 # velero_dr_drill.sh - Velero 灾备演练自动化脚本
 set -euo pipefail
@@ -704,7 +719,6 @@ esac
 
 echo "=== 演练完成 ==="
 ```
-
 ---
 
 <!-- chunk: 监控告警 -->## 监控告警
@@ -846,7 +860,8 @@ spec:
 > - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd 灾难恢复脚本
 set -euo pipefail
@@ -885,7 +900,6 @@ systemctl start kube-controller-manager kube-scheduler
 echo "=== etcd 恢复完成 ==="
 kubectl get nodes
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -933,7 +947,8 @@ kubectl get nodes
 
 ## 常见问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Velero 故障排查脚本
 
@@ -967,7 +982,6 @@ kubectl get volumesnapshots -A
 echo "[8] 最近恢复"
 velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 ```
-
 ## 故障排查手册
 
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
@@ -1015,3 +1029,6 @@ velero restore get --sort-by=.metadata.creationTimestamp | tail -5
 ## Related
 
 - [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+
+
+<!-- risk-assessed -->

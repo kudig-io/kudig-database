@@ -15,6 +15,11 @@ updated: 2026-05-24
 last_updated: 2026-05-24
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # FinOps 与 GreenOps 实践
@@ -87,11 +92,11 @@ FOCUS（FinOps Open Cost and Usage Specification）是 FinOps 基金会发布的
 ### 2.3 多云厂商支持
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 AWS:  CUR 2.0 → FOCUS 导出（原生支持 2024+）
 Azure: Cost Management API → FOCUS 导出（2024+原生支持）
 GCP:  BigQuery Billing Export → FOCUS 映射（社区工具 + 官方适配器）
 ```
-
 ### 2.4 实践建议
 
 1. **统一导入管道**：使用 OpenCost 或 CloudZero 等工具将 CUR/ACR/Billing Export 转换为 FOCUS 格式
@@ -580,3 +585,6 @@ spec:
 - [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]] — 容量规划与成本优化
 - [[concepts/storage-performance-optimization.md|storage performance optimization]] — 存储性能优化策略
 - [[concepts/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施
+
+
+<!-- risk-assessed -->

@@ -29,6 +29,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Storage Capacity（存储容量）
@@ -119,14 +124,14 @@ spec:
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看存储容量对象
 kubectl get csistoragecapacity -A
 
 # 查看特定 SC 的容量
 kubectl get csistoragecapacity -A -o custom-columns='SC:.storageClassName,CAPACITY:.capacity,NODES:.nodeTopology'
 ```
-
 ## 交叉引用
 
 - [存储类](./storage-classes.md) — WaitForFirstConsumer 绑定模式
@@ -142,3 +147,6 @@ kubectl get csistoragecapacity -A -o custom-columns='SC:.storageClassName,CAPACI
 - [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
 - [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
 - [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+
+
+<!-- risk-assessed -->

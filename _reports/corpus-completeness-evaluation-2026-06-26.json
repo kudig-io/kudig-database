@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-06-26T12:00:00+08:00",
+  "vault_path": "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database",
+  "overall_score": 89.1,
+  "scores": {
+    "scale": 97.6,
+    "structure_health": 100.0,
+    "concept_coverage": 98.0,
+    "ticket_readiness": 100,
+    "aliyun_coverage": 39.0,
+    "rag_readiness": 100.0
+  },
+  "scale": {
+    "total_pages": 4881,
+    "total_tokens": 17250307,
+    "total_chars": 69008570
+  },
+  "structure": {
+    "broken_links": 0,
+    "missing_frontmatter": 0,
+    "missing_summary": 2,
+    "missing_tier": 2,
+    "orphans": 1717,
+    "core_pages": 1099,
+    "supporting_pages": 1330,
+    "peripheral_pages": 2450
+  },
+  "content_coverage": {
+    "key_concepts_checked": 50,
+    "key_concepts_hit": 49,
+    "coverage_ratio": 0.98
+  },
+  "ticket_agent": {
+    "ticket_pages": 58,
+    "qa_pairs_estimate": 0,
+    "skill_docs": 507
+  },
+  "aliyun": {
+    "aliyun_pages": 18,
+    "ack_pages": 99
+  },
+  "rag": {
+    "pages_with_summary": 4879,
+    "pages_with_tags": 4881,
+    "pages_with_category": 4881
+  },
+  "top_categories": {
+    "release-notes": 1322,
+    "general": 717,
+    "dictionary": 548,
+    "entities": 284,
+    "skills": 160,
+    "learning": 149,
+    "synthesis": 135,
+    "concepts": 117,
+    "structural-troubleshooting": 72,
+    "fta": 62,
+    "moc": 60,
+    "troubleshooting": 60,
+    "domain": 50,
+    "reference": 45,
+    "networking": 40
+  },
+  "top_tags": {
+    "k8s": 3718,
+    "release-notes": 1345,
+    "changelog": 1325,
+    "prometheus": 1303,
+    "etcd": 942,
+    "rag": 924,
+    "kubelet": 919,
+    "docker": 733,
+    "grafana": 645,
+    "apiserver": 645,
+    "scheduler": 641,
+    "operator": 561,
+    "helm": 554,
+    "glossary": 549,
+    "istio": 394
+  },
+  "top_domains": {
+    "domain-19-landscape-references": 1386,
+    "domain-17-system-foundation": 620,
+    "domain-10-troubleshooting-diagnostics": 380,
+    "domain-14-ai-ml-infra": 185,
+    "domain-07-platform-engineering": 140,
+    "domain-02-workloads-applications": 130,
+    "domain-03-networking-traffic": 126,
+    "domain-01-cluster-fundamentals": 103,
+    "domain-20-application-patterns": 101,
+    "domain-11-production-operations": 76,
+    "domain-06-observability": 71,
+    "domain-05-security-compliance": 66,
+    "domain-08-release-change-management": 57,
+    "domain-15-specialized-tech": 53,
+    "domain-12-cloud-providers": 50
+  }
+}

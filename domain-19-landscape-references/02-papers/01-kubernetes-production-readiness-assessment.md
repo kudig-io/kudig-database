@@ -64,6 +64,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 生产就绪性评估框架 (Production Readiness Assessment Framework)
@@ -134,7 +139,8 @@ authors:
 ```
 
 ## 存储架构评估
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 存储类配置检查
 kubectl get storageclass -o wide
 
@@ -144,7 +150,6 @@ kubectl get storageclass -o wide
 ✓ 备份策略配置
 ✓ 快照功能启用
 ```
-
 ## 2.2 安全合规评估 (权重: 20%)
 
 ## 身份认证与授权
@@ -163,14 +168,14 @@ RBAC最佳实践:
 ```
 
 ## 网络安全
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 网络策略实施检查
 kubectl get networkpolicy --all-namespaces
 
 # 安全基线验证
 kube-bench run --targets master,node,controlplane,policies
 ```
-
 ## 镜像安全
 ```yaml
 镜像安全策略:
@@ -285,7 +290,8 @@ kube-bench run --targets master,node,controlplane,policies
 ## 2.6 成本治理评估 (权重: 10%)
 
 ## 资源利用率分析
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 资源使用效率检查
 kubectl top nodes
 kubectl top pods --all-namespaces
@@ -296,7 +302,6 @@ kubectl top pods --all-namespaces
 ✓ 存储空间利用率: < 80%
 ✓ 网络带宽利用率: < 70%
 ```
-
 ## 成本优化策略
 ```yaml
 成本控制措施:
@@ -367,7 +372,8 @@ DR演练要求:
 
 ## 3.1 自动化评估工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 生产就绪性检查脚本
 #!/bin/bash
 
@@ -391,7 +397,6 @@ kubectl get pods -n monitoring 2>/dev/null || echo "Monitoring namespace not fou
 echo "4. Backup Configuration Check"
 kubectl get cronjobs -n backup 2>/dev/null || echo "Backup jobs not configured"
 ```
-
 ## 3.2 评估问卷模板
 
 ```yaml
@@ -575,3 +580,6 @@ trivy               # 镜像安全扫描
 - [[papers|#papers Hub]] — tag hub
 
 - [[research|#research Hub]] — tag hub
+
+
+<!-- risk-assessed -->

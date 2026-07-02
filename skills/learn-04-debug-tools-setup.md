@@ -31,6 +31,11 @@ prerequisites:
 - cilium-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 trigger_keywords:
@@ -49,7 +54,8 @@ trigger_keywords:
 
 ### 1.1 kubectl 基础配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl 安装（Linux/macOS）
 # Linux
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -70,13 +76,13 @@ source ~/.bashrc
 echo 'source <(kubectl completion zsh)' >> ~/.zshrc
 source ~/.zshrc
 ```
-
 ### 1.2 kubectl 别名配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 添加到 ~/.bashrc 或 ~/.zshrc
 alias k='kubectl'
 alias kg='kubectl get'
@@ -100,10 +106,10 @@ alias kgn='kubectl get nodes'
 alias kn='kubectl config set-context --current --namespace'
 kn default  # 切换到 default namespace
 ```
-
 ### 1.3 kubectx / kubens（krew 插件）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装 krew
 (
   set -x
@@ -128,7 +134,6 @@ kubectl ctx staging                  # 切换到 staging
 kubectl ns                           # 列出所有 namespace
 kubectl ns production               # 切换 namespace
 ```
-
 ---
 
 ## 2. k9s 终端 UI
@@ -242,7 +247,8 @@ kubescape scan --format html --output report.html cluster
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Helm 安装
 helm repo add doktorlenz https://doktorlenz.github.io/charts
 helm install popeye doktorlenz/popeye -n popeye --create-namespace
@@ -250,10 +256,10 @@ helm install popeye doktorlenz/popeye -n popeye --create-namespace
 # 或者 kubectl 插件
 kubectl krew install popeye
 ```
-
 ### 5.2 Popeye 使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 扫描整个集群
 kubectl popeye -A
 
@@ -266,14 +272,14 @@ kubectl popeye -n production -o json
 # 只扫描 Pod 配置（不扫描资源使用）
 kubectl popeye -n production --scans pods
 ```
-
 ---
 
 ## 6. kubectl 插件集合（krew）
 
 ### 6.1 推荐插件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装常用插件
 kubectl krew install ctx          # 切换上下文
 kubectl krew install ns           # 切换命名空间
@@ -286,10 +292,10 @@ kubectl krew install neat          # 清理 kubectl 输出
 kubectl krew index list
 kubectl krew search <keyword>
 ```
-
 ### 6.2 常用 kubectl 插件使用
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # node-shell: SSH 到节点
 kubectl node-shell <node-name>
 
@@ -303,14 +309,14 @@ kubectl get pods -o yaml | kubectl neat
 kubectl ktop node
 kubectl ktop pod -n production
 ```
-
 ---
 
 ## 7. 其他实用工具
 
 ### 7.1 yq (YAML 处理)
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 安装
 # Linux
 sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
@@ -323,7 +329,6 @@ brew install yq
 kubectl get pod <pod-name> -o yaml | yq '.status.phase'
 kubectl get pods -o json | yq '.items[0].metadata.name'
 ```
-
 ### 7.2 stern / kubetail (日志)
 
 ```bash
@@ -354,7 +359,8 @@ cilium endpoint list
 
 ### 8.1 一键验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 cat > verify-tools.sh <<'EOF'
 #!/bin/bash
 
@@ -389,14 +395,14 @@ EOF
 chmod +x verify-tools.sh
 ./verify-tools.sh
 ```
-
 ---
 
 ## 9. 工具配置汇总
 
 ### 9.1 ~/.bashrc 或 ~/.zshrc 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl 配置
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
@@ -413,7 +419,6 @@ alias klf='kubectl logs -f'
 source <(kubectl ctx completion bash)
 source <(kubectl ns completion bash)
 ```
-
 ---
 
 ```yaml
@@ -455,3 +460,5 @@ tags: [onboarding, tools, kubectl, k9s, stern, debugging, sre, ops-engineer, k8s
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 ```
+
+<!-- risk-assessed -->

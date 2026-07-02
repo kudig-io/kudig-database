@@ -32,6 +32,11 @@ prerequisites:
 - monitoring-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 trigger_keywords:
@@ -74,7 +79,8 @@ trigger_keywords:
 
 ### 1.2 交接检查清单
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== 值班交接系统检查 =========="
 echo "时间: $(date)"
 echo ""
@@ -108,14 +114,14 @@ echo ""
 
 echo "========== 检查完毕 =========="
 ```
-
 ---
 
 ## 2. 交班人职责
 
 ### 2.1 交接前准备（下班前 30 分钟）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 整理当前处理的工单状态
 kubectl get events -A --sort-by='.lastTimestamp' | tail -50 > /tmp/handover-events.txt
 
@@ -136,7 +142,6 @@ kubectl top nodes > /tmp/handover-top.txt 2>/dev/null
 
 # 6. 确认下个班次的 oncall 联系人
 ```
-
 ### 2.2 交接内容清单
 
 ```markdown
@@ -194,7 +199,8 @@ kubectl top nodes > /tmp/handover-top.txt 2>/dev/null
 
 ### 3.1 接班后检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 echo "========== 接班检查 =========="
 
 # 1. 确认集群健康
@@ -223,7 +229,6 @@ echo "请测试钉钉/飞书/邮件通知是否正常"
 
 echo "========== 检查完毕 =========="
 ```
-
 ### 3.2 接班确认
 
 ```
@@ -240,7 +245,8 @@ echo "========== 检查完毕 =========="
 
 ### 4.1 突发问题交接
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 交班人突然无法继续值班时
 
 # 1. 紧急交接清单
@@ -268,7 +274,6 @@ echo "========== 紧急交接完毕 =========="
 # 2. 发送交接消息
 # 发送钉钉/飞书消息给接班人和 SRE 值班
 ```
-
 ### 4.2 交接消息模板
 
 ```markdown
@@ -369,7 +374,8 @@ echo "========== 紧急交接完毕 =========="
 
 ### Q: 接班后系统异常怎么办？
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 立即检查
 kubectl get nodes
 kubectl get pods -A | grep -v Running | grep -v Completed
@@ -382,7 +388,6 @@ kubectl get events -A --sort-by='.lastTimestamp' | tail -30
 # 3. 联系交班人了解情况
 # 4. 如交班人无法联系，联系 SRE 值班
 ```
-
 ### Q: 交班人拖延交接怎么办？
 
 - 联系 SRE 主管协调
@@ -456,3 +461,6 @@ tags: [onboarding, oncall, handoff, shift, sre, ops-engineer, k8s-1.28-1.33]
 - [[skills/learn-inner-training.md|learn-inner-training]] — [[Kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
 - [[skills/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
 - [[prometheus]] — Prometheus
+
+
+<!-- risk-assessed -->

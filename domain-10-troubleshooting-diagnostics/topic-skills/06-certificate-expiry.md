@@ -58,6 +58,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 <!-- condition: kubeadm certs check-expiration 2>/dev/null | grep -E 'EXPIRES|expired' 显示证书即将过期或已过期 -->
@@ -176,7 +181,8 @@ Kubernetes 集群涉及以下几类证书，每类的有效期、管理方式和
 按顺序执行以下命令，判断问题爆炸半径：
 
 **Step T1**: 验证 kubectl 是否可用（判断 apiserver 证书是否过期）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 尝试执行最简单的 kubectl 命令
 kubectl version --short 2>&1
 # 或
@@ -189,7 +195,8 @@ kubectl get ns default 2>&1
 > - 返回 `certificate signed by unknown authority` → CA 可能被更换或 kubeconfig 中的 CA 数据不正确
 
 **Step T2**: 判断受影响的证书类型（基础设施 vs 应用层）
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果 kubectl 可用：检查 cert-manager 证书状态
 kubectl get certificates -A 2>/dev/null
 # 检查节点状态（kubelet 证书是否影响节点通信）
@@ -205,7 +212,8 @@ kubectl get mutatingwebhookconfigurations -o name 2>/dev/null
 > - Webhook 调用失败 → Webhook 证书问题（P1）
 
 **Step T3**: 评估受影响组件数量
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 如果 kubectl 可用：
 # 检查有多少 Certificate 资源处于非 Ready 状态
 kubectl get certificates -A --no-headers 2>/dev/null | grep -c "False"
@@ -382,6 +390,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate 2>/dev/null
 根据 Phase 1 检查结果，按以下决策树进入对应的深度诊断路径：
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl 不可用?
 ├── 是 → SSH 到控制平面 → kubeadm certs check-expiration
 │   ├── apiserver 证书过期 → 进入 Phase 2: D2.1 (apiserver cert path)
@@ -395,7 +404,6 @@ kubectl 不可用?
     ├── Webhook TLS 错误 → Phase 2: D2.8 (webhook cert path)
     └── etcd 日志有 TLS 错误 → Phase 2: D2.3 (etcd cert path)
 ```
-
 ---
 
 ### Phase 2: 深度检查（只读，零风险）
@@ -1775,7 +1783,17 @@ kubectl 不可用?
 > - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # V1: 确认 kubeadm 管理的证书有效期已更新
 kubeadm certs check-expiration
 # 预期: 所有证书的 RESIDUAL TIME 为正值（约 364d）
@@ -1814,7 +1832,6 @@ kubectl create namespace test-webhook-verify --dry-run=server 2>&1
 kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：永久删除命名空间及全部资源
 # 预期: 无 webhook 错误
 ```
-
 ### 7.2 短期监控（5-30 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1873,6 +1890,7 @@ kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：�
 ### 8.2 升级消息模板
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【{severity}】证书过期与 TLS 问题 - {cluster_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 - 问题概述: {certificate_type} 证书过期/TLS 问题，持续 {duration}
@@ -1899,7 +1917,6 @@ kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：�
 - Skill 版本: SKILL-SEC-001 v1.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
-
 ### 8.3 交接信息包
 
 升级时，Agent 需准备以下完整信息供人工接手：
@@ -2112,7 +2129,8 @@ danger_operations:
 
 ### 通用验证步骤
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 证书有效期检查
 kubeadm certs check-expiration
 
@@ -2128,9 +2146,10 @@ kubectl get certificates -A
 # 5. Ingress TLS 验证
 kubectl get secret <tls-secret> -n <ns> -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates -subject
 ```
-
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

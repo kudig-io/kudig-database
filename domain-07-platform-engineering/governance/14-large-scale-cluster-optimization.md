@@ -63,6 +63,11 @@ cross_refs:
   label: '相关知识域: domain-10-troubleshooting-diagnostics'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 大规模集群性能优化 (Large Scale Cluster Optimization)
@@ -382,7 +387,8 @@ profiles:
 ```
 
 ### 2. 运维管理策略
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 大规模集群运维检查脚本
 
@@ -412,7 +418,6 @@ large_scale_cluster_check() {
 
 large_scale_cluster_check
 ```
-
 通过系统性的大规模集群优化，可以显著提升集群的性能表现和稳定性，支撑更大规模的业务部署。
 
 ---
@@ -443,3 +448,6 @@ large_scale_cluster_check
 ## Related
 
 - [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+
+
+<!-- risk-assessed -->

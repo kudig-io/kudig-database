@@ -51,6 +51,11 @@ skill_name: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & 
 version: 1.0.0
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -173,6 +178,7 @@ StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用�
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -208,7 +214,6 @@ StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用�
 │ 验证确认      │
 └──────────────┘
 ```
-
 ## 症状识别
 
 ### 2.1 症状模式表
@@ -248,21 +253,24 @@ StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用�
 ### 3.1 影响评估
 
 **Step T1**: 检查 StatefulSet 整体状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get statefulset <name> -n <namespace>
 # 关注: DESIRED, CURRENT, READY 列
 ```
 > **判断规则**: READY < DESIRED → 有副本未就绪；CURRENT < DESIRED → 有副本未创建
 
 **Step T2**: 检查 Pod 启动顺序状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l <statefulset-selector> -o json | \
   jq -r '.items[].metadata.name' | sort -V
 ```
 > **判断规则**: 序号不连续或有缺失 → 启动顺序问题（RC-001）
 
 **Step T3**: 检查 PVC 状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pvc -n <namespace> -l <statefulset-selector>
 ```
 > **判断规则**: 有 PVC Pending → 存储问题（RC-002/003）
@@ -272,7 +280,8 @@ kubectl get pvc -n <namespace> -l <statefulset-selector>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # MySQL
 kubectl exec -n <ns> <mysql-pod> -- mysql -e "SHOW STATUS LIKE 'Slave_IO_Running';" 2>/dev/null
 # Kafka
@@ -822,7 +831,8 @@ kubectl exec -n <ns> <mongo-pod> -- mongosh --eval "rs.status()" 2>/dev/null | g
 
 ### 7.1 即时验证（修复后 1 分钟内）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # V1: 检查 StatefulSet 状态
 kubectl get statefulset <name> -n <namespace>
 # 预期: READY == DESIRED == CURRENT
@@ -844,7 +854,6 @@ kubectl run -n <namespace> dns-test --image=busybox:1.36 --rm -it --restart=Neve
   nslookup <statefulset-name>-0.<service-name>.<namespace>.svc.cluster.local
 # 预期: 解析成功
 ```
-
 ### 7.2 短期监控（5-15 分钟）
 
 | 监控项 | 命令/指标 | 预期趋势 | 异常阈值 |
@@ -1037,3 +1046,5 @@ receivers:
 *维护者: Kudig Team*
 
 ```
+
+<!-- risk-assessed -->

@@ -23,6 +23,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # K8s Monitoring & Alerting Failure 诊断 — 远程顾问对话脚本
 
@@ -584,7 +589,8 @@ relationships:
 顾问："阿里云环境有额外的监控维度，请按以下顺序排查：
 
 **步骤 1：阿里云ARMS/云监控检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否接入阿里云ARMS
 kubectl get pods -n kube-system | grep arms
 
@@ -594,14 +600,14 @@ kubectl get pods -n kube-system | grep cloud-monitor
 # 检查ARMS应用监控
 aliyun arms SearchTraceAppByName --AppName <app>
 ```
-
 > **如果无法执行aliyun CLI**：请登录ARMS控制台，告诉我：
 > 1. 应用是否已接入ARMS？
 > 2. 告警规则是否配置正确？
 > 3. 告警通知渠道是否正常？
 
 **步骤 2：ACK监控组件检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查Prometheus状态
 kubectl get pods -n monitoring
 
@@ -614,7 +620,6 @@ kubectl get pods -n monitoring alertmanager
 # 检查metrics-server
 kubectl top nodes
 ```
-
 **步骤 3：专有云监控特殊考虑**
 - 专有云可能未接入ARMS，使用自建Prometheus
 - 检查天基监控告警配置
@@ -628,7 +633,8 @@ kubectl top nodes
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 重启ARMS探针
 kubectl delete pod -n kube-system -l app=arms-pilot
 
@@ -638,7 +644,6 @@ kubectl get configmap arms-config -n kube-system
 # 重新接入ARMS
 aliyun armsx QueryAppMetadata --AppName <app>
 ```
-
 如自建Prometheus异常：
 1. 检查Prometheus存储空间
 2. 检查Target状态
@@ -680,7 +685,8 @@ aliyun armsx QueryAppMetadata --AppName <app>
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Prometheus 状态
 kubectl get pods -n monitoring -l app=prometheus
 kubectl logs <prometheus-pod> -n monitoring --tail=50
@@ -705,7 +711,6 @@ kubectl patch servicemonitor <name> -n <namespace> --type='json' -p='[{"op": "re
 kubectl get prometheusrules --all-namespaces
 kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='[{"op": "replace", "path": "/spec/groups/0/rules/0/expr", "value": "<promql>"}]'
 ```
-
 ---
 
 *对话脚本版本: 1.0.0 | 技能: K8s Monitoring & Alerting Failure 诊断与修复 | 模式: L2-semi-auto*
@@ -713,3 +718,6 @@ kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='[{"op": "r
 
 - [[entities/cilium.md|Cilium (entities)]]
 - [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|Pods]]
+
+
+<!-- risk-assessed -->

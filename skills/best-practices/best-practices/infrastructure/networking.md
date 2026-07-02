@@ -49,6 +49,11 @@ cross_refs:
   label: 集群配置最佳实践
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Kubernetes 网络配置最佳实践
@@ -302,7 +307,8 @@ fi
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 安装 Calico
 
@@ -337,13 +343,13 @@ EOF
 # 5. 验证安装
 kubectl get pods -n calico-system
 ```
-
 ### 步骤3：配置网络策略
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 配置网络策略
 
@@ -406,13 +412,13 @@ spec:
           name: production
 EOF
 ```
-
 ### 步骤4：配置Ingress
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 安装 Nginx Ingress Controller
 
@@ -432,14 +438,14 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
 kubectl get pods -n ingress-nginx
 kubectl get svc -n ingress-nginx
 ```
-
 ---
 
 ## 验证方法
 
 ### 自动化验证脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 网络配置验证脚本
 
@@ -479,7 +485,6 @@ echo ""
 
 echo "=== 验证完成 ==="
 ```
-
 ### 手动验证清单
 
 **CNI插件验证**：
@@ -530,7 +535,8 @@ cilium config view | grep mtu
 **后果**：服务间通信异常，难以排查。
 
 **正确做法**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有网络策略
 kubectl get networkpolicy --all-namespaces -o yaml
 
@@ -540,7 +546,6 @@ kubectl describe pod <pod-name> -n <namespace>
 # 测试网络连通性
 kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://<service-name>
 ```
-
 ### 陷阱3：DNS配置错误
 
 **问题**：CoreDNS配置不当，导致Service发现失败。
@@ -548,7 +553,8 @@ kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http:
 **后果**：服务间通信异常，应用无法找到后端服务。
 
 **正确做法**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查CoreDNS状态
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 
@@ -558,7 +564,6 @@ kubectl get configmap coredns -n kube-system -o yaml
 # 测试DNS解析
 kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubernetes.default
 ```
-
 ---
 
 ## 相关资源
@@ -597,3 +602,6 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubern
 
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+
+
+<!-- risk-assessed -->

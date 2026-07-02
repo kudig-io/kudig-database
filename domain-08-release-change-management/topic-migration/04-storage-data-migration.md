@@ -38,6 +38,11 @@ prerequisites:
 - backup-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 04 - 存储与数据迁移
@@ -117,7 +122,8 @@ k8s_versions:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 采集自建集群存储使用情况
 echo "=== PV 总容量 ==="
 kubectl get pv -o json | jq '[.items[].spec.capacity.storage | rtrimstr("Gi") | tonumber] | add'
@@ -141,7 +147,6 @@ kubectl get pods -A -o json | jq -r '
   kubectl exec -n $ns $name -- df -h 2>/dev/null | grep -E "^/dev" || echo "无法执行 df"
 done
 ```
-
 ---
 
 <!-- chunk: 2. ACK 存储体系 -->## 2. ACK 存储体系
@@ -411,7 +416,8 @@ spec:
       claimName: mysql-data    # 源集群 PVC
 ```
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 通过 kubectl cp 复制数据（适合中小数据量 < 10GB）
 # 源集群导出
 kubectl --context=source-cluster exec -n production data-exporter -- \
@@ -427,12 +433,12 @@ kubectl --context=ack-cluster exec -n migration data-migrator -- \
 kubectl --context=source-cluster exec -n production data-exporter -- \
   rsync -avz /source/ rsync://<ack-node-ip>:<port>/target/
 ```
-
 ---
 
 <!-- chunk: 6. Local PV → 云盘迁移 -->## 6. Local PV → 云盘迁移
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 识别 Local PV 数据
 kubectl --context=source-cluster get pv -o json | jq -r '
   .items[] | select(.spec.local != null) |
@@ -474,7 +480,6 @@ kubectl --context=ack-cluster run restore-job --rm -it \
 # kubectl cp production/restore-job:/tmp/ 将备份文件复制进去
 # tar xzf /tmp/local-pv-backup.tar.gz -C /data/
 ```
-
 ---
 
 <!-- chunk: 7. Velero 备份恢复方案 -->## 7. Velero 备份恢复方案
@@ -576,7 +581,8 @@ data:
 
 ## 8.1 文件级校验
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # verify-data-integrity.sh
 # 校验迁移前后数据一致性
@@ -616,7 +622,6 @@ for pvc in $(kubectl --context=$ACK_CONTEXT get pvc -n $NS --no-headers -o custo
   fi
 done
 ```
-
 ## 8.2 检查清单
 
 - [ ] 所有 PVC 在 ACK 已创建并绑定
@@ -662,3 +667,5 @@ done
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

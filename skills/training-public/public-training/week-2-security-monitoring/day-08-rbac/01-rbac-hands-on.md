@@ -33,6 +33,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Day 8: K8s RBAC 权限配置实操
@@ -93,7 +98,8 @@ rules:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > app-team-readonly.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -107,13 +113,13 @@ rules:
 EOF
 kubectl apply -f app-team-readonly.yaml
 ```
-
 ### 2.2 创建 RoleBinding（绑定用户）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > app-team-readonly-binding.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -131,10 +137,10 @@ roleRef:
 EOF
 kubectl apply -f app-team-readonly-binding.yaml
 ```
-
 ### 2.3 验证权限
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 以 alice 身份测试（无修改权限）
 kubectl auth can-i create pods -n app-team        # should be "no"
 kubectl auth can-i get pods -n app-team            # should be "yes"
@@ -143,7 +149,6 @@ kubectl auth can-i delete pod -n app-team          # should be "no"
 # 查看 RoleBinding 详情
 kubectl describe rolebinding app-team-readonly-binding -n app-team
 ```
-
 ---
 
 ## 3. 场景二：跨 namespace 读取权限（ClusterRole + RoleBinding）
@@ -155,7 +160,8 @@ kubectl describe rolebinding app-team-readonly-binding -n app-team
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > cluster-readonly.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -168,13 +174,13 @@ rules:
 EOF
 kubectl apply -f cluster-readonly.yaml
 ```
-
 ### 3.2 创建 RoleBinding（跨 namespace 绑定 SA）
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > monitoring-read-all-binding.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -192,7 +198,6 @@ roleRef:
 EOF
 kubectl apply -f monitoring-read-all-binding.yaml
 ```
-
 ---
 
 ## 4. 场景三：Deployment 管理者权限（受限编辑）
@@ -204,7 +209,8 @@ kubectl apply -f monitoring-read-all-binding.yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > deploy-manager.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -225,19 +231,18 @@ rules:
 EOF
 kubectl apply -f deploy-manager.yaml
 ```
-
 ### 4.2 绑定用户
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create rolebinding dev-lead-deploy \
   --role=deploy-manager \
   --user=dev-lead@example.com \
   --namespace=backend
 ```
-
 ---
 
 ## 5. 场景四：节点管理员权限（NodeRestriction）
@@ -249,7 +254,8 @@ kubectl create rolebinding dev-lead-deploy \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 系统已内置 node-admin ClusterRole（绑定到 Node 主体）
 kubectl get clusterrole system:node-admin -o yaml
 
@@ -258,7 +264,6 @@ kubectl create clusterrolebinding node-admin-binding \
   --clusterrole=system:node-admin \
   --user=kubelet
 ```
-
 ### 5.2 限制 kubelet 只可修改自己节点的 Pod
 
 ```bash
@@ -278,7 +283,8 @@ kubectl create clusterrolebinding node-admin-binding \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat > audit-reader.yaml <<'EOF'
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -297,12 +303,12 @@ kubectl create clusterrolebinding audit-reader-group \
   --group=security-team \
   --namespace=kube-system
 ```
-
 ---
 
 ## 7. RBAC 调试命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看当前用户权限
 kubectl auth whoami
 # 输出: Username: alice@example.com  Groups: [frontend-team]
@@ -319,7 +325,6 @@ kubectl get clusterrole
 # 查看谁有权限操作某个资源
 kubectl auth reconcile -f role.yaml  # 自动补充缺失权限（dry-run）
 ```
-
 ---
 
 ## 8. 常见错误与修复
@@ -391,3 +396,5 @@ related:
   - domain-10-troubleshooting-diagnostics/07-rbac-permission-troubleshooting.md
 ---
 ```
+
+<!-- risk-assessed -->

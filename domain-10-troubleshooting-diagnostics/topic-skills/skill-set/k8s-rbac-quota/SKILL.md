@@ -51,6 +51,11 @@ k8s_versions:
 agent_execution_mode: L2-semi-auto
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s RBAC & Quota Failure 诊断与修复
@@ -89,6 +94,7 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 ## 执行流程
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 工单/告警触发
     │
     ▼
@@ -108,7 +114,6 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 │ 验证确认      │    检查: 权限/配额/事件
 └──────────────┘
 ```
-
 ## 可用脚本
 
 | 脚本 | 用途 | 参数 | 风险 |
@@ -430,7 +435,8 @@ jq 'select(.requestURI | contains("/deployments")) | {user: .user.username, verb
 ### 2. 权限模拟测试
 使用 `kubectl auth can-i` 和 impersonation 进行精细化权限测试：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 测试特定用户是否有权限
 kubectl auth can-i create pods -n <ns> --as <user>
 
@@ -445,11 +451,11 @@ kubectl auth can-i get secrets -n <ns> \
 # 列出某用户的所有权限
 kubectl auth can-i --list -n <ns> --as <user>
 ```
-
 ### 3. RBAC 关系图谱分析
 使用工具分析复杂的 RBAC 绑定关系：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 rbac-tool 分析
 kubectl rbac-tool lookup <user>
 
@@ -461,14 +467,14 @@ kubectl get clusterrolebinding -o json | \
 kubectl get clusterrolebinding -o json | \
   jq '.items[] | select(.roleRef.name == "cluster-admin") | {binding: .metadata.name, subjects: .subjects}'
 ```
-
 ### 4. Admission Webhook 拦截诊断
 当 Pod 创建失败但 RBAC 看似正常时：
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查活跃的 MutatingWebhookConfiguration
 kubectl get mutatingwebhookconfiguration
 
@@ -481,11 +487,11 @@ kubectl get events -n <ns> | grep -i webhook
 # 临时排除 webhook 影响（仅测试环境）
 kubectl delete validatingwebhookconfiguration <name>
 ```
-
 ### 5. Quota 使用趋势分析
 预防配额耗尽需要趋势分析：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 监控配额使用率变化
 watch -n 30 'kubectl describe resourcequota -n <ns>'
 
@@ -496,7 +502,6 @@ kubectl get events -n <ns> --field-selector reason=Created | wc -l
 kubectl top pods -n <ns> --sort-by=cpu
 kubectl top pods -n <ns> --sort-by=memory
 ```
-
 ## 预防性措施（补充）
 
 ### RBAC 治理框架
@@ -588,3 +593,5 @@ spec:
 - [[concepts/rbac-authorization.md|RBAC 授权]] — Kubernetes 基于角色的访问控制与权限模型
 
 ```
+
+<!-- risk-assessed -->

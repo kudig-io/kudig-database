@@ -37,6 +37,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 12 - 生产事故管理与应急手册
@@ -213,7 +218,8 @@ class IncidentStateMachine:
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # incident-lifecycle-example.sh - 模拟一次完整的事故处理流程
 
@@ -318,7 +324,6 @@ EOF
 
 echo "✅ 事故生命周期完成"
 ```
-
 #### ⚠️ 常见误区
 
 | 误区 | 正确做法 | 说明 |
@@ -480,7 +485,8 @@ class CommunicationsLead(IncidentRole):
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # war-room-collaboration.sh - 模拟War Room中的角色协同
 
@@ -579,7 +585,6 @@ echo "👔 [IC - Alice] 服务稳定运行15分钟，无异常"
 echo "👔 [IC - Alice] War Room正式关闭，感谢所有人的快速响应"
 echo "👔 [IC - Alice] 请所有参与者准备复盘材料"
 ```
-
 #### ⚠️ 常见误区
 
 | 误区 | 正确做法 | 说明 |
@@ -624,7 +629,7 @@ graph TD
     Q --> R[改进措施]
     R --> S[关闭事故]
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ---
 
 ## 2. 事故分级标准
@@ -708,7 +713,6 @@ incidentExamples:
         - "监控组件版本落后"
       impact: "无立即风险，需计划升级"
 ```
-
 ### 2.3 P0-P3分级详解
 
 #### 🔰 初学者理解
@@ -890,7 +894,8 @@ class IncidentClassifier:
 
 **实战分级案例**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # incident-classification-examples.sh - 真实场景分级示例
 
@@ -996,7 +1001,6 @@ echo "🚨 最终分级: P0 (高峰期特殊升级)"
 echo "原因: 虽然只有5%错误率，但在双11高峰期，业务影响巨大"
 echo "响应要求: 立即启动War Room，全员响应"
 ```
-
 #### ⚠️ 常见误区
 
 | 误区 | 正确做法 | 说明 |
@@ -1396,7 +1400,8 @@ echo "  - 预计损失: \$$TOTAL_LOSS/小时 × 持续时长"
 
 ### 3.1 P0 级别快速响应手册
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # P0 事故应急响应标准流程（15分钟黄金窗口期）
 
@@ -1467,7 +1472,6 @@ kubectl get pods --all-namespaces | grep -v Running
 
 echo "=== P0 应急响应完成，进入持续监控阶段 ==="
 ```
-
 ### 3.2 黄金30分钟原则
 
 #### 🔰 初学者理解
@@ -1588,7 +1592,8 @@ goldenThirtyMinutes:
 
 **30分钟执行脚本**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # golden-30-minutes.sh - 黄金30分钟应急响应脚本
 
@@ -1763,12 +1768,12 @@ else
   echo "  3. 准备对外公告"
 fi
 ```
-
 #### 📝 最小示例
 
 **黄金30分钟实战演练**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 30-minute-drill.sh - 黄金30分钟桌面演练
 
@@ -1831,7 +1836,6 @@ else
   echo "  ❌ 需要改进! 超出黄金窗口期"
 fi
 ```
-
 #### ⚠️ 常见误区
 
 | 误区 | 正确做法 | 说明 |
@@ -2081,7 +2085,8 @@ class StopBleedingDecisionEngine:
 
 **止血策略实战案例**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # stopbleeding-example.sh - 止血策略实战
 
@@ -2175,7 +2180,6 @@ else
   echo "  2. 深入排查是否有其他问题"
 fi
 ```
-
 #### ⚠️ 常见误区
 
 | 误区 | 正确做法 | 说明 |
@@ -2275,7 +2279,8 @@ warRoomProtocol:
 #### Runbook: API Server 不可用
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl 命令失败
 $ kubectl get nodes
 The connection to the server xxx:6443 was refused - did you specify the right host or port?
@@ -2284,9 +2289,9 @@ The connection to the server xxx:6443 was refused - did you specify the right ho
 $ curl -k https://192.168.1.10:6443/healthz
 curl: (7) Failed to connect to 192.168.1.10 port 6443: Connection refused
 ```
-
 **快速诊断**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 API Server 进程
 ssh master-node-1
 ps aux | grep kube-apiserver
@@ -2304,9 +2309,9 @@ ETCDCTL_API=3 etcdctl endpoint health \
 # 4. 检查证书有效期
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
 ```
-
 **恢复步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 方案A: 重启 API Server（首选）
 systemctl restart kube-apiserver
 sleep 10
@@ -2323,9 +2328,9 @@ cp /backup/kube-apiserver.yaml.$(date +%Y%m%d) /etc/kubernetes/manifests/kube-ap
 # 方案D: 切换到备用 API Server
 kubectl config set-cluster prod --server=https://backup-apiserver:6443
 ```
-
 **验证恢复**
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证 API Server 可达
 kubectl get --raw='/healthz?verbose'
 
@@ -2335,18 +2340,18 @@ kubectl get pods -A
 kubectl run test-nginx --image=nginx --restart=Never
 kubectl delete pod test-nginx
 ```
-
 #### Runbook: etcd 集群问题
 
 **问题现象**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 健康检查失败
 ETCDCTL_API=3 etcdctl endpoint health
 https://192.168.1.10:2379 is unhealthy: failed to connect
 ```
-
 **快速诊断**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 检查 etcd 成员状态
 ETCDCTL_API=3 etcdctl member list \
   --write-out=table \
@@ -2363,9 +2368,9 @@ for host in 192.168.1.10 192.168.1.11 192.168.1.12; do
   ping -c 3 $host
 done
 ```
-
 **恢复步骤**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景1: 单个成员失败（3节点中1个失败）
 # 移除问题成员
 ETCDCTL_API=3 etcdctl member remove <member-id>
@@ -2390,13 +2395,13 @@ etcdctl defrag --command-timeout=30s
 # 清理旧版本数据
 etcdctl compact $(etcdctl endpoint status --write-out="json" | jq -r '.[0].Status.raftIndex')
 ```
-
 ### 5.2 工作负载问题应急手册
 
 #### Runbook: Pod 无法启动
 
 **快速诊断脚本**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # pod-troubleshooting.sh - Pod 问题快速诊断工具
 
@@ -2425,7 +2430,6 @@ kubectl describe node $NODE | grep -A 10 "Allocated resources"
 echo "=== 镜像拉取状态 ==="
 kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status.containerStatuses[*].state}'
 ```
-
 **常见故障恢复**
 ```yaml
 # 场景1: ImagePullBackOff
@@ -2469,7 +2473,8 @@ kubectl scale deployment cluster-autoscaler --replicas=1
 
 **问题类型：Service 无法访问**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # service-troubleshooting.sh
 
@@ -2502,12 +2507,12 @@ kubectl run dnsutils --image=tutum/dnsutils --restart=Never -- sleep 3600
 kubectl exec dnsutils -- nslookup $SERVICE_NAME.$NAMESPACE.svc.cluster.local
 kubectl delete pod dnsutils
 ```
-
 ### 6.2 存储问题应急手册
 
 **问题类型：PVC Pending**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # pvc-troubleshooting.sh
 
@@ -2548,7 +2553,6 @@ spec:
     path: /mnt/data/${PVC_NAME}
 EOF
 ```
-
 ---
 
 ## 7. 事后复盘机制
@@ -3304,7 +3308,17 @@ incidentAnalytics:
 
 ## 命令快速参考
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 快速查看集群异常事件
 kubectl get events -A --sort-by=.metadata.creationTimestamp | tail -30
 
@@ -3323,7 +3337,6 @@ kubectl get componentstatuses
 # 快速回滚 Deployment
 kubectl rollout undo deployment/<name> -n <namespace>
 ```
-
 ## 交叉引用
 
 - 相关主题：[生产故障排查手册](production-troubleshooting-playbook.md) · [故障模式分析](failure-patterns-analysis.md) · [SLI/SLO/SLA](sli-slo-sla-engineering.md) · [SRE 成熟度模型](sre-maturity-model.md) · [变更管理](change-management-release.md)
@@ -3339,3 +3352,6 @@ kubectl rollout undo deployment/<name> -n <namespace>
 ## Related
 
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

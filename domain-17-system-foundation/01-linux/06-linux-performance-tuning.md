@@ -54,6 +54,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 06 - Linux 性能调优与瓶颈分析：生产环境性能优化专家指南
@@ -121,6 +126,7 @@ USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资�
 ## Linux 性能分析工具全景
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────┐
 │                     性能分析工具全景图                            │
 │                                                                  │
@@ -138,7 +144,6 @@ USE 方法由 Brendan Gregg 提出，适用于任何资源类型。对每种资�
 │  应用级     │ perf, flamegraph, async-profiler (Java)          │
 └─────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 ## CPU 性能分析
@@ -559,7 +564,8 @@ dig @<dns-server> <domain> | grep "Query time"
 | perf | Y | - | - | - | perf |
 | bpftrace | Y | Y | Y | Y | bpftrace |
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # sysstat 包安装和配置
 yum install -y sysstat              # RHEL
 apt install -y sysstat              # Ubuntu
@@ -575,7 +581,6 @@ sar -b                             # I/O 历史
 sar -n DEV                         # 网络历史
 sar -s 08:00:00 -e 18:00:00        # 指定时间范围
 ```
-
 ---
 
 <!-- chunk: 性能调优 -->## 性能调优
@@ -669,7 +674,8 @@ auditctl -a always,exit -F arch=b64 -S perf_event_open -k perf_access
 
 Kubernetes 通过 cgroups 实现容器资源限制，理解底层机制对于排查性能问题至关重要：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器的 cgroup 路径
 kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].containerID}'
 # 输出: docker://<container_id> 或 containerd://<container_id>
@@ -689,10 +695,10 @@ cat /sys/fs/cgroup/.../cpu.stat | grep throttled_time
 # rate(container_cpu_cfs_throttled_periods_total[5m])
 # / rate(container_cpu_cfs_periods_total[5m])
 ```
-
 ## Kubernetes 性能监控
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kubectl top 命令
 kubectl top nodes                  # 节点资源使用
 kubectl top pods                   # Pod 资源使用
@@ -708,7 +714,6 @@ MEM_LIM:.spec.containers[*].resources.limits.memory'
 # 查看 ResourcePressure 条件
 kubectl describe node <node> | grep -A5 "Pressure"
 ```
-
 ---
 
 <!-- chunk: 最佳实践 -->## 最佳实践
@@ -862,3 +867,6 @@ bpftrace -e 'profile:hz:99 /pid == <pid>/ { @[ustack] = count(); }'
 ## Related
 
 - index/etcd-index|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

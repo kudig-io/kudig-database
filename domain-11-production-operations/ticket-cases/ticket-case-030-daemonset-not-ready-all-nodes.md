@@ -61,6 +61,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -86,7 +91,8 @@ relationships:
 
 按“先 DaemonSet 状态、再节点差异与架构、最后 Pod 事件与日志”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 DaemonSet 整体状态
 kubectl get daemonset logtail-ds -n monitoring -o wide
 
@@ -116,7 +122,6 @@ docker manifest inspect registry-vpc.cn-hangzhou.aliyuncs.com/log-service/logtai
 kubectl get limitrange -n monitoring
 kubectl get resourcequota -n monitoring
 ```
-
 ## 根因分析
 
 经排查，发现 `logtail-ds` DaemonSet 未能在所有节点就绪的原因有两个：
@@ -143,17 +148,17 @@ logtail-ds  15        13        11      13           11          <none>         
 
 **第一步：确认节点架构分布**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.architecture}{"\t"}{.spec.taints[*].key}{"\n"}{end}'
 ```
-
 **第二步：将 DaemonSet 镜像切换为支持多架构的统一标签**
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set image daemonset/logtail-ds -n monitoring \
   logtail=registry-vpc.cn-hangzhou.aliyuncs.com/log-service/logtail:v1.5.0
 ```
-
 > `v1.5.0` 为包含 AMD64 与 ARM64 manifest 的多架构镜像。若官方未提供，可分别按架构使用 nodeSelector 部署两个 DaemonSet。
 
 **第三步：为主节点污点与专用节点污点添加 tolerations**
@@ -161,7 +166,8 @@ kubectl set image daemonset/logtail-ds -n monitoring \
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch daemonset logtail-ds -n monitoring --type='merge' -p '{
   "spec": {
     "template": {
@@ -189,14 +195,14 @@ kubectl patch daemonset logtail-ds -n monitoring --type='merge' -p '{
   }
 }'
 ```
-
 **第四步：如官方镜像不支持 ARM，可按架构分别部署 DaemonSet**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 为 AMD64 节点保留原 DaemonSet，并增加 nodeSelector
 kubectl patch daemonset logtail-ds -n monitoring --type='merge' -p '{
   "spec": {
@@ -242,20 +248,20 @@ spec:
           image: registry-vpc.cn-hangzhou.aliyuncs.com/log-service/logtail:v1.5.0-arm64
 EOF
 ```
-
 **第五步：滚动更新并观察 DaemonSet 状态**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout status daemonset logtail-ds -n monitoring --timeout=300s
 kubectl rollout status daemonset logtail-ds-arm64 -n monitoring --timeout=300s
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. DaemonSet 的 DESIRED == CURRENT == READY
 kubectl get daemonset logtail-ds -n monitoring
 kubectl get daemonset logtail-ds-arm64 -n monitoring
@@ -276,7 +282,6 @@ kubectl get pod -n monitoring -l k8s-app=logtail -o jsonpath='{range .items[*]}{
 kubectl exec -n demo deploy/arm-app-demo -- sh -c 'echo "logtail-test-arm $(date)" >> /var/log/app/test.log'
 # 在 SLS 控制台查询：* and "logtail-test-arm"
 ```
-
 ## 回复客户话术
 
 > 您好，经排查，部分节点日志未被 Logtail 采集的根因是：
@@ -332,3 +337,6 @@ kubectl exec -n demo deploy/arm-app-demo -- sh -c 'echo "logtail-test-arm $(date
 - DaemonSet
 - DaemonSet 未在所有节点运行：日志采集 Agent 缺失
 - Pod Pending：资源不足与 Taint 不匹配
+
+
+<!-- risk-assessed -->

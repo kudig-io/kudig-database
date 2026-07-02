@@ -35,6 +35,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.11 Release Notes
@@ -157,3 +162,6 @@ The [Quickstart Guide](https://docs.helm.sh/using_helm/#quickstart-guide) will g
 - use dot notation for release candidates fb64bb66de0c5ccedce1ad52c64aa77fe0cb734a (Matthew Fisher)
 - Allow zsh completion to be autoloaded by compinit cd6dd313979e68cb4f700ad87387076e77b94572 (Dusty Rip)
 - Do not fail linting because of missing 'required' template values 8ce64076d34ae95aec7c28b58c46916be6009ebe (Curtis Mattoon)
+
+
+<!-- risk-assessed -->

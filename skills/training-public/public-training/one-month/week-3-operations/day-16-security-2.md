@@ -40,6 +40,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -180,7 +185,8 @@ Kubernetes Secret 用于存储敏感数据，但默认情况下 Secret 只做了
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 > - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 创建安全的 Pod
 cat > secure-pod.yaml << 'EOF'
 apiVersion: v1
@@ -279,14 +285,14 @@ kubectl run insecure --image=nginx -n secure-ns
 #   runAsNonRoot != true (pod or container "insecure" must set securityContext.runAsNonRoot=true),
 #   seccompProfile (pod or container "insecure" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
 ```
-
 ### 任务 2: Secret 管理 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 创建 Secret
 kubectl create secret generic app-secret \
   --from-literal=username=admin \
@@ -405,13 +411,13 @@ kubectl exec secret-volume-test -- ls -la /etc/secrets/
 kubectl exec secret-volume-test -- cat /etc/secrets/password
 # 预期输出: S3cur3P@ssw0rd!
 ```
-
 ### 任务 3: Kyverno 策略实践 (45min)
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 安装 Kyverno
 kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.11.0/install.yaml
 
@@ -512,7 +518,6 @@ EOF
 
 kubectl apply -f require-resources.yaml
 ```
-
 ---
 
 ## 配置参考
@@ -701,3 +706,5 @@ resources:
 - [文件: `../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md`](../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md)
 
 ```
+
+<!-- risk-assessed -->

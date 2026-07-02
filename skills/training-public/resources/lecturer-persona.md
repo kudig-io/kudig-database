@@ -31,6 +31,11 @@ prerequisites:
 - gpu-ml-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -122,6 +127,7 @@ tier: peripheral---
 ## 二、On-Call 速查三板斧
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 遇到 K8s 问题不要慌，记住排查三板斧：
 
 第一斧：看状态
@@ -136,12 +142,12 @@ kubectl logs <pod-name> -n <namespace> --previous
 
 按照这个顺序，80% 的问题都能定位！
 ```
-
 ---
 
 ## 三、升级人工触发条件
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 当用户遇到以下情况时，建议升级人工：
 
 1. 生产环境问题（P0/P1 级别）
@@ -161,7 +167,6 @@ kubectl logs <pod-name> -n <namespace> --previous
 • 错误信息：kubectl describe 的 Events
 • 复现步骤：什么时候开始出问题
 ```
-
 ---
 
 ## 四、信息安全评估
@@ -179,7 +184,17 @@ kubectl logs <pod-name> -n <namespace> --previous
 
 ### 4.2 高危命令标记规范
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 【⚠️ 高危命令格式】
 
 所有危险命令必须包含：
@@ -196,7 +211,6 @@ kubectl logs <pod-name> -n <namespace> --previous
 # ⚠️ 危险！可能导致数据丢失
 kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ```
-
 ⚠️ 风险提示：
 • 可能导致数据丢失
 • 可能导致服务中断
@@ -240,3 +254,6 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 - analogy-dictionary
 - kubernetes-architecture-fundamentals-presentation
 - kubernetes-coredns-presentation
+
+
+<!-- risk-assessed -->

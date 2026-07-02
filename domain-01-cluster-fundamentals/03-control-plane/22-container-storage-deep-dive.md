@@ -77,6 +77,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)
@@ -103,6 +108,7 @@ cross_refs:
 ### 1.1 存储接口演进历史
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                     Kubernetes Storage Interface Evolution                       │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -126,7 +132,6 @@ cross_refs:
 │                                                           - 标准化              │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 1.2 CSI 里程碑
 
 | 版本 | Kubernetes 版本 | CSI 状态 | 主要特性 |
@@ -653,6 +658,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                         CSI Volume Mount Workflow                                │
 ├─────────────────────────────────────────────────────────────────────────────────┤
@@ -703,7 +709,6 @@ spec:
 │                                                                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 4. CSI 驱动开发 -->
@@ -712,6 +717,7 @@ spec:
 ### 4.1 CSI 驱动项目结构
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 my-csi-driver/
 ├── cmd/
 │   └── csi-driver/
@@ -741,7 +747,6 @@ my-csi-driver/
 ├── Makefile
 └── go.mod
 ```
-
 ### 4.2 Identity Service 实现
 
 ```go
@@ -2201,7 +2206,8 @@ groups:
 
 ### 9.2 故障排查命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 PVC 状态
 kubectl get pvc -A
 kubectl describe pvc <pvc-name>
@@ -2240,7 +2246,6 @@ kubectl debug node/<node-name> -it --image=busybox -- mount | grep csi
 # 检查 CSI socket
 kubectl debug node/<node-name> -it --image=busybox -- ls -la /var/lib/kubelet/plugins/
 ```
-
 ### 9.3 常见问题排查
 
 | 问题 | 可能原因 | 排查方法 | 解决方案 |
@@ -2582,3 +2587,6 @@ spec:
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+
+
+<!-- risk-assessed -->

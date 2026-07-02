@@ -33,6 +33,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v3.20 Release Notes
@@ -90,3 +95,5 @@ The [Quickstart Guide](https://helm.sh/docs/intro/quickstart/) will get you goin
 - Fix lint warning 09f5129d49a14c9336cea6f33adf5f52889915ef (Evans Mungai)
 - Preserve nil values in chart already 417deb2b6b7504357b0f580b76f5eed1bb8a5270 (Evans Mungai)
 - fix(values): preserve nil values when chart default is empty map 5417bfaa84871feae9c8171f192e2f9796475054 (Evans Mungai)
+
+<!-- risk-assessed -->

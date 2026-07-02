@@ -32,6 +32,11 @@ prerequisites:
 - helm-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Helm|helm]] v2.1 Release Notes
@@ -78,3 +83,6 @@ Play nicely with roles that don't allow creating namespaces 1cbadb450f14362a5fe6
 docs(helm): change `trunc 24` in base charts aa8d178c18174e485ecd4436f4158b24ef0408db
 docs(helm): change `trunc 24` in base charts 4db22274eb4a8d19fe9972a8b8109d207dd4552b
 fix(upgrade):Check the raw vals during an upgrade properly 9fea982deb0b060b68d9b06830c81205731511af
+
+
+<!-- risk-assessed -->

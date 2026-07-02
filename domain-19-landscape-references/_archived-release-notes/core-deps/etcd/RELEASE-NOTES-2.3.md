@@ -33,6 +33,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[etcd|etcd]] v2.3 Release Notes
@@ -64,6 +69,7 @@ Go OS/Arch: linux/amd64
 ```
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 # start a local etcd server
 /tmp/test-etcd/etcd
 
@@ -71,7 +77,6 @@ Go OS/Arch: linux/amd64
 /tmp/test-etcd/etcdctl --endpoints=localhost:2379 set foo "bar"
 /tmp/test-etcd/etcdctl --endpoints=localhost:2379 get foo
 ```
-
 ###### Mac OS (Darwin)
 
 ```
@@ -86,6 +91,7 @@ mkdir -p /tmp/test-etcd && unzip /tmp/etcd-${ETCD_VER}-darwin-amd64.zip -d /tmp 
 ###### Docker
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 docker run --net=host \
     --name etcd-v2.3.8 \
     --volume=/tmp/etcd-data:/etcd-data \
@@ -107,5 +113,7 @@ docker exec etcd-v2.3.8 /bin/sh -c "/usr/local/bin/etcdctl version"
 docker exec etcd-v2.3.8 /bin/sh -c "/usr/local/bin/etcdctl set foo bar"
 docker exec etcd-v2.3.8 /bin/sh -c "/usr/local/bin/etcdctl get foo"
 ```
-
 For more details, please check [Docker guide](https://github.com/coreos/etcd/blob/master/Documentation/op-guide/container.md#docker).
+
+
+<!-- risk-assessed -->

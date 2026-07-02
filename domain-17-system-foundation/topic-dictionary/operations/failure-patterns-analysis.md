@@ -39,6 +39,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 02 - [[Kubernetes|Kubernetes]] 故障模式与根因分析字典
@@ -120,7 +125,8 @@ prerequisites:
 ### 渐进式示例
 
 **Level 1 - 基础用法（快速判断问题层级）**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 第一步：快速检查各层状态
 # 控制平面
 kubectl get componentstatuses 2>/dev/null || echo "控制平面可能有问题"
@@ -134,9 +140,9 @@ kubectl get pods -A | grep -Ev "Running|Completed" | head -20
 # 网络层（测试 DNS）
 kubectl run -it --rm dns-test --image=busybox --restart=Never -- nslookup kubernetes
 ```
-
 **Level 2 - 进阶诊断（根据问题类型深入排查）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 控制平面故障排查
 kubectl get pods -n kube-system -o wide
 kubectl logs -n kube-system kube-apiserver-<node> --tail=50
@@ -149,7 +155,6 @@ kubectl describe node <node-name> | grep -A 10 "Allocated resources"
 kubectl describe pod <pod-name> -n <ns> | grep -A 20 Events
 kubectl logs <pod-name> -n <ns> --previous  # 查看上次崩溃日志
 ```
-
 **Level 3 - 生产实践（完整问题分类矩阵）**:
 
 ### 1.1 控制平面故障模式
@@ -250,7 +255,17 @@ kubectl logs <pod-name> -n <ns> --previous  # 查看上次崩溃日志
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
 ```
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 现象: 网站访问返回 502 错误
 
 Why 1: 为什么返回 502？
@@ -270,9 +285,9 @@ Why 5: 为什么端口被改了？
 
 根因: 缺乏配置变更管理流程
 ```
-
 **Level 2 - 进阶实践（结合工具验证每一步）**:
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Why 1: 检查 Ingress/Service 状态
 kubectl get ingress -n production
 kubectl describe svc backend-service -n production
@@ -293,7 +308,6 @@ kubectl get svc redis -n production -o yaml | grep port
 # Why 5: 查看变更记录
 kubectl get events -n production --field-selector reason=Updated | grep redis
 ```
-
 **Level 3 - 生产实践（完整根因分析方法论）**:
 
 ### 2.1 5 Why分析法
@@ -528,7 +542,8 @@ MTTR = 发现时间 + 定位时间 + 修复时间
 ### 渐进式示例
 
 **Level 1 - 基础用法（标准化快速诊断清单）**:
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # MTTR 优化第一步：标准化问题检查步骤
 # 以下 5 个命令覆盖 80% 的常见问题
 
@@ -547,7 +562,6 @@ kubectl get events -A --field-selector=reason=Scheduled --sort-by='.lastTimestam
 # 5. DNS 连通性（10 秒）
 kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup kubernetes 2>/dev/null
 ```
-
 **Level 3 - 生产实践（智能告警 + 自动诊断 + 自动修复）**:
 
 ### 4.1 问题发现优化
@@ -599,7 +613,8 @@ spec:
 
 ### 4.2 故障定位加速
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # ========== 快速故障诊断脚本 ==========
 set -euo pipefail
@@ -645,7 +660,6 @@ kubectl get pv,pvc -A | grep -E "(Failed|Pending|Lost)"
 
 echo -e "\n=== 诊断完成 ==="
 ```
-
 ### 4.3 自动化修复机制
 
 ```yaml
@@ -968,7 +982,7 @@ spec:
         summary: "检测到未授权的配置变更"
 ```
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### 常见误区与最佳实践
 
 **常见误区**:
@@ -1009,7 +1023,6 @@ echo "2. 异常 Pod: $(kubectl get pods -A --no-headers | grep -Evc 'Running|Com
 echo "3. 待调度 Pod: $(kubectl get pods -A --field-selector=status.phase=Pending --no-headers 2>/dev/null | wc -l) 个"
 echo "4. 最近 Warning 事件: $(kubectl get events -A --field-selector=type=Warning --no-headers 2>/dev/null | wc -l) 条"
 ```
-
 **Level 3 - 生产实践（完整预防体系）**:
 
 ### 6.1 问题预防金字塔
@@ -1203,7 +1216,7 @@ kubectl exec -n kube-system etcd-master1 -- etcdctl member list
 - 增加etcd健康检查频率
 - 建立多地域etcd集群架构
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 #### 案例2: 资源配额配置错误引发连锁问题
 ```markdown
 **问题背景**: 
@@ -1233,7 +1246,6 @@ kubectl describe resourcequota -n order-system
 kubectl describe hpa -n order-system
 # HPA因资源不足无法创建新副本
 ```
-
 **根本原因**: 
 ResourceQuota配置过于保守，在流量激增时限制了必要的资源扩展
 
@@ -1249,7 +1261,7 @@ ResourceQuota配置过于保守，在流量激增时限制了必要的资源扩�
 - 完善容量规划流程
 - 增加压力测试频次
 ```
-
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #### 案例3: 网络策略配置失误阻断服务通信
 ```markdown
 **问题背景**: 
@@ -1280,7 +1292,6 @@ kubectl get pods --show-labels -n production | grep payment
 kubectl describe networkpolicy restrictive-policy -n production
 # 策略阻止了必要的服务间通信
 ```
-
 **根本原因**: 
 NetworkPolicy更新时标签选择器配置错误，意外阻断了合法的服务间通信
 
@@ -1296,7 +1307,7 @@ NetworkPolicy更新时标签选择器配置错误，意外阻断了合法的服�
 - 增加服务连通性监控
 - 完善变更管理规范
 ```
-
+# 🟢 低风险：只读/信息收集，通常无副作用
 ### 7.2 故障处理经验总结
 
 #### 常见诊断误区及避免方法
@@ -1361,7 +1372,6 @@ ps aux
 df -h
 ls -la /app/config/
 ```
-
 **Level 3 - 生产实践（智能化诊断与自愈）**:
 
 ### 8.1 分布式系统故障定位方法论
@@ -1493,7 +1503,8 @@ spec:
 | **安全攻击** | 验证安全防护体系 | 中 | 季度 | 威胁检测准确率 |
 
 #### Chaos Engineering最佳实践
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # ========== 混沌工程实验脚本 ==========
 set -euo pipefail
@@ -1559,7 +1570,6 @@ EOF
 
 echo "✅ 混沌工程实验完成"
 ```
-
 ### 常见误区与最佳实践
 
 **常见误区**:
@@ -1606,7 +1616,8 @@ echo "✅ 混沌工程实验完成"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看最近的异常事件
 kubectl get events -A --sort-by=.metadata.creationTimestamp --field-selector=type=Warning | tail -20
 
@@ -1622,7 +1633,6 @@ kubectl logs <pod> --previous -n <namespace>
 # 网络连通性诊断
 kubectl exec -it <pod> -- ping <target-svc>.<ns>.svc.cluster.local
 ```
-
 ## 交叉引用
 
 - 相关主题：[生产故障排查手册](production-troubleshooting-playbook.md) · [事故管理与 Runbooks](incident-management-runbooks.md) · [混沌工程](chaos-engineering.md) · [SRE 成熟度模型](sre-maturity-model.md)
@@ -1640,3 +1650,5 @@ kubectl exec -it <pod> -- ping <target-svc>.<ns>.svc.cluster.local
 - [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
+
+<!-- risk-assessed -->

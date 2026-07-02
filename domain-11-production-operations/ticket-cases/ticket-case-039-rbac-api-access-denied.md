@@ -65,6 +65,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单描述
@@ -90,7 +95,8 @@ relationships:
 
 按“先日志、后 ServiceAccount、再 Role/RoleBinding”的顺序排查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 查看 Operator Pod 状态与日志
 kubectl get pod -n platform-tools -l app=backup-operator
 kubectl logs -n platform-tools -l app=backup-operator --tail=200 | grep -i "forbidden|denied|RBAC" | tail -30
@@ -122,7 +128,6 @@ kubectl get deployment backup-operator -n platform-tools -o yaml | grep -A 5 ser
 # 7. 查看 apiserver 审计日志中 RBAC 拒绝记录（如有审计日志集成）
 kubectl logs -n kube-system -l component=kube-apiserver --tail=500 | grep "backup-operator" | grep "forbidden" | tail -20
 ```
-
 ## 根因分析
 
 `backup-operator` v2.3.0 新增了集群级 CRD `backups.backup.example.io`、`restores.backup.example.io` 和 `backuppolicies.backup.example.io`，但部署时只创建了 namespace 级别的 `Role` 和 `RoleBinding`，未授予 Operator 跨命名空间 list/watch 这些 CRD 的权限。
@@ -149,7 +154,8 @@ User "system:serviceaccount:platform-tools:backup-operator" cannot list resource
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -167,13 +173,13 @@ rules:
   verbs: ["create", "patch"]
 EOF
 ```
-
 **第二步：创建 ClusterRoleBinding，将 ClusterRole 绑定到 Operator 的 ServiceAccount**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<'EOF' | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -189,31 +195,31 @@ subjects:
   namespace: platform-tools
 EOF
 ```
-
 **第三步：重启 Operator Pod 以重新加载权限**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment backup-operator -n platform-tools
 kubectl rollout status deployment backup-operator -n platform-tools --timeout=180s
 ```
-
 **第四步：验证权限已生效**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl auth can-i list backups.backup.example.io \
   --as=system:serviceaccount:platform-tools:backup-operator \
   --all-namespaces
 ```
-
 ## 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. Operator Pod 全部 Running 且重启次数不再增加
 kubectl get pod -n platform-tools -l app=backup-operator -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.phase}{"\t"}{.status.containerStatuses[0].restartCount}{"\n"}{end}'
 
@@ -241,7 +247,6 @@ kubectl exec -n platform-tools deploy/backup-operator -- \
 # 5. 检查 ClusterRoleBinding 已正确绑定
 kubectl get clusterrolebinding backup-operator-crds -o yaml
 ```
-
 ## 回复客户话术
 
 > 您好，工单 TC-2026-039 已处理完成。
@@ -298,3 +303,6 @@ kubectl get clusterrolebinding backup-operator-crds -o yaml
 - 证书过期导致 kubelet 无法连接 apiserver
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - 基于角色的访问控制
+
+
+<!-- risk-assessed -->

@@ -31,6 +31,11 @@ prerequisites:
 - troubleshooting-methodology
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第八章：AI Agent 时代的运维范式革命
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  
@@ -155,3 +160,6 @@ AI Agent + FTA 打破不可能三角:
 ---
 
 > **导航**: [<< 上一章 - FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md) | [下一章 - FTA 作为 AI Agent 的知识骨架 >>](./09-fta-as-agent-knowledge-skeleton.md)
+
+
+<!-- risk-assessed -->

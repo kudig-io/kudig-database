@@ -39,6 +39,11 @@ prerequisites:
 - etcd-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 集群删除故障排查手册
@@ -119,7 +124,8 @@ k8s_versions:
 
 **排查**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 kubeadm 进程状态
 ps aux | grep kubeadm
 
@@ -134,7 +140,6 @@ cat /proc/$(pgrep kubeadm)/wchan
 journalctl -u kubelet -f
 dmesg -w
 ```
-
 **常见原因与解决**:
 
 | 原因 | 解决 |
@@ -186,7 +191,8 @@ reset 只检查 root 权限（`RunRootCheckOnly`），不检查其他系统条�
 
 **排查**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 etcd Pod 是否还在运行
 crictl ps | grep etcd
 
@@ -203,7 +209,6 @@ ETCDCTL_API=3 etcdctl member list --write-out=table \
   --cert=/etc/kubernetes/pki/etcd/peer.crt \
   --key=/etc/kubernetes/pki/etcd/peer.key
 ```
-
 **常见原因**:
 
 | 原因 | 解决 |
@@ -227,7 +232,17 @@ ETCDCTL_API=3 etcdctl member list --write-out=table \
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 跳过 etcd 移除，直接清理
 kubeadm reset -f --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置
 rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
@@ -239,7 +254,6 @@ etcdctl member list
 # 移除不健康的成员
 etcdctl member remove <unhealthy-member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
-
 ### 2.3 "No etcd config found"
 
 **症状**:
@@ -268,7 +282,8 @@ etcdctl member remove <unhealthy-member-id>  # ⚠️ 移除 etcd 成员，可�
 
 **排查**:
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查容器运行时状态
 systemctl status containerd
 systemctl status docker
@@ -280,7 +295,6 @@ ls -la /var/run/crio/crio.sock
 # 测试 CRI 连接
 crictl info
 ```
-
 **解决**:
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
@@ -288,7 +302,17 @@ crictl info
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重启容器运行时
 systemctl restart containerd
 
@@ -301,12 +325,12 @@ rm -rf /var/lib/containerd/*  # ⚠️ 删除系统/数据文件
 systemctl start containerd
 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ### 3.2 容器无法停止（任务忙碌）
 
 **症状**: `crictl stop` 超时
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 强制停止所有容器
 crictl stop $(crictl ps -q) 2>/dev/null || true
 crictl rmp $(crictl ps -a -q) 2>/dev/null || true
@@ -316,7 +340,6 @@ ctr -n k8s.io tasks kill $(ctr -n k8s.io tasks -q) -s SIGKILL
 ctr -n k8s.io containers rm $(ctr -n k8s.io containers -q)
 ctr -n k8s.io snapshots rm $(ctr -n k8s.io snapshots -q)
 ```
-
 ---
 
 ## 4. 卸载问题
@@ -373,7 +396,17 @@ kubeadm reset -f --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 使用懒卸载（不等待远程响应）
 umount -l /var/lib/kubelet/pods/xxx/volumes/kubernetes.io~nfs/xxx
 
@@ -385,7 +418,6 @@ umount -f /var/lib/kubelet/pods/xxx/volumes/kubernetes.io~nfs/xxx
 reboot
 # 重启后执行 kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置
 ```
-
 ---
 
 ## 5. kubectl delete node 问题
@@ -403,7 +435,17 @@ reboot
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方案 1: 先停止目标节点的 kubelet
 ssh <node> "systemctl stop kubelet"
 kubectl delete node <node>
@@ -415,7 +457,6 @@ kubectl delete node <node> --force --grace-period=0
 kubectl patch node <node> -p '{"metadata":{"finalizers":null}}' --type=merge
 kubectl delete node <node>
 ```
-
 ### 5.2 drain 失败
 
 **症状**:
@@ -437,14 +478,23 @@ there are pending pods when an error occurred...
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 强制 drain
 kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --force --timeout=60s
 
 # 如果还是失败，跳过 drain 直接删除
 kubectl delete node <node> --force --grace-period=0
 ```
-
 ---
 
 ## 6. 重新初始化失败
@@ -456,7 +506,17 @@ kubectl delete node <node> --force --grace-period=0
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查看端口占用
 ss -tlnp | grep 10250
 
@@ -466,7 +526,6 @@ fuser -k 10250/tcp
 # 重启容器运行时
 systemctl restart containerd
 ```
-
 ### 6.2 "[ERROR DirAvailable--etc-kubernetes-manifests]"
 
 **原因**: `/etc/kubernetes/manifests/` 目录中有残留文件。
@@ -487,13 +546,22 @@ kubeadm init ...
 > - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 重置容器运行时
 systemctl stop containerd
 rm -rf /var/lib/containerd/*  # ⚠️ 删除系统/数据文件
 systemctl start containerd
 ```
-
 ### 6.4 etcd 数据残留导致初始化失败
 
 **症状**:
@@ -555,3 +623,6 @@ strace -f -e trace=umount kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配�
 - [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
 - [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
+
+
+<!-- risk-assessed -->

@@ -51,6 +51,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # SLI 实现指南：可用性、延迟、吞吐量
@@ -324,11 +329,11 @@ SLI 的准确性直接影响 SLO 可信度。需要从采集、计算、存储�
 
 分布式追踪可以帮助定位 SLI 恶化的具体链路。
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Jaeger 查询高延迟 trace
 kubectl port-forward svc/jaeger-query 16686:16686 -n observability
 ```
-
 在 Jaeger UI 中按 `service=order-service` 与 `duration>500ms` 过滤，分析慢请求经过的每个 span。
 
 ### SLI 异常排查
@@ -471,3 +476,6 @@ spec:
 
 - [[domain-06-observability/06-slo-sli/02-error-budget-policy.md|错误预算政策与 burn rate alert]]
 - [[domain-06-observability/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
+
+
+<!-- risk-assessed -->

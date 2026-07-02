@@ -51,6 +51,11 @@ cross_refs:
   label: '速查卡: linux'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 07 - Linux 安全加固与合规管理：生产环境安全运维专家指南
@@ -123,7 +128,8 @@ Linux 安全模型是一个多层防御体系，从外到内逐层保护系统�
 
 Linux 通过 /etc/passwd、/etc/shadow、/etc/group 三个文件管理用户和组信息。每个用户有唯一的 UID，系统通过 UID 而非用户名来识别身份。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # /etc/passwd 文件格式
 # 用户名:x:UID:GID:描述:家目录:Shell
 root:x:0:0:root:/root:/bin/bash
@@ -148,7 +154,6 @@ finger username                                # 详细信息
 su - username                                  # 切换用户
 sudo -u username command                       # 以指定用户执行
 ```
-
 ## 密码策略
 
 ```bash
@@ -189,7 +194,8 @@ usermod -s /sbin/nologin username   # 禁止登录
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # /etc/sudoers 或 /etc/sudoers.d/ 目录下的文件
 # 使用 visudo 编辑，自动检查语法
 
@@ -218,7 +224,6 @@ Defaults!SUDOREPLAY !log_output
 Defaults timestamp_timeout=15          # sudo 密码缓存时间 (分钟)
 Defaults passwd_tries=3                # 密码尝试次数
 ```
-
 ---
 
 ## SSH 安全配置
@@ -228,7 +233,8 @@ SSH 是 Linux 服务器最主要的远程管理方式，也是攻击者最常尝
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # /etc/ssh/sshd_config - SSH 服务端安全配置
 
 # ===== 基本安全 =====
@@ -278,7 +284,6 @@ Banner /etc/issue.net               # 登录前横幅
 # 重启生效
 systemctl restart sshd
 ```
-
 ## SSH 密钥管理
 
 ```bash
@@ -387,7 +392,8 @@ SELinux (Security-Enhanced Linux) 是由 NSA 开发的强制访问控制 (MAC) �
 
 ## SELinux 上下文
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看文件安全上下文
 ls -Z /var/www/html/
 # 输出: system_u:object_r:httpd_sys_content_t:s0 /var/www/html/index.html
@@ -424,7 +430,6 @@ setsebool -P virt_use_nfs on                 # 允许虚拟机使用 NFS
 setsebool -P container_manage_cgroup on      # 容器管理 cgroup
 setsebool -P container_use_ceph on           # 容器使用 Ceph
 ```
-
 ## SELinux 故障排查
 
 ```bash
@@ -503,7 +508,17 @@ apparmor_parser -r /etc/apparmor.d/usr.sbin.nginx
 
 ## 安全检查命令
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 检查 UID 0 账户 (应仅有 root)
 awk -F: '$3==0' /etc/passwd
 
@@ -544,7 +559,6 @@ lastlog                               # 最后登录时间
 w
 who
 ```
-
 ---
 
 <!-- chunk: 性能调优 -->## 性能调优
@@ -575,7 +589,8 @@ auditctl -D                           # 临时清空规则（调试用）
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # production-security-harden.sh - 生产环境安全加固脚本
 
@@ -683,13 +698,13 @@ EOF
 
 echo "=== 安全加固完成 ==="
 ```
-
 ## 审计配置
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # /etc/audit/rules.d/production.rules
 
 # 删除所有已有规则
@@ -746,7 +761,6 @@ aureport --summary
 aureport -x --summary                    # 可执行文件报告
 aureport -u --summary                    # 用户报告
 ```
-
 ## 文件完整性监控 (AIDE)
 
 ```bash
@@ -923,3 +937,5 @@ faillock --user username       # 查看锁定状态
 - 09-linux-operations-basics
 
 ```
+
+<!-- risk-assessed -->

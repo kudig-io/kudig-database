@@ -65,6 +65,11 @@ cross_refs:
   label: '速查卡: networking'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Flannel Windows 节点支持
@@ -146,20 +151,20 @@ Get-Module -ListAvailable | Where-Object {$_.Name -eq "HNSTechs"}
 
 ### 3.2 容器运行时
 
-```powershell
+``` powershell
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 containerd (推荐)
 # 或使用 Docker EE with Windows Containers
 ```
-
 ### 3.3 Kubernetes 组件版本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # kube-apiserver, kube-controller-manager, kubelet 需要支持 Windows
 kubectl version --short
 
 # kubelet 版本需要与 kube-apiserver 匹配
 ```
-
 ---
 
 <!-- chunk: 4. 配置步骤 -->
@@ -218,7 +223,8 @@ sc config flanneld start= demand
 
 ### 4.4 HNS 网络创建
 
-```powershell
+``` powershell
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 HNS Network (Flannel 会自动创建，也可手动)
 # 使用 Kubernetes Node 注解指定网络类型
 
@@ -231,7 +237,6 @@ Get-HNSNetwork | Format-List
 # 查看 HNS Endpoint (Pod vEthernet)
 Get-HNSEndpoint | Format-List
 ```
-
 ---
 
 <!-- chunk: 5. 跨平台通信 -->
@@ -257,14 +262,14 @@ vSwitch ──▶ External Network ──▶ VXLAN Tunnel ──▶ Linux Node
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从 Linux Pod 测试到 Windows Pod
 kubectl exec -it <linux-pod> -- ping -c 3 10.244.1.2
 
 # 从 Windows Pod 测试到 Linux Pod
 kubectl exec -it <windows-pod> -- ping 10.244.2.2
 ```
-
 ---
 
 <!-- chunk: 6. 故障排查 -->
@@ -350,7 +355,8 @@ spec:
 
 ### 8.2 网络策略注意事项
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 由于 Flannel 不支持 Windows NetworkPolicy
 # 建议在 Linux 节点前使用 Kubernetes NetworkPolicy
 # 或使用服务网格（如 Istio）进行流量控制
@@ -358,7 +364,6 @@ spec:
 # 检查 Windows 节点上的 pod 是否正确隔离
 kubectl get pods -o wide -n <namespace> | grep -i windows
 ```
-
 ### 8.3 监控配置
 
 ```yaml
@@ -436,3 +441,6 @@ C:\flannel\flanneld.exe --version
 ## Related
 
 - [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+
+
+<!-- risk-assessed -->

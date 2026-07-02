@@ -41,6 +41,11 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # AI/ML 工作负载故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: AI基础设施运维保障
@@ -80,7 +85,8 @@ prerequisites:
 
 ### AI/ML 工作负载状态检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # GPU 资源状态检查
 echo "=== GPU 资源状态检查 ==="
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.capacity.nvidia\.com/gpu}{"\n"}{end}'
@@ -103,7 +109,6 @@ echo "=== 模型服务状态 ==="
 kubectl get services -l app=model-serving --all-namespaces
 kubectl get deployments -l app=model-serving --all-namespaces
 ```
-
 ## 排查方法与步骤
 
 ### 诊断原理说明
@@ -146,7 +151,8 @@ AI/ML 工作负载问题
 
 #### GPU 资源诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # GPU 资源诊断脚本
 
@@ -179,10 +185,10 @@ for node in $(kubectl get nodes -o name | cut -d/ -f2); do
   kubectl debug node/$node -it --image=ubuntu:20.04 -- chroot /host nvidia-smi --query-gpu=memory.used,memory.free --format=csv,noheader,nounits 2>/dev/null || echo "  无法访问节点 GPU 信息"
 done
 ```
-
 #### 分布式训练诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 分布式训练诊断脚本
 
@@ -216,10 +222,10 @@ for pod in $(kubectl get pods -l training=distributed --all-namespaces -o name);
   kubectl logs $pod --tail=100 2>/dev/null | grep -i -E "(error|exception|nccl|timeout|connection)" | head -5
 done
 ```
-
 #### 模型服务诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 模型服务诊断脚本
 
@@ -260,10 +266,10 @@ done
 echo "6. 批处理配置检查:"
 kubectl get deployments -l app=model-serving --all-namespaces -o json | jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name): batch_size=\(.spec.template.spec.containers[0].env[] | select(.name=="BATCH_SIZE") .value // "default")"'
 ```
-
 #### 数据处理诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 数据处理诊断脚本
 
@@ -298,7 +304,6 @@ for job in $(kubectl get jobs -l data-preprocessing=active --all-namespaces -o n
   kubectl describe $job | grep -E "(Active|Succeeded|Failed)"
 done
 ```
-
 ## 解决方案与风险控制
 
 ### GPU 资源问题解决
@@ -697,7 +702,8 @@ spec:
 
 ### AI/ML 工作负载验证脚本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # AI/ML 工作负载验证脚本
 
@@ -774,7 +780,6 @@ echo "4. 数据处理验证:"
 
 echo "AI/ML 工作负载验证完成！"
 ```
-
 ### AI/ML 监控告警配置
 
 ```yaml
@@ -926,7 +931,8 @@ aiMlBestPractices:
 
 ### AI/ML 成本优化策略
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # AI/ML 成本优化脚本
 
@@ -974,7 +980,6 @@ COST_REPORT="/var/log/kubernetes/ml-cost-optimization-$(date +%Y%m%d).log"
 
 echo "成本优化报告已生成: $COST_REPORT"
 ```
-
 ### 典型问题案例
 
 ### 案例一：分布式训练 NCCL 错误
@@ -1570,3 +1575,6 @@ verification: |
 ## Related
 
 - [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+
+
+<!-- risk-assessed -->

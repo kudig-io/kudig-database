@@ -53,6 +53,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 自动化运维与CI/CD集成
@@ -212,7 +217,8 @@ services:
 ```
 
 ## 配置文件组织结构
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 项目配置结构
 .
 ├── docker-compose.yml          # 主配置文件
@@ -233,7 +239,6 @@ services:
     ├── rollback.sh
     └── health-check.sh
 ```
-
 ## Terraform Docker Provider 配置
 
 ## 基础设施定义
@@ -742,7 +747,8 @@ RUN if [ "$BUILD_ENV" = "production" ]; then \
 ```
 
 ## 构建脚本自动化
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # build.sh - 智能构建脚本
 
@@ -802,13 +808,13 @@ main() {
 
 main "$@"
 ```
-
 <!-- chunk: 容器部署自动化 -->## 容器部署自动化
 
 ## 蓝绿部署策略
 
 ## Docker Compose 蓝绿部署
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # blue-green-deploy.sh
 
@@ -875,7 +881,6 @@ docker stack rm $CURRENT_STACK
 
 echo "Deployment completed successfully"
 ```
-
 ## 滚动更新配置
 
 ## Kubernetes 滚动更新策略
@@ -1166,7 +1171,8 @@ groups:
 ## 自动化运维脚本
 
 ## 健康检查和自愈脚本
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # auto-healing.sh
 
@@ -1333,13 +1339,13 @@ trap 'log "INFO: Shutting down auto-healing monitor"; exit 0' TERM INT
 
 main "$@"
 ```
-
 <!-- chunk: 灾备与回滚机制 -->## 灾备与回滚机制
 
 ## 数据备份策略
 
 ## 自动化备份脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # backup-docker-data.sh
 
@@ -1425,11 +1431,11 @@ main() {
 
 main "$@"
 ```
-
 ## 快速回滚机制
 
 ## 回滚脚本
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # rollback.sh
 
@@ -1495,7 +1501,6 @@ fi
 
 echo "Rollback process completed"
 ```
-
 通过这套完整的自动化运维体系，可以实现从代码提交到生产部署的全流程自动化，大大提高运维效率和系统稳定性。
 
 ---
@@ -1525,3 +1530,6 @@ echo "Rollback process completed"
 ## Related
 
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+
+
+<!-- risk-assessed -->

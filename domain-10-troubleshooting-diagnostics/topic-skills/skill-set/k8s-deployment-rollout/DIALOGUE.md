@@ -26,6 +26,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # [[entities/deployment.md|Deployment]] Rollout Failure — 远程顾问对话脚本
 
@@ -61,7 +66,8 @@ relationships:
 
 ### 分支 1-A：能执行 kubectl
 **顾问**: 请执行以下只读命令：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Deployment 状态
 kubectl get deployment <name> -n <ns> -o jsonpath='{"DESIRED: "}{.spec.replicas}{"\nREADY: "}{.status.readyReplicas}{"\nUP-TO-DATE: "}{.status.updatedReplicas}{"\nAVAILABLE: "}{.status.availableReplicas}{"\nPAUSED: "}{.spec.paused}{"\n"}'
 # ReplicaSet
@@ -80,7 +86,8 @@ kubectl get pods -n <ns> -l app=<label>
 
 ### 分支 1-C：多 Deployment 同时问题
 **顾问**: ⚠️ 多 Deployment 同时问题是**升级信号**，通常是集群级别问题。请立即执行：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes
 kubectl get events --all-namespaces --field-selector type=Warning | tail -30
 ```
@@ -95,7 +102,8 @@ kubectl get events --all-namespaces --field-selector type=Warning | tail -30
 
 ### 分支 2-A：Pod 为 Pending/ContainerCreating
 **顾问**: 执行以下诊断：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Pending Pod 事件
 kubectl describe pod <pod> -n <ns> | grep -A 20 "Events"
 # 检查节点资源
@@ -111,7 +119,8 @@ kubectl get events -n <ns> --field-selector reason=FailedScheduling
 
 ### 分支 2-B：Pod 为 ImagePullBackOff/ErrImagePull
 **顾问**: 执行以下检查：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 确认具体错误
 kubectl describe pod <pod> -n <ns> | grep -A 5 "Failed to pull image|Back-off pulling image"
 # 检查镜像配置
@@ -127,7 +136,8 @@ kubectl get sa default -n <ns> -o yaml | grep -A 10 imagePullSecrets
 
 ### 分支 2-C：Pod 为 CrashLoopBackOff/Error
 **顾问**: 执行以下诊断：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看崩溃日志
 kubectl logs <pod> -n <ns> --previous 2>/dev/null | tail -50
 # 检查探针配置
@@ -144,7 +154,8 @@ kubectl describe pod <pod> -n <ns> | grep -A 10 "Last State|Restart Count"
 
 ### 分支 2-D：Deployment paused = true
 **顾问**: 这是最容易修复的情况。请确认：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.paused}'
 kubectl rollout history deployment/<name> -n <ns>
 ```
@@ -157,7 +168,8 @@ kubectl rollout history deployment/<name> -n <ns>
 
 ### 分支 2-E：新旧 ReplicaSet 共存
 **顾问**: 执行：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get rs -n <ns> -l app=<label> -o wide
 kubectl get deployment <name> -n <ns> -o jsonpath='{"maxUnavailable: "}{.spec.strategy.rollingUpdate.maxUnavailable}{"\nmaxSurge: "}{.spec.strategy.rollingUpdate.maxSurge}{"\n"}'
 ```
@@ -180,7 +192,8 @@ kubectl get deployment <name> -n <ns> -o jsonpath='{"maxUnavailable: "}{.spec.st
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"template":{"spec":{"containers":[{"name":"app","resources":{"requests":{"cpu":"100m","memory":"128Mi"}}}]}}}}'
 ```
 > 【如果无法确定容器名】先执行 `kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containers[*].name}'`，替换命令中的 "app"。
@@ -188,7 +201,8 @@ kubectl patch deployment/<name> -n <ns> -p '{"spec":{"template":{"spec":{"contai
 **方案 3**：减少副本数：`kubectl scale deployment/<name> --replicas=1 -n <ns>`。若当前已是 1 副本，此方案不适用。
 
 **验证**：
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get deployment <name> -n <ns>  # READY==DESIRED, UP-TO-DATE==DESIRED
 kubectl rollout status deployment/<name> -n <ns>  # successfully rolled out
 ```
@@ -200,7 +214,8 @@ kubectl rollout status deployment/<name> -n <ns>  # successfully rolled out
 **顾问**: 选择修复方案：
 
 **方案 1（标签错误）**：
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl set image deployment/<name> app=<正确镜像>:<正确标签> -n <ns>
 ```
 > 【如果无法确定正确标签】从镜像仓库确认最新可用标签，或回退到上一个已知标签。
@@ -210,7 +225,8 @@ kubectl set image deployment/<name> app=<正确镜像>:<正确标签> -n <ns>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch sa default -n <ns> -p '{"imagePullSecrets":[{"name":"registry-secret"}]}'
 ```
 > 【如果无法确定 secret】执行 `kubectl get secrets -n <ns> | grep registry`，或联系仓库管理员。
@@ -220,7 +236,8 @@ kubectl patch sa default -n <ns> -p '{"imagePullSecrets":[{"name":"registry-secr
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout history deployment/<name> -n <ns>
 kubectl rollout undo deployment/<name> -n <ns>
 ```
@@ -239,7 +256,8 @@ kubectl rollout undo deployment/<name> -n <ns>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/initialDelaySeconds","value":60},{"op":"replace","path":"/spec/template/spec/containers/0/readinessProbe/initialDelaySeconds","value":30}]'
 ```
 > 【如果容器不是第一个】先执行 `kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containers[*].name}'`，将 /0 替换为对应索引。
@@ -249,7 +267,8 @@ kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/timeoutSeconds","value":10},{"op":"replace","path":"/spec/template/spec/containers/0/livenessProbe/failureThreshold","value":5}]'
 ```
 > 【如果 patch 返回 NotFound】该字段不存在，先查看当前探针：`kubectl get deployment <name> -n <ns> -o yaml | grep -A 20 "livenessProbe"`
@@ -259,7 +278,8 @@ kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"replace","path
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"remove","path":"/spec/template/spec/containers/0/livenessProbe"}]'
 ```
 ⚠️ 仅作紧急恢复，崩溃时不会自动重启。恢复后应立即重新添加并调优。
@@ -276,7 +296,8 @@ kubectl patch deployment/<name> -n <ns> --type='json' -p='[{"op":"remove","path"
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":1,"maxSurge":1}}}}'
 ```
 > 【如果 replicas=1 且希望零停机】先执行 `kubectl scale deployment/<name> --replicas=2 -n <ns>`，等 scale 完成后再调策略。
@@ -290,10 +311,10 @@ kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"Rolling
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":"25%","maxSurge":"25%"}}}}'
 ```
-
 ### 分支 3-E：回滚（高风险）
 **顾问**: ⚠️ 回滚前请确认检查清单：
 - [ ] 新版本问题无法在 10 分钟内修复
@@ -309,7 +330,8 @@ kubectl patch deployment/<name> -n <ns> -p '{"spec":{"strategy":{"type":"Rolling
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl rollout history deployment/<name> -n <ns>
 kubectl rollout undo deployment/<name> -n <ns>
 # 或指定版本：kubectl rollout undo deployment/<name> -n <ns> --to-revision=<版本>
@@ -378,7 +400,8 @@ kubectl rollout undo deployment/<name> -n <ns>
 顾问："阿里云环境有额外的发布管理维度，请按以下顺序排查：
 
 **步骤 1：阿里云镜像仓库检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查镜像是否来自阿里云ACR
 kubectl get deployment <deploy> -o yaml | grep image
 
@@ -388,14 +411,14 @@ kubectl get secret -n <ns> | grep acr
 # 检查ACR实例状态
 aliyun cr GET /repos
 ```
-
 > **如果无法执行aliyun CLI**：请登录ACR控制台，告诉我：
 > 1. 镜像仓库是否存在？
 > 2. 镜像Tag是否存在？
 > 3. 是否有访问权限？
 
 **步骤 2：ACK发布策略检查**
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查是否使用ACK灰度发布
 kubectl get rollout -A
 
@@ -405,7 +428,6 @@ kubectl get hpa -A
 # 检查ESS弹性伸缩状态
 aliyun ess DescribeScalingGroups --RegionId <region>
 ```
-
 **步骤 3：专有云发布特殊考虑**
 - 专有云镜像可能存储在内部Harbor
 - 检查镜像同步任务状态
@@ -419,14 +441,14 @@ aliyun ess DescribeScalingGroups --RegionId <region>
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建ACR拉取Secret
 kubectl create secret docker-registry acr-secret   --docker-server=<acr-domain>   --docker-username=<username>   --docker-password=<password>
 
 # 更新Deployment使用Secret
 kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSecrets":[{"name":"acr-secret"}]}}}}'
 ```
-
 如ESS缩容导致资源不足：
 1. 调整ESS最小实例数
 2. 临时扩容节点
@@ -441,3 +463,6 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 ## Related
 
 - [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+
+
+<!-- risk-assessed -->

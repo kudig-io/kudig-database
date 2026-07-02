@@ -43,6 +43,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: [[wasmCloud|wasmCloud]] 平台
@@ -674,6 +679,7 @@ func main() {}
 ## 3.1 内置 Capability Providers / Built-in Providers
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 wasmCloud 内置 Capability Providers
 
 HTTP 服务器
@@ -712,7 +718,6 @@ Blob 存储
   wasmcloud:secrets:nats-kv   - NATS KV 加密
   wasmcloud:secrets:vault     - Vault 集成
 ```
-
 ## 3.2 自定义 Capability Provider / Custom Provider
 
 ```rust
@@ -1067,7 +1072,8 @@ statefulSet:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 NATS
 helm repo add nats https://nats-io.github.io/k8s/helm/charts/
 helm repo update
@@ -1084,7 +1090,6 @@ kubectl -n wasmcloud exec -it nats-box -- nats server list
 # 创建 wasmCloud 专用账户
 kubectl -n wasmcloud exec -it nats-box -- nats account add wasmcloud
 ```
-
 ## 5.3 Actor 消息通信 / Actor Messaging
 
 ```rust
@@ -1418,7 +1423,8 @@ wash app delete ecommerce-platform
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 wasmCloud Operator
 helm repo add wasmcloud https://wasmcloud.github.io/wasmcloud-operator
 helm repo update
@@ -1433,7 +1439,6 @@ kubectl -n wasmcloud get pods
 kubectl get crd | grep wasmcloud
 # wasmcloudhostconfigs.k8s.wasmcloud.dev
 ```
-
 ```yaml
 # WasmCloudHostConfig - 配置 wasmCloud Host
 apiVersion: k8s.wasmcloud.dev/v1alpha1
@@ -1584,6 +1589,7 @@ spec:
 ## 8.1 多集群 Lattice / Multi-cluster Lattice
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 wasmCloud 多集群分布式部署架构
 
   ┌─────────────────────────────────────────────────────┐
@@ -1609,7 +1615,6 @@ AWS EKS                 Azure AKS                 阿里云 ACK
                            ├── edge-actor
                            └── sensor-collector
 ```
-
 ## 8.2 NATS Leaf Node 配置 / Leaf Node Configuration
 
 ```yaml
@@ -1892,7 +1897,8 @@ mod tests {
 
 ## 9.3 本地开发环境 / Local Development
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启动本地 wasmCloud 开发环境
 # 方法 1: 使用 wash up
 wash up --detached
@@ -1946,7 +1952,6 @@ curl http://localhost:8080/api/orders
 # 4. 查看日志
 wash logs --follow
 ```
-
 ---
 
 <!-- chunk: 10. 安全模型 -->## 10. 安全模型
@@ -2219,7 +2224,8 @@ data:
 
 ## 12.1 生产部署清单 / Production Checklist
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # wasmCloud 生产部署检查清单
 
 echo "=== 1. 检查 NATS 集群健康 ==="
@@ -2253,7 +2259,6 @@ kubectl -n monitoring get pods -l app=otel-collector
 
 echo "=== 生产部署检查完成 ==="
 ```
-
 ## 12.2 滚动更新 / Rolling Updates
 
 ```bash
@@ -2288,7 +2293,8 @@ wash app status orders-update
 
 ## 12.3 故障恢复 / Disaster Recovery
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 场景：Host 问题后自动恢复
 
 # wasmCloud 自动恢复机制：
@@ -2309,7 +2315,6 @@ kubectl -n wasmcloud exec -it nats-box -- \
   nats stream backup WASMCLOUD_EVENTS \
   /backup/wasmcloud-events-$(date +%Y%m%d).tar.gz
 ```
-
 ---
 
 <!-- chunk: 参考资料 / References -->## 参考资料 / References
@@ -2357,3 +2362,6 @@ kubectl -n wasmcloud exec -it nats-box -- \
 - 03-spinkube-framework
 - 05-wasmedge-runtime
 - 06-wasm-component-model
+
+
+<!-- risk-assessed -->

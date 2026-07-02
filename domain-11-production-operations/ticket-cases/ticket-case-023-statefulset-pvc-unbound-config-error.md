@@ -66,6 +66,11 @@ relationships:
   type: related_to
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 工单 023：StatefulSet Pod 启动失败（PVC 未绑定 / 配置错误）
@@ -88,7 +93,8 @@ relationships:
 
 ### 3.1 查看 StatefulSet 与 Pod 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StatefulSet 状态
 kubectl get statefulset mysql -n database
 kubectl describe statefulset mysql -n database
@@ -100,10 +106,10 @@ kubectl get pod -n database -l app=mysql
 kubectl describe pod mysql-3 -n database
 kubectl describe pod mysql-4 -n database
 ```
-
 ### 3.2 查看 PVC 与 PV 状态
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 PVC
 kubectl get pvc -n database
 kubectl describe pvc data-mysql-3 -n database
@@ -113,10 +119,10 @@ kubectl describe pvc data-mysql-4 -n database
 kubectl get pv
 kubectl get pv | grep mysql
 ```
-
 ### 3.3 检查 StorageClass 与 CSI 插件
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 StorageClass 详情
 kubectl get storageclass alicloud-disk-ssd -o yaml
 
@@ -127,10 +133,10 @@ kubectl get pod -n kube-system | grep -E "csi|disk"
 kubectl get csinode
 kubectl describe csinode $(kubectl get node -l topology.kubernetes.io/zone=cn-shanghai-a -o jsonpath='{.items[0].metadata.name}')
 ```
-
 ### 3.4 检查节点可用区拓扑
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看节点可用区标签
 kubectl get nodes -L topology.kubernetes.io/zone
 
@@ -140,17 +146,16 @@ kubectl get pod -n database -l app=mysql -o jsonpath='{range .items[*]}{.metadat
 # 查看节点上已挂载的云盘
 aliyun ecs DescribeDisks --RegionId cn-shanghai --InstanceId i-2zeXXXXXXXXXXXXXX
 ```
-
 ### 3.5 检查 CSI 与阿里云控制台日志
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 CSI provisioner 日志
 kubectl logs -n kube-system -l app=csi-provisioner --tail=200
 
 # 查看 CSI plugin 日志
 kubectl logs -n kube-system -l app=csi-plugin --tail=200 | grep -i "mysql|provision|failed"
 ```
-
 ### 3.6 诊断过程补充说明
 
 StatefulSet 与 Deployment 最大的区别在于其稳定的网络标识与持久化存储。每个 Pod 都有独立的 PVC（通过 `volumeClaimTemplates` 动态创建），Pod 名称与 PVC 名称存在固定对应关系。因此扩容失败时，不能简单地删除 StatefulSet 重新创建，否则可能导致已有 Pod 的 PVC 被误删。正确的做法是先定位新 Pod 对应的 PVC，再分析 PVC 无法 Bound 的原因。
@@ -185,7 +190,17 @@ StatefulSet 与 Deployment 最大的区别在于其稳定的网络标识与持�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 1. 删除 Pending 的 PVC（未绑定，无数据）
 kubectl delete pvc data-mysql-3 data-mysql-4 -n database
 
@@ -196,13 +211,13 @@ kubectl delete pod mysql-3 mysql-4 -n database
 kubectl get pvc -n database -w
 kubectl get pod -n database -l app=mysql -w
 ```
-
 ### 5.2 创建新的 WaitForFirstConsumer StorageClass
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建支持拓扑感知和在线扩容的 StorageClass
 cat <<'EOF' | kubectl apply -f -
 apiVersion: storage.k8s.io/v1
@@ -222,13 +237,13 @@ mountOptions:
   - noatime
 EOF
 ```
-
 ### 5.3 修改 StatefulSet 使用新 StorageClass
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 先导出 StatefulSet 配置备份
 kubectl get statefulset mysql -n database -o yaml > /tmp/mysql-statefulset-backup.yaml
 
@@ -246,23 +261,23 @@ spec:
             storage: 500Gi
 EOF
 ```
-
 ### 5.4 扩容 StatefulSet 并观察
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 扩容到 5 副本
 kubectl scale statefulset mysql --replicas=5 -n database
 
 # 等待并观察
 kubectl rollout status statefulset mysql -n database --timeout=600s
 ```
-
 ## 6. 验证命令
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 StatefulSet 副本数与 Pod 状态
 kubectl get statefulset mysql -n database
 kubectl get pod -n database -l app=mysql
@@ -283,7 +298,6 @@ kubectl exec -it mysql-3 -n database -- mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "
 # 6. 测试云盘挂载与容量
 kubectl exec -it mysql-3 -n database -- df -h /var/lib/mysql
 ```
-
 ## 7. 回复客户话术
 
 > 您好，工单 TC-2026-023 已处理完成。
@@ -331,3 +345,6 @@ kubectl exec -it mysql-3 -n database -- df -h /var/lib/mysql
 - StatefulSet Pod 启动失败：PVC 未绑定
 - PVC 挂载失败：云盘 CSI 插件缺失
 - StatefulSet Pod 启动失败：PVC 未绑定
+
+
+<!-- risk-assessed -->

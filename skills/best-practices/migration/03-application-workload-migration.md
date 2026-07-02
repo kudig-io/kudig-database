@@ -39,6 +39,11 @@ prerequisites:
 - policy-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 03 - 应用工作负载迁移
@@ -134,7 +139,8 @@ k8s_versions:
 
 ## 2.2 使用 skopeo 批量同步
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # sync-images-to-acr.sh
 # 用途: 将自建集群使用的镜像批量同步到 ACR
@@ -172,14 +178,14 @@ done < "$IMAGES_FILE"
 
 echo "镜像同步完成"
 ```
-
 ## 2.3 ACK 配置 ImagePullSecret
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ACR 拉取凭证（每个业务 Namespace 都需要）
 kubectl create secret docker-registry acr-secret \
   --docker-server=registry.cn-hangzhou.aliyuncs.com \
@@ -192,14 +198,14 @@ kubectl patch serviceaccount default \
   -n <namespace> \
   -p '{"imagePullSecrets": [{"name": "acr-secret"}]}'
 ```
-
 ---
 
 <!-- chunk: 3. 资源导出与清洗 -->## 3. 资源导出与清洗
 
 ## 3.1 导出资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # export-resources.sh
 # 从自建集群导出所有业务资源
@@ -243,12 +249,12 @@ kubectl --context=$SOURCE_CONTEXT get clusterrolebindings -o yaml | \
 echo "=== 导出完成: $EXPORT_DIR ==="
 find $EXPORT_DIR -name "*.yaml" | wc -l
 ```
-
 ## 3.2 YAML 清洗脚本
 
 > 导出的 YAML 包含集群特有字段（uid、resourceVersion、creationTimestamp 等），必须清理后才能导入 ACK。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # clean-yaml.sh
 # 清洗导出的 YAML，去除集群特有字段
@@ -308,7 +314,6 @@ done
 
 echo "清洗完成: $CLEAN_DIR"
 ```
-
 ---
 
 <!-- chunk: 4. ACK 特有适配 -->## 4. ACK 特有适配
@@ -400,7 +405,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建命名空间
 for ns_file in ./migration-clean/*/; do
   ns=$(basename $ns_file)
@@ -450,12 +456,12 @@ kubectl --context=ack-cluster apply -f ./migration-clean/clusterrolebindings.yam
 # ACK 支持将阿里云 RAM 用户/角色映射为 K8s RBAC 主体
 # 通过 ACK 控制台: 集群 → 安全管理 → 授权管理
 ```
-
 ---
 
 <!-- chunk: 6. ConfigMap 与 Secret 迁移 -->## 6. ConfigMap 与 Secret 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ConfigMap 迁移
 for ns in $(ls ./migration-clean/); do
   if [ -f "./migration-clean/$ns/configmaps.yaml" ]; then
@@ -479,7 +485,6 @@ done
 kubectl --context=ack-cluster get configmaps -A --no-headers | grep -v kube- | wc -l
 kubectl --context=ack-cluster get secrets -A --no-headers | grep -v kube- | wc -l
 ```
-
 ## 关键注意事项
 
 ```
@@ -500,7 +505,8 @@ ConfigMap 迁移注意:
 
 <!-- chunk: 7. Deployment 迁移 -->## 7. Deployment 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 批量迁移 Deployment
 for ns in $(ls ./migration-clean/); do
   if [ -f "./migration-clean/$ns/deployments.yaml" ]; then
@@ -512,7 +518,6 @@ done
 # 验证 Deployment 状态
 kubectl --context=ack-cluster get deployments -A | grep -v kube-
 ```
-
 ## 常见适配项
 
 ```yaml
@@ -587,7 +592,8 @@ yq eval '
 
 <!-- chunk: 9. Ingress 迁移 -->## 9. Ingress 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Ingress 迁移（确保 ingressClassName 正确）
 for ns in $(ls ./migration-clean/); do
   if [ -f "./migration-clean/$ns/ingresses.yaml" ]; then
@@ -602,12 +608,12 @@ done
 # 验证 Ingress
 kubectl --context=ack-cluster get ingress -A
 ```
-
 ---
 
 <!-- chunk: 10. CronJob 与 Job 迁移 -->## 10. CronJob 与 Job 迁移
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # CronJob 迁移
 for ns in $(ls ./migration-clean/); do
   if [ -f "./migration-clean/$ns/cronjobs.yaml" ]; then
@@ -620,12 +626,12 @@ done
 kubectl --context=ack-cluster get cronjobs -A -o name | \
   xargs -I {} kubectl --context=ack-cluster patch {} -p '{"spec":{"suspend":true}}'
 ```
-
 ---
 
 <!-- chunk: 11. 批量迁移自动化 -->## 11. 批量迁移自动化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # migrate-workloads.sh
 # 一键迁移所有工作负载到 ACK
@@ -687,14 +693,14 @@ echo "======================================"
 echo "  迁移执行完成"
 echo "======================================"
 ```
-
 ---
 
 <!-- chunk: 12. 迁移验证 -->## 12. 迁移验证
 
 ## 12.1 自动化验证脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # verify-migration.sh
 
@@ -720,7 +726,6 @@ echo ""
 echo "=== ACK 事件告警 ==="
 kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sort-by=.lastTimestamp | tail -20
 ```
-
 ## 12.2 检查清单
 
 - [ ] 镜像已全部同步到 ACR，ACK Pod 可正常拉取
@@ -763,3 +768,5 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 - 05-network-migration-traffic-cutover
 
 ```
+
+<!-- risk-assessed -->

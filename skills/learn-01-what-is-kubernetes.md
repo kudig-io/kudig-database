@@ -29,6 +29,11 @@ prerequisites:
 - mysql-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第一课：Kubernetes 入门
@@ -64,6 +69,7 @@ prerequisites:
 ### 1.2 容器是什么？
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 "在说 K8s 之前，我们先说说容器。
 
 【生活类比】
@@ -87,7 +93,6 @@ Docker 是最流行的容器技术。
 
 这就是容器：一个轻量级、独立、可移植的软件打包方式。"
 ```
-
 ### 1.3 Kubernetes 登场
 
 ```
@@ -119,6 +124,7 @@ Docker 是最流行的容器技术。
 ### 2.1 传统部署 vs 容器 vs K8s
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【传统部署的问题】
 
 假设你要部署一个网站：
@@ -144,7 +150,6 @@ Docker 是最流行的容器技术。
 
 这就是 K8s 的魅力！"
 ```
-
 ### 2.2 K8s 的核心能力
 
 | 能力 | 说明 | 类比 |
@@ -222,6 +227,7 @@ s  - s
 ### 4.1 应用场景
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【典型使用场景】
 
 1. 微服务架构
@@ -240,7 +246,6 @@ s  - s
    成百上千个容器需要统一管理
    只有 K8s 能胜任
 ```
-
 ### 4.2 职业价值
 
 ```
@@ -271,6 +276,7 @@ s  - s
 ## 5. 下一步
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【课后作业】
 
 1. 安装 kubectl 客户端
@@ -286,7 +292,6 @@ s  - s
 
 有问题吗？记得多实践！"
 ```
-
 ---
 
 **关联文档**:
@@ -301,3 +306,6 @@ s  - s
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — [[concepts/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
+
+
+<!-- risk-assessed -->

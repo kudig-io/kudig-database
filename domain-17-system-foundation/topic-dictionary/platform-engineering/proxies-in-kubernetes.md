@@ -30,6 +30,11 @@ prerequisites:
 - cloud-provider-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] 中的代理
@@ -148,7 +153,8 @@ Kubernetes 中有五种主要的代理类型：
 
 ## 命令快速参考
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启动 kubectl proxy（默认 8001 端口）
 kubectl proxy --port=8001
 
@@ -179,7 +185,6 @@ kubectl get endpoints <service-name>
 # 检查 LoadBalancer Service 外部 IP
 kubectl get svc -A --field-selector spec.type=LoadBalancer
 ```
-
 ## 交叉引用
 
 - [network-plugins.md](./network-plugins.md) — CNI 插件与 kube-proxy 的协作
@@ -197,3 +202,6 @@ kubectl get svc -A --field-selector spec.type=LoadBalancer
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
 - [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+
+
+<!-- risk-assessed -->

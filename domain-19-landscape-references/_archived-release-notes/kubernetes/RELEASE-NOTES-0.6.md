@@ -31,6 +31,11 @@ prerequisites:
 - cncf-ecosystem
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # [[Kubernetes|Kubernetes]] v0.6 Release Notes
@@ -44,3 +49,6 @@ Source: GitHub Release [v0.6.2](https://github.com/kubernetes/kubernetes/release
 | --- | --- | --- |
 | `kubernetes.tar.gz` | md5 | `8c103659e9c1625633aa1ac186f71105` |
 | `kubernetes.tar.gz` | sha1 | `0962eb595396808990c2c64182948e29a27f3491` |
+
+
+<!-- risk-assessed -->

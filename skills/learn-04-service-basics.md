@@ -29,6 +29,11 @@ prerequisites:
 - kubectl-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 第四课：[[Service|Service]] - 让应用可以被访问
@@ -99,6 +104,7 @@ Service 是 K8s 提供的一种访问 Pod 的方式。
 ### 2.1 ClusterIP（集群内部访问）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【类型说明】
 
 ClusterIP 是默认类型，只能在集群内部访问。
@@ -128,12 +134,12 @@ spec:
 kubectl expose deployment my-app --port=80 --target-port=8080
 # 默认创建 ClusterIP 类型
 ```
-
 ---
 
 ### 2.2 NodePort（节点端口访问）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【类型说明】
 
 NodePort 通过节点端口访问，外部可以访问。
@@ -167,12 +173,12 @@ http://<节点IP>:30080
 
 kubectl expose deployment my-app --port=80 --target-port=8080 --type=NodePort
 ```
-
 ---
 
 ### 2.3 LoadBalancer（云负载均衡器）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【类型说明】
 
 LoadBalancer 通常配合云厂商的负载均衡器使用，外部访问最方便。
@@ -206,7 +212,6 @@ spec:
 
 本地集群没有 LoadBalancer 功能。
 ```
-
 ---
 
 ### 2.4 类型对比
@@ -228,6 +233,7 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【方式一：从 Deployment 暴露】
 
 kubectl expose deployment my-app --port=80 --target-port=8080
@@ -242,7 +248,6 @@ kubectl get services
 # 或
 kubectl get svc
 ```
-
 ### 3.2 访问 Service
 
 ```
@@ -307,6 +312,7 @@ MY_APP_SERVICE_PORT=80
 ### 5.1 Service 无法访问
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【排查步骤】
 
 1. 检查 Service 是否存在
@@ -326,13 +332,13 @@ MY_APP_SERVICE_PORT=80
 5. 检查网络策略
    如果有 NetworkPolicy，可能阻止访问
 ```
-
 ### 5.2 Pod 无法解析 Service DNS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 【排查步骤】
 
 1. 检查 CoreDNS 是否运行
@@ -346,7 +352,6 @@ MY_APP_SERVICE_PORT=80
 3. 测试 DNS 解析
    kubectl run -it --rm dnsutils --image=tutum/dnsutils -- nslookup kubernetes
 ```
-
 ---
 
 ## 6. 总结
@@ -355,6 +360,7 @@ MY_APP_SERVICE_PORT=80
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 【命令速查】
 
 创建 Service：
@@ -384,7 +390,6 @@ kubectl delete svc <name>
 
 有问题吗？"
 ```
-
 ---
 
 **关联文档**:
@@ -404,3 +409,6 @@ kubectl delete svc <name>
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+
+<!-- risk-assessed -->

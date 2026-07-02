@@ -1,0 +1,344 @@
+---
+corpus_id: "cap-tooluse-commands-v1"
+corpus_name: "K8s 命令与配置生成 — 工具层测评语料 v1"
+corpus_version: "1.0.0"
+capability_layer: tool_use
+domain: production-operations
+total_items: 4
+generated_at: "2026-05-21"
+schema_version: "3.0"
+description: >
+  评估 Agent 生成可执行命令、YAML 配置、查询语句的正确性与安全性。
+  要求输出可直接在集群中执行或通过 kubectl apply 部署。
+authors:
+  - name: KUDIG Team
+    role: maintainer
+source_docs:
+  - "domain-18-production-operations/"
+  - "domain-32-yaml-manifests/"
+tags: [k8s, kubectl, yaml, promql, command-generation]
+
+qa_items:
+  # ========================================================================
+  # 命令生成：排查 Pod 网络问题
+  # ========================================================================
+  - id: "cap-tooluse-commands-v1-0001"
+    question: >
+      用户需要排查 namespace "payments" 中名为 "api-gateway-7f8d9c4b5-xk2m9"
+      的 Pod 无法访问外部 PostgreSQL 数据库（host: pg-prod.internal:5432）的问题。
+      请生成一组诊断命令，要求：
+      1. 检查 Pod 内 DNS 解析是否正常
+      2. 检查 Pod 到目标端口的网络连通性
+      3. 检查 NetworkPolicy 是否拦截了出口流量
+      4. 检查节点级别的路由/iptables 规则
+      5. 所有命令必须安全，不得包含破坏性操作
+    expected_answer: >
+      诊断命令组（按执行顺序）：
+
+      ```bash
+      # 1. 检查 Pod 内 DNS 解析
+      kubectl exec -n payments api-gateway-7f8d9c4b5-xk2m9 -- nslookup pg-prod.internal
+      # 备用：若 nslookup 不存在
+      kubectl exec -n payments api-gateway-7f8d9c4b5-xk2m9 -- getent hosts pg-prod.internal
+
+      # 2. 检查到目标端口的网络连通性（使用 nc，优先不用 telnet）
+      kubectl exec -n payments api-gateway-7f8d9c4b5-xk2m9 -- nc -zv pg-prod.internal 5432
+      # 备用：使用 /dev/tcp bash 内建（无需额外工具）
+      kubectl exec -n payments api-gateway-7f8d9c4b5-xk2m9 -- bash -c 'timeout 5 bash -c "</dev/tcp/pg-prod.internal/5432" && echo "open" || echo "closed"'
+
+      # 3. 检查 NetworkPolicy（查看 namespace 下所有策略及其实际效果）
+      kubectl get networkpolicy -n payments -o yaml
+      # 检查该 Pod 是否被任何策略选中（查看 pod 标签）
+      kubectl get pod -n payments api-gateway-7f8d9c4b5-xk2m9 --show-labels
+
+      # 4. 检查节点级别的 iptables 规则（在 Pod 所在节点执行，需节点权限）
+      # 获取 Pod 所在节点
+      NODE=$(kubectl get pod -n payments api-gateway-7f8d9c4b5-xk2m9 -o jsonpath='{.spec.nodeName}')
+      # SSH 到节点后检查（或 kubectl debug node）
+      kubectl debug node/$NODE -it --image=nicolaka/netshoot -- iptables -t nat -L -n -v | grep 5432
+      kubectl debug node/$NODE -it --image=nicolaka/netshoot -- iptables -t filter -L -n -v | grep 5432
+
+      # 5. 检查 CNI 出口策略（Calico/Cilium 等）
+      # 若为 Calico
+      kubectl get globalnetworkpolicy,caliconetworkpolicy -A 2>/dev/null | grep -i payments || echo "No Calico policies"
+      # 若为 Cilium
+      kubectl exec -n kube-system ds/cilium -- cilium endpoint list | grep $(kubectl get pod -n payments api-gateway-7f8d9c4b5-xk2m9 -o jsonpath='{.metadata.uid}')
+      ```
+
+      **安全说明**：
+      - 所有命令均为只读诊断，无修改/删除操作。
+      - 使用 `kubectl debug node` 而非直接 SSH，符合最小权限原则。
+      - `timeout 5` 防止网络探测挂起。
+    type: command_generation
+    difficulty: L3_advanced
+    cognitive_level: apply
+    agent_config:
+      required_tools: [kubectl]
+      forbidden_tools: [kubectl_delete, kubectl_edit]
+      response_format: markdown_code_block
+    evaluation:
+      rubric_id: "R3-TOOL-USE"
+      scoring_method: exact_match
+      max_score: 10
+      passing_threshold: 8
+      check_items:
+        - "包含 DNS 解析检查命令"
+        - "包含端口连通性检查（nc 或 /dev/tcp）"
+        - "包含 NetworkPolicy 查看命令"
+        - "包含节点级 iptables 检查"
+        - "命令均为只读，无破坏性操作"
+        - "使用 kubectl debug node 而非直接 SSH（若适用）"
+        - "命令可直接复制执行（变量正确引用）"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [pod, networkpolicy, cni, dns]
+      ticket_category: "TC-INFRA-NET"
+
+  # ========================================================================
+  # YAML 生成：PodDisruptionBudget
+  # ========================================================================
+  - id: "cap-tooluse-commands-v1-0002"
+    question: >
+      为 Deployment "web-api"（namespace: production，副本数 5）
+      创建一个 PodDisruptionBudget，要求：
+      1. 升级或节点维护时，必须保证至少 80% 的 Pod 可用
+      2. 使用推荐 API 版本（policy/v1）
+      3. 包含标准的 labels、annotations 和合理的 naming
+      4. 附加一个同文件的 Service 定义（ClusterIP，端口 8080→80）
+    expected_answer: >
+      ```yaml
+      ---
+      apiVersion: policy/v1
+      kind: PodDisruptionBudget
+      metadata:
+        name: web-api-pdb
+        namespace: production
+        labels:
+          app: web-api
+          tier: api
+          version: v1
+        annotations:
+          description: "Ensure 80% availability during disruptions"
+          created-by: "kudig-agent"
+      spec:
+        minAvailable: 4          # 5 * 0.8 = 4，保证至少 4 个 Pod 可用
+        selector:
+          matchLabels:
+            app: web-api
+      ---
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: web-api
+        namespace: production
+        labels:
+          app: web-api
+          tier: api
+      spec:
+        type: ClusterIP
+        selector:
+          app: web-api
+        ports:
+          - name: http
+            port: 8080
+            targetPort: 80
+            protocol: TCP
+      ```
+
+      **设计说明**：
+      - `minAvailable: 4` 对应 5 副本的 80%（向下取整）。若使用 maxUnavailable，则为 1。
+      - `policy/v1` 为 Kubernetes v1.21+ 推荐版本，v1beta1 已废弃。
+      - PDB 的 selector 必须与 Deployment 的 pod template labels 完全匹配。
+      - 未设置 maxUnavailable，因为 minAvailable 已明确表达需求。
+    type: yaml_generation
+    difficulty: L2_intermediate
+    cognitive_level: apply
+    agent_config:
+      required_tools: [yaml_generation]
+      response_format: yaml
+    evaluation:
+      rubric_id: "R3-TOOL-USE"
+      scoring_method: exact_match
+      max_score: 10
+      passing_threshold: 8
+      check_items:
+        - "apiVersion 为 policy/v1"
+        - "minAvailable 为 4（或 maxUnavailable 为 1）"
+        - "selector.matchLabels 包含 app: web-api"
+        - "namespace 为 production"
+        - "Service 类型为 ClusterIP，端口映射 8080→80"
+        - "YAML 语法正确，可直接 kubectl apply"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [pdb, deployment, service]
+      ticket_category: "TC-APP-WORKLOAD"
+
+  # ========================================================================
+  # 查询构建：PromQL
+  # ========================================================================
+  - id: "cap-tooluse-commands-v1-0003"
+    question: >
+      请编写 PromQL 查询，用于监控以下场景：
+      1. 过去 5 分钟内，每个 namespace 中处于 CrashLoopBackOff 状态的 Pod 数量
+      2. 上述数量在过去 1 小时内是否有上升趋势（与 1 小时前相比增加超过 50%）
+      要求查询在标准 kube-state-metrics 环境下可执行。
+    expected_answer: >
+      ```promql
+      # 查询 1：当前每个 namespace 中 CrashLoopBackOff Pod 数量
+      sum by (namespace) (
+        kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}
+      )
+
+      # 查询 2：过去 1 小时内 CrashLoopBackOff Pod 数量增长是否超过 50%
+      # 计算当前值与 1 小时前的比值
+      (
+        sum by (namespace) (
+          kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}
+        )
+        /
+        sum by (namespace) (
+          kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} offset 1h
+        )
+      ) > 1.5
+      ```
+
+      **补充说明**：
+      - `kube_pod_container_status_waiting_reason` 是 kube-state-metrics 标准指标，
+        `reason="CrashLoopBackOff"` 精确匹配目标状态。
+      - `offset 1h` 用于获取 1 小时前的数据点，比值 > 1.5 表示增长超过 50%。
+      - 若需要处理除零（1 小时前为 0），可使用：
+        ```promql
+        (
+          sum by (namespace) (kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"})
+          -
+          sum by (namespace) (kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} offset 1h)
+        ) / sum by (namespace) (kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} offset 1h) > 0.5
+        ```
+        或使用 `or vector(0)` 处理空值。
+      - 告警规则建议：
+        ```yaml
+        - alert: CrashLoopBackOffPodIncrease
+          expr: |
+            (
+              sum by (namespace) (kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"})
+              >
+              sum by (namespace) (kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} offset 1h) * 1.5
+            )
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CrashLoopBackOff pods increased by >50% in {{ $labels.namespace }}"
+        ```
+    type: query_construction
+    difficulty: L3_advanced
+    cognitive_level: create
+    agent_config:
+      required_tools: [promql_generation]
+      response_format: markdown_code_block
+    evaluation:
+      rubric_id: "R3-TOOL-USE"
+      scoring_method: exact_match
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "使用 kube_pod_container_status_waiting_reason{reason=\"CrashLoopBackOff\"}"
+        - "使用 sum by (namespace) 按命名空间聚合"
+        - "使用 offset 1h 获取历史数据"
+        - "正确计算 50% 增长率（比值 >1.5 或差值/基值 >0.5）"
+        - "提供可直接在 Prometheus 中执行的 PromQL"
+        - "（加分项）提供完整的告警规则 YAML"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [prometheus, kube-state-metrics, alerting]
+      ticket_category: "TC-APP-POD"
+
+  # ========================================================================
+  # 日志分析：多组件联合排查
+  # ========================================================================
+  - id: "cap-tooluse-commands-v1-0004"
+    question: >
+      以下是从某集群收集的多组件日志片段。请分析：
+      1. 发生了什么故障？
+      2. 根因是什么？
+      3. 应优先执行哪条修复命令？
+    context:
+      - type: log_snippet
+        content: |
+          # kube-apiserver log
+          E0521 09:12:34.567890       1 watcher.go:234] failed to create watcher for *v1.Pod: too old resource version: 12345678 (12347890)
+          W0521 09:12:35.123456       1 handler.go:189] Request to /api/v1/pods timed out
+
+          # etcd log
+          2026-05-21T09:12:30.000Z WARN    etcdserver      read-only range request took too long    {"took": "7.832125421s", "range": "key:\"/registry/pods/\"", "error": "context deadline exceeded"}
+          2026-05-21T09:12:31.000Z WARN    etcdserver      apply entries took too long              {"took": "5.124531221s", "entries": 500}
+
+          # node dmesg
+          [May21 09:10] nvme nvme0: I/O timeout, aborting request
+          [May21 09:11] nvme nvme0: I/O timeout, aborting request
+          [May21 09:12] nvme nvme0: controller is down; will reset
+        source: "multi-component logs"
+    expected_answer: >
+      **故障**：etcd 写入/读取延迟极高（>5s），导致 API Server Watch 机制超时、
+      部分请求失败，进而影响整个控制平面响应能力。
+
+      **根因链**：
+      1. dmesg 显示 NVMe SSD 控制器在 09:10-09:12 出现 I/O timeout 并最终 reset，
+         说明 **etcd 所在节点的本地磁盘出现硬件/固件故障**。
+      2. etcd 日志证实：`read-only range request took too long 7.83s`，
+         `apply entries took too long 5.12s`。etcd 是强依赖磁盘 fsync 的数据库，
+         磁盘 I/O 延迟直接转化为 etcd 请求延迟。
+      3. API Server 日志显示 `too old resource version` 和请求超时，
+         这是 etcd 延迟导致的连锁反应：Watch 连接断开、客户端重连、资源版本落后。
+
+      **优先修复命令**：
+      ```bash
+      # 步骤 1：确认 etcd 成员所在节点和磁盘状态
+      kubectl get pods -n kube-system -l component=etcd -o wide
+      # 找到 leader 和 nvme0 所在节点后，检查 SMART 状态
+      smartctl -a /dev/nvme0n1
+
+      # 步骤 2：若磁盘确认故障，优先迁移 etcd leader 到健康节点
+      # 在 etcd 容器内执行（或 kubectl exec -n kube-system etcd-node-xxx -- etcdctl ...）
+      ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+        --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+        --cert=/etc/kubernetes/pki/etcd/server.crt \
+        --key=/etc/kubernetes/pki/etcd/server.key \
+        endpoint status --write-out=table
+      # 找到 leader 后，若 leader 在故障节点，手动转移：
+      ETCDCTL_API=3 etcdctl move-leader <member-id-of-healthy-node>
+
+      # 步骤 3：将故障节点标记为不可调度，迁移工作负载
+      kubectl cordon <faulty-node>
+      kubectl drain <faulty-node> --ignore-daemonsets --delete-emptydir-data
+
+      # 步骤 4：联系云厂商/硬件团队更换 NVMe 磁盘
+      ```
+
+      **关键判断**：
+      - 根因在磁盘层，不在 etcd 配置或 API Server 配置。
+      - 优先操作是 **转移 etcd leader**（若故障节点为 leader），而非重启 etcd 或 API Server。
+      - 直接重启可能加剧数据一致性问题。
+    type: log_analysis
+    difficulty: L4_expert
+    cognitive_level: analyze
+    agent_config:
+      required_tools: [log_analysis, kubectl]
+      forbidden_tools: [kubectl_delete]
+      response_format: markdown
+    evaluation:
+      rubric_id: "R3-TOOL-USE"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "正确关联 dmesg NVMe 故障与 etcd 延迟"
+        - "指出 etcd 强依赖磁盘 fsync"
+        - "解释 API Server timeout 和 too old resource version 的连锁反应"
+        - "优先推荐转移 etcd leader 而非重启"
+        - "给出可执行的 etcdctl 命令（含证书路径）"
+        - "包含节点隔离（cordon/drain）步骤"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [etcd, apiserver, node, storage]
+      ticket_category: "TC-INFRA-CP"

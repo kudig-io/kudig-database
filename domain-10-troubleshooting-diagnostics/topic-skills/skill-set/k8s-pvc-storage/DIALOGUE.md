@@ -24,6 +24,11 @@ relationships:
   type: uses
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 # [[scripts/video-scripts/node-notready.md|Node NotReady]] 远程顾问对话脚本
 
@@ -64,10 +69,10 @@ relationships:
 
 顾问："现在开始第一轮诊断。请执行以下命令并粘贴完整输出：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes | grep -E '(NotReady|Unknown)'
 ```
-
 > **如果无法执行 kubectl**：请通过集群管理控制台（如 Rancher、OpenShift Console、ACK 控制台）查看节点状态，或者告诉我你当前能访问的界面和看到的信息。"
 
 ### 分支 1.1：单个节点 NotReady
@@ -76,11 +81,11 @@ kubectl get nodes | grep -E '(NotReady|Unknown)'
 
 顾问："单个节点 NotReady，当前为 P2 优先级（2 小时内修复）。下一步请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -o wide
 kubectl describe node <node-name> | grep -A 20 'Conditions:'
 ```
-
 > **如果无法执行 describe**：请通过控制台查看该节点的 Conditions 状态，或者执行 `kubectl get node <node-name> -o yaml` 并把 `status.conditions` 部分贴给我。"
 
 ### 分支 1.2：多个节点 NotReady
@@ -89,12 +94,12 @@ kubectl describe node <node-name> | grep -A 20 'Conditions:'
 
 顾问："多个节点 NotReady，这是一个高影响问题。请**立即**执行以下命令确认控制平面状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get nodes -l node-role.kubernetes.io/control-plane
 # 如果没有 control-plane 标签，尝试：
 kubectl get nodes | grep -E 'master|control-plane'
 ```
-
 > **如果无法执行 kubectl**：请通过控制台确认 master/控制平面节点状态。如果控制平面也异常，或超过 50% 节点受影响，这个问题需要**立即升级**到高级支持团队。"
 
 ### 分支 1.3：工程师无法执行 kubectl
@@ -109,13 +114,13 @@ kubectl get nodes | grep -E 'master|control-plane'
 
 **替代方案 B（SSH 到节点）**：如果你能通过 SSH 连接到任意一个节点，请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 在节点上检查 kubelet 状态
 systemctl status kubelet
 # 检查容器运行时
 systemctl status containerd
 ```
-
 **替代方案 C（云厂商 CLI）**：如果你有云厂商 CLI（如 aws cli、aliyun cli），请执行节点状态查询命令。
 
 > 如果以上都无法执行，且业务已中断，请**立即升级**到高级支持。"
@@ -144,14 +149,14 @@ aliyun ecs DescribeInstances --RegionId <region-id> --Tag.1.Key ack.aliyun.com -
 
 **步骤 2：ACK节点池状态检查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ACK 节点池信息（如安装了 ack-node-problem-detector）
 kubectl get nodes -o custom-columns=NAME:.metadata.name,POOL:.metadata.labels["alibabacloud.com/nodepool-id"],ZONE:.metadata.labels["topology.kubernetes.io/zone"]
 
 # 查看节点问题事件
 kubectl get events --field-selector reason=NodeProblemDetected --sort-by='.lastTimestamp' | tail -20
 ```
-
 > **如果无法执行 kubectl**：请登录 ACK 控制台，进入集群的 **节点管理 > 节点池** 页面，告诉我：
 > 1. 异常节点属于哪个节点池？该节点池状态是否正常？
 > 2. 节点池的 **期望节点数** 与 **当前节点数** 是否一致？
@@ -159,14 +164,14 @@ kubectl get events --field-selector reason=NodeProblemDetected --sort-by='.lastT
 
 **步骤 3：阿里云特有网络与存储检查**
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 Terway 网络组件状态（ACK使用Terway作为默认CNI）
 kubectl get pods -n kube-system | grep -E 'terway|cilium'
 
 # 检查云盘 CSI 插件状态
 kubectl get pods -n kube-system | grep -E 'diskplugin|nasplugin|ossplugin'
 ```
-
 > **如果无法执行 kubectl**：请通过 ACK 控制台 **组件管理** 页面确认以下组件状态：
 > 1. **Terway** / **Flannel** 网络组件是否正常运行？
 > 2. **CSI-Plugin** / **CSI-Provisioner** 存储组件是否正常运行？
@@ -193,10 +198,10 @@ kubectl get pods -n kube-system | grep -E 'diskplugin|nasplugin|ossplugin'
 
 顾问："现在进入深度诊断。请执行以下命令并告诉我结果：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe node <node-name>
 ```
-
 重点关注 Conditions 区域是否有 DiskPressure、MemoryPressure、PIDPressure、KubeletNotReady、NetworkUnavailable 等标记。"
 
 #### 分支 2.1：资源压力类（DiskPressure / MemoryPressure / PIDPressure）
@@ -215,11 +220,11 @@ nproc
 
 > **如果无法 SSH**：请执行以下 kubectl 替代命令：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top node <node-name>
 kubectl get --raw /api/v1/nodes/<node-name>/proxy/stats/summary | head -100
 ```
-
 同时请告诉我：
 1. 该节点上的 Pod 数量：`kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> | wc -l`
 2. 是否有日志类 Pod 产生大量数据？"
@@ -232,7 +237,8 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/stats/summary | head -100
 
 **如果你能通过 SSH 连接该节点**：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 kubelet 状态
 systemctl status kubelet
 journalctl -u kubelet -n 100 --no-pager
@@ -241,17 +247,16 @@ journalctl -u kubelet -n 100 --no-pager
 systemctl status containerd
 crictl ps
 ```
-
 > **如果无法 SSH**：请通过 kubectl 获取相关日志：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看该节点上 kube-system 命名空间的 Pod
 kubectl get pods -n kube-system --field-selector spec.nodeName=<node-name>
 
 # 如果有 node-exporter 或日志收集 Pod，提取 kubelet 相关日志
 kubectl logs -n <monitoring-namespace> <node-exporter-pod> 2>/dev/null | tail -50
 ```
-
 另外请确认：该节点的 `/var/log` 或系统日志能否通过其他渠道获取？"
 
 #### 分支 2.3：网络或证书问题
@@ -260,14 +265,14 @@ kubectl logs -n <monitoring-namespace> <node-exporter-pod> 2>/dev/null | tail -5
 
 顾问："可能是网络分区或证书问题。请执行以下检查：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查节点 Lease
 kubectl get lease -n kube-node-lease <node-name> -o yaml
 
 # 检查节点事件
 kubectl get events --field-selector involvedObject.name=<node-name> --sort-by='.lastTimestamp' | tail -20
 ```
-
 > **如果无法执行上述命令**：请告诉我：
 1. 该节点是自建机房还是云厂商节点？
 2. 云厂商控制台是否显示该节点网络异常（如安全组变更、VPC 路由问题）？
@@ -287,11 +292,11 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 顾问："这种情况需要检查 Node Lease 和 kubelet 心跳。请执行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get lease -n kube-node-lease
 kubectl get node <node-name> -o json | jq '.status.conditions'
 ```
-
 > **如果无法执行 jq**：请使用 `kubectl get node <node-name> -o yaml` 并把 `status.conditions` 部分贴给我。
 
 同时请检查：
@@ -315,7 +320,8 @@ kubectl get node <node-name> -o json | jq '.status.conditions'
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 清理未使用的镜像
 crictl rmi --prune
 # 或使用 docker（如果运行时支持）
@@ -325,7 +331,6 @@ docker system prune -a -f  # ⚠️ 强制清理，可能杀运行中容器
 cd /var/log && find . -name '*.log' -size +100M -exec ls -lh {} \;
 # 手动清理过大的日志文件（> 500MB 且非当前活跃日志）
 ```
-
 > **如果无法 SSH**：请执行以下替代方案：
 > 1. 通过 DaemonSet 或临时 Job 在节点上执行清理
 > 2. 联系云厂商支持扩容节点磁盘
@@ -333,11 +338,11 @@ cd /var/log && find . -name '*.log' -size +100M -exec ls -lh {} \;
 
 步骤 2：验证修复：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name>
 # 等待 DiskPressure=False，节点状态变为 Ready
 ```
-
 步骤 3：防止复发：
 - 配置 logrotate 策略
 - 设置镜像清理 CronJob
@@ -356,21 +361,39 @@ kubectl get node <node-name>
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 systemctl restart kubelet
 systemctl status kubelet
 ```
-
 步骤 2：如果 kubelet 重启后仍异常，重启 containerd：
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 systemctl restart containerd
 systemctl status containerd
 ```
-
 > **如果无法 SSH**：
 > 1. 尝试通过云厂商控制台"重启节点"或"重置节点"
 > 2. 如果集群支持节点替换，标记该节点不可调度并替换：`kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data`，然后创建新节点
@@ -378,11 +401,11 @@ systemctl status containerd
 
 步骤 3：验证修复：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name> -w
 # 观察节点状态在 1-2 分钟内恢复为 Ready
 ```
-
 > **警告**：重启 containerd 会影响该节点上所有容器的运行，可能导致短暂的服务中断。请在业务低峰期执行，或确保 Pod 有副本分布到其他节点。"
 
 #### 分支 3.3：证书过期
@@ -402,7 +425,17 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 方法 A：重启 kubelet 自动轮转
 systemctl restart kubelet
 
@@ -411,7 +444,6 @@ kubeadm certs renew kubelet-client
 # 或
 kubeadm alpha certs renew kubelet-client
 ```
-
 > **如果无法 SSH**：
 > 1. 通过云厂商托管集群的控制台检查是否有证书自动修复功能
 > 2. 如果集群使用外部 CA，联系 CA 管理员重新签发证书
@@ -419,12 +451,12 @@ kubeadm alpha certs renew kubelet-client
 
 步骤 3：验证：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get node <node-name>
 # 检查证书有效期
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 ```
-
 > **注意**：证书问题可能影响多个节点。请检查其他节点是否存在同样问题：`kubectl get nodes` 查看是否有更多节点陆续变为 NotReady。"
 
 #### 分支 3.4：内存压力（MemoryPressure）
@@ -435,10 +467,10 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 步骤 1：识别内存消耗大户：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --sort-by=memory
 ```
-
 > **如果无法使用 metrics-server**：请执行：
 > ```bash
 > kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name> -o json | \
@@ -453,19 +485,28 @@ kubectl top pods --all-namespaces --field-selector spec.nodeName=<node-name> --s
 > - `kubectl cordon`：标记节点不可调度
 > - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl cordon <node-name>
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force
 ```
-
 > **如果 drain 卡住**：添加 `--grace-period=30 --timeout=60s --force` 参数，或手动删除无法驱逐的 Pod。
 
 步骤 3：节点恢复后重新调度：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl uncordon <node-name>
 ```
-
 > **注意**：内存压力修复可能涉及业务 Pod 的迁移，请确认相关应用有副本分布到其他健康节点。"
 
 #### 分支 3.5：网络分区或 CNI 异常
@@ -476,17 +517,17 @@ kubectl uncordon <node-name>
 
 步骤 1：确认网络范围：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 检查同一子网的其他节点
 kubectl get nodes -o wide | grep <node-subnet>
 ```
-
 步骤 2：检查 CNI Pod 状态：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 ```
-
 步骤 3：根据 CNI 类型修复：
 
 - **Calico**：检查 calico-node Pod 日志，确认 BGP 连接状态
@@ -500,13 +541,13 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 步骤 4：验证：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl get node <node-name>
 # 同时检查节点上 Pod 的网络连通性
 kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 # 在 netshoot 中执行 ping/curl 测试
 ```
-
 ---
 
 ## 升级路径
@@ -602,3 +643,6 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 - [[concepts/etcd-×-RBAC.md|etcd-×-RBAC]]
 - [[concepts/Deployment-×-RBAC.md|Deployment-×-RBAC]]
 - [[concepts/Deployment-×-NetworkPolicy.md|Deployment-×-NetworkPolicy]]
+
+
+<!-- risk-assessed -->

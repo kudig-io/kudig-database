@@ -78,6 +78,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # cloud-controller-manager 深度解析 (CCM Deep Dive)
@@ -1928,7 +1933,8 @@ groups:
 
 ### 10.2 诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== CCM 状态检查 ==========
 
 # 检查 CCM Pod 状态
@@ -1989,7 +1995,6 @@ kubectl get secret -n kube-system cloud-config -o yaml
 # 检查 IRSA/RRSA 配置
 kubectl get sa -n kube-system cloud-controller-manager -o yaml
 ```
-
 ### 10.3 常见日志模式
 
 ```bash
@@ -2046,6 +2051,7 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 节点未初始化问题排查流程:
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                                                              │
@@ -2088,7 +2094,6 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ---
 
 <!-- chunk: 11. 生产环境 Checklist -->
@@ -2255,3 +2260,6 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 ## Related
 
 - [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+
+
+<!-- risk-assessed -->

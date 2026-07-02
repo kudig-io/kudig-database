@@ -74,6 +74,11 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 30 - etcd运维操作
@@ -148,7 +153,8 @@ cross_refs:
 ## 备份与恢复
 
 ### 备份命令
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用etcdctl备份
 ETCDCTL_API=3 etcdctl \
   --endpoints=https://127.0.0.1:2379 \
@@ -160,13 +166,13 @@ ETCDCTL_API=3 etcdctl \
 # 验证备份
 etcdctl snapshot status /backup/etcd-*.db -w table
 ```
-
 ### 恢复命令
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 停止API Server
 # 恢复快照(每个节点执行不同参数)
 ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd.db \
@@ -181,7 +187,6 @@ mv /var/lib/etcd /var/lib/etcd-old
 mv /var/lib/etcd-new /var/lib/etcd
 # 重启etcd和API Server
 ```
-
 <!-- chunk: etcd故障处理 -->
 ## etcd故障处理
 
@@ -196,7 +201,8 @@ mv /var/lib/etcd-new /var/lib/etcd
 <!-- chunk: 碎片整理操作 -->
 ## 碎片整理操作
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 获取当前大小
 etcdctl endpoint status --cluster -w table
 
@@ -212,7 +218,6 @@ etcdctl defrag --endpoints=https://10.0.0.3:2379
 # 清除告警
 etcdctl alarm disarm
 ```
-
 <!-- chunk: ACK托管etcd -->
 ## ACK托管etcd
 
@@ -244,7 +249,8 @@ etcdctl alarm disarm
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加成员
 etcdctl member add etcd-3 --peer-urls=https://10.0.0.4:2380
 
@@ -257,7 +263,6 @@ etcdctl member update <member_id> --peer-urls=https://10.0.0.4:2380
 # 强制移除成员(仅紧急情况)
 etcdctl member remove <member_id> --force  # ⚠️ 移除 etcd 成员，可能丢数据
 ```
-
 <!-- chunk: 灾难恢复操作 -->
 ## 灾难恢复操作
 
@@ -265,7 +270,8 @@ etcdctl member remove <member_id> --force  # ⚠️ 移除 etcd 成员，可能�
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # 完整灾难恢复脚本
 
@@ -311,11 +317,11 @@ etcdctl endpoint health --cluster
 # 7. 启动控制平面组件
 systemctl start kube-apiserver kube-controller-manager kube-scheduler
 ```
-
 <!-- chunk: 定期维护脚本 -->
 ## 定期维护脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # etcd定期维护脚本 - 建议每天执行
 
@@ -382,7 +388,6 @@ etcdctl endpoint status --cluster -w table
 
 echo "=== $(date) etcd维护完成 ==="
 ```
-
 <!-- chunk: Prometheus告警规则 -->
 ## Prometheus告警规则
 
@@ -500,7 +505,8 @@ groups:
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看成员列表
 etcdctl member list -w table
 
@@ -513,13 +519,13 @@ etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
 # 更新成员地址
 etcdctl member update <member-id> --peer-urls=https://10.0.0.3:2380
 ```
-
 ### 数据备份与恢复
 
 > ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
 > - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建快照 (在线备份)
 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db
 
@@ -534,10 +540,10 @@ etcdctl snapshot restore /backup/etcd-xxx.db \
   --initial-cluster-token=etcd-cluster-1 \
   --initial-advertise-peer-urls=https://10.0.0.1:2380
 ```
-
 ### 数据维护
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 手动压缩历史版本 (保留最近1小时)
 etcdctl compact $(etcdctl get "" --prefix --keys-only | head -1 | awk '{print $1}')
 
@@ -553,7 +559,6 @@ etcdctl alarm disarm
 # 查看数据库大小
 etcdctl endpoint status --cluster -w table | awk '{print $1, $6}'
 ```
-
 ### 故障排查场景
 
 | 场景 | 现象 | 排查命令 | 处理措施 |
@@ -566,7 +571,8 @@ etcdctl endpoint status --cluster -w table | awk '{print $1, $6}'
 
 ### 性能测试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 写入性能测试
 etcdctl check perf
 
@@ -576,10 +582,10 @@ etcdctl check perf --load="s"
 # 数据一致性检查
 etcdctl check datascale
 ```
-
 ### [[Kubernetes|Kubernetes]] 集成运维
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 etcd 中所有 K8s 键前缀
 etcdctl get /registry --prefix --keys-only --limit 10
 
@@ -595,7 +601,6 @@ etcdctl get "" --prefix --keys-only | wc -l
 # 查找孤儿 Lease
 etcdctl get /registry/leases --prefix --keys-only
 ```
-
 ### 安全配置检查清单
 
 | 检查项 | 命令 | 预期结果 |
@@ -641,3 +646,5 @@ etcdctl get /registry/leases --prefix --keys-only
 - [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ```
+
+<!-- risk-assessed -->

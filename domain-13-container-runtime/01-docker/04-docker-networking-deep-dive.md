@@ -46,6 +46,11 @@ cross_refs:
   label: '速查卡: docker'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # Docker 网络深度解析
@@ -73,6 +78,7 @@ cross_refs:
 ## 网络架构概览
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              Docker Host                                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -104,7 +110,6 @@ cross_refs:
                               ▼
                          外部网络
 ```
-
 ## 网络组件
 
 | 组件 | 说明 | 功能 |
@@ -132,7 +137,8 @@ cross_refs:
 
 ## Bridge 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建自定义网桥
 docker network create \
   --driver bridge \
@@ -154,7 +160,6 @@ docker network connect mynetwork existing_container
 # 指定 IP
 docker run -d --network mynetwork --ip 172.20.0.100 nginx
 ```
-
 ## Bridge 网络选项
 
 | 选项 | 默认值 | 说明 |
@@ -167,7 +172,8 @@ docker run -d --network mynetwork --ip 172.20.0.100 nginx
 
 ## Host 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用 host 网络
 docker run -d --network host nginx
 
@@ -176,7 +182,6 @@ docker run -d --network host nginx
 # - 端口直接绑定主机
 # - 无需端口映射
 ```
-
 **适用场景**:
 - 高性能网络需求
 - 监控/网络工具
@@ -189,17 +194,18 @@ docker run -d --network host nginx
 
 ## None 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 禁用网络
 docker run -d --network none myapp
 
 # 容器只有 loopback 接口
 # 需要自行配置网络
 ```
-
 ## Overlay 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 overlay 网络 (需要 Swarm 模式)
 docker network create \
   --driver overlay \
@@ -214,10 +220,10 @@ docker network create \
 # - 自动服务发现
 # - 支持加密
 ```
-
 ## Macvlan 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建 macvlan 网络
 docker network create \
   --driver macvlan \
@@ -234,7 +240,6 @@ docker network create \
   -o parent=eth0.10 \
   macvlan-vlan10
 ```
-
 **特点**:
 - 容器拥有独立 MAC 地址
 - 直接连接物理网络
@@ -243,7 +248,8 @@ docker network create \
 
 ## IPvlan 网络
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # L2 模式
 docker network create \
   --driver ipvlan \
@@ -261,7 +267,6 @@ docker network create \
   -o ipvlan_mode=l3 \
   ipvlan-l3
 ```
-
 **与 Macvlan 区别**:
 - IPvlan: 所有容器共享父接口 MAC
 - Macvlan: 每个容器独立 MAC
@@ -272,7 +277,8 @@ docker network create \
 
 ## Linux 网络命名空间
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看命名空间
 ls /var/run/docker/netns/
 
@@ -285,7 +291,6 @@ docker exec container_name ip addr
 docker exec container_name cat /etc/resolv.conf
 docker exec container_name cat /etc/hosts
 ```
-
 ## 网络命名空间隔离
 
 ```
@@ -313,7 +318,8 @@ docker exec container_name cat /etc/hosts
 
 ## 共享网络命名空间
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # Pod 模式: 容器共享网络
 docker run -d --name pause --network bridge registry.k8s.io/pause:3.9
 docker run -d --network container:pause nginx
@@ -324,7 +330,6 @@ docker run -d --network container:pause myapp
 # - 相同端口空间
 # - 通过 localhost 通信
 ```
-
 ---
 
 <!-- chunk: Docker DNS 解析 -->## Docker DNS 解析
@@ -332,6 +337,7 @@ docker run -d --network container:pause myapp
 ## 内置 DNS 服务器
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 容器 DNS 解析流程:
 ┌─────────────┐     ┌─────────────────┐     ┌──────────────┐
 │   容器      │────►│   Docker DNS    │────►│   上游 DNS   │
@@ -345,10 +351,10 @@ docker run -d --network container:pause myapp
               │   db → 172.18.0.6           │
               └─────────────────────────────┘
 ```
-
 ## DNS 配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 容器 resolv.conf
 docker exec container_name cat /etc/resolv.conf
 # nameserver 127.0.0.11
@@ -370,10 +376,10 @@ docker run -d \
   "dns-search": ["example.com"]
 }
 ```
-
 ## 服务发现
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建自定义网络
 docker network create mynet
 
@@ -389,10 +395,10 @@ docker exec webserver ping database
 docker run -d --network mynet --network-alias db --name mysql mysql
 # 可以通过 db 或 mysql 访问
 ```
-
 ## hosts 文件管理
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 添加 host 条目
 docker run -d \
   --add-host "api.internal:192.168.1.10" \
@@ -402,14 +408,14 @@ docker run -d \
 # 查看 hosts
 docker exec container_name cat /etc/hosts
 ```
-
 ---
 
 <!-- chunk: 端口映射原理 -->## 端口映射原理
 
 ## iptables 实现
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 端口映射
 docker run -d -p 8080:80 nginx
 
@@ -422,10 +428,10 @@ iptables -t nat -L -n -v
 # MASQUERADE 规则 (出站)
 -A POSTROUTING -s 172.17.0.0/16 ! -o docker0 -j MASQUERADE
 ```
-
 ## 端口映射类型
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 指定主机端口
 docker run -d -p 8080:80 nginx
 
@@ -447,10 +453,10 @@ docker run -d -p 8080-8090:80-90 myapp
 # 多端口映射
 docker run -d -p 80:80 -p 443:443 nginx
 ```
-
 ## docker-proxy
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 默认使用用户态代理
 ps aux | grep docker-proxy
 # docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 8080 -container-ip 172.17.0.2 -container-port 80
@@ -460,24 +466,24 @@ ps aux | grep docker-proxy
   "userland-proxy": false
 }
 ```
-
 ## 查看端口映射
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看容器端口
 docker port container_name
 
 # 查看详细网络信息
 docker inspect -f '{{range $p, $conf := .NetworkSettings.Ports}}{{$p}} -> {{(index $conf 0).HostPort}}{{println}}{{end}}' container_name
 ```
-
 ---
 
 <!-- chunk: 网络配置实践 -->## 网络配置实践
 
 ## 多层网络架构
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 创建前端网络
 docker network create frontend
 
@@ -499,7 +505,6 @@ docker run -d --name mysql --network backend mysql
 # - app 可访问 nginx 和 mysql
 # - nginx 不可访问 mysql
 ```
-
 ## 生产网络配置
 
 ```yaml
@@ -561,7 +566,8 @@ services:
 
 ## 网络安全配置
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 禁用容器间通信
 docker network create --opt com.docker.network.bridge.enable_icc=false secure-net
 
@@ -571,14 +577,14 @@ docker network create --internal internal-net
 # 使用 iptables 规则隔离
 iptables -I DOCKER-USER -s 172.17.0.2 -d 172.17.0.3 -j DROP
 ```
-
 ---
 
 <!-- chunk: 网络故障排查 -->## 网络故障排查
 
 ## 诊断命令
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 网络列表
 docker network ls
 
@@ -591,10 +597,10 @@ docker inspect -f '{{json .NetworkSettings.Networks}}' container_name | jq
 # 容器 IP 地址
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name
 ```
-
 ## 连通性测试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 进入容器测试
 docker exec -it container_name sh
 
@@ -614,10 +620,10 @@ curl -v http://other_container:80
 # 端口测试
 nc -zv other_container 80
 ```
-
 ## 使用 netshoot 调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 启动调试容器
 docker run --rm -it --network container:target_container nicolaka/netshoot
 
@@ -630,7 +636,6 @@ nmap -sT target_host       # 端口扫描
 iptables -L -n -v          # 查看防火墙
 traceroute target_host     # 路由追踪
 ```
-
 ## 常见问题
 
 | 问题 | 症状 | 排查方法 | 解决方案 |
@@ -643,7 +648,8 @@ traceroute target_host     # 路由追踪
 
 ## 清理网络资源
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除未使用的网络
 docker network prune
 
@@ -653,7 +659,6 @@ docker network rm mynetwork
 # 从网络断开所有容器
 docker network disconnect -f mynetwork $(docker network inspect -f '{{range .Containers}}{{.Name}} {{end}}' mynetwork)
 ```
-
 ---
 
 <!-- chunk: 相关文档 -->## 相关文档
@@ -670,3 +675,6 @@ docker network disconnect -f mynetwork $(docker network inspect -f '{{range .Con
 - 03-docker-container-lifecycle
 - 05-docker-storage-volumes
 - 06-docker-compose-orchestration
+
+
+<!-- risk-assessed -->

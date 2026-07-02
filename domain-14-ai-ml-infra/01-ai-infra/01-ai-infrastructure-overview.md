@@ -75,6 +75,11 @@ related_docs:
   desc: AI Agent 工程
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # AI基础设施架构
@@ -182,14 +187,14 @@ related_docs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add volcano-sh https://volcano-sh.github.io/helm-charts
 helm install volcano volcano-sh/volcano \
   --namespace volcano-system \
   --create-namespace \
   --set basic.image_tag_version=v1.8.2
 ```
-
 #### Queue配置
 
 ```yaml
@@ -568,11 +573,11 @@ spec:
 
 #### 监控指标
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看cGPU使用情况
 kubectl get nodes -o custom-columns=NAME:.metadata.name,GPU-MEM:.status.allocatable.'aliyun\.com/gpu-mem',GPU-CORE:.status.allocatable.'aliyun\.com/gpu-core'
 ```
-
 ---
 
 <!-- chunk: 三、高速网络方案 -->
@@ -711,7 +716,8 @@ export NCCL_P2P_LEVEL=SYS
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add juicefs https://juicedata.github.io/charts/
 helm install juicefs-csi-driver juicefs/juicefs-csi-driver \
   --namespace kube-system \
@@ -722,7 +728,6 @@ helm install juicefs-csi-driver juicefs/juicefs-csi-driver \
   --set storageClasses[0].backend.storage=s3 \
   --set storageClasses[0].backend.bucket=http://minio:9000/juicefs
 ```
-
 #### StorageClass配置
 
 ```yaml
@@ -1199,3 +1204,5 @@ spec:
 - 03-gpu-scheduling-management
 
 ```
+
+<!-- risk-assessed -->

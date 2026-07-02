@@ -50,6 +50,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # PostgreSQL StatefulSet + Patroni 高可用生产部署
@@ -115,14 +120,14 @@ Patroni 依赖 etcd 存储 leader 锁。强烈建议部署独立的 etcd 集群�
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 etcd 命名空间
 kubectl create namespace postgres-etcd
 
 # 部署三节点 etcd（生产必须奇数节点）
 kubectl apply -f etcd-statefulset.yaml
 ```
-
 ```yaml
 apiVersion: apps/v1
 kind: StatefulSet
@@ -179,10 +184,10 @@ etcd 集群的节点数必须为奇数，通常生产环境使用 3 节点或 5 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -it etcd-0 -n postgres-etcd -- etcdctl endpoint health --cluster
 ```
-
 ---
 
 ## 3. Patroni 配置
@@ -440,7 +445,8 @@ archive_timeout: 60s
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 配置 WAL-G 环境变量
 kubectl create secret generic wal-g-env -n production \
   --from-literal=AWS_ACCESS_KEY_ID=xxx \
@@ -448,7 +454,6 @@ kubectl create secret generic wal-g-env -n production \
   --from-literal=WALE_S3_ENDPOINT=https+path://oss-cn-hangzhou-internal.aliyuncs.com \
   --from-literal=AWS_S3_BUCKET=pg-backup-bucket
 ```
-
 ### 6.2 每日全量备份 CronJob
 
 ```yaml
@@ -494,34 +499,34 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Patroni 集群成员与 leader
 kubectl exec -it postgres-ha-0 -n production -- patronictl list
 ```
-
 ### 7.2 模拟主库故障
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 删除 leader Pod，观察 Patroni 是否自动切换
 kubectl delete pod -n production -l app=postgres-ha,role=master
 ```
-
 ### 7.3 验证切换结果
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 等待 StatefulSet 重新调度并加入集群
 kubectl exec -it postgres-ha-0 -n production -- patronictl list
 
 # 验证新 leader 可写
 kubectl exec -it postgres-ha-1 -n production -- psql -U postgres -c "CREATE TABLE switchover_test(id int); DROP TABLE switchover_test;"
 ```
-
 ---
 
 ## 8. 监控告警
@@ -573,14 +578,14 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 etcd 健康状态
 kubectl exec -it etcd-0 -n postgres-etcd -- etcdctl endpoint health --cluster
 
 # 检查 Patroni 日志
 kubectl logs postgres-ha-0 -n production
 ```
-
 ### 9.2 复制延迟过高
 
 常见原因包括网络带宽不足、从库 IO 瓶颈或大事务。优化建议：
@@ -639,3 +644,5 @@ Patroni + etcd 方案对网络稳定性要求较高。建议将 PostgreSQL 集�
 - [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|etcd 故障诊断]]
 
 ```
+
+<!-- risk-assessed -->

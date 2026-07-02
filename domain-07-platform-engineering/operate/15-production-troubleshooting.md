@@ -37,6 +37,11 @@ prerequisites:
 - cni-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 生产环境故障诊断 (Production Troubleshooting)
@@ -163,7 +168,8 @@ golden_signals_troubleshooting:
 ```
 
 ### 2. 分层诊断方法
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # 分层故障诊断脚本
 
@@ -205,14 +211,14 @@ layered_troubleshooting() {
 # 使用示例
 layered_troubleshooting "user-service" "production"
 ```
-
 <!-- chunk: 常见问题场景及解决方案 -->
 ## 常见问题场景及解决方案
 
 ### 1. Pod相关问题
 
 #### Pod Pending状态
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # Pod Pending故障诊断脚本
 
@@ -259,7 +265,6 @@ diagnose_pending_pods() {
 # 使用示例
 diagnose_pending_pods "production"
 ```
-
 通过系统性的故障诊断方法和工具，可以显著提升故障处理效率，减少业务中断时间，保障生产环境的稳定运行。
 
 ---
@@ -295,3 +300,6 @@ diagnose_pending_pods "production"
 - 14-large-scale-cluster-optimization
 - 16-platform-upgrade-migration
 - 17-multi-tenant-management
+
+
+<!-- risk-assessed -->

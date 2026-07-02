@@ -49,6 +49,11 @@ authors:
   role: contributor
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 05 - 企业级存储管理与运维实践
@@ -110,7 +115,8 @@ authors:
 
 ## 每日巡检项目
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 存储日常巡检脚本
 cat > /usr/local/bin/daily-storage-check.sh << 'EOF'
 #!/bin/bash
@@ -199,7 +205,6 @@ chmod +x /usr/local/bin/daily-storage-check.sh
 # 添加到crontab
 echo "0 9 * * * /usr/local/bin/daily-storage-check.sh" >> /etc/crontab
 ```
-
 ## 每周运维任务
 
 ```bash
@@ -797,7 +802,8 @@ chmod +x /usr/local/bin/enterprise-backup.sh
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 灾难恢复演练脚本
 cat > /usr/local/bin/drill-recovery.sh << 'EOF'
 #!/bin/bash
@@ -863,7 +869,6 @@ EOF
 
 chmod +x /usr/local/bin/drill-recovery.sh
 ```
-
 ---
 
 <!-- chunk: 故障处理流程 -->## 故障处理流程
@@ -1166,7 +1171,8 @@ chmod +x /usr/local/bin/performance-benchmark.sh
 
 ## 系统级性能优化
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 存储系统优化配置
 cat > /etc/systemd/system/storage-optimization.service << 'EOF'
 [Unit]
@@ -1234,7 +1240,6 @@ EOF
 chmod +x /usr/local/bin/apply-storage-optimizations.sh
 systemctl enable storage-optimization.service
 ```
-
 ---
 
 <!-- chunk: 安全管理规范 -->## 安全管理规范
@@ -1326,7 +1331,8 @@ chmod +x /usr/local/bin/storage-security-check.sh
 
 ## 等保2.0存储要求
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 等保2.0存储合规检查
 cat > /usr/local/bin/compliance-check.sh << 'EOF'
 #!/bin/bash
@@ -1382,7 +1388,6 @@ EOF
 
 chmod +x /usr/local/bin/compliance-check.sh
 ```
-
 ---
 
 <!-- chunk: 自动化运维工具 -->## 自动化运维工具
@@ -1689,3 +1694,6 @@ Level 5 - 自主化 (Autonomous)
 - 04-distributed-storage-systems
 - 06-storage-performance-iops
 - 01-storage-technologies-overview
+
+
+<!-- risk-assessed -->

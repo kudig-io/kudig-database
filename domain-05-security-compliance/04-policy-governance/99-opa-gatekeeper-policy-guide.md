@@ -61,6 +61,11 @@ cross_refs:
   label: '速查卡: tls-pki'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # OPA Gatekeeper 策略即代码深度实践
@@ -167,7 +172,8 @@ graph TB
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
 helm repo update
 
@@ -185,7 +191,6 @@ helm install gatekeeper gatekeeper/gatekeeper \
   --set logDenies=true \
   --set emitAdmissionEvents=true
 ```
-
 ```yaml
 # values-gatekeeper-production.yaml
 replicas: 3
@@ -860,7 +865,8 @@ spec:
 
 ## 违规查看
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有违规
 kubectl get constraints -o json | jq '.items[] | {name: .metadata.name, violations: .status.violations}'
 
@@ -908,7 +914,6 @@ kubectl get constraints -o json | jq '{
   }]
 }'
 ```
-
 ## OPA vs Kyverno 对比
 
 | 维度 | OPA Gatekeeper | Kyverno |
@@ -1095,7 +1100,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 conftest
 wget -q https://github.com/open-policy-agent/conftest/releases/download/v0.55.0/conftest_0.55.0_Linux_x86_64.tar.gz
 tar xzf conftest_0.55.0_Linux_x86_64.tar.gz
@@ -1109,7 +1115,6 @@ for f in policies/gatekeeper/templates/*.yaml; do
   kubectl apply --dry-run=client -f "$f" 2>&1 || exit 1
 done
 ```
-
 ## CI/CD 集成
 
 ```yaml
@@ -1202,7 +1207,8 @@ spec:
 
 ## 完整诊断脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # gatekeeper_diagnostics.sh
 
@@ -1246,7 +1252,6 @@ echo ""
 echo "=== Config Status ==="
 kubectl get config -n gatekeeper-system -o yaml
 ```
-
 ## 常见问题
 
 **ConstraintTemplate 无法创建**：检查 Rego 语法是否正确。使用 `opa check` 命令验证 Rego 代码语法。检查 CRD Schema 定义是否正确，参数类型是否与 Rego 代码中的引用匹配。
@@ -1260,7 +1265,8 @@ kubectl get config -n gatekeeper-system -o yaml
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 紧急恢复
 for wh in $(kubectl get validatingwebhookconfigurations -l app=gatekeeper -o name); do
   kubectl patch "$wh" --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Ignore"}]'
@@ -1271,7 +1277,6 @@ for wh in $(kubectl get validatingwebhookconfigurations -l app=gatekeeper -o nam
   kubectl patch "$wh" --type json -p='[{"op":"replace","path":"/webhooks/0/failurePolicy","value":"Fail"}]'
 done
 ```
-
 ---
 
 *本文档基于 OPA Gatekeeper 策略管理实践经验编写，持续更新最新技术和最佳实践。*
@@ -1305,3 +1310,6 @@ done
 ## Related
 
 - [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+
+
+<!-- risk-assessed -->

@@ -68,6 +68,11 @@ cross_refs:
   label: '故障树: networkpolicy'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 16 - [[NetworkPolicy|NetworkPolicy]] 故障排查 (NetworkPolicy Troubleshooting)
@@ -145,7 +150,8 @@ cross_refs:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 检查CNI插件类型 ==========
 # 查看当前使用的CNI插件
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.containerRuntimeVersion}{"\n"}{end}'
@@ -187,13 +193,13 @@ EOF
 kubectl get networkpolicy test-policy
 kubectl describe networkpolicy test-policy
 ```
-
 ### 2.2 网络策略基本语法检查
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 策略格式验证 ==========
 # 检查必需字段
 kubectl explain networkpolicy.spec
@@ -211,7 +217,6 @@ kubectl apply -f policy.yaml --dry-run=client -o yaml
 # 使用服务器端验证
 kubectl apply -f policy.yaml --server-side --dry-run=server
 ```
-
 ---
 
 <!-- chunk: 3. 策略未生效问题排查 (Policy Not Working Troubleshooting) -->
@@ -220,6 +225,7 @@ kubectl apply -f policy.yaml --server-side --dry-run=server
 ### 3.1 排查决策树
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                   NetworkPolicy 未生效排查流程                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -258,10 +264,10 @@ kubectl apply -f policy.yaml --server-side --dry-run=server
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
 ### 3.2 详细诊断命令
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 策略状态检查 ==========
 # 列出所有NetworkPolicy
 kubectl get networkpolicy --all-namespaces
@@ -307,7 +313,6 @@ wget -qO- http://<target-service>
 # 使用netshoot工具箱
 kubectl run netshoot --image=nicolaka/netshoot -it --rm -- sh
 ```
-
 ---
 
 <!-- chunk: 4. 过度限制问题排查 (Over Restriction Troubleshooting) -->
@@ -319,7 +324,8 @@ kubectl run netshoot --image=nicolaka/netshoot -it --rm -- sh
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 1. 确定阻断范围 ==========
 # 测试同Namespace访问
 kubectl run test-pod --image=busybox -n <same-namespace> -it --rm -- sh
@@ -346,13 +352,13 @@ kubectl apply -f <policy-backup.yaml>
 kubectl logs -n calico-system -l k8s-app=calico-node
 kubectl logs -n kube-system -l k8s-app=cilium
 ```
-
 ### 4.2 默认策略问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 默认拒绝策略检查 ==========
 # 检查是否有隐式默认拒绝
 kubectl get networkpolicy -n <namespace> -o yaml | grep -A10 "policyTypes"
@@ -389,7 +395,6 @@ spec:
   - Ingress
 EOF
 ```
-
 ---
 
 <!-- chunk: 5. 复杂策略配置问题 (Complex Policy Configuration) -->
@@ -401,7 +406,8 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 策略优先级分析 ==========
 # 查看所有相关策略
 kubectl get networkpolicy -n <namespace> -o wide
@@ -443,13 +449,13 @@ kubectl apply -f test-scenario.yaml
 # 测试连通性
 kubectl exec test-source -n <namespace> -- wget -qO- http://test-target.<namespace>.svc.cluster.local
 ```
-
 ### 5.2 Egress策略问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 外部访问策略 ==========
 # 允许访问特定外部IP
 cat <<EOF | kubectl apply -f -
@@ -497,7 +503,6 @@ spec:
       port: 53
 EOF
 ```
-
 ---
 
 <!-- chunk: 6. 性能和监控 (Performance and Monitoring) -->
@@ -505,7 +510,8 @@ EOF
 
 ### 6.1 策略性能影响
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 网络延迟测试 ==========
 # 基准测试（无策略）
 kubectl run baseline-test --image=networkstatic/iperf3 -it --rm -- sh
@@ -528,13 +534,13 @@ curl http://localhost:9098/metrics | grep networkpolicy
 kubectl port-forward -n kube-system svc/hubble-relay 4245:80
 hubble observe --last 100
 ```
-
 ### 6.2 监控告警配置
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 策略违规检测 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -590,7 +596,6 @@ done
 
 echo "Validation complete"
 ```
-
 ---
 
 <!-- chunk: 7. 最佳实践和预防措施 (Best Practices and Prevention) -->
@@ -654,7 +659,8 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== CI/CD集成 ==========
 # 策略linting脚本
 #!/bin/bash
@@ -695,7 +701,6 @@ while read policy; do
     kubectl delete networkpolicy -n ${policy%/*} ${policy##*/}
 done
 ```
-
 ---
 
 ---
@@ -725,3 +730,6 @@ done
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/15-ingress-troubleshooting.md|15-ingress-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/17-hpa-vpa-troubleshooting.md|17-hpa-vpa-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/18-cronjob-troubleshooting.md|18-cronjob-troubleshooting]]
+
+
+<!-- risk-assessed -->

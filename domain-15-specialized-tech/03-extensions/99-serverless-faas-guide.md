@@ -55,6 +55,11 @@ cross_refs:
   label: '相关知识域: domain-07-platform-engineering'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # K8s Serverless / FaaS 实践指南
@@ -117,7 +122,8 @@ K8s Serverless 三种模式
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Knative Serving
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.17.0/serving-crds.yaml
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.17.0/serving-core.yaml
@@ -134,14 +140,14 @@ kubectl patch configmap/config-network \
 # 安装 HPA 自动缩放
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.17.0/serving-hpa.yaml
 ```
-
 ### 2.2 配置 DNS
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 使用 Magic DNS (sslip.io)
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.17.0/serving-default-domain.yaml
 
@@ -151,7 +157,6 @@ kubectl patch configmap/config-domain \
   --type merge \
   --patch '{"data":{"knative.example.com":""}}'
 ```
-
 ---
 
 <!-- chunk: 三、Knative Service 与自动缩放 -->
@@ -248,7 +253,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 helm repo add openfunction https://openfunction.github.io/charts/
 helm repo update
 
@@ -259,7 +265,6 @@ helm install openfunction openfunction/openfunction \
   --set global.KnativeServing.enabled=true \
   --set global.Keda.enabled=true
 ```
-
 ### 4.2 函数定义
 
 ```yaml
@@ -358,7 +363,8 @@ spec:
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 安装 Eventing
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.17.0/eventing-crds.yaml
 kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.17.0/eventing-core.yaml
@@ -367,7 +373,6 @@ kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v
 kubectl apply -f https://github.com/knative-extensions/eventing-kafka-broker/releases/download/knative-v1.17.0/eventing-kafka-controller.yaml
 kubectl apply -f https://github.com/knative-extensions/eventing-kafka-broker/releases/download/knative-v1.17.0/eventing-kafka-broker.yaml
 ```
-
 ```yaml
 # Broker (事件总线)
 apiVersion: eventing.knative.dev/v1
@@ -529,3 +534,5 @@ spec:
 - 02-operator-development-patterns
 
 ```
+
+<!-- risk-assessed -->

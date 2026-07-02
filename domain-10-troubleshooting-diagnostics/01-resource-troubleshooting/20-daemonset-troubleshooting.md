@@ -66,6 +66,11 @@ cross_refs:
   label: '故障树: daemonset'
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 20 - [[DaemonSet|DaemonSet]] 故障排查 (DaemonSet Troubleshooting)
@@ -147,7 +152,8 @@ cross_refs:
 
 ### 2.1 DaemonSet 资源状态验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 基础信息检查 ==========
 # 查看所有DaemonSet
 kubectl get daemonsets --all-namespaces
@@ -183,10 +189,10 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.tai
 # 验证DaemonSet节点选择器
 kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.selector}'
 ```
-
 ### 2.2 调度约束验证
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 污点和容忍度检查 ==========
 # 查看节点污点
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.taints[*]}{.key}={.value}:{.effect}{" "}{end}{"\n"}{end}'
@@ -208,7 +214,6 @@ kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.templa
 # 验证节点标签匹配
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels}{"\n"}{end}' | grep -E "($(kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.template.spec.nodeSelector[*]}'))"
 ```
-
 ---
 
 <!-- chunk: 3. Pod调度问题排查 (Pod Scheduling Issues) -->
@@ -216,7 +221,8 @@ kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata
 
 ### 3.1 Pod未调度到节点
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 调度失败原因分析 ==========
 # 查看未调度Pod的事件
 kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod,reason=FailedScheduling
@@ -263,13 +269,13 @@ kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.templa
 # 验证反亲和性规则
 kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.template.spec.affinity.podAntiAffinity}'
 ```
-
 ### 3.2 污点导致的调度问题
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 污点问题诊断 ==========
 # 列出所有节点污点
 kubectl get nodes -o go-template='{{range .items}}{{printf "%s:\n" .metadata.name}}{{range .spec.taints}}{{printf "  %s=%s:%s\n" .key .value .effect}}{{end}}{{end}}'
@@ -327,7 +333,6 @@ spec:
         effect: NoSchedule
 EOF
 ```
-
 ---
 
 <!-- chunk: 4. Pod运行时问题排查 (Pod Runtime Issues) -->
@@ -335,7 +340,8 @@ EOF
 
 ### 4.1 CrashLoopBackOff问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 容器启动失败分析 ==========
 # 查看Pod状态和重启次数
 kubectl get pods -n <namespace> -l <selector> -o jsonpath='{
@@ -405,10 +411,10 @@ kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.templa
 # 查看探针失败事件
 kubectl get events -n <namespace> --field-selector involvedObject.kind=Pod,reason=Unhealthy
 ```
-
 ### 4.2 权限和安全上下文问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 安全上下文检查 ==========
 # 检查Pod安全上下文
 kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{.spec.template.spec.securityContext}'
@@ -430,7 +436,6 @@ kubectl auth can-i get nodes --as=system:serviceaccount:<namespace>:$SERVICE_ACC
 # 检查RoleBinding
 kubectl get rolebindings -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.subjects[*].name}{"\n"}{end}' | grep $SERVICE_ACCOUNT
 ```
-
 ---
 
 <!-- chunk: 5. 更新和滚动策略问题 (Update and Rolling Strategy Issues) -->
@@ -438,7 +443,8 @@ kubectl get rolebindings -n <namespace> -o jsonpath='{range .items[*]}{.metadata
 
 ### 5.1 更新卡住问题
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== 1. 更新状态检查 ==========
 # 查看DaemonSet更新状态
 kubectl get daemonset <daemonset-name> -n <namespace> -o jsonpath='{
@@ -487,13 +493,13 @@ kubectl get nodes -o jsonpath='{
 # 查看更新事件
 kubectl get events -n <namespace> --field-selector involvedObject.name=<daemonset-name>,involvedObject.kind=DaemonSet
 ```
-
 ### 5.2 滚动更新配置优化
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== 推荐的更新策略配置 ==========
 cat <<EOF > daemonset-update-strategy.yaml
 apiVersion: apps/v1
@@ -536,7 +542,6 @@ kubectl patch daemonset <daemonset-name> -n <namespace> -p '{"spec":{"updateStra
 # RollingUpdate策略 (自动滚动更新)
 kubectl patch daemonset <daemonset-name> -n <namespace> -p '{"spec":{"updateStrategy":{"type":"RollingUpdate","rollingUpdate":{"maxUnavailable":1}}}}'
 ```
-
 ---
 
 <!-- chunk: 6. 监控和告警配置 (Monitoring and Alerting) -->
@@ -547,7 +552,8 @@ kubectl patch daemonset <daemonset-name> -n <namespace> -p '{"spec":{"updateStra
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ========== DaemonSet状态监控 ==========
 cat <<EOF | kubectl apply -f -
 apiVersion: monitoring.coreos.com/v1
@@ -613,10 +619,10 @@ spec:
         summary: "Nodes without required DaemonSet pods"
 EOF
 ```
-
 ### 6.2 性能和健康检查脚本
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # ========== DaemonSet健康检查脚本 ==========
 cat <<'EOF' > daemonset-health-check.sh
 #!/bin/bash
@@ -718,7 +724,6 @@ EOF
 
 chmod +x node-coverage-check.sh
 ```
-
 ---
 
 ---
@@ -748,3 +753,6 @@ chmod +x node-coverage-check.sh
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/19-configmap-secret-troubleshooting.md|19-configmap-secret-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/22-job-troubleshooting.md|22-job-troubleshooting]]
+
+
+<!-- risk-assessed -->

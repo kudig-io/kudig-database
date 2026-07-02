@@ -69,6 +69,11 @@ related_docs:
   desc: CRD/Operator 故障树
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # 01 - CRD自定义资源定义开发指南
@@ -450,7 +455,8 @@ spec:
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # production-crd-deployment.sh
 
@@ -602,7 +608,6 @@ trap rollback_if_needed ERR
 
 main "$@"
 ```
-
 <!-- chunk: CRD部署与管理 -->
 ## CRD部署与管理
 
@@ -612,7 +617,8 @@ main "$@"
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # deploy-crd.sh
 
@@ -654,10 +660,10 @@ kubectl delete mysqlcluster test-cluster
 
 echo "🎉 CRD部署完成!"
 ```
-
 ### 2. CRD验证工具
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 使用kubeval验证
 kubeval --strict --ignore-missing-schemas ${CRD_FILE}
 
@@ -670,7 +676,6 @@ kubebuilder alpha crd gen --input-dir=config/crd/bases/
 # 验证CRD是否存在
 kubectl get crd | grep mysqlcluster
 ```
-
 <!-- chunk: CRD生产环境最佳实践 -->
 ## CRD生产环境最佳实践
 
@@ -832,7 +837,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # crd-deployment-script.sh
 
@@ -938,10 +944,10 @@ main() {
 
 main "$@"
 ```
-
 ### 6. 问题排除与调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crd-debugging-toolkit.sh
 
@@ -1022,7 +1028,6 @@ perform_complete_diagnostics() {
 
 perform_complete_diagnostics
 ```
-
 ### 4. 监控与可观测性
 
 ```yaml
@@ -1086,7 +1091,8 @@ spec:
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # crd-deployment-script.sh
 
@@ -1192,10 +1198,10 @@ main() {
 
 main "$@"
 ```
-
 ### 6. 问题排除与调试
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crd-debugging-toolkit.sh
 
@@ -1276,7 +1282,6 @@ perform_complete_diagnostics() {
 
 perform_complete_diagnostics
 ```
-
 ### 2. 版本管理策略
 
 ```yaml
@@ -1325,7 +1330,8 @@ subresources:
 
 ### 常见问题诊断
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 1. CRD验证失败
 kubectl describe crd mysqlclusters.database.example.com
 
@@ -1341,13 +1347,13 @@ kubectl get mysqlcluster -o yaml | kubectl convert -f - --output-version=v1beta1
 # 5. 权限问题
 kubectl auth can-i create mysqlclusters.database.example.com
 ```
-
 ### 调试命令集合
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看CRD详细信息
 kubectl get crd mysqlclusters.database.example.com -o yaml
 
@@ -1363,7 +1369,6 @@ kubectl create -f test-instance.yaml --dry-run=server -o yaml
 # 验证OpenAPI schema
 kubectl get --raw "/openapi/v2" | jq '.definitions | keys[] | select(contains("mysqlcluster"))'
 ```
-
 <!-- chunk: CRD监控与运维 -->
 ## CRD监控与运维
 
@@ -1393,7 +1398,8 @@ spec:
 
 ### 2. 健康检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 #!/bin/bash
 # crd-health-check.sh
 
@@ -1431,7 +1437,6 @@ fi
 
 echo "✅ CRD健康检查完成"
 ```
-
 ---
 **CRD开发原则**: 结构化定义、版本兼容、安全验证、可观测性
 
@@ -1470,3 +1475,6 @@ echo "✅ CRD健康检查完成"
 - 99-serverless-faas-guide
 - 02-operator-development-patterns
 - 03-admission-webhook-configuration
+
+
+<!-- risk-assessed -->

@@ -52,6 +52,11 @@ prerequisites:
 - observability-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 ---
@@ -708,7 +713,8 @@ graph LR
 
 学员需提前安装以下工具，并在课前完成环境验证：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 基础工具安装 ===
 
 # 1. 安装 kubectl (Linux)
@@ -748,14 +754,14 @@ sudo apt-get install -y tcpdump   # Debian/Ubuntu
 sudo apt-get install -y dnsutils   # Debian/Ubuntu
 brew install bind                   # macOS
 ```
-
 ### 集群访问验证
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # === 集群连通性验证 ===
 
 # 1. 配置 kubeconfig（由讲师提供）
@@ -786,10 +792,10 @@ kubectl expose pod test-nginx --port=80 --target-port=80
 kubectl get all
 kubectl delete pod test-nginx
 ```
-
 ### 版本兼容性检查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # === 版本兼容性检查 ===
 
 # kubectl 版本（与集群版本差异 <= 1 个小版本）
@@ -809,7 +815,6 @@ kubectl get ingressclass
 kubectl get nodes -o wide
 kubectl describe node | grep -A 5 "Capacity"
 ```
-
 ---
 
 ## 培训进度跟踪表（Progress Tracking Table）
@@ -867,7 +872,8 @@ kubectl describe node | grep -A 5 "Capacity"
 > - `helm upgrade/install`：部署/升级 release
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # k8s-lab-setup.sh - Kubernetes 培训实验环境一键部署脚本
 # 用法: bash k8s-lab-setup.sh [学员数量]
@@ -1106,13 +1112,13 @@ echo "  3. 获取 Grafana 密码:"
 echo "     kubectl get secret -n monitoring kube-prometheus-grafana -o jsonpath='{.data.admin-password}' | base64 -d"
 echo ""
 ```
-
 ### RBAC 配置脚本
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
 # setup-student-rbac.sh - 为学员创建受限 RBAC 权限
 # 用法: bash setup-student-rbac.sh <学员编号>
@@ -1215,7 +1221,6 @@ echo "验证命令:"
 echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl get pods"
 echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --list"
 ```
-
 ---
 
 ## 评估标准（Evaluation Criteria）
@@ -1299,3 +1304,6 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 - [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+
+
+<!-- risk-assessed -->

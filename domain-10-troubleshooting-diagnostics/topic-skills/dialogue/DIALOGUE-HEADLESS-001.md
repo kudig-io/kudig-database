@@ -19,6 +19,11 @@ status: reviewed
 last_updated: 2026-05-21
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 # StatefulSet Pod 域名解析失败 — 远程顾问对话脚本
@@ -40,16 +45,16 @@ last_updated: 2026-05-21
 
 **顾问**：请确认 Headless Service 是否正确创建：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc -n <namespace>
 ```
-
 > **如果无法执行**：请通过控制台查看 Service 列表，确认目标 Service 的 TYPE 是否为 `ClusterIP` 且 `CLUSTER-IP` 为 `None`。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get svc <svc-name> -n <namespace> -o yaml | grep -E 'clusterIP:|publishNotReadyAddresses:'
 ```
-
 > **如果无法执行**：请查看 Service YAML，确认 `spec.clusterIP` 是否为 `None`。这是 Headless Service 的关键特征。
 
 **预期用户回复**：Service 存在，但 `clusterIP` 不是 `None`（即不是 Headless Service）。
@@ -64,16 +69,16 @@ kubectl get svc <svc-name> -n <namespace> -o yaml | grep -E 'clusterIP:|publishN
 
 **顾问**：请在 Pod 内或集群中验证 DNS 解析：
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl run -it --rm debug --image=busybox:1.28 --restart=Never -- nslookup <pod-name>.<svc-name>.<namespace>.svc.cluster.local
 ```
-
 > **如果无法执行**：若无法创建临时 Pod，请在现有 Pod 中执行：`kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namespace>.svc.cluster.local`。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get endpoints <svc-name> -n <namespace>
 ```
-
 > **如果无法执行**：请确认 Headless Service 的 Endpoints 是否包含所有 StatefulSet Pod 的 IP。Headless Service 的 DNS 记录由 Endpoints 中的 Pod IP 生成。
 
 **预期用户回复**：nslookup 返回 `NXDOMAIN` 或超时，或 Endpoints 中缺少部分 Pod IP。
@@ -88,16 +93,16 @@ kubectl get endpoints <svc-name> -n <namespace>
 
 **顾问**：请确认集群 DNS 组件 CoreDNS 是否正常运行：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n kube-system | grep -E 'coredns|dns'
 ```
-
 > **如果无法执行**：请通过控制台查看 kube-system 命名空间下的 DNS 相关 Pod 状态。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs -n kube-system deployment/coredns --tail=30
 ```
-
 > **如果无法执行**：请提供 CoreDNS Pod 的状态截图（Running / CrashLoopBackOff / Pending）。
 
 **预期用户回复**：CoreDNS Pod 处于 CrashLoopBackOff，或日志中有 `loop detected` 等错误。
@@ -112,16 +117,16 @@ kubectl logs -n kube-system deployment/coredns --tail=30
 
 **顾问**：请确认 StatefulSet Pod 是否按序启动且全部就绪：
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -l app=<statefulset-label>
 ```
-
 > **如果无法执行**：请执行 `kubectl get pods -n <namespace> -w` 观察 Pod 状态变化，或提供当前 Pod 列表。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get statefulset <sts-name> -n <namespace>
 ```
-
 > **如果无法执行**：请确认 StatefulSet 的 READY 列是否为 `<replicas>/<replicas>`。若第一个 Pod 未就绪，后续 Pod 不会启动。
 
 **预期用户回复**：StatefulSet 中部分 Pod 未就绪，导致后续 Pod 和 DNS 记录未创建。
@@ -139,16 +144,16 @@ kubectl get statefulset <sts-name> -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <pod-name> -n <namespace> -- cat /etc/resolv.conf
 ```
-
 > **如果无法执行**：请确认 Pod 中是否有 `/etc/resolv.conf` 文件，以及 `search` 和 `nameserver` 字段的内容。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 'dnsPolicy:'
 ```
-
 > **如果无法执行**：请确认 Pod 的 `dnsPolicy` 是否为 `ClusterFirst`（默认）。若使用 `Default`，Pod 将使用节点上的 DNS 配置，可能无法解析集群内部域名。
 
 **预期用户回复**：`search` 域中不包含 `<namespace>.svc.cluster.local`，或 `dnsPolicy` 被错误设置为 `Default`。
@@ -167,7 +172,8 @@ kubectl get pod <pod-name> -n <namespace> -o yaml | grep -A 5 'dnsPolicy:'
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
@@ -183,7 +189,6 @@ spec:
     targetPort: 80
 EOF
 ```
-
 > **如果无法执行**：请手动创建 YAML 文件后执行 `kubectl apply -f headless-service.yaml`。注意 `clusterIP: None` 必须显式声明。
 
 #### 方案 B：重启 CoreDNS
@@ -191,24 +196,24 @@ EOF
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl rollout restart deployment/coredns -n kube-system
 ```
-
 > **如果无法执行**：请执行 `kubectl delete pod -n kube-system -l k8s-app=kube-dns` 或 `-l k8s-app=coredns`，让 Deployment 自动重建 Pod。
 
 #### 方案 C：检查 StatefulSet 启动顺序
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe statefulset <sts-name> -n <namespace>
 ```
-
 > **如果无法执行**：请确认 `podManagementPolicy` 是否为 `OrderedReady`（默认）。若第一个 Pod 未就绪，请排查其未就绪原因（如资源不足、镜像拉取失败）。
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <sts-name>-0 -n <namespace>
 ```
-
 > **如果无法执行**：请查看第一个 Pod 的 Events，解决启动阻塞问题后，后续 Pod 会自动启动。
 
 #### 方案 D：修正 DNS 配置
@@ -216,10 +221,10 @@ kubectl describe pod <sts-name>-0 -n <namespace>
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"dnsPolicy":"ClusterFirst","dnsConfig":{"searches":["<namespace>.svc.cluster.local","svc.cluster.local","cluster.local"]}}}'
 ```
-
 > **如果无法执行**：Pod 的 dnsPolicy 通常不可直接 patch。请修改 StatefulSet 的 Pod template 后重新部署。
 
 **验证修复**：
@@ -227,10 +232,10 @@ kubectl patch pod <pod-name> -n <namespace> --type='merge' -p='{"spec":{"dnsPoli
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namespace>.svc.cluster.local
 ```
-
 > **如果无法执行**：请使用 `dig` 或 `host` 命令替代。成功时应返回 Pod 的集群 IP 地址。
 
 ---
@@ -243,3 +248,6 @@ kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namesp
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->

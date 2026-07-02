@@ -42,6 +42,11 @@ prerequisites:
 - tracing-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 成本与延迟优化策略
@@ -770,6 +775,7 @@ async def batch_evaluate_agent(
 ## 8.1 关键路径延迟分析
 
 ```
+# 🟢 低风险：只读/信息收集，通常无副作用
 Agent 任务端到端延迟分解（典型 5 步任务）:
 
   总延迟: ~8500ms
@@ -786,7 +792,6 @@ Agent 任务端到端延迟分解（典型 5 步任务）:
 
 优化后目标: ~3500ms (节省 59%)
 ```
-
 ## 8.2 流式输出降低感知延迟
 
 ```python
@@ -911,3 +916,6 @@ class PrefetchAgent:
 - 10-security-guardrails
 - 12-enterprise-case-studies
 - 13-trusted-agent-system-fiscal-plan
+
+
+<!-- risk-assessed -->

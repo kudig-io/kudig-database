@@ -43,6 +43,11 @@ prerequisites:
 - prometheus-basics
 ---
 
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 
 
 title: 资源与调度故障排查指南
@@ -144,7 +149,8 @@ k8s_versions:
 
 ### 报错查看方式汇总
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 ResourceQuota
 kubectl get resourcequota -A
 kubectl describe resourcequota <quota-name> -n <namespace>
@@ -168,7 +174,6 @@ dmesg | grep -i "oom|killed"
 # 查看调度失败原因
 kubectl describe pod <pod-name> | grep -A10 Events
 ```
-
 ### 影响面分析
 
 | 问题类型 | 影响范围 | 影响描述 |
@@ -184,7 +189,8 @@ kubectl describe pod <pod-name> | grep -A10 Events
 
 ### ResourceQuota 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：查看命名空间配额使用情况
 kubectl get resourcequota -n <namespace>
 kubectl describe resourcequota <quota-name> -n <namespace>
@@ -212,10 +218,10 @@ kubectl describe limitrange <lr-name> -n <namespace>
 kubectl get pods -n <namespace> -o json | \
   jq '[.items[].spec.containers[].resources.requests.memory // "0" | gsub("Mi"; "") | gsub("Gi"; "000") | tonumber] | add'
 ```
-
 ### OOM 排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认 OOM 事件
 kubectl describe pod <pod-name> | grep -i "oom|killed"
 
@@ -240,10 +246,10 @@ dmesg | grep -i "oom|killed" | tail -20
 # 使用 Prometheus 查询
 # container_memory_usage_bytes{pod="<pod-name>"}
 ```
-
 ### 调度失败排查
 
-```bash
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：查看调度失败原因
 kubectl describe pod <pod-name> | grep -A20 Events
 
@@ -267,7 +273,6 @@ kubectl get pod <pod-name> -o yaml | grep -A10 tolerations
 # 步骤 7：使用调度器日志分析
 kubectl logs -n kube-system -l component=kube-scheduler | grep <pod-name>
 ```
-
 ---
 
 ## 解决方案与风险控制
@@ -281,7 +286,8 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep <pod-name>
 > - `kubectl delete`：删除资源（可由声明式清单重建）
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：增加配额
 kubectl patch resourcequota <quota-name> -n <namespace> -p '{
   "spec": {
@@ -335,7 +341,6 @@ spec:
     persistentvolumeclaims: "10"
 EOF
 ```
-
 #### 安全生产风险提示
 
 ```
@@ -355,7 +360,8 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：增加内存限制
 kubectl patch deployment <name> -p '{
   "spec": {
@@ -406,7 +412,6 @@ EOF
 # evictionSoft:
 #   memory.available: "200Mi"
 ```
-
 #### 安全生产风险提示
 
 ```
@@ -426,7 +431,8 @@ EOF
 > - `kubectl apply/create/replace`：创建/变更集群资源
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：减少资源请求
 kubectl patch deployment <name> -p '{
   "spec": {
@@ -489,14 +495,23 @@ kubectl patch deployment <name> -p '{
   }
 }'
 ```
-
 #### 污点容忍问题解决
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `kubectl taint nodes`：变更污点影响 Pod 调度
 > - `kubectl edit/patch`：修改运行中的资源
 
-```bash
+> **🔴 高风险操作警告**
+>
+> 下方命令属于不可逆或高影响操作，执行前请确认：
+> - 已备份关键数据与配置
+> - 处于批准的变更窗口期
+> - 已获得相关责任人授权
+> - 已准备回滚或恢复方案
+> - 目标集群、Namespace、节点/资源名称正确无误
+
+``` bash
+# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 添加容忍
 kubectl patch deployment <name> -p '{
   "spec": {
@@ -515,7 +530,6 @@ kubectl patch deployment <name> -p '{
 # 或移除节点污点（如果合适）
 kubectl taint nodes <node-name> <taint-key>-
 ```
-
 #### 安全生产风险提示
 
 ```
@@ -532,7 +546,8 @@ kubectl taint nodes <node-name> <taint-key>-
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
 
-```bash
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 LimitRange 设置默认值
 cat << EOF | kubectl apply -f -
 apiVersion: v1
@@ -557,7 +572,6 @@ spec:
     type: Container
 EOF
 ```
-
 ---
 
 ## 附录
@@ -610,3 +624,6 @@ EOF
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
+
+
+<!-- risk-assessed -->
