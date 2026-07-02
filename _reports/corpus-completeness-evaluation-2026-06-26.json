@@ -1,29 +1,29 @@
 {
   "timestamp": "2026-06-26T12:00:00+08:00",
   "vault_path": "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database",
-  "overall_score": 89.1,
+  "overall_score": 80.2,
   "scores": {
-    "scale": 97.6,
-    "structure_health": 100.0,
+    "scale": 100,
+    "structure_health": 0,
     "concept_coverage": 98.0,
     "ticket_readiness": 100,
-    "aliyun_coverage": 39.0,
-    "rag_readiness": 100.0
+    "aliyun_coverage": 84.3,
+    "rag_readiness": 99.2
   },
   "scale": {
-    "total_pages": 4881,
-    "total_tokens": 17250307,
-    "total_chars": 69008570
+    "total_pages": 9330,
+    "total_tokens": 34701566,
+    "total_chars": 138820198
   },
   "structure": {
-    "broken_links": 0,
-    "missing_frontmatter": 0,
-    "missing_summary": 2,
-    "missing_tier": 2,
-    "orphans": 1717,
-    "core_pages": 1099,
-    "supporting_pages": 1330,
-    "peripheral_pages": 2450
+    "broken_links": 24,
+    "missing_frontmatter": 77,
+    "missing_summary": 81,
+    "missing_tier": 81,
+    "orphans": 3401,
+    "core_pages": 2163,
+    "supporting_pages": 3548,
+    "peripheral_pages": 3492
   },
   "content_coverage": {
     "key_concepts_checked": 50,
@@ -31,68 +31,68 @@
     "coverage_ratio": 0.98
   },
   "ticket_agent": {
-    "ticket_pages": 58,
-    "qa_pairs_estimate": 0,
-    "skill_docs": 507
+    "ticket_pages": 121,
+    "qa_pairs_estimate": 30193,
+    "skill_docs": 1468
   },
   "aliyun": {
-    "aliyun_pages": 18,
-    "ack_pages": 99
+    "aliyun_pages": 42,
+    "ack_pages": 211
   },
   "rag": {
-    "pages_with_summary": 4879,
-    "pages_with_tags": 4881,
-    "pages_with_category": 4881
+    "pages_with_summary": 9249,
+    "pages_with_tags": 9253,
+    "pages_with_category": 9253
   },
   "top_categories": {
+    "general": 1327,
     "release-notes": 1322,
-    "general": 717,
-    "dictionary": 548,
-    "entities": 284,
-    "skills": 160,
-    "learning": 149,
-    "synthesis": 135,
-    "concepts": 117,
-    "structural-troubleshooting": 72,
-    "fta": 62,
-    "moc": 60,
-    "troubleshooting": 60,
-    "domain": 50,
-    "reference": 45,
-    "networking": 40
+    "index": 897,
+    "entities": 569,
+    "dictionary": 550,
+    "skills": 362,
+    "learning": 290,
+    "synthesis": 269,
+    "concepts": 231,
+    "structural-troubleshooting": 216,
+    "fta": 185,
+    "troubleshooting": 140,
+    "moc": 122,
+    "production-operations": 106,
+    "domain": 101
   },
   "top_tags": {
-    "k8s": 3718,
-    "release-notes": 1345,
-    "changelog": 1325,
-    "prometheus": 1303,
-    "etcd": 942,
-    "rag": 924,
-    "kubelet": 919,
-    "docker": 733,
-    "grafana": 645,
-    "apiserver": 645,
-    "scheduler": 641,
-    "operator": 561,
-    "helm": 554,
-    "glossary": 549,
-    "istio": 394
+    "k8s": 5715,
+    "prometheus": 2385,
+    "etcd": 1793,
+    "kubelet": 1779,
+    "rag": 1370,
+    "release-notes": 1367,
+    "changelog": 1327,
+    "apiserver": 1245,
+    "scheduler": 1228,
+    "docker": 1228,
+    "grafana": 1160,
+    "operator": 1007,
+    "helm": 949,
+    "index": 946,
+    "troubleshooting": 853
   },
   "top_domains": {
-    "domain-19-landscape-references": 1386,
-    "domain-17-system-foundation": 620,
-    "domain-10-troubleshooting-diagnostics": 380,
-    "domain-14-ai-ml-infra": 185,
-    "domain-07-platform-engineering": 140,
-    "domain-02-workloads-applications": 130,
-    "domain-03-networking-traffic": 126,
-    "domain-01-cluster-fundamentals": 103,
-    "domain-20-application-patterns": 101,
-    "domain-11-production-operations": 76,
-    "domain-06-observability": 71,
-    "domain-05-security-compliance": 66,
-    "domain-08-release-change-management": 57,
-    "domain-15-specialized-tech": 53,
-    "domain-12-cloud-providers": 50
+    "domain-19-landscape-references": 1436,
+    "domain-17-system-foundation": 642,
+    "domain-10-troubleshooting-diagnostics": 487,
+    "domain-14-ai-ml-infra": 158,
+    "domain-07-platform-engineering": 155,
+    "domain-02-workloads-applications": 140,
+    "domain-03-networking-traffic": 135,
+    "domain-20-application-patterns": 120,
+    "domain-01-cluster-fundamentals": 116,
+    "domain-11-production-operations": 104,
+    "domain-12-cloud-providers": 97,
+    "domain-06-observability": 87,
+    "domain-05-security-compliance": 81,
+    "domain-08-release-change-management": 70,
+    "domain-15-specialized-tech": 69
   }
 }

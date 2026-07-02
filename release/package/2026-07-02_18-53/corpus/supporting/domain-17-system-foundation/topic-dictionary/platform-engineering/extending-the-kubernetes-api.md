@@ -1,0 +1,121 @@
+---
+title: 扩展 Kubernetes API
+description: '## 概述'
+summary: '## 概述'
+category: dictionary
+tags:
+- k8s
+- glossary
+- terminology
+- apiserver
+- rbac
+- crd
+- operator
+- webhook
+tier: supporting
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- 扩展 Kubernetes API 是什么
+- 如何 扩展 Kubernetes API
+trigger_keywords:
+- 扩展
+- Kubernetes
+- API
+- dictionary
+prerequisites:
+- kubectl-basics
+- cloud-provider-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# 扩展 [[Kubernetes|Kubernetes]]es API|Kubernetes API]]
+
+## 概述
+
+Kubernetes API 是平台的核心，扩展 Kubernetes API 允许用户在不修改 Kubernetes 核心代码的情况下，为集群添加新的资源类型和功能。Kubernetes 提供了两种主要的 API 扩展方式：CustomResourceDefinitions（CRD）和 API Aggregation（AA）。
+
+## 核心概念/原理
+
+- **CustomResourceDefinition（CRD）**：以声明式方式定义新的自定义 API，包括 API 组（group）、类别（kind）和模式（schema）。Kubernetes 控制平面负责服务和存储这些自定义资源。使用 CRD 无需编写自定义 API server。
+- **API Aggregation（聚合层）**：在主 API server 之后运行一个聚合层，作为主 API server 的代理。通过编写和部署自己的 API server，可以为自定义资源提供专门的实现，主 API server 将对应请求委托给扩展 API server。
+
+## 关键机制或特性
+
+- **CRD 的易用性**：无需编程，用户可用任何语言编写控制器；无需额外运行服务，由 API server 直接处理；升级和维护由 Kubernetes 主版本升级覆盖。
+- **API Aggregation 的灵活性**：需要编程、构建二进制和镜像，并运行额外服务；但允许对 API 行为进行更精细的控制，如自定义存储层、自定义业务逻辑、任意验证、Protocol Buffers 支持等。
+- **功能对比**：
+  - 两者均支持：CRUD、Watch、Discovery、多版本、Scale/Status 子资源、HTTPS、内置认证授权、[[Finalizers|Finalizers]]、Admission Webhooks 等。
+  - 仅 AA 支持：自定义存储、其他子资源（如 logs/exec）、strategic-merge-patch、Protocol Buffers。
+
+## 使用场景
+
+- **选择 CRD**：资源字段较少、仅在内部或小规模开源项目使用、对易用性要求高、不需要特殊存储或高级 API 行为时。
+- **选择 API Aggregation**：需要自定义存储后端（如时序数据库）、需要复杂的验证或转换逻辑、需要提供非 CRUD 子资源、面向商业产品且需要最大灵活性时。
+
+## 最佳实践/注意事项
+
+- 不要将自定义资源用作应用程序数据、终端用户数据或监控数据的存储，这会导致与 Kubernetes API 过度耦合。云原生架构提倡组件间松耦合，常规操作所需的支撑服务应作为独立组件运行。
+- 安装第三方 CRD 时，通常会同时部署实现业务逻辑的第三方控制器，带来新的问题点；安装聚合 API 则必然引入新的 Deployment。
+- 自定义资源会占用 API server 的存储空间，创建过多可能压垮存储。
+- 使用 RBAC 时，默认角色通常不会授予新资源的访问权限，需要显式配置权限。
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查步骤 |
+|------|----------|----------|
+| CRD 创建后 API 不可用 | CRD YAML 格式错误 | `kubectl get crd` 检查状态；查看 apiserver 日志 |
+| Aggregated API 503 | 扩展 API server Pod 不健康 | `kubectl get apiservice` 检查 Available 状态 |
+| Webhook 超时 | Webhook 服务不可达 | 检查 Webhook service/endpoint 连通性 |
+
+## 生产检查清单
+
+- [ ] 优先使用 CRD + Controller 而非 Aggregated API（更简单）
+- [ ] Webhook 配置 failurePolicy 和 timeoutSeconds
+- [ ] CRD 配置 validation schema
+- [ ] 测试 API 版本升级兼容性
+
+## 命令快速参考
+
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
+# 查看 CRD
+kubectl get crd
+
+# 查看 API Service 状态
+kubectl get apiservice | grep -v Local
+
+# 查看 Webhook 配置
+kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
+```
+## 交叉引用
+
+- [Custom Resources](./custom-resources.md) — CRD 详解
+- [API Aggregation Layer](./kubernetes-api-aggregation-layer.md) — 聚合 API 详解
+- [Operator 模式](./operator-pattern.md) — CRD + Controller 组合
+
+## 参考链接
+
+- https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/
+
+## Related
+
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
+
+
+<!-- risk-assessed -->

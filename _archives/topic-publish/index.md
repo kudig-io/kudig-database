@@ -21,8 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_archives/topic-publish/video-scripts|Video Scripts]]
-- [[_archives/topic-publish/visualizations|Visualizations]]
+- [[_archives/topic-publish/video-scripts/index|Video Scripts]]
+- [[_archives/topic-publish/visualizations/index|Visualizations]]
 
 ## 文档
 

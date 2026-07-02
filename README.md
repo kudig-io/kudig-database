@@ -19,8 +19,8 @@ created: '2026-07-01'
 
 KUDIG Database 是一个**双层结构**的云原生运维知识库：
 
-- **提炼知识层**（`concepts/` `entities/` `skills/` `references/` `synthesis/`）—— Agent 优先读取，Token 效率高，frontmatter 元数据丰富
-- **源文档层**（`domain-*/` `topic-*/` `docs/`）—— 原始深度技术文档，供深度查询兜底
+- **提炼知识层**（`concepts/` `entities/` `skills/` `synthesis/`）—— Agent 优先读取，Token 效率高，frontmatter 元数据丰富
+- **源文档层**（`domain-*/` `docs/`）—— 原始深度技术文档，供深度查询兜底
 
 覆盖 **20 个核心知识域**：集群基础、工作负载、网络、存储、安全、可观测性、平台工程、发布变更、可靠性工程、故障诊断、生产运维、云厂商（13+ 家）、容器运行时、AI/ML 基础设施、专项技术、数据库中间件、系统基础、清单模式、生态参考、应用模式。
 
@@ -84,18 +84,21 @@ bash scripts/start-web.sh --stop     # 停止服务
 
 ```
 .
-├── concepts/        # 提炼知识：核心概念、架构模式
-├── entities/        # 提炼知识：组件实体、CNCF 工具、云产品
-├── skills/          # 提炼知识：诊断排障、最佳实践、FTA 方法
-├── references/      # 提炼知识：术语词典、命令速查、规范
+├── concepts/        # 提炼知识：核心概念、架构模式、综合分析
+├── entities/        # 提炼知识：组件实体、CNCF 工具、云产品、术语词典
+├── skills/          # 提炼知识：诊断排障、最佳实践、培训体系、FTA 方法
 ├── synthesis/       # 提炼知识：跨领域综合分析
 ├── domain-01..20/   # 源文档：20 个技术域深度文档
-├── docs/            # 映射与规范文档
-├── _meta/           # 元数据定义（taxonomy、schema）
-├── _reports/        # 质量报告与评估
-├── corpus-config/   # AI 语料配置（RAG profile、分块策略）
-├── web/             # Astro 站点项目
-├── scripts/         # 自动化脚本
+├── docs/            # 源文档：映射与规范文档
+├── _meta/           # 元数据、语料配置（taxonomy、schema、corpus-config、journal）
+├── _reports/        # 质量报告与评估、发布素材
+├── _archives/       # Wiki 归档快照（重建/恢复用）
+├── release/         # 发布产物（语料导出 corpus、metadata、qa）
+├── research/        # 研究资料
+├── tags/            # 标签索引
+├── assets/          # 图片、图表、附件
+├── web/             # Astro 静态站点项目
+├── scripts/         # 自动化脚本、模板、提示词
 └── STRUCTURE.md     # 完整目录结构规范
 ```
 

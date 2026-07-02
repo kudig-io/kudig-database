@@ -1,7 +1,7 @@
-# 全量语料配置 — 信噪比优化版
-# 用途：完整知识库导入，已排除 archive/培训/报告/Release Notes 等低信噪比内容
-# 预计 Token：从 ~15M 降至 ~8-10M，检索信噪比提升 40%+
-# 最后更新：2026-05-21
+# 全量语料配置 — 信噪比优化版 v2
+# 用途：完整知识库导出，供 AgentScope Agent NAS 挂载
+# 变更：+synthesis/ 跨域合成页；+domain-17/topic-dictionary/ 术语语料
+# 最后更新：2026-07-02
 
 name: full-corpus
 description: "KUDIG-DATABASE 全量语料导入配置（信噪比优化版）"
@@ -69,8 +69,8 @@ include:
   # Tier 6: 基础与参考域（严格筛选）
   - path: "domain-17-system-foundation/"
     chunking: by_h2
-    priority: low
-    note: "Linux基础占比过高，建议后续拆分"
+    priority: medium
+    note: "Linux 基础 + topic-dictionary 术语语料（565 文件）"
   - path: "domain-18-manifests-patterns/"
     chunking: by_h2
     priority: medium
@@ -99,7 +99,11 @@ include:
   - path: "entities/"
     chunking: by_h2
     priority: medium
-  # references/ 已合并至 entities/，synthesis/ 已合并至 concepts/
+  - path: "synthesis/"
+    chunking: by_h2
+    priority: high
+    note: "跨域合成页（共现分析产出），Agent 高价值连接页"
+  # references/ 已合并至 entities/
 
 exclude:
   # 构建产物与缓存
@@ -146,9 +150,8 @@ exclude:
   # 低信噪比：CNCF Sandbox 项目（1600+ 文件中大部分为一句话简介）
   - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
 
-  # 重复内容：domain 内 dictionary 与 references/ 大量重复
-  # 策略：保留 references/，排除分散在 domain 内的 dictionary
-  - "domain-17-system-foundation/topic-dictionary/"
+  # domain-17 topic-dictionary/ 已纳入导出（565 个术语文件，361 个与 entities/ 无重叠，
+  # 平均 199 行/文件，总计 ~450K tokens 结构化术语语料）
 
   # 原始素材与草稿
   - ".zread/"

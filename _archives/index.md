@@ -21,6 +21,6 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_archives/topic-publish|Topic Publish]]
-- [[_archives/troubleshooting-diagnostics|Troubleshooting Diagnostics]]
+- [[_archives/topic-publish/index|Topic Publish]]
+- [[_archives/troubleshooting-diagnostics/index|Troubleshooting Diagnostics]]
 

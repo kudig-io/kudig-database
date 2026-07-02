@@ -1,0 +1,3069 @@
+domain: domain-02-workloads-applications
+total_questions: 628
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview) 中, 工作负载核心概念体系 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md 的「工作负载核心概念体系」章节。
+  source: domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md
+  section: 工作负载核心概念体系
+- type: troubleshooting
+  question: 如何排查 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md
+- type: comparison
+  question: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/01-workload-overview-architecture.md
+- type: concept
+  question: 在 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns) 中, Deployment 核心架构解析 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md 的「Deployment 核心架构解析」章节。
+  source: domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md
+  section: Deployment 核心架构解析
+- type: troubleshooting
+  question: 如何排查 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/02-deployment-production-patterns.md
+- type: concept
+  question: 在 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations) 中, StatefulSet 核心特性解析 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md 的「StatefulSet 核心特性解析」章节。
+  source: domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md
+  section: StatefulSet 核心特性解析
+- type: troubleshooting
+  question: 如何排查 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md
+- type: concept
+  question: 在 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies) 中, DaemonSet 核心架构与应用场景 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md 的「DaemonSet 核心架构与应用场景」章节。
+  source: domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md
+  section: DaemonSet 核心架构与应用场景
+- type: troubleshooting
+  question: 如何排查 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md
+- type: concept
+  question: 在 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage) 中, Job 类型详解与使用场景 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md 的「Job 类型详解与使用场景」章节。
+  source: domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md
+  section: Job 类型详解与使用场景
+- type: troubleshooting
+  question: 如何排查 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md
+- type: comparison
+  question: 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md
+- type: concept
+  question: 在 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System) 中, 监控体系架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/06-workload-monitoring-alerting.md 的「监控体系架构设计」章节。
+  source: domain-02-workloads-applications/00-core-workloads/06-workload-monitoring-alerting.md
+  section: 监控体系架构设计
+- type: troubleshooting
+  question: 如何排查 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/06-workload-monitoring-alerting.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/06-workload-monitoring-alerting.md
+- type: concept
+  question: 在 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 中, 故障响应流程框架 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 的「故障响应流程框架」章节。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+  section: 故障响应流程框架
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: CLUSTER_NAME=${1:-production}?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+  command: CLUSTER_NAME=${1:-production}
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: diagnose_layer() {?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+  command: diagnose_layer() {
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: debug_pending_pod()
+    {?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+  command: debug_pending_pod() {
+- type: troubleshooting
+  question: 如何排查 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+- type: comparison
+  question: 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/07-workload-troubleshooting-handbook.md
+- type: concept
+  question: 在 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy) 中, 多云架构设计原则 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/08-multi-cloud-workload-strategy.md 的「多云架构设计原则」章节。
+  source: domain-02-workloads-applications/00-core-workloads/08-multi-cloud-workload-strategy.md
+  section: 多云架构设计原则
+- type: troubleshooting
+  question: 如何排查 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/08-multi-cloud-workload-strategy.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/08-multi-cloud-workload-strategy.md
+- type: concept
+  question: 在 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns) 中, 边缘计算架构概览 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md 的「边缘计算架构概览」章节。
+  source: domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md
+  section: 边缘计算架构概览
+- type: troubleshooting
+  question: 如何排查 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md
+- type: comparison
+  question: 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/09-edge-computing-deployment.md
+- type: concept
+  question: 在 工作负载控制器详解 中, 控制器核心特征矩阵 (Controller Matrix) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md 的「控制器核心特征矩阵 (Controller
+    Matrix)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md
+  section: 控制器核心特征矩阵 (Controller Matrix)
+- type: concept
+  question: '在 工作负载控制器详解 中, Deployment: 生产级最佳实践 (Production Patterns) 是什么?'
+  answer: '参见 domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md 的「Deployment: 生产级最佳实践
+    (Production Patterns)」章节。'
+  source: domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md
+  section: 'Deployment: 生产级最佳实践 (Production Patterns)'
+- type: concept
+  question: '在 工作负载控制器详解 中, StatefulSet: 有状态运维 (Stateful Ops) 是什么?'
+  answer: '参见 domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md 的「StatefulSet: 有状态运维
+    (Stateful Ops)」章节。'
+  source: domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md
+  section: 'StatefulSet: 有状态运维 (Stateful Ops)'
+- type: troubleshooting
+  question: 如何排查 工作负载控制器详解 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md
+- type: comparison
+  question: 工作负载控制器详解 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md
+- type: concept
+  question: 在 Pod 生命周期事件表 中, Pod阶段(Phase) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的「Pod阶段(Phase)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  section: Pod阶段(Phase)
+- type: concept
+  question: 在 Pod 生命周期事件表 中, 容器状态 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的「容器状态」章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  section: 容器状态
+- type: concept
+  question: 在 Pod 生命周期事件表 中, Pod Condition 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的「Pod Condition」章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  section: Pod Condition
+- type: concept
+  question: 在 Pod 生命周期事件表 中, 常见事件及处理 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的「常见事件及处理」章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  section: 常见事件及处理
+- type: concept
+  question: 在 Pod 生命周期事件表 中, 事件查看命令 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的「事件查看命令」章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  section: 事件查看命令
+- type: operation
+  question: '如何执行与 Pod 生命周期事件表 相关的操作: kubectl describe pod <pod-name>?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+  command: kubectl describe pod <pod-name>
+- type: troubleshooting
+  question: 如何排查 Pod 生命周期事件表 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md
+- type: concept
+  question: 在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 探针深度调优 (Probes Tuning) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的「探针深度调优 (Probes Tuning)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+  section: 探针深度调优 (Probes Tuning)
+- type: concept
+  question: '在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 调度策略: 亲和性与互斥 (Affinity & Anti-affinity) 是什么?'
+  answer: '参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的「调度策略: 亲和性与互斥 (Affinity & Anti-affinity)」章节。'
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+  section: '调度策略: 亲和性与互斥 (Affinity & Anti-affinity)'
+- type: concept
+  question: 在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 安全加固 (Pod Security) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的「安全加固 (Pod Security)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+  section: 安全加固 (Pod Security)
+- type: concept
+  question: 在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 生命周期 Hook (Lifecycle Hooks) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的「生命周期 Hook (Lifecycle Hooks)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+  section: 生命周期 Hook (Lifecycle Hooks)
+- type: concept
+  question: 在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, Obsidian 相关文档 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的「Obsidian 相关文档」章节。
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+  section: Obsidian 相关文档
+- type: troubleshooting
+  question: 如何排查 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/12-advanced-pod-patterns.md
+- type: concept
+  question: 在 74 - 容器生命周期钩子 (Container Lifecycle Hooks) 中, 容器生命周期架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md 的「容器生命周期架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md
+  section: 容器生命周期架构
+- type: concept
+  question: 在 74 - 容器生命周期钩子 (Container Lifecycle Hooks) 中, 生命周期钩子类型 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md 的「生命周期钩子类型」章节。
+  source: domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md
+  section: 生命周期钩子类型
+- type: concept
+  question: 在 74 - 容器生命周期钩子 (Container Lifecycle Hooks) 中, 钩子执行方式详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md 的「钩子执行方式详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md
+  section: 钩子执行方式详解
+- type: concept
+  question: 在 74 - 容器生命周期钩子 (Container Lifecycle Hooks) 中, 完整生命周期配置示例 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md 的「完整生命周期配置示例」章节。
+  source: domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md
+  section: 完整生命周期配置示例
+- type: troubleshooting
+  question: 如何排查 74 - 容器生命周期钩子 (Container Lifecycle Hooks) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/13-container-lifecycle-hooks.md
+- type: concept
+  question: 在 Sidecar 容器模式 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md 的「概述」章节。
+  source: domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md
+  section: 概述
+- type: concept
+  question: 在 Sidecar 容器模式 中, Sidecar 架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md 的「Sidecar 架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md
+  section: Sidecar 架构
+- type: concept
+  question: 在 Sidecar 容器模式 中, Sidecar 类型对比 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md 的「Sidecar 类型对比」章节。
+  source: domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md
+  section: Sidecar 类型对比
+- type: troubleshooting
+  question: 如何排查 Sidecar 容器模式 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md
+- type: comparison
+  question: Sidecar 容器模式 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/14-sidecar-containers-patterns.md
+- type: concept
+  question: 在 39 - 容器运行时对比表 中, 容器运行时对比 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的「容器运行时对比」章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  section: 容器运行时对比
+- type: concept
+  question: 在 39 - 容器运行时对比表 中, containerd详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的「containerd详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  section: containerd详解
+- type: concept
+  question: 在 39 - 容器运行时对比表 中, CRI-O详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的「CRI-O详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  section: CRI-O详解
+- type: concept
+  question: 在 39 - 容器运行时对比表 中, 性能对比 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的「性能对比」章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  section: 性能对比
+- type: concept
+  question: 在 39 - 容器运行时对比表 中, 安全运行时 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的「安全运行时」章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  section: 安全运行时
+- type: operation
+  question: '如何执行与 39 - 容器运行时对比表 相关的操作: systemctl stop kubelet?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  command: systemctl stop kubelet
+- type: operation
+  question: '如何执行与 39 - 容器运行时对比表 相关的操作: cat > /etc/crictl.yaml <<EOF?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+  command: cat > /etc/crictl.yaml <<EOF
+- type: troubleshooting
+  question: 如何排查 39 - 容器运行时对比表 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+- type: comparison
+  question: 39 - 容器运行时对比表 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/15-container-runtime-interfaces.md
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, RuntimeClass概述 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的「RuntimeClass概述」章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+  section: RuntimeClass概述
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, RuntimeClass配置 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的「RuntimeClass配置」章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+  section: RuntimeClass配置
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, 常用RuntimeClass 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的「常用RuntimeClass」章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+  section: 常用RuntimeClass
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, containerd配置 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的「containerd配置」章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+  section: containerd配置
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, gVisor RuntimeClass 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的「gVisor RuntimeClass」章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+  section: gVisor RuntimeClass
+- type: troubleshooting
+  question: 如何排查 70 - RuntimeClass配置 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+- type: comparison
+  question: 70 - RuntimeClass配置 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/16-runtime-class-configuration.md
+- type: concept
+  question: 在 51 - 容器镜像管理与仓库 (Container Images & Registry) 中, 容器镜像生态架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 的「容器镜像生态架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+  section: 容器镜像生态架构
+- type: concept
+  question: 在 51 - 容器镜像管理与仓库 (Container Images & Registry) 中, 镜像命名规范与最佳实践 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 的「镜像命名规范与最佳实践」章节。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+  section: 镜像命名规范与最佳实践
+- type: concept
+  question: 在 51 - 容器镜像管理与仓库 (Container Images & Registry) 中, 镜像拉取策略详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 的「镜像拉取策略详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+  section: 镜像拉取策略详解
+- type: operation
+  question: '如何执行与 51 - 容器镜像管理与仓库 (Container Images & Registry) 相关的操作: kubectl create secret docker-registry regcred \?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+  command: kubectl create secret docker-registry regcred \
+- type: troubleshooting
+  question: 如何排查 51 - 容器镜像管理与仓库 (Container Images & Registry) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+- type: comparison
+  question: 51 - 容器镜像管理与仓库 (Container Images & Registry) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/17-container-images-registry.md
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 节点池 (NodePool) 核心架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的「节点池 (NodePool) 核心架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  section: 节点池 (NodePool) 核心架构
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 节点生命周期与运维流程 (Node Lifecycle) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的「节点生命周期与运维流程 (Node Lifecycle)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  section: 节点生命周期与运维流程 (Node Lifecycle)
+- type: concept
+  question: '在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 调度与隔离: 标签与污点 (Label & Taint) 是什么?'
+  answer: '参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的「调度与隔离: 标签与污点 (Label &
+    Taint)」章节。'
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  section: '调度与隔离: 标签与污点 (Label & Taint)'
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 资源预留 (Resource Reservation) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的「资源预留 (Resource Reservation)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  section: 资源预留 (Resource Reservation)
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, Obsidian 相关文档 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的「Obsidian 相关文档」章节。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  section: Obsidian 相关文档
+- type: operation
+  question: '如何执行与 27 - 节点与节点池管理 (Node & NodePool Management) 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+  command: kubectl get nodes -o wide
+- type: troubleshooting
+  question: 如何排查 27 - 节点与节点池管理 (Node & NodePool Management) 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/18-node-management-operations.md
+- type: concept
+  question: 在 调度器配置与优化 中, 调度流程 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的「调度流程」章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  section: 调度流程
+- type: concept
+  question: 在 调度器配置与优化 中, 调度器配置文件结构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的「调度器配置文件结构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  section: 调度器配置文件结构
+- type: concept
+  question: 在 调度器配置与优化 中, 调度插件阶段 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的「调度插件阶段」章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  section: 调度插件阶段
+- type: concept
+  question: 在 调度器配置与优化 中, 默认调度插件 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的「默认调度插件」章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  section: 默认调度插件
+- type: concept
+  question: 在 调度器配置与优化 中, 调度配置示例 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的「调度配置示例」章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  section: 调度配置示例
+- type: operation
+  question: '如何执行与 调度器配置与优化 相关的操作: kube-scheduler --config=/etc/kubernetes/scheduler-config.yam?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+  command: kube-scheduler --config=/etc/kubernetes/scheduler-config.yaml
+- type: troubleshooting
+  question: 如何排查 调度器配置与优化 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md
+- type: concept
+  question: 在 Kubelet 配置与调优 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 的「概述」章节。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+  section: 概述
+- type: concept
+  question: 在 Kubelet 配置与调优 中, Kubelet 架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 的「Kubelet 架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+  section: Kubelet 架构
+- type: concept
+  question: 在 Kubelet 配置与调优 中, 配置参数详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 的「配置参数详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+  section: 配置参数详解
+- type: operation
+  question: '如何执行与 Kubelet 配置与调优 相关的操作: [Service]?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+  command: '[Service]'
+- type: troubleshooting
+  question: 如何排查 Kubelet 配置与调优 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+- type: comparison
+  question: Kubelet 配置与调优 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md
+- type: concept
+  question: 在 HPA/VPA 自动伸缩配置 中, HPA 版本演进 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的「HPA 版本演进」章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+  section: HPA 版本演进
+- type: concept
+  question: 在 HPA/VPA 自动伸缩配置 中, HPA 指标类型 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的「HPA 指标类型」章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+  section: HPA 指标类型
+- type: concept
+  question: 在 HPA/VPA 自动伸缩配置 中, HPA 完整配置示例 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的「HPA 完整配置示例」章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+  section: HPA 完整配置示例
+- type: concept
+  question: 在 HPA/VPA 自动伸缩配置 中, HPA 行为策略详解 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的「HPA 行为策略详解」章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+  section: HPA 行为策略详解
+- type: concept
+  question: 在 HPA/VPA 自动伸缩配置 中, VPA 模式对比 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的「VPA 模式对比」章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+  section: VPA 模式对比
+- type: troubleshooting
+  question: 如何排查 HPA/VPA 自动伸缩配置 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+- type: comparison
+  question: HPA/VPA 自动伸缩配置 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/21-hpa-vpa-autoscaling.md
+- type: concept
+  question: 在 集群容量规划 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md 的「概述」章节。
+  source: domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md
+  section: 概述
+- type: concept
+  question: 在 集群容量规划 中, 容量规划架构 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md 的「容量规划架构」章节。
+  source: domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md
+  section: 容量规划架构
+- type: concept
+  question: 在 集群容量规划 中, 集群规模限制 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md 的「集群规模限制」章节。
+  source: domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md
+  section: 集群规模限制
+- type: troubleshooting
+  question: 如何排查 集群容量规划 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md
+- type: comparison
+  question: 集群容量规划 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md
+- type: concept
+  question: 在 16 - 资源管理表 中, 资源类型概览 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/23-resource-management.md 的「资源类型概览」章节。
+  source: domain-02-workloads-applications/00-core-workloads/23-resource-management.md
+  section: 资源类型概览
+- type: concept
+  question: 在 16 - 资源管理表 中, ResourceQuota完整配置 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/23-resource-management.md 的「ResourceQuota完整配置」章节。
+  source: domain-02-workloads-applications/00-core-workloads/23-resource-management.md
+  section: ResourceQuota完整配置
+- type: operation
+  question: '如何执行与 16 - 资源管理表 相关的操作: kubectl get resourcequota -n production?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/23-resource-management.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/23-resource-management.md
+  command: kubectl get resourcequota -n production
+- type: best_practice
+  question: 关于 16 - 资源管理表, 有什么最佳实践?
+  answer: VPA调整CPU/Memory，HPA基于自定义指标
+  source: domain-02-workloads-applications/00-core-workloads/23-resource-management.md
+- type: troubleshooting
+  question: 如何排查 16 - 资源管理表 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/23-resource-management.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/23-resource-management.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 工作负载管理新特性指南 中, 目录 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md 的「目录」章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 工作负载管理新特性指南 中, Sidecar 容器 (v1.33 GA) 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md 的「Sidecar 容器 (v1.33
+    GA)」章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md
+  section: Sidecar 容器 (v1.33 GA)
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 工作负载管理新特性指南 相关的操作: kubectl get pod webapp-with-sidecar -o jsonpath=''{range .sta?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md 中的操作步骤。
+  source: domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md
+  command: kubectl get pod webapp-with-sidecar -o jsonpath='{range .status.initContainerStatuses[*]}{.name}{"\t
+- type: troubleshooting
+  question: 如何排查 Kubernetes v1.29-v1.33 工作负载管理新特性指南 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md
+- type: comparison
+  question: Kubernetes v1.29-v1.33 工作负载管理新特性指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md 中的对比分析。
+  source: domain-02-workloads-applications/00-core-workloads/99-kubernetes-v1.33-workloads-guide.md
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, 目录 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md 的「目录」章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md
+  section: 目录
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, Spring Boot on K8s 架构全景 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md 的「Spring Boot on K8s 架构全景」章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md
+  section: Spring Boot on K8s 架构全景
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, 健康检查与探针配置 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md 的「健康检查与探针配置」章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md
+  section: 健康检查与探针配置
+- type: troubleshooting
+  question: 如何排查 Spring Boot on Kubernetes 生产实践指南 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md
+- type: concept
+  question: 在 Domain-4 工作负载管理质量报告 中, 基础统计 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md 的「基础统计」章节。
+  source: domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md
+  section: 基础统计
+- type: concept
+  question: 在 Domain-4 工作负载管理质量报告 中, ✅ 质量检查结果 是什么?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md 的「✅ 质量检查结果」章节。
+  source: domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md
+  section: ✅ 质量检查结果
+- type: troubleshooting
+  question: 如何排查 Domain-4 工作负载管理质量报告 相关的故障?
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/QUALITY_REPORT.md
+- type: concept
+  question: '在 Domain-4: Kubernetes工作负载 中, 概述 是什么?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/README-old.md 的「概述」章节。
+  source: domain-02-workloads-applications/00-core-workloads/README-old.md
+  section: 概述
+- type: concept
+  question: '在 Domain-4: Kubernetes工作负载 中, 文档目录 是什么?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/README-old.md 的「文档目录」章节。
+  source: domain-02-workloads-applications/00-core-workloads/README-old.md
+  section: 文档目录
+- type: troubleshooting
+  question: '如何排查 Domain-4: Kubernetes工作负载 相关的故障?'
+  answer: 参见 domain-02-workloads-applications/00-core-workloads/README-old.md 的故障排查章节。
+  source: domain-02-workloads-applications/00-core-workloads/README-old.md
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/02-spring-boot-kubernetes-production.md 的「Related」章节。
+  source: domain-02-workloads-applications/02-spring-boot-kubernetes-production.md
+  section: Related
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/02-spring-boot-kubernetes-production.md 的「See Also」章节。
+  source: domain-02-workloads-applications/02-spring-boot-kubernetes-production.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Spring Boot on Kubernetes 生产实践指南 相关的操作: mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER ?'
+  answer: 参见 domain-02-workloads-applications/02-spring-boot-kubernetes-production.md 中的操作步骤。
+  source: domain-02-workloads-applications/02-spring-boot-kubernetes-production.md
+  command: mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.password=$REGISTRY_PASS
+- type: operation
+  question: '如何执行与 Spring Boot on Kubernetes 生产实践指南 相关的操作: ./gradlew bootBuildImage \?'
+  answer: 参见 domain-02-workloads-applications/02-spring-boot-kubernetes-production.md 中的操作步骤。
+  source: domain-02-workloads-applications/02-spring-boot-kubernetes-production.md
+  command: ./gradlew bootBuildImage \
+- type: comparison
+  question: Spring Boot on Kubernetes 生产实践指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/02-spring-boot-kubernetes-production.md 中的对比分析。
+  source: domain-02-workloads-applications/02-spring-boot-kubernetes-production.md
+- type: concept
+  question: 在 JVM GC 容器调优深度指南 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 的「Related」章节。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+  section: Related
+- type: concept
+  question: 在 JVM GC 容器调优深度指南 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 的「See Also」章节。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+  section: See Also
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: java -XshowSettings:system -version?'
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+  command: java -XshowSettings:system -version
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: JAVA_OPTS="-XX:+UseContainerSupport \?'
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+  command: JAVA_OPTS="-XX:+UseContainerSupport \
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: JAVA_OPTS="-XX:+UseContainerSupport \?'
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+  command: JAVA_OPTS="-XX:+UseContainerSupport \
+- type: comparison
+  question: JVM GC 容器调优深度指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/03-jvm-gc-container-tuning.md 中的对比分析。
+  source: domain-02-workloads-applications/03-jvm-gc-container-tuning.md
+- type: concept
+  question: 在 Java Operator SDK 开发指南 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/04-java-operator-sdk-development.md 的「Related」章节。
+  source: domain-02-workloads-applications/04-java-operator-sdk-development.md
+  section: Related
+- type: concept
+  question: 在 Java Operator SDK 开发指南 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/04-java-operator-sdk-development.md 的「See Also」章节。
+  source: domain-02-workloads-applications/04-java-operator-sdk-development.md
+  section: See Also
+- type: comparison
+  question: Java Operator SDK 开发指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/04-java-operator-sdk-development.md 中的对比分析。
+  source: domain-02-workloads-applications/04-java-operator-sdk-development.md
+- type: concept
+  question: 在 Quarkus Native 编译与 Kubernetes 部署指南 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/05-quarkus-native-kubernetes.md 的「Related」章节。
+  source: domain-02-workloads-applications/05-quarkus-native-kubernetes.md
+  section: Related
+- type: concept
+  question: 在 Quarkus Native 编译与 Kubernetes 部署指南 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/05-quarkus-native-kubernetes.md 的「See Also」章节。
+  source: domain-02-workloads-applications/05-quarkus-native-kubernetes.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Quarkus Native 编译与 Kubernetes 部署指南 相关的操作: sdk install java 21.0.6-graal?'
+  answer: 参见 domain-02-workloads-applications/05-quarkus-native-kubernetes.md 中的操作步骤。
+  source: domain-02-workloads-applications/05-quarkus-native-kubernetes.md
+  command: sdk install java 21.0.6-graal
+- type: comparison
+  question: Quarkus Native 编译与 Kubernetes 部署指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/05-quarkus-native-kubernetes.md 中的对比分析。
+  source: domain-02-workloads-applications/05-quarkus-native-kubernetes.md
+- type: concept
+  question: '在 Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 中, See Also 是什么?'
+  answer: 参见 domain-02-workloads-applications/06-java-cicd-tekton-argocd.md 的「See Also」章节。
+  source: domain-02-workloads-applications/06-java-cicd-tekton-argocd.md
+  section: See Also
+- type: concept
+  question: 在 Java 可观测性 on Kubernetes 实践指南 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/07-java-observability-kubernetes.md 的「Related」章节。
+  source: domain-02-workloads-applications/07-java-observability-kubernetes.md
+  section: Related
+- type: concept
+  question: 在 Java 可观测性 on Kubernetes 实践指南 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/07-java-observability-kubernetes.md 的「See Also」章节。
+  source: domain-02-workloads-applications/07-java-observability-kubernetes.md
+  section: See Also
+- type: concept
+  question: 在 Domain-4 工作负载 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md 的「核心项目」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-4 工作负载 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md 的「参考链接」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-4 工作负载 — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md 的「Obsidian
+    相关文档」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md
+  section: Obsidian 相关文档
+- type: troubleshooting
+  question: 如何排查 Domain-4 工作负载 — 开源项目索引 相关的故障?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md 的故障排查章节。
+  source: domain-02-workloads-applications/98-merged-indexes/00-open-source-projects-index-from-domain-4.md
+- type: concept
+  question: 在 domain-4-workloads MOC 中, 领域概述 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 的「领域概述」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-4-workloads MOC 中, 文档清单 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 的「文档清单」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-4-workloads MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 的「知识图谱」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-4-workloads MOC 中, 关联入口 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 的「关联入口」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-4-workloads MOC 相关的故障?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 的故障排查章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+- type: comparison
+  question: domain-4-workloads MOC 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md 中的对比分析。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-4.md
+- type: concept
+  question: 在 domain-java-kubernetes MOC 中, 专题概述 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md 的「专题概述」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md
+  section: 专题概述
+- type: concept
+  question: 在 domain-java-kubernetes MOC 中, 文档清单 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md 的「文档清单」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-java-kubernetes MOC 中, 统计信息 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md 的「统计信息」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md
+  section: 统计信息
+- type: concept
+  question: 在 domain-java-kubernetes MOC 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md 的「Related」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/MOC-from-domain-43.md
+  section: Related
+- type: concept
+  question: '在 Domain-4: Kubernetes工作负载管理 中, 概述 是什么?'
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md 的「概述」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md
+  section: 概述
+- type: concept
+  question: '在 Domain-4: Kubernetes工作负载管理 中, 文档目录 是什么?'
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md 的「文档目录」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md
+  section: 文档目录
+- type: troubleshooting
+  question: '如何排查 Domain-4: Kubernetes工作负载管理 相关的故障?'
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md 的故障排查章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-4.md
+- type: concept
+  question: 在 Java on Kubernetes 综合实践指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 的「概述」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+  section: 概述
+- type: concept
+  question: 在 Java on Kubernetes 综合实践指南 中, 专题指南索引 是什么?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 的「专题指南索引」章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+  section: 专题指南索引
+- type: operation
+  question: '如何执行与 Java on Kubernetes 综合实践指南 相关的操作: -XX:+UseContainerSupport?'
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 中的操作步骤。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+  command: -XX:+UseContainerSupport
+- type: operation
+  question: '如何执行与 Java on Kubernetes 综合实践指南 相关的操作: kubectl get events --field-selector reason=OOMKilling -n pro?'
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 中的操作步骤。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+  command: kubectl get events --field-selector reason=OOMKilling -n production
+- type: troubleshooting
+  question: 如何排查 Java on Kubernetes 综合实践指南 相关的故障?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 的故障排查章节。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+- type: comparison
+  question: Java on Kubernetes 综合实践指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md 中的对比分析。
+  source: domain-02-workloads-applications/98-merged-indexes/README-from-domain-43.md
+- type: concept
+  question: 在 Kubernetes 生产环境部署模式架构详解 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md 的「Related」章节。
+  source: domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md
+  section: Related
+- type: concept
+  question: 在 Kubernetes 生产环境部署模式架构详解 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md 的「See Also」章节。
+  source: domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Kubernetes 生产环境部署模式架构详解 相关的故障?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md 的故障排查章节。
+  source: domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md
+- type: comparison
+  question: Kubernetes 生产环境部署模式架构详解 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md 中的对比分析。
+  source: domain-02-workloads-applications/99-kubernetes-deployment-patterns-architecture.md
+- type: concept
+  question: 在 Kubernetes 多租户与资源隔离生产架构 中, Related 是什么?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md 的「Related」章节。
+  source: domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md
+  section: Related
+- type: concept
+  question: 在 Kubernetes 多租户与资源隔离生产架构 中, See Also 是什么?
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md 的「See Also」章节。
+  source: domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Kubernetes 多租户与资源隔离生产架构 相关的操作: curl -L -o vcluster "https://github.com/loft-sh/vcluster/rel?'
+  answer: 参见 domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md 中的操作步骤。
+  source: domain-02-workloads-applications/99-kubernetes-multi-tenant-architecture.md
+  command: curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  section: 函数签名
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  section: 源码位置
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  section: 参数说明
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 Kubernetes 集群 PKI 架构总览 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  command: kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 Kubernetes 集群 PKI 架构总览 相关的操作: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/01-pki-architecture.md
+  command: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md
+  section: 函数签名
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md
+  section: 源码位置
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 CA 证书生成源码分析 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/02-ca-generation.md
+  command: kubeadm certs check-expiration
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  section: 概述
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  section: 函数签名
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  section: 源码位置
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  section: 参数说明
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 API Server 证书生成源码分析 相关的操作: kubeadm certs renew apiserver --config=kubeadm-config.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/03-apiserver-cert.md
+  command: kubeadm certs renew apiserver --config=kubeadm-config.yaml
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md
+  section: 函数签名
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md
+  section: 源码位置
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md
+  section: 参数说明
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  section: 概述
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  section: 源码路径
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, kubelet 证书类型 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 的「kubelet 证书类型」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  section: kubelet 证书类型
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, kubelet 双证书管理器架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 的「kubelet 双证书管理器架构」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  section: kubelet 双证书管理器架构
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 引导证书机制（Bootstrap） 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 的「引导证书机制（Bootstrap）」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  section: 引导证书机制（Bootstrap）
+- type: operation
+  question: '如何执行与 kubelet 证书与 CSR 机制源码分析 相关的操作: kubectl get csr?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/05-kubelet-cert.md
+  command: kubectl get csr
+- type: concept
+  question: 在 证书轮换机制源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  section: 概述
+- type: concept
+  question: 在 证书轮换机制源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  section: 源码路径
+- type: concept
+  question: 在 证书轮换机制源码分析 中, kubeadm 证书轮换 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 的「kubeadm 证书轮换」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  section: kubeadm 证书轮换
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: $ kubeadm certs check-expiration?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  command: $ kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  command: sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: EXPIRY=$(kubeadm certs check-expiration | grep apiserver | a?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md
+  command: EXPIRY=$(kubeadm certs check-expiration | grep apiserver | awk '{print $3}')
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  section: 概述
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  section: 源码路径
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, SA 密钥对与 TLS 证书的区别 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 的「SA 密钥对与 TLS 证书的区别」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  section: SA 密钥对与 TLS 证书的区别
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, SA 密钥生成 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 的「SA 密钥生成」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  section: SA 密钥生成
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: -----BEGIN RSA PRIVATE KEY-----?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  command: '-----BEGIN RSA PRIVATE KEY-----'
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: ps aux | grep kube-apiserver | grep service-account-key-file?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  command: ps aux | grep kube-apiserver | grep service-account-key-file
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+  command: sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.pub
+- type: comparison
+  question: ServiceAccount 密钥对源码分析 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md
+  section: 函数签名
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md
+  section: 源码位置
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md
+  section: 参数说明
+- type: best_practice
+  question: 关于 证书身份到 RBAC 的映射关系, 有什么最佳实践?
+  answer: <component-name>.<namespace>.svc            │
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md
+- type: best_practice
+  question: 关于 证书身份到 RBAC 的映射关系, 有什么最佳实践?
+  answer: 90 天 - 1 年                                    │
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/08-rbac-mapping.md
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+  section: 概述
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+  section: 源码路径
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, join 流程总览 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 的「join 流程总览」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+  section: join 流程总览
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 阶段详解 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 的「阶段详解」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+  section: 阶段详解
+- type: operation
+  question: '如何执行与 kubeadm join 证书分发流程 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+  command: kubeadm token create --print-join-command
+- type: comparison
+  question: kubeadm join 证书分发流程 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/09-join-cert-flow.md
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  section: 概述
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  section: 源码路径
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 架构与信任模型 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 的「架构与信任模型」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  section: 架构与信任模型
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 证书角色详解 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 的「证书角色详解」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  section: 证书角色详解
+- type: operation
+  question: '如何执行与 Front Proxy 聚合层证书工作流 相关的操作: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-cli?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  command: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
+- type: operation
+  question: '如何执行与 Front Proxy 聚合层证书工作流 相关的操作: --requestheader-client-ca-file=/etc/kubernetes/pki/front-pro?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/10-front-proxy-workflow.md
+  command: --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md
+  section: 函数签名
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md
+  section: 源码位置
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 API Server 证书相关启动参数汇总 相关的操作: echo "=== API Server Certificate Flags ==="?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md
+  command: echo "=== API Server Certificate Flags ==="
+- type: operation
+  question: '如何执行与 API Server 证书相关启动参数汇总 相关的操作: ./check-apiserver-certs.sh?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/11-apiserver-cert-flags.md
+  command: ./check-apiserver-certs.sh
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeconfig 中的证书嵌入逻辑 相关的操作: --kubeconfig=/etc/kubernetes/controller-manager.conf?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md
+  command: --kubeconfig=/etc/kubernetes/controller-manager.conf
+- type: comparison
+  question: kubeconfig 中的证书嵌入逻辑 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/12-kubeconfig-certs.md
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm 配置对证书生成的影响 相关的操作: kubectl get cm kubeadm-config -n kube-system -o yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md
+  command: kubectl get cm kubeadm-config -n kube-system -o yaml
+- type: operation
+  question: '如何执行与 kubeadm 配置对证书生成的影响 相关的操作: kubectl edit cm kubeadm-config -n kube-system?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md
+  command: kubectl edit cm kubeadm-config -n kube-system
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+  section: 概述
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, 架构对比：集群证书 vs Webhook 证书 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 的「架构对比：集群证书 vs Webhook
+    证书」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+  section: 架构对比：集群证书 vs Webhook 证书
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, Webhook 配置的证书字段 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 的「Webhook 配置的证书字段」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+  section: Webhook 配置的证书字段
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, API Server 对 Webhook 证书的验证逻辑 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 的「API Server 对 Webhook
+    证书的验证逻辑」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+  section: API Server 对 Webhook 证书的验证逻辑
+- type: operation
+  question: '如何执行与 Admission Webhook 证书体系 相关的操作: openssl genrsa -out webhook-ca.key 2048?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+  command: openssl genrsa -out webhook-ca.key 2048
+- type: comparison
+  question: Admission Webhook 证书体系 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/14-admission-webhook-certs.md
+- type: concept
+  question: 在 证书格式与编码详解 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  section: 概述
+- type: concept
+  question: 在 证书格式与编码详解 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  section: 函数签名
+- type: concept
+  question: 在 证书格式与编码详解 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  section: 源码位置
+- type: concept
+  question: 在 证书格式与编码详解 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  section: 参数说明
+- type: concept
+  question: 在 证书格式与编码详解 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 证书格式与编码详解 相关的操作: openssl x509 -in ca.pem -out ca.der -outform DER?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  command: openssl x509 -in ca.pem -out ca.der -outform DER
+- type: operation
+  question: '如何执行与 证书格式与编码详解 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -t?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/15-cert-format-encoding.md
+  command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text
+- type: concept
+  question: 在 OpenSSL 证书操作速查手册 中, 查看证书信息 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 的「查看证书信息」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+  section: 查看证书信息
+- type: concept
+  question: 在 OpenSSL 证书操作速查手册 中, 验证证书关系 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 的「验证证书关系」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+  section: 验证证书关系
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+  command: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -e?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+  command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/et?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+  command: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/etcd/*.crt; do
+- type: comparison
+  question: OpenSSL 证书操作速查手册 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/16-openssl-cookbook.md
+- type: concept
+  question: 在 Kubernetes PKI 安全最佳实践 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes PKI 安全最佳实践 中, 私钥保护 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md 的「私钥保护」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md
+  section: 私钥保护
+- type: operation
+  question: '如何执行与 Kubernetes PKI 安全最佳实践 相关的操作: ls -la /etc/kubernetes/pki/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md
+  command: ls -la /etc/kubernetes/pki/
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  section: 参数说明
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 kubeadm init 集群初始化概览 相关的操作: kubeadm init \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  command: kubeadm init \
+- type: operation
+  question: '如何执行与 kubeadm init 集群初始化概览 相关的操作: kubeadm init --config=kubeadm-config.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/01-overview.md
+  command: kubeadm init --config=kubeadm-config.yaml
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  section: 源码位置
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  section: 参数说明
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 调用链 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 的「调用链」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  section: 调用链
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: kubeadm init --ignore-preflight-errors=NumCPU?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  command: kubeadm init --ignore-preflight-errors=NumCPU
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: swapoff -a?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  command: swapoff -a
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: kubeadm init --dry-run?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/02-preflight.md
+  command: kubeadm init --dry-run
+- type: concept
+  question: 在 证书管理 PKI Infrastructure 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 证书管理 PKI Infrastructure 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  section: 源码位置
+- type: concept
+  question: 在 证书管理 PKI Infrastructure 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 证书管理 PKI Infrastructure 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  command: kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 证书管理 PKI Infrastructure 相关的操作: kubeadm certs renew all?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  command: kubeadm certs renew all
+- type: operation
+  question: '如何执行与 证书管理 PKI Infrastructure 相关的操作: cp /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/api?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/03-certs.md
+  command: cp /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.crt.bak
+- type: concept
+  question: 在 Kubeconfig Generation 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md
+  section: 概述
+- type: concept
+  question: 在 Kubeconfig Generation 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md
+  section: 源码路径
+- type: concept
+  question: 在 Kubeconfig Generation 源码分析 中, 生成 kubeconfig 列表 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md 的「生成 kubeconfig 列表」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md
+  section: 生成 kubeconfig 列表
+- type: operation
+  question: '如何执行与 Kubeconfig Generation 源码分析 相关的操作: cat /etc/kubernetes/admin.conf | grep client-certificate-dat?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/04-kubeconfig.md
+  command: cat /etc/kubernetes/admin.conf | grep client-certificate-data | \
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md
+  section: 源码位置
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 控制面组件部署 (Static Pod Manifests) 相关的操作: cat /etc/kubernetes/manifests/kube-apiserver.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/05-control-plane.md
+  command: cat /etc/kubernetes/manifests/kube-apiserver.yaml
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  section: 源码位置
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  section: 参数说明
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 节点加入流程 (kubeadm join) 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  command: kubeadm token create --print-join-command
+- type: operation
+  question: '如何执行与 节点加入流程 (kubeadm join) 相关的操作: kubeadm token list?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+  command: kubeadm token list
+- type: comparison
+  question: 节点加入流程 (kubeadm join) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/06-join.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/06-join.md
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  section: 源码位置
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  section: 参数说明
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 etcd 静态 Pod 管理 相关的操作: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot-$(?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  command: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot-$(date +%Y%m%d).db \
+- type: operation
+  question: '如何执行与 etcd 静态 Pod 管理 相关的操作: crictl stop $(crictl ps --name etcd -q)?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md
+  command: crictl stop $(crictl ps --name etcd -q)
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md
+  section: 概述
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md
+  section: 源码路径
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 高可用架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md 的「高可用架构」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md
+  section: 高可用架构
+- type: operation
+  question: '如何执行与 高可用控制面搭建 — 源码分析 相关的操作: kubeadm init phase upload-certs --upload-certs?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/08-ha.md
+  command: kubeadm init phase upload-certs --upload-certs
+- type: concept
+  question: 在 集群升级流程 kubeadm upgrade 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 集群升级流程 kubeadm upgrade 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  section: 源码位置
+- type: concept
+  question: 在 集群升级流程 kubeadm upgrade 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 集群升级流程 kubeadm upgrade 相关的操作: kubeadm upgrade plan?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  command: kubeadm upgrade plan
+- type: operation
+  question: '如何执行与 集群升级流程 kubeadm upgrade 相关的操作: for node in master-1 master-2 master-3; do?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  command: for node in master-1 master-2 master-3; do
+- type: operation
+  question: '如何执行与 集群升级流程 kubeadm upgrade 相关的操作: ls /etc/kubernetes/tmp/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/09-upgrade.md
+  command: ls /etc/kubernetes/tmp/
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, 主要云厂商托管 K8s 方案 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 的「主要云厂商托管 K8s 方案」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  section: 主要云厂商托管 K8s 方案
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, kubeadm vs 云厂商托管对比 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 的「kubeadm vs 云厂商托管对比」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  section: kubeadm vs 云厂商托管对比
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, EKS 架构 (AWS) 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 的「EKS 架构 (AWS)」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  section: EKS 架构 (AWS)
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, EKS Anywhere 架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 的「EKS Anywhere 架构」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  section: EKS Anywhere 架构
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, GKE 架构 (Google Cloud) 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 的「GKE 架构 (Google Cloud)」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  section: GKE 架构 (Google Cloud)
+- type: operation
+  question: '如何执行与 云厂商方案与 kubeadm 对比 相关的操作: aws eks update-kubeconfig --name my-cluster?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+  command: aws eks update-kubeconfig --name my-cluster
+- type: comparison
+  question: 云厂商方案与 kubeadm 对比 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/10-cloud-comparison.md
+- type: concept
+  question: 在 集群新建进阶关键机制详解 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  section: 源码路径
+- type: concept
+  question: 在 集群新建进阶关键机制详解 中, InitConfiguration 完整结构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 的「InitConfiguration 完整结构」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  section: InitConfiguration 完整结构
+- type: concept
+  question: 在 集群新建进阶关键机制详解 中, kubelet-start 阶段完整流程 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 的「kubelet-start 阶段完整流程」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  section: kubelet-start 阶段完整流程
+- type: concept
+  question: 在 集群新建进阶关键机制详解 中, kubelet.conf vs bootstrap-kubelet.conf 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 的「kubelet.conf vs bootstrap-kubelet.conf」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  section: kubelet.conf vs bootstrap-kubelet.conf
+- type: concept
+  question: 在 集群新建进阶关键机制详解 中, kubelet 配置文件差异 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 的「kubelet 配置文件差异」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  section: kubelet 配置文件差异
+- type: operation
+  question: '如何执行与 集群新建进阶关键机制详解 相关的操作: kubectl -n kube-system get pods -l k8s-app=kube-dns?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+  command: kubectl -n kube-system get pods -l k8s-app=kube-dns
+- type: comparison
+  question: 集群新建进阶关键机制详解 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/11-advanced.md
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 函数/流程签名 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 源码位置 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md
+  section: 源码位置
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 参数说明 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 节点加入进阶: Discovery 与 TLS Bootstrap 详解 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md
+  command: kubeadm token create --print-join-command
+- type: operation
+  question: '如何执行与 节点加入进阶: Discovery 与 TLS Bootstrap 详解 相关的操作: kubeadm join --config=join-config.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/12-join-advanced.md
+  command: kubeadm join --config=join-config.yaml
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 函数/流程签名 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 源码位置 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md
+  section: 源码位置
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 参数说明 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md
+  section: 参数说明
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 返回值 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 etcd 进阶: HA 集群管理与性能调优 相关的操作: ETCDCTL_API=3 etcdctl endpoint status -w json \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md
+  command: ETCDCTL_API=3 etcdctl endpoint status -w json \
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, 源码路径 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  section: 源码路径
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, upload-certs 阶段 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 的「upload-certs 阶段」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  section: upload-certs 阶段
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, --certificate-key 生成与使用 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 的「--certificate-key 生成与使用」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  section: --certificate-key 生成与使用
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, kube-vip 配置 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 的「kube-vip 配置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  section: kube-vip 配置
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, kube-vip 工作模式 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 的「kube-vip 工作模式」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  section: kube-vip 工作模式
+- type: operation
+  question: '如何执行与 高可用进阶: 负载均衡与证书分发 相关的操作: openssl rand -base64 24?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/14-ha-advanced.md
+  command: openssl rand -base64 24
+- type: concept
+  question: 在 集群升级进阶滚动升级与回滚策略 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 集群升级进阶滚动升级与回滚策略 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  section: 源码位置
+- type: concept
+  question: 在 集群升级进阶滚动升级与回滚策略 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 集群升级进阶滚动升级与回滚策略 相关的操作: kubeadm upgrade plan?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  command: kubeadm upgrade plan
+- type: operation
+  question: '如何执行与 集群升级进阶滚动升级与回滚策略 相关的操作: kubeadm upgrade apply v1.29.0 --certificate-key=<key>?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  command: kubeadm upgrade apply v1.29.0 --certificate-key=<key>
+- type: operation
+  question: '如何执行与 集群升级进阶滚动升级与回滚策略 相关的操作: ls -la /etc/kubernetes/tmp/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+  command: ls -la /etc/kubernetes/tmp/
+- type: comparison
+  question: 集群升级进阶滚动升级与回滚策略 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/15-upgrade-advanced.md
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, 源码路径 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/16-security.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/16-security.md
+  section: 源码路径
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, ServiceAccount Token 演进 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/16-security.md 的「ServiceAccount Token 演进」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/16-security.md
+  section: ServiceAccount Token 演进
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, BoundServiceAccountTokenVolumeProjection 特性门控 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/16-security.md 的「BoundServiceAccountTokenVolumeProjection
+    特性门控」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/16-security.md
+  section: BoundServiceAccountTokenVolumeProjection 特性门控
+- type: operation
+  question: '如何执行与 安全机制: ServiceAccount Token 与 Audit 相关的操作: /etc/kubernetes/pki/sa.key (私钥，API Server 用于签发 Token)?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/16-security.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/16-security.md
+  command: /etc/kubernetes/pki/sa.key (私钥，API Server 用于签发 Token)
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, 源码路径 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  section: 源码路径
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, init 完整阶段列表 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 的「init 完整阶段列表」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  section: init 完整阶段列表
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, mark-control-plane 阶段 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 的「mark-control-plane 阶段」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  section: mark-control-plane 阶段
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, kubeadm init --skip-phases 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 的「kubeadm init --skip-phases」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  section: kubeadm init --skip-phases
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, upload-config 阶段 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 的「upload-config 阶段」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  section: upload-config 阶段
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubectl get nodes --show-labels | grep node-role?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  command: kubectl get nodes --show-labels | grep node-role
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubeadm init --skip-phases=mark-control-plane?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  command: kubeadm init --skip-phases=mark-control-plane
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubectl get configmap kubeadm-config -n kube-system
+    -o yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+  command: kubectl get configmap kubeadm-config -n kube-system -o yaml
+- type: comparison
+  question: 'init 阶段详解: mark-control-plane 与 upload-config 中有哪些技术对比?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/17-init-phases.md
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md
+  section: 源码位置
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 CRI 运行时管理 (Container Runtime Interface) 相关的操作: docker pull registry.k8s.io/pause:3.9?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/18-cri-runtime.md
+  command: docker pull registry.k8s.io/pause:3.9
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md
+  section: 函数签名
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md
+  section: 源码位置
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md
+  section: 参数说明
+- type: comparison
+  question: CNI 网络插件与集群网络 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/19-cni-networking.md
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md
+  section: 函数签名
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md
+  section: 源码位置
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Node 注册与 kubeadm token 详解 相关的操作: kubeadm token create?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/20-node-registration.md
+  command: kubeadm token create
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  section: 源码路径
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, kube-proxy 部署 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 的「kube-proxy 部署」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  section: kube-proxy 部署
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, kube-proxy ConfigMap 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 的「kube-proxy ConfigMap」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  section: kube-proxy ConfigMap
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, 三种模式对比 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 的「三种模式对比」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  section: 三种模式对比
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, iptables 模式 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 的「iptables 模式」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  section: iptables 模式
+- type: operation
+  question: '如何执行与 kube-proxy 与 Service 负载均衡 相关的操作: kubectl get ds -n kube-system -l k8s-app=kube-proxy?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  command: kubectl get ds -n kube-system -l k8s-app=kube-proxy
+- type: operation
+  question: '如何执行与 kube-proxy 与 Service 负载均衡 相关的操作: iptables -t nat -L -n | grep KUBE-SVC?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+  command: iptables -t nat -L -n | grep KUBE-SVC
+- type: comparison
+  question: kube-proxy 与 Service 负载均衡 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/21-kube-proxy.md
+- type: concept
+  question: 在 存储与卷管理 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md
+  section: 源码路径
+- type: concept
+  question: 在 存储与卷管理 中, 存储类型总览 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md 的「存储类型总览」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md
+  section: 存储类型总览
+- type: concept
+  question: 在 存储与卷管理 中, emptyDir 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md 的「emptyDir」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md
+  section: emptyDir
+- type: concept
+  question: 在 存储与卷管理 中, hostPath 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md 的「hostPath」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md
+  section: hostPath
+- type: concept
+  question: 在 存储与卷管理 中, PersistentVolume (PV) 与 PVC 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md 的「PersistentVolume (PV)
+    与 PVC」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md
+  section: PersistentVolume (PV) 与 PVC
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md
+  section: 函数签名
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md
+  section: 源码位置
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kube-scheduler 调度详解 相关的操作: kubectl describe pod <pod-name> | grep -A 10 "Events"?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md
+  command: kubectl describe pod <pod-name> | grep -A 10 "Events"
+- type: operation
+  question: '如何执行与 kube-scheduler 调度详解 相关的操作: kubectl apply -f - <<EOF?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/23-scheduler.md
+  command: kubectl apply -f - <<EOF
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm 不安装的组件 (What kubeadm Does Not Install) 相关的操作: kubectl apply -f https://raw.githubusercontent.com/projectca?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+  command: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yam
+- type: operation
+  question: '如何执行与 kubeadm 不安装的组件 (What kubeadm Does Not Install) 相关的操作: helm repo add cilium https://helm.cilium.io/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+  command: helm repo add cilium https://helm.cilium.io/
+- type: comparison
+  question: kubeadm 不安装的组件 (What kubeadm Does Not Install) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/24-what-kubeadm-does-not-install.md
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md
+  section: 源码位置
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md
+  section: 参数说明
+- type: comparison
+  question: 资源管理与配额控制 (Resource Management) 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-create/25-resource-management.md
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+  section: 函数签名
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Kubernetes 集群删除逻辑 — 基于官方代码分析 相关的操作: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+  command: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
+- type: operation
+  question: '如何执行与 Kubernetes 集群删除逻辑 — 基于官方代码分析 相关的操作: ETCDCTL_API=3 etcdctl member list \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+  command: ETCDCTL_API=3 etcdctl member list \
+- type: comparison
+  question: Kubernetes 集群删除逻辑 — 基于官方代码分析 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/01-overview.md
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm reset 源码分析 相关的操作: kubeadm reset?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md
+  command: kubeadm reset
+- type: operation
+  question: '如何执行与 kubeadm reset 源码分析 相关的操作: kubeadm reset --force?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/02-reset.md
+  command: kubeadm reset --force
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  section: 概述
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  section: 函数签名
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  section: 源码位置
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  section: 参数说明
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  command: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl delete node unreachable-node --force --grace-period=?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  command: kubectl delete node unreachable-node --force --grace-period=0
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-dat?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/03-delete-node.md
+  command: kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-data
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  section: 源码路径
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 清理流程总览 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 的「清理流程总览」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  section: 清理流程总览
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 停止 kubelet 服务 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 的「停止 kubelet 服务」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  section: 停止 kubelet 服务
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 卸载 kubelet 挂载点 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 的「卸载 kubelet 挂载点」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  section: 卸载 kubelet 挂载点
+- type: operation
+  question: '如何执行与 节点清理机制 — cleanup-node 源码分析 相关的操作: kubeadm reset --config=reset.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  command: kubeadm reset --config=reset.yaml
+- type: operation
+  question: '如何执行与 节点清理机制 — cleanup-node 源码分析 相关的操作: iptables -F && iptables -t nat -F && iptables -t mangle -F &?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/04-cleanup.md
+  command: iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  section: 源码路径
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 流程总览 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 的「流程总览」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  section: 流程总览
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, etcd 类型检测 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 的「etcd 类型检测」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  section: etcd 类型检测
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, etcd 数据目录获取 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 的「etcd 数据目录获取」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  section: etcd 数据目录获取
+- type: operation
+  question: '如何执行与 etcd 数据清理与成员移除 — 源码分析 相关的操作: etcdctl member list \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/05-etcd-cleanup.md
+  command: etcdctl member list \
+- type: concept
+  question: 在 强制删除与异常场景处理 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md
+  section: 概述
+- type: concept
+  question: 在 强制删除与异常场景处理 中, --force 标志 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md 的「--force 标志」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md
+  section: --force 标志
+- type: concept
+  question: 在 强制删除与异常场景处理 中, 错误处理策略 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md 的「错误处理策略」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md
+  section: 错误处理策略
+- type: operation
+  question: '如何执行与 强制删除与异常场景处理 相关的操作: kubeadm reset -f?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md
+  command: kubeadm reset -f
+- type: operation
+  question: '如何执行与 强制删除与异常场景处理 相关的操作: kubeadm reset --skip-phases=remove-etcd-member?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/06-force-delete.md
+  command: kubeadm reset --skip-phases=remove-etcd-member
+- type: concept
+  question: 在 HA 集群删除注意事项 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  section: 概述
+- type: concept
+  question: 在 HA 集群删除注意事项 中, HA 架构回顾 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 的「HA 架构回顾」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  section: HA 架构回顾
+- type: concept
+  question: 在 HA 集群删除注意事项 中, etcd 仲裁维护 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 的「etcd 仲裁维护」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  section: etcd 仲裁维护
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: etcdctl endpoint status --write-out=table \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  command: etcdctl endpoint status --write-out=table \
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: ip addr show | grep <vip-address>?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  command: ip addr show | grep <vip-address>
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: ETCDCTL_API=3 etcdctl member list \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/07-ha-delete.md
+  command: ETCDCTL_API=3 etcdctl member list \
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  section: 概述
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, 删除方式对比 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 的「删除方式对比」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  section: 删除方式对比
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, kubeadm 删除流程（对比基准） 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 的「kubeadm 删除流程（对比基准）」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  section: kubeadm 删除流程（对比基准）
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, EKS 集群删除 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 的「EKS 集群删除」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  section: EKS 集群删除
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: eksctl delete cluster --name my-cluster --region us-west-2?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  command: eksctl delete cluster --name my-cluster --region us-west-2
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: az aks delete --name my-cluster --resource-group my-rg --yes?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  command: az aks delete --name my-cluster --resource-group my-rg --yes
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: gcloud container clusters delete my-cluster --zone=us-centra?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+  command: gcloud container clusters delete my-cluster --zone=us-central1-a --quiet
+- type: comparison
+  question: 云厂商集群删除方案对比 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/08-cloud-delete.md
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+  section: 函数签名
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+  section: 源码位置
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 reset 子命令与 Phase 操作速查 相关的操作: kubeadm reset --config=reset-config.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+  command: kubeadm reset --config=reset-config.yaml
+- type: operation
+  question: '如何执行与 reset 子命令与 Phase 操作速查 相关的操作: kubeadm reset phase preflight?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+  command: kubeadm reset phase preflight
+- type: comparison
+  question: reset 子命令与 Phase 操作速查 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/09-reset-phase-commands.md
+- type: concept
+  question: 在 删除时的安全清理 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  section: 函数签名
+- type: concept
+  question: 在 删除时的安全清理 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  section: 源码位置
+- type: concept
+  question: 在 删除时的安全清理 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: rm -rf /var/lib/etcd?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  command: rm -rf /var/lib/etcd
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: aws ec2 describe-volumes --filters "Name=tag:KubernetesClust?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  command: aws ec2 describe-volumes --filters "Name=tag:KubernetesCluster,Values=<cluster-name>" --query 'Volum
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: systemctl stop kubelet 2>/dev/null || true?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+  command: systemctl stop kubelet 2>/dev/null || true
+- type: comparison
+  question: 删除时的安全清理 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/10-security-delete.md
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, 源码中的设计决策 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 的「源码中的设计决策」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  section: 源码中的设计决策
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, CNI 配置清理 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 的「CNI 配置清理」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  section: CNI 配置清理
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: ls /etc/cni/net.d/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  command: ls /etc/cni/net.d/
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: rm -rf /etc/cni/net.d/*?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  command: rm -rf /etc/cni/net.d/*
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: rm -rf /etc/cni/net.d/10-flannel.conflist?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/11-network-cleanup.md
+  command: rm -rf /etc/cni/net.d/10-flannel.conflist
+- type: concept
+  question: 在 集群删除故障排查手册 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+  section: 概述
+- type: concept
+  question: 在 集群删除故障排查手册 中, kubeadm reset 常见错误 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 的「kubeadm reset 常见错误」章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+  section: kubeadm reset 常见错误
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: ps aux | grep kubeadm?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+  command: ps aux | grep kubeadm
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: sudo kubeadm reset -f?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+  command: sudo kubeadm reset -f
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: crictl ps | grep etcd?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+  command: crictl ps | grep etcd
+- type: troubleshooting
+  question: 如何排查 集群删除故障排查手册 相关的故障?
+  answer: 参见 domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md 的故障排查章节。
+  source: domain-02-workloads-applications/topic-functions/cluster-delete/12-troubleshooting.md
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Deployment 控制器架构总览 相关的操作: kubectl apply -f deployment.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+  command: kubectl apply -f deployment.yaml
+- type: operation
+  question: '如何执行与 Deployment 控制器架构总览 相关的操作: kubectl set image deployment/web-frontend web=registry.examp?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+  command: kubectl set image deployment/web-frontend web=registry.example.com/web-frontend:v2.2.0
+- type: comparison
+  question: Deployment 控制器架构总览 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Deployment 控制器入口源码分析 相关的操作: kubectl rollout pause deployment/nginx?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md
+  command: kubectl rollout pause deployment/nginx
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md
+  section: 概述
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md
+  section: 源码路径
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, ReplicaSet 控制器架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md 的「ReplicaSet 控制器架构」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md
+  section: ReplicaSet 控制器架构
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, syncReplicaSet — 核心同步函数 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md 的「syncReplicaSet
+    — 核心同步函数」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md
+  section: syncReplicaSet — 核心同步函数
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 期望状态对齐 — manageReplicas 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md 的「期望状态对齐 — manageReplicas」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md
+  section: 期望状态对齐 — manageReplicas
+- type: concept
+  question: 在 滚动更新源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  section: 概述
+- type: concept
+  question: 在 滚动更新源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  section: 源码路径
+- type: concept
+  question: 在 滚动更新源码分析 中, 滚动更新策略配置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 的「滚动更新策略配置」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  section: 滚动更新策略配置
+- type: concept
+  question: 在 滚动更新源码分析 中, rolloutRolling — 滚动更新入口 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 的「rolloutRolling — 滚动更新入口」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  section: rolloutRolling — 滚动更新入口
+- type: concept
+  question: 在 滚动更新源码分析 中, reconcileNewReplicaSet — 扩容新 RS 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 的「reconcileNewReplicaSet
+    — 扩容新 RS」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  section: reconcileNewReplicaSet — 扩容新 RS
+- type: operation
+  question: '如何执行与 滚动更新源码分析 相关的操作: kubectl rollout pause deployment/nginx?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md
+  command: kubectl rollout pause deployment/nginx
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+  section: 概述
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+  section: 参数说明
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 返回值 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 的「返回值」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+  section: 返回值
+- type: comparison
+  question: Deployment Status 计算逻辑 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md
+- type: concept
+  question: 在 版本历史与回滚机制 中, 函数签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md 的「函数签名」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md
+  section: 函数签名
+- type: concept
+  question: 在 版本历史与回滚机制 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md
+  section: 源码位置
+- type: concept
+  question: 在 版本历史与回滚机制 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 版本历史与回滚机制 相关的操作: kubectl set image deployment/nginx nginx=nginx:1.99?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md
+  command: kubectl set image deployment/nginx nginx=nginx:1.99
+- type: concept
+  question: 在 节点生命周期总览 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/01-overview.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/01-overview.md
+  section: 概述
+- type: concept
+  question: 在 节点生命周期总览 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/01-overview.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/01-overview.md
+  section: 源码路径
+- type: concept
+  question: 在 节点生命周期总览 中, 节点生命周期 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/01-overview.md 的「节点生命周期」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/01-overview.md
+  section: 节点生命周期
+- type: concept
+  question: 在 节点注册流程 TLS Bootstrap 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/02-registration.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/02-registration.md
+  section: 概述
+- type: concept
+  question: 在 节点注册流程 TLS Bootstrap 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/02-registration.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/02-registration.md
+  section: 源码路径
+- type: concept
+  question: 在 节点注册流程 TLS Bootstrap 源码分析 中, 节点注册完整流程 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/02-registration.md 的「节点注册完整流程」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/02-registration.md
+  section: 节点注册完整流程
+- type: operation
+  question: '如何执行与 节点注册流程 TLS Bootstrap 源码分析 相关的操作: kubectl get secrets -n kube-system -l kubernetes.io/token-ty?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/02-registration.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/02-registration.md
+  command: kubectl get secrets -n kube-system -l kubernetes.io/token-type=bootstrap.kubernetes.io/token
+- type: operation
+  question: '如何执行与 节点注册流程 TLS Bootstrap 源码分析 相关的操作: kubeadm token create?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/02-registration.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/02-registration.md
+  command: kubeadm token create
+- type: concept
+  question: 在 节点状态与健康检查 Node Conditions 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+  section: 概述
+- type: concept
+  question: 在 节点状态与健康检查 Node Conditions 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+  section: 源码路径
+- type: concept
+  question: 在 节点状态与健康检查 Node Conditions 源码分析 中, 节点状态（Conditions） 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 的「节点状态（Conditions）」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+  section: 节点状态（Conditions）
+- type: operation
+  question: '如何执行与 节点状态与健康检查 Node Conditions 源码分析 相关的操作: kubectl get nodes -o jsonpath=''{range .items[*]}{.metadata.n?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+  command: kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .status.conditions[*]}{
+- type: operation
+  question: '如何执行与 节点状态与健康检查 Node Conditions 源码分析 相关的操作: systemctl status kubelet?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+  command: systemctl status kubelet
+- type: comparison
+  question: 节点状态与健康检查 Node Conditions 源码分析 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/03-condition.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/03-condition.md
+- type: concept
+  question: 在 节点驱逐与维护 kubectl drain 中, 函数/流程签名 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 的「函数/流程签名」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 节点驱逐与维护 kubectl drain 中, 源码位置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 的「源码位置」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+  section: 源码位置
+- type: concept
+  question: 在 节点驱逐与维护 kubectl drain 中, 参数说明 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 的「参数说明」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 节点驱逐与维护 kubectl drain 相关的操作: kubectl drain node-1 \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+  command: kubectl drain node-1 \
+- type: operation
+  question: '如何执行与 节点驱逐与维护 kubectl drain 相关的操作: for node in $(kubectl get nodes -l node-role.kubernetes.io/w?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+  command: for node in $(kubectl get nodes -l node-role.kubernetes.io/worker -o name); do
+- type: comparison
+  question: 节点驱逐与维护 kubectl drain 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/04-drain.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/04-drain.md
+- type: concept
+  question: 在 节点升级 kubeadm upgrade node 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md
+  section: 概述
+- type: concept
+  question: 在 节点升级 kubeadm upgrade node 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md
+  section: 源码路径
+- type: concept
+  question: 在 节点升级 kubeadm upgrade node 源码分析 中, 节点升级概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md 的「节点升级概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md
+  section: 节点升级概述
+- type: operation
+  question: '如何执行与 节点升级 kubeadm upgrade node 源码分析 相关的操作: kubectl version --short?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md
+  command: kubectl version --short
+- type: operation
+  question: '如何执行与 节点升级 kubeadm upgrade node 源码分析 相关的操作: apt-get update && apt-get install -y kubeadm=1.29.0-*?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/05-upgrade.md
+  command: apt-get update && apt-get install -y kubeadm=1.29.0-*
+- type: concept
+  question: 在 节点证书轮换源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+  section: 概述
+- type: concept
+  question: 在 节点证书轮换源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+  section: 源码路径
+- type: concept
+  question: 在 节点证书轮换源码分析 中, kubelet 证书管理架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 的「kubelet 证书管理架构」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+  section: kubelet 证书管理架构
+- type: operation
+  question: '如何执行与 节点证书轮换源码分析 相关的操作: /var/lib/kubelet/pki/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+  command: /var/lib/kubelet/pki/
+- type: operation
+  question: '如何执行与 节点证书轮换源码分析 相关的操作: kubectl get csr?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+  command: kubectl get csr
+- type: comparison
+  question: 节点证书轮换源码分析 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/06-certificate.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/06-certificate.md
+- type: concept
+  question: 在 节点弹性伸缩 Cluster Autoscaler 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md
+  section: 概述
+- type: concept
+  question: 在 节点弹性伸缩 Cluster Autoscaler 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md
+  section: 源码路径
+- type: concept
+  question: 在 节点弹性伸缩 Cluster Autoscaler 源码分析 中, Cluster Autoscaler 工作原理 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md 的「Cluster Autoscaler 工作原理」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md
+  section: Cluster Autoscaler 工作原理
+- type: operation
+  question: '如何执行与 节点弹性伸缩 Cluster Autoscaler 源码分析 相关的操作: gcloud container clusters update my-cluster \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md
+  command: gcloud container clusters update my-cluster \
+- type: operation
+  question: '如何执行与 节点弹性伸缩 Cluster Autoscaler 源码分析 相关的操作: az aks update \?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/07-autoscaling.md
+  command: az aks update \
+- type: concept
+  question: 在 节点故障排查手册 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  section: 概述
+- type: concept
+  question: 在 节点故障排查手册 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  section: 源码路径
+- type: concept
+  question: 在 节点故障排查手册 中, 节点 NotReady 排查 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 的「节点 NotReady 排查」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  section: 节点 NotReady 排查
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: kubectl get nodes?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  command: kubectl get nodes
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: journalctl -u kubelet -p err --no-pager -n 50?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  command: journalctl -u kubelet -p err --no-pager -n 50
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: kubelet --validate --config=/var/lib/kubelet/config.yaml?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+  command: kubelet --validate --config=/var/lib/kubelet/config.yaml
+- type: troubleshooting
+  question: 如何排查 节点故障排查手册 相关的故障?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 的故障排查章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+- type: comparison
+  question: 节点故障排查手册 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/08-troubleshooting.md
+- type: concept
+  question: 在 节点网络 CNI 配置详解 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md
+  section: 概述
+- type: concept
+  question: 在 节点网络 CNI 配置详解 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md
+  section: 源码路径
+- type: concept
+  question: 在 节点网络 CNI 配置详解 中, CNI 架构 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md 的「CNI 架构」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md
+  section: CNI 架构
+- type: operation
+  question: '如何执行与 节点网络 CNI 配置详解 相关的操作: kubectl get pod <pod> -o jsonpath=''{.status.containerStatuse?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md
+  command: kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].containerID}'
+- type: operation
+  question: '如何执行与 节点网络 CNI 配置详解 相关的操作: ip link show?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/09-cni-node.md
+  command: ip link show
+- type: concept
+  question: 在 kubelet 进阶配置 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  section: 概述
+- type: concept
+  question: 在 kubelet 进阶配置 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  section: 源码路径
+- type: concept
+  question: 在 kubelet 进阶配置 中, kubelet 配置文件详解 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 的「kubelet 配置文件详解」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  section: kubelet 配置文件详解
+- type: concept
+  question: 在 kubelet 进阶配置 中, cgroup Driver 配置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 的「cgroup Driver 配置」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  section: cgroup Driver 配置
+- type: operation
+  question: '如何执行与 kubelet 进阶配置 相关的操作: kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq ''.?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  command: kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq '.kubeletconfig.cgroupDriver'
+- type: operation
+  question: '如何执行与 kubelet 进阶配置 相关的操作: cat /proc/cgroups?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+  command: cat /proc/cgroups
+- type: comparison
+  question: kubelet 进阶配置 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/10-kubelet-config.md
+- type: concept
+  question: 在 节点资源压力与 Eviction 源码分析 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/11-eviction.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/11-eviction.md
+  section: 概述
+- type: concept
+  question: 在 节点资源压力与 Eviction 源码分析 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/11-eviction.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/11-eviction.md
+  section: 源码路径
+- type: concept
+  question: 在 节点资源压力与 Eviction 源码分析 中, kubelet Eviction 机制 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/11-eviction.md 的「kubelet Eviction 机制」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/11-eviction.md
+  section: kubelet Eviction 机制
+- type: operation
+  question: '如何执行与 节点资源压力与 Eviction 源码分析 相关的操作: dmesg | grep -i "oom"?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/11-eviction.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/11-eviction.md
+  command: dmesg | grep -i "oom"
+- type: comparison
+  question: 节点资源压力与 Eviction 源码分析 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/11-eviction.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/11-eviction.md
+- type: concept
+  question: 在 节点监控 metrics-server node-exporter kubelet metrics 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  section: 概述
+- type: concept
+  question: 在 节点监控 metrics-server node-exporter kubelet metrics 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  section: 源码路径
+- type: concept
+  question: 在 节点监控 metrics-server node-exporter kubelet metrics 中, kubelet Metrics 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 的「kubelet Metrics」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  section: kubelet Metrics
+- type: operation
+  question: '如何执行与 节点监控 metrics-server node-exporter kubelet metrics 相关的操作: curl -k --cert /var/lib/kubelet/pki/kubelet-client-current.p?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  command: curl -k --cert /var/lib/kubelet/pki/kubelet-client-current.pem \
+- type: operation
+  question: '如何执行与 节点监控 metrics-server node-exporter kubelet metrics 相关的操作: kubelet_runtime_operations_total{operation_type="container_s?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  command: kubelet_runtime_operations_total{operation_type="container_status"} 1234
+- type: operation
+  question: '如何执行与 节点监控 metrics-server node-exporter kubelet metrics 相关的操作: kubelet_pod_worker_duration_seconds_bucket{operation="sync"}?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/12-monitoring.md
+  command: kubelet_pod_worker_duration_seconds_bucket{operation="sync"}
+- type: concept
+  question: 在 节点安全机制 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  section: 概述
+- type: concept
+  question: 在 节点安全机制 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  section: 源码路径
+- type: concept
+  question: 在 节点安全机制 中, Node Authorization 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 的「Node Authorization」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  section: Node Authorization
+- type: operation
+  question: '如何执行与 节点安全机制 相关的操作: --authorization-mode=Node,RBAC?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  command: --authorization-mode=Node,RBAC
+- type: operation
+  question: '如何执行与 节点安全机制 相关的操作: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  command: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -subject
+- type: operation
+  question: '如何执行与 节点安全机制 相关的操作: --enable-admission-plugins=NodeRestriction?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+  command: --enable-admission-plugins=NodeRestriction
+- type: comparison
+  question: 节点安全机制 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/13-security.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-functions/node-create/13-security.md
+- type: concept
+  question: 在 节点存储 中, 节点存储类型 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md 的「节点存储类型」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md
+  section: 节点存储类型
+- type: concept
+  question: 在 节点存储 中, Local PV 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md 的「Local PV」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md
+  section: Local PV
+- type: troubleshooting
+  question: 如何排查 节点存储 相关的故障?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md 的故障排查章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md
+- type: concept
+  question: 在 云厂商节点集成 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  section: 概述
+- type: concept
+  question: 在 云厂商节点集成 中, 源码路径 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 的「源码路径」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  section: 源码路径
+- type: concept
+  question: 在 云厂商节点集成 中, 云厂商节点元数据 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 的「云厂商节点元数据」章节。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  section: 云厂商节点元数据
+- type: operation
+  question: '如何执行与 云厂商节点集成 相关的操作: curl http://169.254.169.254/latest/meta-data/?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  command: curl http://169.254.169.254/latest/meta-data/
+- type: operation
+  question: '如何执行与 云厂商节点集成 相关的操作: curl -H "Metadata-Flavor: Google" http://metadata.google.int?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  command: 'curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/'
+- type: operation
+  question: '如何执行与 云厂商节点集成 相关的操作: curl -H "Metadata: true" "http://169.254.169.254/metadata/in?'
+  answer: 参见 domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-functions/node-create/15-cloud-node.md
+  command: 'curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01"'
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+  section: 概述
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, 架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+  section: 架构设计
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, 核心配置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 的「核心配置」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+  section: 核心配置
+- type: operation
+  question: '如何执行与 Spring Boot on Kubernetes 生产实践指南 相关的操作: mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER ?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+  command: mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.password=$REGISTRY_PASS
+- type: operation
+  question: '如何执行与 Spring Boot on Kubernetes 生产实践指南 相关的操作: ./gradlew bootBuildImage \?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+  command: ./gradlew bootBuildImage \
+- type: comparison
+  question: Spring Boot on Kubernetes 生产实践指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-java-kubernetes/02-spring-boot-kubernetes-production.md
+- type: concept
+  question: 在 JVM GC 容器调优深度指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  section: 概述
+- type: concept
+  question: 在 JVM GC 容器调优深度指南 中, 架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  section: 架构设计
+- type: concept
+  question: 在 JVM GC 容器调优深度指南 中, 核心配置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 的「核心配置」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  section: 核心配置
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: java -XshowSettings:system -version?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  command: java -XshowSettings:system -version
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: JAVA_OPTS="-XX:+UseContainerSupport \?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  command: JAVA_OPTS="-XX:+UseContainerSupport \
+- type: operation
+  question: '如何执行与 JVM GC 容器调优深度指南 相关的操作: JAVA_OPTS="-XX:+UseContainerSupport \?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+  command: JAVA_OPTS="-XX:+UseContainerSupport \
+- type: comparison
+  question: JVM GC 容器调优深度指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-java-kubernetes/03-jvm-gc-container-tuning.md
+- type: concept
+  question: 在 Java Operator SDK 开发指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md
+  section: 概述
+- type: concept
+  question: 在 Java Operator SDK 开发指南 中, 架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md
+  section: 架构设计
+- type: concept
+  question: 在 Java Operator SDK 开发指南 中, 核心配置 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md 的「核心配置」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md
+  section: 核心配置
+- type: comparison
+  question: Java Operator SDK 开发指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-java-kubernetes/04-java-operator-sdk-development.md
+- type: concept
+  question: 在 Quarkus Native 编译与 Kubernetes 部署指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md
+  section: 概述
+- type: concept
+  question: 在 Quarkus Native 编译与 Kubernetes 部署指南 中, 架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 Quarkus Native 编译与 Kubernetes 部署指南 相关的操作: sdk install java 21.0.6-graal?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md 中的操作步骤。
+  source: domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md
+  command: sdk install java 21.0.6-graal
+- type: comparison
+  question: Quarkus Native 编译与 Kubernetes 部署指南 中有哪些技术对比?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md 中的对比分析。
+  source: domain-02-workloads-applications/topic-java-kubernetes/05-quarkus-native-kubernetes.md
+- type: concept
+  question: '在 Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 中, 概述 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md
+  section: 概述
+- type: concept
+  question: '在 Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 中, 架构设计 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md
+  section: 架构设计
+- type: concept
+  question: '在 Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 中, 核心配置 是什么?'
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md 的「核心配置」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/06-java-cicd-tekton-argocd.md
+  section: 核心配置
+- type: concept
+  question: 在 Java 可观测性 on Kubernetes 实践指南 中, 概述 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/07-java-observability-kubernetes.md 的「概述」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/07-java-observability-kubernetes.md
+  section: 概述
+- type: concept
+  question: 在 Java 可观测性 on Kubernetes 实践指南 中, 架构设计 是什么?
+  answer: 参见 domain-02-workloads-applications/topic-java-kubernetes/07-java-observability-kubernetes.md 的「架构设计」章节。
+  source: domain-02-workloads-applications/topic-java-kubernetes/07-java-observability-kubernetes.md
+  section: 架构设计

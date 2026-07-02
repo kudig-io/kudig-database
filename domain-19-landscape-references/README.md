@@ -49,8 +49,11 @@ prerequisites:
 
 | 子目录 | 内容 |
 |---|---|
-| 01-cncf-landscape/ | CNCF 项目全景（graduated/incubating/sandbox） |
+| 01-cncf-landscape/ | CNCF 项目全景（graduated/incubating/sandbox 目录待填充） |
 | 02-papers/ | [[Kubernetes|Kubernetes]] 相关学术论文 |
+| topic-index/ | 按主题的知识图谱索引（cluster/pvc/networking 等） |
+| topic-release-notes/ | Kubernetes 及生态组件版本发布说明归档 |
+| _archived-release-notes/ | 历史发布说明归档（安全/存储/CLI 等） |
 
 ## 与其他 Domain 的关系
 

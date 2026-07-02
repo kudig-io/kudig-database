@@ -1,0 +1,261 @@
+---
+corpus_id: "cap-knowledge-architecture-v1"
+corpus_name: "K8s 架构基础 — 知识层测评语料 v1"
+corpus_version: "1.0.0"
+capability_layer: knowledge
+domain: architecture-fundamentals
+total_items: 5
+generated_at: "2026-05-21"
+schema_version: "3.0"
+description: >
+  评估 Agent 对 Kubernetes 核心架构概念、组件职责、技术对比的掌握程度。
+  覆盖 etcd、API Server、Scheduler、Controller Manager、Kubelet 等核心组件。
+authors:
+  - name: KUDIG Team
+    role: maintainer
+source_docs:
+  - "domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md"
+  - "domain-1-architecture-fundamentals/02-core-components-deep-dive.md"
+tags: [k8s, architecture, control-plane, node]
+
+qa_items:
+  # ========================================================================
+  # 概念理解类
+  # ========================================================================
+  - id: "cap-knowledge-architecture-v1-0001"
+    question: >
+      Kubernetes 中 etcd 的核心职责是什么？为什么集群通常建议部署
+      3 个或 5 个 etcd 节点而不是 2 个或 4 个？
+    variants:
+      - "etcd 在 K8s 里做什么？为什么节点数要是奇数？"
+      - "Explain etcd's role in Kubernetes and why odd-numbered clusters are preferred."
+    expected_answer: >
+      etcd 是 Kubernetes 的分布式键值存储，承担以下核心职责：
+      (1) 存储集群所有配置数据、状态数据和元数据，是集群唯一的可信状态源（SSOT）；
+      (2) 通过 Raft 共识算法实现分布式一致性，确保控制平面组件读取到的状态一致；
+      (3) 提供 Watch 机制，允许 API Server 等组件实时监听资源变更事件。
+
+      建议部署 3 或 5 个节点而非 2 或 4 个的原因基于 Raft 算法特性：
+      - Raft 要求获得超过半数（majority）节点的投票才能提交写操作（选举 leader 或日志复制）。
+      - 2 节点集群的容错能力为 0：任一节点故障后剩余 1 节点无法构成 majority（需要 2/2+1=2 票），
+        集群变为只读或不可用。从成本角度，2 节点的容错能力与 1 节点相同。
+      - 4 节点集群的容错能力为 1：虽然可容忍 1 节点故障，但与 3 节点集群的容错能力相同，
+        却多出一台机器的成本。且 4 节点需要 3 票才能构成 majority，写入延迟更高。
+      - 3 节点可容忍 1 故障，5 节点可容忍 2 故障，性价比最优。
+    type: concept
+    difficulty: L2_intermediate
+    cognitive_level: understand
+    evaluation:
+      rubric_id: "R1-KNOWLEDGE-ACCURACY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "提到 etcd 是分布式键值存储"
+        - "提到 Raft 共识算法"
+        - "解释 majority 机制"
+        - "解释为什么 2 节点不可取（与 1 节点容错相同）"
+        - "解释为什么 4 节点性价比低（与 3 节点容错相同但成本更高）"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [etcd, apiserver]
+
+  # ========================================================================
+  # 技术对比类
+  # ========================================================================
+  - id: "cap-knowledge-architecture-v1-0002"
+    question: >
+      kube-proxy 的 iptables、IPVS 和 nftables 三种后端模式在
+      大规模集群（>5000 节点）下的性能与适用场景有何差异？
+    variants:
+      - "kube-proxy iptables vs IPVS vs nftables，大规模集群选哪个？"
+      - "Compare kube-proxy backends: iptables, IPVS, nftables for large clusters."
+    expected_answer: >
+      三种模式的差异对比：
+
+      1. iptables 模式（默认，历史最久）
+         - 原理：为每个 Service Endpoints 创建 iptables 规则，通过概率匹配实现负载均衡。
+         - 性能瓶颈：规则数为 O(Services × Endpoints)，在 5000+ 节点、数万个 Service 的场景下，
+           iptables 规则链呈线性增长，内核 netfilter 遍历耗时显著增加，Service 更新延迟可达秒级。
+         - 适用：中小规模集群（<1000 Service，<10000 Endpoints）。
+
+      2. IPVS 模式
+         - 原理：基于内核中的 IP Virtual Server（L4 负载均衡器），使用哈希表管理转发规则，
+           复杂度为 O(1)。
+         - 性能优势：连接建立和转发性能远高于 iptables，支持多种负载均衡算法（rr/lc/dh/sh/sed/nq）。
+           在 5000+ 节点集群中，Service 更新延迟为毫秒级。
+         - 限制：需要内核加载 ip_vs 模块；不支持某些复杂的网络策略（如基于客户端 IP 的会话保持
+           需要额外配置）。
+         - 适用：大规模生产集群，尤其是高并发、高频 Service 变更场景。
+
+      3. nftables 模式（Kubernetes v1.31+ 实验性）
+         - 原理：使用 nftables（iptables 的下一代替代品）作为后端，规则组织更高效，
+           使用 set/lookup 结构替代线性规则链。
+         - 性能优势：规则更新为原子操作，无需遍历整个规则链；内存占用更低；
+           与 iptables 模式相比，大规模场景下延迟降低 50%+。
+         - 限制：较新，生态成熟度不如 IPVS；部分旧版内核不支持。
+         - 适用：希望使用现代内核特性且愿意接受新技术的集群。
+
+      大规模集群（>5000 节点）推荐：优先 IPVS（成熟稳定），或评估 nftables（未来方向）。
+      iptables 在此规模下已成为已知瓶颈。
+    type: comparison
+    difficulty: L3_advanced
+    cognitive_level: analyze
+    evaluation:
+      rubric_id: "R1-KNOWLEDGE-ACCURACY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "对比 iptables 的 O(n) 规则链与性能瓶颈"
+        - "对比 IPVS 的 O(1) 哈希表与负载均衡算法"
+        - "对比 nftables 的原子更新与 set/lookup 结构"
+        - "给出大规模集群（>5000 节点）的明确推荐"
+        - "提及版本要求（如 nftables 在 v1.31+）"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [kube-proxy, iptables, ipvs, nftables]
+
+  # ========================================================================
+  # 标准流程类
+  # ========================================================================
+  - id: "cap-knowledge-architecture-v1-0003"
+    question: >
+      当一个新 Pod 被创建时，从 kubectl apply 到 Pod 实际运行在节点上，
+      控制平面组件的完整协作流程是什么？请按时间顺序列出关键步骤。
+    expected_answer: >
+      完整流程如下（按时间顺序）：
+
+      1. kubectl apply 发送 Pod YAML 到 kube-apiserver。
+      2. API Server 执行认证（Authentication）和授权（Authorization），
+         然后将资源定义写入 etcd（此时 Pod 处于 Pending 状态）。
+      3. API Server 通过 Watch 机制通知 kube-scheduler 有新 Pod 待调度。
+      4. Scheduler 执行调度算法（过滤 + 打分）：
+         - 过滤阶段：排除不满足资源需求、亲和性/反亲和性、污点的节点。
+         - 打分阶段：对剩余节点按优先级函数排序，选择最优节点。
+      5. Scheduler 将 Pod 的 spec.nodeName 更新为选定节点，通过 API Server 写回 etcd。
+      6. API Server 通知对应节点的 kubelet（通过 Watch 机制）。
+      7. Kubelet 调用容器运行时（containerd/CRI-O）创建 Pod Sandbox 和网络命名空间。
+      8. CNI 插件为 Pod 分配 IP 地址并配置网络。
+      9. Kubelet 创建 Init Containers（如有）并按顺序执行。
+      10. Kubelet 创建业务容器，通过镜像拉取策略（IfNotPresent/Always）获取镜像。
+      11. Kubelet 执行健康检查（StartupProbe → LivenessProbe → ReadinessProbe）。
+      12. ReadinessProbe 通过后，kubelet 更新 Pod 状态为 Running，
+          EndpointSlice Controller 将 Pod IP 加入 Service Endpoints，流量开始接入。
+    type: procedure
+    difficulty: L3_advanced
+    cognitive_level: understand
+    evaluation:
+      rubric_id: "R1-KNOWLEDGE-ACCURACY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "提到认证授权步骤"
+        - "提到 etcd 写入和 Watch 通知"
+        - "提到 Scheduler 的过滤+打分"
+        - "提到 kubelet 收到通知后的动作"
+        - "提到 CNI 网络配置"
+        - "提到 Init Containers"
+        - "提到健康检查探针的顺序"
+        - "提到 EndpointSlice 更新"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [apiserver, etcd, scheduler, kubelet, cni, containerd]
+
+  # ========================================================================
+  # 事实检索类
+  # ========================================================================
+  - id: "cap-knowledge-architecture-v1-0004"
+    question: >
+      Kubernetes v1.30 中，API Server 的 `--audit-log-maxage`、
+      `--audit-log-maxbackup` 和 `--audit-log-maxsize` 三个参数的默认值
+      和单位分别是什么？
+    expected_answer: >
+      - `--audit-log-maxage`: 默认值为 0（表示不删除旧日志），单位为天（days）。
+        当值 > 0 时，超过该天数的审计日志文件会被自动删除。
+      - `--audit-log-maxbackup`: 默认值为 0（在部分发行版或早期版本中为无限制，
+        生产环境建议显式设置为如 10 或 20），单位为文件个数（保留的旧日志文件数量）。
+        注意：0 表示不限制备份数量（以官方文档为准，不同环境可能有差异）。
+      - `--audit-log-maxsize`: 默认值为 0（表示无限制），单位为 MB（兆字节）。
+        当值 > 0 时，单个审计日志文件达到该大小后会自动轮转。
+
+      生产环境建议配置：
+      - maxage: 30
+      - maxbackup: 10-20
+      - maxsize: 100-500
+    type: fact_retrieval
+    difficulty: L1_beginner
+    cognitive_level: remember
+    evaluation:
+      rubric_id: "R1-KNOWLEDGE-ACCURACY"
+      scoring_method: exact_match
+      max_score: 10
+      passing_threshold: 8
+      check_items:
+        - "maxage 默认 0，单位天"
+        - "maxbackup 默认 0（或无限制），单位文件数"
+        - "maxsize 默认 0，单位 MB"
+    metadata:
+      k8s_versions: ["1.30"]
+      related_components: [apiserver, audit]
+
+  # ========================================================================
+  # 概念理解类（边界场景）
+  # ========================================================================
+  - id: "cap-knowledge-architecture-v1-0005"
+    question: >
+      什么是 Kubernetes 中的 "Resource Quota" 与 "Limit Range"？
+      二者在资源管控中的职责边界有何不同？
+    variants:
+      - "ResourceQuota 和 LimitRange 有什么区别？"
+      - "Differences between ResourceQuota and LimitRange in Kubernetes."
+    expected_answer: >
+      Resource Quota 和 Limit Range 都是 Kubernetes 命名空间级别的资源管控机制，
+      但职责边界完全不同：
+
+      **Resource Quota（资源配额）**
+      - 作用域：Namespace 级别。
+      - 核心职责：限制一个命名空间内可消耗的资源总量和对象数量上限。
+      - 管控对象：
+        - 计算资源总量：CPU 请求/限制总和、内存请求/限制总和。
+        - 存储资源总量：PersistentVolumeClaims 总容量、特定 StorageClass 的容量。
+        - 对象数量上限：Pod、Service、ConfigMap、Secret、PersistentVolumeClaim 等的最大数量。
+      - 触发时机：创建或更新资源时，如果命名空间已使用资源 + 新请求 > Quota，则拒绝创建。
+      - 使用场景：多租户环境中限制团队/项目的资源预算，防止某个命名空间耗尽集群资源。
+
+      **Limit Range（限制范围）**
+      - 作用域：Namespace 级别（但作用于单个 Pod/Container）。
+      - 核心职责：为命名空间内的容器或 Pod 设置默认资源请求/限制，以及允许的最小/最大值。
+      - 管控对象：
+        - 默认值：若用户未设置 requests/limits，自动注入默认值。
+        - 最小值/最大值：限制单个容器可声明的资源范围（如 CPU 必须在 100m-2 之间）。
+        - 存储限制：限制 PVC 请求的最小/最大容量。
+        - 比例限制：限制 request 与 limit 的比例（如 limit 不得超过 request 的 3 倍）。
+      - 触发时机：Pod 创建时，校验并修改容器的 resources 字段。
+      - 使用场景：规范团队资源声明习惯，防止忘记设置 limits 导致资源耗尽。
+
+      **关键区别总结**：
+      | 维度 | Resource Quota | Limit Range |
+      |------|---------------|-------------|
+      | 管控粒度 | 命名空间总量 | 单个 Pod/Container |
+      | 核心功能 | 上限封顶 | 默认值 + 范围约束 |
+      | 拒绝条件 | 总量超标 | 单个容器超出范围 |
+      | 无默认值时 | 不干预 | 自动注入默认值 |
+    type: comparison
+    difficulty: L2_intermediate
+    cognitive_level: understand
+    evaluation:
+      rubric_id: "R1-KNOWLEDGE-ACCURACY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "ResourceQuota 管控命名空间资源总量"
+        - "LimitRange 管控单个容器默认值和范围"
+        - "Quota 在创建时拒绝超额请求"
+        - "LimitRange 在 Pod 创建时校验/修改"
+        - "提供对比表格或等价结构化总结"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [resourcequota, limitrange, scheduler]

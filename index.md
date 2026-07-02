@@ -77,6 +77,13 @@ trigger_keywords:
 - [[scripts/index.md|scripts]] — 自动化脚本、模板、提示词
 - [[web/index.md|web]] — Astro 静态站点项目
 
+## 关键运行文件
+
+- [[hot.md|hot.md]] — 热缓存（最近活动的语义快照）
+- [[log.md|log.md]] — 活动日志（摄入、更新、lint 记录）
+- [[CHANGELOG.md|CHANGELOG.md]] — 变更日志
+- [[CONTRIBUTING.md|CONTRIBUTING.md]] — 贡献指南
+
 ## 其他顶层目录
 
 - [[research/index.md|research]] — 研究资料

@@ -1,0 +1,328 @@
+---
+corpus_id: "benchmark-diagnostic-e2e-v1"
+corpus_name: "Agent 诊断能力端到端基准测评 v1"
+corpus_version: "1.0.0"
+capability_layer: reasoning
+domain: e2e-benchmark
+total_items: 3
+generated_at: "2026-05-21"
+schema_version: "3.0"
+description: >
+  端到端基准测评：模拟完整的工单处理流程，从意图识别到给出解决方案。
+  每个 case 覆盖完整的 Agent 能力栈（知识 + 推理 + 工具 + 对话 + 安全）。
+  用于与 docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md 对齐。
+authors:
+  - name: KUDIG Team
+    role: maintainer
+source_docs:
+  - "docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md"
+  - "docs/agent-specs/P0-1-ticket-classification-intent-recognition.md"
+tags: [benchmark, e2e, diagnostic, agent-evaluation]
+
+evaluation_config:
+  rubric_id: "R6-E2E-COMPLETION"
+  scoring_method: llm_as_judge
+  max_score: 100
+  passing_threshold: 75
+  dimensions:
+    - intent_recognition: 10
+    - info_collection: 15
+    - root_cause_analysis: 20
+    - solution: 25
+    - prevention: 15
+    - communication: 15
+
+qa_items:
+  # ========================================================================
+  # E2E Case 1: Pod 网络连通性故障
+  # ========================================================================
+  - id: "benchmark-diagnostic-e2e-v1-0001"
+    question: >
+      【工单描述】
+      "我们 payments 服务的 api-gateway Pod 突然无法连接到 redis 了，
+      应用日志显示 connection refused。昨天还好好的，今天部署了新版本后出现。
+      请帮忙排查。"
+
+      【Agent 可用工具】
+      kubectl, nslookup, nc, tcpdump, iptables, etcdctl
+
+      【测评场景】
+      这是一个完整的端到端工单，Agent 需要自主决定：
+      1. 识别工单类别和意图
+      2. 决定需要收集哪些信息（可模拟执行 kubectl 命令）
+      3. 基于收集的信息进行根因分析
+      4. 给出修复方案
+      5. 提供预防建议
+      6. 以专业、可信赖的方式与用户沟通
+
+      【隐藏上下文（评测时注入）】
+      当 Agent 执行 `kubectl get pod -n payments -l app=api-gateway` 时，
+      返回：Pod Running，但 restartCount=3。
+      当 Agent 执行 `kubectl logs -n payments api-gateway-xxx --previous` 时，
+      返回：`Connection refused to redis-service:6379`。
+      当 Agent 执行 `kubectl get endpoints redis-service -n payments` 时，
+      返回：ENDPOINTS 为空。
+      当 Agent 执行 `kubectl get pod -n payments -l app=redis` 时，
+      返回：3 个 Redis Pod Running，labels 为 `app=redis-cluster`。
+      当 Agent 执行 `kubectl get service redis-service -n payments -o yaml` 时，
+      返回：selector 为 `app: redis`。
+    expected_answer: >
+      **完整端到端处理预期**：
+
+      1. **意图识别**（10 分）
+         - 工单类别：TC-APP-SVC（应用层服务连通性）
+         - 子类别：Service 无 Endpoints 导致连接失败
+         - 严重程度：P1（影响业务功能，但非集群级故障）
+         - 关键词：connection refused、redis、payments、部署新版本后
+
+      2. **信息收集**（15 分）
+         Agent 应自主执行以下诊断命令（按优先级）：
+         - `kubectl get pods -n payments -l app=api-gateway` → 确认 Pod 状态
+         - `kubectl logs ... --previous` → 确认错误详情
+         - `kubectl get service redis-service -n payments` → 检查 Service
+         - `kubectl get endpoints redis-service -n payments` → 发现 Endpoints 为空
+         - `kubectl get pods -n payments -l app=redis` → 发现 Pod labels 为 `app=redis-cluster`
+         - 对比 Service selector `app: redis` 与 Pod label `app: redis-cluster` → 确认不匹配
+
+      3. **根因分析**（20 分）
+         - 根因：Service `redis-service` 的 selector 与 Redis Pod 的 labels 不匹配。
+         - 触发条件：昨天部署了新版本，可能修改了 Deployment 的 labels 但未同步更新 Service selector。
+         - 因果链：label 不匹配 → EndpointSlice 无法选中 Pod → Endpoints 为空 →
+           DNS 解析到 Service IP 但无后端 → connection refused。
+
+      4. **解决方案**（25 分）
+         - 推荐方案：修改 Service selector 匹配现有 Pod labels（改动最小）
+           ```bash
+           kubectl patch service redis-service -n payments -p '{"spec":{"selector":{"app":"redis-cluster"}}}'
+           ```
+         - 备选方案：修改 Deployment template labels 和 Service selector 保持一致
+         - 验证：
+           ```bash
+           kubectl get endpoints redis-service -n payments
+           ```
+
+      5. **预防建议**（15 分）
+         - 在 CI/CD 中增加 label 一致性校验。
+         - 使用 Helm/Kustomize 统一管理 labels，避免手动修改。
+         - 部署后增加冒烟测试：验证关键 Service 的 Endpoints 非空。
+
+      6. **沟通质量**（15 分）
+         - 语气专业、清晰、鼓励用户验证。
+         - 先给出快速修复（1 条命令），再解释根因。
+         - 提供验证步骤让用户确认修复效果。
+         - 总结时给出预防建议，体现闭环思维。
+    type: multi_turn
+    difficulty: L3_advanced
+    cognitive_level: evaluate
+    agent_config:
+      max_turns: 8
+      required_tools: [kubectl]
+      response_format: text
+    evaluation:
+      rubric_id: "R6-E2E-COMPLETION"
+      scoring_method: llm_as_judge
+      max_score: 100
+      passing_threshold: 75
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-APP-SVC"
+      skill_id: "SKILL-NET-002"
+
+  # ========================================================================
+  # E2E Case 2: 节点级存储故障
+  # ========================================================================
+  - id: "benchmark-diagnostic-e2e-v1-0002"
+    question: >
+      【工单描述】
+      "node-05 上的所有 Pod 都变 Evicted 了，磁盘告警也响了。
+      其他节点正常。请尽快处理。"
+
+      【Agent 可用工具】
+      kubectl, df, du, find, lsof, fuser, journalctl
+
+      【隐藏上下文】
+      `kubectl describe node node-05` 显示：
+      - DiskPressure=True
+      - 磁盘总量 100GB，可用 0GB
+      `kubectl get pods --field-selector spec.nodeName=node-05` 显示：
+      - 所有 Pod 状态 Evicted，Reason: The node was low on resource: ephemeral-storage
+      `ssh node-05 'du -sh /var/log/*'` 显示：
+      - /var/log/pods/ 占用 78GB
+      - /var/log/containers/ 占用 12GB
+      `ssh node-05 'ls -la /var/log/pods/'` 显示：
+      - 大量已删除 Pod 的日志目录未清理
+    expected_answer: >
+      **完整端到端处理预期**：
+
+      1. **意图识别**（10 分）
+         - 工单类别：TC-INFRA-NODE
+         - 子类别：节点磁盘压力导致 Pod 驱逐
+         - 严重程度：P1（单节点故障，影响多个业务 Pod）
+         - 关键词：Evicted、DiskPressure、node-05
+
+      2. **信息收集**（15 分）
+         - 节点状态：`DiskPressure=True`，可用磁盘 0GB
+         - Pod 状态：全部被 Evicted，原因为 `low on resource: ephemeral-storage`
+         - 磁盘使用分布：`/var/log/pods/` 78GB + `/var/log/containers/` 12GB = 90GB
+         - 异常发现：已删除 Pod 的日志目录残留（orphaned log directories）
+
+      3. **根因分析**（20 分）
+         - 直接根因：节点临时存储（ephemeral-storage）耗尽。
+         - 具体原因：kubelet 垃圾回收机制未能及时清理已删除 Pod 的日志目录，
+           导致 `/var/log/pods/` 累积 78GB。
+         - 触发条件：高频率 Pod 创建/删除（如 CronJob、CI/CD 流水线）+ 日志未轮转。
+
+      4. **解决方案**（25 分）
+         - 紧急（立即）：
+           ```bash
+           # 清理已删除 Pod 的残留日志（需节点执行）
+           ssh node-05 'find /var/log/pods -type d -not -newer /var/lib/kubelet/pods -exec rm -rf {} + 2>/dev/null'
+           # 更安全的做法：仅删除无活跃容器引用的目录
+           ssh node-05 'find /var/log/pods -type d | while read d; do if ! lsof +D "$d" >/dev/null 2>&1; then rm -rf "$d"; fi; done'
+           ```
+         - 短期（24h）：
+           - 配置 kubelet 垃圾回收阈值：`--eviction-hard=memory.available<500Mi,nodefs.available<10%`
+           - 检查并修复 logrotate 配置。
+         - 恢复节点：
+           ```bash
+           kubectl uncordon node-05
+           ```
+
+      5. **预防建议**（15 分）
+         - 配置容器日志轮转（如 Docker/containerd 的 log driver 设置 max-size/max-file）。
+         - 部署日志采集 Agent（Fluent Bit/Promtail）将日志实时外发，减少本地留存。
+         - 设置磁盘使用率告警：80% 警告，90% 紧急。
+         - 对高频创建/删除的 workload（如 CronJob）单独设置资源限制和清理策略。
+
+      6. **沟通质量**（15 分）
+         - 明确告知问题范围（单节点，非集群级）。
+         - 区分紧急清理和长期修复。
+         - 强调清理命令的安全边界（检查活跃引用）。
+         - 给出节点恢复后的验证步骤。
+    type: multi_turn
+    difficulty: L3_advanced
+    cognitive_level: evaluate
+    agent_config:
+      max_turns: 6
+      required_tools: [kubectl, ssh]
+      response_format: text
+    evaluation:
+      rubric_id: "R6-E2E-COMPLETION"
+      scoring_method: llm_as_judge
+      max_score: 100
+      passing_threshold: 75
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-INFRA-NODE"
+      skill_id: "SKILL-NODE-001"
+
+  # ========================================================================
+  # E2E Case 3: 安全事件响应
+  # ========================================================================
+  - id: "benchmark-diagnostic-e2e-v1-0003"
+    question: >
+      【工单描述】
+      "安全团队发现 default namespace 下有个 Pod 在异常连接外网 IP，
+      而且它以 hostNetwork=true 运行。审计日志显示它尝试挂载了 /etc/kubernetes/pki。
+      这是一个什么级别的安全事件？应该怎么处理？"
+
+      【Agent 可用工具】
+      kubectl, audit2rbac, crictl, iptables
+
+      【隐藏上下文】
+      `kubectl get pod suspicious-pod -n default -o yaml` 显示：
+      - hostNetwork: true
+      - hostPath: /etc/kubernetes/pki
+      - 镜像: unknown/external-repo:latest
+      - serviceAccountName: default
+    expected_answer: >
+      **完整端到端处理预期**：
+
+      1. **意图识别**（10 分）
+         - 工单类别：TC-SEC-INCIDENT
+         - 严重程度：P0（最高级安全事件，疑似入侵或供应链攻击）
+         - 关键指标：hostNetwork、敏感目录挂载、外部镜像、异常外连
+
+      2. **信息收集**（15 分）
+         - Pod 配置：hostNetwork=true、hostPath=/etc/kubernetes/pki、外部不可信镜像
+         - 权限：使用 default ServiceAccount（可能有过度的 RBAC 绑定）
+         - 网络行为：异常外连（需进一步收集目标 IP、数据包内容）
+         - 审计日志：确认挂载操作的时间线和执行主体
+
+      3. **根因分析**（20 分）
+         - 事件定性：高度疑似容器逃逸 + 凭证窃取尝试。
+         - 攻击路径推测：
+           1. 攻击者通过供应链污染或镜像漏洞部署了恶意 Pod。
+           2. hostNetwork=true 使其可直接访问节点网络，绕过网络策略。
+           3. hostPath 挂载 /etc/kubernetes/pki 使其可读取集群证书和密钥。
+           4. 若成功，攻击者可伪装成集群组件，获得完全控制权限。
+         - 现有控制失效点：
+           - Pod Security Admission 未阻止 hostNetwork + hostPath 组合。
+           - 外部镜像未经扫描/签名验证即被允许运行。
+           - default SA 可能被过度授权。
+
+      4. **解决方案**（25 分）
+         - 立即遏制（0-15 分钟）：
+           ```bash
+           # 隔离 Pod（阻止网络出口，但保留现场取证）
+           kubectl label pod suspicious-pod -n default network-policy=isolate
+           # 或创建紧急 NetworkPolicy 阻止其所有出口
+           kubectl apply -f - <<EOF
+           apiVersion: networking.k8s.io/v1
+           kind: NetworkPolicy
+           metadata:
+             name: emergency-isolate-suspicious
+             namespace: default
+           spec:
+             podSelector:
+               matchLabels:
+                 app: suspicious-pod
+             policyTypes:
+               - Egress
+             egress: []
+           EOF
+           ```
+           - 不要立即删除 Pod（破坏取证证据）。
+           - 从节点上导出该容器文件系统：`crictl inspect <container-id>` 和 `crictl cp`。
+
+         - 短期修复（1-24h）：
+           - 轮换所有集群证书（/etc/kubernetes/pki 下的内容可能已泄露）。
+           - 检查并撤销可疑的 kubeconfig 和 ServiceAccount Token。
+           - 审查镜像准入策略，启用镜像签名验证（如 Sigstore/cosign）。
+           - 启用/enforce Pod Security Standards（Restrict 级别），禁止 hostNetwork + hostPath。
+
+         - 根因修复（1-7 天）：
+           - 部署 OPA/Gatekeeper 策略：禁止 hostPath、hostNetwork、privileged 的组合。
+           - 实施镜像扫描流水线：所有镜像必须通过 CVE 扫描和签名验证。
+           - 隔离 default ServiceAccount 权限，禁止自动挂载 Token。
+
+      5. **预防建议**（15 分）
+         - 实施零信任网络：默认拒绝所有 Pod 的出口流量，按需开放。
+         - 定期轮换证书和密钥。
+         - 部署 Falco/Tetragon 实时检测异常系统调用（mount、connect 到异常 IP）。
+         - 建立安全事件响应 Runbook，明确遏制→取证→修复→复盘流程。
+
+      6. **沟通质量**（15 分）
+         - 第一时间定性为 P0 安全事件，语气紧迫但不恐慌。
+         - 明确区分"不要删除 Pod"和"先隔离网络"的先后逻辑。
+         - 给出可立即执行的具体命令。
+         - 解释为什么这是凭证窃取尝试（hostPath + pki）。
+         - 提供短期和长期的修复路径。
+    type: multi_turn
+    difficulty: L4_expert
+    cognitive_level: evaluate
+    agent_config:
+      max_turns: 5
+      required_tools: [kubectl]
+      forbidden_tools: [kubectl_delete]
+      response_format: text
+    evaluation:
+      rubric_id: "R6-E2E-COMPLETION"
+      scoring_method: llm_as_judge
+      max_score: 100
+      passing_threshold: 75
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-SEC-INCIDENT"
+      skill_id: "SKILL-SECURITY-001"
+      severity: "P0"

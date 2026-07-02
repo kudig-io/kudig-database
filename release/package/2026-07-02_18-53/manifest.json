@@ -1,0 +1,31 @@
+{
+  "name": "kudig-database-corpus",
+  "version": "2026.07.02",
+  "generated_at": "2026-07-02T18:53:19.635447",
+  "source_vault": "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database",
+  "profile": "rag-full-profile.yaml",
+  "total_pages": 3903,
+  "total_tokens": 12279036,
+  "tier_counts": {
+    "core": 1122,
+    "supporting": 1693,
+    "peripheral": 1088
+  },
+  "qa_pairs": 15094,
+  "supplementary": {
+    "qa_raw_files": 63,
+    "intent_corpus_files": 1,
+    "agent_spec_files": 22,
+    "taxonomy_files": 5
+  },
+  "files": {
+    "corpus": "corpus/",
+    "index": "index.json",
+    "qa": "qa/qa-corpus.jsonl",
+    "qa_raw": "qa/raw/",
+    "intent_corpus": "metadata/intent-corpus/",
+    "agent_specs": "metadata/agent-specs/",
+    "taxonomy": "metadata/taxonomy/",
+    "metadata": "metadata/page-stats.json"
+  }
+}

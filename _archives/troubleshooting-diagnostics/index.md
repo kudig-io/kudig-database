@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_archives/troubleshooting-diagnostics/topic-febm|Topic Febm]]
-- [[_archives/troubleshooting-diagnostics/topic-fta|Topic Fta]]
-- [[_archives/troubleshooting-diagnostics/topic-qa-corpus|Topic Qa Corpus]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting|Topic Structural Trouble Shooting]]
+- [[_archives/troubleshooting-diagnostics/topic-febm/index|Topic Febm]]
+- [[_archives/troubleshooting-diagnostics/topic-fta/index|Topic Fta]]
+- [[_archives/troubleshooting-diagnostics/topic-qa-corpus/index|Topic Qa Corpus]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/index|Topic Structural Trouble Shooting]]
 

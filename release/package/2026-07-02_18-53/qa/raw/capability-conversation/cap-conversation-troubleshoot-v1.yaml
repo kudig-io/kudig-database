@@ -1,0 +1,251 @@
+---
+corpus_id: "cap-conversation-troubleshoot-v1"
+corpus_name: "K8s 故障排查多轮对话 — 交互层测评语料 v1"
+corpus_version: "1.0.0"
+capability_layer: conversation
+domain: troubleshooting
+total_items: 3
+generated_at: "2026-05-21"
+schema_version: "3.0"
+description: >
+  评估 Agent 在多轮对话中保持上下文、主动澄清、逐步引导用户完成故障排查的能力。
+  模拟真实工单处理场景，要求 Agent 展示共情、专业和引导能力。
+authors:
+  - name: KUDIG Team
+    role: maintainer
+source_docs:
+  - "domain-12-troubleshooting/"
+  - "docs/agent-specs/P0-3-session-context-management.md"
+tags: [k8s, multi-turn, conversation, clarification, escalation]
+
+qa_items:
+  # ========================================================================
+  # 多轮对话：信息不足时主动澄清
+  # ========================================================================
+  - id: "cap-conversation-troubleshoot-v1-0001"
+    question: >
+      【第1轮 - 用户输入】
+      "我们的服务挂了，快帮我看看！"
+
+      【测评要求】
+      Agent 的回复需要：
+      1. 安抚用户情绪，确认正在处理
+      2. 识别信息缺口（缺少集群、命名空间、Pod 名称、症状描述）
+      3. 提出不超过 3 个最关键的澄清问题
+      4. 给出用户可立即执行的 1 条快速自检命令
+    variants:
+      - "服务挂了，赶紧处理！"
+      - "production is down, need help ASAP"
+    expected_answer: >
+      Agent 预期回复示例：
+
+      ```
+      我理解您的紧急情况，正在为您排查。为了快速定位问题，我需要确认几个关键信息：
+
+      1. **故障范围**：是特定服务/Deployment 异常，还是整个集群/节点层面出现问题？
+      2. **症状表现**：Pod 状态是什么（如 CrashLoopBackOff、Pending、ImagePullBackOff）？
+         是否有具体的错误日志片段？
+      3. **位置信息**：涉及哪个集群和命名空间（namespace）？
+
+      您可以先执行以下命令快速查看异常 Pod 概览，把结果贴给我：
+      ```bash
+      kubectl get pods --all-namespaces --field-selector=status.phase!=Running,status.phase!=Succeeded
+      ```
+      ```
+
+      **对话策略验证点**：
+      - 没有直接猜测根因（信息不足）。
+      - 问题按优先级排列：范围 → 症状 → 位置。
+      - 提供了立即可执行的命令，让用户有参与感并加速信息收集。
+    type: clarification
+    difficulty: L2_intermediate
+    cognitive_level: understand
+    agent_config:
+      max_turns: 5
+      response_format: text
+    evaluation:
+      rubric_id: "R4-CONVERSATION-QUALITY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "语气专业且安抚用户（如'理解紧急情况'）"
+        - "明确提出澄清问题（不超过 3 个）"
+        - "问题按优先级排列"
+        - "提供 1 条立即可执行的快速诊断命令"
+        - "未在信息不足时盲目猜测根因"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-APP-POD"
+
+  # ========================================================================
+  # 多轮对话：上下文保持与推理引导
+  # ========================================================================
+  - id: "cap-conversation-troubleshoot-v1-0002"
+    question: >
+      【完整对话历史】
+
+      第1轮 - 用户: "payments 命名空间的 api-gateway Pod 反复重启"
+      第1轮 - Agent: [已提供诊断命令]
+
+      第2轮 - 用户: "kubectl get pods 显示 CrashLoopBackOff，
+      kubectl logs 显示 'connection refused to redis-cluster:6379'"
+      第2轮 - Agent: [已分析 Redis 连接失败，建议检查 redis-cluster Service 和 Endpoints]
+
+      第3轮 - 用户: "redis-cluster 的 endpoints 是空的，
+      但 Pod 都在 Running。Service selector 是 app=redis。"
+      第3轮 - Agent: [已指出 selector 可能不匹配，建议检查 Pod labels]
+
+      第4轮 - 用户: "Pod 的 label 是 app=redis-cluster，不是 app=redis。
+      这是昨天部署时改的名称。"
+
+      【第5轮 - 当前测评】
+      Agent 需要基于前 4 轮完整上下文给出最终回复，要求：
+      1. 确认根因：Service selector 与 Pod label 不匹配
+      2. 给出修复方案（kubectl patch 或 edit）
+      3. 提供验证命令
+      4. 给出预防措施（如 label 命名规范或 CI 检查）
+      5. 确认是否还有其他关联问题需要排查
+    expected_answer: >
+      Agent 预期回复示例：
+
+      ```
+      ✅ 根因已确认：Service `redis-cluster` 的 selector `app=redis` 与 Pod 实际 label
+      `app=redis-cluster` 不匹配，导致 EndpointSlice 无法选中 Pod，Endpoints 为空。
+      这解释了 api-gateway 的 `connection refused` 错误。
+
+      **修复方案（二选一）**：
+
+      方案 A：修改 Service selector 匹配现有 Pod label（推荐，改动最小）
+      ```bash
+      kubectl patch service redis-cluster -n payments -p '{"spec":{"selector":{"app":"redis-cluster"}}}'
+      ```
+
+      方案 B：修改 Pod label 匹配 Service selector
+      ```bash
+      kubectl label pods -l app=redis-cluster -n payments app=redis --overwrite
+      # 同时需要更新 Deployment 模板中的 labels，否则重启后标签会恢复
+      kubectl patch deployment redis-cluster -n payments -p '{"spec":{"template":{"metadata":{"labels":{"app":"redis"}}}}}'
+      ```
+
+      **验证**：
+      ```bash
+      kubectl get endpoints redis-cluster -n payments
+      kubectl get endpointslices -n payments -l kubernetes.io/service-name=redis-cluster
+      ```
+
+      **预防措施**：
+      1. 建立 label 命名规范：Service selector 必须与 Deployment template labels 一致。
+      2. 在 CI/CD 中增加校验：部署前检查 Service selector 是否匹配目标工作负载的 labels。
+      3. 使用 Helm/Kustomize 管理 labels，避免手动修改导致的不一致。
+
+      修复后请观察 api-gateway 的 restart 次数是否停止增长：
+      `kubectl get pods -l app=api-gateway -n payments -w`
+
+      还有其他问题需要我协助排查吗？
+      ```
+
+      **上下文保持验证点**：
+      - 引用了所有历史关键信息：payments namespace、api-gateway CrashLoopBackOff、
+        redis-cluster endpoints 为空、label 是 app=redis-cluster。
+      - 将因果链完整呈现：label 不匹配 → Endpoints 为空 → api-gateway 连不上 Redis → CrashLoopBackOff。
+      - 提供了改动最小的修复方案（patch Service）和彻底的修复方案（patch Deployment）。
+    type: multi_turn
+    difficulty: L3_advanced
+    cognitive_level: apply
+    agent_config:
+      max_turns: 5
+      response_format: text
+    evaluation:
+      rubric_id: "R4-CONVERSATION-QUALITY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "完整引用前 4 轮的关键上下文信息"
+        - "建立从 label 不匹配到 Pod 崩溃的完整因果链"
+        - "给出可直接执行的修复命令（kubectl patch）"
+        - "提供验证命令确认修复"
+        - "给出预防措施（规范 + CI 校验）"
+        - "语气专业、鼓励用户反馈"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-APP-SVC"
+
+  # ========================================================================
+  # 升级判断：何时需要人工介入
+  # ========================================================================
+  - id: "cap-conversation-troubleshoot-v1-0003"
+    question: >
+      【场景】
+      Agent 在处理一个工单时，通过多轮对话收集到以下信息：
+      - 集群：production
+      - 症状：3 个 master 节点中的 2 个同时变为 NotReady
+      - etcd 日志显示大量 "took too long" 和 "leader election" 消息
+      - 用户尝试重启了一个 master 节点，但问题未恢复
+      - 用户询问 "我能不能直接重启剩下那个 master？"
+
+      【测评要求】
+      Agent 需要判断：
+      1. 当前情况是否超出 Agent 自主处理范围？
+      2. 是否应建议用户升级（escalation）到人工 SRE？
+      3. 如果建议升级，应给出什么理由和当前已收集的关键信息摘要？
+      4. 如果建议用户不要重启最后一个 master，理由是什么？
+    expected_answer: >
+      Agent 预期回复示例：
+
+      ```
+      ⚠️ **强烈建议立即升级（Escalate）到值班 SRE 团队**。
+
+      **升级理由**：
+      1. **控制平面多数节点故障**：2/3 master 节点 NotReady，etcd 仅剩 1 个节点可运行。
+         若此时再重启最后一个 master，etcd 将完全失去 quorum，集群进入不可恢复状态。
+      2. **用户已执行高风险操作且未恢复**：已重启一个 master 但无效，说明问题可能
+         超出单节点层面（如网络分区、底层存储故障、证书过期等）。
+      3. **Agent 能力边界**：此类控制平面多数故障涉及 etcd 数据一致性、
+         证书链验证、底层基础设施排查，需要人工判断和可能的 etcd 备份恢复操作，
+         不建议通过自动化脚本批量操作。
+
+      **请不要重启最后一个 master**。理由：
+      - 3 节点 etcd 集群需要 2 个节点存活才能维持 quorum（majority = 2）。
+      - 当前仅剩 1 个 master 可能还在运行 etcd，重启后将导致 **完全丢失 quorum**，
+        所有 API 请求失败，已运行的 Pod 虽可继续工作，但无法完成任何调度、扩缩容或故障恢复。
+      - 从仅剩的 etcd 节点导出快照备份是当前最高优先级，重启会破坏最后的机会。
+
+      **已收集信息摘要（请转发给 SRE）**：
+      - 集群：production
+      - 故障：2/3 master NotReady，etcd leader election 频繁
+      - 已执行操作：重启 1 个 master，无效
+      - 风险：剩余 1 个 master 是最后的 quorum 保障
+      - 建议优先操作：从存活 etcd 节点导出 `etcdctl snapshot save`
+
+      值班 SRE 联系方式：[On-call PagerDuty/Slack]。
+      ```
+
+      **升级判断验证点**：
+      - 正确识别多数 master 故障属于 P0 级事件。
+      - 明确建议 escalation 而非继续自助排查。
+      - 清晰解释 etcd quorum 机制和重启风险。
+      - 提供结构化的信息摘要，加速人工接手。
+    type: escalation
+    difficulty: L4_expert
+    cognitive_level: evaluate
+    agent_config:
+      max_turns: 3
+      response_format: text
+    evaluation:
+      rubric_id: "R4-CONVERSATION-QUALITY"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 8
+      check_items:
+        - "明确建议升级到人工 SRE"
+        - "解释 etcd quorum 机制（3 节点需要 2 票）"
+        - "警告不要重启最后一个 master"
+        - "提供已收集信息的结构化摘要"
+        - "给出最高优先级的应急建议（etcd snapshot）"
+        - "语气紧迫但冷静，不引发恐慌"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      ticket_category: "TC-INFRA-CP"
+      severity: "P0"

@@ -689,5 +689,21 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
   - 11 合成页添加跨域关联段落（每页 4 个跨域链接）
   - 总计新增 ~100 个 wikilinks
 
+- [2026-07-02] LINT issues_found=935 orphans=406 broken_links=935 stale=37 lifecycle_issues=4 visibility_issues=2 missing_summary=9 broken_links_fixed=441 stale_refreshed=37
+  - 441 directory-as-wikilink 修复（135 个 index.md 文件）
+  - 37 stale core pages last_updated 刷新至 2026-07-02
+  - topic-index Chinese title 修复（进行中）
+  - 报告: _reports/wiki-lint-2026-07-02.md
+
 
 <!-- risk-assessed -->
+
+- [2026-07-02] MAINTENANCE_CYCLE broken_links=935→0 orphans=406→305 stale_core=37_released lifecycle_fixed=5 pii_sources=2 cross_links_added=20 release_pages=3329 release_qa=15094 release_tokens=11553184
+
+- [2026-07-02] STATUS corpus=3329(core=804,sup=1509,per=1016) vault=5553 orphans=305 broken=0 release_tokens=11553184 qa_pairs=15094 report=_reports/wiki-status-2026-07-02.md
+
+- [2026-07-02] QUALITY_CYCLE sre_export=472pages/1.96M_tokens cross_linker_r2=14files_edited synthesis_added=4(kubernetes-prometheus,kubernetes-etcd,kubernetes-service,service-ingress) release_verified=PASS qa_index_created broken_links=0(vault)+1(_archives,skipped) report=_reports/full-quality-cycle-2026-07-02.md
+
+- [2026-07-02] RELEASE_RESTRUCTURE layout=release/{scripts,package/<DATE_TIME>/} packages=2(18-29+18-40) script_default=auto-timestamp safety_guard=added(vault/release/scripts/package protected) AGENT-USAGE.md=written
+
+- [2026-07-02] CORPUS_V2 profile_update=rag-full-profile.yaml(+synthesis/+topic-dictionary) export=3903pages/12.3M_tokens delta=+574pages/+724K_tokens synthesis=10pages topic_dictionary=564pages tier_counts=core:1122/sup:1693/per:1088 index.md=regenerated AGENT-USAGE.md=updated package=release/package/2026-07-02_18-53/

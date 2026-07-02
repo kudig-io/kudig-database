@@ -21,19 +21,19 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane|Control Plane]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components|Node Components]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking|Networking]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage|Storage]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads|Workloads]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth|Security Auth]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling|Resources Scheduling]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations|Cluster Operations]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider|Cloud Provider]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output|Command Output]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads|Ai Ml Workloads]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops|Gitops Devops]]
-- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability|Monitoring Observability]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting|Control Plane]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting|Node Components]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting|Networking]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting|Storage]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting|Workloads]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/index|Security Auth]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/07-resources-scheduling/index|Resources Scheduling]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting|Cluster Operations]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/09-cloud-provider/index|Cloud Provider]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/index|Command Output]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/index|Ai Ml Workloads]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/index|Gitops Devops]]
+- [[_archives/troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/index|Monitoring Observability]]
 
 ## 文档
 

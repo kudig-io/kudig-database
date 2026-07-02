@@ -1,14 +1,14 @@
 ---
 title: Session Hot Cache
-summary: Session Hot Cache：最近一次活动（2026-06-26）：
+summary: Session Hot Cache：最近一次活动（2026-07-02）：
 category: journal
 tags:
 - session-cache
 - recent-activity
 tier: supporting
 created: '2026-05-23'
-updated: '2026-06-26'
-last_updated: 2026-06-26
+updated: '2026-07-02'
+last_updated: 2026-07-02
 ---
 
 > **生产环境安全提示**
@@ -20,7 +20,19 @@ last_updated: 2026-06-26
 
 # 会话热缓存
 
-最近一次活动（2026-06-26）：
+最近一次活动（2026-07-02）：
+- 维护周期：断链 935→0、孤岛 406→305、陈旧核心 37→0、lifecycle/PII 修复 5
+- Release 重新导出：3329 页 / 11.5M tokens / 15094 QA 对（去重后）
+- **Corpus V2 完整度补全**：profile 新增 `synthesis/`（10 页）+ `topic-dictionary/`（564 页），重新导出 3903 页 / 12.3M tokens（+574 页 / +724K tokens），tier: core=1122 / sup=1693 / per=1088
+- SRE profile 子集导出：472 页 / 1.96M tokens → `release-sre/`
+- Agent 消费指南：`release/AGENT-USAGE.md`（分层加载策略）
+- Cross-linker round 2：14 个文件编辑，非 corpus 孤岛 45→3（-93%）
+- Synthesis 高共现扫描：新增 4 页（Kubernetes×Prometheus/etcd/Service, Service×Ingress）
+- Release 完整性校验：page-stats / index / manifest / QA 全部 PASS，生成 `qa-index.json`
+- Release 目录重构：`release/{scripts, package/<DATE_TIME>/}`，脚本默认按时间戳归档，加安全守卫（保护 vault / release / scripts / package 不被覆盖）
+- 报告：`_reports/full-quality-cycle-2026-07-02.md`
+
+上一次活动（2026-06-26）：
 - 为 _reports 和 ticket-cases 中的 30 个 orphan 页面添加 100 个交叉链接
 - 完成 wiki-lint 全库审计
 - 创建 5 个 synthesis 页面：StatefulSet×云原生存储、Helm×GitOps、SLO×可观测性、容器运行时×镜像安全、工单智能体×RAG

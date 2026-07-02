@@ -10,42 +10,37 @@ created: "2026-06-26"
 updated: "2026-06-26"
 ---
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
 # 语料内容完整度评估报告
 
-> **综合评分**: 89.1/100
+> **综合评分**: 80.2/100
 
 ## 评分维度
 
 | 维度 | 得分 | 说明 |
 |---|---|---|
-| 规模 | 97.6 | 4881 页面，17250K tokens |
-| 结构健康度 | 100.0 | broken links=0, missing frontmatter=0 |
+| 规模 | 100.0 | 9330 页面，34702K tokens |
+| 结构健康度 | 0.0 | broken links=24, missing frontmatter=77 |
 | 概念覆盖度 | 98.0 | 49/50 关键概念 |
-| 工单智能体适配度 | 100.0 | ticket 页=58, QA 对≈0, skill 文档=507 |
-| 阿里云覆盖度 | 39.0 | aliyun 页=18, ack 页=99 |
-| RAG 适配度 | 100.0 | summary=4879, tags=4881, category=4881 |
+| 工单智能体适配度 | 100.0 | ticket 页=121, QA 对≈30193, skill 文档=1468 |
+| 阿里云覆盖度 | 84.3 | aliyun 页=42, ack 页=211 |
+| RAG 适配度 | 99.2 | summary=9249, tags=9253, category=9253 |
 
 ## 规模统计
 
-- **总页面数**: 4881
-- **总字符数**: 69,008,570
-- **估算 Tokens**: 17,250,307
+- **总页面数**: 9330
+- **总字符数**: 138,820,198
+- **估算 Tokens**: 34,701,566
 
 ## 结构健康度
 
-- **Broken links**: 0
-- **Missing frontmatter**: 0
-- **Missing summary**: 2
-- **Missing tier**: 2
-- **Orphans**: 1717
-- **Core pages**: 1099
-- **Supporting pages**: 1330
-- **Peripheral pages**: 2450
+- **Broken links**: 24
+- **Missing frontmatter**: 77
+- **Missing summary**: 81
+- **Missing tier**: 81
+- **Orphans**: 3401
+- **Core pages**: 2163
+- **Supporting pages**: 3548
+- **Peripheral pages**: 3492
 
 ## 内容覆盖度
 
@@ -55,59 +50,57 @@ updated: "2026-06-26"
 
 ## 工单智能体适配度
 
-- **Ticket 相关页面**: 58
-- **估算 QA 对数**: 0
-- **Skill 文档**: 507
+- **Ticket 相关页面**: 121
+- **估算 QA 对数**: 30193
+- **Skill 文档**: 1468
 
 ## 阿里云/专有云覆盖
 
-- **阿里云相关页面**: 18
-- **ACK 相关页面**: 99
+- **阿里云相关页面**: 42
+- **ACK 相关页面**: 211
 
 ## RAG 适配度
 
-- **有 summary**: 4879 / 4881
-- **有 tags**: 4881 / 4881
-- **有 category**: 4881 / 4881
+- **有 summary**: 9249 / 9330
+- **有 tags**: 9253 / 9330
+- **有 category**: 9253 / 9330
 
 ## Top 15 Tags
 
-- `#k8s` — 3718
-- `#release-notes` — 1345
-- `#changelog` — 1325
-- `#prometheus` — 1303
-- `#etcd` — 942
-- `#rag` — 924
-- `#kubelet` — 919
-- `#docker` — 733
-- `#grafana` — 645
-- `#apiserver` — 645
-- `#scheduler` — 641
-- `#operator` — 561
-- `#helm` — 554
-- `#glossary` — 549
-- `#istio` — 394
+- `#k8s` — 5715
+- `#prometheus` — 2385
+- `#etcd` — 1793
+- `#kubelet` — 1779
+- `#rag` — 1370
+- `#release-notes` — 1367
+- `#changelog` — 1327
+- `#apiserver` — 1245
+- `#scheduler` — 1228
+- `#docker` — 1228
+- `#grafana` — 1160
+- `#operator` — 1007
+- `#helm` — 949
+- `#index` — 946
+- `#troubleshooting` — 853
 
 ## Top 15 Categories
 
+- `general` — 1327
 - `release-notes` — 1322
-- `general` — 717
-- `dictionary` — 548
-- `entities` — 284
-- `skills` — 160
-- `learning` — 149
-- `synthesis` — 135
-- `concepts` — 117
-- `structural-troubleshooting` — 72
-- `fta` — 62
-- `moc` — 60
-- `troubleshooting` — 60
-- `domain` — 50
-- `reference` — 45
-- `networking` — 40
+- `index` — 897
+- `entities` — 569
+- `dictionary` — 550
+- `skills` — 362
+- `learning` — 290
+- `synthesis` — 269
+- `concepts` — 231
+- `structural-troubleshooting` — 216
+- `fta` — 185
+- `troubleshooting` — 140
+- `moc` — 122
+- `production-operations` — 106
+- `domain` — 101
 
 ## 评估结论
 
 综合评分达到 **优秀** 水平，语料规模充足、结构健康、覆盖全面，可以作为 llm-wiki 语料导出使用。
-
-<!-- risk-assessed -->

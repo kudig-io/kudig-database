@@ -1,0 +1,499 @@
+domain: domain-13-container-runtime
+total_questions: 103
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Docker 架构概述与核心概念 中, Related 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/01-docker-architecture-overview.md 的「Related」章节。
+  source: domain-13-container-runtime/01-docker/01-docker-architecture-overview.md
+  section: Related
+- type: concept
+  question: 在 Docker 架构概述与核心概念 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/01-docker-architecture-overview.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/01-docker-architecture-overview.md
+  section: See Also
+- type: comparison
+  question: Docker 架构概述与核心概念 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/01-docker-architecture-overview.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/01-docker-architecture-overview.md
+- type: concept
+  question: 在 Docker 镜像管理详解 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/02-docker-images-management.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/02-docker-images-management.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 镜像管理详解 相关的操作: docker manifest inspect nginx:1.25 --verbose?'
+  answer: 参见 domain-13-container-runtime/01-docker/02-docker-images-management.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/02-docker-images-management.md
+  command: docker manifest inspect nginx:1.25 --verbose
+- type: operation
+  question: '如何执行与 Docker 镜像管理详解 相关的操作: export DOCKER_BUILDKIT=1?'
+  answer: 参见 domain-13-container-runtime/01-docker/02-docker-images-management.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/02-docker-images-management.md
+  command: export DOCKER_BUILDKIT=1
+- type: operation
+  question: '如何执行与 Docker 镜像管理详解 相关的操作: docker buildx build --secret id=npmrc,src=$HOME/.npmrc .?'
+  answer: 参见 domain-13-container-runtime/01-docker/02-docker-images-management.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/02-docker-images-management.md
+  command: docker buildx build --secret id=npmrc,src=$HOME/.npmrc .
+- type: comparison
+  question: Docker 镜像管理详解 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/02-docker-images-management.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/02-docker-images-management.md
+- type: concept
+  question: 在 Docker 容器生命周期管理 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: --mount type=bind,source=/host/path,target=/container/path,r?'
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+  command: --mount type=bind,source=/host/path,target=/container/path,readonly
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: docker run -d \?'
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+  command: docker run -d \
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: docker run -d \?'
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+  command: docker run -d \
+- type: troubleshooting
+  question: 如何排查 Docker 容器生命周期管理 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+- type: comparison
+  question: Docker 容器生命周期管理 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/03-docker-container-lifecycle.md
+- type: concept
+  question: 在 Docker 网络深度解析 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker network create \?'
+  answer: 参见 domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md
+  command: docker network create \
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker run -d --network host nginx?'
+  answer: 参见 domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md
+  command: docker run -d --network host nginx
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker run -d --network none myapp?'
+  answer: 参见 domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md
+  command: docker run -d --network none myapp
+- type: comparison
+  question: Docker 网络深度解析 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/04-docker-networking-deep-dive.md
+- type: concept
+  question: 在 Docker 存储与数据卷 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/05-docker-storage-volumes.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/05-docker-storage-volumes.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 存储与数据卷 相关的操作: docker info | grep -i storage?'
+  answer: 参见 domain-13-container-runtime/01-docker/05-docker-storage-volumes.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/05-docker-storage-volumes.md
+  command: docker info | grep -i storage
+- type: operation
+  question: '如何执行与 Docker 存储与数据卷 相关的操作: docker volume create mydata?'
+  answer: 参见 domain-13-container-runtime/01-docker/05-docker-storage-volumes.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/05-docker-storage-volumes.md
+  command: docker volume create mydata
+- type: comparison
+  question: Docker 存储与数据卷 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/05-docker-storage-volumes.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/05-docker-storage-volumes.md
+- type: concept
+  question: 在 Docker Compose 编排 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/06-docker-compose-orchestration.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/06-docker-compose-orchestration.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Docker Compose 编排 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/06-docker-compose-orchestration.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/06-docker-compose-orchestration.md
+- type: concept
+  question: 在 Docker 安全最佳实践 中, 目录 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 的「目录」章节。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  section: 目录
+- type: concept
+  question: 在 Docker 安全最佳实践 中, 容器安全基础 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 的「容器安全基础」章节。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  section: 容器安全基础
+- type: concept
+  question: 在 Docker 安全最佳实践 中, 镜像安全 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 的「镜像安全」章节。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  section: 镜像安全
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: trivy image --severity HIGH,CRITICAL myapp:latest?'
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  command: trivy image --severity HIGH,CRITICAL myapp:latest
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: docker run --user 1000:1000 myapp?'
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  command: docker run --user 1000:1000 myapp
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: docker run --read-only \?'
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+  command: docker run --read-only \
+- type: troubleshooting
+  question: 如何排查 Docker 安全最佳实践 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/07-docker-security-best-practices.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/07-docker-security-best-practices.md
+- type: concept
+  question: 在 Docker 故障排查指南 中, 目录 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 的「目录」章节。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  section: 目录
+- type: concept
+  question: 在 Docker 故障排查指南 中, 诊断方法论 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 的「诊断方法论」章节。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  section: 诊断方法论
+- type: concept
+  question: 在 Docker 故障排查指南 中, 容器启动失败 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 的「容器启动失败」章节。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  section: 容器启动失败
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: docker info?'
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  command: docker info
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: dmesg | grep -i "oom\|killed"?'
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  command: dmesg | grep -i "oom\|killed"
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: docker inspect -f ''{{.State.ExitCode}}'' <container>?'
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+  command: docker inspect -f '{{.State.ExitCode}}' <container>
+- type: troubleshooting
+  question: 如何排查 Docker 故障排查指南 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md
+- type: concept
+  question: 在 Docker 性能监控与调优 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{?'
+  answer: 参见 domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md
+  command: docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}"
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: top -b -n 1 | grep docker?'
+  answer: 参见 domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md
+  command: top -b -n 1 | grep docker
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: curl --unix-socket /var/run/docker.sock http://localhost/inf?'
+  answer: 参见 domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md
+  command: curl --unix-socket /var/run/docker.sock http://localhost/info | jq '.'
+- type: troubleshooting
+  question: 如何排查 Docker 性能监控与调优 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/09-docker-performance-monitoring.md
+- type: concept
+  question: 在 Docker 日志管理与分析 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/10-docker-logging-management.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/10-docker-logging-management.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 日志管理与分析 相关的操作: {?'
+  answer: 参见 domain-13-container-runtime/01-docker/10-docker-logging-management.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/10-docker-logging-management.md
+  command: '{'
+- type: operation
+  question: '如何执行与 Docker 日志管理与分析 相关的操作: docker run \?'
+  answer: 参见 domain-13-container-runtime/01-docker/10-docker-logging-management.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/10-docker-logging-management.md
+  command: docker run \
+- type: troubleshooting
+  question: 如何排查 Docker 日志管理与分析 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/10-docker-logging-management.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/10-docker-logging-management.md
+- type: concept
+  question: 在 Docker 自动化运维与CI/CD集成 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/11-docker-automation-devops.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/11-docker-automation-devops.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker 自动化运维与CI/CD集成 相关的操作: .?'
+  answer: 参见 domain-13-container-runtime/01-docker/11-docker-automation-devops.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/11-docker-automation-devops.md
+  command: .
+- type: troubleshooting
+  question: 如何排查 Docker 自动化运维与CI/CD集成 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/11-docker-automation-devops.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/11-docker-automation-devops.md
+- type: concept
+  question: 在 Java 应用容器化最佳实践指南 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/12-java-containerization-guide.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/12-java-containerization-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Java 应用容器化最佳实践指南 相关的操作: docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}"?'
+  answer: 参见 domain-13-container-runtime/01-docker/12-java-containerization-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/12-java-containerization-guide.md
+  command: docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "temurin|distroless|chainguar
+- type: operation
+  question: '如何执行与 Java 应用容器化最佳实践指南 相关的操作: ./mvnw compile jib:dockerBuild?'
+  answer: 参见 domain-13-container-runtime/01-docker/12-java-containerization-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/01-docker/12-java-containerization-guide.md
+  command: ./mvnw compile jib:dockerBuild
+- type: troubleshooting
+  question: 如何排查 Java 应用容器化最佳实践指南 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/12-java-containerization-guide.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/12-java-containerization-guide.md
+- type: comparison
+  question: Java 应用容器化最佳实践指南 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/01-docker/12-java-containerization-guide.md 中的对比分析。
+  source: domain-13-container-runtime/01-docker/12-java-containerization-guide.md
+- type: concept
+  question: 在 Docker 命令大全参考 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/01-docker/99-docker-commands-reference.md 的「See Also」章节。
+  source: domain-13-container-runtime/01-docker/99-docker-commands-reference.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Docker 命令大全参考 相关的故障?
+  answer: 参见 domain-13-container-runtime/01-docker/99-docker-commands-reference.md 的故障排查章节。
+  source: domain-13-container-runtime/01-docker/99-docker-commands-reference.md
+- type: concept
+  question: 在 Harbor企业级容器镜像仓库深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md
+  section: See Also
+- type: concept
+  question: 在 Docker Registry企业级镜像分发深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/02-docker-registry-enterprise-distribution.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/02-docker-registry-enterprise-distribution.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Docker Registry企业级镜像分发深度实践 相关的操作: echo "Generating cosign keys..."?'
+  answer: 参见 domain-13-container-runtime/02-image-management/02-docker-registry-enterprise-distribution.md 中的操作步骤。
+  source: domain-13-container-runtime/02-image-management/02-docker-registry-enterprise-distribution.md
+  command: echo "Generating cosign keys..."
+- type: concept
+  question: 在 JFrog Artifactory Enterprise Container Registry Platform 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/03-jfrog-artifactory-enterprise.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/03-jfrog-artifactory-enterprise.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 JFrog Artifactory Enterprise Container Registry Platform 相关的故障?
+  answer: 参见 domain-13-container-runtime/02-image-management/03-jfrog-artifactory-enterprise.md 的故障排查章节。
+  source: domain-13-container-runtime/02-image-management/03-jfrog-artifactory-enterprise.md
+- type: concept
+  question: 在 Harbor企业级镜像安全扫描深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/04-harbor-enterprise-security-scanning.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/04-harbor-enterprise-security-scanning.md
+  section: See Also
+- type: concept
+  question: 在 Quay Container Registry 企业级镜像管理深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/04-quay-enterprise-registry.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/04-quay-enterprise-registry.md
+  section: See Also
+- type: concept
+  question: 在 GitLab Container Registry Enterprise 深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/05-gitlab-container-registry-enterprise.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/05-gitlab-container-registry-enterprise.md
+  section: See Also
+- type: operation
+  question: '如何执行与 GitLab Container Registry Enterprise 深度实践 相关的操作: openssl req -x509 -nodes -days 365 -newkey rsa:2048 \?'
+  answer: 参见 domain-13-container-runtime/02-image-management/05-gitlab-container-registry-enterprise.md 中的操作步骤。
+  source: domain-13-container-runtime/02-image-management/05-gitlab-container-registry-enterprise.md
+  command: openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+- type: concept
+  question: 在 Amazon ECR (Elastic Container Registry) Enterprise 深度实践 中, See Also 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/06-amazon-ecr-enterprise.md 的「See Also」章节。
+  source: domain-13-container-runtime/02-image-management/06-amazon-ecr-enterprise.md
+  section: See Also
+- type: concept
+  question: 在 Harbor 企业级镜像仓库部署指南 中, 目录 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md 的「目录」章节。
+  source: domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md
+  section: 目录
+- type: concept
+  question: 在 Harbor 企业级镜像仓库部署指南 中, 架构设计 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md 的「架构设计」章节。
+  source: domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md
+  section: 架构设计
+- type: concept
+  question: 在 Harbor 企业级镜像仓库部署指南 中, Helm 部署 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md 的「Helm 部署」章节。
+  source: domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md
+  section: Helm 部署
+- type: concept
+  question: 在 Harbor 企业级镜像仓库部署指南 中, 高可用配置 是什么?
+  answer: 参见 domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md 的「高可用配置」章节。
+  source: domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md
+  section: 高可用配置
+- type: operation
+  question: '如何执行与 Harbor 企业级镜像仓库部署指南 相关的操作: helm repo add harbor https://helm.goharbor.io?'
+  answer: 参见 domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md 中的操作步骤。
+  source: domain-13-container-runtime/02-image-management/99-harbor-enterprise-guide.md
+  command: helm repo add harbor https://helm.goharbor.io
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的「核心项目」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, 运行时对比 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的「运行时对比」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+  section: 运行时对比
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, CNCF Sandbox 申请动态 (KubeCon NA 2024) 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的「CNCF Sandbox
+    申请动态 (KubeCon NA 2024)」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+  section: CNCF Sandbox 申请动态 (KubeCon NA 2024)
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的「参考链接」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的「Obsidian 相关文档」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+  section: Obsidian 相关文档
+- type: troubleshooting
+  question: 如何排查 Domain-13 Docker — 开源项目索引 相关的故障?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 的故障排查章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+- type: comparison
+  question: Domain-13 Docker — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md 中的对比分析。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-13.md
+- type: concept
+  question: 在 Domain-22 容器镜像管理 — 开源项目索引 中, 目录 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md 的「目录」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md
+  section: 目录
+- type: concept
+  question: 在 Domain-22 容器镜像管理 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md 的「核心项目总览」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md
+  section: 核心项目总览
+- type: concept
+  question: 在 Domain-22 容器镜像管理 — 开源项目索引 中, Harbor (CNCF Graduated) 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md 的「Harbor (CNCF
+    Graduated)」章节。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md
+  section: Harbor (CNCF Graduated)
+- type: comparison
+  question: Domain-22 容器镜像管理 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md 中的对比分析。
+  source: domain-13-container-runtime/98-merged-indexes/00-open-source-projects-index-from-domain-22.md
+- type: concept
+  question: 在 domain-13-docker MOC 中, 领域概述 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md 的「领域概述」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-13-docker MOC 中, 文档清单 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md 的「文档清单」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-13-docker MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md 的「知识图谱」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-13-docker MOC 中, 关联入口 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md 的「关联入口」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-13-docker MOC 相关的故障?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md 的故障排查章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-13.md
+- type: concept
+  question: 在 domain-22-container-image-management MOC 中, 领域概述 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md 的「领域概述」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-22-container-image-management MOC 中, 文档清单 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md 的「文档清单」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-22-container-image-management MOC 中, 知识图谱 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md 的「知识图谱」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-22-container-image-management MOC 中, 关联入口 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md 的「关联入口」章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-22-container-image-management MOC 相关的故障?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md 的故障排查章节。
+  source: domain-13-container-runtime/98-merged-indexes/MOC-from-domain-22.md
+- type: concept
+  question: 在 Docker 容器技术深度解析 中, 概述 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 的「概述」章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+  section: 概述
+- type: concept
+  question: 在 Docker 容器技术深度解析 中, 文档目录 是什么?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 的「文档目录」章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+  section: 文档目录
+- type: operation
+  question: '如何执行与 Docker 容器技术深度解析 相关的操作: Ubuntu 20.04+/22.04+?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 中的操作步骤。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+  command: Ubuntu 20.04+/22.04+
+- type: operation
+  question: '如何执行与 Docker 容器技术深度解析 相关的操作: curl -fsSL https://get.docker.com -o get-docker.sh?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 中的操作步骤。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+  command: curl -fsSL https://get.docker.com -o get-docker.sh
+- type: operation
+  question: '如何执行与 Docker 容器技术深度解析 相关的操作: docker --version?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 中的操作步骤。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+  command: docker --version
+- type: troubleshooting
+  question: 如何排查 Docker 容器技术深度解析 相关的故障?
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md 的故障排查章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-13.md
+- type: concept
+  question: '在 Domain 22: 容器镜像管理 (Container Image Management) 中, 领域概述 是什么?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md 的「领域概述」章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md
+  section: 领域概述
+- type: concept
+  question: '在 Domain 22: 容器镜像管理 (Container Image Management) 中, 文档目录 是什么?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md 的「文档目录」章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md
+  section: 文档目录
+- type: concept
+  question: '在 Domain 22: 容器镜像管理 (Container Image Management) 中, 学习路径建议 是什么?'
+  answer: 参见 domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md 的「学习路径建议」章节。
+  source: domain-13-container-runtime/98-merged-indexes/README-from-domain-22.md
+  section: 学习路径建议

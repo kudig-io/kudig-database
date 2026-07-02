@@ -1,0 +1,143 @@
+---
+title: 生产环境日常巡检与值班手册
+summary: 生产环境日常巡检与值班手册：生产环境的稳定性直接决定业务的可用性。作为远程顾问，我们需要建立标准化的巡检清单和值班响应机制，帮助客户在生产环境中主动发现问题、快速响应异常。
+category: domain-11
+tags:
+- domain-11
+- SRE
+- 运维
+- 巡检
+- 值班
+- 变更管理
+- visibility/public
+tier: core
+sources:
+- KUDIG Gap Analysis 2026-05-21
+created: 2026-05-21
+updated: 2026-05-21
+last_updated: 2026-05-21
+status: reviewed
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# 生产环境日常巡检与值班手册
+
+## 概述
+
+生产环境的稳定性直接决定业务的可用性。作为远程顾问，我们需要建立标准化的巡检清单和值班响应机制，帮助客户在生产环境中主动发现问题、快速响应异常。
+
+## 日常巡检清单
+
+### 节点巡检
+
+| 检查项 | 命令/方法 | 正常标准 |
+|---|---|---|
+| 节点状态 | `kubectl get nodes` | All Ready |
+| 资源使用率 | `kubectl top nodes` | CPU < 80%，内存 < 85% |
+| 磁盘空间 | `df -h` | 根分区 < 80% |
+| 系统负载 | `uptime` | load < CPU 核数 × 2 |
+| 节点条件 | `kubectl describe node` | 无 DiskPressure、MemoryPressure |
+
+### Pod 巡检
+
+| 检查项 | 命令/方法 | 正常标准 |
+|---|---|---|
+| Pod 状态分布 | `kubectl get pods -A` | 无 CrashLoopBackOff、Error |
+| 重启计数 | `kubectl get pods -A -o wide` | Restart Count < 3 |
+| 资源使用 | `kubectl top pods -A` | 无资源耗尽 |
+| 事件告警 | `kubectl get events --sort-by='.lastTimestamp'` | 无频繁 Warning |
+
+### 存储巡检
+
+- PVC 使用率：通过 [[persistent-volume-claim]] 检查绑定状态
+- StorageClass 状态：确认 provisioner 正常运行
+- 快照策略：检查备份任务执行历史
+
+### 网络巡检
+
+- Service 端点健康：确认 Endpoints 与 Pod 数量一致
+- Ingress 状态：检查 TLS 证书有效期
+- CoreDNS 响应：测试集群内部 DNS 解析延迟
+
+## 值班手册结构
+
+### 告警响应分级
+
+| 级别 | 响应时间 | 升级路径 | 典型场景 |
+|---|---|---|---|
+| P0 | 5分钟内 | 立即通知值班负责人 + 团队负责人 | 集群不可用、核心服务中断 |
+| P1 | 15分钟内 | 通知值班负责人 | 部分服务降级、节点异常 |
+| P2 | 30分钟内 | 记录并安排处理 | 非核心功能异常、资源预警 |
+
+### 告警响应流程
+
+1. **确认告警**：核实告警真实性，排除误报
+2. **初步判断**：根据现象定位问题域（节点/Pod/网络/存储）
+3. **信息收集**：收集日志、指标、事件，联系相关团队
+4. **决策执行**：根据预案执行回滚或修复操作
+5. **事后复盘**：记录根因，更新 [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide.md|postmortem]] 和 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
+
+## 变更管理流程
+
+### 变更窗口
+
+| 变更类型 | 窗口要求 | 审批层级 |
+|---|---|---|
+| 配置变更 | 任意时间 | 团队负责人 |
+| 版本升级 | 低峰期 | 架构师 + 运维负责人 |
+| 扩缩容 | 任意时间 | 自动化审批 |
+| 架构调整 | 预定维护窗口 | 技术总监 |
+
+### 灰度验证
+
+- 金丝雀发布：先灰度 1% 流量，观察 15 分钟
+- 蓝绿部署：并行部署，切换前做健康检查
+- 回滚预案：确保回滚命令已验证，回滚时间 < 5 分钟
+
+## 阿里云 ACK 特定巡检
+
+### 节点池巡检
+
+- 节点池状态：`ack-node-pool` 检查扩容/缩容状态
+- 组件版本：确认 kube-proxy、CoreDNS 版本与 ACK 推荐版本一致
+- 费用监控：检查按量付费节点资源利用率，识别闲置节点
+
+### 组件升级检查
+
+- 阿里云组件升级公告订阅
+- 升级前在测试集群验证兼容性
+- 升级后检查 [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本匹配
+
+## 远程顾问指导要点
+
+作为远程顾问，无法直连集群，需通过以下方式指导现场执行：
+
+1. **结构化提问**：按巡检清单逐项询问结果，避免遗漏
+2. **输出审核**：要求客户提供命令输出截图或文本，逐项审核
+3. **变更方案评审**：要求客户提交变更方案文档，包含：
+   - 变更范围与影响分析
+   - 回滚步骤（每一步需验证命令）
+   - 验证方法与通过标准
+4. **应急预案**：确认客户已演练回滚操作，而非仅书面记录
+
+> 远程顾问应建立标准话术模板，将巡检清单转化为可执行的对话流程，确保每次指导的一致性。
+
+## 相关链接
+
+- [[node-notready]] — 节点异常的排查方法
+- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
+- [[domain-11-production-operations/02-change-management-guide.md|change-management-guide]] — 变更管理的详细流程
+- [[domain-11-production-operations/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub
+
+
+<!-- risk-assessed -->
