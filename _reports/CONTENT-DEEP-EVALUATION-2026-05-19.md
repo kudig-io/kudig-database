@@ -75,11 +75,11 @@ prerequisites:
 
 | 文档 | 深度 | 代码 | 架构图 | 版本 | 最佳实践 |
 |------|------|------|--------|------|----------|
-| domain-11-production-operations 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-10-troubleshooting-diagnostics 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-04-storage-data 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
-| domain-19-landscape-references kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
-| domain-19-landscape-references koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
+| 生产运维 跨区域容灾 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| 故障诊断 大规模集群 | 8/10 | ✅ | ✅ | ✅ | ✅ |
+| 存储 存储备份灾备 | 9/10 | ✅ | ✅ | ✅ | ✅ |
+| 生态参考 kube-burner | 7/10 | ✅ | ✅ | ⚠️ | ⚠️ |
+| 生态参考 koordinator | 8/10 | ✅ | ✅ | ⚠️ | ✅ |
 
 **发现**: Sandbox CNCF 项目文档偏概述性, 缺少生产案例和性能基准数据。
 

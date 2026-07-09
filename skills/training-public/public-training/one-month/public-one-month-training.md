@@ -76,12 +76,12 @@ audience:
   - 开发工程师转型
 estimated_read_time: 15min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|README]]
+  - 生产运维/topic-learn/quick-start
+  - 生产运维/topic-learn/public-training/[[存储/README.md|README]]
 id: PUBLIC-TRAINING-BOOT-001
 topic: training
 type: landing-page
@@ -368,7 +368,7 @@ GitOps          ❌ 手动 kubectl apply    ✅ ArgoCD 全自动部署
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

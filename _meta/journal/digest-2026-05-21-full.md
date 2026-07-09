@@ -122,61 +122,61 @@ prerequisites:
 
 | 领域 | 文档数 | 主题 |
 |---|---|---|
-| domain-01-cluster-fundamentals 架构基础 | 35 | K8s 架构分层、组件关系、集群拓扑 |
-| domain-01-cluster-fundamentals 设计原则 | 22 | 声明式 API、控制循环、最终一致性、Watch 机制 |
-| domain-01-cluster-fundamentals 控制平面 | 39 | API Server、etcd、Scheduler、Controller Manager、Cloud Controller |
-| domain-02-workloads-applications 工作负载 | 30 | Pod、Deployment、StatefulSet、DaemonSet、Job、HPA |
-| domain-03-networking-traffic 网络 | 57 | [[cni|cni]]、Service、Ingress、DNS、NetworkPolicy、负载均衡 |
-| domain-04-storage-data 存储 | 21 | PV/PVC/StorageClass、CSI、OverlayFS、快照、数据迁移 |
-| domain-05-security-compliance 安全 | 24 | RBAC、准入控制、Pod 安全、Secret 管理、审计 |
-| domain-06-observability 可观测性 | 35 | Prometheus、Grafana、日志聚合、分布式追踪、告警 |
+| 集群基础 架构基础 | 35 | K8s 架构分层、组件关系、集群拓扑 |
+| 集群基础 设计原则 | 22 | 声明式 API、控制循环、最终一致性、Watch 机制 |
+| 集群基础 控制平面 | 39 | API Server、etcd、Scheduler、Controller Manager、Cloud Controller |
+| 工作负载 工作负载 | 30 | Pod、Deployment、StatefulSet、DaemonSet、Job、HPA |
+| 网络 网络 | 57 | [[cni|cni]]、Service、Ingress、DNS、NetworkPolicy、负载均衡 |
+| 存储 存储 | 21 | PV/PVC/StorageClass、CSI、OverlayFS、快照、数据迁移 |
+| 安全 安全 | 24 | RBAC、准入控制、Pod 安全、Secret 管理、审计 |
+| 可观测性 可观测性 | 35 | Prometheus、Grafana、日志聚合、分布式追踪、告警 |
 
 ### 平台运维（6 域，129 篇）
 
 | 领域 | 文档数 | 主题 |
 |---|---|---|
-| domain-07-platform-engineering 平台运维 | 31 | 集群生命周期、升级策略、多集群管理、成本优化 |
-| domain-15-specialized-tech 扩展生态 | 22 | CRD、Operator、Aggregated API、Webhook、调度器扩展 |
-| domain-11-production-operations 生产运维 | 34 | 最佳实践、变更管理、容量规划、SLA/SLO/SLI |
-| domain-06-observability 企业监控告警 | 15 | 告警规则、值班轮转、事件管理、根因分析 |
-| domain-06-observability 日志管理分析 | 12 | EFK/PLG、日志采集、结构化日志、合规审计 |
-| domain-07-platform-engineering 平台工程 | 15 | IDP、开发者门户、自助服务、平台即产品 |
+| 平台工程 平台运维 | 31 | 集群生命周期、升级策略、多集群管理、成本优化 |
+| 专项技术 扩展生态 | 22 | CRD、Operator、Aggregated API、Webhook、调度器扩展 |
+| 生产运维 生产运维 | 34 | 最佳实践、变更管理、容量规划、SLA/SLO/SLI |
+| 可观测性 企业监控告警 | 15 | 告警规则、值班轮转、事件管理、根因分析 |
+| 可观测性 日志管理分析 | 12 | EFK/PLG、日志采集、结构化日志、合规审计 |
+| 平台工程 平台工程 | 15 | IDP、开发者门户、自助服务、平台即产品 |
 
 ### 云原生生态（10 域，405 篇）
 
 | 领域 | 文档数 | 主题 |
 |---|---|---|
 | domain-13-[[container-runtime]] Docker | 16 | Docker 架构、镜像构建、安全扫描、多阶段构建 |
-| domain-17-system-foundation Linux | 13 | 命名空间、cgroup、文件系统、内核调优 |
-| domain-03-networking-traffic 镜像管理 | 11 | 镜像仓库、Harbor、签名、SBOM、漏洞扫描 |
-| domain-08-release-change-management GitOps/CI-CD | 15 | [[argo|argo]]CD、Flux、Tekton、渐进式交付、Git 工作流 |
-| domain-08-release-change-management IaC | 9 | Terraform、Pulumi、Crossplane、配置漂移检测 |
-| domain-05-security-compliance 云原生安全 | 18 | 零信任、OPA/Kyverno、运行时安全、密钥管理 |
-| domain-03-networking-traffic 服务网格 | 16 | Istio、[[envoy|Envoy]]、mTLS、流量管理、可观测性 |
-| domain-19-landscape-references CNCF 全景 | **236** | CNCF 毕业/孵化/沙箱项目全覆盖 |
-| domain-05-security-compliance 供应链安全 | 14 | SBOM、签名验证、SLSA、漏洞管理 |
-| domain-03-networking-traffic API 网关 | 18 | APISIX、Kong、Envoy Gateway、限流、认证 |
+| 系统基础 Linux | 13 | 命名空间、cgroup、文件系统、内核调优 |
+| 网络 镜像管理 | 11 | 镜像仓库、Harbor、签名、SBOM、漏洞扫描 |
+| 发布变更 GitOps/CI-CD | 15 | [[argo|argo]]CD、Flux、Tekton、渐进式交付、Git 工作流 |
+| 发布变更 IaC | 9 | Terraform、Pulumi、Crossplane、配置漂移检测 |
+| 安全 云原生安全 | 18 | 零信任、OPA/Kyverno、运行时安全、密钥管理 |
+| 网络 服务网格 | 16 | Istio、[[envoy|Envoy]]、mTLS、流量管理、可观测性 |
+| 生态参考 CNCF 全景 | **236** | CNCF 毕业/孵化/沙箱项目全覆盖 |
+| 安全 供应链安全 | 14 | SBOM、签名验证、SLSA、漏洞管理 |
+| 网络 API 网关 | 18 | APISIX、Kong、Envoy Gateway、限流、认证 |
 
 ### 高级主题（14 域，263 篇）
 
 | 领域 | 文档数 | 主题 |
 |---|---|---|
-| domain-14-ai-ml-infra AI 基础设施 | 41 | GPU 调度、模型服务、分布式训练、推理优化 |
-| domain-10-troubleshooting-diagnostics 故障排查 | 51 | 系统化排查方法、日志分析、性能调优 |
-| domain-03-networking-traffic 网络基础 | 10 | TCP/IP 协议栈、路由、交换、负载均衡 |
-| domain-04-storage-data 存储基础 | 9 | 块存储、文件存储、对象存储、存储性能 |
-| domain-12-cloud-providers 云厂商指南 | 26 | 阿里云 ACK、AWS EKS、Azure AKS、GCP GKE |
-| domain-19-landscape-references 技术论文 | 29 | K8s 高级技术论文、最佳实践白皮书 |
-| domain-12-cloud-providers 多云混合云 | 13 | 多云管理、混合云架构、集群联邦 |
-| domain-16-database-middleware 数据库中间件 | 12 | MySQL/PostgreSQL on K8s、Redis、消息队列 |
-| domain-08-release-change-management 自动化测试 | 8 | E2E 测试、混沌工程、性能测试、合规测试 |
-| domain-09-reliability-engineering 灾备连续性 | 12 | 备份恢复、跨区容灾、RPO/RTO、故障切换 |
-| domain-17-system-foundation 硬件基础设施 | 21 | 服务器、GPU、网卡、NVMe、DPU/SmartNIC |
-| domain-18-manifests-patterns YAML 参考 | 39 | K8s YAML 配置完整参考手册 |
-| domain-17-system-foundation Events 事件 | 18 | K8s 全域事件分类与诊断 |
-| domain-03-networking-traffic eBPF | 13 | eBPF 编程模型、Cilium、Tetragon |
-| domain-15-specialized-tech 边缘计算 | 14 | KubeEdge、边缘节点管理、边缘自治 |
-| domain-15-specialized-tech WebAssembly | 14 | Wasm 运行时、Spin、containerd-wasm |
+| AI基础设施 AI 基础设施 | 41 | GPU 调度、模型服务、分布式训练、推理优化 |
+| 故障诊断 故障排查 | 51 | 系统化排查方法、日志分析、性能调优 |
+| 网络 网络基础 | 10 | TCP/IP 协议栈、路由、交换、负载均衡 |
+| 存储 存储基础 | 9 | 块存储、文件存储、对象存储、存储性能 |
+| 云厂商 云厂商指南 | 26 | 阿里云 ACK、AWS EKS、Azure AKS、GCP GKE |
+| 生态参考 技术论文 | 29 | K8s 高级技术论文、最佳实践白皮书 |
+| 云厂商 多云混合云 | 13 | 多云管理、混合云架构、集群联邦 |
+| 数据库中间件 数据库中间件 | 12 | MySQL/PostgreSQL on K8s、Redis、消息队列 |
+| 发布变更 自动化测试 | 8 | E2E 测试、混沌工程、性能测试、合规测试 |
+| 可靠性 灾备连续性 | 12 | 备份恢复、跨区容灾、RPO/RTO、故障切换 |
+| 系统基础 硬件基础设施 | 21 | 服务器、GPU、网卡、NVMe、DPU/SmartNIC |
+| 清单模式 YAML 参考 | 39 | K8s YAML 配置完整参考手册 |
+| 系统基础 Events 事件 | 18 | K8s 全域事件分类与诊断 |
+| 网络 eBPF | 13 | eBPF 编程模型、Cilium、Tetragon |
+| 专项技术 边缘计算 | 14 | KubeEdge、边缘节点管理、边缘自治 |
+| 专项技术 WebAssembly | 14 | Wasm 运行时、Spin、containerd-wasm |
 
 ---
 
@@ -234,18 +234,18 @@ prerequisites:
 
 | 源域 | 目标域 | 链接数 | 含义 |
 |---|---|---|---|
-| domain-10-troubleshooting-diagnostics 故障排查 | topic-fta | **144** | 故障排查方法论全面引用 FTA 故障树 |
+| 故障诊断 故障排查 | topic-fta | **144** | 故障排查方法论全面引用 FTA 故障树 |
 | topic-scenarios | (多域) | 89 | 场景导航链接到各领域 |
-| domain-17-system-foundation 硬件 | topic-fta | 21 | 硬件问题也用 FTA 分析 |
-| domain-03-networking-traffic 网络 | topic-fta | 17 | 网络问题用 FTA 定位 |
-| domain-06-observability 可观测性 | topic-fta | 6 | 监控告警触发 FTA 诊断 |
+| 系统基础 硬件 | topic-fta | 21 | 硬件问题也用 FTA 分析 |
+| 网络 网络 | topic-fta | 17 | 网络问题用 FTA 定位 |
+| 可观测性 可观测性 | topic-fta | 6 | 监控告警触发 FTA 诊断 |
 | topic-结构化排查 | topic-fta | 10 | 排查框架引用 FTA |
-| domain-04-storage-data 存储 | topic-fta | 3 | 存储问题 FTA |
-| domain-02-workloads-applications 工作负载 | topic-fta | 3 | 工作负载问题 FTA |
-| domain-07-platform-engineering 平台运维 | topic-fta | 3 | 平台运维引用 FTA |
-| domain-05-security-compliance 安全 | (多域) | 3 | 安全领域交叉引用 |
+| 存储 存储 | topic-fta | 3 | 存储问题 FTA |
+| 工作负载 工作负载 | topic-fta | 3 | 工作负载问题 FTA |
+| 平台工程 平台运维 | topic-fta | 3 | 平台运维引用 FTA |
+| 安全 安全 | (多域) | 3 | 安全领域交叉引用 |
 
-**关键发现**：FTA 是整个知识库的跨域枢纽——144 条从 domain-10-troubleshooting-diagnostics 到 topic-fta 的链接说明故障排查方法论完全建立在 FTA 框架之上。
+**关键发现**：FTA 是整个知识库的跨域枢纽——144 条从 故障诊断 到 topic-fta 的链接说明故障排查方法论完全建立在 FTA 框架之上。
 
 ### Wiki 页面链接网络（Top Hub 页面）
 
@@ -271,17 +271,17 @@ prerequisites:
 | apiserver-fta | API Server 异常 |
 | etcd-fta | etcd 异常 |
 | scheduler-fta | 调度器异常 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|controller-manager-fta]] | 控制器管理器异常 |
+| [[故障诊断/topic-fta/list/controller-manager-fta.md|controller-manager-fta]] | 控制器管理器异常 |
 | kubelet-fta | Kubelet 异常 |
 | calico-fta | Calico CNI 问题 |
 | cilium-fta | Cilium eBPF 问题 |
 | dns-fta | DNS 问题 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]] | Ingress 问题 |
+| [[故障诊断/topic-fta/list/ingress-fta.md|ingress-fta]] | Ingress 问题 |
 | storage-fta | 存储问题 |
 | certificate-fta | 证书异常 |
 | backup-restore-fta | 备份恢复异常 |
 | cluster-upgrade-fta | 集群升级异常 |
-| [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
+| [[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
 | [[skills/cloud-provider-fta.md|cloud-provider-fta]] | 云平台集成异常 |
 | ... | （共 44 棵） |
 
@@ -373,10 +373,10 @@ topic-application-architecture 包含 96 个完整的 K8s 生产架构设计文�
 
 | 页面 | 原因 |
 |---|---|
-| domain-10-troubleshooting-diagnostics | FTA 跨域链接的核心枢纽（144 条引用），确保方法论准确 |
-| domain-10-troubleshooting-diagnostics/topic-fta/list/ | 44 棵故障树是整个知识库的操作核心，需逐一验证 |
-| domain-19-landscape-references | 236 个 CNCF 项目是最大单域，确保覆盖度和准确性 |
-| domain-20-application-patterns/topic-application-architecture/ | 96 个行业模式需检查是否与最新阿里云产品对齐 |
+| 故障诊断 | FTA 跨域链接的核心枢纽（144 条引用），确保方法论准确 |
+| 故障诊断/topic-fta/list/ | 44 棵故障树是整个知识库的操作核心，需逐一验证 |
+| 生态参考 | 236 个 CNCF 项目是最大单域，确保覆盖度和准确性 |
+| 应用模式/topic-application-architecture/ | 96 个行业模式需检查是否与最新阿里云产品对齐 |
 | concepts/kubernetes-architecture-overview | Wiki 主枢纽（59 入链），所有页面依赖它 |
 
 ---

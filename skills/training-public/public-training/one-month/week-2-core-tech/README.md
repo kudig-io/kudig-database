@@ -93,10 +93,10 @@ audience:
   - developer
 estimated_read_time: 30min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 存储
 related_topics:
   - kubernetes
   - control-plane
@@ -104,8 +104,8 @@ related_topics:
   - networking
   - storage
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-devops-toolchain/README.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/README.md
+  - 生产运维/topic-learn/public-training/one-month/week-3-devops-toolchain/README.md
 ---
 ```
 
@@ -386,39 +386,39 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 
 ## 延伸阅读
 
-- [etcd 深入](../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md)
-- [API Server 深入](../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md)
-- [Scheduler 深入](../../domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md)
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
-- [StatefulSet 高级操作](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
-- [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [Ingress 基础](../../domain-03-networking-traffic/19-ingress-fundamentals.md)
-- [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
-- [StorageClass 动态供给](../../domain-04-storage-data/04-storageclass-dynamic-provisioning.md)
+- [etcd 深入](../../集群基础/11-etcd-deep-dive.md)
+- [API Server 深入](../../集群基础/12-apiserver-deep-dive.md)
+- [Scheduler 深入](../../集群基础/20-kube-scheduler-deep-dive.md)
+- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
+- [StatefulSet 高级操作](../../工作负载/03-statefulset-advanced-operations.md)
+- [网络架构总览](../../网络/01-network-architecture-overview.md)
+- [Service 概念与类型](../../网络/06-service-concepts-types.md)
+- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
+- [存储架构总览](../../存储/01-storage-architecture-overview.md)
+- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -66,7 +66,7 @@ prerequisites:
 
 - **实体页面**: [[prometheus|Prometheus]]
 - **最新版本**: v3.11
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/observability/prometheus/`
+- **发布说明目录**: `生态参考/_archived-release-notes/observability/prometheus/`
 - **版本覆盖**: v0.11 → v3.11（87 个版本）
 - **Breaking Changes 提醒**:
   - v3.7: 追踪相关修复（OTLP HTTP 追踪启动失败）
@@ -76,7 +76,7 @@ prerequisites:
 
 - **实体页面**: Grafana
 - **最新版本**: v12.4
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/observability/grafana/`
+- **发布说明目录**: `生态参考/_archived-release-notes/observability/grafana/`
 - **版本覆盖**: v0.1 → v12.4（71 个版本）
 - **升级要点**: v10+ 引入 Scenes 框架，v11+ 默认启用新仪表盘引擎
 
@@ -84,7 +84,7 @@ prerequisites:
 
 - **实体页面**: Loki
 - **最新版本**: v3.7
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/observability/loki/`
+- **发布说明目录**: `生态参考/_archived-release-notes/observability/loki/`
 - **版本覆盖**: v0.1 → v3.7（29 个版本）
 - **Breaking Changes 提醒**:
   - v3.2: 存储格式变更，需迁移现有索引
@@ -94,7 +94,7 @@ prerequisites:
 
 - **实体页面**: [[thanos|Thanos]]
 - **最新版本**: v0.41
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/observability/thanos/`
+- **发布说明目录**: `生态参考/_archived-release-notes/observability/thanos/`
 - **版本覆盖**: v0.1 → v0.41（41 个版本）
 - **Breaking Changes 提醒**:
   - v0.41: 部分查询 API 行为变更
@@ -104,7 +104,7 @@ prerequisites:
 
 - **实体页面**: [[opentelemetry|OpenTelemetry Collector]]
 - **最新版本**: v0.149
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/observability/opentelemetry-collector/`
+- **发布说明目录**: `生态参考/_archived-release-notes/observability/opentelemetry-collector/`
 - **版本覆盖**: v0.1 → v0.149（146 个版本）
 - **Breaking Changes 提醒**:
   - v0.149: 配置格式和处理器管道变更
@@ -126,13 +126,13 @@ prerequisites:
 ## 相关导航
 
 - [[concepts/observability-stack-evolution.md|可观测性技术栈演进]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
 - [[entities/k8s-observability-ecosystem.md|k8s-observability-ecosystem]] — 可观测性体系：指标、日志、链路追踪与混沌工程
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
+- [[生态参考/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
 - [[opentelemetry]] — OpenTelemetry
 - [[thanos]] — Thanos
 - [[prometheus]] — Prometheus

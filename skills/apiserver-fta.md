@@ -49,7 +49,7 @@ severity: high
 # API Server 异常 FTA 树
 
 ## 适用范围与说明
-- **目标**：覆盖 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
+- **目标**：覆盖 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 不可用/性能劣化的关键成因与路径，支撑生产环境快速定位与自动化处置。
 - **范围**：APIServer 进程与配置、认证鉴权、请求排队与限流、依赖组件、证书与时间、网络与基础设施。
 - **符号**：
   - **OR 门**：任一子事件成立即可触发父事件
@@ -195,7 +195,7 @@ flowchart TD
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[skills/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
 
 

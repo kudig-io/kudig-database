@@ -539,7 +539,7 @@ escalation_package:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
-- [domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|README]].md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md)
+- [故障诊断/[[存储/README.md|README]].md](../故障诊断/topic-skills/README.md)
 - [templates/skill-template.md](../templates/skill-template.md)
 
 <!-- risk-assessed -->

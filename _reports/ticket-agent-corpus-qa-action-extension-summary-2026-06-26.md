@@ -135,7 +135,7 @@ action:
 |---|---|
 | `skills/ts-command-output.md` | YAML 块存在语法错误（中文引号），非标准 I-O 对格式 |
 | `_archives/troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md` | 归档文件，按项目规范排除 |
-| `domain-14-ai-ml-infra/01-ai-infra/15-llm-data-pipeline.md` | 不包含标准 I-O 对 YAML 块 |
+| `AI基础设施/01-ai-infra/15-llm-data-pipeline.md` | 不包含标准 I-O 对 YAML 块 |
 
 ---
 
@@ -157,13 +157,13 @@ action:
 
 ```yaml
 qa_corpus:
-  - path: domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/*.with_actions.md
+  - path: 故障诊断/topic-qa-corpus/generated/*.with_actions.md
     priority: critical
     chunking: by_yaml_block
-  - path: domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.with_actions.md
+  - path: 故障诊断/topic-qa-corpus/command-output-diagnosis.with_actions.md
     priority: high
     chunking: by_yaml_block
-  - path: domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.with_actions.md
+  - path: 故障诊断/topic-qa-corpus/seed/p0-core-scenarios.with_actions.md
     priority: high
     chunking: by_yaml_block
 ```
@@ -184,9 +184,9 @@ qa_corpus:
 ## 9. 相关文件
 
 - `scripts/fill_qa_actions.py` — QA action 自动化填充脚本
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/*.with_actions.md` — 带 action 的批量 QA 语料
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.with_actions.md` — 核心命令输出语料
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.with_actions.md` — P0 种子语料
+- `故障诊断/topic-qa-corpus/generated/*.with_actions.md` — 带 action 的批量 QA 语料
+- `故障诊断/topic-qa-corpus/command-output-diagnosis.with_actions.md` — 核心命令输出语料
+- `故障诊断/topic-qa-corpus/seed/p0-core-scenarios.with_actions.md` — P0 种子语料
 - `_reports/ticket-agent-corpus-round2-summary-2026-06-26.md` — 上一轮执行摘要
 - `_meta/projects/kudig-ticket-agent-corpus-improvement-plan.md` — 完整改进规划
 

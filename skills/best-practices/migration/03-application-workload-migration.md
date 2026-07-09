@@ -396,7 +396,7 @@ spec:
 | `nginx.ingress.kubernetes.io/configuration-snippet` | **需审查** | 自定义 Nginx 片段需逐条验证 |
 | `cert-manager.io/cluster-issuer` | 相同（需安装 cert-manager） | 需在 ACK 安装 cert-manager |
 
-> 详细 Ingress 迁移参考: `domain-03-networking-traffic/09-nginx-ingress-migration-guide.md`
+> 详细 Ingress 迁移参考: `网络/09-nginx-ingress-migration-guide.md`
 
 ---
 
@@ -749,16 +749,16 @@ kubectl --context=$ACK_CONTEXT get events -A --field-selector type=Warning --sor
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[domain-08-release-change-management/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+- [[发布变更/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[发布变更/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[发布变更/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[发布变更/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[发布变更/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[发布变更/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[发布变更/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[发布变更/topic-migration/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]]
+- [[发布变更/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[发布变更/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 

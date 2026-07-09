@@ -46,7 +46,7 @@ prerequisites:
 
 # 版本升级指南
 
-> 本文档基于 `domain-19-landscape-references/_archived-release-notes/` 目录下全部 1321 个发布说明文件提炼而成，为 K8s 集群运维人员提供版本升级的参考指南 ^[inferred]
+> 本文档基于 `生态参考/_archived-release-notes/` 目录下全部 1321 个发布说明文件提炼而成，为 K8s 集群运维人员提供版本升级的参考指南 ^[inferred]
 
 ## Kubernetes 升级策略
 
@@ -163,7 +163,7 @@ kubectl uncordon <node-name>
 
 ## 来源文档
 
-domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个文件。
+生态参考/_archived-release-notes/ 目录下全部 1321 个文件。
 
 ## Related
 
@@ -173,7 +173,7 @@ domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - 07-upgrade-paths-strategy
 
 <!-- risk-assessed -->

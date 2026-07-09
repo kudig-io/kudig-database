@@ -3,7 +3,26 @@ name: Quality Gate
 on:
   pull_request:
     paths:
-      - 'domain-*/**'
+      - '集群基础/**'
+      - '工作负载/**'
+      - '网络/**'
+      - '存储/**'
+      - '安全/**'
+      - '可观测性/**'
+      - '平台工程/**'
+      - '发布变更/**'
+      - '可靠性/**'
+      - '故障诊断/**'
+      - '生产运维/**'
+      - '云厂商/**'
+      - '容器运行时/**'
+      - 'AI基础设施/**'
+      - '专项技术/**'
+      - '数据库中间件/**'
+      - '系统基础/**'
+      - '清单模式/**'
+      - '生态参考/**'
+      - '应用模式/**'
       - 'concepts/**'
       - 'entities/**'
       - 'skills/**'
@@ -42,12 +61,13 @@ jobs:
           import sys, pathlib, yaml
           ROOT = pathlib.Path('.')
           EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
-          CONTENT = ('concepts', 'entities', 'skills', 'docs')
+          CONTENT = {'concepts', 'entities', 'skills', 'docs'}
+          DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
           errors, checked = [], 0
           for p in sorted(ROOT.rglob('*.md')):
               if any(x in p.parts for x in EXCL):
                   continue
-              if not (p.parts[0].startswith('domain-') or p.parts[0] in CONTENT):
+              if not (p.parts[0] in DOMAINS or p.parts[0] in CONTENT):
                   continue
               txt = p.read_text(encoding='utf-8')
               if not txt.startswith('---'):
@@ -88,10 +108,11 @@ jobs:
           import pathlib, re
           ROOT = pathlib.Path('.')
           EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
-          CONTENT = ('concepts', 'entities', 'skills', 'docs')
+          CONTENT = {'concepts', 'entities', 'skills', 'docs'}
+          DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
           WL = re.compile(r'\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
           def is_content(p):
-              return p.parts[0].startswith('domain-') or p.parts[0] in CONTENT
+              return p.parts[0] in DOMAINS or p.parts[0] in CONTENT
           names = set()
           for p in ROOT.rglob('*.md'):
               if any(x in p.parts for x in EXCL) or not is_content(p):

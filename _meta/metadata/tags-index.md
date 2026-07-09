@@ -55,92 +55,92 @@ prerequisites:
 - domain-1: 架构概览、核心组件、性能调优
 - domain-2: 设计原理、控制器模式
 - domain-3: 控制平面全组件
-- domain-17-system-foundation/topic-cheat-sheet/k8s.md
+- 系统基础/topic-cheat-sheet/k8s.md
 
 ### etcd
-- domain-01-cluster-fundamentals/07: 分布式共识 etcd
-- domain-01-cluster-fundamentals/11: etcd 深度解析
-- domain-10-troubleshooting-diagnostics/02: etcd 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
+- 集群基础/07: 分布式共识 etcd
+- 集群基础/11: etcd 深度解析
+- 故障诊断/02: etcd 故障排查
+- 故障诊断/topic-fta/list/etcd-fta.md
 
 ### api-server
-- domain-01-cluster-fundamentals/12: API Server 深度解析
-- domain-10-troubleshooting-diagnostics/01: API Server 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md
+- 集群基础/12: API Server 深度解析
+- 故障诊断/01: API Server 故障排查
+- 故障诊断/topic-fta/list/apiserver-fta.md
 
 ### scheduler
-- domain-01-cluster-fundamentals/20: Scheduler 深度解析
-- domain-02-workloads-applications/30: 调度器配置
-- domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md
+- 集群基础/20: Scheduler 深度解析
+- 工作负载/30: 调度器配置
+- 故障诊断/topic-fta/list/scheduler-fta.md
 
 ---
 
 ## 网络
 
 ### cni
-- domain-01-cluster-fundamentals/23: CNI 深度解析
-- domain-03-networking-traffic/07: CNI 插件对比
-- domain-10-troubleshooting-diagnostics/topic-fta/list/cni-fta.md
+- 集群基础/23: CNI 深度解析
+- 网络/07: CNI 插件对比
+- 故障诊断/topic-fta/list/cni-fta.md
 
 ### service
-- domain-03-networking-traffic/11: Service 概念与类型
-- domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
+- 网络/11: Service 概念与类型
+- 故障诊断/topic-fta/list/service-fta.md
 
 ### dns
-- domain-03-networking-traffic/16: DNS 服务发现
-- domain-10-troubleshooting-diagnostics/26: DNS 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md
+- 网络/16: DNS 服务发现
+- 故障诊断/26: DNS 故障排查
+- 故障诊断/topic-fta/list/dns-fta.md
 
 ### ingress
-- domain-03-networking-traffic/27: Ingress 基础
-- domain-10-troubleshooting-diagnostics/15: Ingress 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/[[skills/ingress-fta.md|ingress-fta]].md
+- 网络/27: Ingress 基础
+- 故障诊断/15: Ingress 故障排查
+- 故障诊断/topic-fta/[[skills/ingress-fta.md|ingress-fta]].md
 
 ### gateway-api
-- domain-03-networking-traffic/35: Gateway API 概览
-- domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md
+- 网络/35: Gateway API 概览
+- 故障诊断/topic-fta/list/gateway-api-fta.md
 
 ---
 
 ## 存储
 
 ### pv-pvc
-- domain-04-storage-data/02: PV 架构基础
-- domain-10-troubleshooting-diagnostics/14: PVC 故障排查
+- 存储/02: PV 架构基础
+- 故障诊断/14: PVC 故障排查
 
 ### csi
-- domain-01-cluster-fundamentals/22: CSI 深度解析
-- domain-04-storage-data/05: CSI 驱动集成
-- domain-10-troubleshooting-diagnostics/04: CSI 故障排查
+- 集群基础/22: CSI 深度解析
+- 存储/05: CSI 驱动集成
+- 故障诊断/04: CSI 故障排查
 
 ---
 
 ## 安全
 
 ### rbac
-- domain-05-security-compliance/01: 认证授权系统
-- domain-10-troubleshooting-diagnostics/12: RBAC 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md
+- 安全/01: 认证授权系统
+- 故障诊断/12: RBAC 故障排查
+- 故障诊断/topic-fta/list/rbac-fta.md
 
 ### network-policy
-- domain-05-security-compliance/02: 网络安全策略
-- domain-10-troubleshooting-diagnostics/16: NetworkPolicy 故障排查
-- domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md
+- 安全/02: 网络安全策略
+- 故障诊断/16: NetworkPolicy 故障排查
+- 故障诊断/topic-fta/list/networkpolicy-fta.md
 
 ### runtime-security
-- domain-05-security-compliance/03: 运行时安全防御
+- 安全/03: 运行时安全防御
 
 ---
 
 ## 可观测性
 
 ### prometheus
-- domain-06-observability/02: 监控指标系统
+- 可观测性/02: 监控指标系统
 - domain-20: 企业监控告警
-- domain-17-system-foundation/topic-cheat-sheet/promql.md
+- 系统基础/topic-cheat-sheet/promql.md
 
 ### tracing
-- domain-06-observability/04: 分布式链路追踪
+- 可观测性/04: 分布式链路追踪
 
 ### logging
 - domain-21: 日志管理分析
@@ -150,26 +150,26 @@ prerequisites:
 ## AI/ML
 
 ### gpu
-- domain-14-ai-ml-infra/03: GPU 调度管理
-- domain-14-ai-ml-infra/04: GPU 监控 DCGM
+- AI基础设施/03: GPU 调度管理
+- AI基础设施/04: GPU 监控 DCGM
 
 ### llm
-- domain-14-ai-ml-infra/15-25: LLM 全生命周期
+- AI基础设施/15-25: LLM 全生命周期
 - 02-ai-agents: AI Agent 工程
 
 ### distributed-training
-- domain-14-ai-ml-infra/05: 分布式训练框架
+- AI基础设施/05: 分布式训练框架
 
 ---
 
 ## 方法论
 
 ### fta
-- domain-10-troubleshooting-diagnostics/topic-fta/01-23: FTA 方法论体系
-- domain-10-troubleshooting-diagnostics/topic-fta/list: 36 个组件故障树
+- 故障诊断/topic-fta/01-23: FTA 方法论体系
+- 故障诊断/topic-fta/list: 36 个组件故障树
 
 ### febm
-- domain-10-troubleshooting-diagnostics/topic-febm/01-08: FEBM 取证方法论
+- 故障诊断/topic-febm/01-08: FEBM 取证方法论
 
 ### troubleshooting
 - domain-12: 42+ 篇故障排查

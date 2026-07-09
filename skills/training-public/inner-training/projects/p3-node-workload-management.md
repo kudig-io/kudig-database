@@ -72,8 +72,8 @@ estimated_read_time: 45min
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - node-basics
   - node-advanced
@@ -663,10 +663,10 @@ aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 
 ## 延伸阅读
 
-- [ACK 节点池管理](../../domain-12-cloud-providers/04-alicloud-ack/230-ack-node-pool.md)
+- [ACK 节点池管理](../../云厂商/04-alicloud-ack/230-ack-node-pool.md)
 - [Pod 调度策略](../../domain-09-workload/05-pod-scheduling-strategies.md)
-- [HPA/VPA 自动伸缩](../../domain-02-workloads-applications/21-hpa-vpa-autoscaling.md)
-- [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
+- [HPA/VPA 自动伸缩](../../工作负载/21-hpa-vpa-autoscaling.md)
+- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
 
 ```
 

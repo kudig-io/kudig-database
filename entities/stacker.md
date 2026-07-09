@@ -79,8 +79,8 @@ Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用�
 
 - stacker
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -33,9 +33,9 @@ prerequisites:
 relationships:
 - target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+- target: '[[系统基础/topic-dictionary/observability/observability.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+- target: '[[系统基础/topic-cheat-sheet/gitops.md]]'
   type: related_to
 ---
 
@@ -89,12 +89,12 @@ relationships:
 
 ## 相关 Domain
 
-- [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]]
-- [[domain-17-system-foundation/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
-- domain-08-release-change-management/01-[[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]/01-gitops-principles
+- [[可靠性/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]]
+- [[系统基础/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
+- 发布变更/01-[[系统基础/topic-cheat-sheet/gitops.md|gitops]]/01-gitops-principles
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
+- [[系统基础/topic-cheat-sheet/git.md|Git 速查卡]]
 
 
 <!-- risk-assessed -->

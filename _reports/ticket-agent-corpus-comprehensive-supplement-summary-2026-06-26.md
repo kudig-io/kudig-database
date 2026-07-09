@@ -57,7 +57,7 @@ relationships:
 
 ## 2. 8 个关键二级目录补齐
 
-### 2.1 domain-04-storage-data/04-stateful-app-storage
+### 2.1 存储/04-stateful-app-storage
 
 | 文件 | 说明 |
 |---|---|
@@ -66,7 +66,7 @@ relationships:
 | `04-kafka-statefulset-production.md` | Kafka on K8s：分区、副本、扩容、监控 |
 | `05-redis-cluster-statefulset.md` | Redis Cluster on K8s：槽位、故障转移、数据迁移 |
 
-### 2.2 domain-09-reliability-engineering/01-backup-recovery
+### 2.2 可靠性/01-backup-recovery
 
 | 文件 | 说明 |
 |---|---|
@@ -74,7 +74,7 @@ relationships:
 | `02-namespace-backup-restore.md` | Namespace 级别备份恢复：Velero |
 | `03-pv-backup-snapshot.md` | PV 快照：云盘快照、CSI 快照、恢复演练 |
 
-### 2.3 domain-09-reliability-engineering/03-capacity-planning
+### 2.3 可靠性/03-capacity-planning
 
 | 文件 | 说明 |
 |---|---|
@@ -82,7 +82,7 @@ relationships:
 | `02-hpa-vpa-cluster-autoscaler-karpenter.md` | HPA/VPA/CA/Karpenter 联合容量管理 |
 | `03-resource-quota-limitrange.md` | ResourceQuota/LimitRange 设计与治理 |
 
-### 2.4 domain-08-release-change-management/03-change-management
+### 2.4 发布变更/03-change-management
 
 | 文件 | 说明 |
 |---|---|
@@ -90,7 +90,7 @@ relationships:
 | `02-canary-release-strategy.md` | 金丝雀发布策略与回滚 |
 | `03-change-rollback-playbook.md` | 变更回滚操作手册 |
 
-### 2.5 domain-06-observability/06-slo-sli
+### 2.5 可观测性/06-slo-sli
 
 | 文件 | 说明 |
 |---|---|
@@ -98,7 +98,7 @@ relationships:
 | `02-error-budget-policy.md` | 错误预算政策与 burn rate alert |
 | `03-sli-implementation-guide.md` | SLI 实现指南：可用性、延迟、吞吐量 |
 
-### 2.6 domain-05-security-compliance/07-incident-response
+### 2.6 安全/07-incident-response
 
 | 文件 | 说明 |
 |---|---|
@@ -106,7 +106,7 @@ relationships:
 | `02-container-runtime-threat-response.md` | 容器运行时威胁响应：Falco/Tetragon |
 | `03-supply-chain-incident-response.md` | 供应链安全事件响应：镜像篡改、CVE |
 
-### 2.7 domain-10-troubleshooting-diagnostics/tools
+### 2.7 故障诊断/tools
 
 | 文件 | 说明 |
 |---|---|
@@ -114,7 +114,7 @@ relationships:
 | `02-network-diagnostic-tools.md` | 网络诊断工具：ping/netshoot/ksniff/cilium-cli |
 | `03-ebpf-diagnostic-tools.md` | eBPF 诊断工具：bcc/bpftrace/pixie/inspektor-gadget |
 
-### 2.8 domain-11-production-operations/reply-templates
+### 2.8 生产运维/reply-templates
 
 将原有 README.md 拆分为 5 个独立话术文件：
 
@@ -131,31 +131,31 @@ relationships:
 
 ## 3. 4 个偏薄 Domain 核心补充
 
-### 3.1 domain-13-container-runtime
+### 3.1 容器运行时
 
 新增二级目录：
 
-- `domain-13-container-runtime/03-containerd-cri-o/`
+- `容器运行时/03-containerd-cri-o/`
   - `01-containerd-production-operations.md`
   - `02-cri-o-production-guide.md`
   - `03-oci-runtimes-comparison.md`
-- `domain-13-container-runtime/04-image-build/`
+- `容器运行时/04-image-build/`
   - `01-buildkit-production-guide.md`
   - `02-cloud-native-buildpacks-guide.md`
   - `03-kaniko-ko-build-guide.md`
 
-### 3.2 domain-16-database-middleware
+### 3.2 数据库中间件
 
 补充内容：
 
-- `domain-16-database-middleware/03-message-queues/`
+- `数据库中间件/03-message-queues/`
   - `04-rocketmq-on-kubernetes.md`
   - `05-rabbitmq-on-kubernetes.md`
-- `domain-16-database-middleware/04-time-series-db/`
+- `数据库中间件/04-time-series-db/`
   - `03-victoriametrics-on-kubernetes.md`
-- `domain-16-database-middleware/05-operator-management/`
+- `数据库中间件/05-operator-management/`
   - `03-operator-lifecycle-management.md`
-- `domain-16-database-middleware/06-data-streaming/`
+- `数据库中间件/06-data-streaming/`
   - `03-flink-on-kubernetes.md`
 
 ---

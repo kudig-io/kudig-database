@@ -68,12 +68,12 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-04-storage-data/02-pv-architecture-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 存储/02-pv-architecture-fundamentals
 id: WEEK4-DAY27
 topic: training
 type: hands-on
@@ -99,11 +99,11 @@ tags: [week-4, day-27, storage, volume, mount, k8s, k8s-1.28-1.33]
 ### 必读文档
 
 1. **K8S Volume 类型**
-   - 文件: `../../../domain-04-storage-data/02-pv-architecture-fundamentals.md`
+   - 文件: `../../../存储/02-pv-architecture-fundamentals.md`
    - 重点: emptyDir、hostPath、PVC、configMap、secret
 
 2. **ACK 存储最佳实践**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/245-ack-ebs-storage.md`
    - 重点: 云盘扩容、NAS 子目录挂载
 
 ### 阅读要点

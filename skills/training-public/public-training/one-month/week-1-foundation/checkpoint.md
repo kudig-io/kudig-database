@@ -77,18 +77,18 @@ audience:
   - developer
 estimated_read_time: 90min
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 容器运行时
+  - 系统基础
+  - 集群基础
+  - 故障诊断
 related_topics:
   - docker
   - linux
   - kubernetes
   - troubleshooting
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/[[domain-04-storage-data/README.md|README]].md
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
+  - 生产运维/topic-learn/public-training/one-month/[[存储/README.md|README]].md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
 ---
 ```
 
@@ -947,15 +947,15 @@ kubectl label namespace frontend name=frontend
 
 ## 延伸阅读
 
-- [Docker 基础概念](../../domain-13-container-runtime/01-docker-fundamentals-concepts.md)
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
-- [Pod 排障指南](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [Docker 基础概念](../../容器运行时/01-docker-fundamentals-concepts.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件](../../集群基础/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
+- [Pod 排障指南](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

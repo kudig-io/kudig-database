@@ -341,8 +341,8 @@ s  - s
 
 **关联文档**:
 - [../02-getting-started/](./02-getting-started/) — 快速入门
-- [../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md) — 架构详解
-- [../../domain-17-system-foundation/](../../domain-17-system-foundation/) — Linux 基础
+- [../../集群基础/01-kubernetes-architecture-overview.md](../../集群基础/01-kubernetes-architecture-overview.md) — 架构详解
+- [../../系统基础/](../../系统基础/) — Linux 基础
 
 ## See Also
 

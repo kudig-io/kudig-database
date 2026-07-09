@@ -49,7 +49,7 @@ difficulty: "beginner"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     desc: "深度文档"
-  - path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
+  - path: "../故障诊断/topic-fta/list/{{component}}-fta.md"
     desc: "FTA 故障树"
 ---
 ```
@@ -236,8 +236,8 @@ fi
 
 - [官方文档]({{URL}})
 - [深度文档](../domain-{{N}}-{{name}}/{{doc}}.md)
-- [FTA 故障树](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md)
-- [相关 Skill](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md)
+- [FTA 故障树](../故障诊断/topic-fta/list/{{component}}-fta.md)
+- [相关 Skill](../故障诊断/topic-skills/{{NN}}-{{scenario}}.md)
 
 ---
 

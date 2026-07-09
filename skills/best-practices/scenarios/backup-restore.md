@@ -62,11 +62,11 @@ graph TD
     A["备份恢复"] --> B{"问题确认"}
     B -->|"已知问题"| C["参考相关文档"]
     B -->|"未知问题"| D{"组件定位"}
-    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
-    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
-    D -->|"网络"| G["参考 domain-03-networking-traffic"]
-    D -->|"存储"| H["参考 domain-04-storage-data"]
-    D -->|"安全"| I["参考 domain-05-security-compliance"]
+    D -->|"控制平面"| E["参考 集群基础"]
+    D -->|"工作负载"| F["参考 工作负载"]
+    D -->|"网络"| G["参考 网络"]
+    D -->|"存储"| H["参考 存储"]
+    D -->|"安全"| I["参考 安全"]
 
     C --> J["执行修复"]
     E --> J
@@ -88,16 +88,16 @@ graph TD
 
 ## 相关文档
 
-- [[domain-09-reliability-engineering/README.md|README]]
-- [[domain-01-cluster-fundamentals/README.md|README]]
+- [[可靠性/README.md|README]]
+- [[集群基础/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|backup restore fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]]
+- [[故障诊断/topic-fta/list/backup-restore-fta.md|backup restore fta]]
+- [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]]
 
 
 ---

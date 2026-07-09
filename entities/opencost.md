@@ -89,7 +89,7 @@ OpenCost 是 Kubernetes 成本监控的开源标准。它提供实时成本分�
 
 - opencost
 - observability|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -33,7 +33,7 @@ prerequisites:
 - ebpf-basics
 - policy-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards.md]]'
+- target: '[[系统基础/topic-dictionary/security/pod-security-standards.md]]'
   type: uses
 - target: '[[entities/networkpolicy.md]]'
   type: related_to
@@ -54,7 +54,7 @@ relationships:
 
 ## 连接点
 
-在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy.md|NetworkPolicy]]、[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards.md|Pod 安全标准]]），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
+在 wiki 中，纵深防御和供应链安全被当作两个独立的安全域——[[concepts/security-defense-depth.md|security-defense-depth]] 覆盖运行时分层模型（认证、RBAC、[[entities/networkpolicy.md|NetworkPolicy]]、[[系统基础/topic-dictionary/security/pod-security-standards.md|Pod 安全标准]]），[[supply-chain-security]] 覆盖构建和分发管道（SBOM、镜像签名、SLSA、准入验证）。但它们是**同一安全模型的两半**：供应链安全是代码到达集群**之前**发生的事情，纵深防御是代码到达集群**之后**发生的事情。两者单独都不够——供应链控制假设构建管道是最弱环节，而纵深防御假设最终会有什么东西突破防线。
 
 两者在以下场景中交叉共现：
 
@@ -127,7 +127,7 @@ relationships:
 - [[entities/trivy.md|trivy]] — Trivy
 - [[entities/vault.md|vault]] — HashiCorp Vault
 
-- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]- [[domain-17-system-foundation/topic-dictionary/security/runtime-security.md|运行时安全]]
+- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]- [[系统基础/topic-dictionary/security/runtime-security.md|运行时安全]]
 
 
 <!-- risk-assessed -->

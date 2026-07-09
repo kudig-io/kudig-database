@@ -713,19 +713,19 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/sql.md|sql]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- [[云厂商/15-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- [[云厂商/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[云厂商/15-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/15-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
 
 
 <!-- risk-assessed -->

@@ -85,16 +85,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 故障诊断
 related_topics:
   - workloads
   - pod
   - hpa
   - resources
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-10-workloads-1.md
-  - domain-02-workloads-applications/11-pod-lifecycle-events.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-10-workloads-1.md
+  - 工作负载/11-pod-lifecycle-events.md
 ---
 ```
 
@@ -115,15 +115,15 @@ related:
 ### 必读文档
 
 1. **Pod 生命周期事件**
-   - 文件: `../../domain-02-workloads-applications/11-pod-lifecycle-events.md`
+   - 文件: `../../工作负载/11-pod-lifecycle-events.md`
    - 重点: Init Container、PostStart/PreStop、探针
 
 2. **资源管理**
-   - 文件: `../../domain-02-workloads-applications/23-resource-management.md`
+   - 文件: `../../工作负载/23-resource-management.md`
    - 重点: requests/limits、QoS 等级
 
 3. **HPA/VPA 自动扩缩容**
-   - 文件: `../../domain-02-workloads-applications/21-hpa-vpa-autoscaling.md`
+   - 文件: `../../工作负载/21-hpa-vpa-autoscaling.md`
    - 重点: 基于 CPU/Memory 的自动扩缩
 
 ---

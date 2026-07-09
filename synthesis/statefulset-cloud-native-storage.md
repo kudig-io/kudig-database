@@ -10,11 +10,11 @@ tags:
 - database
 tier: supporting
 sources:
-- domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md
-- domain-04-storage-data/04-stateful-app-storage/02-mysql-statefulset-production.md
-- domain-04-storage-data/04-stateful-app-storage/03-postgresql-statefulset-production.md
-- domain-04-storage-data/04-stateful-app-storage/04-kafka-statefulset-production.md
-- domain-04-storage-data/04-stateful-app-storage/05-redis-cluster-statefulset.md
+- 存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md
+- 存储/04-stateful-app-storage/02-mysql-statefulset-production.md
+- 存储/04-stateful-app-storage/03-postgresql-statefulset-production.md
+- 存储/04-stateful-app-storage/04-kafka-statefulset-production.md
+- 存储/04-stateful-app-storage/05-redis-cluster-statefulset.md
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
@@ -67,12 +67,12 @@ StatefulSet 解决的是"身份"问题（稳定网络标识、有序部署），
 
 ## Related
 
-- [[domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md|01 stateful app storage patterns]]
-- [[domain-04-storage-data/04-stateful-app-storage/02-mysql-statefulset-production.md|02 mysql statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/03-postgresql-statefulset-production.md|03 postgresql statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/04-kafka-statefulset-production.md|04 kafka statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/05-redis-cluster-statefulset.md|05 redis cluster statefulset]]
-- [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|01 velero backup recovery]]
+- [[存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md|01 stateful app storage patterns]]
+- [[存储/04-stateful-app-storage/02-mysql-statefulset-production.md|02 mysql statefulset production]]
+- [[存储/04-stateful-app-storage/03-postgresql-statefulset-production.md|03 postgresql statefulset production]]
+- [[存储/04-stateful-app-storage/04-kafka-statefulset-production.md|04 kafka statefulset production]]
+- [[存储/04-stateful-app-storage/05-redis-cluster-statefulset.md|05 redis cluster statefulset]]
+- [[存储/03-distributed-storage/01-velero-backup-recovery.md|01 velero backup recovery]]
 
 
 <!-- risk-assessed -->

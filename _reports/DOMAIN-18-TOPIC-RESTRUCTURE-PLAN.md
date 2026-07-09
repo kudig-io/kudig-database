@@ -60,7 +60,7 @@ prerequisites:
 
 | Domain | 组织方式 | 效果 |
 |--------|----------|------|
-| `domain-12-troubleshooting` | `domain-10-troubleshooting-diagnostics/topic-febm/`、`domain-10-troubleshooting-diagnostics/topic-fta/`、`domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 模块化、按方法论聚类、易于导航 |
+| `domain-12-troubleshooting` | `故障诊断/topic-febm/`、`故障诊断/topic-fta/`、`故障诊断/topic-structural-trouble-shooting/` | 模块化、按方法论聚类、易于导航 |
 | `domain-18-production-operations` | 全部平铺 | 查找困难、边界模糊、认知负担高 |
 
 ### 1.2 与独立 Domain 大量重叠
@@ -73,7 +73,7 @@ prerequisites:
 | `05-日志收集分析平台` | `domain-21-logging-management-analytics` | domain-18 保留体系设计，domain-21 负责平台部署 |
 | `10-GitOps流水线实践` | `domain-23-gitops-ci-cd` | domain-18 保留流程规范，domain-23 负责工具链配置 |
 | `11-基础设施即代码` | `domain-24-infrastructure-as-code` | domain-18 保留设计原则，domain-24 负责具体实现 |
-| `07-零信任安全` / `08-CIS合规` / `09-SBOM` | `domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]` | domain-18 保留安全架构框架，domain-25 负责工具与合规 |
+| `07-零信任安全` / `08-CIS合规` / `09-SBOM` | `domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]` | domain-18 保留安全架构框架，domain-25 负责工具与合规 |
 | `16-备份` / `17-灾备演练` / `18-跨区域容灾` | `domain-30-disaster-recovery-business-continuity` | domain-18 保留策略与流程，domain-30 负责技术实现 |
 
 ### 1.3 与根目录 Topic 的交叉关系未厘清
@@ -101,7 +101,7 @@ prerequisites:
 参照 `domain-12-troubleshooting` 的 `topic-*` 子目录模式，基于 SRE 可靠性工程框架，在 `domain-18` 内建立以下 **6 个 topic**：
 
 ```
-domain-11-production-operations/
+生产运维/
 ├── topic-production-architecture/          # 架构与设计（6 篇）
 │   ├── 01-production-architecture-design-principles.md
 │   ├── 02-multi-cloud-hybrid-deployment-strategy.md
@@ -171,7 +171,7 @@ domain-11-production-operations/
 
 ## 三、执行步骤
 
-1. **创建目录结构**：在 `domain-11-production-operations/` 下创建 8 个 `topic-*` 子目录
+1. **创建目录结构**：在 `生产运维/` 下创建 8 个 `topic-*` 子目录
 2. **文件迁移**：按映射表将 31 篇文档（不含 `00-open-source-projects-index.md`）移入对应 topic 目录
 3. **MOC 重构**：重写 `MOC.md`，按 topic 分组展示文档清单，更新知识图谱
 4. **README 重构**：重写 `README.md`，按 topic 分组展示目录结构，更新学习路径
@@ -196,7 +196,7 @@ domain-11-production-operations/
 
 1. **导航效率提升**：从 32 篇平铺文档 → 8 个模块化 topic，查找路径缩短
 2. **与 troubleshooting 风格统一**：全库_domain_组织风格一致，降低认知成本
-3. **知识边界清晰**：纵向领域（domain-18）与横向切片（domain-11-production-operations/topic-best-practices/skills）、工具实现（独立 domain）三层分离
+3. **知识边界清晰**：纵向领域（domain-18）与横向切片（生产运维/topic-best-practices/skills）、工具实现（独立 domain）三层分离
 4. **可维护性增强**：新增文档有明确的 topic 归属，避免继续平铺膨胀
 5. **`99-*` 指南归位**：深度指南与对应主题聚合，形成"基础 + 进阶"的完整学习路径
 

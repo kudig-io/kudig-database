@@ -1,8 +1,8 @@
 ---
 title: Kubernetes Knowledge Map
-description: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+description: NET_FUND[网络 网络基础] --> K8S_NET[网络
   K8s 网络]
-summary: NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic
+summary: NET_FUND[网络 网络基础] --> K8S_NET[网络
   K8s 网络]
 category: reference
 tags:
@@ -48,30 +48,30 @@ prerequisites:
 
 ```mermaid
 graph TD
-    LINUX[domain-17-system-foundation Linux] --> DOCKER[domain-13-container-runtime Docker]
-    NET_FUND[domain-03-networking-traffic 网络基础] --> K8S_NET[domain-03-networking-traffic K8s 网络]
-    STORE_FUND[domain-04-storage-data 存储基础] --> K8S_STORE[domain-04-storage-data K8s 存储]
+    LINUX[系统基础 Linux] --> DOCKER[容器运行时 Docker]
+    NET_FUND[网络 网络基础] --> K8S_NET[网络 K8s 网络]
+    STORE_FUND[存储 存储基础] --> K8S_STORE[存储 K8s 存储]
 
-    DOCKER --> ARCH[domain-01-cluster-fundamentals 架构基础]
-    ARCH --> DESIGN[domain-01-cluster-fundamentals 设计原理]
-    DESIGN --> CTRL[domain-01-cluster-fundamentals 控制平面]
+    DOCKER --> ARCH[集群基础 架构基础]
+    ARCH --> DESIGN[集群基础 设计原理]
+    DESIGN --> CTRL[集群基础 控制平面]
 
-    CTRL --> WORKLOAD[domain-02-workloads-applications 工作负载]
+    CTRL --> WORKLOAD[工作负载 工作负载]
     CTRL --> K8S_NET
     CTRL --> K8S_STORE
-    CTRL --> SEC[domain-05-security-compliance 安全合规]
+    CTRL --> SEC[安全 安全合规]
 
-    WORKLOAD --> OBS[domain-06-observability 可观测性]
+    WORKLOAD --> OBS[可观测性 可观测性]
     K8S_NET --> OBS
     SEC --> OBS
 
-    OBS --> PLAT[domain-07-platform-engineering 平台运维]
-    PLAT --> EXT[domain-15-specialized-tech 扩展生态]
+    OBS --> PLAT[平台工程 平台运维]
+    PLAT --> EXT[专项技术 扩展生态]
 
-    PLAT --> TS[domain-10-troubleshooting-diagnostics 故障排查]
+    PLAT --> TS[故障诊断 故障排查]
     OBS --> TS
 
-    EXT --> AI[domain-14-ai-ml-infra AI 基础设施]
+    EXT --> AI[AI基础设施 AI 基础设施]
 ```
 
 ---
@@ -84,7 +84,7 @@ graph LR
     FEBM[topic-febm FEBM 取证] --> |证据方法| SKILLS
     FTA --> |演绎法| TS[故障排查]
     FEBM --> |归纳法| TS
-    TS12[domain-10-troubleshooting-diagnostics] --> TS
+    TS12[故障诊断] --> TS
     STS[topic-structural] --> TS
     SKILLS --> |自动化| AGENT[02-ai-agents]
 ```
@@ -111,16 +111,16 @@ graph LR
 
 | 模块 | 前置依赖 | 推荐后续 |
 |:---|:---|:---|
-| domain-01-cluster-fundamentals 架构 | domain-13-container-runtime Docker | domain-01-cluster-fundamentals 设计原理 |
-| domain-01-cluster-fundamentals 设计 | domain-01-cluster-fundamentals 架构 | domain-01-cluster-fundamentals 控制平面 |
-| domain-01-cluster-fundamentals 控制平面 | domain-01-cluster-fundamentals 设计 | domain-02-workloads-applications/5/6/7 |
-| domain-03-networking-traffic 网络 | domain-03-networking-traffic 网络基础 | domain-10-troubleshooting-diagnostics 排障 |
-| domain-04-storage-data 存储 | domain-04-storage-data 存储基础 | domain-10-troubleshooting-diagnostics 排障 |
-| domain-06-observability 可观测 | domain-01-cluster-fundamentals/4/5 | domain-07-platform-engineering 平台运维 |
-| domain-14-ai-ml-infra AI | domain-02-workloads-applications 工作负载 | 02-ai-agents |
-| domain-10-troubleshooting-diagnostics 排障 | domain-1~8 任一 | domain-10-troubleshooting-diagnostics/topic-fta/skills |
-| topic-fta | domain-10-troubleshooting-diagnostics 排障基础 | topic-skills |
-| topic-skills | topic-fta + domain-10-troubleshooting-diagnostics | 02-ai-agents |
+| 集群基础 架构 | 容器运行时 Docker | 集群基础 设计原理 |
+| 集群基础 设计 | 集群基础 架构 | 集群基础 控制平面 |
+| 集群基础 控制平面 | 集群基础 设计 | 工作负载/5/6/7 |
+| 网络 网络 | 网络 网络基础 | 故障诊断 排障 |
+| 存储 存储 | 存储 存储基础 | 故障诊断 排障 |
+| 可观测性 可观测 | 集群基础/4/5 | 平台工程 平台运维 |
+| AI基础设施 AI | 工作负载 工作负载 | 02-ai-agents |
+| 故障诊断 排障 | domain-1~8 任一 | 故障诊断/topic-fta/skills |
+| topic-fta | 故障诊断 排障基础 | topic-skills |
+| topic-skills | topic-fta + 故障诊断 | 02-ai-agents |
 
 ---
 

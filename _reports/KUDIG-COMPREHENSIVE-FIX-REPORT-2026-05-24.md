@@ -112,9 +112,9 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 ### Domain 索引（3 个）
 | 文件 | 链接数 |
 |---|---|
-| `domain-05-security-compliance/98-merged-indexes/index.md` | 51 |
-| `domain-06-observability/98-merged-indexes/index.md` | 54 |
-| `domain-10-troubleshooting-diagnostics/98-merged-indexes/index.md` | 325 |
+| `安全/98-merged-indexes/index.md` | 51 |
+| `可观测性/98-merged-indexes/index.md` | 54 |
+| `故障诊断/98-merged-indexes/index.md` | 325 |
 
 ### 目录索引（9 个）
 | 文件 | 链接数 | 说明 |
@@ -130,7 +130,7 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 | `_meta/README.md` | 3 | 元数据定义 |
 | `gitbook/README.md` | 12 | GitBook 文档 |
 | `reports/README.md` | 15 | 质量报告 |
-| `domain-11-production-operations/98-merged-indexes/index.md` | — | 生产运维 |
+| `生产运维/98-merged-indexes/index.md` | — | 生产运维 |
 | `skills/best-practices/scenarios/README.md` | — | 最佳实践场景 |
 
 ### 核心概念 Stub（12 个）
@@ -228,12 +228,12 @@ af4cec65  feat: KUDIG知识缺口全面修复（17 files）
 
 | 旧路径前缀 | 新路径 | 修复数量 |
 |-----------|--------|---------|
-| `01-cncf-landscape/` | `domain-19-landscape-references/01-cncf-landscape/` | 229 |
-| `topic-dictionary/` | `domain-17-system-foundation/topic-dictionary/` | 205 |
-| `topic-code-analysis/` | `domain-07-platform-engineering/topic-code-analysis/` | 87 |
-| `topic-functions/` | `domain-02-workloads-applications/topic-functions/` | 80 |
-| `02-ai-agents/` | `domain-14-ai-ml-infra/02-ai-agents/` | 7 |
-| `02-ai-agents/` | `domain-14-ai-ml-infra/02-ai-agents/` | 7 |
+| `01-cncf-landscape/` | `生态参考/01-cncf-landscape/` | 229 |
+| `topic-dictionary/` | `系统基础/topic-dictionary/` | 205 |
+| `topic-code-analysis/` | `平台工程/topic-code-analysis/` | 87 |
+| `topic-functions/` | `工作负载/topic-functions/` | 80 |
+| `02-ai-agents/` | `AI基础设施/02-ai-agents/` | 7 |
+| `02-ai-agents/` | `AI基础设施/02-ai-agents/` | 7 |
 | `beginner-guides/` | `skills/training-public/beginner-guides/` | 4 |
 | `_reports/QUALITY_REPORT_*` | `_reports/quality/QUALITY_REPORT_*` | 4 |
 | `topic-skills/.../README` | `topic-skills/.../SKILL` | 7 |

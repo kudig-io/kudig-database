@@ -72,9 +72,9 @@ prerequisites:
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
+- [[生态参考/98-merged-indexes/index.md|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[生态参考/98-merged-indexes/index.md|release-notes-cicd-gitops]] — 发布说明索引 — CI/CD 与 GitOps
+- [[生态参考/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

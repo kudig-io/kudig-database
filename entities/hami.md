@@ -87,8 +87,8 @@ HAMi（原 vGPU_4k8s）是一个异构计算设备虚拟化中间件，为 Kuber
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - hami
-- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

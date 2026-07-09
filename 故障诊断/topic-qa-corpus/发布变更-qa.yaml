@@ -1,0 +1,877 @@
+domain: 发布变更
+total_questions: 181
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/01-argo-cd-enterprise-gitops.md 的「See Also」章节。
+  source: 发布变更/01-gitops/01-argo-cd-enterprise-gitops.md
+  section: See Also
+- type: comparison
+  question: Argo CD企业级GitOps实践指南 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/01-argo-cd-enterprise-gitops.md 中的对比分析。
+  source: 发布变更/01-gitops/01-argo-cd-enterprise-gitops.md
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/02-jenkins-enterprise-cicd.md 的「See Also」章节。
+  source: 发布变更/01-gitops/02-jenkins-enterprise-cicd.md
+  section: See Also
+- type: comparison
+  question: Jenkins企业级CI/CD流水线深度实践 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/02-jenkins-enterprise-cicd.md 中的对比分析。
+  source: 发布变更/01-gitops/02-jenkins-enterprise-cicd.md
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/03-gitlab-enterprise-cicd.md 的「See Also」章节。
+  source: 发布变更/01-gitops/03-gitlab-enterprise-cicd.md
+  section: See Also
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/04-github-actions-enterprise.md 的「See Also」章节。
+  source: 发布变更/01-gitops/04-github-actions-enterprise.md
+  section: See Also
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/05-tekton-cloud-native-cicd.md 的「See Also」章节。
+  source: 发布变更/01-gitops/05-tekton-cloud-native-cicd.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Tekton 云原生 CI/CD 深度实践 相关的操作: kubectl apply -f https://storage.googleapis.com/tekton-relea?'
+  answer: 参见 发布变更/01-gitops/05-tekton-cloud-native-cicd.md 中的操作步骤。
+  source: 发布变更/01-gitops/05-tekton-cloud-native-cicd.md
+  command: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md 的「See Also」章节。
+  source: 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Flux v2 GitOps 持续交付深度实践 相关的操作: curl -s https://fluxcd.io/install.sh | sudo bash?'
+  answer: 参见 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md 中的操作步骤。
+  source: 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md
+  command: curl -s https://fluxcd.io/install.sh | sudo bash
+- type: troubleshooting
+  question: 如何排查 Flux v2 GitOps 持续交付深度实践 相关的故障?
+  answer: 参见 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md 的故障排查章节。
+  source: 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md
+- type: comparison
+  question: Flux v2 GitOps 持续交付深度实践 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md 中的对比分析。
+  source: 发布变更/01-gitops/06-flux-gitops-continuous-delivery.md
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/07-gitops-security-compliance.md 的「See Also」章节。
+  source: 发布变更/01-gitops/07-gitops-security-compliance.md
+  section: See Also
+- type: operation
+  question: '如何执行与 GitOps 安全与合规深度实践 相关的操作: cosign generate-key-pair?'
+  answer: 参见 发布变更/01-gitops/07-gitops-security-compliance.md 中的操作步骤。
+  source: 发布变更/01-gitops/07-gitops-security-compliance.md
+  command: cosign generate-key-pair
+- type: comparison
+  question: GitOps 安全与合规深度实践 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/07-gitops-security-compliance.md 中的对比分析。
+  source: 发布变更/01-gitops/07-gitops-security-compliance.md
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/08-cicd-pipeline-patterns.md 的「See Also」章节。
+  source: 发布变更/01-gitops/08-cicd-pipeline-patterns.md
+  section: See Also
+- type: comparison
+  question: CI/CD 流水线模式与渐进式交付深度实践 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/08-cicd-pipeline-patterns.md 中的对比分析。
+  source: 发布变更/01-gitops/08-cicd-pipeline-patterns.md
+- type: concept
+  question: 在 10-GitOps流水线实践 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/10-gitops-pipeline-practices.md 的「See Also」章节。
+  source: 发布变更/01-gitops/10-gitops-pipeline-practices.md
+  section: See Also
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/99-argo-cd-gitops-guide.md 的「See Also」章节。
+  source: 发布变更/01-gitops/99-argo-cd-gitops-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Argo CD 企业级 GitOps 实践指南 相关的操作: helm repo add argo https://argoproj.github.io/argo-helm?'
+  answer: 参见 发布变更/01-gitops/99-argo-cd-gitops-guide.md 中的操作步骤。
+  source: 发布变更/01-gitops/99-argo-cd-gitops-guide.md
+  command: helm repo add argo https://argoproj.github.io/argo-helm
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/99-flux-gitops-guide.md 的「See Also」章节。
+  source: 发布变更/01-gitops/99-flux-gitops-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Flux GitOps 实践指南 相关的操作: curl -s https://fluxcd.io/install.sh | sudo bash?'
+  answer: 参见 发布变更/01-gitops/99-flux-gitops-guide.md 中的操作步骤。
+  source: 发布变更/01-gitops/99-flux-gitops-guide.md
+  command: curl -s https://fluxcd.io/install.sh | sudo bash
+- type: comparison
+  question: Flux GitOps 实践指南 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/99-flux-gitops-guide.md 中的对比分析。
+  source: 发布变更/01-gitops/99-flux-gitops-guide.md
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/99-tekton-cicd-guide.md 的「See Also」章节。
+  source: 发布变更/01-gitops/99-tekton-cicd-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Tekton 云原生 CI/CD 实践指南 相关的操作: kubectl apply -f https://storage.googleapis.com/tekton-relea?'
+  answer: 参见 发布变更/01-gitops/99-tekton-cicd-guide.md 中的操作步骤。
+  source: 发布变更/01-gitops/99-tekton-cicd-guide.md
+  command: kubectl apply -f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+- type: comparison
+  question: Tekton 云原生 CI/CD 实践指南 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/99-tekton-cicd-guide.md 中的对比分析。
+  source: 发布变更/01-gitops/99-tekton-cicd-guide.md
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, See Also 是什么?
+  answer: 参见 发布变更/01-gitops/99-tekton-java-cicd-guide.md 的「See Also」章节。
+  source: 发布变更/01-gitops/99-tekton-java-cicd-guide.md
+  section: See Also
+- type: comparison
+  question: Tekton Java CI/CD 流水线实践指南 中有哪些技术对比?
+  answer: 参见 发布变更/01-gitops/99-tekton-java-cicd-guide.md 中的对比分析。
+  source: 发布变更/01-gitops/99-tekton-java-cicd-guide.md
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/01-terraform-enterprise-iac.md 的「See Also」章节。
+  source: 发布变更/02-iac/01-terraform-enterprise-iac.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Terraform企业级基础设施即代码实践 相关的操作: terraform-enterprise/?'
+  answer: 参见 发布变更/02-iac/01-terraform-enterprise-iac.md 中的操作步骤。
+  source: 发布变更/02-iac/01-terraform-enterprise-iac.md
+  command: terraform-enterprise/
+- type: operation
+  question: '如何执行与 Terraform企业级基础设施即代码实践 相关的操作: create_workspaces() {?'
+  answer: 参见 发布变更/02-iac/01-terraform-enterprise-iac.md 中的操作步骤。
+  source: 发布变更/02-iac/01-terraform-enterprise-iac.md
+  command: create_workspaces() {
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/02-ansible-enterprise-automation.md 的「See Also」章节。
+  source: 发布变更/02-iac/02-ansible-enterprise-automation.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Ansible企业级自动化运维深度实践 相关的故障?
+  answer: 参见 发布变更/02-iac/02-ansible-enterprise-automation.md 的故障排查章节。
+  source: 发布变更/02-iac/02-ansible-enterprise-automation.md
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/03-pulumi-enterprise-iac.md 的「See Also」章节。
+  source: 发布变更/02-iac/03-pulumi-enterprise-iac.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Pulumi Enterprise Infrastructure as Code Platform 相关的操作: pulumi login s3://my-pulumi-state-bucket?'
+  answer: 参见 发布变更/02-iac/03-pulumi-enterprise-iac.md 中的操作步骤。
+  source: 发布变更/02-iac/03-pulumi-enterprise-iac.md
+  command: pulumi login s3://my-pulumi-state-bucket
+- type: operation
+  question: '如何执行与 Pulumi Enterprise Infrastructure as Code Platform 相关的操作: pulumi preview --diff?'
+  answer: 参见 发布变更/02-iac/03-pulumi-enterprise-iac.md 中的操作步骤。
+  source: 发布变更/02-iac/03-pulumi-enterprise-iac.md
+  command: pulumi preview --diff
+- type: troubleshooting
+  question: 如何排查 Pulumi Enterprise Infrastructure as Code Platform 相关的故障?
+  answer: 参见 发布变更/02-iac/03-pulumi-enterprise-iac.md 的故障排查章节。
+  source: 发布变更/02-iac/03-pulumi-enterprise-iac.md
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/04-azure-resource-manager-enterprise.md 的「See Also」章节。
+  source: 发布变更/02-iac/04-azure-resource-manager-enterprise.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Azure Resource Manager (ARM) Enterprise 深度实践 相关的故障?
+  answer: 参见 发布变更/02-iac/04-azure-resource-manager-enterprise.md 的故障排查章节。
+  source: 发布变更/02-iac/04-azure-resource-manager-enterprise.md
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/05-crossplane-enterprise-orchestration.md 的「See Also」章节。
+  source: 发布变更/02-iac/05-crossplane-enterprise-orchestration.md
+  section: See Also
+- type: concept
+  question: 在 11-基础设施即代码 中, Related 是什么?
+  answer: 参见 发布变更/02-iac/11-infrastructure-as-code.md 的「Related」章节。
+  source: 发布变更/02-iac/11-infrastructure-as-code.md
+  section: Related
+- type: concept
+  question: 在 11-基础设施即代码 中, See Also 是什么?
+  answer: 参见 发布变更/02-iac/11-infrastructure-as-code.md 的「See Also」章节。
+  source: 发布变更/02-iac/11-infrastructure-as-code.md
+  section: See Also
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 目录 是什么?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 的「目录」章节。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  section: 目录
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 核心概念 是什么?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 的「核心概念」章节。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  section: 核心概念
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 安装部署 是什么?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 的「安装部署」章节。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  section: 安装部署
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, Provider 配置 是什么?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 的「Provider 配置」章节。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  section: Provider 配置
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, Composition 构建平台 API 是什么?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 的「Composition 构建平台 API」章节。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  section: Composition 构建平台 API
+- type: operation
+  question: '如何执行与 Crossplane 平台工程实践指南 相关的操作: helm repo add crossplane-stable https://charts.crossplane.io?'
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 中的操作步骤。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+  command: helm repo add crossplane-stable https://charts.crossplane.io/stable
+- type: comparison
+  question: Crossplane 平台工程实践指南 中有哪些技术对比?
+  answer: 参见 发布变更/02-iac/99-crossplane-platform-guide.md 中的对比分析。
+  source: 发布变更/02-iac/99-crossplane-platform-guide.md
+- type: concept
+  question: 在 22-变更管理流程 中, See Also 是什么?
+  answer: 参见 发布变更/03-change-management/22-change-management-process.md 的「See Also」章节。
+  source: 发布变更/03-change-management/22-change-management-process.md
+  section: See Also
+- type: comparison
+  question: 22-变更管理流程 中有哪些技术对比?
+  answer: 参见 发布变更/03-change-management/22-change-management-process.md 中的对比分析。
+  source: 发布变更/03-change-management/22-change-management-process.md
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, See Also 是什么?
+  answer: 参见 发布变更/04-testing-quality/01-selenium-enterprise-automation.md 的「See Also」章节。
+  source: 发布变更/04-testing-quality/01-selenium-enterprise-automation.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Selenium 企业级自动化测试平台 相关的操作: check_grid_status() {?'
+  answer: 参见 发布变更/04-testing-quality/01-selenium-enterprise-automation.md 中的操作步骤。
+  source: 发布变更/04-testing-quality/01-selenium-enterprise-automation.md
+  command: check_grid_status() {
+- type: troubleshooting
+  question: 如何排查 Selenium 企业级自动化测试平台 相关的故障?
+  answer: 参见 发布变更/04-testing-quality/01-selenium-enterprise-automation.md 的故障排查章节。
+  source: 发布变更/04-testing-quality/01-selenium-enterprise-automation.md
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/04-testing-quality/02-junit5-enterprise-testing.md 的「See Also」章节。
+  source: 发布变更/04-testing-quality/02-junit5-enterprise-testing.md
+  section: See Also
+- type: operation
+  question: '如何执行与 JUnit 5 企业级单元测试框架深度实践 相关的操作: diagnose_test_execution() {?'
+  answer: 参见 发布变更/04-testing-quality/02-junit5-enterprise-testing.md 中的操作步骤。
+  source: 发布变更/04-testing-quality/02-junit5-enterprise-testing.md
+  command: diagnose_test_execution() {
+- type: operation
+  question: '如何执行与 JUnit 5 企业级单元测试框架深度实践 相关的操作: run_test_suite() {?'
+  answer: 参见 发布变更/04-testing-quality/02-junit5-enterprise-testing.md 中的操作步骤。
+  source: 发布变更/04-testing-quality/02-junit5-enterprise-testing.md
+  command: run_test_suite() {
+- type: troubleshooting
+  question: 如何排查 JUnit 5 企业级单元测试框架深度实践 相关的故障?
+  answer: 参见 发布变更/04-testing-quality/02-junit5-enterprise-testing.md 的故障排查章节。
+  source: 发布变更/04-testing-quality/02-junit5-enterprise-testing.md
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, 摘要 是什么?
+  answer: 参见 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md 的「摘要」章节。
+  source: 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md
+  section: 摘要
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, AI系统测试架构 是什么?
+  answer: 参见 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md 的「AI系统测试架构」章节。
+  source: 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md
+  section: AI系统测试架构
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, Obsidian 相关文档 是什么?
+  answer: 参见 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md 的「Obsidian 相关文档」章节。
+  source: 发布变更/04-testing-quality/03-ai-testing-quality-assurance.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/04-testing-quality/05-cypress-enterprise-automation.md 的「See Also」章节。
+  source: 发布变更/04-testing-quality/05-cypress-enterprise-automation.md
+  section: See Also
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, See Also 是什么?
+  answer: 参见 发布变更/04-testing-quality/06-playwright-enterprise-automation.md 的「See Also」章节。
+  source: 发布变更/04-testing-quality/06-playwright-enterprise-automation.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Domain-23 GitOps & CI/CD — 开源项目索引 相关的操作: helm repo add argo https://argoproj.github.io/argo-helm?'
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-23.md 中的操作步骤。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-23.md
+  command: helm repo add argo https://argoproj.github.io/argo-helm
+- type: comparison
+  question: Domain-23 GitOps & CI/CD — 开源项目索引 中有哪些技术对比?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-23.md 中的对比分析。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-23.md
+- type: concept
+  question: 在 Domain-24 基础设施即代码 — 开源项目索引 中, 目录 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md 的「目录」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md
+  section: 目录
+- type: concept
+  question: 在 Domain-24 基础设施即代码 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md 的「核心项目总览」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md
+  section: 核心项目总览
+- type: concept
+  question: 在 Domain-24 基础设施即代码 — 开源项目索引 中, Terraform & OpenTofu 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md 的「Terraform
+    & OpenTofu」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md
+  section: Terraform & OpenTofu
+- type: operation
+  question: '如何执行与 Domain-24 基础设施即代码 — 开源项目索引 相关的操作: curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh?'
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md 中的操作步骤。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md
+  command: curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh
+- type: comparison
+  question: Domain-24 基础设施即代码 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md 中的对比分析。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-24.md
+- type: concept
+  question: 在 Domain-29 自动化测试与质量 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md 的「核心项目」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-29 自动化测试与质量 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md 的「参考链接」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-29 自动化测试与质量 — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md 的「Obsidian
+    相关文档」章节。
+  source: 发布变更/98-merged-indexes/00-open-source-projects-index-from-domain-29.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 domain-23-gitops-ci-cd MOC 中, 领域概述 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-23.md 的「领域概述」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-23.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-23-gitops-ci-cd MOC 中, 文档清单 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-23.md 的「文档清单」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-23.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-23-gitops-ci-cd MOC 中, 知识图谱 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-23.md 的「知识图谱」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-23.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-23-gitops-ci-cd MOC 中, 关联入口 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-23.md 的「关联入口」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-23.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-23-gitops-ci-cd MOC 相关的故障?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-23.md 的故障排查章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-23.md
+- type: concept
+  question: 在 domain-24-infrastructure-as-code MOC 中, 领域概述 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-24.md 的「领域概述」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-24.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-24-infrastructure-as-code MOC 中, 文档清单 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-24.md 的「文档清单」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-24.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-24-infrastructure-as-code MOC 中, 知识图谱 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-24.md 的「知识图谱」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-24.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-24-infrastructure-as-code MOC 中, 关联入口 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-24.md 的「关联入口」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-24.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-24-infrastructure-as-code MOC 相关的故障?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-24.md 的故障排查章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-24.md
+- type: concept
+  question: 在 domain-29-automated-testing-quality MOC 中, 领域概述 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-29.md 的「领域概述」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-29.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-29-automated-testing-quality MOC 中, 文档清单 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-29.md 的「文档清单」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-29.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-29-automated-testing-quality MOC 中, 知识图谱 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-29.md 的「知识图谱」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-29.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-29-automated-testing-quality MOC 中, 关联入口 是什么?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-29.md 的「关联入口」章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-29.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-29-automated-testing-quality MOC 相关的故障?
+  answer: 参见 发布变更/98-merged-indexes/MOC-from-domain-29.md 的故障排查章节。
+  source: 发布变更/98-merged-indexes/MOC-from-domain-29.md
+- type: concept
+  question: '在 Domain 23: GitOps与CI/CD (GitOps & CI/CD) 中, 概述 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-23.md 的「概述」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-23.md
+  section: 概述
+- type: concept
+  question: '在 Domain 23: GitOps与CI/CD (GitOps & CI/CD) 中, GitOps 成熟度模型 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-23.md 的「GitOps 成熟度模型」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-23.md
+  section: GitOps 成熟度模型
+- type: comparison
+  question: 'Domain 23: GitOps与CI/CD (GitOps & CI/CD) 中有哪些技术对比?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-23.md 中的对比分析。
+  source: 发布变更/98-merged-indexes/README-from-domain-23.md
+- type: concept
+  question: '在 Domain 24: 基础设施即代码 (Infrastructure as Code) 中, 领域概述 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-24.md 的「领域概述」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-24.md
+  section: 领域概述
+- type: concept
+  question: '在 Domain 24: 基础设施即代码 (Infrastructure as Code) 中, 文档目录 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-24.md 的「文档目录」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-24.md
+  section: 文档目录
+- type: concept
+  question: '在 Domain 24: 基础设施即代码 (Infrastructure as Code) 中, 学习路径建议 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-24.md 的「学习路径建议」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-24.md
+  section: 学习路径建议
+- type: concept
+  question: '在 Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance) 中, 领域概述 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-29.md 的「领域概述」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-29.md
+  section: 领域概述
+- type: concept
+  question: '在 Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance) 中, 文档目录 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-29.md 的「文档目录」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-29.md
+  section: 文档目录
+- type: concept
+  question: '在 Domain 29: 自动化测试与质量保障 (Automated Testing & Quality Assurance) 中, 学习路径建议 是什么?'
+  answer: 参见 发布变更/98-merged-indexes/README-from-domain-29.md 的「学习路径建议」章节。
+  source: 发布变更/98-merged-indexes/README-from-domain-29.md
+  section: 学习路径建议
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 中, 概述 是什么?
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 的「概述」章节。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+  section: 概述
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 中, 前置条件 是什么?
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 的「前置条件」章节。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+  section: 前置条件
+- type: operation
+  question: '如何执行与 01 - 本机单机 Demo 部署 相关的操作: brew install --cask docker?'
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+  command: brew install --cask docker
+- type: operation
+  question: '如何执行与 01 - 本机单机 Demo 部署 相关的操作: sudo apt-get update?'
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+  command: sudo apt-get update
+- type: operation
+  question: '如何执行与 01 - 本机单机 Demo 部署 相关的操作: docker version?'
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+  command: docker version
+- type: comparison
+  question: 01 - 本机单机 Demo 部署 中有哪些技术对比?
+  answer: 参见 发布变更/topic-deployment/01-local-demo-deployment.md 中的对比分析。
+  source: 发布变更/topic-deployment/01-local-demo-deployment.md
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) 中, 概述 是什么?
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 的「概述」章节。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  section: 概述
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) 中, 前置条件 是什么?
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 的「前置条件」章节。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  section: 前置条件
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) 中, 通用系统准备 (所有方案必做) 是什么?
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 的「通用系统准备 (所有方案必做)」章节。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  section: 通用系统准备 (所有方案必做)
+- type: operation
+  question: '如何执行与 02 - 单节点部署 (Single Node All-in-One) 相关的操作: sudo hostnamectl set-hostname k8s-single-node?'
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  command: sudo hostnamectl set-hostname k8s-single-node
+- type: operation
+  question: '如何执行与 02 - 单节点部署 (Single Node All-in-One) 相关的操作: sudo swapoff -a?'
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  command: sudo swapoff -a
+- type: operation
+  question: '如何执行与 02 - 单节点部署 (Single Node All-in-One) 相关的操作: sudo ufw disable?'
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+  command: sudo ufw disable
+- type: comparison
+  question: 02 - 单节点部署 (Single Node All-in-One) 中有哪些技术对比?
+  answer: 参见 发布变更/topic-deployment/02-single-node-deployment.md 中的对比分析。
+  source: 发布变更/topic-deployment/02-single-node-deployment.md
+- type: concept
+  question: 在 03 - 研发环境部署 (Development Environment Deployment) 中, 概述 是什么?
+  answer: 参见 发布变更/topic-deployment/03-development-environment-deployment.md 的「概述」章节。
+  source: 发布变更/topic-deployment/03-development-environment-deployment.md
+  section: 概述
+- type: concept
+  question: 在 03 - 研发环境部署 (Development Environment Deployment) 中, 环境定位与规划 是什么?
+  answer: 参见 发布变更/topic-deployment/03-development-environment-deployment.md 的「环境定位与规划」章节。
+  source: 发布变更/topic-deployment/03-development-environment-deployment.md
+  section: 环境定位与规划
+- type: operation
+  question: '如何执行与 03 - 研发环境部署 (Development Environment Deployment) 相关的操作: sudo hostnamectl set-hostname <master-1 / worker-1
+    / worker-?'
+  answer: 参见 发布变更/topic-deployment/03-development-environment-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/03-development-environment-deployment.md
+  command: sudo hostnamectl set-hostname <master-1 / worker-1 / worker-2>
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) 中, 概述 是什么?
+  answer: 参见 发布变更/topic-deployment/04-production-environment-deployment.md 的「概述」章节。
+  source: 发布变更/topic-deployment/04-production-environment-deployment.md
+  section: 概述
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) 中, 架构设计 是什么?
+  answer: 参见 发布变更/topic-deployment/04-production-environment-deployment.md 的「架构设计」章节。
+  source: 发布变更/topic-deployment/04-production-environment-deployment.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 04 - 生产环境部署 (Production Environment Deployment) 相关的操作: sudo apt-get install -y haproxy keepalived?'
+  answer: 参见 发布变更/topic-deployment/04-production-environment-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/04-production-environment-deployment.md
+  command: sudo apt-get install -y haproxy keepalived
+- type: operation
+  question: '如何执行与 04 - 生产环境部署 (Production Environment Deployment) 相关的操作: sudo tee /etc/haproxy/haproxy.cfg << ''EOF''?'
+  answer: 参见 发布变更/topic-deployment/04-production-environment-deployment.md 中的操作步骤。
+  source: 发布变更/topic-deployment/04-production-environment-deployment.md
+  command: sudo tee /etc/haproxy/haproxy.cfg << 'EOF'
+- type: concept
+  question: 在 01 - 迁移评估与规划 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 的「目录」章节。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  section: 目录
+- type: concept
+  question: 在 01 - 迁移评估与规划 中, 集群现状采集 是什么?
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 的「集群现状采集」章节。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  section: 集群现状采集
+- type: concept
+  question: 在 01 - 迁移评估与规划 中, 兼容性评估 是什么?
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 的「兼容性评估」章节。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  section: 兼容性评估
+- type: operation
+  question: '如何执行与 01 - 迁移评估与规划 相关的操作: set -euo pipefail?'
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 中的操作步骤。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  command: set -euo pipefail
+- type: operation
+  question: '如何执行与 01 - 迁移评估与规划 相关的操作: chmod +x migration-assessment.sh?'
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 中的操作步骤。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  command: chmod +x migration-assessment.sh
+- type: operation
+  question: '如何执行与 01 - 迁移评估与规划 相关的操作: brew install FairwindsOps/tap/pluto?'
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 中的操作步骤。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+  command: brew install FairwindsOps/tap/pluto
+- type: best_practice
+  question: 关于 01 - 迁移评估与规划, 有什么最佳实践?
+  answer: '- 迁移期间源集群不缩容，保留完整回滚能力'
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+- type: comparison
+  question: 01 - 迁移评估与规划 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/01-migration-assessment-planning.md 中的对比分析。
+  source: 发布变更/topic-migration/01-migration-assessment-planning.md
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 的「目录」章节。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+  section: 目录
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 中, 集群类型选择 是什么?
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 的「集群类型选择」章节。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+  section: 集群类型选择
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 中, VPC 与网络规划 是什么?
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 的「VPC 与网络规划」章节。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+  section: VPC 与网络规划
+- type: operation
+  question: '如何执行与 02 - ACK 目标集群设计与搭建 相关的操作: aliyun cbn CreateCen --Name "migration-cen"?'
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 中的操作步骤。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+  command: aliyun cbn CreateCen --Name "migration-cen"
+- type: operation
+  question: '如何执行与 02 - ACK 目标集群设计与搭建 相关的操作: aliyun vpc CreateVpc \?'
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 中的操作步骤。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+  command: aliyun vpc CreateVpc \
+- type: comparison
+  question: 02 - ACK 目标集群设计与搭建 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/02-ack-target-cluster-design.md 中的对比分析。
+  source: 发布变更/topic-migration/02-ack-target-cluster-design.md
+- type: concept
+  question: 在 03 - 应用工作负载迁移 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 的「目录」章节。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  section: 目录
+- type: concept
+  question: 在 03 - 应用工作负载迁移 中, 迁移流程概览 是什么?
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 的「迁移流程概览」章节。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  section: 迁移流程概览
+- type: concept
+  question: 在 03 - 应用工作负载迁移 中, 镜像仓库迁移 是什么?
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 的「镜像仓库迁移」章节。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  section: 镜像仓库迁移
+- type: operation
+  question: '如何执行与 03 - 应用工作负载迁移 相关的操作: SOURCE_REGISTRY="harbor.internal.com"?'
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  command: SOURCE_REGISTRY="harbor.internal.com"
+- type: operation
+  question: '如何执行与 03 - 应用工作负载迁移 相关的操作: kubectl create secret docker-registry acr-secret \?'
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  command: kubectl create secret docker-registry acr-secret \
+- type: operation
+  question: '如何执行与 03 - 应用工作负载迁移 相关的操作: SOURCE_CONTEXT="source-cluster"?'
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+  command: SOURCE_CONTEXT="source-cluster"
+- type: comparison
+  question: 03 - 应用工作负载迁移 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/03-application-workload-migration.md 中的对比分析。
+  source: 发布变更/topic-migration/03-application-workload-migration.md
+- type: concept
+  question: 在 04 - 存储与数据迁移 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 的「目录」章节。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+  section: 目录
+- type: concept
+  question: 在 04 - 存储与数据迁移 中, 存储架构差异分析 是什么?
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 的「存储架构差异分析」章节。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+  section: 存储架构差异分析
+- type: concept
+  question: 在 04 - 存储与数据迁移 中, ACK 存储体系 是什么?
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 的「ACK 存储体系」章节。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+  section: ACK 存储体系
+- type: operation
+  question: '如何执行与 04 - 存储与数据迁移 相关的操作: echo "=== PV 总容量 ==="?'
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+  command: echo "=== PV 总容量 ==="
+- type: operation
+  question: '如何执行与 04 - 存储与数据迁移 相关的操作: CLEAN_DIR="./migration-clean"?'
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+  command: CLEAN_DIR="./migration-clean"
+- type: comparison
+  question: 04 - 存储与数据迁移 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/04-storage-data-migration.md 中的对比分析。
+  source: 发布变更/topic-migration/04-storage-data-migration.md
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 的「目录」章节。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+  section: 目录
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 中, CNI 差异与适配 是什么?
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 的「CNI 差异与适配」章节。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+  section: CNI 差异与适配
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 中, Service 与负载均衡迁移 是什么?
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 的「Service 与负载均衡迁移」章节。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+  section: Service 与负载均衡迁移
+- type: operation
+  question: '如何执行与 05 - 网络迁移与流量切换 相关的操作: kubectl --context=source-cluster get pods -n kube-system | g?'
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 中的操作步骤。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+  command: kubectl --context=source-cluster get pods -n kube-system | grep -iE "(calico|flannel|cilium|weave)"
+- type: operation
+  question: '如何执行与 05 - 网络迁移与流量切换 相关的操作: kubectl --context=ack-cluster get pods -n kube-system -l app?'
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 中的操作步骤。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+  command: kubectl --context=ack-cluster get pods -n kube-system -l app.kubernetes.io/name=ingress-nginx
+- type: comparison
+  question: 05 - 网络迁移与流量切换 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/05-network-migration-traffic-cutover.md 中的对比分析。
+  source: 发布变更/topic-migration/05-network-migration-traffic-cutover.md
+- type: concept
+  question: 在 06 - 有状态服务迁移 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 的「目录」章节。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+  section: 目录
+- type: concept
+  question: 在 06 - 有状态服务迁移 中, 有状态服务迁移策略 是什么?
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 的「有状态服务迁移策略」章节。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+  section: 有状态服务迁移策略
+- type: concept
+  question: 在 06 - 有状态服务迁移 中, MySQL 迁移 是什么?
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 的「MySQL 迁移」章节。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+  section: MySQL 迁移
+- type: operation
+  question: '如何执行与 06 - 有状态服务迁移 相关的操作: aliyun rds CreateDBInstance \?'
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+  command: aliyun rds CreateDBInstance \
+- type: operation
+  question: '如何执行与 06 - 有状态服务迁移 相关的操作: kubectl --context=ack-cluster apply -f mysql-statefulset.yam?'
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+  command: kubectl --context=ack-cluster apply -f mysql-statefulset.yaml
+- type: best_practice
+  question: 关于 06 - 有状态服务迁移, 有什么最佳实践?
+  answer: '# 1. 迁移后短期缓存命中率会降低（冷启动）'
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+- type: comparison
+  question: 06 - 有状态服务迁移 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/06-stateful-services-migration.md 中的对比分析。
+  source: 发布变更/topic-migration/06-stateful-services-migration.md
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/07-observability-security-migration.md 的「目录」章节。
+  source: 发布变更/topic-migration/07-observability-security-migration.md
+  section: 目录
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 中, 监控体系迁移 是什么?
+  answer: 参见 发布变更/topic-migration/07-observability-security-migration.md 的「监控体系迁移」章节。
+  source: 发布变更/topic-migration/07-observability-security-migration.md
+  section: 监控体系迁移
+- type: operation
+  question: '如何执行与 07 - 可观测性与安全迁移 相关的操作: helm repo add prometheus-community https://prometheus-commun?'
+  answer: 参见 发布变更/topic-migration/07-observability-security-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/07-observability-security-migration.md
+  command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+- type: operation
+  question: '如何执行与 07 - 可观测性与安全迁移 相关的操作: kubectl --context=source-cluster get secret -n monitoring \?'
+  answer: 参见 发布变更/topic-migration/07-observability-security-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/07-observability-security-migration.md
+  command: kubectl --context=source-cluster get secret -n monitoring \
+- type: operation
+  question: '如何执行与 07 - 可观测性与安全迁移 相关的操作: kubectl --context=source-cluster get prometheusrules -A -o y?'
+  answer: 参见 发布变更/topic-migration/07-observability-security-migration.md 中的操作步骤。
+  source: 发布变更/topic-migration/07-observability-security-migration.md
+  command: kubectl --context=source-cluster get prometheusrules -A -o yaml | kubectl neat > src-prometheus-rule
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 的「目录」章节。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  section: 目录
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 中, 功能验证清单 是什么?
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 的「功能验证清单」章节。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  section: 功能验证清单
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 中, 性能对比验证 是什么?
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 的「性能对比验证」章节。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  section: 性能对比验证
+- type: operation
+  question: '如何执行与 08 - 验收、切换与旧集群退役 相关的操作: ACK_CONTEXT="ack-cluster"?'
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 中的操作步骤。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  command: ACK_CONTEXT="ack-cluster"
+- type: operation
+  question: '如何执行与 08 - 验收、切换与旧集群退役 相关的操作: ACK_INGRESS_IP=$(kubectl --context=ack-cluster get svc -n ku?'
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 中的操作步骤。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  command: ACK_INGRESS_IP=$(kubectl --context=ack-cluster get svc -n kube-system \
+- type: operation
+  question: '如何执行与 08 - 验收、切换与旧集群退役 相关的操作: echo "=== 源集群压测 ==="?'
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 中的操作步骤。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+  command: echo "=== 源集群压测 ==="
+- type: comparison
+  question: 08 - 验收、切换与旧集群退役 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/08-validation-cutover-decommission.md 中的对比分析。
+  source: 发布变更/topic-migration/08-validation-cutover-decommission.md
+- type: concept
+  question: 在 09 - 迁移工具链参考 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 的「目录」章节。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  section: 目录
+- type: concept
+  question: 在 09 - 迁移工具链参考 中, 工具总览 是什么?
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 的「工具总览」章节。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  section: 工具总览
+- type: concept
+  question: 在 09 - 迁移工具链参考 中, Velero 完整指南 是什么?
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 的「Velero 完整指南」章节。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  section: Velero 完整指南
+- type: operation
+  question: '如何执行与 09 - 迁移工具链参考 相关的操作: brew install kubectl helm velero skopeo yq jq wrk aliyun-cli?'
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 中的操作步骤。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  command: brew install kubectl helm velero skopeo yq jq wrk aliyun-cli
+- type: operation
+  question: '如何执行与 09 - 迁移工具链参考 相关的操作: aliyun oss mb oss://k8s-migration-velero --region cn-hangzho?'
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 中的操作步骤。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  command: aliyun oss mb oss://k8s-migration-velero --region cn-hangzhou --acl private
+- type: operation
+  question: '如何执行与 09 - 迁移工具链参考 相关的操作: velero install \?'
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 中的操作步骤。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+  command: velero install \
+- type: comparison
+  question: 09 - 迁移工具链参考 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/09-migration-toolchain.md 中的对比分析。
+  source: 发布变更/topic-migration/09-migration-toolchain.md
+- type: concept
+  question: 在 10 - 生产迁移实战案例 中, 目录 是什么?
+  answer: 参见 发布变更/topic-migration/10-real-world-case-study.md 的「目录」章节。
+  source: 发布变更/topic-migration/10-real-world-case-study.md
+  section: 目录
+- type: concept
+  question: 在 10 - 生产迁移实战案例 中, 案例背景 是什么?
+  answer: 参见 发布变更/topic-migration/10-real-world-case-study.md 的「案例背景」章节。
+  source: 发布变更/topic-migration/10-real-world-case-study.md
+  section: 案例背景
+- type: operation
+  question: '如何执行与 10 - 生产迁移实战案例 相关的操作: ping 10.0.0.1  # ACK vSwitch gateway?'
+  answer: 参见 发布变更/topic-migration/10-real-world-case-study.md 中的操作步骤。
+  source: 发布变更/topic-migration/10-real-world-case-study.md
+  command: 'ping 10.0.0.1  # ACK vSwitch gateway'
+- type: operation
+  question: '如何执行与 10 - 生产迁移实战案例 相关的操作: image-syncer --auth sync-config.yaml --images sync-images.ya?'
+  answer: 参见 发布变更/topic-migration/10-real-world-case-study.md 中的操作步骤。
+  source: 发布变更/topic-migration/10-real-world-case-study.md
+  command: image-syncer --auth sync-config.yaml --images sync-images.yaml --retries 3
+- type: comparison
+  question: 10 - 生产迁移实战案例 中有哪些技术对比?
+  answer: 参见 发布变更/topic-migration/10-real-world-case-study.md 中的对比分析。
+  source: 发布变更/topic-migration/10-real-world-case-study.md

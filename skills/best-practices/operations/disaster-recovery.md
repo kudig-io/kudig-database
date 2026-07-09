@@ -36,10 +36,10 @@ prerequisites:
 - backup-basics
 cross_refs:
 - type: domain
-  path: ../../domain-09-reliability-engineering/
+  path: ../../可靠性/
   label: 灾难恢复知识域
 - type: domain
-  path: ../../domain-07-platform-engineering/
+  path: ../../平台工程/
   label: 平台运维知识域
 - type: best-practice
   path: ./deployment.md

@@ -41,10 +41,10 @@ prerequisites:
 
 ### Kubernetes 部署策略最佳实践cross_refs:
 - type: domain
-  path: ../../domain-02-workloads-applications/
+  path: ../../工作负载/
   label: 工作负载知识域
 - type: domain
-  path: ../../domain-08-release-change-management/
+  path: ../../发布变更/
   label: GitOps知识域  role: contributor---
 # Kubernetes 部署策略最佳实践
 
@@ -116,10 +116,10 @@ prerequisites:
 - Velero
 cross_refs:
 - type: domain
-  path: ../../domain-09-reliability-engineering/
+  path: ../../可靠性/
   label: 灾难恢复知识域
 - type: domain
-  path: ../../domain-07-platform-engineering/
+  path: ../../平台工程/
   label: 平台运维知识域
 - type: best-practice
   path: ./deployment.md
@@ -186,10 +186,10 @@ cross_refs:
 - 自动扩缩容
 cross_refs:
 - type: domain
-  path: ../../domain-02-workloads-applications/
+  path: ../../工作负载/
   label: 工作负载知识域
 - type: domain
-  path: ../../domain-07-platform-engineering/
+  path: ../../平台工程/
   label: 平台运维知识域
 - type: best-practice
   path: ./deployment.md

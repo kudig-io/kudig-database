@@ -99,7 +99,7 @@ Crossplane extends K8s API with custom resources for cloud infrastructure. A `Bu
 - 99-crossplane-platform-guide
 - 00-open-source-projects-index
 - 11-infrastructure-as-code
-- [[domain-08-release-change-management/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
+- [[发布变更/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
 - 03-pulumi-enterprise-iac
 - 02-ansible-enterprise-automation
 - 04-azure-resource-manager-enterprise

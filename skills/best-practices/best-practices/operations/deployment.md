@@ -39,10 +39,10 @@ prerequisites:
 - service-mesh-basics
 cross_refs:
 - type: domain
-  path: ../../domain-02-workloads-applications/
+  path: ../../工作负载/
   label: 工作负载知识域
 - type: domain
-  path: ../../domain-08-release-change-management/
+  path: ../../发布变更/
   label: GitOps知识域
 ---
 
@@ -717,9 +717,9 @@ kubectl rollout undo deployment/myapp -n production
 - [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|供应链安全、YAML 配置清单与速查表]] — Cross-reference
 - [[entities/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
-- [[domain-02-workloads-applications/00-core-workloads/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
-- [[domain-02-workloads-applications/00-core-workloads/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
-- [[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
+- [[工作负载/00-core-workloads/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
+- [[工作负载/00-core-workloads/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
+- [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
 - [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — Cross-reference
 - [[concepts/控制器模式 × Deployment.md|控制器模式 × Deployment]] — Cross-reference

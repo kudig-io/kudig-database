@@ -109,7 +109,7 @@ git checkout-index -a -f
 
 ## 错误 5：未检查目标目录冲突
 
-**场景**: `mv topic-fta domain-10-troubleshooting-diagnostics/` 时，domain-10 下已有同名 `topic-fta/` 目录。
+**场景**: `mv topic-fta 故障诊断/` 时，domain-10 下已有同名 `topic-fta/` 目录。
 
 **后果**:
 - `mv` 命令报错 "Directory not empty"

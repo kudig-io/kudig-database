@@ -67,7 +67,7 @@ prerequisites:
 ### Calico
 
 - **最新版本**: v3.31
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/calico/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/calico/`
 - **版本覆盖**: v0.1 → v3.31（35 个版本）
 - **Breaking Changes 提醒**:
   - v3.27: Felix 配置参数和 BGP 默认行为变更
@@ -77,7 +77,7 @@ prerequisites:
 
 - **实体页面**: [[cilium|Cilium]]
 - **最新版本**: v1.19
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/cilium/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/cilium/`
 - **版本覆盖**: v0.1 → v1.19（24 个版本）
 - **Breaking Changes 提醒**:
   - v1.3: Hubble 和 Gateway API 配置格式变更
@@ -87,7 +87,7 @@ prerequisites:
 
 - **实体页面**: [[entities/cni-plugins.md|CNI Plugins]]
 - **最新版本**: v1.9
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/cni-plugins/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/cni-plugins/`
 - **版本覆盖**: v0.1 → v1.9（14 个版本）
 - **Breaking Changes 提醒**:
   - v1.0: CNI 规范 1.0，插件接口标准化
@@ -97,7 +97,7 @@ prerequisites:
 
 - **实体页面**: [[envoy|Envoy]]
 - **最新版本**: v1.37
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/envoy/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/envoy/`
 - **版本覆盖**: v0.1 → v1.37（38 个版本）
 - **升级要点**: 持续优化 xDS API 和 WASM 扩展能力
 
@@ -105,7 +105,7 @@ prerequisites:
 
 - **实体页面**: [[istio|Istio]]
 - **最新版本**: v1.29
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/istio/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/istio/`
 - **版本覆盖**: v0.1 → v1.29（38 个版本）
 - **升级要点**: Ambient Mesh 模式逐步成熟，sidecar-less 架构演进
 
@@ -113,7 +113,7 @@ prerequisites:
 
 - **实体页面**: [[linkerd|Linkerd]]
 - **最新版本**: v18.9
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/networking/linkerd/`
+- **发布说明目录**: `生态参考/_archived-release-notes/networking/linkerd/`
 - **版本覆盖**: v0.1 → v18.9（8 个版本）
 - **升级要点**: 轻量级服务网格，专注 mTLS 和流量管理
 
@@ -132,7 +132,7 @@ prerequisites:
 ## 相关导航
 
 - [[concepts/service-mesh-evolution.md|服务网格演进]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

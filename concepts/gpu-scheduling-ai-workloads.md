@@ -18,9 +18,9 @@ tags:
 - time-slicing
 tier: supporting
 sources:
-- domain-02-workloads-applications/00-core-workloads
-- domain-14-ai-ml-infra/01-ai-infra
-- domain-14-ai-ml-infra/03-mlops
+- 工作负载/00-core-workloads
+- AI基础设施/01-ai-infra
+- AI基础设施/03-mlops
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
@@ -44,7 +44,7 @@ relationships:
 
 ## 概述
 
-AI/ML 工作负载对 [[entities/kubernetes.md|Kubernetes]] 调度提出了独特挑战：GPU 是昂贵的异构资源，推理和训练的工作负载特征截然不同，而传统的 CPU 调度策略（如基于 request/limit 的 Bin Packing）无法有效处理 GPU 的"不可分性"和"时间共享"需求。本页连接 domain-02-workloads-applications 的调度能力与 domain-14-ai-ml-infra 的 GPU 基础设施，展示 K8s 生态中 GPU 调度的完整技术栈——从 NVIDIA Device Plugin 到 MIG 虚拟化，再到 vLLM 推理引擎的部署模式。
+AI/ML 工作负载对 [[entities/kubernetes.md|Kubernetes]] 调度提出了独特挑战：GPU 是昂贵的异构资源，推理和训练的工作负载特征截然不同，而传统的 CPU 调度策略（如基于 request/limit 的 Bin Packing）无法有效处理 GPU 的"不可分性"和"时间共享"需求。本页连接 工作负载 的调度能力与 AI基础设施 的 GPU 基础设施，展示 K8s 生态中 GPU 调度的完整技术栈——从 NVIDIA Device Plugin 到 MIG 虚拟化，再到 vLLM 推理引擎的部署模式。
 
 ## 核心连接
 
@@ -555,16 +555,16 @@ spec:
 
 ## 相关 Domain
 
-- domain-02-workloads-applications/00-core-workloads
-- domain-14-ai-ml-infra/01-ai-infra
-- domain-14-ai-ml-infra/03-mlops
+- 工作负载/00-core-workloads
+- AI基础设施/01-ai-infra
+- AI基础设施/03-mlops
 - [[concepts/ai-agent-ops-patterns.md|ai-agent-ops-patterns]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related
 
 - [[entities/kserve.md|KServe (entities)]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

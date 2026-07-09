@@ -95,25 +95,25 @@ Every write increments a global revision number. Watch streams track from a spec
 - etcd 深度解析
 - 19-etcd-operations
 - 07-distributed-consensus-etcd
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[故障诊断/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
+- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[故障诊断/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
+- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.3
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.4.md|RELEASE-NOTES-3.4]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-0.1
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
+- [[生态参考/_archived-release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
 - Wiki Digest — Daily (2026-05-21) — Cross-reference
 - [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 - [[entities/specialized-workloads-terms.md|K8s 专用工作负载术语参考]] — Cross-reference
@@ -122,7 +122,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[entities/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[entities/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
 - [[entities/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
 - [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[entities/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference
@@ -179,13 +179,13 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[skills/ts-storage.md|存储故障排查]] — Cross-reference
 - [[skills/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
 - [[skills/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
-- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]] — Cross-reference
-- [[domain-01-cluster-fundamentals/03-control-plane/12-apiserver-deep-dive.md|kube-apiserver 深度解析]] — Cross-reference
+- [[集群基础/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]] — Cross-reference
+- [[集群基础/03-control-plane/12-apiserver-deep-dive.md|kube-apiserver 深度解析]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference
 - [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

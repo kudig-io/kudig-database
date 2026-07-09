@@ -1,7 +1,7 @@
 ---
 title: 核心依赖变更日志索引
 description: '# 核心依赖变更日志索引'
-summary: 'domain-19-landscape-references/_archived-release-notes/core-deps/ 目录下全部 83 个文件。'
+summary: '生态参考/_archived-release-notes/core-deps/ 目录下全部 83 个文件。'
 category: entities
 tags:
 - k8s
@@ -38,7 +38,7 @@ prerequisites:
 
 # 核心依赖变更日志索引
 
-> 本文档是 `domain-19-landscape-references/_archived-release-notes/core-deps/` 目录下核心依赖组件变更日志的索引 ^[inferred]
+> 本文档是 `生态参考/_archived-release-notes/core-deps/` 目录下核心依赖组件变更日志的索引 ^[inferred]
 
 ## 组件版本文件统计
 
@@ -80,7 +80,7 @@ prerequisites:
 
 ## 来源文档
 
-domain-19-landscape-references/_archived-release-notes/core-deps/ 目录下全部 83 个文件。
+生态参考/_archived-release-notes/core-deps/ 目录下全部 83 个文件。
 
 ## Related
 

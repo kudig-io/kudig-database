@@ -41,7 +41,7 @@ prerequisites:
 
 # Kubernetes 变更日志索引
 
-> 本文档是 `domain-19-landscape-references/_archived-release-notes/kubernetes/` 目录下 Kubernetes 变更日志的索引和摘要 ^[inferred]
+> 本文档是 `生态参考/_archived-release-notes/kubernetes/` 目录下 Kubernetes 变更日志的索引和摘要 ^[inferred]
 
 ## CHANGELOG 文件索引
 
@@ -95,7 +95,7 @@ prerequisites:
 
 ## 来源文档
 
-domain-19-landscape-references/_archived-release-notes/kubernetes/ 目录下全部 54 个文件。
+生态参考/_archived-release-notes/kubernetes/ 目录下全部 54 个文件。
 
 ## Related
 

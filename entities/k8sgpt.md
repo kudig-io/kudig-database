@@ -91,8 +91,8 @@ K8sGPT 是一款 AI 驱动的 Kubernetes 诊断工具，利用大语言模型 (L
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - k8sgpt
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

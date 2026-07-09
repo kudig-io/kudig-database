@@ -72,31 +72,31 @@ prerequisites:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ TIER 1: 核心技术域                                                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ domain-01-cluster-fundamentals     101 文件                              │
+│ 集群基础     101 文件                              │
 │   ← domain-1 (architecture) + domain-2 (design) + domain-3 (control-plane)   │
 │   子目录: 01-architecture-overview, 02-design-principles, 03-control-plane,  │
 │          04-api-versions, 05-kubectl, 06-upgrade-paths, 07-performance-tuning│
 │                                                                              │
-│ domain-02-workloads-applications    40 文件                              │
+│ 工作负载    40 文件                              │
 │   ← domain-4 (workloads) + domain-43 (java-kubernetes) + domain-18 部分文件  │
 │                                                                              │
-│ domain-03-networking-traffic       116 文件                              │
+│ 网络       116 文件                              │
 │   ← domain-5 (networking) + domain-15 (fundamentals) + domain-26 (mesh)      │
 │     + domain-35 (ebpf) + domain-40 (api-gateway)                             │
 │   子目录: 00-core-k8s-networking, 01-fundamentals, 02-service-mesh,          │
 │          03-api-gateway, 04-ebpf, 05-troubleshooting, 99-attachments         │
 │                                                                              │
-│ domain-04-storage-data              30 文件                              │
+│ 存储              30 文件                              │
 │   ← domain-6 (storage) + domain-16 (storage-fundamentals)                    │
 │                                                                              │
-│ domain-05-security-compliance       61 文件                              │
-│   ← domain-7 (security) + domain-25 ([[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]])                  │
+│ 安全       61 文件                              │
+│   ← domain-7 (security) + domain-25 ([[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]])                  │
 │     + domain-39 (supply-chain-security) + domain-18 部分文件                 │
 │   子目录: 01-identity-access, 02-network-security, 03-runtime-security,      │
 │          04-policy-governance, 05-supply-chain, 06-compliance,               │
 │          07-incident-response                                               │
 │                                                                              │
-│ domain-06-observability             67 文件                              │
+│ 可观测性             67 文件                              │
 │   ← domain-8 (observability) + domain-20 (monitoring-alerting)               │
 │     + domain-21 (logging) + domain-18 部分文件                               │
 │   子目录: 01-overview, 02-metrics, 03-logging, 04-tracing, 05-alerting,      │
@@ -104,40 +104,40 @@ prerequisites:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ TIER 2: 平台与工程域                                                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ domain-07-platform-engineering      49 文件                              │
+│ 平台工程      49 文件                              │
 │   ← domain-9 (platform-ops) + domain-36 (platform-engineering)               │
 │     + domain-18 部分文件                                                     │
 │   子目录: build, operate, governance, developer-experience                   │
 │                                                                              │
-│ domain-08-release-change-management 35 文件                              │
+│ 发布变更 35 文件                              │
 │   ← domain-23 (gitops-ci-cd) + domain-24 (iac) + domain-18 部分文件          │
 │     + domain-29 (automated-testing)                                          │
 │   子目录: 01-gitops, 02-iac, 03-change-management, 04-testing-quality        │
 │                                                                              │
-│ domain-09-reliability-engineering   16 文件                              │
+│ 可靠性   16 文件                              │
 │   ← domain-30 (disaster-recovery) + domain-18 部分文件                       │
 │   子目录: 01-backup-recovery, 02-disaster-recovery, 03-capacity-planning     │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ TIER 3: 运维场景域                                                            │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ domain-10-troubleshooting-diagnostics  221 文件                          │
+│ 故障诊断  221 文件                          │
 │   ← domain-12 (troubleshooting) — 完整子目录结构保留                         │
 │                                                                              │
-│ domain-11-production-operations       11 文件                            │
+│ 生产运维       11 文件                            │
 │   ← domain-18 精简后：FinOps, 治理, 事件响应, 绿色计算                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ TIER 4: 部署与生态域                                                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ domain-12-cloud-providers             40 文件                            │
+│ 云厂商             40 文件                            │
 │   ← domain-17 (cloud-provider) + domain-27 (multi-cloud) + domain-18 部分   │
 │                                                                              │
-│ domain-13-container-runtime           27 文件                            │
+│ 容器运行时           27 文件                            │
 │   ← domain-13 (docker) + domain-22 (image-management)                        │
 │                                                                              │
-│ domain-14-ai-ml-infra                100 文件                            │
+│ AI基础设施                100 文件                            │
 │   ← domain-11 (ai-infra) + domain-41 (ai-agent)                              │
 │                                                                              │
-│ domain-15-specialized-tech            51 文件                            │
+│ 专项技术            51 文件                            │
 │   ← domain-10 (extensions) + domain-37 (edge) + domain-38 (wasm)             │
 │     + domain-18 部分文件                                                     │
 │                                                                              │
@@ -167,39 +167,39 @@ prerequisites:
 
 | 原 Domain | 文件数 | 新 Domain | 处理方式 |
 |-----------|--------|-----------|---------|
-| domain-8-observability | 35 | domain-06-observability | 合并 |
-| domain-20-enterprise-monitoring-alerting | 15 | domain-06-observability | 合并 |
-| domain-21-logging-management-analytics | 12 | domain-06-observability | 合并 |
-| domain-7-security | 24 | domain-05-security-compliance | 合并 |
-| domain-25-cloud-native-security | 18 | domain-05-security-compliance | 合并 |
-| domain-39-supply-chain-security | 14 | domain-05-security-compliance | 合并 |
+| domain-8-observability | 35 | 可观测性 | 合并 |
+| domain-20-enterprise-monitoring-alerting | 15 | 可观测性 | 合并 |
+| domain-21-logging-management-analytics | 12 | 可观测性 | 合并 |
+| domain-7-security | 24 | 安全 | 合并 |
+| domain-25-cloud-native-security | 18 | 安全 | 合并 |
+| domain-39-supply-chain-security | 14 | 安全 | 合并 |
 
 ### P1 优先级（已完成）
 
 | 原 Domain | 文件数 | 处理方式 |
 |-----------|--------|---------|
 | domain-18-production-operations | 34 | **拆分**至 8 个目标 Domain |
-| domain-9-platform-ops | 31 | domain-07-platform-engineering |
-| domain-36-platform-engineering | 15 | domain-07-platform-engineering |
+| domain-9-platform-ops | 31 | 平台工程 |
+| domain-36-platform-engineering | 15 | 平台工程 |
 
 ### P2 优先级（已完成）
 
 | 原 Domain | 文件数 | 新 Domain |
 |-----------|--------|-----------|
-| domain-5-networking | 57 | domain-03-networking-traffic |
-| domain-15-network-fundamentals | 10 | domain-03-networking-traffic |
-| domain-26-service-mesh-microservices | 16 | domain-03-networking-traffic |
-| domain-35-ebpf-technology | 13 | domain-03-networking-traffic |
-| domain-40-cloud-native-api-gateway | 18 | domain-03-networking-traffic |
-| domain-6-storage | 21 | domain-04-storage-data |
-| domain-16-storage-fundamentals | 9 | domain-04-storage-data |
+| domain-5-networking | 57 | 网络 |
+| domain-15-network-fundamentals | 10 | 网络 |
+| domain-26-service-mesh-microservices | 16 | 网络 |
+| domain-35-ebpf-technology | 13 | 网络 |
+| domain-40-cloud-native-api-gateway | 18 | 网络 |
+| domain-6-storage | 21 | 存储 |
+| domain-16-storage-fundamentals | 9 | 存储 |
 
 ### P3 优先级（已完成）
 
 | 原 Domain | 文件数 | 新 Domain |
 |-----------|--------|-----------|
-| domain-13-docker | 16 | domain-13-container-runtime |
-| domain-22-container-image-management | 11 | domain-13-container-runtime |
+| domain-13-docker | 16 | 容器运行时 |
+| domain-22-container-image-management | 11 | 容器运行时 |
 | domain-14-linux | 13 | domain-90-system-foundation |
 | domain-31-hardware | 21 | domain-90-system-foundation |
 | domain-33-kubernetes-events | 18 | domain-90-system-foundation |
@@ -207,29 +207,29 @@ prerequisites:
 | domain-19-papers | 29 | domain-92-landscape-references |
 | domain-34-cncf-landscape | 7+229 | domain-92-landscape-references |
 | domain-42-application-architecture | 98 | domain-93-application-patterns |
-| domain-10-extensions | 22 | domain-15-specialized-tech |
-| domain-37-edge-computing | 14 | domain-15-specialized-tech |
-| domain-38-webassembly-cloud-native | 14 | domain-15-specialized-tech |
-| domain-11-ai-infra | 41 | domain-14-ai-ml-infra |
-| domain-41-ai-agent | 52 | domain-14-ai-ml-infra |
-| domain-17-cloud-provider | 3+ | domain-12-cloud-providers |
-| domain-27-multi-cloud-hybrid | 13 | domain-12-cloud-providers |
-| domain-23-gitops-ci-cd | 15 | domain-08-release-change-management |
-| domain-24-infrastructure-as-code | 9 | domain-08-release-change-management |
+| domain-10-extensions | 22 | 专项技术 |
+| domain-37-edge-computing | 14 | 专项技术 |
+| domain-38-webassembly-cloud-native | 14 | 专项技术 |
+| domain-11-ai-infra | 41 | AI基础设施 |
+| domain-41-ai-agent | 52 | AI基础设施 |
+| domain-17-cloud-provider | 3+ | 云厂商 |
+| domain-27-multi-cloud-hybrid | 13 | 云厂商 |
+| domain-23-gitops-ci-cd | 15 | 发布变更 |
+| domain-24-infrastructure-as-code | 9 | 发布变更 |
 | domain-28-enterprise-database-middleware | 12 | domain-28-database-middleware |
-| domain-29-automated-testing-quality | 8 | domain-08-release-change-management |
-| domain-30-disaster-recovery-business-continuity | 12 | domain-09-reliability-engineering |
-| domain-43-java-kubernetes | 8 | domain-02-workloads-applications |
+| domain-29-automated-testing-quality | 8 | 发布变更 |
+| domain-30-disaster-recovery-business-continuity | 12 | 可靠性 |
+| domain-43-java-kubernetes | 8 | 工作负载 |
 
 ### 核心域合并（已完成）
 
 | 原 Domain | 文件数 | 新 Domain |
 |-----------|--------|-----------|
-| domain-1-architecture-fundamentals | 35 | domain-01-cluster-fundamentals |
-| domain-2-design-principles | 22 | domain-01-cluster-fundamentals |
-| domain-3-control-plane | 39 | domain-01-cluster-fundamentals |
-| domain-4-workloads | 30 | domain-02-workloads-applications |
-| domain-12-troubleshooting | 50+ | domain-10-troubleshooting-diagnostics |
+| domain-1-architecture-fundamentals | 35 | 集群基础 |
+| domain-2-design-principles | 22 | 集群基础 |
+| domain-3-control-plane | 39 | 集群基础 |
+| domain-4-workloads | 30 | 工作负载 |
+| domain-12-troubleshooting | 50+ | 故障诊断 |
 
 ---
 

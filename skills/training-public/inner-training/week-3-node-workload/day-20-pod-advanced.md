@@ -69,8 +69,8 @@ audience:
 estimated_read_time: 45min
 related_domains:
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-scheduling-strategies
   - pod-probes
@@ -105,7 +105,7 @@ related_topics:
    - 重点: 三种探针类型、检测方式、参数配置
 
 3. **ACK 调度优化**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/250-ack-workload.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/250-ack-workload.md`
    - 重点: ACK 中调度器扩展与拓扑感知调度
 
 ### 阅读要点

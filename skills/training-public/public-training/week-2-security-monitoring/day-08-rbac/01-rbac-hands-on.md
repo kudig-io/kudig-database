@@ -384,16 +384,16 @@ audience:
   - security-engineer
 estimated_read_time: 45min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-05-security-compliance
+  - 故障诊断
+  - 安全
 related_topics:
   - security
   - rbac
   - authorization
   - serviceaccount
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-2-security-monitoring/day-09-ram-account-management.md
-  - domain-10-troubleshooting-diagnostics/07-rbac-permission-troubleshooting.md
+  - 生产运维/topic-learn/public-training/week-2-security-monitoring/day-09-ram-account-management.md
+  - 故障诊断/07-rbac-permission-troubleshooting.md
 ---
 ```
 

@@ -17,15 +17,15 @@ tags:
 - cross-cluster
 tier: supporting
 sources:
-- domain-03-networking-traffic/00-core-k8s-networking
-- domain-03-networking-traffic/01-fundamentals
-- domain-06-observability/02-metrics
-- domain-06-observability/07-tools
+- 网络/00-core-k8s-networking
+- 网络/01-fundamentals
+- 可观测性/02-metrics
+- 可观测性/07-tools
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md]]'
+- target: '[[系统基础/topic-dictionary/networking/cluster-mesh.md]]'
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
@@ -43,13 +43,13 @@ relationships:
 
 ## 概述
 
-现代 [[entities/kubernetes.md|Kubernetes]] 平台通常由多个集群组成——按环境划分（开发/测试/生产）、按地域划分（Region A/B/C）、按团队划分（平台/业务/AI）。每个集群独立运行 [[entities/prometheus.md|Prometheus]]，但运维团队需要一个统一的"全局视图"来回答跨集群问题："所有生产集群的 API Server 延迟趋势如何？""跨地域的服务调用链路是否健康？" 本页连接 domain-03-networking-traffic 的多集群网络拓扑与 domain-06-observability 的联邦监控系统，展示 Thanos 和 Cortex 如何实现真正的多集群可观测性联邦。
+现代 [[entities/kubernetes.md|Kubernetes]] 平台通常由多个集群组成——按环境划分（开发/测试/生产）、按地域划分（Region A/B/C）、按团队划分（平台/业务/AI）。每个集群独立运行 [[entities/prometheus.md|Prometheus]]，但运维团队需要一个统一的"全局视图"来回答跨集群问题："所有生产集群的 API Server 延迟趋势如何？""跨地域的服务调用链路是否健康？" 本页连接 网络 的多集群网络拓扑与 可观测性 的联邦监控系统，展示 Thanos 和 Cortex 如何实现真正的多集群可观测性联邦。
 
 ## 核心连接
 
 | 域 | 核心能力 | 联邦监控的桥接作用 |
 |---|---|---|
-| **Networking (domain-03)** | 多集群网络（[[entities/cilium.md|Cilium]] [[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md|Cluster Mesh]]）、流量路由 | 联邦查询需要跨集群网络可达，mTLS 保障安全传输 |
+| **Networking (domain-03)** | 多集群网络（[[entities/cilium.md|Cilium]] [[系统基础/topic-dictionary/networking/cluster-mesh.md|Cluster Mesh]]）、流量路由 | 联邦查询需要跨集群网络可达，mTLS 保障安全传输 |
 | **Observability (domain-06)** | 指标采集、告警、长期存储 | 联邦层聚合多个 Prometheus 数据，提供统一查询和全局告警 |
 
 **关键洞察：多集群可观测性的核心矛盾是"分布式采集"与"集中式洞察"的冲突。** 每个集群的 Prometheus 是自治的（高可用、本地存储、独立告警），但全局视图需要打破集群边界。Thanos 和 Cortex 通过"中心化查询 + 分布式存储"的架构解决这一矛盾。
@@ -393,10 +393,10 @@ groups:
 
 ## 相关 Domain
 
-- domain-03-networking-traffic/00-core-k8s-networking
-- domain-03-networking-traffic/02-cni
-- domain-06-observability/02-metrics
-- domain-06-observability/07-tools
+- 网络/00-core-k8s-networking
+- 网络/02-cni
+- 可观测性/02-metrics
+- 可观测性/07-tools
 - Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

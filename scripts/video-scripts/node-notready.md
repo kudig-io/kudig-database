@@ -180,9 +180,9 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ## 关联知识库
 
-- Skill 源文档：domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md
-- 相关 FTA：参考 domain-10-troubleshooting-diagnostics/topic-fta/
-- 深度排查：参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
+- Skill 源文档：故障诊断/topic-skills/01-node-notready.md
+- 相关 FTA：参考 故障诊断/topic-fta/
+- 深度排查：参考 故障诊断/topic-structural-trouble-shooting/
 
 
 <!-- risk-assessed -->

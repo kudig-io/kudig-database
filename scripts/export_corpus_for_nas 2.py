@@ -66,7 +66,7 @@ _OUTPUT_DIR_PREFIXES = ('release', 'kudig-corpus-export', 'corpus-export')
 # QA 语料目录：其内容是训练数据（流入 qa/），不作为知识页面进入 corpus
 # （脚本已用 copy_qa_raw_sources 将其导出到 qa/raw/，不应再以页面形式重复收录）
 _QA_CORPUS_DIRS = (
-    'domain-10-troubleshooting-diagnostics/topic-qa-corpus/',
+    '故障诊断/topic-qa-corpus/',
 )
 # 始终排除的非文本后缀（语料库只承载文本知识）
 _HARD_EXCLUDED_SUFFIXES = (
@@ -308,7 +308,7 @@ def copy_qa_raw_sources(vault: Path, qa_dir: Path) -> int:
     """复制 QA 语料原始文件（YAML/JSON/MD）到 qa/raw/。"""
     raw_dir = qa_dir / 'raw'
     raw_dir.mkdir(parents=True, exist_ok=True)
-    qa_corpus_dir = vault / 'domain-10-troubleshooting-diagnostics' / 'topic-qa-corpus'
+    qa_corpus_dir = vault / '故障诊断' / 'topic-qa-corpus'
     if not qa_corpus_dir.exists():
         return 0
 

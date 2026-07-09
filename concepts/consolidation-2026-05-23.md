@@ -13,11 +13,11 @@ lifecycle: draft
 lifecycle_changed: 2026-05-23
 last_updated: 2026-05-23
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+- target: '[[系统基础/topic-dictionary/networking/ingress.md]]'
   type: uses
 - target: '[[entities/istio.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/topic-dictionary/networking/service.md]]'
   type: uses
 - target: '[[entities/argo.md]]'
   type: related_to
@@ -35,17 +35,17 @@ relationships:
 - Contradiction callouts added: 0
 
 ## Broken Link Fixes
-- `domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md` — Nexus → `Nexus`
-- `domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md` — ELK → `ELK`
-- `domain-12-cloud-providers/01-alibaba-cloud/README.md` — [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|ingress]]-gateway-failure.md]] → plain text
+- `云厂商/01-alibaba-cloud/01-专有云架构概述.md` — Nexus → `Nexus`
+- `云厂商/01-alibaba-cloud/01-专有云架构概述.md` — ELK → `ELK`
+- `云厂商/01-alibaba-cloud/README.md` — [[系统基础/topic-dictionary/networking/ingress.md|ingress]]-gateway-failure.md]] → plain text
 
 ## Cross-References Added (orphan rescue)
-- `synthesis/gitops-sre-release-gate.md` — now linked from: [[entities/argo.md|argo]]-cd-enterprise-gitops.md]], [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
-- `[[domain-17-system-foundation/topic-dictionary/networking/service.md|service]]-mesh-zero-trust-security.md` — now linked from: [[entities/istio.md|istio]]-enterprise-service-mesh.md]], [[domain-05-security-compliance/02-network-security/07-zero-trust-security-architecture.md|07 zero trust security architecture]]
+- `synthesis/gitops-sre-release-gate.md` — now linked from: [[entities/argo.md|argo]]-cd-enterprise-gitops.md]], [[可靠性/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
+- `[[系统基础/topic-dictionary/networking/service.md|service]]-mesh-zero-trust-security.md` — now linked from: [[entities/istio.md|istio]]-enterprise-service-mesh.md]], [[安全/02-network-security/07-zero-trust-security-architecture.md|07 zero trust security architecture]]
 - `synthesis/finops-resource-governance.md` — already linked (previously fixed)
 
 ## Scope
-本次 consolidate 聚焦新增内容范围（阿里云文档 + synthesis），未处理全 vault 历史遗留的 ~25,465 个 broken links（主要来自 domain-19-landscape-references 的 CNCF 文件）。
+本次 consolidate 聚焦新增内容范围（阿里云文档 + synthesis），未处理全 vault 历史遗留的 ~25,465 个 broken links（主要来自 生态参考 的 CNCF 文件）。
 
 ## 全 Vault Broken Links 清理（追加）
 
@@ -73,7 +73,7 @@ relationships:
 - 覆盖文件: ~4,300+ 个 Markdown
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
+- [[系统基础/topic-cheat-sheet/git.md|Git 速查卡]]
 
 ## Cross-Linker — 知识图谱织密
 

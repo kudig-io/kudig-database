@@ -56,37 +56,37 @@ The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for b
 # 🟢 低风险：只读/信息收集，通常无副作用
 ┌─────────────────────────────────────────────────────────────┐
 │  Layer 1: Foundation (Core K8s Knowledge)                    │
-│  domain-01-cluster-fundamentals  Architecture Fundamentals                         │
-│  domain-01-cluster-fundamentals  Design Principles                                 │
-│  domain-01-cluster-fundamentals  Control Plane (etcd, API Server, Scheduler, CM)   │
-│  domain-02-workloads-applications  Workloads (Pod, Deployment, StatefulSet, Job)     │
-│  domain-03-networking-traffic  Networking (CNI, Service, Ingress, Gateway API)  │
-│  domain-04-storage-data  Storage (PV, PVC, CSI)                            │
-│  domain-05-security-compliance  Security (RBAC, Network Policy, Runtime)          │
-│  domain-06-observability  Observability (Prometheus, Logging, Tracing)      │
-│  domain-07-platform-engineering  Platform Operations                               │
+│  集群基础  Architecture Fundamentals                         │
+│  集群基础  Design Principles                                 │
+│  集群基础  Control Plane (etcd, API Server, Scheduler, CM)   │
+│  工作负载  Workloads (Pod, Deployment, StatefulSet, Job)     │
+│  网络  Networking (CNI, Service, Ingress, Gateway API)  │
+│  存储  Storage (PV, PVC, CSI)                            │
+│  安全  Security (RBAC, Network Policy, Runtime)          │
+│  可观测性  Observability (Prometheus, Logging, Tracing)      │
+│  平台工程  Platform Operations                               │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 2: Advanced Operations                                │
-│  domain-10-troubleshooting-diagnostics Troubleshooting                                   │
-│  domain-13-container-runtime Docker                                            │
-│  domain-17-system-foundation Linux                                             │
-│  domain-03-networking-traffic Network Fundamentals                              │
-│  domain-04-storage-data Storage Fundamentals                              │
-│  domain-12-cloud-providers Cloud Provider                                    │
-│  domain-11-production-operations Production Operations                             │
+│  故障诊断 Troubleshooting                                   │
+│  容器运行时 Docker                                            │
+│  系统基础 Linux                                             │
+│  网络 Network Fundamentals                              │
+│  存储 Storage Fundamentals                              │
+│  云厂商 Cloud Provider                                    │
+│  生产运维 Production Operations                             │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 3: Specialized Domains                                │
-│  domain-19-landscape-references Papers           domain-09-reliability-engineering Disaster Recovery      │
-│  domain-06-observability Monitoring       domain-17-system-foundation Hardware               │
-│  domain-06-observability Logging          domain-18-manifests-patterns YAML Manifests         │
-│  domain-03-networking-traffic Container Images domain-17-system-foundation K8s Events             │
-│  domain-08-release-change-management GitOps/CI-CD     domain-19-landscape-references CNCF Landscape         │
-│  domain-08-release-change-management IaC              domain-03-networking-traffic eBPF Technology        │
-│  domain-05-security-compliance Cloud-Native Sec domain-07-platform-engineering Platform Engineering   │
-│  domain-03-networking-traffic Service Mesh     domain-15-specialized-tech Edge Computing         │
-│  domain-12-cloud-providers Multi-Cloud      domain-15-specialized-tech WebAssembly Cloud-Native│
-│  domain-16-database-middleware Database/Middleware domain-05-security-compliance Supply Chain Security│
-│  domain-08-release-change-management Automated Testing domain-03-networking-traffic API Gateway           │
+│  生态参考 Papers           可靠性 Disaster Recovery      │
+│  可观测性 Monitoring       系统基础 Hardware               │
+│  可观测性 Logging          清单模式 YAML Manifests         │
+│  网络 Container Images 系统基础 K8s Events             │
+│  发布变更 GitOps/CI-CD     生态参考 CNCF Landscape         │
+│  发布变更 IaC              网络 eBPF Technology        │
+│  安全 Cloud-Native Sec 平台工程 Platform Engineering   │
+│  网络 Service Mesh     专项技术 Edge Computing         │
+│  云厂商 Multi-Cloud      专项技术 WebAssembly Cloud-Native│
+│  数据库中间件 Database/Middleware 安全 Supply Chain Security│
+│  发布变更 Automated Testing 网络 API Gateway           │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 4: Problem-Solving Engine (KUDIG Differentiator)      │
 │  topic-fta      Fault Tree Analysis methodology + 16 top events│
@@ -100,7 +100,7 @@ The KUDIG-DB is a 3,532-file Kubernetes operations knowledge base designed for b
 │  topic-ai-coding   OpenRouter, OpenCode AI coding tools       │
 │  topic-application-architecture  96 industry architecture patterns│
 │  domain-java-kubernetes  Java on K8s                          │
-│  domain-03-networking-traffic  Networking + Terway CNI deep dive      │
+│  网络  Networking + Terway CNI deep dive      │
 │  topic-febm        Forensic Evidence-Based Method            │
 │  topic-migration   Migration guides                          │
 ├─────────────────────────────────────────────────────────────┤

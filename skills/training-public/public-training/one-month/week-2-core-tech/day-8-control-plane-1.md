@@ -83,16 +83,16 @@ audience:
   - ops-engineer
 estimated_read_time: 50min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - control-plane
   - etcd
   - apiserver
   - authentication
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-9-control-plane-2.md
-  - domain-01-cluster-fundamentals/11-etcd-deep-dive.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-9-control-plane-2.md
+  - 集群基础/11-etcd-deep-dive.md
 ---
 ```
 
@@ -548,9 +548,9 @@ kubectl exec -n kube-system $ETCD_POD -- \
 - [etcd 官方文档](https://etcd.io/docs/)
 - [Raft 论文](https://raft.github.io/raft.pdf)
 - [Kubernetes API Server 文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
-- [文件: `../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md`](../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md)
-- [文件: `../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md`](../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md)
-- [文件: `../../domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md`](../../domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md)
+- [文件: `../../集群基础/11-etcd-deep-dive.md`](../../集群基础/11-etcd-deep-dive.md)
+- [文件: `../../集群基础/12-apiserver-deep-dive.md`](../../集群基础/12-apiserver-deep-dive.md)
+- [文件: `../../集群基础/07-distributed-consensus-etcd.md`](../../集群基础/07-distributed-consensus-etcd.md)
 
 ---
 

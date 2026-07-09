@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Round 7: 高频引用缺失术语批量展开（25个）"""
 from pathlib import Path
-BASE = Path("domain-17-system-foundation/topic-dictionary")
+BASE = Path("系统基础/topic-dictionary")
 
 def w(cat, fn, zh, en, tags, ov, core, mech, use, refs, rel=""):
     fp = BASE / cat / f"{fn}.md"
@@ -9,7 +9,7 @@ def w(cat, fn, zh, en, tags, ov, core, mech, use, refs, rel=""):
         return False
     tks = "\n".join(f"- {k}" for k in dict.fromkeys([zh, en, "dictionary"]))
     tg = "\n".join(f"- {t}" for t in tags)
-    r = rel or "- [[domain-17-system-foundation/topic-dictionary/k8s-glossary|K8s Glossary]]"
+    r = rel or "- [[系统基础/topic-dictionary/k8s-glossary|K8s Glossary]]"
     fp.parent.mkdir(parents=True, exist_ok=True)
     fp.write_text(f"""---
 title: {zh}
@@ -72,7 +72,7 @@ TERMS = [
      "- 自动代码生成（基于 protobuf schema）\n- Connect-Go / Connect-ES / Connect-Swift 等语言实现\n- 支持 Unary、Server Streaming、Client Streaming、Bidi Streaming\n- 与 Envoy / Nginx 等代理无缝集成\n- 错误处理标准化（Connect Protocol Error）\n- connectrpc 命令行工具",
      "- gRPC API 的浏览器端调用\n- 移动应用的 RPC 通信\n- 替代 REST 的类型安全 API\n- gRPC-Web 的现代化升级\n- 微服务间的高性能 RPC 通信",
      "- https://connectrpc.com/\n- https://github.com/connectrpc/connect-go",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/grpc|gRPC]]\n- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]"),
+     "- [[系统基础/topic-dictionary/networking/grpc|gRPC]]\n- [[系统基础/topic-dictionary/networking/envoy|Envoy]]\n- [[系统基础/topic-dictionary/networking/istio|Istio]]"),
 
     ("networking", "ovn-kubernetes", "OVN-Kubernetes 网络方案", "OVN-Kubernetes",
      ["networking", "cni", "ovn"],
@@ -81,7 +81,7 @@ TERMS = [
      "- OVN Northbound/Southbound 数据库架构\n- OVS（Open vSwitch）作为节点数据面\n- 支持 Hybrid Overlay（Windows + Linux 节点混合）\n- EgressFirewall / EgressQoS / EgressService CRD\n- AdminNetworkPolicy（K8s 增强网络策略）\n- IPAM 管理和多子网支持",
      "- OpenShift / OCP 集群的标准网络方案\n- 需要硬件加速的企业网络\n- Windows + Linux 混合节点集群\n- 需要 AdminNetworkPolicy 的多租户环境\n- 大规模集群的高性能网络",
      "- https://github.com/ovn-kubernetes/ovn-kubernetes\n- https://docs.openshift.com/container-platform/latest/networking/understanding-networking.html",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/antrea|Antrea]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cilium|Cilium]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cni|CNI]]"),
+     "- [[系统基础/topic-dictionary/networking/antrea|Antrea]]\n- [[系统基础/topic-dictionary/networking/cilium|Cilium]]\n- [[系统基础/topic-dictionary/networking/cni|CNI]]"),
 
     ("networking", "kuma", "Kuma 服务网格", "Kuma",
      ["networking", "service-mesh", "envoy"],
@@ -90,7 +90,7 @@ TERMS = [
      "- Mesh CRD 定义网格实例（多网格隔离）\n- TrafficPermission / TrafficRoute / TrafficLog 策略\n- mTLS 自动管理（内置 CA）\n- 速率限制和熔断\n- MeshGateway 支持入口流量\n- Kong Mesh 商业版提供企业功能\n- Kuma GUI 可视化管理",
      "- 轻量级服务网格部署\n- K8s + VM 混合环境的服务治理\n- 多团队/多环境的网格隔离\n- 需要简单操作体验的服务网格\n- Istio 的轻量替代方案",
      "- https://kuma.io/\n- https://github.com/kumahq/kuma",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]\n- [[domain-17-system-foundation/topic-dictionary/networking/linkerd|Linkerd]]\n- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]"),
+     "- [[系统基础/topic-dictionary/networking/istio|Istio]]\n- [[系统基础/topic-dictionary/networking/linkerd|Linkerd]]\n- [[系统基础/topic-dictionary/networking/envoy|Envoy]]"),
 
     ("networking", "kube-vip", "kube-vip 虚拟 IP", "kube-vip",
      ["networking", "ha", "vip"],
@@ -99,7 +99,7 @@ TERMS = [
      "- ARP 模式（L2 局域网 VIP 漂移）\n- BGP 模式（L3 路由宣告，适合大规模）\n- Leader Election 确保单活 VIP\n- Service 自动检测（监控 LoadBalancer 类型 Service）\n- 等价路由（ECMP）负载均衡\n- 支持 IPVS 内核级负载均衡",
      "- kubeadm 集群的控制面高可用\n- 裸金属/边缘环境的 LoadBalancer 实现\n- 替代 MetalLB 的轻量方案\n- 多集群的入口流量管理\n- 无外部 LB 的内部服务暴露",
      "- https://kube-vip.io/\n- https://github.com/kube-vip/kube-vip",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/metallb|MetalLB]]\n- [[domain-17-system-foundation/topic-dictionary/networking/consul|Consul]]\n- [[domain-17-system-foundation/topic-dictionary/networking/k8gb|K8GB]]"),
+     "- [[系统基础/topic-dictionary/networking/metallb|MetalLB]]\n- [[系统基础/topic-dictionary/networking/consul|Consul]]\n- [[系统基础/topic-dictionary/networking/k8gb|K8GB]]"),
 
     ("networking", "aeraki-mesh", "Aeraki Mesh 七层网格", "Aeraki Mesh",
      ["networking", "service-mesh", "l7"],
@@ -108,7 +108,7 @@ TERMS = [
      "- Aeraki Protocol Framework 协议扩展框架\n- 支持 Dubbo、Thrift、Redis、MySQL 等非 HTTP 协议\n- Aeraki Mesh CRD 定义七层路由规则\n- 与 Istio 控制面无缝集成\n- MetaProtocol 元协议框架（协议无关的流量治理）\n- LazyXDS 按需加载优化大规模集群性能",
      "- 使用 Dubbo/Thrift 等传统 RPC 框架的微服务网格化\n- 需要非 HTTP 协议流量治理的场景\n- Istio 生态的协议扩展\n- 传统微服务向服务网格迁移\n- 多协议混合环境的统一管理",
      "- https://www.aeraki.net/\n- https://github.com/aeraki-mesh/aeraki",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]\n- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/linkerd|Linkerd]]"),
+     "- [[系统基础/topic-dictionary/networking/istio|Istio]]\n- [[系统基础/topic-dictionary/networking/envoy|Envoy]]\n- [[系统基础/topic-dictionary/networking/linkerd|Linkerd]]"),
 
     # ── Security ──
     ("security", "notary-project", "Notary Project 容器签名", "Notary Project",
@@ -118,7 +118,7 @@ TERMS = [
      "- `notation sign` 对 OCI 制品签名\n- `notation verify` 验证签名\n- 支持多种密钥后端（本地文件、Azure Key Vault、AWS KMS）\n- Trust Store 和 Trust Policy 管理\n- 签名存储在 OCI Registry 的 Referrers API\n- 与 Kyverno/OPA Gatekeeper/Ratify 集成验证",
      "- CI/CD Pipeline 中的镜像签名和验证\n- 生产部署前的镜像来源验证\n- 合规要求下的软件供应链审计\n- 多环境镜像复制时的完整性保障\n- Kubernetes Admission 策略中的签名验证",
      "- https://notaryproject.dev/\n- https://github.com/notaryproject/notation",
-     "- [[domain-17-system-foundation/topic-dictionary/security/ratify|Ratify]]\n- [[domain-17-system-foundation/topic-dictionary/security/in-toto|in-toto]]\n- [[domain-17-system-foundation/topic-dictionary/security/trivy|Trivy]]"),
+     "- [[系统基础/topic-dictionary/security/ratify|Ratify]]\n- [[系统基础/topic-dictionary/security/in-toto|in-toto]]\n- [[系统基础/topic-dictionary/security/trivy|Trivy]]"),
 
     ("security", "in-toto", "in-toto 供应链安全", "in-toto",
      ["security", "supply-chain", "verification"],
@@ -127,7 +127,7 @@ TERMS = [
      "- Layout 定义：供应链步骤序列和验证规则\n- Link 元数据：每个步骤的材料（materials）和产品（products）\n- 函数签名验证（Functionary verification）\n- 子布局（Sublayouts）支持嵌套供应链\n- ITE-5/ITE-6 规范标准化\n- `in-toto-run` / `in-toto-verify` CLI 工具",
      "- CI/CD Pipeline 的完整性验证\n- 软件发布流程的审计追踪\n- 第三方依赖的来源验证\n- SLSA 合规的供应链证明\n- 与 Sigstore/TUF 集成的综合安全方案",
      "- https://in-toto.io/\n- https://github.com/in-toto/in-toto",
-     "- [[domain-17-system-foundation/topic-dictionary/security/notary-project|Notary Project]]\n- [[domain-17-system-foundation/topic-dictionary/security/ratify|Ratify]]\n- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security|供应链安全]]"),
+     "- [[系统基础/topic-dictionary/security/notary-project|Notary Project]]\n- [[系统基础/topic-dictionary/security/ratify|Ratify]]\n- [[系统基础/topic-dictionary/security/supply-chain-security|供应链安全]]"),
 
     ("security", "ratify", "Ratify 准入验证", "Ratify",
      ["security", "admission", "supply-chain"],
@@ -136,7 +136,7 @@ TERMS = [
      "- 与 OPA Gatekeeper 的 External Data 集成\n- Notation / Cosign 签名验证\n- SBOM 存在性和格式验证\n- 漏洞扫描结果验证（Trivy/Grype）\n- Certificate Store 管理签名证书\n- VerificationResult 标准化输出",
      "- 生产集群的镜像签名强制验证\n- CI/CD 中的供应链安全检查门控\n- 合规要求下的 SBOM 验证\n- 多来源镜像的统一准入策略\n- 与 Kyverno/Gatekeeper 配合的策略引擎",
      "- https://ratify.dev/\n- https://github.com/ratify-project/ratify",
-     "- [[domain-17-system-foundation/topic-dictionary/security/notary-project|Notary Project]]\n- [[domain-17-system-foundation/topic-dictionary/security/opa|OPA Gatekeeper]]\n- [[domain-17-system-foundation/topic-dictionary/security/kyverno|Kyverno]]"),
+     "- [[系统基础/topic-dictionary/security/notary-project|Notary Project]]\n- [[系统基础/topic-dictionary/security/opa|OPA Gatekeeper]]\n- [[系统基础/topic-dictionary/security/kyverno|Kyverno]]"),
 
     ("security", "keycloak", "Keycloak 身份管理", "Keycloak",
      ["security", "identity", "sso"],
@@ -145,7 +145,7 @@ TERMS = [
      "- Realm（域）隔离的多租户管理\n- Identity Broker（联邦身份代理）连接外部 IdP\n- 社交登录（Google/GitHub/Facebook 等）\n- 用户自助服务（注册/密码重置/账户管理）\n- Fine-Grained Admin Permissions\n- OTP/MFA 多因素认证\n- 与 Dex 互补（Keycloak 作为 Dex 后端）",
      "- 企业级 SSO 和身份管理平台\n- Kubernetes 集群的外部 OIDC 提供者\n- 多应用/多服务的统一认证授权\n- 用户自助服务和生命周期管理\n- 合规要求下的审计和访问控制",
      "- https://www.keycloak.org/\n- https://github.com/keycloak/keycloak",
-     "- [[domain-17-system-foundation/topic-dictionary/security/dex|Dex]]\n- [[domain-17-system-foundation/topic-dictionary/security/oauth2-proxy|oauth2-proxy]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]"),
+     "- [[系统基础/topic-dictionary/security/dex|Dex]]\n- [[系统基础/topic-dictionary/security/oauth2-proxy|oauth2-proxy]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]"),
 
     # ── Workloads ──
     ("workloads", "openkruise", "OpenKruise 增强工作负载", "OpenKruise",
@@ -155,7 +155,7 @@ TERMS = [
      "- CloneSet：增强版 Deployment（支持原地升级、指定删除、分批发布）\n- Advanced StatefulSet：增强版 StatefulSet（原地升级、无序扩缩）\n- SidecarSet：统一管理 Sidecar 容器注入和升级\n- NodeImage / ImagePullJob：镜像预热和按需拉取\n- ResourceDistribution：跨命名空间资源分发\n- Advanced DaemonSet：增强版 DaemonSet",
      "- 大规模集群的工作负载管理\n- 需要原地升级（不重建 Pod）的场景\n- Sidecar 容器的统一管理和升级\n- 镜像预热加速大规模扩容\n- 分批发布和金丝雀发布的精细化控制",
      "- https://openkruise.io/\n- https://github.com/openkruise/kruise",
-     "- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/statefulset|StatefulSet]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|DaemonSet]]"),
+     "- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/workloads/statefulset|StatefulSet]]\n- [[系统基础/topic-dictionary/workloads/daemonset|DaemonSet]]"),
 
     # ── Storage ──
     ("storage", "vineyard", "Vineyard 分布式数据共享", "Vineyard",
@@ -165,7 +165,7 @@ TERMS = [
      "- Blob（不可变数据对象）和 Metadata（可变元数据对象）\n- 基于 mmap 的零拷贝共享\n- Distributed Object Manager 跨节点管理\n- 与 Kubernetes CSI 集成（Vineyard CSI Driver）\n- SDK 支持 Python/C++/Java/Rust\n- 与 Ray/Spark/Dask/Mars 等框架集成",
      "- ML Pipeline 中间数据的零拷贝共享\n- 分布式训练中的数据分发\n- 大规模数据处理任务的内存优化\n- 多租户环境下的数据隔离与共享\n- 替代文件系统中转的内存级数据交换",
      "- https://v6d.io/\n- https://github.com/v6d-io/v6d",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/fluid|Fluid]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray|Ray]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]"),
+     "- [[系统基础/topic-dictionary/storage/fluid|Fluid]]\n- [[系统基础/topic-dictionary/specialized-workloads/ray|Ray]]\n- [[系统基础/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]"),
 
     ("storage", "openebs", "OpenEBS 容器存储", "OpenEBS",
      ["storage", "csi", "cncf"],
@@ -174,7 +174,7 @@ TERMS = [
      "- Local PV Hostpath / Device 模式\n- Mayastor：基于 SPDK/NVMe-oF 的高性能复制引擎\n- ZFS Local PV：利用 ZFS 特性的本地存储\n- LVM Local PV：基于 LVM 的本地卷管理\n- 快照和克隆支持\n- CStor（已弃用，迁移至 Mayastor）",
      "- 有状态应用（数据库/消息队列）的持久化存储\n- 需要本地存储高性能 I/O 的场景\n- 云和裸金属环境的统一存储方案\n- 开发/测试环境的快速存储配置\n- 存储数据的快照和克隆",
      "- https://openebs.io/\n- https://github.com/openebs/openebs",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/rook|Rook]]\n- [[domain-17-system-foundation/topic-dictionary/storage/longhorn|Longhorn]]\n- [[domain-17-system-foundation/topic-dictionary/storage/ceph|Ceph]]"),
+     "- [[系统基础/topic-dictionary/storage/rook|Rook]]\n- [[系统基础/topic-dictionary/storage/longhorn|Longhorn]]\n- [[系统基础/topic-dictionary/storage/ceph|Ceph]]"),
 
     # ── Scheduling ──
     ("scheduling", "koordinator", "Koordinator 增强调度", "Koordinator",
@@ -184,7 +184,7 @@ TERMS = [
      "- QoS 动态超卖（Dynamic Resource Overcommitment）\n- CPU Burst 和 CFS Burst 弹性调度\n- 设备插件（GPU Share / RDMA / FPGA）\n- Gang Scheduling 和 Coscheduling\n- 弹性配额（ElasticQuota）多级资源管理\n- Node Resource Manager 精细资源管控",
      "- 在线/离线混部提升集群利用率\n- GPU 共享和细粒度调度\n- 需要严格 QoS 保障的多租户环境\n- 大规模集群的资源弹性超卖\n- AI 训练与在线服务的资源协同",
      "- https://koordinator.sh/\n- https://github.com/koordinator-sh/koordinator",
-     "- [[domain-17-system-foundation/topic-dictionary/scheduling/volcano|Volcano]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler|Scheduler]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/qos|QoS]]"),
+     "- [[系统基础/topic-dictionary/scheduling/volcano|Volcano]]\n- [[系统基础/topic-dictionary/scheduling/scheduler|Scheduler]]\n- [[系统基础/topic-dictionary/scheduling/qos|QoS]]"),
 
     # ── Observability ──
     ("observability", "kepler", "Kepler 能耗监控", "Kepler",
@@ -194,7 +194,7 @@ TERMS = [
      "- eBPF 采集 CPU C-state 和能耗计数器\n- 基于机器学习模型的能耗估算（RAPL + Model）\n- GPU 能耗采集（NVIDIA DCGM）\n- Kepler Dashboard（Grafana 预置看板）\n- 碳排放计算（结合区域电力碳强度数据）\n- OpenTelemetry 集成",
      "- 数据中心碳足迹追踪\n- Kubernetes 集群的能耗优化\n- 绿色计算和可持续发展报告\n- 成本核算中的能耗分摊\n- 工作负载的能效对比（Perf/Watt）",
      "- https://sustainable-computing.io/\n- https://github.com/sustainable-computing-io/kepler",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]"),
+     "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]"),
 
     # ── Operations ──
     ("operations", "k8sgpt", "K8sGPT AI 诊断助手", "K8sGPT",
@@ -204,7 +204,7 @@ TERMS = [
      "- `k8sgpt analyze` 扫描集群问题\n- Analyzer 插件架构（Pod/Service/Ingress/PVC 等分析器）\n- 多 LLM 后端支持（OpenAI、Azure OpenAI、LocalAI、Amazon Bedrock）\n- Filter 机制（按命名空间/类型筛选）\n- 自定义 AI Provider\n- 与 Prometheus/Grafana 集成可视化",
      "- K8s 集群的快速健康检查\n- 复杂问题的 AI 辅助诊断\n- 运维新手的问题排查引导\n- 日常巡检中的异常检测\n- 故障根因分析的第一步",
      "- https://k8sgpt.ai/\n- https://github.com/k8sgpt-ai/k8sgpt",
-     "- [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering|混沌工程]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/operations/k8up|K8up]]"),
+     "- [[系统基础/topic-dictionary/operations/chaos-engineering|混沌工程]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/operations/k8up|K8up]]"),
 
     ("operations", "k8up", "K8up 备份 Operator", "K8up",
      ["operations", "backup", "operator"],
@@ -213,7 +213,7 @@ TERMS = [
      "- Schedule CRD 定义备份计划（Cron 表达式）\n- PreBackupPod 备份前执行自定义脚本（如数据库 dump）\n- 自动 PVC 发现和备份\n- Restore CRD 管理恢复操作\n- Archive CRD 归档旧备份\n- 与 Prometheus 集成导出备份指标",
      "- 有状态应用的定时备份\n- 数据库的 Pre-backup dump + 增量备份\n- 轻量级备份方案（替代 Velero 的全集群备份）\n- 多租户环境的独立备份策略\n- 备份合规和保留策略管理",
      "- https://k8up.io/\n- https://github.com/k8up-io/k8up",
-     "- [[domain-17-system-foundation/topic-dictionary/operations/velero|Velero]]\n- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes|PV/PVC]]\n- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery|备份与灾难恢复]]"),
+     "- [[系统基础/topic-dictionary/operations/velero|Velero]]\n- [[系统基础/topic-dictionary/storage/persistent-volumes|PV/PVC]]\n- [[系统基础/topic-dictionary/operations/backup-disaster-recovery|备份与灾难恢复]]"),
 
     # ── Platform Engineering ──
     ("platform-engineering", "opengitops", "OpenGitOps 标准", "OpenGitOps",
@@ -223,7 +223,7 @@ TERMS = [
      "- GitOps 四原则：声明式、版本化和不可变、自动拉取、持续协调\n- GitOps Agent 参考实现\n- GitOps 合规认证程序\n- 与 Argo CD / Flux 等工具的对齐\n- GitOps Days 社区活动\n- 文档和最佳实践指南",
      "- GitOps 实践的标准化和规范化\n- 企业 GitOps 转型的参考框架\n- GitOps 工具选型的合规评估\n- 多团队 GitOps 流程的统一\n- GitOps 培训和能力建设",
      "- https://opengitops.dev/\n- https://github.com/open-gitops/project",
-     "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/flux|Flux]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/tekton|Tekton]]"),
+     "- [[系统基础/topic-dictionary/platform-engineering/argo|Argo]]\n- [[系统基础/topic-dictionary/platform-engineering/flux|Flux]]\n- [[系统基础/topic-dictionary/platform-engineering/tekton|Tekton]]"),
 
     ("platform-engineering", "score", "Score 工作负载规范", "Score",
      ["platform-engineering", "workload", "cncf"],
@@ -232,7 +232,7 @@ TERMS = [
      "- `score.yaml` 声明式工作负载描述\n- score-compose：转换为 Docker Compose\n- score-k8s：转换为 Kubernetes manifests\n- score-helm：生成 Helm Chart\n- Resource 声明（数据库/缓存/消息队列等依赖）\n- score-spec：转换为 Score 内部规范",
      "- 开发者自助服务平台的底层规范\n- 多环境（dev/staging/prod）的配置一致性\n- 降低开发者对 K8s 的认知负担\n- 平台团队标准化工作负载定义\n- IDP（Internal Developer Platform）的工作负载模型",
      "- https://score.dev/\n- https://github.com/score-spec/spec",
-     "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage|Backstage]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane|Crossplane]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]"),
+     "- [[系统基础/topic-dictionary/platform-engineering/backstage|Backstage]]\n- [[系统基础/topic-dictionary/platform-engineering/crossplane|Crossplane]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]"),
 
     ("platform-engineering", "operator-framework", "Operator Framework 框架", "Operator Framework",
      ["platform-engineering", "operator", "sdk"],
@@ -241,7 +241,7 @@ TERMS = [
      "- `operator-sdk init` 初始化项目（Go/Ansible/Helm/Java）\n- `operator-sdk generate` 代码和 CRD 生成\n- OLM Catalog 管理 Operator 版本和更新通道\n- Scorecard 测试框架\n- Bundle Format 打包标准\n- OperatorHub.io 社区市场",
      "- Kubernetes Operator 的标准化开发\n- Operator 的版本管理和自动升级\n- 企业内部 Operator 的分发和管理\n- Red Hat OpenShift 的 Operator 认证\n- Operator 生态的集成和发布",
      "- https://operatorframework.io/\n- https://github.com/operator-framework/operator-sdk",
-     "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubevela|KubeVela]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane|Crossplane]]"),
+     "- [[系统基础/topic-dictionary/platform-engineering/kubevela|KubeVela]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/platform-engineering/crossplane|Crossplane]]"),
 
     # ── Tooling ──
     ("tooling", "distribution", "CNCF Distribution 镜像仓库", "Distribution",
@@ -251,7 +251,7 @@ TERMS = [
      "- Pull/Push API（Manifest + Blob/Layer 管理）\n- Tag 和 Digest 两种寻址方式\n- Token-based Authentication（Bearer Token）\n- 存储驱动（Filesystem/S3/GCS/Azure/OSS）\n- 垃圾回收（`registry garbage-collect`）\n- Referrers API（OCI 1.1 附件引用）",
      "- 企业内部私有镜像仓库\n- 边缘场景的轻量镜像缓存\n- CI/CD Pipeline 的镜像存储后端\n- 开发环境 Registry 的本地替代\n- OCI 制品（Helm Chart/WASM 等）存储",
      "- https://github.com/distribution/distribution\n- https://distribution.github.io/distribution/",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/harbor|Harbor]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/docker|Docker]]\n- [[domain-17-system-foundation/topic-dictionary/security/notary-project|Notary Project]]"),
+     "- [[系统基础/topic-dictionary/tooling/harbor|Harbor]]\n- [[系统基础/topic-dictionary/tooling/docker|Docker]]\n- [[系统基础/topic-dictionary/security/notary-project|Notary Project]]"),
 
     ("tooling", "headlamp", "Headlamp K8s 仪表盘", "Headlamp",
      ["tooling", "dashboard", "ui"],
@@ -260,7 +260,7 @@ TERMS = [
      "- 集群资源概览（Pods/Services/Deployments 等）\n- 实时日志查看和终端 Shell\n- YAML 编辑器（在线编辑资源）\n- 插件市场（社区和企业插件）\n- 多集群管理和切换\n- 自定义主题和品牌定制",
      "- Kubernetes 集群的可视化管理\n- 替代 K8s Dashboard 的现代方案\n- 开发者的日常集群操作界面\n- 运维团队的集群监控仪表盘\n- 需要品牌定制的企业管理平台",
      "- https://headlamp.io/\n- https://github.com/headlamp-k8s/headlamp",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl|kubectl]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/stern|Stern]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+     "- [[系统基础/topic-dictionary/tooling/kubectl|kubectl]]\n- [[系统基础/topic-dictionary/tooling/stern|Stern]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
     ("tooling", "k0s", "K0s 轻量级 Kubernetes", "K0s",
      ["tooling", "distribution", "edge"],
@@ -269,7 +269,7 @@ TERMS = [
      "- `k0s install controller/worker` 安装命令\n- 内置 Containerd 和 Konnectivity\n- 支持 Control Plane 隔离模式\n- K0sctl 多节点集群部署工具\n- 自动证书管理和轮转\n- 扩展机制（Helm/K0s 扩展）",
      "- 边缘设备和 IoT 的 K8s 部署\n- 开发环境的快速 K8s 搭建\n- CI/CD Pipeline 中的临时集群\n- 嵌入式设备的容器编排\n- K3s 的替代方案",
      "- https://k0sproject.io/\n- https://github.com/k0sproject/k0s",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/k3s|K3s]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/minikube|Minikube]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm|kubeadm]]"),
+     "- [[系统基础/topic-dictionary/tooling/k3s|K3s]]\n- [[系统基础/topic-dictionary/tooling/minikube|Minikube]]\n- [[系统基础/topic-dictionary/tooling/kubeadm|kubeadm]]"),
 
     ("tooling", "kpt", "kpt 包管理工具", "kpt",
      ["tooling", "package", "configuration"],
@@ -278,7 +278,7 @@ TERMS = [
      "- `kpt pkg get` 从 Git 获取配置包\n- `kpt fn render` 执行 KRM Function 管道\n- `kpt live apply` 声明式应用到集群\n- KRM Function 生态（Starlark/Go/Container）\n- Package 层级和子包管理\n- 与 Config Sync / Argo CD 集成",
      "- GitOps 配置的管理和分发\n- 多环境配置的包化管理\n- 配置模板的版本控制和更新\n- KRM Function 的声明式配置转换\n- 大规模 K8s 配置的组织和管理",
      "- https://kpt.dev/\n- https://github.com/GoogleContainerTools/kpt",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/flux|Flux]]"),
+     "- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/platform-engineering/flux|Flux]]"),
 
     # ── Fundamentals ──
     ("fundamentals", "flatcar", "Flatcar 容器操作系统", "Flatcar",
@@ -288,7 +288,7 @@ TERMS = [
      "- Ignition 系统配置（替代 cloud-init）\n- A/B 分区双系统（更新失败自动回滚）\n- 最小化攻击面（无包管理器，无 SSH 密码登录）\n- 自动安全更新\n- 支持多种平台（AWS/Azure/GCP/Bare Metal/QEMU）\n- 与 Fleet/Locksmith 协调更新策略",
      "- Kubernetes 节点的标准化操作系统\n- 边缘/IoT 设备的不可变系统\n- 安全合规要求下的最小化 OS\n- 大规模集群的自动更新管理\n- CoreOS 停服后的替代方案",
      "- https://www.flatcar.org/\n- https://github.com/flatcar/Flatcar",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/bootc|bootc]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker|Docker]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd|containerd]]"),
+     "- [[系统基础/topic-dictionary/tooling/bootc|bootc]]\n- [[系统基础/topic-dictionary/fundamentals/docker|Docker]]\n- [[系统基础/topic-dictionary/fundamentals/containerd|containerd]]"),
 
     # ── Multi-tenancy ──
     ("security", "capsule", "Capsule 多租户管理", "Capsule",
@@ -298,7 +298,7 @@ TERMS = [
      "- Tenant CRD 定义租户及其命名空间\n- NetworkPolicy 自动注入（租户间隔离）\n- ResourceQuota / LimitRange 按租户管理\n- 存储类限制（每租户可用 StorageClass）\n- Ingress 类限制（每租户可用 IngressClass）\n- 节点选择器限制（NodeSelector 按租户隔离）",
      "- 企业内部的 K8s 多租户管理\n- 开发团队的资源隔离\n- SaaS 平台的租户管理\n- 共享集群的安全隔离\n- 替代 vCluster / OCM 的轻量方案",
      "- https://capsule.clastix.io/\n- https://github.com/clastix/capsule",
-     "- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/security/networkpolicy|NetworkPolicy]]\n- [[domain-17-system-foundation/topic-dictionary/security/opa|OPA]]"),
+     "- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/security/networkpolicy|NetworkPolicy]]\n- [[系统基础/topic-dictionary/security/opa|OPA]]"),
 
     # ── Specialized ──
     ("specialized-workloads", "kubevirt", "KubeVirt 虚拟化", "KubeVirt",
@@ -308,7 +308,7 @@ TERMS = [
      "- VirtualMachine / VirtualMachineInstance CRD\n- CDI（Containerized Data Importer）镜像管理\n- DataVolume 声明 VM 磁盘\n- 热迁移（Live Migration）\n- 模板和实例类型（InstanceType）\n- GPU/SRIOV 直通\n- 与 Multus CNI 配合的多网络 VM",
      "- 传统 VM 工作负载迁移到 K8s\n- 容器和 VM 混合工作负载管理\n- 数据库等不适合容器化的 VM 工作负载\n- VDI（虚拟桌面）在 K8s 上的部署\n- 云 VM 与容器应用的统一编排",
      "- https://kubevirt.io/\n- https://github.com/kubevirt/kubevirt",
-     "- [[domain-17-system-foundation/topic-dictionary/workloads/pod|Pod]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cni|CNI]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kata-containers|Kata Containers]]"),
+     "- [[系统基础/topic-dictionary/workloads/pod|Pod]]\n- [[系统基础/topic-dictionary/networking/cni|CNI]]\n- [[系统基础/topic-dictionary/specialized-workloads/kata-containers|Kata Containers]]"),
 
     # ── Platform / CD ──
     ("operations", "pipecd", "PipeCD 持续交付", "PipeCD",
@@ -318,7 +318,7 @@ TERMS = [
      "- Application CRD 定义部署目标\n- Analysis 自动化分析（Prometheus/DataDog/Stackdriver）\n- 渐进式交付（Canary / Blue-Green / Rolling）\n- Web UI 可视化管理\n- 多集群 / 多环境管理\n- Encryption 敏感配置加密\n- Notification 集成（Slack/Teams）",
      "- 多平台（K8s + Serverless + VM）的统一 CD\n- 需要渐进式交付的生产部署\n- GitOps 实践中的持续交付\n- 多团队 / 多环境的部署管理\n- 自动化分析驱动的安全发布",
      "- https://pipecd.dev/\n- https://github.com/pipe-cd/pipecd",
-     "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/flux|Flux]]\n- [[domain-17-system-foundation/topic-dictionary/operations/flagger|Flagger]]"),
+     "- [[系统基础/topic-dictionary/platform-engineering/argo|Argo]]\n- [[系统基础/topic-dictionary/platform-engineering/flux|Flux]]\n- [[系统基础/topic-dictionary/operations/flagger|Flagger]]"),
 
     # ── Service Mesh ──
     ("operations", "meshery", "Meshery 服务网格管理", "Meshery",
@@ -328,7 +328,7 @@ TERMS = [
      "- Meshery Operator 管理 Mesh 生命周期\n- SMP（Service Mesh Performance）标准化性能指标\n- Meshery Designs 可视化架构设计\n- OAM（Open Application Model）集成\n- WASM 过滤器管理\n- MeshSync 集群状态同步\n- 200+ 集成（Adapters）",
      "- 多服务网格的统一管理和对比评估\n- 服务网格的性能基准测试\n- 服务网格迁移的辅助工具\n- 云原生架构的可视化设计\n- 多团队环境的网格治理",
      "- https://meshery.io/\n- https://github.com/meshery/meshery",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]\n- [[domain-17-system-foundation/topic-dictionary/networking/linkerd|Linkerd]]\n- [[domain-17-system-foundation/topic-dictionary/networking/kuma|Kuma]]"),
+     "- [[系统基础/topic-dictionary/networking/istio|Istio]]\n- [[系统基础/topic-dictionary/networking/linkerd|Linkerd]]\n- [[系统基础/topic-dictionary/networking/kuma|Kuma]]"),
 ]
 
 created, skipped = 0, 0

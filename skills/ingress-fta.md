@@ -43,7 +43,7 @@ title: "[[Ingress|Ingress]] 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 Ingress Cont..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md"]
+sources: ["故障诊断/topic-fta/list/ingress-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -92,8 +92,8 @@ base_confidence: 0.7
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

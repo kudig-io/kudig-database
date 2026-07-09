@@ -74,7 +74,7 @@ StatefulSet的配置和状态也会反过来影响apiserver：
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/etcd-×-StatefulSet.md|etcd-×-StatefulSet]]
 - [[concepts/Deployment-×-PVC.md|Deployment-×-PVC]]

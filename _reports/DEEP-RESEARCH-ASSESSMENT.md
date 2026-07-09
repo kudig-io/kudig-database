@@ -190,7 +190,7 @@ tool_schema:
 kudig:FTA-001 rdf:type kudig:FaultTree .
 kudig:FTA-001 kudig:hasRootCause kudig:RC-001 .
 kudig:RC-001 kudig:relatedTo kudig:SKILL-NODE-001 .
-kudig:SKILL-NODE-001 kudig:coveredBy kudig:domain-10-troubleshooting-diagnostics .
+kudig:SKILL-NODE-001 kudig:coveredBy kudig:故障诊断 .
 ```
 
 ---

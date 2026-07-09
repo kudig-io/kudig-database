@@ -66,12 +66,12 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-03-networking-traffic/19-ingress-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 网络/19-ingress-fundamentals
 id: WEEK4-DAY23
 topic: training
 type: hands-on
@@ -101,7 +101,7 @@ tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
    - 重点: Ingress 规则、IngressClass、默认后端
 
 2. **ACK Ingress 管理**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/260-ack-networking.md`
    - 重点: ALB Ingress vs Nginx Ingress 选型
 
 ### 阅读要点

@@ -72,11 +72,11 @@ audience:
 estimated_read_time: 240min
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 22: 企业监控 - Prometheus 企业级 + Grafana
@@ -396,11 +396,11 @@ SLO 不是越高越好。过高的 SLO 意味着几乎不允许出错，这会�
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../domain-06-observability/01-prometheus-enterprise-monitoring.md)
-- [Grafana 企业级可观测性](../../domain-06-observability/02-grafana-enterprise-observability.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
-- [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
+- [Prometheus 企业级监控](../../可观测性/01-prometheus-enterprise-monitoring.md)
+- [Grafana 企业级可观测性](../../可观测性/02-grafana-enterprise-observability.md)
+- [SLO/SLI 体系](../../可观测性/18-slo-sli-system.md)
+- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
+- [Prometheus 监控](../../可观测性/10-monitoring-metrics-prometheus.md)
 
 
 <!-- risk-assessed -->

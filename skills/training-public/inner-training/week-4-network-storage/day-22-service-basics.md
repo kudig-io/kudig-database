@@ -70,13 +70,13 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
 id: WEEK4-DAY22
 topic: training
 type: hands-on
@@ -478,8 +478,8 @@ Endpoints 的更新依赖 kube-proxy 的 Watch 机制，通常在几秒内完成
 
 - [Service 概念与类型](../../domain-06-service-networking/01-service-overview.md)
 - [kube-proxy 模式详解](../../domain-06-service-networking/02-kube-proxy.md)
-- [ACK 网络管理](../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md)
-- [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
+- [ACK 网络管理](../../云厂商/04-alicloud-ack/260-ack-networking.md)
+- [网络架构总览](../../网络/01-network-architecture-overview.md)
 
 
 <!-- risk-assessed -->

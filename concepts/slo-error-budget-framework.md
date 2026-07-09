@@ -1,6 +1,6 @@
 ---
 title: SLO/Error Budget 框架
-summary: SLO/Error Budget 框架：相关索引：domain-19-landscape-references/98-merged-indexes/index.md
+summary: SLO/Error Budget 框架：相关索引：生态参考/98-merged-indexes/index.md
   · concepts/incident-management-patterns.md
 category: concepts
 tags:
@@ -27,7 +27,7 @@ last_updated: 2026-05-24
 
 > 可靠性不是越高越好——它是**刚好够用**的工程权衡。Error Budget 是连接可靠性目标与产品迭代速度的桥梁。
 
-相关索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] · [[concepts/incident-management-patterns.md|incident management patterns]]
+相关索引：[[生态参考/98-merged-indexes/index.md|index]] · [[concepts/incident-management-patterns.md|incident management patterns]]
 
 ---
 

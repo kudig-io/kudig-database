@@ -12,9 +12,9 @@ tier: supporting
 sources:
 - _meta/projects/kudig-ticket-agent-corpus-improvement-plan.md
 - _meta/corpus-config/profiles/rag-ticket-agent-profile.yaml
-- domain-11-production-operations/ticket-routing-rules.md
-- domain-11-production-operations/escalation-playbook.md
-- domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md
+- 生产运维/ticket-routing-rules.md
+- 生产运维/escalation-playbook.md
+- 故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
@@ -66,6 +66,6 @@ RAG 解决"知道什么"的问题，工单智能体解决"怎么做"的问题。
 
 - _meta/projects/kudig-ticket-agent-corpus-improvement-plan.md
 - _meta/corpus-config/profiles/rag-ticket-agent-profile
-- [[domain-11-production-operations/ticket-routing-rules.md|ticket routing rules]]
-- [[domain-11-production-operations/escalation-playbook.md|escalation playbook]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|SKILL DEEP DIVE]]
+- [[生产运维/ticket-routing-rules.md|ticket routing rules]]
+- [[生产运维/escalation-playbook.md|escalation playbook]]
+- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|SKILL DEEP DIVE]]

@@ -25,7 +25,7 @@ last_updated: 2026-05-24
 
 # GitOps 与生产运维
 
-> 相关领域：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] | [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
+> 相关领域：[[生态参考/98-merged-indexes/index.md|index]] | [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
 
 ---
 

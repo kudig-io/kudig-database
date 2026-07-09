@@ -84,8 +84,8 @@ audience:
   - ops-engineer
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - control-plane
   - scheduler
@@ -93,8 +93,8 @@ related_topics:
   - affinity
   - taint
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-8-control-plane-1.md
-  - domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-8-control-plane-1.md
+  - 集群基础/20-kube-scheduler-deep-dive.md
 ---
 ```
 
@@ -115,15 +115,15 @@ related:
 ### 必读文档
 
 1. **Scheduler 深入**
-   - 文件: `../../domain-01-cluster-fundamentals/20-kube-scheduler-deep-dive.md`
+   - 文件: `../../集群基础/20-kube-scheduler-deep-dive.md`
    - 重点: 调度算法、Filter/Score、调度框架
 
 2. **Controller Manager 深入**
-   - 文件: `../../domain-01-cluster-fundamentals/13-kube-controller-manager-deep-dive.md`
+   - 文件: `../../集群基础/13-kube-controller-manager-deep-dive.md`
    - 重点: 各种 Controller 的工作原理
 
 3. **控制器模式**
-   - 文件: `../../domain-01-cluster-fundamentals/03-controller-pattern.md`
+   - 文件: `../../集群基础/03-controller-pattern.md`
    - 重点: Reconcile 循环、声明式管理
 
 ---

@@ -81,9 +81,9 @@ authors:
 | 公开训练营 | `public-training/one-month/` | 28 天课程 + 5 个项目 | ⭐⭐⭐⭐⭐ |
 | 内部培训 | `inner-training/` | 4 周 + 毕业项目 | ⭐⭐⭐⭐☆（ACK 绑定） |
 | 动手实验 | `public-training/*/hands-on/` | 18 个实验，331-677 行/篇 | ⭐⭐⭐⭐☆（云厂商导向） |
-| 概念字典 | `domain-12-cloud-providers/topic-dictionary/` | 120+ 术语条目 | ⭐⭐⭐⭐⭐ |
-| 速查表 | `domain-12-cloud-providers/topic-cheat-sheet/` | 15 张速查表 | ⭐⭐⭐⭐⭐ |
-| YAML 参考 | `domain-11-production-operations/yaml-reference/` | 30 个资源完整 Spec | ⭐⭐⭐⭐⭐ |
+| 概念字典 | `云厂商/topic-dictionary/` | 120+ 术语条目 | ⭐⭐⭐⭐⭐ |
+| 速查表 | `云厂商/topic-cheat-sheet/` | 15 张速查表 | ⭐⭐⭐⭐⭐ |
+| YAML 参考 | `生产运维/yaml-reference/` | 30 个资源完整 Spec | ⭐⭐⭐⭐⭐ |
 | 演示文稿 | `topic-presentations/` | 12 个主题 PPT | ⭐⭐⭐⭐⭐ |
 | 故障排查 | `troubleshooting/` | 决策树 + FTA | ⭐⭐⭐⭐⭐ |
 
@@ -125,7 +125,7 @@ authors:
 ### Layer 1: 地基缺失
 
 #### 1.1 计算机科学通识
-- **现状**: `domain-12-cloud-providers/01-linux/` 直接从"系统架构"开始，假设读者懂进程/线程/文件系统/网络分层
+- **现状**: `云厂商/01-linux/` 直接从"系统架构"开始，假设读者懂进程/线程/文件系统/网络分层
 - **缺口**: 真正的"零基础计算机通识"——CPU/内存/磁盘如何协作、什么是进程和线程、网络分层模型的通俗解释
 - **影响**: 小白直接看 "Linux 网络配置 Deep Dive" 或 "CNI 架构" 会完全懵掉
 - **补齐建议**: 新增 `prerequisites/computer-science-101.md`，用类比讲解（把 CPU 比作厨房、内存比作操作台）
@@ -178,7 +178,7 @@ authors:
 - **补齐建议**: 在 `beginner-guides/` 中新增 Helm 实战章节
 
 #### 3.2 中间件的小白部署指南
-- **现状**: `domain-16-database-middleware/` 只有 9 个文件，标题带 "Enterprise"，偏向架构选型
+- **现状**: `数据库中间件/` 只有 9 个文件，标题带 "Enterprise"，偏向架构选型
 - **缺口**: 《小白如何在 K8s 上跑起第一个 MySQL/Redis/Kafka》——StatefulSet 部署、持久化配置、密码管理、备份入门
 - **影响**: 面试和实际工作中最高频的场景（"你会部署 Redis 集群吗？"），但知识库中没有手把手教程
 - **补齐建议**: 新增 `beginner-guides/middleware-lab/` 系列

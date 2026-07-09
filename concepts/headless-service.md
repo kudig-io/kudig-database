@@ -5,7 +5,7 @@ summary: Headless Service 是 Kubernetes 中一种特殊的 Service 类型，其
 category: concepts
 tags:
 - core-concept
-- domain-03-networking-traffic
+- 网络
 - visibility/public
 tier: supporting
 sources:
@@ -94,7 +94,7 @@ StatefulSet Pod 域名解析失败时，应按以下顺序排查：
 - **验证 DNS 解析**：在 Pod 内执行 `nslookup <pod-name>.<service-name>` 测试解析结果
 - **检查网络策略**：确认没有 NetworkPolicy 阻止 DNS 查询或 Pod 间通信
 
-更多有状态应用排错方法请参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]]，服务发现相关内容参见 [[concepts/service.md|service-discovery]]。
+更多有状态应用排错方法请参考 [[故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]]，服务发现相关内容参见 [[concepts/service.md|service-discovery]]。
 
 ## Related
 

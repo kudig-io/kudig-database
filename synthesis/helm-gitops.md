@@ -10,9 +10,9 @@ tags:
 - continuous-delivery
 tier: supporting
 sources:
-- domain-08-release-change-management/01-gitops/99-helm-production-guide.md
-- domain-08-release-change-management/01-gitops/README.md
-- domain-08-release-change-management/03-change-management/02-canary-release-strategy.md
+- 发布变更/01-gitops/99-helm-production-guide.md
+- 发布变更/01-gitops/README.md
+- 发布变更/03-change-management/02-canary-release-strategy.md
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
@@ -66,10 +66,10 @@ Helm 解决了 K8s 应用的"打包与配置"问题，GitOps 解决了"变更审
 
 ## Related
 
-- [[domain-08-release-change-management/01-gitops/99-helm-production-guide.md|99 helm production guide]]
-- [[domain-19-landscape-references/topic-release-notes/README.md|README]]
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy.md|02 canary release strategy]]
-- [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|03 change rollback playbook]]
+- [[发布变更/01-gitops/99-helm-production-guide.md|99 helm production guide]]
+- [[生态参考/topic-release-notes/README.md|README]]
+- [[发布变更/03-change-management/02-canary-release-strategy.md|02 canary release strategy]]
+- [[发布变更/03-change-management/03-change-rollback-playbook.md|03 change rollback playbook]]
 
 
 <!-- risk-assessed -->

@@ -75,11 +75,11 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 18: 可观测性 - 日志 + 分布式追踪
@@ -732,12 +732,12 @@ amtool silence expire <silence-id>
 - [LogQL 查询语言参考](https://grafana.com/docs/loki/latest/query/)
 - [Alertmanager 配置文档](https://prometheus.io/docs/alerting/latest/configuration/)
 - [Kubernetes 日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
-- [文件: `../../domain-06-observability/03-logging-architecture.md`](../../domain-06-observability/03-logging-architecture.md)
-- [文件: `../../domain-06-observability/04-distributed-tracing.md`](../../domain-06-observability/04-distributed-tracing.md)
+- [文件: `../../可观测性/03-logging-architecture.md`](../../可观测性/03-logging-architecture.md)
+- [文件: `../../可观测性/04-distributed-tracing.md`](../../可观测性/04-distributed-tracing.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

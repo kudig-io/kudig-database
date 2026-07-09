@@ -95,7 +95,7 @@ Kubescape 是第一个用于测试 Kubernetes 是否按照 NSA-CISA 和 MITRE AT
 - kubescape
 - [[skills/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

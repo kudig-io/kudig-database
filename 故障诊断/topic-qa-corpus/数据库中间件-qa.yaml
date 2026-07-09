@@ -1,0 +1,375 @@
+domain: 数据库中间件
+total_questions: 78
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 MySQL 企业级数据库运维管理 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/01-mysql-enterprise-database.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/01-mysql-enterprise-database.md
+  section: See Also
+- type: operation
+  question: '如何执行与 MySQL 企业级数据库运维管理 相关的操作: set -euo pipefail?'
+  answer: 参见 数据库中间件/01-databases/01-mysql-enterprise-database.md 中的操作步骤。
+  source: 数据库中间件/01-databases/01-mysql-enterprise-database.md
+  command: set -euo pipefail
+- type: concept
+  question: 在 PostgreSQL 企业级数据库高可用架构 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/02-postgresql-enterprise-database.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/02-postgresql-enterprise-database.md
+  section: See Also
+- type: operation
+  question: '如何执行与 PostgreSQL 企业级数据库高可用架构 相关的操作: PATRONI_PORT=8008?'
+  answer: 参见 数据库中间件/01-databases/02-postgresql-enterprise-database.md 中的操作步骤。
+  source: 数据库中间件/01-databases/02-postgresql-enterprise-database.md
+  command: PATRONI_PORT=8008
+- type: concept
+  question: 在 分布式数据库企业级实践深度指南 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/03-distributed-database-enterprise.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/03-distributed-database-enterprise.md
+  section: See Also
+- type: comparison
+  question: 分布式数据库企业级实践深度指南 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/03-distributed-database-enterprise.md 中的对比分析。
+  source: 数据库中间件/01-databases/03-distributed-database-enterprise.md
+- type: concept
+  question: 在 数据库中间件 Kubernetes 企业级实践 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/04-database-middleware-kubernetes.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+  section: See Also
+- type: operation
+  question: '如何执行与 数据库中间件 Kubernetes 企业级实践 相关的操作: kubectl apply -f https://raw.githubusercontent.com/vitessio/?'
+  answer: 参见 数据库中间件/01-databases/04-database-middleware-kubernetes.md 中的操作步骤。
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+  command: kubectl apply -f https://raw.githubusercontent.com/vitessio/vitess/v21.0.0/deploy/operator.yaml
+- type: best_practice
+  question: 关于 数据库中间件 Kubernetes 企业级实践, 有什么最佳实践?
+  answer: 'max_connections: 应用总连接数 × 1.5'
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+- type: best_practice
+  question: 关于 数据库中间件 Kubernetes 企业级实践, 有什么最佳实践?
+  answer: 'max_client_conn: 应用总连接数 × 1.5'
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+- type: best_practice
+  question: 关于 数据库中间件 Kubernetes 企业级实践, 有什么最佳实践?
+  answer: 'queryserver-config-pool-size: 目标并发连接数'
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+- type: comparison
+  question: 数据库中间件 Kubernetes 企业级实践 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/04-database-middleware-kubernetes.md 中的对比分析。
+  source: 数据库中间件/01-databases/04-database-middleware-kubernetes.md
+- type: concept
+  question: 在 MongoDB 企业级数据库运维深度实践 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/05-mongodb-enterprise-database.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/05-mongodb-enterprise-database.md
+  section: See Also
+- type: operation
+  question: '如何执行与 MongoDB 企业级数据库运维深度实践 相关的操作: REPLICA_SET="rs0"?'
+  answer: 参见 数据库中间件/01-databases/05-mongodb-enterprise-database.md 中的操作步骤。
+  source: 数据库中间件/01-databases/05-mongodb-enterprise-database.md
+  command: REPLICA_SET="rs0"
+- type: operation
+  question: '如何执行与 MongoDB 企业级数据库运维深度实践 相关的操作: set -euo pipefail?'
+  answer: 参见 数据库中间件/01-databases/05-mongodb-enterprise-database.md 中的操作步骤。
+  source: 数据库中间件/01-databases/05-mongodb-enterprise-database.md
+  command: set -euo pipefail
+- type: comparison
+  question: MongoDB 企业级数据库运维深度实践 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/05-mongodb-enterprise-database.md 中的对比分析。
+  source: 数据库中间件/01-databases/05-mongodb-enterprise-database.md
+- type: concept
+  question: 在 Redis 企业级缓存运维深度实践 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/06-redis-enterprise-cache.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/06-redis-enterprise-cache.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Redis 企业级缓存运维深度实践 相关的操作: NODES=(?'
+  answer: 参见 数据库中间件/01-databases/06-redis-enterprise-cache.md 中的操作步骤。
+  source: 数据库中间件/01-databases/06-redis-enterprise-cache.md
+  command: NODES=(
+- type: operation
+  question: '如何执行与 Redis 企业级缓存运维深度实践 相关的操作: set -euo pipefail?'
+  answer: 参见 数据库中间件/01-databases/06-redis-enterprise-cache.md 中的操作步骤。
+  source: 数据库中间件/01-databases/06-redis-enterprise-cache.md
+  command: set -euo pipefail
+- type: comparison
+  question: Redis 企业级缓存运维深度实践 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/06-redis-enterprise-cache.md 中的对比分析。
+  source: 数据库中间件/01-databases/06-redis-enterprise-cache.md
+- type: concept
+  question: 在 Redis Kubernetes Operator 企业级实践 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/07-redis-kubernetes-operator.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/07-redis-kubernetes-operator.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Redis Kubernetes Operator 企业级实践 相关的操作: kubectl apply -f https://raw.githubusercontent.com/OT-CONTAI?'
+  answer: 参见 数据库中间件/01-databases/07-redis-kubernetes-operator.md 中的操作步骤。
+  source: 数据库中间件/01-databases/07-redis-kubernetes-operator.md
+  command: kubectl apply -f https://raw.githubusercontent.com/OT-CONTAINER-KIT/redis-operator/v0.19.0/example/r
+- type: comparison
+  question: Redis Kubernetes Operator 企业级实践 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/07-redis-kubernetes-operator.md 中的对比分析。
+  source: 数据库中间件/01-databases/07-redis-kubernetes-operator.md
+- type: concept
+  question: 在 Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南 相关的操作: helm repo add strimzi https://strimzi.io/charts/?'
+  answer: 参见 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md 中的操作步骤。
+  source: 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md
+  command: helm repo add strimzi https://strimzi.io/charts/
+- type: comparison
+  question: Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md 中的对比分析。
+  source: 数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md
+- type: concept
+  question: 在 CloudNativePG 企业级 PostgreSQL 运维指南 中, See Also 是什么?
+  answer: 参见 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md 的「See Also」章节。
+  source: 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 CloudNativePG 企业级 PostgreSQL 运维指南 相关的操作: kubectl apply -f \?'
+  answer: 参见 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md 中的操作步骤。
+  source: 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md
+  command: kubectl apply -f \
+- type: comparison
+  question: CloudNativePG 企业级 PostgreSQL 运维指南 中有哪些技术对比?
+  answer: 参见 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md 中的对比分析。
+  source: 数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md
+- type: concept
+  question: 在 NATS 深度解析 中, 架构演进 是什么?
+  answer: 参见 数据库中间件/03-message-queues/01-nats-deep-dive.md 的「架构演进」章节。
+  source: 数据库中间件/03-message-queues/01-nats-deep-dive.md
+  section: 架构演进
+- type: concept
+  question: 在 NATS 深度解析 中, Core NATS vs JetStream 是什么?
+  answer: 参见 数据库中间件/03-message-queues/01-nats-deep-dive.md 的「Core NATS vs JetStream」章节。
+  source: 数据库中间件/03-message-queues/01-nats-deep-dive.md
+  section: Core NATS vs JetStream
+- type: concept
+  question: 在 NATS 深度解析 中, Kubernetes 部署 是什么?
+  answer: 参见 数据库中间件/03-message-queues/01-nats-deep-dive.md 的「Kubernetes 部署」章节。
+  source: 数据库中间件/03-message-queues/01-nats-deep-dive.md
+  section: Kubernetes 部署
+- type: concept
+  question: 在 NATS 深度解析 中, 相关 是什么?
+  answer: 参见 数据库中间件/03-message-queues/01-nats-deep-dive.md 的「相关」章节。
+  source: 数据库中间件/03-message-queues/01-nats-deep-dive.md
+  section: 相关
+- type: comparison
+  question: NATS 深度解析 中有哪些技术对比?
+  answer: 参见 数据库中间件/03-message-queues/01-nats-deep-dive.md 中的对比分析。
+  source: 数据库中间件/03-message-queues/01-nats-deep-dive.md
+- type: concept
+  question: 在 Apache Pulsar 架构解析 中, 分层架构 是什么?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 的「分层架构」章节。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+  section: 分层架构
+- type: concept
+  question: 在 Apache Pulsar 架构解析 中, 计算-存储分离的优势 是什么?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 的「计算-存储分离的优势」章节。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+  section: 计算-存储分离的优势
+- type: concept
+  question: 在 Apache Pulsar 架构解析 中, 多租户与命名空间 是什么?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 的「多租户与命名空间」章节。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+  section: 多租户与命名空间
+- type: concept
+  question: 在 Apache Pulsar 架构解析 中, Geo-Replication 是什么?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 的「Geo-Replication」章节。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+  section: Geo-Replication
+- type: concept
+  question: 在 Apache Pulsar 架构解析 中, 相关 是什么?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 的「相关」章节。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+  section: 相关
+- type: comparison
+  question: Apache Pulsar 架构解析 中有哪些技术对比?
+  answer: 参见 数据库中间件/03-message-queues/02-pulsar-architecture.md 中的对比分析。
+  source: 数据库中间件/03-message-queues/02-pulsar-architecture.md
+- type: concept
+  question: 在 消息队列选型对比 中, 综合对比 是什么?
+  answer: 参见 数据库中间件/03-message-queues/03-message-queue-comparison.md 的「综合对比」章节。
+  source: 数据库中间件/03-message-queues/03-message-queue-comparison.md
+  section: 综合对比
+- type: concept
+  question: 在 消息队列选型对比 中, 选型决策树 是什么?
+  answer: 参见 数据库中间件/03-message-queues/03-message-queue-comparison.md 的「选型决策树」章节。
+  source: 数据库中间件/03-message-queues/03-message-queue-comparison.md
+  section: 选型决策树
+- type: concept
+  question: 在 消息队列选型对比 中, 相关 是什么?
+  answer: 参见 数据库中间件/03-message-queues/03-message-queue-comparison.md 的「相关」章节。
+  source: 数据库中间件/03-message-queues/03-message-queue-comparison.md
+  section: 相关
+- type: comparison
+  question: 消息队列选型对比 中有哪些技术对比?
+  answer: 参见 数据库中间件/03-message-queues/03-message-queue-comparison.md 中的对比分析。
+  source: 数据库中间件/03-message-queues/03-message-queue-comparison.md
+- type: concept
+  question: 在 Prometheus TSDB 深度解析 中, 存储架构 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md 的「存储架构」章节。
+  source: 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md
+  section: 存储架构
+- type: concept
+  question: 在 Prometheus TSDB 深度解析 中, Block 生命周期 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md 的「Block 生命周期」章节。
+  source: 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md
+  section: Block 生命周期
+- type: concept
+  question: 在 Prometheus TSDB 深度解析 中, 高基数问题 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md 的「高基数问题」章节。
+  source: 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md
+  section: 高基数问题
+- type: concept
+  question: 在 Prometheus TSDB 深度解析 中, 相关 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md 的「相关」章节。
+  source: 数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md
+  section: 相关
+- type: concept
+  question: 在 InfluxDB vs TimescaleDB 对比 中, 架构差异 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md 的「架构差异」章节。
+  source: 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md
+  section: 架构差异
+- type: concept
+  question: 在 InfluxDB vs TimescaleDB 对比 中, 选型建议 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md 的「选型建议」章节。
+  source: 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md
+  section: 选型建议
+- type: concept
+  question: 在 InfluxDB vs TimescaleDB 对比 中, 相关 是什么?
+  answer: 参见 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md 的「相关」章节。
+  source: 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md
+  section: 相关
+- type: comparison
+  question: InfluxDB vs TimescaleDB 对比 中有哪些技术对比?
+  answer: 参见 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md 中的对比分析。
+  source: 数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md
+- type: concept
+  question: 在 数据库 Operator 设计模式 中, 核心职责 是什么?
+  answer: 参见 数据库中间件/05-operator-management/01-database-operator-patterns.md 的「核心职责」章节。
+  source: 数据库中间件/05-operator-management/01-database-operator-patterns.md
+  section: 核心职责
+- type: concept
+  question: 在 数据库 Operator 设计模式 中, 状态管理 是什么?
+  answer: 参见 数据库中间件/05-operator-management/01-database-operator-patterns.md 的「状态管理」章节。
+  source: 数据库中间件/05-operator-management/01-database-operator-patterns.md
+  section: 状态管理
+- type: concept
+  question: 在 数据库 Operator 设计模式 中, 常见 Operator 是什么?
+  answer: 参见 数据库中间件/05-operator-management/01-database-operator-patterns.md 的「常见 Operator」章节。
+  source: 数据库中间件/05-operator-management/01-database-operator-patterns.md
+  section: 常见 Operator
+- type: concept
+  question: 在 数据库 Operator 设计模式 中, 反模式 是什么?
+  answer: 参见 数据库中间件/05-operator-management/01-database-operator-patterns.md 的「反模式」章节。
+  source: 数据库中间件/05-operator-management/01-database-operator-patterns.md
+  section: 反模式
+- type: concept
+  question: 在 数据库 Operator 设计模式 中, 相关 是什么?
+  answer: 参见 数据库中间件/05-operator-management/01-database-operator-patterns.md 的「相关」章节。
+  source: 数据库中间件/05-operator-management/01-database-operator-patterns.md
+  section: 相关
+- type: concept
+  question: 在 MySQL PostgreSQL Redis Operator 对比 中, 功能对比 是什么?
+  answer: 参见 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md 的「功能对比」章节。
+  source: 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md
+  section: 功能对比
+- type: concept
+  question: 在 MySQL PostgreSQL Redis Operator 对比 中, 相关 是什么?
+  answer: 参见 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md 的「相关」章节。
+  source: 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md
+  section: 相关
+- type: comparison
+  question: MySQL PostgreSQL Redis Operator 对比 中有哪些技术对比?
+  answer: 参见 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md 中的对比分析。
+  source: 数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md
+- type: concept
+  question: 在 CDC 变更数据捕获 中, CDC 模式 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md 的「CDC 模式」章节。
+  source: 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md
+  section: CDC 模式
+- type: concept
+  question: 在 CDC 变更数据捕获 中, Debezium 架构 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md 的「Debezium 架构」章节。
+  source: 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md
+  section: Debezium 架构
+- type: concept
+  question: 在 CDC 变更数据捕获 中, Kubernetes 部署 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md 的「Kubernetes 部署」章节。
+  source: 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md
+  section: Kubernetes 部署
+- type: concept
+  question: 在 CDC 变更数据捕获 中, 相关 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md 的「相关」章节。
+  source: 数据库中间件/06-data-streaming/01-cdc-change-data-capture.md
+  section: 相关
+- type: concept
+  question: 在 流处理技术概述 中, 框架对比 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/02-stream-processing-overview.md 的「框架对比」章节。
+  source: 数据库中间件/06-data-streaming/02-stream-processing-overview.md
+  section: 框架对比
+- type: concept
+  question: 在 流处理技术概述 中, 选型建议 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/02-stream-processing-overview.md 的「选型建议」章节。
+  source: 数据库中间件/06-data-streaming/02-stream-processing-overview.md
+  section: 选型建议
+- type: concept
+  question: 在 流处理技术概述 中, 相关 是什么?
+  answer: 参见 数据库中间件/06-data-streaming/02-stream-processing-overview.md 的「相关」章节。
+  source: 数据库中间件/06-data-streaming/02-stream-processing-overview.md
+  section: 相关
+- type: comparison
+  question: 流处理技术概述 中有哪些技术对比?
+  answer: 参见 数据库中间件/06-data-streaming/02-stream-processing-overview.md 中的对比分析。
+  source: 数据库中间件/06-data-streaming/02-stream-processing-overview.md
+- type: comparison
+  question: Domain-28 企业数据库与中间件 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 数据库中间件/98-merged-indexes/00-open-source-projects-index-from-domain-28.md 中的对比分析。
+  source: 数据库中间件/98-merged-indexes/00-open-source-projects-index-from-domain-28.md
+- type: concept
+  question: 在 domain-28-enterprise-database-middleware MOC 中, 领域概述 是什么?
+  answer: 参见 数据库中间件/98-merged-indexes/MOC-from-domain-28.md 的「领域概述」章节。
+  source: 数据库中间件/98-merged-indexes/MOC-from-domain-28.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-28-enterprise-database-middleware MOC 中, 文档清单 是什么?
+  answer: 参见 数据库中间件/98-merged-indexes/MOC-from-domain-28.md 的「文档清单」章节。
+  source: 数据库中间件/98-merged-indexes/MOC-from-domain-28.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-28-enterprise-database-middleware MOC 中, 知识图谱 是什么?
+  answer: 参见 数据库中间件/98-merged-indexes/MOC-from-domain-28.md 的「知识图谱」章节。
+  source: 数据库中间件/98-merged-indexes/MOC-from-domain-28.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-28-enterprise-database-middleware MOC 中, 关联入口 是什么?
+  answer: 参见 数据库中间件/98-merged-indexes/MOC-from-domain-28.md 的「关联入口」章节。
+  source: 数据库中间件/98-merged-indexes/MOC-from-domain-28.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-28-enterprise-database-middleware MOC 相关的故障?
+  answer: 参见 数据库中间件/98-merged-indexes/MOC-from-domain-28.md 的故障排查章节。
+  source: 数据库中间件/98-merged-indexes/MOC-from-domain-28.md
+- type: concept
+  question: '在 Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations) 中, 概述 是什么?'
+  answer: 参见 数据库中间件/98-merged-indexes/README-from-domain-28.md 的「概述」章节。
+  source: 数据库中间件/98-merged-indexes/README-from-domain-28.md
+  section: 概述
+- type: concept
+  question: '在 Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations) 中, 全部 11 篇文档概览 是什么?'
+  answer: 参见 数据库中间件/98-merged-indexes/README-from-domain-28.md 的「全部 11 篇文档概览」章节。
+  source: 数据库中间件/98-merged-indexes/README-from-domain-28.md
+  section: 全部 11 篇文档概览
+- type: concept
+  question: '在 Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations) 中, 架构设计 是什么?'
+  answer: 参见 数据库中间件/98-merged-indexes/README-from-domain-28.md 的「架构设计」章节。
+  source: 数据库中间件/98-merged-indexes/README-from-domain-28.md
+  section: 架构设计
+- type: comparison
+  question: 'Domain 28: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations) 中有哪些技术对比?'
+  answer: 参见 数据库中间件/98-merged-indexes/README-from-domain-28.md 中的对比分析。
+  source: 数据库中间件/98-merged-indexes/README-from-domain-28.md

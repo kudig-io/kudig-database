@@ -83,7 +83,7 @@ splitter = RecursiveCharacterTextSplitter(
 
 ```python
 metadata = {
-    'source': 'domain-01-cluster-fundamentals/11-etcd-deep-dive.md',
+    'source': '集群基础/11-etcd-deep-dive.md',
     'domain': 'control-plane',
     'section': '## 3. Raft 共识协议',
     'difficulty': 'advanced',
@@ -99,10 +99,10 @@ metadata = {
 | 目录 | 分块策略 | chunk_size | 说明 |
 |:---|:---|:---:|:---|
 | domain-* | 按 H2 标题分块 | ~2000 | 每个章节独立 chunk |
-| domain-10-troubleshooting-diagnostics/topic-fta/list/ | 按 H3 标题分块 | ~1500 | 每个底事件独立 chunk |
-| domain-10-troubleshooting-diagnostics/topic-skills/ | 按 Section 分块 | ~3000 | 每个 Section 独立 chunk |
-| domain-17-system-foundation/topic-cheat-sheet/ | 整文档 | 全文 | 速查卡保持完整 |
-| domain-17-system-foundation/topic-dictionary/ | 按条目分块 | ~500 | 每个术语独立 chunk |
+| 故障诊断/topic-fta/list/ | 按 H3 标题分块 | ~1500 | 每个底事件独立 chunk |
+| 故障诊断/topic-skills/ | 按 Section 分块 | ~3000 | 每个 Section 独立 chunk |
+| 系统基础/topic-cheat-sheet/ | 整文档 | 全文 | 速查卡保持完整 |
+| 系统基础/topic-dictionary/ | 按条目分块 | ~500 | 每个术语独立 chunk |
 | domain-32-yaml/ | 按资源类型分块 | ~2000 | 每种 YAML 独立 |
 
 ---
@@ -128,7 +128,7 @@ from langchain.vectorstores import Chroma
 
 # 1. 加载文档
 loader = DirectoryLoader(
-    './domain-10-troubleshooting-diagnostics/',
+    './故障诊断/',
     glob='**/*.md',
     show_progress=True
 )

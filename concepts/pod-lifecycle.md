@@ -114,7 +114,7 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [[entities/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
 - [[entities/container-runtime.md|Container Runtime]] — Cross-reference
 - [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

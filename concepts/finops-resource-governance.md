@@ -1,7 +1,7 @@
 ---
 title: FinOps 资源治理
 summary: FinOps 资源治理：entities/kubernetes.md 的多租户架构让资源分配变得复杂：平台团队提供集群，业务团队部署工作负载，但"谁用了多少资源、花了多少钱"往往是一笔糊涂账。FinOps
-  提供成本可见性与优化方法，平台治理提供资源配额与策略执行。本页连接 domain-07-platform-engineering 的治理框架与 domain-11-production-o...
+  提供成本可见性与优化方法，平台治理提供资源配额与策略执行。本页连接 平台工程 的治理框架与 domain-11-production-o...
 category: synthesis
 tags:
 - k8s
@@ -16,9 +16,9 @@ tags:
 - chargeback
 tier: supporting
 sources:
-- domain-07-platform-engineering/03-governance
-- domain-07-platform-engineering/governance
-- domain-11-production-operations/01-finops
+- 平台工程/03-governance
+- 平台工程/governance
+- 生产运维/01-finops
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
@@ -38,7 +38,7 @@ relationships:
 
 ## 概述
 
-[[entities/kubernetes.md|Kubernetes]] 的多租户架构让资源分配变得复杂：平台团队提供集群，业务团队部署工作负载，但"谁用了多少资源、花了多少钱"往往是一笔糊涂账。FinOps 提供成本可见性与优化方法，平台治理提供资源配额与策略执行。本页连接 domain-07-platform-engineering 的治理框架与 domain-11-production-operations 的 FinOps 实践，展示如何在多租户 K8s 环境中构建"成本可见 → 预算约束 → 自动优化"的闭环治理体系。
+[[entities/kubernetes.md|Kubernetes]] 的多租户架构让资源分配变得复杂：平台团队提供集群，业务团队部署工作负载，但"谁用了多少资源、花了多少钱"往往是一笔糊涂账。FinOps 提供成本可见性与优化方法，平台治理提供资源配额与策略执行。本页连接 平台工程 的治理框架与 生产运维 的 FinOps 实践，展示如何在多租户 K8s 环境中构建"成本可见 → 预算约束 → 自动优化"的闭环治理体系。
 
 ## 核心连接
 
@@ -489,16 +489,16 @@ kubectl get svc --all-namespaces -o json | jq '
 
 ## 相关 Domain
 
-- domain-07-platform-engineering/03-governance
-- domain-07-platform-engineering/governance
-- domain-11-production-operations/01-finops
+- 平台工程/03-governance
+- 平台工程/governance
+- 生产运维/01-finops
 - [[concepts/observability-finops.md|observability-finops]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|命名空间]]
+- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/topic-dictionary/fundamentals/namespaces.md|命名空间]]
 - [[entities/prometheus.md|Prometheus (entities)]]
 - [[entities/argo.md|Argo Workflows]]
 

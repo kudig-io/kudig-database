@@ -39,10 +39,10 @@ prerequisites:
 - etcd-basics
 cross_refs:
 - type: domain
-  path: ../../domain-07-platform-engineering/
+  path: ../../平台工程/
   label: 平台运维知识域
 - type: domain
-  path: ../../domain-01-cluster-fundamentals/
+  path: ../../集群基础/
   label: 控制平面知识域
 ---
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Round 11: 剩余缺失术语批量展开（25个）"""
 from pathlib import Path
-BASE = Path("domain-17-system-foundation/topic-dictionary")
+BASE = Path("系统基础/topic-dictionary")
 
 def w(cat, fn, zh, en, tags, ov, core, mech, use, refs, rel=""):
     fp = BASE / cat / f"{fn}.md"
@@ -9,7 +9,7 @@ def w(cat, fn, zh, en, tags, ov, core, mech, use, refs, rel=""):
         return False
     tks = "\n".join(f"- {k}" for k in dict.fromkeys([zh, en, "dictionary"]))
     tg = "\n".join(f"- {t}" for t in tags)
-    r = rel or "- [[domain-17-system-foundation/topic-dictionary/k8s-glossary|K8s Glossary]]"
+    r = rel or "- [[系统基础/topic-dictionary/k8s-glossary|K8s Glossary]]"
     fp.parent.mkdir(parents=True, exist_ok=True)
     fp.write_text(f"""---
 title: {zh}
@@ -72,7 +72,7 @@ TERMS = [
      "- stacker.yaml 定义构建流程\n- 支持从基础镜像/Dockerfile/OCI 开始\n- 层绑定（bind）和导入（import）\n- 构建参数化\n- 多阶段构建支持\n- 签名和推送",
      "- CI/CD Pipeline 的容器构建\n- 无 Docker Daemon 环境的镜像构建\n- 声明式镜像定义\n- 层缓存优化的构建流程\n- Buildah/Kaniko 的替代方案",
      "- https://stackerbuild.io/\n- https://github.com/project-stacker/stacker",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/buildpacks|Buildpacks]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/shipwright|Shipwright]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/docker|Docker]]"),
+     "- [[系统基础/topic-dictionary/tooling/buildpacks|Buildpacks]]\n- [[系统基础/topic-dictionary/tooling/shipwright|Shipwright]]\n- [[系统基础/topic-dictionary/tooling/docker|Docker]]"),
 
     ("tooling", "ko", "ko Go 容器构建", "ko",
      ["tooling", "go", "container"],
@@ -81,7 +81,7 @@ TERMS = [
      "- `ko build` 编译并推送镜像\n- `ko resolve` 替换 YAML 中的镜像引用\n- `ko apply` 构建并直接 kubectl apply\n- 多架构构建（`--platform`）\n- `.ko.yaml` 配置基础镜像\n- SBOM 自动生成\n- 与 GitHub Actions 集成",
      "- Go 微服务的容器化\n- Knative/Tekton 开发流程\n- CI/CD 中的快速构建\n- 多架构镜像的生成\n- Go 项目的容器化最佳实践",
      "- https://ko.build/\n- https://github.com/ko-build/ko",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/buildpacks|Buildpacks]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/docker|Docker]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/podman|Podman]]"),
+     "- [[系统基础/topic-dictionary/tooling/buildpacks|Buildpacks]]\n- [[系统基础/topic-dictionary/tooling/docker|Docker]]\n- [[系统基础/topic-dictionary/tooling/podman|Podman]]"),
 
     ("tooling", "devspace", "DevSpace 云开发环境", "DevSpace",
      ["tooling", "development", "k8s"],
@@ -90,7 +90,7 @@ TERMS = [
      "- devspace.yaml 声明式开发环境配置\n- 文件双向同步（rsync 式）\n- 端口转发自动配置\n- 终端代理（直接在 K8s Pod 中执行命令）\n- Helm/Kubectl 部署集成\n- 多服务并行开发\n- Plugin 扩展",
      "- K8s 微服务的本地开发\n- 多服务联调环境\n- 替代 Telepresence 的开发方案\n- 团队的标准化开发环境\n- 开发/测试环境的快速搭建",
      "- https://devspace.sh/\n- https://github.com/loft-sh/devspace",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/telepresence|Telepresence]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/skaffold|Skaffold]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/devfile|Devfile]]"),
+     "- [[系统基础/topic-dictionary/tooling/telepresence|Telepresence]]\n- [[系统基础/topic-dictionary/tooling/skaffold|Skaffold]]\n- [[系统基础/topic-dictionary/tooling/devfile|Devfile]]"),
 
     ("tooling", "xregistry", "xRegistry 增强型注册表", "xRegistry",
      ["tooling", "registry", "oci"],
@@ -99,7 +99,7 @@ TERMS = [
      "- 全文搜索（镜像/标签/注释）\n- 配额管理（存储/拉取频率限制）\n- 多仓库同步（跨区域复制）\n- 访问控制（RBAC）\n- 审计日志\n- 标签管理（不可变标签/保留策略）\n- Garbage Collection 增强",
      "- 企业内部的高级 OCI Registry\n- 多区域镜像同步\n- 存储配额和成本控制\n- 合规要求下的审计和保留策略\n- Harbor 的轻量替代方案",
      "- https://github.com/xregistry/xregistry",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/distribution|Distribution]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/harbor|Harbor]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/zot|zot]]"),
+     "- [[系统基础/topic-dictionary/tooling/distribution|Distribution]]\n- [[系统基础/topic-dictionary/tooling/harbor|Harbor]]\n- [[系统基础/topic-dictionary/tooling/zot|zot]]"),
 
     ("tooling", "dragonfly", "Dragonfly P2P 分发", "Dragonfly",
      ["tooling", "distribution", "p2p"],
@@ -108,7 +108,7 @@ TERMS = [
      "- DFDaemon 节点代理\n- Scheduler 调度 P2P 节点\n- Manager 集群管理\n- 支持 Docker/Containerd/Podman/Nydus\n- 预热（Preheating）机制\n- 分片下载和断点续传\n- 与 Harbor 集成",
      "- 大规模集群的镜像拉取加速\n- CI/CD 构建产物的快速分发\n- 跨区域的镜像同步加速\n- Registry 带宽瓶颈的缓解\n- K8s 扩容时的镜像分发优化",
      "- https://d7y.io/\n- https://github.com/dragonflyoss/Dragonfly2",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/distribution|Distribution]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/harbor|Harbor]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd|containerd]]"),
+     "- [[系统基础/topic-dictionary/tooling/distribution|Distribution]]\n- [[系统基础/topic-dictionary/tooling/harbor|Harbor]]\n- [[系统基础/topic-dictionary/fundamentals/containerd|containerd]]"),
 
     ("tooling", "microcks", "Microcks API 模拟测试", "Microcks",
      ["tooling", "testing", "api"],
@@ -117,7 +117,7 @@ TERMS = [
      "- 导入 OpenAPI/AsyncAPI/Postman/GraphQL 规范\n- 自动生成 Mock 端点和响应\n- 契约测试（Conformance Testing）\n- 测试数据管理（Dataset）\n- 延迟和错误模拟\n- Kubernetes Operator 部署\n- CLI 和 Web UI",
      "- 微服务 API 的集成测试\n- API 规范的 Mock 服务\n- 消费者驱动的契约测试\n- 前后端并行开发\n- API 变更的影响评估",
      "- https://microcks.io/\n- https://github.com/microcks/microcks",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/grpc|gRPC]]\n- [[domain-17-system-foundation/topic-dictionary/networking/connect-rpc|Connect RPC]]\n- [[domain-17-system-foundation/topic-dictionary/operations/kube-burner|kube-burner]]"),
+     "- [[系统基础/topic-dictionary/networking/grpc|gRPC]]\n- [[系统基础/topic-dictionary/networking/connect-rpc|Connect RPC]]\n- [[系统基础/topic-dictionary/operations/kube-burner|kube-burner]]"),
 
     # ── Security ──
     ("security", "cedar", "Cedar 策略语言", "Cedar",
@@ -127,7 +127,7 @@ TERMS = [
      "- Entity（用户/资源/动作的定义）\n- Policy（when/unless 条件的策略规则）\n- 层次化资源模型\n- 策略组（Policy Set）管理\n- 策略评估（is-authorized API）\n- 形式化验证工具\n- SDK（Rust/Java/Go）",
      "- 应用的细粒度授权策略\n- 多租户 SaaS 的权限管理\n- AWS 资源的 IAM 策略\n- 替代 OPA 的轻量策略方案\n- 需要形式化验证的安全策略",
      "- https://www.cedarpolicy.com/\n- https://github.com/cedar-policy/cedar",
-     "- [[domain-17-system-foundation/topic-dictionary/security/opa|OPA]]\n- [[domain-17-system-foundation/topic-dictionary/security/openfga|OpenFGA]]\n- [[domain-17-system-foundation/topic-dictionary/security/kyverno|Kyverno]]"),
+     "- [[系统基础/topic-dictionary/security/opa|OPA]]\n- [[系统基础/topic-dictionary/security/openfga|OpenFGA]]\n- [[系统基础/topic-dictionary/security/kyverno|Kyverno]]"),
 
     ("security", "cartography", "Cartography 资产图谱", "Cartography",
      ["security", "asset-management", "graph"],
@@ -136,7 +136,7 @@ TERMS = [
      "- 自动化资产采集（Cron 调度）\n- 多云资产关联（EC2→S3→IAM→VPC）\n- Kubernetes 资产采集\n- 安全分析查询（Cypher 查询语言）\n- 自定义分析插件\n- 差异检测（变更追踪）\n- Grafana Dashboard 集成",
      "- 云基础设施的资产盘点\n- 安全态势的可视化分析\n- 资产关系的自动化发现\n- 合规审计的资产报告\n- 安全团队的攻击面分析",
      "- https://cartography-cncf.github.io/cartography/\n- https://github.com/lyft/cartography",
-     "- [[domain-17-system-foundation/topic-dictionary/security/kubescape|Kubescape]]\n- [[domain-17-system-foundation/topic-dictionary/security/trivy|Trivy]]\n- [[domain-17-system-foundation/topic-dictionary/security/cloud-custodian|Cloud Custodian]]"),
+     "- [[系统基础/topic-dictionary/security/kubescape|Kubescape]]\n- [[系统基础/topic-dictionary/security/trivy|Trivy]]\n- [[系统基础/topic-dictionary/security/cloud-custodian|Cloud Custodian]]"),
 
     ("security", "keylime", "Keylime 远程证明", "Keylime",
      ["security", "attestation", "tpm"],
@@ -145,7 +145,7 @@ TERMS = [
      "- Agent（被测系统）+ Verifier（验证者）架构\n- TPM Quote 采集和验证\n- IMA（Integrity Measurement Architecture）日志\n- 可信启动链验证\n- 密钥分发和绑定\n- 证书管理\n- REST API 和 CLI",
      "- 服务器启动完整性验证\n- 边缘设备的信任验证\n- 合规要求的系统完整性监控\n- 零信任架构的硬件信任根\n- 机密计算的远程证明",
      "- https://keylime.dev/\n- https://github.com/keylime/keylime",
-     "- [[domain-17-system-foundation/topic-dictionary/security/confidential-containers|Confidential Containers]]\n- [[domain-17-system-foundation/topic-dictionary/security/parsec|PARSEC]]\n- [[domain-17-system-foundation/topic-dictionary/security/spire|SPIRE]]"),
+     "- [[系统基础/topic-dictionary/security/confidential-containers|Confidential Containers]]\n- [[系统基础/topic-dictionary/security/parsec|PARSEC]]\n- [[系统基础/topic-dictionary/security/spire|SPIRE]]"),
 
     ("security", "open-policy-containers", "OPCo 策略容器", "Open Policy Containers",
      ["security", "policy", "oci"],
@@ -154,7 +154,7 @@ TERMS = [
      "- `policy push/pull/sign` 管理策略镜像\n- 支持 Rego/Kyverno/Cedar 策略格式\n- OCI Artifact 存储策略\n- 策略签名和验证（Cosign/Notation）\n- 策略版本管理和标签\n- 与 Gatekeeper/Kyverno 集成",
      "- 策略的版本控制和分发\n- 多集群的策略同步\n- GitOps 策略管理\n- 策略的安全签名和验证\n- 策略库的集中管理",
      "- https://openpolicycontainers.com/\n- https://github.com/opcr-io/policy",
-     "- [[domain-17-system-foundation/topic-dictionary/security/opa|OPA]]\n- [[domain-17-system-foundation/topic-dictionary/security/kyverno|Kyverno]]\n- [[domain-17-system-foundation/topic-dictionary/security/notary-project|Notary Project]]"),
+     "- [[系统基础/topic-dictionary/security/opa|OPA]]\n- [[系统基础/topic-dictionary/security/kyverno|Kyverno]]\n- [[系统基础/topic-dictionary/security/notary-project|Notary Project]]"),
 
     ("security", "containerssh", "ContainerSSH SSH 代理", "ContainerSSH",
      ["security", "ssh", "container"],
@@ -163,7 +163,7 @@ TERMS = [
      "- SSH 协议服务器（标准 SSH 客户端连接）\n- 后端：Kubernetes/Docker/Local\n- OIDC/LDAP 认证后端\n- 会话录制和回放\n- 配置注入（环境变量/卷）\n- 速率限制和访问控制\n- Prometheus 指标",
      "- 运维人员的安全 Shell 访问\n- 替代 `kubectl exec` 的 SSH 方案\n- 合规要求下的会话审计\n- 开发团队的容器远程访问\n- 跳板机/堡垒机的容器化替代",
      "- https://containerssh.github.io/\n- https://github.com/ContainerSSH/ContainerSSH",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl|kubectl]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/stern|Stern]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]"),
+     "- [[系统基础/topic-dictionary/tooling/kubectl|kubectl]]\n- [[系统基础/topic-dictionary/tooling/stern|Stern]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]"),
 
     # ── Observability ──
     ("observability", "drasi", "Drasi 变更检测", "Drasi",
@@ -173,7 +173,7 @@ TERMS = [
      "- Source 定义数据源（K8s/Gremlin/PostgreSQL）\n- ContinuousQuery 定义监控条件\n- Reaction 定义变化响应\n- 基于 Cypher 图查询语言\n- 状态变化追踪（Added/Updated/Deleted）\n- Kubernetes 资源变化监控\n- Webhook/Log/Teams 反应",
      "- 基础设施变更的实时监控\n- K8s 资源状态变化的告警\n- 应用配置的漂移检测\n- 安全事件的实时响应\n- 运维自动化的事件触发",
      "- https://drasi.dev/\n- https://github.com/drasI-project/drasI",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/operations/kuberhealthy|Kuberhealthy]]"),
+     "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/operations/kuberhealthy|Kuberhealthy]]"),
 
     # ── Networking ──
     ("networking", "sermant", "Sermant 服务治理", "Sermant",
@@ -183,7 +183,7 @@ TERMS = [
      "- 流量管理（路由/灰度/限流/熔断）\n- 标签路由（基于 Header/参数）\n- 服务可观测性（追踪/指标）\n- 插件体系（可扩展治理能力）\n- Sermant Backend 管控面\n- 与 Istio 控制面兼容\n- 支持 Spring Cloud/Dubbo",
      "- Java 微服务的无侵入治理\n- 传统应用的灰度发布\n- Sidecar 不可用场景的替代\n- 服务路由和流量管理\n- 微服务的可观测性接入",
      "- https://sermant.io/\n- https://github.com/sermant-io/Sermant",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]\n- [[domain-17-system-foundation/topic-dictionary/networking/linkerd|Linkerd]]\n- [[domain-17-system-foundation/topic-dictionary/networking/kuma|Kuma]]"),
+     "- [[系统基础/topic-dictionary/networking/istio|Istio]]\n- [[系统基础/topic-dictionary/networking/linkerd|Linkerd]]\n- [[系统基础/topic-dictionary/networking/kuma|Kuma]]"),
 
     ("networking", "kube-ovn", "Kube-OVN CNI", "Kube-OVN",
      ["networking", "cni", "ovn"],
@@ -192,7 +192,7 @@ TERMS = [
      "- Subnet CRD（VPC/子网管理）\n- 固定 IP（Pod Annotation）\n- 安全组（Security Group）\n- QoS 带宽限制\n- 网络 ACL\n- 多网卡支持（Multus）\n- DPDK 加速",
      "- 企业级 K8s 网络方案\n- 需要 VPC/固定 IP 的场景\n- 多租户网络隔离\n- 安全组和 ACL 的精细控制\n- 电信/金融行业的网络合规",
      "- https://kubeovn.github.io/\n- https://github.com/kubeovn/kube-ovn",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/ovn-kubernetes|OVN-Kubernetes]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cilium|Cilium]]\n- [[domain-17-system-foundation/topic-dictionary/networking/antrea|Antrea]]"),
+     "- [[系统基础/topic-dictionary/networking/ovn-kubernetes|OVN-Kubernetes]]\n- [[系统基础/topic-dictionary/networking/cilium|Cilium]]\n- [[系统基础/topic-dictionary/networking/antrea|Antrea]]"),
 
     ("networking", "kuadrant", "Kuadrant API 管理", "Kuadrant",
      ["networking", "api-management", "gateway"],
@@ -201,7 +201,7 @@ TERMS = [
      "- AuthPolicy（认证和授权策略）\n- RateLimitPolicy（速率限制策略）\n- DNSPolicy（DNS 管理）\n- TLSPolicy（TLS 管理）\n- 与 Gateway API 无缝集成\n- OPA 策略引擎后端\n- 多网关供应商支持",
      "- API 网关的策略管理\n- 微服务的认证和授权\n- API 限流和保护\n- Gateway API 的企业增强\n- 多网关的统一策略管理",
      "- https://kuadrant.io/\n- https://github.com/Kuadrant/kuadrant-operator",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/envoy-gateway|Envoy Gateway]]\n- [[domain-17-system-foundation/topic-dictionary/networking/kgateway|KGateway]]\n- [[domain-17-system-foundation/topic-dictionary/security/openfga|OpenFGA]]"),
+     "- [[系统基础/topic-dictionary/networking/envoy-gateway|Envoy Gateway]]\n- [[系统基础/topic-dictionary/networking/kgateway|KGateway]]\n- [[系统基础/topic-dictionary/security/openfga|OpenFGA]]"),
 
     ("networking", "akri", "Akri 边缘设备发现", "Akri",
      ["networking", "edge", "iot"],
@@ -210,7 +210,7 @@ TERMS = [
      "- Configuration CRD 定义设备发现规则\n- Instance CRD 表示发现的设备实例\n- Discovery Handler（ONVIF/OPC-UA/uDev 等）\n- 设备自动调度和绑定 Pod\n- 设备健康检查\n- Prometheus 指标\n- 自定义 Discovery Handler",
      "- IoT 设备的 K8s 管理\n- 边缘节点的硬件资源发现\n- 智能摄像头的 AI 推理\n- GPU/加速器的自动分配\n- 工业设备的容器化接入",
      "- https://docs.akri.sh/\n- https://github.com/project-akri/akri",
-     "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeedge|KubeEdge]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/hami|HAMi]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/openyurt|OpenYurt]]"),
+     "- [[系统基础/topic-dictionary/specialized-workloads/kubeedge|KubeEdge]]\n- [[系统基础/topic-dictionary/scheduling/hami|HAMi]]\n- [[系统基础/topic-dictionary/specialized-workloads/openyurt|OpenYurt]]"),
 
     # ── Operations ──
     ("operations", "tinkerbell", "Tinkerbell 裸金属部署", "Tinkerbell",
@@ -220,7 +220,7 @@ TERMS = [
      "- Hardware CRD 定义硬件资源\n- Template CRD 定义安装工作流\n- Workflow CRD 执行状态\n- Action 容器镜像（安装步骤）\n- Hook（OS 安装镜像）\n- Tink Server/Worker 架构\n- iPXE 引导",
      "- 裸金属服务器的自动化部署\n- 数据中心的服务器生命周期管理\n- 边缘节点的 OS 安装\n- 裸金属 K8s 节点的自动化部署\n- PXE/Kickstart 的现代化替代",
      "- https://tinkerbell.org/\n- https://github.com/tinkerbell/tink",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm|kubeadm]]\n- [[domain-17-system-foundation/topic-dictionary/operations/kubean|Kubean]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/flatcar|Flatcar]]"),
+     "- [[系统基础/topic-dictionary/tooling/kubeadm|kubeadm]]\n- [[系统基础/topic-dictionary/operations/kubean|Kubean]]\n- [[系统基础/topic-dictionary/fundamentals/flatcar|Flatcar]]"),
 
     ("operations", "kured", "Kured 节点重启", "Kured",
      ["operations", "node", "reboot"],
@@ -229,7 +229,7 @@ TERMS = [
      "- 检测重启信号（`/var/run/reboot-required`）\n- 节点排空（Pod 迁移）\n- 节点重启\n- 节点恢复（uncordon）\n- 分布式锁（K8s Lock API）\n- 时间窗口控制\n- Prometheus 指标",
      "- 内核更新后的节点重启\n- 安全补丁的自动化应用\n- 节点维护的自动化编排\n- 大规模集群的滚动重启\n- OS 更新的自动化管理",
      "- https://kubereboot.github.io/kured/\n- https://github.com/kubereboot/kured",
-     "- [[domain-17-system-foundation/topic-dictionary/operations/upgrade|升级]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/flatcar|Flatcar]]\n- [[domain-17-system-foundation/topic-dictionary/operations/kubean|Kubean]]"),
+     "- [[系统基础/topic-dictionary/operations/upgrade|升级]]\n- [[系统基础/topic-dictionary/fundamentals/flatcar|Flatcar]]\n- [[系统基础/topic-dictionary/operations/kubean|Kubean]]"),
 
     ("operations", "holmesgpt", "HolmesGPT AI 排障", "HolmesGPT",
      ["operations", "ai", "diagnostics"],
@@ -238,7 +238,7 @@ TERMS = [
      "- 告警自动分析（Alert → Root Cause）\n- 多数据源集成（Prometheus/Loki/ES）\n- Runbook 自动执行\n- 多 LLM 后端（OpenAI/Azure/Local）\n- Slack/Teams 集成\n- 历史事件学习\n- 修复建议生成",
      "- On-Call 告警的快速诊断\n- 复杂故障的 AI 辅助分析\n- Runbook 的自动化执行\n- 运维团队的 AI 助手\n- 事件管理的效率提升",
      "- https://github.com/robusta-dev/holmesgpt\n- https://home.robusta.dev/",
-     "- [[domain-17-system-foundation/topic-dictionary/operations/k8sgpt|K8sGPT]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/loki|Loki]]"),
+     "- [[系统基础/topic-dictionary/operations/k8sgpt|K8sGPT]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/loki|Loki]]"),
 
     # ── Platform ──
     ("platform-engineering", "armada", "Armada 批量调度", "Armada",
@@ -248,7 +248,7 @@ TERMS = [
      "- JobSet CRD 定义批量作业集\n- Queue CRD 多级队列管理\n- 优先级和抢占策略\n- 跨集群作业分发\n- 资源公平共享（Fair Share）\n- 作业状态聚合\n- Lookout UI 作业监控",
      "- 量化研究的批量计算\n- AI 训练任务的多集群调度\n- 大规模数据处理 Pipeline\n- 多团队的计算资源公平分配\n- HPC 工作负载的 K8s 管理",
      "- https://armadaproject.io/\n- https://github.com/armadaproject/armada",
-     "- [[domain-17-system-foundation/topic-dictionary/scheduling/volcano|Volcano]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/koordinator|Koordinator]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/karmada|Karmada]]"),
+     "- [[系统基础/topic-dictionary/scheduling/volcano|Volcano]]\n- [[系统基础/topic-dictionary/scheduling/koordinator|Koordinator]]\n- [[系统基础/topic-dictionary/platform-engineering/karmada|Karmada]]"),
 
     ("platform-engineering", "kusionstack", "Kusion 配置管理", "KusionStack",
      ["platform-engineering", "configuration", "iac"],
@@ -257,7 +257,7 @@ TERMS = [
      "- AppConfiguration 模型定义应用\n- KCL 语言编写配置\n- Module 可复用配置模块\n- Workspace 多环境管理\n- 预览（Preview）变更影响\n- 与 Kubernetes/Terraform 集成\n- Kusion API Server",
      "- 企业内部的应用配置标准化\n- 多环境（dev/staging/prod）配置管理\n- IaC 的编程化管理\n- 开发者自助的应用交付\n- 复杂应用的声明式定义",
      "- https://kusionstack.io/\n- https://github.com/kusionstack/kusion",
-     "- [[domain-17-system-foundation/topic-dictionary/configuration/kcl|KCL]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane|Crossplane]]"),
+     "- [[系统基础/topic-dictionary/configuration/kcl|KCL]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/platform-engineering/crossplane|Crossplane]]"),
 
     # ── Storage ──
     ("storage", "cubefs", "CubeFS 分布式文件系统", "CubeFS",
@@ -267,7 +267,7 @@ TERMS = [
      "- Master/MetaNode/DataNode/ObjectNode 架构\n- 多副本和纠删码（Erasure Coding）\n- 元数据分区和水平扩展\n- S3 兼容 API\n- 快照和克隆\n- 多租户配额管理\n- CSI 驱动",
      "- AI 训练的共享文件存储\n- 大数据分析的分布式文件系统\n- 容器化应用的高性能存储\n- 多租户文件存储平台\n- 对象存储和文件存储的统一",
      "- https://cubefs.io/\n- https://github.com/cubefs/cubefs",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/ceph|Ceph]]\n- [[domain-17-system-foundation/topic-dictionary/storage/fluid|Fluid]]\n- [[domain-17-system-foundation/topic-dictionary/storage/minio|MinIO]]"),
+     "- [[系统基础/topic-dictionary/storage/ceph|Ceph]]\n- [[系统基础/topic-dictionary/storage/fluid|Fluid]]\n- [[系统基础/topic-dictionary/storage/minio|MinIO]]"),
 
     ("storage", "hwameistor", "HwameiStor 本地存储", "HwameiStor",
      ["storage", "local-storage", "ha"],
@@ -276,7 +276,7 @@ TERMS = [
      "- LocalDiskNode 自动发现本地磁盘\n- LocalVolume 本地卷管理\n- 数据复制（同步/异步）\n- 卷迁移（节点故障时自动迁移）\n- 磁盘健康检查\n- 存储池管理\n- 卷扩容",
      "- 本地磁盘的高可用管理\n- 数据库的本地存储方案\n- 存储成本优化（利用本地磁盘）\n- 边缘设备的存储管理\n- 需要高 IOPS 的有状态应用",
      "- https://hwameistor.io/\n- https://github.com/hwameistor/hwameistor",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/openebs|OpenEBS]]\n- [[domain-17-system-foundation/topic-dictionary/storage/longhorn|Longhorn]]\n- [[domain-17-system-foundation/topic-dictionary/storage/rook|Rook]]"),
+     "- [[系统基础/topic-dictionary/storage/openebs|OpenEBS]]\n- [[系统基础/topic-dictionary/storage/longhorn|Longhorn]]\n- [[系统基础/topic-dictionary/storage/rook|Rook]]"),
 
     # ── Specialized ──
     ("specialized-workloads", "modelpack", "ModelPack 模型打包", "ModelPack",
@@ -286,7 +286,7 @@ TERMS = [
      "- 模型文件打包为 OCI Layer\n- 模型元数据（框架/精度/指标）\n- 模型签名和验证\n- 多 Registry 同步\n- 与 KServe/Seldon/BentoML 集成\n- Helm Chart 模型部署\n- 模型拉取和缓存",
      "- AI 模型的版本管理\n- 模型的分发和部署\n- MLOps 的模型 Registry\n- 多环境模型的同步\n- 模型的签名和合规管理",
      "- https://github.com/modelpack/modelpack",
-     "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/seldon|Seldon]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/kaito|KAITO]]"),
+     "- [[系统基础/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[系统基础/topic-dictionary/specialized-workloads/seldon|Seldon]]\n- [[系统基础/topic-dictionary/scheduling/kaito|KAITO]]"),
 
     ("specialized-workloads", "kitops", "KitOps ML 打包", "KitOps",
      ["specialized-workloads", "ai-ml", "oci"],
@@ -295,7 +295,7 @@ TERMS = [
      "- Kitfile YAML 定义 ML 包\n- `kit pack` 打包为 OCI 镜像\n- `kit push/pull` 推送/拉取到 Registry\n- 模型/数据集/代码统一管理\n- 签名和验证（Cosign/Notation）\n- Kitfile 参数化\n- 多 Registry 支持",
      "- AI 模型的 DevOps 管理\n- 模型版本控制和分发\n- ML Pipeline 的资产打包\n- 团队协作的模型共享\n- 合规要求下的模型审计",
      "- https://kitops.ml/\n- https://github.com/jozu-ai/kitops",
-     "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/modelpack|ModelPack]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[domain-17-system-foundation/topic-dictionary/security/notary-project|Notary Project]]"),
+     "- [[系统基础/topic-dictionary/specialized-workloads/modelpack|ModelPack]]\n- [[系统基础/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[系统基础/topic-dictionary/security/notary-project|Notary Project]]"),
 ]
 
 created, skipped = 0, 0

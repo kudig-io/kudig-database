@@ -487,16 +487,16 @@ net.ipv4.tcp_congestion_control = bbr
 ## 11. EXISTING KUDIG DOCUMENTATION CROSS-REFERENCES
 
 Existing docs in the kudig-database that cover related topics:
-- `domain-03-networking-traffic/00-core-k8s-networking/03-cni-plugins-comparison.md` - CNI comparison (last_updated: 2026-01)
-- `domain-03-networking-traffic/00-core-k8s-networking/09-kube-proxy-modes-performance.md` - kube-proxy modes (last_updated: 2026-01)
-- `domain-03-networking-traffic/00-core-k8s-networking/11-dns-service-discovery-coredns.md` - CoreDNS
-- `domain-03-networking-traffic/00-core-k8s-networking/16-networkpolicy-deep-practice.md` - NetworkPolicy
-- `domain-03-networking-traffic/00-core-k8s-networking/34-network-performance-tuning.md` - Performance tuning
-- `domain-03-networking-traffic/00-core-k8s-networking/35-gateway-api-overview.md` - Gateway API
-- `domain-03-networking-traffic/02-service-mesh/01-istio-enterprise-service-mesh.md` - Istio
-- `domain-03-networking-traffic/02-service-mesh/02-linkerd-enterprise-service-mesh.md` - Linkerd
-- `domain-03-networking-traffic/02-service-mesh/08-ambient-mesh-l7-policy.md` - Ambient mesh
-- `domain-03-networking-traffic/04-ebpf/` - eBPF directory
+- `网络/00-core-k8s-networking/03-cni-plugins-comparison.md` - CNI comparison (last_updated: 2026-01)
+- `网络/00-core-k8s-networking/09-kube-proxy-modes-performance.md` - kube-proxy modes (last_updated: 2026-01)
+- `网络/00-core-k8s-networking/11-dns-service-discovery-coredns.md` - CoreDNS
+- `网络/00-core-k8s-networking/16-networkpolicy-deep-practice.md` - NetworkPolicy
+- `网络/00-core-k8s-networking/34-network-performance-tuning.md` - Performance tuning
+- `网络/00-core-k8s-networking/35-gateway-api-overview.md` - Gateway API
+- `网络/02-service-mesh/01-istio-enterprise-service-mesh.md` - Istio
+- `网络/02-service-mesh/02-linkerd-enterprise-service-mesh.md` - Linkerd
+- `网络/02-service-mesh/08-ambient-mesh-l7-policy.md` - Ambient mesh
+- `网络/04-ebpf/` - eBPF directory
 
 
 <!-- risk-assessed -->

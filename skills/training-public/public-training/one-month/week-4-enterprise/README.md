@@ -77,13 +77,13 @@ audience:
 estimated_read_time: 30min
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-08-release-change-management
-  - domain-05-security-compliance
-  - domain-11-production-operations
+  - 发布变更
+  - 安全
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/README
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/README
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # Week 4: 企业级进阶期 (Days 22-28)
@@ -430,43 +430,43 @@ Kyverno 的优势在于使用 Kubernetes 原生资源定义策略，学习曲线
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../domain-06-observability/01-prometheus-enterprise-monitoring.md)
-- [ArgoCD 企业级 GitOps](../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md)
-- [Kyverno 企业策略管理](../../domain-05-security-compliance/04-kyverno-enterprise-policy-management.md)
-- [Vault 企业 Secret 管理](../../domain-05-security-compliance/05-vault-enterprise-secrets-management.md)
-- [FTA 故障树分析](../../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
-- [CRD 开发指南](../../domain-15-specialized-tech/01-crd-development-guide.md)
-- [Helm Charts 管理](../../domain-15-specialized-tech/06-helm-charts-management.md)
-- [生产架构设计原则](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [零信任安全架构](../../domain-11-production-operations/07-zero-trust-security-architecture.md)
-- [变更管理流程](../../domain-11-production-operations/22-change-management-process.md)
-- [事故响应处理](../../domain-11-production-operations/23-incident-response-handling.md)
-- [容量规划预测](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+- [Prometheus 企业级监控](../../可观测性/01-prometheus-enterprise-monitoring.md)
+- [ArgoCD 企业级 GitOps](../../发布变更/01-argo-cd-enterprise-gitops.md)
+- [Kyverno 企业策略管理](../../安全/04-kyverno-enterprise-policy-management.md)
+- [Vault 企业 Secret 管理](../../安全/05-vault-enterprise-secrets-management.md)
+- [FTA 故障树分析](../../../故障诊断/topic-fta/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../故障诊断/topic-febm/01-febm-theory-foundations.md)
+- [SLO/SLI 体系](../../可观测性/18-slo-sli-system.md)
+- [CRD 开发指南](../../专项技术/01-crd-development-guide.md)
+- [Helm Charts 管理](../../专项技术/06-helm-charts-management.md)
+- [生产架构设计原则](../../生产运维/01-production-architecture-design-principles.md)
+- [零信任安全架构](../../生产运维/07-zero-trust-security-architecture.md)
+- [变更管理流程](../../生产运维/22-change-management-process.md)
+- [事故响应处理](../../生产运维/23-incident-response-handling.md)
+- [容量规划预测](../../生产运维/24-capacity-planning-forecasting.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -79,18 +79,18 @@ audience:
   - 运维工程师
 estimated_read_time: 15min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-3-node-workload
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-28-comprehensive-review
+  - 生产运维/topic-learn/inner-training/week-3-node-workload
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-28-comprehensive-review
 id: WEEK4-INDEX
 topic: training
 type: week-index
@@ -319,15 +319,15 @@ PVC Pending 通常有几个原因：1) 没有满足条件的 PV（大小不够�
 
 ## 延伸阅读
 
-- [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
-- [CNI 架构基础](../../domain-03-networking-traffic/02-cni-architecture-fundamentals.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [Ingress 基础](../../domain-03-networking-traffic/19-ingress-fundamentals.md)
-- [Nginx Ingress 完整指南](../../domain-03-networking-traffic/21-nginx-ingress-complete-guide.md)
-- [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
-- [PV 架构基础](../../domain-04-storage-data/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../domain-04-storage-data/04-storageclass-dynamic-provisioning.md)
-- [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
+- [网络架构总览](../../网络/01-network-architecture-overview.md)
+- [CNI 架构基础](../../网络/02-cni-architecture-fundamentals.md)
+- [Service 概念与类型](../../网络/06-service-concepts-types.md)
+- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
+- [Nginx Ingress 完整指南](../../网络/21-nginx-ingress-complete-guide.md)
+- [存储架构总览](../../存储/01-storage-architecture-overview.md)
+- [PV 架构基础](../../存储/02-pv-architecture-fundamentals.md)
+- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
+- [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 ---
 
@@ -383,24 +383,24 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

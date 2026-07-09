@@ -68,11 +68,11 @@ audience:
   - security-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-05-security-compliance
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security.md|16-security]]-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[工作负载/topic-functions/cluster-create/16-security.md|16-security]]-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
 
 # Day 15: 安全体系 - RBAC + 认证授权
@@ -426,10 +426,10 @@ default ServiceAccount 默认没有任何权限（除了通过自动挂载的 To
 
 ## 延伸阅读
 
-- [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
-- [证书管理](../../domain-05-security-compliance/10-certificate-management.md)
-- [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
+- [认证授权系统](../../安全/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
+- [证书管理](../../安全/10-certificate-management.md)
+- [Pod 安全标准](../../安全/06-pod-security-standards.md)
 
 
 <!-- risk-assessed -->

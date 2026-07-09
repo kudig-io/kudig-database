@@ -8,7 +8,7 @@ the KUDIG dictionary entry template (annotations.md style).
 import os
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent.parent / "domain-17-system-foundation" / "topic-dictionary"
+BASE = Path(__file__).resolve().parent.parent / "系统基础" / "topic-dictionary"
 
 # ── Term definitions ──────────────────────────────────────────────
 # Format: (filename, title_zh, title_en, category_dir, tags, content_dict)
@@ -62,7 +62,7 @@ t("control-plane", "控制平面", "Control Plane", "fundamentals",
 - 使用 RBAC 严格控制对控制平面 API 的访问权限。
 - 监控控制平面组件的健康状态和资源使用。""",
   "https://kubernetes.io/docs/concepts/architecture/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]] | [[etcd|etcd]]")
+  "[[系统基础/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]] | [[etcd|etcd]]")
 
 t("kube-apiserver", "API Server", "kube-apiserver", "fundamentals",
   ["k8s", "glossary", "apiserver", "control-plane"],
@@ -89,7 +89,7 @@ t("kube-apiserver", "API Server", "kube-apiserver", "fundamentals",
 - 生产环境中部署多个 API Server 实例并使用负载均衡器。
 - 启用 `--encryption-provider-config` 加密 etcd 中的 Secret 数据。""",
   "https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]")
+  "[[系统基础/topic-dictionary/fundamentals/the-kubernetes-api|Kubernetes API]]")
 
 t("kube-scheduler", "调度器", "kube-scheduler", "fundamentals",
   ["k8s", "glossary", "scheduler", "control-plane"],
@@ -140,7 +140,7 @@ kube-controller-manager 运行的核心控制器包括：
 - 调整 `--concurrent-*-syncs` 参数控制控制器的并发度。
 - 定期检查控制器日志，排查 reconcile 失败的资源。""",
   "https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/controllers|控制器]]")
+  "[[系统基础/topic-dictionary/fundamentals/controllers|控制器]]")
 
 t("cloud-controller-manager", "云控制器管理器", "cloud-controller-manager", "fundamentals",
   ["k8s", "glossary", "cloud-controller-manager", "control-plane"],
@@ -164,7 +164,7 @@ CCM 将云相关逻辑从 kube-controller-manager 中分离出来，使核心 Ku
 - CCM 需要适当的 IAM 权限来管理云资源。
 - 监控 CCM 的 Service 同步状态，确保 LoadBalancer 正常创建。""",
   "https://kubernetes.io/docs/concepts/architecture/cloud-controller/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
+  "[[系统基础/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
 
 t("etcd", "etcd", "etcd", "fundamentals",
   ["k8s", "glossary", "etcd", "control-plane", "storage"],
@@ -189,7 +189,7 @@ API Server 是唯一直接与 etcd 通信的组件。所有 Kubernetes 对象通
 - **监控**：关注 WAL fsync 延迟、backend commit 延迟等关键指标。
 - **版本**：Kubernetes 对 etcd 版本有严格要求，参见兼容性矩阵。""",
   "https://etcd.io/docs/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/storage-versions|存储版本]]")
+  "[[系统基础/topic-dictionary/fundamentals/storage-versions|存储版本]]")
 
 t("node", "节点", "Node", "fundamentals",
   ["k8s", "glossary", "node", "kubelet"],
@@ -218,7 +218,7 @@ t("node", "节点", "Node", "fundamentals",
 - 监控节点资源使用率和 Pod 容量。
 - 使用 Node Problem Detector 自动检测和报告节点异常。""",
   "https://kubernetes.io/docs/concepts/architecture/nodes/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes|节点]]")
+  "[[系统基础/topic-dictionary/fundamentals/nodes|节点]]")
 
 t("kubelet", "kubelet", "kubelet", "fundamentals",
   ["k8s", "glossary", "kubelet", "node"],
@@ -244,7 +244,7 @@ kubelet 通过 API Server 获取 Pod 配置，同时向 API Server 报告节点�
 - 配置 `--eviction-hard` 和 `--eviction-soft` 防止节点资源耗尽。
 - 定期升级 kubelet 版本，保持与 API Server 的兼容性。""",
   "https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
+  "[[系统基础/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
 
 t("kube-proxy", "kube-proxy", "kube-proxy", "fundamentals",
   ["k8s", "glossary", "kube-proxy", "networking"],
@@ -268,7 +268,7 @@ kube-proxy 监听 Service 和 Endpoints/EndpointSlice 的变化，自动更新�
 - 使用 `kube-proxy --proxy-mode=ipvs` 切换到 IPVS 模式时需确保内核模块就绪。
 - 考虑使用 eBPF 替代方案（如 Cilium）获得更好的性能。""",
   "https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/service|Service]]")
+  "[[系统基础/topic-dictionary/networking/service|Service]]")
 
 t("container-runtime", "容器运行时", "Container Runtime", "fundamentals",
   ["k8s", "glossary", "container-runtime", "containerd", "cri"],
@@ -322,7 +322,7 @@ t("pod", "Pod", "Pod", "workloads",
 - 配置 Liveness 和 Readiness 探针确保健康检查。
 - 使用 `terminationGracePeriodSeconds` 实现优雅关闭。""",
   "https://kubernetes.io/docs/concepts/workloads/pods/",
-  "[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
+  "[[系统基础/topic-dictionary/fundamentals/kubernetes-components|Kubernetes 组件]]")
 
 t("deployment", "Deployment", "Deployment", "workloads",
   ["k8s", "glossary", "deployment", "workload"],
@@ -510,7 +510,7 @@ t("service", "服务", "Service", "networking",
 - 监控 EndpointSlice 同步状态，确保后端 Pod 及时注册。
 - 大规模场景考虑使用 IPVS 模式替代 iptables。""",
   "https://kubernetes.io/docs/concepts/services-networking/service/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/service|Service]]")
+  "[[系统基础/topic-dictionary/networking/service|Service]]")
 
 t("ingress", "入口", "Ingress", "networking",
   ["k8s", "glossary", "ingress", "networking", "http"],
@@ -551,7 +551,7 @@ spec:
 - 对于复杂路由需求，考虑迁移到 Gateway API。
 - 监控 Ingress Controller 的请求延迟和错误率。""",
   "https://kubernetes.io/docs/concepts/services-networking/ingress/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]")
+  "[[系统基础/topic-dictionary/networking/ingress|Ingress]]")
 
 t("endpoints", "端点", "Endpoints", "networking",
   ["k8s", "glossary", "endpoints", "networking"],
@@ -576,7 +576,7 @@ t("endpoints", "端点", "Endpoints", "networking",
 - 排查 Service 不通时检查 Endpoints 是否包含正确的后端 Pod。
 - 使用 `kubectl get endpointslices` 查看分片的端点信息。""",
   "https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/endpointslices|EndpointSlices]]")
+  "[[系统基础/topic-dictionary/networking/endpointslices|EndpointSlices]]")
 
 t("ingress-controller", "入口控制器", "Ingress Controller", "networking",
   ["k8s", "glossary", "ingress", "networking", "nginx"],
@@ -599,7 +599,7 @@ Ingress Controller 监听 Ingress 资源的变化，动态更新自身的反向�
 - 配置请求限流和 WAF 规则保护后端服务。
 - 考虑迁移到 Gateway API 获得更强大的路由能力。""",
   "https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers|Ingress Controllers]]")
+  "[[系统基础/topic-dictionary/networking/ingress-controllers|Ingress Controllers]]")
 
 t("network-policy", "网络策略", "NetworkPolicy", "networking",
   ["k8s", "glossary", "network-policy", "security", "networking"],
@@ -638,7 +638,7 @@ spec:
 - 使用 Cilium 的 FQDN Policy 实现基于域名的出站控制。
 - 定期审计 NetworkPolicy 覆盖情况，确保无遗漏。""",
   "https://kubernetes.io/docs/concepts/services-networking/network-policies/",
-  "[[domain-17-system-foundation/topic-dictionary/networking/network-policies|Network Policies]]")
+  "[[系统基础/topic-dictionary/networking/network-policies|Network Policies]]")
 
 t("cni", "容器网络接口", "CNI (Container Network Interface)", "networking",
   ["k8s", "glossary", "cni", "networking"],
@@ -931,7 +931,7 @@ data:
 - 为 ConfigMap 设置合理的标签便于管理。
 - 考虑使用外部配置中心（如 Apollo、Nacos）管理动态配置。""",
   "https://kubernetes.io/docs/concepts/configuration/configmap/",
-  "[[domain-17-system-foundation/topic-dictionary/configuration/configmaps|ConfigMaps]]")
+  "[[系统基础/topic-dictionary/configuration/configmaps|ConfigMaps]]")
 
 t("secret", "密钥", "Secret", "security",
   ["k8s", "glossary", "secret", "security"],
@@ -959,7 +959,7 @@ t("secret", "密钥", "Secret", "security",
 - 通过 RBAC 严格控制 Secret 的访问权限。
 - 避免将 Secret 硬编码在 YAML 文件中并提交到 Git。""",
   "https://kubernetes.io/docs/concepts/configuration/secret/",
-  "[[domain-17-system-foundation/topic-dictionary/configuration/secrets|Secrets]]")
+  "[[系统基础/topic-dictionary/configuration/secrets|Secrets]]")
 
 t("service-account", "服务账号", "ServiceAccount", "security",
   ["k8s", "glossary", "service-account", "rbac", "security"],
@@ -1505,7 +1505,7 @@ livenessProbe:
 - 避免在 Liveness Probe 中执行重量级检查。
 - 对于慢启动应用，使用 Startup Probe 替代。""",
   "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/",
-  "[[domain-17-system-foundation/topic-dictionary/configuration/liveness-readiness-and-startup-probes|Probes]]")
+  "[[系统基础/topic-dictionary/configuration/liveness-readiness-and-startup-probes|Probes]]")
 
 t("readiness-probe", "就绪探针", "Readiness Probe", "configuration",
   ["k8s", "glossary", "probe", "health-check"],
@@ -2054,7 +2054,7 @@ t("admission-controller", "准入控制器", "Admission Controller", "security",
 - 配置 Webhook 的 `failurePolicy: Ignore` 避免 Webhook 故障导致集群不可用。
 - 为 Webhook 配置 `namespaceSelector` 排除系统命名空间。""",
   "https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/",
-  "[[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices|Admission Webhook 最佳实践]]")
+  "[[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices|Admission Webhook 最佳实践]]")
 
 t("webhook", "Webhook", "Webhook", "security",
   ["k8s", "glossary", "security", "webhook"],

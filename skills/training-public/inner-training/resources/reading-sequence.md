@@ -42,8 +42,8 @@ prerequisites:
 - gpu-ml-basics
 - prometheus-basics
 related_domains:
-- domain-12-cloud-providers
-- domain-01-cluster-fundamentals
+- 云厂商
+- 集群基础
 related_topics:
 - knowledge-map
 - commands-cheatsheet
@@ -77,49 +77,49 @@ related_topics:
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/200-ack-overview.md` | ACK 产品概览与架构 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
-| 📖3 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/200-ack-overview.md` | ACK 产品概览与架构 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
+| 📖3 | `../../云厂商/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
 
 ### [[skills/training-public/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api.md|Day 2: ACK SDK & API]]
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/290-ack-openapi.md` | ACK OpenAPI 规范 |
-| 📖2 | `../../domain-12-cloud-providers/04-alicloud-ack/200-ack-overview.md` | API 端点与认证 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/290-ack-openapi.md` | ACK OpenAPI 规范 |
+| 📖2 | `../../云厂商/04-alicloud-ack/200-ack-overview.md` | API 端点与认证 |
 
 ### Day 3: ACK ACR 控制台 & 功能
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/200-ack-overview.md` | 控制台功能入口 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 控制台与镜像管理 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/200-ack-overview.md` | 控制台功能入口 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/280-ack-acr-integration.md` | ACR 控制台与镜像管理 |
 
 ### Day 4: K8S 新建集群etes 生产环境速查卡|K8S]] 新建集群
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md` | 集群创建流程 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md` | 网络 CIDR 规划 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/210-ack-cluster-management.md` | 集群创建流程 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/260-ack-networking.md` | 网络 CIDR 规划 |
 
 ### Day 5: K8S 集群删除
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md` | 集群删除与资源清理 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/210-ack-cluster-management.md` | 集群删除与资源清理 |
 
 ### Day 6: K8S 集群升级
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/220-ack-upgrade.md` | 集群升级策略 |
-| 📖2 | `../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md` | 升级兼容性 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/220-ack-upgrade.md` | 集群升级策略 |
+| 📖2 | `../../云厂商/04-alicloud-ack/210-ack-cluster-management.md` | 升级兼容性 |
 
 ### Day 7: K8S 集群证书
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/230-ack-certificate.md` | 证书管理与轮转 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/230-ack-certificate.md` | 证书管理与轮转 |
 | 📖2 | `../../domain-05-security/01-authentication.md` | K8S 认证机制 |
 
 ---
@@ -137,7 +137,7 @@ related_topics:
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md` | RAM 集成方案 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/210-ack-cluster-management.md` | RAM 集成方案 |
 | 📖2 | `../../domain-05-security/02-rbac.md` | RBAC 与 RAM 映射 |
 
 ### Day 10: ACK ACR K8S 漏洞
@@ -159,7 +159,7 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-05-security/06-audit.md` | 审计日志配置 |
-| 📖2 | `../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md` | SLS 日志集成 |
+| 📖2 | `../../云厂商/04-alicloud-ack/210-ack-cluster-management.md` | SLS 日志集成 |
 
 ### Day 13: K8S 集群监控
 
@@ -184,27 +184,27 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-03-node/01-node-overview.md` | 节点概念与状态 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md` | ACK 节点与 ECS |
+| ⭐2 | `../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md` | ACK 节点与 ECS |
 
 ### Day 16: Node 节点进阶
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-03-node/02-node-management.md` | 标签、污点、维护 |
-| 📖2 | `../../domain-10-troubleshooting-diagnostics/05-node-troubleshooting.md` | 节点故障排查 |
+| 📖2 | `../../故障诊断/05-node-troubleshooting.md` | 节点故障排查 |
 
 ### Day 17: 节点池基础
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md` | 节点池概念与创建 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md` | 节点池概念与创建 |
 
 ### Day 18: 节点池进阶
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-10-troubleshooting-diagnostics/28-cluster-autoscaler-troubleshooting.md` | 自动伸缩排障 |
-| 📖2 | `../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md` | 伸缩组配置 |
+| ⭐1 | `../../故障诊断/28-cluster-autoscaler-troubleshooting.md` | 自动伸缩排障 |
+| 📖2 | `../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md` | 伸缩组配置 |
 
 ### Day 19: Pod 容器组基础
 
@@ -225,7 +225,7 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-04-control-plane/01-api-server.md` | 控制面组件 |
-| ⭐2 | `../../domain-10-troubleshooting-diagnostics/01-troubleshooting-overview.md` | 故障排查思路 |
+| ⭐2 | `../../故障诊断/01-troubleshooting-overview.md` | 故障排查思路 |
 
 ---
 
@@ -236,20 +236,20 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-06-service-networking/01-service-overview.md` | Service 类型与机制 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md` | ACK SLB 集成 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/260-ack-networking.md` | ACK SLB 集成 |
 
 ### Day 23: Ingress
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-06-service-networking/03-ingress.md` | Ingress 规则与控制器 |
-| 📖2 | `../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md` | ALB Ingress |
+| 📖2 | `../../云厂商/04-alicloud-ack/260-ack-networking.md` | ALB Ingress |
 
 ### Day 24: Terway 网络
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md` | Terway 架构与模式 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/260-ack-networking.md` | Terway 架构与模式 |
 | ⭐2 | `../../domain-06-service-networking/04-cni.md` | CNI 规范 |
 
 ### Day 25: Flannel 网络
@@ -257,14 +257,14 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-06-service-networking/04-cni.md` | Flannel VxLAN |
-| 📖2 | `../../domain-10-troubleshooting-diagnostics/10-network-troubleshooting.md` | 网络排查 |
+| 📖2 | `../../故障诊断/10-network-troubleshooting.md` | 网络排查 |
 
 ### Day 26: 存储卷创建 & 删除
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | `../../domain-07-storage/01-storage-overview.md` | PV/PVC 概念 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/270-ack-storage.md` | ACK 存储集成 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/270-ack-storage.md` | ACK 存储集成 |
 
 ### Day 27: 存储卷挂载
 
@@ -278,11 +278,11 @@ related_topics:
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
 | ⭐1 | 回顾以上所有 ⭐ 文档 | 查漏补缺 |
-| 📖2 | `../../domain-10-troubleshooting-diagnostics/01-troubleshooting-overview.md` | 综合排障 |
+| 📖2 | `../../故障诊断/01-troubleshooting-overview.md` | 综合排障 |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

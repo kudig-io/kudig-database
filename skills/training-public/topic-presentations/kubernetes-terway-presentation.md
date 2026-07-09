@@ -661,22 +661,22 @@ Terway
 
 | 序号 | 文件路径 | 内容说明 |
 |:---|:---|:---|
-| 1 | `domain-03-networking-traffic/40-terway-product-overview.md` | 产品概览: 定位、版本历史、模式总览 |
-| 2 | `domain-03-networking-traffic/41-terway-architecture-deep-dive.md` | 架构原理: 控制面/数据面详解、IPAM |
-| 3 | `domain-03-networking-traffic/42-terway-usage-guide.md` | 使用指南: 安装配置、模式切换 |
-| 4 | `domain-03-networking-traffic/43-terway-crd-operations.md` | CRD 操作: PodENI/ReservedIP CRUD |
-| 5 | `domain-03-networking-traffic/44-terway-operations-manual.md` | 运维手册: 健康检查、GC、升级 |
-| 6 | `domain-03-networking-traffic/45-terway-testing-validation.md` | 测试验证: 网络连通性、NetworkPolicy 测试 |
-| 7 | `domain-03-networking-traffic/46-terway-performance-tuning.md` | 性能调优: 模式对比、内核调优 |
-| 8 | `domain-03-networking-traffic/47-terway-troubleshooting-fta.md` | 故障树分析: 结构化排障方法 |
+| 1 | `网络/40-terway-product-overview.md` | 产品概览: 定位、版本历史、模式总览 |
+| 2 | `网络/41-terway-architecture-deep-dive.md` | 架构原理: 控制面/数据面详解、IPAM |
+| 3 | `网络/42-terway-usage-guide.md` | 使用指南: 安装配置、模式切换 |
+| 4 | `网络/43-terway-crd-operations.md` | CRD 操作: PodENI/ReservedIP CRUD |
+| 5 | `网络/44-terway-operations-manual.md` | 运维手册: 健康检查、GC、升级 |
+| 6 | `网络/45-terway-testing-validation.md` | 测试验证: 网络连通性、NetworkPolicy 测试 |
+| 7 | `网络/46-terway-performance-tuning.md` | 性能调优: 模式对比、内核调优 |
+| 8 | `网络/47-terway-troubleshooting-fta.md` | 故障树分析: 结构化排障方法 |
 
 ## 通用网络知识
 
 | 序号 | 文件路径 | 内容说明 |
 |:---|:---|:---|
-| 1 | `domain-03-networking-traffic/05-terway-advanced-guide.md` | Terway 高级指南 |
-| 2 | `domain-03-networking-traffic/37-terway-resources-crud-operations.md` | CRD CRUD 操作 |
-| 3 | `domain-03-networking-traffic/38-terway-gc-mechanism.md` | GC 垃圾回收机制 |
+| 1 | `网络/05-terway-advanced-guide.md` | Terway 高级指南 |
+| 2 | `网络/37-terway-resources-crud-operations.md` | CRD CRUD 操作 |
+| 3 | `网络/38-terway-gc-mechanism.md` | GC 垃圾回收机制 |
 
 ## 关联培训专题
 
@@ -715,7 +715,7 @@ Terway
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

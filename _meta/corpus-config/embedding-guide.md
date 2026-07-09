@@ -105,19 +105,19 @@ description: "面向 SRE/运维的故障诊断 Agent 语料配置"
 
 # 核心语料（必须导入）
 core:
-  - path: domain-10-troubleshooting-diagnostics/topic-fta/list/
+  - path: 故障诊断/topic-fta/list/
     priority: critical
     chunking: by_h3
 
 # 方法论语料（推荐导入）
 methodology:
-  - path: domain-10-troubleshooting-diagnostics/topic-febm/
+  - path: 故障诊断/topic-febm/
     priority: high
     chunking: by_h2
 
 # 参考语料（可选导入）
 reference:
-  - path: domain-17-system-foundation/topic-cheat-sheet/k8s.md
+  - path: 系统基础/topic-cheat-sheet/k8s.md
     priority: medium
     chunking: full_doc
 
@@ -180,11 +180,11 @@ _meta/corpus-config/profiles/.vector-cache/<profile-name>/
 ```json
 {
   "chunk_id": "a1b2c3d4e5f67890",
-  "source_path": "domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-control-plane/SKILL.md",
+  "source_path": "故障诊断/topic-skills/skill-set/k8s-control-plane/SKILL.md",
   "text": "## 验证修复\n\n```bash\n./scripts/verify-control-plane.sh <namespace>\n```...",
   "metadata": {
-    "source": "domain-10-troubleshooting-diagnostics/...",
-    "domain": "domain-10-troubleshooting-diagnostics",
+    "source": "故障诊断/...",
+    "domain": "故障诊断",
     "filename": "SKILL.md",
     "section_title": "## 验证修复",
     "chunk_index": 5,

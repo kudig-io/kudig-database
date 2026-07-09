@@ -78,16 +78,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
   - networking
   - service
   - dns
   - cni
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2.md
-  - domain-03-networking-traffic/01-network-architecture-overview.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2.md
+  - 网络/01-network-architecture-overview.md
 ---
 ```
 
@@ -108,19 +108,19 @@ related:
 ### 必读文档
 
 1. **网络架构总览**
-   - 文件: `../../domain-03-networking-traffic/01-network-architecture-overview.md`
+   - 文件: `../../网络/01-network-architecture-overview.md`
    - 重点: K8s 网络模型、三层扁平网络
 
 2. **CNI 架构基础**
-   - 文件: `../../domain-03-networking-traffic/02-cni-architecture-fundamentals.md`
+   - 文件: `../../网络/02-cni-architecture-fundamentals.md`
    - 重点: CNI 插件机制、常见 CNI 实现
 
 3. **Service 概念和类型**
-   - 文件: `../../domain-03-networking-traffic/06-service-concepts-types.md`
+   - 文件: `../../网络/06-service-concepts-types.md`
    - 重点: ClusterIP/NodePort/LoadBalancer/ExternalName
 
 4. **DNS 和服务发现**
-   - 文件: `../../domain-03-networking-traffic/11-dns-service-discovery-coredns.md`
+   - 文件: `../../网络/11-dns-service-discovery-coredns.md`
    - 重点: CoreDNS 配置、DNS 解析规则
 
 ---

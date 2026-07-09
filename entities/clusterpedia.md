@@ -40,7 +40,7 @@ title: "Clusterpedia"
 category: entities
 summary: "Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 Kubernetes 资源的 "百科全书"。它将多个集群的资源同步到统一的存储中，提供与 kubectl 兼容的 API 进行跨集群的资源搜索、过滤和分页查询。"
 tags: k8s, cncf, orchestration, clusterpedia]
-sources: ["docs/domain-19-landscape-references/sandbox/clusterpedia/clusterpedia.md", "domain-19-landscape-references/sandbox/clusterpedia/clusterpedia.md"]
+sources: ["docs/生态参考/sandbox/clusterpedia/clusterpedia.md", "生态参考/sandbox/clusterpedia/clusterpedia.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -87,7 +87,7 @@ Clusterpedia 是一个多集群资源的统一搜索和查询引擎，类似于 
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

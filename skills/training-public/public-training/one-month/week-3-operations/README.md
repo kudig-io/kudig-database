@@ -76,13 +76,13 @@ audience:
   - platform-engineer
 estimated_read_time: 30min
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-technologies/README
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/README
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-technologies/README
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/README
 ---
 
 # Week 3: 运维作战能力期 (Days 15-21)
@@ -354,38 +354,38 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 
 ## 延伸阅读
 
-- [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
-- [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
-- [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
-- [FTA 故障树分析](../../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
+- [认证授权系统](../../安全/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
+- [Pod 安全标准](../../安全/06-pod-security-standards.md)
+- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
+- [Prometheus 监控](../../可观测性/10-monitoring-metrics-prometheus.md)
+- [FTA 故障树分析](../../../故障诊断/topic-fta/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../故障诊断/topic-febm/01-febm-theory-foundations.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
 

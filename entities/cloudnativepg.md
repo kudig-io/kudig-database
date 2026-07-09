@@ -93,8 +93,8 @@ CloudNativePG 是 Kubernetes 上的 PostgreSQL Operator，提供完整的数据�
 - 99-cloudnativepg-enterprise-guide
 - cloudnativepg
 - storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

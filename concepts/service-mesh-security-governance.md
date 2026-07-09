@@ -84,13 +84,13 @@ spec:
 
 ## 相关 Domain
 
-- domain-03-networking-traffic/03-service-mesh/01-istio-security-configuration
-- domain-05-security-compliance/02-policy-engineering/01-opa-gatekeeper
+- 网络/03-service-mesh/01-istio-security-configuration
+- 安全/02-policy-engineering/01-opa-gatekeeper
 ## Related
 
 - [[entities/istio.md|Istio (entities)]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-03-networking-traffic/02-service-mesh/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
+- [[系统基础/topic-dictionary/networking/service.md|Service]]
+- [[网络/02-service-mesh/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
 - [[entities/02-istio-advanced-traffic-management.md|Istio 高级流量管理 (entities)]]
 
 

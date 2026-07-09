@@ -36,7 +36,7 @@ prerequisites:
 - backup-basics
 cross_refs:
 - type: domain
-  path: ../../domain-04-storage-data/
+  path: ../../存储/
   label: 存储知识域
 - type: best-practice
   path: ./kubernetes-cluster.md

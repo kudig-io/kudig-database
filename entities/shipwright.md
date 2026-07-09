@@ -87,8 +87,8 @@ Shipwright 是一个在 Kubernetes 上构建容器镜像的框架。它抽象了
 - [[entities/werf.md|werf]]
 - [[entities/pipecd.md|PipeCD]]
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

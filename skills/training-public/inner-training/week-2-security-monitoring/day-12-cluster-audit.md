@@ -69,13 +69,13 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
-  - domain-06-observability/03-logging-architecture
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 可观测性/03-logging-architecture
 id: WEEK2-DAY12
 topic: training
 type: hands-on
@@ -471,8 +471,8 @@ rules:
 - [Kubernetes 审计官方文档](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
 - [阿里云 SLS 文档](https://help.aliyun.com/product/28958.html)
 - [ACK 审计日志文档](https://help.aliyun.com/document_detail/155212.html)
-- [文件: `../../../domain-06-observability/01-observability-architecture-overview.md`](../../../domain-06-observability/01-observability-architecture-overview.md)
-- [文件: `../../../domain-06-observability/03-logging-architecture.md`](../../../domain-06-observability/03-logging-architecture.md)
+- [文件: `../../../可观测性/01-observability-architecture-overview.md`](../../../可观测性/01-observability-architecture-overview.md)
+- [文件: `../../../可观测性/03-logging-architecture.md`](../../../可观测性/03-logging-architecture.md)
 
 ---
 

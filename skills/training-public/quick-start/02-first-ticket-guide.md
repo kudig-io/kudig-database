@@ -476,10 +476,10 @@ tar czf /tmp/k8s-debug-$(date +%Y%m%d%H%M).tar.gz /tmp/nodes.txt /tmp/pods.txt /
 
 | 场景 | 参考文档 |
 |------|---------|
-| Pod 问题 | `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` |
+| Pod 问题 | `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` |
 | Service 问题 | `P1-5-oncall-quick-reference-card.md` |
-| 节点问题 | `domain-10-troubleshooting-diagnostics/02-node-notready-troubleshooting.md` |
-| 网络问题 | `domain-10-troubleshooting-diagnostics/03-service-endpoints-troubleshooting.md` |
+| 节点问题 | `故障诊断/02-node-notready-troubleshooting.md` |
+| 网络问题 | `故障诊断/03-service-endpoints-troubleshooting.md` |
 
 ---
 
@@ -509,12 +509,12 @@ audience:
   - 运维新人
 estimated_read_time: 35min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start/01-day-one-checklist
-  - domain-11-production-operations/topic-learn/quick-start/03-oncall-handoff
+  - 生产运维/topic-learn/quick-start/01-day-one-checklist
+  - 生产运维/topic-learn/quick-start/03-oncall-handoff
   - P1-5-oncall-quick-reference-card
 id: QUICKSTART-DAY2
 topic: onboarding

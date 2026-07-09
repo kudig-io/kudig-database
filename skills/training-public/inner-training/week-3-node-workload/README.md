@@ -51,7 +51,7 @@ title: Week 3: 节点与工作负载管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK week 3 node [[domain-17-system-foundation/topic-dictionary/workloads/workload-management.md|workload management]] curriculum
+  - ACK week 3 node [[系统基础/topic-dictionary/workloads/workload-management.md|workload management]] curriculum
   - [[Kubernetes|Kubernetes]] node pool management learning path
   - Pod lifecycle scheduling management
   - Kubernetes core components operations
@@ -77,7 +77,7 @@ estimated_read_time: 30min
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-12-cloud-providers
+  - 云厂商
 related_topics:
   - node-basics
   - node-advanced
@@ -383,37 +383,37 @@ Pod Pending 通常有两个原因：一是没有节点满足调度条件（资�
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [ECS 计算资源](../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md)
-- [Pod 生命周期事件](../../domain-02-workloads-applications/11-pod-lifecycle-events.md)
-- [HPA/VPA 自动伸缩](../../domain-02-workloads-applications/21-hpa-vpa-autoscaling.md)
-- [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [集群自动伸缩排障](../../domain-10-troubleshooting-diagnostics/28-cluster-autoscaler-troubleshooting.md)
+- [K8s 架构与组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
+- [Pod 生命周期事件](../../工作负载/11-pod-lifecycle-events.md)
+- [HPA/VPA 自动伸缩](../../工作负载/21-hpa-vpa-autoscaling.md)
+- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [集群自动伸缩排障](../../故障诊断/28-cluster-autoscaler-troubleshooting.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
 

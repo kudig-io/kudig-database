@@ -87,8 +87,8 @@ prerequisites:
 
 ## 相关 Domain
 
-- domain-14-ai-ml-infra/01-ai-infrastructure-overview
-- domain-20-application-patterns/05-ai-ml-patterns/01-ml-serving-patterns
+- AI基础设施/01-ai-infrastructure-overview
+- 应用模式/05-ai-ml-patterns/01-ml-serving-patterns
 ## Related
 
 - [[STRUCTURE|KUDIG-DATABASE 目录结构规范]]

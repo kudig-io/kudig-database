@@ -7,6 +7,14 @@ import remarkHtml from 'remark-html';
 
 const REPO_ROOT = path.resolve(process.cwd(), '..');
 
+// 20 个中文知识域名（目录重命名后用于替代 domain- 前缀检测）
+export const DOMAIN_DIRS = new Set([
+  '集群基础', '工作负载', '网络', '存储', '安全', '可观测性',
+  '平台工程', '发布变更', '可靠性', '故障诊断', '生产运维', '云厂商',
+  '容器运行时', 'AI基础设施', '专项技术', '数据库中间件', '系统基础',
+  '清单模式', '生态参考', '应用模式',
+]);
+
 /**
  * Scan all markdown files in the repository root
  */
@@ -44,8 +52,8 @@ export function scanDocs() {
         }
         scanDir(fullPath, relativePath);
       } else if (entry.isFile() && entry.name.endsWith('.md')) {
-        // Skip files in root that aren't domain directories
-        if (!basePath && !entry.name.startsWith('domain-') && entry.name !== 'index.md' && entry.name !== 'MOC.md') {
+        // Skip loose root-level files (only allow index.md, MOC.md, and files inside domain dirs)
+        if (!basePath && entry.name !== 'index.md' && entry.name !== 'MOC.md') {
           continue;
         }
         
@@ -83,7 +91,7 @@ export function scanDocs() {
 
 function inferCategory(filePath) {
   const parts = filePath.split('/');
-  if (parts[0].startsWith('domain-')) {
+  if (DOMAIN_DIRS.has(parts[0])) {
     return parts[0];
   }
   return 'other';
@@ -116,26 +124,26 @@ export function groupByDomain(docs) {
  */
 export function getDomainMeta(domainSlug) {
   const domainMap = {
-    'domain-01-cluster-fundamentals': { name: '集群基础架构', icon: '🏗️', color: 'blue' },
-    'domain-02-workloads-applications': { name: '工作负载与应用', icon: '📦', color: 'green' },
-    'domain-03-networking-traffic': { name: '网络与流量', icon: '🌐', color: 'cyan' },
-    'domain-04-storage-data': { name: '存储与数据', icon: '💾', color: 'purple' },
-    'domain-05-security-compliance': { name: '安全与合规', icon: '🔒', color: 'red' },
-    'domain-06-observability': { name: '可观测性', icon: '📊', color: 'orange' },
-    'domain-07-platform-engineering': { name: '平台工程', icon: '⚙️', color: 'slate' },
-    'domain-08-release-change-management': { name: '发布与变更管理', icon: '🚀', color: 'indigo' },
-    'domain-09-reliability-engineering': { name: '可靠性工程', icon: '⛑️', color: 'rose' },
-    'domain-10-troubleshooting-diagnostics': { name: '故障诊断', icon: '🔧', color: 'amber' },
-    'domain-11-production-operations': { name: '生产运维', icon: '🏭', color: 'emerald' },
-    'domain-12-cloud-providers': { name: '云服务商', icon: '☁️', color: 'sky' },
-    'domain-13-container-runtime': { name: '容器运行时', icon: '🐳', color: 'teal' },
-    'domain-14-ai-ml-infra': { name: 'AI/ML 基础设施', icon: '🤖', color: 'violet' },
-    'domain-15-specialized-tech': { name: '专项技术', icon: '🔬', color: 'fuchsia' },
-    'domain-16-database-middleware': { name: '数据库与中间件', icon: '🗄️', color: 'pink' },
-    'domain-17-system-foundation': { name: '系统基础', icon: '📚', color: 'zinc' },
-    'domain-18-manifests-patterns': { name: '清单与模式', icon: '📋', color: 'stone' },
-    'domain-19-landscape-references': { name: '全景与参考', icon: '🗺️', color: 'neutral' },
-    'domain-20-application-patterns': { name: '应用模式', icon: '📐', color: 'lime' },
+    '集群基础': { name: '集群基础架构', icon: '🏗️', color: 'blue' },
+    '工作负载': { name: '工作负载与应用', icon: '📦', color: 'green' },
+    '网络': { name: '网络与流量', icon: '🌐', color: 'cyan' },
+    '存储': { name: '存储与数据', icon: '💾', color: 'purple' },
+    '安全': { name: '安全与合规', icon: '🔒', color: 'red' },
+    '可观测性': { name: '可观测性', icon: '📊', color: 'orange' },
+    '平台工程': { name: '平台工程', icon: '⚙️', color: 'slate' },
+    '发布变更': { name: '发布与变更管理', icon: '🚀', color: 'indigo' },
+    '可靠性': { name: '可靠性工程', icon: '⛑️', color: 'rose' },
+    '故障诊断': { name: '故障诊断', icon: '🔧', color: 'amber' },
+    '生产运维': { name: '生产运维', icon: '🏭', color: 'emerald' },
+    '云厂商': { name: '云服务商', icon: '☁️', color: 'sky' },
+    '容器运行时': { name: '容器运行时', icon: '🐳', color: 'teal' },
+    'AI基础设施': { name: 'AI/ML 基础设施', icon: '🤖', color: 'violet' },
+    '专项技术': { name: '专项技术', icon: '🔬', color: 'fuchsia' },
+    '数据库中间件': { name: '数据库与中间件', icon: '🗄️', color: 'pink' },
+    '系统基础': { name: '系统基础', icon: '📚', color: 'zinc' },
+    '清单模式': { name: '清单与模式', icon: '📋', color: 'stone' },
+    '生态参考': { name: '全景与参考', icon: '🗺️', color: 'neutral' },
+    '应用模式': { name: '应用模式', icon: '📐', color: 'lime' },
   };
   
   return domainMap[domainSlug] || { name: domainSlug, icon: '📄', color: 'gray' };
@@ -154,20 +162,20 @@ export async function renderMarkdown(content) {
 }
 
 /**
- * Transform wikilinks to regular links
+ * Transform wikilinks to regular links.
+ * 保留中文路径段（知识域名已是中文），仅清理文件名扩展名与空格。
+ * [[故障诊断/topic-fta/README.md|显示名]] → [显示名](/kudig-database/故障诊断/topic-fta/README)
  */
 export function transformWikilinks(content) {
-  // [[Page Name]] -> [Page Name](/kudig-database/page-name)
-  // [[Page Name|Display]] -> [Display](/kudig-database/page-name)
   return content.replace(
     /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
     (match, target, display) => {
       const text = display || target;
       const slug = target
         .trim()
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9\-\/]/g, '');
+        .replace(/\.md$/, '')      // 去掉末尾 .md
+        .replace(/\/index$/, '')   // 去掉末尾 /index
+        .replace(/\s+/g, '-');     // 空格转连字符
       return `[${text}](/kudig-database/${slug})`;
     }
   );

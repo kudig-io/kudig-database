@@ -49,7 +49,7 @@ def normalize_topic(title: str) -> str:
 
 
 def main():
-    cases_dir = Path('domain-11-production-operations/ticket-cases')
+    cases_dir = Path('生产运维/ticket-cases')
     files = sorted(cases_dir.glob('ticket-case-*.md'))
 
     groups = defaultdict(list)

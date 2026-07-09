@@ -65,9 +65,9 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 云厂商
+  - 故障诊断
 related_topics:
   - rbac-configuration
   - ack-cluster-lifecycle
@@ -94,11 +94,11 @@ related_topics:
 ### 必读文档
 
 1. **ACK RAM 授权**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/243-ack-ram-authorization.md`
    - 重点: RAM 策略类型、ACK 权限模型
 
 2. **认证授权体系**
-   - 文件: `../../../domain-05-security-compliance/01-authentication-authorization-system.md`
+   - 文件: `../../../安全/01-authentication-authorization-system.md`
    - 重点: K8S 认证方式、与云平台的集成
 
 ### 阅读要点

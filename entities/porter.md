@@ -41,7 +41,7 @@ title: "Porter"
 category: entities
 summary: "Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将复杂的云原生应用及其所有依赖（Helm Charts、Terraform 模块、Kubernetes manifests、脚本等）打包为可分发、可安装的 Bundle。它解决了"我的应用需要先部署数据库，再配置网络，最后部署应用"这类多步骤安装流程的自动化问题，支持安装、升级、..."
 tags: k8s, cncf, config, porter]
-sources: ["docs/domain-19-landscape-references/sandbox/porter/porter.md", "domain-19-landscape-references/sandbox/porter/porter.md"]
+sources: ["docs/生态参考/sandbox/porter/porter.md", "生态参考/sandbox/porter/porter.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -86,8 +86,8 @@ Porter 是一个 CNAB (Cloud Native Application Bundle) 包管理器，用于将
 
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

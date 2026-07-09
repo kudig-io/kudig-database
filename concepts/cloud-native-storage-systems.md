@@ -18,7 +18,7 @@ related:
 - '[[concepts/csi-drivers.md|csi drivers]]'
 - '[[concepts/storageclass.md|storageclass]]'
 - '[[concepts/pv.md|pv]]'
-- '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
+- '[[生态参考/98-merged-indexes/index.md|index]]'
 ---
 
 > **生产环境安全提示**
@@ -49,7 +49,7 @@ related:
 云原生存储通过 [[concepts/csi-drivers.md|csi drivers]] 标准化接口暴露能力，配合 [[concepts/storageclass.md|storageclass]]
 实现声明式供给，最终以 [[concepts/pv.md|pv]] 绑定到工作负载。
 
-> 相关领域索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]]
+> 相关领域索引：[[生态参考/98-merged-indexes/index.md|index]]
 
 ---
 
@@ -433,7 +433,7 @@ volumeBindingMode: WaitForFirstConsumer   # 拓扑感知
 - [[concepts/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
 - [[concepts/storageclass.md|storageclass]] — StorageClass 配置详解
 - [[concepts/pv.md|pv]] — 持久卷生命周期
-- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 存储与数据领域索引
+- [[生态参考/98-merged-indexes/index.md|index]] — 存储与数据领域索引
 
 ## Related
 

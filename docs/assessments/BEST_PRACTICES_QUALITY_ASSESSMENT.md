@@ -77,9 +77,9 @@ prerequisites:
 10. domain-33-kubernetes-events: 17文件, 83次
 
 **出现频率最高的文件**：
-1. domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md (52次, 96KB)
-2. domain-17-system-foundation/topic-dictionary/operations/sre-maturity-model.md (29次, 84KB)
-3. domain-17-system-foundation/topic-dictionary/operations/performance-tuning-expert.md (27次, 86KB)
+1. 系统基础/topic-dictionary/operations/operations-best-practices.md (52次, 96KB)
+2. 系统基础/topic-dictionary/operations/sre-maturity-model.md (29次, 84KB)
+3. 系统基础/topic-dictionary/operations/performance-tuning-expert.md (27次, 86KB)
 
 ## 质量优势
 
@@ -123,7 +123,7 @@ prerequisites:
 
 ### 4. 部分内容较浅
 - **问题**：部分领域的最佳实践内容较浅，缺乏具体实施步骤
-- **示例**：domain-07-platform-engineering/01-platform-ops-overview.md 最佳实践原则过于简短
+- **示例**：平台工程/01-platform-ops-overview.md 最佳实践原则过于简短
 - **影响**：可操作性不足，用户难以实施
 - **建议**：深化内容，提供具体实施步骤和示例
 
@@ -147,7 +147,7 @@ prerequisites:
 
 ### 2. 创建最佳实践索引
 
-**已创建索引**：`[[domain-04-storage-data/README.md|README]].md`
+**已创建索引**：`[[存储/README.md|README]].md`
 
 **索引内容**：
 - 分类清晰的最佳实践列表

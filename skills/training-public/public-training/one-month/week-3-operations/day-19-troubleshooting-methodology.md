@@ -70,13 +70,13 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 19: 故障排查方法论 (关键日)
@@ -141,15 +141,15 @@ FEBM: 解决"怎么判断"的问题 (方法)
 ### 必读文档
 
 1. **结构化故障排查框架**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|[[KUDIG Database]]]].md`
+   - 文件: `../../故障诊断/[[存储/README.md|[[KUDIG Database]]]].md`
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md`
+   - 文件: `../../故障诊断/topic-fta/04-fta-core-principles.md`
    - 重点: 故障树构建、根因分析
 
 3. **FEBM 理论基础**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md`
+   - 文件: `../../故障诊断/topic-febm/01-febm-theory-foundations.md`
    - 重点: 取证循证方法论
 
 ---
@@ -264,7 +264,7 @@ Node NotReady (顶事件)
 
 ### 任务 2: Pod Pending 完整排障 (45min)
 
-参考 `../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md`
+参考 `../../故障诊断/05-pod-pending-diagnosis.md`
 
 #### 2.1 创建会 Pending 的 Pod
 
@@ -372,7 +372,7 @@ kubectl get pod fixed-test
 
 ### 任务 3: Node NotReady 排障 (45min)
 
-参考 `../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md`
+参考 `../../故障诊断/06-node-notready-diagnosis.md`
 
 按故障树路径逐层排查:
 
@@ -570,12 +570,12 @@ echo "========== 排查完毕 =========="
 
 ## 延伸阅读
 
-- [结构化故障排查框架](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md)
-- [FTA 核心原理](../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
-- [FEBM 理论基础](../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
-- [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
-- [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [结构化故障排查框架](../../故障诊断/topic-structural-trouble-shooting/README.md)
+- [FTA 核心原理](../../故障诊断/topic-fta/04-fta-core-principles.md)
+- [FEBM 理论基础](../../故障诊断/topic-febm/01-febm-theory-foundations.md)
+- [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
+- [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
 
 ```
 

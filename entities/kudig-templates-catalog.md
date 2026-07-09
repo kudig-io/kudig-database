@@ -47,12 +47,12 @@ prerequisites:
 | 模板 | 用途 | 目标文档 |
 |------|------|---------|
 | Skill 运维技能模板 | 故障排查技能文档 | skills/ 目录下所有 Skill |
-| FTA 故障树模板 | 组件故障树分析 | domain-10-troubleshooting-diagnostics/topic-fta/ 目录下所有 FTA |
-| FEBM 取证模板 | 法医取证分析 | domain-10-troubleshooting-diagnostics/topic-febm/ 目录 |
+| FTA 故障树模板 | 组件故障树分析 | 故障诊断/topic-fta/ 目录下所有 FTA |
+| FEBM 取证模板 | 法医取证分析 | 故障诊断/topic-febm/ 目录 |
 | MOC 导航模板 | 内容导航索引 | 各 domain/topic 的 README |
 | 领域文章模板 | 技术深度文章 | domain-*/ 目录下技术文章 |
-| 最佳实践模板 | 运维最佳实践 | domain-11-production-operations/ 等实践文档 |
-| 速查卡模板 | 快速参考卡片 | domain-17-system-foundation/topic-cheat-sheet/ 目录 |
+| 最佳实践模板 | 运维最佳实践 | 生产运维/ 等实践文档 |
+| 速查卡模板 | 快速参考卡片 | 系统基础/topic-cheat-sheet/ 目录 |
 | 决策树模板 | 故障排查决策树 | topic-structural/ 目录 |
 | 演示文稿模板 | 培训课件 | 内部培训/公开培训材料 |
 | 项目索引模板 | 开源项目参考 | 第三方组件 entity 页面 |

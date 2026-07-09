@@ -33,7 +33,7 @@ prerequisites:
 relationships:
 - target: '[[entities/kubernetes.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[系统基础/topic-cheat-sheet/k8s.md]]'
   type: related_to
 - target: '[[skills/best-practices/best-practices/infrastructure/storage.md]]'
   type: related_to
@@ -78,7 +78,7 @@ velero backup create prod-backup \
 # 灾难恢复
 velero restore create --from-backup prod-backup
 ```
-## 3-2-1 原则在 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] 中的实践
+## 3-2-1 原则在 [[系统基础/topic-cheat-sheet/k8s.md|K8s]] 中的实践
 
 ```
 3 份数据:
@@ -96,12 +96,12 @@ velero restore create --from-backup prod-backup
 
 ## 相关 Domain
 
-- domain-09-reliability-engineering/01-backup-recovery/01-backup-strategies
+- 可靠性/01-backup-recovery/01-backup-strategies
 - domain-04-[[skills/best-practices/best-practices/infrastructure/storage.md|storage]]-data/03-csi/01-csi-snapshot
 ## Related
 
-- [[domain-01-cluster-fundamentals/01-architecture-overview/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
-- [[domain-19-landscape-references/02-papers/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)]]
+- [[集群基础/01-architecture-overview/01-kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
+- [[生态参考/02-papers/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架 (Production Readiness Assessment Framework)]]
 
 
 <!-- risk-assessed -->

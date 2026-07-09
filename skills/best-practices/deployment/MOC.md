@@ -69,10 +69,10 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]] |  | deployment |  |
-| 2 | [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]] |  | deployment |  |
-| 3 | [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]] |  | deployment |  |
-| 4 | [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]] |  | deployment, production |  |
+| 1 | [[发布变更/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]] |  | deployment |  |
+| 2 | [[发布变更/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]] |  | deployment |  |
+| 3 | [[发布变更/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]] |  | deployment |  |
+| 4 | [[发布变更/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]] |  | deployment, production |  |
 
 ---
 
@@ -103,16 +103,16 @@ prerequisites:
 - [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
 - [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
 - [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
-- [[domain-03-networking-traffic/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[domain-06-observability/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
-- [[domain-01-cluster-fundamentals/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[domain-01-cluster-fundamentals/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[domain-04-storage-data/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- 网络 MOC — Cross-reference
+- [[网络/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[可观测性/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
+- [[集群基础/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[集群基础/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[存储/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[存储/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 
 
 <!-- risk-assessed -->

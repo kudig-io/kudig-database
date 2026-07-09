@@ -83,19 +83,19 @@ updated: 2026-05-21T16:30:00Z
 
 - `STRUCTURE` — 项目结构文件，不需要入链
 - `AGENTS` — Agent 配置文件，不需要入链
-- `domain-07-platform-engineering/topic-code-analysis/node-create/11-eviction` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/09-cni-node` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/06-certificate` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/13-security` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/07-autoscaling` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/12-monitoring` — 源分析文件
-- `domain-07-platform-engineering/topic-code-analysis/node-create/05-upgrade` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/11-eviction` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/08-troubleshooting` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/09-cni-node` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/06-certificate` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/13-security` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/07-autoscaling` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/12-monitoring` — 源分析文件
+- `平台工程/topic-code-analysis/node-create/05-upgrade` — 源分析文件
 
 ### 分类
 
 - **非 wiki 页面**（不需要修复）：`STRUCTURE`, `AGENTS`, `CHANGELOG`, `CONTRIBUTING`, `.codebuddy/` 等
-- **domain-07-platform-engineering/topic-code-analysis/ 源文件**（低优先级）：代码分析输出，应由 wiki-ingest 转化为 wiki 页面后自动解决
+- **平台工程/topic-code-analysis/ 源文件**（低优先级）：代码分析输出，应由 wiki-ingest 转化为 wiki 页面后自动解决
 - **核心 wiki 孤儿**（需要修复）：少数 concepts/skills/entities 页面缺少入链
 
 ---
@@ -108,9 +108,9 @@ updated: 2026-05-21T16:30:00Z
 |---|---|---|---|
 | CONTRIBUTING.md | 23 | `[[scripts/templates/fta-template.md|fta template]]` | 移除 .md 后缀 |
 | CONTRIBUTING.md | 306 | `[[fta-template]]` | 指向 `[[scripts/templates/fta-template.md|fta template]]` |
-| MOC.md | 40 | `[[domain-07-platform-engineering/topic-code-analysis/MOC` | 修复嵌套 wikilink 语法 |
+| MOC.md | 40 | `[[平台工程/topic-code-analysis/MOC` | 修复嵌套 wikilink 语法 |
 | AGENTS.md | 40,102,125 | `wikilinks` 等 | 这些是说明性文本，可转为代码格式 |
-| domain-07-platform-engineering/topic-code-analysis/README.md | 15-19 | `[[entities/k8s-cluster-cert.md|k8s cluster cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
+| 平台工程/topic-code-analysis/README.md | 15-19 | `[[entities/k8s-cluster-cert.md|k8s cluster cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
 | 多个 README.md | 多处 | `[[scripts/templates/cheat-sheet-template.md|cheat sheet template]]` | 应指向 `[[scripts/templates/cheat-sheet-template.md|cheat sheet template]]` |
 | _reports/OBSIDIAN-WIKI-AGENT... | 125,130,132,425 | 中文链接/相对路径 | 这些是分析报告，应转为纯文本 |
 
@@ -118,7 +118,7 @@ updated: 2026-05-21T16:30:00Z
 
 1. CONTRIBUTING.md — 修复 fta-template 链接
 2. MOC.md — 修复嵌套 wikilink 语法错误
-3. domain-07-platform-engineering/topic-code-analysis/ 目录 — 批量修复 cheat-sheet-template 和分组页面链接
+3. 平台工程/topic-code-analysis/ 目录 — 批量修复 cheat-sheet-template 和分组页面链接
 4. _reports/ 目录 — 将破损链接转为纯文本
 5. AGENTS.md — 将 wikilinks 说明转为代码格式
 
@@ -130,7 +130,7 @@ updated: 2026-05-21T16:30:00Z
 
 - **非 wiki 文件**（可忽略）：CHANGELOG.md, CONTRIBUTING.md, MOC.md, README.md 等
 - **.codebuddy/ 缓存文件**（可忽略）：AI 工具生成的临时文件
-- **domain-07-platform-engineering/topic-code-analysis/ 源文件**（低优先级）：代码分析输出
+- **平台工程/topic-code-analysis/ 源文件**（低优先级）：代码分析输出
 - **_meta/ 元数据文件**（建议修复）：wiki 自身的元数据配置
 - **_reports/ 报告文件**（建议修复）：本报告等
 
@@ -162,7 +162,7 @@ updated: 2026-05-21T16:30:00Z
 
 页面中包含 password/token/secret 等模式但未标记 `visibility/pii`。
 
-**分析：** 这些 407 个页面全部位于 `domain-07-platform-engineering/topic-code-analysis/` 目录下，内容是 Kubernetes 技术文档中的示例命令和配置片段（如 `kubeadm join --token xxx`），不是真正的 PII 数据。**标记为已知误报，无需修复。**
+**分析：** 这些 407 个页面全部位于 `平台工程/topic-code-analysis/` 目录下，内容是 Kubernetes 技术文档中的示例命令和配置片段（如 `kubeadm join --token xxx`），不是真正的 PII 数据。**标记为已知误报，无需修复。**
 
 ---
 
@@ -189,11 +189,11 @@ updated: 2026-05-21T16:30:00Z
 ### 修复 1：嵌套 wikilink 模式（940 个）
 
 模式：`path/[[basename` → `path/basename`
-- domain-14-ai-ml-infra/ — 修复 ~150 个文件中的 150+ 嵌套链接
-- domain-20-application-patterns/ — 修复 ~90 个文件中的 450+ 嵌套链接
-- domain-10-troubleshooting-diagnostics/topic-fta/ — 修复 ~30 个文件中的 140+ 嵌套链接
-- domain-10-troubleshooting-diagnostics/topic-febm/ — 修复 ~10 个文件中的 45+ 嵌套链接
-- domain-11-production-operations/topic-best-practices/migration/ — 修复 ~10 个文件中的 40+ 嵌套链接
+- AI基础设施/ — 修复 ~150 个文件中的 150+ 嵌套链接
+- 应用模式/ — 修复 ~90 个文件中的 450+ 嵌套链接
+- 故障诊断/topic-fta/ — 修复 ~30 个文件中的 140+ 嵌套链接
+- 故障诊断/topic-febm/ — 修复 ~10 个文件中的 45+ 嵌套链接
+- 生产运维/topic-best-practices/migration/ — 修复 ~10 个文件中的 40+ 嵌套链接
 - 其他 domain 文件 — 修复 ~50 个文件中的 115+ 嵌套链接
 
 ### 修复 2：cheat-sheet-template 链接（15 个）
@@ -206,15 +206,15 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 4：MOC.md 嵌套 wikilink（1 个）
 
-`domain-07-platform-engineering/[[domain-07-platform-engineering/topic-code-analysis/MOC.md|MOC]]` → `[[domain-07-platform-engineering/topic-code-analysis/MOC.md|MOC]]`
+`平台工程/[[平台工程/topic-code-analysis/MOC.md|MOC]]` → `[[平台工程/topic-code-analysis/MOC.md|MOC]]`
 
-### 修复 5：domain-07-platform-engineering/topic-code-analysis/README.md 分组链接（5 个）
+### 修复 5：平台工程/topic-code-analysis/README.md 分组链接（5 个）
 
 将目录名 wikilink（如 `[[entities/k8s-cluster-cert.md|k8s cluster cert]]`）转为纯文本
 
 ### 修复 6：转义 wikilink（48 个）
 
-domain-11-production-operations/MOC.md 中的 `display` → `display`
+生产运维/MOC.md 中的 `display` → `display`
 
 ### 修复 7：_reports/ 中文 wikilink（3 个）
 

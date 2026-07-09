@@ -75,8 +75,8 @@ audience:
 estimated_read_time: 45min
 related_domains:
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-overview
   - pod-lifecycle
@@ -603,8 +603,8 @@ Init Container 失败后，Pod 不会继续启动主容器。如果 restartPolic
 
 - [Pod 基础概念](../../domain-09-workload/01-pod-overview.md)
 - [Pod 生命周期详解](../../domain-09-workload/02-pod-lifecycle.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [ACK 工作负载管理](../../domain-12-cloud-providers/04-alicloud-ack/250-ack-workload.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [ACK 工作负载管理](../../云厂商/04-alicloud-ack/250-ack-workload.md)
 
 ```
 

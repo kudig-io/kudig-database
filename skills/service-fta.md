@@ -80,9 +80,9 @@ severity: high
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|Service 异常故障树分析]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[故障诊断/topic-fta/list/service-fta.md|Service 异常故障树分析]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

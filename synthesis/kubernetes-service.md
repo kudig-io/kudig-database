@@ -11,8 +11,8 @@ tags:
 - endpointslice
 tier: supporting
 sources:
-- domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes.md
-- domain-17-system-foundation/topic-dictionary/networking/service.md
+- 系统基础/topic-dictionary/fundamentals/kubernetes.md
+- 系统基础/topic-dictionary/networking/service.md
 - concepts/service-networking.md
 - concepts/bp-operations.md
 - concepts/bp-infrastructure.md
@@ -67,8 +67,8 @@ Kubernetes 解决了"应用如何在集群中运行"，Service 解决了"应用�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+- [[系统基础/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
+- [[系统基础/topic-dictionary/networking/service.md|Service]]
 - [[concepts/service-networking.md|Service Networking]]
 - [[concepts/bp-operations.md|最佳实践：Operations]]
 - [[concepts/bp-infrastructure.md|最佳实践：Infrastructure]]

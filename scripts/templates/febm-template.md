@@ -20,7 +20,7 @@ created: '2026-07-01'
 > **文档类型**: FEBM 取证分析
 > **适用版本**: Kubernetes v1.28 - v1.32
 > **最后更新**: {{日期}}
-> **关联主文档**: [FEBM 方法论深度剖析](../domain-10-troubleshooting-diagnostics/topic-febm/febm-methodology-deep-dive.md)
+> **关联主文档**: [FEBM 方法论深度剖析](../故障诊断/topic-febm/febm-methodology-deep-dive.md)
 
 ---
 
@@ -41,8 +41,8 @@ authors:
 reviewers: []
 tags: [febm, forensics, k8s, {{component}}]
 related_docs:
-  fta_ref: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
-  skill_ref: "../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md"
+  fta_ref: "../故障诊断/topic-fta/list/{{component}}-fta.md"
+  skill_ref: "../故障诊断/topic-skills/{{NN}}-{{scenario}}.md"
 ---
 ```
 
@@ -444,9 +444,9 @@ FEBM-OODA 循环:
 
 | 类型 | 文档 | 说明 |
 |:---|:---|:---|
-| FTA 故障树 | [../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | {{说明}} |
-| Skill 技能 | [../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
-| 速查卡 | [../domain-17-system-foundation/topic-cheat-sheet/k8s.md](../domain-17-system-foundation/topic-cheat-sheet/k8s.md) | {{说明}} |
+| FTA 故障树 | [../故障诊断/topic-fta/list/{{component}}-fta.md](../故障诊断/topic-fta/list/{{component}}-fta.md) | {{说明}} |
+| Skill 技能 | [../故障诊断/topic-skills/{{NN}}-{{scenario}}.md](../故障诊断/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
+| 速查卡 | [../系统基础/topic-cheat-sheet/k8s.md](../系统基础/topic-cheat-sheet/k8s.md) | {{说明}} |
 | 深度学习 | [../domain-{{N}}-{{name}}/{{doc}}.md](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
 
 ---
@@ -460,6 +460,6 @@ FEBM-OODA 循环:
 
 ---
 
-> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../domain-10-troubleshooting-diagnostics/[[domain-04-storage-data/README.md|README]].md)
+> **导航**: [<< FEBM 方法论深度剖析](../febm-methodology-deep-dive.md) | [返回主索引](../故障诊断/[[存储/README.md|README]].md)
 
 <!-- risk-assessed -->

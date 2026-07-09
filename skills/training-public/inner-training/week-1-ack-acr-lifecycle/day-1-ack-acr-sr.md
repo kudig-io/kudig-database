@@ -74,8 +74,8 @@ audience:
   - Anyone interested in ACK/ACR
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-cluster-types
@@ -475,9 +475,9 @@ kubectl get pods -n kube-system
 - [ACK 产品文档](https://help.aliyun.com/product/85222.html)
 - [ACR 产品文档](https://help.aliyun.com/product/60716.html)
 - [Kubernetes 架构概述](https://kubernetes.io/docs/concepts/architecture/)
-- [文件: `../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md`](../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [文件: `../../../domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md`](../../../domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md)
-- [文件: `../../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md`](../../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
+- [文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`](../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [文件: `../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md`](../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
+- [文件: `../../../集群基础/01-kubernetes-architecture-overview.md`](../../../集群基础/01-kubernetes-architecture-overview.md)
 
 ---
 

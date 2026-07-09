@@ -11,6 +11,12 @@ KG_FILE="$BASE_DIR/.understand-anything/knowledge-graph.json"
 REPORT_DIR="$BASE_DIR/reports"
 mkdir -p "$REPORT_DIR"
 
+# 知识域名（中文目录名，替代原 domain-* glob）
+DOMAINS=(集群基础 工作负载 网络 存储 安全 可观测性 平台工程 发布变更 可靠性 故障诊断 生产运维 云厂商 容器运行时 AI基础设施 专项技术 数据库中间件 系统基础 清单模式 生态参考 应用模式)
+# 构造 find 可用的路径列表
+DOMAIN_PATHS=()
+for d in "${DOMAINS[@]}"; do DOMAIN_PATHS+=("$BASE_DIR/$d"); done
+
 echo "============================================================"
 echo "KUDIG-DATABASE Agent Corpus 质量检查"
 echo "日期: $(date +%Y-%m-%d)"
@@ -20,7 +26,7 @@ echo "============================================================"
 echo ""
 echo "=== 文档统计 ==="
 TOTAL_MD=$(find "$BASE_DIR" -name "*.md" -not -path "*/.git/*" -not -path "*/node_modules/*" | wc -l | tr -d ' ')
-DOMAIN_COUNT=$(find "$BASE_DIR" -maxdepth 1 -type d -name "domain-*" | wc -l | tr -d ' ')
+DOMAIN_COUNT=${#DOMAINS[@]}
 TOPIC_COUNT=$(find "$BASE_DIR" -maxdepth 1 -type d -name "topic-*" | wc -l | tr -d ' ')
 MOC_COUNT=$(find "$BASE_DIR" -name "MOC.md" -not -path "*/.git/*" | wc -l | tr -d ' ')
 
@@ -58,7 +64,7 @@ while IFS= read -r file; do
     if ! echo "$fm_block" | grep -q "^k8s_versions:"; then
         MISSING_K8S=$((MISSING_K8S + 1))
     fi
-done < <(find "$BASE_DIR/domain-*" "$BASE_DIR/topic-*" -name "*.md" 2>/dev/null)
+done < <(find "${DOMAIN_PATHS[@]}" -name "*.md" 2>/dev/null)
 
 echo "  无 Frontmatter:     $NO_FM"
 echo "  缺失 Tags:          $MISSING_TAGS"
@@ -68,8 +74,9 @@ echo "  缺失 K8s_versions:  $MISSING_K8S"
 # === 3. MOC 覆盖率 ===
 echo ""
 echo "=== MOC 覆盖率 ==="
-TOTAL_DIRS=$(find "$BASE_DIR" -maxdepth 1 -type d \( -name "domain-*" -o -name "topic-*" \) | wc -l | tr -d ' ')
-MOC_DIRS=$(find "$BASE_DIR" -maxdepth 1 -type d \( -name "domain-*" -o -name "topic-*" \) -exec test -f {}/MOC.md \; -print | wc -l | tr -d ' ')
+TOTAL_DIRS=${#DOMAINS[@]}
+MOC_DIRS=0
+for d in "${DOMAINS[@]}"; do [[ -f "$BASE_DIR/$d/MOC.md" ]] && MOC_DIRS=$((MOC_DIRS + 1)); done
 echo "  应有 MOC 目录:      $TOTAL_DIRS"
 echo "  已有 MOC 目录:      $MOC_DIRS"
 if [ "$TOTAL_DIRS" -gt 0 ]; then
@@ -88,7 +95,7 @@ while IFS= read -r file; do
         WIKILINK_FILES=$((WIKILINK_FILES + 1))
         TOTAL_WIKILINKS=$((TOTAL_WIKILINKS + count))
     fi
-done < <(find "$BASE_DIR" -type f \( -path "*/domain-*/*.md" -o -path "*/topic-*/*.md" \) -not -name "MOC.md" -not -name "README.md" 2>/dev/null)
+done < <(find "${DOMAIN_PATHS[@]}" -type f -name "*.md" -not -name "MOC.md" -not -name "README.md" 2>/dev/null)
 
 echo "  有 Wikilinks 文件:  $WIKILINK_FILES"
 echo "  Wikilinks 总数:     $TOTAL_WIKILINKS"

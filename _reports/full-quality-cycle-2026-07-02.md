@@ -23,7 +23,7 @@
 | Peripheral | 1,016 | 44 | 4.3% |
 | QA pairs | 15,094 | 15,094（共享） | — |
 
-**修复**: `rag-sre-profile.yaml` 旧 schema（`core/methodology/reference`）已重写为 `include` 列表，路径 `domain-12-troubleshooting/` 已纠正为实际的 `domain-10-troubleshooting-diagnostics/` 子目录。
+**修复**: `rag-sre-profile.yaml` 旧 schema（`core/methodology/reference`）已重写为 `include` 列表，路径 `domain-12-troubleshooting/` 已纠正为实际的 `故障诊断/` 子目录。
 
 ### ✅ 2. Cross-Linker Round 2（孤岛页）
 

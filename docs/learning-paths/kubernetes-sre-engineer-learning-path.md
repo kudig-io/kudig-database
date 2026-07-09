@@ -38,8 +38,8 @@ last_updated: 2026-05-23
 
 **推荐学习**：
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
-- `domain-01-cluster-fundamentals/01-architecture-overview/`
-- `domain-01-cluster-fundamentals/05-kubectl/`
+- `集群基础/01-architecture-overview/`
+- `集群基础/05-kubectl/`
 
 ### 1.2 kubectl基础操作
 - [ ] 资源查看：get、describe、logs、top
@@ -68,7 +68,7 @@ kubectl top pod -n <namespace>
 - [ ] 阿里云SLB与Ingress集成
 
 **推荐学习**：
-- `domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md`
+- `云厂商/01-alibaba-cloud/02-ACK集群运维.md`
 
 ### 阶段一评估标准
 > 能够独立完成以下操作即达标：
@@ -90,7 +90,7 @@ kubectl top pod -n <namespace>
 
 **推荐学习**：
 - [[scripts/video-scripts/node-notready.md|node notready]]
-- `domain-01-cluster-fundamentals/07-performance-tuning/`
+- `集群基础/07-performance-tuning/`
 
 ### 2.2 应用管理
 - [ ] Deployment滚动更新策略
@@ -99,8 +99,8 @@ kubectl top pod -n <namespace>
 - [ ] HPA和VPA配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md|08 deployment rollout failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
+- [[故障诊断/topic-skills/08-deployment-rollout-failure.md|08 deployment rollout failure]]
+- [[故障诊断/topic-skills/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
 - k8s-autoscaling
 
 ### 2.3 存储与配置
@@ -112,7 +112,7 @@ kubectl top pod -n <namespace>
 **推荐学习**：
 - k8s-pvc-storage
 - k8s-config-secret
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|21 statefulset failure]]
+- [[故障诊断/topic-skills/21-statefulset-failure.md|21 statefulset failure]]
 
 ### 2.4 网络排查
 - [ ] Service连通性诊断
@@ -121,9 +121,9 @@ kubectl top pod -n <namespace>
 - [ ] Ingress和SLB问题诊断
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|05 service connectivity]]
+- [[故障诊断/topic-skills/05-service-connectivity.md|05 service connectivity]]
 - k8s-dns-failure
-- [[domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md|13 ingress gateway failure]]
+- [[故障诊断/topic-skills/13-ingress-gateway-failure.md|13 ingress gateway failure]]
 
 ### 阶段二评估标准
 > 能够独立完成以下操作即达标：
@@ -145,9 +145,9 @@ kubectl top pod -n <namespace>
 - [ ] etcd备份和恢复
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|11 control plane failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
-- `domain-01-cluster-fundamentals/06-upgrade-paths/`
+- [[故障诊断/topic-skills/11-control-plane-failure.md|11 control plane failure]]
+- [[故障诊断/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
+- `集群基础/06-upgrade-paths/`
 
 ### 3.2 安全与合规
 - [ ] RBAC权限模型和最小权限原则
@@ -156,9 +156,9 @@ kubectl top pod -n <namespace>
 - [ ] 审计日志配置
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/09-rbac-quota-failure.md|09 rbac quota failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md|18 security incident response]]
-- `domain-05-security-compliance/`
+- [[故障诊断/topic-skills/09-rbac-quota-failure.md|09 rbac quota failure]]
+- [[故障诊断/topic-skills/18-security-incident-response.md|18 security incident response]]
+- `安全/`
 
 ### 3.3 可观测性体系
 - [ ] Prometheus监控采集和告警规则
@@ -167,9 +167,9 @@ kubectl top pod -n <namespace>
 - [ ] 分布式链路追踪
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/15-monitoring-alerting-failure.md|15 monitoring alerting failure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/16-logging-pipeline-failure.md|16 logging pipeline failure]]
-- `domain-06-observability/`
+- [[故障诊断/topic-skills/15-monitoring-alerting-failure.md|15 monitoring alerting failure]]
+- [[故障诊断/topic-skills/16-logging-pipeline-failure.md|16 logging pipeline failure]]
+- `可观测性/`
 
 ### 3.4 性能优化
 - [ ] CPU/内存瓶颈分析
@@ -178,8 +178,8 @@ kubectl top pod -n <namespace>
 - [ ] 大规模集群性能考量
 
 **推荐学习**：
-- [[domain-10-troubleshooting-diagnostics/topic-skills/17-performance-bottleneck.md|17 performance bottleneck]]
-- `domain-01-cluster-fundamentals/07-performance-tuning/`
+- [[故障诊断/topic-skills/17-performance-bottleneck.md|17 performance bottleneck]]
+- `集群基础/07-performance-tuning/`
 
 ### 阶段三评估标准
 > 能够独立完成以下操作即达标：
@@ -201,7 +201,7 @@ kubectl top pod -n <namespace>
 - [ ] 灾难恢复方案设计
 
 **推荐学习**：
-- `domain-09-reliability-engineering/`
+- `可靠性/`
 - `synthesis/高可用模式/`
 
 ### 4.2 多集群管理
@@ -211,7 +211,7 @@ kubectl top pod -n <namespace>
 - [ ] 灾难恢复中的多集群切换
 
 **推荐学习**：
-- `domain-07-platform-engineering/`
+- `平台工程/`
 - `synthesis/multi-cluster-observability-federation.md`
 
 ### 4.3 平台工程
@@ -221,8 +221,8 @@ kubectl top pod -n <namespace>
 - [ ] 标准化和模板化
 
 **推荐学习**：
-- `domain-07-platform-engineering/03-governance/`
-- `domain-08-release-change-management/01-gitops/`
+- `平台工程/03-governance/`
+- `发布变更/01-gitops/`
 
 ### 4.4 混沌工程
 - [ ] 故障注入工具（Chaos Mesh、Litmus）
@@ -231,7 +231,7 @@ kubectl top pod -n <namespace>
 - [ ] 事后复盘（Post-mortem）
 
 **推荐学习**：
-- `domain-09-reliability-engineering/04-chaos-engineering/`
+- `可靠性/04-chaos-engineering/`
 - `synthesis/chaos-drill-integration.md`
 
 ### 阶段四评估标准
@@ -254,8 +254,8 @@ kubectl top pod -n <namespace>
 - [ ] 升级决策框架
 
 **推荐学习**：
-- `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/SKILL.md`
-- `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/DIALOGUE.md`
+- `故障诊断/topic-skills/skill-set/*/SKILL.md`
+- `故障诊断/topic-skills/skill-set/*/DIALOGUE.md`
 
 ### 5.2 工单处理流程
 - [ ] 工单分级（P0/P1/P2）
@@ -264,7 +264,7 @@ kubectl top pod -n <namespace>
 - [ ] 事后复盘和知识沉淀
 
 **推荐学习**：
-- `domain-10-troubleshooting-diagnostics/topic-multi-fault-scenarios/`
+- `故障诊断/topic-multi-fault-scenarios/`
 - `synthesis/case-studies/`
 
 ### 5.3 阿里云专有云专项
@@ -275,7 +275,7 @@ kubectl top pod -n <namespace>
 - [ ] 阿里云安全（RAM/KMS）
 
 **推荐学习**：
-- `domain-12-cloud-providers/01-alibaba-cloud/`
+- `云厂商/01-alibaba-cloud/`
 
 ---
 
@@ -285,12 +285,12 @@ kubectl top pod -n <namespace>
 |:---|:---|---:|
 | 概念文档 | `concepts/` | 62 |
 | 最佳实践 | `best-practices/` | 14 |
-| 诊断Skill | `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/` | 17 |
-| 对话脚本 | `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/DIALOGUE.md` | 17 |
+| 诊断Skill | `故障诊断/topic-skills/skill-set/*/` | 17 |
+| 对话脚本 | `故障诊断/topic-skills/skill-set/*/DIALOGUE.md` | 17 |
 | 合成分析 | `synthesis/` | 100+ |
 | 案例研究 | `synthesis/case-studies/` | 36 |
-| 阿里云文档 | `domain-12-cloud-providers/01-alibaba-cloud/` | 6 |
-| 多问题并发 | `domain-10-troubleshooting-diagnostics/topic-multi-fault-scenarios/` | 10 |
+| 阿里云文档 | `云厂商/01-alibaba-cloud/` | 6 |
+| 多问题并发 | `故障诊断/topic-multi-fault-scenarios/` | 10 |
 
 ---
 

@@ -49,7 +49,7 @@ prerequisites:
 
 title: [[Kubernetes|Kubernetes]] 密钥管理最佳实践
 description: 生产环境 Kubernetes 密钥管理配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/security
+category: 生产运维/topic-best-practices/security
 tags:
 - kubernetes
 - security
@@ -75,10 +75,10 @@ trigger_keywords:
 - Vault
 cross_refs:
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 安全知识域
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 云原生安全知识域
 - type: best-practice
   path: ./pod-security.md

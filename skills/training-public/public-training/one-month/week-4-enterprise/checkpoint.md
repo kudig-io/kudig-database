@@ -83,13 +83,13 @@ audience:
 estimated_read_time: 90min
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-08-release-change-management
-  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+  - 发布变更
+  - domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
 # Week 4 Checkpoint: 终极自测
@@ -492,7 +492,7 @@ Payment Service 5xx 激增
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

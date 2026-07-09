@@ -10,10 +10,10 @@ tags:
 - security
 tier: supporting
 sources:
-- domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md
-- domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md
-- domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md
-- domain-05-security-compliance/05-supply-chain/README.md
+- 容器运行时/03-containerd-cri-o/01-containerd-production-operations.md
+- 容器运行时/03-containerd-cri-o/02-cri-o-production-guide.md
+- 容器运行时/04-image-build/01-buildkit-production-guide.md
+- 安全/05-supply-chain/README.md
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
@@ -62,8 +62,8 @@ lifecycle_changed: '2026-06-26'
 
 ## Related
 
-- [[domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md|01 containerd production operations]]
-- [[domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide.md|02 cri o production guide]]
-- [[domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md|01 buildkit production guide]]
-- [[domain-19-landscape-references/topic-release-notes/README.md|README]]
-- [[domain-05-security-compliance/07-incident-response/02-container-runtime-threat-response.md|02 container runtime threat response]]
+- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations.md|01 containerd production operations]]
+- [[容器运行时/03-containerd-cri-o/02-cri-o-production-guide.md|02 cri o production guide]]
+- [[容器运行时/04-image-build/01-buildkit-production-guide.md|01 buildkit production guide]]
+- [[生态参考/topic-release-notes/README.md|README]]
+- [[安全/07-incident-response/02-container-runtime-threat-response.md|02 container runtime threat response]]

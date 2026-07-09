@@ -39,7 +39,7 @@ prerequisites:
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[entities/kubernetes.md|k8s]] 基础设施的问题排查
-> **关联**: domain-14-linux, domain-03-networking-traffic
+> **关联**: domain-14-linux, 网络
 
 ---
 
@@ -395,8 +395,8 @@ echo | openssl s_client -connect <host>:443 2>/dev/null | openssl x509 -noout -d
 ---
 
 **关联文档**:
-- [domain-17-system-foundation/](../domain-17-system-foundation/) — Linux 系统基础
-- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — 网络基础
-- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — Kubernetes 网络
+- [系统基础/](../系统基础/) — Linux 系统基础
+- [网络/](../网络/) — 网络基础
+- [网络/](../网络/) — Kubernetes 网络
 
 <!-- risk-assessed -->

@@ -895,7 +895,7 @@ CoreDNS
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]]
 
 ```
 

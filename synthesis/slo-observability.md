@@ -10,10 +10,10 @@ tags:
 - metrics
 tier: supporting
 sources:
-- domain-06-observability/06-slo-sli/01-slo-engineering-practice.md
-- domain-06-observability/06-slo-sli/02-error-budget-policy.md
-- domain-06-observability/06-slo-sli/03-sli-implementation-guide.md
-- domain-06-observability/02-metrics/README.md
+- 可观测性/06-slo-sli/01-slo-engineering-practice.md
+- 可观测性/06-slo-sli/02-error-budget-policy.md
+- 可观测性/06-slo-sli/03-sli-implementation-guide.md
+- 可观测性/02-metrics/README.md
 created: '2026-06-26'
 updated: '2026-06-26'
 last_updated: 2026-06-26
@@ -62,7 +62,7 @@ SLO（服务等级目标）定义了服务可接受的表现边界，SLI（服�
 
 ## Related
 
-- [[domain-06-observability/06-slo-sli/01-slo-engineering-practice.md|01 slo engineering practice]]
-- [[domain-06-observability/06-slo-sli/02-error-budget-policy.md|02 error budget policy]]
-- [[domain-06-observability/06-slo-sli/03-sli-implementation-guide.md|03 sli implementation guide]]
-- [[domain-19-landscape-references/topic-release-notes/README.md|README]]
+- [[可观测性/06-slo-sli/01-slo-engineering-practice.md|01 slo engineering practice]]
+- [[可观测性/06-slo-sli/02-error-budget-policy.md|02 error budget policy]]
+- [[可观测性/06-slo-sli/03-sli-implementation-guide.md|03 sli implementation guide]]
+- [[生态参考/topic-release-notes/README.md|README]]

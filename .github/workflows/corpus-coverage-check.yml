@@ -3,16 +3,16 @@ name: Corpus Coverage Check
 on:
   push:
     paths:
-      - 'domain-10-troubleshooting-diagnostics/topic-skills/**'
-      - 'domain-10-troubleshooting-diagnostics/topic-fta/**'
-      - 'domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/**'
+      - '故障诊断/topic-skills/**'
+      - '故障诊断/topic-fta/**'
+      - '故障诊断/topic-qa-corpus/seed/**'
       - 'scripts/corpus-generator/**'
       - '.github/workflows/corpus-coverage-check.yml'
   pull_request:
     paths:
-      - 'domain-10-troubleshooting-diagnostics/topic-skills/**'
-      - 'domain-10-troubleshooting-diagnostics/topic-fta/**'
-      - 'domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/**'
+      - '故障诊断/topic-skills/**'
+      - '故障诊断/topic-fta/**'
+      - '故障诊断/topic-qa-corpus/seed/**'
       - 'scripts/corpus-generator/**'
   workflow_dispatch:
 
@@ -38,15 +38,15 @@ jobs:
         run: |
           cd scripts/corpus-generator
           python3 generate.py --priority all \
-            --output domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/
+            --output 故障诊断/topic-qa-corpus/generated/
 
       - name: Validate corpus coverage
         run: |
           cd scripts/corpus-generator
           python3 validators/coverage_checker.py \
-            --skills-dir domain-10-troubleshooting-diagnostics/topic-skills \
-            --fta-dir domain-10-troubleshooting-diagnostics/topic-fta/list \
-            --corpus-dir domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated \
+            --skills-dir 故障诊断/topic-skills \
+            --fta-dir 故障诊断/topic-fta/list \
+            --corpus-dir 故障诊断/topic-qa-corpus/generated \
             --output corpus-coverage-report.json
 
       - name: Upload coverage report

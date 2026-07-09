@@ -113,7 +113,7 @@ category: dictionary
 
 在 Kubernetes 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**etcd 集群状态、Kubernetes 资源定义、Secrets 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/backup-disaster-recovery.md`）*
 
 ---
 
@@ -151,7 +151,7 @@ authors:
   role: contributor
 k8s_ver...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/capacity-planning-forecasting.md`）*
 
 ---
 
@@ -161,7 +161,7 @@ Kubernetes 集群的所有组件之间都通过 **TLS（传输层安全协议）
 
 > **注意**：原概念页面 `/docs/concepts/cluster-administration/certificates/` 已迁移，当前内容主要基于官方最佳实践文档 `/docs/setup/best-practices/certificates/` 进行总结。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/certificates.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/certificates.md`）*
 
 ---
 
@@ -202,7 +202,7 @@ k8s_versions:
 - '1.29'
 - '...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/change-management-release.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/change-management-release.md`）*
 
 ---
 
@@ -210,7 +210,7 @@ k8s_versions:
 
 **混沌工程**是一种通过在生产环境中有控制地注入问题，来验证系统韧性和发现潜在弱点的工程实践。其核心理念是"**主动制造问题，以避免被动承受问题**"。2026 年的 Kubernetes 生产环境中，混沌工程已成为 SRE 成熟度模型中的关键能力，主流工具包括 **Litmus、Chaos Mesh、Gremlin** 和 Netflix 开源的 **Chaos Monkey**。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/chaos-engineering.md`）*
 
 ---
 
@@ -252,7 +252,7 @@ k8s_versions:
 - '1.30'
 ...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/enterprise-ops-practices.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/enterprise-ops-practices.md`）*
 
 ---
 
@@ -285,7 +285,7 @@ trigger_keywords:
 - Kubernetes
 - 故障模式...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/failure-patterns-analysis.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/failure-patterns-analysis.md`）*
 
 ---
 
@@ -293,7 +293,7 @@ trigger_keywords:
 
 随着 Kubernetes 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/finops-and-cost-optimization.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/finops-and-cost-optimization.md`）*
 
 ---
 
@@ -301,7 +301,7 @@ trigger_keywords:
 
 随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 Kubernetes 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/greenops-and-carbon-aware-computing.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/greenops-and-carbon-aware-computing.md`）*
 
 ---
 
@@ -339,7 +339,7 @@ authors:
   role: contributor
 k8s_ver...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/incident-management-runbooks.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/incident-management-runbooks.md`）*
 
 ---
 
@@ -347,7 +347,7 @@ k8s_ver...
 
 插件（Addons）用于扩展 Kubernetes 的功能。Kubernetes 本身不提供原生的完整集群功能（如 DNS、网络、仪表板等），而是通过插件生态来补充这些能力。本文档列出了 Kubernetes 官方文档中提到的一些可用插件，并提供其安装说明的链接。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/installing-addons.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/installing-addons.md`）*
 
 ---
 
@@ -355,7 +355,7 @@ k8s_ver...
 
 节点自动扩缩容（Node Autoscaling）能够根据集群中工作负载的需求，自动**供应（provision）**新节点或**整合（consolidate）**现有节点，以提供所需容量的同时优化成本。执行这些操作的组件称为**节点自动扩缩器（Node autoscalers）**。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/node-autoscaling.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/node-autoscaling.md`）*
 
 ---
 
@@ -363,7 +363,7 @@ k8s_ver...
 
 在 Kubernetes 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/node-shutdowns.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/node-shutdowns.md`）*
 
 ---
 
@@ -398,7 +398,7 @@ trigger_keywords:
 - dictionary
 title_en: Operations Best Pr...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/operations-best-practices.md`）*
 
 ---
 
@@ -435,7 +435,7 @@ title_en: Performance Tuning Expert
 authors:
 - name: KUDIG ...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/performance-tuning-expert.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/performance-tuning-expert.md`）*
 
 ---
 
@@ -473,7 +473,7 @@ title_en: Production Troubleshooting Playbook
 authors:
 - name: KUDIG ...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/production-troubleshooting-playbook.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/production-troubleshooting-playbook.md`）*
 
 ---
 
@@ -512,7 +512,7 @@ authors:
   role: contributor
 k8s_vers...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/sli-slo-sla-engineering.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/sli-slo-sla-engineering.md`）*
 
 ---
 
@@ -552,7 +552,7 @@ k8s_versions:
 - '1.28'
 - '1.29'...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/sre-maturity-model.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/sre-maturity-model.md`）*
 
 ---
 
@@ -560,7 +560,7 @@ k8s_versions:
 
 虽然 Kubernetes 最初为无状态应用设计，但近年来**有状态工作负载（Stateful Workloads）** 在 K8s 上的运行已日趋成熟。数据库（MySQL、PostgreSQL、MongoDB）、消息队列（Kafka、RabbitMQ）、缓存（Redis）和搜索引擎（Elasticsearch）等关键基础设施组件，越来越多地通过 **StatefulSet** 和 **Operator** 模式部署在 Kubernetes 中。2026 年的最佳实践要求 SRE 掌握有状态服务的高可用、备份恢复、存储性能和滚动升级策略。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/stateful-services-operations.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/stateful-services-operations.md`）*
 
 ---
 
@@ -568,7 +568,7 @@ k8s_versions:
 
 Kubernetes 可以配置为在节点上使用 swap（交换）内存，允许内核将不活跃的内存页换出到后备存储，从而释放物理内存。这对具有大内存占用但只在特定时间访问部分内存的工作负载非常有用，也有助于防止 Pod 在内存压力峰值期间被终止，并提高节点内存管理的灵活性。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/operations/swap-memory-management.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/operations/swap-memory-management.md`）*
 
 ---
 
@@ -579,26 +579,26 @@ Kubernetes 可以配置为在节点上使用 swap（交换）内存，允许内�
 
 ## 来源文件
 
-- `domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md`
-- `domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md`
-- `domain-17-system-foundation/topic-dictionary/operations/certificates.md`
-- `domain-17-system-foundation/topic-dictionary/operations/change-management-release.md`
-- `domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md`
-- `domain-17-system-foundation/topic-dictionary/operations/enterprise-ops-practices.md`
-- `domain-17-system-foundation/topic-dictionary/operations/failure-patterns-analysis.md`
-- `domain-17-system-foundation/topic-dictionary/operations/finops-and-cost-optimization.md`
-- `domain-17-system-foundation/topic-dictionary/operations/greenops-and-carbon-aware-computing.md`
-- `domain-17-system-foundation/topic-dictionary/operations/incident-management-runbooks.md`
-- `domain-17-system-foundation/topic-dictionary/operations/installing-addons.md`
-- `domain-17-system-foundation/topic-dictionary/operations/node-autoscaling.md`
-- `domain-17-system-foundation/topic-dictionary/operations/node-shutdowns.md`
-- `domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md`
-- `domain-17-system-foundation/topic-dictionary/operations/performance-tuning-expert.md`
-- `domain-17-system-foundation/topic-dictionary/operations/production-troubleshooting-playbook.md`
-- `domain-17-system-foundation/topic-dictionary/operations/sli-slo-sla-engineering.md`
-- `domain-17-system-foundation/topic-dictionary/operations/sre-maturity-model.md`
-- `domain-17-system-foundation/topic-dictionary/operations/stateful-services-operations.md`
-- `domain-17-system-foundation/topic-dictionary/operations/swap-memory-management.md`
+- `系统基础/topic-dictionary/operations/backup-disaster-recovery.md`
+- `系统基础/topic-dictionary/operations/capacity-planning-forecasting.md`
+- `系统基础/topic-dictionary/operations/certificates.md`
+- `系统基础/topic-dictionary/operations/change-management-release.md`
+- `系统基础/topic-dictionary/operations/chaos-engineering.md`
+- `系统基础/topic-dictionary/operations/enterprise-ops-practices.md`
+- `系统基础/topic-dictionary/operations/failure-patterns-analysis.md`
+- `系统基础/topic-dictionary/operations/finops-and-cost-optimization.md`
+- `系统基础/topic-dictionary/operations/greenops-and-carbon-aware-computing.md`
+- `系统基础/topic-dictionary/operations/incident-management-runbooks.md`
+- `系统基础/topic-dictionary/operations/installing-addons.md`
+- `系统基础/topic-dictionary/operations/node-autoscaling.md`
+- `系统基础/topic-dictionary/operations/node-shutdowns.md`
+- `系统基础/topic-dictionary/operations/operations-best-practices.md`
+- `系统基础/topic-dictionary/operations/performance-tuning-expert.md`
+- `系统基础/topic-dictionary/operations/production-troubleshooting-playbook.md`
+- `系统基础/topic-dictionary/operations/sli-slo-sla-engineering.md`
+- `系统基础/topic-dictionary/operations/sre-maturity-model.md`
+- `系统基础/topic-dictionary/operations/stateful-services-operations.md`
+- `系统基础/topic-dictionary/operations/swap-memory-management.md`
 
 ## Related
 

@@ -6,7 +6,7 @@ category: references
 tags:
 - k8s
 - architecture
-- domain-01-cluster-fundamentals
+- 集群基础
 - reference
 - etcd
 - apiserver
@@ -47,7 +47,7 @@ prerequisites:
 
 ## Source
 
-Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1.33).
+Distilled from 集群基础 (25 documents, Kubernetes v1.29-v1.33).
 
 ## Layered Architecture
 
@@ -101,6 +101,6 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
+- [[平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
 
 <!-- risk-assessed -->

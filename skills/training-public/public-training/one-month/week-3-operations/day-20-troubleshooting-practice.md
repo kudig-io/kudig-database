@@ -64,12 +64,12 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
 
 # Day 20: 故障排查实战
@@ -91,16 +91,16 @@ related_topics:
 ### 必读文档
 
 1. **Pod 综合排障**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md`
+   - 文件: `../../故障诊断/08-pod-comprehensive-troubleshooting.md`
 
 2. **[[Service|Service]] 综合排障**
-   - 文件: `../../[[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
+   - 文件: `../../[[故障诊断/01-resource-troubleshooting/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
 
 3. **网络 CNI 排障**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/03-networking-cni-troubleshooting.md`
+   - 文件: `../../故障诊断/03-networking-cni-troubleshooting.md`
 
 4. **OOM 诊断**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md`
+   - 文件: `../../故障诊断/07-oom-memory-diagnosis.md`
 
 ---
 

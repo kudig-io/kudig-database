@@ -1,0 +1,504 @@
+domain: 可靠性
+total_questions: 103
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 16-企业级备份策略 中, Related 是什么?
+  answer: 参见 可靠性/01-backup-recovery/16-enterprise-backup-strategy.md 的「Related」章节。
+  source: 可靠性/01-backup-recovery/16-enterprise-backup-strategy.md
+  section: Related
+- type: concept
+  question: 在 16-企业级备份策略 中, See Also 是什么?
+  answer: 参见 可靠性/01-backup-recovery/16-enterprise-backup-strategy.md 的「See Also」章节。
+  source: 可靠性/01-backup-recovery/16-enterprise-backup-strategy.md
+  section: See Also
+- type: concept
+  question: 在 VMware vSphere 企业级灾备与业务连续性 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md
+  section: See Also
+- type: operation
+  question: '如何执行与 VMware vSphere 企业级灾备与业务连续性 相关的操作: echo "=== 配置网络 ==="?'
+  answer: 参见 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md 中的操作步骤。
+  source: 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md
+  command: echo "=== 配置网络 ==="
+- type: comparison
+  question: VMware vSphere 企业级灾备与业务连续性 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/01-vmware-vsphere-enterprise-dr.md
+- type: concept
+  question: 在 Veeam Backup & Replication 企业级备份恢复解决方案 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/02-veeam-enterprise-backup.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/02-veeam-enterprise-backup.md
+  section: See Also
+- type: concept
+  question: 在 企业级容灾架构与混沌工程深度实践 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/03-enterprise-disaster-recovery-chaos-engineering.md 的「See
+    Also」章节。
+  source: 可靠性/02-disaster-recovery/03-enterprise-disaster-recovery-chaos-engineering.md
+  section: See Also
+- type: comparison
+  question: 企业级容灾架构与混沌工程深度实践 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/03-enterprise-disaster-recovery-chaos-engineering.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/03-enterprise-disaster-recovery-chaos-engineering.md
+- type: concept
+  question: 在 Commvault 企业级灾备与业务连续性深度实践 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/05-commvault-enterprise-disaster-recovery.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/05-commvault-enterprise-disaster-recovery.md
+  section: See Also
+- type: concept
+  question: 在 Rubrik 企业级灾备与业务连续性深度实践 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/06-rubrik-enterprise-disaster-recovery.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/06-rubrik-enterprise-disaster-recovery.md
+  section: See Also
+- type: comparison
+  question: Rubrik 企业级灾备与业务连续性深度实践 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/06-rubrik-enterprise-disaster-recovery.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/06-rubrik-enterprise-disaster-recovery.md
+- type: concept
+  question: 在 Kubernetes 备份与恢复深度实践 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/07-kubernetes-backup-restore-deep-dive.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/07-kubernetes-backup-restore-deep-dive.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Kubernetes 备份与恢复深度实践 相关的操作: set -euo pipefail?'
+  answer: 参见 可靠性/02-disaster-recovery/07-kubernetes-backup-restore-deep-dive.md 中的操作步骤。
+  source: 可靠性/02-disaster-recovery/07-kubernetes-backup-restore-deep-dive.md
+  command: set -euo pipefail
+- type: concept
+  question: 在 混沌工程平台实践：LitmusChaos 与 Chaos Mesh 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md
+  section: See Also
+- type: operation
+  question: '如何执行与 混沌工程平台实践：LitmusChaos 与 Chaos Mesh 相关的操作: helm repo add chaos-mesh https://charts.chaos-mesh.org?'
+  answer: 参见 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md 中的操作步骤。
+  source: 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md
+  command: helm repo add chaos-mesh https://charts.chaos-mesh.org
+- type: best_practice
+  question: 关于 混沌工程平台实践：LitmusChaos 与 Chaos Mesh, 有什么最佳实践?
+  answer: 如果团队主要使用 Kubernetes 且关注深度混沌实验（IO 故障、时钟偏移等），选择 Chaos Mesh；如果需要企业级韧性管理平台，包含多集群管理、预定义实验库和 SRE 工作流集成，选择 LitmusChaos。
+  source: 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md
+- type: comparison
+  question: 混沌工程平台实践：LitmusChaos 与 Chaos Mesh 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/08-chaos-engineering-platforms.md
+- type: concept
+  question: 在 应用级灾备架构：多区域部署与故障转移 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/09-application-level-disaster-recovery.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/09-application-level-disaster-recovery.md
+  section: See Also
+- type: comparison
+  question: 应用级灾备架构：多区域部署与故障转移 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/09-application-level-disaster-recovery.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/09-application-level-disaster-recovery.md
+- type: concept
+  question: 在 17-灾难恢复演练 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/17-disaster-recovery-drills.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/17-disaster-recovery-drills.md
+  section: See Also
+- type: concept
+  question: 在 18-跨区域容灾部署 中, Related 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md 的「Related」章节。
+  source: 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md
+  section: Related
+- type: concept
+  question: 在 18-跨区域容灾部署 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md
+  section: See Also
+- type: comparison
+  question: 18-跨区域容灾部署 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/18-cross-region-disaster-recovery.md
+- type: concept
+  question: 在 Velero 企业级备份恢复实践指南 中, See Also 是什么?
+  answer: 参见 可靠性/02-disaster-recovery/99-velero-backup-recovery-guide.md 的「See Also」章节。
+  source: 可靠性/02-disaster-recovery/99-velero-backup-recovery-guide.md
+  section: See Also
+- type: comparison
+  question: Velero 企业级备份恢复实践指南 中有哪些技术对比?
+  answer: 参见 可靠性/02-disaster-recovery/99-velero-backup-recovery-guide.md 中的对比分析。
+  source: 可靠性/02-disaster-recovery/99-velero-backup-recovery-guide.md
+- type: concept
+  question: 在 24. 容量规划与预测 (Capacity Planning & Forecasting) 中, See Also 是什么?
+  answer: 参见 可靠性/03-capacity-planning/24-capacity-planning-forecasting.md 的「See Also」章节。
+  source: 可靠性/03-capacity-planning/24-capacity-planning-forecasting.md
+  section: See Also
+- type: operation
+  question: '如何执行与 24. 容量规划与预测 (Capacity Planning & Forecasting) 相关的操作: 1 Core = 1000 milli cores (m)?'
+  answer: 参见 可靠性/03-capacity-planning/24-capacity-planning-forecasting.md 中的操作步骤。
+  source: 可靠性/03-capacity-planning/24-capacity-planning-forecasting.md
+  command: 1 Core = 1000 milli cores (m)
+- type: concept
+  question: 在 SLI 定义与选择方法论 中, 什么是 SLI 是什么?
+  answer: 参见 可靠性/04-slo-sli/01-sli-definition-selection.md 的「什么是 SLI」章节。
+  source: 可靠性/04-slo-sli/01-sli-definition-selection.md
+  section: 什么是 SLI
+- type: concept
+  question: 在 SLI 定义与选择方法论 中, 四大黄金信号 (Four Golden Signals) 是什么?
+  answer: 参见 可靠性/04-slo-sli/01-sli-definition-selection.md 的「四大黄金信号 (Four Golden Signals)」章节。
+  source: 可靠性/04-slo-sli/01-sli-definition-selection.md
+  section: 四大黄金信号 (Four Golden Signals)
+- type: comparison
+  question: SLI 定义与选择方法论 中有哪些技术对比?
+  answer: 参见 可靠性/04-slo-sli/01-sli-definition-selection.md 中的对比分析。
+  source: 可靠性/04-slo-sli/01-sli-definition-selection.md
+- type: concept
+  question: 在 SLO 设定与实施指南 中, SLO 基础概念 是什么?
+  answer: 参见 可靠性/04-slo-sli/02-slo-implementation-guide.md 的「SLO 基础概念」章节。
+  source: 可靠性/04-slo-sli/02-slo-implementation-guide.md
+  section: SLO 基础概念
+- type: concept
+  question: 在 SLO 设定与实施指南 中, 可用性等级对照表 是什么?
+  answer: 参见 可靠性/04-slo-sli/02-slo-implementation-guide.md 的「可用性等级对照表」章节。
+  source: 可靠性/04-slo-sli/02-slo-implementation-guide.md
+  section: 可用性等级对照表
+- type: best_practice
+  question: 关于 SLO 设定与实施指南, 有什么最佳实践?
+  answer: '保守: 99.85%（基于历史平均）'
+  source: 可靠性/04-slo-sli/02-slo-implementation-guide.md
+- type: comparison
+  question: SLO 设定与实施指南 中有哪些技术对比?
+  answer: 参见 可靠性/04-slo-sli/02-slo-implementation-guide.md 中的对比分析。
+  source: 可靠性/04-slo-sli/02-slo-implementation-guide.md
+- type: concept
+  question: 在 错误预算管理 中, 错误预算基础 是什么?
+  answer: 参见 可靠性/04-slo-sli/03-error-budget-management.md 的「错误预算基础」章节。
+  source: 可靠性/04-slo-sli/03-error-budget-management.md
+  section: 错误预算基础
+- type: concept
+  question: 在 错误预算管理 中, 错误预算计算 是什么?
+  answer: 参见 可靠性/04-slo-sli/03-error-budget-management.md 的「错误预算计算」章节。
+  source: 可靠性/04-slo-sli/03-error-budget-management.md
+  section: 错误预算计算
+- type: comparison
+  question: 错误预算管理 中有哪些技术对比?
+  answer: 参见 可靠性/04-slo-sli/03-error-budget-management.md 中的对比分析。
+  source: 可靠性/04-slo-sli/03-error-budget-management.md
+- type: concept
+  question: 在 Burn Rate 告警与预算消耗监控 中, Burn Rate 基础 是什么?
+  answer: 参见 可靠性/04-slo-sli/04-burn-rate-alerting.md 的「Burn Rate 基础」章节。
+  source: 可靠性/04-slo-sli/04-burn-rate-alerting.md
+  section: Burn Rate 基础
+- type: concept
+  question: 在 Burn Rate 告警与预算消耗监控 中, 多级告警配置 是什么?
+  answer: 参见 可靠性/04-slo-sli/04-burn-rate-alerting.md 的「多级告警配置」章节。
+  source: 可靠性/04-slo-sli/04-burn-rate-alerting.md
+  section: 多级告警配置
+- type: concept
+  question: 在 Burn Rate 告警与预算消耗监控 中, PromQL 告警规则 是什么?
+  answer: 参见 可靠性/04-slo-sli/04-burn-rate-alerting.md 的「PromQL 告警规则」章节。
+  source: 可靠性/04-slo-sli/04-burn-rate-alerting.md
+  section: PromQL 告警规则
+- type: concept
+  question: 在 Burn Rate 告警与预算消耗监控 中, 相关 是什么?
+  answer: 参见 可靠性/04-slo-sli/04-burn-rate-alerting.md 的「相关」章节。
+  source: 可靠性/04-slo-sli/04-burn-rate-alerting.md
+  section: 相关
+- type: concept
+  question: 在 混沌工程概述与原则 中, 五大原则 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/01-chaos-engineering-overview.md 的「五大原则」章节。
+  source: 可靠性/05-chaos-engineering/01-chaos-engineering-overview.md
+  section: 五大原则
+- type: concept
+  question: 在 Chaos Mesh 企业级部署 中, 架构组件 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 的「架构组件」章节。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  section: 架构组件
+- type: concept
+  question: 在 Chaos Mesh 企业级部署 中, Helm 安装 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 的「Helm 安装」章节。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  section: Helm 安装
+- type: concept
+  question: 在 Chaos Mesh 企业级部署 中, 安全加固 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 的「安全加固」章节。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  section: 安全加固
+- type: concept
+  question: 在 Chaos Mesh 企业级部署 中, 实验类型清单 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 的「实验类型清单」章节。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  section: 实验类型清单
+- type: concept
+  question: 在 Chaos Mesh 企业级部署 中, 相关 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 的「相关」章节。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  section: 相关
+- type: operation
+  question: '如何执行与 Chaos Mesh 企业级部署 相关的操作: helm repo add chaos-mesh https://charts.chaos-mesh.org?'
+  answer: 参见 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md 中的操作步骤。
+  source: 可靠性/05-chaos-engineering/02-chaos-mesh-deployment.md
+  command: helm repo add chaos-mesh https://charts.chaos-mesh.org
+- type: concept
+  question: 在 混沌实验设计与执行 中, 实验设计流程 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/03-chaos-experiment-design.md 的「实验设计流程」章节。
+  source: 可靠性/05-chaos-engineering/03-chaos-experiment-design.md
+  section: 实验设计流程
+- type: concept
+  question: 在 混沌实验设计与执行 中, 类经典实验模板 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/03-chaos-experiment-design.md 的「类经典实验模板」章节。
+  source: 可靠性/05-chaos-engineering/03-chaos-experiment-design.md
+  section: 类经典实验模板
+- type: concept
+  question: 在 Litmus 混沌工程实践 中, Litmus vs Chaos Mesh 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 的「Litmus vs Chaos Mesh」章节。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  section: Litmus vs Chaos Mesh
+- type: concept
+  question: 在 Litmus 混沌工程实践 中, 核心概念 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 的「核心概念」章节。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  section: 核心概念
+- type: concept
+  question: 在 Litmus 混沌工程实践 中, 安装 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 的「安装」章节。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  section: 安装
+- type: concept
+  question: 在 Litmus 混沌工程实践 中, 实验示例 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 的「实验示例」章节。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  section: 实验示例
+- type: concept
+  question: 在 Litmus 混沌工程实践 中, GitOps 集成 是什么?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 的「GitOps 集成」章节。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  section: GitOps 集成
+- type: operation
+  question: '如何执行与 Litmus 混沌工程实践 相关的操作: kubectl apply -f https://litmuschaos.github.io/litmus/3.12.0?'
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 中的操作步骤。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+  command: kubectl apply -f https://litmuschaos.github.io/litmus/3.12.0/litmus-3.12.0.yaml
+- type: comparison
+  question: Litmus 混沌工程实践 中有哪些技术对比?
+  answer: 参见 可靠性/05-chaos-engineering/04-litmus-practices.md 中的对比分析。
+  source: 可靠性/05-chaos-engineering/04-litmus-practices.md
+- type: concept
+  question: 在 无责事后复盘模板 中, 模板结构 是什么?
+  answer: 参见 可靠性/06-postmortem/01-blameless-postmortem-template.md 的「模板结构」章节。
+  source: 可靠性/06-postmortem/01-blameless-postmortem-template.md
+  section: 模板结构
+- type: concept
+  question: 在 无责事后复盘模板 中, 元信息 是什么?
+  answer: 参见 可靠性/06-postmortem/01-blameless-postmortem-template.md 的「元信息」章节。
+  source: 可靠性/06-postmortem/01-blameless-postmortem-template.md
+  section: 元信息
+- type: concept
+  question: 在 无责事后复盘模板 中, 摘要 (Executive Summary) 是什么?
+  answer: 参见 可靠性/06-postmortem/01-blameless-postmortem-template.md 的「摘要 (Executive Summary)」章节。
+  source: 可靠性/06-postmortem/01-blameless-postmortem-template.md
+  section: 摘要 (Executive Summary)
+- type: concept
+  question: 在 无责事后复盘模板 中, 事件时间线 (Timeline) 是什么?
+  answer: 参见 可靠性/06-postmortem/01-blameless-postmortem-template.md 的「事件时间线 (Timeline)」章节。
+  source: 可靠性/06-postmortem/01-blameless-postmortem-template.md
+  section: 事件时间线 (Timeline)
+- type: concept
+  question: 在 无责事后复盘模板 中, 影响评估 (Impact Assessment) 是什么?
+  answer: 参见 可靠性/06-postmortem/01-blameless-postmortem-template.md 的「影响评估 (Impact Assessment)」章节。
+  source: 可靠性/06-postmortem/01-blameless-postmortem-template.md
+  section: 影响评估 (Impact Assessment)
+- type: concept
+  question: 在 事后复盘文化建立指南 中, 为什么需要无责文化 是什么?
+  answer: 参见 可靠性/06-postmortem/02-postmortem-culture-guide.md 的「为什么需要无责文化」章节。
+  source: 可靠性/06-postmortem/02-postmortem-culture-guide.md
+  section: 为什么需要无责文化
+- type: concept
+  question: 在 事后复盘文化建立指南 中, 实施步骤 是什么?
+  answer: 参见 可靠性/06-postmortem/02-postmortem-culture-guide.md 的「实施步骤」章节。
+  source: 可靠性/06-postmortem/02-postmortem-culture-guide.md
+  section: 实施步骤
+- type: concept
+  question: 在 可用性计算模型 中, 基本公式 是什么?
+  answer: 参见 可靠性/07-sre-practices/01-availability-calculation-model.md 的「基本公式」章节。
+  source: 可靠性/07-sre-practices/01-availability-calculation-model.md
+  section: 基本公式
+- type: concept
+  question: 在 可用性计算模型 中, 多服务综合可用性 是什么?
+  answer: 参见 可靠性/07-sre-practices/01-availability-calculation-model.md 的「多服务综合可用性」章节。
+  source: 可靠性/07-sre-practices/01-availability-calculation-model.md
+  section: 多服务综合可用性
+- type: concept
+  question: 在 基于 SLO 的发布门控 中, 发布决策矩阵 是什么?
+  answer: 参见 可靠性/07-sre-practices/02-release-gate-slo-based.md 的「发布决策矩阵」章节。
+  source: 可靠性/07-sre-practices/02-release-gate-slo-based.md
+  section: 发布决策矩阵
+- type: concept
+  question: 在 基于 SLO 的发布门控 中, CI/CD 集成 是什么?
+  answer: 参见 可靠性/07-sre-practices/02-release-gate-slo-based.md 的「CI/CD 集成」章节。
+  source: 可靠性/07-sre-practices/02-release-gate-slo-based.md
+  section: CI/CD 集成
+- type: concept
+  question: 在 基于 SLO 的发布门控 中, 自动化发布策略 是什么?
+  answer: 参见 可靠性/07-sre-practices/02-release-gate-slo-based.md 的「自动化发布策略」章节。
+  source: 可靠性/07-sre-practices/02-release-gate-slo-based.md
+  section: 自动化发布策略
+- type: concept
+  question: 在 基于 SLO 的发布门控 中, 相关 是什么?
+  answer: 参见 可靠性/07-sre-practices/02-release-gate-slo-based.md 的「相关」章节。
+  source: 可靠性/07-sre-practices/02-release-gate-slo-based.md
+  section: 相关
+- type: concept
+  question: 在 事故指挥系统 中, ICS 核心角色 是什么?
+  answer: 参见 可靠性/07-sre-practices/03-incident-command-system.md 的「ICS 核心角色」章节。
+  source: 可靠性/07-sre-practices/03-incident-command-system.md
+  section: ICS 核心角色
+- type: concept
+  question: 在 事故指挥系统 中, 事故严重级别 是什么?
+  answer: 参见 可靠性/07-sre-practices/03-incident-command-system.md 的「事故严重级别」章节。
+  source: 可靠性/07-sre-practices/03-incident-command-system.md
+  section: 事故严重级别
+- type: concept
+  question: 在 事故指挥系统 中, 通信模板 是什么?
+  answer: 参见 可靠性/07-sre-practices/03-incident-command-system.md 的「通信模板」章节。
+  source: 可靠性/07-sre-practices/03-incident-command-system.md
+  section: 通信模板
+- type: concept
+  question: 在 事故指挥系统 中, 相关 是什么?
+  answer: 参见 可靠性/07-sre-practices/03-incident-command-system.md 的「相关」章节。
+  source: 可靠性/07-sre-practices/03-incident-command-system.md
+  section: 相关
+- type: concept
+  question: 在 Toil 削减与自动化 中, 什么是 Toil 是什么?
+  answer: 参见 可靠性/07-sre-practices/04-toil-reduction-automation.md 的「什么是 Toil」章节。
+  source: 可靠性/07-sre-practices/04-toil-reduction-automation.md
+  section: 什么是 Toil
+- type: concept
+  question: 在 Toil 削减与自动化 中, Toil 度量 是什么?
+  answer: 参见 可靠性/07-sre-practices/04-toil-reduction-automation.md 的「Toil 度量」章节。
+  source: 可靠性/07-sre-practices/04-toil-reduction-automation.md
+  section: Toil 度量
+- type: concept
+  question: 在 Toil 削减与自动化 中, 自动化优先级矩阵 是什么?
+  answer: 参见 可靠性/07-sre-practices/04-toil-reduction-automation.md 的「自动化优先级矩阵」章节。
+  source: 可靠性/07-sre-practices/04-toil-reduction-automation.md
+  section: 自动化优先级矩阵
+- type: concept
+  question: 在 Toil 削减与自动化 中, 自动化策略 是什么?
+  answer: 参见 可靠性/07-sre-practices/04-toil-reduction-automation.md 的「自动化策略」章节。
+  source: 可靠性/07-sre-practices/04-toil-reduction-automation.md
+  section: 自动化策略
+- type: concept
+  question: 在 Toil 削减与自动化 中, 相关 是什么?
+  answer: 参见 可靠性/07-sre-practices/04-toil-reduction-automation.md 的「相关」章节。
+  source: 可靠性/07-sre-practices/04-toil-reduction-automation.md
+  section: 相关
+- type: concept
+  question: 在 负载测试方法论 中, 四种测试类型 是什么?
+  answer: 参见 可靠性/08-performance-testing/01-load-testing-methodology.md 的「四种测试类型」章节。
+  source: 可靠性/08-performance-testing/01-load-testing-methodology.md
+  section: 四种测试类型
+- type: concept
+  question: 在 负载测试方法论 中, K8s 环境工具链 是什么?
+  answer: 参见 可靠性/08-performance-testing/01-load-testing-methodology.md 的「K8s 环境工具链」章节。
+  source: 可靠性/08-performance-testing/01-load-testing-methodology.md
+  section: K8s 环境工具链
+- type: concept
+  question: 在 负载测试方法论 中, k6 示例 是什么?
+  answer: 参见 可靠性/08-performance-testing/01-load-testing-methodology.md 的「k6 示例」章节。
+  source: 可靠性/08-performance-testing/01-load-testing-methodology.md
+  section: k6 示例
+- type: concept
+  question: 在 负载测试方法论 中, 相关 是什么?
+  answer: 参见 可靠性/08-performance-testing/01-load-testing-methodology.md 的「相关」章节。
+  source: 可靠性/08-performance-testing/01-load-testing-methodology.md
+  section: 相关
+- type: concept
+  question: 在 混沌测试与负载测试集成 中, GameDay 概念 是什么?
+  answer: 参见 可靠性/08-performance-testing/02-chaos-load-integration.md 的「GameDay 概念」章节。
+  source: 可靠性/08-performance-testing/02-chaos-load-integration.md
+  section: GameDay 概念
+- type: concept
+  question: 在 混沌测试与负载测试集成 中, GameDay 流程 是什么?
+  answer: 参见 可靠性/08-performance-testing/02-chaos-load-integration.md 的「GameDay 流程」章节。
+  source: 可靠性/08-performance-testing/02-chaos-load-integration.md
+  section: GameDay 流程
+- type: concept
+  question: 在 混沌测试与负载测试集成 中, 集成架构 是什么?
+  answer: 参见 可靠性/08-performance-testing/02-chaos-load-integration.md 的「集成架构」章节。
+  source: 可靠性/08-performance-testing/02-chaos-load-integration.md
+  section: 集成架构
+- type: concept
+  question: 在 混沌测试与负载测试集成 中, 相关 是什么?
+  answer: 参见 可靠性/08-performance-testing/02-chaos-load-integration.md 的「相关」章节。
+  source: 可靠性/08-performance-testing/02-chaos-load-integration.md
+  section: 相关
+- type: concept
+  question: 在 灾备场景目录 中, 场景分类 是什么?
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md 的「场景分类」章节。
+  source: 可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md
+  section: 场景分类
+- type: concept
+  question: 在 灾备场景目录 中, 相关 是什么?
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md 的「相关」章节。
+  source: 可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md
+  section: 相关
+- type: concept
+  question: 在 可用区故障恢复手册 中, 触发条件 是什么?
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md 的「触发条件」章节。
+  source: 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md
+  section: 触发条件
+- type: concept
+  question: 在 可用区故障恢复手册 中, 恢复流程 是什么?
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md 的「恢复流程」章节。
+  source: 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md
+  section: 恢复流程
+- type: operation
+  question: '如何执行与 可用区故障恢复手册 相关的操作: kubectl get nodes -L topology.kubernetes.io/zone?'
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md 中的操作步骤。
+  source: 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md
+  command: kubectl get nodes -L topology.kubernetes.io/zone
+- type: operation
+  question: '如何执行与 可用区故障恢复手册 相关的操作: aws elbv2 modify-target-group \?'
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md 中的操作步骤。
+  source: 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md
+  command: aws elbv2 modify-target-group \
+- type: operation
+  question: '如何执行与 可用区故障恢复手册 相关的操作: kubectl scale deployment/order-service --replicas=30 -n prod?'
+  answer: 参见 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md 中的操作步骤。
+  source: 可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md
+  command: kubectl scale deployment/order-service --replicas=30 -n production
+- type: comparison
+  question: Domain-30 灾备与业务连续性 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 可靠性/98-merged-indexes/00-open-source-projects-index-from-domain-30.md 中的对比分析。
+  source: 可靠性/98-merged-indexes/00-open-source-projects-index-from-domain-30.md
+- type: concept
+  question: 在 domain-30-disaster-recovery-business-continuity MOC 中, 领域概述 是什么?
+  answer: 参见 可靠性/98-merged-indexes/MOC-from-domain-30.md 的「领域概述」章节。
+  source: 可靠性/98-merged-indexes/MOC-from-domain-30.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-30-disaster-recovery-business-continuity MOC 中, 文档清单 是什么?
+  answer: 参见 可靠性/98-merged-indexes/MOC-from-domain-30.md 的「文档清单」章节。
+  source: 可靠性/98-merged-indexes/MOC-from-domain-30.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-30-disaster-recovery-business-continuity MOC 中, 知识图谱 是什么?
+  answer: 参见 可靠性/98-merged-indexes/MOC-from-domain-30.md 的「知识图谱」章节。
+  source: 可靠性/98-merged-indexes/MOC-from-domain-30.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-30-disaster-recovery-business-continuity MOC 中, 关联入口 是什么?
+  answer: 参见 可靠性/98-merged-indexes/MOC-from-domain-30.md 的「关联入口」章节。
+  source: 可靠性/98-merged-indexes/MOC-from-domain-30.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-30-disaster-recovery-business-continuity MOC 相关的故障?
+  answer: 参见 可靠性/98-merged-indexes/MOC-from-domain-30.md 的故障排查章节。
+  source: 可靠性/98-merged-indexes/MOC-from-domain-30.md
+- type: concept
+  question: '在 Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) 中, 概述 是什么?'
+  answer: 参见 可靠性/98-merged-indexes/README-from-domain-30.md 的「概述」章节。
+  source: 可靠性/98-merged-indexes/README-from-domain-30.md
+  section: 概述
+- type: concept
+  question: '在 Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) 中, DR 策略总览 是什么?'
+  answer: 参见 可靠性/98-merged-indexes/README-from-domain-30.md 的「DR 策略总览」章节。
+  source: 可靠性/98-merged-indexes/README-from-domain-30.md
+  section: DR 策略总览
+- type: comparison
+  question: 'Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) 中有哪些技术对比?'
+  answer: 参见 可靠性/98-merged-indexes/README-from-domain-30.md 中的对比分析。
+  source: 可靠性/98-merged-indexes/README-from-domain-30.md

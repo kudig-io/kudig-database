@@ -9,8 +9,8 @@ Covers:
 import os
 from pathlib import Path
 
-BASE_K8S = Path(__file__).resolve().parent.parent / "domain-17-system-foundation" / "topic-dictionary"
-BASE_FTA = Path(__file__).resolve().parent.parent / "domain-10-troubleshooting-diagnostics" / "topic-fta" / "glossary"
+BASE_K8S = Path(__file__).resolve().parent.parent / "系统基础" / "topic-dictionary"
+BASE_FTA = Path(__file__).resolve().parent.parent / "故障诊断" / "topic-fta" / "glossary"
 
 TERMS = []
 
@@ -171,7 +171,7 @@ t("probe", "探针", "Probe", "configuration",
 - 探针检查路径应反映应用的真实健康状态，避免过于简单的检查（如仅检查端口开放）。
 - 合理设置探测间隔和阈值，平衡检测灵敏度和资源开销。""",
   "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes",
-  "[[domain-17-system-foundation/topic-dictionary/configuration/liveness-probe|Liveness Probe]] | [[domain-17-system-foundation/topic-dictionary/configuration/readiness-probe|Readiness Probe]]")
+  "[[系统基础/topic-dictionary/configuration/liveness-probe|Liveness Probe]] | [[系统基础/topic-dictionary/configuration/readiness-probe|Readiness Probe]]")
 
 t("api-version", "API 版本", "API Version", "platform-engineering",
   ["k8s", "glossary", "api", "platform"], BASE_K8S,
@@ -518,7 +518,7 @@ PSP 可以控制：
 - 迁移步骤：1) 审计现有 PSP 规则 → 2) 映射到 PSS 级别 → 3) 在命名空间上应用 PSS 标签 → 4) 验证 → 5) 删除 PSP。
 - 新集群直接使用 Pod Security Admission。""",
   "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
-  "[[domain-17-system-foundation/topic-dictionary/security/pod-security-standards|Pod Security Standards]]")
+  "[[系统基础/topic-dictionary/security/pod-security-standards|Pod Security Standards]]")
 
 t("certificate-authority", "证书颁发机构", "Certificate Authority (CA)", "security",
   ["k8s", "glossary", "security", "certificate", "tls"], BASE_K8S,
@@ -1047,7 +1047,7 @@ created: "2026-06-24"
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary|FTA 术语表]]
+- [[故障诊断/topic-fta/appendix-a-glossary|FTA 术语表]]
 """
     filepath.write_text(content, encoding="utf-8")
     print(f"  CREATED: {filepath.relative_to(BASE_FTA.parent.parent.parent)}")

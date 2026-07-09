@@ -60,7 +60,7 @@ prerequisites:
 ### 评估报告
 - `reports/EVALUATION-2026-05-19.md`
 
-### Agent QA 对语料库 (`domain-10-troubleshooting-diagnostics/topic-qa-corpus/`)
+### Agent QA 对语料库 (`故障诊断/topic-qa-corpus/`)
 - 18 个 YAML 文件, 2,336 个 QA 对
 - 覆盖: 15 个核心 domain + FTA + Skills + 应用架构
 - 命令输出诊断语料: 23 个常见问题场景 (command → output → diagnosis → action)
@@ -118,7 +118,7 @@ python3 scripts/enhance-cross-refs.py
 ### generate-qa-corpus.py
 ```bash
 python3 scripts/generate-qa-corpus.py
-# 输出: domain-10-troubleshooting-diagnostics/topic-qa-corpus/ 目录
+# 输出: 故障诊断/topic-qa-corpus/ 目录
 ```
 
 

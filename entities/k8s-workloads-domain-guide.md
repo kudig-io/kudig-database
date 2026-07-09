@@ -6,7 +6,7 @@ category: references
 tags:
 - k8s
 - workloads
-- domain-02-workloads-applications
+- 工作负载
 - pod
 - deployment
 - statefulset
@@ -46,7 +46,7 @@ prerequisites:
 
 ## Source
 
-Distilled from domain-02-workloads-applications (24 documents, Kubernetes v1.28-v1.32).
+Distilled from 工作负载 (24 documents, Kubernetes v1.28-v1.32).
 
 ## Workload Controllers
 

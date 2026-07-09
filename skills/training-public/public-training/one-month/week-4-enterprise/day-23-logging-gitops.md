@@ -75,11 +75,11 @@ audience:
 estimated_read_time: 240min
 related_domains:
   - domain-21-logging-management-analytics
-  - domain-08-release-change-management
+  - 发布变更
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
 ---
 
 # Day 23: 企业日志 + GitOps
@@ -820,8 +820,8 @@ filebeat:
 - [GitOps 原则](https://opengitops.dev/)
 - [Kustomize 官方文档](https://kustomize.io/)
 - [ELK on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- [文件: `../../domain-06-observability/01-elk-stack-enterprise-logging.md`](../../domain-06-observability/01-elk-stack-enterprise-logging.md)
-- [文件: `../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md`](../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md)
+- [文件: `../../可观测性/01-elk-stack-enterprise-logging.md`](../../可观测性/01-elk-stack-enterprise-logging.md)
+- [文件: `../../发布变更/01-argo-cd-enterprise-gitops.md`](../../发布变更/01-argo-cd-enterprise-gitops.md)
 
 ```
 

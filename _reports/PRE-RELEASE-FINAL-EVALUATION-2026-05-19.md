@@ -110,7 +110,7 @@ prerequisites:
 
 - [ ] 无 LICENSE 文件 ← 发布必须补
 - [ ] 34个 .DS_Store 未清理
-- [ ] 1个 .xmind 二进制文件在 domain-03-networking-traffic 中
+- [ ] 1个 .xmind 二进制文件在 网络 中
 - [ ] 1个 PDF 在 topic-febm 中
 - [ ] 断链: 1个已知断链（topic-fta 内锚点链接）
 - [ ] site/ 目录不应入库（MkDocs 构建产物，已在 .gitignore）
@@ -192,7 +192,7 @@ prerequisites:
 
 | 项目 | 状态 | 详情 |
 |------|------|------|
-| 断链修复 | ✅ 已修复 | domain-03-networking-traffic/topic-terway/07-troubleshooting-fta.md 中的锚点断链已移除，检查 9 链接 0 断链 |
+| 断链修复 | ✅ 已修复 | 网络/topic-terway/07-troubleshooting-fta.md 中的锚点断链已移除，检查 9 链接 0 断链 |
 | mkdocs site_url | ✅ 已修复 | localhost:8000 → https://kudig-io.github.io/kudig-database |
 | .web-server.log/pid | ✅ 已清除 | 运行时残留文件已删除 |
 
@@ -200,8 +200,8 @@ prerequisites:
 
 | 项目 | 说明 |
 |------|------|
-| .xmind 文件 | domain-03-networking-traffic/01-network-architecture-overview-xmind.xmind (源文件，site/gitbook 中有副本) |
-| .pdf 文件 | domain-10-troubleshooting-diagnostics/topic-febm/FTA-vs-FEBM.pdf (源文件，site/gitbook 中有副本) |
+| .xmind 文件 | 网络/01-network-architecture-overview-xmind.xmind (源文件，site/gitbook 中有副本) |
+| .pdf 文件 | 故障诊断/topic-febm/FTA-vs-FEBM.pdf (源文件，site/gitbook 中有副本) |
 | topic-release-notes 占比 | 1322文件(~39%)，建议发布后独立子仓 |
 
 ### 发布就绪度: 7.0/10 → 8.5/10
@@ -210,32 +210,32 @@ prerequisites:
 
 | Domain | 文件数 | 行数 |
 |--------|--------|------|
-| domain-01-cluster-fundamentals | 34 | 26,118 |
-| domain-01-cluster-fundamentals | 21 | 14,262 |
-| domain-01-cluster-fundamentals | 38 | 46,469 |
-| domain-02-workloads-applications | 29 | 17,430 |
-| domain-03-networking-traffic | 48 | 37,103 |
-| domain-04-storage-data | 20 | 17,681 |
-| domain-05-security-compliance | 23 | 15,511 |
-| domain-06-observability | 34 | 25,559 |
-| domain-07-platform-engineering | 30 | 18,350 |
-| domain-15-specialized-tech | 21 | 19,492 |
+| 集群基础 | 34 | 26,118 |
+| 集群基础 | 21 | 14,262 |
+| 集群基础 | 38 | 46,469 |
+| 工作负载 | 29 | 17,430 |
+| 网络 | 48 | 37,103 |
+| 存储 | 20 | 17,681 |
+| 安全 | 23 | 15,511 |
+| 可观测性 | 34 | 25,559 |
+| 平台工程 | 30 | 18,350 |
+| 专项技术 | 21 | 19,492 |
 | domain-11-ai-infra | 40 | 44,101 |
-| domain-10-troubleshooting-diagnostics | 50 | 44,098 |
-| domain-13-container-runtime | 15 | 10,390 |
-| domain-17-system-foundation | 12 | 11,920 |
-| domain-03-networking-traffic | 9 | 6,317 |
-| domain-04-storage-data | 8 | 4,877 |
-| domain-12-cloud-providers | 25 | 15,124 |
-| domain-11-production-operations | 33 | 27,771 |
+| 故障诊断 | 50 | 44,098 |
+| 容器运行时 | 15 | 10,390 |
+| 系统基础 | 12 | 11,920 |
+| 网络 | 9 | 6,317 |
+| 存储 | 8 | 4,877 |
+| 云厂商 | 25 | 15,124 |
+| 生产运维 | 33 | 27,771 |
 | domain-19-papers | 28 | 33,935 |
 | domain-20-enterprise-monitoring-alerting | 14 | 12,767 |
 | domain-21-logging-management-analytics | 11 | 9,991 |
 | domain-22-container-image-management | 10 | 7,384 |
-| domain-08-release-change-management | 14 | 15,336 |
+| 发布变更 | 14 | 15,336 |
 | domain-24-infrastructure-as-code | 8 | 6,020 |
-| domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]] | 17 | 18,276 |
-| domain-03-networking-traffic | 15 | 15,976 |
+| domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]] | 17 | 18,276 |
+| 网络 | 15 | 15,976 |
 | domain-27-multi-cloud-hybrid | 12 | 15,164 |
 | domain-28-enterprise-database-middleware | 11 | 10,401 |
 | domain-29-automated-testing-quality | 7 | 5,654 |
@@ -243,12 +243,12 @@ prerequisites:
 | domain-31-hardware | 20 | 11,152 |
 | domain-32-yaml-manifests | 38 | 70,061 |
 | domain-33-kubernetes-events | 17 | 30,029 |
-| domain-19-landscape-references | 235 | 79,463 |
+| 生态参考 | 235 | 79,463 |
 | domain-35-ebpf-technology | 12 | 26,802 |
-| domain-07-platform-engineering | 14 | 21,564 |
+| 平台工程 | 14 | 21,564 |
 | domain-37-edge-computing | 13 | 22,155 |
 | domain-38-webassembly-cloud-native | 13 | 25,419 |
-| domain-05-security-compliance | 13 | 21,652 |
+| 安全 | 13 | 21,652 |
 | domain-40-cloud-native-api-gateway | 17 | 12,477 |
 
 

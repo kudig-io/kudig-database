@@ -452,9 +452,9 @@ audience:
   - ops-engineer
 estimated_read_time: 50min
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
-  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+  - 安全
+  - 故障诊断
+  - domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - security
   - rbac
@@ -462,9 +462,9 @@ related_topics:
   - pod-security
   - vulnerability
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-2-security-monitoring/day-08-rbac/01-rbac-hands-on.md
-  - domain-05-security-compliance/05-pod-security-standards.md
-  - domain-05-security-compliance/01-falco-cloud-native-security.md
+  - 生产运维/topic-learn/public-training/week-2-security-monitoring/day-08-rbac/01-rbac-hands-on.md
+  - 安全/05-pod-security-standards.md
+  - 安全/01-falco-cloud-native-security.md
 ---
 ```
 ```

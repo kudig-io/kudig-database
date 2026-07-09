@@ -41,10 +41,10 @@ prerequisites:
 - cni-basics
 cross_refs:
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 网络知识域
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 服务网格知识域
 - type: best-practice
   path: ./pod-security.md

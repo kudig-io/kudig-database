@@ -128,23 +128,23 @@ trigger_keywords:
 
 | Domain | 文件 |
 |:---|:---|
-| domain-01-cluster-fundamentals 架构基础 | `domain-01-cluster-fundamentals/00-open-source-projects-index.md` |
-| domain-15-specialized-tech 扩展 | `domain-15-specialized-tech/00-open-source-projects-index.md` |
-| domain-14-ai-ml-infra AI 基础设施 | `domain-14-ai-ml-infra/00-open-source-projects-index.md` |
-| domain-10-troubleshooting-diagnostics 故障排查 | `domain-10-troubleshooting-diagnostics/00-open-source-projects-index.md` |
-| domain-13-container-runtime Docker | `domain-13-container-runtime/00-open-source-projects-index.md` |
-| domain-03-networking-traffic 网络基础 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
-| domain-04-storage-data 存储基础 | `domain-04-storage-data/00-open-source-projects-index.md` |
-| domain-12-cloud-providers 云厂商 | `domain-12-cloud-providers/00-open-source-projects-index.md` |
-| domain-11-production-operations 生产运维 | `domain-11-production-operations/00-open-source-projects-index.md` |
-| domain-06-observability 监控告警 | `domain-06-observability/00-open-source-projects-index.md` |
-| domain-06-observability 日志管理 | `domain-06-observability/00-open-source-projects-index.md` |
-| domain-03-networking-traffic 镜像管理 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
-| domain-08-release-change-management GitOps CI/CD | `domain-08-release-change-management/00-open-source-projects-index.md` |
-| domain-08-release-change-management IaC | `domain-08-release-change-management/00-open-source-projects-index.md` |
-| domain-05-security-compliance 云原生安全 | `domain-05-security-compliance/00-open-source-projects-index.md` |
-| domain-03-networking-traffic 服务网格 | `domain-03-networking-traffic/00-open-source-projects-index.md` |
-| domain-12-cloud-providers 多云混合 | `domain-12-cloud-providers/00-open-source-projects-index.md` |
+| 集群基础 架构基础 | `集群基础/00-open-source-projects-index.md` |
+| 专项技术 扩展 | `专项技术/00-open-source-projects-index.md` |
+| AI基础设施 AI 基础设施 | `AI基础设施/00-open-source-projects-index.md` |
+| 故障诊断 故障排查 | `故障诊断/00-open-source-projects-index.md` |
+| 容器运行时 Docker | `容器运行时/00-open-source-projects-index.md` |
+| 网络 网络基础 | `网络/00-open-source-projects-index.md` |
+| 存储 存储基础 | `存储/00-open-source-projects-index.md` |
+| 云厂商 云厂商 | `云厂商/00-open-source-projects-index.md` |
+| 生产运维 生产运维 | `生产运维/00-open-source-projects-index.md` |
+| 可观测性 监控告警 | `可观测性/00-open-source-projects-index.md` |
+| 可观测性 日志管理 | `可观测性/00-open-source-projects-index.md` |
+| 网络 镜像管理 | `网络/00-open-source-projects-index.md` |
+| 发布变更 GitOps CI/CD | `发布变更/00-open-source-projects-index.md` |
+| 发布变更 IaC | `发布变更/00-open-source-projects-index.md` |
+| 安全 云原生安全 | `安全/00-open-source-projects-index.md` |
+| 网络 服务网格 | `网络/00-open-source-projects-index.md` |
+| 云厂商 多云混合 | `云厂商/00-open-source-projects-index.md` |
 
 
 <!-- risk-assessed -->

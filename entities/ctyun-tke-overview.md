@@ -1491,11 +1491,11 @@ echo "风险评估报告已生成: telecom-upgrade-risk-assessment.md"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

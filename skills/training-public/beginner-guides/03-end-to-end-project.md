@@ -1180,7 +1180,7 @@ kind delete cluster --name k8s-lab
 - [[02-local-lab-environment]] — 本地实验环境搭建
 - [[04-cka-exam-prep-guide]] — 备考 CKA 时，本项目是很好的练习素材
 - ../fundamentals/03-deployment-basics.md — Deployment 基础概念
-- ../../domain-08-release-change-management/01-gitops/ — GitOps 深度解析
+- ../../发布变更/01-gitops/ — GitOps 深度解析
 
 
 <!-- risk-assessed -->

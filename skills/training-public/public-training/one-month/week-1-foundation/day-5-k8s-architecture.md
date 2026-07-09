@@ -81,15 +81,15 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - kubernetes
   - architecture
   - kubectl
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md
-  - domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md
+  - 集群基础/01-kubernetes-architecture-overview.md
 ---
 
 ```
@@ -491,14 +491,14 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 
 ## 延伸阅读
 
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
-- [K8s 速查手册](../../domain-17-system-foundation/topic-cheat-sheet/k8s.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [核心组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
+- [K8s 速查手册](../../系统基础/topic-cheat-sheet/k8s.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

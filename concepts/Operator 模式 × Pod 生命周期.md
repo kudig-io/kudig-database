@@ -45,7 +45,7 @@ relationships:
   type: uses
 - target: '[[entities/cloudnativepg.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md]]'
+- target: '[[系统基础/topic-dictionary/workloads/cronjob.md]]'
   type: related_to
 - target: '[[entities/distribution.md]]'
   type: related_to
@@ -69,7 +69,7 @@ relationships:
 
 - **数据库初始化**：[[entities/cloudnativepg.md|CloudNativePG]] 在 Pod 启动前通过 Init 容器恢复备份数据——这扩展了 Pod 的"Pending→Running"过渡阶段
 - **滚动升级**：数据库 Operator 在主从架构中需要：先升级从节点、切换主从、再升级原主节点——这不是标准的 RollingUpdate，而是领域特定的协调序列
-- **备份 [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|CronJob]]**：Operator 自动创建 CronJob 执行定时备份，并将备份状态写入 CRD status——备份成为 Pod 生命周期的一部分
+- **备份 [[系统基础/topic-dictionary/workloads/cronjob.md|CronJob]]**：Operator 自动创建 CronJob 执行定时备份，并将备份状态写入 CRD status——备份成为 Pod 生命周期的一部分
 - **故障转移**：当主节点 Pod 失败时，Operator 不是简单地重新创建 Pod，而是提升从节点为主节点、更新服务端点、触发告警——这是跨 Pod 的协调操作
 
 ## 交叉洞察

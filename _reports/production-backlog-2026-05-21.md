@@ -45,7 +45,7 @@ last_updated: 2026-05-24
 
 **问题**: 本次新增的 16 个文件全部包含指向不存在页面的 wikilink。
 
-**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
+**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
 
 **涉及文件和 broken link 分布**:
 
@@ -61,7 +61,7 @@ last_updated: 2026-05-24
 **修复策略**:
 - **方案 A**（推荐）: 将不存在的 wikilink 替换为纯文本描述，或创建对应的 stub 页面
 - **方案 B**: 创建缺失的 troubleshooting/skill 页面（工作量大，但最完整）
-- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[domain-10-troubleshooting-diagnostics/98-merged-indexes/index.md|domain-10-troubleshooting-diagnostics]]`）
+- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[故障诊断/98-merged-indexes/index.md|故障诊断]]`）
 
 **建议**: 先执行方案 A（纯文本化）确保生产可用，后续再按需创建 stub。
 
@@ -93,7 +93,7 @@ last_updated: 2026-05-24
    - 或按 skill 拆分为每个 skill 一个 `.md` 文件（每个约 500-2000 tokens）
 
 2. **CHANGELOG 文件（14个 >200KB）**: 共 136 个 CHANGELOG 文件。建议：
-   - 将 `domain-19-landscape-references/` 下的 CHANGELOG 移入 `_archives/`
+   - 将 `生态参考/` 下的 CHANGELOG 移入 `_archives/`
    - 或仅保留最近 3 个版本的 CHANGELOG 在主语料中
 
 3. **建立加载黑名单**: 在加载逻辑中明确排除 `topic-qa-corpus/generated/*.md` 和 `CHANGELOG-*.md`
@@ -106,7 +106,7 @@ last_updated: 2026-05-24
 
 **问题**: 新增 16 个文件 + 1 个报告 ≈ 253 个 chunks 未加入向量索引。
 
-**影响**: 语义搜索时，新增内容无法被检索到。远程顾问查询「SRE 日常巡检」时，`domain-11-production-operations/01-production-sre-daily-ops.md` 不会出现在搜索结果中。
+**影响**: 语义搜索时，新增内容无法被检索到。远程顾问查询「SRE 日常巡检」时，`生产运维/01-production-sre-daily-ops.md` 不会出现在搜索结果中。
 
 **执行**: 运行 `embedding-pipeline.py` 的增量模式，预计 5-10 分钟。
 
@@ -137,7 +137,7 @@ last_updated: 2026-05-24
 
 ### P2-1: Domain-11 继续增强
 
-当前 domain-11-production-operations 从 12 文件增至 14 文件，但仍是所有 domain 中最少的。建议补充：
+当前 生产运维 从 12 文件增至 14 文件，但仍是所有 domain 中最少的。建议补充：
 - 值班手册模板
 - 告警分级响应流程
 - 生产事故复盘模板

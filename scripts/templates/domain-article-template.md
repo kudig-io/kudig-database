@@ -49,7 +49,7 @@ reading_level: "intermediate"            # beginner | intermediate | advanced | 
 audience: ["SRE", "Ops Engineer"]        # 目标读者: SRE / DevOps / Developer / Architect
 estimated_read_time: "15min"            # 预计阅读时间: "5min" / "30min" / "1h"
 prerequisites:                          # 前置知识依赖（文档路径或主题名）
-  - "domain-01-cluster-fundamentals"
+  - "集群基础"
   - "basic-linux-commands"
 # ---- Cross-References (统一格式) ----
 cross_refs:
@@ -57,10 +57,10 @@ cross_refs:
     path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     label: "{{说明}}"
   - type: "fta"
-    path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
+    path: "../故障诊断/topic-fta/list/{{component}}-fta.md"
     label: "{{说明}}"
   - type: "cheatsheet"
-    path: "../domain-17-system-foundation/topic-cheat-sheet/{{cheat-sheet}}.md"
+    path: "../系统基础/topic-cheat-sheet/{{cheat-sheet}}.md"
     label: "{{说明}}"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
@@ -107,17 +107,17 @@ related_docs:
   上游依赖                     下游应用
   ┌──────────┐               ┌──────────┐
   │ 架构基础  │───►  本文档  ◄──│ 故障排查  │
-  │ (domain-01-cluster-fundamentals)│               │(domain-10-troubleshooting-diagnostics)│
+  │ (集群基础)│               │(故障诊断)│
   └──────────┘               └──────────┘
         │                         ▲
         ▼                         │
   ┌──────────┐               ┌──────────┐
   │ 设计原理  │               │ 平台运维  │
-  │ (domain-01-cluster-fundamentals)│               │ (domain-07-platform-engineering)│
+  │ (集群基础)│               │ (平台工程)│
   └──────────┘               └──────────┘
 
-交叉引用: [架构基础](./domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md) |
-         [设计原理](./domain-01-cluster-fundamentals/01-design-principles-foundations.md)
+交叉引用: [架构基础](./集群基础/01-kubernetes-architecture-overview.md) |
+         [设计原理](./集群基础/01-design-principles-foundations.md)
 ```
 
 ---
@@ -370,7 +370,7 @@ groups:
     annotations:
       summary: "{{组件}}实例宕机"
       description: "{{组件}} {{$labels.instance}} 已宕机超过 1 分钟"
-      runbook_url: "../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md"
+      runbook_url: "../故障诊断/topic-fta/list/{{component}}-fta.md"
       grafana_dashboard: "/d/{{dashboard-id}}/{{component}}-overview"
 
   - alert: {{ComponentName}}HighErrorRate
@@ -491,8 +491,8 @@ curl -s localhost:{{port}}/metrics | grep {{metric}}
 
 | 问题场景 | FTA 文档 | 关键底事件 |
 |:---|:---|:---|
-| {{场景1}} | [{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | BE-1 / BE-2 / BE-3 |
-| {{场景2}} | [{{component}}-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | BE-4 / BE-5 |
+| {{场景1}} | [{{component}}-fta.md](../故障诊断/topic-fta/list/{{component}}-fta.md) | BE-1 / BE-2 / BE-3 |
+| {{场景2}} | [{{component}}-fta.md](../故障诊断/topic-fta/list/{{component}}-fta.md) | BE-4 / BE-5 |
 
 ### 7.4 降级方案
 
@@ -639,8 +639,8 @@ securityContext:
 - [{{组件}}官方文档]({{URL}})
 
 ### 深度阅读
-- [设计原理 - {{相关文档}}](../domain-01-cluster-fundamentals/{{doc}}.md)
-- [架构基础 - {{相关文档}}](../domain-01-cluster-fundamentals/{{doc}}.md)
+- [设计原理 - {{相关文档}}](../集群基础/{{doc}}.md)
+- [架构基础 - {{相关文档}}](../集群基础/{{doc}}.md)
 
 ### 相关博客/论文
 - [{{标题}}]({{URL}}) - {{说明}}
@@ -653,10 +653,10 @@ securityContext:
 |:---|:---|:---|
 | 前置阅读 | [{{文档名}}](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
 | 深入阅读 | [{{文档名}}](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
-| 速查参考 | [{{速查卡}}](../domain-17-system-foundation/topic-cheat-sheet/{{cheat-sheet}}.md) | {{说明}} |
-| 故障排查 | [{{排障文档}}](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/{{doc}}.md) | {{说明}} |
-| FTA | [{{故障树}}](../domain-10-troubleshooting-diagnostics/topic-fta/list/{{component}}-fta.md) | {{说明}} |
-| Skill | [{{技能}}](../domain-10-troubleshooting-diagnostics/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
+| 速查参考 | [{{速查卡}}](../系统基础/topic-cheat-sheet/{{cheat-sheet}}.md) | {{说明}} |
+| 故障排查 | [{{排障文档}}](../故障诊断/topic-structural-trouble-shooting/{{doc}}.md) | {{说明}} |
+| FTA | [{{故障树}}](../故障诊断/topic-fta/list/{{component}}-fta.md) | {{说明}} |
+| Skill | [{{技能}}](../故障诊断/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
 
 ---
 

@@ -50,10 +50,10 @@ prerequisites:
 - 高可用
 cross_refs:
 - type: domain
-  path: ../../domain-07-platform-engineering/
+  path: ../../平台工程/
   label: 平台运维知识域
 - type: domain
-  path: ../../domain-01-cluster-fundamentals/
+  path: ../../集群基础/
   label: 控制平面知识域  role: contributor---
 # Kubernetes 集群配置最佳实践
 
@@ -118,7 +118,7 @@ graph TB
 
 ### Kubernetes 网络配置最佳实践cross_refs:
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 网络知识域
 - type: best-practice
   path: ./kubernetes-cluster.md
@@ -184,7 +184,7 @@ graph TB
 
 ### Kubernetes 存储配置最佳实践cross_refs:
 - type: domain
-  path: ../../domain-04-storage-data/
+  path: ../../存储/
   label: 存储知识域
 - type: best-practice
   path: ./kubernetes-cluster.md

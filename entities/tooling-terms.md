@@ -100,7 +100,7 @@ authors:
 - name: KUDIG Team
   role: contr...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/tooling/cli-commands.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/tooling/cli-commands.md`）*
 
 ---
 
@@ -108,7 +108,7 @@ authors:
 
 容器镜像是 Kubernetes 应用部署的基础单元。优化镜像不仅可以**缩短启动时间、降低存储和带宽成本**，还能**显著减少安全攻击面**。2026 年的行业最佳实践强调：镜像应尽可能小、只包含应用运行所需的最小依赖、使用不可变基础镜像，并通过 SBOM 和签名确保供应链透明。主流优化手段包括**多阶段构建（Multi-stage Build）、Distroless 镜像、BuildKit 缓存、镜像分层优化和 OCI 标准化**。
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/tooling/container-image-optimization.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/tooling/container-image-optimization.md`）*
 
 ---
 
@@ -147,7 +147,7 @@ title_en: Tool Ecosystem
 authors:
 ...
 
-> *（内容已精简，完整版请参阅源文件 `domain-17-system-foundation/topic-dictionary/tooling/tool-ecosystem.md`）*
+> *（内容已精简，完整版请参阅源文件 `系统基础/topic-dictionary/tooling/tool-ecosystem.md`）*
 
 ---
 
@@ -158,9 +158,9 @@ authors:
 
 ## 来源文件
 
-- `domain-17-system-foundation/topic-dictionary/tooling/cli-commands.md`
-- `domain-17-system-foundation/topic-dictionary/tooling/container-image-optimization.md`
-- `domain-17-system-foundation/topic-dictionary/tooling/tool-ecosystem.md`
+- `系统基础/topic-dictionary/tooling/cli-commands.md`
+- `系统基础/topic-dictionary/tooling/container-image-optimization.md`
+- `系统基础/topic-dictionary/tooling/tool-ecosystem.md`
 
 ## Related
 

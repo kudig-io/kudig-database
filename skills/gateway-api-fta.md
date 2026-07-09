@@ -50,7 +50,7 @@ title: "Gateway API 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get gateway,httproute -A -o jsonpath='{range .items[?(@.status.conditions[?(@.type!=\'Ready\' && @.status!=\'Accepted\')])]} {.kind}/{.metadata.namespace..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/gateway-api-fta.md"]
+sources: ["故障诊断/topic-fta/list/gateway-api-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

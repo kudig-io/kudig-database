@@ -79,7 +79,7 @@ Athenz 是由 Yahoo (Verizon Media) 开发的开源平台，提供基于 X.509 �
 
 - athenz
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

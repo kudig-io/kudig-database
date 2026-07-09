@@ -74,12 +74,12 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-11-production-operations
+  - 集群基础
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/checkpoint
-  - domain-11-production-operations/topic-learn/public-training/one-month/README
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/checkpoint
+  - 生产运维/topic-learn/public-training/one-month/README
 ---
 
 # Day 28: 综合复习 + 毕业项目
@@ -474,10 +474,10 @@ echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/
 
 - [毕业项目详细指南](../projects/p5-graduation-project.md)
 - [终极自测题](./checkpoint.md)
-- [生产架构设计原则](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [变更管理流程](../../domain-11-production-operations/22-change-management-process.md)
-- [事故响应处理](../../domain-11-production-operations/23-incident-response-handling.md)
-- [容量规划预测](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+- [生产架构设计原则](../../生产运维/01-production-architecture-design-principles.md)
+- [变更管理流程](../../生产运维/22-change-management-process.md)
+- [事故响应处理](../../生产运维/23-incident-response-handling.md)
+- [容量规划预测](../../生产运维/24-capacity-planning-forecasting.md)
 
 ---
 

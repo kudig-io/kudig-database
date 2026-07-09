@@ -162,7 +162,7 @@ flowchart TD
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md|GPU 异常故障树分析]]
+- [[故障诊断/topic-fta/list/gpu-fta.md|GPU 异常故障树分析]]
 - [[skills/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
 
 

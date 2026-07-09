@@ -38,7 +38,7 @@ title: "02-ai-agents MOC"
 category: concepts
 summary: "AI Agent — AI 智能体架构、工具调用、Agent 工作流"02-ai-agents MOC""
 tags: k8s, ai-agent]
-sources: ["domain-14-ai-ml-infra/02-ai-agents/MOC.md"]
+sources: ["AI基础设施/02-ai-agents/MOC.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

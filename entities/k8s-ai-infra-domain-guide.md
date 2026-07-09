@@ -9,7 +9,7 @@ tags:
 - ml
 - gpu
 - llm
-- domain-14-ai-ml-infra
+- AI基础设施
 - reference
 - prometheus
 - job

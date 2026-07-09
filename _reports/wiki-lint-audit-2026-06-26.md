@@ -54,7 +54,7 @@ updated: "2026-06-26"
 - `skills/pod-fta.md` — Pod 异常故障树分析 (skills)
 - `skills/calico-fta.md` — Calico Fta
 - `skills/higress-fta.md` — Higress 网关异常故障树分析 (skills)
-- `domain-05-security-compliance/P3-11-security-incident-sop-compliance-checklist.md` — P3 11 Security Incident Sop Compliance Checklist
+- `安全/P3-11-security-incident-sop-compliance-checklist.md` — P3 11 Security Incident Sop Compliance Checklist
 - `entities/41-terway-architecture-deep-dive.md` — Terway 架构深度解析
 - `entities/keycloak.md` — Keycloak [entities]
 - `entities/vitess.md` — Vitess (entities)
@@ -88,8 +88,8 @@ updated: "2026-06-26"
 
 ## Missing/Invalid Summary
 
-- `domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md` — no summary
-- `domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md` — no summary
+- `存储/03-distributed-storage/01-velero-backup-recovery.md` — no summary
+- `存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md` — no summary
 
 ## Stale Pages
 

@@ -326,12 +326,12 @@ graph TB
 
 | 专题/领域 | 与本专题的关系 |
 |---------|--------------|
-| [domain-11-ai-infra](../domain-14-ai-ml-infra/) | GPU 调度、LLM 推理服务、MLOps 基础设施 |
-| [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | K8s 运维 Agent 的核心知识语料 |
-| [domain-05-security-compliance](../domain-05-security-compliance/) | 安全最佳实践在 Agent 安全中的应用 |
-| [domain-07-platform-engineering](../domain-07-platform-engineering/) | 平台工程视角的 Agent 服务运维 |
-| [domain-32-yaml-manifests](../domain-18-manifests-patterns/) | Agent 生产部署 YAML 模板参考 |
-| [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 问题树分析作为 Agent 推理骨架 |
+| [domain-11-ai-infra](../AI基础设施/) | GPU 调度、LLM 推理服务、MLOps 基础设施 |
+| [故障诊断](../故障诊断/) | K8s 运维 Agent 的核心知识语料 |
+| [安全](../安全/) | 安全最佳实践在 Agent 安全中的应用 |
+| [平台工程](../平台工程/) | 平台工程视角的 Agent 服务运维 |
+| [domain-32-yaml-manifests](../清单模式/) | Agent 生产部署 YAML 模板参考 |
+| [topic-fta](../故障诊断/topic-fta/) | 问题树分析作为 Agent 推理骨架 |
 
 ---
 

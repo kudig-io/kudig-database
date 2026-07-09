@@ -973,13 +973,13 @@ phases:
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/sql.md|sql]]
+- [[系统基础/topic-cheat-sheet/linux.md|linux]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -40,7 +40,7 @@ title: "Pod 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.namespace}/{.metadata.name}{\'\..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md"]
+sources: ["故障诊断/topic-fta/list/pod-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -83,7 +83,7 @@ base_confidence: 0.7
 ## Related
 
 - [[kube-scheduler]] — kube-scheduler
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

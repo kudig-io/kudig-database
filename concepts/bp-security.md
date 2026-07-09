@@ -40,10 +40,10 @@ prerequisites:
 
 ### Kubernetes 网络安全最佳实践cross_refs:
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 网络知识域
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 服务网格知识域
 - type: best-practice
   path: ./pod-security.md
@@ -107,10 +107,10 @@ prerequisites:
 
 ### Kubernetes Pod安全最佳实践cross_refs:
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 安全知识域
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 云原生安全知识域  role: contributor---
 # Kubernetes Pod安全最佳实践
 
@@ -180,10 +180,10 @@ prerequisites:
 - Vault
 cross_refs:
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 安全知识域
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 云原生安全知识域
 - type: best-practice
   path: ./pod-security.md

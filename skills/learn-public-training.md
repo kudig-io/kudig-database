@@ -70,13 +70,13 @@ prerequisites:
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz
-  - domain-17-system-foundation/topic-dictionary/k8s-glossary
+  - 生产运维/topic-learn/quick-start
+  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz
+  - 系统基础/topic-dictionary/k8s-glossary
 id: TRAINING-INDEX-001
 topic: training
 type: index
@@ -157,15 +157,15 @@ Week 4: 网络与存储 (进阶)
   - sre工程师
   - devops工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/README
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-10-troubleshooting-diagnostics
+  - 生产运维/topic-learn/public-training/README
+  - 生产运维/topic-learn/quick-start
+  - 故障诊断
 id: PUBLIC-TRAINING-PLAN-001
 topic: training
 type: training-plan
@@ -217,12 +217,12 @@ tags: [training, 28-days, k8s, learning-path, sre, devops, k8s-1.28-1.33]
   - platform-engineer
   - developer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # 项目 P1: 从零搭建 K8s 集群
@@ -261,14 +261,14 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # 项目 P2: 生产级应用全栈编排
@@ -305,15 +305,15 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 可观测性
+  - 故障诊断
   - domain-20-enterprise-monitoring-alerting
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
 ---
 
 # 项目 P3: 可
@@ -342,11 +342,11 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-08-release-change-management
-  - domain-11-production-operations
+  - 发布变更
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # 项目 P4: GitOps 流水线
@@ -389,19 +389,19 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
-  - domain-11-production-operations
-  - domain-08-release-change-management
+  - 工作负载
+  - 网络
+  - 存储
+  - 安全
+  - 可观测性
+  - 故障诊断
+  - 生产运维
+  - 发布变更
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
+  - 生产运维/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-
 
 > *（内容已精简，完整内容请参阅源文件）*
 
@@ -428,12 +428,12 @@ related_topics:
   - 运维工程师
   - 开发工程师转型
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-11-production-operations/topic-learn/public-training/one-month/README
+  - 生产运维/topic-learn/quick-start
+  - 生产运维/topic-learn/public-training/one-month/README
 id: PUBLIC-TRAINING-BOOT-001
 topic: training
 type: landing-page
@@ -470,11 +470,11 @@ tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
 ---
 
 ### K8s 命令速查表related_domains:
-- domain-01-cluster-fundamentals
-- domain-10-troubleshooting-diagnostics
+- 集群基础
+- 故障诊断
 related_topics:
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/knowledge-map  role: contributor---
+- 生产运维/topic-learn/public-training/one-month/resources/reading-sequence
+- 生产运维/topic-learn/public-training/one-month/resources/knowledge-map  role: contributor---
 
 # K8s 命令速查表
 
@@ -506,14 +506,14 @@ kubectl get nodes -o
 ---
 
 ### 知识图谱模板related_domains:
-- domain-01-cluster-fundamentals
-- domain-02-workloads-applications
-- domain-03-networking-traffic
-- domain-05-security-compliance
-- domain-06-observability
+- 集群基础
+- 工作负载
+- 网络
+- 安全
+- 可观测性
 related_topics:
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet  role: contributor---
+- 生产运维/topic-learn/public-training/one-month/resources/reading-sequence
+- 生产运维/topic-learn/public-training/one-month/resources/commands-cheatsheet  role: contributor---
 
 # 知识图谱模板
 
@@ -548,15 +548,15 @@ d
 ---
 
 ### 文档阅读顺序索引related_domains:
-- domain-01-cluster-fundamentals
-- domain-02-workloads-applications
-- domain-03-networking-traffic
-- domain-05-security-compliance
-- domain-06-observability
-- domain-10-troubleshooting-diagnostics
+- 集群基础
+- 工作负载
+- 网络
+- 安全
+- 可观测性
+- 故障诊断
 related_topics:
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/knowledge-map
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet  role: contributor---
+- 生产运维/topic-learn/public-training/one-month/resources/knowledge-map
+- 生产运维/topic-learn/public-training/one-month/resources/commands-cheatsheet  role: contributor---
 
 # 文档阅读顺序索引
 
@@ -584,7 +584,7 @@ related_topics:
 
 Docker 是 Kubernetes 运行容器的底层技术。这两天的学习帮助你理解"容器到底是什么"，并掌握 Docker 的基本操作。
 
-1. `domain-13-container-runtime/01-docker-architecture-overview.md`
+1. `容器运行时/01-docker-architecture-overview.md`
    - Docker Engine 的架构组成：Client、Daemon、Registry 
 
 > *（内容已精简，完整内容请参阅源文件）*
@@ -618,15 +618,15 @@ tags: [week-1, docker, linux, kubernetes, namespace, cgroup, one-month]  - "Dock
   - ops-engineer
   - developer
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
-  - domain-01-cluster-fundamentals
+  - 容器运行时
+  - 系统基础
+  - 集群基础
 related_topics:
   - docker
   - linux
   - kubernetes
-  - container  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
+  - container  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/README.md
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
 ---
 ```
 
@@ -682,16 +682,16 @@ tags: [checkpoint, self-test, week-1, docker, linux, kubernetes, namespace, cgro
   - ops-engineer
   - developer
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 容器运行时
+  - 系统基础
+  - 集群基础
+  - 故障诊断
 related_topics:
   - docker
   - linux
   - kubernetes
-  - troubleshooting  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
+  - troubleshooting  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/README.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
 ---
 ```
 
@@ -733,13 +733,13 @@ tags: [docker, container, image, dockerfile, build, run, namespace, cgroup, hand
   - ops-engineer
   - developer
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
+  - 容器运行时
+  - 系统基础
 related_topics:
   - docker
   - container
-  - image  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-2-docker-advanced.md
-  - domain-13-container-runtime/01-docker-fundamentals-concepts.md
+  - image  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-2-docker-advanced.md
+  - 容器运行时/01-docker-fundamentals-concepts.md
 ---
 ```
 
@@ -781,13 +781,13 @@ tags: [docker, network, bridge, host, overlay, volume, bind-mount, security, han
   - ops-engineer
   - developer
 related_domains:
-  - domain-13-container-runtime
+  - 容器运行时
 related_topics:
   - docker
   - networking
   - storage
-  - security  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
-  - domain-13-container-runtime/04-docker-networking-deep-dive.md
+  - security  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
+  - 容器运行时/04-docker-networking-deep-dive.md
 ---
 ```
 
@@ -829,14 +829,14 @@ tags: [linux, namespace, cgroup, process, signal, system-call, container, hands-
   - ops-engineer
   - developer
 related_domains:
-  - domain-17-system-foundation
-  - domain-13-container-runtime
+  - 系统基础
+  - 容器运行时
 related_topics:
   - linux
   - container
   - namespace
-  - cgroup  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-4-linux-network.md
-  - domain-17-system-foundation/01-linux-system-architecture.md
+  - cgroup  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-4-linux-network.md
+  - 系统基础/01-linux-system-architecture.md
 ---
 ```
 
@@ -873,13 +873,13 @@ tags: [linux, network, ip, iptables, tcpdump, sysctl, performance, tuning, hands
   - 网络排障  - sre
   - ops-engineer
 related_domains:
-  - domain-17-system-foundation
-  - domain-03-networking-traffic
+  - 系统基础
+  - 网络
 related_topics:
   - linux
   - networking
-  - performance  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-3-linux-core.md
-  - domain-17-system-foundation/04-linux-networking-configuration.md
+  - performance  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-3-linux-core.md
+  - 系统基础/04-linux-networking-configuration.md
 ---
 ```
 
@@ -926,12 +926,12 @@ tags: [kubernetes, architecture, master, node, etcd, apiserver, scheduler, kubel
   - ops-engineer
   - developer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - kubernetes
   - architecture
-  - kubectl  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md
+  - kubectl  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md
   - domain-1-architecture-f
 
 > *（内容已精简，完整内容请参阅源文件）*
@@ -967,14 +967,14 @@ tags: [kubernetes, deployment, service, rolling-update, rollback, api-version, h
   - ops-engineer
   - developer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
+  - 集群基础
+  - 工作负载
 related_topics:
   - kubernetes
   - deployment
   - service
-  - rollout  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-5-k8s-architecture.md
-  - domain-02-workloads-applications/02-deploym
+  - rollout  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-5-k8s-architecture.md
+  - 工作负载/02-deploym
 
 > *（内容已精简，完整内容请参阅源文件）*
 
@@ -1007,14 +1007,14 @@ tags: [review, practice, kind, deployment, service, kubectl, troubleshooting, ha
   - ops-engineer
   - developer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - kubernetes
   - kubectl
   - deployment
-  - troubleshooting  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/checkpoint.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
+  - troubleshooting  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/checkpoint.md
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
 ---
 ```
 
@@ -1063,17 +1063,17 @@ tags: [week-2, control-plane, workloads, networking, storage, kubernetes, one-mo
   - ops-engineer
   - developer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 存储
 related_topics:
   - kubernetes
   - control-plane
   - workloads
   - networking
-  - storage  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-devops-toolchain/README.md
+  - storage  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/README.md
+  - 生产运维/topic-learn/public-training/one-month/week-3-devops-toolchain/README.md
 ---
 ```
 
@@ -1120,16 +1120,16 @@ tags: [checkpoint, self-test, week-2, deployment, statefulset, service, ingress,
   - ops-engineer
   - developer
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
   - workloads
   - networking
   - storage
-  - troubleshooting  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-
+  - troubleshooting  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/README.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-
 
 > *（内容已精简，完整内容请参阅源文件）*
 
@@ -1164,7 +1164,7 @@ tags: [deployment, statefulset, daemonset, replicaset, rolling-update, rollback,
   - ops-engineer
   - developer
 related_domains:
-  - domain-02-workloads-applications
+  - 工作负载
   -
 
 > *（内容已精简，完整内容请参阅源文件）*
@@ -1206,8 +1206,8 @@ tags: [pod, lifecycle, probe, resources, qos, hpa, vpa, autoscaling, hands-on, w
   - ops-engineer
   - developer
 related_domains:
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 故障诊断
 related_topics:
   - workloads
   - pod
@@ -1246,13 +1246,13 @@ tags: [cni, service, dns, coredns, iptables, ipvs, networking, hands-on, week-2]
   - ops-engineer
   - developer
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
   - networking
   - service
   - dns
-  - cni  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2.md
+  - cni  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-13-networking-2.md
   - d
 
 > *（内容已精简，完整内容请参阅源文件）*
@@ -1291,8 +1291,8 @@ tags: [ingress, networkpolicy, nginx-ingress, tls, hostname, path, routing, hand
   - ops-engineer
   - developer
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
   - networking
   - ingress
@@ -1329,14 +1329,14 @@ tags: [pv, pvc, storageclass, dynamic-provisioning, statefulset, csi, hands-on, 
   - WaitForFirstConsumer  - sre
   - ops-engineer
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
   - storage
   - pv
   - pvc
-  - statefulset  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-12-networking-1.md
-  - domain-04-storage-data/04-storageclass-dynamic-provisioning.md
+  - statefulset  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-12-networking-1.md
+  - 存储/04-storageclass-dynamic-provisioning.md
 ---
 ```
 
@@ -1377,13 +1377,13 @@ tags: [etcd, apiserver, control-plane, raft, authentication, authorization, admi
   - 备份恢复  - sre
   - ops-engineer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - control-plane
   - etcd
   - apiserver
-  - authentication  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-c
+  - authentication  - 生产运维/topic-learn/public-training/one-month/week-2-c
 
 > *（内容已精简，完整内容请参阅源文件）*
 
@@ -1420,7 +1420,7 @@ tags: [scheduler, controller-manager, affinity, taint, toleration, nodeelector, 
   - 污点  - sre
   - ops-engineer
 related_domains:
-  - domain-01-cluster-fundamentals
+  - 集群基础
   - domain-12-t
 
 > *（内容已精简，完整内容请参阅源文件）*
@@ -1443,13 +1443,13 @@ related_domains:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-technologies/README
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/README
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-technologies/README
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/README
 ---
 
 # Week 3: 运维作战能力期 (Days 15-21)
@@ -1498,13 +1498,13 @@ Kubernetes 的安全模型建立在三个核心机制之上：**认证（Authent
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
 
 # Week 3 Checkpoint: 自测检验
@@ -1541,11 +1541,11 @@ Week 3 是运维作战能力建设的关键阶段，涵盖了安全合规体系�
   - platform-engineer
   - security-engineer
 related_domains:
-  - domain-05-security-compliance
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-16-security-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-16-security-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
 
 # Day 15: 安全体系 - RBAC + 认证授权
@@ -1578,11 +1578,11 @@ related_topics:
   - platform-engineer
   - security-engineer
 related_domains:
-  - domain-05-security-compliance
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 故障诊断/topic-fta/04-fta-core-principles
 ---
 
 # Day 16: 安全体系 - Pod 安全 + 密钥管理
@@ -1617,11 +1617,11 @@ Pod 安全和密钥管理是 Kubernetes 安全体系的两大核心支柱。Pod 
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 17: 可观测性 - 监控 + Prometheus
@@ -1653,11 +1653,11 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 18: 可观测性 - 日志 + 分布式追踪
@@ -1691,13 +1691,13 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 19: 故障排查方法论 (关键日)
@@ -1731,12 +1731,12 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
 
 # Day 20: 故障排查实战
@@ -1758,7 +1758,7 @@ related_topics:
 ### 必读文档
 
 1. **Pod 综合排障**
-   - 文件: `../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md`
+   - 文件: `../../故障诊断/08-pod-comprehensive-troubleshooting.md`
 
 2. **Service
 
@@ -1784,13 +1784,13 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-07-platform-engineering
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
 ---
 
 # Day 21: 平台运维 + 综合实践
@@ -1825,13 +1825,13 @@ related_topics:
   - platform-engineer
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-08-release-change-management
-  - domain-05-security-compliance
-  - domain-11-production-operations
+  - 发布变更
+  - 安全
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/README
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/README
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # Week 4: 企业级进阶期 (Days 22-28)
@@ -1885,13 +1885,13 @@ related_topics:
   - platform-engineer
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-08-release-change-management
-  - domain-05-security-compliance
+  - 发布变更
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
 # Week 4 Checkpoint: 终极自测
@@ -1925,11 +1925,11 @@ related_topics:
   - platform-engineer
 related_domains:
   - domain-20-enterprise-monitoring-alerting
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 22: 企业监控 - Prometheus 企业级 + Grafana
@@ -1961,11 +1961,11 @@ related_topics:
   - platform-engineer
 related_domains:
   - domain-21-logging-management-analytics
-  - domain-08-release-change-management
+  - 发布变更
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-22-enterprise-monitoring
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
 ---
 
 # Day 23: 企业日志 + GitOps
@@ -2002,12 +2002,12 @@ related_topics:
   - security-engineer
   - platform-engineer
 related_domains:
-  - domain-05-security-compliance
-  - domain-05-security-compliance
+  - 安全
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-16-security-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-16-security-2
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
 # Day 24: 云原生安全 + 合规
@@ -2040,11 +2040,11 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-11-production-operations
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-26-fta-febm-deep
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-26-fta-febm-deep
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
 ---
 
 # Day 25: 生产运维最佳实践
@@ -2081,13 +2081,13 @@ related_topics:
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 26: FTA/FEBM 专题深化
@@ -2122,11 +2122,11 @@ FTA（故障树分析，Fault Tree Analysis）和 FEBM（取证循证方法，Fo
   - platform-engineer
   - developer
 related_domains:
-  - domain-15-specialized-tech
+  - 专项技术
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
 ---
 
 # Day 27: 扩展生态 + 高级主题
@@ -2158,12 +2158,12 @@ K8s 的核心设计理念之一就是可扩展性。K8s 内置了 Pod、Service�
   - devops-engineer
   - platform-engineer
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-11-production-operations
+  - 集群基础
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/checkpoint
-  - domain-11-production-operations/topic-learn/public-training/one-month/README
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/checkpoint
+  - 生产运维/topic-learn/public-training/one-month/README
 ---
 
 # Day 28: 综合复习 + 毕业项目
@@ -2428,11 +2428,11 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-07-platform-engineering
+  - 故障诊断
+  - 平台工程
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
 ---
 
 # Day 15: Node 节点基础实操
@@ -2473,12 +2473,12 @@ related_topics:
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-07-platform-engineering
+  - 故障诊断
+  - 平台工程
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
 ---
 
 # Day 16: Node 节点进阶实操
@@ -2515,11 +2515,11 @@ related_topics:
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-07-platform-engineering
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
 ---
 
 # Day 17: 节点池基础实操
@@ -2567,11 +2567,11 @@ related_topics:
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-07-platform-engineering
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
 ---
 
 # Day 18: 节点池进阶实操
@@ -2623,11 +2623,11 @@ related_topics:
   - developer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-02-workloads-applications
+  - 故障诊断
+  - 工作负载
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
 ---
 
 # Day 19: Pod 容器组基础实操
@@ -2671,11 +2671,11 @@ kubectl get pod <pod-name> -o jsonpath='{.st
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-02-workloads-applications
+  - 故障诊断
+  - 工作负载
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-19-pod-basics/01-pod-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-19-pod-basics/01-pod-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
 ---
 
 # Day 20: Pod 容器组进阶实操
@@ -2721,11 +2721,11 @@ spec:
   - ops-engineer
   - platform-engineer
 related_domains:
-  - domain-07-platform-engineering
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
 ---
 
 # Day 21: K8s 组件运维实操

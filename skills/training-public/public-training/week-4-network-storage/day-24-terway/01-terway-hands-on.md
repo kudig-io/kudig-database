@@ -328,16 +328,16 @@ audience:
   - ops-engineer
 estimated_read_time: 35min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-03-networking-traffic
+  - 故障诊断
+  - 网络
 related_topics:
   - networking
   - cni
   - terway
   - networkpolicy
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-25-flannel/01-flannel-hands-on.md
-  - domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md
+  - 生产运维/topic-learn/public-training/week-4-network-storage/day-25-flannel/01-flannel-hands-on.md
+  - 故障诊断/topic-fta/list/calico-fta.md
 ---
 ```
 

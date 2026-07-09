@@ -145,7 +145,7 @@ prerequisites:
 
 ## 三、关键问题诊断
 
-### 3.1 🔴 domain-09-reliability-engineering 严重不足
+### 3.1 🔴 可靠性 严重不足
 
 **当前内容**（17 文件）:
 ```
@@ -169,7 +169,7 @@ README.md               1 文件
 
 **建议**: 将 domain-09 扩充至 40-60 文件，新增 `04-slo-sli/`、`05-chaos-engineering/`、`06-postmortem/` 子目录。
 
-### 3.2 🔴 domain-11-production-operations 严重混杂
+### 3.2 🔴 生产运维 严重混杂
 
 **当前内容**（264 文件）:
 ```
@@ -189,7 +189,7 @@ projects/               1 文件  ❌ 应移至根目录 projects/
 
 **影响**: 该 Domain 实际核心生产运维内容仅 **6 个文件**，其余 258 个文件属于误归类内容。
 
-### 3.3 🟡 domain-16-database-middleware 覆盖不足
+### 3.3 🟡 数据库中间件 覆盖不足
 
 当前仅覆盖: MySQL、PostgreSQL、MongoDB、Redis、Kafka
 

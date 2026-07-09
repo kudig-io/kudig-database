@@ -81,7 +81,7 @@ Tremor 是一个高性能的事件处理引擎，专为处理大规模数据流�
 - tremor
 - [[entities/drasi.md|[[Drasi|Drasi]]]]
 - observability|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

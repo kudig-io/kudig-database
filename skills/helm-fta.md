@@ -166,51 +166,51 @@ flowchart TD
 - [[flux]] — Flux
 - [[helm]] — Helm
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|Helm 发布异常故障树分析]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
+- [[故障诊断/topic-fta/list/helm-fta.md|Helm 发布异常故障树分析]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
 - RELEASE-NOTES-2.16
 - RELEASE-NOTES-2.12
 - RELEASE-NOTES-2.13
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
 - RELEASE-NOTES-2.17
 - RELEASE-NOTES-2.4
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
 - RELEASE-NOTES-3.5
 - RELEASE-NOTES-2.0
 - RELEASE-NOTES-3.1
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
 - RELEASE-NOTES-2.1
 - RELEASE-NOTES-3.0
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
 - RELEASE-NOTES-2.5
 - RELEASE-NOTES-1.2
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
 - RELEASE-NOTES-3.4
 - RELEASE-NOTES-2.2
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
 - RELEASE-NOTES-3.3
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-3.7
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
 - RELEASE-NOTES-2.7
 - RELEASE-NOTES-3.6
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
 - RELEASE-NOTES-2.3
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
 - RELEASE-NOTES-3.2
 - RELEASE-NOTES-2.8
 - RELEASE-NOTES-2.10
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
 - RELEASE-NOTES-2.14
 - RELEASE-NOTES-2.15
 - RELEASE-NOTES-2.9
 - RELEASE-NOTES-2.11
-- [[domain-19-landscape-references/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
+- [[生态参考/_archived-release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
 - [[skills/ts-command-output.md|命令输出根因解析]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
+- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
 
 
 <!-- risk-assessed -->

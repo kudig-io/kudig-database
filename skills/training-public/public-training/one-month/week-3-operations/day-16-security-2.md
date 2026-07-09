@@ -72,11 +72,11 @@ audience:
   - security-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-05-security-compliance
+  - 安全
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 故障诊断/topic-fta/04-fta-core-principles
 ---
 
 # Day 16: 安全体系 - Pod 安全 + 密钥管理
@@ -701,9 +701,9 @@ resources:
 - [Pod Security Standards 官方文档](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [Kyverno 官方文档](https://kyverno.io/docs/)
 - [Secret 最佳实践](https://kubernetes.io/docs/concepts/configuration/secret/#good-practices)
-- [文件: `../../domain-05-security-compliance/06-pod-security-standards.md`](../../domain-05-security-compliance/06-pod-security-standards.md)
-- [文件: `../../domain-05-security-compliance/11-secret-management-tools.md`](../../domain-05-security-compliance/11-secret-management-tools.md)
-- [文件: `../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md`](../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md)
+- [文件: `../../安全/06-pod-security-standards.md`](../../安全/06-pod-security-standards.md)
+- [文件: `../../安全/11-secret-management-tools.md`](../../安全/11-secret-management-tools.md)
+- [文件: `../../安全/14-policy-engines-opa-kyverno.md`](../../安全/14-policy-engines-opa-kyverno.md)
 
 ```
 

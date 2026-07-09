@@ -46,7 +46,7 @@ title: "[[ORAS|ORAS]] (OCI Registry As Storage)"
 category: entities
 summary: "ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取自 OCI 兼容仓库的工具和库。它允许使用容器镜像仓库存储任意类型的工件，如 Helm Chart、WASM 模块、策略文件、签名等，实现 "anything as OCI artifacts" 的理念。"
 tags: k8s, cncf, image, oras]
-sources: ["docs/domain-19-landscape-references/sandbox/oras/oras.md", "domain-19-landscape-references/sandbox/oras/oras.md"]
+sources: ["docs/生态参考/sandbox/oras/oras.md", "生态参考/sandbox/oras/oras.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -95,8 +95,8 @@ ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取�
 
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

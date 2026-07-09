@@ -67,15 +67,15 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
 id: WEEK4-DAY28
 topic: training
 type: review

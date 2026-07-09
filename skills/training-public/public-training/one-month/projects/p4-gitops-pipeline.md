@@ -70,11 +70,11 @@ audience:
   - platform-engineer
 estimated_read_time: 120min
 related_domains:
-  - domain-08-release-change-management
-  - domain-11-production-operations
+  - 发布变更
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # 项目 P4: GitOps 流水线
@@ -629,14 +629,14 @@ kubectl delete namespace dev staging prod  # ⚠️ 不可逆：永久删除命�
 
 ## 延伸阅读
 
-- [ArgoCD 企业级 GitOps](../../domain-08-release-change-management/01-argo-cd-enterprise-gitops.md)
+- [ArgoCD 企业级 GitOps](../../发布变更/01-argo-cd-enterprise-gitops.md)
 - [Kustomize 基础](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/)
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
 - [Sealed Secret](https://github.com/bitnami-labs/sealed-secrets)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

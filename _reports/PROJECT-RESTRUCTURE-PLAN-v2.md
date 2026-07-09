@@ -140,93 +140,93 @@ kudig-database/
 ├── synthesis/                # 29 个综合分析（跨域连接、趋势分析）
 │
 │  知识域层（唯一主分类）
-├── domain-01-cluster-fundamentals/
+├── 集群基础/
 │   ├── MOC.md
 │   ├── README.md
 │   ├── 00-99-xxx.md          # 核心域文档
 │   └── （暂无数入 topic）
 │
-├── domain-02-workloads-applications/
+├── 工作负载/
 │   ├── ...核心域文档...
-│   ├── domain-02-workloads-applications/topic-functions/              # ← 迁入（80 个文件）
-│   └── domain-02-workloads-applications/topic-java-kubernetes/        # ← 迁入（7 个文件）
+│   ├── 工作负载/topic-functions/              # ← 迁入（80 个文件）
+│   └── 工作负载/topic-java-kubernetes/        # ← 迁入（7 个文件）
 │
-├── domain-03-networking-traffic/
+├── 网络/
 │   ├── ...核心域文档...
-│   └── domain-03-networking-traffic/topic-terway/                 # ← 迁入（10 个文件）
+│   └── 网络/topic-terway/                 # ← 迁入（10 个文件）
 │
-├── domain-04-storage-data/
+├── 存储/
 │   └── ...核心域文档...
 │
-├── domain-05-security-compliance/
+├── 安全/
 │   └── ...核心域文档...
 │
-├── domain-06-observability/
+├── 可观测性/
 │   └── ...核心域文档...
 │
-├── domain-07-platform-engineering/
+├── 平台工程/
 │   ├── ...核心域文档...
-│   └── domain-07-platform-engineering/topic-code-analysis/          # ← 迁入（89 个文件）
+│   └── 平台工程/topic-code-analysis/          # ← 迁入（89 个文件）
 │
-├── domain-08-release-change-management/
+├── 发布变更/
 │   ├── ...核心域文档...
-│   ├── domain-08-release-change-management/topic-deployment/             # ← 迁入（5 个文件）
-│   └── domain-08-release-change-management/topic-migration/              # ← 迁入（11 个文件）
+│   ├── 发布变更/topic-deployment/             # ← 迁入（5 个文件）
+│   └── 发布变更/topic-migration/              # ← 迁入（11 个文件）
 │
-├── domain-09-reliability-engineering/
+├── 可靠性/
 │   └── ...核心域文档...
 │
-├── domain-10-troubleshooting-diagnostics/
+├── 故障诊断/
 │   ├── ...核心域文档...
-│   ├── domain-10-troubleshooting-diagnostics/topic-fta/                    # ← 迁入（81 个文件）
-│   ├── domain-10-troubleshooting-diagnostics/topic-febm/                   # ← 迁入（11 个文件）
-│   ├── domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/  # ← 迁入（72 个文件）
-│   ├── domain-10-troubleshooting-diagnostics/topic-skills/                 # ← 迁入（42 个文件）
-│   └── domain-10-troubleshooting-diagnostics/topic-qa-corpus/              # ← 迁入（4 个文件）
+│   ├── 故障诊断/topic-fta/                    # ← 迁入（81 个文件）
+│   ├── 故障诊断/topic-febm/                   # ← 迁入（11 个文件）
+│   ├── 故障诊断/topic-structural-trouble-shooting/  # ← 迁入（72 个文件）
+│   ├── 故障诊断/topic-skills/                 # ← 迁入（42 个文件）
+│   └── 故障诊断/topic-qa-corpus/              # ← 迁入（4 个文件）
 │
-├── domain-11-production-operations/
+├── 生产运维/
 │   ├── ...核心域文档...
-│   ├── domain-11-production-operations/topic-best-practices/         # ← 迁入（55 个文件）
-│   ├── domain-11-production-operations/topic-learn/                  # ← 迁入（151 个文件）
-│   ├── domain-11-production-operations/topic-k8s-lecturer/           # ← 迁入（18 个文件）
-│   ├── domain-11-production-operations/topic-presentations/          # ← 迁入（13 个文件）
-│   ├── domain-11-production-operations/topic-publish/                # ← 迁入（12 个文件）
+│   ├── 生产运维/topic-best-practices/         # ← 迁入（55 个文件）
+│   ├── 生产运维/topic-learn/                  # ← 迁入（151 个文件）
+│   ├── 生产运维/topic-k8s-lecturer/           # ← 迁入（18 个文件）
+│   ├── 生产运维/topic-presentations/          # ← 迁入（13 个文件）
+│   ├── 生产运维/topic-publish/                # ← 迁入（12 个文件）
 │   ├── journal/                      # ← 迁入（2 个文件）
 │   └── projects/                     # ← 迁入（1 个文件）
 │
-├── domain-12-cloud-providers/
+├── 云厂商/
 │   └── ...核心域文档...
 │
-├── domain-13-container-runtime/
+├── 容器运行时/
 │   └── ...核心域文档...
 │
-├── domain-14-ai-ml-infra/
+├── AI基础设施/
 │   ├── ...核心域文档...
-│   ├── domain-14-ai-ml-infra/02-ai-agents/               # ← 迁入（58 个文件）
-│   └── domain-14-ai-ml-infra/topic-ai-coding/              # ← 迁入（25 个文件）
+│   ├── AI基础设施/02-ai-agents/               # ← 迁入（58 个文件）
+│   └── AI基础设施/topic-ai-coding/              # ← 迁入（25 个文件）
 │
-├── domain-15-specialized-tech/
+├── 专项技术/
 │   └── ...核心域文档...
 │
-├── domain-16-database-middleware/
+├── 数据库中间件/
 │   └── ...核心域文档...
 │
-├── domain-17-system-foundation/
+├── 系统基础/
 │   ├── ...核心域文档...
-│   ├── domain-17-system-foundation/topic-dictionary/             # ← 迁入（209 个文件）
-│   └── domain-17-system-foundation/topic-cheat-sheet/            # ← 迁入（15 个文件）
+│   ├── 系统基础/topic-dictionary/             # ← 迁入（209 个文件）
+│   └── 系统基础/topic-cheat-sheet/            # ← 迁入（15 个文件）
 │
-├── domain-18-manifests-patterns/
+├── 清单模式/
 │   └── ...核心域文档...
 │
-├── domain-19-landscape-references/
+├── 生态参考/
 │   ├── ...核心域文档...
-│   ├── domain-19-landscape-references/_archived-release-notes/          # ← 迁入（1,323 个文件）
-│   └── domain-19-landscape-references/topic-index/                  # ← 迁入（25 个文件）
+│   ├── 生态参考/_archived-release-notes/          # ← 迁入（1,323 个文件）
+│   └── 生态参考/topic-index/                  # ← 迁入（25 个文件）
 │
-└── domain-20-application-patterns/
+└── 应用模式/
     ├── ...核心域文档...
-    └── domain-20-application-patterns/topic-application-architecture/ # ← 迁入（97 个文件）
+    └── 应用模式/topic-application-architecture/ # ← 迁入（97 个文件）
 ```
 
 ---
@@ -254,14 +254,14 @@ kudig-database/
 
 | 阶段 | 内容 | 文件数 | 操作 |
 |------|------|--------|------|
-| **1** | Troubleshooting 核心 | 210 | `mv topic-fta topic-febm topic-structural-trouble-shooting topic-skills topic-qa-corpus domain-10-troubleshooting-diagnostics/` |
-| **2** | Production Operations | 249 | `mv topic-best-practices topic-learn topic-k8s-lecturer topic-presentations topic-publish journal projects domain-11-production-operations/` |
-| **3** | Release & Change | 16 | `mv topic-deployment topic-migration domain-08-release-change-management/` |
-| **4** | System Foundation | 224 | `mv topic-dictionary topic-cheat-sheet domain-17-system-foundation/` |
-| **5** | AI Infra | 83 | `mv 02-ai-agents topic-ai-coding domain-14-ai-ml-infra/` |
-| **6** | Platform & Patterns | 273 | `mv topic-code-analysis domain-07-platform-engineering/`, `mv topic-application-architecture domain-20-application-patterns/`, `mv topic-functions topic-java-kubernetes domain-02-workloads-applications/` |
-| **7** | Landscape | 1,348 | `mv topic-release-notes topic-index domain-19-landscape-references/` |
-| **8** | Networking | 10 | `mv topic-terway domain-03-networking-traffic/` |
+| **1** | Troubleshooting 核心 | 210 | `mv topic-fta topic-febm topic-structural-trouble-shooting topic-skills topic-qa-corpus 故障诊断/` |
+| **2** | Production Operations | 249 | `mv topic-best-practices topic-learn topic-k8s-lecturer topic-presentations topic-publish journal projects 生产运维/` |
+| **3** | Release & Change | 16 | `mv topic-deployment topic-migration 发布变更/` |
+| **4** | System Foundation | 224 | `mv topic-dictionary topic-cheat-sheet 系统基础/` |
+| **5** | AI Infra | 83 | `mv 02-ai-agents topic-ai-coding AI基础设施/` |
+| **6** | Platform & Patterns | 273 | `mv topic-code-analysis 平台工程/`, `mv topic-application-architecture 应用模式/`, `mv topic-functions topic-java-kubernetes 工作负载/` |
+| **7** | Landscape | 1,348 | `mv topic-release-notes topic-index 生态参考/` |
+| **8** | Networking | 10 | `mv topic-terway 网络/` |
 | **9** | 链接修复 | — | 全库脚本替换旧 topic 路径为新的 domain/topic 路径 |
 
 ---

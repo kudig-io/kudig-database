@@ -86,7 +86,7 @@ OpenTofu 是 Terraform 的开源分支，在 Terraform 转向 BSL 许可后由�
 - opentofu
 - [[entities/cdk8s.md|cdk8s (Cloud Development Kit for Kubernetes)]]
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

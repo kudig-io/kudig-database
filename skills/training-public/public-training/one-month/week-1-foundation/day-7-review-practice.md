@@ -78,16 +78,16 @@ audience:
   - developer
 estimated_read_time: 50min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
   - kubernetes
   - kubectl
   - deployment
   - troubleshooting
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/checkpoint.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/checkpoint.md
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
 ---
 
 ```
@@ -698,15 +698,15 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 
 ## 延伸阅读
 
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [K8s 速查手册](../../domain-17-system-foundation/topic-cheat-sheet/k8s.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
+- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
+- [Service 概念与类型](../../网络/06-service-concepts-types.md)
+- [K8s 速查手册](../../系统基础/topic-cheat-sheet/k8s.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

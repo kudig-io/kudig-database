@@ -94,7 +94,7 @@ if !deletionTimestamp.IsZero() {
 
 Use `envtest` (provided by controller-runtime) for integration testing:
 - Spins up a real API Server and etcd
-- Tests reconciler against real [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
+- Tests reconciler against real [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 - Fast, no full cluster needed
 
 ### Step 6: Package and Deploy

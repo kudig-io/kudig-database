@@ -70,11 +70,11 @@ audience:
   - platform-engineer
 estimated_read_time: 90min
 related_domains:
-  - domain-07-platform-engineering
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on
 ---
 
 # Day 21: K8s 组件运维实操

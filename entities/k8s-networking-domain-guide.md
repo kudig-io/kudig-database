@@ -6,7 +6,7 @@ category: references
 tags:
 - k8s
 - networking
-- domain-03-networking-traffic
+- 网络
 - service
 - cni
 - ingress
@@ -48,7 +48,7 @@ prerequisites:
 
 ## Source
 
-Distilled from domain-03-networking-traffic (39 documents, Kubernetes v1.28-v1.32).
+Distilled from 网络 (39 documents, Kubernetes v1.28-v1.32).
 
 ## Networking Model
 

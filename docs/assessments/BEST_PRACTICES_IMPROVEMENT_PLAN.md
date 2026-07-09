@@ -93,7 +93,7 @@ prerequisites:
 **内容结构**：
 ```
 best-practices/
-├── [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md                    # 总体介绍和导航
+├── [[平台工程/topic-code-analysis/deployment-create/README.md|README]].md                    # 总体介绍和导航
 ├── infrastructure/              # 基础设施最佳实践
 │   ├── kubernetes-cluster.md
 │   ├── networking.md

@@ -21,6 +21,9 @@ DRY_RUN=false
 VERBOSE=false
 BASE_DIR="${PWD}"
 
+# 知识域名（中文目录名，替代原 domain-* glob）
+DOMAINS=(集群基础 工作负载 网络 存储 安全 可观测性 平台工程 发布变更 可靠性 故障诊断 生产运维 云厂商 容器运行时 AI基础设施 专项技术 数据库中间件 系统基础 清单模式 生态参考 应用模式)
+
 while [[ $# -gt 0 ]]; do
     case $1 in
         --dry-run|-n) DRY_RUN=true ;;
@@ -58,7 +61,7 @@ while IFS= read -r line; do
             echo "[OK] $rel_path"
         fi
     fi
-done < <(grep -rh 'path:' domain-*/ topic-*/ --include='*.md' 2>/dev/null | grep -E '\.\./' | head -200)
+done < <(grep -rh 'path:' "${DOMAINS[@]}" --include='*.md' 2>/dev/null | grep -E '\.\./' | head -200)
 
 # Check related_docs paths
 while IFS= read -r line; do
@@ -75,7 +78,7 @@ while IFS= read -r line; do
             echo "[OK] $rel_path"
         fi
     fi
-done < <(grep -rh 'related_docs:' -A 10 domain-*/ topic-*/ --include='*.md' 2>/dev/null | grep 'path:')
+done < <(grep -rh 'related_docs:' -A 10 "${DOMAINS[@]}" --include='*.md' 2>/dev/null | grep 'path:')
 
 echo ""
 echo "--- Summary ---"

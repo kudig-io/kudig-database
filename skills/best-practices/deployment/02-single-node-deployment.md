@@ -1149,25 +1149,25 @@ sudo snap remove microk8s
 
 ---
 
-**来源文档**: `domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md`
+**来源文档**: `集群基础/12-cluster-deployment-patterns.md`
 
 ---
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[发布变更/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[发布变更/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[发布变更/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[发布变更/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/linux.md|linux]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 
 ```
 

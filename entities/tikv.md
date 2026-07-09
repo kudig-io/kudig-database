@@ -84,7 +84,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[生态参考/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[entities/cncf-observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[chaos-mesh]] — Chaos Mesh
 - [[kubean]] — Kubean
@@ -92,7 +92,7 @@ description: '## 项目概述'
 
 - tikv
 - [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

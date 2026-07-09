@@ -256,7 +256,7 @@ last_updated: 2026-05-23
 
 *报告生成时间: 2026-05-23*
 *评估方法: 定量指标 + 抽样验证 + 功能测试*
-*数据来源: corpus-config/profiles、domain-10-troubleshooting-diagnostics、scripts/embedding-pipeline.py*
+*数据来源: corpus-config/profiles、故障诊断、scripts/embedding-pipeline.py*
 
 
 <!-- risk-assessed -->

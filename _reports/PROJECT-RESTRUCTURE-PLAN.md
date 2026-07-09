@@ -62,7 +62,7 @@ prerequisites:
 | `journal/` | 1 个 | 2 | 日志 |
 | `projects/` | 1 个 | 1 | 项目 |
 | `corpus-config/` | 1 个 | 2 | 语料配置 |
-| 根目录 .md | — | 9 | AGENTS.md, [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md 等 |
+| 根目录 .md | — | 9 | AGENTS.md, [[平台工程/topic-code-analysis/deployment-create/README.md|README]].md 等 |
 
 ### 1.2 核心问题
 
@@ -89,44 +89,44 @@ prerequisites:
 
 | # | Topic 目录 | 文件数 | 目标 Domain | 归属理由 |
 |---|-----------|--------|-------------|----------|
-| 1 | `domain-10-troubleshooting-diagnostics/topic-fta/` | 81 | `domain-10-troubleshooting-diagnostics/` | 问题树分析是排障核心方法论 |
-| 2 | `domain-10-troubleshooting-diagnostics/topic-febm/` | 11 | `domain-10-troubleshooting-diagnostics/` | 问题排查工程方法论 |
-| 3 | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/` | 72 | `domain-10-troubleshooting-diagnostics/` | 结构化排查体系 |
-| 4 | `domain-10-troubleshooting-diagnostics/topic-skills/` | 42 | `domain-10-troubleshooting-diagnostics/` | 运维技能卡片（排障导向） |
-| 5 | `domain-10-troubleshooting-diagnostics/topic-qa-corpus/` | 4 | `domain-10-troubleshooting-diagnostics/` | QA 语料（排障能力评估） |
-| 6 | `domain-11-production-operations/topic-best-practices/` | 55 | `domain-11-production-operations/` | 最佳实践属于生产运维 |
-| 7 | `domain-11-production-operations/topic-learn/` | 151 | `domain-11-production-operations/` | 学习材料/培训内容 |
-| 8 | `domain-11-production-operations/topic-k8s-lecturer/` | 18 | `domain-11-production-operations/` | 讲师培训材料 |
-| 9 | `domain-11-production-operations/topic-presentations/` | 13 | `domain-11-production-operations/` | 演示文稿 |
-| 10 | `domain-11-production-operations/topic-publish/` | 12 | `domain-11-production-operations/` | 发布与内容运营 |
-| 11 | `domain-08-release-change-management/topic-deployment/` | 5 | `domain-08-release-change-management/` | 部署属于发布交付 |
-| 12 | `domain-08-release-change-management/topic-migration/` | 11 | `domain-08-release-change-management/` | 迁移属于变更管理 |
-| 13 | `domain-17-system-foundation/topic-dictionary/` | 209 | `domain-17-system-foundation/` | 术语词典属于基础概念 |
-| 14 | `domain-17-system-foundation/topic-cheat-sheet/` | 15 | `domain-17-system-foundation/` | 速查表属于基础参考 |
-| 15 | `domain-02-workloads-applications/topic-functions/` | 80 | `domain-02-workloads-applications/` | 函数/工作负载管理 |
-| 16 | `domain-02-workloads-applications/topic-java-kubernetes/` | 7 | `domain-02-workloads-applications/` | Java on K8s 工作负载 |
-| 17 | `domain-14-ai-ml-infra/02-ai-agents/` | 58 | `domain-14-ai-ml-infra/` | AI Agent 基础设施 |
-| 18 | `domain-14-ai-ml-infra/topic-ai-coding/` | 25 | `domain-14-ai-ml-infra/` | AI 编码辅助 |
-| 19 | `domain-07-platform-engineering/topic-code-analysis/` | 89 | `domain-07-platform-engineering/` | 代码分析属于平台工程 |
-| 20 | `domain-20-application-patterns/topic-application-architecture/` | 97 | `domain-20-application-patterns/` | 应用架构模式 |
-| 21 | `domain-19-landscape-references/_archived-release-notes/` | 1,323 | `domain-19-landscape-references/` | 发布说明属于生态全景 |
-| 22 | `domain-19-landscape-references/topic-index/` | 25 | `domain-19-landscape-references/` | 索引属于生态参考 |
-| 23 | `domain-03-networking-traffic/topic-terway/` | 10 | `domain-03-networking-traffic/` | Terway 网络插件 |
+| 1 | `故障诊断/topic-fta/` | 81 | `故障诊断/` | 问题树分析是排障核心方法论 |
+| 2 | `故障诊断/topic-febm/` | 11 | `故障诊断/` | 问题排查工程方法论 |
+| 3 | `故障诊断/topic-structural-trouble-shooting/` | 72 | `故障诊断/` | 结构化排查体系 |
+| 4 | `故障诊断/topic-skills/` | 42 | `故障诊断/` | 运维技能卡片（排障导向） |
+| 5 | `故障诊断/topic-qa-corpus/` | 4 | `故障诊断/` | QA 语料（排障能力评估） |
+| 6 | `生产运维/topic-best-practices/` | 55 | `生产运维/` | 最佳实践属于生产运维 |
+| 7 | `生产运维/topic-learn/` | 151 | `生产运维/` | 学习材料/培训内容 |
+| 8 | `生产运维/topic-k8s-lecturer/` | 18 | `生产运维/` | 讲师培训材料 |
+| 9 | `生产运维/topic-presentations/` | 13 | `生产运维/` | 演示文稿 |
+| 10 | `生产运维/topic-publish/` | 12 | `生产运维/` | 发布与内容运营 |
+| 11 | `发布变更/topic-deployment/` | 5 | `发布变更/` | 部署属于发布交付 |
+| 12 | `发布变更/topic-migration/` | 11 | `发布变更/` | 迁移属于变更管理 |
+| 13 | `系统基础/topic-dictionary/` | 209 | `系统基础/` | 术语词典属于基础概念 |
+| 14 | `系统基础/topic-cheat-sheet/` | 15 | `系统基础/` | 速查表属于基础参考 |
+| 15 | `工作负载/topic-functions/` | 80 | `工作负载/` | 函数/工作负载管理 |
+| 16 | `工作负载/topic-java-kubernetes/` | 7 | `工作负载/` | Java on K8s 工作负载 |
+| 17 | `AI基础设施/02-ai-agents/` | 58 | `AI基础设施/` | AI Agent 基础设施 |
+| 18 | `AI基础设施/topic-ai-coding/` | 25 | `AI基础设施/` | AI 编码辅助 |
+| 19 | `平台工程/topic-code-analysis/` | 89 | `平台工程/` | 代码分析属于平台工程 |
+| 20 | `应用模式/topic-application-architecture/` | 97 | `应用模式/` | 应用架构模式 |
+| 21 | `生态参考/_archived-release-notes/` | 1,323 | `生态参考/` | 发布说明属于生态全景 |
+| 22 | `生态参考/topic-index/` | 25 | `生态参考/` | 索引属于生态参考 |
+| 23 | `网络/topic-terway/` | 10 | `网络/` | Terway 网络插件 |
 
 ### 3.2 迁移后各 Domain 文件规模预估
 
 | Domain | 原有 | 迁入 | 预估总计 |
 |--------|------|------|----------|
-| domain-10-troubleshooting-diagnostics | 219 | 210 | ~429 |
-| domain-11-production-operations | 12 | 249 | ~261 |
-| domain-08-release-change-management | 36 | 16 | ~52 |
-| domain-17-system-foundation | 53 | 224 | ~277 |
-| domain-02-workloads-applications | 41 | 87 | ~128 |
-| domain-14-ai-ml-infra | 101 | 83 | ~184 |
-| domain-07-platform-engineering | 50 | 89 | ~139 |
-| domain-20-application-patterns | 99 | 97 | ~196 |
-| domain-19-landscape-references | 266 | 1,348 | ~1,614 |
-| domain-03-networking-traffic | 115 | 10 | ~125 |
+| 故障诊断 | 219 | 210 | ~429 |
+| 生产运维 | 12 | 249 | ~261 |
+| 发布变更 | 36 | 16 | ~52 |
+| 系统基础 | 53 | 224 | ~277 |
+| 工作负载 | 41 | 87 | ~128 |
+| AI基础设施 | 101 | 83 | ~184 |
+| 平台工程 | 50 | 89 | ~139 |
+| 应用模式 | 99 | 97 | ~196 |
+| 生态参考 | 266 | 1,348 | ~1,614 |
+| 网络 | 115 | 10 | ~125 |
 | 其他 domain | ~443 | 0 | ~443 |
 
 ---
@@ -140,8 +140,8 @@ prerequisites:
 | `docs/` | 35 | **保留** — 元文档、规范、字典（FRONTMATTER-SPEC.md, TAG-DICTIONARY.md 等） |
 | `_reports/` | 27 | **保留** — 报告文件（评估报告、分析报告等） |
 | `corpus-config/` | 2 | **保留** — 语料库配置 |
-| `journal/` | 2 | **移入** `domain-11-production-operations/journal/` |
-| `projects/` | 1 | **移入** `domain-11-production-operations/projects/` |
+| `journal/` | 2 | **移入** `生产运维/journal/` |
+| `projects/` | 1 | **移入** `生产运维/projects/` |
 
 ### 4.2 分散到各 Domain（按内容主题）
 
@@ -176,16 +176,16 @@ prerequisites:
 **目标**: 将 5 个排障相关 topic 移入 domain-10
 **操作**:
 ```bash
-mkdir -p domain-10-troubleshooting-diagnostics/topic-fta
-mkdir -p domain-10-troubleshooting-diagnostics/topic-febm
-mkdir -p domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting
-mkdir -p domain-10-troubleshooting-diagnostics/topic-skills
-mkdir -p domain-10-troubleshooting-diagnostics/topic-qa-corpus
-mv domain-10-troubleshooting-diagnostics/topic-fta/* domain-10-troubleshooting-diagnostics/topic-fta/
-mv domain-10-troubleshooting-diagnostics/topic-febm/* domain-10-troubleshooting-diagnostics/topic-febm/
-mv domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/* domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
-mv domain-10-troubleshooting-diagnostics/topic-skills/* domain-10-troubleshooting-diagnostics/topic-skills/
-mv domain-10-troubleshooting-diagnostics/topic-qa-corpus/* domain-10-troubleshooting-diagnostics/topic-qa-corpus/
+mkdir -p 故障诊断/topic-fta
+mkdir -p 故障诊断/topic-febm
+mkdir -p 故障诊断/topic-structural-trouble-shooting
+mkdir -p 故障诊断/topic-skills
+mkdir -p 故障诊断/topic-qa-corpus
+mv 故障诊断/topic-fta/* 故障诊断/topic-fta/
+mv 故障诊断/topic-febm/* 故障诊断/topic-febm/
+mv 故障诊断/topic-structural-trouble-shooting/* 故障诊断/topic-structural-trouble-shooting/
+mv 故障诊断/topic-skills/* 故障诊断/topic-skills/
+mv 故障诊断/topic-qa-corpus/* 故障诊断/topic-qa-corpus/
 ```
 **文件数**: 210 个
 **预计时间**: 5 分钟
@@ -194,13 +194,13 @@ mv domain-10-troubleshooting-diagnostics/topic-qa-corpus/* domain-10-troubleshoo
 **目标**: 将 5 个运维/培训 topic + journal + projects 移入 domain-11
 **操作**:
 ```bash
-mv domain-11-production-operations/topic-best-practices/ domain-11-production-operations/
-mv domain-11-production-operations/topic-learn/ domain-11-production-operations/
-mv domain-11-production-operations/topic-k8s-lecturer/ domain-11-production-operations/
-mv domain-11-production-operations/topic-presentations/ domain-11-production-operations/
-mv domain-11-production-operations/topic-publish/ domain-11-production-operations/
-mv journal/ domain-11-production-operations/
-mv projects/ domain-11-production-operations/
+mv 生产运维/topic-best-practices/ 生产运维/
+mv 生产运维/topic-learn/ 生产运维/
+mv 生产运维/topic-k8s-lecturer/ 生产运维/
+mv 生产运维/topic-presentations/ 生产运维/
+mv 生产运维/topic-publish/ 生产运维/
+mv journal/ 生产运维/
+mv projects/ 生产运维/
 ```
 **文件数**: 249 个
 **预计时间**: 5 分钟
@@ -209,8 +209,8 @@ mv projects/ domain-11-production-operations/
 **目标**: deployment + migration → domain-08
 **操作**:
 ```bash
-mv domain-08-release-change-management/topic-deployment/ domain-08-release-change-management/
-mv domain-08-release-change-management/topic-migration/ domain-08-release-change-management/
+mv 发布变更/topic-deployment/ 发布变更/
+mv 发布变更/topic-migration/ 发布变更/
 ```
 **文件数**: 16 个
 **预计时间**: 2 分钟
@@ -219,8 +219,8 @@ mv domain-08-release-change-management/topic-migration/ domain-08-release-change
 **目标**: dictionary + cheat-sheet → domain-17
 **操作**:
 ```bash
-mv domain-17-system-foundation/topic-dictionary/ domain-17-system-foundation/
-mv domain-17-system-foundation/topic-cheat-sheet/ domain-17-system-foundation/
+mv 系统基础/topic-dictionary/ 系统基础/
+mv 系统基础/topic-cheat-sheet/ 系统基础/
 ```
 **文件数**: 224 个
 **预计时间**: 5 分钟
@@ -229,8 +229,8 @@ mv domain-17-system-foundation/topic-cheat-sheet/ domain-17-system-foundation/
 **目标**: ai-agent + ai-coding → domain-14
 **操作**:
 ```bash
-mv domain-14-ai-ml-infra/02-ai-agents/ domain-14-ai-ml-infra/
-mv domain-14-ai-ml-infra/topic-ai-coding/ domain-14-ai-ml-infra/
+mv AI基础设施/02-ai-agents/ AI基础设施/
+mv AI基础设施/topic-ai-coding/ AI基础设施/
 ```
 **文件数**: 83 个
 **预计时间**: 2 分钟
@@ -239,10 +239,10 @@ mv domain-14-ai-ml-infra/topic-ai-coding/ domain-14-ai-ml-infra/
 **目标**: code-analysis → domain-07, application-architecture → domain-20, functions + java-kubernetes → domain-02
 **操作**:
 ```bash
-mv domain-07-platform-engineering/topic-code-analysis/ domain-07-platform-engineering/
-mv domain-20-application-patterns/topic-application-architecture/ domain-20-application-patterns/
-mv domain-02-workloads-applications/topic-functions/ domain-02-workloads-applications/
-mv domain-02-workloads-applications/topic-java-kubernetes/ domain-02-workloads-applications/
+mv 平台工程/topic-code-analysis/ 平台工程/
+mv 应用模式/topic-application-architecture/ 应用模式/
+mv 工作负载/topic-functions/ 工作负载/
+mv 工作负载/topic-java-kubernetes/ 工作负载/
 ```
 **文件数**: 273 个
 **预计时间**: 5 分钟
@@ -251,8 +251,8 @@ mv domain-02-workloads-applications/topic-java-kubernetes/ domain-02-workloads-a
 **目标**: release-notes + index → domain-19
 **操作**:
 ```bash
-mv domain-19-landscape-references/_archived-release-notes/ domain-19-landscape-references/
-mv domain-19-landscape-references/topic-index/ domain-19-landscape-references/
+mv 生态参考/_archived-release-notes/ 生态参考/
+mv 生态参考/topic-index/ 生态参考/
 ```
 **文件数**: 1,348 个
 **预计时间**: 10 分钟
@@ -261,7 +261,7 @@ mv domain-19-landscape-references/topic-index/ domain-19-landscape-references/
 **目标**: terway → domain-03
 **操作**:
 ```bash
-mv domain-03-networking-traffic/topic-terway/ domain-03-networking-traffic/
+mv 网络/topic-terway/ 网络/
 ```
 **文件数**: 10 个
 **预计时间**: 1 分钟
@@ -271,8 +271,8 @@ mv domain-03-networking-traffic/topic-terway/ domain-03-networking-traffic/
 **策略**: 不一次性完成，而是按子目录分批迁移
 ```bash
 # 示例：concepts/ 中的安全概念 → domain-05
-mv concepts/security-* domain-05-security-compliance/concepts/
-mv concepts/observability-* domain-06-observability/concepts/
+mv concepts/security-* 安全/concepts/
+mv concepts/observability-* 可观测性/concepts/
 # ...（需逐文件分析）
 ```
 **文件数**: 598 个
@@ -325,7 +325,7 @@ ls -A topic-xxx/ 2>/dev/null || echo "Source dir removed or empty"
 1. 每阶段完成后，记录迁移映射（已包含在本计划中）
 2. 如需回滚某阶段：
    ```bash
-   mv domain-10-troubleshooting-diagnostics/topic-fta/ ./domain-10-troubleshooting-diagnostics/topic-fta/
+   mv 故障诊断/topic-fta/ ./故障诊断/topic-fta/
    ```
 3. 最坏情况：从 git HEAD 恢复（`git checkout HEAD -- <file>`），但尽量避免
 
@@ -338,8 +338,8 @@ ls -A topic-xxx/ 2>/dev/null || echo "Source dir removed or empty"
 ```python
 # 批量替换旧路径为新路径
 # 示例：
-# "domain-10-troubleshooting-diagnostics/topic-fta/01-xxx.md" → "domain-10-troubleshooting-diagnostics/topic-fta/01-xxx.md"
-# "domain-11-production-operations/topic-best-practices/security/pod-security.md" → "domain-11-production-operations/domain-11-production-operations/topic-best-practices/security/pod-security.md"
+# "故障诊断/topic-fta/01-xxx.md" → "故障诊断/topic-fta/01-xxx.md"
+# "生产运维/topic-best-practices/security/pod-security.md" → "生产运维/生产运维/topic-best-practices/security/pod-security.md"
 ```
 
 **修复范围**:
@@ -358,66 +358,66 @@ kudig-database/
 ├── docs/                                         # 元文档保留
 ├── _reports/                                     # 报告保留
 ├── corpus-config/                                # 配置保留
-├── domain-01-cluster-fundamentals/
+├── 集群基础/
 │   ├── 00-open-source-projects-index.md
 │   ├── 01-kubernetes-architecture-overview.md
 │   └── ...
-├── domain-02-workloads-applications/
+├── 工作负载/
 │   ├── ...原有文件...
-│   ├── domain-02-workloads-applications/topic-functions/          # ← 迁入
-│   └── domain-02-workloads-applications/topic-java-kubernetes/    # ← 迁入
-├── domain-03-networking-traffic/
+│   ├── 工作负载/topic-functions/          # ← 迁入
+│   └── 工作负载/topic-java-kubernetes/    # ← 迁入
+├── 网络/
 │   ├── ...原有文件...
-│   └── domain-03-networking-traffic/topic-terway/             # ← 迁入
-├── domain-04-storage-data/
-├── domain-05-security-compliance/
+│   └── 网络/topic-terway/             # ← 迁入
+├── 存储/
+├── 安全/
 │   └── concepts/                 # ← 分散迁入
-├── domain-06-observability/
+├── 可观测性/
 │   └── concepts/                 # ← 分散迁入
-├── domain-07-platform-engineering/
+├── 平台工程/
 │   ├── ...原有文件...
-│   └── domain-07-platform-engineering/topic-code-analysis/      # ← 迁入
-├── domain-08-release-change-management/
+│   └── 平台工程/topic-code-analysis/      # ← 迁入
+├── 发布变更/
 │   ├── ...原有文件...
-│   ├── domain-08-release-change-management/topic-deployment/         # ← 迁入
-│   └── domain-08-release-change-management/topic-migration/          # ← 迁入
-├── domain-09-reliability-engineering/
-├── domain-10-troubleshooting-diagnostics/
+│   ├── 发布变更/topic-deployment/         # ← 迁入
+│   └── 发布变更/topic-migration/          # ← 迁入
+├── 可靠性/
+├── 故障诊断/
 │   ├── ...原有文件...
-│   ├── domain-10-troubleshooting-diagnostics/topic-fta/                # ← 迁入
-│   ├── domain-10-troubleshooting-diagnostics/topic-febm/               # ← 迁入
-│   ├── domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/  # ← 迁入
-│   ├── domain-10-troubleshooting-diagnostics/topic-skills/             # ← 迁入
-│   └── domain-10-troubleshooting-diagnostics/topic-qa-corpus/          # ← 迁入
-├── domain-11-production-operations/
+│   ├── 故障诊断/topic-fta/                # ← 迁入
+│   ├── 故障诊断/topic-febm/               # ← 迁入
+│   ├── 故障诊断/topic-structural-trouble-shooting/  # ← 迁入
+│   ├── 故障诊断/topic-skills/             # ← 迁入
+│   └── 故障诊断/topic-qa-corpus/          # ← 迁入
+├── 生产运维/
 │   ├── ...原有文件...
-│   ├── domain-11-production-operations/topic-best-practices/     # ← 迁入
-│   ├── domain-11-production-operations/topic-learn/              # ← 迁入
-│   ├── domain-11-production-operations/topic-k8s-lecturer/       # ← 迁入
-│   ├── domain-11-production-operations/topic-presentations/      # ← 迁入
-│   ├── domain-11-production-operations/topic-publish/            # ← 迁入
+│   ├── 生产运维/topic-best-practices/     # ← 迁入
+│   ├── 生产运维/topic-learn/              # ← 迁入
+│   ├── 生产运维/topic-k8s-lecturer/       # ← 迁入
+│   ├── 生产运维/topic-presentations/      # ← 迁入
+│   ├── 生产运维/topic-publish/            # ← 迁入
 │   ├── journal/                  # ← 迁入
 │   └── projects/                 # ← 迁入
-├── domain-12-cloud-providers/
-├── domain-13-container-runtime/
-├── domain-14-ai-ml-infra/
+├── 云厂商/
+├── 容器运行时/
+├── AI基础设施/
 │   ├── ...原有文件...
-│   ├── domain-14-ai-ml-infra/02-ai-agents/           # ← 迁入
-│   └── domain-14-ai-ml-infra/topic-ai-coding/          # ← 迁入
-├── domain-15-specialized-tech/
-├── domain-16-database-middleware/
-├── domain-17-system-foundation/
+│   ├── AI基础设施/02-ai-agents/           # ← 迁入
+│   └── AI基础设施/topic-ai-coding/          # ← 迁入
+├── 专项技术/
+├── 数据库中间件/
+├── 系统基础/
 │   ├── ...原有文件...
-│   ├── domain-17-system-foundation/topic-dictionary/         # ← 迁入
-│   └── domain-17-system-foundation/topic-cheat-sheet/        # ← 迁入
-├── domain-18-manifests-patterns/
-├── domain-19-landscape-references/
+│   ├── 系统基础/topic-dictionary/         # ← 迁入
+│   └── 系统基础/topic-cheat-sheet/        # ← 迁入
+├── 清单模式/
+├── 生态参考/
 │   ├── ...原有文件...
-│   ├── domain-19-landscape-references/_archived-release-notes/      # ← 迁入
-│   └── domain-19-landscape-references/topic-index/              # ← 迁入
-└── domain-20-application-patterns/
+│   ├── 生态参考/_archived-release-notes/      # ← 迁入
+│   └── 生态参考/topic-index/              # ← 迁入
+└── 应用模式/
     ├── ...原有文件...
-    └── domain-20-application-patterns/topic-application-architecture/  # ← 迁入
+    └── 应用模式/topic-application-architecture/  # ← 迁入
 ```
 
 ---

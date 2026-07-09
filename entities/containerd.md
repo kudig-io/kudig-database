@@ -94,12 +94,12 @@ journalctl -u containerd -f
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-1.5
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-0.0
 - RELEASE-NOTES-1.0
@@ -128,8 +128,8 @@ journalctl -u containerd -f
 - [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/node-index.md|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -41,10 +41,10 @@ prerequisites:
 - etcd-basics
 cross_refs:
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 可观测性知识域
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 企业监控知识域
 ---
 

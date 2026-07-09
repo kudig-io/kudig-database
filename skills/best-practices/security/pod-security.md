@@ -37,10 +37,10 @@ prerequisites:
 - kubectl-basics
 cross_refs:
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 安全知识域
 - type: domain
-  path: ../../domain-05-security-compliance/
+  path: ../../安全/
   label: 云原生安全知识域
 ---
 

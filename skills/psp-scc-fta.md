@@ -171,9 +171,9 @@ flowchart TD
 - [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[opa]] — OPA (Open Policy Agent)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
+- [[故障诊断/topic-fta/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
 - [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

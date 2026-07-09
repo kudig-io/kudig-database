@@ -510,6 +510,6 @@ markdown_extensions:
 
 ---
 
-**下一步行动**: 在 domain-10-troubleshooting-diagnostics 目录下所有文档中应用此规范，将现有问题排查流程转换为 Mermaid 决策树格式。
+**下一步行动**: 在 故障诊断 目录下所有文档中应用此规范，将现有问题排查流程转换为 Mermaid 决策树格式。
 
 <!-- risk-assessed -->

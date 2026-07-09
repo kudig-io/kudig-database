@@ -63,7 +63,7 @@ prerequisites:
 | Symptom | 症状 | SYMP-001 |
 | DiagnosticStep | 诊断步骤 | DS-001 |
 | Remediation | 修复方案 | REM-001 |
-| Domain | 知识域 | domain-10-troubleshooting-diagnostics |
+| Domain | 知识域 | 故障诊断 |
 | Tool | 工具 | kubectl_get_pods |
 
 ---
@@ -140,7 +140,7 @@ kudig:REM-001 rdf:type kudig:Remediation ;
 # 技能属于知识域
 kudig:SKILL-NODE-001 kudig:belongsTo kudig:DOMAIN-12 .
 kudig:DOMAIN-12 rdf:type kudig:Domain ;
-    kudig:domainId "domain-10-troubleshooting-diagnostics" ;
+    kudig:domainId "故障诊断" ;
     kudig:title "问题排查" ;
     kudig:hasDocument kudig:DOC-01, kudig:DOC-02 .
 

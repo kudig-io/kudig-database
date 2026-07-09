@@ -36,7 +36,7 @@ title: "topic-best-practices MOC"
 category: concepts
 summary: "*本文档由 scripts/generate-mocs.py 自动生成，最后更新 2026-05-21。*"topic-best-practices MOC""
 tags: k8s, best-practices]
-sources: ["domain-11-production-operations/topic-best-practices/MOC.md"]
+sources: ["生产运维/topic-best-practices/MOC.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

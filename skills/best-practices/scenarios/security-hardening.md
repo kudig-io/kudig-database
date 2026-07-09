@@ -62,11 +62,11 @@ graph TD
     A["安全加固"] --> B{"问题确认"}
     B -->|"已知问题"| C["参考相关文档"]
     B -->|"未知问题"| D{"组件定位"}
-    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
-    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
-    D -->|"网络"| G["参考 domain-03-networking-traffic"]
-    D -->|"存储"| H["参考 domain-04-storage-data"]
-    D -->|"安全"| I["参考 domain-05-security-compliance"]
+    D -->|"控制平面"| E["参考 集群基础"]
+    D -->|"工作负载"| F["参考 工作负载"]
+    D -->|"网络"| G["参考 网络"]
+    D -->|"存储"| H["参考 存储"]
+    D -->|"安全"| I["参考 安全"]
 
     C --> J["执行修复"]
     E --> J
@@ -88,8 +88,8 @@ graph TD
 
 ## 相关文档
 
-- [[domain-05-security-compliance/README.md|README]]
-- [[domain-05-security-compliance/README.md|README]]
+- [[安全/README.md|README]]
+- [[安全/README.md|README]]
 - supply-chain-security/README.md]]
 
 
@@ -97,9 +97,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|rbac fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|certificate fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]]
+- [[故障诊断/topic-fta/list/rbac-fta.md|rbac fta]]
+- [[故障诊断/topic-fta/list/certificate-fta.md|certificate fta]]
+- [[故障诊断/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]]
 
 
 ---
@@ -120,7 +120,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - [[skills/certificate-fta.md|certificate-fta]]
-- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+- [[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
 
 
 <!-- risk-assessed -->

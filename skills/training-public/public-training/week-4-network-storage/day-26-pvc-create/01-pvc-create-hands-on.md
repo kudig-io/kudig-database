@@ -664,8 +664,8 @@ audience:
   - ops-engineer
 estimated_read_time: 50min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-04-storage-data
+  - 故障诊断
+  - 存储
 related_topics:
   - storage
   - pv
@@ -673,8 +673,8 @@ related_topics:
   - storageclass
   - csi
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-27-pvc-mount/01-pvc-mount-hands-on.md
-  - domain-10-troubleshooting-diagnostics/10-pv-pvc-troubleshooting.md
+  - 生产运维/topic-learn/public-training/week-4-network-storage/day-27-pvc-mount/01-pvc-mount-hands-on.md
+  - 故障诊断/10-pv-pvc-troubleshooting.md
 ---
 ```
 

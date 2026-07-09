@@ -77,16 +77,16 @@ audience:
   - ops-engineer
 estimated_read_time: 45min
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
   - storage
   - pv
   - pvc
   - statefulset
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-12-networking-1.md
-  - domain-04-storage-data/04-storageclass-dynamic-provisioning.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-12-networking-1.md
+  - 存储/04-storageclass-dynamic-provisioning.md
 ---
 ```
 
@@ -107,15 +107,15 @@ related:
 ### 必读文档
 
 1. **存储架构总览**
-   - 文件: `../../domain-04-storage-data/01-storage-architecture-overview.md`
+   - 文件: `../../存储/01-storage-architecture-overview.md`
    - 重点: 存储架构全貌
 
 2. **PV 架构基础**
-   - 文件: `../../domain-04-storage-data/02-pv-architecture-fundamentals.md`
+   - 文件: `../../存储/02-pv-architecture-fundamentals.md`
    - 重点: PV/PVC 绑定机制
 
 3. **StorageClass 动态供应**
-   - 文件: `../../domain-04-storage-data/04-storageclass-dynamic-provisioning.md`
+   - 文件: `../../存储/04-storageclass-dynamic-provisioning.md`
    - 重点: 动态供应、CSI 驱动
 
 ---

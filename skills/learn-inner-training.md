@@ -63,17 +63,17 @@ prerequisites:
   - 技术支持人员
   - SRE工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 集群基础
+  - 工作负载
+  - 安全
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/README
-  - domain-11-production-operations/topic-learn/inner-training/week-1-ack-acr-lifecycle
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring
-  - domain-11-production-operations/topic-learn/inner-training/week-3-node-workload
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage
+  - 生产运维/topic-learn/inner-training/README
+  - 生产运维/topic-learn/inner-training/week-1-ack-acr-lifecycle
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring
+  - 生产运维/topic-learn/inner-training/week-3-node-workload
+  - 生产运维/topic-learn/inner-training/week-4-network-storage
 id: INNER-TRAINING-001
 topic: training
 type: training-plan
@@ -127,13 +127,13 @@ tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
   - 技术支持人员
   - SRE工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-05-security-compliance
-  - domain-12-cloud-providers
+  - 集群基础
+  - 安全
+  - 云厂商
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/inner-one-month-training
-  - domain-11-production-operations/topic-learn/inner-training/week-1-ack-acr-lifecycle
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring
+  - 生产运维/topic-learn/inner-training/inner-one-month-training
+  - 生产运维/topic-learn/inner-training/week-1-ack-acr-lifecycle
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring
 id: INNER-TRAINING-INDEX-001
 topic: training
 type: training-plan
@@ -171,9 +171,9 @@ tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
   - DevOps engineers
   - Platform engineers
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 集群基础
+  - 故障诊断
 related_topics:
   - cluster-creation
   - cluster-deletion
@@ -215,9 +215,9 @@ related_topics:
   - SRE engineers
   - Security engineers
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-12-cloud-providers
+  - 安全
+  - 可观测性
+  - 云厂商
 related_topics:
   - ram-integration
   - vulnerability
@@ -269,8 +269,8 @@ related_topics:
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - node-basics
   - node-advanced
@@ -317,8 +317,8 @@ related_topics:
 related_domains:
   - domain-6-networking
   - domain-7-storage
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - service-networking
   - ingress
@@ -368,9 +368,9 @@ related_topics:
   - DevOps engineers
   - Platform engineers
 related_domains:
-  - domain-12-cloud-providers
-  - domain-05-security-compliance
-  - domain-06-observability
+  - 云厂商
+  - 安全
+  - 可观测性
   - domain-9-workload
 related_topics:
   - ack-cluster-lifecycle
@@ -392,8 +392,8 @@ related_topics:
 ---
 
 ### ACK/ACR/K8S 命令速查表related_domains:
-- domain-12-cloud-providers
-- domain-01-cluster-fundamentals
+- 云厂商
+- 集群基础
 related_topics:
 - knowledge-map
 - reading-sequence  role: contributor---
@@ -445,8 +445,8 @@ aliyun cs GET /clust
 ---
 
 ### ACK/ACR/K8S 内部培训知识图谱related_domains:
-- domain-12-cloud-providers
-- domain-01-cluster-fundamentals
+- 云厂商
+- 集群基础
 related_topics:
 - reading-sequence
 - commands-cheatsheet  role: contributor---
@@ -497,8 +497,8 @@ SDK & API
 ---
 
 ### 阅读顺序指南related_domains:
-- domain-12-cloud-providers
-- domain-01-cluster-fundamentals
+- 云厂商
+- 集群基础
 related_topics:
 - knowledge-map
 - commands-cheatsheet  role: contributor---
@@ -524,9 +524,9 @@ related_topics:
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|
-| ⭐1 | `../../domain-12-cloud-providers/04-alicloud-ack/200-ack-overview.md` | ACK 产品概览与架构 |
-| ⭐2 | `../../domain-12-cloud-providers/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
-| 📖3 | `../../domain-12-cloud-providers/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
+| ⭐1 | `../../云厂商/04-alicloud-ack/200-ack-overview.md` | ACK 产品概览与架构 |
+| ⭐2 | `../../云厂商/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
+| 📖3 | `../../云厂商/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
 
 ### Day 2: ACK SDK & API
 
@@ -560,8 +560,8 @@ related_topics:
   - ACK beginners
   - New joiners
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - day-1-ack-acr-sr
   - day-2-ack-sdk-api
@@ -619,8 +619,8 @@ ACK 是阿里云提供的托管 Kubernetes 服务，它将 K8s 的复杂性封�
   - 自测  - Week 1 learners
   - ACK beginners
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - day-1-ack-acr-sr
   - day-2-ack-sdk-api
@@ -670,8 +670,8 @@ related_topics:
   - New joiners
   - Anyone interested in ACK/ACR
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-cluster-types
@@ -714,8 +714,8 @@ related_topics:
   - DevOps engineers
   - Platform engineers
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-openapi
@@ -757,8 +757,8 @@ ACK 提供了完整的 OpenAPI 接口，支持通过 aliyun CLI、Python SDK、J
   - Beginners
   - Operations personnel
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-practical-guide
@@ -799,9 +799,9 @@ related_topics:
   - DevOps engineers
   - Platform engineers
 related_domains:
-  - domain-12-cloud-providers
+  - 云厂商
   - domain-6-networking
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
 related_topics:
   - ack-overview
   - ack-vpc-network
@@ -854,9 +854,9 @@ related_topics:
   - SRE engineers
   - Platform engineers
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 集群基础
+  - 故障诊断
 related_topics:
   - cluster-lifecycle-management
   - cluster-creation
@@ -903,10 +903,10 @@ related_topics:
   - SRE engineers
   - Platform engineers
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-07-platform-engineering
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 平台工程
+  - 云厂商
+  - 故障诊断
 related_topics:
   - cluster-lifecycle-management
   - upgrade-paths-strategy
@@ -949,10 +949,10 @@ related_topics:
   - SRE engineers
   - Platform engineers
 related_domains:
-  - domain-05-security-compliance
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 安全
+  - 集群基础
+  - 故障诊断
+  - 云厂商
 related_topics:
   - certificate-management
   - security-architecture
@@ -995,15 +995,15 @@ related_topics:
   - ops工程师
   - 安全工程师
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-1-ack-acr-lifecycle
-  - domain-11-production-operations/topic-learn/inner-training/week-3-node-workload
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 生产运维/topic-learn/inner-training/week-1-ack-acr-lifecycle
+  - 生产运维/topic-learn/inner-training/week-3-node-workload
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
 id: WEEK2-INDEX
 topic: training
 type: week-index
@@ -1062,13 +1062,13 @@ RBAC（Role-Based Acc
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
 id: WEEK2-CHECKPOINT
 topic: training
 type: checkpoint
@@ -1103,9 +1103,9 @@ tags: [week-2, checkpoint, self-test, security, monitoring, k8s, k8s-1.28-1.33]
   - Security engineers
   - SRE engineers
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 安全
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-security-standards
   - secret-management
@@ -1148,9 +1148,9 @@ Kubernetes 安全漏洞管理是每
   - Security engineers
   - SRE engineers
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 安全
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-security-standards
   - rbac-configuration
@@ -1194,13 +1194,13 @@ related_topics:
   - 安全工程师
   - 运维工程师
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
-  - domain-06-observability/03-logging-architecture
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 可观测性/03-logging-architecture
 id: WEEK2-DAY12
 topic: training
 type: hands-on
@@ -1241,9 +1241,9 @@ Kubernetes 审计（Audit）是集群安全体系中的重要组成部分，它�
   - ACK operators
   - Platform engineers
 related_domains:
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 可观测性
+  - 故障诊断
+  - 云厂商
 related_topics:
   - monitoring-metrics-system
   - alerting-management
@@ -1287,12 +1287,12 @@ related_topics:
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/checkpoint
-  - domain-02-workloads-applications/23-resource-management
-  - domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/checkpoint
+  - 工作负载/23-resource-management
+  - 故障诊断/24-quota-limitrange-troubleshooting
 id: WEEK2-DAY14
 topic: training
 type: hands-on
@@ -1336,13 +1336,13 @@ tags: [week-2, day-14, quota, resource, limitrange, k8s, k8s-1.28-1.33]
   - 安全工程师
   - 运维工程师
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
-  - domain-05-security-compliance/01-authentication-authorization-system
-  - domain-05-security-compliance/07-rbac-matrix-configuration
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 安全/01-authentication-authorization-system
+  - 安全/07-rbac-matrix-configuration
 id: WEEK2-DAY8
 topic: training
 type: hands-on
@@ -1375,9 +1375,9 @@ tags: [week-2, day-8, rbac, security, authorization, k8s, k8s-1.28-1.33]
   - DevOps engineers
   - Platform engineers
 related_domains:
-  - domain-05-security-compliance
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 云厂商
+  - 故障诊断
 related_topics:
   - rbac-configuration
   - ack-cluster-lifecycle
@@ -1432,7 +1432,7 @@ related_topics:
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-12-cloud-providers
+  - 云厂商
 related_topics:
   - node-basics
   - node-advanced
@@ -1493,7 +1493,7 @@ Kubernetes 中的每个 Node 节点都运行着三个核心组件：**kubelet**�
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
 related_topics:
   - node-basics
   - node-advanced
@@ -1541,8 +1541,8 @@ Week 3 的学习聚焦于 Kubernetes 集群中最核心的运维对象——节�
   - Platform engineers
 related_domains:
   - domain-3-node
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - node-overview
   - node-management
@@ -1586,8 +1586,8 @@ Node（节点）是 Kubernetes 集群的工作引擎，是实际运行容器应�
   - Platform engineers
 related_domains:
   - domain-3-node
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - node-basics
   - node-management
@@ -1631,8 +1631,8 @@ related_topics:
   - Platform engineers
 related_domains:
   - domain-3-node
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - nodepool-advanced
   - node-basics
@@ -1675,8 +1675,8 @@ related_topics:
   - Platform engineers
 related_domains:
   - domain-3-node
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - nodepool-basics
   - cluster-autoscaler-troubleshooting
@@ -1728,8 +1728,8 @@ related_topics:
   - SRE engineers
 related_domains:
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-overview
   - pod-lifecycle
@@ -1774,8 +1774,8 @@ related_topics:
   - SRE engineers
 related_domains:
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-scheduling-strategies
   - pod-probes
@@ -1821,9 +1821,9 @@ related_topics:
   - SRE engineers
   - Platform engineers
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 集群基础
+  - 故障诊断
+  - 云厂商
 related_topics:
   - apiserver-deep-dive
   - etcd-deep-dive
@@ -1866,18 +1866,18 @@ related_topics:
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-3-node-workload
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-28-comprehensive-review
+  - 生产运维/topic-learn/inner-training/week-3-node-workload
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-28-comprehensive-review
 id: WEEK4-INDEX
 topic: training
 type: week-index
@@ -1918,13 +1918,13 @@ tags: [week-4, networking, storage, service, ingress, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
 id: WEEK4-CHECKPOINT
 topic: training
 type: checkpoint
@@ -1966,13 +1966,13 @@ Week 4 是整个培训的收官阶段，涵盖了 Kubernetes 网络和存储两�
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
 id: WEEK4-DAY22
 topic: training
 type: hands-on
@@ -2009,12 +2009,12 @@ tags: [week-4, day-22, service, networking, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-03-networking-traffic/19-ingress-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 网络/19-ingress-fundamentals
 id: WEEK4-DAY23
 topic: training
 type: hands-on
@@ -2056,12 +2056,12 @@ tags: [week-4, day-23, ingress, networking, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-03-networking-traffic/02-cni-architecture-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-25-flannel-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 网络/02-cni-architecture-fundamentals
 id: WEEK4-DAY24
 topic: training
 type: hands-on
@@ -2103,12 +2103,12 @@ tags: [week-4, day-24, terway, cni, networking, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-03-networking-traffic/02-cni-architecture-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 网络/02-cni-architecture-fundamentals
 id: WEEK4-DAY25
 topic: training
 type: hands-on
@@ -2154,12 +2154,12 @@ tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-04-storage-data/01-storage-architecture-overview
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 存储/01-storage-architecture-overview
 id: WEEK4-DAY26
 topic: training
 type: hands-on
@@ -2202,12 +2202,12 @@ tags: [week-4, day-26, storage, pv, pvc, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-04-storage-data/02-pv-architecture-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 存储/02-pv-architecture-fundamentals
 id: WEEK4-DAY27
 topic: training
 type: hands-on
@@ -2246,15 +2246,15 @@ tags: [week-4, day-27, storage, volume, mount, k8s, k8s-1.28-1.33]
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
 id: WEEK4-DAY28
 topic: training
 type: review

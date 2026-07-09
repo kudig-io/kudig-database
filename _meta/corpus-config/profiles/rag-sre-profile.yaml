@@ -10,79 +10,79 @@ use_case: "自动化故障诊断、根因分析、修复建议"
 include:
   # ── 核心语料（必须导入） ──
 
-  - path: "domain-10-troubleshooting-diagnostics/topic-fta/"
+  - path: "故障诊断/topic-fta/"
     priority: critical
     chunking: by_h3
     note: "36 个组件故障树 + FTA 方法论（推理骨架）"
 
-  - path: "domain-10-troubleshooting-diagnostics/topic-skills/"
+  - path: "故障诊断/topic-skills/"
     priority: critical
     chunking: by_section
     note: "18 个诊断-修复 Skill"
 
-  - path: "domain-10-troubleshooting-diagnostics/00-core-troubleshooting/"
+  - path: "故障诊断/00-core-troubleshooting/"
     priority: critical
     chunking: by_h2
     note: "核心故障排查"
 
-  - path: "domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/"
+  - path: "故障诊断/01-resource-troubleshooting/"
     priority: critical
     chunking: by_h2
     note: "资源类故障排查"
 
-  - path: "domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/"
+  - path: "故障诊断/02-infrastructure-troubleshooting/"
     priority: critical
     chunking: by_h2
     note: "基础设施故障排查"
 
-  - path: "domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/"
+  - path: "故障诊断/03-advanced-troubleshooting/"
     priority: critical
     chunking: by_h2
     note: "高级故障排查"
 
   # ── 方法论语料（推荐导入） ──
 
-  - path: "domain-10-troubleshooting-diagnostics/topic-febm/"
+  - path: "故障诊断/topic-febm/"
     priority: high
     chunking: by_h2
     note: "FEBM 取证方法"
 
-  - path: "domain-10-troubleshooting-diagnostics/topic-multi-fault-scenarios/"
+  - path: "故障诊断/topic-multi-fault-scenarios/"
     priority: high
     chunking: by_h2
     note: "多故障并发场景"
 
   # ── 参考语料（可选导入） ──
 
-  - path: "domain-17-system-foundation/topic-cheat-sheet/"
+  - path: "系统基础/topic-cheat-sheet/"
     priority: medium
     chunking: full_doc
     note: "K8s / Linux 速查卡"
 
-  - path: "domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/"
+  - path: "故障诊断/topic-structural-trouble-shooting/"
     priority: medium
     chunking: by_h2
     note: "结构化排障方法"
 
-  - path: "domain-10-troubleshooting-diagnostics/04-jvm-tuning/"
+  - path: "故障诊断/04-jvm-tuning/"
     priority: medium
     chunking: by_h2
     note: "JVM 调优"
 
-  - path: "domain-10-troubleshooting-diagnostics/99-production-readiness-operations-guide.md"
+  - path: "故障诊断/99-production-readiness-operations-guide.md"
     priority: medium
     chunking: full_doc
     note: "生产就绪运维指南"
 
-  - path: "domain-10-troubleshooting-diagnostics/index.md"
+  - path: "故障诊断/index.md"
     priority: medium
     chunking: full_doc
 
-  - path: "domain-10-troubleshooting-diagnostics/README.md"
+  - path: "故障诊断/README.md"
     priority: medium
     chunking: full_doc
 
-  - path: "domain-10-troubleshooting-diagnostics/SUMMARY.md"
+  - path: "故障诊断/SUMMARY.md"
     priority: medium
     chunking: full_doc
 
@@ -90,6 +90,6 @@ exclude:
   - "*.pdf"
   - "CHANGELOG.md"
   - "ENHANCEMENT-RECORD.md"
-  - "domain-10-troubleshooting-diagnostics/topic-qa-corpus/"
-  - "domain-10-troubleshooting-diagnostics/tools/"
-  - "domain-10-troubleshooting-diagnostics/98-merged-indexes/"
+  - "故障诊断/topic-qa-corpus/"
+  - "故障诊断/tools/"
+  - "故障诊断/98-merged-indexes/"

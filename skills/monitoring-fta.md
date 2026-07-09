@@ -42,7 +42,7 @@ title: "监控与告警异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示监控组件异常 --> - **目标**：覆盖 Prometheus 采集失败、..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md"]
+sources: ["故障诊断/topic-fta/list/monitoring-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

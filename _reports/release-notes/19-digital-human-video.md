@@ -184,7 +184,7 @@ kudig-database 是什么?
 
 [停顿, 展示 Agent 输出]
 
-Agent 命中了 domain-01-cluster-fundamentals 的 etcd 深度文档。
+Agent 命中了 集群基础 的 etcd 深度文档。
 1,042 行。从 Raft 协议到 MVCC 数据模型, 从 Watch 机制到备份恢复。
 30 分钟的系统性知识, 30 秒输出。
 

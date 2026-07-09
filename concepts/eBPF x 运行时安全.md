@@ -32,15 +32,15 @@ prerequisites:
 - cilium-basics
 - kafka-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+- target: '[[系统基础/topic-dictionary/networking/service-mesh.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md]]'
+- target: '[[系统基础/topic-dictionary/security/multi-tenancy.md]]'
   type: related_to
 - target: '[[entities/networkpolicy.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/security/runtime-security.md]]'
+- target: '[[系统基础/topic-dictionary/security/runtime-security.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/topic-dictionary/networking/service.md]]'
   type: uses
 ---
 
@@ -52,7 +52,7 @@ relationships:
 
 
 ---
-title: eBPF x [[domain-17-system-foundation/topic-dictionary/security/runtime-security.md|运行时安全]]
+title: eBPF x [[系统基础/topic-dictionary/security/runtime-security.md|运行时安全]]
 category: synthesis
 tags:
 - k8s
@@ -69,7 +69,7 @@ sources:
 - entities/falco.md
 - entities/cilium.md
 - concepts/security-defense-depth.md
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|service]]-mesh-architecture.md
+- [[系统基础/topic-dictionary/networking/service.md|service]]-mesh-architecture.md
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 summary: "eBPF 如何将网络、可观测性和运行时安全三大安全关注点统一为单一内核级数据面——从 Cilium 的 L7 策略到 Tetragon 的进程追踪，揭示了一种统一的内核级安全模型。"
@@ -98,7 +98,7 @@ eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互
 - **Cilium** 用 eBPF 实现 L3/L4/L7 网络策略（网络）+ 服务网格 mTLS（安全）+ 流量可视化（可观测性）——三合一
 - **Tetragon** 使用 eBPF kprobe 和 cgroup 挂钩实现进程执行监控、文件访问追踪和网络异常检测——与 Cilium 共享相同的 eBPF 基础设施
 - **Hubble** 使用与 Tetragon 相同的 eBPF socket 和 TC 挂载点，但用于流可观测性而非强制 enforcement
-- **Cilium [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|Service Mesh]]** 用 eBPF L4 mTLS 取代 sidecar 代理模式，消除了每 Pod 代理开销
+- **Cilium [[系统基础/topic-dictionary/networking/service-mesh.md|Service Mesh]]** 用 eBPF L4 mTLS 取代 sidecar 代理模式，消除了每 Pod 代理开销
 
 这三个工具（Cilium、Tetragon、Hubble）被 wiki 分别视为"网络"、"安全"和"可观测性"的独立页面，但它们实际上是同一个 eBPF 基础设施在不同层面的应用——同一个 Cilium Agent 同时将 eBPF 程序注入内核，分别服务这三个目标。
 
@@ -133,7 +133,7 @@ eBPF 从根本上改变了 Kubernetes 的安全格局——它将传统上相互
 ## 开放问题
 
 - **eBPF 程序版本管理：** 如何安全地跨集群升级 eBPF 程序，而不引发内核恐慌或在滚动升级期间产生策略盲区？
-- **[[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md|多租户]] eBPF 策略：** 在多租户集群中，如何确保一个租户的 eBPF 程序不会干扰另一个租户的策略？
+- **[[系统基础/topic-dictionary/security/multi-tenancy.md|多租户]] eBPF 策略：** 在多租户集群中，如何确保一个租户的 eBPF 程序不会干扰另一个租户的策略？
 - **回退策略：** 如果 eBPF 数据面问题（eBPF 程序导致内核恐慌），安全回退是什么——数据包是被丢弃还是放行？wiki 尚未全面覆盖 eBPF 故障模式。
 - **Tetragon 的策略即代码：** CiliumNetworkPolicy 已有成熟的 GitOps 工作流，但 Tetragon 的 TracingPolicy 尚缺乏等效的标准化策略即代码模式，无法纳入 GitOps 管道。
 - **eBPF 安全成熟度评估：** 如何量化评估一个集群的 eBPF 安全覆盖率？哪些 eBPF 程序已部署、哪些内核挂载点已利用、哪些安全层已通过 eBPF 实现？

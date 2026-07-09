@@ -66,9 +66,9 @@ audience:
   - Security engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-12-cloud-providers
+  - 安全
+  - 可观测性
+  - 云厂商
 related_topics:
   - ram-integration
   - vulnerability

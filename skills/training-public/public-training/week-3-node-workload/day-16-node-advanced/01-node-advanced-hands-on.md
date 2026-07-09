@@ -69,12 +69,12 @@ audience:
   - platform-engineer
 estimated_read_time: 90min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-07-platform-engineering
+  - 故障诊断
+  - 平台工程
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-18-nodepool-advanced/01-nodepool-advanced-hands-on
 ---
 
 # Day 16: Node 节点进阶实操

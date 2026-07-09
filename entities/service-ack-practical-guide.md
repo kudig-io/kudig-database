@@ -81,7 +81,7 @@ trigger_keywords:
 - provider
 cross_refs:
 - type: fta
-  path: ../domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md
+  path: ../故障诊断/topic-fta/list/service-fta.md
   label: '故障树: service'
 authors:
 - name: KUDIG Team
@@ -402,18 +402,18 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - [[skills/service-fta.md|service-fta]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[domain-12-cloud-providers/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 
 <!-- risk-assessed -->

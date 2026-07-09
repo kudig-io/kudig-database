@@ -54,10 +54,10 @@ prerequisites:
 - 日志收集
 cross_refs:
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 日志管理知识域
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 可观测性知识域
 - type: best-practice
   path: ./monitoring.md
@@ -113,10 +113,10 @@ cross_refs:
 
 ### Kubernetes 监控最佳实践cross_refs:
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 可观测性知识域
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 企业监控知识域  role: contributor---
 # Kubernetes 监控最佳实践
 
@@ -186,7 +186,7 @@ cross_refs:
 - OpenTelemetry
 cross_refs:
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 可观测性知识域
 - type: best-practice
   path: ./monitoring.md

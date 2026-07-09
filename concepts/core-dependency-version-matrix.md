@@ -40,13 +40,13 @@ prerequisites:
 
 # 核心依赖版本矩阵
 
-> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/core-deps/` 目录下 5 个核心依赖项目的 83 个版本发布说明 ^[inferred]
+> 本文档综合了 `生态参考/_archived-release-notes/core-deps/` 目录下 5 个核心依赖项目的 83 个版本发布说明 ^[inferred]
 
 ## etcd 版本演进
 
 etcd 是 Kubernetes 的唯一状态存储，版本选择直接影响集群的稳定性和性能。
 
-| etcd 版本 | 关键特性 | 兼容 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]] 版本 |
+| etcd 版本 | 关键特性 | 兼容 [[系统基础/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]] 版本 |
 |---|---|---|
 | v3.0 | v3 API 引入、lease 机制、watch 改进 | v1.3 - v1.6 |
 | v3.1 | 快照恢复改进、etcdctl v3 完善 | v1.6 - v1.8 |
@@ -140,11 +140,11 @@ runc 是 OCI 容器运行时的参考实现，被 containerd 和 CRI-O 底层使
 
 ## 来源文档
 
-- domain-19-landscape-references/_archived-release-notes/core-deps/etcd/（15 个文件）
-- domain-19-landscape-references/_archived-release-notes/core-deps/containerd/（13 个文件）
-- domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/（32 个文件）
-- domain-19-landscape-references/_archived-release-notes/core-deps/coredns/（16 个文件）
-- domain-19-landscape-references/_archived-release-notes/core-deps/runc/（7 个文件）
+- 生态参考/_archived-release-notes/core-deps/etcd/（15 个文件）
+- 生态参考/_archived-release-notes/core-deps/containerd/（13 个文件）
+- 生态参考/_archived-release-notes/core-deps/cri-o/（32 个文件）
+- 生态参考/_archived-release-notes/core-deps/coredns/（16 个文件）
+- 生态参考/_archived-release-notes/core-deps/runc/（7 个文件）
 
 ## Related
 

@@ -73,12 +73,12 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/checkpoint
-  - domain-02-workloads-applications/23-resource-management
-  - domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/checkpoint
+  - 工作负载/23-resource-management
+  - 故障诊断/24-quota-limitrange-troubleshooting
 id: WEEK2-DAY14
 topic: training
 type: hands-on
@@ -151,11 +151,11 @@ tags: [week-2, day-14, quota, resource, limitrange, k8s, k8s-1.28-1.33]
 ### 必读文档
 
 1. **资源管理**
-   - 文件: `../../../domain-02-workloads-applications/23-resource-management.md`
+   - 文件: `../../../工作负载/23-resource-management.md`
    - 重点: requests/limits、QoS 等级
 
 2. **配额排障**
-   - 文件: `../../../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md`
+   - 文件: `../../../故障诊断/24-quota-limitrange-troubleshooting.md`
    - 重点: 配额相关的常见问题
 
 ---
@@ -665,8 +665,8 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 
 ## 延伸阅读
 
-- [资源管理](../../domain-02-workloads-applications/23-resource-management.md)
-- [配额排障](../../domain-10-troubleshooting-diagnostics/24-quota-limitrange-troubleshooting.md)
+- [资源管理](../../工作负载/23-resource-management.md)
+- [配额排障](../../故障诊断/24-quota-limitrange-troubleshooting.md)
 - [K8s Resource Quota 文档](https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
 - [K8s Limit Range 文档](https://kubernetes.io/docs/concepts/policy/limit-range/)
 

@@ -81,12 +81,12 @@ Falco → Alertmanager → Loki (日志) + Prometheus (指标)
 
 ## 相关 Domain
 
-- domain-05-security-compliance/04-runtime-security/01-falco-[[entities/deployment.md|deployment]]
-- domain-06-observability/03-logging/01-logging-collection-analysis
+- 安全/04-runtime-security/01-falco-[[entities/deployment.md|deployment]]
+- 可观测性/03-logging/01-logging-collection-analysis
 ## Related
 
 - [[entities/falco.md|Falco (entities)]]
-- [[domain-15-specialized-tech/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
+- [[专项技术/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
 - [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署 (entities)]]
 - [[log|Wiki Log]]
 

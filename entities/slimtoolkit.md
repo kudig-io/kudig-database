@@ -77,7 +77,7 @@ SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自�
 - [[entities/zot.md|zot]]
 - [[entities/eraser.md|Eraser]]
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

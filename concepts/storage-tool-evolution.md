@@ -42,7 +42,7 @@ prerequisites:
 
 # 存储工具演进
 
-> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/storage/` 目录下 Rook、Longhorn 和 Velero 三大存储/备份工具的 76 个版本发布说明 ^[inferred]
+> 本文档综合了 `生态参考/_archived-release-notes/storage/` 目录下 Rook、Longhorn 和 Velero 三大存储/备份工具的 76 个版本发布说明 ^[inferred]
 
 ## 组件概览
 
@@ -141,9 +141,9 @@ Velero（前身为 Heptio Ark）是 Kubernetes 备份和灾难恢复工具。
 
 ## 来源文档
 
-- domain-19-landscape-references/_archived-release-notes/storage/rook/（29 个文件）
-- domain-19-landscape-references/_archived-release-notes/storage/longhorn/（19 个文件）
-- domain-19-landscape-references/_archived-release-notes/storage/velero/（28 个文件）
+- 生态参考/_archived-release-notes/storage/rook/（29 个文件）
+- 生态参考/_archived-release-notes/storage/longhorn/（19 个文件）
+- 生态参考/_archived-release-notes/storage/velero/（28 个文件）
 
 ## Related
 

@@ -48,14 +48,14 @@ prerequisites:
 - etcd-basics
 - logging-basics
 related_domains:
-- domain-01-cluster-fundamentals
-- domain-02-workloads-applications
-- domain-03-networking-traffic
-- domain-05-security-compliance
-- domain-06-observability
+- 集群基础
+- 工作负载
+- 网络
+- 安全
+- 可观测性
 related_topics:
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/reading-sequence
-- domain-11-production-operations/topic-learn/public-training/one-month/resources/commands-cheatsheet
+- 生产运维/topic-learn/public-training/one-month/resources/reading-sequence
+- 生产运维/topic-learn/public-training/one-month/resources/commands-cheatsheet
 ---
 
 > **生产环境安全提示**
@@ -402,7 +402,7 @@ Pod → Prometheus (采集+存储) → Grafana (可视化)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

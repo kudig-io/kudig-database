@@ -45,7 +45,7 @@ title: "Controller Manager 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l component=kube-controller-manager -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 ..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md"]
+sources: ["故障诊断/topic-fta/list/controller-manager-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

@@ -1,0 +1,366 @@
+---
+corpus_id: "cap-reasoning-troubleshoot-v1"
+corpus_name: "K8s 故障诊断推理链 — 推理层测评语料 v1"
+corpus_version: "1.0.0"
+capability_layer: reasoning
+domain: troubleshooting
+total_items: 4
+generated_at: "2026-05-21"
+schema_version: "3.0"
+description: >
+  评估 Agent 从症状到根因的推理能力，要求展示完整的诊断逻辑链。
+  覆盖 Pod 异常、节点故障、网络问题、存储故障等场景。
+authors:
+  - name: KUDIG Team
+    role: maintainer
+source_docs:
+  - "domain-12-troubleshooting/"
+  - "故障诊断/topic-skills/"
+tags: [k8s, troubleshooting, diagnosis, reasoning]
+
+qa_items:
+  # ========================================================================
+  # 根因分析：Pod CrashLoopBackOff
+  # ========================================================================
+  - id: "cap-reasoning-troubleshoot-v1-0001"
+    question: >
+      用户报告某 Deployment 的 Pod 反复处于 CrashLoopBackOff 状态。
+      已知信息：该 Pod 之前正常运行了 3 个月，昨天运维团队升级了
+      基础镜像版本（alpine:3.18 → alpine:3.19），今天开始出现问题。
+      请分析最可能的根因，并给出验证步骤。
+    context:
+      - type: command_output
+        content: |
+          $ kubectl get pods -l app=myapp
+          NAME                     READY   STATUS             RESTARTS   AGE
+          myapp-7d9f4b8c5-x2k9m    0/1     CrashLoopBackOff   12         45m
+        source: "kubectl get pods"
+      - type: command_output
+        content: |
+          $ kubectl describe pod myapp-7d9f4b8c5-x2k9m | grep -A 10 Events
+          Events:
+            Type     Reason     Age                   From               Message
+            ----     ------     ----                  ----               -------
+            Normal   Scheduled  45m                   default-scheduler  Successfully assigned default/myapp-7d9f4b8c5-x2k9m to node-01
+            Normal   Pulling    45m                   kubelet            Pulling image "myapp:v2.1.0"
+            Normal   Pulled     44m                   kubelet            Successfully pulled image "myapp:v2.1.0"
+            Normal   Created    44m (x12 over 45m)    kubelet            Created container myapp
+            Normal   Started    44m (x12 over 45m)    kubelet            Started container myapp
+            Warning  BackOff    3m (x201 over 44m)   kubelet            Back-off restarting failed container
+        source: "kubectl describe pod"
+    expected_answer: >
+      **根因判断**：最可能的根因是 alpine 3.19 镜像升级引入了 musl libc 兼容性问题
+      或 glibc 依赖变更，导致应用启动失败。升级前运行 3 个月正常，升级后立即出现问题，
+      时间线强相关。
+
+      **推理链**：
+      1. 从 kubectl get pods 确认 Pod 处于 CrashLoopBackOff，RESTARTS=12，说明容器反复崩溃。
+      2. kubectl describe 显示 Pulling 和 Pulled 正常，说明镜像拉取无问题，排除 ImagePullBackOff。
+      3. Events 中无 OOMKilled、无 FailedScheduling、无磁盘/内存压力，排除资源类故障。
+      4. 容器反复 Created → Started → BackOff，说明启动后立即退出，属于应用层问题。
+      5. 关键线索：昨天升级基础镜像（alpine:3.18 → 3.19），alpine 3.19 升级了 musl libc，
+         某些基于 CGO 编译的二进制或依赖特定 DNS 解析行为的应用可能不兼容。
+
+      **验证步骤**：
+      1. `kubectl logs myapp-7d9f4b8c5-x2k9m --previous` 查看上次崩溃的标准输出/错误。
+      2. 若日志显示 `segmentation fault` 或 `symbol not found`，确认 musl/glibc 兼容性问题。
+      3. 若日志显示 DNS 解析失败（alpine 3.19 变更了 DNS 解析行为），检查 `/etc/resolv.conf`。
+      4. 对比两个镜像的差异：`docker run --rm alpine:3.18 cat /etc/os-release` vs 3.19。
+      5. 临时回滚基础镜像到 alpine:3.18，观察是否恢复，快速验证假设。
+    type: root_cause
+    difficulty: L3_advanced
+    cognitive_level: analyze
+    reasoning_chain:
+      - step: 1
+        action: "确认 Pod 状态和重启次数"
+        evidence: "RESTARTS=12, STATUS=CrashLoopBackOff"
+      - step: 2
+        action: "分析 Events，排除基础设施类故障"
+        evidence: "Pulling/Pulled 正常，无 OOM/调度失败/节点压力"
+      - step: 3
+        action: "定位故障层级"
+        conclusion: "应用层启动失败（Created→Started→BackOff 循环）"
+      - step: 4
+        action: "关联时间线与变更事件"
+        evidence: "alpine 3.18→3.19 升级，musl libc 变更历史已知风险"
+      - step: 5
+        action: "提出验证假设并给出可执行步骤"
+    evaluation:
+      rubric_id: "R2-DIAGNOSTIC-REASONING"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "正确识别 CrashLoopBackOff 而非其他状态"
+        - "排除镜像拉取、资源、调度类故障"
+        - "将故障定位到应用层"
+        - "关联镜像升级时间线"
+        - "提出 alpine 3.19 musl libc 兼容性假设"
+        - "给出具体可执行的验证命令"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [pod, kubelet, container-runtime]
+      ticket_category: "TC-APP-POD"
+
+  # ========================================================================
+  # 根因分析：节点 NotReady
+  # ========================================================================
+  - id: "cap-reasoning-troubleshoot-v1-0002"
+    question: >
+      监控告警显示 node-03 状态变为 NotReady，该节点上运行的 47 个 Pod 被驱逐。
+      以下是从节点和相关组件收集到的信息，请定位根因。
+    context:
+      - type: command_output
+        content: |
+          $ kubectl get node node-03
+          NAME     STATUS     ROLES    AGE   VERSION
+          node-03  NotReady   <none>   90d   v1.30.2
+
+          $ kubectl describe node node-03 | grep -A 5 Conditions
+          Conditions:
+            Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+            ----             ------  -----------------                 ------------------                ------                       -------
+            MemoryPressure   False   Thu, 21 May 2026 08:15:00 +0000   Thu, 21 May 2026 08:15:00 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+            DiskPressure     False   Thu, 21 May 2026 08:15:00 +0000   Thu, 21 May 2026 08:15:00 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+            PIDPressure      False   Thu, 21 May 2026 08:15:00 +0000   Thu, 21 May 2026 08:15:00 +0000   KubeletHasSufficientPID      kubelet has no PID pressure
+            Ready            False   Thu, 21 May 2026 08:15:00 +0000   Thu, 21 May 2026 08:10:00 +0000   KubeletNotReady              PLEG is not healthy: pleg was last seen active 5m0s ago
+        source: "kubectl describe node"
+      - type: log_snippet
+        content: |
+          # journalctl -u kubelet -n 20
+          May 21 08:10:05 node-03 kubelet[1234]: E0521 08:10:05.123456    1234 kubelet.go:2373] "Container runtime is down" err="rpc error: code = Unknown desc = failed to list containers: context deadline exceeded"
+          May 21 08:10:10 node-03 kubelet[1234]: E0521 08:10:10.234567    1234 pod_workers.go:965] "Error syncing pod" err="rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial unix /run/containerd/containerd.sock: connect: connection refused\""
+        source: "kubelet logs"
+    expected_answer: >
+      **根因判断**：containerd 容器运行时崩溃或卡死，导致 kubelet 无法通过 CRI 接口
+      与容器运行时通信，PLEG（Pod Lifecycle Event Generator）健康检查失败，
+      进而导致节点状态变为 NotReady 并触发 Pod 驱逐。
+
+      **推理链**：
+      1. 节点状态为 NotReady，但 MemoryPressure/DiskPressure/PIDPressure 均为 False，
+         排除资源压力导致的 NotReady。
+      2. Ready=False 的 Reason 明确为 `KubeletNotReady`，Message 为
+         `PLEG is not healthy: pleg was last seen active 5m0s ago`。
+         PLEG 负责周期性通过容器运行时（containerd）获取 Pod 状态，
+         超过 3 分钟未活动即判定不健康。
+      3. kubelet 日志显示两条关键错误：
+         - `Container runtime is down: failed to list containers: context deadline exceeded`
+         - `dial unix /run/containerd/containerd.sock: connect: connection refused`
+      4. 以上信息交叉验证：containerd.sock 连接被拒绝，说明 containerd 进程未运行或
+         监听套接字已消失。
+      5. 根因层级：容器运行时（containerd）故障 → CRI 接口不可用 → PLEG 无法获取状态 →
+         kubelet 报告 NotReady → 控制器驱逐 Pod。
+
+      **修复方案**：
+      1. SSH 登录 node-03，检查 containerd 进程状态：`systemctl status containerd`。
+      2. 若进程不存在，检查是否 OOMKilled：`dmesg | grep -i containerd`。
+      3. 尝试重启 containerd：`systemctl restart containerd`。
+      4. 若重启失败，检查 containerd 配置文件 `/etc/containerd/config.toml` 是否损坏。
+      5. 若频繁出现，考虑增加 containerd 的 memory limit 或排查底层存储（overlayfs）性能问题。
+      6. 节点恢复 Ready 后，被驱逐的 Pod 会在其他节点重新调度创建（StatefulSet 需关注存储亲和性）。
+    type: root_cause
+    difficulty: L3_advanced
+    cognitive_level: analyze
+    reasoning_chain:
+      - step: 1
+        action: "排除资源压力类故障"
+        evidence: "Memory/Disk/PID Pressure 均为 False"
+      - step: 2
+        action: "分析 NotReady Reason 和 PLEG 状态"
+        evidence: "KubeletNotReady, PLEG not healthy 5m0s"
+      - step: 3
+        action: "关联 kubelet 日志"
+        evidence: "containerd.sock connection refused, runtime is down"
+      - step: 4
+        action: "建立因果链"
+        conclusion: "containerd 故障 → CRI 不可用 → PLEG 失败 → NotReady → 驱逐"
+      - step: 5
+        action: "给出分层修复方案"
+    evaluation:
+      rubric_id: "R2-DIAGNOSTIC-REASONING"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "排除资源压力（Memory/Disk/PID）"
+        - "正确解读 PLEG is not healthy"
+        - "关联 containerd.sock connection refused"
+        - "建立完整的因果链"
+        - "给出分层的修复步骤（检查→重启→配置→根因预防）"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [node, kubelet, containerd, pleg]
+      ticket_category: "TC-INFRA-NODE"
+
+  # ========================================================================
+  # 决策判断：升级策略
+  # ========================================================================
+  - id: "cap-reasoning-troubleshoot-v1-0003"
+    question: >
+      你需要为生产集群（500+ 节点，运行电商核心交易系统）制定
+      Kubernetes 1.29 → 1.30 的升级策略。以下约束条件：
+      - SLA 要求 99.99% 可用性（全年停机 < 52 分钟）
+      - 不允许同时超过 5% 的节点处于不可用状态
+      - 必须在 2 周内完成
+      - 升级期间需保留回滚能力
+      请给出升级策略决策，并分析各方案的风险。
+    expected_answer: >
+      **推荐策略：滚动蓝绿节点池升级（Blue-Green Node Pool Rolling Upgrade）**
+
+      **决策依据**：
+      1. 99.99% SLA 不允许集群级停机，因此排除原地全集群停机升级。
+      2. 5% 不可用节点上限意味着单次最多操作 25 个节点（500×5%）。
+      3. 2 周时间窗口充足，可支撑谨慎的分批策略。
+      4. 回滚能力要求保留旧版本节点池作为热备。
+
+      **具体方案**：
+
+      阶段 1：控制平面升级（第 1-2 天）
+      - 使用托管控制平面（如 ACK/AKS/GKE）的自动升级能力，或按官方文档
+        逐个升级 etcd → API Server → Controller Manager → Scheduler。
+      - 控制平面升级期间通过负载均衡器保持 API 高可用（多 master 架构）。
+      - 升级前完整备份 etcd：`etcdctl snapshot save`。
+
+      阶段 2：验证测试（第 3 天）
+      - 在非核心命名空间部署金丝雀工作负载，验证 1.30 API 兼容性。
+      - 运行核心业务流程端到端测试，确认无异常。
+
+      阶段 3：数据平面滚动升级（第 4-10 天）
+      - 创建新的 1.30 节点池（Green），大小为 25 节点（5%）。
+      - 通过节点亲和性/污点，将非核心负载逐步迁移至 Green 池验证。
+      - 验证通过后，逐批（每批 20-25 节点）将旧池（Blue）节点设为不可调度、
+        驱逐 Pod、删除节点，同时扩容 Green 池。
+      - 每批操作后等待 2 小时，观察核心指标（P50/P99 延迟、错误率、订单转化率）。
+      - 若任何指标异常，立即停止升级，将流量切回 Blue 池节点。
+
+      阶段 4：收尾（第 11-14 天）
+      - 全部节点验证完成，保留 Blue 池 48 小时作为热备。
+      - 确认无回滚需求后，删除 Blue 池。
+      - 更新运维文档和 Runbook。
+
+      **风险矩阵**：
+      | 风险 | 概率 | 影响 | 缓解措施 |
+      |------|------|------|----------|
+      | 1.30 API 弃用导致应用不兼容 | 中 | 高 | 金丝雀验证 + etcd 备份 |
+      | 节点驱逐速度过快引发雪崩 | 低 | 高 | 每批 5% + PDB + 2h 观察 |
+      | CNI/CSI 驱动未支持 1.30 | 低 | 极高 | 升级前确认兼容性矩阵 |
+      | 回滚时 etcd 数据已向前写入 | 极低 | 极高 | 控制平面升级后立即全量备份 |
+    type: decision
+    difficulty: L4_expert
+    cognitive_level: evaluate
+    reasoning_chain:
+      - step: 1
+        action: "解析约束条件"
+        conclusion: "99.99% SLA + 5% 节点上限 → 排除停机升级，必须滚动"
+      - step: 2
+        action: "评估升级策略选项"
+        options: ["原地滚动", "蓝绿节点池", "金丝雀集群"]
+        selected: "蓝绿节点池（兼顾回滚能力与速度）"
+      - step: 3
+        action: "设计分阶段执行计划"
+        phases: ["控制平面", "验证", "数据平面滚动", "收尾"]
+      - step: 4
+        action: "风险识别与缓解"
+    evaluation:
+      rubric_id: "R2-DIAGNOSTIC-REASONING"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "根据 SLA 和节点上限约束排除不可行方案"
+        - "给出分阶段执行计划（含时间线）"
+        - "包含控制平面和数据平面分离策略"
+        - "提及 etcd 备份作为回滚保障"
+        - "给出风险矩阵和缓解措施"
+        - "包含验证/金丝雀步骤"
+    metadata:
+      k8s_versions: ["1.29", "1.30"]
+      related_components: [cluster-lifecycle, etcd, kubelet]
+      ticket_category: "TC-INFRA-UPGRADE"
+
+  # ========================================================================
+  # 趋势预测：磁盘耗尽
+  # ========================================================================
+  - id: "cap-reasoning-troubleshoot-v1-0004"
+    question: >
+      某工作节点的 /var/log 目录在过去 7 天的磁盘使用率数据如下：
+      第1天 45%，第2天 52%，第3天 61%，第4天 70%，第5天 78%，
+      第6天 87%，第7天（今天）95%。
+      该节点磁盘总量 200GB，/var/log 单独挂载。
+      请预测何时会达到 100%，分析增长模式，并给出干预建议。
+    context:
+      - type: metric_data
+        content: |
+          day,usage_pct,usage_gb
+          1,45,90
+          2,52,104
+          3,61,122
+          4,70,140
+          5,78,156
+          6,87,174
+          7,95,190
+        source: "prometheus node_filesystem_avail_bytes"
+    expected_answer: >
+      **预测**：若不干预，将在 1-2 天内达到 100%（最快约 12-24 小时）。
+
+      **增长模式分析**：
+      1. 逐日增长量（GB）：14, 18, 18, 16, 18, 16。平均日增长约 16.7GB。
+      2. 当前剩余空间：200 × (1 - 0.95) = 10GB。
+      3. 按平均日增长 16.7GB 计算：10 / 16.7 ≈ 0.6 天 ≈ 14.4 小时。
+      4. 第 6→7 天增长了 16GB，若保持此速率：10 / 16 = 0.625 天 ≈ 15 小时。
+      5. 考虑到 95%→100% 阶段可能因日志写入加速（某些应用在磁盘紧张时可能产生更多错误日志），
+         保守估计 12-24 小时内触发 DiskPressure 或日志写入失败。
+
+      **根因推测**：
+      - 日增长 16GB 属于异常高水平，正常 K8s 节点日志（kubelet、容器日志）通常日增长 < 2GB。
+      - 可能原因：
+        (1) 某应用 Pod 产生大量错误日志（如无限重试、循环报错）。
+        (2) 日志轮转（logrotate）未配置或配置失效。
+        (3) 审计日志（audit log）开启且 verbose 级别过高。
+        (4) 某容器以 debug 级别输出大量日志且无 sidecar 采集清理。
+
+      **干预建议（按优先级）**：
+      1. **立即（0-1h）**：
+         - 找到日志大户：`du -sh /var/log/* /var/log/pods/*` 或 `ncdu /var/log`。
+         - 临时清理旧日志：`find /var/log -name '*.log.*' -mtime +3 -delete`（确认非关键后）。
+         - 扩容 /var/log 所在 PV（如云盘在线扩容）。
+      2. **短期（1-24h）**：
+         - 配置/修复 logrotate：确保 kubelet 日志、容器日志有轮转策略。
+         - 检查并调整应用日志级别：将 debug → info 或 error。
+         - 配置审计日志策略：从 RequestResponse 降级到 Metadata 或 None。
+      3. **长期**：
+         - 部署日志采集 sidecar（如 Fluent Bit）将日志实时转储到对象存储/Elasticsearch。
+         - 设置磁盘使用率告警阈值：80% 警告，90% 紧急。
+         - 考虑将 /var/log 与系统根分区分离（已分离，但需监控）。
+    type: prediction
+    difficulty: L3_advanced
+    cognitive_level: analyze
+    reasoning_chain:
+      - step: 1
+        action: "计算增长速率和趋势"
+        evidence: "平均日增长 16.7GB，剩余 10GB"
+      - step: 2
+        action: "建立时间预测模型"
+        conclusion: "10 / 16.7 ≈ 0.6 天，保守 12-24h"
+      - step: 3
+        action: "识别异常并推测根因"
+        evidence: "正常日增长应 <2GB，当前 16GB 属于异常"
+      - step: 4
+        action: "给出分层干预方案"
+        phases: ["立即/紧急", "短期/24h", "长期/预防"]
+    evaluation:
+      rubric_id: "R2-DIAGNOSTIC-REASONING"
+      scoring_method: llm_as_judge
+      max_score: 10
+      passing_threshold: 7
+      check_items:
+        - "正确计算平均日增长（约 16.7GB）"
+        - "给出合理的 100% 时间预测（12-24h）"
+        - "指出当前增长属于异常水平"
+        - "推测至少 2 个可能的根因"
+        - "给出分层的干预建议（紧急/短期/长期）"
+        - "提及 logrotate、日志级别、审计策略等具体措施"
+    metadata:
+      k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32"]
+      related_components: [node, kubelet, logging]
+      ticket_category: "TC-INFRA-NODE"

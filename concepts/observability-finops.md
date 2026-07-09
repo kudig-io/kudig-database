@@ -31,7 +31,7 @@ prerequisites:
 relationships:
 - target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+- target: '[[系统基础/topic-dictionary/observability/observability.md]]'
   type: related_to
 ---
 
@@ -78,8 +78,8 @@ OpenCost + Prometheus:
 
 ## 相关 Domain
 
-- [[domain-17-system-foundation/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
-- domain-11-production-operations/01-finops/01-cost-governance
+- [[系统基础/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
+- 生产运维/01-finops/01-cost-governance
 
 
 <!-- risk-assessed -->

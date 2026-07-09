@@ -79,12 +79,12 @@ prerequisites:
 
 ## 新增文件清单
 
-### domain-10-troubleshooting-diagnostics/topic-qa-corpus/ (20 个文件)
+### 故障诊断/topic-qa-corpus/ (20 个文件)
 - 18 个 domain QA YAML 文件 (2,336 QA 对)
 - 1 个命令输出诊断语料 (23 场景)
-- 1 个 [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]] 索引
+- 1 个 [[平台工程/topic-code-analysis/deployment-create/README.md|README]] 索引
 
-### domain-10-troubleshooting-diagnostics/topic-skills/scripts/ (17 个脚本)
+### 故障诊断/topic-skills/scripts/ (17 个脚本)
 - diagnose-pod-crashloop.sh
 - diagnose-pod-pending.sh
 - diagnose-dns-failure.sh
@@ -103,7 +103,7 @@ prerequisites:
 - diagnose-performance-bottleneck.sh
 - diagnose-security-incident.sh
 
-### domain-17-system-foundation/topic-cheat-sheet/ (3 个新文件)
+### 系统基础/topic-cheat-sheet/ (3 个新文件)
 - helm.md
 - gitops.md
 - gateway-api.md

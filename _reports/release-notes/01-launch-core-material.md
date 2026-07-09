@@ -200,7 +200,7 @@ prerequisites:
 
 **提问**: "我要深度研究 etcd 的生产运维, 包括备份恢复和性能调优"
 
-**预期输出**: Agent 从 domain-01-cluster-fundamentals 命中 etcd 深度文档 (1,042 行), 输出:
+**预期输出**: Agent 从 集群基础 命中 etcd 深度文档 (1,042 行), 输出:
 - Raft 共识协议原理
 - MVCC 数据模型
 - Watch 机制

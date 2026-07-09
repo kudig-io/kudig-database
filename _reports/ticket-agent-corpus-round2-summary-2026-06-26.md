@@ -77,9 +77,9 @@ relationships:
 
 ### 2.4 输出文件
 
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.with_actions.md`
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p1.with_actions.md`
-- `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p2.with_actions.md`
+- `故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.with_actions.md`
+- `故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p1.with_actions.md`
+- `故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p2.with_actions.md`
 
 ---
 

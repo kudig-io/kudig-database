@@ -72,7 +72,7 @@ estimated_read_time: 30min
 related_domains:
   - domain-3-node
   - domain-9-workload
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
 related_topics:
   - node-basics
   - node-advanced
@@ -646,11 +646,11 @@ kubectl get pods -n kube-system -l app=flannel
 - [节点管理最佳实践](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Pod 生命周期](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 - [调度器文档](https://kubernetes.io/docs/concepts/scheduling-eviction/)
-- [文件: `../../../domain-02-workloads-applications/02-deployment-production-patterns.md`](../../../domain-02-workloads-applications/02-deployment-production-patterns.md)
+- [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../工作负载/02-deployment-production-patterns.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

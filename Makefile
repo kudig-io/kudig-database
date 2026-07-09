@@ -4,9 +4,9 @@
 # =============================================================================
 
 CORPUS_DIR := scripts/corpus-generator
-CORPUS_OUTPUT := domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated
-SKILLS_DIR := domain-10-troubleshooting-diagnostics/topic-skills
-FTA_DIR := domain-10-troubleshooting-diagnostics/topic-fta/list
+CORPUS_OUTPUT := 故障诊断/topic-qa-corpus/generated
+SKILLS_DIR := 故障诊断/topic-skills
+FTA_DIR := 故障诊断/topic-fta/list
 
 .PHONY: corpus-generate corpus-generate-all corpus-validate corpus-stats corpus-clean
 

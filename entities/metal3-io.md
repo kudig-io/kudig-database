@@ -38,7 +38,7 @@ title: "Metal3"
 category: entities
 summary: "Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能力。它基于 Cluster API 实现裸金属服务器的自动发现、配置和生命周期管理，实现"裸金属即服务"。"
 tags: k8s, cncf, metal, metal3-io]
-sources: ["docs/domain-19-landscape-references/incubating/metal3-io/metal3-io.md", "domain-19-landscape-references/incubating/metal3-io/metal3-io.md"]
+sources: ["docs/生态参考/incubating/metal3-io/metal3-io.md", "生态参考/incubating/metal3-io/metal3-io.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -92,7 +92,7 @@ Metal3（Metal Kubed）提供裸金属基础设施的 Kubernetes 原生管理能
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - index/node-index|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

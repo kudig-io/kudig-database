@@ -88,7 +88,7 @@ External Secrets Operator (ESO) 将外部密钥管理系统（如 AWS Secrets Ma
 - [[entities/ratify.md|Ratify]]
 - [[entities/kudig-ecosystem-guide.md|KUDIG 开源生态指南与深度研究指南]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

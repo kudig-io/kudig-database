@@ -127,8 +127,8 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 - RELEASE-NOTES-0.5
 - 99-istio-service-mesh-guide
 - 01-istio-enterprise-service-mesh
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[故障诊断/topic-fta/list/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]]
+- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
 - istio
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - [[entities/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
@@ -142,9 +142,9 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

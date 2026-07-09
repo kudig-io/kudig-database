@@ -96,11 +96,11 @@ relationships:
 
 ## 相关 Domain
 
-- domain-05-security-compliance/01-security-baseline/01-zero-trust-architecture
-- domain-03-networking-traffic/03-service-mesh/01-istio-multi-cluster
+- 安全/01-security-baseline/01-zero-trust-architecture
+- 网络/03-service-mesh/01-istio-multi-cluster
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
+- [[系统基础/topic-dictionary/configuration/secrets.md|Secrets]]
 - [[entities/istio.md|Istio (entities)]]
 
 

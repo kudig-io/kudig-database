@@ -66,11 +66,11 @@ audience:
   - platform-engineer
 estimated_read_time: 90min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-02-workloads-applications
+  - 故障诊断
+  - 工作负载
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
-  - domain-11-production-operations/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on
+  - 生产运维/topic-learn/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on
 ---
 
 # Day 19: Pod 容器组基础实操

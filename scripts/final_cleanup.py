@@ -49,8 +49,8 @@ def fix_body_broken_links(vault: Path):
             except PermissionError:
                 pass
 
-    # 3. domain-02-workloads-applications/topic-functions/MOC.md 中的 _meta 链接
-    moc = vault / 'domain-02-workloads-applications/topic-functions/MOC.md'
+    # 3. 工作负载/topic-functions/MOC.md 中的 _meta 链接
+    moc = vault / '工作负载/topic-functions/MOC.md'
     if moc.exists():
         text = moc.read_text(encoding='utf-8')
         if '[[_meta/corpus-config/embedding-guide.md]]' in text:
@@ -58,7 +58,7 @@ def fix_body_broken_links(vault: Path):
                                 '_meta/corpus-config/embedding-guide.md')
             try:
                 moc.write_text(text, encoding='utf-8')
-                fixed.append('domain-02-workloads-applications/topic-functions/MOC.md -> _meta link')
+                fixed.append('工作负载/topic-functions/MOC.md -> _meta link')
             except PermissionError:
                 pass
 

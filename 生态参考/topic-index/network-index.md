@@ -1,0 +1,138 @@
+---
+title: Network 网络知识图谱索引
+description: '## Network 知识图谱'
+summary: '## Network 知识图谱'
+category: index
+tags:
+- k8s
+- index
+- catalog
+- network
+- cni
+- service
+- ingress
+- istio
+- envoy
+- cilium
+tier: core
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 20min
+intent_queries:
+- Network 知识图谱 是什么
+- Kubernetes 网络 相关文档
+trigger_keywords:
+- Network
+- 知识图谱
+- index
+- cni
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+- service-mesh-basics
+- ebpf-basics
+- cilium-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Network 网络知识图谱索引
+
+> 知识图谱：按关键字 **network** 聚合项目内所有相关内容。
+
+## 核心文档 (直接相关)
+
+### 网络知识域 (核心)
+
+- [[网络/00-core-k8s-networking/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
+- 141 - [[集群基础/03-control-plane/23-container-network-deep-dive.md|CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
+- 76 - CNI插件深度对比
+- Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
+- 77 - Service实现机制
+- Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
+- [[网络/00-core-k8s-networking/10-service-advanced-features.md|10 service advanced features]]
+
+### DNS 与服务发现
+
+- 04 - DNS 服务发现与 CoreDNS 调优
+- 33 - 服务发现与 DNS 配置 (Service Discovery & DNS)
+- 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
+
+### NetworkPolicy
+
+- 01 - NetworkPolicy 深度实践指南
+- 78 - NetworkPolicy高级配置
+
+### Ingress
+
+- [[assets/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
+- 128 - Ingress Controller 深入剖析
+- 129 - NGINX Ingress 完整配置指南
+- 130 - Ingress TLS 与证书管理
+
+### CNI 插件
+
+- 142 - Flannel 完整指南 (Flannel Complete Guide)
+- 143 - Terway 高级指南 (Terway Advanced Guide)
+
+### YAML 配置参考
+
+- 08 - Service 全类型 YAML 配置参考
+- 09 - Endpoints / EndpointSlice YAML 配置参考
+- 10 - Ingress / IngressClass YAML 配置参考
+- 22 - NetworkPolicy YAML 配置参考
+
+## 关联文档 (K8s 集成)
+
+### 故障排查
+
+- [[故障诊断/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]]
+- [[故障诊断/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[故障诊断/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[故障诊断/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+
+### K8s 事件
+
+- 10 - Service 与网络事件
+
+### 技能卡片
+
+- [[故障诊断/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
+- [[故障诊断/topic-skills/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
+
+### FTA 故障树
+
+- [[故障诊断/topic-fta/list/dns-fta.md|DNS 异常 FTA 树]]
+- [[故障诊断/topic-fta/list/ingress-fta.md|Ingress 异常 FTA 树]]
+- [[故障诊断/topic-fta/list/networkpolicy-fta.md|NetworkPolicy 异常 FTA 树]]
+- [[故障诊断/topic-fta/list/service-fta.md|Service 异常 FTA 树]]
+
+## 扩展参考
+
+### 网络生态项目
+
+- Cilium
+- CNI (Container Network Interface)
+- CoreDNS
+- Envoy
+- Istio
+- Linkerd
+- Antrea
+- Kube-OVN
+- Cilium eBPF 网络与安全实践指南
+
+
+<!-- risk-assessed -->

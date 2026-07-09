@@ -40,10 +40,10 @@ prerequisites:
 - logging-basics
 cross_refs:
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 日志管理知识域
 - type: domain
-  path: ../../domain-06-observability/
+  path: ../../可观测性/
   label: 可观测性知识域
 - type: best-practice
   path: ./monitoring.md

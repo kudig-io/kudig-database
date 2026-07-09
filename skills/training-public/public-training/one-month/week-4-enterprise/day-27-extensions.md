@@ -76,11 +76,11 @@ audience:
   - developer
 estimated_read_time: 240min
 related_domains:
-  - domain-15-specialized-tech
+  - 专项技术
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-23-logging-gitops
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
+  - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
 ---
 
 # Day 27: 扩展生态 + 高级主题
@@ -451,10 +451,10 @@ Artifact Hub（artifacthub.io）是 CNCF 官方的 Helm Chart 搜索引擎。Bit
 
 ## 延伸阅读
 
-- [CRD 开发指南](../../domain-15-specialized-tech/01-crd-development-guide.md)
-- [Helm Charts 管理](../../domain-15-specialized-tech/06-helm-charts-management.md)
-- [CRD/Operator 开发](../../domain-07-platform-engineering/20-crd-operator-development.md)
-- [控制器模式](../../domain-01-cluster-fundamentals/03-controller-pattern.md)
+- [CRD 开发指南](../../专项技术/01-crd-development-guide.md)
+- [Helm Charts 管理](../../专项技术/06-helm-charts-management.md)
+- [CRD/Operator 开发](../../平台工程/20-crd-operator-development.md)
+- [控制器模式](../../集群基础/03-controller-pattern.md)
 
 
 <!-- risk-assessed -->

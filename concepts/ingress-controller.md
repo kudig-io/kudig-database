@@ -95,7 +95,7 @@ spec:
 4. **DNS 与外部可达性**：确认域名解析是否指向 Ingress 的外部端点（如 SLB IP 或 ALB DNS），排除客户端到入口层的网络问题。同时检查安全组或防火墙是否放行了 80/443 端口。
 5. **SSL 证书过期或配置错误**：TLS Secret 中证书过期、私钥不匹配或 Secret 名称错误都会导致 HTTPS 访问失败。指导用户检查 Secret 内容以及 Ingress 中 `tls.secretName` 的引用。
 
-更多排查细节可参考 [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]] 与技能页面 [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|k8s-ingress-gateway]]。
+更多排查细节可参考 [[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]] 与技能页面 [[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|k8s-ingress-gateway]]。
 
 ## 相关概念
 

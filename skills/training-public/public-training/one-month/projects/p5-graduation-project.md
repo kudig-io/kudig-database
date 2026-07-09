@@ -73,9 +73,9 @@ audience:
   - Platform engineers
 estimated_read_time: 60min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-05-security-compliance
-  - domain-06-observability
+  - 云厂商
+  - 安全
+  - 可观测性
   - domain-9-workload
 related_topics:
   - ack-cluster-lifecycle
@@ -998,7 +998,7 @@ aliyun cs DELETE /clusters/<cluster_id> --body '{"retain_all_resources": false}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

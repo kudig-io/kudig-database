@@ -331,7 +331,7 @@ class SkillExtractor:
 
 if __name__ == '__main__':
     import sys
-    skills_dir = sys.argv[1] if len(sys.argv) > 1 else '../../domain-10-troubleshooting-diagnostics/topic-skills'
+    skills_dir = sys.argv[1] if len(sys.argv) > 1 else '../../故障诊断/topic-skills'
     extractor = SkillExtractor(skills_dir)
     pairs = extractor.extract_all()
     print(f"\n总计提取: {len(pairs)} I-O pairs")

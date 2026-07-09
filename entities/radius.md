@@ -40,7 +40,7 @@ title: "Radius"
 category: entities
 summary: "Radius 是由 Microsoft 开发的云原生应用平台，提供了一种以应用为中心的方式来定义和部署云原生应用及其依赖的基础设施。它引入了 "Application Graph" 的概念，让开发者定义应用需要什么（如数据库、消息队列），而由平台工程师定义如何提供这些资源（Azure CosmosDB 还是本地 MongoDB），实现关注点分离。"
 tags: k8s, cncf, platform, radius]
-sources: ["docs/domain-19-landscape-references/sandbox/radius/radius.md", "domain-19-landscape-references/sandbox/radius/radius.md"]
+sources: ["docs/生态参考/sandbox/radius/radius.md", "生态参考/sandbox/radius/radius.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

@@ -2,9 +2,9 @@
 """
 修正 wikilink alias 里的旧域编号。
 
-模式：[[domain-07-platform-engineering/README.md|Domain 36: 平台工程]]
+模式：[[平台工程/README.md|Domain 36: 平台工程]]
 路径 domain-07 是权威，alias 显示 "Domain 36"（迁移前旧编号）错误。
-修正为：[[domain-07-platform-engineering/README.md|Domain 07: 平台工程]]
+修正为：[[平台工程/README.md|Domain 07: 平台工程]]
 
 安全约束：仅处理 alias 段（| 与 ]] 之间）不含额外 [[ 的链接，避免触碰
 已损坏的嵌套 wikilink（那些需人工重建）。

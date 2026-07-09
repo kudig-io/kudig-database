@@ -37,17 +37,17 @@ last_updated: 2026-05-24
 
 | Domain | 文件数 | 总行数 | 均行 | FTA | Dialogue | Case | 状态 |
 |---|---|---|---|---|---|---|---|
-| **domain-11-production-operations** | 12 | 6,587 | 548 | 0 | 0 | 0 | 🔴 最薄弱 |
-| **domain-16-database-middleware** | 22 | 11,787 | 535 | 0 | 0 | 0 | 🔴 薄弱 |
-| **domain-04-storage-data** | 31 | 24,310 | 784 | 0 | 0 | 0 | 🟡 薄弱 |
-| **domain-09-reliability-engineering** | 35 | 25,660 | 733 | 0 | 0 | 0 | 🟡 薄弱 |
-| **domain-13-container-runtime** | 28 | 19,032 | 679 | 0 | 0 | 0 | 🟡 薄弱 |
-| domain-10-troubleshooting-diagnostics | 329 | 298,193 | 906 | 83 | 17 | 0 | ✅ 充分 |
-| domain-01-cluster-fundamentals | 102 | 98,618 | 966 | 0 | 0 | 0 | ✅ 充分 |
-| domain-12-cloud-providers | 48 | 36,495 | 760 | 0 | 0 | 0 | ✅ 中等 |
+| **生产运维** | 12 | 6,587 | 548 | 0 | 0 | 0 | 🔴 最薄弱 |
+| **数据库中间件** | 22 | 11,787 | 535 | 0 | 0 | 0 | 🔴 薄弱 |
+| **存储** | 31 | 24,310 | 784 | 0 | 0 | 0 | 🟡 薄弱 |
+| **可靠性** | 35 | 25,660 | 733 | 0 | 0 | 0 | 🟡 薄弱 |
+| **容器运行时** | 28 | 19,032 | 679 | 0 | 0 | 0 | 🟡 薄弱 |
+| 故障诊断 | 329 | 298,193 | 906 | 83 | 17 | 0 | ✅ 充分 |
+| 集群基础 | 102 | 98,618 | 966 | 0 | 0 | 0 | ✅ 充分 |
+| 云厂商 | 48 | 36,495 | 760 | 0 | 0 | 0 | ✅ 中等 |
 
 **关键发现**:
-- `domain-11-production-operations` 仅12个文件，严重缺乏日常运维、变更管理、发布窗口等核心内容
+- `生产运维` 仅12个文件，严重缺乏日常运维、变更管理、发布窗口等核心内容
 - 5个薄弱 Domain 均无 FTA 和 Dialogue 脚本，意味着只有参考文档，没有结构化诊断流程
 - 故障诊断域（troubleshooting-diagnostics）有83个FTA和17个对话脚本，覆盖最充分
 
@@ -73,11 +73,11 @@ last_updated: 2026-05-24
 
 | 概念 | 期望位置 | 现状 | 优先级 |
 |---|---|---|---|
-| **persistent-volume-claim** | concepts/ + domain-04-storage-data | 仅有 troubleshooting 提及 | 🔴 高 |
-| **headless-service** | concepts/ + domain-03-networking-traffic | 无独立文档 | 🟡 中 |
-| **blue-green-deployment** | concepts/ + domain-02-workloads-applications | 无独立文档 | 🟡 中 |
-| **canary-deployment** | concepts/ + domain-02-workloads-applications | 无独立文档 | 🟡 中 |
-| **pod-security-policy** | concepts/ + domain-05-security-compliance | 无独立文档（已废弃但需历史记录） | 🟢 低 |
+| **persistent-volume-claim** | concepts/ + 存储 | 仅有 troubleshooting 提及 | 🔴 高 |
+| **headless-service** | concepts/ + 网络 | 无独立文档 | 🟡 中 |
+| **blue-green-deployment** | concepts/ + 工作负载 | 无独立文档 | 🟡 中 |
+| **canary-deployment** | concepts/ + 工作负载 | 无独立文档 | 🟡 中 |
+| **pod-security-policy** | concepts/ + 安全 | 无独立文档（已废弃但需历史记录） | 🟢 低 |
 
 ---
 
@@ -105,11 +105,11 @@ last_updated: 2026-05-24
 
 | Domain | 建议补充内容 |
 |---|---|
-| **domain-11-production-operations** | 日常巡检SOP、变更管理流程、发布窗口管理、值班手册 |
-| **domain-16-database-middleware** | Redis/MySQL/PostgreSQL on K8s 运维、连接池问题、备份策略 |
-| **domain-04-storage-data** | PVC 扩容流程、存储快照、跨区域复制、存储类选择指南 |
-| **domain-09-reliability-engineering** | SLO定义方法、错误预算、混沌工程、容量规划 |
-| **domain-13-container-runtime** | containerd 深度运维、镜像拉取优化、运行时安全 |
+| **生产运维** | 日常巡检SOP、变更管理流程、发布窗口管理、值班手册 |
+| **数据库中间件** | Redis/MySQL/PostgreSQL on K8s 运维、连接池问题、备份策略 |
+| **存储** | PVC 扩容流程、存储快照、跨区域复制、存储类选择指南 |
+| **可靠性** | SLO定义方法、错误预算、混沌工程、容量规划 |
+| **容器运行时** | containerd 深度运维、镜像拉取优化、运行时安全 |
 
 ---
 

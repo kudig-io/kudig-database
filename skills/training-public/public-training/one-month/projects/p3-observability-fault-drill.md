@@ -74,15 +74,15 @@ audience:
   - platform-engineer
 estimated_read_time: 150min
 related_domains:
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 可观测性
+  - 故障诊断
   - domain-20-enterprise-monitoring-alerting
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-17-observability-1
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
 ---
 
 # 项目 P3: 可观测性体系搭建 + 故障演练
@@ -617,10 +617,10 @@ kubectl delete prometheusrule core-alerts -n monitoring
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../domain-06-observability/01-prometheus-enterprise-monitoring.md)
-- [FTA 故障树分析](../../../domain-10-troubleshooting-diagnostics/topic-fta/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../domain-10-troubleshooting-diagnostics/topic-febm/01-febm-theory-foundations.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [Prometheus 企业级监控](../../可观测性/01-prometheus-enterprise-monitoring.md)
+- [FTA 故障树分析](../../../故障诊断/topic-fta/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../故障诊断/topic-febm/01-febm-theory-foundations.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
 
 ```
 

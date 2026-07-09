@@ -82,17 +82,17 @@ audience:
   - developer
 estimated_read_time: 30min
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
-  - domain-01-cluster-fundamentals
+  - 容器运行时
+  - 系统基础
+  - 集群基础
 related_topics:
   - docker
   - linux
   - kubernetes
   - container
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/README.md
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/README.md
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup.md
 ---
 ```
 
@@ -126,7 +126,7 @@ related:
 | NET | 网络栈 | 独立的 IP、端口、路由表 | Pod 网络（CNI） |
 | IPC | 进程间通信 | 信号量、消息队列隔离 | Pod 内容器通信 |
 | MNT | 文件系统挂载 | 独立的文件系统视图 | Volume 挂载 |
-| UTS | 主机名和域名 | 容器有自己的 hostname | [[domain-17-system-foundation/topic-dictionary/workloads/pod-hostname.md|Pod hostname]] |
+| UTS | 主机名和域名 | 容器有自己的 hostname | [[系统基础/topic-dictionary/workloads/pod-hostname.md|Pod hostname]] |
 | USER | 用户和组 ID | 容器内 root ≠ 宿主机 root | securityContext |
 | CGROUP | cgroup 根目录 | cgroup 视图隔离 | 容器内不可见宿主 cgroup |
 
@@ -338,38 +338,38 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 
 ## 延伸阅读
 
-- [Docker 架构总览](../../domain-13-container-runtime/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../domain-13-container-runtime/03-docker-container-lifecycle.md)
-- [Docker 网络深入](../../domain-13-container-runtime/04-docker-networking-deep-dive.md)
-- [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../domain-17-system-foundation/02-linux-process-management.md)
-- [Linux 网络配置](../../domain-17-system-foundation/04-linux-networking-configuration.md)
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
+- [Docker 架构总览](../../容器运行时/01-docker-architecture-overview.md)
+- [Docker 容器生命周期](../../容器运行时/03-docker-container-lifecycle.md)
+- [Docker 网络深入](../../容器运行时/04-docker-networking-deep-dive.md)
+- [Linux 系统架构](../../系统基础/01-linux-system-architecture.md)
+- [Linux 进程管理](../../系统基础/02-linux-process-management.md)
+- [Linux 网络配置](../../系统基础/04-linux-networking-configuration.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 ```
 

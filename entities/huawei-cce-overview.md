@@ -588,12 +588,12 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - USER
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

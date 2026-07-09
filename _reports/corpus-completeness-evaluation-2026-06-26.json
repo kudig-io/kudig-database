@@ -79,20 +79,20 @@
     "troubleshooting": 853
   },
   "top_domains": {
-    "domain-19-landscape-references": 1436,
-    "domain-17-system-foundation": 642,
-    "domain-10-troubleshooting-diagnostics": 487,
-    "domain-14-ai-ml-infra": 158,
-    "domain-07-platform-engineering": 155,
-    "domain-02-workloads-applications": 140,
-    "domain-03-networking-traffic": 135,
-    "domain-20-application-patterns": 120,
-    "domain-01-cluster-fundamentals": 116,
-    "domain-11-production-operations": 104,
-    "domain-12-cloud-providers": 97,
-    "domain-06-observability": 87,
-    "domain-05-security-compliance": 81,
-    "domain-08-release-change-management": 70,
-    "domain-15-specialized-tech": 69
+    "生态参考": 1436,
+    "系统基础": 642,
+    "故障诊断": 487,
+    "AI基础设施": 158,
+    "平台工程": 155,
+    "工作负载": 140,
+    "网络": 135,
+    "应用模式": 120,
+    "集群基础": 116,
+    "生产运维": 104,
+    "云厂商": 97,
+    "可观测性": 87,
+    "安全": 81,
+    "发布变更": 70,
+    "专项技术": 69
   }
 }

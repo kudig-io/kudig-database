@@ -47,7 +47,7 @@ prerequisites:
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: 集群联邦 (Kubefed)、GitOps 多集群冲突、多集群网络打通的问题排查
-> **关联**: domain-37-edge-computing, domain-08-release-change-management
+> **关联**: domain-37-edge-computing, 发布变更
 
 ---
 
@@ -296,9 +296,9 @@ kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubef
 ---
 
 **关联文档**:
-- [domain-08-release-change-management/](../domain-08-release-change-management/) — GitOps CI/CD
-- [domain-15-specialized-tech/](../domain-15-specialized-tech/) — 边缘计算
-- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 运维 Skill
+- [发布变更/](../发布变更/) — GitOps CI/CD
+- [专项技术/](../专项技术/) — 边缘计算
+- [故障诊断/topic-skills/](../故障诊断/topic-skills/) — 运维 Skill
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)
 
 <!-- risk-assessed -->

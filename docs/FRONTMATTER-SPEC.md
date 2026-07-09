@@ -104,7 +104,7 @@ estimated_read_time: "15min" # 5min / 10min / 15min / 30min / 1h / 2h
 
 # === 交叉引用 (Optional but Recommended) ===
 prerequisites:
-  - "domain-01-cluster-fundamentals"
+  - "集群基础"
 aliases:
   - "常见别名"
 intent_queries:
@@ -114,7 +114,7 @@ cross_refs:
     path: "../domain-N-name/doc.md"
     label: "说明"
   - type: "fta"
-    path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/component-fta.md"
+    path: "../故障诊断/topic-fta/list/component-fta.md"
     label: "说明"
 ---
 ```
@@ -130,7 +130,7 @@ cross_refs:
 | `title` | string | 文档标题（中文） | "Kubernetes 架构全景图" |
 | `title_en` | string | 英文标题 | "Kubernetes Architecture Overview" |
 | `description` | string | 一句话摘要 | "Kubernetes 系统架构全景图，包含控制平面、数据平面和扩展组件" |
-| `category` | string | 所属目录 | "domain-01-cluster-fundamentals" |
+| `category` | string | 所属目录 | "集群基础" |
 | `tags` | list | 标签数组 | [k8s, architecture, deep-dive] |
 | `k8s_versions` | list | 覆盖的 K8s 版本 | ["1.28", "1.29", "1.30", "1.31", "1.32"] |
 | `last_updated` | string | 最后更新日期 | "2026-05" |
@@ -144,7 +144,7 @@ cross_refs:
 
 | 字段 | 类型 | 说明 | 示例 |
 |---|---|---|---|
-| `prerequisites` | list | 前置知识依赖 | ["domain-01-cluster-fundamentals"] |
+| `prerequisites` | list | 前置知识依赖 | ["集群基础"] |
 | `aliases` | list | 搜索别名 | ["k8s架构", "kubernetes架构"] |
 | `intent_queries` | list | Agent 意图查询 | ["K8s架构是什么？"] |
 | `cross_refs` | list | 交叉引用 | [{type: "domain", path: "...", label: "..."}] |

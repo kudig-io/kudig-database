@@ -70,12 +70,12 @@ audience:
   - developer
 estimated_read_time: 150min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/projects/p2-production-app-orchestration
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # 项目 P1: 从零搭建 K8s 集群
@@ -663,7 +663,7 @@ kind delete cluster --name learn-k8s
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

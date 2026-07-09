@@ -78,15 +78,15 @@ audience:
   - devops工程师
 estimated_read_time: 25min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 集群基础
+  - 工作负载
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/README
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-10-troubleshooting-diagnostics
+  - 生产运维/topic-learn/public-training/README
+  - 生产运维/topic-learn/quick-start
+  - 故障诊断
 id: PUBLIC-TRAINING-PLAN-001
 topic: training
 type: training-plan
@@ -180,7 +180,7 @@ Domain15(网络基础)┘       │                 │                     │
                      Domain4(工作负载)   Domain5(网络)      Domain12(故障排查)
                           │              Domain6(存储)           │
                           v                 │                    v
-                     Domain7(安全)  <───────┘             domain-10-troubleshooting-diagnostics/topic-fta/febm
+                     Domain7(安全)  <───────┘             故障诊断/topic-fta/febm
                      Domain8(可观测性)
                           │
                           v
@@ -252,22 +252,22 @@ Domain15(网络基础)┘       │                 │                     │
 ## 关键文件索引
 
 ### 核心架构文档
-- `../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md`
-- `../domain-01-cluster-fundamentals/02-core-components-deep-dive.md`
+- `../集群基础/01-kubernetes-architecture-overview.md`
+- `../集群基础/02-core-components-deep-dive.md`
 
 ### 故障排查体系
-- `../domain-10-troubleshooting-diagnostics/topic-fta/23-fta-production-quick-start.md`
-- `../domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md`
-- `../domain-10-troubleshooting-diagnostics/` (42篇)
+- `../故障诊断/topic-fta/23-fta-production-quick-start.md`
+- `../故障诊断/topic-febm/08-febm-production-quick-start.md`
+- `../故障诊断/` (42篇)
 
 ### 生产运维实践
-- `../domain-11-production-operations/23-incident-response-handling.md`
-- `../domain-11-production-operations/22-change-management-process.md`
+- `../生产运维/23-incident-response-handling.md`
+- `../生产运维/22-change-management-process.md`
 
 ### 速查手册
-- `../domain-17-system-foundation/topic-cheat-sheet/k8s.md`
-- `../domain-13-container-runtime/99-docker-commands-reference.md`
-- `../domain-17-system-foundation/99-linux-commands-reference.md`
+- `../系统基础/topic-cheat-sheet/k8s.md`
+- `../容器运行时/99-docker-commands-reference.md`
+- `../系统基础/99-linux-commands-reference.md`
 
 ---
 
@@ -305,24 +305,24 @@ Domain15(网络基础)┘       │                 │                     │
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

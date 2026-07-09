@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 
-BASE = Path("domain-17-system-foundation/topic-dictionary")
+BASE = Path("系统基础/topic-dictionary")
 
 def write_file(cat_dir, filename, title_zh, title_en, tags, overview, core, mechanism, use_cases, refs, related_links=""):
     fp = BASE / cat_dir / f"{filename}.md"
@@ -14,7 +14,7 @@ def write_file(cat_dir, filename, title_zh, title_en, tags, overview, core, mech
     tks = list(dict.fromkeys([title_zh, title_en, "dictionary"]))
     tk_lines = "\n".join(f"- {kw}" for kw in tks)
 
-    rel = related_links if related_links else f"- [[domain-17-system-foundation/topic-dictionary/k8s-glossary|K8s Glossary]]"
+    rel = related_links if related_links else f"- [[系统基础/topic-dictionary/k8s-glossary|K8s Glossary]]"
 
     content = f"""---
 title: {title_zh}
@@ -84,7 +84,7 @@ K8S_MISSING = [
      "- 控制平面节点通常标记 `node-role.kubernetes.io/control-plane` 污点，默认不接受用户 Pod。\n- 高可用部署使用 kubeadm 的 `--control-plane-endpoint` 配置负载均衡。\n- etcd 可以堆叠（stacked）在控制平面节点上，也可以外部独立部署。",
      "- 生产集群至少部署 3 个控制平面节点实现高可用。\n- 控制平面节点应有独立的计算资源，不与工作负载混用。\n- 使用 `kubeadm init --upload-certs` 加入额外控制平面节点。\n- 定期检查 etcd 集群健康状态和证书过期时间。",
      "- [Control Plane Node - Kubernetes Docs](https://kubernetes.io/docs/concepts/architecture/nodes/#control-plane-node)",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/master-node|Master Node]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/control-plane|Control Plane]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/worker-node|Worker Node]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/node|Node]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd|Etcd]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/master-node|Master Node]]\n- [[系统基础/topic-dictionary/fundamentals/control-plane|Control Plane]]\n- [[系统基础/topic-dictionary/fundamentals/worker-node|Worker Node]]\n- [[系统基础/topic-dictionary/fundamentals/node|Node]]\n- [[系统基础/topic-dictionary/fundamentals/etcd|Etcd]]"),
 
     ("fundamentals", "controller-manager", "控制器管理器", "kube-controller-manager",
      ["controller-manager", "control-plane"],
@@ -93,7 +93,7 @@ K8S_MISSING = [
      "- 所有控制器共享一个进程，通过 `--controllers` 标志控制启用/禁用。\n- 控制器采用 watch + reconcile 模式，持续将系统状态推向期望状态。\n- leader election 确保多副本部署时只有一个活跃实例。",
      "- 通过 `--concurrent-*` 参数调优控制器的并发处理能力。\n- 监控 `workqueue_depth` 和 `workqueue_latency` 指标检测控制器性能。\n- 自定义控制器推荐使用 controller-runtime 或 Kubebuilder 框架。",
      "- [kube-controller-manager - Kubernetes Docs](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-apiserver|Kube-apiserver]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-scheduler|Kube-scheduler]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset|ReplicaSet]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/kube-apiserver|Kube-apiserver]]\n- [[系统基础/topic-dictionary/fundamentals/kube-scheduler|Kube-scheduler]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/workloads/replicaset|ReplicaSet]]\n- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
 
     ("networking", "endpoint", "端点", "Endpoints",
      ["endpoint", "service"],
@@ -102,7 +102,7 @@ K8S_MISSING = [
      "- 每个 Endpoint 包含 IP、端口和就绪状态。\n- EndpointSlice 按拓扑分区，支持 `topology.kubernetes.io/zone` 标签。\n- 外部服务可通过手动 Endpoints + ExternalName Service 接入。",
      "- 大规模集群优先使用 EndpointSlice API。\n- 排查 Service 不通时，检查 Endpoints 是否包含预期的后端 Pod。\n- 使用 `kubectl get endpointslices -l kubernetes.io/service-name=<svc>` 查看。\n- Headless Service 的 Endpoints 直接返回 Pod IP。",
      "- [Endpoints - Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/service/#endpoints)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/headless-service|Headless Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[domain-17-system-foundation/topic-dictionary/networking/coredns|CoreDNS]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]"),
+     "- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/headless-service|Headless Service]]\n- [[系统基础/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[系统基础/topic-dictionary/networking/coredns|CoreDNS]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]"),
 
     ("networking", "networkpolicy", "网络策略", "NetworkPolicy",
      ["networkpolicy", "security", "cni"],
@@ -111,7 +111,7 @@ K8S_MISSING = [
      "- NetworkPolicy 需要 CNI 插件支持（Calico、Cilium、Weave 等）。\n- 不支持的 CNI 会静默忽略 NetworkPolicy 资源。\n- 规则中的 `namespaceSelector` 和 `podSelector` 可以组合使用。\n- `ipBlock` 支持 CIDR 匹配（除 `except` 子网外）。",
      "- 为每个命名空间创建默认 deny-all 策略，再按需放行。\n- 使用标签选择器精确控制流量，避免过度宽松的策略。\n- 定期审计 NetworkPolicy 覆盖情况，确保无遗漏。\n- 生产环境建议配合 Cilium 或 Calico 的高级网络策略功能。",
      "- [NetworkPolicy - Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/network-policies/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/cni|CNI]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]\n- [[domain-17-system-foundation/topic-dictionary/security/security-context|Security Context]]"),
+     "- [[系统基础/topic-dictionary/networking/cni|CNI]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/networking/ingress|Ingress]]\n- [[系统基础/topic-dictionary/security/security-context|Security Context]]"),
 
     ("scheduling", "scheduler", "调度器", "kube-scheduler",
      ["scheduler", "control-plane", "scheduling"],
@@ -120,7 +120,7 @@ K8S_MISSING = [
      "- 调度器以 Scheduling Framework 架构运行，支持插件化扩展。\n- Scheduler Extender 和 Scheduling Plugin 两种扩展方式。\n- Priority Class 影响 Pod 的调度优先级和抢占（Preemption）行为。\n- 调度器指标通过 `/metrics` 端点暴露（scheduling_duration、binding_duration 等）。",
      "- 使用 `--percentage-of-nodes-to-score` 调优大规模集群的调度性能。\n- 自定义调度需求优先使用 Scheduling Plugin 而非 Extender。\n- 为关键工作负载设置 PriorityClass 确保调度优先级。\n- 使用 Descheduler 周期性重新平衡集群中的 Pod 分布。",
      "- [kube-scheduler - Kubernetes Docs](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)",
-     "- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity|Affinity]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/taint|Taint]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/toleration|Toleration]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/topology-spread-constraints|Topology Spread Constraints]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/resource-request|Resource Request]]"),
+     "- [[系统基础/topic-dictionary/scheduling/affinity|Affinity]]\n- [[系统基础/topic-dictionary/scheduling/taint|Taint]]\n- [[系统基础/topic-dictionary/scheduling/toleration|Toleration]]\n- [[系统基础/topic-dictionary/scheduling/topology-spread-constraints|Topology Spread Constraints]]\n- [[系统基础/topic-dictionary/scheduling/resource-request|Resource Request]]"),
 
     ("networking", "dns-resolution", "DNS 解析", "DNS Resolution",
      ["dns", "coredns", "networking"],
@@ -129,7 +129,7 @@ K8S_MISSING = [
      "- CoreDNS 以 Deployment 形式运行在 kube-system 命名空间。\n- Pod 的 `/etc/resolv.conf` 由 kubelet 自动配置指向 CoreDNS。\n- `dnsPolicy` 控制 Pod 的 DNS 行为：`ClusterFirst`（默认）、`Default`、`None`。\n- NodeLocal DNSCache 减少 CoreDNS 压力，提升解析性能。",
      "- 排查 DNS 问题时使用 `nslookup` 或 `dig` 测试解析。\n- 大集群启用 NodeLocal DNSCache 避免 CoreDNS 成为瓶颈。\n- 使用 `ndots:2` 减少不必要的域名后缀搜索。\n- 外部 DNS 查询使用 ExternalDNS 管理云 DNS 记录。",
      "- [DNS for Services and Pods - Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/coredns|CoreDNS]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/headless-service|Headless Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/endpoint|Endpoints]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]"),
+     "- [[系统基础/topic-dictionary/networking/coredns|CoreDNS]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/headless-service|Headless Service]]\n- [[系统基础/topic-dictionary/networking/endpoint|Endpoints]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]"),
 
     ("networking", "ipip", "IPIP", "IPIP",
      ["ipip", "tunnel", "networking", "cni"],
@@ -138,7 +138,7 @@ K8S_MISSING = [
      "- IPIP 模式的 MTU 比 VXLAN 小 20 字节（外层 IP 头开销）。\n- IPIP 不支持跨子网（不同 L2 域）通信，仅限同子网节点。\n- Calico 支持 IPIP Always（所有跨节点流量）和 CrossSubnet（仅跨子网）两种模式。\n- IPIP 流量在节点上是 `tunl0` 接口。",
      "- 同子网集群优先使用 IPIP 模式，开销最小。\n- 跨子网或需要 L2 隔离时使用 VXLAN 模式。\n- 排查 IPIP 问题时检查 `tunl0` 接口状态和路由表。\n- 注意 IPIP 与 IPsec 的兼容性。",
      "- [Calico IPIP Mode - Project Calico](https://docs.tigera.io/calico/latest/networking/configure-ip-addresses/ipip)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/vxlan|VXLAN]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cni|CNI]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[domain-17-system-foundation/topic-dictionary/networking/nodeport|NodePort]]"),
+     "- [[系统基础/topic-dictionary/networking/vxlan|VXLAN]]\n- [[系统基础/topic-dictionary/networking/cni|CNI]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[系统基础/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[系统基础/topic-dictionary/networking/nodeport|NodePort]]"),
 
     ("networking", "nat", "网络地址转换", "NAT (Network Address Translation)",
      ["nat", "networking", "kube-proxy"],
@@ -147,7 +147,7 @@ K8S_MISSING = [
      "- kube-proxy 的 iptables 模式通过 `KUBE-SERVICES` 和 `KUBE-SVC-*` 链实现 DNAT。\n- IPVS 模式使用内核 IPVS 模块，性能优于 iptables。\n- `externalTrafficPolicy: Local` 保留客户端源 IP（不做 SNAT）。\n- `masquerade-all` 配置强制对所有出站流量做 SNAT。",
      "- 需要保留客户端源 IP 时使用 `externalTrafficPolicy: Local`。\n- 大规模集群优先使用 IPVS 模式替代 iptables。\n- 排查 NAT 问题时使用 `iptables -t nat -L -n` 检查规则。\n- 注意 SNAT 对网络策略和日志的影响（源 IP 变为节点 IP）。",
      "- [NAT - Wikipedia](https://en.wikipedia.org/wiki/Network_address_translation)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[domain-17-system-foundation/topic-dictionary/networking/nodeport|NodePort]]\n- [[domain-17-system-foundation/topic-dictionary/networking/loadbalancer|LoadBalancer]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy|Kube-proxy]]"),
+     "- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/clusterip|ClusterIP]]\n- [[系统基础/topic-dictionary/networking/nodeport|NodePort]]\n- [[系统基础/topic-dictionary/networking/loadbalancer|LoadBalancer]]\n- [[系统基础/topic-dictionary/fundamentals/kube-proxy|Kube-proxy]]"),
 
     ("fundamentals", "kubernetes", "Kubernetes", "Kubernetes (K8s)",
      ["kubernetes", "k8s", "container-orchestration"],
@@ -156,7 +156,7 @@ K8S_MISSING = [
      "- **自动调度**：根据资源需求和约束将 Pod 调度到最佳节点。\n- **自愈能力**：Pod 崩溃自动重启，节点故障自动迁移。\n- **水平扩缩**：通过 HPA/VPA 自动调整资源。\n- **服务发现与负载均衡**：通过 Service 和 Ingress 暴露应用。\n- **滚动更新与回滚**：零停机部署和快速回滚。\n- **声明式配置**：GitOps 友好的基础设施即代码。",
      "- 使用 kubeadm 初始化生产级集群。\n- 遵循最小权限原则配置 RBAC。\n- 为所有工作负载设置 resource requests/limits。\n- 使用命名空间隔离不同团队或环境的工作负载。\n- 启用审计日志（Audit Log）追踪 API 操作。\n- 定期升级集群版本，关注弃用 API 迁移。",
      "- [Kubernetes Official Documentation](https://kubernetes.io/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/pod|Pod]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/node|Node]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace|Namespace]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/cncf|CNCF]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/pod|Pod]]\n- [[系统基础/topic-dictionary/fundamentals/node|Node]]\n- [[系统基础/topic-dictionary/fundamentals/namespace|Namespace]]\n- [[系统基础/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[系统基础/topic-dictionary/fundamentals/cncf|CNCF]]"),
 ]
 
 # ── Part B: 高频 CN 生态引用术语 ──────────────────────
@@ -169,7 +169,7 @@ CN_ECOSYSTEM = [
      "- **Helm v3**：移除了 Tiller 服务端组件，直接通过 kubeconfig 与 apiserver 交互。\n- **Release 版本管理**：每次 `helm upgrade` 自动生成新版本，支持 `helm rollback`。\n- **模板引擎**：基于 Go text/template，支持 values 注入和条件渲染。\n- **Hook 机制**：在 install/upgrade/delete 前后执行 Job/Pod。\n- **OCI Registry**：Helm v3.8+ 支持将 Chart 推送到 OCI 兼容的容器仓库。",
      "- 使用 `helm template` 本地渲染 Chart 检查生成的 YAML。\n- 使用 `helm lint` 验证 Chart 语法和最佳实践。\n- 生产环境推荐配合 Helmfile 或 ArgoCD 进行声明式管理。\n- 避免在 Chart 中硬编码镜像版本，使用 values 注入。\n- 使用 `helm diff` 插件预览 upgrade 变更。",
      "- [Helm Official Documentation](https://helm.sh/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl|Kubectl]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest|Manifest]]\n- [[domain-17-system-foundation/topic-dictionary/operations/rolling-update|Rolling Update]]"),
+     "- [[系统基础/topic-dictionary/tooling/kubectl|Kubectl]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/platform-engineering/manifest|Manifest]]\n- [[系统基础/topic-dictionary/operations/rolling-update|Rolling Update]]"),
 
     ("fundamentals", "containerd", "containerd", "containerd",
      ["containerd", "cri", "container-runtime"],
@@ -178,7 +178,7 @@ CN_ECOSYSTEM = [
      "- **CRI 接口**：kubelet 通过 gRPC 调用 containerd 的 CRI 实现。\n- **shim 架构**：containerd-shim 为每个容器独立运行，containerd 重启不影响容器。\n- **镜像管理**：支持 OCI 和 Docker 镜像格式。\n- **快照管理**：overlayfs 等快照驱动管理容器文件系统层。\n- 配置文件位于 `/etc/containerd/config.toml`。",
      "- 使用 `crictl` 而非 `docker` 命令调试容器。\n- 配置 mirror 加速镜像拉取（特别是国内环境）。\n- 启用 `SystemdCgroup` 与 kubelet 保持一致。\n- 监控 containerd 的 gRPC 延迟和容器启动时间指标。",
      "- [containerd Official](https://containerd.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri|CRI]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubelet|Kubelet]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/pod|Pod]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/container|Container]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/worker-node|Worker Node]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/cri|CRI]]\n- [[系统基础/topic-dictionary/fundamentals/kubelet|Kubelet]]\n- [[系统基础/topic-dictionary/fundamentals/pod|Pod]]\n- [[系统基础/topic-dictionary/fundamentals/container|Container]]\n- [[系统基础/topic-dictionary/fundamentals/worker-node|Worker Node]]"),
 
     ("networking", "cilium", "Cilium", "Cilium",
      ["cilium", "cni", "ebpf", "networkpolicy"],
@@ -187,7 +187,7 @@ CN_ECOSYSTEM = [
      "- 完全替代 kube-proxy，使用 eBPF 实现 Service 负载均衡。\n- 支持 FQDN Policy（基于域名的网络策略）。\n- 支持 Cluster Mesh 实现多集群网络互通。\n- Gateway API 原生支持。\n- Tetragon 提供运行时安全检测和进程级可观测性。",
      "- 新集群优先选择 Cilium 作为 CNI。\n- 启用 Cilium 的 kube-proxy 替代模式提升 Service 性能。\n- 使用 Hubble 进行网络故障排查和流量分析。\n- 配合 CiliumNetworkPolicy 实现 L7 层安全策略。\n- 使用 Cilium CLI 进行安装和诊断。",
      "- [Cilium Official Documentation](https://docs.cilium.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/cni|CNI]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy|Kube-proxy]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+     "- [[系统基础/topic-dictionary/networking/cni|CNI]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/fundamentals/kube-proxy|Kube-proxy]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
     ("networking", "coredns", "CoreDNS", "CoreDNS",
      ["coredns", "dns", "networking"],
@@ -196,7 +196,7 @@ CN_ECOSYSTEM = [
      "- 插件链按 Corefile 中的顺序执行。\n- 支持 DNS-over-TLS 和 DNS-over-gRPC。\n- 通过 `hosts` 插件可添加自定义 DNS 记录。\n- `rewrite` 插件支持 DNS 记录重写。\n- 指标通过 `/metrics` 端点暴露给 Prometheus。",
      "- 大集群启用 NodeLocal DNSCache 减少 CoreDNS 压力。\n- 使用 `cache` 插件合理设置 TTL 减少查询量。\n- 排查 DNS 问题时检查 CoreDNS Pod 日志和资源使用。\n- 配置 `forward` 插件的上游 DNS 服务器。\n- 使用 `rewrite` 插件处理内部域名映射。",
      "- [CoreDNS Official](https://coredns.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/dns-resolution|DNS Resolution]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/headless-service|Headless Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/endpoint|Endpoints]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+     "- [[系统基础/topic-dictionary/networking/dns-resolution|DNS Resolution]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/headless-service|Headless Service]]\n- [[系统基础/topic-dictionary/networking/endpoint|Endpoints]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
     ("networking", "envoy", "Envoy", "Envoy Proxy",
      ["envoy", "service-mesh", "proxy", "cncf"],
@@ -205,7 +205,7 @@ CN_ECOSYSTEM = [
      "- **Sidecar 模式**：作为 Pod 的 sidecar 容器运行（Istio 默认）。\n- **Gateway 模式**：作为入口/出口网关运行。\n- 支持 HTTP/1.1、HTTP/2、gRPC、TCP、UDP 协议。\n- 内置熔断、重试、超时、限流等弹性功能。\n- 支持 Wasm 扩展自定义过滤器。",
      "- 使用 Envoy 作为 API Gateway 的数据平面（Gateway API 支持）。\n- 配合 Istio 构建服务网格实现 mTLS 和流量管理。\n- 使用 Envoy Admin API（`/config_dump`、`/stats`）排查问题。\n- 监控 Envoy 的 upstream_rq_time 和 upstream_cx_connect_fail 指标。\n- 合理配置 Circuit Breaker 防止级联故障。",
      "- [Envoy Proxy Official](https://www.envoyproxy.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cilium|Cilium]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+     "- [[系统基础/topic-dictionary/networking/ingress|Ingress]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[系统基础/topic-dictionary/networking/cilium|Cilium]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
     ("networking", "istio", "Istio", "Istio",
      ["istio", "service-mesh", "envoy"],
@@ -214,7 +214,7 @@ CN_ECOSYSTEM = [
      "- **mTLS**：自动为服务间通信启用双向 TLS 加密。\n- **流量拆分**：通过 VirtualService 实现金丝雀发布和 A/B 测试。\n- **故障注入**：模拟延迟和错误，验证服务韧性。\n- **可观测性**：自动生成分布式追踪、指标和访问日志。\n- Istio Ambient Mesh：无 sidecar 的新模式，降低资源开销。",
      "- 新集群评估是否需要服务网格（非所有场景都需要 Istio）。\n- 使用 STRICT mTLS 模式确保所有服务间通信加密。\n- 合理配置 DestinationRule 的 ConnectionPool 和 OutlierDetection。\n- 使用 Kiali 可视化服务网格拓扑和流量。\n- 关注 Istio Ambient Mesh 的发展，减少 sidecar 开销。",
      "- [Istio Official Documentation](https://istio.io/latest/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cilium|Cilium]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]"),
+     "- [[系统基础/topic-dictionary/networking/envoy|Envoy]]\n- [[系统基础/topic-dictionary/networking/cilium|Cilium]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/ingress|Ingress]]\n- [[系统基础/topic-dictionary/security/certificate|Certificate]]"),
 
     ("observability", "opentelemetry", "OpenTelemetry", "OpenTelemetry (OTel)",
      ["opentelemetry", "observability", "tracing", "metrics", "logging"],
@@ -223,7 +223,7 @@ CN_ECOSYSTEM = [
      "- **OTLP 协议**：基于 gRPC/HTTP，统一传输 Traces、Metrics、Logs。\n- **自动 Instrumentation**：Java Agent、Node.js SDK 等无需修改代码即可采集。\n- **Collector Pipeline**：receivers → processors → exporters，灵活路由数据。\n- **Context Propagation**：通过 W3C Trace Context 在微服务间传递追踪上下文。\n- 支持 Kubernetes Operator 自动注入 Instrumentation。",
      "- 新项目直接使用 OpenTelemetry SDK 替代 Jaeger/Zipkin 等独立方案。\n- 部署 OTel Collector 统一采集和路由观测数据。\n- 使用 auto-instrumentation 降低接入成本。\n- 配置合理的采样率避免数据爆炸（如 traceID ratio 采样）。\n- 结合 Grafana Tempo/Jaeger 可视化和查询追踪数据。",
      "- [OpenTelemetry Official](https://opentelemetry.io/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]\n- [[domain-17-system-foundation/topic-dictionary/observability/jaeger|Jaeger]]\n- [[domain-17-system-foundation/topic-dictionary/observability/logging|Logging]]\n- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager|Alertmanager]]"),
+     "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]\n- [[系统基础/topic-dictionary/observability/jaeger|Jaeger]]\n- [[系统基础/topic-dictionary/observability/logging|Logging]]\n- [[系统基础/topic-dictionary/observability/alertmanager|Alertmanager]]"),
 
     ("observability", "jaeger", "Jaeger", "Jaeger",
      ["jaeger", "tracing", "observability", "cncf"],
@@ -232,7 +232,7 @@ CN_ECOSYSTEM = [
      "- 完全兼容 OpenTelemetry Collector 和 OTLP 协议。\n- 支持自适应采样（Adaptive Sampling），根据流量自动调整。\n- Jaeger v2 基于 OpenTelemetry Collector 架构重构。\n- 支持 Service Performance Monitoring（SPM）自动聚合指标。\n- 提供 Spark/Flink 作业进行离线数据分析。",
      "- 新部署推荐使用 Jaeger v2（基于 OTel Collector）。\n- 配合 OpenTelemetry SDK 采集追踪数据。\n- 使用 Jaeger UI 分析慢请求和错误链路。\n- 为高流量服务配置合理采样率（如 1%）。\n- 存储后端优先选择 Elasticsearch 或 Tempo。",
      "- [Jaeger Official](https://www.jaegertracing.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]\n- [[domain-17-system-foundation/topic-dictionary/observability/logging|Logging]]\n- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]"),
+     "- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]\n- [[系统基础/topic-dictionary/observability/logging|Logging]]\n- [[系统基础/topic-dictionary/networking/envoy|Envoy]]"),
 
     ("observability", "thanos", "Thanos", "Thanos",
      ["thanos", "prometheus", "observability", "cncf"],
@@ -241,7 +241,7 @@ CN_ECOSYSTEM = [
      "- **全局视图**：跨集群查询所有 Prometheus 实例的数据。\n- **无限保留**：TSDB 数据上传到 S3/GCS/MinIO 实现长期存储。\n- **降采样**：自动将历史数据降采样（5m/1h）减少查询开销。\n- **去重**：相同指标的多个副本自动去重。\n- 兼容 PromQL，无需修改现有查询。",
      "- 多集群环境使用 Thanos Query 提供统一查询入口。\n- 对象存储优先选择 S3 兼容的存储（MinIO、AWS S3）。\n- 配置 Compactor 的 retention 策略管理存储成本。\n- 使用 Thanos Ruler 实现全局告警规则。\n- 考虑 VictoriaMetrics 作为 Thanos 的替代方案。",
      "- [Thanos Official](https://thanos.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]\n- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager|Alertmanager]]\n- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]"),
+     "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]\n- [[系统基础/topic-dictionary/observability/alertmanager|Alertmanager]]\n- [[系统基础/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]"),
 
     ("operations", "argo", "Argo", "Argo",
      ["argo", "gitops", "cicd", "cncf"],
@@ -250,7 +250,7 @@ CN_ECOSYSTEM = [
      "- **GitOps 模型**：Git 仓库作为唯一的真实来源（Single Source of Truth）。\n- **Pull 模式**：Argo CD 主动从 Git 拉取变更，而非 CI push。\n- **多集群管理**：ApplicationSet 批量管理多集群部署。\n- **渐进式发布**：Argo Rollouts 支持金丝雀和蓝绿部署策略。\n- **SSO/RBAC**：集成 OIDC/LDAP 和应用级 RBAC。",
      "- 使用 Argo CD 管理所有 K8s 资源的 GitOps 部署。\n- 配置 auto-sync + self-heal 实现全自动运维。\n- 使用 ApplicationSet 管理多环境/多集群部署。\n- 配合 Argo Rollouts 实现金丝雀发布。\n- 启用 Argo CD 的 RBAC 和 SSO 控制访问权限。",
      "- [Argo CD Official](https://argo-cd.readthedocs.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/operations/rolling-update|Rolling Update]]\n- [[domain-17-system-foundation/topic-dictionary/operations/rollback|Rollback]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]"),
+     "- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/operations/rolling-update|Rolling Update]]\n- [[系统基础/topic-dictionary/operations/rollback|Rollback]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]"),
 
     ("security", "trivy", "Trivy", "Trivy",
      ["trivy", "security", "scanning", "cncf"],
@@ -259,7 +259,7 @@ CN_ECOSYSTEM = [
      "- **Trivy Operator**：Kubernetes 原生部署，自动扫描集群中的镜像和配置。\n- **CI/CD 集成**：作为 GitHub Action、GitLab CI 步骤扫描镜像。\n- **SBOM 生成**：输出 SPDX/CycloneDX 格式的软件物料清单。\n- **Misconfiguration**：扫描 Terraform、Kubernetes YAML、Dockerfile。\n- 支持 JSON/Table/SARIF 多种输出格式。",
      "- CI/CD 流水线中集成 `trivy image` 扫描构建的镜像。\n- 部署 Trivy Operator 持续扫描集群中的运行镜像。\n- 使用 `trivy config` 检查 Kubernetes YAML 的安全配置。\n- 将 Trivy 结果集成到 GitHub Security Advisory。\n- 定期生成 SBOM 满足合规要求。",
      "- [Trivy Official](https://aquasecurity.github.io/trivy/)",
-     "- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[domain-17-system-foundation/topic-dictionary/security/security-context|Security Context]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]\n- [[domain-17-system-foundation/topic-dictionary/security/admission-controller|Admission Controller]]"),
+     "- [[系统基础/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[系统基础/topic-dictionary/security/security-context|Security Context]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/security/certificate|Certificate]]\n- [[系统基础/topic-dictionary/security/admission-controller|Admission Controller]]"),
 
     ("security", "falco", "Falco", "Falco",
      ["falco", "security", "runtime-security", "cncf", "ebpf"],
@@ -268,7 +268,7 @@ CN_ECOSYSTEM = [
      "- **eBPF 探针**：现代部署推荐使用 eBPF 替代内核模块，更安全。\n- **规则优先级**：Emergency → Critical → Error → Warning → Notice → Info → Debug。\n- **宏和列表**：可组合的 reusable 规则构建块。\n- **插件系统**：支持扩展数据源（K8s Audit Log、CloudTrail 等）。\n- 与 Kubernetes Audit Log 结合实现 API 级别的安全监控。",
      "- 部署 Falco 作为 DaemonSet 监控所有节点的运行时行为。\n- 使用 Falco Talon 实现自动化响应（如杀死可疑进程）。\n- 配合 Falco Sidekick 将告警发送到 Slack/PagerDuty。\n- 自定义规则检测特定于业务的异常行为。\n- 定期审查 Falco 告警，减少误报。",
      "- [Falco Official](https://falco.org/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/security/trivy|Trivy]]\n- [[domain-17-system-foundation/topic-dictionary/security/security-context|Security Context]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/networking/cilium|Cilium]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+     "- [[系统基础/topic-dictionary/security/trivy|Trivy]]\n- [[系统基础/topic-dictionary/security/security-context|Security Context]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/networking/cilium|Cilium]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
     ("operations", "cert-manager", "cert-manager", "cert-manager",
      ["cert-manager", "certificate", "tls", "cncf"],
@@ -277,7 +277,7 @@ CN_ECOSYSTEM = [
      "- **ACME 协议**：支持 Let's Encrypt 的 HTTP-01 和 DNS-01 验证。\n- **自动续期**：证书到期前自动续期（默认 2/3 生命周期时触发）。\n- **Vault 集成**：支持 HashiCorp Vault 作为证书颁发源。\n- **istio-csr**：为 Istio 提供自动化的 mTLS 证书管理。\n- **approve**：内置 RBAC 控制证书审批流程。",
      "- 为 Ingress 资源自动签发 Let's Encrypt 证书（配合 cert-manager annotation）。\n- 生产环境使用 ClusterIssuer 统一管理证书颁发源。\n- DNS-01 验证适合通配符证书（*.example.com）。\n- 监控证书到期时间，设置 30 天到期告警。\n- 考虑使用 step-ca 或 Vault PKI 作为内部 CA。",
      "- [cert-manager Official](https://cert-manager.io/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate-authority|Certificate Authority]]\n- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]\n- [[domain-17-system-foundation/topic-dictionary/security/webhook|Webhook]]\n- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]"),
+     "- [[系统基础/topic-dictionary/security/certificate|Certificate]]\n- [[系统基础/topic-dictionary/security/certificate-authority|Certificate Authority]]\n- [[系统基础/topic-dictionary/networking/ingress|Ingress]]\n- [[系统基础/topic-dictionary/security/webhook|Webhook]]\n- [[系统基础/topic-dictionary/networking/istio|Istio]]"),
 
     ("storage", "rook", "Rook", "Rook",
      ["rook", "storage", "operator", "cncf"],
@@ -286,7 +286,7 @@ CN_ECOSYSTEM = [
      "- **全自动运维**：OSD 故障自动恢复、数据自动重平衡。\n- **弹性扩缩**：动态添加/移除 OSD 节点。\n- **加密**：支持 OSD 级别的静态加密（encryption at rest）。\n- **Dashboard**：内置 Ceph Dashboard 监控存储健康。\n- 支持快照（Snapshot）和克隆（Clone）功能。",
      "- 需要 Kubernetes 原生存储能力时优先考虑 Rook-Ceph。\n- 确保至少有 3 个 OSD 节点实现数据冗余。\n- 为 RBD 和 CephFS 分别创建 StorageClass。\n- 监控 Ceph 集群健康状态（HEALTH_OK/WARN/ERR）。\n- 配置 Pool 的副本数和故障域（failureDomain）。",
      "- [Rook Official](https://rook.io/docs/rook/latest/)",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim|Persistent Volume Claim]]\n- [[domain-17-system-foundation/topic-dictionary/storage/storage-class|Storage Class]]\n- [[domain-17-system-foundation/topic-dictionary/storage/csi|CSI]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
+     "- [[系统基础/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[系统基础/topic-dictionary/storage/persistent-volume-claim|Persistent Volume Claim]]\n- [[系统基础/topic-dictionary/storage/storage-class|Storage Class]]\n- [[系统基础/topic-dictionary/storage/csi|CSI]]\n- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
 
     ("storage", "longhorn", "Longhorn", "Longhorn",
      ["longhorn", "storage", "cncf"],
@@ -295,7 +295,7 @@ CN_ECOSYSTEM = [
      "- Longhorn UI 提供可视化存储管理。\n- 支持 Volume 的在线扩容和迁移。\n- 自动创建 Volume 的定期快照计划。\n- 支持 Volume 的加密和访问控制。\n- 通过 StorageClass 实现 PV 动态制备。",
      "- 中小集群或边缘场景优先考虑 Longhorn。\n- 配置至少 3 个 Replica 确保数据可靠性。\n- 启用自动快照和备份策略。\n- 监控 Longhorn 的 Engine/Replica 状态。\n- 使用 RecurringJob 自动化快照和备份任务。",
      "- [Longhorn Official](https://longhorn.io/docs/)",
-     "- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[domain-17-system-foundation/topic-dictionary/storage/storage-class|Storage Class]]\n- [[domain-17-system-foundation/topic-dictionary/storage/rook|Rook]]\n- [[domain-17-system-foundation/topic-dictionary/storage/csi|CSI]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/statefulset|StatefulSet]]"),
+     "- [[系统基础/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[系统基础/topic-dictionary/storage/storage-class|Storage Class]]\n- [[系统基础/topic-dictionary/storage/rook|Rook]]\n- [[系统基础/topic-dictionary/storage/csi|CSI]]\n- [[系统基础/topic-dictionary/workloads/statefulset|StatefulSet]]"),
 
     ("platform-engineering", "grpc", "gRPC", "gRPC",
      ["grpc", "rpc", "protobuf", "networking"],
@@ -304,7 +304,7 @@ CN_ECOSYSTEM = [
      "- Kubernetes 的 kubelet ↔ apiserver、etcd ↔ apiserver 等组件间通信大量使用 gRPC。\n- Envoy 原生支持 gRPC 代理、负载均衡和重试。\n- gRPC Health Check 协议用于服务健康检查。\n- gRPC Reflection 支持运行时服务发现。\n- gRPC-Gateway 自动生成 REST API 代理。",
      "- 微服务间内部通信优先使用 gRPC。\n- 对外 API 使用 gRPC-Gateway 同时提供 REST 接口。\n- 配置合理的超时和重试策略（gRPC retry policy）。\n- 使用 grpcurl 工具调试 gRPC 服务。\n- 配合 OpenTelemetry 实现 gRPC 调用的分布式追踪。",
      "- [gRPC Official](https://grpc.io/)",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]\n- [[domain-17-system-foundation/topic-dictionary/networking/istio|Istio]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-apiserver|Kube-apiserver]]"),
+     "- [[系统基础/topic-dictionary/networking/envoy|Envoy]]\n- [[系统基础/topic-dictionary/networking/istio|Istio]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/fundamentals/kube-apiserver|Kube-apiserver]]"),
 ]
 
 

@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 
-BASE = Path("domain-17-system-foundation/topic-dictionary")
+BASE = Path("系统基础/topic-dictionary")
 
 def w(cat, fn, zh, en, tags, overview, core, mech, use, refs, rel=""):
     fp = BASE / cat / f"{fn}.md"
@@ -13,7 +13,7 @@ def w(cat, fn, zh, en, tags, overview, core, mech, use, refs, rel=""):
     tks = list(dict.fromkeys([zh, en, "dictionary"]))
     tk = "\n".join(f"- {k}" for k in tks)
     tg = "\n".join(f"- {t}" for t in tags)
-    r = rel or "- [[domain-17-system-foundation/topic-dictionary/k8s-glossary|K8s Glossary]]"
+    r = rel or "- [[系统基础/topic-dictionary/k8s-glossary|K8s Glossary]]"
     c = f"""---
 title: {zh}
 description: '{overview[:80]}...'
@@ -81,7 +81,7 @@ TERMS = [
  "- **Argo CD**：最流行的 GitOps 控制器，支持多集群管理。\n- **Flux**：CNCF 毕业项目，原生多租户支持。\n- **Kustomize/Helm**：GitOps 中常用的配置渲染工具。\n- **密封密钥（Sealed Secrets）**：在 Git 中安全存储加密的 Secret。\n- 支持渐进式发布（配合 Argo Rollouts/Flagger）。",
  "- 所有 K8s 资源定义存放在 Git 仓库中，通过 PR 管理变更。\n- 使用 Argo CD 或 Flux 实现自动同步。\n- 敏感信息使用 Sealed Secrets 或 External Secrets Operator。\n- 环境分离策略：按目录或按分支管理多环境配置。\n- 配置漂移检测：GitOps 控制器自动检测并修复漂移。",
  "- [OpenGitOps](https://opengitops.dev/)",
- "- [[domain-17-system-foundation/topic-dictionary/operations/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/operations/flux|Flux]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]"),
+ "- [[系统基础/topic-dictionary/operations/argo|Argo]]\n- [[系统基础/topic-dictionary/operations/flux|Flux]]\n- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]"),
 
 ("operations", "flux", "Flux", "Flux",
  ["flux", "gitops", "cncf"],
@@ -90,7 +90,7 @@ TERMS = [
  "- **Source 抽象**：GitRepository、HelmRepository、OCIRepository、Bucket 等。\n- **Kustomization**：声明式的 Kustomize 部署流水线。\n- **HelmRelease**：声明式的 Helm 部署，支持 valuesFrom。\n- **Image Update**：自动检测新镜像版本并提交 PR 到 Git。\n- **多租户**：通过 RBAC 和 Namespace 隔离不同团队。",
  "- 作为 Argo CD 的替代方案，特别适合多租户场景。\n- 使用 Image Automation 实现镜像版本的自动更新。\n- 配合 Kustomize 管理多环境配置差异。\n- 使用 Flux 的 Webhook 接收实现即时同步。\n- 监控 Flux 控制器的 reconciliation 状态。",
  "- [Flux Official](https://fluxcd.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/operations/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/operations/gitops|GitOps]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]"),
+ "- [[系统基础/topic-dictionary/operations/argo|Argo]]\n- [[系统基础/topic-dictionary/operations/gitops|GitOps]]\n- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/tooling/kustomize|Kustomize]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]"),
 
 ("operations", "tekton", "Tekton", "Tekton",
  ["tekton", "cicd", "pipeline", "cncf"],
@@ -99,7 +99,7 @@ TERMS = [
  "- **Task 共享 Workspace**：通过 PVC 在 Task 之间传递数据。\n- **Catalog**：社区贡献的预构建 Task（如 git-clone、buildpacks）。\n- **Results**：Task 输出结果供下游 Task 引用。\n- **When Expressions**：条件执行 Task。\n- **Finally**：Pipeline 结束后的清理/通知 Task。",
  "- 云原生 CI/CD 优先选择 Tekton 替代 Jenkins。\n- 使用 Tekton Catalog 复用社区 Task 减少重复开发。\n- 配合 Triggers 实现 Webhook 触发的自动构建。\n- 使用 Tekton Dashboard 或 Tekton Results 查看执行历史。\n- 为 Pipeline 设置合理的超时时间和重试策略。",
  "- [Tekton Official](https://tekton.dev/)",
- "- [[domain-17-system-foundation/topic-dictionary/operations/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/operations/gitops|GitOps]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/job|Job]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]"),
+ "- [[系统基础/topic-dictionary/operations/argo|Argo]]\n- [[系统基础/topic-dictionary/operations/gitops|GitOps]]\n- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/workloads/job|Job]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]"),
 
 ("operations", "velero", "Velero", "Velero",
  ["velero", "backup", "disaster-recovery", "cncf"],
@@ -108,7 +108,7 @@ TERMS = [
  "- **CSI 快照**：使用 CSI VolumeSnapshot 实现 PV 的即时快照。\n- **Restic/Kopia**：文件级备份，适用于不支持 CSI 快照的存储。\n- **资源过滤**：按 Label、Namespace、资源类型选择性备份。\n- **跨集群迁移**：备份源集群，恢复到目标集群。\n- 支持备份前的 Hook（如数据库 flush）。",
  "- 生产集群必须配置定期备份策略。\n- 使用 Schedule 资源定义每日/每周自动备份。\n- 定期测试 Restore 流程确保备份可用。\n- 备份数据加密存储，配置合理的保留策略。\n- 使用 Velero 进行集群迁移（on-prem → 云）。",
  "- [Velero Official](https://velero.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[domain-17-system-foundation/topic-dictionary/storage/storage-class|Storage Class]]\n- [[domain-17-system-foundation/topic-dictionary/operations/upgrade|Upgrade]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/statefulset|StatefulSet]]\n- [[domain-17-system-foundation/topic-dictionary/storage/rook|Rook]]"),
+ "- [[系统基础/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[系统基础/topic-dictionary/storage/storage-class|Storage Class]]\n- [[系统基础/topic-dictionary/operations/upgrade|Upgrade]]\n- [[系统基础/topic-dictionary/workloads/statefulset|StatefulSet]]\n- [[系统基础/topic-dictionary/storage/rook|Rook]]"),
 
 # === Observability ===
 ("observability", "loki", "Loki", "Loki",
@@ -118,7 +118,7 @@ TERMS = [
  "- **LogQL**：类 PromQL 的日志查询语言，支持标签过滤和日志解析。\n- **多租户**：通过 `X-Scope-OrgID` Header 隔离租户。\n- **对象存储**：日志块存储在 S3/GCS/MinIO。\n- **Promtail/Alloy**：日志采集 Agent（类似 Fluentd）。\n- 与 Grafana 深度集成，Dashboard 中联合查询 Metrics + Logs。",
  "- 云原生日志方案优先选择 Loki 替代 ELK。\n- 使用 Kubernetes 标签（pod、namespace、container）作为 Loki 标签。\n- 避免高基数标签（如 request_id），使用 LogQL 过滤。\n- 配置日志保留策略（retention）控制存储成本。\n- 配合 Promtail 或 Grafana Alloy 采集容器日志。",
  "- [Loki Official](https://grafana.com/oss/loki/)",
- "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]\n- [[domain-17-system-foundation/topic-dictionary/observability/logging|Logging]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/observability/jaeger|Jaeger]]"),
+ "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]\n- [[系统基础/topic-dictionary/observability/logging|Logging]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/observability/jaeger|Jaeger]]"),
 
 ("observability", "promql", "PromQL", "PromQL",
  ["promql", "prometheus", "observability", "query-language"],
@@ -127,7 +127,7 @@ TERMS = [
  "- **瞬时向量 vs 范围向量**：`metric` 返回最新值，`metric[5m]` 返回时间范围。\n- **聚合运算符**：`sum`、`avg`、`max`、`min`、`count`、`topk` 等。\n- **二元运算符**：支持向量之间的加减乘除和匹配。\n- **子查询**：`rate(metric[5m])[30m:1m]` 嵌套查询。\n- Recording Rules 预计算复杂查询减少查询延迟。",
  "- 掌握 PromQL 是 SRE/运维工程师的必备技能。\n- 使用 `rate()` 而非 `irate()` 用于告警（更平滑）。\n- 配置 Recording Rules 预计算常用的高开销查询。\n- 使用 Grafana 变量实现动态 PromQL 查询。\n- 了解 PromQL 的 Staleness 机制（5 分钟过期标记）。",
  "- [PromQL Reference](https://prometheus.io/docs/prometheus/latest/querying/basics/)",
- "- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]\n- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager|Alertmanager]]\n- [[domain-17-system-foundation/topic-dictionary/observability/thanos|Thanos]]\n- [[domain-17-system-foundation/topic-dictionary/observability/metrics-server|Metrics Server]]"),
+ "- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]\n- [[系统基础/topic-dictionary/observability/alertmanager|Alertmanager]]\n- [[系统基础/topic-dictionary/observability/thanos|Thanos]]\n- [[系统基础/topic-dictionary/observability/metrics-server|Metrics Server]]"),
 
 # === Security ===
 ("security", "opa", "Open Policy Agent", "OPA (Open Policy Agent)",
@@ -137,7 +137,7 @@ TERMS = [
  "- **Gatekeeper**：OPA 的 Kubernetes 原生实现，通过 CRD 管理策略。\n- **ConstraintTemplate**：参数化的策略模板。\n- **Audit**：定期审计已有资源是否违反策略。\n- **Mutation**：自动修正不符合策略的资源。\n- **外部数据**：引用 ConfigMap 等外部数据辅助决策。",
  "- 使用 OPA Gatekeeper 替代 PSP 实现 Pod 安全策略。\n- 定义约束：禁止 latest 标签镜像、要求 resource limits 等。\n- 使用 ConstraintTemplate 构建团队可复用的策略库。\n- 配合 CI/CD 在部署前进行策略检查（dry-run）。\n- 启用 Audit 功能定期扫描集群中的违规资源。",
  "- [OPA Official](https://www.openpolicyagent.org/)",
- "- [[domain-17-system-foundation/topic-dictionary/security/kyverno|Kyverno]]\n- [[domain-17-system-foundation/topic-dictionary/security/admission-controller|Admission Controller]]\n- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/security/webhook|Webhook]]"),
+ "- [[系统基础/topic-dictionary/security/kyverno|Kyverno]]\n- [[系统基础/topic-dictionary/security/admission-controller|Admission Controller]]\n- [[系统基础/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/security/webhook|Webhook]]"),
 
 ("security", "kyverno", "Kyverno", "Kyverno",
  ["kyverno", "policy", "security", "cncf"],
@@ -146,7 +146,7 @@ TERMS = [
  "- **Mutate 规则**：自动注入 sidecar、添加默认 labels。\n- **Generate 规则**：自动为新命名空间创建 NetworkPolicy/ResourceQuota。\n- **Image Verify**：验证镜像的 Sigstore/Cosign 签名。\n- **Reports**：生成策略违规报告。\n- **Exceptions**：为特定资源定义策略例外。",
  "- 团队熟悉 YAML 但不想学 Rego 时选择 Kyverno。\n- 使用 Mutate 规则自动为所有 Pod 添加安全上下文。\n- 使用 Generate 规则自动为新 Namespace 创建默认策略。\n- 配合 Sigstore/Cosign 实现镜像签名验证。\n- 使用 Kyverno CLI 在 CI 中测试策略。",
  "- [Kyverno Official](https://kyverno.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/security/opa|OPA]]\n- [[domain-17-system-foundation/topic-dictionary/security/admission-controller|Admission Controller]]\n- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[domain-17-system-foundation/topic-dictionary/security/trivy|Trivy]]\n- [[domain-17-system-foundation/topic-dictionary/security/webhook|Webhook]]"),
+ "- [[系统基础/topic-dictionary/security/opa|OPA]]\n- [[系统基础/topic-dictionary/security/admission-controller|Admission Controller]]\n- [[系统基础/topic-dictionary/security/pod-security-policy|Pod Security Policy]]\n- [[系统基础/topic-dictionary/security/trivy|Trivy]]\n- [[系统基础/topic-dictionary/security/webhook|Webhook]]"),
 
 ("security", "vault", "HashiCorp Vault", "Vault",
  ["vault", "secrets-management", "security"],
@@ -155,7 +155,7 @@ TERMS = [
  "- **动态凭证**：按需生成短生命周期的数据库凭证、AWS 凭证等。\n- **Kubernetes Auth**：使用 ServiceAccount Token 认证 Pod 身份。\n- **Auto-Unseal**：使用云 KMS 自动解封 Vault。\n- **审计日志**：记录所有密钥访问操作。\n- **Secret Rotation**：自动轮转数据库密码和 API 密钥。",
  "- 生产环境使用 Vault 替代 K8s Secret 管理敏感信息。\n- 启用 K8s Auth Method 实现 Pod 级别的密钥访问。\n- 使用 Vault Agent Sidecar 自动注入密钥（无需修改应用代码）。\n- 配置短期凭证（TTL < 1h）减少密钥泄露风险。\n- 启用审计日志满足合规要求。",
  "- [Vault Official](https://www.vaultproject.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/configuration/secret|Secret]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate-authority|Certificate Authority]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/security/service-account|Service Account]]"),
+ "- [[系统基础/topic-dictionary/configuration/secret|Secret]]\n- [[系统基础/topic-dictionary/security/certificate|Certificate]]\n- [[系统基础/topic-dictionary/security/certificate-authority|Certificate Authority]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/security/service-account|Service Account]]"),
 
 # === Networking ===
 ("networking", "traefik", "Traefik", "Traefik",
@@ -165,7 +165,7 @@ TERMS = [
  "- **自动服务发现**：监听 K8s API 自动发现 Ingress/Gateway 资源。\n- **Middleware 链**：RateLimit、CircuitBreaker、Auth、Compress 等。\n- **Let's Encrypt**：自动签发和续期 TLS 证书。\n- **Dashboard**：内置 Web UI 查看路由和中间件状态。\n- **TCP/UDP**：支持非 HTTP 协议的流量代理。",
  "- 中小集群可选择 Traefik 替代 Nginx Ingress Controller。\n- 使用 Middleware 实现限流、认证、压缩等功能。\n- 启用自动 TLS（Let's Encrypt）简化证书管理。\n- 配合 Gateway API 实现更精细的流量管理。\n- 使用 Traefik Pilot 或 Prometheus 监控代理指标。",
  "- [Traefik Official](https://doc.traefik.io/traefik/)",
- "- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/envoy|Envoy]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]\n- [[domain-17-system-foundation/topic-dictionary/networking/loadbalancer|LoadBalancer]]"),
+ "- [[系统基础/topic-dictionary/networking/ingress|Ingress]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/envoy|Envoy]]\n- [[系统基础/topic-dictionary/security/certificate|Certificate]]\n- [[系统基础/topic-dictionary/networking/loadbalancer|LoadBalancer]]"),
 
 # === Storage ===
 ("storage", "ceph", "Ceph", "Ceph",
@@ -175,7 +175,7 @@ TERMS = [
  "- **RBD（块设备）**：Kubernetes PV 的主要来源，支持快照和克隆。\n- **CephFS（文件系统）**：支持 ReadWriteMany 的共享存储。\n- **RGW（对象网关）**：S3 兼容接口，适合备份和大数据。\n- **数据冗余**：副本（Replicated）或纠删码（Erasure Coding）。\n- **自动恢复**：OSD 故障后自动重平衡数据。",
  "- 通过 Rook-Ceph Operator 在 K8s 中部署和管理 Ceph 集群。\n- 为不同工作负载创建不同的 Pool 和 StorageClass。\n- 数据库使用 RBD（块存储）获得最佳 IOPS。\n- 共享文件存储使用 CephFS。\n- 监控 Ceph 集群健康状态：`ceph health detail`。",
  "- [Ceph Official](https://docs.ceph.com/)",
- "- [[domain-17-system-foundation/topic-dictionary/storage/rook|Rook]]\n- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[domain-17-system-foundation/topic-dictionary/storage/storage-class|Storage Class]]\n- [[domain-17-system-foundation/topic-dictionary/storage/csi|CSI]]\n- [[domain-17-system-foundation/topic-dictionary/storage/volume|Volume]]"),
+ "- [[系统基础/topic-dictionary/storage/rook|Rook]]\n- [[系统基础/topic-dictionary/storage/persistent-volume|Persistent Volume]]\n- [[系统基础/topic-dictionary/storage/storage-class|Storage Class]]\n- [[系统基础/topic-dictionary/storage/csi|CSI]]\n- [[系统基础/topic-dictionary/storage/volume|Volume]]"),
 
 # === AI/ML ===
 ("specialized-workloads", "kubeflow", "Kubeflow", "Kubeflow",
@@ -185,7 +185,7 @@ TERMS = [
  "- **Pipeline SDK**：Python SDK 定义 ML 工作流步骤。\n- **分布式训练**：PyTorchJob/TFJob 管理多 GPU/多节点训练。\n- **资源调度**：GPU 调度、优先级队列、资源隔离。\n- **模型注册**：版本化管理训练好的模型。\n- **Experiment Tracking**：跟踪实验参数和指标。",
  "- 需要标准化 ML 工作流时引入 Kubeflow Pipelines。\n- GPU 训练任务使用 Training Operators 管理。\n- 使用 Katib 自动化超参搜索。\n- 配合 KServe 实现模型的在线推理服务。\n- 注意 Kubeflow 的资源开销，小型团队可考虑轻量替代方案。",
  "- [Kubeflow Official](https://www.kubeflow.org/)",
- "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/job|Job]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/resource-request|Resource Request]]\n- [[domain-17-system-foundation/topic-dictionary/operations/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
+ "- [[系统基础/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[系统基础/topic-dictionary/workloads/job|Job]]\n- [[系统基础/topic-dictionary/scheduling/resource-request|Resource Request]]\n- [[系统基础/topic-dictionary/operations/argo|Argo]]\n- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
 
 ("specialized-workloads", "kserve", "KServe", "KServe",
  ["kserve", "ml", "inference", "cncf"],
@@ -194,7 +194,7 @@ TERMS = [
  "- **Serverless 模式**：基于 Knative，支持缩到零降低成本。\n- **RawDeployment 模式**：不依赖 Knative，适合简单场景。\n- **ModelMesh**：在少量 Pod 中加载大量模型，适合大规模模型服务。\n- **V2 协议**：标准化的推理 API（Predict/Explain）。\n- 支持 ONNX Runtime、Triton 等多种推理引擎。",
  "- ML 模型上线使用 KServe 替代自建的推理服务。\n- 配合 Kubeflow 实现训练到部署的全自动化。\n- 使用金丝雀发布逐步切换新模型版本。\n- 低成本场景启用 Scale-to-Zero。\n- 大规模模型服务使用 ModelMesh 优化资源利用。",
  "- [KServe Official](https://kserve.github.io/website/)",
- "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/knative|Knative]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/hpa|HPA]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/keda|KEDA]]"),
+ "- [[系统基础/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]\n- [[系统基础/topic-dictionary/specialized-workloads/knative|Knative]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/scheduling/hpa|HPA]]\n- [[系统基础/topic-dictionary/specialized-workloads/keda|KEDA]]"),
 
 ("specialized-workloads", "ray", "Ray", "Ray",
  ["ray", "distributed-computing", "ai", "ml"],
@@ -203,7 +203,7 @@ TERMS = [
  "- **弹性伸缩**：RayCluster 根据负载自动扩缩 Worker 节点。\n- **GPU 调度**：支持 GPU 亲和性和共享（fractional GPU）。\n- **Ray Job**：一次性提交和运行分布式任务。\n- **Fault Tolerance**：Worker 故障自动恢复。\n- 与 Kubernetes 生态集成（Ingress、RBAC、ResourceQuota）。",
  "- 大规模 AI 训练使用 Ray Train 替代单机训练。\n- 使用 Ray Serve 部署 ML 模型的在线推理服务。\n- 配合 KubeRay Operator 实现 Ray 集群的 K8s 原生管理。\n- 使用 Ray Autoscaler 实现按需 GPU 资源伸缩。\n- 通过 Ray Dashboard 监控任务执行和资源使用。",
  "- [Ray Official](https://docs.ray.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/job|Job]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/hpa|HPA]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
+ "- [[系统基础/topic-dictionary/specialized-workloads/kubeflow|Kubeflow]]\n- [[系统基础/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[系统基础/topic-dictionary/workloads/job|Job]]\n- [[系统基础/topic-dictionary/scheduling/hpa|HPA]]\n- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]"),
 
 # === Runtime ===
 ("fundamentals", "cri-o", "CRI-O", "CRI-O",
@@ -213,7 +213,7 @@ TERMS = [
  "- **CRI 专用**：仅实现 Kubernetes CRI，不暴露额外 API。\n- **conmon**：每个容器的监控进程，收集退出码和资源使用。\n- **支持多种 OCI 运行时**：runc（标准）、crun（C 实现，更快）、kata（VM 隔离）。\n- 配置文件：`/etc/crio/crio.conf`。\n- 与 kubelet 版本严格对应。",
  "- 追求最小攻击面的安全敏感环境优先选择 CRI-O。\n- 使用 crun 替代 runc 提升容器启动速度。\n- 配置镜像 mirror 加速拉取。\n- 监控 CRI-O 的 `crio_operations_latency` 指标。\n- 确保 CRI-O 版本与 Kubernetes 版本匹配。",
  "- [CRI-O Official](https://cri-o.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri|CRI]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd|Containerd]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubelet|Kubelet]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/pod|Pod]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/container|Container]]"),
+ "- [[系统基础/topic-dictionary/fundamentals/cri|CRI]]\n- [[系统基础/topic-dictionary/fundamentals/containerd|Containerd]]\n- [[系统基础/topic-dictionary/fundamentals/kubelet|Kubelet]]\n- [[系统基础/topic-dictionary/fundamentals/pod|Pod]]\n- [[系统基础/topic-dictionary/fundamentals/container|Container]]"),
 
 # === Platform ===
 ("platform-engineering", "crossplane", "Crossplane", "Crossplane",
@@ -223,7 +223,7 @@ TERMS = [
  "- **持续调谐**：Controller 持续将云资源推向期望状态。\n- **Composition 抽象**：团队通过 Claim 请求资源，无需了解底层细节。\n- **跨云管理**：同一套 API 管理 AWS/Azure/GCP 资源。\n- **Provider Config**：管理云凭证和连接配置。\n- **Observe-Only**：导入已有云资源到 Crossplane 管理。",
  "- 平台团队使用 Crossplane 构建自助式基础设施平台。\n- 定义 Composition 让开发者通过 Claim 请求数据库/存储/网络。\n- 配合 Argo CD 实现应用 + 基础设施的统一 GitOps。\n- 从 Terraform 迁移时使用 `provider-terraform` 桥接。\n- 使用 Crossplane 的 Drift Detection 自动修复配置漂移。",
  "- [Crossplane Official](https://www.crossplane.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]\n- [[domain-17-system-foundation/topic-dictionary/operations/argo|Argo]]\n- [[domain-17-system-foundation/topic-dictionary/operations/gitops|GitOps]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource|Custom Resource]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest|Manifest]]"),
+ "- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]\n- [[系统基础/topic-dictionary/operations/argo|Argo]]\n- [[系统基础/topic-dictionary/operations/gitops|GitOps]]\n- [[系统基础/topic-dictionary/platform-engineering/custom-resource|Custom Resource]]\n- [[系统基础/topic-dictionary/platform-engineering/manifest|Manifest]]"),
 
 # === Autoscaling ===
 ("scheduling", "keda", "KEDA", "KEDA (Kubernetes Event-Driven Autoscaling)",
@@ -233,7 +233,7 @@ TERMS = [
  "- **Scale-to-Zero**：无事件时将 Pod 缩到 0，节省资源。\n- **丰富的 Scaler**：Kafka lag、Prometheus 指标、数据库队列长度等。\n- **ScaledJob**：按消息队列积压量批量创建 Job 消费者。\n- **Fallback**：Scaler 故障时的降级策略。\n- 兼容标准 HPA 的 min/max/desired 语义。",
  "- 消费者类工作负载（消息队列处理）使用 KEDA 替代 HPA。\n- 配置 Kafka lag 触发器实现自动消费扩缩容。\n- 使用 Scale-to-Zero 降低非高峰时段的资源成本。\n- 配合 ScaledJob 处理批量异步任务。\n- 设置合理的 cooldownPeriod 避免频繁扩缩。",
  "- [KEDA Official](https://keda.sh/)",
- "- [[domain-17-system-foundation/topic-dictionary/scheduling/hpa|HPA]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/vpa|VPA]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/job|Job]]"),
+ "- [[系统基础/topic-dictionary/scheduling/hpa|HPA]]\n- [[系统基础/topic-dictionary/scheduling/vpa|VPA]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/workloads/job|Job]]"),
 
 # === Serverless ===
 ("specialized-workloads", "knative", "Knative", "Knative",
@@ -243,7 +243,7 @@ TERMS = [
  "- **Revision 管理**：每次配置变更自动创建新 Revision。\n- **流量拆分**：Route 支持按比例分配流量到多个 Revision（金丝雀）。\n- **Concurrency**：控制每个 Pod 的并发请求数。\n- **Eventing Broker**：标准化的事件发布和订阅（CloudEvents）。\n- **Trigger**：基于事件属性过滤并路由到 Knative Service。",
  "- 轻量级 HTTP 服务使用 Knative Serving 部署（缩到零节省成本）。\n- 使用 Revision 流量拆分实现金丝雀发布。\n- 配合 KServe 部署 ML 模型推理服务。\n- 使用 Eventing 构建事件驱动的微服务架构。\n- 设置合理的 `minScale` 避免冷启动延迟。",
  "- [Knative Official](https://knative.dev/)",
- "- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/keda|KEDA]]\n- [[domain-17-system-foundation/topic-dictionary/scheduling/hpa|HPA]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]\n- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]"),
+ "- [[系统基础/topic-dictionary/specialized-workloads/kserve|KServe]]\n- [[系统基础/topic-dictionary/specialized-workloads/keda|KEDA]]\n- [[系统基础/topic-dictionary/scheduling/hpa|HPA]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]\n- [[系统基础/topic-dictionary/networking/ingress|Ingress]]"),
 
 # === Dev/Local ===
 ("tooling", "minikube", "Minikube", "Minikube",
@@ -253,7 +253,7 @@ TERMS = [
  "- **Addons**：一键启用 Ingress、Metrics Server、Dashboard 等。\n- **Multi-Node**：`--nodes=3` 模拟多节点集群。\n- **Mount**：将本地目录挂载到集群中。\n- **Registry**：内置私有镜像仓库。\n- **Profile**：管理多个 Minikube 集群实例。",
  "- K8s 新人学习使用 Minikube 快速搭建本地环境。\n- 开发调试使用 `minikube tunnel` 测试 LoadBalancer 服务。\n- CI/CD 流水线中使用 Minikube 运行集成测试。\n- 使用 Addons 快速启用 Ingress 和 Metrics Server。\n- 考虑使用 Kind 作为更轻量的替代方案。",
  "- [Minikube Official](https://minikube.sigs.k8s.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl|Kubectl]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm|Kubeadm]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/node|Node]]\n- [[domain-17-system-foundation/topic-dictionary/networking/ingress|Ingress]]"),
+ "- [[系统基础/topic-dictionary/tooling/kubectl|Kubectl]]\n- [[系统基础/topic-dictionary/tooling/kubeadm|Kubeadm]]\n- [[系统基础/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[系统基础/topic-dictionary/fundamentals/node|Node]]\n- [[系统基础/topic-dictionary/networking/ingress|Ingress]]"),
 
 # === Edge ===
 ("platform-engineering", "kubeedge", "KubeEdge", "KubeEdge",
@@ -263,7 +263,7 @@ TERMS = [
  "- **离线自治**：边缘节点网络中断后仍可运行工作负载。\n- **轻量级**：EdgeCore 资源占用极小（适合 ARM 设备）。\n- **设备管理**：通过 Device CRD 管理 IoT 设备（MQTT/Modbus）。\n- **EdgeMesh**：边缘节点间的服务发现和负载均衡。\n- 支持 ARM64 架构。",
  "- IoT/边缘场景使用 KubeEdge 将 K8s 能力下沉到边缘。\n- 利用离线自治能力应对不稳定的边缘网络。\n- 使用 Device Controller 统一管理 IoT 设备。\n- 边缘节点优先部署 DaemonSet 类型的监控和日志 Agent。\n- 合理规划云边网络带宽，避免大量资源同步。",
  "- [KubeEdge Official](https://kubeedge.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/fundamentals/node|Node]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset|DaemonSet]]\n- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]"),
+ "- [[系统基础/topic-dictionary/fundamentals/node|Node]]\n- [[系统基础/topic-dictionary/fundamentals/cluster|Cluster]]\n- [[系统基础/topic-dictionary/workloads/daemonset|DaemonSet]]\n- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]"),
 
 # === Container Registry ===
 ("tooling", "harbor", "Harbor", "Harbor",
@@ -273,7 +273,7 @@ TERMS = [
  "- **Project**：Harbor 的逻辑隔离单元（类似 K8s Namespace）。\n- **Tag Retention**：自动清理过期或多余的镜像 Tag。\n- **Proxy Cache**：代理缓存公共 Registry 加速拉取。\n- **P2P 分发**：通过 Dragonfly 实现高效镜像分发。\n- 支持 OIDC/LDAP/AD 认证集成。",
  "- 企业环境部署 Harbor 作为私有容器镜像仓库。\n- 配置自动漏洞扫描，阻止高风险镜像部署。\n- 使用复制策略同步镜像到多个数据中心。\n- 启用镜像签名验证确保部署的镜像未被篡改。\n- 配置 Tag Retention 策略自动清理过期镜像。",
  "- [Harbor Official](https://goharbor.io/)",
- "- [[domain-17-system-foundation/topic-dictionary/security/trivy|Trivy]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]\n- [[domain-17-system-foundation/topic-dictionary/security/certificate|Certificate]]\n- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/deployment|Deployment]]"),
+ "- [[系统基础/topic-dictionary/security/trivy|Trivy]]\n- [[系统基础/topic-dictionary/tooling/helm|Helm]]\n- [[系统基础/topic-dictionary/security/certificate|Certificate]]\n- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/workloads/deployment|Deployment]]"),
 
 # === Observability: Tempo ===
 ("observability", "tempo", "Tempo", "Tempo",
@@ -283,7 +283,7 @@ TERMS = [
  "- **OTLP 原生**：直接接收 OpenTelemetry 协议数据。\n- **低成本**：存储成本比 Jaeger（ES 后端）低 5-10 倍。\n- **Metrics-from-Traces**：从 span 数据自动生成指标。\n- **TraceQL**：结构化查询语言（类似 LogQL）。\n- 支持多租户隔离。",
  "- Grafana 生态用户选择 Tempo 替代 Jaeger 存储追踪数据。\n- 配合 OpenTelemetry Collector 采集和路由 span 数据。\n- 在 Grafana 中实现 Metrics → Logs → Traces 的关联查询。\n- 使用 TraceQL 进行高级追踪数据查询。\n- 配置合理的采样率控制存储成本。",
  "- [Tempo Official](https://grafana.com/oss/tempo/)",
- "- [[domain-17-system-foundation/topic-dictionary/observability/jaeger|Jaeger]]\n- [[domain-17-system-foundation/topic-dictionary/observability/loki|Loki]]\n- [[domain-17-system-foundation/topic-dictionary/observability/prometheus|Prometheus]]\n- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[domain-17-system-foundation/topic-dictionary/observability/grafana|Grafana]]"),
+ "- [[系统基础/topic-dictionary/observability/jaeger|Jaeger]]\n- [[系统基础/topic-dictionary/observability/loki|Loki]]\n- [[系统基础/topic-dictionary/observability/prometheus|Prometheus]]\n- [[系统基础/topic-dictionary/observability/opentelemetry|OpenTelemetry]]\n- [[系统基础/topic-dictionary/observability/grafana|Grafana]]"),
 ]
 
 # ─── MAIN ──────────────────────────────────────────────

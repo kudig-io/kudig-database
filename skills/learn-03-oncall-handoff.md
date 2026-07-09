@@ -442,10 +442,10 @@ kubectl get events -A --sort-by='.lastTimestamp' | tail -30
   - ops工程师
   - 值班人员
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start/01-day-one-checklist
-  - domain-11-production-operations/topic-learn/quick-start/02-first-ticket-guide
+  - 生产运维/topic-learn/quick-start/01-day-one-checklist
+  - 生产运维/topic-learn/quick-start/02-first-ticket-guide
   - P1-5-oncall-quick-reference-card
 id: QUICKSTART-DAY3
 topic: onboarding

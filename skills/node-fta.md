@@ -42,7 +42,7 @@ title: "Node 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type==\'Ready\' && @.status!=\'True\')].nodeName]' 显示有 NotReady 节点 --> - **目标**：覆盖节点不可用/不稳..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"]
+sources: ["故障诊断/topic-fta/list/node-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -93,8 +93,8 @@ base_confidence: 0.7
 
 - [[kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/node-index.md|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

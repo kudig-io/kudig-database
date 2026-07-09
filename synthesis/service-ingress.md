@@ -11,8 +11,8 @@ tags:
 - tls
 tier: supporting
 sources:
-- domain-17-system-foundation/topic-dictionary/networking/service.md
-- domain-17-system-foundation/topic-dictionary/networking/ingress.md
+- 系统基础/topic-dictionary/networking/service.md
+- 系统基础/topic-dictionary/networking/ingress.md
 - concepts/service-networking.md
 - concepts/bp-operations.md
 - concepts/bp-security.md
@@ -67,8 +67,8 @@ Service 和 Ingress 共同定义了 Kubernetes 的"网络边界"：Service 是�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/topic-dictionary/networking/service.md|Service]]
+- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
 - [[concepts/service-networking.md|Service Networking]]
 - [[concepts/bp-operations.md|最佳实践：Operations]]
 - [[concepts/bp-security.md|最佳实践：Security]]

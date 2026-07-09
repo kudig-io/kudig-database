@@ -68,9 +68,9 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
+  - 云厂商
   - domain-6-networking
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
 related_topics:
   - ack-overview
   - ack-vpc-network
@@ -97,15 +97,15 @@ related_topics:
 ### 必读文档
 
 1. **ACK 服务总览与集群类型**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`
    - 重点: 不同集群类型的创建参数差异
 
 2. **VPC 网络规划**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/242-ack-vpc-network.md`
    - 重点: VPC CIDR 规划、Pod CIDR、Service CIDR
 
 3. **ECS 计算资源**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md`
    - 重点: 实例规格选择、系统盘配置
 
 ### 阅读要点

@@ -78,8 +78,8 @@ K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS �
 
 - k8gb
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

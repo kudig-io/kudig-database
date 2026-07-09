@@ -59,29 +59,29 @@ prerequisites:
 ## beginner 入门级
 
 ### 推荐起步
-- domain-11-production-operations/topic-learn/: 1 个月学习计划（系统化路径）
-- domain-17-system-foundation/topic-cheat-sheet/k8s.md: [[entities/kubernetes.md|kubernetes]] 速查卡
-- domain-08-release-change-management/topic-deployment/01: 本地 Demo 部署
-- domain-13-container-runtime/01: Docker 架构概述
-- domain-17-system-foundation/09: Linux 运维基础
+- 生产运维/topic-learn/: 1 个月学习计划（系统化路径）
+- 系统基础/topic-cheat-sheet/k8s.md: [[entities/kubernetes.md|kubernetes]] 速查卡
+- 发布变更/topic-deployment/01: 本地 Demo 部署
+- 容器运行时/01: Docker 架构概述
+- 系统基础/09: Linux 运维基础
 
 ### 概念速查
-- domain-17-system-foundation/topic-dictionary/: 运维词典
+- 系统基础/topic-dictionary/: 运维词典
 
 ---
 
 ## intermediate 中级
 
 ### 核心技术
-- domain-01-cluster-fundamentals/01-02: K8s 架构、核心组件
-- domain-02-workloads-applications/10-11: 工作负载控制器、Pod 生命周期
-- domain-03-networking-traffic/05,11,16: 网络架构、Service、DNS
-- domain-04-storage-data/01-04: 存储架构、PV、StorageClass
-- domain-05-security-compliance/01-03: 认证授权、网络安全、运行时安全
+- 集群基础/01-02: K8s 架构、核心组件
+- 工作负载/10-11: 工作负载控制器、Pod 生命周期
+- 网络/05,11,16: 网络架构、Service、DNS
+- 存储/01-04: 存储架构、PV、StorageClass
+- 安全/01-03: 认证授权、网络安全、运行时安全
 
 ### 日常运维
-- domain-10-troubleshooting-diagnostics/05-08: Pod/Node 故障诊断
-- domain-18-manifests-patterns/: YAML 配置参考
+- 故障诊断/05-08: Pod/Node 故障诊断
+- 清单模式/: YAML 配置参考
 
 ---
 
@@ -89,35 +89,35 @@ prerequisites:
 
 ### 深度原理
 - domain-2: 设计原理全系列（18 篇）
-- domain-01-cluster-fundamentals/11-23: 控制平面深度解析
-- domain-03-networking-traffic/27-42: Ingress/Gateway API 深度
+- 集群基础/11-23: 控制平面深度解析
+- 网络/27-42: Ingress/Gateway API 深度
 - domain-8: 可观测性全系列
 
 ### 生产实践
 - domain-9: 平台运维全系列
 - domain-18: 生产运维实践
 - topic-skills: 18 个诊断-修复 Skill
-- domain-10-troubleshooting-diagnostics/topic-fta/list: 36 个组件故障树
+- 故障诊断/topic-fta/list: 36 个组件故障树
 
 ---
 
 ## expert 专家级
 
 ### 源码与架构
-- domain-01-cluster-fundamentals/11: K8s 源码架构
-- domain-01-cluster-fundamentals/12: Operator 开发指南
+- 集群基础/11: K8s 源码架构
+- 集群基础/12: Operator 开发指南
 - domain-3: 控制平面源码级分析
 - domain-19: 技术白皮书（26 篇）
 
 ### 方法论
-- domain-10-troubleshooting-diagnostics/topic-fta/01-23: FTA 方法论体系
+- 故障诊断/topic-fta/01-23: FTA 方法论体系
 - topic-febm: FEBM 取证循证方法论
 
 ### 前沿技术
 - domain-35: eBPF 技术
 - domain-36: 平台工程
 - domain-38: WebAssembly
-- domain-14-ai-ml-infra/15-36: LLM/AI 基础设施
+- AI基础设施/15-36: LLM/AI 基础设施
 
 ---
 

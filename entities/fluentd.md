@@ -80,7 +80,7 @@ description: '## 项目概述'
 - [[skills/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
 - [[skills/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

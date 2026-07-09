@@ -2,7 +2,7 @@
 title: Kubernetes 网络配置最佳实践 [infrastructure]
 description: 生产环境 Kubernetes 网络配置的最佳实践指南
 summary: 生产环境 Kubernetes 网络配置的最佳实践指南
-category: domain-11-production-operations/topic-best-practices/infrastructure
+category: 生产运维/topic-best-practices/infrastructure
 tags:
 - kubernetes
 - networking
@@ -52,7 +52,7 @@ authors:
   role: contributor
 cross_refs:
 - type: domain
-  path: ../../domain-03-networking-traffic/
+  path: ../../网络/
   label: 网络知识域
 - type: best-practice
   path: ./kubernetes-cluster.md
@@ -617,8 +617,8 @@ kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup kubern
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

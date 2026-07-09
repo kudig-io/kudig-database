@@ -72,8 +72,8 @@ Prometheus的配置和状态也会反过来影响etcd：
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[系统基础/topic-cheat-sheet/git.md|Git 速查卡]]
+- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
 - [[concepts/etcd-×-灾难恢复.md|etcd-×-灾难恢复]]

@@ -3,38 +3,38 @@
 from pathlib import Path
 import re
 
-BASE = Path("domain-17-system-foundation/topic-dictionary")
+BASE = Path("系统基础/topic-dictionary")
 SKIP = {'k8s-glossary.md', 'README.md', 'MOC.md', 'GAP-ANALYSIS.md'}
 
 # ────────────────────────────────────────────────────────────
 # P1a: 路径修正映射表
 # ────────────────────────────────────────────────────────────
 PATH_FIXES = {
-    "domain-17-system-foundation/topic-dictionary/fundamentals/pod": "domain-17-system-foundation/topic-dictionary/workloads/pod",
-    "domain-17-system-foundation/topic-dictionary/configuration/secret": "domain-17-system-foundation/topic-dictionary/security/secret",
-    "domain-17-system-foundation/topic-dictionary/platform-engineering/argo": "domain-17-system-foundation/topic-dictionary/operations/argo",
-    "domain-17-system-foundation/topic-dictionary/operations/kubectl": "domain-17-system-foundation/topic-dictionary/tooling/kubectl",
-    "domain-17-system-foundation/topic-dictionary/operations/helm": "domain-17-system-foundation/topic-dictionary/tooling/helm",
-    "domain-17-system-foundation/topic-dictionary/operations/kustomize": "domain-17-system-foundation/topic-dictionary/tooling/kustomize",
-    "domain-17-system-foundation/topic-dictionary/tooling/docker": "domain-17-system-foundation/topic-dictionary/fundamentals/docker",
-    "domain-17-system-foundation/topic-dictionary/platform-engineering/flux": "domain-17-system-foundation/topic-dictionary/operations/flux",
-    "domain-17-system-foundation/topic-dictionary/platform-engineering/tekton": "domain-17-system-foundation/topic-dictionary/operations/tekton",
-    "domain-17-system-foundation/topic-dictionary/tooling/tekton": "domain-17-system-foundation/topic-dictionary/operations/tekton",
-    "domain-17-system-foundation/topic-dictionary/security/cert-manager": "domain-17-system-foundation/topic-dictionary/operations/cert-manager",
-    "domain-17-system-foundation/topic-dictionary/security/cloud-custodian": "domain-17-system-foundation/topic-dictionary/operations/cloud-custodian",
-    "domain-17-system-foundation/topic-dictionary/security/networkpolicy": "domain-17-system-foundation/topic-dictionary/networking/networkpolicy",
-    "domain-17-system-foundation/topic-dictionary/specialized-workloads/kata-containers": "domain-17-system-foundation/topic-dictionary/fundamentals/kata-containers",
-    "domain-17-system-foundation/topic-dictionary/specialized-workloads/keda": "domain-17-system-foundation/topic-dictionary/scheduling/keda",
-    "domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeedge": "domain-17-system-foundation/topic-dictionary/platform-engineering/kubeedge",
-    "domain-17-system-foundation/topic-dictionary/storage/configmap": "domain-17-system-foundation/topic-dictionary/configuration/configmap",
-    "domain-17-system-foundation/topic-dictionary/storage/etcd": "domain-17-system-foundation/topic-dictionary/fundamentals/etcd",
-    "domain-17-system-foundation/topic-dictionary/networking/grpc": "domain-17-system-foundation/topic-dictionary/platform-engineering/grpc",
+    "系统基础/topic-dictionary/fundamentals/pod": "系统基础/topic-dictionary/workloads/pod",
+    "系统基础/topic-dictionary/configuration/secret": "系统基础/topic-dictionary/security/secret",
+    "系统基础/topic-dictionary/platform-engineering/argo": "系统基础/topic-dictionary/operations/argo",
+    "系统基础/topic-dictionary/operations/kubectl": "系统基础/topic-dictionary/tooling/kubectl",
+    "系统基础/topic-dictionary/operations/helm": "系统基础/topic-dictionary/tooling/helm",
+    "系统基础/topic-dictionary/operations/kustomize": "系统基础/topic-dictionary/tooling/kustomize",
+    "系统基础/topic-dictionary/tooling/docker": "系统基础/topic-dictionary/fundamentals/docker",
+    "系统基础/topic-dictionary/platform-engineering/flux": "系统基础/topic-dictionary/operations/flux",
+    "系统基础/topic-dictionary/platform-engineering/tekton": "系统基础/topic-dictionary/operations/tekton",
+    "系统基础/topic-dictionary/tooling/tekton": "系统基础/topic-dictionary/operations/tekton",
+    "系统基础/topic-dictionary/security/cert-manager": "系统基础/topic-dictionary/operations/cert-manager",
+    "系统基础/topic-dictionary/security/cloud-custodian": "系统基础/topic-dictionary/operations/cloud-custodian",
+    "系统基础/topic-dictionary/security/networkpolicy": "系统基础/topic-dictionary/networking/networkpolicy",
+    "系统基础/topic-dictionary/specialized-workloads/kata-containers": "系统基础/topic-dictionary/fundamentals/kata-containers",
+    "系统基础/topic-dictionary/specialized-workloads/keda": "系统基础/topic-dictionary/scheduling/keda",
+    "系统基础/topic-dictionary/specialized-workloads/kubeedge": "系统基础/topic-dictionary/platform-engineering/kubeedge",
+    "系统基础/topic-dictionary/storage/configmap": "系统基础/topic-dictionary/configuration/configmap",
+    "系统基础/topic-dictionary/storage/etcd": "系统基础/topic-dictionary/fundamentals/etcd",
+    "系统基础/topic-dictionary/networking/grpc": "系统基础/topic-dictionary/platform-engineering/grpc",
     # Short references
-    "etcd": "domain-17-system-foundation/topic-dictionary/fundamentals/etcd",
-    "kubernetes": "domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes",
-    "kyverno": "domain-17-system-foundation/topic-dictionary/security/kyverno",
-    "opa": "domain-17-system-foundation/topic-dictionary/security/opa",
-    "deployment": "domain-17-system-foundation/topic-dictionary/workloads/deployment",
+    "etcd": "系统基础/topic-dictionary/fundamentals/etcd",
+    "kubernetes": "系统基础/topic-dictionary/fundamentals/kubernetes",
+    "kyverno": "系统基础/topic-dictionary/security/kyverno",
+    "opa": "系统基础/topic-dictionary/security/opa",
+    "deployment": "系统基础/topic-dictionary/workloads/deployment",
 }
 
 # ────────────────────────────────────────────────────────────
@@ -69,7 +69,7 @@ CORE_TERMS = [
      "- 容器 = 进程 + namespace + cgroup + rootfs\n- 镜像是只读层，容器是读写层\n- 容器运行时（runc）负责创建和管理\n- 容器间共享内核，隔离通过 namespace 实现\n- 生命周期：create → start → running → stop → remove\n- 资源限制通过 cgroup v1/v2 配置\n- 健康检查通过进程探针实现",
      "- 应用容器化（微服务部署）\n- CI/CD 构建环境隔离\n- 多租户安全隔离\n- 资源配额和限流\n- 不可变基础设施\n- 最佳实践：单进程、非 root、只读 rootfs、健康检查",
      "- https://kubernetes.io/docs/concepts/containers/\n- https://opencontainers.org/",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker|Docker]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/runc|runc]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd|containerd]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/docker|Docker]]\n- [[系统基础/topic-dictionary/fundamentals/runc|runc]]\n- [[系统基础/topic-dictionary/fundamentals/containerd|containerd]]"),
 
     ("fundamentals", "cluster", "Kubernetes 集群", "Cluster",
      ["fundamentals", "cluster", "architecture"],
@@ -78,7 +78,7 @@ CORE_TERMS = [
      "- 集群 = Control Plane + Worker Nodes\n- API Server 是唯一入口（所有操作经此）\n- etcd 存储集群状态（Raft 共识）\n- Scheduler 决定 Pod 放置\n- kubelet 管理节点上的 Pod\n- kube-proxy 维护网络规则\n- 集群联邦（Federation）管理多集群",
      "- 生产环境高可用部署（3+ Master）\n- 多租户集群隔离\n- 集群升级和证书轮转\n- 集群网络安全加固\n- 多区域/多可用区部署\n- 最佳实践：托管 K8s（EKS/AKS/GKE）降低运维负担",
      "- https://kubernetes.io/docs/concepts/cluster-administration/\n- https://kubernetes.io/docs/setup/",
-     "- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes|Kubernetes]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace|Namespace]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd|etcd]]"),
+     "- [[系统基础/topic-dictionary/fundamentals/kubernetes|Kubernetes]]\n- [[系统基础/topic-dictionary/fundamentals/namespace|Namespace]]\n- [[系统基础/topic-dictionary/fundamentals/etcd|etcd]]"),
 
     ("fundamentals", "namespace", "命名空间", "Namespace",
      ["fundamentals", "multi-tenancy", "isolation"],
@@ -87,7 +87,7 @@ CORE_TERMS = [
      "- Namespace 隔离资源名称（同命名空间内唯一）\n- ResourceQuota 限制 CPU/Memory/PVC/对象数量\n- LimitRange 设置默认的资源请求和限制\n- NetworkPolicy 控制跨命名空间网络访问\n- RBAC Role/RoleBinding 限定命名空间权限\n- 集群级资源（Node/PV/ClusterRole）不受命名空间约束\n- 4 个系统命名空间有特定用途",
      "- 多团队/多项目的资源隔离\n- 开发/测试/生产环境分离\n- 资源配额和成本分摊\n- 最小权限的 RBAC 设计\n- 最佳实践：避免 default 命名空间、命名规范、配合 NetworkPolicy",
      "- https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/\n- https://kubernetes.io/docs/concepts/policy/resource-quotas/",
-     "- [[domain-17-system-foundation/topic-dictionary/security/rbac|RBAC]]\n- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster|Cluster]]"),
+     "- [[系统基础/topic-dictionary/security/rbac|RBAC]]\n- [[系统基础/topic-dictionary/networking/networkpolicy|NetworkPolicy]]\n- [[系统基础/topic-dictionary/fundamentals/cluster|Cluster]]"),
 
     ("configuration", "env", "环境变量配置", "Environment Variables",
      ["configuration", "env", "configmap", "secret"],
@@ -96,7 +96,7 @@ CORE_TERMS = [
      "- `env.name` + `env.value` 静态定义\n- `env.valueFrom.configMapKeyRef` 引用 ConfigMap\n- `env.valueFrom.secretKeyRef` 引用 Secret\n- `env.valueFrom.fieldRef` 引用 Pod 元数据（name/namespace/ip）\n- `env.valueFrom.resourceFieldRef` 引用资源限制\n- `envFrom.configMapRef` 批量导入\n- 环境变量变更需要重启 Pod（不同于 Volume 挂载的热更新）",
      "- 应用配置的外部化注入\n- 数据库连接串和 API Key 的安全传递\n- 多环境（dev/staging/prod）的配置差异化\n- Pod 元数据注入（Downward API）\n- 最佳实践：敏感信息用 Secret、批量配置用 envFrom、避免硬编码",
      "- https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/\n- https://kubernetes.io/docs/concepts/configuration/configmap/",
-     "- [[domain-17-system-foundation/topic-dictionary/configuration/configmap|ConfigMap]]\n- [[domain-17-system-foundation/topic-dictionary/security/secret|Secret]]\n- [[domain-17-system-foundation/topic-dictionary/configuration/helm-values|Helm Values]]"),
+     "- [[系统基础/topic-dictionary/configuration/configmap|ConfigMap]]\n- [[系统基础/topic-dictionary/security/secret|Secret]]\n- [[系统基础/topic-dictionary/configuration/helm-values|Helm Values]]"),
 
     ("networking", "headless-service", "Headless Service 无头服务", "Headless Service",
      ["networking", "service", "dns"],
@@ -105,7 +105,7 @@ CORE_TERMS = [
      "- `clusterIP: None` 定义 Headless Service\n- DNS 格式：`pod-name.svc-name.namespace.svc.cluster.local`\n- 有 selector 时返回匹配 Pod 的 IP 列表\n- 无 selector 时配合 EndpointSlice 手动管理\n- StatefulSet 必须使用 Headless Service\n- 与 Service Mesh 的集成（Istio 自动处理）\n- DNS SRV 记录支持端口发现",
      "- StatefulSet（数据库集群）的网络标识\n- 服务发现的客户端直连模式\n- 需要知道具体后端地址的场景\n- gRPC 客户端的 DNS 负载均衡\n- 最佳实践：配合 StatefulSet 使用、DNS TTL 调优",
      "- https://kubernetes.io/docs/concepts/services-networking/service/#headless-services\n- https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/",
-     "- [[domain-17-system-foundation/topic-dictionary/networking/service|Service]]\n- [[domain-17-system-foundation/topic-dictionary/networking/dns|DNS]]\n- [[domain-17-system-foundation/topic-dictionary/workloads/statefulset|StatefulSet]]"),
+     "- [[系统基础/topic-dictionary/networking/service|Service]]\n- [[系统基础/topic-dictionary/networking/dns|DNS]]\n- [[系统基础/topic-dictionary/workloads/statefulset|StatefulSet]]"),
 
     ("observability", "logging", "日志体系", "Logging",
      ["observability", "logging", "fluentd", "loki"],
@@ -114,7 +114,7 @@ CORE_TERMS = [
      "- 容器 stdout/stderr → /var/log/containers/*.log\n- 节点级日志采集 DaemonSet\n- Fluent Bit（轻量采集）+ Fluentd（聚合路由）\n- OpenTelemetry Collector（统一采集）\n- 结构化日志（JSON）优于纯文本\n- 日志索引和保留策略\n- 日志关联（trace_id/span_id 贯穿链路）",
      "- 应用错误的快速定位\n- 安全审计和合规日志\n- 性能问题的日志分析\n- 多租户日志隔离\n- 最佳实践：结构化 JSON、保留策略、日志级别控制、敏感信息脱敏",
      "- https://kubernetes.io/docs/concepts/cluster-administration/logging/\n- https://opentelemetry.io/",
-     "- [[domain-17-system-foundation/topic-dictionary/observability/fluentd|Fluentd]]\n- [[domain-17-system-foundation/topic-dictionary/observability/loki|Loki]]\n- [[domain-17-system-foundation/topic-dictionary/observability/logging-operator|Logging Operator]]"),
+     "- [[系统基础/topic-dictionary/observability/fluentd|Fluentd]]\n- [[系统基础/topic-dictionary/observability/loki|Loki]]\n- [[系统基础/topic-dictionary/observability/logging-operator|Logging Operator]]"),
 
     ("platform-engineering", "custom-resource", "自定义资源 CRD", "Custom Resource",
      ["platform-engineering", "crd", "extension"],
@@ -123,7 +123,7 @@ CORE_TERMS = [
      "- CRD YAML 定义资源 schema（OpenAPI v3）\n- API Group/Version/Kind 注册到 API Server\n- 验证（Validation）通过 OpenAPI schema\n- 子资源（status/scale）支持\n- Webhook（准入控制和转换）\n- Finalizers 生命周期管理\n- 版本管理和转换（conversion webhook）",
      "- 平台能力的 API 化（数据库/消息队列/证书）\n- 运维自动化（备份策略/巡检任务）\n- 业务模型的 K8s 化（工单/配置中心）\n- Operator 开发的基础\n- 最佳实践：版本演进、向后兼容、Status 子资源、条件（Conditions）",
      "- https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/\n- https://book.kubebuilder.io/",
-     "- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]\n- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubebuilder|Kubebuilder]]\n- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes|Kubernetes]]"),
+     "- [[系统基础/topic-dictionary/platform-engineering/operator-pattern|Operator Pattern]]\n- [[系统基础/topic-dictionary/platform-engineering/kubebuilder|Kubebuilder]]\n- [[系统基础/topic-dictionary/fundamentals/kubernetes|Kubernetes]]"),
 
     ("tooling", "skaffold", "Skaffold 开发工具", "Skaffold",
      ["tooling", "development", "google"],
@@ -132,7 +132,7 @@ CORE_TERMS = [
      "- `skaffold dev` 开发模式（文件监控 + 自动重部署）\n- `skaffold run` 单次构建部署\n- `skaffold debug` 调试模式（端口转发）\n- 支持 Docker/Jib/Buildpacks/Kaniko/ko 构建器\n- Helm/Kustomize/Kpt/raw YAML 部署\n- 多模块（Artifacts）并行构建\n- Profile 环境切换（dev/staging/prod）",
      "- K8s 应用的日常开发循环\n- 微服务的联调环境\n- CI/CD Pipeline 的本地验证\n- 团队的标准化开发工具\n- 最佳实践：dev profile + prod profile、build concurrency、port-forward",
      "- https://skaffold.dev/\n- https://github.com/GoogleContainerTools/skaffold",
-     "- [[domain-17-system-foundation/topic-dictionary/tooling/devspace|DevSpace]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/telepresence|Telepresence]]\n- [[domain-17-system-foundation/topic-dictionary/tooling/helm|Helm]]"),
+     "- [[系统基础/topic-dictionary/tooling/devspace|DevSpace]]\n- [[系统基础/topic-dictionary/tooling/telepresence|Telepresence]]\n- [[系统基础/topic-dictionary/tooling/helm|Helm]]"),
 ]
 
 def create_core_terms():
@@ -232,7 +232,7 @@ def add_missing_related():
         peers = get_category_peers(cat_dir, f.stem)
         if len(peers) < 2:
             # Also get glossary as fallback
-            glossary_link = "domain-17-system-foundation/topic-dictionary/k8s-glossary"
+            glossary_link = "系统基础/topic-dictionary/k8s-glossary"
         # Pick up to 3 peers
         related_links = []
         for stem, path in peers[:3]:
@@ -247,7 +247,7 @@ def add_missing_related():
             related_links.append(f"- [[{path}|{title}]]")
 
         if not related_links:
-            related_links.append("- [[domain-17-system-foundation/topic-dictionary/k8s-glossary|K8s Glossary]]")
+            related_links.append("- [[系统基础/topic-dictionary/k8s-glossary|K8s Glossary]]")
 
         related_section = "\n".join(related_links)
 

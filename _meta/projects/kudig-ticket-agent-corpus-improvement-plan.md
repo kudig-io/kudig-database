@@ -111,9 +111,9 @@ KUDIG Database 已具备成为通用 SRE 诊断 Agent 语料的基础：
 | # | 任务 | 产出 | 优先级 |
 |---|---|---|---|
 | 1.1 | 创建 ticket-agent 专用 profile | `_meta/corpus-config/profiles/rag-ticket-agent-profile.yaml` | P0 |
-| 1.2 | 创建工单闭环样本库 | `domain-11-production-operations/ticket-cases/` 50+ 条 | P0 |
+| 1.2 | 创建工单闭环样本库 | `生产运维/ticket-cases/` 50+ 条 | P0 |
 | 1.3 | 补齐存储 Domain 缺漏 | Velero / Rook / Longhorn / 有状态应用存储指南 | P0 |
-| 1.4 | 补齐 Helm 生产实践 | `domain-08-release-change-management/01-gitops/99-helm-production-guide.md` | P0 |
+| 1.4 | 补齐 Helm 生产实践 | `发布变更/01-gitops/99-helm-production-guide.md` | P0 |
 | 1.5 | 提升 3-5 个核心 Skill 深度 | node-notready、pod-crashloop、service-unreachable 等 | P0 |
 | 1.6 | 接入真实 Embedding 模型 | pipeline 默认从 mock 切至 local (bge-m3) | P1 |
 
@@ -126,8 +126,8 @@ KUDIG Database 已具备成为通用 SRE 诊断 Agent 语料的基础：
 | 2.1 | 专有云组件知识库 | ASO、天基、专有云 SLB/OSS/RDS/VPC 在 K8s 中的集成与排障 | P1 |
 | 2.2 | 阿里云 CLI / ACK 控制台操作集 | 每个 Skill 增加阿里云专属诊断路径 | P1 |
 | 2.3 | 工单回复话术模板 | 确认/请求信息/方案/升级/闭环五类话术 | P1 |
-| 2.4 | 工单分类与路由规则 | `domain-11-production-operations/ticket-routing-rules.md` | P1 |
-| 2.5 | 升级与交接协议 | `domain-11-production-operations/escalation-playbook.md` | P1 |
+| 2.4 | 工单分类与路由规则 | `生产运维/ticket-routing-rules.md` | P1 |
+| 2.5 | 升级与交接协议 | `生产运维/escalation-playbook.md` | P1 |
 | 2.6 | 扩充工单样本至 200+ | 覆盖 P0/P1/P2/P3 各优先级 | P1 |
 
 ### 阶段 3：质量工程与评估（1-2 周）
@@ -151,27 +151,27 @@ KUDIG Database 已具备成为通用 SRE 诊断 Agent 语料的基础：
 
 | 内容 | 路径 | 说明 |
 |---|---|---|
-| 工单闭环样本 | `domain-11-production-operations/ticket-cases/` | 每条包含 incident_id、priority、description、diagnosis_steps、fix_commands、verification、reply_template |
-| 工单分类规则 | `domain-11-production-operations/ticket-routing-rules.md` | 关键词 → Domain/Skill/FTA 映射 |
-| 升级标准 | `domain-11-production-operations/escalation-playbook.md` | P0/P1/P2 升级条件与交接信息模板 |
-| 回复话术库 | `domain-11-production-operations/reply-templates/` | 五类标准话术 |
-| 专有云组件索引 | `domain-12-cloud-providers/01-alibaba-cloud/apsara-stack-components.md` | ASO、天基、专有云底座组件 |
+| 工单闭环样本 | `生产运维/ticket-cases/` | 每条包含 incident_id、priority、description、diagnosis_steps、fix_commands、verification、reply_template |
+| 工单分类规则 | `生产运维/ticket-routing-rules.md` | 关键词 → Domain/Skill/FTA 映射 |
+| 升级标准 | `生产运维/escalation-playbook.md` | P0/P1/P2 升级条件与交接信息模板 |
+| 回复话术库 | `生产运维/reply-templates/` | 五类标准话术 |
+| 专有云组件索引 | `云厂商/01-alibaba-cloud/apsara-stack-components.md` | ASO、天基、专有云底座组件 |
 
 ### 4.2 技术内容缺漏（补齐）
 
 | Domain | 缺漏内容 | 说明 |
 |---|---|---|
-| domain-04-storage-data | Velero 生产指南 | 备份恢复、灾难恢复 |
-| domain-04-storage-data | Rook-Ceph / Longhorn / OpenEBS | 分布式存储系统 |
-| domain-04-storage-data | 有状态应用存储模式 | MySQL/PostgreSQL/Kafka/Elasticsearch |
-| domain-08-release-change-management | Helm 生产实践 | chart 开发、values 管理、helm-secrets |
-| domain-08-release-change-management | 渐进式交付 | Flagger、Argo Rollouts |
-| domain-02-workloads-applications | Java on K8s | JVM 调优、Spring Boot/Quarkus |
-| domain-02-workloads-applications | Serverless / Knative | 无服务器工作负载 |
-| domain-03-networking-traffic | Cilium 生产落地 | 替换迁移、ClusterMesh |
-| domain-03-networking-traffic | Gateway API 实战 | 从 Ingress 迁移、多租户路由 |
-| domain-13-container-runtime | CRI-O / BuildKit | 容器运行时与镜像构建 |
-| domain-14-ai-ml-infra | vLLM / TGI / KServe | LLM 推理服务引擎 |
+| 存储 | Velero 生产指南 | 备份恢复、灾难恢复 |
+| 存储 | Rook-Ceph / Longhorn / OpenEBS | 分布式存储系统 |
+| 存储 | 有状态应用存储模式 | MySQL/PostgreSQL/Kafka/Elasticsearch |
+| 发布变更 | Helm 生产实践 | chart 开发、values 管理、helm-secrets |
+| 发布变更 | 渐进式交付 | Flagger、Argo Rollouts |
+| 工作负载 | Java on K8s | JVM 调优、Spring Boot/Quarkus |
+| 工作负载 | Serverless / Knative | 无服务器工作负载 |
+| 网络 | Cilium 生产落地 | 替换迁移、ClusterMesh |
+| 网络 | Gateway API 实战 | 从 Ingress 迁移、多租户路由 |
+| 容器运行时 | CRI-O / BuildKit | 容器运行时与镜像构建 |
+| AI基础设施 | vLLM / TGI / KServe | LLM 推理服务引擎 |
 
 ### 4.3 质量增强（全 Domain）
 
@@ -233,10 +233,10 @@ KUDIG Database 已具备成为通用 SRE 诊断 Agent 语料的基础：
 ## 7. 相关文件
 
 - `_meta/corpus-config/profiles/rag-ticket-agent-profile.yaml` — Ticket Agent 语料配置
-- `domain-11-production-operations/ticket-cases/` — 工单闭环样本库
-- `domain-11-production-operations/ticket-routing-rules.md` — 工单分类与路由规则
-- `domain-11-production-operations/escalation-playbook.md` — 升级与交接协议
-- `domain-11-production-operations/reply-templates/` — 回复话术库
+- `生产运维/ticket-cases/` — 工单闭环样本库
+- `生产运维/ticket-routing-rules.md` — 工单分类与路由规则
+- `生产运维/escalation-playbook.md` — 升级与交接协议
+- `生产运维/reply-templates/` — 回复话术库
 - `STRUCTURE.md` — 目录结构规范
 - `_reports/DEEP-ASSESSMENT-2026-05-23.md` — 深度评估报告
 

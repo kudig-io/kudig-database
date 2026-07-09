@@ -72,8 +72,8 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-openapi
@@ -143,11 +143,11 @@ ACK API 基于 ROA 风格 (RESTful)，请求需要经过签名才能通过认证
 ### 必读文档
 
 1. **ACK OpenAPI 概览**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`
    - 重点: API 接口分类、调用方式、签名机制
 
 2. **ACK RAM 授权**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/243-ack-ram-authorization.md`
    - 重点: RAM 策略与 ACK API 权限映射
 
 ---
@@ -567,8 +567,8 @@ Day 3 将学习 ACK/ACR 控制台操作，熟悉界面功能入口和核心操�
 
 ## 延伸阅读
 
-- [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [ACK RAM 授权](../../domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md)
+- [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [ACK RAM 授权](../../云厂商/04-alicloud-ack/243-ack-ram-authorization.md)
 - [ACK OpenAPI 文档](https://help.aliyun.com/document_detail/260907.html)
 
 

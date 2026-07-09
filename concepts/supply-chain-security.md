@@ -105,7 +105,7 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
 
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 02-supply-chain-maturity-model
 - 07-sigstore-cosign-signing
 - 01-supply-chain-security-overview
@@ -113,17 +113,17 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - 06-github-actions-slsa-build
 - 08-fulcio-rekor-transparency
 - 10-compliance-automation-audit
-- [[domain-05-security-compliance/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[安全/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
 - 04-sbom-vulnerability-analysis
 - 05-slsa-levels-implementation
 - 09-policy-controller-verification
-- domain-05-security-compliance MOC
+- 安全 MOC
 - 99-slsa-supply-chain-security-guide
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[entities/argocd.md|ArgoCD]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

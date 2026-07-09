@@ -93,7 +93,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md
+  path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md
   label: '结构化排障: 05-webhook-admission-troubleshooting'
 fta_metadata:
   fta_id: FTA-WEBHOOK-001
@@ -180,7 +180,7 @@ flowchart TD
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
+- [[故障诊断/topic-fta/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 
 

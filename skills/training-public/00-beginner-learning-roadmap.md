@@ -272,8 +272,8 @@ authors:
 | 概念类比词典 | [resources/analogy-dictionary.md](resources/analogy-dictionary.md) | 用生活化语言理解抽象概念 |
 | 命令速查表 | [public-training/one-month/resources/commands-cheatsheet.md](public-training/one-month/resources/commands-cheatsheet.md) | 日常命令快速查找 |
 | 知识图谱 | [public-training/one-month/resources/knowledge-map.md](public-training/one-month/resources/knowledge-map.md) | 全局知识导航 |
-| 术语表 | [../../domain-17-system-foundation/topic-dictionary/k8s-glossary.md](../../domain-17-system-foundation/topic-dictionary/k8s-glossary.md) | 不懂就查 |
-| YAML 参考 | [../../domain-18-manifests-patterns/01-yaml-reference/](../../domain-18-manifests-patterns/01-yaml-reference/) | 写 manifest 时参考 |
+| 术语表 | [../../系统基础/topic-dictionary/k8s-glossary.md](../../系统基础/topic-dictionary/k8s-glossary.md) | 不懂就查 |
+| YAML 参考 | [../../清单模式/01-yaml-reference/](../../清单模式/01-yaml-reference/) | 写 manifest 时参考 |
 | 故障排查 | [../topic-skills/](../topic-skills/) | 遇到问题来这找 |
 
 ---

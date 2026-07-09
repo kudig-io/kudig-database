@@ -62,11 +62,11 @@ graph TD
     A["故障排查"] --> B{"问题确认"}
     B -->|"已知问题"| C["参考相关文档"]
     B -->|"未知问题"| D{"组件定位"}
-    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
-    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
-    D -->|"网络"| G["参考 domain-03-networking-traffic"]
-    D -->|"存储"| H["参考 domain-04-storage-data"]
-    D -->|"安全"| I["参考 domain-05-security-compliance"]
+    D -->|"控制平面"| E["参考 集群基础"]
+    D -->|"工作负载"| F["参考 工作负载"]
+    D -->|"网络"| G["参考 网络"]
+    D -->|"存储"| H["参考 存储"]
+    D -->|"安全"| I["参考 安全"]
 
     C --> J["执行修复"]
     E --> J
@@ -88,23 +88,23 @@ graph TD
 
 ## 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/README.md|README]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|README]]
-- domain-01-cluster-fundamentals/16-troubleshooting-guide.md
+- [[故障诊断/README.md|README]]
+- [[故障诊断/topic-structural-trouble-shooting/README.md|README]]
+- 集群基础/16-troubleshooting-guide.md
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|所有 FTA 故障树]]
+- [[故障诊断/topic-fta/MOC.md|所有 FTA 故障树]]
 
 
 ---
 
 ## 操作技能
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|所有操作技能]]
+- [[故障诊断/topic-skills/MOC.md|所有操作技能]]
 
 
 ---
@@ -118,7 +118,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - MOC.md|MOC]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- [[平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 
 
 <!-- risk-assessed -->

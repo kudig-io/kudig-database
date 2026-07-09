@@ -1,7 +1,7 @@
 ---
 title: 'Day 1: 新人首日检查清单 [quick-start]'
 description: '# stern - 日志实时跟踪'
-summary: '2. `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查'
+summary: '2. `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查'
 category: learning
 tags:
 - k8s
@@ -202,9 +202,9 @@ kubectl auth can-i get services --namespace=kube-system
 ### 推荐阅读顺序
 
 1. `P1-5-oncall-quick-reference-card.md` — oncall 速查卡
-2. `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查
-3. `domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md` — 故障排查总览
-4. `domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|[[KUDIG Database]]]].md` — Week 1 培训
+2. `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查
+3. `故障诊断/00-troubleshooting-overview.md` — 故障排查总览
+4. `生产运维/topic-learn/public-training/[[存储/README.md|[[KUDIG Database]]]].md` — Week 1 培训
 
 ---
 
@@ -262,11 +262,11 @@ audience:
   - 新入职员工
 estimated_read_time: 30min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start/02-first-ticket-guide
-  - domain-11-production-operations/topic-learn/quick-start/03-oncall-handoff
+  - 生产运维/topic-learn/quick-start/02-first-ticket-guide
+  - 生产运维/topic-learn/quick-start/03-oncall-handoff
   - P1-5-oncall-quick-reference-card
 id: QUICKSTART-DAY1
 topic: onboarding

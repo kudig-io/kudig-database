@@ -73,13 +73,13 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-07-platform-engineering
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 平台工程
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-20-troubleshooting-practice
 ---
 
 # Day 21: 平台运维 + 综合实践
@@ -148,15 +148,15 @@ related_topics:
 ### 必读文档
 
 1. **集群生命周期管理**
-   - 文件: `../../domain-07-platform-engineering/02-cluster-lifecycle-management.md`
+   - 文件: `../../平台工程/02-cluster-lifecycle-management.md`
    - 重点: 集群升级、维护窗口
 
 2. **备份恢复策略**
-   - 文件: `../../domain-07-platform-engineering/12-backup-recovery-strategy.md`
+   - 文件: `../../平台工程/12-backup-recovery-strategy.md`
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../[[domain-06-observability/05-alerting/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
+   - 文件: `../../[[可观测性/05-alerting/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---
@@ -564,10 +564,10 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 
 ## 延伸阅读
 
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
-- [备份恢复策略](../../domain-07-platform-engineering/12-backup-recovery-strategy.md)
-- [监控 Playbooks](../../domain-06-observability/21-monitoring-playbooks.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
+- [备份恢复策略](../../平台工程/12-backup-recovery-strategy.md)
+- [监控 Playbooks](../../可观测性/21-monitoring-playbooks.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
 
 ```
 

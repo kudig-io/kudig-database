@@ -806,13 +806,13 @@ EOF
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/k8s-cloud-provider-comparison.md|[[云厂商托管 Kubernetes 服务全景对比（13 家）|云厂商托管 Kubernetes 服务全景对比（13 家）]]]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -62,7 +62,7 @@ prerequisites:
 
 - **实体页面**: [[containerd|containerd]]
 - **最新版本**: v2.2
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/core-deps/containerd/`
+- **发布说明目录**: `生态参考/_archived-release-notes/core-deps/containerd/`
 - **版本覆盖**: v0.1 → v2.2（13 个版本）
 - **Breaking Changes 提醒**:
   - v1.3: 插件接口和配置文件格式变更
@@ -73,7 +73,7 @@ prerequisites:
 
 - **实体页面**: [[coredns|CoreDNS]]
 - **最新版本**: v1.14
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/core-deps/coredns/`
+- **发布说明目录**: `生态参考/_archived-release-notes/core-deps/coredns/`
 - **版本覆盖**: v0.1 → v1.14（16 个版本）
 - **Breaking Changes 提醒**:
   - v1.13: 部分插件默认配置变更
@@ -83,7 +83,7 @@ prerequisites:
 
 - **实体页面**: [[cri-o|CRI-O]]
 - **最新版本**: v1.35
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/`
+- **发布说明目录**: `生态参考/_archived-release-notes/core-deps/cri-o/`
 - **版本覆盖**: v0.1 → v1.35（32 个版本）
 - **升级要点**: 版本号与 Kubernetes 版本对齐（v1.35 → K8s 1.35）
 
@@ -91,7 +91,7 @@ prerequisites:
 
 - **实体页面**: [[etcd|etcd]]
 - **最新版本**: v3.6
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/core-deps/etcd/`
+- **发布说明目录**: `生态参考/_archived-release-notes/core-deps/etcd/`
 - **版本覆盖**: v0.1 → v3.6（15 个版本）
 - **Breaking Changes 提醒**:
   - v3.6: gRPC API 和存储引擎优化
@@ -100,7 +100,7 @@ prerequisites:
 ### runc
 
 - **最新版本**: v1.4
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/core-deps/runc/`
+- **发布说明目录**: `生态参考/_archived-release-notes/core-deps/runc/`
 - **版本覆盖**: v0.1 → v1.4（7 个版本）
 - **升级要点**: OCI 运行时规范参考实现，安全修复优先
 
@@ -128,7 +128,7 @@ prerequisites:
 
 - [[concepts/core-dependency-version-matrix.md|核心依赖版本矩阵]]
 - [[entities/core-deps-changelog.md|核心依赖变更日志索引]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

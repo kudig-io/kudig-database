@@ -77,9 +77,9 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 集群基础
+  - 故障诊断
+  - 云厂商
 related_topics:
   - apiserver-deep-dive
   - etcd-deep-dive
@@ -595,13 +595,13 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [etcd 深入分析](../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md)
-- [API Server 深入分析](../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md)
-- [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md)
-- [组件故障排查总览](../../domain-10-troubleshooting-diagnostics/01-troubleshooting-overview.md)
-- [CoreDNS 排障指南](../../domain-10-troubleshooting-diagnostics/11-coredns-troubleshooting.md)
-- [kube-proxy 排障指南](../../domain-10-troubleshooting-diagnostics/10-kube-proxy-troubleshooting.md)
+- [K8s 架构与组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [etcd 深入分析](../../集群基础/11-etcd-deep-dive.md)
+- [API Server 深入分析](../../集群基础/12-apiserver-deep-dive.md)
+- [ACK 集群管理](../../云厂商/04-alicloud-ack/210-ack-cluster-management.md)
+- [组件故障排查总览](../../故障诊断/01-troubleshooting-overview.md)
+- [CoreDNS 排障指南](../../故障诊断/11-coredns-troubleshooting.md)
+- [kube-proxy 排障指南](../../故障诊断/10-kube-proxy-troubleshooting.md)
 
 ```
 

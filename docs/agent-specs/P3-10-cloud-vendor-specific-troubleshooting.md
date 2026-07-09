@@ -45,7 +45,7 @@ prerequisites:
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: ACK/EKS/GKE/AKS 特有问题场景的诊断与修复
-> **关联**: domain-17-cloud-provider, domain-10-troubleshooting-diagnostics
+> **关联**: domain-17-cloud-provider, 故障诊断
 
 ---
 
@@ -393,8 +393,8 @@ az vm list --resource-group <rg>
 ---
 
 **关联文档**:
-- [domain-12-cloud-providers/](../domain-12-cloud-providers/) — 云厂商选型对比
-- [domain-03-networking-traffic/](../domain-03-networking-traffic/) — Kubernetes 网络
+- [云厂商/](../云厂商/) — 云厂商选型对比
+- [网络/](../网络/) — Kubernetes 网络
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)
 
 <!-- risk-assessed -->

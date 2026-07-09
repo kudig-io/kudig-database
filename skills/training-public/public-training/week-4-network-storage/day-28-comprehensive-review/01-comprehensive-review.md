@@ -461,8 +461,8 @@ audience:
   - developer
 estimated_read_time: 60min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-01-cluster-fundamentals
+  - 故障诊断
+  - 集群基础
 related_topics:
   - troubleshooting
   - deployment
@@ -470,8 +470,8 @@ related_topics:
   - storage
   - security
 related:
-  - domain-11-production-operations/topic-learn/public-training/[[domain-04-storage-data/README.md|README]].md
-  - domain-10-troubleshooting-diagnostics/00-troubleshooting-overview.md
+  - 生产运维/topic-learn/public-training/[[存储/README.md|README]].md
+  - 故障诊断/00-troubleshooting-overview.md
 ---
 ```
 

@@ -177,7 +177,7 @@ title: Open Policy Agent (OPA)
 - [[concepts/multi-tenancy-isolation.md|Multi-Tenancy Isolation]] — Cross-reference
 - [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -88,72 +88,72 @@ tier: peripheral---
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `CrashLoopBackOff` | 容器反复崩溃重启 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | `kubectl logs <pod>` → `kubectl describe pod <pod>` |
-| `ImagePullBackOff` | 镜像拉取失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | `kubectl describe pod` → 检查 image 和 secret |
-| `ErrImagePull` | 镜像拉取错误 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | `docker pull <image>` 手动测试 |
-| `CreateContainerConfigError` | 容器配置错误 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | 检查 ConfigMap/Secret 是否存在 |
-| `InvalidImageName` | 镜像名无效 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | 检查 image 字段格式 |
-| `RunContainerError` | 容器运行错误 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]] | `kubectl describe pod` → 查看事件 |
+| `CrashLoopBackOff` | 容器反复崩溃重启 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | `kubectl logs <pod>` → `kubectl describe pod <pod>` |
+| `ImagePullBackOff` | 镜像拉取失败 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | `kubectl describe pod` → 检查 image 和 secret |
+| `ErrImagePull` | 镜像拉取错误 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | `docker pull <image>` 手动测试 |
+| `CreateContainerConfigError` | 容器配置错误 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | 检查 ConfigMap/Secret 是否存在 |
+| `InvalidImageName` | 镜像名无效 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | 检查 image 字段格式 |
+| `RunContainerError` | 容器运行错误 | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] | `kubectl describe pod` → 查看事件 |
 
 ## 调度相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `Pending` | Pod 等待调度 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `kubectl describe pod` → 查看调度事件 |
-| `Unschedulable` | 无法调度 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | 检查节点资源、亲和性、污点 |
-| `FailedScheduling` | 调度失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/scheduler-fta.md|scheduler fta]] | `kubectl describe pod` 查看原因 |
+| `Pending` | Pod 等待调度 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `kubectl describe pod` → 查看调度事件 |
+| `Unschedulable` | 无法调度 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | 检查节点资源、亲和性、污点 |
+| `FailedScheduling` | 调度失败 | [[故障诊断/topic-fta/list/scheduler-fta.md|scheduler fta]] | `kubectl describe pod` 查看原因 |
 
 ## 节点相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `NotReady` | 节点不健康 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `kubectl describe node` → 检查 kubelet |
-| `NodeLost` | 节点失联 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | SSH 到节点 → 检查网络和服务 |
-| `MemoryPressure` | 内存压力 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `free -m` → 检查大内存 Pod |
-| `DiskPressure` | 磁盘压力 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `df -h` → 清理无用镜像和日志 |
-| `PIDPressure` | PID 耗尽 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `cat /proc/sys/kernel/pid_max` |
-| `Evicted` | Pod 被驱逐 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]] | `kubectl describe pod` → 查看驱逐原因 |
+| `NotReady` | 节点不健康 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `kubectl describe node` → 检查 kubelet |
+| `NodeLost` | 节点失联 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | SSH 到节点 → 检查网络和服务 |
+| `MemoryPressure` | 内存压力 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `free -m` → 检查大内存 Pod |
+| `DiskPressure` | 磁盘压力 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `df -h` → 清理无用镜像和日志 |
+| `PIDPressure` | PID 耗尽 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `cat /proc/sys/kernel/pid_max` |
+| `Evicted` | Pod 被驱逐 | [[故障诊断/topic-fta/list/node-fta.md|node fta]] | `kubectl describe pod` → 查看驱逐原因 |
 
 ## 网络相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `Connection refused` | 连接被拒绝 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|service fta]] | `kubectl get endpoints` → 检查 Pod 是否在运行 |
-| `DNS lookup failed` | DNS 解析失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns fta]] | `nslookup` → 检查 CoreDNS |
-| `Timeout` | 连接超时 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]] | `kubectl exec` → `curl` 测试 |
-| `502 Bad Gateway` | 网关错误 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress fta]] | 检查 Ingress 和后端 Pod |
-| `503 Service Unavailable` | 服务不可用 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-fta.md|service fta]] | 检查 Endpoints 是否有后端 |
+| `Connection refused` | 连接被拒绝 | [[故障诊断/topic-fta/list/service-fta.md|service fta]] | `kubectl get endpoints` → 检查 Pod 是否在运行 |
+| `DNS lookup failed` | DNS 解析失败 | [[故障诊断/topic-fta/list/dns-fta.md|dns fta]] | `nslookup` → 检查 CoreDNS |
+| `Timeout` | 连接超时 | [[故障诊断/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]] | `kubectl exec` → `curl` 测试 |
+| `502 Bad Gateway` | 网关错误 | [[故障诊断/topic-fta/list/ingress-fta.md|ingress fta]] | 检查 Ingress 和后端 Pod |
+| `503 Service Unavailable` | 服务不可用 | [[故障诊断/topic-fta/list/service-fta.md|service fta]] | 检查 Endpoints 是否有后端 |
 
 ## 存储相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `Pending PVC` | PVC 未绑定 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]] | `kubectl describe pvc` → 检查 StorageClass |
-| `VolumeMount failed` | 挂载失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]] | `kubectl describe pod` → 检查 PV 状态 |
-| `ReadOnlyFilesystem` | 只读文件系统 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]] | 检查 accessModes 和节点磁盘 |
-| `NodePublishVolume failed` | CSI 挂载失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]] | 检查 CSI Driver 和存储后端 |
+| `Pending PVC` | PVC 未绑定 | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] | `kubectl describe pvc` → 检查 StorageClass |
+| `VolumeMount failed` | 挂载失败 | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] | `kubectl describe pod` → 检查 PV 状态 |
+| `ReadOnlyFilesystem` | 只读文件系统 | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] | 检查 accessModes 和节点磁盘 |
+| `NodePublishVolume failed` | CSI 挂载失败 | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] | 检查 CSI Driver 和存储后端 |
 
 ## 控制平面错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `connection refused:6443` | API Server 不可用 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|apiserver fta]] | 检查 apiserver 进程和证书 |
-| `etcd cluster unavailable` | etcd 不可用 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]] | `etcdctl endpoint health` |
-| `leader election lost` | Leader 选举失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/controller-manager-fta.md|controller manager fta]] | 检查网络分区和时钟同步 |
+| `connection refused:6443` | API Server 不可用 | [[故障诊断/topic-fta/list/apiserver-fta.md|apiserver fta]] | 检查 apiserver 进程和证书 |
+| `etcd cluster unavailable` | etcd 不可用 | [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]] | `etcdctl endpoint health` |
+| `leader election lost` | Leader 选举失败 | [[故障诊断/topic-fta/list/controller-manager-fta.md|controller manager fta]] | 检查网络分区和时钟同步 |
 
 ## 证书相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
-| `x509: certificate has expired` | 证书过期 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|certificate fta]] | `kubeadm certs check-expiration` |
-| `TLS handshake error` | TLS 握手失败 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|certificate fta]] | 检查证书链和 CA |
+| `x509: certificate has expired` | 证书过期 | [[故障诊断/topic-fta/list/certificate-fta.md|certificate fta]] | `kubeadm certs check-expiration` |
+| `TLS handshake error` | TLS 握手失败 | [[故障诊断/topic-fta/list/certificate-fta.md|certificate fta]] | 检查证书链和 CA |
 
 ## 安全相关错误
 
 | 错误状态 | 含义 | FTA | 快速排查 |
 |---|---|---|---|
 | `forbidden: User cannot` | RBAC 权限不足 | - | `kubectl auth can-i` → 检查 RoleBinding |
-| `Secret not found` | Secret 不存在 | [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|rbac fta]] | `kubectl get secret` → 检查创建 |
+| `Secret not found` | Secret 不存在 | [[故障诊断/topic-fta/list/rbac-fta.md|rbac fta]] | `kubectl get secret` → 检查创建 |
 
 ---
 

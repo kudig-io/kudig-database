@@ -989,7 +989,7 @@ Kubernetes 存储
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
 
 ```
 

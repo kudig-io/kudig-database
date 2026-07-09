@@ -87,7 +87,7 @@ Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身
 
 - virtual-kubelet
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

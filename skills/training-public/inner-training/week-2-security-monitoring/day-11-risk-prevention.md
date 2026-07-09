@@ -70,9 +70,9 @@ audience:
   - SRE engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 安全
+  - 故障诊断
+  - 云厂商
 related_topics:
   - pod-security-standards
   - rbac-configuration
@@ -151,11 +151,11 @@ related_topics:
 ### 必读文档
 
 1. **Pod 安全标准**
-   - 文件: `../../../domain-05-security-compliance/06-pod-security-standards.md`
+   - 文件: `../../../安全/06-pod-security-standards.md`
    - 重点: Privileged/Baseline/Restricted 三个级别
 
 2. **Secret 管理工具**
-   - 文件: `../../../domain-05-security-compliance/11-secret-management-tools.md`
+   - 文件: `../../../安全/11-secret-management-tools.md`
    - 重点: Secret 安全存储与轮换
 
 ---
@@ -641,10 +641,10 @@ Day 12 将学习集群审计日志的配置与分析方法。
 
 ## 延伸阅读
 
-- [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
-- [Secret 管理工具](../../domain-05-security-compliance/11-secret-management-tools.md)
-- [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
-- [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
+- [Pod 安全标准](../../安全/06-pod-security-standards.md)
+- [Secret 管理工具](../../安全/11-secret-management-tools.md)
+- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
+- [认证授权系统](../../安全/01-authentication-authorization-system.md)
 - [NetworkPolicy 实践](../../domain-6-networking/12-network-policy-practice.md)
 
 ```

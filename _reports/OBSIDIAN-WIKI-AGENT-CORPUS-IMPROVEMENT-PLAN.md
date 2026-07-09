@@ -181,7 +181,7 @@ intent_queries:
   - "Kubernetes v1.32 有哪些新特性?"
 action_triggers:
   - keyword: ["Pod crash", "CrashLoopBackOff"]
-    target_file: "domain-10-troubleshooting-diagnostics/pod-troubleshooting.md"
+    target_file: "故障诊断/pod-troubleshooting.md"
     confidence: high
 ```
 
@@ -361,7 +361,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 |---|---|---|
 | E2.1 添加 chunking 标记 | `<!-- chunk: header -->` | 核心文档 |
 | E2.2 长文档拆分建议报告 | 识别 > 500 行文档 | - |
-| E2.3 向量索引增强 | `domain-19-landscape-references/topic-index/vector-index.json` | 已存在,扩展 |
+| E2.3 向量索引增强 | `生态参考/topic-index/vector-index.json` | 已存在,扩展 |
 
 ---
 
@@ -459,7 +459,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 | F1 | intent_queries 扩展至 domain-13~40 | ✅ 完成 | 372 文件，覆盖全部 747 个 domain 文件 |
 | F2 | RAG chunk markers 扩展至长文档 | ✅ 完成 | 518 文件 (domain-13+ / topic-*) |
 | F3 | topic-cheat-sheet wikilinks | ✅ 完成 | 6 文件 (docker/git/networking/promql/sql/tls-pki) |
-| F4 | 缺失 README 目录补齐 | ✅ 完成 | domain-02-workloads-applications/topic-functions/domain-11-production-operations/topic-learn/topic-scenarios |
+| F4 | 缺失 README 目录补齐 | ✅ 完成 | 工作负载/topic-functions/生产运维/topic-learn/topic-scenarios |
 | F5 | 质量检查脚本 bug 修复 | ✅ 完成 | find 路径修复 + edge types 显示修复 |
 
 *最后更新: 2026-05-20 (全部任务 + 第二轮改进完成)*
@@ -469,7 +469,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 ## Obsidian 相关文档
 
 - _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
-- [[domain-19-landscape-references/topic-release-notes/README.md|项目报告 (Reports)]]
+- [[生态参考/topic-release-notes/README.md|项目报告 (Reports)]]
 - _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
 - _reports/CONTENT-GAP-ANALYSIS.md
 - _reports/DEEP-RESEARCH-ASSESSMENT.md
@@ -491,6 +491,6 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 
 <!-- risk-assessed -->

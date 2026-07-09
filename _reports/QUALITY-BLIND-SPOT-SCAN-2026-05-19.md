@@ -63,10 +63,10 @@ prerequisites:
 PSP 在 K8s v1.25 已正式移除, 替代方案为 Pod Security Admission (PSA)。
 
 典型文件:
-- `domain-01-cluster-fundamentals/17-apiserver-tuning.md`
-- `domain-07-platform-engineering/02-cluster-lifecycle-management.md`
-- `domain-17-system-foundation/07-linux-security-hardening.md`
-- `domain-17-system-foundation/topic-dictionary/security/pod-security-admission.md`
+- `集群基础/17-apiserver-tuning.md`
+- `平台工程/02-cluster-lifecycle-management.md`
+- `系统基础/07-linux-security-hardening.md`
+- `系统基础/topic-dictionary/security/pod-security-admission.md`
 
 修复方案: 在每个提及 PSP 的段落添加弃用警告:
 ```
@@ -78,9 +78,9 @@ PSP 在 K8s v1.25 已正式移除, 替代方案为 Pod Security Admission (PSA)�
 
 | 文件 | 总 QA 数 | 模板化数量 | 模板化比例 |
 |------|----------|-----------|-----------|
-| domain-01-cluster-fundamentals | 165 | 99 | 60% |
-| domain-03-networking-traffic | 186 | 117 | 63% |
-| domain-06-observability | 140 | 102 | 73% |
+| 集群基础 | 165 | 99 | 60% |
+| 网络 | 186 | 117 | 63% |
+| 可观测性 | 140 | 102 | 73% |
 | topic-application-architecture | 288 | 270 | 94% |
 
 典型模板化 QA:

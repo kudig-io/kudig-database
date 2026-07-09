@@ -74,13 +74,13 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
-  - domain-05-security-compliance/01-authentication-authorization-system
-  - domain-05-security-compliance/07-rbac-matrix-configuration
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 安全/01-authentication-authorization-system
+  - 安全/07-rbac-matrix-configuration
 id: WEEK2-DAY8
 topic: training
 type: hands-on
@@ -584,10 +584,10 @@ cluster-admin 拥有集群的完全控制权，包括删除 Namespace、修改 R
 
 ## 延伸阅读
 
-- [认证授权体系](../../domain-05-security-compliance/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../domain-05-security-compliance/07-rbac-matrix-configuration.md)
-- [安全架构总览](../../domain-01-cluster-fundamentals/14-security-architecture.md)
-- [ACK 安全管理](../../domain-12-cloud-providers/04-alicloud-ack/270-ack-security.md)
+- [认证授权体系](../../安全/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
+- [安全架构总览](../../集群基础/14-security-architecture.md)
+- [ACK 安全管理](../../云厂商/04-alicloud-ack/270-ack-security.md)
 
 
 <!-- risk-assessed -->

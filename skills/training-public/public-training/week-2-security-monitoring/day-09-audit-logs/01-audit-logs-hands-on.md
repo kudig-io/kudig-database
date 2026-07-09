@@ -341,16 +341,16 @@ audience:
   - security-engineer
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 故障诊断
 related_topics:
   - security
   - audit
   - logging
   - compliance
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-2-security-monitoring/day-08-rbac/01-rbac-hands-on.md
-  - domain-10-troubleshooting-diagnostics/12-audit-log-analysis.md
+  - 生产运维/topic-learn/public-training/week-2-security-monitoring/day-08-rbac/01-rbac-hands-on.md
+  - 故障诊断/12-audit-log-analysis.md
 ---
 ```
 

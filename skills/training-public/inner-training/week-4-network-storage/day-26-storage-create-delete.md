@@ -70,12 +70,12 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/checkpoint
-  - domain-04-storage-data/01-storage-architecture-overview
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-27-storage-mount
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/checkpoint
+  - 存储/01-storage-architecture-overview
 id: WEEK4-DAY26
 topic: training
 type: hands-on
@@ -530,10 +530,10 @@ volumeClaimTemplates 为 StatefulSet 的每个 Pod 自动创建独立的 PVC。P
 
 ## 延伸阅读
 
-- [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
-- [PV 架构基础](../../domain-04-storage-data/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../domain-04-storage-data/04-storageclass-dynamic-provisioning.md)
-- [ACK 存储管理](../../domain-12-cloud-providers/04-alicloud-ack/245-ack-ebs-storage.md)
+- [存储架构总览](../../存储/01-storage-architecture-overview.md)
+- [PV 架构基础](../../存储/02-pv-architecture-fundamentals.md)
+- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
+- [ACK 存储管理](../../云厂商/04-alicloud-ack/245-ack-ebs-storage.md)
 
 ## Related
 

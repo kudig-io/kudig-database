@@ -60,23 +60,23 @@ def main():
     new_files = [
         "_meta/projects/kudig-ticket-agent-corpus-improvement-plan.md",
         "_meta/corpus-config/profiles/rag-ticket-agent-profile.yaml",
-        "domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md",
-        "domain-04-storage-data/03-distributed-storage/02-rook-ceph-production.md",
-        "domain-04-storage-data/03-distributed-storage/03-longhorn-production.md",
-        "domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md",
-        "domain-08-release-change-management/01-gitops/99-helm-production-guide.md",
-        "domain-11-production-operations/ticket-routing-rules.md",
-        "domain-11-production-operations/escalation-playbook.md",
-        "domain-11-production-operations/reply-templates/README.md",
-        "domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md",
-        "domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md",
-        "domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md",
-        "domain-12-cloud-providers/01-alibaba-cloud/apsara-stack-components.md",
+        "存储/03-distributed-storage/01-velero-backup-recovery.md",
+        "存储/03-distributed-storage/02-rook-ceph-production.md",
+        "存储/03-distributed-storage/03-longhorn-production.md",
+        "存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md",
+        "发布变更/01-gitops/99-helm-production-guide.md",
+        "生产运维/ticket-routing-rules.md",
+        "生产运维/escalation-playbook.md",
+        "生产运维/reply-templates/README.md",
+        "故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md",
+        "故障诊断/topic-skills/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md",
+        "故障诊断/topic-skills/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md",
+        "云厂商/01-alibaba-cloud/apsara-stack-components.md",
         "_reports/ticket-agent-corpus-execution-summary-2026-06-26.md",
         "_reports/ticket-agent-corpus-execution-summary-2026-06-26-final.md",
     ]
 
-    ticket_cases = list((project_root / "domain-11-production-operations/ticket-cases").glob("ticket-case-*.md"))
+    ticket_cases = list((project_root / "生产运维/ticket-cases").glob("ticket-case-*.md"))
     new_files.extend([str(p.relative_to(project_root)) for p in ticket_cases])
 
     print("正在构建文件索引...")

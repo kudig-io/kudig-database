@@ -72,13 +72,13 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
+  - 故障诊断
   - topic-fta
   - topic-febm
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 26: FTA/FEBM 专题深化
@@ -571,10 +571,10 @@ spec:
 
 ## 延伸阅读
 
-- [文件: `../../domain-10-troubleshooting-diagnostics/topic-fta/23-fta-production-quick-start.md`](../../domain-10-troubleshooting-diagnostics/topic-fta/23-fta-production-quick-start.md)
-- [文件: `../../domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md`](../../domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md)
-- [文件: `../../domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md`](../../domain-10-troubleshooting-diagnostics/topic-febm/08-febm-production-quick-start.md)
-- [文件: `../../domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md`](../../domain-10-troubleshooting-diagnostics/topic-fta/10-agent-orchestration-patterns.md)
+- [文件: `../../故障诊断/topic-fta/23-fta-production-quick-start.md`](../../故障诊断/topic-fta/23-fta-production-quick-start.md)
+- [文件: `../../故障诊断/topic-fta/kubernetes-fta-full-analysis.md`](../../故障诊断/topic-fta/kubernetes-fta-full-analysis.md)
+- [文件: `../../故障诊断/topic-febm/08-febm-production-quick-start.md`](../../故障诊断/topic-febm/08-febm-production-quick-start.md)
+- [文件: `../../故障诊断/topic-fta/10-agent-orchestration-patterns.md`](../../故障诊断/topic-fta/10-agent-orchestration-patterns.md)
 - [NASA FTA Handbook](https://ntrs.nasa.gov/citations/20020003100)
 - [Google SRE Book - Understanding Outages](https://sre.google/sre-book/understanding-outages/)
 

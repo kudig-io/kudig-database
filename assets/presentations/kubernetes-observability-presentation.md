@@ -1019,7 +1019,7 @@ Observability
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

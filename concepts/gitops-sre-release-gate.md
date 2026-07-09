@@ -17,10 +17,10 @@ tags:
 - reliability
 tier: supporting
 sources:
-- domain-08-release-change-management/01-gitops
-- domain-08-release-change-management/03-change-management
-- domain-09-reliability-engineering/04-slo-sli
-- domain-09-reliability-engineering/07-sre-practices
+- 发布变更/01-gitops
+- 发布变更/03-change-management
+- 可靠性/04-slo-sli
+- 可靠性/07-sre-practices
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
@@ -31,7 +31,7 @@ relationships:
   type: related_to
 - target: '[[entities/flux.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+- target: '[[系统基础/topic-cheat-sheet/gitops.md]]'
   type: related_to
 - target: '[[concepts/GitOps x 平台工程.md]]'
   type: related_to
@@ -39,11 +39,11 @@ relationships:
 
 
 
-# [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] SRE 发布门控
+# [[系统基础/topic-cheat-sheet/gitops.md|GitOps]] SRE 发布门控
 
 ## 概述
 
-GitOps 将基础设施和应用的期望状态声明在 Git 中，由 [[entities/argocd.md|ArgoCD]]/[[entities/flux.md|Flux]] 自动同步到集群。但"自动同步"不等于"安全发布"——一次错误的提交可能直接破坏生产环境。SRE 的 SLO 驱动方法论为 GitOps 提供了"发布门控"（Release Gate）机制：在变更真正影响用户之前，用可观测性数据验证其健康度，不通过则自动阻断或回滚。本页连接 domain-08-release-change-management 的 GitOps 发布流水线与 domain-09-reliability-engineering 的 SLO 门控实践，展示如何将 SRE 的可靠性工程注入 GitOps 的每一次变更。
+GitOps 将基础设施和应用的期望状态声明在 Git 中，由 [[entities/argocd.md|ArgoCD]]/[[entities/flux.md|Flux]] 自动同步到集群。但"自动同步"不等于"安全发布"——一次错误的提交可能直接破坏生产环境。SRE 的 SLO 驱动方法论为 GitOps 提供了"发布门控"（Release Gate）机制：在变更真正影响用户之前，用可观测性数据验证其健康度，不通过则自动阻断或回滚。本页连接 发布变更 的 GitOps 发布流水线与 可靠性 的 SLO 门控实践，展示如何将 SRE 的可靠性工程注入 GitOps 的每一次变更。
 
 ## 核心连接
 
@@ -487,10 +487,10 @@ spec:
 
 ## 相关 Domain
 
-- domain-08-release-change-management/01-gitops
-- domain-08-release-change-management/03-change-management
-- domain-09-reliability-engineering/04-slo-sli
-- domain-09-reliability-engineering/07-sre-practices
+- 发布变更/01-gitops
+- 发布变更/03-change-management
+- 可靠性/04-slo-sli
+- 可靠性/07-sre-practices
 - GitOps x 平台工程.md|GitOps x 平台工程]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

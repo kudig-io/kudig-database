@@ -84,7 +84,7 @@ KubeSlice 是一个多集群网络平台，通过创建逻辑 Slice（网络切�
 
 - kubeslice
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

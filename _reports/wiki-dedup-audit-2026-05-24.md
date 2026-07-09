@@ -56,7 +56,7 @@ relationships:
 
 ## 2. CNCF 实体重复（~50 对）
 
-`domain-19-landscape-references/01-cncf-landscape/graduated/*/` 与 `entities/` 重复。
+`生态参考/01-cncf-landscape/graduated/*/` 与 `entities/` 重复。
 
 **示例**:
 - `domain-19-.../graduated/tikv/tikv` ↔ `entities/tikv`

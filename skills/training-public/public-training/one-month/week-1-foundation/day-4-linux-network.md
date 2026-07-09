@@ -73,15 +73,15 @@ audience:
   - ops-engineer
 estimated_read_time: 40min
 related_domains:
-  - domain-17-system-foundation
-  - domain-03-networking-traffic
+  - 系统基础
+  - 网络
 related_topics:
   - linux
   - networking
   - performance
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-3-linux-core.md
-  - domain-17-system-foundation/04-linux-networking-configuration.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-3-linux-core.md
+  - 系统基础/04-linux-networking-configuration.md
 ---
 ```
 
@@ -102,17 +102,17 @@ related:
 ### 必读文档
 
 1. **Linux 网络配置**
-   - 文件: `../../domain-17-system-foundation/04-linux-networking-configuration.md`
+   - 文件: `../../系统基础/04-linux-networking-configuration.md`
    - 重点: ip 命令、iptables 基础、路由表、网络命名空间
 
 2. **性能调优**
-   - 文件: `../../domain-17-system-foundation/06-linux-performance-tuning.md`
+   - 文件: `../../系统基础/06-linux-performance-tuning.md`
    - 重点: 内核参数调优 (K8s 生产必做)
 
 ### 补充阅读
 
 3. **运维基础操作**
-   - 文件: `../../domain-17-system-foundation/09-linux-operations-basics.md`
+   - 文件: `../../系统基础/09-linux-operations-basics.md`
 
 ---
 

@@ -46,7 +46,7 @@ title: "Cluster Autoscaler 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\'\n\'}{en..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md"]
+sources: ["故障诊断/topic-fta/list/cluster-autoscaler-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed

@@ -71,14 +71,14 @@ audience:
   - platform-engineer
 estimated_read_time: 150min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p5-graduation-project
+  - 生产运维/topic-learn/public-training/one-month/projects/p1-k8s-cluster-setup
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
 ---
 
 # 项目 P2: 生产级应用全栈编排
@@ -843,15 +843,15 @@ kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名
 
 ## 延伸阅读
 
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
-- [StatefulSet 高级操作](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [Ingress 基础](../../domain-03-networking-traffic/19-ingress-fundamentals.md)
-- [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
+- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
+- [StatefulSet 高级操作](../../工作负载/03-statefulset-advanced-operations.md)
+- [Service 概念与类型](../../网络/06-service-concepts-types.md)
+- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
+- [存储架构总览](../../存储/01-storage-architecture-overview.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

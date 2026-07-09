@@ -18,6 +18,11 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 # ───────────────────────────────────────────────────
+# 知识域名（中文目录名，替代原 domain-* glob）
+# ───────────────────────────────────────────────────
+DOMAINS=(集群基础 工作负载 网络 存储 安全 可观测性 平台工程 发布变更 可靠性 故障诊断 生产运维 云厂商 容器运行时 AI基础设施 专项技术 数据库中间件 系统基础 清单模式 生态参考 应用模式)
+
+# ───────────────────────────────────────────────────
 # 颜色定义
 # ───────────────────────────────────────────────────
 RED='\033[0;31m'
@@ -52,9 +57,9 @@ count_md_content() {
 # 1. 整体规模指标
 # ═══════════════════════════════════════════════════
 TOTAL_FILES=$(find . -name "*.md" -type f | wc -l | tr -d ' ')
-MD_DOCS=$(find domain-* topic-* -name "*.md" -type f 2>/dev/null | wc -l | tr -d ' ')
+MD_DOCS=$(find "${DOMAINS[@]}" -name "*.md" -type f 2>/dev/null | wc -l | tr -d ' ')
 TOTAL_CHARS=$(LC_ALL=C find . -name "*.md" -type f -print0 | xargs -0 wc -m 2>/dev/null | tail -1 | awk '{print $1}')
-DOMAIN_COUNT=$(ls -d domain-* topic-* 2>/dev/null | wc -l | tr -d ' ')
+DOMAIN_COUNT=${#DOMAINS[@]}
 PRODUCT_COUNT=$(ls topic-fta/list/*-fta.md 2>/dev/null | sed 's/.*\///' | sed 's/-fta\.md$//' | sort -u | wc -l | tr -d ' ')
 
 # ═══════════════════════════════════════════════════
@@ -88,10 +93,9 @@ CLOUD_PROVIDERS=$(ls -d domain-17-cloud-provider/*/ 2>/dev/null | wc -l | tr -d 
 # ═══════════════════════════════════════════════════
 DOMAIN_NAMES=""
 DOMAIN_COUNTS=""
-for d in domain-*/; do
-    name=$(basename "$d")
+for d in "${DOMAINS[@]}"; do
     cnt=$(count_md_content "$d")
-    DOMAIN_NAMES="${DOMAIN_NAMES}${name}|"
+    DOMAIN_NAMES="${DOMAIN_NAMES}${d}|"
     DOMAIN_COUNTS="${DOMAIN_COUNTS}${cnt}|"
 done
 

@@ -523,10 +523,10 @@ Day 1 → Day 2 → Day 3 → Day 4 → Week 1 培训
 
 | 资源 | 说明 |
 |------|------|
-| `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | kubectl 场景速查卡 |
+| `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | kubectl 场景速查卡 |
 | `P1-5-oncall-quick-reference-card.md` | oncall 速查卡 |
-| `domain-10-troubleshooting-diagnostics/` | 故障排查手册 |
-| `domain-10-troubleshooting-diagnostics/topic-skills/assessment/daily-check-quiz.md` | 每日一题 |
+| `故障诊断/` | 故障排查手册 |
+| `故障诊断/topic-skills/assessment/daily-check-quiz.md` | 每日一题 |
 
 ---
 
@@ -583,11 +583,11 @@ Day 1 → Day 2 → Day 3 → Day 4 → Week 1 培训
   - ops工程师
   - 新入职员工
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training
-  - domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz
+  - 生产运维/topic-learn/public-training
+  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz
   - P1-5-oncall-quick-reference-card
 id: QUICKSTART-INDEX-001
 topic: onboarding

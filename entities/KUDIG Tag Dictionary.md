@@ -62,29 +62,29 @@ Unified tagging system for 3,337+ documents in the KUDIG knowledge base. Ensures
 | `k8s` | Kubernetes core knowledge | All domain docs |
 | `docker` | Docker container tech | domain-13, related |
 | `linux` | Linux system | domain-14, related |
-| `networking` | Network technology | domain-5, domain-03-networking-traffic |
-| `storage` | Storage technology | domain-6, domain-04-storage-data |
-| `security` | Security technology | domain-7, domain-25, domain-05-security-compliance |
-| `observability` | Observability | domain-8, domain-20, domain-06-observability |
+| `networking` | Network technology | domain-5, 网络 |
+| `storage` | Storage technology | domain-6, 存储 |
+| `security` | Security technology | domain-7, domain-25, 安全 |
+| `observability` | Observability | domain-8, domain-20, 可观测性 |
 | `ai` | AI/ML infrastructure | domain-11, topic-ai-* |
-| `devops` | DevOps practices | domain-9, domain-08-release-change-management |
-| `platform` | Platform engineering | domain-07-platform-engineering |
-| `mesh` | Service Mesh | domain-03-networking-traffic |
-| `gitops` | GitOps methodology | domain-08-release-change-management |
-| `iac` | Infrastructure as Code | domain-08-release-change-management |
-| `cncf` | CNCF ecosystem | domain-19-landscape-references |
-| `ebpf` | eBPF technology | domain-03-networking-traffic |
-| `edge` | Edge computing | domain-15-specialized-tech |
-| `wasm` | WebAssembly | domain-15-specialized-tech |
-| `gateway` | API Gateway | domain-03-networking-traffic |
-| `database` | Database middleware | domain-16-database-middleware |
-| `cloud` | Multi/hybrid cloud | domain-17, domain-12-cloud-providers |
-| `hardware` | Hardware | domain-17-system-foundation |
-| `paper` | Academic papers | domain-19-landscape-references |
-| `yaml` | YAML manifests | domain-18-manifests-patterns |
-| `events` | Kubernetes events | domain-17-system-foundation |
-| `quality` | Testing & quality | domain-08-release-change-management |
-| `disaster-recovery` | DR & BCP | domain-09-reliability-engineering |
+| `devops` | DevOps practices | domain-9, 发布变更 |
+| `platform` | Platform engineering | 平台工程 |
+| `mesh` | Service Mesh | 网络 |
+| `gitops` | GitOps methodology | 发布变更 |
+| `iac` | Infrastructure as Code | 发布变更 |
+| `cncf` | CNCF ecosystem | 生态参考 |
+| `ebpf` | eBPF technology | 网络 |
+| `edge` | Edge computing | 专项技术 |
+| `wasm` | WebAssembly | 专项技术 |
+| `gateway` | API Gateway | 网络 |
+| `database` | Database middleware | 数据库中间件 |
+| `cloud` | Multi/hybrid cloud | domain-17, 云厂商 |
+| `hardware` | Hardware | 系统基础 |
+| `paper` | Academic papers | 生态参考 |
+| `yaml` | YAML manifests | 清单模式 |
+| `events` | Kubernetes events | 系统基础 |
+| `quality` | Testing & quality | 发布变更 |
+| `disaster-recovery` | DR & BCP | 可靠性 |
 | `cheatsheet` | Quick reference | topic-cheat-sheet |
 | `fta` | Fault Tree Analysis | topic-fta |
 | `skill` | Operational skills | topic-skills |
@@ -96,7 +96,7 @@ Unified tagging system for 3,337+ documents in the KUDIG knowledge base. Ensures
 | `architecture` | Application architecture | topic-application-architecture |
 | `deployment` | Deployment strategies | topic-deployment |
 | `java` | Java ecosystem | domain-java-kubernetes |
-| `terway` | Terway CNI | domain-03-networking-traffic |
+| `terway` | Terway CNI | 网络 |
 | `febm` | FEBM forensics | topic-febm |
 | `ai-agent` | AI agents | 02-ai-agents |
 | `ai-coding` | AI coding | topic-ai-coding |

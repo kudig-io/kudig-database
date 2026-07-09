@@ -75,13 +75,13 @@ audience:
   - 运维工程师
 estimated_read_time: 15min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 工作负载
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start
-  - domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz
-  - domain-17-system-foundation/topic-dictionary/k8s-glossary
+  - 生产运维/topic-learn/quick-start
+  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz
+  - 系统基础/topic-dictionary/k8s-glossary
 id: TRAINING-INDEX-001
 topic: training
 type: index
@@ -256,13 +256,13 @@ Week 4: 网络与存储 (进阶)
 | 资源 | 路径 | 用途 |
 |------|------|------|
 | oncall 速查卡 | `P1-5-oncall-quick-reference-card.md` | 值班快速参考 |
-| kubectl 场景速查卡 | `domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | 命令场景对照 |
-| 新人上手路径 | `domain-11-production-operations/topic-learn/quick-start/` | 快速入门指南 |
-| 考核评估体系 | `domain-10-troubleshooting-diagnostics/topic-skills/assessment/` | 技能评估工具 |
-| K8s 术语表 | `domain-17-system-foundation/topic-dictionary/k8s-glossary.md` | 术语查询 |
-| 故障排查手册 | `domain-10-troubleshooting-diagnostics/` | 故障排查参考 |
-| 内部培训教案 | `domain-11-production-operations/topic-learn/inner-training/` | 详细教案 (阿里云版本) |
-| 公开培训教案 | `domain-11-production-operations/topic-learn/public-training/` | 通用版本教案 |
+| kubectl 场景速查卡 | `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | 命令场景对照 |
+| 新人上手路径 | `生产运维/topic-learn/quick-start/` | 快速入门指南 |
+| 考核评估体系 | `故障诊断/topic-skills/assessment/` | 技能评估工具 |
+| K8s 术语表 | `系统基础/topic-dictionary/k8s-glossary.md` | 术语查询 |
+| 故障排查手册 | `故障诊断/` | 故障排查参考 |
+| 内部培训教案 | `生产运维/topic-learn/inner-training/` | 详细教案 (阿里云版本) |
+| 公开培训教案 | `生产运维/topic-learn/public-training/` | 通用版本教案 |
 
 ---
 
@@ -310,9 +310,9 @@ intent_queries:
 difficulty: beginner
 target_roles: [sre, ops-engineer]
 related:
-  - domain-11-production-operations/topic-learn/quick-start/README.md
-  - domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz.md
-  - domain-17-system-foundation/topic-dictionary/k8s-glossary.md
+  - 生产运维/topic-learn/quick-start/README.md
+  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz.md
+  - 系统基础/topic-dictionary/k8s-glossary.md
 ---
 ```
 
@@ -320,24 +320,24 @@ related:
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

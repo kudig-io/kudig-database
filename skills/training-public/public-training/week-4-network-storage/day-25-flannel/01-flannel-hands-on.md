@@ -331,16 +331,16 @@ audience:
   - ops-engineer
 estimated_read_time: 35min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-03-networking-traffic
+  - 故障诊断
+  - 网络
 related_topics:
   - networking
   - cni
   - flannel
   - vxlan
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-24-terway/01-terway-hands-on.md
-  - domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md
+  - 生产运维/topic-learn/public-training/week-4-network-storage/day-24-terway/01-terway-hands-on.md
+  - 故障诊断/topic-fta/list/calico-fta.md
 ---
 ```
 
@@ -391,8 +391,8 @@ ReadWriteOnce (单节点 RW) / ReadOnlyMany (多节点 RO) / ReadWriteMany (多�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
 
 ```
 

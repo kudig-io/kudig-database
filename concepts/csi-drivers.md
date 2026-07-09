@@ -484,7 +484,7 @@ parameters:
 - [[concepts/pv.md|pv]] — PersistentVolume 和 PersistentVolumeClaim
 - [[concepts/storageclass.md|storageclass]] — StorageClass 动态供应
 - [[concepts/storage-model.md|storage model]] — Kubernetes 存储模型总览
-- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 存储与数据领域索引
+- [[生态参考/98-merged-indexes/index.md|index]] — 存储与数据领域索引
 
 ## Related
 

@@ -50,26 +50,26 @@ Organizes knowledge by **production scenario** rather than document structure. E
 
 | ID | Scenario | Entry Point | Covered Domains | Est. Docs |
 |----|----------|-------------|-----------------|-----------|
-| SC-01 | Cluster Deployment | topic-scenarios/cluster-deployment.md | domain-1, domain-4, domain-07-platform-engineering | ~20 |
-| SC-02 | Application Deployment | topic-scenarios/app-deployment.md | domain-4, domain-18-manifests-patterns | ~30 |
+| SC-01 | Cluster Deployment | topic-scenarios/cluster-deployment.md | domain-1, domain-4, 平台工程 | ~20 |
+| SC-02 | Application Deployment | topic-scenarios/app-deployment.md | domain-4, 清单模式 | ~30 |
 | SC-03 | Troubleshooting | topic-scenarios/troubleshooting.md | domain-12, topic-fta, topic-skills | ~100 |
-| SC-04 | Performance Tuning | topic-scenarios/performance-tuning.md | domain-1, domain-13, domain-11-production-operations | ~25 |
-| SC-05 | Security Hardening | topic-scenarios/security-hardening.md | domain-7, domain-25, domain-05-security-compliance | ~30 |
-| SC-06 | Monitoring & Alerting | topic-scenarios/monitoring-alerting.md | domain-8, domain-20, domain-06-observability | ~30 |
+| SC-04 | Performance Tuning | topic-scenarios/performance-tuning.md | domain-1, domain-13, 生产运维 | ~25 |
+| SC-05 | Security Hardening | topic-scenarios/security-hardening.md | domain-7, domain-25, 安全 | ~30 |
+| SC-06 | Monitoring & Alerting | topic-scenarios/monitoring-alerting.md | domain-8, domain-20, 可观测性 | ~30 |
 | SC-07 | Backup & Restore | topic-scenarios/backup-restore.md | domain-30, domain-3, topic-fta | ~20 |
 | SC-08 | Upgrade & Migration | topic-scenarios/upgrade-migration.md | domain-1, topic-migration | ~25 |
 | SC-09 | Daily Operations | topic-scenarios/daily-ops.md | domain-9, topic-skills | ~40 |
 | SC-10 | AI Infrastructure | topic-scenarios/ai-infra-ops.md | domain-11, 02-ai-agents | ~30 |
-| SC-11 | Network Diagnosis | topic-scenarios/network-diagnosis.md | domain-5, domain-03-networking-traffic | ~25 |
-| SC-12 | Storage Issues | topic-scenarios/storage-issues.md | domain-6, domain-04-storage-data | ~20 |
-| SC-13 | Security Incident Response | topic-scenarios/security-incident.md | domain-7, domain-25, domain-05-security-compliance | ~15 |
-| SC-14 | Capacity Planning | topic-scenarios/capacity-planning.md | domain-18, domain-07-platform-engineering | ~15 |
-| SC-15 | GitOps Workflow | topic-scenarios/gitops-workflow.md | domain-23, domain-08-release-change-management | ~20 |
-| SC-16 | Service Mesh Operations | topic-scenarios/mesh-ops.md | domain-03-networking-traffic | ~15 |
-| SC-17 | Multi-Cluster Management | topic-scenarios/multi-cluster.md | domain-9, domain-12-cloud-providers | ~15 |
-| SC-18 | Edge Operations | topic-scenarios/edge-ops.md | domain-15-specialized-tech | ~10 |
-| SC-19 | Cost Optimization | topic-scenarios/cost-optimization.md | domain-18, domain-07-platform-engineering | ~10 |
-| SC-20 | Compliance & Audit | topic-scenarios/compliance-audit.md | domain-25, domain-05-security-compliance | ~10 |
+| SC-11 | Network Diagnosis | topic-scenarios/network-diagnosis.md | domain-5, 网络 | ~25 |
+| SC-12 | Storage Issues | topic-scenarios/storage-issues.md | domain-6, 存储 | ~20 |
+| SC-13 | Security Incident Response | topic-scenarios/security-incident.md | domain-7, domain-25, 安全 | ~15 |
+| SC-14 | Capacity Planning | topic-scenarios/capacity-planning.md | domain-18, 平台工程 | ~15 |
+| SC-15 | GitOps Workflow | topic-scenarios/gitops-workflow.md | domain-23, 发布变更 | ~20 |
+| SC-16 | Service Mesh Operations | topic-scenarios/mesh-ops.md | 网络 | ~15 |
+| SC-17 | Multi-Cluster Management | topic-scenarios/multi-cluster.md | domain-9, 云厂商 | ~15 |
+| SC-18 | Edge Operations | topic-scenarios/edge-ops.md | 专项技术 | ~10 |
+| SC-19 | Cost Optimization | topic-scenarios/cost-optimization.md | domain-18, 平台工程 | ~10 |
+| SC-20 | Compliance & Audit | topic-scenarios/compliance-audit.md | domain-25, 安全 | ~10 |
 
 ## Scenario Page Structure
 
@@ -85,16 +85,16 @@ Each scenario page should contain:
 
 | Scenario | Primary Docs | Secondary Docs |
 |----------|-------------|----------------|
-| Cluster Deployment | domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md | domain-07-platform-engineering/*, domain-08-release-change-management/topic-deployment/* |
-| Application Deployment | domain-02-workloads-applications/* | domain-18-manifests-patterns/* |
-| Troubleshooting | domain-10-troubleshooting-diagnostics/* | domain-10-troubleshooting-diagnostics/topic-fta/list/*, domain-10-troubleshooting-diagnostics/topic-skills/* |
-| Performance Tuning | domain-01-cluster-fundamentals/13-performance-tuning-guide.md | domain-11-production-operations/* |
-| Security Hardening | domain-05-security-compliance/* | domain-05-security-compliance/*, domain-05-security-compliance/* |
-| Monitoring & Alerting | domain-06-observability/* | domain-06-observability/*, domain-06-observability/* |
-| Backup & Restore | domain-01-cluster-fundamentals/* (etcd) | domain-09-reliability-engineering/* |
-| Upgrade & Migration | domain-01-cluster-fundamentals/07,18-upgrade* | domain-08-release-change-management/topic-migration/* |
-| Daily Operations | domain-07-platform-engineering/* | domain-10-troubleshooting-diagnostics/topic-skills/* |
-| AI Infrastructure | domain-14-ai-ml-infra/* | domain-14-ai-ml-infra/02-ai-agents/* |
+| Cluster Deployment | 集群基础/12-cluster-deployment-patterns.md | 平台工程/*, 发布变更/topic-deployment/* |
+| Application Deployment | 工作负载/* | 清单模式/* |
+| Troubleshooting | 故障诊断/* | 故障诊断/topic-fta/list/*, 故障诊断/topic-skills/* |
+| Performance Tuning | 集群基础/13-performance-tuning-guide.md | 生产运维/* |
+| Security Hardening | 安全/* | 安全/*, 安全/* |
+| Monitoring & Alerting | 可观测性/* | 可观测性/*, 可观测性/* |
+| Backup & Restore | 集群基础/* (etcd) | 可靠性/* |
+| Upgrade & Migration | 集群基础/07,18-upgrade* | 发布变更/topic-migration/* |
+| Daily Operations | 平台工程/* | 故障诊断/topic-skills/* |
+| AI Infrastructure | AI基础设施/* | AI基础设施/02-ai-agents/* |
 
 ## Agent Routing
 
@@ -109,7 +109,7 @@ User input: "My Pod keeps crashing with OOMKilled"
 
 User input: "How do I set up ArgoCD for my cluster?"
   -> Intent: GitOps Workflow (SC-15)
-  -> Primary docs: domain-08-release-change-management/*
+  -> Primary docs: 发布变更/*
 ```
 
 ## Related

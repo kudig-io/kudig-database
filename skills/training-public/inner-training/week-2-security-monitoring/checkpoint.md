@@ -73,13 +73,13 @@ audience:
   - 运维工程师
 estimated_read_time: 60min
 related_domains:
-  - domain-05-security-compliance
-  - domain-06-observability
-  - domain-10-troubleshooting-diagnostics
+  - 安全
+  - 可观测性
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-8-rbac
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-12-cluster-audit
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring/day-14-quota-license
 id: WEEK2-CHECKPOINT
 topic: training
 type: checkpoint
@@ -677,7 +677,7 @@ Phase 4: 验证
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

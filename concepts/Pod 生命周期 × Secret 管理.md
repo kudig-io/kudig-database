@@ -32,9 +32,9 @@ prerequisites:
 relationships:
 - target: '[[entities/kubelet.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md]]'
+- target: '[[系统基础/topic-dictionary/configuration/secrets.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[系统基础/topic-cheat-sheet/k8s.md]]'
   type: related_to
 - target: '[[concepts/Operator 模式 × Pod 生命周期.md]]'
   type: uses
@@ -54,7 +54,7 @@ relationships:
 
 ## 连接点
 
-[[concepts/pod-lifecycle.md|pod lifecycle]] 描述 Pod 从 Pending 到 Terminating 的状态机，[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|secrets]]-management]] 覆盖密钥的安全存储。wiki 将两者分属不同主题，但 Secret 的生命周期**完全嵌入在 Pod 的生命周期中**：[[entities/kubelet.md|kubelet]] 在 Pod 进入 Running 前挂载 Secret，在 Pod Terminating 后才卸载。这意味着 Secret 在 Pod 的每个阶段都有不同的暴露面和风险 profile。
+[[concepts/pod-lifecycle.md|pod lifecycle]] 描述 Pod 从 Pending 到 Terminating 的状态机，[[系统基础/topic-dictionary/configuration/secrets.md|secrets]]-management]] 覆盖密钥的安全存储。wiki 将两者分属不同主题，但 Secret 的生命周期**完全嵌入在 Pod 的生命周期中**：[[entities/kubelet.md|kubelet]] 在 Pod 进入 Running 前挂载 Secret，在 Pod Terminating 后才卸载。这意味着 Secret 在 Pod 的每个阶段都有不同的暴露面和风险 profile。
 
 ## 共现场景
 
@@ -62,7 +62,7 @@ relationships:
 - **Running 阶段**：Secret 已挂载为 tmpfs 卷或注入为环境变量，容器内任何进程都可以读取。这是 Secret 暴露面最大的阶段
 - **容器重启**：livenessProbe 失败导致容器重启时，Secret 挂载保持，新容器立即获得相同 Secret——无需重新从 API Server 拉取
 - **Pod Terminating**：SIGTERM 后容器仍可在 terminationGracePeriodSeconds 内读取 Secret。PreStop hook 可以主动清理内存中的 Secret，但大多数应用不这样做
-- **不可变 Secret**：[[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] v1.21+ 的 immutable Secret 禁止修改，但容器仍可在运行中读取旧值。Secret 更新后需要 Pod 重建才能加载新值
+- **不可变 Secret**：[[系统基础/topic-cheat-sheet/k8s.md|K8s]] v1.21+ 的 immutable Secret 禁止修改，但容器仍可在运行中读取旧值。Secret 更新后需要 Pod 重建才能加载新值
 
 ## 交叉洞察
 

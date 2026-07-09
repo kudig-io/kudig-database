@@ -55,7 +55,7 @@ prerequisites:
 | **topic-febm** | 法医鉴定循证（归纳法） | 10篇 | 证据链构建，取证分析 |
 | **topic-structural** | 结构化故障排查 | 63篇 | 详细排查步骤，决策树 |
 | **domain-12** | 组件级故障排查 | 42篇 | 按组件的深度排查指南 |
-| **domain-01-cluster-fundamentals (control-plane)** | 控制平面深度 dive | 32篇 | 原理与架构深度解析 |
+| **集群基础 (control-plane)** | 控制平面深度 dive | 32篇 | 原理与架构深度解析 |
 | **topic-skills** | 诊断-修复闭环技能 | 18个 | Agent 可执行的自动化技能 |
 | **topic-terway** | 阿里云 CNI 专项 | 12篇 | Terway/ENI/IPVLAN 故障排查 |
 
@@ -205,19 +205,19 @@ bottom_event:
 
   related_docs:
     structural:
-      - path: "domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/07-oom-memory-diagnosis.md"
+      - path: "故障诊断/topic-structural-trouble-shooting/07-oom-memory-diagnosis.md"
         description: "OOM 内存诊断完整步骤"
         relevance: 0.95
     domain_12:
-      - path: "domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md"
+      - path: "故障诊断/07-oom-memory-diagnosis.md"
         description: "Domain 级 OOM 诊断"
         relevance: 0.90
     skills:
-      - path: "domain-10-troubleshooting-diagnostics/topic-skills/oom-diagnosis-skill.md"
+      - path: "故障诊断/topic-skills/oom-diagnosis-skill.md"
         description: "自动化诊断技能"
         auto_executable: true
     febm_case:
-      - path: "domain-10-troubleshooting-diagnostics/topic-febm/FEBM-case-INC-2026-0215.md"
+      - path: "故障诊断/topic-febm/FEBM-case-INC-2026-0215.md"
         description: "FEBM 案例：Java heap space 泄漏"
         evidence_chain: "OOM → JVM heap 1.2Gi > limit 1Gi → OrderCache.loadAll"
 ```
@@ -259,12 +259,12 @@ ACK-One 特有问题:
   - 统一监控/日志失败 (BE-11.7, BE-11.8)
 
 现状:
-  - domain-15-specialized-tech 有多集群管理故障排查
+  - 专项技术 有多集群管理故障排查
   - 但 ACK-One 特有的故障模式覆盖不足
   - 缺乏 Federation DNS、跨集群服务发现的具体排查步骤
 ```
 
-**改进方案**: 在 domain-15-specialized-tech 或 topic-structural 中增加 ACK-One 专项故障排查
+**改进方案**: 在 专项技术 或 topic-structural 中增加 ACK-One 专项故障排查
 
 ---
 
@@ -366,21 +366,21 @@ ASM/Istio 特有问题:
 
 1. **增加症状快速映射层**
    - 在 topic-index 或独立文档中增加"症状-文档"映射表
-   - 参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/43-symptom-sop-mapping.md 的格式
+   - 参考 故障诊断/topic-structural-trouble-shooting/43-symptom-sop-mapping.md 的格式
    - 但增加 AI Agent 可直接使用的决策树格式
 
 2. **完善 FTA 底事件的 related_docs**
    - 在 kubernetes-fta-full-analysis-v2.md 中补充 related_docs 字段
-   - 每个 BE 指向对应的 structural 和 domain-10-troubleshooting-diagnostics 文档
+   - 每个 BE 指向对应的 structural 和 故障诊断 文档
 
 ### 5.2 第二阶段（短期执行）
 
 3. **扩展 Terway 故障树排查**
-   - 将 domain-03-networking-traffic/topic-terway/07-troubleshooting-fta.md 扩展为完整手册
+   - 将 网络/topic-terway/07-troubleshooting-fta.md 扩展为完整手册
    - 补充 TE-9 所有底事件的详细排查步骤
 
 4. **扩展多集群/ASM 问题覆盖**
-   - 在 domain-15-specialized-tech 中增加 ACK-One 专项
+   - 在 专项技术 中增加 ACK-One 专项
    - 在 topic-structural 中扩展 Istio/ASM 故障排查
 
 ### 5.3 第三阶段（中长期）

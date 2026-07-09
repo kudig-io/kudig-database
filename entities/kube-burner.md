@@ -89,7 +89,7 @@ Kube-burner 是一个 Kubernetes 性能和规模测试工具，通过在集群�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kube-burner
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

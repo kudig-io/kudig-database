@@ -80,11 +80,11 @@ Defines the standardized YAML frontmatter format for all 3,337+ documents in the
 | Category | Description | Source Topics |
 |----------|-------------|--------------|
 | `docs` | Spec and dictionary documents | docs/ |
-| `fta` | Fault Tree Analysis documents | domain-10-troubleshooting-diagnostics/topic-fta/ |
-| `skills` | Diagnostic skill documents | domain-10-troubleshooting-diagnostics/topic-skills/ |
-| `cheatsheet` | Quick reference cards | domain-17-system-foundation/topic-cheat-sheet/ |
+| `fta` | Fault Tree Analysis documents | 故障诊断/topic-fta/ |
+| `skills` | Diagnostic skill documents | 故障诊断/topic-skills/ |
+| `cheatsheet` | Quick reference cards | 系统基础/topic-cheat-sheet/ |
 | `scenario` | Production scenario guides | topic-scenarios/ |
-| `learning` | Learning path documents | domain-11-production-operations/topic-learn/ |
+| `learning` | Learning path documents | 生产运维/topic-learn/ |
 | `moc` | Map of Contents / navigation pages | All MOC.md files |
 | `template` | Document templates | templates/ |
 | `prompt` | Agent prompt templates | prompts/ |

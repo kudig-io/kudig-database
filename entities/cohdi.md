@@ -83,7 +83,7 @@ CoHDI（Composable Hyperconverged Disaggregated Infrastructure）是一个 Kuber
 
 - cohdi
 - index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

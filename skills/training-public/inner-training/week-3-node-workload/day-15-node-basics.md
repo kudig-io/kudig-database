@@ -77,8 +77,8 @@ audience:
 estimated_read_time: 45min
 related_domains:
   - domain-3-node
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - node-overview
   - node-management
@@ -608,10 +608,10 @@ echo "========================================"
 
 ## 延伸阅读
 
-- [K8s 核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
+- [K8s 核心组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [OOM 内存诊断](../../故障诊断/07-oom-memory-diagnosis.md)
 
 ```
 

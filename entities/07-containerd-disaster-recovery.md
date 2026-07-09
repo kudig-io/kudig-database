@@ -81,12 +81,12 @@ title: containerd 灾难恢复与业务连续性
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.1.md|RELEASE-NOTES-2.1]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-1.5
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
+- [[生态参考/_archived-release-notes/core-deps/containerd/RELEASE-NOTES-2.2.md|RELEASE-NOTES-2.2]]
 - RELEASE-NOTES-1.1
 - RELEASE-NOTES-0.0
 - RELEASE-NOTES-1.0

@@ -81,16 +81,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-02-workloads-applications
+  - 集群基础
+  - 工作负载
 related_topics:
   - kubernetes
   - deployment
   - service
   - rollout
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-5-k8s-architecture.md
-  - domain-02-workloads-applications/02-deployment-production-patterns.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-5-k8s-architecture.md
+  - 工作负载/02-deployment-production-patterns.md
 ---
 ```
 
@@ -549,14 +549,14 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 
 ## 延伸阅读
 
-- [集群配置参数](../../domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md)
-- [API 版本与特性](../../domain-01-cluster-fundamentals/03-api-versions-features.md)
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
-- [K8s 速查手册](../../domain-17-system-foundation/topic-cheat-sheet/k8s.md)
+- [集群配置参数](../../集群基础/06-cluster-configuration-parameters.md)
+- [API 版本与特性](../../集群基础/03-api-versions-features.md)
+- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
+- [K8s 速查手册](../../系统基础/topic-cheat-sheet/k8s.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

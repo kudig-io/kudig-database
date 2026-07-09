@@ -438,12 +438,12 @@ source <(kubectl ns completion bash)
   - ops工程师
   - 运维工程师
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/quick-start/01-day-one-checklist
-  - domain-11-production-operations/topic-learn/quick-start/02-first-ticket-guide
-  - domain-07-platform-engineering/26-kubectl-plugin-ecosystem
+  - 生产运维/topic-learn/quick-start/01-day-one-checklist
+  - 生产运维/topic-learn/quick-start/02-first-ticket-guide
+  - 平台工程/26-kubectl-plugin-ecosystem
 id: QUICKSTART-DAY4
 topic: onboarding
 type: setup-guide

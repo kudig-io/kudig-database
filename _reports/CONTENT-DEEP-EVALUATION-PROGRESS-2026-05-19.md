@@ -102,9 +102,9 @@ prerequisites:
 ### 本轮新增
 | 文件 | 用途 |
 |------|------|
-| `domain-17-system-foundation/topic-cheat-sheet/helm.md` | Helm 包管理器速查卡 |
-| `domain-17-system-foundation/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / [[flux|Flux]]) 速查卡 |
-| `domain-17-system-foundation/topic-cheat-sheet/gateway-api.md` | Kubernetes Gateway API 速查卡 |
+| `系统基础/topic-cheat-sheet/helm.md` | Helm 包管理器速查卡 |
+| `系统基础/topic-cheat-sheet/gitops.md` | GitOps (Argo CD / [[flux|Flux]]) 速查卡 |
+| `系统基础/topic-cheat-sheet/gateway-api.md` | Kubernetes Gateway API 速查卡 |
 | `scripts/fix-read-time.py` | estimated_read_time 批量校准脚本 |
 | `reports/CONTENT-DEEP-EVALUATION-2026-05-19.md` | 内容深度评估报告 |
 | `reports/FIX-SUMMARY-2026-05-19.md` | 修复完成报告 |
@@ -112,8 +112,8 @@ prerequisites:
 ### 历史新增
 | 文件 | 用途 |
 |------|------|
-| `domain-10-troubleshooting-diagnostics/topic-qa-corpus/` (18 文件) | Agent QA 对语料库 (2,336 对) |
-| `domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md` | 命令输出解读语料 (23 场景) |
+| `故障诊断/topic-qa-corpus/` (18 文件) | Agent QA 对语料库 (2,336 对) |
+| `故障诊断/topic-qa-corpus/command-output-diagnosis.md` | 命令输出解读语料 (23 场景) |
 | `scripts/batch-fix-quality.py` | 批量 front matter 标准化 |
 | `scripts/enhance-cross-refs.py` | cross_refs 交叉引用生成 |
 | `scripts/generate-qa-corpus.py` | QA 对语料生成 |

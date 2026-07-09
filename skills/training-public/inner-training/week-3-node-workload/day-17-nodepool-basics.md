@@ -75,8 +75,8 @@ audience:
 estimated_read_time: 45min
 related_domains:
   - domain-3-node
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - nodepool-advanced
   - node-basics
@@ -819,10 +819,10 @@ resource "alicloud_cs_kubernetes_node_pool" "app_pool" {
 
 ## 延伸阅读
 
-- [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [ECS 计算资源](../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md)
-- [集群自动伸缩排障](../../domain-10-troubleshooting-diagnostics/28-cluster-autoscaler-troubleshooting.md)
-- [K8s 架构与组件](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
+- [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
+- [集群自动伸缩排障](../../故障诊断/28-cluster-autoscaler-troubleshooting.md)
+- [K8s 架构与组件](../../集群基础/02-core-components-deep-dive.md)
 
 
 <!-- risk-assessed -->

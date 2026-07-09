@@ -179,7 +179,7 @@ flowchart TD
 
 - [[README]]
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/kubeadm-fta.md|kubeadm-fta]]
+- [[故障诊断/topic-fta/list/kubeadm-fta.md|kubeadm-fta]]
 - [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
 
 

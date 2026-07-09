@@ -2,8 +2,8 @@
 """
 主生成脚本：从 Skills 和 FTA 生成命令输出→诊断 I-O 对语料
 Usage:
-    python generate.py --priority P0 --output ../../domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/
-    python generate.py --priority all --output ../../domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/
+    python generate.py --priority P0 --output ../../故障诊断/topic-qa-corpus/generated/
+    python generate.py --priority all --output ../../故障诊断/topic-qa-corpus/generated/
 """
 
 import argparse
@@ -220,13 +220,13 @@ def main():
     parser.add_argument('--output', type=str, required=True,
                         help='输出目录')
     parser.add_argument('--skills-dir', type=str,
-                        default='domain-10-troubleshooting-diagnostics/topic-skills',
+                        default='故障诊断/topic-skills',
                         help='Skills 目录')
     parser.add_argument('--fta-dir', type=str,
-                        default='domain-10-troubleshooting-diagnostics/topic-fta/list',
+                        default='故障诊断/topic-fta/list',
                         help='FTA 目录')
     parser.add_argument('--seed-dir', type=str,
-                        default='domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed',
+                        default='故障诊断/topic-qa-corpus/seed',
                         help='手工种子目录')
     parser.add_argument('--config', type=str, default=None,
                         help='配置文件路径')

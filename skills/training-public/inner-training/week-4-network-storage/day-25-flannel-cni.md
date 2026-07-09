@@ -68,12 +68,12 @@ audience:
   - 运维工程师
 estimated_read_time: 45min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-03-networking-traffic/02-cni-architecture-fundamentals
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 网络/02-cni-architecture-fundamentals
 id: WEEK4-DAY25
 topic: training
 type: hands-on
@@ -99,7 +99,7 @@ tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
 ### 必读文档
 
 1. **ACK 网络方案对比**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/260-ack-networking.md`
    - 重点: Flannel vs Terway 架构差异
 
 2. **Flannel 网络原理**
@@ -107,7 +107,7 @@ tags: [week-4, day-25, flannel, cni, networking, k8s, k8s-1.28-1.33]
    - 重点: VxLAN 封装、Pod CIDR 分配
 
 3. **网络故障排查**
-   - 文件: `../../../domain-10-troubleshooting-diagnostics/10-network-troubleshooting.md`
+   - 文件: `../../../故障诊断/10-network-troubleshooting.md`
    - 重点: 网络分层排查方法
 
 ### 阅读要点
@@ -296,7 +296,7 @@ Day 26 将学习存储卷 (PV/PVC) 的创建与删除。
 ## Related
 
 - index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

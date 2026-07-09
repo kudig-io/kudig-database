@@ -42,7 +42,7 @@ prerequisites:
 
 # CLI 工具演进
 
-> 本文档综合了 `domain-19-landscape-references/_archived-release-notes/cli-tools/` 目录下 5 个 CLI 工具的 187 个版本发布说明 ^[inferred]
+> 本文档综合了 `生态参考/_archived-release-notes/cli-tools/` 目录下 5 个 CLI 工具的 187 个版本发布说明 ^[inferred]
 
 ## 组件概览
 
@@ -140,11 +140,11 @@ Kustomize 提供声明式的配置定制，已集成到 kubectl。
 
 ## 来源文档
 
-- domain-19-landscape-references/_archived-release-notes/cli-tools/helm/（42 个文件）
-- domain-19-landscape-references/_archived-release-notes/cli-tools/kind/（32 个文件）
-- domain-19-landscape-references/_archived-release-notes/cli-tools/kops/（32 个文件）
-- domain-19-landscape-references/_archived-release-notes/cli-tools/minikube/（74 个文件）
-- domain-19-landscape-references/_archived-release-notes/cli-tools/kustomize/（7 个文件）
+- 生态参考/_archived-release-notes/cli-tools/helm/（42 个文件）
+- 生态参考/_archived-release-notes/cli-tools/kind/（32 个文件）
+- 生态参考/_archived-release-notes/cli-tools/kops/（32 个文件）
+- 生态参考/_archived-release-notes/cli-tools/minikube/（74 个文件）
+- 生态参考/_archived-release-notes/cli-tools/kustomize/（7 个文件）
 
 ## Related
 
@@ -154,7 +154,7 @@ Kustomize 提供声明式的配置定制，已集成到 kubectl。
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - [[ko|ko]]
 
 <!-- risk-assessed -->

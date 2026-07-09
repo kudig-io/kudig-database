@@ -81,16 +81,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-17-system-foundation
-  - domain-13-container-runtime
+  - 系统基础
+  - 容器运行时
 related_topics:
   - linux
   - container
   - namespace
   - cgroup
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-4-linux-network.md
-  - domain-17-system-foundation/01-linux-system-architecture.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-4-linux-network.md
+  - 系统基础/01-linux-system-architecture.md
 ---
 
 ```
@@ -613,10 +613,10 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 
 ## 延伸阅读
 
-- [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../[[domain-17-system-foundation/01-linux/02-linux-process-management.md|02-linux-process-management]].md)
-- [Linux 容器基础原理](../../domain-17-system-foundation/08-linux-container-fundamentals.md)
-- [Linux 命令参考](../../domain-17-system-foundation/99-linux-commands-reference.md)
+- [Linux 系统架构](../../系统基础/01-linux-system-architecture.md)
+- [Linux 进程管理](../../[[系统基础/01-linux/02-linux-process-management.md|02-linux-process-management]].md)
+- [Linux 容器基础原理](../../系统基础/08-linux-container-fundamentals.md)
+- [Linux 命令参考](../../系统基础/99-linux-commands-reference.md)
 
 ```
 

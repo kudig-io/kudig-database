@@ -241,13 +241,13 @@ def process_file(input_path: Path, max_pairs: int = None) -> Path:
 def main():
     files = [
         # generated 批量 QA 文件
-        Path("domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.md"),
-        Path("domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p1.md"),
-        Path("domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p2.md"),
+        Path("故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.md"),
+        Path("故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p1.md"),
+        Path("故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p2.md"),
         # 核心命令输出解读语料
-        Path("domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md"),
+        Path("故障诊断/topic-qa-corpus/command-output-diagnosis.md"),
         # P0 核心场景手工种子
-        Path("domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.md"),
+        Path("故障诊断/topic-qa-corpus/seed/p0-core-scenarios.md"),
     ]
 
     total_pairs = 0

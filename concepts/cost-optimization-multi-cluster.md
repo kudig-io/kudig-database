@@ -77,8 +77,8 @@ relationships:
 
 ## 相关 Domain
 
-- domain-11-production-operations/01-finops/01-cost-governance
-- domain-12-cloud-providers/01-aws-eks/01-eks-cost-optimization
+- 生产运维/01-finops/01-cost-governance
+- 云厂商/01-aws-eks/01-eks-cost-optimization
 
 
 <!-- risk-assessed -->

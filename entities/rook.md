@@ -83,28 +83,28 @@ description: '## 项目概述'
 - rook
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.18.md|RELEASE-NOTES-1.18]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.19.md|RELEASE-NOTES-1.19]]
 - RELEASE-NOTES-1.8
 - RELEASE-NOTES-0.9
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.16.md|RELEASE-NOTES-1.16]]
 - RELEASE-NOTES-1.3
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.12.md|RELEASE-NOTES-1.12]]
 - RELEASE-NOTES-0.6
 - RELEASE-NOTES-1.6
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.13.md|RELEASE-NOTES-1.13]]
 - RELEASE-NOTES-0.7
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.17.md|RELEASE-NOTES-1.17]]
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-1.5
 - RELEASE-NOTES-1.10
 - RELEASE-NOTES-0.4
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.14.md|RELEASE-NOTES-1.14]]
 - RELEASE-NOTES-1.1
-- [[domain-19-landscape-references/_archived-release-notes/storage/rook/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
+- [[生态参考/_archived-release-notes/storage/rook/RELEASE-NOTES-1.15.md|RELEASE-NOTES-1.15]]
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.4
@@ -114,9 +114,9 @@ description: '## 项目概述'
 - [[concepts/storage-tool-evolution.md|存储工具演进]] — Cross-reference
 - [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

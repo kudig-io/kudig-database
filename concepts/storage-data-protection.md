@@ -28,7 +28,7 @@ last_updated: 2026-05-24
 
 数据保护是 Kubernetes 存储体系中最后一道防线。本文涵盖 Velero 最佳实践、不可变备份、勒索软件防护、多层灾难恢复策略以及 RTO/RPO 目标设定。
 
-相关：[[concepts/csi-drivers.md|csi drivers]] | [[concepts/storage-tool-evolution.md|storage tool evolution]] | [[domain-19-landscape-references/98-merged-indexes/index.md|index]]
+相关：[[concepts/csi-drivers.md|csi drivers]] | [[concepts/storage-tool-evolution.md|storage tool evolution]] | [[生态参考/98-merged-indexes/index.md|index]]
 
 ---
 

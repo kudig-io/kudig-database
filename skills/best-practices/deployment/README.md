@@ -77,7 +77,7 @@ prerequisites:
 # 🟢 低风险：只读/信息收集，通常无副作用
 Q1: 你的目标是什么？
 │
-├── 学习 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]] / 快速体验 → Q2
+├── 学习 [[系统基础/topic-cheat-sheet/k8s.md|k8s]] / 快速体验 → Q2
 │   ├── 本机有 Docker？
 │   │   ├── 是 → 01-local-demo (kind/minikube)
 │   │   └── 否 → 先安装 Docker Desktop，再看 01-local-demo
@@ -164,16 +164,16 @@ Q1: 你的目标是什么？
 
 | 类别 | 文档路径 | 说明 |
 |------|---------|------|
-| 集群架构模式 | `domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md` | 各种部署架构模式详解 |
-| 集群生命周期 | `domain-07-platform-engineering/02-cluster-lifecycle-management.md` | 创建→运维→升级→回收全流程 |
-| 生产部署实践 | `domain-01-cluster-fundamentals/24-production-deployment-best-practices.md` | 企业级部署最佳实践 |
-| Deployment 模式 | `domain-02-workloads-applications/02-deployment-production-patterns.md` | 蓝绿/金丝雀/滚动更新详解 |
-| 生产架构原则 | `domain-01-cluster-fundamentals/01-production-architecture-design-principles.md` | 高可用/安全/可扩展设计 |
-| 故障排查大全 | `domain-10-troubleshooting-diagnostics/` | 各类故障排查手册 |
-| 网络深入 | `domain-03-networking-traffic/` | CNI、[[Service|Service]]、Ingress 详解 |
-| 存储深入 | `domain-04-storage-data/` | CSI、PV/PVC、存储类详解 |
-| 安全深入 | `domain-05-security-compliance/` | RBAC、NetworkPolicy、安全加固 |
-| 监控深入 | `domain-06-observability/` | Prometheus、Grafana、日志 |
+| 集群架构模式 | `集群基础/12-cluster-deployment-patterns.md` | 各种部署架构模式详解 |
+| 集群生命周期 | `平台工程/02-cluster-lifecycle-management.md` | 创建→运维→升级→回收全流程 |
+| 生产部署实践 | `集群基础/24-production-deployment-best-practices.md` | 企业级部署最佳实践 |
+| Deployment 模式 | `工作负载/02-deployment-production-patterns.md` | 蓝绿/金丝雀/滚动更新详解 |
+| 生产架构原则 | `集群基础/01-production-architecture-design-principles.md` | 高可用/安全/可扩展设计 |
+| 故障排查大全 | `故障诊断/` | 各类故障排查手册 |
+| 网络深入 | `网络/` | CNI、[[Service|Service]]、Ingress 详解 |
+| 存储深入 | `存储/` | CSI、PV/PVC、存储类详解 |
+| 安全深入 | `安全/` | RBAC、NetworkPolicy、安全加固 |
+| 监控深入 | `可观测性/` | Prometheus、Grafana、日志 |
 
 ---
 
@@ -199,24 +199,24 @@ Q1: 你的目标是什么？
 - [[entities/kubernetes.md|kubernetes]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

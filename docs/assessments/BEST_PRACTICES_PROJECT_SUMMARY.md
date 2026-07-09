@@ -78,7 +78,7 @@ prerequisites:
 
 **模板和标准**：
 - `templates/best-practice-template.md` - 最佳实践内容模板
-- `[[domain-04-storage-data/README.md|README]].md` - 最佳实践索引页面
+- `[[存储/README.md|README]].md` - 最佳实践索引页面
 - `best-practices/infrastructure/kubernetes-cluster.md` - 示例最佳实践文档
 
 **评估和计划**：
@@ -109,13 +109,13 @@ prerequisites:
 ### 具体示例
 
 **优秀示例**：
-- `domain-17-system-foundation/topic-dictionary/operations/operations-best-practices.md`：3035行，65个代码块，渐进式示例
-- `domain-03-networking-traffic/10-ebpf-security-applications.md`：4174行，架构图+部署清单
-- `domain-16-database-middleware/04-database-middleware-kubernetes.md`：决策树+问题排查
+- `系统基础/topic-dictionary/operations/operations-best-practices.md`：3035行，65个代码块，渐进式示例
+- `网络/10-ebpf-security-applications.md`：4174行，架构图+部署清单
+- `数据库中间件/04-database-middleware-kubernetes.md`：决策树+问题排查
 
 **待改进示例**：
-- `domain-07-platform-engineering/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
-- `domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
+- `平台工程/01-platform-ops-overview.md`：最佳实践原则过于简短（仅4点）
+- `AI基础设施/02-ai-agents/06-multi-agent-orchestration.md`：最佳实践与反模式分离，缺乏详细说明
 
 ## 改进措施
 

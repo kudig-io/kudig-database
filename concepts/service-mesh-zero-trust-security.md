@@ -18,10 +18,10 @@ tags:
 - identity
 tier: supporting
 sources:
-- domain-03-networking-traffic/02-service-mesh
-- domain-03-networking-traffic/05-service-mesh
-- domain-05-security-compliance/02-network-security
-- domain-05-security-compliance/01-identity-access
+- 网络/02-service-mesh
+- 网络/05-service-mesh
+- 安全/02-network-security
+- 安全/01-identity-access
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
@@ -32,7 +32,7 @@ relationships:
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+- target: '[[系统基础/topic-dictionary/networking/service-mesh.md]]'
   type: uses
 - target: '[[concepts/Cilium eBPF × 可观测性.md]]'
   type: uses
@@ -40,11 +40,11 @@ relationships:
 
 
 
-# [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|Service Mesh]] 零信任安全架构
+# [[系统基础/topic-dictionary/networking/service-mesh.md|Service Mesh]] 零信任安全架构
 
 ## 概述
 
-零信任（Zero Trust）的核心原则是"从不信任、始终验证"——无论流量来自集群外部还是内部，都必须经过认证和授权。Service Mesh（以 [[entities/istio.md|Istio]] 为代表）是零信任理念在 [[entities/kubernetes.md|Kubernetes]] 服务间通信层的具体技术实现：通过自动 mTLS、L7 授权策略和统一身份框架，将安全从"网络边界"下沉到"每次服务调用"。本页连接 domain-03-networking-traffic 的服务网格能力与 domain-05-security-compliance 的零信任安全框架，展示如何在 K8s 环境中构建服务网格驱动的零信任架构。
+零信任（Zero Trust）的核心原则是"从不信任、始终验证"——无论流量来自集群外部还是内部，都必须经过认证和授权。Service Mesh（以 [[entities/istio.md|Istio]] 为代表）是零信任理念在 [[entities/kubernetes.md|Kubernetes]] 服务间通信层的具体技术实现：通过自动 mTLS、L7 授权策略和统一身份框架，将安全从"网络边界"下沉到"每次服务调用"。本页连接 网络 的服务网格能力与 安全 的零信任安全框架，展示如何在 K8s 环境中构建服务网格驱动的零信任架构。
 
 ## 核心连接
 
@@ -574,10 +574,10 @@ flowchart TD
 
 ## 相关 Domain
 
-- domain-03-networking-traffic/02-service-mesh
-- domain-03-networking-traffic/05-service-mesh
-- domain-05-security-compliance/02-network-security
-- domain-05-security-compliance/01-identity-access
+- 网络/02-service-mesh
+- 网络/05-service-mesh
+- 安全/02-network-security
+- 安全/01-identity-access
 - [[concepts/服务网格 x 零信任安全.md|服务网格 x 零信任安全]]
 - Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
 

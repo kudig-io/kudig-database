@@ -89,9 +89,9 @@ description: '## 项目概述'
 - 99-linkerd-service-mesh-guide
 - 02-linkerd-enterprise-service-mesh
 - linkerd
-- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|RELEASE-NOTES-18.9]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|RELEASE-NOTES-18.8]]
-- [[domain-19-landscape-references/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|RELEASE-NOTES-18.7]]
+- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|RELEASE-NOTES-18.9]]
+- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|RELEASE-NOTES-18.8]]
+- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|RELEASE-NOTES-18.7]]
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-0.4
@@ -105,9 +105,9 @@ description: '## 项目概述'
 - [[skills/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

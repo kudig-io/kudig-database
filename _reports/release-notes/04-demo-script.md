@@ -66,7 +66,7 @@ prerequisites:
 
 **Agent 输出要点** (主持人边展示边讲解):
 
-1. "Agent 命中了 domain-01-cluster-fundamentals 的 etcd 深度文档, 1,042 行"
+1. "Agent 命中了 集群基础 的 etcd 深度文档, 1,042 行"
 2. "它给出了 Raft 共识协议的完整解析, 包括 Leader 选举和日志复制"
 3. "MVCC 数据模型, 解释了多版本并发控制的原理"
 4. "备份恢复的完整操作流程, 含 etcdctl 命令"
@@ -110,7 +110,7 @@ prerequisites:
 
 **Agent 输出要点**:
 
-1. "Agent 命中了 domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md"
+1. "Agent 命中了 应用模式/topic-application-architecture/06-fintech-architecture.md"
 2. "给出了完整的微服务拆分: 支付网关/风控引擎/账务系统/清算系统"
 3. "安全架构: HSM 密钥管理 + KMS + TDE 加密 + 审计日志"
 4. "多可用区部署方案, 含 Mermaid 架构图"

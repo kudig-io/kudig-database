@@ -1,7 +1,7 @@
 ---
 title: 'Day 2: Docker 网络 + 存储 + 安全'
 description: '# Day 2: Docker 网络 + 存储 + 安全'
-summary: '在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 的基础。'
+summary: '在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[系统基础/topic-cheat-sheet/k8s|k8s]] 的基础。'
 category: learning
 tags:
 - k8s
@@ -78,15 +78,15 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-13-container-runtime
+  - 容器运行时
 related_topics:
   - docker
   - networking
   - storage
   - security
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
-  - domain-13-container-runtime/04-docker-networking-deep-dive.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
+  - 容器运行时/04-docker-networking-deep-dive.md
 ---
 ```
 
@@ -96,7 +96,7 @@ related:
 
 ## 概述
 
-在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
+在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[系统基础/topic-cheat-sheet/k8s|k8s]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
 
 ---
 
@@ -144,17 +144,17 @@ related:
 ### 必读文档
 
 1. **Docker 网络深入**
-   - 文件: `../../domain-13-container-runtime/04-docker-networking-deep-dive.md`
+   - 文件: `../../容器运行时/04-docker-networking-deep-dive.md`
    - 重点: bridge、host、overlay 网络模式的区别和使用场景
 
 2. **Docker 存储**
-   - 文件: `../../domain-13-container-runtime/05-docker-storage-volumes.md`
+   - 文件: `../../容器运行时/05-docker-storage-volumes.md`
    - 重点: Volume vs Bind Mount vs tmpfs 的选择
 
 ### 补充阅读
 
 3. **Docker 安全最佳实践**
-   - 文件: `../../domain-13-container-runtime/07-docker-security-best-practices.md`
+   - 文件: `../../容器运行时/07-docker-security-best-practices.md`
    - 重点: 非 root 用户、只读文件系统、资源限制
 
 ---
@@ -618,9 +618,9 @@ docker run --rm -v my-data:/data -v $(pwd):/backup alpine tar czf /backup/data.t
 
 ## 延伸阅读 (可选)
 
-- `../../domain-13-container-runtime/06-docker-compose-orchestration.md` - Docker Compose 编排
-- `../../domain-13-container-runtime/08-container-runtime-variants.md` - 容器运行时变体
-- `../../domain-13-container-runtime/99-docker-commands-reference.md` - Docker 命令参考
+- `../../容器运行时/06-docker-compose-orchestration.md` - Docker Compose 编排
+- `../../容器运行时/08-container-runtime-variants.md` - 容器运行时变体
+- `../../容器运行时/99-docker-commands-reference.md` - Docker 命令参考
 
 ---
 

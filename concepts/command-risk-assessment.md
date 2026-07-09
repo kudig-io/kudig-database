@@ -112,9 +112,9 @@ kubectl delete namespace prod-app
 ## 7. 相关参考
 
 - [[command-doc-map|命令文档映射]]
-- [[domain-05-security-compliance/README|安全与合规]]
-- [[domain-09-reliability-engineering/README|可靠性工程（备份/恢复/DR）]]
-- [[domain-11-production-operations/README|生产运维]]
+- [[安全/README|安全与合规]]
+- [[可靠性/README|可靠性工程（备份/恢复/DR）]]
+- [[生产运维/README|生产运维]]
 
 ```
 

@@ -122,8 +122,8 @@ last_updated: 2026-06-26
 ### 例外说明
 
 - 2 个文件因 macOS `com.apple.provenance` 扩展属性保护无法写入：
-  - `domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md`
-  - `domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md`
+  - `存储/03-distributed-storage/01-velero-backup-recovery.md`
+  - `存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md`
 - 需用户手动在 Finder 中解除保护或运行 `xattr -c <file>` 后补充 summary
 
 ### 输出报告
@@ -187,7 +187,7 @@ last_updated: 2026-06-26
 
 只针对近期新增、未与主知识图谱连接的目标目录：
 - `_reports/`
-- `domain-11-production-operations/ticket-cases/`
+- `生产运维/ticket-cases/`
 
 ### 成果
 
@@ -231,7 +231,7 @@ last_updated: 2026-06-26
 
 ### 说明
 
-- 2,425 个 orphan 中，大部分是 domain-19-landscape-references 的发布说明归档，属于预期 orphan
+- 2,425 个 orphan 中，大部分是 生态参考 的发布说明归档，属于预期 orphan
 - Missing summary 是历史遗留问题，因为早期文档未要求 summary 字段
 - 本次未自动修复所有问题，仅生成审计报告供后续决策
 

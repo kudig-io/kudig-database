@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 为指定目录中的 orphan 页面添加交叉链接。
-默认处理 _reports/ 和 domain-11-production-operations/ticket-cases/ 中的 orphan 页面。
+默认处理 _reports/ 和 生产运维/ticket-cases/ 中的 orphan 页面。
 """
 
 import re
@@ -205,7 +205,7 @@ def main():
 
     target_dirs = [
         vault / '_reports',
-        vault / 'domain-11-production-operations/ticket-cases',
+        vault / '生产运维/ticket-cases',
     ]
 
     print("Building page registry...")

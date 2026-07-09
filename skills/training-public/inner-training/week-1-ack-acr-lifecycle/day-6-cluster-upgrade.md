@@ -71,10 +71,10 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-07-platform-engineering
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 集群基础
+  - 平台工程
+  - 云厂商
+  - 故障诊断
 related_topics:
   - cluster-lifecycle-management
   - upgrade-paths-strategy
@@ -143,15 +143,15 @@ ACK 版本升级路径:
 ### 必读文档
 
 1. **K8S 版本升级策略**
-   - 文件: `../../../domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md`
+   - 文件: `../../../集群基础/07-upgrade-paths-strategy.md`
    - 重点: 版本兼容性、升级路径规划
 
 2. **升级与迁移策略**
-   - 文件: `../../../domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md`
+   - 文件: `../../../集群基础/18-upgrade-migration-strategy.md`
    - 重点: 升级风险评估、回滚方案
 
 3. **ACK 集群管理**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`
    - 重点: ACK 特有的升级流程和注意事项
 
 ---
@@ -521,9 +521,9 @@ Day 7 将学习集群证书管理，理解证书类型、过期处理和轮换�
 
 ## 延伸阅读
 
-- [K8s 版本升级策略](../../domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md)
-- [升级与迁移策略](../../domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md)
-- [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
+- [K8s 版本升级策略](../../集群基础/07-upgrade-paths-strategy.md)
+- [升级与迁移策略](../../集群基础/18-upgrade-migration-strategy.md)
+- [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 
 <!-- risk-assessed -->

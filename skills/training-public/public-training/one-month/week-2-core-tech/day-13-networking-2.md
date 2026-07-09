@@ -81,16 +81,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 故障诊断
 related_topics:
   - networking
   - ingress
   - networkpolicy
   - tls
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-14-storage-practice.md
-  - domain-03-networking-traffic/19-ingress-fundamentals.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-14-storage-practice.md
+  - 网络/19-ingress-fundamentals.md
 ---
 ```
 
@@ -111,19 +111,19 @@ related:
 ### 必读文档
 
 1. **Ingress 基础**
-   - 文件: `../../domain-03-networking-traffic/19-ingress-fundamentals.md`
+   - 文件: `../../网络/19-ingress-fundamentals.md`
    - 重点: Ingress 资源和控制器的关系
 
 2. **Nginx Ingress 完整指南**
-   - 文件: `../../domain-03-networking-traffic/21-nginx-ingress-complete-guide.md`
+   - 文件: `../../网络/21-nginx-ingress-complete-guide.md`
    - 重点: 配置方法、常用注解
 
 3. **Ingress TLS 证书**
-   - 文件: `../../domain-03-networking-traffic/22-ingress-tls-certificate.md`
+   - 文件: `../../网络/22-ingress-tls-certificate.md`
    - 重点: TLS 配置、证书管理
 
 4. **NetworkPolicy 深入实践**
-   - 文件: `../../domain-03-networking-traffic/16-networkpolicy-deep-practice.md`
+   - 文件: `../../网络/16-networkpolicy-deep-practice.md`
    - 重点: 网络隔离策略编写
 
 ---

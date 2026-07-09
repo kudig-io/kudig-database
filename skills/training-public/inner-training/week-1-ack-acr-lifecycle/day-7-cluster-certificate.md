@@ -75,10 +75,10 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-05-security-compliance
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 安全
+  - 集群基础
+  - 故障诊断
+  - 云厂商
 related_topics:
   - certificate-management
   - security-architecture
@@ -490,15 +490,15 @@ ACK 托管版的管控面证书轮换是滚动进行的，不会导致服务中�
 
 ## 延伸阅读
 
-- [证书管理详解](../../domain-05-security-compliance/10-certificate-management.md)
-- [安全架构总览](../../domain-01-cluster-fundamentals/14-security-architecture.md)
-- [证书排障指南](../../domain-10-troubleshooting-diagnostics/13-certificate-troubleshooting.md)
-- [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md)
-- [kubelet TLS Bootstrap](../../domain-05-security-compliance/02-kubelet-tls-bootstrap.md)
+- [证书管理详解](../../安全/10-certificate-management.md)
+- [安全架构总览](../../集群基础/14-security-architecture.md)
+- [证书排障指南](../../故障诊断/13-certificate-troubleshooting.md)
+- [ACK 集群管理](../../云厂商/04-alicloud-ack/210-ack-cluster-management.md)
+- [kubelet TLS Bootstrap](../../安全/02-kubelet-tls-bootstrap.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -78,15 +78,15 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-13-container-runtime
-  - domain-17-system-foundation
+  - 容器运行时
+  - 系统基础
 related_topics:
   - docker
   - container
   - image
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-1-foundation/day-2-docker-advanced.md
-  - domain-13-container-runtime/01-docker-fundamentals-concepts.md
+  - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-2-docker-advanced.md
+  - 容器运行时/01-docker-fundamentals-concepts.md
 ---
 ```
 
@@ -398,12 +398,12 @@ containerd 是从 Docker 中拆分出来的容器运行时组件。Docker 的架
 
 ## 延伸阅读
 
-- [Docker 架构总览](../../domain-13-container-runtime/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../domain-13-container-runtime/03-docker-container-lifecycle.md)
-- [Docker 镜像构建优化](../../domain-13-container-runtime/02-docker-image-build-optimization.md)
-- [Docker 网络深入](../../domain-13-container-runtime/04-docker-networking-deep-dive.md)
-- [Docker 安全最佳实践](../../domain-13-container-runtime/07-docker-security-best-practices.md)
-- [Docker 命令参考](../../domain-13-container-runtime/99-docker-commands-reference.md)
+- [Docker 架构总览](../../容器运行时/01-docker-architecture-overview.md)
+- [Docker 容器生命周期](../../容器运行时/03-docker-container-lifecycle.md)
+- [Docker 镜像构建优化](../../容器运行时/02-docker-image-build-optimization.md)
+- [Docker 网络深入](../../容器运行时/04-docker-networking-deep-dive.md)
+- [Docker 安全最佳实践](../../容器运行时/07-docker-security-best-practices.md)
+- [Docker 命令参考](../../容器运行时/99-docker-commands-reference.md)
 
 ```
 

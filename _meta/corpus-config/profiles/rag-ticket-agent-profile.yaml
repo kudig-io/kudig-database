@@ -12,46 +12,46 @@ use_case: "工单分类、诊断推理、修复建议、客户回复、升级判
 
 # 第一层：工单闭环样本（最高优先级）
 ticket_cases:
-  - path: domain-11-production-operations/ticket-cases/
+  - path: 生产运维/ticket-cases/
     priority: critical
     chunking: by_section
     note: "工单描述 → 分类 → 诊断 → 修复 → 验证 → 回复，最贴近工单场景"
 
 # 第二层：工单处理专属知识
 workflow:
-  - path: domain-11-production-operations/ticket-routing-rules.md
+  - path: 生产运维/ticket-routing-rules.md
     priority: critical
     chunking: by_h2
-  - path: domain-11-production-operations/escalation-playbook.md
+  - path: 生产运维/escalation-playbook.md
     priority: critical
     chunking: by_h2
-  - path: domain-11-production-operations/reply-templates/
+  - path: 生产运维/reply-templates/
     priority: high
     chunking: by_section
 
 # 第三层：核心诊断骨架
 core:
-  - path: domain-10-troubleshooting-diagnostics/topic-fta/list/
+  - path: 故障诊断/topic-fta/list/
     priority: critical
     chunking: by_h3
     note: "44 个组件故障树，推理骨架"
-  - path: domain-10-troubleshooting-diagnostics/topic-skills/skill-set/
+  - path: 故障诊断/topic-skills/skill-set/
     priority: critical
     chunking: by_section
     note: "17 个诊断-修复 Skill"
-  - path: domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
+  - path: 故障诊断/topic-structural-trouble-shooting/
     priority: high
     chunking: by_h2
 
 # 第四层：阿里云 / 专有云知识（优先于其他云厂商）
 alibaba_cloud:
-  - path: domain-12-cloud-providers/01-alibaba-cloud/
+  - path: 云厂商/01-alibaba-cloud/
     priority: high
     chunking: by_h2
-  - path: domain-03-networking-traffic/topic-terway/
+  - path: 网络/topic-terway/
     priority: high
     chunking: by_h2
-  - path: domain-04-storage-data/01-k8s-storage/
+  - path: 存储/01-k8s-storage/
     priority: high
     chunking: by_h2
     note: "云盘 CSI、NAS、OSS 与专有云存储对接"
@@ -70,37 +70,37 @@ distilled:
 
 # 第六层：源文档层（深度兜底）
 source_docs:
-  - path: domain-01-cluster-fundamentals/
+  - path: 集群基础/
     priority: medium
     chunking: by_h2
-  - path: domain-02-workloads-applications/
+  - path: 工作负载/
     priority: medium
     chunking: by_h2
-  - path: domain-03-networking-traffic/
+  - path: 网络/
     priority: medium
     chunking: by_h2
-  - path: domain-04-storage-data/
+  - path: 存储/
     priority: medium
     chunking: by_h2
-  - path: domain-05-security-compliance/
+  - path: 安全/
     priority: medium
     chunking: by_h2
-  - path: domain-06-observability/
+  - path: 可观测性/
     priority: medium
     chunking: by_h2
-  - path: domain-07-platform-engineering/
+  - path: 平台工程/
     priority: medium
     chunking: by_h2
-  - path: domain-08-release-change-management/
+  - path: 发布变更/
     priority: medium
     chunking: by_h2
-  - path: domain-09-reliability-engineering/
+  - path: 可靠性/
     priority: medium
     chunking: by_h2
-  - path: domain-11-production-operations/
+  - path: 生产运维/
     priority: medium
     chunking: by_h2
-  - path: domain-13-container-runtime/
+  - path: 容器运行时/
     priority: low
     chunking: by_h2
 
@@ -126,29 +126,29 @@ exclude:
   - ".obsidian/"
 
   # 非阿里云云厂商（降低优先级，必要时只保留 overview）
-  - "domain-12-cloud-providers/02-aws-eks/"
-  - "domain-12-cloud-providers/03-google-cloud-gke/"
-  - "domain-12-cloud-providers/04-azure-aks/"
-  - "domain-12-cloud-providers/06-tencent-tke/"
-  - "domain-12-cloud-providers/07-huawei-cce/"
-  - "domain-12-cloud-providers/08-multi-cloud/"
-  - "domain-12-cloud-providers/09-ucloud-uk8s/"
-  - "domain-12-cloud-providers/10-ibm-iks/"
+  - "云厂商/02-aws-eks/"
+  - "云厂商/03-google-cloud-gke/"
+  - "云厂商/04-azure-aks/"
+  - "云厂商/06-tencent-tke/"
+  - "云厂商/07-huawei-cce/"
+  - "云厂商/08-multi-cloud/"
+  - "云厂商/09-ucloud-uk8s/"
+  - "云厂商/10-ibm-iks/"
 
   # 低信噪比内容
   - "**/*-archive/"
   - "**/archive/"
-  - "domain-11-production-operations/topic-best-practices/"
-  - "domain-11-production-operations/topic-k8s-lecturer/"
-  - "domain-11-production-operations/topic-learn/"
-  - "domain-11-production-operations/topic-presentations/"
-  - "domain-11-production-operations/topic-publish/"
-  - "domain-11-production-operations/journal/"
-  - "domain-11-production-operations/projects/"
-  - "domain-19-landscape-references/topic-release-notes/"
-  - "domain-19-landscape-references/topic-index/"
-  - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
-  - "domain-17-system-foundation/topic-dictionary/"
+  - "生产运维/topic-best-practices/"
+  - "生产运维/topic-k8s-lecturer/"
+  - "生产运维/topic-learn/"
+  - "生产运维/topic-presentations/"
+  - "生产运维/topic-publish/"
+  - "生产运维/journal/"
+  - "生产运维/projects/"
+  - "生态参考/topic-release-notes/"
+  - "生态参考/topic-index/"
+  - "生态参考/01-cncf-landscape/sandbox/"
+  - "系统基础/topic-dictionary/"
   - ".zread/"
   - ".wiki-meta/"
   - "_archives/"

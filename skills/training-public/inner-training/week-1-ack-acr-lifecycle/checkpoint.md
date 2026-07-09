@@ -69,8 +69,8 @@ audience:
   - ACK beginners
 estimated_read_time: 30min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - day-1-ack-acr-sr
   - day-2-ack-sdk-api
@@ -700,14 +700,14 @@ kubectl get nodes
 
 ## 延伸阅读
 
-- [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 版本升级策略](../../domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md)
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+- [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [K8s 版本升级策略](../../集群基础/07-upgrade-paths-strategy.md)
+- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

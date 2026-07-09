@@ -46,8 +46,8 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 related_domains:
-- domain-12-cloud-providers
-- domain-01-cluster-fundamentals
+- 云厂商
+- 集群基础
 related_topics:
 - reading-sequence
 - commands-cheatsheet

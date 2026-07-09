@@ -76,13 +76,13 @@ audience:
   - 运维工程师
 estimated_read_time: 60min
 related_domains:
-  - domain-03-networking-traffic
-  - domain-04-storage-data
-  - domain-10-troubleshooting-diagnostics
+  - 网络
+  - 存储
+  - 故障诊断
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-23-ingress
-  - domain-11-production-operations/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-22-service-basics
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-23-ingress
+  - 生产运维/topic-learn/inner-training/week-4-network-storage/day-26-storage-create-delete
 id: WEEK4-CHECKPOINT
 topic: training
 type: checkpoint
@@ -654,7 +654,7 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

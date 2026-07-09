@@ -82,16 +82,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-02-workloads-applications
-  - domain-10-troubleshooting-diagnostics
+  - 工作负载
+  - 故障诊断
 related_topics:
   - workloads
   - deployment
   - statefulset
   - daemonset
 related:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-2-core-tech/day-11-workloads-2.md
-  - domain-02-workloads-applications/02-deployment-production-patterns.md
+  - 生产运维/topic-learn/public-training/one-month/week-2-core-tech/day-11-workloads-2.md
+  - 工作负载/02-deployment-production-patterns.md
 ---
 ```
 
@@ -112,15 +112,15 @@ related:
 ### 必读文档
 
 1. **Deployment 生产模式**
-   - 文件: `../../domain-02-workloads-applications/02-deployment-production-patterns.md`
+   - 文件: `../../工作负载/02-deployment-production-patterns.md`
    - 重点: 滚动更新、回滚、蓝绿、金丝雀
 
 2. **StatefulSet 高级操作**
-   - 文件: `../../domain-02-workloads-applications/03-statefulset-advanced-operations.md`
+   - 文件: `../../工作负载/03-statefulset-advanced-operations.md`
    - 重点: 有状态应用、稳定网络标识、有序部署
 
 3. **DaemonSet 管理**
-   - 文件: `../../domain-02-workloads-applications/04-daemonset-management.md`
+   - 文件: `../../工作负载/04-daemonset-management.md`
    - 重点: 每节点一个 Pod、日志采集、监控代理
 
 ---
@@ -412,7 +412,7 @@ Day 11 将学习 Pod 生命周期、资源管理和自动扩缩容 (HPA/VPA)。
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

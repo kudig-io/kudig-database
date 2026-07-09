@@ -76,13 +76,13 @@ audience:
   - SRE工程师
 estimated_read_time: 20min
 related_domains:
-  - domain-01-cluster-fundamentals
-  - domain-05-security-compliance
-  - domain-12-cloud-providers
+  - 集群基础
+  - 安全
+  - 云厂商
 related_topics:
-  - domain-11-production-operations/topic-learn/inner-training/inner-one-month-training
-  - domain-11-production-operations/topic-learn/inner-training/week-1-ack-acr-lifecycle
-  - domain-11-production-operations/topic-learn/inner-training/week-2-security-monitoring
+  - 生产运维/topic-learn/inner-training/inner-one-month-training
+  - 生产运维/topic-learn/inner-training/week-1-ack-acr-lifecycle
+  - 生产运维/topic-learn/inner-training/week-2-security-monitoring
 id: INNER-TRAINING-INDEX-001
 topic: training
 type: training-plan

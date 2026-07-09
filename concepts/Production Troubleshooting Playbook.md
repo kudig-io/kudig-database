@@ -33,7 +33,7 @@ prerequisites:
 - kubectl-basics
 - etcd-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+- target: '[[系统基础/topic-dictionary/networking/ingress.md]]'
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
@@ -88,7 +88,7 @@ This playbook synthesizes information from the [[entities/kubernetes.md|Kubernet
 | DNS resolution failure | TE-4 -> IE-4.1 | `kubectl get ep kube-dns -n kube-system` | CoreDNS pods down, endpoint missing |
 | Pod-to-Pod connectivity | TE-4 -> IE-4.2 | `kubectl exec -it <pod> -- curl <target>` | NetworkPolicy blocking, CNI issue |
 | Service unreachable | TE-2 -> IE-2.2 | `kubectl get ep <service>` | Endpoint not populated, selector wrong |
-| External access failure | TE-2 -> IE-2.3 | `kubectl get [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|ingress]]` | Ingress config error, cert expiry |
+| External access failure | TE-2 -> IE-2.3 | `kubectl get [[系统基础/topic-dictionary/networking/ingress.md|ingress]]` | Ingress config error, cert expiry |
 
 ### Tier 4: Storage Diagnosis (15-30 Minutes)
 
@@ -152,7 +152,7 @@ After every P0/P1 incident:
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+- [[系统基础/topic-dictionary/networking/service.md|Service]]
 
 
 <!-- risk-assessed -->

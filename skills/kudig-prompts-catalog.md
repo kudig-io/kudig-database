@@ -57,11 +57,11 @@ prerequisites:
 
 | 用户查询关键词 | 路由目标 |
 |----------------|----------|
-| Pod 启动失败、CrashLoopBackOff、Pending | domain-02-workloads-applications → domain-10-troubleshooting-diagnostics/topic-fta/pod-fta |
-| etcd、控制平面、apiserver | domain-01-cluster-fundamentals → domain-10-troubleshooting-diagnostics/topic-fta/apiserver-fta |
-| 网络不通、[[Service|Service]]、DNS | domain-03-networking-traffic → domain-10-troubleshooting-diagnostics/topic-fta/dns-fta |
-| 存储、PV、PVC | domain-04-storage-data → domain-10-troubleshooting-diagnostics/topic-fta/csi-fta |
-| 权限、RBAC、认证 | domain-05-security-compliance → domain-10-troubleshooting-diagnostics/topic-fta/rbac-fta |
+| Pod 启动失败、CrashLoopBackOff、Pending | 工作负载 → 故障诊断/topic-fta/pod-fta |
+| etcd、控制平面、apiserver | 集群基础 → 故障诊断/topic-fta/apiserver-fta |
+| 网络不通、[[Service|Service]]、DNS | 网络 → 故障诊断/topic-fta/dns-fta |
+| 存储、PV、PVC | 存储 → 故障诊断/topic-fta/csi-fta |
+| 权限、RBAC、认证 | 安全 → 故障诊断/topic-fta/rbac-fta |
 
 ## 架构评审 Prompt
 
@@ -88,15 +88,15 @@ prerequisites:
 ## Related
 
 - [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|dns-fta]] — dns-fta
+- [[故障诊断/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
+- [[故障诊断/topic-fta/list/dns-fta.md|dns-fta]] — dns-fta
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
 - observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
-- [[domain-06-observability/01-overview/25-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
+- [[可观测性/01-overview/25-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
 - [[skills/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
-- [[domain-01-cluster-fundamentals/03-control-plane/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
-- [[domain-07-platform-engineering/operate/15-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
+- [[集群基础/03-control-plane/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
+- [[平台工程/operate/15-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
 
 
 <!-- risk-assessed -->

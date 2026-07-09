@@ -79,8 +79,8 @@ description: '## 项目概述'
 - spiffe
 - [[entities/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -102,9 +102,9 @@ last_updated: 2026-05-24
 
 | Domain | README | Index | MOC | 导航评级 |
 |---|---|---|---|---|
-| domain-05-security-compliance | ✅ | ✅ | ❌ | ⚠️ |
-| domain-06-observability | ✅ | ✅ | ❌ | ⚠️ |
-| domain-10-troubleshooting-diagnostics | ✅ | ✅ | ✅ | ✅ |
+| 安全 | ✅ | ✅ | ❌ | ⚠️ |
+| 可观测性 | ✅ | ✅ | ❌ | ⚠️ |
+| 故障诊断 | ✅ | ✅ | ✅ | ✅ |
 | **其余 17 个 Domain** | ✅ | ❌ | ❌ | ❌ |
 
 **生产影响**: 人类专家进入任意 Domain（除 troubleshooting 外），只能看到一个 README，无法快速浏览该 Domain 下的所有主题和文件。在 5,570 个文件的语料库中，没有索引意味着人类专家需要依靠搜索或文件树来定位内容，效率极低。

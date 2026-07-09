@@ -96,8 +96,8 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 - [[entities/spiderpool.md|Spiderpool]]
 - [[entities/k8gb.md|K8GB]]
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -67,9 +67,9 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 集群基础
+  - 故障诊断
 related_topics:
   - cluster-creation
   - cluster-deletion
@@ -555,9 +555,9 @@ aliyun slb DeleteLoadBalancer --LoadBalancerId <slb-id>
 
 ## 延伸阅读
 
-- [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+- [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
 
 
 <!-- risk-assessed -->

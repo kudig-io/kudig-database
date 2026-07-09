@@ -111,6 +111,6 @@ prerequisites:
 - [[concepts/service-mesh-architecture.md|Service Mesh Architecture]]
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/11-network-cleanup.md|11-network-cleanup]]
+- [[平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md|11-network-cleanup]]
 
 <!-- risk-assessed -->

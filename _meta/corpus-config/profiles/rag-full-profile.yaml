@@ -8,84 +8,84 @@ description: "KUDIG-DATABASE 全量语料导入配置（信噪比优化版）"
 
 include:
   # Tier 1: 核心技术域（高信噪比，完整保留）
-  - path: "domain-01-cluster-fundamentals/"
+  - path: "集群基础/"
     chunking: by_h2
     priority: high
-  - path: "domain-02-workloads-applications/"
+  - path: "工作负载/"
     chunking: by_h2
     priority: high
-  - path: "domain-03-networking-traffic/"
+  - path: "网络/"
     chunking: by_h2
     priority: high
-  - path: "domain-04-storage-data/"
+  - path: "存储/"
     chunking: by_h2
     priority: high
-  - path: "domain-05-security-compliance/"
+  - path: "安全/"
     chunking: by_h2
     priority: high
-  - path: "domain-06-observability/"
+  - path: "可观测性/"
     chunking: by_h2
     priority: high
 
   # Tier 2: 平台与工程域（高信噪比）
-  - path: "domain-07-platform-engineering/"
+  - path: "平台工程/"
     chunking: by_h2
     priority: high
-  - path: "domain-08-release-change-management/"
+  - path: "发布变更/"
     chunking: by_h2
     priority: high
-  - path: "domain-09-reliability-engineering/"
+  - path: "可靠性/"
     chunking: by_h2
     priority: high
 
   # Tier 3: 运维与诊断（核心资产，但排除 archive）
-  - path: "domain-10-troubleshooting-diagnostics/"
+  - path: "故障诊断/"
     chunking: by_h2
     priority: high
 
   # Tier 4: 生产运维（整域保留；培训/讲师/演示/发布策略由下方 exclude 精确剔除，
   #        从而保留 ticket-cases、reply-templates、on-call/escalation playbook 等高价值运维内容）
-  - path: "domain-11-production-operations/"
+  - path: "生产运维/"
     chunking: by_h2
     priority: high
 
   # Tier 5: 云厂商、运行时、AI Infra（按需保留）
-  - path: "domain-12-cloud-providers/"
+  - path: "云厂商/"
     chunking: by_h2
     priority: medium
-  - path: "domain-13-container-runtime/"
+  - path: "容器运行时/"
     chunking: by_h2
     priority: medium
-  - path: "domain-14-ai-ml-infra/"
+  - path: "AI基础设施/"
     chunking: by_h2
     priority: medium
-  - path: "domain-15-specialized-tech/"
+  - path: "专项技术/"
     chunking: by_h2
     priority: medium
-  - path: "domain-16-database-middleware/"
+  - path: "数据库中间件/"
     chunking: by_h2
     priority: medium
 
   # Tier 6: 基础与参考域（严格筛选）
-  - path: "domain-17-system-foundation/"
+  - path: "系统基础/"
     chunking: by_h2
     priority: medium
     note: "Linux 基础 + topic-dictionary 术语语料（565 文件）"
-  - path: "domain-18-manifests-patterns/"
+  - path: "清单模式/"
     chunking: by_h2
     priority: medium
-  - path: "domain-19-landscape-references/01-cncf-landscape/"
+  - path: "生态参考/01-cncf-landscape/"
     chunking: by_h3
     priority: low
     note: "仅保留 Graduated/Incubating，Sandbox 知识密度过低"
-  - path: "domain-19-landscape-references/02-papers/"
+  - path: "生态参考/02-papers/"
     chunking: by_h2
     priority: medium
-  - path: "domain-19-landscape-references/topic-index/"
+  - path: "生态参考/topic-index/"
     chunking: by_h2
     priority: medium
     note: "知识图谱聚合页（25 个，均有实质内容），被正文大量引用"
-  - path: "domain-20-application-patterns/"
+  - path: "应用模式/"
     chunking: by_h2
     priority: low
 
@@ -134,21 +134,21 @@ exclude:
   - "**/archive/"
 
   # 低信噪比：培训、讲师、演示、发布策略
-  - "domain-11-production-operations/topic-best-practices/"
-  - "domain-11-production-operations/topic-k8s-lecturer/"
-  - "domain-11-production-operations/topic-learn/"
-  - "domain-11-production-operations/topic-presentations/"
-  - "domain-11-production-operations/topic-publish/"
-  - "domain-11-production-operations/journal/"
-  - "domain-11-production-operations/projects/"
+  - "生产运维/topic-best-practices/"
+  - "生产运维/topic-k8s-lecturer/"
+  - "生产运维/topic-learn/"
+  - "生产运维/topic-presentations/"
+  - "生产运维/topic-publish/"
+  - "生产运维/journal/"
+  - "生产运维/projects/"
 
   # 低信噪比：版本更新日志（时效性强，知识密度低）
-  - "domain-19-landscape-references/topic-release-notes/"
+  - "生态参考/topic-release-notes/"
   # 注：topic-index/ 保留（25 个知识图谱聚合页，均为实质内容，且被正文大量 [[引用]]，
   #     排除会造成 ~1550 处断链）
 
   # 低信噪比：CNCF Sandbox 项目（1600+ 文件中大部分为一句话简介）
-  - "domain-19-landscape-references/01-cncf-landscape/sandbox/"
+  - "生态参考/01-cncf-landscape/sandbox/"
 
   # domain-17 topic-dictionary/ 已纳入导出（565 个术语文件，361 个与 entities/ 无重叠，
   # 平均 199 行/文件，总计 ~450K tokens 结构化术语语料）

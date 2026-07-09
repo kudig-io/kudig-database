@@ -74,11 +74,11 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-06-observability
+  - 可观测性
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - domain-11-production-operations/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-18-observability-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
+  - 生产运维/topic-learn/public-training/one-month/projects/p3-observability-fault-drill
 ---
 
 # Day 17: 可观测性 - 监控 + Prometheus
@@ -428,15 +428,15 @@ Target down 意味着 Prometheus 无法从目标拉取指标。排查步骤：1)
 
 ## 延伸阅读
 
-- [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
-- [监控指标系统](../../domain-06-observability/02-monitoring-metrics-system.md)
-- [Prometheus 生产级配置](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
-- [告警管理](../../domain-06-observability/05-alerting-management.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
+- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
+- [监控指标系统](../../可观测性/02-monitoring-metrics-system.md)
+- [Prometheus 生产级配置](../../可观测性/10-monitoring-metrics-prometheus.md)
+- [告警管理](../../可观测性/05-alerting-management.md)
+- [SLO/SLI 体系](../../可观测性/18-slo-sli-system.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -46,7 +46,7 @@ title: "Inspektor Gadget"
 category: entities
 summary: "Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试和检查 Kubernetes 集群中的应用程序。它利用 eBPF 在内核级别收集数据，提供对容器和 Pod 的深入可观测性，无需修改应用程序代码或添加 sidecar。"
 tags: k8s, cncf, observability, inspektor-gadget]
-sources: ["docs/domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md", "domain-19-landscape-references/sandbox/inspektor-gadget/inspektor-gadget.md"]
+sources: ["docs/生态参考/sandbox/inspektor-gadget/inspektor-gadget.md", "生态参考/sandbox/inspektor-gadget/inspektor-gadget.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -99,7 +99,7 @@ Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

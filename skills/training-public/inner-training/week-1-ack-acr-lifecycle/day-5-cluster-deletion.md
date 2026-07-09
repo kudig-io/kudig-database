@@ -69,9 +69,9 @@ audience:
   - Platform engineers
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 集群基础
+  - 故障诊断
 related_topics:
   - cluster-lifecycle-management
   - cluster-creation
@@ -152,11 +152,11 @@ related_topics:
 ### 必读文档
 
 1. **ACK 集群管理**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`
    - 重点: 集群删除相关的注意事项
 
 2. **K8S 集群架构**
-   - 文件: `../../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md`
+   - 文件: `../../../集群基础/01-kubernetes-architecture-overview.md`
    - 重点: 理解删除集群涉及的组件和资源
 
 ---
@@ -504,9 +504,9 @@ Day 6 将学习集群升级策略，掌握版本升级的操作步骤和风险�
 
 ## 延伸阅读
 
-- [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+- [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
+- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
+- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
 
 
 <!-- risk-assessed -->

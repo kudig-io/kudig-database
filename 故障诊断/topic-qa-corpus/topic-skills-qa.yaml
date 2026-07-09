@@ -1,0 +1,1076 @@
+domain: topic-skills
+total_questions: 215
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 的「概述」章节。
+  source: 故障诊断/topic-skills/01-node-notready.md
+  section: 概述
+- type: concept
+  question: 在 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/01-node-notready.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: kubectl get nodes --no-headers | awk ''{print
+    $2}'' | sort | u?'
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 中的操作步骤。
+  source: 故障诊断/topic-skills/01-node-notready.md
+  command: kubectl get nodes --no-headers | awk '{print $2}' | sort | uniq -c
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: kubectl get nodes --no-headers | grep
+    "NotReady" | grep -E "?'
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 中的操作步骤。
+  source: 故障诊断/topic-skills/01-node-notready.md
+  command: kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master"
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: NODE_NAME="<notready-node>"?'
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 中的操作步骤。
+  source: 故障诊断/topic-skills/01-node-notready.md
+  command: NODE_NAME="<notready-node>"
+- type: troubleshooting
+  question: 如何排查 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 的故障排查章节。
+  source: 故障诊断/topic-skills/01-node-notready.md
+- type: comparison
+  question: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/01-node-notready.md 中的对比分析。
+  source: 故障诊断/topic-skills/01-node-notready.md
+- type: concept
+  question: 在 Pod CrashLoopBackOff & OOMKilled 诊断与修复 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 的「概述」章节。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  section: 概述
+- type: concept
+  question: 在 Pod CrashLoopBackOff & OOMKilled 诊断与修复 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get pods -n <namespace> -l <label-selector> -o wide?'
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  command: kubectl get pods -n <namespace> -l <label-selector> -o wide
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get pod <pod> -n <namespace> -o jsonpath=''{.metadata?'
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  command: kubectl get pod <pod> -n <namespace> -o jsonpath='{.metadata.ownerReferences[0].kind}/{.metadata.own
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get deployment <deployment> -n <namespace> -o jsonpa?'
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  command: 'kubectl get deployment <deployment> -n <namespace> -o jsonpath=''Ready: {.status.readyReplicas}/{.sta'
+- type: best_practice
+  question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
+  answer: 1) 临时增大 memory limits 到 `<new-limit>`；2) 安排应用团队修复泄漏点 `<leak-location>`。是否批准？"
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+- type: best_practice
+  question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
+  answer: 新 limit = 当前峰值内存 × 2（根据泄漏速率调整）
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+- type: troubleshooting
+  question: 如何排查 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的故障?
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 的故障排查章节。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+- type: comparison
+  question: Pod CrashLoopBackOff & OOMKilled 诊断与修复 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md 中的对比分析。
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+- type: concept
+  question: 在 Pod Pending 调度失败诊断与修复 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 的「概述」章节。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+  section: 概述
+- type: concept
+  question: 在 Pod Pending 调度失败诊断与修复 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl get pods -n <namespace> --field-selector status.phas?'
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 中的操作步骤。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+  command: kubectl get pods -n <namespace> --field-selector status.phase=Pending --no-headers | wc -l
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl get pods -n <namespace> --field-selector status.phas?'
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 中的操作步骤。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+  command: kubectl get pods -n <namespace> --field-selector status.phase=Pending -o custom-columns=NAME:.metada
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-?'
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 中的操作步骤。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+  command: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-server not available, skip"
+- type: troubleshooting
+  question: 如何排查 Pod Pending 调度失败诊断与修复 相关的故障?
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 的故障排查章节。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+- type: comparison
+  question: Pod Pending 调度失败诊断与修复 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/03-pod-pending.md 中的对比分析。
+  source: 故障诊断/topic-skills/03-pod-pending.md
+- type: concept
+  question: 在 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+  section: 概述
+- type: concept
+  question: 在 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl exec -n kube-system deploy/coredns
+    -- nslookup kuber?'
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+  command: kubectl exec -n kube-system deploy/coredns -- nslookup kubernetes.default.svc.cluster.local 2>/dev/n
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl get pods -n kube-system -l
+    k8s-app=kube-dns -o wide?'
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+  command: kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl run dns-test-default --image=busybox:1.36
+    --rm -it -?'
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+  command: kubectl run dns-test-default --image=busybox:1.36 --rm -it --restart=Never -n default -- nslookup ku
+- type: best_practice
+  question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: 每 500-1000 Pod 增加 1 个 CoreDNS 副本
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+- type: best_practice
+  question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: 生产环境 CoreDNS 副本数 ≥ 2，大规模集群（>100 nodes）建议 3-5 个副本
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+- type: troubleshooting
+  question: 如何排查 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+- type: comparison
+  question: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/04-dns-resolution-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
+- type: concept
+  question: 在 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 的「概述」章节。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+  section: 概述
+- type: concept
+  question: 在 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get svc <service>
+    -n <namespace> -o wide?'
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+  command: kubectl get svc <service> -n <namespace> -o wide
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get endpoints
+    <service> -n <namespace>?'
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+  command: kubectl get endpoints <service> -n <namespace>
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get pods -n <namespace>
+    -l <selector-from-svc> -o wi?'
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+  command: kubectl get pods -n <namespace> -l <selector-from-svc> -o wide
+- type: troubleshooting
+  question: 如何排查 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的故障?
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 的故障排查章节。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+- type: comparison
+  question: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/05-service-connectivity.md 中的对比分析。
+  source: 故障诊断/topic-skills/05-service-connectivity.md
+- type: concept
+  question: 在 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 的「概述」章节。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+  section: 概述
+- type: concept
+  question: 在 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl version --short 2>&1?'
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 中的操作步骤。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+  command: kubectl version --short 2>&1
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl get certificates -A 2>/dev/null?'
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 中的操作步骤。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+  command: kubectl get certificates -A 2>/dev/null
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl get certificates -A --no-headers
+    2>/dev/null | grep ?'
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 中的操作步骤。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+  command: kubectl get certificates -A --no-headers 2>/dev/null | grep -c "False"
+- type: troubleshooting
+  question: 如何排查 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的故障?
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 的故障排查章节。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+- type: comparison
+  question: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/06-certificate-expiry.md 中的对比分析。
+  source: 故障诊断/topic-skills/06-certificate-expiry.md
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 的「概述」章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+  section: 概述
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: echo "=== Non-Bound PVCs
+    ===" && \?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+  command: echo "=== Non-Bound PVCs ===" && \
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A -l ''app.kubernetes.io/component
+    in (csi-?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+  command: kubectl get pods -A -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-he
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A --field-selector=status.phase!=Running,s?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+  command: kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded --no-headers | \
+- type: troubleshooting
+  question: 如何排查 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 的故障排查章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+- type: comparison
+  question: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure 2.md 中的对比分析。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure 2.md
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+  section: 概述
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: echo "=== Non-Bound PVCs
+    ===" && \?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+  command: echo "=== Non-Bound PVCs ===" && \
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A -l ''app.kubernetes.io/component
+    in (csi-?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+  command: kubectl get pods -A -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-he
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A --field-selector=status.phase!=Running,s?'
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+  command: kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded --no-headers | \
+- type: troubleshooting
+  question: 如何排查 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+- type: comparison
+  question: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/07-pvc-storage-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/07-pvc-storage-failure.md
+- type: concept
+  question: 在 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+  section: 概述
+- type: concept
+  question: 在 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 相关的操作: kubectl rollout status
+    deployment/NAME -n NS --timeout=10s?'
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+  command: kubectl rollout status deployment/NAME -n NS --timeout=10s
+- type: operation
+  question: '如何执行与 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 相关的操作: kubectl get rs -n NS -l
+    app=NAME --sort-by=.metadata.creatio?'
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+  command: kubectl get rs -n NS -l app=NAME --sort-by=.metadata.creationTimestamp -o wide
+- type: operation
+  question: '如何执行与 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 相关的操作: kubectl describe deployment
+    NAME -n NS | grep -A10 "Conditio?'
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+  command: kubectl describe deployment NAME -n NS | grep -A10 "Conditions:"
+- type: troubleshooting
+  question: 如何排查 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 相关的故障?
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+- type: comparison
+  question: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/08-deployment-rollout-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/08-deployment-rollout-failure.md
+- type: concept
+  question: 在 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+  section: 概述
+- type: concept
+  question: 在 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 相关的操作: kubectl get sa -A | grep -E "(cicd|jenkins|argocd|flux|cross?'
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+  command: kubectl get sa -A | grep -E "(cicd|jenkins|argocd|flux|crossplane)"
+- type: operation
+  question: '如何执行与 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 相关的操作: kubectl get resourcequota -A
+    -o custom-columns=NS:.metadata.?'
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+  command: kubectl get resourcequota -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,USED_CPU:.
+- type: operation
+  question: '如何执行与 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 相关的操作: SA_NAME="<serviceaccount-name>"?'
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+  command: SA_NAME="<serviceaccount-name>"
+- type: troubleshooting
+  question: 如何排查 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 相关的故障?
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+- type: comparison
+  question: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/09-rbac-quota-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/09-rbac-quota-failure.md
+- type: concept
+  question: 在 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+  section: 概述
+- type: concept
+  question: 在 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 相关的操作: kubectl get pods --all-namespaces --no-headers
+    | grep -E "Im?'
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+  command: kubectl get pods --all-namespaces --no-headers | grep -E "ImagePullBackOff|ErrImagePull" | wc -l
+- type: operation
+  question: '如何执行与 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 相关的操作: kubectl get pods --all-namespaces -o jsonpath=''{range
+    .items?'
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+  command: kubectl get pods --all-namespaces -o jsonpath='{range .items[?(@.status.phase!="Running")]}{.spec.co
+- type: operation
+  question: '如何执行与 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 相关的操作: kubectl run test-pull --image=docker.io/library/busybox:late?'
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+  command: kubectl run test-pull --image=docker.io/library/busybox:latest --rm -it --restart=Never --command --
+- type: troubleshooting
+  question: 如何排查 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 相关的故障?
+  answer: 参见 故障诊断/topic-skills/10-image-pull-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/10-image-pull-failure.md
+- type: concept
+  question: 在 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+  section: 概述
+- type: concept
+  question: 在 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 相关的操作: kubectl cluster-info --request-timeout=10s?'
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+  command: kubectl cluster-info --request-timeout=10s
+- type: operation
+  question: '如何执行与 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 相关的操作: kubectl get componentstatuses
+    2>/dev/null || echo "component?'
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+  command: kubectl get componentstatuses 2>/dev/null || echo "componentstatuses not supported"
+- type: operation
+  question: '如何执行与 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 相关的操作: ETCDCTL_API=3 etcdctl \?'
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+  command: ETCDCTL_API=3 etcdctl \
+- type: troubleshooting
+  question: 如何排查 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/11-control-plane-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/11-control-plane-failure.md
+- type: concept
+  question: 在 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+  section: 概述
+- type: concept
+  question: 在 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 相关的操作: kubectl get hpa
+    -A 2>/dev/null | grep -c "unknown" && \?'
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+  command: kubectl get hpa -A 2>/dev/null | grep -c "unknown" && \
+- type: operation
+  question: '如何执行与 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 相关的操作: kubectl get pods
+    -A --field-selector=status.phase=Pending --?'
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+  command: kubectl get pods -A --field-selector=status.phase=Pending --no-headers | wc -l
+- type: operation
+  question: '如何执行与 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 相关的操作: kubectl get deploy
+    -n kube-system metrics-server?'
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+  command: kubectl get deploy -n kube-system metrics-server
+- type: troubleshooting
+  question: 如何排查 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+- type: comparison
+  question: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/12-autoscaling-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/12-autoscaling-failure.md
+- type: concept
+  question: 在 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+  section: 概述
+- type: concept
+  question: 在 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 相关的操作: kubectl get
+    ingress -A -o wide?'
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+  command: kubectl get ingress -A -o wide
+- type: operation
+  question: '如何执行与 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 相关的操作: INGRESS_IP=$(kubectl
+    get ingress <ingress-name> -n <namespac?'
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+  command: INGRESS_IP=$(kubectl get ingress <ingress-name> -n <namespace> -o jsonpath='{.status.loadBalancer.in
+- type: operation
+  question: '如何执行与 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 相关的操作: kubectl get
+    pods -n ingress-nginx -l app.kubernetes.io/compo?'
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+  command: kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller
+- type: best_practice
+  question: 关于 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: '`<new>`）。Controller Pod 将重启。是否批准？"'
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+- type: troubleshooting
+  question: 如何排查 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+- type: comparison
+  question: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/13-ingress-gateway-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md
+- type: concept
+  question: 在 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+  section: 概述
+- type: concept
+  question: 在 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 相关的操作: kubectl get pods
+    -A --field-selector status.phase!=Running,s?'
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+  command: kubectl get pods -A --field-selector status.phase!=Running,status.phase!=Succeeded | grep -E "Create
+- type: operation
+  question: '如何执行与 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 相关的操作: kubectl get pods
+    -A --field-selector status.phase=Pending -o?'
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+  command: kubectl get pods -A --field-selector status.phase=Pending -o jsonpath='{range .items[*]}{.metadata.n
+- type: operation
+  question: '如何执行与 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 相关的操作: POD_NAME="<pod-name>"?'
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+  command: POD_NAME="<pod-name>"
+- type: troubleshooting
+  question: 如何排查 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 相关的故障?
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+- type: comparison
+  question: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/14-configmap-secret-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/14-configmap-secret-failure.md
+- type: concept
+  question: 在 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  section: 概述
+- type: concept
+  question: 在 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 相关的操作: kubectl get pods -n monitoring
+    --no-headers | awk ''{print $3?'
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  command: kubectl get pods -n monitoring --no-headers | awk '{print $3}' | sort | uniq -c
+- type: operation
+  question: '如何执行与 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 相关的操作: kubectl port-forward -n monitoring
+    svc/prometheus-operated 9?'
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  command: kubectl port-forward -n monitoring svc/prometheus-operated 9090:9090 &
+- type: operation
+  question: '如何执行与 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 相关的操作: curl -s http://localhost:9090/api/v1/alerts
+    | jq ''.data.aler?'
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  command: curl -s http://localhost:9090/api/v1/alerts | jq '.data.alerts | length'
+- type: troubleshooting
+  question: 如何排查 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/15-monitoring-alerting-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/15-monitoring-alerting-failure.md
+- type: concept
+  question: 在 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 的「概述」章节。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+  section: 概述
+- type: concept
+  question: 在 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 相关的操作: kubectl get ds -n logging -o wide?'
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+  command: kubectl get ds -n logging -o wide
+- type: operation
+  question: '如何执行与 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 相关的操作: kubectl top pods -n logging --sort-by=memory?'
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+  command: kubectl top pods -n logging --sort-by=memory
+- type: operation
+  question: '如何执行与 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 相关的操作: kubectl exec -n logging $(kubectl get
+    pod -n logging -l app=?'
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+  command: kubectl exec -n logging $(kubectl get pod -n logging -l app=elasticsearch -o jsonpath='{.items[0].me
+- type: troubleshooting
+  question: 如何排查 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+- type: comparison
+  question: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/16-logging-pipeline-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/16-logging-pipeline-failure.md
+- type: concept
+  question: 在 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 的「概述」章节。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+  section: 概述
+- type: concept
+  question: 在 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 相关的操作: kubectl top nodes --sort-by=cpu 2>/dev/null
+    || echo "Metrics?'
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 中的操作步骤。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+  command: kubectl top nodes --sort-by=cpu 2>/dev/null || echo "Metrics server not available"
+- type: operation
+  question: '如何执行与 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 相关的操作: kubectl get events -A --sort-by=.lastTimestamp
+    | grep -iE ''o?'
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 中的操作步骤。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+  command: kubectl get events -A --sort-by=.lastTimestamp | grep -iE 'oom|evict|throttl|fail|error' | tail -20
+- type: operation
+  question: '如何执行与 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 相关的操作: ssh <node-ip> "vmstat 1 5"?'
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 中的操作步骤。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+  command: ssh <node-ip> "vmstat 1 5"
+- type: troubleshooting
+  question: 如何排查 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 相关的故障?
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 的故障排查章节。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+- type: comparison
+  question: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/17-performance-bottleneck.md 中的对比分析。
+  source: 故障诊断/topic-skills/17-performance-bottleneck.md
+- type: concept
+  question: 在 安全事件应急响应 / Security Incident Response 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 的「概述」章节。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+  section: 概述
+- type: concept
+  question: 在 安全事件应急响应 / Security Incident Response 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 安全事件应急响应 / Security Incident Response 相关的操作: kubectl get pods -A -o wide | grep -E "SUSPECT_POD_NAME|AFFE?'
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 中的操作步骤。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+  command: kubectl get pods -A -o wide | grep -E "SUSPECT_POD_NAME|AFFECTED_NAMESPACE"
+- type: operation
+  question: '如何执行与 安全事件应急响应 / Security Incident Response 相关的操作: cat <<EOF | kubectl apply -f -?'
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 中的操作步骤。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+  command: cat <<EOF | kubectl apply -f -
+- type: operation
+  question: '如何执行与 安全事件应急响应 / Security Incident Response 相关的操作: kubectl describe pod SUSPECT_POD -n NAMESPACE > /tmp/evidenc?'
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 中的操作步骤。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+  command: kubectl describe pod SUSPECT_POD -n NAMESPACE > /tmp/evidence-pod-describe.txt
+- type: troubleshooting
+  question: 如何排查 安全事件应急响应 / Security Incident Response 相关的故障?
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 的故障排查章节。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+- type: comparison
+  question: 安全事件应急响应 / Security Incident Response 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/18-security-incident-response.md 中的对比分析。
+  source: 故障诊断/topic-skills/18-security-incident-response.md
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  section: 执行流程
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 相关的操作: kubectl get nodes -o json | jq -r ''?'
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  command: kubectl get nodes -o json | jq -r '
+- type: operation
+  question: '如何执行与 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 相关的操作: kubectl get pods -A --field-selector=status.phase=Failed
+    | g?'
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  command: kubectl get pods -A --field-selector=status.phase=Failed | grep Evicted | \
+- type: operation
+  question: '如何执行与 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 相关的操作: kubectl get pods -A --field-selector
+    spec.nodeName=<node-nam?'
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+  command: kubectl get pods -A --field-selector spec.nodeName=<node-name> \
+- type: troubleshooting
+  question: 如何排查 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+- type: comparison
+  question: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/19-node-resource-pressure.md 中的对比分析。
+  source: 故障诊断/topic-skills/19-node-resource-pressure.md
+- type: concept
+  question: 在 Skill 本地运行 Demo 指南 中, 概述 是什么?
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 的「概述」章节。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+  section: 概述
+- type: concept
+  question: 在 Skill 本地运行 Demo 指南 中, 前置条件 是什么?
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 的「前置条件」章节。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+  section: 前置条件
+- type: operation
+  question: '如何执行与 Skill 本地运行 Demo 指南 相关的操作: docker version           # Docker 运行中?'
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+  command: 'docker version           # Docker 运行中'
+- type: operation
+  question: '如何执行与 Skill 本地运行 Demo 指南 相关的操作: cd 故障诊断/topic-skills/demo?'
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+  command: cd 故障诊断/topic-skills/demo
+- type: operation
+  question: '如何执行与 Skill 本地运行 Demo 指南 相关的操作: bash run-skill-demo.sh?'
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 中的操作步骤。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+  command: bash run-skill-demo.sh
+- type: troubleshooting
+  question: 如何排查 Skill 本地运行 Demo 指南 相关的故障?
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 的故障排查章节。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+- type: comparison
+  question: Skill 本地运行 Demo 指南 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/19-skill-local-demo-guide.md 中的对比分析。
+  source: 故障诊断/topic-skills/19-skill-local-demo-guide.md
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  section: 执行流程
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 相关的操作: kubectl get pods -n <namespace>
+    -l <label-selector>?'
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  command: kubectl get pods -n <namespace> -l <label-selector>
+- type: operation
+  question: '如何执行与 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 相关的操作: kubectl get events -A --field-selector
+    reason=NetworkPolicy ?'
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  command: kubectl get events -A --field-selector reason=NetworkPolicy --sort-by=.lastTimestamp | tail -10
+- type: operation
+  question: '如何执行与 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 相关的操作: kubectl get pods -n calico-system
+    -o wide 2>/dev/null || \?'
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 中的操作步骤。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+  command: kubectl get pods -n calico-system -o wide 2>/dev/null || \
+- type: troubleshooting
+  question: 如何排查 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 相关的故障?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 的故障排查章节。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+- type: comparison
+  question: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/20-networkpolicy-connectivity.md 中的对比分析。
+  source: 故障诊断/topic-skills/20-networkpolicy-connectivity.md
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 相关的操作: kubectl get statefulset <name>
+    -n <namespace>?'
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  command: kubectl get statefulset <name> -n <namespace>
+- type: operation
+  question: '如何执行与 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 相关的操作: kubectl get pods -n <namespace>
+    -l <statefulset-selector> -o?'
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  command: kubectl get pods -n <namespace> -l <statefulset-selector> -o json | \
+- type: operation
+  question: '如何执行与 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 相关的操作: kubectl get pvc -n <namespace>
+    -l <statefulset-selector>?'
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+  command: kubectl get pvc -n <namespace> -l <statefulset-selector>
+- type: troubleshooting
+  question: 如何排查 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+- type: comparison
+  question: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/21-statefulset-failure.md 中的对比分析。
+  source: 故障诊断/topic-skills/21-statefulset-failure.md
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 相关的操作: kubectl get daemonset <name> -n <namespace>?'
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  command: kubectl get daemonset <name> -n <namespace>
+- type: operation
+  question: '如何执行与 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 相关的操作: kubectl get pods -n <namespace> -l
+    <selector> -o json | \?'
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  command: kubectl get pods -n <namespace> -l <selector> -o json | \
+- type: operation
+  question: '如何执行与 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 相关的操作: kubectl get nodes <missing-node> -o
+    wide?'
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+  command: kubectl get nodes <missing-node> -o wide
+- type: troubleshooting
+  question: 如何排查 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/22-daemonset-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/22-daemonset-failure.md
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 相关的操作: kubectl get job <name> -n <namespace>
+    -o jsonpath=''{?'
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  command: kubectl get job <name> -n <namespace> -o jsonpath='{
+- type: operation
+  question: '如何执行与 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 相关的操作: kubectl get jobs -n <namespace>
+    | wc -l?'
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  command: kubectl get jobs -n <namespace> | wc -l
+- type: operation
+  question: '如何执行与 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 相关的操作: kubectl get cronjob <name> -n
+    <namespace> -o jsonpath=''{.spe?'
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 中的操作步骤。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+  command: kubectl get cronjob <name> -n <namespace> -o jsonpath='{.spec.schedule}'
+- type: troubleshooting
+  question: 如何排查 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/23-job-cronjob-failure.md 的故障排查章节。
+  source: 故障诊断/topic-skills/23-job-cronjob-failure.md
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 何时使用此 Skill
+    是什么?
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 快速分级（2
+    分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  section: 执行流程
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 相关的操作:
+    kubectl get resourcequota --all-namespaces -o jsonpath=''{?'
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 中的操作步骤。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  command: kubectl get resourcequota --all-namespaces -o jsonpath='{
+- type: operation
+  question: '如何执行与 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 相关的操作:
+    kubectl get resourcequota -n kube-system?'
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 中的操作步骤。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  command: kubectl get resourcequota -n kube-system
+- type: operation
+  question: '如何执行与 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 相关的操作:
+    kubectl get limitrange --all-namespaces?'
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 中的操作步骤。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+  command: kubectl get limitrange --all-namespaces
+- type: troubleshooting
+  question: 如何排查 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/24-namespace-quota-limitrange.md 的故障排查章节。
+  source: 故障诊断/topic-skills/24-namespace-quota-limitrange.md
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 的「何时使用此 Skill」章节。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 的「快速分级（2 分钟内完成）」章节。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 的「执行流程」章节。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  section: 执行流程
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 的「症状识别」章节。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 相关的操作: kubectl get --raw /healthz?'
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 中的操作步骤。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  command: kubectl get --raw /healthz
+- type: operation
+  question: '如何执行与 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 相关的操作: kubectl get pods -n
+    kube-system -o jsonpath=''{?'
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 中的操作步骤。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  command: kubectl get pods -n kube-system -o jsonpath='{
+- type: operation
+  question: '如何执行与 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 相关的操作: kubectl get events
+    --all-namespaces --field-selector reason=?'
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 中的操作步骤。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+  command: kubectl get events --all-namespaces --field-selector reason=NodeReady,reason=NodeNotReady --sort-by=
+- type: troubleshooting
+  question: 如何排查 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 的故障排查章节。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+- type: comparison
+  question: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/25-cluster-upgrade-migration.md 中的对比分析。
+  source: 故障诊断/topic-skills/25-cluster-upgrade-migration.md
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 增强概览 是什么?
+  answer: 参见 故障诊断/topic-skills/ENHANCEMENT-RECORD.md 的「增强概览」章节。
+  source: 故障诊断/topic-skills/ENHANCEMENT-RECORD.md
+  section: 增强概览
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 增强前后对比 是什么?
+  answer: 参见 故障诊断/topic-skills/ENHANCEMENT-RECORD.md 的「增强前后对比」章节。
+  source: 故障诊断/topic-skills/ENHANCEMENT-RECORD.md
+  section: 增强前后对比
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 详细变更记录 是什么?
+  answer: 参见 故障诊断/topic-skills/ENHANCEMENT-RECORD.md 的「详细变更记录」章节。
+  source: 故障诊断/topic-skills/ENHANCEMENT-RECORD.md
+  section: 详细变更记录
+- type: troubleshooting
+  question: 如何排查 topic-skills 全面增强记录 相关的故障?
+  answer: 参见 故障诊断/topic-skills/ENHANCEMENT-RECORD.md 的故障排查章节。
+  source: 故障诊断/topic-skills/ENHANCEMENT-RECORD.md
+- type: comparison
+  question: topic-skills 全面增强记录 中有哪些技术对比?
+  answer: 参见 故障诊断/topic-skills/ENHANCEMENT-RECORD.md 中的对比分析。
+  source: 故障诊断/topic-skills/ENHANCEMENT-RECORD.md
+- type: concept
+  question: 在 topic-skills MOC 中, 专题概述 是什么?
+  answer: 参见 故障诊断/topic-skills/MOC.md 的「专题概述」章节。
+  source: 故障诊断/topic-skills/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-skills MOC 中, 文档清单 是什么?
+  answer: 参见 故障诊断/topic-skills/MOC.md 的「文档清单」章节。
+  source: 故障诊断/topic-skills/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-skills MOC 中, 统计信息 是什么?
+  answer: 参见 故障诊断/topic-skills/MOC.md 的「统计信息」章节。
+  source: 故障诊断/topic-skills/MOC.md
+  section: 统计信息
+- type: troubleshooting
+  question: 如何排查 topic-skills MOC 相关的故障?
+  answer: 参见 故障诊断/topic-skills/MOC.md 的故障排查章节。
+  source: 故障诊断/topic-skills/MOC.md
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 变更说明 是什么?
+  answer: 参见 故障诊断/topic-skills/skill-schema.md 的「变更说明」章节。
+  source: 故障诊断/topic-skills/skill-schema.md
+  section: 变更说明
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 快速导航 是什么?
+  answer: 参见 故障诊断/topic-skills/skill-schema.md 的「快速导航」章节。
+  source: 故障诊断/topic-skills/skill-schema.md
+  section: 快速导航
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 模板版本历史 是什么?
+  answer: 参见 故障诊断/topic-skills/skill-schema.md 的「模板版本历史」章节。
+  source: 故障诊断/topic-skills/skill-schema.md
+  section: 模板版本历史
+- type: troubleshooting
+  question: 如何排查 Skill Schema (历史参考) 相关的故障?
+  answer: 参见 故障诊断/topic-skills/skill-schema.md 的故障排查章节。
+  source: 故障诊断/topic-skills/skill-schema.md

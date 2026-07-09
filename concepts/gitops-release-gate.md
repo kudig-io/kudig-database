@@ -26,7 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+- target: '[[系统基础/topic-cheat-sheet/gitops.md]]'
   type: related_to
 ---
 
@@ -37,7 +37,7 @@ relationships:
 
 
 
-# [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] 与发布门控的协同
+# [[系统基础/topic-cheat-sheet/gitops.md|GitOps]] 与发布门控的协同
 
 ## 发布流水线
 
@@ -88,13 +88,13 @@ spec:
 
 ## 相关 Domain
 
-- domain-08-release-change-management/01-gitops/01-gitops-principles
-- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
-- domain-05-security-compliance/01-security-baseline/01-security-scanning-ci-cd
+- 发布变更/01-gitops/01-gitops-principles
+- [[可靠性/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
+- 安全/01-security-baseline/01-security-scanning-ci-cd
 ## Related
 
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git 速查卡]]
+- [[系统基础/topic-cheat-sheet/git.md|Git 速查卡]]
 
 
 <!-- risk-assessed -->

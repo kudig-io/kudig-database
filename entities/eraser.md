@@ -89,7 +89,7 @@ Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群�
 - [[entities/stacker.md|Stacker]]
 - [[entities/xregistry.md|xRegistry]]
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

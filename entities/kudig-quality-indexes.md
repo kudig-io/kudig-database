@@ -59,7 +59,7 @@ KUDIG 最佳实践项目的整体总结，包括覆盖范围、质量指标、�
 知识库全局入口，按 Domain × Topic 二维矩阵组织。
 
 ### 存储索引（STORAGE-INDEX）
-domain-04-storage-data 专题的详细索引，覆盖 PV/PVC/StorageClass/CSI 全部文档。
+存储 专题的详细索引，覆盖 PV/PVC/StorageClass/CSI 全部文档。
 
 ### 可视化索引
 Mermaid 图表和可视化资源的索引目录。

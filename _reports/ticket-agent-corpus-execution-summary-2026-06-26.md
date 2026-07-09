@@ -69,53 +69,53 @@ relationships:
 
 | 文件路径 | 大小 | 说明 |
 |---|---|---|
-| `domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md` | 23 KB | Velero 在阿里云/专有云上的安装、备份、恢复、定时策略、灾难恢复 |
-| `domain-04-storage-data/03-distributed-storage/02-rook-ceph-production.md` | 19 KB | Rook-Ceph 架构、部署、Pool/StorageClass、OSD 故障排查、性能调优 |
-| `domain-04-storage-data/03-distributed-storage/03-longhorn-production.md` | 20 KB | Longhorn 架构、安装、卷管理、OSS 备份、节点故障恢复、CSI 集成 |
-| `domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md` | 15 KB | MySQL/PostgreSQL/Kafka/Elasticsearch/Redis 存储选型与模式 |
+| `存储/03-distributed-storage/01-velero-backup-recovery.md` | 23 KB | Velero 在阿里云/专有云上的安装、备份、恢复、定时策略、灾难恢复 |
+| `存储/03-distributed-storage/02-rook-ceph-production.md` | 19 KB | Rook-Ceph 架构、部署、Pool/StorageClass、OSD 故障排查、性能调优 |
+| `存储/03-distributed-storage/03-longhorn-production.md` | 20 KB | Longhorn 架构、安装、卷管理、OSS 备份、节点故障恢复、CSI 集成 |
+| `存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md` | 15 KB | MySQL/PostgreSQL/Kafka/Elasticsearch/Redis 存储选型与模式 |
 
 ### 2.3 发布与变更管理补齐
 
 | 文件路径 | 大小 | 说明 |
 |---|---|---|
-| `domain-08-release-change-management/01-gitops/99-helm-production-guide.md` | 19 KB | Helm chart 开发、values 分层、helm-secrets/SOPS、ArgoCD/Flux 集成、回滚 |
+| `发布变更/01-gitops/99-helm-production-guide.md` | 19 KB | Helm chart 开发、values 分层、helm-secrets/SOPS、ArgoCD/Flux 集成、回滚 |
 
 ### 2.4 工单处理规则
 
 | 文件路径 | 大小 | 说明 |
 |---|---|---|
-| `domain-11-production-operations/ticket-routing-rules.md` | 12 KB | 工单分类、P0-P3 优先级矩阵、关键词 → Skill/FTA 映射、专有云高频工单 |
-| `domain-11-production-operations/escalation-playbook.md` | 10 KB | 升级标准、交接信息模板、升级话术、ASO/天基/底座升级路径 |
-| `domain-11-production-operations/reply-templates/README.md` | 13 KB | 确认收到/请求信息/给出方案/升级通知/闭环确认五类话术库 |
+| `生产运维/ticket-routing-rules.md` | 12 KB | 工单分类、P0-P3 优先级矩阵、关键词 → Skill/FTA 映射、专有云高频工单 |
+| `生产运维/escalation-playbook.md` | 10 KB | 升级标准、交接信息模板、升级话术、ASO/天基/底座升级路径 |
+| `生产运维/reply-templates/README.md` | 13 KB | 确认收到/请求信息/给出方案/升级通知/闭环确认五类话术库 |
 
 ### 2.5 工单闭环样本
 
 | 文件路径 | 大小 | 主题 |
 |---|---|---|
-| `domain-11-production-operations/ticket-cases/ticket-case-001-terway-eni-exhaustion.md` | 10 KB | Terway ENI IP 耗尽导致节点 NotReady |
-| `domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md` | 11 KB | Java OOM 叠加 ESSD IO hang 导致 CrashLoopBackOff |
-| `domain-11-production-operations/ticket-cases/ticket-case-003-slb-backend-group-misconfig.md` | 11 KB | 专有云 SLB 后端服务器组配置异常 |
-| `domain-11-production-operations/ticket-cases/ticket-case-004-csi-plugin-missing-after-scale.md` | 10 KB | 节点池扩容后 CSI 插件缺失导致 PVC 挂载失败 |
-| `domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md` | 11 KB | kubelet 证书过期导致节点 NotReady |
-| `domain-11-production-operations/ticket-cases/ticket-case-006-image-pull-acr-timeout.md` | 10 KB | ACR 镜像拉取超时导致 Deployment 更新失败 |
-| `domain-11-production-operations/ticket-cases/ticket-case-007-hpa-metrics-server-down.md` | 11 KB | metrics-server 异常导致 HPA 未生效 |
-| `domain-11-production-operations/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | 11 KB | CoreDNS 配置误改 + VPC DNS 转发异常 |
-| `domain-11-production-operations/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md` | 11 KB | etcd 磁盘满导致 apiserver 响应慢（P0 升级标准） |
-| `domain-11-production-operations/ticket-cases/ticket-case-010-networkpolicy-blocks-traffic.md` | 12 KB | NetworkPolicy 误拦截导致服务间 503 |
+| `生产运维/ticket-cases/ticket-case-001-terway-eni-exhaustion.md` | 10 KB | Terway ENI IP 耗尽导致节点 NotReady |
+| `生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md` | 11 KB | Java OOM 叠加 ESSD IO hang 导致 CrashLoopBackOff |
+| `生产运维/ticket-cases/ticket-case-003-slb-backend-group-misconfig.md` | 11 KB | 专有云 SLB 后端服务器组配置异常 |
+| `生产运维/ticket-cases/ticket-case-004-csi-plugin-missing-after-scale.md` | 10 KB | 节点池扩容后 CSI 插件缺失导致 PVC 挂载失败 |
+| `生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md` | 11 KB | kubelet 证书过期导致节点 NotReady |
+| `生产运维/ticket-cases/ticket-case-006-image-pull-acr-timeout.md` | 10 KB | ACR 镜像拉取超时导致 Deployment 更新失败 |
+| `生产运维/ticket-cases/ticket-case-007-hpa-metrics-server-down.md` | 11 KB | metrics-server 异常导致 HPA 未生效 |
+| `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | 11 KB | CoreDNS 配置误改 + VPC DNS 转发异常 |
+| `生产运维/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md` | 11 KB | etcd 磁盘满导致 apiserver 响应慢（P0 升级标准） |
+| `生产运维/ticket-cases/ticket-case-010-networkpolicy-blocks-traffic.md` | 12 KB | NetworkPolicy 误拦截导致服务间 503 |
 
 ### 2.6 Skill 深度补充
 
 | 文件路径 | 大小 | 说明 |
 |---|---|---|
-| `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` | 16 KB | Node NotReady 根因 prose 解释、专有云场景、边界条件、版本差异 |
-| `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md` | 16 KB | Pod CrashLoopBackOff 完整根因链、多语言应用、阿里云场景 |
-| `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md` | 16 KB | Service 无法访问完整决策树、SLB/NLB/ALB 集成、Terway 场景 |
+| `故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` | 16 KB | Node NotReady 根因 prose 解释、专有云场景、边界条件、版本差异 |
+| `故障诊断/topic-skills/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md` | 16 KB | Pod CrashLoopBackOff 完整根因链、多语言应用、阿里云场景 |
+| `故障诊断/topic-skills/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md` | 16 KB | Service 无法访问完整决策树、SLB/NLB/ALB 集成、Terway 场景 |
 
 ### 2.7 专有云组件索引
 
 | 文件路径 | 大小 | 说明 |
 |---|---|---|
-| `domain-12-cloud-providers/01-alibaba-cloud/apsara-stack-components.md` | 23 KB | 飞天底座、ASO、天基、伏羲、洛神、盘古、女娲及与 K8s 集成排障 |
+| `云厂商/01-alibaba-cloud/apsara-stack-components.md` | 23 KB | 飞天底座、ASO、天基、伏羲、洛神、盘古、女娲及与 K8s 集成排障 |
 
 ---
 

@@ -63,11 +63,11 @@ graph TD
     A["集群部署"] --> B{"问题确认"}
     B -->|"已知问题"| C["参考相关文档"]
     B -->|"未知问题"| D{"组件定位"}
-    D -->|"控制平面"| E["参考 domain-01-cluster-fundamentals"]
-    D -->|"工作负载"| F["参考 domain-02-workloads-applications"]
-    D -->|"网络"| G["参考 domain-03-networking-traffic"]
-    D -->|"存储"| H["参考 domain-04-storage-data"]
-    D -->|"安全"| I["参考 domain-05-security-compliance"]
+    D -->|"控制平面"| E["参考 集群基础"]
+    D -->|"工作负载"| F["参考 工作负载"]
+    D -->|"网络"| G["参考 网络"]
+    D -->|"存储"| H["参考 存储"]
+    D -->|"安全"| I["参考 安全"]
 
     C --> J["执行修复"]
     E --> J
@@ -89,21 +89,21 @@ graph TD
 
 ## 相关文档
 
-- domain-01-cluster-fundamentals/12-cluster-deployment-patterns.md
-- domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md
-- domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
-- domain-01-cluster-fundamentals/03-plane-high-availability.md
-- [[domain-07-platform-engineering/README.md|README]]
-- [[domain-08-release-change-management/topic-deployment/README.md|README]]
+- 集群基础/12-cluster-deployment-patterns.md
+- 集群基础/06-cluster-configuration-parameters.md
+- 集群基础/07-upgrade-paths-strategy.md
+- 集群基础/03-plane-high-availability.md
+- [[平台工程/README.md|README]]
+- [[发布变更/topic-deployment/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|apiserver fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]]
+- [[故障诊断/topic-fta/list/apiserver-fta.md|apiserver fta]]
+- [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]]
+- [[故障诊断/topic-fta/list/node-fta.md|node fta]]
 
 
 ---

@@ -596,7 +596,7 @@ flowchart TD
 - [../README.md](../README.md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
-- [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
+- [../../故障诊断/](../../故障诊断/) — 故障排查文档
 
 ## See Also
 

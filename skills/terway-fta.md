@@ -40,7 +40,7 @@ title: "Terway 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l app=terway -o jsonpath='{range .items[?(@.status.phase!='Running')]} {.metadata.name}{\'\n\'}{end}' 显示 Terway 异常 --> - **目标**：..."
 tags: ["k8s", "fta", "troubleshooting"]
-sources: ["domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md"]
+sources: ["故障诊断/topic-fta/list/terway-fta.md"]
 created: 2026-05-21
 updated: 2026-05-21
 lifecycle: reviewed
@@ -91,7 +91,7 @@ base_confidence: 0.7
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -4,7 +4,7 @@ summary: 蓝绿部署（Blue-Green Deployment）是一种发布策略，通过�
 category: concepts
 tags:
 - core-concept
-- domain-08-release-change-management
+- 发布变更
 - visibility/public
 tier: supporting
 sources:
@@ -102,7 +102,7 @@ Service 的 selector 变更会立即生效，所有新请求将被路由到绿�
 - **保留蓝环境**：在观察期内不要立即删除蓝环境 Deployment，确保随时可回滚
 - **决策回滚或保留**：若观察期内指标正常，蓝环境可保留作为下次发布的绿环境；若异常，立即切回蓝环境并分析问题
 
-更多部署排错方法请参考 [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[concepts/deployments.md|deployment-strategies]]。
+更多部署排错方法请参考 [[故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[concepts/deployments.md|deployment-strategies]]。
 
 
 ## 参见

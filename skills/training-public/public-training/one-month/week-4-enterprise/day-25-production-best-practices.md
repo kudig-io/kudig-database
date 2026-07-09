@@ -68,11 +68,11 @@ audience:
   - platform-engineer
 estimated_read_time: 240min
 related_domains:
-  - domain-11-production-operations
+  - 生产运维
 related_topics:
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-26-fta-febm-deep
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-24-security-compliance
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-26-fta-febm-deep
+  - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-28-final-project
 ---
 
 # Day 25: 生产运维最佳实践
@@ -574,10 +574,10 @@ spec:
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 - [ITIL 变更管理](https://www.axelos.com/best-practice-solutions/itil)
 - [PagerDuty 事故响应指南](https://response.pagerduty.com/)
-- [文件: `../../domain-11-production-operations/01-production-architecture-design-principles.md`](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [文件: `../../domain-11-production-operations/22-change-management-process.md`](../../domain-11-production-operations/22-change-management-process.md)
-- [文件: `../../domain-11-production-operations/23-incident-response-handling.md`](../../domain-11-production-operations/23-incident-response-handling.md)
-- [文件: `../../domain-11-production-operations/24-capacity-planning-forecasting.md`](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+- [文件: `../../生产运维/01-production-architecture-design-principles.md`](../../生产运维/01-production-architecture-design-principles.md)
+- [文件: `../../生产运维/22-change-management-process.md`](../../生产运维/22-change-management-process.md)
+- [文件: `../../生产运维/23-incident-response-handling.md`](../../生产运维/23-incident-response-handling.md)
+- [文件: `../../生产运维/24-capacity-planning-forecasting.md`](../../生产运维/24-capacity-planning-forecasting.md)
 
 ```
 

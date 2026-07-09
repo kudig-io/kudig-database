@@ -64,25 +64,25 @@ reading_level: "intermediate"          # beginner | intermediate | advanced | ex
 audience: ["SRE", "Ops Engineer"]      # 目标读者: SRE / DevOps / Developer
 estimated_read_time: "10min"            # 预计阅读时间
 prerequisites:                         # 前置知识依赖
-  - "domain-10-troubleshooting-diagnostics"
+  - "故障诊断"
   - "kubectl-basics"
 
 # === 关联引用 ===
 related_skills:                        # 关联的其他 Skill ID
   - "SKILL-POD-001"
 fta_refs:                              # 对应的 FTA 文件
-  - "domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+  - "故障诊断/topic-fta/list/node-fta.md"
 knowledge_refs:                        # 深度知识参考
-  - "domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/node-*.md"
-  - "domain-10-troubleshooting-diagnostics/"
+  - "故障诊断/topic-structural-trouble-shooting/node-*.md"
+  - "故障诊断/"
 
 # === 统一 cross_refs ===
 cross_refs:
   - type: "fta"
-    path: "../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md"
+    path: "../故障诊断/topic-fta/list/node-fta.md"
     label: "Node 故障树分析"
   - type: "domain"
-    path: "../domain-10-troubleshooting-diagnostics/02-node-notready-troubleshooting.md"
+    path: "../故障诊断/02-node-notready-troubleshooting.md"
     label: "Node NotReady 深度诊断"
 ---
 ```
@@ -245,7 +245,7 @@ kubectl ...
 - 至少覆盖 8 个根因
 - 概率分三级：高（>30% 工单为此根因）、中（10-30%）、低（<10%）
 - 诊断证据引用诊断工作流中的 Step ID
-- FTA 映射引用 domain-10-troubleshooting-diagnostics/topic-fta/list/ 中对应的底事件
+- FTA 映射引用 故障诊断/topic-fta/list/ 中对应的底事件
 
 ---
 
@@ -548,6 +548,6 @@ receivers:
 
 ---
 
-> **关联文档**: [domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md](../domain-10-troubleshooting-diagnostics/topic-skills/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
+> **关联文档**: [故障诊断/topic-skills/skill-schema.md](../故障诊断/topic-skills/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
 
 <!-- risk-assessed -->

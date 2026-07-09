@@ -84,8 +84,8 @@ trigger_keywords:
 - fta
 cross_refs:
 - type: domain
-  path: ../domain-03-networking-traffic/
-  label: '知识域: domain-03-networking-traffic'
+  path: ../网络/
+  label: '知识域: 网络'
 fta_metadata:
   fta_id: FTA-CILIUM-001
   top_event: Cilium/eBPF 网络异常 (Pod 无法通信/访问延迟高)
@@ -180,7 +180,7 @@ flowchart TD
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
+- [[故障诊断/topic-fta/list/cilium-fta.md|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18

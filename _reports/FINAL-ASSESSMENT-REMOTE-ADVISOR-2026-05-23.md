@@ -172,13 +172,13 @@ kubectl get, kubectl describe, kubectl logs, kubectl exec, kubectl rollout, ssh,
 
 | 交付物 | 路径 |
 |:---|:---|
-| 对话脚本（17个） | `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/DIALOGUE.md` |
-| Skill文档（17个） | `domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/SKILL.md` |
-| QA语料（JSON） | `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.json` |
-| QA语料（YAML） | `domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.yaml` |
+| 对话脚本（17个） | `故障诊断/topic-skills/skill-set/*/DIALOGUE.md` |
+| Skill文档（17个） | `故障诊断/topic-skills/skill-set/*/SKILL.md` |
+| QA语料（JSON） | `故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.json` |
+| QA语料（YAML） | `故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.yaml` |
 | 向量化索引 | `corpus-config/profiles/` |
-| 生产案例 | `domain-10-troubleshooting-diagnostics/topic-case-studies/` |
-| Synthesis | `domain-10-troubleshooting-diagnostics/topic-synthesis/` |
+| 生产案例 | `故障诊断/topic-case-studies/` |
+| Synthesis | `故障诊断/topic-synthesis/` |
 | 执行记录 | `_reports/EXECUTION-REMOTE-ADVISOR-2026-05-23.md` |
 | 执行计划 | `_reports/EXECUTION-PLAN-REMOTE-ADVISOR-2026-05-23.md` |
 | 需求跟踪 | `_reports/REQUIREMENTS-TRACKING-2026-05-23.md` |

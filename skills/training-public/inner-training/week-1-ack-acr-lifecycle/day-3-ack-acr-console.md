@@ -75,8 +75,8 @@ audience:
   - Operations personnel
 estimated_read_time: 45min
 related_domains:
-  - domain-12-cloud-providers
-  - domain-01-cluster-fundamentals
+  - 云厂商
+  - 集群基础
 related_topics:
   - ack-overview
   - ack-practical-guide
@@ -137,11 +137,11 @@ related_topics:
 ### 必读文档
 
 1. **ACK 实操指南**
-   - 文件: `../../../domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md`
+   - 文件: `../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md`
    - 重点: 控制台核心操作流程
 
 2. **K8S 架构与组件**
-   - 文件: `../../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md`
+   - 文件: `../../../集群基础/02-core-components-deep-dive.md`
    - 重点: 理解控制台背后对应的 K8S 资源对象
 
 ---
@@ -549,9 +549,9 @@ Day 4 将学习 K8S 集群创建的完整流程，包括参数配置、网络规
 
 ## 延伸阅读
 
-- [ACK 实操指南](../../domain-12-cloud-providers/04-alicloud-ack/service-ack-practical-guide.md)
-- [K8s 核心组件](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
+- [ACK 实操指南](../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
+- [K8s 核心组件](../../集群基础/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
 
 
 <!-- risk-assessed -->

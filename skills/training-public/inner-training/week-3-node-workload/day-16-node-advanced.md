@@ -76,8 +76,8 @@ audience:
 estimated_read_time: 45min
 related_domains:
   - domain-3-node
-  - domain-10-troubleshooting-diagnostics
-  - domain-12-cloud-providers
+  - 故障诊断
+  - 云厂商
 related_topics:
   - node-basics
   - node-management
@@ -634,8 +634,8 @@ data:
 - [节点管理文档](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Taint 和 Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 - [节点维护](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
-- [文件: `../../../domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md`](../../../domain-10-troubleshooting-diagnostics/09-node-comprehensive-troubleshooting.md)
-- [文件: `../../../domain-02-workloads-applications/02-deployment-production-patterns.md`](../../../domain-02-workloads-applications/02-deployment-production-patterns.md)
+- [文件: `../../../故障诊断/09-node-comprehensive-troubleshooting.md`](../../../故障诊断/09-node-comprehensive-troubleshooting.md)
+- [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../工作负载/02-deployment-production-patterns.md)
 
 ---
 

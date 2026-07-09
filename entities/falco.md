@@ -124,14 +124,14 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
 - [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
 - [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
 - [[entities/trivy.md|Trivy]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

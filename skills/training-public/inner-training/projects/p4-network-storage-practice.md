@@ -73,8 +73,8 @@ estimated_read_time: 45min
 related_domains:
   - domain-6-networking
   - domain-7-storage
-  - domain-12-cloud-providers
-  - domain-10-troubleshooting-diagnostics
+  - 云厂商
+  - 故障诊断
 related_topics:
   - service-networking
   - ingress
@@ -432,7 +432,7 @@ kubectl delete namespace microservice-demo  # ⚠️ 不可逆：永久删除命
 ```
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
 
 
 <!-- risk-assessed -->

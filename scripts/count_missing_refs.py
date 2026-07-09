@@ -16,16 +16,16 @@ candidates = [c for c in candidates if c not in existing]
 
 # Search directories
 dirs = [
-    "domain-01-cluster-fundamentals", "domain-02-workloads-applications",
-    "domain-03-networking-traffic", "domain-04-storage-data",
-    "domain-05-security-compliance", "domain-06-observability",
-    "domain-07-platform-engineering", "domain-08-release-change-management",
-    "domain-09-reliability-engineering", "domain-10-troubleshooting-diagnostics",
-    "domain-11-production-operations", "domain-12-cloud-providers",
-    "domain-13-container-runtime", "domain-14-ai-ml-infra",
-    "domain-15-specialized-tech", "domain-16-database-middleware",
-    "domain-17-system-foundation", "domain-18-manifests-patterns",
-    "domain-19-landscape-references", "domain-20-application-patterns",
+    "集群基础", "工作负载",
+    "网络", "存储",
+    "安全", "可观测性",
+    "平台工程", "发布变更",
+    "可靠性", "故障诊断",
+    "生产运维", "云厂商",
+    "容器运行时", "AI基础设施",
+    "专项技术", "数据库中间件",
+    "系统基础", "清单模式",
+    "生态参考", "应用模式",
     "concepts", "synthesis", "entities", "best-practices",
 ]
 

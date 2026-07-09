@@ -331,28 +331,28 @@ platform-engineering/
 
 **当前**（以 "Pod 无法访问 Service" 为例）：
 ```
-domain-10-troubleshooting-diagnostics/ → domain-03-networking-traffic/ → domain-06-observability/
+故障诊断/ → 网络/ → 可观测性/
 → domain-26-service-mesh/ → domain-40-api-gateway/
 = 跨 5 个 Domain，平均 8-12 次文件跳转
 ```
 
 **整合后**：
 ```
-domain-10-troubleshooting-diagnostics/（入口决策树）
-  → domain-03-networking-traffic/（网络排查）
-  → domain-06-observability/（指标验证）
+故障诊断/（入口决策树）
+  → 网络/（网络排查）
+  → 可观测性/（指标验证）
 = 跨 3 个 Domain，决策树引导直达
 ```
 
 ### 4.2 变更管理知识聚合
 
 **当前**：变更管理知识分散在：
-- `domain-09-reliability-engineering/22-change-management-process.md`
-- `domain-07-platform-engineering/07-gitops-configuration-management.md`
-- `domain-08-release-change-management/` (15 个文件)
-- `domain-08-release-change-management/` (9 个文件)
+- `可靠性/22-change-management-process.md`
+- `平台工程/07-gitops-configuration-management.md`
+- `发布变更/` (15 个文件)
+- `发布变更/` (9 个文件)
 
-**整合后**：全部聚合到 `domain-08-release-change-management/`
+**整合后**：全部聚合到 `发布变更/`
 
 ### 4.3 新人 onboarding 路径
 

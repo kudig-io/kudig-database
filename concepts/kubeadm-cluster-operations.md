@@ -1,7 +1,7 @@
 ---
 title: kubeadm 集群运维全景
 description: '# kubeadm 集群运维全景'
-summary: '本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 domain-02-workloads-applications/topic-functions/ 下的 82 篇源文档，'
+summary: '本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 工作负载/topic-functions/ 下的 82 篇源文档，'
 category: synthesis
 tags:
 - k8s
@@ -55,7 +55,7 @@ relationships:
 
 ## 概述
 
-本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 domain-02-workloads-applications/topic-functions/ 下的 82 篇源文档，覆盖 5 个子专题：cluster-cert、cluster-create、cluster-delete、[[entities/deployment.md|deployment]]-create、node-create。
+本文档综合梳理 kubeadm 集群运维的全生命周期知识，涵盖集群创建、高可用部署、证书管理、节点运维、工作负载管理和集群删除六大领域。知识来源为 工作负载/topic-functions/ 下的 82 篇源文档，覆盖 5 个子专题：cluster-cert、cluster-create、cluster-delete、[[entities/deployment.md|deployment]]-create、node-create。
 
 ## 运维全景图
 
@@ -188,7 +188,7 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

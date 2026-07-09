@@ -308,8 +308,8 @@ kubectl rollout restart daemonset <name> -n <ns>
 ---
 
 **关联文档**:
-- [domain-10-troubleshooting-diagnostics/topic-skills/README.md](../domain-10-troubleshooting-diagnostics/topic-skills/README.md) — 完整 Skill 文档
+- [故障诊断/topic-skills/README.md](../故障诊断/topic-skills/README.md) — 完整 Skill 文档
 - [P1-4: 决策树 Mermaid 可视化](./P1-4-decision-tree-mermaid-visualization.md)
-- [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — 详细问题排查文档
+- [故障诊断/](../故障诊断/) — 详细问题排查文档
 
 <!-- risk-assessed -->

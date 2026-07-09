@@ -100,7 +100,7 @@ description: '## 项目概述'
 - [[entities/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
 - [[etcd]] — etcd
 
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[工作负载/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
 - ovn-kubernetes
 - 99-spring-cloud-kubernetes-service-mesh-guide
 - 08-kubernetes-network-policies-security-micro-segmentation
@@ -133,7 +133,7 @@ description: '## 项目概述'
 - 99-kubernetes-v1.33-platform-ops-guide
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[集群基础/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - 13-kubernetes-cost-governance
 - 99-kubernetes-v1.33-workloads-guide
 - 99-spring-boot-kubernetes-guide
@@ -145,7 +145,7 @@ description: '## 项目概述'
 - 03-image-pull-events
 - 15-ecosystem-addon-events
 - 08-statefulset-daemonset-events
-- [[domain-17-system-foundation/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- [[系统基础/README.md|Domain-33: Kubernetes Events 全域事件大全]]
 - 02-pod-container-lifecycle-events
 - 00-open-source-projects-index
 - 04-probe-health-check-events
@@ -181,16 +181,16 @@ description: '## 项目概述'
 - 99-java-security-kubernetes-guide
 - 05-ibm-cloud-kubernetes-service-enterprise
 - 02-kubernetes-gateway-api-deep-dive
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
-- [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
+- [[工作负载/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[工作负载/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[工作负载/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[工作负载/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[工作负载/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[工作负载/README.md|Java on Kubernetes 综合实践指南]]
 - domain-java-kubernetes MOC
 - 16-kubernetes-hardware-troubleshooting
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
+- [[故障诊断/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
 - vscode-kubernetes-tools
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - Wiki Lint Report — 2026-05-21 — Cross-reference
@@ -209,7 +209,7 @@ description: '## 项目概述'
 - [[entities/root-terms.md|K8s Root术语参考]] — Cross-reference
 - [[entities/scheduling-terms.md|K8s 调度术语参考]] — Cross-reference
 - [[entities/kudig-contribution-guide.md|贡献指南、项目概览与版本发布说明]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
 - [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[entities/storage-terms.md|K8s 存储术语参考]] — Cross-reference
 - [[entities/observability-terms.md|K8s 可观测性术语参考]] — Cross-reference
@@ -342,11 +342,11 @@ description: '## 项目概述'
 - [[entities/container-runtime.md|Container Runtime]] — Cross-reference
 - [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 - CHANGELOG-1.2
 - CHANGELOG-1.3
 

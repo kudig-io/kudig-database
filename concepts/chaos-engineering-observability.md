@@ -1,7 +1,7 @@
 ---
 title: 混沌工程与可观测性融合
 summary: 混沌工程与可观测性融合：混沌工程通过在生产环境注入问题来验证系统韧性，可观测性通过采集和分析系统信号来理解系统行为。两者的交汇点在于：混沌实验的可信度依赖于可观测性——你无法验证"系统在问题中是否表现正确"，除非你能够看到系统在问题中的真实行为。
-  本页连接 domain-09-reliability-engineering 的混沌工程方法论与 domain-06-observability ...
+  本页连接 可靠性 的混沌工程方法论与 可观测性 ...
 category: synthesis
 tags:
 - k8s
@@ -16,11 +16,11 @@ tags:
 - resilience
 tier: supporting
 sources:
-- domain-09-reliability-engineering/04-chaos-engineering
-- domain-09-reliability-engineering/05-sre-practices
-- domain-06-observability/02-metrics
-- domain-06-observability/05-alerting
-- domain-06-observability/06-slo-sli
+- 可靠性/04-chaos-engineering
+- 可靠性/05-sre-practices
+- 可观测性/02-metrics
+- 可观测性/05-alerting
+- 可观测性/06-slo-sli
 created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
@@ -37,7 +37,7 @@ relationships:
 
 ## 概述
 
-混沌工程通过在生产环境注入问题来验证系统韧性，可观测性通过采集和分析系统信号来理解系统行为。两者的交汇点在于：**混沌实验的可信度依赖于可观测性——你无法验证"系统在问题中是否表现正确"，除非你能够看到系统在问题中的真实行为。** 本页连接 domain-09-reliability-engineering 的混沌工程方法论与 domain-06-observability 的监控体系，展示如何将可观测性注入混沌实验的全生命周期——从实验设计、执行监控到结果验证。
+混沌工程通过在生产环境注入问题来验证系统韧性，可观测性通过采集和分析系统信号来理解系统行为。两者的交汇点在于：**混沌实验的可信度依赖于可观测性——你无法验证"系统在问题中是否表现正确"，除非你能够看到系统在问题中的真实行为。** 本页连接 可靠性 的混沌工程方法论与 可观测性 的监控体系，展示如何将可观测性注入混沌实验的全生命周期——从实验设计、执行监控到结果验证。
 
 ## 核心连接
 
@@ -544,11 +544,11 @@ chaos-gate:
 
 ## 相关 Domain
 
-- domain-09-reliability-engineering/04-chaos-engineering
-- domain-09-reliability-engineering/05-sre-practices
-- domain-06-observability/02-metrics
-- domain-06-observability/05-alerting
-- domain-06-observability/06-slo-sli
+- 可靠性/04-chaos-engineering
+- 可靠性/05-sre-practices
+- 可观测性/02-metrics
+- 可观测性/05-alerting
+- 可观测性/06-slo-sli
 - [[concepts/chaos-drill-integration.md|chaos-drill-integration]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

@@ -111,16 +111,16 @@ last_updated: 2026-05-23
 
 ```bash
 # node-notready 对话脚本结构验证
-$ grep -c "Round" domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
+$ grep -c "Round" 故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
 3
 
-$ grep -c "分支" domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
+$ grep -c "分支" 故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
 12
 
-$ grep -c "如果无法执行" domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
+$ grep -c "如果无法执行" 故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
 8
 
-$ grep -c "升级" domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
+$ grep -c "升级" 故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
 5
 ```
 
@@ -128,11 +128,11 @@ $ grep -c "升级" domain-10-troubleshooting-diagnostics/topic-skills/skill-set/
 
 ```bash
 # Action 覆盖率
-$ python3 -c "import json; d=json.load(open('domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.json')); print(f'Action coverage: {sum(1 for x in d if x.get(\"action\"))/len(d)*100:.1f}%')"
+$ python3 -c "import json; d=json.load(open('故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.json')); print(f'Action coverage: {sum(1 for x in d if x.get(\"action\"))/len(d)*100:.1f}%')"
 Action coverage: 100.0%
 
 # Severity 分布
-$ python3 -c "import json, collections; d=json.load(open('domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.json')); c=collections.Counter(x['severity'] for x in d); [print(f'{k}: {v} ({v/len(d)*100:.1f}%)') for k,v in c.most_common()]"
+$ python3 -c "import json, collections; d=json.load(open('故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.json')); c=collections.Counter(x['severity'] for x in d); [print(f'{k}: {v} ({v/len(d)*100:.1f}%)') for k,v in c.most_common()]"
 critical: 12 (2.6%)
 high: 153 (32.6%)
 medium: 304 (64.8%)
@@ -177,20 +177,20 @@ medium: 304 (64.8%)
 
 ### 新增文件
 ```
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pod-crashloop/DIALOGUE.md
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-dns-failure/DIALOGUE.md
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-deployment-rollout/DIALOGUE.md
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-certificate-expiry/DIALOGUE.md
+故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md
+故障诊断/topic-skills/skill-set/k8s-pod-crashloop/DIALOGUE.md
+故障诊断/topic-skills/skill-set/k8s-dns-failure/DIALOGUE.md
+故障诊断/topic-skills/skill-set/k8s-deployment-rollout/DIALOGUE.md
+故障诊断/topic-skills/skill-set/k8s-certificate-expiry/DIALOGUE.md
 ```
 
 ### 修改文件
 ```
-domain-10-troubleshooting-diagnostics/topic-skills/skill-set/*/SKILL.md  (17 个文件，新增信息收集+替代方案)
-domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.json
-domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-p0.yaml
-domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-all.json
-domain-10-troubleshooting-diagnostics/topic-qa-corpus/generated/command-output-diagnosis-all.yaml
+故障诊断/topic-skills/skill-set/*/SKILL.md  (17 个文件，新增信息收集+替代方案)
+故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.json
+故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.yaml
+故障诊断/topic-qa-corpus/generated/command-output-diagnosis-all.json
+故障诊断/topic-qa-corpus/generated/command-output-diagnosis-all.yaml
 ```
 
 ---

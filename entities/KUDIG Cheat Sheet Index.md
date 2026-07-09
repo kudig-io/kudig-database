@@ -88,7 +88,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|k8s-supply-chain-yaml-cheatsheet]]
 
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 - [[entities/kudig-gitbook-mac-plan.md|kudig-gitbook-mac-plan]]
 
@@ -102,7 +102,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-ai-corpus-configuration.md|k8s-ai-corpus-configuration]]
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-kubernetes]]
+- [[生态参考/98-merged-indexes/index.md|release-notes-kubernetes]]
 
 - [[entities/k8s-glossary-index.md|k8s-glossary-index]]
 

@@ -1,0 +1,40 @@
+---
+title: Disaster Recovery Playbooks
+description: Disaster Recovery Playbooks 目录索引
+summary: Disaster Recovery Playbooks 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: 2026-07
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+# Disaster Recovery Playbooks
+
+> 本页为 `可靠性/09-disaster-recovery-playbooks` 目录的自动索引。
+
+## 文档
+
+- [[可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|Dr Scenarios Catalog]]
+- [[可靠性/09-disaster-recovery-playbooks/02-az-failure-playbook.md|Az Failure Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/03-disaster-recovery-bc-runbook.md|Disaster Recovery Bc Runbook]]
+- [[可靠性/09-disaster-recovery-playbooks/03-etcd-corruption-recovery-playbook.md|Etcd Corruption Recovery Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/04-node-failure-bulk-recovery-playbook.md|Node Failure Bulk Recovery Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/05-cluster-upgrade-failure-rollback-playbook.md|Cluster Upgrade Failure Rollback Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/06-control-plane-loss-recovery-playbook.md|Control Plane Loss Recovery Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/07-storage-backend-failure-playbook.md|Storage Backend Failure Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/08-dns-service-outage-playbook.md|Dns Service Outage Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/09-certificate-expiry-mass-rotation-playbook.md|Certificate Expiry Mass Rotation Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/10-network-partition-playbook.md|Network Partition Playbook]]
+- [[可靠性/09-disaster-recovery-playbooks/11-disaster-recovery-bc-runbook.md|Disaster Recovery Bc Runbook]]
+
+
+
+<!-- risk-assessed -->

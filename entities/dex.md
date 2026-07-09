@@ -98,15 +98,15 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[可观测性/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 04-cncf-fta-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[domain-06-observability/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[可观测性/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[可观测性/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
@@ -116,26 +116,26 @@ Dex 是一个身份联合服务，实现 OpenID Connect (OIDC) 协议。它作�
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
+- [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 00-open-source-projects-index
-- [[domain-05-security-compliance/00-open-source-projects-index.md|00-open-source-projects-index]]
-- 00-open-source-projects-index
-- 00-open-source-projects-index
-- 00-open-source-projects-index
+- [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
 - 00-open-source-projects-index
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|fta-index]]
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- 00-open-source-projects-index
+- [[故障诊断/topic-fta/fta-index.md|fta-index]]
 - dex
 - [[skills/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

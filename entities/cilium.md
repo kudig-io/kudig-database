@@ -93,7 +93,7 @@ Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Be
 - 99-cilium-ebpf-network-guide
 - 05-cilium-service-mesh
 - 04-cilium-network-policy
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cilium-fta.md|cilium-fta]]
+- [[故障诊断/topic-fta/list/cilium-fta.md|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18
@@ -132,9 +132,9 @@ Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Be
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

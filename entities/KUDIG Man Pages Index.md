@@ -99,16 +99,16 @@ prerequisites:
 
 | Domain | Path | Focus |
 |--------|------|-------|
-| Architecture Fundamentals | domain-01-cluster-fundamentals/ | K8s architecture, core components, upgrade strategies |
-| Design Principles | domain-01-cluster-fundamentals/ | Declarative API, controller pattern, etcd consensus |
-| Control Plane | domain-01-cluster-fundamentals/ | Deep dive into control plane components |
-| Workloads | domain-02-workloads-applications/ | Pod lifecycle, scheduling, HPA/VPA |
-| Networking | domain-03-networking-traffic/ | CNI, Service, Ingress, Gateway API |
-| Storage | domain-04-storage-data/ | PV/PVC, CSI drivers |
-| Security | domain-05-security-compliance/ | RBAC, network policy, runtime security |
-| Observability | domain-06-observability/ | Monitoring, logging, distributed tracing |
-| Platform Ops | domain-07-platform-engineering/ | Cluster management, GitOps, cost optimization |
-| Troubleshooting | domain-10-troubleshooting-diagnostics/ | Full component troubleshooting |
+| Architecture Fundamentals | 集群基础/ | K8s architecture, core components, upgrade strategies |
+| Design Principles | 集群基础/ | Declarative API, controller pattern, etcd consensus |
+| Control Plane | 集群基础/ | Deep dive into control plane components |
+| Workloads | 工作负载/ | Pod lifecycle, scheduling, HPA/VPA |
+| Networking | 网络/ | CNI, Service, Ingress, Gateway API |
+| Storage | 存储/ | PV/PVC, CSI drivers |
+| Security | 安全/ | RBAC, network policy, runtime security |
+| Observability | 可观测性/ | Monitoring, logging, distributed tracing |
+| Platform Ops | 平台工程/ | Cluster management, GitOps, cost optimization |
+| Troubleshooting | 故障诊断/ | Full component troubleshooting |
 
 ## Related
 
@@ -123,7 +123,7 @@ prerequisites:
 - [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
 - [[entities/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 - [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 

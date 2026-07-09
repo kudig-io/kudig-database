@@ -17,9 +17,31 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
+# 知识库 domain 目录（已从 domain-NN-slug 改为中文命名）
+DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
+
 # 基于 rag-full-profile.yaml 的 include 规则
 INCLUDE_PATTERNS = [
-    "domain-*/**/*.md",
+    "集群基础/**/*.md",
+    "工作负载/**/*.md",
+    "网络/**/*.md",
+    "存储/**/*.md",
+    "安全/**/*.md",
+    "可观测性/**/*.md",
+    "平台工程/**/*.md",
+    "发布变更/**/*.md",
+    "可靠性/**/*.md",
+    "故障诊断/**/*.md",
+    "生产运维/**/*.md",
+    "云厂商/**/*.md",
+    "容器运行时/**/*.md",
+    "AI基础设施/**/*.md",
+    "专项技术/**/*.md",
+    "数据库中间件/**/*.md",
+    "系统基础/**/*.md",
+    "清单模式/**/*.md",
+    "生态参考/**/*.md",
+    "应用模式/**/*.md",
     "concepts/**/*.md",
     "skills/**/*.md",
     "entities/**/*.md",
@@ -183,7 +205,7 @@ def detect_domain(path: Path) -> str:
     """从路径提取 domain 标签"""
     parts = path.parts
     for i, part in enumerate(parts):
-        if part.startswith("domain-"):
+        if part in DOMAINS:
             return part
     return "other"
 

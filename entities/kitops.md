@@ -79,7 +79,7 @@ KitOps 是一个 MLOps/AI 工件打包和版本管理工具，使用 OCI 标准�
 - [[entities/slimtoolkit.md|[[SlimToolkit|SlimToolkit]]]]
 - [[entities/modelpack.md|ModelPack]]
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

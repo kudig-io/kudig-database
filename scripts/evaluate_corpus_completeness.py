@@ -10,6 +10,9 @@ import yaml
 from pathlib import Path
 from collections import defaultdict, Counter
 
+# 知识库 domain 目录（已从 domain-NN-slug 改为中文命名）
+DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
+
 
 def is_excluded(rel: str) -> bool:
     excluded = (
@@ -88,7 +91,7 @@ def main():
         category_counts[category] += 1
 
         # domain 分布
-        if rel.startswith('domain-'):
+        if rel.split('/')[0] in DOMAINS:
             domain = rel.split('/')[0]
             domain_counts[domain] += 1
 

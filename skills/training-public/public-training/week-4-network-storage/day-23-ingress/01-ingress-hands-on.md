@@ -433,16 +433,16 @@ audience:
   - developer
 estimated_read_time: 45min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-03-networking-traffic
+  - 故障诊断
+  - 网络
 related_topics:
   - service
   - networking
   - ingress
   - tls
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-22-service-basics/01-service-basics-hands-on.md
-  - domain-10-troubleshooting-diagnostics/09-ingress-troubleshooting.md
+  - 生产运维/topic-learn/public-training/week-4-network-storage/day-22-service-basics/01-service-basics-hands-on.md
+  - 故障诊断/09-ingress-troubleshooting.md
 ---
 ```
 

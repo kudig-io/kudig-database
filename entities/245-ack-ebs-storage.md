@@ -213,18 +213,18 @@ parameters:
 ## Related
 
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[系统基础/topic-cheat-sheet/go.md|go]]
+- [[系统基础/topic-cheat-sheet/sql.md|sql]]
+- [[系统基础/topic-cheat-sheet/linux.md|linux]]
+- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[domain-12-cloud-providers/05-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[云厂商/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[云厂商/05-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
+- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
 
 
 <!-- risk-assessed -->

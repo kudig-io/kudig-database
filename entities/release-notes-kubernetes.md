@@ -57,7 +57,7 @@ prerequisites:
 ## 最新版本
 
 - **最新版本**: v1.1 (RELEASE-NOTES) / v1.36 (CHANGELOG)
-- **发布说明目录**: `domain-19-landscape-references/_archived-release-notes/kubernetes/`
+- **发布说明目录**: `生态参考/_archived-release-notes/kubernetes/`
 
 ---
 
@@ -99,14 +99,14 @@ prerequisites:
 - [[entities/kubernetes-changelog.md|Kubernetes 变更日志索引]]
 - [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]]
 - [[entities/version-upgrade-guide.md|版本升级指南]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
+- [[生态参考/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
 - [[entities/kudig-contribution-guide.md|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全
+- [[生态参考/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

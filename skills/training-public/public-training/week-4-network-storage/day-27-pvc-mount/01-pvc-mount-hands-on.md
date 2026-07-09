@@ -409,16 +409,16 @@ audience:
   - developer
 estimated_read_time: 40min
 related_domains:
-  - domain-10-troubleshooting-diagnostics
-  - domain-04-storage-data
+  - 故障诊断
+  - 存储
 related_topics:
   - storage
   - pvc
   - statetefulset
   - configmap
 related:
-  - domain-11-production-operations/topic-learn/public-training/week-4-network-storage/day-26-pvc-create/01-pvc-create-hands-on.md
-  - domain-10-troubleshooting-diagnostics/10-pv-pvc-troubleshooting.md
+  - 生产运维/topic-learn/public-training/week-4-network-storage/day-26-pvc-create/01-pvc-create-hands-on.md
+  - 故障诊断/10-pv-pvc-troubleshooting.md
 ---
 ```
 

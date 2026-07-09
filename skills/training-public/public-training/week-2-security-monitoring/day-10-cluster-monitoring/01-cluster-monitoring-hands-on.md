@@ -427,7 +427,7 @@ audience:
   - ops-engineer
 estimated_read_time: 50min
 related_domains:
-  - domain-06-observability
+  - 可观测性
   - domain-20-enterprise-monitoring-alerting
 related_topics:
   - monitoring
@@ -436,8 +436,8 @@ related_topics:
   - alertmanager
   - observability
 related:
-  - domain-06-observability/01-prometheus-operator-deep-dive.md
-  - domain-06-observability/05-alert-manager-configuration.md
+  - 可观测性/01-prometheus-operator-deep-dive.md
+  - 可观测性/05-alert-manager-configuration.md
 ---
 ```
 ```

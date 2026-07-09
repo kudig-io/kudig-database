@@ -95,9 +95,9 @@ relationships:
 
 | 旧路径前缀 | 实际位置 | 数量 |
 |-----------|---------|------|
-| `01-cncf-landscape/...` | `domain-19-landscape-references/01-cncf-landscape/...` | 229 |
-| `topic-dictionary/...` | `domain-17-system-foundation/topic-dictionary/...` | 205 |
-| `topic-code-analysis/...` | `domain-07-platform-engineering/topic-code-analysis/...` | 88 |
+| `01-cncf-landscape/...` | `生态参考/01-cncf-landscape/...` | 229 |
+| `topic-dictionary/...` | `系统基础/topic-dictionary/...` | 205 |
+| `topic-code-analysis/...` | `平台工程/topic-code-analysis/...` | 88 |
 | `topic-functions/...` | 待确认 | 80 |
 | `02-ai-agents/...` | 待确认 | 7 |
 | `02-ai-agents/...` | 待确认 | 7 |

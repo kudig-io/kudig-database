@@ -1,7 +1,7 @@
 ---
 title: KUDIG 项目运维报告：Comate 操作记录与计划
 description: '# KUDIG 项目运维报告'
-summary: 'domain-03-networking-traffic 和 domain-04-storage-data 的内容增强计划。'
+summary: '网络 和 存储 的内容增强计划。'
 category: reference
 tags:
 - k8s
@@ -53,7 +53,7 @@ prerequisites:
 重复判断依据：文件名/目录名中包含 " 2"（空格+数字2）后缀。
 
 ### 涉及范围
-- domain-02-workloads-applications ~ domain-40（大部分域目录）
+- 工作负载 ~ domain-40（大部分域目录）
 - topic-*（14 个专题目录）
 - gitbook/、man/、_reports/
 
@@ -63,7 +63,7 @@ prerequisites:
 
 ## 网络存储增强
 
-domain-03-networking-traffic 和 domain-04-storage-data 的内容增强计划。
+网络 和 存储 的内容增强计划。
 
 ## 结构化排查扩展
 

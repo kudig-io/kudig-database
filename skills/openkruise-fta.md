@@ -92,9 +92,9 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 - [[openkruise]] — OpenKruise
 
 - [[nginx-ingress-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
+- [[故障诊断/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
 - [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
+- [[生态参考/topic-index/openkruise-index.md|OpenKruise 全局索引]]
 
 
 <!-- risk-assessed -->
