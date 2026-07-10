@@ -1,3 +1,0 @@
-message: Improved latency performance when gzipping/gunzipping large data (such as CP/DP config data).
-type: performance
-scope: Core

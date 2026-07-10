@@ -1,3 +1,0 @@
-message: "Fix incorrect LuaJIT LDP/STP fusion on ARM64 which may sometimes cause incorrect logic"
-type: dependency
-scope: Core

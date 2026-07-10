@@ -1,3 +1,0 @@
-message: "**DNS Client**: Ignore a non-positive values on resolv.conf for options timeout, and use a default value of 2 seconds instead."
-type: bugfix
-scope: Core

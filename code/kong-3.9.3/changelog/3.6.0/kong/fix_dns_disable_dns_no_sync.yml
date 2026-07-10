@@ -1,3 +1,0 @@
-message: The default value of `dns_no_sync` option has been changed to `off`
-type: feature
-scope: Configuration

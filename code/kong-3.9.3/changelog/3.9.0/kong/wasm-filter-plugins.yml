@@ -1,3 +1,0 @@
-message: "**proxy-wasm**: Added support for Wasm filters to be configured via the /plugins admin API"
-type: feature
-scope: Core

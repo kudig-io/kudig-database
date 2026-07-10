@@ -1,3 +1,0 @@
-message: "respect custom `proxy_access_log`"
-type: bugfix
-scope: Configuration

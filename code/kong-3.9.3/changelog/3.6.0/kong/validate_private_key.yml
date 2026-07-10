@@ -1,3 +1,0 @@
-message: Validate private and public key for `keys` entity to ensure they match each other.
-type: bugfix
-scope: Core

@@ -1,3 +1,0 @@
-message: "Fixed an issue where `POST /config?flatten_errors=1` could not return a proper response if the input included duplicate upstream targets."
-type: bugfix
-scope: Core

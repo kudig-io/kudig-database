@@ -1,3 +1,0 @@
-message: fix ldoc intermittent failure caused by LuaJIT error.
-type: bugfix
-scope: Core

@@ -1,4 +1,0 @@
-storage:
-  tsdb:
-    retention:
-      percentage: 0.5

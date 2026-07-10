@@ -1,4 +1,0 @@
-message: |
-    rename `privileged_agent` to `dedicated_config_processing. Enable `dedicated_config_processing` by default
-type: feature
-scope: Core

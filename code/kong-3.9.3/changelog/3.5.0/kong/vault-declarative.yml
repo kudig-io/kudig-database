@@ -1,3 +1,0 @@
-message: Vault references can be used in Dbless mode in declarative config
-type: bugfix
-scope: Core

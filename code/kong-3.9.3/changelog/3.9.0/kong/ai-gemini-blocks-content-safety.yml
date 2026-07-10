@@ -1,3 +1,0 @@
-message: "**ai-proxy**: Fixed a bug where Gemini provider would return an error if content safety failed in AI Proxy."
-type: bugfix
-scope: Plugin

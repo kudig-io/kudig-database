@@ -1,3 +1,0 @@
-message: |
-  Improved the robustness of lua-cjson when handling unexpected input.
-type: dependency

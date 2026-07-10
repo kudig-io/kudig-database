@@ -1,3 +1,0 @@
-message: Fixed an issue where the Vault secret cache got refreshed during `resurrect_ttl` time and could not be fetched by other workers.
-type: bugfix
-scope: Core

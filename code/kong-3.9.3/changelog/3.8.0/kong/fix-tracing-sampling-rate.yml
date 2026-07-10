@@ -1,3 +1,0 @@
-message: "**OpenTelemetry:** Improved accuracy of sampling decisions."
-type: bugfix
-scope: Plugin

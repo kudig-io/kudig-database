@@ -1,3 +1,0 @@
-message: "response.set_header support header argument with table array of string"
-type: bugfix
-scope: PDK

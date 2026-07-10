@@ -1,3 +1,0 @@
-message: "**ai-proxy**: Fixed a bug where tools (function) calls to Gemini (or via Vertex) would return empty results."
-type: bugfix
-scope: Plugin

@@ -1,3 +1,0 @@
-message: "**Tracing**: enhanced robustness of trace ID parsing"
-type: bugfix
-scope: PDK

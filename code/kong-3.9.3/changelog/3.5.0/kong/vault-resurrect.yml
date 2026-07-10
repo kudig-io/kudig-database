@@ -1,3 +1,0 @@
-message: Vault resurrect time is respected in case a vault secret is deleted from a vault
-type: bugfix
-scope: Core

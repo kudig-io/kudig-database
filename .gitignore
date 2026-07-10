@@ -30,6 +30,7 @@ corpus-config/profiles/.vector-cache/
 
 # 源码/（原 code/，内含 Kubernetes/terway 等 vendor 源码树，不入库）
 源码/
+code/
 
 # 密钥与环境变量（禁止入库）
 .env

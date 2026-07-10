@@ -1,4 +1,0 @@
-message: |
-  **ai-proxy**: Fixed preserve mode.
-type: "bugfix"
-scope: "Plugin"

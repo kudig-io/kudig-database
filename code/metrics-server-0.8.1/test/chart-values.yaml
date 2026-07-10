@@ -1,3 +1,0 @@
-args:
-  - --kubelet-insecure-tls
-  - --node-selector=metrics-server-skip!=true

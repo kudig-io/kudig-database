@@ -1,3 +1,0 @@
-message: Kong Manager will now hide the scope change field when creating/editing a scoped plugin from another entity.
-type: bugfix
-githubs: [297]

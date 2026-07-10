@@ -1,3 +1,0 @@
-message: "**ai-proxy**: Fixed a bug where Bedrock Guardrail config was ignored."
-type: bugfix
-scope: Plugin

@@ -1,3 +1,0 @@
-message: "**OpenTelemetry:** Added support for OpenTelemetry formatted logs."
-type: feature
-scope: Plugin

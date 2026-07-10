@@ -1,4 +1,0 @@
-psutil==5.8.0
-typing==3.7.4.3
-boofuzz==0.4.0
-PyYAML==5.4.1

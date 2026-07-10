@@ -1,6 +1,0 @@
-type: metric
-
-status:
-  class: receiver
-  stability:
-    beta: [traces, logs, metrics]

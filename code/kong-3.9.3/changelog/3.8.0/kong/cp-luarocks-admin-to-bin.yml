@@ -1,3 +1,0 @@
-message: "Fixed an issue where luarocks-admin was not available in /usr/local/bin."
-type: bugfix
-scope: Core

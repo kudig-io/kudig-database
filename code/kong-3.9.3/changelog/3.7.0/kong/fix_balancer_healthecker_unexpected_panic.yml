@@ -1,3 +1,0 @@
-message: "**Core**: Fixed unexpected table nil panic in the balancer's stop_healthchecks function"
-type: bugfix
-scope: Core

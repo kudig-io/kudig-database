@@ -1,4 +1,0 @@
-message: |
-  Fixed an issue where some debug level error logs were not being displayed by the CLI.
-type: bugfix
-scope: CLI Command

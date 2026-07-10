@@ -1,3 +1,0 @@
-message: Removed unnecessary DNS client initialization
-type: performance
-scope: Core

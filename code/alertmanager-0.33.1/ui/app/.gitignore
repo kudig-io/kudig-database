@@ -1,7 +1,0 @@
-dist/
-elm-stuff/
-.elm
-/elm-*
-/build
-/node_modules/
-/.build_stamp

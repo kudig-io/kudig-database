@@ -1,6 +1,0 @@
-exports_files(
-    [
-        "BUILD.libxcrypt.bazel",
-    ],
-    visibility = ["//visibility:public"],
-)

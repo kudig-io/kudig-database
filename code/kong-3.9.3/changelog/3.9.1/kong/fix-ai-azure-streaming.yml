@@ -1,3 +1,0 @@
-message: "**ai-proxy**: Fixed a bug where Azure streaming responses would be missing individual tokens."
-type: bugfix
-scope: Plugin

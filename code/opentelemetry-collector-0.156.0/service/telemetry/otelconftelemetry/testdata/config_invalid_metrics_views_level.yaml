@@ -1,5 +1,0 @@
-metrics:
-  level: basic
-  views:
-    - selector: {}
-      stream: {}

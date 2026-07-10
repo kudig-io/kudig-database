@@ -1,5 +1,0 @@
-Disable CONFIG_SECURITY_LUA_LSM_STATS by default while keeping Lua-LSM
-enabled where supported (ANBZ: #36820).
-
-Keep the existing disabled architecture-specific overrides for loongarch,
-riscv, sw_64-6b, and sw_64-8a.

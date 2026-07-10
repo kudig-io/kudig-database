@@ -1,3 +1,0 @@
-message: "**ai-proxy**: Fixed an issue where AI Transformer plugins always returned a 404 error when using 'Google One' Gemini subscriptions."
-type: bugfix
-scope: Plugin

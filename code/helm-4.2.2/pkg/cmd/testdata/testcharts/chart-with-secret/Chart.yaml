@@ -1,4 +1,0 @@
-apiVersion: v2
-description: Chart with Kubernetes Secret
-name: chart-with-secret
-version: 0.0.1

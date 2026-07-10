@@ -1,2 +1,0 @@
-message: "**Loggly**: Fixed an issue where `/bin/hostname` missing caused an error warning on startup."
-type: bugfix
