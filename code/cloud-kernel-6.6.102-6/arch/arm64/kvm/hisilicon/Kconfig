@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config KVM_HISI_VIRT
+	bool "HiSilicon SoC specific virtualization features"
+	depends on ARCH_HISI
+	depends on KVM
+	help
+	  Support for HiSilicon SoC specific virtualization features.
+	  On non-HiSilicon platforms, say N here.
+
+config ARM64_HISI_IPIV
+	bool "Enable support for IPIV"
+	default y
+	depends on ACPI
+	depends on KVM_HISI_VIRT
+	help
+	  IPIV optimizes vSGI on the basis of GICv4.1. The vCPU on the sending
+	  side of vSGI needs to trap to Hypervisor. IPIv sends vSGI without
+	  traping, improving performance.
+
+	  The feature will only be enabled if CPU in the system and Guest OS
+	  support this feature. If unsure, say Y.

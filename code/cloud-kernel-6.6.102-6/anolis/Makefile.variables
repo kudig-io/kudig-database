@@ -1,0 +1,97 @@
+# the global environment variables, which will be passed to shell scripts
+# all variables are start with DIST_, to avoid influences kernel build
+
+# the dist suffix, eg: an7, an8, an23
+DIST ?= .an23
+
+# build mode:
+# - official build, the kernel version looks like: 5.10.134-15.1_rc1, and also generate source rpm
+# - nightly build, the kernel version looks like: 5.10.134-1.git.6235a991a61d, and also generate source rpm
+# - devel build, same as nightly build, without source rpm
+DIST_BUILD_MODE ?= devel
+
+# the package release version.
+# eg: for ANCK 5.10-015.1, the major version is 15, the minor version is 1
+DIST_RELEASE_MAJOR_VERSION = 6
+DIST_RELEASE_MINOR_VERSION =
+
+# testing stage.
+# eg: alpha, beta, rc
+DIST_TESTING_STAGE =
+DIST_TESTING_STAGE_MAJOR_VERSION =
+DIST_TESTING_STAGE_MINOR_VERSION =
+
+# special versions, eg: the pgo version
+DIST_SPECIAL_VERSION_NAME =
+DIST_SPECIAL_VERSION_MAJOR =
+DIST_SPECIAL_VERSION_MINOR =
+
+# build number
+DIST_BUILD_NUMBER ?= 1
+
+# the kernel root
+DIST_SRCROOT = $(shell realpath ..)/
+DIST_SOURCES = $(DIST_SRCROOT)anolis/
+DIST_RPM = $(DIST_SOURCES)rpm/
+DIST_CHANGELOG = $(DIST_SOURCES)changelog/
+
+# the output directory
+DIST_OUTPUT ?= $(DIST_SOURCES)output/
+DIST_RPMBUILDDIR_OUTPUT = ${DIST_OUTPUT}/rpmbuild
+DIST_SHORT_OUTPUT=$(subst $(DIST_SRCROOT),,$(DIST_OUTPUT))
+
+DIST_SPEC_TEMPLATE = kernel.spec.template
+DIST_SPEC_FILE = kernel.spec
+
+# generate anolis kernel version
+
+# kernel version for offical build
+DIST_RELEASE_VERSION = $(DIST_RELEASE_MAJOR_VERSION)$(if $(DIST_RELEASE_MINOR_VERSION),.$(DIST_RELEASE_MINOR_VERSION))
+DIST_SPECIAL_VERSION = $(if $(DIST_SPECIAL_VERSION_NAME),.$(DIST_SPECIAL_VERSION_NAME)$(if $(DIST_SPECIAL_VERSION_MAJOR),.$(DIST_SPECIAL_VERSION_MAJOR))$(if $(DIST_SPECIAL_VERSION_MINOR),.$(DIST_SPECIAL_VERSION_MINOR)))
+DIST_TESTING_VERSION = $(if $(DIST_TESTING_STAGE),_$(DIST_TESTING_STAGE)$(if $(DIST_TESTING_STAGE_MAJOR_VERSION),$(DIST_TESTING_STAGE_MAJOR_VERSION))$(if $(DIST_TESTING_STAGE_MINOR_VERSION),.$(DIST_TESTING_STAGE_MINOR_VERSION)))
+DIST_LINUXVERSION:=$(shell cat $(DIST_SRCROOT)/Makefile | sed -ne '/^VERSION\ =\ /{s///;p;q}')
+DIST_LINUXKPATCHLEVEL:=$(shell cat $(DIST_SRCROOT)/Makefile | sed -ne '/^PATCHLEVEL\ =\ /{s///;p;q}')
+DIST_LINUXKSUBLEVEL:=$(shell cat $(DIST_SRCROOT)/Makefile | sed -ne '/^SUBLEVEL\ =\ /{s///;p;q}')
+DIST_KERNELVERSION = $(DIST_LINUXVERSION).$(DIST_LINUXKPATCHLEVEL).$(DIST_LINUXKSUBLEVEL)
+DIST_OFFICIAL_PKGRELEASEVERION = $(DIST_RELEASE_VERSION)$(DIST_SPECIAL_VERSION)$(DIST_TESTING_VERSION)
+
+# kernel version for unoffical build
+DIST_GIT_HEAD_SHORT_COMMIT_ID = $(shell git rev-parse --short HEAD)
+DIST_GIT_HEAD_FULL_COMMIT_ID = $(shell git rev-parse HEAD)
+DIST_UNOFFICIAL_PKGRELEASEVERION = ${DIST_BUILD_NUMBER}.git.$(DIST_GIT_HEAD_SHORT_COMMIT_ID)
+
+# kernel version for diy build
+DIST_DIY_PKGRELEASEVERION = ${DIST_DIY}.diy
+
+# final kernel version
+ifeq ("${DIST_BUILD_MODE}", "official")
+DIST_PKGRELEASEVERION = $(DIST_OFFICIAL_PKGRELEASEVERION)
+else ifeq ("${DIST_BUILD_MODE}", "diy")
+DIST_PKGRELEASEVERION = $(DIST_DIY_PKGRELEASEVERION)
+else
+DIST_PKGRELEASEVERION = $(DIST_UNOFFICIAL_PKGRELEASEVERION)
+endif
+DIST_ANOLIS_VERSION = $(DIST_KERNELVERSION)-$(DIST_PKGRELEASEVERION)
+
+# the package id used for compress kernel tarball:
+#   for official build, we compress tarball from tag
+#   for unofficial build, we compress tarball from git HEAD
+DIST_PKG_COMMIT_ID = $(if $(DIST_OFFICIAL_BUILD),$(DIST_ANOLIS_VERSION),$(DIST_GIT_HEAD_FULL_COMMIT_ID))
+
+ifneq ("${ARCH}","")
+DIST_ARCH ?= $(ARCH)
+else
+DIST_ARCH ?= $(shell uname -m)
+endif
+ifeq ($(DIST_ARCH),x86_64)
+    DIST_ARCH := x86
+endif
+ifeq ($(DIST_ARCH),aarch64)
+	DIST_ARCH := arm64
+endif
+ifeq ($(DIST_ARCH),loongarch)
+	DIST_ARCH := loongarch
+endif
+ifeq ($(DIST_ARCH),riscv64)
+	DIST_ARCH := riscv
+endif

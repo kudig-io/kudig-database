@@ -1,0 +1,12 @@
+# See https://cloud.google.com/cloud-build/docs/build-config
+timeout: 3600s
+options:
+  substitution_option: ALLOW_LOOSE
+steps:
+  - name: 'gcr.io/k8s-staging-test-infra/gcb-docker-gcloud:v20231105-52c482caa0'
+    entrypoint: make
+    env:
+    - GIT_TAG=$_PULL_BASE_REF
+    - GIT_COMMIT=$_PULL_BASE_SHA
+    args:
+    - push-all

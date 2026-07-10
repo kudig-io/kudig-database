@@ -1,0 +1,3 @@
+cgroup.memory=nokmem
+crashkernel=0M-2G:0M,2G-8G:192M,8G-128G:256M,128G-376G:384M,376G-:448M
+thp_file=8K-2M:always thp_file=2M:always+exec

@@ -1,0 +1,309 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ *  Copyright (C) 2025 WXIAT
+ */
+
+#define pr_fmt(fmt) "cpufreq: " fmt
+
+#include <linux/cpufreq.h>
+#include <linux/err.h>
+#include <linux/delay.h>
+
+#include <asm/sw64_init.h>
+#include <asm/cpu.h>
+
+#define MAX_RETRY	10
+
+#define CLK_LV1_SEL_PROTECT	(0x1UL << 0)
+#define CLK_LV1_SEL_MUXA	(0x1UL << 2)
+#define CLK_LV1_SEL_MUXB	(0x1UL << 3)
+
+#define OFFSET_CLU_LV1_SEL	0x3a80UL
+#define OFFSET_CLU_LV2_SEL_H	0x3a00UL
+#define OFFSET_CLU_LV2_SEL_L	0x3b00UL
+#define OFFSET_CLK_CTL		0x3b80UL
+
+/*
+ * frequency in MHz, volts in mV and stored as "driver_data" in the structure.
+ * volts 0 means to be determined
+ */
+#define FV(mhz, mv)							\
+	{								\
+		.frequency = (mhz) * 1000,				\
+		.driver_data = (mv)					\
+	}
+
+enum sunway_cpu_pll {
+	SUNWAY_CPU_PLL0 = 0,
+	SUNWAY_CPU_PLL1 = 1,
+	SUNWAY_CPU_PLL2 = 2
+};
+
+#ifdef CONFIG_PLATFORM_JUNZHANG
+
+#define CLK_PROTECT(pll)	(0x1UL << (16 * (pll)))
+#define CLK_VALID(pll)		(0x1UL << (1 + 16 * (pll)))
+#define CLK_RESET(pll)		(0x1UL << (2 + 16 * (pll)))
+#define CLK_LOCK(pll)		(0x1UL << (3 + 16 * (pll)))
+#define PLL_CFG_SHIFT(pll)	(4 + 16 * (pll))
+#define CORE_PLL_CFG_MASK	0x1f
+
+struct cpufreq_frequency_table freq_table[] = {
+	{0, 0, CPUFREQ_ENTRY_INVALID}, /* 200Mhz is ignored */
+	FV(1200, 850),
+	FV(1300, 850),
+	FV(1400, 850),
+	FV(1450, 850),
+	FV(1500, 850),
+	FV(1550, 850),
+	FV(1600, 850),
+	FV(1650, 900),
+	FV(1700, 900),
+	FV(1750, 900),
+	FV(1800, 900),
+	FV(1850, 900),
+	FV(1900, 900),
+	FV(1950, 900),
+	FV(2000, 900),
+	FV(2050, 950),
+	FV(2100, 950),
+	FV(2150, 950),
+	FV(2200, 950),
+	FV(2250, 0),
+	FV(2300, 0),
+	FV(2350, 0),
+	FV(2400, 0),
+	FV(2450, 0),
+	FV(2500, 0),
+	FV(2550, 0),
+	FV(2600, 0),
+	FV(2650, 0),
+	FV(2700, 0),
+	FV(2800, 0),
+	FV(2850, 0),
+	{0, 0, CPUFREQ_TABLE_END},
+};
+
+#endif
+
+#ifdef CONFIG_PLATFORM_XUELANG
+
+#define CLK_PROTECT(pll)	(0x1UL << 0)
+#define CLK_VALID(pll)		(0x1UL << (1 + 7 * (pll)))
+#define CLK_RESET(pll)		(0x1UL << (2 + 7 * (pll)))
+#define CLK_LOCK(pll)		(0x1UL << (3 + 7 * (pll)))
+#define PLL_CFG_SHIFT(pll)	(4 + 7 * (pll))
+#define CORE_PLL_CFG_MASK	0xf
+
+struct cpufreq_frequency_table freq_table[] = {
+	{0, 0, CPUFREQ_ENTRY_INVALID}, /* 200Mhz is ignored */
+	{0, 0, CPUFREQ_ENTRY_INVALID}, /* 1200Mhz is ignored */
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_ENTRY_INVALID},
+	{0, 0, CPUFREQ_TABLE_END},
+};
+
+static void __init fill_freq_table(struct cpufreq_frequency_table *ft)
+{
+	int i;
+	unsigned long freq_off;
+	unsigned char external_clk;
+
+	external_clk = *((unsigned char *)__va(MB_EXTCLK));
+
+	if (external_clk == 240)
+		freq_off = 60000;
+	else
+		freq_off = 50000;
+
+	freq_table[2].frequency = freq_off * 36;
+	for (i = 3; freq_table[i].frequency != CPUFREQ_TABLE_END; i++)
+		freq_table[i].frequency = freq_off * 38 + ((i - 3) * freq_off);
+}
+
+#endif
+
+static unsigned int sunway_get_rate(struct cpufreq_policy *policy)
+{
+	int i, node;
+	u64 val;
+	void __iomem *spbu_base;
+	struct cpufreq_frequency_table *ft = policy->freq_table;
+
+	node = per_cpu(hard_node_id, policy->cpu);
+	spbu_base = misc_platform_get_spbu_base(node);
+
+	/* PLL2 provides working frequency for core */
+	val = readq(spbu_base + OFFSET_CLK_CTL) >> PLL_CFG_SHIFT(SUNWAY_CPU_PLL2);
+	val &= CORE_PLL_CFG_MASK;
+
+	for (i = 0; ft[i].frequency != CPUFREQ_TABLE_END; i++) {
+		if (val == i) {
+			if (ft[i].frequency == CPUFREQ_ENTRY_INVALID)
+				return sunway_max_cpu_freq() / KHZ;
+			return ft[i].frequency;
+		}
+	}
+
+	return 0;
+}
+
+static int sunway_update_pll_cfg(struct cpufreq_policy *policy,
+		enum sunway_cpu_pll pll, unsigned long pll_cfg)
+{
+	int retry = 0, node;
+	void __iomem *spbu_base;
+
+	node = per_cpu(hard_node_id, policy->cpu);
+	spbu_base = misc_platform_get_spbu_base(node);
+
+	/* PLL1 should keep stable */
+	if (WARN_ON(pll == SUNWAY_CPU_PLL1))
+		return -EINVAL;
+
+	if (pll == SUNWAY_CPU_PLL0) {
+		/* LV1 MUXA select PLL2, LV1 MUXB select PLL2 */
+		writeq(CLK_LV1_SEL_MUXA | CLK_LV1_SEL_MUXB | CLK_LV1_SEL_PROTECT,
+				spbu_base + OFFSET_CLU_LV1_SEL);
+	} else if (pll == SUNWAY_CPU_PLL2) {
+		/* LV1 MUXA keep PLL0 selected, LV1 MUXB select PLL1 */
+		writeq(CLK_LV1_SEL_PROTECT, spbu_base + OFFSET_CLU_LV1_SEL);
+	}
+
+	/* Reset PLL */
+	writeq(CLK_PROTECT(pll) | CLK_RESET(pll) | CLK_VALID(pll),
+			spbu_base + OFFSET_CLK_CTL);
+
+	/* Configure PLL */
+	writeq(CLK_PROTECT(pll) | CLK_VALID(pll) | pll_cfg << PLL_CFG_SHIFT(pll),
+			spbu_base + OFFSET_CLK_CTL);
+
+	udelay(2);
+
+	/* Reset over */
+	writeq(CLK_VALID(pll), spbu_base + OFFSET_CLK_CTL);
+
+	/* Wait until PLL stable */
+	while (retry < MAX_RETRY) {
+		if (readq(spbu_base + OFFSET_CLK_CTL) & CLK_LOCK(pll))
+			break;
+		retry++;
+		udelay(100);
+	}
+
+	if (pll_cfg && (retry == MAX_RETRY))
+		return -ETIME;
+
+	/* Configure over */
+	writeq(0, spbu_base + OFFSET_CLK_CTL);
+
+	/* LV1 MUXA select PLL0, LV1 MUXB select PLL2 */
+	writeq(CLK_LV1_SEL_MUXB | CLK_LV1_SEL_PROTECT, spbu_base + OFFSET_CLU_LV1_SEL);
+
+	return 0;
+}
+
+static unsigned int sunway_cpufreq_get(unsigned int cpu)
+{
+	struct cpufreq_policy *policy = cpufreq_cpu_get_raw(cpu);
+
+	if (!policy) {
+		pr_err("%s: no policy associated to cpu: %d\n",
+				__func__, cpu);
+		return 0;
+	}
+
+	return sunway_get_rate(policy);
+}
+
+static int sunway_cpufreq_target(struct cpufreq_policy *policy,
+				     unsigned int index)
+{
+	unsigned int cpu = policy->cpu;
+
+	if (!cpu_online(cpu))
+		return -ENODEV;
+
+	return sunway_update_pll_cfg(policy, SUNWAY_CPU_PLL2, index);
+}
+
+static int sunway_cpufreq_init(struct cpufreq_policy *policy)
+{
+	int cpu, node;
+	void __iomem *spbu_base;
+
+	node = per_cpu(hard_node_id, policy->cpu);
+
+	for_each_possible_cpu(cpu) {
+		if (per_cpu(hard_node_id, cpu) == node)
+			cpumask_set_cpu(cpu, policy->cpus);
+	}
+
+	policy->freq_table = freq_table;
+
+	spbu_base = misc_platform_get_spbu_base(node);
+
+	/* LV2 MUX select the clock output by LV1 MUXB as working freq */
+	writeq(~0ULL, spbu_base + OFFSET_CLU_LV2_SEL_L);
+	if (is_junzhang_v1() || is_junzhang_v2())
+		writeq(~0ULL, spbu_base + OFFSET_CLU_LV2_SEL_H);
+
+	/* Set PLL0 to the lowest freq */
+	sunway_update_pll_cfg(policy, SUNWAY_CPU_PLL0, 0);
+
+	return 0;
+}
+
+static struct freq_attr *sunway_table_attr[] = {
+	&cpufreq_freq_attr_scaling_available_freqs, NULL,
+};
+
+static struct cpufreq_driver sunway_cpufreq_driver = {
+	.name = "sunway-cpufreq",
+	.flags = CPUFREQ_NEED_INITIAL_FREQ_CHECK,
+	.init = sunway_cpufreq_init,
+	.verify = cpufreq_generic_frequency_table_verify,
+	.target_index = sunway_cpufreq_target,
+	.get = sunway_cpufreq_get,
+	.attr = sunway_table_attr,
+};
+
+static int __init cpufreq_init(void)
+{
+	int i, ret;
+	unsigned long max_rate = sunway_max_cpu_freq() / KHZ; /* KHz */
+
+	if (!is_in_host()) {
+		pr_warn("cpufreq driver of Sunway platforms is only supported in host mode\n");
+		return -ENODEV;
+	}
+
+#ifdef CONFIG_PLATFORM_XUELANG
+	fill_freq_table(freq_table);
+#endif
+
+	for (i = 0; freq_table[i].frequency != CPUFREQ_TABLE_END; i++) {
+		if (max_rate == freq_table[i].frequency)
+			freq_table[i+1].frequency = CPUFREQ_TABLE_END;
+	}
+
+	ret = cpufreq_register_driver(&sunway_cpufreq_driver);
+	if (ret)
+		return ret;
+
+	return 0;
+}
+device_initcall(cpufreq_init);
+

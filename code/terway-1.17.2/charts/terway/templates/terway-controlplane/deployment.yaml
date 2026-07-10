@@ -1,0 +1,153 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terway-controlplane
+  labels:
+  {{- include "terway-controlplane.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.terwayControlplane.replicaCount }}
+  selector:
+    matchLabels:
+    {{- include "terway-controlplane.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        k8s-app: terway-controlplane
+    {{- include "terway-controlplane.selectorLabels" . | nindent 8 }}
+    spec:
+      hostNetwork: true
+      serviceAccountName: terway-controlplane
+      containers:
+        - name: terway-controlplane
+          image: "{{ .Values.terwayControlplane.image.repository }}:{{ .Values.terwayControlplane.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.terwayControlplane.image.pullPolicy }}
+          command:
+            - /usr/bin/terway-controlplane
+            - "-v"
+            - "{{ .Values.terwayControlplane.logLevel }}"
+            {{- if .Values.featureGates }}
+            - "-feature-gates={{.Values.featureGates}}"
+            {{- end }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
+          ports:
+            - name: healthz
+              containerPort: 8080
+              protocol: TCP
+            - name: metrics
+              containerPort: 8081
+              protocol: TCP
+          env:
+          {{- toYaml .Values.terwayControlplane.envs | nindent 12 }}
+          livenessProbe:
+            periodSeconds: 10
+            timeoutSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 8080
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            httpGet:
+              path: /readyz
+              port: 8080
+          resources:
+          {{- toYaml .Values.terwayControlplane.resources | nindent 12 }}
+          volumeMounts:
+            - name: config-vol
+              mountPath: /etc/config
+              readOnly: true
+            - name: secret-vol
+              mountPath: /etc/credential
+              readOnly: true
+            - name: webhook-vol
+              mountPath: /var/run/webhook-cert
+            - name: addon-token
+              mountPath: "/var/addon"
+              readOnly: true
+        - name: cilium-operator
+          image: "{{ .Values.terwayControlplane.image.repository }}:{{ .Values.terwayControlplane.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.terwayControlplane.image.pullPolicy }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          command:
+            - /usr/bin/cilium-operator-generic
+            - --config
+            - /etc/config/cilium-config.yaml
+            - --gops-port
+            - "0"
+          env:
+            - name: K8S_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          livenessProbe:
+            httpGet:
+              host: 127.0.0.1
+              path: /healthz
+              port: 9234
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: "4"
+              memory: 4Gi
+          volumeMounts:
+            - name: config-vol
+              mountPath: /etc/config
+              readOnly: true
+      volumes:
+        - name: config-vol
+          configMap:
+            name: terway-controlplane
+            items:
+              - key: ctrl-config.yaml
+                path: ctrl-config.yaml
+              - key: cilium-config.yaml
+                path: cilium-config.yaml
+        - name: secret-vol
+          secret:
+            secretName: terway-controlplane-credential
+        - name: webhook-vol
+          emptyDir: { }
+        - name: addon-token
+          secret:
+            secretName: addon.network.token
+            items:
+            - key: addon.token.config
+              path: token-config
+            optional: true
+      {{- with .Values.terwayControlplane.nodeSelector }}
+      nodeSelector:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.terwayControlplane.affinity }}
+      affinity:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.terwayControlplane.tolerations }}
+      tolerations:
+      {{- toYaml . | nindent 8 }}
+  {{- end }}

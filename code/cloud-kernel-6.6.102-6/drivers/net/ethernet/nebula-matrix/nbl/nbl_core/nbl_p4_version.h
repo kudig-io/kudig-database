@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: GPL-2.0*/
+/*
+ * Copyright (c) 2022 nebula-matrix Limited.
+ * Author:
+ */
+
+#ifndef _NBL_P4_VERSION_H_
+#define _NBL_P4_VERSION_H_
+
+#define NBL_SINGLE_VXLAN_TOE_ENHANCE_P4_MD5 "fc61c22894eb17f688dff153b7c29efe"
+#define NBL_DUAL_VXLAN_TOE_ENHANCE_P4_MD5 "64fff3eeebdb53990c201ec70a430a55"
+#define NBL_QUAD_VXLAN_TOE_ENHANCE_P4_MD5 "9b8ab0508834436e1df1eac537934485"
+
+#define NBL_SINGLE_PORT_HG_P4_MD5 "44757bab80dc985bffc04fe9a6d66bc1"
+#define NBL_DUAL_PORT_HG_P4_MD5 "74e95394bc348b9cc6ebe5f9c28c2b8a"
+#define NBL_QUAD_PORT_HG_P4_MD5 "009e209c4a3cab358bc76d5e06e3338b"
+
+#define NBL_SINGLE_PORT_LG_P4_MD5 "bfb18a8db52d82d2708920d0d3efc231"
+#define NBL_DUAL_PORT_LG_P4_MD5 "32da40ac96884d520ebfe4179db2d7fb"
+#define NBL_QUAD_PORT_LG_P4_MD5 "07453cc77b7c714c285038b05f5b53d7"
+
+#endif

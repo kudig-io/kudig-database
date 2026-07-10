@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# SW64 CPU Idle drivers
+#
+config SW64_CPUIDLE
+	bool "Generic SW64 CPU idle Driver"
+	depends on !NO_HZ
+	depends on !NO_HZ_IDLE
+	help
+	  Enable cpuidle support for SW64 architecture.
+	  Disabled when tickless system (NO_HZ or NO_HZ_IDLE) is active.

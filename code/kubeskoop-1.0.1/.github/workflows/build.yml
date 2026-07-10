@@ -1,0 +1,95 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: docker.io
+  OWNER: kubeskoop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.after }}
+  cancel-in-progress: true
+
+jobs:
+  build-skoop:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Docker meta agent
+        id: meta-agent
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.OWNER }}/agent
+          tags: |
+            type=raw,value={{date 'YYYYMMDD'}}-{{sha}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{raw}}
+            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Docker meta controller
+        id: meta-controller
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.OWNER }}/controller
+          tags: |
+            type=raw,value={{date 'YYYYMMDD'}}-{{sha}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{raw}}
+            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        if: ${{ github.event_name != 'pull_request' && github.event.action != 'unassigned' && github.repository == 'alibaba/kubeskoop' }}
+
+      - name: Go Build Cache for Docker
+        uses: actions/cache@v3
+        with:
+          path: go-build-cache
+          key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
+      - name: inject go-build-cache into docker
+        # v1 was composed of two actions: "inject" and "extract".
+        # v2 is unified to a single action.
+        uses: reproducible-containers/buildkit-cache-dance@v2.1.2
+        with:
+          cache-source: go-build-cache
+
+      - name: Build and push agent
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name != 'pull_request' && github.repository == 'alibaba/kubeskoop' }}
+          tags: ${{ steps.meta-agent.outputs.tags }}
+          target: agent
+          labels: ${{ steps.meta-agent.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Build and push controller
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name != 'pull_request' && github.repository == 'alibaba/kubeskoop' }}
+          tags: ${{ steps.meta-controller.outputs.tags }}
+          target: controller
+          labels: ${{ steps.meta-controller.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

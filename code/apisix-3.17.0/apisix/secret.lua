@@ -1,0 +1,333 @@
+--
+-- Licensed to the Apache Software Foundation (ASF) under one or more
+-- contributor license agreements.  See the NOTICE file distributed with
+-- this work for additional information regarding copyright ownership.
+-- The ASF licenses this file to You under the Apache License, Version 2.0
+-- (the "License"); you may not use this file except in compliance with
+-- the License.  You may obtain a copy of the License at
+--
+--     http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+--
+
+local require   = require
+local core      = require("apisix.core")
+local string    = require("apisix.core.string")
+local tracer    = require("apisix.tracer")
+
+local local_conf = require("apisix.core.config_local").local_conf()
+
+local find      = string.find
+local sub       = string.sub
+local upper     = string.upper
+local byte      = string.byte
+local type      = type
+local pcall     = pcall
+local pairs     = pairs
+local ngx       = ngx
+
+local _M = {}
+
+
+local PREFIX = "$secret://"
+local secrets
+
+local function check_secret(conf)
+    local idx = find(conf.id or "", "/")
+    if not idx then
+        return false, "no secret id"
+    end
+    local manager = sub(conf.id, 1, idx - 1)
+
+    local ok, secret_manager = pcall(require, "apisix.secret." .. manager)
+    if not ok then
+        return false, "secret manager not exits, manager: " .. manager
+    end
+
+    return core.schema.check(secret_manager.schema, conf)
+end
+
+
+local function secret_kv(manager, confid)
+    local secret_values
+    secret_values = core.config.fetch_created_obj("/secrets")
+    if not secret_values or not secret_values.values then
+       return nil
+    end
+
+    local secret = secret_values:get(manager .. "/" .. confid)
+    if not secret then
+        return nil
+    end
+
+    return secret.value
+end
+
+
+function _M.secrets()
+    if not secrets then
+        return nil, nil
+    end
+
+    return secrets.values, secrets.conf_version
+end
+
+
+function _M.init_worker()
+    local cfg = {
+        automatic = true,
+        checker = check_secret,
+    }
+
+    secrets = core.config.new("/secrets", cfg)
+end
+
+
+local function check_secret_uri(secret_uri)
+    -- Avoid the error caused by has_prefix to cause a crash.
+    if type(secret_uri) ~= "string" then
+        return false, "error secret_uri type: " .. type(secret_uri)
+    end
+
+    if not string.has_prefix(secret_uri, PREFIX) and
+        not string.has_prefix(upper(secret_uri), core.env.PREFIX) then
+        return false, "error secret_uri prefix: " .. secret_uri
+    end
+
+    return true
+end
+
+_M.check_secret_uri = check_secret_uri
+
+
+local function parse_secret_uri(secret_uri)
+    local is_secret_uri, err = check_secret_uri(secret_uri)
+    if not is_secret_uri then
+        return is_secret_uri, err
+    end
+
+    local path = sub(secret_uri, #PREFIX + 1)
+    local idx1 = find(path, "/")
+    if not idx1 then
+        return nil, "error format: no secret manager"
+    end
+    local manager = sub(path, 1, idx1 - 1)
+
+    local idx2 = find(path, "/", idx1 + 1)
+    if not idx2 then
+        return nil, "error format: no secret conf id"
+    end
+    local confid = sub(path, idx1 + 1, idx2 - 1)
+
+    local key = sub(path, idx2 + 1)
+    if key == "" then
+        return nil, "error format: no secret key id"
+    end
+
+    local opts = {
+        manager = manager,
+        confid = confid,
+        key = key
+    }
+    return opts
+end
+
+
+local function fetch_by_uri_secret(secret_uri)
+    core.log.info("fetching data from secret uri: ", secret_uri)
+    local opts, err = parse_secret_uri(secret_uri)
+    if not opts then
+        return nil, err
+    end
+
+    local conf = secret_kv(opts.manager, opts.confid)
+    if not conf then
+        return nil, "no secret conf, secret_uri: " .. secret_uri
+    end
+
+    local ok, sm = pcall(require, "apisix.secret." .. opts.manager)
+    if not ok then
+        return nil, "no secret manager: " .. opts.manager
+    end
+
+    local span = tracer.start(ngx.ctx, "fetch_secret", tracer.kind.client)
+    local value, err = sm.get(conf, opts.key)
+    if err then
+        span:set_status(tracer.status.ERROR, err)
+        span:finish(ngx.ctx)
+        return nil, err
+    end
+
+    span:finish(ngx.ctx)
+    return value
+end
+
+-- for test
+_M.fetch_by_uri = fetch_by_uri_secret
+
+
+local function new_lrucache()
+    local ttl = core.table.try_read_attr(local_conf, "apisix", "lru", "secret", "ttl")
+    if not ttl then
+        ttl = 300
+    end
+
+    local count = core.table.try_read_attr(local_conf, "apisix", "lru", "secret", "count")
+    if not count then
+        count = 512
+    end
+
+    local neg_ttl = core.table.try_read_attr(local_conf, "apisix", "lru", "secret", "neg_ttl")
+    if not neg_ttl then
+        neg_ttl = 60  -- 1 minute default for failures
+    end
+
+    local neg_count = core.table.try_read_attr(local_conf, "apisix", "lru", "secret", "neg_count")
+    if not neg_count then
+        neg_count = 512
+    end
+
+    core.log.info("secret lrucache ttl: ", ttl, ", count: ", count,
+                  ", neg_ttl: ", neg_ttl, ", neg_count: ", neg_count)
+
+    return core.lrucache.new({
+        ttl = ttl,
+        count = count,
+        neg_ttl = neg_ttl,
+        neg_count = neg_count,
+        invalid_stale = true,
+        refresh_stale = true
+    })
+end
+
+local secrets_cache = new_lrucache()
+
+
+
+local function fetch(uri, use_cache)
+    -- do a quick filter to improve retrieval speed
+    if byte(uri, 1, 1) ~= byte('$') then
+        return nil
+    end
+
+    local fetch_by_uri
+    if string.has_prefix(upper(uri), core.env.PREFIX) then
+        fetch_by_uri = core.env.fetch_by_uri
+    elseif string.has_prefix(uri, PREFIX) then
+        fetch_by_uri = fetch_by_uri_secret
+    else
+        return nil
+    end
+
+    if not use_cache then
+        local val, err = fetch_by_uri(uri)
+        if err then
+            core.log.error("failed to fetch secret value: ", err)
+            return nil
+        end
+        return val
+    end
+
+    return secrets_cache(uri, "", fetch_by_uri, uri)
+end
+
+local function retrieve_refs(refs, use_cache)
+    for k, v in pairs(refs) do
+        local typ = type(v)
+        if typ == "string" then
+            refs[k] = fetch(v, use_cache) or v
+        elseif typ == "table" then
+            retrieve_refs(v, use_cache)
+        end
+    end
+    return refs
+end
+
+function _M.fetch_secrets(refs, use_cache)
+    if not refs or type(refs) ~= "table" then
+        return nil
+    end
+
+    local new_refs = core.table.deepcopy(refs)
+    return retrieve_refs(new_refs, use_cache)
+end
+
+
+-- Used as jsonschema skip_validation hook: signature is (value, schema).
+-- Returns true to skip validation when value is a secret reference ($secret:// or $env://).
+-- Only skips for fields whose schema accepts string values.
+function _M.is_secret_ref(value, schema)
+    if type(value) ~= "string" or byte(value, 1) ~= 36 then  -- '$'
+        return false
+    end
+    if schema and schema.type and schema.type ~= "string" then
+        return false
+    end
+    if not (string.has_prefix(value, PREFIX)
+            or string.has_prefix(upper(value), core.env.PREFIX)) then
+        return false
+    end
+
+    return true
+end
+
+
+local function _has_secret_ref(t, visited)
+    if visited[t] then
+        return false
+    end
+    visited[t] = true
+    for _, v in pairs(t) do
+        if type(v) == "string" then
+            if _M.is_secret_ref(v) then
+                return true
+            end
+        elseif type(v) == "table" then
+            if _has_secret_ref(v, visited) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+
+function _M.has_secret_ref(conf)
+    if type(conf) ~= "table" then
+        return false
+    end
+    return _has_secret_ref(conf, {})
+end
+
+
+local function _collect_secret_values(t, vals, use_cache, visited)
+    if visited[t] then
+        return
+    end
+    visited[t] = true
+    for _, v in pairs(t) do
+        if type(v) == "string" and _M.is_secret_ref(v) then
+            vals[v] = fetch(v, use_cache)
+        elseif type(v) == "table" then
+            _collect_secret_values(v, vals, use_cache, visited)
+        end
+    end
+end
+
+
+function _M.collect_secret_values(conf, use_cache)
+    local vals = {}
+    if type(conf) ~= "table" then
+        return vals
+    end
+    _collect_secret_values(conf, vals, use_cache, {})
+    return vals
+end
+
+
+return _M

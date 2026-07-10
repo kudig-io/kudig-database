@@ -1,0 +1,229 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+set -ex
+
+export_version_info() {
+    source ./.requirements
+}
+
+export_or_prefix() {
+    export OPENRESTY_PREFIX="/usr/local/openresty"
+
+    export PATH=$OPENRESTY_PREFIX/nginx/sbin:$OPENRESTY_PREFIX/luajit/bin:$OPENRESTY_PREFIX/bin:$PATH
+    export OPENSSL_PREFIX=$OPENRESTY_PREFIX/openssl3
+    export OPENSSL_BIN=$OPENSSL_PREFIX/bin/openssl
+}
+
+create_lua_deps() {
+    echo "Create lua deps"
+
+    make deps
+
+    # just for jwt-auth test
+    luarocks install lua-resty-openssl --tree deps
+
+    # maybe reopen this feature later
+    # luarocks install luacov-coveralls --tree=deps --local > build.log 2>&1 || (cat build.log && exit 1)
+    # for github action cache
+    chmod -R a+r deps
+}
+
+rerun_flaky_tests() {
+    if tail -1 "$1" | grep "Result: PASS"; then
+        exit 0
+    fi
+
+    if ! tail -1 "$1" | grep "Result: FAIL"; then
+        # CI failure not caused by failed test
+        exit 1
+    fi
+
+    local tests
+    local n_test
+    tests="$(awk '/^t\/.*.t\s+\(.+ Failed: .+\)/{ print $1 }' "$1")"
+    n_test="$(echo "$tests" | wc -l)"
+    if [ "$n_test" -gt 10 ]; then
+        # too many tests failed
+        exit 1
+    fi
+
+    echo "Rerun $(echo "$tests" | xargs)"
+    FLUSH_ETCD=1 prove --timer -I./test-nginx/lib -I./ $(echo "$tests" | xargs)
+}
+
+fail_on_bailout() {
+    local test_output_file="$1"
+
+    # Check for bailout message in test output
+    if grep -q "Bailout called.  Further testing stopped:" "$test_output_file"; then
+        echo "Error: Bailout detected in test output"
+        exit 1
+    fi
+}
+install_curl () {
+    CURL_VERSION="8.13.0"
+    wget -q https://github.com/stunnel/static-curl/releases/download/${CURL_VERSION}/curl-linux-x86_64-glibc-${CURL_VERSION}.tar.xz
+    tar -xf curl-linux-x86_64-glibc-${CURL_VERSION}.tar.xz
+    sudo cp curl /usr/bin
+    curl -V
+}
+
+install_apisix_runtime() {
+    export runtime_version=${APISIX_RUNTIME}
+    wget "https://raw.githubusercontent.com/api7/apisix-build-tools/apisix-runtime/${APISIX_RUNTIME}/build-apisix-runtime.sh"
+    chmod +x build-apisix-runtime.sh
+    ./build-apisix-runtime.sh latest
+}
+
+install_grpcurl () {
+    # For more versions, visit https://github.com/fullstorydev/grpcurl/releases
+    GRPCURL_VERSION="1.8.5"
+    wget -q https://github.com/fullstorydev/grpcurl/releases/download/v${GRPCURL_VERSION}/grpcurl_${GRPCURL_VERSION}_linux_x86_64.tar.gz
+    tar -xvf grpcurl_${GRPCURL_VERSION}_linux_x86_64.tar.gz -C /usr/local/bin
+}
+
+install_vault_cli () {
+    VAULT_VERSION="1.9.0"
+    wget -q https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip
+    unzip vault_${VAULT_VERSION}_linux_amd64.zip && mv ./vault /usr/local/bin
+}
+
+install_nodejs () {
+    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install --cleanup lts
+    export PNPM_HOME="/pnpm"
+    export PATH="$PNPM_HOME:$PATH"
+    corepack enable pnpm
+    pnpm setup
+}
+
+install_brotli () {
+    local BORTLI_VERSION="1.1.0"
+    wget -q https://github.com/google/brotli/archive/refs/tags/v${BORTLI_VERSION}.zip
+    unzip v${BORTLI_VERSION}.zip && cd ./brotli-${BORTLI_VERSION} && mkdir build && cd build
+    local CMAKE=$(command -v cmake3 > /dev/null 2>&1 && echo cmake3 || echo cmake)
+    ${CMAKE} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local/brotli ..
+    sudo ${CMAKE} --build . --config Release --target install
+    if [ -d "/usr/local/brotli/lib64" ]; then
+        echo /usr/local/brotli/lib64 | sudo tee /etc/ld.so.conf.d/brotli.conf
+    else
+        echo /usr/local/brotli/lib | sudo tee /etc/ld.so.conf.d/brotli.conf
+    fi
+    sudo ldconfig
+    cd ../..
+    rm -rf brotli-${BORTLI_VERSION}
+}
+
+set_coredns() {
+    # test a domain name is configured as upstream
+    echo "127.0.0.1 test.com" | sudo tee -a /etc/hosts
+    echo "::1 ipv6.local" | sudo tee -a /etc/hosts
+    # test certificate verification
+    echo "127.0.0.1 admin.apisix.dev" | sudo tee -a /etc/hosts
+    cat /etc/hosts # check GitHub Action's configuration
+
+    # override DNS configures
+    if [ -f "/etc/netplan/50-cloud-init.yaml" ]; then
+        sudo pip3 install yq
+
+        tmp=$(mktemp)
+        yq -y '.network.ethernets.eth0."dhcp4-overrides"."use-dns"=false' /etc/netplan/50-cloud-init.yaml | \
+        yq -y '.network.ethernets.eth0."dhcp4-overrides"."use-domains"=false' | \
+        yq -y '.network.ethernets.eth0.nameservers.addresses[0]="8.8.8.8"' | \
+        yq -y '.network.ethernets.eth0.nameservers.search[0]="apache.org"' > $tmp
+        mv $tmp /etc/netplan/50-cloud-init.yaml
+        cat /etc/netplan/50-cloud-init.yaml
+        sudo netplan apply
+        sleep 3
+
+        sudo mv /etc/resolv.conf /etc/resolv.conf.bak
+        sudo ln -s /run/systemd/resolve/resolv.conf /etc/
+    fi
+    cat /etc/resolv.conf
+
+    mkdir -p build-cache
+
+    if [ ! -f "build-cache/coredns_1_8_1" ]; then
+        wget -q https://github.com/coredns/coredns/releases/download/v1.8.1/coredns_1.8.1_linux_amd64.tgz
+        tar -xvf coredns_1.8.1_linux_amd64.tgz
+        mv coredns build-cache/
+
+        touch build-cache/coredns_1_8_1
+    fi
+
+    pushd t/coredns || exit 1
+    ../../build-cache/coredns -dns.port=1053 &
+    popd || exit 1
+
+    touch build-cache/test_resolve.conf
+    echo "nameserver 127.0.0.1:1053" > build-cache/test_resolve.conf
+}
+
+GRPC_SERVER_EXAMPLE_VER=20210819
+
+linux_get_dependencies () {
+    apt update
+    apt install -y cpanminus build-essential libncurses5-dev libreadline-dev libssl-dev perl libpcre3 libpcre3-dev libpcre2-dev xz-utils redis-tools
+    apt remove -y curl
+    apt-get install -y libyaml-dev
+    wget https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
+
+    # install curl with http3 support
+    install_curl
+}
+
+function start_grpc_server_example() {
+    ./t/grpc_server_example/grpc_server_example \
+        -grpc-address :10051 -grpcs-address :10052 -grpcs-mtls-address :10053 -grpc-http-address :10054 \
+        -crt ./t/certs/apisix.crt -key ./t/certs/apisix.key -ca ./t/certs/mtls_ca.crt \
+        > grpc_server_example.log 2>&1 &
+
+    for (( i = 0; i <= 10; i++ )); do
+        sleep 0.5
+        GRPC_PROC=`ps -ef | grep grpc_server_example | grep -v grep || echo "none"`
+        if [[ $GRPC_PROC == "none" || "$i" -eq 10 ]]; then
+            echo "failed to start grpc_server_example"
+            ss -antp | grep 1005 || echo "no proc listen port 1005x"
+            cat grpc_server_example.log
+
+            exit 1
+        fi
+
+        ss -lntp | grep 10051 | grep grpc_server && break
+    done
+}
+
+
+function start_sse_server_example() {
+    # build sse_server_example
+    pushd t/sse_server_example
+    go build
+    ./sse_server_example 7737 2>&1 &
+
+    for (( i = 0; i <= 10; i++ )); do
+        sleep 0.5
+        SSE_PROC=`ps -ef | grep sse_server_example | grep -v grep || echo "none"`
+        if [[ $SSE_PROC == "none" || "$i" -eq 10 ]]; then
+            echo "failed to start sse_server_example"
+            ss -antp | grep 7737 || echo "no proc listen port 7737"
+            exit 1
+        else
+            break
+        fi
+    done
+    popd
+}

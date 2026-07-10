@@ -1,0 +1,8 @@
+config DRM_YHGCH
+	tristate "DRM Support for YHGCH BMC"
+	depends on DRM && PCI && MMU
+	select DRM_KMS_HELPER
+	select DRM_VRAM_HELPER
+	help
+	  Choose this option if you have a Yhgch soc chipset.
+	  If M is selected the module will be called yhgch-drm.

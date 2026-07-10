@@ -1,0 +1,83 @@
+name: check
+
+on:
+  push: { }
+  pull_request: { }
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.after }}
+  cancel-in-progress: true
+
+jobs:
+  go-test:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        buildkitd-config-inline: |
+          [[worker.oci.gcpolicy]]
+          minFreeSpace = "1GB"
+          [[worker.oci.gcpolicy]]
+          all = true
+          minFreeSpace = "1GB"
+
+    - uses: crazy-max/ghaction-github-runtime@v3
+    - name: Test
+      run: |
+        sudo -E "PATH=$PATH" make test
+    - uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage.txt
+        flags: unittests
+        name: codecov-terway
+        fail_ci_if_error: true
+        verbose: true
+
+  go-mod:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+    - name: Check module vendoring
+      run: |
+        go mod tidy
+        go mod vendor
+        git diff --exit-code || (echo "please run 'go mod tidy && go mod vendor', and submit your changes"; exit 1)
+
+  go-lint:
+    name: lint
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: 'go.mod'
+        cache: false
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v8
+      with:
+        version: v2.11.4
+        args: --config=.golangci.yml
+
+  super-linter:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Lint Code Base
+      uses: super-linter/super-linter@v5.1.1
+      env:
+        VALIDATE_ALL_CODEBASE: true
+        VALIDATE_MARKDOWN: true
+        VALIDATE_BASH: true
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILTER_REGEX_EXCLUDE: .*(test|tests).*
+        SHELLCHECK_OPTS: "-e SC2166"

@@ -1,0 +1,711 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubeskoop
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kubeskoop-exporter
+  namespace: kubeskoop
+  labels:
+    app: kubeskoop-exporter
+spec:
+  selector:
+    matchLabels:
+      app: kubeskoop-exporter
+  template:
+    metadata:
+      labels:
+        app: kubeskoop-exporter
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9102"
+        prometheus.io/scheme: http
+        prometheus.io/scrape: "true"
+      name: kubeskoop-exporter
+    spec:
+      hostNetwork: true
+      hostPID: true
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirstWithHostNet
+      initContainers:
+        - name: inspector-prepare
+          image: kubeskoop/agent:v1.0.0
+          volumeMounts:
+            - name: btf-rawdata
+              mountPath: /etc/net-exporter/btf
+            - mountPath: /boot/
+              name: boot
+          command: [btfhack, discover, -p, /etc/net-exporter/btf/]
+      containers:
+      - image: kubeskoop/agent:v1.0.0
+        name: inspector
+        ports:
+        - name: http
+          containerPort: 9102
+        env:
+        - name: INSPECTOR_NODENAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config/
+          - name: btf-rawdata
+            mountPath: /etc/net-exporter/btf
+          - name: proc
+            mountPath: /proc
+          - mountPath: /run/containerd/
+            name: containerd
+          - mountPath: /var/run/
+            name: dockershim
+          - mountPath: /sys/fs/bpf
+            name: bpf-maps
+            mountPropagation: HostToContainer
+          - mountPath: /sys/fs/cgroup
+            name: cgroup
+            mountPropagation: HostToContainer
+          - mountPath: /sys/kernel/debug
+            name: bpf-events
+            mountPropagation: HostToContainer
+          - mountPath: /etc/node-hostname
+            name: hostname
+        command: [/bin/inspector,server,-d]
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - SYS_PTRACE
+            - SYS_ADMIN
+            - SYS_RESOURCE
+            - DAC_OVERRIDE
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 1000Mi
+          limits:
+            cpu: 1000m
+            memory: 2000Mi
+      volumes:
+        - name: proc
+          hostPath:
+            path: /proc
+        - name: containerd
+          hostPath:
+            path: /run/containerd/
+        - name: dockershim
+          hostPath:
+            path: /var/run/
+        - hostPath:
+            path: /sys/fs/bpf
+            type: DirectoryOrCreate
+          name: bpf-maps
+        - name: boot
+          hostPath:
+            path: /boot
+            type: DirectoryOrCreate
+        - hostPath:
+            path: /sys/fs/cgroup
+            type: DirectoryOrCreate
+          name: cgroup
+        - hostPath:
+            path: /sys/kernel/debug
+          name: bpf-events
+        - name: hostname
+          hostPath:
+            path: /etc/hostname
+            type: FileOrCreate
+        - name: config-volume
+          configMap:
+            name: kubeskoop-config
+        - name: btf-rawdata
+          emptyDir: {}
+---
+apiVersion: v1
+data:
+  config.yaml: |-
+    debugMode: true
+    port: 9102
+    enableController: true
+    metrics:
+      probes:
+      - name: conntrack
+      - name: qdisc
+      - name: netdev
+      - name: io
+      - name: sock
+      - name: tcpsummary
+      - name: tcp
+      - name: tcpext
+      - name: udp
+      - name: socketlatency
+      - name: packetloss
+      - name: flow
+        args:
+          enablePortInLabel: false
+      - name: tcpretrans
+    event:
+      probes:
+      - name: tcpreset
+      - name: packetloss
+        args:
+          enableStack: false
+      - name: tcpretrans
+      sinks:
+      - name: stderr
+      - name: loki
+        args:
+          addr: loki-service
+kind: ConfigMap
+metadata:
+  name: kubeskoop-config
+  namespace: kubeskoop
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources:
+  - namespaces
+  - pods
+  - pods/exec
+  verbs: ["create", "delete"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: kubeskoop
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-server-conf
+  labels:
+    name: prometheus-server-conf
+  namespace: kubeskoop
+data:
+  prometheus.rules: |-
+    groups:
+    - name: devopscube demo alert
+      rules:
+      - alert: High Pod Memory
+        expr: sum(container_memory_usage_bytes) > 1
+        for: 1m
+        labels:
+          severity: slack
+        annotations:
+          summary: High Memory Usage
+  prometheus.yml: |-
+    global:
+      scrape_interval: 5s
+      evaluation_interval: 5s
+
+    scrape_configs:
+      - job_name: 'net-exporter'
+        kubernetes_sd_configs:
+          - role: endpoints
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_endpoints_name]
+          regex: 'net-exporter'
+          action: keep
+
+      - job_name: 'kubernetes-pods'
+
+        kubernetes_sd_configs:
+        - role: pod
+
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod_name
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: kubeskoop
+  labels:
+    app: prometheus-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--storage.tsdb.retention.time=12h"
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500M
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+
+        - name: prometheus-storage-volume
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  namespace: kubeskoop
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9090'
+spec:
+  selector:
+    app: prometheus-server
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 9090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-service
+  namespace: kubeskoop
+spec:
+  selector:
+    app: grafana-loki
+  type: ClusterIP
+  ports:
+    - port: 3100
+      targetPort: 3100
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: kubeskoop
+data:
+  prometheus.yaml: |-
+    {
+        "apiVersion": 1,
+        "datasources": [
+            {
+               "access":"proxy",
+                "editable": true,
+                "name": "prometheus",
+                "orgId": 1,
+                "type": "prometheus",
+                "url": "http://prometheus-service",
+                "version": 1
+            }
+        ]
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: kubeskoop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+          - name: grafana
+            containerPort: 3000
+        env:
+          - name: GF_SECURITY_ADMIN_PASSWORD
+            value: "kubeskoop"
+          - name: GF_SECURITY_ALLOW_EMBEDDING
+            value: "true"
+          - name: GF_SERVER_SERVE_FROM_SUB_PATH
+            value: "true"
+          - name: GF_SERVER_ROOT_URL
+            value: "/grafana"
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+          requests:
+            memory: 500M
+            cpu: "500m"
+        volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: grafana-storage
+          - mountPath: /etc/grafana/provisioning/datasources
+            name: grafana-datasources
+            readOnly: false
+      - name: register-dashboard
+        image: kubeskoop/controller:v1.0.0
+        env:
+          - name: GRAFANA_PASSWORD
+            value: "kubeskoop"
+        command: ["/bin/grafana_dashboard.sh"]
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-datasources
+          configMap:
+              defaultMode: 420
+              name: grafana-datasources
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: kubeskoop
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '3000'
+spec:
+  selector:
+    app: grafana
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-loki
+  namespace: kubeskoop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana-loki
+  template:
+    metadata:
+      name: grafana-loki
+      labels:
+        app: grafana-loki
+    spec:
+      containers:
+      - name: grafana-loki
+        image: grafana/loki:2.7.0
+        ports:
+        - name: grafana-loki
+          containerPort: 3100
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+          requests:
+            memory: 500M
+            cpu: "500m"
+        volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: grafana-storage
+          - mountPath: /mnt/config/
+            name: grafana-loki-config
+            readOnly: false
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-loki-config
+          configMap:
+              defaultMode: 420
+              name: grafana-loki-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-loki-config
+  namespace: kubeskoop
+data:
+  loki-config.yaml: |-
+    auth_enabled: false
+
+    server:
+      http_listen_port: 3100
+      grpc_listen_port: 9096
+
+    common:
+      path_prefix: /tmp/loki
+      storage:
+        filesystem:
+          chunks_directory: /tmp/loki/chunks
+          rules_directory: /tmp/loki/rules
+      replication_factor: 1
+      ring:
+        instance_addr: 127.0.0.1
+        kvstore:
+          store: inmemory
+
+    schema_config:
+      configs:
+        - from: 2020-10-24
+          store: boltdb-shipper
+          object_store: filesystem
+          schema: v11
+          index:
+            prefix: index_
+            period: 24h
+
+    analytics:
+      reporting_enabled: false
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubeskoop-controller
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - configmaps
+  - namespaces
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["daemonsets"]
+  verbs: ["get", "list"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["networkpolicies"]
+  verbs: ["get", "list"]
+- apiGroups: ["projectcalico.org", "crd.projectcalico.org"]
+  resources: ["ippools"]
+  verbs: ["get", "list"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubeskoop-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubeskoop-controller
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: kubeskoop
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: controller
+  namespace: kubeskoop
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  resourceNames: ["kubeskoop-config"]
+  verbs: ["get", "update"]
+- apiGroups: [""]
+  resources:
+  - pods
+  verbs: ["get", "list", "watch", "delete", "create"]
+- apiGroups: [""]
+  resources: ["pods/exec", "pods/attach", "pods/portforward"]
+  verbs: ["create", "get", "list", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: controller
+  namespace: kubeskoop
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: controller
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: kubeskoop
+---
+apiVersion: v1
+data:
+  controller.yaml: |-
+    logLevel: debug
+    server:
+      httpPort: 10264
+      agentPort: 10263
+    controller:
+      prometheus: http://prometheus-service
+      database:
+        type: sqlite3
+      loki: http://loki-service:3100
+      diagnose: {}
+kind: ConfigMap
+metadata:
+  name: kubeskoop-controller-config
+  namespace: kubeskoop
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  namespace: kubeskoop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: controller
+  template:
+    metadata:
+      name: controller
+      labels:
+        app: controller
+    spec:
+      containers:
+      - name: controller
+        image: kubeskoop/controller:v1.0.0
+        command: ["/bin/controller"]
+        volumeMounts:
+          - name:  lib
+            mountPath: /var/lib/kubeskoop
+          - name: config
+            mountPath: /etc/kubeskoop
+      volumes:
+      - name: lib
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: kubeskoop-controller-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: controller
+  namespace: kubeskoop
+spec:
+  selector:
+    app: controller
+  ports:
+    - name: grpc
+      port: 10263
+      targetPort: 10263
+    - name: http
+      port: 10264
+      targetPort: 10264
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webconsole
+  namespace: kubeskoop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webconsole
+  template:
+    metadata:
+      name: webconsole
+      labels:
+        app: webconsole
+    spec:
+      containers:
+      - name: controller
+        image: kubeskoop/controller:v1.0.0
+        command: ["/bin/webconsole"]
+        env:
+          - name: CONTROLLER_ENDPOINT
+            value: "http://controller:10264"
+          - name: GRAFANA_PROXY
+            value: "true"
+          - name: GRAFANA_ENDPOINT
+            value: "http://grafana/grafana"
+          - name: GRAFANA_USERNAME
+            value: "admin"
+          - name: GRAFANA_PASSWORD
+            value: "kubeskoop"
+          - name: AUTH_USERNAME
+            value: "admin"
+          - name: AUTH_PASSWORD
+            value: "kubeskoop"
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webconsole
+  namespace: kubeskoop
+spec:
+  selector:
+    app: webconsole
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

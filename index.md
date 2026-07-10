@@ -35,8 +35,8 @@ trigger_keywords:
 ## 项目概览
 
 - [[README.md|项目 README]] — 完整介绍、快速开始与部署说明
-- [[STRUCTURE.md|目录结构规范]] — 目录层级与用途约定
-- [[AGENTS.md|Agent 行为规范]] — AI Agent 唤醒协议与任务处理工作流
+- [[docs/STRUCTURE.md|目录结构规范]] — 目录层级与用途约定
+- [[_meta/AGENTS.md|Agent 行为规范]] — AI Agent 唤醒协议与任务处理工作流
 
 ## 核心知识层
 
@@ -79,10 +79,10 @@ trigger_keywords:
 
 ## 关键运行文件
 
-- [[hot.md|hot.md]] — 热缓存（最近活动的语义快照）
-- [[log.md|log.md]] — 活动日志（摄入、更新、lint 记录）
-- [[CHANGELOG.md|CHANGELOG.md]] — 变更日志
-- [[CONTRIBUTING.md|CONTRIBUTING.md]] — 贡献指南
+- [[_meta/hot.md|hot.md]] — 热缓存（最近活动的语义快照）
+- [[_meta/log.md|log.md]] — 活动日志（摄入、更新、lint 记录）
+- [[docs/CHANGELOG.md|CHANGELOG.md]] — 变更日志
+- [[docs/CONTRIBUTING.md|CONTRIBUTING.md]] — 贡献指南
 
 ## 其他顶层目录
 

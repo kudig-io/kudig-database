@@ -1,0 +1,11 @@
+# This file is for kernel kconfig baseline
+
+# the config levels, do not touch it, please
+DIST_LEVELS= L0-MANDATORY L1-RECOMMEND L2-OPTIONAL UNKNOWN
+
+# the default kernel name, the ANCK downstream distributions could override it
+# eg:
+# DIST_CONFIG_KERNEL_NAME ?= FOO
+DIST_CONFIG_KERNEL_NAME ?= ANCK
+
+include Makefile.$(DIST_CONFIG_KERNEL_NAME)

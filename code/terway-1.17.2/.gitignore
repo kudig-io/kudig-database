@@ -1,0 +1,14 @@
+.idea
+vendor
+**/*.exe
+.run
+
+# Test and build artifacts
+bin/
+coverage*.txt
+*.coverprofile
+
+.qoder
+.vscode
+
+.DS_Store

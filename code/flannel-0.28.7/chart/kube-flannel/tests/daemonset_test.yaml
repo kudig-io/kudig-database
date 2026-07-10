@@ -1,0 +1,84 @@
+suite: test daemonset
+templates:
+  - daemonset.yaml
+tests:
+  - it: should have the correct api version
+    asserts:
+      - isKind:
+          of: DaemonSet
+      - isAPIVersion:
+          of: apps/v1
+      - equal:
+          path: metadata.name
+          value: kube-flannel-ds
+
+  - it: should have the correct image
+    set:
+      flannel.image.repository: cicker.io/flannel/flannel
+      flannel.image.tag: v555.44.3
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: cicker.io/flannel/flannel:v555.44.3
+      - equal:
+          path: spec.template.spec.initContainers[1].image
+          value: cicker.io/flannel/flannel:v555.44.3
+
+  - it: should have the correct cni image
+    set:
+      flannel.flannel_cni.image.repository: cicker.io/flannel/flannel-cni-plugin
+      flannel.flannel_cni.image.tag: v777.66.5
+    asserts:
+      - equal:
+          path: spec.template.spec.initContainers[0].image
+          value: cicker.io/flannel/flannel-cni-plugin:v777.66.5
+
+  - it: should have the correct args
+    set:
+      flannel.args:
+        - "--ip-masq"
+        - "--kube-subnet-mgr"
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].command
+          value:
+            - "/opt/bin/flanneld"
+            - "--ip-masq"
+            - "--kube-subnet-mgr"
+
+  - it: should have the correct image pull secrets
+    set:
+      global.imagePullSecrets:
+        - name: "a-test-secret"
+    asserts:
+      - equal:
+          path: spec.template.spec.imagePullSecrets
+          value:
+            - name: "a-test-secret"
+
+  - it: should add the install-cni init container when default values are used
+    asserts:
+      - contains:
+          path: spec.template.spec.initContainers
+          content:
+            name: install-cni
+          any: true
+
+  - it: should not add the install-cni init container when skipCNIConfigInstallation is set
+    set:
+      flannel.skipCNIConfigInstallation: true
+    asserts:
+      - notContains:
+          path: spec.template.spec.initContainers
+          content:
+            name: install-cni
+          any: true
+
+  - it: should render nodeSelector when set
+    set:
+      flannel.nodeSelector:
+        eks.amazonaws.com/compute-type: hybrid
+    asserts:
+      - equal:
+          path: spec.template.spec.nodeSelector["eks.amazonaws.com/compute-type"]
+          value: hybrid

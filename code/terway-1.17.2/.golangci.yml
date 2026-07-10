@@ -1,0 +1,40 @@
+version: "2"
+run:
+  concurrency: 4
+  build-tags:
+    - default_build
+    - privileged
+  tests: false
+linters:
+  enable:
+    - goconst
+    - misspell
+    - staticcheck
+  settings:
+    errcheck:
+      check-blank: false
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - dupl
+          - goconst
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

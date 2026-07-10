@@ -47,3 +47,12 @@ secrets/
 # 个人开发环境产物（非便携，勿追踪）
 .claude/skills/
 .claude/scripts/output/
+
+# 各类 Agent / IDE 辅助工具目录（非语料、非项目源码）
+.codebuddy/
+.comate/
+.mimocode/
+.qoder/
+.understand-anything/
+.zcode/
+.zread/

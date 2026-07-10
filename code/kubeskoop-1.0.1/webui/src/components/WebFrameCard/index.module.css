@@ -1,0 +1,6 @@
+.webFrame {
+  border: none;
+  width: 100%;
+  height: calc(100vh - 52px);
+  min-height: 860px;
+}

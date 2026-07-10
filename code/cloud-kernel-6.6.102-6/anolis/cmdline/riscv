@@ -1,0 +1,2 @@
+cgroup.memory=nokmem
+crashkernel=0M-2G:128M,2G-64G:256M,64G-:384M

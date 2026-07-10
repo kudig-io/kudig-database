@@ -1,0 +1,66 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "docker" 
+    directory: "images" 
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gomod" 
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+    groups:
+      k8s:
+        patterns: [ "k8s.io/*", "sigs.k8s.io/*" ]
+        update-types: [ "major", "minor", "patch" ]
+      etcd:
+        patterns: [ "go.etcd.io/*" ]
+        update-types: [ "major", "minor", "patch" ]
+      tencent:
+        patterns: [ "github.com/tencentcloud/*" ]
+        update-types: [ "major", "minor", "patch" ]
+      other-go-modules:
+        patterns: [ "*" ]
+        exclude-patterns: 
+          - "k8s.io/*"
+          - "sigs.k8s.io/*"
+          - "go.etcd.io/*"
+          - "github.com/tencentcloud/*"
+  - package-ecosystem: "github-actions" 
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: docker
+    directory: /e2e
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /images
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /chart/kube-flannel/
+    schedule:
+      interval: weekly
+    allow:
+      - dependency-name: "flannel-cni-plugin"
+      - dependency-name: "kube-network-policies"
+
+  - package-ecosystem: "docker"
+    directory: "/Documentation/kustomization/kube-flannel"
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "ghcr.io/flannel-io/flannel-cni-plugin"
+
+  - package-ecosystem: docker
+    directory: /images/iperf3
+    schedule:
+      interval: daily
