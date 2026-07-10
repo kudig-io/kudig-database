@@ -67,6 +67,6 @@ Koordinator 是阿里巴巴开源的 CNCF Sandbox 项目，提供 Kubernetes 增
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/volcano.md|Volcano]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler.md|Scheduler]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/qos.md|QoS]]
+- [[domain-17-system-foundation/知识字典/scheduling/volcano.md|Volcano]]
+- [[domain-17-system-foundation/知识字典/scheduling/scheduler.md|Scheduler]]
+- [[domain-17-system-foundation/知识字典/scheduling/qos.md|QoS]]

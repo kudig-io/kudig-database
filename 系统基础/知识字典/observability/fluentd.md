@@ -67,6 +67,6 @@ Fluentd 是 CNCF 毕业项目，统一日志收集层，支持 500+ 插件连接
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/loki.md|Loki]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/loki.md|Loki]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]

@@ -72,11 +72,11 @@ kubectl uncordon <node-name>
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/operations/drain.md|Drain]]
-- [[domain-17-system-foundation/topic-dictionary/operations/scale.md|Scale]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/operations/drain.md|Drain]]
+- [[domain-17-system-foundation/知识字典/operations/scale.md|Scale]]
 
 
 <!-- risk-assessed -->

@@ -145,8 +145,8 @@ python3 validators/coverage_checker.py \
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|Skills 故障诊断手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|FTA 故障树索引]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/README.md|Skills 故障诊断手册]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/fta-index.md|FTA 故障树索引]]
 - [[release-sre/qa/raw/MOC.md|Release SRE QA 语料导航]]
 - [[release-sre/qa/raw/command-output-diagnosis.md|Release SRE 命令输出诊断语料]]
 - [[release-sre/qa/raw/seed/p0-core-scenarios.md|Release SRE P0 核心场景种子数据]]
@@ -159,7 +159,7 @@ python3 validators/coverage_checker.py \
 - [[release-sre/qa/raw/generated/command-output-diagnosis-p1.with_actions.md|Release SRE P1 生成语料（含 Actions）]]
 - [[release-sre/qa/raw/generated/command-output-diagnosis-p2.with_actions.md|Release SRE P2 生成语料（含 Actions）]]
 - 发布前评估报告
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README.md|Agent QA 对语料库 README]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/README.md|Agent QA 对语料库 README]]
 
 
 <!-- risk-assessed -->

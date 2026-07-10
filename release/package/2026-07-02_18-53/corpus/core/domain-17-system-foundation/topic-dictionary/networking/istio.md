@@ -81,11 +81,11 @@ Istio 是最广泛使用的开源服务网格平台，为微服务通信提供�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/security/certificate.md|Certificate]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/security/certificate.md|Certificate]]
 
 
 <!-- risk-assessed -->

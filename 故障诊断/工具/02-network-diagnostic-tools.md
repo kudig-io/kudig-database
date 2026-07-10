@@ -476,13 +476,13 @@ tshark -r /tmp/order-service.pcap -q -z io,stat,1
 
 ## Related
 
-- [[故障诊断/tools/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[故障诊断/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|网络连通性故障诊断]]
+- [[故障诊断/工具/README.md|Domain-12 故障排查工具套件使用说明]]
+- [[故障诊断/基础设施排障/25-network-connectivity-troubleshooting.md|网络连通性故障诊断]]
 
 ## See Also
 
-- [[故障诊断/tools/01-kubectl-plugins-guide.md|kubectl 插件指南]]
-- [[故障诊断/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
+- [[故障诊断/工具/01-kubectl-plugins-guide.md|kubectl 插件指南]]
+- [[故障诊断/工具/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
 
 
 <!-- risk-assessed -->

@@ -89,7 +89,7 @@ Aeraki Mesh 是 Istio 服务网格的扩展框架，专注于为非 HTTP 协议�
 
 - aeraki-mesh
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

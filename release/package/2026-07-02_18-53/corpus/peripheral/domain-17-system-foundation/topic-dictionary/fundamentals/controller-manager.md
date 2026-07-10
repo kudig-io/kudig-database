@@ -75,11 +75,11 @@ kube-controller-manager 是 Kubernetes 控制平面组件，负责运行各种�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-apiserver.md|Kube-apiserver]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-scheduler.md|Kube-scheduler]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|ReplicaSet]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kube-apiserver.md|Kube-apiserver]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kube-scheduler.md|Kube-scheduler]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/workloads/replicaset.md|ReplicaSet]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

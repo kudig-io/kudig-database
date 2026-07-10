@@ -50,7 +50,7 @@ Secret 是 [[Kubernetes|Kubernetes]] 中用于存储敏感数据（如密码、�
 ## 核心概念/原理
 
 - **与 ConfigMap 的对比**：Secret 与 ConfigMap 类似，但专门用于保存机密数据。Kubernetes 对 Secret 对象会施加额外的保护措施。
-- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（[[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
+- **默认存储状态**：默认情况下，Secret 以未加密形式存储在 API Server 的后端数据存储（[[系统基础/知识字典/fundamentals/etcd.md|etcd]]）中。任何拥有 API 访问权限或 etcd 访问权限的人都可以读取或修改 Secret。
 - **访问控制**：在该命名空间中拥有创建 Pod 权限的用户，可以间接读取该命名空间下的所有 Secret（例如通过 Deployment）。因此，必须配合 RBAC 进行严格授权。
 - **数据字段**：
   - `data`：值为 base64 编码的字符串。
@@ -256,7 +256,7 @@ kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.
 - [Kubernetes 官方文档 - Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 ## Related
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

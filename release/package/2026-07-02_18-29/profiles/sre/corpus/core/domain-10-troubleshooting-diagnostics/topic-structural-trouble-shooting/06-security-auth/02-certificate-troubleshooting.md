@@ -925,22 +925,22 @@ kubectl certificate deny <csr>
 ### 相关文档
 
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]].md)
-- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
-- [RBAC 故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
+- [etcd 故障排查](../[[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]].md)
+- [kubelet 故障排查](../[[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
+- [RBAC 故障排查](./[[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
 
 
 <!-- risk-assessed -->

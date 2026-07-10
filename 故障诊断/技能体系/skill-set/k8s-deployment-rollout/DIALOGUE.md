@@ -462,7 +462,7 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 - [[concepts/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

@@ -82,11 +82,11 @@ Longhorn 是 SUSE（原 Rancher）开源的 Kubernetes 原生分布式块存储�
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[系统基础/topic-dictionary/storage/rook.md|Rook]]
-- [[系统基础/topic-dictionary/storage/csi.md|CSI]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|StatefulSet]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/storage/storage-class.md|Storage Class]]
+- [[系统基础/知识字典/storage/rook.md|Rook]]
+- [[系统基础/知识字典/storage/csi.md|CSI]]
+- [[系统基础/知识字典/workloads/statefulset.md|StatefulSet]]
 
 
 <!-- risk-assessed -->

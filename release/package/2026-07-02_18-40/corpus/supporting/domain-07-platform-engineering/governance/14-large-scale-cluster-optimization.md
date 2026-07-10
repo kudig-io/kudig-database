@@ -430,7 +430,7 @@ large_scale_cluster_check
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - 监控告警体系
@@ -447,7 +447,7 @@ large_scale_cluster_check
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 
 
 <!-- risk-assessed -->

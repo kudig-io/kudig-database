@@ -1740,8 +1740,8 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 - PV/PVC 核心概念
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-04-storage-data
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/storage-index.md|Storage 存储知识图谱索引]]
 
 ## See Also
 

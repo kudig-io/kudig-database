@@ -76,7 +76,7 @@ prerequisites:
 
 K3s 是边缘 Kubernetes 的主流选择：
 - **单节点即可运行**：Server 节点自带 controller 和 worker 能力
-- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]
+- **默认使用 SQLite**：适合小规模集群（< 50 节点），可选外部 [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]]
 - **内置组件**：Traefik [[Ingress|Ingress]]、CoreDNS、Flannel CNI、Metrics Server
 - **资源占用低**：仅需 512MB 内存即可运行
 - **ARM64 支持**：完美适配 Raspberry Pi、NVIDIA Jetson 等边缘硬件
@@ -156,7 +156,7 @@ curl -sfL https://get.k3s.io | sh -
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

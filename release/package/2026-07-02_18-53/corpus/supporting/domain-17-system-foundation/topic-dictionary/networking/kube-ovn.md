@@ -70,6 +70,6 @@ Kube-OVN 是阿里云灵骏开源的 CNCF Sandbox 项目，基于 OVN/OVS 的 Ku
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ovn-kubernetes.md|OVN-Kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium]]
-- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea]]
+- [[domain-17-system-foundation/知识字典/networking/ovn-kubernetes.md|OVN-Kubernetes]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium]]
+- [[domain-17-system-foundation/知识字典/networking/antrea.md|Antrea]]

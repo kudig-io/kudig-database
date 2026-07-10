@@ -80,11 +80,11 @@ Kubernetes 通过标签表示拓扑信息：
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/affinity.md|Affinity]]
-- [[系统基础/topic-dictionary/scheduling/anti-affinity.md|Anti Affinity]]
-- [[系统基础/topic-dictionary/scheduling/taint.md|Taint]]
-- [[系统基础/topic-dictionary/scheduling/toleration.md|Toleration]]
-- [[系统基础/topic-dictionary/scheduling/node-selector.md|Node Selector]]
+- [[系统基础/知识字典/scheduling/affinity.md|Affinity]]
+- [[系统基础/知识字典/scheduling/anti-affinity.md|Anti Affinity]]
+- [[系统基础/知识字典/scheduling/taint.md|Taint]]
+- [[系统基础/知识字典/scheduling/toleration.md|Toleration]]
+- [[系统基础/知识字典/scheduling/node-selector.md|Node Selector]]
 
 
 <!-- risk-assessed -->

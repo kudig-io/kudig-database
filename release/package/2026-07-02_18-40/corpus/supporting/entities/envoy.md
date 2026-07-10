@@ -144,11 +144,11 @@ description: '## 项目概述'
 - [[skills/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

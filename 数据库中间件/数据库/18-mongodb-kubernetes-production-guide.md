@@ -317,7 +317,7 @@ kubectl patch pvc data-volume-prod-mongodb-0 -n mongodb -p \
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[数据库中间件/01-databases/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
+- [[数据库中间件/数据库/05-mongodb-enterprise-database.md|MongoDB 企业级数据库运维深度实践]]
 - [[数据库中间件/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
 - [[可靠性/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]

@@ -476,9 +476,9 @@ spec:
 
 ## Related
 
-- [[专项技术/05-ebpf-programming/01-ebpf-programming-fundamentals|eBPF 开发基础]]
-- [[专项技术/05-ebpf-programming/03-ebpf-networking-applications|eBPF 网络应用]]
-- [[专项技术/05-ebpf-programming/04-ebpf-security-runtime|eBPF 安全运行时]]
+- [[网络/eBPF/01-ebpf-programming-fundamentals|eBPF 开发基础]]
+- [[网络/eBPF/03-ebpf-networking-applications|eBPF 网络应用]]
+- [[网络/eBPF/04-ebpf-security-runtime|eBPF 安全运行时]]
 
 ## See Also
 

@@ -21,10 +21,10 @@ affected_cluster: ack-zyy-prod-08
 affected_namespace: kube-system
 ticket_type: 可观测性故障 / DaemonSet 调度异常
 skill_ref:
-- '[[工作负载/00-core-workloads/04-daemonset-management.md|DaemonSet
+- '[[工作负载/核心工作负载/04-daemonset-management.md|DaemonSet
   管理]]'
 - Logtail 排障
-- '[[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|节点诊断
+- '[[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|节点诊断
   Skill]]'
 fta_ref:
 - 'FTA: DaemonSet 未覆盖全部节点'
@@ -54,9 +54,9 @@ authors:
 relationships:
 - target: '[[concepts/daemonset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
 
@@ -336,7 +336,7 @@ kubectl get node cn-zhangjiakou.172.16.8.12 -o jsonpath='{.status.conditions[?(@
 > - 将 Logtail 镜像拉取策略调整为 `IfNotPresent`，并计划预加载镜像到节点。
 >
 > 当前所有节点日志已恢复上传至 SLS。建议后续：
-> - 对带 Taint 的节点建立标准化 Toleration 清单，参考 [[工作负载/00-core-workloads/04-daemonset-management.md|DaemonSet 管理]]；
+> - 对带 Taint 的节点建立标准化 Toleration 清单，参考 [[工作负载/核心工作负载/04-daemonset-management.md|DaemonSet 管理]]；
 > - 配置节点磁盘使用率告警：`node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.15` 触发 P2 告警；
 > - 在 SLS 侧配置机器组心跳告警，及时发现日志采集 Agent 缺失。
 >

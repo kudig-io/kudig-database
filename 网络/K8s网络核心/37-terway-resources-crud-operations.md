@@ -1781,7 +1781,7 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

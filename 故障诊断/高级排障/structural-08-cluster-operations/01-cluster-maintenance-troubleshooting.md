@@ -860,19 +860,19 @@ kubeadm token create --print-join-command
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
 
 
 <!-- risk-assessed -->

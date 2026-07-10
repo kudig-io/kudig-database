@@ -114,7 +114,7 @@ prerequisites:
 
 **核心要点**:
 - **API Server 并发控制**: 限制同时处理的请求数量，防止控制平面过载
-- **[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
+- **[[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 存储配额**: 限制集群状态数据的大小，防止存储空间耗尽导致集群瘫痪
 - **资源请求与限制**: 为每个容器设置 CPU/内存的下限（requests）和上限（limits），这是 K8s 调度和稳定性的基石
 - **健康检查三件套**: livenessProbe（存活探针）、readinessProbe（就绪探针）、startupProbe（启动探针）缺一不可
 - **网络策略**: 默认拒绝所有流量，按需开放，实现「零信任」网络
@@ -3086,7 +3086,7 @@ kubectl get pdb -A
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

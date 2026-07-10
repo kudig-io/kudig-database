@@ -94,7 +94,7 @@ k8s_versions:
 
 > **所属部分**: 第一部分 - FTA 方法论理论基础  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第一章：FTA 起源与发展史](./[[故障诊断/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]].md)  
+> **上一章**: [第一章：FTA 起源与发展史](./[[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]].md)  
 > **下一章**: [第三章：FTA 符号体系与标准规范](./03-fta-symbol-system-and-standards.md)
 
 ---
@@ -363,25 +363,25 @@ FTA 分析的最终目标是量化和提升系统可靠性。以下是核心可�
 
 ## Obsidian 相关文档
 
-- [[故障诊断/topic-fta/MOC.md|topic-fta MOC]]
-- [[故障诊断/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-- [[故障诊断/topic-fta/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
+- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
+- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
 
 ## See Also
 
-- [[故障诊断/topic-fta/symptom-vector-matcher.md|symptom-vector-matcher]]
-- [[故障诊断/topic-fta/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
-- [[故障诊断/topic-fta/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
-- [[故障诊断/topic-fta/04-fta-core-principles.md|04-fta-core-principles]]
+- [[故障诊断/FTA故障树/symptom-vector-matcher.md|symptom-vector-matcher]]
+- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
+- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
+- [[故障诊断/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]]
 
 
 <!-- risk-assessed -->

@@ -21,11 +21,11 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: kube-system
 ticket_type: 网络故障
 skill_ref:
-- '[[网络/00-core-k8s-networking/09-kube-proxy-modes-performance.md|kube-proxy
+- '[[网络/K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy
   模式与性能]]'
-- '[[故障诊断/topic-fta/list/service-fta.md|Service 异常故障树分析]]'
+- '[[故障诊断/FTA故障树/list/service-fta.md|Service 异常故障树分析]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/service-fta.md|FTA: Service
+- '[[故障诊断/FTA故障树/list/service-fta.md|FTA: Service
   异常]]'
 last_updated: 2026-06-26 15:30:00+08:00
 duplicate_of: INC-2026-ACK-019
@@ -55,13 +55,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/fundamentals/kube-proxy.md]]'
+- target: '[[系统基础/知识字典/fundamentals/kube-proxy.md]]'
   type: related_to
 - target: '[[concepts/service.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[生产运维/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]'
+- target: '[[生产运维/工单案例/ticket-case-046-ingress-controller-404-502.md]]'
   type: related_to
 ---
 

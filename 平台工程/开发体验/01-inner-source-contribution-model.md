@@ -698,7 +698,7 @@ Platform Team (平台团队):
 
 ## Related
 
-- [[平台工程/developer-experience/02-developer-onboarding-automation|开发者入职自动化]]
+- [[平台工程/开发体验/02-developer-onboarding-automation|开发者入职自动化]]
 - 平台工程/
 - [[CONTRIBUTING|贡献指南]]
 

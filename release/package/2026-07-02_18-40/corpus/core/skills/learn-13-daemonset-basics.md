@@ -569,7 +569,7 @@ kubectl delete daemonset <name> -n <namespace>
 
 **关联文档**:
 - [../11-scheduling/11-scheduling-basics.md](../11-scheduling/11-scheduling-basics.md) — 调度与亲和性
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md) — DaemonSet 问题 [[SKILL|Skill]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/17-daemonset-pdb-failure.md) — DaemonSet 问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## Related

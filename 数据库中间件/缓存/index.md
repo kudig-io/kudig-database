@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[数据库中间件/02-cache/01-redis-cluster-sentinel-topology.md|Redis Cluster Sentinel Topology]]
-- [[数据库中间件/02-cache/02-memcached-distributed-caching.md|Memcached Distributed Caching]]
+- [[数据库中间件/缓存/01-redis-cluster-sentinel-topology.md|Redis Cluster Sentinel Topology]]
+- [[数据库中间件/缓存/02-memcached-distributed-caching.md|Memcached Distributed Caching]]
 

@@ -1853,15 +1853,15 @@ related:
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[故障诊断/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[故障诊断/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[故障诊断/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
 
 ```
 

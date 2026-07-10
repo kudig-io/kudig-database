@@ -81,11 +81,11 @@ Kata Containers 是 OpenInfra Foundation 的开源项目，通过轻量级虚拟
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/runc.md|runc]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|Containerd]]
-- [[系统基础/topic-dictionary/fundamentals/cri-o.md|CRI-O]]
-- [[系统基础/topic-dictionary/security/security-context.md|Security Context]]
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/fundamentals/runc.md|runc]]
+- [[系统基础/知识字典/fundamentals/containerd.md|Containerd]]
+- [[系统基础/知识字典/fundamentals/cri-o.md|CRI-O]]
+- [[系统基础/知识字典/security/security-context.md|Security Context]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
 
 
 <!-- risk-assessed -->

@@ -68,6 +68,6 @@ Connect 是 Buf 开发的开源 RPC 协议，兼容 gRPC 和 Protobuf，但使�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/grpc.md|gRPC]]
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/istio.md|Istio]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/grpc.md|gRPC]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/istio.md|Istio]]

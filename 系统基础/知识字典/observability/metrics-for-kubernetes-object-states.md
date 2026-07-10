@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-kube-state-metrics 是一个 Kubernetes 插件代理，用于从 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 中对象的状态生成并暴露集群级指标。它连接到 API 服务器，通过 HTTP 端点暴露由集群中各个对象状态生成的指标，使运维人员能够基于对象状态进行查询和告警。
+kube-state-metrics 是一个 Kubernetes 插件代理，用于从 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 中对象的状态生成并暴露集群级指标。它连接到 API 服务器，通过 HTTP 端点暴露由集群中各个对象状态生成的指标，使运维人员能够基于对象状态进行查询和告警。
 
 ## 核心概念/原理
 
@@ -118,7 +118,7 @@ kube-state-metrics 本身只是一个指标暴露端点，需要配合 Prometheu
 
 ## Related
 
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

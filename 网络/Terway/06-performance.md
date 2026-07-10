@@ -747,7 +747,7 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 |:---|:---|
 | [01-product.md](./01-product.md) | Terway 产品概览、版本历史、模式总览 |
 | [02-architecture.md](./02-architecture.md) | 架构原理、数据面/控制面、CRD 资源模型 |
-| [03-usage.md](./[[网络/topic-terway/03-usage.md|03-usage]].md) | 安装配置、模式切换、NetworkPolicy、固定 IP |
+| [03-usage.md](./[[网络/Terway/03-usage.md|03-usage]].md) | 安装配置、模式切换、NetworkPolicy、固定 IP |
 | [04-operations.md](./04-operations.md) | 健康检查、GC 机制、升级策略、监控告警 |
 | [05-testing.md](./05-testing.md) | Pod 网络验证、连通性测试、NetworkPolicy 测试 |
 
@@ -759,8 +759,8 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 | [网络/37-terway-resources-crud-operations.md](../网络/37-terway-resources-crud-operations.md) | Terway 实例 CRUD 操作、CRD 资源管理 |
 | [网络/38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) | Terway GC 垃圾回收机制 |
 | [网络/34-network-performance-tuning.md](../网络/34-network-performance-tuning.md) | 网络性能调优通用指南 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/topic-fta/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训 |
 
 ---
@@ -769,7 +769,7 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

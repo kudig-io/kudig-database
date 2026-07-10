@@ -489,12 +489,12 @@ echo "Inventory saved to $OUTPUT"
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/git.md|git]]
 - [[entities/sops.md|sops]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```
 

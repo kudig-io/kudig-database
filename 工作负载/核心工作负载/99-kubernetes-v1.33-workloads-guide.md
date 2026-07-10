@@ -660,11 +660,11 @@ func (r *MyAppReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 <!-- chunk: 参考链接 -->
 ## 参考链接
 
-- [[系统基础/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- [[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 - [Resize CPU and Memory Resources](https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/)
 - [Job Success Policy](https://kubernetes.io/docs/concepts/workloads/controllers/job/#success-policy)
-- [[系统基础/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
-- [[系统基础/topic-dictionary/workloads/user-namespaces.md|User Namespaces]]](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
+- [[系统基础/知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-scheduling-readiness/)
+- [[系统基础/知识字典/workloads/user-namespaces.md|User Namespaces]]](https://kubernetes.io/docs/concepts/workloads/pods/user-namespaces/)
 
 ---
 

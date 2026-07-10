@@ -306,8 +306,8 @@ kubectl get deploy -n production -o name | xargs -I{} kubectl scale {} --replica
 
 ## Related
 
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

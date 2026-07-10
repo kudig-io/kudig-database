@@ -74,9 +74,9 @@ Copa（Container Patching）是微软开源的 CNCF Sandbox 项目，无需访�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/trivy.md|Trivy]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security.md|供应链安全]]
+- [[domain-17-system-foundation/知识字典/security/trivy.md|Trivy]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/security/supply-chain-security.md|供应链安全]]
 
 
 <!-- risk-assessed -->

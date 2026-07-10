@@ -69,7 +69,7 @@ prerequisites:
 - **Unhealthy Pod Eviction Policy**：建议设置为 `AlwaysAllow`，以便在节点维护期间允许驱逐不健康的 Pod。
 
 ## 使用场景
-- 运行基于仲裁的应用（如 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]、ZooKeeper），需要保证最低副本数。
+- 运行基于仲裁的应用（如 [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]]、ZooKeeper），需要保证最低副本数。
 - 集群管理员进行节点维护、升级或缩容时，确保业务不中断。
 - 多租户环境中，应用团队通过 PDB 声明可用性需求。
 
@@ -217,7 +217,7 @@ kubectl get pdb -n <namespace> -o wide
 ```
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
+- [[domain-17-system-foundation/知识字典/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
 - [[entities/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
@@ -228,9 +228,9 @@ kubectl get pdb -n <namespace> -o wide
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

@@ -67,8 +67,8 @@ Service 和 Ingress 共同定义了 Kubernetes 的"网络边界"：Service 是�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
 - [[concepts/service-networking.md|Service Networking]]
 - [[concepts/bp-operations.md|最佳实践：Operations]]
 - [[concepts/bp-security.md|最佳实践：Security]]

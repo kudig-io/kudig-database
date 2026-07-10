@@ -22,24 +22,24 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-17-system-foundation/topic-cheat-sheet/README.md|Readme]]
+- [[domain-17-system-foundation/速查卡/README.md|Readme]]
 
 ## 文档
 
-- [[domain-17-system-foundation/topic-cheat-sheet/MOC.md|Moc]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gateway-api.md|Gateway Api]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|Git]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|Gitops]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|Go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8S]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|Kubectl Scene Cheatsheet]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|Linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|Networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|Promql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/sql.md|Sql]]
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|Tls Pki]]
+- [[domain-17-system-foundation/速查卡/MOC.md|Moc]]
+- [[domain-17-system-foundation/速查卡/docker.md|Docker]]
+- [[domain-17-system-foundation/速查卡/gateway-api.md|Gateway Api]]
+- [[domain-17-system-foundation/速查卡/git.md|Git]]
+- [[domain-17-system-foundation/速查卡/gitops.md|Gitops]]
+- [[domain-17-system-foundation/速查卡/go.md|Go]]
+- [[domain-17-system-foundation/速查卡/helm.md|Helm]]
+- [[domain-17-system-foundation/速查卡/k8s.md|K8S]]
+- [[domain-17-system-foundation/速查卡/kubectl-scene-cheatsheet.md|Kubectl Scene Cheatsheet]]
+- [[domain-17-system-foundation/速查卡/linux.md|Linux]]
+- [[domain-17-system-foundation/速查卡/networking.md|Networking]]
+- [[domain-17-system-foundation/速查卡/promql.md|Promql]]
+- [[domain-17-system-foundation/速查卡/sql.md|Sql]]
+- [[domain-17-system-foundation/速查卡/tls-pki.md|Tls Pki]]
 
 
 

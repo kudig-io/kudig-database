@@ -476,8 +476,8 @@ which docker
 
 ## Related
 
-- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations|containerd 生产运维]]
-- [[容器运行时/05-runtime-migration/02-containerd-to-cri-o-migration|containerd 到 CRI-O 迁移]]
+- [[容器运行时/containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
+- [[容器运行时/运行时迁移/02-containerd-to-cri-o-migration|containerd 到 CRI-O 迁移]]
 
 ## See Also
 

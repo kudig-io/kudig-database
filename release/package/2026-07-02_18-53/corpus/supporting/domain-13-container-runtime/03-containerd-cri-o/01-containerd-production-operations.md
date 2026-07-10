@@ -411,8 +411,8 @@ sudo systemctl restart systemd-journald
 ## 13. 相关文档
 
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|containerd 深度指南]]
-- [[domain-13-container-runtime/01-docker/01-docker-architecture-overview.md|Docker 架构概述]]
-- [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
+- [[domain-13-container-runtime/Docker/01-docker-architecture-overview.md|Docker 架构概述]]
+- [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 - [[domain-05-security-compliance/README.md|容器安全合规]]
 
 

@@ -48,7 +48,7 @@ CNCF 基础设施项目覆盖 **混沌工程**、**消息中间件**、**API 与
 
 ---
 
-## [[系统基础/topic-dictionary/operations/chaos-engineering.md|混沌工程（Chaos Engineering）]]
+## [[系统基础/知识字典/operations/chaos-engineering.md|混沌工程（Chaos Engineering）]]
 
 ### [[chaos-mesh]] — 孵化项目
 

@@ -481,7 +481,7 @@ kubectl logs <pod-name> --tail=100 --previous
 
 ## See Also
 
-- [[云厂商/06-tencent-tke/99-tencent-tke-production-runbook.md|TKE 生产运维 Runbook]]
+- [[云厂商/腾讯云TKE/99-tencent-tke-production-runbook.md|TKE 生产运维 Runbook]]
 - CLB 配置指南
 - ACR 镜像仓库文档
 

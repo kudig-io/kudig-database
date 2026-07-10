@@ -2492,19 +2492,19 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/helm.md|helm]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/helm.md|helm]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[故障诊断/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
 
 ```
 

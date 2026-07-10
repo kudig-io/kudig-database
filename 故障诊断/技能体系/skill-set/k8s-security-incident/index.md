@@ -22,6 +22,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-skills/skill-set/k8s-security-incident/DIALOGUE.md|Dialogue]]
-- [[故障诊断/topic-skills/skill-set/k8s-security-incident/SKILL.md|Skill]]
+- [[故障诊断/技能体系/skill-set/k8s-security-incident/DIALOGUE.md|Dialogue]]
+- [[故障诊断/技能体系/skill-set/k8s-security-incident/SKILL.md|Skill]]
 

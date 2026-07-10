@@ -326,10 +326,10 @@ Step 1（首次回复）:
 
 ## Related
 
-- [[domain-11-production-operations/reply-templates/README.md|工单回复话术库索引]]
+- [[domain-11-production-operations/回复话术/README.md|工单回复话术库索引]]
 - [[domain-11-production-operations/ticket-routing-rules.md|工单分类与路由规则]]
 
 ## See Also
 
-- [[domain-11-production-operations/reply-templates/02-information-request.md|请求信息话术]]
+- [[domain-11-production-operations/回复话术/02-information-request.md|请求信息话术]]
 - [[domain-11-production-operations/escalation-playbook.md|升级与交接协议]]

@@ -54,11 +54,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
 
@@ -282,7 +282,7 @@ ack-cli node exec cn-zhangjiakou.172.16.7.31 -- journalctl -u kubelet --since "3
 
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
-- [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+- [[domain-11-production-operations/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 
 
 <!-- risk-assessed -->

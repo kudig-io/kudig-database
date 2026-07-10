@@ -725,14 +725,14 @@ Level 5 - 自主运维 (Autonomous Operations)
 
 - 可观测性架构体系
 - 分布式追踪体系
-- [[系统基础/topic-cheat-sheet/promql.md|PromQL 速查卡]]
+- [[系统基础/速查卡/promql.md|PromQL 速查卡]]
 - 相关知识域: 集群基础
 - 相关知识域: 工作负载
 - 相关知识域: 网络
 - 相关知识域: 平台工程
-- [[系统基础/topic-cheat-sheet/promql.md|速查卡: promql]]
+- [[系统基础/速查卡/promql.md|速查卡: promql]]
 
-- [[可观测性/README.md|返回目录]]- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[可观测性/README.md|返回目录]]- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

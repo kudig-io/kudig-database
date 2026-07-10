@@ -364,7 +364,7 @@ Sources: [01-docker-architecture-overview.md](domain-13-container-runtime/01-doc
 | 11 | [Docker 自动化运维与 CI/CD 集成](domain-13-container-runtime/11-docker-automation-devops.md) | IaC 实践、流水线设计、灾备回滚 |
 | 99 | [Docker 命令大全参考](domain-13-container-runtime/99-docker-commands-reference.md) | 全量命令速查（含安全风险提示） |
 
-另可参考速查卡：[Docker & Containerd 速查表](topic-cheat-sheet/docker.md)
+另可参考速查卡：[Docker & Containerd 速查表](速查卡/docker.md)
 
 Sources: [README.md](domain-13-container-runtime/README.md#L9-L47)
 

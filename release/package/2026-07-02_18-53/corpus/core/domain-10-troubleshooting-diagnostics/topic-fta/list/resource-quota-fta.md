@@ -175,13 +175,13 @@ flowchart TD
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[service-fta]] — Service 异常故障树分析
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/resource-quota-fta.md|ResourceQuota 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/resource-quota-fta.md|ResourceQuota 异常故障树分析]]
 - [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/resource-quota-fta.md|Resource-Quota FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/FTA故障树/list/resource-quota-fta.md|Resource-Quota FTA 完整版]]
 
 
 <!-- risk-assessed -->

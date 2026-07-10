@@ -73,9 +73,9 @@ Virtual Kubelet 是 CNCF Sandbox 项目，通过 Kubelet 接口将外部服务�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/cluster-autoscaler.md|Cluster Autoscaler]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/knative.md|Knative]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/scheduling/cluster-autoscaler.md|Cluster Autoscaler]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/knative.md|Knative]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
 
 
 <!-- risk-assessed -->

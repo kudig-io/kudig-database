@@ -566,8 +566,8 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 
 ## Related
 
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

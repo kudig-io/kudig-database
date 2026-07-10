@@ -290,18 +290,18 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
 
 
 <!-- risk-assessed -->

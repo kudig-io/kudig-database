@@ -177,7 +177,7 @@ authors:
   ```bash
   kubectl label ns <namespace> pod-security.kubernetes.io/enforce=restricted
   ```
-- 参考 [[安全/04-policy-governance/06-pod-security-standards.md|Pod Security Standards]] 配置基线策略，并在 CI 中集成策略校验。
+- 参考 [[安全/策略治理/06-pod-security-standards.md|Pod Security Standards]] 配置基线策略，并在 CI 中集成策略校验。
 
 ### 2.4 证书与镜像签名缺失
 
@@ -390,22 +390,22 @@ kubectl get crd -o json | jq '.items[].spec.versions[].name'
 
 ### 同域资料
 
-- [[清单模式/01-yaml-reference/36-ecosystem-kustomize-helm-argocd.md|Kustomize / Helm / ArgoCD YAML 配置参考]]
-- [[清单模式/01-yaml-reference/27-hpa-autoscaling-v2.md|HorizontalPodAutoscaler v2 YAML 配置参考]]
-- [[清单模式/01-yaml-reference/22-networkpolicy-reference.md|NetworkPolicy 配置参考]]
-- [[清单模式/01-yaml-reference/23-pod-security-standards.md|Pod Security Standards 配置参考]]
-- [[清单模式/01-yaml-reference/28-poddisruptionbudget-reference.md|PodDisruptionBudget 配置参考]]
+- [[清单模式/YAML参考/36-ecosystem-kustomize-helm-argocd.md|Kustomize / Helm / ArgoCD YAML 配置参考]]
+- [[清单模式/YAML参考/27-hpa-autoscaling-v2.md|HorizontalPodAutoscaler v2 YAML 配置参考]]
+- [[清单模式/YAML参考/22-networkpolicy-reference.md|NetworkPolicy 配置参考]]
+- [[清单模式/YAML参考/23-pod-security-standards.md|Pod Security Standards 配置参考]]
+- [[清单模式/YAML参考/28-poddisruptionbudget-reference.md|PodDisruptionBudget 配置参考]]
 
 ### 相关域资料
 
-- [[发布变更/01-gitops/99-argo-cd-gitops-guide.md|ArgoCD GitOps 指南]]
-- [[发布变更/01-gitops/99-helm-production-guide.md|Helm 生产化指南]]
-- [[安全/04-policy-governance/99-kyverno-policy-guide.md|Kyverno 策略指南]]
-- [[安全/04-policy-governance/99-opa-gatekeeper-policy-guide.md|OPA Gatekeeper 策略指南]]
-- [[可观测性/02-metrics/10-monitoring-metrics-prometheus.md|Prometheus 监控指标实践]]
+- [[发布变更/GitOps/99-argo-cd-gitops-guide.md|ArgoCD GitOps 指南]]
+- [[发布变更/GitOps/99-helm-production-guide.md|Helm 生产化指南]]
+- [[安全/策略治理/99-kyverno-policy-guide.md|Kyverno 策略指南]]
+- [[安全/策略治理/99-opa-gatekeeper-policy-guide.md|OPA Gatekeeper 策略指南]]
+- [[可观测性/指标/10-monitoring-metrics-prometheus.md|Prometheus 监控指标实践]]
 - [[可靠性/03-slo-sli-guide.md|SLO/SLI 指南]]
 - [[生产运维/01-production-sre-daily-ops.md|SRE 日常运维手册]]
-- [[工作负载/00-core-workloads/12-advanced-pod-patterns.md|高级 Pod 模式]]
+- [[工作负载/核心工作负载/12-advanced-pod-patterns.md|高级 Pod 模式]]
 
 ---
 

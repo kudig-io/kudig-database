@@ -73,16 +73,16 @@ FEBM 取证 — 问题事件取证方法文档
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[故障诊断/topic-febm/01-febm-theory-foundations.md|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
-| 2 | [[故障诊断/topic-febm/02-febm-technical-implementation.md|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
-| 3 | [[故障诊断/topic-febm/03-febm-best-practices.md|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
-| 4 | [[故障诊断/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
-| 5 | [[故障诊断/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
-| 6 | [[故障诊断/topic-febm/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |
-| 7 | [[故障诊断/topic-febm/07-febm-appendix.md|第七章:附录]] |  | febm, troubleshooting |  |
-| 8 | [[故障诊断/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]] |  | febm, troubleshooting, production |  |
-| 9 | [[故障诊断/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]] |  | febm, troubleshooting |  |
-| 10 | [[故障诊断/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]] |  | febm, troubleshooting |  |
+| 1 | [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
+| 2 | [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
+| 3 | [[故障诊断/FEBM方法论/03-febm-best-practices.md|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
+| 4 | [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
+| 5 | [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
+| 6 | [[故障诊断/FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |
+| 7 | [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]] |  | febm, troubleshooting |  |
+| 8 | [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]] |  | febm, troubleshooting, production |  |
+| 9 | [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]] |  | febm, troubleshooting |  |
+| 10 | [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]] |  | febm, troubleshooting |  |
 
 ---
 
@@ -100,8 +100,8 @@ FEBM 取证 — 问题事件取证方法文档
 
 - [[entities/kubernetes.md|kubernetes]]
 - [[log|log]]
-- [[故障诊断/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
-- [[故障诊断/topic-febm/01-febm-theory-foundations.md|01-febm-theory-foundations]]
+- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]]
 - Wiki Lint Report — 2026-05-21 — Cross-reference
 - [[entities/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
 - [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
@@ -114,15 +114,15 @@ FEBM 取证 — 问题事件取证方法文档
 - [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
 - [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
-- [[网络/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[可观测性/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[网络/K8s网络核心/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[可观测性/总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[集群基础/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[集群基础/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[存储/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[存储/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- [[集群基础/kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[集群基础/架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[存储/K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[存储/K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 
 
 <!-- risk-assessed -->

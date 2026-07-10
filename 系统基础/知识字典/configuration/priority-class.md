@@ -70,6 +70,6 @@ PriorityClass 是 Kubernetes 的 Pod 优先级定义资源，通过 priorityClas
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/pdb.md|PDB]]
-- [[系统基础/topic-dictionary/configuration/priority-class.md|Preemption]]
-- [[系统基础/topic-dictionary/configuration/resource-quota.md|ResourceQuota]]
+- [[系统基础/知识字典/operations/pdb.md|PDB]]
+- [[系统基础/知识字典/configuration/priority-class.md|Preemption]]
+- [[系统基础/知识字典/configuration/resource-quota.md|ResourceQuota]]

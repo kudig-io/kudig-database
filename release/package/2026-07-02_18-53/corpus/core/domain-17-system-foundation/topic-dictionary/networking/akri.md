@@ -70,6 +70,6 @@ Akri 是微软开源的 CNCF Sandbox 项目，在 Kubernetes 上自动发现和�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubeedge.md|KubeEdge]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/hami.md|HAMi]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/openyurt.md|OpenYurt]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kubeedge.md|KubeEdge]]
+- [[domain-17-system-foundation/知识字典/scheduling/hami.md|HAMi]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/openyurt.md|OpenYurt]]

@@ -171,9 +171,9 @@ SPIRE 的短期 SVID 自动轮换机制大幅提升了安全性：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

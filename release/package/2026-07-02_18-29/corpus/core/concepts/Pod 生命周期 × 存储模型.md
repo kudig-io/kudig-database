@@ -38,7 +38,7 @@ relationships:
   type: uses
 - target: '[[skills/training-public/inner-training/week-3-node-workload/checkpoint.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[domain-17-system-foundation/速查卡/k8s.md]]'
   type: related_to
 - target: '[[concepts/Pod 生命周期 × Secret 管理.md]]'
   type: uses
@@ -111,7 +111,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 2. Pod 被调度到具体节点后，CSI 驱动根据节点所在的可用区置备 PV
 3. 保证 Pod 和 PV 在同一可用区，避免跨可用区挂载失败
 
-这个设计揭示了 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] 的核心架构决策：存储置备不应该先于调度。如果先置备存储（Immediate 模式），Pod 可能被调度到与 PV 不同可用区的节点，导致挂载失败。WaitForFirstConsumer 将存储模型的决策延迟到 Pod 生命周期中的调度阶段，解决了这一矛盾。
+这个设计揭示了 [[domain-17-system-foundation/速查卡/k8s.md|K8s]] 的核心架构决策：存储置备不应该先于调度。如果先置备存储（Immediate 模式），Pod 可能被调度到与 PV 不同可用区的节点，导致挂载失败。WaitForFirstConsumer 将存储模型的决策延迟到 Pod 生命周期中的调度阶段，解决了这一矛盾。
 
 ## 张力与权衡
 

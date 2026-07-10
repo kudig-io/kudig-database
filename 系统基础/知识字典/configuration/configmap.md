@@ -85,7 +85,7 @@ data:
 
 ## Related
 
-[[系统基础/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
+[[系统基础/知识字典/configuration/configmaps.md|ConfigMaps]]
 
 
 <!-- risk-assessed -->

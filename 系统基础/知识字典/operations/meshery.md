@@ -68,6 +68,6 @@ Meshery 是 CNCF Sandbox 项目，提供服务网格和云原生基础设施的�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[系统基础/topic-dictionary/networking/kuma.md|Kuma]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/linkerd.md|Linkerd]]
+- [[系统基础/知识字典/networking/kuma.md|Kuma]]

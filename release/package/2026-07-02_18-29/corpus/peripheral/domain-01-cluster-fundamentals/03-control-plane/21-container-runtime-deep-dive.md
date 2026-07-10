@@ -1758,7 +1758,7 @@ spec:
     SystemdCgroup = true
 ```
 
-### 9.4 [[domain-13-container-runtime/03-containerd-cri-o/06-runtime-security-hardening 2.md|安全加固配置]]
+### 9.4 [[domain-13-container-runtime/containerd-CRI-O/06-runtime-security-hardening 2.md|安全加固配置]]
 
 ```yaml
 # Seccomp 配置

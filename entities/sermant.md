@@ -89,7 +89,7 @@ Sermant 是华为开源的基于 Java Agent 的无代理服务网格方案，通
 
 - sermant
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

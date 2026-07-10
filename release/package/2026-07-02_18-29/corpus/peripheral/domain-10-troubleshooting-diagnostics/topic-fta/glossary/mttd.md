@@ -59,4 +59,4 @@ MTTD（Mean Time To Detect，平均检测时间）是从故障发生到被检测
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

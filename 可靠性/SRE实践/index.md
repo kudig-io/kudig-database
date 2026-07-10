@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可靠性/07-sre-practices/01-availability-calculation-model.md|Availability Calculation Model]]
-- [[可靠性/07-sre-practices/02-release-gate-slo-based.md|Release Gate Slo Based]]
-- [[可靠性/07-sre-practices/03-incident-command-system.md|Incident Command System]]
-- [[可靠性/07-sre-practices/04-toil-reduction-automation.md|Toil Reduction Automation]]
+- [[可靠性/SRE实践/01-availability-calculation-model.md|Availability Calculation Model]]
+- [[可靠性/SRE实践/02-release-gate-slo-based.md|Release Gate Slo Based]]
+- [[可靠性/SRE实践/03-incident-command-system.md|Incident Command System]]
+- [[可靠性/SRE实践/04-toil-reduction-automation.md|Toil Reduction Automation]]
 

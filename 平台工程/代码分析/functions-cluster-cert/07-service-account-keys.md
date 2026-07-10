@@ -583,11 +583,11 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/vault.md|vault]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

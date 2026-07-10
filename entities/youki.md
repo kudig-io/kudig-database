@@ -83,7 +83,7 @@ youki 是一个用 Rust 实现的 OCI 容器运行时，作为 runc 的替代品
 - [[concepts/container-runtime-comparison.md|[[Container Runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
 - [[concepts/docker-architecture.md|[[Docker Architecture and Container Runtime|Docker Architecture and Container Runtime]]]] — Cross-reference
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -73,7 +73,7 @@ prerequisites:
 | `05-日志收集分析平台` | `domain-21-logging-management-analytics` | domain-18 保留体系设计，domain-21 负责平台部署 |
 | `10-GitOps流水线实践` | `domain-23-gitops-ci-cd` | domain-18 保留流程规范，domain-23 负责工具链配置 |
 | `11-基础设施即代码` | `domain-24-infrastructure-as-code` | domain-18 保留设计原则，domain-24 负责具体实现 |
-| `07-零信任安全` / `08-CIS合规` / `09-SBOM` | `domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]` | domain-18 保留安全架构框架，domain-25 负责工具与合规 |
+| `07-零信任安全` / `08-CIS合规` / `09-SBOM` | `domain-25-[[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]]` | domain-18 保留安全架构框架，domain-25 负责工具与合规 |
 | `16-备份` / `17-灾备演练` / `18-跨区域容灾` | `domain-30-disaster-recovery-business-continuity` | domain-18 保留策略与流程，domain-30 负责技术实现 |
 
 ### 1.3 与根目录 Topic 的交叉关系未厘清

@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-qa-corpus/seed/p0-core-scenarios.md|P0 Core Scenarios]]
-- [[故障诊断/topic-qa-corpus/seed/p0-core-scenarios.with_actions.md|P0 Core Scenarios.With Actions]]
+- [[故障诊断/QA语料/seed/p0-core-scenarios.md|P0 Core Scenarios]]
+- [[故障诊断/QA语料/seed/p0-core-scenarios.with_actions.md|P0 Core Scenarios.With Actions]]
 

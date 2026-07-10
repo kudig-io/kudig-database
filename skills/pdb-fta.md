@@ -173,7 +173,7 @@ flowchart TD
 - [[gpu-fta]] — GPU 异常故障树分析
 - [[skills/ts-workloads.md|ts-workloads]] — 工作负载故障排查
 
-- [[故障诊断/topic-fta/list/pdb-fta.md|PDB 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/pdb-fta.md|PDB 异常故障树分析]]
 - [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
 - [[skills/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
 

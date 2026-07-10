@@ -351,10 +351,10 @@ authors:
 
 ## Related
 
-- [[生产运维/reply-templates/README.md|工单回复话术库索引]]
+- [[生产运维/回复话术/README.md|工单回复话术库索引]]
 - [[生产运维/ticket-routing-rules.md|工单分类与路由规则]]
 
 ## See Also
 
 - [[生产运维/escalation-playbook.md|升级与交接协议]]
-- [[生产运维/reply-templates/03-solution-proposal.md|给出方案话术]]
+- [[生产运维/回复话术/03-solution-proposal.md|给出方案话术]]

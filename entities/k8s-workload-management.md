@@ -88,6 +88,6 @@ HPA 经典公式：`目标副本数 = ceil(当前副本数 × (当前指标值 /
 
 - [[keda]] — KEDA
 
-- [[平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md|Deployment 与 HPA 集成源码分析]]
+- [[平台工程/代码分析/deployment-create/08-hpa-integration.md|Deployment 与 HPA 集成源码分析]]
 
 <!-- risk-assessed -->

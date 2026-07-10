@@ -69,6 +69,6 @@ Hyperlight 是微软开源的项目，提供超轻量的安全微虚拟机（mic
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/runc.md|runc]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/urunc.md|urunc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[domain-17-system-foundation/知识字典/fundamentals/runc.md|runc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/urunc.md|urunc]]

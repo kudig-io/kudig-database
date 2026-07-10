@@ -314,8 +314,8 @@ Phase 5: 输出与闭环
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 
 ## See Also
 

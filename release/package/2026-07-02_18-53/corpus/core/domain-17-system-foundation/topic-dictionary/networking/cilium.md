@@ -82,11 +82,11 @@ Cilium 是基于 eBPF 技术的 Kubernetes CNI 插件和网络安全解决方案
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/cni.md|CNI]]
-- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md|Kube-proxy]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/networking/cni.md|CNI]]
+- [[domain-17-system-foundation/知识字典/networking/networkpolicy.md|NetworkPolicy]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kube-proxy.md|Kube-proxy]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-11-production-operations/01-finops/01-cost-allocation-chargeback.md|Cost Allocation Chargeback]]
-- [[domain-11-production-operations/01-finops/02-idle-resource-right-sizing.md|Idle Resource Right Sizing]]
-- [[domain-11-production-operations/01-finops/03-spot-instance-strategy.md|Spot Instance Strategy]]
-- [[domain-11-production-operations/01-finops/13-kubernetes-cost-governance.md|Kubernetes Cost Governance]]
-- [[domain-11-production-operations/01-finops/14-finops-cost-governance-runbook.md|Finops Cost Governance Runbook]]
-- [[domain-11-production-operations/01-finops/99-finops-cost-optimization-guide.md|Finops Cost Optimization Guide]]
+- [[domain-11-production-operations/成本治理/01-cost-allocation-chargeback.md|Cost Allocation Chargeback]]
+- [[domain-11-production-operations/成本治理/02-idle-resource-right-sizing.md|Idle Resource Right Sizing]]
+- [[domain-11-production-operations/成本治理/03-spot-instance-strategy.md|Spot Instance Strategy]]
+- [[domain-11-production-operations/成本治理/13-kubernetes-cost-governance.md|Kubernetes Cost Governance]]
+- [[domain-11-production-operations/成本治理/14-finops-cost-governance-runbook.md|Finops Cost Governance Runbook]]
+- [[domain-11-production-operations/成本治理/99-finops-cost-optimization-guide.md|Finops Cost Optimization Guide]]
 

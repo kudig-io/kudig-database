@@ -351,10 +351,10 @@ kubectl get resourcequota,limitrange -A
 
 ### 本域必读
 
-- [[domain-12-cloud-providers/06-tencent-tke/tencent-tke-overview.md|腾讯云 TKE 概述]] — TKE 架构与核心概念
-- [[domain-12-cloud-providers/06-tencent-tke/02-tke-networking-vpc-cni.md|TKE VPC-CNI 网络]] — 网络模式与 IPAM 细节
-- [[domain-12-cloud-providers/06-tencent-tke/04-tke-iam-cam-integration.md|TKE CAM 身份集成]] — CAM/TCM 工作负载身份
-- [[domain-12-cloud-providers/06-tencent-tke/05-tke-troubleshooting-playbook.md|TKE 故障排查手册]] — 专项排障
+- [[domain-12-cloud-providers/腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE 概述]] — TKE 架构与核心概念
+- [[domain-12-cloud-providers/腾讯云TKE/02-tke-networking-vpc-cni.md|TKE VPC-CNI 网络]] — 网络模式与 IPAM 细节
+- [[domain-12-cloud-providers/腾讯云TKE/04-tke-iam-cam-integration.md|TKE CAM 身份集成]] — CAM/TCM 工作负载身份
+- [[domain-12-cloud-providers/腾讯云TKE/05-tke-troubleshooting-playbook.md|TKE 故障排查手册]] — 专项排障
 
 ### 跨域参考
 

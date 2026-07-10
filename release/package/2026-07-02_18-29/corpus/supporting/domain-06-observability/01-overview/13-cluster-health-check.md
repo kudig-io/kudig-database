@@ -1171,7 +1171,7 @@ aliyun cs DescribeClusterNodes --ClusterId <cluster-id>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
 

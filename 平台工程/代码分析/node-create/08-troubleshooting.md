@@ -91,7 +91,7 @@ trigger_keywords:
 - certificate expired
 related_domains:
 - 集群基础
-- domain-[[平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- domain-[[平台工程/代码分析/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 - 网络
 related_topics:
 - node-create/03-condition
@@ -591,9 +591,9 @@ openssl verify -CAfile /etc/kubernetes/pki/ca.crt /var/lib/kubelet/pki/kubelet-c
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 

@@ -654,7 +654,7 @@ Terway
 |:---|:---|:---|
 | 1 | `网络/topic-terway/01-product.md` | 产品概览: 定位、版本历史、模式总览 |
 | 2 | `网络/topic-terway/02-architecture.md` | 架构原理: 控制面/数据面详解、IPAM |
-| 3 | `网络/[[网络/topic-terway/03-usage.md|03-usage]].md` | 使用指南: 安装配置、模式切换 |
+| 3 | `网络/[[网络/Terway/03-usage.md|03-usage]].md` | 使用指南: 安装配置、模式切换 |
 | 4 | `网络/topic-terway/03b-crd-operations.md` | CRD 操作: PodENI/ReservedIP CRUD |
 | 5 | `网络/topic-terway/04-operations.md` | 运维手册: 健康检查、GC、升级 |
 | 6 | `网络/topic-terway/05-testing.md` | 测试验证: 网络连通性、NetworkPolicy 测试 |
@@ -682,7 +682,7 @@ Terway
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

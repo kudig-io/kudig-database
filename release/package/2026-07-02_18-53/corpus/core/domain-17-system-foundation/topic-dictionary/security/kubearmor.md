@@ -70,6 +70,6 @@ KubeArmor 是 Accuknox 开源的 CNCF Sandbox 项目，基于 eBPF 和 LSM（Lin
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/falco.md|Falco]]
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|Kyverno]]
+- [[domain-17-system-foundation/知识字典/security/falco.md|Falco]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|Kyverno]]

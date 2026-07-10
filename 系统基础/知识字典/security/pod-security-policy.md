@@ -82,7 +82,7 @@ PSP 可以控制：
 
 ## Related
 
-[[系统基础/topic-dictionary/security/pod-security-standards.md|Pod Security Standards]]
+[[系统基础/知识字典/security/pod-security-standards.md|Pod Security Standards]]
 
 
 <!-- risk-assessed -->

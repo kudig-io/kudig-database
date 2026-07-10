@@ -945,8 +945,8 @@ kubectl top pods -n production | grep -E "(database|frontend)"
 
 ## Related
 
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -2382,9 +2382,9 @@ kubectl delete pvc <pvc-name> --grace-period=0 --force
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
 

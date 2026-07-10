@@ -94,7 +94,7 @@ related_topics:
 - cluster-create/01-overview
 - cluster-create/03-certs
 - cluster-create/07-etcd
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
+- [[domain-07-platform-engineering/代码分析/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
 authors:
 - name: KUDIG Team
   role: contributor
@@ -724,10 +724,10 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]
+- [[domain-17-system-foundation/知识字典/workloads/daemonset.md|daemonset]]
 
 
 <!-- risk-assessed -->

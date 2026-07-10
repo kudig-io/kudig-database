@@ -67,8 +67,8 @@ Kubernetes 解决了"应用如何在集群中运行"，Service 解决了"应用�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kubernetes.md|Kubernetes]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
 - [[concepts/service-networking.md|Service Networking]]
 - [[concepts/bp-operations.md|最佳实践：Operations]]
 - [[concepts/bp-infrastructure.md|最佳实践：Infrastructure]]

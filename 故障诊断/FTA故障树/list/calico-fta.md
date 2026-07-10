@@ -171,52 +171,52 @@ flowchart TD
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 
-- [[故障诊断/topic-fta/list/calico-fta.md|calico-fta]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico-fta]]
 - RELEASE-NOTES-3.18
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
 - RELEASE-NOTES-3.19
 - RELEASE-NOTES-2.4
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
 - RELEASE-NOTES-3.12
 - RELEASE-NOTES-3.5
 - RELEASE-NOTES-3.1
 - RELEASE-NOTES-3.16
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.22.md|RELEASE-NOTES-3.22]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.22.md|RELEASE-NOTES-3.22]]
 - RELEASE-NOTES-3.0
 - RELEASE-NOTES-3.17
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
 - RELEASE-NOTES-2.5
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
 - RELEASE-NOTES-3.13
 - RELEASE-NOTES-3.4
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
 - RELEASE-NOTES-3.14
 - RELEASE-NOTES-3.3
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
 - RELEASE-NOTES-2.6
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
 - RELEASE-NOTES-3.7
 - RELEASE-NOTES-3.10
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
 - RELEASE-NOTES-3.6
 - RELEASE-NOTES-3.11
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
 - RELEASE-NOTES-3.15
 - RELEASE-NOTES-3.2
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
 - RELEASE-NOTES-3.9
 - RELEASE-NOTES-3.8
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
-- [[生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
+- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
 
 
 <!-- risk-assessed -->

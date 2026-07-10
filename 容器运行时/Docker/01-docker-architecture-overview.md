@@ -709,7 +709,7 @@ Image Index (多架构索引)
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

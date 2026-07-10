@@ -79,7 +79,7 @@ Kubernetes 通过 **Device Plugin** 框架将 GPU、TPU 等硬件资源以 `nvid
 
 ### 4. 动态资源分配（DRA）
 
-Kubernetes 1.26+ 引入的 **[[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
+Kubernetes 1.26+ 引入的 **[[domain-17-system-foundation/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (DRA)** 提供了比 Device Plugin 更灵活的资源模型。DRA 支持：
 - 定义自定义资源分配语义
 - 多节点 NVLink Domain 抽象
 - 更细粒度的调度决策
@@ -126,11 +126,11 @@ Kubernetes 1.26+ 引入的 **[[domain-17-system-foundation/topic-dictionary/sche
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/namespace.md|Namespace]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]
 
 
 <!-- risk-assessed -->

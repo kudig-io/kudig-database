@@ -83,11 +83,11 @@ Velero 是 CNCF 孵化项目，提供 Kubernetes 集群资源和持久卷的备�
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[系统基础/topic-dictionary/operations/upgrade.md|Upgrade]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|StatefulSet]]
-- [[系统基础/topic-dictionary/storage/rook.md|Rook]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/storage/storage-class.md|Storage Class]]
+- [[系统基础/知识字典/operations/upgrade.md|Upgrade]]
+- [[系统基础/知识字典/workloads/statefulset.md|StatefulSet]]
+- [[系统基础/知识字典/storage/rook.md|Rook]]
 
 
 <!-- risk-assessed -->

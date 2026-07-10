@@ -2542,7 +2542,7 @@ chmod +x pod-lifecycle-diagnosis.sh
 - **[06-node-lifecycle-condition-events.md](./06-node-lifecycle-condition-events.md)** - 节点生命周期事件（NodeReady, NodeNotReady, NodeHasDiskPressure）
 - **[11-storage-volume-events.md](./11-storage-volume-events.md)** - 存储卷挂载事件（FailedMount, FailedAttachVolume）
 - **[Domain-4: 工作负载 - Pod 生命周期](../工作负载/02-pod-lifecycle.md)** - Pod 生命周期详细说明
-- **[Topic: 结构化故障排查 - Pod 故障排查](../故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查完整流程
+- **[Topic: 结构化故障排查 - Pod 故障排查](../故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查完整流程
 
 ---
 
@@ -2574,8 +2574,8 @@ chmod +x pod-lifecycle-diagnosis.sh
 
 ## Related
 
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
 

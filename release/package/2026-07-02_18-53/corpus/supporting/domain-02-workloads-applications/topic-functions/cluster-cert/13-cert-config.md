@@ -509,7 +509,7 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
@@ -518,10 +518,10 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/networking.md|networking]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-19-landscape-references/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

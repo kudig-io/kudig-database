@@ -69,6 +69,6 @@ Fluid 是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数据工作�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
-- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
-- [[domain-17-system-foundation/topic-dictionary/storage/minio.md|MinIO]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[domain-17-system-foundation/知识字典/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/知识字典/storage/minio.md|MinIO]]

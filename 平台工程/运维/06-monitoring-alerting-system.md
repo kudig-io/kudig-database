@@ -510,7 +510,7 @@ slos:
 - Domain-9 平台运维 — 开源项目索引
 - 平台运维概述
 - 集群生命周期管理
-- [[平台工程/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[平台工程/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - GitOps配置管理 (GitOps Configuration Management)
@@ -528,7 +528,7 @@ slos:
 - 相关知识域: 可观测性
 - 相关知识域: 专项技术
 - 相关知识域: 故障诊断
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

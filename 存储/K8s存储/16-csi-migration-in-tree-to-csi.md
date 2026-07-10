@@ -669,9 +669,9 @@ echo "=========================================="
 
 ## Related
 
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

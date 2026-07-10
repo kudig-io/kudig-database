@@ -1241,7 +1241,7 @@ spec:
 
 - domain-03-networking-traffic KUDIG Database — Global MOC
 - [[domain-03-networking-traffic/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
-- [[domain-03-networking-traffic/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
+- [[domain-03-networking-traffic/K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -1261,8 +1261,8 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/dns-index.md|DNS 知识图谱索引]]
 
 
 <!-- risk-assessed -->

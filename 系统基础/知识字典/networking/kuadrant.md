@@ -70,6 +70,6 @@ Kuadrant 是 Red Hat 开源的 CNCF Sandbox 项目，基于 Gateway API 提供 A
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/envoy-gateway.md|Envoy Gateway]]
-- [[系统基础/topic-dictionary/networking/kgateway.md|KGateway]]
-- [[系统基础/topic-dictionary/security/openfga.md|OpenFGA]]
+- [[系统基础/知识字典/networking/envoy-gateway.md|Envoy Gateway]]
+- [[系统基础/知识字典/networking/kgateway.md|KGateway]]
+- [[系统基础/知识字典/security/openfga.md|OpenFGA]]

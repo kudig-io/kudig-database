@@ -1312,8 +1312,8 @@ kubectl get ingress --all-namespaces -o json | \
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

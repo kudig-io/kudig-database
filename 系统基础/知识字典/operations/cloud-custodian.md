@@ -73,9 +73,9 @@ Cloud Custodian（c7n）是 CNCF Sandbox 项目，多云环境的统一治理引
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/observability/opencost.md|OpenCost]]
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/observability/opencost.md|OpenCost]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
 
 
 <!-- risk-assessed -->

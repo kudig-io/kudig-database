@@ -785,7 +785,7 @@ spec:
 
 - [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

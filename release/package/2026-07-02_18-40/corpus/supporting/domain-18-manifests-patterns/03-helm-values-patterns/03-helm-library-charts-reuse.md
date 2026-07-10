@@ -673,8 +673,8 @@ helmfile -e prod sync --debug
 
 ## Related
 
-- [[domain-18-manifests-patterns/03-helm-values-patterns/01-helm-values-best-practices|Helm Values 最佳实践]]
-- [[domain-18-manifests-patterns/03-helm-values-patterns/02-helm-hooks-lifecycle|Helm Hooks 生命周期]]
+- [[domain-18-manifests-patterns/Helm值模式/01-helm-values-best-practices|Helm Values 最佳实践]]
+- [[domain-18-manifests-patterns/Helm值模式/02-helm-hooks-lifecycle|Helm Hooks 生命周期]]
 
 ## See Also
 

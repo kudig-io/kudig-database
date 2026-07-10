@@ -70,6 +70,6 @@ LoxiLB 是基于 eBPF 的高性能外部负载均衡器，专为 Kubernetes 设�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/metallb.md|MetalLB]]
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
-- [[系统基础/topic-dictionary/networking/kube-vip.md|kube-vip]]
+- [[系统基础/知识字典/networking/metallb.md|MetalLB]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/networking/kube-vip.md|kube-vip]]

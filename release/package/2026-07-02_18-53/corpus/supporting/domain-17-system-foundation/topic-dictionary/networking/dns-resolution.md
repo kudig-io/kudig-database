@@ -79,11 +79,11 @@ Pod 内的 DNS 查询 → Pod DNS Config → CoreDNS → 上游 DNS（如需要�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/coredns.md|CoreDNS]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/headless-service.md|Headless Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/endpoint.md|Endpoints]]
-- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
+- [[domain-17-system-foundation/知识字典/networking/coredns.md|CoreDNS]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/headless-service.md|Headless Service]]
+- [[domain-17-system-foundation/知识字典/networking/endpoint.md|Endpoints]]
+- [[domain-17-system-foundation/知识字典/networking/networkpolicy.md|NetworkPolicy]]
 
 
 <!-- risk-assessed -->

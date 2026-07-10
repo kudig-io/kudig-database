@@ -86,11 +86,11 @@ Trace
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/logging.md|Logging]]
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/logging.md|Logging]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]
 
 
 <!-- risk-assessed -->

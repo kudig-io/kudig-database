@@ -82,11 +82,11 @@ volumes:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
-- [[domain-17-system-foundation/topic-dictionary/storage/hostpath.md|Hostpath]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/知识字典/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/知识字典/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/知识字典/storage/hostpath.md|Hostpath]]
 
 
 <!-- risk-assessed -->

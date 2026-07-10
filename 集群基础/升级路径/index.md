@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[集群基础/06-upgrade-paths/06-cluster-configuration-parameters.md|Cluster Configuration Parameters]]
-- [[集群基础/06-upgrade-paths/07-upgrade-paths-strategy.md|Upgrade Paths Strategy]]
-- [[集群基础/06-upgrade-paths/18-upgrade-migration-strategy.md|Upgrade Migration Strategy]]
-- [[集群基础/06-upgrade-paths/99-kubernetes-v1.33-upgrade-guide.md|Kubernetes V1.33 Upgrade Guide]]
+- [[集群基础/升级路径/06-cluster-configuration-parameters.md|Cluster Configuration Parameters]]
+- [[集群基础/升级路径/07-upgrade-paths-strategy.md|Upgrade Paths Strategy]]
+- [[集群基础/升级路径/18-upgrade-migration-strategy.md|Upgrade Migration Strategy]]
+- [[集群基础/升级路径/99-kubernetes-v1.33-upgrade-guide.md|Kubernetes V1.33 Upgrade Guide]]
 

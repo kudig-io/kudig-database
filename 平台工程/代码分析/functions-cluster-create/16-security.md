@@ -364,10 +364,10 @@ NodeRestriction 限制 kubelet 的操作:
 - [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[系统基础/topic-dictionary/configuration/secrets.md|secrets]]
+- [[系统基础/知识字典/configuration/secrets.md|secrets]]
 
 ```
 

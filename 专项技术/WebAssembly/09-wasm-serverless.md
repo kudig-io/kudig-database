@@ -2238,7 +2238,7 @@ compatibility_date = "2024-01-01"
 ENVIRONMENT = "production"
 API_KEY = "..."
 
-[[系统基础/topic-dictionary/fundamentals/namespaces.md|namespaces]]
+[[系统基础/知识字典/fundamentals/namespaces.md|namespaces]]
 binding = "KV_STORE"
 id = "abc123..."
 

@@ -349,9 +349,9 @@ spec:
 - 调度器配置与优化
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
 
-- [[平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[平台工程/代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
 ## See Also
 
 - 08-multi-cloud-workload-strategy

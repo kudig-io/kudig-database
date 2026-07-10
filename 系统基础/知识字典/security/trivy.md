@@ -81,11 +81,11 @@ NVD、Alpine、Debian、Ubuntu、Red Hat、Amazon Linux、GitHub Advisory 等。
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/pod-security-policy.md|Pod Security Policy]]
-- [[系统基础/topic-dictionary/security/security-context.md|Security Context]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/security/admission-controller.md|Admission Controller]]
+- [[系统基础/知识字典/security/pod-security-policy.md|Pod Security Policy]]
+- [[系统基础/知识字典/security/security-context.md|Security Context]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/security/admission-controller.md|Admission Controller]]
 
 
 <!-- risk-assessed -->

@@ -178,8 +178,8 @@ data:
 
 ## 相关链接
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL.md|image-pull-troubleshooting]] — 镜像拉取问题排查
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-image-pull/SKILL.md|k8s-image-pull]] — K8s 镜像拉取机制
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-image-pull/SKILL.md|image-pull-troubleshooting]] — 镜像拉取问题排查
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-image-pull/SKILL.md|k8s-image-pull]] — K8s 镜像拉取机制
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|container-runtime-security]] — 容器运行时安全
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|docker-migration-containerd]] — Docker 迁移至 containerd 指南
 

@@ -51,13 +51,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/storage/csi.md]]'
+- target: '[[系统基础/知识字典/storage/csi.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
+- target: '[[生产运维/工单案例/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-028-statefulset-pvc-unbound.md]]'
+- target: '[[生产运维/工单案例/ticket-case-028-statefulset-pvc-unbound.md]]'
   type: related_to
 ---
 

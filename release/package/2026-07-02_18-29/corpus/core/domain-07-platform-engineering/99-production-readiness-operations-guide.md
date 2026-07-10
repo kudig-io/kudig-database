@@ -294,7 +294,7 @@ Secret 轮换应尽量在业务低峰期执行，并预先在 staging 环境验�
 - [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩展实践指南]]
 - [[domain-07-platform-engineering/99-keda-event-driven-autoscaling-guide.md|KEDA 事件驱动自动缩放实践指南]]
 - [[domain-07-platform-engineering/12-automated-operations-toolchain.md|自动化运维工具链]]
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]]
+- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]]
 
 ### 相关域核心文档
 

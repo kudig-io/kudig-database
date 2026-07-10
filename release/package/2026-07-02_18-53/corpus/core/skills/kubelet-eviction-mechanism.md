@@ -238,6 +238,6 @@ kubectl describe pod <pod> | grep -A 5 "Last State"
 - [[prometheus]] — Prometheus
 
 - [[pod-lifecycle|pod-lifecycle]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/速查卡/linux.md|linux]]
 
 <!-- risk-assessed -->

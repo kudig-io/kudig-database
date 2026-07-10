@@ -161,9 +161,9 @@ systemd-inhibit --list
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
-- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/知识字典/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
 
 
 <!-- risk-assessed -->

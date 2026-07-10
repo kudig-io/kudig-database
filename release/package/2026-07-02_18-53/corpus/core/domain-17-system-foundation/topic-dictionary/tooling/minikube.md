@@ -87,11 +87,11 @@ minikube tunnel                   # 暴露 LoadBalancer Service
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
 
 
 <!-- risk-assessed -->

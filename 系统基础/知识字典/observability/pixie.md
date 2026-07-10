@@ -67,6 +67,6 @@ Pixie 是 New Relic 开源的 CNCF Sandbox 项目，利用 eBPF 技术实现 Kub
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/observability/jaeger.md|Jaeger]]
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/jaeger.md|Jaeger]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]

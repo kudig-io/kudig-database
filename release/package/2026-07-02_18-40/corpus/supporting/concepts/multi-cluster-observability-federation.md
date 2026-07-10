@@ -25,7 +25,7 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/cluster-mesh.md]]'
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
@@ -49,7 +49,7 @@ relationships:
 
 | 域 | 核心能力 | 联邦监控的桥接作用 |
 |---|---|---|
-| **Networking (domain-03)** | 多集群网络（[[entities/cilium.md|Cilium]] [[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md|Cluster Mesh]]）、流量路由 | 联邦查询需要跨集群网络可达，mTLS 保障安全传输 |
+| **Networking (domain-03)** | 多集群网络（[[entities/cilium.md|Cilium]] [[domain-17-system-foundation/知识字典/networking/cluster-mesh.md|Cluster Mesh]]）、流量路由 | 联邦查询需要跨集群网络可达，mTLS 保障安全传输 |
 | **Observability (domain-06)** | 指标采集、告警、长期存储 | 联邦层聚合多个 Prometheus 数据，提供统一查询和全局告警 |
 
 **关键洞察：多集群可观测性的核心矛盾是"分布式采集"与"集中式洞察"的冲突。** 每个集群的 Prometheus 是自治的（高可用、本地存储、独立告警），但全局视图需要打破集群边界。Thanos 和 Cortex 通过"中心化查询 + 分布式存储"的架构解决这一矛盾。

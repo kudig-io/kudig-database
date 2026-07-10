@@ -577,7 +577,7 @@ class K8sManifestReviewer:
 | **人在环中设计** | 高风险操作必须有人工门禁 | 所有案例都有关键节点的人工确认 |
 | **渐进式授权** | 从只读/建议开始，积累信任后扩权 | 三个案例都经历了先部分上线的过程 |
 | **可观测性先行** | 上线第一天就接入完整的可观测性 | Langfuse + Prometheus 同步上线 |
-| **[[domain-14-ai-ml-infra/03-agent-runtime/14-agent-evaluation-benchmarks.md|质量评估体系]]** | 建立基准测试集，持续监控质量 | 每日自动运行评估，监控质量回退 |
+| **[[domain-14-ai-ml-infra/Agent运行时/14-agent-evaluation-benchmarks.md|质量评估体系]]** | 建立基准测试集，持续监控质量 | 每日自动运行评估，监控质量回退 |
 
 ## 4.2 规避的关键失败模式
 
@@ -678,7 +678,7 @@ Phase 4: Mature（持续）
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | Supervisor-Worker 模式的实际案例 |
 | [10 - 安全护栏](./10-security-guardrails.md) | 金融案例中的合规护栏实现 |
 | [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s Agent 的战略设计 |
-| [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障树分析在 AIOps Agent 中的应用 |
+| [topic-fta](../domain-10-troubleshooting-diagnostics/FTA故障树/) | 故障树分析在 AIOps Agent 中的应用 |
 
 ---
 
@@ -689,17 +689,17 @@ Phase 4: Mature（持续）
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[domain-14-ai-ml-infra/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/AI-Agents/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

@@ -69,6 +69,6 @@ Ratify 是微软开源的 Kubernetes 准入验证框架，与 OPA Gatekeeper 配
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/notary-project.md|Notary Project]]
-- [[系统基础/topic-dictionary/security/opa.md|OPA Gatekeeper]]
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/security/notary-project.md|Notary Project]]
+- [[系统基础/知识字典/security/opa.md|OPA Gatekeeper]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]

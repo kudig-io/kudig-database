@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[安全/02-network-security/02-network-security-policies.md|Network Security Policies]]
-- [[安全/02-network-security/07-zero-trust-security-architecture.md|Zero Trust Security Architecture]]
-- [[安全/02-network-security/18-network-defense-depth.md|Network Defense Depth]]
-- [[安全/02-network-security/19-zero-trust-architecture.md|Zero Trust Architecture]]
-- [[安全/02-network-security/21-multicluster-security.md|Multicluster Security]]
+- [[安全/网络安全/02-network-security-policies.md|Network Security Policies]]
+- [[安全/网络安全/07-zero-trust-security-architecture.md|Zero Trust Security Architecture]]
+- [[安全/网络安全/18-network-defense-depth.md|Network Defense Depth]]
+- [[安全/网络安全/19-zero-trust-architecture.md|Zero Trust Architecture]]
+- [[安全/网络安全/21-multicluster-security.md|Multicluster Security]]
 

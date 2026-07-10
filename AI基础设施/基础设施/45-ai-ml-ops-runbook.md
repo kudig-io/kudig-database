@@ -349,12 +349,12 @@ spec:
 
 - [[AI基础设施/99-production-readiness-operations-guide.md|AI/ML 基础设施 生产就绪运维指南]]
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[AI基础设施/01-ai-infra/04-gpu-monitoring-dcgm.md|GPU 监控与 DCGM]]
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[AI基础设施/01-ai-infra/10-model-deployment-management.md|模型部署管理]]
-- [[AI基础设施/01-ai-infra/14-troubleshooting-performance.md|AI 性能故障排查]]
-- [[AI基础设施/01-ai-infra/17-llm-inference-serving.md|LLM 推理服务]]
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]]
+- [[AI基础设施/基础设施/04-gpu-monitoring-dcgm.md|GPU 监控与 DCGM]]
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]]
+- [[AI基础设施/基础设施/10-model-deployment-management.md|模型部署管理]]
+- [[AI基础设施/基础设施/14-troubleshooting-performance.md|AI 性能故障排查]]
+- [[AI基础设施/基础设施/17-llm-inference-serving.md|LLM 推理服务]]
 
 
 <!-- risk-assessed -->

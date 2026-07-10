@@ -535,7 +535,7 @@ kubectl top pods -n <namespace>
 
 **关联文档**:
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/](../../domain-10-troubleshooting-diagnostics/topic-skills/) — 18 个 GA Skill
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/](../../domain-10-troubleshooting-diagnostics/技能体系/) — 18 个 GA Skill
 - [../01-introduction/01-what-is-kubernetes.md](../01-introduction/01-what-is-kubernetes.md) — K8s 概念入门
 
 ## Related

@@ -68,6 +68,6 @@ Telepresence 是 Ambassadeur Labs 开源的 Kubernetes 远程开发工具，将�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/skaffold.md|Skaffold]]
-- [[domain-17-system-foundation/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[domain-17-system-foundation/topic-dictionary/networking/consul.md|Consul]]
+- [[domain-17-system-foundation/知识字典/tooling/skaffold.md|Skaffold]]
+- [[domain-17-system-foundation/知识字典/networking/linkerd.md|Linkerd]]
+- [[domain-17-system-foundation/知识字典/networking/consul.md|Consul]]

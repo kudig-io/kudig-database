@@ -1,6 +1,6 @@
 本页是 **kudig-database 知识库中 9 张技术速查卡的总览与导航页**。这些速查卡覆盖了云原生运维工程师日常工作中最频繁接触的命令、语法和配置——从 `kubectl` 资源操作到 PromQL 监控查询、从 Docker 容器管理到 SQL 数据库运维，每张卡片均经过生产环境验证，包含真实场景示例与版本兼容性标注。无论你是刚入职的初级开发者还是需要快速刷新记忆的高级工程师，都可以把本页当作**一页直达的命令索引**。
 
-Sources: [README.md](topic-cheat-sheet/README.md#L1-L63)
+Sources: [README.md](速查卡/README.md#L1-L63)
 
 ## 速查卡全景索引
 
@@ -8,17 +8,17 @@ Sources: [README.md](topic-cheat-sheet/README.md#L1-L63)
 
 | # | 速查卡 | 内容覆盖 | 适用版本 | 文件大小 | 深度知识来源 |
 |:---:|:---|:---|:---|:---:|:---|
-| 1 | **[Kubernetes 速查卡](topic-cheat-sheet/k8s.md)** | kubectl 命令、集群管理、Pod 操作、网络、存储、RBAC、etcd、故障排查 | v1.25–v1.32 | 37KB | domain-1 ~ domain-12 |
-| 2 | **[Linux 速查卡](topic-cheat-sheet/linux.md)** | 系统管理、进程、网络、存储、安全、Shell 脚本、性能调优 | RHEL 7-9, Ubuntu 20-24 | 44KB | domain-14 |
-| 3 | **[Go 语言速查卡](topic-cheat-sheet/go.md)** | 语法、并发、网络、数据库、测试、性能优化 | Go 1.20-1.22 | 49KB | domain-2（源码阅读） |
-| 4 | **[Docker 速查卡](topic-cheat-sheet/docker.md)** | 容器生命周期、镜像管理、网络、存储、Compose、ctr | Docker 20.10+, containerd 1.6+ | 11KB | domain-13 |
-| 5 | **[PromQL 速查卡](topic-cheat-sheet/promql.md)** | 指标查询、聚合函数、K8s 监控查询、告警规则模板 | Prometheus 2.40+ | 11KB | domain-8, domain-20 |
-| 6 | **[网络诊断速查卡](topic-cheat-sheet/networking.md)** | DNS 诊断、TCP 调试、HTTP 测试、抓包分析、K8s 网络 | TCP/IP | 14KB | domain-5, domain-15 |
-| 7 | **[Git 速查表](topic-cheat-sheet/git.md)** | 日常操作、分支管理、撤销操作、远程仓库、Stash、故障排查 | Git 2.30+ | 12KB | domain-23 |
-| 8 | **[SQL 速查表](topic-cheat-sheet/sql.md)** | 查询语法、聚合分组、JOIN、子查询、索引优化、事务、备份恢复 | MySQL 8.0, PostgreSQL 14 | 20KB | domain-28 |
-| 9 | **[TLS/PKI 速查卡](topic-cheat-sheet/tls-pki.md)** | 证书格式、OpenSSL 命令、证书链、K8s 证书管理 | x509, TLS 1.2/1.3 | 11KB | domain-7 |
+| 1 | **[Kubernetes 速查卡](速查卡/k8s.md)** | kubectl 命令、集群管理、Pod 操作、网络、存储、RBAC、etcd、故障排查 | v1.25–v1.32 | 37KB | domain-1 ~ domain-12 |
+| 2 | **[Linux 速查卡](速查卡/linux.md)** | 系统管理、进程、网络、存储、安全、Shell 脚本、性能调优 | RHEL 7-9, Ubuntu 20-24 | 44KB | domain-14 |
+| 3 | **[Go 语言速查卡](速查卡/go.md)** | 语法、并发、网络、数据库、测试、性能优化 | Go 1.20-1.22 | 49KB | domain-2（源码阅读） |
+| 4 | **[Docker 速查卡](速查卡/docker.md)** | 容器生命周期、镜像管理、网络、存储、Compose、ctr | Docker 20.10+, containerd 1.6+ | 11KB | domain-13 |
+| 5 | **[PromQL 速查卡](速查卡/promql.md)** | 指标查询、聚合函数、K8s 监控查询、告警规则模板 | Prometheus 2.40+ | 11KB | domain-8, domain-20 |
+| 6 | **[网络诊断速查卡](速查卡/networking.md)** | DNS 诊断、TCP 调试、HTTP 测试、抓包分析、K8s 网络 | TCP/IP | 14KB | domain-5, domain-15 |
+| 7 | **[Git 速查表](速查卡/git.md)** | 日常操作、分支管理、撤销操作、远程仓库、Stash、故障排查 | Git 2.30+ | 12KB | domain-23 |
+| 8 | **[SQL 速查表](速查卡/sql.md)** | 查询语法、聚合分组、JOIN、子查询、索引优化、事务、备份恢复 | MySQL 8.0, PostgreSQL 14 | 20KB | domain-28 |
+| 9 | **[TLS/PKI 速查卡](速查卡/tls-pki.md)** | 证书格式、OpenSSL 命令、证书链、K8s 证书管理 | x509, TLS 1.2/1.3 | 11KB | domain-7 |
 
-Sources: [README.md](topic-cheat-sheet/README.md#L9-L54)
+Sources: [README.md](速查卡/README.md#L9-L54)
 
 ## 架构关系：速查卡在知识库中的定位
 
@@ -67,7 +67,7 @@ graph TD
     DOCKER -.-> TS
 ```
 
-Sources: [README.md](topic-cheat-sheet/README.md#L43-L54)
+Sources: [README.md](速查卡/README.md#L43-L54)
 
 ---
 
@@ -129,7 +129,7 @@ kubectl get ingress -A                                        # 查看所有 Ing
 
 **版本兼容性提醒**：`--short` 标志在 v1.28+ 已弃用，推荐使用 `--output=yaml|json`；`kubectl get componentstatuses` 在 v1.19+ 已弃用，改用 `/livez`、`/readyz` API。
 
-Sources: [k8s.md](topic-cheat-sheet/k8s.md#L1-L100), [k8s.md](topic-cheat-sheet/k8s.md#L180-L316), [k8s.md](topic-cheat-sheet/k8s.md#L320-L398)
+Sources: [k8s.md](速查卡/k8s.md#L1-L100), [k8s.md](速查卡/k8s.md#L180-L316), [k8s.md](速查卡/k8s.md#L320-L398)
 
 ---
 
@@ -177,7 +177,7 @@ ss -tnp                         # 网络连接统计（关注 ESTABLISHED/CLOSE_
 
 **工具包依赖提醒**：`mpstat`、`iostat`、`sar` 需要 sysstat v12.5+（Ubuntu 22.04+、RHEL 9+ 自带）；`htop` 需要 v3.2+；`iotop` 需要 root 权限。
 
-Sources: [linux.md](topic-cheat-sheet/linux.md#L1-L126), [linux.md](topic-cheat-sheet/linux.md#L127-L200)
+Sources: [linux.md](速查卡/linux.md#L1-L126), [linux.md](速查卡/linux.md#L127-L200)
 
 ---
 
@@ -217,7 +217,7 @@ Sources: [linux.md](topic-cheat-sheet/linux.md#L1-L126), [linux.md](topic-cheat-
 | `--rm` | 停止后自动删除 | `docker run --rm busybox echo hi` |
 | `--privileged` | 特权模式（**不安全，慎用**） | — |
 
-Sources: [docker.md](topic-cheat-sheet/docker.md#L1-L200), [docker.md](topic-cheat-sheet/docker.md#L200-L399)
+Sources: [docker.md](速查卡/docker.md#L1-L200), [docker.md](速查卡/docker.md#L200-L399)
 
 ---
 
@@ -259,7 +259,7 @@ predict_linear(node_filesystem_avail_bytes[1h], 4*3600) < 0
 
 **聚合函数速查**：`sum()` 求和、`avg()` 平均值、`min()`/`max()` 极值、`count()` 计数、`topk(n, ...)` 最大 n 个、`bottomk(n, ...)` 最小 n 个、`quantile(φ, ...)` 分位数、`stddev()` 标准差。
 
-Sources: [promql.md](topic-cheat-sheet/promql.md#L1-L200), [promql.md](topic-cheat-sheet/promql.md#L280-L400)
+Sources: [promql.md](速查卡/promql.md#L1-L200), [promql.md](速查卡/promql.md#L280-L400)
 
 ---
 
@@ -298,7 +298,7 @@ Git 撤销操作是初学者最容易出错的领域。下表按"修改阶段"�
 
 **新式命令提示**：Git 2.23+ 推荐使用 `git switch` 替代 `git checkout` 切换分支，使用 `git restore` 替代 `git checkout -- <file>` 撤销修改。
 
-Sources: [git.md](topic-cheat-sheet/git.md#L1-L200), [git.md](topic-cheat-sheet/git.md#L274-L334)
+Sources: [git.md](速查卡/git.md#L1-L200), [git.md](速查卡/git.md#L274-L334)
 
 ---
 
@@ -342,7 +342,7 @@ SQL JOIN 是初学者最常需要快速确认的语法，以下是五种 JOIN �
 | **避免函数** | 索引字段上使用函数会导致索引失效 | ❌ `WHERE YEAR(date) = 2024` → ✅ `WHERE date >= '2024-01-01'` |
 | **定期维护** | 定期 ANALYZE 更新统计信息，重建碎片索引 | `ANALYZE TABLE users` |
 
-Sources: [sql.md](topic-cheat-sheet/sql.md#L1-L200), [sql.md](topic-cheat-sheet/sql.md#L400-L534)
+Sources: [sql.md](速查卡/sql.md#L1-L200), [sql.md](速查卡/sql.md#L400-L534)
 
 ---
 
@@ -354,19 +354,19 @@ Sources: [sql.md](topic-cheat-sheet/sql.md#L1-L200), [sql.md](topic-cheat-sheet/
 
 覆盖 DNS 诊断（dig/nslookup/host）、TCP/UDP 调试（nc/nmap/ss）、HTTP/HTTPS 诊断（curl/wget）、路由与防火墙、抓包分析（tcpdump）以及 **Kubernetes 网络诊断**专用命令。607 行。
 
-Sources: [networking.md](topic-cheat-sheet/networking.md#L1-L200)
+Sources: [networking.md](速查卡/networking.md#L1-L200)
 
 ### ⑧ TLS/PKI 速查卡
 
 覆盖证书格式对照表（.pem/.crt/.key/.csr/.p12）、OpenSSL 完整命令（查看/验证/生成/测试 TLS 连接）、证书链构建、**Kubernetes 集群证书管理**（kubeadm 证书续期）以及证书过期监控脚本。428 行。
 
-Sources: [tls-pki.md](topic-cheat-sheet/tls-pki.md#L1-L200)
+Sources: [tls-pki.md](速查卡/tls-pki.md#L1-L200)
 
 ### ⑨ Go 语言速查卡
 
 覆盖 Go 1.20-1.22 的语法基础、并发模式（goroutine/channel/select/context）、网络编程、数据库操作、测试框架与性能优化。2606 行，是全库体量最大的速查卡，主要服务于阅读 Kubernetes 源码的场景。
 
-Sources: [go.md](topic-cheat-sheet/go.md#L1)
+Sources: [go.md](速查卡/go.md#L1)
 
 ---
 
@@ -403,7 +403,7 @@ grep -n "port-forward" topic-cheat-sheet/k8s.md
 
 每张速查卡均为自包含的 Markdown 文档，可直接导出为 PDF 或打印，适合贴在工位旁随时参考。所有版本兼容性信息已内联在文档中，离线使用无需额外查证。
 
-Sources: [README.md](topic-cheat-sheet/README.md#L23-L54)
+Sources: [README.md](速查卡/README.md#L23-L54)
 
 ---
 

@@ -758,7 +758,7 @@ capacity_checklist
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

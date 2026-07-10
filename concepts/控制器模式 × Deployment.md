@@ -45,7 +45,7 @@ relationships:
   type: uses
 - target: '[[entities/argo.md]]'
   type: related_to
-- target: '[[系统基础/topic-dictionary/workloads/daemonset.md]]'
+- target: '[[系统基础/知识字典/workloads/daemonset.md]]'
   type: related_to
 ---
 
@@ -82,7 +82,7 @@ Deployment Controller（有状态策略层）
             └── Pod（无状态实例）
 ```
 
-这个分层设计成为所有复杂控制器的模板：StatefulSet（有序 Pod 管理）、[[系统基础/topic-dictionary/workloads/daemonset.md|DaemonSet]]（节点级调度）、Job（完成度追踪）。
+这个分层设计成为所有复杂控制器的模板：StatefulSet（有序 Pod 管理）、[[系统基础/知识字典/workloads/daemonset.md|DaemonSet]]（节点级调度）、Job（完成度追踪）。
 
 **Deployment 定义了控制器的 maturity baseline：**
 - L1：维持数量（ReplicaSet）
@@ -120,6 +120,6 @@ Deployment Controller（有状态策略层）
 - [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
 - [[concepts/控制器模式 × 可观测性.md|控制器模式 × 可观测性]]
 
-- [[平台工程/topic-code-analysis/deployment-create/README.md|Deployment Create — [[entities/kubernetes.md|Kubernetes]] Deployment 控制器源码分析]]
+- [[平台工程/代码分析/deployment-create/README.md|Deployment Create — [[entities/kubernetes.md|Kubernetes]] Deployment 控制器源码分析]]
 
 <!-- risk-assessed -->

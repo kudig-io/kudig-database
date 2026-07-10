@@ -373,12 +373,12 @@ ETCDCTL_API=3 etcdctl endpoint status --cluster -w table
 ### 同域深度参考
 
 - [[集群基础/01-production-architecture-design-principles.md|生产架构设计原则]]
-- [[集群基础/01-architecture-overview/17-production-operations-best-practices.md|生产环境运维最佳实践]]
-- [[集群基础/03-control-plane/03-plane-high-availability.md|控制平面高可用]]
-- [[集群基础/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案]]
-- [[集群基础/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[集群基础/03-control-plane/12-apiserver-deep-dive.md|API Server 深度解析]]
-- [[集群基础/06-upgrade-paths/99-kubernetes-v1.33-upgrade-guide.md|Kubernetes v1.33 升级指南]]
+- [[集群基础/架构总览/17-production-operations-best-practices.md|生产环境运维最佳实践]]
+- [[集群基础/控制平面/03-plane-high-availability.md|控制平面高可用]]
+- [[集群基础/控制平面/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案]]
+- [[集群基础/控制平面/11-etcd-deep-dive.md|etcd 深度解析]]
+- [[集群基础/控制平面/12-apiserver-deep-dive.md|API Server 深度解析]]
+- [[集群基础/升级路径/99-kubernetes-v1.33-upgrade-guide.md|Kubernetes v1.33 升级指南]]
 
 ### 跨域协作参考
 

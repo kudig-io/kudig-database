@@ -22,24 +22,24 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[系统基础/topic-cheat-sheet/README.md|Readme]]
+- [[系统基础/速查卡/README.md|Readme]]
 
 ## 文档
 
-- [[系统基础/topic-cheat-sheet/MOC.md|Moc]]
-- [[系统基础/topic-cheat-sheet/docker.md|Docker]]
-- [[系统基础/topic-cheat-sheet/gateway-api.md|Gateway Api]]
-- [[系统基础/topic-cheat-sheet/git.md|Git]]
-- [[系统基础/topic-cheat-sheet/gitops.md|Gitops]]
-- [[系统基础/topic-cheat-sheet/go.md|Go]]
-- [[系统基础/topic-cheat-sheet/helm.md|Helm]]
-- [[系统基础/topic-cheat-sheet/k8s.md|K8S]]
-- [[系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md|Kubectl Scene Cheatsheet]]
-- [[系统基础/topic-cheat-sheet/linux.md|Linux]]
-- [[系统基础/topic-cheat-sheet/networking.md|Networking]]
-- [[系统基础/topic-cheat-sheet/promql.md|Promql]]
-- [[系统基础/topic-cheat-sheet/sql.md|Sql]]
-- [[系统基础/topic-cheat-sheet/tls-pki.md|Tls Pki]]
+- [[系统基础/速查卡/MOC.md|Moc]]
+- [[系统基础/速查卡/docker.md|Docker]]
+- [[系统基础/速查卡/gateway-api.md|Gateway Api]]
+- [[系统基础/速查卡/git.md|Git]]
+- [[系统基础/速查卡/gitops.md|Gitops]]
+- [[系统基础/速查卡/go.md|Go]]
+- [[系统基础/速查卡/helm.md|Helm]]
+- [[系统基础/速查卡/k8s.md|K8S]]
+- [[系统基础/速查卡/kubectl-scene-cheatsheet.md|Kubectl Scene Cheatsheet]]
+- [[系统基础/速查卡/linux.md|Linux]]
+- [[系统基础/速查卡/networking.md|Networking]]
+- [[系统基础/速查卡/promql.md|Promql]]
+- [[系统基础/速查卡/sql.md|Sql]]
+- [[系统基础/速查卡/tls-pki.md|Tls Pki]]
 
 
 

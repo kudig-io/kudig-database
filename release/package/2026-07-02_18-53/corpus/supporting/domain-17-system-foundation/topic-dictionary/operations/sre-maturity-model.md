@@ -2802,7 +2802,7 @@ Q5-Q6: 全面推广
 | [./failure-patterns-analysis.md](././failure-patterns-analysis.md) | 关联实践 | 故障模式分析帮助识别成熟度短板,指导改进方向 |
 | [./performance-tuning-expert.md](././performance-tuning-expert.md) | 深化学习 | 性能调优是Level 4-5阶段的核心能力,提升运维成熟度 |
 | [../domain-03-networking-traffic/30-service-mesh-deep-dive.md](../domain-03-networking-traffic/30-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
-| [../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
+| [../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md](../domain-10-troubleshooting-diagnostics/高级排障/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
 | [../domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md](../domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md) | 知识扩展 | 可观测性演讲稿深入讲解监控体系建设,是第3节的补充 |
 
 ## 故障排查
@@ -2854,7 +2854,7 @@ kubectl get crd | wc -l
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

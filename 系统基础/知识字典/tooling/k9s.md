@@ -86,11 +86,11 @@ k9s 是一个基于终端的 Kubernetes 集群管理 UI 工具。它提供了实
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[系统基础/topic-dictionary/tooling/kubectx.md|Kubectx]]
-- [[系统基础/topic-dictionary/tooling/kubens.md|Kubens]]
-- [[系统基础/topic-dictionary/tooling/stern.md|Stern]]
+- [[系统基础/知识字典/tooling/kubectl.md|Kubectl]]
+- [[系统基础/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[系统基础/知识字典/tooling/kubectx.md|Kubectx]]
+- [[系统基础/知识字典/tooling/kubens.md|Kubens]]
+- [[系统基础/知识字典/tooling/stern.md|Stern]]
 
 
 <!-- risk-assessed -->

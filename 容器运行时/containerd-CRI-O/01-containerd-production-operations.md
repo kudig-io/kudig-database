@@ -411,8 +411,8 @@ sudo systemctl restart systemd-journald
 ## 13. 相关文档
 
 - [[容器运行时/01-containerd-deep-guide.md|containerd 深度指南]]
-- [[容器运行时/01-docker/01-docker-architecture-overview.md|Docker 架构概述]]
-- [[容器运行时/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
+- [[容器运行时/Docker/01-docker-architecture-overview.md|Docker 架构概述]]
+- [[容器运行时/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 - [[安全/README.md|容器安全合规]]
 
 

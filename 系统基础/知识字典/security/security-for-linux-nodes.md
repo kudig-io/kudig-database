@@ -74,9 +74,9 @@ prerequisites:
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/admission-controller.md|准入控制器]]
-- [[系统基础/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
-- [[系统基础/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]
+- [[系统基础/知识字典/security/admission-controller.md|准入控制器]]
+- [[系统基础/知识字典/security/application-security-checklist.md|应用安全清单]]
+- [[系统基础/知识字典/security/athenz.md|Athenz 身份认证与授权]]
 
 
 <!-- risk-assessed -->

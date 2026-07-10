@@ -74,9 +74,9 @@ Score 是 CNCF Sandbox 项目，定义了一个平台无关的工作负载描述
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
 
 
 <!-- risk-assessed -->

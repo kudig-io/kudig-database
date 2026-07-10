@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Readme]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/README.md|Readme]]
 
 ## 子目录
 
@@ -37,9 +37,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|Configuration First Methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|Dra Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-etcd-maintenance.md|Etcd Maintenance]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|Moc]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|Symptom Mapping Layer]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|Configuration First Methodology]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|Dra Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|Etcd Maintenance]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/MOC.md|Moc]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/symptom-mapping-layer.md|Symptom Mapping Layer]]
 

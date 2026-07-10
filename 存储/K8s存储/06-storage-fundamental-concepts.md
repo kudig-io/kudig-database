@@ -1126,7 +1126,7 @@ kubectl delete sc lab-retain lab-delete
 ## Related
 
 - index/storage-index|Storage 存储知识图谱索引]]
-- [[生态参考/topic-index/csi-index.md|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
+- [[生态参考/领域索引/csi-index.md|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
 
 
 <!-- risk-assessed -->

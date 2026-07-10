@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[系统基础/topic-dictionary/README.md|Readme]]
+- [[系统基础/知识字典/README.md|Readme]]
 
 ## 子目录
 
@@ -37,7 +37,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[系统基础/topic-dictionary/GAP-ANALYSIS.md|Gap Analysis]]
-- [[系统基础/topic-dictionary/MOC.md|Moc]]
-- [[系统基础/topic-dictionary/k8s-glossary.md|K8S Glossary]]
+- [[系统基础/知识字典/GAP-ANALYSIS.md|Gap Analysis]]
+- [[系统基础/知识字典/MOC.md|Moc]]
+- [[系统基础/知识字典/k8s-glossary.md|K8S Glossary]]
 

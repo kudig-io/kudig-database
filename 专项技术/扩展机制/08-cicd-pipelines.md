@@ -1792,7 +1792,7 @@ spec:
 - CRD 开发指南
 - GitOps 配置管理
 - 相关知识域: 平台工程
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

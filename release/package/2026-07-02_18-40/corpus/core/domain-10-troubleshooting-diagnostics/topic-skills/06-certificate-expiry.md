@@ -2148,7 +2148,7 @@ kubectl get secret <tls-secret> -n <ns> -o jsonpath='{.data.tls\.crt}' | base64 
 ```
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```
 

@@ -69,6 +69,6 @@ KCP（Kubernetes-like Control Plane）是 Red Hat 开源的 CNCF Sandbox 项目�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubestellar.md|KubeStellar]]
-- [[domain-17-system-foundation/topic-dictionary/security/capsule.md|Capsule]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kubestellar.md|KubeStellar]]
+- [[domain-17-system-foundation/知识字典/security/capsule.md|Capsule]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]

@@ -82,11 +82,11 @@ Docker 推动了容器技术的发展，其镜像格式和运行时规范已被 
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|Containerd]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri.md|CRI]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri-o.md|CRI-O]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|Containerd]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri.md|CRI]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri-o.md|CRI-O]]
 
 
 <!-- risk-assessed -->

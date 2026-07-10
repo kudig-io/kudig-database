@@ -720,22 +720,22 @@ kubeadm certs renew all
 ### 相关文档
 
 - [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [API Server 故障排查](../[[故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]].md)
-- [证书故障排查](../[[故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
-- [集群维护故障排查](./[[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]].md)
+- [API Server 故障排查](../[[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]].md)
+- [证书故障排查](../[[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
+- [集群维护故障排查](./[[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
 
 ```
 

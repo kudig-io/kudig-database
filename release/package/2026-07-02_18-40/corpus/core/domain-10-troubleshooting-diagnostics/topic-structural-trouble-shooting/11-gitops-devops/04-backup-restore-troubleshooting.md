@@ -902,14 +902,14 @@ sla_reporting:
 - 08-docker-troubleshooting-guide
 - [[entities/kubernetes.md|kubernetes]]
 - [[hot|hot]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/cronjob.md|cronjob]]
+- [[domain-17-system-foundation/知识字典/workloads/cronjob.md|cronjob]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
 
 ```
 

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|Cloud Provider Integration Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|Multi Cloud Networking Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|Cloud Resource Quota Troubleshooting]]
+- [[故障诊断/高级排障/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|Cloud Provider Integration Troubleshooting]]
+- [[故障诊断/高级排障/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|Multi Cloud Networking Troubleshooting]]
+- [[故障诊断/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|Cloud Resource Quota Troubleshooting]]
 

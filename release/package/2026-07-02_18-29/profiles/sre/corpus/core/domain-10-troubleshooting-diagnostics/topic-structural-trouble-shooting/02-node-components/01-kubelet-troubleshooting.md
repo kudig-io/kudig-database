@@ -1820,17 +1820,17 @@ systemReserved:
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[CHANGELOG|CHANGELOG]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
 
 ```
 

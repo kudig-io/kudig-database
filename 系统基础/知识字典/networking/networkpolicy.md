@@ -82,11 +82,11 @@ NetworkPolicy 是 Kubernetes 中控制 Pod 之间以及 Pod 与外部网络之�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/cni.md|CNI]]
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/security/security-context.md|Security Context]]
+- [[系统基础/知识字典/networking/cni.md|CNI]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/security/security-context.md|Security Context]]
 
 
 <!-- risk-assessed -->

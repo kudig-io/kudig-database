@@ -742,7 +742,7 @@ Agent 安全检查清单:
 
 ## Related
 
-- [[domain-14-ai-ml-infra/02-ai-agents/52-agent-cost-optimization-caching|Agent 成本优化]]
+- [[domain-14-ai-ml-infra/AI-Agents/52-agent-cost-optimization-caching|Agent 成本优化]]
 - domain-05-security-compliance/
 - domain-06-observability/
 

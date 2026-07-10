@@ -78,11 +78,11 @@ Flux v2 基于 Kubernetes Controller 模式，由多个专用控制器组成：
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/gitops.md|GitOps]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/gitops.md|GitOps]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

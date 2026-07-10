@@ -61,4 +61,4 @@ FMEA 与 FTA 互为补充：FTA 是自顶向下演绎，FMEA 是自底向上归�
 
 ## Related
 
-- [[故障诊断/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[故障诊断/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

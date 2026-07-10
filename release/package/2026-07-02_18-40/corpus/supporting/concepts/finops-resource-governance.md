@@ -497,8 +497,8 @@ kubectl get svc --all-namespaces -o json | jq '
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|命名空间]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/fundamentals/namespaces.md|命名空间]]
 - [[entities/prometheus.md|Prometheus (entities)]]
 - [[entities/argo.md|Argo Workflows]]
 

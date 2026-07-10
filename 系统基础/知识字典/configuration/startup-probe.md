@@ -84,11 +84,11 @@ startupProbe:
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/configmap.md|Configmap]]
-- [[系统基础/topic-dictionary/security/secret.md|Secret]]
-- [[系统基础/topic-dictionary/configuration/env.md|Env]]
-- [[系统基础/topic-dictionary/configuration/configmaps.md|Configmaps]]
-- [[系统基础/topic-dictionary/configuration/liveness-probe.md|Liveness Probe]]
+- [[系统基础/知识字典/configuration/configmap.md|Configmap]]
+- [[系统基础/知识字典/security/secret.md|Secret]]
+- [[系统基础/知识字典/configuration/env.md|Env]]
+- [[系统基础/知识字典/configuration/configmaps.md|Configmaps]]
+- [[系统基础/知识字典/configuration/liveness-probe.md|Liveness Probe]]
 
 
 <!-- risk-assessed -->

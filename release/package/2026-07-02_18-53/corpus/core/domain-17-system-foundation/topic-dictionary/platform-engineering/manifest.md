@@ -96,11 +96,11 @@ spec:                      # 期望状态（规格）
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 ```
 

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-01-cluster-fundamentals/04-api-versions/03-api-versions-features.md|Api Versions Features]]
-- [[domain-01-cluster-fundamentals/04-api-versions/99-kubernetes-api-version-matrix.md|Kubernetes Api Version Matrix]]
-- [[domain-01-cluster-fundamentals/04-api-versions/99-kubernetes-version-lifecycle-support-policy.md|Kubernetes Version Lifecycle Support Policy]]
+- [[domain-01-cluster-fundamentals/API版本/03-api-versions-features.md|Api Versions Features]]
+- [[domain-01-cluster-fundamentals/API版本/99-kubernetes-api-version-matrix.md|Kubernetes Api Version Matrix]]
+- [[domain-01-cluster-fundamentals/API版本/99-kubernetes-version-lifecycle-support-policy.md|Kubernetes Version Lifecycle Support Policy]]
 

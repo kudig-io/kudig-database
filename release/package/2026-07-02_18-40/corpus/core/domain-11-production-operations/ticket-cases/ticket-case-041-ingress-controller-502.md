@@ -21,11 +21,11 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: ingress-nginx
 ticket_type: 应用入口故障
 skill_ref:
-- '[[domain-03-networking-traffic/03-api-gateway/14-api-gateway-production-operations.md|API
+- '[[domain-03-networking-traffic/API网关/14-api-gateway-production-operations.md|API
   网关生产运维]]'
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|Ingress 异常故障树分析]]'
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|Ingress 异常故障树分析]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA:
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/nginx-ingress-fta.md|FTA:
   Nginx Ingress 异常]]'
 last_updated: 2026-06-26 16:15:00+08:00
 duplicate_of: TC-2026-021
@@ -57,9 +57,9 @@ authors:
 relationships:
 - target: '[[concepts/ingress.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 

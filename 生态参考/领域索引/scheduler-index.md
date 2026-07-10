@@ -58,26 +58,26 @@ prerequisites:
 
 ### 深度技术
 
-- [[系统基础/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)]]
+- [[系统基础/知识字典/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)]]
 - 调度器配置与优化
-- 动态资源分配 ([[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|dynamic-resource-allocation]]
+- 动态资源分配 ([[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|dynamic-resource-allocation]]
 - HPA/VPA 自动伸缩配置
 - 集群容量规划
 - 资源管理表
 
 ### 故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[故障诊断/01-resource-troubleshooting/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
-- [[故障诊断/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
-- [[故障诊断/02-infrastructure-troubleshooting/28-cluster-autoscaler-troubleshooting.md|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
-- [[故障诊断/02-infrastructure-troubleshooting/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[故障诊断/资源排障/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
+- [[故障诊断/资源排障/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
+- [[故障诊断/基础设施排障/28-cluster-autoscaler-troubleshooting.md|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
+- [[故障诊断/基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
+- [[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/12-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
+- [[故障诊断/技能体系/12-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
 
 ### YAML 配置
 
@@ -92,7 +92,7 @@ prerequisites:
 
 ### 技术论文
 
-- [[生态参考/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
+- [[生态参考/论文/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
 
 ---
 
@@ -102,23 +102,23 @@ prerequisites:
 
 ### 调度相关
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|API 优先级与公平性 (APF) 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/06-apf-troubleshooting.md|API 优先级与公平性 (APF) 故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
 
 ### 资源管理
 
-- [[平台工程/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/01-resources-quota-troubleshooting.md|资源与调度故障排查指南]]
+- [[平台工程/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|资源与调度故障排查指南]]
 
 ### Pod调度
 
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
-- [[故障诊断/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
+- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
+- [[故障诊断/技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### 节点调度
 
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ---
 
@@ -128,25 +128,25 @@ prerequisites:
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]]
-- [[系统基础/topic-dictionary/scheduling/pod-priority-and-preemption.md|Pod Priority and Preemption]]
-- [[系统基础/topic-dictionary/scheduling/taints-and-tolerations.md|Taints and Tolerations]]
-- [[系统基础/topic-dictionary/scheduling/pod-topology-spread-constraints.md|Pod Topology Spread Constraints]]
-- [[系统基础/topic-dictionary/scheduling/scheduling-framework.md|Scheduling Framework]]
-- [[系统基础/topic-dictionary/scheduling/scheduler-performance-tuning.md|Scheduler Performance Tuning]]
-- [[系统基础/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]
-- [[系统基础/topic-dictionary/scheduling/karpenter-autoscaling.md|Karpenter 自动扩缩容]]
-- [[系统基础/topic-dictionary/scheduling/assigning-pods-to-nodes.md|Assigning Pods to Nodes]]
-- [[系统基础/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]
-- [[系统基础/topic-dictionary/scheduling/resource-bin-packing.md|Resource Bin Packing]]
-- [[系统基础/topic-dictionary/scheduling/node-declared-features.md|Node Declared Features]]
-- [[系统基础/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]
-- [[系统基础/topic-dictionary/scheduling/node-pressure-eviction.md|Node-pressure Eviction]]
-- [[系统基础/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
-- [[系统基础/topic-dictionary/platform-engineering/device-plugins.md|Device Plugins]]
-- [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]
-- [[系统基础/topic-dictionary/security/resource-quotas.md|Resource Quotas]]
-- [[系统基础/topic-dictionary/security/limit-ranges.md|Limit Ranges]]
+- [[系统基础/知识字典/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]]
+- [[系统基础/知识字典/scheduling/pod-priority-and-preemption.md|Pod Priority and Preemption]]
+- [[系统基础/知识字典/scheduling/taints-and-tolerations.md|Taints and Tolerations]]
+- [[系统基础/知识字典/scheduling/pod-topology-spread-constraints.md|Pod Topology Spread Constraints]]
+- [[系统基础/知识字典/scheduling/scheduling-framework.md|Scheduling Framework]]
+- [[系统基础/知识字典/scheduling/scheduler-performance-tuning.md|Scheduler Performance Tuning]]
+- [[系统基础/知识字典/scheduling/gang-scheduling.md|Gang Scheduling]]
+- [[系统基础/知识字典/scheduling/karpenter-autoscaling.md|Karpenter 自动扩缩容]]
+- [[系统基础/知识字典/scheduling/assigning-pods-to-nodes.md|Assigning Pods to Nodes]]
+- [[系统基础/知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]
+- [[系统基础/知识字典/scheduling/resource-bin-packing.md|Resource Bin Packing]]
+- [[系统基础/知识字典/scheduling/node-declared-features.md|Node Declared Features]]
+- [[系统基础/知识字典/scheduling/pod-overhead.md|Pod Overhead]]
+- [[系统基础/知识字典/scheduling/node-pressure-eviction.md|Node-pressure Eviction]]
+- [[系统基础/知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[系统基础/知识字典/platform-engineering/device-plugins.md|Device Plugins]]
+- [[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]
+- [[系统基础/知识字典/security/resource-quotas.md|Resource Quotas]]
+- [[系统基础/知识字典/security/limit-ranges.md|Limit Ranges]]
 
 
 <!-- risk-assessed -->

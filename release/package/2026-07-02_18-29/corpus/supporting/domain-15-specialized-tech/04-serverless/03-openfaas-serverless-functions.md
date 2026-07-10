@@ -585,8 +585,8 @@ functions:
 
 ## Related
 
-- [[domain-15-specialized-tech/04-serverless/01-knative-serving-deep-dive|Knative Serving 深度解析]]
-- [[domain-15-specialized-tech/04-serverless/02-knative-eventing-patterns|Knative Eventing 事件驱动模式]]
+- [[domain-15-specialized-tech/无服务器/01-knative-serving-deep-dive|Knative Serving 深度解析]]
+- [[domain-15-specialized-tech/无服务器/02-knative-eventing-patterns|Knative Eventing 事件驱动模式]]
 
 ## See Also
 

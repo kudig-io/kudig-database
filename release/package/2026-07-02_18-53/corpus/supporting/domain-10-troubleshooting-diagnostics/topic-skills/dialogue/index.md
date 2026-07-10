@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-BLUEGREEN-001.md|Dialogue Bluegreen 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-CANARY-001.md|Dialogue Canary 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-HEADLESS-001.md|Dialogue Headless 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-HPA-001.md|Dialogue Hpa 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-INGRESS-001.md|Dialogue Ingress 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-NETWORKPOLICY-001.md|Dialogue Networkpolicy 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-PSP-001.md|Dialogue Psp 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-PVC-001.md|Dialogue Pvc 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-RBAC-001.md|Dialogue Rbac 001]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/dialogue/DIALOGUE-SCHEDULER-001.md|Dialogue Scheduler 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-BLUEGREEN-001.md|Dialogue Bluegreen 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-CANARY-001.md|Dialogue Canary 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-HEADLESS-001.md|Dialogue Headless 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-HPA-001.md|Dialogue Hpa 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-INGRESS-001.md|Dialogue Ingress 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-NETWORKPOLICY-001.md|Dialogue Networkpolicy 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-PSP-001.md|Dialogue Psp 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-PVC-001.md|Dialogue Pvc 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-RBAC-001.md|Dialogue Rbac 001]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/dialogue/DIALOGUE-SCHEDULER-001.md|Dialogue Scheduler 001]]
 

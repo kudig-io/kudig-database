@@ -229,9 +229,9 @@ kubectl edit * （直接修改线上资源）
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/helm.md|helm]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 
 ## See Also
 

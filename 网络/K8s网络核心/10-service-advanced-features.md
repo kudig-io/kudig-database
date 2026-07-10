@@ -958,7 +958,7 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

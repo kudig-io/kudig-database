@@ -73,9 +73,9 @@ cdk8s（Cloud Development Kit for Kubernetes）是 CNCF Sandbox 项目，允许�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/kcl.md|KCL]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/configuration/kcl.md|KCL]]
 
 
 <!-- risk-assessed -->

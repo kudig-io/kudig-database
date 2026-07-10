@@ -835,9 +835,9 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/docker.md|docker]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
 

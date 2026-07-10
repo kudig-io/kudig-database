@@ -47,7 +47,7 @@ prerequisites:
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
 > **用途**: 容器逃逸检测、密钥轮换自动化、合规审计检查清单
-> **关联**: SKILL-SECURITY-001, domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+> **关联**: SKILL-SECURITY-001, domain-25-[[domain-17-system-foundation/知识字典/security/cloud-native-security.md|cloud-native-security]]
 
 ---
 
@@ -454,7 +454,7 @@ spec:
 ---
 
 **关联文档**:
-- [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](../domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md) — 安全事件 Skill
+- [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](../domain-10-troubleshooting-diagnostics/技能体系/18-security-incident-response.md) — 安全事件 Skill
 - [domain-05-security-compliance/](../domain-05-security-compliance/) — 云原生安全
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 ```

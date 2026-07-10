@@ -45,7 +45,7 @@ flowchart TB
 
 **关键抽象层级**中每一层都有明确的职责边界：**Volume** 是 Pod 内容器间共享存储的基础单元，生命周期与 Pod 绑定；**PVC** 作为命名空间级的声明式资源，将开发者的存储需求（容量、访问模式、性能等级）与底层实现完全隔离；**PV** 是集群级存储实例，承载实际的存储后端连接信息；**StorageClass** 作为动态供给的模板引擎，定义了 provisioner、回收策略、绑定模式和参数映射；**CSI Driver** 则是 Kubernetes 与存储后端之间的标准 gRPC 接口，所有 in-tree 插件已在 v1.26+ 废弃、v1.31+ 移除。
 
-Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L38-L54), [06-storage-fundamental-concepts.md](domain-04-storage-data/06-storage-fundamental-concepts.md#L18-L46), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L1-L12)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L38-L54), [06-storage-fundamental-concepts.md](domain-04-storage-data/06-storage-fundamental-concepts.md#L18-L46), [persistent-volumes.md](知识字典/storage/persistent-volumes.md#L1-L12)
 
 ---
 
@@ -119,7 +119,7 @@ spec:
 
 **模式三：标签选择器绑定（Selector Binding）——精细调度**。PVC 通过 `matchLabels` / `matchExpressions` 从多个候选 PV 中筛选，常用于 Local PV 按节点精确分配。
 
-Sources: [03-pvc-patterns-practices.md](domain-04-storage-data/03-pvc-patterns-practices.md#L63-L162), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L14-L22)
+Sources: [03-pvc-patterns-practices.md](domain-04-storage-data/03-pvc-patterns-practices.md#L63-L162), [persistent-volumes.md](知识字典/storage/persistent-volumes.md#L14-L22)
 
 ### PVC 规格字段速查
 
@@ -181,7 +181,7 @@ Sources: [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-archi
 
 **生产环境铁律**：关键数据的 StorageClass 必须设置 `reclaimPolicy: Retain`，并在 PVC 创建后立即验证 PV 的回收策略。可通过 `kubectl patch pv <pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'` 动态修改。
 
-Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L171-L220), [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L109-L143), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L25-L33)
+Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L171-L220), [02-pv-architecture-fundamentals.md](domain-04-storage-data/02-pv-architecture-fundamentals.md#L109-L143), [persistent-volumes.md](知识字典/storage/persistent-volumes.md#L25-L33)
 
 ---
 
@@ -215,7 +215,7 @@ Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-sto
 
 **生产环境强烈推荐** `WaitForFirstConsumer`。使用此模式时**不要在 Pod 规格中使用 `nodeName`** 直接指定节点，否则调度器被绕过、PVC 将永远 Pending。
 
-Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L72-L101), [storage-classes.md](topic-dictionary/storage/storage-classes.md#L34-L38)
+Sources: [04-storageclass-dynamic-provisioning.md](domain-04-storage-data/04-storageclass-dynamic-provisioning.md#L72-L101), [storage-classes.md](知识字典/storage/storage-classes.md#L34-L38)
 
 ### 动态供给全流程
 
@@ -431,7 +431,7 @@ spec:
       storage: 100Gi
 ```
 
-Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L18-L42), [volume-snapshots.md](topic-dictionary/storage/volume-snapshots.md#L1-L46), [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L387-L436)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L18-L42), [volume-snapshots.md](知识字典/storage/volume-snapshots.md#L1-L46), [01-storage-architecture-overview.md](domain-04-storage-data/01-storage-architecture-overview.md#L387-L436)
 
 ### 卷克隆（Volume Cloning）
 
@@ -454,7 +454,7 @@ spec:
     name: db-data          # 源 PVC（同命名空间）
 ```
 
-Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L94-L113), [csi-volume-cloning.md](topic-dictionary/storage/csi-volume-cloning.md#L1-L22)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L94-L113), [csi-volume-cloning.md](知识字典/storage/csi-volume-cloning.md#L1-L22)
 
 ### 在线扩容（Volume Expansion）
 
@@ -462,7 +462,7 @@ Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-adv
 
 **关键约束**：Kubernetes **不支持 PVC 缩容**；云盘每次扩容最少增加 10GB；扩容期间可能有短暂 I/O 抖动。
 
-Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L157-L180), [persistent-volumes.md](topic-dictionary/storage/persistent-volumes.md#L44-L48)
+Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-advanced-features.md#L157-L180), [persistent-volumes.md](知识字典/storage/persistent-volumes.md#L44-L48)
 
 ### 临时卷（Ephemeral Volumes）
 
@@ -474,7 +474,7 @@ Sources: [11-storage-advanced-features.md](domain-04-storage-data/11-storage-adv
 | **CSI Ephemeral** | Pod 内联 `csi` 卷 | ❌ | 需要 CSI 特殊能力的临时空间 |
 | **Generic Ephemeral** | `ephemeral.volumeClaimTemplate` | ✅ | 需要调度器感知的临时持久存储 |
 
-Sources: [ephemeral-volumes.md](topic-dictionary/storage/ephemeral-volumes.md#L1-L50)
+Sources: [ephemeral-volumes.md](知识字典/storage/ephemeral-volumes.md#L1-L50)
 
 ---
 
@@ -672,8 +672,8 @@ Sources: [01-storage-architecture-overview.md](domain-04-storage-data/01-storage
 |:---|:---|:---|
 | PV/PVC 故障排查 | 状态机分析、常见错误、解决方案 | [09-pv-pvc-troubleshooting.md](domain-04-storage-data/09-pv-pvc-troubleshooting.md) |
 | 存储卷事件 | 完整事件索引、排查路径 | [11-storage-volume-events.md](domain-17-system-foundation/11-storage-volume-events.md) |
-| CSI FTA 故障树 | 演绎式故障分析树 | [csi-fta.md](topic-fta/list/csi-fta.md) |
-| CSI 故障排查 | 配置优先方法论 | [02-csi-troubleshooting.md](topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) |
+| CSI FTA 故障树 | 演绎式故障分析树 | [csi-fta.md](FTA故障树/list/csi-fta.md) |
+| CSI 故障排查 | 配置优先方法论 | [02-csi-troubleshooting.md](高级排障/04-storage/02-csi-troubleshooting.md) |
 
 ---
 

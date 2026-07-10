@@ -190,9 +190,9 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i gan
 ```
 ## 交叉引用
 
-- [[系统基础/topic-dictionary/workloads/workload-api.md|Workload API]]](workload-api.md) — Workload 资源的 API 定义和结构
-- [[系统基础/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略详解
-- [[系统基础/topic-dictionary/workloads/jobs.md|Jobs]]](jobs.md) — Job 控制器与 Workload 配合使用
+- [[系统基础/知识字典/workloads/workload-api.md|Workload API]]](workload-api.md) — Workload 资源的 API 定义和结构
+- [[系统基础/知识字典/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略详解
+- [[系统基础/知识字典/workloads/jobs.md|Jobs]]](jobs.md) — Job 控制器与 Workload 配合使用
 - [调度与驱逐](../scheduling/) — 调度器行为和 Pod 放置决策
 
 ## 参考链接
@@ -200,9 +200,9 @@ kubectl logs -n kube-system -l component=kube-scheduler --tail=100 | grep -i gan
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

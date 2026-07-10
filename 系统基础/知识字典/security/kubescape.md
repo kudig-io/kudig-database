@@ -75,9 +75,9 @@ Kubescape 是 ARMO 开源的 CNCF Sandbox 项目，提供 Kubernetes 集群的�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/trivy.md|Trivy]]
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/security/trivy.md|Trivy]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]
 
 
 <!-- risk-assessed -->

@@ -87,7 +87,7 @@ SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采�
 - schemahero
 - [[entities/opengemini.md|openGemini]]
 - [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

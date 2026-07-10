@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[云厂商/06-tencent-tke/02-tke-networking-vpc-cni.md|Tke Networking Vpc Cni]]
-- [[云厂商/06-tencent-tke/03-tke-storage-cbs-cfs.md|Tke Storage Cbs Cfs]]
-- [[云厂商/06-tencent-tke/04-tke-iam-cam-integration.md|Tke Iam Cam Integration]]
-- [[云厂商/06-tencent-tke/05-tke-troubleshooting-playbook.md|Tke Troubleshooting Playbook]]
-- [[云厂商/06-tencent-tke/tencent-tke-overview.md|Tencent Tke Overview]]
+- [[云厂商/腾讯云TKE/02-tke-networking-vpc-cni.md|Tke Networking Vpc Cni]]
+- [[云厂商/腾讯云TKE/03-tke-storage-cbs-cfs.md|Tke Storage Cbs Cfs]]
+- [[云厂商/腾讯云TKE/04-tke-iam-cam-integration.md|Tke Iam Cam Integration]]
+- [[云厂商/腾讯云TKE/05-tke-troubleshooting-playbook.md|Tke Troubleshooting Playbook]]
+- [[云厂商/腾讯云TKE/tencent-tke-overview.md|Tencent Tke Overview]]
 

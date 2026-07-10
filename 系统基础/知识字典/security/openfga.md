@@ -70,6 +70,6 @@ OpenFGA 是 CNCF Sandbox 项目，高性能的关系型授权引擎，基于 Goo
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/security/keycloak.md|Keycloak]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/keycloak.md|Keycloak]]

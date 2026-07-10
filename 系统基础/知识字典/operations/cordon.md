@@ -88,11 +88,11 @@ kubectl get nodes
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/operations/uncordon.md|Uncordon]]
-- [[系统基础/topic-dictionary/operations/drain.md|Drain]]
+- [[系统基础/知识字典/tooling/kubectl.md|Kubectl]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/operations/uncordon.md|Uncordon]]
+- [[系统基础/知识字典/operations/drain.md|Drain]]
 
 
 <!-- risk-assessed -->

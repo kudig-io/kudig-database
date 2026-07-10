@@ -70,7 +70,7 @@ Pod 的生命周期由五个 **Phase** 组成，它们描述了 Pod 在宏观层
 
 容器的 `Waiting` 状态尤其值得关注——它包含 `ContainerCreating`（正常）、`ImagePullBackOff`（镜像问题）、`CrashLoopBackOff`（应用反复崩溃）等子状态。其中 **CrashLoopBackOff** 是生产环境最常见的问题之一，kubelet 对此采用指数退避策略（10s → 20s → 40s → … → 300s 上限），防止无效重启消耗节点资源。
 
-Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L5-L29), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L6-L18)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L5-L29), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L6-L18)
 
 ### Pod Conditions：就绪状态的精细化判定
 
@@ -86,7 +86,7 @@ Phase 仅提供粗粒度状态，而 **Pod Conditions** 提供了细粒度的健
 
 此外，**Readiness Gates**（v1.14+）允许应用向 Pod Status 注入自定义就绪条件（如"配置已加载完毕"），Pod 只有在所有自定义条件均为 `True` 时才被视为 Ready。这对于需要等待外部依赖就绪的应用（如数据库连接池预热完成）非常有价值。
 
-Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L30-L38), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L20-L23)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L30-L38), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L20-L23)
 
 ### 三种探针的协作模型
 
@@ -121,7 +121,7 @@ graph LR
 
 一个常见的生产级配置模式是：`startupProbe` 给予 150s 启动窗口（`failureThreshold: 30, periodSeconds: 5`），`livenessProbe` 以 10s 间隔检测核心健康端点，`readinessProbe` 以 5s 间隔检测业务就绪状态。这种"宽松启动 + 严格运行"的策略，既保护了启动期，又保证了运行时的快速故障检测。
 
-Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L90-L128), [12-advanced-pod-patterns.md](domain-02-workloads-applications/12-advanced-pod-patterns.md#L5-L11), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L86-L135)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L90-L128), [12-advanced-pod-patterns.md](domain-02-workloads-applications/12-advanced-pod-patterns.md#L5-L11), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L86-L135)
 
 ### 优雅终止：从 SIGTERM 到 SIGKILL 的时间窗口
 
@@ -158,7 +158,7 @@ lifecycle:
       seconds: 10  # v1.29+ GA，替代 exec + sleep 的方式
 ```
 
-Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L130-L151), [13-container-lifecycle-hooks.md](domain-02-workloads-applications/13-container-lifecycle-hooks.md#L296-L345), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L23-L31)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L130-L151), [13-container-lifecycle-hooks.md](domain-02-workloads-applications/13-container-lifecycle-hooks.md#L296-L345), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L23-L31)
 
 ### 生命周期 Hook 的执行方式
 
@@ -213,7 +213,7 @@ graph LR
 
 调度器的两阶段决策模型是：先通过 **Filter** 找到所有可行节点，再通过 **Score** 对可行节点打分选最优。如果 Filter 结果为空，则进入 PostFilter 触发抢占（Preemption）——驱逐低优先级 Pod 为高优先级 Pod 腾出空间。
 
-Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L5-L11), [kubernetes-scheduler.md](topic-dictionary/scheduling/kubernetes-scheduler.md#L8-L14)
+Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-scheduler-configuration.md#L5-L11), [kubernetes-scheduler.md](知识字典/scheduling/kubernetes-scheduler.md#L8-L14)
 
 ### 调度策略全景：从节点选择到拓扑分布
 
@@ -357,7 +357,7 @@ desiredReplicas = ceil(currentReplicas × currentMetricValue / desiredMetricValu
 | **External** | External Metrics API | 消息队列长度、云监控 | autoscaling/v2 GA |
 | **ContainerResource** | Metrics Server | 多容器 Pod 中单个容器的资源 | v1.27+ GA |
 
-Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L5-L21), [horizontal-pod-autoscaling.md](topic-dictionary/workloads/horizontal-pod-autoscaling.md#L6-L12)
+Sources: [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L5-L21), [horizontal-pod-autoscaling.md](知识字典/workloads/horizontal-pod-autoscaling.md#L6-L12)
 
 ### HPA 行为策略：控制伸缩的速率与节奏
 
@@ -599,7 +599,7 @@ Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-li
 | Pod 被抢占 | `kubectl get events --field-selector=reason=Preempted` | 优先级设置不合理 | 调度策略 |
 | 节点 NotReady 导致 Pod Unknown | `kubectl get nodes` | 节点网络 / kubelet 故障 | 生命周期 |
 
-Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L58-L78), [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L258-L291), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L137-L210)
+Sources: [11-pod-lifecycle-events.md](domain-02-workloads-applications/11-pod-lifecycle-events.md#L58-L78), [21-hpa-vpa-autoscaling.md](domain-02-workloads-applications/21-hpa-vpa-autoscaling.md#L258-L291), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L137-L210)
 
 ### 关键监控指标
 
@@ -639,7 +639,7 @@ Sources: [19-scheduler-configuration.md](domain-02-workloads-applications/19-sch
 - [ ] VPA 处于 Off 模式观察 24h+ 后再开启 Auto
 - [ ] 配置 PodDisruptionBudget 保护最小可用副本数
 
-Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L461-L483), [pod-lifecycle.md](topic-dictionary/workloads/pod-lifecycle.md#L183-L190)
+Sources: [01-workload-overview-architecture.md](domain-02-workloads-applications/01-workload-overview-architecture.md#L461-L483), [pod-lifecycle.md](知识字典/workloads/pod-lifecycle.md#L183-L190)
 
 ---
 

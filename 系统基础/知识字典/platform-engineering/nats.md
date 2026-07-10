@@ -69,6 +69,6 @@ NATS 是 CNCF 孵化项目，高性能的轻量级消息系统，支持 Core Pub
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/knative.md|Knative Eventing]]
-- [[系统基础/topic-dictionary/platform-engineering/grpc.md|gRPC]]
-- [[系统基础/topic-dictionary/platform-engineering/dapr.md|Dapr]]
+- [[系统基础/知识字典/specialized-workloads/knative.md|Knative Eventing]]
+- [[系统基础/知识字典/platform-engineering/grpc.md|gRPC]]
+- [[系统基础/知识字典/platform-engineering/dapr.md|Dapr]]

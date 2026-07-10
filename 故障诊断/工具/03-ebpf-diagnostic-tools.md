@@ -440,13 +440,13 @@ bpftrace -e 'kprobe:tcp_sendmsg /pid == <pid>/ { @start[tid] = nsecs; } kretprob
 
 ## Related
 
-- [[故障诊断/tools/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[故障诊断/02-infrastructure-troubleshooting/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
+- [[故障诊断/工具/README.md|Domain-12 故障排查工具套件使用说明]]
+- [[故障诊断/基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
 
 ## See Also
 
-- [[故障诊断/tools/01-kubectl-plugins-guide.md|kubectl 插件指南]]
-- [[故障诊断/tools/02-network-diagnostic-tools.md|网络诊断工具]]
+- [[故障诊断/工具/01-kubectl-plugins-guide.md|kubectl 插件指南]]
+- [[故障诊断/工具/02-network-diagnostic-tools.md|网络诊断工具]]
 
 
 <!-- risk-assessed -->

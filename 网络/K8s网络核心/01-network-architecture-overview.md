@@ -1570,7 +1570,7 @@ echo "3. Service问题: 检查Endpoints和后端Pod状态"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -73,9 +73,9 @@ Cartography 是 Lyft 开源的安全资产图谱工具，自动收集和关联�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/kubescape.md|Kubescape]]
-- [[系统基础/topic-dictionary/security/trivy.md|Trivy]]
-- [[系统基础/topic-dictionary/operations/cloud-custodian.md|Cloud Custodian]]
+- [[系统基础/知识字典/security/kubescape.md|Kubescape]]
+- [[系统基础/知识字典/security/trivy.md|Trivy]]
+- [[系统基础/知识字典/operations/cloud-custodian.md|Cloud Custodian]]
 
 
 <!-- risk-assessed -->

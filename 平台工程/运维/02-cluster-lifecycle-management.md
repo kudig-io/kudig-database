@@ -401,8 +401,8 @@ resource "aws_eks_cluster" "main" {
 - 相关知识域: 可观测性
 - 相关知识域: 专项技术
 - 相关知识域: 故障诊断
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

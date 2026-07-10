@@ -77,11 +77,11 @@ kubens 修改 kubeconfig 中当前上下文的 `namespace` 字段。
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectx.md|Kubectx]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/k9s.md|K9S]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/stern.md|Stern]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectx.md|Kubectx]]
+- [[domain-17-system-foundation/知识字典/tooling/k9s.md|K9S]]
+- [[domain-17-system-foundation/知识字典/tooling/stern.md|Stern]]
 
 
 <!-- risk-assessed -->

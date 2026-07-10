@@ -67,6 +67,6 @@ Devfile 是 CNCF Sandbox 项目，定义了云开发环境的声明式规范，�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/telepresence.md|Telepresence]]
-- [[系统基础/topic-dictionary/tooling/minikube.md|Minikube]]
-- [[系统基础/topic-dictionary/platform-engineering/backstage.md|Backstage]]
+- [[系统基础/知识字典/tooling/telepresence.md|Telepresence]]
+- [[系统基础/知识字典/tooling/minikube.md|Minikube]]
+- [[系统基础/知识字典/platform-engineering/backstage.md|Backstage]]

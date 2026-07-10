@@ -86,8 +86,8 @@ prerequisites:
 - [[entities/kudig-gitbook-system.md|kudig-gitbook-system]] — Gitbook 本地文档浏览系统与构建指南
 - [[kudig-templates-catalog]] — KUDIG 文档模板目录
 - [[entities/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]] — KUDIG Frontmatter Specification
-- [[故障诊断/topic-fta/list/pod-fta.md|pod-fta]] — pod-fta
-- [[故障诊断/topic-fta/list/node-fta.md|node-fta]] — node-fta
+- [[故障诊断/FTA故障树/list/pod-fta.md|pod-fta]] — pod-fta
+- [[故障诊断/FTA故障树/list/node-fta.md|node-fta]] — node-fta
 
 
 <!-- risk-assessed -->

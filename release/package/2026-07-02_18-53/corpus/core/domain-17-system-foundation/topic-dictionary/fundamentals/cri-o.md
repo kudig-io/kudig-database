@@ -86,11 +86,11 @@ kubelet → CRI → CRI-O → OCI Runtime (runc/crun)
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri.md|CRI]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|Containerd]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubelet.md|Kubelet]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri.md|CRI]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|Containerd]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kubelet.md|Kubelet]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
 
 
 <!-- risk-assessed -->

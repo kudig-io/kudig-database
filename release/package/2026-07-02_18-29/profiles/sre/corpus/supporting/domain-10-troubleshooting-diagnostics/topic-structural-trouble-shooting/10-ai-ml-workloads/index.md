@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|Ai Ml Workloads Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|Mpi Operator Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|Ai Ml Workloads Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|Mpi Operator Troubleshooting]]
 

@@ -89,8 +89,8 @@ graph TD
 ## 相关文档
 
 - 工作负载/02-deployment-production-patterns.md
-- [[工作负载/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
-- [[工作负载/00-core-workloads/04-daemonset-management.md|04 daemonset management]]
+- [[工作负载/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
+- [[工作负载/核心工作负载/04-daemonset-management.md|04 daemonset management]]
 - [[清单模式/README.md|README]]
 
 
@@ -98,9 +98,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/pod-fta.md|pod fta]]
-- [[故障诊断/topic-fta/list/deployment-fta.md|deployment fta]]
-- [[故障诊断/topic-fta/list/statefulset-fta.md|statefulset fta]]
+- [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]]
+- [[故障诊断/FTA故障树/list/deployment-fta.md|deployment fta]]
+- [[故障诊断/FTA故障树/list/statefulset-fta.md|statefulset fta]]
 
 
 ---

@@ -55,9 +55,9 @@ authors:
 relationships:
 - target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
+- target: '[[生产运维/工单案例/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
 

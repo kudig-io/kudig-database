@@ -83,11 +83,11 @@ KServe（原 KFServing）是 CNCF 孵化项目，为 Kubernetes 提供标准化�
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
-- [[系统基础/topic-dictionary/specialized-workloads/knative.md|Knative]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/scheduling/hpa.md|HPA]]
-- [[系统基础/topic-dictionary/scheduling/keda.md|KEDA]]
+- [[系统基础/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[系统基础/知识字典/specialized-workloads/knative.md|Knative]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/scheduling/hpa.md|HPA]]
+- [[系统基础/知识字典/scheduling/keda.md|KEDA]]
 
 
 <!-- risk-assessed -->

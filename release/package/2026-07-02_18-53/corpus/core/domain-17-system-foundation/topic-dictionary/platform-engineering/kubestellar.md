@@ -69,6 +69,6 @@ KubeStellar 是 IBM 开源的 CNCF Sandbox 项目，提供基于 Kubernetes 原�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/karmada.md|Karmada]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/open-cluster-management.md|OCM]]
-- [[domain-17-system-foundation/topic-dictionary/networking/clusternet.md|Clusternet]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/karmada.md|Karmada]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/open-cluster-management.md|OCM]]
+- [[domain-17-system-foundation/知识字典/networking/clusternet.md|Clusternet]]

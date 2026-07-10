@@ -200,10 +200,10 @@ curl -H "Host: example.com" http://<ingress-ip>/path
 - https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 
 ## Related
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

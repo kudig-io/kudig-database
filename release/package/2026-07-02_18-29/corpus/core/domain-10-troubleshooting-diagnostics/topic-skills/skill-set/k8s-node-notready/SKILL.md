@@ -186,19 +186,19 @@ bash scripts/verify-node.sh <node-name>
 
 | 资源 | 路径 |
 |------|------|
-| FTA 问题树 | [domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md](../../domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md) |
+| FTA 问题树 | [domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/node-fta.md) |
 | 版本兼容矩阵 | [reference/version-matrix.md](./reference/version-matrix.md) |
 | 诊断工作流详情 | [reference/diagnostic-workflow.md](./reference/diagnostic-workflow.md) |
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
 | 根因目录 | [reference/root-cause-catalog.md](./reference/root-cause-catalog.md) |
-| 结构化排查 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) |
+| 结构化排查 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../../domain-10-troubleshooting-diagnostics/高级排障/) |
 | 单文件完整版 | [../01-node-notready.md](../01-node-notready.md) |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/node-index.md|Node 知识图谱索引]]
 
 
 ## 远程顾问信息收集

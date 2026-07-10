@@ -814,12 +814,12 @@ curl -s http://127.0.0.1:2381/metrics | grep -E 'etcd_server_has_leader|etcd_ser
 - [[reference|#reference Hub]] — tag hub
 
 - [[hot|hot]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[系统基础/topic-dictionary/operations/certificates.md|certificates]]
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[系统基础/知识字典/operations/certificates.md|certificates]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -333,11 +333,11 @@ kubectl apply -f experiments/logging-pod-kill.yaml
 
 可观测性不是孤立体系，必须与相邻域保持清晰边界和协作接口。
 
-- **与 [[domain-01-cluster-fundamentals/README.md|集群基础域]] 协作**：控制平面组件（API Server、etcd、Scheduler、Controller Manager）的健康指标由集群域负责部署和升级，可观测性域负责采集、告警和 Dashboard。参考 [[domain-06-observability/01-overview/13-cluster-health-check.md|集群健康检查指南]]。
+- **与 [[domain-01-cluster-fundamentals/README.md|集群基础域]] 协作**：控制平面组件（API Server、etcd、Scheduler、Controller Manager）的健康指标由集群域负责部署和升级，可观测性域负责采集、告警和 Dashboard。参考 [[domain-06-observability/总览/13-cluster-health-check.md|集群健康检查指南]]。
 - **与 [[domain-03-networking-traffic/README.md|网络域]] 协作**：CNI、CoreDNS、Ingress、Service Mesh 的网络延迟与丢包指标由网络域提供解释，可观测性域负责统一呈现和跨域关联。网络策略变更前需确认不会阻断 Prometheus / Loki / OTLP 流量。
-- **与 [[domain-05-security-compliance/README.md|安全合规域]] 协作**：审计日志、Falco 运行时事件、RBAC 变更日志需要进入 SIEM/SOAR。可观测性域负责采集与转发，安全域负责策略、归档与合规响应。参考 [[domain-06-observability/03-logging/08-logging-audit-compliance.md|日志审计合规]]。
+- **与 [[domain-05-security-compliance/README.md|安全合规域]] 协作**：审计日志、Falco 运行时事件、RBAC 变更日志需要进入 SIEM/SOAR。可观测性域负责采集与转发，安全域负责策略、归档与合规响应。参考 [[domain-06-observability/日志/08-logging-audit-compliance.md|日志审计合规]]。
 - **与 [[domain-07-platform-engineering/README.md|平台工程域]] 协作**：平台工程负责可观测性平台的部署、租户隔离、成本分摊和 GitOps 版本管理；可观测性域负责使用规范、SLO 定义和告警质量治理。
-- **与 [[domain-09-reliability-engineering/README.md|可靠性工程域]] 协作**：SLO/SLI、错误预算、混沌工程实验由可靠性域主导设计，可观测性域提供数据基础和告警触发能力。参考 [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|SLO/SLI 体系建设]]。
+- **与 [[domain-09-reliability-engineering/README.md|可靠性工程域]] 协作**：SLO/SLI、错误预算、混沌工程实验由可靠性域主导设计，可观测性域提供数据基础和告警触发能力。参考 [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|SLO/SLI 体系建设]]。
 - **与 [[domain-10-troubleshooting-diagnostics/README.md|故障排查域]] 协作**：可观测性数据是故障排查的入口，复杂场景（如内核、多租户、网络分区）由排查域提供深度工具链（eBPF、kubectl debug、inspektor-gadget）。
 
 ---
@@ -347,11 +347,11 @@ kubectl apply -f experiments/logging-pod-kill.yaml
 ### 本域核心文档
 
 - [[domain-06-observability/README.md|Domain 06 — Observability（可观测性）]]
-- [[domain-06-observability/01-overview/13-cluster-health-check.md|集群健康检查指南]]
-- [[domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md|Prometheus 企业级监控部署指南]]
-- [[domain-06-observability/05-alerting/21-monitoring-playbooks.md|监控 Playbooks]]
-- [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|SLO/SLI 体系建设与管理]]
-- [[domain-06-observability/07-tools/26-troubleshooting-tools.md|可观测性排障工具]]
+- [[domain-06-observability/总览/13-cluster-health-check.md|集群健康检查指南]]
+- [[domain-06-observability/指标/99-prometheus-enterprise-guide.md|Prometheus 企业级监控部署指南]]
+- [[domain-06-observability/告警/21-monitoring-playbooks.md|监控 Playbooks]]
+- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|SLO/SLI 体系建设与管理]]
+- [[domain-06-observability/工具/26-troubleshooting-tools.md|可观测性排障工具]]
 
 ### 相关域文档
 

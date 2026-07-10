@@ -1,7 +1,7 @@
 ---
 title: kgateway
 description: '## 概述'
-summary: 'K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Gateway，完全实现了 Kubernetes Gateway API 标准。'
+summary: 'K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] Gateway，完全实现了 Kubernetes Gateway API 标准。'
 category: entities
 tags:
 - k8s
@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Gateway，完全实现了 Kubernetes Gateway API 标准。它为 Kubernetes 集群提供南北向流量管理、API 路由、认证授权、限流、请求转换等能力，同时支持将流量路由到 Kubernetes [[Service|Service]]、外部服务、Lambda 函数等多种上游目标。
+K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] Gateway，完全实现了 Kubernetes Gateway API 标准。它为 Kubernetes 集群提供南北向流量管理、API 路由、认证授权、限流、请求转换等能力，同时支持将流量路由到 Kubernetes [[Service|Service]]、外部服务、Lambda 函数等多种上游目标。
 
 ## 核心能力
 
@@ -80,7 +80,7 @@ K Gateway（原 Gloo Gateway）是一个基于 Envoy 的 [[系统基础/topic-di
 
 - kgateway
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

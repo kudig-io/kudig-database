@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/09-ucloud-uk8s/ucloud-uk8s-overview.md|Ucloud Uk8S Overview]]
+- [[domain-12-cloud-providers/其他云/UCloud-UK8S/ucloud-uk8s-overview.md|Ucloud Uk8S Overview]]
 

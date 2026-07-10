@@ -43,7 +43,7 @@ prerequisites:
 
 ## 概述
 
-InterLink 是一个 Virtual Kubeletet|Kubelet]] 提供者实现，允许将 Kubernetes Pod 调度到远程 HPC（高性能计算）和云计算基础设施上执行。它通过标准的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 将传统 HPC 集群（Slurm、HTCondor）和云计算平台作为 Kubernetes 的扩展计算资源，使科研人员和工程师能够使用熟悉的 Kubernetes 工作流提交和管理 H...
+InterLink 是一个 Virtual Kubeletet|Kubelet]] 提供者实现，允许将 Kubernetes Pod 调度到远程 HPC（高性能计算）和云计算基础设施上执行。它通过标准的 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 将传统 HPC 集群（Slurm、HTCondor）和云计算平台作为 Kubernetes 的扩展计算资源，使科研人员和工程师能够使用熟悉的 Kubernetes 工作流提交和管理 H...
 
 ## 核心能力
 
@@ -83,7 +83,7 @@ InterLink 是一个 Virtual Kubeletet|Kubelet]] 提供者实现，允许将 Kube
 - [[entities/akri.md|Akri]]
 - [[entities/openyurt.md|OpenYurt]]
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

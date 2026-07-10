@@ -172,7 +172,7 @@ Operator 自身也需要升级，而升级过程必须保证：
 - [[entities/crd-custom-resources.md|crd-custom-resources]]
 - [[concepts/declarative-api.md|declarative-api]]
 - [[concepts/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
 
 
 <!-- risk-assessed -->

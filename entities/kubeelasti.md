@@ -85,7 +85,7 @@ KubeElastic 是一个 Kubernetes 原生的弹性伸缩和资源优化平台，�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kubeelasti
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

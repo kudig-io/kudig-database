@@ -89,8 +89,8 @@ Clusternet 是一个多集群管理和应用分发平台，专为管理跨云、
 - clusternet
 - [[concepts/etcd x 高可用模式.md|etcd × 高可用模式]] — Cross-reference
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

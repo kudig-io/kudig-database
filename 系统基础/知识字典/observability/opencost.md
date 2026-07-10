@@ -73,9 +73,9 @@ OpenCost 是 CNCF Sandbox 项目，为 Kubernetes 提供开源的成本分配和
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/kepler.md|Kepler]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/kepler.md|Kepler]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
 
 
 <!-- risk-assessed -->

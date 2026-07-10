@@ -85,11 +85,11 @@ Datadog 是企业级全栈可观测性 SaaS 平台，提供 Metrics、Logs、Tra
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/loki.md|Loki]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/observability/alertmanager.md|Alertmanager]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/loki.md|Loki]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/alertmanager.md|Alertmanager]]
 
 
 <!-- risk-assessed -->

@@ -83,11 +83,11 @@ Knative 是 CNCF 孵化项目，为 Kubernetes 提供 Serverless 能力。它包
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[系统基础/topic-dictionary/scheduling/keda.md|KEDA]]
-- [[系统基础/topic-dictionary/scheduling/hpa.md|HPA]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[系统基础/知识字典/scheduling/keda.md|KEDA]]
+- [[系统基础/知识字典/scheduling/hpa.md|HPA]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
 
 
 <!-- risk-assessed -->

@@ -31,7 +31,7 @@ prerequisites:
 relationships:
 - target: '[[skills/best-practices/best-practices/observability/monitoring.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/observability/observability.md]]'
+- target: '[[domain-17-system-foundation/知识字典/observability/observability.md]]'
   type: related_to
 ---
 
@@ -77,7 +77,7 @@ MLflow / WandB + Kubernetes:
 ## 相关 Domain
 
 - domain-14-ai-ml-infra/03-gpu-scheduling/01-gpu-scheduling-management
-- [[domain-17-system-foundation/topic-dictionary/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
+- [[domain-17-system-foundation/知识字典/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
 
 
 <!-- risk-assessed -->

@@ -232,7 +232,7 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 
 - [Job/CronJob 高级用法](../../domain-02-workloads-applications/05-job-cronjob-advanced.md)
 - [已完成 Job 自动清理](./automatic-cleanup-for-finished-jobs.md)
-- [Job/CronJob 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/job-cronjob-fta.md)
+- [Job/CronJob 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/job-cronjob-fta.md)
 - [工作负载管理总览](./workload-management.md)
 - [工作负载故障排查手册](../../domain-02-workloads-applications/07-workload-troubleshooting-handbook.md)
 
@@ -241,9 +241,9 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

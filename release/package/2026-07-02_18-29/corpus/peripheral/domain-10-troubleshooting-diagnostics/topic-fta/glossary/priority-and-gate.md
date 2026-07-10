@@ -58,4 +58,4 @@ PAND 用于分析时序敏感的故障场景：某些故障只在特定操作顺
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

@@ -96,8 +96,8 @@ prerequisites:
 
 ## 相关
 
-- [[可靠性/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]
-- [[可靠性/08-performance-testing/01-load-testing-methodology.md|01 load testing methodology]]
+- [[可靠性/混沌工程/03-chaos-experiment-design.md|03 chaos experiment design]]
+- [[可靠性/性能测试/01-load-testing-methodology.md|01 load testing methodology]]
 
 
 <!-- risk-assessed -->

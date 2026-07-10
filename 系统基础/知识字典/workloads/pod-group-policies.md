@@ -42,7 +42,7 @@ prerequisites:
 # Pod Group Policies
 
 ## 概述
-Pod Group Policies 是 [[系统基础/topic-dictionary/workloads/workload-api.md|Workload API]] 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
+Pod Group Policies 是 [[系统基础/知识字典/workloads/workload-api.md|Workload API]] 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
 
 ## 核心概念/原理
 目前 API 支持两种策略类型，每个组必须且只能指定一种：
@@ -50,7 +50,7 @@ Pod Group Policies 是 [[系统基础/topic-dictionary/workloads/workload-api.md
    - 调度器将组内所有 Pod 视为独立实体，按标准 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 行为逐个调度。
    - 主要用于组织 Pod 以提升可观测性和管理性，适用于不需要同时启动的组，或为未来引入非“全有或全无”约束做准备。
 2. **gang（集体调度策略）**
-   - 强制“全有或全无”调度（[[系统基础/topic-dictionary/scheduling/gang-scheduling.md|gang scheduling]]）。
+   - 强制“全有或全无”调度（[[系统基础/知识字典/scheduling/gang-scheduling.md|gang scheduling]]）。
    - 适用于紧耦合工作负载，部分启动会导致死锁或资源浪费的场景（如分布式训练、批处理作业）。
    - 需要指定 `minCount` 参数：只有当至少有 `minCount` 个 Pod 能够同时调度时，该组才会被允许绑定到节点。
 
@@ -205,9 +205,9 @@ kubectl get events -n <ns> --field-selector reason=GangScheduling
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

@@ -90,8 +90,8 @@ ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种
 - chaosblade
 - [[entities/krkn.md|Krkn]]
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

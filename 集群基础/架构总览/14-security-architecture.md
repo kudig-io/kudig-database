@@ -1461,8 +1461,8 @@ if __name__ == "__main__":
 
 ## Related
 
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

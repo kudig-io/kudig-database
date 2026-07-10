@@ -238,7 +238,7 @@ kubectl uncordon <node>
 # 检查 PDB 阻止事件
 kubectl get events -n production --field-selector reason=NoPods
 ```
-> 节点维护与 PodDisruptionBudget 的 interplay 详见 [[工作负载/00-core-workloads/18-node-management-operations.md|节点管理操作]]。
+> 节点维护与 PodDisruptionBudget 的 interplay 详见 [[工作负载/核心工作负载/18-node-management-operations.md|节点管理操作]]。
 
 ### 3.4 配置 / 密钥轮换
 
@@ -267,7 +267,7 @@ kubectl patch cronjob my-cronjob -n production -p '{"spec":{"suspend":true}}'
 
 ## 四、故障排查速查
 
-排查工作负载故障时，建议遵循“先状态、后日志、再事件、最后深入容器”的顺序。下表列出生产环境最常见症状，并提供对应的确认命令与修复措施。若症状复杂或跨多个域，请结合 [[工作负载/00-core-workloads/07-workload-troubleshooting-handbook.md|工作负载故障排查手册]] 进行系统分析。
+排查工作负载故障时，建议遵循“先状态、后日志、再事件、最后深入容器”的顺序。下表列出生产环境最常见症状，并提供对应的确认命令与修复措施。若症状复杂或跨多个域，请结合 [[工作负载/核心工作负载/07-workload-troubleshooting-handbook.md|工作负载故障排查手册]] 进行系统分析。
 
 | 症状 | 可能原因 | 确认命令 | 修复措施 |
 |---|---|---|---|
@@ -279,7 +279,7 @@ kubectl patch cronjob my-cronjob -n production -p '{"spec":{"suspend":true}}'
 | Job 失败或超时 | backoffLimit 用尽、资源不足、任务死锁 | `kubectl describe job` / `kubectl logs job/...` | 提高 limit、拆分任务、调整 activeDeadlineSeconds |
 | StatefulSet 启动卡住 | PVC Pending、Headless DNS 未解析、init 容器阻塞 | `kubectl describe sts` / `kubectl get pvc` / `kubectl logs -c init` | 修复存储、检查 DNS、重跑 init 逻辑 |
 
-更系统的排查流程请参考 [[工作负载/00-core-workloads/07-workload-troubleshooting-handbook.md|工作负载故障排查手册]]。
+更系统的排查流程请参考 [[工作负载/核心工作负载/07-workload-troubleshooting-handbook.md|工作负载故障排查手册]]。
 
 ---
 
@@ -306,9 +306,9 @@ kubectl patch cronjob my-cronjob -n production -p '{"spec":{"suspend":true}}'
 - [[工作负载/05-quarkus-native-kubernetes.md|Quarkus Native on Kubernetes]]
 - [[工作负载/06-java-cicd-tekton-argocd.md|Java CI/CD 与 Tekton/ArgoCD]]
 - [[工作负载/07-java-observability-kubernetes.md|Java 可观测性指南]]
-- [[工作负载/00-core-workloads/21-hpa-vpa-autoscaling.md|HPA/VPA 自动伸缩]]
-- [[工作负载/00-core-workloads/23-resource-management.md|资源管理]]
-- [[工作负载/00-core-workloads/03-statefulset-advanced-operations.md|StatefulSet 高级操作]]
+- [[工作负载/核心工作负载/21-hpa-vpa-autoscaling.md|HPA/VPA 自动伸缩]]
+- [[工作负载/核心工作负载/23-resource-management.md|资源管理]]
+- [[工作负载/核心工作负载/03-statefulset-advanced-operations.md|StatefulSet 高级操作]]
 
 ### 计划补充的新文件（来自缺口分析）
 

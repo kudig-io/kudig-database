@@ -171,14 +171,14 @@ flowchart TD
 - [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[opa]] — OPA (Open Policy Agent)
 
-- [[故障诊断/topic-fta/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
 - [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/psp-scc-fta.md|Psp-Scc FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/FTA故障树/list/psp-scc-fta.md|Psp-Scc FTA 完整版]]
 
 
 <!-- risk-assessed -->

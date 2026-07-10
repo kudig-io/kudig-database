@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可观测性/06-slo-sli/01-slo-engineering-practice.md|Slo Engineering Practice]]
-- [[可观测性/06-slo-sli/02-error-budget-policy.md|Error Budget Policy]]
-- [[可观测性/06-slo-sli/03-sli-implementation-guide.md|Sli Implementation Guide]]
-- [[可观测性/06-slo-sli/18-slo-sli-system.md|Slo Sli System]]
+- [[可观测性/SLO-SLI/01-slo-engineering-practice.md|Slo Engineering Practice]]
+- [[可观测性/SLO-SLI/02-error-budget-policy.md|Error Budget Policy]]
+- [[可观测性/SLO-SLI/03-sli-implementation-guide.md|Sli Implementation Guide]]
+- [[可观测性/SLO-SLI/18-slo-sli-system.md|Slo Sli System]]
 

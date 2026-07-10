@@ -429,6 +429,6 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 **关联文档**:
 - [domain-16-database-middleware/](../domain-16-database-middleware/) — 数据库中间件完整文档
 - [domain-10-troubleshooting-diagnostics/](../domain-10-troubleshooting-diagnostics/) — K8s 通用问题排查
-- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) — 通用运维 Skill
+- [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/技能体系/) — 通用运维 Skill
 
 <!-- risk-assessed -->

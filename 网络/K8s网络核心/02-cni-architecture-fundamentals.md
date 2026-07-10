@@ -986,9 +986,9 @@ kubectl apply -f calico-old-version.yaml
 - 相关知识域: 集群基础
 - 相关知识域: 网络
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/networking.md|速查卡: networking]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[系统基础/速查卡/networking.md|速查卡: networking]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ## See Also
 

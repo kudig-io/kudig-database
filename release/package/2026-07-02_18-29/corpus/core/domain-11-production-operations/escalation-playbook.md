@@ -350,7 +350,7 @@ KUDIG 智能体
 ## Related
 
 - [[domain-11-production-operations/ticket-routing-rules|工单分类与路由规则]]
-- [[domain-11-production-operations/reply-templates/README|回复话术库]]
+- [[domain-11-production-operations/回复话术/README|回复话术库]]
 - [[AGENTS.md|Agent 行为规范与工作流]]
 
 ## See Also

@@ -245,7 +245,7 @@ kubectl get flowschema <name> -o jsonpath='{.metadata.annotations.apf\.kubernete
 - [API Priority and Fairness - Kubernetes 官方文档](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/)
 
 ## Related
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -82,11 +82,11 @@ Kustomize 是 Kubernetes 原生的配置管理工具，通过 overlay 模式对 
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/gitops.md|GitOps]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/gitops.md|GitOps]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

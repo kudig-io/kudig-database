@@ -656,8 +656,8 @@ jobs:
 
 ## Related
 
-- [[发布变更/01-gitops/07-gitops-security-compliance|GitOps 安全合规]]
-- [[发布变更/03-change-management/01-change-window-and-approval|变更窗口与审批]]
+- [[发布变更/GitOps/07-gitops-security-compliance|GitOps 安全合规]]
+- [[发布变更/变更管理/01-change-window-and-approval|变更窗口与审批]]
 
 ## See Also
 

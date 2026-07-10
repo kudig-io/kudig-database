@@ -70,11 +70,11 @@ prerequisites:
 
 - CloneSet 故障排查
 - Deployment 故障排查
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查]]
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise FTA 故障树]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/openkruise-fta.md|OpenKruise FTA 故障树]]
 
 ## 云厂商集成
 

@@ -58,9 +58,9 @@ prerequisites:
 用于向客户端证明服务器身份：
 
 - **API Server**：集群入口点，所有 `kubectl` 和组件都通过其 REST API 访问。
-- **[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] Server**：Kubernetes 的后端数据库，需要 TLS 保护键值存储访问。
+- **[[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] Server**：Kubernetes 的后端数据库，需要 TLS 保护键值存储访问。
 - **[[kubelet|Kubelet]]**：每个节点上的代理，提供 Pod/容器管理接口。
-- **Front-Proxy（可选）**：用于 API Server 的聚合层（Aggregation Layer），[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]。
+- **Front-Proxy（可选）**：用于 API Server 的聚合层（Aggregation Layer），[[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]。
 
 ### 2. 客户端证书（Client Certificates）
 
@@ -224,7 +224,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json server-csr.js
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

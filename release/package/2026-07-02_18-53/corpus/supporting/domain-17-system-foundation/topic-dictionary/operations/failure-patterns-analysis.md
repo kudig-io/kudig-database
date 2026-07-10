@@ -119,7 +119,7 @@ prerequisites:
 ```
 
 **问题影响传播**:
-- **上游问题影响下游**: [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 问题 → API Server 无法读写 → 调度器无法工作 → 新 Pod 无法创建
+- **上游问题影响下游**: [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 问题 → API Server 无法读写 → 调度器无法工作 → 新 Pod 无法创建
 - **下游故障隔离**: 单个 Pod 崩溃 → 不影响其他 Pod（如果有多副本和 Service 负载均衡）
 
 ### 渐进式示例
@@ -1647,7 +1647,7 @@ kubectl exec -it <pod> -- ping <target-svc>.<ns>.svc.cluster.local
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

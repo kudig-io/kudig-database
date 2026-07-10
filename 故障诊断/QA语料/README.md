@@ -176,10 +176,10 @@ seed/*.md ────────────────────┘  (人�
 
 ## Related
 
-- [[故障诊断/topic-skills/README.md|Skills 故障诊断手册]]
+- [[故障诊断/技能体系/README.md|Skills 故障诊断手册]]
 - index.md|FTA 故障树索引]]
-- [[故障诊断/topic-qa-corpus/command-output-diagnosis.md|原始命令输出诊断语料]]
-- [[故障诊断/topic-qa-corpus/seed/p0-core-scenarios.md|P0 手工种子语料]]
+- [[故障诊断/QA语料/command-output-diagnosis.md|原始命令输出诊断语料]]
+- [[故障诊断/QA语料/seed/p0-core-scenarios.md|P0 手工种子语料]]
 - 发布前评估报告
 
 

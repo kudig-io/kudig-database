@@ -751,7 +751,7 @@ emergency_response
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

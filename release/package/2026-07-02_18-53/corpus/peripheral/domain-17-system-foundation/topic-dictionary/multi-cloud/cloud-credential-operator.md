@@ -74,9 +74,9 @@ Cloud Credential Operator（CCO）是 Red Hat 开源的 K8s Operator，自动管
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/cluster-api.md|Cluster API]]
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe.md|SPIFFE]]
-- [[domain-17-system-foundation/topic-dictionary/security/vault.md|Vault]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/cluster-api.md|Cluster API]]
+- [[domain-17-system-foundation/知识字典/security/spiffe.md|SPIFFE]]
+- [[domain-17-system-foundation/知识字典/security/vault.md|Vault]]
 
 
 <!-- risk-assessed -->

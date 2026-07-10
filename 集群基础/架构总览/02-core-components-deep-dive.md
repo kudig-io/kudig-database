@@ -1716,10 +1716,10 @@ resources:
 - etcd 深度解析
 - 相关知识域: 容器运行时
 - 相关知识域: 集群基础
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
+- [[系统基础/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

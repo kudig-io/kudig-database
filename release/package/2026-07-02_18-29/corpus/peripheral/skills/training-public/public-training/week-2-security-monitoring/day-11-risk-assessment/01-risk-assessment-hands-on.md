@@ -454,7 +454,7 @@ estimated_read_time: 50min
 related_domains:
   - domain-05-security-compliance
   - domain-10-troubleshooting-diagnostics
-  - domain-25-[[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+  - domain-25-[[domain-17-system-foundation/知识字典/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - security
   - rbac

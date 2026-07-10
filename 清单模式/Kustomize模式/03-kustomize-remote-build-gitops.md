@@ -544,8 +544,8 @@ crane manifest registry.example.com/kustomize/my-app:v1.0.0
 
 ## Related
 
-- [[清单模式/02-kustomize-patterns/01-kustomize-base-overlay-structure|Kustomize Base/Overlay 分层架构]]
-- [[清单模式/02-kustomize-patterns/02-kustomize-transformers-reference|Kustomize Transformers 参考]]
+- [[清单模式/Kustomize模式/01-kustomize-base-overlay-structure|Kustomize Base/Overlay 分层架构]]
+- [[清单模式/Kustomize模式/02-kustomize-transformers-reference|Kustomize Transformers 参考]]
 
 ## See Also
 

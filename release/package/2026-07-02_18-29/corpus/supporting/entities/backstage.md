@@ -88,7 +88,7 @@ description: '## 项目概述'
 - [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[concepts/platform-engineering-idp.md|Platform Engineering and Internal Developer Platforms]] — Cross-reference
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

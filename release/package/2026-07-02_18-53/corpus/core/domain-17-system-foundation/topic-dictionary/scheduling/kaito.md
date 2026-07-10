@@ -69,6 +69,6 @@ KAITO（Kubernetes AI Toolchain Operator）是微软开源的 CNCF Sandbox 项�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray.md|Ray]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ray.md|Ray]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]

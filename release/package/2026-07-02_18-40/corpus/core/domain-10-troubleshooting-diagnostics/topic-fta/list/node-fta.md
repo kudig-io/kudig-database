@@ -93,13 +93,13 @@ base_confidence: 0.7
 
 - [[kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/node-index.md|Node 知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/node-fta.md|Node FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/FTA故障树/list/node-fta.md|Node FTA 完整版]]
 
 
 <!-- risk-assessed -->

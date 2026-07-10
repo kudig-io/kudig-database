@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/13-ctyun-tke/ctyun-tke-overview.md|Ctyun Tke Overview]]
+- [[domain-12-cloud-providers/其他云/天翼云-TKE/ctyun-tke-overview.md|Ctyun Tke Overview]]
 

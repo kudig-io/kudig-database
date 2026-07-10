@@ -22,9 +22,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[清单模式/03-helm-values-patterns/01-helm-values-best-practices.md|Helm Values Best Practices]]
-- [[清单模式/03-helm-values-patterns/02-helm-hooks-lifecycle.md|Helm Hooks Lifecycle]]
-- [[清单模式/03-helm-values-patterns/03-helm-library-charts-reuse.md|Helm Library Charts Reuse]]
+- [[清单模式/Helm值模式/01-helm-values-best-practices.md|Helm Values Best Practices]]
+- [[清单模式/Helm值模式/02-helm-hooks-lifecycle.md|Helm Hooks Lifecycle]]
+- [[清单模式/Helm值模式/03-helm-library-charts-reuse.md|Helm Library Charts Reuse]]
 
 
 

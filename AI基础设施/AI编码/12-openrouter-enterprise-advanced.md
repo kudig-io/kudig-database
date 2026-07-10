@@ -353,7 +353,7 @@ client = OpenAI(
 | [08 - Prompt Caching](./08-openrouter-prompt-caching-optimization.md) | 成本优化深入 |
 | [11 - 安全与隐私](./11-openrouter-security-privacy.md) | 安全加固与合规 |
 | [topic-coding/03](../topic-coding/03-opencode-providers-models.md) | OpenCode 配置 OpenRouter Provider |
-| [02-ai-agents](../AI基础设施/02-ai-agents/) | Agent CLI 统一 LLM 后端 |
+| [02-ai-agents](../AI基础设施/AI-Agents/) | Agent CLI 统一 LLM 后端 |
 | [AI基础设施/17](../AI基础设施/17-llm-inference-serving.md) | LLM 推理服务层 |
 | [网络](../网络/) | 云原生 Gateway 模式 |
 

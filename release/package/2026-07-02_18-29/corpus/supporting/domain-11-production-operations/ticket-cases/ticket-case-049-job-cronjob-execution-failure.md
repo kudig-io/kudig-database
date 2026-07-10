@@ -24,9 +24,9 @@ affected_cluster: ack-zyy-prod-07
 affected_namespace: finance-reconcile
 ticket_type: 批处理故障
 skill_ref:
-- '[[domain-02-workloads-applications/00-core-workloads/05-job-cronjob-advanced.md|Job
+- '[[domain-02-workloads-applications/核心工作负载/05-job-cronjob-advanced.md|Job
   与 CronJob 高级用法]]'
-- '[[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|Pod
+- '[[domain-02-workloads-applications/核心工作负载/11-pod-lifecycle-events.md|Pod
   生命周期事件]]'
 - RBAC 排障
 fta_ref:
@@ -57,9 +57,9 @@ authors:
 relationships:
 - target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-039-rbac-api-access-denied.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
 

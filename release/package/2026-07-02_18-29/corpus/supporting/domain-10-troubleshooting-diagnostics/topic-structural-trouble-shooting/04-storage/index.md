@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|Pv Pvc Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|Csi Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|Snapshot Backup Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|Storage Performance Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|Storageclass Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/01-pv-pvc-troubleshooting.md|Pv Pvc Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/02-csi-troubleshooting.md|Csi Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|Snapshot Backup Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/04-storage-performance-troubleshooting.md|Storage Performance Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/05-storageclass-troubleshooting.md|Storageclass Troubleshooting]]
 

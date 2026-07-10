@@ -2233,8 +2233,8 @@ done
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
 - 13-backup-demo-video
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

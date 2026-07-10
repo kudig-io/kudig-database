@@ -22,9 +22,9 @@ affected_namespace: middleware
 ticket_type: 存储故障
 skill_ref:
 - '[[存储/02-pvc-expansion-guide.md|PVC 扩容指南]]'
-- '[[故障诊断/topic-fta/list/csi-fta.md|CSI 异常故障树分析]]'
+- '[[故障诊断/FTA故障树/list/csi-fta.md|CSI 异常故障树分析]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/csi-fta.md|FTA: CSI 存储异常]]'
+- '[[故障诊断/FTA故障树/list/csi-fta.md|FTA: CSI 存储异常]]'
 last_updated: 2026-06-26 16:00:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
@@ -55,9 +55,9 @@ authors:
 relationships:
 - target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 

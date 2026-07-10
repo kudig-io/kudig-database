@@ -136,31 +136,31 @@ prerequisites:
 - 36 - AI平台增强可观测性
 
 ### 故障排查域
-- [[故障诊断/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|30 - 监控告警故障排查]]
-- [[故障诊断/03-advanced-troubleshooting/39-enterprise-monitoring-alerting-system.md|39 - 企业级监控告警体系]]
+- [[故障诊断/基础设施排障/30-monitoring-alerting-troubleshooting.md|30 - 监控告警故障排查]]
+- [[故障诊断/高级排障/39-enterprise-monitoring-alerting-system.md|39 - 企业级监控告警体系]]
 
 ### 结构化故障排查
-- [[故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|eBPF 可观测性故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[故障诊断/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
+- [[故障诊断/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
+- [[故障诊断/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|eBPF 可观测性故障排查指南]]
+- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
 
 ## 扩展参考
 
 ### 企业级监控方案
 - Prometheus企业级监控系统深度实践
-- [[可观测性/07-tools/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
+- [[可观测性/工具/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
 - Datadog 企业级监控平台深度实践
-- [[可观测性/07-tools/07-zabbix-enterprise-monitoring.md|07 zabbix enterprise monitoring]]
-- [[可观测性/07-tools/08-new-relic-enterprise-apm.md|08 new relic enterprise apm]]
+- [[可观测性/工具/07-zabbix-enterprise-monitoring.md|07 zabbix enterprise monitoring]]
+- [[可观测性/工具/08-new-relic-enterprise-apm.md|08 new relic enterprise apm]]
 
 ### 日志管理与分析
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
-- [[可观测性/03-logging/03-loki-enterprise-log-aggregation.md|03 loki enterprise log aggregation]]
+- [[可观测性/日志/03-loki-enterprise-log-aggregation.md|03 loki enterprise log aggregation]]
 - 企业级日志治理与合规审计深度实践
 - Graylog 企业级日志管理平台深度实践
 - Splunk企业级日志分析与安全智能平台深度实践
@@ -171,21 +171,21 @@ prerequisites:
 - Prometheus 企业级监控部署指南
 
 ### 技能卡片
-- [[故障诊断/topic-skills/15-monitoring-alerting-failure.md|监控告警体系故障诊断与修复]]
-- [[故障诊断/topic-skills/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
+- [[故障诊断/技能体系/15-monitoring-alerting-failure.md|监控告警体系故障诊断与修复]]
+- [[故障诊断/技能体系/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
 
 ### 术语词典
-- [[系统基础/topic-dictionary/observability/alerting-and-slo-monitoring.md|告警与 SLO 监控工程]]
-- [[系统基础/topic-dictionary/observability/llm-observability.md|LLM 可观测性]]
-- [[系统基础/topic-dictionary/observability/log-aggregation-with-loki.md|日志聚合与 Loki]]
-- [[系统基础/topic-dictionary/observability/logging-architecture.md|日志架构]]
-- [[系统基础/topic-dictionary/observability/metrics-for-kubernetes-object-states.md|Kubernetes 对象状态指标]]
-- [[系统基础/topic-dictionary/observability/metrics-for-kubernetes-system-components.md|Kubernetes 系统组件指标]]
-- [[系统基础/topic-dictionary/observability/observability.md|可观测性]]
-- [[系统基础/topic-dictionary/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
-- [[系统基础/topic-dictionary/observability/system-logs.md|系统日志]]
-- [[系统基础/topic-dictionary/observability/traces-for-kubernetes-system-components.md|Kubernetes 系统组件链路追踪]]
+- [[系统基础/知识字典/observability/alerting-and-slo-monitoring.md|告警与 SLO 监控工程]]
+- [[系统基础/知识字典/observability/llm-observability.md|LLM 可观测性]]
+- [[系统基础/知识字典/observability/log-aggregation-with-loki.md|日志聚合与 Loki]]
+- [[系统基础/知识字典/observability/logging-architecture.md|日志架构]]
+- [[系统基础/知识字典/observability/metrics-for-kubernetes-object-states.md|Kubernetes 对象状态指标]]
+- [[系统基础/知识字典/observability/metrics-for-kubernetes-system-components.md|Kubernetes 系统组件指标]]
+- [[系统基础/知识字典/observability/observability.md|可观测性]]
+- [[系统基础/知识字典/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
+- [[系统基础/知识字典/observability/system-logs.md|系统日志]]
+- [[系统基础/知识字典/observability/traces-for-kubernetes-system-components.md|Kubernetes 系统组件链路追踪]]
 
 ### K8s 事件
 - 01 - Kubernetes 事件系统架构与 API 参考
@@ -205,10 +205,10 @@ prerequisites:
 - 15 - 生态系统与插件事件
 
 ### 速查表
-- [[系统基础/topic-cheat-sheet/promql.md|PromQL 速查表]]
-- [[系统基础/topic-cheat-sheet/k8s.md|Kubernetes 生产环境速查卡]]
-- [[系统基础/topic-cheat-sheet/networking.md|网络诊断速查表]]
-- [[系统基础/topic-cheat-sheet/tls-pki.md|TLS/SSL 与 PKI 速查表]]
+- [[系统基础/速查卡/promql.md|PromQL 速查表]]
+- [[系统基础/速查卡/k8s.md|Kubernetes 生产环境速查卡]]
+- [[系统基础/速查卡/networking.md|网络诊断速查表]]
+- [[系统基础/速查卡/tls-pki.md|TLS/SSL 与 PKI 速查表]]
 
 ### CNCF 生态
 - Prometheus

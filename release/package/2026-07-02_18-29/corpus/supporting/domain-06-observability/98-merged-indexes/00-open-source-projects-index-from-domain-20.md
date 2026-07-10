@@ -307,8 +307,8 @@ cross_refs:
 
 ## See Also
 
-- [[domain-06-observability/07-tools/26-troubleshooting-tools.md|26-troubleshooting-tools]]
-- [[domain-06-observability/07-tools/27-performance-profiling-tools.md|27-performance-profiling-tools]]
+- [[domain-06-observability/工具/26-troubleshooting-tools.md|26-troubleshooting-tools]]
+- [[domain-06-observability/工具/27-performance-profiling-tools.md|27-performance-profiling-tools]]
 - [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-domain-06-observability]]
 - [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-domain-06-observability]]
 

@@ -17,17 +17,17 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[网络/topic-terway/README.md|Readme]]
+- [[网络/Terway/README.md|Readme]]
 
 ## 文档
 
-- [[网络/topic-terway/01-product.md|Product]]
-- [[网络/topic-terway/02-architecture.md|Architecture]]
-- [[网络/topic-terway/03-usage.md|Usage]]
-- [[网络/topic-terway/03b-crd-operations.md|03B Crd Operations]]
-- [[网络/topic-terway/04-operations.md|Operations]]
-- [[网络/topic-terway/05-testing.md|Testing]]
-- [[网络/topic-terway/06-performance.md|Performance]]
-- [[网络/topic-terway/07-troubleshooting-fta.md|Troubleshooting Fta]]
-- [[网络/topic-terway/terway-index.md|Terway Index]]
+- [[网络/Terway/01-product.md|Product]]
+- [[网络/Terway/02-architecture.md|Architecture]]
+- [[网络/Terway/03-usage.md|Usage]]
+- [[网络/Terway/03b-crd-operations.md|03B Crd Operations]]
+- [[网络/Terway/04-operations.md|Operations]]
+- [[网络/Terway/05-testing.md|Testing]]
+- [[网络/Terway/06-performance.md|Performance]]
+- [[网络/Terway/07-troubleshooting-fta.md|Troubleshooting Fta]]
+- [[网络/Terway/terway-index.md|Terway Index]]
 

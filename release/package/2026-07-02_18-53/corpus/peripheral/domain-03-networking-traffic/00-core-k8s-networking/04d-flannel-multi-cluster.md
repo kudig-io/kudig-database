@@ -306,7 +306,7 @@ kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
 kubectl patch configmap -n kube-flannel kube-flannel-cfg --type merge -p \
   '{"data":{"net-conf.json":"{\"Network\":\"10.245.0.0/16\",\"Backend\":{\"Type\":\"vxlan\"},\"EtcdPrefix\":\"/cluster-b/network\"}"}}'
 ```
-### 4.3 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 后端
+### 4.3 使用 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 后端
 
 **推荐方案**：避免使用 etcd 后端，改用 Kubernetes API 后端
 
@@ -552,7 +552,7 @@ flannelctl subnet list
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 ```
 

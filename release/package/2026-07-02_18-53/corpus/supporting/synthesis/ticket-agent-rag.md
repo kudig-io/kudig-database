@@ -68,4 +68,4 @@ RAG 解决"知道什么"的问题，工单智能体解决"怎么做"的问题。
 - _meta/corpus-config/profiles/rag-ticket-agent-profile
 - [[domain-11-production-operations/ticket-routing-rules.md|ticket routing rules]]
 - [[domain-11-production-operations/escalation-playbook.md|escalation playbook]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|SKILL DEEP DIVE]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|SKILL DEEP DIVE]]

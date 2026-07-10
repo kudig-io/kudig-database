@@ -73,7 +73,7 @@ prerequisites:
 
 ## 相关
 
-- [[domain-16-database-middleware/06-data-streaming/01-cdc-change-data-capture.md|01 cdc change data capture]]
+- [[domain-16-database-middleware/数据流/01-cdc-change-data-capture.md|01 cdc change data capture]]
 
 
 <!-- risk-assessed -->

@@ -187,9 +187,9 @@ kubectl get pod <pod> -o jsonpath='{.spec.containers[0].volumeMounts}' | jq .
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
-- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
-- [[domain-17-system-foundation/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+- [[domain-17-system-foundation/知识字典/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/知识字典/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[domain-17-system-foundation/知识字典/storage/composefs.md|ComposeFS 只读文件系统]]
 
 
 <!-- risk-assessed -->

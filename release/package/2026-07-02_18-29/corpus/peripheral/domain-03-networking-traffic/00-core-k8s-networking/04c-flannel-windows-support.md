@@ -440,7 +440,7 @@ C:\flannel\flanneld.exe --version
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

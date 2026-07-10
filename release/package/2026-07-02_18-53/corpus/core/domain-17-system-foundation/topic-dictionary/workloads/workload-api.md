@@ -193,8 +193,8 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload|gang
 ```
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/workload-reference.md|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略的详细行为
+- [[domain-17-system-foundation/知识字典/workloads/workload-reference.md|Workload Reference]]](workload-reference.md) — Pod 端的 workloadRef 字段说明
+- [[domain-17-system-foundation/知识字典/workloads/pod-group-policies.md|Pod Group Policies]]](pod-group-policies.md) — basic 和 gang 策略的详细行为
 - [Jobs](jobs.md) — 批处理 Job 与 Workload API 的集成
 - [CronJob](cronjob.md) — 周期性任务场景下的 Workload 使用
 
@@ -203,9 +203,9 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "workload|gang
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

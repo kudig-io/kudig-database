@@ -74,9 +74,9 @@ Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubectl.md|kubectl]]
-- [[系统基础/topic-dictionary/tooling/stern.md|Stern]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/tooling/kubectl.md|kubectl]]
+- [[系统基础/知识字典/tooling/stern.md|Stern]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

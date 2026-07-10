@@ -163,7 +163,7 @@ Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/Gree
 - **[23-事件响应处理](./topic-reliability-operations/23-incident-response-handling.md)** - SRE 实践和故障处理流程
 - **[24-容量规划预测](./topic-reliability-operations/24-capacity-planning-forecasting.md)** - 资源需求预测和扩容策略
 
-> 🔗 **横向技能切片**：[topic-skills 运维技能卡片](../topic-skills)
+> 🔗 **横向技能切片**：[topic-skills 运维技能卡片](../技能体系)
 
 ---
 
@@ -267,7 +267,7 @@ kube-bench, kube-hunter, Polaris
 - **[Domain-23: GitOps CI-CD](../domain-08-release-change-management)** - GitOps 工具实现
 - **[Domain-25: 云原生安全](../domain-05-security-compliance)** - 安全工具实现
 - **[Domain-30: 灾备与业务连续性](../domain-30-disaster-recovery-business-continuity)** - 灾备工具实现
-- **[topic-skills: 运维技能卡片](../topic-skills)** - 场景化操作技能
+- **[topic-skills: 运维技能卡片](../技能体系)** - 场景化操作技能
 - **[topic-best-practices: 最佳实践](../topic-best-practices)** - 跨域最佳实践摘要
 
 ---

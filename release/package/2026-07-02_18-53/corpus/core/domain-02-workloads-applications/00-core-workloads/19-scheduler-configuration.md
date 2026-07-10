@@ -584,8 +584,8 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 - Scheduler 深度解析
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
+- [[domain-19-landscape-references/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 

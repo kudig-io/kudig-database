@@ -100,7 +100,7 @@ relationships:
 - 网络/03-service-mesh/01-istio-multi-cluster
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/secrets.md|Secrets]]
+- [[系统基础/知识字典/configuration/secrets.md|Secrets]]
 - [[entities/istio.md|Istio (entities)]]
 
 

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/11-oracle-oke/oracle-oke-overview.md|Oracle Oke Overview]]
+- [[domain-12-cloud-providers/其他云/Oracle-OKE/oracle-oke-overview.md|Oracle Oke Overview]]
 

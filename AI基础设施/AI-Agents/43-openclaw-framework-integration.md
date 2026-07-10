@@ -545,7 +545,7 @@ agent = ReActAgent(
 | USER.md | [平台工程](../平台工程/) | 运维工程师角色定义 |
 | AGENTS.md | [故障诊断](../故障诊断/) | 诊断工作流模板 |
 | TOOLS.md | [网络](../网络/), [可观测性](../可观测性/) | 工具使用规范 |
-| SKILL.md | [topic-fta](../故障诊断/topic-fta/), [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/) | 故障树 + SOP 知识 |
+| SKILL.md | [topic-fta](../故障诊断/FTA故障树/), [topic-structural-trouble-shooting](../故障诊断/高级排障/) | 故障树 + SOP 知识 |
 | MEMORY.md | [domain-33-kubernetes-events](../系统基础/) | 事件模式知识库 |
 | IDENTITY.md | — | Agent 品牌独立设计 |
 
@@ -659,17 +659,17 @@ agent = ReActAgent(
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[AI基础设施/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[AI基础设施/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[AI基础设施/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[AI基础设施/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[AI基础设施/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[AI基础设施/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[AI基础设施/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[AI基础设施/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[AI基础设施/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[AI基础设施/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[AI基础设施/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[AI基础设施/AI-Agents/README.md|AI Agent 工程专题]]
+- [[AI基础设施/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[AI基础设施/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[AI基础设施/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[AI基础设施/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[AI基础设施/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[AI基础设施/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[AI基础设施/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[AI基础设施/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[AI基础设施/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[AI基础设施/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

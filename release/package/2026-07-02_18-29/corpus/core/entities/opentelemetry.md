@@ -81,7 +81,7 @@ description: '## 项目概述'
 
 - 23-kubernetes-opentelemetry-native-observability
 - 03-opentelemetry-distributed-tracing
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
 - opentelemetry
 - RELEASE-NOTES-0.43
 - RELEASE-NOTES-0.12
@@ -234,8 +234,8 @@ description: '## 项目概述'
 - [[concepts/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
 - [[concepts/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

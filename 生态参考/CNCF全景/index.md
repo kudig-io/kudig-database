@@ -23,8 +23,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[生态参考/01-cncf-landscape/01-cncf-integration-guide.md|Cncf Integration Guide]]
-- [[生态参考/01-cncf-landscape/02-cncf-learning-paths.md|Cncf Learning Paths]]
-- [[生态参考/01-cncf-landscape/03-cncf-selection-guide.md|Cncf Selection Guide]]
-- [[生态参考/01-cncf-landscape/04-cncf-fta-index.md|Cncf Fta Index]]
+- [[生态参考/CNCF全景/01-cncf-integration-guide.md|Cncf Integration Guide]]
+- [[生态参考/CNCF全景/02-cncf-learning-paths.md|Cncf Learning Paths]]
+- [[生态参考/CNCF全景/03-cncf-selection-guide.md|Cncf Selection Guide]]
+- [[生态参考/CNCF全景/04-cncf-fta-index.md|Cncf Fta Index]]
 

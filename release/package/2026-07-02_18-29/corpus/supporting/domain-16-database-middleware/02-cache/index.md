@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-16-database-middleware/02-cache/01-redis-cluster-sentinel-topology.md|Redis Cluster Sentinel Topology]]
-- [[domain-16-database-middleware/02-cache/02-memcached-distributed-caching.md|Memcached Distributed Caching]]
+- [[domain-16-database-middleware/缓存/01-redis-cluster-sentinel-topology.md|Redis Cluster Sentinel Topology]]
+- [[domain-16-database-middleware/缓存/02-memcached-distributed-caching.md|Memcached Distributed Caching]]
 

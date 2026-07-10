@@ -89,7 +89,7 @@ graph TD
 ## 相关文档
 
 - [[domain-14-ai-ml-infra/README.md|README]]
-- [[domain-14-ai-ml-infra/02-ai-agents/README.md|README]]
+- [[domain-14-ai-ml-infra/AI-Agents/README.md|README]]
 
 
 ---

@@ -74,9 +74,9 @@ Operator Framework 是 Red Hat 开源的 Kubernetes Operator 开发和管理框�
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/kubevela.md|KubeVela]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/platform-engineering/kubevela.md|KubeVela]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
 
 
 <!-- risk-assessed -->

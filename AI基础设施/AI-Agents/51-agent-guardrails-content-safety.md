@@ -742,7 +742,7 @@ Agent 安全检查清单:
 
 ## Related
 
-- [[AI基础设施/02-ai-agents/52-agent-cost-optimization-caching|Agent 成本优化]]
+- [[AI基础设施/AI-Agents/52-agent-cost-optimization-caching|Agent 成本优化]]
 - 安全/
 - 可观测性/
 

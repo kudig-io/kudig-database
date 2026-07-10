@@ -25,11 +25,11 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 relationships:
-- target: '[[系统基础/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/知识字典/networking/service.md]]'
   type: uses
 - target: '[[entities/backstage.md]]'
   type: related_to
-- target: '[[系统基础/topic-cheat-sheet/k8s.md]]'
+- target: '[[系统基础/速查卡/k8s.md]]'
   type: related_to
 ---
 
@@ -54,7 +54,7 @@ relationships:
 └── PagerDuty/OpsGenie: On-call 信息
 ```
 
-## 与 [[系统基础/topic-cheat-sheet/k8s.md|K8s]] 集成
+## 与 [[系统基础/速查卡/k8s.md|K8s]] 集成
 
 ```
 Backstage 读取 K8s:
@@ -76,7 +76,7 @@ Backstage 读取 K8s:
 ## 相关 Domain
 
 - 平台工程/01-idp/01-internal-developer-platform
-- 应用模式/01-microservices/01-[[系统基础/topic-dictionary/networking/service.md|service]]-mesh-patterns
+- 应用模式/01-microservices/01-[[系统基础/知识字典/networking/service.md|service]]-mesh-patterns
 
 
 <!-- risk-assessed -->

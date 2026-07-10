@@ -67,6 +67,6 @@ OpenEBS 是 Maya Data 开源的 CNCF Sandbox 项目，为 Kubernetes 提供容�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/rook.md|Rook]]
-- [[domain-17-system-foundation/topic-dictionary/storage/longhorn.md|Longhorn]]
-- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/知识字典/storage/rook.md|Rook]]
+- [[domain-17-system-foundation/知识字典/storage/longhorn.md|Longhorn]]
+- [[domain-17-system-foundation/知识字典/storage/ceph.md|Ceph]]

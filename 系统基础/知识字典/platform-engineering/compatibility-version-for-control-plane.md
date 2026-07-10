@@ -102,11 +102,11 @@ kubectl get pod -n kube-system kube-apiserver-* -o yaml | grep emulation-version
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[系统基础/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[系统基础/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
+- [[系统基础/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[系统基础/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[系统基础/知识字典/platform-engineering/kind.md|Kind]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
 
 
 <!-- risk-assessed -->

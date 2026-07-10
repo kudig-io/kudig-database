@@ -81,9 +81,9 @@ HwameiStor 是一个 Kubernetes 原生的高可用本地存储系统，能够将
 
 - hwameistor
 - [[entities/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

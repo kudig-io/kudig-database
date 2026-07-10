@@ -1,7 +1,7 @@
 ---
 title: kube-rs (entities)
 description: '## 概述'
-summary: 'kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。'
+summary: 'kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。'
 category: entities
 tags:
 - k8s
@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
+kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 交互能力。它包含低级 API 客户端（kube-client）、运行时抽象（kube-runtime）和 CRD 代码生成（kube-derive），使开发者能用 Rust 构建高性能、内存安全的 Kubernetes Controller 和 Operator。
 
 ## 核心能力
 
@@ -88,7 +88,7 @@ kube-rs 是 Rust 语言的 Kubernetes 客户端库，提供类型安全的 [[dom
 
 - kube-rs
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -415,25 +415,25 @@ ChatOps 升级消息模板:
 
 ## Obsidian 相关文档
 
-- [[故障诊断/topic-fta/MOC.md|topic-fta MOC]]
-- [[故障诊断/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/topic-fta/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/topic-fta/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/topic-fta/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/topic-fta/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/topic-fta/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/topic-fta/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/topic-fta/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/topic-fta/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/topic-fta/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/topic-fta/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
+- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
+- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
+- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
+- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
+- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
+- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
+- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
+- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
+- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
+- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
+- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
 
 ## See Also
 
-- [[故障诊断/topic-fta/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
-- [[故障诊断/topic-fta/12-fta-aiops-integration.md|12-fta-aiops-integration]]
-- [[故障诊断/topic-fta/14-fta-system-engineering.md|14-fta-system-engineering]]
-- [[故障诊断/topic-fta/15-fta-quality-assessment.md|15-fta-quality-assessment]]
+- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
+- [[故障诊断/FTA故障树/12-fta-aiops-integration.md|12-fta-aiops-integration]]
+- [[故障诊断/FTA故障树/14-fta-system-engineering.md|14-fta-system-engineering]]
+- [[故障诊断/FTA故障树/15-fta-quality-assessment.md|15-fta-quality-assessment]]
 
 
 <!-- risk-assessed -->

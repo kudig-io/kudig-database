@@ -114,7 +114,7 @@ graph TD
 ## Related
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - 09-edge-computing-kubeedge
 
 

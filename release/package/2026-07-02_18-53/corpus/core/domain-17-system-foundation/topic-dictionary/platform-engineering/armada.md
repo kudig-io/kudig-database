@@ -69,6 +69,6 @@ Armada 是 G-Research 开源的 CNCF Sandbox 项目，专为大规模批量工�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/volcano.md|Volcano]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/koordinator.md|Koordinator]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/karmada.md|Karmada]]
+- [[domain-17-system-foundation/知识字典/scheduling/volcano.md|Volcano]]
+- [[domain-17-system-foundation/知识字典/scheduling/koordinator.md|Koordinator]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/karmada.md|Karmada]]

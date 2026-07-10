@@ -233,11 +233,11 @@ Ingress 和 Gateway 是 [[Kubernetes|Kubernetes]] 集群对外暴露服务的核
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[故障诊断/topic-skills/05-service-connectivity.md|05 service connectivity]]
+- [[故障诊断/技能体系/05-service-connectivity.md|05 service connectivity]]
 
 - k8s-dns-failure
 
-- [[故障诊断/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
+- [[故障诊断/技能体系/06-certificate-expiry.md|06 certificate expiry]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

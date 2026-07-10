@@ -2238,7 +2238,7 @@ compatibility_date = "2024-01-01"
 ENVIRONMENT = "production"
 API_KEY = "..."
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/namespaces.md|namespaces]]
+[[domain-17-system-foundation/知识字典/fundamentals/namespaces.md|namespaces]]
 binding = "KV_STORE"
 id = "abc123..."
 

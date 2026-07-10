@@ -66,7 +66,7 @@ version: 1.0.0
 - [知识进化](#知识进化)
   - [常见误诊模式](#101-常见误诊模式)
   - [深度知识引用](#102-深度知识引用)
-  - [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 改进记录](#103-skill-改进记录)
+  - [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/SKILL.md|Skill]] 改进记录](#103-skill-改进记录)
   - [待补充的知识空白](#104-待补充的知识空白)
 
 ---
@@ -85,7 +85,7 @@ version: 1.0.0
 | `kubectl debug node/` | GA | GA | GA | GA | GA |
 | Custom Debug Profiles | beta | beta | GA | GA | GA |
 | NodeStatus 上报改进 | 基础 | 优化心跳频率 | 改进 Lease 上报 | 增强状态报告详细度 | 稳定 |
-| [[domain-17-system-foundation/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]] | alpha | beta | beta | GA | GA |
+| [[domain-17-system-foundation/知识字典/workloads/sidecar-containers.md|Sidecar Containers]] | alpha | beta | beta | GA | GA |
 | Node Resource Fit Scoring | 基础 | 基础 | 改进 | 改进 | 增强 |
 | PodDisruptionConditions | beta | GA | GA | GA | GA |
 
@@ -212,7 +212,7 @@ version: 1.0.0
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

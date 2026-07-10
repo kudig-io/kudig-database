@@ -178,6 +178,6 @@ flowchart TD
 - [[cilium-fta]] — Cilium Fta
 - [[entities/kubelet.md|kubelet]] — kubelet
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/nodepool-fta.md|NodePool 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/nodepool-fta.md|NodePool 异常故障树分析]]
 
 <!-- risk-assessed -->

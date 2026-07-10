@@ -193,7 +193,7 @@ last_updated: 2026-05-23
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/05-service-connectivity.md|05 service connectivity]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/05-service-connectivity.md|05 service connectivity]]
 
 - k8s-ingress-gateway
 

@@ -188,7 +188,7 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

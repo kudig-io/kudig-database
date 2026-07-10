@@ -354,8 +354,8 @@ spec:
 
 ## Related
 
-- [[domain-13-container-runtime/03-containerd-cri-o/05-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
-- [[domain-13-container-runtime/03-containerd-cri-o/06-rootless-containers-guide|Rootless 容器指南]]
+- [[domain-13-container-runtime/containerd-CRI-O/05-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
+- [[domain-13-container-runtime/containerd-CRI-O/06-rootless-containers-guide|Rootless 容器指南]]
 
 ## See Also
 

@@ -174,9 +174,9 @@ kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
-- [[系统基础/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[系统基础/知识字典/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
 
 
 <!-- risk-assessed -->

@@ -22,12 +22,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|Cluster Maintenance Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md|Logging Monitoring Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|Helm Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|Ha Disaster Recovery Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md|Crd Operator Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/06-kustomize-troubleshooting.md|Kustomize Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|Cluster Maintenance Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|Logging Monitoring Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|Helm Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|Ha Disaster Recovery Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|Crd Operator Troubleshooting]]
+- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|Kustomize Troubleshooting]]
 
 
 

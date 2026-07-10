@@ -34,7 +34,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/workloads/deployments.md]]'
+- target: '[[domain-17-system-foundation/知识字典/workloads/deployments.md]]'
   type: uses
 - target: '[[skills/Kubernetes Diagnostic Skills Overview.md]]'
   type: uses
@@ -42,7 +42,7 @@ relationships:
   type: related_to
 - target: '[[scripts/man/INSTALL.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[domain-17-system-foundation/速查卡/k8s.md]]'
   type: related_to
 ---
 
@@ -86,7 +86,7 @@ When receiving your first troubleshooting ticket:
 ### Handoff Checklist
 
 - [ ] Active incidents: status, next actions, who is involved
-- [ ] Recent changes: [[domain-17-system-foundation/topic-dictionary/workloads/deployments.md|deployments]], config changes, infrastructure modifications
+- [ ] Recent changes: [[domain-17-system-foundation/知识字典/workloads/deployments.md|deployments]], config changes, infrastructure modifications
 - [ ] Known issues: tracked bugs, pending fixes, workaround in place
 - [ ] Upcoming changes: scheduled maintenance, planned deployments
 - [ ] Monitoring anomalies: alerts firing, dashboards showing unusual patterns
@@ -118,7 +118,7 @@ Open Tickets:
 
 ## Debug Tools Setup
 
-Essential tools for [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] troubleshooting:
+Essential tools for [[domain-17-system-foundation/速查卡/k8s.md|K8s]] troubleshooting:
 
 | Tool | Purpose | Setup |
 |------|---------|-------|

@@ -17,18 +17,18 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-08-release-change-management/topic-migration/README.md|Readme]]
+- [[domain-08-release-change-management/迁移方案/README.md|Readme]]
 
 ## 文档
 
-- [[domain-08-release-change-management/topic-migration/01-migration-assessment-planning.md|Migration Assessment Planning]]
-- [[domain-08-release-change-management/topic-migration/02-ack-target-cluster-design.md|Ack Target Cluster Design]]
-- [[domain-08-release-change-management/topic-migration/03-application-workload-migration.md|Application Workload Migration]]
-- [[domain-08-release-change-management/topic-migration/04-storage-data-migration.md|Storage Data Migration]]
-- [[domain-08-release-change-management/topic-migration/05-network-migration-traffic-cutover.md|Network Migration Traffic Cutover]]
-- [[domain-08-release-change-management/topic-migration/06-stateful-services-migration.md|Stateful Services Migration]]
-- [[domain-08-release-change-management/topic-migration/07-observability-security-migration.md|Observability Security Migration]]
-- [[domain-08-release-change-management/topic-migration/08-validation-cutover-decommission.md|Validation Cutover Decommission]]
-- [[domain-08-release-change-management/topic-migration/09-migration-toolchain.md|Migration Toolchain]]
-- [[domain-08-release-change-management/topic-migration/10-real-world-case-study.md|Real World Case Study]]
+- [[domain-08-release-change-management/迁移方案/01-migration-assessment-planning.md|Migration Assessment Planning]]
+- [[domain-08-release-change-management/迁移方案/02-ack-target-cluster-design.md|Ack Target Cluster Design]]
+- [[domain-08-release-change-management/迁移方案/03-application-workload-migration.md|Application Workload Migration]]
+- [[domain-08-release-change-management/迁移方案/04-storage-data-migration.md|Storage Data Migration]]
+- [[domain-08-release-change-management/迁移方案/05-network-migration-traffic-cutover.md|Network Migration Traffic Cutover]]
+- [[domain-08-release-change-management/迁移方案/06-stateful-services-migration.md|Stateful Services Migration]]
+- [[domain-08-release-change-management/迁移方案/07-observability-security-migration.md|Observability Security Migration]]
+- [[domain-08-release-change-management/迁移方案/08-validation-cutover-decommission.md|Validation Cutover Decommission]]
+- [[domain-08-release-change-management/迁移方案/09-migration-toolchain.md|Migration Toolchain]]
+- [[domain-08-release-change-management/迁移方案/10-real-world-case-study.md|Real World Case Study]]
 

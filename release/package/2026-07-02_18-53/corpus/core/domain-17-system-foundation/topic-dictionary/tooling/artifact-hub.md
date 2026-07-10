@@ -73,9 +73,9 @@ Artifact Hub 是 CNCF 孵化项目，云原生制品的集中发现和分发平�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/distribution.md|Distribution]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/harbor.md|Harbor]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/distribution.md|Distribution]]
+- [[domain-17-system-foundation/知识字典/tooling/harbor.md|Harbor]]
 
 
 <!-- risk-assessed -->

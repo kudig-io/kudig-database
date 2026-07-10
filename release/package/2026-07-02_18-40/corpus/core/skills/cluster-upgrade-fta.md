@@ -179,9 +179,9 @@ flowchart TD
 - [[higress-fta]] — Higress 网关异常故障树分析
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
 - [[skills/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

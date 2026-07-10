@@ -100,7 +100,7 @@ spec:
 
 ## 相关
 
-- [[domain-16-database-middleware/03-message-queues/02-pulsar-architecture.md|02 pulsar architecture]]
+- [[domain-16-database-middleware/消息队列/02-pulsar-architecture.md|02 pulsar architecture]]
 
 
 <!-- risk-assessed -->

@@ -68,6 +68,6 @@ Open Cluster Management（OCM）是 Red Hat 主导的 CNCF Sandbox 项目，提�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/karmada.md|Karmada]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/rancher.md|Rancher]]
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/karmada.md|Karmada]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/rancher.md|Rancher]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]

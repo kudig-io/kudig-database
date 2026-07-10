@@ -460,9 +460,9 @@ message OrderCreatedEvent {
 
 ## Related
 
-- [[domain-20-application-patterns/sub-patterns/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
-- [[domain-20-application-patterns/sub-patterns/03-saga-distributed-transaction|Saga 分布式事务]]
-- [[domain-07-platform-engineering/developer-experience/01-inner-source-contribution-model|内部开源贡献模型]]
+- [[domain-20-application-patterns/子模式/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
+- [[domain-20-application-patterns/子模式/03-saga-distributed-transaction|Saga 分布式事务]]
+- [[domain-07-platform-engineering/开发体验/01-inner-source-contribution-model|内部开源贡献模型]]
 
 ## See Also
 

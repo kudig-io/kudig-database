@@ -598,9 +598,9 @@ kubectl exec -it pod/my-java-app -- \
 
 ## Related
 
-- [[故障诊断/04-jvm-tuning/99-jvm-gc-container-tuning-guide|JVM GC 容器调优]]
-- [[故障诊断/04-jvm-tuning/99-java-performance-resource-sizing-guide|Java 性能资源配比]]
-- [[系统基础/topic-cheat-sheet/perf-bpftrace-cheat-sheet|perf/bpftrace 速查卡]]
+- [[故障诊断/JVM调优/99-jvm-gc-container-tuning-guide|JVM GC 容器调优]]
+- [[故障诊断/JVM调优/99-java-performance-resource-sizing-guide|Java 性能资源配比]]
+- [[系统基础/速查卡/perf-bpftrace-cheat-sheet|perf/bpftrace 速查卡]]
 
 ## See Also
 

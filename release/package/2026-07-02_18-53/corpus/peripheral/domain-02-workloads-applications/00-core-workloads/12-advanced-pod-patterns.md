@@ -147,7 +147,7 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

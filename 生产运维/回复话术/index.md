@@ -17,13 +17,13 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[生产运维/reply-templates/README.md|Readme]]
+- [[生产运维/回复话术/README.md|Readme]]
 
 ## 文档
 
-- [[生产运维/reply-templates/01-acknowledgment.md|Acknowledgment]]
-- [[生产运维/reply-templates/02-information-request.md|Information Request]]
-- [[生产运维/reply-templates/03-solution-proposal.md|Solution Proposal]]
-- [[生产运维/reply-templates/04-escalation-notice.md|Escalation Notice]]
-- [[生产运维/reply-templates/05-closure-confirmation.md|Closure Confirmation]]
+- [[生产运维/回复话术/01-acknowledgment.md|Acknowledgment]]
+- [[生产运维/回复话术/02-information-request.md|Information Request]]
+- [[生产运维/回复话术/03-solution-proposal.md|Solution Proposal]]
+- [[生产运维/回复话术/04-escalation-notice.md|Escalation Notice]]
+- [[生产运维/回复话术/05-closure-confirmation.md|Closure Confirmation]]
 

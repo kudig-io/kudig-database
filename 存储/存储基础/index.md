@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[存储/02-storage-fundamentals/01-storage-technologies-overview.md|Storage Technologies Overview]]
-- [[存储/02-storage-fundamentals/02-block-file-object-storage.md|Block File Object Storage]]
-- [[存储/02-storage-fundamentals/03-raid-storage-redundancy.md|Raid Storage Redundancy]]
-- [[存储/02-storage-fundamentals/04-distributed-storage-systems.md|Distributed Storage Systems]]
-- [[存储/02-storage-fundamentals/05-storage-management-operations.md|Storage Management Operations]]
-- [[存储/02-storage-fundamentals/06-storage-performance-iops.md|Storage Performance Iops]]
+- [[存储/存储基础/01-storage-technologies-overview.md|Storage Technologies Overview]]
+- [[存储/存储基础/02-block-file-object-storage.md|Block File Object Storage]]
+- [[存储/存储基础/03-raid-storage-redundancy.md|Raid Storage Redundancy]]
+- [[存储/存储基础/04-distributed-storage-systems.md|Distributed Storage Systems]]
+- [[存储/存储基础/05-storage-management-operations.md|Storage Management Operations]]
+- [[存储/存储基础/06-storage-performance-iops.md|Storage Performance Iops]]
 

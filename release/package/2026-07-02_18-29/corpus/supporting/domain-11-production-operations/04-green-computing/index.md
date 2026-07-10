@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-11-production-operations/04-green-computing/15-green-computing-sustainability.md|Green Computing Sustainability]]
-- [[domain-11-production-operations/04-green-computing/99-greenops-sustainable-computing-guide.md|Greenops Sustainable Computing Guide]]
+- [[domain-11-production-operations/绿色计算/15-green-computing-sustainability.md|Green Computing Sustainability]]
+- [[domain-11-production-operations/绿色计算/99-greenops-sustainable-computing-guide.md|Greenops Sustainable Computing Guide]]
 

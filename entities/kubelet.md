@@ -96,7 +96,7 @@ kubelet auto-rotates its client certificate (`--rotate-certificates`), preventin
 - 15-kubelet-deep-dive
 - 33-kubelet-eviction-thresholds
 - 20-kubelet-configuration
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
 - virtual-kubelet
 - [[skills/node-fta.md|Node 异常故障树分析]] — Cross-reference
 - [[skills/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference

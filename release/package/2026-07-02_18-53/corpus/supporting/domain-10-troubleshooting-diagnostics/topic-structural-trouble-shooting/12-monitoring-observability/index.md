@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|Monitoring Observability Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/02-opentelemetry-troubleshooting.md|Opentelemetry Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|Ebpf Observability Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|Finops Cost Optimization Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|Monitoring Observability Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|Opentelemetry Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|Ebpf Observability Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|Finops Cost Optimization Troubleshooting]]
 

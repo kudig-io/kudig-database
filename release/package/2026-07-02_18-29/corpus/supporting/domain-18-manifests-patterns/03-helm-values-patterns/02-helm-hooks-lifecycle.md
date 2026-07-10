@@ -659,8 +659,8 @@ spec:
 
 ## Related
 
-- [[domain-18-manifests-patterns/03-helm-values-patterns/01-helm-values-best-practices|Helm Values 最佳实践]]
-- [[domain-18-manifests-patterns/03-helm-values-patterns/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
+- [[domain-18-manifests-patterns/Helm值模式/01-helm-values-best-practices|Helm Values 最佳实践]]
+- [[domain-18-manifests-patterns/Helm值模式/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
 
 ## See Also
 

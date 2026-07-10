@@ -53,9 +53,9 @@ authors:
 relationships:
 - target: '[[concepts/service.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]'
+- target: '[[生产运维/工单案例/ticket-case-044-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
 

@@ -493,9 +493,9 @@ apt-get update && apt-get install -y tcpdump strace curl dnsutils
 
 ## Related
 
-- [[集群基础/05-kubectl/05-kubectl-commands-reference|kubectl 命令参考]]
+- [[集群基础/kubectl/05-kubectl-commands-reference|kubectl 命令参考]]
 - 故障诊断/03-advanced-troubleshooting/
-- [[系统基础/topic-cheat-sheet/k8s.md|K8s 速查卡]]
+- [[系统基础/速查卡/k8s.md|K8s 速查卡]]
 
 ## See Also
 

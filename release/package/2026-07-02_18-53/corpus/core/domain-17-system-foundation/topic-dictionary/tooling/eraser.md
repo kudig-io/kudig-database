@@ -72,9 +72,9 @@ Eraser 是微软开源的 CNCF Sandbox 项目，自动清理 Kubernetes 节点�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-dictionary/security/trivy.md|Trivy]]
-- [[domain-17-system-foundation/topic-dictionary/operations/k8sgpt.md|K8sGPT]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/security/trivy.md|Trivy]]
+- [[domain-17-system-foundation/知识字典/operations/k8sgpt.md|K8sGPT]]
 
 
 <!-- risk-assessed -->

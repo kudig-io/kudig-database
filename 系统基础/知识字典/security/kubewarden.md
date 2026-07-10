@@ -69,6 +69,6 @@ Kubewarden 是 SUSE 开源的 CNCF Sandbox 项目，使用 WebAssembly（Wasm）
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[系统基础/topic-dictionary/security/gatekeeper.md|Gatekeeper]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/security/gatekeeper.md|Gatekeeper]]

@@ -184,7 +184,7 @@ kube-scheduler --feature-gates=SchedulerQueueingHints=true
 - 减少不必要的重试和抢占
 - 更智能的 Pod 排队策略
 
-### DRA ([[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) 集成 (v1.33 GA)
+### DRA ([[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) 集成 (v1.33 GA)
 
 ```yaml
 # v1.33: DRA 控制平面 GA

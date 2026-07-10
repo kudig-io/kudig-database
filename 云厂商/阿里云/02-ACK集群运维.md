@@ -24,7 +24,7 @@ relationships:
   type: uses
 - target: '[[entities/kubelet.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/security/pod-security-policies.md]]'
+- target: '[[系统基础/知识字典/security/pod-security-policies.md]]'
   type: uses
 ---
 
@@ -181,7 +181,7 @@ aliyun cs GET /clusters/<cluster-id>/upgrade_status
 | 检查项 | 命令/方法 | 风险等级 |
 |--------|-----------|----------|
 | API 废弃检查 | `kubectl get --raw=/api/v1` | 高 |
-| [[系统基础/topic-dictionary/security/pod-security-policies.md|Pod 安全策略]] | `kubectl get psp` | 高 |
+| [[系统基础/知识字典/security/pod-security-policies.md|Pod 安全策略]] | `kubectl get psp` | 高 |
 | 节点镜像预热 | 确认新节点镜像可用 | 中 |
 | CRD 兼容性 | `kubectl get crd` | 中 |
 
@@ -541,17 +541,17 @@ ETCDCTL_API=3 etcdctl endpoint health \
 
 ## 相关文档
 
-- [[云厂商/01-alibaba-cloud/01-专有云架构概述.md|专有云架构概述]]
-- [[云厂商/01-alibaba-cloud/03-Terway-CNI网络.md|Terway-CNI网络]]
-- [[云厂商/01-alibaba-cloud/04-阿里云存储集成.md|阿里云存储集成]]
-- [[云厂商/01-alibaba-cloud/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
-- [[云厂商/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
+- [[云厂商/阿里云/01-专有云架构概述.md|专有云架构概述]]
+- [[云厂商/阿里云/03-Terway-CNI网络.md|Terway-CNI网络]]
+- [[云厂商/阿里云/04-阿里云存储集成.md|阿里云存储集成]]
+- [[云厂商/阿里云/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
+- [[云厂商/阿里云/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 - [[alicloud-apsara-ack-overview|阿里云专有版ACK概述]]
 ## Related
 
 - [[entities/coredns.md|CoreDNS (entities)]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
 
 
 <!-- risk-assessed -->

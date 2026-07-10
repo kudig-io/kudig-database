@@ -1414,19 +1414,19 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"schedulerName"
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
 
 ```
 

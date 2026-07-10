@@ -355,8 +355,8 @@ kubectl exec -it prod-pg-0 -n database -- patronictl switchover
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
-- [[数据库中间件/01-databases/02-postgresql-enterprise-database.md|PostgreSQL 企业数据库]]
-- [[数据库中间件/01-databases/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业指南]]
+- [[数据库中间件/数据库/02-postgresql-enterprise-database.md|PostgreSQL 企业数据库]]
+- [[数据库中间件/数据库/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业指南]]
 - [[存储/99-production-readiness-operations-guide.md|存储数据域生产就绪指南]]
 - [[可靠性/README.md|可靠性工程域]]
 - [[安全/README.md|安全合规域]]

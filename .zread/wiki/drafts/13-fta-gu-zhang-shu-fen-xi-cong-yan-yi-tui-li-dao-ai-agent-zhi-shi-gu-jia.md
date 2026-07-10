@@ -1,6 +1,6 @@
 **故障树分析（Fault Tree Analysis, FTA）**是一种自顶向下的演绎式系统安全分析方法——它以系统中某个不期望事件为起点，逐层分解导致该事件发生的所有可能原因，直至找到最基本的根本原因，形成一棵结构化的因果树。本页将系统性地呈现 FTA 的理论根基、构建方法论、在 Kubernetes 运维中的实践落地，以及它如何成为 AI Agent 智能诊断的**知识骨架**。
 
-Sources: [01-fta-origin-and-evolution.md](topic-fta/01-fta-origin-and-evolution.md#L10-L13)
+Sources: [01-fta-origin-and-evolution.md](FTA故障树/01-fta-origin-and-evolution.md#L10-L13)
 
 ---
 
@@ -16,7 +16,7 @@ FTA 诞生于 1961 年贝尔电话实验室，最初用于"民兵"洲际弹道�
 
 第三阶段的本质转变在于：FTA 不再是一张静态的分析图，而是被建模为**可计算的知识图谱**，AI Agent 在其上进行动态推理、自动修复和经验学习。这正是本知识库将 FTA 定位为"AI Agent 知识骨架"的核心依据。
 
-Sources: [01-fta-origin-and-evolution.md](topic-fta/01-fta-origin-and-evolution.md#L14-L65)
+Sources: [01-fta-origin-and-evolution.md](FTA故障树/01-fta-origin-and-evolution.md#L14-L65)
 
 ---
 
@@ -49,7 +49,7 @@ FTA 的工程质量由以下五大原则保障：
 
 其中**MECE 完备性**是 FTA 质量的核心保障。"互斥"要求同一逻辑门下的子事件不重叠——例如"网络故障"不应与"DNS 解析失败"并列（后者是前者的子集），应拆分为"传输层网络故障""DNS 解析失败""防火墙策略阻断"三个互斥维度。"穷尽"要求覆盖所有可能性——例如"Pod 无法调度"不应只考虑"资源不足"和"节点不可用"，还需纳入亲和性规则、污点/容忍、PDB 约束、资源配额等。
 
-Sources: [04-fta-core-principles.md](topic-fta/04-fta-core-principles.md#L10-L107)
+Sources: [04-fta-core-principles.md](FTA故障树/04-fta-core-principles.md#L10-L107)
 
 ---
 
@@ -86,7 +86,7 @@ MCS4 = {kube-proxy 故障, iptables 损坏}    → 2阶
 
 FTA 采用 IEC 61025 标准定义的图形符号：矩形表示顶事件/中间事件（可分解），圆形表示底事件（不可再分解的基本故障），菱形表示未展开事件，三角形为转移符号。逻辑门包括 OR 门（弧形）、AND 门（平底）、k/n 投票门、抑制门、优先 AND 门和异或门六类。本知识库采用 `TE-{序号}` / `IE-{顶事件序号}.{序号}` / `BE-{序号}` / `HA-{底事件编号}.{序号}` 的统一编号体系，确保跨文档一致性。
 
-Sources: [02-fta-mathematical-foundations.md](topic-fta/02-fta-mathematical-foundations.md#L10-L108), [03-fta-symbol-system-and-standards.md](topic-fta/03-fta-symbol-system-and-standards.md#L10-L141)
+Sources: [02-fta-mathematical-foundations.md](FTA故障树/02-fta-mathematical-foundations.md#L10-L108), [03-fta-symbol-system-and-standards.md](FTA故障树/03-fta-symbol-system-and-standards.md#L10-L141)
 
 ---
 
@@ -134,7 +134,7 @@ graph TD
 
 在此基础上，本知识库还提供了 **36 个组件级 FTA 文档**，涵盖 Pod（80+ 底事件）、Node、API Server、etcd、DNS、Service、Ingress、HPA、证书、Webhook 准入控制、集群升级、ArgoCD 等全组件场景。每个 FTA 文档均包含 Mermaid 故障树图、底事件详细定义、JSON 工作流（支持 Agent 自动化遍历）以及 K8s 版本兼容说明。
 
-Sources: [kubernetes-fta-full-analysis.md](topic-fta/kubernetes-fta-full-analysis.md#L9-L196), [list/README.md](topic-fta/list/README.md#L1-L199)
+Sources: [kubernetes-fta-full-analysis.md](FTA故障树/kubernetes-fta-full-analysis.md#L9-L196), [list/README.md](FTA故障树/list/README.md#L1-L199)
 
 ---
 
@@ -160,7 +160,7 @@ flowchart LR
 
 **阶段五：验证与优化**——静态验证（历史故障覆盖率 ≥ 95%、逻辑一致性检查）、动态验证（混沌工程注入故障，对比 FTA 预测与实际表现）、专家评审。
 
-Sources: [05-fta-construction-process.md](topic-fta/05-fta-construction-process.md#L10-L200), [06-fta-verification-and-quality.md](topic-fta/06-fta-verification-and-quality.md#L10-L98)
+Sources: [05-fta-construction-process.md](FTA故障树/05-fta-construction-process.md#L10-L200), [06-fta-verification-and-quality.md](FTA故障树/06-fta-verification-and-quality.md#L10-L98)
 
 ---
 
@@ -223,7 +223,7 @@ flowchart TB
 
 Agent 执行核心逻辑（伪代码）为递归遍历故障树：遇到 OR 门时按概率排序并行检查所有子事件，返回第一个确认故障的路径；遇到 AND 门时顺序检查，任一正常即排除；遇到底事件时直接检查可观测数据（Metrics/Logs/Events）。修复时按成功率排序尝试修复动作，高风险操作需人工审批。每次故障处理后，Agent 记录诊断路径、更新概率数据、检测新的故障模式并提议扩展 FTA。
 
-Sources: [08-ai-agent-ops-revolution.md](topic-fta/08-ai-agent-ops-revolution.md#L10-L120), [09-fta-as-agent-knowledge-skeleton.md](topic-fta/09-fta-as-agent-knowledge-skeleton.md#L10-L281)
+Sources: [08-ai-agent-ops-revolution.md](FTA故障树/08-ai-agent-ops-revolution.md#L10-L120), [09-fta-as-agent-knowledge-skeleton.md](FTA故障树/09-fta-as-agent-knowledge-skeleton.md#L10-L281)
 
 ---
 
@@ -248,7 +248,7 @@ Sources: [08-ai-agent-ops-revolution.md](topic-fta/08-ai-agent-ops-revolution.md
 
 **总耗时**：MTTD 30s + MTTR 3min20s = **3min50s**（传统人工处理通常需要 30-60 分钟）。
 
-Sources: [09-fta-as-agent-knowledge-skeleton.md](topic-fta/09-fta-as-agent-knowledge-skeleton.md#L283-L385)
+Sources: [09-fta-as-agent-knowledge-skeleton.md](FTA故障树/09-fta-as-agent-knowledge-skeleton.md#L283-L385)
 
 ---
 
@@ -262,7 +262,7 @@ Sources: [09-fta-as-agent-knowledge-skeleton.md](topic-fta/09-fta-as-agent-knowl
 
 FTA-Agent 架构实现了工单生命周期的全自动化：**用户报障 → NLP 意图识别 → FTA 顶事件映射 → Agent 树遍历诊断 → 自动修复 → 验证关闭 → 学习反馈**。NLP 映射器通过关键词规则将工单文本映射到 FTA 事件（如"crashloopbackoff"→TE-3/BE-2.1，"certificate"→TE-7/BE-7.1），按匹配置信度排序后启动 FTA 导航。对于 FTA 已覆盖的故障路径，可实现 MTTD < 1min、MTTR < 5min 的全自动闭环。
 
-Sources: [11-fta-driven-runbook-automation.md](topic-fta/11-fta-driven-runbook-automation.md#L10-L172), [13-intelligent-ticket-processing.md](topic-fta/13-intelligent-ticket-processing.md#L10-L96)
+Sources: [11-fta-driven-runbook-automation.md](FTA故障树/11-fta-driven-runbook-automation.md#L10-L172), [13-intelligent-ticket-processing.md](FTA故障树/13-intelligent-ticket-processing.md#L10-L96)
 
 ---
 
@@ -276,7 +276,7 @@ Sources: [11-fta-driven-runbook-automation.md](topic-fta/11-fta-driven-runbook-a
 
 未来方向是构建**自进化的智能运维系统**：通过强化学习优化 FTA 路径权重（哪些分支概率最高、哪些修复最有效），通过联邦学习跨团队/跨集群共享 FTA 知识而不泄露敏感数据，通过数字孪生在虚拟环境中仿真故障场景、验证 FTA 完整性。最终目标是：Agent 从每次故障中学习，自动发现新的故障模式并提议扩展 FTA，经人工审核后纳入知识库——实现故障覆盖率的持续提升。
 
-Sources: [20-fta-llm-opportunities.md](topic-fta/20-fta-llm-opportunities.md#L10-L100)
+Sources: [20-fta-llm-opportunities.md](FTA故障树/20-fta-llm-opportunities.md#L10-L100)
 
 ---
 
@@ -293,7 +293,7 @@ Sources: [20-fta-llm-opportunities.md](topic-fta/20-fta-llm-opportunities.md#L10
 
 第一周的关键任务是选择**高频率 + 高影响 + 高 MTTR + 根因不明确**的故障场景。选择标准：发生 ≥ 5 次/季度、P0/P1 级别、解决时间 > 30 分钟。构建第一棵故障树时，推荐使用混合策略：第 1-2 层按影响范围分解（对齐 SLO），第 3-4 层按故障类型分解（对齐运维操作）。
 
-Sources: [23-fta-production-quick-start.md](topic-fta/23-fta-production-quick-start.md#L33-L118)
+Sources: [23-fta-production-quick-start.md](FTA故障树/23-fta-production-quick-start.md#L33-L118)
 
 ---
 

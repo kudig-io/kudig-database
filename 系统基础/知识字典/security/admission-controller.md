@@ -77,7 +77,7 @@ Admission Controller 是 Kubernetes API Server 中的插件机制，在对象持
 
 ## Related
 
-[[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+[[系统基础/知识字典/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
 
 
 <!-- risk-assessed -->

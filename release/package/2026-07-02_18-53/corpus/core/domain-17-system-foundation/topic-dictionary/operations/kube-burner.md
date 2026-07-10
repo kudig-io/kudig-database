@@ -69,6 +69,6 @@ kube-burner 是 Cloud-Bulldozer 开源的 Kubernetes 性能测试和压力测试
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler.md|Scheduler]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|混沌工程]]
+- [[domain-17-system-foundation/知识字典/scheduling/scheduler.md|Scheduler]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/operations/chaos-engineering.md|混沌工程]]

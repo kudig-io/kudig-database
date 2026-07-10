@@ -82,7 +82,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 资源在不同版本间的字段稳定性分为：
+[[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 资源在不同版本间的字段稳定性分为：
 - **GA (Stable)**: 大版本稳定，无特殊情况不变更
 - **Beta**: 可能在未来版本废弃，字段名可能变
 - **Alpha**: 可能随时被移除，不应在生产环境使用

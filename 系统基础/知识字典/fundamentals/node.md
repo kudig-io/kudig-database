@@ -80,7 +80,7 @@ Node（节点）是 Kubernetes 集群中的工作机器，可以是物理机或�
 
 ## Related
 
-[[系统基础/topic-dictionary/fundamentals/nodes.md|节点]]
+[[系统基础/知识字典/fundamentals/nodes.md|节点]]
 
 
 <!-- risk-assessed -->

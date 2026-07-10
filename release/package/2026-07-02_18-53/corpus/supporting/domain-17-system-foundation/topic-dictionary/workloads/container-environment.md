@@ -54,7 +54,7 @@ prerequisites:
 ### 容器自身信息
 
 - **主机名（Hostname）**：容器的主机名即其所在 Pod 的名称。可通过 `hostname` 命令或 libc 的 `gethostname` 函数调用获取
-- **Pod 名称和命名空间**：通过 [[domain-17-system-foundation/topic-dictionary/workloads/downward-api.md|Downward API]] 以环境变量的形式注入到容器中
+- **Pod 名称和命名空间**：通过 [[domain-17-system-foundation/知识字典/workloads/downward-api.md|Downward API]] 以环境变量的形式注入到容器中
 - **用户定义的环境变量**：在 Pod 定义中通过 `env` 或 `envFrom` 指定的环境变量，以及容器镜像构建时静态设置的环境变量，均对容器可见
 
 ### 集群信息
@@ -278,9 +278,9 @@ kubectl exec <pod> -- nslookup my-service.my-namespace.svc.cluster.local
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

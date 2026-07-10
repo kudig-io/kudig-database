@@ -68,6 +68,6 @@ Oxia 是 DataStax 开源的分布式元数据协调服务，设计为 Apache Pul
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]
-- [[系统基础/topic-dictionary/storage/tikv.md|TiKV]]
-- [[系统基础/topic-dictionary/storage/vineyard.md|Vineyard]]
+- [[系统基础/知识字典/fundamentals/etcd.md|etcd]]
+- [[系统基础/知识字典/storage/tikv.md|TiKV]]
+- [[系统基础/知识字典/storage/vineyard.md|Vineyard]]

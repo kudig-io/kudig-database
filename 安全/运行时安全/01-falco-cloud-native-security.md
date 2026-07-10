@@ -1399,7 +1399,7 @@ Falco 0.36+ 引入了插件系统，支持扩展事件源和字段提取器。�
 
 ## Related
 
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

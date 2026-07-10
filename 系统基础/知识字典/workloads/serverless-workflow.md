@@ -68,6 +68,6 @@ Serverless Workflow 是 CNCF Sandbox 项目，定义了事件驱动工作流的�
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/knative.md|Knative]]
-- [[系统基础/topic-dictionary/platform-engineering/dapr.md|Dapr]]
-- [[系统基础/topic-dictionary/platform-engineering/nats.md|NATS]]
+- [[系统基础/知识字典/specialized-workloads/knative.md|Knative]]
+- [[系统基础/知识字典/platform-engineering/dapr.md|Dapr]]
+- [[系统基础/知识字典/platform-engineering/nats.md|NATS]]

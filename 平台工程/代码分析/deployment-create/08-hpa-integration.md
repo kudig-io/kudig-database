@@ -434,10 +434,10 @@ Events:
 ## Related
 
 - [[entities/kubernetes.md|kubernetes]]
-- [[系统基础/topic-dictionary/workloads/replicaset.md|replicaset]]
-- [[平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md|03-replicaset-controller]]
-- [[平台工程/topic-code-analysis/deployment-create/05-deployment-status.md|05-deployment-status]]
-- [[平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md|02-deployment-controller]]
+- [[系统基础/知识字典/workloads/replicaset.md|replicaset]]
+- [[平台工程/代码分析/deployment-create/03-replicaset-controller.md|03-replicaset-controller]]
+- [[平台工程/代码分析/deployment-create/05-deployment-status.md|05-deployment-status]]
+- [[平台工程/代码分析/deployment-create/02-deployment-controller.md|02-deployment-controller]]
 
 
 <!-- risk-assessed -->

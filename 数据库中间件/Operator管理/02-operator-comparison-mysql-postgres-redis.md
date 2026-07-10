@@ -59,7 +59,7 @@ prerequisites:
 
 ## 相关
 
-- [[数据库中间件/05-operator-management/01-database-operator-patterns.md|01 database operator patterns]]
+- [[数据库中间件/Operator管理/01-database-operator-patterns.md|01 database operator patterns]]
 
 
 <!-- risk-assessed -->

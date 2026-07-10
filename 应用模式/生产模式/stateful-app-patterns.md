@@ -279,7 +279,7 @@ spec:
 
 ## 7. 跨域协作
 
-- **Pod 可用性与 PDB**: 见 [[topic-production-patterns/pod-availability-lifecycle|Pod 可用性生产模式]]
+- **Pod 可用性与 PDB**: 见 [[生产模式/pod-availability-lifecycle|Pod 可用性生产模式]]
 - **存储备份恢复深入**: 见 `存储/01-k8s-storage/15-storage-disaster-recovery.md`
 - **数据库专项运维**: 见 `数据库中间件/01-databases/` (PostgreSQL/MySQL/Redis/Etcd 生产指南)
 - **灾备 Runbook**: 见 `可靠性/09-disaster-recovery-playbooks/03-disaster-recovery-bc-runbook.md`

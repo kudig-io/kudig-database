@@ -643,9 +643,9 @@ data:
 
 ## 相关主题
 
-- [[AI基础设施/03-agent-runtime/16-coze-agent-platform|Coze Agent平台]]
-- [[AI基础设施/03-agent-runtime/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
-- [[AI基础设施/03-agent-runtime/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
+- [[AI基础设施/Agent运行时/16-coze-agent-platform|Coze Agent平台]]
+- [[AI基础设施/Agent运行时/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
+- [[AI基础设施/Agent运行时/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
 
 ## 参考资料
 

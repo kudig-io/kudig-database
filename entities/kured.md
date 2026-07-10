@@ -91,8 +91,8 @@ Kured (KUbernetes REboot Daemon) 是一个 Kubernetes 守护进程，用于在�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kured
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

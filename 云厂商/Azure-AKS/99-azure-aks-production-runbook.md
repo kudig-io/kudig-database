@@ -392,11 +392,11 @@ az aks nodepool add \
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
-- [[云厂商/04-azure-aks/azure-aks-overview.md|AKS 概览]]
-- [[云厂商/04-azure-aks/02-aks-cluster-lifecycle-upgrades.md|AKS 集群生命周期与升级]]
-- [[云厂商/04-azure-aks/03-aks-networking-azure-cni.md|AKS Azure CNI 网络]]
-- [[云厂商/04-azure-aks/05-aks-identity-workload-identity.md|AKS 身份与 Workload Identity]]
-- [[云厂商/04-azure-aks/06-aks-troubleshooting-playbook.md|AKS 故障排查手册]]
+- [[云厂商/Azure-AKS/azure-aks-overview.md|AKS 概览]]
+- [[云厂商/Azure-AKS/02-aks-cluster-lifecycle-upgrades.md|AKS 集群生命周期与升级]]
+- [[云厂商/Azure-AKS/03-aks-networking-azure-cni.md|AKS Azure CNI 网络]]
+- [[云厂商/Azure-AKS/05-aks-identity-workload-identity.md|AKS 身份与 Workload Identity]]
+- [[云厂商/Azure-AKS/06-aks-troubleshooting-playbook.md|AKS 故障排查手册]]
 - [[安全/README.md|安全合规域]]
 - [[可观测性/README.md|可观测性域]]
 

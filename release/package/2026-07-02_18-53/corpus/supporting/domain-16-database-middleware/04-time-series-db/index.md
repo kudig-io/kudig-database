@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-16-database-middleware/04-time-series-db/01-prometheus-tsdb-deep-dive.md|Prometheus Tsdb Deep Dive]]
-- [[domain-16-database-middleware/04-time-series-db/02-influxdb-vs-timescaledb.md|Influxdb Vs Timescaledb]]
-- [[domain-16-database-middleware/04-time-series-db/03-victoriametrics-on-kubernetes.md|Victoriametrics On Kubernetes]]
+- [[domain-16-database-middleware/时序数据库/01-prometheus-tsdb-deep-dive.md|Prometheus Tsdb Deep Dive]]
+- [[domain-16-database-middleware/时序数据库/02-influxdb-vs-timescaledb.md|Influxdb Vs Timescaledb]]
+- [[domain-16-database-middleware/时序数据库/03-victoriametrics-on-kubernetes.md|Victoriametrics On Kubernetes]]
 

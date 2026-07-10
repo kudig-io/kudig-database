@@ -795,23 +795,23 @@ capsh --decode=<hex>
 ```
 ### 相关文档
 
-- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [Pod 故障排查](../[[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
 - [RBAC 故障排查](./01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
+- [Webhook/准入控制故障排查](../[[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
 
 ```
 

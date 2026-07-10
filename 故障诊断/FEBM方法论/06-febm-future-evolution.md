@@ -4019,24 +4019,24 @@ FEBM 不是静态的方法论,而是一个持续演进的生态系统。随着�
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[故障诊断/topic-febm/MOC.md|topic-febm MOC]]
-- [[故障诊断/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/topic-febm/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
-- [[故障诊断/topic-febm/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
-- [[故障诊断/topic-febm/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
-- [[故障诊断/topic-febm/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[故障诊断/topic-febm/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
-- [[故障诊断/topic-febm/07-febm-appendix.md|第七章:附录]]
-- [[故障诊断/topic-febm/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[故障诊断/topic-febm/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
-- [[故障诊断/topic-febm/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
+- [[故障诊断/FEBM方法论/MOC.md|topic-febm MOC]]
+- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
+- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
+- [[故障诊断/FEBM方法论/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
+- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
+- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
+- [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]]
+- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
+- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
+- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
 
 ## See Also
 
-- [[故障诊断/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
-- [[故障诊断/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
-- [[故障诊断/topic-febm/07-febm-appendix.md|07-febm-appendix]]
-- [[故障诊断/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
+- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|05-febm-construction-methodology]]
+- [[故障诊断/FEBM方法论/07-febm-appendix.md|07-febm-appendix]]
+- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|08-febm-production-quick-start]]
 
 
 <!-- risk-assessed -->

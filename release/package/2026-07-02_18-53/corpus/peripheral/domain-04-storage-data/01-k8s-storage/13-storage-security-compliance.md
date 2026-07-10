@@ -1189,7 +1189,7 @@ main
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/storage-index.md|Storage 存储知识图谱索引]]
 
 
 <!-- risk-assessed -->

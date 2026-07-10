@@ -1052,7 +1052,7 @@ K8s 1.33/1.34安全增强:
 - research/ — tag hub
 
 - 79-polar-research
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

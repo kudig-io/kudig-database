@@ -89,11 +89,11 @@ Falco 是 CNCF 毕业项目，提供云原生运行时安全检测能力。它�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/trivy.md|Trivy]]
-- [[domain-17-system-foundation/topic-dictionary/security/security-context.md|Security Context]]
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/security/trivy.md|Trivy]]
+- [[domain-17-system-foundation/知识字典/security/security-context.md|Security Context]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

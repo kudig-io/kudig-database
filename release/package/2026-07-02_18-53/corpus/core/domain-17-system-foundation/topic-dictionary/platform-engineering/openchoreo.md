@@ -70,6 +70,6 @@ OpenChoreo 是 WSO2 开源的内部开发者平台（IDP），基于 Kubernetes 
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/score.md|Score]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/score.md|Score]]

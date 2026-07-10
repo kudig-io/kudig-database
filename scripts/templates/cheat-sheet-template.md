@@ -236,8 +236,8 @@ fi
 
 - [官方文档]({{URL}})
 - [深度文档](../domain-{{N}}-{{name}}/{{doc}}.md)
-- [FTA 故障树](../故障诊断/topic-fta/list/{{component}}-fta.md)
-- [相关 Skill](../故障诊断/topic-skills/{{NN}}-{{scenario}}.md)
+- [FTA 故障树](../故障诊断/FTA故障树/list/{{component}}-fta.md)
+- [相关 Skill](../故障诊断/技能体系/{{NN}}-{{scenario}}.md)
 
 ---
 

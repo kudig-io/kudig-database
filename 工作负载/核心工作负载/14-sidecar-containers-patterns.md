@@ -868,7 +868,7 @@ spec:
 | **localhost** | 127.0.0.1 | TCP/HTTP 标准 | 需要端口协调 | 代理、API 调用 |
 | **Unix Socket** | 共享 Volume 中的 socket | 高性能、安全 | 需要两端支持 | 高性能 IPC |
 | **共享内存** | emptyDir (medium: Memory) | 最高性能 | 复杂、需要锁机制 | 极高性能场景 |
-| **环境变量** | [[系统基础/topic-dictionary/workloads/downward-api.md|Downward API]] | 简单 | 只能传递静态值 | 配置传递 |
+| **环境变量** | [[系统基础/知识字典/workloads/downward-api.md|Downward API]] | 简单 | 只能传递静态值 | 配置传递 |
 
 ### 通信配置示例
 
@@ -1113,7 +1113,7 @@ spec:
 ---
 
 **参考资料**:
-- [KEP-753: [[系统基础/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
+- [KEP-753: [[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
 - [Kubernetes Sidecar 模式](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
 - [[entities/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
 

@@ -172,18 +172,18 @@ k8s_versions:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/240-ack-ecs-compute.md|240-ack-ecs-compute]]
 - [[entities/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
 - [[entities/kubernetes.md|kubernetes]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
-- [[domain-12-cloud-providers/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[domain-12-cloud-providers/阿里云/apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[domain-12-cloud-providers/阿里云/apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[domain-12-cloud-providers/阿里云/apsara/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- [[domain-12-cloud-providers/阿里云/apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
 
 
 <!-- risk-assessed -->

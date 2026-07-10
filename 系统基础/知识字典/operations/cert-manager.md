@@ -83,11 +83,11 @@ Certificate → CertificateRequest → Order → Challenge (HTTP-01/DNS-01) → 
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/security/certificate-authority.md|Certificate Authority]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/security/webhook.md|Webhook]]
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/security/certificate-authority.md|Certificate Authority]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/security/webhook.md|Webhook]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
 
 
 <!-- risk-assessed -->

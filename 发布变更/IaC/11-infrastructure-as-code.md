@@ -980,8 +980,8 @@ creation_rules:
 
 - 22-production-checklist
 - [[工作负载/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
 
 ## See Also
 

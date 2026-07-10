@@ -574,11 +574,11 @@ hostname
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|nodes]]
+- [[系统基础/知识字典/fundamentals/nodes.md|nodes]]
 
 ```
 

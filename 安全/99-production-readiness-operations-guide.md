@@ -150,7 +150,7 @@ kubeadm certs renew all
 systemctl restart kubelet
 kubectl get nodes
 ```
-更完整的轮换流程与回滚方案参见 [[安全/06-compliance/10-certificate-management.md|证书管理与 TLS 配置]]。
+更完整的轮换流程与回滚方案参见 [[安全/合规审计/10-certificate-management.md|证书管理与 TLS 配置]]。
 
 ### 2.2 RBAC 过度授权与横向移动
 
@@ -171,7 +171,7 @@ kubectl get clusterroles -o json | jq -r '
     (.resources[]? == "pods" and (.verbs[]? == "create" or .verbs[]? == "*"))) |
   .metadata.name'
 ```
-推荐采用最小权限角色模板，具体矩阵参考 [[安全/01-identity-access/07-rbac-matrix-configuration.md|RBAC 权限矩阵表]]。
+推荐采用最小权限角色模板，具体矩阵参考 [[安全/身份与访问/07-rbac-matrix-configuration.md|RBAC 权限矩阵表]]。
 
 ### 2.3 容器镜像供应链污染
 
@@ -188,7 +188,7 @@ cosign verify --key cosign.pub <registry>/<image>:<tag>
 helm upgrade --install kyverno kyverno/kyverno -n kyverno --create-namespace
 kubectl apply -f policies/image-signature-verification.yaml
 ```
-签名、SBOM 与 SLSA 实施细节参见 [[安全/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概览]]。
+签名、SBOM 与 SLSA 实施细节参见 [[安全/供应链/01-supply-chain-security-overview.md|供应链安全概览]]。
 
 ### 2.4 运行时逃逸与异常行为未检测
 
@@ -204,7 +204,7 @@ kubectl logs -n falco -l app.kubernetes.io/name=falco | tail -n 50
 # 检查节点 Seccomp / AppArmor / SELinux 状态
 kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.osImage}{"\t"}{.status.nodeInfo.kernelVersion}{"\n"}{end}'
 ```
-规则调优与事件响应流程参考 [[安全/03-runtime-security/99-falco-runtime-security-guide.md|Falco 运行时安全指南]]。
+规则调优与事件响应流程参考 [[安全/运行时安全/99-falco-runtime-security-guide.md|Falco 运行时安全指南]]。
 
 ### 2.5 网络平面默认互通导致东西向扩散
 
@@ -230,7 +230,7 @@ EOF
 
 # ACK 等云厂商可叠加安全组 + CloudFirewall / Security Group 限制节点级流量
 ```
-网络分段与零信任架构设计参考 [[安全/02-network-security/19-zero-trust-architecture.md|零信任架构]]。
+网络分段与零信任架构设计参考 [[安全/网络安全/19-zero-trust-architecture.md|零信任架构]]。
 
 ---
 
@@ -399,13 +399,13 @@ kubectl get sa -n production <app-sa> -o json | jq '.metadata.annotations["eks.a
 
 ### 本域核心文档
 
-- [[安全/01-identity-access/07-rbac-matrix-configuration.md|RBAC 权限矩阵表]] — 最小权限角色设计参考
-- [[安全/04-policy-governance/06-pod-security-standards.md|Pod 安全标准详解]] — PSA 分级与迁移
-- [[安全/06-compliance/10-certificate-management.md|证书管理与 TLS 配置]] — 集群证书与 cert-manager 运维
-- [[安全/02-network-security/19-zero-trust-architecture.md|零信任架构]] — 网络分段与身份驱动访问
-- [[安全/03-runtime-security/99-falco-runtime-security-guide.md|Falco 运行时安全指南]] — 运行时威胁检测
-- [[安全/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概览]] — 镜像签名与 SBOM
-- [[安全/07-incident-response/20-incident-response-process.md|安全事件响应流程]] — 事件响应与取证
+- [[安全/身份与访问/07-rbac-matrix-configuration.md|RBAC 权限矩阵表]] — 最小权限角色设计参考
+- [[安全/策略治理/06-pod-security-standards.md|Pod 安全标准详解]] — PSA 分级与迁移
+- [[安全/合规审计/10-certificate-management.md|证书管理与 TLS 配置]] — 集群证书与 cert-manager 运维
+- [[安全/网络安全/19-zero-trust-architecture.md|零信任架构]] — 网络分段与身份驱动访问
+- [[安全/运行时安全/99-falco-runtime-security-guide.md|Falco 运行时安全指南]] — 运行时威胁检测
+- [[安全/供应链/01-supply-chain-security-overview.md|供应链安全概览]] — 镜像签名与 SBOM
+- [[生产运维/事件响应/20-incident-response-process.md|安全事件响应流程]] — 事件响应与取证
 
 ### 相关域参考
 

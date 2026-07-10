@@ -116,7 +116,7 @@ kubectl delete crd <crd-name>
 ```
 ## 交叉引用
 
-- [扩展 Kubernetes API](./extending-[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
+- [扩展 Kubernetes API](./extending-[[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
 - [Operator 模式](./operator-pattern.md) — CRD + Controller 最佳实践
 - [Admission Webhook](./admission-webhook-good-practices.md) — CR 验证与变更
 
@@ -126,11 +126,11 @@ kubectl delete crd <crd-name>
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
 
 
 <!-- risk-assessed -->

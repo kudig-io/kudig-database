@@ -56,7 +56,7 @@ authors:
 
 System Foundation 是 Kubernetes 生产集群的“底座”，涵盖 Linux 操作系统、服务器硬件以及 Kubernetes 事件系统。底座不稳，上层控制面（etcd、API Server、kubelet）和负载都会出现偶发、难以定位的故障。根据当前内容缺口分析，domain-17-system-foundation 亟需补齐 **节点时间同步**、**systemd 与 kubelet 服务管理**、**内核实时补丁**、**OS 镜像与节点加固基线** 以及 **NUMA / CPU 拓扑感知** 等生产就绪动作。本指南聚焦该域的生产就绪检查清单、关键风险缓解、日常运维操作与故障排查速查，帮助 SRE 在上线前与运行期建立可观测、可回滚、可审计的系统基线。
 
-> 本指南与 [[domain-17-system-foundation/01-linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]、[[domain-17-system-foundation/02-hardware/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]] 互补，避免重复罗列通用命令，重点补充生产就绪视角的落地动作。
+> 本指南与 [[domain-17-system-foundation/01-linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]、[[domain-17-system-foundation/硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]] 互补，避免重复罗列通用命令，重点补充生产就绪视角的落地动作。
 
 ---
 
@@ -80,13 +80,13 @@ System Foundation 是 Kubernetes 生产集群的“底座”，涵盖 Linux 操�
    通过 `/etc/sysctl.d/` 或 CloudInit 固化必须参数，包括 `net.ipv4.ip_forward=1`、`net.bridge.bridge-nf-call-iptables=1`、`vm.swappiness=1`、`fs.inotify.max_user_watches=524288`、`net.netfilter.nf_conntrack_max` 等；绝对避免使用已废弃的 `tcp_tw_recycle`，并注意 conntrack 与 CNI 的交互。
 
 6. **节点资源压力阈值已合理设置**  
-   根据实际磁盘与内存规格配置 `evictionHard`、`evictionSoft`、`imageGCHighThresholdPercent`、`imageGCLowThresholdPercent`，并在低峰期人为触发验证。阈值设置过晚会导致服务降级，设置过早则造成资源浪费。参考 [[domain-17-system-foundation/03-kubernetes-events/06-node-lifecycle-condition-events.md|节点生命周期与状态事件]]。
+   根据实际磁盘与内存规格配置 `evictionHard`、`evictionSoft`、`imageGCHighThresholdPercent`、`imageGCLowThresholdPercent`，并在低峰期人为触发验证。阈值设置过晚会导致服务降级，设置过早则造成资源浪费。参考 [[domain-17-system-foundation/K8s事件/06-node-lifecycle-condition-events.md|节点生命周期与状态事件]]。
 
 7. **磁盘分区与 I/O 基线满足 etcd/容器运行时要求**  
    `/var/lib/etcd`、`/var/lib/containerd` 与 `/var/log/pods` 应独立分区或独立磁盘，避免根分区写满导致节点 NotReady。etcd fsync 延迟目标 < 10 ms，PLEG 敏感路径磁盘 `await` < 50 ms；建议定期使用 `fio` 或 `etcdctl check perf` 复测。
 
 8. **硬件健康监控与告警已接入**  
-   部署 Node Problem Detector（NPD）并配置 Prometheus 规则覆盖 SMART/NVMe 寿命、ECC 内存错误、CPU MCE、温度、IPMI SEL。对可纠正错误设置增长阈值告警，对不可纠正错误立即触发 P0 隔离。参考 [[domain-17-system-foundation/02-hardware/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]]。
+   部署 Node Problem Detector（NPD）并配置 Prometheus 规则覆盖 SMART/NVMe 寿命、ECC 内存错误、CPU MCE、温度、IPMI SEL。对可纠正错误设置增长阈值告警，对不可纠正错误立即触发 P0 隔离。参考 [[domain-17-system-foundation/硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]]。
 
 9. **日志与审计 retention 已规划**  
    `systemd-journald` 配置 `Storage=persistent` 与 `SystemMaxUse`（如 2G）；容器日志启用 `--log-max-size=100Mi --log-max-files=5`；logrotate 策略必须覆盖 `/var/log/pods`、EmptyDir 日志以及 Kubernetes 审计日志，防止磁盘满导致驱逐。
@@ -255,9 +255,9 @@ System Foundation 的问题往往会“向上透传”为集群、网络、存�
 - [[domain-17-system-foundation/01-linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]
 - [[domain-17-system-foundation/01-linux/06-linux-performance-tuning.md|Linux 性能调优]]
 - [[domain-17-system-foundation/01-linux/07-linux-security-hardening.md|Linux 安全加固]]
-- [[domain-17-system-foundation/02-hardware/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]]
-- [[domain-17-system-foundation/03-kubernetes-events/06-node-lifecycle-condition-events.md|节点生命周期与状态事件]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|kubectl 场景速查卡]]
+- [[domain-17-system-foundation/硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]]
+- [[domain-17-system-foundation/K8s事件/06-node-lifecycle-condition-events.md|节点生命周期与状态事件]]
+- [[domain-17-system-foundation/速查卡/kubectl-scene-cheatsheet.md|kubectl 场景速查卡]]
 - 节点时间同步指南（待补充）（待补充）
 - systemd 与 kubelet 服务管理（待补充）（待补充）
 

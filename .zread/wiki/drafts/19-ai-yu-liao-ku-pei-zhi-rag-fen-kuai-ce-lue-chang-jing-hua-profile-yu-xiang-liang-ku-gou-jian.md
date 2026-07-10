@@ -79,7 +79,7 @@ fta_splitter = MarkdownHeaderTextSplitter(
 )
 ```
 
-Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L9-L23), [pod-fta.md](topic-fta/list/pod-fta.md#L1-L40)
+Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L9-L23), [pod-fta.md](FTA故障树/list/pod-fta.md#L1-L40)
 
 ### 策略二：递归字符分块 + 重叠
 
@@ -110,7 +110,7 @@ Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L25-L
 | 整文档保留 | `topic-cheat-sheet` | 全文 | 文档整体 | 文档级 |
 | 按条目分块 | `topic-dictionary` | ~500 字符 | H2/H3 条目 | 条目级 |
 
-Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L62-L72), [k8s.md](topic-cheat-sheet/k8s.md#L1-L30)
+Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L62-L72), [k8s.md](速查卡/k8s.md#L1-L30)
 
 ## 元数据增强：让向量检索从"模糊匹配"升级为"精准定位"
 
@@ -165,7 +165,7 @@ flowchart LR
 
 **路径提取**是最可靠的方式——`domain-3-control-plane` 直接映射为 `domain: control-plane`，`topic-skills/01-node-notready.md` 映射为 `domain: skills, topic: node-ops`。**YAML 前置元数据**在 Skill 文档中尤为丰富，例如 `SKILL-NODE-001` 包含了 `trigger_keywords`（NotReady、NodeNotReady 等）和 `k8s_versions`（1.28-1.32），这些字段可直接作为向量数据库的过滤条件，实现"查找适用于 K8s 1.30 的 Node NotReady 诊断步骤"这类精准查询。**外部索引文件**则提供了跨文档的关联信息，`tags-index.md` 将同一标签（如 `etcd`）下的所有文档聚合在一起，可用于构建 Chunk 间的显式链接关系。
 
-Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L49-L59), [tags-index.md](metadata/tags-index.md#L1-L80), [difficulty-index.md](metadata/difficulty-index.md#L1-L84), [01-node-notready.md](topic-skills/01-node-notready.md#L1-L40)
+Sources: [rag-chunking-strategy.md](corpus-config/rag-chunking-strategy.md#L49-L59), [tags-index.md](metadata/tags-index.md#L1-L80), [difficulty-index.md](metadata/difficulty-index.md#L1-L84), [01-node-notready.md](技能体系/01-node-notready.md#L1-L40)
 
 ## 场景化 Profile：四套预置语料配置
 

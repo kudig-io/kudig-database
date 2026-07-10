@@ -78,7 +78,7 @@ Kuadrant 是一个 Kubernetes Gateway API 的策略引擎，为 Gateway API 添�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kuadrant
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

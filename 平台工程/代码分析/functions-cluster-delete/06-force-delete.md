@@ -548,9 +548,9 @@ echo "=== Node ${NODE_NAME} has been fully reset ==="
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/git.md|git]]
 
 ```
 

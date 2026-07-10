@@ -88,11 +88,11 @@ Envoy 通过 xDS（发现服务 API）动态获取配置：
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/networkpolicy.md|NetworkPolicy]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

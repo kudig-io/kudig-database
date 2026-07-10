@@ -73,9 +73,9 @@ SPIRE（SPIFFE Runtime Environment）是 CNCF 毕业项目，实现 SPIFFE 规�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
-- [[domain-17-system-foundation/topic-dictionary/operations/cert-manager.md|cert-manager]]
-- [[domain-17-system-foundation/topic-dictionary/networking/istio.md|Istio]]
+- [[domain-17-system-foundation/知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[domain-17-system-foundation/知识字典/operations/cert-manager.md|cert-manager]]
+- [[domain-17-system-foundation/知识字典/networking/istio.md|Istio]]
 
 
 <!-- risk-assessed -->

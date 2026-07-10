@@ -75,29 +75,29 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[生态参考/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]] |  | index, reference |  |
-| 2 | [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]] |  | index, reference, backup-restore |  |
-| 3 | [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]] |  | index, reference |  |
-| 4 | [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]] |  | index, reference |  |
-| 5 | [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]] |  | index, reference |  |
-| 6 | [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]] |  | index, reference |  |
-| 7 | [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]] |  | index, reference |  |
-| 8 | [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]] |  | index, reference |  |
-| 9 | [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]] |  | index, reference, daily-ops |  |
-| 10 | [[生态参考/topic-index/helm-index.md|Helm 全局索引]] |  | index, reference |  |
-| 11 | [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]] |  | index, reference |  |
-| 12 | [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]] |  | index, reference, networking |  |
-| 13 | [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]] |  | index, reference |  |
-| 14 | [[生态参考/topic-index/node-index.md|Node 知识图谱索引]] |  | index, reference |  |
-| 15 | [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]] |  | index, reference, observability |  |
-| 16 | [[生态参考/topic-index/openkruise-index.md|OpenKruise 全局索引]] |  | index, reference |  |
-| 17 | [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]] |  | index, reference |  |
-| 18 | [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]] |  | index, reference |  |
-| 19 | [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]] |  | index, reference |  |
-| 20 | [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]] |  | index, reference, security |  |
-| 21 | [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]] |  | index, reference |  |
-| 22 | [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]] |  | index, reference, storage |  |
-| 23 | [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]] |  | index, reference |  |
+| 1 | [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]] |  | index, reference |  |
+| 2 | [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]] |  | index, reference, backup-restore |  |
+| 3 | [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]] |  | index, reference |  |
+| 4 | [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]] |  | index, reference |  |
+| 5 | [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]] |  | index, reference |  |
+| 6 | [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]] |  | index, reference |  |
+| 7 | [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]] |  | index, reference |  |
+| 8 | [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]] |  | index, reference |  |
+| 9 | [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]] |  | index, reference, daily-ops |  |
+| 10 | [[生态参考/领域索引/helm-index.md|Helm 全局索引]] |  | index, reference |  |
+| 11 | [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]] |  | index, reference |  |
+| 12 | [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]] |  | index, reference, networking |  |
+| 13 | [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]] |  | index, reference |  |
+| 14 | [[生态参考/领域索引/node-index.md|Node 知识图谱索引]] |  | index, reference |  |
+| 15 | [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]] |  | index, reference, observability |  |
+| 16 | [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]] |  | index, reference |  |
+| 17 | [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]] |  | index, reference |  |
+| 18 | [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]] |  | index, reference |  |
+| 19 | [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]] |  | index, reference |  |
+| 20 | [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]] |  | index, reference, security |  |
+| 21 | [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]] |  | index, reference |  |
+| 22 | [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]] |  | index, reference, storage |  |
+| 23 | [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]] |  | index, reference |  |
 
 ---
 
@@ -126,15 +126,15 @@ prerequisites:
 - [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
 - [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
-- [[网络/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[可观测性/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[网络/K8s网络核心/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[可观测性/总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[集群基础/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[集群基础/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[存储/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[存储/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- [[集群基础/kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[集群基础/架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[存储/K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[存储/K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 
 
 <!-- risk-assessed -->

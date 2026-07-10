@@ -67,6 +67,6 @@ Vineyard（v6d）是 CNCF Sandbox 项目，为 Kubernetes 上的 AI/ML 和大数
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/fluid.md|Fluid]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray.md|Ray]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[domain-17-system-foundation/知识字典/storage/fluid.md|Fluid]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ray.md|Ray]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]

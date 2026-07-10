@@ -64,7 +64,7 @@ authors:
 
 ## 1. 生产环境检查清单
 
-在将任一数据库或中间件实例标记为 `Production Ready` 之前，建议逐项核对以下检查点。本清单基于 [[01-databases/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]] 与 [[05-operator-management/01-database-operator-patterns.md|数据库 Operator 设计模式]] 中的生产要求提炼而成。
+在将任一数据库或中间件实例标记为 `Production Ready` 之前，建议逐项核对以下检查点。本清单基于 [[数据库/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]] 与 [[Operator管理/01-database-operator-patterns.md|数据库 Operator 设计模式]] 中的生产要求提炼而成。
 
 建议将本清单嵌入平台工程团队的 Service Catalog 或 GitOps 模板中，作为数据库实例上架（onboarding）的强制门禁。每次重大变更（版本升级、存储扩容、网络策略调整）后，应重新执行相关检查项并留存审计记录。对于核心生产实例，建议每季度开展一次全面复评。
 
@@ -307,17 +307,17 @@ kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --pod-selector='
 
 - [[README.md|Database & Middleware 目录]] — 域内结构与索引
 - [[01-database-on-kubernetes-guide.md|Kubernetes 数据库部署指南]] — 通用部署模式
-- [[01-databases/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
-- [[01-databases/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库运维管理]]
-- [[01-databases/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
-- [[01-databases/06-redis-enterprise-cache.md|Redis 企业级缓存]]
-- [[01-databases/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes Strimzi 实践]]
-- [[01-databases/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业指南]]
-- [[03-message-queues/03-message-queue-comparison.md|消息队列选型]]
-- [[04-time-series-db/01-prometheus-tsdb-deep-dive.md|Prometheus TSDB 深度解析]]
-- [[05-operator-management/01-database-operator-patterns.md|数据库 Operator 设计模式]]
-- [[05-operator-management/03-operator-lifecycle-management.md|Operator 生命周期管理]]
-- [[06-data-streaming/01-cdc-change-data-capture.md|CDC 变更数据捕获]]
+- [[数据库/01-mysql-enterprise-database.md|MySQL 企业级数据库运维管理]]
+- [[数据库/02-postgresql-enterprise-database.md|PostgreSQL 企业级数据库运维管理]]
+- [[数据库/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 企业级实践]]
+- [[数据库/06-redis-enterprise-cache.md|Redis 企业级缓存]]
+- [[数据库/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes Strimzi 实践]]
+- [[数据库/99-cloudnativepg-enterprise-guide.md|CloudNativePG 企业指南]]
+- [[消息队列/03-message-queue-comparison.md|消息队列选型]]
+- [[时序数据库/01-prometheus-tsdb-deep-dive.md|Prometheus TSDB 深度解析]]
+- [[Operator管理/01-database-operator-patterns.md|数据库 Operator 设计模式]]
+- [[Operator管理/03-operator-lifecycle-management.md|Operator 生命周期管理]]
+- [[数据流/01-cdc-change-data-capture.md|CDC 变更数据捕获]]
 
 ### 计划补充的关键主题
 

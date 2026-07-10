@@ -190,18 +190,18 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/243-ack-ram-authorization.md|243-ack-ram-authorization]]
 - [[entities/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
 - [[entities/kubernetes.md|kubernetes]]
 
 ## See Also
 
-- [[云厂商/15-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
 - logging.md|251-apsara-stack-sls-logging]]
-- [[云厂商/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[云厂商/15-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
 
 
 <!-- risk-assessed -->

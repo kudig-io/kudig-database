@@ -80,11 +80,11 @@ Grafana 是开源的数据可视化平台，支持丰富的图表类型和数据
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
-- [[domain-17-system-foundation/topic-dictionary/observability/metrics-server.md|Metrics Server]]
-- [[domain-17-system-foundation/topic-dictionary/observability/kubernetes-events.md|Kubernetes Events]]
-- [[domain-17-system-foundation/topic-dictionary/observability/logging.md|Logging]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|Alertmanager]]
+- [[domain-17-system-foundation/知识字典/observability/metrics-server.md|Metrics Server]]
+- [[domain-17-system-foundation/知识字典/observability/kubernetes-events.md|Kubernetes Events]]
+- [[domain-17-system-foundation/知识字典/observability/logging.md|Logging]]
 
 
 <!-- risk-assessed -->

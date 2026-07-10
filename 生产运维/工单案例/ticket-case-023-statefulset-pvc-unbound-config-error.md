@@ -60,9 +60,9 @@ authors:
 relationships:
 - target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-004-csi-plugin-missing-after-scale.md]]'
+- target: '[[生产运维/工单案例/ticket-case-004-csi-plugin-missing-after-scale.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
+- target: '[[生产运维/工单案例/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
 ---
 

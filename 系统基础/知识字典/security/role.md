@@ -84,11 +84,11 @@ rules:
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/rbac.md|Rbac]]
-- [[系统基础/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[系统基础/topic-dictionary/security/rolebinding.md|Rolebinding]]
-- [[系统基础/topic-dictionary/security/clusterrolebinding.md|Clusterrolebinding]]
-- [[系统基础/topic-dictionary/security/service-account.md|Service Account]]
+- [[系统基础/知识字典/security/rbac.md|Rbac]]
+- [[系统基础/知识字典/security/clusterrole.md|Clusterrole]]
+- [[系统基础/知识字典/security/rolebinding.md|Rolebinding]]
+- [[系统基础/知识字典/security/clusterrolebinding.md|Clusterrolebinding]]
+- [[系统基础/知识字典/security/service-account.md|Service Account]]
 
 
 <!-- risk-assessed -->

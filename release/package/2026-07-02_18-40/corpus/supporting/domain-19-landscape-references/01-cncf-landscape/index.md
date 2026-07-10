@@ -23,8 +23,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-19-landscape-references/01-cncf-landscape/01-cncf-integration-guide.md|Cncf Integration Guide]]
-- [[domain-19-landscape-references/01-cncf-landscape/02-cncf-learning-paths.md|Cncf Learning Paths]]
-- [[domain-19-landscape-references/01-cncf-landscape/03-cncf-selection-guide.md|Cncf Selection Guide]]
-- [[domain-19-landscape-references/01-cncf-landscape/04-cncf-fta-index.md|Cncf Fta Index]]
+- [[domain-19-landscape-references/CNCF全景/01-cncf-integration-guide.md|Cncf Integration Guide]]
+- [[domain-19-landscape-references/CNCF全景/02-cncf-learning-paths.md|Cncf Learning Paths]]
+- [[domain-19-landscape-references/CNCF全景/03-cncf-selection-guide.md|Cncf Selection Guide]]
+- [[domain-19-landscape-references/CNCF全景/04-cncf-fta-index.md|Cncf Fta Index]]
 

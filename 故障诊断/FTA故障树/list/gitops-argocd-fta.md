@@ -165,7 +165,7 @@ flowchart TD
 - [[helm]] — Helm
 - [[entities/argocd.md|argocd]] — ArgoCD
 
-- [[故障诊断/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[skills/skill-MOC.md|topic-skills MOC]] — Cross-reference
 

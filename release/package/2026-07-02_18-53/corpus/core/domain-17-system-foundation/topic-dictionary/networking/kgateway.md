@@ -70,6 +70,6 @@ KGateway（原 Gloo Edge/Gloo Gateway）是 Solo.io 开源的 Kubernetes API 网
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy-gateway.md|Envoy Gateway]]
-- [[domain-17-system-foundation/topic-dictionary/networking/contour.md|Contour]]
-- [[domain-17-system-foundation/topic-dictionary/networking/traefik.md|Traefik]]
+- [[domain-17-system-foundation/知识字典/networking/envoy-gateway.md|Envoy Gateway]]
+- [[domain-17-system-foundation/知识字典/networking/contour.md|Contour]]
+- [[domain-17-system-foundation/知识字典/networking/traefik.md|Traefik]]

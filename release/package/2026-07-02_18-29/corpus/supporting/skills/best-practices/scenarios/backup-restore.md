@@ -96,8 +96,8 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|backup restore fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|backup restore fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/etcd-fta.md|etcd fta]]
 
 
 ---

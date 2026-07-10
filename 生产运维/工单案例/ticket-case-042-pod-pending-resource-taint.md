@@ -21,10 +21,10 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: data-proc
 ticket_type: 调度失败
 skill_ref:
-- '[[故障诊断/topic-fta/list/pod-fta.md|Pod 异常故障树分析]]'
-- '[[平台工程/governance/03-capacity-planning-resource-assessment.md|容量规划与资源评估]]'
+- '[[故障诊断/FTA故障树/list/pod-fta.md|Pod 异常故障树分析]]'
+- '[[平台工程/治理/03-capacity-planning-resource-assessment.md|容量规划与资源评估]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/scheduler-fta.md|FTA: Scheduler
+- '[[故障诊断/FTA故障树/list/scheduler-fta.md|FTA: Scheduler
   异常]]'
 last_updated: 2026-06-26 15:45:00+08:00
 duplicate_of: INC-2026-ACK-047
@@ -53,11 +53,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[生产运维/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
 
@@ -189,7 +189,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-data-compute
 > 当前 Pending Pod 已全部调度并进入 Running。建议后续：
 > - 版本发布前在测试环境验证资源请求变化对调度容量的影响；
 > - 建立 taint 操作台账，临时污点必须设置自动过期或人工复核；
-> - 配置 [[平台工程/governance/03-capacity-planning-resource-assessment.md|容量规划]] 流程，评估节点池是否需要升级实例规格。
+> - 配置 [[平台工程/治理/03-capacity-planning-resource-assessment.md|容量规划]] 流程，评估节点池是否需要升级实例规格。
 >
 > 如有新异常请随时联系。
 
@@ -223,7 +223,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-data-compute
 
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Ingress 控制器 Pod 异常导致 404/502
-- [[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+- [[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 
 
 <!-- risk-assessed -->

@@ -89,8 +89,8 @@ spec:
 ## Related
 
 - [[entities/istio.md|Istio (entities)]]
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[网络/02-service-mesh/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[网络/服务网格/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
 - [[entities/02-istio-advanced-traffic-management.md|Istio 高级流量管理 (entities)]]
 
 

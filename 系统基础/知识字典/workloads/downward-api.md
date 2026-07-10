@@ -303,9 +303,9 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.spec.containers[0].resources}'
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

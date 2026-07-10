@@ -563,15 +563,15 @@ hcloud cce cluster show <CLUSTER_ID>
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[domain-12-cloud-providers/99-production-readiness-operations-guide.md|云厂商托管 Kubernetes 生产就绪运维指南]]
-- [[domain-12-cloud-providers/07-huawei-cce/huawei-cce-overview.md|华为云 CCE 企业级深度实战指南]]
-- [[domain-12-cloud-providers/07-huawei-cce/02-cce-networking-vpc-router.md|CCE 网络模型与 VPC 路由深度解析]]
-- [[domain-12-cloud-providers/07-huawei-cce/04-cce-iam-aad-integration.md|CCE 身份认证与 IAM 细粒度授权]]
-- [[domain-12-cloud-providers/07-huawei-cce/03-cce-storage-evs-sfs.md|CCE 存储架构：EVS、SFS 与 OBS 集成]]
-- [[domain-12-cloud-providers/07-huawei-cce/05-cce-troubleshooting-playbook.md|CCE 故障排查手册]]
-- [[domain-09-reliability-engineering/02-disaster-recovery/18-cross-region-disaster-recovery.md|跨 Region 灾难恢复指南]]
-- [[domain-06-observability/01-overview/01-observability-architecture-overview.md|可观测性架构概述]]
-- [[domain-11-production-operations/01-finops/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
-- [[domain-01-cluster-fundamentals/03-control-plane/35-cluster-upgrade-runbook.md|集群升级 Runbook]]
+- [[domain-12-cloud-providers/华为云CCE/huawei-cce-overview.md|华为云 CCE 企业级深度实战指南]]
+- [[domain-12-cloud-providers/华为云CCE/02-cce-networking-vpc-router.md|CCE 网络模型与 VPC 路由深度解析]]
+- [[domain-12-cloud-providers/华为云CCE/04-cce-iam-aad-integration.md|CCE 身份认证与 IAM 细粒度授权]]
+- [[domain-12-cloud-providers/华为云CCE/03-cce-storage-evs-sfs.md|CCE 存储架构：EVS、SFS 与 OBS 集成]]
+- [[domain-12-cloud-providers/华为云CCE/05-cce-troubleshooting-playbook.md|CCE 故障排查手册]]
+- [[domain-09-reliability-engineering/灾难恢复/18-cross-region-disaster-recovery.md|跨 Region 灾难恢复指南]]
+- [[domain-06-observability/总览/01-observability-architecture-overview.md|可观测性架构概述]]
+- [[domain-11-production-operations/成本治理/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
+- [[domain-01-cluster-fundamentals/控制平面/35-cluster-upgrade-runbook.md|集群升级 Runbook]]
 
 ---
 

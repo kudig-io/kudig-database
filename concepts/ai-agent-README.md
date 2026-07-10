@@ -331,7 +331,7 @@ graph TB
 | [安全](../安全/) | 安全最佳实践在 Agent 安全中的应用 |
 | [平台工程](../平台工程/) | 平台工程视角的 Agent 服务运维 |
 | [domain-32-yaml-manifests](../清单模式/) | Agent 生产部署 YAML 模板参考 |
-| [topic-fta](../故障诊断/topic-fta/) | 问题树分析作为 Agent 推理骨架 |
+| [topic-fta](../故障诊断/FTA故障树/) | 问题树分析作为 Agent 推理骨架 |
 
 ---
 

@@ -183,6 +183,6 @@ spec:
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[deployment]] — Deployment
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]
+- [[domain-07-platform-engineering/代码分析/deployment-create/README.md|Deployment Create — Kubernetes Deployment 控制器源码分析]]
 
 <!-- risk-assessed -->

@@ -1968,8 +1968,8 @@ go install github.com/slsa-framework/slsa-verifier/v2/cli/slsa-verifier@latest
 - 安全 KUDIG Database — Global MOC
 - [[安全/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
 - [[安全/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
-- [[安全/05-supply-chain/02-supply-chain-maturity-model.md|02 supply chain maturity model]]
-- [[安全/05-supply-chain/03-sbom-generation-management.md|03 sbom generation management]]
+- [[安全/供应链/02-supply-chain-maturity-model.md|02 supply chain maturity model]]
+- [[安全/供应链/03-sbom-generation-management.md|03 sbom generation management]]
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
 - SLSA 级别与实施 (SLSA Levels and Implementation)
 - GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)

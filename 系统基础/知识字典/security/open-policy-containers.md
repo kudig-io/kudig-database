@@ -67,6 +67,6 @@ Open Policy Containers（OPCo）将安全策略打包为 OCI 镜像，通过标�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[系统基础/topic-dictionary/security/notary-project.md|Notary Project]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/security/notary-project.md|Notary Project]]

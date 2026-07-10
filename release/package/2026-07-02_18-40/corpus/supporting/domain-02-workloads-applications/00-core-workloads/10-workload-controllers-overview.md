@@ -349,9 +349,9 @@ spec:
 - 调度器配置与优化
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[domain-07-platform-engineering/代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
 ## See Also
 
 - 08-multi-cloud-workload-strategy

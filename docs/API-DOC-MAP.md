@@ -1,10 +1,10 @@
 ---
 title: KUDIG API → 文档映射
-description: '| `Pod` | v1 | 最小部署单元 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11
-  pod lifecycle events]] | [[故障诊断/topic-fta/list/pod-fta.md|pod
+description: '| `Pod` | v1 | 最小部署单元 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11
+  pod lifecycle events]] | [[故障诊断/FTA故障树/list/pod-fta.md|pod
   fta]] |'
-summary: '| `Pod` | v1 | 最小部署单元 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11
-  pod lifecycle events]] | [[故障诊断/topic-fta/list/pod-fta.md...'
+summary: '| `Pod` | v1 | 最小部署单元 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11
+  pod lifecycle events]] | [[故障诊断/FTA故障树/list/pod-fta.md...'
 category: general
 tags:
 - k8s
@@ -90,35 +90,35 @@ tier: peripheral---
 
 | 资源类型 | API 版本 | 用途 | 参考文档 | FTA |
 |---|---|---|---|---|
-| `Pod` | v1 | 最小部署单元 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |
-| `Deployment` | apps/v1 | 无状态应用 | 工作负载/02-deployment-production-patterns | [[故障诊断/topic-fta/list/deployment-fta.md|deployment fta]] |
-| `StatefulSet` | apps/v1 | 有状态应用 | [[工作负载/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]] | [[故障诊断/topic-fta/list/statefulset-fta.md|statefulset fta]] |
-| `DaemonSet` | apps/v1 | 节点级守护进程 | [[工作负载/00-core-workloads/04-daemonset-management.md|04 daemonset management]] | - |
-| `Job` | batch/v1 | 一次性任务 | [[工作负载/00-core-workloads/05-job-cronjob-advanced.md|05 job cronjob advanced]] | - |
-| `CronJob` | batch/v1 | 定时任务 | [[工作负载/00-core-workloads/05-job-cronjob-advanced.md|05 job cronjob advanced]] | - |
-| `Service` | v1 | 服务发现和负载均衡 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/service-fta.md|service fta]] |
-| `Ingress` | networking.k8s.io/v1 | HTTP/HTTPS 路由 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/ingress-fta.md|ingress fta]] |
+| `Pod` | v1 | 最小部署单元 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |
+| `Deployment` | apps/v1 | 无状态应用 | 工作负载/02-deployment-production-patterns | [[故障诊断/FTA故障树/list/deployment-fta.md|deployment fta]] |
+| `StatefulSet` | apps/v1 | 有状态应用 | [[工作负载/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]] | [[故障诊断/FTA故障树/list/statefulset-fta.md|statefulset fta]] |
+| `DaemonSet` | apps/v1 | 节点级守护进程 | [[工作负载/核心工作负载/04-daemonset-management.md|04 daemonset management]] | - |
+| `Job` | batch/v1 | 一次性任务 | [[工作负载/核心工作负载/05-job-cronjob-advanced.md|05 job cronjob advanced]] | - |
+| `CronJob` | batch/v1 | 定时任务 | [[工作负载/核心工作负载/05-job-cronjob-advanced.md|05 job cronjob advanced]] | - |
+| `Service` | v1 | 服务发现和负载均衡 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/service-fta.md|service fta]] |
+| `Ingress` | networking.k8s.io/v1 | HTTP/HTTPS 路由 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/ingress-fta.md|ingress fta]] |
 | `ConfigMap` | v1 | 配置管理 | [[清单模式/README.md|README]] | - |
-| `Secret` | v1 | 敏感信息 | [[安全/README.md|README]] | [[故障诊断/topic-fta/list/rbac-fta.md|rbac fta]] |
-| `PersistentVolume` | v1 | 持久化存储 | [[存储/README.md|README]] | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] |
-| `PersistentVolumeClaim` | v1 | 存储请求 | [[存储/README.md|README]] | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] |
-| `StorageClass` | storage.k8s.io/v1 | 动态存储供给 | [[存储/README.md|README]] | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] |
+| `Secret` | v1 | 敏感信息 | [[安全/README.md|README]] | [[故障诊断/FTA故障树/list/rbac-fta.md|rbac fta]] |
+| `PersistentVolume` | v1 | 持久化存储 | [[存储/README.md|README]] | [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]] |
+| `PersistentVolumeClaim` | v1 | 存储请求 | [[存储/README.md|README]] | [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]] |
+| `StorageClass` | storage.k8s.io/v1 | 动态存储供给 | [[存储/README.md|README]] | [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]] |
 | `Namespace` | v1 | 资源隔离 | [[安全/README.md|README]] | - |
 | `Role/RoleBinding` | rbac.authorization.k8s.io/v1 | RBAC 权限 | [[安全/README.md|README]] | - |
 | `ClusterRole` | rbac.authorization.k8s.io/v1 | 集群级权限 | [[安全/README.md|README]] | - |
 | `ServiceAccount` | v1 | 服务身份 | [[安全/README.md|README]] | - |
-| `NetworkPolicy` | networking.k8s.io/v1 | 网络隔离 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]] |
-| `HorizontalPodAutoscaler` | autoscaling/v2 | 水平自动伸缩 | 工作负载/02-deployment-production-patterns | [[故障诊断/topic-fta/list/hpa-fta.md|hpa fta]] |
-| `CustomResourceDefinition` | apiextensions.k8s.io/v1 | 自定义资源 | [[专项技术/README.md|README]] | [[故障诊断/topic-fta/list/crd-operator-fta.md|crd operator fta]] |
+| `NetworkPolicy` | networking.k8s.io/v1 | 网络隔离 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/networkpolicy-fta.md|networkpolicy fta]] |
+| `HorizontalPodAutoscaler` | autoscaling/v2 | 水平自动伸缩 | 工作负载/02-deployment-production-patterns | [[故障诊断/FTA故障树/list/hpa-fta.md|hpa fta]] |
+| `CustomResourceDefinition` | apiextensions.k8s.io/v1 | 自定义资源 | [[专项技术/README.md|README]] | [[故障诊断/FTA故障树/list/crd-operator-fta.md|crd operator fta]] |
 
 ## 控制平面资源
 
 | 资源类型 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `etcd` (非 K8s 资源) | 集群数据存储 | 集群基础/11-etcd-deep-dive | [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]] |
+| `etcd` (非 K8s 资源) | 集群数据存储 | 集群基础/11-etcd-deep-dive | [[故障诊断/FTA故障树/list/etcd-fta.md|etcd fta]] |
 | `APIService` | API 聚合 | [[专项技术/README.md|README]] | - |
-| `ValidatingWebhookConfiguration` | 准入验证 | [[安全/README.md|README]] | [[故障诊断/topic-fta/list/webhook-admission-fta.md|webhook admission fta]] |
-| `MutatingWebhookConfiguration` | 准入变异 | [[安全/README.md|README]] | [[故障诊断/topic-fta/list/webhook-admission-fta.md|webhook admission fta]] |
+| `ValidatingWebhookConfiguration` | 准入验证 | [[安全/README.md|README]] | [[故障诊断/FTA故障树/list/webhook-admission-fta.md|webhook admission fta]] |
+| `MutatingWebhookConfiguration` | 准入变异 | [[安全/README.md|README]] | [[故障诊断/FTA故障树/list/webhook-admission-fta.md|webhook admission fta]] |
 
 ## 扩展资源
 

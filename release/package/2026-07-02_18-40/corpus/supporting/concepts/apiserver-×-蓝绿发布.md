@@ -74,7 +74,7 @@ apiserver与蓝绿发布是Kubernetes生产环境中的两个关键维度。理�
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
 - [[concepts/etcd-×-灾难恢复.md|etcd-×-灾难恢复]]

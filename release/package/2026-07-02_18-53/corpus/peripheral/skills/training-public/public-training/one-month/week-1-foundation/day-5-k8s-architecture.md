@@ -494,11 +494,11 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
 - [核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
 - [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
-- [K8s 速查手册](../../domain-17-system-foundation/topic-cheat-sheet/k8s.md)
+- [K8s 速查手册](../../domain-17-system-foundation/速查卡/k8s.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

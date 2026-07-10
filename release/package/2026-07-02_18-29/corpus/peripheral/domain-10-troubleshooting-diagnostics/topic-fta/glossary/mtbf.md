@@ -60,4 +60,4 @@ MTBF 用于评估系统组件的可靠性，指导维护计划和备件策略。
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

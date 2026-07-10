@@ -96,9 +96,9 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 - [[entities/root-terms.md|K8s Root术语参考]] — Cross-reference
 - [[skills/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

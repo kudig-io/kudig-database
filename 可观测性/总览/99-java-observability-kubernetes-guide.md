@@ -901,7 +901,7 @@ kubectl cp deployment/spring-app:/tmp/recording.jfr ./recording.jfr
 - 12-demo-env-guide
 - 21-platform-selection-guide
 
-- [[可观测性/README.md|返回目录]]- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[可观测性/README.md|返回目录]]- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

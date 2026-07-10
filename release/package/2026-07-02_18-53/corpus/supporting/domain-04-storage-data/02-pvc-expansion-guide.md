@@ -185,7 +185,7 @@ kubectl apply -f new-larger-pvc.yaml
 - [[storage-tool-evolution]] — 存储工具的演进
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[domain-16-database-middleware/01-database-on-kubernetes-guide.md|database-on-kubernetes-guide]] — K8s 上的数据库运行指南
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
 
 ## Related
 

@@ -655,7 +655,7 @@ echo "=== 检查完成 ==="
 - 21-platform-selection-guide
 - [[工作负载/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 
-- [[可观测性/README.md|返回目录]]- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[可观测性/README.md|返回目录]]- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-06-observability/07-tools/02-grafana-enterprise-observability.md|Grafana Enterprise Observability]]
-- [[domain-06-observability/07-tools/05-datadog-enterprise-apm.md|Datadog Enterprise Apm]]
-- [[domain-06-observability/07-tools/05-datadog-enterprise-monitoring.md|Datadog Enterprise Monitoring]]
-- [[domain-06-observability/07-tools/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring]]
-- [[domain-06-observability/07-tools/08-new-relic-enterprise-apm.md|New Relic Enterprise Apm]]
-- [[domain-06-observability/07-tools/26-troubleshooting-tools.md|Troubleshooting Tools]]
-- [[domain-06-observability/07-tools/27-performance-profiling-tools.md|Performance Profiling Tools]]
+- [[domain-06-observability/工具/02-grafana-enterprise-observability.md|Grafana Enterprise Observability]]
+- [[domain-06-observability/工具/05-datadog-enterprise-apm.md|Datadog Enterprise Apm]]
+- [[domain-06-observability/工具/05-datadog-enterprise-monitoring.md|Datadog Enterprise Monitoring]]
+- [[domain-06-observability/工具/07-zabbix-enterprise-monitoring.md|Zabbix Enterprise Monitoring]]
+- [[domain-06-observability/工具/08-new-relic-enterprise-apm.md|New Relic Enterprise Apm]]
+- [[domain-06-observability/工具/26-troubleshooting-tools.md|Troubleshooting Tools]]
+- [[domain-06-observability/工具/27-performance-profiling-tools.md|Performance Profiling Tools]]
 

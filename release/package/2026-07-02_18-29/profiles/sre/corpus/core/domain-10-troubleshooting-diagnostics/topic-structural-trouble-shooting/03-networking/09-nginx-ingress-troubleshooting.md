@@ -522,24 +522,24 @@ data:
 
 - [nginx-ingress 完全指南](./domain-03-networking-traffic/21-nginx-ingress-complete-guide.md)
 - [nginx-ingress 迁移指南](./domain-03-networking-traffic/09-nginx-ingress-migration-guide.md)
-- [nginx-ingress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md)
-- [nginx-ingress 全局索引](./domain-19-landscape-references/topic-index/nginx-ingress-index.md)
-- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [nginx-ingress FTA 故障树](./domain-10-troubleshooting-diagnostics/FTA故障树/list/nginx-ingress-fta.md)
+- [nginx-ingress 全局索引](./domain-19-landscape-references/领域索引/nginx-ingress-index.md)
+- [Ingress 通用故障排查](./[[domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[index|index]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-19-landscape-references/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
 
 ```
 

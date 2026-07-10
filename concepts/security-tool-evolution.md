@@ -176,6 +176,6 @@ cert-manager 自动化 Kubernetes 中的 TLS 证书管理。
 - [[entities/trivy.md|trivy]] — Trivy
 - [[cert-manager]] — cert-manager
 
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 
 <!-- risk-assessed -->

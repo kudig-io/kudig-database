@@ -67,6 +67,6 @@ Kubean 是 DaoCloud 开源的 CNCF Sandbox 项目，基于 Kubespray 提供 Kube
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|kubeadm]]
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
-- [[系统基础/topic-dictionary/platform-engineering/rancher.md|Rancher]]
+- [[系统基础/知识字典/tooling/kubeadm.md|kubeadm]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/platform-engineering/rancher.md|Rancher]]

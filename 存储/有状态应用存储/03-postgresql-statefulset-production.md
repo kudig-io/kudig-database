@@ -635,13 +635,13 @@ Patroni + etcd 方案对网络稳定性要求较高。建议将 PostgreSQL 集�
 
 ## Related
 
-- [[存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
-- [[存储/03-distributed-storage/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
+- [[存储/有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
+- [[存储/分布式存储/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
 
 ## See Also
 
-- [[可靠性/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
-- [[故障诊断/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|etcd 故障诊断]]
+- [[可靠性/备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[故障诊断/核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障诊断]]
 
 ```
 

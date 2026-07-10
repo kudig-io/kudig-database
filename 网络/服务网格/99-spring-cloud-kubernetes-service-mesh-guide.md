@@ -1212,7 +1212,7 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 
 <!-- risk-assessed -->

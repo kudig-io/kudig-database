@@ -66,6 +66,6 @@ Antrea 是 VMware 开源的 Kubernetes 网络方案（CNI），基于 Open vSwit
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
-- [[系统基础/topic-dictionary/networking/cni.md|CNI]]
-- [[系统基础/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/networking/cni.md|CNI]]
+- [[系统基础/知识字典/networking/networkpolicy.md|NetworkPolicy]]

@@ -79,11 +79,11 @@ ServiceAccount 是 Kubernetes 中为 Pod 提供身份标识的资源。Pod 通�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|Rbac]]
-- [[domain-17-system-foundation/topic-dictionary/security/role.md|Role]]
-- [[domain-17-system-foundation/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[domain-17-system-foundation/topic-dictionary/security/rolebinding.md|Rolebinding]]
-- [[domain-17-system-foundation/topic-dictionary/security/clusterrolebinding.md|Clusterrolebinding]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|Rbac]]
+- [[domain-17-system-foundation/知识字典/security/role.md|Role]]
+- [[domain-17-system-foundation/知识字典/security/clusterrole.md|Clusterrole]]
+- [[domain-17-system-foundation/知识字典/security/rolebinding.md|Rolebinding]]
+- [[domain-17-system-foundation/知识字典/security/clusterrolebinding.md|Clusterrolebinding]]
 
 
 <!-- risk-assessed -->

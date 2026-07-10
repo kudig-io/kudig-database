@@ -444,8 +444,8 @@ spec:
 
 ## Related
 
-- [[容器运行时/03-containerd-cri-o/04-kata-containers-secure-container|Kata Containers 安全容器]]
-- [[容器运行时/03-containerd-cri-o/06-rootless-containers-guide|Rootless 容器指南]]
+- [[容器运行时/containerd-CRI-O/04-kata-containers-secure-container|Kata Containers 安全容器]]
+- [[容器运行时/containerd-CRI-O/06-rootless-containers-guide|Rootless 容器指南]]
 
 ## See Also
 

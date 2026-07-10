@@ -81,7 +81,7 @@ authors:
 从 Kubernetes v1.10 开始，控制平面和节点组件逐步支持通过**类型化配置文件**（Typed Configuration Files）进行配置，而不是仅依赖命令行标志（CLI flags）。这种方式提供了以下优势:
 
 - **结构化和类型安全**：配置文件有明确的 API schema，可验证字段类型和约束
-- **版本化**：配置 API 遵循 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本控制原则，支持平滑升级
+- **版本化**：配置 API 遵循 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本控制原则，支持平滑升级
 - **易于管理**：配置文件可以纳入版本控制，便于审计和自动化部署
 - **减少命令行复杂度**：避免冗长的启动参数
 
@@ -3374,10 +3374,10 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 - 35-advanced-pod-patterns
 - 36-ecosystem-kustomize-helm-argocd
 
-- [[平台工程/topic-code-analysis/node-create/10-kubelet-config.md|10-kubelet-config]]
-- [[平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md|04-kubeconfig]]
-- [[平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
-- [[平台工程/topic-code-analysis/cluster-cert/13-cert-config.md|13-cert-config]]
+- [[平台工程/代码分析/node-create/10-kubelet-config.md|10-kubelet-config]]
+- [[平台工程/代码分析/cluster-create/04-kubeconfig.md|04-kubeconfig]]
+- [[平台工程/代码分析/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
+- [[平台工程/代码分析/cluster-cert/13-cert-config.md|13-cert-config]]
 ```
 
 <!-- risk-assessed -->

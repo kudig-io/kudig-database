@@ -266,7 +266,7 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[domain-09-reliability-engineering/混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]
 - deployment]]
 
 

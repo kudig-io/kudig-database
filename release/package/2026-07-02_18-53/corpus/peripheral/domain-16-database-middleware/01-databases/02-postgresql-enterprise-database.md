@@ -78,7 +78,7 @@ PostgreSQL 是全球功能最丰富的开源对象关系型数据库系统，以
 
 企业级 PostgreSQL 运维的核心挑战在于：如何构建零数据丢失的高可用集群（Patroni + [[etcd|etcd]]）、如何实现大规模连接池化（PgBouncer）、如何设计高效的备份恢复策略（WAL-G / Barman + S3）、以及如何建立全链路可观测体系（pg_stat_statements + [[Prometheus|Prometheus]]）。本文档将从架构设计到故障排查，系统性地覆盖这些主题。
 
-PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发控制（MVCC）、丰富的数据类型（JSONB、GIS、UUID、数组）、强大的扩展系统（PostGIS、TimescaleDB、pgvector）、以及活跃的社区生态。在 K8s 环境中，[[CloudNativePG|CloudNativePG]]、Zalando Postgres Operator、Crunchy PGO 等三个主流 Operator 可供选择。对于 K8s 上的完整生产部署指南（高可用架构、Patroni/CloudNativePG 选型、备份与 PITR、连接池、监控告警与故障转移），参见 [[domain-16-database-middleware/01-databases/16-postgresql-kubernetes-production-guide|PostgreSQL on Kubernetes 生产指南]]。
+PostgreSQL 的核心优势包括：完整的 ACID 事务支持、多版本并发控制（MVCC）、丰富的数据类型（JSONB、GIS、UUID、数组）、强大的扩展系统（PostGIS、TimescaleDB、pgvector）、以及活跃的社区生态。在 K8s 环境中，[[CloudNativePG|CloudNativePG]]、Zalando Postgres Operator、Crunchy PGO 等三个主流 Operator 可供选择。对于 K8s 上的完整生产部署指南（高可用架构、Patroni/CloudNativePG 选型、备份与 PITR、连接池、监控告警与故障转移），参见 [[domain-16-database-middleware/数据库/16-postgresql-kubernetes-production-guide|PostgreSQL on Kubernetes 生产指南]]。
 
 ---
 

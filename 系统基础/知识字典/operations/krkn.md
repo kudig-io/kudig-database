@@ -72,9 +72,9 @@ Krkn（原 Kraken）是 Red Hat 开源的混沌工程工具，专注于 Kubernet
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/litmus.md|LitmusChaos]]
-- [[系统基础/topic-dictionary/operations/chaos-mesh.md|Chaos Mesh]]
-- [[系统基础/topic-dictionary/operations/chaos-engineering.md|混沌工程]]
+- [[系统基础/知识字典/operations/litmus.md|LitmusChaos]]
+- [[系统基础/知识字典/operations/chaos-mesh.md|Chaos Mesh]]
+- [[系统基础/知识字典/operations/chaos-engineering.md|混沌工程]]
 
 
 <!-- risk-assessed -->

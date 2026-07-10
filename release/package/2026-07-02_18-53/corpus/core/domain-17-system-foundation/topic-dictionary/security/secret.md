@@ -80,7 +80,7 @@ Secret 是 Kubernetes 中用于存储敏感数据的 API 资源，如密码、To
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
+[[domain-17-system-foundation/知识字典/configuration/secrets.md|Secrets]]
 
 
 <!-- risk-assessed -->

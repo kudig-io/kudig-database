@@ -83,7 +83,7 @@ Apache Kafka 是分布式流处理平台的行业标准，在企业级架构中�
 
 Strimzi 的核心价值在于：将 Kafka 集群（包括 Broker、ZooKeeper 或 KRaft）、Kafka Connect、Kafka MirrorMaker、Kafka Bridge 等组件全部通过 CRD 管理，实现自动化部署、滚动升级、证书管理、Topic 和 User 的声明式管理。Strimzi 0.45 支持 Kafka 3.9 和 KRaft 模式（无需 ZooKeeper），标志着 Kafka on K8s 进入新阶段。
 
-本文档系统覆盖 Strimzi Operator 的部署配置、Topic 管理、Consumer Group 监控、Exactly-Once 语义实现、以及企业级运维实践。对于面向生产环境的完整 Kafka on Kubernetes 运维指南（KRaft 与 ZooKeeper 选型、Strimzi Operator 部署、Topic/Partition/Replica 设计、吞吐调优、监控告警、升级与灾难恢复），参见 [[数据库中间件/03-message-queues/06-kafka-kubernetes-production-guide|Kafka Kubernetes 生产指南]]。
+本文档系统覆盖 Strimzi Operator 的部署配置、Topic 管理、Consumer Group 监控、Exactly-Once 语义实现、以及企业级运维实践。对于面向生产环境的完整 Kafka on Kubernetes 运维指南（KRaft 与 ZooKeeper 选型、Strimzi Operator 部署、Topic/Partition/Replica 设计、吞吐调优、监控告警、升级与灾难恢复），参见 [[数据库中间件/消息队列/06-kafka-kubernetes-production-guide|Kafka Kubernetes 生产指南]]。
 
 ## Kafka 架构核心概念深度解析
 

@@ -75,9 +75,9 @@ Shipwright 是 Red Hat 开源的 CNCF Sandbox 项目，在 Kubernetes 上提供�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/buildpacks.md|Buildpacks]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/operations/tekton.md|Tekton]]
+- [[系统基础/知识字典/tooling/buildpacks.md|Buildpacks]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/operations/tekton.md|Tekton]]
 
 
 <!-- risk-assessed -->

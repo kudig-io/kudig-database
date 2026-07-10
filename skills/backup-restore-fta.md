@@ -167,12 +167,12 @@ flowchart TD
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

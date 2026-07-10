@@ -1,7 +1,7 @@
 ---
 title: Paralus (entities)
 description: '## 概述'
-summary: 'Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，'
+summary: 'Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，'
 category: entities
 tags:
 - k8s
@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，实现基于身份的细粒度访问控制和完整的操作审计日志。
+Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，实现基于身份的细粒度访问控制和完整的操作审计日志。
 
 ## 核心能力
 
@@ -80,7 +80,7 @@ Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提
 
 - paralus
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

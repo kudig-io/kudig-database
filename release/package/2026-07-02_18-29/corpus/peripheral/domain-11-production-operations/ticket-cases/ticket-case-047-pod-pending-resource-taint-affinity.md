@@ -22,9 +22,9 @@ affected_cluster: ack-zyy-prod-05
 affected_namespace: risk-engine
 ticket_type: 调度故障
 skill_ref:
-- '[[domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md|集群容量规划]]'
-- '[[domain-02-workloads-applications/00-core-workloads/23-resource-management.md|资源管理]]'
-- '[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-deployment-rollout/SKILL.md|Deployment
+- '[[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
+- '[[domain-02-workloads-applications/核心工作负载/23-resource-management.md|资源管理]]'
+- '[[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-deployment-rollout/SKILL.md|Deployment
   滚动发布诊断 Skill]]'
 fta_ref:
 - 'FTA: Pod Pending 排障'
@@ -52,11 +52,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
@@ -273,7 +273,7 @@ kubectl run risk-test --image=registry.aliyuncs.com/acs/busybox -n risk-engine -
 >
 > 当前所有 Pending Pod 已 Running，Deployment 副本数达到 60/60，风控接口健康检查正常。建议后续：
 > - 在发布模板中固化 Toleration 与亲和性配置，避免后续版本误删；
-> - 配置发布前容量预检，参考 [[domain-02-workloads-applications/00-core-workloads/22-cluster-capacity-planning.md|集群容量规划]]；
+> - 配置发布前容量预检，参考 [[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]；
 > - 为 `risk-engine` 节点池启用 Cluster Autoscaler，参考 ACK 集群自动扩缩容。
 >
 > 如有新异常，请随时联系。

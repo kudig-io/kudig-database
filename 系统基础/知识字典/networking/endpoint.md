@@ -77,11 +77,11 @@ Endpoints 是 Kubernetes 中 Service 后端 Pod 的 IP 地址和端口的集合�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/headless-service.md|Headless Service]]
-- [[系统基础/topic-dictionary/networking/clusterip.md|ClusterIP]]
-- [[系统基础/topic-dictionary/networking/coredns.md|CoreDNS]]
-- [[系统基础/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/headless-service.md|Headless Service]]
+- [[系统基础/知识字典/networking/clusterip.md|ClusterIP]]
+- [[系统基础/知识字典/networking/coredns.md|CoreDNS]]
+- [[系统基础/知识字典/networking/networkpolicy.md|NetworkPolicy]]
 
 
 <!-- risk-assessed -->

@@ -2492,19 +2492,19 @@ spec:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|helm]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/helm.md|helm]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
 
 ```
 

@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 混沌工程与故障注入测试 ([[系统基础/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]] and Fault Injection Testing)
+# [[Kubernetes|Kubernetes]] 混沌工程与故障注入测试 ([[系统基础/知识字典/operations/chaos-engineering.md|Chaos Engineering]] and Fault Injection Testing)
 
 > **作者**: 混沌工程专家 | **版本**: v1.5 | **更新时间**: 2026-03-03
 > **适用场景**: 系统韧性测试与可靠性验证 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -1013,7 +1013,7 @@ spec:
 
 - research/ — tag hub
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

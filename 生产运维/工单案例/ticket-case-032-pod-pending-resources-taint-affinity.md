@@ -24,12 +24,12 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: data-platform
 ticket_type: 调度失败
 skill_ref:
-- '[[工作负载/00-core-workloads/19-scheduler-configuration.md|Scheduler
+- '[[工作负载/核心工作负载/19-scheduler-configuration.md|Scheduler
   配置]]'
-- '[[工作负载/00-core-workloads/22-cluster-capacity-planning.md|集群容量规划]]'
+- '[[工作负载/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/scheduler-fta.md|FTA: 调度失败]]'
-- '[[故障诊断/topic-fta/list/pod-fta.md|FTA: Pod 异常]]'
+- '[[故障诊断/FTA故障树/list/scheduler-fta.md|FTA: 调度失败]]'
+- '[[故障诊断/FTA故障树/list/pod-fta.md|FTA: Pod 异常]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-047
 status: duplicate
@@ -61,11 +61,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[生产运维/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
@@ -232,7 +232,7 @@ kubectl exec -n data-platform deploy/spark-history-server -- hdfs dfs -ls /etl/o
 > **当前状态：** 新 driver Pod 已调度并 Running，任务日志显示已开始读取数据。
 >
 > **后续建议：**
-> - 参考 [[工作负载/00-core-workloads/22-cluster-capacity-planning.md|集群容量规划]] 在批处理高峰前预扩容大数据节点池；
+> - 参考 [[工作负载/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]] 在批处理高峰前预扩容大数据节点池；
 > - 在 SparkApplication 模板中统一注入大数据节点污点容忍，避免遗漏；
 > - 配置 Spark on K8s 监控，对 Pending 超过 5 分钟的 driver 触发 P2 告警；
 > - 评估是否引入 Cluster Autoscaler 自动按队列长度扩容大数据节点池。

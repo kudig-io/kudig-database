@@ -47,7 +47,7 @@ ServiceAccount（服务账号）是 [[Kubernetes|Kubernetes]] 中的一种非人
 ServiceAccount 具有以下关键属性：
 
 - **命名空间范围（Namespaced）**：每个 ServiceAccount 都绑定到一个 Kubernetes 命名空间。每个命名空间在创建时会自动获得一个名为 `default` 的 ServiceAccount。
-- **轻量级（Lightweight）**：ServiceAccount 存在于集群中，通过 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 定义，可快速创建以支持特定任务。
+- **轻量级（Lightweight）**：ServiceAccount 存在于集群中，通过 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 定义，可快速创建以支持特定任务。
 - **可移植（Portable）**：复杂的容器化工作负载配置可以包含系统组件的 ServiceAccount 定义，其轻量级和命名空间特性使配置易于移植。
 
 与用户账户（User account）不同：
@@ -129,11 +129,11 @@ ServiceAccount 使用签名的 **JSON Web Token（JWT）** 向 Kubernetes API se
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|Rbac]]
-- [[domain-17-system-foundation/topic-dictionary/security/role.md|Role]]
-- [[domain-17-system-foundation/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[domain-17-system-foundation/topic-dictionary/security/rolebinding.md|Rolebinding]]
-- [[domain-17-system-foundation/topic-dictionary/security/clusterrolebinding.md|Clusterrolebinding]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|Rbac]]
+- [[domain-17-system-foundation/知识字典/security/role.md|Role]]
+- [[domain-17-system-foundation/知识字典/security/clusterrole.md|Clusterrole]]
+- [[domain-17-system-foundation/知识字典/security/rolebinding.md|Rolebinding]]
+- [[domain-17-system-foundation/知识字典/security/clusterrolebinding.md|Clusterrolebinding]]
 
 
 <!-- risk-assessed -->

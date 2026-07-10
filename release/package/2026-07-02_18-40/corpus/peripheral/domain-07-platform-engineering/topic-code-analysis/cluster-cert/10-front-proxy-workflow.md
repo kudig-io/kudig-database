@@ -463,8 +463,8 @@ openssl x509 -req \
 - [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cert-manager.md|cert-manager]]
 

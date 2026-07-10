@@ -70,8 +70,8 @@ prerequisites:
 
 ## 相关
 
-- [[domain-16-database-middleware/03-message-queues/01-nats-deep-dive.md|01 nats deep dive]]
-- [[domain-16-database-middleware/03-message-queues/02-pulsar-architecture.md|02 pulsar architecture]]
+- [[domain-16-database-middleware/消息队列/01-nats-deep-dive.md|01 nats deep dive]]
+- [[domain-16-database-middleware/消息队列/02-pulsar-architecture.md|02 pulsar architecture]]
 
 
 <!-- risk-assessed -->

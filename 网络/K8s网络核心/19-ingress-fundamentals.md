@@ -196,7 +196,7 @@ cross_refs:
 
 | 概念 | 英文术语 | 定义 | 作用 | 版本要求 |
 |-----|---------|------|------|---------|
-| **Ingress** | Ingress | [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
+| **Ingress** | Ingress | [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 对象，管理集群外部访问集群内服务的 HTTP/HTTPS 路由规则 | 定义 L7 路由规则、TLS 终止、虚拟主机 | v1.19+ GA |
 | **Ingress Controller** | Ingress Controller | 负责实现 Ingress 规则的控制器组件，通常是反向代理服务器 | 监听 Ingress 资源变化，配置代理规则，实际处理流量转发 | - |
 | **IngressClass** | IngressClass | 定义 Ingress 控制器类型的 API 对象 | 支持多控制器共存，指定 Ingress 由哪个控制器处理 | v1.19+ GA |
 | **Backend** | Backend | Ingress 路由到的后端 Service | 接收转发的流量，负载均衡到 Pod | v1.19+ |
@@ -2240,8 +2240,8 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 ```
 

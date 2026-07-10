@@ -64,7 +64,7 @@ Kubernetes 中有五种主要的代理类型：
 - 客户端到代理使用 HTTP。
 - 代理到 apiserver 使用 HTTPS。
 - 自动定位 apiserver 并添加认证头。
-- 常用于本地安全访问 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
+- 常用于本地安全访问 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
 
 ### 2. apiserver proxy
 
@@ -199,9 +199,9 @@ kubectl get svc -A --field-selector spec.type=LoadBalancer
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
-- [[系统基础/topic-dictionary/platform-engineering/api-group.md|API 组]]
-- [[系统基础/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+- [[系统基础/知识字典/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[系统基础/知识字典/platform-engineering/api-group.md|API 组]]
+- [[系统基础/知识字典/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
 
 
 <!-- risk-assessed -->

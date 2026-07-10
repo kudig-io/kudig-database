@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|Velero Backup Recovery]]
-- [[domain-04-storage-data/03-distributed-storage/02-rook-ceph-production.md|Rook Ceph Production]]
-- [[domain-04-storage-data/03-distributed-storage/03-longhorn-production.md|Longhorn Production]]
-- [[domain-04-storage-data/03-distributed-storage/04-openebs-production.md|Openebs Production]]
-- [[domain-04-storage-data/03-distributed-storage/05-juicefs-distributed-filesystem.md|Juicefs Distributed Filesystem]]
-- [[domain-04-storage-data/03-distributed-storage/06-nfs-csi-production-guide.md|Nfs Csi Production Guide]]
+- [[domain-04-storage-data/分布式存储/01-velero-backup-recovery.md|Velero Backup Recovery]]
+- [[domain-04-storage-data/分布式存储/02-rook-ceph-production.md|Rook Ceph Production]]
+- [[domain-04-storage-data/分布式存储/03-longhorn-production.md|Longhorn Production]]
+- [[domain-04-storage-data/分布式存储/04-openebs-production.md|Openebs Production]]
+- [[domain-04-storage-data/分布式存储/05-juicefs-distributed-filesystem.md|Juicefs Distributed Filesystem]]
+- [[domain-04-storage-data/分布式存储/06-nfs-csi-production-guide.md|Nfs Csi Production Guide]]
 

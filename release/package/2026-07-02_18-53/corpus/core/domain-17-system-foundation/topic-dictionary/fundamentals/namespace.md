@@ -68,6 +68,6 @@ Namespace 是 Kubernetes 的逻辑隔离机制，将集群资源划分为虚拟�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
-- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/networking/networkpolicy.md|NetworkPolicy]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]

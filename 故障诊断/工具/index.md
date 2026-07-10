@@ -22,13 +22,13 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[故障诊断/tools/README.md|Readme]]
+- [[故障诊断/工具/README.md|Readme]]
 
 ## 文档
 
-- [[故障诊断/tools/01-kubectl-plugins-guide.md|Kubectl Plugins Guide]]
-- [[故障诊断/tools/02-network-diagnostic-tools.md|Network Diagnostic Tools]]
-- [[故障诊断/tools/03-ebpf-diagnostic-tools.md|Ebpf Diagnostic Tools]]
+- [[故障诊断/工具/01-kubectl-plugins-guide.md|Kubectl Plugins Guide]]
+- [[故障诊断/工具/02-network-diagnostic-tools.md|Network Diagnostic Tools]]
+- [[故障诊断/工具/03-ebpf-diagnostic-tools.md|Ebpf Diagnostic Tools]]
 
 
 

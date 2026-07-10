@@ -1275,8 +1275,8 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 | 相关目录 | 关系 |
 |:---|:---|
 | [domain-11-production-operations/topic-learn/](../domain-11-production-operations/topic-learn/) | 系统化学习计划（Presentation 可作为课程配套） |
-| [domain-17-system-foundation/topic-cheat-sheet/](../domain-17-system-foundation/topic-cheat-sheet/) | 演示中的命令速查 |
-| [domain-10-troubleshooting-diagnostics/topic-fta/](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障排查方法论 Presentation 的深度参考 |
+| [domain-17-system-foundation/topic-cheat-sheet/](../domain-17-system-foundation/速查卡/) | 演示中的命令速查 |
+| [domain-10-troubleshooting-diagnostics/topic-fta/](../domain-10-troubleshooting-diagnostics/FTA故障树/) | 故障排查方法论 Presentation 的深度参考 |
 
 ---
 
@@ -1291,19 +1291,19 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

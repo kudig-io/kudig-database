@@ -69,6 +69,6 @@ Volcano 是 CNCF 孵化项目，专为 Kubernetes 上的批处理、AI/ML、HPC 
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/scheduler.md|Scheduler]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray.md|Ray]]
+- [[domain-17-system-foundation/知识字典/scheduling/scheduler.md|Scheduler]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ray.md|Ray]]

@@ -702,11 +702,11 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 - [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
 - [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
 - [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [K8s 速查手册](../../domain-17-system-foundation/topic-cheat-sheet/k8s.md)
+- [K8s 速查手册](../../domain-17-system-foundation/速查卡/k8s.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

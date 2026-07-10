@@ -391,13 +391,13 @@ for i in {1..10}; do curl -s -o /dev/null -w "%{http_code}\n" https://api.exampl
 
 ## Related
 
-- [[domain-08-release-change-management/03-change-management/22-change-management-process.md|变更管理流程]]
+- [[domain-08-release-change-management/变更管理/22-change-management-process.md|变更管理流程]]
 - [[domain-11-production-operations/02-change-management-guide.md|变更管理指南]]
 
 ## See Also
 
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy.md|金丝雀发布策略与回滚]]
-- [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|变更回滚操作手册]]
+- [[domain-08-release-change-management/变更管理/02-canary-release-strategy.md|金丝雀发布策略与回滚]]
+- [[domain-08-release-change-management/变更管理/03-change-rollback-playbook.md|变更回滚操作手册]]
 
 ```
 

@@ -980,7 +980,7 @@ organizational_capability_building:
 
 - 77-fusion-energy-monitoring
 
-- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

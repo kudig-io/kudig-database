@@ -69,6 +69,6 @@ KMesh 是华为开源的 CNCF Sandbox 项目，基于 eBPF 和可编程硬件在
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]

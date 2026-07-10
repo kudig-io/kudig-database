@@ -103,7 +103,7 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 - [[scheduler-fta]] — Scheduler 异常故障树分析
 - [[skills/assessment-k8s-fundamentals-quiz-answers.md|assessment-k8s-fundamentals-quiz-answers]] — K8S Fundamentals Quiz Answers
 - [[prometheus]] — Prometheus
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 
 <!-- risk-assessed -->

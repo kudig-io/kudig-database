@@ -72,9 +72,9 @@ Cloud Native Buildpacks（CNB）是 CNCF 孵化项目，将应用源代码自动
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/operations/tekton.md|Tekton]]
-- [[系统基础/topic-dictionary/tooling/podman.md|Podman]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/operations/tekton.md|Tekton]]
+- [[系统基础/知识字典/tooling/podman.md|Podman]]
 
 
 <!-- risk-assessed -->

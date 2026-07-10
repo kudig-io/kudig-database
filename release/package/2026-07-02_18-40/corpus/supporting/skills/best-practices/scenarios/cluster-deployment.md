@@ -94,16 +94,16 @@ graph TD
 - domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
 - domain-01-cluster-fundamentals/03-plane-high-availability.md
 - [[domain-07-platform-engineering/README.md|README]]
-- [[domain-08-release-change-management/topic-deployment/README.md|README]]
+- [[domain-08-release-change-management/部署方案/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|apiserver fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md|etcd fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|apiserver fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/etcd-fta.md|etcd fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/node-fta.md|node fta]]
 
 
 ---

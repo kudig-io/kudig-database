@@ -130,8 +130,8 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 - [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference
 - [[entities/trivy.md|Trivy]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -1125,7 +1125,7 @@ kubectl logs -n kube-system kube-apiserver-xxx | grep aggregator
 <!-- chunk: 📚 参考资源 -->## 📚 参考资源
 
 - **官方文档**:
-  - [Extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+  - [Extend [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with the aggregation layer](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
   - [Configure the aggregation layer](https://kubernetes.io/docs/tasks/extend-kubernetes/configure-aggregation-layer/)
   - [Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
 - **API Server 开发**:

@@ -278,9 +278,9 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|亲和性]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[domain-17-system-foundation/知识字典/scheduling/affinity.md|亲和性]]
+- [[domain-17-system-foundation/知识字典/scheduling/anti-affinity.md|反亲和性]]
+- [[domain-17-system-foundation/知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
 
 
 <!-- risk-assessed -->

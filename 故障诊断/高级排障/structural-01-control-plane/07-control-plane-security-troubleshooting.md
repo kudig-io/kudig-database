@@ -617,17 +617,17 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/git.md|git]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[故障诊断/高级排障/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
 
 ```
 

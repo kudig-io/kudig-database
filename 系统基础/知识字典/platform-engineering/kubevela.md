@@ -73,9 +73,9 @@ KubeVela 是阿里巴巴开源的 CNCF 孵化项目，基于 OAM（Open Applicat
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/platform-engineering/score.md|Score]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/platform-engineering/score.md|Score]]
 
 
 <!-- risk-assessed -->

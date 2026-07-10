@@ -669,9 +669,9 @@ echo "=========================================="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

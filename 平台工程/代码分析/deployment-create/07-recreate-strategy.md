@@ -431,10 +431,10 @@ db-migrator-7c8e0d9g6-ij3kl   1/1     Running       0          10s
 ## Related
 
 - [[entities/kubernetes.md|kubernetes]]
-- [[系统基础/topic-dictionary/workloads/pods.md|pods]]
-- [[系统基础/topic-dictionary/workloads/replicaset.md|replicaset]]
-- [[平台工程/topic-code-analysis/deployment-create/04-rolling-update.md|04-rolling-update]]
-- [[平台工程/topic-code-analysis/deployment-create/05-deployment-status.md|05-deployment-status]]
+- [[系统基础/知识字典/workloads/pods.md|pods]]
+- [[系统基础/知识字典/workloads/replicaset.md|replicaset]]
+- [[平台工程/代码分析/deployment-create/04-rolling-update.md|04-rolling-update]]
+- [[平台工程/代码分析/deployment-create/05-deployment-status.md|05-deployment-status]]
 
 
 <!-- risk-assessed -->

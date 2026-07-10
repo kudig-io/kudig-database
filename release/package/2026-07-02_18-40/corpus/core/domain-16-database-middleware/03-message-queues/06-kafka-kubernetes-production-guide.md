@@ -369,7 +369,7 @@ kubectl exec -n kafka prod-kafka-broker-0 -- \
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[domain-16-database-middleware/01-databases/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
+- [[domain-16-database-middleware/数据库/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
 - [[domain-16-database-middleware/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
 - [[domain-09-reliability-engineering/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]

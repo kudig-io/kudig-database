@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skills-run/README.md|Readme]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skills-run/README.md|Readme]]
 
 ## 子目录
 

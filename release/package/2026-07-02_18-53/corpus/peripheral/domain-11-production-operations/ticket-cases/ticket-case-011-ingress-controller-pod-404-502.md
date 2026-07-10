@@ -54,13 +54,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-046-ingress-controller-404-502.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-046-ingress-controller-404-502.md]]'
   type: related_to
 - target: '[[concepts/ingress.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 

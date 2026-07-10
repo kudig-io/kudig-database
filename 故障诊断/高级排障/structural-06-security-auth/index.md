@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|Rbac Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|Certificate Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|Pod Security Troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|Audit Logging Troubleshooting]]
+- [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|Rbac Troubleshooting]]
+- [[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|Certificate Troubleshooting]]
+- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod Security Troubleshooting]]
+- [[故障诊断/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|Audit Logging Troubleshooting]]
 

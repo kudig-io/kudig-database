@@ -127,7 +127,7 @@ description: '## 项目概述'
 - [[concepts/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
 - [[skills/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

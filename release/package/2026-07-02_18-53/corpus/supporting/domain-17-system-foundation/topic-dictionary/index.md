@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-17-system-foundation/topic-dictionary/README.md|Readme]]
+- [[domain-17-system-foundation/知识字典/README.md|Readme]]
 
 ## 子目录
 
@@ -37,7 +37,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-17-system-foundation/topic-dictionary/GAP-ANALYSIS.md|Gap Analysis]]
-- [[domain-17-system-foundation/topic-dictionary/MOC.md|Moc]]
-- [[domain-17-system-foundation/topic-dictionary/k8s-glossary.md|K8S Glossary]]
+- [[domain-17-system-foundation/知识字典/GAP-ANALYSIS.md|Gap Analysis]]
+- [[domain-17-system-foundation/知识字典/MOC.md|Moc]]
+- [[domain-17-system-foundation/知识字典/k8s-glossary.md|K8S Glossary]]
 

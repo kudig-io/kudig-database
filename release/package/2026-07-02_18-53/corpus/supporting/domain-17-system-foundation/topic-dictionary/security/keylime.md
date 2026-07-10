@@ -68,6 +68,6 @@ Keylime 是 MITRE 开源的 CNCF Sandbox 项目，基于 TPM（可信平台模�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/confidential-containers.md|Confidential Containers]]
-- [[domain-17-system-foundation/topic-dictionary/security/parsec.md|PARSEC]]
-- [[domain-17-system-foundation/topic-dictionary/security/spire.md|SPIRE]]
+- [[domain-17-system-foundation/知识字典/security/confidential-containers.md|Confidential Containers]]
+- [[domain-17-system-foundation/知识字典/security/parsec.md|PARSEC]]
+- [[domain-17-system-foundation/知识字典/security/spire.md|SPIRE]]

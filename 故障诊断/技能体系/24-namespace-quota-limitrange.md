@@ -1250,13 +1250,13 @@ receivers:
 
 ## Obsidian 相关文档
 
-- [[故障诊断/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
-- [[故障诊断/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
-- [[故障诊断/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
-- [[故障诊断/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
-- [[故障诊断/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
-- [[故障诊断/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 深度排查]]
-- [[故障诊断/topic-fta/list/resource-quota-fta.md|Quota/LimitRange 故障树分析]]
+- [[故障诊断/技能体系/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
+- [[故障诊断/技能体系/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
+- [[故障诊断/技能体系/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
+- [[故障诊断/技能体系/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
+- [[故障诊断/技能体系/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
+- [[故障诊断/资源排障/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 深度排查]]
+- [[故障诊断/FTA故障树/list/resource-quota-fta.md|Quota/LimitRange 故障树分析]]
 
 ```
 

@@ -1118,23 +1118,23 @@ receivers:
 
 ## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/11-control-plane-failure.md|SKILL-CP-001 etcd 与控制平面故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|SKILL-CONFIG-002 Namespace/Quota/LimitRange 问题]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/34-upgrade-migration-troubleshooting.md|升级迁移深度排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|升级迁移故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/11-control-plane-failure.md|SKILL-CP-001 etcd 与控制平面故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/24-namespace-quota-limitrange.md|SKILL-CONFIG-002 Namespace/Quota/LimitRange 问题]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/19-node-resource-pressure.md|SKILL-NODE-002 节点资源压力诊断]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/20-networkpolicy-connectivity.md|SKILL-NET-004 NetworkPolicy 连通性问题]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/21-statefulset-failure.md|SKILL-WORK-002 StatefulSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/22-daemonset-failure.md|SKILL-WORK-003 DaemonSet 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/23-job-cronjob-failure.md|SKILL-WORK-004 Job/CronJob 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/34-upgrade-migration-troubleshooting.md|升级迁移深度排查]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/cluster-upgrade-fta.md|升级迁移故障树分析]]
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/19-node-resource-pressure.md|19-node-resource-pressure]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/20-networkpolicy-connectivity.md|20-networkpolicy-connectivity]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/24-namespace-quota-limitrange.md|24-namespace-quota-limitrange]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/22-daemonset-failure.md|22-daemonset-failure]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/19-node-resource-pressure.md|19-node-resource-pressure]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/20-networkpolicy-connectivity.md|20-networkpolicy-connectivity]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/24-namespace-quota-limitrange.md|24-namespace-quota-limitrange]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/22-daemonset-failure.md|22-daemonset-failure]]
 
 ```
 

@@ -21,7 +21,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/daily-check-quiz.md|Daily Check Quiz]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/k8s-fundamentals-quiz.md|K8S Fundamentals Quiz]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/troubleshooting-lab-exam.md|Troubleshooting Lab Exam]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/assessment/daily-check-quiz.md|Daily Check Quiz]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/assessment/k8s-fundamentals-quiz.md|K8S Fundamentals Quiz]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/assessment/troubleshooting-lab-exam.md|Troubleshooting Lab Exam]]
 

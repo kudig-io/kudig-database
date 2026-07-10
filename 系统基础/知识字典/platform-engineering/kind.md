@@ -84,11 +84,11 @@ metadata:
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[系统基础/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[系统基础/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

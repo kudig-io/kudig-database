@@ -78,11 +78,11 @@ API Group 是 Kubernetes 中将相关 API 资源组织在一起的逻辑分组�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

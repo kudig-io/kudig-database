@@ -1784,9 +1784,9 @@ systemctl restart kube-apiserver
 - 相关知识域: 网络
 - 相关知识域: 存储
 - 相关知识域: 安全
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
+- [[系统基础/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

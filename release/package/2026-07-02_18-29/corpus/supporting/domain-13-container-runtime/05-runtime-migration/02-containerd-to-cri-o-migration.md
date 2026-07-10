@@ -519,9 +519,9 @@ ip netns list
 
 ## Related
 
-- [[domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations|containerd 生产运维]]
-- [[domain-13-container-runtime/03-containerd-cri-o/02-cri-o-production-guide|CRI-O 生产指南]]
-- [[domain-13-container-runtime/05-runtime-migration/01-docker-to-containerd-migration|Docker 到 containerd 迁移]]
+- [[domain-13-container-runtime/containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
+- [[domain-13-container-runtime/containerd-CRI-O/02-cri-o-production-guide|CRI-O 生产指南]]
+- [[domain-13-container-runtime/运行时迁移/01-docker-to-containerd-migration|Docker 到 containerd 迁移]]
 
 ## See Also
 

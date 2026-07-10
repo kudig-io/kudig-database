@@ -509,7 +509,7 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`]([[平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`buildKubeConfigFromSpec`]([[平台工程/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 
@@ -518,10 +518,10 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

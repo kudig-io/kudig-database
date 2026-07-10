@@ -203,7 +203,7 @@ authors:
   kubectl cordon <node>
   kubectl drain <node> --ignore-daemonsets --force
   ```
-- **证书过期**：参考 [[集群基础/03-control-plane/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]。
+- **证书过期**：参考 [[集群基础/控制平面/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]。
 - **安全事件**：立即隔离受感染 Pod/节点，保留镜像与日志，通知安全团队。
 - **外部依赖故障**：切换 DNS/流量至备用区域或降级模式。
 
@@ -271,11 +271,11 @@ IC：张三 | Communicator：李四 | 时间：2026-07-01 14:32 UTC+8
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
 - [[故障诊断/99-production-readiness-operations-guide.md|故障诊断 生产就绪运维指南]]
-- [[生产运维/03-incident-response/01-escalation-matrix-severity-levels.md|升级矩阵与严重等级]]
-- [[生产运维/03-incident-response/02-war-room-coordination-procedures.md|War Room 协调流程]]
-- [[生产运维/03-incident-response/03-communication-templates-stakeholder.md|事故沟通模板]]
-- [[生产运维/03-incident-response/04-incident-postmortem-template.md|无责复盘模板]]
-- [[生产运维/03-incident-response/23-incident-response-handling.md|事故响应处理]]
+- [[生产运维/事件响应/01-escalation-matrix-severity-levels.md|升级矩阵与严重等级]]
+- [[生产运维/事件响应/02-war-room-coordination-procedures.md|War Room 协调流程]]
+- [[生产运维/事件响应/03-communication-templates-stakeholder.md|事故沟通模板]]
+- [[生产运维/事件响应/04-incident-postmortem-template.md|无责复盘模板]]
+- [[生产运维/事件响应/23-incident-response-handling.md|事故响应处理]]
 
 
 <!-- risk-assessed -->

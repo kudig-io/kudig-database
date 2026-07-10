@@ -1,6 +1,6 @@
 Skill 库（`topic-skills/`）是 KUDIG 知识体系中面向 **AI Agent 运行时** 的核心执行层。它将 18 类高频 Kubernetes 工单场景，封装为从**症状触发**到**修复验证**的完整闭环 Runbook——每个 Skill 都是自包含的、机器可解析的、带风险门控的诊断-修复执行单元。Agent 接收到工单或告警后，沿着「路由匹配 → 症状识别 → 快速分级 → 分阶段诊断 → 根因确认 → 风险分级修复 → 验证确认 → 必要时升级」的标准流水线推进，形成可追溯、可审计的自动化工单处理闭环。
 
-Sources: [README.md](topic-skills/README.md#L1-L9), [skill-schema.md](topic-skills/skill-schema.md#L1-L27)
+Sources: [README.md](技能体系/README.md#L1-L9), [skill-schema.md](技能体系/skill-schema.md#L1-L27)
 
 ## 四层知识架构中的定位
 
@@ -32,11 +32,11 @@ Skill 库在 KUDIG 的知识分层中占据**最顶层执行位**，它向下依
 
 **关键区别**：FTA 回答"为什么"（因果链推理），结构化排查指南回答"怎么查"（人类可读的深度方法论），Skill 则回答"做什么"——Agent 拿到工单后执行什么动作序列、在哪个步骤停下来等审批、何时升级到人工。三者共同构成从演绎推理到自动化执行的完整链路。
 
-Sources: [README.md](topic-skills/README.md#L14-L40)
+Sources: [README.md](技能体系/README.md#L14-L40)
 
 ## Skill 文档的 12-Section 规范结构
 
-每个 Skill 文档严格遵循由 [skill-schema.md](topic-skills/skill-schema.md) 定义的 12-Section 规范结构，Agent 运行时按章节编号定位内容。前 10 个 Section 为必选，Section 11-12 为可选扩展。这一固定结构保证了 Agent 解析的确定性和跨 Skill 的一致性。
+每个 Skill 文档严格遵循由 [skill-schema.md](技能体系/skill-schema.md) 定义的 12-Section 规范结构，Agent 运行时按章节编号定位内容。前 10 个 Section 为必选，Section 11-12 为可选扩展。这一固定结构保证了 Agent 解析的确定性和跨 Skill 的一致性。
 
 ```mermaid
 graph TD
@@ -76,7 +76,7 @@ graph TD
 | Section 11: 云厂商特异性 | ACK/EKS/GKE/AKS 平台差异化诊断与修复 | **平台适配**：托管 K8s 的特殊路径 |
 | Section 12: 自动化集成接口 | 脚本入口、Webhook 回调、JSON 输出规范 | **系统集成**：与外部工具链的标准化对接 |
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L1-L27), [skill-schema.md](topic-skills/skill-schema.md#L100-L230)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L1-L27), [skill-schema.md](技能体系/skill-schema.md#L100-L230)
 
 ## YAML Front Matter：Agent 路由的元数据基石
 
@@ -108,7 +108,7 @@ fta_refs:
 
 **分类 ID 命名规范**采用 `SKILL-{CATEGORY}-{SEQ}` 格式，12 个类别覆盖 Node（NODE）、Pod（POD）、网络（NET）、存储（STORE）、安全（SEC）、工作负载（WORK）、镜像（IMAGE）、控制平面（CP）、弹性伸缩（SCALE）、配置（CONFIG）、可观测性（MONITOR/LOG）、性能（PERF）。文档内部，诊断步骤使用 `D{Phase}.{Seq}`、根因使用 `RC-{SEQ}`、修复操作使用 `REM-{SEQ}`、验证步骤使用 `V{Seq}` 的唯一 ID 标识，确保 Agent 定位内容的精确性。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L50-L96), [01-node-notready.md](topic-skills/01-node-notready.md#L1-L48), [skill-schema.md](topic-skills/skill-schema.md#L448-L460)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L50-L96), [01-node-notready.md](技能体系/01-node-notready.md#L1-L48), [skill-schema.md](技能体系/skill-schema.md#L448-L460)
 
 ## Agent 执行流水线：从工单到闭环
 
@@ -185,7 +185,7 @@ flowchart TD
 
 Agent 路由引擎通过三重匹配机制从输入源定位到正确的 Skill：**NLP 关键词**匹配工单文本中的自然语言描述（如"节点 NotReady"、"ImagePullBackOff"），**Event Reason**匹配 Kubernetes 集群事件流中的标准化事件标识（如 `NodeNotReady`、`FailedScheduling`），**Prometheus 指标**匹配告警规则中的指标模式（如 `kube_node_status_condition{condition="Ready",status="false"}`）。当多个 Skill 同时匹配时，Agent 进入症状模式表（Section 2）进行置信度排序，排除不适用的 Skill。
 
-Sources: [README.md](topic-skills/README.md#L176-L223)
+Sources: [README.md](技能体系/README.md#L176-L223)
 
 ### 症状识别与排除标准
 
@@ -193,7 +193,7 @@ Section 2 的症状模式表是路由决策的核心验证层。每个症状条�
 
 **排除标准**同样关键——它防止 Agent 将不属于本 Skill 的工单错误路由。例如节点状态 Ready 但 Pod CrashLoopBackOff 应路由到 SKILL-POD-001，节点被 cordon 标记为 SchedulingDisabled 但状态为 Ready 属于人工操作而非故障。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L115-L143), [01-node-notready.md](topic-skills/01-node-notready.md#L78-L128)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L115-L143), [01-node-notready.md](技能体系/01-node-notready.md#L78-L128)
 
 ### 快速分级：2 分钟影响评估
 
@@ -208,7 +208,7 @@ Sources: [skill-schema.md](topic-skills/skill-schema.md#L115-L143), [01-node-not
 
 存在**立即升级触发条件**（如 >50% 节点 NotReady、所有控制平面节点 NotReady、`kubectl get nodes` 本身超时）时，Agent 跳过全部诊断步骤，直接升级至人工。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L147-L184), [01-node-notready.md](topic-skills/01-node-notready.md#L132-L200)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L147-L184), [01-node-notready.md](技能体系/01-node-notready.md#L132-L200)
 
 ### 诊断工作流：三阶段递进
 
@@ -222,13 +222,13 @@ Sources: [skill-schema.md](topic-skills/skill-schema.md#L147-L184), [01-node-not
 
 对于批量 NotReady（多节点同时异常），Skill 还定义了 **Phase 4（级联故障分析）**：批量节点关联性分析（Zone/Rack 分布）→ 网络层面排查 → 控制平面健康检查 → 时钟偏差批量检查，用于区分独立故障和共同根因导致的级联故障。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L188-L230), [01-node-notready.md](topic-skills/01-node-notready.md#L205-L399), [01-node-notready.md](topic-skills/01-node-notready.md#L576-L666)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L188-L230), [01-node-notready.md](技能体系/01-node-notready.md#L205-L399), [01-node-notready.md](技能体系/01-node-notready.md#L576-L666)
 
 ### 根因分类与 FTA 映射
 
 Section 5 以结构化表格枚举所有已知根因，每条包含根因 ID（RC-xxx）、描述、概率（高/中/低）、诊断证据（引用 Section 4 的 Step ID）和 FTA 映射（引用 `topic-fta/list/` 中的底事件 ID）。以 SKILL-NODE-001 为例，它定义了 15 个根因，从高频的 kubelet 进程崩溃（RC-001，概率"高"）到低频的 kubelet 证书自动轮转失败（RC-015，概率~4%），每个根因都映射到对应的 FTA 故障树底事件，如 RC-001 映射到 `node-fta: BE-kubelet-crash`。
 
-Sources: [01-node-notready.md](topic-skills/01-node-notready.md#L669-L688), [skill-schema.md](topic-skills/skill-schema.md#L233-L248)
+Sources: [01-node-notready.md](技能体系/01-node-notready.md#L669-L688), [skill-schema.md](技能体系/skill-schema.md#L233-L248)
 
 ## 风险门控：四档修复与 Human-in-the-Loop
 
@@ -243,7 +243,7 @@ Sources: [01-node-notready.md](topic-skills/01-node-notready.md#L669-L688), [ski
 
 每个修复操作（REM-xxx）必须包含完整的 **前置检查** → **执行命令** → **后置验证** → **回滚方案** 四步链路。以 REM-002（清理磁盘空间）为例：前置检查确认磁盘使用率确实 >85%；执行清理已退出容器、无用镜像、旧日志和 journal 日志；后置验证确认使用率降至 85% 以下且 DiskPressure 恢复为 False；回滚方案说明清理为不可逆操作但仅涉及缓存/日志。对于 🔴 高风险操作如 REM-006（排空节点并重启），还必须包含 PodDisruptionBudget 检查、local storage 确认等安全检查项。
 
-Sources: [README.md](topic-skills/README.md#L250-L257), [01-node-notready.md](topic-skills/01-node-notready.md#L691-L900), [skill-schema.md](topic-skills/skill-schema.md#L254-L316)
+Sources: [README.md](技能体系/README.md#L250-L257), [01-node-notready.md](技能体系/01-node-notready.md#L691-L900), [skill-schema.md](技能体系/skill-schema.md#L254-L316)
 
 ## 验证闭环与升级协议
 
@@ -251,13 +251,13 @@ Sources: [README.md](topic-skills/README.md#L250-L257), [01-node-notready.md](to
 
 修复操作执行后，Section 7 定义了三级验证体系确保问题真正解决：**即时验证**（修复后 1 分钟内，确认节点状态恢复、Conditions 正常、Lease 续租），**短期监控**（5-15 分钟，监控 CPU/内存/磁盘使用率、kubelet 心跳、PLEG 延迟等指标的趋势），**回归检测**（24 小时内关注节点状态稳定性、资源使用趋势、kubelet 重启次数等）。只有当 Section 7.3 定义的**解决确认标准**全部满足（如节点 Ready 持续 >5 分钟、所有 Conditions 为 False、Pod 恢复 Running、无新增 Warning 事件），才能确认工单关闭。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L319-L354), [01-node-notready.md](topic-skills/01-node-notready.md#L1175-L1234)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L319-L354), [01-node-notready.md](技能体系/01-node-notready.md#L1175-L1234)
 
 ### 升级协议与交接信息包
 
 当 Agent 无法在既定 SLA 内解决问题时（诊断超时 10 分钟未确认根因、修复操作执行 2 次仍失败、严重性升级、未知根因、权限不足、发现安全疑虑），Section 8 定义了标准化的升级流程。升级时 Agent 必须准备完整的**交接信息包**：按时间顺序的完整诊断路径、已排除的根因及排除依据、可能的根因假设及置信度、关键资源的 YAML 快照、以及最近 30 分钟的关键事件时间线。这确保人工接手时不需要重复已完成的工作。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L358-L393), [01-node-notready.md](topic-skills/01-node-notready.md#L1237-L1302)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L358-L393), [01-node-notready.md](技能体系/01-node-notready.md#L1237-L1302)
 
 ## 18 个 Skill 全景索引
 
@@ -265,24 +265,24 @@ Sources: [skill-schema.md](topic-skills/skill-schema.md#L358-L393), [01-node-not
 
 | # | Skill ID | 名称 | 类别 | 文件 | 典型行数 |
 |---|----------|------|------|------|---------|
-| 01 | SKILL-NODE-001 | 节点 NotReady 诊断与修复 | Node | [01-node-notready.md](topic-skills/01-node-notready.md) | ~1416 |
-| 02 | SKILL-POD-001 | Pod CrashLoop/OOMKilled 诊断 | Pod | [02-pod-crashloop-oomkilled.md](topic-skills/02-pod-crashloop-oomkilled.md) | ~1400 |
-| 03 | SKILL-POD-002 | Pod Pending 调度失败诊断 | Pod | [03-pod-pending.md](topic-skills/03-pod-pending.md) | ~1350 |
-| 04 | SKILL-NET-001 | DNS 解析故障诊断 | Network | [04-dns-resolution-failure.md](topic-skills/04-dns-resolution-failure.md) | ~1380 |
-| 05 | SKILL-NET-002 | Service 连通性故障诊断 | Network | [05-service-connectivity.md](topic-skills/05-service-connectivity.md) | ~1360 |
-| 06 | SKILL-SEC-001 | 证书过期与 TLS 故障诊断 | Security | [06-certificate-expiry.md](topic-skills/06-certificate-expiry.md) | ~1340 |
-| 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](topic-skills/07-pvc-storage-failure.md) | ~1411 |
-| 08 | SKILL-WORK-001 | Deployment 滚动更新故障 | Workload | [08-deployment-rollout-failure.md](topic-skills/08-deployment-rollout-failure.md) | ~1328 |
-| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 故障 | Security | [09-rbac-quota-failure.md](topic-skills/09-rbac-quota-failure.md) | ~1511 |
-| 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](topic-skills/10-image-pull-failure.md) | ~1392 |
-| 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](topic-skills/11-control-plane-failure.md) | ~1535 |
-| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩故障 | Scaling | [12-autoscaling-failure.md](topic-skills/12-autoscaling-failure.md) | ~1414 |
-| 13 | SKILL-NET-003 | Ingress/Gateway 路由故障 | Network | [13-ingress-gateway-failure.md](topic-skills/13-ingress-gateway-failure.md) | ~1383 |
-| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理故障 | Configuration | [14-configmap-secret-failure.md](topic-skills/14-configmap-secret-failure.md) | ~1283 |
-| 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](topic-skills/15-monitoring-alerting-failure.md) | ~1343 |
-| 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](topic-skills/16-logging-pipeline-failure.md) | ~1500 |
-| 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](topic-skills/17-performance-bottleneck.md) | ~1436 |
-| 18 | SKILL-SECURITY-001 | 安全事件应急响应 | Security | [18-security-incident-response.md](topic-skills/18-security-incident-response.md) | ~1619 |
+| 01 | SKILL-NODE-001 | 节点 NotReady 诊断与修复 | Node | [01-node-notready.md](技能体系/01-node-notready.md) | ~1416 |
+| 02 | SKILL-POD-001 | Pod CrashLoop/OOMKilled 诊断 | Pod | [02-pod-crashloop-oomkilled.md](技能体系/02-pod-crashloop-oomkilled.md) | ~1400 |
+| 03 | SKILL-POD-002 | Pod Pending 调度失败诊断 | Pod | [03-pod-pending.md](技能体系/03-pod-pending.md) | ~1350 |
+| 04 | SKILL-NET-001 | DNS 解析故障诊断 | Network | [04-dns-resolution-failure.md](技能体系/04-dns-resolution-failure.md) | ~1380 |
+| 05 | SKILL-NET-002 | Service 连通性故障诊断 | Network | [05-service-connectivity.md](技能体系/05-service-connectivity.md) | ~1360 |
+| 06 | SKILL-SEC-001 | 证书过期与 TLS 故障诊断 | Security | [06-certificate-expiry.md](技能体系/06-certificate-expiry.md) | ~1340 |
+| 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](技能体系/07-pvc-storage-failure.md) | ~1411 |
+| 08 | SKILL-WORK-001 | Deployment 滚动更新故障 | Workload | [08-deployment-rollout-failure.md](技能体系/08-deployment-rollout-failure.md) | ~1328 |
+| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 故障 | Security | [09-rbac-quota-failure.md](技能体系/09-rbac-quota-failure.md) | ~1511 |
+| 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](技能体系/10-image-pull-failure.md) | ~1392 |
+| 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](技能体系/11-control-plane-failure.md) | ~1535 |
+| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩故障 | Scaling | [12-autoscaling-failure.md](技能体系/12-autoscaling-failure.md) | ~1414 |
+| 13 | SKILL-NET-003 | Ingress/Gateway 路由故障 | Network | [13-ingress-gateway-failure.md](技能体系/13-ingress-gateway-failure.md) | ~1383 |
+| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理故障 | Configuration | [14-configmap-secret-failure.md](技能体系/14-configmap-secret-failure.md) | ~1283 |
+| 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](技能体系/15-monitoring-alerting-failure.md) | ~1343 |
+| 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](技能体系/16-logging-pipeline-failure.md) | ~1500 |
+| 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](技能体系/17-performance-bottleneck.md) | ~1436 |
+| 18 | SKILL-SECURITY-001 | 安全事件应急响应 | Security | [18-security-incident-response.md](技能体系/18-security-incident-response.md) | ~1619 |
 
 ### 症状→Skill 快速路由表
 
@@ -304,7 +304,7 @@ Sources: [skill-schema.md](topic-skills/skill-schema.md#L358-L393), [01-node-not
 | HPA 不触发扩容 / Metrics Server 无数据 | SKILL-SCALE-001 | 0.90 |
 | Ingress 404/502/503 / Gateway 路由异常 | SKILL-NET-003 | 0.90 |
 
-Sources: [README.md](topic-skills/README.md#L44-L64), [README.md](topic-skills/README.md#L106-L168)
+Sources: [README.md](技能体系/README.md#L44-L64), [README.md](技能体系/README.md#L106-L168)
 
 ## IDE 目录格式 Skill：可执行脚本与机器可解析数据
 
@@ -333,7 +333,7 @@ skill-set/k8s-node-notready/
 
 `assets/skill-metadata.yaml` 是整个目录格式的元数据核心，它不仅包含 YAML front matter 的所有路由信息，还额外声明了 RC→FTA 的双向映射索引（如 `RC-001: ["evt_kubelet_down", "evt_heartbeat_fail"]`）、脚本清单（含参数、风险级别、所属 Phase）、根因和修复操作的完整索引，以及典型触发场景的结构化描述。Agent 运行时可以仅解析此 YAML 文件即可获得完整的 Skill 执行上下文。
 
-Sources: [README.md](topic-skills/README.md#L348-L371), [SKILL.md](topic-skills/skill-set/k8s-node-notready/SKILL.md#L1-L190), [skill-metadata.yaml](topic-skills/skill-set/k8s-node-notready/assets/skill-metadata.yaml#L1-L200)
+Sources: [README.md](技能体系/README.md#L348-L371), [SKILL.md](技能体系/skill-set/k8s-node-notready/SKILL.md#L1-L190), [skill-metadata.yaml](技能体系/skill-set/k8s-node-notready/assets/skill-metadata.yaml#L1-L200)
 
 ## 本地 Demo 框架：Kind 集群上的闭环演练
 
@@ -362,7 +362,7 @@ bash teardown.sh                # 清理
 
 每个 Demo 场景按照 6-Phase 结构运行：Phase 0 故障注入 → Phase 1 症状检测（Section 2）→ Phase 2 快速分级（Section 3）→ Phase 3 诊断工作流（Section 4）→ Phase 4 根因确认（Section 5）→ Phase 5 修复操作（Section 6）→ Phase 6 验证确认（Section 7）。
 
-Sources: [skills-run/README.md](topic-skills/skills-run/README.md#L1-L120), [README.md](topic-skills/README.md#L317-L342)
+Sources: [skills-run/README.md](技能体系/skills-run/README.md#L1-L120), [README.md](技能体系/README.md#L317-L342)
 
 ## 反馈闭环与知识进化
 
@@ -370,7 +370,7 @@ Skill 库设计了内建的**知识进化机制**（Section 10）。每次 Agent
 
 Section 10.1 的**常见误诊模式表**是这一机制的具象化成果。以节点 NotReady 为例，它记录了 6 个高频误诊场景：网络抖动误判为 kubelet 崩溃（实际为交换机端口 flapping）、DiskPressure 归因于镜像过多（实际为日志轮转失败）、PLEG 不健康误判为容器运行时故障（实际为容器 D 状态阻塞）、证书过期误判为网络故障等。每个误诊模式都附带避免方法，Agent 在诊断过程中可以参考这些经验避免重复犯错。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L423-L444), [01-node-notready.md](topic-skills/01-node-notready.md#L1373-L1416)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L423-L444), [01-node-notready.md](技能体系/01-node-notready.md#L1373-L1416)
 
 ## 版本兼容与云厂商适配
 
@@ -388,13 +388,13 @@ Sources: [skill-schema.md](topic-skills/skill-schema.md#L423-L444), [01-node-not
 
 诊断工作流的每个步骤中，受版本影响的行为都通过 `**[vX.XX+]**` 标记明确指出，如 `[v1.30+]` NodeSwap 启用时 MemoryPressure 计算包含 swap 使用量、`[v1.31+]` EventedPLEG 默认启用减少 PLEG 误报、`[v1.32+]` nftables 模式下需使用 `nft list ruleset` 替代 `iptables -L`。
 
-Sources: [README.md](topic-skills/README.md#L269-L297), [01-node-notready.md](topic-skills/01-node-notready.md#L1305-L1370)
+Sources: [README.md](技能体系/README.md#L269-L297), [01-node-notready.md](技能体系/01-node-notready.md#L1305-L1370)
 
 ### 云厂商特异性（Section 11）
 
 Section 11 为托管 Kubernetes 服务提供平台差异化的诊断与修复指导，覆盖 ACK（阿里云）、EKS（AWS）、GKE（Google Cloud）、AKS（Azure）四大平台。每条差异项包含平台标识、与标准 K8s 的行为差异说明、云厂商 CLI 的诊断命令、平台特定的修复路径和官方文档链接。典型差异包括：ACK 控制平面托管导致无法直接访问 etcd，需通过 `aliyun cs DescribeClusterDetail` 或工单排查；EKS 的 ENI 模式网络需关注 IP 地址耗尽；GKE 自动升级可能导致意外重启。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L464-L493)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L464-L493)
 
 ## 自动化集成接口（Section 12）
 
@@ -406,7 +406,7 @@ Section 12 定义了 Skill 与外部系统集成的标准接口，包含三个�
 
 **输出规范**：诊断报告和修复建议以标准 JSON Schema 输出，包含 `findings`（每步发现）、`root_cause_candidates`（候选根因及置信度）、`recommended_action`（推荐修复操作、风险级别、执行命令、回滚命令），便于上游系统解析和审计。
 
-Sources: [skill-schema.md](topic-skills/skill-schema.md#L497-L563)
+Sources: [skill-schema.md](技能体系/skill-schema.md#L497-L563)
 
 ## 增强历程与质量标准
 
@@ -421,13 +421,13 @@ Skill 库经历过一次系统性全面增强（2026-04），将 Skill 数量从
 | 版本兼容 | K8s v1.28-v1.32 版本兼容矩阵 |
 | 命令验证 | 所有命令准确可执行 |
 
-Sources: [ENHANCEMENT-RECORD.md](topic-skills/ENHANCEMENT-RECORD.md#L1-L178)
+Sources: [ENHANCEMENT-RECORD.md](技能体系/ENHANCEMENT-RECORD.md#L1-L178)
 
 ## 后续演进方向
 
 Skill 库的演进规划聚焦三个方向：**IDE 目录格式扩展**（为全部 18 个 Skill 提供可执行脚本和机器可解析数据），**云厂商特异性补充**（为现有 Skill 添加 ACK/EKS/GKE/AKS 差异化内容），以及**新 Skill 开发**（节点磁盘压力 SKILL-NODE-002、NetworkPolicy 连通性 SKILL-NET-004、StatefulSet/DaemonSet/Job 故障诊断 SKILL-WORK-002/003/004）。
 
-Sources: [README.md](topic-skills/README.md#L375-L394)
+Sources: [README.md](技能体系/README.md#L375-L394)
 
 ## 关联导航
 

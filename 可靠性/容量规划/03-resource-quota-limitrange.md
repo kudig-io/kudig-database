@@ -468,13 +468,13 @@ kubectl describe limitrange -n <namespace>
 
 ## Related
 
-- [[可靠性/03-capacity-planning/01-capacity-planning-framework.md|容量规划框架]]
-- [[生产运维/02-governance/14-resource-quota-management.md|资源配额管理]]
+- [[可靠性/容量规划/01-capacity-planning-framework.md|容量规划框架]]
+- [[生产运维/集群治理/14-resource-quota-management.md|资源配额管理]]
 
 ## See Also
 
-- [[故障诊断/01-resource-troubleshooting/24-quota-limitrange-troubleshooting.md|ResourceQuota/LimitRange 故障诊断]]
-- [[发布变更/01-gitops/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
+- [[故障诊断/资源排障/24-quota-limitrange-troubleshooting.md|ResourceQuota/LimitRange 故障诊断]]
+- [[发布变更/GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
 
 
 <!-- risk-assessed -->

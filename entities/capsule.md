@@ -91,7 +91,7 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 - capsule
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -622,7 +622,7 @@ spec:
 
 ---
 
-<!-- chunk: 6. [[系统基础/topic-cheat-sheet/gitops.md|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
+<!-- chunk: 6. [[系统基础/速查卡/gitops.md|GitOps]] 速查卡|GitOps]] 集成 -->## 6. GitOps 集成
 
 ## 6.1 Argo CD + Argo Rollouts + Flagger
 

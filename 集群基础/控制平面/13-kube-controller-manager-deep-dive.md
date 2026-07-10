@@ -1341,8 +1341,8 @@ token
 - 相关知识域: 网络
 - 相关知识域: 存储
 - 相关知识域: 安全
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
+- [[系统基础/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
 ## See Also
 

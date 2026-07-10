@@ -143,7 +143,7 @@ kubectl get pods -n ingress-nginx -o wide --show-labels
 
 # 生产最小配置: 3 副本 + PDB minAvailable=2 + 跨 AZ topologySpreadConstraints
 ```
-同时应配置 `config_last_reload_successful` 和 `nginx_ingress_controller_ssl_expire_time_seconds` 等关键指标的告警。对于七层流量较大的场景，建议将 Ingress 控制器与后端 Service 之间通过 Service Mesh 进行灰度与熔断治理。详情参考 [[00-core-k8s-networking/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]。
+同时应配置 `config_last_reload_successful` 和 `nginx_ingress_controller_ssl_expire_time_seconds` 等关键指标的告警。对于七层流量较大的场景，建议将 Ingress 控制器与后端 Service 之间通过 Service Mesh 进行灰度与熔断治理。详情参考 [[K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]。
 
 ### 2.4 CoreDNS 级联故障
 
@@ -288,17 +288,17 @@ iperf3 -c <server-ip> -t 30 -P 4
 | HTTPS 握手后卡死 | MTU 不匹配导致大包丢包 | `kubectl exec <pod> -- ping -M do -s 1472 <target>` | 修正 Pod/隧道/物理网卡 MTU |
 | Service Mesh 服务间调用失败 | Sidecar 注入失败 / DestinationRule 配置错误 | `kubectl get pods -n <ns>`; `istioctl analyze` | 重新注入 Sidecar；修正 DestinationRule |
 
-排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[../domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
+排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[../domain-10-troubleshooting-diagnostics/FTA故障树/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
 
 ## 5. 与其他域的协作边界
 
 | 本域职责 | 协作域 | 边界说明 |
 |---|---|---|
 | CNI / Service / Ingress 高可用架构 | [[../domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|domain-01-cluster-fundamentals]] | 本域提供网络组件 HA 要求，集群域负责控制面、节点与升级基线 |
-| NetworkPolicy / mTLS / 证书生命周期 | [[../domain-05-security-compliance/02-network-security/02-network-security-policies.md|domain-05-security-compliance]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
-| 网络指标、流量拓扑、告警 | [[../domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md|domain-06-observability]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
-| 网络 SLO/SLI、容灾演练 | [[../domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|domain-09-reliability-engineering]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
-| 网络故障树与现场诊断 | [[../domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|domain-10-troubleshooting-diagnostics]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
+| NetworkPolicy / mTLS / 证书生命周期 | [[../domain-05-security-compliance/网络安全/02-network-security-policies.md|domain-05-security-compliance]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
+| 网络指标、流量拓扑、告警 | [[../domain-06-observability/指标/99-prometheus-enterprise-guide.md|domain-06-observability]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
+| 网络 SLO/SLI、容灾演练 | [[../domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|domain-09-reliability-engineering]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
+| 网络故障树与现场诊断 | [[../domain-10-troubleshooting-diagnostics/FTA故障树/fta-index.md|domain-10-troubleshooting-diagnostics]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
 | 值班、变更、事件响应 | [[../domain-11-production-operations/03-on-call-playbook.md|domain-11-production-operations]] | 本域提供网络专项 runbook，生产运维域负责值班体系与变更管理 |
 
 明确协作边界可以避免上线前责任不清、运行期间互相推诿。网络域应主动输出网络组件的 SLO 要求、变更窗口建议和应急预案，而其他域则提供平台级支撑。跨域变更评审时，网络域代表应参与涉及 CNI、Ingress、证书和 DNS 的变更，确保网络层面的影响被充分评估。
@@ -306,17 +306,17 @@ iperf3 -c <server-ip> -t 30 -P 4
 ## 6. 推荐阅读
 
 ### 本域专项指南
-- [[00-core-k8s-networking/33-network-troubleshooting.md|网络故障诊断与链路排查]]
-- [[00-core-k8s-networking/27-cni-troubleshooting-optimization.md|CNI 故障排查与优化]]
-- [[00-core-k8s-networking/28-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与性能优化]]
-- [[00-core-k8s-networking/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]
-- [[00-core-k8s-networking/34-network-performance-tuning.md|网络性能调优]]
-- [[00-core-k8s-networking/16-networkpolicy-deep-practice.md|NetworkPolicy 深度实践]]
-- [[00-core-k8s-networking/18-network-encryption-mtls.md|网络加密与 mTLS]]
-- [[00-core-k8s-networking/32-multi-cluster-networking.md|多集群网络]]
-- [[00-core-k8s-networking/09-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
-- [[03-api-gateway/11-api-gateway-security-practices.md|API Gateway 安全实践]]
-- [[02-service-mesh/99-linkerd-service-mesh-guide.md|Linkerd Service Mesh 指南]]
+- [[K8s网络核心/33-network-troubleshooting.md|网络故障诊断与链路排查]]
+- [[K8s网络核心/27-cni-troubleshooting-optimization.md|CNI 故障排查与优化]]
+- [[K8s网络核心/28-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与性能优化]]
+- [[K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]
+- [[K8s网络核心/34-network-performance-tuning.md|网络性能调优]]
+- [[K8s网络核心/16-networkpolicy-deep-practice.md|NetworkPolicy 深度实践]]
+- [[K8s网络核心/18-network-encryption-mtls.md|网络加密与 mTLS]]
+- [[K8s网络核心/32-multi-cluster-networking.md|多集群网络]]
+- [[K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
+- [[API网关/11-api-gateway-security-practices.md|API Gateway 安全实践]]
+- [[服务网格/99-linkerd-service-mesh-guide.md|Linkerd Service Mesh 指南]]
 
 ### 本域规划补齐文件（缺口分析推荐）
 - Calico 生产运维指南（待补充）
@@ -327,12 +327,12 @@ iperf3 -c <server-ip> -t 30 -P 4
 
 ### 跨域参考
 - [[../domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|集群生产架构设计原则]]
-- [[../domain-05-security-compliance/02-network-security/02-network-security-policies.md|网络安全策略]]
-- [[../domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
-- [[../domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
-- [[../domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|DNS 故障树]]
-- [[../domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|Ingress 故障树]]
+- [[../domain-05-security-compliance/网络安全/02-network-security-policies.md|网络安全策略]]
+- [[../domain-06-observability/指标/99-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
+- [[../domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[../domain-10-troubleshooting-diagnostics/FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
+- [[../domain-10-troubleshooting-diagnostics/FTA故障树/list/dns-fta.md|DNS 故障树]]
+- [[../domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|Ingress 故障树]]
 
 
 <!-- risk-assessed -->

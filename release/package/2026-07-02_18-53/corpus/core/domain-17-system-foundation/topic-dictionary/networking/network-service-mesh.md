@@ -67,6 +67,6 @@ Network Service Mesh（NSM）是 CNCF Sandbox 项目，使用服务网格的概�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/submariner.md|Submariner]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cni.md|CNI]]
-- [[domain-17-system-foundation/topic-dictionary/networking/loxilb.md|LoxiLB]]
+- [[domain-17-system-foundation/知识字典/networking/submariner.md|Submariner]]
+- [[domain-17-system-foundation/知识字典/networking/cni.md|CNI]]
+- [[domain-17-system-foundation/知识字典/networking/loxilb.md|LoxiLB]]

@@ -276,7 +276,7 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 - [高级 Pod 运维模式](../../domain-02-workloads-applications/12-advanced-pod-patterns.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [Pod 综合故障排查手册](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [Pod 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md)
+- [Pod 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/pod-fta.md)
 - [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
 - [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
 
@@ -285,7 +285,7 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

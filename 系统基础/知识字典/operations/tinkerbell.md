@@ -70,6 +70,6 @@ Tinkerbell 是 Equinix Metal 开源的 CNCF Sandbox 项目，提供裸金属服�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|kubeadm]]
-- [[系统基础/topic-dictionary/operations/kubean.md|Kubean]]
-- [[系统基础/topic-dictionary/fundamentals/flatcar.md|Flatcar]]
+- [[系统基础/知识字典/tooling/kubeadm.md|kubeadm]]
+- [[系统基础/知识字典/operations/kubean.md|Kubean]]
+- [[系统基础/知识字典/fundamentals/flatcar.md|Flatcar]]

@@ -685,8 +685,8 @@ generatorOptions:
 
 ## Related
 
-- [[清单模式/02-kustomize-patterns/01-kustomize-base-overlay-structure|Kustomize Base/Overlay 分层架构]]
-- [[清单模式/02-kustomize-patterns/03-kustomize-remote-build-gitops|Kustomize 高级特性与 GitOps]]
+- [[清单模式/Kustomize模式/01-kustomize-base-overlay-structure|Kustomize Base/Overlay 分层架构]]
+- [[清单模式/Kustomize模式/03-kustomize-remote-build-gitops|Kustomize 高级特性与 GitOps]]
 
 ## See Also
 

@@ -79,7 +79,7 @@ kube-apiserver 为以下场景生成 spans：
 
 - 传入的 HTTP 请求
 - 对外部 webhook 的请求
-- 对 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 的请求
+- 对 [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 的请求
 - 重入请求（re-entrant requests）
 
 kube-apiserver 会在对外请求时传播 **W3C Trace Context**，但不会利用传入请求附带的 trace context（因为 apiserver 通常是公共端点）。
@@ -144,7 +144,7 @@ tracing:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

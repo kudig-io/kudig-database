@@ -1076,18 +1076,18 @@ my-k8s-worker          Ready    <none>          25s   v1.32.0
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[domain-08-release-change-management/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[domain-08-release-change-management/部署方案/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[domain-08-release-change-management/部署方案/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[domain-08-release-change-management/部署方案/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[domain-08-release-change-management/部署方案/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/linux.md|linux]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 
 ```
 

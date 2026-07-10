@@ -85,7 +85,7 @@ authors:
 
 <!-- chunk: 1. 项目概述 -->## 1. 项目概述
 
-Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
+Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 网关项目，目标是以 **Gateway API First** 的设计原则，为 Envoy Proxy 提供标准化、云原生的控制平面。
 
 ## 核心定位
 

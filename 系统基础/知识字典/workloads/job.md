@@ -77,11 +77,11 @@ Job 是 Kubernetes 中用于运行一次性任务的工作负载控制器。它�
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|Statefulset]]
-- [[系统基础/topic-dictionary/workloads/daemonset.md|Daemonset]]
-- [[系统基础/topic-dictionary/workloads/replicaset.md|Replicaset]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/workloads/statefulset.md|Statefulset]]
+- [[系统基础/知识字典/workloads/daemonset.md|Daemonset]]
+- [[系统基础/知识字典/workloads/replicaset.md|Replicaset]]
 
 
 <!-- risk-assessed -->

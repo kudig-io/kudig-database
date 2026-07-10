@@ -23,13 +23,13 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: middleware
 ticket_type: 有状态应用启动失败
 skill_ref:
-- '[[存储/01-k8s-storage/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
-- '[[工作负载/00-core-workloads/03-statefulset-advanced-operations.md|StatefulSet
+- '[[存储/K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
+- '[[工作负载/核心工作负载/03-statefulset-advanced-operations.md|StatefulSet
   进阶运维]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/statefulset-fta.md|FTA:
+- '[[故障诊断/FTA故障树/list/statefulset-fta.md|FTA:
   StatefulSet 启动失败]]'
-- '[[故障诊断/topic-fta/list/csi-fta.md|FTA: CSI 存储异常]]'
+- '[[故障诊断/FTA故障树/list/csi-fta.md|FTA: CSI 存储异常]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-048
 status: duplicate
@@ -62,13 +62,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
+- target: '[[生产运维/工单案例/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
 - target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
@@ -303,7 +303,7 @@ kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=100 | grep -i
 > **当前状态：** `mysql-0/1/2` 全部 Running，主从同步状态正常，业务连接测试通过。
 >
 > **后续建议：**
-> - 参考 [[存储/01-k8s-storage/09-pv-pvc-troubleshooting.md|PV/PVC 排障]] 建立 StorageClass 与可用区库存的联动监控；
+> - 参考 [[存储/K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]] 建立 StorageClass 与可用区库存的联动监控；
 > - 为 `alicloud-disk-ssd` StorageClass 配置 `allowedTopologies` 或 StatefulSet 中显式 topology 约束，避免调度到无盘区；
 > - 若需三可用区部署，请提交 c 区 ESSD 库存扩容工单，库存恢复后再解除 nodeAffinity 限制；
 > - 定期演练 MySQL StatefulSet 备份恢复，确保数据可恢复。

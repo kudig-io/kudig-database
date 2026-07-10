@@ -355,12 +355,12 @@ Agent 在执行 Skill 后应记录：
 
 | 资源 | 路径 | 用途 |
 |------|------|------|
-| FTA 故障树库 | [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) | 每个 Skill 对应的故障分析模型 |
-| FEBM 循证方法论 | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) | Agent 工单处理的理论基础 |
-| 结构化故障排查 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) | 深度排查参考指南 |
-| Agent 设计 | [domain-14-ai-ml-infra/02-ai-agents/](../domain-14-ai-ml-infra/02-ai-agents/) | AI Agent 工程与架构设计 |
-| 事件管理 Runbook | [domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md](../domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md) | 事件管理流程模板 |
-| 生产排障 Playbook | [domain-17-system-foundation/topic-dictionary/16-production-troubleshooting-playbook.md](../domain-17-system-foundation/topic-dictionary/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
+| FTA 故障树库 | [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/FTA故障树/list/) | 每个 Skill 对应的故障分析模型 |
+| FEBM 循证方法论 | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/FEBM方法论/) | Agent 工单处理的理论基础 |
+| 结构化故障排查 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/高级排障/) | 深度排查参考指南 |
+| Agent 设计 | [domain-14-ai-ml-infra/02-ai-agents/](../domain-14-ai-ml-infra/AI-Agents/) | AI Agent 工程与架构设计 |
+| 事件管理 Runbook | [domain-17-system-foundation/topic-dictionary/12-incident-management-runbooks.md](../domain-17-system-foundation/知识字典/12-incident-management-runbooks.md) | 事件管理流程模板 |
+| 生产排障 Playbook | [domain-17-system-foundation/topic-dictionary/16-production-troubleshooting-playbook.md](../domain-17-system-foundation/知识字典/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |
 | Skill 文档模板 | [skill-schema.md](./skill-schema.md) | 新建 Skill 的规范化模板 |
 | IDE 目录格式 Skill | [k8s-node-notready/](./skill-set/k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
 | **本地 Demo** | [skills-run/](./skills-run/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
@@ -456,19 +456,19 @@ skill-set/k8s-node-notready/
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 ```
 

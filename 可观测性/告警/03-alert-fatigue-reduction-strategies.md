@@ -512,8 +512,8 @@ spec:
 
 ## Related
 
-- [[可观测性/05-alerting/01-alertmanager-deep-configuration|Alertmanager 深度配置]]
-- [[可观测性/05-alerting/02-pagerduty-opsgenie-integration|告警平台集成]]
+- [[可观测性/告警/01-alertmanager-deep-configuration|Alertmanager 深度配置]]
+- [[可观测性/告警/02-pagerduty-opsgenie-integration|告警平台集成]]
 
 ## See Also
 

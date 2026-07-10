@@ -17,13 +17,13 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|Ack Ecs Compute]]
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|Ack Slb Nlb Alb]]
-- [[domain-12-cloud-providers/05-alicloud-ack/242-ack-vpc-network.md|Ack Vpc Network]]
-- [[domain-12-cloud-providers/05-alicloud-ack/243-ack-ram-authorization.md|Ack Ram Authorization]]
-- [[domain-12-cloud-providers/05-alicloud-ack/244-ack-ros-iac.md|Ack Ros Iac]]
-- [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|Ack Ebs Storage]]
-- [[domain-12-cloud-providers/05-alicloud-ack/99-alicloud-ack-production-runbook.md|Alicloud Ack Production Runbook]]
-- [[domain-12-cloud-providers/05-alicloud-ack/alicloud-ack-overview.md|Alicloud Ack Overview]]
-- [[domain-12-cloud-providers/05-alicloud-ack/service-ack-practical-guide.md|Service Ack Practical Guide]]
+- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|Ack Ecs Compute]]
+- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|Ack Slb Nlb Alb]]
+- [[domain-12-cloud-providers/阿里云/ack/242-ack-vpc-network.md|Ack Vpc Network]]
+- [[domain-12-cloud-providers/阿里云/ack/243-ack-ram-authorization.md|Ack Ram Authorization]]
+- [[domain-12-cloud-providers/阿里云/ack/244-ack-ros-iac.md|Ack Ros Iac]]
+- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|Ack Ebs Storage]]
+- [[domain-12-cloud-providers/阿里云/ack/99-alicloud-ack-production-runbook.md|Alicloud Ack Production Runbook]]
+- [[domain-12-cloud-providers/阿里云/ack/alicloud-ack-overview.md|Alicloud Ack Overview]]
+- [[domain-12-cloud-providers/阿里云/ack/service-ack-practical-guide.md|Service Ack Practical Guide]]
 

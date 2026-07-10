@@ -69,6 +69,6 @@ SpinKube 是 Fermyon 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Sp
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[系统基础/topic-dictionary/specialized-workloads/knative.md|Knative]]
-- [[系统基础/topic-dictionary/specialized-workloads/openfaas.md|OpenFaaS]]
+- [[系统基础/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[系统基础/知识字典/specialized-workloads/knative.md|Knative]]
+- [[系统基础/知识字典/specialized-workloads/openfaas.md|OpenFaaS]]

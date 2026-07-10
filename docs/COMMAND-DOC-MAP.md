@@ -1,9 +1,9 @@
 ---
 title: KUDIG 命令 → 文档映射
 description: '| `kubectl logs` | 查看容器日志 | [[故障诊断/README.md|README]]
-  | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |'
+  | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |'
 summary: '| `kubectl logs` | 查看容器日志 | [[故障诊断/README.md|README]]
-  | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |'
+  | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |'
 category: general
 tags:
 - k8s
@@ -89,35 +89,35 @@ tier: peripheral---
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `kubectl get pods` | 查看 Pod 状态 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |
-| `kubectl describe pod` | Pod 详情和事件 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |
-| `kubectl logs` | 查看容器日志 | [[故障诊断/README.md|README]] | [[故障诊断/topic-fta/list/pod-fta.md|pod fta]] |
-| `kubectl exec` | 进入容器 | [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|11 pod lifecycle events]] | - |
+| `kubectl get pods` | 查看 Pod 状态 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl describe pod` | Pod 详情和事件 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl logs` | 查看容器日志 | [[故障诊断/README.md|README]] | [[故障诊断/FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl exec` | 进入容器 | [[工作负载/核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | - |
 | `kubectl get events` | 查看集群事件 | [[系统基础/README.md|README]] | - |
-| `kubectl get nodes` | 节点状态 | [[故障诊断/README.md|README]] | [[故障诊断/topic-fta/list/node-fta.md|node fta]] |
-| `kubectl describe node` | 节点详情 | [[故障诊断/README.md|README]] | [[故障诊断/topic-fta/list/node-fta.md|node fta]] |
-| `kubectl rollout status` | 滚动更新状态 | 工作负载/02-deployment-production-patterns | [[故障诊断/topic-fta/list/deployment-fta.md|deployment fta]] |
-| `kubectl rollout undo` | 回滚 | 集群基础/18-upgrade-migration-strategy | [[故障诊断/topic-fta/list/cluster-upgrade-fta.md|cluster upgrade fta]] |
+| `kubectl get nodes` | 节点状态 | [[故障诊断/README.md|README]] | [[故障诊断/FTA故障树/list/node-fta.md|node fta]] |
+| `kubectl describe node` | 节点详情 | [[故障诊断/README.md|README]] | [[故障诊断/FTA故障树/list/node-fta.md|node fta]] |
+| `kubectl rollout status` | 滚动更新状态 | 工作负载/02-deployment-production-patterns | [[故障诊断/FTA故障树/list/deployment-fta.md|deployment fta]] |
+| `kubectl rollout undo` | 回滚 | 集群基础/18-upgrade-migration-strategy | [[故障诊断/FTA故障树/list/cluster-upgrade-fta.md|cluster upgrade fta]] |
 | `kubectl apply -f` | 应用配置 | [[清单模式/README.md|README]] | - |
 | `kubectl delete` | 删除资源 | [[清单模式/README.md|README]] | - |
-| `kubectl port-forward` | 端口转发 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/service-fta.md|service fta]] |
-| `kubectl scale` | 扩缩容 | 工作负载/02-deployment-production-patterns | [[故障诊断/topic-fta/list/hpa-fta.md|hpa fta]] |
+| `kubectl port-forward` | 端口转发 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/service-fta.md|service fta]] |
+| `kubectl scale` | 扩缩容 | 工作负载/02-deployment-production-patterns | [[故障诊断/FTA故障树/list/hpa-fta.md|hpa fta]] |
 | `kubectl top nodes` | 节点资源使用 | [[可观测性/README.md|README]] | - |
 | `kubectl top pods` | Pod 资源使用 | [[可观测性/README.md|README]] | - |
 | `kubectl auth can-i` | 权限检查 | [[安全/README.md|README]] | - |
-| `kubectl get pv/pvc` | 存储状态 | [[存储/README.md|README]] | [[故障诊断/topic-fta/list/csi-fta.md|csi fta]] |
-| `kubectl get ingress` | Ingress 状态 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/ingress-fta.md|ingress fta]] |
-| `kubectl get svc` | Service 状态 | [[网络/README.md|README]] | [[故障诊断/topic-fta/list/service-fta.md|service fta]] |
-| `kubectl get configmap/secret` | 配置和密钥 | [[安全/README.md|README]] | [[故障诊断/topic-fta/list/rbac-fta.md|rbac fta]] |
+| `kubectl get pv/pvc` | 存储状态 | [[存储/README.md|README]] | [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]] |
+| `kubectl get ingress` | Ingress 状态 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/ingress-fta.md|ingress fta]] |
+| `kubectl get svc` | Service 状态 | [[网络/README.md|README]] | [[故障诊断/FTA故障树/list/service-fta.md|service fta]] |
+| `kubectl get configmap/secret` | 配置和密钥 | [[安全/README.md|README]] | [[故障诊断/FTA故障树/list/rbac-fta.md|rbac fta]] |
 
 ## etcdctl 命令映射
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `etcdctl member list` | 成员列表 | 集群基础/11-etcd-deep-dive | [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]] |
-| `etcdctl endpoint health` | 健康检查 | 集群基础/11-etcd-deep-dive | [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]] |
-| `etcdctl snapshot save` | 备份 | [[可靠性/README.md|README]] | [[故障诊断/topic-fta/list/backup-restore-fta.md|backup restore fta]] |
-| `etcdctl snapshot restore` | 恢复 | [[可靠性/README.md|README]] | [[故障诊断/topic-fta/list/backup-restore-fta.md|backup restore fta]] |
+| `etcdctl member list` | 成员列表 | 集群基础/11-etcd-deep-dive | [[故障诊断/FTA故障树/list/etcd-fta.md|etcd fta]] |
+| `etcdctl endpoint health` | 健康检查 | 集群基础/11-etcd-deep-dive | [[故障诊断/FTA故障树/list/etcd-fta.md|etcd fta]] |
+| `etcdctl snapshot save` | 备份 | [[可靠性/README.md|README]] | [[故障诊断/FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
+| `etcdctl snapshot restore` | 恢复 | [[可靠性/README.md|README]] | [[故障诊断/FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
 
 ## 监控命令映射
 
@@ -131,11 +131,11 @@ tier: peripheral---
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `helm install` | 安装 Chart | [[系统基础/topic-cheat-sheet/helm.md|helm]] | [[故障诊断/topic-fta/list/helm-fta.md|helm fta]] |
-| `helm upgrade` | 升级 Chart | [[系统基础/topic-cheat-sheet/helm.md|helm]] | [[故障诊断/topic-fta/list/helm-fta.md|helm fta]] |
-| `helm rollback` | 回滚 | [[系统基础/topic-cheat-sheet/helm.md|helm]] | [[故障诊断/topic-fta/list/helm-fta.md|helm fta]] |
-| `helm list` | 列出 Release | [[系统基础/topic-cheat-sheet/helm.md|helm]] | - |
-| `helm template` | 渲染模板 | [[系统基础/topic-cheat-sheet/helm.md|helm]] | - |
+| `helm install` | 安装 Chart | [[系统基础/速查卡/helm.md|helm]] | [[故障诊断/FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm upgrade` | 升级 Chart | [[系统基础/速查卡/helm.md|helm]] | [[故障诊断/FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm rollback` | 回滚 | [[系统基础/速查卡/helm.md|helm]] | [[故障诊断/FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm list` | 列出 Release | [[系统基础/速查卡/helm.md|helm]] | - |
+| `helm template` | 渲染模板 | [[系统基础/速查卡/helm.md|helm]] | - |
 
 ---
 

@@ -66,10 +66,10 @@ Helm 解决了 K8s 应用的"打包与配置"问题，GitOps 解决了"变更审
 
 ## Related
 
-- [[domain-08-release-change-management/01-gitops/99-helm-production-guide.md|99 helm production guide]]
-- [[domain-19-landscape-references/topic-release-notes/README.md|README]]
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy.md|02 canary release strategy]]
-- [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|03 change rollback playbook]]
+- [[domain-08-release-change-management/GitOps/99-helm-production-guide.md|99 helm production guide]]
+- [[domain-19-landscape-references/领域索引/README.md|README]]
+- [[domain-08-release-change-management/变更管理/02-canary-release-strategy.md|02 canary release strategy]]
+- [[domain-08-release-change-management/变更管理/03-change-rollback-playbook.md|03 change rollback playbook]]
 
 
 <!-- risk-assessed -->

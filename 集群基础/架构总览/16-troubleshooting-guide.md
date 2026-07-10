@@ -139,7 +139,7 @@ cross_refs:
 
 | 工具 | 用途 | 专家提示 |
 |:---|:---|:---|
-| [[集群基础/05-kubectl/03-kubectl-debug-ephemeral-containers|kubectl-debug]] | 启动诊断容器 | 使用 `--ephemeral-containers` (v1.25+ GA) |
+| [[集群基础/kubectl/03-kubectl-debug-ephemeral-containers|kubectl-debug]] | 启动诊断容器 | 使用 `--ephemeral-containers` (v1.25+ GA) |
 | **Cilium Hubble** | 网络流量可视化 | 观察 L7 层的拒绝原因 |
 | **Inspektor Gadget** | eBPF 实时监控 | 捕获进程级文件读写和网络连接 |
 | **Prometheus** | 长期趋势分析 | 关注组件的 Memory/CPU 波动 |
@@ -182,9 +182,9 @@ cross_refs:
 - 07 - 升级路径与策略指南
 - 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 - 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
-- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[故障诊断/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

@@ -217,7 +217,7 @@ spec:
 
 **优势**: 替代大部分 ValidatingWebhook，零延迟、高可用、无需维护 Webhook 服务。
 
-### 3.2 [[系统基础/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]] GA (SchedulingGates)
+### 3.2 [[系统基础/知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]] GA (SchedulingGates)
 
 ```yaml
 apiVersion: v1

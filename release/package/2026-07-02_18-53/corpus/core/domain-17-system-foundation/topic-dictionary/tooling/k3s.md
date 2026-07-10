@@ -82,11 +82,11 @@ Flannel (CNI)、CoreDNS、Traefik (Ingress)、Local Path Provisioner、Klipper (
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/minikube.md|Minikube]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/rancher.md|Rancher]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubeedge.md|KubeEdge]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kubernetes.md|Kubernetes]]
+- [[domain-17-system-foundation/知识字典/tooling/minikube.md|Minikube]]
+- [[domain-17-system-foundation/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/rancher.md|Rancher]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kubeedge.md|KubeEdge]]
 
 
 <!-- risk-assessed -->

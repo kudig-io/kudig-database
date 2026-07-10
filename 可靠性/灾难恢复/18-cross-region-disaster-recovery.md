@@ -1278,7 +1278,7 @@ data:
 
 - 22-production-checklist
 - [[工作负载/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 
 ## See Also
 

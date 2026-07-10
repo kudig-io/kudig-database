@@ -131,7 +131,7 @@ func (r *resetData) ResetCfg() *kubeadmapi.ResetConfiguration
 | `newCmdReset` | `*cobra.Command` | 返回配置好的 reset 子命令 |
 | `ForceReset` | `bool` | 是否跳过用户确认 |
 | `DryRun` | `bool` | 是否为干跑模式 |
-| `Client` | `clientset.Interface` | [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 客户端（dry-run 时为 FakeClient） |
+| `Client` | `clientset.Interface` | [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 客户端（dry-run 时为 FakeClient） |
 | `Cfg` | `*kubeadmapi.InitConfiguration` | 从集群获取的配置，不可达时为 nil |
 
 ## 调用链

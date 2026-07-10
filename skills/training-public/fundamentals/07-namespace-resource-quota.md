@@ -479,7 +479,7 @@ kubectl describe resourcequota -n <namespace>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../09-troubleshooting/09-common-problems.md) — 常见问题
-- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../故障诊断/topic-skills/09-rbac-quota-failure.md) — RBAC/配额问题
+- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../故障诊断/技能体系/09-rbac-quota-failure.md) — RBAC/配额问题
 - [../../故障诊断/](../../故障诊断/) — 故障排查文档
 
 ## See Also

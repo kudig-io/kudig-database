@@ -1162,18 +1162,18 @@ kubectl get pvc -n monitoring
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[发布变更/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[发布变更/topic-deployment/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
-- [[发布变更/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
-- [[发布变更/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[发布变更/部署方案/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[发布变更/部署方案/01-local-demo-deployment.md|01 - 本机单机 Demo 部署]]
+- [[发布变更/部署方案/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[发布变更/部署方案/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/helm.md|helm]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/helm.md|helm]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 
 
 <!-- risk-assessed -->

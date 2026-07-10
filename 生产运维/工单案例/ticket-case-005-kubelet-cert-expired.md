@@ -52,9 +52,9 @@ authors:
 relationships:
 - target: '[[entities/kubelet.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-001-terway-eni-exhaustion.md]]'
+- target: '[[生产运维/工单案例/ticket-case-001-terway-eni-exhaustion.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 - target: '[[skills/kubelet-certificate-rotation.md]]'
   type: related_to

@@ -98,8 +98,8 @@ authors:
 
 ### 1.3 不适用场景
 
-- 单集群 Argo CD 基础安装与配置，请参考 [[发布变更/01-gitops/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]；
-- 单个应用的 Helm/Kustomize 模板编写，请参考 [[发布变更/01-gitops/99-helm-production-guide.md|Helm 生产指南]]；
+- 单集群 Argo CD 基础安装与配置，请参考 [[发布变更/GitOps/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]；
+- 单个应用的 Helm/Kustomize 模板编写，请参考 [[发布变更/GitOps/99-helm-production-guide.md|Helm 生产指南]]；
 - 集群升级与节点变更，请参考 [[集群基础/99-production-readiness-operations-guide.md|集群基础域生产就绪运维指南]]；
 - 跨集群网络与 Service Mesh，请参考 [[网络/99-production-readiness-operations-guide.md|网络流量域生产就绪运维指南]]。
 
@@ -1008,16 +1008,16 @@ done
 ### 本域资料
 
 - [[发布变更/99-production-readiness-operations-guide.md|发布与变更管理 生产就绪运维指南]]
-- [[发布变更/01-gitops/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[发布变更/01-gitops/99-helm-production-guide.md|Helm 生产指南]]
-- [[发布变更/01-gitops/07-gitops-security-compliance.md|GitOps 安全合规实践]]
-- [[发布变更/03-change-management/03-change-rollback-playbook.md|变更回滚操作手册]]
+- [[发布变更/GitOps/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
+- [[发布变更/GitOps/99-helm-production-guide.md|Helm 生产指南]]
+- [[发布变更/GitOps/07-gitops-security-compliance.md|GitOps 安全合规实践]]
+- [[发布变更/变更管理/03-change-rollback-playbook.md|变更回滚操作手册]]
 
 ### 多集群与联邦资料
 
-- [[云厂商/08-multi-cloud/08-multicloud-federation-karmada.md|Karmada 多云联邦实践]]
-- [[系统基础/topic-dictionary/platform-engineering/cluster-api-and-fleet-management.md|Cluster API 与 Fleet 管理术语]]
-- [[系统基础/topic-dictionary/platform-engineering/karmada.md|Karmada 术语]]
+- [[云厂商/多云混合/08-multicloud-federation-karmada.md|Karmada 多云联邦实践]]
+- [[系统基础/知识字典/platform-engineering/cluster-api-and-fleet-management.md|Cluster API 与 Fleet 管理术语]]
+- [[系统基础/知识字典/platform-engineering/karmada.md|Karmada 术语]]
 
 ### 相关域生产就绪指南
 
@@ -1030,7 +1030,7 @@ done
 
 ### 安全与网络
 
-- [[安全/02-network-security/21-multicluster-security.md|多集群安全]]
+- [[安全/网络安全/21-multicluster-security.md|多集群安全]]
 - [[网络/99-production-readiness-operations-guide.md|网络流量 生产就绪运维指南]]
 
 ---

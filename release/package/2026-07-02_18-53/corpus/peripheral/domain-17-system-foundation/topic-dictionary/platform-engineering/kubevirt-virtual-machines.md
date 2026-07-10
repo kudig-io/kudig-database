@@ -237,9 +237,9 @@ kubectl get pods -n cdi
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|API 组]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-group.md|API 组]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
 
 
 <!-- risk-assessed -->

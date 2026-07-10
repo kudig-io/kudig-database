@@ -54,15 +54,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/dns-resolution.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/dns-resolution.md]]'
   type: related_to
 - target: '[[entities/coredns.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/dns.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/dns.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-013-configmap-secret-update-not-effective.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]'
+- target: '[[domain-17-system-foundation/知识字典/configuration/configmap.md]]'
   type: related_to
 - target: '[[concepts/service-networking.md]]'
   type: related_to
@@ -359,7 +359,7 @@ kubectl exec -it deploy/route-service -n logistics-platform -- \
 - DNS 解析
 - CoreDNS (entities)
 - 域名服务
-- [[domain-11-production-operations/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md|ConfigMap/Secret 更新后应用未生效]]
+- [[domain-11-production-operations/工单案例/ticket-case-013-configmap-secret-update-not-effective.md|ConfigMap/Secret 更新后应用未生效]]
 - 配置映射
 - [[concepts/service-networking.md|Service Networking]]
 

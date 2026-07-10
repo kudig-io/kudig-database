@@ -60,7 +60,7 @@ prerequisites:
 ### ServiceAccount
 
 - **避免使用 `default` ServiceAccount**。为每个工作负载或微服务创建独立的 ServiceAccount。
-- 除非 Pod 明确需要访问 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
+- 除非 Pod 明确需要访问 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 才能运行，否则应将 `automountServiceAccountToken` 设置为 `false`。
 
 ### Pod 级 `securityContext` 建议
 
@@ -134,9 +134,9 @@ prerequisites:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
-- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]
-- [[domain-17-system-foundation/topic-dictionary/security/bank-vaults.md|Bank Vaults Vault 集成]]
+- [[domain-17-system-foundation/知识字典/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/知识字典/security/athenz.md|Athenz 身份认证与授权]]
+- [[domain-17-system-foundation/知识字典/security/bank-vaults.md|Bank Vaults Vault 集成]]
 
 
 <!-- risk-assessed -->

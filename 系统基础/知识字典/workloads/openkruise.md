@@ -68,6 +68,6 @@ OpenKruise 是阿里巴巴开源的 CNCF 孵化项目，为 Kubernetes 提供增
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|StatefulSet]]
-- [[系统基础/topic-dictionary/workloads/daemonset.md|DaemonSet]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/workloads/statefulset.md|StatefulSet]]
+- [[系统基础/知识字典/workloads/daemonset.md|DaemonSet]]

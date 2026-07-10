@@ -82,7 +82,7 @@ related_docs:
 - [资源查询与筛选](#资源查询与筛选)
 - [Pod 操作](#pod-操作)
 - Deployment 管理](#deployment-管理)
-- [[系统基础/topic-dictionary/networking/service.md|Service]] 与网络](#service-与网络)
+- [[系统基础/知识字典/networking/service.md|Service]] 与网络](#service-与网络)
 - [ConfigMap & Secret](#configmap--secret)
 - [存储管理](#存储管理)
 - [调度与亲和性](#调度与亲和性)
@@ -1810,8 +1810,8 @@ labels:
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
 

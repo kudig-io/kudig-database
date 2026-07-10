@@ -85,11 +85,11 @@ Argo 是 CNCF 毕业项目集合，包含 Argo CD（GitOps 持续部署）、Arg
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/operations/rolling-update.md|Rolling Update]]
-- [[domain-17-system-foundation/topic-dictionary/operations/rollback.md|Rollback]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/operations/rolling-update.md|Rolling Update]]
+- [[domain-17-system-foundation/知识字典/operations/rollback.md|Rollback]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

@@ -183,11 +183,11 @@ tier: peripheral---
 | 模块 | 定位 | 内容 | 入口 |
 |:---|:---|:---|:---|
 | **domain-12** (本目录) | 按组件/资源类型的完整排查指南 | 42 篇深度文档 | [本文档](#文档目录) |
-| **topic-fta** | FTA 故障树分析（演绎法推理骨架） | 36 个组件故障树 | [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/topic-fta/list/) |
-| **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) |
-| **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/topic-skills/) |
-| **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) |
-| **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md) |
+| **topic-fta** | FTA 故障树分析（演绎法推理骨架） | 36 个组件故障树 | [domain-10-troubleshooting-diagnostics/topic-fta/list/](../domain-10-troubleshooting-diagnostics/FTA故障树/list/) |
+| **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/](../domain-10-troubleshooting-diagnostics/高级排障/) |
+| **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [domain-10-troubleshooting-diagnostics/topic-skills/](../domain-10-troubleshooting-diagnostics/技能体系/) |
+| **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/FEBM方法论/) |
+| **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md) |
 
 ### 推荐使用路径
 

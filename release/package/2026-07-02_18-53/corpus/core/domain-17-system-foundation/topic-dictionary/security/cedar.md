@@ -75,9 +75,9 @@ Cedar 是 AWS 开源的策略语言，用于定义和执行细粒度授权策略
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
-- [[domain-17-system-foundation/topic-dictionary/security/openfga.md|OpenFGA]]
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|Kyverno]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/security/openfga.md|OpenFGA]]
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|Kyverno]]
 
 
 <!-- risk-assessed -->

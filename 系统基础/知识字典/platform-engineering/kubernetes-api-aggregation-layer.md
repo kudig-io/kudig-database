@@ -100,7 +100,7 @@ kubectl describe apiservice <name>
 ```
 ## 交叉引用
 
-- 扩展 Kubernetes API](./extending-[[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
+- 扩展 Kubernetes API](./extending-[[系统基础/知识字典/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
 - Custom Resources](./custom-resources.md) — CRD 作为更简单的替代方案
 
 ## 参考链接
@@ -109,9 +109,9 @@ kubectl describe apiservice <name>
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
-- [[系统基础/topic-dictionary/platform-engineering/api-group.md|API 组]]
-- [[系统基础/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+- [[系统基础/知识字典/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[系统基础/知识字典/platform-engineering/api-group.md|API 组]]
+- [[系统基础/知识字典/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
 
 
 <!-- risk-assessed -->

@@ -812,8 +812,8 @@ groups:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]]
-- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
+- [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|02 slo implementation guide]]
+- [[domain-09-reliability-engineering/SRE实践/02-release-gate-slo-based.md|02 release gate slo based]]
 
 
 <!-- risk-assessed -->

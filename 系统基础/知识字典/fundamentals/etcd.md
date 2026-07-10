@@ -76,7 +76,7 @@ API Server 是唯一直接与 etcd 通信的组件。所有 Kubernetes 对象通
 
 ## Related
 
-[[系统基础/topic-dictionary/fundamentals/storage-versions.md|存储版本]]
+[[系统基础/知识字典/fundamentals/storage-versions.md|存储版本]]
 
 
 <!-- risk-assessed -->

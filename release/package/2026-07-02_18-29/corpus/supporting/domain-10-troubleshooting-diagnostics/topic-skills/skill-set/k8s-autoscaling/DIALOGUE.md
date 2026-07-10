@@ -705,7 +705,7 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 ## Related
 
 - [[entities/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[domain-17-system-foundation/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

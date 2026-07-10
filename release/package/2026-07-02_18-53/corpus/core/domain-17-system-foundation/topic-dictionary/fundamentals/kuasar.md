@@ -67,6 +67,6 @@ Kuasar 是华为开源的 CNCF Sandbox 项目，提供多沙箱容器运行时�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/runc.md|runc]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/youki.md|youki]]
+- [[domain-17-system-foundation/知识字典/fundamentals/runc.md|runc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[domain-17-system-foundation/知识字典/fundamentals/youki.md|youki]]

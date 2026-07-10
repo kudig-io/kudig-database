@@ -77,11 +77,11 @@ LoadBalancer 是 Service 的一种类型，通过云厂商的负载均衡器将�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/networking/clusterip.md|Clusterip]]
-- [[系统基础/topic-dictionary/networking/nodeport.md|Nodeport]]
-- [[系统基础/topic-dictionary/networking/headless-service.md|Headless Service]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/clusterip.md|Clusterip]]
+- [[系统基础/知识字典/networking/nodeport.md|Nodeport]]
+- [[系统基础/知识字典/networking/headless-service.md|Headless Service]]
 
 
 <!-- risk-assessed -->

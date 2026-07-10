@@ -74,9 +74,9 @@ Podman Desktop 是 Red Hat 开源的容器管理图形界面工具，提供容�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/podman.md|Podman]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/tooling/minikube.md|Minikube]]
+- [[系统基础/知识字典/tooling/podman.md|Podman]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/tooling/minikube.md|Minikube]]
 
 
 <!-- risk-assessed -->

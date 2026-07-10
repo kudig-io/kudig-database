@@ -194,19 +194,19 @@ graph TD
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/docker.md|docker]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/docker.md|docker]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[云厂商/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[云厂商/05-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
+- [[云厂商/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/阿里云/ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[云厂商/阿里云/ack/244-ack-ros-iac.md|244-ack-ros-iac]]
 
 
 <!-- risk-assessed -->

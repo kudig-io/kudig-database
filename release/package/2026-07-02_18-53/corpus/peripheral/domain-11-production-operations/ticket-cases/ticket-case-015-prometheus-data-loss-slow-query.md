@@ -51,7 +51,7 @@ authors:
 relationships:
 - target: '[[entities/prometheus.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 - target: '[[concepts/bp-observability.md]]'
   type: related_to

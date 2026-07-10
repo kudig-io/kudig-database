@@ -69,6 +69,6 @@ OVN-Kubernetes 是基于 OVN（Open Virtual Network）的 Kubernetes CNI 实现�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/antrea.md|Antrea]]
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
-- [[系统基础/topic-dictionary/networking/cni.md|CNI]]
+- [[系统基础/知识字典/networking/antrea.md|Antrea]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/networking/cni.md|CNI]]

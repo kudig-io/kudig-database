@@ -1264,7 +1264,7 @@ kubectl auth can-i create statefulsets -n production --as system:serviceaccount:
 
 ## 5.4 案例 4: 应用 ServiceAccount 最小权限
 
-**场景**: 应用需要访问 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 获取自己的 Pod 信息和配置。
+**场景**: 应用需要访问 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 获取自己的 Pod 信息和配置。
 
 ```yaml
 ---
@@ -1922,7 +1922,7 @@ kubectl apply -f rolebinding.yaml
 
 ## Related
 
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

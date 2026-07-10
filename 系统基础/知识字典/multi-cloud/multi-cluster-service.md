@@ -68,6 +68,6 @@ Multi-Cluster Service（MCS）是 Google/Anthos 推动的多集群服务发现�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/service-mesh.md|Service Mesh]]
-- [[系统基础/topic-dictionary/networking/envoy-gateway.md|Envoy Gateway]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/service-mesh.md|Service Mesh]]
+- [[系统基础/知识字典/networking/envoy-gateway.md|Envoy Gateway]]

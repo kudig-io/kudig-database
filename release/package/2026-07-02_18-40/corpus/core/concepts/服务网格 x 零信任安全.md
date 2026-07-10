@@ -36,15 +36,15 @@ prerequisites:
 - cilium-basics
 - etcd-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/ingress.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/ingress.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/service.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/service-mesh.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[domain-17-system-foundation/速查卡/k8s.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]'
+- target: '[[domain-17-system-foundation/速查卡/networking.md]]'
   type: related_to
 ---
 
@@ -59,8 +59,8 @@ relationships:
 title: 服务网格 x 零信任安全
 category: synthesis
 tags:
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]/service|service]]-mesh
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/networking.md|networking]]/service|service]]-mesh
 - mtls
 - zero-trust
 - istio
@@ -108,7 +108,7 @@ tier: supporting---
 
 - **Istio mTLS** 实现了零信任的"所有服务间通信加密"要求，但 mTLS 本身不是零信任——它只是传输层加密
 - **AuthorizationPolicy** 实现了零信任的"最小权限"要求，允许策略如"只有 frontend 命名空间的 service-account 可以访问 payment-service 的 POST /api/charge 路径"
-- **Cilium [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|Service Mesh]]** 用 eBPF 实现 L4 mTLS，性能成本 <1%，使得零信任策略可以无性能代价地大规模部署
+- **Cilium [[domain-17-system-foundation/知识字典/networking/service-mesh.md|Service Mesh]]** 用 eBPF 实现 L4 mTLS，性能成本 <1%，使得零信任策略可以无性能代价地大规模部署
 - **NetworkPolicy + 服务网格** 共同构成零信任的隐式分段：NetworkPolicy 做 L3/L4 粗粒度隔离，服务网格做 L7 细粒度控制
 
 ## 交叉洞察
@@ -126,7 +126,7 @@ tier: supporting---
 - **一致性保证**：所有服务使用相同的认证/授权实现，不存在"某个服务忘记验证 JWT"的漏洞
 
 **但服务网格 ≠ 完整零信任：** 服务网格只解决了服务间通信的零信任。完整的零信任还包括：
-- **用户到服务的认证**（由 API Gateway / [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]] 处理）
+- **用户到服务的认证**（由 API Gateway / [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]] 处理）
 - **API 访问控制**（由 RBAC 处理）
 - **运行时行为监控**（由 Falco/Tetragon 处理）
 - **数据和密钥管理**（由 Vault/etcd 加密处理）

@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/04-jvm-tuning/99-java-performance-resource-sizing-guide.md|Java Performance Resource Sizing Guide]]
-- [[故障诊断/04-jvm-tuning/99-jvm-gc-container-tuning-guide.md|Jvm Gc Container Tuning Guide]]
+- [[故障诊断/JVM调优/99-java-performance-resource-sizing-guide.md|Java Performance Resource Sizing Guide]]
+- [[故障诊断/JVM调优/99-jvm-gc-container-tuning-guide.md|Jvm Gc Container Tuning Guide]]
 

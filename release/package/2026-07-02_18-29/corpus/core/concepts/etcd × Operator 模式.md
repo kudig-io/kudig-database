@@ -46,7 +46,7 @@ relationships:
   type: uses
 - target: '[[concepts/etcd × 可观测性.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[domain-17-system-foundation/速查卡/k8s.md]]'
   type: related_to
 ---
 
@@ -62,7 +62,7 @@ relationships:
 
 ## 连接点
 
-[[entities/etcd.md|etcd]] 是 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] 的心脏，[[concepts/operator-pattern.md|operator pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 问题直接导致整个集群不可用，而 Operator 本身的问题也可能引发 etcd 问题。
+[[entities/etcd.md|etcd]] 是 [[domain-17-system-foundation/速查卡/k8s.md|K8s]] 的心脏，[[concepts/operator-pattern.md|operator pattern]] 描述自定义控制器管理有状态应用。两者的交叉点是 **etcd Operator**：将 etcd 集群的生命周期管理（部署、扩容、备份、恢复、升级）自动化。但 wiki 没有指出一个关键矛盾：**etcd 是 Operator 想要管理的最危险的目标**——因为 etcd 问题直接导致整个集群不可用，而 Operator 本身的问题也可能引发 etcd 问题。
 
 ## 共现场景
 

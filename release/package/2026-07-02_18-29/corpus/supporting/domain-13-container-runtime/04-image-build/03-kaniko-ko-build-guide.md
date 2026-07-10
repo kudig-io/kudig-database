@@ -380,10 +380,10 @@ echo "Deploy image: ${IMAGE}"
 
 ## 11. 相关文档
 
-- [[domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md|BuildKit 生产指南]]
-- [[domain-13-container-runtime/04-image-build/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks 指南]]
-- [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
-- [[domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
+- [[domain-13-container-runtime/镜像构建/01-buildkit-production-guide.md|BuildKit 生产指南]]
+- [[domain-13-container-runtime/镜像构建/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks 指南]]
+- [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
+- [[domain-08-release-change-management/GitOps/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
 
 
 <!-- risk-assessed -->

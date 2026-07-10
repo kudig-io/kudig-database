@@ -207,9 +207,9 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/hpc-and-bioinformatics.md|高性能计算与生物信息学（HPC & Bioinformatics）]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/hpc-and-bioinformatics.md|高性能计算与生物信息学（HPC & Bioinformatics）]]
 
 
 <!-- risk-assessed -->

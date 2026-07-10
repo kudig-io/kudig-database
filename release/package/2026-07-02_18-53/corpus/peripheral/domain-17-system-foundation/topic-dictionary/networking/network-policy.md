@@ -91,7 +91,7 @@ spec:
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|Network Policies]]
+[[domain-17-system-foundation/知识字典/networking/network-policies.md|Network Policies]]
 
 
 <!-- risk-assessed -->

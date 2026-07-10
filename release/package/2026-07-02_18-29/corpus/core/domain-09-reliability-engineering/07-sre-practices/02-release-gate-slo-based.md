@@ -827,8 +827,8 @@ argocd_app_info{sync_status="Synced",health_status="Healthy"}
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]]
-- [[domain-09-reliability-engineering/04-slo-sli/04-burn-rate-alerting.md|04 burn rate alerting]]
+- [[domain-09-reliability-engineering/SLO-SLI/03-error-budget-management.md|03 error budget management]]
+- [[domain-09-reliability-engineering/SLO-SLI/04-burn-rate-alerting.md|04 burn rate alerting]]
 
 ## 相关合成分析
 

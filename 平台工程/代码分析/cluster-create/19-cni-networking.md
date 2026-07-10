@@ -562,10 +562,10 @@ kubectl exec -it <pod> -- cat /etc/resolv.conf
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
-- [[系统基础/topic-cheat-sheet/linux.md|linux]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
+- [[系统基础/速查卡/linux.md|linux]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 ```

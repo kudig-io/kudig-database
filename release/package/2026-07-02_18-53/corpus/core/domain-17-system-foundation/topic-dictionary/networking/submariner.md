@@ -68,6 +68,6 @@ Submariner 是 Red Hat 主导的 CNCF Sandbox 项目，专注于解决 Kubernete
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium Cluster Mesh]]
-- [[domain-17-system-foundation/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[domain-17-system-foundation/topic-dictionary/networking/consul.md|Consul]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium Cluster Mesh]]
+- [[domain-17-system-foundation/知识字典/networking/linkerd.md|Linkerd]]
+- [[domain-17-system-foundation/知识字典/networking/consul.md|Consul]]

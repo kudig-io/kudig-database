@@ -78,6 +78,6 @@ Kubernetes removed the built-in Docker shim (dockershim) in v1.24. Docker images
 
 - 21-container-runtime-deep-dive
 - 15-container-runtime-interfaces
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
 
 <!-- risk-assessed -->

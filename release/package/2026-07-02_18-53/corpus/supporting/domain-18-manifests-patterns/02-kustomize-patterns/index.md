@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-18-manifests-patterns/02-kustomize-patterns/01-kustomize-base-overlay-structure.md|Kustomize Base Overlay Structure]]
-- [[domain-18-manifests-patterns/02-kustomize-patterns/02-kustomize-transformers-reference.md|Kustomize Transformers Reference]]
-- [[domain-18-manifests-patterns/02-kustomize-patterns/03-kustomize-remote-build-gitops.md|Kustomize Remote Build Gitops]]
+- [[domain-18-manifests-patterns/Kustomize模式/01-kustomize-base-overlay-structure.md|Kustomize Base Overlay Structure]]
+- [[domain-18-manifests-patterns/Kustomize模式/02-kustomize-transformers-reference.md|Kustomize Transformers Reference]]
+- [[domain-18-manifests-patterns/Kustomize模式/03-kustomize-remote-build-gitops.md|Kustomize Remote Build Gitops]]
 

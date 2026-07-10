@@ -82,7 +82,7 @@ Trickster 是一个 HTTP 反向代理/缓存，专为时序数据库（Prometheu
 
 - trickster
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

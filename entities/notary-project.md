@@ -87,8 +87,8 @@ Notary Project 提供容器镜像和 OCI 制品的签名、验证规范与工具
 
 - notary-project
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

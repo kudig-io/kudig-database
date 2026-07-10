@@ -68,6 +68,6 @@ LitmusChaos 是 CNCF 孵化项目，提供 Kubernetes 原生的混沌工程平�
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/chaos-engineering.md|混沌工程]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/chaos-engineering.md|混沌工程]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]

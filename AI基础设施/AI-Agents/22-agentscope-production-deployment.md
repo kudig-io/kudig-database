@@ -98,7 +98,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-从开发环境到生产环境，Agent 系统需要解决状态管理、安全执行、弹性伸缩和全链路可观测等关键问题。AgentScope 通过独立的 **agentscope-runtime** 项目提供生产级运行时，支持 Agent-as-a-Service（AaaS）模式部署，内置[[AI基础设施/03-agent-runtime/12-agent-sandbox-isolation.md|沙箱安全执行]]、OpenTelemetry 追踪和 K8s 原生部署能力。
+从开发环境到生产环境，Agent 系统需要解决状态管理、安全执行、弹性伸缩和全链路可观测等关键问题。AgentScope 通过独立的 **agentscope-runtime** 项目提供生产级运行时，支持 Agent-as-a-Service（AaaS）模式部署，内置[[AI基础设施/Agent运行时/12-agent-sandbox-isolation.md|沙箱安全执行]]、OpenTelemetry 追踪和 K8s 原生部署能力。
 
 本文系统讲解 AgentScope 的生产部署全流程。
 
@@ -991,17 +991,17 @@ kubectl get hpa -n agent-system
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[AI基础设施/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[AI基础设施/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[AI基础设施/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[AI基础设施/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[AI基础设施/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[AI基础设施/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[AI基础设施/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[AI基础设施/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[AI基础设施/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[AI基础设施/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[AI基础设施/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[AI基础设施/AI-Agents/README.md|AI Agent 工程专题]]
+- [[AI基础设施/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[AI基础设施/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[AI基础设施/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[AI基础设施/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[AI基础设施/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[AI基础设施/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[AI基础设施/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[AI基础设施/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[AI基础设施/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[AI基础设施/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

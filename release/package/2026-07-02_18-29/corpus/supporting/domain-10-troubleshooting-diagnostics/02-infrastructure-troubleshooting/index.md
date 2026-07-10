@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|Network Connectivity Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|Dns Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/27-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/28-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/29-cloud-provider-troubleshooting.md|Cloud Provider Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|Monitoring Alerting Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/31-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/32-security-troubleshooting.md|Security Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/33-performance-bottleneck-troubleshooting.md|Performance Bottleneck Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/34-upgrade-migration-troubleshooting.md|Upgrade Migration Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/25-network-connectivity-troubleshooting.md|Network Connectivity Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/26-dns-troubleshooting.md|Dns Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/27-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/28-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/29-cloud-provider-troubleshooting.md|Cloud Provider Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/30-monitoring-alerting-troubleshooting.md|Monitoring Alerting Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/31-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/32-security-troubleshooting.md|Security Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/33-performance-bottleneck-troubleshooting.md|Performance Bottleneck Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/34-upgrade-migration-troubleshooting.md|Upgrade Migration Troubleshooting]]
 

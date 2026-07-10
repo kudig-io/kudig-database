@@ -77,11 +77,11 @@ Worker Node（工作节点）是 Kubernetes 集群中运行用户工作负载的
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/control-plane.md|Control Plane]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/fundamentals/namespace.md|Namespace]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/fundamentals/control-plane.md|Control Plane]]
 
 
 <!-- risk-assessed -->

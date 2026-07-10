@@ -72,9 +72,9 @@ Carvel（原 K14s）是 VMware 开源的 Kubernetes 工具集，包含 ytt（YAM
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/tooling/kpt.md|kpt]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/tooling/kpt.md|kpt]]
 
 
 <!-- risk-assessed -->

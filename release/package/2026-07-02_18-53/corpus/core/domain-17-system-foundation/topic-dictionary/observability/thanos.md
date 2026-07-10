@@ -79,11 +79,11 @@ Thanos 是 CNCF 孵化项目，为 Prometheus 提供高可用、长期存储和�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/grafana.md|Grafana]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/grafana.md|Grafana]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|Alertmanager]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/知识字典/observability/opentelemetry.md|OpenTelemetry]]
 
 
 <!-- risk-assessed -->

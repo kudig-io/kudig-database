@@ -56,7 +56,7 @@ authors:
 
 # AI/ML 基础设施生产就绪运维指南
 
-本指南面向准备将 AI/ML 工作负载接入 Kubernetes 生产环境的 SRE、平台工程师与 MLOps 团队，聚焦 GPU 调度、训练/推理服务、MLOps 平台与 AI Agent 的运行时治理。AI/ML 基础设施与传统业务负载相比，具有资源昂贵、任务周期长、网络拓扑敏感、模型资产敏感等特点，因此生产就绪评审需要覆盖硬件生命周期、调度策略、可观测性、成本控制、安全合规与灾备等多个维度。阅读前建议先了解 [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] 与 [[AI基础设施/01-ai-infra/04-gpu-monitoring-dcgm.md|GPU 监控与可观测性]] 中的基础概念。
+本指南面向准备将 AI/ML 工作负载接入 Kubernetes 生产环境的 SRE、平台工程师与 MLOps 团队，聚焦 GPU 调度、训练/推理服务、MLOps 平台与 AI Agent 的运行时治理。AI/ML 基础设施与传统业务负载相比，具有资源昂贵、任务周期长、网络拓扑敏感、模型资产敏感等特点，因此生产就绪评审需要覆盖硬件生命周期、调度策略、可观测性、成本控制、安全合规与灾备等多个维度。阅读前建议先了解 [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] 与 [[AI基础设施/基础设施/04-gpu-monitoring-dcgm.md|GPU 监控与可观测性]] 中的基础概念。
 
 ## 1. 生产环境检查清单
 
@@ -230,14 +230,14 @@ AI/ML 基础设施的生产就绪不能孤立完成，需要与以下域紧密�
 ### 同域核心资料
 
 - [[AI基础设施/README.md|AI/ML Infrastructure 总览]]
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]]
-- [[AI基础设施/01-ai-infra/04-gpu-monitoring-dcgm.md|GPU 监控与可观测性]]
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]]
-- [[AI基础设施/01-ai-infra/17-llm-inference-serving.md|LLM 推理服务]]
-- [[AI基础设施/01-ai-infra/11-ai-security-model-protection.md|AI 安全模型保护]]
-- [[AI基础设施/01-ai-infra/14-troubleshooting-performance.md|性能故障排查]]
-- [[AI基础设施/02-ai-agents/09-production-deployment-guide.md|AI Agent 生产部署指南]]
-- [[AI基础设施/02-ai-agents/10-security-guardrails.md|AI Agent 安全护栏]]
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]]
+- [[AI基础设施/基础设施/04-gpu-monitoring-dcgm.md|GPU 监控与可观测性]]
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]]
+- [[AI基础设施/基础设施/17-llm-inference-serving.md|LLM 推理服务]]
+- [[AI基础设施/基础设施/11-ai-security-model-protection.md|AI 安全模型保护]]
+- [[AI基础设施/基础设施/14-troubleshooting-performance.md|性能故障排查]]
+- [[AI基础设施/AI-Agents/09-production-deployment-guide.md|AI Agent 生产部署指南]]
+- [[AI基础设施/AI-Agents/10-security-guardrails.md|AI Agent 安全护栏]]
 
 ### 跨域协作资料
 

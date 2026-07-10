@@ -67,6 +67,6 @@ Downward API 是 Kubernetes 将 Pod/Container 元数据（名称、命名空间�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|Environment Variables]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|ConfigMap]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/configuration/env.md|Environment Variables]]
+- [[domain-17-system-foundation/知识字典/configuration/configmap.md|ConfigMap]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]

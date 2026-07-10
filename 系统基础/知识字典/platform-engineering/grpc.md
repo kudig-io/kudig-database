@@ -88,11 +88,11 @@ gRPC 是 Google 开源的高性能远程过程调用（RPC）框架，使用 Pro
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/fundamentals/kube-apiserver.md|Kube-apiserver]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/fundamentals/kube-apiserver.md|Kube-apiserver]]
 
 
 <!-- risk-assessed -->

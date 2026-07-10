@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/reference/remediation-playbook.md|Remediation Playbook]]
+- [[故障诊断/技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md|Remediation Playbook]]
 

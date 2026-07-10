@@ -89,11 +89,11 @@ request: apps/v1beta1 → 自动转换为 v1 返回
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kind.md|Kind]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

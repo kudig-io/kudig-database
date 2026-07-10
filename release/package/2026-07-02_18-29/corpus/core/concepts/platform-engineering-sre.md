@@ -26,7 +26,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 relationships:
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/k8s.md]]'
+- target: '[[domain-17-system-foundation/速查卡/k8s.md]]'
   type: related_to
 ---
 
@@ -43,7 +43,7 @@ relationships:
 
 | 职责 | 平台工程 | SRE |
 |------|---------|-----|
-| **基础设施** | 提供标准化的 [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s]] 平台 | 确保平台可靠性 |
+| **基础设施** | 提供标准化的 [[domain-17-system-foundation/速查卡/k8s.md|K8s]] 平台 | 确保平台可靠性 |
 | **开发者体验** | 构建 IDP、模板、文档 | 定义 SLO、发布规范 |
 | **工具链** | 选择、集成、维护 | 监控、告警、On-call |
 | **安全** | 平台级安全基线 | 运行时安全监控 |
@@ -74,10 +74,10 @@ SRE 定义:
 ## 相关 Domain
 
 - domain-07-platform-engineering/01-idp/01-internal-developer-platform
-- [[domain-09-reliability-engineering/07-sre-practices/04-toil-reduction-automation.md|04 toil reduction automation]]
+- [[domain-09-reliability-engineering/SRE实践/04-toil-reduction-automation.md|04 toil reduction automation]]
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/runtime-security.md|运行时安全]]
+- [[domain-17-system-foundation/知识字典/security/runtime-security.md|运行时安全]]
 
 
 <!-- risk-assessed -->

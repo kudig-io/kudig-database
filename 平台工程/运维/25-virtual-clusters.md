@@ -386,7 +386,7 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ```
 

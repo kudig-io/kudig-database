@@ -69,6 +69,6 @@ Kuma 是 Kong 开源的 CNCF Sandbox 服务网格，基于 Envoy Proxy，支持 
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/linkerd.md|Linkerd]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]

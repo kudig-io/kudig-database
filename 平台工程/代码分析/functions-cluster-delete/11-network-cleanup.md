@@ -556,8 +556,8 @@ echo "=== 网络清理完成 ==="
 - 22-networkpolicy-reference
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
 
 ```
 

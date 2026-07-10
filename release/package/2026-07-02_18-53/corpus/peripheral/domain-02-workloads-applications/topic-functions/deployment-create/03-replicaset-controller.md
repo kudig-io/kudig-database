@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-title: [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析
+title: [[domain-17-system-foundation/知识字典/workloads/replicaset.md|replicaset]] 控制器源码分析
 category: deployment
 tags:
 - replicaset
@@ -450,8 +450,8 @@ kubelet: 在节点上创建容器
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 

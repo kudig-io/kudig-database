@@ -74,9 +74,9 @@ Kustomization 是 Kustomize 的核心配置文件，通过 kustomization.yaml �
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kpt.md|kpt]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/tooling/kpt.md|kpt]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
 
 
 <!-- risk-assessed -->

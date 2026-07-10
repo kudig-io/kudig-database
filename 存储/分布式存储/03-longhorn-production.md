@@ -615,14 +615,14 @@ groups:
 
 ## Related
 
-- [[存储/01-k8s-storage/10-storage-backup-disaster-recovery.md|10 - 存储备份与灾难恢复]]
+- [[存储/K8s存储/10-storage-backup-disaster-recovery.md|10 - 存储备份与灾难恢复]]
 - [[存储/README.md|Storage Domain 存储领域知识库]]
 
 ## See Also
 
-- [[存储/03-distributed-storage/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
-- [[存储/03-distributed-storage/02-rook-ceph-production.md|Rook-Ceph 生产指南]]
-- [[存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用存储模式]]
+- [[存储/分布式存储/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
+- [[存储/分布式存储/02-rook-ceph-production.md|Rook-Ceph 生产指南]]
+- [[存储/有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用存储模式]]
 
 ---
 

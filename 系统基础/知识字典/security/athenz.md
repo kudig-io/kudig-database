@@ -65,6 +65,6 @@ Athenz 是 Yahoo 开源并捐赠给 CNCF 的服务平台，提供基于 X.509 �
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
-- [[系统基础/topic-dictionary/operations/cert-manager.md|cert-manager]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[系统基础/知识字典/operations/cert-manager.md|cert-manager]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]

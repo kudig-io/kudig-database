@@ -74,9 +74,9 @@ Distribution 是 CNCF 毕业项目，提供 OCI 兼容的容器镜像仓库实�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/harbor.md|Harbor]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/security/notary-project.md|Notary Project]]
+- [[系统基础/知识字典/tooling/harbor.md|Harbor]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/security/notary-project.md|Notary Project]]
 
 
 <!-- risk-assessed -->

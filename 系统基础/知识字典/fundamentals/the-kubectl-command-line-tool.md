@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
+`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
 
 ## 核心概念/原理
 
@@ -55,7 +55,7 @@ prerequisites:
 - 从集群外部运行时，`kubectl` 使用 kubeconfig 文件查找 API 服务器地址和凭据。
 - 从 Pod 内部运行时（如 CI/CD 流水线中），`kubectl` 可以基于挂载到 Pod 中的 ServiceAccount 令牌使用集群内认证（in-cluster authentication）。
 
-执行命令时，`kubectl` 将用户意图转换为一个或多个发往 Kubernetes API 的 HTTP 请求。API 服务器验证每个请求，将其应用到存储在 [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] 中的集群状态，并返回结果。
+执行命令时，`kubectl` 将用户意图转换为一个或多个发往 Kubernetes API 的 HTTP 请求。API 服务器验证每个请求，将其应用到存储在 [[系统基础/知识字典/fundamentals/etcd.md|etcd]] 中的集群状态，并返回结果。
 
 ### kubeconfig 配置
 
@@ -102,7 +102,7 @@ prerequisites:
 - [The kubectl command-line tool - Official Documentation](https://kubernetes.io/docs/concepts/overview/kubectl/)
 
 ## Related
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

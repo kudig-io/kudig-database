@@ -117,7 +117,7 @@ status:
 ## 相关
 
 - 专项技术/02-operator-development-patterns
-- [[数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md|02 operator comparison mysql postgres redis]]
+- [[数据库中间件/Operator管理/02-operator-comparison-mysql-postgres-redis.md|02 operator comparison mysql postgres redis]]
 
 
 <!-- risk-assessed -->

@@ -81,11 +81,11 @@ Backstage 是 React + Node.js 应用，通过 Plugin 架构扩展功能。K8s �
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

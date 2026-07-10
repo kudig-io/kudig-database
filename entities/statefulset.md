@@ -88,9 +88,9 @@ Databases (MySQL, PostgreSQL, MongoDB), message brokers (Kafka, RabbitMQ), searc
 - 08-statefulset-daemonset-events
 - 05-statefulset-reference
 - 03-statefulset-advanced-operations
-- [[故障诊断/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
-- [[故障诊断/topic-fta/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[故障诊断/资源排障/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
+- [[故障诊断/FTA故障树/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
+- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
 - [[skills/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
 
 

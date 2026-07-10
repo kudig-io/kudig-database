@@ -2266,14 +2266,14 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 - 23-pod-security-standards
 - 24-admission-webhook-configuration
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/19-cni-networking.md|19-cni-networking]]
+- [[domain-07-platform-engineering/代码分析/cluster-create/19-cni-networking.md|19-cni-networking]]
 
 ## Related
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

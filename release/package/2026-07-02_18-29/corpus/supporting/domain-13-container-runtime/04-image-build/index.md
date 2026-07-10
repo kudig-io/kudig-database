@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md|Buildkit Production Guide]]
-- [[domain-13-container-runtime/04-image-build/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks Guide]]
-- [[domain-13-container-runtime/04-image-build/03-kaniko-ko-build-guide.md|Kaniko Ko Build Guide]]
+- [[domain-13-container-runtime/镜像构建/01-buildkit-production-guide.md|Buildkit Production Guide]]
+- [[domain-13-container-runtime/镜像构建/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks Guide]]
+- [[domain-13-container-runtime/镜像构建/03-kaniko-ko-build-guide.md|Kaniko Ko Build Guide]]
 

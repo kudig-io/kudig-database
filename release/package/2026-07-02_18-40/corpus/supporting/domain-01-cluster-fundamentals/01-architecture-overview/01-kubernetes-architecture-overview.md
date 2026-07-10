@@ -2295,12 +2295,12 @@ echo "🎯 问题监控已启动 (PID: $!)"
 
 - 设计原则——理解 K8s 的设计哲学
 - 控制平面架构深度解析
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 命令速查卡]]
+- [[domain-17-system-foundation/速查卡/k8s.md|K8s 命令速查卡]]
 - 相关知识域: domain-13-container-runtime
 - 相关知识域: domain-01-cluster-fundamentals
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

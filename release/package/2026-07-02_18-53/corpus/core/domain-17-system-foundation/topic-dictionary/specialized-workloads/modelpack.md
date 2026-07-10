@@ -72,9 +72,9 @@ ModelPack 是将 AI/ML 模型打包为 OCI 镜像的工具和规范，利用容�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/seldon.md|Seldon]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/kaito.md|KAITO]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/seldon.md|Seldon]]
+- [[domain-17-system-foundation/知识字典/scheduling/kaito.md|KAITO]]
 
 
 <!-- risk-assessed -->

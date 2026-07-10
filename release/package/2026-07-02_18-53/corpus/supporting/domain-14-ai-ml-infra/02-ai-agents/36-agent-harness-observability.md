@@ -97,7 +97,7 @@ k8s_versions:
 
 可观测性是 Agent Harness 从"PoC"走向"生产"的必要条件。传统软件系统的可观测性（Metrics/Traces/Logs）需要针对 Agent 的特殊性进行扩展——Agent 的非确定性行为、多轮推理过程、工具调用链路、LLM 延迟特性，都需要专门的追踪和度量方案。
 
-本文系统阐述 Agent Harness 的可观测性架构，包括 OpenTelemetry 集成、[[domain-14-ai-ml-infra/03-agent-runtime/13-agent-observability-langfuse.md|Langfuse]] 追踪、Prometheus 指标体系、告警规则设计、调试工具链，以及生产级 Dashboard 方案。
+本文系统阐述 Agent Harness 的可观测性架构，包括 OpenTelemetry 集成、[[domain-14-ai-ml-infra/Agent运行时/13-agent-observability-langfuse.md|Langfuse]] 追踪、Prometheus 指标体系、告警规则设计、调试工具链，以及生产级 Dashboard 方案。
 
 ---
 
@@ -919,17 +919,17 @@ class TrajectoryReplayer:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[domain-14-ai-ml-infra/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/AI-Agents/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

@@ -173,7 +173,7 @@ kubectl uncordon <node-name>
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - 07-upgrade-paths-strategy
 
 <!-- risk-assessed -->

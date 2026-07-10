@@ -81,11 +81,11 @@ kubelet → CRI → containerd/CRI-O → runc → Linux Kernel (namespaces/cgrou
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|Containerd]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri-o.md|CRI-O]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri.md|CRI]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
-- [[domain-17-system-foundation/topic-dictionary/security/security-context.md|Security Context]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|Containerd]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri-o.md|CRI-O]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri.md|CRI]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/security/security-context.md|Security Context]]
 
 
 <!-- risk-assessed -->

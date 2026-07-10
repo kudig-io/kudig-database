@@ -83,11 +83,11 @@ Certificate → CertificateRequest → Order → Challenge (HTTP-01/DNS-01) → 
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/certificate.md|Certificate]]
-- [[domain-17-system-foundation/topic-dictionary/security/certificate-authority.md|Certificate Authority]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/security/webhook.md|Webhook]]
-- [[domain-17-system-foundation/topic-dictionary/networking/istio.md|Istio]]
+- [[domain-17-system-foundation/知识字典/security/certificate.md|Certificate]]
+- [[domain-17-system-foundation/知识字典/security/certificate-authority.md|Certificate Authority]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/security/webhook.md|Webhook]]
+- [[domain-17-system-foundation/知识字典/networking/istio.md|Istio]]
 
 
 <!-- risk-assessed -->

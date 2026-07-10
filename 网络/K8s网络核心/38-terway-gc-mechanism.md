@@ -75,7 +75,7 @@ cross_refs:
 
 
 
-# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[系统基础/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
+# 38 - Terway GC (垃圾回收) 机制详解 (Terway [[系统基础/知识字典/fundamentals/garbage-collection.md|Garbage Collection]] Mechanism)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+ | **最后更新**: 2026-04
 
@@ -1069,7 +1069,7 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

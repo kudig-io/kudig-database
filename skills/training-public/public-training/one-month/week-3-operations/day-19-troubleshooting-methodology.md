@@ -570,9 +570,9 @@ echo "========== 排查完毕 =========="
 
 ## 延伸阅读
 
-- [结构化故障排查框架](../../故障诊断/topic-structural-trouble-shooting/README.md)
-- [FTA 核心原理](../../故障诊断/topic-fta/04-fta-core-principles.md)
-- [FEBM 理论基础](../../故障诊断/topic-febm/01-febm-theory-foundations.md)
+- [结构化故障排查框架](../../故障诊断/高级排障/README.md)
+- [FTA 核心原理](../../故障诊断/FTA故障树/04-fta-core-principles.md)
+- [FEBM 理论基础](../../故障诊断/FEBM方法论/01-febm-theory-foundations.md)
 - [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
 - [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
 - [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)

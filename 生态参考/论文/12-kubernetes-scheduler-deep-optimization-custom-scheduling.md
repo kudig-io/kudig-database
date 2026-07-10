@@ -1501,7 +1501,7 @@ spec:
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Op...
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Imp...
 - Kubernetes 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Archit...
-- [[生态参考/02-papers/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
+- [[生态参考/论文/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
 - Kubernetes 成本治理与 FinOps 实践 (Kubernetes Cost Governance and F...
 - Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface ...
 - Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro...
@@ -1520,8 +1520,8 @@ spec:
 
 - research/ — tag hub
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

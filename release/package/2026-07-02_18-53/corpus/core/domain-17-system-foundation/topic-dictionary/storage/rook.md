@@ -81,11 +81,11 @@ Rook 是 CNCF 毕业项目，为 Kubernetes 提供云原生存储编排平台。
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[domain-17-system-foundation/topic-dictionary/storage/csi.md|CSI]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/知识字典/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/知识字典/storage/csi.md|CSI]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

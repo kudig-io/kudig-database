@@ -74,7 +74,7 @@ etcd与灾难恢复是Kubernetes生产环境中的两个关键维度。理解它
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[故障诊断/技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
 - [[concepts/etcd-×-Prometheus.md|etcd-×-Prometheus]]

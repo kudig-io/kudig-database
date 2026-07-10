@@ -106,7 +106,7 @@ cross_refs:
 - [x] **扩充**: 控制器管理器完整控制器解析 (13)
 - [x] **扩充**: 节点问题检测器NPD + 机器健康检查MHC (15)
 - [x] **扩充**: API Server深度解析 - Structured Authentication Configuration
-- [x] **扩充**: Scheduler深度解析 - [[domain-17-system-foundation/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]
+- [x] **扩充**: Scheduler深度解析 - [[domain-17-system-foundation/知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]
 - [x] **扩充**: etcd运维操作 - 日常运维手册完善
 
 ### ✅ 技术深度检查

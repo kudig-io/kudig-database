@@ -58,7 +58,7 @@ prerequisites:
   - `nodeAffinity`：基于节点标签的复杂约束（优先/强制）。
   - `podAffinity` / `podAntiAffinity`：基于其他 Pod 标签的 placement 约束。
   - `tolerations`：允许 Pod 调度到带有匹配 taint 的节点上。
-- **[[系统基础/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]**：记录 Pod 基础设施本身消耗的资源（超出容器请求/限制的部分），由 RuntimeClass 定义。
+- **[[系统基础/知识字典/scheduling/pod-overhead.md|Pod Overhead]]**：记录 Pod 基础设施本身消耗的资源（超出容器请求/限制的部分），由 RuntimeClass 定义。
 
 ## 关键机制或特性
 - **特权模式（Privileged Mode）**：`securityContext` 中可启用特权模式，但会覆盖许多其他安全设置，应尽量避免，优先使用细粒度权限配置。
@@ -237,7 +237,7 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,TAINTS:.spec.taints[*].
 
 - [RuntimeClass](runtime-class.md) — 运行时类的深入配置
 - [Pod 生命周期](pod-lifecycle.md) — Pod 各阶段与安全上下文的交互
-- [[系统基础/topic-dictionary/workloads/pods.md|Pods]]](pods.md) — Pod 基础概念和配置
+- [[系统基础/知识字典/workloads/pods.md|Pods]]](pods.md) — Pod 基础概念和配置
 - [调度与约束](../scheduling/) — nodeAffinity、tolerations 详解
 
 ## 参考链接
@@ -245,9 +245,9 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,TAINTS:.spec.taints[*].
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
-- [[系统基础/topic-dictionary/workloads/container-environment.md|容器环境（Container Environment）]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/container-environment.md|容器环境（Container Environment）]]
 
 
 <!-- risk-assessed -->

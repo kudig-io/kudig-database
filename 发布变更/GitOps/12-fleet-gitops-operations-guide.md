@@ -525,10 +525,10 @@ rules:
 
 - [[发布变更/99-production-readiness-operations-guide.md|发布变更管理 生产就绪运维指南]]
 - [[平台工程/99-production-readiness-operations-guide.md|平台工程 生产就绪运维指南]]
-- [[发布变更/01-gitops/99-argo-cd-gitops-guide.md|Argo CD GitOps 指南]]
-- [[发布变更/01-gitops/99-flux-gitops-guide.md|Flux GitOps 指南]]
-- [[发布变更/01-gitops/07-gitops-security-compliance.md|GitOps 安全合规]]
-- [[可靠性/04-slo-sli/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[发布变更/GitOps/99-argo-cd-gitops-guide.md|Argo CD GitOps 指南]]
+- [[发布变更/GitOps/99-flux-gitops-guide.md|Flux GitOps 指南]]
+- [[发布变更/GitOps/07-gitops-security-compliance.md|GitOps 安全合规]]
+- [[可观测性/SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
 
 
 <!-- risk-assessed -->

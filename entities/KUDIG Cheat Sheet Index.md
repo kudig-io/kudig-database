@@ -88,7 +88,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|k8s-supply-chain-yaml-cheatsheet]]
 
-- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 - [[entities/kudig-gitbook-mac-plan.md|kudig-gitbook-mac-plan]]
 

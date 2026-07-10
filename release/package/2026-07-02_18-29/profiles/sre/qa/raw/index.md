@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README.md|Readme]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/README.md|Readme]]
 
 ## 子目录
 
@@ -33,7 +33,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/MOC.md|Moc]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md|Command Output Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.with_actions.md|Command Output Diagnosis.With Actions]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/MOC.md|Moc]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/command-output-diagnosis.md|Command Output Diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/command-output-diagnosis.with_actions.md|Command Output Diagnosis.With Actions]]
 

@@ -67,6 +67,6 @@ Open Policy Containers（OPCo）将安全策略打包为 OCI 镜像，通过标�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[domain-17-system-foundation/topic-dictionary/security/notary-project.md|Notary Project]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|Kyverno]]
+- [[domain-17-system-foundation/知识字典/security/notary-project.md|Notary Project]]

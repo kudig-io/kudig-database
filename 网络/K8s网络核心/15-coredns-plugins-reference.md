@@ -1094,7 +1094,7 @@ CoreDNS插件按照编译时定义的顺序执行，以下是官方推荐顺序�
 
 ## Related
 
-- [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
 
 ```
 

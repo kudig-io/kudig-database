@@ -85,7 +85,7 @@ data:
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
+[[domain-17-system-foundation/知识字典/configuration/configmaps.md|ConfigMaps]]
 
 
 <!-- risk-assessed -->

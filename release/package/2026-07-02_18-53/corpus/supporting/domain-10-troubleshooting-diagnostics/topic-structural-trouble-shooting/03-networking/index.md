@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|Cni Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|Dns Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service Ingress Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|Networkpolicy Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh Istio Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|Gateway Api Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|Terway Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|Flannel Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|Higress Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|Nginx Ingress Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|Cni Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|Dns Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service Ingress Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md|Networkpolicy Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh Istio Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway Api Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|Terway Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|Flannel Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-higress-troubleshooting.md|Higress Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|Nginx Ingress Troubleshooting]]
 

@@ -69,6 +69,6 @@ Bank Vaults（vault-secrets-webhook + vault-operator）是 Banzai Cloud 开源�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/vault.md|Vault]]
-- [[domain-17-system-foundation/topic-dictionary/security/external-secrets.md|External Secrets]]
-- [[domain-17-system-foundation/topic-dictionary/security/sops.md|SOPS]]
+- [[domain-17-system-foundation/知识字典/security/vault.md|Vault]]
+- [[domain-17-system-foundation/知识字典/security/external-secrets.md|External Secrets]]
+- [[domain-17-system-foundation/知识字典/security/sops.md|SOPS]]

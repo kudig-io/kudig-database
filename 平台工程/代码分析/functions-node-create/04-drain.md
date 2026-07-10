@@ -897,9 +897,9 @@ kubectl get events --field-selector reason=Evicted -A
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/sql.md|sql]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/sql.md|sql]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
 - [[entities/kubernetes.md|kubernetes]]
 

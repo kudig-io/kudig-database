@@ -43,7 +43,7 @@ Finalizers 是带有命名空间限制的键，用于告诉 [[entities/kubernete
 
 ### Finalizers 如何工作
 
-当用户请求删除一个带有 Finalizers 的对象时，[[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器会：
+当用户请求删除一个带有 Finalizers 的对象时，[[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器会：
 
 1. 在对象上添加 `metadata.deletionTimestamp` 字段，标记对象已被请求删除。
 2. 阻止对象被移除，直到其 `metadata.finalizers` 字段中的所有项都被移除。
@@ -90,9 +90,9 @@ Finalizers 有时会阻止依赖对象的删除，从而导致目标所有者对
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[domain-17-system-foundation/知识字典/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/知识字典/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/知识字典/fundamentals/bpfman.md|bpfman eBPF 管理器]]
 
 
 <!-- risk-assessed -->

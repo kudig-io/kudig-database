@@ -87,7 +87,7 @@ livenessProbe:
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/configuration/liveness-readiness-and-startup-probes.md|Probes]]
+[[domain-17-system-foundation/知识字典/configuration/liveness-readiness-and-startup-probes.md|Probes]]
 
 
 <!-- risk-assessed -->

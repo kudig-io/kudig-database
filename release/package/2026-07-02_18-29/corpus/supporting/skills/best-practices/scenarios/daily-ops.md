@@ -88,7 +88,7 @@ graph TD
 
 - [[domain-07-platform-engineering/README.md|README]]
 - domain-01-cluster-fundamentals/05-kubectl-commands-reference.md
-- [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|README]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/README.md|README]]
 
 
 ---
@@ -102,7 +102,7 @@ graph TD
 
 ## 操作技能
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|所有操作技能]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/MOC.md|所有操作技能]]
 
 
 ---

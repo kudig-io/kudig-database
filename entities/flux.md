@@ -75,7 +75,7 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 
 - 06-flux-gitops-continuous-delivery
 - 99-flux-gitops-guide
-- [[故障诊断/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[故障诊断/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
 - flux
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.26
@@ -109,12 +109,12 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - RELEASE-NOTES-0.4
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-0.0
-- [[生态参考/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
+- [[_archives/release-notes/cicd-gitops/flux/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-2.3
 - RELEASE-NOTES-0.5
 - RELEASE-NOTES-0.20
-- [[生态参考/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
+- [[_archives/release-notes/cicd-gitops/flux/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
 - RELEASE-NOTES-0.14
 - RELEASE-NOTES-0.30
 - RELEASE-NOTES-0.10
@@ -135,9 +135,9 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 - [[concepts/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
 - [[skills/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

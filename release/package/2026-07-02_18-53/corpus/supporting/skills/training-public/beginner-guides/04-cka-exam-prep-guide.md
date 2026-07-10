@@ -93,9 +93,9 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 
 | 考纲领域 | 权重 | 核心考点 | 本库对应文档 |
 |---------|------|---------|-------------|
-| 集群架构、安装与配置 | 25% | kubeadm 安装、升级、高可用、[[etcd|etcd]] 备份恢复 | [domain-01/06-upgrade-paths](../../domain-01-cluster-fundamentals/06-upgrade-paths/) |
+| 集群架构、安装与配置 | 25% | kubeadm 安装、升级、高可用、[[etcd|etcd]] 备份恢复 | [domain-01/06-upgrade-paths](../../domain-01-cluster-fundamentals/升级路径/) |
 | 工作负载与调度 | 15% | Pod、Deployment、DaemonSet、Job、调度规则 | [fundamentals/02-15](../fundamentals/) |
-| 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../domain-03-networking-traffic/00-core-k8s-networking/) |
+| 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../domain-03-networking-traffic/K8s网络核心/) |
 | 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
 | 故障排查 | 30% | 节点问题、Pod 排障、网络排障、组件排障 | [domain-10-troubleshooting-diagnostics](../../domain-10-troubleshooting-diagnostics/) |
 

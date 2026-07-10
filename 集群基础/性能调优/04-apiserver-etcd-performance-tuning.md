@@ -646,8 +646,8 @@ etcd_server_leader_changes_seen_total
 ## Related
 
 - 集群基础/03-control-plane/
-- [[系统基础/topic-cheat-sheet/k8s.md|K8s 速查卡]]
-- [[集群基础/07-performance-tuning/19-cluster-performance-tuning|集群性能调优]]
+- [[系统基础/速查卡/k8s.md|K8s 速查卡]]
+- [[集群基础/性能调优/19-cluster-performance-tuning|集群性能调优]]
 
 ## See Also
 

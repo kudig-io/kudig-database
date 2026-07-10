@@ -215,11 +215,11 @@ Kubernetes 的调度器会根据节点的资源情况来决定...（省略 200 �
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/helm.md|helm]]
-- [[系统基础/topic-cheat-sheet/promql.md|promql]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/docker.md|docker]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/helm.md|helm]]
+- [[系统基础/速查卡/promql.md|promql]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/docker.md|docker]]
 
 ## See Also
 

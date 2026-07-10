@@ -169,8 +169,8 @@ Copa (Copacetic) 是一个容器镜像漏洞修补工具，能够直接在现有
 - RELEASE-NOTES-0.60
 - RELEASE-NOTES-0.31
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

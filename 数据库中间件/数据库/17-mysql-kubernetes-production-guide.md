@@ -300,8 +300,8 @@ UPDATE performance_schema.setup_consumers SET ENABLED='YES' WHERE NAME LIKE '%st
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
-- [[数据库中间件/01-databases/01-mysql-enterprise-database.md|MySQL 企业数据库]]
-- [[数据库中间件/01-databases/13-mysql-group-replication-topology.md|MySQL Group Replication 拓扑]]
+- [[数据库中间件/数据库/01-mysql-enterprise-database.md|MySQL 企业数据库]]
+- [[数据库中间件/数据库/13-mysql-group-replication-topology.md|MySQL Group Replication 拓扑]]
 - [[存储/99-production-readiness-operations-guide.md|存储数据域生产就绪指南]]
 - [[可靠性/README.md|可靠性工程域]]
 - [[安全/README.md|安全合规域]]

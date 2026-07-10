@@ -90,11 +90,11 @@ Kyverno 是 CNCF 孵化项目，专为 Kubernetes 设计的策略引擎。与 OP
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/admission-controller.md|Admission Controller]]
-- [[系统基础/topic-dictionary/security/pod-security-policy.md|Pod Security Policy]]
-- [[系统基础/topic-dictionary/security/trivy.md|Trivy]]
-- [[系统基础/topic-dictionary/security/webhook.md|Webhook]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/admission-controller.md|Admission Controller]]
+- [[系统基础/知识字典/security/pod-security-policy.md|Pod Security Policy]]
+- [[系统基础/知识字典/security/trivy.md|Trivy]]
+- [[系统基础/知识字典/security/webhook.md|Webhook]]
 
 
 <!-- risk-assessed -->

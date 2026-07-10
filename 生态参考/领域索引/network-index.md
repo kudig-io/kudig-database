@@ -53,13 +53,13 @@ prerequisites:
 
 ### 网络知识域 (核心)
 
-- [[网络/00-core-k8s-networking/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- 141 - [[集群基础/03-control-plane/23-container-network-deep-dive.md|CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
+- [[网络/K8s网络核心/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
+- 141 - [[集群基础/控制平面/23-container-network-deep-dive.md|CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
 - 76 - CNI插件深度对比
 - Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 - 77 - Service实现机制
 - Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
-- [[网络/00-core-k8s-networking/10-service-advanced-features.md|10 service advanced features]]
+- [[网络/K8s网络核心/10-service-advanced-features.md|10 service advanced features]]
 
 ### DNS 与服务发现
 
@@ -95,14 +95,14 @@ prerequisites:
 
 ### 故障排查
 
-- [[故障诊断/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]]
-- [[故障诊断/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
-- [[故障诊断/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
-- [[故障诊断/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[故障诊断/核心排障/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]]
+- [[故障诊断/资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[故障诊断/基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[故障诊断/基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
 
 ### K8s 事件
 
@@ -110,15 +110,15 @@ prerequisites:
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
-- [[故障诊断/topic-skills/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
+- [[故障诊断/技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
+- [[故障诊断/技能体系/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
 
 ### FTA 故障树
 
-- [[故障诊断/topic-fta/list/dns-fta.md|DNS 异常 FTA 树]]
-- [[故障诊断/topic-fta/list/ingress-fta.md|Ingress 异常 FTA 树]]
-- [[故障诊断/topic-fta/list/networkpolicy-fta.md|NetworkPolicy 异常 FTA 树]]
-- [[故障诊断/topic-fta/list/service-fta.md|Service 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/dns-fta.md|DNS 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/ingress-fta.md|Ingress 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/service-fta.md|Service 异常 FTA 树]]
 
 ## 扩展参考
 

@@ -1,7 +1,7 @@
 ---
 title: Skill 本地运行 Demo 指南
 description: '# Skill 本地运行 Demo 指南'
-summary: 'topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md)）。'
+summary: 'topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/代码分析/deployment-create/README.md|README]].md)）。'
 category: demo
 tags:
 - k8s
@@ -63,7 +63,7 @@ k8s_versions:
 
 ## 1. 概述
 
-topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/topic-code-analysis/deployment-create/README.md|README]].md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
+topic-skills 定义了面向 AI Agent 的 [[Kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[domain-07-platform-engineering/代码分析/deployment-create/README.md|README]].md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
 
 ```
 故障注入 → 症状检测 → 快速分级 → 诊断工作流 → 根因确认 → 修复操作 → 验证确认
@@ -344,7 +344,7 @@ KIND_IMAGE=kindest/node:v1.30.6 bash setup-kind-cluster.sh
 | Skill Schema | [skill-schema.md](./skill-schema.md) | Skill 文档规范模板 |
 | IDE Skill 示例 | [k8s-node-notready/](./skill-set/k8s-node-notready/) | 完整 IDE 格式 Skill |
 | Skills 索引 | [README.md](./README.md) | Skill 库总索引 |
-| FTA 故障树 | [../domain-10-troubleshooting-diagnostics/topic-fta/](../domain-10-troubleshooting-diagnostics/topic-fta/) | 故障分析模型 |
+| FTA 故障树 | [../domain-10-troubleshooting-diagnostics/topic-fta/](../domain-10-troubleshooting-diagnostics/FTA故障树/) | 故障分析模型 |
 
 
 <!-- risk-assessed -->

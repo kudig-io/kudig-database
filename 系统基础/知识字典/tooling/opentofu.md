@@ -74,9 +74,9 @@ OpenTofu 是 Terraform 的开源分支（Linux Foundation 托管），在 HashiC
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/platform-engineering/backstage.md|Backstage]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/platform-engineering/backstage.md|Backstage]]
 
 
 <!-- risk-assessed -->

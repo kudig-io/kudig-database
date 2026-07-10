@@ -17,25 +17,25 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/README.md|Readme]]
+- [[domain-07-platform-engineering/代码分析/node-create/README.md|Readme]]
 
 ## 文档
 
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|Overview]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/02-registration.md|Registration]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/03-condition.md|Condition]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/04-drain.md|Drain]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/05-upgrade.md|Upgrade]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/06-certificate.md|Certificate]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/07-autoscaling.md|Autoscaling]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/08-troubleshooting.md|Troubleshooting]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/09-cni-node.md|Cni Node]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/10-kubelet-config.md|Kubelet Config]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/11-eviction.md|Eviction]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/12-monitoring.md|Monitoring]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/13-security.md|Security]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/14-storage-node.md|Storage Node]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/15-cloud-node.md|Cloud Node]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/16-windows-node.md|Windows Node]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/17-arm-multiarch.md|Arm Multiarch]]
+- [[domain-07-platform-engineering/代码分析/node-create/01-overview.md|Overview]]
+- [[domain-07-platform-engineering/代码分析/node-create/02-registration.md|Registration]]
+- [[domain-07-platform-engineering/代码分析/node-create/03-condition.md|Condition]]
+- [[domain-07-platform-engineering/代码分析/node-create/04-drain.md|Drain]]
+- [[domain-07-platform-engineering/代码分析/node-create/05-upgrade.md|Upgrade]]
+- [[domain-07-platform-engineering/代码分析/node-create/06-certificate.md|Certificate]]
+- [[domain-07-platform-engineering/代码分析/node-create/07-autoscaling.md|Autoscaling]]
+- [[domain-07-platform-engineering/代码分析/node-create/08-troubleshooting.md|Troubleshooting]]
+- [[domain-07-platform-engineering/代码分析/node-create/09-cni-node.md|Cni Node]]
+- [[domain-07-platform-engineering/代码分析/node-create/10-kubelet-config.md|Kubelet Config]]
+- [[domain-07-platform-engineering/代码分析/node-create/11-eviction.md|Eviction]]
+- [[domain-07-platform-engineering/代码分析/node-create/12-monitoring.md|Monitoring]]
+- [[domain-07-platform-engineering/代码分析/node-create/13-security.md|Security]]
+- [[domain-07-platform-engineering/代码分析/node-create/14-storage-node.md|Storage Node]]
+- [[domain-07-platform-engineering/代码分析/node-create/15-cloud-node.md|Cloud Node]]
+- [[domain-07-platform-engineering/代码分析/node-create/16-windows-node.md|Windows Node]]
+- [[domain-07-platform-engineering/代码分析/node-create/17-arm-multiarch.md|Arm Multiarch]]
 

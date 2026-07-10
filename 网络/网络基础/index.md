@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[网络/01-fundamentals/01-network-protocols-stack.md|Network Protocols Stack]]
-- [[网络/01-fundamentals/02-tcp-udp-deep-dive.md|Tcp Udp Deep Dive]]
-- [[网络/01-fundamentals/03-dns-principles-configuration.md|Dns Principles Configuration]]
-- [[网络/01-fundamentals/04-load-balancing-technologies.md|Load Balancing Technologies]]
-- [[网络/01-fundamentals/05-network-security-fundamentals.md|Network Security Fundamentals]]
-- [[网络/01-fundamentals/06-sdn-network-virtualization.md|Sdn Network Virtualization]]
-- [[网络/01-fundamentals/99-cilium-ebpf-network-guide.md|Cilium Ebpf Network Guide]]
+- [[网络/网络基础/01-network-protocols-stack.md|Network Protocols Stack]]
+- [[网络/网络基础/02-tcp-udp-deep-dive.md|Tcp Udp Deep Dive]]
+- [[网络/网络基础/03-dns-principles-configuration.md|Dns Principles Configuration]]
+- [[网络/网络基础/04-load-balancing-technologies.md|Load Balancing Technologies]]
+- [[网络/网络基础/05-network-security-fundamentals.md|Network Security Fundamentals]]
+- [[网络/网络基础/06-sdn-network-virtualization.md|Sdn Network Virtualization]]
+- [[网络/网络基础/99-cilium-ebpf-network-guide.md|Cilium Ebpf Network Guide]]
 

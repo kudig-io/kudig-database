@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/01-gitops-devops-troubleshooting.md|Gitops Devops Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/02-tekton-troubleshooting.md|Tekton Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/03-flux-image-automation-troubleshooting.md|Flux Image Automation Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|Gitops Devops Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|Tekton Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|Flux Image Automation Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/04-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
 

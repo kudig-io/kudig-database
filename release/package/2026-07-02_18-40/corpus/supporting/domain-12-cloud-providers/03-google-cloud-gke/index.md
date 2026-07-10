@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/03-google-cloud-gke/02-gke-autopilot-serverless.md|Gke Autopilot Serverless]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/03-gke-networking-dataplane-v2.md|Gke Networking Dataplane V2]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/04-gke-storage-filestore-gcs.md|Gke Storage Filestore Gcs]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/05-gke-workload-identity-security.md|Gke Workload Identity Security]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/06-gke-troubleshooting-playbook.md|Gke Troubleshooting Playbook]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/google-cloud-gke-overview.md|Google Cloud Gke Overview]]
+- [[domain-12-cloud-providers/Google-GKE/02-gke-autopilot-serverless.md|Gke Autopilot Serverless]]
+- [[domain-12-cloud-providers/Google-GKE/03-gke-networking-dataplane-v2.md|Gke Networking Dataplane V2]]
+- [[domain-12-cloud-providers/Google-GKE/04-gke-storage-filestore-gcs.md|Gke Storage Filestore Gcs]]
+- [[domain-12-cloud-providers/Google-GKE/05-gke-workload-identity-security.md|Gke Workload Identity Security]]
+- [[domain-12-cloud-providers/Google-GKE/06-gke-troubleshooting-playbook.md|Gke Troubleshooting Playbook]]
+- [[domain-12-cloud-providers/Google-GKE/google-cloud-gke-overview.md|Google Cloud Gke Overview]]
 

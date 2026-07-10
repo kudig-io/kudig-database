@@ -128,7 +128,7 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 
-- [[平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
+- [[平台工程/代码分析/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
 ```
 
 <!-- risk-assessed -->

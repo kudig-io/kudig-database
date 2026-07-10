@@ -491,8 +491,8 @@ curl -s localhost:{{port}}/metrics | grep {{metric}}
 
 | 问题场景 | FTA 文档 | 关键底事件 |
 |:---|:---|:---|
-| {{场景1}} | [{{component}}-fta.md](../故障诊断/topic-fta/list/{{component}}-fta.md) | BE-1 / BE-2 / BE-3 |
-| {{场景2}} | [{{component}}-fta.md](../故障诊断/topic-fta/list/{{component}}-fta.md) | BE-4 / BE-5 |
+| {{场景1}} | [{{component}}-fta.md](../故障诊断/FTA故障树/list/{{component}}-fta.md) | BE-1 / BE-2 / BE-3 |
+| {{场景2}} | [{{component}}-fta.md](../故障诊断/FTA故障树/list/{{component}}-fta.md) | BE-4 / BE-5 |
 
 ### 7.4 降级方案
 
@@ -653,10 +653,10 @@ securityContext:
 |:---|:---|:---|
 | 前置阅读 | [{{文档名}}](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
 | 深入阅读 | [{{文档名}}](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
-| 速查参考 | [{{速查卡}}](../系统基础/topic-cheat-sheet/{{cheat-sheet}}.md) | {{说明}} |
-| 故障排查 | [{{排障文档}}](../故障诊断/topic-structural-trouble-shooting/{{doc}}.md) | {{说明}} |
-| FTA | [{{故障树}}](../故障诊断/topic-fta/list/{{component}}-fta.md) | {{说明}} |
-| Skill | [{{技能}}](../故障诊断/topic-skills/{{NN}}-{{scenario}}.md) | {{说明}} |
+| 速查参考 | [{{速查卡}}](../系统基础/速查卡/{{cheat-sheet}}.md) | {{说明}} |
+| 故障排查 | [{{排障文档}}](../故障诊断/高级排障/{{doc}}.md) | {{说明}} |
+| FTA | [{{故障树}}](../故障诊断/FTA故障树/list/{{component}}-fta.md) | {{说明}} |
+| Skill | [{{技能}}](../故障诊断/技能体系/{{NN}}-{{scenario}}.md) | {{说明}} |
 
 ---
 

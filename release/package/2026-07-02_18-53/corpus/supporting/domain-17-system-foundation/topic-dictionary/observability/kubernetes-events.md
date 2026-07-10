@@ -90,11 +90,11 @@ kubectl get events -w
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/grafana.md|Grafana]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
-- [[domain-17-system-foundation/topic-dictionary/observability/metrics-server.md|Metrics Server]]
-- [[domain-17-system-foundation/topic-dictionary/observability/logging.md|Logging]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/grafana.md|Grafana]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|Alertmanager]]
+- [[domain-17-system-foundation/知识字典/observability/metrics-server.md|Metrics Server]]
+- [[domain-17-system-foundation/知识字典/observability/logging.md|Logging]]
 
 
 <!-- risk-assessed -->

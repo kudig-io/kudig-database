@@ -77,7 +77,7 @@ container2wasm 是一个将 Linux 容器镜像转换为 WebAssembly (WASM) 模�
 
 - container2wasm
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

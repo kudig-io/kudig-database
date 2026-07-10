@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[云厂商/03-google-cloud-gke/02-gke-autopilot-serverless.md|Gke Autopilot Serverless]]
-- [[云厂商/03-google-cloud-gke/03-gke-networking-dataplane-v2.md|Gke Networking Dataplane V2]]
-- [[云厂商/03-google-cloud-gke/04-gke-storage-filestore-gcs.md|Gke Storage Filestore Gcs]]
-- [[云厂商/03-google-cloud-gke/05-gke-workload-identity-security.md|Gke Workload Identity Security]]
-- [[云厂商/03-google-cloud-gke/06-gke-troubleshooting-playbook.md|Gke Troubleshooting Playbook]]
-- [[云厂商/03-google-cloud-gke/google-cloud-gke-overview.md|Google Cloud Gke Overview]]
+- [[云厂商/Google-GKE/02-gke-autopilot-serverless.md|Gke Autopilot Serverless]]
+- [[云厂商/Google-GKE/03-gke-networking-dataplane-v2.md|Gke Networking Dataplane V2]]
+- [[云厂商/Google-GKE/04-gke-storage-filestore-gcs.md|Gke Storage Filestore Gcs]]
+- [[云厂商/Google-GKE/05-gke-workload-identity-security.md|Gke Workload Identity Security]]
+- [[云厂商/Google-GKE/06-gke-troubleshooting-playbook.md|Gke Troubleshooting Playbook]]
+- [[云厂商/Google-GKE/google-cloud-gke-overview.md|Google Cloud Gke Overview]]
 

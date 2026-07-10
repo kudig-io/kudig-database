@@ -23,8 +23,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/DIALOGUE.md|Dialogue]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Skill Deep Dive]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|Skill]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/USAGE-GUIDE.md|Usage Guide]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/DIALOGUE.md|Dialogue]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Skill Deep Dive]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|Skill]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md|Usage Guide]]
 

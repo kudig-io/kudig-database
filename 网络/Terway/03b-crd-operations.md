@@ -1405,7 +1405,7 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 | 文档 | 说明 |
 |:---|:---|
-| [03-usage.md](./[[网络/topic-terway/03-usage.md|03-usage]].md) | Terway 使用指南, 包含基础操作与场景示例 |
+| [03-usage.md](./[[网络/Terway/03-usage.md|03-usage]].md) | Terway 使用指南, 包含基础操作与场景示例 |
 | [02-architecture.md](./02-architecture.md) | Terway 架构设计, CNI 插件原理与组件交互 |
 | [04-operations.md](./04-operations.md) | Terway 运维手册, 日常运维与故障处理 |
 | [网络/37](../网络/37-terway-resources-crud-operations.md) | 原始 CRUD 操作指南 (本文档提取源) |
@@ -1423,7 +1423,7 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

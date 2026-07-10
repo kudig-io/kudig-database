@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[故障诊断/topic-skills/skills-run/README.md|Readme]]
+- [[故障诊断/技能体系/skills-run/README.md|Readme]]
 
 ## 子目录
 

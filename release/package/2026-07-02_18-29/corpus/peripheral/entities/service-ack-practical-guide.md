@@ -402,18 +402,18 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[skills/service-fta.md|service-fta]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[domain-12-cloud-providers/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 
 <!-- risk-assessed -->

@@ -86,11 +86,11 @@ OpenTelemetry（简称 OTel）是 CNCF 孵化项目，提供统一的分布式�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/grafana.md|Grafana]]
-- [[domain-17-system-foundation/topic-dictionary/observability/jaeger.md|Jaeger]]
-- [[domain-17-system-foundation/topic-dictionary/observability/logging.md|Logging]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/grafana.md|Grafana]]
+- [[domain-17-system-foundation/知识字典/observability/jaeger.md|Jaeger]]
+- [[domain-17-system-foundation/知识字典/observability/logging.md|Logging]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|Alertmanager]]
 
 
 <!-- risk-assessed -->

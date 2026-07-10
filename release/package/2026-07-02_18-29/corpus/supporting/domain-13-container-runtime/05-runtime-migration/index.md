@@ -22,8 +22,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-13-container-runtime/05-runtime-migration/01-docker-to-containerd-migration.md|Docker To Containerd Migration]]
-- [[domain-13-container-runtime/05-runtime-migration/02-containerd-to-cri-o-migration.md|Containerd To Cri O Migration]]
+- [[domain-13-container-runtime/运行时迁移/01-docker-to-containerd-migration.md|Docker To Containerd Migration]]
+- [[domain-13-container-runtime/运行时迁移/02-containerd-to-cri-o-migration.md|Containerd To Cri O Migration]]
 
 
 

@@ -484,7 +484,7 @@ kubectl run netshoot --rm -it --image=nicolaka/netshoot -- bash
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

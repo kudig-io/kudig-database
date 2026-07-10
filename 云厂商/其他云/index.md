@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[云厂商/09-ucloud-uk8s/ucloud-uk8s-overview.md|Ucloud Uk8S Overview]]
+- [[云厂商/其他云/UCloud-UK8S/ucloud-uk8s-overview.md|Ucloud Uk8S Overview]]
 

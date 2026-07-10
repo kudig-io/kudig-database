@@ -78,7 +78,7 @@ Vineyard 是一个内存中的不可变数据管理器，为大数据和 AI/ML �
 - vineyard
 - storage|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

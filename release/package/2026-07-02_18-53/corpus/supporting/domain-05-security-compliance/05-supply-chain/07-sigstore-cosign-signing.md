@@ -1688,7 +1688,7 @@ Sigstore 和 Cosign 提供了一个现代化、易用的软件签名框架：
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

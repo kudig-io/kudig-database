@@ -69,6 +69,6 @@ urunc 是 Nubificus 开源的 CNCF Sandbox 项目，在 Kubernetes 上运行 Uni
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[系统基础/topic-dictionary/fundamentals/runc.md|runc]]
-- [[系统基础/topic-dictionary/fundamentals/kuasar.md|Kuasar]]
+- [[系统基础/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[系统基础/知识字典/fundamentals/runc.md|runc]]
+- [[系统基础/知识字典/fundamentals/kuasar.md|Kuasar]]

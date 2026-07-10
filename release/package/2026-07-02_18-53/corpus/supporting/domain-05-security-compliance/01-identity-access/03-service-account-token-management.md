@@ -445,8 +445,8 @@ spec:
 
 ## Related
 
-- [[domain-05-security-compliance/01-identity-access/07-rbac-matrix-configuration|RBAC 最佳实践]]
-- [[domain-05-security-compliance/01-identity-access/04-oidc-identity-provider-integration|OIDC 身份集成]]
+- [[domain-05-security-compliance/身份与访问/07-rbac-matrix-configuration|RBAC 最佳实践]]
+- [[domain-05-security-compliance/身份与访问/04-oidc-identity-provider-integration|OIDC 身份集成]]
 
 ## See Also
 

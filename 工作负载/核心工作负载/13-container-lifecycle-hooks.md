@@ -941,7 +941,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.terminationGracePeriodSeconds}'
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
-- 03 - [[工作负载/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
+- 03 - [[工作负载/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)

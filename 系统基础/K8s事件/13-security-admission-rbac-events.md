@@ -1722,11 +1722,11 @@ subjects:
 - [35 - Gateway API 概览](../网络/35-gateway-api-overview.md)
 
 ## Topic-Structural-Troubleshooting
-- [01 - API Server 故障排查](../故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md)
-- [05 - Webhook Admission 故障排查](../故障诊断/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md)
+- [01 - API Server 故障排查](../故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md)
+- [05 - Webhook Admission 故障排查](../故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md)
 
 ## Topic-Dictionary
-- [05 - 概念速查手册](../系统基础/topic-dictionary/05-concept-reference.md)
+- [05 - 概念速查手册](../系统基础/知识字典/05-concept-reference.md)
 
 ---
 
@@ -1858,7 +1858,7 @@ kubectl get events -A --field-selector reason=PodSecurityViolation \
 ## Related
 
 - [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

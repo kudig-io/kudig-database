@@ -96,13 +96,13 @@ description: '## 项目概述'
 - 99-argo-cd-gitops-guide
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
 - [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.8
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12.md|RELEASE-NOTES-2.12]]
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13.md|RELEASE-NOTES-2.13]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12.md|RELEASE-NOTES-2.12]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13.md|RELEASE-NOTES-2.13]]
 - RELEASE-NOTES-1.8
 - RELEASE-NOTES-0.9
 - RELEASE-NOTES-2.4
@@ -110,35 +110,35 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.2
 - RELEASE-NOTES-1.7
 - RELEASE-NOTES-2.0
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1.md|RELEASE-NOTES-3.1]]
 - RELEASE-NOTES-0.6
 - RELEASE-NOTES-1.6
 - RELEASE-NOTES-2.1
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0.md|RELEASE-NOTES-3.0]]
 - RELEASE-NOTES-0.7
 - RELEASE-NOTES-2.5
 - RELEASE-NOTES-1.2
 - RELEASE-NOTES-0.3
 - RELEASE-NOTES-1.5
 - RELEASE-NOTES-2.2
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3.md|RELEASE-NOTES-3.3]]
 - RELEASE-NOTES-0.4
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6.md|RELEASE-NOTES-2.6]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6.md|RELEASE-NOTES-2.6]]
 - RELEASE-NOTES-1.1
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7.md|RELEASE-NOTES-2.7]]
 - RELEASE-NOTES-1.0
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.4
 - RELEASE-NOTES-2.3
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
 - RELEASE-NOTES-0.5
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10.md|RELEASE-NOTES-2.10]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8.md|RELEASE-NOTES-2.8]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10.md|RELEASE-NOTES-2.10]]
 - RELEASE-NOTES-0.10
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14.md|RELEASE-NOTES-2.14]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14.md|RELEASE-NOTES-2.14]]
 - RELEASE-NOTES-0.11
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9.md|RELEASE-NOTES-2.9]]
-- [[domain-19-landscape-references/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11.md|RELEASE-NOTES-2.11]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9.md|RELEASE-NOTES-2.9]]
+- [[domain-19-landscape-references/_archives/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11.md|RELEASE-NOTES-2.11]]
 - [[entities/pixie.md|Pixie]]
 - [[entities/kuberhealthy.md|Kuberhealthy]]
 - [[entities/kubescape.md|Kubescape]]
@@ -166,11 +166,11 @@ description: '## 项目概述'
 - [[skills/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/领域索引/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

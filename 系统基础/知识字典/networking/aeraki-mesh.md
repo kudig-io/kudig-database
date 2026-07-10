@@ -67,6 +67,6 @@ Aeraki Mesh 是腾讯开源的服务网格方案，专注于解决 Istio 只支�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
-- [[系统基础/topic-dictionary/networking/linkerd.md|Linkerd]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/networking/linkerd.md|Linkerd]]

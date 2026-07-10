@@ -69,6 +69,6 @@ Kubernetes 日志体系涵盖容器标准输出、节点级日志采集和集中
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/fluentd.md|Fluentd]]
-- [[domain-17-system-foundation/topic-dictionary/observability/loki.md|Loki]]
-- [[domain-17-system-foundation/topic-dictionary/observability/logging-operator.md|Logging Operator]]
+- [[domain-17-system-foundation/知识字典/observability/fluentd.md|Fluentd]]
+- [[domain-17-system-foundation/知识字典/observability/loki.md|Loki]]
+- [[domain-17-system-foundation/知识字典/observability/logging-operator.md|Logging Operator]]

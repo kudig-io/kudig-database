@@ -31,7 +31,7 @@ relationships:
   type: related_to
 - target: '[[entities/flux.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/gitops.md]]'
+- target: '[[domain-17-system-foundation/速查卡/gitops.md]]'
   type: related_to
 - target: '[[concepts/GitOps x 平台工程.md]]'
   type: related_to
@@ -39,7 +39,7 @@ relationships:
 
 
 
-# [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|GitOps]] SRE 发布门控
+# [[domain-17-system-foundation/速查卡/gitops.md|GitOps]] SRE 发布门控
 
 ## 概述
 

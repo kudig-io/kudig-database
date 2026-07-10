@@ -93,7 +93,7 @@ k8s_versions:
 ## 目录
 
 - [负载均衡选型指南](#负载均衡选型指南)
-- [[系统基础/topic-dictionary/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
+- [[系统基础/知识字典/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
 - [ALB Ingress 高级配置](#alb-ingress-高级配置)
 - [生产级注解 (Annotations) 速查表](#生产级注解-annotations-速查表)
 - [故障排查与性能调优](#故障排查与性能调优)
@@ -209,18 +209,18 @@ spec:
 ## Related
 
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/grpc.md|grpc]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[云厂商/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[云厂商/05-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[云厂商/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[云厂商/阿里云/ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[云厂商/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/阿里云/ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[云厂商/阿里云/ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
 
 
 <!-- risk-assessed -->

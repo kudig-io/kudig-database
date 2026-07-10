@@ -68,6 +68,6 @@ ResourceQuota 是 Kubernetes 命名空间级别的资源配额机制，限制命
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/limit-range.md|LimitRange]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/configuration/limit-range.md|LimitRange]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]

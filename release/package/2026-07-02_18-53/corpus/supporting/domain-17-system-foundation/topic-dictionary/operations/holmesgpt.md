@@ -70,6 +70,6 @@ HolmesGPT 是 Robusta 开源的 AI 辅助 Kubernetes 排障工具，利用 LLM �
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/k8sgpt.md|K8sGPT]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/loki.md|Loki]]
+- [[domain-17-system-foundation/知识字典/operations/k8sgpt.md|K8sGPT]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/loki.md|Loki]]

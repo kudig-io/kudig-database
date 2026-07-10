@@ -720,7 +720,7 @@ docker run --privileged -it quay.io/iovisor/bpftrace:latest
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|Linux 速查卡]]
+- [[domain-17-system-foundation/速查卡/linux.md|Linux 速查卡]]
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools|eBPF 诊断工具]]
 - [[domain-10-troubleshooting-diagnostics/tools/04-memory-diagnostic-tools|内存诊断工具]]
 

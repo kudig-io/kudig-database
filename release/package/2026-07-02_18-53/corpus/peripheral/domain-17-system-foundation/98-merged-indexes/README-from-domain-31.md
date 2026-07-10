@@ -94,7 +94,7 @@ tier: peripheral---
 | 编号 | 文档 | 描述 |
 |------|------|------|
 | 05 | [内存技术深度解析](05-memory-technology-deep-dive.md) | DDR5架构、ECC、RAS特性、性能优化 |
-| 06 | [机械硬盘技术]([[domain-17-system-foundation/02-hardware/06-storage-hdd-technology.md|06-storage-hdd-technology]].md) | HDD原理、S.M.A.R.T.监控、企业级特性 |
+| 06 | [机械硬盘技术]([[domain-17-system-foundation/硬件/06-storage-hdd-technology.md|06-storage-hdd-technology]].md) | HDD原理、S.M.A.R.T.监控、企业级特性 |
 | 07 | [SSD固态硬盘技术](07-storage-ssd-technology.md) | NAND闪存、NVMe协议、耐久性管理 |
 | 08 | [网络硬件技术](08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡、交换机 |
 | 09 | [硬件厂商生态](09-hardware-vendors-ecosystem.md) | 服务器厂商、组件供应商、ODM/白牌 |

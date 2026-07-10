@@ -73,9 +73,9 @@ Server-Side Apply（SSA）是 Kubernetes 1.22+ GA 的配置管理特性，在 AP
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/strategic-merge-patch.md|Strategic Merge Patch]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/configuration/strategic-merge-patch.md|Strategic Merge Patch]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|kubectl]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
 
 
 <!-- risk-assessed -->

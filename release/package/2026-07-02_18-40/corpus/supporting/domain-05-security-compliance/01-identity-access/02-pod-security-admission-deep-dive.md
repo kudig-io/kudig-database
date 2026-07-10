@@ -522,8 +522,8 @@ PSA 部署检查清单：
 
 ## Related
 
-- [[domain-05-security-compliance/01-identity-access/07-rbac-matrix-configuration|RBAC 最佳实践]]
-- [[domain-05-security-compliance/03-runtime-security/03-runtime-security-defense|Seccomp 与 AppArmor]]
+- [[domain-05-security-compliance/身份与访问/07-rbac-matrix-configuration|RBAC 最佳实践]]
+- [[domain-05-security-compliance/运行时安全/03-runtime-security-defense|Seccomp 与 AppArmor]]
 
 ## See Also
 

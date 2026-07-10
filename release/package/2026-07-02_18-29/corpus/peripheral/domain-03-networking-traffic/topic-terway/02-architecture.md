@@ -975,7 +975,7 @@ BoltDB 是一个轻量级嵌入式 Key-Value 数据库, Terway 使用它存储�
 | 文件 | 说明 |
 |------|------|
 | [01-product.md](./01-product.md) | Terway 产品概览, 版本历史, CNI 对比, ECS 规格速查 |
-| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | 安装配置, 模式切换, NetworkPolicy, 固定 IP, Annotation 速查 |
+| [03-usage.md](./[[domain-03-networking-traffic/Terway/03-usage.md|03-usage]].md) | 安装配置, 模式切换, NetworkPolicy, 固定 IP, Annotation 速查 |
 | [04-operations.md](./04-operations.md) | 运维操作, GC 机制, 健康检查, 故障排查, 升级流程 |
 | [05-testing.md](./05-testing.md) | 端到端测试套件, NetworkPolicy 测试, 性能基准验证 |
 | [06-performance.md](./06-performance.md) | 性能基准测试, 各模式对比, 内核调优, 生产基线 |
@@ -989,8 +989,8 @@ BoltDB 是一个轻量级嵌入式 Key-Value 数据库, Terway 使用它存储�
 | [domain-03-networking-traffic/38-terway-gc-mechanism.md](../domain-03-networking-traffic/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解, 设计原则, 触发链路 |
 | [domain-03-networking-traffic/02-cni-architecture-fundamentals.md](../domain-03-networking-traffic/02-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
 | [domain-03-networking-traffic/34-network-performance-tuning.md](../domain-03-networking-traffic/34-network-performance-tuning.md) | 网络性能调优通用指南 |
-| [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 
 ---
 
@@ -1023,7 +1023,7 @@ BoltDB 是一个轻量级嵌入式 Key-Value 数据库, Terway 使用它存储�
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

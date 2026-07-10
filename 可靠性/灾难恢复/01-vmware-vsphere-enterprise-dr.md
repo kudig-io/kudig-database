@@ -1356,7 +1356,7 @@ capacity_management:
 
 ## Related
 
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 
 
 <!-- risk-assessed -->

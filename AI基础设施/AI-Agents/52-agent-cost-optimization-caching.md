@@ -802,7 +802,7 @@ Token 优化:
 
 ## Related
 
-- [[AI基础设施/02-ai-agents/51-agent-guardrails-content-safety|Agent 安全护栏]]
+- [[AI基础设施/AI-Agents/51-agent-guardrails-content-safety|Agent 安全护栏]]
 - AI基础设施/
 - 可观测性/
 

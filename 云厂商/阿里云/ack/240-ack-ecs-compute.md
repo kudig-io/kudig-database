@@ -233,19 +233,19 @@ fs.file-max = 2000000
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[云厂商/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[云厂商/05-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[云厂商/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/阿里云/ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/阿里云/ack/242-ack-vpc-network.md|242-ack-vpc-network]]
 
 
 <!-- risk-assessed -->

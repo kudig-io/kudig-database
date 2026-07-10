@@ -56,9 +56,9 @@ authors:
 relationships:
 - target: '[[concepts/ingress.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 

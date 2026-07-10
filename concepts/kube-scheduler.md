@@ -89,7 +89,7 @@ Pod 长期处于 Pending 状态是远程顾问模式下的经典问题。排查�
 4. **调度框架插件拦截**：某些自定义调度插件（如 GPU 调度、容量调度）可能在 Filter 或 Permit 阶段拒绝 Pod。若标准排查无异常，需确认集群是否启用了第三方调度插件，并查看调度器日志中的插件名称与拒绝原因。
 5. **持久化卷绑定延迟**：若 Pod 依赖 PVC 且使用 WaitForFirstConsumer 模式，调度器会等待卷创建完成后再绑定节点。存储后端（如 NAS、云盘）的延迟或配额耗尽会导致 Pod 长期 Pending，此时 Events 中通常会有卷相关的提示。
 
-更多排查细节可参考 [[故障诊断/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|scheduler-troubleshooting]] 与 [[node-notready]]。
+更多排查细节可参考 [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|scheduler-troubleshooting]] 与 [[node-notready]]。
 
 ## 相关概念
 

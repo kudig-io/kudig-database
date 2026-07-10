@@ -73,11 +73,11 @@ VXLAN（Virtual Extensible LAN）是一种网络虚拟化技术，通过在 UDP 
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/networking/clusterip.md|Clusterip]]
-- [[系统基础/topic-dictionary/networking/nodeport.md|Nodeport]]
-- [[系统基础/topic-dictionary/networking/loadbalancer.md|Loadbalancer]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/clusterip.md|Clusterip]]
+- [[系统基础/知识字典/networking/nodeport.md|Nodeport]]
+- [[系统基础/知识字典/networking/loadbalancer.md|Loadbalancer]]
 
 
 <!-- risk-assessed -->

@@ -297,7 +297,7 @@ spec:
 
 - [[KServe]] — 推理服务平台
 - [[Kubeflow]] — ML 平台
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray|KubeRay]] — Ray on K8S
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ray|KubeRay]] — Ray on K8S
 - vLLM — LLM 推理引擎
 - MLflow — ML 实验管理
 - K8S 调度器 — 调度系统

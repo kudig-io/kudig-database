@@ -68,6 +68,6 @@ LimitRange 是 Kubernetes 命名空间级别的资源默认值和约束机制，
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/resource-quota.md|ResourceQuota]]
-- [[系统基础/topic-dictionary/scheduling/vpa.md|VPA]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/configuration/resource-quota.md|ResourceQuota]]
+- [[系统基础/知识字典/scheduling/vpa.md|VPA]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]

@@ -432,7 +432,7 @@ kubectl delete namespace microservice-demo  # ⚠️ 不可逆：永久删除命
 ```
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/pvc-index.md|PVC 知识图谱索引]]
 
 
 <!-- risk-assessed -->

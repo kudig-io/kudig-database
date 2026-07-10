@@ -82,7 +82,7 @@ prerequisites:
 
 - [[skills/ts-security-auth.md|ts-security-auth]] — 安全认证故障排查
 - [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]] — node-fta
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/node-fta.md|node-fta]] — node-fta
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

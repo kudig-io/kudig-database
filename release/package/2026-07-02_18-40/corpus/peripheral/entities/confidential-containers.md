@@ -88,7 +88,7 @@ Confidential Containers (CoCo) 是一个为 Kubernetes 提供机密计算能力�
 - confidential-containers
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[entities/tetragon.md|Tetragon]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

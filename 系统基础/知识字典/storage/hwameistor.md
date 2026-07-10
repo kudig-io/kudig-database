@@ -68,6 +68,6 @@ HwameiStor 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供高
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/openebs.md|OpenEBS]]
-- [[系统基础/topic-dictionary/storage/longhorn.md|Longhorn]]
-- [[系统基础/topic-dictionary/storage/rook.md|Rook]]
+- [[系统基础/知识字典/storage/openebs.md|OpenEBS]]
+- [[系统基础/知识字典/storage/longhorn.md|Longhorn]]
+- [[系统基础/知识字典/storage/rook.md|Rook]]

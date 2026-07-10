@@ -63,23 +63,23 @@ prerequisites:
 ### 证书工具
 
 - cert-manager 自动证书管理实践指南
-- [[系统基础/topic-cheat-sheet/tls-pki.md|TLS/SSL 与 PKI 速查表]]
+- [[系统基础/速查卡/tls-pki.md|TLS/SSL 与 PKI 速查表]]
 
 ### 故障排查
 
 - 证书故障排查 (Certificate Troubleshooting)
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]
+- [[故障诊断/技能体系/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]
 
 ### 集群证书
 
-- [[工作负载/topic-functions/cluster-cert/06-cert-rotation.md|证书轮换机制源码分析]]
-- [[工作负载/topic-functions/cluster-cert/07-service-account-keys.md|ServiceAccount 密钥对源码分析]]
-- [[工作负载/topic-functions/cluster-cert/13-cert-config.md|kubeadm 配置对证书生成的影响]]
-- [[工作负载/topic-functions/cluster-cert/17-pki-security-best-practices.md|Kubernetes PKI 安全最佳实践]]
+- [[平台工程/代码分析/functions-cluster-cert/06-cert-rotation.md|证书轮换机制源码分析]]
+- [[平台工程/代码分析/functions-cluster-cert/07-service-account-keys.md|ServiceAccount 密钥对源码分析]]
+- [[平台工程/代码分析/functions-cluster-cert/13-cert-config.md|kubeadm 配置对证书生成的影响]]
+- [[平台工程/代码分析/functions-cluster-cert/17-pki-security-best-practices.md|Kubernetes PKI 安全最佳实践]]
 
 ---
 
@@ -94,19 +94,19 @@ prerequisites:
 
 ### 控制平面
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
 
 ### 安全
 
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/operations/certificates.md|Certificates（PKI 证书与要求）]]
-- [[系统基础/topic-dictionary/configuration/secrets.md|Secrets]]
-- [[系统基础/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane.md|Communication between Nodes and the Control Plane]]
+- [[系统基础/知识字典/operations/certificates.md|Certificates（PKI 证书与要求）]]
+- [[系统基础/知识字典/configuration/secrets.md|Secrets]]
+- [[系统基础/知识字典/fundamentals/communication-between-nodes-and-the-control-plane.md|Communication between Nodes and the Control Plane]]
 
 ---
 

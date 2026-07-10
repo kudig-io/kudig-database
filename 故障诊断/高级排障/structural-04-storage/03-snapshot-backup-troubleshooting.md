@@ -789,19 +789,19 @@ groups:
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[hot|hot]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/sql.md|sql]]
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/sql.md|sql]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
+- [[故障诊断/高级排障/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
+- [[故障诊断/高级排障/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
+- [[故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
 
 
 <!-- risk-assessed -->

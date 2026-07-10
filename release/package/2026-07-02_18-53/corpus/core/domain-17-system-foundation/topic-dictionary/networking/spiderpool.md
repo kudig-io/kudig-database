@@ -70,6 +70,6 @@ Spiderpool 是 DaoCloud 开源的 CNCF Sandbox 项目，为 Kubernetes 提供 Un
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/cni.md|CNI]]
-- [[domain-17-system-foundation/topic-dictionary/networking/metallb.md|MetalLB]]
-- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea]]
+- [[domain-17-system-foundation/知识字典/networking/cni.md|CNI]]
+- [[domain-17-system-foundation/知识字典/networking/metallb.md|MetalLB]]
+- [[domain-17-system-foundation/知识字典/networking/antrea.md|Antrea]]

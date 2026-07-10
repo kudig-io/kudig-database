@@ -1270,6 +1270,6 @@ HPE_iLO_Status:
 - 18-hardware-failure-case-studies
 - 01-cloud-hardware-architecture
 
-- [[平台工程/topic-code-analysis/node-create/08-troubleshooting.md|08-troubleshooting]]
+- [[平台工程/代码分析/node-create/08-troubleshooting.md|08-troubleshooting]]
 
 <!-- risk-assessed -->

@@ -81,11 +81,11 @@ Distributor、Ingester、Querier、Query-Frontend、Compactor、Store-Gateway、
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/thanos.md|Thanos]]
-- [[domain-17-system-foundation/topic-dictionary/observability/promql.md|PromQL]]
-- [[domain-17-system-foundation/topic-dictionary/observability/grafana.md|Grafana]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|Alertmanager]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/thanos.md|Thanos]]
+- [[domain-17-system-foundation/知识字典/observability/promql.md|PromQL]]
+- [[domain-17-system-foundation/知识字典/observability/grafana.md|Grafana]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|Alertmanager]]
 
 
 <!-- risk-assessed -->

@@ -81,7 +81,7 @@ Inclavare Containers 是一个基于硬件可信执行环境 (TEE) 的机密容�
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - inclavare-containers
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

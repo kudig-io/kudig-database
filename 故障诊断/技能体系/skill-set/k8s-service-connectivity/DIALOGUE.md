@@ -23,7 +23,7 @@ relationships:
   type: uses
 - target: '[[entities/deployment.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/ingress.md]]'
+- target: '[[系统基础/知识字典/networking/ingress.md]]'
   type: uses
 ---
 
@@ -84,7 +84,7 @@ relationships:
 
 ### 入口 D：工程师报告外部访问 Service 失败（NodePort/LoadBalancer）
 
-**工程师**：「NodePort 不通」/「LoadBalancer 外部 IP 无法访问」/「[[系统基础/topic-dictionary/networking/ingress.md|Ingress]] 后端超时」
+**工程师**：「NodePort 不通」/「LoadBalancer 外部 IP 无法访问」/「[[系统基础/知识字典/networking/ingress.md|Ingress]] 后端超时」
 
 **顾问回应**：
 > 外部访问失败涉及 Service 网络链路的多个环节。先定位是 Service 内部问题还是外部暴露层问题。请执行：

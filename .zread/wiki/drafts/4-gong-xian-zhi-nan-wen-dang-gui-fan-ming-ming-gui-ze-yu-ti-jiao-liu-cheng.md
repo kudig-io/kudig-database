@@ -431,5 +431,5 @@ Sources: [.editorconfig](.editorconfig#L1-L39)
 - **了解知识库全景** → [项目总览：KUDIG-DATABASE 全域知识库](1-xiang-mu-zong-lan-kudig-database-quan-yu-zhi-shi-ku)
 - **选择学习方向** → [知识地图与学习路径规划](3-zhi-shi-di-tu-yu-xue-xi-lu-jing-gui-hua)
 - **深入 Domain 文档写法** → 参考 [domain-01-cluster-fundamentals/README.md](domain-01-cluster-fundamentals/README.md) 作为目录索引的标杆范例
-- **了解 Skill 文档规范** → 参考 [topic-skills/skill-schema.md](topic-skills/skill-schema.md) 中定义的 12 Section 完整规范
+- **了解 Skill 文档规范** → 参考 [topic-skills/skill-schema.md](技能体系/skill-schema.md) 中定义的 12 Section 完整规范
 - **理解 AI 语料库接入** → [快速开始：克隆、GitBook 浏览与 AI 语料库接入](2-kuai-su-kai-shi-ke-long-gitbook-liu-lan-yu-ai-yu-liao-ku-jie-ru)

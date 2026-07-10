@@ -80,11 +80,11 @@ kubectl 是 Kubernetes 的官方命令行工具，通过与 API Server 通信来
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[系统基础/topic-dictionary/tooling/kubectx.md|Kubectx]]
-- [[系统基础/topic-dictionary/tooling/kubens.md|Kubens]]
-- [[系统基础/topic-dictionary/tooling/k9s.md|K9S]]
-- [[系统基础/topic-dictionary/tooling/stern.md|Stern]]
+- [[系统基础/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[系统基础/知识字典/tooling/kubectx.md|Kubectx]]
+- [[系统基础/知识字典/tooling/kubens.md|Kubens]]
+- [[系统基础/知识字典/tooling/k9s.md|K9S]]
+- [[系统基础/知识字典/tooling/stern.md|Stern]]
 
 
 <!-- risk-assessed -->

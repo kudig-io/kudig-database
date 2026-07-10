@@ -51,7 +51,7 @@ prerequisites:
 ### 网络知识域 ([[entities/coredns.md|CoreDNS]]/DNS 核心)
 
 - 04 - DNS 服务发现与 CoreDNS 调优
-- 33 - 服务发现与 DNS 配置 ([[domain-03-networking-traffic/00-core-k8s-networking/11-dns-service-discovery-coredns.md|11 dns service discovery coredns]]
+- 33 - 服务发现与 DNS 配置 ([[domain-03-networking-traffic/K8s网络核心/11-dns-service-discovery-coredns.md|11 dns service discovery coredns]]
 - 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 - 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)
 - 55 - CoreDNS 插件完整参考 (Plugins Reference)
@@ -59,32 +59,32 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/networking/dns-for-services-and-pods.md|DNS for Services and Pods]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]
+- [[domain-17-system-foundation/知识字典/networking/dns-for-services-and-pods.md|DNS for Services and Pods]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/endpointslices.md|EndpointSlices]]
 
 ## 关联文档 (K8s 集成)
 
 ### 网络相关
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cluster-mesh.md|多集群网络互联（Cluster Mesh）]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[domain-17-system-foundation/知识字典/networking/cluster-mesh.md|多集群网络互联（Cluster Mesh）]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]]
 
 ### FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md|DNS 异常 FTA 树]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/dns-fta.md|DNS 异常 FTA 树]]
 
 ## 扩展参考
 

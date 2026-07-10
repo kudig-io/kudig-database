@@ -90,7 +90,7 @@ Meshery 是云原生管理平面，提供服务网格和云原生基础设施的
 
 - meshery
 - [[entities/cncf-networking.md|[[CNCF 网络与服务网格项目全景|CNCF 网络与服务网格项目全景]]]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

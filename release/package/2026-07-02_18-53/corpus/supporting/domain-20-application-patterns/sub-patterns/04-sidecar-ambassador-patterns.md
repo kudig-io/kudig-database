@@ -700,7 +700,7 @@ kubectl get pods -A -o json | jq -r '
 
 - domain-02-workloads-applications/
 - domain-03-networking-traffic/
-- [[domain-20-application-patterns/sub-patterns/05-chaos-resilience-patterns|弹性与混沌模式]]
+- [[domain-20-application-patterns/子模式/05-chaos-resilience-patterns|弹性与混沌模式]]
 
 ## See Also
 

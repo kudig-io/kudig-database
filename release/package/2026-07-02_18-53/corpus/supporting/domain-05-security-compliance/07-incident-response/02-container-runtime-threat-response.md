@@ -470,12 +470,12 @@ Falco/Tetragon 规则需要定期维护，以适应业务变化并降低误报�
 
 ## Related
 
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|安全事件响应与应急处理流程]]
-- [[domain-05-security-compliance/03-runtime-security/01-falco-cloud-native-security.md|Falco 云原生安全]]
+- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[domain-05-security-compliance/运行时安全/01-falco-cloud-native-security.md|Falco 云原生安全]]
 
 ## See Also
 
-- [[domain-05-security-compliance/07-incident-response/01-security-incident-response-playbook.md|云原生安全事件响应手册]]
+- [[domain-05-security-compliance/事件响应/01-security-incident-response-playbook.md|云原生安全事件响应手册]]
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
 
 ```

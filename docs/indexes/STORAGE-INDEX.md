@@ -60,10 +60,10 @@ prerequisites:
 | 理解 PV/PVC/SC 关系 | [三者关系全景图](存储/06-storage-fundamental-concepts.md) |
 | PVC 出问题了 | [PVC 状态速查](存储/03-pvc-patterns-practices.md) → [深度排查](存储/09-pv-pvc-troubleshooting.md) |
 | 配置 StorageClass | [动态供给详解](存储/04-storageclass-dynamic-provisioning.md) → [YAML 参考](清单模式/17-storageclass-volumesnapshot.md) |
-| CSI 驱动开发/调试 | [CSI 深度解析](集群基础/22-container-storage-deep-dive.md) → [CSI 排障](故障诊断/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) |
+| CSI 驱动开发/调试 | [CSI 深度解析](集群基础/22-container-storage-deep-dive.md) → [CSI 排障](故障诊断/高级排障/04-storage/02-csi-troubleshooting.md) |
 | 性能调优 | [性能调优](存储/08-storage-performance-tuning.md) → [生产优化](生产运维/21-storage-performance-optimization.md) |
 | 备份容灾 | [备份方案](存储/10-storage-backup-disaster-recovery.md) → [灾备策略](存储/15-storage-disaster-recovery.md) |
-| 存储迁移 | [迁移指南](发布变更/topic-migration/04-storage-data-migration.md) → [CSI 迁移](存储/16-csi-migration-in-tree-to-csi.md) |
+| 存储迁移 | [迁移指南](发布变更/迁移方案/04-storage-data-migration.md) → [CSI 迁移](存储/16-csi-migration-in-tree-to-csi.md) |
 | 快速查阅术语 | [字典条目](#字典条目-topic-dictionarystorage-17-篇) |
 | 培训教学 | [全栈培训](生产运维/topic-presentations/kubernetes-storage-presentation.md) → [4 周课程](#培训材料-topic-learn-4-篇) |
 
@@ -172,17 +172,17 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [PV/PVC 深度排查](故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md) | 1,289 | PV/PVC 生命周期、PVC Pending 诊断、Multi-Attach 解决、块设备层诊断、专家清理技巧 |
-| [CSI 存储驱动深度排查](故障诊断/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md) | 2,075 | CSI 架构深度、gRPC 调试、Sidecar 日志分析、完整生命周期、版本兼容、专家检查清单 |
-| [快照与备份排障](故障诊断/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md) | 680 | VolumeSnapshot 创建/恢复/清理问题、Finalizer 阻塞、孤儿 VolumeSnapshotContent、配额限制 |
-| [存储 I/O 性能排障](故障诊断/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md) | 737 | 高延迟 I/O 诊断、吞吐瓶颈、存储饱和/抖动、iostat/fio 分析、文件系统参数调优 |
-| [StorageClass 配置排障](故障诊断/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md) | 744 | 动态供给失败、绑定模式/拓扑问题、卷扩容问题、主流 CSI 驱动速查表 |
+| [PV/PVC 深度排查](故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md) | 1,289 | PV/PVC 生命周期、PVC Pending 诊断、Multi-Attach 解决、块设备层诊断、专家清理技巧 |
+| [CSI 存储驱动深度排查](故障诊断/高级排障/04-storage/02-csi-troubleshooting.md) | 2,075 | CSI 架构深度、gRPC 调试、Sidecar 日志分析、完整生命周期、版本兼容、专家检查清单 |
+| [快照与备份排障](故障诊断/高级排障/04-storage/03-snapshot-backup-troubleshooting.md) | 680 | VolumeSnapshot 创建/恢复/清理问题、Finalizer 阻塞、孤儿 VolumeSnapshotContent、配额限制 |
+| [存储 I/O 性能排障](故障诊断/高级排障/04-storage/04-storage-performance-troubleshooting.md) | 737 | 高延迟 I/O 诊断、吞吐瓶颈、存储饱和/抖动、iostat/fio 分析、文件系统参数调优 |
+| [StorageClass 配置排障](故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md) | 744 | 动态供给失败、绑定模式/拓扑问题、卷扩容问题、主流 CSI 驱动速查表 |
 
 ### 技能卡
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [PVC/PV/CSI 存储问题诊断技能](故障诊断/topic-skills/07-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
+| [PVC/PV/CSI 存储问题诊断技能](故障诊断/技能体系/07-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
 
 ---
 
@@ -242,7 +242,7 @@ prerequisites:
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
 | [ACK EBS 云盘存储](云厂商/04-alicloud-ack/245-ack-ebs-storage.md) | 119 | 阿里云 ESSD 性能等级（PL0-PL3）、ACK CSI StorageClass、磁盘加密、快照管理、成本模型 |
-| [存储与数据迁移](发布变更/topic-migration/04-storage-data-migration.md) | 551 | 自建 K8s → ACK 迁移、StorageClass 映射、NFS→NAS/Ceph→ESSD/Local PV→云盘迁移、Velero 工作流 |
+| [存储与数据迁移](发布变更/迁移方案/04-storage-data-migration.md) | 551 | 自建 K8s → ACK 迁移、StorageClass 映射、NFS→NAS/Ceph→ESSD/Local PV→云盘迁移、Velero 工作流 |
 
 ---
 
@@ -274,8 +274,8 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [集群存储与卷管理](工作负载/topic-functions/cluster-create/22-storage-volumes.md) | 275 | 存储类型概览、CSI 架构图、kubeadm 存储、Local PV、拓扑调度、卷限制 |
-| [节点存储](工作负载/topic-functions/node-create/14-storage-node.md) | 393 | emptyDir/hostPath/PV/PVC、CSI Node 插件两阶段挂载、CSIDriver API、挂载传播、节点诊断脚本 |
+| [集群存储与卷管理](平台工程/代码分析/functions-cluster-create/22-storage-volumes.md) | 275 | 存储类型概览、CSI 架构图、kubeadm 存储、Local PV、拓扑调度、卷限制 |
+| [节点存储](平台工程/代码分析/functions-node-create/14-storage-node.md) | 393 | emptyDir/hostPath/PV/PVC、CSI Node 插件两阶段挂载、CSIDriver API、挂载传播、节点诊断脚本 |
 
 ---
 
@@ -285,23 +285,23 @@ prerequisites:
 
 | 条目 | 行数 | 核心概念 |
 |------|-----:|---------|
-| [Volumes（卷）](系统基础/topic-dictionary/storage/volumes.md) | 164 | Volume 类型（emptyDir/hostPath/nfs/iscsi/cephfs 等） |
-| [Persistent Volumes（持久卷）](系统基础/topic-dictionary/storage/persistent-volumes.md) | 187 | PV/PVC 生命周期、绑定、回收策略、访问模式 |
-| [Storage Classes（存储类）](系统基础/topic-dictionary/storage/storage-classes.md) | 146 | StorageClass 参数、provisioner、volumeBindingMode |
-| [Volume Snapshots（卷快照）](系统基础/topic-dictionary/storage/volume-snapshots.md) | 131 | VolumeSnapshot/VolumeSnapshotContent 创建与恢复 |
-| [CSI Volume Cloning（卷克隆）](系统基础/topic-dictionary/storage/csi-volume-cloning.md) | 115 | PVC-to-PVC 克隆、dataSource 引用 |
-| [Dynamic Volume Provisioning](系统基础/topic-dictionary/storage/dynamic-volume-provisioning.md) | 120 | 动态 vs 静态供给、provisioner 工作流 |
-| [Ephemeral Volumes（临时卷）](系统基础/topic-dictionary/storage/ephemeral-volumes.md) | 136 | 临时内联 CSI 卷、ConfigMap/Secret 卷 |
-| [Projected Volumes（投射卷）](系统基础/topic-dictionary/storage/projected-volumes.md) | 143 | 多源投射、serviceAccountToken 投射 |
-| [Local Ephemeral Storage](系统基础/topic-dictionary/storage/local-ephemeral-storage.md) | 130 | 节点临时存储、驱逐阈值、资源配额 |
-| [Volume Health Monitoring](系统基础/topic-dictionary/storage/volume-health-monitoring.md) | 121 | 卷健康状态检测、CSI NodeGetVolumeStats |
-| [Volume Attributes Classes](系统基础/topic-dictionary/storage/volume-attributes-classes.md) | 153 | VolumeAttributesClass (v1.29+)、动态修改卷属性 |
-| [Node Volume Limits](系统基础/topic-dictionary/[[系统基础/topic-dictionary/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
-| [高性能存储网络](系统基础/topic-dictionary/storage/high-performance-storage-networks.md) | 145 | RDMA、NVMe-oF、RoCE、iWARP |
-| [对象存储与数据流水线](系统基础/topic-dictionary/storage/object-storage-and-data-pipelines.md) | 178 | S3/MinIO 集成、COSI（容器对象存储接口） |
-| [Storage Capacity](系统基础/topic-dictionary/storage/storage-capacity.md) | 105 | CSIStorageCapacity、拓扑感知供给 |
-| [Volume Snapshot Classes](系统基础/topic-dictionary/storage/volume-snapshot-classes.md) | 109 | VolumeSnapshotClass 参数、驱动配置 |
-| [Windows Storage](系统基础/topic-dictionary/storage/windows-storage.md) | 146 | Windows 节点存储、SMB 挂载、gMSA |
+| [Volumes（卷）](系统基础/知识字典/storage/volumes.md) | 164 | Volume 类型（emptyDir/hostPath/nfs/iscsi/cephfs 等） |
+| [Persistent Volumes（持久卷）](系统基础/知识字典/storage/persistent-volumes.md) | 187 | PV/PVC 生命周期、绑定、回收策略、访问模式 |
+| [Storage Classes（存储类）](系统基础/知识字典/storage/storage-classes.md) | 146 | StorageClass 参数、provisioner、volumeBindingMode |
+| [Volume Snapshots（卷快照）](系统基础/知识字典/storage/volume-snapshots.md) | 131 | VolumeSnapshot/VolumeSnapshotContent 创建与恢复 |
+| [CSI Volume Cloning（卷克隆）](系统基础/知识字典/storage/csi-volume-cloning.md) | 115 | PVC-to-PVC 克隆、dataSource 引用 |
+| [Dynamic Volume Provisioning](系统基础/知识字典/storage/dynamic-volume-provisioning.md) | 120 | 动态 vs 静态供给、provisioner 工作流 |
+| [Ephemeral Volumes（临时卷）](系统基础/知识字典/storage/ephemeral-volumes.md) | 136 | 临时内联 CSI 卷、ConfigMap/Secret 卷 |
+| [Projected Volumes（投射卷）](系统基础/知识字典/storage/projected-volumes.md) | 143 | 多源投射、serviceAccountToken 投射 |
+| [Local Ephemeral Storage](系统基础/知识字典/storage/local-ephemeral-storage.md) | 130 | 节点临时存储、驱逐阈值、资源配额 |
+| [Volume Health Monitoring](系统基础/知识字典/storage/volume-health-monitoring.md) | 121 | 卷健康状态检测、CSI NodeGetVolumeStats |
+| [Volume Attributes Classes](系统基础/知识字典/storage/volume-attributes-classes.md) | 153 | VolumeAttributesClass (v1.29+)、动态修改卷属性 |
+| [Node Volume Limits](系统基础/知识字典/[[系统基础/知识字典/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md) | 114 | 节点卷挂载数量限制、云厂商限制 |
+| [高性能存储网络](系统基础/知识字典/storage/high-performance-storage-networks.md) | 145 | RDMA、NVMe-oF、RoCE、iWARP |
+| [对象存储与数据流水线](系统基础/知识字典/storage/object-storage-and-data-pipelines.md) | 178 | S3/MinIO 集成、COSI（容器对象存储接口） |
+| [Storage Capacity](系统基础/知识字典/storage/storage-capacity.md) | 105 | CSIStorageCapacity、拓扑感知供给 |
+| [Volume Snapshot Classes](系统基础/知识字典/storage/volume-snapshot-classes.md) | 109 | VolumeSnapshotClass 参数、驱动配置 |
+| [Windows Storage](系统基础/知识字典/storage/windows-storage.md) | 146 | Windows 节点存储、SMB 挂载、gMSA |
 
 ---
 

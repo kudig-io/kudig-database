@@ -35,11 +35,11 @@ relationships:
   type: uses
 - target: '[[entities/kubelet.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/configuration/secrets.md]]'
+- target: '[[系统基础/知识字典/configuration/secrets.md]]'
   type: uses
 - target: '[[entities/deployment.md]]'
   type: uses
-- target: '[[系统基础/topic-cheat-sheet/k8s.md]]'
+- target: '[[系统基础/速查卡/k8s.md]]'
   type: related_to
 ---
 
@@ -55,7 +55,7 @@ relationships:
 
 ## 连接点
 
-[[系统基础/topic-dictionary/configuration/secrets.md|secrets]]-management]] 覆盖密钥的安全存储，[[concepts/storage-model.md|storage model]] 覆盖 PV/PVC/StorageClass 的三层抽象。两者的交叉点是 **Secret 的物理存储路径**：[[系统基础/topic-cheat-sheet/k8s.md|K8s]] Secret 从 API Server 写入 [[entities/etcd.md|etcd]]，从 etcd 同步到 [[entities/kubelet.md|kubelet]]，从 kubelet 挂载为 tmpfs 到容器。这条路径上的每个存储层都有不同的安全特性和失效模式。
+[[系统基础/知识字典/configuration/secrets.md|secrets]]-management]] 覆盖密钥的安全存储，[[concepts/storage-model.md|storage model]] 覆盖 PV/PVC/StorageClass 的三层抽象。两者的交叉点是 **Secret 的物理存储路径**：[[系统基础/速查卡/k8s.md|K8s]] Secret 从 API Server 写入 [[entities/etcd.md|etcd]]，从 etcd 同步到 [[entities/kubelet.md|kubelet]]，从 kubelet 挂载为 tmpfs 到容器。这条路径上的每个存储层都有不同的安全特性和失效模式。
 
 ## 共现场景
 

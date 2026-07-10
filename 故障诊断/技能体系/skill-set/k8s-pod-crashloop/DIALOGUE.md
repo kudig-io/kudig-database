@@ -557,7 +557,7 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 ## Related
 
 - [[scripts/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
-- [[系统基础/topic-dictionary/configuration/secrets.md|Secrets]]
+- [[系统基础/知识字典/configuration/secrets.md|Secrets]]
 
 
 <!-- risk-assessed -->

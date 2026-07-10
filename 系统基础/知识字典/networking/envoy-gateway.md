@@ -84,11 +84,11 @@ Envoy Gateway 是 CNCF 项目，提供基于 Envoy 的 Kubernetes Gateway API �
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/networking/traefik.md|Traefik]]
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/traefik.md|Traefik]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
 
 
 <!-- risk-assessed -->

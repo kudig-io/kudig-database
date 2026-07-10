@@ -478,23 +478,23 @@ spec:
 
 - [Higress 企业级网关实践](./网络/04-higress-enterprise-gateway.md)
 - Higress FTA 故障树](./故障诊断/topic-fta/list/higress-fta.md)
-- [Higress 全局索引](./生态参考/topic-index/higress-index.md)
-- [Ingress 通用故障排查](./[[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [Higress 全局索引](./生态参考/领域索引/higress-index.md)
+- [Ingress 通用故障排查](./[[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[index|index]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 
 ```
 

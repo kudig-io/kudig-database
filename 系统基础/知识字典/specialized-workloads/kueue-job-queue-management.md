@@ -112,7 +112,7 @@ Kueue 位于 **API Server 与默认调度器之间**：
 ## 最佳实践/注意事项
 
 - **从队列配额开始设计**：先定义各团队的 ClusterQueue 配额，再允许用户提交作业
-- **配合 [[系统基础/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]] 使用**：分布式训练作业应启用 Volcano/Kube-Batch 的 Gang Scheduling，与 Kueue 协同防止资源死锁
+- **配合 [[系统基础/知识字典/scheduling/gang-scheduling.md|Gang Scheduling]] 使用**：分布式训练作业应启用 Volcano/Kube-Batch 的 Gang Scheduling，与 Kueue 协同防止资源死锁
 - **Checkpoint 是 Spot 实例的前提**：只有具备完善 checkpoint 机制的作业才能安全使用可抢占资源
 - **设置合理的抢占策略**：避免频繁抢占导致训练任务反复重启，可配置抢占宽限期（Preemption Grace Period）
 - **监控队列深度和等待时间**：核心指标包括队列中的 Workload 数量、平均等待时间、准入率
@@ -127,11 +127,11 @@ Kueue 位于 **API Server 与默认调度器之间**：
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
-- [[系统基础/topic-dictionary/fundamentals/container.md|Container]]
-- [[系统基础/topic-dictionary/fundamentals/node.md|Node]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[系统基础/topic-dictionary/fundamentals/cluster.md|Cluster]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/fundamentals/container.md|Container]]
+- [[系统基础/知识字典/fundamentals/node.md|Node]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/fundamentals/cluster.md|Cluster]]
 
 
 <!-- risk-assessed -->

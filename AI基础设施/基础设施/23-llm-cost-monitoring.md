@@ -1417,7 +1417,7 @@ class CostReportGenerator:
 
 ## Related
 
-- [[生态参考/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 
 <!-- risk-assessed -->

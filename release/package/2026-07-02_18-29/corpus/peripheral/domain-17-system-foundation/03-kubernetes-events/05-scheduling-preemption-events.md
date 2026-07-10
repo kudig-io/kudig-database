@@ -978,11 +978,11 @@ kubectl get nodes -o json | jq -r '.items[] |
 - **[../domain-2-workload/10-pod-scheduling.md](../domain-2-workload/10-pod-scheduling.md)** - Pod 调度机制详解
 - **[../domain-4-storage/20-pv-pvc-dynamic-provisioning.md](../domain-4-storage/20-pv-pvc-dynamic-provisioning.md)** - 存储动态供应与绑定
 - **[../domain-3-cluster/15-node-management.md](../domain-3-cluster/15-node-management.md)** - 节点管理与污点配置
-- **[../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md)** - 调度器故障排查
+- **[../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/03-scheduler-troubleshooting.md)** - 调度器故障排查
 
 ## 相关最佳实践
-- **[../domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md](../domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md)** - 调度策略最佳实践
-- **[../domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md](../domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md)** - 调度性能优化
+- **[../domain-17-system-foundation/topic-dictionary/01-operations-best-practices.md](../domain-17-system-foundation/知识字典/01-operations-best-practices.md)** - 调度策略最佳实践
+- **[../domain-17-system-foundation/topic-dictionary/03-performance-tuning-expert.md](../domain-17-system-foundation/知识字典/03-performance-tuning-expert.md)** - 调度性能优化
 
 ---
 
@@ -1014,8 +1014,8 @@ kubectl get nodes -o json | jq -r '.items[] |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

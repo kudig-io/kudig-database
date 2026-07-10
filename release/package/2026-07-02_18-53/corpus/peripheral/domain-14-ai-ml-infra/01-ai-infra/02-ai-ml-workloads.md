@@ -1372,7 +1372,7 @@ kubectl get podgroups -n ml-training
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 
 <!-- risk-assessed -->

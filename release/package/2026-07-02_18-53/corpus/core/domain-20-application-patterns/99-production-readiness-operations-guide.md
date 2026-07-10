@@ -55,7 +55,7 @@ authors:
 > **适用版本**: Kubernetes v1.28 - v1.33
 > **目标读者**: SRE、运维工程师、平台工程师
 
-本指南聚焦 [[domain-20-application-patterns/README.md|Application Patterns]] 领域中**应用工作负载投产与持续运维**的实操要求，不重复阐述具体行业架构，而是把各垂直场景（[[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商]]、[[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序]]、[[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技]]、[[domain-20-application-patterns/topic-application-architecture/17-saas-multitenant-architecture.md|SaaS 多租户]] 等）共性的生产就绪动作抽象为可执行清单与命令。
+本指南聚焦 [[domain-20-application-patterns/README.md|Application Patterns]] 领域中**应用工作负载投产与持续运维**的实操要求，不重复阐述具体行业架构，而是把各垂直场景（[[domain-20-application-patterns/行业架构/01-ecommerce-architecture.md|电商]]、[[domain-20-application-patterns/行业架构/02-mini-program-architecture.md|小程序]]、[[domain-20-application-patterns/行业架构/06-fintech-architecture.md|金融科技]]、[[domain-20-application-patterns/行业架构/17-saas-multitenant-architecture.md|SaaS 多租户]] 等）共性的生产就绪动作抽象为可执行清单与命令。
 
 区别于[[domain-11-production-operations/01-production-sre-daily-ops.md|通用生产巡检手册]]，本文更强调**面向应用架构特性的检查项**：例如有状态服务的 PVC 快照、电商秒杀的 HPA 行为、多租户 SaaS 的网络隔离等。
 
@@ -464,12 +464,12 @@ Application Patterns 位于业务架构与平台能力的交汇点，生产就�
 ### 本域核心参考
 
 - [[domain-20-application-patterns/README.md|Application Patterns 目录]]
-- [[domain-20-application-patterns/topic-application-architecture/README.md|应用层架构设计最佳实践]]
-- [[domain-20-application-patterns/topic-application-architecture/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/02-mini-program-architecture.md|小程序平台 Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/06-fintech-architecture.md|金融科技 FinTech Kubernetes 生产架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/17-saas-multitenant-architecture.md|SaaS 多租户架构设计]]
-- [[domain-20-application-patterns/topic-application-architecture/20-microservice-governance-architecture.md|微服务治理架构设计]]
+- [[domain-20-application-patterns/行业架构/README.md|应用层架构设计最佳实践]]
+- [[domain-20-application-patterns/行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/行业架构/02-mini-program-architecture.md|小程序平台 Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/行业架构/06-fintech-architecture.md|金融科技 FinTech Kubernetes 生产架构设计]]
+- [[domain-20-application-patterns/行业架构/17-saas-multitenant-architecture.md|SaaS 多租户架构设计]]
+- [[domain-20-application-patterns/行业架构/20-microservice-governance-architecture.md|微服务治理架构设计]]
 
 ### 计划补充的生产模式专题（参考 Gap Analysis）
 

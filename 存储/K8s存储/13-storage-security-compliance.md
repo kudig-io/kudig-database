@@ -1189,7 +1189,7 @@ main
 
 ## Related
 
-- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
 
 
 <!-- risk-assessed -->

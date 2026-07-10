@@ -55,7 +55,7 @@ prerequisites:
 
 Each Pod has four condition types that describe its internal state:
 - **PodScheduled**: Pod assigned to a node
-- **Initialized**: All [[系统基础/topic-dictionary/workloads/init-containers.md|init containers]] completed
+- **Initialized**: All [[系统基础/知识字典/workloads/init-containers.md|init containers]] completed
 - **ContainersReady**: All containers passed readiness
 - **Ready**: Pod can accept traffic (subset of ContainersReady + network ready)
 
@@ -63,7 +63,7 @@ Each Pod has four condition types that describe its internal state:
 
 1. **Init Containers** run sequentially (each must succeed before next starts)
 2. **Main Containers** start in parallel after all init containers complete
-3. **[[系统基础/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]** (v1.28+) can run alongside init containers in parallel
+3. **[[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]** (v1.28+) can run alongside init containers in parallel
 
 ## Health Probes
 
@@ -98,7 +98,7 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
 - [[entities/statefulset.md|StatefulSet]]
 - [[concepts/high-availability-patterns.md|High Availability Patterns]]
 - [[skills/configure-health-probes.md|Configure Health Probes]]
@@ -118,7 +118,7 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [[entities/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
 - [[entities/container-runtime.md|Container Runtime]] — Cross-reference
 - [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

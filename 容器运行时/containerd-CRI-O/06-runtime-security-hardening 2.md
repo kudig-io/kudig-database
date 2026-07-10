@@ -345,12 +345,12 @@ EOF
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[容器运行时/99-production-readiness-operations-guide.md|容器运行时生产就绪运维指南]]
-- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[容器运行时/03-containerd-cri-o/04-kata-containers-secure-container.md|Kata Containers 安全容器]]
-- [[容器运行时/03-containerd-cri-o/05-gvisor-sandbox-runtime.md|gVisor 沙箱运行时]]
+- [[容器运行时/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[容器运行时/containerd-CRI-O/04-kata-containers-secure-container.md|Kata Containers 安全容器]]
+- [[容器运行时/containerd-CRI-O/05-gvisor-sandbox-runtime.md|gVisor 沙箱运行时]]
 - [[安全/README.md|安全合规域]]
-- [[安全/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概述]]
-- [[安全/03-runtime-security/99-falco-runtime-security-guide.md|Falco 运行时安全指南]]
+- [[安全/供应链/01-supply-chain-security-overview.md|供应链安全概述]]
+- [[安全/运行时安全/99-falco-runtime-security-guide.md|Falco 运行时安全指南]]
 
 ---
 

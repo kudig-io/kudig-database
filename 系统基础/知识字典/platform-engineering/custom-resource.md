@@ -67,5 +67,5 @@ Custom Resource（CR）是 Kubernetes 的核心扩展机制，通过 CRD（Custo
 - https://book.kubebuilder.io/
 
 ## Related
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
-- [[系统基础/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/fundamentals/kubernetes.md|Kubernetes]]

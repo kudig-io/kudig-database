@@ -86,11 +86,11 @@ subjects:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|Rbac]]
-- [[domain-17-system-foundation/topic-dictionary/security/role.md|Role]]
-- [[domain-17-system-foundation/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[domain-17-system-foundation/topic-dictionary/security/service-account.md|Service Account]]
-- [[domain-17-system-foundation/topic-dictionary/security/service-account-token.md|Service Account Token]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|Rbac]]
+- [[domain-17-system-foundation/知识字典/security/role.md|Role]]
+- [[domain-17-system-foundation/知识字典/security/clusterrole.md|Clusterrole]]
+- [[domain-17-system-foundation/知识字典/security/service-account.md|Service Account]]
+- [[domain-17-system-foundation/知识字典/security/service-account-token.md|Service Account Token]]
 
 
 <!-- risk-assessed -->

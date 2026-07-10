@@ -207,9 +207,9 @@ flowchart TD
 - [[skills/skill-README.md|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 - [[etcd]] — etcd
 
-- [[故障诊断/topic-fta/list/etcd-fta.md|etcd 异常故障树分析]]
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[故障诊断/FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

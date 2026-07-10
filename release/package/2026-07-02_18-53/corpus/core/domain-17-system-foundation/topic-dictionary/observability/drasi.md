@@ -68,6 +68,6 @@ Drasi 是微软开源的 CNCF Sandbox 项目，实时检测基础设施和应用
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[domain-17-system-foundation/topic-dictionary/operations/kuberhealthy.md|Kuberhealthy]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[domain-17-system-foundation/知识字典/operations/kuberhealthy.md|Kuberhealthy]]

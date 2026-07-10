@@ -288,7 +288,7 @@ compactor:
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[domain-06-observability/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]]
 - [[domain-06-observability/99-slo-operations-guide.md|SLO 运维指南]]
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
 - [[domain-11-production-operations/03-on-call-playbook.md|值班手册与告警响应规范]]
 - [[domain-11-production-operations/04-incident-response-template.md|事故响应模板与流程规范]]
 - 告警质量治理与告警疲劳缓解（待补充）

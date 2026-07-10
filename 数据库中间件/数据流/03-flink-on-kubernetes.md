@@ -457,8 +457,8 @@ kubectl top pod -l app=wordcount-app -n flink
 ```
 ## 14. 相关文档
 
-- [[数据库中间件/06-data-streaming/01-cdc-change-data-capture.md|CDC 变更数据捕获]]
-- [[数据库中间件/06-data-streaming/02-stream-processing-overview.md|流处理概述]]
+- [[数据库中间件/数据流/01-cdc-change-data-capture.md|CDC 变更数据捕获]]
+- [[数据库中间件/数据流/02-stream-processing-overview.md|流处理概述]]
 
 ```
 

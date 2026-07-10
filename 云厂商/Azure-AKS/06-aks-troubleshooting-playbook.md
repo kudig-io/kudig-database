@@ -505,7 +505,7 @@ kubectl run netshoot --rm -it --image=nicolaka/netshoot -- bash
 
 ## See Also
 
-- [[云厂商/04-azure-aks/99-azure-aks-production-runbook.md|AKS 生产环境运行手册]]
+- [[云厂商/Azure-AKS/99-azure-aks-production-runbook.md|AKS 生产环境运行手册]]
 - Container Insights KQL 参考
 
 

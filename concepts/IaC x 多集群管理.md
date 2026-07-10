@@ -33,9 +33,9 @@ prerequisites:
 - iac-basics
 - policy-basics
 relationships:
-- target: '[[平台工程/operate/13-multi-cluster-management.md]]'
+- target: '[[平台工程/运维/13-multi-cluster-management.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/configuration/secrets.md]]'
+- target: '[[系统基础/知识字典/configuration/secrets.md]]'
   type: uses
 - target: '[[entities/argocd.md]]'
   type: related_to
@@ -49,7 +49,7 @@ relationships:
 
 
 ---
-title: 基础设施即代码 x [[平台工程/operate/13-multi-cluster-management.md|多集群管理]]
+title: 基础设施即代码 x [[平台工程/运维/13-multi-cluster-management.md|多集群管理]]
 category: synthesis
 tags:
 - k8s
@@ -156,7 +156,7 @@ GitOps 协调 (Flux/ArgoCD 跨 N 个集群同步)
 - [[kyverno]] — Kyverno
 - [[crossplane]] — Crossplane
 - [[cni]] — CNI (Container Network Interface)
-- [[sops]] — SOPS ([[系统基础/topic-dictionary/configuration/secrets.md|Secrets]] OPerationS)
+- [[sops]] — SOPS ([[系统基础/知识字典/configuration/secrets.md|Secrets]] OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
 - [[entities/helm.md|Helm (entities)]]
 - [[entities/argo.md|Argo Workflows]]

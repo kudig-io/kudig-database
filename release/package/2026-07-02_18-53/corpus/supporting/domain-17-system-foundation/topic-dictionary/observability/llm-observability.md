@@ -160,9 +160,9 @@ cost_histogram.record(cost, attributes={"model": model_name})
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/alerting-and-slo-monitoring.md|告警与 SLO 监控工程]]
-- [[domain-17-system-foundation/topic-dictionary/observability/alertmanager.md|告警管理器]]
-- [[domain-17-system-foundation/topic-dictionary/observability/datadog.md|Datadog]]
+- [[domain-17-system-foundation/知识字典/observability/alerting-and-slo-monitoring.md|告警与 SLO 监控工程]]
+- [[domain-17-system-foundation/知识字典/observability/alertmanager.md|告警管理器]]
+- [[domain-17-system-foundation/知识字典/observability/datadog.md|Datadog]]
 
 
 <!-- risk-assessed -->

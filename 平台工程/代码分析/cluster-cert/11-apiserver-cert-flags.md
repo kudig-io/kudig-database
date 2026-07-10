@@ -474,11 +474,11 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
-- [[平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
+- [[平台工程/代码分析/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
+- [[平台工程/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
 
 
 <!-- risk-assessed -->

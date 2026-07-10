@@ -52,7 +52,7 @@ prerequisites:
 
 ## 概述
 
-k3s 是经过 CNCF 认证的轻量级 Kubernetes 发行版，专为资源受限环境设计。它将 Kubernetes 所需的所有组件打包到单个小于 100MB 的二进制文件中，非常适合 IoT、边缘计算、CI/CD 和开发环境。k3s 移除了遗留和可选组件，同时保持完全兼容标准 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
+k3s 是经过 CNCF 认证的轻量级 Kubernetes 发行版，专为资源受限环境设计。它将 Kubernetes 所需的所有组件打包到单个小于 100MB 的二进制文件中，非常适合 IoT、边缘计算、CI/CD 和开发环境。k3s 移除了遗留和可选组件，同时保持完全兼容标准 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]。
 
 ## 核心能力
 
@@ -96,13 +96,13 @@ k3s 是经过 CNCF 认证的轻量级 Kubernetes 发行版，专为资源受限�
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[故障诊断/03-advanced-troubleshooting/44-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
+- [[故障诊断/高级排障/44-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
 - k3s
 - [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/node-index.md|Node 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

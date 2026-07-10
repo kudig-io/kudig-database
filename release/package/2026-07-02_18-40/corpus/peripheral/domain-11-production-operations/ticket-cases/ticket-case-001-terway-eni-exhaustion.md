@@ -50,11 +50,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-039-rbac-api-access-denied.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-039-rbac-api-access-denied.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-010-networkpolicy-blocks-traffic.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-010-networkpolicy-blocks-traffic.md]]'
   type: related_to
 ---
 

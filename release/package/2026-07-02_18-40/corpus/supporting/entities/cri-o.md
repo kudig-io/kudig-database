@@ -113,7 +113,7 @@ description: '## 项目概述'
 - RELEASE-NOTES-0.1
 - RELEASE-NOTES-1.25
 - RELEASE-NOTES-1.11
-- [[domain-19-landscape-references/_archived-release-notes/core-deps/cri-o/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
+- [[domain-19-landscape-references/_archives/release-notes/core-deps/cri-o/RELEASE-NOTES-1.35.md|RELEASE-NOTES-1.35]]
 - troubleshooting|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
@@ -125,8 +125,8 @@ description: '## 项目概述'
 - [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[entities/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[entities/container-runtime.md|Container Runtime]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -523,9 +523,9 @@ kubectl debug node/<node> -it --image=busybox
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/docker.md|docker]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/docker.md|docker]]
 - [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
 
 ```

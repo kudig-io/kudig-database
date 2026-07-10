@@ -379,8 +379,8 @@ spec:
 - [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cni.md|cni]]
-- [[系统基础/topic-cheat-sheet/sql.md|sql]]
-- [[系统基础/topic-dictionary/workloads/daemonset.md|daemonset]]
+- [[系统基础/速查卡/sql.md|sql]]
+- [[系统基础/知识字典/workloads/daemonset.md|daemonset]]
 
 
 <!-- risk-assessed -->

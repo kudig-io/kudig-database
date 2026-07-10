@@ -172,8 +172,8 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

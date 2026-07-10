@@ -92,7 +92,7 @@ GSF 提出了绿色软件开发的八大原则：
 
 ### 碳感知 Kubernetes 调度器
 
-通过扩展 [[domain-17-system-foundation/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]] 或自定义控制器实现：
+通过扩展 [[domain-17-system-foundation/知识字典/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]] 或自定义控制器实现：
 - 读取电网碳强度 API（如 Electricity Maps、WattTime）
 - 在节点标签中标记当前区域的碳强度分数
 - 调度器优先将可延迟批处理任务分配到碳强度低的节点/时段
@@ -188,9 +188,9 @@ kubectl get nodes -l kubernetes.io/arch=arm64
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
-- [[domain-17-system-foundation/topic-dictionary/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/知识字典/operations/capacity-planning-forecasting.md|13 - 容量规划与资源预测]]
 
 
 <!-- risk-assessed -->

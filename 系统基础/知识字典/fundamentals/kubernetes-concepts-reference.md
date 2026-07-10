@@ -97,7 +97,7 @@ prerequisites:
 | 9 | Label | §1 | 对象标签，像"行李标签"用于分类和筛选 |
 | 10 | [[concepts/container-runtime.md|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
 | 11 | kube-apiserver | §3 | API 入口，像"公司前台接待" |
-| 12 | [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] | §3 | 数据存储，像"公司的档案室" |
+| 12 | [[系统基础/知识字典/fundamentals/etcd.md|etcd]] | §3 | 数据存储，像"公司的档案室" |
 | 13 | kubelet | §4 | 节点代理，像"每台机器上的管家" |
 | 14 | Ingress | §6 | 外部流量入口，像"大楼的门卫" |
 | 15 | PersistentVolume | §7 | 持久存储，像"云端硬盘" |
@@ -6133,8 +6133,8 @@ prerequisites:
 - [Kubernetes Concepts Reference]()
 
 ## Related
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

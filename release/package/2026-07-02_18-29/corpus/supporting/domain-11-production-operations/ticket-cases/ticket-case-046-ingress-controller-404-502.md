@@ -24,11 +24,11 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: kube-system
 ticket_type: 网络故障 / Ingress 故障
 skill_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|Ingress
+- '[[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|Ingress
   网关诊断 Skill]]'
-- '[[domain-03-networking-traffic/00-core-k8s-networking/25-ingress-monitoring-troubleshooting.md|Ingress
+- '[[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress
   监控与排障]]'
-- '[[domain-02-workloads-applications/00-core-workloads/11-pod-lifecycle-events.md|Pod
+- '[[domain-02-workloads-applications/核心工作负载/11-pod-lifecycle-events.md|Pod
   生命周期事件]]'
 fta_ref:
 - 'FTA: Ingress 返回 404/502'
@@ -62,9 +62,9 @@ authors:
 relationships:
 - target: '[[concepts/ingress.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
@@ -288,7 +288,7 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --since=5m |
 >
 > 当前外部探测 `api.order.example.com` 与 `shop.example.com` 已稳定返回 200，5xx 比例已回落至正常水平。建议后续：
 > - 为 Ingress Controller 配置基于连接数与内存的 HPA，参考 HPA 最佳实践；
-> - 在 CI/CD 中增加 Ingress 注解语法校验，参考 [[domain-03-networking-traffic/00-core-k8s-networking/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]]；
+> - 在 CI/CD 中增加 Ingress 注解语法校验，参考 [[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]]；
 > - 配置 Ingress Controller 内存使用率告警：`container_memory_usage_bytes / container_spec_memory_limit_bytes > 0.8` 持续 3 分钟触发 P2 告警。
 >
 > 如有波动，请随时联系。

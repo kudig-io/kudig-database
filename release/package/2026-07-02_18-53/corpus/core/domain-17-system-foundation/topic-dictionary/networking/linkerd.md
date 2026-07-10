@@ -84,11 +84,11 @@ Linkerd 是最早的服务网格项目之一，现为 CNCF 毕业项目。以极
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/istio.md|Istio]]
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cilium.md|Cilium]]
-- [[domain-17-system-foundation/topic-dictionary/security/certificate.md|Certificate]]
+- [[domain-17-system-foundation/知识字典/networking/istio.md|Istio]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/cilium.md|Cilium]]
+- [[domain-17-system-foundation/知识字典/security/certificate.md|Certificate]]
 
 
 <!-- risk-assessed -->

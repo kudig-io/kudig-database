@@ -522,24 +522,24 @@ data:
 
 - [nginx-ingress 完全指南](./网络/21-nginx-ingress-complete-guide.md)
 - [nginx-ingress 迁移指南](./网络/09-nginx-ingress-migration-guide.md)
-- [nginx-ingress FTA 故障树](./故障诊断/topic-fta/list/nginx-ingress-fta.md)
-- [nginx-ingress 全局索引](./生态参考/topic-index/nginx-ingress-index.md)
-- [Ingress 通用故障排查](./[[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [nginx-ingress FTA 故障树](./故障诊断/FTA故障树/list/nginx-ingress-fta.md)
+- [nginx-ingress 全局索引](./生态参考/领域索引/nginx-ingress-index.md)
+- [Ingress 通用故障排查](./[[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
 - [[index|index]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
 
 ```
 

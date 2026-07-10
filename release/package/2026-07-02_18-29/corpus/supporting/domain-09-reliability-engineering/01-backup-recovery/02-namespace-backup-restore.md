@@ -533,12 +533,12 @@ kubectl exec -n production-drill deploy/app -c app -- /health-check.sh
 
 ## 12. Related
 
-- [[domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[domain-09-reliability-engineering/02-disaster-recovery/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份恢复深度解析]]
-- [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
-- [[domain-09-reliability-engineering/01-backup-recovery/03-pv-backup-snapshot.md|PV 快照：云盘快照、CSI 快照、恢复演练]]
-- [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
-- [[domain-04-storage-data/01-k8s-storage/15-storage-disaster-recovery.md|存储灾难恢复]]
+- [[domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[domain-09-reliability-engineering/灾难恢复/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份恢复深度解析]]
+- [[domain-09-reliability-engineering/备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[domain-09-reliability-engineering/备份恢复/03-pv-backup-snapshot.md|PV 快照：云盘快照、CSI 快照、恢复演练]]
+- [[domain-04-storage-data/K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[domain-04-storage-data/K8s存储/15-storage-disaster-recovery.md|存储灾难恢复]]
 
 
 <!-- risk-assessed -->

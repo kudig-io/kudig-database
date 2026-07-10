@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-15-specialized-tech/05-ebpf-programming/01-ebpf-programming-fundamentals.md|Ebpf Programming Fundamentals]]
-- [[domain-15-specialized-tech/05-ebpf-programming/02-ebpf-observability-tools.md|Ebpf Observability Tools]]
-- [[domain-15-specialized-tech/05-ebpf-programming/03-ebpf-networking-applications.md|Ebpf Networking Applications]]
-- [[domain-15-specialized-tech/05-ebpf-programming/04-ebpf-security-runtime.md|Ebpf Security Runtime]]
+- [[domain-15-specialized-tech/eBPF/01-ebpf-programming-fundamentals.md|Ebpf Programming Fundamentals]]
+- [[domain-15-specialized-tech/eBPF/02-ebpf-observability-tools.md|Ebpf Observability Tools]]
+- [[domain-15-specialized-tech/eBPF/03-ebpf-networking-applications.md|Ebpf Networking Applications]]
+- [[domain-15-specialized-tech/eBPF/04-ebpf-security-runtime.md|Ebpf Security Runtime]]
 

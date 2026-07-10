@@ -3477,7 +3477,7 @@ spec:
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

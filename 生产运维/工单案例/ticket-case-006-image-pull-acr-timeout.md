@@ -56,11 +56,11 @@ authors:
 relationships:
 - target: '[[entities/deployment.md]]'
   type: related_to
-- target: '[[系统基础/topic-dictionary/operations/rolling-update.md]]'
+- target: '[[系统基础/知识字典/operations/rolling-update.md]]'
   type: related_to
 - target: '[[skills/deployment-rolling-update.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md]]'
+- target: '[[生产运维/工单案例/ticket-case-009-etcd-disk-full-apiserver-slow.md]]'
   type: related_to
 ---
 

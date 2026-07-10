@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-09-reliability-engineering/08-performance-testing/01-load-testing-methodology.md|Load Testing Methodology]]
-- [[domain-09-reliability-engineering/08-performance-testing/02-chaos-load-integration.md|Chaos Load Integration]]
-- [[domain-09-reliability-engineering/08-performance-testing/03-benchmarking-methodology-kube-burner.md|Benchmarking Methodology Kube Burner]]
-- [[domain-09-reliability-engineering/08-performance-testing/04-production-load-testing-playbook.md|Production Load Testing Playbook]]
+- [[domain-09-reliability-engineering/性能测试/01-load-testing-methodology.md|Load Testing Methodology]]
+- [[domain-09-reliability-engineering/性能测试/02-chaos-load-integration.md|Chaos Load Integration]]
+- [[domain-09-reliability-engineering/性能测试/03-benchmarking-methodology-kube-burner.md|Benchmarking Methodology Kube Burner]]
+- [[domain-09-reliability-engineering/性能测试/04-production-load-testing-playbook.md|Production Load Testing Playbook]]
 

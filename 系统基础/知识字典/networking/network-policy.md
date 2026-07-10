@@ -91,7 +91,7 @@ spec:
 
 ## Related
 
-[[系统基础/topic-dictionary/networking/network-policies.md|Network Policies]]
+[[系统基础/知识字典/networking/network-policies.md|Network Policies]]
 
 
 <!-- risk-assessed -->

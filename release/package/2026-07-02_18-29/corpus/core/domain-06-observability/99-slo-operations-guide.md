@@ -255,12 +255,12 @@ curl -s 'http://alertmanager:9093/api/v1/alerts' | \
 ### 同域核心文档
 
 - [[domain-06-observability/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]]
-- [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|SLO/SLI 体系建设与管理]]
-- [[domain-06-observability/06-slo-sli/01-slo-engineering-practice.md|SLO 工程实践]]
-- [[domain-06-observability/06-slo-sli/02-error-budget-policy.md|错误预算政策]]
-- [[domain-06-observability/06-slo-sli/03-sli-implementation-guide.md|SLI 实施指南]]
-- [[domain-06-observability/02-metrics/99-prometheus-enterprise-guide.md|Prometheus 企业级监控部署指南]]
-- [[domain-06-observability/05-alerting/21-monitoring-playbooks.md|监控 Playbooks]]
+- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|SLO/SLI 体系建设与管理]]
+- [[domain-06-observability/SLO-SLI/01-slo-engineering-practice.md|SLO 工程实践]]
+- [[domain-06-observability/SLO-SLI/02-error-budget-policy.md|错误预算政策]]
+- [[domain-06-observability/SLO-SLI/03-sli-implementation-guide.md|SLI 实施指南]]
+- [[domain-06-observability/指标/99-prometheus-enterprise-guide.md|Prometheus 企业级监控部署指南]]
+- [[domain-06-observability/告警/21-monitoring-playbooks.md|监控 Playbooks]]
 
 ### 跨域参考
 

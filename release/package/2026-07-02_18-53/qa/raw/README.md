@@ -176,10 +176,10 @@ seed/*.md ────────────────────┘  (人�
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|Skills 故障诊断手册]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/README.md|Skills 故障诊断手册]]
 - index.md|FTA 故障树索引]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md|原始命令输出诊断语料]]
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/seed/p0-core-scenarios.md|P0 手工种子语料]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/command-output-diagnosis.md|原始命令输出诊断语料]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/seed/p0-core-scenarios.md|P0 手工种子语料]]
 - 发布前评估报告
 
 

@@ -69,6 +69,6 @@ Kubernetes 集群是由一组节点（Node）组成的计算资源池，包含�
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]
+- [[系统基础/知识字典/fundamentals/kubernetes.md|Kubernetes]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/fundamentals/etcd.md|etcd]]

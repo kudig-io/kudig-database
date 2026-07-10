@@ -76,11 +76,11 @@ ClusterIP 是 Kubernetes Service 的默认类型，为 Service 分配一个集�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/networking/nodeport.md|Nodeport]]
-- [[系统基础/topic-dictionary/networking/loadbalancer.md|Loadbalancer]]
-- [[系统基础/topic-dictionary/networking/headless-service.md|Headless Service]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/nodeport.md|Nodeport]]
+- [[系统基础/知识字典/networking/loadbalancer.md|Loadbalancer]]
+- [[系统基础/知识字典/networking/headless-service.md|Headless Service]]
 
 
 <!-- risk-assessed -->

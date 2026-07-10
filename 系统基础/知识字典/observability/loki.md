@@ -86,11 +86,11 @@ Loki 是 Grafana Labs 开源的日志聚合系统，被称为「日志界的 Pro
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/logging.md|Logging]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/observability/jaeger.md|Jaeger]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/logging.md|Logging]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/jaeger.md|Jaeger]]
 
 
 <!-- risk-assessed -->

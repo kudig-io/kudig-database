@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/10-ibm-iks/ibm-iks-overview.md|Ibm Iks Overview]]
+- [[domain-12-cloud-providers/其他云/IBM-IKS/ibm-iks-overview.md|Ibm Iks Overview]]
 

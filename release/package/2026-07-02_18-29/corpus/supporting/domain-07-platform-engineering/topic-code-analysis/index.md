@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-07-platform-engineering/topic-code-analysis/README.md|Readme]]
+- [[domain-07-platform-engineering/代码分析/README.md|Readme]]
 
 ## 子目录
 
@@ -29,5 +29,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-07-platform-engineering/topic-code-analysis/MOC.md|Moc]]
+- [[domain-07-platform-engineering/代码分析/MOC.md|Moc]]
 

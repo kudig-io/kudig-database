@@ -123,7 +123,7 @@ graph LR
 | **存储资源** | 磁盘使用率、IOPS、带宽 | <80% | 每天 | CSI Metrics、Node Exporter |
 | **网络资源** | 带宽使用率、PPS、连接数 | <70% | 每天 | CNI Metrics、Node Exporter |
 | **Pod 密度** | 每节点 Pod 数、调度失败率 | <80% max-[[Pods|pods]] | 每周 | Kube-Scheduler Metrics |
-| **[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 容量** | DB 大小、请求延迟、吞吐量 | <8GB, <100ms | 每天 | etcd Metrics |
+| **[[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 容量** | DB 大小、请求延迟、吞吐量 | <8GB, <100ms | 每天 | etcd Metrics |
 
 ### 1.3 容量规划方法论
 
@@ -1764,9 +1764,9 @@ etcdctl endpoint status --write-out=table
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
-- [[domain-17-system-foundation/topic-dictionary/operations/cert-manager.md|cert-manager]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/backup-disaster-recovery.md|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[domain-17-system-foundation/知识字典/operations/cert-manager.md|cert-manager]]
 
 
 <!-- risk-assessed -->

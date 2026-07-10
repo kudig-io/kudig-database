@@ -60,7 +60,7 @@ Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行
 
 ### 主要组件指标端点
 
-- **kube-controller-manager**：提供控制器性能和健康指标，如 [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 请求延迟、云提供商 API 延迟等。
+- **kube-controller-manager**：提供控制器性能和健康指标，如 [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 请求延迟、云提供商 API 延迟等。
 - **kube-scheduler**：暴露可选指标，报告运行中 Pod 的请求资源和限制（`/metrics/resources`）。
 - **[[kubelet|kubelet]]**：除 `/metrics` 外，还提供 `/metrics/cadvisor`、`/metrics/resource` 和 `/metrics/probes`。
 - **kube-apiserver**、**kube-proxy**：均在 `/metrics` 端点暴露指标。
@@ -121,7 +121,7 @@ kubelet 支持收集 Linux 内核的 **Pressure Stall Information (PSI)** 指标
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

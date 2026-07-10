@@ -74,9 +74,9 @@ prerequisites:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/runc.md|runc]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/fundamentals/runc.md|runc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

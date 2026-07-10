@@ -94,7 +94,7 @@ related_domains:
 - domain-10-troubleshooting-diagnostics
 related_topics:
 - 09-upgrade
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
+- [[domain-07-platform-engineering/代码分析/cluster-create/15-upgrade-advanced.md|15-upgrade-advanced]]
 - node-create/04-drain
 authors:
 - name: KUDIG Team
@@ -579,8 +579,8 @@ sudo apt-get install kubeadm=1.28.0-*
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 ```

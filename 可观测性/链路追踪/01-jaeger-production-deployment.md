@@ -637,8 +637,8 @@ Jaeger 生产部署检查清单：
 
 ## Related
 
-- [[可观测性/04-tracing/02-grafana-tempo-tracing|Grafana Tempo]]
-- [[可观测性/04-tracing/03-opentelemetry-collector-patterns|OTel Collector 配置模式]]
+- [[可观测性/链路追踪/02-grafana-tempo-tracing|Grafana Tempo]]
+- [[可观测性/链路追踪/03-opentelemetry-collector-patterns|OTel Collector 配置模式]]
 
 ## See Also
 

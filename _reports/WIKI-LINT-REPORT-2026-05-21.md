@@ -108,7 +108,7 @@ updated: 2026-05-21T16:30:00Z
 |---|---|---|---|
 | CONTRIBUTING.md | 23 | `[[scripts/templates/fta-template.md|fta template]]` | 移除 .md 后缀 |
 | CONTRIBUTING.md | 306 | `[[fta-template]]` | 指向 `[[scripts/templates/fta-template.md|fta template]]` |
-| MOC.md | 40 | `[[平台工程/topic-code-analysis/MOC` | 修复嵌套 wikilink 语法 |
+| MOC.md | 40 | `[[平台工程/代码分析/MOC` | 修复嵌套 wikilink 语法 |
 | AGENTS.md | 40,102,125 | `wikilinks` 等 | 这些是说明性文本，可转为代码格式 |
 | 平台工程/topic-code-analysis/README.md | 15-19 | `[[entities/k8s-cluster-cert.md|k8s cluster cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
 | 多个 README.md | 多处 | `[[scripts/templates/cheat-sheet-template.md|cheat sheet template]]` | 应指向 `[[scripts/templates/cheat-sheet-template.md|cheat sheet template]]` |
@@ -191,8 +191,8 @@ updated: 2026-05-21T16:30:00Z
 模式：`path/[[basename` → `path/basename`
 - AI基础设施/ — 修复 ~150 个文件中的 150+ 嵌套链接
 - 应用模式/ — 修复 ~90 个文件中的 450+ 嵌套链接
-- 故障诊断/topic-fta/ — 修复 ~30 个文件中的 140+ 嵌套链接
-- 故障诊断/topic-febm/ — 修复 ~10 个文件中的 45+ 嵌套链接
+- 故障诊断/FTA故障树/ — 修复 ~30 个文件中的 140+ 嵌套链接
+- 故障诊断/FEBM方法论/ — 修复 ~10 个文件中的 45+ 嵌套链接
 - 生产运维/topic-best-practices/migration/ — 修复 ~10 个文件中的 40+ 嵌套链接
 - 其他 domain 文件 — 修复 ~50 个文件中的 115+ 嵌套链接
 
@@ -206,7 +206,7 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 4：MOC.md 嵌套 wikilink（1 个）
 
-`平台工程/[[平台工程/topic-code-analysis/MOC.md|MOC]]` → `[[平台工程/topic-code-analysis/MOC.md|MOC]]`
+`平台工程/[[平台工程/代码分析/MOC.md|MOC]]` → `[[平台工程/代码分析/MOC.md|MOC]]`
 
 ### 修复 5：平台工程/topic-code-analysis/README.md 分组链接（5 个）
 

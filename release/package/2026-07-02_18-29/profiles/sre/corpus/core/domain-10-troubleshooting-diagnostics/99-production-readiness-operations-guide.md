@@ -331,12 +331,12 @@ kubectl get nodes -o json | jq -r '.items[].metadata.labels["cloud.google.com/gk
 
 ### 本域核心排障指南
 
-- [[topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
-- [[topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
-- [[topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
-- [[topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 故障排查]]
-- [[topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 故障排查]]
-- [[topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|证书故障排查]]
+- [[高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[高级排障/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
+- [[高级排障/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 故障排查]]
+- [[高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 故障排查]]
+- [[高级排障/06-security-auth/02-certificate-troubleshooting.md|证书故障排查]]
 
 ### 相关域扩展阅读
 

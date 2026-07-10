@@ -70,6 +70,6 @@ Piraeus Datastore 是 LINBIT 开源的 CNCF Sandbox 项目，基于 DRBD/LINSTOR
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/rook.md|Rook]]
-- [[domain-17-system-foundation/topic-dictionary/storage/longhorn.md|Longhorn]]
-- [[domain-17-system-foundation/topic-dictionary/storage/openebs.md|OpenEBS]]
+- [[domain-17-system-foundation/知识字典/storage/rook.md|Rook]]
+- [[domain-17-system-foundation/知识字典/storage/longhorn.md|Longhorn]]
+- [[domain-17-system-foundation/知识字典/storage/openebs.md|OpenEBS]]

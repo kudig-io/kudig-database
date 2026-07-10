@@ -564,7 +564,7 @@ spec:
 ## Related
 
 - [[entities/kserve.md|KServe (entities)]]
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 
 <!-- risk-assessed -->

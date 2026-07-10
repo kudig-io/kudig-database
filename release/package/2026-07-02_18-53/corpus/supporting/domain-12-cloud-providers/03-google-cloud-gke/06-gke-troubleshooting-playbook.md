@@ -510,7 +510,7 @@ kubectl get networkpolicy -A
 
 ## See Also
 
-- [[domain-12-cloud-providers/03-google-cloud-gke/99-gke-production-runbook.md|GKE 生产环境运行手册]]
+- [[domain-12-cloud-providers/Google-GKE/99-gke-production-runbook.md|GKE 生产环境运行手册]]
 - Kubernetes Troubleshooting
 
 

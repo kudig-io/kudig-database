@@ -325,10 +325,10 @@ kubectl --context=dr-prod get svc -A
 ### 跨域参考
 
 - [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
-- [[云厂商/08-multi-cloud/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]]
-- [[云厂商/08-multi-cloud/08-multicloud-federation-karmada.md|多集群联邦 Karmada]]
-- [[云厂商/08-multi-cloud/09-multicloud-network-interconnect.md|多云网络互联]]
-- [[云厂商/08-multi-cloud/10-multicloud-disaster-recovery.md|多云灾难恢复]]
+- [[云厂商/多云混合/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]]
+- [[云厂商/多云混合/08-multicloud-federation-karmada.md|多集群联邦 Karmada]]
+- [[云厂商/多云混合/09-multicloud-network-interconnect.md|多云网络互联]]
+- [[云厂商/多云混合/10-multicloud-disaster-recovery.md|多云灾难恢复]]
 - [[平台工程/99-production-readiness-operations-guide.md|平台工程生产就绪运维指南]]
 - [[可观测性/README.md|可观测性域]]
 - [[安全/README.md|安全合规域]]

@@ -69,6 +69,6 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP（VIP）和负载均衡能力，�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/metallb.md|MetalLB]]
-- [[系统基础/topic-dictionary/networking/consul.md|Consul]]
-- [[系统基础/topic-dictionary/networking/k8gb.md|K8GB]]
+- [[系统基础/知识字典/networking/metallb.md|MetalLB]]
+- [[系统基础/知识字典/networking/consul.md|Consul]]
+- [[系统基础/知识字典/networking/k8gb.md|K8GB]]

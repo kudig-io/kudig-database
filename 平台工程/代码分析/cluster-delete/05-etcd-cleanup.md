@@ -479,10 +479,10 @@ rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/git.md|git]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ```
 

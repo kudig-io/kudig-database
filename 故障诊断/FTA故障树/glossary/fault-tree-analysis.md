@@ -59,4 +59,4 @@ FTA 由贝尔实验室的 H.A. Watson 于 1962 年发明，最初用于民兵导
 
 ## Related
 
-- [[故障诊断/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[故障诊断/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

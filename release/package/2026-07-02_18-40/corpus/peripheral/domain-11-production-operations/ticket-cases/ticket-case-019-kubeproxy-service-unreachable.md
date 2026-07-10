@@ -52,13 +52,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md]]'
+- target: '[[domain-17-system-foundation/知识字典/fundamentals/kube-proxy.md]]'
   type: related_to
 - target: '[[concepts/service.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-044-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
 

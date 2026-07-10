@@ -648,12 +648,12 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 | 资源 | 路径 | 关系 |
 |------|------|------|
-| **DNS 故障树分析** | [故障诊断/topic-fta/list/dns-fta.md](../故障诊断/topic-fta/list/dns-fta.md) | FTA 因果分析模型 |
-| **DNS 结构化排查指南** | [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [[故障诊断/02-infrastructure-troubleshooting/26-dns-troubleshooting.md|26-dns-troubleshooting]].md](../故障诊断/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
-| **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../故障诊断/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
-| **FEBM 取证方法论** | [故障诊断/topic-febm/](../故障诊断/topic-febm/) | 事后复盘取证分析 |
-| **FTA 方法论合集** | [故障诊断/topic-fta/fta-methodology-and-agentic-practices.md](../故障诊断/topic-fta/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
+| **DNS 故障树分析** | [故障诊断/topic-fta/list/dns-fta.md](../故障诊断/FTA故障树/list/dns-fta.md) | FTA 因果分析模型 |
+| **DNS 结构化排查指南** | [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
+| **DNS 故障排查（domain-12）** | [[故障诊断/基础设施排障/26-dns-troubleshooting.md|26-dns-troubleshooting]].md](../故障诊断/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
+| **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../故障诊断/技能体系/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
+| **FEBM 取证方法论** | [故障诊断/topic-febm/](../故障诊断/FEBM方法论/) | 事后复盘取证分析 |
+| **FTA 方法论合集** | [故障诊断/topic-fta/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
 
 ---
 
@@ -667,18 +667,18 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[故障诊断/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
-- [[故障诊断/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
-- [[故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[故障诊断/高级排障/MOC.md|topic-structural-trouble-shooting MOC]]
+- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[故障诊断/高级排障/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[故障诊断/高级排障/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
 
 ```
 

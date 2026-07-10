@@ -86,7 +86,7 @@ spec:
 
 ## 相关
 
-- [[数据库中间件/06-data-streaming/02-stream-processing-overview.md|02 stream processing overview]]
+- [[数据库中间件/数据流/02-stream-processing-overview.md|02 stream processing overview]]
 
 
 <!-- risk-assessed -->

@@ -74,7 +74,7 @@ StatefulSet的配置和状态也会反过来影响etcd：
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/Deployment-×-PVC.md|Deployment-×-PVC]]
 - [[concepts/StatefulSet-×-Service.md|StatefulSet-×-Service]]

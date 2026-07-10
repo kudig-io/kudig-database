@@ -113,7 +113,7 @@ API Request → APIServer → CEL 表达式引擎 (内联) → 决策
 | 可扩展 | 通过 CRD 扩展参数类型 |
 | 版本控制 | 与 K8s API 版本同步演进 |
 
-### 1.2 [[系统基础/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]：Pod 生命周期语义增强
+### 1.2 [[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]：Pod 生命周期语义增强
 
 **设计影响**: 原生 Sidecar (v1.33 GA) 扩展了 Pod 的`initContainers`语义，引入`restartPolicy: Always`。
 
@@ -158,7 +158,7 @@ Terminating
 
 ### 2.1 DRA：控制器模式在硬件资源管理的应用
 
-**设计影响**: [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (v1.33 GA) 将控制器模式扩展到了**硬件资源分配领域**。
+**设计影响**: [[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (v1.33 GA) 将控制器模式扩展到了**硬件资源分配领域**。
 
 ```
 传统 Device Plugin 模式:

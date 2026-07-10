@@ -845,7 +845,7 @@ kubectl get serviceaccounts --all-namespaces | grep -E "(default|system)"
 - [[集群基础/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
 - [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
-- [[集群基础/03-control-plane/02-plane-components-interaction.md|02 plane components interaction]]
+- [[集群基础/控制平面/02-plane-components-interaction.md|02 plane components interaction]]
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
 - 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 - 控制平面监控与可观测性 (Control Plane Monitoring & Observability)

@@ -156,7 +156,7 @@ related_topics:
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../[[domain-06-observability/05-alerting/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
+   - 文件: `../../[[domain-06-observability/告警/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---

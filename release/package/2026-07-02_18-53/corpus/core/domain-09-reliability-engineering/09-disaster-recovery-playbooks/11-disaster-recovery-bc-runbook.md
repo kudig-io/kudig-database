@@ -174,7 +174,7 @@ etcd 采用 Raft 协议，3 节点集群可容忍 1 节点故障。当 2 节点�
    kubectl get nodes
    ```
 
-详细操作参考 [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复手册]]。恢复完成后，应持续观察 etcd 的 leader 切换次数、提交延迟与 compact 状态，确认集群已稳定。若原故障由存储损坏引起，需替换故障节点的磁盘并重新加入集群，避免再次触发相同问题。
+详细操作参考 [[domain-09-reliability-engineering/灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复手册]]。恢复完成后，应持续观察 etcd 的 leader 切换次数、提交延迟与 compact 状态，确认集群已稳定。若原故障由存储损坏引起，需替换故障节点的磁盘并重新加入集群，避免再次触发相同问题。
 
 ### 3.3 集群级还原（Velero）
 
@@ -344,10 +344,10 @@ AZ 级故障是云环境最常见的故障类型之一，通常由电力、网�
 
 - [[domain-09-reliability-engineering/99-production-readiness-operations-guide.md|可靠性工程 生产就绪运维指南]]
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复手册]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/02-az-failure-playbook.md|可用区故障手册]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/06-control-plane-loss-recovery-playbook.md|控制平面丢失恢复]]
-- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾难恢复]]
+- [[domain-09-reliability-engineering/灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复手册]]
+- [[domain-09-reliability-engineering/灾难恢复/02-az-failure-playbook.md|可用区故障手册]]
+- [[domain-09-reliability-engineering/灾难恢复/06-control-plane-loss-recovery-playbook.md|控制平面丢失恢复]]
+- [[domain-01-cluster-fundamentals/控制平面/10-plane-backup-disaster-recovery.md|控制平面备份与灾难恢复]]
 
 
 <!-- risk-assessed -->

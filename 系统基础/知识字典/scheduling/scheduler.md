@@ -81,11 +81,11 @@ kube-scheduler 是 Kubernetes 控制平面组件，负责将新创建的 Pod 分
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/affinity.md|Affinity]]
-- [[系统基础/topic-dictionary/scheduling/taint.md|Taint]]
-- [[系统基础/topic-dictionary/scheduling/toleration.md|Toleration]]
-- [[系统基础/topic-dictionary/scheduling/topology-spread-constraints.md|Topology Spread Constraints]]
-- [[系统基础/topic-dictionary/scheduling/resource-request.md|Resource Request]]
+- [[系统基础/知识字典/scheduling/affinity.md|Affinity]]
+- [[系统基础/知识字典/scheduling/taint.md|Taint]]
+- [[系统基础/知识字典/scheduling/toleration.md|Toleration]]
+- [[系统基础/知识字典/scheduling/topology-spread-constraints.md|Topology Spread Constraints]]
+- [[系统基础/知识字典/scheduling/resource-request.md|Resource Request]]
 
 
 <!-- risk-assessed -->

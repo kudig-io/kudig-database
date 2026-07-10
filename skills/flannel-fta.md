@@ -90,10 +90,10 @@ ping -M do -s 1400 <target-ip>
 - [[skills/ts-networking.md|ts-networking]] — 网络故障排查
 - [[etcd]] — etcd
 
-- [[故障诊断/topic-fta/list/flannel-fta.md|Flannel 网络异常故障树分析]]
+- [[故障诊断/FTA故障树/list/flannel-fta.md|Flannel 网络异常故障树分析]]
 - [[skills/ts-command-output.md|命令输出根因解析]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

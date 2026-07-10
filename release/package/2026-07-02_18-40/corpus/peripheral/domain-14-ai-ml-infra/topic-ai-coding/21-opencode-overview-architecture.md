@@ -276,7 +276,7 @@ Session
 | [02 - 安装部署与快速入门](./02-opencode-installation-quickstart.md) | 下一步：安装并开始使用 |
 | [04 - Agent 系统深度指南](./04-opencode-agents-system.md) | 深入 Agent 架构 |
 | [10 - Server 模式与 HTTP API](./10-opencode-server-api.md) | 深入 Client/Server 架构 |
-| [domain-14-ai-ml-infra/02-ai-agents/23](../domain-14-ai-ml-infra/02-ai-agents/23-agent-cli-fundamentals.md) | Agent CLI 通用理论框架 |
+| [domain-14-ai-ml-infra/02-ai-agents/23](../domain-14-ai-ml-infra/AI-Agents/23-agent-cli-fundamentals.md) | Agent CLI 通用理论框架 |
 
 ---
 

@@ -402,18 +402,18 @@ spec:
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[skills/service-fta.md|service-fta]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/coredns.md|coredns]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[云厂商/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[云厂商/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 
 <!-- risk-assessed -->

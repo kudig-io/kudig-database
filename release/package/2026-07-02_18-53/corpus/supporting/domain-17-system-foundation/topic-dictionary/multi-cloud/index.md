@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/cloud-credential-operator.md|Cloud Credential Operator]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/cluster-api.md|Cluster Api]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/crossplane-composition.md|Crossplane Composition]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/edge-computing-and-k3s.md|Edge Computing And K3S]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/federation.md|Federation]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/multi-cloud-operations.md|Multi Cloud Operations]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/multi-cluster-service.md|Multi Cluster Service]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/spaceborne-computing.md|Spaceborne Computing]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/cloud-credential-operator.md|Cloud Credential Operator]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/cluster-api.md|Cluster Api]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/crossplane-composition.md|Crossplane Composition]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/edge-computing-and-k3s.md|Edge Computing And K3S]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/federation.md|Federation]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/multi-cloud-operations.md|Multi Cloud Operations]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/multi-cluster-service.md|Multi Cluster Service]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/spaceborne-computing.md|Spaceborne Computing]]
 

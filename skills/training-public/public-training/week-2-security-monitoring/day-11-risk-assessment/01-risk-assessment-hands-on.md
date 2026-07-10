@@ -454,7 +454,7 @@ estimated_read_time: 50min
 related_domains:
   - 安全
   - 故障诊断
-  - domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+  - domain-25-[[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - security
   - rbac

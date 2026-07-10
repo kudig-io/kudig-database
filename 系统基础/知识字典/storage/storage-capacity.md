@@ -78,7 +78,7 @@ prerequisites:
 
 - 存储容量跟踪能提高首次调度成功的概率，但无法完全保证，因为容量信息可能不是实时的。
 - 如果一个 Pod 使用多个卷，可能出现第一个卷已在某个拓扑段创建成功，但剩余容量不足以创建第二个卷的情况，此时需要人工干预（如扩容或删除已创建卷）。
-- CSI 临时卷（CSI [[系统基础/topic-dictionary/storage/ephemeral-volumes.md|ephemeral volumes]]es（卷）|volumes]]）的调度**不**考虑存储容量。
+- CSI 临时卷（CSI [[系统基础/知识字典/storage/ephemeral-volumes.md|ephemeral volumes]]es（卷）|volumes]]）的调度**不**考虑存储容量。
 
 ## 使用场景
 
@@ -135,7 +135,7 @@ kubectl get csistoragecapacity -A -o custom-columns='SC:.storageClassName,CAPACI
 ## 交叉引用
 
 - [存储类](./storage-classes.md) — WaitForFirstConsumer 绑定模式
-- [节点特定卷限制](./[[系统基础/topic-dictionary/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md) — 节点级卷数量限制
+- [节点特定卷限制](./[[系统基础/知识字典/storage/node-specific-volume-limits.md|node-specific-volume-limits]].md) — 节点级卷数量限制
 - [动态卷供给](./dynamic-volume-provisioning.md) — 容量感知供给
 
 ## 参考链接
@@ -144,9 +144,9 @@ kubectl get csistoragecapacity -A -o custom-columns='SC:.storageClassName,CAPACI
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/ceph.md|Ceph]]
-- [[系统基础/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
-- [[系统基础/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+- [[系统基础/知识字典/storage/ceph.md|Ceph]]
+- [[系统基础/知识字典/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[系统基础/知识字典/storage/composefs.md|ComposeFS 只读文件系统]]
 
 
 <!-- risk-assessed -->

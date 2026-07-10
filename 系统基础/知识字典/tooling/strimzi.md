@@ -86,11 +86,11 @@ Strimzi 是 CNCF 孵化项目，在 Kubernetes 上提供 Apache Kafka 的原生�
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|StatefulSet]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/workloads/statefulset.md|StatefulSet]]
 
 
 <!-- risk-assessed -->

@@ -78,7 +78,7 @@ kube-controller-manager 运行的核心控制器包括：
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/controllers.md|控制器]]
+[[domain-17-system-foundation/知识字典/fundamentals/controllers.md|控制器]]
 
 
 <!-- risk-assessed -->

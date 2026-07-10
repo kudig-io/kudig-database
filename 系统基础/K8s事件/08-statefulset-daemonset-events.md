@@ -1607,7 +1607,7 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup web-0.ngi
 - DaemonSet Pod 通过标准调度器调度
 - 支持完整的调度特性:
   - Node affinity
-  - [[系统基础/topic-dictionary/scheduling/taints-and-tolerations.md|Taints and tolerations]]
+  - [[系统基础/知识字典/scheduling/taints-and-tolerations.md|Taints and tolerations]]
   - Pod priority and preemption
   - Resource requests and limits
 - 调度失败会有调度器事件记录
@@ -2482,7 +2482,7 @@ kube_daemonset_status_updated_number_scheduled < kube_daemonset_status_desired_n
 
 ## Related
 
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

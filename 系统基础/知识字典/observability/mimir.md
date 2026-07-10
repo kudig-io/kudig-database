@@ -81,11 +81,11 @@ Distributor、Ingester、Querier、Query-Frontend、Compactor、Store-Gateway、
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/thanos.md|Thanos]]
-- [[系统基础/topic-dictionary/observability/promql.md|PromQL]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/alertmanager.md|Alertmanager]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/thanos.md|Thanos]]
+- [[系统基础/知识字典/observability/promql.md|PromQL]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/alertmanager.md|Alertmanager]]
 
 
 <!-- risk-assessed -->

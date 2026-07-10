@@ -81,11 +81,11 @@ Consul 可补充 K8s 的服务发现：跨集群、非 K8s 服务、多数据中
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/istio.md|Istio]]
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/coredns.md|CoreDNS]]
-- [[domain-17-system-foundation/topic-dictionary/security/vault.md|Vault]]
+- [[domain-17-system-foundation/知识字典/networking/istio.md|Istio]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/coredns.md|CoreDNS]]
+- [[domain-17-system-foundation/知识字典/security/vault.md|Vault]]
 
 
 <!-- risk-assessed -->

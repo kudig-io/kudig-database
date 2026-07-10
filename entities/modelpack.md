@@ -82,8 +82,8 @@ ModelPack 是一个 ML/AI 模型打包和分发标准，将机器学习模型、
 - [[entities/eraser.md|[[Eraser|Eraser]]]]
 - [[entities/slimtoolkit.md|[[SlimToolkit|SlimToolkit]]]]
 - [[entities/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
-- [[生态参考/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -67,6 +67,6 @@ The Update Framework（TUF）是 CNCF 毕业项目，为软件更新提供密码
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/notary-project.md|Notary Project]]
-- [[系统基础/topic-dictionary/security/in-toto.md|in-toto]]
-- [[系统基础/topic-dictionary/security/supply-chain-security.md|供应链安全]]
+- [[系统基础/知识字典/security/notary-project.md|Notary Project]]
+- [[系统基础/知识字典/security/in-toto.md|in-toto]]
+- [[系统基础/知识字典/security/supply-chain-security.md|供应链安全]]

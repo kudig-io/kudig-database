@@ -423,25 +423,25 @@ ps aux | grep kube-apiserver | grep -E 'request-timeout|watch-cache|etcd-compact
 ### 同域核心文档
 
 - [[domain-16-database-middleware/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
-- [[domain-16-database-middleware/01-databases/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 部署概览]]
+- [[domain-16-database-middleware/数据库/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 部署概览]]
 
 ### 控制面与性能调优
 
 - [[domain-01-cluster-fundamentals/99-production-readiness-operations-guide.md|集群基础生产就绪运维指南]]
 - [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|Kubernetes 生产架构蓝图]]
-- [[domain-01-cluster-fundamentals/07-performance-tuning/04-apiserver-etcd-performance-tuning.md|API Server 与 etcd 性能调优]]
+- [[domain-01-cluster-fundamentals/性能调优/04-apiserver-etcd-performance-tuning.md|API Server 与 etcd 性能调优]]
 
 ### 备份恢复与灾备
 
 - [[domain-09-reliability-engineering/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
-- [[domain-09-reliability-engineering/01-backup-recovery/01-etcd-backup-restore.md|etcd 备份与恢复]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/06-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/09-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
+- [[domain-09-reliability-engineering/备份恢复/01-etcd-backup-restore.md|etcd 备份与恢复]]
+- [[domain-09-reliability-engineering/灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
+- [[domain-09-reliability-engineering/灾难恢复/06-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
+- [[domain-09-reliability-engineering/灾难恢复/09-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
 
 ### 工单案例
 
-- [[domain-11-production-operations/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md|工单案例 009：etcd 磁盘满导致 API Server 变慢]]
+- [[domain-11-production-operations/工单案例/ticket-case-009-etcd-disk-full-apiserver-slow.md|工单案例 009：etcd 磁盘满导致 API Server 变慢]]
 
 ---
 

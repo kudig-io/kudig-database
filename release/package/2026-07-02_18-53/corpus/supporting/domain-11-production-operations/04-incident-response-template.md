@@ -128,7 +128,7 @@ timeline:
 1. **诊断建议**：基于经验提供排查方向，帮助缩小根因范围
 2. **方案审核**：对客户提出的修复方案进行风险评估，指出潜在副作用
 3. **事后复盘**：参与复盘会议，提供外部视角，帮助发现盲点和流程改进点
-4. **知识沉淀**：将事故处理过程写入 [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide.md|postmortem]]，补充到 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
+4. **知识沉淀**：将事故处理过程写入 [[domain-09-reliability-engineering/事后复盘/02-postmortem-culture-guide.md|postmortem]]，补充到 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
 
 > 远程顾问应避免直接「接管」指挥权，而是帮助客户 Commander 做出更 informed 的决策。
 

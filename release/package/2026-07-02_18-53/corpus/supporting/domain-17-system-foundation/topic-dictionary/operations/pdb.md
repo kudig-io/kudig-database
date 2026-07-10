@@ -95,11 +95,11 @@ PDB 在以下场景中阻止 Pod 被驱逐：
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/operations/cordon.md|Cordon]]
-- [[domain-17-system-foundation/topic-dictionary/operations/uncordon.md|Uncordon]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/operations/cordon.md|Cordon]]
+- [[domain-17-system-foundation/知识字典/operations/uncordon.md|Uncordon]]
 
 ```
 

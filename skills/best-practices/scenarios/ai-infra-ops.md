@@ -89,7 +89,7 @@ graph TD
 ## 相关文档
 
 - [[AI基础设施/README.md|README]]
-- [[AI基础设施/02-ai-agents/README.md|README]]
+- [[AI基础设施/AI-Agents/README.md|README]]
 
 
 ---

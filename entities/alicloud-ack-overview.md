@@ -619,22 +619,22 @@ echo "Logs collected to: $LOG_DIR"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/sql.md|sql]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/sql.md|sql]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/git.md|git]]
 - 06-monitoring-alerting-system
 - [[entities/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[云厂商/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[云厂商/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[云厂商/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/阿里云/ack/244-ack-ros-iac.md|244-ack-ros-iac]]
+- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[云厂商/阿里云/ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[云厂商/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
 
 
 <!-- risk-assessed -->

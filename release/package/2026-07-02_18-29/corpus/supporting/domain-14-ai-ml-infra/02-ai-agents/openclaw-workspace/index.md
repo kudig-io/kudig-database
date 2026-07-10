@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/AGENTS.md|Agents]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/IDENTITY.md|Identity]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/MEMORY.md|Memory]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SKILL.md|Skill]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/SOUL.md|Soul]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/TOOLS.md|Tools]]
-- [[domain-14-ai-ml-infra/02-ai-agents/openclaw-workspace/USER.md|User]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/AGENTS.md|Agents]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/IDENTITY.md|Identity]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/MEMORY.md|Memory]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/SKILL.md|Skill]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/SOUL.md|Soul]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/TOOLS.md|Tools]]
+- [[domain-14-ai-ml-infra/AI-Agents/openclaw-workspace/USER.md|User]]
 

@@ -75,9 +75,9 @@ zot 是 Cisco 开源的 CNCF Sandbox 项目，轻量级 OCI 原生容器注册�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/distribution.md|Distribution]]
-- [[系统基础/topic-dictionary/tooling/harbor.md|Harbor]]
-- [[系统基础/topic-dictionary/security/notary-project.md|Notary Project]]
+- [[系统基础/知识字典/tooling/distribution.md|Distribution]]
+- [[系统基础/知识字典/tooling/harbor.md|Harbor]]
+- [[系统基础/知识字典/security/notary-project.md|Notary Project]]
 
 
 <!-- risk-assessed -->

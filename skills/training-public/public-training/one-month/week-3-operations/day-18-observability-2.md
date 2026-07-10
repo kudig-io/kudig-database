@@ -737,7 +737,7 @@ amtool silence expire <silence-id>
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

@@ -97,7 +97,7 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/helm-fta.md|helm fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/helm-fta.md|helm fta]]
 
 
 ---
@@ -119,8 +119,8 @@ graph TD
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - [[concepts/infrastructure-as-code.md|infrastructure-as-code]]
 - [[skills/helm-fta.md|helm-fta]]
-- [[domain-17-system-foundation/topic-cheat-sheet/helm.md|[[Helm|helm]]]]
-- [[domain-17-system-foundation/topic-cheat-sheet/gitops.md|gitops]]
+- [[domain-17-system-foundation/速查卡/helm.md|[[Helm|helm]]]]
+- [[domain-17-system-foundation/速查卡/gitops.md|gitops]]
 
 
 <!-- risk-assessed -->

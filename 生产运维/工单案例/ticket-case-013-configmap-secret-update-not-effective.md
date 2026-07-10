@@ -49,13 +49,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/configuration/configmap.md]]'
+- target: '[[系统基础/知识字典/configuration/configmap.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[系统基础/topic-dictionary/security/secret.md]]'
+- target: '[[系统基础/知识字典/security/secret.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md]]'
+- target: '[[生产运维/工单案例/ticket-case-008-coredns-vpc-dns-forward.md]]'
   type: related_to
 ---
 

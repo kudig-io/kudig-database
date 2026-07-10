@@ -386,11 +386,11 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 - [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/fluentd.md|Fluentd]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 
 
 <!-- risk-assessed -->

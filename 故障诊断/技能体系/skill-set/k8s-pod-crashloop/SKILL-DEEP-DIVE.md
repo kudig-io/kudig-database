@@ -52,7 +52,7 @@ version: 1.0.0
 
 # Pod CrashLoopBackOff / OOMKilled 深度解析
 
-> 本文是 [[故障诊断/topic-skills/skill-set/k8s-pod-crashloop/SKILL.md|Pod CrashLoopBackOff / OOMKilled 诊断与修复]] 的深度补充，聚焦「Exit Code 背后的根因链」「多语言应用的典型 Crash 模式」以及「阿里云/专有云下的特殊场景」。
+> 本文是 [[故障诊断/技能体系/skill-set/k8s-pod-crashloop/SKILL.md|Pod CrashLoopBackOff / OOMKilled 诊断与修复]] 的深度补充，聚焦「Exit Code 背后的根因链」「多语言应用的典型 Crash 模式」以及「阿里云/专有云下的特殊场景」。
 
 ## 1. Exit Code 的完整根因链
 
@@ -259,10 +259,10 @@ kubectl get events -n <ns> --field-selector involvedObject.name=<pod>,reason=Fai
 ```
 ## 9. 相关链接
 
-- [[故障诊断/topic-fta/list/pod-fta.md|Pod 异常 FTA 树]]
-- [[故障诊断/topic-skills/skill-set/k8s-pod-crashloop/SKILL.md|Pod CrashLoopBackOff / OOMKilled 诊断与修复 Skill]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析]]
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[故障诊断/FTA故障树/list/pod-fta.md|Pod 异常 FTA 树]]
+- [[故障诊断/技能体系/skill-set/k8s-pod-crashloop/SKILL.md|Pod CrashLoopBackOff / OOMKilled 诊断与修复 Skill]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 ## Related
 

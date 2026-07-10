@@ -189,8 +189,8 @@ description: '## 项目概述'
 - [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
 - domain-java-kubernetes MOC
 - 16-kubernetes-hardware-troubleshooting
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
 - vscode-kubernetes-tools
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - Wiki Lint Report — 2026-05-21 — Cross-reference
@@ -342,11 +342,11 @@ description: '## 项目概述'
 - [[entities/container-runtime.md|Container Runtime]] — Cross-reference
 - [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/领域索引/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 - CHANGELOG-1.2
 - CHANGELOG-1.3
 

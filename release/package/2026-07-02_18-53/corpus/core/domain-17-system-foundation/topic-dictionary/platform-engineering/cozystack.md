@@ -68,6 +68,6 @@ Cozystack 是开源的 Kubernetes 云操作系统，在 K8s 之上提供完整�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubevirt.md|KubeVirt]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/rancher.md|Rancher]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubevirt.md|KubeVirt]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/rancher.md|Rancher]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]

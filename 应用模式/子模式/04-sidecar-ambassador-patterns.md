@@ -700,7 +700,7 @@ kubectl get pods -A -o json | jq -r '
 
 - 工作负载/
 - 网络/
-- [[应用模式/sub-patterns/05-chaos-resilience-patterns|弹性与混沌模式]]
+- [[应用模式/子模式/05-chaos-resilience-patterns|弹性与混沌模式]]
 
 ## See Also
 

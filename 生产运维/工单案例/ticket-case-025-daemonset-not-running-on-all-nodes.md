@@ -57,9 +57,9 @@ authors:
 relationships:
 - target: '[[concepts/daemonset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-050-daemonset-not-running-all-nodes.md]]'
+- target: '[[生产运维/工单案例/ticket-case-050-daemonset-not-running-all-nodes.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-030-daemonset-not-ready-all-nodes.md]]'
+- target: '[[生产运维/工单案例/ticket-case-030-daemonset-not-ready-all-nodes.md]]'
   type: related_to
 ---
 

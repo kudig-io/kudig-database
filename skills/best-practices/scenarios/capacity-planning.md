@@ -96,8 +96,8 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/hpa-fta.md|hpa fta]]
-- [[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|cluster autoscaler fta]]
+- [[故障诊断/FTA故障树/list/hpa-fta.md|hpa fta]]
+- [[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|cluster autoscaler fta]]
 
 
 ---
@@ -117,8 +117,8 @@ graph TD
 ## Related
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
-- [[故障诊断/topic-fta/list/vpa-fta.md|vpa-fta]]
-- [[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]]
+- [[故障诊断/FTA故障树/list/vpa-fta.md|vpa-fta]]
+- [[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]]
 
 
 <!-- risk-assessed -->

@@ -226,9 +226,9 @@ kubectl get pods --all-namespaces --field-selector spec.nodeName=<windows-node>
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/configmap.md|配置映射]]
-- [[系统基础/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
-- [[系统基础/topic-dictionary/configuration/env.md|环境变量配置]]
+- [[系统基础/知识字典/configuration/configmap.md|配置映射]]
+- [[系统基础/知识字典/configuration/configmaps.md|ConfigMaps]]
+- [[系统基础/知识字典/configuration/env.md|环境变量配置]]
 
 
 <!-- risk-assessed -->

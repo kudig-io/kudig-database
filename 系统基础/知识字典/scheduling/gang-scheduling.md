@@ -48,7 +48,7 @@ Gang Scheduling（组调度）确保一组 Pod 以"全有或全无"的方式进�
 
 ## 核心概念/原理
 
-Gang Scheduling 依赖于 [[系统基础/topic-dictionary/workloads/workload-api.md|Workload API]]。需要启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组。
+Gang Scheduling 依赖于 [[系统基础/知识字典/workloads/workload-api.md|Workload API]]。需要启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组。
 
 当启用 `GangScheduling` 插件时，调度器会更改属于 Workload 中 `gang` pod group 策略的 Pod 的生命周期：
 
@@ -190,7 +190,7 @@ kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 - [Kubernetes 官方文档 - Gang Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/gang-scheduling/)
 
 ## Related
-- [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

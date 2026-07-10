@@ -619,13 +619,13 @@ payload = {"user": "user-id-123"}
 
 ## Related
 
-- [[domain-14-ai-ml-infra/03-agent-runtime/01-langchain-langgraph-deep-dive|LangChain/LangGraph 深度指南]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/07-agent-framework-selection-guide|Agent 框架选型决策树]]
+- [[domain-14-ai-ml-infra/Agent运行时/01-langchain-langgraph-deep-dive|LangChain/LangGraph 深度指南]]
+- [[domain-14-ai-ml-infra/Agent运行时/07-agent-framework-selection-guide|Agent 框架选型决策树]]
 
 ## See Also
 
-- [[domain-14-ai-ml-infra/03-agent-runtime/03-crewai-multi-agent-framework|CrewAI 多 Agent 框架]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/06-semantic-kernel-enterprise|Semantic Kernel 企业级 Agent]]
+- [[domain-14-ai-ml-infra/Agent运行时/03-crewai-multi-agent-framework|CrewAI 多 Agent 框架]]
+- [[domain-14-ai-ml-infra/Agent运行时/06-semantic-kernel-enterprise|Semantic Kernel 企业级 Agent]]
 
 
 <!-- risk-assessed -->

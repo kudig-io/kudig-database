@@ -67,6 +67,6 @@ OpenYurt 是阿里巴巴开源的 CNCF Sandbox 项目，将 Kubernetes 能力扩
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/kubeedge.md|KubeEdge]]
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
-- [[系统基础/topic-dictionary/platform-engineering/karmada.md|Karmada]]
+- [[系统基础/知识字典/platform-engineering/kubeedge.md|KubeEdge]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/platform-engineering/karmada.md|Karmada]]

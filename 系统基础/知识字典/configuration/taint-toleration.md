@@ -70,6 +70,6 @@ Taints（污点）和 Tolerations（容忍）是 Kubernetes 的调度约束机�
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/affinity.md|Node Affinity]]
-- [[系统基础/topic-dictionary/scheduling/topology-spread-constraints.md|Topology Spread]]
-- [[系统基础/topic-dictionary/fundamentals/cluster.md|Cluster]]
+- [[系统基础/知识字典/scheduling/affinity.md|Node Affinity]]
+- [[系统基础/知识字典/scheduling/topology-spread-constraints.md|Topology Spread]]
+- [[系统基础/知识字典/fundamentals/cluster.md|Cluster]]

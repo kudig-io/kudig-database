@@ -89,8 +89,8 @@ graph TD
 ## 相关文档
 
 - domain-02-workloads-applications/02-deployment-production-patterns.md
-- [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
-- [[domain-02-workloads-applications/00-core-workloads/04-daemonset-management.md|04 daemonset management]]
+- [[domain-02-workloads-applications/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
+- [[domain-02-workloads-applications/核心工作负载/04-daemonset-management.md|04 daemonset management]]
 - [[domain-18-manifests-patterns/README.md|README]]
 
 
@@ -98,9 +98,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md|pod fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md|deployment fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/statefulset-fta.md|statefulset fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/pod-fta.md|pod fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/deployment-fta.md|deployment fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/statefulset-fta.md|statefulset fta]]
 
 
 ---

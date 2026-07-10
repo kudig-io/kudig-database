@@ -812,8 +812,8 @@ groups:
 
 ## 相关
 
-- [[可靠性/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]]
-- [[可靠性/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]]
+- [[可观测性/SLO-SLI/02-slo-implementation-guide.md|02 slo implementation guide]]
+- [[可靠性/SRE实践/02-release-gate-slo-based.md|02 release gate slo based]]
 
 
 <!-- risk-assessed -->

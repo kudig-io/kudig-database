@@ -69,6 +69,6 @@ InterLink 是 INFN（意大利国家核物理研究所）开源的 CNCF Sandbox 
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/virtual-kubelet.md|Virtual Kubelet]]
-- [[系统基础/topic-dictionary/scheduling/volcano.md|Volcano]]
-- [[系统基础/topic-dictionary/scheduling/hami.md|HAMi]]
+- [[系统基础/知识字典/fundamentals/virtual-kubelet.md|Virtual Kubelet]]
+- [[系统基础/知识字典/scheduling/volcano.md|Volcano]]
+- [[系统基础/知识字典/scheduling/hami.md|HAMi]]

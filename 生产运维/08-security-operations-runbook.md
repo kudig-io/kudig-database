@@ -437,8 +437,8 @@ kubectl describe node <node> > /evidence/<node>-describe.txt
 - [[生产运维/03-on-call-playbook.md|值班手册与告警响应规范]]
 - [[生产运维/04-incident-response-template.md|事故响应模板与流程规范]]
 - [[安全/README.md|安全合规域]]
-- [[安全/04-policy-governance/index.md|策略治理]]
-- [[容器运行时/03-containerd-cri-o/06-runtime-security-hardening.md|运行时安全加固]]
+- [[安全/策略治理/index.md|策略治理]]
+- [[容器运行时/containerd-CRI-O/06-runtime-security-hardening.md|运行时安全加固]]
 - [[可观测性/README.md|可观测性域]]
 
 

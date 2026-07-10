@@ -97,15 +97,15 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 ## Related
 
 - [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|opa]] — OPA (Open Policy Agent)
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|kyverno]] — Kyverno
+- [[domain-17-system-foundation/知识字典/security/opa.md|opa]] — OPA (Open Policy Agent)
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|kyverno]] — Kyverno
 - [[entities/trivy.md|trivy]] — Trivy
 - [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
 - [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[entities/trivy.md|Trivy]]
 - Cosign/Sigstore
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|Kyverno]]
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|Kyverno]]
 - [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
 
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
@@ -126,8 +126,8 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[entities/argocd.md|ArgoCD]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

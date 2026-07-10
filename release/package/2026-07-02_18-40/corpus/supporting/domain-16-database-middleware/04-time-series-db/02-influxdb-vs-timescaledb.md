@@ -71,7 +71,7 @@ prerequisites:
 
 ## 相关
 
-- [[domain-16-database-middleware/04-time-series-db/01-prometheus-tsdb-deep-dive.md|01 prometheus tsdb deep dive]]
+- [[domain-16-database-middleware/时序数据库/01-prometheus-tsdb-deep-dive.md|01 prometheus tsdb deep dive]]
 
 
 <!-- risk-assessed -->

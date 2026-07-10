@@ -571,7 +571,7 @@ helm test myapp -n production
 
 ## See Also
 
-- [[domain-12-cloud-providers/01-alibaba-cloud/apsara-stack-components.md|专有云组件索引]]
+- [[domain-12-cloud-providers/阿里云/apsara-stack-components.md|专有云组件索引]]
 - [[domain-11-production-operations/ticket-routing-rules.md|工单分类与路由规则]]
 
 ---

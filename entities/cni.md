@@ -96,9 +96,9 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - 27-cni-troubleshooting-optimization
 - 03-cni-plugins-comparison
 - CNI 架构与核心原理
-- [[故障诊断/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
+- [[故障诊断/核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
 - 03-cilium-cni-architecture
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 - cni
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
@@ -156,9 +156,9 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - [[skills/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
 - [[skills/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

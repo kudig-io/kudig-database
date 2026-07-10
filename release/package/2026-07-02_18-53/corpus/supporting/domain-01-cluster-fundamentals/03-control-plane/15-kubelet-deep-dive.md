@@ -1350,7 +1350,7 @@ cat /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/memory.min
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-19-landscape-references/topic-index/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/node-index.md|Node 知识图谱索引]]
 
 ```
 

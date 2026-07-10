@@ -602,15 +602,15 @@ aliyun ecs DescribeDisks --RegionId cn-hangzhou \
 
 ## Related
 
-- [[存储/01-k8s-storage/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
+- [[存储/K8s存储/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
 - [[存储/README|Storage Domain 存储领域知识库]]
-- [[云厂商/01-alibaba-cloud/apsara-stack-components|专有云组件索引]]
+- [[云厂商/阿里云/apsara-stack-components|专有云组件索引]]
 
 ## See Also
 
-- [[存储/03-distributed-storage/01-velero-backup-recovery|Velero 阿里云专有云备份恢复实战]]
-- [[存储/03-distributed-storage/03-longhorn-production|Longhorn 生产指南]]
-- [[存储/04-stateful-app-storage/01-stateful-app-storage-patterns|有状态应用存储模式]]
+- [[存储/分布式存储/01-velero-backup-recovery|Velero 阿里云专有云备份恢复实战]]
+- [[存储/分布式存储/03-longhorn-production|Longhorn 生产指南]]
+- [[存储/有状态应用存储/01-stateful-app-storage-patterns|有状态应用存储模式]]
 
 ---
 

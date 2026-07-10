@@ -119,8 +119,8 @@ roleRef:
 
 ## 相关
 
-- [[可靠性/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
-- [[可靠性/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]
+- [[可靠性/混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[可靠性/混沌工程/03-chaos-experiment-design.md|03 chaos experiment design]]
 
 ```
 

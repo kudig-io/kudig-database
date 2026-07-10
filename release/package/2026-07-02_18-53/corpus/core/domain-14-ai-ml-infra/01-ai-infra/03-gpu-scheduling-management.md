@@ -1157,8 +1157,8 @@ kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 - 分布式训练框架
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/go.md|速查卡: go]]
+- [[domain-19-landscape-references/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 ## See Also
 

@@ -79,11 +79,11 @@ Pod 只会被调度到同时具有 `disktype=ssd` 和 `zone=us-east-1a` 标签�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md|Affinity]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/anti-affinity.md|Anti Affinity]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/taint.md|Taint]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/toleration.md|Toleration]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/resource-request.md|Resource Request]]
+- [[domain-17-system-foundation/知识字典/scheduling/affinity.md|Affinity]]
+- [[domain-17-system-foundation/知识字典/scheduling/anti-affinity.md|Anti Affinity]]
+- [[domain-17-system-foundation/知识字典/scheduling/taint.md|Taint]]
+- [[domain-17-system-foundation/知识字典/scheduling/toleration.md|Toleration]]
+- [[domain-17-system-foundation/知识字典/scheduling/resource-request.md|Resource Request]]
 
 
 <!-- risk-assessed -->

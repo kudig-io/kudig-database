@@ -75,9 +75,9 @@ PipeCD 是 Cybozu 开源的 CNCF Sandbox 持续交付平台，支持 Kubernetes�
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/flux.md|Flux]]
-- [[系统基础/topic-dictionary/operations/flagger.md|Flagger]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/flux.md|Flux]]
+- [[系统基础/知识字典/operations/flagger.md|Flagger]]
 
 
 <!-- risk-assessed -->

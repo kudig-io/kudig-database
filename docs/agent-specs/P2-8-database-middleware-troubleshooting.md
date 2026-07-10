@@ -429,6 +429,6 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 **关联文档**:
 - [数据库中间件/](../数据库中间件/) — 数据库中间件完整文档
 - [故障诊断/](../故障诊断/) — K8s 通用问题排查
-- [故障诊断/topic-skills/](../故障诊断/topic-skills/) — 通用运维 Skill
+- [故障诊断/topic-skills/](../故障诊断/技能体系/) — 通用运维 Skill
 
 <!-- risk-assessed -->

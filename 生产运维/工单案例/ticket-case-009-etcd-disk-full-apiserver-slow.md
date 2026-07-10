@@ -57,9 +57,9 @@ authors:
 relationships:
 - target: '[[entities/etcd.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]'
+- target: '[[生产运维/工单案例/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 - target: '[[concepts/etcd × 可观测性.md]]'
   type: related_to

@@ -17,20 +17,20 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[工作负载/topic-functions/cluster-delete/README.md|Readme]]
+- [[平台工程/代码分析/functions-cluster-delete/README.md|Readme]]
 
 ## 文档
 
-- [[工作负载/topic-functions/cluster-delete/01-overview.md|Overview]]
-- [[工作负载/topic-functions/cluster-delete/02-reset.md|Reset]]
-- [[工作负载/topic-functions/cluster-delete/03-delete-node.md|Delete Node]]
-- [[工作负载/topic-functions/cluster-delete/04-cleanup.md|Cleanup]]
-- [[工作负载/topic-functions/cluster-delete/05-etcd-cleanup.md|Etcd Cleanup]]
-- [[工作负载/topic-functions/cluster-delete/06-force-delete.md|Force Delete]]
-- [[工作负载/topic-functions/cluster-delete/07-ha-delete.md|Ha Delete]]
-- [[工作负载/topic-functions/cluster-delete/08-cloud-delete.md|Cloud Delete]]
-- [[工作负载/topic-functions/cluster-delete/09-reset-phase-commands.md|Reset Phase Commands]]
-- [[工作负载/topic-functions/cluster-delete/10-security-delete.md|Security Delete]]
-- [[工作负载/topic-functions/cluster-delete/11-network-cleanup.md|Network Cleanup]]
-- [[工作负载/topic-functions/cluster-delete/12-troubleshooting.md|Troubleshooting]]
+- [[平台工程/代码分析/functions-cluster-delete/01-overview.md|Overview]]
+- [[平台工程/代码分析/functions-cluster-delete/02-reset.md|Reset]]
+- [[平台工程/代码分析/functions-cluster-delete/03-delete-node.md|Delete Node]]
+- [[平台工程/代码分析/functions-cluster-delete/04-cleanup.md|Cleanup]]
+- [[平台工程/代码分析/functions-cluster-delete/05-etcd-cleanup.md|Etcd Cleanup]]
+- [[平台工程/代码分析/functions-cluster-delete/06-force-delete.md|Force Delete]]
+- [[平台工程/代码分析/functions-cluster-delete/07-ha-delete.md|Ha Delete]]
+- [[平台工程/代码分析/functions-cluster-delete/08-cloud-delete.md|Cloud Delete]]
+- [[平台工程/代码分析/functions-cluster-delete/09-reset-phase-commands.md|Reset Phase Commands]]
+- [[平台工程/代码分析/functions-cluster-delete/10-security-delete.md|Security Delete]]
+- [[平台工程/代码分析/functions-cluster-delete/11-network-cleanup.md|Network Cleanup]]
+- [[平台工程/代码分析/functions-cluster-delete/12-troubleshooting.md|Troubleshooting]]
 

@@ -1474,7 +1474,7 @@ kubectl get ipinstances -A -o json | jq -r '
 |:---|:---|
 | [01-product.md](./01-product.md) | Terway 产品概览: 定位、版本历史、模式总览 |
 | [02-architecture.md](./02-architecture.md) | 架构原理: ENI/ENIIP/IPVlan 模式、IPAM 机制、CRD 模型 |
-| [03-usage.md](./[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md) | 使用指南: 安装配置、NetworkPolicy、固定 IP |
+| [03-usage.md](./[[domain-03-networking-traffic/Terway/03-usage.md|03-usage]].md) | 使用指南: 安装配置、NetworkPolicy、固定 IP |
 | [05-testing.md](./05-testing.md) | 测试验证: 连通性测试、NetworkPolicy 测试、GC 验证 |
 | [06-performance.md](./06-performance.md) | 性能调优: 模式性能对比、内核调优、基准测试 |
 
@@ -1490,13 +1490,13 @@ kubectl get ipinstances -A -o json | jq -r '
 
 | 文档 | 说明 |
 |:---|:---|
-| [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
-| [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md) | Terway FTA 故障树 |
+| [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
+| [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/terway-fta.md) | Terway FTA 故障树 |
 | [domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md](../domain-11-production-operations/topic-presentations/kubernetes-terway-presentation.md) | 全栈培训演示 |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

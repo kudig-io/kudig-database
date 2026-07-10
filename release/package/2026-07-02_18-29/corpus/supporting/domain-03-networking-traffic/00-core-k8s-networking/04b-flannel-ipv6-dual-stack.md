@@ -88,7 +88,7 @@ Flannel v0.20+ 支持 IPv6 Dual Stack，允许集群同时使用 IPv4 和 IPv6 �
 | 功能 | 支持情况 |
 |:-----|:-------:|
 | 单 IPv6 集群 | ✓ 支持 |
-| [[domain-17-system-foundation/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
+| [[domain-17-system-foundation/知识字典/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]] | ✓ v0.20+ |
 | IPv6 only 后端 (VXLAN) | ✓ v0.21+ |
 | Windows 节点 IPv6 | ✗ 暂不支持 |
 
@@ -411,7 +411,7 @@ net-conf.json: |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

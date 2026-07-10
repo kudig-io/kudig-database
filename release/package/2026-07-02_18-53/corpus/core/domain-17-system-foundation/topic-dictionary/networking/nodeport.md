@@ -81,11 +81,11 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/ingress.md|Ingress]]
-- [[domain-17-system-foundation/topic-dictionary/networking/clusterip.md|Clusterip]]
-- [[domain-17-system-foundation/topic-dictionary/networking/loadbalancer.md|Loadbalancer]]
-- [[domain-17-system-foundation/topic-dictionary/networking/headless-service.md|Headless Service]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
+- [[domain-17-system-foundation/知识字典/networking/clusterip.md|Clusterip]]
+- [[domain-17-system-foundation/知识字典/networking/loadbalancer.md|Loadbalancer]]
+- [[domain-17-system-foundation/知识字典/networking/headless-service.md|Headless Service]]
 
 
 <!-- risk-assessed -->

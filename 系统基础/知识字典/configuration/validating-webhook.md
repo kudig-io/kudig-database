@@ -70,6 +70,6 @@ ValidatingAdmissionWebhook 是 Kubernetes 准入控制器的扩展机制，允�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/platform-engineering/custom-resource.md|Custom Resource]]

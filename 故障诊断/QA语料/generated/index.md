@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.md|Command Output Diagnosis P0]]
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p0.with_actions.md|Command Output Diagnosis P0.With Actions]]
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p1.md|Command Output Diagnosis P1]]
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p1.with_actions.md|Command Output Diagnosis P1.With Actions]]
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p2.md|Command Output Diagnosis P2]]
-- [[故障诊断/topic-qa-corpus/generated/command-output-diagnosis-p2.with_actions.md|Command Output Diagnosis P2.With Actions]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p0.md|Command Output Diagnosis P0]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p0.with_actions.md|Command Output Diagnosis P0.With Actions]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p1.md|Command Output Diagnosis P1]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p1.with_actions.md|Command Output Diagnosis P1.With Actions]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p2.md|Command Output Diagnosis P2]]
+- [[故障诊断/QA语料/generated/command-output-diagnosis-p2.with_actions.md|Command Output Diagnosis P2.With Actions]]
 

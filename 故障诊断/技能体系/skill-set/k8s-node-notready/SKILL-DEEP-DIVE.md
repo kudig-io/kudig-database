@@ -55,7 +55,7 @@ authors:
 
 # K8s Node NotReady 深度解析
 
-> 本文是 [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]] 的深度补充，不替代原 Skill，而是解释「为什么」以及「在阿里云/专有云里会发生什么」。
+> 本文是 [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]] 的深度补充，不替代原 Skill，而是解释「为什么」以及「在阿里云/专有云里会发生什么」。
 
 ## 1. 每种根因的「为什么」
 
@@ -232,10 +232,10 @@ ssh <node> 'openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -no
 
 ## 7. 相关链接
 
-- [[故障诊断/topic-fta/list/node-fta.md|Node 异常 FTA 树]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复 Skill]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类目录]]
-- [[生态参考/topic-index/node-index.md|Node 知识图谱索引]]
+- [[故障诊断/FTA故障树/list/node-fta.md|Node 异常 FTA 树]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复 Skill]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类目录]]
+- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
 - Terway 网络专题
 
 ## Related

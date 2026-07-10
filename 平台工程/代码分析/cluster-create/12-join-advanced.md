@@ -861,11 +861,11 @@ kubeadm token create --print-join-command | grep -o 'sha256:[a-f0-9]*'
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/containerd.md|containerd]]
-- [[平台工程/topic-code-analysis/node-create/01-overview.md|01-overview]]
+- [[平台工程/代码分析/node-create/01-overview.md|01-overview]]
 
 ```
 

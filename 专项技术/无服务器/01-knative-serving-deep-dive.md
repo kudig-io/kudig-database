@@ -501,8 +501,8 @@ spec:
 
 ## Related
 
-- [[专项技术/04-serverless/02-knative-eventing-patterns|Knative Eventing 事件驱动模式]]
-- [[专项技术/04-serverless/03-openfaas-serverless-functions|OpenFaaS 无服务器函数]]
+- [[专项技术/无服务器/02-knative-eventing-patterns|Knative Eventing 事件驱动模式]]
+- [[专项技术/无服务器/03-openfaas-serverless-functions|OpenFaaS 无服务器函数]]
 
 ## See Also
 

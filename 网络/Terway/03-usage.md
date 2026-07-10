@@ -1113,8 +1113,8 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 |:---|:---|
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训 |
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Day 24: Terway CNI 入门 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/topic-fta/list/terway-fta.md) | FTA 故障树 |
+| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
+| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | FTA 故障树 |
 
 ---
 
@@ -1122,7 +1122,7 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -548,8 +548,8 @@ limits_config:
 
 ## Related
 
-- [[domain-06-observability/03-logging/01-elk-stack-enterprise-logging|EFK 日志栈]]
-- [[domain-05-security-compliance/06-compliance/02-encryption-at-rest-transit|加密方案]]
+- [[domain-06-observability/日志/01-elk-stack-enterprise-logging|EFK 日志栈]]
+- [[domain-05-security-compliance/合规审计/02-encryption-at-rest-transit|加密方案]]
 
 ## See Also
 

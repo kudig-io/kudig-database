@@ -773,7 +773,7 @@ metrics_system_checklist
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[平台工程/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[平台工程/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 监控告警体系
 - GitOps配置管理 (GitOps Configuration Management)
@@ -790,7 +790,7 @@ metrics_system_checklist
 
 ## Related
 
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

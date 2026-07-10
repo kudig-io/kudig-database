@@ -1568,15 +1568,15 @@ kubectl logs -l app=<label> --all-containers
 - 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 - 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
 - 05 - 事件与审计日志管理 (Events & Audit Logs)
-- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[故障诊断/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 
 - [[kudig-prompts-catalog]]
 
-- [[可观测性/README.md|返回目录]]- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[可观测性/README.md|返回目录]]- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

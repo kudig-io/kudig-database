@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-blue-green/README.md|Readme]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-blue-green/README.md|Readme]]
 

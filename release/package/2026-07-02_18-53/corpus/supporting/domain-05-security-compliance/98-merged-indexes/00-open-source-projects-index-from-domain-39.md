@@ -118,7 +118,7 @@ authors:
 
 ## See Also
 
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
+- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|20-incident-response-process]]
 - [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 - [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 - [[domain-05-security-compliance/98-merged-indexes/MOC-from-domain-25.md|MOC-from-domain-05-security-compliance]]

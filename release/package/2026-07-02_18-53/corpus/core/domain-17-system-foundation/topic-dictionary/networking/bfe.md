@@ -66,6 +66,6 @@ BFE（Baidu Front End）是百度开源的七层负载均衡引擎，已在百�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/traefik.md|Traefik]]
-- [[domain-17-system-foundation/topic-dictionary/networking/consul.md|Consul]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/traefik.md|Traefik]]
+- [[domain-17-system-foundation/知识字典/networking/consul.md|Consul]]

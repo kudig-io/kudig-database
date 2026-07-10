@@ -70,5 +70,5 @@ prerequisites:
 - https://kubernetes.io/docs/concepts/configuration/configmap/
 
 ## Related
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|ConfigMap]]
-- [[domain-17-system-foundation/topic-dictionary/security/secret.md|Secret]]
+- [[domain-17-system-foundation/知识字典/configuration/configmap.md|ConfigMap]]
+- [[domain-17-system-foundation/知识字典/security/secret.md|Secret]]

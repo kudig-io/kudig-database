@@ -225,6 +225,6 @@ ip link delete flannel.1 2>/dev/null || true
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[concepts/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
 
 <!-- risk-assessed -->

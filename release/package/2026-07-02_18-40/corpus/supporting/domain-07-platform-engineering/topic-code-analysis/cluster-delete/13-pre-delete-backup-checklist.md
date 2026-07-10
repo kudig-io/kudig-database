@@ -415,9 +415,9 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
 - [[entities/kubernetes.md|kubernetes]]
 - [[hot|hot]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/02-reset.md|02-reset]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/07-ha-delete.md|07-ha-delete]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/05-etcd-cleanup.md|05-etcd-cleanup]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/02-reset.md|02-reset]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/07-ha-delete.md|07-ha-delete]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/05-etcd-cleanup.md|05-etcd-cleanup]]
 
 ```
 

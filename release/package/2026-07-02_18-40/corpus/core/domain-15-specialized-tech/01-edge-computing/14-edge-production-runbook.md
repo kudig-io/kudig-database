@@ -354,11 +354,11 @@ openssl x509 -in /etc/kubeedge/certs/edge.crt -noout -dates
 
 - [[domain-15-specialized-tech/99-production-readiness-operations-guide.md|专项技术 生产就绪运维指南]]
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
-- [[domain-15-specialized-tech/01-edge-computing/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
-- [[domain-15-specialized-tech/01-edge-computing/04-kubeedge-device-edge-apps.md|KubeEdge 设备与边缘应用]]
-- [[domain-15-specialized-tech/01-edge-computing/08-edge-storage-network.md|边缘存储与网络]]
-- [[domain-15-specialized-tech/01-edge-computing/09-edge-security.md|边缘安全]]
-- [[domain-01-cluster-fundamentals/03-control-plane/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]
+- [[domain-15-specialized-tech/边缘计算/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
+- [[domain-15-specialized-tech/边缘计算/04-kubeedge-device-edge-apps.md|KubeEdge 设备与边缘应用]]
+- [[domain-15-specialized-tech/边缘计算/08-edge-storage-network.md|边缘存储与网络]]
+- [[domain-15-specialized-tech/边缘计算/09-edge-security.md|边缘安全]]
+- [[domain-01-cluster-fundamentals/控制平面/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]
 
 
 <!-- risk-assessed -->

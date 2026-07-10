@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[平台工程/topic-code-analysis/README.md|Readme]]
+- [[平台工程/代码分析/README.md|Readme]]
 
 ## 子目录
 
@@ -29,5 +29,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[平台工程/topic-code-analysis/MOC.md|Moc]]
+- [[平台工程/代码分析/MOC.md|Moc]]
 

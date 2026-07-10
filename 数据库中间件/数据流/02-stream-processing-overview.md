@@ -73,7 +73,7 @@ prerequisites:
 
 ## 相关
 
-- [[数据库中间件/06-data-streaming/01-cdc-change-data-capture.md|01 cdc change data capture]]
+- [[数据库中间件/数据流/01-cdc-change-data-capture.md|01 cdc change data capture]]
 
 
 <!-- risk-assessed -->

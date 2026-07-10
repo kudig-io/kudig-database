@@ -85,11 +85,11 @@ mychart/
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[domain-17-system-foundation/topic-dictionary/operations/rolling-update.md|Rolling Update]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[domain-17-system-foundation/知识字典/operations/rolling-update.md|Rolling Update]]
 
 
 <!-- risk-assessed -->

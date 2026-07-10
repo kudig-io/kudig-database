@@ -552,8 +552,8 @@ OTel Collector 配置检查清单：
 
 ## Related
 
-- [[可观测性/04-tracing/01-jaeger-production-deployment|Jaeger 生产部署]]
-- [[可观测性/04-tracing/02-grafana-tempo-tracing|Grafana Tempo]]
+- [[可观测性/链路追踪/01-jaeger-production-deployment|Jaeger 生产部署]]
+- [[可观测性/链路追踪/02-grafana-tempo-tracing|Grafana Tempo]]
 
 ## See Also
 

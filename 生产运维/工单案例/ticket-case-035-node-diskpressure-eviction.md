@@ -21,12 +21,12 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: kube-system, multi-app
 ticket_type: 节点压力/磁盘资源告警
 skill_ref:
-- '[[集群基础/03-control-plane/33-kubelet-eviction-thresholds.md|kubelet
+- '[[集群基础/控制平面/33-kubelet-eviction-thresholds.md|kubelet
   驱逐阈值]]'
-- '[[工作负载/00-core-workloads/18-node-management-operations.md|节点管理运维]]'
+- '[[工作负载/核心工作负载/18-node-management-operations.md|节点管理运维]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/nodepool-fta.md|FTA: 节点池异常]]'
-- '[[故障诊断/topic-fta/list/pod-fta.md|FTA: Pod 异常]]'
+- '[[故障诊断/FTA故障树/list/nodepool-fta.md|FTA: 节点池异常]]'
+- '[[故障诊断/FTA故障树/list/pod-fta.md|FTA: Pod 异常]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: TC-2026-040
 status: duplicate
@@ -58,13 +58,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[生产运维/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
 
@@ -271,7 +271,7 @@ kubectl get pod -n rec-service -o wide | grep -v Running
 > **当前状态：** 节点 `DiskPressure` 条件已消失，磁盘使用率降至 65% 以下，业务 Pod 全部 Running，无新驱逐事件。
 >
 > **后续建议：**
-> - 参考 [[集群基础/03-control-plane/33-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]] 为节点池配置合理的磁盘告警；
+> - 参考 [[集群基础/控制平面/33-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]] 为节点池配置合理的磁盘告警；
 > - 为推荐服务容器配置 日志轮转 Sidecar 或限制 stdout 日志量，关闭不必要的 debug 日志；
 > - 在节点初始化脚本中配置 `logrotate` 与 `journalctl --vacuum-size`，并定期清理镜像；
 > - 通过 节点维护手册 将磁盘清理纳入月度巡检；
@@ -301,7 +301,7 @@ kubectl get pod -n rec-service -o wide | grep -v Running
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
 - Pod Pending：资源不足与 Taint 不匹配
 - Ingress 控制器 Pod 异常导致 404/502
-- [[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+- [[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 
 
 <!-- risk-assessed -->

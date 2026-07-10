@@ -296,16 +296,16 @@ sudo systemctl restart systemd-journald
 ### 本域相关文档
 
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|containerd 深度指南]] — 理解 containerd 架构、CRI 与镜像命名空间。
-- [[domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]] — ACK/ASO 场景下的安装、迁移、配置优化与升级回滚。
-- [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业级镜像仓库深度实践]] — 企业镜像仓库的高可用、安全扫描与灾备。
-- [[domain-13-container-runtime/04-image-build/01-buildkit-production-guide.md|BuildKit 生产化构建指南]] — 镜像构建加速、缓存与 rootless 构建。
-- [[domain-13-container-runtime/01-docker/07-docker-security-best-practices.md|Docker 安全最佳实践]] — 容器运行时安全基线与限制策略。
-- [[domain-13-container-runtime/01-docker/08-docker-troubleshooting-guide.md|Docker 故障排查指南]] — 容器、网络与存储的通用排错思路。
+- [[domain-13-container-runtime/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]] — ACK/ASO 场景下的安装、迁移、配置优化与升级回滚。
+- [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业级镜像仓库深度实践]] — 企业镜像仓库的高可用、安全扫描与灾备。
+- [[domain-13-container-runtime/镜像构建/01-buildkit-production-guide.md|BuildKit 生产化构建指南]] — 镜像构建加速、缓存与 rootless 构建。
+- [[domain-13-container-runtime/Docker/07-docker-security-best-practices.md|Docker 安全最佳实践]] — 容器运行时安全基线与限制策略。
+- [[domain-13-container-runtime/Docker/08-docker-troubleshooting-guide.md|Docker 故障排查指南]] — 容器、网络与存储的通用排错思路。
 
 ### 跨域参考
 
 - [[domain-05-security-compliance/README.md|domain-05-security-compliance]] — 镜像安全、供应链与合规。
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system.md|监控告警体系]] — 运行时指标接入与告警治理。
+- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — 运行时指标接入与告警治理。
 - [[domain-10-troubleshooting-diagnostics/README.md|domain-10-troubleshooting-diagnostics]] — 统一排障框架与技能库。
 
 ---

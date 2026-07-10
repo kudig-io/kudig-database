@@ -99,8 +99,8 @@ kubectl top pod -n <namespace>
 - [ ] HPA和VPA配置
 
 **推荐学习**：
-- [[故障诊断/topic-skills/08-deployment-rollout-failure.md|08 deployment rollout failure]]
-- [[故障诊断/topic-skills/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
+- [[故障诊断/技能体系/08-deployment-rollout-failure.md|08 deployment rollout failure]]
+- [[故障诊断/技能体系/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
 - k8s-autoscaling
 
 ### 2.3 存储与配置
@@ -112,7 +112,7 @@ kubectl top pod -n <namespace>
 **推荐学习**：
 - k8s-pvc-storage
 - k8s-config-secret
-- [[故障诊断/topic-skills/21-statefulset-failure.md|21 statefulset failure]]
+- [[故障诊断/技能体系/21-statefulset-failure.md|21 statefulset failure]]
 
 ### 2.4 网络排查
 - [ ] Service连通性诊断
@@ -121,9 +121,9 @@ kubectl top pod -n <namespace>
 - [ ] Ingress和SLB问题诊断
 
 **推荐学习**：
-- [[故障诊断/topic-skills/05-service-connectivity.md|05 service connectivity]]
+- [[故障诊断/技能体系/05-service-connectivity.md|05 service connectivity]]
 - k8s-dns-failure
-- [[故障诊断/topic-skills/13-ingress-gateway-failure.md|13 ingress gateway failure]]
+- [[故障诊断/技能体系/13-ingress-gateway-failure.md|13 ingress gateway failure]]
 
 ### 阶段二评估标准
 > 能够独立完成以下操作即达标：
@@ -145,8 +145,8 @@ kubectl top pod -n <namespace>
 - [ ] etcd备份和恢复
 
 **推荐学习**：
-- [[故障诊断/topic-skills/11-control-plane-failure.md|11 control plane failure]]
-- [[故障诊断/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
+- [[故障诊断/技能体系/11-control-plane-failure.md|11 control plane failure]]
+- [[故障诊断/技能体系/06-certificate-expiry.md|06 certificate expiry]]
 - `集群基础/06-upgrade-paths/`
 
 ### 3.2 安全与合规
@@ -156,8 +156,8 @@ kubectl top pod -n <namespace>
 - [ ] 审计日志配置
 
 **推荐学习**：
-- [[故障诊断/topic-skills/09-rbac-quota-failure.md|09 rbac quota failure]]
-- [[故障诊断/topic-skills/18-security-incident-response.md|18 security incident response]]
+- [[故障诊断/技能体系/09-rbac-quota-failure.md|09 rbac quota failure]]
+- [[故障诊断/技能体系/18-security-incident-response.md|18 security incident response]]
 - `安全/`
 
 ### 3.3 可观测性体系
@@ -167,8 +167,8 @@ kubectl top pod -n <namespace>
 - [ ] 分布式链路追踪
 
 **推荐学习**：
-- [[故障诊断/topic-skills/15-monitoring-alerting-failure.md|15 monitoring alerting failure]]
-- [[故障诊断/topic-skills/16-logging-pipeline-failure.md|16 logging pipeline failure]]
+- [[故障诊断/技能体系/15-monitoring-alerting-failure.md|15 monitoring alerting failure]]
+- [[故障诊断/技能体系/16-logging-pipeline-failure.md|16 logging pipeline failure]]
 - `可观测性/`
 
 ### 3.4 性能优化
@@ -178,7 +178,7 @@ kubectl top pod -n <namespace>
 - [ ] 大规模集群性能考量
 
 **推荐学习**：
-- [[故障诊断/topic-skills/17-performance-bottleneck.md|17 performance bottleneck]]
+- [[故障诊断/技能体系/17-performance-bottleneck.md|17 performance bottleneck]]
 - `集群基础/07-performance-tuning/`
 
 ### 阶段三评估标准

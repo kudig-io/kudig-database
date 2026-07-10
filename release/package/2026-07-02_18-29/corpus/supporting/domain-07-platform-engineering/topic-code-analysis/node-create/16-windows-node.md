@@ -381,7 +381,7 @@ System Info:
 - [[entities/cni.md|cni]]
 - [[entities/cri-o.md|CRI-O]]
 - [[entities/containerd.md|containerd]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|linux]]
+- [[domain-17-system-foundation/速查卡/linux.md|linux]]
 
 
 <!-- risk-assessed -->

@@ -994,10 +994,10 @@ etcdctl user grant-role user role        # 授权
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md|集群删除前的数据备份与迁移检查清单]]- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/13-pre-delete-backup-checklist.md|集群删除前的数据备份与迁移检查清单]]- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 

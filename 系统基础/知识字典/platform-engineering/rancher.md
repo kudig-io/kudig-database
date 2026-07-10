@@ -89,11 +89,11 @@ Rancher Server → 管理多个 Downstream Clusters
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
-- [[系统基础/topic-dictionary/storage/longhorn.md|Longhorn]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/storage/longhorn.md|Longhorn]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

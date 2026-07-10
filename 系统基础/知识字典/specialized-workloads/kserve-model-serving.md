@@ -134,7 +134,7 @@ KServe 支持多种推理协议：
 - [NVIDIA Triton Inference Server](https://developer.nvidia.com/triton-inference-server)
 
 ## Related
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

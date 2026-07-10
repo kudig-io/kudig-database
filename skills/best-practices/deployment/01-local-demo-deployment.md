@@ -1076,18 +1076,18 @@ my-k8s-worker          Ready    <none>          25s   v1.32.0
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-deployment MOC
-- [[发布变更/topic-deployment/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
-- [[发布变更/topic-deployment/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
-- [[发布变更/topic-deployment/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
-- [[发布变更/topic-deployment/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
+- [[发布变更/部署方案/README.md|Kubernetes 部署方案指南 (Deployment Guide)]]
+- [[发布变更/部署方案/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One)]]
+- [[发布变更/部署方案/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment)]]
+- [[发布变更/部署方案/04-production-environment-deployment.md|04 - 生产环境部署 (Production Environment Deployment)]]
 
 ## Related
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/linux.md|linux]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/linux.md|linux]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 
 ```
 

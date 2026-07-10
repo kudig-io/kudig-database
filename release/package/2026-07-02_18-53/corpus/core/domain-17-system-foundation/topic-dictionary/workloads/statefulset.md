@@ -82,11 +82,11 @@ StatefulSet 是 Kubernetes 中管理有状态应用的工作负载控制器。�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|Daemonset]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|Replicaset]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/job.md|Job]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/workloads/daemonset.md|Daemonset]]
+- [[domain-17-system-foundation/知识字典/workloads/replicaset.md|Replicaset]]
+- [[domain-17-system-foundation/知识字典/workloads/job.md|Job]]
 
 
 <!-- risk-assessed -->

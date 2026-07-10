@@ -82,11 +82,11 @@ Podman 原生支持 Pod（一组共享网络和存储的容器），类似 Kuber
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|Containerd]]
-- [[系统基础/topic-dictionary/fundamentals/container.md|Container]]
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
-- [[系统基础/topic-dictionary/security/security-context.md|Security Context]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/fundamentals/containerd.md|Containerd]]
+- [[系统基础/知识字典/fundamentals/container.md|Container]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/security/security-context.md|Security Context]]
 
 
 <!-- risk-assessed -->

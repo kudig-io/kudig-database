@@ -59,7 +59,7 @@ prerequisites:
 
 ## 相关
 
-- [[domain-16-database-middleware/05-operator-management/01-database-operator-patterns.md|01 database operator patterns]]
+- [[domain-16-database-middleware/Operator管理/01-database-operator-patterns.md|01 database operator patterns]]
 
 
 <!-- risk-assessed -->

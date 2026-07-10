@@ -24,14 +24,14 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: ingress-nginx
 ticket_type: 应用入口访问故障
 skill_ref:
-- '[[domain-03-networking-traffic/00-core-k8s-networking/21-nginx-ingress-complete-guide.md|Nginx
+- '[[domain-03-networking-traffic/K8s网络核心/21-nginx-ingress-complete-guide.md|Nginx
   Ingress 完全指南]]'
-- '[[domain-03-networking-traffic/00-core-k8s-networking/25-ingress-monitoring-troubleshooting.md|Ingress
+- '[[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress
   监控与排障]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-ingress-fta.md|FTA:
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/nginx-ingress-fta.md|FTA:
   Nginx Ingress 故障]]'
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|FTA: Ingress
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|FTA: Ingress
   访问异常]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: TC-2026-021
@@ -65,13 +65,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 - target: '[[concepts/ingress.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
@@ -260,7 +260,7 @@ kubectl get events -n ingress-nginx --field-selector reason=OOMKilled --sort-by=
 >
 > **后续建议：**
 > - 为 Ingress Controller 开启 HPA，建议最小副本 2，最大 8，避免单点故障；
-> - 参考 [[domain-03-networking-traffic/00-core-k8s-networking/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]] 配置入口延迟、5xx 比例、Controller CPU/内存使用率告警；
+> - 参考 [[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]] 配置入口延迟、5xx 比例、Controller CPU/内存使用率告警；
 > - 升级 Nginx Ingress 前在预发环境按实际证书与 Ingress 数量压测内存占用；
 > - 将 Controller 接入 Prometheus，采集 `nginx_ingress_controller_requests` 与容器 OOM 指标。
 >

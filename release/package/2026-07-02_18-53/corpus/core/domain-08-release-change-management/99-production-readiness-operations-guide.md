@@ -268,7 +268,7 @@ kubectl rollout undo deployment/<name> -n production --to-revision=<n>
 helm history <release-name> -n production
 helm rollback <release-name> <revision> -n production
 ```
-更多回滚场景参见 [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|变更回滚操作手册]]。
+更多回滚场景参见 [[domain-08-release-change-management/变更管理/03-change-rollback-playbook.md|变更回滚操作手册]]。
 
 ### 3.3 验证 CI/CD 流水线产物
 
@@ -366,12 +366,12 @@ kubectl get events -n production --field-selector reason=Started,involvedObject.
 
 ### 本域现有资料
 
-- [[domain-08-release-change-management/01-gitops/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
-- [[domain-08-release-change-management/01-gitops/99-helm-production-guide.md|Helm 生产指南]]
-- [[domain-08-release-change-management/03-change-management/03-change-rollback-playbook.md|变更回滚操作手册]]
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy.md|金丝雀发布策略与回滚]]
-- [[domain-08-release-change-management/03-change-management/22-change-management-process.md|变更管理流程]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|生产环境部署]]
+- [[domain-08-release-change-management/GitOps/99-argo-cd-gitops-guide.md|Argo CD 企业级 GitOps 实践指南]]
+- [[domain-08-release-change-management/GitOps/99-helm-production-guide.md|Helm 生产指南]]
+- [[domain-08-release-change-management/变更管理/03-change-rollback-playbook.md|变更回滚操作手册]]
+- [[domain-08-release-change-management/变更管理/02-canary-release-strategy.md|金丝雀发布策略与回滚]]
+- [[domain-08-release-change-management/变更管理/22-change-management-process.md|变更管理流程]]
+- [[domain-08-release-change-management/部署方案/04-production-environment-deployment.md|生产环境部署]]
 
 ### 规划新建资料（来自域内容差距分析）
 

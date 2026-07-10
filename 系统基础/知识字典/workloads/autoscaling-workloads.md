@@ -260,9 +260,9 @@ kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/container-environment.md|容器环境（Container Environment）]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/container-environment.md|容器环境（Container Environment）]]
 
 
 <!-- risk-assessed -->

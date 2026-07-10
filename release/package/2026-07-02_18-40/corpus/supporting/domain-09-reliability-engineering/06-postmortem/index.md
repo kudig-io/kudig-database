@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-09-reliability-engineering/06-postmortem/01-blameless-postmortem-template.md|Blameless Postmortem Template]]
-- [[domain-09-reliability-engineering/06-postmortem/02-postmortem-culture-guide.md|Postmortem Culture Guide]]
+- [[domain-09-reliability-engineering/事后复盘/01-blameless-postmortem-template.md|Blameless Postmortem Template]]
+- [[domain-09-reliability-engineering/事后复盘/02-postmortem-culture-guide.md|Postmortem Culture Guide]]
 

@@ -94,9 +94,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/csi-fta.md|csi fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/csi-fta.md|csi fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/csi-fta.md|csi fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/csi-fta.md|csi fta]]
 
 
 ---

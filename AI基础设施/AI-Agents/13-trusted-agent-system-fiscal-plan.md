@@ -845,7 +845,7 @@ graph TB
 | [06 - 多 Agent 编排与协作架构](./06-multi-agent-orchestration.md) | Workflow 编排方案参考 |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | 智能体部署方案 |
 | [10 - 安全护栏与合规](./10-security-guardrails.md) | 安全质检标准参考 |
-| [topic-fta](../故障诊断/topic-fta/) | 故障树分析（FTA）方法论 |
+| [topic-fta](../故障诊断/FTA故障树/) | 故障树分析（FTA）方法论 |
 | [故障诊断](../故障诊断/) | 容器问题排障知识源 |
 
 ---
@@ -857,17 +857,17 @@ graph TB
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[AI基础设施/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[AI基础设施/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[AI基础设施/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[AI基础设施/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[AI基础设施/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[AI基础设施/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[AI基础设施/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[AI基础设施/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[AI基础设施/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[AI基础设施/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[AI基础设施/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[AI基础设施/AI-Agents/README.md|AI Agent 工程专题]]
+- [[AI基础设施/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[AI基础设施/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[AI基础设施/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[AI基础设施/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[AI基础设施/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[AI基础设施/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[AI基础设施/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[AI基础设施/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[AI基础设施/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[AI基础设施/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## Related
 

@@ -310,7 +310,7 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 - index.md|Domain-4 工作负载 — 开源项目索引]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
-- 03 - [[domain-02-workloads-applications/00-core-workloads/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
+- 03 - [[domain-02-workloads-applications/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
 - 04 - DaemonSet 管理策略与最佳实践 (DaemonSet Management Strategies)
 - 05 - Job 与 CronJob 高级用法 (Job & CronJob Advanced Usage)
 - 06 - 工作负载监控与告警体系 (Workload Monitoring & Alerting System)
@@ -327,8 +327,8 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 - HPA/VPA 自动扩缩容
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-19-landscape-references/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
+- [[domain-19-landscape-references/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 ## See Also
 

@@ -67,6 +67,6 @@ Tokenetes 是开源的 Kubernetes Token 管理服务，为 K8s 提供安全的�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe.md|SPIFFE]]
-- [[domain-17-system-foundation/topic-dictionary/security/spire.md|SPIRE]]
-- [[domain-17-system-foundation/topic-dictionary/security/keycloak.md|Keycloak]]
+- [[domain-17-system-foundation/知识字典/security/spiffe.md|SPIFFE]]
+- [[domain-17-system-foundation/知识字典/security/spire.md|SPIRE]]
+- [[domain-17-system-foundation/知识字典/security/keycloak.md|Keycloak]]

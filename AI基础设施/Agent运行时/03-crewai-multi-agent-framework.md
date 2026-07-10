@@ -684,12 +684,12 @@ crew = Crew(agents=agents, tasks=tasks, verbose=True)
 
 ## Related
 
-- [[AI基础设施/03-agent-runtime/01-langchain-langgraph-deep-dive|LangChain/LangGraph 深度指南]]
-- [[AI基础设施/03-agent-runtime/04-autogen-microsoft-agent|Microsoft AutoGen]]
+- [[AI基础设施/Agent运行时/01-langchain-langgraph-deep-dive|LangChain/LangGraph 深度指南]]
+- [[AI基础设施/Agent运行时/04-autogen-microsoft-agent|Microsoft AutoGen]]
 
 ## See Also
 
-- [[AI基础设施/03-agent-runtime/07-agent-framework-selection-guide|Agent 框架选型决策树]]
+- [[AI基础设施/Agent运行时/07-agent-framework-selection-guide|Agent 框架选型决策树]]
 
 
 <!-- risk-assessed -->

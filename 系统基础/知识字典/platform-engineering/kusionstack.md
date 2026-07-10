@@ -73,9 +73,9 @@ KusionStack 是蚂蚁集团开源的 CNCF Sandbox 项目，面向应用的配置
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/kcl.md|KCL]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/configuration/kcl.md|KCL]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
 
 
 <!-- risk-assessed -->

@@ -81,7 +81,7 @@ status: reviewed
 2. **初步判断**：根据现象定位问题域（节点/Pod/网络/存储）
 3. **信息收集**：收集日志、指标、事件，联系相关团队
 4. **决策执行**：根据预案执行回滚或修复操作
-5. **事后复盘**：记录根因，更新 [[可靠性/06-postmortem/02-postmortem-culture-guide.md|postmortem]] 和 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
+5. **事后复盘**：记录根因，更新 [[可靠性/事后复盘/02-postmortem-culture-guide.md|postmortem]] 和 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
 
 ## 变更管理流程
 

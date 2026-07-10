@@ -29,7 +29,7 @@ prerequisites:
 relationships:
 - target: '[[entities/kubeedge.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-cheat-sheet/networking.md]]'
+- target: '[[domain-17-system-foundation/速查卡/networking.md]]'
   type: related_to
 ---
 
@@ -91,11 +91,11 @@ relationships:
 ## 相关 Domain
 
 - domain-01-cluster-fundamentals/09-edge-computing/01-kubeedge-overview
-- domain-03-[[domain-17-system-foundation/topic-cheat-sheet/networking.md|networking]]-traffic/07-edge-networking/01-edge-network-patterns
+- domain-03-[[domain-17-system-foundation/速查卡/networking.md|networking]]-traffic/07-edge-networking/01-edge-network-patterns
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/37-multi-cluster-management-troubleshooting.md|多集群管理故障排查]]
-- [[domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/40-large-scale-cluster-operations.md|大规模集群运维]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/37-multi-cluster-management-troubleshooting.md|多集群管理故障排查]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/40-large-scale-cluster-operations.md|大规模集群运维]]
 
 
 <!-- risk-assessed -->

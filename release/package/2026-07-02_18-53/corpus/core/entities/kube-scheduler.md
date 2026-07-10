@@ -39,7 +39,7 @@ prerequisites:
 
 kube-scheduler watches for unscheduled [[Pods|Pods]] and assigns each to the most suitable node. It is the only component that writes to `Pod.spec.nodeName`.
 
-## [[domain-17-system-foundation/topic-dictionary/scheduling/scheduling-framework.md|Scheduling Framework]]
+## [[domain-17-system-foundation/知识字典/scheduling/scheduling-framework.md|Scheduling Framework]]
 
 The scheduler is plugin-based with extension points:
 

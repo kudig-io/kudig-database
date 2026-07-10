@@ -177,20 +177,20 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences[0].na
 ```
 ## 交叉引用
 
-- [[系统基础/topic-dictionary/workloads/deployments.md|Deployments]]](./deployments.md)
+- [[系统基础/知识字典/workloads/deployments.md|Deployments]]](./deployments.md)
 - [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 - [工作负载管理总览](./workload-management.md)
-- [[系统基础/topic-dictionary/workloads/replicationcontroller.md|ReplicationController]]（旧版）](./replicationcontroller.md)
+- [[系统基础/知识字典/workloads/replicationcontroller.md|ReplicationController]]（旧版）](./replicationcontroller.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

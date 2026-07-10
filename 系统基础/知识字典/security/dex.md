@@ -65,6 +65,6 @@ Dex 是 CNCF 托管的 OIDC（OpenID Connect）身份认证服务，作为联邦
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/oauth2-proxy.md|oauth2-proxy]]
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
-- [[系统基础/topic-dictionary/security/vault.md|Vault]]
+- [[系统基础/知识字典/security/oauth2-proxy.md|oauth2-proxy]]
+- [[系统基础/知识字典/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/vault.md|Vault]]

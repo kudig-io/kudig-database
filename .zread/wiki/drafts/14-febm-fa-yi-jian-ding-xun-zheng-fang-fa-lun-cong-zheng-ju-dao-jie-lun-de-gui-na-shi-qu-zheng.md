@@ -1,6 +1,6 @@
 FEBM（Forensic Evidence-Based Methodology，法医鉴定循证方法论）是一套源于传统法医学、适配云原生数字环境的系统化调查方法论。它将物理世界中积累了数百年的法医学原理——尤其是洛卡德交换原理"每次接触都会留下痕迹"——迁移并重构为适用于 Kubernetes 环境的数字取证实践。与 [FTA 故障树分析](13-fta-gu-zhang-shu-fen-xi-cong-yan-yi-tui-li-dao-ai-agent-zhi-shi-gu-jia) 的**演绎法**（自上而下，从假设到验证）形成根本性互补，FEBM 采用**归纳法**（自下而上，从证据到结论），天然适应高度动态、短暂且分布式的云原生系统环境。本页涵盖 FEBM 的哲学基石、四大支柱、技术实现体系、五层可观测性架构、AI Agent 工单处理集成、五级成熟度建设路线以及生产环境快速启动指南，为 SRE、安全工程师、取证分析师和平台架构师提供完整的方法论全景。
 
-Sources: [README.md](topic-febm/README.md#L1-L120), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L1-L36)
+Sources: [README.md](FEBM方法论/README.md#L1-L120), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L1-L36)
 
 ---
 
@@ -10,7 +10,7 @@ FEBM 的哲学基石可追溯至 20 世纪法国犯罪学家埃德蒙·洛卡德
 
 FEBM 的学科定位横跨三个核心领域：**数字取证科学**（Digital Forensics）提供证据采集、保管、分析的程序规范；**循证方法论**（Evidence-Based Methodology）建立证据等级评估与假设-验证框架；**事件响应工程**（Incident Response Engineering）面向实际运维场景提供标准化响应流程。三者交叉融合，共同构建了 FEBM 的认识论体系。
 
-Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L21-L58), [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L61-L121)
+Sources: [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L21-L58), [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L61-L121)
 
 ## 四大核心支柱
 
@@ -38,7 +38,7 @@ FEBM 的方法论体系建立在四大核心支柱之上，这些支柱不是独
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L192-L265), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L37-L62)
+Sources: [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L192-L265), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L37-L62)
 
 ## 证据分类与易失性时间线
 
@@ -56,7 +56,7 @@ FEBM 将 Kubernetes 环境中的证据按**易失性**进行系统分级，这�
 | Level 7 | 审计记录 | 月-年级 | 低 | API Server 审计日志 |
 | Level 8 | 配置历史 | 永久 | 低 | GitOps 仓库、etcd 快照 |
 
-Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L252-L265), [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L362-L397)
+Sources: [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L252-L265), [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L362-L397)
 
 ## FEBM vs. FTA：归纳法与演绎法的认识论对比
 
@@ -74,7 +74,7 @@ Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.m
 
 在成熟的运维实践中，两者形成**互补而非替代**的关系：设计阶段运用 FTA 进行系统性风险识别和架构优化，运行阶段运用 FEBM 进行实时诊断和深度调查，反馈阶段 FEBM 发现的新故障模式更新到 FTA 模型库，FTA 的关键路径指导 FEBM 的监控重点。在 AI Agent 工单处理中，推荐采用 FTA+FEBM 融合模式——初步分类匹配走 FTA 快速路径（置信度 > 0.9 时直接执行），无匹配或低置信度时启动 FEBM 证据驱动调查，无论哪条路径都用 FEBM 验证最终结论。
 
-Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L478-L530), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L119-L143), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L577-L614)
+Sources: [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L478-L530), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L119-L143), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L577-L614)
 
 ## 证据生命周期六阶段模型
 
@@ -100,7 +100,7 @@ flowchart LR
     style ARC fill:#eceff1,stroke:#37474f
 ```
 
-Sources: [02-febm-technical-implementation.md](topic-febm/02-febm-technical-implementation.md#L10-L52), [02-febm-technical-implementation.md](topic-febm/02-febm-technical-implementation.md#L54-L147), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L149-L174)
+Sources: [02-febm-technical-implementation.md](FEBM方法论/02-febm-technical-implementation.md#L10-L52), [02-febm-technical-implementation.md](FEBM方法论/02-febm-technical-implementation.md#L54-L147), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L149-L174)
 
 ## 关键技术组件
 
@@ -114,7 +114,7 @@ FEBM 在 Kubernetes 环境中的技术实现依赖四大核心组件的协同工
 
 **时间线重建技术**将分散在多源异构数据中的事件按时间顺序整合为统一时间线，通过 Pod UID、Container ID、Trace ID、Audit ID、Node Name 等关联标识符实现跨源证据关联。Kubernetes 审计日志为时间线重建提供了核心数据基础——API Server 记录的所有资源操作请求，包括请求者身份、操作类型、资源对象、时间戳、请求/响应体等详细信息。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L176-L298), [02-febm-technical-implementation.md](topic-febm/02-febm-technical-implementation.md#L149-L200)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L176-L298), [02-febm-technical-implementation.md](FEBM方法论/02-febm-technical-implementation.md#L149-L200)
 
 ## 五层可观测性架构
 
@@ -122,7 +122,7 @@ FEBM 的有效实施依赖完善的可观测性基础设施。该架构被组织
 
 证据采集策略遵循三大原则：**分级采集，按易失性优先**（高易失性+高价值证据标记为 P0 立即采集，如内存快照和运行时系统调用）；**持续采集而非事后启动**（传统取证的"事件发生后启动调查"模式在 Kubernetes 环境中不可行，eBPF 探针持续监控系统调用、审计日志实时流式分析、异常模式即时触发增强采集）；**证据完整性保障**（采集阶段 SHA-256 哈希计算、传输阶段 TLS 加密、存储阶段不可变存储 WORM、全程链式监管 Chain of Custody 记录）。
 
-Sources: [03-febm-best-practices.md](topic-febm/03-febm-best-practices.md#L1-L100), [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L301-L392)
+Sources: [03-febm-best-practices.md](FEBM方法论/03-febm-best-practices.md#L1-L100), [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L301-L392)
 
 ## 事件响应流程与取证即代码
 
@@ -130,7 +130,7 @@ FEBM 在 Kubernetes 环境中的标准事件响应流程对齐 NIST SP 800-61，
 
 **取证即代码（Forensics as Code）** 是 FEBM 的工程化最佳实践，将检测规则（Falco/Sigma 规则）、响应 Playbook（Argo Workflow YAML）、分析脚本（Python 时间线构建器/审计日志分析器）和基线配置（正常 syscall profile、预期网络策略）全部纳入 Git 版本控制，通过 CI/CD 流水线测试和部署。这种实践与 GitOps 理念深度融合，确保不同环境、不同时间的一致性执行，是 FEBM 规模化落地的关键。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L399-L478), [03-febm-best-practices.md](topic-febm/03-febm-best-practices.md#L1-L21)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L399-L478), [03-febm-best-practices.md](FEBM方法论/03-febm-best-practices.md#L1-L21)
 
 ## FEBM 驱动的 AI Agent 工单处理
 
@@ -140,7 +140,7 @@ FEBM Agent 具备七大核心能力：**证据感知**（多源证据实时采�
 
 以一个真实的"订单服务促销期间间歇性超时"工单为例，FEBM Agent 通过多源证据并行采集（Prometheus 指标显示连接池使用率从 40% 飙升至 100%、HPA 从 3 扩到 12 Pod、应用日志显示 "Connection pool exhausted"、分布式追踪显示阻塞在数据库连接获取阶段），在 T+35 秒内完成时间线重建和因果推断，确认根因为 HPA maxReplicas 调整后连接池配置未联动——每 Pod maxPoolSize=10 × 12 Pods = 120 连接 > 数据库 max_connections=100。这种动态反馈循环故障（HPA 扩容 → 连接需求增长 → 超过 DB 上限 → 连接超时 → 重试风暴 → 加剧竞争）完全超出了 FTA 的单一树结构表达能力。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L482-L614), [04-febm-agent-ticket-processing.md](topic-febm/04-febm-agent-ticket-processing.md#L1-L148)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L482-L614), [04-febm-agent-ticket-processing.md](FEBM方法论/04-febm-agent-ticket-processing.md#L1-L148)
 
 ## 五级成熟度模型与分阶段建设路线
 
@@ -156,7 +156,7 @@ FEBM 体系建设遵循渐进式成熟度路径，从被动响应到智能预测
 
 建设路线分为五个阶段：**Phase 1 可观测性基座建设**（部署 Fluent Bit→Loki 日志采集、Prometheus+Grafana 指标监控、OpenTelemetry 分布式追踪、启用 K8s 审计日志 RequestResponse 级别、部署 Falco 运行时检测）→ **Phase 2 取证能力增强**（启用容器检查点 Kubernetes 1.25+、部署 eBPF 探针、部署 Cilium Hubble 网络可视化、建立证据存储不可变基础设施）→ **Phase 3 流程标准化**（制定事件响应 SOP、建立 Chain of Custody 程序、团队能力培训、定期演练）→ **Phase 4 自动化编排**（Falcosidekick 事件路由、Argo Workflows 取证流程编排、实现"检测→检查点→隔离→分析"自动化、Forensics as Code 全面实施）→ **Phase 5 AI 驱动自进化**（ML 预测组件失效概率、图神经网络重建攻击路径、结构因果模型融合 FTA 逻辑与 FEBM 证据）。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L718-L797), [05-febm-construction-methodology.md](topic-febm/05-febm-construction-methodology.md#L1-L120)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L718-L797), [05-febm-construction-methodology.md](FEBM方法论/05-febm-construction-methodology.md#L1-L120)
 
 ## 关键工具链参考
 
@@ -173,7 +173,7 @@ Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.m
 | 自动化响应 | Falcosidekick, Argo Workflows | 事件驱动编排，证据保全 | P2 |
 | 取证基础设施 | OSDFIR Infrastructure | 一体化云原生取证平台 | P2 |
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L892-L905)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L892-L905)
 
 ## 生产环境第一周快速启动
 
@@ -188,7 +188,7 @@ Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.m
 
 生产环境快速启动指南还提供了 6 个 Kubernetes 常见故障场景的标准化 FEBM 取证 Runbook：OOMKilled 取证、CrashLoopBackOff 取证、NodeNotReady 取证、间歇性超时取证（含 FTA+FEBM 联合诊断流程）、证书过期取证、配置漂移取证。每个 Runbook 包含证据采集命令序列、时间线重建步骤、因果推断框架和修复建议。
 
-Sources: [08-febm-production-quick-start.md](topic-febm/08-febm-production-quick-start.md#L1-L79), [08-febm-production-quick-start.md](topic-febm/08-febm-production-quick-start.md#L82-L180)
+Sources: [08-febm-production-quick-start.md](FEBM方法论/08-febm-production-quick-start.md#L1-L79), [08-febm-production-quick-start.md](FEBM方法论/08-febm-production-quick-start.md#L82-L180)
 
 ## 取证自动化蓝图与合规落地
 
@@ -196,7 +196,7 @@ FEBM 的终极目标是实现取证自动化的端到端闭环，涵盖六个阶
 
 合规落地对齐 SOC 2 / ISO 27001 / 等保要求，核心控制域包括：访问控制（按场景拆分 ServiceAccount，证据采集与修复使用独立 SA）、日志与可观测性（RequestResponse 级别审计、WORM 远端存储）、变更管理（GitOps 审批、Runbook PR+CI）、业务连续性（季度 GameDay 演练）、数据保全（采集即 Hash、敏感数据脱敏、传输存储加密）、供应链安全（取证镜像签名验签、SBOM 生成）。建议的 SLO 体系：P0 场景 MTTA ≤ 5 分钟、MTTR ≤ 30 分钟、自动化率 ≥ 70%；合规要求审计留存 ≥ 180 天、哈希/CoC 覆盖率 ≥ 95%。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L1010-L1066)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L1010-L1066)
 
 ## 认知偏差防范与 OODA 循环
 
@@ -204,13 +204,13 @@ FEBM 的运行时推理过程映射到 John Boyd 的 OODA 循环：**Observe（�
 
 方法论明确识别并防范六大认知偏差：**确认偏误**（强制列举和验证替代假设）、**锚定效应**（多源证据交叉验证）、**可得性偏差**（系统化证据采集不依赖记忆）、**近因效应**（时间线重建覆盖完整时间窗口）、**叙事偏差**（要求多条独立证据链）、**权威偏差**（证据优先于经验判断）。这些防范机制直接嵌入 FEBM 的证据采集和分析流程中，确保结论的客观性。
 
-Sources: [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md#L639-L681)
+Sources: [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md#L639-L681)
 
 ## 未来演进方向
 
 FEBM 的演进方向聚焦于三个维度：**AI/ML 增强的混合方法**（ML 预测基本事件概率赋能 FTA、智能取证代理自动化证据关联、图神经网络重建攻击路径、结构因果模型 SCM 融合 FTA 的演绎严谨性和 FEBM 的归纳灵活性）；**云原生取证基础设施**（OSDFIR Infrastructure 将 Turbinia、GRR、Timesketch、Yeti 等开源取证工具容器化、Container Explorer 提供容器级取证处理能力）；**持续取证与 DevSecOps 融合**（将证据采集和分析嵌入日常运维流程，eBPF 探针持续监控系统调用，审计日志实时流式分析，异常模式即时触发增强采集，FEBM 从事后响应演进为持续风险感知）。
 
-Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md#L986-L1007), [06-febm-future-evolution.md](topic-febm/06-febm-future-evolution.md#L1-L7)
+Sources: [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md#L986-L1007), [06-febm-future-evolution.md](FEBM方法论/06-febm-future-evolution.md#L1-L7)
 
 ## FEBM 知识体系全景索引
 
@@ -218,24 +218,24 @@ Sources: [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.m
 
 | # | 文档 | 核心内容 | 行数 |
 |:---:|:---|:---|:---:|
-| 总纲 | [febm-methodology-deep-dive.md](topic-febm/febm-methodology-deep-dive.md) | 六大部分概览，取证自动化蓝图，合规落地清单 | 1,101 |
-| 1 | [01-febm-theory-foundations.md](topic-febm/01-febm-theory-foundations.md) | 洛卡德原理、四大支柱、FEBM vs FTA 认识论差异、认知偏差防范 | 684 |
-| 2 | [02-febm-technical-implementation.md](topic-febm/02-febm-technical-implementation.md) | 证据生命周期、CRIU 检查点、eBPF 遥测、内存取证、时间线重建 | 3,388 |
-| 3 | [03-febm-best-practices.md](topic-febm/03-febm-best-practices.md) | 五层可观测性栈、证据采集策略、Forensics as Code、常见陷阱 | 3,163 |
-| 4 | [04-febm-agent-ticket-processing.md](topic-febm/04-febm-agent-ticket-processing.md) | Agent 工单处理架构、七大核心能力、完整案例、人机协同 | 2,690 |
-| 5 | [05-febm-construction-methodology.md](topic-febm/05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线、组织角色矩阵、预算规划 | 2,873 |
-| 6 | [06-febm-future-evolution.md](topic-febm/06-febm-future-evolution.md) | AI/ML 增强、OSDFIR、DevSecOps 融合、数字孪生、量子计算 | 3,916 |
-| 7 | [07-febm-appendix.md](topic-febm/07-febm-appendix.md) | 50+ 术语表、参考标准、40+ 工具速查表、规则模板 | 1,267 |
-| 8 | [08-febm-production-quick-start.md](topic-febm/08-febm-production-quick-start.md) | 第一周行动清单、6 个 K8s 故障取证 Runbook、KPI 仪表板 | 4,297 |
+| 总纲 | [febm-methodology-deep-dive.md](FEBM方法论/febm-methodology-deep-dive.md) | 六大部分概览，取证自动化蓝图，合规落地清单 | 1,101 |
+| 1 | [01-febm-theory-foundations.md](FEBM方法论/01-febm-theory-foundations.md) | 洛卡德原理、四大支柱、FEBM vs FTA 认识论差异、认知偏差防范 | 684 |
+| 2 | [02-febm-technical-implementation.md](FEBM方法论/02-febm-technical-implementation.md) | 证据生命周期、CRIU 检查点、eBPF 遥测、内存取证、时间线重建 | 3,388 |
+| 3 | [03-febm-best-practices.md](FEBM方法论/03-febm-best-practices.md) | 五层可观测性栈、证据采集策略、Forensics as Code、常见陷阱 | 3,163 |
+| 4 | [04-febm-agent-ticket-processing.md](FEBM方法论/04-febm-agent-ticket-processing.md) | Agent 工单处理架构、七大核心能力、完整案例、人机协同 | 2,690 |
+| 5 | [05-febm-construction-methodology.md](FEBM方法论/05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线、组织角色矩阵、预算规划 | 2,873 |
+| 6 | [06-febm-future-evolution.md](FEBM方法论/06-febm-future-evolution.md) | AI/ML 增强、OSDFIR、DevSecOps 融合、数字孪生、量子计算 | 3,916 |
+| 7 | [07-febm-appendix.md](FEBM方法论/07-febm-appendix.md) | 50+ 术语表、参考标准、40+ 工具速查表、规则模板 | 1,267 |
+| 8 | [08-febm-production-quick-start.md](FEBM方法论/08-febm-production-quick-start.md) | 第一周行动清单、6 个 K8s 故障取证 Runbook、KPI 仪表板 | 4,297 |
 
-Sources: [README.md](topic-febm/README.md#L46-L56)
+Sources: [README.md](FEBM方法论/README.md#L46-L56)
 
 ---
 
 **阅读建议**：
 
-- **SRE 实践者**：从 [生产环境快速启动](topic-febm/08-febm-production-quick-start.md) 开始，然后深入 [最佳实践](topic-febm/03-febm-best-practices.md) 和 [工单 Agent](topic-febm/04-febm-agent-ticket-processing.md)
-- **安全工程师**：从 [技术实现体系](topic-febm/02-febm-technical-implementation.md) 开始，然后阅读 [最佳实践](topic-febm/03-febm-best-practices.md) 和 [附录规则模板](topic-febm/07-febm-appendix.md)
-- **平台架构师**：从 [理论基础](topic-febm/01-febm-theory-foundations.md) 开始，然后深入 [体系建设方法论](topic-febm/05-febm-construction-methodology.md) 和 [未来演进](topic-febm/06-febm-future-evolution.md)
+- **SRE 实践者**：从 [生产环境快速启动](FEBM方法论/08-febm-production-quick-start.md) 开始，然后深入 [最佳实践](FEBM方法论/03-febm-best-practices.md) 和 [工单 Agent](FEBM方法论/04-febm-agent-ticket-processing.md)
+- **安全工程师**：从 [技术实现体系](FEBM方法论/02-febm-technical-implementation.md) 开始，然后阅读 [最佳实践](FEBM方法论/03-febm-best-practices.md) 和 [附录规则模板](FEBM方法论/07-febm-appendix.md)
+- **平台架构师**：从 [理论基础](FEBM方法论/01-febm-theory-foundations.md) 开始，然后深入 [体系建设方法论](FEBM方法论/05-febm-construction-methodology.md) 和 [未来演进](FEBM方法论/06-febm-future-evolution.md)
 - **方法论对比**：结合 [FTA 故障树分析](13-fta-gu-zhang-shu-fen-xi-cong-yan-yi-tui-li-dao-ai-agent-zhi-shi-gu-jia) 页面理解 FTA+FEBM 融合实践
 - **下一步实践**：参考 [结构化故障排查](15-jie-gou-hua-gu-zhang-pai-cha-pei-zhi-you-xian-fang-fa-lun-yu-quan-zu-jian-pai-zhang-zhi-nan) 和 [运维 Skill 库](16-yun-wei-skill-ku-ai-agent-ke-zhi-xing-de-gong-dan-zhen-duan-xiu-fu-bi-huan) 了解 FEBM 在具体故障场景中的应用

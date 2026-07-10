@@ -230,9 +230,9 @@ kubectl get pods --all-namespaces -o custom-columns='NAME:.metadata.name,SCHEDUL
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/affinity.md|亲和性]]
-- [[系统基础/topic-dictionary/scheduling/anti-affinity.md|反亲和性]]
-- [[系统基础/topic-dictionary/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[系统基础/知识字典/scheduling/affinity.md|亲和性]]
+- [[系统基础/知识字典/scheduling/anti-affinity.md|反亲和性]]
+- [[系统基础/知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
 
 
 <!-- risk-assessed -->

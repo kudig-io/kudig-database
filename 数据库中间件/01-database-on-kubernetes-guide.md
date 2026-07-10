@@ -172,8 +172,8 @@ spec:
 
 ## 相关链接
 
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
-- [[故障诊断/01-resource-troubleshooting/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]] — PVC 与存储问题排查
+- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
+- [[故障诊断/资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]] — PVC 与存储问题排查
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[数据库中间件/01-database-on-kubernetes-guide.md|mysql-operator-guide]] — MySQL Operator 详细配置
 

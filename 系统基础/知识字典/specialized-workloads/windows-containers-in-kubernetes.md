@@ -138,9 +138,9 @@ Kubernetes 支持在 Windows 节点上运行 Windows 容器（仅支持进程隔
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
-- [[系统基础/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
-- [[系统基础/topic-dictionary/specialized-workloads/guide-for-running-windows-containers-in-kubernetes.md|在 Kubernetes 中运行 Windows 容器指南]]
+- [[系统基础/知识字典/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
+- [[系统基础/知识字典/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
+- [[系统基础/知识字典/specialized-workloads/guide-for-running-windows-containers-in-kubernetes.md|在 Kubernetes 中运行 Windows 容器指南]]
 
 
 <!-- risk-assessed -->

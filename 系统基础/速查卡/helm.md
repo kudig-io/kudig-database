@@ -280,10 +280,10 @@ dependencies:
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[entities/argocd.md|ArgoCD]] — Cross-reference
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 - helm v3.1 Release Notes
 - helm v2.1 Release Notes
 - helm v3.2 Release Notes

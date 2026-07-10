@@ -62,7 +62,7 @@ version: 1.0.0
 
 1. [系统架构概述](#1-系统架构概述)
 2. [文件清单与职责](#2-文件清单与职责)
-3. [[AI基础设施/02-ai-agents/openclaw-workspace/SKILL.md|Skill]] 元系统 — 工作原理](#3-skill-元系统--工作原理)
+3. [[AI基础设施/AI-Agents/openclaw-workspace/SKILL.md|Skill]] 元系统 — 工作原理](#3-skill-元系统--工作原理)
 4. [FTA 系统 — 工作原理](#4-fta-系统--工作原理)
 5. [双向集成设计](#5-双向集成设计)
 6. [Agent 执行流程详解](#6-agent-执行流程详解)
@@ -640,7 +640,7 @@ fta_mapping:
 
 ## Related
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

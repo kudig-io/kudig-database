@@ -354,11 +354,11 @@ openssl x509 -in /etc/kubeedge/certs/edge.crt -noout -dates
 
 - [[专项技术/99-production-readiness-operations-guide.md|专项技术 生产就绪运维指南]]
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
-- [[专项技术/01-edge-computing/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
-- [[专项技术/01-edge-computing/04-kubeedge-device-edge-apps.md|KubeEdge 设备与边缘应用]]
-- [[专项技术/01-edge-computing/08-edge-storage-network.md|边缘存储与网络]]
-- [[专项技术/01-edge-computing/09-edge-security.md|边缘安全]]
-- [[集群基础/03-control-plane/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]
+- [[专项技术/边缘计算/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
+- [[专项技术/边缘计算/04-kubeedge-device-edge-apps.md|KubeEdge 设备与边缘应用]]
+- [[专项技术/边缘计算/08-edge-storage-network.md|边缘存储与网络]]
+- [[专项技术/边缘计算/09-edge-security.md|边缘安全]]
+- [[集群基础/控制平面/34-certificate-pki-lifecycle-runbook.md|Kubernetes 证书与 PKI 生命周期运维 Runbook]]
 
 
 <!-- risk-assessed -->

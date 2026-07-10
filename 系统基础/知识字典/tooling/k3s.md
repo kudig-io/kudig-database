@@ -82,11 +82,11 @@ Flannel (CNI)、CoreDNS、Traefik (Ingress)、Local Path Provisioner、Klipper (
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[系统基础/topic-dictionary/tooling/minikube.md|Minikube]]
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[系统基础/topic-dictionary/platform-engineering/rancher.md|Rancher]]
-- [[系统基础/topic-dictionary/platform-engineering/kubeedge.md|KubeEdge]]
+- [[系统基础/知识字典/fundamentals/kubernetes.md|Kubernetes]]
+- [[系统基础/知识字典/tooling/minikube.md|Minikube]]
+- [[系统基础/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[系统基础/知识字典/platform-engineering/rancher.md|Rancher]]
+- [[系统基础/知识字典/platform-engineering/kubeedge.md|KubeEdge]]
 
 
 <!-- risk-assessed -->

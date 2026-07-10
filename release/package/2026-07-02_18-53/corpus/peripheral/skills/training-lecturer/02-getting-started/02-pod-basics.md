@@ -451,7 +451,7 @@ kubectl logs <pod-name> --previous
 
 **关联文档**:
 - [../02-getting-started/](../02-getting-started/) — 快速入门
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md) — 节点问题 [[SKILL|Skill]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md](../../domain-10-troubleshooting-diagnostics/技能体系/01-node-notready.md) — 节点问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also

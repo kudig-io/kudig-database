@@ -97,9 +97,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|rbac fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|certificate fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/rbac-fta.md|rbac fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/certificate-fta.md|certificate fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/networkpolicy-fta.md|networkpolicy fta]]
 
 
 ---
@@ -120,7 +120,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - [[skills/certificate-fta.md|certificate-fta]]
-- [[domain-17-system-foundation/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+- [[domain-17-system-foundation/知识字典/security/cloud-native-security.md|cloud-native-security]]
 
 
 <!-- risk-assessed -->

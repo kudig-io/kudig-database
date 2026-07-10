@@ -22,8 +22,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|Command Output Root Cause Parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|Kubectl Watch Output Parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/00-command-output-root-cause-parser.md|Command Output Root Cause Parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/01-kubectl-watch-output-parser.md|Kubectl Watch Output Parser]]
 
 
 

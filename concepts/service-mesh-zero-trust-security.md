@@ -32,7 +32,7 @@ relationships:
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/service-mesh.md]]'
+- target: '[[系统基础/知识字典/networking/service-mesh.md]]'
   type: uses
 - target: '[[concepts/Cilium eBPF × 可观测性.md]]'
   type: uses
@@ -40,7 +40,7 @@ relationships:
 
 
 
-# [[系统基础/topic-dictionary/networking/service-mesh.md|Service Mesh]] 零信任安全架构
+# [[系统基础/知识字典/networking/service-mesh.md|Service Mesh]] 零信任安全架构
 
 ## 概述
 

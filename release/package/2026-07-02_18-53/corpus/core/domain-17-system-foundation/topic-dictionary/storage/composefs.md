@@ -67,6 +67,6 @@ ComposeFS 是 Linux 内核的只读文件系统，基于内容寻址（content-a
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/podman.md|Podman]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/bootc.md|bootc]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[domain-17-system-foundation/知识字典/tooling/podman.md|Podman]]
+- [[domain-17-system-foundation/知识字典/tooling/bootc.md|bootc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|containerd]]

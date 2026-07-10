@@ -21,7 +21,7 @@ relationships:
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/知识字典/networking/service.md]]'
   type: uses
 ---
 
@@ -396,7 +396,7 @@ kubectl无法连接
 ### 场景：无法访问 etcd 节点
 | 原命令 | 替代方案 A | 替代方案 B | 替代方案 C |
 |:---|:---|:---|:---|
-| `etcdctl endpoint health` | 通过 apiserver 间接检查：`kubectl get --raw /healthz/etcd` | 查看 etcd Pod 日志 | 检查 etcd [[系统基础/topic-dictionary/networking/service.md|Service]] Endpoint |
+| `etcdctl endpoint health` | 通过 apiserver 间接检查：`kubectl get --raw /healthz/etcd` | 查看 etcd Pod 日志 | 检查 etcd [[系统基础/知识字典/networking/service.md|Service]] Endpoint |
 | `etcdctl member list` | 查看 etcd Pod 状态推断成员数 | 使用 `kubectl get endpoints -n kube-system etcd` | 请管理员协助执行 |
 | `etcdctl snapshot save` | 检查是否有自动化备份（Velero/etcd-backup-operator） | 使用云厂商 etcd 备份功能 | 联系 DBA 或存储团队协助 |
 
@@ -445,7 +445,7 @@ kubectl无法连接
 - [[concepts/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
 ## Related
 
-- [[系统基础/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+- [[系统基础/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
 
 
 <!-- risk-assessed -->

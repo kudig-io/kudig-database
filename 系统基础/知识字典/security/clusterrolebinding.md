@@ -86,11 +86,11 @@ subjects:
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/rbac.md|Rbac]]
-- [[系统基础/topic-dictionary/security/role.md|Role]]
-- [[系统基础/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[系统基础/topic-dictionary/security/service-account.md|Service Account]]
-- [[系统基础/topic-dictionary/security/service-account-token.md|Service Account Token]]
+- [[系统基础/知识字典/security/rbac.md|Rbac]]
+- [[系统基础/知识字典/security/role.md|Role]]
+- [[系统基础/知识字典/security/clusterrole.md|Clusterrole]]
+- [[系统基础/知识字典/security/service-account.md|Service Account]]
+- [[系统基础/知识字典/security/service-account-token.md|Service Account Token]]
 
 
 <!-- risk-assessed -->

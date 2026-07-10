@@ -180,7 +180,7 @@ flowchart TD
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 
-- [[故障诊断/topic-fta/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 
 

@@ -150,7 +150,7 @@ API [[entities/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|06 certificate expiry]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/06-certificate-expiry.md|06 certificate expiry]]
 
 - [[scripts/video-scripts/node-notready.md|node notready]]
 

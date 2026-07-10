@@ -461,13 +461,13 @@ kubectl krew install ctx ns ktop stern cost neat trace sniff gadget
 
 ## Related
 
-- [[故障诊断/tools/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[故障诊断/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md|故障排查开源项目索引]]
+- [[故障诊断/工具/README.md|Domain-12 故障排查工具套件使用说明]]
+- [[故障诊断/核心排障/00-open-source-projects-index-from-domain-12.md|故障排查开源项目索引]]
 
 ## See Also
 
-- [[故障诊断/tools/02-network-diagnostic-tools.md|网络诊断工具]]
-- [[故障诊断/tools/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
+- [[故障诊断/工具/02-network-diagnostic-tools.md|网络诊断工具]]
+- [[故障诊断/工具/03-ebpf-diagnostic-tools.md|eBPF 诊断工具]]
 
 
 <!-- risk-assessed -->

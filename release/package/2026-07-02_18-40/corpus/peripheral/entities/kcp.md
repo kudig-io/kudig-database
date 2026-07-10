@@ -1,7 +1,7 @@
 ---
 title: kcp
 description: '## 概述'
-summary: 'kcp 是一个类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器，提供多租户、逻辑隔离的控制平面，不需要管理实际的容器或 Pod。'
+summary: 'kcp 是一个类 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器，提供多租户、逻辑隔离的控制平面，不需要管理实际的容器或 Pod。'
 category: entities
 tags:
 - k8s
@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-kcp 是一个类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器，提供多租户、逻辑隔离的控制平面，不需要管理实际的容器或 Pod。它利用 Kubernetes 的 API 机制（CRD、控制器、准入控制等），将其从容器编排中解耦出来，作为通用的 API 平台使用。kcp 支持在单个服务器上运行数千个逻辑集群（Workspace），每个 Workspace 拥有独立的 API 视图和资源隔离。
+kcp 是一个类 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器，提供多租户、逻辑隔离的控制平面，不需要管理实际的容器或 Pod。它利用 Kubernetes 的 API 机制（CRD、控制器、准入控制等），将其从容器编排中解耦出来，作为通用的 API 平台使用。kcp 支持在单个服务器上运行数千个逻辑集群（Workspace），每个 Workspace 拥有独立的 API 视图和资源隔离。
 
 ## 核心能力
 
@@ -83,8 +83,8 @@ kcp 是一个类 [[domain-17-system-foundation/topic-dictionary/fundamentals/the
 
 - kcp
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -775,7 +775,7 @@ symptom_mappings:
       - path: "集群基础/02-etcd-troubleshooting.md"
         type: "domain"
         relevance: 0.95
-      - path: "[[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]].md"
+      - path: "[[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]].md"
         type: "domain"
         relevance: 0.90
 
@@ -2064,11 +2064,11 @@ compliance:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[故障诊断/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting MOC]]
-- [[故障诊断/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[故障诊断/高级排障/MOC.md|topic-structural-trouble-shooting MOC]]
+- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
+- [[故障诊断/高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
 
 ## Related
 
@@ -2077,10 +2077,10 @@ compliance:
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[故障诊断/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
 
 
 <!-- risk-assessed -->

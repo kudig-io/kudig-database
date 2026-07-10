@@ -88,14 +88,14 @@ graph TD
 
 - 集群基础/07-upgrade-paths-strategy.md
 - 集群基础/18-upgrade-migration-strategy.md
-- [[发布变更/topic-migration/README.md|README]]
+- [[发布变更/迁移方案/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/cluster-upgrade-fta.md|cluster upgrade fta]]
+- [[故障诊断/FTA故障树/list/cluster-upgrade-fta.md|cluster upgrade fta]]
 
 
 ---

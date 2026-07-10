@@ -521,9 +521,9 @@ echo "=== 安全清理完成 ==="
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/git.md|git]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/git.md|git]]
 
 ```
 

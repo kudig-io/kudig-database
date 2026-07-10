@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[AI基础设施/02-ai-agents/openclaw-workspace/AGENTS.md|Agents]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/IDENTITY.md|Identity]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/MEMORY.md|Memory]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SKILL.md|Skill]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SOUL.md|Soul]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/TOOLS.md|Tools]]
-- [[AI基础设施/02-ai-agents/openclaw-workspace/USER.md|User]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/AGENTS.md|Agents]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/IDENTITY.md|Identity]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/MEMORY.md|Memory]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/SKILL.md|Skill]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/SOUL.md|Soul]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/TOOLS.md|Tools]]
+- [[AI基础设施/AI-Agents/openclaw-workspace/USER.md|User]]
 

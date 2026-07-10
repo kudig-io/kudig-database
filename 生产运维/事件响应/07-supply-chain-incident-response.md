@@ -440,13 +440,13 @@ SLSA（Supply-chain Levels for Software Artifacts）提供从源码到交付的�
 
 ## Related
 
-- [[安全/07-incident-response/20-incident-response-process.md|安全事件响应与应急处理流程]]
-- [[安全/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概述]]
+- [[生产运维/事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[安全/供应链/01-supply-chain-security-overview.md|供应链安全概述]]
 
 ## See Also
 
-- [[安全/05-supply-chain/07-sigstore-cosign-signing.md|Sigstore Cosign 镜像签名]]
-- [[安全/05-supply-chain/04-sbom-vulnerability-analysis.md|SBOM 与漏洞分析]]
+- [[安全/供应链/07-sigstore-cosign-signing.md|Sigstore Cosign 镜像签名]]
+- [[安全/供应链/04-sbom-vulnerability-analysis.md|SBOM 与漏洞分析]]
 
 
 <!-- risk-assessed -->

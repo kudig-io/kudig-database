@@ -100,11 +100,11 @@ description: '## 项目概述'
 - [[entities/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
 - [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
 - [[concepts/storage-tool-evolution.md|存储工具演进]] — Cross-reference
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

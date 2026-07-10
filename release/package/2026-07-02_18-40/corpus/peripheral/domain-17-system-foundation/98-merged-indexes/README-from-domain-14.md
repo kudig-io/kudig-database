@@ -1265,7 +1265,7 @@ K8s节点维护:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|速查卡: linux]]
+- [[domain-17-system-foundation/速查卡/linux.md|速查卡: linux]]
 
 
 <!-- risk-assessed -->

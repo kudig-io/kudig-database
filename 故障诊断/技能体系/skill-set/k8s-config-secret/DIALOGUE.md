@@ -287,9 +287,9 @@ kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 - [[concepts/case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
 ## Related
 
-- [[系统基础/03-kubernetes-events/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[系统基础/topic-cheat-sheet/git.md|Git 速查卡]]
-- [[系统基础/topic-cheat-sheet/gitops.md|GitOps 速查卡]]
+- [[系统基础/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
+- [[系统基础/速查卡/git.md|Git 速查卡]]
+- [[系统基础/速查卡/gitops.md|GitOps 速查卡]]
 
 
 <!-- risk-assessed -->

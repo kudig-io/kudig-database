@@ -727,8 +727,8 @@ kubectl port-forward svc/argo-rollouts-dashboard -n argo-rollouts 3100:3100
 
 ## Related
 
-- [[domain-08-release-change-management/01-gitops/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy|Canary 发布策略]]
+- [[domain-08-release-change-management/GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
+- [[domain-08-release-change-management/变更管理/02-canary-release-strategy|Canary 发布策略]]
 
 ## See Also
 

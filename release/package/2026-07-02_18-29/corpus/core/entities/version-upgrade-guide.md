@@ -173,7 +173,7 @@ domain-19-landscape-references/_archived-release-notes/ 目录下全部 1321 个
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - 07-upgrade-paths-strategy
 
 <!-- risk-assessed -->

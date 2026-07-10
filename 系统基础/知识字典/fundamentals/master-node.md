@@ -77,11 +77,11 @@ Master Node（主节点）是运行 Kubernetes 控制平面组件的节点。在
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
-- [[系统基础/topic-dictionary/fundamentals/container.md|Container]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[系统基础/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[系统基础/topic-dictionary/fundamentals/control-plane.md|Control Plane]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/fundamentals/container.md|Container]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/fundamentals/cluster.md|Cluster]]
+- [[系统基础/知识字典/fundamentals/control-plane.md|Control Plane]]
 
 
 <!-- risk-assessed -->

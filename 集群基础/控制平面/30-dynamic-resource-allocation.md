@@ -82,7 +82,7 @@ cross_refs:
 
 
 
-# 30 - 动态资源分配 ([[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]])
+# 30 - 动态资源分配 ([[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]])
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
 
@@ -1072,7 +1072,7 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

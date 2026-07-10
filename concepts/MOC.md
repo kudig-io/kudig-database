@@ -12,7 +12,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[平台工程/operate/13-multi-cluster-management.md]]'
+- target: '[[平台工程/运维/13-multi-cluster-management.md]]'
   type: uses
 - target: '[[concepts/Deployment × Secret 管理.md]]'
   type: uses
@@ -88,14 +88,14 @@ relationships:
 - Pod 生命周期 × Secret 管理 — Secret 注入
 - [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]] — 部署与 Secret
 - Secret 管理 × 存储模型 — Secret 存储
-- IaC × [[平台工程/operate/13-multi-cluster-management.md|多集群管理]] — 基础设施即代码
+- IaC × [[平台工程/运维/13-multi-cluster-management.md|多集群管理]] — 基础设施即代码
 
 ### SRE/可靠性
 
 - [[concepts/slo-monitoring-integration.md|SLO × 监控集成]] — SLO 监控
 - K8s 问题分布与 MTTR 基准 — 问题统计
 - [[entities/kubernetes.md|Kubernetes]] Fault Distribution and MTTR.md|K8s 问题分布 (EN)]] — 英文版
-- [[系统基础/topic-dictionary/operations/production-troubleshooting-playbook.md|生产故障排查手册]] — 综合排查
+- [[系统基础/知识字典/operations/production-troubleshooting-playbook.md|生产故障排查手册]] — 综合排查
 - [[concepts/Structural Troubleshooting Framework.md|结构化故障排查框架]] — 方法论
 
 ---

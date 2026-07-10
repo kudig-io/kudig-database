@@ -83,11 +83,11 @@ Seldon 是 ML 模型部署和推理管理平台，提供 Seldon Core（K8s 原�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/ray.md|Ray]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/ray.md|Ray]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

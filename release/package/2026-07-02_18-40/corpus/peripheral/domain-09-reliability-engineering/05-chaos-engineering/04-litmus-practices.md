@@ -147,8 +147,8 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment.md|02 chaos mesh deployment]]
+- [[domain-09-reliability-engineering/混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[domain-09-reliability-engineering/混沌工程/02-chaos-mesh-deployment.md|02 chaos mesh deployment]]
 
 ```
 

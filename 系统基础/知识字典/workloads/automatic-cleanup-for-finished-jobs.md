@@ -47,7 +47,7 @@ prerequisites:
 # Automatic Cleanup for Finished [[Jobs|Jobs]]
 
 ## 概述
-TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] 压力。
+TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间（TTL）的自动清理机制。它有助于减少 API Server 中已完成 Job 的累积，降低 [[系统基础/知识字典/fundamentals/etcd.md|etcd]] 压力。
 
 ## 核心概念/原理
 - **触发时机**：计时器在 Job 状态变为 `Complete` 或 `Failed` 时开始计时。
@@ -217,9 +217,9 @@ kubectl get jobs -A --no-headers | wc -l
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
-- [[系统基础/topic-dictionary/workloads/container-environment.md|容器环境（Container Environment）]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/container-environment.md|容器环境（Container Environment）]]
 
 
 <!-- risk-assessed -->

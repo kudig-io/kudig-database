@@ -75,9 +75,9 @@ Paralus 是 CNCF Sandbox 项目，为 Kubernetes 提供集中式的访问控制�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/security/keycloak.md|Keycloak]]
-- [[系统基础/topic-dictionary/security/dex.md|Dex]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/keycloak.md|Keycloak]]
+- [[系统基础/知识字典/security/dex.md|Dex]]
 
 
 <!-- risk-assessed -->

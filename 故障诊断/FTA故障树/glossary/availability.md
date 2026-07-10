@@ -64,4 +64,4 @@ A = 正常运行时间 / (正常运行时间 + 故障时间) × 100%
 
 ## Related
 
-- [[故障诊断/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[故障诊断/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

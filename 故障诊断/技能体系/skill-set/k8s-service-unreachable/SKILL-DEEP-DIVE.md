@@ -62,7 +62,7 @@ authors:
 
 # Service 无法访问 深度解析
 
-> 本文是 [[故障诊断/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复]] 的深度补充，系统梳理 Endpoints 为空、Endpoints 有但不可达、DNS 失败、kube-proxy 异常、SLB 后端异常五类核心场景的决策树，并重点覆盖阿里云/专有云环境。
+> 本文是 [[故障诊断/技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复]] 的深度补充，系统梳理 Endpoints 为空、Endpoints 有但不可达、DNS 失败、kube-proxy 异常、SLB 后端异常五类核心场景的决策树，并重点覆盖阿里云/专有云环境。
 
 ## 1. 决策树：Service 为什么不可达
 
@@ -275,10 +275,10 @@ kubectl logs -n kube-system -l component=cloud-controller-manager --tail=100
 ```
 ## 9. 相关链接
 
-- [[故障诊断/topic-fta/list/service-fta.md|Service 异常 FTA 树]]
-- [[故障诊断/topic-skills/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 Skill]]
+- [[故障诊断/FTA故障树/list/service-fta.md|Service 异常 FTA 树]]
+- [[故障诊断/技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 Skill]]
 - Terway 网络专题
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ## Related
 

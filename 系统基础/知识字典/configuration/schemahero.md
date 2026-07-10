@@ -69,6 +69,6 @@ SchemaHero 是 Replicated 开源的 CNCF Sandbox 项目，以 GitOps 方式管�
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/cloudnativepg.md|CloudNativePG]]
-- [[系统基础/topic-dictionary/operations/flux.md|Flux]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
+- [[系统基础/知识字典/storage/cloudnativepg.md|CloudNativePG]]
+- [[系统基础/知识字典/operations/flux.md|Flux]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]

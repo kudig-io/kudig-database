@@ -57,4 +57,4 @@ R(t) = 1 - F(t)（F(t) 为累积故障分布函数）
 
 ## Related
 
-- [[故障诊断/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[故障诊断/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

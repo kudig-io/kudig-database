@@ -601,24 +601,24 @@ related:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
 
 ```
 

@@ -59,4 +59,4 @@ House Event 用于简化故障树建模，将正常操作与故障事件区分�
 
 ## Related
 
-- [[故障诊断/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[故障诊断/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

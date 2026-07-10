@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/12-volcengine-vek/volcengine-vek-overview.md|Volcengine Vek Overview]]
+- [[domain-12-cloud-providers/其他云/火山引擎-VEK/volcengine-vek-overview.md|Volcengine Vek Overview]]
 

@@ -54,7 +54,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/scheduling/hpa.md]]'
+- target: '[[系统基础/知识字典/scheduling/hpa.md]]'
   type: related_to
 - target: '[[entities/prometheus.md]]'
   type: related_to

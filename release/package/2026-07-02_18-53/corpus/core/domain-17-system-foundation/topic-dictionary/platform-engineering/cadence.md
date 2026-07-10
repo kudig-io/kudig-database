@@ -68,6 +68,6 @@ Cadence 是 Uber 开源的分布式工作流引擎（后由 Uber 团队成立独
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/dapr.md|Dapr]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/serverless-workflow.md|Serverless Workflow]]
-- [[domain-17-system-foundation/topic-dictionary/operations/tekton.md|Tekton]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/dapr.md|Dapr]]
+- [[domain-17-system-foundation/知识字典/workloads/serverless-workflow.md|Serverless Workflow]]
+- [[domain-17-system-foundation/知识字典/operations/tekton.md|Tekton]]

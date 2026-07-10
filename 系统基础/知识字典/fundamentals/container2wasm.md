@@ -73,9 +73,9 @@ container2wasm 是 containerd 作者之一 Kazuyoshi Kato 开源的工具，将 
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/wasmedge.md|WasmEdge]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[系统基础/知识字典/fundamentals/wasmedge.md|WasmEdge]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/fundamentals/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

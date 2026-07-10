@@ -21,5 +21,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md|Skill Deep Dive]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md|Skill Deep Dive]]
 

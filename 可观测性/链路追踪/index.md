@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可观测性/04-tracing/01-jaeger-production-deployment.md|Jaeger Production Deployment]]
-- [[可观测性/04-tracing/02-grafana-tempo-tracing.md|Grafana Tempo Tracing]]
-- [[可观测性/04-tracing/03-opentelemetry-collector-patterns.md|Opentelemetry Collector Patterns]]
-- [[可观测性/04-tracing/03-opentelemetry-distributed-tracing.md|Opentelemetry Distributed Tracing]]
-- [[可观测性/04-tracing/04-distributed-tracing.md|Distributed Tracing]]
-- [[可观测性/04-tracing/99-distributed-tracing-guide.md|Distributed Tracing Guide]]
+- [[可观测性/链路追踪/01-jaeger-production-deployment.md|Jaeger Production Deployment]]
+- [[可观测性/链路追踪/02-grafana-tempo-tracing.md|Grafana Tempo Tracing]]
+- [[可观测性/链路追踪/03-opentelemetry-collector-patterns.md|Opentelemetry Collector Patterns]]
+- [[可观测性/链路追踪/03-opentelemetry-distributed-tracing.md|Opentelemetry Distributed Tracing]]
+- [[可观测性/链路追踪/04-distributed-tracing.md|Distributed Tracing]]
+- [[可观测性/链路追踪/99-distributed-tracing-guide.md|Distributed Tracing Guide]]
 

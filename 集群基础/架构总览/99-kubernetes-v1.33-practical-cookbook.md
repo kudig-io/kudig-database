@@ -262,7 +262,7 @@ kubectl run test --image=nginx:1.25 --dry-run=server
 
 ### 场景
 
-[[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (v1.33 GA) 允许 Pod 请求 GPU/FPGA 等外部资源，替代 Device Plugin 方案。
+[[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (v1.33 GA) 允许 Pod 请求 GPU/FPGA 等外部资源，替代 Device Plugin 方案。
 
 ### 前置条件
 

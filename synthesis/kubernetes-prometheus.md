@@ -67,8 +67,8 @@ Kubernetes 解决"如何运行应用"，Prometheus 解决"运行得怎么样"。
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kubernetes.md|Kubernetes]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/fundamentals/kubernetes.md|Kubernetes]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
 - [[concepts/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
 - [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
 - [[concepts/bp-observability.md|最佳实践：Observability]]

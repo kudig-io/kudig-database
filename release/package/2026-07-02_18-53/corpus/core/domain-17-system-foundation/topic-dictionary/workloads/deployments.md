@@ -267,7 +267,7 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [工作负载监控与告警](../../domain-02-workloads-applications/06-workload-monitoring-alerting.md)
 - [工作负载故障排查手册](../../domain-02-workloads-applications/07-workload-troubleshooting-handbook.md)
-- [Deployment 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/deployment-fta.md)
+- [Deployment 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/deployment-fta.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 
 ## 参考链接
@@ -275,9 +275,9 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

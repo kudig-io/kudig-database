@@ -620,8 +620,8 @@ kubectl get pods -l app=web-frontend -w
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
 - [[README|README]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[concepts/deployment-controller-architecture.md|deployment-controller-architecture]]
 - [[entities/kubernetes.md|kubernetes]]
 

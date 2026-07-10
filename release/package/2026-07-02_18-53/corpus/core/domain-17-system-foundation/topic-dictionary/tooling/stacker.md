@@ -74,9 +74,9 @@ Stacker 是 Project Atomic（Red Hat）开源的容器镜像构建工具，使�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/buildpacks.md|Buildpacks]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/shipwright.md|Shipwright]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/tooling/buildpacks.md|Buildpacks]]
+- [[domain-17-system-foundation/知识字典/tooling/shipwright.md|Shipwright]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
 
 
 <!-- risk-assessed -->

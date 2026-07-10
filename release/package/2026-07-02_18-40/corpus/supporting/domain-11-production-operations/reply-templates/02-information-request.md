@@ -348,13 +348,13 @@ kubectl get svc -n production
 
 ## Related
 
-- [[domain-11-production-operations/reply-templates/README.md|工单回复话术库索引]]
+- [[domain-11-production-operations/回复话术/README.md|工单回复话术库索引]]
 - [[domain-11-production-operations/ticket-routing-rules.md|工单分类与路由规则]]
 
 ## See Also
 
-- [[domain-11-production-operations/reply-templates/01-acknowledgment.md|确认收到话术]]
-- [[domain-11-production-operations/reply-templates/03-solution-proposal.md|给出方案话术]]
+- [[domain-11-production-operations/回复话术/01-acknowledgment.md|确认收到话术]]
+- [[domain-11-production-operations/回复话术/03-solution-proposal.md|给出方案话术]]
 
 
 <!-- risk-assessed -->

@@ -70,6 +70,6 @@ bpfman 是 Red Hat 开源的 CNCF Sandbox 项目，作为系统级守护进程�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/cilium.md|Cilium]]
-- [[系统基础/topic-dictionary/observability/pixie.md|Pixie]]
-- [[系统基础/topic-dictionary/security/falco.md|Falco]]
+- [[系统基础/知识字典/networking/cilium.md|Cilium]]
+- [[系统基础/知识字典/observability/pixie.md|Pixie]]
+- [[系统基础/知识字典/security/falco.md|Falco]]

@@ -74,9 +74,9 @@ Flatcar Container Linux 是 Kinvolk（现微软）维护的不可变容器操作
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/bootc.md|bootc]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[系统基础/知识字典/tooling/bootc.md|bootc]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/fundamentals/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

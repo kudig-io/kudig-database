@@ -685,8 +685,8 @@ kustomize build overlays/prod | grep -A 20 "kind: ConfigMap"
 
 ## Related
 
-- [[清单模式/02-kustomize-patterns/02-kustomize-transformers-reference|Kustomize Transformers 参考]]
-- [[清单模式/02-kustomize-patterns/03-kustomize-remote-build-gitops|Kustomize 高级特性与 GitOps]]
+- [[清单模式/Kustomize模式/02-kustomize-transformers-reference|Kustomize Transformers 参考]]
+- [[清单模式/Kustomize模式/03-kustomize-remote-build-gitops|Kustomize 高级特性与 GitOps]]
 
 ## See Also
 

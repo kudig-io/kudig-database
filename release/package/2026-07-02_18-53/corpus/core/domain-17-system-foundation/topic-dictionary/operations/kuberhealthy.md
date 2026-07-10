@@ -70,6 +70,6 @@ Kuberhealthy 是 CNCF Sandbox 项目，在 Kubernetes 上运行合成监控检�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/operations/kube-burner.md|kube-burner]]
-- [[domain-17-system-foundation/topic-dictionary/observability/kepler.md|Kepler]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/operations/kube-burner.md|kube-burner]]
+- [[domain-17-system-foundation/知识字典/observability/kepler.md|Kepler]]

@@ -70,18 +70,18 @@ prerequisites:
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
 - Envoy Proxy 企业级服务网格数据平面深度实践
-- [[数据库中间件/01-databases/03-distributed-database-enterprise.md|03 distributed database enterprise]]
+- [[数据库中间件/数据库/03-distributed-database-enterprise.md|03 distributed database enterprise]]
 - Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践
 
 ### 入门指南
 
 - Istio 企业级服务网格入门指南
 - Linkerd 轻量级服务网格实践指南
-- [[工作负载/00-core-workloads/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
+- [[工作负载/核心工作负载/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
 
 ### 故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
 
 ### CNCF 生态
 
@@ -99,12 +99,12 @@ prerequisites:
 ### 网络与安全
 
 - 网络加密与mTLS
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[故障诊断/高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
+- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
 
 ### 可观测性
 
-- [[系统基础/topic-dictionary/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
+- [[系统基础/知识字典/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
 - 服务网格与微服务架构设计
 
 ### 技术论文
@@ -119,19 +119,19 @@ prerequisites:
 
 ### 网络相关
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 安全相关
 
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
+- [[系统基础/知识字典/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/networking/service-mesh.md|服务网格（Service Mesh）]]
-- [[系统基础/topic-dictionary/networking/gateway-api.md|Gateway API]]
-- [[系统基础/topic-dictionary/networking/network-policies.md|网络策略（Network Policies）]]
+- [[系统基础/知识字典/networking/service-mesh.md|服务网格（Service Mesh）]]
+- [[系统基础/知识字典/networking/gateway-api.md|Gateway API]]
+- [[系统基础/知识字典/networking/network-policies.md|网络策略（Network Policies）]]
 
 
 <!-- risk-assessed -->

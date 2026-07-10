@@ -80,11 +80,11 @@ GitOps 是一种以 Git 仓库作为基础设施和应用配置的唯一真实�
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/flux.md|Flux]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/flux.md|Flux]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

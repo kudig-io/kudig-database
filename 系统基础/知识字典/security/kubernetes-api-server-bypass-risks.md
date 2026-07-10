@@ -49,7 +49,7 @@ Kubernetes API server 是外部用户和服务与集群交互的主要入口。�
 
 ## 核心概念/原理
 
-攻击者如果能够直接访问某些组件或配置，就可以在不经过 API server 的情况下创建、修改或删除集群中的资源，从而绕过 API server 的审计和准入控制。主要风险点包括：Static [[Pods|Pods]]、[[kubelet|Kubelet]] API、[[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] API 和容器运行时套接字。
+攻击者如果能够直接访问某些组件或配置，就可以在不经过 API server 的情况下创建、修改或删除集群中的资源，从而绕过 API server 的审计和准入控制。主要风险点包括：Static [[Pods|Pods]]、[[kubelet|Kubelet]] API、[[系统基础/知识字典/fundamentals/etcd.md|etcd]] API 和容器运行时套接字。
 
 ## 关键机制或特性
 
@@ -121,11 +121,11 @@ Kubernetes 集群使用 etcd 作为数据存储。etcd 服务通常在 TCP **237
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/rbac.md|Rbac]]
-- [[系统基础/topic-dictionary/security/role.md|Role]]
-- [[系统基础/topic-dictionary/security/clusterrole.md|Clusterrole]]
-- [[系统基础/topic-dictionary/security/rolebinding.md|Rolebinding]]
-- [[系统基础/topic-dictionary/security/clusterrolebinding.md|Clusterrolebinding]]
+- [[系统基础/知识字典/security/rbac.md|Rbac]]
+- [[系统基础/知识字典/security/role.md|Role]]
+- [[系统基础/知识字典/security/clusterrole.md|Clusterrole]]
+- [[系统基础/知识字典/security/rolebinding.md|Rolebinding]]
+- [[系统基础/知识字典/security/clusterrolebinding.md|Clusterrolebinding]]
 
 
 <!-- risk-assessed -->

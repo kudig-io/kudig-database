@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/14-ecloud-cke/ecloud-cke-overview.md|Ecloud Cke Overview]]
+- [[domain-12-cloud-providers/其他云/移动云-CKE/ecloud-cke-overview.md|Ecloud Cke Overview]]
 

@@ -94,16 +94,16 @@ graph TD
 - 集群基础/07-upgrade-paths-strategy.md
 - 集群基础/03-plane-high-availability.md
 - [[平台工程/README.md|README]]
-- [[发布变更/topic-deployment/README.md|README]]
+- [[发布变更/部署方案/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/apiserver-fta.md|apiserver fta]]
-- [[故障诊断/topic-fta/list/etcd-fta.md|etcd fta]]
-- [[故障诊断/topic-fta/list/node-fta.md|node fta]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|apiserver fta]]
+- [[故障诊断/FTA故障树/list/etcd-fta.md|etcd fta]]
+- [[故障诊断/FTA故障树/list/node-fta.md|node fta]]
 
 
 ---

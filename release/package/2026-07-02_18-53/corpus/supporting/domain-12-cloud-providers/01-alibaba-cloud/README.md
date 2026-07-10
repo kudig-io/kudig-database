@@ -17,12 +17,12 @@ last_updated: 2026-05-23
 
 | # | 文档 | 说明 |
 |---|:---|:---|
-| 1 | [[domain-12-cloud-providers/01-alibaba-cloud/01-专有云架构概述.md|01 专有云架构概述]] | 阿里云专有云产品矩阵、部署模式、与公有云差异 |
-| 2 | [[domain-12-cloud-providers/01-alibaba-cloud/02-ACK集群运维.md|02 ACK集群运维]] | ACK专有版/托管版集群管理、日志监控、安全 |
-| 3 | [[domain-12-cloud-providers/01-alibaba-cloud/03-Terway-CNI网络.md|03 Terway CNI网络]] | Terway模式详解、常见问题排查、IP管理 |
-| 4 | [[domain-12-cloud-providers/01-alibaba-cloud/04-阿里云存储集成.md|04 阿里云存储集成]] | 云盘/ESSD、NAS、OSS、CSI驱动 |
-| 5 | [[domain-12-cloud-providers/01-alibaba-cloud/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] | SLB/ALB/NLB、Ingress Controller、CDN/WAF |
-| 6 | [[domain-12-cloud-providers/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] | 远程诊断方法论、受限场景替代方案、升级话术 |
+| 1 | [[domain-12-cloud-providers/阿里云/01-专有云架构概述.md|01 专有云架构概述]] | 阿里云专有云产品矩阵、部署模式、与公有云差异 |
+| 2 | [[domain-12-cloud-providers/阿里云/02-ACK集群运维.md|02 ACK集群运维]] | ACK专有版/托管版集群管理、日志监控、安全 |
+| 3 | [[domain-12-cloud-providers/阿里云/03-Terway-CNI网络.md|03 Terway CNI网络]] | Terway模式详解、常见问题排查、IP管理 |
+| 4 | [[domain-12-cloud-providers/阿里云/04-阿里云存储集成.md|04 阿里云存储集成]] | 云盘/ESSD、NAS、OSS、CSI驱动 |
+| 5 | [[domain-12-cloud-providers/阿里云/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] | SLB/ALB/NLB、Ingress Controller、CDN/WAF |
+| 6 | [[domain-12-cloud-providers/阿里云/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] | 远程诊断方法论、受限场景替代方案、升级话术 |
 
 ## 适用场景
 

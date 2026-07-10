@@ -74,8 +74,8 @@ PV的配置和状态也会反过来影响StatefulSet：
 
 - [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[entities/argo.md|Argo Workflows]]
-- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
-- [[故障诊断/topic-skills/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[故障诊断/技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
+- [[故障诊断/技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md|DIALOGUE]]
 - [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
 - [[concepts/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
 - [[concepts/Deployment-×-PVC.md|Deployment-×-PVC]]

@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可观测性/05-alerting/01-alertmanager-deep-configuration.md|Alertmanager Deep Configuration]]
-- [[可观测性/05-alerting/02-pagerduty-opsgenie-integration.md|Pagerduty Opsgenie Integration]]
-- [[可观测性/05-alerting/03-alert-fatigue-reduction-strategies.md|Alert Fatigue Reduction Strategies]]
-- [[可观测性/05-alerting/05-alerting-management.md|Alerting Management]]
-- [[可观测性/05-alerting/06-monitoring-alerting-practice.md|Monitoring Alerting Practice]]
-- [[可观测性/05-alerting/21-monitoring-playbooks.md|Monitoring Playbooks]]
+- [[可观测性/告警/01-alertmanager-deep-configuration.md|Alertmanager Deep Configuration]]
+- [[可观测性/告警/02-pagerduty-opsgenie-integration.md|Pagerduty Opsgenie Integration]]
+- [[可观测性/告警/03-alert-fatigue-reduction-strategies.md|Alert Fatigue Reduction Strategies]]
+- [[可观测性/告警/05-alerting-management.md|Alerting Management]]
+- [[可观测性/告警/06-monitoring-alerting-practice.md|Monitoring Alerting Practice]]
+- [[可观测性/告警/21-monitoring-playbooks.md|Monitoring Playbooks]]
 

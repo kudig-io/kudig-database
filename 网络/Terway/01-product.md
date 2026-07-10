@@ -356,7 +356,7 @@ Terway 以 Apache 2.0 协议开源，允许自由使用、修改和分发。ACK 
 | 文档 | 说明 |
 |:---|:---|
 | [02-architecture.md](./02-architecture.md) | Terway 架构原理深度解析 (数据面/控制面/IPAM/CRD) |
-| [03-usage.md](./[[网络/topic-terway/03-usage.md|03-usage]].md) | 使用指南 (安装配置、模式切换、NetworkPolicy、固定 IP) |
+| [03-usage.md](./[[网络/Terway/03-usage.md|03-usage]].md) | 使用指南 (安装配置、模式切换、NetworkPolicy、固定 IP) |
 | [04-operations.md](./04-operations.md) | 运维手册 (健康检查、GC 机制、升级策略、故障排查) |
 | [05-testing.md](./05-testing.md) | 测试验证 (Pod 网络连通性、NetworkPolicy 测试、ENI 配额验证) |
 | [06-performance.md](./06-performance.md) | 性能调优 (模式对比、内核调优、基准测试) |
@@ -380,8 +380,8 @@ Terway 以 Apache 2.0 协议开源，允许自由使用、修改和分发。ACK 
 |:---|:---|
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训演示 |
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Terway CNI 入门学习材料 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/topic-fta/list/terway-fta.md) | Terway 异常 FTA 故障树分析 |
+| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树分析 |
 
 ---
 
@@ -389,7 +389,7 @@ Terway 以 Apache 2.0 协议开源，允许自由使用、修改和分发。ACK 
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

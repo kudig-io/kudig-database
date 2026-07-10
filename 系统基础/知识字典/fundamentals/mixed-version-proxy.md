@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-Mixed Version Proxy 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 1.28 引入的 Alpha 特性（默认关闭），它允许 API 服务器将资源请求代理给其他对等（peer）API 服务器，同时使客户端能够通过发现机制获得整个集群资源的完整视图。这在集群中运行多个不同版本的 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器时非常有用（例如在进行长时间的滚动升级期间）。
+Mixed Version Proxy 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 1.28 引入的 Alpha 特性（默认关闭），它允许 API 服务器将资源请求代理给其他对等（peer）API 服务器，同时使客户端能够通过发现机制获得整个集群资源的完整视图。这在集群中运行多个不同版本的 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器时非常有用（例如在进行长时间的滚动升级期间）。
 
 ## 核心概念/原理
 
@@ -100,9 +100,9 @@ application/json;g=apidiscovery.k8s.io;v=v2;as=APIGroupDiscoveryList;profile=nop
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
-- [[系统基础/topic-dictionary/fundamentals/annotations.md|注解]]
-- [[系统基础/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[系统基础/知识字典/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[系统基础/知识字典/fundamentals/annotations.md|注解]]
+- [[系统基础/知识字典/fundamentals/bpfman.md|bpfman eBPF 管理器]]
 
 
 <!-- risk-assessed -->

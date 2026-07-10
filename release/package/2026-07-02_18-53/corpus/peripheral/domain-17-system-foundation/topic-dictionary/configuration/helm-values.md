@@ -74,9 +74,9 @@ Helm Values 是 Helm Chart 的参数化配置机制，通过 values.yaml 文件�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|ConfigMap]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|Environment Variables]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/configuration/configmap.md|ConfigMap]]
+- [[domain-17-system-foundation/知识字典/configuration/env.md|Environment Variables]]
 
 
 <!-- risk-assessed -->

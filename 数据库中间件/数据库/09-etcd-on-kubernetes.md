@@ -423,25 +423,25 @@ ps aux | grep kube-apiserver | grep -E 'request-timeout|watch-cache|etcd-compact
 ### 同域核心文档
 
 - [[数据库中间件/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
-- [[数据库中间件/01-databases/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 部署概览]]
+- [[数据库中间件/数据库/04-database-middleware-kubernetes.md|数据库中间件 Kubernetes 部署概览]]
 
 ### 控制面与性能调优
 
 - [[集群基础/99-production-readiness-operations-guide.md|集群基础生产就绪运维指南]]
 - [[集群基础/99-kubernetes-production-architecture-blueprint.md|Kubernetes 生产架构蓝图]]
-- [[集群基础/07-performance-tuning/04-apiserver-etcd-performance-tuning.md|API Server 与 etcd 性能调优]]
+- [[集群基础/性能调优/04-apiserver-etcd-performance-tuning.md|API Server 与 etcd 性能调优]]
 
 ### 备份恢复与灾备
 
 - [[可靠性/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
-- [[可靠性/01-backup-recovery/01-etcd-backup-restore.md|etcd 备份与恢复]]
-- [[可靠性/09-disaster-recovery-playbooks/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
-- [[可靠性/09-disaster-recovery-playbooks/06-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
-- [[可靠性/09-disaster-recovery-playbooks/09-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
+- [[可靠性/备份恢复/01-etcd-backup-restore.md|etcd 备份与恢复]]
+- [[可靠性/灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
+- [[可靠性/灾难恢复/06-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
+- [[可靠性/灾难恢复/09-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
 
 ### 工单案例
 
-- [[生产运维/ticket-cases/ticket-case-009-etcd-disk-full-apiserver-slow.md|工单案例 009：etcd 磁盘满导致 API Server 变慢]]
+- [[生产运维/工单案例/ticket-case-009-etcd-disk-full-apiserver-slow.md|工单案例 009：etcd 磁盘满导致 API Server 变慢]]
 
 ---
 

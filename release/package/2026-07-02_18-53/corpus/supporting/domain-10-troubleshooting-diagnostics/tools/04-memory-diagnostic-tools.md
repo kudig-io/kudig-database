@@ -730,7 +730,7 @@ grep -i huge /proc/meminfo
 
 - domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/
 - [[domain-10-troubleshooting-diagnostics/tools/03-ebpf-diagnostic-tools|eBPF 诊断工具]]
-- [[domain-17-system-foundation/topic-cheat-sheet/linux.md|Linux 速查卡]]
+- [[domain-17-system-foundation/速查卡/linux.md|Linux 速查卡]]
 
 ## See Also
 

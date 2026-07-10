@@ -1453,7 +1453,7 @@ echo "✅ CRD健康检查完成"
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - 02 - Operator开发模式与控制器实现
 - 03 - 准入控制器(Webhook)配置与实现
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the kubernetes api]]
+- [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|the kubernetes api]]
 - 包管理与应用分发工具
 - 47 - Helm Chart开发与管理
 - 129 - Helm 高级运维：复杂部署、CI/CD 集成与安全最佳实践

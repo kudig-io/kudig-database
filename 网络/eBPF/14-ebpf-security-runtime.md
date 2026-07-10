@@ -670,9 +670,9 @@ kubectl get events -A --field-selector reason=SecurityViolation
 
 ## Related
 
-- [[专项技术/05-ebpf-programming/01-ebpf-programming-fundamentals|eBPF 开发基础]]
-- [[专项技术/05-ebpf-programming/02-ebpf-observability-tools|eBPF 可观测工具]]
-- [[专项技术/05-ebpf-programming/03-ebpf-networking-applications|eBPF 网络应用]]
+- [[网络/eBPF/01-ebpf-programming-fundamentals|eBPF 开发基础]]
+- [[网络/eBPF/02-ebpf-observability-tools|eBPF 可观测工具]]
+- [[网络/eBPF/03-ebpf-networking-applications|eBPF 网络应用]]
 
 ## See Also
 

@@ -17,17 +17,17 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-03-networking-traffic/topic-terway/README.md|Readme]]
+- [[domain-03-networking-traffic/Terway/README.md|Readme]]
 
 ## 文档
 
-- [[domain-03-networking-traffic/topic-terway/01-product.md|Product]]
-- [[domain-03-networking-traffic/topic-terway/02-architecture.md|Architecture]]
-- [[domain-03-networking-traffic/topic-terway/03-usage.md|Usage]]
-- [[domain-03-networking-traffic/topic-terway/03b-crd-operations.md|03B Crd Operations]]
-- [[domain-03-networking-traffic/topic-terway/04-operations.md|Operations]]
-- [[domain-03-networking-traffic/topic-terway/05-testing.md|Testing]]
-- [[domain-03-networking-traffic/topic-terway/06-performance.md|Performance]]
-- [[domain-03-networking-traffic/topic-terway/07-troubleshooting-fta.md|Troubleshooting Fta]]
-- [[domain-03-networking-traffic/topic-terway/terway-index.md|Terway Index]]
+- [[domain-03-networking-traffic/Terway/01-product.md|Product]]
+- [[domain-03-networking-traffic/Terway/02-architecture.md|Architecture]]
+- [[domain-03-networking-traffic/Terway/03-usage.md|Usage]]
+- [[domain-03-networking-traffic/Terway/03b-crd-operations.md|03B Crd Operations]]
+- [[domain-03-networking-traffic/Terway/04-operations.md|Operations]]
+- [[domain-03-networking-traffic/Terway/05-testing.md|Testing]]
+- [[domain-03-networking-traffic/Terway/06-performance.md|Performance]]
+- [[domain-03-networking-traffic/Terway/07-troubleshooting-fta.md|Troubleshooting Fta]]
+- [[domain-03-networking-traffic/Terway/terway-index.md|Terway Index]]
 

@@ -378,8 +378,8 @@ RocketMQ 在 Kubernetes 中的工单主要集中在消息发送失败、消费�
 
 ## 10. 相关文档
 
-- [[数据库中间件/03-message-queues/03-message-queue-comparison.md|消息队列选型对比]]
-- [[数据库中间件/01-databases/08-kafka-kubernetes-strimzi.md|Kafka on Kubernetes Strimzi]]
+- [[数据库中间件/消息队列/03-message-queue-comparison.md|消息队列选型对比]]
+- [[数据库中间件/数据库/08-kafka-kubernetes-strimzi.md|Kafka on Kubernetes Strimzi]]
 - Kubernetes 存储架构概述
 
 

@@ -69,6 +69,6 @@ HAMi（Heterogeneous AI Computing Middleware）是 CNCF Sandbox 项目，为 Kub
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/koordinator.md|Koordinator]]
-- [[系统基础/topic-dictionary/scheduling/volcano.md|Volcano]]
-- [[系统基础/topic-dictionary/scheduling/kaito.md|KAITO]]
+- [[系统基础/知识字典/scheduling/koordinator.md|Koordinator]]
+- [[系统基础/知识字典/scheduling/volcano.md|Volcano]]
+- [[系统基础/知识字典/scheduling/kaito.md|KAITO]]

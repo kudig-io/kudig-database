@@ -304,7 +304,7 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
-# 参见 [[domain-05-security-compliance/05-supply-chain/14-supply-chain-security-runbook.md|供应链安全运维 Runbook]]
+# 参见 [[domain-05-security-compliance/供应链/14-supply-chain-security-runbook.md|供应链安全运维 Runbook]]
 # 最小示例：禁止未签名镜像
 cat <<EOF | kubectl apply -f -
 apiVersion: kyverno.io/v1
@@ -402,10 +402,10 @@ kubectl rollout restart ds/falco -n falco
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[domain-13-container-runtime/99-production-readiness-operations-guide.md|容器运行时 生产就绪运维指南]]
-- [[domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[domain-13-container-runtime/03-containerd-cri-o/04-kata-containers-secure-container.md|Kata Containers 安全容器]]
-- [[domain-13-container-runtime/03-containerd-cri-o/05-gvisor-sandbox-runtime.md|gVisor 沙箱运行时]]
-- [[domain-05-security-compliance/05-supply-chain/14-supply-chain-security-runbook.md|供应链安全运维 Runbook]]
+- [[domain-13-container-runtime/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[domain-13-container-runtime/containerd-CRI-O/04-kata-containers-secure-container.md|Kata Containers 安全容器]]
+- [[domain-13-container-runtime/containerd-CRI-O/05-gvisor-sandbox-runtime.md|gVisor 沙箱运行时]]
+- [[domain-05-security-compliance/供应链/14-supply-chain-security-runbook.md|供应链安全运维 Runbook]]
 - [[domain-05-security-compliance/99-production-readiness-operations-guide.md|安全与合规 生产就绪运维指南]]
 
 ---

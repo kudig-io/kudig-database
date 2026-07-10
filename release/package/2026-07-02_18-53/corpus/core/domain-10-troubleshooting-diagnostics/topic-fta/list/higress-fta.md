@@ -97,10 +97,10 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 - [[certificate-fta]] — 证书异常故障树分析
 - [[envoy]] — Envoy
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md|Higress 网关异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/higress-fta.md|Higress 网关异常故障树分析]]
 - [[skills/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
 - [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

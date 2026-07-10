@@ -67,6 +67,6 @@ openGemini 是华为开源的 CNCF Sandbox 时序数据库，兼容 InfluxDB 协
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/thanos.md|Thanos]]
-- [[domain-17-system-foundation/topic-dictionary/observability/mimir.md|Mimir]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/thanos.md|Thanos]]
+- [[domain-17-system-foundation/知识字典/observability/mimir.md|Mimir]]

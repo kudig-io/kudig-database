@@ -84,7 +84,7 @@ Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包�
 
 - open-policy-containers
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

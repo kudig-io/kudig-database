@@ -87,11 +87,11 @@ minikube tunnel                   # 暴露 LoadBalancer Service
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|Kubeadm]]
-- [[系统基础/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[系统基础/topic-dictionary/fundamentals/node.md|Node]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/tooling/kubectl.md|Kubectl]]
+- [[系统基础/知识字典/tooling/kubeadm.md|Kubeadm]]
+- [[系统基础/知识字典/fundamentals/cluster.md|Cluster]]
+- [[系统基础/知识字典/fundamentals/node.md|Node]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
 
 
 <!-- risk-assessed -->

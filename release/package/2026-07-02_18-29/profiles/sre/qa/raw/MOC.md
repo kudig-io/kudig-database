@@ -145,10 +145,10 @@ python3 validators/coverage_checker.py \
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/README.md|Skills 故障诊断手册]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/fta-index.md|FTA 故障树索引]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/README.md|Skills 故障诊断手册]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/fta-index.md|FTA 故障树索引]]
 - 发布前评估报告
-- [[domain-10-troubleshooting-diagnostics/topic-qa-corpus/README.md|Agent QA 对语料库 README]]
+- [[domain-10-troubleshooting-diagnostics/QA语料/README.md|Agent QA 对语料库 README]]
 
 
 <!-- risk-assessed -->

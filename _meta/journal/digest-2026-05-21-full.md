@@ -271,17 +271,17 @@ prerequisites:
 | apiserver-fta | API Server 异常 |
 | etcd-fta | etcd 异常 |
 | scheduler-fta | 调度器异常 |
-| [[故障诊断/topic-fta/list/controller-manager-fta.md|controller-manager-fta]] | 控制器管理器异常 |
+| [[故障诊断/FTA故障树/list/controller-manager-fta.md|controller-manager-fta]] | 控制器管理器异常 |
 | kubelet-fta | Kubelet 异常 |
 | calico-fta | Calico CNI 问题 |
 | cilium-fta | Cilium eBPF 问题 |
 | dns-fta | DNS 问题 |
-| [[故障诊断/topic-fta/list/ingress-fta.md|ingress-fta]] | Ingress 问题 |
+| [[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]] | Ingress 问题 |
 | storage-fta | 存储问题 |
 | certificate-fta | 证书异常 |
 | backup-restore-fta | 备份恢复异常 |
 | cluster-upgrade-fta | 集群升级异常 |
-| [[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
+| [[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
 | [[skills/cloud-provider-fta.md|cloud-provider-fta]] | 云平台集成异常 |
 | ... | （共 44 棵） |
 

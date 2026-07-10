@@ -565,16 +565,16 @@ echo "=============================================="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-migration MOC
-- [[发布变更/topic-migration/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
-- [[发布变更/topic-migration/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
-- [[发布变更/topic-migration/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
-- [[发布变更/topic-migration/03-application-workload-migration.md|03 - 应用工作负载迁移]]
-- [[发布变更/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
-- [[发布变更/topic-migration/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
-- [[发布变更/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
-- [[发布变更/topic-migration/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
-- [[发布变更/topic-migration/09-migration-toolchain.md|09 - 迁移工具链参考]]
-- [[发布变更/topic-migration/10-real-world-case-study.md|10 - 生产迁移实战案例]]
+- [[发布变更/迁移方案/README.md|自建 Kubernetes 迁移至阿里云 ACK 生产实践指南]]
+- [[发布变更/迁移方案/01-migration-assessment-planning.md|01 - 迁移评估与规划]]
+- [[发布变更/迁移方案/02-ack-target-cluster-design.md|02 - ACK 目标集群设计与搭建]]
+- [[发布变更/迁移方案/03-application-workload-migration.md|03 - 应用工作负载迁移]]
+- [[发布变更/迁移方案/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[发布变更/迁移方案/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换]]
+- [[发布变更/迁移方案/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[发布变更/迁移方案/07-observability-security-migration.md|07 - 可观测性与安全迁移]]
+- [[发布变更/迁移方案/09-migration-toolchain.md|09 - 迁移工具链参考]]
+- [[发布变更/迁移方案/10-real-world-case-study.md|10 - 生产迁移实战案例]]
 
 ## See Also
 

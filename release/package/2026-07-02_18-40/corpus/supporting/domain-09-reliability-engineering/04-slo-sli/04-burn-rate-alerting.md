@@ -915,7 +915,7 @@ Day 12: PaymentServiceSlowBurn 恢复
   → 短暂问题，预算影响很小
 ```
 
-### 故障注入验证 ([[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|Chaos Engineering]])
+### 故障注入验证 ([[domain-17-system-foundation/知识字典/operations/chaos-engineering.md|Chaos Engineering]])
 
 ```yaml
 # burn-rate-chaos-experiment.yaml
@@ -1023,9 +1023,9 @@ spec:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]] — 错误预算管理
-- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|02 release gate slo based]] — 基于 SLO 的发布门控
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|02 slo implementation guide]] — SLO 设定与实施指南
+- [[domain-09-reliability-engineering/SLO-SLI/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[domain-09-reliability-engineering/SRE实践/02-release-gate-slo-based.md|02 release gate slo based]] — 基于 SLO 的发布门控
+- [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|02 slo implementation guide]] — SLO 设定与实施指南
 
 
 <!-- risk-assessed -->

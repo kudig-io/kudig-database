@@ -284,9 +284,9 @@ diagnose_pending_pods "production"
 - GitOps配置管理 (GitOps Configuration Management)
 - 运维自动化工具链 (Operations Automation Toolchain)
 - 成本优化与FinOps实践 (Cost Optimization & FinOps)
-- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[故障诊断/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## Related
 

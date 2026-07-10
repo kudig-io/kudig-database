@@ -854,11 +854,11 @@ done
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|certificates]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/01-overview.md|01-overview]]
+- [[domain-17-system-foundation/知识字典/operations/certificates.md|certificates]]
+- [[domain-07-platform-engineering/代码分析/node-create/01-overview.md|01-overview]]
 
 
 <!-- risk-assessed -->

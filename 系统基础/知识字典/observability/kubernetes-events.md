@@ -90,11 +90,11 @@ kubectl get events -w
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/alertmanager.md|Alertmanager]]
-- [[系统基础/topic-dictionary/observability/metrics-server.md|Metrics Server]]
-- [[系统基础/topic-dictionary/observability/logging.md|Logging]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/alertmanager.md|Alertmanager]]
+- [[系统基础/知识字典/observability/metrics-server.md|Metrics Server]]
+- [[系统基础/知识字典/observability/logging.md|Logging]]
 
 
 <!-- risk-assessed -->

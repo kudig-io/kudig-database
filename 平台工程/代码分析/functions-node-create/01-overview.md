@@ -588,9 +588,9 @@ kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 
 - [[README|README]]
 - [[scripts/man/INSTALL.md|INSTALL]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/linux.md|linux]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/linux.md|linux]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 
 ```
 

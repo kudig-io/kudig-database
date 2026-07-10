@@ -46,7 +46,7 @@ prerequisites:
 
 ## Role
 
-CRDs allow users to define new resource types that are treated as first-class citizens by [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]]. Once a CRD is created, you can `kubectl create/apply/get` instances of the custom resource.
+CRDs allow users to define new resource types that are treated as first-class citizens by [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|the Kubernetes API]]. Once a CRD is created, you can `kubectl create/apply/get` instances of the custom resource.
 
 ## CRD Specification
 

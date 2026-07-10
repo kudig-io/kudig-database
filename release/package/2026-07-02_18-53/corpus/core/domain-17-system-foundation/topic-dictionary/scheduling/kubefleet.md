@@ -68,6 +68,6 @@ KubeFleet 是微软开源的 CNCF Sandbox 项目，提供 Kubernetes 多集群�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubestellar.md|KubeStellar]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/karmada.md|Karmada]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/open-cluster-management.md|OCM]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kubestellar.md|KubeStellar]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/karmada.md|Karmada]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/open-cluster-management.md|OCM]]

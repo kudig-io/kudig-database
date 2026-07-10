@@ -51,7 +51,7 @@ prerequisites:
 
 ## Custom Resource Definition (CRD)
 
-CRDs extend [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with custom resource types without modifying API Server code:
+CRDs extend [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|the Kubernetes API]] with custom resource types without modifying API Server code:
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -127,9 +127,9 @@ The API aggregation layer allows running independent API Servers alongside the m
 - [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
 - [[entities/kube-apiserver.md|kube-apiserver]] — Cross-reference
 - [[entities/metal3-io.md|Metal3]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/helm-index.md|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/helm-index.md|Helm 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

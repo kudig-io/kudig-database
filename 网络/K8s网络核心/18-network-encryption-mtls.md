@@ -322,7 +322,7 @@ spec:
 
 - 网络 KUDIG Database — Global MOC
 - [[网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
-- [[网络/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
+- [[网络/K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -342,10 +342,10 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

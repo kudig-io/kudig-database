@@ -57,11 +57,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/security/rbac.md]]'
+- target: '[[domain-17-system-foundation/知识字典/security/rbac.md]]'
   type: related_to
 ---
 

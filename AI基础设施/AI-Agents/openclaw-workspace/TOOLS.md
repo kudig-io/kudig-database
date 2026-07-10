@@ -388,8 +388,8 @@ toolkit.register_agent_skill("openclaw-workspace")
 
 - 29-agentscope-studio-skill-demo
 - [[log|log]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/helm.md|helm]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/helm.md|helm]]
 
 ## See Also
 

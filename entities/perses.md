@@ -84,7 +84,7 @@ Perses 是一个云原生的 Dashboard 即代码 (Dashboard-as-Code) 可视化�
 
 - perses
 - [[entities/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

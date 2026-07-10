@@ -100,11 +100,11 @@ Kubernetes 采用声明式 API：用户描述「期望状态」（Desired State�
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/pod.md|Pod]]
-- [[系统基础/topic-dictionary/fundamentals/node.md|Node]]
-- [[系统基础/topic-dictionary/fundamentals/namespace.md|Namespace]]
-- [[系统基础/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[系统基础/topic-dictionary/fundamentals/cncf.md|CNCF]]
+- [[系统基础/知识字典/workloads/pod.md|Pod]]
+- [[系统基础/知识字典/fundamentals/node.md|Node]]
+- [[系统基础/知识字典/fundamentals/namespace.md|Namespace]]
+- [[系统基础/知识字典/fundamentals/cluster.md|Cluster]]
+- [[系统基础/知识字典/fundamentals/cncf.md|CNCF]]
 
 
 <!-- risk-assessed -->

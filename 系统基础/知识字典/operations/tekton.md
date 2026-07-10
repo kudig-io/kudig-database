@@ -87,11 +87,11 @@ Tekton 是 CNCF 孵化项目，提供 Kubernetes 原生的 CI/CD 流水线框架
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/gitops.md|GitOps]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/workloads/job.md|Job]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/gitops.md|GitOps]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/workloads/job.md|Job]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

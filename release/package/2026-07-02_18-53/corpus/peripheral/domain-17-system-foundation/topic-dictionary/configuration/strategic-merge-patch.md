@@ -75,9 +75,9 @@ Strategic Merge Patch 是 Kubernetes 特有的 JSON 合并策略，针对列表�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/server-side-apply.md|Server-Side Apply]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kustomize.md|Kustomize]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|kubectl]]
+- [[domain-17-system-foundation/知识字典/configuration/server-side-apply.md|Server-Side Apply]]
+- [[domain-17-system-foundation/知识字典/tooling/kustomize.md|Kustomize]]
 
 
 <!-- risk-assessed -->

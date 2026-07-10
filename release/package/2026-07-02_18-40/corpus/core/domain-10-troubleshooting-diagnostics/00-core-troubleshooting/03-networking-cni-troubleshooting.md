@@ -203,12 +203,12 @@ related_docs:
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| CNI 深度排查 | [01-cni-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) | 系统化排查方法论、conntrack/iptables TRACE/eBPF诊断、生产案例 |
-| CoreDNS/DNS 排查指南 | [02-dns-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md) | DNS全链路排查、NodeLocal DNSCache、CoreDNS调优 |
-| Service 与 Ingress 排查指南 | [03-service-ingress-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md) | kube-proxy规则链路、Service DNAT、Ingress Controller诊断 |
-| NetworkPolicy 深度排查 | [04-networkpolicy-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md) | 零信任治理、Calico/Cilium策略追踪、iptables规则映射 |
-| Service Mesh (Istio) 排查 | [05-service-mesh-istio-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md) | xDS推送、Envoy配置、mTLS证书、Ambient Mesh |
-| Gateway API 排查 | [06-gateway-api-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md) | Gateway状态机、路由优先级、BackendTLSPolicy |
+| CNI 深度排查 | [01-cni-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) | 系统化排查方法论、conntrack/iptables TRACE/eBPF诊断、生产案例 |
+| CoreDNS/DNS 排查指南 | [02-dns-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md) | DNS全链路排查、NodeLocal DNSCache、CoreDNS调优 |
+| Service 与 Ingress 排查指南 | [03-service-ingress-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md) | kube-proxy规则链路、Service DNAT、Ingress Controller诊断 |
+| NetworkPolicy 深度排查 | [04-networkpolicy-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md) | 零信任治理、Calico/Cilium策略追踪、iptables规则映射 |
+| Service Mesh (Istio) 排查 | [05-service-mesh-istio-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md) | xDS推送、Envoy配置、mTLS证书、Ambient Mesh |
+| Gateway API 排查 | [06-gateway-api-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md) | Gateway状态机、路由优先级、BackendTLSPolicy |
 
 ### J. eBPF 与网络可观测性
 
@@ -222,7 +222,7 @@ related_docs:
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
 | Service 与网络事件 | [10-service-networking-events.md](../domain-17-system-foundation/10-service-networking-events.md) | K8s网络相关Event解读 |
-| NetworkPolicy 异常 FTA 树 | [networkpolicy-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/networkpolicy-fta.md) | 故障树分析 |
+| NetworkPolicy 异常 FTA 树 | [networkpolicy-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/networkpolicy-fta.md) | 故障树分析 |
 | 网络硬件技术 | [08-network-hardware-technology.md](../domain-17-system-foundation/08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡 |
 | 网络硬件故障排查 | [13-network-hardware-troubleshooting.md](../domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、ethtool |
 
@@ -230,19 +230,19 @@ related_docs:
 
 | 排查场景 | 首选文档 | 深度参考 |
 |---------|---------|----------|
-| **Pod-to-Pod 不通（同节点）** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [25-网络连通性](25-network-connectivity-troubleshooting.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) |
-| **Pod-to-Pod 不通（跨节点）** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) |
+| **Pod-to-Pod 不通（同节点）** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [25-网络连通性](25-network-connectivity-troubleshooting.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
+| **Pod-to-Pod 不通（跨节点）** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
 | **Pod-to-Node 不通** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | 本文、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
 | **Node-to-Node 不通** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md)、[Linux网络配置](../domain-17-system-foundation/04-linux-networking-configuration.md) |
-| **Pod-to-Service 不通** | [10-Service排查](10-service-comprehensive-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md) |
-| **DNS 解析失败** | [26-DNS排查](26-dns-troubleshooting.md) | [DNS深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md)、[CoreDNS优化](../domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md) |
-| **Ingress 访问异常** | [15-Ingress排查](15-ingress-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md)、[Ingress监控](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) |
-| **NetworkPolicy 不生效** | [16-NP排查](16-networkpolicy-troubleshooting.md) | [NP深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md) |
-| **CNI 插件问题** | 本文 | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md) |
-| **Service Mesh 问题** | [Istio排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](../domain-03-networking-traffic/30-service-mesh-deep-dive.md)、[Cilium Mesh](../domain-03-networking-traffic/05-cilium-service-mesh.md) |
-| **Gateway API 问题** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](../domain-03-networking-traffic/35-gateway-api-overview.md) |
+| **Pod-to-Service 不通** | [10-Service排查](10-service-comprehensive-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md) |
+| **DNS 解析失败** | [26-DNS排查](26-dns-troubleshooting.md) | [DNS深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md)、[CoreDNS优化](../domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md) |
+| **Ingress 访问异常** | [15-Ingress排查](15-ingress-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md)、[Ingress监控](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) |
+| **NetworkPolicy 不生效** | [16-NP排查](16-networkpolicy-troubleshooting.md) | [NP深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md) |
+| **CNI 插件问题** | 本文 | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
+| **Service Mesh 问题** | [Istio排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](../domain-03-networking-traffic/30-service-mesh-deep-dive.md)、[Cilium Mesh](../domain-03-networking-traffic/05-cilium-service-mesh.md) |
+| **Gateway API 问题** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](../domain-03-networking-traffic/35-gateway-api-overview.md) |
 | **网络性能问题** | [34-网络性能调优](../domain-03-networking-traffic/34-network-performance-tuning.md) | [生产网络优化](../domain-06-observability/20-network-performance-optimization.md) |
-| **conntrack 表满** | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md) | [CNI深度排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md)、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
+| **conntrack 表满** | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md) | [CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md)、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
 | **MTU/分片问题** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [CNI容器网络深度](../domain-01-cluster-fundamentals/23-container-network-deep-dive.md) |
 
 ---
@@ -931,30 +931,30 @@ groups:
 - domain-10-troubleshooting-diagnostics MOC
 - [[domain-10-troubleshooting-diagnostics/README.md|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-control-plane-apiserver-troubleshooting.md|01-control-plane-apiserver-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/05-pod-pending-diagnosis.md|05-pod-pending-diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/01-control-plane-apiserver-troubleshooting.md|01-control-plane-apiserver-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|05-pod-pending-diagnosis]]
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ```
 

@@ -488,8 +488,8 @@ podman info --storage
 
 ## Related
 
-- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations|containerd 生产运维]]
-- [[容器运行时/03-containerd-cri-o/05-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
+- [[容器运行时/containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
+- [[容器运行时/containerd-CRI-O/05-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
 
 ## See Also
 

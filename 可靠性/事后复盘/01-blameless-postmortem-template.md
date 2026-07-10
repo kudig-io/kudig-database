@@ -150,7 +150,7 @@ prerequisites:
 
 ## 相关
 
-- [[可靠性/06-postmortem/02-postmortem-culture-guide.md|02 postmortem culture guide]]
+- [[可靠性/事后复盘/02-postmortem-culture-guide.md|02 postmortem culture guide]]
 
 
 <!-- risk-assessed -->

@@ -81,11 +81,11 @@ CRUSH（Controlled Replication Under Scalable Hashing）决定数据如何分布
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/rook.md|Rook]]
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[系统基础/topic-dictionary/storage/csi.md|CSI]]
-- [[系统基础/topic-dictionary/storage/volume.md|Volume]]
+- [[系统基础/知识字典/storage/rook.md|Rook]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/storage/storage-class.md|Storage Class]]
+- [[系统基础/知识字典/storage/csi.md|CSI]]
+- [[系统基础/知识字典/storage/volume.md|Volume]]
 
 
 <!-- risk-assessed -->

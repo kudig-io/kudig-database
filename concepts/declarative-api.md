@@ -64,7 +64,7 @@ Every Kubernetes object follows a standard structure:
 Key metadata fields:
 - **resourceVersion**: etcd revision number, used for optimistic concurrency control
 - **generation**: Incremented each time spec changes
-- **ownerReferences**: Enables cascading deletion ([[系统基础/topic-dictionary/fundamentals/garbage-collection.md|garbage collection]])
+- **ownerReferences**: Enables cascading deletion ([[系统基础/知识字典/fundamentals/garbage-collection.md|garbage collection]])
 - **[[Finalizers|finalizers]]**: Pre-delete hooks for resource cleanup
 
 ## Server-Side Apply (SSA)

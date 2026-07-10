@@ -948,7 +948,7 @@ security_incident_response_flow:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
+- [[domain-17-system-foundation/速查卡/tls-pki.md|速查卡: tls-pki]]
 
 - [[domain-05-security-compliance/README.md|返回目录]]
 

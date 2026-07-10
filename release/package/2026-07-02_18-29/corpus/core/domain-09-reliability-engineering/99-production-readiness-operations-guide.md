@@ -71,13 +71,13 @@ authors:
 | 3 | 优雅中断策略 | 核心服务配置 PodDisruptionBudget，确保升级/缩容时最小可用副本 | `kubectl get pdb -A` |
 | 4 | 资源配额与限制 | 所有生产命名空间配置 ResourceQuota / LimitRange，Pod 设置 Request & Limit | `kubectl describe quota -n <ns>` |
 | 5 | 备份与恢复验证 | etcd、PVC、命名级备份策略已配置，近 30 天内完成恢复演练 | `velero backup get` / `etcdctl snapshot status` |
-| 6 | SLO/SLI 已定义 | 关键用户旅程已设定可量化的 SLO，错误预算与 Burn Rate 告警已上线 | 见 [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|SLO 设定与实施指南]] |
-| 7 | 发布门控生效 | 错误预算不足时自动阻断或降级发布，金丝雀/蓝绿策略已配置 | 见 [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|基于 SLO 的发布门控]] |
+| 6 | SLO/SLI 已定义 | 关键用户旅程已设定可量化的 SLO，错误预算与 Burn Rate 告警已上线 | 见 [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]] |
+| 7 | 发布门控生效 | 错误预算不足时自动阻断或降级发布，金丝雀/蓝绿策略已配置 | 见 [[domain-09-reliability-engineering/SRE实践/02-release-gate-slo-based.md|基于 SLO 的发布门控]] |
 | 8 | 证书生命周期监控 | K8s CA、cert-manager、Ingress mTLS 证书有效期 ≥30 天告警 | `kubeadm certs check-expiration` / `kubectl get certificate -A` |
-| 9 | 灾备演练记录 | AZ/Region 级、控制面、有状态应用三类场景已演练并有 RTO/RPO 数据 | 见 [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|灾备场景目录]] |
-| 10 | 混沌工程安全护栏 | 实验具备 blast-radius 控制、kill-switch、自动回滚，且避开生产高峰 | 见 [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|混沌实验设计]] |
+| 9 | 灾备演练记录 | AZ/Region 级、控制面、有状态应用三类场景已演练并有 RTO/RPO 数据 | 见 [[domain-09-reliability-engineering/灾难恢复/01-dr-scenarios-catalog.md|灾备场景目录]] |
+| 10 | 混沌工程安全护栏 | 实验具备 blast-radius 控制、kill-switch、自动回滚，且避开生产高峰 | 见 [[domain-09-reliability-engineering/混沌工程/03-chaos-experiment-design.md|混沌实验设计]] |
 | 11 | 可观测性闭环 | 日志、指标、链路覆盖关键路径，告警已关联 on-call 值班表与升级策略 | `kubectl get prometheusrules -A` |
-| 12 | 事后复盘文化 | 近 90 天内 P1/P0 事故已完成无责复盘，改进项有 Owner 与截止日期 | 见 [[domain-09-reliability-engineering/06-postmortem/01-blameless-postmortem-template.md|无责事后复盘模板]] |
+| 12 | 事后复盘文化 | 近 90 天内 P1/P0 事故已完成无责复盘，改进项有 Owner 与截止日期 | 见 [[domain-09-reliability-engineering/事后复盘/01-blameless-postmortem-template.md|无责事后复盘模板]] |
 
 建议将上表集成到发布平台（如 Backstage / Argo CD ApplicationSet）的 PRR Gate 中，未通过项自动阻塞 GitOps 同步，避免人工检查遗漏。PRR 评审结果应作为重大变更的准入条件，并在 `_meta/journal/` 中记录历史。
 
@@ -245,13 +245,13 @@ kubectl annotate deployment/web chaos-mesh.org/experiment-active="true" --overwr
 
 ### 本域核心参考
 
-- [[domain-09-reliability-engineering/04-slo-sli/02-slo-implementation-guide.md|SLO 设定与实施指南]]
-- [[domain-09-reliability-engineering/07-sre-practices/02-release-gate-slo-based.md|基于 SLO 的发布门控]]
-- [[domain-09-reliability-engineering/01-backup-recovery/01-etcd-backup-restore.md|etcd 备份与恢复]]
-- [[domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|混沌实验设计]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|灾备场景目录]]
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/02-az-failure-playbook.md|AZ 故障 Playbook]]
+- [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[domain-09-reliability-engineering/SRE实践/02-release-gate-slo-based.md|基于 SLO 的发布门控]]
+- [[domain-09-reliability-engineering/备份恢复/01-etcd-backup-restore.md|etcd 备份与恢复]]
+- [[domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[domain-09-reliability-engineering/混沌工程/03-chaos-experiment-design.md|混沌实验设计]]
+- [[domain-09-reliability-engineering/灾难恢复/01-dr-scenarios-catalog.md|灾备场景目录]]
+- [[domain-09-reliability-engineering/灾难恢复/02-az-failure-playbook.md|AZ 故障 Playbook]]
 
 ### Gap 分析推荐新建
 

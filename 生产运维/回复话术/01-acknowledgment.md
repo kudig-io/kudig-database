@@ -326,10 +326,10 @@ Step 1（首次回复）:
 
 ## Related
 
-- [[生产运维/reply-templates/README.md|工单回复话术库索引]]
+- [[生产运维/回复话术/README.md|工单回复话术库索引]]
 - [[生产运维/ticket-routing-rules.md|工单分类与路由规则]]
 
 ## See Also
 
-- [[生产运维/reply-templates/02-information-request.md|请求信息话术]]
+- [[生产运维/回复话术/02-information-request.md|请求信息话术]]
 - [[生产运维/escalation-playbook.md|升级与交接协议]]

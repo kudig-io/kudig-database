@@ -53,9 +53,9 @@ authors:
 relationships:
 - target: '[[concepts/service.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-044-kubeproxy-service-unreachable.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-044-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
 

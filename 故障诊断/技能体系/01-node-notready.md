@@ -1559,7 +1559,7 @@ kubectl get pods --field-selector spec.nodeName=<node-name> --all-namespaces
 ```
 ## Related
 
-- [[生态参考/topic-index/node-index.md|Node 知识图谱索引]]
+- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
 
 ```
 

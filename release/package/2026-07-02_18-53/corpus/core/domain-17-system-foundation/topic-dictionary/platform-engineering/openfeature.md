@@ -69,6 +69,6 @@ OpenFeature 是 CNCF 孵化项目，定义了特性标志（Feature Flags）的�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/flagger.md|Flagger]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/pipecd.md|PipeCD]]
+- [[domain-17-system-foundation/知识字典/operations/flagger.md|Flagger]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/pipecd.md|PipeCD]]

@@ -465,7 +465,7 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 
 ## Related
 
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

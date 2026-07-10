@@ -101,6 +101,6 @@ Distilled from 集群基础 (25 documents, Kubernetes v1.29-v1.33).
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview
-- [[平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
+- [[平台工程/代码分析/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
 
 <!-- risk-assessed -->

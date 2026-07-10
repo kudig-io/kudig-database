@@ -88,7 +88,7 @@ authors:
 | 9 | **安全加固与合规基线** | PSP/PSS 限制特权容器、NetworkPolicy 默认拒绝、镜像扫描与准入 | `kubectl get networkpolicies -A`；`kubectl get psp` 或 `kubectl label ns prod pod-security.kubernetes.io/enforce=restricted` |
 | 10 | **成本与配额治理** | 命名空间 ResourceQuota、LimitRange、Spot/抢占式实例标签与污点隔离 | `kubectl get resourcequota,limitrange -A` |
 | 11 | **升级与回滚计划** | 已制定控制平面与节点池升级窗口、版本偏斜检查、回滚命令 | `kubectl get nodes -o wide` 核对 kubelet 版本；厂商 CLI 查询可用升级版本 |
-| 12 | **灾难演练与混沌工程** | 已完成 AZ 故障切换、节点故障、控制平面断网演练并记录 RTO | 参考 [[可靠性/05-chaos-engineering/01-chaos-engineering-overview.md|混沌工程概述]] |
+| 12 | **灾难演练与混沌工程** | 已完成 AZ 故障切换、节点故障、控制平面断网演练并记录 RTO | 参考 [[可靠性/混沌工程/01-chaos-engineering-overview.md|混沌工程概述]] |
 
 > 检查清单应随每次大版本升级或新环境交付重新执行，并将结果归档到变更管理记录中。建议由平台工程师、SRE 和安全工程师三方会签，缺一不可。对于多集群场景，应在每个区域或每个云账号单独执行，避免“一套环境通过、其余环境漏检”的隐患。
 
@@ -338,11 +338,11 @@ kubectl get deployments -A -o jsonpath='{range .items[*]}{@.metadata.namespace}{
 
 ### 本域必读
 
-- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|阿里云 ACK 概述]] — ACK 托管版/专有版架构、Terway 网络、RRSA 身份与安全加固。
-- [[云厂商/08-multi-cloud/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]] — 主备/主主模式、跨云数据同步、故障切换与统一监控。
-- [[云厂商/02-aws-eks/aws-eks-overview.md|AWS EKS 概述]] — EKS 架构、IRSA、托管节点组与 Fargate 模式。
-- [[云厂商/03-google-cloud-gke/google-cloud-gke-overview.md|Google GKE 概述]] — GKE Autopilot/Standard、Workload Identity、Backup for GKE。
-- [[云厂商/04-azure-aks/azure-aks-overview.md|Azure AKS 概述]] — AKS 网络、Azure AD 集成、托管 Prometheus/Grafana。
+- [[云厂商/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK 概述]] — ACK 托管版/专有版架构、Terway 网络、RRSA 身份与安全加固。
+- [[云厂商/多云混合/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]] — 主备/主主模式、跨云数据同步、故障切换与统一监控。
+- [[云厂商/AWS-EKS/aws-eks-overview.md|AWS EKS 概述]] — EKS 架构、IRSA、托管节点组与 Fargate 模式。
+- [[云厂商/Google-GKE/google-cloud-gke-overview.md|Google GKE 概述]] — GKE Autopilot/Standard、Workload Identity、Backup for GKE。
+- [[云厂商/Azure-AKS/azure-aks-overview.md|Azure AKS 概述]] — AKS 网络、Azure AD 集成、托管 Prometheus/Grafana。
 
 ### 跨域参考
 

@@ -56,7 +56,7 @@ Sidecar 容器是与主应用容器运行在同一 Pod 内的辅助容器，用�
 - **终止顺序**：Sidecar 按定义顺序的反向依次终止，确保辅助服务在主应用需要时始终可用。
 - **探针支持**：与普通 init 容器不同，Sidecar 支持 `livenessProbe`、`readinessProbe` 和 `startupProbe`。
 - **Job 兼容性**：在 Job 中使用 Kubernetes 原生 Sidecar 容器时，Sidecar 不会阻止 Job 在主容器完成后标记为完成。
-- **资源共享**：Sidecar 与主容器共享网络和存储命名空间；Pod 的有效资源请求/限制为：[[系统基础/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]] + max(非 init 容器之和, 有效 init 容器值)。
+- **资源共享**：Sidecar 与主容器共享网络和存储命名空间；Pod 的有效资源请求/限制为：[[系统基础/知识字典/scheduling/pod-overhead.md|Pod Overhead]] + max(非 init 容器之和, 有效 init 容器值)。
 
 ## 使用场景
 - 日志/指标收集代理（如 Fluent Bit、[[Prometheus|Prometheus]] exporter）。
@@ -206,7 +206,7 @@ kubectl debug -it <pod-name> --image=busybox --target=<sidecar-name> -n prod
 
 ## Related
 
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

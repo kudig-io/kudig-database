@@ -190,6 +190,6 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 
 - 相关知识域: domain-02-workloads-applications
 - 相关知识域: domain-03-networking-traffic
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|速查卡: go]]
+- [[domain-17-system-foundation/速查卡/go.md|速查卡: go]]
 
 <!-- risk-assessed -->

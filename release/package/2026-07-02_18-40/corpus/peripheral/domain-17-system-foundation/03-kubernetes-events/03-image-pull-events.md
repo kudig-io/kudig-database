@@ -2482,9 +2482,9 @@ echo "=== Audit Complete ==="
 
 ## 10.3 Domain-12: 故障排查
 
-- **[Domain-12: Troubleshooting / 27-image-registry-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md)** - 镜像仓库故障排查
-- **[Domain-12: Troubleshooting / 03-container-runtime-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md)** - 容器运行时(containerd/docker)故障排查
-- **[Domain-12: Troubleshooting / 01-pod-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查综合指南
+- **[Domain-12: Troubleshooting / 27-image-registry-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/高级排障/02-node-components/05-image-registry-troubleshooting.md)** - 镜像仓库故障排查
+- **[Domain-12: Troubleshooting / 03-container-runtime-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/高级排障/02-node-components/03-container-runtime-troubleshooting.md)** - 容器运行时(containerd/docker)故障排查
+- **[Domain-12: Troubleshooting / 01-pod-troubleshooting.md](../../domain-10-troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查综合指南
 
 ## 10.4 Domain-2: 节点管理
 
@@ -2537,7 +2537,7 @@ echo "=== Audit Complete ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ```
 

@@ -88,7 +88,7 @@ graph TD
 
 - [[平台工程/README.md|README]]
 - 集群基础/05-kubectl-commands-reference.md
-- [[故障诊断/topic-skills/README.md|README]]
+- [[故障诊断/技能体系/README.md|README]]
 
 
 ---
@@ -102,7 +102,7 @@ graph TD
 
 ## 操作技能
 
-- [[故障诊断/topic-skills/MOC.md|所有操作技能]]
+- [[故障诊断/技能体系/MOC.md|所有操作技能]]
 
 
 ---

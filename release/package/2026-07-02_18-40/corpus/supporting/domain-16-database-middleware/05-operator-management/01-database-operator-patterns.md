@@ -117,7 +117,7 @@ status:
 ## 相关
 
 - domain-15-specialized-tech/02-operator-development-patterns
-- [[domain-16-database-middleware/05-operator-management/02-operator-comparison-mysql-postgres-redis.md|02 operator comparison mysql postgres redis]]
+- [[domain-16-database-middleware/Operator管理/02-operator-comparison-mysql-postgres-redis.md|02 operator comparison mysql postgres redis]]
 
 
 <!-- risk-assessed -->

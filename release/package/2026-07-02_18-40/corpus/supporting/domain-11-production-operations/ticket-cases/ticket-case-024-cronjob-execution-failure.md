@@ -57,9 +57,9 @@ authors:
 relationships:
 - target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-029-cronjob-fail.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-029-cronjob-fail.md]]'
   type: related_to
 ---
 

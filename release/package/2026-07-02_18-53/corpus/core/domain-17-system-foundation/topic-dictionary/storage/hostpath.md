@@ -74,11 +74,11 @@ hostPath 卷将节点文件系统的文件或目录挂载到 Pod 中。它提供
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
-- [[domain-17-system-foundation/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[domain-17-system-foundation/topic-dictionary/storage/volume.md|Volume]]
-- [[domain-17-system-foundation/topic-dictionary/storage/emptydir.md|Emptydir]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[domain-17-system-foundation/知识字典/storage/storage-class.md|Storage Class]]
+- [[domain-17-system-foundation/知识字典/storage/volume.md|Volume]]
+- [[domain-17-system-foundation/知识字典/storage/emptydir.md|Emptydir]]
 
 
 <!-- risk-assessed -->

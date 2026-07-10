@@ -20,9 +20,9 @@ relationships:
   type: uses
 - target: '[[entities/cilium.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md]]'
+- target: '[[domain-17-system-foundation/知识字典/configuration/configmaps.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md]]'
+- target: '[[domain-17-system-foundation/知识字典/fundamentals/nodes.md]]'
   type: uses
 ---
 
@@ -58,7 +58,7 @@ relationships:
 顾问："未授权 API 访问是严重安全事件。请确认三点：
 1. **来源追踪**：未授权调用的来源 IP 和 UserAgent 是什么？是内部还是外部来源？
 2. **时间范围**：异常调用从什么时候开始？持续多久了？
-3. **访问范围**：尝试访问了哪些资源？（secrets / [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|configmaps]] / pods / [[domain-17-system-foundation/topic-dictionary/fundamentals/nodes.md|nodes]]）"
+3. **访问范围**：尝试访问了哪些资源？（secrets / [[domain-17-system-foundation/知识字典/configuration/configmaps.md|configmaps]] / pods / [[domain-17-system-foundation/知识字典/fundamentals/nodes.md|nodes]]）"
 
 ### 场景 C：工程师发现可疑镜像或后门
 

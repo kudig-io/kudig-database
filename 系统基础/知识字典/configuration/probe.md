@@ -90,7 +90,7 @@ Probe（探针）是 Kubernetes 中容器健康检查机制的统称。kubelet �
 
 ## Related
 
-[[系统基础/topic-dictionary/configuration/liveness-probe.md|Liveness Probe]] | [[系统基础/topic-dictionary/configuration/readiness-probe.md|Readiness Probe]]
+[[系统基础/知识字典/configuration/liveness-probe.md|Liveness Probe]] | [[系统基础/知识字典/configuration/readiness-probe.md|Readiness Probe]]
 
 
 <!-- risk-assessed -->

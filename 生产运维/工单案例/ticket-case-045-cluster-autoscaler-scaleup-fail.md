@@ -22,10 +22,10 @@ affected_namespace: kube-system
 ticket_type: 自动扩缩容故障
 skill_ref:
 - '[[平台工程/99-karpenter-node-autoscaling-guide.md|节点自动扩缩容指南]]'
-- '[[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|Cluster
+- '[[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|Cluster
   Autoscaler 异常故障树分析]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/cluster-autoscaler-fta.md|FTA:
+- '[[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|FTA:
   Cluster Autoscaler 异常]]'
 last_updated: 2026-06-26 16:00:00+08:00
 difficulty: intermediate
@@ -51,11 +51,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/scheduling/cluster-autoscaler.md]]'
+- target: '[[系统基础/知识字典/scheduling/cluster-autoscaler.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md]]'
+- target: '[[生产运维/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 - target: '[[concepts/autoscaling-strategies.md]]'
   type: related_to
@@ -255,7 +255,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-mall-compute
 ## Related
 
 - Cluster Autoscaler
-- [[生产运维/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md|Cluster Autoscaler 扩容失败：节点池未触发自动扩容]]
+- [[生产运维/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md|Cluster Autoscaler 扩容失败：节点池未触发自动扩容]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
 

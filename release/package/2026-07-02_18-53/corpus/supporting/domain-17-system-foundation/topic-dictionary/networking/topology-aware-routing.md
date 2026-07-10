@@ -165,8 +165,8 @@ kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
 ```
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service-internal-traffic-policy.md|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
-- [[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
+- [[domain-17-system-foundation/知识字典/networking/service-internal-traffic-policy.md|Service Internal Traffic Policy]]](service-internal-traffic-policy.md) — 节点本地路由（互斥特性）
+- [[domain-17-system-foundation/知识字典/networking/endpointslices.md|EndpointSlices]]](endpointslices.md) — hints 字段和 zone 信息
 - [Service](service.md) — trafficDistribution 字段
 - [Cluster Networking](cluster-networking.md) — 跨可用区流量优化
 
@@ -176,9 +176,9 @@ kubectl get svc <name> -o jsonpath='{.metadata.annotations}'
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
-- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
-- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+- [[domain-17-system-foundation/知识字典/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/知识字典/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/知识字典/networking/antrea.md|Antrea 网络方案]]
 
 
 <!-- risk-assessed -->

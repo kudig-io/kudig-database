@@ -68,6 +68,6 @@ Contour 是 VMware 开源的 Kubernetes Ingress 控制器，基于 Envoy Proxy �
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy.md|Envoy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/envoy-gateway.md|Envoy Gateway]]
-- [[domain-17-system-foundation/topic-dictionary/networking/traefik.md|Traefik]]
+- [[domain-17-system-foundation/知识字典/networking/envoy.md|Envoy]]
+- [[domain-17-system-foundation/知识字典/networking/envoy-gateway.md|Envoy Gateway]]
+- [[domain-17-system-foundation/知识字典/networking/traefik.md|Traefik]]

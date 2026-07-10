@@ -197,9 +197,9 @@ flowchart TD
 - [[skills/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查
 - [[skills/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Kubernetes Diagnostic Skills Overview
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/rbac-fta.md|RBAC 异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/rbac-fta.md|RBAC 异常故障树分析]]
 - [[skills/skill-23-job-cronjob-failure.md|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

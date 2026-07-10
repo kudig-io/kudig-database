@@ -365,8 +365,8 @@ receivers:
 
 ## Related
 
-- [[domain-06-observability/05-alerting/01-alertmanager-deep-configuration|Alertmanager 深度配置]]
-- [[domain-06-observability/05-alerting/03-alert-fatigue-reduction-strategies|告警疲劳治理]]
+- [[domain-06-observability/告警/01-alertmanager-deep-configuration|Alertmanager 深度配置]]
+- [[domain-06-observability/告警/03-alert-fatigue-reduction-strategies|告警疲劳治理]]
 
 ## See Also
 

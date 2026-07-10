@@ -1,6 +1,6 @@
 本页面是 KUDIG 知识库中 **Kubernetes 及其云原生生态组件 Release Notes 的全量归档入口**。归档涵盖 **33 个核心项目、1,322 份版本说明文档**，总计约 14.3 MB 的原始版本信息，按功能领域分为 **8 大分类、30+ 子项目**，时间跨度从 Kubernetes v0.4（2014 年）到 v1.36（2026 年开发中）乃至各生态组件的最新稳定版。这些文档通过自动化脚本从各项目 GitHub Release 页面和官方 Changelog 仓库同步获取，保留了原始的下载链接、变更分类、升级注意事项和依赖变更信息。
 
-Sources: [README.md](topic-release-notes/README.md#L1-L79), [download-release-notes.py](scripts/download-release-notes.py#L1-L241)
+Sources: [README.md](领域索引/README.md#L1-L79), [download-release-notes.py](scripts/download-release-notes.py#L1-L241)
 
 ## 归档架构总览
 
@@ -59,7 +59,7 @@ graph TD
 
 > **图注**：上图展示了归档的 8 大分类及其 33 个子项目的层次结构，括号内数字为各项目归档的版本数量。分类逻辑遵循 CNCF 云原生全景图的功能域划分，确保使用者能按技术领域快速定位目标组件的版本信息。
 
-Sources: [README.md](topic-release-notes/README.md#L1-L79)
+Sources: [README.md](领域索引/README.md#L1-L79)
 
 ## 数据采集机制
 
@@ -79,7 +79,7 @@ Kubernetes 归档是整个版本库的核心，共 **55 个版本文件**，覆�
 
 **典型 Changelog 文档结构**（以 v1.36 为例）包含以下标准段落：Downloads（含 SHA512 校验和）、Urgent Upgrade Notes（升级前必读）、Changes by Kind（按 Deprecation / API Change / Feature / Bug or Regression / Other 分类）以及 Dependencies（新增/变更/移除的 Go 依赖）。最新 v1.36.0-beta.0 已引入多项重量级特性，包括 DRA（Dynamic Resource Allocation）多项特性晋升 Beta/GA、Workload 和 PodGroup API 集成、PodGroup 调度逻辑、以及 `ImageVolume` 特性达到 Stable。
 
-Sources: [CHANGELOG-1.36.md](topic-release-notes/kubernetes/CHANGELOG-1.36.md#L1-L200), [CHANGELOG-1.35.md](topic-release-notes/kubernetes/CHANGELOG-1.35.md#L1-L172), [RELEASE-NOTES-1.1.md](topic-release-notes/kubernetes/RELEASE-NOTES-1.1.md#L1-L16)
+Sources: [CHANGELOG-1.36.md](领域索引/kubernetes/CHANGELOG-1.36.md#L1-L200), [CHANGELOG-1.35.md](领域索引/kubernetes/CHANGELOG-1.35.md#L1-L172), [RELEASE-NOTES-1.1.md](领域索引/kubernetes/RELEASE-NOTES-1.1.md#L1-L16)
 
 ## 核心依赖（Core Dependencies）
 
@@ -95,7 +95,7 @@ Sources: [CHANGELOG-1.36.md](topic-release-notes/kubernetes/CHANGELOG-1.36.md#L1
 
 以 **etcd v3.6** 为例，Release Notes 包含完整的安装指南（Linux / macOS / Docker），并明确提醒用户在升级前阅读 upgrade guide（可能存在 breaking changes）。**CRI-O** 的归档版本最为丰富（32 个），其版本号与 Kubernetes minor 版本保持对齐，便于用户确认兼容性。
 
-Sources: [README.md](topic-release-notes/README.md#L13-L21), [etcd RELEASE-NOTES-3.6.md](topic-release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md#L1-L96)
+Sources: [README.md](领域索引/README.md#L13-L21), [etcd RELEASE-NOTES-3.6.md](领域索引/core-deps/etcd/RELEASE-NOTES-3.6.md#L1-L96)
 
 ## CLI 工具（CLI & Tools）
 
@@ -111,7 +111,7 @@ CLI 工具分类归档了 **5 个项目、187 个版本**，覆盖集群创建�
 
 **minikube** 以 74 个归档版本位居本分类之首，反映了其高频迭代节奏。**Helm** 从 v1.2 演进至 v4.1，经历了从 Tiller 架构到 Helm 3 无 Tiller 设计的重大范式转变，其 Release Notes 对理解 Helm 生态的迁移路径至关重要。
 
-Sources: [README.md](topic-release-notes/README.md#L23-L31)
+Sources: [README.md](领域索引/README.md#L23-L31)
 
 ## 网络与服务网格（Networking & Service Mesh）
 
@@ -128,7 +128,7 @@ Sources: [README.md](topic-release-notes/README.md#L23-L31)
 
 以 **Cilium v1.17** 为例，其 Release Notes 按类别组织变更（Bugfixes / CI Changes / Misc Changes / Other Changes），并提供完整的 Docker Manifest 清单，包含 `cilium`、`clustermesh-apiserver`、`hubble-relay`、`operator-*` 等多架构镜像的 SHA256 摘要，便于供应链安全验证。**Envoy** 和 **Istio** 各 38 个版本，跨越了从早期 alpha 到成熟生产级的完整演进。
 
-Sources: [README.md](topic-release-notes/README.md#L33-L42), [cilium RELEASE-NOTES-1.17.md](topic-release-notes/networking/cilium/RELEASE-NOTES-1.17.md#L1-L92)
+Sources: [README.md](领域索引/README.md#L33-L42), [cilium RELEASE-NOTES-1.17.md](领域索引/networking/cilium/RELEASE-NOTES-1.17.md#L1-L92)
 
 ## 可观测性（Observability）
 
@@ -144,7 +144,7 @@ Sources: [README.md](topic-release-notes/README.md#L33-L42), [cilium RELEASE-NOT
 
 **OpenTelemetry Collector** 以 146 个版本遥遥领先，这源于其 `0.x` 阶段的快速迭代（几乎每 1–2 周发布一个 minor 版本）。**Prometheus** 的归档从 v0.11 到 v3.11 跨越了将近 10 年的演进，其中 v2.0 到 v3.0 的升级路径（远程写入、TSDB、原生 Histogram）是每个 SRE 必须了解的关键知识。**Grafana** 的 71 个版本完整记录了从 v1.0 简单可视化工具到 v12.x 统一可观测性平台的转型历程。
 
-Sources: [README.md](topic-release-notes/README.md#L44-L52)
+Sources: [README.md](领域索引/README.md#L44-L52)
 
 ## CI/CD 与 GitOps（CI/CD & GitOps）
 
@@ -158,7 +158,7 @@ Sources: [README.md](topic-release-notes/README.md#L44-L52)
 
 **Tekton Pipelines** 以 80 个版本居首，其 `0.x` 阶段包含 69 个迭代版本，反映了 CI/CD 领域 API 从频繁变更到 v1.0 稳定化的过程。**Flux** 从 v0.0 到 v2.8 的归档展示了从 Flux v1（单仓库模型）到 Flux v2（GitOps Toolkit 多组件解耦）的架构重塑。
 
-Sources: [README.md](topic-release-notes/README.md#L54-L60)
+Sources: [README.md](领域索引/README.md#L54-L60)
 
 ## 安全与策略（Security & Policy）
 
@@ -174,7 +174,7 @@ Sources: [README.md](topic-release-notes/README.md#L54-L60)
 
 **OPA** 以 86 个版本位居安全分类之首，其 Release Notes 从 v0.1 到 v1.15 完整记录了从学术项目到企业级策略引擎的蜕变。**Falco v0.43** 的 Release Notes 展示了典型结构：Breaking Changes、Minor Changes、Bug Fixes、Non user-facing changes，并附有 PR 统计和发布经理签名——这对安全审计合规场景尤为重要。
 
-Sources: [README.md](topic-release-notes/README.md#L62-L70), [falco RELEASE-NOTES-0.43.md](topic-release-notes/security/falco/RELEASE-NOTES-0.43.md#L1-L87)
+Sources: [README.md](领域索引/README.md#L62-L70), [falco RELEASE-NOTES-0.43.md](领域索引/security/falco/RELEASE-NOTES-0.43.md#L1-L87)
 
 ## 存储与灾备（Storage & CSI）
 
@@ -188,7 +188,7 @@ Sources: [README.md](topic-release-notes/README.md#L62-L70), [falco RELEASE-NOTE
 
 **Velero v1.18** 引入了多项重量级特性：并发备份处理、Data Mover 缓存卷支持、增量大小追踪、命名空间通配符过滤、以及 VolumePolicy 对 PVC Phase 的支持。这些特性直接解决了大规模多租户场景下的备份性能和灵活性瓶颈。Release Notes 同时记录了 Go 运行时版本（1.25.7）和 kopia 依赖版本（0.22.3），为依赖链安全审计提供依据。
 
-Sources: [README.md](topic-release-notes/README.md#L72-L78), [velero RELEASE-NOTES-1.18.md](topic-release-notes/storage/velero/RELEASE-NOTES-1.18.md#L1-L114)
+Sources: [README.md](领域索引/README.md#L72-L78), [velero RELEASE-NOTES-1.18.md](领域索引/storage/velero/RELEASE-NOTES-1.18.md#L1-L114)
 
 ## 归档统计总览
 
@@ -204,7 +204,7 @@ Sources: [README.md](topic-release-notes/README.md#L72-L78), [velero RELEASE-NOT
 | 存储与灾备 | 3 | 76 | 5.7% |
 | **合计** | **33** | **1,321** | **100%** |
 
-Sources: [README.md](topic-release-notes/README.md#L4-L4)
+Sources: [README.md](领域索引/README.md#L4-L4)
 
 ## 典型使用场景
 
@@ -214,7 +214,7 @@ Sources: [README.md](topic-release-notes/README.md#L4-L4)
 
 **供应链 SBOM 构成分析**：Cilium、Envoy 等项目的 Release Notes 中包含 Docker Manifest SHA256 摘要，可用于验证部署镜像的完整性，满足 [供应链安全](28-gong-ying-lian-an-quan-sbom-slsa-sigstore-yu-he-gui-zi-dong-hua) 文档中描述的 SLSA Level 要求。
 
-Sources: [CHANGELOG-1.36.md](topic-release-notes/kubernetes/CHANGELOG-1.36.md#L137-L200), [CHANGELOG-1.35.md](topic-release-notes/kubernetes/CHANGELOG-1.35.md#L175-L200)
+Sources: [CHANGELOG-1.36.md](领域索引/kubernetes/CHANGELOG-1.36.md#L137-L200), [CHANGELOG-1.35.md](领域索引/kubernetes/CHANGELOG-1.35.md#L175-L200)
 
 ## 版本文件命名与内容约定
 

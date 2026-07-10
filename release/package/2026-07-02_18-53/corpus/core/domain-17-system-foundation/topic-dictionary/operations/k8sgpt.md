@@ -69,6 +69,6 @@ K8sGPT 是 CNCF Sandbox 项目，利用 AI/LLM 技术自动扫描 Kubernetes 集
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/chaos-engineering.md|混沌工程]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/operations/k8up.md|K8up]]
+- [[domain-17-system-foundation/知识字典/operations/chaos-engineering.md|混沌工程]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/operations/k8up.md|K8up]]

@@ -79,9 +79,9 @@ Kubernetes 官方提供了从 PodSecurityPolicy 迁移到内置 Pod Security Adm
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|准入控制器]]
-- [[domain-17-system-foundation/topic-dictionary/security/application-security-checklist.md|应用安全清单]]
-- [[domain-17-system-foundation/topic-dictionary/security/athenz.md|Athenz 身份认证与授权]]
+- [[domain-17-system-foundation/知识字典/security/admission-controller.md|准入控制器]]
+- [[domain-17-system-foundation/知识字典/security/application-security-checklist.md|应用安全清单]]
+- [[domain-17-system-foundation/知识字典/security/athenz.md|Athenz 身份认证与授权]]
 
 
 <!-- risk-assessed -->

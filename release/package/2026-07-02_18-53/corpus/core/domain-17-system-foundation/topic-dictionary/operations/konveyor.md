@@ -67,6 +67,6 @@ Konveyor 是 Red Hat 开源的 CNCF Sandbox 项目，为应用现代化和迁移
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/buildpacks.md|Buildpacks]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
-- [[domain-17-system-foundation/topic-dictionary/operations/k8sgpt.md|K8sGPT]]
+- [[domain-17-system-foundation/知识字典/tooling/buildpacks.md|Buildpacks]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/operations/k8sgpt.md|K8sGPT]]

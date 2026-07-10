@@ -1050,8 +1050,8 @@ sequenceDiagram
 
 ## See Also
 
-- [[domain-05-security-compliance/06-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[domain-05-security-compliance/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
+- [[domain-05-security-compliance/合规审计/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
+- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|20-incident-response-process]]
 - [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 - [[domain-05-security-compliance/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-domain-05-security-compliance]]
 

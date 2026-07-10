@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可观测性/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus Enterprise Monitoring]]
-- [[可观测性/02-metrics/02-monitoring-metrics-system.md|Monitoring Metrics System]]
-- [[可观测性/02-metrics/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation]]
-- [[可观测性/02-metrics/07-monitoring-dashboards.md|Monitoring Dashboards]]
-- [[可观测性/02-metrics/10-monitoring-metrics-prometheus.md|Monitoring Metrics Prometheus]]
-- [[可观测性/02-metrics/11-custom-metrics-adapter.md|Custom Metrics Adapter]]
-- [[可观测性/02-metrics/15-enterprise-scale-monitoring.md|Enterprise Scale Monitoring]]
-- [[可观测性/02-metrics/16-multi-cluster-monitoring-governance.md|Multi Cluster Monitoring Governance]]
-- [[可观测性/02-metrics/17-monitoring-cost-optimization.md|Monitoring Cost Optimization]]
-- [[可观测性/02-metrics/99-prometheus-enterprise-guide.md|Prometheus Enterprise Guide]]
+- [[可观测性/指标/01-prometheus-enterprise-monitoring.md|Prometheus Enterprise Monitoring]]
+- [[可观测性/指标/02-monitoring-metrics-system.md|Monitoring Metrics System]]
+- [[可观测性/指标/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation]]
+- [[可观测性/指标/07-monitoring-dashboards.md|Monitoring Dashboards]]
+- [[可观测性/指标/10-monitoring-metrics-prometheus.md|Monitoring Metrics Prometheus]]
+- [[可观测性/指标/11-custom-metrics-adapter.md|Custom Metrics Adapter]]
+- [[可观测性/指标/15-enterprise-scale-monitoring.md|Enterprise Scale Monitoring]]
+- [[可观测性/指标/16-multi-cluster-monitoring-governance.md|Multi Cluster Monitoring Governance]]
+- [[可观测性/指标/17-monitoring-cost-optimization.md|Monitoring Cost Optimization]]
+- [[可观测性/指标/99-prometheus-enterprise-guide.md|Prometheus Enterprise Guide]]
 

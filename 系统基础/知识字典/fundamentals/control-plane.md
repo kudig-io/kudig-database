@@ -80,7 +80,7 @@ prerequisites:
 
 ## Related
 
-[[系统基础/topic-dictionary/fundamentals/kubernetes-components.md|Kubernetes 组件]] | [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]
+[[系统基础/知识字典/fundamentals/kubernetes-components.md|Kubernetes 组件]] | [[系统基础/知识字典/fundamentals/etcd.md|etcd]]
 
 
 <!-- risk-assessed -->

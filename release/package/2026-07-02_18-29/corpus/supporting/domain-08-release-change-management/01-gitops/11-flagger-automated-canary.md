@@ -612,8 +612,8 @@ kubectl logs -n flagger-system deploy/flagger -f --tail=100
 
 ## Related
 
-- [[domain-08-release-change-management/01-gitops/09-argo-rollouts-progressive-delivery|Argo Rollouts 渐进式交付]]
-- [[domain-08-release-change-management/03-change-management/02-canary-release-strategy|Canary 发布策略]]
+- [[domain-08-release-change-management/GitOps/09-argo-rollouts-progressive-delivery|Argo Rollouts 渐进式交付]]
+- [[domain-08-release-change-management/变更管理/02-canary-release-strategy|Canary 发布策略]]
 
 ## See Also
 

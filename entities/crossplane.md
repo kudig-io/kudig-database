@@ -79,8 +79,8 @@ Crossplane enables platform teams to create self-service infrastructure abstract
 - [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

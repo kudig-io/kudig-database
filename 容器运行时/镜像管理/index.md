@@ -22,14 +22,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[容器运行时/02-image-management/01-harbor-enterprise-image-registry.md|Harbor Enterprise Image Registry]]
-- [[容器运行时/02-image-management/02-docker-registry-enterprise-distribution.md|Docker Registry Enterprise Distribution]]
-- [[容器运行时/02-image-management/03-jfrog-artifactory-enterprise.md|Jfrog Artifactory Enterprise]]
-- [[容器运行时/02-image-management/04-harbor-enterprise-security-scanning.md|Harbor Enterprise Security Scanning]]
-- [[容器运行时/02-image-management/04-quay-enterprise-registry.md|Quay Enterprise Registry]]
-- [[容器运行时/02-image-management/05-gitlab-container-registry-enterprise.md|Gitlab Container Registry Enterprise]]
-- [[容器运行时/02-image-management/06-amazon-ecr-enterprise.md|Amazon Ecr Enterprise]]
-- [[容器运行时/02-image-management/99-harbor-enterprise-guide.md|Harbor Enterprise Guide]]
+- [[容器运行时/镜像管理/01-harbor-enterprise-image-registry.md|Harbor Enterprise Image Registry]]
+- [[容器运行时/镜像管理/02-docker-registry-enterprise-distribution.md|Docker Registry Enterprise Distribution]]
+- [[容器运行时/镜像管理/03-jfrog-artifactory-enterprise.md|Jfrog Artifactory Enterprise]]
+- [[容器运行时/镜像管理/04-harbor-enterprise-security-scanning.md|Harbor Enterprise Security Scanning]]
+- [[容器运行时/镜像管理/04-quay-enterprise-registry.md|Quay Enterprise Registry]]
+- [[容器运行时/镜像管理/05-gitlab-container-registry-enterprise.md|Gitlab Container Registry Enterprise]]
+- [[容器运行时/镜像管理/06-amazon-ecr-enterprise.md|Amazon Ecr Enterprise]]
+- [[容器运行时/镜像管理/99-harbor-enterprise-guide.md|Harbor Enterprise Guide]]
 
 
 

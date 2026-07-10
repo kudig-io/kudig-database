@@ -199,7 +199,7 @@ var OrderSagaSteps = []SagaStep{
 }
 ```
 
-## 4. [[domain-14-ai-ml-infra/03-agent-runtime/08-durable-agent-execution-temporal.md|Temporal]] 工作流引擎集成
+## 4. [[domain-14-ai-ml-infra/Agent运行时/08-durable-agent-execution-temporal.md|Temporal]] 工作流引擎集成
 
 ### 4.1 Temporal 架构
 
@@ -521,8 +521,8 @@ Saga 设计检查清单:
 
 ## Related
 
-- [[domain-20-application-patterns/sub-patterns/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
-- [[domain-20-application-patterns/sub-patterns/01-microservice-decomposition-strategies|微服务拆分策略]]
+- [[domain-20-application-patterns/子模式/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
+- [[domain-20-application-patterns/子模式/01-microservice-decomposition-strategies|微服务拆分策略]]
 - domain-08-release-change-management/
 
 ## See Also

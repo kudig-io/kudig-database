@@ -82,11 +82,11 @@ KEDA（Kubernetes Event-Driven Autoscaling）是 CNCF 毕业项目，为 Kuberne
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/scheduling/hpa.md|HPA]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/vpa.md|VPA]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/job.md|Job]]
+- [[domain-17-system-foundation/知识字典/scheduling/hpa.md|HPA]]
+- [[domain-17-system-foundation/知识字典/scheduling/vpa.md|VPA]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/workloads/deployment.md|Deployment]]
+- [[domain-17-system-foundation/知识字典/workloads/job.md|Job]]
 
 
 <!-- risk-assessed -->

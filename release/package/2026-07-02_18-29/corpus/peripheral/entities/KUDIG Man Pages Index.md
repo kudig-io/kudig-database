@@ -123,7 +123,7 @@ prerequisites:
 - [[concepts/etcd Operational Reference.md|etcd Operational Reference]]
 - [[entities/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 - [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 

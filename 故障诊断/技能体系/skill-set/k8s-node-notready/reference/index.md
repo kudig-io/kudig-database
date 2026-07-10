@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow.md|Diagnostic Workflow]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/remediation-playbook.md|Remediation Playbook]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md|Root Cause Catalog]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/version-matrix.md|Version Matrix]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md|Diagnostic Workflow]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md|Remediation Playbook]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md|Root Cause Catalog]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/version-matrix.md|Version Matrix]]
 

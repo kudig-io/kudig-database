@@ -161,7 +161,7 @@ spec:
 ### 审计日志集成
 
 1. **ASOP 审计**: 记录平台管理员的操作日志。
-2. **ACK 审计**: 记录 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 的所有请求。
+2. **ACK 审计**: 记录 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 的所有请求。
 3. **RDS/OSS 审计**: 存储日志需定期同步至 SLS 进行合规性检查。
 
 ### 导出与转发
@@ -199,22 +199,22 @@ spec:
 ## 相关文档
 
 - [95-logging-auditing.md](./95-logging-auditing.md) - Kubernetes 日志总表
-- [241-ack-slb-nlb-alb.md](./[[云厂商/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]].md) - 专有云负载均衡集成
+- [241-ack-slb-nlb-alb.md](./[[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]].md) - 专有云负载均衡集成
 - [252-apsara-stack-pop-operations.md](./252-apsara-stack-pop-operations.md) - 专有云平台运维 (POP)
 
 ## Related
 
 - [[log|log]]
 - [[index|index]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/sql.md|sql]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/sql.md|sql]]
 
 ## See Also
 
-- [[云厂商/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[云厂商/15-alicloud-apsara-ack/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[云厂商/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[云厂商/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
 
 
 <!-- risk-assessed -->

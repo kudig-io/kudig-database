@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-skills/assessment/answer-keys/k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]]
+- [[故障诊断/技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]]
 

@@ -83,11 +83,11 @@ Pod → External
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/clusterip.md|ClusterIP]]
-- [[domain-17-system-foundation/topic-dictionary/networking/nodeport.md|NodePort]]
-- [[domain-17-system-foundation/topic-dictionary/networking/loadbalancer.md|LoadBalancer]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kube-proxy.md|Kube-proxy]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/clusterip.md|ClusterIP]]
+- [[domain-17-system-foundation/知识字典/networking/nodeport.md|NodePort]]
+- [[domain-17-system-foundation/知识字典/networking/loadbalancer.md|LoadBalancer]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kube-proxy.md|Kube-proxy]]
 
 
 <!-- risk-assessed -->

@@ -1474,9 +1474,9 @@ echo "系统优化完成！请重启相关服务使配置生效。"
 - AI实验管理与MLOps平台
 - AutoML与超参数调优
 - AI模型注册中心与版本管理
-- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[故障诊断/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

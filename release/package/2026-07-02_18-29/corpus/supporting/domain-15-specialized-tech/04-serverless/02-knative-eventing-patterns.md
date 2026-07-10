@@ -603,8 +603,8 @@ kubectl get kafkasource -o yaml
 
 ## Related
 
-- [[domain-15-specialized-tech/04-serverless/01-knative-serving-deep-dive|Knative Serving 深度解析]]
-- [[domain-15-specialized-tech/04-serverless/03-openfaas-serverless-functions|OpenFaaS 无服务器函数]]
+- [[domain-15-specialized-tech/无服务器/01-knative-serving-deep-dive|Knative Serving 深度解析]]
+- [[domain-15-specialized-tech/无服务器/03-openfaas-serverless-functions|OpenFaaS 无服务器函数]]
 
 ## See Also
 

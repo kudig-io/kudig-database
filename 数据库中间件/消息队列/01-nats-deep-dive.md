@@ -100,7 +100,7 @@ spec:
 
 ## 相关
 
-- [[数据库中间件/03-message-queues/02-pulsar-architecture.md|02 pulsar architecture]]
+- [[数据库中间件/消息队列/02-pulsar-architecture.md|02 pulsar architecture]]
 
 
 <!-- risk-assessed -->

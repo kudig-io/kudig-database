@@ -659,8 +659,8 @@ spec:
 
 ## Related
 
-- [[清单模式/03-helm-values-patterns/01-helm-values-best-practices|Helm Values 最佳实践]]
-- [[清单模式/03-helm-values-patterns/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
+- [[清单模式/Helm值模式/01-helm-values-best-practices|Helm Values 最佳实践]]
+- [[清单模式/Helm值模式/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
 
 ## See Also
 

@@ -531,7 +531,7 @@ kubectl get certificate -A -w
 > 如有新的证书相关问题，可引用本次对话或重新发起。还有其他我可以帮助的吗？
 ## Related
 
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
 
 
 <!-- risk-assessed -->

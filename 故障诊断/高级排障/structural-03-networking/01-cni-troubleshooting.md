@@ -123,8 +123,8 @@ k8s_versions:
 | **资深专家** | 深入剖析 VXLAN/IPIP 封装原理、BGP 路由分发机制、eBPF（Cilium）对内核协议栈的加速优化，以及在大规模集群下的 IPAM 地址池管理和跨可用区网络延迟调优。 |
 
 > **专项排查文档**：
-> - [Terway（阿里云 CNI）深度排查]([[故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络问题
-> - [Flannel 专项排查]([[故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]].md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
+> - [Terway（阿里云 CNI）深度排查]([[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]].md) — 阿里云 ACK/ASK 集群网络问题
+> - [Flannel 专项排查]([[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]].md) — VXLAN/host-gw/UDP 模式、子网分配、跨节点通信
 
 ---
 
@@ -1763,21 +1763,21 @@ sysctl -p /etc/sysctl.d/99-kubernetes.conf
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[生态参考/topic-index/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[系统基础/速查卡/go.md|go]]
+- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
 
 
 <!-- risk-assessed -->

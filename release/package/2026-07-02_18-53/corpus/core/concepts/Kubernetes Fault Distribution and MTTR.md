@@ -40,7 +40,7 @@ relationships:
   type: uses
 - target: '[[skills/Kubernetes FTA Top Events Index.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/workloads/pods.md]]'
+- target: '[[domain-17-system-foundation/知识字典/workloads/pods.md]]'
   type: uses
 - target: '[[skills/best-practices/scenarios/capacity-planning.md]]'
   type: related_to
@@ -116,7 +116,7 @@ Based on production data across the industry:
 
 - etcd: 10,000+ writes/second on SSD
 - API Server: Handles 1,000+ req/sec per instance
-- kube-scheduler: Schedules 100+ [[domain-17-system-foundation/topic-dictionary/workloads/pods.md|pods]]/sec
+- kube-scheduler: Schedules 100+ [[domain-17-system-foundation/知识字典/workloads/pods.md|pods]]/sec
 - Typical cluster: 500-5,000 pods per cluster
 - Typical node: 50-110 pods per node (varies by instance type)
 

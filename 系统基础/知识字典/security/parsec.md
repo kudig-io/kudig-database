@@ -69,6 +69,6 @@ PARSEC（Platform AbstRaction for SECurity）是 CNCF Sandbox 项目，为应用
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/confidential-containers.md|Confidential Containers]]
-- [[系统基础/topic-dictionary/security/vault.md|Vault]]
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[系统基础/知识字典/security/confidential-containers.md|Confidential Containers]]
+- [[系统基础/知识字典/security/vault.md|Vault]]
+- [[系统基础/知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]

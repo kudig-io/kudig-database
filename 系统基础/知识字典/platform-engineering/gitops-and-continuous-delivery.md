@@ -102,7 +102,7 @@ repo/
 │   └── production/        # 生产环境覆盖
 ```
 
-### [[应用模式/topic-production-patterns/progressive-delivery-patterns.md|渐进式交付（Progressive Delivery）]]
+### [[应用模式/生产模式/progressive-delivery-patterns.md|渐进式交付（Progressive Delivery）]]
 
 结合 **Argo Rollouts** 实现：
 - **金丝雀分析（Canary Analysis）**：自动基于 Prometheus 指标判断是否继续推广
@@ -223,8 +223,8 @@ flux logs --all-namespaces
 - [CNCF GitOps Landscape](https://landscape.cncf.io/card-mode?category=continuous-delivery&grouping=category)
 
 ## Related
-- [[生态参考/topic-index/helm-index.md|Helm 全局索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

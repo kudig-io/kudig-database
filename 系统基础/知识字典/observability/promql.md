@@ -91,11 +91,11 @@ histogram_quantile(0.99, rate(duration_bucket[5m]))  # P99 延迟
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
-- [[系统基础/topic-dictionary/observability/alertmanager.md|Alertmanager]]
-- [[系统基础/topic-dictionary/observability/thanos.md|Thanos]]
-- [[系统基础/topic-dictionary/observability/metrics-server.md|Metrics Server]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/alertmanager.md|Alertmanager]]
+- [[系统基础/知识字典/observability/thanos.md|Thanos]]
+- [[系统基础/知识字典/observability/metrics-server.md|Metrics Server]]
 
 
 <!-- risk-assessed -->

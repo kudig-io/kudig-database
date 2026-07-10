@@ -251,7 +251,7 @@ kubectl port-forward svc/backend-api 8080:80 -n production
 
 ## Related
 
-- [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
 
 ```
 

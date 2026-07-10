@@ -73,9 +73,9 @@ ChaosBlade 是阿里巴巴开源的混沌工程工具，支持对 Java/C++/Node.
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/chaos-mesh.md|Chaos Mesh]]
-- [[系统基础/topic-dictionary/operations/litmus.md|LitmusChaos]]
-- [[系统基础/topic-dictionary/operations/krkn.md|Krkn]]
+- [[系统基础/知识字典/operations/chaos-mesh.md|Chaos Mesh]]
+- [[系统基础/知识字典/operations/litmus.md|LitmusChaos]]
+- [[系统基础/知识字典/operations/krkn.md|Krkn]]
 
 
 <!-- risk-assessed -->

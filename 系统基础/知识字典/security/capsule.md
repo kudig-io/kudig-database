@@ -67,6 +67,6 @@ Capsule 是 CNCF Sandbox 项目，为 Kubernetes 提供轻量级多租户管理�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
-- [[系统基础/topic-dictionary/security/opa.md|OPA]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/networking/networkpolicy.md|NetworkPolicy]]
+- [[系统基础/知识字典/security/opa.md|OPA]]

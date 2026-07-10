@@ -120,7 +120,7 @@ prerequisites:
 ## 相关
 
 - deployment]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|03 chaos experiment design]]
+- [[domain-09-reliability-engineering/混沌工程/03-chaos-experiment-design.md|03 chaos experiment design]]
 
 
 <!-- risk-assessed -->

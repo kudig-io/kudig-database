@@ -76,7 +76,7 @@ kube-proxy 监听 Service 和 Endpoints/EndpointSlice 的变化，自动更新�
 
 ## Related
 
-[[系统基础/topic-dictionary/networking/service.md|Service]]
+[[系统基础/知识字典/networking/service.md|Service]]
 
 
 <!-- risk-assessed -->

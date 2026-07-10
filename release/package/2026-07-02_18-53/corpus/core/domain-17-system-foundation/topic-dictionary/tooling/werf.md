@@ -75,9 +75,9 @@ werf 是 Flant 开源的 CNCF Sandbox 项目，一站式 CI/CD 工具，集成�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/operations/flux.md|Flux]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/helm.md|Helm]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/operations/flux.md|Flux]]
+- [[domain-17-system-foundation/知识字典/tooling/helm.md|Helm]]
 
 
 <!-- risk-assessed -->

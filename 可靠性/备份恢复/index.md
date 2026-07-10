@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可靠性/01-backup-recovery/01-etcd-backup-restore.md|Etcd Backup Restore]]
-- [[可靠性/01-backup-recovery/02-namespace-backup-restore.md|Namespace Backup Restore]]
-- [[可靠性/01-backup-recovery/03-pv-backup-snapshot.md|Pv Backup Snapshot]]
-- [[可靠性/01-backup-recovery/16-enterprise-backup-strategy.md|Enterprise Backup Strategy]]
+- [[可靠性/备份恢复/01-etcd-backup-restore.md|Etcd Backup Restore]]
+- [[可靠性/备份恢复/02-namespace-backup-restore.md|Namespace Backup Restore]]
+- [[可靠性/备份恢复/03-pv-backup-snapshot.md|Pv Backup Snapshot]]
+- [[可靠性/备份恢复/16-enterprise-backup-strategy.md|Enterprise Backup Strategy]]
 

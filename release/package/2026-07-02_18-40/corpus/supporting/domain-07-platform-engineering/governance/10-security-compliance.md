@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# 安全合规管理 ([[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Management)
+# 安全合规管理 ([[domain-07-platform-engineering/治理/10-security-compliance.md|Security & Compliance]] Management)
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **文档版本**: v2.0 | **最后更新**: 2026-02
 > **专业级别**: 企业级生产环境 | **作者**: Allen Galler

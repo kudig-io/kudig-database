@@ -1613,12 +1613,12 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|daemonset]]
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-17-system-foundation/知识字典/workloads/daemonset.md|daemonset]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

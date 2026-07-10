@@ -598,8 +598,8 @@ spec:
 
 ## Related
 
-- [[domain-20-application-patterns/sub-patterns/03-saga-distributed-transaction|Saga 分布式事务]]
-- [[domain-20-application-patterns/sub-patterns/01-microservice-decomposition-strategies|微服务拆分策略]]
+- [[domain-20-application-patterns/子模式/03-saga-distributed-transaction|Saga 分布式事务]]
+- [[domain-20-application-patterns/子模式/01-microservice-decomposition-strategies|微服务拆分策略]]
 - domain-16-database-middleware/
 
 ## See Also

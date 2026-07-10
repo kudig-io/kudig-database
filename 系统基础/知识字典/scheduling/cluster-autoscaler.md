@@ -78,11 +78,11 @@ Pending Pod → CA 检测 → 请求云厂商创建节点 → 节点加入集群
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/hpa.md|HPA]]
-- [[系统基础/topic-dictionary/scheduling/vpa.md|VPA]]
-- [[系统基础/topic-dictionary/scheduling/keda.md|KEDA]]
-- [[系统基础/topic-dictionary/operations/pdb.md|PDB]]
-- [[系统基础/topic-dictionary/fundamentals/node.md|Node]]
+- [[系统基础/知识字典/scheduling/hpa.md|HPA]]
+- [[系统基础/知识字典/scheduling/vpa.md|VPA]]
+- [[系统基础/知识字典/scheduling/keda.md|KEDA]]
+- [[系统基础/知识字典/operations/pdb.md|PDB]]
+- [[系统基础/知识字典/fundamentals/node.md|Node]]
 
 
 <!-- risk-assessed -->

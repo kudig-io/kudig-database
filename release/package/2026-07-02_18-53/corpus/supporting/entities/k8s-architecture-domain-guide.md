@@ -101,6 +101,6 @@ Distilled from domain-01-cluster-fundamentals (25 documents, Kubernetes v1.29-v1
 - [[concepts/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
+- [[domain-07-platform-engineering/代码分析/cluster-cert/01-pki-architecture.md|01-pki-architecture]]
 
 <!-- risk-assessed -->

@@ -67,6 +67,6 @@ SPIFFE（Secure Production Identity Framework for Everyone）是 CNCF 毕业项�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/spire.md|SPIRE]]
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
-- [[domain-17-system-foundation/topic-dictionary/operations/cert-manager.md|cert-manager]]
+- [[domain-17-system-foundation/知识字典/security/spire.md|SPIRE]]
+- [[domain-17-system-foundation/知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[domain-17-system-foundation/知识字典/operations/cert-manager.md|cert-manager]]

@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|Kubelet Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|Kube Proxy Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|Container Runtime Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|Node Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|Gpu Device Plugin Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/01-kubelet-troubleshooting.md|Kubelet Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|Kube Proxy Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/03-container-runtime-troubleshooting.md|Container Runtime Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/04-node-troubleshooting.md|Node Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/05-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|Gpu Device Plugin Troubleshooting]]
 

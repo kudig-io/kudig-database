@@ -649,7 +649,7 @@ spec:
 
 ## See Also
 
-- [[云厂商/07-huawei-cce/99-huawei-cce-production-runbook.md|华为云 CCE 生产运行手册]]
+- [[云厂商/华为云CCE/99-huawei-cce-production-runbook.md|华为云 CCE 生产运行手册]]
 
 
 <!-- risk-assessed -->

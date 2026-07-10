@@ -506,10 +506,10 @@ curl -s -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-versio
 - [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cloud-controller-manager.md|cloud-controller-manager]]
 
 ```
 

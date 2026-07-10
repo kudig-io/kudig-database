@@ -61,17 +61,17 @@ prerequisites:
 
 ### 故障排查
 
-- [[故障诊断/00-core-troubleshooting/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断 (Pod Pending Diagnosis)]]
+- [[故障诊断/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断 (Pod Pending Diagnosis)]]
 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
+- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
 
 ### FTA 故障树
 
-- [[故障诊断/topic-fta/list/pod-fta.md|Pod 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/pod-fta.md|Pod 异常 FTA 树]]
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
+- [[故障诊断/技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### YAML 配置
 
@@ -91,36 +91,36 @@ prerequisites:
 
 ### 工作负载
 
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md|Job 与 CronJob 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
+- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
+- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
+- [[故障诊断/高级排障/05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
+- [[故障诊断/高级排障/05-workloads/05-job-cronjob-troubleshooting.md|Job 与 CronJob 故障排查指南]]
+- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
 
 ### 控制平面
 
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
 
 ### 网络
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
 
 ### 存储
 
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### 安全
 
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
 
 ### 调度资源
 
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
 
 ---
 
@@ -130,16 +130,16 @@ prerequisites:
 
 ### 节点相关
 
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/workloads/pods.md|Pods]]
-- [[系统基础/topic-dictionary/workloads/pod-lifecycle.md|Pod Lifecycle]]
-- [[系统基础/topic-dictionary/workloads/managing-workloads.md|Managing Workloads]]
-- [[系统基础/topic-dictionary/workloads/sidecar-containers.md|Sidecar Containers]]
-- [[系统基础/topic-dictionary/workloads/vertical-pod-autoscaling.md|Vertical Pod Autoscaling]]
+- [[系统基础/知识字典/workloads/pods.md|Pods]]
+- [[系统基础/知识字典/workloads/pod-lifecycle.md|Pod Lifecycle]]
+- [[系统基础/知识字典/workloads/managing-workloads.md|Managing Workloads]]
+- [[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]
+- [[系统基础/知识字典/workloads/vertical-pod-autoscaling.md|Vertical Pod Autoscaling]]
 
 
 <!-- risk-assessed -->

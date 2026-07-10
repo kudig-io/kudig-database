@@ -75,9 +75,9 @@ DevSpace 是 Loft Labs 开源的云原生开发工具，为 Kubernetes 提供一
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/telepresence.md|Telepresence]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/skaffold.md|Skaffold]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/devfile.md|Devfile]]
+- [[domain-17-system-foundation/知识字典/tooling/telepresence.md|Telepresence]]
+- [[domain-17-system-foundation/知识字典/tooling/skaffold.md|Skaffold]]
+- [[domain-17-system-foundation/知识字典/tooling/devfile.md|Devfile]]
 
 
 <!-- risk-assessed -->

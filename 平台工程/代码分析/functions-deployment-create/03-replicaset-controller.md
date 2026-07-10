@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-title: [[系统基础/topic-dictionary/workloads/replicaset.md|replicaset]] 控制器源码分析
+title: [[系统基础/知识字典/workloads/replicaset.md|replicaset]] 控制器源码分析
 category: deployment
 tags:
 - replicaset
@@ -450,8 +450,8 @@ kubelet: 在节点上创建容器
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 
 

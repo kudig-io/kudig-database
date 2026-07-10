@@ -285,8 +285,8 @@ crictl logs <container-id>   # 需 SSH 到节点
 
 ## 7. 跨域协作
 
-- **Pod 可用性与探针设计**: 见 [[topic-production-patterns/pod-availability-lifecycle|Pod 可用性生产模式]]
-- **资源 QoS 与 OOM**: 见 [[topic-production-patterns/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
+- **Pod 可用性与探针设计**: 见 [[生产模式/pod-availability-lifecycle|Pod 可用性生产模式]]
+- **资源 QoS 与 OOM**: 见 [[生产模式/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
 - **结构化排障方法论 (FTA)**: 见 `故障诊断/topic-fta/`
 - **网络连通性排障**: 见 `网络/99-production-readiness-operations-guide.md`
 - **节点异常排障**: 见 `故障诊断/topic-structural-trouble-shooting/02-node-components/`

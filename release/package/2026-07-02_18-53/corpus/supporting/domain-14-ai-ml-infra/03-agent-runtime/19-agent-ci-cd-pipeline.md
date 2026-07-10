@@ -952,9 +952,9 @@ spec:
 
 ## 相关主题
 
-- [[domain-14-ai-ml-infra/03-agent-runtime/18-agent-retry-resilience|Agent弹性设计]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/20-agent-multi-tenancy|Agent多租户架构]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
+- [[domain-14-ai-ml-infra/Agent运行时/18-agent-retry-resilience|Agent弹性设计]]
+- [[domain-14-ai-ml-infra/Agent运行时/20-agent-multi-tenancy|Agent多租户架构]]
+- [[domain-14-ai-ml-infra/Agent运行时/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
 
 ## 参考资料
 

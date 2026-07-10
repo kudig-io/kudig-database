@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-09-reliability-engineering/01-backup-recovery/01-etcd-backup-restore.md|Etcd Backup Restore]]
-- [[domain-09-reliability-engineering/01-backup-recovery/02-namespace-backup-restore.md|Namespace Backup Restore]]
-- [[domain-09-reliability-engineering/01-backup-recovery/03-pv-backup-snapshot.md|Pv Backup Snapshot]]
-- [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|Enterprise Backup Strategy]]
+- [[domain-09-reliability-engineering/备份恢复/01-etcd-backup-restore.md|Etcd Backup Restore]]
+- [[domain-09-reliability-engineering/备份恢复/02-namespace-backup-restore.md|Namespace Backup Restore]]
+- [[domain-09-reliability-engineering/备份恢复/03-pv-backup-snapshot.md|Pv Backup Snapshot]]
+- [[domain-09-reliability-engineering/备份恢复/16-enterprise-backup-strategy.md|Enterprise Backup Strategy]]
 

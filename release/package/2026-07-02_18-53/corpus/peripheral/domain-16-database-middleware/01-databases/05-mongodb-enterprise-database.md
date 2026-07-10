@@ -76,7 +76,7 @@ MongoDB 是全球领先的文档型 NoSQL 数据库，以其灵活的文档模�
 
 企业级 MongoDB 运维需要掌握的核心领域包括：副本集（Replica Set）的高可用配置与故障转移、分片集群（Sharded Cluster）的数据均衡与热点处理、WiredTiger 存储引擎的内存与缓存调优、基于 Oplog 的增量备份与时间点恢复、以及安全加固（SCRAM-SHA-256、TLS、RBAC、审计日志）。本文档系统覆盖上述所有主题，提供生产级配置和脚本。
 
-MongoDB 在 K8s 环境中的运维推荐使用 MongoDB Community Operator（开源）或 MongoDB Atlas（云托管）。对于自建场景，需要特别关注 [[StatefulSet|StatefulSet]] 的有序部署、PodDisruptionBudget 的配置、以及 PVC 的存储类选择。对于完整的 K8s 生产部署指南（ReplicaSet 与 Sharded 集群选型、Operator 部署、备份恢复、TLS、mTLS、监控告警与故障转移），参见 [[domain-16-database-middleware/01-databases/18-mongodb-kubernetes-production-guide|MongoDB Kubernetes 生产指南]]。
+MongoDB 在 K8s 环境中的运维推荐使用 MongoDB Community Operator（开源）或 MongoDB Atlas（云托管）。对于自建场景，需要特别关注 [[StatefulSet|StatefulSet]] 的有序部署、PodDisruptionBudget 的配置、以及 PVC 的存储类选择。对于完整的 K8s 生产部署指南（ReplicaSet 与 Sharded 集群选型、Operator 部署、备份恢复、TLS、mTLS、监控告警与故障转移），参见 [[domain-16-database-middleware/数据库/18-mongodb-kubernetes-production-guide|MongoDB Kubernetes 生产指南]]。
 
 ## MongoDB 技术架构深度解析
 

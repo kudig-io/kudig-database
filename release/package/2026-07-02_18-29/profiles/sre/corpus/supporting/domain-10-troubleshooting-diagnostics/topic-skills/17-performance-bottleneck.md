@@ -92,7 +92,7 @@ agent_execution_mode: L2-semi-auto
 - **网络性能瓶颈**: 带宽瓶颈、连接数限制、conntrack 表溢出
 - **磁盘 I/O 性能瓶颈**: IOPS、吞吐量、延迟问题
 - **Kubernetes 平台性能**: API Server 过载、etcd 慢查询、Scheduler 延迟
-- **应用级性能分析**: pprof/[[domain-10-troubleshooting-diagnostics/04-jvm-tuning/03-jdk-flight-recorder-k8s.md|JFR]]/perf 实战工具使用
+- **应用级性能分析**: pprof/[[domain-10-troubleshooting-diagnostics/JVM调优/03-jdk-flight-recorder-k8s.md|JFR]]/perf 实战工具使用
 
 ### 典型触发场景
 

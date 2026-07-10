@@ -1905,7 +1905,7 @@ v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标
 
 - research/ — tag hub
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

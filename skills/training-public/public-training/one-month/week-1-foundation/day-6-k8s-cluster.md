@@ -552,11 +552,11 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 - [集群配置参数](../../集群基础/06-cluster-configuration-parameters.md)
 - [API 版本与特性](../../集群基础/03-api-versions-features.md)
 - [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
-- [K8s 速查手册](../../系统基础/topic-cheat-sheet/k8s.md)
+- [K8s 速查手册](../../系统基础/速查卡/k8s.md)
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

@@ -70,6 +70,6 @@ Logging Operator 是 Kube Logging（原 Banzai Cloud）开源的 CNCF Sandbox �
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/fluentd.md|Fluentd]]
-- [[系统基础/topic-dictionary/observability/loki.md|Loki]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/fluentd.md|Fluentd]]
+- [[系统基础/知识字典/observability/loki.md|Loki]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]

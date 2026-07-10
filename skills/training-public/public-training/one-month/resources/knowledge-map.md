@@ -402,7 +402,7 @@ Pod → Prometheus (采集+存储) → Grafana (可视化)
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

@@ -236,9 +236,9 @@ kubectl patch pv <pv-name> -p '{"spec":{"claimRef":null}}'
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/ceph.md|Ceph]]
-- [[系统基础/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
-- [[系统基础/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+- [[系统基础/知识字典/storage/ceph.md|Ceph]]
+- [[系统基础/知识字典/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[系统基础/知识字典/storage/composefs.md|ComposeFS 只读文件系统]]
 
 ```
 

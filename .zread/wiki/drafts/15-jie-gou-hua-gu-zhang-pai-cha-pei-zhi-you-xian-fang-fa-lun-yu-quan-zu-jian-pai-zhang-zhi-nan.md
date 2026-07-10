@@ -1,6 +1,6 @@
 当 Kubernetes 生产集群出现疑难问题时，最常见的困境不是"没有排查手段"，而是"不知道该从哪里开始"。面对症状模糊、多组件交叉关联的复杂故障，SRE 工程师往往陷入"东查一下、西查一下"的无序状态。本页系统梳理了一套**配置优先（Configuration-First）**的结构化排查方法论，并基于 41 篇组件级排障指南，构建从现象到根因的全景式排查路径，帮助你在面对任何 Kubernetes 故障时都能快速定位排查起点、遵循最优排查顺序。
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L1-L29), [README.md](topic-structural-trouble-shooting/README.md#L1-L17)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L1-L29), [README.md](高级排障/README.md#L1-L17)
 
 ## 方法论定位：四层排查体系
 
@@ -14,7 +14,7 @@ Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooti
 
 **配置优先方法论**解决的是最前置的决策问题：当你面对一个疑难故障时，第一步该做什么？答案不是抓包，不是查内核参数，而是——**先检查配置文件**。
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L15-L37)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L15-L37)
 
 ## 黄金法则：为什么配置必须优先
 
@@ -31,7 +31,7 @@ Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooti
 
 这个数据的含义非常明确：**在投入任何高成本排查手段之前，配置验证是不可跳过的第一步**。
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L42-L59)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L42-L59)
 
 ## 排查顺序金字塔与五步法
 
@@ -66,7 +66,7 @@ graph TB
 - **证据驱动**：每一步的排除必须有明确的命令输出或日志证据支撑
 - **时间门控**：每一步有建议的时间上限，超时应重新评估方向
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L61-L97)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L61-L97)
 
 ## Step 1 详解：配置检查四层模型与通用检查清单
 
@@ -91,7 +91,7 @@ Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooti
 | C6 | **默认值陷阱** | 隐式默认值是否符合预期 | 确认关键字段未依赖不安全的默认值 |
 | C7 | **权限与引用** | 配置引用的资源是否存在且可访问 | Secret/ConfigMap 存在、RBAC 允许访问 |
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L100-L135)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L100-L135)
 
 ## 实战案例：CoreDNS 疑难问题的配置优先排查全流程
 
@@ -140,7 +140,7 @@ kubectl get endpoints kube-dns -n kube-system
 
 当 Step 1 未发现配置问题时，依次进入**版本兼容性验证**（检查 CoreDNS 版本与 K8s 版本兼容矩阵）、**运行状态与资源检查**（CPU/内存使用、副本数、SERVFAIL 率）、**网络链路排查**（Pod IP 连通性、kube-proxy 规则、NetworkPolicy 阻断、conntrack 表），以及最后的**系统深层排查**（内核 conntrack 竞态、IPVS 规则、系统级 DNS 缓存）。每一步都附带明确的检查命令和判定标准。
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L138-L355)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L138-L355)
 
 ## 全组件排障地图：41 篇指南全景覆盖
 
@@ -238,7 +238,7 @@ graph LR
 | API 请求限流 (429) | API 优先级与公平性 (APF) |
 | kubectl drain 卡住 | PodDisruptionBudget 排查 |
 
-Sources: [README.md](topic-structural-trouble-shooting/README.md#L116-L157)
+Sources: [README.md](高级排障/README.md#L116-L157)
 
 ### 各组件 10 分钟快速诊断模板
 
@@ -246,31 +246,31 @@ Sources: [README.md](topic-structural-trouble-shooting/README.md#L116-L157)
 
 **API Server**：确认 `kubectl version` 和 `/readyz` 是否返回 → 查看健康端点详细输出 → 检查资源与 APF 限流 → 检查 etcd 延迟 → 分析请求模式（LIST/watch 风暴）。
 
-Sources: [01-apiserver-troubleshooting.md](topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md#L28-L39)
+Sources: [01-apiserver-troubleshooting.md](高级排障/01-control-plane/01-apiserver-troubleshooting.md#L28-L39)
 
 **kubelet**：`kubectl get nodes -o wide` 查看节点面状态 → `curl localhost:10248/healthz` 检查存活 → `free -m`/`df -h` 确认资源压力 → `crictl info` 验证 CRI 交互 → `journalctl -u kubelet | grep PLEG` 检查 PLEG/驱逐信号。
 
-Sources: [01-kubelet-troubleshooting.md](topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md#L14-L26)
+Sources: [01-kubelet-troubleshooting.md](高级排障/02-node-components/01-kubelet-troubleshooting.md#L14-L26)
 
 **CNI 网络插件**：检查 CNI DaemonSet 存活 → 节点上验证 `/etc/cni/net.d/` 与 `/opt/cni/bin/` 完整性 → 检查 Pod IP 分配状态 → 验证路由/封装（VXLAN/BGP） → 测试 MTU 与跨节点连通。
 
-Sources: [01-cni-troubleshooting.md](topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md#L24-L37)
+Sources: [01-cni-troubleshooting.md](高级排障/03-networking/01-cni-troubleshooting.md#L24-L37)
 
 **Pod 故障排查**：四步法 `get → describe → logs → exec` → 定位 Pending/ContainerCreating/CrashLoopBackOff 阶段 → 确认镜像与拉取 → 检查资源与驱逐 → 验证网络/存储。
 
-Sources: [01-pod-troubleshooting.md](topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md#L16-L27)
+Sources: [01-pod-troubleshooting.md](高级排障/05-workloads/01-pod-troubleshooting.md#L16-L27)
 
 **PV/PVC 存储**：`kubectl get pvc -A` 查看 PVC 状态 → 核对 PV/StorageClass 配置 → 检查 VolumeAttachment 附件状态 → 节点上确认设备与挂载存在 → 排查 Multi-Attach 冲突。
 
-Sources: [01-pv-pvc-troubleshooting.md](topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md#L16-L27)
+Sources: [01-pv-pvc-troubleshooting.md](高级排障/04-storage/01-pv-pvc-troubleshooting.md#L16-L27)
 
 **RBAC/认证**：`kubectl auth whoami` 确认身份 → `kubectl auth can-i` 快速权限判断 → 检查事件与审计日志 → 排查绑定链路 → 验证 ServiceAccount Token。
 
-Sources: [01-rbac-troubleshooting.md](topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md#L15-L26)
+Sources: [01-rbac-troubleshooting.md](高级排障/06-security-auth/01-rbac-troubleshooting.md#L15-L26)
 
 **AI/ML 工作负载**：检查 GPU 可见性 → Device Plugin DaemonSet 状态 → 分布式训练 Pod 的 NCCL/网络报错 → 数据集 PVC 挂载与 I/O 吞吐 → GPU 资源请求碎片化。
 
-Sources: [01-ai-ml-workloads-troubleshooting.md](topic-structural-trouble-shooting/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md#L5-L15)
+Sources: [01-ai-ml-workloads-troubleshooting.md](高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md#L5-L15)
 
 ## 通用排查流程：从现象到修复
 
@@ -302,7 +302,7 @@ flowchart TD
     style F fill:#1a5276,color:#fff
 ```
 
-Sources: [README.md](topic-structural-trouble-shooting/README.md#L201-L231)
+Sources: [README.md](高级排障/README.md#L201-L231)
 
 ## 反模式与陷阱：排查中最常见的五个错误
 
@@ -314,7 +314,7 @@ Sources: [README.md](topic-structural-trouble-shooting/README.md#L201-L231)
 | A4 | **忽略近期变更** | 不查变更历史就开始排查 | 70% 的故障与近期变更相关 | Step 1 必须包含变更追溯 |
 | A5 | **默认值盲区** | 假设默认配置没问题 | Kubernetes 默认值不一定适合所有场景 | 明确检查关键参数的默认值 |
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L486-L506)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L486-L506)
 
 ## 其他常见组件的 Step 1 配置检查速查
 
@@ -355,7 +355,7 @@ Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooti
 | Volume 挂载 | `kubectl describe pod <pod> \| grep -A 10 Volumes` | ConfigMap/Secret/PVC 不存在或名称错误 |
 | SecurityContext | `kubectl get pod <pod> -o yaml \| grep -A 10 securityContext` | 与 PSA 策略冲突 |
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L358-L398)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L358-L398)
 
 ## 文档统计与覆盖范围
 
@@ -373,7 +373,7 @@ Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooti
 | 集群运维 | 6 | 维护升级、日志监控、Helm、HA/灾备、CRD/Operator、Kustomize | ⭐⭐⭐ 运维效率提升 |
 | 云厂商/AI/GitOps/可观测 | 4 | 云厂商集成、AI/ML 工作负载、GitOps/DevOps、监控可观测 | ⭐⭐ 扩展场景 |
 
-Sources: [README.md](topic-structural-trouble-shooting/README.md#L236-L248)
+Sources: [README.md](高级排障/README.md#L236-L248)
 
 ## 排查前置条件与工具推荐
 
@@ -386,7 +386,7 @@ Sources: [README.md](topic-structural-trouble-shooting/README.md#L236-L248)
 
 此外，`domain-10-troubleshooting-diagnostics/tools/` 目录下提供了一个完整的 Shell 诊断工具套件 `domain12_troubleshooting_toolkit.sh`，可自动执行集群健康检查、节点诊断、Pod 状态分析等任务，适合作为排查流程中的辅助自动化工具。
 
-Sources: [README.md](topic-structural-trouble-shooting/README.md#L108-L114), [domain12_troubleshooting_toolkit.sh](domain-10-troubleshooting-diagnostics/tools/domain12_troubleshooting_toolkit.sh#L1-L58)
+Sources: [README.md](高级排障/README.md#L108-L114), [domain12_troubleshooting_toolkit.sh](domain-10-troubleshooting-diagnostics/tools/domain12_troubleshooting_toolkit.sh#L1-L58)
 
 ## 配置优先排查 Checklist（可直接打印使用）
 
@@ -410,7 +410,7 @@ Sources: [README.md](topic-structural-trouble-shooting/README.md#L108-L114), [do
 - [ ] **CF6** `reload` 插件存在（支持热加载）
 - [ ] **CF7-CF12** resolv.conf、Service selector、Endpoints、副本数、资源限制等
 
-Sources: [00-configuration-first-methodology.md](topic-structural-trouble-shooting/00-configuration-first-methodology.md#L509-L537)
+Sources: [00-configuration-first-methodology.md](高级排障/00-configuration-first-methodology.md#L509-L537)
 
 ## 延伸阅读与下一步
 

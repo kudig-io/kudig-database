@@ -73,9 +73,9 @@ Crossplane Composition 是 Crossplane 的组合式基础设施管理特性，通
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/backstage.md|Backstage]]
-- [[domain-17-system-foundation/topic-dictionary/multi-cloud/cluster-api.md|Cluster API]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/backstage.md|Backstage]]
+- [[domain-17-system-foundation/知识字典/multi-cloud/cluster-api.md|Cluster API]]
 
 
 <!-- risk-assessed -->

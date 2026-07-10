@@ -97,11 +97,11 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/dns-fta.md|dns fta]]
-- [[故障诊断/topic-fta/list/service-fta.md|service fta]]
-- [[故障诊断/topic-fta/list/ingress-fta.md|ingress fta]]
-- [[故障诊断/topic-fta/list/networkpolicy-fta.md|networkpolicy fta]]
-- [[故障诊断/topic-fta/list/service-fta.md|service fta]]
+- [[故障诊断/FTA故障树/list/dns-fta.md|dns fta]]
+- [[故障诊断/FTA故障树/list/service-fta.md|service fta]]
+- [[故障诊断/FTA故障树/list/ingress-fta.md|ingress fta]]
+- [[故障诊断/FTA故障树/list/networkpolicy-fta.md|networkpolicy fta]]
+- [[故障诊断/FTA故障树/list/service-fta.md|service fta]]
 
 
 ---
@@ -121,10 +121,10 @@ graph TD
 ## Related
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[skills/service-fta.md|service-fta]]
-- [[故障诊断/topic-fta/list/dns-fta.md|dns-fta]]
-- [[故障诊断/topic-fta/list/ingress-fta.md|ingress-fta]]
+- [[故障诊断/FTA故障树/list/dns-fta.md|dns-fta]]
+- [[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]]
 
 
 <!-- risk-assessed -->

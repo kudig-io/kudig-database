@@ -265,7 +265,7 @@ kubectl --kubeconfig=/path/to/config get pods
 ```
 ## 交叉引用
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
+- [[domain-17-system-foundation/知识字典/configuration/secrets.md|Secrets]]](./secrets.md) — kubeconfig 中的凭据本质上是 Secret 数据
 - [ConfigMaps](./configmaps.md) — 集群配置管理的另一种方式
 
 ## 参考链接
@@ -274,9 +274,9 @@ kubectl --kubeconfig=/path/to/config get pods
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|配置映射]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|环境变量配置]]
+- [[domain-17-system-foundation/知识字典/configuration/configmap.md|配置映射]]
+- [[domain-17-system-foundation/知识字典/configuration/configmaps.md|ConfigMaps]]
+- [[domain-17-system-foundation/知识字典/configuration/env.md|环境变量配置]]
 
 
 <!-- risk-assessed -->

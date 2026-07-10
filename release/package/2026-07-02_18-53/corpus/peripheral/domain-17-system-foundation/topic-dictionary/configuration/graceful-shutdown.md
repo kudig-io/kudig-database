@@ -87,11 +87,11 @@ spec:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmap.md|Configmap]]
-- [[domain-17-system-foundation/topic-dictionary/security/secret.md|Secret]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/env.md|Env]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/configmaps.md|Configmaps]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/probe.md|Probe]]
+- [[domain-17-system-foundation/知识字典/configuration/configmap.md|Configmap]]
+- [[domain-17-system-foundation/知识字典/security/secret.md|Secret]]
+- [[domain-17-system-foundation/知识字典/configuration/env.md|Env]]
+- [[domain-17-system-foundation/知识字典/configuration/configmaps.md|Configmaps]]
+- [[domain-17-system-foundation/知识字典/configuration/probe.md|Probe]]
 
 
 <!-- risk-assessed -->

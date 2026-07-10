@@ -339,8 +339,8 @@ spec:
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|Kubernetes 生产环境速查卡]]
-- [[domain-17-system-foundation/topic-dictionary/security/multi-tenancy.md|多租户]]
+- [[domain-17-system-foundation/速查卡/k8s.md|Kubernetes 生产环境速查卡]]
+- [[domain-17-system-foundation/知识字典/security/multi-tenancy.md|多租户]]
 
 
 <!-- risk-assessed -->

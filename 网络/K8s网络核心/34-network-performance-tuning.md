@@ -293,7 +293,7 @@ groups:
 
 - 网络 KUDIG Database — Global MOC
 - [[网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
-- [[网络/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
+- [[网络/K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - index.md|Domain-5 网络 — 开源项目索引]]
 - FAQ 文档
 - 网络核心组件
@@ -313,7 +313,7 @@ groups:
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

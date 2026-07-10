@@ -67,6 +67,6 @@ in-toto 是 CNCF 孵化项目，为软件供应链提供端到端的完整性验
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/notary-project.md|Notary Project]]
-- [[domain-17-system-foundation/topic-dictionary/security/ratify.md|Ratify]]
-- [[domain-17-system-foundation/topic-dictionary/security/supply-chain-security.md|供应链安全]]
+- [[domain-17-system-foundation/知识字典/security/notary-project.md|Notary Project]]
+- [[domain-17-system-foundation/知识字典/security/ratify.md|Ratify]]
+- [[domain-17-system-foundation/知识字典/security/supply-chain-security.md|供应链安全]]

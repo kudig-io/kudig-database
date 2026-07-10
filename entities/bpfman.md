@@ -85,7 +85,7 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - bpfman
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

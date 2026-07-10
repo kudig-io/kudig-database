@@ -693,9 +693,9 @@ print(result)
 
 ## 相关主题
 
-- [[AI基础设施/03-agent-runtime/15-cloud-agent-platforms|云Agent平台即服务]]
-- [[AI基础设施/03-agent-runtime/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
-- [[AI基础设施/03-agent-runtime/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
+- [[AI基础设施/Agent运行时/15-cloud-agent-platforms|云Agent平台即服务]]
+- [[AI基础设施/Agent运行时/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
+- [[AI基础设施/Agent运行时/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
 
 ## 参考资料
 

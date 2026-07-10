@@ -493,7 +493,7 @@ chmod +x failover-test.sh
 ```
 ---
 
-<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[系统基础/topic-dictionary/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[Service|Service]] Discovery Issues) -->
+<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[系统基础/知识字典/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[Service|Service]] Discovery Issues) -->
 ## 4. 跨集群网络和服务发现问题排查 (Cross-Cluster Networking and Service Discovery Issues)
 
 ### 4.1 服务发现配置检查
@@ -1235,25 +1235,25 @@ chmod +x cluster-failover.sh
 - 故障诊断 MOC
 - [[故障诊断/README.md|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
-- [[故障诊断/00-core-troubleshooting/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
-- [[故障诊断/00-core-troubleshooting/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
-- [[故障诊断/00-core-troubleshooting/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
-- [[故障诊断/00-core-troubleshooting/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[故障诊断/00-core-troubleshooting/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
-- [[故障诊断/00-core-troubleshooting/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[故障诊断/00-core-troubleshooting/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[故障诊断/00-core-troubleshooting/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[故障诊断/01-resource-troubleshooting/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[故障诊断/topic-fta/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[故障诊断/topic-fta/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[故障诊断/核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
+- [[故障诊断/核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
+- [[故障诊断/核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
+- [[故障诊断/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
+- [[故障诊断/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
+- [[故障诊断/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
+- [[故障诊断/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
+- [[故障诊断/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
+- [[故障诊断/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[故障诊断/03-advanced-troubleshooting/35-node-component-troubleshooting.md|35-node-component-troubleshooting]]
-- [[故障诊断/03-advanced-troubleshooting/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
-- [[故障诊断/03-advanced-troubleshooting/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[故障诊断/03-advanced-troubleshooting/39-enterprise-monitoring-alerting-system.md|39-enterprise-monitoring-alerting-system]]
+- [[故障诊断/高级排障/35-node-component-troubleshooting.md|35-node-component-troubleshooting]]
+- [[故障诊断/高级排障/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
+- [[故障诊断/高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+- [[故障诊断/高级排障/39-enterprise-monitoring-alerting-system.md|39-enterprise-monitoring-alerting-system]]
 
 
 <!-- risk-assessed -->

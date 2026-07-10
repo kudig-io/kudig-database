@@ -488,9 +488,9 @@ ossutil cp -r /vm-data/snapshots/20240629 oss://victoria-backups/snapshots/
 
 ## 13. 相关文档
 
-- [[数据库中间件/04-time-series-db/01-prometheus-tsdb-deep-dive.md|Prometheus TSDB 深度解析]]
-- [[数据库中间件/04-time-series-db/02-influxdb-vs-timescaledb.md|InfluxDB 与 TimescaleDB 对比]]
-- [[可观测性/02-metrics/02-monitoring-metrics-system.md|监控指标体系]]
+- [[数据库中间件/时序数据库/01-prometheus-tsdb-deep-dive.md|Prometheus TSDB 深度解析]]
+- [[数据库中间件/时序数据库/02-influxdb-vs-timescaledb.md|InfluxDB 与 TimescaleDB 对比]]
+- [[可观测性/指标/02-monitoring-metrics-system.md|监控指标体系]]
 
 ```
 

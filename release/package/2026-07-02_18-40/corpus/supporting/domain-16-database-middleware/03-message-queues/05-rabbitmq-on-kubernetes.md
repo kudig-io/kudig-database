@@ -370,8 +370,8 @@ RabbitMQ 在 Kubernetes 中的常见工单包括连接数告警、队列堆积�
 
 ## 11. 相关文档
 
-- [[domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md|消息队列选型对比]]
-- [[domain-16-database-middleware/03-message-queues/04-rocketmq-on-kubernetes.md|RocketMQ on Kubernetes]]
+- [[domain-16-database-middleware/消息队列/03-message-queue-comparison.md|消息队列选型对比]]
+- [[domain-16-database-middleware/消息队列/04-rocketmq-on-kubernetes.md|RocketMQ on Kubernetes]]
 - 身份认证与授权系统
 
 ```

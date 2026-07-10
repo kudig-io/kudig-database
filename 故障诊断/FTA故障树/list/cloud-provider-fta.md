@@ -154,10 +154,10 @@ flowchart TD
 - [[service-fta]] — Service 异常故障树分析
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
-- [[故障诊断/topic-fta/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
+- [[故障诊断/FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
 - [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

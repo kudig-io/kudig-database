@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-16-database-middleware/03-message-queues/01-nats-deep-dive.md|Nats Deep Dive]]
-- [[domain-16-database-middleware/03-message-queues/02-pulsar-architecture.md|Pulsar Architecture]]
-- [[domain-16-database-middleware/03-message-queues/03-message-queue-comparison.md|Message Queue Comparison]]
-- [[domain-16-database-middleware/03-message-queues/04-rocketmq-on-kubernetes.md|Rocketmq On Kubernetes]]
-- [[domain-16-database-middleware/03-message-queues/05-rabbitmq-on-kubernetes.md|Rabbitmq On Kubernetes]]
-- [[domain-16-database-middleware/03-message-queues/06-kafka-kubernetes-production-guide.md|Kafka Kubernetes Production Guide]]
+- [[domain-16-database-middleware/消息队列/01-nats-deep-dive.md|Nats Deep Dive]]
+- [[domain-16-database-middleware/消息队列/02-pulsar-architecture.md|Pulsar Architecture]]
+- [[domain-16-database-middleware/消息队列/03-message-queue-comparison.md|Message Queue Comparison]]
+- [[domain-16-database-middleware/消息队列/04-rocketmq-on-kubernetes.md|Rocketmq On Kubernetes]]
+- [[domain-16-database-middleware/消息队列/05-rabbitmq-on-kubernetes.md|Rabbitmq On Kubernetes]]
+- [[domain-16-database-middleware/消息队列/06-kafka-kubernetes-production-guide.md|Kafka Kubernetes Production Guide]]
 

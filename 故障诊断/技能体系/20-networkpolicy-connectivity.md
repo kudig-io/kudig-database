@@ -231,7 +231,7 @@ NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 Netwo
 
 ### 2.3 排除标准
 
-- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级问题 → [[故障诊断/00-core-troubleshooting/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]].md
+- 所有 Pod 间通信均失败（不仅是特定 Pod）→ 可能是 CNI 级问题 → [[故障诊断/核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]].md
 - DNS 解析失败 → SKILL-NET-001
 - Service 无 Endpoint → SKILL-NET-002
 - 节点状态 NotReady → SKILL-NODE-001

@@ -82,11 +82,11 @@ External Client → LoadBalancer IP → [MetalLB ARP/BGP] → Node → kube-prox
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/loadbalancer.md|LoadBalancer]]
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/nodeport.md|NodePort]]
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/fundamentals/kube-proxy.md|Kube-proxy]]
+- [[系统基础/知识字典/networking/loadbalancer.md|LoadBalancer]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/nodeport.md|NodePort]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/fundamentals/kube-proxy.md|Kube-proxy]]
 
 
 <!-- risk-assessed -->

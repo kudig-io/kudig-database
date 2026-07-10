@@ -201,9 +201,9 @@ kubectl exec <pod> -- curl -6 http://[<ipv6-addr>]:80
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
-- [[domain-17-system-foundation/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
-- [[domain-17-system-foundation/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+- [[domain-17-system-foundation/知识字典/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[domain-17-system-foundation/知识字典/networking/akri.md|Akri 边缘设备发现]]
+- [[domain-17-system-foundation/知识字典/networking/antrea.md|Antrea 网络方案]]
 
 
 <!-- risk-assessed -->

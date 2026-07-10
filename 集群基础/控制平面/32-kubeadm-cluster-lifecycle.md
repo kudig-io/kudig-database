@@ -234,7 +234,7 @@ Phase 5: 附加组件 (addon)
 
 | 组件 | 端口 | 协议 | 方向 | 说明 |
 |------|------|------|------|------|
-| **API Server** | 6443 | TCP | Inbound | [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 入口 |
+| **API Server** | 6443 | TCP | Inbound | [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 入口 |
 | **etcd** | 2379-2380 | TCP | Inbound | etcd 客户端/对等通信 |
 | **kubelet** | 10250 | TCP | Inbound | Kubelet API |
 | **Scheduler** | 10259 | TCP | Inbound | 调度器度量端点 |
@@ -2400,8 +2400,8 @@ kubeadm 作为 Kubernetes 官方推荐的集群生命周期管理工具，在生
 
 ## Related
 
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ```
 

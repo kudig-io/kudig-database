@@ -531,11 +531,11 @@ kubectl get certificates -A
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/google-cloud-gke-overview.md|GKE 概览]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/02-gke-autopilot-serverless.md|GKE Autopilot]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/03-gke-networking-dataplane-v2.md|GKE 网络与 Dataplane V2]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/05-gke-workload-identity-security.md|GKE Workload Identity 与安全]]
-- [[domain-12-cloud-providers/03-google-cloud-gke/06-gke-troubleshooting-playbook.md|GKE 故障排查手册]]
+- [[domain-12-cloud-providers/Google-GKE/google-cloud-gke-overview.md|GKE 概览]]
+- [[domain-12-cloud-providers/Google-GKE/02-gke-autopilot-serverless.md|GKE Autopilot]]
+- [[domain-12-cloud-providers/Google-GKE/03-gke-networking-dataplane-v2.md|GKE 网络与 Dataplane V2]]
+- [[domain-12-cloud-providers/Google-GKE/05-gke-workload-identity-security.md|GKE Workload Identity 与安全]]
+- [[domain-12-cloud-providers/Google-GKE/06-gke-troubleshooting-playbook.md|GKE 故障排查手册]]
 - [[domain-05-security-compliance/README.md|安全合规域]]
 - [[domain-06-observability/README.md|可观测性域]]
 

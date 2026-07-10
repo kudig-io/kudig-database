@@ -78,7 +78,7 @@ kube-apiserver 是 Kubernetes 控制平面的核心组件，提供 RESTful API �
 
 ## Related
 
-[[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]
+[[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 
 
 <!-- risk-assessed -->

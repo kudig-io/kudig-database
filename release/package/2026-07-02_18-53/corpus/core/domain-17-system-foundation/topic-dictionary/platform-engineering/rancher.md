@@ -89,11 +89,11 @@ Rancher Server → 管理多个 Downstream Clusters
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/k3s.md|K3s]]
-- [[domain-17-system-foundation/topic-dictionary/storage/longhorn.md|Longhorn]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/tooling/k3s.md|K3s]]
+- [[domain-17-system-foundation/知识字典/storage/longhorn.md|Longhorn]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

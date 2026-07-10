@@ -21,9 +21,9 @@ relationships:
   type: uses
 - target: '[[entities/kubelet.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/fundamentals/namespaces.md]]'
+- target: '[[系统基础/知识字典/fundamentals/namespaces.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/知识字典/networking/service.md]]'
   type: uses
 ---
 
@@ -47,7 +47,7 @@ relationships:
 
 **顾问回应**：
 > 收到，镜像拉取失败会直接导致 Pod 无法启动。作为远程顾问，我无法直连你的集群，请你配合执行检查命令。先回答三个问题（30 秒内）：
-> 1. **影响范围**：多少 Pod / [[系统基础/topic-dictionary/fundamentals/namespaces.md|命名空间]] / 节点受影响？
+> 1. **影响范围**：多少 Pod / [[系统基础/知识字典/fundamentals/namespaces.md|命名空间]] / 节点受影响？
 > 2. **紧急程度**：业务是否已中断？是否有用户投诉？
 > 3. **发生时间**：问题是突然发生还是逐渐恶化？最近是否有发布变更？
 
@@ -477,7 +477,7 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 ```
 如专有云Harbor无法访问：
 1. 检查Harbor Pod状态
-2. 检查Harbor [[系统基础/topic-dictionary/networking/service.md|Service]]
+2. 检查Harbor [[系统基础/知识字典/networking/service.md|Service]]
 3. 检查节点到Harbor网络连通性
 4. 如Harbor异常，联系平台团队
 

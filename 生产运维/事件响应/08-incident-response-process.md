@@ -796,7 +796,7 @@ echo "Health check completed. Report saved to /reports/incident_${INCIDENT_ID}_r
 
 ## Related
 
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

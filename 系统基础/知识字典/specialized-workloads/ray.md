@@ -85,11 +85,11 @@ Ray 是一个通用的分布式计算框架，擅长大规模 AI/ML 工作负载
 
 ## Related
 
-- [[系统基础/topic-dictionary/specialized-workloads/kubeflow.md|Kubeflow]]
-- [[系统基础/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[系统基础/topic-dictionary/workloads/job.md|Job]]
-- [[系统基础/topic-dictionary/scheduling/hpa.md|HPA]]
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
+- [[系统基础/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[系统基础/知识字典/workloads/job.md|Job]]
+- [[系统基础/知识字典/scheduling/hpa.md|HPA]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

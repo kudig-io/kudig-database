@@ -258,8 +258,8 @@ spec:
 
 ## 7. 跨域协作
 
-- **Pod 可用性与 PDB**: 见 [[topic-production-patterns/pod-availability-lifecycle|Pod 可用性生产模式]]
-- **调度与拓扑分布**: 见 [[topic-production-patterns/scheduling-topology-patterns|调度与拓扑分布模式]]
+- **Pod 可用性与 PDB**: 见 [[生产模式/pod-availability-lifecycle|Pod 可用性生产模式]]
+- **调度与拓扑分布**: 见 [[生产模式/scheduling-topology-patterns|调度与拓扑分布模式]]
 - **FinOps 成本治理**: 见 `domain-11-production-operations/01-finops/14-finops-cost-governance-runbook.md`
 
 

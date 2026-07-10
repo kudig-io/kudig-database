@@ -70,18 +70,18 @@ prerequisites:
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
 - Envoy Proxy 企业级服务网格数据平面深度实践
-- [[domain-16-database-middleware/01-databases/03-distributed-database-enterprise.md|03 distributed database enterprise]]
+- [[domain-16-database-middleware/数据库/03-distributed-database-enterprise.md|03 distributed database enterprise]]
 - Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践
 
 ### 入门指南
 
 - Istio 企业级服务网格入门指南
 - Linkerd 轻量级服务网格实践指南
-- [[domain-02-workloads-applications/00-core-workloads/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
+- [[domain-02-workloads-applications/核心工作负载/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
 
 ### CNCF 生态
 
@@ -99,12 +99,12 @@ prerequisites:
 ### 网络与安全
 
 - 网络加密与mTLS
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
 
 ### 可观测性
 
-- [[domain-17-system-foundation/topic-dictionary/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
+- [[domain-17-system-foundation/知识字典/observability/opentelemetry-and-distributed-tracing.md|OpenTelemetry 与分布式链路追踪]]
 - 服务网格与微服务架构设计
 
 ### 技术论文
@@ -119,19 +119,19 @@ prerequisites:
 
 ### 网络相关
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 安全相关
 
-- [[domain-17-system-foundation/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
+- [[domain-17-system-foundation/知识字典/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/networking/service-mesh.md|服务网格（Service Mesh）]]
-- [[domain-17-system-foundation/topic-dictionary/networking/gateway-api.md|Gateway API]]
-- [[domain-17-system-foundation/topic-dictionary/networking/network-policies.md|网络策略（Network Policies）]]
+- [[domain-17-system-foundation/知识字典/networking/service-mesh.md|服务网格（Service Mesh）]]
+- [[domain-17-system-foundation/知识字典/networking/gateway-api.md|Gateway API]]
+- [[domain-17-system-foundation/知识字典/networking/network-policies.md|网络策略（Network Policies）]]
 
 
 <!-- risk-assessed -->

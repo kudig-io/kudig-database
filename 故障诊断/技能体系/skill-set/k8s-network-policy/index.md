@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[故障诊断/topic-skills/skill-set/k8s-network-policy/README.md|Readme]]
+- [[故障诊断/技能体系/skill-set/k8s-network-policy/README.md|Readme]]
 

@@ -85,11 +85,11 @@ Gatekeeper 是 OPA（Open Policy Agent）的 Kubernetes 原生实现，通过 CR
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
-- [[domain-17-system-foundation/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|Admission Controller]]
-- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policy.md|Pod Security Policy]]
-- [[domain-17-system-foundation/topic-dictionary/security/webhook.md|Webhook]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/security/kyverno.md|Kyverno]]
+- [[domain-17-system-foundation/知识字典/security/admission-controller.md|Admission Controller]]
+- [[domain-17-system-foundation/知识字典/security/pod-security-policy.md|Pod Security Policy]]
+- [[domain-17-system-foundation/知识字典/security/webhook.md|Webhook]]
 
 
 <!-- risk-assessed -->

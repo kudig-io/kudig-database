@@ -574,7 +574,7 @@ kubectl get pods -l app=web-frontend -w
 
 - [`syncDeployment`](02-deployment-controller.md) — 主协调函数
 - [`rolloutRolling`](04-rolling-update.md) — RollingUpdate 策略
-- [`rolloutRecreate`]([[平台工程/topic-code-analysis/deployment-create/README.md|[[KUDIG Database|README]]]].md) — Recreate 策略
+- [`rolloutRecreate`]([[平台工程/代码分析/deployment-create/README.md|[[KUDIG Database|README]]]].md) — Recreate 策略
 - [`calculateStatus`](05-deployment-status.md) — Status 计算
 - [`rollbackToRevision`](06-revision-history.md) — 版本回滚
 

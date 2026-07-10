@@ -82,9 +82,9 @@ prerequisites:
 
 ## 相关 Domain
 
-- [[可靠性/05-chaos-engineering/01-chaos-engineering-overview.md|01 chaos engineering overview]]
-- [[可靠性/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
-- [[可靠性/08-performance-testing/02-chaos-load-integration.md|02 chaos load integration]]
+- [[可靠性/混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]
+- [[可靠性/灾难恢复/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
+- [[可靠性/性能测试/02-chaos-load-integration.md|02 chaos load integration]]
 
 
 <!-- risk-assessed -->

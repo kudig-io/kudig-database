@@ -74,9 +74,9 @@ SlimToolkit（原 DockerSlim）是 CNCF Sandbox 项目，通过静态和动态�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/buildpacks.md|Buildpacks]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/copa.md|Copa]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/tooling/buildpacks.md|Buildpacks]]
+- [[domain-17-system-foundation/知识字典/tooling/copa.md|Copa]]
 
 
 <!-- risk-assessed -->

@@ -73,9 +73,9 @@ Cluster API（CAPI）是 CNCF 孵化项目，使用 Kubernetes 声明式 API 管
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubeadm.md|kubeadm]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/kubestellar.md|KubeStellar]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/tooling/kubeadm.md|kubeadm]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/kubestellar.md|KubeStellar]]
 
 
 <!-- risk-assessed -->

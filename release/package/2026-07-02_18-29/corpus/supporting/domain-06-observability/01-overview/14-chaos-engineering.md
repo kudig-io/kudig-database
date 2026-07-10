@@ -1938,7 +1938,7 @@ webhooks:
 
 - [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 
-- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also
 

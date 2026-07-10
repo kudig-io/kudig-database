@@ -120,7 +120,7 @@ spec:
 
 > **注意**：默认情况下，RuntimeClass 假设集群节点配置是同质的；若节点异构，应通过 `scheduling` 字段进行约束。
 
-### Pod 开销（[[domain-17-system-foundation/topic-dictionary/scheduling/pod-overhead.md|Pod Overhead]]）
+### Pod 开销（[[domain-17-system-foundation/知识字典/scheduling/pod-overhead.md|Pod Overhead]]）
 
 自 v1.24 起进入 Stable。RuntimeClass 支持通过 `overhead` 字段声明运行 Pod 所需的额外资源开销（如虚拟化层消耗的资源），使调度器和其他组件在决策时能够将其纳入考量：
 
@@ -321,9 +321,9 @@ kubectl exec test-kata -- uname -r    # Kata 会显示 guest kernel 版本
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

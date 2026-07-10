@@ -52,21 +52,21 @@ prerequisites:
 
 - 27 - 节点与节点池管理 (Node & NodePool Management)
 - [[entities/kubefleet.md|Kubelet 配置与调优]]
-- [[集群基础/03-control-plane/15-kubelet-deep-dive.md|kubelet 深度解析 (kubelet Deep Dive)]]
+- [[集群基础/控制平面/15-kubelet-deep-dive.md|kubelet 深度解析 (kubelet Deep Dive)]]
 
 ### 故障排查
 
-- [[故障诊断/00-core-troubleshooting/06-node-notready-diagnosis.md|06 - 节点 NotReady 状态深度诊断 (Node NotReady Diagnosis)]]
-- [[故障诊断/01-resource-troubleshooting/09-node-comprehensive-troubleshooting.md|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
-- [[故障诊断/03-advanced-troubleshooting/35-node-component-troubleshooting.md|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
+- [[故障诊断/核心排障/06-node-notready-diagnosis.md|06 - 节点 NotReady 状态深度诊断 (Node NotReady Diagnosis)]]
+- [[故障诊断/资源排障/09-node-comprehensive-troubleshooting.md|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
+- [[故障诊断/高级排障/35-node-component-troubleshooting.md|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
 
 ### 结构化故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[故障诊断/高级排障/02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
 
 ### YAML 配置参考
 
@@ -80,16 +80,16 @@ prerequisites:
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/01-node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
+- [[故障诊断/技能体系/01-node-notready.md|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
 
 ### FTA 故障树
 
-- [[故障诊断/topic-fta/list/node-fta.md|Node 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/node-fta.md|Node 异常 FTA 树]]
 
 ### 自动扩缩容
 
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 - Karpenter 节点自动扩展实践指南
 
 ## 扩展参考
@@ -107,14 +107,14 @@ prerequisites:
 
 ### 硬件与设备管理
 
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 - Metal3-io
 - KubeEdge
 
 ### 生产运维
 
 - 19-集群性能调优
-- [[可靠性/03-capacity-planning/24-capacity-planning-forecasting.md|24 capacity planning forecasting]]
+- [[可靠性/容量规划/24-capacity-planning-forecasting.md|24 capacity planning forecasting]]
 - K8s FinOps 成本优化实践指南
 
 

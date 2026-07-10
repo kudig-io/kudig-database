@@ -85,11 +85,11 @@ Traefik 是现代化的 HTTP 反向代理和负载均衡器，原生支持 Docke
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/ingress.md|Ingress]]
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/envoy.md|Envoy]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/networking/loadbalancer.md|LoadBalancer]]
+- [[系统基础/知识字典/networking/ingress.md|Ingress]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/envoy.md|Envoy]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/networking/loadbalancer.md|LoadBalancer]]
 
 
 <!-- risk-assessed -->

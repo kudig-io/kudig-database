@@ -462,7 +462,7 @@ kubectl krew install ctx ns ktop stern cost neat trace sniff gadget
 ## Related
 
 - [[domain-10-troubleshooting-diagnostics/tools/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md|故障排查开源项目索引]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/00-open-source-projects-index-from-domain-12.md|故障排查开源项目索引]]
 
 ## See Also
 

@@ -83,7 +83,7 @@ Java 是企业级后端开发的第一大语言，Kubernetes 是容器编排的�
 
 ```mermaid
 graph TB
-    ROOT[Java on [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]<br/>综合实践指南] --> A[容器化]
+    ROOT[Java on [[domain-17-system-foundation/速查卡/k8s.md|k8s]]<br/>综合实践指南] --> A[容器化]
     ROOT --> B[运行时]
     ROOT --> C[框架]
     ROOT --> D[CI/CD]

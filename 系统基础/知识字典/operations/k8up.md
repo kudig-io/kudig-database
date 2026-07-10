@@ -69,6 +69,6 @@ K8up 是 VSHN 开源的 Kubernetes 备份 Operator，基于 restic 实现增量�
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/velero.md|Velero]]
-- [[系统基础/topic-dictionary/storage/persistent-volumes.md|PV/PVC]]
-- [[系统基础/topic-dictionary/operations/backup-disaster-recovery.md|备份与灾难恢复]]
+- [[系统基础/知识字典/operations/velero.md|Velero]]
+- [[系统基础/知识字典/storage/persistent-volumes.md|PV/PVC]]
+- [[系统基础/知识字典/operations/backup-disaster-recovery.md|备份与灾难恢复]]

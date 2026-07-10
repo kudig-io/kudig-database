@@ -74,9 +74,9 @@ prerequisites:
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/fundamentals/runc.md|runc]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/fundamentals/runc.md|runc]]
+- [[系统基础/知识字典/fundamentals/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

@@ -211,8 +211,8 @@ Step 4: 场景化 Q&A
 | 概念类比词典 | [resources/analogy-dictionary.md](resources/analogy-dictionary.md) | 培训讲解素材 |
 | 命令速查表 | [public-training/one-month/resources/commands-cheatsheet.md](public-training/one-month/resources/commands-cheatsheet.md) | 日常运维速查 |
 | 知识图谱 | [public-training/one-month/resources/knowledge-map.md](public-training/one-month/resources/knowledge-map.md) | 全局知识导航 |
-| 考核评估 | [../故障诊断/topic-skills/assessment/]( ../故障诊断/topic-skills/assessment/) | 技能自测工具 |
-| 术语表 | [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/topic-dictionary/k8s-glossary.md) | 术语查询 |
+| 考核评估 | [../故障诊断/topic-skills/assessment/]( ../故障诊断/技能体系/assessment/) | 技能自测工具 |
+| 术语表 | [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/知识字典/k8s-glossary.md) | 术语查询 |
 | 故障排查手册 | [../故障诊断/]( ../故障诊断/) | 深度故障排查 |
 
 ---
@@ -258,8 +258,8 @@ Step 4: 场景化 Q&A
 - [00-learning-gaps-analysis.md](00-learning-gaps-analysis.md) — 内容缺口分析
 - [00-beginner-learning-roadmap.md](00-beginner-learning-roadmap.md) — 多路径学习路线图
 - [beginner-guides/](beginner-guides/) — 🆕 小白补充教程
-- [../故障诊断/topic-skills/](../故障诊断/topic-skills/) — 18 个 GA Skill（深度技术细节）
-- [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/topic-dictionary/k8s-glossary.md) — K8s 术语表
+- [../故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
+- [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/知识字典/k8s-glossary.md) — K8s 术语表
 - [../故障诊断/](../故障诊断/) — 故障排查深度文档
 
 ## Related
@@ -272,19 +272,19 @@ Step 4: 场景化 Q&A
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 ## 参见

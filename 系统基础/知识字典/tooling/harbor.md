@@ -87,11 +87,11 @@ Harbor 是 CNCF 毕业项目，提供企业级容器镜像和 Helm Chart 的托�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/trivy.md|Trivy]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/security/trivy.md|Trivy]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

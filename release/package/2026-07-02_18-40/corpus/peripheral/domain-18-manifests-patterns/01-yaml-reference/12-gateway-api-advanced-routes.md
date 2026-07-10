@@ -1750,7 +1750,7 @@ spec:
 ## 本知识库相关文档
 - [11 - Gateway API 核心资源](./11-gateway-api-core.md)
 - [Service 全类型参考](./02-service-all-types.md)
-- [Service Mesh 故障排查](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md)
+- [Service Mesh 故障排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md)
 
 ---
 

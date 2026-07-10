@@ -99,7 +99,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-没有评测的 Agent 是黑盒。评测体系解决"Agent 质量是否达标"的问题，可观测性解决"Agent 为什么这么做"的问题。本文覆盖从单轮问答到多步轨迹的全面评测框架、RAGAS/LLM-as-Judge 实施方法、LangSmith/[[domain-14-ai-ml-infra/03-agent-runtime/13-agent-observability-langfuse.md|Langfuse]]/Phoenix 的配置与使用，以及生产 Agent 的关键监控指标体系。
+没有评测的 Agent 是黑盒。评测体系解决"Agent 质量是否达标"的问题，可观测性解决"Agent 为什么这么做"的问题。本文覆盖从单轮问答到多步轨迹的全面评测框架、RAGAS/LLM-as-Judge 实施方法、LangSmith/[[domain-14-ai-ml-infra/Agent运行时/13-agent-observability-langfuse.md|Langfuse]]/Phoenix 的配置与使用，以及生产 Agent 的关键监控指标体系。
 
 ---
 
@@ -883,17 +883,17 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents KUDIG Database — Global MOC
-- [[domain-14-ai-ml-infra/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
-- [[domain-14-ai-ml-infra/02-ai-agents/11-cost-latency-optimization.md|成本与延迟优化策略]]
+- [[domain-14-ai-ml-infra/AI-Agents/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/AI-Agents/11-cost-latency-optimization.md|成本与延迟优化策略]]
 
 ## Related
 

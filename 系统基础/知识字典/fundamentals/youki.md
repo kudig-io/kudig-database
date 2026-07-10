@@ -69,6 +69,6 @@ youki 是用 Rust 编写的 OCI 容器运行时，兼容 runc 接口，旨在提
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/runc.md|runc]]
-- [[系统基础/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[系统基础/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[系统基础/知识字典/fundamentals/runc.md|runc]]
+- [[系统基础/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[系统基础/知识字典/fundamentals/containerd.md|containerd]]

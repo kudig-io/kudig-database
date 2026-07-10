@@ -643,9 +643,9 @@ data:
 
 ## 相关主题
 
-- [[domain-14-ai-ml-infra/03-agent-runtime/16-coze-agent-platform|Coze Agent平台]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
+- [[domain-14-ai-ml-infra/Agent运行时/16-coze-agent-platform|Coze Agent平台]]
+- [[domain-14-ai-ml-infra/Agent运行时/17-agent-rate-limiting-cost-control|Agent限流与成本控制]]
+- [[domain-14-ai-ml-infra/Agent运行时/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
 
 ## 参考资料
 

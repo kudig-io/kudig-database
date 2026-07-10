@@ -94,9 +94,9 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/csi-fta.md|csi fta]]
-- [[故障诊断/topic-fta/list/csi-fta.md|csi fta]]
-- [[故障诊断/topic-fta/list/csi-fta.md|csi fta]]
+- [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]]
+- [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]]
+- [[故障诊断/FTA故障树/list/csi-fta.md|csi fta]]
 
 
 ---

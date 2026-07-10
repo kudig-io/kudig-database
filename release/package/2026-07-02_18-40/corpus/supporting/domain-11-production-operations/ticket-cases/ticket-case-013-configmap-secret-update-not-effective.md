@@ -49,13 +49,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/configuration/configmap.md]]'
+- target: '[[domain-17-system-foundation/知识字典/configuration/configmap.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/security/secret.md]]'
+- target: '[[domain-17-system-foundation/知识字典/security/secret.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-008-coredns-vpc-dns-forward.md]]'
   type: related_to
 ---
 

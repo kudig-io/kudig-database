@@ -52,11 +52,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-014-node-disk-pressure.md]]'
+- target: '[[生产运维/工单案例/ticket-case-014-node-disk-pressure.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
 
@@ -323,9 +323,9 @@ ssh root@cn-beijing.172.18.3.21 'docker system df'
 ## Related
 
 - 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
-- [[生产运维/ticket-cases/ticket-case-014-node-disk-pressure.md|节点 DiskPressure 导致 Pod 被驱逐]]
+- [[生产运维/工单案例/ticket-case-014-node-disk-pressure.md|节点 DiskPressure 导致 Pod 被驱逐]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
-- [[生产运维/ticket-cases/ticket-case-014-node-disk-pressure.md|节点 DiskPressure 导致 Pod 被驱逐]]
+- [[生产运维/工单案例/ticket-case-014-node-disk-pressure.md|节点 DiskPressure 导致 Pod 被驱逐]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 
 

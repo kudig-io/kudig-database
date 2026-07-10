@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-09-reliability-engineering/05-chaos-engineering/01-chaos-engineering-overview.md|Chaos Engineering Overview]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/02-chaos-mesh-deployment.md|Chaos Mesh Deployment]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/03-chaos-experiment-design.md|Chaos Experiment Design]]
-- [[domain-09-reliability-engineering/05-chaos-engineering/04-litmus-practices.md|Litmus Practices]]
+- [[domain-09-reliability-engineering/混沌工程/01-chaos-engineering-overview.md|Chaos Engineering Overview]]
+- [[domain-09-reliability-engineering/混沌工程/02-chaos-mesh-deployment.md|Chaos Mesh Deployment]]
+- [[domain-09-reliability-engineering/混沌工程/03-chaos-experiment-design.md|Chaos Experiment Design]]
+- [[domain-09-reliability-engineering/混沌工程/04-litmus-practices.md|Litmus Practices]]
 

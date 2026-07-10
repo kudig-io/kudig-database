@@ -875,7 +875,7 @@ echo "Pod 网段配置: $POD_CIDR"
 kubectl exec terway-test-1 -- ping -c 1 -W 2 $TEST3_IP
 echo "若跨节点 Pod 不通，检查安全组是否放行 Pod CIDR 互访"
 ```
-> 安全组配置参考: [03-usage.md](./[[网络/topic-terway/03-usage.md|03-usage]].md) 第 2 节
+> 安全组配置参考: [03-usage.md](./[[网络/Terway/03-usage.md|03-usage]].md) 第 2 节
 
 ---
 
@@ -1235,12 +1235,12 @@ chmod +x terway-e2e-test.sh
 | 文档 | 说明 |
 |:---|:---|
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Terway CNI 入门学习任务 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/topic-fta/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 
 ## Related
 
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

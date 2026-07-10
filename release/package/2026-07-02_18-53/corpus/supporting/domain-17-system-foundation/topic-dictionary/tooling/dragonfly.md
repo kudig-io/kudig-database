@@ -73,9 +73,9 @@ Dragonfly 是阿里巴巴开源的 CNCF 孵化项目，基于 P2P（点对点）
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/distribution.md|Distribution]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/harbor.md|Harbor]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/containerd.md|containerd]]
+- [[domain-17-system-foundation/知识字典/tooling/distribution.md|Distribution]]
+- [[domain-17-system-foundation/知识字典/tooling/harbor.md|Harbor]]
+- [[domain-17-system-foundation/知识字典/fundamentals/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

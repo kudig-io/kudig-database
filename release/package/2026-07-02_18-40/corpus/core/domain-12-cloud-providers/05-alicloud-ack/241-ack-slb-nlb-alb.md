@@ -93,7 +93,7 @@ k8s_versions:
 ## 目录
 
 - [负载均衡选型指南](#负载均衡选型指南)
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
 - [ALB Ingress 高级配置](#alb-ingress-高级配置)
 - [生产级注解 (Annotations) 速查表](#生产级注解-annotations-速查表)
 - [故障排查与性能调优](#故障排查与性能调优)
@@ -209,18 +209,18 @@ spec:
 ## Related
 
 - [[log|log]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/grpc.md|grpc]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-alicloud-ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/05-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[domain-12-cloud-providers/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[domain-12-cloud-providers/阿里云/ack/service-ack-practical-guide.md|service-ack-practical-guide]]
+- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[domain-12-cloud-providers/阿里云/ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[domain-12-cloud-providers/阿里云/ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
 
 
 <!-- risk-assessed -->

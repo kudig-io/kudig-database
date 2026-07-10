@@ -65,7 +65,7 @@ Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与
 
 在对象的 manifest（YAML 或 JSON）中，必须设置以下字段：
 
-- `apiVersion`：创建对象时使用的 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本
+- `apiVersion`：创建对象时使用的 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 版本
 - `kind`：要创建的对象类型
 - `metadata`：帮助唯一标识对象的数据，包括 `name`、可选的 `namespace` 等
 - `spec`：对象的期望状态
@@ -93,9 +93,9 @@ Kubernetes 控制平面持续主动管理每个对象的实际状态，使其与
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
-- [[系统基础/topic-dictionary/fundamentals/annotations.md|注解]]
-- [[系统基础/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[系统基础/知识字典/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[系统基础/知识字典/fundamentals/annotations.md|注解]]
+- [[系统基础/知识字典/fundamentals/bpfman.md|bpfman eBPF 管理器]]
 
 
 <!-- risk-assessed -->

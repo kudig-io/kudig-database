@@ -73,9 +73,9 @@ ContainerSSH 是开源的 SSH 服务器，将 SSH 连接代理到 Kubernetes Pod
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/stern.md|Stern]]
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/stern.md|Stern]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
 
 
 <!-- risk-assessed -->

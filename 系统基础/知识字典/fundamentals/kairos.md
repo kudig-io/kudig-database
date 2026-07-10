@@ -68,6 +68,6 @@ Kairos（原 c3os）是 Spectro Cloud 开源的 CNCF Sandbox 项目，将任意 
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/flatcar.md|Flatcar]]
-- [[系统基础/topic-dictionary/tooling/bootc.md|bootc]]
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/fundamentals/flatcar.md|Flatcar]]
+- [[系统基础/知识字典/tooling/bootc.md|bootc]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]

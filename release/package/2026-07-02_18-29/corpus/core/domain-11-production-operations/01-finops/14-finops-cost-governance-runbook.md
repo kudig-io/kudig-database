@@ -312,11 +312,11 @@ groups:
 
 - [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]
 - [[domain-07-platform-engineering/99-production-readiness-operations-guide.md|平台工程 生产就绪运维指南]]
-- [[domain-11-production-operations/01-finops/99-finops-cost-optimization-guide.md|K8s FinOps 成本优化实践指南]]
-- [[domain-11-production-operations/01-finops/01-cost-allocation-chargeback.md|成本分摊与 Chargeback]]
-- [[domain-11-production-operations/01-finops/02-idle-resource-right-sizing.md|闲置资源与 Right-sizing]]
-- [[domain-11-production-operations/01-finops/03-spot-instance-strategy.md|Spot 实例策略]]
-- [[domain-14-ai-ml-infra/01-ai-infra/27-cost-management-kubecost.md|AI 场景 Kubecost 成本管理]]
+- [[domain-11-production-operations/成本治理/99-finops-cost-optimization-guide.md|K8s FinOps 成本优化实践指南]]
+- [[domain-11-production-operations/成本治理/01-cost-allocation-chargeback.md|成本分摊与 Chargeback]]
+- [[domain-11-production-operations/成本治理/02-idle-resource-right-sizing.md|闲置资源与 Right-sizing]]
+- [[domain-11-production-operations/成本治理/03-spot-instance-strategy.md|Spot 实例策略]]
+- [[domain-14-ai-ml-infra/基础设施/27-cost-management-kubecost.md|AI 场景 Kubecost 成本管理]]
 
 
 <!-- risk-assessed -->

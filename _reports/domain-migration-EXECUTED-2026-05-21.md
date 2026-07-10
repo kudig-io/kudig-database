@@ -90,7 +90,7 @@ prerequisites:
 │   ← domain-6 (storage) + domain-16 (storage-fundamentals)                    │
 │                                                                              │
 │ 安全       61 文件                              │
-│   ← domain-7 (security) + domain-25 ([[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]])                  │
+│   ← domain-7 (security) + domain-25 ([[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]])                  │
 │     + domain-39 (supply-chain-security) + domain-18 部分文件                 │
 │   子目录: 01-identity-access, 02-network-security, 03-runtime-security,      │
 │          04-policy-governance, 05-supply-chain, 06-compliance,               │

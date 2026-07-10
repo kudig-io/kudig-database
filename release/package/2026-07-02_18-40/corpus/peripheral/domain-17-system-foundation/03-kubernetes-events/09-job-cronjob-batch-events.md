@@ -2323,8 +2323,8 @@ spec:
 - [08-service-ingress-events.md](./08-service-ingress-events.md) - Service/Ingress 网络事件
 
 **Troubleshooting 文档:**
-- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md) - Job/CronJob 故障排查
-- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md) - Controller Manager 故障排查
+- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/05-workloads/05-job-cronjob-troubleshooting.md) - Job/CronJob 故障排查
+- [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/04-controller-manager-troubleshooting.md) - Controller Manager 故障排查
 
 **Domain 文档:**
 - [domain-8-kubernetes-workloads/](../domain-8-kubernetes-workloads/) - Workload 工作负载详解
@@ -2519,7 +2519,7 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

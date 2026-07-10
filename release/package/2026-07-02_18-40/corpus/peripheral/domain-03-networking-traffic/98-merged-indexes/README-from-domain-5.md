@@ -231,6 +231,6 @@ cross_refs:
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[domain-17-system-foundation/速查卡/networking.md|速查卡: networking]]
 
 <!-- risk-assessed -->

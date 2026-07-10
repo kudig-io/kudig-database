@@ -76,7 +76,7 @@ kubelet 通过 API Server 获取 Pod 配置，同时向 API Server 报告节点�
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components.md|Kubernetes 组件]]
+[[domain-17-system-foundation/知识字典/fundamentals/kubernetes-components.md|Kubernetes 组件]]
 
 
 <!-- risk-assessed -->

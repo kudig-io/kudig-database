@@ -179,7 +179,7 @@ kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
 
 - [Service](service.md) — Service 类型和 ClusterIP 的使用
 - [DNS for Services](dns-for-services-and-[[Pods|pods]].md) — ClusterIP 与 DNS 记录的关系
-- [[系统基础/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
+- [[系统基础/知识字典/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
 
 ## 参考链接
 
@@ -187,9 +187,9 @@ kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
-- [[系统基础/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
-- [[系统基础/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+- [[系统基础/知识字典/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[系统基础/知识字典/networking/akri.md|Akri 边缘设备发现]]
+- [[系统基础/知识字典/networking/antrea.md|Antrea 网络方案]]
 
 
 <!-- risk-assessed -->

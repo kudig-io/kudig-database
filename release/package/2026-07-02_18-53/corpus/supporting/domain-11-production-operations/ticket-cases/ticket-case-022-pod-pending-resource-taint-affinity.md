@@ -56,15 +56,15 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/taint.md]]'
+- target: '[[domain-17-system-foundation/知识字典/scheduling/taint.md]]'
   type: related_to
-- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/affinity.md]]'
+- target: '[[domain-17-system-foundation/知识字典/scheduling/affinity.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-027-pod-pending-resource-taint.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-027-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
@@ -340,11 +340,11 @@ kubectl get events -n data-platform --sort-by='.lastTimestamp' | tail -30
 - 污点
 - 亲和性
 - Pod Pending：资源不足与 Taint 不匹配
-- [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+- [[domain-11-production-operations/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 - Pod Pending：资源不足与污点不匹配
 - 亲和性
 - Pod Pending：资源不足与 Taint 不匹配
-- [[domain-11-production-operations/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
+- [[domain-11-production-operations/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|Pod 大量 Pending：节点 CPU/内存资源不足]]
 - Pod Pending：资源不足与污点不匹配
 
 

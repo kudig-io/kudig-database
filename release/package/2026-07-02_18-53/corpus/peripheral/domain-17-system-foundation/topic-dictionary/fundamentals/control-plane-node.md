@@ -77,11 +77,11 @@ Control Plane Node 是 Master Node 的现代称谓，强调该节点运行控制
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/master-node.md|Master Node]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/control-plane.md|Control Plane]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/worker-node.md|Worker Node]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|Etcd]]
+- [[domain-17-system-foundation/知识字典/fundamentals/master-node.md|Master Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/control-plane.md|Control Plane]]
+- [[domain-17-system-foundation/知识字典/fundamentals/worker-node.md|Worker Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|Etcd]]
 
 
 <!-- risk-assessed -->

@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-09-reliability-engineering/03-capacity-planning/01-capacity-planning-framework.md|Capacity Planning Framework]]
-- [[domain-09-reliability-engineering/03-capacity-planning/02-hpa-vpa-cluster-autoscaler-karpenter.md|Hpa Vpa Cluster Autoscaler Karpenter]]
-- [[domain-09-reliability-engineering/03-capacity-planning/03-resource-quota-limitrange.md|Resource Quota Limitrange]]
-- [[domain-09-reliability-engineering/03-capacity-planning/24-capacity-planning-forecasting.md|Capacity Planning Forecasting]]
-- [[domain-09-reliability-engineering/03-capacity-planning/25-ai-driven-capacity-planning-cost-optimization-2025.md|Ai Driven Capacity Planning Cost Optimization 2025]]
+- [[domain-09-reliability-engineering/容量规划/01-capacity-planning-framework.md|Capacity Planning Framework]]
+- [[domain-09-reliability-engineering/容量规划/02-hpa-vpa-cluster-autoscaler-karpenter.md|Hpa Vpa Cluster Autoscaler Karpenter]]
+- [[domain-09-reliability-engineering/容量规划/03-resource-quota-limitrange.md|Resource Quota Limitrange]]
+- [[domain-09-reliability-engineering/容量规划/24-capacity-planning-forecasting.md|Capacity Planning Forecasting]]
+- [[domain-09-reliability-engineering/容量规划/25-ai-driven-capacity-planning-cost-optimization-2025.md|Ai Driven Capacity Planning Cost Optimization 2025]]
 

@@ -2708,12 +2708,12 @@ roleRef:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|K8s 速查卡]]
+- [[domain-17-system-foundation/速查卡/k8s.md|K8s 速查卡]]
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/networking.md|速查卡: networking]]
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[domain-17-system-foundation/速查卡/networking.md|速查卡: networking]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ## See Also
 

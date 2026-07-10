@@ -22,13 +22,13 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[云厂商/02-aws-eks/02-eks-cluster-lifecycle-management.md|Eks Cluster Lifecycle Management]]
-- [[云厂商/02-aws-eks/03-eks-networking-vpc-cni.md|Eks Networking Vpc Cni]]
-- [[云厂商/02-aws-eks/04-eks-storage-efs-fsx.md|Eks Storage Efs Fsx]]
-- [[云厂商/02-aws-eks/05-eks-iam-irsa-pod-identity.md|Eks Iam Irsa Pod Identity]]
-- [[云厂商/02-aws-eks/06-eks-troubleshooting-playbook.md|Eks Troubleshooting Playbook]]
-- [[云厂商/02-aws-eks/99-aws-eks-production-runbook.md|Aws Eks Production Runbook]]
-- [[云厂商/02-aws-eks/aws-eks-overview.md|Aws Eks Overview]]
+- [[云厂商/AWS-EKS/02-eks-cluster-lifecycle-management.md|Eks Cluster Lifecycle Management]]
+- [[云厂商/AWS-EKS/03-eks-networking-vpc-cni.md|Eks Networking Vpc Cni]]
+- [[云厂商/AWS-EKS/04-eks-storage-efs-fsx.md|Eks Storage Efs Fsx]]
+- [[云厂商/AWS-EKS/05-eks-iam-irsa-pod-identity.md|Eks Iam Irsa Pod Identity]]
+- [[云厂商/AWS-EKS/06-eks-troubleshooting-playbook.md|Eks Troubleshooting Playbook]]
+- [[云厂商/AWS-EKS/99-aws-eks-production-runbook.md|Aws Eks Production Runbook]]
+- [[云厂商/AWS-EKS/aws-eks-overview.md|Aws Eks Overview]]
 
 
 

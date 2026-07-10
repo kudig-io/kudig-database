@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/assessment/answer-keys/k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]]
 

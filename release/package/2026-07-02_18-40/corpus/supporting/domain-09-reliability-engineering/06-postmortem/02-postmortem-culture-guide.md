@@ -105,7 +105,7 @@ prerequisites:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/06-postmortem/01-blameless-postmortem-template.md|01 blameless postmortem template]]
+- [[domain-09-reliability-engineering/事后复盘/01-blameless-postmortem-template.md|01 blameless postmortem template]]
 
 
 <!-- risk-assessed -->

@@ -459,16 +459,16 @@ related:
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/ko.md|ko]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
 
 
 <!-- risk-assessed -->

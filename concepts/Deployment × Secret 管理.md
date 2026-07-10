@@ -34,7 +34,7 @@ relationships:
   type: uses
 - target: '[[entities/external-secrets.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/ingress.md]]'
+- target: '[[系统基础/知识字典/networking/ingress.md]]'
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
@@ -99,7 +99,7 @@ relationships:
 
 - **镜像拉取 Secret**：Deployment 的 imagePullSecrets 引用 Docker registry 凭证，这是 Secret 最基础的用途。私有镜像仓库的认证直接绑定到 Deployment 的 Pod 模板
 - **应用配置 Secret**：Deployment 将数据库连接字符串、API 密钥作为环境变量注入容器。这是最常见的模式，也是最容易泄露的模式（环境变量会出现在进程列表、core dump、应用日志中）
-- **TLS 证书挂载**：[[系统基础/topic-dictionary/networking/ingress.md|Ingress]] Controller 或 API 服务的 Deployment 通过 Secret 卷挂载 TLS 证书。证书到期后需要滚动更新 Deployment 才能重新加载
+- **TLS 证书挂载**：[[系统基础/知识字典/networking/ingress.md|Ingress]] Controller 或 API 服务的 Deployment 通过 Secret 卷挂载 TLS 证书。证书到期后需要滚动更新 Deployment 才能重新加载
 - **Vault Agent Sidecar**：Deployment 的 Pod 模板中注入 Vault Agent Sidecar，将动态凭证以内存卷形式挂载到应用容器。这是生产环境推荐的模式，但增加了 Pod 复杂度和启动延迟
 - **[[entities/external-secrets.md|External Secrets]] Operator**：Deployment 引用由 ESO 自动同步的 K8s Secret，将外部密钥管理（Vault、AWS Secrets Manager）与 Deployment 的声明式配置解耦
 

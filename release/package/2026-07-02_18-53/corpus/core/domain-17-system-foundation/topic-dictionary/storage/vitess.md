@@ -69,6 +69,6 @@ Vitess 是 PlanetScale 开源的 CNCF 毕业项目，为 MySQL 提供水平扩�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/tikv.md|TiKV]]
-- [[domain-17-system-foundation/topic-dictionary/storage/cloudnativepg.md|CloudNativePG]]
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|PV/PVC]]
+- [[domain-17-system-foundation/知识字典/storage/tikv.md|TiKV]]
+- [[domain-17-system-foundation/知识字典/storage/cloudnativepg.md|CloudNativePG]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volumes.md|PV/PVC]]

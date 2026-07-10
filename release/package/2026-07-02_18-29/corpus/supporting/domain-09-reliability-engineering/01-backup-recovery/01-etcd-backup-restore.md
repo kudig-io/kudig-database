@@ -474,12 +474,12 @@ etcdctl endpoint status --cluster -w table
 
 ## 11. Related
 
-- [[domain-01-cluster-fundamentals/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[domain-01-cluster-fundamentals/03-control-plane/19-etcd-operations.md|etcd 运维操作指南]]
-- [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery.md|控制面备份与灾难恢复]]
-- [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
-- [[domain-09-reliability-engineering/02-disaster-recovery/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[domain-01-cluster-fundamentals/控制平面/11-etcd-deep-dive.md|etcd 深度解析]]
+- [[domain-01-cluster-fundamentals/控制平面/19-etcd-operations.md|etcd 运维操作指南]]
+- [[domain-01-cluster-fundamentals/控制平面/10-plane-backup-disaster-recovery.md|控制面备份与灾难恢复]]
+- [[domain-09-reliability-engineering/备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[domain-04-storage-data/K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
 
 
 <!-- risk-assessed -->

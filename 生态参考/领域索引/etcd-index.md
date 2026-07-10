@@ -62,15 +62,15 @@ prerequisites:
 
 ### 深度技术
 
-- [[集群基础/03-control-plane/11-etcd-deep-dive.md|11 etcd deep dive]]
+- [[集群基础/控制平面/11-etcd-deep-dive.md|11 etcd deep dive]]
 - etcd运维操作
 
 ### 故障排查与维护
 
 - etcd 故障排查 (etcd Troubleshooting)
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/10-etcd-maintenance.md|etcd 维护专项文档]]
-- [[故障诊断/topic-fta/list/etcd-fta.md|etcd 异常故障树分析 (etcd FTA)]]
+- [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[故障诊断/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[故障诊断/FTA故障树/list/etcd-fta.md|etcd 异常故障树分析 (etcd FTA)]]
 
 ### CNCF 生态
 
@@ -92,9 +92,9 @@ prerequisites:
 
 ### 集群创建与证书
 
-- [[工作负载/topic-functions/cluster-create/07-etcd.md|etcd 集群初始化细节]]
-- [[工作负载/topic-functions/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
-- [[工作负载/topic-functions/cluster-cert/04-etcd-cert.md|etcd 证书体系源码分析]]
+- [[平台工程/代码分析/functions-cluster-create/07-etcd.md|etcd 集群初始化细节]]
+- [[平台工程/代码分析/functions-cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
+- [[平台工程/代码分析/functions-cluster-cert/04-etcd-cert.md|etcd 证书体系源码分析]]
 
 ### 平台运维
 
@@ -128,26 +128,26 @@ prerequisites:
 
 ### 控制平面故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/08-control-plane-performance-troubleshooting.md|控制平面性能瓶颈分析与优化指南]]
-- [[故障诊断/topic-structural-trouble-shooting/01-control-plane/09-control-plane-ha-troubleshooting.md|控制平面高可用故障处理指南]]
+- [[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
+- [[故障诊断/高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|控制平面性能瓶颈分析与优化指南]]
+- [[故障诊断/高级排障/01-control-plane/09-control-plane-ha-troubleshooting.md|控制平面高可用故障处理指南]]
 
 ### 网络与存储故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/assets/escalation-template.md|升级消息模板 / Escalation Message Template]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/diagnostic-workflow.md|诊断工作流 / Diagnostic Workflow]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/remediation-playbook.md|修复操作手册 / Remediation Playbook]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类 / Root Cause Catalog]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/reference/version-matrix.md|版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
-- [[故障诊断/topic-skills/skill-set/k8s-node-notready/USAGE-GUIDE.md|Skills + FTA 使用指南 — k8s-node-notready & node-fta]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/assets/escalation-template.md|升级消息模板 / Escalation Message Template]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md|诊断工作流 / Diagnostic Workflow]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md|修复操作手册 / Remediation Playbook]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md|根因分类 / Root Cause Catalog]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/reference/version-matrix.md|版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
+- [[故障诊断/技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md|Skills + FTA 使用指南 — k8s-node-notready & node-fta]]
 
 ## YAML 清单参考
 
@@ -156,44 +156,44 @@ prerequisites:
 
 ## 术语词典
 
-- [[系统基础/topic-dictionary/configuration/secrets.md|Secrets]]
-- [[系统基础/topic-dictionary/fundamentals/cloud-controller-manager.md|Cloud Controller Manager（云控制器管理器）]]
-- [[系统基础/topic-dictionary/fundamentals/garbage-collection.md|Garbage Collection（垃圾回收）]]
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-components.md|Kubernetes 组件]]
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-concepts-reference.md|知识地图]]
-- [[系统基础/topic-dictionary/fundamentals/leases.md|Leases（租约）]]
-- [[系统基础/topic-dictionary/fundamentals/namespaces.md|命名空间]]
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|Nodes（节点）]]
-- [[系统基础/topic-dictionary/fundamentals/storage-versions.md|存储版本]]
-- [[系统基础/topic-dictionary/fundamentals/the-kubectl-command-line-tool.md|kubectl 命令行工具]]
-- [[系统基础/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]
-- [[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
-- [[系统基础/topic-dictionary/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
-- [[系统基础/topic-dictionary/platform-engineering/cluster-api-and-fleet-management.md|Cluster API 与集群舰队管理]]
-- [[系统基础/topic-dictionary/platform-engineering/compatibility-version-for-control-plane.md|Kubernetes 控制平面组件的兼容版本]]
-- [[系统基础/topic-dictionary/platform-engineering/coordinated-leader-election.md|协调领导者选举（Coordinated Leader Election）]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resources.md|自定义资源]]
-- [[系统基础/topic-dictionary/platform-engineering/device-plugins.md|设备插件]]
-- [[系统基础/topic-dictionary/platform-engineering/extending-the-kubernetes-api.md|扩展 Kubernetes API]]
-- [[系统基础/topic-dictionary/platform-engineering/gitops-and-continuous-delivery.md|GitOps 与持续交付]]
-- [[系统基础/topic-dictionary/platform-engineering/infrastructure-as-code-for-kubernetes.md|Kubernetes 基础设施即代码（IaC）]]
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator 模式]]
-- [[系统基础/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]
-- [[系统基础/topic-dictionary/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]]
-- [[系统基础/topic-dictionary/scheduling/pod-topology-spread-constraints.md|Pod Topology Spread Constraints]]
-- [[系统基础/topic-dictionary/scheduling/scheduler-performance-tuning.md|Scheduler Performance Tuning]]
-- [[系统基础/topic-dictionary/security/cloud-native-security-practices.md|09 - 云原生安全专家指南]]
-- [[系统基础/topic-dictionary/security/cloud-native-security.md|云原生安全]]
-- [[系统基础/topic-dictionary/security/controlling-access-to-the-kubernetes-api.md|控制对 Kubernetes API 的访问]]
-- [[系统基础/topic-dictionary/security/good-practices-for-kubernetes-secrets.md|Kubernetes Secrets 最佳实践]]
-- [[系统基础/topic-dictionary/security/kubernetes-api-server-bypass-risks.md|Kubernetes API Server 绕过风险]]
-- [[系统基础/topic-dictionary/security/multi-tenancy.md|多租户]]
-- [[系统基础/topic-dictionary/security/role-based-access-control-good-practices.md|基于角色的访问控制（RBAC）最佳实践]]
-- [[系统基础/topic-dictionary/security/secrets-management-deep-dive.md|密钥管理深度指南]]
-- [[系统基础/topic-dictionary/security/security-checklist.md|安全清单]]
-- [[系统基础/topic-dictionary/security/service-accounts.md|服务账号]]
-- [[系统基础/topic-dictionary/tooling/cli-commands.md|知识地图]]
-- [[系统基础/topic-dictionary/tooling/tool-ecosystem.md|Kusheet 工具与开源项目 URL 汇总]]
+- [[系统基础/知识字典/configuration/secrets.md|Secrets]]
+- [[系统基础/知识字典/fundamentals/cloud-controller-manager.md|Cloud Controller Manager（云控制器管理器）]]
+- [[系统基础/知识字典/fundamentals/garbage-collection.md|Garbage Collection（垃圾回收）]]
+- [[系统基础/知识字典/fundamentals/kubernetes-components.md|Kubernetes 组件]]
+- [[系统基础/知识字典/fundamentals/kubernetes-concepts-reference.md|知识地图]]
+- [[系统基础/知识字典/fundamentals/leases.md|Leases（租约）]]
+- [[系统基础/知识字典/fundamentals/namespaces.md|命名空间]]
+- [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
+- [[系统基础/知识字典/fundamentals/storage-versions.md|存储版本]]
+- [[系统基础/知识字典/fundamentals/the-kubectl-command-line-tool.md|kubectl 命令行工具]]
+- [[系统基础/知识字典/networking/ingress-controllers.md|Ingress Controllers]]
+- [[系统基础/知识字典/platform-engineering/admission-webhook-good-practices.md|Admission Webhook 最佳实践]]
+- [[系统基础/知识字典/platform-engineering/api-priority-and-fairness.md|API 优先级与公平性（API Priority and Fairness）]]
+- [[系统基础/知识字典/platform-engineering/cluster-api-and-fleet-management.md|Cluster API 与集群舰队管理]]
+- [[系统基础/知识字典/platform-engineering/compatibility-version-for-control-plane.md|Kubernetes 控制平面组件的兼容版本]]
+- [[系统基础/知识字典/platform-engineering/coordinated-leader-election.md|协调领导者选举（Coordinated Leader Election）]]
+- [[系统基础/知识字典/platform-engineering/custom-resources.md|自定义资源]]
+- [[系统基础/知识字典/platform-engineering/device-plugins.md|设备插件]]
+- [[系统基础/知识字典/platform-engineering/extending-the-kubernetes-api.md|扩展 Kubernetes API]]
+- [[系统基础/知识字典/platform-engineering/gitops-and-continuous-delivery.md|GitOps 与持续交付]]
+- [[系统基础/知识字典/platform-engineering/infrastructure-as-code-for-kubernetes.md|Kubernetes 基础设施即代码（IaC）]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator 模式]]
+- [[系统基础/知识字典/scheduling/gang-scheduling.md|Gang Scheduling]]
+- [[系统基础/知识字典/scheduling/kubernetes-scheduler.md|Kubernetes Scheduler]]
+- [[系统基础/知识字典/scheduling/pod-topology-spread-constraints.md|Pod Topology Spread Constraints]]
+- [[系统基础/知识字典/scheduling/scheduler-performance-tuning.md|Scheduler Performance Tuning]]
+- [[系统基础/知识字典/security/cloud-native-security-practices.md|09 - 云原生安全专家指南]]
+- [[系统基础/知识字典/security/cloud-native-security.md|云原生安全]]
+- [[系统基础/知识字典/security/controlling-access-to-the-kubernetes-api.md|控制对 Kubernetes API 的访问]]
+- [[系统基础/知识字典/security/good-practices-for-kubernetes-secrets.md|Kubernetes Secrets 最佳实践]]
+- [[系统基础/知识字典/security/kubernetes-api-server-bypass-risks.md|Kubernetes API Server 绕过风险]]
+- [[系统基础/知识字典/security/multi-tenancy.md|多租户]]
+- [[系统基础/知识字典/security/role-based-access-control-good-practices.md|基于角色的访问控制（RBAC）最佳实践]]
+- [[系统基础/知识字典/security/secrets-management-deep-dive.md|密钥管理深度指南]]
+- [[系统基础/知识字典/security/security-checklist.md|安全清单]]
+- [[系统基础/知识字典/security/service-accounts.md|服务账号]]
+- [[系统基础/知识字典/tooling/cli-commands.md|知识地图]]
+- [[系统基础/知识字典/tooling/tool-ecosystem.md|Kusheet 工具与开源项目 URL 汇总]]
 
 ## Docker
 
@@ -221,20 +221,20 @@ prerequisites:
 
 ## 云服务商
 
-- [[云厂商/02-aws-eks/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
-- [[云厂商/03-google-cloud-gke/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
-- [[云厂商/04-azure-aks/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[云厂商/05-alicloud-ack/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
-- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
-- [[云厂商/06-tencent-tke/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
-- [[云厂商/07-huawei-cce/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]
-- [[云厂商/09-ucloud-uk8s/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
-- [[云厂商/10-ibm-iks/ibm-iks-overview.md|IBM IKS (IBM Cloud Kubernetes Service) 概述]]
-- [[云厂商/11-oracle-oke/oracle-oke-overview.md|Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析]]
-- [[云厂商/12-volcengine-vek/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
-- [[云厂商/13-ctyun-tke/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
-- [[云厂商/14-ecloud-cke/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
-- [[云厂商/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
+- [[云厂商/AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
+- [[云厂商/Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
+- [[云厂商/Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
+- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
+- [[云厂商/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
+- [[云厂商/腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
+- [[云厂商/华为云CCE/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]
+- [[云厂商/其他云/UCloud-UK8S/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
+- [[云厂商/其他云/IBM-IKS/ibm-iks-overview.md|IBM IKS (IBM Cloud Kubernetes Service) 概述]]
+- [[云厂商/其他云/Oracle-OKE/oracle-oke-overview.md|Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析]]
+- [[云厂商/其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
+- [[云厂商/其他云/天翼云-TKE/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
+- [[云厂商/其他云/移动云-CKE/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
+- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
 
 ## 生产运维
 
@@ -266,21 +266,21 @@ prerequisites:
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 - Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
-- [[生态参考/02-papers/07-kubernetes-csi-storage-deep-practice.md|07 kubernetes csi storage deep practice]]
+- [[生态参考/论文/07-kubernetes-csi-storage-deep-practice.md|07 kubernetes csi storage deep practice]]
 - Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
-- [[生态参考/02-papers/11-kubernetes-api-server-deep-optimization-extension.md|11 kubernetes api server deep optimization extension]]
-- [[生态参考/02-papers/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
+- [[生态参考/论文/11-kubernetes-api-server-deep-optimization-extension.md|11 kubernetes api server deep optimization extension]]
+- [[生态参考/论文/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
 - Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
 - Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 - Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
 - Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 - Kubernetes Gateway API 与现代流量管理实践
 - Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
-- [[生态参考/02-papers/21-kubernetes-platform-engineering-internal-developer-platform.md|21 kubernetes platform engineering internal developer platform]]
+- [[生态参考/论文/21-kubernetes-platform-engineering-internal-developer-platform.md|21 kubernetes platform engineering internal developer platform]]
 - Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 - Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
 - Kubernetes 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
-- [[生态参考/02-papers/25-gke-autopilot-google-cloud-ai-infrastructure.md|25 gke autopilot google cloud ai infrastructure]]
+- [[生态参考/论文/25-gke-autopilot-google-cloud-ai-infrastructure.md|25 gke autopilot google cloud ai infrastructure]]
 - Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 ## CNCF 生态

@@ -73,9 +73,9 @@ kpt 是 Google 开源的 Kubernetes 包管理工具，基于 Git 仓库管理 K8
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/operations/flux.md|Flux]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/operations/flux.md|Flux]]
 
 
 <!-- risk-assessed -->

@@ -85,11 +85,11 @@ Grafana Tempo 是 Grafana Labs 开源的大规模分布式追踪后端，专为�
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/jaeger.md|Jaeger]]
-- [[系统基础/topic-dictionary/observability/loki.md|Loki]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[系统基础/topic-dictionary/observability/opentelemetry.md|OpenTelemetry]]
-- [[系统基础/topic-dictionary/observability/grafana.md|Grafana]]
+- [[系统基础/知识字典/observability/jaeger.md|Jaeger]]
+- [[系统基础/知识字典/observability/loki.md|Loki]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/observability/opentelemetry.md|OpenTelemetry]]
+- [[系统基础/知识字典/observability/grafana.md|Grafana]]
 
 
 <!-- risk-assessed -->

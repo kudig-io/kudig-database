@@ -59,11 +59,11 @@ prerequisites:
 
 ### 故障排查
 - nginx-ingress 网关故障排查
-- [[故障诊断/topic-fta/list/nginx-ingress-fta.md|nginx-ingress FTA 故障树]]
-- [[故障诊断/topic-skills/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[故障诊断/01-resource-troubleshooting/15-ingress-troubleshooting.md|15 - Ingress 故障排查]]
+- [[故障诊断/FTA故障树/list/nginx-ingress-fta.md|nginx-ingress FTA 故障树]]
+- [[故障诊断/技能体系/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查]]
 
 ### 迁移指南
 - nginx-ingress 迁移指南
@@ -73,9 +73,9 @@ prerequisites:
 
 ### 网络与路由
 - CNI 容器网络接口深度解析
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 零信任安全治理]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 故障排查]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 零信任安全治理]]
+- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 故障排查]]
 - Ingress 监控与故障排查
 
 ### 云厂商集成
@@ -97,7 +97,7 @@ prerequisites:
 - Envoy
 
 ### Ingress 控制器对比
-- [[系统基础/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]
+- [[系统基础/知识字典/networking/ingress-controllers.md|Ingress Controllers]]
 - Contour
 - Emissary-Ingress
 

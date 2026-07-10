@@ -392,7 +392,7 @@ spec:
     image: myapp:v1.0
 ```
 
-### 5.2 [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (需显式启用)
+### 5.2 [[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]] (需显式启用)
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器

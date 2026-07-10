@@ -239,7 +239,7 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 
 - [DaemonSet 管理详解](../../工作负载/04-daemonset-management.md)
 - [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [DaemonSet 故障树分析 (FTA)](../../故障诊断/topic-fta/list/daemonset-fta.md)
+- [DaemonSet 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/daemonset-fta.md)
 - [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
 - [工作负载监控与告警](../../工作负载/06-workload-monitoring-alerting.md)
 
@@ -248,7 +248,7 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

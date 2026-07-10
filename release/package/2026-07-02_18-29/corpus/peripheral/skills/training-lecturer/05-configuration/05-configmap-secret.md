@@ -387,7 +387,7 @@ kubectl describe secret <name>
 
 **关联文档**:
 - [../06-configuration/06-namespace-resource-quota.md](../06-configuration/06-namespace-resource-quota.md) — 命名空间与资源配额
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/14-configmap-secret-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/14-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
 - [../../domain-05-security-compliance/](../../domain-05-security-compliance/) — K8s 安全文档
 
 <!-- risk-assessed -->

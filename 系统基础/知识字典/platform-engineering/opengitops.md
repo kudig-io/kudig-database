@@ -69,6 +69,6 @@ OpenGitOps 是 CNCF Sandbox 项目，定义了 GitOps 的原则和标准，提�
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/flux.md|Flux]]
-- [[系统基础/topic-dictionary/operations/tekton.md|Tekton]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/flux.md|Flux]]
+- [[系统基础/知识字典/operations/tekton.md|Tekton]]

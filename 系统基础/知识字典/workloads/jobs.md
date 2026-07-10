@@ -80,7 +80,7 @@ Job 用于表示一次性任务，运行到完成即停止。Job 会创建一个
 - 使用 `restartPolicy: Never` 调试 Job 更方便查看失败日志。
 - 应用代码需具备幂等性，以应对 Pod 重启或重新调度。
 - 使用 `podFailurePolicy` 忽略由集群中断（如抢占、驱逐）导致的失败，避免不必要的重试。
-- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 [[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] 中堆积过多历史对象。
+- 为已完成 Job 设置 `ttlSecondsAfterFinished`，防止 [[系统基础/知识字典/fundamentals/etcd.md|etcd]] 中堆积过多历史对象。
 - 使用 Indexed Job 时，确保应用能正确读取 `JOB_COMPLETION_INDEX` 或主机名来分配任务。
 
 ## 实战 YAML 示例
@@ -252,7 +252,7 @@ kubectl patch job <job-name> -n prod -p '{"spec":{"suspend":true}}'
 - [Job/CronJob 高级用法](../../工作负载/05-job-cronjob-advanced.md)
 - [CronJob 定时任务](./cronjob.md)
 - [已完成 Job 自动清理](./automatic-cleanup-for-finished-jobs.md)
-- [Job/CronJob 故障树分析 (FTA)](../../故障诊断/topic-fta/list/job-cronjob-fta.md)
+- [Job/CronJob 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/job-cronjob-fta.md)
 - [工作负载故障排查手册](../../工作负载/07-workload-troubleshooting-handbook.md)
 
 ## 参考链接
@@ -260,9 +260,9 @@ kubectl patch job <job-name> -n prod -p '{"spec":{"suspend":true}}'
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

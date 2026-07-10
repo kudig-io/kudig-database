@@ -649,7 +649,7 @@ spec:
 
 ## See Also
 
-- [[domain-12-cloud-providers/07-huawei-cce/99-huawei-cce-production-runbook.md|华为云 CCE 生产运行手册]]
+- [[domain-12-cloud-providers/华为云CCE/99-huawei-cce-production-runbook.md|华为云 CCE 生产运行手册]]
 
 
 <!-- risk-assessed -->

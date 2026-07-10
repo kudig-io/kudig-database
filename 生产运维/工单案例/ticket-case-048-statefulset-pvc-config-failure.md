@@ -24,10 +24,10 @@ affected_cluster: ack-zyy-prod-06
 affected_namespace: db-mysql
 ticket_type: 存储故障 / 有状态应用故障
 skill_ref:
-- '[[存储/01-k8s-storage/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
-- '[[存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md|StorageClass
+- '[[存储/K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
+- '[[存储/K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass
   动态供给]]'
-- '[[存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用存储模式]]'
+- '[[存储/有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用存储模式]]'
 fta_ref:
 - 'FTA: StatefulSet PVC 启动失败'
 last_updated: 2026-06-26 17:15:00+08:00
@@ -55,13 +55,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-043-statefulset-pvc-unbound.md]]'
+- target: '[[生产运维/工单案例/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
 - target: '[[concepts/statefulset.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[生产运维/工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
@@ -315,9 +315,9 @@ kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=50 
 > - 更新 StatefulSet 引用新的 StorageClass 并重新创建。
 >
 > 当前 3 个 MySQL Pod 均已 Running，PVC 全部 Bound，数据目录可读写，MySQL 服务可正常登录。建议后续：
-> - 为数据库类有状态应用统一使用 `volumeBindingMode: WaitForFirstConsumer` 的 StorageClass，参考 [[存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]；
+> - 为数据库类有状态应用统一使用 `volumeBindingMode: WaitForFirstConsumer` 的 StorageClass，参考 [[存储/K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]；
 > - 在云侧提前确认目标可用区支持的 ESSD 性能级别；
-> - 将本案例纳入数据库上线 Checklist，参考 [[存储/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用存储模式]]。
+> - 将本案例纳入数据库上线 Checklist，参考 [[存储/有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用存储模式]]。
 >
 > 如有疑问，请随时联系。
 

@@ -67,6 +67,6 @@ TiKV 是 PingCAP 开源的 CNCF 毕业项目，分布式事务键值存储引擎
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]
-- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
-- [[domain-17-system-foundation/topic-dictionary/storage/vineyard.md|Vineyard]]
+- [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]]
+- [[domain-17-system-foundation/知识字典/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/知识字典/storage/vineyard.md|Vineyard]]

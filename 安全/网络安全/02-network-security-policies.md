@@ -624,9 +624,9 @@ kubectl logs -n kube-system -l k8s-app=cilium
 - 运行时安全防护
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
+- [[系统基础/速查卡/tls-pki.md|速查卡: tls-pki]]
 
-- [[安全/README.md|返回目录]]- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[安全/README.md|返回目录]]- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 

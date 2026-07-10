@@ -66,7 +66,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[系统基础/topic-dictionary/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
+# [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[系统基础/知识字典/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
 
 > **作者**: 网络安全架构专家 | **版本**: v2.0 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级网络安全防护 | **复杂度**: ⭐⭐⭐⭐⭐

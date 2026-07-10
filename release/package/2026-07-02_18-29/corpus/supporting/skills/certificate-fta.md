@@ -176,6 +176,6 @@ flowchart TD
 - [[entities/kubelet.md|kubelet]] — kubelet
 - [[cert-manager]] — cert-manager
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/certificate-fta.md|证书异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/certificate-fta.md|证书异常故障树分析]]
 
 <!-- risk-assessed -->

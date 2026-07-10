@@ -86,11 +86,11 @@ MinIO 是高性能的 S3 兼容对象存储系统，可在任何基础设施上�
 
 ## Related
 
-- [[系统基础/topic-dictionary/observability/thanos.md|Thanos]]
-- [[系统基础/topic-dictionary/observability/loki.md|Loki]]
-- [[系统基础/topic-dictionary/operations/velero.md|Velero]]
-- [[系统基础/topic-dictionary/tooling/harbor.md|Harbor]]
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/observability/thanos.md|Thanos]]
+- [[系统基础/知识字典/observability/loki.md|Loki]]
+- [[系统基础/知识字典/operations/velero.md|Velero]]
+- [[系统基础/知识字典/tooling/harbor.md|Harbor]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
 
 
 <!-- risk-assessed -->

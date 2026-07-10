@@ -67,12 +67,12 @@ StatefulSet 解决的是"身份"问题（稳定网络标识、有序部署），
 
 ## Related
 
-- [[domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md|01 stateful app storage patterns]]
-- [[domain-04-storage-data/04-stateful-app-storage/02-mysql-statefulset-production.md|02 mysql statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/03-postgresql-statefulset-production.md|03 postgresql statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/04-kafka-statefulset-production.md|04 kafka statefulset production]]
-- [[domain-04-storage-data/04-stateful-app-storage/05-redis-cluster-statefulset.md|05 redis cluster statefulset]]
-- [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|01 velero backup recovery]]
+- [[domain-04-storage-data/有状态应用存储/01-stateful-app-storage-patterns.md|01 stateful app storage patterns]]
+- [[domain-04-storage-data/有状态应用存储/02-mysql-statefulset-production.md|02 mysql statefulset production]]
+- [[domain-04-storage-data/有状态应用存储/03-postgresql-statefulset-production.md|03 postgresql statefulset production]]
+- [[domain-04-storage-data/有状态应用存储/04-kafka-statefulset-production.md|04 kafka statefulset production]]
+- [[domain-04-storage-data/有状态应用存储/05-redis-cluster-statefulset.md|05 redis cluster statefulset]]
+- [[domain-04-storage-data/分布式存储/01-velero-backup-recovery.md|01 velero backup recovery]]
 
 
 <!-- risk-assessed -->

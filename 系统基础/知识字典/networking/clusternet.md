@@ -73,9 +73,9 @@ Clusternet 是 CNCF Sandbox 项目，提供 Kubernetes 多集群的管理和连�
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/karmada.md|Karmada]]
-- [[系统基础/topic-dictionary/networking/submariner.md|Submariner]]
-- [[系统基础/topic-dictionary/platform-engineering/rancher.md|Rancher]]
+- [[系统基础/知识字典/platform-engineering/karmada.md|Karmada]]
+- [[系统基础/知识字典/networking/submariner.md|Submariner]]
+- [[系统基础/知识字典/platform-engineering/rancher.md|Rancher]]
 
 
 <!-- risk-assessed -->

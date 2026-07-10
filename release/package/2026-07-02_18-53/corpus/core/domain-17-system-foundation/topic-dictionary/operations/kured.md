@@ -73,9 +73,9 @@ Kured（KUbernetes REboot Daemon）是开源的 K8s 节点重启守护进程，�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/operations/upgrade.md|升级]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/flatcar.md|Flatcar]]
-- [[domain-17-system-foundation/topic-dictionary/operations/kubean.md|Kubean]]
+- [[domain-17-system-foundation/知识字典/operations/upgrade.md|升级]]
+- [[domain-17-system-foundation/知识字典/fundamentals/flatcar.md|Flatcar]]
+- [[domain-17-system-foundation/知识字典/operations/kubean.md|Kubean]]
 
 
 <!-- risk-assessed -->

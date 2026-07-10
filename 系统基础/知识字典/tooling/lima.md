@@ -72,9 +72,9 @@ Lima（Linux on Mac）是一个轻量级工具，在 macOS 上自动创建和管
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/minikube.md|Minikube]]
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/tooling/minikube.md|Minikube]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
 
 
 <!-- risk-assessed -->

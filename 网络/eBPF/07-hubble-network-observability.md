@@ -1,7 +1,7 @@
 ---
 title: Hubble 网络可观测性 (Hubble Network Observability)
 description: '# Hubble 网络可观测性 (Hubble Network Observability)'
-summary: '4. [[系统基础/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)'
+summary: '4. [[系统基础/知识字典/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)'
 category: ebpf-technology
 tags:
 - k8s
@@ -79,7 +79,7 @@ authors:
 1. [Hubble 概述与架构](#1-hubble-概述与架构)
 2. [Hubble 组件详解](#2-hubble-组件详解)
 3. [L3/L4/L7 流量可视化](#3-l3l4l7-流量可视化)
-4. [[系统基础/topic-dictionary/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
+4. [[系统基础/知识字典/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
 6. [[entities/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
 7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)

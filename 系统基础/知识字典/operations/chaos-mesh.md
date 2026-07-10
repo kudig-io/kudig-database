@@ -72,9 +72,9 @@ Chaos Mesh 是 PingCAP 开源并捐赠给 CNCF 的混沌工程平台，提供 We
 
 ## Related
 
-- [[系统基础/topic-dictionary/operations/litmus.md|LitmusChaos]]
-- [[系统基础/topic-dictionary/operations/chaos-engineering.md|混沌工程]]
-- [[系统基础/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[系统基础/知识字典/operations/litmus.md|LitmusChaos]]
+- [[系统基础/知识字典/operations/chaos-engineering.md|混沌工程]]
+- [[系统基础/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

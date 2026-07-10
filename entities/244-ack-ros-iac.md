@@ -202,19 +202,19 @@ graph LR
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
-- [[系统基础/topic-cheat-sheet/gitops.md|gitops]]
-- [[系统基础/topic-cheat-sheet/git.md|git]]
+- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[系统基础/速查卡/k8s.md|k8s]]
+- [[系统基础/速查卡/gitops.md|gitops]]
+- [[系统基础/速查卡/git.md|git]]
 - 06-cluster-configuration-parameters
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 
-- [[云厂商/05-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[云厂商/05-alicloud-ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[云厂商/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[云厂商/05-alicloud-ack/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/阿里云/ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[云厂商/阿里云/ack/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[云厂商/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
 
 
 <!-- risk-assessed -->

@@ -169,9 +169,9 @@ Istio、Linkerd、Cilium Service Mesh 均可自动生成分布式追踪数据并
 
 ## Related
 
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -624,9 +624,9 @@ kubectl logs -n kube-system -l k8s-app=cilium
 - 运行时安全防护
 - 相关知识域: domain-01-cluster-fundamentals
 - 相关知识域: domain-06-observability
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|速查卡: tls-pki]]
+- [[domain-17-system-foundation/速查卡/tls-pki.md|速查卡: tls-pki]]
 
-- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[domain-05-security-compliance/README.md|返回目录]]- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 

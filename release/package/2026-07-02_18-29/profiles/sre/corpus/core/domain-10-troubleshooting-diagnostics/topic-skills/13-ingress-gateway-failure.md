@@ -704,7 +704,7 @@ kubectl port-forward -n envoy-gateway-system deploy/<envoy-deploy> 19000:19000
 
 | 根因 ID | 描述 | 概率 | 诊断证据 | FTA 映射 | 风险等级 |
 |--------|------|------|---------|---------|---------|
-| RC-001 | **后端 Service 无 Ready Endpoints** — Service selector 不匹配、后端 Pod 全部不健康或正在重启，导致 Ingress 无法路由到任何后端 | ~20% | D2.3 显示 Endpoints 为空；D1.2 Backend 显示 `<error: endpoints>`；D2.1 日志包含 `no upstream host` | [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]: BE-no-endpoints | 🟡 |
+| RC-001 | **后端 Service 无 Ready Endpoints** — Service selector 不匹配、后端 Pod 全部不健康或正在重启，导致 Ingress 无法路由到任何后端 | ~20% | D2.3 显示 Endpoints 为空；D1.2 Backend 显示 `<error: endpoints>`；D2.1 日志包含 `no upstream host` | [[domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|ingress-fta]]: BE-no-endpoints | 🟡 |
 | RC-002 | **Ingress Host/Path 规则配置错误** — Ingress 的 host、path 或 pathType 配置不正确，导致请求无法匹配到正确的后端 | ~15% | D1.6 返回 404；D2.2 Nginx 配置中未包含目标 `server_name` 或 `location`；D1.2 Rules 配置与请求不匹配 | ingress-fta: BE-rule-mismatch | 🟢 |
 | RC-003 | **TLS Secret 不存在或证书不匹配** — Ingress 引用的 TLS Secret 缺失、证书已过期、或证书 SAN 不包含目标域名 | ~12% | D2.4 Secret 不存在或证书过期/不匹配；D1.6 TLS 握手失败；D1.2 TLS 配置错误 | ingress-fta: BE-tls-invalid | 🟡 |
 | RC-004 | **IngressClass 未指定或不匹配** — Ingress 未指定 IngressClass 或指定的 IngressClass 与实际 Controller 不匹配，导致 Ingress 未被处理 | ~10% | D1.1 ADDRESS 为空；D1.3 IngressClass 不存在或 controller 不匹配；D1.2 无任何 Events | ingress-fta: BE-class-mismatch | 🟢 |
@@ -1523,8 +1523,8 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 
 <!-- risk-assessed -->

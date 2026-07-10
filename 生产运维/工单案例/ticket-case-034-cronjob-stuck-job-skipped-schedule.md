@@ -21,14 +21,14 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: etl
 ticket_type: CronJob 执行失败
 skill_ref:
-- '[[工作负载/00-core-workloads/05-job-cronjob-advanced.md|Job/CronJob
+- '[[工作负载/核心工作负载/05-job-cronjob-advanced.md|Job/CronJob
   进阶]]'
-- '[[发布变更/01-gitops/99-argo-cd-gitops-guide.md|GitOps
+- '[[发布变更/GitOps/99-argo-cd-gitops-guide.md|GitOps
   变更管理]]'
 fta_ref:
-- '[[故障诊断/topic-fta/list/job-cronjob-fta.md|FTA:
+- '[[故障诊断/FTA故障树/list/job-cronjob-fta.md|FTA:
   CronJob 执行失败]]'
-- '[[故障诊断/topic-fta/list/deployment-fta.md|FTA: 工作负载发布失败]]'
+- '[[故障诊断/FTA故障树/list/deployment-fta.md|FTA: 工作负载发布失败]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-049
 status: duplicate
@@ -62,9 +62,9 @@ authors:
 relationships:
 - target: '[[concepts/cronjob.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-049-job-cronjob-execution-failure.md]]'
+- target: '[[生产运维/工单案例/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 ---
 
@@ -220,7 +220,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | gr
 > **当前状态：** 手动验证 Job 已 Complete，报表文件已生成到 MinIO 指定目录。
 >
 > **后续建议：**
-> - 参考 [[工作负载/00-core-workloads/05-job-cronjob-advanced.md|Job/CronJob 进阶]] review 所有 CronJob 的 `concurrencyPolicy` 与超时设置；
+> - 参考 [[工作负载/核心工作负载/05-job-cronjob-advanced.md|Job/CronJob 进阶]] review 所有 CronJob 的 `concurrencyPolicy` 与超时设置；
 > - 对关键 ETL 任务配置 Job 失败/漏调告警，监控 `kube_job_status_failed` 与 CronJob `last_successful_time`；
 > - 在 GitOps 仓库中为 CronJob 增加 lint 规则，禁止生产环境使用无 `activeDeadlineSeconds` 的 `Forbid` 策略；
 > - 对 Hive/Presto 等外部依赖增加超时熔断，避免单个任务挂起阻塞整条链路。

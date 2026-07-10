@@ -21,17 +21,17 @@ created: 2026-06-26
 updated: 2026-06-26
 last_updated: 2026-06-26
 relationships:
-- target: '[[云厂商/01-alibaba-cloud/01-专有云架构概述.md]]'
+- target: '[[云厂商/阿里云/01-专有云架构概述.md]]'
   type: related_to
-- target: '[[云厂商/01-alibaba-cloud/02-ACK集群运维.md]]'
+- target: '[[云厂商/阿里云/02-ACK集群运维.md]]'
   type: related_to
-- target: '[[云厂商/01-alibaba-cloud/03-Terway-CNI网络.md]]'
+- target: '[[云厂商/阿里云/03-Terway-CNI网络.md]]'
   type: related_to
-- target: '[[云厂商/01-alibaba-cloud/04-阿里云存储集成.md]]'
+- target: '[[云厂商/阿里云/04-阿里云存储集成.md]]'
   type: related_to
-- target: '[[云厂商/01-alibaba-cloud/05-阿里云SLB与Ingress.md]]'
+- target: '[[云厂商/阿里云/05-阿里云SLB与Ingress.md]]'
   type: related_to
-- target: '[[云厂商/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md]]'
+- target: '[[云厂商/阿里云/06-阿里云专有云远程顾问指南.md]]'
   type: related_to
 difficulty: advanced
 audience:
@@ -70,7 +70,7 @@ authors:
 
 # 阿里云专有云（Apsara Stack）组件与 K8s 运维关联索引
 
-本文档面向在客户数据中心运维 [[云厂商/01-alibaba-cloud/01-专有云架构概述.md|阿里云专有云（Apsara Stack）]] 上 [[云厂商/01-alibaba-cloud/02-ACK集群运维.md|ACK 专有云版]] 集群的 SRE、平台工程师及远程顾问。它将飞天底座、ASO、天基、盘古、女娲、洛神、伏羲等专有云核心组件与 Kubernetes 运维场景进行映射，帮助工程师在 Pod 调度失败、网络抖动、存储挂载异常、安全凭证过期等典型工单中快速定位应排查的底座组件，并明确何时需要联系阿里云 TAM 或驻场工程师。
+本文档面向在客户数据中心运维 [[云厂商/阿里云/01-专有云架构概述.md|阿里云专有云（Apsara Stack）]] 上 [[云厂商/阿里云/02-ACK集群运维.md|ACK 专有云版]] 集群的 SRE、平台工程师及远程顾问。它将飞天底座、ASO、天基、盘古、女娲、洛神、伏羲等专有云核心组件与 Kubernetes 运维场景进行映射，帮助工程师在 Pod 调度失败、网络抖动、存储挂载异常、安全凭证过期等典型工单中快速定位应排查的底座组件，并明确何时需要联系阿里云 TAM 或驻场工程师。
 
 ---
 
@@ -289,12 +289,12 @@ aliyun actiontrail LookupEvents --LookupAttributes '[{"Key":"EventName","Value":
 
 ## Related
 
-- [[云厂商/01-alibaba-cloud/01-专有云架构概述.md|01 专有云架构概述]]
-- [[云厂商/01-alibaba-cloud/02-ACK集群运维.md|02 ACK集群运维]]
-- [[云厂商/01-alibaba-cloud/03-Terway-CNI网络.md|03 Terway CNI网络]]
-- [[云厂商/01-alibaba-cloud/04-阿里云存储集成.md|04 阿里云存储集成]]
-- [[云厂商/01-alibaba-cloud/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]]
-- [[云厂商/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]]
+- [[云厂商/阿里云/01-专有云架构概述.md|01 专有云架构概述]]
+- [[云厂商/阿里云/02-ACK集群运维.md|02 ACK集群运维]]
+- [[云厂商/阿里云/03-Terway-CNI网络.md|03 Terway CNI网络]]
+- [[云厂商/阿里云/04-阿里云存储集成.md|04 阿里云存储集成]]
+- [[云厂商/阿里云/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]]
+- [[云厂商/阿里云/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]]
 
 ## See Also
 

@@ -514,13 +514,13 @@ spec:
 
 ## Related
 
-- [[发布变更/03-change-management/22-change-management-process.md|变更管理流程]]
-- [[发布变更/03-change-management/01-change-window-and-approval.md|变更窗口与审批流程]]
+- [[发布变更/变更管理/22-change-management-process.md|变更管理流程]]
+- [[发布变更/变更管理/01-change-window-and-approval.md|变更窗口与审批流程]]
 
 ## See Also
 
-- [[发布变更/01-gitops/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
-- [[可观测性/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
+- [[发布变更/GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
+- [[可观测性/指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 
 ```
 

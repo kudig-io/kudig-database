@@ -42,7 +42,7 @@ relationships:
   type: uses
 - target: '[[entities/prometheus.md]]'
   type: uses
-- target: '[[domain-17-system-foundation/topic-dictionary/networking/service.md]]'
+- target: '[[domain-17-system-foundation/知识字典/networking/service.md]]'
   type: uses
 - target: '[[entities/cloudnativepg.md]]'
   type: related_to
@@ -64,7 +64,7 @@ relationships:
 [[operator-pattern]] 描述 CRD + 自定义控制器的扩展模式，[[entities/prometheus.md|prometheus]]-grafana.md|prometheus-grafana]] 描述 K8s 监控栈。wiki 将两者视为独立主题，但它们是深度耦合的：Prometheus Operator 不仅是 Operator 最成功的生产案例，更直接塑造了现代 K8s 可观测性的架构范式——ServiceMonitor、PodMonitor、AlertmanagerConfig 等核心监控概念全部以 CRD 形式存在。反过来，一个成熟的 Operator 必须暴露自身的协调指标、资源状态和健康信号，否则它将成为集群中的黑箱控制器。
 
 两者的关系不是 A 使用 B，而是互相定义：
-- 可观测性需要 Operator：Prometheus 的 [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]] Discovery、规则管理、高可用部署在没有 Operator 之前是运维噩梦
+- 可观测性需要 Operator：Prometheus 的 [[domain-17-system-foundation/知识字典/networking/service.md|Service]] Discovery、规则管理、高可用部署在没有 Operator 之前是运维噩梦
 - Operator 需要可观测性：自定义控制器的 Reconcile 成功率、队列深度、协调延迟是评估 Operator 成熟度的核心指标
 
 ## 共现场景

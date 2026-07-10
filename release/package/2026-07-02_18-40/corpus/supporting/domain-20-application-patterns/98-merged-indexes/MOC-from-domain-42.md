@@ -182,7 +182,7 @@ prerequisites:
 - [[entities/kubernetes.md|kubernetes]]
 - daily-ops
 - [[log|log]]
-- [[domain-19-landscape-references/topic-index/README.md|topic-index 深度研究入口使用指南]] — Cross-reference
+- [[domain-19-landscape-references/领域索引/README.md|topic-index 深度研究入口使用指南]] — Cross-reference
 
 
 <!-- risk-assessed -->

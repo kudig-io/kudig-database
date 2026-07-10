@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[云厂商/04-azure-aks/02-aks-cluster-lifecycle-upgrades.md|Aks Cluster Lifecycle Upgrades]]
-- [[云厂商/04-azure-aks/03-aks-networking-azure-cni.md|Aks Networking Azure Cni]]
-- [[云厂商/04-azure-aks/04-aks-storage-managed-disk.md|Aks Storage Managed Disk]]
-- [[云厂商/04-azure-aks/05-aks-identity-workload-identity.md|Aks Identity Workload Identity]]
-- [[云厂商/04-azure-aks/06-aks-troubleshooting-playbook.md|Aks Troubleshooting Playbook]]
-- [[云厂商/04-azure-aks/azure-aks-overview.md|Azure Aks Overview]]
+- [[云厂商/Azure-AKS/02-aks-cluster-lifecycle-upgrades.md|Aks Cluster Lifecycle Upgrades]]
+- [[云厂商/Azure-AKS/03-aks-networking-azure-cni.md|Aks Networking Azure Cni]]
+- [[云厂商/Azure-AKS/04-aks-storage-managed-disk.md|Aks Storage Managed Disk]]
+- [[云厂商/Azure-AKS/05-aks-identity-workload-identity.md|Aks Identity Workload Identity]]
+- [[云厂商/Azure-AKS/06-aks-troubleshooting-playbook.md|Aks Troubleshooting Playbook]]
+- [[云厂商/Azure-AKS/azure-aks-overview.md|Azure Aks Overview]]
 

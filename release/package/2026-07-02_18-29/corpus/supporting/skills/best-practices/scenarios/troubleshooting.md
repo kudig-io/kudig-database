@@ -89,7 +89,7 @@ graph TD
 ## 相关文档
 
 - [[domain-10-troubleshooting-diagnostics/README.md|README]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md|README]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/README.md|README]]
 - domain-01-cluster-fundamentals/16-troubleshooting-guide.md
 
 
@@ -97,14 +97,14 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/MOC.md|所有 FTA 故障树]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/MOC.md|所有 FTA 故障树]]
 
 
 ---
 
 ## 操作技能
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/MOC.md|所有操作技能]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/MOC.md|所有操作技能]]
 
 
 ---
@@ -118,7 +118,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - MOC.md|MOC]]
-- [[domain-07-platform-engineering/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- [[domain-07-platform-engineering/代码分析/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 
 
 <!-- risk-assessed -->

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[数据库中间件/05-operator-management/01-database-operator-patterns.md|Database Operator Patterns]]
-- [[数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md|Operator Comparison Mysql Postgres Redis]]
-- [[数据库中间件/05-operator-management/03-operator-lifecycle-management.md|Operator Lifecycle Management]]
+- [[数据库中间件/Operator管理/01-database-operator-patterns.md|Database Operator Patterns]]
+- [[数据库中间件/Operator管理/02-operator-comparison-mysql-postgres-redis.md|Operator Comparison Mysql Postgres Redis]]
+- [[数据库中间件/Operator管理/03-operator-lifecycle-management.md|Operator Lifecycle Management]]
 

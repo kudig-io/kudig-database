@@ -340,8 +340,8 @@ kubectl delete pod <name> --grace-period=0 --force  # ⚠️ 跳过优雅终止�
 
 - [Pod 生命周期](pod-lifecycle.md) — 完整的 Pod 生命周期阶段和终止流程
 - [容器环境](container-environment.md) — 容器运行时的环境信息
-- [[系统基础/topic-dictionary/workloads/disruptions.md|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
-- [[系统基础/topic-dictionary/workloads/deployments.md|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
+- [[系统基础/知识字典/workloads/disruptions.md|Disruptions]]](disruptions.md) — PDB 与优雅终止的配合
+- [[系统基础/知识字典/workloads/deployments.md|Deployments]]](deployments.md) — 滚动更新中的 PreStop 行为
 
 ## 参考链接
 
@@ -351,9 +351,9 @@ kubectl delete pod <name> --grace-period=0 --force  # ⚠️ 跳过优雅终止�
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

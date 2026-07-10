@@ -821,7 +821,7 @@ common_challenges_solutions:
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理
-- [[平台工程/governance/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[平台工程/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - 性能基准测试与调优 (Performance Benchmarking & Tuning)
 - 运维指标体系建设 (Operations Metrics System)
 - 监控告警体系

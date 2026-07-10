@@ -84,11 +84,11 @@ Kubeflow 是 CNCF 孵化项目，为 Kubernetes 上的机器学习工作负载�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/specialized-workloads/kserve.md|KServe]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/job.md|Job]]
-- [[domain-17-system-foundation/topic-dictionary/scheduling/resource-request.md|Resource Request]]
-- [[domain-17-system-foundation/topic-dictionary/operations/argo.md|Argo]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[domain-17-system-foundation/知识字典/specialized-workloads/kserve.md|KServe]]
+- [[domain-17-system-foundation/知识字典/workloads/job.md|Job]]
+- [[domain-17-system-foundation/知识字典/scheduling/resource-request.md|Resource Request]]
+- [[domain-17-system-foundation/知识字典/operations/argo.md|Argo]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

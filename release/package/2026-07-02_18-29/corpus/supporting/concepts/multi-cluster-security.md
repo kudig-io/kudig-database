@@ -100,7 +100,7 @@ relationships:
 - domain-03-networking-traffic/03-service-mesh/01-istio-multi-cluster
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
+- [[domain-17-system-foundation/知识字典/configuration/secrets.md|Secrets]]
 - [[entities/istio.md|Istio (entities)]]
 
 

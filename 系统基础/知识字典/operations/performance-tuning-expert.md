@@ -69,7 +69,7 @@ prerequisites:
 - **专家**: 负责生产环境性能调优的SRE/运维工程师,需要深入掌握各层面性能优化技术和实战案例
 
 **前置知识要求**:
-- **基础**: Kubernetes架构(API Server、[[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]、调度器)、Pod生命周期、资源请求与限制
+- **基础**: Kubernetes架构(API Server、[[系统基础/知识字典/fundamentals/etcd.md|etcd]]、调度器)、Pod生命周期、资源请求与限制
 - **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系([[Prometheus|Prometheus]]/Grafana)
 - **专家**: Linux内核调优、容器运行时原理、网络栈优化、应用性能分析
 
@@ -3025,9 +3025,9 @@ groups:
 | **备份容灾** | [06-backup-disaster-recovery.md](./06-backup-disaster-recovery.md) | 高可用架构下的性能考量,灾难恢复场景的性能优化 |
 | **成本优化策略** | [13-cost-optimization-strategies.md](./13-cost-optimization-strategies.md) | 资源利用率优化与成本控制的平衡,右键调整(Rightsizing)策略 |
 | **自动扩缩容策略** | [15-autoscaling-strategies.md](./15-autoscaling-strategies.md) | HPA/VPA/Cluster Autoscaler的配置和优化,动态性能调优 |
-| **控制平面故障排查** | [../故障诊断/topic-structural-trouble-shooting/01-control-plane/](../故障诊断/topic-structural-trouble-shooting/01-control-plane/) | API Server、etcd、调度器的性能故障排查详细指南 |
-| **网络故障排查** | [../故障诊断/topic-structural-trouble-shooting/03-networking/](../故障诊断/topic-structural-trouble-shooting/03-networking/) | CNI插件、Service、网络策略的性能问题诊断 |
-| **存储故障排查** | [../故障诊断/topic-structural-trouble-shooting/04-storage/](../故障诊断/topic-structural-trouble-shooting/04-storage/) | PV/PVC、CSI驱动的性能问题分析和优化 |
+| **控制平面故障排查** | [../故障诊断/topic-structural-trouble-shooting/01-control-plane/](../故障诊断/高级排障/01-control-plane/) | API Server、etcd、调度器的性能故障排查详细指南 |
+| **网络故障排查** | [../故障诊断/topic-structural-trouble-shooting/03-networking/](../故障诊断/高级排障/03-networking/) | CNI插件、Service、网络策略的性能问题诊断 |
+| **存储故障排查** | [../故障诊断/topic-structural-trouble-shooting/04-storage/](../故障诊断/高级排障/04-storage/) | PV/PVC、CSI驱动的性能问题分析和优化 |
 | **网络深入指南** | [../网络/](../网络/) | Kubernetes网络架构、Service Mesh、网关API等网络性能优化专题 |
 
 ---
@@ -3094,7 +3094,7 @@ cat /proc/sys/net/netfilter/nf_conntrack_count && cat /proc/sys/net/netfilter/nf
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

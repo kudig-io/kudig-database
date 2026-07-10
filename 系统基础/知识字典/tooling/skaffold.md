@@ -74,9 +74,9 @@ Skaffold 是 Google 开源的 K8s 开发工具，自动化构建/推送/部署�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/devspace.md|DevSpace]]
-- [[系统基础/topic-dictionary/tooling/telepresence.md|Telepresence]]
-- [[系统基础/topic-dictionary/tooling/helm.md|Helm]]
+- [[系统基础/知识字典/tooling/devspace.md|DevSpace]]
+- [[系统基础/知识字典/tooling/telepresence.md|Telepresence]]
+- [[系统基础/知识字典/tooling/helm.md|Helm]]
 
 
 <!-- risk-assessed -->

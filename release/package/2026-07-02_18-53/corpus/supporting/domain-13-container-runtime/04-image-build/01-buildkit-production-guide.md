@@ -407,10 +407,10 @@ dive registry.cn-hangzhou.aliyuncs.com/demo/app:v1.2.3
 
 ## 14. 相关文档
 
-- [[domain-13-container-runtime/01-docker/01-docker-architecture-overview.md|Docker 架构概览]]
-- [[domain-13-container-runtime/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
-- [[domain-13-container-runtime/04-image-build/03-kaniko-ko-build-guide.md|Kaniko 与 ko 构建指南]]
-- [[domain-08-release-change-management/01-gitops/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
+- [[domain-13-container-runtime/Docker/01-docker-architecture-overview.md|Docker 架构概览]]
+- [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
+- [[domain-13-container-runtime/镜像构建/03-kaniko-ko-build-guide.md|Kaniko 与 ko 构建指南]]
+- [[domain-08-release-change-management/GitOps/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
 
 
 <!-- risk-assessed -->

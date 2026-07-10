@@ -985,9 +985,9 @@ data:
 
 ## 相关主题
 
-- [[domain-14-ai-ml-infra/03-agent-runtime/18-agent-retry-resilience|Agent弹性设计]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/15-cloud-agent-platforms|云Agent平台即服务]]
-- [[domain-14-ai-ml-infra/03-agent-runtime/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
+- [[domain-14-ai-ml-infra/Agent运行时/18-agent-retry-resilience|Agent弹性设计]]
+- [[domain-14-ai-ml-infra/Agent运行时/15-cloud-agent-platforms|云Agent平台即服务]]
+- [[domain-14-ai-ml-infra/Agent运行时/21-agent-runtime-architecture-overview|Agent Runtime架构总览]]
 
 ## 参考资料
 

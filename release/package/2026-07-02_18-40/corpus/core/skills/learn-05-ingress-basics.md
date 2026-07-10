@@ -403,7 +403,7 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../05-configuration/05-configmap-secret.md) — 配置管理
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/13-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
 - [../../domain-03-networking-traffic/](../../domain-03-networking-traffic/) — Kubernetes 网络文档
 
 ## Related
@@ -414,13 +414,13 @@ kubectl delete ingress my-ingress
 
 - [[skills/learn-public-training.md|learn-public-training]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md|monitoring-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/monitoring-fta.md|monitoring-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/crd-operator-fta.md|crd-operator-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/crd-operator-fta.md|crd-operator-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/vpa-fta.md|vpa-fta]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md|hpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/hpa-fta.md|hpa-fta]]
 
 - [[skills/learn-01-what-is-kubernetes.md|learn-01-what-is-kubernetes]]
 
@@ -428,11 +428,11 @@ kubectl delete ingress my-ingress
 
 - [[skills/learn-13-daemonset-basics.md|learn-13-daemonset-basics]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta.md|ingress-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|ingress-fta]]
 
 - README.md|learn-README]]
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
 
 - [[openkruise-fta]]
 

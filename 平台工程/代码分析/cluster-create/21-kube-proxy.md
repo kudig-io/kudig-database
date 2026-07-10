@@ -349,9 +349,9 @@ cat /proc/sys/net/netfilter/nf_conntrack_count
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/networking.md|networking]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/networking.md|networking]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[concepts/service-networking.md|service-networking]]
 - [[entities/kubernetes.md|kubernetes]]
 

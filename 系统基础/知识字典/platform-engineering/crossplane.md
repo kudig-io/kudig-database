@@ -84,11 +84,11 @@ Crossplane 是 CNCF 孵化项目，将 Kubernetes 的控制循环扩展到基础
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
-- [[系统基础/topic-dictionary/operations/gitops.md|GitOps]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
+- [[系统基础/知识字典/operations/gitops.md|GitOps]]
+- [[系统基础/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
 
 
 <!-- risk-assessed -->

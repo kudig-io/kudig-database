@@ -394,13 +394,13 @@ SLO 体系要真正落地，需要技术与业务团队共同认可。建议从�
 
 ## Related
 
-- [[可观测性/06-slo-sli/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
-- [[可靠性/04-slo-sli/01-sli-definition-selection.md|SLI 定义与选择]]
+- [[可观测性/SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
+- [[可观测性/SLO-SLI/01-sli-definition-selection.md|SLI 定义与选择]]
 
 ## See Also
 
-- [[可观测性/06-slo-sli/02-error-budget-policy.md|错误预算政策与 burn rate alert]]
-- [[可观测性/02-metrics/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
+- [[可观测性/SLO-SLI/02-error-budget-policy.md|错误预算政策与 burn rate alert]]
+- [[可观测性/指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
 
 
 <!-- risk-assessed -->

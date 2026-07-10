@@ -486,10 +486,10 @@ systemctl restart kubelet
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[系统基础/topic-cheat-sheet/go.md|go]]
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/go.md|go]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md|04-etcd-cert]]
+- [[平台工程/代码分析/cluster-cert/04-etcd-cert.md|04-etcd-cert]]
 
 
 <!-- risk-assessed -->

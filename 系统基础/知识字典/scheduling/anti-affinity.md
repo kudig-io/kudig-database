@@ -80,11 +80,11 @@ affinity:
 
 ## Related
 
-- [[系统基础/topic-dictionary/scheduling/taint.md|Taint]]
-- [[系统基础/topic-dictionary/scheduling/toleration.md|Toleration]]
-- [[系统基础/topic-dictionary/scheduling/node-selector.md|Node Selector]]
-- [[系统基础/topic-dictionary/scheduling/resource-request.md|Resource Request]]
-- [[系统基础/topic-dictionary/scheduling/resource-limit.md|Resource Limit]]
+- [[系统基础/知识字典/scheduling/taint.md|Taint]]
+- [[系统基础/知识字典/scheduling/toleration.md|Toleration]]
+- [[系统基础/知识字典/scheduling/node-selector.md|Node Selector]]
+- [[系统基础/知识字典/scheduling/resource-request.md|Resource Request]]
+- [[系统基础/知识字典/scheduling/resource-limit.md|Resource Limit]]
 
 
 <!-- risk-assessed -->

@@ -51,7 +51,7 @@ prerequisites:
 
 ## 概述
 
-在 [[Kubernetes|Kubernetes]] 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**[[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]] 集群状态、Kubernetes 资源定义、[[Secrets|Secrets]] 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
+在 [[Kubernetes|Kubernetes]] 生产环境中，**备份与灾难恢复（BDR）** 是保障业务连续性的最后防线。2026 年的最佳实践要求企业不仅备份应用数据，还要备份**[[系统基础/知识字典/fundamentals/etcd.md|etcd]] 集群状态、Kubernetes 资源定义、[[Secrets|Secrets]] 以及容器镜像**。一套完整的 BDR 策略应涵盖 **恢复时间目标（RTO）** 和 **恢复点目标（RPO）**，并通过定期的灾难恢复演练验证其有效性。
 
 ## 核心概念/原理
 
@@ -227,8 +227,8 @@ velero backup get && velero restore get
 
 ## Related
 
-- [[生态参考/topic-index/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

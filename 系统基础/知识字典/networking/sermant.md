@@ -68,6 +68,6 @@ Sermant 是华为开源的 CNCF Sandbox 项目，基于 Java Agent 的无代理�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/istio.md|Istio]]
-- [[系统基础/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[系统基础/topic-dictionary/networking/kuma.md|Kuma]]
+- [[系统基础/知识字典/networking/istio.md|Istio]]
+- [[系统基础/知识字典/networking/linkerd.md|Linkerd]]
+- [[系统基础/知识字典/networking/kuma.md|Kuma]]

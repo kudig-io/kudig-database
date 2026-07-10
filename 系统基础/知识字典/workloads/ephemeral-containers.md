@@ -189,16 +189,16 @@ kubectl debug node/<node-name> -it --image=ubuntu:22.04
 - [高级 Pod 运维模式](../../工作负载/12-advanced-pod-patterns.md)
 - [容器运行时接口 (CRI)](./container-runtime-interface-cri.md)
 - [Pod 生命周期](./pod-lifecycle.md)
-- [Pod 故障树分析 (FTA)](../../故障诊断/topic-fta/list/pod-fta.md)
+- [Pod 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/pod-fta.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[容器运行时/04-image-build/01-buildkit-production-guide.md|Buildkit Production Guide]]
-- [[容器运行时/04-image-build/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks Guide]]
-- [[容器运行时/04-image-build/03-kaniko-ko-build-guide.md|Kaniko Ko Build Guide]]
+- [[容器运行时/镜像构建/01-buildkit-production-guide.md|Buildkit Production Guide]]
+- [[容器运行时/镜像构建/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks Guide]]
+- [[容器运行时/镜像构建/03-kaniko-ko-build-guide.md|Kaniko Ko Build Guide]]
 

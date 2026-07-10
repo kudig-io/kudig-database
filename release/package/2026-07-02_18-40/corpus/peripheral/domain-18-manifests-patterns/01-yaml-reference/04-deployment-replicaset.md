@@ -2875,7 +2875,7 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 - [02 - Namespace / ResourceQuota / LimitRange](./02-namespace-resourcequota-limitrange.md)
 - [03 - Pod YAML 配置参考](./03-pod.md) *(待创建)*
 - [05 - Service / Ingress 配置参考](./05-service-ingress.md) *(待创建)*
-- [Kubernetes 故障排查 - Workloads](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md)
+- [Kubernetes 故障排查 - Workloads](../domain-10-troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md)
 
 ---
 

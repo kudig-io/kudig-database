@@ -71,9 +71,9 @@ SOPS 是 Mozilla 开发的加密文件编辑器，支持 YAML/JSON/ENV 等格式
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/external-secrets.md|External Secrets]]
-- [[domain-17-system-foundation/topic-dictionary/security/vault.md|Vault]]
-- [[domain-17-system-foundation/topic-dictionary/security/opa.md|OPA]]
+- [[domain-17-system-foundation/知识字典/security/external-secrets.md|External Secrets]]
+- [[domain-17-system-foundation/知识字典/security/vault.md|Vault]]
+- [[domain-17-system-foundation/知识字典/security/opa.md|OPA]]
 
 
 <!-- risk-assessed -->

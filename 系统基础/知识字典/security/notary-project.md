@@ -72,9 +72,9 @@ Notary Project（原 Docker Notary v2）是 CNCF 孵化项目，提供容器镜�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/ratify.md|Ratify]]
-- [[系统基础/topic-dictionary/security/in-toto.md|in-toto]]
-- [[系统基础/topic-dictionary/security/trivy.md|Trivy]]
+- [[系统基础/知识字典/security/ratify.md|Ratify]]
+- [[系统基础/知识字典/security/in-toto.md|in-toto]]
+- [[系统基础/知识字典/security/trivy.md|Trivy]]
 
 
 <!-- risk-assessed -->

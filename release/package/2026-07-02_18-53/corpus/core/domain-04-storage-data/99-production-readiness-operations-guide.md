@@ -55,7 +55,7 @@ authors:
 
 > **适用版本**: Kubernetes v1.28 - v1.33 | **最后更新**: 2026-07 | **运维重点**: 生产准入检查、日常巡检、风险缓解、故障闭环
 
-本指南聚焦将 `domain-04-storage-data` 的存储能力从“可用”推进到“可长期稳定运行”，重点补齐当前知识库在**存储多租户治理、临时存储管理、CSI 供应链安全、容量规划、存储混沌演练**五个方向的缺口。阅读前建议先熟悉 [[01-k8s-storage/01-storage-architecture-overview.md|存储架构概览]] 与 [[01-k8s-storage/07-storage-daily-operations.md|存储日常运维操作手册]]。
+本指南聚焦将 `domain-04-storage-data` 的存储能力从“可用”推进到“可长期稳定运行”，重点补齐当前知识库在**存储多租户治理、临时存储管理、CSI 供应链安全、容量规划、存储混沌演练**五个方向的缺口。阅读前建议先熟悉 [[K8s存储/01-storage-architecture-overview.md|存储架构概览]] 与 [[K8s存储/07-storage-daily-operations.md|存储日常运维操作手册]]。
 
 生产环境中的存储故障往往具有“级联放大”特征：一个 CSI Node 插件异常可能导致整节点有状态 Pod 无法重启；一个未设置 sizeLimit 的 emptyDir 可能在数小时内占满节点磁盘，触发大规模驱逐；一次未经验证的备份恢复演练可能在真正灾难时暴露 RTO 不可达。因此，本指南不仅提供检查清单，更强调“可验证、可回滚、可审计”的运维闭环。
 
@@ -85,7 +85,7 @@ authors:
 | 5 | 临时存储限制 | 关键命名空间 Pod 设置 `emptyDir` sizeLimit，`ephemeral-storage` request/limit | `kubectl get pods -n <ns> -o jsonpath='{..emptyDir.sizeLimit}'` |
 | 6 | 数据静态加密 | 生产 SC 启用后端加密（KMS/云盘加密），敏感应用不使用本地未加密卷 | `kubectl get sc <sc> -o jsonpath='{.parameters.encrypted}'` |
 | 7 | 快照与恢复就绪 | VolumeSnapshotClass 已创建，`deletionPolicy` 符合 RPO 要求，恢复演练通过 | `kubectl get volumesnapshotclass` |
-| 8 | 备份策略落地 | 使用 Velero 或云厂商方案对关键 PVC/命名空间执行定期备份，并验证还原 | 见 [[03-distributed-storage/01-velero-backup-recovery.md|Velero 备份恢复]] |
+| 8 | 备份策略落地 | 使用 Velero 或云厂商方案对关键 PVC/命名空间执行定期备份，并验证还原 | 见 [[分布式存储/01-velero-backup-recovery.md|Velero 备份恢复]] |
 | 9 | 容量与告警 | 监控 PVC 使用率、Pool/磁盘组容量、CSI 侧卡错误率，阈值 ≤ 80% 触发预警 | Prometheus + Alertmanager 规则 |
 | 10 | CSI 供应链安全 | CSI 镜像来自受信仓库并经过签名校验，RBAC 最小权限，不挂载 hostPath | `kubectl get clusterrole,role -l app.kubernetes.io/component=csi-driver` |
 | 11 | 有状态应用存储模式 | MySQL/PostgreSQL/Kafka/Redis 使用对应 StatefulSet 存储模式，禁止多 Pod 挂载 RWO | `kubectl get sts -n <ns> -o wide` |
@@ -378,7 +378,7 @@ kubectl get pvc -A -o json | jq -r '
 | 节点 `DiskPressure=True` | emptyDir/日志/镜像占满节点盘 | `kubectl describe node <node>` | 清理镜像缓存、设置 log rotation、为 Pod 配置 ephemeral-storage limit |
 | 快照 `ReadyToUse=false` | CSI snapshotter 异常、后端快照配额满 | `kubectl get volumesnapshot <name> -n <ns> -o yaml` | 检查 snapshot-controller 日志、清理旧快照、确认 VolumeSnapshotClass 参数 |
 
-通用诊断脚本可直接使用 [[01-k8s-storage/09-pv-pvc-troubleshooting.md|PV/PVC 故障排查与解决方案]] 中的 `pv-pvc-diagnostics.sh`。
+通用诊断脚本可直接使用 [[K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 故障排查与解决方案]] 中的 `pv-pvc-diagnostics.sh`。
 
 ### 排障核心原则
 
@@ -404,13 +404,13 @@ kubectl get pvc -A -o json | jq -r '
 
 ### 本域相关
 
-- [[01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]]
-- [[01-k8s-storage/07-storage-daily-operations.md|存储日常运维操作手册]]
-- [[01-k8s-storage/09-pv-pvc-troubleshooting.md|PV/PVC 故障排查与解决方案]]
-- [[01-k8s-storage/13-storage-security-compliance.md|存储安全与合规管理]]
-- [[01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]]
+- [[K8s存储/07-storage-daily-operations.md|存储日常运维操作手册]]
+- [[K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 故障排查与解决方案]]
+- [[K8s存储/13-storage-security-compliance.md|存储安全与合规管理]]
+- [[K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
 - [[02-pvc-expansion-guide.md|PVC 扩容指南]]
-- [[03-distributed-storage/01-velero-backup-recovery.md|Velero 备份恢复]]
+- [[分布式存储/01-velero-backup-recovery.md|Velero 备份恢复]]
 
 ### 跨域相关
 

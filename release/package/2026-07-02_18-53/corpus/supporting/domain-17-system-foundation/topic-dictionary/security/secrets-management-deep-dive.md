@@ -53,7 +53,7 @@ prerequisites:
 ### 1. Kubernetes Secret 的局限
 
 原生 Secret 存在以下安全风险：
-- **默认未加密存储**：[[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]] 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
+- **默认未加密存储**：[[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]] 中的 Secret 默认以 Base64 编码存储，若 etcd 被攻破则 Secret 泄露
 - **访问控制粗粒度**：任何具有 Pod 创建权限的用户都可能读取同一 Namespace 中的 Secret
 - **无自动轮转**：Kubernetes 本身不提供 Secret 的自动过期和更新机制
 - **缺乏审计**：无法追踪谁、在何时、以何种方式使用了 Secret
@@ -199,8 +199,8 @@ spec:
 - [Kubernetes Secret Encryption at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
 
 ## Related
-- [[domain-19-landscape-references/topic-index/security-index.md|Security 安全知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

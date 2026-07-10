@@ -180,7 +180,7 @@ flowchart TD
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[故障诊断/topic-fta/list/cilium-fta.md|cilium-fta]]
+- [[故障诊断/FTA故障树/list/cilium-fta.md|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18

@@ -59,4 +59,4 @@ MCS 分析帮助识别系统的薄弱环节和单点故障。优先处理阶数�
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

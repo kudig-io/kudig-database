@@ -68,6 +68,6 @@ CubeFS（原 CFS）是京东开源的 CNCF 孵化项目，云原生分布式文�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/ceph.md|Ceph]]
-- [[domain-17-system-foundation/topic-dictionary/storage/fluid.md|Fluid]]
-- [[domain-17-system-foundation/topic-dictionary/storage/minio.md|MinIO]]
+- [[domain-17-system-foundation/知识字典/storage/ceph.md|Ceph]]
+- [[domain-17-system-foundation/知识字典/storage/fluid.md|Fluid]]
+- [[domain-17-system-foundation/知识字典/storage/minio.md|MinIO]]

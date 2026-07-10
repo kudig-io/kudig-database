@@ -45,7 +45,7 @@ last_updated: 2026-05-24
 
 **问题**: 本次新增的 16 个文件全部包含指向不存在页面的 wikilink。
 
-**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
+**影响**: 远程顾问模式的核心机制是「概念 → 诊断 → 修复」的知识链路。当加载 `concepts/ingress-controller.md` 并尝试跳转到 `[[故障诊断/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` 时，文件不存在，链路断裂。
 
 **涉及文件和 broken link 分布**:
 
@@ -61,7 +61,7 @@ last_updated: 2026-05-24
 **修复策略**:
 - **方案 A**（推荐）: 将不存在的 wikilink 替换为纯文本描述，或创建对应的 stub 页面
 - **方案 B**: 创建缺失的 troubleshooting/skill 页面（工作量大，但最完整）
-- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[故障诊断/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[故障诊断/98-merged-indexes/index.md|故障诊断]]`）
+- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[故障诊断/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[故障诊断/98-merged-indexes/index.md|故障诊断]]`）
 
 **建议**: 先执行方案 A（纯文本化）确保生产可用，后续再按需创建 stub。
 

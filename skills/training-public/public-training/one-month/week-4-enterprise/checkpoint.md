@@ -84,7 +84,7 @@ estimated_read_time: 90min
 related_domains:
   - domain-20-enterprise-monitoring-alerting
   - 发布变更
-  - domain-25-[[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]]
+  - domain-25-[[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - 生产运维/topic-learn/public-training/one-month/projects/p4-gitops-pipeline
   - 生产运维/topic-learn/public-training/one-month/projects/p5-graduation-project
@@ -492,7 +492,7 @@ Payment Service 5xx 激增
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

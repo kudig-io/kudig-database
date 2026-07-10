@@ -96,8 +96,8 @@ SOPS (Secrets OPerationS) 是一个加密文件编辑器，支持 YAML、JSON、
 - [[concepts/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

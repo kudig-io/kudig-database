@@ -2102,7 +2102,7 @@ kubectl run dns-latency --image=busybox:1.36 --rm -it --restart=Never -- sh -c '
 ```
 ## Related
 
-- [[生态参考/topic-index/dns-index.md|DNS 知识图谱索引]]
+- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
 
 ```
 

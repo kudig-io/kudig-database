@@ -81,11 +81,11 @@ HashiCorp Vault、AWS Secrets Manager、AWS Parameter Store、Azure Key Vault、
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/vault.md|Vault]]
-- [[系统基础/topic-dictionary/security/secret.md|Secret]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/security/service-account.md|Service Account]]
-- [[系统基础/topic-dictionary/operations/cert-manager.md|cert-manager]]
+- [[系统基础/知识字典/security/vault.md|Vault]]
+- [[系统基础/知识字典/security/secret.md|Secret]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/security/service-account.md|Service Account]]
+- [[系统基础/知识字典/operations/cert-manager.md|cert-manager]]
 
 
 <!-- risk-assessed -->

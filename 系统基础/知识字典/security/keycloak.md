@@ -70,6 +70,6 @@ Keycloak 是 Red Hat 赞助的开源身份和访问管理（IAM）平台，提�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/dex.md|Dex]]
-- [[系统基础/topic-dictionary/security/oauth2-proxy.md|oauth2-proxy]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/dex.md|Dex]]
+- [[系统基础/知识字典/security/oauth2-proxy.md|oauth2-proxy]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]

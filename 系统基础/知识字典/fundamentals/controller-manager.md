@@ -75,11 +75,11 @@ kube-controller-manager 是 Kubernetes 控制平面组件，负责运行各种�
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kube-apiserver.md|Kube-apiserver]]
-- [[系统基础/topic-dictionary/fundamentals/kube-scheduler.md|Kube-scheduler]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/workloads/replicaset.md|ReplicaSet]]
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|Operator Pattern]]
+- [[系统基础/知识字典/fundamentals/kube-apiserver.md|Kube-apiserver]]
+- [[系统基础/知识字典/fundamentals/kube-scheduler.md|Kube-scheduler]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/workloads/replicaset.md|ReplicaSet]]
+- [[系统基础/知识字典/platform-engineering/operator-pattern.md|Operator Pattern]]
 
 
 <!-- risk-assessed -->

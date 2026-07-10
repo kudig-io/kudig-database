@@ -70,6 +70,6 @@ Headless Service 是 clusterIP 设为 None 的特殊 Service，不分配虚拟 I
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/service.md|Service]]
-- [[系统基础/topic-dictionary/networking/dns.md|DNS]]
-- [[系统基础/topic-dictionary/workloads/statefulset.md|StatefulSet]]
+- [[系统基础/知识字典/networking/service.md|Service]]
+- [[系统基础/知识字典/networking/dns.md|DNS]]
+- [[系统基础/知识字典/workloads/statefulset.md|StatefulSet]]

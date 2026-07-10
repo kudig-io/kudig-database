@@ -545,7 +545,7 @@ agent = ReActAgent(
 | USER.md | [domain-07-platform-engineering](../domain-07-platform-engineering/) | 运维工程师角色定义 |
 | AGENTS.md | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/) | 诊断工作流模板 |
 | TOOLS.md | [domain-03-networking-traffic](../domain-03-networking-traffic/), [domain-06-observability](../domain-06-observability/) | 工具使用规范 |
-| SKILL.md | [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/), [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/) | 故障树 + SOP 知识 |
+| SKILL.md | [topic-fta](../domain-10-troubleshooting-diagnostics/FTA故障树/), [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/高级排障/) | 故障树 + SOP 知识 |
 | MEMORY.md | [domain-33-kubernetes-events](../domain-17-system-foundation/) | 事件模式知识库 |
 | IDENTITY.md | — | Agent 品牌独立设计 |
 
@@ -659,17 +659,17 @@ agent = ReActAgent(
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents MOC
-- [[domain-14-ai-ml-infra/02-ai-agents/README.md|AI Agent 工程专题]]
-- [[domain-14-ai-ml-infra/02-ai-agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
-- [[domain-14-ai-ml-infra/02-ai-agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
-- [[domain-14-ai-ml-infra/02-ai-agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
-- [[domain-14-ai-ml-infra/02-ai-agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
-- [[domain-14-ai-ml-infra/02-ai-agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
-- [[domain-14-ai-ml-infra/02-ai-agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
-- [[domain-14-ai-ml-infra/02-ai-agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
-- [[domain-14-ai-ml-infra/02-ai-agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
-- [[domain-14-ai-ml-infra/02-ai-agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
+- [[domain-14-ai-ml-infra/AI-Agents/README.md|AI Agent 工程专题]]
+- [[domain-14-ai-ml-infra/AI-Agents/01-ai-agent-fundamentals.md|AI Agent 基础与核心架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
+- [[domain-14-ai-ml-infra/AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
+- [[domain-14-ai-ml-infra/AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]
+- [[domain-14-ai-ml-infra/AI-Agents/05-tool-use-function-calling.md|Tool Use & Function Calling 设计规范]]
+- [[domain-14-ai-ml-infra/AI-Agents/06-multi-agent-orchestration.md|多 Agent 编排与协作架构]]
+- [[domain-14-ai-ml-infra/AI-Agents/07-memory-context-management.md|记忆管理与上下文窗口工程]]
+- [[domain-14-ai-ml-infra/AI-Agents/08-agent-evaluation-observability.md|Agent 评测体系与可观测性]]
+- [[domain-14-ai-ml-infra/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
+- [[domain-14-ai-ml-infra/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
 ## See Also
 

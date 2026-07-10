@@ -78,7 +78,7 @@ Endpoints 是 Service 后端 Pod 的 IP 地址和端口组合。当 Service 使�
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/networking/endpointslices.md|EndpointSlices]]
+[[domain-17-system-foundation/知识字典/networking/endpointslices.md|EndpointSlices]]
 
 
 <!-- risk-assessed -->

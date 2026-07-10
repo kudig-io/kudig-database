@@ -398,7 +398,7 @@ kubectl edit hpa <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../09-troubleshooting/09-common-problems.md) — 常见问题排查
-- [../../故障诊断/topic-skills/07-hpa-scaling-failure.md](../../故障诊断/topic-skills/07-hpa-scaling-failure.md) — HPA 问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/07-hpa-scaling-failure.md](../../故障诊断/技能体系/07-hpa-scaling-failure.md) — HPA 问题 [[SKILL|Skill]]
 - [../../工作负载/](../../工作负载/) — 工作负载文档
 
 

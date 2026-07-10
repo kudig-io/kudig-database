@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[系统基础/topic-dictionary/multi-cloud/cloud-credential-operator.md|Cloud Credential Operator]]
-- [[系统基础/topic-dictionary/multi-cloud/cluster-api.md|Cluster Api]]
-- [[系统基础/topic-dictionary/multi-cloud/crossplane-composition.md|Crossplane Composition]]
-- [[系统基础/topic-dictionary/multi-cloud/edge-computing-and-k3s.md|Edge Computing And K3S]]
-- [[系统基础/topic-dictionary/multi-cloud/federation.md|Federation]]
-- [[系统基础/topic-dictionary/multi-cloud/multi-cloud-operations.md|Multi Cloud Operations]]
-- [[系统基础/topic-dictionary/multi-cloud/multi-cluster-service.md|Multi Cluster Service]]
-- [[系统基础/topic-dictionary/multi-cloud/spaceborne-computing.md|Spaceborne Computing]]
+- [[系统基础/知识字典/multi-cloud/cloud-credential-operator.md|Cloud Credential Operator]]
+- [[系统基础/知识字典/multi-cloud/cluster-api.md|Cluster Api]]
+- [[系统基础/知识字典/multi-cloud/crossplane-composition.md|Crossplane Composition]]
+- [[系统基础/知识字典/multi-cloud/edge-computing-and-k3s.md|Edge Computing And K3S]]
+- [[系统基础/知识字典/multi-cloud/federation.md|Federation]]
+- [[系统基础/知识字典/multi-cloud/multi-cloud-operations.md|Multi Cloud Operations]]
+- [[系统基础/知识字典/multi-cloud/multi-cluster-service.md|Multi Cluster Service]]
+- [[系统基础/知识字典/multi-cloud/spaceborne-computing.md|Spaceborne Computing]]
 

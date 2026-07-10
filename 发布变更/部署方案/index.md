@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[发布变更/topic-deployment/README.md|Readme]]
+- [[发布变更/部署方案/README.md|Readme]]
 
 ## 文档
 
-- [[发布变更/topic-deployment/01-local-demo-deployment.md|Local Demo Deployment]]
-- [[发布变更/topic-deployment/02-single-node-deployment.md|Single Node Deployment]]
-- [[发布变更/topic-deployment/03-development-environment-deployment.md|Development Environment Deployment]]
-- [[发布变更/topic-deployment/04-production-environment-deployment.md|Production Environment Deployment]]
+- [[发布变更/部署方案/01-local-demo-deployment.md|Local Demo Deployment]]
+- [[发布变更/部署方案/02-single-node-deployment.md|Single Node Deployment]]
+- [[发布变更/部署方案/03-development-environment-deployment.md|Development Environment Deployment]]
+- [[发布变更/部署方案/04-production-environment-deployment.md|Production Environment Deployment]]
 

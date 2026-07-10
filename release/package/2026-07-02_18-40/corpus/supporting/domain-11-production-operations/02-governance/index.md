@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-11-production-operations/02-governance/01-namespace-strategy-lifecycle.md|Namespace Strategy Lifecycle]]
-- [[domain-11-production-operations/02-governance/02-label-convention-governance.md|Label Convention Governance]]
-- [[domain-11-production-operations/02-governance/03-admission-policy-governance.md|Admission Policy Governance]]
-- [[domain-11-production-operations/02-governance/04-rbac-governance-model.md|Rbac Governance Model]]
-- [[domain-11-production-operations/02-governance/14-resource-quota-management.md|Resource Quota Management]]
+- [[domain-11-production-operations/集群治理/01-namespace-strategy-lifecycle.md|Namespace Strategy Lifecycle]]
+- [[domain-11-production-operations/集群治理/02-label-convention-governance.md|Label Convention Governance]]
+- [[domain-11-production-operations/集群治理/03-admission-policy-governance.md|Admission Policy Governance]]
+- [[domain-11-production-operations/集群治理/04-rbac-governance-model.md|Rbac Governance Model]]
+- [[domain-11-production-operations/集群治理/14-resource-quota-management.md|Resource Quota Management]]
 

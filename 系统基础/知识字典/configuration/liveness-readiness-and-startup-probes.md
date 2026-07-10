@@ -273,7 +273,7 @@ kubectl get pods --field-selector=status.phase=Running -o json | jq '.items[] | 
 ```
 ## 交叉引用
 
-- [[系统基础/topic-dictionary/configuration/configmaps.md|ConfigMaps]]](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
+- [[系统基础/知识字典/configuration/configmaps.md|ConfigMaps]]](./configmaps.md) — 探针端口/路径可通过 ConfigMap 配置化
 - [Pod 和容器的资源管理](./resource-management-for-pods-and-containers.md) — 资源不足可导致探针超时
 - [Secrets](./secrets.md) — 需要认证的探针端点可使用 Secret 中的凭据
 
@@ -283,9 +283,9 @@ kubectl get pods --field-selector=status.phase=Running -o json | jq '.items[] | 
 
 ## Related
 
-- [[系统基础/topic-dictionary/configuration/configmap.md|配置映射]]
-- [[系统基础/topic-dictionary/configuration/configmaps.md|ConfigMaps]]
-- [[系统基础/topic-dictionary/configuration/env.md|环境变量配置]]
+- [[系统基础/知识字典/configuration/configmap.md|配置映射]]
+- [[系统基础/知识字典/configuration/configmaps.md|ConfigMaps]]
+- [[系统基础/知识字典/configuration/env.md|环境变量配置]]
 
 
 <!-- risk-assessed -->

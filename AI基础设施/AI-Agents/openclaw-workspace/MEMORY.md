@@ -333,8 +333,8 @@ memory_metadata:
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/topic-cheat-sheet/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
+- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[系统基础/速查卡/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
 - [[entities/coredns.md|coredns]]
 
 ## See Also

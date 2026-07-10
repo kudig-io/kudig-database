@@ -84,11 +84,11 @@ KubeEdge 是 CNCF 孵化项目，将 Kubernetes 的能力扩展到边缘计算�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/node.md|Node]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cluster.md|Cluster]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/daemonset.md|DaemonSet]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/fundamentals/node.md|Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cluster.md|Cluster]]
+- [[domain-17-system-foundation/知识字典/workloads/daemonset.md|DaemonSet]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

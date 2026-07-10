@@ -71,40 +71,40 @@ prerequisites:
 - 146 - LLM模型量化技术
 - 147 - 向量数据库与RAG架构
 - LLM 成本监控与 FinOps
-- [[系统基础/topic-dictionary/observability/llm-observability.md|LLM 可观测性]]
+- [[系统基础/知识字典/observability/llm-observability.md|LLM 可观测性]]
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
-- [[系统基础/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
-- [[系统基础/topic-dictionary/specialized-workloads/kserve-model-serving.md|KServe 模型服务平台]]
-- [[系统基础/topic-dictionary/specialized-workloads/kueue-job-queue-management.md|Kueue 作业队列与准入控制]]
-- [[系统基础/topic-dictionary/specialized-workloads/llm-inference-optimization.md|大语言模型（LLM）推理优化]]
-- [[系统基础/topic-dictionary/specialized-workloads/mlops-pipelines-and-model-registry.md|MLOps 流水线与模型仓库]]
-- [[系统基础/topic-dictionary/specialized-workloads/vector-databases-and-rag-infrastructure.md|向量数据库与 RAG 基础设施]]
-- [[系统基础/topic-dictionary/platform-engineering/device-plugins.md|设备插件]]
-- [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]
-- [[系统基础/topic-dictionary/scheduling/gang-scheduling.md|Gang Scheduling]]
+- [[系统基础/知识字典/specialized-workloads/ai-infra-specialist.md|08 - AI/ML基础设施专业词典]]
+- [[系统基础/知识字典/specialized-workloads/gpu-resource-management-and-partitioning.md|GPU 资源管理与分区技术]]
+- [[系统基础/知识字典/specialized-workloads/kserve-model-serving.md|KServe 模型服务平台]]
+- [[系统基础/知识字典/specialized-workloads/kueue-job-queue-management.md|Kueue 作业队列与准入控制]]
+- [[系统基础/知识字典/specialized-workloads/llm-inference-optimization.md|大语言模型（LLM）推理优化]]
+- [[系统基础/知识字典/specialized-workloads/mlops-pipelines-and-model-registry.md|MLOps 流水线与模型仓库]]
+- [[系统基础/知识字典/specialized-workloads/vector-databases-and-rag-infrastructure.md|向量数据库与 RAG 基础设施]]
+- [[系统基础/知识字典/platform-engineering/device-plugins.md|设备插件]]
+- [[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]
+- [[系统基础/知识字典/scheduling/gang-scheduling.md|Gang Scheduling]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|AI/ML 工作负载故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|MPI Operator 与分布式训练故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[故障诊断/高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|AI/ML 工作负载故障排查指南]]
+- [[故障诊断/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
+- [[故障诊断/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|MPI Operator 与分布式训练故障排查指南]]
+- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 调度与资源
 
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 
 ### 成本与可观测性
 
 - 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 - AI平台可观测性体系
-- [[故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
 
 ## 扩展参考
 
@@ -115,13 +115,13 @@ prerequisites:
 - Volcano
 - Fluid
 - HAMi (Heterogeneous AI Computing Virtualization Middleware)
-- [[专项技术/01-edge-computing/99-kubernetes-developer-toolchain-guide.md|99 kubernetes developer toolchain guide]]
+- [[专项技术/边缘计算/99-kubernetes-developer-toolchain-guide.md|99 kubernetes developer toolchain guide]]
 - HolmesGPT
 - ModelPack
 
 ### 技术论文
 
-- [[生态参考/02-papers/17-kubernetes-aiml-gpu-scheduling-llm-inference.md|17 kubernetes aiml gpu scheduling llm inference]]
+- [[生态参考/论文/17-kubernetes-aiml-gpu-scheduling-llm-inference.md|17 kubernetes aiml gpu scheduling llm inference]]
 
 
 <!-- risk-assessed -->

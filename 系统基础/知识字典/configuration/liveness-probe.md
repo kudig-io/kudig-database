@@ -87,7 +87,7 @@ livenessProbe:
 
 ## Related
 
-[[系统基础/topic-dictionary/configuration/liveness-readiness-and-startup-probes.md|Probes]]
+[[系统基础/知识字典/configuration/liveness-readiness-and-startup-probes.md|Probes]]
 
 
 <!-- risk-assessed -->

@@ -84,11 +84,11 @@ HashiCorp Vault 是业界领先的密钥管理系统，提供密钥存储、动�
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/secret.md|Secret]]
-- [[系统基础/topic-dictionary/security/certificate.md|Certificate]]
-- [[系统基础/topic-dictionary/security/certificate-authority.md|Certificate Authority]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/security/service-account.md|Service Account]]
+- [[系统基础/知识字典/security/secret.md|Secret]]
+- [[系统基础/知识字典/security/certificate.md|Certificate]]
+- [[系统基础/知识字典/security/certificate-authority.md|Certificate Authority]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/service-account.md|Service Account]]
 
 
 <!-- risk-assessed -->

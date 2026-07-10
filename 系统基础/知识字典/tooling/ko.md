@@ -75,9 +75,9 @@ ko 是 Google 开源的工具，无需 Dockerfile 即可将 Go 程序构建为�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/buildpacks.md|Buildpacks]]
-- [[系统基础/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[系统基础/topic-dictionary/tooling/podman.md|Podman]]
+- [[系统基础/知识字典/tooling/buildpacks.md|Buildpacks]]
+- [[系统基础/知识字典/fundamentals/docker.md|Docker]]
+- [[系统基础/知识字典/tooling/podman.md|Podman]]
 
 
 <!-- risk-assessed -->

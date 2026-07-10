@@ -262,7 +262,7 @@ kubectl top nodes
 
 - [VPA 垂直自动扩缩](./vertical-pod-autoscaling.md)
 - [自动扩缩容概览](./autoscaling-workloads.md)
-- [HPA 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md)
+- [HPA 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/hpa-fta.md)
 - [工作负载监控与告警](../../domain-02-workloads-applications/06-workload-monitoring-alerting.md)
 - [Deployments](./deployments.md)
 
@@ -271,9 +271,9 @@ kubectl top nodes
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[domain-17-system-foundation/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[domain-17-system-foundation/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[domain-17-system-foundation/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

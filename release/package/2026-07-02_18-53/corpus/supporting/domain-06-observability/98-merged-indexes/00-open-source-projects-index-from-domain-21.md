@@ -325,7 +325,7 @@ Fluentd 的轻量级替代品，C 语言编写：
 
 ## See Also
 
-- [[domain-06-observability/07-tools/27-performance-profiling-tools.md|27-performance-profiling-tools]]
+- [[domain-06-observability/工具/27-performance-profiling-tools.md|27-performance-profiling-tools]]
 - [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-domain-06-observability]]
 - [[domain-06-observability/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-domain-06-observability]]
 - [[domain-06-observability/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]

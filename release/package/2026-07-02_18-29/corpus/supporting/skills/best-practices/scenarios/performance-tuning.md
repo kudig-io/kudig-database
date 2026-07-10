@@ -97,8 +97,8 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/hpa-fta.md|hpa fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/hpa-fta.md|hpa fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/node-fta.md|node fta]]
 
 
 ---
@@ -119,8 +119,8 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - observability/19-cluster-performance-tuning.md|19-cluster-performance-tuning]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/node-fta.md|node-fta]]
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/vpa-fta.md|vpa-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/node-fta.md|node-fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/vpa-fta.md|vpa-fta]]
 
 
 <!-- risk-assessed -->

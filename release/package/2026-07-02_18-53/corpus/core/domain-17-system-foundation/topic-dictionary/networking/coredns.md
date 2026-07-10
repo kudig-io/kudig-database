@@ -84,11 +84,11 @@ CoreDNS 以 Deployment 形式运行在 kube-system 命名空间，通过 ConfigM
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/dns-resolution.md|DNS Resolution]]
-- [[domain-17-system-foundation/topic-dictionary/networking/service.md|Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/headless-service.md|Headless Service]]
-- [[domain-17-system-foundation/topic-dictionary/networking/endpoint.md|Endpoints]]
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/networking/dns-resolution.md|DNS Resolution]]
+- [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
+- [[domain-17-system-foundation/知识字典/networking/headless-service.md|Headless Service]]
+- [[domain-17-system-foundation/知识字典/networking/endpoint.md|Endpoints]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

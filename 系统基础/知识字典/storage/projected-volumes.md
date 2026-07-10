@@ -81,7 +81,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 
 - **统一凭证与配置目录**：将 API Token、CA 证书和应用配置集中投射到一个目录，方便应用统一读取。
 - **安全注入 ServiceAccount Token**：避免将 Token 直接嵌入镜像，通过投射卷动态注入并自动管理过期时间。
-- **Pod 身份认证**：为工作负载提供访问 [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 或其他服务所需的证书和信任链。
+- **Pod 身份认证**：为工作负载提供访问 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 或其他服务所需的证书和信任链。
 
 ## 最佳实践/注意事项
 
@@ -186,9 +186,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[?(@.projected)]}' | jq .
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/ceph.md|Ceph]]
-- [[系统基础/topic-dictionary/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
-- [[系统基础/topic-dictionary/storage/composefs.md|ComposeFS 只读文件系统]]
+- [[系统基础/知识字典/storage/ceph.md|Ceph]]
+- [[系统基础/知识字典/storage/cloudnativepg.md|CloudNativePG 云原生 PostgreSQL]]
+- [[系统基础/知识字典/storage/composefs.md|ComposeFS 只读文件系统]]
 
 
 <!-- risk-assessed -->

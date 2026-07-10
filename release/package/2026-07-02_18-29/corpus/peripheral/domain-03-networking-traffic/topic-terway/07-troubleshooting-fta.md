@@ -769,7 +769,7 @@ related_docs:
   - path: "07-troubleshooting-fta.md"
     type: "fta"
     relevance: 0.98
-  - path: "[[domain-03-networking-traffic/topic-terway/03-usage.md|03-usage]].md"
+  - path: "[[domain-03-networking-traffic/Terway/03-usage.md|03-usage]].md"
     type: "structural"
     relevance: 0.95
   - path: "../domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis-v2.md"
@@ -834,14 +834,14 @@ auto_heal_actions:
 | 文档 | 路径 | 内容 |
 |------|------|------|
 | Terway 运维手册 | [04-operations.md](./04-operations.md) | 日常运维操作 |
-| FTA 完整树 (含 JSON 工作流) | [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md) | 完整 FTA 树定义 + 自动化工作流 |
-| 结构化排查指南 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md) | 详细排查步骤与脚本 |
+| FTA 完整树 (含 JSON 工作流) | [domain-10-troubleshooting-diagnostics/topic-fta/list/terway-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/terway-fta.md) | 完整 FTA 树定义 + 自动化工作流 |
+| 结构化排查指南 | [domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md) | 详细排查步骤与脚本 |
 | Terway 架构 | [02-architecture.md](./02-architecture.md) | 架构与模式说明 |
 | Terway 性能调优 | [06-performance.md](./06-performance.md) | 性能优化参考 |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index.md|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

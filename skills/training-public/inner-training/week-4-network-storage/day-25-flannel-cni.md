@@ -296,7 +296,7 @@ Day 26 将学习存储卷 (PV/PVC) 的创建与删除。
 ## Related
 
 - index/terway-index|Terway 知识图谱索引]]
-- [[生态参考/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

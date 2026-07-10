@@ -61,11 +61,11 @@ authors:
 
 | 场景 | 文件 | 说明 |
 |:---|:---|:---|
-| 确认收到 | [[domain-11-production-operations/reply-templates/01-acknowledgment.md|确认收到话术]] | 标准、紧急、非工作时间、重复问题、节假日、VIP 等确认模板 |
-| 请求信息 | [[domain-11-production-operations/reply-templates/02-information-request.md|请求信息话术]] | 通用信息、诊断命令、权限、变更记录、日志截图、业务影响、时间线 |
-| 给出方案 | [[domain-11-production-operations/reply-templates/03-solution-proposal.md|给出方案话术]] | 临时缓解、完整修复、自助修复、需审批方案、多选方案、配置变更、补丁升级 |
-| 升级通知 | [[domain-11-production-operations/reply-templates/04-escalation-notice.md|升级通知话术]] | 标准升级、P0 紧急、厂商/底座团队、内部协调、非工作时间、跨团队 |
-| 闭环确认 | [[domain-11-production-operations/reply-templates/05-closure-confirmation.md|闭环确认话术]] | 已解决、待用户确认、暂时缓解观察、未复现/咨询、邀请评价、自动关闭 |
+| 确认收到 | [[domain-11-production-operations/回复话术/01-acknowledgment.md|确认收到话术]] | 标准、紧急、非工作时间、重复问题、节假日、VIP 等确认模板 |
+| 请求信息 | [[domain-11-production-operations/回复话术/02-information-request.md|请求信息话术]] | 通用信息、诊断命令、权限、变更记录、日志截图、业务影响、时间线 |
+| 给出方案 | [[domain-11-production-operations/回复话术/03-solution-proposal.md|给出方案话术]] | 临时缓解、完整修复、自助修复、需审批方案、多选方案、配置变更、补丁升级 |
+| 升级通知 | [[domain-11-production-operations/回复话术/04-escalation-notice.md|升级通知话术]] | 标准升级、P0 紧急、厂商/底座团队、内部协调、非工作时间、跨团队 |
+| 闭环确认 | [[domain-11-production-operations/回复话术/05-closure-confirmation.md|闭环确认话术]] | 已解决、待用户确认、暂时缓解观察、未复现/咨询、邀请评价、自动关闭 |
 
 ## 通用变量说明
 
@@ -217,7 +217,7 @@ kubectl logs <pod-name> -n production --previous
 
 - [[domain-11-production-operations/ticket-routing-rules.md|工单分类与路由规则]]
 - [[domain-11-production-operations/escalation-playbook.md|升级与交接协议]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复 Skill]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复 Skill]]
 
 ## See Also
 

@@ -62,7 +62,7 @@ SLO（服务等级目标）定义了服务可接受的表现边界，SLI（服�
 
 ## Related
 
-- [[domain-06-observability/06-slo-sli/01-slo-engineering-practice.md|01 slo engineering practice]]
-- [[domain-06-observability/06-slo-sli/02-error-budget-policy.md|02 error budget policy]]
-- [[domain-06-observability/06-slo-sli/03-sli-implementation-guide.md|03 sli implementation guide]]
-- [[domain-19-landscape-references/topic-release-notes/README.md|README]]
+- [[domain-06-observability/SLO-SLI/01-slo-engineering-practice.md|01 slo engineering practice]]
+- [[domain-06-observability/SLO-SLI/02-error-budget-policy.md|02 error budget policy]]
+- [[domain-06-observability/SLO-SLI/03-sli-implementation-guide.md|03 sli implementation guide]]
+- [[domain-19-landscape-references/领域索引/README.md|README]]

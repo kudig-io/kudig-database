@@ -223,7 +223,7 @@ print(f"激进建议: {recommendation['aggressive']:.4%}")
 
 ### Step 2: 识别 SLI
 
-为每个关键步骤选择合适的 SLI（参考 [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]]）：
+为每个关键步骤选择合适的 SLI（参考 [[domain-09-reliability-engineering/SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]]）：
 
 ```
 步骤 3: 提交订单
@@ -1012,9 +1012,9 @@ escalation:
 
 ## 相关
 
-- [[domain-09-reliability-engineering/04-slo-sli/01-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
-- [[domain-09-reliability-engineering/04-slo-sli/03-error-budget-management.md|03 error budget management]] — 错误预算管理
-- [[domain-06-observability/06-slo-sli/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
+- [[domain-09-reliability-engineering/SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
+- [[domain-09-reliability-engineering/SLO-SLI/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
 
 
 <!-- risk-assessed -->

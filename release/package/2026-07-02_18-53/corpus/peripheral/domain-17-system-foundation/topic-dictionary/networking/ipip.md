@@ -82,11 +82,11 @@ IPIP（IP-in-IP）是一种网络隧道协议，将一个 IP 数据包封装在�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/vxlan.md|VXLAN]]
-- [[domain-17-system-foundation/topic-dictionary/networking/cni.md|CNI]]
-- [[domain-17-system-foundation/topic-dictionary/networking/networkpolicy.md|NetworkPolicy]]
-- [[domain-17-system-foundation/topic-dictionary/networking/clusterip.md|ClusterIP]]
-- [[domain-17-system-foundation/topic-dictionary/networking/nodeport.md|NodePort]]
+- [[domain-17-system-foundation/知识字典/networking/vxlan.md|VXLAN]]
+- [[domain-17-system-foundation/知识字典/networking/cni.md|CNI]]
+- [[domain-17-system-foundation/知识字典/networking/networkpolicy.md|NetworkPolicy]]
+- [[domain-17-system-foundation/知识字典/networking/clusterip.md|ClusterIP]]
+- [[domain-17-system-foundation/知识字典/networking/nodeport.md|NodePort]]
 
 
 <!-- risk-assessed -->

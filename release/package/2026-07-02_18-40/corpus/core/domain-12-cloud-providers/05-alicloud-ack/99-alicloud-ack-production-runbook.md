@@ -309,13 +309,13 @@ kubectl top pods -A --containers | sort -k4 -nr | head -n 20
 ### 本域资料
 
 - [[domain-12-cloud-providers/99-production-readiness-operations-guide.md|云厂商托管 Kubernetes 生产就绪运维指南]]
-- [[domain-12-cloud-providers/05-alicloud-ack/alicloud-ack-overview.md|阿里云 ACK 概述]]
-- [[domain-12-cloud-providers/05-alicloud-ack/242-ack-vpc-network.md|ACK VPC 网络]]
-- [[domain-12-cloud-providers/05-alicloud-ack/243-ack-ram-authorization.md|ACK RAM 授权]]
-- [[domain-12-cloud-providers/05-alicloud-ack/240-ack-ecs-compute.md|ACK ECS 计算]]
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|ACK SLB/NLB/ALB]]
-- [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|ACK EBS 存储]]
-- [[domain-12-cloud-providers/05-alicloud-ack/service-ack-practical-guide.md|ACK 实战指南]]
+- [[domain-12-cloud-providers/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK 概述]]
+- [[domain-12-cloud-providers/阿里云/ack/242-ack-vpc-network.md|ACK VPC 网络]]
+- [[domain-12-cloud-providers/阿里云/ack/243-ack-ram-authorization.md|ACK RAM 授权]]
+- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|ACK ECS 计算]]
+- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|ACK SLB/NLB/ALB]]
+- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|ACK EBS 存储]]
+- [[domain-12-cloud-providers/阿里云/ack/service-ack-practical-guide.md|ACK 实战指南]]
 
 ### 跨域参考
 

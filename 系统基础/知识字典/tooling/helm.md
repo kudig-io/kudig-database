@@ -85,11 +85,11 @@ mychart/
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[系统基础/topic-dictionary/tooling/kustomize.md|Kustomize]]
-- [[系统基础/topic-dictionary/workloads/deployment.md|Deployment]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[系统基础/topic-dictionary/operations/rolling-update.md|Rolling Update]]
+- [[系统基础/知识字典/tooling/kubectl.md|Kubectl]]
+- [[系统基础/知识字典/tooling/kustomize.md|Kustomize]]
+- [[系统基础/知识字典/workloads/deployment.md|Deployment]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/operations/rolling-update.md|Rolling Update]]
 
 
 <!-- risk-assessed -->

@@ -1,7 +1,7 @@
 ---
 title: 'Day 2: Docker 网络 + 存储 + 安全'
 description: '# Day 2: Docker 网络 + 存储 + 安全'
-summary: '在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 的基础。'
+summary: '在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/速查卡/k8s|k8s]] 的基础。'
 category: learning
 tags:
 - k8s
@@ -96,7 +96,7 @@ related:
 
 ## 概述
 
-在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/topic-cheat-sheet/k8s|k8s]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
+在理解了 Docker 基础概念之后，今天深入 Docker 的三大高级特性：网络、存储和安全。这三个方面直接影响容器化应用的生产可靠性。Docker 网络决定了容器间如何通信，存储决定了数据如何持久化，安全决定了容器运行时的隔离程度。掌握这些内容是理解 [[domain-17-system-foundation/速查卡/k8s|k8s]] 网络 (CNI)、存储 (CSI) 和安全 (PSS) 的基础。
 
 ---
 

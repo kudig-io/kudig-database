@@ -97,7 +97,7 @@ graph TD
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/monitoring-fta.md|monitoring fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/monitoring-fta.md|monitoring fta]]
 
 
 ---

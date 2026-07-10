@@ -298,8 +298,8 @@ velero backup get | head
 - [[生产运维/02-change-management-guide.md|变更管理指南]]
 - [[生产运维/03-on-call-playbook.md|值班手册与告警响应规范]]
 - [[生产运维/04-incident-response-template.md|事故响应模板与流程规范]]
-- [[生产运维/02-governance/14-resource-quota-management.md|资源配额管理]]
-- [[生产运维/01-finops/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
+- [[生产运维/集群治理/14-resource-quota-management.md|资源配额管理]]
+- [[生产运维/成本治理/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
 
 ### 本域待补齐专题（gap 分析推荐）
 

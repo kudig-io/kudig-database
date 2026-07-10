@@ -63,16 +63,16 @@ prerequisites:
 ### 证书工具
 
 - cert-manager 自动证书管理实践指南
-- [[domain-17-system-foundation/topic-cheat-sheet/tls-pki.md|TLS/SSL 与 PKI 速查表]]
+- [[domain-17-system-foundation/速查卡/tls-pki.md|TLS/SSL 与 PKI 速查表]]
 
 ### 故障排查
 
 - 证书故障排查 (Certificate Troubleshooting)
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]]
 
 ### 集群证书
 
@@ -94,19 +94,19 @@ prerequisites:
 
 ### 控制平面
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
 
 ### 安全
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
 
 ### 术语词典
 
-- [[domain-17-system-foundation/topic-dictionary/operations/certificates.md|Certificates（PKI 证书与要求）]]
-- [[domain-17-system-foundation/topic-dictionary/configuration/secrets.md|Secrets]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane.md|Communication between Nodes and the Control Plane]]
+- [[domain-17-system-foundation/知识字典/operations/certificates.md|Certificates（PKI 证书与要求）]]
+- [[domain-17-system-foundation/知识字典/configuration/secrets.md|Secrets]]
+- [[domain-17-system-foundation/知识字典/fundamentals/communication-between-nodes-and-the-control-plane.md|Communication between Nodes and the Control Plane]]
 
 ---
 

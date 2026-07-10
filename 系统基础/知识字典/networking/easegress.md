@@ -67,6 +67,6 @@ Easegress 是 MegaEase 开源的 CNCF Sandbox 项目，提供全场景的流量�
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/traefik.md|Traefik]]
-- [[系统基础/topic-dictionary/networking/envoy-gateway.md|Envoy Gateway]]
-- [[系统基础/topic-dictionary/networking/contour.md|Contour]]
+- [[系统基础/知识字典/networking/traefik.md|Traefik]]
+- [[系统基础/知识字典/networking/envoy-gateway.md|Envoy Gateway]]
+- [[系统基础/知识字典/networking/contour.md|Contour]]

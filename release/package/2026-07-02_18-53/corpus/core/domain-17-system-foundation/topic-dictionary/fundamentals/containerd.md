@@ -84,11 +84,11 @@ kubelet → CRI → containerd → runc → Linux Kernel
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/cri.md|CRI]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/kubelet.md|Kubelet]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/pod.md|Pod]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/container.md|Container]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/worker-node.md|Worker Node]]
+- [[domain-17-system-foundation/知识字典/fundamentals/cri.md|CRI]]
+- [[domain-17-system-foundation/知识字典/fundamentals/kubelet.md|Kubelet]]
+- [[domain-17-system-foundation/知识字典/workloads/pod.md|Pod]]
+- [[domain-17-system-foundation/知识字典/fundamentals/container.md|Container]]
+- [[domain-17-system-foundation/知识字典/fundamentals/worker-node.md|Worker Node]]
 
 
 <!-- risk-assessed -->

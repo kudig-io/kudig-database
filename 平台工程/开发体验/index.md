@@ -22,12 +22,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[平台工程/developer-experience/01-inner-source-contribution-model.md|Inner Source Contribution Model]]
-- [[平台工程/developer-experience/02-developer-onboarding-automation.md|Developer Onboarding Automation]]
-- [[平台工程/developer-experience/09-developer-experience-metrics.md|Developer Experience Metrics]]
-- [[平台工程/developer-experience/10-platform-team-topology.md|Platform Team Topology]]
-- [[平台工程/developer-experience/23-cli-enhancement-tools.md|Cli Enhancement Tools]]
-- [[平台工程/developer-experience/26-kubectl-plugin-ecosystem.md|Kubectl Plugin Ecosystem]]
+- [[平台工程/开发体验/01-inner-source-contribution-model.md|Inner Source Contribution Model]]
+- [[平台工程/开发体验/02-developer-onboarding-automation.md|Developer Onboarding Automation]]
+- [[平台工程/开发体验/09-developer-experience-metrics.md|Developer Experience Metrics]]
+- [[平台工程/开发体验/10-platform-team-topology.md|Platform Team Topology]]
+- [[平台工程/开发体验/23-cli-enhancement-tools.md|Cli Enhancement Tools]]
+- [[平台工程/开发体验/26-kubectl-plugin-ecosystem.md|Kubectl Plugin Ecosystem]]
 
 
 

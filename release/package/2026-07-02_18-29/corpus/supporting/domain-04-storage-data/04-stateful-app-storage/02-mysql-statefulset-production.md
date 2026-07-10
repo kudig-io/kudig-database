@@ -639,14 +639,14 @@ MySQL 运行过程中 binlog、慢查询日志和临时文件可能快速增长�
 
 ## Related
 
-- [[domain-04-storage-data/04-stateful-app-storage/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
-- [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
-- [[domain-09-reliability-engineering/01-backup-recovery/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[domain-04-storage-data/有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
+- [[domain-04-storage-data/K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[domain-09-reliability-engineering/备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
 
 ## See Also
 
-- [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
-- [[domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/21-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
+- [[domain-04-storage-data/分布式存储/01-velero-backup-recovery.md|Velero 阿里云专有云备份恢复实战]]
+- [[domain-10-troubleshooting-diagnostics/资源排障/21-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
 
 
 <!-- risk-assessed -->

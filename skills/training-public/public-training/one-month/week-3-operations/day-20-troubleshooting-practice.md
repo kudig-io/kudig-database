@@ -94,7 +94,7 @@ related_topics:
    - 文件: `../../故障诊断/08-pod-comprehensive-troubleshooting.md`
 
 2. **[[Service|Service]] 综合排障**
-   - 文件: `../../[[故障诊断/01-resource-troubleshooting/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
+   - 文件: `../../[[故障诊断/资源排障/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
 
 3. **网络 CNI 排障**
    - 文件: `../../故障诊断/03-networking-cni-troubleshooting.md`

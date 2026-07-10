@@ -2616,7 +2616,7 @@ echo "  - imports-exports.txt: Module interface analysis"
 - [x] 维护模块清单（版本、SHA256、部署时间）
 ```
 
-## 13.2 零信任 [[domain-15-specialized-tech/02-webassembly/11-wasm-production-deployment.md|Wasm 部署]]
+## 13.2 零信任 [[domain-15-specialized-tech/WebAssembly/11-wasm-production-deployment.md|Wasm 部署]]
 
 ```yaml
 # zero-trust-wasm-deployment.yaml

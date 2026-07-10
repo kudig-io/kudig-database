@@ -74,9 +74,9 @@ bootc 是 Red Hat 开源的项目，将 OCI 容器镜像作为操作系统的基
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/docker.md|Docker]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/podman.md|Podman]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/runc.md|runc]]
+- [[domain-17-system-foundation/知识字典/fundamentals/docker.md|Docker]]
+- [[domain-17-system-foundation/知识字典/tooling/podman.md|Podman]]
+- [[domain-17-system-foundation/知识字典/fundamentals/runc.md|runc]]
 
 
 <!-- risk-assessed -->

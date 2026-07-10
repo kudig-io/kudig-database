@@ -23,7 +23,7 @@ relationships:
   type: uses
 - target: '[[entities/kubelet.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/networking/service.md]]'
+- target: '[[系统基础/知识字典/networking/service.md]]'
   type: uses
 ---
 
@@ -227,7 +227,7 @@ relationships:
 **顾问指令**：
 > Pod DNS 配置正确，解析失败说明 CoreDNS 服务端没有响应。
 >
-> 1. 确认 CoreDNS [[系统基础/topic-dictionary/networking/service.md|Service]] ClusterIP：`kubectl get svc kube-dns -n kube-system`
+> 1. 确认 CoreDNS [[系统基础/知识字典/networking/service.md|Service]] ClusterIP：`kubectl get svc kube-dns -n kube-system`
 >    **如果没有 kube-dns 服务名** → `kubectl get svc -n kube-system | grep -i dns`
 > 2. 从 Pod 内直接测试 CoreDNS 服务 IP：`kubectl exec -it <pod-name> -n <namespace> -- nc -vz <kube-dns-cluster-ip> 53`
 >    **如果没有 nc** → `kubectl exec -it <pod-name> -n <namespace> -- sh -c "echo '' > /dev/udp/<kube-dns-cluster-ip>/53"`

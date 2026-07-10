@@ -70,6 +70,6 @@ Perses 是 CNCF Sandbox 项目，云原生可观测性仪表盘工具，旨在�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/observability/prometheus.md|Prometheus]]
-- [[domain-17-system-foundation/topic-dictionary/observability/thanos.md|Thanos]]
-- [[domain-17-system-foundation/topic-dictionary/observability/grafana.md|Grafana]]
+- [[domain-17-system-foundation/知识字典/observability/prometheus.md|Prometheus]]
+- [[domain-17-system-foundation/知识字典/observability/thanos.md|Thanos]]
+- [[domain-17-system-foundation/知识字典/observability/grafana.md|Grafana]]

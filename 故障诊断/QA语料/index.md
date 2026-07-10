@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[故障诊断/topic-qa-corpus/README.md|Readme]]
+- [[故障诊断/QA语料/README.md|Readme]]
 
 ## 子目录
 
@@ -33,7 +33,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[故障诊断/topic-qa-corpus/MOC.md|Moc]]
-- [[故障诊断/topic-qa-corpus/command-output-diagnosis.md|Command Output Diagnosis]]
-- [[故障诊断/topic-qa-corpus/command-output-diagnosis.with_actions.md|Command Output Diagnosis.With Actions]]
+- [[故障诊断/QA语料/MOC.md|Moc]]
+- [[故障诊断/QA语料/command-output-diagnosis.md|Command Output Diagnosis]]
+- [[故障诊断/QA语料/command-output-diagnosis.with_actions.md|Command Output Diagnosis.With Actions]]
 

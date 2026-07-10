@@ -347,6 +347,6 @@ kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded|erro
 **关联文档**:
 - [AI基础设施/](../AI基础设施/) — AI 基础设施完整文档
 - [故障诊断/](../故障诊断/) — K8s 通用问题排查
-- [故障诊断/topic-skills/](../故障诊断/topic-skills/) — 通用运维 Skill
+- [故障诊断/topic-skills/](../故障诊断/技能体系/) — 通用运维 Skill
 
 <!-- risk-assessed -->

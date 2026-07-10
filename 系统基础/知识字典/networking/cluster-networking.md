@@ -216,9 +216,9 @@ kubectl exec <pod> -- ip route
 
 ## Related
 
-- [[系统基础/topic-dictionary/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
-- [[系统基础/topic-dictionary/networking/akri.md|Akri 边缘设备发现]]
-- [[系统基础/topic-dictionary/networking/antrea.md|Antrea 网络方案]]
+- [[系统基础/知识字典/networking/aeraki-mesh.md|Aeraki Mesh 七层网格]]
+- [[系统基础/知识字典/networking/akri.md|Akri 边缘设备发现]]
+- [[系统基础/知识字典/networking/antrea.md|Antrea 网络方案]]
 
 
 <!-- risk-assessed -->

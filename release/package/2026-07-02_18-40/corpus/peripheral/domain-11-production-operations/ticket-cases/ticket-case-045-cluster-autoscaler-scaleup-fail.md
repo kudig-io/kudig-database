@@ -22,10 +22,10 @@ affected_namespace: kube-system
 ticket_type: 自动扩缩容故障
 skill_ref:
 - '[[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|节点自动扩缩容指南]]'
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|Cluster
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/cluster-autoscaler-fta.md|Cluster
   Autoscaler 异常故障树分析]]'
 fta_ref:
-- '[[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-autoscaler-fta.md|FTA:
+- '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/cluster-autoscaler-fta.md|FTA:
   Cluster Autoscaler 异常]]'
 last_updated: 2026-06-26 16:00:00+08:00
 difficulty: intermediate
@@ -51,11 +51,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[domain-17-system-foundation/topic-dictionary/scheduling/cluster-autoscaler.md]]'
+- target: '[[domain-17-system-foundation/知识字典/scheduling/cluster-autoscaler.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md]]'
   type: related_to
-- target: '[[domain-11-production-operations/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[domain-11-production-operations/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
 - target: '[[concepts/autoscaling-strategies.md]]'
   type: related_to
@@ -255,7 +255,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-mall-compute
 ## Related
 
 - Cluster Autoscaler
-- [[domain-11-production-operations/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md|Cluster Autoscaler 扩容失败：节点池未触发自动扩容]]
+- [[domain-11-production-operations/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md|Cluster Autoscaler 扩容失败：节点池未触发自动扩容]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
 

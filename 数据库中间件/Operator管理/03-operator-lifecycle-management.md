@@ -477,8 +477,8 @@ spec:
 
 ## 13. 相关文档
 
-- [[数据库中间件/05-operator-management/01-database-operator-patterns.md|数据库 Operator 设计模式]]
-- [[数据库中间件/05-operator-management/02-operator-comparison-mysql-postgres-redis.md|MySQL/PostgreSQL/Redis Operator 对比]]
+- [[数据库中间件/Operator管理/01-database-operator-patterns.md|数据库 Operator 设计模式]]
+- [[数据库中间件/Operator管理/02-operator-comparison-mysql-postgres-redis.md|MySQL/PostgreSQL/Redis Operator 对比]]
 
 ```
 

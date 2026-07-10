@@ -245,14 +245,14 @@ Sources: [knowledge-map.md](metadata/knowledge-map.md#L70-L84)
 如果你是第一次接触这个知识库，按照以下三步即可快速开始：
 
 **第一步：建立环境（Day 1）**
-使用 [topic-deployment](topic-deployment/README.md) 中的本地 Demo 方案（kind 或 minikube），在 30-60 分钟内搭建一个可操作的 K8s 集群。动手操作是理解抽象概念最快的方式。你可以参考 [快速开始：克隆、GitBook 浏览与 AI 语料库接入](2-kuai-su-kai-shi-ke-long-gitbook-liu-lan-yu-ai-yu-liao-ku-jie-ru)完成环境准备。
+使用 [topic-deployment](部署方案/README.md) 中的本地 Demo 方案（kind 或 minikube），在 30-60 分钟内搭建一个可操作的 K8s 集群。动手操作是理解抽象概念最快的方式。你可以参考 [快速开始：克隆、GitBook 浏览与 AI 语料库接入](2-kuai-su-kai-shi-ke-long-gitbook-liu-lan-yu-ai-yu-liao-ku-jie-ru)完成环境准备。
 
-Sources: [README.md](topic-deployment/README.md#L43-L51)
+Sources: [README.md](部署方案/README.md#L43-L51)
 
 **第二步：速查卡随身带（持续）**
-将 [topic-cheat-sheet](topic-cheat-sheet/README.md) 中的 K8s、Linux、Docker 三张速查卡作为日常参考工具。遇到任何操作不确定时，先查速查卡，再查深度文档。速查卡覆盖了 kubectl 命令、Docker 操作和 Linux 系统管理等高频操作，是初学者最高频使用的参考资料。
+将 [topic-cheat-sheet](速查卡/README.md) 中的 K8s、Linux、Docker 三张速查卡作为日常参考工具。遇到任何操作不确定时，先查速查卡，再查深度文档。速查卡覆盖了 kubectl 命令、Docker 操作和 Linux 系统管理等高频操作，是初学者最高频使用的参考资料。
 
-Sources: [README.md](topic-cheat-sheet/README.md#L10-L22)
+Sources: [README.md](速查卡/README.md#L10-L22)
 
 **第三步：按路径系统学习（Week 1-4）**
 从上面的 4 周学习路径中选择一条（通用或 ACK 专项），按天推进。每天的理论阅读控制在 1.5 小时以内，剩余时间全部用于实操。每周完成一个实践项目，周末用 checkpoint 自测题检验成果。
@@ -284,10 +284,10 @@ Sources: [difficulty-index.md](metadata/difficulty-index.md#L18-L84), [tags-inde
 | **难度索引** | [difficulty-index.md](metadata/difficulty-index.md) | 按难度分级的文档导航 |
 | **标签索引** | [tags-index.md](metadata/tags-index.md) | 按技术标签（etcd、CNI、RBAC 等）聚合检索 |
 | **知识图谱** | [knowledge-map.md](metadata/knowledge-map.md) | 知识域间依赖关系和学习路径 |
-| **运维词典** | [topic-dictionary](topic-dictionary/README.md) | 200+ 条 K8s 概念速查，13 个分类 |
+| **运维词典** | [topic-dictionary](知识字典/README.md) | 200+ 条 K8s 概念速查，13 个分类 |
 | **可视化图谱** | [visualizations](visualizations/) | D3 交互式知识域浏览器 |
 
-Sources: [INDEX.md](INDEX.md#L1-L135), [README.md](topic-dictionary/README.md#L1-L12)
+Sources: [INDEX.md](INDEX.md#L1-L135), [README.md](知识字典/README.md#L1-L12)
 
 ## 下一步建议
 

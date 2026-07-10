@@ -197,19 +197,19 @@ metadata:
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/docker.md|docker]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/docker.md|docker]]
 - [[entities/kubernetes.md|kubernetes]]
 - USER
 - [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 
 ## See Also
 
-- [[domain-12-cloud-providers/05-alicloud-ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
-- [[domain-12-cloud-providers/05-alicloud-ack/242-ack-vpc-network.md|242-ack-vpc-network]]
-- [[domain-12-cloud-providers/05-alicloud-ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/05-alicloud-ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[domain-12-cloud-providers/阿里云/ack/242-ack-vpc-network.md|242-ack-vpc-network]]
+- [[domain-12-cloud-providers/阿里云/ack/244-ack-ros-iac.md|244-ack-ros-iac]]
+- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 
 
 <!-- risk-assessed -->

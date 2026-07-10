@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[domain-08-release-change-management/topic-deployment/README.md|Readme]]
+- [[domain-08-release-change-management/部署方案/README.md|Readme]]
 
 ## 文档
 
-- [[domain-08-release-change-management/topic-deployment/01-local-demo-deployment.md|Local Demo Deployment]]
-- [[domain-08-release-change-management/topic-deployment/02-single-node-deployment.md|Single Node Deployment]]
-- [[domain-08-release-change-management/topic-deployment/03-development-environment-deployment.md|Development Environment Deployment]]
-- [[domain-08-release-change-management/topic-deployment/04-production-environment-deployment.md|Production Environment Deployment]]
+- [[domain-08-release-change-management/部署方案/01-local-demo-deployment.md|Local Demo Deployment]]
+- [[domain-08-release-change-management/部署方案/02-single-node-deployment.md|Single Node Deployment]]
+- [[domain-08-release-change-management/部署方案/03-development-environment-deployment.md|Development Environment Deployment]]
+- [[domain-08-release-change-management/部署方案/04-production-environment-deployment.md|Production Environment Deployment]]
 

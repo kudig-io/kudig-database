@@ -511,8 +511,8 @@ Alertmanager 配置检查清单：
 
 ## Related
 
-- [[domain-06-observability/05-alerting/02-pagerduty-opsgenie-integration|告警平台集成]]
-- [[domain-06-observability/05-alerting/03-alert-fatigue-reduction-strategies|告警疲劳治理]]
+- [[domain-06-observability/告警/02-pagerduty-opsgenie-integration|告警平台集成]]
+- [[domain-06-observability/告警/03-alert-fatigue-reduction-strategies|告警疲劳治理]]
 
 ## See Also
 

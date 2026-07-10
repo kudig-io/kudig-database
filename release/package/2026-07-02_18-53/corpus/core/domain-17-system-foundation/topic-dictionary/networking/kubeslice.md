@@ -69,6 +69,6 @@ KubeSlice 是 Avesha 开源的 CNCF Sandbox 项目，通过创建跨集群的网
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/submariner.md|Submariner]]
-- [[domain-17-system-foundation/topic-dictionary/networking/clusternet.md|Clusternet]]
-- [[domain-17-system-foundation/topic-dictionary/networking/k8gb.md|K8GB]]
+- [[domain-17-system-foundation/知识字典/networking/submariner.md|Submariner]]
+- [[domain-17-system-foundation/知识字典/networking/clusternet.md|Clusternet]]
+- [[domain-17-system-foundation/知识字典/networking/k8gb.md|K8GB]]

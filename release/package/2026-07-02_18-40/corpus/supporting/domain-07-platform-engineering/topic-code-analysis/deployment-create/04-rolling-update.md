@@ -441,10 +441,10 @@ func (dc *DeploymentController) syncRolloutStatus(ctx context.Context, allRSs []
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[domain-17-system-foundation/topic-cheat-sheet/go.md|go]]
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|k8s]]
+- [[domain-17-system-foundation/速查卡/go.md|go]]
+- [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-17-system-foundation/topic-dictionary/workloads/replicaset.md|replicaset]]
+- [[domain-17-system-foundation/知识字典/workloads/replicaset.md|replicaset]]
 
 
 <!-- risk-assessed -->

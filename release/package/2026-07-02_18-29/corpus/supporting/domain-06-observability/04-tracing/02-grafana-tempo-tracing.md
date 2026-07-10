@@ -498,8 +498,8 @@ Tempo 生产部署检查清单：
 
 ## Related
 
-- [[domain-06-observability/04-tracing/01-jaeger-production-deployment|Jaeger 生产部署]]
-- [[domain-06-observability/04-tracing/03-opentelemetry-collector-patterns|OTel Collector 配置模式]]
+- [[domain-06-observability/链路追踪/01-jaeger-production-deployment|Jaeger 生产部署]]
+- [[domain-06-observability/链路追踪/03-opentelemetry-collector-patterns|OTel Collector 配置模式]]
 
 ## See Also
 

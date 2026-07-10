@@ -97,8 +97,8 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/list/gateway-api-fta.md|gateway api fta]]
-- [[故障诊断/topic-fta/list/ingress-fta.md|ingress fta]]
+- [[故障诊断/FTA故障树/list/gateway-api-fta.md|gateway api fta]]
+- [[故障诊断/FTA故障树/list/ingress-fta.md|ingress fta]]
 
 
 ---
@@ -118,8 +118,8 @@ graph TD
 ## Related
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
-- [[故障诊断/topic-fta/list/ingress-fta.md|ingress-fta]]
-- [[系统基础/topic-dictionary/networking/service-mesh.md|service-mesh]]
+- [[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]]
+- [[系统基础/知识字典/networking/service-mesh.md|service-mesh]]
 
 
 <!-- risk-assessed -->

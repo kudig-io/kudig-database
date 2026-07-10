@@ -81,11 +81,11 @@ NVD、Alpine、Debian、Ubuntu、Red Hat、Amazon Linux、GitHub Advisory 等。
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/security/pod-security-policy.md|Pod Security Policy]]
-- [[domain-17-system-foundation/topic-dictionary/security/security-context.md|Security Context]]
-- [[domain-17-system-foundation/topic-dictionary/security/rbac.md|RBAC]]
-- [[domain-17-system-foundation/topic-dictionary/security/certificate.md|Certificate]]
-- [[domain-17-system-foundation/topic-dictionary/security/admission-controller.md|Admission Controller]]
+- [[domain-17-system-foundation/知识字典/security/pod-security-policy.md|Pod Security Policy]]
+- [[domain-17-system-foundation/知识字典/security/security-context.md|Security Context]]
+- [[domain-17-system-foundation/知识字典/security/rbac.md|RBAC]]
+- [[domain-17-system-foundation/知识字典/security/certificate.md|Certificate]]
+- [[domain-17-system-foundation/知识字典/security/admission-controller.md|Admission Controller]]
 
 
 <!-- risk-assessed -->

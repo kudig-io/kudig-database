@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[可靠性/06-postmortem/01-blameless-postmortem-template.md|Blameless Postmortem Template]]
-- [[可靠性/06-postmortem/02-postmortem-culture-guide.md|Postmortem Culture Guide]]
+- [[可靠性/事后复盘/01-blameless-postmortem-template.md|Blameless Postmortem Template]]
+- [[可靠性/事后复盘/02-postmortem-culture-guide.md|Postmortem Culture Guide]]
 

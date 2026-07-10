@@ -386,20 +386,20 @@ cosign verify-attestation --key cosign.pub \
 ### 同域核心文档
 
 - [[安全/99-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]]
-- [[安全/05-supply-chain/01-supply-chain-security-overview.md|供应链安全概览]]
-- [[安全/05-supply-chain/03-sbom-generation-management.md|SBOM 生成与管理]]
-- [[安全/05-supply-chain/07-sigstore-cosign-signing.md|Sigstore Cosign 镜像签名]]
-- [[安全/05-supply-chain/08-fulcio-rekor-transparency.md|Fulcio / Rekor 透明度日志]]
-- [[安全/05-supply-chain/09-policy-controller-verification.md|镜像签名校验策略控制器]]
-- [[安全/05-supply-chain/99-slsa-supply-chain-security-guide.md|SLSA 供应链安全指南]]
-- [[安全/05-supply-chain/13-image-security-scanning.md|镜像安全扫描]]
+- [[安全/供应链/01-supply-chain-security-overview.md|供应链安全概览]]
+- [[安全/供应链/03-sbom-generation-management.md|SBOM 生成与管理]]
+- [[安全/供应链/07-sigstore-cosign-signing.md|Sigstore Cosign 镜像签名]]
+- [[安全/供应链/08-fulcio-rekor-transparency.md|Fulcio / Rekor 透明度日志]]
+- [[安全/供应链/09-policy-controller-verification.md|镜像签名校验策略控制器]]
+- [[安全/供应链/99-slsa-supply-chain-security-guide.md|SLSA 供应链安全指南]]
+- [[安全/供应链/13-image-security-scanning.md|镜像安全扫描]]
 
 ### 跨域参考
 
 - [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
 - [[容器运行时/99-production-readiness-operations-guide.md|容器运行时生产就绪运维指南]]
-- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[容器运行时/02-image-management/01-harbor-enterprise-image-registry.md|Harbor 企业级镜像仓库]]
+- [[容器运行时/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[容器运行时/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业级镜像仓库]]
 - [[发布变更/README.md|发布与变更管理]]
 - [[生产运维/README.md|生产运维]]
 

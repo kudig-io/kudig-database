@@ -412,7 +412,7 @@ Day 11 将学习 Pod 生命周期、资源管理和自动扩缩容 (HPA/VPA)。
 
 ## Related
 
-- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

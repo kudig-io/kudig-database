@@ -80,14 +80,14 @@ severity: high
 - [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[故障诊断/topic-fta/list/service-fta.md|Service 异常故障树分析]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
+- [[故障诊断/FTA故障树/list/service-fta.md|Service 异常故障树分析]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/topic-fta/list/service-fta.md|Service FTA 完整版]]
+> [[_archives/troubleshooting-diagnostics/FTA故障树/list/service-fta.md|Service FTA 完整版]]
 
 
 <!-- risk-assessed -->

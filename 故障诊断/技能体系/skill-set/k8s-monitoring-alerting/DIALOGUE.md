@@ -19,7 +19,7 @@ relationships:
   type: uses
 - target: '[[entities/kubernetes.md]]'
   type: uses
-- target: '[[系统基础/topic-dictionary/fundamentals/namespaces.md]]'
+- target: '[[系统基础/知识字典/fundamentals/namespaces.md]]'
   type: uses
 ---
 
@@ -63,7 +63,7 @@ relationships:
 > ```bash
 > kubectl get pods -n monitoring -l app=alertmanager
 > ```
-> **如果无法执行**（不知道 monitoring namespace）→ `kubectl get pods --all-[[系统基础/topic-dictionary/fundamentals/namespaces.md|namespaces]] | grep -i alertmanager`
+> **如果无法执行**（不知道 monitoring namespace）→ `kubectl get pods --all-[[系统基础/知识字典/fundamentals/namespaces.md|namespaces]] | grep -i alertmanager`
 > **如果 grep 无结果** → `kubectl get pods --all-namespaces | grep -E "alert|prometheus|grafana"`
 > 请把 Pod 状态、重启次数贴给我。
 
@@ -717,7 +717,7 @@ kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='[{"op": "r
 ## Related
 
 - [[entities/cilium.md|Cilium (entities)]]
-- [[系统基础/topic-dictionary/workloads/pods.md|Pods]]
+- [[系统基础/知识字典/workloads/pods.md|Pods]]
 
 
 <!-- risk-assessed -->

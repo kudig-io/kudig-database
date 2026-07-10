@@ -584,8 +584,8 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 - Scheduler 深度解析
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[生态参考/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
+- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 

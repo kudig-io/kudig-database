@@ -61,4 +61,4 @@ RPN 用于对故障模式进行优先级排序。高 RPN 值的故障模式应�
 
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/appendix-a-glossary.md|FTA 术语表]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/appendix-a-glossary.md|FTA 术语表]]

@@ -57,11 +57,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md]]'
+- target: '[[生产运维/工单案例/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[系统基础/topic-dictionary/security/rbac.md]]'
+- target: '[[系统基础/知识字典/security/rbac.md]]'
   type: related_to
 ---
 

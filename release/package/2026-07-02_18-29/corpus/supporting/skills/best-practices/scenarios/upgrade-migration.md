@@ -88,14 +88,14 @@ graph TD
 
 - domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md
 - domain-01-cluster-fundamentals/18-upgrade-migration-strategy.md
-- [[domain-08-release-change-management/topic-migration/README.md|README]]
+- [[domain-08-release-change-management/迁移方案/README.md|README]]
 
 
 ---
 
 ## FTA 故障树
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/cluster-upgrade-fta.md|cluster upgrade fta]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/cluster-upgrade-fta.md|cluster upgrade fta]]
 
 
 ---

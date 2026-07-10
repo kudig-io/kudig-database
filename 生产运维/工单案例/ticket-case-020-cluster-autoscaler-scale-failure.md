@@ -49,13 +49,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[系统基础/topic-dictionary/scheduling/cluster-autoscaler.md]]'
+- target: '[[系统基础/知识字典/scheduling/cluster-autoscaler.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md]]'
+- target: '[[生产运维/工单案例/ticket-case-045-cluster-autoscaler-scaleup-fail.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-002-java-oom-essd-iohang.md]]'
+- target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[生产运维/ticket-cases/ticket-case-019-kubeproxy-service-unreachable.md]]'
+- target: '[[生产运维/工单案例/ticket-case-019-kubeproxy-service-unreachable.md]]'
   type: related_to
 ---
 

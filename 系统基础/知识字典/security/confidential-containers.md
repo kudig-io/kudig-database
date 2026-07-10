@@ -67,6 +67,6 @@ Confidential Containers（CoCo）是 CNCF Sandbox 项目，将机密计算（TEE
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/kata-containers.md|Kata Containers]]
-- [[系统基础/topic-dictionary/security/vault.md|Vault]]
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[系统基础/知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[系统基础/知识字典/security/vault.md|Vault]]
+- [[系统基础/知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]

@@ -69,6 +69,6 @@ WasmEdge 是 Second State 开源的 CNCF Sandbox 项目，高性能 WebAssembly 
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/runc.md|runc]]
-- [[系统基础/topic-dictionary/specialized-workloads/spinkube.md|SpinKube]]
-- [[系统基础/topic-dictionary/fundamentals/kuasar.md|Kuasar]]
+- [[系统基础/知识字典/fundamentals/runc.md|runc]]
+- [[系统基础/知识字典/specialized-workloads/spinkube.md|SpinKube]]
+- [[系统基础/知识字典/fundamentals/kuasar.md|Kuasar]]

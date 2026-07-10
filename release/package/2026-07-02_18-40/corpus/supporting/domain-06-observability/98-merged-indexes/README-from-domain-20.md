@@ -196,7 +196,7 @@ tier: peripheral---
 
 ## Related
 
-- [[domain-17-system-foundation/topic-cheat-sheet/promql.md|速查卡: promql]]
+- [[domain-17-system-foundation/速查卡/promql.md|速查卡: promql]]
 
 - [[domain-06-observability/README.md|返回目录]]
 

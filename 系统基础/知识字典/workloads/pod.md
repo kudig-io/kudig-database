@@ -76,7 +76,7 @@ Pod 是 Kubernetes 的最小调度单元和计算单元。一个 Pod 封装了�
 
 ## Related
 
-[[系统基础/topic-dictionary/fundamentals/kubernetes-components.md|Kubernetes 组件]]
+[[系统基础/知识字典/fundamentals/kubernetes-components.md|Kubernetes 组件]]
 
 
 <!-- risk-assessed -->

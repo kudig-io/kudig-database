@@ -73,9 +73,9 @@ K0s 是 Mirantis 开源的轻量级 Kubernetes 发行版，单二进制部署，
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/k3s.md|K3s]]
-- [[系统基础/topic-dictionary/tooling/minikube.md|Minikube]]
-- [[系统基础/topic-dictionary/tooling/kubeadm.md|kubeadm]]
+- [[系统基础/知识字典/tooling/k3s.md|K3s]]
+- [[系统基础/知识字典/tooling/minikube.md|Minikube]]
+- [[系统基础/知识字典/tooling/kubeadm.md|kubeadm]]
 
 
 <!-- risk-assessed -->

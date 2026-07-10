@@ -281,11 +281,11 @@ echo "| TCP_RR 64B | 45k tps | 38k tps | 同 AZ 同节点池 |" >> /tmp/perf-ben
 ### 同域资料
 
 - [[生态参考/README.md|Domain 19 总览]]
-- [[生态参考/01-cncf-landscape/03-cncf-selection-guide.md|CNCF 项目选型指南]]
-- [[生态参考/02-papers/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架]]
+- [[生态参考/CNCF全景/03-cncf-selection-guide.md|CNCF 项目选型指南]]
+- [[生态参考/论文/01-kubernetes-production-readiness-assessment.md|Kubernetes 生产就绪性评估框架]]
 - [[生态参考/98-merged-indexes/00-open-source-projects-index-from-domain-19.md|开源项目索引]]
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 
 ### 计划新建文件（来自内容缺口分析）
 

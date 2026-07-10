@@ -601,24 +601,24 @@ related:
 
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
-- [[故障诊断/topic-structural-trouble-shooting/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
-- [[故障诊断/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
+- [[故障诊断/高级排障/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
+- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
+- [[故障诊断/高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
+- [[故障诊断/高级排障/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[故障诊断/topic-structural-trouble-shooting/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[故障诊断/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
+- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[故障诊断/高级排障/symptom-mapping-layer.md|symptom-mapping-layer]]
+- [[故障诊断/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
 
 ```
 

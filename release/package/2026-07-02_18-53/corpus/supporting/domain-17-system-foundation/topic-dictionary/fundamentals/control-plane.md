@@ -80,7 +80,7 @@ prerequisites:
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/fundamentals/kubernetes-components.md|Kubernetes 组件]] | [[domain-17-system-foundation/topic-dictionary/fundamentals/etcd.md|etcd]]
+[[domain-17-system-foundation/知识字典/fundamentals/kubernetes-components.md|Kubernetes 组件]] | [[domain-17-system-foundation/知识字典/fundamentals/etcd.md|etcd]]
 
 
 <!-- risk-assessed -->

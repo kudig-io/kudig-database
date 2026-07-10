@@ -1423,7 +1423,7 @@ data:
 | **v1.31** | 调度器吞吐量优化 | 支持更大规模集群 |
 | | 新增 `NodeResourcesFitArgs` 评分调优 | 更精细的资源匹配 |
 | **v1.30** | etcd 3.5.x 默认版本 | 性能提升 ~50% |
-| | 新增 `DRA` ([[domain-17-system-foundation/topic-dictionary/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) | GPU 等资源更灵活分配 |
+| | 新增 `DRA` ([[domain-17-system-foundation/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]]) | GPU 等资源更灵活分配 |
 | **v1.29** | Cluster Autoscaler 性能优化 | 大规模集群扩缩容更快 |
 | | 新增 `--max-pod-eviction-time` | 更可控的节点缩容 |
 | **v1.28** | 引入 `SchedulerQueueingHints` | 调度性能提升 |
@@ -1486,8 +1486,8 @@ data:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

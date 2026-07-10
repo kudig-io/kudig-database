@@ -196,7 +196,7 @@ flanneld --backend=wireguard \
 
 | 参数 | 环境变量 | 默认值 | 说明 |
 |:-----|:---------|:------:|:-----|
-| `--kube-subnet-mgr` | - | false | 使用 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 管理子网（推荐） |
+| `--kube-subnet-mgr` | - | false | 使用 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 管理子网（推荐） |
 | `--kube-api-url` | `FLANNEL_KUBE_API_URL` | - | Kubernetes API Server URL |
 | `--kubeconfig` | `FLANNEL_KUBECONFIG` | ~/.kube/config | kubeconfig 文件路径 |
 | `--kubeconfig-file` | `FLANNEL_KUBECONFIG_FILE` | - | kubeconfig 文件路径（备选） |
@@ -486,7 +486,7 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[domain-19-landscape-references/topic-index/flannel-index.md|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

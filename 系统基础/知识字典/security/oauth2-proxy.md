@@ -66,6 +66,6 @@ oauth2-proxy 是一个反向代理，为后端应用提供 OAuth2/OIDC 认证层
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/dex.md|Dex]]
-- [[系统基础/topic-dictionary/networking/traefik.md|Traefik]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/dex.md|Dex]]
+- [[系统基础/知识字典/networking/traefik.md|Traefik]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]

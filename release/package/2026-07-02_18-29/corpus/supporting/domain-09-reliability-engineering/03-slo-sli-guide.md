@@ -160,7 +160,7 @@ Burn Rate 表示错误预算的消耗速度：
 ## 相关链接
 
 - [[observability-stack-evolution]] — 可观测性技术栈演进
-- [[domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/30-monitoring-alerting-troubleshooting.md|monitoring-alerting-troubleshooting]] — 监控告警问题排查
+- [[domain-10-troubleshooting-diagnostics/基础设施排障/30-monitoring-alerting-troubleshooting.md|monitoring-alerting-troubleshooting]] — 监控告警问题排查
 - [[domain-09-reliability-engineering/98-merged-indexes/index.md|chaos-engineering-guide]] — 混沌工程实践
 - [[domain-09-reliability-engineering/98-merged-indexes/index.md|capacity-planning-guide]] — 容量规划指南
 

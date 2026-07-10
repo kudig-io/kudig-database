@@ -51,49 +51,49 @@ prerequisites:
 
 ### 集群生命周期
 
-- [[平台工程/operate/02-cluster-lifecycle-management.md|集群生命周期管理 (Cluster Lifecycle Management)]]
+- [[平台工程/运维/02-cluster-lifecycle-management.md|集群生命周期管理 (Cluster Lifecycle Management)]]
 - 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 - 集群容量规划
 
 ### 集群创建
 
 - [[entities/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](工作负载/topic-functions/cluster-create/01-overview.md)
-- [预检阶段 (Preflight Checks)](工作负载/topic-functions/cluster-create/02-preflight.md)
-- [证书阶段 (Certificate Generation)](工作负载/topic-functions/cluster-create/03-certs.md)
-- [kubeconfig 阶段 (Kubeconfig Generation)](工作负载/topic-functions/cluster-create/04-kubeconfig.md)
-- [控制面阶段 (Control Plane & Static [[系统基础/topic-dictionary/workloads/pods.md|Pods]])](工作负载/topic-functions/cluster-create/05-control-plane.md)
+- [预检阶段 (Preflight Checks)](平台工程/代码分析/functions-cluster-create/02-preflight.md)
+- [证书阶段 (Certificate Generation)](平台工程/代码分析/functions-cluster-create/03-certs.md)
+- [kubeconfig 阶段 (Kubeconfig Generation)](平台工程/代码分析/functions-cluster-create/04-kubeconfig.md)
+- [控制面阶段 (Control Plane & Static [[系统基础/知识字典/workloads/pods.md|Pods]])](工作负载/topic-functions/cluster-create/05-control-plane.md)
 - 节点加入流程 (kubeadm join)](工作负载/topic-functions/cluster-create/06-join.md)
-- [etcd 集群初始化细节](工作负载/topic-functions/cluster-create/07-etcd.md)
-- [高可用控制面搭建](工作负载/topic-functions/cluster-create/08-ha.md)
-- [集群升级流程](工作负载/topic-functions/cluster-create/09-upgrade.md)
-- [CNI 网络插件与集群网络](工作负载/topic-functions/cluster-create/19-cni-networking.md)
-- [Node 注册与 kubeadm token 详解](工作负载/topic-functions/cluster-create/20-node-registration.md)
+- [etcd 集群初始化细节](平台工程/代码分析/functions-cluster-create/07-etcd.md)
+- [高可用控制面搭建](平台工程/代码分析/functions-cluster-create/08-ha.md)
+- [集群升级流程](平台工程/代码分析/functions-cluster-create/09-upgrade.md)
+- [CNI 网络插件与集群网络](平台工程/代码分析/functions-cluster-create/19-cni-networking.md)
+- [Node 注册与 kubeadm token 详解](平台工程/代码分析/functions-cluster-create/20-node-registration.md)
 - Cluster Create — Kubernetes 集群新建源码分析](工作负载/topic-functions/cluster-create/README.md)
 
 ### 集群证书
 
-- [Kubernetes 集群 PKI 架构总览](工作负载/topic-functions/cluster-cert/01-pki-architecture.md)
-- [CA 证书生成源码分析](工作负载/topic-functions/cluster-cert/02-ca-generation.md)
-- [API Server 证书生成源码分析](工作负载/topic-functions/cluster-cert/03-apiserver-cert.md)
-- [etcd 证书体系源码分析](工作负载/topic-functions/cluster-cert/04-etcd-cert.md)
-- [kubelet 证书与 CSR 机制源码分析](工作负载/topic-functions/cluster-cert/05-kubelet-cert.md)
-- [证书轮换机制源码分析](工作负载/topic-functions/cluster-cert/06-cert-rotation.md)
-- [证书身份到 RBAC 的映射关系](工作负载/topic-functions/cluster-cert/08-rbac-mapping.md)
+- [Kubernetes 集群 PKI 架构总览](平台工程/代码分析/functions-cluster-cert/01-pki-architecture.md)
+- [CA 证书生成源码分析](平台工程/代码分析/functions-cluster-cert/02-ca-generation.md)
+- [API Server 证书生成源码分析](平台工程/代码分析/functions-cluster-cert/03-apiserver-cert.md)
+- [etcd 证书体系源码分析](平台工程/代码分析/functions-cluster-cert/04-etcd-cert.md)
+- [kubelet 证书与 CSR 机制源码分析](平台工程/代码分析/functions-cluster-cert/05-kubelet-cert.md)
+- [证书轮换机制源码分析](平台工程/代码分析/functions-cluster-cert/06-cert-rotation.md)
+- [证书身份到 RBAC 的映射关系](平台工程/代码分析/functions-cluster-cert/08-rbac-mapping.md)
 - Cluster Cert — Kubernetes 集群证书体系源码分析](工作负载/topic-functions/cluster-cert/README.md)
 
 ### 集群删除
 
-- [[工作负载/topic-functions/cluster-delete/05-etcd-cleanup.md|etcd 数据清理与成员移除 — 源码分析]]
-- [[工作负载/topic-functions/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
+- [[平台工程/代码分析/functions-cluster-delete/05-etcd-cleanup.md|etcd 数据清理与成员移除 — 源码分析]]
+- [[平台工程/代码分析/functions-cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[故障诊断/02-infrastructure-troubleshooting/34-upgrade-migration-troubleshooting.md|34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)]]
-- [[故障诊断/03-advanced-troubleshooting/40-large-scale-cluster-operations.md|40 - 大规模集群运维 (Large Scale Cluster Operations)]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
+- [[故障诊断/基础设施排障/34-upgrade-migration-troubleshooting.md|34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)]]
+- [[故障诊断/高级排障/40-large-scale-cluster-operations.md|40 - 大规模集群运维 (Large Scale Cluster Operations)]]
+- [[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
+- [[故障诊断/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 
 ### 多集群管理
 
@@ -115,7 +115,7 @@ prerequisites:
 
 ### 平台运维
 
-- [[平台工程/governance/14-large-scale-cluster-optimization.md|14 large scale cluster optimization]]
+- [[平台工程/治理/14-large-scale-cluster-optimization.md|14 large scale cluster optimization]]
 - Karpenter 节点自动扩展实践指南
 
 

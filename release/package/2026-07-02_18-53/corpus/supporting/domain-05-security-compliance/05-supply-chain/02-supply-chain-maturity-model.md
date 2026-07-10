@@ -2203,8 +2203,8 @@ if __name__ == "__main__":
 - domain-05-security-compliance KUDIG Database — Global MOC
 - [[domain-05-security-compliance/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]]]]
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
-- [[domain-05-security-compliance/05-supply-chain/01-supply-chain-security-overview.md|01 supply chain security overview]]
-- [[domain-05-security-compliance/05-supply-chain/03-sbom-generation-management.md|03 sbom generation management]]
+- [[domain-05-security-compliance/供应链/01-supply-chain-security-overview.md|01 supply chain security overview]]
+- [[domain-05-security-compliance/供应链/03-sbom-generation-management.md|03 sbom generation management]]
 - SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance)
 - SLSA 级别与实施 (SLSA Levels and Implementation)
 - GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)

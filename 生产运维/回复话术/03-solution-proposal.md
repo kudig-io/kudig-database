@@ -434,13 +434,13 @@ kubectl get pods -n production
 
 ## Related
 
-- [[生产运维/reply-templates/README.md|工单回复话术库索引]]
+- [[生产运维/回复话术/README.md|工单回复话术库索引]]
 - [[生产运维/ticket-routing-rules.md|工单分类与路由规则]]
 
 ## See Also
 
-- [[生产运维/reply-templates/02-information-request.md|请求信息话术]]
-- [[生产运维/reply-templates/04-escalation-notice.md|升级通知话术]]
+- [[生产运维/回复话术/02-information-request.md|请求信息话术]]
+- [[生产运维/回复话术/04-escalation-notice.md|升级通知话术]]
 
 
 <!-- risk-assessed -->

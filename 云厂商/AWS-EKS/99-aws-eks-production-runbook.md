@@ -455,12 +455,12 @@ done
 ### 本域资料
 
 - [[云厂商/99-production-readiness-operations-guide.md|云厂商托管 Kubernetes 生产就绪运维指南]]
-- [[云厂商/02-aws-eks/aws-eks-overview.md|AWS EKS 概述]]
-- [[云厂商/02-aws-eks/02-eks-cluster-lifecycle-management.md|EKS 集群生命周期管理]]
-- [[云厂商/02-aws-eks/05-eks-iam-irsa-pod-identity.md|EKS IAM/IRSA 与 Pod Identity]]
-- [[云厂商/02-aws-eks/03-eks-networking-vpc-cni.md|EKS 网络与 VPC CNI]]
-- [[云厂商/02-aws-eks/04-eks-storage-efs-fsx.md|EKS 存储 EFS/FSx]]
-- [[云厂商/02-aws-eks/06-eks-troubleshooting-playbook.md|EKS 故障排查手册]]
+- [[云厂商/AWS-EKS/aws-eks-overview.md|AWS EKS 概述]]
+- [[云厂商/AWS-EKS/02-eks-cluster-lifecycle-management.md|EKS 集群生命周期管理]]
+- [[云厂商/AWS-EKS/05-eks-iam-irsa-pod-identity.md|EKS IAM/IRSA 与 Pod Identity]]
+- [[云厂商/AWS-EKS/03-eks-networking-vpc-cni.md|EKS 网络与 VPC CNI]]
+- [[云厂商/AWS-EKS/04-eks-storage-efs-fsx.md|EKS 存储 EFS/FSx]]
+- [[云厂商/AWS-EKS/06-eks-troubleshooting-playbook.md|EKS 故障排查手册]]
 
 ### 跨域参考
 

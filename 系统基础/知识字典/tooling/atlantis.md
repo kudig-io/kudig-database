@@ -73,9 +73,9 @@ Atlantis 是开源的 Terraform Pull Request 自动化工具，在 PR 中自动�
 
 ## Related
 
-- [[系统基础/topic-dictionary/tooling/opentofu.md|OpenTofu]]
-- [[系统基础/topic-dictionary/platform-engineering/crossplane.md|Crossplane]]
-- [[系统基础/topic-dictionary/operations/argo.md|Argo]]
+- [[系统基础/知识字典/tooling/opentofu.md|OpenTofu]]
+- [[系统基础/知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[系统基础/知识字典/operations/argo.md|Argo]]
 
 
 <!-- risk-assessed -->

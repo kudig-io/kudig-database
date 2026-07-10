@@ -57,28 +57,28 @@ prerequisites:
 
 ### 故障排查
 - Higress 网关故障排查指南
-- [[故障诊断/topic-fta/list/higress-fta.md|Higress FTA 故障树]]
+- [[故障诊断/FTA故障树/list/higress-fta.md|Higress FTA 故障树]]
 
 ### 域名文档
 - API 网关选型对比
 
 ## 关联文档 (K8s集成)
 
-### [[系统基础/topic-dictionary/networking/ingress.md|Ingress]] 相关
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+### [[系统基础/知识字典/networking/ingress.md|Ingress]] 相关
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
+- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
 - Service 端点异常
 
 ### 服务网格
 - 服务网格与微服务架构
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Istio 故障排查]]
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 深度排查与性能调优]]
+- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Istio 故障排查]]
+- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 深度排查与性能调优]]
 
 ### Envoy 与网关
 - Envoy 深度解析
 - Gateway API
-- [[故障诊断/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理]]
+- [[故障诊断/高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理]]
 
 ### 迁移指南
 - nginx-ingress 迁移指南
@@ -102,7 +102,7 @@ prerequisites:
 - 网络性能优化
 
 ### 术语词典
-- [[系统基础/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]
+- [[系统基础/知识字典/networking/ingress-controllers.md|Ingress Controllers]]
 - 服务网格术语
 - API 相关术语
 

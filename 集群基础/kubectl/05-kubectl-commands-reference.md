@@ -2505,15 +2505,15 @@ kubectl get --raw='/healthz/etcd'
 - [[MOC]]
 
 - 架构全景图
-- [[系统基础/topic-cheat-sheet/k8s.md|K8s 速查卡]]
+- [[系统基础/速查卡/k8s.md|K8s 速查卡]]
 - 相关知识域: 容器运行时
 - 相关知识域: 集群基础
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[系统基础/速查卡/k8s.md|速查卡: k8s]]
+- [[系统基础/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
 
-- [[平台工程/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
-- [[平台工程/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]
-- [[平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md|01-pki-architecture]]- [[生态参考/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[平台工程/代码分析/deployment-create/01-overview.md|01-overview]]
+- [[平台工程/代码分析/cluster-delete/01-overview.md|01-overview]]
+- [[平台工程/代码分析/cluster-cert/01-pki-architecture.md|01-pki-architecture]]- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also
 

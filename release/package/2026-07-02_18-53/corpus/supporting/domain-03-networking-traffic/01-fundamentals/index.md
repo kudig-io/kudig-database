@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-03-networking-traffic/01-fundamentals/01-network-protocols-stack.md|Network Protocols Stack]]
-- [[domain-03-networking-traffic/01-fundamentals/02-tcp-udp-deep-dive.md|Tcp Udp Deep Dive]]
-- [[domain-03-networking-traffic/01-fundamentals/03-dns-principles-configuration.md|Dns Principles Configuration]]
-- [[domain-03-networking-traffic/01-fundamentals/04-load-balancing-technologies.md|Load Balancing Technologies]]
-- [[domain-03-networking-traffic/01-fundamentals/05-network-security-fundamentals.md|Network Security Fundamentals]]
-- [[domain-03-networking-traffic/01-fundamentals/06-sdn-network-virtualization.md|Sdn Network Virtualization]]
-- [[domain-03-networking-traffic/01-fundamentals/99-cilium-ebpf-network-guide.md|Cilium Ebpf Network Guide]]
+- [[domain-03-networking-traffic/网络基础/01-network-protocols-stack.md|Network Protocols Stack]]
+- [[domain-03-networking-traffic/网络基础/02-tcp-udp-deep-dive.md|Tcp Udp Deep Dive]]
+- [[domain-03-networking-traffic/网络基础/03-dns-principles-configuration.md|Dns Principles Configuration]]
+- [[domain-03-networking-traffic/网络基础/04-load-balancing-technologies.md|Load Balancing Technologies]]
+- [[domain-03-networking-traffic/网络基础/05-network-security-fundamentals.md|Network Security Fundamentals]]
+- [[domain-03-networking-traffic/网络基础/06-sdn-network-virtualization.md|Sdn Network Virtualization]]
+- [[domain-03-networking-traffic/网络基础/99-cilium-ebpf-network-guide.md|Cilium Ebpf Network Guide]]
 

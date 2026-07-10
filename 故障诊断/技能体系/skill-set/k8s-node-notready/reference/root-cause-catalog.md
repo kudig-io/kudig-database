@@ -327,7 +327,7 @@ RC-006 (网络不通) ←→ RC-007 (证书过期)
 
 ## Related
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

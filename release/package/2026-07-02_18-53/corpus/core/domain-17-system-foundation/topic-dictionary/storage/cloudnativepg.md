@@ -68,6 +68,6 @@ CloudNativePG 是 EDB 开源的 Kubernetes PostgreSQL Operator，以 GitOps 友�
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|PV/PVC]]
-- [[domain-17-system-foundation/topic-dictionary/operations/velero.md|Velero]]
-- [[domain-17-system-foundation/topic-dictionary/platform-engineering/rancher.md|Rancher]]
+- [[domain-17-system-foundation/知识字典/storage/persistent-volumes.md|PV/PVC]]
+- [[domain-17-system-foundation/知识字典/operations/velero.md|Velero]]
+- [[domain-17-system-foundation/知识字典/platform-engineering/rancher.md|Rancher]]

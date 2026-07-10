@@ -1100,7 +1100,7 @@ Info [IST0108]: DestinationRule "reviews-policy" uses outlier detection with bas
 | PILOT_EVICTION_INTERVAL | 0s | 清理无效代理配置的间隔 | 30s |
 | PILOT_CERT_PROVIDER | istiod | 证书提供者类型 | istiod |
 | ENABLE_DEBUG_ON_HTTP | true | 是否启用 /debug 端点 | false (生产) |
-| KUBE_API_REQUEST_TIMEOUT | 60s | [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] 请求超时 | 60s |
+| KUBE_API_REQUEST_TIMEOUT | 60s | [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 请求超时 | 60s |
 | PILOT_WORKLOAD_ENTRY_GRACE_PERIOD | 30s | WorkloadEntry 注入后的宽限期 | 30s |
 | PILOT_SIDECAR_ENABLE_INBOUND_PASSTHROUGH_PORTS | true | 是否允许入站流量直通 | 按需 |
 
@@ -1372,7 +1372,7 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 ## Related
 
-- [[生态参考/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 ## 相关合成分析
 

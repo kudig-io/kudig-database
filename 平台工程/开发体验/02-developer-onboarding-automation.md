@@ -822,7 +822,7 @@ metrics:
 
 ## Related
 
-- [[平台工程/developer-experience/01-inner-source-contribution-model|内部开源贡献模型]]
+- [[平台工程/开发体验/01-inner-source-contribution-model|内部开源贡献模型]]
 - 平台工程/
 - AI基础设施/
 

@@ -209,8 +209,8 @@ Kubernetes 控制平面域深入解析 API Server、[[etcd]]、Scheduler、Contr
 - 相关知识域: domain-03-networking-traffic
 - 相关知识域: domain-04-storage-data
 - 相关知识域: domain-05-security-compliance
-- [[domain-17-system-foundation/topic-cheat-sheet/k8s.md|速查卡: k8s]]
-- [[domain-17-system-foundation/topic-cheat-sheet/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
-- [[domain-07-platform-engineering/topic-code-analysis/node-create/README.md|Node Create 模块函数索引]]
+- [[domain-17-system-foundation/速查卡/k8s.md|速查卡: k8s]]
+- [[domain-17-system-foundation/速查卡/kubectl-scene-cheatsheet.md|速查卡: kubectl-scene-cheatsheet]]
+- [[domain-07-platform-engineering/代码分析/node-create/README.md|Node Create 模块函数索引]]
 
 <!-- risk-assessed -->

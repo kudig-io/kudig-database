@@ -90,9 +90,9 @@ Kubernetes 采用“轮毂-辐条（Hub-and-Spoke）”API 模式：
 
 ## Related
 
-- [[系统基础/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
-- [[系统基础/topic-dictionary/fundamentals/annotations.md|注解]]
-- [[系统基础/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[系统基础/知识字典/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[系统基础/知识字典/fundamentals/annotations.md|注解]]
+- [[系统基础/知识字典/fundamentals/bpfman.md|bpfman eBPF 管理器]]
 
 
 <!-- risk-assessed -->

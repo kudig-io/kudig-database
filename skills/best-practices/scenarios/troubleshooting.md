@@ -89,7 +89,7 @@ graph TD
 ## 相关文档
 
 - [[故障诊断/README.md|README]]
-- [[故障诊断/topic-structural-trouble-shooting/README.md|README]]
+- [[故障诊断/高级排障/README.md|README]]
 - 集群基础/16-troubleshooting-guide.md
 
 
@@ -97,14 +97,14 @@ graph TD
 
 ## FTA 故障树
 
-- [[故障诊断/topic-fta/MOC.md|所有 FTA 故障树]]
+- [[故障诊断/FTA故障树/MOC.md|所有 FTA 故障树]]
 
 
 ---
 
 ## 操作技能
 
-- [[故障诊断/topic-skills/MOC.md|所有操作技能]]
+- [[故障诊断/技能体系/MOC.md|所有操作技能]]
 
 
 ---
@@ -118,7 +118,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - MOC.md|MOC]]
-- [[平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- [[平台工程/代码分析/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
 
 
 <!-- risk-assessed -->

@@ -77,7 +77,7 @@ Ingress Controller 监听 Ingress 资源的变化，动态更新自身的反向�
 
 ## Related
 
-[[domain-17-system-foundation/topic-dictionary/networking/ingress-controllers.md|Ingress Controllers]]
+[[domain-17-system-foundation/知识字典/networking/ingress-controllers.md|Ingress Controllers]]
 
 
 <!-- risk-assessed -->

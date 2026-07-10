@@ -86,7 +86,7 @@ relationships:
 - domain-12-cloud-providers/02-google-cloud-gke/01-gke-migration-guide
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查指南 [topic-structural-trouble-shooting]]]
+- [[domain-10-troubleshooting-diagnostics/高级排障/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查指南 [topic-structural-trouble-shooting]]]
 - [[skills/helm-fta.md|Helm 发布异常故障树分析 (skills)]]
 
 

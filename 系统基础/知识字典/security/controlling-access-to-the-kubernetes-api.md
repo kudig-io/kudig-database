@@ -92,7 +92,7 @@ Kubernetes 支持多种授权模块：
 
 ### API 验证与持久化
 
-通过所有准入控制器后，请求会经过对应 API 对象的验证例程，然后写入对象存储（[[系统基础/topic-dictionary/fundamentals/etcd.md|etcd]]）。
+通过所有准入控制器后，请求会经过对应 API 对象的验证例程，然后写入对象存储（[[系统基础/知识字典/fundamentals/etcd.md|etcd]]）。
 
 ### 审计
 
@@ -126,7 +126,7 @@ Kubernetes 审计提供了一组按时间顺序排列的安全相关记录，记
 - https://kubernetes.io/docs/concepts/security/controlling-access/
 
 ## Related
-- [[生态参考/topic-index/security-index.md|Security 安全知识图谱索引]]
+- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

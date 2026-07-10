@@ -70,7 +70,7 @@ prerequisites:
 ### 子路径（subPath / subPathExpr）
 
 - `subPath`：指定卷内的子路径进行挂载，使同一个卷可在同一 Pod 中被多个容器以不同子目录挂载。
-- `subPathExpr`：支持使用 [[系统基础/topic-dictionary/workloads/downward-api.md|downward API]] 环境变量动态构建子路径名。
+- `subPathExpr`：支持使用 [[系统基础/知识字典/workloads/downward-api.md|downward API]] 环境变量动态构建子路径名。
 
 ### 挂载传播（Mount Propagation）
 
@@ -207,11 +207,11 @@ kubectl get pvc -n production
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
-- [[系统基础/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[系统基础/topic-dictionary/storage/volume.md|Volume]]
-- [[系统基础/topic-dictionary/storage/emptydir.md|Emptydir]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[系统基础/知识字典/storage/storage-class.md|Storage Class]]
+- [[系统基础/知识字典/storage/volume.md|Volume]]
+- [[系统基础/知识字典/storage/emptydir.md|Emptydir]]
 
 
 <!-- risk-assessed -->

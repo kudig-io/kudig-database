@@ -76,31 +76,31 @@ prerequisites:
 
 ### 术语词典
 
-- [[系统基础/topic-dictionary/security/cloud-native-security-practices.md|09 - 云原生安全专家指南]]
-- [[系统基础/topic-dictionary/security/cloud-native-security.md|云原生安全]]
-- [[系统基础/topic-dictionary/security/controlling-access-to-the-kubernetes-api.md|控制对 Kubernetes API 的访问]]
-- [[系统基础/topic-dictionary/security/good-practices-for-kubernetes-secrets.md|Kubernetes Secrets 最佳实践]]
-- [[系统基础/topic-dictionary/security/pod-security-admission.md|Pod 安全准入]]
-- [[系统基础/topic-dictionary/security/pod-security-standards.md|Pod 安全标准]]
-- [[系统基础/topic-dictionary/security/policy-as-code.md|策略即代码（Policy as Code）]]
-- [[系统基础/topic-dictionary/security/role-based-access-control-good-practices.md|基于角色的访问控制（RBAC）最佳实践]]
-- [[系统基础/topic-dictionary/security/runtime-security.md|运行时安全]]
-- [[系统基础/topic-dictionary/security/secrets-management-deep-dive.md|密钥管理深度指南]]
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
-- [[系统基础/topic-dictionary/security/supply-chain-security.md|软件供应链安全]]
-- [[系统基础/topic-dictionary/networking/network-policies.md|Network Policies]]
+- [[系统基础/知识字典/security/cloud-native-security-practices.md|09 - 云原生安全专家指南]]
+- [[系统基础/知识字典/security/cloud-native-security.md|云原生安全]]
+- [[系统基础/知识字典/security/controlling-access-to-the-kubernetes-api.md|控制对 Kubernetes API 的访问]]
+- [[系统基础/知识字典/security/good-practices-for-kubernetes-secrets.md|Kubernetes Secrets 最佳实践]]
+- [[系统基础/知识字典/security/pod-security-admission.md|Pod 安全准入]]
+- [[系统基础/知识字典/security/pod-security-standards.md|Pod 安全标准]]
+- [[系统基础/知识字典/security/policy-as-code.md|策略即代码（Policy as Code）]]
+- [[系统基础/知识字典/security/role-based-access-control-good-practices.md|基于角色的访问控制（RBAC）最佳实践]]
+- [[系统基础/知识字典/security/runtime-security.md|运行时安全]]
+- [[系统基础/知识字典/security/secrets-management-deep-dive.md|密钥管理深度指南]]
+- [[系统基础/知识字典/security/spiffe-spire-identity.md|SPIFFE / SPIRE 与工作负载身份]]
+- [[系统基础/知识字典/security/supply-chain-security.md|软件供应链安全]]
+- [[系统基础/知识字典/networking/network-policies.md|Network Policies]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[故障诊断/01-resource-troubleshooting/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
-- [[故障诊断/01-resource-troubleshooting/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
-- [[故障诊断/02-infrastructure-troubleshooting/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/06-security-auth/04-audit-logging-troubleshooting.md|审计日志故障排查指南]]
+- [[故障诊断/资源排障/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
+- [[故障诊断/资源排障/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
+- [[故障诊断/基础设施排障/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
+- [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
+- [[故障诊断/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|审计日志故障排查指南]]
 
 ### YAML 配置参考
 
@@ -112,14 +112,14 @@ prerequisites:
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
-- [[故障诊断/topic-skills/14-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
-- [[故障诊断/topic-skills/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
+- [[故障诊断/技能体系/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
+- [[故障诊断/技能体系/14-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
+- [[故障诊断/技能体系/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
 
 ### FTA 故障树
 
-- [[故障诊断/topic-fta/list/psp-scc-fta.md|PSP/SCC 异常 FTA 树]]
-- [[故障诊断/topic-fta/list/rbac-fta.md|RBAC 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/psp-scc-fta.md|PSP/SCC 异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/rbac-fta.md|RBAC 异常 FTA 树]]
 
 ## 扩展参考
 
@@ -133,8 +133,8 @@ prerequisites:
 
 ### 供应链安全
 
-- [[安全/05-supply-chain/05-slsa-levels-implementation.md|05 slsa levels implementation]]
-- [[安全/05-supply-chain/07-sigstore-cosign-signing.md|07 sigstore cosign signing]]
+- [[安全/供应链/05-slsa-levels-implementation.md|05 slsa levels implementation]]
+- [[安全/供应链/07-sigstore-cosign-signing.md|07 sigstore cosign signing]]
 
 ### 安全生态项目
 

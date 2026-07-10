@@ -116,7 +116,7 @@ kubectl delete crd <crd-name>
 ```
 ## 交叉引用
 
-- [扩展 Kubernetes API](./extending-[[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
+- [扩展 Kubernetes API](./extending-[[系统基础/知识字典/fundamentals/the-kubernetes-api.md|the-kubernetes-api]].md) — API 扩展总览
 - [Operator 模式](./operator-pattern.md) — CRD + Controller 最佳实践
 - [Admission Webhook](./admission-webhook-good-practices.md) — CR 验证与变更
 
@@ -126,11 +126,11 @@ kubectl delete crd <crd-name>
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/api-group.md|Api Group]]
-- [[系统基础/topic-dictionary/platform-engineering/api-version.md|Api Version]]
-- [[系统基础/topic-dictionary/platform-engineering/kind.md|Kind]]
-- [[系统基础/topic-dictionary/platform-engineering/manifest.md|Manifest]]
-- [[系统基础/topic-dictionary/platform-engineering/custom-resource.md|Custom Resource]]
+- [[系统基础/知识字典/platform-engineering/api-group.md|Api Group]]
+- [[系统基础/知识字典/platform-engineering/api-version.md|Api Version]]
+- [[系统基础/知识字典/platform-engineering/kind.md|Kind]]
+- [[系统基础/知识字典/platform-engineering/manifest.md|Manifest]]
+- [[系统基础/知识字典/platform-engineering/custom-resource.md|Custom Resource]]
 
 
 <!-- risk-assessed -->

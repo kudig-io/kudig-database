@@ -76,7 +76,7 @@ cross_refs:
 
 
 
-# 23 - 监控安全与合规治理 (Monitoring [[domain-07-platform-engineering/governance/10-security-compliance.md|Security & Compliance]] Governance)
+# 23 - 监控安全与合规治理 (Monitoring [[domain-07-platform-engineering/治理/10-security-compliance.md|Security & Compliance]] Governance)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [NIST网络安全框架](https://www.nist.gov/cyberframework)
 
@@ -936,7 +936,7 @@ disaster_recovery_planning:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

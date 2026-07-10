@@ -141,7 +141,7 @@ cross_refs:
 | **Spark** | 批处理 | PB级 | Spark Operator | 有限 | 大规模ETL |
 | **Dask** | 并行计算 | TB级 | Dask Operator | 是 | Python原生 |
 | **Flink** | 流处理 | 无限 | Flink Operator | 否 | 实时数据流 |
-| **[[AI基础设施/03-agent-runtime/09-prefect-inngest-agent-workflow.md|Prefect]]** | 编排 | 依赖后端 | K8s Agent | 否 | 工作流编排 |
+| **[[AI基础设施/Agent运行时/09-prefect-inngest-agent-workflow.md|Prefect]]** | 编排 | 依赖后端 | K8s Agent | 否 | 工作流编排 |
 | **Airflow** | 编排 | 依赖后端 | K8s Executor | 否 | DAG调度 |
 
 ---

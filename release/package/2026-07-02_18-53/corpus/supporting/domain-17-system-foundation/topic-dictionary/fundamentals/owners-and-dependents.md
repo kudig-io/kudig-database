@@ -91,9 +91,9 @@ Kubernetes 在使用前台级联删除或孤立删除时也会向所有者资源
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/annotations.md|注解]]
-- [[domain-17-system-foundation/topic-dictionary/fundamentals/bpfman.md|bpfman eBPF 管理器]]
+- [[domain-17-system-foundation/知识字典/fundamentals/about-cgroup-v2.md|About cgroup v2（关于 cgroup v2）]]
+- [[domain-17-system-foundation/知识字典/fundamentals/annotations.md|注解]]
+- [[domain-17-system-foundation/知识字典/fundamentals/bpfman.md|bpfman eBPF 管理器]]
 
 
 <!-- risk-assessed -->

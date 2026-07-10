@@ -69,40 +69,40 @@ prerequisites:
 
 ### 术语词典 (存储相关)
 
-- [[系统基础/topic-dictionary/storage/csi-volume-cloning.md|CSI Volume Cloning（CSI 卷克隆）]]
-- [[系统基础/topic-dictionary/storage/dynamic-volume-provisioning.md|Dynamic Volume Provisioning（动态卷供给）]]
-- [[系统基础/topic-dictionary/storage/ephemeral-volumes.md|Ephemeral Volumes（临时卷）]]
-- [[系统基础/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes（持久卷）]]
-- [[系统基础/topic-dictionary/storage/storage-classes.md|Storage Classes（存储类）]]
-- [[系统基础/topic-dictionary/storage/volume-attributes-classes.md|Volume Attributes Classes（卷属性类）]]
-- [[系统基础/topic-dictionary/storage/volume-health-monitoring.md|Volume Health Monitoring（卷健康监控）]]
-- [[系统基础/topic-dictionary/storage/volume-snapshot-classes.md|Volume Snapshot Classes（卷快照类）]]
-- [[系统基础/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots（卷快照）]]
-- [[系统基础/topic-dictionary/storage/volumes.md|Volumes（卷）]]
+- [[系统基础/知识字典/storage/csi-volume-cloning.md|CSI Volume Cloning（CSI 卷克隆）]]
+- [[系统基础/知识字典/storage/dynamic-volume-provisioning.md|Dynamic Volume Provisioning（动态卷供给）]]
+- [[系统基础/知识字典/storage/ephemeral-volumes.md|Ephemeral Volumes（临时卷）]]
+- [[系统基础/知识字典/storage/persistent-volumes.md|Persistent Volumes（持久卷）]]
+- [[系统基础/知识字典/storage/storage-classes.md|Storage Classes（存储类）]]
+- [[系统基础/知识字典/storage/volume-attributes-classes.md|Volume Attributes Classes（卷属性类）]]
+- [[系统基础/知识字典/storage/volume-health-monitoring.md|Volume Health Monitoring（卷健康监控）]]
+- [[系统基础/知识字典/storage/volume-snapshot-classes.md|Volume Snapshot Classes（卷快照类）]]
+- [[系统基础/知识字典/storage/volume-snapshots.md|Volume Snapshots（卷快照）]]
+- [[系统基础/知识字典/storage/volumes.md|Volumes（卷）]]
 
 ## 关联文档 (K8s 集成)
 
 ### 故障排查
 
-- [[故障诊断/01-resource-troubleshooting/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
-- [[故障诊断/00-core-troubleshooting/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
-- [[故障诊断/01-resource-troubleshooting/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
-- [[故障诊断/topic-structural-trouble-shooting/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
-- [[故障诊断/topic-fta/list/csi-fta.md|CSI 存储异常 FTA 树]]
+- [[故障诊断/资源排障/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
+- [[故障诊断/核心排障/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
+- [[故障诊断/资源排障/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
+- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[故障诊断/高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[故障诊断/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[故障诊断/高级排障/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[故障诊断/FTA故障树/list/csi-fta.md|CSI 存储异常 FTA 树]]
 
 ### 控制平面组件
 
-- [[集群基础/03-control-plane/22-container-storage-deep-dive.md|22 container storage deep dive]]
+- [[集群基础/控制平面/22-container-storage-deep-dive.md|22 container storage deep dive]]
 - cloud-controller-manager 深度解析 (CCM Deep Dive)
 
 ### 技能卡片
 
-- [[故障诊断/topic-skills/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
-- [[故障诊断/topic-skills/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
+- [[故障诊断/技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
+- [[故障诊断/技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### K8s 事件
 
@@ -110,8 +110,8 @@ prerequisites:
 
 ### 功能操作
 
-- [[工作负载/topic-functions/cluster-create/22-storage-volumes.md|存储与卷管理]]
-- [[工作负载/topic-functions/node-create/14-storage-node.md|节点存储]]
+- [[平台工程/代码分析/functions-cluster-create/22-storage-volumes.md|存储与卷管理]]
+- [[平台工程/代码分析/functions-node-create/14-storage-node.md|节点存储]]
 
 ### 设计原则
 
@@ -137,10 +137,10 @@ prerequisites:
 
 ### 灾备与迁移
 
-- [[发布变更/topic-migration/04-storage-data-migration.md|04 - 存储与数据迁移]]
-- [[发布变更/topic-migration/06-stateful-services-migration.md|06 - 有状态服务迁移]]
+- [[发布变更/迁移方案/04-storage-data-migration.md|04 - 存储与数据迁移]]
+- [[发布变更/迁移方案/06-stateful-services-migration.md|06 - 有状态服务迁移]]
 - 17 - 灾难恢复演练
-- [[故障诊断/topic-fta/list/backup-restore-fta.md|备份/恢复异常 FTA 树]]
+- [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常 FTA 树]]
 
 ### 培训学习
 

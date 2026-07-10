@@ -119,7 +119,7 @@ kubectl get pods -o wide -n production | grep Running
 
 ## 相关
 
-- [[domain-09-reliability-engineering/09-disaster-recovery-playbooks/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
+- [[domain-09-reliability-engineering/灾难恢复/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
 
 
 <!-- risk-assessed -->

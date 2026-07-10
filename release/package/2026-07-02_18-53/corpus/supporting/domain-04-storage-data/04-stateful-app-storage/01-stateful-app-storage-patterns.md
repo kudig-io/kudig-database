@@ -467,14 +467,14 @@ spec:
 
 ## Related
 
-- [[domain-04-storage-data/01-k8s-storage/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
+- [[domain-04-storage-data/K8s存储/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
 - [[domain-04-storage-data/README|Storage Domain 存储领域知识库]]
 
 ## See Also
 
-- [[domain-04-storage-data/03-distributed-storage/01-velero-backup-recovery|Velero 阿里云专有云备份恢复实战]]
-- [[domain-04-storage-data/03-distributed-storage/02-rook-ceph-production|Rook-Ceph 生产指南]]
-- [[domain-04-storage-data/03-distributed-storage/03-longhorn-production|Longhorn 生产指南]]
+- [[domain-04-storage-data/分布式存储/01-velero-backup-recovery|Velero 阿里云专有云备份恢复实战]]
+- [[domain-04-storage-data/分布式存储/02-rook-ceph-production|Rook-Ceph 生产指南]]
+- [[domain-04-storage-data/分布式存储/03-longhorn-production|Longhorn 生产指南]]
 
 ---
 

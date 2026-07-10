@@ -80,7 +80,7 @@ authors:
 
 在执行生产升级前，必须在与生产环境同版本、同配置、同规模的预发或灰度集群完成一次完整演练，验证升级计划、回滚步骤与业务影响。演练报告应作为生产变更工单的附件，未通过演练的集群禁止进入生产升级窗口。
 
-> **不在本手册范围内**: 大版本跳跃升级（如 v1.x → v2.x）、跨云厂商迁移、自定义二进制集群、非 kubeadm 部署（如 OpenShift、Rancher）的专有升级路径。这些情况应参考 [[集群基础/03-control-plane/07-plane-upgrade-migration.md|控制平面升级与迁移策略]] 或对应云厂商升级文档。
+> **不在本手册范围内**: 大版本跳跃升级（如 v1.x → v2.x）、跨云厂商迁移、自定义二进制集群、非 kubeadm 部署（如 OpenShift、Rancher）的专有升级路径。这些情况应参考 [[集群基础/控制平面/07-plane-upgrade-migration.md|控制平面升级与迁移策略]] 或对应云厂商升级文档。
 
 ---
 
@@ -632,11 +632,11 @@ kubectl get nodes
 
 ### 同域参考
 
-- [[集群基础/03-control-plane/32-kubeadm-upgrade-complete-guide.md|kubeadm 升级完整路径指南（含 rollback）]]
-- [[集群基础/03-control-plane/07-plane-upgrade-migration.md|控制平面升级与迁移策略]]
-- [[集群基础/03-control-plane/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案]]
-- [[集群基础/03-control-plane/11-etcd-deep-dive.md|etcd 深度解析]]
-- [[集群基础/03-control-plane/12-apiserver-deep-dive.md|API Server 深度解析]]
+- [[集群基础/控制平面/32-kubeadm-upgrade-complete-guide.md|kubeadm 升级完整路径指南（含 rollback）]]
+- [[集群基础/控制平面/07-plane-upgrade-migration.md|控制平面升级与迁移策略]]
+- [[集群基础/控制平面/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案]]
+- [[集群基础/控制平面/11-etcd-deep-dive.md|etcd 深度解析]]
+- [[集群基础/控制平面/12-apiserver-deep-dive.md|API Server 深度解析]]
 - [[集群基础/99-production-readiness-operations-guide.md|集群基础 生产就绪运维指南]]
 
 ### 跨域参考

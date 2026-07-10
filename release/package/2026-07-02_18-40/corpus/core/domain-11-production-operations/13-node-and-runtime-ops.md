@@ -356,9 +356,9 @@ df -h /var/lib/containerd
 ### 跨域参考
 
 - [[domain-13-container-runtime/99-production-readiness-operations-guide.md|容器运行时生产就绪运维指南]]
-- [[domain-13-container-runtime/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[domain-10-troubleshooting-diagnostics/00-core-troubleshooting/06-node-notready-diagnosis.md|节点 NotReady 诊断]]
-- [[domain-02-workloads-applications/00-core-workloads/20-kubelet-configuration.md|Kubelet 配置]]
+- [[domain-13-container-runtime/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|节点 NotReady 诊断]]
+- [[domain-02-workloads-applications/核心工作负载/20-kubelet-configuration.md|Kubelet 配置]]
 
 ---
 

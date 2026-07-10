@@ -108,9 +108,9 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - 03-kubeedge-architecture-deployment
 - 12-cluster-deployment-patterns
 - 10-model-deployment-management
-- [[故障诊断/01-resource-troubleshooting/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
-- [[故障诊断/topic-fta/list/deployment-fta.md|Deployment 异常故障树分析]]
-- [[故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[故障诊断/资源排障/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
+- [[故障诊断/FTA故障树/list/deployment-fta.md|Deployment 异常故障树分析]]
+- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
 - [[entities/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
 - [[entities/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
 - [[entities/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
@@ -122,9 +122,9 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|供应链安全、YAML 配置清单与速查表]] — Cross-reference
 - [[entities/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
-- [[工作负载/00-core-workloads/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
-- [[工作负载/00-core-workloads/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
-- [[工作负载/00-core-workloads/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
+- [[工作负载/核心工作负载/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
+- [[工作负载/核心工作负载/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
+- [[工作负载/核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
 - [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[concepts/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[concepts/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference

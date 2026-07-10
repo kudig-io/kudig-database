@@ -70,6 +70,6 @@ Kubernetes Federation（Federation v2/KubeFed）是多集群管理的标准和�
 
 ## Related
 
-- [[系统基础/topic-dictionary/platform-engineering/karmada.md|Karmada]]
-- [[系统基础/topic-dictionary/platform-engineering/open-cluster-management.md|OCM]]
-- [[系统基础/topic-dictionary/scheduling/kubefleet.md|KubeFleet]]
+- [[系统基础/知识字典/platform-engineering/karmada.md|Karmada]]
+- [[系统基础/知识字典/platform-engineering/open-cluster-management.md|OCM]]
+- [[系统基础/知识字典/scheduling/kubefleet.md|KubeFleet]]

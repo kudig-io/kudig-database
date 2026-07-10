@@ -82,11 +82,11 @@ volumes:
 
 ## Related
 
-- [[系统基础/topic-dictionary/storage/persistent-volume.md|Persistent Volume]]
-- [[系统基础/topic-dictionary/storage/persistent-volume-claim.md|Persistent Volume Claim]]
-- [[系统基础/topic-dictionary/storage/storage-class.md|Storage Class]]
-- [[系统基础/topic-dictionary/storage/volume.md|Volume]]
-- [[系统基础/topic-dictionary/storage/hostpath.md|Hostpath]]
+- [[系统基础/知识字典/storage/persistent-volume.md|Persistent Volume]]
+- [[系统基础/知识字典/storage/persistent-volume-claim.md|Persistent Volume Claim]]
+- [[系统基础/知识字典/storage/storage-class.md|Storage Class]]
+- [[系统基础/知识字典/storage/volume.md|Volume]]
+- [[系统基础/知识字典/storage/hostpath.md|Hostpath]]
 
 
 <!-- risk-assessed -->

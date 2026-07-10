@@ -44,7 +44,7 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 
 ## 核心能力
 
-- **控制平面 HA**: 为 [[domain-17-system-foundation/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 提供 VIP
+- **控制平面 HA**: 为 [[domain-17-system-foundation/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] Server 提供 VIP
 - **Service LoadBalancer**: 裸金属 LoadBalancer 实现
 - **ARP/BGP**: 支持 Layer 2 (ARP) 和 Layer 3 (BGP) 模式
 - **Leader 选举**: 基于 Raft 或 Kubernetes Lease 的选举
@@ -88,7 +88,7 @@ kube-vip 为 Kubernetes 集群提供虚拟 IP (VIP) 和负载均衡功能。它�
 - [[entities/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
 - [[skills/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
 - [[entities/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

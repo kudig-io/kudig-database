@@ -87,7 +87,7 @@ cross_refs:
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|
 | **Sidecar 容器** | - | - | Alpha | Beta | Beta | GA | GA | GA | **GA** | init 容器 restartPolicy: Always |
 | **ReadWriteOncePod** | - | - | - | - | **GA** | GA | GA | GA | GA | PVC 单 Pod 独占 |
-| **[[系统基础/topic-dictionary/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]** | - | - | - | - | Beta | **GA** | GA | GA | GA | SchedulingGates |
+| **[[系统基础/知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]** | - | - | - | - | Beta | **GA** | GA | GA | GA | SchedulingGates |
 | **In-Place Pod Resize** | - | - | - | - | Beta | Beta | Beta | Beta | **Alpha** | 原地调整资源 |
 | **PodIndexLabel** | - | - | - | - | - | - | - | - | **GA** | [[StatefulSet|StatefulSet]] 自动标签 |
 | **Job Mutable Scheduling Directives** | - | - | - | - | - | - | - | - | - | 已稳定 |

@@ -1043,7 +1043,7 @@ spec:
 
 - 网络 KUDIG Database — Global MOC
 - [[网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
-- [[网络/00-core-k8s-networking/00-network-in-nutshell.md|00 network in nutshell]]
+- [[网络/K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
 - 网络核心组件
@@ -1063,9 +1063,9 @@ spec:
 
 ## Related
 
-- [[生态参考/topic-index/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/topic-index/network-index.md|Network 网络知识图谱索引]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 
 <!-- risk-assessed -->

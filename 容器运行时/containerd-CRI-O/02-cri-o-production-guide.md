@@ -300,7 +300,7 @@ runtime_type = "vm"
 EOF
 sudo systemctl restart crio
 ```
-在 Pod 中通过 `runtimeClassName: kata` 即可使用 Kata。详见 [[容器运行时/03-containerd-cri-o/03-oci-runtimes-comparison.md|OCI 运行时对比]]。
+在 Pod 中通过 `runtimeClassName: kata` 即可使用 Kata。详见 [[容器运行时/containerd-CRI-O/03-oci-runtimes-comparison.md|OCI 运行时对比]]。
 
 ## 7. 监控与日志
 
@@ -442,10 +442,10 @@ skopeo inspect --tls-verify=false docker://registry.cn-hangzhou.aliyuncs.com/dem
 
 ## 13. 相关文档
 
-- [[容器运行时/03-containerd-cri-o/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[容器运行时/03-containerd-cri-o/03-oci-runtimes-comparison.md|OCI 运行时对比]]
+- [[容器运行时/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[容器运行时/containerd-CRI-O/03-oci-runtimes-comparison.md|OCI 运行时对比]]
 - [[容器运行时/01-containerd-deep-guide.md|containerd 深度指南]]
-- [[工作负载/00-core-workloads/15-container-runtime-interfaces.md|容器运行时接口]]
+- [[工作负载/核心工作负载/15-container-runtime-interfaces.md|容器运行时接口]]
 
 ```
 

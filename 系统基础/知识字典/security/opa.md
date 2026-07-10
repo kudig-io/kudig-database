@@ -85,11 +85,11 @@ deny[msg] {
 
 ## Related
 
-- [[系统基础/topic-dictionary/security/kyverno.md|Kyverno]]
-- [[系统基础/topic-dictionary/security/admission-controller.md|Admission Controller]]
-- [[系统基础/topic-dictionary/security/pod-security-policy.md|Pod Security Policy]]
-- [[系统基础/topic-dictionary/security/rbac.md|RBAC]]
-- [[系统基础/topic-dictionary/security/webhook.md|Webhook]]
+- [[系统基础/知识字典/security/kyverno.md|Kyverno]]
+- [[系统基础/知识字典/security/admission-controller.md|Admission Controller]]
+- [[系统基础/知识字典/security/pod-security-policy.md|Pod Security Policy]]
+- [[系统基础/知识字典/security/rbac.md|RBAC]]
+- [[系统基础/知识字典/security/webhook.md|Webhook]]
 
 
 <!-- risk-assessed -->

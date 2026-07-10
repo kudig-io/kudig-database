@@ -22,6 +22,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/DIALOGUE.md|Dialogue]]
-- [[domain-10-troubleshooting-diagnostics/topic-skills/skill-set/k8s-ingress-gateway/SKILL.md|Skill]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md|Dialogue]]
+- [[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|Skill]]
 

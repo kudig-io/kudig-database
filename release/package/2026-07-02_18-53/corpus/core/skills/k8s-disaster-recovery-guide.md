@@ -48,9 +48,9 @@ prerequisites:
 
 五层架构 ^[inferred]：
 
-- **生产环境**：Kubernetes 集群 + [[domain-17-system-foundation/topic-dictionary/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
+- **生产环境**：Kubernetes 集群 + [[domain-17-system-foundation/知识字典/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
 - **备份层**：Velero 备份工具 + 定时备份任务
-- **存储层**：S3/OSS 对象存储 + [[domain-17-system-foundation/topic-dictionary/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
+- **存储层**：S3/OSS 对象存储 + [[domain-17-system-foundation/知识字典/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
 - **恢复层**：Velero Restore 任务 + 集群恢复 + 数据恢复
 - **灾备环境**：灾备集群 + 灾备数据
 

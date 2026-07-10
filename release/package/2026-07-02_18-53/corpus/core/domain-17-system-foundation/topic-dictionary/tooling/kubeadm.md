@@ -79,11 +79,11 @@ kubeadm init → 生成证书 → 启动 etcd → 启动 API Server →
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectl.md|Kubectl]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubectx.md|Kubectx]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/kubens.md|Kubens]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/k9s.md|K9S]]
-- [[domain-17-system-foundation/topic-dictionary/tooling/stern.md|Stern]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectl.md|Kubectl]]
+- [[domain-17-system-foundation/知识字典/tooling/kubectx.md|Kubectx]]
+- [[domain-17-system-foundation/知识字典/tooling/kubens.md|Kubens]]
+- [[domain-17-system-foundation/知识字典/tooling/k9s.md|K9S]]
+- [[domain-17-system-foundation/知识字典/tooling/stern.md|Stern]]
 
 
 <!-- risk-assessed -->

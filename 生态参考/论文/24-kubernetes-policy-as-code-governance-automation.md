@@ -1996,7 +1996,7 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 
 - research/ — tag hub
 
-- [[生态参考/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

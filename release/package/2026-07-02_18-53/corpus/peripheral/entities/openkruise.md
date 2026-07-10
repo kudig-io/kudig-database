@@ -84,11 +84,11 @@ OpenKruise 是 Kubernetes 的增强工作负载套件，提供高级部署、原
 - [[entities/statefulset.md|statefulset]] — StatefulSet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/topic-fta/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
+- [[domain-10-troubleshooting-diagnostics/FTA故障树/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
 - openkruise
 - [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/openkruise-index.md|OpenKruise 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

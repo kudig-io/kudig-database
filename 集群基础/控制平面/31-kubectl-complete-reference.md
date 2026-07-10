@@ -1166,7 +1166,7 @@ kubectl attach job/batch-processor -n production
 
 ### 6.6 kubectl debug
 
-> 完整深度指南请参考 → [[集群基础/05-kubectl/03-kubectl-debug-ephemeral-containers|kubectl debug 深度指南]]（ephemeral 容器注入、节点调试、Pod 复制调试、Profile 调试及生产故障排查工作流）
+> 完整深度指南请参考 → [[集群基础/kubectl/03-kubectl-debug-ephemeral-containers|kubectl debug 深度指南]]（ephemeral 容器注入、节点调试、Pod 复制调试、Profile 调试及生产故障排查工作流）
 
 **语法格式:**
 ``` bash
@@ -2209,7 +2209,7 @@ kubectl plugin list --name-only
 - 32-kubeadm-cluster-lifecycle
 - 32-kubeadm-upgrade-complete-guide
 
-- [[平台工程/topic-code-analysis/deployment-create/01-overview.md|01-overview]]
-- [[平台工程/topic-code-analysis/cluster-delete/01-overview.md|01-overview]]
+- [[平台工程/代码分析/deployment-create/01-overview.md|01-overview]]
+- [[平台工程/代码分析/cluster-delete/01-overview.md|01-overview]]
 
 <!-- risk-assessed -->

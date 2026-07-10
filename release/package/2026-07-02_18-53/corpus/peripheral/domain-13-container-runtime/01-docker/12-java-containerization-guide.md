@@ -877,7 +877,7 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ```
 

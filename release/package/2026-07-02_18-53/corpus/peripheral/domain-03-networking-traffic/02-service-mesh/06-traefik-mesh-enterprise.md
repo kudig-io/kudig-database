@@ -1125,7 +1125,7 @@ kubectl get endpoints -n production
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -79,9 +79,9 @@ prerequisites:
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
 | [pod-fta.md](pod-fta.md) | 58.8 KB | Pod 全生命周期异常（调度/镜像/运行时/健康检查/网络/存储/安全/节点/控制面） | ~80 |
-| [deployment-fta.md]([[故障诊断/topic-fta/list/deployment-fta.md|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
-| [statefulset-fta.md]([[故障诊断/topic-fta/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
-| [daemonset-fta.md]([[故障诊断/topic-fta/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
+| [deployment-fta.md]([[故障诊断/FTA故障树/list/deployment-fta.md|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
+| [statefulset-fta.md]([[故障诊断/FTA故障树/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
+| [daemonset-fta.md]([[故障诊断/FTA故障树/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
 | [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
 
 ### 2. 网络与流量
@@ -90,10 +90,10 @@ prerequisites:
 |:---|---:|:---|:---:|
 | [dns-fta.md](dns-fta.md) | 24.2 KB | CoreDNS/集群 DNS/外部 DNS 解析/缓存/NXDOMAIN | ~28 |
 | [service-fta.md](service-fta.md) | 25.9 KB | Service 类型/Endpoints/kube-proxy/负载均衡/会话亲和 | ~30 |
-| [ingress-fta.md]([[故障诊断/topic-fta/list/ingress-fta.md|ingress-fta]].md) | 26.3 KB | Ingress Controller/TLS 终止/路由/后端健康/注解 | ~30 |
-| [networkpolicy-fta.md]([[故障诊断/topic-fta/list/networkpolicy-fta.md|networkpolicy-fta]].md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
-| [gateway-api-fta.md]([[故障诊断/topic-fta/list/gateway-api-fta.md|gateway-api-fta]].md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
-| [terway-fta.md]([[故障诊断/topic-fta/list/terway-fta.md|terway-fta]].md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
+| [ingress-fta.md]([[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]].md) | 26.3 KB | Ingress Controller/TLS 终止/路由/后端健康/注解 | ~30 |
+| [networkpolicy-fta.md]([[故障诊断/FTA故障树/list/networkpolicy-fta.md|networkpolicy-fta]].md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
+| [gateway-api-fta.md]([[故障诊断/FTA故障树/list/gateway-api-fta.md|gateway-api-fta]].md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
+| [terway-fta.md]([[故障诊断/FTA故障树/list/terway-fta.md|terway-fta]].md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
 
 ### 3. 控制面组件
 
@@ -101,7 +101,7 @@ prerequisites:
 |:---|---:|:---|:---:|
 | [apiserver-fta.md](apiserver-fta.md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
 | [scheduler-fta.md](scheduler-fta.md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
-| [controller-manager-fta.md]([[故障诊断/topic-fta/list/controller-manager-fta.md|controller-manager-fta]].md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
+| [controller-manager-fta.md]([[故障诊断/FTA故障树/list/controller-manager-fta.md|controller-manager-fta]].md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
 | [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
 
 ### 4. 存储
@@ -184,11 +184,11 @@ prerequisites:
 - [[专项技术/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - [[发布变更/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance)]]
 - [[系统基础/README.md|Domain 31 - 硬件基础设施]]
-- [[故障诊断/topic-febm/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/tools/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[故障诊断/topic-structural-trouble-shooting/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/topic-fta/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/topic-fta/list/README.md|FTA 故障树清单索引]]
+- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
+- [[故障诊断/工具/README.md|Domain-12 故障排查工具套件使用说明]]
+- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
+- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[故障诊断/FTA故障树/list/README.md|FTA 故障树清单索引]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
@@ -196,19 +196,19 @@ prerequisites:
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/operate/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/topic-index/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/topic-index/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/topic-index/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/topic-index/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/topic-index/higress-index.md|Higress 知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

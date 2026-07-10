@@ -95,7 +95,7 @@ Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSe
 | 05 | [Job批处理](./05-job-batch-processing.md) | 批处理任务、定时任务、并行处理 | ⭐⭐⭐⭐ |
 | 06 | [CronJob定时任务](./06-cronjob-scheduled-tasks.md) | 定时调度、任务管理、失败处理 | ⭐⭐⭐⭐ |
 | 07 | [ReplicaSet管理](./07-replicaset-management.md) | 副本管理、标签选择器、扩缩容 | ⭐⭐⭐⭐ |
-| 08 | [[系统基础/topic-dictionary/workloads/replicationcontroller.md|ReplicationController]]](./08-replicationcontroller.md) | 传统副本控制器、迁移指南 | ⭐⭐⭐ |
+| 08 | [[系统基础/知识字典/workloads/replicationcontroller.md|ReplicationController]]](./08-replicationcontroller.md) | 传统副本控制器、迁移指南 | ⭐⭐⭐ |
 
 ### 高级配置 (09-16)
 | # | 文档 | 关键内容 | 重要程度 |

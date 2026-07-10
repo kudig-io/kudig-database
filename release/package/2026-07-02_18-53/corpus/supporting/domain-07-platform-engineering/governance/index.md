@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-07-platform-engineering/governance/03-capacity-planning-resource-assessment.md|Capacity Planning Resource Assessment]]
-- [[domain-07-platform-engineering/governance/04-performance-benchmarking-tuning.md|Performance Benchmarking Tuning]]
-- [[domain-07-platform-engineering/governance/09-cost-optimization-finops.md|Cost Optimization Finops]]
-- [[domain-07-platform-engineering/governance/10-security-compliance.md|Security Compliance]]
-- [[domain-07-platform-engineering/governance/14-large-scale-cluster-optimization.md|Large Scale Cluster Optimization]]
-- [[domain-07-platform-engineering/governance/17-multi-tenant-management.md|Multi Tenant Management]]
+- [[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|Capacity Planning Resource Assessment]]
+- [[domain-07-platform-engineering/治理/04-performance-benchmarking-tuning.md|Performance Benchmarking Tuning]]
+- [[domain-07-platform-engineering/治理/09-cost-optimization-finops.md|Cost Optimization Finops]]
+- [[domain-07-platform-engineering/治理/10-security-compliance.md|Security Compliance]]
+- [[domain-07-platform-engineering/治理/14-large-scale-cluster-optimization.md|Large Scale Cluster Optimization]]
+- [[domain-07-platform-engineering/治理/17-multi-tenant-management.md|Multi Tenant Management]]
 

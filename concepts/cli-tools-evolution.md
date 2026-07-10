@@ -154,7 +154,7 @@ Kustomize 提供声明式的配置定制，已集成到 kubectl。
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[helm]] — Helm
 
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[系统基础/速查卡/k8s.md|k8s]]
 - [[ko|ko]]
 
 <!-- risk-assessed -->

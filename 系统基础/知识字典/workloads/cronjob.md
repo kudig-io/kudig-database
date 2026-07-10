@@ -232,7 +232,7 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 
 - [Job/CronJob 高级用法](../../工作负载/05-job-cronjob-advanced.md)
 - [已完成 Job 自动清理](./automatic-cleanup-for-finished-jobs.md)
-- [Job/CronJob 故障树分析 (FTA)](../../故障诊断/topic-fta/list/job-cronjob-fta.md)
+- [Job/CronJob 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/job-cronjob-fta.md)
 - [工作负载管理总览](./workload-management.md)
 - [工作负载故障排查手册](../../工作负载/07-workload-troubleshooting-handbook.md)
 
@@ -241,9 +241,9 @@ kubectl logs job/$(kubectl get jobs -n prod -l app=db-backup --sort-by=.status.s
 
 ## Related
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[系统基础/知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[系统基础/知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[系统基础/知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

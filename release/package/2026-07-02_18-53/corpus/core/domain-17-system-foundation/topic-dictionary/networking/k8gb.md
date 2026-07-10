@@ -66,6 +66,6 @@ K8GB（Kubernetes Global Balancer）是 CNCF Sandbox 项目，实现跨多个 Ku
 
 ## Related
 
-- [[domain-17-system-foundation/topic-dictionary/networking/consul.md|Consul]]
-- [[domain-17-system-foundation/topic-dictionary/networking/linkerd.md|Linkerd]]
-- [[domain-17-system-foundation/topic-dictionary/operations/flagger.md|Flagger]]
+- [[domain-17-system-foundation/知识字典/networking/consul.md|Consul]]
+- [[domain-17-system-foundation/知识字典/networking/linkerd.md|Linkerd]]
+- [[domain-17-system-foundation/知识字典/operations/flagger.md|Flagger]]

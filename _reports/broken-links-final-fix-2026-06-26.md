@@ -40,12 +40,12 @@ last_updated: 2026-06-26
 | `_reports/broken-links-round3-fix-2026-06-26.md` | `[[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
 | `_reports/broken-links-round3-fix-2026-06-26.md` | `[[sidecar-containers`]]` |
 | `_reports/report-journal-links-converted-2026-06-26.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` |
-| `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `[[平台工程/topic-code-analysis/MOC`]]` |
+| `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `[[平台工程/代码分析/MOC`]]` |
 | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `[[basename` → `path/basename`
 - AI基础设施/ — 修复 ~150 个文件中的 150+ 嵌套链接
 - 应用模式/ — 修复 ~90 个文件中的 450+ 嵌套链接
-- 故障诊断/topic-fta/ — 修复 ~30 个文件中的 140+ 嵌套链接
-- 故障诊断/topic-febm/ — 修复 ~10 个文件中的 45+ 嵌套链接
+- 故障诊断/FTA故障树/ — 修复 ~30 个文件中的 140+ 嵌套链接
+- 故障诊断/FEBM方法论/ — 修复 ~10 个文件中的 45+ 嵌套链接
 - 生产运维/topic-best-practices/migration/ — 修复 ~10 个文件中的 40+ 嵌套链接
 - 其他 domain 文件 — 修复 ~50 个文件中的 115+ 嵌套链接]]` |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `[[entities/kudig-prompts-catalog.md|kudig prompts catalog]]` |
@@ -113,19 +113,19 @@ last_updated: 2026-06-26
 | `entities/slimtoolkit.md` | `[[entities/oscal-compass.md|oscal compass]]` |
 | `entities/flatcar.md` | `[[entities/serverless-devs.md|serverless devs]]` |
 | `entities/cncf-edge-ai.md` | `[[entities/serverless-devs.md|serverless devs]]` |
-| `生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md` | `[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
+| `生产运维/ticket-cases/ticket-case-040-node-diskpressure-eviction.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
 | `生产运维/ticket-cases/ticket-case-007-hpa-metrics-server-down.md` | `[[concepts/autoscaling-strategies.md|autoscaling strategies]]` |
-| `生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md` | `[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
-| `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | `[[生产运维/ticket-cases/ticket-case-013-configmap-secret-update-not-effective.md|ticket case 013 configmap secret update not effective]]` |
+| `生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
+| `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | `[[生产运维/工单案例/ticket-case-013-configmap-secret-update-not-effective.md|ticket case 013 configmap secret update not effective]]` |
 | `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | `[[concepts/service-networking.md|service networking]]` |
 | `生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md` | `[[skills/kubelet-certificate-rotation.md|kubelet certificate rotation]]` |
-| `生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md` | `[[生产运维/ticket-cases/ticket-case-020-cluster-autoscaler-scale-failure.md|ticket case 020 cluster autoscaler scale failure]]` |
+| `生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md` | `[[生产运维/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md|ticket case 020 cluster autoscaler scale failure]]` |
 | `生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md` | `[[concepts/autoscaling-strategies.md|autoscaling strategies]]` |
 | `生产运维/ticket-cases/ticket-case-015-prometheus-data-loss-slow-query.md` | `[[concepts/bp-observability.md|bp observability]]` |
-| `生产运维/ticket-cases/ticket-case-018-node-diskpressure.md` | `[[生产运维/ticket-cases/ticket-case-014-node-disk-pressure.md|ticket case 014 node disk pressure]]` |
+| `生产运维/ticket-cases/ticket-case-018-node-diskpressure.md` | `[[生产运维/工单案例/ticket-case-014-node-disk-pressure.md|ticket case 014 node disk pressure]]` |
 | `生产运维/ticket-cases/ticket-case-006-image-pull-acr-timeout.md` | `[[skills/deployment-rolling-update.md|deployment rolling update]]` |
-| `生产运维/ticket-cases/ticket-case-022-pod-pending-resource-taint-affinity.md` | `[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
-| `生产运维/ticket-cases/ticket-case-035-node-diskpressure-eviction.md` | `[[生产运维/ticket-cases/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
+| `生产运维/ticket-cases/ticket-case-022-pod-pending-resource-taint-affinity.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
+| `生产运维/ticket-cases/ticket-case-035-node-diskpressure-eviction.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
 | `故障诊断/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md` | `[[entities/inspektor-gadget.md|inspektor gadget]]` |
 | `_reports/quality/QUALITY_REPORT.md` | `_reports/execution-plan.md` |
 | `_reports/quality/QUALITY_REPORT.md` | `_reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md` |

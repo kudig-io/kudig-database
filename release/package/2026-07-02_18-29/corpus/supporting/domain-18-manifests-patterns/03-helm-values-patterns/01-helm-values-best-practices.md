@@ -788,8 +788,8 @@ yamllint values/prod.yaml
 
 ## Related
 
-- [[domain-18-manifests-patterns/03-helm-values-patterns/02-helm-hooks-lifecycle|Helm Hooks 生命周期]]
-- [[domain-18-manifests-patterns/03-helm-values-patterns/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
+- [[domain-18-manifests-patterns/Helm值模式/02-helm-hooks-lifecycle|Helm Hooks 生命周期]]
+- [[domain-18-manifests-patterns/Helm值模式/03-helm-library-charts-reuse|Helm Library Chart 复用模式]]
 
 ## See Also
 
