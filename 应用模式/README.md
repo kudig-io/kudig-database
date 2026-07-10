@@ -32,53 +32,34 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 ---
+# 应用模式 Application Patterns
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+> 子模式、行业架构与生产模式。
 
+## 二级子目录
 
+- [[应用模式/子模式/README.md|子模式]]
+- [[应用模式/生产模式/README.md|生产模式]]
+- [[应用模式/行业架构/README.md|行业架构]]
 
+## 跨域导航
 
-# Application Patterns
-
-原 应用模式 的业务应用架构参考库，涵盖电商、小程序、IM、教育等场景架构。
-
-## 目录结构
-
-| 子目录 | 内容 |
-|---|---|
-| `topic-production-patterns/` | 生产级应用运维模式：Pod 可用性、资源 QoS、调度分布、状态应用、渐进交付、应用排障 |
-| `topic-application-architecture/` | 垂直行业参考架构：电商、小程序、CMS、IM/RTC、在线教育、金融科技、IoT、游戏等 |
-| `sub-patterns/` | 微服务设计模式：服务分解、CQRS、Saga、Sidecar、弹性与混沌 |
-
-## 与其他 Domain 的关系
-
-- [[工作负载/README.md|工作负载]] — 工作负载选型
-- [[网络/README.md|网络]] — 服务网格
-
-## Related
-
-- Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- networking|发布说明索引 — 网络]] — Cross-reference
-- 网络 KUDIG Database — Global MOC — Cross-reference
-- Topic 应用层架构设计最佳实践 — Cross-reference
-- topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|[[Kubernetes 通用最佳实践参考|Kubernetes 通用最佳实践参考]]]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
-- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
-
-<!-- risk-assessed -->
+- [[AI基础设施/README.md|AI基础设施]]
+- [[专项技术/README.md|专项技术]]
+- [[云厂商/README.md|云厂商]]
+- [[发布变更/README.md|发布变更]]
+- [[可观测性/README.md|可观测性]]
+- [[可靠性/README.md|可靠性]]
+- [[存储/README.md|存储]]
+- [[安全/README.md|安全]]
+- [[容器运行时/README.md|容器运行时]]
+- [[工作负载/README.md|工作负载]]
+- [[平台工程/README.md|平台工程]]
+- [[故障诊断/README.md|故障诊断]]
+- [[数据库中间件/README.md|数据库中间件]]
+- [[清单模式/README.md|清单模式]]
+- [[生产运维/README.md|生产运维]]
+- [[生态参考/README.md|生态参考]]
+- [[系统基础/README.md|系统基础]]
+- [[网络/README.md|网络]]
+- [[集群基础/README.md|集群基础]]

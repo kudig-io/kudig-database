@@ -35,62 +35,42 @@ prerequisites:
 - troubleshooting-methodology
 - gpu-scheduling-basics
 ---
+# 故障诊断 Troubleshooting
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+> 资源/基础设施/高级/核心排障、JVM/性能调优、FEBM 方法论、FTA 故障树、技能体系与多故障场景。
 
+## 二级子目录
 
+- [[故障诊断/FEBM方法论/README.md|FEBM方法论]]
+- [[故障诊断/FTA故障树/README.md|FTA故障树]]
+- [[故障诊断/JVM调优/README.md|JVM调优]]
+- [[故障诊断/QA语料/README.md|QA语料]]
+- [[故障诊断/基础设施排障/README.md|基础设施排障]]
+- [[故障诊断/多故障场景/README.md|多故障场景]]
+- [[故障诊断/工具/README.md|工具]]
+- [[故障诊断/技能体系/README.md|技能体系]]
+- [[故障诊断/核心排障/README.md|核心排障]]
+- [[故障诊断/资源排障/README.md|资源排障]]
+- [[故障诊断/高级排障/README.md|高级排障]]
 
+## 跨域导航
 
-# Troubleshooting & Diagnostics
-
-整合原 故障诊断 的全链路排障知识，完整保留 topic-febm、topic-fta、topic-structural-trouble-shooting 和 tools 子目录结构。
-
-## 目录结构
-
-| 子目录 | 内容 |
-|---|---|
-| 00-core-troubleshooting/ | 核心排障方法论与通用流程 |
-| 01-resource-troubleshooting/ | 资源层排障（Pod/Node/存储/CronJob） |
-| 02-infrastructure-troubleshooting/ | 基础设施排障（网络/DNS/控制面） |
-| 03-advanced-troubleshooting/ | 高级排障（症状映射、版本问题、云厂商） |
-| 04-jvm-tuning/ | JVM 调优与 Java 应用排障 |
-| topic-febm/ | FEBM 问题事件基础模型 |
-| topic-fta/ | FTA 故障树分析（44 组件故障树，推理骨架） |
-| topic-skills/ | 诊断-修复 Skill 集（17 个场景化诊断流程） |
-| topic-structural-trouble-shooting/ | 结构化排障框架（按组件域分类） |
-| topic-multi-fault-scenarios/ | 多故障并发场景 |
-| topic-qa-corpus/ | 问答语料库 |
-| tools/ | 排障工具集合 |
-
-## 与其他 Domain 的关系
-
-- observability/README.md|可观测性]] — 监控与告警
-- [[安全/README.md|安全]] — 安全事件响应
-
-## Related
-
-- Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- networking|发布说明索引 — 网络]] — Cross-reference
-- 网络 MOC — Cross-reference
-- Topic 应用层架构设计最佳实践 — Cross-reference
-- topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
-- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
-
-<!-- risk-assessed -->
+- [[AI基础设施/README.md|AI基础设施]]
+- [[专项技术/README.md|专项技术]]
+- [[云厂商/README.md|云厂商]]
+- [[发布变更/README.md|发布变更]]
+- [[可观测性/README.md|可观测性]]
+- [[可靠性/README.md|可靠性]]
+- [[存储/README.md|存储]]
+- [[安全/README.md|安全]]
+- [[容器运行时/README.md|容器运行时]]
+- [[工作负载/README.md|工作负载]]
+- [[平台工程/README.md|平台工程]]
+- [[应用模式/README.md|应用模式]]
+- [[数据库中间件/README.md|数据库中间件]]
+- [[清单模式/README.md|清单模式]]
+- [[生产运维/README.md|生产运维]]
+- [[生态参考/README.md|生态参考]]
+- [[系统基础/README.md|系统基础]]
+- [[网络/README.md|网络]]
+- [[集群基础/README.md|集群基础]]
