@@ -352,8 +352,8 @@ cat /proc/sys/net/netfilter/nf_conntrack_count
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/networking.md|networking]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[concepts/service-networking.md|service-networking]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[概念/service-networking.md|service-networking]]
+- [[实体/kubernetes.md|kubernetes]]
 
 
 <!-- risk-assessed -->

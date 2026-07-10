@@ -160,7 +160,7 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: topology.[[entities/kubernetes.md|kubernetes]].io/zone
+          - key: topology.[[实体/kubernetes.md|kubernetes]].io/zone
             operator: In
             values: ["us-east-1a", "us-east-1b"]
     podAntiAffinity:

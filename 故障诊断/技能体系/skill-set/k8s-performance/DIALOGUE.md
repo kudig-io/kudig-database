@@ -17,11 +17,11 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/etcd.md]]'
+- target: '[[实体/etcd.md]]'
   type: uses
-- target: '[[entities/istio.md]]'
+- target: '[[实体/istio.md]]'
   type: uses
 ---
 
@@ -262,7 +262,7 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 同时请确认：
 1. 延迟高是发生在 Pod 到 Service、Pod 到 Pod，还是 Pod 到外部服务？
-2. 是否使用了 Service Mesh（[[entities/istio.md|Istio]] / Linkerd）？如果是，请检查 sidecar 资源使用
+2. 是否使用了 Service Mesh（[[实体/istio.md|Istio]] / Linkerd）？如果是，请检查 sidecar 资源使用
 3. 节点网络带宽使用率是否接近上限？"
 
 #### 分支 2.5：应用级性能问题（非基础设施瓶颈）
@@ -536,7 +536,7 @@ kubectl annotate service <service-name> service.kubernetes.io/topology-mode=Auto
 - **多个节点同时资源饱和**（CPU > 90% 或内存 > 95%），且无法快速扩容
 - **集群级别资源耗尽**，新 Pod 无法调度
 - **性能问题伴随节点 NotReady** 或 Pod 频繁驱逐，呈扩散趋势
-- **磁盘 IO 饱和导致 [[entities/etcd.md|etcd]] 响应慢**，影响整个集群稳定性
+- **磁盘 IO 饱和导致 [[实体/etcd.md|etcd]] 响应慢**，影响整个集群稳定性
 
 ### 🟠 建议升级（P1）
 
@@ -555,7 +555,7 @@ kubectl annotate service <service-name> service.kubernetes.io/topology-mode=Auto
 
 ### 升级话术
 
-顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
+顾问："当前情况已超出本 [[技能/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
 
 **请执行以下操作**：
 1. 通知值班经理 / 高级 SRE 团队 / 应用开发团队
@@ -661,12 +661,12 @@ aliyun ess ExecuteScalingRule --ScalingRuleId <rule-id>
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-09-01-gpu-memory-leak.md|2026-09-01-gpu-memory-leak]]
-- [[concepts/case-studies/2026-10-05-节点内核参数不一致导致sysctl配置冲突.md|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
+- [[概念/case-studies/2026-09-01-gpu-memory-leak.md|2026-09-01-gpu-memory-leak]]
+- [[概念/case-studies/2026-10-05-节点内核参数不一致导致sysctl配置冲突.md|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
 ## Related
 
-- [[entities/deployment.md|Deployment]]
-- [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
+- [[实体/deployment.md|Deployment]]
+- [[实体/kubernetes.md|Kubernetes (CNCF Graduated)]]
 
 
 <!-- risk-assessed -->

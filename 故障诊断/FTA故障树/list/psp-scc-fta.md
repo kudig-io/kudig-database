@@ -160,25 +160,25 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
 - [[gpu-fta]] — GPU 异常故障树分析
-- [[skills/ts-workloads.md|ts-workloads]] — 工作负载故障排查
+- [[技能/ts-workloads.md|ts-workloads]] — 工作负载故障排查
 - [[pdb-fta]] — PDB 异常故障树分析
-- [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
+- [[技能/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[opa]] — OPA (Open Policy Agent)
 
 - [[故障诊断/FTA故障树/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
-- [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
+- [[技能/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
 - [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/FTA故障树/list/psp-scc-fta.md|Psp-Scc FTA 完整版]]
+> [[归档/troubleshooting-diagnostics/FTA故障树/list/psp-scc-fta.md|Psp-Scc FTA 完整版]]
 
 
 <!-- risk-assessed -->

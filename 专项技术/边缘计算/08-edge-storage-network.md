@@ -77,7 +77,7 @@ Edge computing presents unique challenges for storage and networking: limited de
 1. [边缘存储架构总览](#1-边缘存储架构总览)
 2. [本地存储方案](#2-本地存储方案)
 3. [边缘分布式存储](#3-边缘分布式存储)
-4. [[entities/kubernetes.md|Kubernetes]] 边缘存储](#4-kubernetes-边缘存储)
+4. [[实体/kubernetes.md|Kubernetes]] 边缘存储](#4-kubernetes-边缘存储)
 5. [弱网络优化策略](#5-弱网络优化策略)
 6. [离线数据同步](#6-离线数据同步)
 7. [断线重连机制](#7-断线重连机制)

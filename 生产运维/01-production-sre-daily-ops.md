@@ -81,7 +81,7 @@ status: reviewed
 2. **初步判断**：根据现象定位问题域（节点/Pod/网络/存储）
 3. **信息收集**：收集日志、指标、事件，联系相关团队
 4. **决策执行**：根据预案执行回滚或修复操作
-5. **事后复盘**：记录根因，更新 [[可靠性/事后复盘/02-postmortem-culture-guide.md|postmortem]] 和 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
+5. **事后复盘**：记录根因，更新 [[可靠性/事后复盘/02-postmortem-culture-guide.md|postmortem]] 和 [[概念/KUDIG Knowledge Base Architecture.md|knowledge-base]]
 
 ## 变更管理流程
 
@@ -112,7 +112,7 @@ status: reviewed
 
 - 阿里云组件升级公告订阅
 - 升级前在测试集群验证兼容性
-- 升级后检查 [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本匹配
+- 升级后检查 [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本匹配
 
 ## 远程顾问指导要点
 
@@ -131,7 +131,7 @@ status: reviewed
 ## 相关链接
 
 - [[node-notready]] — 节点异常的排查方法
-- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
+- [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
 - [[生产运维/02-change-management-guide.md|change-management-guide]] — 变更管理的详细流程
 - [[生产运维/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
 

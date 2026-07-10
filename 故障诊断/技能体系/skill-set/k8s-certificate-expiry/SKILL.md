@@ -198,11 +198,11 @@ last_updated: 2026-05-23
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[skills/ts-control-plane.md|ts control plane]]
+- [[技能/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 
-- [[skills/best-practices/scenarios/security-incident.md|security incident]]
+- [[技能/best-practices/scenarios/security-incident.md|security incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -286,7 +286,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Kubernetes 组件证书签发、轮转与过期管理
+- [[概念/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Kubernetes 组件证书签发、轮转与过期管理
 
 ```
 

@@ -49,7 +49,7 @@ version: 1.0.0
 
 # 故障排查实验考核
 
-> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33 | **时间**: 90 分钟
+> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[实体/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33 | **时间**: 90 分钟
 
 ---
 

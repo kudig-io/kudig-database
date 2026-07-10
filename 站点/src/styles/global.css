@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #0f172a;
+    --color-card: #1e293b;
+    --color-border: #334155;
+    --color-text: #f1f5f9;
+    --color-muted: #94a3b8;
+    --color-primary: #3b82f6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-kudig-dark text-kudig-text antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+
+  /* Code blocks */
+  pre {
+    @apply rounded-lg p-4 overflow-x-auto;
+  }
+  code {
+    @apply font-mono text-sm;
+  }
+  :not(pre) > code {
+    @apply bg-kudig-card px-1.5 py-0.5 rounded text-primary-300;
+  }
+
+  /* Typography */
+  .prose {
+    @apply text-kudig-text;
+  }
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply text-kudig-text font-bold;
+  }
+  .prose h1 {
+    @apply text-3xl mb-6 pb-4 border-b border-kudig-border;
+  }
+  .prose h2 {
+    @apply text-2xl mt-8 mb-4;
+  }
+  .prose h3 {
+    @apply text-xl mt-6 mb-3;
+  }
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+  .prose ul {
+    @apply list-disc;
+  }
+  .prose ol {
+    @apply list-decimal;
+  }
+  .prose li {
+    @apply mb-1;
+  }
+  .prose a {
+    @apply text-primary-400 hover:text-primary-300 underline underline-offset-2;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-primary-500 pl-4 py-2 my-4 bg-kudig-card rounded-r;
+  }
+  .prose table {
+    @apply w-full border-collapse mb-4;
+  }
+  .prose th, .prose td {
+    @apply border border-kudig-border px-3 py-2 text-left;
+  }
+  .prose th {
+    @apply bg-kudig-card font-semibold;
+  }
+  .prose tr:nth-child(even) {
+    @apply bg-kudig-dark/50;
+  }
+  .prose hr {
+    @apply border-kudig-border my-8;
+  }
+}
+
+@layer components {
+  .domain-card {
+    @apply bg-kudig-card border border-kudig-border rounded-xl p-6 
+           hover:border-primary-500/50 transition-all duration-300
+           hover:shadow-lg hover:shadow-primary-500/10;
+  }
+
+  .nav-link {
+    @apply text-kudig-muted hover:text-kudig-text transition-colors
+           px-3 py-2 rounded-lg hover:bg-kudig-card;
+  }
+
+  .nav-link.active {
+    @apply text-primary-400 bg-primary-500/10;
+  }
+
+  .sidebar-link {
+    @apply block text-sm text-kudig-muted hover:text-kudig-text 
+           transition-colors py-1 px-2 rounded hover:bg-kudig-card/50;
+  }
+
+  .sidebar-link.active {
+    @apply text-primary-400 bg-primary-500/10;
+  }
+}

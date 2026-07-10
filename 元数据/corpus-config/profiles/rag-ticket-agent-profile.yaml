@@ -1,0 +1,155 @@
+# 工单智能体语料配置（阿里云专有云版）
+# 用途：构建面向阿里云专有云 K8s 运维工单的智能 Agent
+# 核心原则：
+#   1. 优先摄入工单闭环样本（ticket-cases）
+#   2. 优先摄入阿里云/专有云相关内容
+#   3. 核心 Skill 和 FTA 作为诊断骨架
+#   4. 排除培训、讲师、演示等低信噪比内容
+
+name: ticket-agent-apsara-stack
+description: "面向阿里云专有云 K8s 运维工单智能体的语料配置"
+use_case: "工单分类、诊断推理、修复建议、客户回复、升级判断"
+
+# 第一层：工单闭环样本（最高优先级）
+ticket_cases:
+  - path: 生产运维/ticket-cases/
+    priority: critical
+    chunking: by_section
+    note: "工单描述 → 分类 → 诊断 → 修复 → 验证 → 回复，最贴近工单场景"
+
+# 第二层：工单处理专属知识
+workflow:
+  - path: 生产运维/ticket-routing-rules.md
+    priority: critical
+    chunking: by_h2
+  - path: 生产运维/escalation-playbook.md
+    priority: critical
+    chunking: by_h2
+  - path: 生产运维/reply-templates/
+    priority: high
+    chunking: by_section
+
+# 第三层：核心诊断骨架
+core:
+  - path: 故障诊断/topic-fta/list/
+    priority: critical
+    chunking: by_h3
+    note: "44 个组件故障树，推理骨架"
+  - path: 故障诊断/topic-skills/skill-set/
+    priority: critical
+    chunking: by_section
+    note: "17 个诊断-修复 Skill"
+  - path: 故障诊断/topic-structural-trouble-shooting/
+    priority: high
+    chunking: by_h2
+
+# 第四层：阿里云 / 专有云知识（优先于其他云厂商）
+alibaba_cloud:
+  - path: 云厂商/01-alibaba-cloud/
+    priority: high
+    chunking: by_h2
+  - path: 网络/topic-terway/
+    priority: high
+    chunking: by_h2
+  - path: 存储/01-k8s-storage/
+    priority: high
+    chunking: by_h2
+    note: "云盘 CSI、NAS、OSS 与专有云存储对接"
+
+# 第五层：提炼知识层（concepts/entities/skills）
+distilled:
+  - path: 概念/
+    priority: high
+    chunking: by_h2
+  - path: 技能/
+    priority: high
+    chunking: by_h2
+  - path: 实体/
+    priority: medium
+    chunking: by_h2
+
+# 第六层：源文档层（深度兜底）
+source_docs:
+  - path: 集群基础/
+    priority: medium
+    chunking: by_h2
+  - path: 工作负载/
+    priority: medium
+    chunking: by_h2
+  - path: 网络/
+    priority: medium
+    chunking: by_h2
+  - path: 存储/
+    priority: medium
+    chunking: by_h2
+  - path: 安全/
+    priority: medium
+    chunking: by_h2
+  - path: 可观测性/
+    priority: medium
+    chunking: by_h2
+  - path: 平台工程/
+    priority: medium
+    chunking: by_h2
+  - path: 发布变更/
+    priority: medium
+    chunking: by_h2
+  - path: 可靠性/
+    priority: medium
+    chunking: by_h2
+  - path: 生产运维/
+    priority: medium
+    chunking: by_h2
+  - path: 容器运行时/
+    priority: low
+    chunking: by_h2
+
+# 显式排除
+exclude:
+  # 构建产物与缓存
+  - "*.pdf"
+  - "*.png"
+  - "*.xlsx"
+  - ".git/"
+  - ".ruff_cache/"
+  - ".venv/"
+
+  # 元数据与报告（规划文档自身也不导入语料）
+  - "报告/"
+  - "元数据/"
+  - "_staging/"
+  - "_raw/"
+  - "CHANGELOG.md"
+  - "ENHANCEMENT-RECORD.md"
+  - "QUALITY_REPORT*"
+  - "*.base"
+  - ".obsidian/"
+
+  # 非阿里云云厂商（降低优先级，必要时只保留 overview）
+  - "云厂商/02-aws-eks/"
+  - "云厂商/03-google-cloud-gke/"
+  - "云厂商/04-azure-aks/"
+  - "云厂商/06-tencent-tke/"
+  - "云厂商/07-huawei-cce/"
+  - "云厂商/08-multi-cloud/"
+  - "云厂商/09-ucloud-uk8s/"
+  - "云厂商/10-ibm-iks/"
+
+  # 低信噪比内容
+  - "**/*-archive/"
+  - "**/archive/"
+  - "生产运维/topic-best-practices/"
+  - "生产运维/topic-k8s-lecturer/"
+  - "生产运维/topic-learn/"
+  - "生产运维/topic-presentations/"
+  - "生产运维/topic-publish/"
+  - "生产运维/journal/"
+  - "生产运维/projects/"
+  - "生态参考/topic-release-notes/"
+  - "生态参考/topic-index/"
+  - "生态参考/01-cncf-landscape/sandbox/"
+  - "系统基础/topic-dictionary/"
+  - ".zread/"
+  - ".wiki-meta/"
+  - "归档/"
+  - "元数据/corpus-config/profiles/*.yaml"

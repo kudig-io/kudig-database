@@ -585,8 +585,8 @@ echo "$TOKEN" | cut -d. -f2 | base64 -d | jq .
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/vault.md|vault]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/vault.md|vault]]
 - [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 

@@ -55,7 +55,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[concepts/cronjob.md]]'
+- target: '[[概念/cronjob.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-049-job-cronjob-execution-failure.md]]'
   type: related_to

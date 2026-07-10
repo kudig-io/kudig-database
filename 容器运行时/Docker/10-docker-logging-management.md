@@ -1049,7 +1049,7 @@ print(analyzer.detect_anomalies())
 - [[容器运行时/README.md|[[Docker 容器技术深度解析|Docker 容器技术深度解析]]]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
-- [[entities/docker.md|docker]]
+- [[实体/docker.md|docker]]
 - Docker 容器生命周期管理
 - Docker 网络深度解析
 - Docker 存储与数据卷

@@ -15,11 +15,11 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[entities/etcd.md]]'
+- target: '[[实体/etcd.md]]'
   type: uses
-- target: '[[entities/helm.md]]'
+- target: '[[实体/helm.md]]'
   type: uses
-- target: '[[entities/kubernetes.md]]'
+- target: '[[实体/kubernetes.md]]'
   type: uses
 - target: '[[系统基础/知识字典/networking/service.md]]'
   type: uses
@@ -78,7 +78,7 @@ relationships:
   - 如无法执行：请提供当前可执行的环境信息
 
 ### 分支 3：etcd异常
-- `kubectl exec -it [[entities/etcd.md|etcd]]-<node> -n kube-system -- etcdctl endpoint health`
+- `kubectl exec -it [[实体/etcd.md|etcd]]-<node> -n kube-system -- etcdctl endpoint health`
   > 💬 **顾问确认**：如输出与预期不符，请停止操作并立即反馈。
   - 如无法执行：请提供当前可执行的环境信息
 - `kubectl exec -it etcd-<node> -n kube-system -- etcdctl member list`
@@ -90,7 +90,7 @@ relationships:
 ### 分支 1：apiserver崩溃
 - `journalctl -u kube-apiserver -n 100 --no-pager`
   - 如无法执行：请提供当前可执行的环境信息
-- `检查证书有效期: openssl x509 -in /[[entities/kubernetes.md|kubernetes]]/pki/apiserver.crt -noout -dates`
+- `检查证书有效期: openssl x509 -in /[[实体/kubernetes.md|kubernetes]]/pki/apiserver.crt -noout -dates`
   - 如无法执行：请提供当前可执行的环境信息
 - `如证书过期: kubeadm certs renew all`
   - 如无法执行：请提供当前可执行的环境信息
@@ -410,7 +410,7 @@ kubectl无法连接
 ### 场景：安全策略禁止执行命令
 | 原命令 | 替代方案 A | 替代方案 B | 替代方案 C |
 |:---|:---|:---|:---|
-| 任何 kubectl 命令 | 提供截图和描述 | 审查现有配置文件（[[entities/helm.md|Helm]]） | 转为文档指导和流程确认 |
+| 任何 kubectl 命令 | 提供截图和描述 | 审查现有配置文件（[[实体/helm.md|Helm]]） | 转为文档指导和流程确认 |
 | 修改静态 Pod manifest | 通过 GitOps/Config Management 下发 | 联系有权限的安全管理员 | 使用声明式 API 而非直接修改节点 |
 | etcd 数据操作 | 完全依赖自动化备份恢复流程 | 联系平台团队执行 | 准备重建集群的方案 |
 
@@ -442,7 +442,7 @@ kubectl无法连接
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
+- [[概念/case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
 ## Related
 
 - [[系统基础/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]

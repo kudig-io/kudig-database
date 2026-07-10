@@ -115,8 +115,8 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [apiserver-fta.md]([[skills/apiserver-fta.md|apiserver-fta]].md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
-| [scheduler-fta.md]([[skills/scheduler-fta.md|scheduler-fta]].md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
+| [apiserver-fta.md]([[技能/apiserver-fta.md|apiserver-fta]].md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
+| [scheduler-fta.md]([[技能/scheduler-fta.md|scheduler-fta]].md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
 | [controller-manager-fta.md](controller-manager-fta.md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
 | [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
 
@@ -130,7 +130,7 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [rbac-fta.md]([[skills/rbac-fta.md|rbac-fta]].md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
+| [rbac-fta.md]([[技能/rbac-fta.md|rbac-fta]].md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
 | [certificate-fta.md](certificate-fta.md) | 52.6 KB | 证书签发/轮换/过期/CA 链/cert-manager/TLS | ~60 |
 | [webhook-admission-fta.md](webhook-admission-fta.md) | 50.5 KB | Webhook 超时/TLS/失败策略/副作用/匹配规则 | ~58 |
 | [psp-scc-fta.md](psp-scc-fta.md) | 44.0 KB | PSP/SCC/PSA 策略迁移/安全上下文/特权容器 | ~50 |
@@ -164,7 +164,7 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [helm-fta.md]([[skills/helm-fta.md|helm-fta]].md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
+| [helm-fta.md]([[技能/helm-fta.md|helm-fta]].md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
 | [crd-operator-fta.md](crd-operator-fta.md) | 35.9 KB | CRD 定义/Operator/控制器/Finalizer/版本转换 | ~42 |
 | [gitops-argocd-fta.md](gitops-argocd-fta.md) | 30.4 KB | ArgoCD 同步/漂移/Git 仓库/健康检查/RBAC | ~35 |
 
@@ -305,20 +305,20 @@ cross_refs:
 - [[README]]
 - [[README]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]

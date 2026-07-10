@@ -60,7 +60,7 @@ prerequisites:
 - 06 - Pod安全标准详解
 - 07 - RBAC权限矩阵表
 - 08 - 安全最佳实践表
-- [[entities/kubernetes.md|Kubernetes 安全加固]]
+- [[实体/kubernetes.md|Kubernetes 安全加固]]
 - 证书管理与 TLS 配置
 - 11 - 密钥与敏感信息管理工具
 - 14 - 策略引擎与合规
@@ -72,7 +72,7 @@ prerequisites:
 
 - 01 - NetworkPolicy 深度实践指南
 - 83 - 网络加密与mTLS
-- [[entities/03-containerd-security-hardening.md|03 containerd security hardening]]
+- [[实体/03-containerd-security-hardening.md|03 containerd security hardening]]
 
 ### 术语词典
 

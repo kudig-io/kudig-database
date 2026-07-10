@@ -95,7 +95,7 @@ trigger_keywords:
 - Quota
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/[[skills/resource-quota-fta.md|resource-quota-fta]].md
+  path: ../故障诊断/topic-fta/[[技能/resource-quota-fta.md|resource-quota-fta]].md
   label: '故障树: resource-quota'
 authors:
 - name: KUDIG Team

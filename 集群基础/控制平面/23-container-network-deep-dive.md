@@ -96,7 +96,7 @@ cross_refs:
 2. [CNI 规范详解](#2-cni-规范详解)
 3. [CNI 插件类型](#3-cni-插件类型)
 4. [Calico 深度解析](#4-calico-深度解析)
-5. [[entities/cilium.md|Cilium]] 深度解析](#5-cilium-深度解析)
+5. [[实体/cilium.md|Cilium]] 深度解析](#5-cilium-深度解析)
 6. [其他主流 CNI](#6-其他主流-cni)
 7. [网络策略实现](#7-网络策略实现)
 8. [CNI 配置与调优](#8-cni-配置与调优)
@@ -136,7 +136,7 @@ cross_refs:
 
 | 概念 | 描述 | 作用 |
 |------|------|------|
-| **[[concepts/container-runtime.md|Container Runtime]]** | 容器运行时 ([[containerd|containerd]]/CRI-O) | 调用 CNI 插件 |
+| **[[概念/container-runtime.md|Container Runtime]]** | 容器运行时 ([[containerd|containerd]]/CRI-O) | 调用 CNI 插件 |
 | **CNI Plugin** | 网络插件可执行文件 | 配置容器网络 |
 | **CNI Config** | JSON 配置文件 | 定义网络参数 |
 | **Network Namespace** | 网络命名空间 | 隔离容器网络 |

@@ -55,7 +55,7 @@ TTL-after-finished 控制器为已完成的 Job 对象提供基于生存时间�
 - **配置字段**：在 Job 的 `spec.ttlSecondsAfterFinished` 字段中指定 TTL 秒数。
 
 ## 关键机制或特性
-- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 不保证一定保留该 Job。
+- **动态修改**：可以在 Job 创建后或完成后修改 `ttlSecondsAfterFinished` 字段，但若在原有 TTL 已过期后再延长，[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 不保证一定保留该 Job。
 - **时间偏差敏感**：TTL 控制器依赖 Job 状态中的时间戳判断 TTL 是否到期，集群时钟偏差可能导致清理时间出现偏差。
 - **多种设置方式**：
   - 在 Job 清单中直接声明。

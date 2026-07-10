@@ -84,7 +84,7 @@ related_docs:
 
 # AI基础设施架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [[entities/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA AI Enterprise](https://www.nvidia.com/en-us/data-center/products/ai-enterprise/) | [[实体/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/)
 
 <!-- chunk: AI Infra 全景架构 -->
 ## AI Infra 全景架构

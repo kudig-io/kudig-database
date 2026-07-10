@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # StatefulSet Pod 域名解析失败 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/headless-service.md|Headless Service]]
+> 对应概念：[[概念/headless-service.md|Headless Service]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -242,8 +242,8 @@ kubectl exec <pod-name> -n <namespace> -- nslookup <pod-name>.<svc-name>.<namesp
 
 ## 相关概念
 
-- [[concepts/headless-service.md|Headless Service]]
-- [[concepts/statefulset.md|StatefulSet]]
+- [[概念/headless-service.md|Headless Service]]
+- [[概念/statefulset.md|StatefulSet]]
 
 ## Related
 

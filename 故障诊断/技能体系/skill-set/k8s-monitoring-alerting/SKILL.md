@@ -235,7 +235,7 @@ agent_execution_mode: L2-semi-auto
 
 - k8s-performance
 
-- [[skills/ts-control-plane.md|ts control plane]]
+- [[技能/ts-control-plane.md|ts control plane]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -323,7 +323,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/observability-stack-evolution.md|可观测性技术栈演进]] — 指标、日志、追踪三大支柱的演进与整合
+- [[概念/observability-stack-evolution.md|可观测性技术栈演进]] — 指标、日志、追踪三大支柱的演进与整合
 
 ```
 

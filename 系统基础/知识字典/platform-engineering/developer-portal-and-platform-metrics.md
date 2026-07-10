@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着 [[Kubernetes|Kubernetes]] 和云原生技术栈的复杂度不断上升，**平台工程（[[concepts/platform-engineering-sre.md|Platform Engineering]]）** 正在取代传统的 DevOps 模式，成为企业提升开发者效率和交付速度的核心方法论。**开发者门户（Developer Portal）** 是平台工程的关键载体，它通过自助服务（Self-[[Service|service]]）界面将底层基础设施的复杂性抽象化，让应用开发者能够专注于业务代码。2026 年的主流实现包括 **[[Backstage|Backstage]]（由 Spotify 开源，现由 CNCF 托管）** 和 **Port** 等商业方案。
+随着 [[Kubernetes|Kubernetes]] 和云原生技术栈的复杂度不断上升，**平台工程（[[概念/platform-engineering-sre.md|Platform Engineering]]）** 正在取代传统的 DevOps 模式，成为企业提升开发者效率和交付速度的核心方法论。**开发者门户（Developer Portal）** 是平台工程的关键载体，它通过自助服务（Self-[[Service|service]]）界面将底层基础设施的复杂性抽象化，让应用开发者能够专注于业务代码。2026 年的主流实现包括 **[[Backstage|Backstage]]（由 Spotify 开源，现由 CNCF 托管）** 和 **Port** 等商业方案。
 
 ## 核心概念/原理
 
@@ -227,7 +227,7 @@ kubectl exec -n backstage <pod> -- pg_isready -h <db-host>
 ```
 ## 交叉引用
 
-- [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — Argo [[entities/flux.md|Flux]] 与 Backstage 集成
+- [gitops-and-continuous-delivery.md](./gitops-and-continuous-delivery.md) — Argo [[实体/flux.md|Flux]] 与 Backstage 集成
 - [infrastructure-as-code-for-kubernetes.md](./infrastructure-as-code-for-kubernetes.md) — IaC 自动化与开发者自助服务
 - [cluster-api-and-fleet-management.md](./cluster-api-and-fleet-management.md) — 多集群环境的门户管理
 - [operator-pattern.md](./operator-pattern.md) — 平台能力的 Operator 封装

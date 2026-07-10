@@ -71,7 +71,7 @@ cross_refs:
 
 # 07 - RBAC权限矩阵表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/rbac](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
 <!-- chunk: 内置ClusterRole -->
 ## 内置ClusterRole

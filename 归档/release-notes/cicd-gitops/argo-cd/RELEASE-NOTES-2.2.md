@@ -1,0 +1,113 @@
+---
+title: etcd v2.2 Release Notes
+description: etcd v2.2 Release Notes — Kubernetes 生产运维知识库
+summary: etcd v2.2 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- etcd
+- docker
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- etcd v2.2 Release Notes 是什么
+- 如何 etcd v2.2 Release Notes
+trigger_keywords:
+- etcd
+- v2.2
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+- etcd-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# [[etcd|etcd]] v2.2 Release Notes
+
+Source: [v2.2.5](https://github.com/etcd-io/etcd/releases/tag/v2.2.5)
+
+### Changelog
+- [[GH 3830](https://github.com/coreos/etcd/pull/3830)] Godeps: update boltdb to fix arm64 build
+- [[GH 4215](https://github.com/coreos/etcd/pull/4215)] etcdmain: fix proxy srv lookup
+- [[GH 4254](https://github.com/coreos/etcd/pull/4254)] client: do not timeout when wait is true
+- [[GH 4281](https://github.com/coreos/etcd/pull/4281)] etcdserver, auth: not cache a flag of auth status
+- update [[gRPC|gRPC]] dependencies (git SHA [`e29d659177655e589850ba7d3d83f7ce12ef23dd`](https://github.com/grpc/grpc-go/commit/e29d659177655e589850ba7d3d83f7ce12ef23dd))
+
+### Getting Started
+
+#### OS X
+
+To get started on OSX run the following in a terminal:
+
+```
+curl -L  https://github.com/coreos/etcd/releases/download/v2.2.5/etcd-v2.2.5-darwin-amd64.zip -o etcd-v2.2.5-darwin-amd64.zip
+unzip etcd-v2.2.5-darwin-amd64.zip
+cd etcd-v2.2.5-darwin-amd64
+./etcd
+```
+
+Open another terminal:
+
+```
+# 🟢 低风险：只读/信息收集，通常无副作用
+./etcdctl set mykey "this is awesome"
+./etcdctl get mykey
+```
+#### Linux
+
+To get started on Linux run the following in a terminal:
+
+```
+curl -L  https://github.com/coreos/etcd/releases/download/v2.2.5/etcd-v2.2.5-linux-amd64.tar.gz -o etcd-v2.2.5-linux-amd64.tar.gz
+tar xzvf etcd-v2.2.5-linux-amd64.tar.gz
+cd etcd-v2.2.5-linux-amd64
+./etcd
+```
+
+Open another terminal:
+
+```
+# 🟢 低风险：只读/信息收集，通常无副作用
+./etcdctl set mykey "this is awesome"
+./etcdctl get mykey
+```
+#### Docker
+
+To get started with Docker on Linux run the following in a terminal:
+
+```
+# 🟢 低风险：只读/信息收集，通常无副作用
+docker run --name etcd quay.io/coreos/etcd:v2.2.5
+docker exec etcd /etcdctl set foo bar
+```
+For advanced usage, please check [our docker guide](https://github.com/coreos/etcd/blob/master/Documentation/docker_guide.md).
+
+#### ACI/rkt
+
+To get started with rkt on Linux run the following in a terminal:
+
+```
+# for more info about rkt command line, see related doc at https://github.com/coreos/rkt/blob/master/Documentation/commands.md#rkt-run
+rkt run --volume data-dir,kind=host,source=/tmp --mds-register=false coreos.com/etcd:v2.2.5
+```
+
+
+<!-- risk-assessed -->

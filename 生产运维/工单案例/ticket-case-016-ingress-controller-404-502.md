@@ -54,7 +54,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[concepts/ingress.md]]'
+- target: '[[概念/ingress.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to

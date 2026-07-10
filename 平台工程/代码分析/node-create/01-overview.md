@@ -526,7 +526,7 @@ kubectl debug node/<node> -it --image=busybox
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/docker.md|docker]]
-- [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
+- [[概念/node-lifecycle-management.md|node-lifecycle-management]]
 
 ```
 

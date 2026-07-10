@@ -56,7 +56,7 @@ authors:
 relationships:
 - target: '[[生产运维/工单案例/ticket-case-046-ingress-controller-404-502.md]]'
   type: related_to
-- target: '[[concepts/ingress.md]]'
+- target: '[[概念/ingress.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to

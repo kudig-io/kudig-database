@@ -1,0 +1,94 @@
+---
+title: Backstage [entities]
+description: '## 概述'
+summary: '该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]'
+category: entities
+tags:
+- k8s
+- cncf
+- platform
+- backstage
+- prometheus
+- grafana
+- argocd
+- containerd
+- crd
+- operator
+tier: supporting
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Backstage 是什么
+- 如何 Backstage
+trigger_keywords:
+- Backstage
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Backstage
+
+> **CNCF 状态**: Incubating | **类别**: Platform | **主要语言**: TypeScript
+
+## 概述
+
+description: '## 项目概述'
+
+## 核心能力
+
+- 详见源文档获取完整信息 ^[inferred]
+
+## K8s 集成
+
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+
+## 生产部署要点
+
+- 建议参考官方文档获取最新部署指南 ^[inferred]
+
+## 架构定位
+
+在 CNCF 生态中，backstage 属于 **Platform** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+
+## 参考链接
+
+- [[实体/prometheus-grafana.md|prometheus-grafana]]
+- [[实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[概念/microservice-resilience-patterns.md|microservice-resilience-patterns]]
+- [[概念/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+
+## Related
+
+- [[wasmedge]] — WasmEdge
+- [[实体/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
+- [[04-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
+- [[spin]] — Spin
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+
+- 03-backstage-deployment
+- 04-backstage-catalog-techdocs
+- 99-backstage-idp-guide
+- 05-backstage-scaffolder-templates
+- backstage
+- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/platform-engineering-idp.md|Platform Engineering and Internal Developer Platforms]] — Cross-reference
+- [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+
+
+<!-- risk-assessed -->

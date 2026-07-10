@@ -76,7 +76,7 @@ cross_refs:
 
 # 08 - 日志审计与合规管理 (Logging Auditing & Compliance)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] Audit Policy](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|Kubernetes]] Audit Policy](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
 <!-- chunk: 概述 -->
 ## 概述

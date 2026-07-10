@@ -1115,7 +1115,7 @@ spec:
 **参考资料**:
 - [KEP-753: [[系统基础/知识字典/workloads/sidecar-containers.md|Sidecar Containers]]](https://github.com/kubernetes/enhancements/tree/master/keps/sig-node/753-sidecar-containers)
 - [Kubernetes Sidecar 模式](https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/)
-- [[entities/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
+- [[实体/istio.md|Istio]] Sidecar 注入](https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/)
 
 ---
 

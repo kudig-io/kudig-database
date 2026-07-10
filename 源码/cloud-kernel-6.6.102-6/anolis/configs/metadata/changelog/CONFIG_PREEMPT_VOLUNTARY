@@ -1,0 +1,3 @@
+Considering compatibility issues, we have introduced dynamic preempt and set the Kconfig of preempt
+in ANCK to Voluntary, and added 'preempt=none' in bootcmdline to ensure that the preemption mode
+remains consistent with previous settings.

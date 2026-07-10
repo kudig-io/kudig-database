@@ -164,7 +164,7 @@ spec:
         - name: JOB_COMPLETION_INDEX
           valueFrom:
             fieldRef:
-              fieldPath: metadata.annotations['batch.[[entities/kubernetes.md|kubernetes]].io/job-completion-index']
+              fieldPath: metadata.annotations['batch.[[实体/kubernetes.md|kubernetes]].io/job-completion-index']
         resources:
           requests:
             cpu: "500m"

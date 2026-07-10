@@ -287,7 +287,7 @@ metadata:
   name: jib-build
   namespace: ci-cd
 spec:
-  description: "使用 Jib 构建容器镜像（无需 [[entities/docker.md|docker]] daemon）"
+  description: "使用 Jib 构建容器镜像（无需 [[实体/docker.md|docker]] daemon）"
   workspaces:
     - name: source
   params:

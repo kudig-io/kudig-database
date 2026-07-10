@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
+[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了多种扩展机制，用于增强集群中节点的能力，或提供连接 Pod 的网络 fabric。这些扩展并非 Kubernetes 核心自带的组件，但能够灵活地支持新硬件、新存储类型以及不同的网络拓扑。
 
 ## 核心概念/原理
 

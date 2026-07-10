@@ -1,0 +1,132 @@
+package secondary
+
+import (
+	"time"
+
+	"github.com/coredns/caddy"
+	"github.com/coredns/coredns/core/dnsserver"
+	"github.com/coredns/coredns/plugin"
+	"github.com/coredns/coredns/plugin/file"
+	"github.com/coredns/coredns/plugin/pkg/fall"
+	clog "github.com/coredns/coredns/plugin/pkg/log"
+	"github.com/coredns/coredns/plugin/pkg/parse"
+	"github.com/coredns/coredns/plugin/pkg/upstream"
+	"github.com/coredns/coredns/plugin/transfer"
+)
+
+var log = clog.NewWithPlugin("secondary")
+
+func init() { plugin.Register("secondary", setup) }
+
+func setup(c *caddy.Controller) error {
+	zones, fall, err := secondaryParse(c)
+	if err != nil {
+		return plugin.Error("secondary", err)
+	}
+
+	s := &Secondary{file.File{Zones: zones, Fall: fall}}
+	var x *transfer.Transfer
+	c.OnStartup(func() error {
+		t := dnsserver.GetConfig(c).Handler("transfer")
+		if t != nil {
+			x = t.(*transfer.Transfer)
+			s.Xfer = x // if found this must be OK.
+		}
+		return nil
+	})
+
+	// Add startup functions to retrieve the zone and keep it up to date.
+	for i := range zones.Names {
+		n := zones.Names[i]
+		z := zones.Z[n]
+		if len(z.TransferFrom) > 0 {
+			// In order to support secondary plugin reloading.
+			updateShutdown := make(chan bool)
+
+			c.OnStartup(func() error {
+				z.StartupOnce.Do(func() {
+					go func() {
+						dur := time.Millisecond * 250
+						max := time.Second * 10
+						for {
+							err := z.TransferIn(x)
+							if err == nil {
+								break
+							}
+							log.Warningf("All '%s' masters failed to transfer, retrying in %s: %s", n, dur.String(), err)
+							time.Sleep(dur)
+							dur <<= 1 // double the duration
+							if dur > max {
+								dur = max
+							}
+							select {
+							case <-updateShutdown:
+								return
+							default:
+							}
+						}
+						z.Update(updateShutdown, x)
+					}()
+				})
+				return nil
+			})
+			c.OnShutdown(func() error {
+				updateShutdown <- true
+				return nil
+			})
+		}
+	}
+
+	dnsserver.GetConfig(c).AddPlugin(func(next plugin.Handler) plugin.Handler {
+		s.Next = next
+		return s
+	})
+
+	return nil
+}
+
+func secondaryParse(c *caddy.Controller) (file.Zones, fall.F, error) {
+	z := make(map[string]*file.Zone)
+	names := []string{}
+	fall := fall.F{}
+	for c.Next() {
+		if c.Val() == "secondary" {
+			// secondary [origin]
+			origins := plugin.OriginsFromArgsOrServerBlock(c.RemainingArgs(), c.ServerBlockKeys)
+			for i := range origins {
+				z[origins[i]] = file.NewZone(origins[i], "stdin")
+				names = append(names, origins[i])
+			}
+
+			hasTransfer := false
+			for c.NextBlock() {
+				var f []string
+
+				switch c.Val() {
+				case "transfer":
+					var err error
+					f, err = parse.TransferIn(c)
+					if err != nil {
+						return file.Zones{}, fall, err
+					}
+					hasTransfer = true
+				case "fallthrough":
+					fall.SetZonesFromArgs(c.RemainingArgs())
+				default:
+					return file.Zones{}, fall, c.Errf("unknown property '%s'", c.Val())
+				}
+
+				for _, origin := range origins {
+					if f != nil {
+						z[origin].TransferFrom = append(z[origin].TransferFrom, f...)
+					}
+					z[origin].Upstream = upstream.New()
+				}
+			}
+			if !hasTransfer {
+				return file.Zones{}, fall, c.Err("secondary zones require a transfer from property")
+			}
+		}
+	}
+	return file.Zones{Z: z, Names: names}, fall, nil
+}

@@ -82,7 +82,7 @@ related_docs:
 
 # 28 - 调度器配置与优化
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 <!-- chunk: 调度流程 -->
 ## 调度流程

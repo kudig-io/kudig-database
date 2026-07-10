@@ -352,8 +352,8 @@ Controller Manager 和 Scheduler 使用 Kubernetes 内置的 leader election:
 - [[log|log]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/kube-vip.md|kube-vip]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/kube-vip.md|kube-vip]]
 
 
 <!-- risk-assessed -->

@@ -86,20 +86,20 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
-- [[skills/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[技能/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
 - storage.md|ts-storage]] — 存储故障排查
-- [[skills/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+- [[技能/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 - [[certificate-fta]] — 证书异常故障树分析
 - [[envoy]] — Envoy
 
 - [[故障诊断/FTA故障树/list/higress-fta.md|Higress 网关异常故障树分析]]
-- [[skills/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[技能/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
 - [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
 
 

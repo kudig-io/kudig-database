@@ -64,7 +64,7 @@ authors:
 > **目标读者**: SRE、平台工程师、云架构师。
 > **最后更新**: 2026-07-01
 
-本指南是 [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]] 的多集群专项 runbook，参考 [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“Multi-Cluster / Fleet Management & GitOps at Scale”缺口，覆盖集群注册表、舰队策略、Secret 同步、全局负载均衡、跨集群可观测性与灾难恢复。
+本指南是 [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]] 的多集群专项 runbook，参考 [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“Multi-Cluster / Fleet Management & GitOps at Scale”缺口，覆盖集群注册表、舰队策略、Secret 同步、全局负载均衡、跨集群可观测性与灾难恢复。
 
 ---
 
@@ -324,7 +324,7 @@ kubectl --context=dr-prod get svc -A
 
 ### 跨域参考
 
-- [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
+- [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
 - [[云厂商/多云混合/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]]
 - [[云厂商/多云混合/08-multicloud-federation-karmada.md|多集群联邦 Karmada]]
 - [[云厂商/多云混合/09-multicloud-network-interconnect.md|多云网络互联]]

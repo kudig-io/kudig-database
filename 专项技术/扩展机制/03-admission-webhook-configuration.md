@@ -66,7 +66,7 @@ cross_refs:
 
 # 03 - 准入控制器(Webhook)配置与实现
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/reference/access-authn-authz/admission-controllers/](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 
 <!-- chunk: 准入控制器架构与原理 -->
 ## 准入控制器架构与原理

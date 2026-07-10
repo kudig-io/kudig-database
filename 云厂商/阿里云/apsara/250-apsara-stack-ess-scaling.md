@@ -174,9 +174,9 @@ k8s_versions:
 
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[entities/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[实体/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[实体/kubernetes.md|kubernetes]]
 
 ## See Also
 

@@ -96,7 +96,7 @@ related_docs:
 
 1. [控制平面组件概览](#1-控制平面组件概览)
 2. [kube-apiserver 深度剖析](#2-kube-apiserver-深度剖析)
-3. [[entities/etcd.md|etcd]] 生产实践](#3-etcd-生产实践)
+3. [[实体/etcd.md|etcd]] 生产实践](#3-etcd-生产实践)
 4. [kube-scheduler 调度优化](#4-kube-scheduler-调度优化)
 5. [kube-controller-manager 控制器详解](#5-kube-controller-manager-控制器详解)
 6. [cloud-controller-manager 云集成](#6-cloud-controller-manager-云集成)

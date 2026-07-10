@@ -1,7 +1,7 @@
 ---
 title: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 description: '- 运维工程师'
-summary: 'StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。'
+summary: 'StatefulSet 是 [[实体/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。'
 category: skills
 tags:
 - k8s
@@ -141,7 +141,7 @@ tier: peripheral---
 
 # StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
-StatefulSet 是 [[entities/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。这些特性使其故障模式更为复杂：Pod 启动顺序依赖、PVC 与 Pod 的生命周期绑定、Headless Service 依赖、以及分布式一致性要求（如数据库集群的脑裂问题）。
+StatefulSet 是 [[实体/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。这些特性使其故障模式更为复杂：Pod 启动顺序依赖、PVC 与 Pod 的生命周期绑定、Headless Service 依赖、以及分布式一致性要求（如数据库集群的脑裂问题）。
 
 本 Skill 覆盖 Pod 启动顺序卡住、PVC 绑定失败、Headless Service 异常、更新策略阻塞、存储容量不足、分布式脑裂等 10 种根因的诊断和修复。
 

@@ -240,7 +240,7 @@ related_docs:
 | **TokenController** | ServiceAccount, Secret | Secret | SA Token的生成与清理 |
 | **LegacyServiceAccountTokenCleanUpController** | Secret | Secret | 清理过期的legacy SA Token |
 | **CertificateSigningController** | CSR | Certificate | 证书签名请求审批与签发 |
-| **BootstrapsignerController** | ConfigMap | ConfigMap | 为[[entities/kubelet.md|kubelet]]引导签名Token |
+| **BootstrapsignerController** | ConfigMap | ConfigMap | 为[[实体/kubelet.md|kubelet]]引导签名Token |
 | **TokencleanerController** | Secret | Secret | 清理过期的引导Token |
 | **ClusterTrustBundleController** | ClusterTrustBundle | ConfigMap/Secret | 集群信任包分发与管理 |
 | **ResourceQuotaController** | ResourceQuota | ResourceQuota Status | 配额使用量计算与更新 |
@@ -1332,7 +1332,7 @@ token
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]]
+- [[实体/kubelet.md|kubelet]]
 
 - etcd 深度解析
 - API Server 深度解析

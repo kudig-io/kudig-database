@@ -806,7 +806,7 @@ groups:
 - 16-troubleshooting-guide
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 
 ## See Also

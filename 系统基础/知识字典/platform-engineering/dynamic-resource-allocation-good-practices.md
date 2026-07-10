@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-动态资源分配（[[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]], DRA）是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
+动态资源分配（[[系统基础/知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]], DRA）是 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
 
 ## 核心概念/原理
 

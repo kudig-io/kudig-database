@@ -143,20 +143,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[calico-fta]] — Calico Fta
-- [[skills/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[技能/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[service-fta]] — Service 异常故障树分析
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
 - [[故障诊断/FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
-- [[skills/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 

@@ -71,7 +71,7 @@ authors:
 3. [Wasm Shim 实现原理](#3-wasm-shim-实现原理)
 4. [安装与配置](#4-安装与配置)
 5. [RuntimeClass 配置](#5-runtimeclass-配置)
-6. [[entities/kubernetes.md|Kubernetes]] 集成](#6-kubernetes-集成)
+6. [[实体/kubernetes.md|Kubernetes]] 集成](#6-kubernetes-集成)
 7. [多运行时部署](#7-多运行时部署)
 8. [OCI Wasm 工件](#8-oci-wasm-工件)
 9. [性能调优](#9-性能调优)

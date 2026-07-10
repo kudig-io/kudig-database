@@ -75,7 +75,7 @@ cross_refs:
 
 # 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/security/multi-tenancy](https://kubernetes.io/docs/concepts/security/multi-tenancy/)
 
 <!-- chunk: 多租户隔离级别 -->
 ## 多租户隔离级别

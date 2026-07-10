@@ -1784,7 +1784,7 @@ graph TD
 ## Related
 
 - [[MOC]]
-- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 
 - PV/PVC 核心概念
 - StorageClass 动态供给

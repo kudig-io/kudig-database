@@ -70,7 +70,7 @@ related_topics:
 
 
 
-# Deployment [[skills/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
+# Deployment [[技能/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
 
 ## 函数签名
 
@@ -505,10 +505,10 @@ flowchart TD
 
 ## Related
 
-- [[entities/argo.md|argo]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/linkerd.md|Linkerd]]
-- [[entities/istio.md|Istio]]
+- [[实体/argo.md|argo]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/linkerd.md|Linkerd]]
+- [[实体/istio.md|Istio]]
 
 
 <!-- risk-assessed -->

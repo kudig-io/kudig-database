@@ -399,7 +399,7 @@ sequenceDiagram
 ## 配置示例
 
 ```yaml
-apiVersion: kubeadm.[[entities/kubernetes.md|k8s]].io/v1beta4
+apiVersion: kubeadm.[[实体/kubernetes.md|k8s]].io/v1beta4
 kind: ResetConfiguration
 certificatesDir: /etc/kubernetes/pki
 cleanupTmpDir: true

@@ -1,0 +1,547 @@
+package eni
+
+import (
+	"context"
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/go-logr/logr"
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
+	corev1 "k8s.io/api/core/v1"
+	k8sErr "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/client-go/tools/events"
+	"k8s.io/utils/ptr"
+	"sigs.k8s.io/controller-runtime/pkg/builder"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+	"sigs.k8s.io/controller-runtime/pkg/handler"
+	"sigs.k8s.io/controller-runtime/pkg/manager"
+	"sigs.k8s.io/controller-runtime/pkg/predicate"
+	"sigs.k8s.io/controller-runtime/pkg/reconcile"
+
+	aliyunClient "github.com/AliyunContainerService/terway/pkg/aliyun/client"
+	"github.com/AliyunContainerService/terway/pkg/apis/network.alibabacloud.com/v1beta1"
+	"github.com/AliyunContainerService/terway/pkg/backoff"
+	register "github.com/AliyunContainerService/terway/pkg/controller"
+	"github.com/AliyunContainerService/terway/pkg/controller/common"
+	"github.com/AliyunContainerService/terway/pkg/utils"
+	"github.com/AliyunContainerService/terway/types"
+)
+
+// ReconcileNetworkInterface reconciles a AutoRepair object
+type ReconcileNetworkInterface struct {
+	client client.Client
+	scheme *runtime.Scheme
+	aliyun aliyunClient.OpenAPI
+
+	//record event recorder
+	record events.EventRecorder
+
+	resourceBackoff *BackoffManager
+}
+
+const ControllerName = "eni"
+
+func init() {
+	register.Add(ControllerName, func(mgr manager.Manager, ctrlCtx *register.ControllerCtx) error {
+		ctrlCtx.RegisterResource = append(ctrlCtx.RegisterResource, &v1beta1.NetworkInterface{})
+
+		err := builder.ControllerManagedBy(mgr).
+			Named(ControllerName).
+			WithOptions(controller.Options{
+				MaxConcurrentReconciles: ctrlCtx.Config.ENIMaxConcurrent,
+				LogConstructor: func(request *reconcile.Request) logr.Logger {
+					log := mgr.GetLogger()
+					if request != nil {
+						log = log.WithValues("name", request.Name)
+					}
+					return log
+				},
+			}).
+			// may be use watch event
+			Watches(&v1beta1.NetworkInterface{}, &handler.EnqueueRequestForObject{}, builder.WithPredicates(&predicate.ResourceVersionChangedPredicate{})).
+			Complete(&ReconcileNetworkInterface{
+				client:          mgr.GetClient(),
+				scheme:          mgr.GetScheme(),
+				aliyun:          ctrlCtx.AliyunClient, // use direct client
+				record:          mgr.GetEventRecorder(utils.EventName(ControllerName)),
+				resourceBackoff: NewBackoffManager(),
+			})
+
+		return err
+
+	}, true)
+}
+
+func (r *ReconcileNetworkInterface) Reconcile(ctx context.Context, request reconcile.Request) (reconcile.Result, error) {
+	eni := &v1beta1.NetworkInterface{}
+	err := r.client.Get(ctx, request.NamespacedName, eni)
+	if err != nil {
+		if k8sErr.IsNotFound(err) {
+			r.resourceBackoff.Del(request.String())
+			return reconcile.Result{}, nil
+		}
+		return reconcile.Result{}, err
+	}
+
+	l := logr.FromContextOrDiscard(ctx)
+	l.Info("reconcile networkInterface", "status", eni.Status.Phase)
+	// nb(l1b0k): v1beta1.ENIPhaseInitial means do nothing
+
+	if eni.Status.Phase == v1beta1.ENIPhaseDeleting {
+		if eni.DeletionTimestamp.IsZero() {
+			err = r.client.Delete(ctx, eni)
+			if err != nil {
+				return reconcile.Result{}, err
+			}
+			return reconcile.Result{}, nil
+		}
+	}
+
+	// Phase may change from Deleting -> Unbind, this is expected, as DeletionTimestamp is always set first
+	if eni.Status.Phase == v1beta1.ENIPhaseDetaching ||
+		eni.Status.Phase == v1beta1.ENIPhaseDeleting ||
+		!eni.DeletionTimestamp.IsZero() {
+		result, err := r.detach(ctx, eni)
+		if err != nil {
+			return reconcile.Result{}, err
+		}
+		if !result.IsZero() {
+			return result, nil
+		}
+	}
+
+	if !eni.DeletionTimestamp.IsZero() {
+		err = r.delete(ctx, eni)
+		if err != nil {
+			return reconcile.Result{}, err
+		}
+		return reconcile.Result{}, nil
+	}
+
+	if eni.Status.Phase == v1beta1.ENIPhaseBinding {
+		result, err := r.attach(ctx, eni)
+		if err != nil {
+			return reconcile.Result{}, err
+		}
+		return result, nil
+	}
+
+	return reconcile.Result{}, nil
+}
+
+// resolveBackendAPI determines the BackendAPI from NI CR annotation or name prefix (fallback).
+func (r *ReconcileNetworkInterface) resolveBackendAPI(_ context.Context, ni *v1beta1.NetworkInterface) aliyunClient.BackendAPI {
+	// Priority 1: Check NI CR annotation
+	if api := ni.Annotations[types.ENOApi]; api != "" {
+		switch api {
+		case types.APIEcs, types.APIEcsHDeni:
+			return aliyunClient.BackendAPIECS
+		case types.APIEnoHDeni:
+			return aliyunClient.BackendAPIEFLOHDENI
+		}
+	}
+
+	// Priority 2: Fallback to name prefix
+	if strings.HasPrefix(ni.Name, "leni-") {
+		return aliyunClient.BackendAPIEFLO
+	}
+	if strings.HasPrefix(ni.Name, "hdeni-") {
+		return aliyunClient.BackendAPIEFLOHDENI
+	}
+	return aliyunClient.BackendAPIECS
+}
+
+// getECSBackoff returns the appropriate ECS-path backoff for the given NI name.
+// Migrated leni-/hdeni- resources use dedicated backoff configs with initialDelay=4s.
+func (r *ReconcileNetworkInterface) getECSBackoff(niName string) backoff.ExtendedBackoff {
+	if strings.HasPrefix(niName, "leni-") {
+		return backoff.Backoff(backoff.WaitECSLENIStatus)
+	}
+	if strings.HasPrefix(niName, "hdeni-") {
+		return backoff.Backoff(backoff.WaitECSHDENIStatus)
+	}
+	return backoff.Backoff(backoff.WaitENIStatus)
+}
+
+func (r *ReconcileNetworkInterface) attach(ctx context.Context, networkInterface *v1beta1.NetworkInterface) (reconcile.Result, error) {
+	var err error
+
+	if networkInterface.Status.InstanceID != "" {
+		var resp []*aliyunClient.NetworkInterface
+
+		backend := r.resolveBackendAPI(ctx, networkInterface)
+		ctx = aliyunClient.SetBackendAPI(ctx, backend)
+
+		if backend == aliyunClient.BackendAPIEFLO || backend == aliyunClient.BackendAPIEFLOHDENI {
+			// EFLO path: LENI/HDENI status codes
+			resp, err = r.aliyun.DescribeNetworkInterfaceV2(ctx, &aliyunClient.DescribeNetworkInterfaceOptions{
+				NetworkInterfaceIDs: &[]string{networkInterface.Name},
+				RawStatus:           ptr.To(true),
+			})
+			if err != nil {
+				return reconcile.Result{}, err
+			}
+			if len(resp) == 0 {
+				return reconcile.Result{}, fmt.Errorf("network interface %s not found", networkInterface.Name)
+			}
+
+			switch resp[0].Status {
+			case aliyunClient.LENIStatusAvailable:
+			case aliyunClient.LENIStatusUnattached, aliyunClient.LENIStatusAttachFailed:
+				//	"Code": "1017",  Attaching Available 不允许操作
+				err = r.aliyun.AttachNetworkInterfaceV2(ctx, &aliyunClient.AttachNetworkInterfaceOptions{
+					NetworkInterfaceID:     toPtr(networkInterface.Name),
+					InstanceID:             toPtr(networkInterface.Status.InstanceID),
+					TrunkNetworkInstanceID: toPtr(networkInterface.Status.TrunkENIID),
+					NetworkCardIndex:       networkInterface.Status.NetworkCardIndex,
+				})
+				if err != nil {
+					r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventAttachENIFailed, types.ActionAttachENI,
+						"Failed to attach ENI %s to instance %s: %v", networkInterface.Name, networkInterface.Status.InstanceID, err)
+					return reconcile.Result{}, err
+				}
+				fallthrough
+			case aliyunClient.LENIStatusExecuting, aliyunClient.LENIStatusAttaching, aliyunClient.LENIStatusDetaching:
+				du, err := r.resourceBackoff.Get(networkInterface.Name, backoff.Backoff(backoff.WaitLENIStatus))
+				if err != nil {
+					return reconcile.Result{}, err
+				}
+				logr.FromContextOrDiscard(ctx).Info("waiting for network interface backoff", "du", du, "id", networkInterface.Name)
+				return reconcile.Result{RequeueAfter: du}, nil
+			case aliyunClient.LENIStatusCreateFailed:
+				// release this eni, this status should be on first create
+				var podObjRef *corev1.ObjectReference
+				if networkInterface.Spec.PodENIRef != nil {
+					podObjRef = &corev1.ObjectReference{
+						Kind:      "Pod",
+						Namespace: networkInterface.Spec.PodENIRef.Namespace,
+						Name:      networkInterface.Spec.PodENIRef.Name,
+					}
+				}
+				r.record.Eventf(networkInterface, podObjRef, corev1.EventTypeWarning, types.EventCreateENIFailed, types.ActionCreateENI, "backend create failed, will delete")
+				r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventCreateENIFailed, types.ActionCreateENI,
+					"ENI %s creation failed in backend, rolling back", networkInterface.Name)
+				return reconcile.Result{}, r.rollBackPodENI(ctx, networkInterface)
+			case aliyunClient.LENIStatusDetachFailed, aliyunClient.LENIStatusDeleteFailed, aliyunClient.LENIStatusDeleting:
+				r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventAttachENIFailed, types.ActionAttachENI,
+					"ENI %s in unexpected status %s during attach", networkInterface.Name, resp[0].Status)
+				return reconcile.Result{}, fmt.Errorf("unsupported status on attach %s", resp[0].Status)
+			default:
+				return reconcile.Result{}, fmt.Errorf("unknown status %s", resp[0].Status)
+			}
+
+		} else {
+			// ECS path: standard ENI status codes
+			// for migrated hdeni, set trunkENIID to DenseModeTrunkEniId if it's empty
+			trunkENIID := networkInterface.Status.TrunkENIID
+			if trunkENIID == "" && strings.HasPrefix(networkInterface.Name, "hdeni-") {
+				trunkENIID = "DenseModeTrunkEniId"
+			}
+			err = r.aliyun.AttachNetworkInterfaceV2(ctx, &aliyunClient.AttachNetworkInterfaceOptions{
+				NetworkInterfaceID:     toPtr(networkInterface.Name),
+				InstanceID:             toPtr(networkInterface.Status.InstanceID),
+				TrunkNetworkInstanceID: toPtr(trunkENIID),
+				NetworkCardIndex:       networkInterface.Status.NetworkCardIndex,
+			})
+			if err != nil {
+				r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventAttachENIFailed, types.ActionAttachENI,
+					"Failed to attach ENI %s to instance %s: %v", networkInterface.Name, networkInterface.Status.InstanceID, err)
+				return reconcile.Result{}, err
+			}
+
+			bo := r.getECSBackoff(networkInterface.Name)
+			if networkInterface.Status.TrunkENIID == "" {
+				time.Sleep(bo.InitialDelay)
+			} else {
+				time.Sleep(backoff.Backoff(backoff.WaitMemberENIStatus).InitialDelay)
+			}
+
+			resp, err = r.aliyun.DescribeNetworkInterfaceV2(ctx, &aliyunClient.DescribeNetworkInterfaceOptions{
+				NetworkInterfaceIDs: &[]string{networkInterface.Name},
+				RawStatus:           ptr.To(true),
+			})
+			if err != nil {
+				return reconcile.Result{}, err
+			}
+
+			if len(resp) != 1 || resp[0].Status != aliyunClient.ENIStatusInUse {
+				du, err := r.resourceBackoff.Get(networkInterface.Name, bo)
+				if err != nil {
+					return reconcile.Result{}, err
+				}
+				return reconcile.Result{RequeueAfter: du}, nil
+			}
+		}
+
+		r.resourceBackoff.Del(networkInterface.Name)
+
+		remote := resp[0]
+
+		oldSpec := networkInterface.Spec.DeepCopy()
+
+		networkInterface.Spec.ENI = v1beta1.ENI{
+			ID:               remote.NetworkInterfaceID,
+			VPCID:            remote.VPCID,
+			MAC:              remote.MacAddress,
+			Zone:             remote.ZoneID,
+			VSwitchID:        remote.VSwitchID,
+			ResourceGroupID:  remote.ResourceGroupID,
+			SecurityGroupIDs: remote.SecurityGroupIDs,
+		}
+		networkInterface.Spec.IPv4 = remote.PrivateIPAddress
+		if len(remote.IPv6Set) > 0 {
+			networkInterface.Spec.IPv6 = remote.IPv6Set[0].IPAddress
+		}
+
+		if !cmp.Equal(*oldSpec, networkInterface.Spec, cmpopts.EquateEmpty()) {
+
+			logr.FromContextOrDiscard(ctx).Info("spec not equal", "old", oldSpec, "new", networkInterface.Spec, "diff",
+				cmp.Diff(*oldSpec, networkInterface.Spec, cmpopts.EquateEmpty()),
+			)
+
+			oldRv := networkInterface.GetResourceVersion()
+			err = r.client.Update(ctx, networkInterface)
+			if err != nil {
+				return reconcile.Result{}, fmt.Errorf("update eni failed, %w", err)
+			}
+
+			// networkInterface should be updated
+			_ = common.WaitRVChanged(ctx, r.client, networkInterface, networkInterface.Namespace, networkInterface.Name, oldRv)
+		}
+
+		networkInterface.Status.ENIInfo = v1beta1.ENIInfo{
+			ID:               remote.NetworkInterfaceID,
+			Type:             v1beta1.ENIType(remote.Type),
+			Vid:              remote.DeviceIndex,
+			NetworkCardIndex: ptr.To(remote.NetworkCardIndex),
+			Status:           v1beta1.ENIStatusBind,
+			VfID:             remote.VfID,
+		}
+		networkInterface.Status.Phase = v1beta1.ENIPhaseBind
+
+		err = r.client.Status().Update(ctx, networkInterface)
+		if err != nil {
+			return reconcile.Result{}, fmt.Errorf("update eni status failed, %w", err)
+		}
+	}
+
+	// add node label
+	if networkInterface.Labels[types.ENIRelatedNodeName] != networkInterface.Status.NodeName {
+		update := networkInterface.DeepCopy()
+		if update.Labels == nil {
+			update.Labels = make(map[string]string)
+		}
+		update.Labels[types.ENIRelatedNodeName] = networkInterface.Status.NodeName
+		err = r.client.Patch(ctx, update, client.MergeFrom(networkInterface))
+		if err != nil {
+			return reconcile.Result{}, fmt.Errorf("failed to patch network interface labels: %w", err)
+		}
+	}
+
+	return reconcile.Result{}, nil
+}
+
+func (r *ReconcileNetworkInterface) detach(ctx context.Context, networkInterface *v1beta1.NetworkInterface) (reconcile.Result, error) {
+	var err error
+
+	if networkInterface.Status.InstanceID != "" {
+		backend := r.resolveBackendAPI(ctx, networkInterface)
+		ctx = aliyunClient.SetBackendAPI(ctx, backend)
+
+		if backend == aliyunClient.BackendAPIEFLO || backend == aliyunClient.BackendAPIEFLOHDENI {
+			// EFLO path: LENI/HDENI status codes
+			resp, err := r.aliyun.DescribeNetworkInterfaceV2(ctx, &aliyunClient.DescribeNetworkInterfaceOptions{
+				NetworkInterfaceIDs: &[]string{networkInterface.Name},
+				RawStatus:           ptr.To(true),
+			})
+			if err != nil {
+				return reconcile.Result{}, err
+			}
+			if len(resp) > 0 {
+				switch resp[0].Status {
+				case aliyunClient.LENIStatusAvailable, aliyunClient.LENIStatusDetachFailed:
+					err = r.aliyun.DetachNetworkInterfaceV2(ctx, &aliyunClient.DetachNetworkInterfaceOptions{
+						NetworkInterfaceID: toPtr(networkInterface.Name),
+						InstanceID:         toPtr(networkInterface.Status.InstanceID),
+					})
+					if err != nil {
+						r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventDetachENIFailed, types.ActionDetachENI,
+							"Failed to detach ENI %s from instance %s: %v", networkInterface.Name, networkInterface.Status.InstanceID, err)
+						return reconcile.Result{}, err
+					}
+					fallthrough
+				case aliyunClient.LENIStatusExecuting, aliyunClient.LENIStatusDetaching:
+					du, err := r.resourceBackoff.Get(networkInterface.Name, backoff.Backoff(backoff.WaitLENIStatus))
+					if err != nil {
+						return reconcile.Result{}, err
+					}
+					return reconcile.Result{RequeueAfter: du}, nil
+				case aliyunClient.LENIStatusUnattached, aliyunClient.LENIStatusCreateFailed, aliyunClient.LENIStatusDeleting, aliyunClient.LENIStatusDeleteFailed, aliyunClient.LENIStatusAttachFailed:
+					// ignore this status. detach assume succeed.
+				default:
+					return reconcile.Result{}, fmt.Errorf("unknown status %s", resp[0].Status)
+				}
+			}
+
+		} else {
+			// ECS path
+			var trunkID *string
+			if networkInterface.Status.TrunkENIID != "DenseModeTrunkEniId" {
+				trunkID = toPtr(networkInterface.Status.TrunkENIID)
+			}
+
+			err = r.aliyun.DetachNetworkInterfaceV2(ctx, &aliyunClient.DetachNetworkInterfaceOptions{
+				NetworkInterfaceID: toPtr(networkInterface.Name),
+				InstanceID:         toPtr(networkInterface.Status.InstanceID),
+				TrunkID:            trunkID,
+			})
+			if err != nil {
+				r.emitEventToPod(ctx, networkInterface, corev1.EventTypeWarning, types.EventDetachENIFailed, types.ActionDetachENI,
+					"Failed to detach ENI %s from instance %s: %v", networkInterface.Name, networkInterface.Status.InstanceID, err)
+				return reconcile.Result{}, err
+			}
+
+			bo := r.getECSBackoff(networkInterface.Name)
+			if networkInterface.Status.TrunkENIID == "" {
+				time.Sleep(bo.InitialDelay)
+			} else {
+				time.Sleep(backoff.Backoff(backoff.WaitMemberENIStatus).InitialDelay)
+			}
+
+			enis, err := r.aliyun.DescribeNetworkInterfaceV2(ctx, &aliyunClient.DescribeNetworkInterfaceOptions{
+				NetworkInterfaceIDs: &[]string{networkInterface.Name},
+				RawStatus:           ptr.To(true),
+			})
+			if err != nil {
+				return reconcile.Result{}, err
+			}
+
+			if len(enis) > 0 && enis[0].Status != aliyunClient.ENIStatusAvailable {
+				du, err := r.resourceBackoff.Get(networkInterface.Name, bo)
+				if err != nil {
+					return reconcile.Result{}, err
+				}
+				return reconcile.Result{RequeueAfter: du}, nil
+			}
+		}
+
+		// always clean up the backoff, as we will update the cr status, so we will not go here again
+		r.resourceBackoff.Del(networkInterface.Name)
+
+		networkInterface.Status.ENIInfo.Status = v1beta1.ENIPhaseUnbind
+		networkInterface.Status.ENIInfo.Vid = 0
+		networkInterface.Status.ENIInfo.VfID = nil
+		networkInterface.Status.ENIInfo.NetworkCardIndex = nil
+
+		networkInterface.Status.InstanceID = ""
+		networkInterface.Status.TrunkENIID = ""
+		networkInterface.Status.NodeName = ""
+		networkInterface.Status.NetworkCardIndex = nil
+		networkInterface.Status.Phase = v1beta1.ENIPhaseUnbind
+		err = r.client.Status().Update(ctx, networkInterface)
+
+		if err != nil {
+			return reconcile.Result{}, fmt.Errorf("update network interface status to %s failed, %w", v1beta1.ENIPhaseUnbind, err)
+		}
+	}
+
+	// remove node label
+	if networkInterface.Labels[types.ENIRelatedNodeName] != "" {
+		update := networkInterface.DeepCopy()
+		delete(update.Labels, types.ENIRelatedNodeName)
+		err = r.client.Patch(ctx, update, client.MergeFrom(networkInterface))
+		if err != nil {
+			return reconcile.Result{}, fmt.Errorf("failed to remove network interface labels: %w", err)
+		}
+	}
+	return reconcile.Result{}, nil
+}
+
+func (r *ReconcileNetworkInterface) delete(ctx context.Context, networkInterface *v1beta1.NetworkInterface) error {
+	backend := r.resolveBackendAPI(ctx, networkInterface)
+	ctx = aliyunClient.SetBackendAPI(ctx, backend)
+
+	err := r.aliyun.DeleteNetworkInterfaceV2(ctx, networkInterface.Name)
+	if err != nil {
+		return err
+	}
+	r.resourceBackoff.Del(networkInterface.Name)
+
+	update := networkInterface.DeepCopy()
+	controllerutil.RemoveFinalizer(update, types.FinalizerENI)
+	err = r.client.Patch(ctx, update, client.MergeFrom(networkInterface))
+	if err != nil {
+		if k8sErr.IsNotFound(err) {
+			return nil
+		}
+		return fmt.Errorf("remove finalizer failed, %w", err)
+	}
+	// wait gone
+	common.WaitDeleted(ctx, r.client, &v1beta1.NetworkInterface{}, networkInterface.Namespace, networkInterface.Name)
+	return nil
+}
+
+// emitEventToPod finds the associated Pod via PodENIRef and emits an event to it,
+// with the NetworkInterface as the related secondary object.
+func (r *ReconcileNetworkInterface) emitEventToPod(ctx context.Context, ni *v1beta1.NetworkInterface, eventType, reason, action, msgFmt string, args ...interface{}) {
+	if ni.Spec.PodENIRef == nil || ni.Spec.PodENIRef.Name == "" {
+		return
+	}
+
+	l := logr.FromContextOrDiscard(ctx)
+
+	pod := &corev1.Pod{}
+	err := r.client.Get(ctx, client.ObjectKey{
+		Namespace: ni.Spec.PodENIRef.Namespace,
+		Name:      ni.Spec.PodENIRef.Name,
+	}, pod)
+	if err != nil {
+		l.V(4).Info("failed to get pod for event emission", "error", err,
+			"namespace", ni.Spec.PodENIRef.Namespace, "name", ni.Spec.PodENIRef.Name)
+		return
+	}
+
+	r.record.Eventf(pod, ni, eventType, reason, action, msgFmt, args...)
+}
+
+func (r *ReconcileNetworkInterface) rollBackPodENI(ctx context.Context, networkInterface *v1beta1.NetworkInterface) error {
+	if networkInterface.Spec.PodENIRef == nil || networkInterface.Spec.PodENIRef.Name == "" {
+		return nil
+	}
+
+	l := logr.FromContextOrDiscard(ctx)
+
+	podENI := &v1beta1.PodENI{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      networkInterface.Spec.PodENIRef.Name,
+			Namespace: networkInterface.Spec.PodENIRef.Namespace,
+		},
+	}
+
+	err := r.client.Get(ctx, client.ObjectKeyFromObject(podENI), podENI)
+	if err != nil {
+		if k8sErr.IsNotFound(err) {
+			return nil
+		}
+		return err
+	}
+
+	if podENI.DeletionTimestamp.IsZero() {
+		l.Info("eni create failed, delete podENI")
+		return r.client.Delete(ctx, podENI)
+	}
+	return nil
+}
+
+func toPtr(in string) *string {
+	if in == "" {
+		return nil
+	}
+	return &in
+}

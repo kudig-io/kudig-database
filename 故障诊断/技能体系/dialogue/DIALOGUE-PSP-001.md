@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # Pod Security Policy 咨询与迁移 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/pod-security-policy.md|Pod Security Policy]]  
+> 对应概念：[[概念/pod-security-policy.md|Pod Security Policy]]  
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。  
 > **⚠️ 重要提示**：Pod Security Policy 已于 Kubernetes v1.21 弃用，v1.25 正式移除。本脚本同时覆盖遗留环境排查和迁移指导。
 
@@ -236,7 +236,7 @@ spec:
 
 ## 相关概念
 
-- [[concepts/pod-security-policy.md|Pod Security Policy]]
+- [[概念/pod-security-policy.md|Pod Security Policy]]
 - [[安全/98-merged-indexes/index.md|安全合规索引]]
 
 ```

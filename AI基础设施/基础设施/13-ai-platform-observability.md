@@ -71,7 +71,7 @@ cross_refs:
 
 # AI平台可观测性体系
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/prometheus.md|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/prometheus.md|Prometheus]]](https://prometheus.io/) | [[实体/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/)
 
 <!-- chunk: 一、AI平台可观测性全景架构 -->
 ## 一、AI平台可观测性全景架构

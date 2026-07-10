@@ -1,0 +1,72 @@
+# This GitHub action is used to compare API state snapshots of Main
+# to Head of the PR in order to validate releases are not breaking
+# backwards compatibility.
+#
+# This GitHub action will fail if there are incompatible changes.
+#
+name: "Inform Incompatible PRs"
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  Check-Compatibility:
+    runs-on: ubuntu-latest
+    env:
+      BASE_REF: ${{ github.base_ref }}
+      HEAD_REF: ${{ github.head_ref }}
+    steps:
+      - name: Checkout-Main
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: ${{ github.base_ref }}
+          path: ${{ github.base_ref }}
+          persist-credentials: false
+
+      - name: Checkout-HEAD
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          path: ${{ github.head_ref }}
+          persist-credentials: false
+
+      - name: Setup Go
+        uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6.5.0
+        with:
+          go-version: oldstable
+          cache: false
+
+      - name: Cache Go
+        id: go-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/go/bin
+            ~/go/pkg/mod
+          key: go-cache-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/go.sum') }}
+
+      # Generate apidiff states of Main
+      - name: Generate-States
+        run: |
+          cd $BASE_REF
+          make apidiff-build
+
+      # Compare apidiff states of Main with PR
+      - name: Compare-States
+        env:
+          CI: true
+          COMPARE_OPTS: -d "../${{ github.base_ref }}/internal/data/apidiff"
+        run: |
+          cd $HEAD_REF
+          make apidiff-compare
+
+      # Fail GitHub Action if there are incompatible changes
+      - name: Check-States
+        env:
+          CI: true
+          COMPARE_OPTS: -d "../${{ github.base_ref }}/internal/data/apidiff" -c
+        run: |
+          cd $HEAD_REF
+          make apidiff-compare

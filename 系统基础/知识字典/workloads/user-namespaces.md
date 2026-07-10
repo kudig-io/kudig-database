@@ -188,7 +188,7 @@ kubectl get --raw /api/v1/nodes/<node-name>/proxy/metrics | grep user_namespace
 - [Pods 基础](./pods.md)
 
 ## 参考链接
-- https://[[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/user-namespaces/
+- https://[[实体/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/user-namespaces/
 
 ## Related
 

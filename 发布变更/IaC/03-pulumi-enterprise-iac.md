@@ -54,7 +54,7 @@ intent_queries:
 - pulumi-enterprise-iac的最佳实践
 
 tier: peripheral---
-title: Pulumi Enterprise [[concepts/infrastructure-as-code.md|Infrastructure as Code]] Platform
+title: Pulumi Enterprise [[概念/infrastructure-as-code.md|Infrastructure as Code]] Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: infrastructure-as-code
 tags:

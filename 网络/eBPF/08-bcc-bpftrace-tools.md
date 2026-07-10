@@ -77,7 +77,7 @@ authors:
 3. [bpftrace 语言基础](#3-bpftrace-语言基础)
 4. [bpftrace 单行脚本示例](#4-bpftrace-单行脚本示例)
 5. [复杂 bpftrace 脚本开发](#5-复杂-bpftrace-脚本开发)
-6. [[entities/kubernetes.md|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
+6. [[实体/kubernetes.md|Kubernetes]] 环境中的 eBPF 性能分析](#6-kubernetes-环境中的-ebpf-性能分析)
 7. [容器感知的 eBPF 工具](#7-容器感知的-ebpf-工具)
 8. [自定义 bcc/bpftrace 工具开发](#8-自定义-bccbpftrace-工具开发)
 9. [性能分析方法论 (USE/RED)](#9-性能分析方法论-usered)

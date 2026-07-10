@@ -74,7 +74,7 @@ cross_refs:
 3. [CloudCore 组件详解](#3-cloudcore-组件详解)
 4. [EdgeCore 组件详解](#4-edgecore-组件详解)
 5. [通信机制](#5-通信机制)
-6. [[entities/helm.md|Helm]] 部署](#6-helm-部署)
+6. [[实体/helm.md|Helm]] 部署](#6-helm-部署)
 7. [keadm CLI 部署](#7-keadm-cli-部署)
 8. [高可用部署](#8-高可用部署)
 9. [配置详解](#9-配置详解)

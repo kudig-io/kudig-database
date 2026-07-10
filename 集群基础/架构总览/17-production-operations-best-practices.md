@@ -76,7 +76,7 @@ cross_refs:
 
 
 
-# 17 - 生产环境运维最佳实践 ([[entities/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
+# 17 - 生产环境运维最佳实践 ([[实体/k8s-production-operations.md|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [Kubernetes Production Guide](https://kubernetes.io/docs/setup/production-environment/), CNCF Production Readiness
 

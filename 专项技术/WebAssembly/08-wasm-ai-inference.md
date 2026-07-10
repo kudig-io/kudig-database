@@ -69,7 +69,7 @@ authors:
 
 1. [Wasm AI 推理架构概述](#1-wasm-ai-推理架构概述)
 2. [WASI-NN 标准接口](#2-wasi-nn-标准接口)
-3. [[entities/wasmedge.md|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
+3. [[实体/wasmedge.md|WasmEdge]] WASI-NN 实践](#3-wasmedge-wasi-nn-实践)
 4. [ONNX Runtime Wasm](#4-onnx-runtime-wasm)
 5. [llama.cpp Wasm 移植](#5-llamacpp-wasm-移植)
 6. [模型优化与量化](#6-模型优化与量化)
@@ -78,7 +78,7 @@ authors:
 9. [Python/JS AI 推理集成](#9-pythonjs-ai-推理集成)
 10. [多模型服务架构](#10-多模型服务架构)
 11. [性能基准与对比](#11-性能基准与对比)
-12. [[entities/kubernetes.md|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
+12. [[实体/kubernetes.md|Kubernetes]] AI 推理集成](#12-kubernetes-ai-推理集成)
 13. [实战案例：图像分类服务](#13-实战案例图像分类服务)
 14. [实战案例：LLM 推理服务](#14-实战案例llm-推理服务)
 

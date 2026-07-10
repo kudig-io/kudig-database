@@ -370,9 +370,9 @@ Spot 实例叠加 Graviton = 最高性价比组合
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
-- [[entities/containerd.md|containerd]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/cni.md|cni]]
+- [[实体/containerd.md|containerd]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/docker.md|docker]]
 

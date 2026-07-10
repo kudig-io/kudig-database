@@ -79,7 +79,7 @@ related_docs:
 
 # 35 - 工作负载控制器详解 (Workload Controllers)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
 
 <!-- chunk: 控制器核心特征矩阵 (Controller Matrix) -->
 ## 控制器核心特征矩阵 (Controller Matrix)

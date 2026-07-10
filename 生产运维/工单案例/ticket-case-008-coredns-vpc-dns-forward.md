@@ -56,7 +56,7 @@ authors:
 relationships:
 - target: '[[系统基础/知识字典/networking/dns-resolution.md]]'
   type: related_to
-- target: '[[entities/coredns.md]]'
+- target: '[[实体/coredns.md]]'
   type: related_to
 - target: '[[系统基础/知识字典/networking/dns.md]]'
   type: related_to
@@ -64,7 +64,7 @@ relationships:
   type: related_to
 - target: '[[系统基础/知识字典/configuration/configmap.md]]'
   type: related_to
-- target: '[[concepts/service-networking.md]]'
+- target: '[[概念/service-networking.md]]'
   type: related_to
 ---
 
@@ -361,7 +361,7 @@ kubectl exec -it deploy/route-service -n logistics-platform -- \
 - 域名服务
 - [[生产运维/工单案例/ticket-case-013-configmap-secret-update-not-effective.md|ConfigMap/Secret 更新后应用未生效]]
 - 配置映射
-- [[concepts/service-networking.md|Service Networking]]
+- [[概念/service-networking.md|Service Networking]]
 
 
 <!-- risk-assessed -->

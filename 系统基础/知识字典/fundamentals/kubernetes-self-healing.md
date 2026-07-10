@@ -51,7 +51,7 @@ Kubernetes 从设计之初就具备自愈能力，以帮助维护工作负载的
 ## 关键机制或特性
 
 ### 容器级重启
-- 若 [[concepts/pod-lifecycle.md|pod]] 中的容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy`（如 `Always`、`OnFailure`）自动重启该容器。
+- 若 [[概念/pod-lifecycle.md|pod]] 中的容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy`（如 `Always`、`OnFailure`）自动重启该容器。
 
 ### 副本替换
 - **Deployment / [[ReplicaSet|ReplicaSet]]**：若某个 Pod 失败，控制器会创建新的 Pod 以维持指定的副本数。

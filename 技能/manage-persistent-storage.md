@@ -1,0 +1,124 @@
+---
+title: Manage Persistent Storage
+description: '- [[生态参考/98-merged-indexes/index.md|release-notes-storage]]
+  — 发布说明索引 — 存储'
+summary: '- [[生态参考/98-merged-indexes/index.md|release-notes-storage]]
+  — 发布说明索引 — 存储'
+category: skills
+tags:
+- k8s
+- storage
+- pv
+- pvc
+- storageclass
+- csi
+- volume
+- statefulset
+- rag
+tier: core
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Manage Persistent Storage 是什么
+- 如何 Manage Persistent Storage
+trigger_keywords:
+- Manage
+- Persistent
+- Storage
+prerequisites:
+- kubectl-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Manage Persistent Storage
+
+## Storage Lifecycle
+
+### Provision
+
+**Dynamic** (recommended): Create a StorageClass with a CSI driver. PVCs automatically provision PVs.
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ssd-storage
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer  # Schedule Pod first
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+```
+
+**Static**: Manually create PV, then create PVC that matches PV specs.
+
+### Bind
+
+The PVC Controller automatically binds PVCs to matching PVs based on:
+- Storage class match
+- Access mode compatibility
+- Sufficient capacity
+- Label selectors (if specified)
+
+### Use
+
+Reference PVC in Pod/Deployment spec:
+```yaml
+volumes:
+- name: data
+  persistentVolumeClaim:
+    claimName: my-pvc
+```
+
+### Expand
+
+If `allowVolumeExpansion: true` is set on the StorageClass, increase PVC size:
+
+> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
+> - `kubectl edit/patch`：修改运行中的资源
+
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
+kubectl patch pvc my-pvc -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
+```
+### Troubleshoot
+
+``` bash
+# 🟢 低风险：只读/信息收集，通常无副作用
+kubectl get pvc                          # Check binding status
+kubectl describe pvc <name>              # Check events for binding failures
+kubectl get pv                           # Check PV status and reclaim policy
+```
+## Common Issues
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| PVC stuck Pending | No matching PV or provisioner failure | Check StorageClass provisioner, describe PVC |
+| Volume stuck in Terminating | Pod still referencing PVC | Check owner references, remove [[Finalizers|finalizers]] if orphaned |
+| Expansion failed | CSI driver doesn't support expansion, filesystem needs resize | Use compatible CSI driver, resize filesystem manually |
+
+## Related
+
+- [[生态参考/98-merged-indexes/index.md|release-notes-storage]] — 发布说明索引 — 存储
+- [[技能/ts-storage.md|ts-storage]] — 存储故障排查
+- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[deployment]] — Deployment
+- [[概念/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[概念/storage-model.md|Persistent Storage Model]]
+- [[实体/statefulset.md|StatefulSet]]
+- [[实体/csi-drivers.md|CSI Drivers]]
+- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+
+- [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+
+<!-- risk-assessed -->

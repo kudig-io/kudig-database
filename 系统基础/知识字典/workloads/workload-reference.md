@@ -44,7 +44,7 @@ prerequisites:
 # Workload Reference
 
 ## 概述
-Workload Reference 是 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控）。它允许将 Pod 链接到一个 Workload 对象，使调度器能够按组进行协同调度决策，而不是将 Pod 视为独立个体。
+Workload Reference 是 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控）。它允许将 Pod 链接到一个 Workload 对象，使调度器能够按组进行协同调度决策，而不是将 Pod 视为独立个体。
 
 ## 核心概念/原理
 - **Workload 引用**：在 Pod 的 `spec.workloadRef` 字段中指定同一命名空间下的 Workload 对象名称和 Pod 组名称。

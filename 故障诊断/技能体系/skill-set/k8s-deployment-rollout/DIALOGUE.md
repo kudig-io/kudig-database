@@ -16,13 +16,13 @@ rounds: 3
 branches_per_round: 3+
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
+- target: '[[概念/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
   type: uses
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[entities/kubernetes.md]]'
+- target: '[[实体/kubernetes.md]]'
   type: uses
 ---
 
@@ -32,9 +32,9 @@ relationships:
 
 
 
-# [[entities/deployment.md|Deployment]] Rollout Failure — 远程顾问对话脚本
+# [[实体/deployment.md|Deployment]] Rollout Failure — 远程顾问对话脚本
 
-> 顾问身份：远程 [[entities/kubernetes.md|Kubernetes]] SRE 顾问（无法直接连接集群），通过对话指导现场工程师。
+> 顾问身份：远程 [[实体/kubernetes.md|Kubernetes]] SRE 顾问（无法直接连接集群），通过对话指导现场工程师。
 
 ---
 
@@ -94,7 +94,7 @@ kubectl get events --all-namespaces --field-selector type=Warning | tail -30
 > 【如果无法获取全集群事件】改为 `kubectl get events -n <ns> --field-selector type=Warning | tail -20`
 > 【如果 kubectl get nodes 不可用】请从监控平台确认：是否有节点离线、集群总节点数是否减少、是否有网络告警。
 
-**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
+**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
 
 ---
 
@@ -456,10 +456,10 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
-- [[concepts/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
-- [[concepts/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
-- [[concepts/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
+- [[概念/case-studies/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
+- [[概念/case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
+- [[概念/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
+- [[概念/case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
 ## Related
 
 - [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]

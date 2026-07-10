@@ -81,7 +81,7 @@ related_docs:
 
 # 37 - Pod生命周期事件表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
 <!-- chunk: Pod阶段(Phase) -->
 ## Pod阶段(Phase)
@@ -321,7 +321,7 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 ## Related
 
 - [[deployment]]
-- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 
 - 工作负载控制器详解
 - HPA/VPA 自动扩缩容

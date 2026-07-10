@@ -42,7 +42,7 @@ prerequisites:
 
 
 
-# 容器运行时接口（[[concepts/container-runtime.md|Container Runtime]] Interface, CRI）
+# 容器运行时接口（[[概念/container-runtime.md|Container Runtime]] Interface, CRI）
 
 ## 概述
 

@@ -107,30 +107,30 @@ The API aggregation layer allows running independent API Servers alongside the m
 - [Operator Pattern]()
 
 ## Related
-- [[concepts/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
-- [[concepts/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
-- [[concepts/CRD × 可观测性.md|CRD × 可观测性]] — 综合
+- [[概念/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
+- [[概念/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[概念/CRD × 可观测性.md|CRD × 可观测性]] — 综合
 
-- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - [[系统基础/知识字典/fundamentals/kubernetes.md|kubernetes]] — Kubernetes (CNCF Graduated)
-- [[entities/argocd.md|argocd]] — ArgoCD
-- [[skills/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
-- [[entities/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
-- [[concepts/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
-- [[concepts/controller-pattern.md|Controller Pattern]]
-- [[concepts/declarative-api.md|Declarative API]]
-- [[entities/crd-custom-resources.md|CRD Custom Resources]]
+- [[实体/argocd.md|argocd]] — ArgoCD
+- [[技能/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
+- [[实体/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
+- [[概念/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[概念/controller-pattern.md|Controller Pattern]]
+- [[概念/declarative-api.md|Declarative API]]
+- [[实体/crd-custom-resources.md|CRD Custom Resources]]
 - Admission Webhooks
-- [[skills/develop-crd-operator.md|Develop CRD Operator]]
+- [[技能/develop-crd-operator.md|Develop CRD Operator]]
 - Wiki Digest — Daily (2026-05-21) — Cross-reference
-- [[entities/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] — Cross-reference
-- [[entities/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
-- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
-- [[concepts/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
-- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
-- [[entities/kube-apiserver.md|kube-apiserver]] — Cross-reference
-- [[entities/metal3-io.md|Metal3]] — Cross-reference
+- [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] — Cross-reference
+- [[实体/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
+- [[概念/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
+- [[概念/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
+- [[实体/kube-apiserver.md|kube-apiserver]] — Cross-reference
+- [[实体/metal3-io.md|Metal3]] — Cross-reference
 - [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

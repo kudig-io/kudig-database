@@ -150,20 +150,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
-- [[skills/ts-node-components.md|节点组件排查]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/ts-node-components.md|节点组件排查]]
 
 ## Related
 
-- [[skills/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
-- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[entities/container-runtime.md|container-runtime]] — Container Runtime
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[技能/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
+- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[实体/container-runtime.md|container-runtime]] — Container Runtime
+- [[实体/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 
 - [[故障诊断/FTA故障树/list/gpu-fta.md|GPU 异常故障树分析]]
-- [[skills/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
+- [[技能/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
 
 
 <!-- risk-assessed -->

@@ -10,13 +10,13 @@ schema_version: "3.0"
 description: >
   端到端基准测评：模拟完整的工单处理流程，从意图识别到给出解决方案。
   每个 case 覆盖完整的 Agent 能力栈（知识 + 推理 + 工具 + 对话 + 安全）。
-  用于与 docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md 对齐。
+  用于与 文档/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md 对齐。
 authors:
   - name: KUDIG Team
     role: maintainer
 source_docs:
-  - "docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md"
-  - "docs/agent-specs/P0-1-ticket-classification-intent-recognition.md"
+  - "文档/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md"
+  - "文档/agent-specs/P0-1-ticket-classification-intent-recognition.md"
 tags: [benchmark, e2e, diagnostic, agent-evaluation]
 
 evaluation_config:

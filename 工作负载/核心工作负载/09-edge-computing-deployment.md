@@ -74,7 +74,7 @@ cross_refs:
 
 # 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubeedge.md|KubeEdge]]](https://kubeedge.io/), [[entities/openyurt.md|OpenYurt]]](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubeedge.md|KubeEdge]]](https://kubeedge.io/), [[实体/openyurt.md|OpenYurt]]](https://openyurt.io/)
 
 <!-- chunk: 边缘计算架构概览 -->
 ## 边缘计算架构概览

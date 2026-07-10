@@ -900,8 +900,8 @@ kubectl get events --field-selector reason=Evicted -A
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/sql.md|sql]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[skills/node-drain-and-maintenance.md|node-drain-and-maintenance]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[技能/node-drain-and-maintenance.md|node-drain-and-maintenance]]
+- [[实体/kubernetes.md|kubernetes]]
 
 
 <!-- risk-assessed -->

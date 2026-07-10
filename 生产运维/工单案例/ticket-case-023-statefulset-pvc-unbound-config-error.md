@@ -58,7 +58,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[concepts/statefulset.md]]'
+- target: '[[概念/statefulset.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-004-csi-plugin-missing-after-scale.md]]'
   type: related_to

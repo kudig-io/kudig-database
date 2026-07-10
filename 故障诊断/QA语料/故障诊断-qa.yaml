@@ -7302,10 +7302,10 @@ qa_pairs:
   source: 故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md
   section: 根因概览 (12 种)
 - type: operation
-  question: '如何执行与 K8s Node NotReady 诊断与修复 相关的操作: bash scripts/diagnose-quick.sh <node-name>?'
+  question: '如何执行与 K8s Node NotReady 诊断与修复 相关的操作: bash 脚本/diagnose-quick.sh <node-name>?'
   answer: 参见 故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md 中的操作步骤。
   source: 故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md
-  command: bash scripts/diagnose-quick.sh <node-name>
+  command: bash 脚本/diagnose-quick.sh <node-name>
 - type: troubleshooting
   question: 如何排查 K8s Node NotReady 诊断与修复 相关的故障?
   answer: 参见 故障诊断/topic-skills/skill-set/k8s-node-notready/SKILL.md 的故障排查章节。

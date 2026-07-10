@@ -93,7 +93,7 @@ related_docs:
 
 # 04 - 分布式追踪体系 (Distributed Tracing)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opentelemetry.md|opentelemetry]].io](https://opentelemetry.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/opentelemetry.md|opentelemetry]].io](https://opentelemetry.io/)
 
 <!-- chunk: 概述 -->
 ## 概述

@@ -83,7 +83,7 @@ cross_refs:
 
 # 30 - etcd运维操作
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/etcd.md|etcd]].io/docs](https://etcd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/etcd.md|etcd]].io/docs](https://etcd.io/docs/)
 
 <!-- chunk: etcd集群规格建议 -->
 ## etcd集群规格建议

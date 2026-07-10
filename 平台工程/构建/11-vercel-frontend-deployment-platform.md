@@ -62,7 +62,7 @@ cross_refs:
 # Vercel 前端部署平台深度指南
 # Vercel Frontend Deployment Platform In-Depth Guide
 
-> **领域**: 平台工程 | [[concepts/platform-engineering-sre.md|Platform Engineering]]  
+> **领域**: 平台工程 | [[概念/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 入门到中级 | Beginner to Intermediate  
 > **阅读时间**: 约 45 分钟 | ~45 min read  
 > **最后更新**: 2026-04-03

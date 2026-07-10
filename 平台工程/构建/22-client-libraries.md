@@ -62,7 +62,7 @@ cross_refs:
 
 # 46 - Kubernetes客户端库
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/using-api/client-libraries](https://kubernetes.io/docs/reference/using-api/client-libraries/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/reference/using-api/client-libraries](https://kubernetes.io/docs/reference/using-api/client-libraries/)
 
 <!-- chunk: 客户端库架构 -->
 ## 客户端库架构

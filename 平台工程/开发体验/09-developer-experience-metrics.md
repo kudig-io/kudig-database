@@ -80,7 +80,7 @@ estimated_read_time: 5min
 intent_queries:
 - 开发者体验度量 (Developer Experience Metrics) 是什么
 - 如何 开发者体验度量 (Developer Experience Metrics)
-- [[Kubernetes|Kubernetes]] 36 [[concepts/platform-engineering-sre.md|platform engineering]] 最佳实践
+- [[Kubernetes|Kubernetes]] 36 [[概念/platform-engineering-sre.md|platform engineering]] 最佳实践
 trigger_keywords:
 - 开发者体验度量
 - Developer

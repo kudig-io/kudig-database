@@ -1230,7 +1230,7 @@ manage_pvc_operations
 
 ## Related
 
-- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
 - [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]

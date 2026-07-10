@@ -198,7 +198,7 @@ graph TD
 - [[系统基础/速查卡/networking.md|networking]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also

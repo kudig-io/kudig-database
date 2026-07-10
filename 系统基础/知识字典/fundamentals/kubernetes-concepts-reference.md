@@ -95,7 +95,7 @@ prerequisites:
 | 7 | ConfigMap | §5 | 配置数据存储，像"应用的配置文件柜" |
 | 8 | Secret | §5 | 敏感数据存储，像"保险箱" |
 | 9 | Label | §1 | 对象标签，像"行李标签"用于分类和筛选 |
-| 10 | [[concepts/container-runtime.md|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
+| 10 | [[概念/container-runtime.md|Container Runtime]] | §4 | 运行容器的引擎，像"虚拟机里的操作系统" |
 | 11 | kube-apiserver | §3 | API 入口，像"公司前台接待" |
 | 12 | [[系统基础/知识字典/fundamentals/etcd.md|etcd]] | §3 | 数据存储，像"公司的档案室" |
 | 13 | kubelet | §4 | 节点代理，像"每台机器上的管家" |

@@ -515,7 +515,7 @@ kubectl top pods --all-namespaces --sort-by=memory
 - [[系统基础/速查卡/networking.md|networking]]
 - [[系统基础/速查卡/linux.md|linux]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 
 
 <!-- risk-assessed -->

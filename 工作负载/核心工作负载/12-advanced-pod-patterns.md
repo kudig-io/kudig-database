@@ -71,7 +71,7 @@ cross_refs:
 
 # 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[concepts/pod-lifecycle.md|Pod Lifecycle]]](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[概念/pod-lifecycle.md|Pod Lifecycle]]](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
 <!-- chunk: 1. 探针深度调优 (Probes Tuning) -->
 ## 1. 探针深度调优 (Probes Tuning)

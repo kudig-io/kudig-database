@@ -138,8 +138,8 @@ Week 9-12: 运维实践 (40h)
 ```
 **推荐文档**：
 - [Kubernetes](./graduated/kubernetes/kubernetes.md)
-- [[entities/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
-- [[entities/helm.md|Helm]]](./graduated/helm/helm.md)
+- [[实体/containerd.md|containerd]]|containerd]]](./graduated/containerd/containerd.md)
+- [[实体/helm.md|Helm]]](./graduated/helm/helm.md)
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Argo CD](./graduated/argo/argo.md)
 - [Flux](./graduated/flux/flux.md)
@@ -201,7 +201,7 @@ Week 13-16: 生产实践 (40h)
 **推荐文档**：
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Istio](./graduated/istio/istio.md)
-- [[entities/linkerd.md|Linkerd]]](./graduated/linkerd/linkerd.md)
+- [[实体/linkerd.md|Linkerd]]](./graduated/linkerd/linkerd.md)
 - [OpenTelemetry](./incubating/opentelemetry/opentelemetry.md)
 - [Falco](./graduated/falco/falco.md)
 - [Chaos Mesh](./incubating/chaos-mesh/chaos-mesh.md)
@@ -331,10 +331,10 @@ Month 3: 身份与零信任 (40h)
 - [OPA](./graduated/opa/opa.md)
 - [Falco](./graduated/falco/falco.md)
 - [SPIFFE](./graduated/spiffe/spiffe.md)
-- [[entities/spire.md|SPIRE]]](./graduated/spire/spire.md)
+- [[实体/spire.md|SPIRE]]](./graduated/spire/spire.md)
 - [Kyverno](./incubating/kyverno/kyverno.md)
 - [in-toto](./graduated/in-toto/in-toto.md)
-- [[entities/operator-framework.md|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
+- [[实体/operator-framework.md|The Update Framework (TUF)]]|TUF]]](./graduated/tuf/tuf.md)
 
 ---
 

@@ -78,7 +78,7 @@ severity: high
 | **K8s 全量故障树** | [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md) |
 | **FTA + AI Agent** | [第8章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) |
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta-methodology-and-agentic-practices.md) |
-| **FTA vs FEBM 对比** | [topic-febm](../故障诊断/[[entities/kudig-metadata-index.md|README]]]].md) |
+| **FTA vs FEBM 对比** | [topic-febm](../故障诊断/[[实体/kudig-metadata-index.md|README]]]].md) |
 
 ## 最近更新（2026 Q2）
 - **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta-methodology-and-agentic-practices.md#二十三生产级落地基线2026q2-更新)
@@ -189,24 +189,24 @@ Agent 工程师:  第8-13章 → 第14章
 
 - [[README|README]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/opentelemetry.md|OpenTelemetry]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/opentelemetry.md|OpenTelemetry]]
 - [[log|log]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
@@ -216,21 +216,21 @@ Agent 工程师:  第8-13章 → 第14章
 
 ## 历史归档版本
 
-- [[_archives/troubleshooting-diagnostics/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/05-fta-construction-process.md|05-fta-construction-process]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/06-fta-verification-and-quality.md|06-fta-verification-and-quality]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/07-fta-maintenance-and-evolution.md|07-fta-maintenance-and-evolution]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/10-agent-orchestration-patterns.md|10-agent-orchestration-patterns]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/12-fta-aiops-integration.md|12-fta-aiops-integration]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/13-intelligent-ticket-processing.md|13-intelligent-ticket-processing]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/14-fta-system-engineering.md|14-fta-system-engineering]]
-- [[_archives/troubleshooting-diagnostics/FTA故障树/15-fta-quality-assessment.md|15-fta-quality-assessment]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/05-fta-construction-process.md|05-fta-construction-process]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/06-fta-verification-and-quality.md|06-fta-verification-and-quality]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/07-fta-maintenance-and-evolution.md|07-fta-maintenance-and-evolution]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|09-fta-as-agent-knowledge-skeleton]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/10-agent-orchestration-patterns.md|10-agent-orchestration-patterns]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/12-fta-aiops-integration.md|12-fta-aiops-integration]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/13-intelligent-ticket-processing.md|13-intelligent-ticket-processing]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/14-fta-system-engineering.md|14-fta-system-engineering]]
+- [[归档/troubleshooting-diagnostics/FTA故障树/15-fta-quality-assessment.md|15-fta-quality-assessment]]
 
 
 <!-- risk-assessed -->

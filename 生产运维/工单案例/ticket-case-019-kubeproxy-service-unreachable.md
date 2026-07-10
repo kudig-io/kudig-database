@@ -54,7 +54,7 @@ authors:
 relationships:
 - target: '[[系统基础/知识字典/fundamentals/kube-proxy.md]]'
   type: related_to
-- target: '[[concepts/service.md]]'
+- target: '[[概念/service.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to

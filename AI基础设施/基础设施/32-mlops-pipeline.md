@@ -67,7 +67,7 @@ cross_refs:
 
 # 32 - MLOps端到端流水线
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[entities/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[实体/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[实体/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
 
 <!-- chunk: 一、MLOps流水线架构 -->
 ## 一、MLOps流水线架构

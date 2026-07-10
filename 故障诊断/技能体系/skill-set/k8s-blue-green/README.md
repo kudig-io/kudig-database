@@ -77,9 +77,9 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 
 ## 相关概念
 
-- [[concepts/blue-green-deployment.md|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
-- [[concepts/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
-- [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略与流量权重控制
+- [[概念/blue-green-deployment.md|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略
+- [[概念/deployment-controller-architecture.md|Deployment 控制器架构]] — Deployment 滚动更新与副本管理原理
+- [[概念/canary-deployment.md|金丝雀部署]] — 渐进式发布策略与流量权重控制
 
 ## Related
 

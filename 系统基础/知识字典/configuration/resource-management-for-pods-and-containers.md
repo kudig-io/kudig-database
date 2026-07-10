@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
+在 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
 
 ## 核心概念/原理
 

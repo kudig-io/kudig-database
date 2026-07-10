@@ -156,7 +156,7 @@ kubectl scale deployment <name> --replicas=0       # 临时减少副本（低风
 
 # 原因 2: 污点不容忍
 kubectl get nodes -o jsonpath='{.items[*].spec.taints}'  # 查看节点污点
-kubectl patch pod <pod-name> -p '{"spec":{"tolerations":[{"key":"node.[[entities/kubernetes.md|kubernetes]].io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}]}}'  # 临时添加容忍
+kubectl patch pod <pod-name> -p '{"spec":{"tolerations":[{"key":"node.[[实体/kubernetes.md|kubernetes]].io/not-ready","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}]}}'  # 临时添加容忍
 
 # 原因 3: nodeSelector 不匹配
 kubectl label node <node-name> <label-key>=<value>  # 添加标签匹配

@@ -38,7 +38,7 @@ prerequisites:
 
 ## 概述
 
-本页面描述了针对 Linux 操作系统的安全考虑和最佳实践。Linux 节点在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中承担着运行容器工作负载的重要角色，某些内核和系统配置会直接影响 Secret 等敏感数据的保护效果。
+本页面描述了针对 Linux 操作系统的安全考虑和最佳实践。Linux 节点在 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中承担着运行容器工作负载的重要角色，某些内核和系统配置会直接影响 Secret 等敏感数据的保护效果。
 
 ## 核心概念/原理
 

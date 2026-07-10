@@ -1,0 +1,15 @@
+Enabling lsm=bpf by default would cause a performance regression
+for lmbench/tcp and lmbench/syscall by 5%~11%.
+
+Actually not all or most users want lsm=bpf and those who want
+could enable it by cmdline. Thus here we will not enable lsm=bpf
+by default.
+
+Lua-LSM support is backported into the security subsystem (ANBZ: #31935).
+Enable lua in CONFIG_LSM together with CONFIG_SECURITY_LUA_LSM=y on
+architectures that provide ARCH_HAS_SETJMP in this backport tree.
+Keep loongarch, riscv, sw_64-6b, and sw_64-8a on the original LSM list.
+
+Enable lua for all architectures, Using a unified CONFIG_LSM simplifies
+the config, and platforms that do not support SETJMP will not be
+affected due to dependencies.

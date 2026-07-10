@@ -447,9 +447,9 @@ Kubernetes v1.30+ 引入 **ValidatingAdmissionPolicy**（内置 CEL 表达式验
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cert-manager.md|cert-manager]]
-- [[entities/kserve.md|kserve]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/cert-manager.md|cert-manager]]
+- [[实体/kserve.md|kserve]]
 
 
 <!-- risk-assessed -->

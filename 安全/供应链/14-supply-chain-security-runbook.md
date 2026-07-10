@@ -69,7 +69,7 @@ authors:
 > **目标读者**: SRE、平台工程师、安全工程师、DevOps。  
 > **最后更新**: 2026-07-01
 
-本手册是 [[安全/99-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]] 在供应链安全方向的落地 runbook，参考 [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“镜像仓库 / 供应链安全”缺口设计，覆盖镜像 SBOM、签名、准入校验、仓库安全与 CI/CD 加固。软件供应链安全的目标是确保从源代码到生产运行的每一步都可追溯、可验证、可审计。
+本手册是 [[安全/99-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]] 在供应链安全方向的落地 runbook，参考 [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“镜像仓库 / 供应链安全”缺口设计，覆盖镜像 SBOM、签名、准入校验、仓库安全与 CI/CD 加固。软件供应链安全的目标是确保从源代码到生产运行的每一步都可追溯、可验证、可审计。
 
 ---
 
@@ -396,7 +396,7 @@ cosign verify-attestation --key cosign.pub \
 
 ### 跨域参考
 
-- [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
+- [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
 - [[容器运行时/99-production-readiness-operations-guide.md|容器运行时生产就绪运维指南]]
 - [[容器运行时/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
 - [[容器运行时/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业级镜像仓库]]

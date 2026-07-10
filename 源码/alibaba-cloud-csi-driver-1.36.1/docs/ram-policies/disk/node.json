@@ -1,0 +1,28 @@
+{
+    "Version": "1",
+    "Statement": [
+        {
+            "Action": [
+                "ecs:AddTags",
+                "ecs:DeleteSnapshot",
+                "ecs:DescribeDisks",
+                "ecs:DescribeInstanceAttribute",
+                "ecs:DescribeInstanceHistoryEvents",
+                "ecs:DescribeInstances",
+                "ecs:DescribeSnapshots",
+                "ecs:DescribeTags",
+                "ecs:DescribeTaskAttribute",
+                "ecs:ListTagResources",
+                "ecs:RemoveTags",
+                "ecs:TagResources",
+                "ecs:UntagResources",
+                "eflo:DescribeNode",
+                "eflo:DescribeNodeType"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}

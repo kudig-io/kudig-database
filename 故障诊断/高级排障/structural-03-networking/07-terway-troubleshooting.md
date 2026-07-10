@@ -819,7 +819,7 @@ terway-cli --help
 - 16-troubleshooting-guide
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[skills/ts-networking.md|ts-networking]]
+- [[技能/ts-networking.md|ts-networking]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

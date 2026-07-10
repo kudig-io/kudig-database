@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 可以配置为在节点上使用 swap（交换）内存，允许内核将不活跃的内存页换出到后备存储，从而释放物理内存。这对具有大内存占用但只在特定时间访问部分内存的工作负载非常有用，也有助于防止 Pod 在内存压力峰值期间被终止，并提高节点内存管理的灵活性。
+[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 可以配置为在节点上使用 swap（交换）内存，允许内核将不活跃的内存页换出到后备存储，从而释放物理内存。这对具有大内存占用但只在特定时间访问部分内存的工作负载非常有用，也有助于防止 Pod 在内存压力峰值期间被终止，并提高节点内存管理的灵活性。
 
 ## 核心概念/原理
 
@@ -61,7 +61,7 @@ prerequisites:
 
 注意：选择 `NoSwap` 且 `failSwapOn: false` 时，Kubernetes 管理的容器不使用 swap，但系统服务（包括 kubelet 本身）仍可使用 swap。
 
-### [[concepts/container-runtime.md|Container Runtime]] 集成
+### [[概念/container-runtime.md|Container Runtime]] 集成
 
 kubelet 通过 CRI 指示容器运行时在 cgroup 层面（如 cgroup v2 的 `memory.swap.max`）配置 swap，容器运行时负责将这些设置写入容器级 cgroup。
 

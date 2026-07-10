@@ -318,7 +318,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/observability-stack-evolution.md|可观测性技术栈演进]] — 日志收集管道与可观测性体系架构
+- [[概念/observability-stack-evolution.md|可观测性技术栈演进]] — 日志收集管道与可观测性体系架构
 
 ```
 

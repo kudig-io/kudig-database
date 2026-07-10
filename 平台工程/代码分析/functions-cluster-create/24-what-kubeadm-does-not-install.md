@@ -745,7 +745,7 @@ kubectl get pods -A -o wide
 - [[reference|#reference Hub]] — tag hub
 
 - [[log|log]]
-- [[scripts/man/INSTALL.md|INSTALL]]
+- [[脚本/man/INSTALL.md|INSTALL]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/networking.md|networking]]
 - [[系统基础/速查卡/k8s.md|k8s]]

@@ -60,7 +60,7 @@ prerequisites:
 
 ## 架构基础
 
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
+- [[概念/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
 - [[集群基础/架构总览/02-core-components-deep-dive.md|02 core components deep dive]]
 - [[集群基础/kubectl/05-kubectl-commands-reference.md|05 kubectl commands reference]]
 - 07 - 升级路径与策略指南

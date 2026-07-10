@@ -70,7 +70,7 @@ cross_refs:
 
 # AI模型部署与生命周期管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
 
 <!-- chunk: 一、模型部署架构概览 -->
 ## 一、模型部署架构概览

@@ -45,7 +45,7 @@ lifecycle: reviewed
 
 ## 概述
 
-类似于 Angular 等编程框架中的组件生命周期钩子，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
+类似于 Angular 等编程框架中的组件生命周期钩子，[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 为容器提供了生命周期钩子（Lifecycle Hooks）机制。该机制使容器能够感知自身管理生命周期中的事件，并在相应钩子触发时执行处理程序（handler）中的代码。
 
 ## 核心概念/原理
 

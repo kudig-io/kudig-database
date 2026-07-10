@@ -1,0 +1,5 @@
+# License: GPL-2.0
+#
+# yhgch drm device configuration.
+
+source "drivers/gpu/drm/yhgch/yhgch-drm/Kconfig"

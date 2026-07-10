@@ -432,8 +432,8 @@ source <(kubectl completion zsh)   # Zsh
 - 集群基础 KUDIG Database — Global MOC
 - [[集群基础/README.md|Domain-1: Kubernetes架构基础]]
 - index.md|Domain-1 架构基础 — 开源项目索引]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - 03 - 功能和API表
 - 04 - Kubernetes 源码结构深度解析
 - kubectl 命令完整参考

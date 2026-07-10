@@ -1,0 +1,168 @@
+domain: domain-25-cloud-native-security
+total_questions: 34
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Domain-25 云原生安全 — 开源项目索引 中, 概述与威胁模型 是什么?
+  answer: 参见 domain-25-cloud-native-security/00-open-source-projects-index.md 的「概述与威胁模型」章节。
+  source: domain-25-cloud-native-security/00-open-source-projects-index.md
+  section: 概述与威胁模型
+- type: concept
+  question: 在 Domain-25 云原生安全 — 开源项目索引 中, 核心项目总览 是什么?
+  answer: 参见 domain-25-cloud-native-security/00-open-source-projects-index.md 的「核心项目总览」章节。
+  source: domain-25-cloud-native-security/00-open-source-projects-index.md
+  section: 核心项目总览
+- type: concept
+  question: 在 Domain-25 云原生安全 — 开源项目索引 中, 运行时安全 (Runtime Security) 是什么?
+  answer: 参见 domain-25-cloud-native-security/00-open-source-projects-index.md 的「运行时安全 (Runtime Security)」章节。
+  source: domain-25-cloud-native-security/00-open-source-projects-index.md
+  section: 运行时安全 (Runtime Security)
+- type: comparison
+  question: Domain-25 云原生安全 — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/00-open-source-projects-index.md 中的对比分析。
+  source: domain-25-cloud-native-security/00-open-source-projects-index.md
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 概述与威胁模型 是什么?
+  answer: 参见 domain-25-cloud-native-security/01-falco-cloud-native-security.md 的「概述与威胁模型」章节。
+  source: domain-25-cloud-native-security/01-falco-cloud-native-security.md
+  section: 概述与威胁模型
+- type: operation
+  question: '如何执行与 Falco 云原生安全监控深度实践 相关的操作: helm repo add falcosecurity https://falcosecurity.github.io/?'
+  answer: 参见 domain-25-cloud-native-security/01-falco-cloud-native-security.md 中的操作步骤。
+  source: domain-25-cloud-native-security/01-falco-cloud-native-security.md
+  command: helm repo add falcosecurity https://falcosecurity.github.io/charts/
+- type: comparison
+  question: Falco 云原生安全监控深度实践 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/01-falco-cloud-native-security.md 中的对比分析。
+  source: domain-25-cloud-native-security/01-falco-cloud-native-security.md
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, Abstract 是什么?
+  answer: 参见 domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md 的「Abstract」章节。
+  source: domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md
+  section: Abstract
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, Sysdig Architecture Deep Dive 是什么?
+  answer: 参见 domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md 的「Sysdig Architecture Deep Dive」章节。
+  source: domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md
+  section: Sysdig Architecture Deep Dive
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, Enterprise Deployment Architecture 是什么?
+  answer: 参见 domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md 的「Enterprise Deployment Architecture」章节。
+  source: domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md
+  section: Enterprise Deployment Architecture
+- type: comparison
+  question: Sysdig企业级容器安全深度实践 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md 中的对比分析。
+  source: domain-25-cloud-native-security/02-sysdig-enterprise-container-security.md
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, 概述 是什么?
+  answer: 参见 domain-25-cloud-native-security/03-aqua-enterprise-container-security.md 的「概述」章节。
+  source: domain-25-cloud-native-security/03-aqua-enterprise-container-security.md
+  section: 概述
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/03-aqua-enterprise-container-security.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/03-aqua-enterprise-container-security.md
+  section: 架构设计
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 概述 是什么?
+  answer: 参见 domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md 的「概述」章节。
+  source: domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md
+  section: 概述
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 Kyverno 企业级策略管理深度实践 相关的操作: helm repo add kyverno https://kyverno.github.io/kyverno/?'
+  answer: 参见 domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md 中的操作步骤。
+  source: domain-25-cloud-native-security/04-kyverno-enterprise-policy-management.md
+  command: helm repo add kyverno https://kyverno.github.io/kyverno/
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, 概述 是什么?
+  answer: 参见 domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md 的「概述」章节。
+  source: domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md
+  section: 概述
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 HashiCorp Vault 企业级密钥管理深度实践 相关的操作: vault auth enable ldap?'
+  answer: 参见 domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md 中的操作步骤。
+  source: domain-25-cloud-native-security/05-vault-enterprise-secrets-management.md
+  command: vault auth enable ldap
+- type: comparison
+  question: OPA Gatekeeper 策略即代码深度实践 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/09-opa-gatekeeper-policy.md 中的对比分析。
+  source: domain-25-cloud-native-security/09-opa-gatekeeper-policy.md
+- type: operation
+  question: '如何执行与 容器镜像安全扫描深度实践 相关的操作: IMAGE="registry.company.com/myapp:v1.2.3"?'
+  answer: 参见 domain-25-cloud-native-security/10-image-security-scanning.md 中的操作步骤。
+  source: domain-25-cloud-native-security/10-image-security-scanning.md
+  command: IMAGE="registry.company.com/myapp:v1.2.3"
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/11-kubernetes-security-hardening.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/11-kubernetes-security-hardening.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 cert-manager 自动证书管理深度实践 相关的操作: helm repo add jetstack https://charts.jetstack.io?'
+  answer: 参见 domain-25-cloud-native-security/99-cert-manager-tls-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-cert-manager-tls-guide.md
+  command: helm repo add jetstack https://charts.jetstack.io
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/99-falco-runtime-security-guide.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/99-falco-runtime-security-guide.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 Falco 运行时安全监控深度实践 相关的操作: helm repo add falcosecurity https://falcosecurity.github.io/?'
+  answer: 参见 domain-25-cloud-native-security/99-falco-runtime-security-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-falco-runtime-security-guide.md
+  command: helm repo add falcosecurity https://falcosecurity.github.io/charts
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, 概述 是什么?
+  answer: 参见 domain-25-cloud-native-security/99-java-security-kubernetes-guide.md 的「概述」章节。
+  source: domain-25-cloud-native-security/99-java-security-kubernetes-guide.md
+  section: 概述
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, 架构设计 是什么?
+  answer: 参见 domain-25-cloud-native-security/99-java-security-kubernetes-guide.md 的「架构设计」章节。
+  source: domain-25-cloud-native-security/99-java-security-kubernetes-guide.md
+  section: 架构设计
+- type: operation
+  question: '如何执行与 Kyverno K8s 原生策略管理实践指南 相关的操作: helm repo add kyverno https://kyverno.github.io/kyverno/?'
+  answer: 参见 domain-25-cloud-native-security/99-kyverno-policy-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-kyverno-policy-guide.md
+  command: helm repo add kyverno https://kyverno.github.io/kyverno/
+- type: operation
+  question: '如何执行与 Kyverno K8s 原生策略管理实践指南 相关的操作: kubectl get validatingwebhookconfiguration -l app.kubernetes?'
+  answer: 参见 domain-25-cloud-native-security/99-kyverno-policy-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-kyverno-policy-guide.md
+  command: kubectl get validatingwebhookconfiguration -l app.kubernetes.io/name=kyverno -o yaml
+- type: operation
+  question: '如何执行与 OPA Gatekeeper 策略即代码深度实践 相关的操作: helm repo add gatekeeper https://open-policy-agent.github.io?'
+  answer: 参见 domain-25-cloud-native-security/99-opa-gatekeeper-policy-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-opa-gatekeeper-policy-guide.md
+  command: helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
+- type: comparison
+  question: OPA Gatekeeper 策略即代码深度实践 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/99-opa-gatekeeper-policy-guide.md 中的对比分析。
+  source: domain-25-cloud-native-security/99-opa-gatekeeper-policy-guide.md
+- type: operation
+  question: '如何执行与 Vault K8s 密钥管理集成深度实践 相关的操作: helm repo add hashicorp https://helm.releases.hashicorp.com?'
+  answer: 参见 domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md
+  command: helm repo add hashicorp https://helm.releases.hashicorp.com
+- type: operation
+  question: '如何执行与 Vault K8s 密钥管理集成深度实践 相关的操作: kubectl exec -it vault-0 -n vault -- vault operator init -ke?'
+  answer: 参见 domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md 中的操作步骤。
+  source: domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md
+  command: kubectl exec -it vault-0 -n vault -- vault operator init -key-shares=5 -key-threshold=3 -format=json
+- type: comparison
+  question: Vault K8s 密钥管理集成深度实践 中有哪些技术对比?
+  answer: 参见 domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md 中的对比分析。
+  source: domain-25-cloud-native-security/99-vault-k8s-secrets-guide.md

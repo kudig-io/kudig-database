@@ -43,7 +43,7 @@ prerequisites:
 
 ## 概述
 
-[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持在 Windows 节点上运行工作负载，并允许与 Linux 节点混合部署在同一个集群中。Windows 容器网络通过 CNI 插件暴露，其网络模型与 Linux 有显著差异：每个容器拥有一个虚拟网卡（vNIC），连接到 Hyper-V 虚拟交换机（vSwitch），由 Host Networking [[Service|Service]]（HNS）和 Host Compute Service（HCS）协同管理。
+[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持在 Windows 节点上运行工作负载，并允许与 Linux 节点混合部署在同一个集群中。Windows 容器网络通过 CNI 插件暴露，其网络模型与 Linux 有显著差异：每个容器拥有一个虚拟网卡（vNIC），连接到 Hyper-V 虚拟交换机（vSwitch），由 Host Networking [[Service|Service]]（HNS）和 Host Compute Service（HCS）协同管理。
 
 ## 核心概念/原理
 

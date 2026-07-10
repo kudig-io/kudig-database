@@ -51,7 +51,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[concepts/service.md]]'
+- target: '[[概念/service.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to

@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[ReplicaSet|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
+在 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[ReplicaSet|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
 
 ## 核心概念/原理
 

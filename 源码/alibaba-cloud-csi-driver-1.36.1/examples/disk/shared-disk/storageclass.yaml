@@ -1,0 +1,11 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: alicloud-disk-essd-multi-attach-wait
+parameters:
+  type: cloud_essd
+  multiAttach: "true" 
+provisioner: diskplugin.csi.alibabacloud.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer

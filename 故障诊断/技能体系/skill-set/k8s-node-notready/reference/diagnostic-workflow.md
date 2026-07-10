@@ -127,7 +127,7 @@ version: 1.0.0
   - `MemoryPressure` 为 `True` → 记录，可能根因为 RC-004
   - `DiskPressure` 为 `True` → 记录，可能根因为 RC-003
   - `PIDPressure` 为 `True` → 记录，可能根因为 RC-005
-  - Message 字段包含 `[[concepts/container-runtime.md|container runtime]] is down` → RC-002（容器运行时问题）
+  - Message 字段包含 `[[概念/container-runtime.md|container runtime]] is down` → RC-002（容器运行时问题）
   - Message 字段包含 `PLEG is not healthy` → RC-008（PLEG 不健康）
   - Message 字段包含 `certificate` 或 `x509` → RC-007（证书问题），关联 SKILL-SEC-001
 - **版本差异**:

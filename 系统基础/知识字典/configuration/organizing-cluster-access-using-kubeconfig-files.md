@@ -54,7 +54,7 @@ kubeconfig 文件用于组织关于集群、用户、命名空间和认证机制
 
 ### kubeconfig 的三大组成部分
 
-1. **Clusters（集群）**：定义一个或多个 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群的 API Server 地址和证书信息。
+1. **Clusters（集群）**：定义一个或多个 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群的 API Server 地址和证书信息。
 2. **Users（用户）**：定义访问集群所需的身份认证信息（如客户端证书、用户名密码、Token 等）。
 3. **Contexts（上下文）**：将 cluster、namespace 和 user 组合在一起，形成一个便于切换的访问环境。
 

@@ -15,13 +15,13 @@ agent_role: 远程顾问
 execution_mode: L1-advisory
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/etcd.md]]'
+- target: '[[实体/etcd.md]]'
   type: uses
-- target: '[[entities/kubelet.md]]'
+- target: '[[实体/kubelet.md]]'
   type: uses
-- target: '[[skills/kubelet-certificate-rotation.md]]'
+- target: '[[技能/kubelet-certificate-rotation.md]]'
   type: uses
 ---
 
@@ -82,7 +82,7 @@ relationships:
 >
 > 同时请确认：报错中是否包含 `x509`、`certificate`、`unauthorized`？集群是 kubeadm 部署还是托管集群？
 
-### 入口 D：工程师提到 [[entities/kubelet.md|kubelet]] 报错
+### 入口 D：工程师提到 [[实体/kubelet.md|kubelet]] 报错
 
 **工程师**："kubelet 日志里有证书错误" / "FailedToUpdateNodeStatus"
 
@@ -137,7 +137,7 @@ relationships:
 ### Round 1 — 分支 C：完全无法执行任何命令
 
 **顾问**：当前信息有限。请尽可能收集：
-> 1. **监控截图**：是否有 apiserver、[[entities/etcd.md|etcd]]、kubelet 告警？
+> 1. **监控截图**：是否有 apiserver、[[实体/etcd.md|etcd]]、kubelet 告警？
 > 2. **告警内容**：告警通知的完整内容
 > 3. **应用表现**：业务是否还能访问？错误页面是什么？
 > 4. **变更记录**：最近 24-48 小时是否有运维变更？
@@ -190,7 +190,7 @@ relationships:
 > - **替代方案 B**：查看 `/var/log/messages` 或 `/var/log/syslog`
 > - **替代方案 C**：`kubectl debug node/<node> -it --image=busybox`
 >
-> 这可能需要引导至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001（节点问题诊断）。
+> 这可能需要引导至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001（节点问题诊断）。
 
 ### Round 2 — 分支 B：只能 SSH 到节点，手动检查
 
@@ -323,7 +323,7 @@ relationships:
 
 ### Round 3 — 分支 C：kubelet 证书问题 — CSR 处理
 
-**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[skills/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]（自动/手动）。
+**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[技能/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]（自动/手动）。
 > **自动轮换场景**，请执行：
 > ```bash
 > kubectl get csr

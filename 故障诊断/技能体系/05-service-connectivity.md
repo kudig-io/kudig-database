@@ -1821,7 +1821,7 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 |------|---------|---------|
 | Kubernetes 网络模型与 Service 实现 | `网络/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
 | Service 故障树分析 | `故障诊断/topic-fta/list/service-fta.md` | 理解 Service 连通性问题的完整因果链和概率模型 |
-| Ingress 故障树分析 | `故障诊断/topic-fta/[[skills/ingress-fta.md|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
+| Ingress 故障树分析 | `故障诊断/topic-fta/[[技能/ingress-fta.md|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
 | 网络故障排查深度指南 | `故障诊断/topic-structural-trouble-shooting/` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法论 |
 | DNS 诊断 | `SKILL-NET-001` | 当问题根因在 DNS 层面时的关联 Skill |

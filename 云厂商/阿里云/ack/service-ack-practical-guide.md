@@ -404,9 +404,9 @@ spec:
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[skills/service-fta.md|service-fta]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[技能/service-fta.md|service-fta]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/coredns.md|coredns]]
 
 ## See Also
 

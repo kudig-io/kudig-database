@@ -84,7 +84,7 @@ related_docs:
 
 # 02 - 网络安全策略与零信任架构
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/network-policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 <!-- chunk: 网络安全架构全景 -->
 ## 网络安全架构全景
@@ -618,7 +618,7 @@ kubectl logs -n kube-system -l k8s-app=cilium
 
 ## Related
 
-- [[concepts/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[概念/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 
 - 认证授权体系
 - 运行时安全防护

@@ -15,13 +15,13 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/cilium.md]]'
+- target: '[[实体/cilium.md]]'
   type: uses
-- target: '[[entities/coredns.md]]'
+- target: '[[实体/coredns.md]]'
   type: uses
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
 - target: '[[系统基础/知识字典/networking/ingress.md]]'
   type: uses
@@ -130,7 +130,7 @@ relationships:
 **工程师反馈**：多个 Service 或整个命名空间的服务发现失效。
 
 **顾问指令**：
-> 多个 Service 同时问题通常指向集群级组件异常（kube-proxy、[[entities/coredns.md|CoreDNS]]、CNI）。先确认范围。
+> 多个 Service 同时问题通常指向集群级组件异常（kube-proxy、[[实体/coredns.md|CoreDNS]]、CNI）。先确认范围。
 > 1. 检查 kube-proxy Pod 状态：`kubectl get pods -n kube-system -l k8s-app=kube-proxy`
 > **如果没有 kube-proxy 标签** → `kubectl get pods -n kube-system | grep -i proxy`
 > 2. 检查 CoreDNS 状态：`kubectl get pods -n kube-system -l k8s-app=kube-dns`
@@ -142,7 +142,7 @@ relationships:
 
 **分支决策**：
 - **B1**：kube-proxy Pod 异常或部分节点缺失 → Round 2 — 分支 D（kube-proxy 修复）
-- **B2**：CoreDNS Pod 异常 → 升级至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
+- **B2**：CoreDNS Pod 异常 → 升级至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **B3**：CNI Pod 异常 → 升级至 SKILL-NET-003（网络深度诊断）
 - **B4**：节点 NotReady → 升级至 SKILL-NODE-001（节点问题诊断）
 
@@ -359,7 +359,7 @@ relationships:
 > 2. 检查云安全组/ACL：登录云控制台，检查节点安全组的入站规则是否允许 NodePort 范围（默认 30000-32767）；确认是否有 Network ACL 限制；确认是否配置了源 IP 白名单
 > 3. 检查 NetworkPolicy：`kubectl get networkpolicy -n <namespace>`
 > **如果无法执行** → `kubectl get networkpolicy --all-namespaces`
-> **如果使用 [[entities/cilium.md|Cilium]]** → `kubectl get ciliumnetworkpolicy -n <namespace>`
+> **如果使用 [[实体/cilium.md|Cilium]]** → `kubectl get ciliumnetworkpolicy -n <namespace>`
 
 **分支决策**：
 - **F1**：节点防火墙阻断 → Round 3 — 分支 Q（开放防火墙端口）
@@ -680,7 +680,7 @@ kubectl get endpointslices -n <namespace>
 > **如果无法执行** → `kubectl describe pod <pod-name> -n <namespace> | grep -A 5 "DNS Policy"`
 > 2. 查看 dnsConfig：`kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.dnsConfig}'`
 > **如果无 dnsConfig** → 检查集群默认 DNS 配置：`kubectl get configmap coredns -n kube-system -o yaml | grep -A 10 "kubernetes"`
-> 3. 如需修改，在 [[entities/deployment.md|Deployment]] 中增加 dnsConfig：
+> 3. 如需修改，在 [[实体/deployment.md|Deployment]] 中增加 dnsConfig：
 > ```yaml
 > dnsPolicy: ClusterFirst
 > dnsConfig:
@@ -825,7 +825,7 @@ kubectl get endpointslices -n <namespace>
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-09-15-multicluster-network-partition.md|2026-09-15-multicluster-network-partition]]
+- [[概念/case-studies/2026-09-15-multicluster-network-partition.md|2026-09-15-multicluster-network-partition]]
 
 
 <!-- risk-assessed -->

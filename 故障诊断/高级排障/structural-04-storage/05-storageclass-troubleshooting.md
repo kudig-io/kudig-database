@@ -885,7 +885,7 @@ fi
 - 16-troubleshooting-guide
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]

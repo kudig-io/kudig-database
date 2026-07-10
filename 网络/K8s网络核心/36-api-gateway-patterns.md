@@ -69,7 +69,7 @@ cross_refs:
 
 # 38 - Ingress和API Gateway对比表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/services-networking/ingress-controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
 
 <!-- chunk: Ingress控制器对比 -->
 ## Ingress控制器对比

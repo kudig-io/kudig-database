@@ -71,7 +71,7 @@ authors:
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[skills/ts-cloud-provider.md|cloud providers]].
+This document provides comprehensive exploration of Crossplane enterprise deployment architecture, multi-cloud management practices, and operational orchestration. Based on large-scale production environment experience, it offers complete technical guidance from control plane setup to provider management, helping enterprises build unified, vendor-agnostic infrastructure automation platforms with Kubernetes-native approach across AWS, Azure, GCP and other [[技能/ts-cloud-provider.md|cloud providers]].
 
 <!-- chunk: 1. Crossplane Enterprise Architecture -->## 1. Crossplane Enterprise Architecture
 

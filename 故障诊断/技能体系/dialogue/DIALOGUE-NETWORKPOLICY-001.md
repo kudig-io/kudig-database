@@ -29,7 +29,7 @@ last_updated: 2026-05-21
 
 # Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/network-policy.md|NetworkPolicy]]
+> 对应概念：[[概念/network-policy.md|NetworkPolicy]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -231,9 +231,9 @@ kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 
 ## 相关概念
 
-- [[concepts/network-policy.md|NetworkPolicy]]
-- [[entities/cni.md|CNI 插件]]
-- [[skills/best-practices/best-practices/security/pod-security.md|Pod 安全策略]]
+- [[概念/network-policy.md|NetworkPolicy]]
+- [[实体/cni.md|CNI 插件]]
+- [[技能/best-practices/best-practices/security/pod-security.md|Pod 安全策略]]
 
 ## Related
 

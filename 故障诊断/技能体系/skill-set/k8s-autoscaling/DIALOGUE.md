@@ -14,11 +14,11 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/helm.md]]'
+- target: '[[实体/helm.md]]'
   type: uses
-- target: '[[entities/kubelet.md]]'
+- target: '[[实体/kubelet.md]]'
   type: uses
 ---
 
@@ -212,7 +212,7 @@ kubectl get deployment metrics-server -n kube-system -o yaml | grep -A 10 'args:
 ```
 > **如果无法查看 Pod 详情**：请告诉我 metrics-server Pod 的状态（Running / Pending / CrashLoopBackOff）。如果是 Pending，可能是节点资源不足或调度约束导致。
 > 
-> **如果无法查看 deployment 配置**：请通过 Dashboard 查看 metrics-server 的启动参数，特别关注 `--[[entities/kubelet.md|kubelet]]-preferred-address-types` 和 `--kubelet-insecure-tls` 等参数。
+> **如果无法查看 deployment 配置**：请通过 Dashboard 查看 metrics-server 的启动参数，特别关注 `--[[实体/kubelet.md|kubelet]]-preferred-address-types` 和 `--kubelet-insecure-tls` 等参数。
 
 **工程师回复选项**：
 - **A1-1**：metrics-server Pod 为 Pending 状态，Events 显示无法调度
@@ -257,7 +257,7 @@ kubectl describe clusterrole cluster-autoscaler
 # 查看 CA 启动参数
 kubectl get deployment cluster-autoscaler -n kube-system -o yaml | grep -A 20 'args:'
 ```
-> **如果无法查看 clusterrole**：请确认你是否有查看 RBAC 配置的权限。如果没有，请告诉我你们使用的集群类型（EKS/AKS/GKE/ACK/自建），以及 CA 的安装方式（[[entities/helm.md|helm]] chart / 云厂商插件 / 手动部署）。
+> **如果无法查看 clusterrole**：请确认你是否有查看 RBAC 配置的权限。如果没有，请告诉我你们使用的集群类型（EKS/AKS/GKE/ACK/自建），以及 CA 的安装方式（[[实体/helm.md|helm]] chart / 云厂商插件 / 手动部署）。
 > 
 > **如果 CA 部署在命名空间之外**：请确认 CA 的实际部署位置和配置方式。有些集群的 CA 作为云厂商的托管组件运行，不在 kube-system 中。
 
@@ -609,7 +609,7 @@ kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 's
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 需要检查 prometheus-adapter 或自定义指标适配器配置
-> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-MON-001
+> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-MON-001
 > 3. **升级至控制平面专家** → 如果怀疑 apiserver 或 kubelet 指标接口异常，转接至 SKILL-CONT-001
 > 4. **升级至平台工程专家** → 如果涉及多租户配额策略或复杂的资源调度策略
 
@@ -700,11 +700,11 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-02-18-hpa-thrashing.md|2026-02-18-hpa-thrashing]]
-- [[concepts/case-studies/2026-08-18-cluster-autoscaler-scale-down-delay.md|2026-08-18-cluster-autoscaler-scale-down-delay]]
+- [[概念/case-studies/2026-02-18-hpa-thrashing.md|2026-02-18-hpa-thrashing]]
+- [[概念/case-studies/2026-08-18-cluster-autoscaler-scale-down-delay.md|2026-08-18-cluster-autoscaler-scale-down-delay]]
 ## Related
 
-- [[entities/deployment.md|Deployment]]
+- [[实体/deployment.md|Deployment]]
 - [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 

@@ -126,7 +126,7 @@ OpenCode 在 `skill` 工具描述中列出所有可用 Skill：
   </skill>
   <skill>
     <name>k8s-debug</name>
-    <description>Debug [[entities/kubernetes.md|kubernetes]] pod issues</description>
+    <description>Debug [[实体/kubernetes.md|kubernetes]] pod issues</description>
   </skill>
 </available_skills>
 ```

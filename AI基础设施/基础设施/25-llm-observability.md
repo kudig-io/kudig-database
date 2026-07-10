@@ -69,7 +69,7 @@ cross_refs:
 
 # 25 - LLM可观测性与监控体系
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/prometheus.md|Prometheus]]](https://prometheus.io/) | [[entities/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/) | [Elasticsearch](https://www.elastic.co/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[实体/prometheus.md|Prometheus]]](https://prometheus.io/) | [[实体/opentelemetry.md|OpenTelemetry]]](https://opentelemetry.io/) | [Grafana](https://grafana.com/) | [Elasticsearch](https://www.elastic.co/)
 
 <!-- chunk: 一、企业级LLM可观测性架构 -->
 ## 一、企业级LLM可观测性架构

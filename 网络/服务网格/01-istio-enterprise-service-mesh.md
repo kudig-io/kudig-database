@@ -1376,7 +1376,7 @@ istioctl proxy-config listener deploy/istio-ingressgateway -n istio-system --jso
 
 ## 相关合成分析
 
-- [[concepts/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
+- [[概念/service-mesh-zero-trust-security.md|Service Mesh 零信任安全架构]]
 
 
 ```

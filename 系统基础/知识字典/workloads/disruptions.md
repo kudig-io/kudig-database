@@ -218,13 +218,13 @@ kubectl get pdb -n <namespace> -o wide
 ## 交叉引用
 
 - [[系统基础/知识字典/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
-- [[entities/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
+- [[实体/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
 - [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
 - [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
 - [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
 
 ## 参考链接
-- https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
+- https://[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
 
 ## Related
 

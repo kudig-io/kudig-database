@@ -115,16 +115,16 @@ prerequisites:
 
 - topic-index MOC
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[entities/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
-- [[entities/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
-- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- [[entities/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
-- [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
-- [[entities/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
-- [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
-- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[实体/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
+- [[实体/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[实体/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[实体/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[实体/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[实体/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[实体/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[实体/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[实体/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
 - [[网络/K8s网络核心/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
 - [[可观测性/总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference

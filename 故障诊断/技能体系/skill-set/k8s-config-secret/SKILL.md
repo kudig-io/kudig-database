@@ -232,7 +232,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 
 - k8s-deployment-rollout
 
-- [[scripts/video-scripts/pod-crashloop.md|pod crashloop]]
+- [[脚本/video-scripts/pod-crashloop.md|pod crashloop]]
 
 - k8s-rbac-quota
 
@@ -301,7 +301,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/secrets-management.md|Secrets 管理]] — Kubernetes Secret 创建、挂载与安全最佳实践
+- [[概念/secrets-management.md|Secrets 管理]] — Kubernetes Secret 创建、挂载与安全最佳实践
 
 
 <!-- risk-assessed -->

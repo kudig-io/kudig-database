@@ -65,7 +65,7 @@ cross_refs:
 
 # 16 - 安全合规管理 (Security & Compliance Management)& Compliance]] Management)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)
 
 <!-- chunk: 零信任安全架构 -->
 ## 零信任安全架构

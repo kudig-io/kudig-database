@@ -323,7 +323,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
+- [[概念/pod-lifecycle.md|Pod 生命周期]] — Pod 创建、运行、终止的完整生命周期
 
 ## Related
 

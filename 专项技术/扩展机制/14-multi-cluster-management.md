@@ -67,7 +67,7 @@ cross_refs:
 
 # 14 - 多集群管理与联邦 (Multi-Cluster Management & Federation)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/architecture/multicluster](https://kubernetes.io/docs/concepts/architecture/multicluster/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/architecture/multicluster](https://kubernetes.io/docs/concepts/architecture/multicluster/)
 
 <!-- chunk: 多集群架构模式 -->
 ## 多集群架构模式

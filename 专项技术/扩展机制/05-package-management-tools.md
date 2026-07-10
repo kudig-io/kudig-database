@@ -2115,7 +2115,7 @@ kustomize edit set namespace    # 设置命名空间
 
 ## Related
 
-- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - CRD 开发指南
 - CI/CD 管道

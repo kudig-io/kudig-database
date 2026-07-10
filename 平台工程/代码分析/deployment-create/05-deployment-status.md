@@ -743,8 +743,8 @@ kubectl get deployment nginx -o json | jq '.status.conditions[] | {type, lastTra
 - [[README|README]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/argo.md|argo]]
-- [[entities/argocd.md|argocd]]
+- [[实体/argo.md|argo]]
+- [[实体/argocd.md|argocd]]
 
 
 <!-- risk-assessed -->

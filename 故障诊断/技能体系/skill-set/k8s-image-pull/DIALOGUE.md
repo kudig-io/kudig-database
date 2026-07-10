@@ -15,11 +15,11 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[entities/kubelet.md]]'
+- target: '[[实体/kubelet.md]]'
   type: uses
 - target: '[[系统基础/知识字典/fundamentals/namespaces.md]]'
   type: uses
@@ -55,7 +55,7 @@ relationships:
 
 ### 入口 B：工程师报告 Pod 无法启动（疑似镜像问题）
 
-**工程师**：「Pod 一直在 Pending」/「[[entities/deployment.md|Deployment]] 滚动更新卡住了」/「新发布的版本起不来」
+**工程师**：「Pod 一直在 Pending」/「[[实体/deployment.md|Deployment]] 滚动更新卡住了」/「新发布的版本起不来」
 
 **顾问回应**：
 > Pod 无法启动有多种可能，镜像拉取失败是最常见的根因之一。请先执行：
@@ -217,7 +217,7 @@ relationships:
 > **如果无法创建临时 Pod** → `kubectl exec -it <pod-name> -n <namespace> -- nslookup <registry-host>`
 
 **分支决策**：
-- **C1**：DNS 解析失败 → 升级至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
+- **C1**：DNS 解析失败 → 升级至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **C2**：DNS 正常但 HTTP 超时，多节点受影响 → Round 3 — 分支 M（镜像仓库/代理排查）
 - **C3**：DNS 正常但 HTTP 超时，仅单节点受影响 → Round 3 — 分支 N（单节点网络排查）
 
@@ -490,7 +490,7 @@ kubectl create secret docker-registry acr-secret   --docker-server=registry.<reg
 | 涉及节点级容器运行时问题 | **SKILL-NODE-001** | 节点深度诊断 |
 | 涉及 DNS 解析失败 | **SKILL-NET-001** | DNS 问题诊断 |
 | 涉及网络策略/防火墙阻断出站 | **SKILL-NET-003** | 网络深度诊断 |
-| 需要修改节点系统级配置 | **节点管理团队** | systemd、[[entities/kubelet.md|kubelet]] 等 |
+| 需要修改节点系统级配置 | **节点管理团队** | systemd、[[实体/kubelet.md|kubelet]] 等 |
 | 镜像安全扫描/漏洞阻断 | **SKILL-SEC-003** | 安全策略相关 |
 | 怀疑镜像被篡改或供应链攻击 | **安全团队** | 需紧急安全审查 |
 

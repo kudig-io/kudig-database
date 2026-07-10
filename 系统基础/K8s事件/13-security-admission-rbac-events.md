@@ -1857,7 +1857,7 @@ kubectl get events -A --field-selector reason=PodSecurityViolation \
 
 ## Related
 
-- [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]]
+- [[概念/Deployment × Secret 管理.md|Deployment × Secret 管理]]
 - [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 ## See Also

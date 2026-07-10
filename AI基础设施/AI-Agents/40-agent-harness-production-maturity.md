@@ -93,7 +93,7 @@ k8s_versions:
 
 # Agent Harness 生产运维与成熟度模型
 
-> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: [[entities/k8s-production-operations.md|Production Operations]], 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
+> **文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: [[实体/k8s-production-operations.md|Production Operations]], 成熟度模型, 灰度发布, 容量规划, SLA, 故障恢复, 版本管理, 配置管理, 自进化, 运维自动化
 
 ---
 

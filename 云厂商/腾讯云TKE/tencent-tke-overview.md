@@ -1914,7 +1914,7 @@ spec:
 - [[系统基础/速查卡/sql.md|sql]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - 06-monitoring-alerting-system
-- [[entities/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
+- [[实体/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

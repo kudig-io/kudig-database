@@ -160,7 +160,7 @@ tolerations:
 可以通过 `RuntimeClass` 将 `nodeSelector` 和 `tolerations` 封装起来，简化 Pod 配置：
 
 ```yaml
-apiVersion: node.[[entities/kubernetes.md|k8s]].io/v1
+apiVersion: node.[[实体/kubernetes.md|k8s]].io/v1
 kind: RuntimeClass
 metadata:
   name: windows-2019

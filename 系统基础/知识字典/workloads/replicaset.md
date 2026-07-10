@@ -57,7 +57,7 @@ ReplicaSet 的作用是维护一组稳定运行的 Pod 副本。它通常不直�
   1. 未调度或 Pending 的 Pod
   2. 节点上该控制器 Pod 密度较高的
   3. 创建时间较新的
-  4. `controller.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/pod-deletion-cost` 注解值较低的（Beta，默认启用）
+  4. `controller.[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/pod-deletion-cost` 注解值较低的（Beta，默认启用）
   5. 随机选择
 - **终止副本追踪（Beta）**：`DeploymentReplicaSetTerminatingReplicas` 启用后，可通过 `.status.terminatingReplicas` 查看终止中副本数。
 

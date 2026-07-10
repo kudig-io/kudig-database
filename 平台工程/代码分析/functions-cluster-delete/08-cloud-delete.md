@@ -531,7 +531,7 @@ tencentcloud cli cvm DeleteCluster --cluster-id cls-xxx
 
 - [[README|README]]
 - [[log|log]]
-- [[scripts/man/INSTALL.md|INSTALL]]
+- [[脚本/man/INSTALL.md|INSTALL]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 

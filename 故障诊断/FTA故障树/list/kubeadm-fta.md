@@ -166,12 +166,12 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[实体/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
@@ -180,7 +180,7 @@ flowchart TD
 - [[README]]
 - [[nginx-ingress-fta]]
 - [[故障诊断/FTA故障树/list/kubeadm-fta.md|kubeadm-fta]]
-- [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
 
 
 <!-- risk-assessed -->

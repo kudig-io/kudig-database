@@ -1,0 +1,708 @@
+package eni
+
+import (
+	"context"
+	"fmt"
+	"net"
+	"net/netip"
+	"os"
+	"strings"
+	"sync"
+	"time"
+
+	"github.com/go-logr/logr"
+	corev1 "k8s.io/api/core/v1"
+	k8sErr "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/fields"
+	"k8s.io/apimachinery/pkg/labels"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/util/wait"
+	"k8s.io/client-go/rest"
+	toolscache "k8s.io/client-go/tools/cache"
+	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/cache"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+	logf "sigs.k8s.io/controller-runtime/pkg/log"
+	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
+
+	aliyunClient "github.com/AliyunContainerService/terway/pkg/aliyun/client"
+	networkv1beta1 "github.com/AliyunContainerService/terway/pkg/apis/network.alibabacloud.com/v1beta1"
+	"github.com/AliyunContainerService/terway/pkg/backoff"
+	terwayIP "github.com/AliyunContainerService/terway/pkg/ip"
+	"github.com/AliyunContainerService/terway/pkg/utils"
+	"github.com/AliyunContainerService/terway/types"
+	"github.com/AliyunContainerService/terway/types/daemon"
+)
+
+// SharedCRDManager holds the controller-runtime manager shared by peer controllers
+// (CRDV2 and LocalDelegate). It owns the manager lifecycle and cache sync signal.
+type SharedCRDManager struct {
+	mgr           ctrl.Manager
+	cacheSyncedCh chan struct{}
+}
+
+// NewSharedCRDManager creates the shared controller-runtime manager with filtered
+// caches for this node and registers the nodeReconcile controller.
+func NewSharedCRDManager(restConfig *rest.Config, nodeName, namespace string) (*SharedCRDManager, error) {
+	options := ctrl.Options{
+		Scheme:                 types.Scheme,
+		HealthProbeBindAddress: "0",
+		Metrics: metricsserver.Options{
+			BindAddress: "0",
+		},
+		WebhookServer: nil,
+		Cache: cache.Options{
+			Mapper: types.NewRESTMapper(),
+			ByObject: map[client.Object]cache.ByObject{
+				&corev1.Node{}: {
+					Field:     fields.SelectorFromSet(map[string]string{"metadata.name": nodeName}),
+					Transform: utils.SlimNode,
+				},
+				&networkv1beta1.PodENI{}: {
+					Label: labels.SelectorFromSet(map[string]string{types.ENIRelatedNodeName: nodeName}),
+				},
+				&networkv1beta1.Node{}: {
+					Field: fields.SelectorFromSet(map[string]string{"metadata.name": nodeName}),
+				},
+				&networkv1beta1.NodeRuntime{}: {
+					Field: fields.SelectorFromSet(map[string]string{"metadata.name": nodeName}),
+				},
+				&corev1.Pod{}: {
+					Field: fields.AndSelectors(
+						fields.OneTermEqualSelector("spec.nodeName", nodeName),
+						fields.OneTermNotEqualSelector("status.phase", string(corev1.PodSucceeded)),
+						fields.OneTermNotEqualSelector("status.phase", string(corev1.PodFailed)),
+					),
+					Transform: utils.SlimPod,
+				},
+				&corev1.ConfigMap{}: {
+					Field: fields.SelectorFromSet(map[string]string{"metadata.namespace": namespace}),
+				},
+			},
+		},
+	}
+
+	mgr, err := ctrl.NewManager(restConfig, options)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create controller manager: %w", err)
+	}
+	if err = (&nodeReconcile{
+		nodeName: nodeName,
+		client:   mgr.GetClient(),
+		record:   mgr.GetEventRecorder("terway-daemon"),
+	}).SetupWithManager(mgr); err != nil {
+		return nil, fmt.Errorf("failed to setup node reconcile controller: %w", err)
+	}
+
+	cacheSyncedCh := make(chan struct{})
+	if err = mgr.Add(&started{ch: cacheSyncedCh}); err != nil {
+		return nil, fmt.Errorf("failed to add started runnable: %w", err)
+	}
+
+	return &SharedCRDManager{mgr: mgr, cacheSyncedCh: cacheSyncedCh}, nil
+}
+
+// Start begins the controller-runtime manager in a background goroutine.
+func (s *SharedCRDManager) Start(ctx context.Context, wg *sync.WaitGroup) {
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		if err := s.mgr.Start(ctx); err != nil && ctx.Err() == nil {
+			logf.Log.Error(err, "shared CRD manager failed")
+			os.Exit(1)
+		}
+	}()
+}
+
+func (s *SharedCRDManager) CacheSynced() <-chan struct{} { return s.cacheSyncedCh }
+func (s *SharedCRDManager) Client() client.Client        { return s.mgr.GetClient() }
+func (s *SharedCRDManager) Scheme() *runtime.Scheme      { return s.mgr.GetScheme() }
+func (s *SharedCRDManager) GetCache() cache.Cache        { return s.mgr.GetCache() }
+
+var _ NetworkInterface = &CRDV2{}
+
+type started struct {
+	ch chan struct{}
+}
+
+func (s *started) Start(context.Context) error {
+	close(s.ch)
+	return nil
+}
+
+type CRDV2 struct {
+	sharedMgr *SharedCRDManager
+	scheme    *runtime.Scheme
+	client    client.Client
+	nodeName  string
+
+	lock        sync.Mutex
+	deletedPods map[string]*networkv1beta1.RuntimePodStatus
+
+	notifier       *Notifier
+	podENINotifier *Notifier
+}
+
+func NewCRDV2(sharedMgr *SharedCRDManager, nodeName string) *CRDV2 {
+	return &CRDV2{
+		sharedMgr:      sharedMgr,
+		scheme:         sharedMgr.Scheme(),
+		client:         sharedMgr.Client(),
+		nodeName:       nodeName,
+		deletedPods:    make(map[string]*networkv1beta1.RuntimePodStatus),
+		notifier:       NewNotifier(),
+		podENINotifier: NewNotifier(),
+	}
+}
+
+func (r *CRDV2) Run(ctx context.Context, podResources []daemon.PodResources, wg *sync.WaitGroup) error {
+	logf.Log.Info("start CRDV2 controller")
+
+	<-r.sharedMgr.CacheSynced()
+	logf.Log.Info("crd v2 controller cache synced")
+
+	nodeInformer, err := r.sharedMgr.GetCache().GetInformer(ctx, &networkv1beta1.Node{})
+	if err != nil {
+		return err
+	}
+
+	_, err = nodeInformer.AddEventHandler(&toolscache.ResourceEventHandlerFuncs{
+		AddFunc: func(obj interface{}) {
+			r.notifier.Notify()
+		},
+		UpdateFunc: func(oldObj, newObj interface{}) {
+			newNode := newObj.(*networkv1beta1.Node)
+			if newNode.Status.NetworkInterfaces == nil {
+				return
+			}
+			r.notifier.Notify()
+		},
+	})
+	if err != nil {
+		return err
+	}
+
+	podENIInformer, err := r.sharedMgr.GetCache().GetInformer(ctx, &networkv1beta1.PodENI{})
+	if err != nil {
+		return err
+	}
+
+	_, err = podENIInformer.AddEventHandler(&toolscache.ResourceEventHandlerFuncs{
+		AddFunc: func(obj interface{}) {
+			r.podENINotifier.Notify()
+		},
+		UpdateFunc: func(oldObj, newObj interface{}) {
+			newPodENI := newObj.(*networkv1beta1.PodENI)
+			if newPodENI.Status.Phase == networkv1beta1.ENIPhaseBind {
+				r.podENINotifier.Notify()
+			}
+		},
+	})
+	if err != nil {
+		return err
+	}
+
+	go wait.UntilWithContext(ctx, func(ctx context.Context) {
+		if err := r.syncNodeRuntime(ctx); err != nil {
+			logf.Log.Error(err, "failed to mark delete")
+		}
+	}, 3*time.Second)
+
+	go wait.UntilWithContext(ctx, func(ctx context.Context) {
+		if err := r.syncDeletedPods(ctx); err != nil {
+			logf.Log.Error(err, "sync deleted pods")
+		}
+	}, 5*time.Minute)
+
+	return nil
+}
+
+func (r *CRDV2) Priority() int {
+	return 100
+}
+
+func (r *CRDV2) Allocate(ctx context.Context, cni *daemon.CNI, request ResourceRequest) (chan *AllocResp, []Trace) {
+	switch request.ResourceType() {
+	case ResourceTypeLocalIP, ResourceTypeRDMA:
+		return r.multiIP(ctx, cni, request)
+	case ResourceTypeRemoteIP:
+		return r.remote(ctx, cni, request)
+	default:
+		return nil, []Trace{{Condition: ResourceTypeMismatch}}
+	}
+}
+
+func (r *CRDV2) Release(ctx context.Context, cni *daemon.CNI, request NetworkResource) (bool, error) {
+	switch request.ResourceType() {
+	case ResourceTypeLocalIP, ResourceTypeRDMA:
+		r.lock.Lock()
+		defer r.lock.Unlock()
+
+		r.deletedPods[cni.PodUID] = &networkv1beta1.RuntimePodStatus{
+			PodID: cni.PodID,
+		}
+	}
+	return false, nil
+}
+
+func (r *CRDV2) Dispose(n int) int {
+	return 0
+}
+
+func (r *CRDV2) multiIP(ctx context.Context, cni *daemon.CNI, request ResourceRequest) (chan *AllocResp, []Trace) {
+	resp := make(chan *AllocResp)
+
+	go func() {
+		l := logf.FromContext(ctx, "ipam", "crd")
+		defer close(resp)
+
+		// Subscribe to Node CR change messages
+		ch := r.notifier.Subscribe()
+		defer r.notifier.Unsubscribe(ch)
+
+		// Try once first to avoid waiting
+		if allocResp, success := r.tryAllocateIP(ctx, cni, l); success {
+			resp <- allocResp
+			return
+		}
+
+		// Wait for Node CR change messages
+		for {
+			select {
+			case <-ctx.Done():
+				l.Info("context cancelled, allocation failed")
+				allocErr := fmt.Errorf("allocate IP timeout")
+				if conditions := r.collectENIConditions(); conditions != "" {
+					allocErr = fmt.Errorf("allocate IP timeout: %s", conditions)
+				}
+				select {
+				case resp <- &AllocResp{Err: allocErr}:
+				default:
+				}
+				return
+			case <-ch:
+				l.V(2).Info("received node change notification, trying to allocate IP")
+				if allocResp, success := r.tryAllocateIP(ctx, cni, l); success {
+					resp <- allocResp
+					return
+				}
+			}
+		}
+	}()
+
+	return resp, nil
+}
+
+// tryAllocateIP attempts to allocate IP, returns allocation result and success status
+func (r *CRDV2) tryAllocateIP(ctx context.Context, cni *daemon.CNI, l logr.Logger) (*AllocResp, bool) {
+	node := &networkv1beta1.Node{}
+	allocResp := &AllocResp{}
+
+	err := r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, node)
+	if err != nil {
+		l.Error(err, "get node failed")
+		return nil, false
+	}
+
+	if node.Spec.ENISpec == nil {
+		l.V(2).Info("nodes.network.alibabacloud.com %s has not been initialized", r.nodeName)
+		return nil, false
+	}
+
+	// cni.PodName
+	var ipv4, ipv6 netip.Addr
+	var eniInfo *networkv1beta1.Nic
+	for _, eni := range node.Status.NetworkInterfaces {
+		if eni.Status != aliyunClient.ENIStatusInUse {
+			continue
+		}
+		for _, ip := range eni.IPv4 {
+			if ip.Status != networkv1beta1.IPStatusValid ||
+				ip.PodID != cni.PodID {
+				continue
+			}
+			if ip.PodUID != "" && ip.PodUID != cni.PodUID {
+				continue
+			}
+			addr, err := netip.ParseAddr(ip.IP)
+			if err != nil {
+				return nil, false
+			}
+			ipv4 = addr
+			eniInfo = eni
+		}
+		for _, ip := range eni.IPv6 {
+			if ip.Status != networkv1beta1.IPStatusValid ||
+				ip.PodID != cni.PodID {
+				continue
+			}
+			if ip.PodUID != "" && ip.PodUID != cni.PodUID {
+				continue
+			}
+			addr, err := netip.ParseAddr(ip.IP)
+			if err != nil {
+				return nil, false
+			}
+			ipv6 = addr
+			eniInfo = eni
+		}
+	}
+	if (!ipv4.IsValid() && !ipv6.IsValid()) || eniInfo == nil {
+		l.V(2).Info("no valid ip found")
+		return nil, false
+	}
+
+	var ip types.IPSet2
+
+	ip.IPv4 = ipv4
+	ip.IPv6 = ipv6
+	gw := types.IPSet{}
+	vsw := types.IPNetSet{}
+	if ipv4.IsValid() {
+		gw.IPv4 = net.ParseIP(terwayIP.DeriveGatewayIP(eniInfo.IPv4CIDR))
+
+		_, cidr, err := net.ParseCIDR(eniInfo.IPv4CIDR)
+		if err != nil {
+			return nil, false
+		}
+		vsw.IPv4 = cidr
+	}
+	if ipv6.IsValid() {
+		gw.IPv6 = net.ParseIP(terwayIP.DeriveGatewayIP(eniInfo.IPv6CIDR))
+
+		_, cidr, err := net.ParseCIDR(eniInfo.IPv6CIDR)
+		if err != nil {
+			return nil, false
+		}
+		vsw.IPv6 = cidr
+	}
+
+	allocResp.NetworkConfigs = append(allocResp.NetworkConfigs, &LocalIPResource{
+		ENI: daemon.ENI{
+			ID:               eniInfo.ID,
+			MAC:              eniInfo.MacAddress,
+			SecurityGroupIDs: eniInfo.SecurityGroupIDs,
+			Trunk:            false,
+			ERdma: node.Spec.ENISpec.EnableERDMA &&
+				eniInfo.NetworkInterfaceTrafficMode == networkv1beta1.NetworkInterfaceTrafficModeHighPerformance,
+			GatewayIP:   gw,
+			VSwitchCIDR: vsw,
+			VSwitchID:   eniInfo.VSwitchID,
+		},
+		IP: ip,
+	})
+	l.Info("get valid ip from crd", "cfg", allocResp.NetworkConfigs)
+
+	// Clean up deletedPods
+	r.lock.Lock()
+	delete(r.deletedPods, cni.PodUID)
+	r.lock.Unlock()
+
+	return allocResp, true
+}
+
+// collectENIConditions reads ENI conditions from the Node CRD to provide
+// diagnostic information when IP allocation times out.
+func (r *CRDV2) collectENIConditions() string {
+	bgCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	node := &networkv1beta1.Node{}
+	if err := r.client.Get(bgCtx, client.ObjectKey{Name: r.nodeName}, node); err != nil {
+		return ""
+	}
+
+	var msgs []string
+	for eniID, eni := range node.Status.NetworkInterfaces {
+		for condName, cond := range eni.Conditions {
+			msgs = append(msgs, fmt.Sprintf("%s %s: %s", eniID, condName, cond.Message))
+		}
+	}
+	return strings.Join(msgs, "; ")
+}
+
+func (r *CRDV2) remote(ctx context.Context, cni *daemon.CNI, request ResourceRequest) (chan *AllocResp, []Trace) {
+	remote := &Remote{
+		client:   r.client,
+		notifier: r.podENINotifier,
+	}
+	trunk, err := r.getTrunkENI(ctx)
+	if err != nil {
+		resp := make(chan *AllocResp)
+
+		go func() {
+			select {
+			case <-ctx.Done():
+				return
+			case resp <- &AllocResp{Err: err}:
+			}
+		}()
+		return resp, nil
+	}
+
+	remote.trunkENI = trunk
+
+	return remote.Allocate(ctx, cni, request)
+}
+
+func (r *CRDV2) getTrunkENI(ctx context.Context) (*daemon.ENI, error) {
+	var node *networkv1beta1.Node
+
+	var trunkENI *daemon.ENI
+
+	var innerErr error
+	err := wait.ExponentialBackoffWithContext(ctx, backoff.Backoff(backoff.WaitPodENIStatus).Backoff, func(ctx context.Context) (bool, error) {
+		node = &networkv1beta1.Node{}
+		innerErr = r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, node)
+		if innerErr != nil {
+			return false, nil
+		}
+		if node.Spec.ENISpec == nil {
+			// cr not ready
+			innerErr = fmt.Errorf("nodes.network.alibabacloud.com %s has not been initialized", r.nodeName)
+			return false, nil
+		}
+		if !node.Spec.ENISpec.EnableTrunk {
+			// trunk is not enabled
+			return true, nil
+		}
+		// nb(l1b0k): we need to deprecate the trunk-on anno on node
+
+		k8sNode := &corev1.Node{}
+		innerErr = r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, k8sNode)
+		if innerErr != nil {
+			return false, nil
+		}
+		trunkID := k8sNode.Annotations[types.TrunkOn]
+
+		trunk, ok := node.Status.NetworkInterfaces[trunkID]
+		if !ok {
+			innerErr = fmt.Errorf("trunk %s has not been initialized", trunkID)
+			return false, nil
+		}
+
+		trunkENI = &daemon.ENI{
+			ID:               trunk.ID,
+			MAC:              trunk.MacAddress,
+			SecurityGroupIDs: trunk.SecurityGroupIDs,
+			Trunk:            true,
+			ERdma:            false,
+			PrimaryIP:        types.IPSet{},
+			GatewayIP:        types.IPSet{},
+			VSwitchCIDR:      types.IPNetSet{},
+			VSwitchID:        trunk.VSwitchID,
+		}
+		trunkENI.PrimaryIP.SetIP(trunk.PrimaryIPAddress)
+		if node.Spec.ENISpec.EnableIPv4 {
+			trunkENI.GatewayIP.SetIP(terwayIP.DeriveGatewayIP(trunk.IPv4CIDR))
+			trunkENI.VSwitchCIDR.SetIPNet(trunk.IPv4CIDR)
+		}
+		if node.Spec.ENISpec.EnableIPv6 {
+			trunkENI.GatewayIP.SetIP(terwayIP.DeriveGatewayIP(trunk.IPv6CIDR))
+			trunkENI.VSwitchCIDR.SetIPNet(trunk.IPv6CIDR)
+		}
+
+		return true, nil
+	})
+	if err != nil {
+		return nil, fmt.Errorf("error get trunk eni %w, innerErr %s", err, innerErr)
+	}
+
+	return trunkENI, err
+}
+
+// syncNodeRuntime run a cron job to update delete pods
+func (r *CRDV2) syncNodeRuntime(ctx context.Context) error {
+	r.lock.Lock()
+	defer r.lock.Unlock()
+
+	if len(r.deletedPods) == 0 {
+		return nil
+	}
+
+	nodeRuntime, err := r.getRuntimeNode(ctx)
+	if err != nil {
+		return err
+	}
+
+	if !nodeRuntime.DeletionTimestamp.IsZero() {
+		// ignore deleting
+		return nil
+	}
+
+	for k, pod := range r.deletedPods {
+		v, ok := nodeRuntime.Status.Pods[k]
+		if !ok {
+			v = &networkv1beta1.RuntimePodStatus{
+				PodID: pod.PodID,
+			}
+			if nodeRuntime.Status.Pods == nil {
+				nodeRuntime.Status.Pods = make(map[string]*networkv1beta1.RuntimePodStatus)
+			}
+			nodeRuntime.Status.Pods[k] = v
+		}
+		// cni del is called
+		if v.Status == nil {
+			v.Status = map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{}
+		}
+		v.Status[networkv1beta1.CNIStatusDeleted] = &networkv1beta1.CNIStatusInfo{
+			LastUpdateTime: metav1.Now(),
+		}
+
+		logf.Log.Info("report pod deleted", "pod", v)
+	}
+
+	err = saveStatus(ctx, r.client, nodeRuntime)
+	if err != nil {
+		return err
+	}
+
+	r.deletedPods = make(map[string]*networkv1beta1.RuntimePodStatus)
+	return nil
+}
+
+func saveStatus(ctx context.Context, c client.Client, nodeRuntime *networkv1beta1.NodeRuntime) error {
+	update := nodeRuntime.DeepCopy()
+	changed, err := controllerutil.CreateOrPatch(ctx, c, update, func() error {
+		update.Status = nodeRuntime.Status
+		update.Spec = nodeRuntime.Spec
+		update.Labels = nodeRuntime.Labels
+		update.Name = nodeRuntime.Name
+		return nil
+	})
+	if err != nil {
+		return fmt.Errorf("failed to save node runtime status %w", err)
+	}
+	if changed != controllerutil.OperationResultNone {
+		logf.Log.Info("changed node runtime status", "pods", nodeRuntime.Status.Pods)
+	}
+	return nil
+}
+
+func (r *CRDV2) syncDeletedPods(ctx context.Context) error {
+	l := logf.FromContext(ctx)
+
+	nodeRuntime, err := r.getRuntimeNode(ctx)
+	if err != nil {
+		return err
+	}
+
+	if !nodeRuntime.DeletionTimestamp.IsZero() {
+		return nil
+	}
+
+	// get inUsed Pod UIDs in ipam
+	inUsed, err := r.inUsedPodUIDs(ctx)
+	if err != nil {
+		return err
+	}
+
+	removeDeleted(l, nodeRuntime, inUsed)
+
+	syncBack(l, nodeRuntime, inUsed)
+
+	err = saveStatus(ctx, r.client, nodeRuntime)
+	return err
+}
+
+func removeDeleted(l logr.Logger, nodeRuntime *networkv1beta1.NodeRuntime, inUsed map[string]networkv1beta1.RuntimePodStatus) {
+	// clean exist record if not expected
+	for uid, v := range nodeRuntime.Status.Pods {
+		_, found := inUsed[uid]
+		// only clean when ipam is forget this pod
+		if !found {
+			status, _, ok := utils.RuntimeFinalStatus(v.Status)
+			if !ok || status != networkv1beta1.CNIStatusDeleted {
+				continue
+			}
+
+			delete(nodeRuntime.Status.Pods, uid)
+			l.Info("pod uid no longer exist in nodes cr, remove this pod ", "pod", v, "uid", uid)
+		}
+	}
+}
+
+func syncBack(l logr.Logger, nodeRuntime *networkv1beta1.NodeRuntime, inUsed map[string]networkv1beta1.RuntimePodStatus) {
+	// for uid found in ipam , but not on runtimeStatus, sync back
+	// so gc could clean up those records
+	if nodeRuntime.Status.Pods == nil {
+		nodeRuntime.Status.Pods = make(map[string]*networkv1beta1.RuntimePodStatus)
+	}
+	for uid := range inUsed {
+		_, ok := nodeRuntime.Status.Pods[uid]
+		if !ok {
+			newStatus := inUsed[uid]
+			nodeRuntime.Status.Pods[uid] = &newStatus
+			l.Info("sync back pod", "pod", newStatus, "uid", uid)
+		}
+	}
+}
+
+// inUsedPodUIDs return the pod uid record in the ipam
+func (r *CRDV2) inUsedPodUIDs(ctx context.Context) (map[string]networkv1beta1.RuntimePodStatus, error) {
+	node := &networkv1beta1.Node{}
+	err := r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, node)
+	if err != nil {
+		return nil, err
+	}
+
+	pendingUID := map[string]networkv1beta1.RuntimePodStatus{}
+
+	for _, v := range node.Status.NetworkInterfaces {
+		for _, ipam := range v.IPv4 {
+			if ipam.PodUID != "" {
+				pendingUID[ipam.PodUID] = networkv1beta1.RuntimePodStatus{
+					PodID: ipam.PodID,
+					Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+						networkv1beta1.CNIStatusInitial: {
+							LastUpdateTime: metav1.Now(),
+						},
+					},
+				}
+			}
+		}
+		for _, ipam := range v.IPv6 {
+			if ipam.PodUID != "" {
+				pendingUID[ipam.PodUID] = networkv1beta1.RuntimePodStatus{
+					PodID: ipam.PodID,
+					Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+						networkv1beta1.CNIStatusInitial: {
+							LastUpdateTime: metav1.Now(),
+						},
+					},
+				}
+			}
+		}
+	}
+	return pendingUID, nil
+}
+
+// getRuntimeNode create if not present
+func (r *CRDV2) getRuntimeNode(ctx context.Context) (*networkv1beta1.NodeRuntime, error) {
+	nodeRuntime := &networkv1beta1.NodeRuntime{}
+
+	err := r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, nodeRuntime)
+	if err != nil {
+		if !k8sErr.IsNotFound(err) {
+			return nil, fmt.Errorf("failed to get node runtime %w", err)
+		}
+		// not found
+		node := &corev1.Node{}
+		err = r.client.Get(ctx, client.ObjectKey{Name: r.nodeName}, node)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get node %s: %w", r.nodeName, err)
+		}
+		nodeRuntime.Name = r.nodeName
+		if nodeRuntime.Labels == nil {
+			nodeRuntime.Labels = map[string]string{}
+		}
+		nodeRuntime.Labels["name"] = r.nodeName
+		err = controllerutil.SetOwnerReference(node, nodeRuntime, r.scheme)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nodeRuntime, nil
+}

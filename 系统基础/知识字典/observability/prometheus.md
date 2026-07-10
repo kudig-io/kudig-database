@@ -79,7 +79,7 @@ Prometheus 是 CNCF 毕业项目，是 Kubernetes 生态中最主流的监控系
 
 ## Related
 
-[[entities/prometheus.md|Prometheus]]
+[[实体/prometheus.md|Prometheus]]
 
 
 <!-- risk-assessed -->

@@ -47,7 +47,7 @@ prerequisites:
 
 # Java Operator SDK 开发指南
 
-> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.28+
+> **适用版本**: JDK 17+ / Java Operator SDK 4.x / fabric8 7.x / [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.28+
 > **最后更新**: 2026-04-30
 
 ---

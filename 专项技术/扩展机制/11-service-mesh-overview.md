@@ -69,7 +69,7 @@ cross_refs:
 
 # 20 - 服务网格集成表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/istio.md|istio]].io/latest/docs](https://istio.io/latest/docs/) | [[entities/linkerd.md|linkerd]].io/docs](https://linkerd.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/istio.md|istio]].io/latest/docs](https://istio.io/latest/docs/) | [[实体/linkerd.md|linkerd]].io/docs](https://linkerd.io/docs/)
 
 <!-- chunk: 服务网格对比 -->
 ## 服务网格对比

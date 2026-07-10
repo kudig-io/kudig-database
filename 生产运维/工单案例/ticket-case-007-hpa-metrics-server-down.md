@@ -56,9 +56,9 @@ authors:
 relationships:
 - target: '[[系统基础/知识字典/scheduling/hpa.md]]'
   type: related_to
-- target: '[[entities/prometheus.md]]'
+- target: '[[实体/prometheus.md]]'
   type: related_to
-- target: '[[concepts/autoscaling-strategies.md]]'
+- target: '[[概念/autoscaling-strategies.md]]'
   type: related_to
 ---
 
@@ -318,10 +318,10 @@ kubectl get deploy pay-gateway -n pay-gateway -w
 - 水平 Pod 自动扩缩容
 - Metrics Server
 - Prometheus (entities)
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
+- [[概念/autoscaling-strategies.md|Autoscaling Strategies]]
 - Metrics Server
 - Prometheus (entities)
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
+- [[概念/autoscaling-strategies.md|Autoscaling Strategies]]
 
 
 <!-- risk-assessed -->

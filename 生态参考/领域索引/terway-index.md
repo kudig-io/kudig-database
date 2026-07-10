@@ -63,7 +63,7 @@ prerequisites:
 | 2 | topic-terway | [02-architecture.md](./02-architecture.md) | 973 | 专题 | 整体架构图、控制面/数据面、IPAM 流程、5 个 CRD 模型、BoltDB 持久化 |
 | 3 | topic-terway | [03-usage.md](./03-usage.md) | 1022 | 专题 | 安装初始化、5 种模式 YAML 配置、[[系统基础/知识字典/networking/networkpolicy.md|NetworkPolicy]]、固定 IP、IPv6 双栈、容量规划 |
 | 4 | topic-terway | [03b-crd-operations.md](./03b-crd-operations.md) | 1231 | 专题 | 5 个 CRD 全量清单与完整 CRUD、ConfigMap 管理、综合诊断脚本 |
-| 5 | topic-terway | [04-operations.md](./04-operations.md) | 1388 | 专题 | 健康检查、GC 机制(设计原则/参数调优)、[[entities/prometheus.md|Prometheus]] 告警、升级回滚、巡检清单 |
+| 5 | topic-terway | [04-operations.md](./04-operations.md) | 1388 | 专题 | 健康检查、GC 机制(设计原则/参数调优)、[[实体/prometheus.md|Prometheus]] 告警、升级回滚、巡检清单 |
 | 6 | topic-terway | [05-testing.md](./05-testing.md) | 1028 | 专题 | 端到端测试套件、ENI 密度压测、NetworkPolicy 测试、iperf3 基准、MTU 测试 |
 | 7 | topic-terway | [06-performance.md](./06-performance.md) | 682 | 专题 | 5 模式性能基准、Pod 容量计算、内核调优、eBPF 加速、生产基线指标 |
 | 8 | topic-terway | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 513 | 专题 | Mermaid FTA 全景图、6 大问题类别、32 条错误信息目录、AND 门组合问题 |

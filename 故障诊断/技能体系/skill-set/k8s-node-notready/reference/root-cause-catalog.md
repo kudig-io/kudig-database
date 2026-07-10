@@ -120,7 +120,7 @@ version: 1.0.0
   - **D2.3** 显示 containerd 未运行（`Active: inactive (dead)` / `Active: failed`）
   - **D2.4** 日志有错误（`failed to create shim`、`context deadline exceeded` 等）
   - **D2.6** PLEG 不健康（`GenericPLEG: Unable to retrieve [[Pods|pods]]`）
-  - **D1.2** Message 包含 "[[concepts/container-runtime.md|container runtime]] is down"
+  - **D1.2** Message 包含 "[[概念/container-runtime.md|container runtime]] is down"
 - **FTA 底层事件映射**: `node-fta.md → evt_rt_down`, `evt_cri_sock`, `evt_rt_hang`
 - **关联修复**: REM-004（重启 containerd）、REM-006（排空节点并重启）
 - **交叉关联**:

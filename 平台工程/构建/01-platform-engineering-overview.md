@@ -64,7 +64,7 @@ authors:
 
 
 # 平台工程概述与成熟度模型
-# [[concepts/platform-engineering-sre.md|Platform Engineering]] Overview and Maturity Model
+# [[概念/platform-engineering-sre.md|Platform Engineering]] Overview and Maturity Model
 
 > **领域**: 平台工程 | Platform Engineering  
 > **难度**: 入门到中级 | Beginner to Intermediate  

@@ -35,14 +35,14 @@ trigger_keywords:
 ## 项目概览
 
 - [[README.md|项目 README]] — 完整介绍、快速开始与部署说明
-- [[docs/STRUCTURE.md|目录结构规范]] — 目录层级与用途约定
-- [[_meta/AGENTS.md|Agent 行为规范]] — AI Agent 唤醒协议与任务处理工作流
+- [[文档/STRUCTURE.md|目录结构规范]] — 目录层级与用途约定
+- [[元数据/AGENTS.md|Agent 行为规范]] — AI Agent 唤醒协议与任务处理工作流
 
 ## 核心知识层
 
-- [[concepts/index.md|concepts]] — 核心概念、架构模式、设计原理
-- [[entities/index.md|entities]] — 组件实体、CNCF 工具、云产品、术语词典
-- [[skills/index.md|skills]] — 诊断排障、最佳实践、培训体系、FTA 方法
+- [[概念/index.md|concepts]] — 核心概念、架构模式、设计原理
+- [[实体/index.md|entities]] — 组件实体、CNCF 工具、云产品、术语词典
+- [[技能/index.md|skills]] — 诊断排障、最佳实践、培训体系、FTA 方法
 
 ## 源文档层 (Domain 1-20)
 
@@ -69,30 +69,30 @@ trigger_keywords:
 
 ## 工程与元数据
 
-- [[docs/index.md|docs]] — 映射与规范文档
-- [[_meta/index.md|_meta]] — 元数据、语料配置、日志摘要
-- [[_reports/index.md|_reports]] — 质量报告与评估
-- [[_archives/index.md|_archives]] — 归档快照
-- [[assets/index.md|assets]] — 图片、图表、附件
-- [[scripts/index.md|scripts]] — 自动化脚本、模板、提示词
-- [[web/index.md|web]] — Astro 静态站点项目
+- [[文档/index.md|docs]] — 映射与规范文档
+- [[元数据/index.md|_meta]] — 元数据、语料配置、日志摘要
+- [[报告/index.md|_reports]] — 质量报告与评估
+- [[归档/index.md|_archives]] — 归档快照
+- [[资产/index.md|assets]] — 图片、图表、附件
+- [[脚本/index.md|scripts]] — 自动化脚本、模板、提示词
+- [[站点/index.md|web]] — Astro 静态站点项目
 
 ## 关键运行文件
 
-- [[_meta/hot.md|hot.md]] — 热缓存（最近活动的语义快照）
-- [[_meta/log.md|log.md]] — 活动日志（摄入、更新、lint 记录）
-- [[docs/CHANGELOG.md|CHANGELOG.md]] — 变更日志
-- [[docs/CONTRIBUTING.md|CONTRIBUTING.md]] — 贡献指南
+- [[元数据/hot.md|hot.md]] — 热缓存（最近活动的语义快照）
+- [[元数据/log.md|log.md]] — 活动日志（摄入、更新、lint 记录）
+- [[文档/CHANGELOG.md|CHANGELOG.md]] — 变更日志
+- [[文档/CONTRIBUTING.md|CONTRIBUTING.md]] — 贡献指南
 
 ## 其他顶层目录
 
-- [[research/index.md|research]] — 研究资料
-- [[release/index.md|release]] — 发布产物
-- [[tags/index.md|tags]] — 标签索引
-- [[synthesis/index.md|synthesis]] — 综合分析
+- [[研究/index.md|research]] — 研究资料
+- [[发布/index.md|release]] — 发布产物
+- [[标签/index.md|tags]] — 标签索引
+- [[综合/index.md|synthesis]] — 综合分析
 
 ## 相关入口
 
-- [[entities/k8s-glossary-index.md|K8s 术语表索引]]
-- [[entities/k8s-knowledge-map.md|Kubernetes Knowledge Map]]
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[实体/k8s-glossary-index.md|K8s 术语表索引]]
+- [[实体/k8s-knowledge-map.md|Kubernetes Knowledge Map]]
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]

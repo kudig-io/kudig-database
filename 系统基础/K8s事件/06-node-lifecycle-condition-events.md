@@ -70,7 +70,7 @@ cross_refs:
 - [概述](#概述)
 - [节点生命周期状态机](#节点生命周期状态机)
 - [节点状态类型详解](#节点状态类型详解)
-- [[entities/kubelet.md|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
+- [[实体/kubelet.md|Kubelet]] 节点状态事件](#kubelet-节点状态事件)
 - [Node Controller 事件](#node-controller-事件)
 - [节点驱逐机制](#节点驱逐机制)
 - [生产环境监控建议](#生产环境监控建议)

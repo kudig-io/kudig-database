@@ -61,7 +61,7 @@ cross_refs:
 
 # 48 - GitOps工作流
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/opengitops.md|opengitops]].dev](https://opengitops.dev/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/opengitops.md|opengitops]].dev](https://opengitops.dev/)
 
 <!-- chunk: GitOps核心原则 -->
 ## GitOps核心原则

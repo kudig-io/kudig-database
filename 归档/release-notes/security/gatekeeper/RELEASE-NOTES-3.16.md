@@ -1,0 +1,49 @@
+---
+title: gatekeeper v3.16 Release Notes
+description: gatekeeper v3.16 Release Notes — Kubernetes 生产运维知识库
+summary: gatekeeper v3.16 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- agent
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- gatekeeper v3.16 Release Notes 是什么
+- 如何 gatekeeper v3.16 Release Notes
+trigger_keywords:
+- gatekeeper
+- v3.16
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# gatekeeper v3.16 Release Notes
+
+Source: [v3.16.3](https://github.com/open-policy-agent/gatekeeper/releases/tag/v3.16.3)
+
+## Chores
+- bumping frameworks/constraints (cp - 3399) (#3400) [#3400](https://github.com/open-policy-agent/gatekeeper/pull/3400) ([Jaydipkumar Arvindbhai Gabani](https://github.com/open-policy-agent/gatekeeper/commit/0ca51a253360dda6cb571c5d8ad8c7acd358d566))
+- Prepare v3.16.3 release (#3401) [#3401](https://github.com/open-policy-agent/gatekeeper/pull/3401) ([github-actions[bot]](https://github.com/open-policy-agent/gatekeeper/commit/a08c83dd2c983db77847b44733f615c8adce9c74))
+
+<!-- risk-assessed -->

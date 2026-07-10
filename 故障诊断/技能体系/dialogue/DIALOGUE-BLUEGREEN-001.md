@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # 蓝绿部署切换后服务不可用 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/blue-green-deployment.md|蓝绿部署]]
+> 对应概念：[[概念/blue-green-deployment.md|蓝绿部署]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -218,8 +218,8 @@ curl -s http://<svc-ip>/health
 
 ## 相关概念
 
-- [[concepts/blue-green-deployment.md|蓝绿部署]]
-- [[concepts/deployment-controller-architecture.md|Deployment 控制器]]
+- [[概念/blue-green-deployment.md|蓝绿部署]]
+- [[概念/deployment-controller-architecture.md|Deployment 控制器]]
 
 ## Related
 

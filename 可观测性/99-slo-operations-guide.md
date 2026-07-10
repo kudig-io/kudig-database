@@ -64,7 +64,7 @@ authors:
 > **目标读者**: SRE、平台工程师、监控工程师。
 > **最后更新**: 2026-07-01
 
-本指南是 [[可观测性/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]] 的 SLO 专项 runbook，参考 [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“Observability / SLO Operations”缺口，系统覆盖 SLI/SLO/SLA、错误预算、burn-rate 告警、告警 review 机制与 Dashboard-as-Code。
+本指南是 [[可观测性/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]] 的 SLO 专项 runbook，参考 [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]] 中“Observability / SLO Operations”缺口，系统覆盖 SLI/SLO/SLA、错误预算、burn-rate 告警、告警 review 机制与 Dashboard-as-Code。
 
 ---
 
@@ -264,7 +264,7 @@ curl -s 'http://alertmanager:9093/api/v1/alerts' | \
 
 ### 跨域参考
 
-- [[_reports/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
+- [[报告/domain-content-gap-analysis-2026-07-01.md|域内容缺口分析]]
 - [[可靠性/README.md|可靠性工程]]
 - [[生产运维/README.md|生产运维]]
 

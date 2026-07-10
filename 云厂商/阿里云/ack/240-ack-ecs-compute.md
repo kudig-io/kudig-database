@@ -235,9 +235,9 @@ fs.file-max = 2000000
 
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
+- [[实体/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/containerd.md|containerd]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ## See Also

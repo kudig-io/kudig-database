@@ -250,7 +250,7 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 
 ## 参考链接
-- https://[[entities/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
+- https://[[实体/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
 
 ## Related
 

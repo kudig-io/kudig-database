@@ -23,11 +23,11 @@ on:
       - '清单模式/**'
       - '生态参考/**'
       - '应用模式/**'
-      - 'concepts/**'
-      - 'entities/**'
-      - 'skills/**'
-      - 'docs/**'
-      - 'scripts/**'
+      - '概念/**'
+      - '实体/**'
+      - '技能/**'
+      - '文档/**'
+      - '脚本/**'
       - '.github/workflows/quality.yml'
   push:
     branches: [main]
@@ -35,7 +35,7 @@ on:
 
 jobs:
   lint:
-    name: Ruff Lint (scripts/)
+    name: Ruff Lint (脚本/)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +44,7 @@ jobs:
           python-version: '3.11'
       - run: pip install ruff
       - name: Ruff check
-        run: ruff check scripts/maintenance/
+        run: ruff check 脚本/maintenance/
 
   frontmatter:
     name: Frontmatter Integrity

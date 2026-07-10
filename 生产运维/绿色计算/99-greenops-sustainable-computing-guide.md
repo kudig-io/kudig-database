@@ -72,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - GreenOps 可持续计算与碳足迹优化指南 是什么
 - 如何 GreenOps 可持续计算与碳足迹优化指南
-- [[Kubernetes|Kubernetes]] 18 [[entities/k8s-production-operations.md|production operations]] 最佳实践
+- [[Kubernetes|Kubernetes]] 18 [[实体/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - GreenOps
 - 可持续计算与碳足迹优化指南

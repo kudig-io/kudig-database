@@ -200,9 +200,9 @@ metadata:
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - USER
-- [[entities/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
+- [[实体/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 
 ## See Also
 

@@ -206,7 +206,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 | `certificate has expired` | 证书过期 | 轮换证书 |
 | `failed to run Kubelet: cannot create certificate` | 证书问题 | 检查CA/重新生成 |
 | `node not found` | 节点未注册 | 检查kubelet配置/重新注册 |
-| `[[concepts/container-runtime.md|container runtime]] is down` | 运行时问题 | 重启containerd/docker |
+| `[[概念/container-runtime.md|container runtime]] is down` | 运行时问题 | 重启containerd/docker |
 | `PLEG is not healthy` | PLEG超时 | 检查运行时/重启kubelet |
 
 ---

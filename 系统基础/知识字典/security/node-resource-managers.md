@@ -43,7 +43,7 @@ prerequisites:
 
 ## 概述
 
-为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
+为了支持对延迟敏感（latency-critical）和高吞吐量（high-throughput）的工作负载，[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供了一套节点资源管理器（Node Resource Managers）。这些管理器旨在协调和优化节点上为 Pod 分配 CPU、设备（devices）和内存（大页，hugepages）资源时的对齐方式，以最大程度地提升工作负载性能。
 
 ## 核心概念/原理
 

@@ -20,9 +20,9 @@ created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 relationships:
-- target: '[[entities/etcd.md]]'
+- target: '[[实体/etcd.md]]'
   type: uses
-- target: '[[entities/kubelet.md]]'
+- target: '[[实体/kubelet.md]]'
   type: uses
 - target: '[[系统基础/知识字典/security/pod-security-policies.md]]'
   type: uses
@@ -49,7 +49,7 @@ ACK 专有版（Dedicated）与托管版（Managed）的核心区别：专有版
 | 维度 | 专有版 ACK | 托管版 ACK | 专有云可用性 |
 |------|------------|------------|--------------|
 | Master 节点 | 客户自建/可见 | 阿里云托管 | 专有版为主 |
-| [[entities/etcd.md|etcd]] | 客户自管 | 阿里云托管 | 专有版自管 |
+| [[实体/etcd.md|etcd]] | 客户自管 | 阿里云托管 | 专有版自管 |
 | 适用场景 | 金融/强合规 | 通用互联网 | 专有云多专有版 |
 | 运维复杂度 | 高 | 低 | 需掌握 etcd/管控面 |
 
@@ -478,7 +478,7 @@ ACK 专有版安全组规则模板：
 |------|------|------|---------|------|
 | 入站 | TCP | 22 | 堡垒机IP段 | SSH管理 |
 | 入站 | TCP | 6443 | 运维网段 | API Server |
-| 入站 | TCP | 10250 | 节点间 | [[entities/kubelet.md|Kubelet]] |
+| 入站 | TCP | 10250 | 节点间 | [[实体/kubelet.md|Kubelet]] |
 | 入站 | TCP | 8472 | 节点间 | Flannel VXLAN |
 | 入站 | UDP | 4789 | 节点间 | Terway VXLAN |
 | 入站 | TCP | 30000-32767 | 负载均衡 | NodePort |
@@ -550,7 +550,7 @@ ETCDCTL_API=3 etcdctl endpoint health \
 - [[alicloud-apsara-ack-overview|阿里云专有版ACK概述]]
 ## Related
 
-- [[entities/coredns.md|CoreDNS (entities)]]
+- [[实体/coredns.md|CoreDNS (entities)]]
 - [[系统基础/知识字典/networking/ingress.md|Ingress]]
 
 

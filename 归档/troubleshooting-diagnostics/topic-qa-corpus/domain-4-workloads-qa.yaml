@@ -1,0 +1,155 @@
+domain: domain-4-workloads
+total_questions: 32
+generated_at: '2026-05-19'
+qa_pairs:
+- type: comparison
+  question: 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview) 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/01-workload-overview-architecture.md 中的对比分析。
+  source: domain-4-workloads/01-workload-overview-architecture.md
+- type: concept
+  question: 在 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns) 中, Deployment 核心架构解析 是什么?
+  answer: 参见 domain-4-workloads/02-deployment-production-patterns.md 的「Deployment 核心架构解析」章节。
+  source: domain-4-workloads/02-deployment-production-patterns.md
+  section: Deployment 核心架构解析
+- type: concept
+  question: 在 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations) 中, StatefulSet 核心特性解析 是什么?
+  answer: 参见 domain-4-workloads/03-statefulset-advanced-operations.md 的「StatefulSet 核心特性解析」章节。
+  source: domain-4-workloads/03-statefulset-advanced-operations.md
+  section: StatefulSet 核心特性解析
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: CLUSTER_NAME=${1:-production}?'
+  answer: 参见 domain-4-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-4-workloads/07-workload-troubleshooting-handbook.md
+  command: CLUSTER_NAME=${1:-production}
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: diagnose_layer() {?'
+  answer: 参见 domain-4-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-4-workloads/07-workload-troubleshooting-handbook.md
+  command: diagnose_layer() {
+- type: operation
+  question: '如何执行与 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 相关的操作: debug_pending_pod()
+    {?'
+  answer: 参见 domain-4-workloads/07-workload-troubleshooting-handbook.md 中的操作步骤。
+  source: domain-4-workloads/07-workload-troubleshooting-handbook.md
+  command: debug_pending_pod() {
+- type: comparison
+  question: 07 - 工作负载故障排查与应急响应手册 (Workload Troubleshooting & Incident Response Handbook) 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/07-workload-troubleshooting-handbook.md 中的对比分析。
+  source: domain-4-workloads/07-workload-troubleshooting-handbook.md
+- type: comparison
+  question: 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patterns) 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/09-edge-computing-deployment.md 中的对比分析。
+  source: domain-4-workloads/09-edge-computing-deployment.md
+- type: concept
+  question: 在 工作负载控制器详解 中, 控制器核心特征矩阵 (Controller Matrix) 是什么?
+  answer: 参见 domain-4-workloads/10-workload-controllers-overview.md 的「控制器核心特征矩阵 (Controller Matrix)」章节。
+  source: domain-4-workloads/10-workload-controllers-overview.md
+  section: 控制器核心特征矩阵 (Controller Matrix)
+- type: concept
+  question: '在 工作负载控制器详解 中, Deployment: 生产级最佳实践 (Production Patterns) 是什么?'
+  answer: '参见 domain-4-workloads/10-workload-controllers-overview.md 的「Deployment: 生产级最佳实践 (Production Patterns)」章节。'
+  source: domain-4-workloads/10-workload-controllers-overview.md
+  section: 'Deployment: 生产级最佳实践 (Production Patterns)'
+- type: concept
+  question: '在 工作负载控制器详解 中, StatefulSet: 有状态运维 (Stateful Ops) 是什么?'
+  answer: '参见 domain-4-workloads/10-workload-controllers-overview.md 的「StatefulSet: 有状态运维 (Stateful Ops)」章节。'
+  source: domain-4-workloads/10-workload-controllers-overview.md
+  section: 'StatefulSet: 有状态运维 (Stateful Ops)'
+- type: concept
+  question: '在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 调度策略: 亲和性与互斥 (Affinity & Anti-affinity) 是什么?'
+  answer: '参见 domain-4-workloads/12-advanced-pod-patterns.md 的「调度策略: 亲和性与互斥 (Affinity & Anti-affinity)」章节。'
+  source: domain-4-workloads/12-advanced-pod-patterns.md
+  section: '调度策略: 亲和性与互斥 (Affinity & Anti-affinity)'
+- type: concept
+  question: 在 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns) 中, 生命周期 Hook (Lifecycle Hooks) 是什么?
+  answer: 参见 domain-4-workloads/12-advanced-pod-patterns.md 的「生命周期 Hook (Lifecycle Hooks)」章节。
+  source: domain-4-workloads/12-advanced-pod-patterns.md
+  section: 生命周期 Hook (Lifecycle Hooks)
+- type: comparison
+  question: Sidecar 容器模式 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/14-sidecar-containers-patterns.md 中的对比分析。
+  source: domain-4-workloads/14-sidecar-containers-patterns.md
+- type: operation
+  question: '如何执行与 39 - 容器运行时对比表 相关的操作: systemctl stop kubelet?'
+  answer: 参见 domain-4-workloads/15-container-runtime-interfaces.md 中的操作步骤。
+  source: domain-4-workloads/15-container-runtime-interfaces.md
+  command: systemctl stop kubelet
+- type: operation
+  question: '如何执行与 39 - 容器运行时对比表 相关的操作: cat > /etc/crictl.yaml <<EOF?'
+  answer: 参见 domain-4-workloads/15-container-runtime-interfaces.md 中的操作步骤。
+  source: domain-4-workloads/15-container-runtime-interfaces.md
+  command: cat > /etc/crictl.yaml <<EOF
+- type: comparison
+  question: 39 - 容器运行时对比表 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/15-container-runtime-interfaces.md 中的对比分析。
+  source: domain-4-workloads/15-container-runtime-interfaces.md
+- type: concept
+  question: 在 70 - RuntimeClass配置 中, gVisor RuntimeClass 是什么?
+  answer: 参见 domain-4-workloads/16-runtime-class-configuration.md 的「gVisor RuntimeClass」章节。
+  source: domain-4-workloads/16-runtime-class-configuration.md
+  section: gVisor RuntimeClass
+- type: comparison
+  question: 70 - RuntimeClass配置 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/16-runtime-class-configuration.md 中的对比分析。
+  source: domain-4-workloads/16-runtime-class-configuration.md
+- type: operation
+  question: '如何执行与 51 - 容器镜像管理与仓库 (Container Images & Registry) 相关的操作: kubectl create secret docker-registry regcred \?'
+  answer: 参见 domain-4-workloads/17-container-images-registry.md 中的操作步骤。
+  source: domain-4-workloads/17-container-images-registry.md
+  command: kubectl create secret docker-registry regcred \
+- type: comparison
+  question: 51 - 容器镜像管理与仓库 (Container Images & Registry) 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/17-container-images-registry.md 中的对比分析。
+  source: domain-4-workloads/17-container-images-registry.md
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 节点池 (NodePool) 核心架构 是什么?
+  answer: 参见 domain-4-workloads/18-node-management-operations.md 的「节点池 (NodePool) 核心架构」章节。
+  source: domain-4-workloads/18-node-management-operations.md
+  section: 节点池 (NodePool) 核心架构
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 节点生命周期与运维流程 (Node Lifecycle) 是什么?
+  answer: 参见 domain-4-workloads/18-node-management-operations.md 的「节点生命周期与运维流程 (Node Lifecycle)」章节。
+  source: domain-4-workloads/18-node-management-operations.md
+  section: 节点生命周期与运维流程 (Node Lifecycle)
+- type: concept
+  question: '在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 调度与隔离: 标签与污点 (Label & Taint) 是什么?'
+  answer: '参见 domain-4-workloads/18-node-management-operations.md 的「调度与隔离: 标签与污点 (Label & Taint)」章节。'
+  source: domain-4-workloads/18-node-management-operations.md
+  section: '调度与隔离: 标签与污点 (Label & Taint)'
+- type: concept
+  question: 在 27 - 节点与节点池管理 (Node & NodePool Management) 中, 资源预留 (Resource Reservation) 是什么?
+  answer: 参见 domain-4-workloads/18-node-management-operations.md 的「资源预留 (Resource Reservation)」章节。
+  source: domain-4-workloads/18-node-management-operations.md
+  section: 资源预留 (Resource Reservation)
+- type: operation
+  question: '如何执行与 27 - 节点与节点池管理 (Node & NodePool Management) 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 domain-4-workloads/18-node-management-operations.md 中的操作步骤。
+  source: domain-4-workloads/18-node-management-operations.md
+  command: kubectl get nodes -o wide
+- type: comparison
+  question: 集群容量规划 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/22-cluster-capacity-planning.md 中的对比分析。
+  source: domain-4-workloads/22-cluster-capacity-planning.md
+- type: best_practice
+  question: 关于 16 - 资源管理表, 有什么最佳实践?
+  answer: VPA调整CPU/Memory，HPA基于自定义指标
+  source: domain-4-workloads/23-resource-management.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 工作负载管理新特性指南 中, Sidecar 容器 (v1.33 GA) 是什么?
+  answer: 参见 domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md 的「Sidecar 容器 (v1.33 GA)」章节。
+  source: domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md
+  section: Sidecar 容器 (v1.33 GA)
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 工作负载管理新特性指南 相关的操作: kubectl get pod webapp-with-sidecar -o jsonpath=''{range .sta?'
+  answer: 参见 domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md 中的操作步骤。
+  source: domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md
+  command: kubectl get pod webapp-with-sidecar -o jsonpath='{range .status.initContainerStatuses[*]}{.name}{"\t
+- type: comparison
+  question: Kubernetes v1.29-v1.33 工作负载管理新特性指南 中有哪些技术对比?
+  answer: 参见 domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md 中的对比分析。
+  source: domain-4-workloads/99-kubernetes-v1.33-workloads-guide.md
+- type: concept
+  question: 在 Spring Boot on Kubernetes 生产实践指南 中, Spring Boot on K8s 架构全景 是什么?
+  answer: 参见 domain-4-workloads/99-spring-boot-kubernetes-guide.md 的「Spring Boot on K8s 架构全景」章节。
+  source: domain-4-workloads/99-spring-boot-kubernetes-guide.md
+  section: Spring Boot on K8s 架构全景

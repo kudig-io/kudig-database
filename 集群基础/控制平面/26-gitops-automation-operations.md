@@ -1696,7 +1696,7 @@ Level 5 - 自主GitOps (Autonomous GitOps)
 - 集群基础 KUDIG Database — Global MOC
 - [[集群基础/README.md|Domain-3: Kubernetes控制平面]]
 - index.md|Domain-3 控制平面 — 开源项目索引]]
-- [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
+- [[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...
 - 控制平面安全加固指南 (Control Plane Security Hardening Guide)

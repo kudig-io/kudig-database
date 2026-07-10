@@ -246,11 +246,11 @@ agent_execution_mode: L2-semi-auto
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[scripts/video-scripts/node-notready.md|node notready]]
+- [[脚本/video-scripts/node-notready.md|node notready]]
 
 - k8s-autoscaling
 
-- [[skills/best-practices/scenarios/monitoring-alerting.md|monitoring alerting]]
+- [[技能/best-practices/scenarios/monitoring-alerting.md|monitoring alerting]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -345,7 +345,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 架构设计与性能优化基础
+- [[概念/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 架构设计与性能优化基础
 
 
 <!-- risk-assessed -->

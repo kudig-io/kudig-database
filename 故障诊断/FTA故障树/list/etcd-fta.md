@@ -195,16 +195,16 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - etcd 故障排查
 
 ## Related
 
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
+- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
 - [[cluster-upgrade-fta]] — 集群升级异常故障树分析
 - [[job-cronjob-fta]] — Job/CronJob 异常故障树分析
-- [[skills/skill-README.md|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+- [[技能/skill-README.md|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 - [[etcd]] — etcd
 
 - [[故障诊断/FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]]

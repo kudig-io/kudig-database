@@ -192,9 +192,9 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/243-ack-ram-authorization.md|243-ack-ram-authorization]]
-- [[entities/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/243-ack-ram-authorization.md|243-ack-ram-authorization]]
+- [[实体/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[实体/kubernetes.md|kubernetes]]
 
 ## See Also
 

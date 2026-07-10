@@ -488,7 +488,7 @@ systemctl restart kubelet
 - [[README|README]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[平台工程/代码分析/cluster-cert/04-etcd-cert.md|04-etcd-cert]]
 
 

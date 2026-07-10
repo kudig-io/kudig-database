@@ -300,7 +300,7 @@ python3 scripts/build-index-vector.py --route "节点NotReady"
 | cert-index.md | TC-SEC-CERT | P0 | 证书过期、CSR、TLS |
 | security-index.md | TC-SEC-RBAC | P0-P1 | RBAC、PSP、PSA |
 | scheduler-index.md | TC-INFRA-SCALE | P1-P2 | 调度失败、亲和性、污点 |
-| etcd-index.md | TC-INFRA-CP | P0 | [[entities/etcd.md|etcd]] 存储、空间、配额 |
+| etcd-index.md | TC-INFRA-CP | P0 | [[实体/etcd.md|etcd]] 存储、空间、配额 |
 | dns-index.md | TC-INFRA-NET | P1 | CoreDNS、域名解析 |
 | cluster-index.md | TC-INFRA-CP | P0 | 集群整体、高可用 |
 | pvc-index.md | TC-INFRA-STORE | P1 | PVC 绑定、存储供给 |
@@ -338,20 +338,20 @@ topic-index
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - KUDIG Knowledge Base Architecture — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Kubernetes 灾难恢复最佳实践 & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]

@@ -57,7 +57,7 @@ prerequisites:
 
 ### 集群创建
 
-- [[entities/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](工作负载/topic-functions/cluster-create/01-overview.md)
+- [[实体/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](工作负载/topic-functions/cluster-create/01-overview.md)
 - [预检阶段 (Preflight Checks)](平台工程/代码分析/functions-cluster-create/02-preflight.md)
 - [证书阶段 (Certificate Generation)](平台工程/代码分析/functions-cluster-create/03-certs.md)
 - [kubeconfig 阶段 (Kubeconfig Generation)](平台工程/代码分析/functions-cluster-create/04-kubeconfig.md)

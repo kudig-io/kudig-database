@@ -388,8 +388,8 @@ kubectl get node <node> -o jsonpath='{.status.capacity}'
 - [[log|log]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/fluentd.md|Fluentd]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/fluentd.md|Fluentd]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 
 

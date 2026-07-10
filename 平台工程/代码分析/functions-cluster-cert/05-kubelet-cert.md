@@ -512,7 +512,7 @@ ps aux | grep kubelet | grep -E "rotate-certificates|rotate-server-certificates"
 - [[log|log]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[系统基础/知识字典/fundamentals/nodes.md|nodes]]
 
 

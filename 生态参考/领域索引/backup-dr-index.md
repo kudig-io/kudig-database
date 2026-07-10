@@ -117,7 +117,7 @@ prerequisites:
 
 ### 生产运维
 
-- [[concepts/kubernetes-architecture-overview.md|kubernetes architecture overview]]
+- [[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]
 - 企业级备份策略
 - 灾难恢复演练
 - 跨区域容灾部署

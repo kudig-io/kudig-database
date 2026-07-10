@@ -135,7 +135,7 @@ kubectl apply -f configmap-backup.yaml
 ## 相关链接
 
 - [[生产运维/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
-- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
+- [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
 - [[发布变更/98-merged-indexes/index.md|gitops-deployment-patterns]] — GitOps 部署模式
 - [[生产运维/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
 

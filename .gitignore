@@ -23,10 +23,13 @@ video-output/
 # RAG 向量化 Pipeline 本地缓存（由 scripts/embedding-pipeline.py 生成，含 >100MB 大文件）
 corpus-config/profiles/.vector-cache/
 
-# Node.js（web/ Astro 项目）
-web/node_modules/
-web/.astro/
-web/dist/
+# Node.js（站点/ Astro 项目，原 web/）
+站点/node_modules/
+站点/.astro/
+站点/dist/
+
+# 源码/（原 code/，内含 Kubernetes/terway 等 vendor 源码树，不入库）
+源码/
 
 # 密钥与环境变量（禁止入库）
 .env

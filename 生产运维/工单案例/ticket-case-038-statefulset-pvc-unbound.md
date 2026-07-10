@@ -62,7 +62,7 @@ authors:
 relationships:
 - target: '[[生产运维/工单案例/ticket-case-043-statefulset-pvc-unbound.md]]'
   type: related_to
-- target: '[[concepts/statefulset.md]]'
+- target: '[[概念/statefulset.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to

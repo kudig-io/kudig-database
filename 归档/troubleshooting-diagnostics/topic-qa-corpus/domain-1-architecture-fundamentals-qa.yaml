@@ -1,0 +1,752 @@
+domain: domain-1-architecture-fundamentals
+total_questions: 153
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Domain-1 架构基础 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/00-open-source-projects-index.md 的「核心项目」章节。
+  source: domain-1-architecture-fundamentals/00-open-source-projects-index.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-1 架构基础 — 开源项目索引 中, K8s 发行版选型 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/00-open-source-projects-index.md 的「K8s 发行版选型」章节。
+  source: domain-1-architecture-fundamentals/00-open-source-projects-index.md
+  section: K8s 发行版选型
+- type: concept
+  question: 在 Domain-1 架构基础 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/00-open-source-projects-index.md 的「参考链接」章节。
+  source: domain-1-architecture-fundamentals/00-open-source-projects-index.md
+  section: 参考链接
+- type: concept
+  question: 在 Kubernetes 架构全景图 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 架构全景图 中, 架构总览 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md 的「架构总览」章节。
+  source: domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md
+  section: 架构总览
+- type: comparison
+  question: Kubernetes 架构全景图 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md
+- type: concept
+  question: 在 Kubernetes 核心组件深度剖析 中, 控制平面组件概览 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/02-core-components-deep-dive.md 的「控制平面组件概览」章节。
+  source: domain-1-architecture-fundamentals/02-core-components-deep-dive.md
+  section: 控制平面组件概览
+- type: comparison
+  question: Kubernetes 核心组件深度剖析 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/02-core-components-deep-dive.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/02-core-components-deep-dive.md
+- type: concept
+  question: 在 03 - 功能和API表 中, 核心工作负载API 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 的「核心工作负载API」章节。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  section: 核心工作负载API
+- type: concept
+  question: 在 03 - 功能和API表 中, 服务发现与网络API 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 的「服务发现与网络API」章节。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  section: 服务发现与网络API
+- type: concept
+  question: 在 03 - 功能和API表 中, 配置与存储API 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 的「配置与存储API」章节。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  section: 配置与存储API
+- type: concept
+  question: 在 03 - 功能和API表 中, 扩展与自定义API 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 的「扩展与自定义API」章节。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  section: 扩展与自定义API
+- type: concept
+  question: 在 03 - 功能和API表 中, 安全与访问控制API 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 的「安全与访问控制API」章节。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  section: 安全与访问控制API
+- type: operation
+  question: '如何执行与 03 - 功能和API表 相关的操作: kubectl get --raw /metrics | grep apiserver_requested_deprec?'
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  command: kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+- type: operation
+  question: '如何执行与 03 - 功能和API表 相关的操作: kubectl get --raw /metrics | grep apiserver_requested_deprec?'
+  answer: 参见 domain-1-architecture-fundamentals/03-api-versions-features.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/03-api-versions-features.md
+  command: kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+- type: concept
+  question: 在 04 - Kubernetes 源码结构深度解析 中, 顶级目录结构（生产环境价值解读） 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/04-source-code-structure.md 的「顶级目录结构（生产环境价值解读）」章节。
+  source: domain-1-architecture-fundamentals/04-source-code-structure.md
+  section: 顶级目录结构（生产环境价值解读）
+- type: concept
+  question: 在 04 - Kubernetes 源码结构深度解析 中, cmd/ 目录详解：组件入口与启动流程 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/04-source-code-structure.md 的「cmd/ 目录详解：组件入口与启动流程」章节。
+  source: domain-1-architecture-fundamentals/04-source-code-structure.md
+  section: cmd/ 目录详解：组件入口与启动流程
+- type: operation
+  question: '如何执行与 04 - Kubernetes 源码结构深度解析 相关的操作: make all WHAT=cmd/kube-apiserver GOFLAGS=-v?'
+  answer: 参见 domain-1-architecture-fundamentals/04-source-code-structure.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/04-source-code-structure.md
+  command: make all WHAT=cmd/kube-apiserver GOFLAGS=-v
+- type: operation
+  question: '如何执行与 04 - Kubernetes 源码结构深度解析 相关的操作: git clone https://github.com/kubernetes/kubernetes.git?'
+  answer: 参见 domain-1-architecture-fundamentals/04-source-code-structure.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/04-source-code-structure.md
+  command: git clone https://github.com/kubernetes/kubernetes.git
+- type: operation
+  question: '如何执行与 04 - Kubernetes 源码结构深度解析 相关的操作: make generated_files?'
+  answer: 参见 domain-1-architecture-fundamentals/04-source-code-structure.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/04-source-code-structure.md
+  command: make generated_files
+- type: concept
+  question: 在 kubectl 命令完整参考 中, 文档概述 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 的「文档概述」章节。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  section: 文档概述
+- type: concept
+  question: 在 kubectl 命令完整参考 中, kubectl 基础架构 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 的「kubectl 基础架构」章节。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  section: kubectl 基础架构
+- type: operation
+  question: '如何执行与 kubectl 命令完整参考 相关的操作: kubectl get <resource> [name] [options]?'
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  command: kubectl get <resource> [name] [options]
+- type: operation
+  question: '如何执行与 kubectl 命令完整参考 相关的操作: kubectl get pods -A -o wide?'
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  command: kubectl get pods -A -o wide
+- type: operation
+  question: '如何执行与 kubectl 命令完整参考 相关的操作: kubectl get nodes -o jsonpath=''{.items[*].status.addresses[??'
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+  command: kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'
+- type: best_practice
+  question: 关于 kubectl 命令完整参考, 有什么最佳实践?
+  answer: '# 1. 需要 Pod 中有 tar 命令'
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+- type: comparison
+  question: kubectl 命令完整参考 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/05-kubectl-commands-reference.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/05-kubectl-commands-reference.md
+- type: concept
+  question: 在 06 - 集群配置参数完全参考 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md
+  section: 目录
+- type: concept
+  question: 在 06 - 集群配置参数完全参考 中, kube-apiserver 参数 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md 的「kube-apiserver 参数」章节。
+  source: domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md
+  section: kube-apiserver 参数
+- type: operation
+  question: '如何执行与 06 - 集群配置参数完全参考 相关的操作: --enable-admission-plugins=\?'
+  answer: 参见 domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md
+  command: --enable-admission-plugins=\
+- type: comparison
+  question: 06 - 集群配置参数完全参考 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/06-cluster-configuration-parameters.md
+- type: concept
+  question: 在 07 - 升级路径与策略指南 中, 重大破坏性变更时间线 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md 的「重大破坏性变更时间线」章节。
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+  section: 重大破坏性变更时间线
+- type: concept
+  question: 在 07 - 升级路径与策略指南 中, 升级前检查清单 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md 的「升级前检查清单」章节。
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+  section: 升级前检查清单
+- type: operation
+  question: '如何执行与 07 - 升级路径与策略指南 相关的操作: apt update?'
+  answer: 参见 domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+  command: apt update
+- type: operation
+  question: '如何执行与 07 - 升级路径与策略指南 相关的操作: aliyun cs UpgradeCluster --ClusterId <cluster-id> --version ?'
+  answer: 参见 domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+  command: aliyun cs UpgradeCluster --ClusterId <cluster-id> --version 1.32.x
+- type: operation
+  question: '如何执行与 07 - 升级路径与策略指南 相关的操作: etcdctl snapshot restore snapshot.db \?'
+  answer: 参见 domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+  command: etcdctl snapshot restore snapshot.db \
+- type: best_practice
+  question: 关于 07 - 升级路径与策略指南, 有什么最佳实践?
+  answer: $(if [ $(kubectl get nodes --no-headers | grep -v Ready | wc -l) -eq 0 ] && [ $(kubectl get pods -n kube-system
+    | grep -v Running | wc -l) -eq 0 ]; then echo "集群健康，可以进行升级"; else echo "发现异常，请先修复再升级"; f
+  source: domain-1-architecture-fundamentals/07-upgrade-paths-strategy.md
+- type: concept
+  question: 在 08 - 多租户架构设计 (Multi-Tenancy Architecture) 中, 多租户隔离级别 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md 的「多租户隔离级别」章节。
+  source: domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md
+  section: 多租户隔离级别
+- type: concept
+  question: 在 08 - 多租户架构设计 (Multi-Tenancy Architecture) 中, Namespace隔离 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md 的「Namespace隔离」章节。
+  source: domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md
+  section: Namespace隔离
+- type: concept
+  question: 在 08 - 多租户架构设计 (Multi-Tenancy Architecture) 中, RBAC多租户配置 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md 的「RBAC多租户配置」章节。
+  source: domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md
+  section: RBAC多租户配置
+- type: concept
+  question: 在 08 - 多租户架构设计 (Multi-Tenancy Architecture) 中, 层级命名空间(HNC) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md 的「层级命名空间(HNC)」章节。
+  source: domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md
+  section: 层级命名空间(HNC)
+- type: concept
+  question: 在 08 - 多租户架构设计 (Multi-Tenancy Architecture) 中, Virtual Cluster(vCluster) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md 的「Virtual Cluster(vCluster)」章节。
+  source: domain-1-architecture-fundamentals/08-multi-tenancy-architecture.md
+  section: Virtual Cluster(vCluster)
+- type: concept
+  question: 在 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中, 边缘计算框架对比 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 的「边缘计算框架对比」章节。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  section: 边缘计算框架对比
+- type: concept
+  question: 在 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中, KubeEdge架构 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 的「KubeEdge架构」章节。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  section: KubeEdge架构
+- type: concept
+  question: 在 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中, OpenYurt架构 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 的「OpenYurt架构」章节。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  section: OpenYurt架构
+- type: concept
+  question: 在 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中, 边缘节点管理 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 的「边缘节点管理」章节。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  section: 边缘节点管理
+- type: concept
+  question: 在 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中, 边缘应用部署模式 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 的「边缘应用部署模式」章节。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  section: 边缘应用部署模式
+- type: operation
+  question: '如何执行与 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 相关的操作: keadm init --advertise-address="云端IP" --kubeedge-version=1.1?'
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  command: keadm init --advertise-address="云端IP" --kubeedge-version=1.15.0
+- type: operation
+  question: '如何执行与 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 相关的操作: yurtadm init --apiserver-advertise-address=<master-ip> \?'
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+  command: yurtadm init --apiserver-advertise-address=<master-ip> \
+- type: comparison
+  question: 09 - 边缘计算集成架构 (KubeEdge/OpenYurt) 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/09-edge-computing-kubeedge.md
+- type: concept
+  question: 在 10 - Windows 容器支持与集成指南 中, Windows节点要求 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 的「Windows节点要求」章节。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+  section: Windows节点要求
+- type: concept
+  question: 在 10 - Windows 容器支持与集成指南 中, Windows容器类型 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 的「Windows容器类型」章节。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+  section: Windows容器类型
+- type: concept
+  question: 在 10 - Windows 容器支持与集成指南 中, 支持的功能对比 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 的「支持的功能对比」章节。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+  section: 支持的功能对比
+- type: concept
+  question: 在 10 - Windows 容器支持与集成指南 中, Windows节点配置 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 的「Windows节点配置」章节。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+  section: Windows节点配置
+- type: concept
+  question: 在 10 - Windows 容器支持与集成指南 中, Windows Pod配置 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 的「Windows Pod配置」章节。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+  section: Windows Pod配置
+- type: comparison
+  question: 10 - Windows 容器支持与集成指南 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/10-windows-containers-support.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/10-windows-containers-support.md
+- type: concept
+  question: 在 11 - Kubernetes 源码架构深度分析 中, 概述 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 的「概述」章节。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  section: 概述
+- type: concept
+  question: 在 11 - Kubernetes 源码架构深度分析 中, 源码仓库结构概览 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 的「源码仓库结构概览」章节。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  section: 源码仓库结构概览
+- type: concept
+  question: 在 11 - Kubernetes 源码架构深度分析 中, 核心组件源码深度分析 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 的「核心组件源码深度分析」章节。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  section: 核心组件源码深度分析
+- type: operation
+  question: '如何执行与 11 - Kubernetes 源码架构深度分析 相关的操作: kubernetes/?'
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  command: kubernetes/
+- type: operation
+  question: '如何执行与 11 - Kubernetes 源码架构深度分析 相关的操作: cmd/?'
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  command: cmd/
+- type: operation
+  question: '如何执行与 11 - Kubernetes 源码架构深度分析 相关的操作: pkg/?'
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+  command: pkg/
+- type: comparison
+  question: 11 - Kubernetes 源码架构深度分析 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/11-kubernetes-source-code-architecture.md
+- type: concept
+  question: 在 12 - Kubernetes 集群部署架构模式指南 中, 概述 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md 的「概述」章节。
+  source: domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md
+  section: 概述
+- type: concept
+  question: 在 12 - Kubernetes 集群部署架构模式指南 中, 部署架构设计原则 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md 的「部署架构设计原则」章节。
+  source: domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md
+  section: 部署架构设计原则
+- type: concept
+  question: 在 12 - Kubernetes 集群部署架构模式指南 中, 典型部署架构模式 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md 的「典型部署架构模式」章节。
+  source: domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md
+  section: 典型部署架构模式
+- type: operation
+  question: '如何执行与 12 - Kubernetes 集群部署架构模式指南 相关的操作: minikube start \?'
+  answer: 参见 domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/12-cluster-deployment-patterns.md
+  command: minikube start \
+- type: concept
+  question: 在 13 - Kubernetes 性能调优专项指南 中, 性能基准与监控体系 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/13-performance-tuning-guide.md 的「性能基准与监控体系」章节。
+  source: domain-1-architecture-fundamentals/13-performance-tuning-guide.md
+  section: 性能基准与监控体系
+- type: concept
+  question: 在 13 - Kubernetes 性能调优专项指南 中, 控制平面性能优化 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/13-performance-tuning-guide.md 的「控制平面性能优化」章节。
+  source: domain-1-architecture-fundamentals/13-performance-tuning-guide.md
+  section: 控制平面性能优化
+- type: operation
+  question: '如何执行与 13 - Kubernetes 性能调优专项指南 相关的操作: cat > cluster-loader-config.yaml << EOF?'
+  answer: 参见 domain-1-architecture-fundamentals/13-performance-tuning-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/13-performance-tuning-guide.md
+  command: cat > cluster-loader-config.yaml << EOF
+- type: operation
+  question: '如何执行与 13 - Kubernetes 性能调优专项指南 相关的操作: kubectl run iperf-server --image=networkstatic/iperf3 --port?'
+  answer: 参见 domain-1-architecture-fundamentals/13-performance-tuning-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/13-performance-tuning-guide.md
+  command: kubectl run iperf-server --image=networkstatic/iperf3 --port=5201 \
+- type: concept
+  question: 在 14 - Kubernetes 安全架构深度分析 中, 安全架构总体设计 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/14-security-architecture.md 的「安全架构总体设计」章节。
+  source: domain-1-architecture-fundamentals/14-security-architecture.md
+  section: 安全架构总体设计
+- type: operation
+  question: '如何执行与 14 - Kubernetes 安全架构深度分析 相关的操作: --oidc-issuer-url=https://accounts.google.com?'
+  answer: 参见 domain-1-architecture-fundamentals/14-security-architecture.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/14-security-architecture.md
+  command: --oidc-issuer-url=https://accounts.google.com
+- type: best_practice
+  question: 关于 14 - Kubernetes 安全架构深度分析, 有什么最佳实践?
+  answer: '{check[''remediation'']}\n"'
+  source: domain-1-architecture-fundamentals/14-security-architecture.md
+- type: comparison
+  question: 14 - Kubernetes 安全架构深度分析 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/14-security-architecture.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/14-security-architecture.md
+- type: concept
+  question: 在 15 - Kubernetes 可观测性架构体系 中, 可观测性架构设计原则 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/15-observability-architecture.md 的「可观测性架构设计原则」章节。
+  source: domain-1-architecture-fundamentals/15-observability-architecture.md
+  section: 可观测性架构设计原则
+- type: concept
+  question: 在 15 - Kubernetes 可观测性架构体系 中, 指标监控体系架构 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/15-observability-architecture.md 的「指标监控体系架构」章节。
+  source: domain-1-architecture-fundamentals/15-observability-architecture.md
+  section: 指标监控体系架构
+- type: comparison
+  question: 15 - Kubernetes 可观测性架构体系 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/15-observability-architecture.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/15-observability-architecture.md
+- type: concept
+  question: 在 16 - Kubernetes 故障排查专家级指南 中, 架构级故障排查逻辑 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/16-troubleshooting-guide.md 的「架构级故障排查逻辑」章节。
+  source: domain-1-architecture-fundamentals/16-troubleshooting-guide.md
+  section: 架构级故障排查逻辑
+- type: concept
+  question: 在 16 - Kubernetes 故障排查专家级指南 中, 核心组件故障诊断 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/16-troubleshooting-guide.md 的「核心组件故障诊断」章节。
+  source: domain-1-architecture-fundamentals/16-troubleshooting-guide.md
+  section: 核心组件故障诊断
+- type: operation
+  question: '如何执行与 16 - Kubernetes 故障排查专家级指南 相关的操作: etcdctl endpoint status --write-out=table?'
+  answer: 参见 domain-1-architecture-fundamentals/16-troubleshooting-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/16-troubleshooting-guide.md
+  command: etcdctl endpoint status --write-out=table
+- type: concept
+  question: 在 17 - 生产环境运维最佳实践 (Production Operations Best Practices) 中, 相关文档交叉引用 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/17-production-operations-best-practices.md 的「相关文档交叉引用」章节。
+  source: domain-1-architecture-fundamentals/17-production-operations-best-practices.md
+  section: 相关文档交叉引用
+- type: concept
+  question: 在 17 - 生产环境运维最佳实践 (Production Operations Best Practices) 中, 生产环境架构设计原则 (Production Architecture Principles) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/17-production-operations-best-practices.md 的「生产环境架构设计原则 (Production Architecture
+    Principles)」章节。
+  source: domain-1-architecture-fundamentals/17-production-operations-best-practices.md
+  section: 生产环境架构设计原则 (Production Architecture Principles)
+- type: operation
+  question: '如何执行与 17 - 生产环境运维最佳实践 (Production Operations Best Practices) 相关的操作: cat > /etc/haproxy/haproxy.cfg << EOF?'
+  answer: 参见 domain-1-architecture-fundamentals/17-production-operations-best-practices.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/17-production-operations-best-practices.md
+  command: cat > /etc/haproxy/haproxy.cfg << EOF
+- type: troubleshooting
+  question: 如何排查 17 - 生产环境运维最佳实践 (Production Operations Best Practices) 相关的故障?
+  answer: 参见 domain-1-architecture-fundamentals/17-production-operations-best-practices.md 的故障排查章节。
+  source: domain-1-architecture-fundamentals/17-production-operations-best-practices.md
+- type: comparison
+  question: 17 - 生产环境运维最佳实践 (Production Operations Best Practices) 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/17-production-operations-best-practices.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/17-production-operations-best-practices.md
+- type: concept
+  question: 在 18 - Kubernetes 升级和迁移策略指南 中, 版本管理策略 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md 的「版本管理策略」章节。
+  source: domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md
+  section: 版本管理策略
+- type: concept
+  question: 在 18 - Kubernetes 升级和迁移策略指南 中, 升级前准备 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md 的「升级前准备」章节。
+  source: domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md
+  section: 升级前准备
+- type: operation
+  question: '如何执行与 18 - Kubernetes 升级和迁移策略指南 相关的操作: CURRENT_VERSION="v1.28.0"?'
+  answer: 参见 domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/18-upgrade-migration-strategy.md
+  command: CURRENT_VERSION="v1.28.0"
+- type: concept
+  question: 在 Kubectl v1.29 - v1.33 新命令与用法速查 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubectl v1.29 - v1.33 新命令与用法速查 中, v1.29 新命令 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 的「v1.29 新命令」章节。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  section: v1.29 新命令
+- type: concept
+  question: 在 Kubectl v1.29 - v1.33 新命令与用法速查 中, v1.30 新命令 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 的「v1.30 新命令」章节。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  section: v1.30 新命令
+- type: operation
+  question: '如何执行与 Kubectl v1.29 - v1.33 新命令与用法速查 相关的操作: kubectl events?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  command: kubectl events
+- type: operation
+  question: '如何执行与 Kubectl v1.29 - v1.33 新命令与用法速查 相关的操作: kubectl debug mypod -it --image=busybox --target=myapp?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  command: kubectl debug mypod -it --image=busybox --target=myapp
+- type: operation
+  question: '如何执行与 Kubectl v1.29 - v1.33 新命令与用法速查 相关的操作: kubectl alpha node-logs mynode?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubectl-v1.29-v1.33-new-commands-guide.md
+  command: kubectl alpha node-logs mynode
+- type: concept
+  question: 在 Kubernetes 版本 API 兼容矩阵 (1.28 → 1.33) 中, 概述 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-api-version-matrix.md 的「概述」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-api-version-matrix.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 版本 API 兼容矩阵 (1.28 → 1.33) 中, Deployment 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-api-version-matrix.md 的「Deployment」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-api-version-matrix.md
+  section: Deployment
+- type: concept
+  question: 在 Kubernetes 核心组件 v1.29 - v1.33 新特性速查 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 核心组件 v1.29 - v1.33 新特性速查 中, API Server 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md 的「API Server」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md
+  section: API Server
+- type: operation
+  question: '如何执行与 Kubernetes 核心组件 v1.29 - v1.33 新特性速查 相关的操作: kube-scheduler --feature-gates=SchedulerQueueingHints=true?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md
+  command: kube-scheduler --feature-gates=SchedulerQueueingHints=true
+- type: comparison
+  question: Kubernetes 核心组件 v1.29 - v1.33 新特性速查 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-components-v1.29-v1.33-update.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 核心特性架构图集 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 核心特性架构图集 中, Sidecar 容器架构 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md 的「Sidecar 容器架构」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md
+  section: Sidecar 容器架构
+- type: comparison
+  question: Kubernetes v1.29-v1.33 核心特性架构图集 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/99-kubernetes-core-features-mermaid-diagrams.md
+- type: concept
+  question: 在 Kubernetes v1.25 - v1.33 特性对比总表 中, 工作负载 (Workloads) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 的「工作负载 (Workloads)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  section: 工作负载 (Workloads)
+- type: concept
+  question: 在 Kubernetes v1.25 - v1.33 特性对比总表 中, 网络 (Networking) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 的「网络 (Networking)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  section: 网络 (Networking)
+- type: concept
+  question: 在 Kubernetes v1.25 - v1.33 特性对比总表 中, 存储 (Storage) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 的「存储 (Storage)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  section: 存储 (Storage)
+- type: concept
+  question: 在 Kubernetes v1.25 - v1.33 特性对比总表 中, 安全 (Security) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 的「安全 (Security)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  section: 安全 (Security)
+- type: concept
+  question: 在 Kubernetes v1.25 - v1.33 特性对比总表 中, 调度 (Scheduling) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 的「调度 (Scheduling)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  section: 调度 (Scheduling)
+- type: operation
+  question: '如何执行与 Kubernetes v1.25 - v1.33 特性对比总表 相关的操作: kubectl version?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+  command: kubectl version
+- type: comparison
+  question: Kubernetes v1.25 - v1.33 特性对比总表 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.25-v1.33-feature-comparison-table.md
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册 中, Feature Gate 说明 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md 的「Feature Gate
+    说明」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md
+  section: Feature Gate 说明
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 完整 Feature Gate 与特性参考手册 中, 已 GA 特性 (默认启用) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md 的「已 GA 特性 (默认启用)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md
+  section: 已 GA 特性 (默认启用)
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 版本特性深度指南 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 版本特性深度指南 中, 版本演进总览 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md 的「版本演进总览」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md
+  section: 版本演进总览
+- type: concept
+  question: 在 Kubernetes v1.29 - v1.33 版本特性深度指南 中, v1.29 核心特性 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md 的「v1.29 核心特性」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md
+  section: v1.29 核心特性
+- type: comparison
+  question: Kubernetes v1.29 - v1.33 版本特性深度指南 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.29-v1.33-features-guide.md
+- type: concept
+  question: 在 Kubernetes v1.33 弃用功能与迁移指南 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.33 弃用功能与迁移指南 中, 弃用与移除总览 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 的「弃用与移除总览」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  section: 弃用与移除总览
+- type: concept
+  question: 在 Kubernetes v1.33 弃用功能与迁移指南 中, 已移除功能 (v1.25-v1.33) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 的「已移除功能 (v1.25-v1.33)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  section: 已移除功能 (v1.25-v1.33)
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 弃用功能与迁移指南 相关的操作: kubectl get psp?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  command: kubectl get psp
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 弃用功能与迁移指南 相关的操作: kubectl get sc?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  command: kubectl get sc
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 弃用功能与迁移指南 相关的操作: ps aux | grep kubelet | grep cloud-provider?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+  command: ps aux | grep kubelet | grep cloud-provider
+- type: best_practice
+  question: 关于 Kubernetes v1.33 弃用功能与迁移指南, 有什么最佳实践?
+  answer: 评估是否可迁移到 CEL Admission"
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-deprecation-migration-guide.md
+- type: concept
+  question: 在 Kubernetes v1.33 生态系统兼容性矩阵 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.33 生态系统兼容性矩阵 中, 兼容性说明 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md 的「兼容性说明」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md
+  section: 兼容性说明
+- type: concept
+  question: 在 Kubernetes v1.33 生态系统兼容性矩阵 中, 容器运行时 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md 的「容器运行时」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md
+  section: 容器运行时
+- type: concept
+  question: 在 Kubernetes v1.33 生态系统兼容性矩阵 中, CNI 网络插件 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md 的「CNI 网络插件」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md
+  section: CNI 网络插件
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 生态系统兼容性矩阵 相关的操作: kubectl get nodes -o jsonpath=''{.items[*].status.nodeInfo.co?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-ecosystem-compatibility-matrix.md
+  command: kubectl get nodes -o jsonpath='{.items[*].status.nodeInfo.containerRuntimeVersion}'
+- type: concept
+  question: 在 Kubernetes v1.33 实战案例集 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.33 实战案例集 中, 案例一：Sidecar 容器实现优雅启动/终止 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md 的「案例一：Sidecar 容器实现优雅启动/终止」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md
+  section: 案例一：Sidecar 容器实现优雅启动/终止
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 实战案例集 相关的操作: kubectl get pod app-with-sidecar -o jsonpath=''{.status.initC?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md
+  command: kubectl get pod app-with-sidecar -o jsonpath='{.status.initContainerStatuses}' | jq
+- type: comparison
+  question: Kubernetes v1.33 实战案例集 中有哪些技术对比?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md 中的对比分析。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-practical-cookbook.md
+- type: concept
+  question: 在 Kubernetes v1.33 生产环境最佳实践 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.33 生产环境最佳实践 中, Sidecar 容器生产实践 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md 的「Sidecar 容器生产实践」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md
+  section: Sidecar 容器生产实践
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 生产环境最佳实践 相关的操作: kubectl version | grep Server?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-production-best-practices.md
+  command: kubectl version | grep Server
+- type: concept
+  question: 在 Kubernetes v1.33 速查卡 中, v1.33 核心变更 (最新) 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md 的「v1.33 核心变更 (最新)」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md
+  section: v1.33 核心变更 (最新)
+- type: concept
+  question: 在 Kubernetes v1.33 速查卡 中, 版本演进时间线 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md 的「版本演进时间线」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md
+  section: 版本演进时间线
+- type: concept
+  question: 在 Kubernetes v1.33 速查卡 中, ⚡ 快速启用新特性 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md 的「⚡ 快速启用新特性」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md
+  section: ⚡ 快速启用新特性
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 速查卡 相关的操作: --feature-gates=DynamicResourceAllocation=true?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md
+  command: --feature-gates=DynamicResourceAllocation=true
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 速查卡 相关的操作: --feature-gates=InPlacePodVerticalScaling=true?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-quick-reference-card.md
+  command: --feature-gates=InPlacePodVerticalScaling=true
+- type: concept
+  question: 在 Kubernetes v1.33 升级实操指南 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.33 升级实操指南 中, 升级前检查清单 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 的「升级前检查清单」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  section: 升级前检查清单
+- type: concept
+  question: 在 Kubernetes v1.33 升级实操指南 中, 控制平面升级 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 的「控制平面升级」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  section: 控制平面升级
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 升级实操指南 相关的操作: echo "=== K8s v1.33 升级前检查 ==="?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  command: echo "=== K8s v1.33 升级前检查 ==="
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 升级实操指南 相关的操作: ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  command: ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}'
+- type: operation
+  question: '如何执行与 Kubernetes v1.33 升级实操指南 相关的操作: apt-mark unhold kubeadm && \?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-v1.33-upgrade-guide.md
+  command: apt-mark unhold kubeadm && \
+- type: concept
+  question: 在 Kubernetes 版本生命周期与支持策略 中, 目录 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md 的「目录」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes 版本生命周期与支持策略 中, 版本发布节奏 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md 的「版本发布节奏」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md
+  section: 版本发布节奏
+- type: concept
+  question: 在 Kubernetes 版本生命周期与支持策略 中, 支持周期与 EOL 是什么?
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md 的「支持周期与 EOL」章节。
+  source: domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md
+  section: 支持周期与 EOL
+- type: operation
+  question: '如何执行与 Kubernetes 版本生命周期与支持策略 相关的操作: eksctl upgrade cluster --name=my-cluster --version=1.33?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md
+  command: eksctl upgrade cluster --name=my-cluster --version=1.33
+- type: operation
+  question: '如何执行与 Kubernetes 版本生命周期与支持策略 相关的操作: VERSION=$(kubectl version -o json | jq -r ''.serverVersion.gi?'
+  answer: 参见 domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md 中的操作步骤。
+  source: domain-1-architecture-fundamentals/99-kubernetes-version-lifecycle-support-policy.md
+  command: VERSION=$(kubectl version -o json | jq -r '.serverVersion.gitVersion' | sed 's/v//')

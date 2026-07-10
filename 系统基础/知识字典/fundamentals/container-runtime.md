@@ -78,7 +78,7 @@ Kubernetes 通过 CRI（Container Runtime Interface）与容器运行时通信�
 
 ## Related
 
-[[entities/containerd.md|containerd]] | [[entities/cri-o.md|CRI-O]]
+[[实体/containerd.md|containerd]] | [[实体/cri-o.md|CRI-O]]
 
 
 <!-- risk-assessed -->

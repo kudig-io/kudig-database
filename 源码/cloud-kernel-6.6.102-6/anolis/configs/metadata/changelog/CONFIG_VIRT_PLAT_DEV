@@ -1,0 +1,3 @@
+Backport patches from openEuler to support virt platform device direct inject lpi irq(ANBZ: #9398).
+
+It's required by internal users(Aone: 56141911).

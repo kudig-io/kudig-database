@@ -66,7 +66,7 @@ Spring Boot 是目前 Java 微服务领域使用最广泛的框架，而 Kuberne
 
 ```mermaid
 graph TB
-    subgraph "Spring Boot on [[entities/kubernetes.md|k8s]] 生产架构"
+    subgraph "Spring Boot on [[实体/kubernetes.md|k8s]] 生产架构"
         SRC[源代码] --> BUILD[镜像构建]
         BUILD --> |Jib/Buildpacks<br/>Multi-stage| IMG[容器镜像]
         IMG --> REG[镜像仓库]

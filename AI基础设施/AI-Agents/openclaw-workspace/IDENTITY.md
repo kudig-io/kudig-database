@@ -228,7 +228,7 @@ PromQL: 使用 yaml 代码块
 
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 
 ## See Also
 

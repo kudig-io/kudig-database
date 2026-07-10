@@ -58,7 +58,7 @@ prerequisites:
 ### 深度技术
 
 - 证书管理与 TLS 配置
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 
 ### 证书工具
 

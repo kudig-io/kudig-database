@@ -81,7 +81,7 @@ authors:
 3. [L3/L4/L7 流量可视化](#3-l3l4l7-流量可视化)
 4. [[系统基础/知识字典/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
-6. [[entities/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
+6. [[实体/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
 7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)
 8. [与 Grafana 集成仪表板](#8-与-grafana-集成仪表板)
 9. [故障排查与网络诊断](#9-故障排查与网络诊断)

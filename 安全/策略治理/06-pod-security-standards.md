@@ -66,7 +66,7 @@ cross_refs:
 
 # 06 - Pod安全标准详解
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/security/pod-security-standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 
 <!-- chunk: Pod Securityod Security Standards]] (PSS) 级别 -->
 ## Pod Security Standards (PSS) 级别

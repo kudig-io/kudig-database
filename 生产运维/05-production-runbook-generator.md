@@ -172,7 +172,7 @@ kubectl get nodes -l alibabacloud.com/nodepool-id=$NP_ID
 
 - 在 ACK 控制台查看待升级组件列表
 - 先在测试集群验证兼容性
-- 升级后参考 [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本一致
+- 升级后参考 [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] 确认版本一致
 
 ### 集群备份
 
@@ -197,7 +197,7 @@ kubectl get nodes -l alibabacloud.com/nodepool-id=$NP_ID
 - [[生产运维/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[生产运维/03-on-call-playbook.md|on-call-playbook]] — 值班手册与告警响应规范
 - [[生产运维/04-incident-response-template.md|incident-response-template]] — 事故响应模板
-- [[concepts/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
+- [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
 
 ## Related
 

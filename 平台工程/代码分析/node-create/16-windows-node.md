@@ -377,10 +377,10 @@ System Info:
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/cni.md|cni]]
-- [[entities/cri-o.md|CRI-O]]
-- [[entities/containerd.md|containerd]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/cni.md|cni]]
+- [[实体/cri-o.md|CRI-O]]
+- [[实体/containerd.md|containerd]]
 - [[系统基础/速查卡/linux.md|linux]]
 
 

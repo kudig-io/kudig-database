@@ -54,7 +54,7 @@ Service Internal Traffic Policy（Service 内部流量策略）用于控制集�
 
 - **kube-proxy 端点过滤**：kube-proxy 根据 Service 的 `spec.internalTrafficPolicy` 值，在维护本地路由规则时过滤 EndpointSlice。当策略为 `Local` 时，仅保留 `nodeName` 与当前节点匹配的端点。
 - **与 externalTrafficPolicy 的关系**：`internalTrafficPolicy` 和 `externalTrafficPolicy` 是相互独立的字段，可以分别设置。例如，将两者都设为 `Local`，可同时优化内部和外部流量的节点本地路由，并保留外部客户端的真实源 IP。
-- **与 [[系统基础/知识字典/networking/topology-aware-routing.md|Topology Aware Routing]] 的互斥**：同一 Service 上不能同时启用 `internalTrafficPolicy: Local` 和 Topology Aware Routing（`service.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto`），但可以在集群中为不同的 Service 分别使用这两种特性。
+- **与 [[系统基础/知识字典/networking/topology-aware-routing.md|Topology Aware Routing]] 的互斥**：同一 Service 上不能同时启用 `internalTrafficPolicy: Local` 和 Topology Aware Routing（`service.[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto`），但可以在集群中为不同的 Service 分别使用这两种特性。
 
 ## 使用场景
 

@@ -41,7 +41,7 @@ last_updated: 2026-05-23
 
 ## 概述
 
-API [[entities/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
+API [[实体/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 ## 快速诊断
 
@@ -152,9 +152,9 @@ API [[entities/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 - [[故障诊断/技能体系/06-certificate-expiry.md|06 certificate expiry]]
 
-- [[scripts/video-scripts/node-notready.md|node notready]]
+- [[脚本/video-scripts/node-notready.md|node notready]]
 
-- [[skills/best-practices/scenarios/security-incident.md|security incident]]
+- [[技能/best-practices/scenarios/security-incident.md|security incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。
@@ -543,7 +543,7 @@ kubectl get pods -n kube-system -l k8s-app=calico-node  # 或其他 CNI
 
 ## 相关概念
 
-- [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计
+- [[概念/kubernetes-architecture-overview.md|Kubernetes 架构概览]] — Kubernetes 控制平面与工作节点架构设计
 
 ```
 

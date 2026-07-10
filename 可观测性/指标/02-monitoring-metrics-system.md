@@ -91,7 +91,7 @@ related_docs:
 
 # 02 - 指标监控体系详解 (Monitoring Metrics System)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus.md|prometheus]].io/docs](https://prometheus.io/docs/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/prometheus.md|prometheus]].io/docs](https://prometheus.io/docs/)
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -721,7 +721,7 @@ Level 5 - 自主运维 (Autonomous Operations)
 
 ## Related
 
-- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - 可观测性架构体系
 - 分布式追踪体系

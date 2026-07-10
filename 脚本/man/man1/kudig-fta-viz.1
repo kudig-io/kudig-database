@@ -1,0 +1,68 @@
+.TH KUDIG-FTA-VIZ 1 "April 2026" "KUDIG-DATABASE 1.0" "User Commands"
+.SH NAME
+kudig-fta-viz \- FTA 故障树可视化工具
+.SH SYNOPSIS
+.B kudig-fta-viz
+.SH DESCRIPTION
+.B kudig-fta-viz
+基于 matplotlib 生成高质量的 FTA（故障树分析）示意图 PNG 图片，
+用于文档编写和演示场景。
+.PP
+故障树分析（Fault Tree Analysis）是 KUDIG-DATABASE 的核心方法论之一，
+用于系统性地分析和预防 Kubernetes 集群故障。
+.SH DEPENDENCIES
+.TP
+.B Python 3.7+
+Python 运行环境
+.TP
+.B matplotlib
+绘图库，用于生成可视化图表
+.TP
+.B numpy
+数值计算库
+.SH OUTPUT
+生成的 PNG 图片保存在当前目录，文件名格式：
+.RS
+.nf
+fta_tree_\fI<timestamp>\fR.png
+.fi
+.RE
+.SH FTA COMPONENTS VISUALIZED
+.TP
+顶事件 (Top Event)
+系统级故障，位于故障树顶端
+.TP
+中间事件 (Intermediate Events)
+需要进一步分析的子系统故障
+.TP
+底事件 (Basic Events)
+基本故障单元，无需再分解
+.TP
+逻辑门 (Logic Gates)
+AND 门、OR 门、投票门等
+.SH EXAMPLES
+.PP
+生成故障树可视化：
+.RS
+.nf
+$ python3 scripts/fta_tree_visualization.py
+Generating FTA tree visualization...
+Saved to: fta_tree_20250408_102030.png
+.fi
+.RE
+.SH NOTES
+生成的图片可用于：
+.IP \(bu 2
+技术文档插图
+.IP \(bu 2
+演示文稿
+.IP \(bu 2
+故障分析报告
+.IP \(bu 2
+培训和教学材料
+.SH AUTHOR
+KUDIG Team <https://github.com/your-org/kudig-database>
+.SH SEE ALSO
+.BR kudig-stats (1)
+.SH COPYRIGHT
+Licensed under CC BY-SA 4.0

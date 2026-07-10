@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
+字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
 
 ## 核心概念/原理
 

@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # Ingress 规则不生效 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/ingress-controller.md|Ingress Controller]]
+> 对应概念：[[概念/ingress-controller.md|Ingress Controller]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -225,8 +225,8 @@ curl -H "Host:<your-domain>" http://<ingress-ip>/path -I
 
 ## 相关概念
 
-- [[concepts/ingress-controller.md|Ingress Controller]]
-- [[concepts/service-networking.md|Service 网络模型]]
+- [[概念/ingress-controller.md|Ingress Controller]]
+- [[概念/service-networking.md|Service 网络模型]]
 
 ## Related
 

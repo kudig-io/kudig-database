@@ -265,7 +265,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理
+- [[概念/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 DNS 解析原理
 
 ## Related
 

@@ -1,0 +1,101 @@
+---
+title: Resource Management (Requests, Limits, QoS)
+description: Resource Management (Requests, Limits, QoS) — Kubernetes 生产运维知识库
+summary: Resource Management (Requests, Limits, QoS) — Kubernetes 生产运维知识库
+category: concepts
+tags:
+- k8s
+- resources
+- qos
+- requests
+- limits
+- eviction
+- cgroups
+- kubelet
+- scheduler
+- vpa
+tier: core
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Resource Management (Requests, Limits, QoS) 是什么
+- 如何 Resource Management (Requests, Limits, QoS)
+trigger_keywords:
+- Resource
+- Management
+- Requests
+- Limits
+- QoS
+prerequisites:
+- kubectl-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Resource Management (Requests, Limits, QoS)
+
+## Requests vs Limits
+
+| Field | Purpose | Scheduling | Runtime |
+|-------|---------|------------|---------|
+| **requests** | Minimum guaranteed resources | Used by scheduler to find fitting nodes | cgroup guaranteed share |
+| **limits** | Maximum usable resources | Not used for scheduling | cgroup hard cap (OOMKilled if exceeded) |
+
+## QoS Classes
+
+The [[kubelet|kubelet]] assigns QoS class based on request/limit configuration:
+
+| QoS Class | Condition | Eviction Priority |
+|-----------|-----------|-------------------|
+| **Guaranteed** | requests == limits for all containers | Last to be evicted |
+| **Burstable** | At least one container has requests < limits | Middle priority |
+| **BestEffort** | No requests or limits specified | First to be evicted |
+
+## Eviction Thresholds
+
+kubelet monitors node resources and evicts [[Pods|Pods]] when thresholds are crossed:
+
+| Threshold Type | Default | Behavior |
+|----------------|---------|----------|
+| **Hard** (`--eviction-hard`) | memory.available < 100Mi | Immediate eviction, no grace period |
+| **Soft** (`--eviction-soft`) | memory.available < 200Mi | Graceful eviction with configurable grace period |
+
+Eviction follows QoS priority: BestEffort first, then Burstable (proportional to overuse), and Guaranteed only as last resort.
+
+## ResourceQuota and LimitRange
+
+- **ResourceQuota**: Namespace-level aggregate limits (total CPU, memory, PVC count, Pod count)
+- **LimitRange**: Per-container defaults and constraints (default requests/limits, min/max)
+
+## Best Practices
+
+- Always set both requests and limits for CPU and memory
+- Use VPA to right-size resource requests based on actual usage
+- Memory limits should account for JVM heap + off-heap (Metaspace, direct buffers, thread stacks)
+- Set CPU limits carefully -- too low causes throttling; consider removing CPU limits for latency-sensitive workloads
+
+## Related
+
+- [[技能/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
+- [[技能/node-drain-and-maintenance.md|node-drain-and-maintenance]] — 节点驱逐与维护
+- [[概念/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
+- [[概念/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
+- [[实体/kubelet.md|kubelet]] — kubelet
+- [[概念/autoscaling-strategies.md|Autoscaling Strategies]]
+- [[概念/scheduling-algorithm.md|Scheduling Algorithm]]
+- [[pod-lifecycle|Pod Lifecycle]]
+- [[实体/kubelet.md|kubelet]]
+
+- 23-resource-management
+
+<!-- risk-assessed -->

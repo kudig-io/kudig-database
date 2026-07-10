@@ -362,7 +362,7 @@ kubectl get resourcequota,limitrange -A
 - [[安全/99-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]] — 安全基线与审计
 - [[可观测性/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]] — CLS / Prometheus / 告警体系
 - [[可靠性/README.md|可靠性工程域]] — 灾备、备份演练与 SLO
-- [[_reports/domain-content-gap-analysis-2026-07-01.md|Domain Content Gap Analysis 2026-07-01]]
+- [[报告/domain-content-gap-analysis-2026-07-01.md|Domain Content Gap Analysis 2026-07-01]]
 
 
 <!-- risk-assessed -->

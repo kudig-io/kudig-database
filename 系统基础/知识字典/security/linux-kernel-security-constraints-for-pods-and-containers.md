@@ -46,7 +46,7 @@ prerequisites:
 
 ## 核心概念/原理
 
-Linux 内核提供了多种安全特性来改善隔离并加固容器化工作负载。[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许通过 Pod 的 `securityContext` 配置这些特性，还支持其他安全设置，如特定的 Linux capabilities 或使用 UID/GID 的文件访问权限。
+Linux 内核提供了多种安全特性来改善隔离并加固容器化工作负载。[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许通过 Pod 的 `securityContext` 配置这些特性，还支持其他安全设置，如特定的 Linux capabilities 或使用 UID/GID 的文件访问权限。
 
 在配置这些内核级安全能力之前，建议首先考虑实施**网络级隔离**，并尽量以**非 root 用户**运行工作负载。如果确实需要 root 权限，可以考虑使用用户命名空间（Userer Namespaces|User Namespaces]]espaces]]）来减少主机上的权限。
 

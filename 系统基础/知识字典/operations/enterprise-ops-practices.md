@@ -2025,7 +2025,7 @@ data:
 
 #### 自动化与编排
 - **Ansible/Terraform**: 基础设施即代码
-- **[[Argo|Argo]] [[entities/flux.md|Flux]]**: GitOps持续交付
+- **[[Argo|Argo]] [[实体/flux.md|Flux]]**: GitOps持续交付
 - **Jenkins/GitLab CI**: CI/CD流水线
 - **Spinnaker**: 多云交付平台
 

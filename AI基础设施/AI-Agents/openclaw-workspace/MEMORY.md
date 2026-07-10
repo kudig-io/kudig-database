@@ -335,7 +335,7 @@ memory_metadata:
 
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
-- [[entities/coredns.md|coredns]]
+- [[实体/coredns.md|coredns]]
 
 ## See Also
 

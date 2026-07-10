@@ -318,7 +318,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/ingress-controller.md|Ingress Controller]] — Ingress 控制器原理与配置
+- [[概念/ingress-controller.md|Ingress Controller]] — Ingress 控制器原理与配置
 
 ```
 

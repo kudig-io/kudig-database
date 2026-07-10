@@ -346,9 +346,9 @@ spec:
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
-- [[entities/cilium.md|Cilium]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/coredns.md|coredns]]
+- [[实体/cilium.md|Cilium]]
 
 
 <!-- risk-assessed -->

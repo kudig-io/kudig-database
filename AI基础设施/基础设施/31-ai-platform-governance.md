@@ -68,7 +68,7 @@ cross_refs:
 
 # 31 - AI平台治理框架
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[entities/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[实体/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
 
 <!-- chunk: 一、AI平台治理全景架构 -->
 ## 一、AI平台治理全景架构

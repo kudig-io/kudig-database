@@ -53,7 +53,7 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[concepts/daemonset.md]]'
+- target: '[[概念/daemonset.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-050-daemonset-not-running-all-nodes.md]]'
   type: related_to

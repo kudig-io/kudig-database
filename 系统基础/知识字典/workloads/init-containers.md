@@ -229,7 +229,7 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions[?(@.type=="I
 - [Pod 综合故障排查手册](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
 
 ## 参考链接
-- https://[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/
+- https://[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/
 
 ## Related
 

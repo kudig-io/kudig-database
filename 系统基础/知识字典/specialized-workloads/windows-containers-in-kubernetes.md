@@ -57,7 +57,7 @@ Kubernetes 支持在 Windows 节点上运行 Windows 容器（仅支持进程隔
 - 控制平面只能运行在 Linux 上。
 - 工作节点可运行 Windows Server 2022 或 Windows Server 2025。
 - 集群必须是多操作系统混合集群。
-- 需要安装兼容的容器运行时（如 [[containerd|containerD]] 或 Mirantis [[concepts/container-runtime.md|Container Runtime]]）。
+- 需要安装兼容的容器运行时（如 [[containerd|containerD]] 或 Mirantis [[概念/container-runtime.md|Container Runtime]]）。
 
 ### 操作系统兼容性
 - Windows 节点与容器基础镜像之间存在严格的版本兼容性规则：主机的操作系统版本必须与容器基础镜像的操作系统版本匹配。
@@ -65,7 +65,7 @@ Kubernetes 支持在 Windows 节点上运行 Windows 容器（仅支持进程隔
 
 ### Pause 容器
 - Kubernetes 使用 pause 容器作为 Pod 的网络和生命周期基础。
-- Kubernetes v1.35.0 推荐的 pause 镜像为 `registry.[[entities/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]].io/pause:3.6`。
+- Kubernetes v1.35.0 推荐的 pause 镜像为 `registry.[[实体/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]].io/pause:3.6`。
 - 若生产环境要求签名二进制文件，建议使用 Microsoft 维护的镜像 `mcr.microsoft.com/oss/kubernetes/pause:3.6`。
 
 ## 关键机制或特性

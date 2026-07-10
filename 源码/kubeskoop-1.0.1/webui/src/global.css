@@ -1,0 +1,11 @@
+@import '@alifd/theme-design-pro/variables.css';
+@import '@alifd/theme-design-pro/dist/next.var.css';
+
+body {
+  -webkit-font-smoothing: antialiased;
+  min-width: 1100px;
+}
+
+.next-loading {
+  position: unset;
+}

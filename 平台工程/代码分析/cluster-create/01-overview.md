@@ -838,8 +838,8 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/coredns.md|coredns]]
 
 ```
 

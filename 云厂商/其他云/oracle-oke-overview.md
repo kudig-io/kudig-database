@@ -1043,8 +1043,8 @@ Oracle OKE凭借其企业级架构设计、金融级安全特性和卓越的性�
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - 06-monitoring-alerting-system
-- [[entities/oracle-oke-overview.md|Oracle Container Engine for Kubernetes (OKE)]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/oracle-oke-overview.md|Oracle Container Engine for Kubernetes (OKE)]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 

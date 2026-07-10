@@ -28,7 +28,7 @@ last_updated: 2026-05-22
 
 所有证书操作均为高风险。执行前请：
 1. 确认处于维护窗口
-2. 备份 `/[[entities/kubernetes.md|kubernetes]]/pki`
+2. 备份 `/[[实体/kubernetes.md|kubernetes]]/pki`
 3. 通知相关团队
 
 ## 修复步骤

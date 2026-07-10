@@ -1,0 +1,5 @@
+cgroup.memory=nokmem
+crashkernel=0M-2G:0M,2G-64G:256M,64G-:384M
+iommu.passthrough=1 iommu.strict=0
+nospectre_bhb ssbd=force-off
+thp_file=8K-2M:always thp_file=2M:always+exec

@@ -159,64 +159,64 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/ts-networking.md|网络故障排查]]
 
 ## Related
 
-- [[skills/skill-MOC.md|skill-MOC]] — topic-skills MOC
+- [[技能/skill-MOC.md|skill-MOC]] — topic-skills MOC
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
-- [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[实体/kubelet.md|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 
 - [[故障诊断/FTA故障树/list/calico-fta.md|calico-fta]]
 - RELEASE-NOTES-3.18
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
 - RELEASE-NOTES-3.19
 - RELEASE-NOTES-2.4
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
 - RELEASE-NOTES-3.12
 - RELEASE-NOTES-3.5
 - RELEASE-NOTES-3.1
 - RELEASE-NOTES-3.16
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.22.md|RELEASE-NOTES-3.22]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.22.md|RELEASE-NOTES-3.22]]
 - RELEASE-NOTES-3.0
 - RELEASE-NOTES-3.17
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
 - RELEASE-NOTES-2.5
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
 - RELEASE-NOTES-3.13
 - RELEASE-NOTES-3.4
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
 - RELEASE-NOTES-3.14
 - RELEASE-NOTES-3.3
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
 - RELEASE-NOTES-2.6
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
 - RELEASE-NOTES-3.7
 - RELEASE-NOTES-3.10
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
 - RELEASE-NOTES-3.6
 - RELEASE-NOTES-3.11
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
 - RELEASE-NOTES-3.15
 - RELEASE-NOTES-3.2
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
 - RELEASE-NOTES-3.9
 - RELEASE-NOTES-3.8
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
-- [[_archives/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
+- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.23.md|RELEASE-NOTES-3.23]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.27.md|RELEASE-NOTES-3.27]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.30.md|RELEASE-NOTES-3.30]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.24.md|RELEASE-NOTES-3.24]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.25.md|RELEASE-NOTES-3.25]]
+- [[归档/release-notes/networking/calico/RELEASE-NOTES-3.31.md|RELEASE-NOTES-3.31]]
 
 
 <!-- risk-assessed -->

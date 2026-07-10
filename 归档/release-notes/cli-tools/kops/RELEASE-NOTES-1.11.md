@@ -1,0 +1,57 @@
+---
+title: kops v1.11 Release Notes
+description: kops v1.11 Release Notes — Kubernetes 生产运维知识库
+summary: kops v1.11 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- kops v1.11 Release Notes 是什么
+- 如何 kops v1.11 Release Notes
+trigger_keywords:
+- kops
+- v1.11
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# kops v1.11 Release Notes
+
+Source: [1.11.1](https://github.[[实体/kubernetes.md|kubernetes]]/kops/releases/tag/1.11.1)
+
+Release 1.11.1
+
+## Highlights
+* Fixes for [cve-2019-5736](https://kubernetes.io/blog/2019/02/11/runc-and-cve-2019-5736/), for more details please see the [kops advisory for cve-2019-5736](https://github.com/kubernetes/kops/blob/master/docs/advisories/cve_2019_5736.md)
+* Fixes for RHEL & Centos distros, that may have caused instances to fail to start due to an issue around overlay2 detection.
+* Reserve the nodeport range, to avoid potential port conflicts; see #6342 for details
+
+For full details please see the [1.11 release notes](https://github.com/kubernetes/kops/blob/master/docs/releases/1.11-NOTES.md)
+
+Many thanks to everyone that contributed to the release.  Thanks for code contributions to [@bcorijn](https://github.com/bcorijn), [@jjo](https://github.com/jjo), [@justinsb](https://github.com/justinsb), [@mikesplain](https://github.com/mikesplain), [@nareshku](https://github.com/nareshku), [@ricardo-larosa](https://github.com/ricardo-larosa), [@sp-joseluis-ledesma](https://github.com/sp-joseluis-ledesma)
+
+
+
+<!-- risk-assessed -->

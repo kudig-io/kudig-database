@@ -1,0 +1,112 @@
+---
+title: CNI Plugins
+description: CNI Plugins — Kubernetes 生产运维知识库
+summary: CNI Plugins — Kubernetes 生产运维知识库
+category: entities
+tags:
+- k8s
+- cni
+- networking
+- calico
+- cilium
+- flannel
+- terway
+- kubelet
+- networkpolicy
+- ebpf
+tier: core
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- CNI Plugins 是什么
+- 如何 CNI Plugins
+trigger_keywords:
+- CNI
+- Plugins
+prerequisites:
+- kubectl-basics
+- ebpf-basics
+- cilium-basics
+- cni-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# CNI Plugins
+
+## What is CNI
+
+CNI (Container Network Interface) is the standard plugin interface Kubernetes uses to configure Pod networking. CNI plugins are invoked by [[kubelet|kubelet]] during Pod creation to set up network namespaces, assign IP addresses, and configure routes.
+
+## Major CNI Plugins
+
+| Plugin | Type | Features | Best For |
+|--------|------|----------|----------|
+| **Calico** | BGP routing | [[NetworkPolicy|NetworkPolicy]] enforcement, BGP peering, IPIP/VXLAN overlay | Enterprise, NetworkPolicy-heavy |
+| **Cilium** | eBPF-based | L7 policy, identity-aware security, observability, service mesh replacement | High-performance, security-focused |
+| **Flannel** | Overlay (VXLAN/UDP/WireGuard) | Simple, minimal overhead, dual-stack, WireGuard encryption | Small clusters, simplicity |
+| **Terway** | Alibaba Cloud ENI | Direct ENI IP allocation, high throughput, VPC-native | Alibaba Cloud environments |
+
+## CNI Requirements
+
+Every CNI plugin must satisfy:
+- Each Pod gets a unique IP address
+- Pods on the same node can communicate without NAT
+- Pods on different nodes can communicate without NAT (cluster-wide flat network)
+- No special port mapping needed
+
+## IPAM (IP Address Management)
+
+CNI plugins handle IP allocation through IPAM plugins:
+- **host-local**: Node-scoped IP range allocation
+- **DHCP**: External DHCP server
+- **Static**: Fixed IP assignment
+- **Cloud provider**: VPC subnet allocation (Terway)
+
+## Selection Criteria
+
+Choose based on:
+- **Scale**: Flannel for small, Calico/Cilium for large
+- **Security**: Cilium for eBPF-based L7 policies, Calico for standard NetworkPolicy
+- **Cloud integration**: Terway for Alibaba Cloud, AWS VPC CNI for AWS
+- **Performance**: Cilium eBPF > Calico BGP > Flannel VXLAN
+
+## Related
+- [[概念/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]] — 综合
+
+- [[cilium]] — Cilium
+- [[实体/kubelet.md|kubelet]] — kubelet
+- [[cni]] — CNI (Container Network Interface)
+- [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[概念/service-networking.md|service-networking]] — Service Networking
+- [[概念/service-networking.md|Service Networking]]
+- [[实体/networkpolicy.md|NetworkPolicy]]
+- Kubernetes Network Model
+
+- 03-cni-plugins-comparison
+- RELEASE-NOTES-1.9
+- RELEASE-NOTES-0.8
+- RELEASE-NOTES-1.8
+- RELEASE-NOTES-0.9
+- RELEASE-NOTES-1.3
+- RELEASE-NOTES-1.7
+- RELEASE-NOTES-0.6
+- RELEASE-NOTES-1.6
+- RELEASE-NOTES-0.7
+- RELEASE-NOTES-1.2
+- RELEASE-NOTES-1.5
+- RELEASE-NOTES-1.1
+- RELEASE-NOTES-1.0
+- RELEASE-NOTES-1.4
+
+<!-- risk-assessed -->

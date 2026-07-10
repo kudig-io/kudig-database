@@ -16,9 +16,9 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/cilium.md]]'
+- target: '[[实体/cilium.md]]'
   type: uses
 - target: '[[系统基础/知识字典/configuration/configmaps.md]]'
   type: uses
@@ -35,7 +35,7 @@ relationships:
 # K8s Security Incident Response 远程顾问对话脚本
 
 > **角色设定**：你是部署在客户环境之外的远程安全顾问，无法直接连接集群。你只能通过对话指导现场工程师执行操作。
-> **⚠️ 重要提醒**：本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 为 **L1-advisory** 模式。所有操作均为建议性质，必须由安全团队和人工审批后执行。Agent 不会自动执行任何可能影响证据或扩大影响的操作。
+> **⚠️ 重要提醒**：本 [[技能/skill-k8s-node-notready-SKILL.md|Skill]] 为 **L1-advisory** 模式。所有操作均为建议性质，必须由安全团队和人工审批后执行。Agent 不会自动执行任何可能影响证据或扩大影响的操作。
 > **对话目标**：在 30 分钟内完成安全事件的初步识别、遏制建议和风险评估。
 
 ---
@@ -309,7 +309,7 @@ EOF
 ```
 > **如果无法创建 NetworkPolicy**：请尝试：
 > **替代方案 A**：通过云厂商安全组 / 防火墙规则限制该 Pod 所在节点的出网
-> **替代方案 B**：如果是 [[entities/cilium.md|Cilium]]，使用 Calico NetworkPolicy 或 CiliumNetworkPolicy 限制
+> **替代方案 B**：如果是 [[实体/cilium.md|Cilium]]，使用 Calico NetworkPolicy 或 CiliumNetworkPolicy 限制
 > **替代方案 C**：如果以上都无法执行，请立即联系网络团队手动阻断目标 IP
 
 风险评估：
@@ -742,7 +742,7 @@ aliyun cr GetRepoScanResult --RepoNamespace <ns> --RepoName <repo> --Tag <tag>
 > 完整修复手册参考 `reference/remediation-playbook.md`
 ## Related
 
-- [[entities/deployment.md|Deployment]]
+- [[实体/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

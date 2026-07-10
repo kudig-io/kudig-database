@@ -386,8 +386,8 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 - 29-agentscope-studio-skill-demo
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/coredns.md|coredns]]
 
 - 48-openclaw-skill-mechanism
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]

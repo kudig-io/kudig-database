@@ -355,7 +355,7 @@ bash scripts/comprehensive-quality-check.sh
 | 文档头部信息 | 检查版本信息字段 | 作为警告提示 |
 | 统计汇总 | 全库文档数量、Domain/Topic 文档数 | 供参考 |
 
-Sources: [scripts/comprehensive-quality-check.sh](scripts/comprehensive-quality-check.sh#L1-L116)
+Sources: [scripts/comprehensive-quality-check.sh](脚本/comprehensive-quality-check.sh#L1-L116)
 
 ### 脚本二：代码示例语法验证
 
@@ -369,7 +369,7 @@ bash scripts/code-example-validation.sh
 - **Bash 块**：通过 `bash -n` 进行语法检查
 - 最终输出通过/错误计数，发现错误时以非零退出码阻止提交
 
-Sources: [scripts/code-example-validation.sh](scripts/code-example-validation.sh#L1-L95)
+Sources: [scripts/code-example-validation.sh](脚本/code-example-validation.sh#L1-L95)
 
 ### CI/CD 自动验证
 

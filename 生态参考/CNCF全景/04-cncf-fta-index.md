@@ -92,7 +92,7 @@ authors:
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
 | **Flannel** | [flannel-fta.md](../故障诊断/FTA故障树/list/flannel-fta.md) | [08-flannel-troubleshooting](../故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
-| **Calico** | [calico-fta.md](../故障诊断/FTA故障树/list/calico-fta.md) | [05-calico-troubleshooting](../故障诊断/高级排障/03-networking/05-calico-troubleshooting.md) | [[entities/networkpolicy.md|NetworkPolicy]] |
+| **Calico** | [calico-fta.md](../故障诊断/FTA故障树/list/calico-fta.md) | [05-calico-troubleshooting](../故障诊断/高级排障/03-networking/05-calico-troubleshooting.md) | [[实体/networkpolicy.md|NetworkPolicy]] |
 | **[[Cilium|Cilium]]** | [cilium-fta.md](../故障诊断/FTA故障树/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../网络/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
 | **[[Antrea|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
@@ -177,7 +177,7 @@ authors:
 | **Controller Manager** | [controller-manager-fta.md](../故障诊断/FTA故障树/list/controller-manager-fta.md) | - | 控制器循环 |
 | **Scheduler** | (待补充) | - | 调度决策 |
 | **Kubelet** | (待补充) | [Kubelet 故障排查](../故障诊断/高级排障/01-kubernetes-core/03-kubelet-troubleshooting.md) | 状态同步 |
-| **[[concepts/container-runtime.md|Container Runtime]]** | (待补充) | - | 容器启动 |
+| **[[概念/container-runtime.md|Container Runtime]]** | (待补充) | - | 容器启动 |
 
 ### 7.2 工作负载
 

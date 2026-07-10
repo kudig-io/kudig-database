@@ -1,0 +1,944 @@
+package eni
+
+import (
+	"context"
+	"reflect"
+	"testing"
+	"time"
+
+	"github.com/agiledragon/gomonkey/v2"
+	"github.com/go-logr/logr"
+	"github.com/stretchr/testify/assert"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/util/wait"
+	pkgclient "sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/client/fake"
+
+	networkv1beta1 "github.com/AliyunContainerService/terway/pkg/apis/network.alibabacloud.com/v1beta1"
+	"github.com/AliyunContainerService/terway/pkg/backoff"
+	"github.com/AliyunContainerService/terway/rpc"
+	"github.com/AliyunContainerService/terway/types"
+	"github.com/AliyunContainerService/terway/types/daemon"
+)
+
+func TestGetTrunkENIReturnsErrorWhenNodeNotInitialized(t *testing.T) {
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName: "node1",
+	}
+	ctx := context.Background()
+
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeSpec{ENISpec: nil},
+	}).Build()
+	crd.client = fakeClient
+
+	eni, err := crd.getTrunkENI(ctx)
+	assert.Nil(t, eni)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "has not been initialized")
+}
+
+func TestGetTrunkENIReturnsErrorWhenTrunkNotEnabled(t *testing.T) {
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName: "node1",
+	}
+	ctx := context.Background()
+
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeSpec{ENISpec: &networkv1beta1.ENISpec{EnableTrunk: false}},
+	}).Build()
+	crd.client = fakeClient
+
+	eni, err := crd.getTrunkENI(ctx)
+	assert.Nil(t, eni)
+	assert.NoError(t, err)
+}
+
+func TestGetTrunkENIReturnsErrorWhenTrunkIDNotFound(t *testing.T) {
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName: "node1",
+	}
+	ctx := context.Background()
+
+	// Create a fake client with the initial state
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(
+		&networkv1beta1.Node{
+			ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+			Spec:       networkv1beta1.NodeSpec{ENISpec: &networkv1beta1.ENISpec{EnableTrunk: true}},
+		},
+		&corev1.Node{
+			ObjectMeta: metav1.ObjectMeta{Name: "node1", Annotations: map[string]string{}},
+		},
+	).Build()
+	crd.client = fakeClient
+
+	eni, err := crd.getTrunkENI(ctx)
+	assert.Nil(t, eni)
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "has not been initialized")
+}
+
+func TestGetTrunkENIReturnsValidENI(t *testing.T) {
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName: "node1",
+	}
+	ctx := context.Background()
+
+	// Create a fake client with the initial state
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(
+		&networkv1beta1.Node{
+			ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+			Spec: networkv1beta1.NodeSpec{
+				ENISpec: &networkv1beta1.ENISpec{
+					EnableTrunk: true,
+					EnableIPv4:  true,
+					EnableIPv6:  true,
+				}},
+			Status: networkv1beta1.NodeStatus{
+				NetworkInterfaces: map[string]*networkv1beta1.Nic{
+					"eni-1": {
+						ID:                          "eni-1",
+						MacAddress:                  "00:00:00:00:00:01",
+						SecurityGroupIDs:            []string{"sg-1"},
+						IPv4CIDR:                    "192.168.1.0/24",
+						IPv6CIDR:                    "fd00::/64",
+						PrimaryIPAddress:            "192.168.1.10",
+						NetworkInterfaceType:        networkv1beta1.ENITypeTrunk,
+						NetworkInterfaceTrafficMode: networkv1beta1.NetworkInterfaceTrafficModeStandard,
+					},
+				},
+			},
+		},
+		&corev1.Node{
+			ObjectMeta: metav1.ObjectMeta{Name: "node1", Annotations: map[string]string{types.TrunkOn: "eni-1"}},
+		},
+	).Build()
+	crd.client = fakeClient
+
+	eni, err := crd.getTrunkENI(ctx)
+	assert.NotNil(t, eni)
+	assert.NoError(t, err)
+	assert.Equal(t, "eni-1", eni.ID)
+	assert.Equal(t, "00:00:00:00:00:01", eni.MAC)
+	assert.Equal(t, []string{"sg-1"}, eni.SecurityGroupIDs)
+	assert.Equal(t, "192.168.1.10", eni.PrimaryIP.IPv4.String())
+	assert.Equal(t, "192.168.1.253", eni.GatewayIP.IPv4.String())
+	assert.Equal(t, "192.168.1.0/24", eni.VSwitchCIDR.IPv4.String())
+	assert.Equal(t, "fd00::/64", eni.VSwitchCIDR.IPv6.String())
+}
+
+func TestGetRuntimeNode(t *testing.T) {
+	tests := []struct {
+		name             string
+		existingNodes    []corev1.Node
+		existingRuntimes []networkv1beta1.NodeRuntime
+		nodeName         string
+		expectedError    bool
+		expectedLabels   map[string]string
+	}{
+		{
+			name:             "Node exists, Runtime does not",
+			existingNodes:    []corev1.Node{{ObjectMeta: metav1.ObjectMeta{Name: "test-node"}}},
+			existingRuntimes: []networkv1beta1.NodeRuntime{},
+			nodeName:         "test-node",
+			expectedError:    false,
+			expectedLabels:   map[string]string{"name": "test-node"},
+		},
+		{
+			name:             "Runtime exists",
+			existingNodes:    []corev1.Node{{ObjectMeta: metav1.ObjectMeta{Name: "test-node"}}},
+			existingRuntimes: []networkv1beta1.NodeRuntime{{ObjectMeta: metav1.ObjectMeta{Name: "test-node", Labels: map[string]string{"name": "test-node"}}}},
+			nodeName:         "test-node",
+			expectedError:    false,
+			expectedLabels:   map[string]string{"name": "test-node"},
+		},
+		{
+			name:             "Node does not exist",
+			existingNodes:    []corev1.Node{},
+			existingRuntimes: []networkv1beta1.NodeRuntime{},
+			nodeName:         "test-node",
+			expectedError:    true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Set up the fake client with existing nodes and runtimes
+			objs := []runtime.Object{}
+			for _, n := range tt.existingNodes {
+				objs = append(objs, &n)
+			}
+			for _, r := range tt.existingRuntimes {
+				objs = append(objs, &r)
+			}
+			builder := fake.NewClientBuilder()
+			fakeClient := builder.WithScheme(types.Scheme).WithRuntimeObjects(objs...).Build()
+			r := &CRDV2{
+				client:   fakeClient,
+				nodeName: tt.nodeName,
+				scheme:   types.Scheme,
+			}
+			ctx := context.Background()
+
+			// Call the method under test
+			nodeRuntime, err := r.getRuntimeNode(ctx)
+
+			// Check for expected errors
+			if (err != nil) != tt.expectedError {
+				t.Errorf("expected error: %v, got: %v", tt.expectedError, err)
+			}
+
+			if !tt.expectedError {
+				// Check expected labels
+				assert.Equal(t, tt.expectedLabels, nodeRuntime.Labels)
+			}
+		})
+	}
+}
+
+func TestInUsedPodUIDs(t *testing.T) {
+	tests := []struct {
+		name            string
+		node            *networkv1beta1.Node
+		expectedPodUIDs map[string]networkv1beta1.RuntimePodStatus
+		expectedError   bool
+	}{
+		{
+			name: "No network interfaces",
+			node: &networkv1beta1.Node{
+				ObjectMeta: metav1.ObjectMeta{
+					Name: "test-node",
+				},
+				Status: networkv1beta1.NodeStatus{}},
+			expectedPodUIDs: map[string]networkv1beta1.RuntimePodStatus{},
+			expectedError:   false,
+		},
+		{
+			name: "IPv4 and IPv6 IPAM records present",
+			node: &networkv1beta1.Node{
+				ObjectMeta: metav1.ObjectMeta{
+					Name: "test-node",
+				},
+				Status: networkv1beta1.NodeStatus{
+					NetworkInterfaces: map[string]*networkv1beta1.Nic{
+						"eni-1": {
+							ID: "eni-1",
+							IPv4: map[string]*networkv1beta1.IP{
+								"127.0.0.1": {
+									IP:      "",
+									Primary: false,
+									Status:  "",
+									PodID:   "pod-id-1",
+									PodUID:  "pod-uid-1",
+								},
+								"127.0.0.2": {
+									IP:      "",
+									Primary: false,
+									Status:  "",
+									PodID:   "pod-id-2",
+									PodUID:  "pod-uid-2",
+								},
+							},
+						},
+					},
+				},
+			},
+			expectedPodUIDs: map[string]networkv1beta1.RuntimePodStatus{
+				"pod-uid-1": {PodID: "pod-id-1", Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+					networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+						LastUpdateTime: metav1.Time{},
+					},
+				}},
+				"pod-uid-2": {PodID: "pod-id-2", Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+					networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+						LastUpdateTime: metav1.Time{},
+					},
+				}},
+			},
+			expectedError: false,
+		},
+		{
+			name:            "Error getting node",
+			node:            nil,
+			expectedPodUIDs: map[string]networkv1beta1.RuntimePodStatus{},
+			expectedError:   true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Create a fake client with the test node
+			objs := []runtime.Object{}
+			if tt.node != nil {
+				objs = append(objs, tt.node)
+			}
+			builder := fake.NewClientBuilder()
+			fakeClient := builder.WithScheme(types.Scheme).WithRuntimeObjects(objs...).Build()
+			r := &CRDV2{
+				client:   fakeClient,
+				nodeName: "test-node",
+			}
+			ctx := context.Background()
+
+			// Call the method under test
+			podUIDs, err := r.inUsedPodUIDs(ctx)
+
+			for _, podUID := range podUIDs {
+				for _, v := range podUID.Status {
+					v.LastUpdateTime = metav1.Time{}
+				}
+			}
+			// Check for expected errors
+			if (err != nil) != tt.expectedError {
+				t.Errorf("expected error: %v, got: %v", tt.expectedError, err)
+			}
+
+			if !tt.expectedError {
+				assert.Equal(t, tt.expectedPodUIDs, podUIDs)
+			}
+		})
+	}
+}
+
+func Test_syncBack(t *testing.T) {
+	type args struct {
+		l           logr.Logger
+		nodeRuntime *networkv1beta1.NodeRuntime
+		inUsed      map[string]networkv1beta1.RuntimePodStatus
+	}
+	tests := []struct {
+		name string
+		args args
+
+		expect *networkv1beta1.NodeRuntime
+	}{
+		{
+			name: "add pod back",
+			args: args{
+				l:           logr.Discard(),
+				nodeRuntime: &networkv1beta1.NodeRuntime{},
+				inUsed: map[string]networkv1beta1.RuntimePodStatus{
+					"uid1": networkv1beta1.RuntimePodStatus{
+						PodID: "pod-id-1",
+						Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+							networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+								LastUpdateTime: metav1.Time{},
+							},
+						},
+					},
+					"uid2": networkv1beta1.RuntimePodStatus{
+						PodID: "pod-id-2",
+						Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+							networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+								LastUpdateTime: metav1.Time{},
+							},
+						},
+					},
+				},
+			},
+			expect: &networkv1beta1.NodeRuntime{
+				Status: networkv1beta1.NodeRuntimeStatus{Pods: map[string]*networkv1beta1.RuntimePodStatus{
+					"uid1": {
+						PodID: "pod-id-1",
+						Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+							networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+								LastUpdateTime: metav1.Time{},
+							},
+						},
+					},
+					"uid2": {
+						PodID: "pod-id-2",
+						Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+							networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+								LastUpdateTime: metav1.Time{},
+							},
+						},
+					},
+				}},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			syncBack(tt.args.l, tt.args.nodeRuntime, tt.args.inUsed)
+
+			assert.Equal(t, tt.expect, tt.args.nodeRuntime)
+		})
+	}
+}
+
+func Test_removeDeleted(t *testing.T) {
+	type args struct {
+		l           logr.Logger
+		nodeRuntime *networkv1beta1.NodeRuntime
+		inUsed      map[string]networkv1beta1.RuntimePodStatus
+	}
+	tests := []struct {
+		name   string
+		args   args
+		expect *networkv1beta1.NodeRuntime
+	}{
+		{
+			name: "remove unused",
+			args: args{
+				l: logr.Discard(),
+				nodeRuntime: &networkv1beta1.NodeRuntime{
+					Status: networkv1beta1.NodeRuntimeStatus{
+						Pods: map[string]*networkv1beta1.RuntimePodStatus{
+							"uid1": {
+								PodID: "pod-id-1",
+								Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+									networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+										LastUpdateTime: metav1.Time{},
+									},
+								},
+							},
+							"uid2": {
+								PodID: "pod-id-2",
+								Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+									networkv1beta1.CNIStatusDeleted: &networkv1beta1.CNIStatusInfo{
+										LastUpdateTime: metav1.Time{},
+									},
+								},
+							},
+						},
+					},
+				},
+				inUsed: map[string]networkv1beta1.RuntimePodStatus{},
+			},
+			expect: &networkv1beta1.NodeRuntime{
+				Status: networkv1beta1.NodeRuntimeStatus{Pods: map[string]*networkv1beta1.RuntimePodStatus{
+					"uid1": {
+						PodID: "pod-id-1",
+						Status: map[networkv1beta1.CNIStatus]*networkv1beta1.CNIStatusInfo{
+							networkv1beta1.CNIStatusInitial: &networkv1beta1.CNIStatusInfo{
+								LastUpdateTime: metav1.Time{},
+							},
+						},
+					},
+				}},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			removeDeleted(tt.args.l, tt.args.nodeRuntime, tt.args.inUsed)
+
+			assert.Equal(t, tt.expect, tt.args.nodeRuntime)
+		})
+	}
+}
+
+func TestSyncNodeRuntimeReturnsNilWhenNoDeletedPods(t *testing.T) {
+	r := &CRDV2{
+		deletedPods: make(map[string]*networkv1beta1.RuntimePodStatus),
+	}
+	err := r.syncNodeRuntime(context.Background())
+	assert.NoError(t, err)
+}
+
+func TestSyncNodeRuntimeReturnsErrorWhenGetRuntimeNodeFails(t *testing.T) {
+	client := fake.NewClientBuilder().WithScheme(types.Scheme).Build()
+	r := &CRDV2{
+		client:      client,
+		deletedPods: map[string]*networkv1beta1.RuntimePodStatus{"pod-1": {PodID: "pod-1"}},
+	}
+	err := r.syncNodeRuntime(context.Background())
+	assert.Error(t, err)
+}
+
+func TestSyncNodeRuntimeUpdatesDeletedPods(t *testing.T) {
+	n := &networkv1beta1.NodeRuntime{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeRuntimeSpec{},
+		Status:     networkv1beta1.NodeRuntimeStatus{Pods: map[string]*networkv1beta1.RuntimePodStatus{}},
+	}
+	client := fake.NewClientBuilder().WithScheme(types.Scheme).
+		WithStatusSubresource(n).
+		WithObjects(n).Build()
+	r := &CRDV2{
+		client:      client,
+		nodeName:    "node1",
+		deletedPods: map[string]*networkv1beta1.RuntimePodStatus{"pod-1": {PodID: "pod-1"}},
+	}
+
+	err := r.syncNodeRuntime(context.Background())
+	assert.NoError(t, err)
+
+	nodeRuntime := &networkv1beta1.NodeRuntime{}
+	err = client.Get(context.Background(), pkgclient.ObjectKey{Name: "node1"}, nodeRuntime)
+	assert.NoError(t, err)
+	assert.Contains(t, nodeRuntime.Status.Pods, "pod-1")
+	assert.Contains(t, nodeRuntime.Status.Pods["pod-1"].Status, networkv1beta1.CNIStatusDeleted)
+}
+
+func TestSyncNodeRuntimeClearsDeletedPods(t *testing.T) {
+	n := &networkv1beta1.NodeRuntime{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeRuntimeSpec{},
+		Status:     networkv1beta1.NodeRuntimeStatus{Pods: map[string]*networkv1beta1.RuntimePodStatus{}},
+	}
+
+	client := fake.NewClientBuilder().WithScheme(types.Scheme).WithStatusSubresource(n).WithObjects(n).Build()
+	r := &CRDV2{
+		client:      client,
+		nodeName:    "node1",
+		deletedPods: map[string]*networkv1beta1.RuntimePodStatus{"pod-1": {PodID: "pod-1"}},
+	}
+	err := r.syncNodeRuntime(context.Background())
+	assert.NoError(t, err)
+	assert.Empty(t, r.deletedPods)
+}
+
+// ==============================================================================
+// Allocate and Release Tests
+// ==============================================================================
+
+func TestCRDV2_Allocate_UnknownResourceType(t *testing.T) {
+	r := &CRDV2{
+		nodeName:    "node1",
+		deletedPods: make(map[string]*networkv1beta1.RuntimePodStatus),
+	}
+
+	// Create a mock request with unknown resource type (0 is not a valid type)
+	request := &mockResourceRequest{resourceType: 0}
+	cni := &daemon.CNI{PodID: "pod-1", PodUID: "uid-1"}
+
+	ch, traces := r.Allocate(context.Background(), cni, request)
+
+	assert.Nil(t, ch)
+	assert.Len(t, traces, 1)
+	assert.Equal(t, ResourceTypeMismatch, traces[0].Condition)
+}
+
+func TestCRDV2_Release_LocalIP(t *testing.T) {
+	r := &CRDV2{
+		nodeName:    "node1",
+		deletedPods: make(map[string]*networkv1beta1.RuntimePodStatus),
+	}
+
+	request := &mockNetworkResource{resourceType: ResourceTypeLocalIP}
+	cni := &daemon.CNI{PodID: "pod-1", PodUID: "uid-1"}
+
+	ok, err := r.Release(context.Background(), cni, request)
+
+	assert.False(t, ok)
+	assert.NoError(t, err)
+	assert.Contains(t, r.deletedPods, "uid-1")
+	assert.Equal(t, "pod-1", r.deletedPods["uid-1"].PodID)
+}
+
+func TestCRDV2_Release_RDMA(t *testing.T) {
+	r := &CRDV2{
+		nodeName:    "node1",
+		deletedPods: make(map[string]*networkv1beta1.RuntimePodStatus),
+	}
+
+	request := &mockNetworkResource{resourceType: ResourceTypeRDMA}
+	cni := &daemon.CNI{PodID: "pod-2", PodUID: "uid-2"}
+
+	ok, err := r.Release(context.Background(), cni, request)
+
+	assert.False(t, ok)
+	assert.NoError(t, err)
+	assert.Contains(t, r.deletedPods, "uid-2")
+	assert.Equal(t, "pod-2", r.deletedPods["uid-2"].PodID)
+}
+
+func TestCRDV2_Release_RemoteIP(t *testing.T) {
+	r := &CRDV2{
+		nodeName:    "node1",
+		deletedPods: make(map[string]*networkv1beta1.RuntimePodStatus),
+	}
+
+	request := &mockNetworkResource{resourceType: ResourceTypeRemoteIP}
+	cni := &daemon.CNI{PodID: "pod-3", PodUID: "uid-3"}
+
+	ok, err := r.Release(context.Background(), cni, request)
+
+	assert.False(t, ok)
+	assert.NoError(t, err)
+	// RemoteIP should not be added to deletedPods
+	assert.NotContains(t, r.deletedPods, "uid-3")
+}
+
+func TestCRDV2_Priority(t *testing.T) {
+	r := &CRDV2{}
+	assert.Equal(t, 100, r.Priority())
+}
+
+func TestCRDV2_Dispose(t *testing.T) {
+	r := &CRDV2{}
+	assert.Equal(t, 0, r.Dispose(10))
+}
+
+// mockResourceRequest implements ResourceRequest interface for testing
+type mockResourceRequest struct {
+	resourceType ResourceType
+}
+
+func (m *mockResourceRequest) ResourceType() ResourceType {
+	return m.resourceType
+}
+
+// mockNetworkResource implements NetworkResource interface for testing
+type mockNetworkResource struct {
+	resourceType ResourceType
+}
+
+func (m *mockNetworkResource) ResourceType() ResourceType {
+	return m.resourceType
+}
+
+func (m *mockNetworkResource) ToStore() []daemon.ResourceItem {
+	return nil
+}
+
+func (m *mockNetworkResource) ToRPC() []*rpc.NetConf {
+	return nil
+}
+
+// ==============================================================================
+// collectENIConditions Tests
+// ==============================================================================
+
+func TestCRDV2_collectENIConditions_NoConditions(t *testing.T) {
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Status: networkv1beta1.NodeStatus{
+			NetworkInterfaces: map[string]*networkv1beta1.Nic{
+				"eni-1": {
+					ID:     "eni-1",
+					Status: "InUse",
+				},
+			},
+		},
+	}).Build()
+
+	r := &CRDV2{client: fakeClient, nodeName: "node1"}
+	result := r.collectENIConditions()
+	assert.Empty(t, result)
+}
+
+func TestCRDV2_collectENIConditions_WithConditions(t *testing.T) {
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Status: networkv1beta1.NodeStatus{
+			NetworkInterfaces: map[string]*networkv1beta1.Nic{
+				"eni-bp1fi7h3c8iy5r714zl8": {
+					ID:     "eni-bp1fi7h3c8iy5r714zl8",
+					Status: "InUse",
+					Conditions: map[string]networkv1beta1.Condition{
+						"InsufficientIP": {
+							Message:      "vsw-bp1mh6lpn21jzqllmdsfw ip is not enough",
+							ObservedTime: metav1.Now(),
+						},
+					},
+				},
+			},
+		},
+	}).Build()
+
+	r := &CRDV2{client: fakeClient, nodeName: "node1"}
+	result := r.collectENIConditions()
+	assert.Contains(t, result, "eni-bp1fi7h3c8iy5r714zl8")
+	assert.Contains(t, result, "InsufficientIP")
+	assert.Contains(t, result, "vsw-bp1mh6lpn21jzqllmdsfw ip is not enough")
+}
+
+func TestCRDV2_collectENIConditions_NodeNotFound(t *testing.T) {
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).Build()
+
+	r := &CRDV2{client: fakeClient, nodeName: "node1"}
+	result := r.collectENIConditions()
+	assert.Empty(t, result)
+}
+
+// ==============================================================================
+// remote method Tests
+// ==============================================================================
+
+func TestCRDV2_remote_GetTrunkENIError(t *testing.T) {
+	// Set up backoff to make tests run faster
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName:       "node1",
+		podENINotifier: NewNotifier(),
+	}
+
+	ctx := context.Background()
+
+	// Create a fake client that will cause getTrunkENI to fail
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeSpec{ENISpec: nil}, // This will cause getTrunkENI to fail
+	}).Build()
+	crd.client = fakeClient
+
+	request := &mockResourceRequest{resourceType: ResourceTypeRemoteIP}
+	cni := &daemon.CNI{PodID: "pod-1", PodUID: "uid-1"}
+
+	resp, traces := crd.remote(ctx, cni, request)
+
+	// Should return a channel and no traces
+	assert.NotNil(t, resp)
+	assert.Nil(t, traces)
+
+	// Wait for the error response
+	select {
+	case result := <-resp:
+		assert.NotNil(t, result)
+		assert.Error(t, result.Err)
+		assert.Contains(t, result.Err.Error(), "has not been initialized")
+	case <-time.After(2 * time.Second):
+		t.Fatal("timeout waiting for error response")
+	}
+}
+
+func TestCRDV2_remote_GetTrunkENIError_ContextCanceled(t *testing.T) {
+	// Set up backoff to make tests run faster
+	backoff.Backoff(backoff.WaitPodENIStatus)
+	backoff.OverrideBackoff(map[string]backoff.ExtendedBackoff{
+		backoff.WaitPodENIStatus: {
+			Backoff: wait.Backoff{
+				Duration: 0,
+				Factor:   0,
+				Jitter:   0,
+				Steps:    1,
+				Cap:      0,
+			},
+		},
+	})
+
+	crd := &CRDV2{
+		nodeName:       "node1",
+		podENINotifier: NewNotifier(),
+	}
+
+	// Create a context that will be canceled
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel() // Cancel immediately
+
+	// Create a fake client that will cause getTrunkENI to fail
+	fakeClient := fake.NewClientBuilder().WithScheme(types.Scheme).WithObjects(&networkv1beta1.Node{
+		ObjectMeta: metav1.ObjectMeta{Name: "node1"},
+		Spec:       networkv1beta1.NodeSpec{ENISpec: nil},
+	}).Build()
+	crd.client = fakeClient
+
+	request := &mockResourceRequest{resourceType: ResourceTypeRemoteIP}
+	cni := &daemon.CNI{PodID: "pod-1", PodUID: "uid-1"}
+
+	resp, traces := crd.remote(ctx, cni, request)
+
+	// Should return a channel and no traces
+	assert.NotNil(t, resp)
+	assert.Nil(t, traces)
+
+	// With canceled context, the goroutine should exit without sending
+	select {
+	case result := <-resp:
+		// If we get a result, it should be nil (channel closed) or have an error
+		if result != nil {
+			// If there's an error, that's also acceptable
+			assert.Error(t, result.Err)
+		}
+	case <-time.After(500 * time.Millisecond):
+		// Channel might be closed without sending, which is also acceptable
+		// This is a race condition test
+	}
+}
+
+func TestCRDV2_remote_GetTrunkENISuccess(t *testing.T) {
+	crd := &CRDV2{
+		nodeName:       "node1",
+		podENINotifier: NewNotifier(),
+	}
+
+	ctx := context.Background()
+	request := &mockResourceRequest{resourceType: ResourceTypeRemoteIP}
+	cni := &daemon.CNI{
+		PodID:        "pod-1",
+		PodUID:       "uid-1",
+		PodName:      "pod-1",
+		PodNamespace: "default",
+	}
+
+	// Mock getTrunkENI to return a valid trunk ENI
+	trunkENI := &daemon.ENI{
+		ID:               "eni-1",
+		MAC:              "00:00:00:00:00:01",
+		SecurityGroupIDs: []string{"sg-1"},
+		Trunk:            true,
+	}
+
+	patches := gomonkey.NewPatches()
+	defer patches.Reset()
+
+	// Mock getTrunkENI method
+	patches.ApplyPrivateMethod(crd, "getTrunkENI", func(_ *CRDV2, _ context.Context) (*daemon.ENI, error) {
+		return trunkENI, nil
+	})
+
+	// Create a mock Remote instance and mock its Allocate method
+	expectedResp := make(chan *AllocResp, 1)
+	expectedResp <- &AllocResp{
+		Err: nil,
+		NetworkConfigs: NetworkResources{
+			&RemoteIPResource{},
+		},
+	}
+	close(expectedResp)
+
+	// We need to mock Remote.Allocate, but since it's called on a new instance,
+	// we'll use ApplyMethod on the Remote type
+	patches.ApplyMethod(reflect.TypeOf(&Remote{}), "Allocate",
+		func(_ *Remote, _ context.Context, _ *daemon.CNI, _ ResourceRequest) (chan *AllocResp, []Trace) {
+			return expectedResp, nil
+		})
+
+	resp, traces := crd.remote(ctx, cni, request)
+
+	// Should return a channel and no traces
+	assert.NotNil(t, resp)
+	assert.Nil(t, traces)
+
+	// Verify the response
+	select {
+	case result := <-resp:
+		assert.NotNil(t, result)
+		assert.NoError(t, result.Err)
+		assert.NotNil(t, result.NetworkConfigs)
+		assert.Equal(t, 1, len(result.NetworkConfigs))
+		// Verify ResourceType by comparing the underlying value
+		assert.Equal(t, int(ResourceTypeRemoteIP), int(result.NetworkConfigs[0].ResourceType()))
+	case <-time.After(1 * time.Second):
+		t.Fatal("timeout waiting for allocation response")
+	}
+}
+
+func TestCRDV2_remote_GetTrunkENISuccess_TrunkNotEnabled(t *testing.T) {
+	crd := &CRDV2{
+		nodeName:       "node1",
+		podENINotifier: NewNotifier(),
+	}
+
+	ctx := context.Background()
+	request := &mockResourceRequest{resourceType: ResourceTypeRemoteIP}
+	cni := &daemon.CNI{
+		PodID:        "pod-1",
+		PodUID:       "uid-1",
+		PodName:      "pod-1",
+		PodNamespace: "default",
+	}
+
+	patches := gomonkey.NewPatches()
+	defer patches.Reset()
+
+	// Mock getTrunkENI to return nil, nil (trunk not enabled)
+	patches.ApplyPrivateMethod(crd, "getTrunkENI", func(_ *CRDV2, _ context.Context) (*daemon.ENI, error) {
+		return nil, nil
+	})
+
+	// Mock Remote.Allocate to return expected response
+	// Create the channel inside the mock function to avoid race conditions
+	patches.ApplyMethod(reflect.TypeOf(&Remote{}), "Allocate",
+		func(_ *Remote, _ context.Context, _ *daemon.CNI, _ ResourceRequest) (chan *AllocResp, []Trace) {
+			expectedResp := make(chan *AllocResp, 1)
+			expectedResp <- &AllocResp{
+				Err: nil,
+				NetworkConfigs: NetworkResources{
+					&RemoteIPResource{},
+				},
+			}
+			close(expectedResp)
+			return expectedResp, nil
+		})
+
+	resp, traces := crd.remote(ctx, cni, request)
+
+	// Should return a channel and no traces
+	assert.NotNil(t, resp)
+	assert.Nil(t, traces)
+
+	// Verify the response
+	select {
+	case result := <-resp:
+		assert.NotNil(t, result)
+		assert.NoError(t, result.Err)
+		assert.NotNil(t, result.NetworkConfigs)
+		assert.Equal(t, 1, len(result.NetworkConfigs))
+		// Verify ResourceType by comparing the underlying value
+		assert.Equal(t, int(ResourceTypeRemoteIP), int(result.NetworkConfigs[0].ResourceType()))
+	case <-time.After(1 * time.Second):
+		t.Fatal("timeout waiting for allocation response")
+	}
+}

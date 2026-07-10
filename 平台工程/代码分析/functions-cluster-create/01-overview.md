@@ -96,7 +96,7 @@ func getVariantVersion(kubernetesVersion string, imageRepository string) (string
 | 参数名 | 类型 | 说明 | 验证规则 |
 |--------|------|------|---------|
 | `cfgPath` | `string` | 配置文件路径 | 可选，与 CLI 参数互斥 |
-| `kubernetesVersion` | `string` | [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 版本 | 必须是有效 semver (如 v1.28.0) |
+| `kubernetesVersion` | `string` | [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 版本 | 必须是有效 semver (如 v1.28.0) |
 | `controlPlaneEndpoint` | `string` | API Server 负载均衡地址 | 格式: host:port |
 | `apiserverAdvertiseAddress` | `string` | API Server 广播地址 | 有效 IPv4/IPv6 地址 |
 | `apiserverBindPort` | `int32` | API Server 监听端口 | 范围 1-65535，默认 6443 |
@@ -764,7 +764,7 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 |------|------|---------|
 | `[ERROR Swap]: running with swap on is not supported` | 开启了 swap | `swapoff -a` 并注释 `/etc/fstab` 中的 swap 行 |
 | `[ERROR Port-6443]: Port 6443 is in use` | API Server 端口被占用 | 释放端口: `lsof -i :6443` 或更换端口 |
-| `[ERROR CRI]: [[concepts/container-runtime.md|container runtime]] is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
+| `[ERROR CRI]: [[概念/container-runtime.md|container runtime]] is not ready` | CRI 运行时未安装或未启动 | 安装并启动 containerd |
 | `[ERROR FileContent--proc-sys-net-ipv4-ip_forward]` | 未开启 IP 转发 | `sysctl -w net.ipv4.ip_forward=1` |
 | `[ERROR DirAvailable--var-lib-etcd]: /var/lib/etcd is not empty` | etcd 数据目录不为空 | 清理: `rm -rf /var/lib/etcd/*` |
 | `[ERROR Service-Docker]: docker service is not enabled` | Docker 服务问题 | 改用 containerd 作为 CRI |

@@ -75,9 +75,9 @@ kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
 
 ## 相关概念
 
-- [[concepts/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
-- [[concepts/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA、Cluster Autoscaler 选型与协同
-- [[concepts/resource-management.md|资源管理]] — Kubernetes 资源请求、限制与配额管理
+- [[概念/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
+- [[概念/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA、Cluster Autoscaler 选型与协同
+- [[概念/resource-management.md|资源管理]] — Kubernetes 资源请求、限制与配额管理
 
 ## Related
 

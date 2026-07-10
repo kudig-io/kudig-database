@@ -266,7 +266,7 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep -i "scoring strat
 ```
 ## 交叉引用
 
-- [[entities/kubernetes.md|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
+- [[实体/kubernetes.md|Kubernetes]] 调度器](./kubernetes-scheduler.md) — 评分阶段如何使用 NodeResourcesFit
 - [调度框架](./scheduling-framework.md) — Score 扩展点与 NormalizeScore
 - [调度器性能调优](./scheduler-performance-tuning.md) — 评分节点数量对装箱效果的影响
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备与装箱策略的交互

@@ -129,7 +129,7 @@ KubeVirt 支持在不影响业务的情况下将运行中的 VM 从一个节点�
 ## 使用场景
 
 1. **VMware 替代与迁移**：企业将传统的 vSphere VM 迁移到 Kubernetes 平台，统一基础设施管理
-2. **遗留应用容器化过渡期**：无法直接容器化的老系统先以 VM 形式运行在 [[entities/kubernetes.md|k8s]] 上，逐步重构
+2. **遗留应用容器化过渡期**：无法直接容器化的老系统先以 VM 形式运行在 [[实体/kubernetes.md|k8s]] 上，逐步重构
 3. **Windows 工作负载**：Windows 容器功能有限，通过 KubeVirt 运行完整 Windows VM 运行 .NET Framework 应用
 4. **数据库与有状态服务**：MySQL、PostgreSQL、Oracle 等需要强磁盘 I/O 一致性的数据库先在 VM 中运行
 5. **AI 训练 VM**：为数据科学家提供带 GPU 透传的 Ubuntu/Windows VM，既保留 K8s 资源调度能力，又提供完整 OS 环境

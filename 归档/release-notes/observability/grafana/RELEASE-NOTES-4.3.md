@@ -1,0 +1,63 @@
+---
+title: grafana v4.3 Release Notes
+description: grafana v4.3 Release Notes — Kubernetes 生产运维知识库
+summary: grafana v4.3 Release Notes — Kubernetes 生产运维知识库
+category: release-notes
+tags:
+- k8s
+- release-notes
+- changelog
+- grafana
+- flux
+- elasticsearch
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- grafana v4.3 Release Notes 是什么
+- 如何 grafana v4.3 Release Notes
+trigger_keywords:
+- grafana
+- v4.3
+- Release
+- Notes
+- release
+- notes
+prerequisites:
+- kubectl-basics
+- cncf-ecosystem
+- monitoring-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# grafana v4.3 Release Notes
+
+Source: [v4.3.2](https://github.com/grafana/grafana/releases/tag/v4.3.2)
+
+[Download Page](http://grafana.org/download)
+[Installation Guide](http://docs.grafana.org/installation/)
+
+To view screenshots and examples of the new features read the [What's New in v4.3](http://docs.grafana.org/guides/whats-new-in-v4-3/) article.
+
+## Bug fixes
+
+* **InfluxDB**: Fixed issue with query editor not showing ALIAS BY input field when in text editor mode [#8459](https://github.com/grafana/grafana/issues/8459)
+* **Graph Log Scale**: Fixed issue with log scale going below x-axis [#8244](https://github.com/grafana/grafana/issues/8244)
+* **Playlist**: Fixed dashboard play order issue [#7688](https://github.com/grafana/grafana/issues/7688)
+* **Elasticsearch**: Fixed table query issue with ES 2.x [#8467](https://github.com/grafana/grafana/issues/8467), thx [@goldeelox](https://github.com/goldeelox)
+
+## Changes
+* **Lazy Loading Of Panels**: Panels are no longer loaded as they are scrolled into view, this was reverted due to Chrome bug, might be reintroduced when Chrome fixes it's JS blocking behavior on scroll. [#8500](https://github.com/grafana/grafana/issues/8500)
+
+<!-- risk-assessed -->

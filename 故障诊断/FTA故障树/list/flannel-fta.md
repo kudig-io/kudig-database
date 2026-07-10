@@ -78,21 +78,21 @@ ping -M do -s 1400 <target-ip>
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
 
-- [[nodepool-fta]] — [[skills/nodepool-fta.md|[[NodePool 异常故障树分析|NodePool 异常故障树分析]]]]
-- [[skills/ts-control-plane.md|ts-control-plane]] — 控制平面故障排查
+- [[nodepool-fta]] — [[技能/nodepool-fta.md|[[NodePool 异常故障树分析|NodePool 异常故障树分析]]]]
+- [[技能/ts-control-plane.md|ts-control-plane]] — 控制平面故障排查
 - [[README]] — FTA 故障树清单索引
-- [[skills/ts-networking.md|ts-networking]] — 网络故障排查
+- [[技能/ts-networking.md|ts-networking]] — 网络故障排查
 - [[etcd]] — etcd
 
 - [[故障诊断/FTA故障树/list/flannel-fta.md|Flannel 网络异常故障树分析]]
-- [[skills/ts-command-output.md|命令输出根因解析]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/ts-command-output.md|命令输出根因解析]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 

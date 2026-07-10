@@ -109,7 +109,7 @@ cross_refs:
 | **node_exporter** | 主机指标导出 | [[Prometheus|Prometheus]] | v1.9.0 | 11k+ | Apache-2.0 |
 | **cAdvisor** | 容器资源分析 | K8s SIG | v0.51.0 | 16k+ | Apache-2.0 |
 | **Kubeshark** | K8s 流量抓包分析 | Kubeshark | v52.0.0 | 13k+ | Apache-2.0 |
-| **[[entities/inspektor-gadget.md|Inspektor Gadget]]** | eBPF 排查工具集 | Inspektor | v0.38.0 | 7k+ | Apache-2.0 |
+| **[[实体/inspektor-gadget.md|Inspektor Gadget]]** | eBPF 排查工具集 | Inspektor | v0.38.0 | 7k+ | Apache-2.0 |
 | **kubectl-debug** | 调试容器 | 社区 | v0.2.0 | 3k+ | Apache-2.0 |
 | **kruise-debug** | [[OpenKruise|OpenKruise]] 调试 | 阿里云 | - | - | Apache-2.0 |
 | **ktop** | top 风格 K8s 监控 | 社区 | v0.3.0 | 1.5k+ | Apache-2.0 |

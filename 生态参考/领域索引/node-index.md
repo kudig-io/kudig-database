@@ -51,7 +51,7 @@ prerequisites:
 ### 节点管理
 
 - 27 - 节点与节点池管理 (Node & NodePool Management)
-- [[entities/kubefleet.md|Kubelet 配置与调优]]
+- [[实体/kubefleet.md|Kubelet 配置与调优]]
 - [[集群基础/控制平面/15-kubelet-deep-dive.md|kubelet 深度解析 (kubelet Deep Dive)]]
 
 ### 故障排查
@@ -101,7 +101,7 @@ prerequisites:
 
 ### 节点操作系统
 
-- [[entities/inclavare-containers.md|inclavare containers]]
+- [[实体/inclavare-containers.md|inclavare containers]]
 - K0s
 - k3s
 

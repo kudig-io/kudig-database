@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-在 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
+在 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
 
 ## 核心概念/原理
 

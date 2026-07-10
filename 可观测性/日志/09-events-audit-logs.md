@@ -76,7 +76,7 @@ cross_refs:
 
 # 05 - 事件与审计日志管理 (Events & Audit Logs)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
 <!-- chunk: 概述 -->
 ## 概述

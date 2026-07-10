@@ -81,10 +81,10 @@ cross_refs:
 ## 目录
 
 - [kube-apiserver 参数](#kube-apiserver-参数)
-- [[entities/etcd.md|etcd]] 参数](#etcd-参数)
+- [[实体/etcd.md|etcd]] 参数](#etcd-参数)
 - [kube-scheduler 参数](#kube-scheduler-参数)
 - [kube-controller-manager 参数](#kube-controller-manager-参数)
-- [[entities/kubelet.md|kubelet]] 参数](#kubelet-参数)
+- [[实体/kubelet.md|kubelet]] 参数](#kubelet-参数)
 - [kube-proxy 参数](#kube-proxy-参数)
 - [Feature Gates 完整参考](#feature-gates-完整参考)
 - [生产配置示例](#生产配置示例)

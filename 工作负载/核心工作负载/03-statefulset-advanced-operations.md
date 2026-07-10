@@ -75,7 +75,7 @@ cross_refs:
 
 # 03 - [[StatefulSet|StatefulSet]] 高级运维指南 (StatefulSet Advanced Operations)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|Kubernetes]] [[StatefulSets|StatefulSets]]](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 <!-- chunk: StatefulSet 核心特性解析 -->
 ## StatefulSet 核心特性解析

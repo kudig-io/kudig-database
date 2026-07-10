@@ -544,8 +544,8 @@ kubectl get node worker-1 -o yaml
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - 02-cluster-lifecycle-management
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/containerd.md|containerd]]
 
 
 <!-- risk-assessed -->

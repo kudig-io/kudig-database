@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
+随着 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
 
 ## 核心概念/原理
 

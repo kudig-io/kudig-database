@@ -229,7 +229,7 @@ ImagePullBackOff 和 ErrImagePull 是 [[Kubernetes|Kubernetes]] 中最常见的 
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[scripts/video-scripts/pod-crashloop.md|pod crashloop]]
+- [[脚本/video-scripts/pod-crashloop.md|pod crashloop]]
 
 - k8s-deployment-rollout
 
@@ -297,7 +297,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/container-runtime-comparison.md|容器运行时]] — Kubernetes 容器运行时机制与镜像管理
+- [[概念/container-runtime-comparison.md|容器运行时]] — Kubernetes 容器运行时机制与镜像管理
 
 
 <!-- risk-assessed -->

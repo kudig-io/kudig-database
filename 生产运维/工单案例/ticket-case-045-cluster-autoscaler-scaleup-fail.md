@@ -57,7 +57,7 @@ relationships:
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[concepts/autoscaling-strategies.md]]'
+- target: '[[概念/autoscaling-strategies.md]]'
   type: related_to
 ---
 
@@ -257,7 +257,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-mall-compute
 - Cluster Autoscaler
 - [[生产运维/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md|Cluster Autoscaler 扩容失败：节点池未触发自动扩容]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
-- [[concepts/autoscaling-strategies.md|Autoscaling Strategies]]
+- [[概念/autoscaling-strategies.md|Autoscaling Strategies]]
 
 
 <!-- risk-assessed -->

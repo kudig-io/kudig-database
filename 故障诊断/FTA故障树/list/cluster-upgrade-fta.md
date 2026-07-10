@@ -168,25 +168,25 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
-- [[skills/ts-storage.md|ts-storage]] — 存储故障排查
-- [[skills/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+- [[技能/ts-storage.md|ts-storage]] — 存储故障排查
+- [[技能/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 - [[certificate-fta]] — 证书异常故障树分析
 - [[higress-fta]] — Higress 网关异常故障树分析
-- [[skills/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
+- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
 
 - [[故障诊断/FTA故障树/list/cluster-upgrade-fta.md|集群升级异常故障树分析]]
-- [[skills/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[技能/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[_archives/troubleshooting-diagnostics/FTA故障树/list/cluster-upgrade-fta.md|Cluster-Upgrade FTA 完整版]]
+> [[归档/troubleshooting-diagnostics/FTA故障树/list/cluster-upgrade-fta.md|Cluster-Upgrade FTA 完整版]]
 
 
 <!-- risk-assessed -->

@@ -74,7 +74,7 @@ cross_refs:
 
 # 05 - 告警管理策略 (Alerting Management)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/prometheus.md|prometheus]].io/docs/alerting](https://prometheus.io/docs/alerting/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/prometheus.md|prometheus]].io/docs/alerting](https://prometheus.io/docs/alerting/)
 
 <!-- chunk: 概述 -->
 ## 概述

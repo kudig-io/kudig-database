@@ -1,0 +1,16 @@
+dist/*.tar.gz
+dist/flanneld*
+dist/*.docker
+dist/here.txt
+dist/flannel_oci.tar
+cover.out
+.editorconfig
+.idea/
+default.etcd/
+flannel.exe
+bash_unit
+dist/qemu-*
+.vscode/*
+vendor/*
+e2e/scratch/*
+e2e/kube-flannel.yml

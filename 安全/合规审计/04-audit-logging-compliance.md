@@ -67,7 +67,7 @@ cross_refs:
 
 # 04 - 审计日志与合规性管理
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/tasks/debug-application-cluster/audit](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
 
 <!-- chunk: 审计日志架构全景 -->
 ## 审计日志架构全景

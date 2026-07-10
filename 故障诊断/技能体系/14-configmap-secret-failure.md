@@ -602,7 +602,7 @@ kubectl describe pod $POD_NAME -n $NS | grep -A5 "Events:"
 | RC-008 | **KMS Provider 解密失败** — apiserver 无法使用 KMS 提供的密钥解密 etcd 中的 Secret 数据 | ~5% | D2.7 日志包含 decrypt 错误；所有 Secret 读取失败 | 🔴 |
 | RC-009 | **应用未监听配置文件变化（需要 Reloader）** — ConfigMap 通过 Volume 挂载且已更新，但应用不监听文件变化，需要重启才能读取新配置 | ~5% | D2.8 ConfigMap 已更新；应用日志无配置变更记录；重启后生效 | 🟢 |
 | RC-010 | **Namespace 间 Secret 引用限制** — Pod 尝试引用其他 namespace 的 ConfigMap/Secret，Kubernetes 不支持跨 namespace 引用 | ~4% | D1.2 显示引用的 ConfigMap/Secret 在其他 namespace | 🟢 |
-| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | [[entities/flux.md|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
+| RC-011 | **配置漂移（手动修改 vs GitOps 源）** — ConfigMap/Secret 被手动修改后与 GitOps 源不一致，导致同步覆盖或冲突 | ~4% | [[实体/flux.md|Flux]] 显示 OutOfSync；kubectl get 与 Git 仓库内容不一致 | 🟡 |
 | RC-012 | **Optional 引用的 ConfigMap/Secret 缺失导致静默失败** — 使用 `optional: true` 引用不存在的资源，Pod 启动成功但配置为空，应用行为异常 | ~5% | D1.2 显示 optional: true；D1.5 环境变量不存在但 Pod Running | 🟢 |
 
 ---

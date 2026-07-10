@@ -60,7 +60,7 @@ prerequisites:
 
 ### 可观测性架构
 - 16 - 可观测性设计原则
-- 01 - [[entities/kubernetes.md|Kubernetes 可观测性架构体系]]
+- 01 - [[实体/kubernetes.md|Kubernetes 可观测性架构体系]]
 - 00 - 可观测性开源项目索引
 
 ### 指标监控

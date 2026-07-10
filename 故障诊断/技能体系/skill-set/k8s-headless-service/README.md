@@ -81,9 +81,9 @@ kubectl get networkpolicy -n <namespace>
 
 ## 相关概念
 
-- [[concepts/headless-service.md|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
-- [[concepts/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
-- [[concepts/service-networking.md|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制
+- [[概念/headless-service.md|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识
+- [[概念/cni-networking-model.md|CNI 网络模型]] — Kubernetes 容器网络接口与 Pod 间通信原理
+- [[概念/service-networking.md|Service 网络模型]] — Kubernetes Service 核心概念与流量转发机制
 
 ## Related
 

@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
+随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
 
 ## 核心概念/原理
 

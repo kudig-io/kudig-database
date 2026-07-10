@@ -616,7 +616,7 @@ kubectl get rs -l app=web-app
 - [[README|README]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 
 
 <!-- risk-assessed -->

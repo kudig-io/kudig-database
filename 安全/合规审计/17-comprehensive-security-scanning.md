@@ -69,7 +69,7 @@ cross_refs:
 
 # 17 - 安全扫描与漏洞检测工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy.md|Trivy]]](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [[entities/falco.md|Falco]]](https://falco.org/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[实体/trivy.md|Trivy]]](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [[实体/falco.md|Falco]]](https://falco.org/)
 
 <!-- chunk: 一、安全扫描体系架构 -->
 ## 一、安全扫描体系架构

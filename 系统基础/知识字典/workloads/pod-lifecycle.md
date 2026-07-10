@@ -1,7 +1,7 @@
 ---
 title: Pod Lifecycle (concepts)
-description: '- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
-summary: '- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+description: '- [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: '- [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -89,35 +89,35 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [Pod Lifecycle]()
 
 ## Related
-- [[concepts/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
-- [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
-- [[concepts/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]] — 综合
+- [[概念/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
+- [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]] — 综合
 
-- [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
-- [[concepts/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
-- [[entities/kubelet.md|kubelet]] — kubelet
-- [[concepts/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[skills/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[概念/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
+- [[实体/kubelet.md|kubelet]] — kubelet
+- [[概念/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
+- [[技能/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
 - [[系统基础/知识字典/workloads/deployment.md|Deployment]]
-- [[entities/statefulset.md|StatefulSet]]
-- [[concepts/high-availability-patterns.md|High Availability Patterns]]
-- [[skills/configure-health-probes.md|Configure Health Probes]]
-- [[entities/kubelet.md|kubelet]]
+- [[实体/statefulset.md|StatefulSet]]
+- [[概念/high-availability-patterns.md|High Availability Patterns]]
+- [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[实体/kubelet.md|kubelet]]
 
 - Pod 生命周期事件表
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[entities/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
-- [[entities/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
-- [[entities/k8s-architecture-domain-guide.md|Kubernetes Architecture Domain Guide]] — Cross-reference
-- [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
-- [[concepts/scheduling-algorithm.md|Scheduling Algorithm]] — Cross-reference
-- [[skills/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
-- [[skills/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
-- [[skills/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
-- [[entities/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
-- [[entities/container-runtime.md|Container Runtime]] — Cross-reference
-- [[entities/clusterpedia.md|Clusterpedia]] — Cross-reference
+- [[实体/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
+- [[实体/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
+- [[实体/k8s-architecture-domain-guide.md|Kubernetes Architecture Domain Guide]] — Cross-reference
+- [[实体/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[概念/scheduling-algorithm.md|Scheduling Algorithm]] — Cross-reference
+- [[技能/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
+- [[技能/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
+- [[技能/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
+- [[实体/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
+- [[实体/container-runtime.md|Container Runtime]] — Cross-reference
+- [[实体/clusterpedia.md|Clusterpedia]] — Cross-reference
 - [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 
 

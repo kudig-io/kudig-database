@@ -1091,8 +1091,8 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper --tail=50
 
 ## Related
 
-- [[_archives/release-notes/security/gatekeeper/RELEASE-NOTES-3.22.md|gatekeeper v3.22 Release Notes]]
-- [[_archives/release-notes/security/gatekeeper/RELEASE-NOTES-3.21.md|gatekeeper v3.21 Release Notes]]
+- [[归档/release-notes/security/gatekeeper/RELEASE-NOTES-3.22.md|gatekeeper v3.22 Release Notes]]
+- [[归档/release-notes/security/gatekeeper/RELEASE-NOTES-3.21.md|gatekeeper v3.21 Release Notes]]
 
 
 <!-- risk-assessed -->

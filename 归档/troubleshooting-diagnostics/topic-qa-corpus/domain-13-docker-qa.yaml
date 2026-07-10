@@ -1,0 +1,114 @@
+domain: domain-13-docker
+total_questions: 23
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 Domain-13 Docker — 开源项目索引 中, CNCF Sandbox 申请动态 (KubeCon NA 2024) 是什么?
+  answer: 参见 domain-13-docker/00-open-source-projects-index.md 的「CNCF Sandbox 申请动态 (KubeCon NA 2024)」章节。
+  source: domain-13-docker/00-open-source-projects-index.md
+  section: CNCF Sandbox 申请动态 (KubeCon NA 2024)
+- type: comparison
+  question: Domain-13 Docker — 开源项目索引 中有哪些技术对比?
+  answer: 参见 domain-13-docker/00-open-source-projects-index.md 中的对比分析。
+  source: domain-13-docker/00-open-source-projects-index.md
+- type: comparison
+  question: Docker 架构概述与核心概念 中有哪些技术对比?
+  answer: 参见 domain-13-docker/01-docker-architecture-overview.md 中的对比分析。
+  source: domain-13-docker/01-docker-architecture-overview.md
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: --mount type=bind,source=/host/path,target=/container/path,r?'
+  answer: 参见 domain-13-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-docker/03-docker-container-lifecycle.md
+  command: --mount type=bind,source=/host/path,target=/container/path,readonly
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: docker run -d \?'
+  answer: 参见 domain-13-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-docker/03-docker-container-lifecycle.md
+  command: docker run -d \
+- type: operation
+  question: '如何执行与 Docker 容器生命周期管理 相关的操作: docker run -d \?'
+  answer: 参见 domain-13-docker/03-docker-container-lifecycle.md 中的操作步骤。
+  source: domain-13-docker/03-docker-container-lifecycle.md
+  command: docker run -d \
+- type: comparison
+  question: Docker 容器生命周期管理 中有哪些技术对比?
+  answer: 参见 domain-13-docker/03-docker-container-lifecycle.md 中的对比分析。
+  source: domain-13-docker/03-docker-container-lifecycle.md
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker network create \?'
+  answer: 参见 domain-13-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-docker/04-docker-networking-deep-dive.md
+  command: docker network create \
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker run -d --network host nginx?'
+  answer: 参见 domain-13-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-docker/04-docker-networking-deep-dive.md
+  command: docker run -d --network host nginx
+- type: operation
+  question: '如何执行与 Docker 网络深度解析 相关的操作: docker run -d --network none myapp?'
+  answer: 参见 domain-13-docker/04-docker-networking-deep-dive.md 中的操作步骤。
+  source: domain-13-docker/04-docker-networking-deep-dive.md
+  command: docker run -d --network none myapp
+- type: comparison
+  question: Docker 网络深度解析 中有哪些技术对比?
+  answer: 参见 domain-13-docker/04-docker-networking-deep-dive.md 中的对比分析。
+  source: domain-13-docker/04-docker-networking-deep-dive.md
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: trivy image --severity HIGH,CRITICAL myapp:latest?'
+  answer: 参见 domain-13-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-docker/07-docker-security-best-practices.md
+  command: trivy image --severity HIGH,CRITICAL myapp:latest
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: docker run --user 1000:1000 myapp?'
+  answer: 参见 domain-13-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-docker/07-docker-security-best-practices.md
+  command: docker run --user 1000:1000 myapp
+- type: operation
+  question: '如何执行与 Docker 安全最佳实践 相关的操作: docker run --read-only \?'
+  answer: 参见 domain-13-docker/07-docker-security-best-practices.md 中的操作步骤。
+  source: domain-13-docker/07-docker-security-best-practices.md
+  command: docker run --read-only \
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: docker info?'
+  answer: 参见 domain-13-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-docker/08-docker-troubleshooting-guide.md
+  command: docker info
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: dmesg | grep -i "oom\|killed"?'
+  answer: 参见 domain-13-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-docker/08-docker-troubleshooting-guide.md
+  command: dmesg | grep -i "oom\|killed"
+- type: operation
+  question: '如何执行与 Docker 故障排查指南 相关的操作: docker inspect -f ''{{.State.ExitCode}}'' <container>?'
+  answer: 参见 domain-13-docker/08-docker-troubleshooting-guide.md 中的操作步骤。
+  source: domain-13-docker/08-docker-troubleshooting-guide.md
+  command: docker inspect -f '{{.State.ExitCode}}' <container>
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{?'
+  answer: 参见 domain-13-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-docker/09-docker-performance-monitoring.md
+  command: docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}"
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: top -b -n 1 | grep docker?'
+  answer: 参见 domain-13-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-docker/09-docker-performance-monitoring.md
+  command: top -b -n 1 | grep docker
+- type: operation
+  question: '如何执行与 Docker 性能监控与调优 相关的操作: curl --unix-socket /var/run/docker.sock http://localhost/inf?'
+  answer: 参见 domain-13-docker/09-docker-performance-monitoring.md 中的操作步骤。
+  source: domain-13-docker/09-docker-performance-monitoring.md
+  command: curl --unix-socket /var/run/docker.sock http://localhost/info | jq '.'
+- type: operation
+  question: '如何执行与 Java 应用容器化最佳实践指南 相关的操作: docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}"?'
+  answer: 参见 domain-13-docker/12-java-containerization-guide.md 中的操作步骤。
+  source: domain-13-docker/12-java-containerization-guide.md
+  command: docker images --format "{{.Repository}}:{{.Tag}}\t{{.Size}}" | grep -E "temurin|distroless|chainguar
+- type: operation
+  question: '如何执行与 Java 应用容器化最佳实践指南 相关的操作: ./mvnw compile jib:dockerBuild?'
+  answer: 参见 domain-13-docker/12-java-containerization-guide.md 中的操作步骤。
+  source: domain-13-docker/12-java-containerization-guide.md
+  command: ./mvnw compile jib:dockerBuild
+- type: comparison
+  question: Java 应用容器化最佳实践指南 中有哪些技术对比?
+  answer: 参见 domain-13-docker/12-java-containerization-guide.md 中的对比分析。
+  source: domain-13-docker/12-java-containerization-guide.md

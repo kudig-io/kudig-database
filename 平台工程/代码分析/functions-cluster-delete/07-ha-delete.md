@@ -521,7 +521,7 @@ kubectl delete configmap -n kube-system kubeadm-config
 - [[reference|#reference Hub]] — tag hub
 
 - [[README|README]]
-- [[scripts/man/INSTALL.md|INSTALL]]
+- [[脚本/man/INSTALL.md|INSTALL]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/git.md|git]]

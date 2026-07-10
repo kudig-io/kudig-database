@@ -624,8 +624,8 @@ echo "Logs collected to: $LOG_DIR"
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/git.md|git]]
 - 06-monitoring-alerting-system
-- [[entities/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
-- [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
+- [[实体/k8s-cloud-provider-comparison.md|云厂商托管 Kubernetes 服务全景对比（13 家）]] — Cross-reference
+- [[实体/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 

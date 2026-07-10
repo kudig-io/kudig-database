@@ -726,7 +726,7 @@ kubectl set image daemonset/kube-proxy kube-proxy=registry.k8s.io/kube-proxy:v1.
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[系统基础/知识字典/workloads/daemonset.md|daemonset]]
 
 

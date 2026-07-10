@@ -50,7 +50,7 @@ prerequisites:
 - 如果删除对象，可以创建一个同名的新对象。
 - **名称必须在同一资源的所有 API 版本中唯一**。API 资源由 API 组、资源类型、命名空间（针对命名空间资源）和名称区分，API 版本在此上下文中无关紧要。
 
-**自动生成名称**：当在创建请求中提供 `generateName` 而非 `name` 时，服务器会将提供的值作为前缀，并附加生成的后缀。自 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.31 起，服务器会最多尝试 8 次生成唯一名称，然后才返回 HTTP 409 冲突响应。
+**自动生成名称**：当在创建请求中提供 `generateName` 而非 `name` 时，服务器会将提供的值作为前缀，并附加生成的后缀。自 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.31 起，服务器会最多尝试 8 次生成唯一名称，然后才返回 HTTP 409 冲突响应。
 
 ### 命名约束类型
 

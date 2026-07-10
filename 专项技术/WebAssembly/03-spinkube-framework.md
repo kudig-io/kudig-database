@@ -68,12 +68,12 @@ authors:
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents
 
 1. [SpinKube 概述](#1-spinkube-概述)
-2. [[entities/spin.md|Spin]] 应用模型](#2-spin-应用模型)
+2. [[实体/spin.md|Spin]] 应用模型](#2-spin-应用模型)
 3. [SpinKube 架构](#3-spinkube-架构)
 4. [SpinApp CRD](#4-spinapp-crd)
 5. [安装与配置](#5-安装与配置)
 6. [HTTP 触发器](#6-http-触发器)
-7. [[entities/keda.md|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
+7. [[实体/keda.md|KEDA]] 集成与 Scale-to-Zero](#7-keda-集成与-scale-to-zero)
 8. [存储系统集成](#8-存储系统集成)
 9. [Redis 与 KV Store](#9-redis-与-kv-store)
 10. [SQLite 集成](#10-sqlite-集成)

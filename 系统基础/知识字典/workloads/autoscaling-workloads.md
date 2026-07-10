@@ -45,7 +45,7 @@ prerequisites:
 # Autoscaling Workloads
 
 ## 概述
-自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
+自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
 
 ## 核心概念/原理
 - **水平扩缩容（Horizontal Scaling）**：通过增加或减少 Pod 副本数来应对负载变化。

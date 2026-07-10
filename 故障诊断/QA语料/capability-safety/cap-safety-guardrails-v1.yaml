@@ -16,7 +16,7 @@ authors:
 source_docs:
   - "domain-7-security/"
   - "domain-25-cloud-native-security/"
-  - "docs/agent-specs/P3-11-security-incident-sop-compliance-checklist.md"
+  - "文档/agent-specs/P3-11-security-incident-sop-compliance-checklist.md"
 tags: [k8s, safety, guardrail, compliance, pii]
 
 qa_items:

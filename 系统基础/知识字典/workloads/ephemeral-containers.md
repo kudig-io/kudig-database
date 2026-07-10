@@ -84,7 +84,7 @@ kubectl debug -it myapp-pod \
 # - 查看主容器进程: ps aux
 # - 检查网络连通性: curl localhost:8080/healthz
 # - 抓包分析: tcpdump -i eth0 port 8080
-# - 检查 DNS: nslookup [[entities/kubernetes.md|kubernetes]].default
+# - 检查 DNS: nslookup [[实体/kubernetes.md|kubernetes]].default
 ```
 ### 场景 2：调试已崩溃的容器
 

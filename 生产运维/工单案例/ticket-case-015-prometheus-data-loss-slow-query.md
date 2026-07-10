@@ -49,11 +49,11 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[entities/prometheus.md]]'
+- target: '[[实体/prometheus.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[concepts/bp-observability.md]]'
+- target: '[[概念/bp-observability.md]]'
   type: related_to
 ---
 
@@ -299,10 +299,10 @@ Prometheus 数据丢失往往并非 Prometheus 本身崩溃，而是存储或资
 - Prometheus (entities)
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - Observability
-- [[concepts/bp-observability.md|最佳实践：Observability]]
+- [[概念/bp-observability.md|最佳实践：Observability]]
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
 - Observability
-- [[concepts/bp-observability.md|最佳实践：Observability]]
+- [[概念/bp-observability.md|最佳实践：Observability]]
 
 
 <!-- risk-assessed -->

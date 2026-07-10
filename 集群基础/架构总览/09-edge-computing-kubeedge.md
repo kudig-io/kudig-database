@@ -71,7 +71,7 @@ cross_refs:
 
 # 09 - 边缘计算集成架构 ([[KubeEdge|KubeEdge]]/OpenYurt)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[entities/openyurt.md|openyurt]].io](https://openyurt.io/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[实体/openyurt.md|openyurt]].io](https://openyurt.io/)
 
 <!-- chunk: 边缘计算框架对比 -->
 ## 边缘计算框架对比

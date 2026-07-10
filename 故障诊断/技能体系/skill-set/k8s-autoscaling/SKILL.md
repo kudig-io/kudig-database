@@ -142,7 +142,7 @@ HPA、VPA 和 Cluster Autoscaler 是 [[Kubernetes|Kubernetes]] 弹性能力的�
 
 ## Related
 
-- [[concepts/platform-engineering-sre.md|platform engineering sre]]
+- [[概念/platform-engineering-sre.md|platform engineering sre]]
 
 
 ## 远程顾问信息收集
@@ -315,7 +315,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
+- [[概念/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置
 
 ```
 

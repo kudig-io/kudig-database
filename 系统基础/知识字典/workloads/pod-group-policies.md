@@ -47,7 +47,7 @@ Pod Group Policies 是 [[系统基础/知识字典/workloads/workload-api.md|Wor
 ## 核心概念/原理
 目前 API 支持两种策略类型，每个组必须且只能指定一种：
 1. **basic（基本策略）**
-   - 调度器将组内所有 Pod 视为独立实体，按标准 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 行为逐个调度。
+   - 调度器将组内所有 Pod 视为独立实体，按标准 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 行为逐个调度。
    - 主要用于组织 Pod 以提升可观测性和管理性，适用于不需要同时启动的组，或为未来引入非“全有或全无”约束做准备。
 2. **gang（集体调度策略）**
    - 强制“全有或全无”调度（[[系统基础/知识字典/scheduling/gang-scheduling.md|gang scheduling]]）。

@@ -900,7 +900,7 @@ sla_reporting:
 ## Related
 
 - 08-docker-troubleshooting-guide
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[hot|hot]]
 - [[系统基础/知识字典/workloads/cronjob.md|cronjob]]
 

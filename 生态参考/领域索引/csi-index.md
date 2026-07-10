@@ -137,7 +137,7 @@ prerequisites:
 - 灾难恢复演练
 
 ### Kubernetes 版本相关
-- [[_archives/release-notes/kubernetes/CHANGELOG-1.25.md|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
+- [[归档/release-notes/kubernetes/CHANGELOG-1.25.md|CHANGELOG-1.25 - CSI Ephemeral Volume GA]]
 - CHANGELOG-1.23 - CSI Volume Mount Group
 - CHANGELOG-1.21 - CSI Health Monitoring
 - CHANGELOG-1.19 - CSI Health Monitoring Alpha

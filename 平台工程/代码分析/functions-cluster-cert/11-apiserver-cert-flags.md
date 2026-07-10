@@ -476,7 +476,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[平台工程/代码分析/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
 - [[平台工程/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
 

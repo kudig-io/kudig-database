@@ -1,0 +1,179 @@
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+package otelconftelemetry
+
+import (
+	"path/filepath"
+	"testing"
+	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	config "go.opentelemetry.io/contrib/otelconf/v0.3.0"
+	"go.uber.org/zap"
+
+	"go.opentelemetry.io/collector/component/componenttest"
+	"go.opentelemetry.io/collector/config/configtelemetry"
+	"go.opentelemetry.io/collector/confmap"
+	"go.opentelemetry.io/collector/confmap/confmaptest"
+	"go.opentelemetry.io/collector/service/telemetry/otelconftelemetry/internal/migration"
+)
+
+func TestComponentConfigStruct(t *testing.T) {
+	require.NoError(t, componenttest.CheckConfigStruct(
+		NewFactory().CreateDefaultConfig(),
+	))
+}
+
+func TestUnmarshalDefaultConfig(t *testing.T) {
+	factory := NewFactory()
+	cfg := factory.CreateDefaultConfig()
+	require.NoError(t, confmap.New().Unmarshal(&cfg))
+	assert.Equal(t, factory.CreateDefaultConfig(), cfg)
+}
+
+func TestDefaultConfig_DoesNotEnableResourceConstantLabels(t *testing.T) {
+	cfg := createDefaultConfig().(*Config)
+	require.Len(t, cfg.Metrics.Readers, 1)
+	require.NotNil(t, cfg.Metrics.Readers[0].Pull)
+	require.NotNil(t, cfg.Metrics.Readers[0].Pull.Exporter.Prometheus)
+	assert.Nil(t, cfg.Metrics.Readers[0].Pull.Exporter.Prometheus.WithResourceConstantLabels)
+}
+
+func TestConfig(t *testing.T) {
+	t.Parallel()
+
+	type testcase struct {
+		setup        func(*testing.T) // optional testcase setup
+		config       *Config
+		unmarshalErr string
+		validateErr  string
+	}
+
+	tests := map[string]testcase{
+		"config_empty.yaml": {
+			config: createDefaultConfig().(*Config),
+		},
+		"config_logs.yaml": {
+			config: func() *Config {
+				cfg := createDefaultConfig().(*Config)
+				cfg.Logs.Development = true
+				cfg.Logs.DisableCaller = true
+				cfg.Logs.DisableStacktrace = true
+				cfg.Logs.InitialFields = map[string]any{"fieldKey": "fieldValue"}
+				cfg.Logs.Level = zap.InfoLevel
+				cfg.Logs.Sampling = &LogsSamplingConfig{
+					Enabled:    false,
+					Tick:       1 * time.Second,
+					Initial:    234,
+					Thereafter: 567,
+				}
+				cfg.Logs.Processors = []config.LogRecordProcessor{{
+					Batch: &config.BatchLogRecordProcessor{
+						Exporter: config.LogRecordExporter{
+							Console: config.Console{},
+						},
+					},
+				}}
+				return cfg
+			}(),
+		},
+		"config_metrics_empty_readers.yaml": {
+			config: func() *Config {
+				cfg := createDefaultConfig().(*Config)
+				cfg.Metrics.Level = configtelemetry.LevelNone
+				cfg.Metrics.Readers = []config.MetricReader{}
+				return cfg
+			}(),
+		},
+		"config_invalid_unknown_field.yaml": {
+			unmarshalErr: `invalid keys: unknown`,
+		},
+		"config_invalid_metrics_empty_readers.yaml": {
+			validateErr: `collector telemetry metrics reader should exist when metric level is not none`,
+		},
+		"config_invalid_metrics_views_level.yaml": {
+			validateErr: `service::telemetry::metrics::views can only be set when service::telemetry::metrics::level is detailed`,
+		},
+		"config_prometheus_host_only.yaml": {
+			config: func() *Config {
+				cfg := createDefaultConfig().(*Config)
+				host := "[::0]"
+				cfg.Metrics.Readers = []config.MetricReader{
+					{
+						Pull: &config.PullMetricReader{Exporter: config.PullMetricExporter{Prometheus: &config.Prometheus{
+							WithoutScopeInfo:  ptr(true),
+							WithoutUnits:      ptr(true),
+							WithoutTypeSuffix: ptr(true),
+							Host:              &host,
+							Port:              ptr(8888),
+						}}},
+					},
+				}
+				return cfg
+			}(),
+		},
+	}
+
+	for filename, test := range tests {
+		t.Run(filename, func(t *testing.T) {
+			if test.setup != nil {
+				test.setup(t)
+			}
+
+			cm, err := confmaptest.LoadConf(filepath.Join("testdata", filename))
+			require.NoError(t, err)
+
+			cfg := createDefaultConfig().(*Config)
+			err = cm.Unmarshal(cfg)
+			if test.unmarshalErr != "" {
+				assert.ErrorContains(t, err, test.unmarshalErr)
+				return
+			}
+			require.NoError(t, err)
+
+			err = confmap.Validate(cfg)
+			if test.validateErr != "" {
+				assert.ErrorContains(t, err, test.validateErr)
+				return
+			}
+			require.NoError(t, err)
+
+			assert.Equal(t, test.config, cfg)
+		})
+	}
+}
+
+func TestConfigMarshalResource(t *testing.T) {
+	cfg := createDefaultConfig().(*Config)
+	cfg.Resource = migration.ResourceConfigV030{
+		Resource: config.Resource{
+			Attributes: []config.AttributeNameValue{
+				{Name: "service.name", Value: "custom-service"},
+			},
+		},
+		LegacyAttributes: map[string]any{
+			"legacy.attr":     "legacy-value",
+			"service.version": nil,
+		},
+	}
+
+	cm := confmap.New()
+	require.NoError(t, cm.Marshal(cfg))
+	raw := cm.ToStringMap()
+
+	resourceRaw, ok := raw["resource"].(map[string]any)
+	require.True(t, ok)
+	assert.Equal(t, "legacy-value", resourceRaw["legacy.attr"])
+	assert.Contains(t, resourceRaw, "service.version")
+	assert.Nil(t, resourceRaw["service.version"])
+
+	attrs, ok := resourceRaw["attributes"].([]any)
+	require.True(t, ok)
+	require.Len(t, attrs, 1)
+	attr, ok := attrs[0].(map[string]any)
+	require.True(t, ok)
+	assert.Equal(t, "service.name", attr["name"])
+	assert.Equal(t, "custom-service", attr["value"])
+}

@@ -80,20 +80,20 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - observability.md|ts-monitoring-observability]] — 监控可观测性排查
-- [[skills/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kudig-prompts-catalog]] — KUDIG Prompt 模板集：故障排查、架构评审、配置生成与学习路径
-- [[skills/learn-decision-tree-mermaid.md|learn-decision-tree-mermaid]] — 故障排查决策树 - Mermaid 可视化版
+- [[技能/learn-decision-tree-mermaid.md|learn-decision-tree-mermaid]] — 故障排查决策树 - Mermaid 可视化版
 - [[openkruise]] — OpenKruise
 
 - [[nginx-ingress-fta]]
 - [[故障诊断/FTA故障树/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
-- [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
 - [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]]
 
 

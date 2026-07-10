@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
+[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
 
 ## 核心概念/原理
 

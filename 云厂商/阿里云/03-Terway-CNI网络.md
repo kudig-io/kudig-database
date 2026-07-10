@@ -21,7 +21,7 @@ created: 2026-05-21
 updated: 2026-05-21
 last_updated: 2026-05-21
 relationships:
-- target: '[[entities/cni.md]]'
+- target: '[[实体/cni.md]]'
   type: related_to
 ---
 
@@ -33,7 +33,7 @@ relationships:
 
 # Terway CNI网络
 
-Terway 是阿里云自研的容器网络接口（[[entities/cni.md|CNI]]）插件，专为 ACK 集群设计。在专有云环境中，Terway 是推荐的网络方案，提供优于 Flannel 的网络性能和功能特性。本文档面向远程顾问，提供 Terway 模式详解、选型建议和排查指南。
+Terway 是阿里云自研的容器网络接口（[[实体/cni.md|CNI]]）插件，专为 ACK 集群设计。在专有云环境中，Terway 是推荐的网络方案，提供优于 Flannel 的网络性能和功能特性。本文档面向远程顾问，提供 Terway 模式详解、选型建议和排查指南。
 
 ---
 

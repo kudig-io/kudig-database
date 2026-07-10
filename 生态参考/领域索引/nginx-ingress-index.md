@@ -53,7 +53,7 @@ prerequisites:
 
 ### nginx-ingress 核心文档
 - nginx-ingress 完全指南
-- [[assets/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
+- [[资产/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
 - Ingress Controller 深入剖析
 - Ingress TLS 与证书管理
 
@@ -113,7 +113,7 @@ prerequisites:
 ### 学习培训
 - Ingress 学习路径
 - 网络与存储周
-- [[skills/training-public/inner-training/week-4-network-storage/day-23-ingress.md|day 23 ingress]]
+- [[技能/training-public/inner-training/week-4-network-storage/day-23-ingress.md|day 23 ingress]]
 
 
 <!-- risk-assessed -->

@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/canary-deployment.md|金丝雀部署]]
+> 对应概念：[[概念/canary-deployment.md|金丝雀部署]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -235,8 +235,8 @@ kubectl logs -n <namespace> -l version=canary --tail=20 | grep -i error
 
 ## 相关概念
 
-- [[concepts/canary-deployment.md|金丝雀部署]]
-- [[concepts/ingress-controller.md|Ingress Controller]]
+- [[概念/canary-deployment.md|金丝雀部署]]
+- [[概念/ingress-controller.md|Ingress Controller]]
 
 ## Related
 

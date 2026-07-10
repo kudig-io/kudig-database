@@ -66,7 +66,7 @@ cross_refs:
 
 # 14 - 策略引擎与合规
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/policy](https://kubernetes.io/docs/concepts/policy/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/policy](https://kubernetes.io/docs/concepts/policy/)
 
 <!-- chunk: 策略引擎对比 -->
 ## 策略引擎对比

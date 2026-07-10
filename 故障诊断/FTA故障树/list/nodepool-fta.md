@@ -166,17 +166,17 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/troubleshoot-node-issues.md|节点故障排查]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/troubleshoot-node-issues.md|节点故障排查]]
 
 ## Related
 
-- [[skills/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
+- [[技能/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
-- [[skills/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[技能/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
 - [[cilium-fta]] — Cilium Fta
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[实体/kubelet.md|kubelet]] — kubelet
 
 - [[故障诊断/FTA故障树/list/nodepool-fta.md|NodePool 异常故障树分析]]
 

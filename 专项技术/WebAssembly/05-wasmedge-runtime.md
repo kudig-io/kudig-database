@@ -64,7 +64,7 @@ authors:
 1. [WasmEdge 概述](#1-wasmedge-概述)
 2. [架构与核心组件](#2-架构与核心组件)
 3. [WASI 支持与扩展](#3-wasi-支持与扩展)
-4. [[entities/kubernetes.md|Kubernetes]] 集成](#4-kubernetes-集成)
+4. [[实体/kubernetes.md|Kubernetes]] 集成](#4-kubernetes-集成)
 5. [边缘部署](#5-边缘部署)
 6. 网络插件](#6-网络插件)
 7. [AI 推理支持](#7-ai-推理支持)

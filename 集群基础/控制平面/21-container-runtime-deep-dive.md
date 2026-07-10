@@ -1,7 +1,7 @@
 ---
 title: 容器运行时深度解析 (Container Runtime Interface Deep Dive)
 description: '# 容器运行时深度解析 (Container Runtime Interface Deep Dive)'
-summary: '4. [[entities/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)'
+summary: '4. [[实体/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)'
 category: control-plane
 tags:
 - k8s
@@ -84,7 +84,7 @@ cross_refs:
 
 
 
-# 容器运行时深度解析 ([[concepts/container-runtime.md|Container Runtime]] Interface Deep Dive)
+# 容器运行时深度解析 ([[概念/container-runtime.md|Container Runtime]] Interface Deep Dive)
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -92,7 +92,7 @@ cross_refs:
 1. [容器运行时演进历史](#1-容器运行时演进历史)
 2. [容器运行时架构](#2-容器运行时架构)
 3. [CRI 接口规范](#3-cri-接口规范)
-4. [[entities/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)
+4. [[实体/containerd.md|containerd]] 深度解析](#4-containerd-深度解析)
 5. [CRI-O 深度解析](#5-cri-o-深度解析)
 6. [OCI 运行时详解](#6-oci-运行时详解)
 7. [安全容器运行时](#7-安全容器运行时)

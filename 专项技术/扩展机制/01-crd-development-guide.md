@@ -78,7 +78,7 @@ related_docs:
 
 # 01 - CRD自定义资源定义开发指南
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/concepts/extend-kubernetes/api-extension/custom-resources/](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
 
 <!-- chunk: CRD核心概念与架构 -->
 ## CRD核心概念与架构
@@ -1463,7 +1463,7 @@ echo "✅ CRD健康检查完成"
 
 ## Related
 
-- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 
 - 包管理与应用分发
 - CI/CD 管道

@@ -1633,7 +1633,7 @@ verification: |
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[scripts/man/INSTALL.md|INSTALL]]
+- [[脚本/man/INSTALL.md|INSTALL]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

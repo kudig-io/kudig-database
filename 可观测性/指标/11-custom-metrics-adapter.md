@@ -77,7 +77,7 @@ cross_refs:
 
 # 07 - 自定义指标适配器与HPA扩展 (Custom Metrics Adapter & HPA Extension)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
 本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 [[Prometheus|Prometheus]] Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
 

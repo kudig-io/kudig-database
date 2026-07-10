@@ -40,7 +40,7 @@ prerequisites:
 # Downward API
 
 ## 概述
-Downward API 允许容器在不使用 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 客户端或访问 API Server 的情况下，消费关于自身或集群的信息。它降低了应用与 Kubernetes 的耦合度。
+Downward API 允许容器在不使用 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 客户端或访问 API Server 的情况下，消费关于自身或集群的信息。它降低了应用与 Kubernetes 的耦合度。
 
 ## 核心概念/原理
 Downward API 提供两种方式将 Pod/容器级别的信息暴露给运行中的容器：

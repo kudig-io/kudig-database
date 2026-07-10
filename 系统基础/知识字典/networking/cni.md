@@ -82,7 +82,7 @@ CNI（Container Network Interface）是容器网络插件的标准接口规范�
 
 ## Related
 
-[[entities/cilium.md|Cilium]] | [[entities/cni-plugins.md|CNI Plugins]]
+[[实体/cilium.md|Cilium]] | [[实体/cni-plugins.md|CNI Plugins]]
 
 
 <!-- risk-assessed -->

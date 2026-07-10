@@ -259,27 +259,27 @@ dependencies:
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[entities/k8s-advanced-ecosystem.md|[[硬件知识体系、CNCF 全景生态与 eBPF 平台工程|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]]] — Cross-reference
+- [[实体/k8s-advanced-ecosystem.md|[[硬件知识体系、CNCF 全景生态与 eBPF 平台工程|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]]] — Cross-reference
 - gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[entities/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
-- [[entities/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
-- [[entities/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
-- [[concepts/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
-- [[concepts/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
-- [[concepts/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference
-- [[concepts/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
-- [[skills/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[skills/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
-- [[skills/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
-- [[skills/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[skills/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
-- [[skills/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[skills/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
-- [[entities/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
-- [[entities/argocd.md|ArgoCD]] — Cross-reference
-- [[entities/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
+- [[实体/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[实体/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
+- [[实体/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
+- [[概念/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
+- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
+- [[概念/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference
+- [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
+- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
+- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[技能/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[实体/argocd.md|ArgoCD]] — Cross-reference
+- [[实体/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]]
 - [[生态参考/领域索引/helm-index.md|Helm 全局索引]]

@@ -66,7 +66,7 @@ cross_refs:
 
 # 13 - 镜像安全扫描与漏洞管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[实体/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
 
 <!-- chunk: 一、镜像安全扫描架构 -->
 ## 一、镜像安全扫描架构

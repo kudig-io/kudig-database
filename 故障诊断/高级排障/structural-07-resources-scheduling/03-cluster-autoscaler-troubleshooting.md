@@ -880,7 +880,7 @@ containers:
 - 16-troubleshooting-guide
 - [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
 - [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 - [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]

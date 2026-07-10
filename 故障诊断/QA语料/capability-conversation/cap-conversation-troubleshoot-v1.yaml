@@ -15,7 +15,7 @@ authors:
     role: maintainer
 source_docs:
   - "domain-12-troubleshooting/"
-  - "docs/agent-specs/P0-3-session-context-management.md"
+  - "文档/agent-specs/P0-3-session-context-management.md"
 tags: [k8s, multi-turn, conversation, clarification, escalation]
 
 qa_items:

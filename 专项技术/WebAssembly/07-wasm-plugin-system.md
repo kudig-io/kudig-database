@@ -71,8 +71,8 @@ authors:
 
 1. [插件系统架构概述](#1-插件系统架构概述)
 2. [proxy-wasm 规范详解](#2-proxy-wasm-规范详解)
-3. [[entities/envoy.md|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
-4. [[entities/istio.md|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
+3. [[实体/envoy.md|Envoy]] Wasm Filter 开发](#3-envoy-wasm-filter-开发)
+4. [[实体/istio.md|Istio]] Wasm Plugin 配置](#4-istio-wasm-plugin-配置)
 5. [HTTP 头部操作插件](#5-http-头部操作插件)
 6. [限流插件实现](#6-限流插件实现)
 7. [可观测性插件](#7-可观测性插件)

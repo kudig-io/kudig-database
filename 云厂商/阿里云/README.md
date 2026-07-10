@@ -44,7 +44,7 @@ last_updated: 2026-05-23
 
 ## 快速入口
 
-- **节点问题**：[[scripts/video-scripts/node-notready.md|node notready]] → 查看阿里云特定分支
+- **节点问题**：[[脚本/video-scripts/node-notready.md|node notready]] → 查看阿里云特定分支
 - **网络问题**：k8s-dns-failure → 查看阿里云DNS特定分支
 - **存储问题**：k8s-pvc-storage → 查看阿里云CSI特定分支
 - **Ingress问题**：k8s-ingress-gateway-failure → 查看SLB特定分支

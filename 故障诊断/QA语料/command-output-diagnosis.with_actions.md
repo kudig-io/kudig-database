@@ -95,7 +95,7 @@ output_pattern: 'NAME                    READY   STATUS             RESTARTS   A
 
   '
 diagnosis:
-- 镜像拉取失败, [[entities/kubernetes.md|k8s]] 正在退避重试
+- 镜像拉取失败, [[实体/kubernetes.md|k8s]] 正在退避重试
 - '常见原因: 镜像名/tag 拼写错误、私有仓库认证失败、网络不通、镜像不存在'
 action:
 - command: kubectl describe pod myapp-xxxx-yyyy | grep -A5 Events

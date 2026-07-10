@@ -29,7 +29,7 @@ last_updated: 2026-05-21
 
 # ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本
 
-> 对应概念：[[concepts/rbac-authorization.md|RBAC 权限模型]]
+> 对应概念：[[概念/rbac-authorization.md|RBAC 权限模型]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -229,9 +229,9 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa> -n <ns>
 
 ## 相关概念
 
-- [[concepts/rbac-authorization.md|RBAC 权限模型]]
-- [[concepts/rbac-authorization.md|ServiceAccount]]
-- [[concepts/rbac-authorization.md|RoleBinding 与 ClusterRoleBinding]]
+- [[概念/rbac-authorization.md|RBAC 权限模型]]
+- [[概念/rbac-authorization.md|ServiceAccount]]
+- [[概念/rbac-authorization.md|RoleBinding 与 ClusterRoleBinding]]
 
 ## Related
 

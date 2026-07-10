@@ -1,7 +1,7 @@
 ---
 title: Software Supply Chain Security
-description: '- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
-summary: '- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+description: '- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+summary: '- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -96,17 +96,17 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 
 ## Related
 
-- [[concepts/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
+- [[概念/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]] — CI/CD Pipeline Patterns
 - [[系统基础/知识字典/security/opa.md|opa]] — OPA (Open Policy Agent)
 - [[系统基础/知识字典/security/kyverno.md|kyverno]] — Kyverno
-- [[entities/trivy.md|trivy]] — Trivy
-- [[concepts/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
-- [[concepts/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
-- [[concepts/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
-- [[entities/trivy.md|Trivy]]
+- [[实体/trivy.md|trivy]] — Trivy
+- [[概念/cloud-native-defense-in-depth.md|cloud-native-defense-in-depth]] — Cloud Native Defense in Depth
+- [[概念/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
+- [[概念/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
+- [[实体/trivy.md|Trivy]]
 - Cosign/Sigstore
 - [[系统基础/知识字典/security/kyverno.md|Kyverno]]
-- [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
+- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
 
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
 - [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
@@ -123,9 +123,9 @@ Kyverno or OPA Gatekeeper policies verify image signatures before deployment:
 - 09-policy-controller-verification
 - 安全 MOC
 - 99-slsa-supply-chain-security-guide
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[entities/argocd.md|ArgoCD]] — Cross-reference
-- [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[实体/argocd.md|ArgoCD]] — Cross-reference
+- [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

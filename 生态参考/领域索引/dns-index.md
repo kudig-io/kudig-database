@@ -48,7 +48,7 @@ prerequisites:
 
 ## 核心文档 (直接相关)
 
-### 网络知识域 ([[entities/coredns.md|CoreDNS]]/DNS 核心)
+### 网络知识域 ([[实体/coredns.md|CoreDNS]]/DNS 核心)
 
 - 04 - DNS 服务发现与 CoreDNS 调优
 - 33 - 服务发现与 DNS 配置 ([[网络/K8s网络核心/11-dns-service-discovery-coredns.md|11 dns service discovery coredns]]

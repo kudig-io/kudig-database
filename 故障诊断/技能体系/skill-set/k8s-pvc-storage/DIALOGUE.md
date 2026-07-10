@@ -14,13 +14,13 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/cilium.md]]'
+- target: '[[实体/cilium.md]]'
   type: uses
-- target: '[[entities/kubernetes.md]]'
+- target: '[[实体/kubernetes.md]]'
   type: uses
-- target: '[[scripts/video-scripts/node-notready.md]]'
+- target: '[[脚本/video-scripts/node-notready.md]]'
   type: uses
 ---
 
@@ -30,9 +30,9 @@ relationships:
 
 
 
-# [[scripts/video-scripts/node-notready.md|Node NotReady]] 远程顾问对话脚本
+# [[脚本/video-scripts/node-notready.md|Node NotReady]] 远程顾问对话脚本
 
-> 本脚本用于远程顾问指导现场工程师诊断和修复 [[entities/kubernetes.md|Kubernetes]] 节点 NotReady 问题。
+> 本脚本用于远程顾问指导现场工程师诊断和修复 [[实体/kubernetes.md|Kubernetes]] 节点 NotReady 问题。
 > 顾问无法直接连接集群，所有诊断依赖工程师执行命令并反馈结果。
 
 ---
@@ -532,7 +532,7 @@ kubectl get pods -n kube-system | grep -E 'cni|calico|flannel|cilium|weave'
 
 - **Calico**：检查 calico-node Pod 日志，确认 BGP 连接状态
 - **Flannel**：检查 flannel DaemonSet，确认 VXLAN 接口正常
-- **[[entities/cilium.md|Cilium]]**：检查 cilium-agent Pod，确认 eBPF 状态
+- **[[实体/cilium.md|Cilium]]**：检查 cilium-agent Pod，确认 eBPF 状态
 
 > **如果无法执行 kubectl**：
 > 1. 检查云厂商安全组/ACL 是否有变更
@@ -579,7 +579,7 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ### 升级话术
 
-顾问："当前情况已超出本 [[skills/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
+顾问："当前情况已超出本 [[技能/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
 
 **请执行以下操作**：
 1. 通知值班经理 / 高级 SRE 团队
@@ -619,30 +619,30 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-01-15-node-notready-pod-eviction.md|2026-01-15-node-notready-pod-eviction]]
+- [[概念/case-studies/2026-01-15-node-notready-pod-eviction.md|2026-01-15-node-notready-pod-eviction]]
 ## Related
 
-- [[entities/kubelet.md|kubelet]]
-- [[concepts/etcd-×-PVC.md|etcd-×-PVC]]
-- [[concepts/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
-- [[concepts/etcd-×-StatefulSet.md|etcd-×-StatefulSet]]
-- [[concepts/Deployment-×-PVC.md|Deployment-×-PVC]]
-- [[concepts/StatefulSet-×-Service.md|StatefulSet-×-Service]]
-- [[concepts/Deployment-×-Service.md|Deployment-×-Service]]
-- [[concepts/apiserver-×-PVC.md|apiserver-×-PVC]]
-- [[concepts/apiserver-×-PV.md|apiserver-×-PV]]
-- [[concepts/apiserver-×-Service.md|apiserver-×-Service]]
-- [[concepts/apiserver-×-Ingress.md|apiserver-×-Ingress]]
-- [[concepts/StatefulSet-×-Ingress.md|StatefulSet-×-Ingress]]
-- [[concepts/Deployment-×-Ingress.md|Deployment-×-Ingress]]
-- [[concepts/etcd-×-Service.md|etcd-×-Service]]
-- [[concepts/etcd-×-Ingress.md|etcd-×-Ingress]]
-- [[concepts/apiserver-×-RBAC.md|apiserver-×-RBAC]]
-- [[concepts/apiserver-×-NetworkPolicy.md|apiserver-×-NetworkPolicy]]
-- [[concepts/StatefulSet-×-NetworkPolicy.md|StatefulSet-×-NetworkPolicy]]
-- [[concepts/etcd-×-RBAC.md|etcd-×-RBAC]]
-- [[concepts/Deployment-×-RBAC.md|Deployment-×-RBAC]]
-- [[concepts/Deployment-×-NetworkPolicy.md|Deployment-×-NetworkPolicy]]
+- [[实体/kubelet.md|kubelet]]
+- [[概念/etcd-×-PVC.md|etcd-×-PVC]]
+- [[概念/apiserver-×-Pod诊断.md|apiserver-×-Pod诊断]]
+- [[概念/etcd-×-StatefulSet.md|etcd-×-StatefulSet]]
+- [[概念/Deployment-×-PVC.md|Deployment-×-PVC]]
+- [[概念/StatefulSet-×-Service.md|StatefulSet-×-Service]]
+- [[概念/Deployment-×-Service.md|Deployment-×-Service]]
+- [[概念/apiserver-×-PVC.md|apiserver-×-PVC]]
+- [[概念/apiserver-×-PV.md|apiserver-×-PV]]
+- [[概念/apiserver-×-Service.md|apiserver-×-Service]]
+- [[概念/apiserver-×-Ingress.md|apiserver-×-Ingress]]
+- [[概念/StatefulSet-×-Ingress.md|StatefulSet-×-Ingress]]
+- [[概念/Deployment-×-Ingress.md|Deployment-×-Ingress]]
+- [[概念/etcd-×-Service.md|etcd-×-Service]]
+- [[概念/etcd-×-Ingress.md|etcd-×-Ingress]]
+- [[概念/apiserver-×-RBAC.md|apiserver-×-RBAC]]
+- [[概念/apiserver-×-NetworkPolicy.md|apiserver-×-NetworkPolicy]]
+- [[概念/StatefulSet-×-NetworkPolicy.md|StatefulSet-×-NetworkPolicy]]
+- [[概念/etcd-×-RBAC.md|etcd-×-RBAC]]
+- [[概念/Deployment-×-RBAC.md|Deployment-×-RBAC]]
+- [[概念/Deployment-×-NetworkPolicy.md|Deployment-×-NetworkPolicy]]
 
 
 <!-- risk-assessed -->

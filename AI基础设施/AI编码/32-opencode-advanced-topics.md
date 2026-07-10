@@ -270,7 +270,7 @@ project-root/
 └── .opencode/
     ├── agents/                # 自定义 Agent
     │   ├── review.md
-    │   └── [[entities/kubernetes.md|k8s]]-ops.md
+    │   └── [[实体/kubernetes.md|k8s]]-ops.md
     ├── commands/              # 自定义命令
     │   ├── test.md
     │   └── deploy.md

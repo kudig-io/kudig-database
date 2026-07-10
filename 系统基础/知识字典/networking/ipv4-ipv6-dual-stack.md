@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持为 Pod 和 [[Service|Service]] 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
+[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持为 Pod 和 [[Service|Service]] 同时分配 IPv4 与 IPv6 地址，实现双栈（Dual-Stack）网络。自 v1.21 起，IPv4/IPv6 双栈默认启用，允许集群中的工作负载通过两种协议族同时进行通信，包括集群内部 Service 访问和 Pod 的集群外出网流量。
 
 ## 核心概念/原理
 

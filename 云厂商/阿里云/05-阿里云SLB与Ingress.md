@@ -504,9 +504,9 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
 - [[alicloud-ack-overview|阿里云ACK概述]]
 ## Related
 
-- [[entities/coredns.md|CoreDNS (entities)]]
-- [[entities/deployment.md|Deployment]]
-- [[entities/kubernetes.md|Kubernetes (CNCF Graduated)]]
+- [[实体/coredns.md|CoreDNS (entities)]]
+- [[实体/deployment.md|Deployment]]
+- [[实体/kubernetes.md|Kubernetes (CNCF Graduated)]]
 - [[系统基础/知识字典/fundamentals/nodes.md|Nodes（节点）]]
 
 

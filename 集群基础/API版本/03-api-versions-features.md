@@ -76,7 +76,7 @@ cross_refs:
 
 # 03 - 功能和API表
 
-> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [[entities/kubernetes.md|kubernetes]].io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
+> **适用版本**: v1.25 - v1.33 | **最后更新**: 2026-04-24 | **参考**: [[实体/kubernetes.md|kubernetes]].io/docs/reference/kubernetes-api](https://kubernetes.io/docs/reference/kubernetes-api/)
 
 <!-- chunk: 核心工作负载API -->
 ## 核心工作负载API

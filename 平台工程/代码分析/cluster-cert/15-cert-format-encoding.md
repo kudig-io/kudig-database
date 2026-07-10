@@ -678,7 +678,7 @@ kubectl get secret my-tls-secret -o jsonpath='{.data.tls\.crt}' | \
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 
 
 <!-- risk-assessed -->

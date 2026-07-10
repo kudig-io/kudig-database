@@ -937,7 +937,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
     "major": "1",
     "minor": "35",
     "gitVersion": "v1.35.3",
-    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[entities/bfe.md|bfe]]27",
+    "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9[[实体/bfe.md|bfe]]27",
     "gitTreeState": "clean",
     "buildDate": "2026-03-18T18:30:07Z",
     "goVersion": "go1.26.1",

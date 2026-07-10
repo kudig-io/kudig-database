@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # Pod 一直 Pending，无法调度 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/kube-scheduler.md|Kubernetes Scheduler]]
+> 对应概念：[[概念/kube-scheduler.md|Kubernetes Scheduler]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -242,9 +242,9 @@ kubectl get pod <pod-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/kube-scheduler.md|Kubernetes Scheduler]]
-- [[concepts/node-taint.md|节点 Taint 与 Toleration]]
-- [[concepts/pod-affinity.md|Pod 亲和性与反亲和性]]
+- [[概念/kube-scheduler.md|Kubernetes Scheduler]]
+- [[概念/node-taint.md|节点 Taint 与 Toleration]]
+- [[概念/pod-affinity.md|Pod 亲和性与反亲和性]]
 
 ## Related
 

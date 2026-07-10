@@ -77,7 +77,7 @@ CSI（Container Storage Interface）是存储插件的标准接口规范。它�
 
 ## Related
 
-[[entities/csi-drivers.md|CSI Drivers]]
+[[实体/csi-drivers.md|CSI Drivers]]
 
 
 <!-- risk-assessed -->

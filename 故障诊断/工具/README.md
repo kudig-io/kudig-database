@@ -122,9 +122,9 @@ grep
 **功能**: 检查集群网络组件和服务连通性
 **输出文件**: `network_check.txt`
 **检查项目**:
-- [[entities/coredns.md|[[CoreDNS|coredns]]]]运行状态
+- [[实体/coredns.md|[[CoreDNS|coredns]]]]运行状态
 - Service和Endpoint状态
-- [[entities/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]配置
+- [[实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]配置
 - Ingress控制器状态
 
 ### 5. 存储系统检查
@@ -296,24 +296,24 @@ fi
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/ko.md|[[ko|ko]]]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/ko.md|[[ko|ko]]]]
 - 16-quick-start-guide
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - networking|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]

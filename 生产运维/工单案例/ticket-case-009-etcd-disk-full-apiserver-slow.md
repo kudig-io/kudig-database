@@ -55,13 +55,13 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[entities/etcd.md]]'
+- target: '[[实体/etcd.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-005-kubelet-cert-expired.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[concepts/etcd × 可观测性.md]]'
+- target: '[[概念/etcd × 可观测性.md]]'
   type: related_to
 ---
 

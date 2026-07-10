@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/horizontal-pod-autoscaler.md|HPA]]
+> 对应概念：[[概念/horizontal-pod-autoscaler.md|HPA]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -264,9 +264,9 @@ kubectl get hpa <hpa-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/horizontal-pod-autoscaler.md|HPA]]
-- [[concepts/metrics-server.md|Metrics Server]]
-- [[concepts/horizontal-pod-autoscaler.md|自动扩缩容策略]]
+- [[概念/horizontal-pod-autoscaler.md|HPA]]
+- [[概念/metrics-server.md|Metrics Server]]
+- [[概念/horizontal-pod-autoscaler.md|自动扩缩容策略]]
 
 ## Related
 

@@ -977,7 +977,7 @@ phases:
 - [[系统基础/速查卡/sql.md|sql]]
 - [[系统基础/速查卡/linux.md|linux]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
+- [[实体/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

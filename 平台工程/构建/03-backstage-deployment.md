@@ -66,7 +66,7 @@ cross_refs:
 # [[Backstage|Backstage]] 部署与配置
 # Backstage Deployment and Configuration
 
-> **领域**: 平台工程 | [[concepts/platform-engineering-sre.md|Platform Engineering]]  
+> **领域**: 平台工程 | [[概念/platform-engineering-sre.md|Platform Engineering]]  
 > **难度**: 中级到高级 | Intermediate to Advanced  
 > **阅读时间**: 约 70 分钟 | ~70 min read  
 > **最后更新**: 2026-03-04
@@ -78,7 +78,7 @@ cross_refs:
 1. [Backstage 架构深度解析](#1-backstage-架构深度解析)
 2. [前端架构与插件系统](#2-前端架构与插件系统)
 3. [后端架构与 API 设计](#3-后端架构与-api-设计)
-4. [[entities/kubernetes.md|Kubernetes]] 生产部署](#4-kubernetes-生产部署)
+4. [[实体/kubernetes.md|Kubernetes]] 生产部署](#4-kubernetes-生产部署)
 5. [PostgreSQL 数据库配置](#5-postgresql-数据库配置)
 6. [认证配置：OAuth 与 OIDC](#6-认证配置oauth-与-oidc)
 7. [RBAC 权限控制](#7-rbac-权限控制)

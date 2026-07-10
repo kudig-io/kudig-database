@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-PodSecurityPolicy（Pod 安全策略，简称 PSP）是一种已移除的 [[entities/kubernetes.md|[[Kubernetes|kubernetes]]]] 安全控制机制。它在 Kubernetes v1.21 中被弃用，并在 **v1.25 中彻底移除**。官方文档不再推荐使用该功能，而是提供了内置和第三方的替代方案来实现相同的 Pod 安全限制。
+PodSecurityPolicy（Pod 安全策略，简称 PSP）是一种已移除的 [[实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 安全控制机制。它在 Kubernetes v1.21 中被弃用，并在 **v1.25 中彻底移除**。官方文档不再推荐使用该功能，而是提供了内置和第三方的替代方案来实现相同的 Pod 安全限制。
 
 ## 核心概念/原理
 

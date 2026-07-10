@@ -846,7 +846,7 @@ Level 5 - 自主化运维 (Autonomous Operations) ......................... 95-1
 - 可观测性 KUDIG Database — Global MOC
 - [[可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
 - 分布式追踪体系

@@ -1637,7 +1637,7 @@ maintenance.run_daily_maintenance()
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
 - [[可观测性/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
 - [[可观测性/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[entities/prometheus.md|prometheus]]
+- [[实体/prometheus.md|prometheus]]
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage

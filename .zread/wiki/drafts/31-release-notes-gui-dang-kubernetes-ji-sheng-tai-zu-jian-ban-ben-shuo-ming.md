@@ -1,6 +1,6 @@
 本页面是 KUDIG 知识库中 **Kubernetes 及其云原生生态组件 Release Notes 的全量归档入口**。归档涵盖 **33 个核心项目、1,322 份版本说明文档**，总计约 14.3 MB 的原始版本信息，按功能领域分为 **8 大分类、30+ 子项目**，时间跨度从 Kubernetes v0.4（2014 年）到 v1.36（2026 年开发中）乃至各生态组件的最新稳定版。这些文档通过自动化脚本从各项目 GitHub Release 页面和官方 Changelog 仓库同步获取，保留了原始的下载链接、变更分类、升级注意事项和依赖变更信息。
 
-Sources: [README.md](领域索引/README.md#L1-L79), [download-release-notes.py](scripts/download-release-notes.py#L1-L241)
+Sources: [README.md](领域索引/README.md#L1-L79), [download-release-notes.py](脚本/download-release-notes.py#L1-L241)
 
 ## 归档架构总览
 
@@ -63,9 +63,9 @@ Sources: [README.md](领域索引/README.md#L1-L79)
 
 ## 数据采集机制
 
-归档通过 [`download-release-notes.py`](scripts/download-release-notes.py) 脚本实现自动化采集。该脚本的核心逻辑包含两个数据通道：**Kubernetes 官方 Changelog** 直接从 `kubernetes/kubernetes` 仓库的 `CHANGELOG/` 目录拉取原始 Markdown 文件（v1.2 至 v1.36），而 **早期版本**（v0.4–v1.1）和**所有生态组件**则通过 GitHub Releases API 获取。脚本内置速率限制处理、alpha/beta/rc 版本过滤以及 `Major.Minor` 分组聚合逻辑——同一版本线只保留最新 patch 版本的 Release Notes。
+归档通过 [`download-release-notes.py`](脚本/download-release-notes.py) 脚本实现自动化采集。该脚本的核心逻辑包含两个数据通道：**Kubernetes 官方 Changelog** 直接从 `kubernetes/kubernetes` 仓库的 `CHANGELOG/` 目录拉取原始 Markdown 文件（v1.2 至 v1.36），而 **早期版本**（v0.4–v1.1）和**所有生态组件**则通过 GitHub Releases API 获取。脚本内置速率限制处理、alpha/beta/rc 版本过滤以及 `Major.Minor` 分组聚合逻辑——同一版本线只保留最新 patch 版本的 Release Notes。
 
-Sources: [download-release-notes.py](scripts/download-release-notes.py#L1-L116)
+Sources: [download-release-notes.py](脚本/download-release-notes.py#L1-L116)
 
 ## Kubernetes 核心版本归档
 
@@ -228,7 +228,7 @@ Sources: [CHANGELOG-1.36.md](领域索引/kubernetes/CHANGELOG-1.36.md#L137-L200
 | **数据来源** | Kubernetes 来自官方 `CHANGELOG/` 仓库目录；其余来自各项目 GitHub Releases API |
 | **原始格式保留** | 保留 GitHub Flavored Markdown 原始内容，包括 PR 链接、贡献者信息和下载校验和 |
 
-Sources: [download-release-notes.py](scripts/download-release-notes.py#L55-L115)
+Sources: [download-release-notes.py](脚本/download-release-notes.py#L55-L115)
 
 ## 相关阅读
 

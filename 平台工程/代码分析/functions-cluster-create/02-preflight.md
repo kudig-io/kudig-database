@@ -711,8 +711,8 @@ func (c DirAvailableCheck) Check() error {
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/docker.md|docker]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/containerd.md|containerd]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/containerd.md|containerd]]
 
 ```
 

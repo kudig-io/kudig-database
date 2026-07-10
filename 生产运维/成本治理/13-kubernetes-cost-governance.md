@@ -79,7 +79,7 @@ estimated_read_time: 5min
 intent_queries:
 - Kubernetes成本治理 是什么
 - 如何 Kubernetes成本治理
-- [[Kubernetes|Kubernetes]] 18 [[entities/k8s-production-operations.md|production operations]] 最佳实践
+- [[Kubernetes|Kubernetes]] 18 [[实体/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - Kubernetes成本治理
 - production

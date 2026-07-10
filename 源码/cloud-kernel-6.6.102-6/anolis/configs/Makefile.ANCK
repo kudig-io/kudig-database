@@ -1,0 +1,3 @@
+DIST_CONFIG_LAYOUTS = anolis/configs/scripts/kconfig_layout
+DIST_CONFIG_ACTIONS_REFRESH = anolis/configs/scripts/kconfig_import
+DIST_CONFIG_ACTIONS_IMPORTS = anolis/configs/scripts/kconfig_import

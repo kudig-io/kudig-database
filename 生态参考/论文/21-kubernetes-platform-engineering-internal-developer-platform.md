@@ -63,7 +63,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[concepts/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
+title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[概念/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
 description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务
   | **复杂度:** ⭐⭐⭐⭐⭐'
 category: papers
@@ -1879,7 +1879,7 @@ platform_as_product:
     practices:
       - name: "用户研究驱动"
         description: "定期与开发者进行用户访谈，理解真实痛点"
-        [[entities/cadence.md|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
+        [[实体/cadence.md|cadence]]: "每季度至少 10 次 1:1 开发者访谈"
 
       - name: "产品路线图公开"
         description: "平台路线图对所有工程师透明可见"

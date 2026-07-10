@@ -11,11 +11,11 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/cilium.md]]'
+- target: '[[实体/cilium.md]]'
   type: uses
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
 ---
 
@@ -92,7 +92,7 @@ kubectl describe pod <pod-name> -n <namespace> | tail -n 30
 # 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get pods -n <namespace> -o wide | grep -E "CrashLoopBackOff|Error|OOMKilled"
 ```
-> **如果无法执行**：请手动统计一下：有多少个 Pod 受影响？它们是否属于同一个 [[entities/deployment.md|Deployment]]/StatefulSet/DaemonSet？是否分布在不同的节点上？
+> **如果无法执行**：请手动统计一下：有多少个 Pod 受影响？它们是否属于同一个 [[实体/deployment.md|Deployment]]/StatefulSet/DaemonSet？是否分布在不同的节点上？
 
 **工程师回复选项**：
 - **C1**：所有受影响 Pod 属于同一个 Deployment，分布在不同节点
@@ -374,7 +374,7 @@ kubectl get endpoints <dependency-svc> -n <dependency-namespace>
 # 🟢 低风险：只读/信息收集，通常无副作用
 kubectl get networkpolicy -n <namespace>
 ```
-> **如果无法执行**：请确认你们是否使用了 [[entities/cilium.md|Cilium]] 等网络策略。如果使用了，请检查是否有规则阻止了 Pod 访问依赖服务。如果无法确认，可以暂时将网络策略全部删除测试（仅限测试环境）。
+> **如果无法执行**：请确认你们是否使用了 [[实体/cilium.md|Cilium]] 等网络策略。如果使用了，请检查是否有规则阻止了 Pod 访问依赖服务。如果无法确认，可以暂时将网络策略全部删除测试（仅限测试环境）。
 
 **步骤 3**：临时缓解方案
 > 如果依赖服务确实不可用且短时间内无法恢复，建议：1) 如果应用支持启动重试，可以增加 `initialDelaySeconds` 和 `failureThreshold` 让 Pod 有更多时间等待依赖恢复；2) 如果业务可以降级，可以临时将该 Deployment 的副本数缩为 0，等依赖恢复后再扩容。请告诉我你的选择。
@@ -470,7 +470,7 @@ kubectl logs <pod-name> -n <namespace> --tail=50
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 我需要你执行更详细的诊断命令，包括节点级别检查
-> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-STORE-001
+> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-STORE-001
 > 3. **升级至节点专家** → 如果怀疑是节点/内核级别问题，我将转接至 SKILL-NODE-001
 > 4. **升级至工作负载专家** → 如果涉及复杂的 Deployment/StatefulSet 编排问题，我将转接至 SKILL-WORK-001
 
@@ -552,11 +552,11 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-03-15-oomkilled-java-restart.md|2026-03-15-oomkilled-java-restart]]
-- [[concepts/case-studies/2026-08-10-容器内存限制过严导致java应用频繁oom.md|2026-08-10-容器内存限制过严导致java应用频繁oom]]
+- [[概念/case-studies/2026-03-15-oomkilled-java-restart.md|2026-03-15-oomkilled-java-restart]]
+- [[概念/case-studies/2026-08-10-容器内存限制过严导致java应用频繁oom.md|2026-08-10-容器内存限制过严导致java应用频繁oom]]
 ## Related
 
-- [[scripts/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
+- [[脚本/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]
 - [[系统基础/知识字典/configuration/secrets.md|Secrets]]
 
 

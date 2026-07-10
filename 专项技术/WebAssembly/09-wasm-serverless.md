@@ -72,8 +72,8 @@ authors:
 
 1. [Wasm Serverless 架构概述](#1-wasm-serverless-架构概述)
 2. [冷启动优化原理](#2-冷启动优化原理)
-3. [[entities/spin.md|Spin]] 框架详解](#3-spin-框架详解)
-4. [[entities/wasmcloud.md|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
+3. [[实体/spin.md|Spin]] 框架详解](#3-spin-框架详解)
+4. [[实体/wasmcloud.md|wasmCloud]]ud 平台|wasmCloud 平台]]](#4-wasmcloud-平台)
 5. [Fermyon Cloud 部署](#5-fermyon-cloud-部署)
 6. [事件触发器系统](#6-事件触发器系统)
 7. [Scale-to-Zero 实现](#7-scale-to-zero-实现)

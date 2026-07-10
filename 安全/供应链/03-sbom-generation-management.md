@@ -69,7 +69,7 @@ authors:
 1. [SBOM 基础概念](#1-sbom-基础概念)
 2. [SBOM 标准格式对比](#2-sbom-标准格式对比)
 3. [Syft CLI 完整指南](#3-syft-cli-完整指南)
-4. [[entities/trivy.md|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
+4. [[实体/trivy.md|Trivy]] SBOM 生成](#4-trivy-sbom-生成)
 5. [其他 SBOM 生成工具](#5-其他-sbom-生成工具)
 6. [SBOM 生命周期管理](#6-sbom-生命周期管理)
 7. [CI/CD 集成实践](#7-cicd-集成实践)

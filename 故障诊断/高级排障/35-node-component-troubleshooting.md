@@ -81,7 +81,7 @@ cross_refs:
 ## 目录
 
 1. [概述与诊断框架](#1-概述与诊断框架)
-2. [[entities/kubelet.md|kubelet]] 故障排查](#2-kubelet-故障排查)
+2. [[实体/kubelet.md|kubelet]] 故障排查](#2-kubelet-故障排查)
 3. [容器运行时故障排查](#3-容器运行时故障排查)
 4. [kube-proxy 故障排查](#4-kube-proxy-故障排查)
 5. [节点资源压力诊断](#5-节点资源压力诊断)

@@ -15,13 +15,13 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[skills/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[entities/kubelet.md]]'
+- target: '[[实体/kubelet.md]]'
   type: uses
-- target: '[[entities/kubernetes.md]]'
+- target: '[[实体/kubernetes.md]]'
   type: uses
 ---
 
@@ -124,7 +124,7 @@ relationships:
 >    **如果 previous 也拿不到** → `kubectl get events -n logging --field-selector reason=BackOff | tail -20`
 > 3. 检查 DaemonSet 调度状态：`kubectl get daemonset -n logging`
 >    **如果无法执行** → `kubectl get ds -n logging`
->    **如果无 ds** → `kubectl get [[entities/deployment.md|deployment]] -n logging | grep -E "fluent|filebeat"`
+>    **如果无 ds** → `kubectl get [[实体/deployment.md|deployment]] -n logging | grep -E "fluent|filebeat"`
 > 请把 Events、日志和 DaemonSet 状态贴给我。
 
 **分支决策**：
@@ -252,7 +252,7 @@ relationships:
 >
 > 1. 检查节点日志路径：`kubectl exec <fluent-pod> -n logging -- ls -la /var/log/containers/ | head -10`
 >    **如果无法 exec** → `kubectl debug node/<node-name> -it --image=busybox -- ls -la /host/var/log/containers/ | head -10`
->    **如果无法 debug node** → `kubectl run node-test --image=busybox --rm -it --restart=Never --overrides='{"spec":{"nodeSelector":{"[[entities/kubernetes.md|kubernetes]].io/hostname":"<node-name>"},"hostNetwork":true}}' -- ls -la /var/log/containers/ | head -10`
+>    **如果无法 debug node** → `kubectl run node-test --image=busybox --rm -it --restart=Never --overrides='{"spec":{"nodeSelector":{"[[实体/kubernetes.md|kubernetes]].io/hostname":"<node-name>"},"hostNetwork":true}}' -- ls -la /var/log/containers/ | head -10`
 > 2. 检查符号链接：`kubectl exec <fluent-pod> -n logging -- ls -la /var/log/containers/<pod-name>_<namespace>_<container>*.log`
 >    **如果链接断裂** → 检查 containerd/docker 日志配置
 > 3. 检查 Pod 是否有读取权限：`kubectl exec <fluent-pod> -n logging -- id`
@@ -496,7 +496,7 @@ relationships:
 > 1. 检查 containerd 状态：`kubectl run node-debug --image=nicolaka/netshoot --rm -it --restart=Never --overrides='{"spec":{"nodeSelector":{"kubernetes.io/hostname":"<node-name>"},"hostNetwork":true}}' -- systemctl status containerd`
 >    **如果无法执行** → `kubectl debug node/<node-name> -it --image=nicolaka/netshoot -- systemctl status containerd`
 >    **如果无法 debug** → `kubectl get node <node-name> -o yaml | grep -i condition`
-> 2. 检查 [[entities/kubelet.md|kubelet]] 日志配置：`kubectl run node-debug ... -- cat /var/lib/kubelet/config.yaml | grep -A 5 containerLogMaxSize`
+> 2. 检查 [[实体/kubelet.md|kubelet]] 日志配置：`kubectl run node-debug ... -- cat /var/lib/kubelet/config.yaml | grep -A 5 containerLogMaxSize`
 > 3. 重启 containerd/kubelet：`systemctl restart containerd && systemctl restart kubelet`
 >    **如果无法 SSH** → 联系节点管理员执行
 > 请告诉我 containerd 状态、日志配置、重启后是否恢复。
@@ -673,7 +673,7 @@ EOF
 | 后端存储数据损坏 | **存储专家** | 需要 ES/Loki 数据恢复 |
 | 日志代理持续崩溃 | **Operator 维护团队** | 可能是 Bug 或根本性配置错误 |
 | 多节点同时日志异常 | **基础设施团队** | 底层存储/网络问题 |
-| 安全策略限制 | **[[skills/skill-k8s-node-notready-SKILL.md|SKILL]]-SEC-003** | RBAC/PSP/OPA 相关 |
+| 安全策略限制 | **[[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-SEC-003** | RBAC/PSP/OPA 相关 |
 | 高日志量无法优化 | **可观测性架构师** | 架构调整 |
 | 合规审计日志中断 | **合规团队** | 需要审计追溯 |
 
@@ -730,7 +730,7 @@ kubectl delete pod -n logging -l app=fluent-bit
 *对话脚本版本: 1.0.0 | 技能: K8s Logging Pipeline Failure 诊断与修复 | 模式: L2-semi-auto*
 ## Related
 
-- [[entities/cilium.md|Cilium (entities)]]
+- [[实体/cilium.md|Cilium (entities)]]
 
 
 <!-- risk-assessed -->

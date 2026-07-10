@@ -15,9 +15,9 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[entities/helm.md]]'
+- target: '[[实体/helm.md]]'
   type: uses
 ---
 
@@ -80,7 +80,7 @@ relationships:
 ### 分支 1：ConfigMap Key不匹配
 - `kubectl create configmap <cm> -n <ns> --from-literal=<key>=<value> --dry-run=client -o yaml | kubectl apply -f -`
   - 如无法执行：请提供当前可执行的环境信息
-- `kubectl rollout restart [[entities/deployment.md|deployment]]/<d> -n <ns>`
+- `kubectl rollout restart [[实体/deployment.md|deployment]]/<d> -n <ns>`
   > 💬 **顾问确认**：如果命令执行失败，请提供错误信息，我会调整方案。
   - 如无法执行：请提供当前可执行的环境信息
 
@@ -113,7 +113,7 @@ relationships:
   - 如无法执行：请提供当前可执行的环境信息
 - `检查ConfigMap/Secret的subPath挂载`
   - 如无法执行：请提供当前可执行的环境信息
-- `如使用Helm: [[entities/helm.md|helm]] upgrade <release> <chart> --set <key>=<value>`
+- `如使用Helm: [[实体/helm.md|helm]] upgrade <release> <chart> --set <key>=<value>`
   - 如无法执行：请提供当前可执行的环境信息
 
 
@@ -283,8 +283,8 @@ kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-05-15-configmap-no-rolling-update.md|2026-05-15-configmap-no-rolling-update]]
-- [[concepts/case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
+- [[概念/case-studies/2026-05-15-configmap-no-rolling-update.md|2026-05-15-configmap-no-rolling-update]]
+- [[概念/case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
 ## Related
 
 - [[系统基础/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]

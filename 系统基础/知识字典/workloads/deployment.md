@@ -77,7 +77,7 @@ Deployment 是 Kubernetes 中管理无状态应用的核心工作负载控制器
 
 ## Related
 
-[[entities/deployment.md|Deployment]]
+[[实体/deployment.md|Deployment]]
 
 
 <!-- risk-assessed -->

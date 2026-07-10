@@ -2,7 +2,7 @@
 # 用途: Agent 能力问答对测评语料库数据模型
 # 规范版本: 3.0
 # 最后更新: 2026-05-21
-# 关联: docs/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md
+# 关联: 文档/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md
 
 ---
 schema_version: "3.0"

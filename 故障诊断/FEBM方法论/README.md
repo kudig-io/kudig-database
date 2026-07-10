@@ -98,7 +98,7 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 | 4 | [FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) | Agent 工单处理架构、七大核心能力模型、FTA+FEBM 融合模式、三个完整案例（连接池耗尽/容器逃逸/静默失败）、人机协同分级、知识进化机制 | 2,690 |
 | 5 | [FEBM 体系建设方法论](./05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线（Phase 1-5）、工具链参考、组织角色矩阵、实施建议、预算规划、合规法律考量 | 2,873 |
 | 6 | [未来演进方向](./06-febm-future-evolution.md) | AI/ML 增强混合方法、云原生取证基础设施（OSDFIR）、DevSecOps 融合、意图模型协同、数字孪生、量子计算影响、标准化 | 3,916 |
-| 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、[[entities/falco.md|[[Falco|Falco]]]] 检测规则模板、事件响应 Checklist | 1,267 |
+| 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、[[实体/falco.md|[[Falco|Falco]]]] 检测规则模板、事件响应 Checklist | 1,267 |
 | 8 | [生产环境快速启动与 K8s 问题取证手册](./08-febm-production-quick-start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 问题取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
 
 ---
@@ -169,23 +169,23 @@ Agent 工程师:  第四章(工单Agent) → 第五章(建设方法论) → topi
 
 - [[README|README]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/ko.md|ko]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/ko.md|ko]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]

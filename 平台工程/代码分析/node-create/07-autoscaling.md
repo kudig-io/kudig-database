@@ -459,8 +459,8 @@ cluster_autoscaler_last_activity                          # 最后一次活动�
 
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[concepts/node-lifecycle-management.md|node-lifecycle-management]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[概念/node-lifecycle-management.md|node-lifecycle-management]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[系统基础/知识字典/fundamentals/nodes.md|nodes]]
 
 

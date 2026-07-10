@@ -433,7 +433,7 @@ Events:
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[系统基础/知识字典/workloads/replicaset.md|replicaset]]
 - [[平台工程/代码分析/deployment-create/03-replicaset-controller.md|03-replicaset-controller]]
 - [[平台工程/代码分析/deployment-create/05-deployment-status.md|05-deployment-status]]

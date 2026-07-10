@@ -78,7 +78,7 @@ CoreDNS 是 CNCF 毕业项目，通过 Kubernetes 插件机制部署。它支持
 
 ## Related
 
-[[entities/coredns.md|CoreDNS]]
+[[实体/coredns.md|CoreDNS]]
 
 
 <!-- risk-assessed -->

@@ -310,13 +310,13 @@ kubectl get pod <ingress-pod> -n kube-system -o wide
 
 ## 相关案例
 
-- [[concepts/case-studies/2026-04-10-ingress-502-bad-gateway.md|2026-04-10-ingress-502-bad-gateway]]
+- [[概念/case-studies/2026-04-10-ingress-502-bad-gateway.md|2026-04-10-ingress-502-bad-gateway]]
 ## Related
 
 - [[云厂商/阿里云/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
 - [[系统基础/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
 - [[故障诊断/资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
-- [[entities/argo.md|Argo Workflows]]
+- [[实体/argo.md|Argo Workflows]]
 
 
 <!-- risk-assessed -->

@@ -90,7 +90,7 @@ related_docs:
 - [故障排查](#故障排查)
 - [资源监控](#资源监控)
 - [高级操作](#高级操作)
-- [[entities/etcd.md|etcd]] 操作](#etcd-操作)
+- [[实体/etcd.md|etcd]] 操作](#etcd-操作)
 - [API Server 管理](#api-server-管理)
 - [集群维护](#集群维护)
 

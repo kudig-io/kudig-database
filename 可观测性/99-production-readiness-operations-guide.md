@@ -370,7 +370,7 @@ kubectl apply -f experiments/logging-pod-kill.yaml
 
 - [[可观测性/README.md|返回 Domain 06 目录]]
 - [[生产运维/README.md|生产运维域]]
-- [[_reports/domain-content-gap-analysis-2026-07-01.md|Domain Content Gap Analysis 2026-07-01]]
+- [[报告/domain-content-gap-analysis-2026-07-01.md|Domain Content Gap Analysis 2026-07-01]]
 
 
 <!-- risk-assessed -->

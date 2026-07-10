@@ -28,7 +28,7 @@ last_updated: 2026-05-21
 
 # PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本
 
-> 对应概念：[[concepts/persistent-volume-claim.md|PVC]]
+> 对应概念：[[概念/persistent-volume-claim.md|PVC]]
 > 顾问身份：部署在客户专有云之外的远程 SRE 专家，**无法直接连接集群**。
 
 ---
@@ -257,9 +257,9 @@ kubectl get pvc <pvc-name> -n <namespace> -w
 
 ## 相关概念
 
-- [[concepts/persistent-volume-claim.md|PVC]]
-- [[concepts/pv.md|PersistentVolume]]
-- [[concepts/storageclass.md|StorageClass]]
+- [[概念/persistent-volume-claim.md|PVC]]
+- [[概念/pv.md|PersistentVolume]]
+- [[概念/storageclass.md|StorageClass]]
 
 ## Related
 

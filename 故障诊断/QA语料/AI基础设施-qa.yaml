@@ -1072,10 +1072,10 @@ qa_pairs:
   source: AI基础设施/02-ai-agents/26-agent-cli-development-workflow.md
   section: See Also
 - type: operation
-  question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 阅读 docs/PRD-user-auth.md, 总结核心需求和技术要点?'
+  question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 阅读 文档/PRD-user-auth.md, 总结核心需求和技术要点?'
   answer: 参见 AI基础设施/02-ai-agents/26-agent-cli-development-workflow.md 中的操作步骤。
   source: AI基础设施/02-ai-agents/26-agent-cli-development-workflow.md
-  command: '> 阅读 docs/PRD-user-auth.md, 总结核心需求和技术要点'
+  command: '> 阅读 文档/PRD-user-auth.md, 总结核心需求和技术要点'
 - type: operation
   question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 用户反馈: 当并发创建订单时偶尔出现库存超卖?'
   answer: 参见 AI基础设施/02-ai-agents/26-agent-cli-development-workflow.md 中的操作步骤。
@@ -2223,10 +2223,10 @@ qa_pairs:
   source: AI基础设施/topic-ai-agent/26-agent-cli-development-workflow.md
   section: 项目概述
 - type: operation
-  question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 阅读 docs/PRD-user-auth.md, 总结核心需求和技术要点?'
+  question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 阅读 文档/PRD-user-auth.md, 总结核心需求和技术要点?'
   answer: 参见 AI基础设施/topic-ai-agent/26-agent-cli-development-workflow.md 中的操作步骤。
   source: AI基础设施/topic-ai-agent/26-agent-cli-development-workflow.md
-  command: '> 阅读 docs/PRD-user-auth.md, 总结核心需求和技术要点'
+  command: '> 阅读 文档/PRD-user-auth.md, 总结核心需求和技术要点'
 - type: operation
   question: '如何执行与 Agent CLI 开发工作流与最佳实践 相关的操作: > 用户反馈: 当并发创建订单时偶尔出现库存超卖?'
   answer: 参见 AI基础设施/topic-ai-agent/26-agent-cli-development-workflow.md 中的操作步骤。

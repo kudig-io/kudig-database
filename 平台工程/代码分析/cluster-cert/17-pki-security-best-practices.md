@@ -492,8 +492,8 @@ echo "Inventory saved to $OUTPUT"
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
 - [[系统基础/速查卡/git.md|git]]
-- [[entities/sops.md|sops]]
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/sops.md|sops]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 
 ```

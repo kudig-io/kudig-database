@@ -49,7 +49,7 @@ prerequisites:
 
 ## 关键机制或特性
 
-- **启用方式**：通过在 Service 上添加注解 `service.[[entities/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
+- **启用方式**：通过在 Service 上添加注解 `service.[[实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/topology-mode: Auto` 开启。在 Kubernetes 1.27 之前，使用旧注解 `service.kubernetes.io/topology-aware-hints`。
 - **保护机制（Safeguards）**：当以下任一条件不满足时，系统会回退到全集群范围的路由，避免流量不均衡或黑洞：
   1. 端点数量少于集群 zone 数量。
   2. 无法在各区之间实现可接受的均衡分配（预期过载值超过阈值）。

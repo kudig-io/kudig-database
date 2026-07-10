@@ -608,7 +608,7 @@ hybrid_observability:
 ## Related
 
 - [[MOC]]
-- [[concepts/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
+- [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]
 - 77-fusion-energy-monitoring
 
 - 指标监控体系

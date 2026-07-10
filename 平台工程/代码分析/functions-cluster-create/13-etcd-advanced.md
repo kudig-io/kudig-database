@@ -829,8 +829,8 @@ ETCDCTL_API=3 etcdctl member list -w table \
 - [[hot|hot]]
 - [[系统基础/速查卡/go.md|go]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[entities/kubernetes.md|kubernetes]]
-- [[entities/coredns.md|coredns]]
+- [[实体/kubernetes.md|kubernetes]]
+- [[实体/coredns.md|coredns]]
 - [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 

@@ -71,7 +71,7 @@ authors:
 2. [测试环境规范](#2-测试环境规范)
 3. [基础代理性能对比](#3-基础代理性能对比)
 4. [带插件场景性能对比](#4-带插件场景性能对比)
-5. [[entities/envoy.md|Envoy]] 数据平面调优](#5-envoy-数据平面调优)
+5. [[实体/envoy.md|Envoy]] 数据平面调优](#5-envoy-数据平面调优)
 6. [OpenResty 数据平面调优](#6-openresty-数据平面调优)
 7. [Kubernetes 层面调优](#7-kubernetes-层面调优)
 8. [eBPF 加速路径](#8-ebpf-加速路径)

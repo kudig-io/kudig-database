@@ -1,0 +1,5 @@
+objtool-y += decode.o
+objtool-y += orc.o
+objtool-y += unwind_hints.o
+objtool-y += insn.o
+objtool-y += cfi.o

@@ -1262,7 +1262,7 @@ Repo Server 错误:
 
 ## 相关合成分析
 
-- [[concepts/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
+- [[概念/gitops-sre-release-gate.md|GitOps SRE 发布门控]]
 
 
 

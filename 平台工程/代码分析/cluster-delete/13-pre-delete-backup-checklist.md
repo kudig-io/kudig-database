@@ -413,7 +413,7 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
 ## Related
 
-- [[entities/kubernetes.md|kubernetes]]
+- [[实体/kubernetes.md|kubernetes]]
 - [[hot|hot]]
 - [[平台工程/代码分析/cluster-delete/02-reset.md|02-reset]]
 - [[平台工程/代码分析/cluster-delete/07-ha-delete.md|07-ha-delete]]

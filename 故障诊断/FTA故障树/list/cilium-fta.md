@@ -168,13 +168,13 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[skills/ts-networking.md|网络故障排查]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/ts-networking.md|网络故障排查]]
 
 ## Related
 
-- [[entities/kubelet.md|kubelet]] — kubelet
+- [[实体/kubelet.md|kubelet]] — kubelet
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)

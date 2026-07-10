@@ -162,20 +162,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
-- [[skills/skills-run-README.md|skills-run-README]] — Skills Demo — 本地运行工单诊断技能
-- [[skills/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
-- [[skills/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/skills-run-README.md|skills-run-README]] — Skills Demo — 本地运行工单诊断技能
+- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
+- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
 - [[gpu-fta]] — GPU 异常故障树分析
-- [[skills/ts-workloads.md|ts-workloads]] — 工作负载故障排查
+- [[技能/ts-workloads.md|ts-workloads]] — 工作负载故障排查
 
 - [[故障诊断/FTA故障树/list/pdb-fta.md|PDB 异常故障树分析]]
-- [[skills/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
-- [[skills/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
+- [[技能/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
+- [[技能/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
 
 
 <!-- risk-assessed -->

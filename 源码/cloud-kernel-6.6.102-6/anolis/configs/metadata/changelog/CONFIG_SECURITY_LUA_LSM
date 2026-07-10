@@ -1,0 +1,7 @@
+Lua-LSM is backported into ANCK through the Lua-LSM integration series
+(ANBZ: #31935).
+
+Enable CONFIG_SECURITY_LUA_LSM by default on architectures that currently
+provide ARCH_HAS_SETJMP in this backport tree.
+Keep loongarch, riscv, sw_64-6b, and sw_64-8a disabled until setjmp/longjmp
+support is available there.

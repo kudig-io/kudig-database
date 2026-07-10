@@ -207,15 +207,15 @@ flowchart TD
 
 ## 相关链接
 
-- [[skills/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## See Also
 
-- [[skills/cluster-upgrade-fta.md|cluster-upgrade-fta]]
-- [[skills/configure-health-probes.md|configure-health-probes]]
-- [[skills/crd-operator-fta.md|crd-operator-fta]]
-- [[skills/csi-fta.md|csi-fta]]
+- [[技能/cluster-upgrade-fta.md|cluster-upgrade-fta]]
+- [[技能/configure-health-probes.md|configure-health-probes]]
+- [[技能/crd-operator-fta.md|crd-operator-fta]]
+- [[技能/csi-fta.md|csi-fta]]
 
 
 <!-- risk-assessed -->

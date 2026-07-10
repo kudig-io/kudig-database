@@ -1,0 +1,126 @@
+From 0242634f4cf47e2cf135eaf42385c21628d00939 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E6=B8=85=E5=BC=A6?= <libokang.lbk@alibaba-inc.com>
+Date: Thu, 13 Apr 2023 15:13:39 +0800
+Subject: [PATCH 2/3] performance improve
+
+---
+ felix/daemon/daemon.go               |  4 ++++
+ felix/fv/infrastructure/infra_k8s.go | 19 +++++++++----------
+ 2 files changed, 13 insertions(+), 10 deletions(-)
+
+diff --git a/felix/daemon/daemon.go b/felix/daemon/daemon.go
+index 4429ada5f..7992b7446 100644
+--- a/felix/daemon/daemon.go
++++ b/felix/daemon/daemon.go
+@@ -287,6 +287,7 @@ configRetry:
+ 		// config.  We don't need to re-load the configuration _again_ because the
+ 		// calculation graph will spot if the config has changed since we were initialised.
+ 		datastoreConfig = configParams.DatastoreConfig()
++		datastoreConfig.Spec.K8sClientQPS = 1
+ 		backendClient, err = backend.NewClient(datastoreConfig)
+ 		if err != nil {
+ 			log.WithError(err).Error("Failed to (re)connect to datastore")
+@@ -310,6 +311,9 @@ configRetry:
+ 				log.WithError(err).Info("Kubernetes in-cluster config not available. " +
+ 					"Assuming we're not in a Kubernetes deployment.")
+ 			} else {
++				k8sconf.QPS = 1
++				k8sconf.Burst = 3
++				k8sconf.Timeout = 30 * time.Second
+ 				k8sClientSet, err = kubernetes.NewForConfig(k8sconf)
+ 				if err != nil {
+ 					log.WithError(err).Error("Got in-cluster config but failed to create Kubernetes client.")
+diff --git a/felix/fv/infrastructure/infra_k8s.go b/felix/fv/infrastructure/infra_k8s.go
+index fa235288a..296429db0 100644
+--- a/felix/fv/infrastructure/infra_k8s.go
++++ b/felix/fv/infrastructure/infra_k8s.go
+@@ -29,7 +29,6 @@ import (
+ 	"github.com/davecgh/go-spew/spew"
+ 	"github.com/onsi/ginkgo"
+ 
+-	. "github.com/onsi/gomega"
+ 	log "github.com/sirupsen/logrus"
+ 	v1 "k8s.io/api/core/v1"
+ 	apierrs "k8s.io/apimachinery/pkg/api/errors"
+@@ -315,7 +314,7 @@ func setupK8sDatastoreInfra() (*K8sDatastoreInfra, error) {
+ 
+ 	start = time.Now()
+ 	for {
+-		_, err := kds.K8sClient.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{})
++		_, err := kds.K8sClient.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 		if err == nil {
+ 			break
+ 		}
+@@ -787,7 +786,7 @@ func (kds *K8sDatastoreInfra) AddDefaultDeny() error {
+ }
+ 
+ func (kds *K8sDatastoreInfra) DumpErrorData() {
+-	nsList, err := kds.K8sClient.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{})
++	nsList, err := kds.K8sClient.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 	if err == nil {
+ 		log.Info("DIAGS: Kubernetes Namespaces:")
+ 		for _, ns := range nsList.Items {
+@@ -852,7 +851,7 @@ func isSystemNamespace(ns string) bool {
+ 
+ func cleanupAllNamespaces(clientset *kubernetes.Clientset, calicoClient client.Interface) {
+ 	log.Info("Cleaning up all namespaces...")
+-	nsList, err := clientset.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{})
++	nsList, err := clientset.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 	if err != nil {
+ 		panic(err)
+ 	}
+@@ -870,7 +869,7 @@ func cleanupAllNamespaces(clientset *kubernetes.Clientset, calicoClient client.I
+ 
+ func cleanupAllNodes(clientset *kubernetes.Clientset, calicoClient client.Interface) {
+ 	log.Info("Cleaning up all nodes...")
+-	nodeList, err := clientset.CoreV1().Nodes().List(context.Background(), metav1.ListOptions{})
++	nodeList, err := clientset.CoreV1().Nodes().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 	if err != nil {
+ 		panic(err)
+ 	}
+@@ -886,7 +885,7 @@ func cleanupAllNodes(clientset *kubernetes.Clientset, calicoClient client.Interf
+ 
+ func cleanupAllPods(clientset *kubernetes.Clientset, calicoClient client.Interface) {
+ 	log.Info("Cleaning up Pods")
+-	nsList, err := clientset.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{})
++	nsList, err := clientset.CoreV1().Namespaces().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 	if err != nil {
+ 		panic(err)
+ 	}
+@@ -899,7 +898,7 @@ func cleanupAllPods(clientset *kubernetes.Clientset, calicoClient client.Interfa
+ 		nsName := ns.ObjectMeta.Name
+ 		go func() {
+ 			admission <- 1
+-			podList, err := clientset.CoreV1().Pods(nsName).List(context.Background(), metav1.ListOptions{})
++			podList, err := clientset.CoreV1().Pods(nsName).List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 			if err != nil {
+ 				panic(err)
+ 			}
+@@ -1009,13 +1008,13 @@ func cleanupAllFelixConfigurations(clientset *kubernetes.Clientset, client clien
+ func cleanupAllServices(clientset *kubernetes.Clientset, calicoClient client.Interface) {
+ 	log.Info("Cleaning up services")
+ 	coreV1 := clientset.CoreV1()
+-	namespaceList, err := coreV1.Namespaces().List(context.Background(), metav1.ListOptions{})
++	namespaceList, err := coreV1.Namespaces().List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 	if err != nil {
+ 		panic(err)
+ 	}
+ 	for _, ns := range namespaceList.Items {
+ 		serviceInterface := coreV1.Services(ns.Name)
+-		services, err := serviceInterface.List(context.Background(), metav1.ListOptions{})
++		services, err := serviceInterface.List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 		if err != nil {
+ 			panic(err)
+ 		}
+@@ -1030,7 +1029,7 @@ func cleanupAllServices(clientset *kubernetes.Clientset, calicoClient client.Int
+ 			}
+ 		}
+ 		endpointsInterface := coreV1.Endpoints(ns.Name)
+-		endpoints, err := endpointsInterface.List(context.Background(), metav1.ListOptions{})
++		endpoints, err := endpointsInterface.List(context.Background(), metav1.ListOptions{ResourceVersion: "0"})
+ 		if err != nil {
+ 			panic(err)
+ 		}
+-- 
+2.40.0
+

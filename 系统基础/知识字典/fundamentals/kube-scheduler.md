@@ -75,7 +75,7 @@ kube-scheduler 基于可插拔的 Scheduling Framework 架构，支持自定义 
 
 ## Related
 
-[[entities/scheduling-terms.md|调度术语参考]]
+[[实体/scheduling-terms.md|调度术语参考]]
 
 
 <!-- risk-assessed -->

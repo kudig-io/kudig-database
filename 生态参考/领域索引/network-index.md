@@ -74,7 +74,7 @@ prerequisites:
 
 ### Ingress
 
-- [[assets/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
+- [[资产/presentations/kubernetes-ingress-presentation.md|kubernetes ingress presentation]]
 - 128 - Ingress Controller 深入剖析
 - 129 - NGINX Ingress 完整配置指南
 - 130 - Ingress TLS 与证书管理

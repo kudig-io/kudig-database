@@ -73,9 +73,9 @@ kubectl get deployment <canary-deployment> -n <namespace> -o yaml | grep -A10 en
 
 ## 相关概念
 
-- [[concepts/canary-deployment.md|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
-- [[concepts/blue-green-deployment.md|蓝绿部署]] — 零停机发布切换机制与回滚策略
-- [[concepts/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障
+- [[概念/canary-deployment.md|金丝雀部署]] — 渐进式发布策略、流量权重与指标驱动的自动推进
+- [[概念/blue-green-deployment.md|蓝绿部署]] — 零停机发布切换机制与回滚策略
+- [[概念/autoscaling-strategies.md|自动扩缩容策略]] — HPA、VPA 与发布过程中的弹性保障
 
 ## Related
 

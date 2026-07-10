@@ -237,7 +237,7 @@ agent_execution_mode: L1-advisory
 
 - k8s-rbac-quota
 
-- [[skills/ts-control-plane.md|ts control plane]]
+- [[技能/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 
@@ -332,7 +332,7 @@ flowchart TD
 
 ## 相关概念
 
-- [[concepts/supply-chain-security.md|供应链安全]] — Kubernetes 镜像供应链安全与漏洞防护
+- [[概念/supply-chain-security.md|供应链安全]] — Kubernetes 镜像供应链安全与漏洞防护
 
 
 <!-- risk-assessed -->

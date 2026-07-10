@@ -15,9 +15,9 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[entities/deployment.md]]'
+- target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[entities/kubernetes.md]]'
+- target: '[[实体/kubernetes.md]]'
   type: uses
 - target: '[[系统基础/知识字典/fundamentals/namespaces.md]]'
   type: uses
@@ -190,7 +190,7 @@ relationships:
 >    **如果 Pod 已崩溃无法 exec** → `kubectl get pvc <prometheus-pvc-name> -n monitoring -o yaml | grep -A 5 resources`
 >    **如果不知道 PVC 名** → `kubectl get pvc -n monitoring`
 > 2. 检查 Prometheus 资源限制：`kubectl get prometheus -n monitoring -o yaml | grep -A 10 resources`
->    **如果无 prometheus CRD** → `kubectl get [[entities/deployment.md|deployment]] -n monitoring | grep prometheus`
+>    **如果无 prometheus CRD** → `kubectl get [[实体/deployment.md|deployment]] -n monitoring | grep prometheus`
 >    **如果是 Deployment 部署** → `kubectl get deployment <prometheus-deploy> -n monitoring -o yaml | grep -A 10 resources`
 > 3. 检查 TSDB 状态（如果 Pod 能启动）：`kubectl port-forward -n monitoring svc/prometheus-k8s 9090:9090 &`
 >    **如果无法 port-forward** → `kubectl exec <prometheus-pod> -n monitoring -- wget -qO- http://localhost:9090/api/v1/status/tsdb`
@@ -388,7 +388,7 @@ relationships:
 > 请告诉我规则列表中是否有错误标记、PromQL 在 Prometheus 中是否能正常查询。
 
 **修复方案**：
-> 修正规则中的 PromQL：`kubectl patch prometheusrules <rule-name> -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/groups/0/rules/0/expr", "value": "up{job=\"[[entities/kubernetes.md|kubernetes]]-pods\"} == 0"}]'`
+> 修正规则中的 PromQL：`kubectl patch prometheusrules <rule-name> -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/groups/0/rules/0/expr", "value": "up{job=\"[[实体/kubernetes.md|kubernetes]]-pods\"} == 0"}]'`
 > **如果 patch 复杂** → `kubectl edit prometheusrules <rule-name> -n monitoring`
 
 **分支决策**：
@@ -716,7 +716,7 @@ kubectl patch prometheusrules <name> -n <namespace> --type='json' -p='[{"op": "r
 *对话脚本版本: 1.0.0 | 技能: K8s Monitoring & Alerting Failure 诊断与修复 | 模式: L2-semi-auto*
 ## Related
 
-- [[entities/cilium.md|Cilium (entities)]]
+- [[实体/cilium.md|Cilium (entities)]]
 - [[系统基础/知识字典/workloads/pods.md|Pods]]
 
 

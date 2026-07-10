@@ -69,7 +69,7 @@ cross_refs:
 
 # 15 - 安全扫描与检测工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[entities/falco.md|Falco]] Documentation](https://falco.org/docs/) | [[entities/kubearmor.md|KubeArmor]] Documentation](https://kubearmor.io/)
+> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[实体/falco.md|Falco]] Documentation](https://falco.org/docs/) | [[实体/kubearmor.md|KubeArmor]] Documentation](https://kubearmor.io/)
 
 <!-- chunk: 一、运行时安全检测架构 -->
 ## 一、运行时安全检测架构
