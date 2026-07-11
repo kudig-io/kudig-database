@@ -15,7 +15,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,42 +39,49 @@ prerequisites:
 
 
 
-
 # Krkn
 
 > **CNCF 状态**: Sandbox | **类别**: Chaos | **主要语言**: Python
 
 ## 概述
 
-Krkn（原名 Kraken）是一个面向 Kubernetes 的混沌工程工具，通过向集群注入各种问题场景来测试系统的弹性和可靠性。它支持节点问题、Pod 中断、网络混沌、CPU/内存压力、时间偏移等多种混沌场景，并提供基于 Cerberus 的健康检查和告警机制，帮助团队在生产环境之前发现系统弱点。
+Krkn（原 krkube）是一个 CNCF 沙箱项目，由 Red Hat 开源，是专为 OpenShift/Kubernetes 设计的混沌工程工具。它专注于基础设施级故障注入——模拟节点宕机、网络中断、API Server 压力等大规模故障场景。Krkn 特别适合验证 OpenShift/K8s 生产集群的容灾能力和恢复机制。与 Chaos Mesh 专注于 Pod 级故障不同，Krkn 更关注节点和集群级别的混沌实验。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **节点混沌**：模拟节点 NotReady、关机、网络隔离等故障
+- **网络混沌**：注入集群级网络延迟、丢包、DNS 故障
+- **API Server 压力**：模拟 API Server 过载和响应延迟
+- **Pod 混沌**：大规模 Pod kill 和 IO 干扰
+- **Scenario 框架**：通过 YAML 定义可复用的混沌场景
+- **与 Prow 集成**：支持 CI/CD 流水线中的自动化混沌测试
+
+## 架构与工作原理
+
+Krkn 采用 Python 实现的 Scenario 驱动架构：每个 Scenario 以 YAML 配置定义故障类型、目标范围和持续时间。Krkn 核心引擎解析 Scenario 配置，通过 K8s API（如 cordon/uncordon node、delete pod）或系统命令（如 iptables、tc）执行故障注入。执行完成后自动收集指标和日志用于分析。支持与 Chaos Mesh 互补使用。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Krkn 直接通过 Kubernetes API 执行混沌操作：通过 cordon/uncordon 模拟节点故障；通过 delete pod 验证工作负载韧性；通过 NetworkPolicy 和 iptables 规则注入网络故障。Krkn 以 Job 或 CronJob 方式在 K8s 集群中运行，通过 ServiceAccount 获取所需的 API 权限。与 Prometheus 集成收集故障期间的系统指标。
 
-## 生产部署要点
+## 生产用例
 
-- **渐进式注入**: 从小范围、低强度开始，逐步扩大混沌范围
-- **健康检查**: 始终启用 Cerberus 监控集群状态，设置安全阀
-- **非生产先行**: 先在测试/预发环境验证混沌场景
-- **SLO 驱动**: 基于 SLO 定义验收标准，混沌测试通过=SLO 不受影响
-- **团队协作**: 提前通知相关团队，记录混沌测试的发现和改进措施
+- **集群容灾测试**：验证多节点故障场景下的集群可用性
+- **OpenShift 认证测试**：PaaS 级混沌验证
+- **API Server 韧性**：验证控制平面在高负载下的表现
+- **灾备演练**：模拟数据中心级故障验证 DR 方案
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，krkn 属于 **Chaos** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+pip3 install krkn
+# 运行混沌场景
+krkn --config kraken-config.yaml --scenario scenarios/node_scenario.yaml
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[etcd]]
-- [[实体/prometheus-grafana.md|prometheus-grafana]]
-- [[operator-pattern]]
-- [[概念/secrets-management.md|secrets-management]]
-- [[pod-lifecycle]]
+相比 Chaos Mesh（Pod 级混沌），Krkn 更关注节点和集群级故障注入。相比 LitmusChaos，Krkn 更专注于 OpenShift/K8s 基础设施混沌。
 
 ## Related
 

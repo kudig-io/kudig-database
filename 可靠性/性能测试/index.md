@@ -19,6 +19,8 @@ last_updated: 2026-07
 
 - [[可靠性/性能测试/01-load-testing-methodology.md|Load Testing Methodology]]
 - [[可靠性/性能测试/02-chaos-load-integration.md|Chaos Load Integration]]
+- [[可靠性/性能测试/02-k6-load-testing-k8s.md|K6 Load Testing K8s]]
+- [[可靠性/性能测试/03-locust-distributed-testing.md|Locust Distributed Testing]]
 - [[可靠性/性能测试/03-benchmarking-methodology-kube-burner.md|Benchmarking Methodology Kube Burner]]
 - [[可靠性/性能测试/04-production-load-testing-playbook.md|Production Load Testing Playbook]]
 

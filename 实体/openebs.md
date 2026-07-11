@@ -16,7 +16,7 @@ tags:
 - rag
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,33 +47,63 @@ prerequisites:
 
 ## 概述
 
-OpenEBS 是领先的容器原生存储解决方案，将存储控制器作为容器运行，实现了存储的容器化和微服务化。它提供多种存储引擎，支持本地存储 (Local PV) 和分布式复制存储 (Replicated PV)，适用于有状态应用的各种场景。
+OpenEBS 是领先的容器原生存储（Container-Native Storage）解决方案，由 MayaData 开发，2019 年加入 CNCF Sandbox。它将存储控制器作为容器运行，实现了存储的容器化和微服务化。OpenEBS 提供多种存储引擎，支持本地存储（Local PV）和分布式复制存储（Replicated PV/Mayastor），适用于有状态应用的各种场景。它是 Kubernetes 生态中使用最广泛的开源 CSI 存储项目之一。
 
-## 核心能力
+## 核心特性
 
-- **容器原生**: 存储控制器以 Pod 形式运行
-- **多存储引擎**: Local PV、cStor、Jiva、Mayastor
-- **声明式配置**: 使用 CRD 管理存储资源
-- **快照与克隆**: 支持卷快照和克隆操作
+- **容器原生架构**: 存储控制器和数据平面均以 Pod 形式运行
+- **多存储引擎**: Local PV（Hostpath/Device/RAM）、Mayastor（SPDK 高性能）、cStor
+- **CSI 原生**: 完全基于 Container Storage Interface 实现
+- **快照与克隆**: 支持 VolumeSnapshot 和 PVC Clone
 - **备份恢复**: 集成 Velero 实现灾难恢复
-- **性能调优**: 针对不同负载优化存储配置
+- **监控集成**: 内置 Prometheus 指标和 Grafana 仪表盘
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+OpenEBS 采用微服务存储架构。核心组件包括：MayaStor（高性能存储引擎，基于 SPDK 用户态块设备）、Local PV（直接使用节点磁盘，零开销）、cStor（基于 ZFS 的复制存储引擎）。每个存储卷对应一个 Target Pod（iSCSI/NVMe-oF Target）和多个 Replica Pod。Target Pod 接收来自 CSI Plugin 的 I/O 请求，同步写入 Replica。Provisioner 监听 PVC 创建请求，自动分配存储和创建 Target/Replica。Mayactor Operator 管理存储池和卷的生命周期。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **引擎选择**: 高性能场景用 Mayastor，简单场景用 Local PV
-- **磁盘规划**: 使用专用磁盘，避免与系统盘混用
-- **副本策略**: 生产环境至少 3 副本
-- **备份策略**: 结合 Velero 实现定期备份
-- **资源限制**: 为存储组件设置合理的资源限制
-- **监控告警**: 监控存储池容量和 I/O 性能
+OpenEBS 通过 CSI Driver 与 Kubernetes 集成。部署为 DaemonSet（mayastor、node operator）和 Deployment（provisioner、API server）。StorageClass 定义使用哪个 OpenEBS 引擎和参数。支持标准的 PVC → PV 映射、VolumeSnapshot 和 Clone。Local PV 模式直接使用节点磁盘，无网络开销，适合需要极低延迟的数据库。Mayastor 使用 NVMe-oF 协议提供跨节点复制能力。
+
+## 生产使用场景
+
+1. **数据库存储**: 为 PostgreSQL、MongoDB 等 StatefulSet 提供高性能持久卷
+2. **本地存储加速**: 使用 Local PV 直连 NVMe/SSD，实现最高 IOPS
+3. **Dev/Test 环境**: 在共享集群上为每个团队提供隔离的存储空间
+4. **Kafka/Elasticsearch**: 为分布式消息队列和搜索引擎提供复制存储
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add openebs https://openebs.github.io/openebs
+helm install openebs openebs/openebs -n openebs --create-namespace
+# 使用 Local PV
+kubectl apply -f - <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata: { name: openebs-local }
+provisioner: openebs.io/local
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+EOF
+# 或使用 Mayastor
+kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/mayastor.yaml
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **OpenEBS** | 多引擎、CSI 原生 | 引擎选择复杂、cStor 性能一般 |
+| Longhorn | 部署简单、UI 友好 | 仅块存储、性能不如 Mayastor |
+| Rook/Ceph | 功能最全面 | 资源开销大、运维复杂 |
+| TopoLVM | 高性能 LVM | 功能较少 |
 
 ## 架构定位
 
-在 CNCF 生态中，openebs 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，OpenEBS 属于 **Storage** 类别，是容器原生存储的代表性项目。它的多引擎架构使其能适配从本地高性能到分布式复制等多种场景。
 
 ## 参考链接
 

@@ -16,7 +16,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,32 +48,66 @@ prerequisites:
 
 ## 概述
 
-KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。它提供无服务器推理、自动扩缩容、金丝雀部署和模型解释能力，支持 TensorFlow、PyTorch、scikit-learn、XGBoost 等主流框架。
+KServe（前身 KFServing）是 Kubeflow 孵化、现独立运营的 Kubernetes 标准化模型推理平台，2022 年加入 CNCF Incubating。它提供无服务器推理（Serverless Inference）、自动扩缩容、金丝雀部署和模型解释能力，支持 TensorFlow、PyTorch、scikit-learn、XGBoost、ONNX 等主流 ML 框架。KServe 通过统一的推理协议简化了从模型训练到生产部署的流程，是云原生 MLOps 的核心组件。
 
-## 核心能力
+## 核心特性
 
-- **标准化接口**: 统一的 V1/V2 推理协议
-- **多框架支持**: TensorFlow、PyTorch、Triton、ONNX、XGBoost 等
-- **Serverless**: 基于 Knative 的自动扩缩容（可缩至零）
+- **标准化推理协议**: 统一的 V1（REST）和 V2（gRPC/REST）推理协议
+- **多框架 InferenceRuntime**: 支持 PyTorch、TensorFlow、Triton、ONNX、XGBoost、HuggingFace
+- **Serverless**: 基于 Knative 的自动扩缩容，支持缩容到零
 - **高级部署**: 金丝雀发布、A/B 测试、蓝绿部署
-- **模型解释**: 集成 Alibi Explainer 提供可解释性
-- **GPU 支持**: 自动 GPU 调度和资源管理
+- **模型解释**: 集成 Alibi Explainer 提供预测可解释性
+- **GPU 支持**: 自动 GPU 调度、显存管理和多模型共享
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+KServe 由 KServe Controller、InferenceService CRD 和 Model Agent 组成。Controller 监听 InferenceService CRD，创建 Knative Service（或原生 Deployment）。InferenceService 定义推理服务规格——Predictor（模型存储 URI、框架、资源）、Transformer（预处理/后处理）、Explainer（模型解释）。每个 Pod 包含 Model Agent（拉取模型权重）和 Model Server（运行推理）。基于 Knative 的 Activator 实现冷启动——流量到达时自动扩容从零到一。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **模型版本管理**: 使用 storageUri 路径区分版本
-- **资源配置**: 根据模型大小配置合适的 memory/GPU
-- **健康检查**: 配置 liveness/readiness probe
-- **预热**: 生产环境设置 min-scale >= 1 避免冷启动
-- **监控告警**: 监控推理延迟和错误率
+KServe 通过 InferenceService CRD 声明式管理推理服务。InferenceService 定义模型来源（storageUri）、运行时（框架）、资源配置（CPU/GPU/Memory）。Controller 创建 Knative Service 或原生 K8s Service + Deployment。基于 Knative KPA（Knative Pod Autoscaler）实现从零到 N 的自动扩缩容。与 Istio/Kourier 等 Ingress/Gateway 集成暴露推理端点。通过 KServe Model Agent 从 S3/GCS/HuggingFace 拉取模型。
+
+## 生产使用场景
+
+1. **模型生产部署**: 将训练好的 ML 模型部署为可伸缩的推理 API
+2. **金丝雀发布**: 将 10% 流量导入新版本模型，验证效果后全量切换
+3. **GPU 成本优化**: 使用 Scale-to-Zero 在无请求时释放 GPU 资源
+4. **多模型部署**: 在同一 GPU 上部署多个模型共享计算资源
+
+## 安装
+
+```bash
+# 安装 Knative（KServe 依赖）
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.14.0/serving-core.yaml
+# 安装 KServe
+kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.12.1/kserve.yaml
+# 部署推理服务
+kubectl apply -f - <<EOF
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata: { name: iris-classifier }
+spec:
+  predictor:
+    minReplicas: 1
+    pytorch:
+      storageUri: s3://models/iris
+      resources:
+        limits: { nvidia.com/gpu: 1 }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **KServe** | CNCF Incubating、标准协议 | Knative 依赖较重 |
+| Seldon Core | 功能丰富、企业级 | 架构复杂 |
+| BentoML | 端到端 MLOps | 非 K8s 原生 |
+| Triton Inference Server | NVIDIA 官方、高性能 | 仅 NVIDIA GPU |
 
 ## 架构定位
 
-在 CNCF 生态中，kserve 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，KServe 属于 **AI/ML / Serverless** 类别，是云原生模型推理的标准化平台。它定义了推理服务的通用 API 标准。
 
 ## 参考链接
 

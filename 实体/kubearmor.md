@@ -16,7 +16,7 @@ tags:
 - ebpf
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,33 +48,68 @@ prerequisites:
 
 ## 概述
 
-KubeArmor 是一个云原生运行时安全引擎，利用 Linux 安全模块 (LSM - AppArmor, BPF-LSM, SELinux) 在系统级别执行安全策略。它保护 Kubernetes Pod、容器和节点免受已知和未知的威胁，包括进程执行、文件访问和网络操作的细粒度控制。
+KubeArmor 是由 Accuknox 开发的云原生运行时安全引擎，2021 年加入 CNCF Sandbox。它利用 Linux 安全模块（LSM - AppArmor、BPF-LSM、SELinux）在系统级别执行安全策略，保护 Kubernetes Pod、容器和节点免受已知和未知的威胁。KubeArmor 提供进程执行、文件访问和网络操作的细粒度控制，是容器运行时安全防护的重要工具。
 
-## 核心能力
+## 核心特性
 
-- **LSM 强制执行**: 基于 AppArmor/BPF-LSM/SELinux 内核级安全
-- **进程控制**: 限制容器内可执行的进程
-- **文件保护**: 控制文件/目录的读写访问
-- **网络控制**: 限制容器的网络行为
-- **系统调用过滤**: 细粒度的 syscall 控制
-- **可观测性**: 实时安全遥测数据
+- **LSM 强制执行**: 基于 AppArmor、BPF-LSM、SELinux 的内核级安全策略
+- **进程控制**: 限制容器内可执行的进程（白名单/黑名单）
+- **文件保护**: 控制文件和目录的读写执行访问
+- **网络控制**: 限制容器的网络连接行为
+- **系统调用过滤**: 细粒度的 syscall 控制（基于 seccomp）
+- **安全遥测**: 实时安全事件日志和 Prometheus 指标
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+KubeArmor 由 KubeArmor Operator（管理策略部署）、KubeArmor DaemonSet（每个节点的策略执行器）和 Policy CRD 组成。DaemonSet 中的 KubeArmor 进程监听 K8s API 获取 KubeArmorPolicy 和 KubeArmorHostPolicy CRD，将策略翻译为 AppArmor Profile 或 BPF-LSM 程序，加载到容器运行时和主机内核。当容器内进程触发策略规则时，LSM 拦截操作（Allow/Audit/Block），KubeArmor 将安全事件记录为日志并导出为 Prometheus 指标。karmor CLI 工具辅助策略生成和测试。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **审计优先**: 先以 audit 模式运行，了解应用行为
-- **推荐策略**: 使用 `karmor recommend` 生成基线策略
-- **最小权限**: 使用 Allow 模式实现白名单
-- **渐进收紧**: 从宽松策略逐步收紧
-- **监控告警**: 配置安全事件告警
-- **容器加固**: 配合 seccomp 和 capabilities 使用
+KubeArmor 通过 KubeArmorPolicy CRD（命名空间级）和 KubeArmorHostPolicy CRD（节点级）声明式管理安全策略。策略通过标签选择器匹配目标 Pod。DaemonSet 以特权模式运行，加载 LSM 策略到节点内核。支持三种策略动作：Allow（白名单模式，仅允许列出的操作）、Audit（记录但不阻止）、Block（阻止并记录）。与容器运行时（containerd、CRI-O）集成，自动为容器应用 AppArmor Profile。
+
+## 生产使用场景
+
+1. **容器加固**: 限制容器只能执行必要的进程和访问必要的文件
+2. **合规要求**: 满足 PCI-DSS、HIPAA 等安全合规对运行时防护的要求
+3. **零信任安全**: 实施 "deny by default" 策略，最小化攻击面
+4. **入侵检测**: 以 Audit 模式运行，检测异常进程执行和文件访问
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add kubearmor https://kubearmor.github.io/charts
+helm install kubearmor kubearmor/kubearmor-operator -n kubearmor --create-namespace
+# 应用安全策略
+kubectl apply -f - <<EOF
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata: { name: ksp-block-exec }
+spec:
+  severity: 8
+  selector:
+    matchLabels: { app: web }
+  process:
+    matchPaths:
+    - path: /bin/bash
+  action: Block
+EOF
+# 生成策略建议
+karmor recommend --pod web-app
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **KubeArmor** | LSM 内核级、策略丰富 | LSM 支持因 OS 而异 |
+| Falco | 运行时检测、eBPF 原生 | 仅检测，不执行阻止 |
+| Tetragon | eBPF 高性能 | 配置复杂 |
+| NeuVector | 全栈安全 | 商业产品 |
 
 ## 架构定位
 
-在 CNCF 生态中，kubearmor 属于 **Security** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，KubeArmor 属于 **Security / Runtime Protection** 类别，是容器运行时强制执行（Enforcement）的代表性项目。它与 Falco（检测）、Cilium（网络）互补。
 
 ## 参考链接
 

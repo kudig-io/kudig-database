@@ -13,7 +13,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -35,35 +35,81 @@ prerequisites:
 
 
 
-
 # Podman Desktop
 
 > **CNCF 状态**: Sandbox | **类别**: Runtime | **主要语言**: TypeScript, Svelte
 
 ## 概述
 
-Podman Desktop 是一个开源的图形化容器管理工具，为开发者提供在本地管理容器、Pod 和 Kubernetes 的统一桌面体验。它支持 Podman、Docker、Lima 等多种容器引擎，并提供可扩展的插件系统，帮助开发者在 macOS、Windows 和 Linux 上无缝进行云原生开发。
+Podman Desktop 是由 Red Hat 开发的开源桌面容器管理工具（与 Podman Container Tools 系列同属一个生态），2022 年进入 CNCF Sandbox。它为 macOS、Windows 和 Linux 开发者提供统一的图形化界面来管理容器、镜像、Pod 和 Kubernetes 集群。Podman Desktop 以 **Podman 引擎**为核心，同时兼容 Docker、containerd、Lima 等其他容器运行时，帮助开发者从本地开发无缝过渡到 Kubernetes 生产环境。
 
-## 核心能力
+Podman Desktop 的核心差异化在于 **Rootless + Daemonless 架构**——基于 Podman 的非特权容器运行模式，开发者无需 root 权限和后台 daemon 即可运行容器。它集成了 Kind、Minikube、Developer Sandbox 等 Kubernetes 本地发行版管理，开发者可以一键创建/销毁本地 K8s 集群进行端到端测试。可扩展的插件系统允许第三方集成自定义功能。
 
-- 详见源文档获取完整信息 ^[inferred]
+## Key Features
+
+- **多引擎支持**：统一界面管理 Podman（默认）、Docker、Lima、containerd 等容器引擎
+- **Rootless 容器**：基于 Podman 的 rootless 模式，无需 root/daemon 运行容器
+- **本地 K8s 管理**：集成 Kind、Minikube、CRC（OpenShift Local）创建/管理本地集群
+- **Pod 管理**：创建和管理 Podman Pod，可导出为 Kubernetes YAML
+- **镜像构建**：Containerfile/Dockerfile 构建支持，多架构镜像构建
+- **扩展系统**：插件化架构，支持自定义功能和第三方集成
+
+## Architecture
+
+Podman Desktop 基于 **Electron + TypeScript + Svelte** 构建。前端通过 Podman/Docker API（REST API over Unix Socket 或 TCP）与底层容器引擎通信。在 macOS/Windows 上，Podman Desktop 通过 **Podman Machine**（基于 Lima/WSL2 的 Linux 虚拟机）运行 Linux 容器。扩展系统使用 VS Code Extension API 风格，允许社区贡献 UI 面板、命令和功能集成。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Podman Desktop 深度集成 Kubernetes 工作流。可以将 Podman Pod 一键导出为 Kubernetes Deployment YAML（`podman generate kube`），也可直接连接远程 Kubernetes 集群管理资源。内置 Kind 集成允许快速创建本地 K8s 集群，推送镜像到集群内部 Registry 进行端到端测试。
 
 ## 生产部署要点
 
-- **Rootless 模式**: 优先使用 Podman 的 rootless 模式提升安全性
-- **资源管理**: 在 Settings 中合理配置 Podman Machine 的 CPU 和内存
-- **镜像清理**: 定期使用 `podman system prune` 清理未使用的资源
-- **Compose 优先**: 多容器开发使用 Compose 文件管理，便于团队共享
-- **Kind 开发**: 使用 Kind 集群进行本地 Kubernetes 开发和测试
-- **扩展开发**: 利用扩展 API 自定义开发工作流
+- **Rootless 模式**：优先使用 Podman 的 rootless 模式提升安全性
+- **资源管理**：在 Settings 中合理配置 Podman Machine 的 CPU 和内存
+- **镜像清理**：定期使用 `podman system prune` 清理未使用的资源
+- **Compose 优先**：多容器开发使用 Compose 文件管理，便于团队共享
+- **Kind 开发**：使用 Kind 集群进行本地 Kubernetes 开发和测试
+- **扩展开发**：利用扩展 API 自定义开发工作流
 
-## 架构定位
+## 生产场景
 
-在 CNCF 生态中，podman-desktop 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+1. **本地容器开发**：开发者构建、运行、调试容器化应用
+2. **Kubernetes YAML 生成**：从 Podman Pod 生成 K8s YAML，用于部署到生产集群
+3. **多集群测试**：使用 Kind 创建多个本地集群，测试多集群场景
+4. **安全开发**：Rootless 模式确保开发环境不影响宿主系统
+
+## 安装
+
+```bash
+# macOS
+brew install --cask podman-desktop
+
+# Windows (winget)
+winget install RedHat.Podman-Desktop
+
+# Linux (Flatpak)
+flatpak install flathub io.podman_desktop.PodmanDesktop
+
+# 从源码构建（开发模式）
+git clone https://github.com/containers/podman-desktop
+cd podman-desktop
+yarn install
+yarn dev
+
+# 安装 Podman 引擎并初始化 Machine
+brew install podman
+podman machine init
+podman machine start
+```
+
+## 对比
+
+| 特性 | Podman Desktop | Docker Desktop | Rancher Desktop | OrBStack |
+|------|---------------|----------------|-----------------|----------|
+| 开源 | ✅ Apache 2.0 | ❌ 商业 | ✅ Apache 2.0 | ❌ |
+| Rootless | ✅ | ❌ | ⚠️ | ✅ |
+| 扩展系统 | ✅ | ✅ Extensions | ⚠️ | ❌ |
+| 商业许可 | ❌ 无限制 | ✅ 大企业付费 | ❌ | ❌ |
 
 ## 参考链接
 

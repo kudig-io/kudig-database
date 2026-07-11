@@ -10,8 +10,8 @@ tier: core
 sources:
 - KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
-updated: 2026-05-21
-last_updated: 2026-05-21
+updated: 2026-07
+last_updated: 2026-07
 status: reviewed
 ---
 
@@ -90,7 +90,89 @@ PVC 一直停留在 `Pending` 状态是存储类问题的典型表现，诊断�
 - **检查资源配额**：确认命名空间的 `ResourceQuota` 是否限制了 PVC 或存储类的使用
 - **查看事件**：`kubectl describe pvc <name>` 中的 Events 通常会给出具体失败原因
 
-更多存储排错方法请参考 [[故障诊断/资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]。
+## 技术深度解析
+
+### PV-PVC 绑定机制
+
+Kubernetes 的 PV-PVC 绑定由 `PersistentVolumeController` 异步执行，绑定过程：
+
+```
+1. 用户创建 PVC（指定 capacity, accessModes, storageClassName）
+2. PV Controller 检测到新 PVC
+   → 如果 PVC 设置了 storageClassName: 触发动态供给流程
+   → 如果 PVC 未设置 storageClassName: 查找匹配的静态 PV
+3. 动态供给: StorageClass 的 Provisioner 调用云 API 创建存储卷
+   → 创建成功: 生成新 PV 对象
+   → 创建失败: PVC 保持 Pending，记录失败事件
+4. PV Controller 将 PV 和 PVC 绑定（设置 claimRef）
+5. PVC 状态变为 Bound
+```
+
+### CSI 快照机制
+
+VolumeSnapshot 是 CSI 规范定义的存储快照能力：
+
+```yaml
+# 创建 VolumeSnapshot
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: db-snapshot-daily
+spec:
+  volumeSnapshotClassName: csi-snapshot-class
+  source:
+    persistentVolumeClaimName: database-pvc
+---
+# 从快照创建新 PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-restored
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: fast-ssd
+  dataSource:
+    name: db-snapshot-daily
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+```
+
+### 生产 PVC 定义示例
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-storage
+  labels:
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteOnce                   # 块存储仅支持 RWO
+  storageClassName: fast-ssd          # 高性能 SSD StorageClass
+  resources:
+    requests:
+      storage: 200Gi
+```
+
+## 最佳实践
+
+- **为有状态应用使用 StatefulSet + volumeClaimTemplates**：StatefulSet 自动为每个 Pod 创建独立 PVC，确保数据隔离和稳定的 PVC 命名
+- **选择正确的 accessMode**：数据库等需要独占访问的使用 RWO；文件共享场景使用 RWX（需 NAS/NFS 支持）；不要对块存储 PVC 请求 RWX
+- **设置合理的容量**：PVC 容量一旦创建通常不可缩减（部分 CSI 驱动支持扩容），建议预留 30% 增长空间
+- **配置 StorageClass 的 volumeBindingMode: WaitForFirstConsumer**：确保 PV 创建在 Pod 调度的节点所在可用区——避免跨区存储延迟
+- **定期创建 VolumeSnapshot**：配合 Velero 实现定时快照备份，RPO 控制在 24 小时以内
+
+## 常见陷阱
+
+- **PVC Pending 因可用区不匹配**：云盘通常绑定特定可用区，如果 Pod 被调度到不同 AZ 的节点，PVC 无法挂载——使用 `WaitForFirstConsumer` 绑定模式
+- **PVC 扩容需要存储驱动支持**：不是所有 CSI 驱动都支持在线扩容——扩容前确认 StorageClass 的 `allowVolumeExpansion: true`
+- **删除 PVC 不会自动删除 PV**：默认 PV reclaimPolicy 为 Retain，删除 PVC 后 PV 变为 Released 状态但数据仍在——需要手动清理或设置 Delete 策略
+
+更多存储排错方法请参考 [[故障诊断/资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]，备份恢复策略参见 [[概念/data-protection-k8s.md|data-protection-k8s]]。
 
 ## Related
 

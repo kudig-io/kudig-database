@@ -16,7 +16,7 @@ tags:
 - rag
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -46,28 +46,63 @@ prerequisites:
 
 ## 概述
 
-K8up 是一个 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolume 的自动化备份。它通过 CRD 声明式管理备份、恢复、归档和清理策略，支持将备份存储到 S3、GCS、Azure Blob 等对象存储后端。
+K8up 是由 Appuio 开发的 Kubernetes 备份 Operator，基于 Restic 实现 PersistentVolume 的自动化备份。2020 年加入 CNCF Sandbox。K8up 通过 CRD 声明式管理备份（Backup）、恢复（Restore）、归档（Archive）和清理（Prune）策略，支持将备份存储到 S3、GCS、Azure Blob、MinIO 等对象存储后端。它专注于 Kubernetes 原生的备份体验，让备份策略像应用配置一样通过 GitOps 管理。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Restic 引擎**: 基于成熟工具 Restic 实现增量、加密、去重备份
+- **声明式 CRD**: 通过 Backup/Restore/Archive/Prune/Schedule CRD 管理
+- **多存储后端**: S3、GCS、Azure Blob、MinIO、SFTP 等
+- **数据库钩子**: 支持 preBackupCommands 注解执行数据库一致性转储
+- **Prometheus 指标**: 暴露备份成功/失败指标，支持告警集成
+- **Namespace 隔离**: 每个命名空间可独立配置备份策略
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+K8up 由 Operator 和 Executor 组成。Operator（Deployment）监听 K8up CRD 变更，为每个备份任务创建 Executor Job。Executor Pod 挂载目标 PVC，使用 Restic 将数据备份到配置的对象存储。Schedule CRD 定义定时备份计划，Operator 根据计划自动创建 Backup 任务。备份仓库密码存储在 Kubernetes Secret 中，Restic 仓库使用 AES-256 加密。Prune 任务根据保留策略（如 keep-daily 7、keep-weekly 4）清理旧备份。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **定期测试恢复**: 不要只测试备份，定期验证恢复流程
-- **数据库钩子**: 使用 backupcommand 注解执行数据库一致性转储
-- **保留策略**: 根据合规要求配置合理的保留策略
-- **加密**: 使用强密码保护 Restic 仓库，密码存储在 Kubernetes Secret 中
-- **完整性检查**: 定期运行 Check 验证备份数据完整性
-- **监控告警**: 基于 `k8up_backup_failure_total` 配置告警
+K8up 完全基于 Kubernetes 原生 API。通过 CRD 定义备份策略，通过 Operator 管理执行。Backup CRD 可注解到 PVC 或 Pod 上实现自动备份。preBackupCommands 注解允许在备份前执行命令（如 `pg_dump`）。通过 ServiceAccount 和 RBAC 控制备份范围。Prometheus ServiceMonitor 集成实现监控告警。
+
+## 生产使用场景
+
+1. **PVC 定期备份**: 为有状态应用（数据库、文件存储）的 PV 配置每日增量备份
+2. **数据库一致性备份**: 通过 preBackupCommands 执行 `pg_dump` 或 `mongodump`
+3. **跨集群备份**: 将备份推送到 S3，在另一个集群恢复
+4. **合规归档**: 将备份归档到冷存储满足合规要求
+
+## 安装
+
+```bash
+helm repo add appuio https://charts.appuio.ch
+helm install k8up appuio/k8up
+# 创建备份计划
+kubectl apply -f - <<EOF
+apiVersion: k8up.io/v1
+kind: Schedule
+metadata: { name: daily-backup }
+spec:
+  backup:
+    schedule: '0 2 * * *'
+  prune:
+    schedule: '0 4 * * *'
+    retention: { keepDaily: 7 }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **K8up** | Restic 引擎、声明式、轻量 | 仅 PV 级别备份 |
+| Velero | 功能全面（资源+PV）、CNCF 生态主流 | 较重、插件依赖多 |
+| Kasten K10 | 企业级、应用感知备份 | 商业产品 |
+| Longhorn Backup | 与 Longhorn 深度集成 | 仅限 Longhorn 存储 |
 
 ## 架构定位
 
-在 CNCF 生态中，k8up 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，K8up 属于 **Storage / Backup** 类别，专注于轻量级的 PV 级别备份。它与 Velero 互补，适合需要简洁声明式备份的场景。
 
 ## 参考链接
 

@@ -15,7 +15,7 @@ tags:
 - agent
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -38,35 +38,97 @@ prerequisites:
 
 
 
-
 # Serverless Devs
 
 > **CNCF 状态**: Sandbox | **类别**: Serverless | **主要语言**: TypeScript / JavaScript
 
 ## 概述
 
-Serverless Devs 是一个开源的 Serverless 开发者平台和命令行工具，致力于为开发者提供强大便捷的 Serverless 应用全生命周期管理能力。项目采用组件化设计，支持多云厂商的 Serverless 服务，让开发者能够使用统一的开发体验在不同云平台上开发、部署和管理 Serverless 应用。
+Serverless Devs 是由阿里云（中国信息通信研究院联合发起）开发的开源 Serverless 开发者工具平台，2021 年进入 CNCF Sandbox。它致力于为开发者提供统一的 Serverless 应用全生命周期管理能力——从本地开发、调试、部署到运维监控。项目采用**组件化（Component）设计**，通过统一的 CLI 和 YAML 规范抽象不同云厂商的 Serverless 服务，让开发者获得跨云的一致体验。
 
-## 核心能力
+Serverless Devs 的核心差异化在于**多云无锁定（Multi-Cloud, No Lock-in）**——同一份 `s.yaml` 配置可以部署到阿里云函数计算（FC）、AWS Lambda、腾讯云 SCF、华为云 FG 等不同云厂商。它由**Serverless CLI**（命令行工具）、**组件生态**（cloud-infra、fc、lambda 等可插拔组件）和**Serverless Application Model**（统一应用描述规范）构成。
 
-- **fc**: 阿里云函数计算组件
-- **fc-domain**: 自定义域名管理
-- **fc-api**: API 网关配置
-- **lambda**: AWS Lambda 组件
-- **scf**: 腾讯云云函数组件
-- **layer**: 层(依赖)管理组件
+## Key Features
+
+- **多云统一**：阿里云 FC、AWS Lambda、腾讯云 SCF、华为云 FG 统一 CLI 体验
+- **组件化架构**：通过组件（Component）扩展支持不同 Serverless 平台
+- **s.yaml 规范**：Serverless Application Model 声明式描述应用
+- **本地调试**：本地模拟 Serverless 运行环境进行调试
+- **CI/CD 集成**：通过 CLI 脚本无缝集成到 CI/CD 管道
+- **应用监控**：查看函数调用日志、性能指标和追踪信息
+
+## Architecture
+
+Serverless Devs 由 **Serverless CLI（s）**（主命令行工具）、**Component System**（组件系统，每个组件对应一种 Serverless 平台或服务）、**s.yaml**（应用描述文件）和**Package Registry**（组件仓库，类似 npm registry）组成。CLI 读取 `s.yaml` 中的应用定义，根据 `component` 字段加载对应组件（如 `fc` 或 `lambda`），将声明式配置翻译为目标平台的 API 调用。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Serverless Devs 支持 Kubernetes 上的 Serverless 部署。通过 `kubeless` 或 `knative` 组件，可以将函数部署到 K8s 中的 Serverless 平台。也支持部署到阿里云 ACK Serverless（基于虚拟节点和弹性容器实例），获得 Serverless 的弹性伸缩体验。
 
 ## 生产部署要点
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **组件选择**：根据目标云平台选择对应的组件版本
+- **密钥管理**：使用 `s config` 安全管理不同云厂商的 access key
+- **环境隔离**：为 dev/staging/prod 维护独立的 s.yaml 配置
+- **CI/CD 集成**：在流水线中使用 `s deploy --use-local` 实现自动化部署
+- **监控接入**：配置日志和追踪输出到统一监控平台
 
-## 架构定位
+## 生产场景
 
-在 CNCF 生态中，serverless-devs 属于 **Serverless** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+1. **多云 Serverless 部署**：同一函数部署到阿里云 FC 和 AWS Lambda，实现多云容灾
+2. **事件驱动应用**：上传文件触发图像处理函数，API 请求触发计算函数
+3. **定时任务**：Cron 触发的数据同步和报表生成函数
+4. **API 后端**：Serverless 化的 RESTful API，按需弹性扩缩
+
+## 安装
+
+```bash
+# 安装 Serverless Devs CLI（npm）
+npm install -g @serverless-devs/s
+
+# 或使用安装脚本
+curl -fsSL https://serverless-ai.oss-cn-hangzhou.aliyuncs.com/install.sh | bash
+
+# 配置云厂商密钥
+s config add --AccessKeyID xxx --AccessKeySecret yyy -a default
+
+# 初始化新项目
+s init devsapp/start-fc-http-nodejs14
+cd start-fc-http-nodejs14
+
+# 编辑 s.yaml
+cat > s.yaml <<EOF
+edition: 3.0.0
+name: my-app
+access: default
+vars:
+  region: cn-hangzhou
+resources:
+  hello_world:
+    component: fc3
+    props:
+      region: \${vars.region}
+      functionName: hello-world
+      runtime: nodejs18
+      handler: index.handler
+      code:
+        source: ./code
+EOF
+
+# 部署
+s deploy
+# 调用
+s invoke
+```
+
+## 对比
+
+| 特性 | Serverless Devs | Serverless Framework | SAM | funcraft |
+|------|----------------|---------------------|-----|----------|
+| 多云 | ✅ 阿里云/AWS/腾讯 | ✅ 多云 | ❌ AWS only | ❌ 阿里云 only |
+| 开源 | ✅ | ⚠️ 核心 | ✅ | ✅ |
+| 组件生态 | ✅ Registry | ✅ Plugins | ⚠️ | ❌ |
+| K8s 支持 | ⚠️ | ✅ | ❌ | ❌ |
 
 ## 参考链接
 

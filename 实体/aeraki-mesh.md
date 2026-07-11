@@ -16,7 +16,7 @@ tags:
 - kafka
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -50,27 +50,64 @@ prerequisites:
 
 ## 概述
 
-Aeraki Mesh 是 Istio 服务网格的扩展框架，专注于为非 HTTP 协议提供流量管理能力。在微服务架构中，除了 HTTP/gRPC 之外，还广泛使用 Dubbo、Thrift、Redis、Kafka 等协议。Aeraki Mesh 通过扩展 Istio 的数据面（Envoy）和控制面，使这些非 HTTP 协议也能享受服务网格的流量路由、负载均衡、熔断限流和可观测性能力。
+Aeraki Mesh 是由美团开源的 Istio 服务网格扩展框架，2021 年加入 CNCF Sandbox。它专注于为非 HTTP 协议提供流量管理能力。在微服务架构中，除了 HTTP/gRPC 之外，还广泛使用 Dubbo、Thrift、Redis、Kafka 等协议。Aeraki Mesh 通过扩展 Istio 的数据面（Envoy）和控制面，使这些非 HTTP 协议也能享受服务网格的流量路由、负载均衡、熔断限流和可观测性能力。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **多协议管理**: Dubbo、Thrift、Redis、Kafka、RocketMQ、Zookeeper 等协议
+- **MetaProtocol**: 通用协议扩展框架，支持自定义协议
+- **MetaRouter CRD**: 类似 VirtualService 的协议级路由规则
+- **Istio 集成**: 与 Istio 控制平面无缝集成，共享 mTLS 和可观测性
+- **Redis 读写分离**: 自动解析 Redis 协议实现读写路由
+- **Dubbo 灰度**: 基于 Dubbo 服务名的版本路由和流量比例控制
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Aeraki Mesh 在 Istio 架构上增加了两个组件。Aeraki（控制面扩展）作为 Istio 的翻译器，监听 MetaRouter CRD 和 Istio Service Entry，将非 HTTP 协议的治理规则翻译为 Envoy 过滤器链配置，通过 xDS 下发。数据面上，Aeraki 为 Envoy 注入 MetaProtocol Proxy 或专用协议 Filter（如 Dubbo Proxy、Redis Proxy），在 L7 解析协议元数据（方法名、服务名、参数）进行路由决策。Aeraki 也支持 RDS（Route Discovery Service）动态下发路由规则。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **协议识别**: 确保 [[Service|Service]] 端口命名遵循 Istio 协议识别规范 (如 `tcp-dubbo`)
-- **版本灰度**: 使用 MetaRouter 进行 Dubbo 版本灰度发布，结合权重控制流量比例
-- **Redis 读写分离**: 利用 Redis 协议解析能力实现自动读写分离
-- **指标采集**: 启用 Aeraki 协议指标，配合 Prometheus + Grafana 监控非 HTTP 服务
-- **渐进扩展**: 先用 MetaProtocol 管理核心协议，再逐步扩展到更多自定义协议
+Aeraki Mesh 作为 Istio 的扩展部署。它监听 Kubernetes API 中的 MetaRouter CRD 和 Service Entry，通过 Istio 的 Sidecar 注入机制安装 Envoy 扩展 Filter。`Service` 端口命名（如 `tcp-dubbo`、`tcp-redis`）触发 Aeraki 应用对应协议的 Filter。MetaRouter CRD 与 VirtualService 并行工作，VirtualService 管 HTTP，MetaRouter 管非 HTTP。与 Istio 的 mTLS、AuthorizationPolicy 等安全机制完全兼容。
+
+## 生产使用场景
+
+1. **Dubbo 微服务网格**: 将 Java Dubbo 服务纳入网格管理，实现灰度发布和流量控制
+2. **Redis 读写分离**: 自动将读请求路由到 Replica，写请求路由到 Master
+3. **Kafka 流量管理**: 对 Kafka 消息流量进行限流和监控
+4. **Thrift 服务治理**: 为 PHP/Thrift 服务提供熔断和超时能力
+
+## 安装
+
+```bash
+# 前置: Istio 已安装
+istioctl install --set profile=default
+# 安装 Aeraki
+kubectl apply -f https://raw.githubusercontent.com/aeraki-mesh/aeraki/main/deploy/aeraki.yaml
+# 配置 Dubbo 路由
+kubectl apply -f - <<EOF
+apiVersion: metaprotocol.aeraki.io/v1beta1
+kind: MetaRouter
+metadata: { name: dubbo-router }
+spec:
+  hosts: ["org.apache.dubbo.demo.DemoService..*..*"]
+  routes:
+  - match: { metadata: { method: { exact: "sayHello" } } }
+    route: { cluster: outbound|20880||dubbo-demo.v1 }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Aeraki Mesh** | 多协议管理、Istio 兼容 | 社区较小 |
+| Istio 原生 | HTTP/gRPC 全面支持 | 非 HTTP 协议支持有限 |
+| Spring Cloud | Java 原生治理 | 需引入 Spring Cloud SDK |
+| Envoy Filter 手动配置 | 完全自定义 | 维护成本极高 |
 
 ## 架构定位
 
-在 CNCF 生态中，aeraki-mesh 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Aeraki Mesh 属于 **Networking / Service Mesh** 类别，是 Istio 在非 HTTP 协议治理方面的重要补充。它解决了传统服务网格仅覆盖 HTTP 的局限性。
 
 ## 参考链接
 

@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,33 +47,64 @@ prerequisites:
 
 ## 概述
 
-Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点登录（SSO）、身份联合、用户管理和细粒度授权功能。它支持 OpenID Connect、OAuth 2.0 和 SAML 2.0 标准协议。
+Keycloak 是由 Red Hat 开源的身份和访问管理（IAM）解决方案，2023 年加入 CNCF Incubating。它提供单点登录（SSO）、身份联合、用户管理和细粒度授权功能，支持 OpenID Connect（OIDC）、OAuth 2.0 和 SAML 2.0 标准协议。Keycloak 是企业级 IAM 领域最流行的开源方案之一，被广泛应用于微服务、API 网关和 Kubernetes 集群的身份认证场景。
 
-## 核心能力
+## 核心特性
 
-- **单点登录 (SSO)**: 一次登录访问多个应用
-- **身份联合**: 集成 LDAP、Active Directory、社交登录
-- **标准协议**: OpenID Connect、OAuth 2.0、SAML 2.0
-- **多租户**: Realm 隔离的多租户架构
-- **细粒度授权**: 基于角色、资源、策略的访问控制
-- **高可用**: 支持集群部署和数据库复制
+- **单点登录 (SSO)**: 一次登录访问多个应用，支持 Web 和移动端
+- **身份联合**: 集成 LDAP、Active Directory、社交登录（Google/GitHub/Microsoft）
+- **标准协议**: OpenID Connect 1.0、OAuth 2.0、SAML 2.0
+- **多租户**: Realm 隔离的多租户架构，每个租户独立管理
+- **细粒度授权**: 基于角色（RBAC）、资源（UMA）和策略的访问控制
+- **用户管理**: 用户注册、密码策略、多因素认证（OTP/WebAuthn）
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Keycloak 基于 Java（Quarkus）构建。核心组件包括：Auth Server（处理认证和授权请求）、Realm Manager（管理多租户 Realm）、Identity Brokering（OIDC/SAML 身份联合）、User Federation（LDAP/AD 用户同步）、Token Generator（签发 JWT/OAuth Token）。数据层使用关系型数据库（PostgreSQL、MySQL、MariaDB）存储用户和配置。Keycloak 可以集群部署，通过分布式 Infinispan 缓存实现 Session 和 Token 共享。
 
-## 生产部署要点
+## Kubernetes 鿟成
 
-- **生产安全**: 强制 HTTPS，配置合适的 Token 过期时间
-- **密码策略**: 启用密码复杂度、历史记录、暴力破解保护
-- **多因素认证**: 为敏感操作启用 OTP/WebAuthn
-- **会话管理**: 配置会话超时，启用 SSO Session Idle
-- **审计日志**: 启用 Event Logging，集成 SIEM
-- **备份恢复**: 定期备份 Realm 配置和数据库
+Keycloak 通过 Keycloak Operator 或 Helm Chart 部署到 Kubernetes。Operator 通过 Keycloak CRD 管理实例生命周期。在 K8s 场景中，Keycloak 常作为 OIDC Provider 与 API Server 集成——配置 `--oidc-issuer-url` 使 kubectl 通过 Keycloak 认证。Ingress/API Gateway（如 Envoy、Traefik）可集成 Keycloak 实现集群入口的统一认证。支持通过 ProtocolMapper 为 K8s ServiceAccount 映射 RBAC 角色。
+
+## 生产使用场景
+
+1. **统一身份认证**: 为所有内部应用提供 SSO 和集中式用户管理
+2. **K8s API 认证**: 作为 Kubernetes API Server 的 OIDC Provider
+3. **API 网关认证**: 在 API Gateway 层集成 Keycloak 进行请求认证
+4. **多租户 SaaS**: 使用 Realm 隔离为不同租户提供独立的身份管理
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install keycloak bitnami/keycloak \
+  --set auth.adminUser=admin \
+  --set auth.adminPassword=secure-password \
+  --set global.postgresql.auth.postgresPassword=pg-password
+# 或使用 Operator
+kubectl apply -f https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/latest/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
+kubectl apply -f - <<EOF
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+spec:
+  instances: 2
+  db: { vendor: postgres, host: pg-svc }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Keycloak** | CNCF Incubating、Red Hat 支持 | Java 资源开销大 |
+| Dex | 轻量级、K8s 原生 | 功能少（仅 OIDC 桥接） |
+| Authentik | Python、灵活 | 社区较小 |
+| Auth0 | SaaS、零运维 | 商业产品 |
 
 ## 架构定位
 
-在 CNCF 生态中，keycloak 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Keycloak 属于 **Security / IAM** 类别，是开源 IAM 领域的标杆项目。它在 Kubernetes 身份认证生态中扮演 OIDC Provider 的核心角色。
 
 ## 参考链接
 

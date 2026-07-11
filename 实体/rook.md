@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -46,23 +46,53 @@ prerequisites:
 
 ## 概述
 
-description: '## 项目概述'
+Rook 是一个云原生存储编排器，2018 年成为 CNCF 毕业项目（Graduated）。它将分布式存储系统（如 Ceph、NFS、EdgeFS）转化为自我管理、自我扩展、自我修复的存储服务。Rook 通过 Kubernetes Operator 模式自动化存储集群的部署、配置、扩缩容、升级和灾难恢复，大幅降低分布式存储在 Kubernetes 上运行的运维复杂度。Ceph 是 Rook 最成熟和广泛使用的存储后端。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Ceph 全功能管理**: 通过 CRD 管理 Ceph Cluster、Block (RBD)、File (CephFS)、Object (RGW)
+- **声明式运维**: 使用 CRD 声明式配置存储集群，自动调谐到期望状态
+- **自动扩缩容**: 自动添加/移除 OSD，动态扩展存储容量
+- **数据恢复**: 自动处理磁盘/节点故障，数据重平衡
+- **安全加密**: 支持 LUKS 全盘加密和 KMS 集成
+- **监控集成**: 内置 Prometheus 指标和 Grafana 仪表盘
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Rook 的核心是 Ceph Operator，它监听 CephCluster CRD 并管理整个 Ceph 集群的生命周期。架构包含：Rook Operator（主控制器）、Ceph CSI Driver（提供 Kubernetes CSI 接口）、Ceph Mon（监控集群状态）、Ceph OSD（存储数据）、Ceph MDS（CephFS 元数据）、Ceph RGW（S3 对象存储接口）。Operator 自动配置 Mon 仲裁、OSD 放置组和 CRUSH Map，无需手动操作 Ceph 命令行工具。所有组件以 Pod 形式运行，由 Kubernetes 编排。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+Rook 通过 CSI（Container Storage Interface）与 Kubernetes 深度集成。Ceph CSI 提供三种存储接口：RBD（块存储，支持 RWO/RWX）、CephFS（文件存储，支持 RWX）、RGW（对象存储，S3 API）。Rook Operator 监听 CephCluster CRD，自动部署和管理 Ceph 组件。StorageClass 配置引用 Rook 管理的存储池，实现动态卷置备。支持 Volume Snapshot、PVC Clone 和跨命名空间共享。
+
+## 生产使用场景
+
+1. **统一存储平台**: 一个 Ceph 集群同时提供块存储（数据库）、文件存储（共享目录）和对象存储（备份）
+2. **混合云存储**: 在裸金属数据中心使用 Rook/Ceph 替代云厂商托管存储
+3. **高性能数据库**: 使用 RBD 块存储为 PostgreSQL、MongoDB 提供低延迟持久卷
+4. **S3 兼容对象存储**: 使用 RGW 为应用程序提供 AWS S3 兼容的 API
+
+## 安装
+
+```bash
+helm repo add rook-release https://charts.rook.io/release
+helm install rook-ceph rook-release/rook-ceph -n rook-ceph --create-namespace
+# 创建 Ceph 集群
+kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/cluster.yaml
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Rook/Ceph** | 功能全面（块/文件/对象）、CNCF 毕业 | 资源开销大、学习曲线陡 |
+| Longhorn | 部署简单、UI 友好 | 仅块存储、大规模性能有限 |
+| OpenEBS | 多引擎、CSI 原生 | 引擎选择复杂、功能分散 |
+| Portworx | 企业级、高性能 | 商业产品、厂商锁定 |
 
 ## 架构定位
 
-在 CNCF 生态中，rook 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Rook 属于 **Storage** 类别，是分布式存储编排的标杆项目。它将存储管理能力以 Kubernetes 原生方式（CRD + Operator）交付，是云原生存储领域最成熟的开源方案。
 
 ## 参考链接
 

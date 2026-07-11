@@ -16,7 +16,7 @@ tags:
 - ebpf
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,27 +47,64 @@ prerequisites:
 
 ## 概述
 
-OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网络插件，提供企业级的虚拟网络功能。它利用 OVN 的分布式虚拟路由、负载均衡、ACL 和 NAT 能力，为 Kubernetes 提供高性能、可扩展的 L2/L3/L4 网络。OVN-Kubernetes 是 OpenShift 的默认网络插件，已在大规模生产环...
+OVN-Kubernetes 是基于 OVN（Open Virtual Network）的 Kubernetes CNI 网络插件，由 Red Hat 维护，2022 年加入 CNCF Sandbox。它利用 OVN 的分布式虚拟路由、负载均衡、ACL 和 NAT 能力，为 Kubernetes 提供高性能、可扩展的 L2/L3/L4 网络。OVN-Kubernetes 是 OpenShift 的默认网络插件，已在大规模生产环境中验证。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **OVN 数据平面**: 基于 OVN 的高性能虚拟网络（分布式路由/交换/ACL）
+- **NetworkPolicy**: 完整支持 K8s NetworkPolicy（通过 OVN ACL 实现）
+- **Egress IP**: 为 Pod 出站流量分配固定源 IP
+- **Egress Firewall**: 命名空间级别的出站流量控制（CRD）
+- **Hybrid SDN**: 支持命名空间级的网络隔离（非全局 Pod 网络）
+- **硬件卸载**: 支持 OVS 硬件卸载（SR-IOV、 Mellanox ASAP）
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+OVN-Kubernetes 架构以 OVN 为核心。OVN 北向数据库（NBDB）和南向数据库（SBDB）以 Raft 集群运行（至少 3 节点 HA）。ovnkube-master（每个控制节点一个）监听 K8s API 获取 Pod、Service、NetworkPolicy 变更，将配置写入 NBDB。ovnkube-node（每个工作节点以 DaemonSet 运行）管理本地 OVS 实例，从 SBDB 获取配置更新 OVS flow table。Pod 网络通过 OVS Geneve 隧道或裸网络（hybrid）连接。NetworkPolicy 通过 OVN ACL 实现，比 iptables 性能更高。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **高可用部署**: OVN 数据库 (NBDB/SBDB) 使用 Raft 集群，至少 3 节点
-- **Network Policy**: 使用 OVN ACL 实现高性能策略，避免 iptables 规则膨胀
-- **Egress 管理**: 使用 Egress IP 和 EgressFirewall 控制出向流量
-- **监控**: 监控 OVN 数据库大小和 OVS 流表规模
-- **硬件卸载**: 高吞吐场景启用 SR-IOV 或 OVS 硬件卸载
+OVN-Kubernetes 作为标准 CNI 插件集成。通过 CRD（EgressIP、EgressFirewall、AdminNetworkPolicy）提供超越标准 NetworkPolicy 的高级网络控制。EgressIP CRD 为指定命名空间的 Pod 分配固定出站 IP（配合节点 IP 池）。EgressFirewall CRD 限制命名空间出站流量到特定 CIDR/端口。在 OpenShift 中作为默认 CNI，与 OpenShift SDN 无缝集成。
+
+## 生产使用场景
+
+1. **企业网络隔离**: 使用 Hybrid SDN 或 AdminNetworkPolicy 实现多团队网络隔离
+2. **Egress IP 控制**: 为合规要求固定 Pod 出站源 IP
+3. **出站防火墙**: 限制 Pod 可访问的外部网络范围
+4. **高性能 NetworkPolicy**: 使用 OVN ACL 替代 iptables 实现高性能网络策略
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add ovn-kubernetes https://ovn-kubernetes.github.io/ovn-kubernetes
+helm install ovn-kubernetes ovn-kubernetes/ovn-kubernetes
+# 或使用部署 YAML
+kubectl apply -f https://raw.githubusercontent.com/ovn-org/ovn-kubernetes/master/dist/images/yaml-kubernetes/ovn-setup.yaml
+# Egress IP 配置
+kubectl apply -f - <<EOF
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata: { name: egress-prod }
+spec:
+  egressIPs: ["203.0.113.10"]
+  namespaceSelector:
+    matchLabels: { env: production }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **OVN-Kubernetes** | OVN 高性能、OpenShift 验证 | OVN 运维复杂 |
+| Calico | BGP 原生、简单 | 无 Egress IP/Firewall |
+| Cilium | eBPF 高性能、可观测强 | 企业网络功能较少 |
+| Kube-OVN | VPC 多租户 | 社区较小 |
 
 ## 架构定位
 
-在 CNCF 生态中，ovn-kubernetes 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，OVN-Kubernetes 属于 **Networking** 类别，是 OVN 技术在 Kubernetes 上的官方实现。OpenShift 默认 CNI，已在大规模生产中验证。
 
 ## 参考链接
 

@@ -26,6 +26,11 @@ status: reviewed
 - [[脚本/prompts/config-generator.md|config-generator]]
 - [[脚本/prompts/learning-path.md|learning-path]]
 - [[脚本/prompts/troubleshooting.md|troubleshooting]]
+- [[脚本/prompts/incident-diagnosis.md|incident-diagnosis]]
+- [[脚本/prompts/capacity-review.md|capacity-review]]
+- [[脚本/prompts/security-audit.md|security-audit]]
+- [[脚本/prompts/cost-analysis.md|cost-analysis]]
+- [[脚本/prompts/migration-planning.md|migration-planning]]
 
 ## Related
 

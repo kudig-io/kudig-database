@@ -16,7 +16,7 @@ tags:
 - agent
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,32 +47,53 @@ prerequisites:
 
 ## 概述
 
-Artifact Hub 是云原生制品的发现和分发平台。它是 CNCF 生态系统的中央枢纽，支持搜索、发现和发布 Helm charts、OPA 策略、Falco 规则、KEDA scalers 等多种制品类型。
+Artifact Hub 是 CNCF 生态系统的中央制品发现和分发平台，2020 年加入 CNCF Sandbox，后晋升为 Incubating。它支持搜索、发现和发布 Helm Charts、OLM Operators、Falco 规则、OPA 策略、KEDA Scalers、Tekton Pipelines、Container Images 等多种云原生制品类型。Artifact Hub 的目标是成为云原生生态的 "npm registry"，让开发者和运维人员能够一站式发现和安装云原生组件。
 
-## 核心能力
+## 核心特性
 
-- **统一搜索**: 跨多种制品类型的全文搜索
-- **丰富元数据**: 版本、依赖、安全评级、维护者信息
-- **安全扫描**: 自动检测镜像漏洞和安全问题
-- **签名验证**: 支持 Cosign 签名的制品验证
-- **订阅通知**: 跟踪制品更新，接收变更通知
-- **私有仓库**: 支持托管私有制品仓库
+- **多制品类型**: 统一搜索 Helm、OPA、Falco、KEDA、Tekton、Tinkerbell Actions、Container Images 等
+- **全文搜索**: 跨制品类型的全文搜索和标签过滤
+- **丰富元数据**: 版本历史、依赖关系、安全评级、维护者信息、README 文档
+- **安全扫描**: 自动检测容器镜像漏洞
+- **签名验证**: 支持 Cosign 签名的制品验证状态展示
+- **订阅通知**: 跟踪制品更新，接收新版本和变更通知
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Artifact Hub 采用前后端分离的微服务架构。后端使用 Go 实现，提供 RESTful API，使用 PostgreSQL 存储制品元数据。前端使用 TypeScript/React 构建。制品来源追踪器（Tracker）定期扫描已注册的仓库（GitHub、Helm Registry、OCI Registry 等），解析制品元数据并更新索引。安全扫描器自动对制品中的容器镜像进行漏洞扫描。整个系统支持 Helm Chart 方式部署到 Kubernetes。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **完善元数据**: 提供详细的描述、截图、安装说明
-- **版本语义化**: 遵循 SemVer 规范管理版本
-- **安全扫描**: 定期更新镜像，修复漏洞
-- **签名制品**: 使用 Cosign 签名增加可信度
-- **保持活跃**: 定期更新和响应用户反馈
+Artifact Hub 本身作为服务部署，通过 Helm Chart 安装到 Kubernetes。它与 Kubernetes 生态深度集成：Helm Charts 可直接通过 Artifact Hub 发现并安装；OLM Operators 通过 OperatorHub 集成分发。`helm search hub` 命令直接查询 Artifact Hub 的 API。它还支持 Tekton Pipeline 模板发现和 KEDA Scaler 模板浏览。
+
+## 生产使用场景
+
+1. **组件发现**: 团队在 Artifact Hub 搜索可复用的 Helm Charts 和 Operators
+2. **制品发布**: 开源项目在 Artifact Hub 注册仓库，增加可见性
+3. **安全合规**: 通过安全扫描评级选择可信制品
+4. **版本跟踪**: 订阅关键依赖制品的更新通知
+
+## 安装
+
+```bash
+# Artifact Hub 本身无需安装到集群，直接访问 artifacthub.io
+# 私有部署
+helm repo add artifact-hub https://artifacthub.github.io/helm-charts
+helm install artifact-hub artifact-hub/artifact-hub
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Artifact Hub** | CNCF 官方、多制品类型、免费 | 定制化能力有限 |
+| OperatorHub.io | 专注 Operators、Red Hat 支持 | 仅 Operators |
+| Helm Hub (已合并) | Helm 原生 | 已并入 Artifact Hub |
+| Kubeapps Hub | 与 Kubeapps 集成 | 仅 Helm Charts |
 
 ## 架构定位
 
-在 CNCF 生态中，artifact-hub 属于 **Supply Chain** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Artifact Hub 属于 **Supply Chain / Platform** 类别，是云原生制品发现的标准入口。它与 Helm、Operator Framework、Tekton、KEDA 等项目协同工作。
 
 ## 参考链接
 

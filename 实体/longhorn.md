@@ -13,7 +13,7 @@ tags:
 - rag
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -41,23 +41,53 @@ prerequisites:
 
 ## 概述
 
-description: '## 项目概述'
+Longhorn 是由 Rancher Labs（现 SUSE）开源的云原生分布式块存储系统，2019 年加入 CNCF Sandbox，后晋升为 Incubating 项目。Longhorn 利用容器和微服务架构将存储控制器和数据平面容器化，为 Kubernetes 提供企业级持久化存储。它通过跨节点数据复制、快照、备份和灾难恢复功能，使有状态应用在 Kubernetes 上运行更加可靠和简单。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **分布式块存储**: 为 Kubernetes Pod 提供高可用的 PersistentVolume
+- **同步复制**: 跨节点数据复制，默认 3 副本，可自定义副本数
+- **快照与备份**: 支持定时快照，备份到 NFS/S3 兼容存储
+- **跨集群灾难恢复**: 利用备份在另一个集群恢复数据卷
+- **精简置备**: 按需分配存储空间，提高利用率
+- **内置 UI**: 提供直观的 Web 管理界面管理卷和快照
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Longhorn 采用完全分布式架构，核心组件包括：Longhorn Manager（DaemonSet，管理卷生命周期）、Longhorn Engine（每个卷一个实例，负责数据复制和快照）、Longhorn UI（管理界面）、CSI Driver（实现 Kubernetes CSI 接口）。数据以多个 Replica 的形式分布在集群节点上，每个 Replica 是一个 Linux 进程。Longhorn Engine 接收来自 CSI 的 I/O 请求，同步写入所有 Replica，确保数据一致性。引擎本身也是容器化的，通过 Kubernetes 进行编排和管理。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+Longhorn 通过 CSI（Container Storage Interface）与 Kubernetes 集成，自动配置和挂载 PersistentVolume。它部署为 DaemonSet 在每个节点运行 Longhorn Manager，通过 Longhorn CSI Plugin 暴露存储能力。支持动态置备（Dynamic Provisioning）、StorageClass、Volume Snapshot 和 PVC 克隆等标准 K8s 存储 API。通过 Helm Chart 一键安装，无需修改节点配置。
+
+## 生产使用场景
+
+1. **数据库持久化**: 为 PostgreSQL、MySQL 等 StatefulSet 提供可靠的块存储
+2. **Dev/Test 环境**: 在裸金属集群上替代云厂商 EBS/GPD，降低成本
+3. **跨集群 DR**: 利用 S3 备份实现跨集群数据恢复，构建灾备方案
+4. **边缘计算**: 轻量级部署，为边缘集群提供持久化能力
+
+## 安装
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.2/deploy/longhorn.yaml
+# 或使用 Helm
+helm repo add longhorn https://charts.longhorn.io
+helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Longhorn** | 易于部署、内置备份、UI 友好 | 性能不如 Ceph、节点规模有限 |
+| Rook/Ceph | 成熟稳定、高性能、大规模支持 | 运维复杂、资源开销大 |
+| OpenEBS | 多引擎选择、CSI 原生 | 功能分散、文档不够统一 |
+| Linstor/DRBD | 高性能块复制 | 配置复杂、社区较小 |
 
 ## 架构定位
 
-在 CNCF 生态中，longhorn 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Longhorn 属于 **Storage** 类别，是云原生块存储的代表性项目。它降低了分布式存储的运维门槛，特别适合中小规模 Kubernetes 集群和边缘场景。
 
 ## 参考链接
 

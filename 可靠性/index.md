@@ -35,5 +35,7 @@ last_updated: 2026-07
 ## 文档
 
 - [[可靠性/03-slo-sli-guide.md|Slo Sli Guide]]
+- [[可靠性/04-error-budget-policy-template.md|Error Budget Policy Template]]
+- [[可靠性/05-reliability-maturity-model.md|Reliability Maturity Model]]
 - [[可靠性/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

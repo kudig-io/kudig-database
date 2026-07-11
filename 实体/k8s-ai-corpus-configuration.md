@@ -13,7 +13,7 @@ tags:
 - agent
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,41 +39,52 @@ prerequisites:
 
 
 
-
 # AI 语料库配置
 
-## RAG 分块策略
+> **CNCF 状态**: 参考文档 | **类别**: AI Infrastructure | **主要语言**: YAML, Python
 
-三种分块方式：
+## 概述
 
-1. **按 Markdown 标题分块**（推荐）：保持知识完整性
-2. **语义分块**：基于 Embedding 相似度切分
-3. **混合分块**：标题分块 + 语义二次细分
+Kubernetes AI 语料库配置是一份涵盖在 K8s 上部署和管理大规模 AI/ML 训练语料的技术配置参考文档。它整合了 GPU 调度、分布式存储、数据流水线、训练框架部署等多个维度的配置最佳实践。该文档覆盖了从数据准备（数据清洗、格式化、分布式存储）、到模型训练（PyTorch DDP、DeepSpeed、Megatron）、再到推理服务（vLLM、TGI、TensorRT-LLM）的全链路 K8s 配置。
 
-最佳实践：
-- 块大小：200-800 tokens
-- 重叠：50-100 tokens
-- 保留元数据（标题层级、来源文档）
+## Key Features（核心能力）
 
-## 场景化 Profile
+- **GPU 调度配置**：NVIDIA GPU Operator、MIG 切分、GPU 共享的 K8s 配置
+- **分布式训练**：PyTorchJob、MPIJob CRD 和 DeepSpeed 配置
+- **数据流水线**：使用 Ray Data、Apache Arrow 进行分布式数据处理
+- **存储配置**：利用 Alluxio、JuiceFS 加速训练数据读取
+- **推理服务**：KServe + vLLM/TGI 的大模型推理部署
+- **可观测性**：GPU 利用率监控、训练指标收集
 
-不同使用场景需要不同的分块和检索策略：
+## 架构与工作原理
 
-| 场景 | 分块粒度 | 检索策略 | Top-K |
-|------|----------|----------|-------|
-| 故障排查 | 细粒度 | 关键词 + 语义 | 3-5 |
-| 学习参考 | 中粒度 | 纯语义 | 5-10 |
-| 代码生成 | 代码块级 | 关键词为主 | 3 |
+AI 语料库配置分为三层：基础设施层（GPU Operator 管理 NVIDIA 驱动和设备插件；分布式存储提供训练数据访问）；训练层（通过 Volcano/Kubeflow Training Operator 管理分布式训练任务；Ray 集群处理数据流水线）；推理层（KServe 部署模型推理服务，GPU Autoscaler 根据请求量弹性扩缩）。每层都有对应的 K8s CRD 和配置模板。
 
-## 向量库构建流程
+## K8s 集成
 
+GPU 通过 NVIDIA GPU Operator 以 Device Plugin 方式暴露给 K8s。训练任务通过 PyTorchJob/MPIJob CRD 定义，由 Training Operator 调度到 GPU 节点。RDMA/InfiniBand 通过 SR-IOV Network Device Plugin 配置。训练数据通过 CSI 驱动（如 JuiceFS、Lustre）挂载。推理服务通过 KServe InferenceService CRD 定义，配合 GPU Autoscaler 自动伸缩。
+
+## 生产用例
+
+- **大语言模型训练**：LLM 预训练和微调的 K8s 集群配置
+- **GPU 集群管理**：大规模 GPU 集群的调度和利用率优化
+- **模型推理服务**：大模型的在线推理部署和弹性伸缩
+- **MLOps 流水线**：从数据处理到模型部署的端到端自动化
+
+## 安装与快速开始
+
+```bash
+# GPU Operator
+helm repo add nvidia https://nvidia.github.io/gpu-operator
+helm install gpu-operator nvidia/gpu-operator -n gpu-operator --create-namespace
+
+# Training Operator
+kubectl apply -k github.com/kubeflow/training-operator/manifests/overlays/standalone
 ```
-源文档 → 清洗 → 分块 → Embedding → 入库 → 索引优化 → 测试
-```
 
----
+## 对比替代方案
 
-> 来源：.zread/wiki/drafts/19-ai-yu-liao-ku-pei-zhi-*.md
+相比裸机 AI 训练，K8s 提供更好的资源利用率和弹性伸缩。相比云托管 ML 平台（SageMaker），自建 K8s AI 平台更灵活但运维复杂度更高。
 
 ## Related
 

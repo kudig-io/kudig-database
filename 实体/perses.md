@@ -1,7 +1,7 @@
 ---
 title: Perses (entities)
 description: '## 概述'
-summary: 'Perses 是一个云原生的 Dashboard 即代码 (Dashboard-as-Code) 可视化平台，用于创建和管理可观测性仪表板。它旨在成为 Grafana 的开源替代方案之一，提供标准化的 Dashboard 定义规范，支持将仪表板作为代码进行版本控制和 GitOps 管理。'
+summary: 'Perses 是一个云原生的 Dashboard 即代码 (Dashboard-as-Code) 可视化平台，用于创建和管理可观测性仪表板。'
 category: entities
 tags:
 - k8s
@@ -14,7 +14,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -37,34 +37,85 @@ prerequisites:
 
 
 
-
 # Perses
 
 > **CNCF 状态**: Sandbox | **类别**: Observability | **主要语言**: Go, TypeScript
 
 ## 概述
 
-Perses 是一个云原生的 Dashboard 即代码 (Dashboard-as-Code) 可视化平台，用于创建和管理可观测性仪表板。它旨在成为 Grafana 的开源替代方案之一，提供标准化的 Dashboard 定义规范，支持将仪表板作为代码进行版本控制和 GitOps 管理。
+Perses 是一个云原生的 Dashboard 即代码（Dashboard-as-Code）可视化平台，由 Perses 社区开发（核心贡献者来自 Grafana Labs），2023 年加入 CNCF 沙箱。它旨在成为 Grafana 的开源替代方案之一，提供标准化的 Dashboard 定义规范，支持将仪表板作为代码进行版本控制和 GitOps 管理。与 Grafana 使用数据库存储 Dashboard JSON 不同，Perses 原生使用 JSON/YAML 文件存储 Dashboard 定义，使得仪表板可以纳入 Git 版本控制，通过 ArgoCD/Flux 等 GitOps 工具管理。Perses 原生支持 Prometheus 和 Loki 数据源，并提供与 Grafana 兼容的 Panel 类型（折线图、柱状图、热力图等）。
 
 ## 核心能力
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Dashboard 即代码**: Dashboard 定义为原生 JSON/YAML 文件，可纳入 Git 版本控制
+- **CRD 集成**: PersesDashboard CRD 支持在 Kubernetes 中以 GitOps 方式管理仪表板
+- **标准化规范**: 统一的 Dashboard 定义格式，支持变量、布局和面板复用
+- **多数据源**: 原生支持 Prometheus、Loki、Tempo 等可观测性后端
+- **RBAC**: 内置基于角色的访问控制
+- **导入兼容**: 支持从 Grafana JSON 导入 Dashboard
+
+## 架构
+
+Perses 采用简洁的云原生架构：
+
+- **Perses Server**: 后端服务，提供 RESTful API 和 Dashboard 渲染
+- **Perses UI**: 基于 React 的前端界面，支持 Dashboard 可视化编辑和浏览
+- **Dashboard Spec**: JSON/YAML 格式的仪表板定义，包含布局、面板和查询
+- **Datasource Plugin**: 可扩展的数据源适配器（Prometheus、Loki 等）
+- **CRD Controller**: 在 Kubernetes 中监听 PersesDashboard CRD，同步到 Perses Server
+- **File Storage**: Dashboard 定义存储在文件系统或 Git 中（而非数据库）
+
+GitOps 流程：`Dashboard YAML → Git → ArgoCD → PersesDashboard CRD → Perses Server → UI 渲染`
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Perses 通过 Perses Operator 和 CRD 实现与 Kubernetes 的深度集成。`PersesDashboard` CRD 定义 Dashboard 资源，`PersesDatasource` CRD 定义数据源。Perses Operator 监听这些 CRD，自动将配置同步到 Perses Server。Dashboard 定义以 YAML 存储在 Git 中，通过 ArgoCD/Flux 自动同步到集群中的 PersesDashboard CRD。与 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中的标准 GitOps 工作流完全兼容，实现了 Dashboard 的声明式管理。
 
-## 生产部署要点
+## 生产场景
 
-- **代码化管理**: 将 Dashboard 定义存储在 Git 仓库，通过 CI/CD 部署
-- **变量化**: 使用变量实现 Dashboard 的环境通用性
-- **标准化**: 团队统一使用 Perses 定义规范，确保仪表板一致性
-- **CRD 集成**: 在 Kubernetes 中使用 PersesDashboard CRD 实现 GitOps
-- **数据源配置**: 集中管理 Prometheus 数据源配置
+1. **GitOps 仪表板管理**: 所有 Dashboard 纳入 Git 版本控制，通过 GitOps 工具自动部署
+2. **多环境监控**: 在 dev/staging/prod 集群中统一部署标准化 Dashboard
+3. **团队 Dashboard 共享**: 通过 Git 分享 Dashboard 定义，团队成员可复用和修改
+4. **监控即代码**: 在 CI/CD 流水线中自动生成和部署监控仪表板
+
+## 安装
+
+```bash
+# Helm 安装 Perses
+helm repo add perses https://perses.github.io/helm-charts
+helm install perses perses/perses -n perses --create-namespace
+
+# 安装 Perses Operator
+helm install perses-operator perses/perses-operator -n perses
+
+# 创建 Prometheus 数据源
+kubectl apply -f - <<EOF
+apiVersion: perses.dev/v1alpha1
+kind: PersesDatasource
+metadata:
+  name: prometheus
+  namespace: perses
+spec:
+  proxy:
+    url: http://prometheus-server.monitoring.svc.cluster.local:9090
+EOF
+
+# 创建 Dashboard
+kubectl apply -f my-dashboard.yaml
+```
+
+## 对比
+
+| 特性 | Perses | Grafana | Kibana | Apache Superset |
+|------|--------|---------|--------|-----------------|
+| Dashboard 即代码 | ✅ 原生 | ⚠️ 需插件 | ❌ | ⚠️ 有限 |
+| GitOps | ✅ CRD | ⚠️ 需插件 | ❌ | ❌ |
+| K8s 原生 | ✅ | ⚠️ | ❌ | ❌ |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF |
 
 ## 架构定位
 
-在 CNCF 生态中，perses 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Perses 属于 **Observability** 类别，为云原生应用提供 Dashboard 即代码的可视化能力。
 
 ## 参考链接
 

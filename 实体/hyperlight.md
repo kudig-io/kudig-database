@@ -16,7 +16,7 @@ tags:
 - wasm
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -45,27 +45,57 @@ prerequisites:
 
 ## 概述
 
-Hyperlight 是一个轻量级虚拟机管理器 (VMM)，专为在毫秒级启动时间内运行函数式工作负载而设计。它创建超轻量的 micro-VM，每个 VM 可在 1-2 毫秒内启动，内存开销仅为几 MB。Hyperlight 特别适合 Serverless 和 FaaS 场景，提供比容器更强的隔离性，同时保持接近容器的启动速度和资源效率。
+Hyperlight 是由 Microsoft 开发的轻量级虚拟机管理器（VMM），2024 年加入 CNCF Sandbox。它专为在毫秒级启动时间内运行函数式工作负载（Function Workloads）而设计。Hyperlight 创建超轻量的 micro-VM，每个 VM 可在 1-2 毫秒内启动，内存开销仅为 2-5 MB。Hyperlight 特别适合 Serverless、FaaS 和 AI Agent 安全沙箱场景，提供比容器更强的硬件级隔离，同时保持接近容器的启动速度和资源效率。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **极速启动**: 1-2ms VM 启动时间，接近进程创建速度
+- **超低内存**: 每个 micro-VM 仅需 2-5MB 内存开销
+- **硬件隔离**: 基于 Hypervisor（Microsoft Hypervisor / KVM）的硬件级沙箱
+- **Host-Guest 通信**: 高效的 Host 函数调用和 Guest 回调机制
+- **SandboxPool**: VM 实例池复用，减少创建开销
+- **多语言 Guest**: 支持 Rust、Go、C、Python 编写的 Guest 代码
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Hyperlight 架构由 Host 和 Guest 两部分组成。Host 进程通过 Hyperlight SDK 创建 micro-VM——分配内存、加载 Guest 二进制文件到 Guest 内存空间、初始化 CPU 上下文。Guest 运行在硬件隔离的 VM 中，通过 Hypercall 与 Host 通信。Host 可以向 Guest 传递参数并调用 Guest 函数，Guest 也可以通过 Host Function 回调请求 Host 执行操作（如网络请求）。Guest 使用专用的内存布局和引导加载器，无需完整操作系统。支持 Microsoft Hypervisor（Windows/Azure）和 KVM（Linux）后端。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **Sandbox 池**: 对于高并发场景，使用 SandboxPool 复用 VM 实例减少创建开销
-- **最小内存**: 根据 Guest 实际需求配置最小内存，提高部署密度
-- **超时保护**: 为所有 Guest 调用设置超时，防止恶意或异常 Guest 阻塞
-- **无状态 Guest**: 设计无状态的 Guest 函数，便于 Sandbox 复用
-- **Host 函数最小化**: 减少 Host 函数暴露面，降低安全风险
+Hyperlight 可作为 Kubernetes 中 AI Agent 和 Serverless 函数的安全沙箱运行时。通过自定义 RuntimeClass 或 Sidecar 模式集成。在 AI Agent 场景中，不可信的 Agent 代码运行在 Hyperlight micro-VM 中，通过 Host Function 受控地访问集群资源。与 containerd 的 shim 集成可实现将 Hyperlight VM 作为 Pod 的容器运行时替代。
+
+## 生产使用场景
+
+1. **AI Agent 沙箱**: 在隔离的 micro-VM 中运行不可信的 AI Agent 代码
+2. **Serverless 函数**: 毫秒级启动的函数运行环境
+3. **多租户隔离**: 在共享集群中为每个租户提供硬件级隔离
+4. **安全计算**: 运行不可信代码（如用户提交的脚本）的沙箱
+
+## 安装
+
+```bash
+# Rust SDK
+cargo add hyperlight-host hyperlight-guest
+# 示例: 创建 Sandbox 运行 Guest 函数
+use hyperlight_host::sandbox::Sandbox;
+let mut sandbox = Sandbox::new()?;
+let result = sandbox.call_guest_function("add", &[1, 2])?;
+# Kubernetes 集成
+kubectl apply -f https://github.com/hyperlight-dev/hyperlight/deploy/kubernetes.yaml
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Hyperlight** | 极速启动、极低内存 | 较新、社区小 |
+| Firecracker | AWS 生产验证、成熟 | 启动约 125ms、内存约 5MB |
+| gVisor | 用户态内核、兼容性好 | 性能开销较大 |
+| Kata Containers | 标准化、安全 | 启动较慢、资源开销大 |
 
 ## 架构定位
 
-在 CNCF 生态中，hyperlight 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Hyperlight 属于 **Runtime / Sandbox** 类别，代表了 micro-VM 在 AI Agent 和 Serverless 场景中的应用方向。它在隔离性与性能之间找到了新的平衡点。
 
 ## 参考链接
 

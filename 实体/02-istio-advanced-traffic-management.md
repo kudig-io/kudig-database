@@ -13,7 +13,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -43,23 +43,63 @@ prerequisites:
 
 ## 概述
 
-description: Istio 高级流量管理指南，涵盖金丝雀发布、AB测试、流量镜像、断路器、限流配等
+Istio 高级流量管理是 Istio 服务网格的核心能力之一。Istio 是 CNCF 毕业项目（Graduated），由 Google、IBM 和 Lyft 联合创建。高级流量管理涵盖金丝雀发布（Canary Release）、A/B 测试、流量镜像（Traffic Mirroring）、断路器（Circuit Breaker）、限流配额（Rate Limiting）和故障注入（Fault Injection）等功能。通过 VirtualService、DestinationRule 和 Gateway 等 CRD，Istio 提供了比 Kubernetes 原生 Service 更精细的流量控制能力。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **金丝雀发布**: 通过权重按比例将流量分发到不同版本
+- **A/B 测试**: 基于 Header、Cookie、URI 等条件路由到不同版本
+- **流量镜像**: 将生产流量复制到新版本（Shadow）进行验证，不影响线上
+- **断路器**: 连接池和异常检测自动隔离不健康实例
+- **故障注入**: 注入延迟和错误测试系统弹性
+- **请求超时与重试**: 可配置的超时和自动重试策略
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Istio 流量管理通过 Envoy 代理在数据平面执行。控制平面（istiod）将 VirtualService（路由规则）和 DestinationRule（目标策略）翻译为 Envoy 配置，通过 xDS API 下发到每个 Sidecar。流量进入 Pod 时，iptables 规则将流量重定向到 Envoy（15006/15001 端口）。Envoy 根据 VirtualService 配置执行路由决策（权重、匹配条件），根据 DestinationRule 执行策略（LB、断路器、连接池）。Gateway 处理南北向流量，VirtualService 配置 HTTP/TCP 路由规则。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+Istio 通过 CRD（VirtualService、DestinationRule、Gateway、ServiceEntry、EnvoyFilter）扩展 Kubernetes API。这些 CRD 声明式定义流量管理策略。Sidecar 通过 Mutating Webhook 自动注入到命名空间中的 Pod。VirtualService 通过 `hosts` 关联 Kubernetes Service，DestinationRule 通过 `host` 定义版本子集（subset）。Gateway 替代 Ingress 处理外部流量入口。
+
+## 生产使用场景
+
+1. **渐进式金丝雀发布**: 将 5% 流量导入新版本，逐步增加到 100%
+2. **流量镜像验证**: 将生产流量复制到预发布环境，验证新版本正确性
+3. **A/B 测试**: 基于 Cookie 路由不同用户体验到不同 UI 版本
+4. **熔断降级**: 自动隔离连续返回 5xx 的后端实例，保护系统稳定性
+
+## 安装
+
+```bash
+# 安装 Istio
+istioctl install --set profile=demo
+# 金丝雀发布示例
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+spec:
+  http:
+  - route:
+    - destination: { host: app, subset: v1 }
+      weight: 90
+    - destination: { host: app, subset: v2 }
+      weight: 10
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Istio** | 功能最全面、CNCF 毕业 | 资源开销大、配置复杂 |
+| Linkerd | 轻量级、易运维 | 高级流量管理功能较少 |
+| Kuma | 通用服务网格、多平台 | 社区较小 |
+| Cilium Service Mesh | eBPF 无 Sidecar | 功能尚在发展中 |
 
 ## 架构定位
 
-在 CNCF 生态中，02-istio-advanced-traffic-management 属于 **Service Mesh** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Istio 属于 **Service Mesh** 类别，是流量管理能力最强大的服务网格平台。高级流量管理是其核心竞争力之一。
 
 ## 参考链接
 

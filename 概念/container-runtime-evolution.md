@@ -10,8 +10,8 @@ tags:
 - k8s
 tier: core
 created: 2026-05-24
-updated: 2026-05-24
-last_updated: 2026-05-24
+updated: 2026-07
+last_updated: 2026-07
 ---
 
 
@@ -82,8 +82,66 @@ WebAssembly 作为新型容器运行时正在崛起：
 
 参见 OCI image spec、image lifecycle。
 
-## Related
+## 技术深度解析
 
-- [[概念/specialized-k8s-technologies.md|specialized k8s technologies]] — 特殊化 K8S 技术
-- [[概念/k8s-security-compliance.md|k8s security compliance]] — K8S 安全与合规
-- [[概念/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施
+### CRI 架构演进
+
+容器运行时接口（CRI）的演进反映了 Kubernetes 解耦运行时的持续努力：
+
+```
+K8s 1.20 之前: Docker (dockershim) → 内置于 kubelet
+K8s 1.20-1.24: dockershim 废弃警告 → CRI 过渡期
+K8s 1.24+:     移除 dockershim → containerd / CRI-O 直接对接
+K8s 1.32+:     CRI v1 唯一 → 移除 v1alpha2
+```
+
+### RuntimeClass 与多运行时共存
+
+生产集群可以同时运行多种容器运行时，通过 RuntimeClass 按工作负载选择：
+
+```yaml
+# 标准容器（默认 runc）
+spec:
+  runtimeClassName: runc          # 高性能、低开销
+
+# 安全隔离（Kata Containers）
+spec:
+  runtimeClassName: kata          # VM 级隔离，多租户场景
+
+# WASM 工作负载
+spec:
+  runtimeClassName: wasm          # 亚毫秒启动、极小体积
+```
+
+### containerd 2.0 Sandbox API
+
+containerd 2.0 引入的 Sandbox API 将 Pod sandbox 管理从 kubelet CRI 中解耦：
+
+```
+传统 CRI: kubelet → CRI RunPodSandbox → containerd 内部处理
+Sandbox API: kubelet → CRI → containerd Sandbox Controller
+  → 支持可插拔 sandbox 实现（runc / kata / wasm）
+  → sandbox 生命周期独立于容器管理
+```
+
+## 最佳实践
+
+- **containerd 作为默认运行时**：生产环境默认使用 containerd 2.x（CRI v1），无需 Docker——更轻量、更安全
+- **安全敏感场景考虑 Kata Containers**：多租户或强隔离需求场景使用 Kata Containers 提供虚拟机级隔离，配合 Pod Overhead 计量资源
+- **大镜像场景启用懒加载**：AI/ML 场景镜像通常 >1GB，启用 Nydus 或 eStargz 懒加载可将冷启动从分钟级降至秒级
+- **ARM 节点使用 crun 替代 runc**：crun 在 ARM 平台上启动更快、内存占用更小——CRI-O 已默认使用 crun
+- **为 WASM 工作负载准备独立节点池**：WASM shim 与传统容器行为不同，通过 RuntimeClass 和 taint 隔离 WASM 节点
+
+## 常见陷阱
+
+- **containerd 版本与 K8s 不兼容**：K8s 1.32+ 要求 containerd 2.0+，升级 K8s 前必须先升级运行时——否则 Pod 无法创建
+- **镜像懒加载的首次访问延迟**：懒加载将镜像拉取延迟到运行时，首次文件访问可能变慢——不适合启动时加载大量文件的应用
+- **机密容器性能开销**：TEE 加密/解密有 5-15% 性能损耗——需要评估是否值得安全收益
+
+## 相关页面
+
+- [[概念/specialized-k8s-technologies.md|K8S 专项技术]] — WASM 与边缘计算
+- [[概念/k8s-security-compliance.md|K8S 安全与合规]] — 机密容器与 TEE
+- [[概念/k8s-ai-ml-infrastructure.md|K8S AI/ML 基础设施]] — 大镜像优化
+- [[概念/pod-overhead.md|Pod Overhead]] — 安全运行时的资源计量
+- [[概念/kubernetes-containerd-integration.md|K8s 与 containerd 集成]] — CRI 通信架构

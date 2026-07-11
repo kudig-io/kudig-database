@@ -14,7 +14,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -43,31 +43,55 @@ prerequisites:
 
 ## 概述
 
-Virtual Kubelet 是一个开源框架，它模拟 Kubernetes kubelet，将自身注册为集群中的一个节点。但不同于真正的 kubelet 运行在物理/虚拟机上，Virtual Kubelet 将 Pod 调度到其他后端服务，如 Azure Container Instances (ACI)、AWS Fargate、HashiCorp Nomad 等无服务器容器平台。
+Virtual Kubelet 是由 Microsoft 开源的开源框架，2019 年加入 CNCF Sandbox。它模拟 Kubernetes kubelet，将自身注册为集群中的一个节点，但不同于真正的 kubelet 运行在物理/虚拟机上，Virtual Kubelet 将 Pod 调度到其他后端服务，如 Azure Container Instances（ACI）、AWS Fargate、HashiCorp Nomad 等无服务器容器平台。它使 Kubernetes 集群能够弹性扩展到云端无服务器基础设施，无需管理底层节点。
 
-## 核心能力
+## 核心特性
 
-- **虚拟节点**: 在 K8s 中注册虚拟节点
-- **多后端**: ACI、Fargate、Nomad、OpenStack
-- **无限扩展**: 无需管理底层节点基础设施
-- **标准 API**: 兼容 Kubernetes Pod API
-- **弹性伸缩**: 实现真正的无服务器容器
-- **Provider 接口**: 可扩展的 Provider 插件架构
+- **虚拟节点**: 在 K8s 集群中注册为一个 Node，对调度器透明
+- **多 Provider 后端**: 支持 ACI、Fargate、Nomad、ECS、OpenStack Zun 等
+- **Provider 接口**: 定义标准接口，可自定义实现新的后端
+- **弹性扩展**: 无需预置节点即可运行突发工作负载
+- **标准 Pod API**: 兼容 Kubernetes Pod 生命周期管理
+- **成本优化**: 仅在实际运行 Pod 时计费
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Virtual Kubelet 核心是一个实现 Kubernetes kubelet 接口的进程。它通过 Node API 将自身注册为集群节点，配置特定的 Taint 以避免普通 Pod 被调度到此节点。当 Pod 被调度到虚拟节点时，Virtual Kubelet 的 Provider 接口将 Pod 定义转换为后端服务（如 ACI）的容器实例并启动。Pod 状态通过 watch 机制持续同步回 Kubernetes。Provider 接口定义了 CreatePod、DeletePod、GetPod、GetPodStatus 等核心方法，每个 Provider 负责具体的后端对接。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **Taint/Toleration**: 使用 taint 控制调度到虚拟节点
-- **资源限制**: 设置合理的资源请求
-- **网络规划**: 注意虚拟节点的网络连通性
-- **持久化**: 虚拟节点通常不支持本地存储
+Virtual Kubelet 通过 Kubernetes Node API 注册为集群节点，具有特定的 Taint（`virtual-kubelet.io/provider`）。Pod 通过 Toleration 显式调度到虚拟节点。它实现了 Pod 生命周期管理（创建、删除、状态查询），但网络、存储和 Secret 等方面可能因 Provider 而异。Provider 负责将 Kubernetes Pod Spec 映射到底层平台的容器实例，包括环境变量、卷挂载、端口映射等配置。
+
+## 生产使用场景
+
+1. **突发流量处理**: 在流量高峰期将溢出的 Pod 调度到 ACI/Fargate，无需扩容节点
+2. **CI/CD 作业**: 将构建任务调度到无服务器平台，节省集群资源
+3. **混合调度**: 关键服务运行在自管节点，非关键任务运行在虚拟节点
+4. **边缘扩展**: 在边缘集群中使用 Virtual Kubelet 连接云端无服务器后端
+
+## 安装
+
+```bash
+# Azure ACI Provider
+helm repo add virtual-kubelet https://virtual-kubelet.github.io
+helm install virtual-kubelet virtual-kubelet/virtual-kubelet \
+  --set provider=azure --set env.azureSubscriptionId=<id>
+# 或使用 CLI
+vkubelet --provider azure --nodeName virtual-node-aci
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Virtual Kubelet** | 标准化接口、多 Provider | 部分功能受限（存储/网络） |
+| KEDA + Jobs | 事件驱动、原生 K8s | 仅支持缩容到零，不能扩展节点 |
+| Karpenter | 自动节点供给、高性能 | 仅支持节点级扩展，非无服务器 |
+| ACK (Alibaba) | 云厂商深度集成 | 厂商绑定 |
 
 ## 架构定位
 
-在 CNCF 生态中，virtual-kubelet 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Virtual Kubelet 属于 **Runtime / Orchestration** 类别，是 Kubernetes 与无服务器计算之间的桥梁。它扩展了 Kubernetes 的弹性能力边界。
 
 ## 参考链接
 

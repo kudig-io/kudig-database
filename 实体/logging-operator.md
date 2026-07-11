@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,28 +49,69 @@ prerequisites:
 
 ## 概述
 
-Logging Operator 是一个 Kubernetes Operator，用于自动化部署和配置 Kubernetes 集群的日志收集管道。它基于 Fluentd 和 Fluent Bit 构建，通过 CRD 声明式地管理日志的收集、过滤、转换和路由，支持将日志发送到 Elasticsearch、Loki、S3、Kafka 等多种后端。
+Logging Operator 是由 Banzaicloud（现 Cisco）开发的 Kubernetes 日志收集管道 Operator，2021 年加入 CNCF Sandbox。它基于 Fluentd 和 Fluent Bit 构建，通过 CRD 声明式地管理日志的收集、过滤、转换和路由，支持将日志发送到 Elasticsearch、Loki、S3、Kafka、CloudWatch 等多种后端。Logging Operator 将复杂的日志管道配置转化为 Kubernetes 原生的声明式 API。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **双层架构**: Fluent Bit（轻量采集器） + Fluentd（处理路由）
+- **CRD 声明式管理**: Logging、Flow、Output、ClusterFlow、ClusterOutput CRD
+- **多输出后端**: Elasticsearch、Loki、S3、Kafka、CloudWatch、Datadog 等
+- **日志过滤与转换**: 支持正则匹配、JSON 解析、字段重命名、记录修改
+- **多租户隔离**: 命名空间级别 Flow 隔离和全局 ClusterFlow
+- **缓冲保护**: PVC 持久化缓冲区防止输出不可用时数据丢失
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Logging Operator 采用双层架构。第一层 Fluent Bit 以 DaemonSet 运行在每个节点上，从容器日志文件（/var/log/containers）采集日志，发送到 Fluentd。第二层 Fluentd 以 StatefulSet 运行，负责日志处理（过滤、解析、转换）和路由（发送到多种输出）。Operator 监听 Logging、Flow、Output CRD，将用户配置翻译为 Fluent Bit 和 Fluentd 的配置文件。Flow CRD 定义命名空间级日志处理管道，Output CRD 定义日志输出目标。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **缓冲配置**: 生产环境使用 PVC 持久化缓冲区，防止数据丢失
-- **资源限制**: 为 Fluent Bit 和 Fluentd 设置合理的 CPU/内存限制
-- **日志分级**: 使用 Flow 过滤掉 debug 级别日志减少存储开销
-- **多输出**: 热数据发往 Elasticsearch/Loki，冷数据归档到 S3
-- **多租户**: 利用 Flow/Output 的 Namespace 隔离实现多租户日志管理
-- **监控缓冲**: 关注缓冲区使用率，避免因输出目标不可用导致缓冲溢出
+Logging Operator 通过 CRD 声明式管理日志管道。`logging` CRD 定义全局配置（Fluent Bit/Fluentd 部署参数）。`flow` CRD 为每个命名空间定义日志过滤和路由规则。`output` CRD 定义后端连接配置。Operator 自动管理 Fluent Bit DaemonSet 和 Fluentd StatefulSet 的生命周期。通过 Kubernetes RBAC 控制不同命名空间的日志管道配置权限。
+
+## 生产使用场景
+
+1. **统一日志收集**: 为集群中所有应用提供统一的日志采集和处理管道
+2. **多租户日志**: 不同命名空间的日志发送到不同的 Elasticsearch 索引
+3. **热温冷分层**: 热数据发往 Elasticsearch/Loki，冷数据归档到 S3
+4. **Kafka 管道**: 将日志发送到 Kafka，由下游消费者异步处理
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
+helm install logging-operator banzaicloud-stable/logging-operator
+# 配置日志管道
+kubectl apply -f - <<EOF
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+spec:
+  fluentd: {}
+  fluentbit: {}
+  controlNamespace: logging
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata: { name: loki-output }
+spec:
+  loki:
+    url: http://loki.logging.svc:3100
+    labels: { app: "{{.kubernetes.labels.app}}" }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Logging Operator** | CRD 声明式、双层架构 | 配置复杂度高 |
+| Promtail + Loki | Grafana 原生集成 | 功能单一（仅 Loki 输出） |
+| Vector | Rust 高性能、统一日志+指标 | 非 K8s 原生配置 |
+| Filebeat | ELK 生态标准 | 配置手动、无 CRD |
 
 ## 架构定位
 
-在 CNCF 生态中，logging-operator 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Logging Operator 属于 **Observability / Logging** 类别，是 Kubernetes 日志管道的声明式管理方案。它与 Loki、Elasticsearch、Grafana 等项目协同工作。
 
 ## 参考链接
 

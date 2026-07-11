@@ -13,7 +13,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,40 +34,48 @@ prerequisites:
 
 
 
-
 # KubeFleet
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
 ## 概述
 
-KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、[[Service|Service]]、ConfigMap 等）自动分发到多个成员集群，并支持基于集群属性、资源可用性和自定义策略的智能调度。
+KubeFleet 是一个 CNCF 沙箱项目，由 Microsoft 开源，专注于 Kubernetes 多集群应用编排和资源调度。它提供统一的管理平面，将应用工作负载智能分发到多个集群，支持基于资源可用性、标签策略和地理位置的调度决策。KubeFleet 特别关注大规模边缘和混合云场景，解决多集群环境下的应用部署、配置管理和生命周期协调问题。项目是 Azure Kubernetes Fleet Manager 的开源核心。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **多集群调度**：基于资源容量、标签约束和亲和性的智能工作负载调度
+- **资源预留**：在目标集群预留资源确保部署成功
+- **渐进式部署**：支持跨集群的滚动更新和金丝雀发布
+- **配置传播**：跨集群的 ConfigMap、Secret、RBAC 等配置同步
+- **集群分组**：通过集群属性（Property）和分组（ClusterGroup）管理集群
+- **冲突解决**：自动处理多集群资源冲突和覆盖
+
+## 架构与工作原理
+
+KubeFleet 采用 Hub-Spoke 架构：Hub Cluster 运行 Fleet Manager 控制器，管理工作负载分发策略和集群状态；Member Clusters 运行 Fleet Agent，接收并执行分发指令。核心 CRD 包括 ClusterProperty（集群属性）、ClusterGroup（集群分组）、MemberCluster（成员集群注册）。调度引擎通过 Resource Distribution Controller 将工作负载按策略分发到目标集群，并跟踪各集群的部署状态。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+KubeFleet 通过丰富的 CRD 与 Kubernetes 集成：MemberCluster CRD 注册成员集群；ClusterResourcePlacement CRD 定义资源分发策略（目标集群、调度约束、部署策略）；ClusterGroup CRD 定义集群分组。Hub Controller 通过各成员集群的 kubeconfig 连接到远程 API Server，推送配置和监控状态。Agent 在成员集群中协调实际资源创建。
 
-## 生产部署要点
+## 生产用例
 
-- **Hub 高可用**: Hub 集群使用多副本部署，确保控制面高可用
-- **标签规范**: 统一集群标签体系（region、env、tier），便于调度策略编写
-- **渐进式发布**: 关键服务使用 RollingUpdate 策略，避免同时更新所有集群
-- **资源选择器**: 精确定义 resourceSelectors，避免意外分发不需要的资源
-- **监控告警**: 监控 ClusterResourcePlacement 的 status conditions，及时发现分发异常
+- **多集群应用部署**：将应用统一部署到多个生产集群
+- **边缘计算编排**：将工作负载分发到地理分布的边缘集群
+- **灾难恢复**：跨集群的工作负载快速迁移和恢复
+- **多环境管理**：统一管理 dev/staging/prod 的应用部署
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，kubefleet 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+helm repo add kubefleet https://azure.github.io/fleet/charts
+helm install fleet kubefleet/fleet-manager -n fleet-system --create-namespace
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[deployment]]
-- [[实体/crd-custom-resources.md|crd-custom-resources]]
-- [[概念/controller-pattern.md|controller-pattern]]
+相比 Karmada（CNCF 孵化），KubeFleet 更关注 Azure 生态但功能类似。相比 KubeStellar，KubeFleet 的调度策略更丰富但社区更小。
 
 ## Related
 

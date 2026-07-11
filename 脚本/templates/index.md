@@ -31,4 +31,8 @@ last_updated: 2026-07
 - [[脚本/templates/moc-template.md|Moc Template]]
 - [[脚本/templates/presentation-template.md|Presentation Template]]
 - [[脚本/templates/skill-template.md|Skill Template]]
+- [[脚本/templates/runbook-template.md|Runbook Template]]
+- [[脚本/templates/slo-template.md|SLO Template]]
+- [[脚本/templates/postmortem-template.md|Postmortem Template]]
+- [[脚本/templates/onboarding-guide-template.md|Onboarding Guide Template]]
 

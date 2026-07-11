@@ -16,7 +16,7 @@ tags:
 - ceph
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -43,51 +43,51 @@ prerequisites:
 
 
 
-
 # 存储体系
 
-## PV/PVC 绑定机制
+> **CNCF 状态**: 生态概览 | **类别**: Storage | **主要语言**: YAML
 
-- **PV（PersistentVolume）**：集群级存储资源
-- **PVC（PersistentVolumeClaim）**：用户对存储的请求
-- 绑定条件：accessModes + storageClassName + capacity 匹配
+## 概述
 
-回收策略：Retain（保留）、Delete（删除）、Recycle（已废弃）。
+Kubernetes 存储生态系统是一个涵盖 CSI 驱动、存储类、卷快照、数据保护等多层面的综合技术体系。它定义了容器存储接口（CSI）标准，让存储厂商可以通过统一的插件接口为 K8s 提供持久化存储能力。该生态系统包括 CSI 驱动（如 Ceph RBD、NFS、EBS、Azure Disk）、存储编排工具（如 Rook、Longhorn）、数据保护方案（如 Velero、Kasten）等多个组件。
 
-## StorageClass 动态供给
+## Key Features（核心能力）
 
-```yaml
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: fast-ssd
-provisioner: kubernetes.io/aws-ebs
-parameters:
-  type: gp3
-  iops: "3000"
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
+- **CSI 标准**：Container Storage Interface 统一了存储提供商的接入方式
+- **StorageClass**：动态 PV 供应，支持存储分层和 QoS
+- **VolumeSnapshot**：卷快照和恢复机制
+- **Volume Expansion**：在线卷扩容
+- **Rook/Longhorn**：K8s 原生的分布式存储编排
+- **Velero**：集群资源和 PV 数据的备份恢复
+
+## 架构与工作原理
+
+K8s 存储生态由多个层级构成：存储介质层（块存储、文件存储、对象存储）；CSI 驱动层（Provisioner、Attacher、Snapshotter 三组件）；K8s API 层（PV/PVC/StorageClass/VolumeSnapshot CRD）；编排管理层（Rook operator、Longhorn manager）。PVC 通过 StorageClass 动态创建 PV，CSI 驱动与底层存储系统交互完成实际卷操作。
+
+## K8s 集成
+
+K8s 存储核心概念包括 PersistentVolume（PV，集群级存储资源）、PersistentVolumeClaim（PVC，用户级存储请求）、StorageClass（动态供应策略）。CSI 驱动通过 Sidecar 组件（external-provisioner、external-attacher、external-snapshotter）与 K8s 控制平面交互。Pod 通过 volumeMounts 引用 PVC，kubelet 通过 CSI gRPC 接口挂载卷到 Pod。
+
+## 生产用例
+
+- **数据库持久化**：MySQL/PostgreSQL 的持久化存储
+- **消息队列存储**：Kafka/RabbitMQ 的数据卷
+- **数据备份恢复**：Velero 定期备份 PV 数据到 S3
+- **多区域存储**：跨 AZ 的存储复制和高可用
+
+## 安装与快速开始
+
+```bash
+# 安装 Rook-Ceph 分布式存储
+helm repo add rook-release https://charts.rook.io/release
+helm install rook-ceph rook-release/rook-ceph -n rook-ceph --create-namespace
+# 创建 StorageClass
+kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/csi/rbd/storageclass.yaml
 ```
 
-## CSI 驱动架构
+## 对比替代方案
 
-CSI（Container Storage Interface）三组件：
-- **External Provisioner**：创建/删除存储卷
-- **External Attacher**：挂载/卸载存储卷到节点
-- **Node Driver**：节点级别挂载操作
-
-主流驱动：AWS EBS CSI、Azure Disk CSI、GCE PD CSI、Ceph RBD CSI、NFS CSI。
-
-## 灾备恢复（Velero）
-
-Velero 备份策略：
-- **集群资源备份**：所有 K8s 对象（etcd 快照）
-- **PV 数据备份**：VolumeSnapshot 或 restic 文件级备份
-- **跨集群恢复**：支持不同集群间恢复
-
----
-
-> 来源：.zread/wiki/drafts/10-cun-chu-ti-xi-pv-pvc-storageclass-csi-qu-dong-yu-zai-bei-hui-fu.md
+相比 in-tree 存储插件（已废弃），CSI 提供了标准化、可插拔的存储接口。相比外部存储阵列，Rook/Longhorn 提供 K8s 原生的分布式存储。
 
 ## Related
 
@@ -96,5 +96,6 @@ Velero 备份策略：
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+
 
 <!-- risk-assessed -->

@@ -1,7 +1,7 @@
 ---
 title: Open Policy Containers (OPCR)
 description: '## 概述'
-summary: 'Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包为 OCI 兼容镜像并分发的标准和工具集。它定义了 Policy as Code 的打包格式，使策略可以像容器镜像一样存储在任意 OCI Registry 中，并支持签名、版本化和分发。'
+summary: 'Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包为 OCI 兼容镜像并分发的标准和工具集。'
 category: entities
 tags:
 - k8s
@@ -14,7 +14,7 @@ tags:
 - agent
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,34 +39,94 @@ prerequisites:
 
 
 
-
 # [[实体/open-policy-containers.md|Open Policy Containers]] (OPCR)
 
 > **CNCF 状态**: Sandbox | **类别**: Policy | **主要语言**: Go
 
 ## 概述
 
-Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包为 OCI 兼容镜像并分发的标准和工具集。它定义了 Policy as Code 的打包格式，使策略可以像容器镜像一样存储在任意 OCI Registry 中，并支持签名、版本化和分发。OPCR 让安全策略的管理和部署与云原生工作流无缝集成。
+Open Policy Containers (OPCR) 是一个将 OPA (Open Policy Agent) 策略打包为 OCI 兼容镜像并分发的标准和工具集。它定义了 Policy as Code 的打包格式，使安全策略可以像容器镜像一样存储在任意 OCI Registry 中，并支持签名、版本化和分发。OPCR 让安全策略的管理和部署与云原生工作流无缝集成——策略开发者使用 `opcr build/push` 打包和分发 Rego 策略，运维人员通过 `opcr pull` 拉取策略到 OPA 部署中。OPCR 还支持基于 cosign 的策略签名验证，确保策略在分发过程中不被篡改。
 
 ## 核心能力
 
-- 详见源文档获取完整信息 ^[inferred]
+- **OCI 策略打包**: 将 Rego 策略文件打包为 OCI 兼容镜像
+- **标准 Registry 兼容**: 推送到 Docker Hub、Harbor、ECR、GCR 等标准 OCI Registry
+- **版本管理**: 通过 OCI 标签实现策略版本控制（v1.0.0、latest 等）
+- **签名验证**: 基于 cosign 的策略签名，防止策略被篡改
+- **opcr CLI**: 类似 Docker 的 CLI 接口（build/push/pull/sign）
+- **Kubernetes 集成**: 通过 Operator 或 Gatekeeper 自动同步策略镜像
+
+## 架构
+
+OPCR 采用 OCI 制品规范打包策略：
+
+- **opcr CLI**: 命令行工具，管理策略镜像的 build/push/pull/sign
+- **Policy Bundle**: 包含 Rego 文件和 manifest 的 OCI 层
+- **OCI Manifest**: 描述策略镜像的 OCI 1.1 manifest
+- **Cosign**: 策略签名工具（可选，基于 Sigstore）
+- **Registry**: 标准 OCI Registry 存储（Harbor/Docker Hub/ECR）
+- **Policy Controller (OPA/Gatekeeper)**: 消费策略镜像的运行时
+
+打包流程：`Rego 文件 → opcr build → OCI 镜像 → opcr push → Registry → opcr pull → OPA/Gatekeeper`
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+OPCR 打包的策略镜像可以被 Kubernetes 中的 OPA 或 Gatekeeper 消费。Gatekeeper 支持从 OCI Registry 拉取策略镜像作为 ConstraintTemplate。OPCR 还可以与策略编排工具（如 OPA Operator）集成——Operator 监听 Registry 中的策略镜像更新，自动拉取新版本策略并加载到 OPA。通过 cosign 签名验证确保只有受信任的策略被部署。与 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中的准入控制（Admission Webhook）和供应链安全机制集成。
 
-## 生产部署要点
+## 生产场景
 
-- **语义版本**: 使用语义化版本号管理策略版本
-- **签名验证**: 生产环境始终验证策略签名，防止策略被篡改
-- **测试先行**: 每次策略变更都运行完整的测试套件
-- **分层策略**: 将通用策略和业务策略分开打包，便于复用
-- **审计日志**: 记录策略版本变更和部署历史
+1. **策略即代码**: 将安全策略（如"禁止 latest 标签镜像"）打包为 OCI 镜像，GitOps 管理
+2. **多集群策略分发**: 通过中央 Registry 向所有集群统一分发安全策略
+3. **合规策略管理**: 将 PCI-DSS/SOC 2 合规策略打包版本化，审计可追溯
+4. **策略市场**: 在组织内共享通用安全策略包
+
+## 安装
+
+```bash
+# 安装 opcr CLI
+curl -L https://github.com/opcr-io/opcr/releases/latest/download/opcr_$(uname -s)_$(uname -m).tar.gz | tar xz
+mv opcr /usr/local/bin/
+
+# 登录 Registry
+opcr login myregistry.io -u username -p password
+
+# 构建策略镜像
+cat > policy.rego <<'REGO'
+package k8srequiredlabels
+
+violation[{"msg": msg, "details": {"missing_labels": missing}}] {
+  provided := {label | input.review.object.metadata.labels[label]}
+  required := {label | label := input.parameters.labels[_]}
+  missing := required - provided
+  count(missing) > 0
+  msg := sprintf("you must provide labels: %v", [missing])
+}
+REGO
+
+opcr build -t myregistry.io/policies/k8s-required-labels:v1.0.0 .
+
+# 推送到 Registry
+opcr push myregistry.io/policies/k8s-required-labels:v1.0.0
+
+# 签名（使用 cosign）
+cosign sign --key cosign.key myregistry.io/policies/k8s-required-labels:v1.0.0
+
+# 拉取到 OPA/Gatekeeper
+opcr pull myregistry.io/policies/k8s-required-labels:v1.0.0
+```
+
+## 对比
+
+| 特性 | OPCR | OPA Bundles | Kyverno Policies | Gatekeeper Constraints |
+|------|------|-------------|------------------|------------------------|
+| OCI 打包 | ✅ | ❌ | ❌ | ❌ |
+| Registry 分发 | ✅ | ⚠️ HTTP | ❌ | ❌ |
+| 签名验证 | ✅ cosign | ❌ | ❌ | ❌ |
+| CNCF 状态 | Sandbox | Graduated | Incubating | Incubating |
 
 ## 架构定位
 
-在 CNCF 生态中，open-policy-containers 属于 **Policy** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，OPCR 属于 **Policy** 类别，为云原生应用提供策略的 OCI 打包和分发能力。
 
 ## 参考链接
 

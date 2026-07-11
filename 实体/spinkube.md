@@ -16,7 +16,7 @@ tags:
 - wasm
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -45,28 +45,62 @@ prerequisites:
 
 ## 概述
 
-SpinKube 是一个在 Kubernetes 上运行 WebAssembly (Wasm) 微服务和应用的开源平台。它将 Fermyon Spin 框架与 Kubernetes 集成，使开发者能够像部署容器一样部署 Wasm 应用，同时获得更快的启动速度、更小的资源占用和更强的安全隔离。
+SpinKube 是由 Microsoft（Fermyon 团队）开源的 WebAssembly（Wasm）应用运行平台，2024 年加入 CNCF Sandbox。它将 Fermyon Spin 框架与 Kubernetes 集成，使开发者能够像部署容器一样部署 Wasm 应用，同时获得更快的启动速度（毫秒级）、更小的资源占用（MB 级）和更强的安全隔离（Wasm 沙箱）。SpinKube 代表了 Wasm 作为容器补充运行时的方向。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Wasm 原生**: 将 Spin Wasm 应用作为一等公民部署到 Kubernetes
+- **极速启动**: Wasm 模块毫秒级启动，适合 Serverless 和事件驱动场景
+- **低资源占用**: 每个 Wasm 实例仅几 MB 内存，高密度部署
+- **SpinApp CRD**: 通过 CRD 声明式管理 Wasm 应用
+- **OCI 分发**: Wasm 应用通过 OCI Artifact 分发，复用标准 Registry
+- **containerd shim**: 通过 spin-shim 与 containerd 原生集成
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+SpinKube 由 Spin Operator 和 containerd-shim-spin 组成。Spin Operator 监听 SpinApp CRD，管理 Wasm 应用的副本和调度。containerd-shim-spin 是 containerd 的 OCI Runtime Shim，使 containerd 能够直接运行 Wasm 模块而非容器镜像。当 Pod 指定 RuntimeClass 为 `wasmtime-spin-v2` 时，kubelet 通过 CRI 调用 containerd，containerd 通过 shim 加载 Wasm 模块并在 Wasmtime 运行时中执行。Wasm 应用通过 Spin SDK 访问 Key-Value Store、SQLite、HTTP 等组件能力。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **适用场景**: 高密度短任务、API Gateway、边缘计算、Serverless 函数
-- **OCI 分发**: 使用 `spin registry push` 将 Wasm 应用作为 OCI artifact 分发
-- **状态管理**: 使用 Spin 的 Key-Value Store 或 SQLite 数据库组件管理状态
-- **渐进采用**: 从无状态 API 和辅助微服务开始，逐步扩大 Wasm 工作负载比例
-- **监控**: 利用 Kubernetes 标准监控工具监控 SpinApp 的 Pod 状态和资源使用
-- **多组件**: 利用 Spin 的多组件模型在一个应用中组合 API 和静态文件服务
+SpinKube 通过 RuntimeClass 与 Kubernetes 集成。`runtimeClassName: wasmtime-spin-v2` 指示 kubelet 使用 Wasm 运行时。SpinApp CRD 定义 Wasm 应用的镜像（OCI 引用）、副本数、环境变量和触发器。Operator 将 SpinApp 转换为标准 Deployment + Service。containerd 的 shim 层处理 Wasm 模块加载和执行，对 Kubernetes 控制平面完全透明。支持标准的 HPA、Service 和 Ingress。
+
+## 生产使用场景
+
+1. **Serverless 函数**: 事件驱动的 Wasm 函数，毫秒级冷启动
+2. **API 微服务**: 轻量级 HTTP API 服务，高密度部署
+3. **边缘计算**: 在资源受限的边缘节点上运行 Wasm 应用
+4. **事件处理**: 消息队列消费者的轻量级处理函数
+
+## 安装
+
+```bash
+# 安装 Spin Operator
+kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.4.0/spin-operator.crds.yaml
+kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.4.0/spin-operator.runtime-class.yaml
+kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.4.0/spin-operator.deployment.yaml
+# 部署 Spin 应用
+kubectl apply -f - <<EOF
+apiVersion: core.spinkube.dev/v1alpha1
+kind: SpinApp
+metadata: { name: hello-wasm }
+spec:
+  image: ghcr.io/spinkube/containerd-shim-spin/examples/spin-rust-hello:v0.4.0
+  replicas: 3
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **SpinKube** | K8s 原生 Wasm、CRD 管理 | 较新、生态小 |
+| WasmEdge + containerd | CNCF Wasm 运行时 | 需手动集成 |
+| Kuasar | 多沙箱运行时 | 通用方案、非 Wasm 专注 |
+| 容器 (containerd) | 最成熟、生态最大 | 启动慢、资源占用大 |
 
 ## 架构定位
 
-在 CNCF 生态中，spinkube 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，SpinKube 属于 **Runtime / WebAssembly** 类别，是 Wasm 在 Kubernetes 上的代表性运行平台。它代表了容器与 Wasm 共存的未来方向。
 
 ## 参考链接
 

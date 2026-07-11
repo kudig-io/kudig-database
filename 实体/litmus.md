@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,32 +48,65 @@ prerequisites:
 
 ## 概述
 
-[[Litmus|Litmus]] 是云原生混沌工程平台，提供完整的混沌实验编排和管理能力。它帮助团队在受控环境中测试系统弹性，发现潜在问题点并提高系统可靠性。
+LitmusChaos 是由 Harness（原 MayaData）开源的云原生混沌工程平台，2020 年加入 CNCF Sandbox，后晋升为 Incubating。它提供完整的混沌实验编排和管理能力，帮助团队在受控环境中主动注入故障，测试系统弹性，发现潜在问题。LitmusChaos 提供预置的 ChaosHub 实验库，支持 Pod 杀死、网络延迟、CPU 压力等数十种故障注入场景，并通过 GitOps 方式管理混沌实验。
 
-## 核心能力
+## 核心特性
 
-- **丰富的实验库**: ChaosHub 提供 50+ 预置混沌实验
-- **Kubernetes 原生**: CRD 方式定义和管理混沌实验
-- **GitOps 支持**: 混沌即代码，版本控制管理
-- **可观测性集成**: Prometheus 指标和 Grafana 仪表盘
-- **细粒度控制**: 支持命名空间、标签、注解级别的定向注入
-- **多租户**: 支持多团队协作管理混沌实验
+- **ChaosHub**: 50+ 预置混沌实验（Pod Kill、Network Delay、CPU Hog、Disk Fill 等）
+- **CRD 原生**: ChaosEngine、ChaosExperiment、ChaosResult CRD 声明式管理
+- **GitOps 支持**: 混沌实验以 YAML 定义，通过 Git 版本控制管理
+- **稳态假设**: 实验前后验证系统稳态指标（Hypothesis CRD）
+- **多调度模式**: 支持 Cron、Manual、Automated 触发方式
+- **可观测性**: Prometheus 指标导出和 Grafana 仪表盘
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+LitmusChaos 采用控制平面-执行平面分离架构。控制平面（ChaosCenter）提供 Web UI 和 API，管理项目、用户和实验编排。执行平面由 ChaosOperator 和 ChaosRunner 组成——Operator 监听 ChaosEngine CRD，为每个实验创建 ChaosRunner Pod。ChaosRunner 注入混沌故障到目标 Pod/Node。实验执行使用 LitmusProbes（探针）验证稳态假设，结果写入 ChaosResult CRD。ChaosHub 提供实验模板，可克隆和自定义。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **渐进式测试**: 从低强度实验开始，逐步增加复杂度
-- **稳态假设**: 实验前定义清晰的稳态指标和阈值
-- **最小爆炸半径**: 限制实验范围，避免影响生产环境
-- **自动化集成**: 将混沌实验纳入 CI/CD 流水线
-- **游戏日**: 定期组织全团队参与的混沌工程演练
+LitmusChaos 完全基于 Kubernetes CRD 构建。ChaosEngine 定义实验目标和参数，ChaosExperiment 定义实验步骤，ChaosResult 记录执行结果。通过 ServiceAccount 和 RBAC 控制实验权限范围。支持命名空间级别的混沌隔离。实验可通过 ArgoCD 或 FluxCD 以 GitOps 方式部署。ChaosScheduler 支持 CronJob 式的定期实验。
+
+## 生产使用场景
+
+1. **弹性验证**: 在游戏日（Game Day）中注入 Pod 故障，验证自动恢复能力
+2. **CI/CD 集成**: 在部署后自动运行混沌实验，确保新版本的弹性不退化
+3. **多区域容灾**: 注入网络分区，验证跨区域故障切换
+4. **容量规划**: 注入 CPU/内存压力，验证系统在高负载下的表现
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add litmuschaos https://litmuschaos.github.io/litmus-helm/
+helm install litmus litmuschaos/litmus --namespace litmus --create-namespace
+# 安装混沌实验
+kubectl apply -f https://hub.litmuschaos.io/api/chaos/2.15.0?file=charts/generic/pod-delete/experiment.yaml
+# 运行实验
+kubectl apply -f - <<EOF
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata: { name: pod-kill-test }
+spec:
+  appinfo: { appns: default, applabel: app=test }
+  chaosServiceAccount: litmus-admin
+  experiments:
+  - name: pod-delete
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **LitmusChaos** | CNCF Incubating、UI 完善 | 资源开销中等 |
+| Chaos Mesh | CNCF Incubating、中文社区强 | 架构较重 |
+| Gremlin | 企业级、商业支持 | 商业产品 |
+| Pumba | 轻量级、Docker 原生 | 功能有限、无 UI |
 
 ## 架构定位
 
-在 CNCF 生态中，litmus 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，LitmusChaos 属于 **Observability / Reliability Engineering** 类别，是云原生混沌工程的两大主流平台之一（与 Chaos Mesh 并列）。
 
 ## 参考链接
 

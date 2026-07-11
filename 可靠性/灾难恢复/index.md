@@ -17,6 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
+- [[可靠性/灾难恢复/01-multi-region-dr-architecture.md|Multi Region Dr Architecture]]
+- [[可靠性/灾难恢复/02-dr-automation-playbook.md|Dr Automation Playbook]]
 - [[可靠性/灾难恢复/01-vmware-vsphere-enterprise-dr.md|Vmware Vsphere Enterprise Dr]]
 - [[可靠性/灾难恢复/02-veeam-enterprise-backup.md|Veeam Enterprise Backup]]
 - [[可靠性/灾难恢复/03-enterprise-disaster-recovery-chaos-engineering.md|Enterprise Disaster Recovery Chaos Engineering]]

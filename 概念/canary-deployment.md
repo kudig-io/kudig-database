@@ -10,8 +10,8 @@ tier: supporting
 sources:
 - KUDIG Gap Analysis 2026-05-21
 created: 2026-05-21
-updated: 2026-05-21
-last_updated: 2026-05-21
+updated: 2026-07
+last_updated: 2026-07
 status: reviewed
 ---
 
@@ -98,7 +98,96 @@ Service Mesh 支持基于 HTTP 头、Cookie、用户身份等维度的路由，�
 - **准备一键回滚**：金丝雀版本出现异常时，能够快速将流量比例归零或切回稳定版本
 - **渐进推广节奏**：建议按 5% → 10% → 25% → 50% → 100% 的节奏推进，每个阶段充分验证
 
-更多部署排错方法请参考 [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]。
+## 技术深度解析
+
+### 流量分割的实现层级
+
+金丝雀发布的流量控制可以在不同网络层级实现：
+
+| 层级 | 机制 | 精度 | 适用场景 |
+|------|------|------|---------|
+| Pod 副本比例 | Deployment replicas 比例 | 粗（受 Pod 数限制） | 简单场景 |
+| Service Mesh | Istio VirtualService weight | 精细（1% 级别） | 生产标准 |
+| Ingress | Nginx canary-weight | 中等（5% 级别） | 非 Mesh 环境 |
+| 网关层 | API Gateway 流量分割 | 精细 + 支持用户分群 | 高级路由需求 |
+
+### Nginx Ingress 金丝雀
+
+```yaml
+# 金丝雀 Ingress（通过 annotation 控制）
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-canary
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"        # 10% 流量
+    # 或基于 header/Cookie 的定向金丝雀
+    nginx.ingress.kubernetes.io/canary-by-header: "x-canary"
+    nginx.ingress.kubernetes.io/canary-by-header-value: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-app-canary
+            port:
+              number: 80
+```
+
+### Argo Rollouts 自动化金丝雀
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app
+spec:
+  replicas: 10
+  strategy:
+    canary:
+      canaryService: my-app-canary       # 金丝雀 Service
+      stableService: my-app-stable       # 稳定版 Service
+      trafficRouting:
+        istio:
+          virtualService:
+            name: my-app-vs
+            routes:
+            - primary
+      steps:
+      - setWeight: 5
+      - pause: {duration: 5m}
+      - analysis:
+          templates:
+          - templateName: success-rate-check
+      - setWeight: 25
+      - pause: {duration: 10m}
+      - analysis:
+          templates:
+          - templateName: success-rate-check
+      - setWeight: 50
+      - pause: {duration: 10m}
+      - setWeight: 100
+```
+
+## 最佳实践
+
+- **从极小比例开始**：建议从 1% 或 5% 开始——即使新版本有严重 bug，影响面也极小
+- **定义自动化决策标准**：提前用 AnalysisTemplate 定义错误率、延迟等指标红线，避免人工判断延迟
+- **选择有意义的流量子集**：优先将内部用户、灰度地域或非关键业务流量导入金丝雀——而非随机分配
+- **每个阶段充分观察**：每阶段至少观察 15-30 分钟，覆盖一个完整业务周期（如包含高峰期）
+- **准备一键回滚**：金丝雀异常时，能够通过将 canary weight 归零瞬间切回稳定版本
+
+## 常见陷阱
+
+- **金丝雀流量太少无统计意义**：如果金丝雀只占 1% 流量但总 QPS 很低（如 10 QPS），样本量不足以发现问题——需要确保金丝雀流量绝对值足够
+- **Session 一致性问题**：用户请求在稳定版和金丝雀版之间随机切换，可能导致 session 不一致——使用基于 Cookie/header 的粘性路由
+- **金丝雀与稳定版数据库 schema 冲突**：如果金丝雀版本修改了数据库 schema，可能与稳定版不兼容——需要遵循兼容性扩展策略
+
+更多部署排错方法请参考 [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[概念/blue-green-deployment.md|blue-green-deployment]]。
 
 
 ## 参见

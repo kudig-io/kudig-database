@@ -14,7 +14,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -37,38 +37,51 @@ prerequisites:
 
 
 
-
 # Paralus
 
 > **CNCF 状态**: Sandbox | **类别**: Security | **主要语言**: Go
 
 ## 概述
 
-Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提供统一的身份认证、授权和审计能力。它作为 kubectl 和 [[系统基础/知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 之间的安全代理层，实现基于身份的细粒度访问控制和完整的操作审计日志。
+Paralus 是一个 CNCF 沙箱项目，由 RackN 开发，是一个 Kubernetes 集群的零信任访问控制系统。它提供基于角色的访问控制（RBAC）、单点登录（SSO）和审计日志功能，让用户通过统一身份认证安全地访问多个 K8s 集群。Paralus 消除了共享 kubeconfig 和 SSH 访问的安全风险，通过短期 Token 和细粒度权限实现零信任 K8s 访问。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **统一身份认证**：集成 OIDC/SAML/SSO 提供跨集群统一登录
+- **细粒度 RBAC**：基于 Namespace、Role、Cluster 的多层访问控制
+- **kubectl 代理**：通过 Paralus Proxy 代理 kubectl 命令，无需直接暴露 K8s API
+- **SSO 集成**：支持 GitHub、Google、Azure AD、Okta 等身份提供商
+- **审计日志**：记录所有 K8s API 操作，支持合规审计
+- **多集群管理**：统一管理多个 K8s 集群的访问权限
+
+## 架构与工作原理
+
+Paralus 由多个组件构成：Paralus Controller 是核心管理平面，管理用户、角色、集群和策略；Paralus Connector（Adapter）部署在目标集群，作为 K8s API 的反向代理执行认证和授权；Paralus CLI（pctl）为用户提供本地 kubectl 代理。用户通过 OIDC SSO 认证后获取短期 Token，Token 通过 Paralus Proxy 转发到目标集群，Proxy 验证 Token 并根据 RBAC 策略授权或拒绝请求。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Paralus Controller 部署在管理集群上，通过 CRD 或数据库管理用户/角色/集群映射。Paralus Adapter 以 Deployment 部署在目标集群，作为 K8s API Server 前面的认证代理。用户配置 kubectl 使用 Paralus Proxy 地址而非直接连接 K8s API Server。通过 ValidatingWebhook 确保 Adapter 正确拦截所有 API 请求。
 
-## 生产部署要点
+## 生产用例
 
-- **零信任**: 所有集群访问通过 Paralus 代理，不直接暴露 API Server
-- **JIT 访问**: 为生产集群使用即时访问，避免长期权限授予
-- **审计合规**: 利用审计日志满足合规要求，记录所有 kubectl 操作
-- **IdP 集成**: 使用企业 IdP (Okta/Azure AD) 统一身份管理
-- **最小权限**: 基于项目和命名空间配置最小权限角色
+- **多集群安全访问**：为团队提供统一的多集群 K8s 访问入口
+- **合规审计**：满足金融/医疗行业对 K8s 操作审计的要求
+- **零信任安全**：消除共享凭据，使用短期 Token 实现最小权限访问
+- **外部协作者访问**：安全地为外包团队提供临时 K8s 访问
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，paralus 属于 **Security** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+helm repo add paralus https://paralus.github.io/helm-charts
+helm install paralus paralus/paralus -n paralus --create-namespace
+# 下载 pctl CLI
+pctl login paralus.example.com
+pctl kubeconfig --cluster production
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[pod-lifecycle]]
+相比 Teleport（通用基础设施访问），Paralus 专注于 K8s 集群访问控制。相比 K8s 原生 RBAC + OIDC，Paralus 提供更丰富的多集群管理和审计能力。
 
 ## Related
 

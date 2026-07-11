@@ -15,7 +15,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -37,42 +37,48 @@ prerequisites:
 
 
 
-
 # Eraser
 
 > **CNCF 状态**: Sandbox | **类别**: Image | **主要语言**: Go
 
 ## 概述
 
-Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群节点中删除存在漏洞的和未使用的容器镜像。它通过与漏洞扫描器（如 [[Trivy|Trivy]]）集成，定期扫描节点上的镜像，自动移除包含高危漏洞的镜像，减小节点的攻击面并释放磁盘空间。
+Eraser 是一个 CNCF 沙箱项目，由 Microsoft 开源，是 Kubernetes 集群的自动化镜像清理工具。它定期扫描节点上的容器镜像，删除不安全或不再使用的镜像，减少节点存储消耗和攻击面。Eraser 特别关注安全管理——可以自动删除包含已知漏洞（CVE）的镜像，防止不安全镜像在节点上被使用。与 K8s 原生的镜像垃圾回收（基于磁盘阈值）不同，Eraser 提供基于策略的主动镜像清理。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **漏洞扫描清理**：集成 Trivy 自动扫描并删除包含 CVE 的镜像
+- **未使用镜像清理**：删除节点上没有运行容器的镜像
+- **镜像排除列表**：通过配置保护关键镜像不被清理
+- **定时清理**：通过 CronJob 或 EraserSchedule CRD 定期执行
+- **节点资源释放**：可视化报告清理后的存储空间回收
+- **ImageList 管理**：通过 CRD 声明式管理需要清理的镜像列表
+
+## 架构与工作原理
+
+Eraser 由 Manager、Collector 和 Remover 三个组件构成。Manager 作为 Controller 管理清理任务的生命周期；Collector 以 DaemonSet 方式运行在每个节点上，扫描本地镜像列表和漏洞信息；Remover 执行实际的镜像删除操作（通过 containerd/CRI API）。通过 ImageList CRD 声明需要删除的镜像，Manager 协调各节点上的 Collector 和 Remover 执行清理。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Eraser 通过 CRD 与 Kubernetes 集成。ImageList CRD 定义需要从节点清理的镜像列表（通过镜像名或正则匹配）。Eraser ConfigMap 配置全局策略（排除列表、扫描器配置）。Manager 通过 Deployment 部署，Collector/Remover 通过 DaemonSet 运行在每个节点。通过 containerd 的 Image Service API 或 nerdctl 执行镜像删除。
 
-## 生产部署要点
+## 生产用例
 
-- **排除列表**: 将关键系统镜像（pause、coredns 等）加入排除列表
-- **渐进部署**: 先在非生产集群测试清理策略，确认不会误删关键镜像
-- **执行时间**: 将清理任务安排在低峰时段执行，减少对节点的影响
-- **严重级别**: 根据组织安全策略选择需要清理的漏洞严重级别
-- **磁盘监控**: 配合节点磁盘使用率监控，动态调整清理频率
+- **节点存储管理**：定期清理未使用镜像释放节点磁盘
+- **安全漏洞修复**：自动删除包含已知 CVE 的镜像
+- **合规要求**：确保节点上不残留过期或不安全的镜像
+- **大规模集群维护**：数千节点集群的镜像清理自动化
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，eraser 属于 **Image** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+helm repo add eraser https://eraser-dev.github.io/eraser/charts
+helm install eraser eraser/eraser -n eraser-system --create-namespace
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[containerd]]
-- [[实体/trivy.md|trivy]]
-- [[实体/crd-custom-resources.md|crd-custom-resources]]
-- [[operator-pattern]]
-- [[概念/controller-pattern.md|controller-pattern]]
+相比 K8s 原生镜像 GC（基于磁盘阈值被动清理），Eraser 提供基于策略的主动清理和安全扫描。相比手动清理脚本，Eraser 提供声明式管理和高可靠性。
 
 ## Related
 

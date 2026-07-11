@@ -16,7 +16,7 @@ tags:
 - containerd
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -50,28 +50,56 @@ prerequisites:
 
 ## 概述
 
-K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二进制文件，零依赖、零摩擦地安装和运行。k0s 的设计目标是简化 Kubernetes 的安装、运维和升级过程，适用于从边缘设备到大规模数据中心的各种场景。
+K0s 是由 Mirantis（原 Docker Enterprise 团队）开源的轻量级、全功能 Kubernetes 发行版，2021 年加入 CNCF Sandbox。它打包为单一二进制文件，零依赖、零摩擦地安装和运行。k0s 的设计目标是简化 Kubernetes 的安装、运维和升级过程，适用于从边缘设备到大规模数据中心的各种场景。与 k3s 类似，k0s 致力于降低 Kubernetes 的使用门槛，但提供了更完整的上游 Kubernetes 兼容性。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **单一二进制**: 所有组件（API Server、Controller Manager、Scheduler、kubelet）打包在一个二进制文件中
+- **零依赖**: 无需预装容器运行时、etcd 或其他组件，二进制自包含一切
+- **全功能**: 包含 CoreDNS、CNI（Calico/kube-router）、metrics-server 等核心组件
+- **k0sctl**: 基础设施即代码工具，通过 YAML 配置实现多节点自动化部署
+- **Autopilot**: 内置滚动升级和自动恢复能力
+- **灵活架构**: 支持单节点、多 Controller HA 和 Worker 分离部署
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+k0s 将 Kubernetes 所有控制平面组件（API Server、Controller Manager、Scheduler、etcd）编译为单一 Go 二进制文件。通过子命令（`k0s controller`、`k0s worker`、`k0s etcd`）在同一二进制中启动不同角色。Controller 节点运行内嵌的 etcd 作为存储后端，Worker 节点仅运行 kubelet 和容器运行时（containerd）。k0sctl 通过 SSH 连接目标节点，自动分发二进制、配置服务和加入集群。默认 CNI 使用 kube-router，可切换为 Calico。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **生产环境部署**: 使用至少 3 个 Controller 节点实现 HA，使用 k0sctl 进行自动化部署
-- **网络选择**: 大规模集群推荐使用 Calico 的 BGP 模式，小型集群使用默认 kube-router
-- **存储后端**: 大规模集群（100+ 节点）考虑使用外部 etcd 或 PostgreSQL
-- **安全加固**: 启用 Pod Securityod Security Standards]]，配置审计日志，定期轮转证书
-- **升级策略**: 使用 Autopilot 实现无中断滚动升级，先升级 Controller 再升级 Worker
-- **备份恢复**: 定期执行 `k0s backup`，存储到外部安全位置
+k0s 是 100% 上游 Kubernetes 兼容发行版，通过 CNCF 一致性认证。所有 Kubernetes API、kubectl 命令和标准 CRD/Operator 在 k0s 上完全兼容。控制平面以 systemd 服务运行，kubelet 通过本地 socket 连接 API Server。支持标准的 kubeconfig 认证、RBAC 和 NetworkPolicy。通过 Containerd Socket Interface 兼容标准 CRI 插件。
+
+## 生产使用场景
+
+1. **边缘 IoT**: 在资源受限的边缘设备上运行轻量级 Kubernetes
+2. **裸金属自建**: 替代 kubeadm 简化裸金属集群的部署和运维
+3. **开发测试**: 快速创建本地开发集群，零配置启动
+4. **Air-gap 环境**: 单二进制 + 离线镜像包适配隔离网络环境
+
+## 安装
+
+```bash
+# 单节点安装
+curl -sSLf https://get.k0s.sh | sudo sh
+sudo k0s install controller --single
+sudo k0s start
+# 多节点部署（使用 k0sctl）
+curl -sSLf https://github.com/k0sproject/k0sctl/releases/latest/download/k0sctl-linux-x64 -o k0sctl
+k0sctl apply --config cluster.yaml
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **k0s** | 单二进制、全功能、k0sctl 优秀 | 社区较小 |
+| k3s | CNCF 生态最大、Rancher 支持 | 替换组件（etcd→SQLite/Dqlite） |
+| Talos Linux | 不可变 OS、API 驱动 | 需替换整个操作系统 |
+| kubeadm | 官方标准 | 配置复杂、步骤多 |
 
 ## 架构定位
 
-在 CNCF 生态中，k0s 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，k0s 属于 **Runtime / Kubernetes Distribution** 类别，是轻量级 Kubernetes 发行版的重要选择，适合需要上游兼容性但希望简化运维的场景。
 
 ## 参考链接
 

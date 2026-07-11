@@ -16,7 +16,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,42 +39,47 @@ prerequisites:
 
 
 
-
 # KubeElastic
 
 > **CNCF 状态**: Sandbox | **类别**: Observability | **主要语言**: Go
 
 ## 概述
 
-KubeElastic 是一个 Kubernetes 原生的弹性伸缩和资源优化平台，专注于基于实时负载和成本的智能资源调整。它结合机器学习预测算法，自动调整 Pod 资源配额（VPA）和副本数（HPA），同时优化集群节点利用率，帮助用户在保证性能 SLO 的前提下降低云成本。
+KubeElasti 是一个 CNCF 沙箱项目，旨在为 Kubernetes 提供弹性存储卷管理能力。它通过动态调整 PV 大小和 IOPS 限制，根据工作负载实际需求自动伸缩存储资源。KubeElasti 解决了 K8s 存储资源过度分配的问题——许多 PV 在创建时分配了大量空间但实际使用率很低，KubeElasti 可以根据监控指标自动调整存储分配，降低存储成本。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **动态卷扩缩**：根据使用率自动扩展或回收 PV 空间
+- **IOPS 调整**：动态调整云存储卷的 IOPS 和吞吐限制
+- **基于指标的伸缩**：通过 Prometheus 指标触发存储伸缩
+- **多 CSI 支持**：兼容支持 Volume Expansion 的 CSI 驱动
+- **安全策略**：定义最小/最大卷大小限制防止异常伸缩
+- **通知机制**：伸缩事件通知到 Slack/PagerDuty
+
+## 架构与工作原理
+
+KubeElasti 由 Controller 和 Monitor 组成。Controller 监听 ElasticVolume CRD，管理卷伸缩的生命周期。Monitor 定期从 Prometheus 查询 PV 使用率指标，当使用率超过/低于阈值时触发伸缩决策。Controller 通过 K8s Volume Expansion API（editting PVC spec.resources.requests.storage）和 CSI 驱动接口执行实际的卷大小调整。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+KubeElasti 通过自定义 CRD 与 K8s 集成。ElasticVolume CRD 定义目标 PVC、伸缩策略（阈值、最小/最大大小、步长）。Controller 监听这些 CRD 和 Prometheus 指标，通过修改 PVC 的 resources.requests.storage 字段触发 CSI Volume Expansion。仅支持 allowVolumeExpansion: true 的 StorageClass。
 
-## 生产部署要点
+## 生产用例
 
-- **渐进启用**: 先以 Dry-run 模式观察推荐值，确认合理后再启用自动调整
-- **SLO 优先**: 配置合理的性能 SLO，避免激进缩容影响服务质量
-- **预测校准**: 定期检查预测准确性，调整模型参数
-- **Spot 容错**: 对使用 Spot 实例的工作负载配置 checkpoint 和重试策略
-- **监控告警**: 配置成本和资源利用率告警，跟踪优化效果
+- **存储成本优化**：自动回收未使用的 PV 空间
+- **数据库存储管理**：根据数据库增长自动扩展存储
+- **日志存储管理**：根据日志量自动调整日志卷大小
+- **开发环境**：为开发环境自动分配和回收存储
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，[[实体/kubeelasti.md|kubeelasti]] 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+kubectl apply -f https://github.com/kubeelasti/kubeelasti/releases/latest/download/kubeelasti.yaml
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[实体/prometheus-grafana.md|prometheus-grafana]]
-- [[deployment]]
-- [[operator-pattern]]
-- [[概念/controller-pattern.md|controller-pattern]]
-- [[概念/autoscaling-strategies.md|autoscaling-strategies]]
+相比手动 PV 管理，KubeElasti 提供自动化存储弹性伸缩。相比 K8s 原生 Volume Expansion（仅支持手动扩展），KubeElasti 提供基于指标的自动伸缩。
 
 ## Related
 

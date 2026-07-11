@@ -12,8 +12,8 @@ tags:
 - k8s
 tier: core
 created: 2026-05-24
-updated: 2026-05-24
-last_updated: 2026-05-24
+updated: 2026-07
+last_updated: 2026-07
 ---
 
 > **生产环境安全提示**
@@ -71,11 +71,91 @@ WASM 工作负载特点：亚毫秒启动、极小内存占用、跨平台字节
 - HPA、资源限制、Network Policy 等核心功能在 Windows 节点上可用
 - 混合 Linux/Windows 集群可通过 nodeSelector 和 taint/toleration 调度
 
-## Related
+## 技术深度解析
 
-- [[概念/container-runtime-evolution.md|container runtime evolution]] — 容器运行时演进
-- [[概念/k8s-networking-evolution.md|k8s networking evolution]] — K8S 网络技术演进
-- [[概念/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]] — K8S AI/ML 基础设施
+### eBPF 工作原理
+
+eBPF（extended Berkeley Packet Filter）允许在内核中安全运行沙箱程序，无需修改内核源码或加载内核模块：
+
+```
+用户态:
+  Cilium / Tetragon / Falco → 编译 eBPF 程序 → bpf() 系统调用加载到内核
+
+内核态:
+  eBPF Verifier → 验证安全性（无无限循环、内存安全）
+  → 挂载到 hook 点（XDP / TC / Tracepoint / Kprobe）
+  → 在网络包/系统调用路径上执行 → 数据通过 ring buffer / map 传回用户态
+```
+
+**Cilium 替代 kube-proxy 的数据路径**：
+
+| 传统 kube-proxy | Cilium eBPF |
+|----------------|-------------|
+| iptables 规则链（O(n) 查找） | eBPF hashmap（O(1) 查找） |
+| 每次 Service 变更重写全部规则 | 增量更新 eBPF map |
+| 数据包路径：Pod → iptables → Pod | 数据包路径：Pod → eBPF → Pod（更短） |
+
+### WASM 运行时集成
+
+```yaml
+# WASM 工作负载通过 RuntimeClass 调度
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: wasm
+handler: wasm
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasm-function
+spec:
+  template:
+    spec:
+      runtimeClassName: wasm           # 使用 WASM 运行时
+      containers:
+      - name: spin-app
+        image: registry/spin-app:latest  # WASM 模块打包为 OCI 镜像
+```
+
+### Knative Serverless 配置
+
+```yaml
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-processor
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/scale-to-zero: "true"
+        autoscaling.knative.dev/target: "10"     # 每实例 10 并发
+        autoscaling.knative.dev/min-scale: "0"   # 允许缩容到零
+    spec:
+      containers:
+      - image: processor:latest
+```
+
+## 最佳实践
+
+- **eBPF 优先于内核模块**：Falco、Cilium 等 eBPF 方案在生产环境中应优先于传统内核模块方案——eBPF 无需修改内核、不会导致 panic、可热更新
+- **WASM 工作负载隔离测试**：WASM 虽有安全沙箱优势，但生态尚不成熟——建议先在非关键场景验证再推广
+- **边缘节点使用 K3s 而非完整 K8s**：资源受限环境下 K3s（<100MB）远优于完整 K8s 发行版
+- **多架构镜像成为标准**：ARM 节点越来越普遍，所有镜像构建必须支持 multi-arch（`docker buildx`）
+- **Serverless 场景评估冷启动容忍度**：Knative scale-to-zero 有冷启动延迟（镜像拉取+初始化），延迟敏感型服务不适合
+
+## 常见陷阱
+
+- **eBPF 程序内核版本依赖**：eBPF 程序的行为可能因内核版本差异而不同——需要针对目标内核版本测试，Cilium 有严格的内核版本兼容矩阵
+- **WASM 性能限制**：WASM 目前不支持 GPU 直通和复杂系统调用，计算密集型 AI 工作负载仍需传统容器
+- **Windows 节点网络限制**：Windows 容器不支持所有 CNI 功能（如 Cilium eBPF datapath），混合集群中需单独处理 Windows 节点的网络方案
+
+## 相关页面
+
+- [[概念/container-runtime-evolution.md|容器运行时演进]] — WASM 与机密容器
+- [[概念/edge-cloud-continuum.md|边缘云连续体]] — KubeEdge 边缘计算
+- [[概念/k8s-networking-evolution.md|K8S 网络技术演进]] — Cilium/eBPF 网络
 
 
 <!-- risk-assessed -->

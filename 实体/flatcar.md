@@ -16,7 +16,7 @@ tags:
 - rag
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,32 +47,56 @@ prerequisites:
 
 ## 概述
 
-Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 CoreOS Container Linux 的延续和替代品。它提供最小化、自动更新、安全的容器运行环境。
+Flatcar Container Linux 是为容器优化的不可变 Linux 发行版，是 CoreOS Container Linux 的延续和替代品（CoreOS 被 Red Hat 收购后停止维护）。Flatcar 由 Kinvolk（现 Microsoft）维护，2019 年加入 CNCF Sandbox，后晋升为 Incubating。它提供最小化、自动更新、安全的容器运行环境，是运行 Kubernetes 节点操作系统的理想选择之一。
 
-## 核心能力
+## 核心特性
 
-- **不可变基础设施**: 只读根文件系统，配置通过 Ignition/Cloud-Init
-- **自动更新**: 内置 A/B 分区自动更新机制
-- **最小化设计**: 只包含运行容器必需的组件
-- **安全加固**: SELinux、只读 rootfs、自动安全补丁
-- **多平台支持**: AWS、Azure、GCP、VMware、裸金属等
-- **兼容性**: 完全兼容 CoreOS Container Linux
+- **不可变基础设施**: 只读根文件系统（/usr），配置通过 Ignition 声明式管理
+- **自动更新**: 内置 A/B 分区原子更新机制，回滚只需重启
+- **最小化设计**: 只包含运行容器必需的组件，无包管理器
+- **安全加固**: SELinux、只读 rootfs、自动安全补丁、内核模块签名
+- **多平台支持**: AWS、Azure、GCP、VMware、裸金属、Equnix Metal
+- **CoreOS 兼容**: 完全兼容 CoreOS Container Linux 的使用模式
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Flatcar 采用不可变 OS 设计理念。系统分区以只读方式挂载（/usr 为只读），用户配置和数据存储在 /etc 和 /var 中。Ignition（替代 cloud-init）在首次启动时从 JSON 配置（user-data）中配置用户、网络、systemd 服务和文件。自动更新使用 update-engine（后台检查更新）和 locksmith（协调重启），采用 A/B 分区方案实现原子更新——新系统写入备用分区，重启时切换。所有更新通过 Omaha 协议从 Flatcar 更新服务器拉取。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **Ignition 配置**: 使用 Ignition 实现声明式配置
-- **自动更新**: 配置更新窗口避免业务高峰
-- **协调更新**: 使用 locksmith 协调集群节点更新
-- **监控**: 监控更新状态和系统健康
-- **LTS 版本**: 生产环境考虑使用 LTS 通道
+Flatcar 是运行 Kubernetes 节点的理想 OS。只读 rootfs 消除了操作系统层面的配置漂移。Ignition 配置文件声明式定义节点初始化（网络、Docker/containerd、kubelet 参数）。自动更新确保安全补丁及时安装，配合 Kured 协调节点重启。容器运行时（containerd）预装或通过 Ignition 安装。在裸金属集群中，Flatcar + Ignition + Matchbox 实现完全自动化的 PXE 部署。
+
+## 生产使用场景
+
+1. **裸金属 Kubernetes**: 在自建数据中心使用 Flatcar 作为节点 OS，实现不可变基础设施
+2. **安全合规**: 自动安全更新和只读 rootfs 满足等保和 SOC2 合规要求
+3. **大规模部署**: 通过 Ignition + Matchbox 实现 PXE 批量部署
+4. **边缘 IoT**: 在资源受限的边缘设备上运行轻量级容器
+
+## 安装
+
+```bash
+# Ignition 配置示例（config.ign）
+{
+  "ignition": { "version": "3.3.0" },
+  "systemd": { "units": [{ "name": "docker.service", "enabled": true }] },
+  "passwd": { "users": [{ "name": "core", "sshAuthorizedKeys": ["ssh-ed25519 AAA..."] }] }
+}
+# 在云平台使用 Flatcar 镜像并传入 Ignition 配置作为 user-data
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Flatcar** | CoreOS 延续、自动更新 | 社区较小 |
+| Talos Linux | API 驱动、K8s 专属 | 新项目、生态小 |
+| Bottlerocket | AWS 支持、自动更新 | AWS 生态绑定 |
+| Ubuntu + kubeadm | 最广泛使用 | 需手动维护和加固 |
 
 ## 架构定位
 
-在 CNCF 生态中，flatcar 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Flatcar 属于 **Runtime / Container OS** 类别，是容器专用操作系统的代表性项目。它与 Kubernetes、containerd、Kured 等项目深度协同。
 
 ## 参考链接
 

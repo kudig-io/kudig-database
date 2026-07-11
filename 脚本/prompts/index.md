@@ -25,4 +25,9 @@ last_updated: 2026-07
 - [[脚本/prompts/config-generator.md|Config Generator]]
 - [[脚本/prompts/learning-path.md|Learning Path]]
 - [[脚本/prompts/troubleshooting.md|Troubleshooting]]
+- [[脚本/prompts/incident-diagnosis.md|Incident Diagnosis]]
+- [[脚本/prompts/capacity-review.md|Capacity Review]]
+- [[脚本/prompts/security-audit.md|Security Audit]]
+- [[脚本/prompts/cost-analysis.md|Cost Analysis]]
+- [[脚本/prompts/migration-planning.md|Migration Planning]]
 

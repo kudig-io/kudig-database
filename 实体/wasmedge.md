@@ -1,7 +1,7 @@
 ---
 title: WasmEdge (entities)
 description: '## 概述'
-summary: 'WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行时，适用于云原生、边缘计算和去中心化应用。它是目前最快的 Wasm 运行时之一，支持 AOT (Ahead-of-Time) 编译，并提供丰富的宿主函数扩展，包括网络套接字、TensorFlow 推理、Key-Value 存储等。'
+summary: 'WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行时，适用于云原生、边缘计算和去中心化应用。'
 category: entities
 tags:
 - k8s
@@ -16,7 +16,7 @@ tags:
 - wasm
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,35 +39,90 @@ prerequisites:
 
 
 
-
 # WasmEdge
 
 > **CNCF 状态**: Sandbox | **类别**: Runtime | **主要语言**: C++, Rust
 
 ## 概述
 
-WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行时，适用于云原生、边缘计算和去中心化应用。它是目前最快的 Wasm 运行时之一，支持 AOT (Ahead-of-Time) 编译，并提供丰富的宿主函数扩展，包括网络套接字、TensorFlow 推理、Key-Value 存储等。
+WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行时，由 CNCF 沙箱项目 WasmEdge 社区（核心贡献来自 Second State 和华为）开发维护。它是目前最快的 Wasm 运行时之一，支持 AOT（Ahead-of-Time）编译，接近原生 C/C++ 代码的执行性能。WasmEdge 适用于云原生、边缘计算和去中心化应用场景，提供丰富的宿主函数扩展，包括网络套接字、TensorFlow 推理、Key-Value 存储等。在 Kubernetes 生态中，WasmEdge 可以作为 containerd 的运行时替代（通过 runwasi shim），让开发者使用 Wasm 镜像（仅几 MB）替代传统容器镜像（数百 MB），实现毫秒级冷启动。
 
 ## 核心能力
 
-- 详见源文档获取完整信息 ^[inferred]
+- **高性能执行**: 支持 AOT 编译，性能接近原生代码
+- **安全沙箱**: Wasm 天然的内存安全沙箱隔离，无系统调用风险
+- **毫秒级冷启动**: <1ms 启动时间，远优于传统容器（秒级），适合 Serverless
+- **微小镜像**: Wasm 镜像通常仅几 MB，相比容器镜像大幅减少存储和传输开销
+- **多语言支持**: Rust、C/C++、Go、JavaScript、Python、Swift 等
+- **插件生态**: TensorFlow 推理、网络套接字、WASI NN（LLM 推理）等插件
+
+## 架构
+
+WasmEdge 采用分层运行时架构：
+
+- **WasmEdge Runtime**: 核心 Wasm 执行引擎，支持解释器和 AOT 两种模式
+- **AOT Compiler**: `wasmedgec` 工具，将 Wasm bytecode 预编译为原生机器码
+- **WASI 实现**: WebAssembly System Interface，提供文件系统、网络等系统能力
+- **Host Functions**: 可扩展的宿主函数（TensorFlow、Redis、网络等）
+- **containerd Shim**: runwasi shim，使 WasmEdge 作为 containerd 的低级运行时
+- **WASI NN Plugin**: 支持在 Wasm 中运行 LLM 推理（GGML、ONNX Runtime）
+
+执行流程：`Wasm bytecode → WasmEdge (Interpreter/AOT) → 原生执行（沙箱内）`
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+WasmEdge 通过 containerd 的 runwasi shim 与 Kubernetes 集成。节点上安装 WasmEdge 运行时和 containerd shim（`containerd-shim-wasmedge-v1`），配置 containerd 使用 WasmEdge 处理 `application/wasm` 类型的镜像。Pod 的 runtimeClassName 设置为 `wasm`，containerd 会直接以 WasmEdge 运行 Wasm 字节码，无需传统容器镜像层。与 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 完全兼容——标准 kubectl 命令即可管理 Wasm 工作负载。也可通过 SpinKube、Kwasm 等项目简化 Wasm 在 K8s 上的部署。
 
-## 生产部署要点
+## 生产场景
 
-- **AOT 编译**: 生产环境使用 `wasmedgec` 预编译 Wasm 模块提升性能
-- **资源限制**: Wasm 天然沙箱隔离，配合 Kubernetes 资源限制双重保护
-- **镜像大小**: Wasm 镜像通常只有几 MB，相比容器镜像显著减少存储和传输
-- **冷启动**: 利用 <1ms 启动特性优化 Serverless 冷启动场景
-- **LLM 部署**: 使用 WasmEdge GGML 插件在边缘设备运行量化 LLM
-- **渐进迁移**: 从高频短任务开始迁移到 Wasm，逐步扩展到更多工作负载
+1. **Serverless 函数**: 毫秒级冷启动的 Wasm 函数，替代传统容器化 FaaS
+2. **边缘 AI 推理**: 在边缘设备上通过 WasmEdge + WASI NN 运行量化 LLM
+3. **微服务轻量化**: 将高频短任务从容器迁移到 Wasm，减少镜像拉取和启动开销
+4. **安全沙箱执行**: 利用 Wasm 内存安全特性运行不可信代码（如用户脚本）
+
+## 安装
+
+```bash
+# 安装 WasmEdge
+curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+# AOT 编译优化
+wasmedgec app.wasm app_aot.wasm
+
+# 运行 Wasm 应用
+wasmedge app.wasm
+
+# 在 Kubernetes 中使用 WasmEdge（通过 Kwasm）
+helm repo add kwasm http://kwasm.sh/kwasm-operator/
+helm install kwasm kwasm/kwasm-operator -n kwasm --create-namespace
+kubectl annotate node <node-name> kwasm.sh/kwasm-node=true
+
+# 创建 Wasm Pod
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-app
+spec:
+  runtimeClassName: wasmedge
+  containers:
+  - name: app
+    image: wasmregistry/wasmedge-http-server:latest
+EOF
+```
+
+## 对比
+
+| 特性 | WasmEdge | Wasmer | Wasmtime | Lucet |
+|------|----------|--------|----------|-------|
+| AOT 编译 | ✅ | ⚠️ | ✅ | ✅ |
+| 冷启动 | <1ms | ~1ms | ~1ms | <1ms |
+| K8s 集成 | ✅ containerd | ⚠️ | ⚠️ | ❌ |
+| LLM 推理 | ✅ WASI NN | ❌ | ❌ | ❌ |
 
 ## 架构定位
 
-在 CNCF 生态中，wasmedge 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，WasmEdge 属于 **Runtime** 类别，为云原生应用提供高性能 WebAssembly 运行时能力。
 
 ## 参考链接
 

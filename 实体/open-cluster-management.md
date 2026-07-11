@@ -15,7 +15,7 @@ tags:
 - rag
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,28 +48,55 @@ prerequisites:
 
 ## 概述
 
-Open Cluster Management (OCM) 是一个社区驱动的多集群管理平台，提供 Kubernetes 多集群编排的核心能力。OCM 采用 Hub-Spoke 架构，通过轻量级的代理模型实现集群注册、工作负载分发、策略治理和应用生命周期管理。
+Open Cluster Management（OCM）是由 Red Hat 开源的多集群管理平台，2021 年加入 CNCF Sandbox。OCM 采用 Hub-Spoke 架构，通过轻量级的代理模型实现集群注册、工作负载分发、策略治理和应用生命周期管理。与其他多集群方案不同，OCM 设计了清晰的 Cluster API、Placement API 和 ManifestWork API，使多集群管理变得声明式和可扩展。它是 Red Hat Advanced Cluster Management（ACM）的开源上游项目。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Hub-Spoke 架构**: Hub 集群集中管理，Klusterlet 代理注册到 Spoke 集群
+- **集群注册**: ManagedCluster API 管理集群注册和状态上报
+- **工作负载分发**: ManifestWork API 将 K8s 资源分发到托管集群
+- **智能调度**: Placement API 支持按标签、拓扑、亲和性选择目标集群
+- **策略治理**: Policy 框架支持配置合规检查和安全策略分发
+- **Addon 框架**: 可扩展的 Addon 机制，支持自定义功能扩展
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+OCM 采用 Hub-Agent 架构。Hub 集群运行 Registration Operator、Placement Controller 和 Cluster Manager。每个被管集群运行 Klusterlet（包含 Registration Agent 和 Work Agent）。Registration Agent 负责集群注册和证书管理；Work Agent 负责从 Hub 拉取 ManifestWork 并在本地集群应用。Placement Controller 根据 Placement 规则从 ManagedClusterSet 中选择目标集群。所有交互通过 CRD 声明式定义，Hub 不直接访问 Spoke 的 API Server，而是通过 ManifestWork 下发操作。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **集群组织**: 使用 ManagedClusterSet 按环境、区域或团队组织集群
-- **渐进式部署**: 先使用 `inform` 模式验证策略影响，再切换为 `enforce`
-- **Placement 策略**: 利用 Spread 和 Steady 策略平衡负载和稳定性
-- **状态反馈**: 在 ManifestWork 中配置 feedbackRules 获取资源状态
-- **Addon 管理**: 使用 Addon 框架扩展能力，避免直接在 Spoke 集群操作
-- **安全模型**: 遵循最小权限原则，Klusterlet 仅需访问其对应 namespace
+OCM 完全基于 Kubernetes 原生 API 设计。ManagedCluster、ManagedClusterSet、Placement、ManifestWork 均为 CRD。Klusterlet 以 Deployment 形式部署在被管集群中，通过 Lease 机制保持心跳。Addon 框架允许第三方扩展（如observability addon）作为 Kubernetes Controller 运行。策略（Policy）框架通过 Gatekeeper/OPA 或自定义控制器实现合规检查。
+
+## 生产使用场景
+
+1. **多集群应用分发**: 将应用统一部署到开发、测试、生产集群
+2. **策略合规管理**: 跨集群统一分发安全策略和配置基线
+3. **边缘集群管理**: 管理大量边缘 Kubernetes 集群的生命周期
+4. **灾难恢复**: 在多个集群间分发工作负载，实现故障切换
+
+## 安装
+
+```bash
+# Hub 集群
+clusteradm init --wait
+# 注册 Spoke 集群
+clusteradm join --hub-token <token> --hub-apiserver <url> --wait
+# 或使用 Helm
+helm install cluster-manager open-cluster-management/cluster-manager
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **OCM** | 轻量级、API 设计清晰、可扩展 | 社区较小、功能不如 ACM 丰富 |
+| Karmada | 调度能力强、CNCF Incubating | 架构较重、学习曲线陡 |
+| ArgoCD + ApplicationSet | GitOps 原生、成熟稳定 | 不是专门的多集群管理平台 |
+| Clusternet | 支持边缘场景 | 社区更小 |
 
 ## 架构定位
 
-在 CNCF 生态中，open-cluster-management 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，OCM 属于 **Orchestration** 类别，专注于多集群管理的标准化 API 设计。它是 Red Hat ACM 的上游，在企业级多集群管理领域占据重要位置。
 
 ## 参考链接
 

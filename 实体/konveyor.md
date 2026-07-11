@@ -13,7 +13,7 @@ tags:
 - kserve
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,38 +34,50 @@ prerequisites:
 
 
 
-
 # Konveyor
 
 > **CNCF 状态**: Sandbox | **类别**: CI/CD | **主要语言**: Go, TypeScript
 
 ## 概述
 
-Konveyor 是一个应用现代化平台，帮助组织将传统应用（如 Java EE、Spring）迁移和重构到 Kubernetes 平台。它提供应用清单管理、依赖分析、迁移评估、自动化代码重构等能力。Konveyor 通过 AI 辅助分析识别迁移障碍，生成迁移路径建议，并提供 IDE 插件帮助开发者自动化完成代码变更。
+Konveyor 是一个 CNCF 沙箱项目，由 Red Hat 主导，是一个应用现代化和迁移工具集。它帮助组织将传统应用（Java EE、虚拟机应用）迁移到 Kubernetes 和云原生架构。Konveyor 包含多个工具：Tackle（迁移项目管理）、Windup（代码分析）、Move2Kube（部署配置迁移）、Crane（K8s 集群间迁移）等。项目通过自动化分析和迁移建议，大幅降低应用现代化的工作量。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **应用评估**：Tackle 提供应用现代化就绪度评估和迁移计划管理
+- **代码分析**：Windup 分析应用源码，识别迁移到容器/K8s 的障碍和风险
+- **Move2Kube**：自动将应用部署配置（如 docker-compose）转换为 K8s YAML
+- **Crane**：K8s 集群间的资源和数据迁移工具
+- **迁移路径建议**：基于分析结果推荐最佳迁移路径
+- **多语言支持**：支持 Java、Python、Go、Node.js 等语言应用分析
+
+## 架构与工作原理
+
+Konveyor 是一个工具集而非单一系统：Tackle 提供项目管理 Web UI 和 API；Windup 通过静态代码分析识别迁移风险和依赖；Move2Kube 通过解析现有部署配置（如 docker-compose、Cloud Foundry manifest）生成 K8s 部署清单；Crane 通过 K8s API 迁移命名空间级别的资源。各工具可独立使用或通过 Tackle 统一管理。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Konveyor 本身可在 Kubernetes 上部署，通过 Operator 管理各组件。迁移工具通过 K8s API 连接到目标集群，执行资源迁移和配置转换。Move2Kube 生成的 K8s YAML 可直接 kubectl apply。Crane 支持跨集群的命名空间迁移，包括 PVC 数据迁移。
 
-## 生产部署要点
+## 生产用例
 
-- **评估优先**: 先用问卷评估确定迁移优先级，再做深度分析
-- **分批迁移**: 从低复杂度应用开始迁移，积累经验后处理复杂应用
-- **自定义规则**: 根据组织技术栈添加自定义分析规则
-- **AI 审查**: AI 生成的代码修改建议需要人工审查后再应用
-- **持续跟踪**: 利用应用清单功能跟踪整个迁移组合的进度
+- **应用现代化**：将传统 Java EE 应用迁移到 K8s 容器化架构
+- **VM 到容器迁移**：将虚拟机应用容器化到 K8s
+- **集群迁移**：跨 K8s 集群的资源和数据迁移
+- **迁移评估**：评估应用组合的云原生就绪度
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，konveyor 属于 **CI/CD** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+# Move2Kube CLI
+pip3 install move2kube
+# Tackle Operator
+kubectl apply -f https://raw.githubusercontent.com/konveyor/tackle-operator/main/install/konveyor-operator.yaml
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[operator-pattern]]
+相比手动迁移分析，Konveyor 提供自动化的代码分析和配置转换。相比 AWS Migration Hub（云厂商绑定），Konveyor 是开源且厂商中立的。
 
 ## Related
 

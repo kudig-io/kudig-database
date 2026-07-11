@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,33 +48,56 @@ prerequisites:
 
 ## 概述
 
-Operator Framework 是一个开源工具包，用于以高效、自动化和可扩展的方式管理 Kubernetes 原生应用（Operators）。它提供了构建、测试和分发 Operators 的完整解决方案。
+Operator Framework 是由 Red Hat 开源的工具包，用于构建、测试和分发 Kubernetes 原生应用（Operators），2020 年加入 CNCF Incubating。它提供了完整的 Operator 生命周期管理解决方案，包括 Operator SDK（开发框架）、Operator Lifecycle Manager（OLM，运行时管理）和 OperatorHub.io（发现和分发平台）。Operator Framework 是 Kubernetes 生态中 Operator 模式事实上的标准工具链。
 
-## 核心能力
+## 核心特性
 
-- **Operator SDK**: 快速构建 Operators 的开发框架
-- **Operator Lifecycle Manager (OLM)**: Operator 安装、升级、RBAC 管理
-- **OperatorHub**: Operator 发现和分发平台
-- **多语言支持**: Go、Ansible、Helm 三种构建方式
-- **成熟度模型**: 5 级能力模型指导 Operator 开发
-- **测试框架**: 内置单元测试和 E2E 测试支持
+- **Operator SDK**: 支持 Go、Ansible、Helm 三种方式构建 Operators
+- **OLM (Operator Lifecycle Manager)**: 安装、升级、依赖管理和 RBAC 自动化
+- **OperatorHub.io**: 类似 App Store 的 Operator 发现和安装平台
+- **成熟度模型**: 5 级 Operator 能力模型（Basic Install → Auto Pilot）
+- **内置测试**: scorecard 工具评估 Operator 质量
+- **Catalog 管理**: 自定义 Operator Catalog 适配企业内部环境
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Operator Framework 由三个核心组件组成。Operator SDK 是 CLI 工具，提供项目脚手架、API 代码生成、测试框架和打包功能。OLM 在集群中以 Deployment 运行（olm-operator 和 catalog-operator），监听 Subscription 和 ClusterServiceVersion（CSV）CRD，管理 Operator 的安装、升级、依赖解析和 RBAC。OperatorHub.io 是外部 Web 平台，收录社区提交的 Operators。OLM Catalog 以 OCI 镜像或 CatalogSource 形式分发 Operator 列表和元数据。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **[[Finalizers|Finalizers]]**: 使用 Finalizers 处理资源清理
-- **Status Conditions**: 遵循 Kubernetes 条件约定
-- **Owner References**: 设置正确的所有者引用
-- **幂等性**: Reconcile 函数必须幂等
-- **错误处理**: 合理使用 Requeue 和错误返回
-- **监控**: 暴露 Prometheus 指标
+Operator Framework 完全基于 Kubernetes CRD 和 Controller 模式。OLM 通过 ClusterServiceVersion（CSV）描述 Operator 的元数据、安装模式和依赖关系。Subscription CRD 定义用户对某个 Operator 的订阅（频道、更新策略）。InstallPlan 由 OLM 自动生成，列出安装所需的所有资源。OLM 自动管理 RBAC（创建 Role/RoleBinding），确保 Operator 仅获得必要权限。Operator 通过 OLM 安装后，其 CRD 和 Deployment 自动创建。
+
+## 生产使用场景
+
+1. **数据库管理**: 安装 PostgreSQL/Redis Operator，自动化数据库运维
+2. **中间件部署**: 通过 OLM 一键安装 Kafka/Elasticsearch Operator
+3. **企业内部 Operator**: 构建内部 Operator Catalog，分发公司专有 Operators
+4. **自动升级**: 订阅 Operator 更新频道，自动获取安全补丁和新版本
+
+## 安装
+
+```bash
+# 安装 OLM
+operator-sdk olm install
+# 安装 Operator
+kubectl operator install postgresql --channel stable-v1 --version 1.2.0
+# 使用 SDK 创建新 Operator
+operator-sdk init --domain example.com --repo github.com/myorg/my-operator
+operator-sdk create api --group app --version v1 --kind MyApp --resource --controller
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Operator Framework** | CNCF Incubating、Red Hat 支持 | OLM 较重 |
+| Kubebuilder | 轻量、官方 SIG 维护 | 无生命周期管理 |
+| Metacontroller | 无需编写 Controller | 功能受限 |
+| kubebuilder + Helm | 简单直接 | 无 OLM 级别的管理能力 |
 
 ## 架构定位
 
-在 CNCF 生态中，operator-framework 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Operator Framework 属于 **Orchestration** 类别，是 Operator 模式全生命周期管理的标准方案。OLM 是 OpenShift 的核心组件之一。
 
 ## 参考链接
 

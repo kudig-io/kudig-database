@@ -14,7 +14,7 @@ tags:
 - ebpf
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -61,33 +61,59 @@ base_confidence: 0.7
 
 ## 概述
 
-Inspektor Gadget 是一组基于 eBPF 的工具集合 ("gadgets")，用于调试和检查 Kubernetes 集群中的应用程序。它利用 eBPF 在内核级别收集数据，提供对容器和 Pod 的深入可观测性，无需修改应用程序代码或添加 sidecar。
+Inspektor Gadget 是由 Microsoft（Kinvolk）开源的 eBPF 工具集合（"Gadgets"），用于调试和检查 Kubernetes 集群中的应用程序，2021 年加入 CNCF Sandbox。它利用 eBPF 在内核级别收集数据，提供对容器和 Pod 的深入可观测性，无需修改应用程序代码或添加 Sidecar。Inspektor Gadget 覆盖网络、进程、文件系统、安全等多个调试领域。
 
-## 核心能力
+## 核心特性
 
 - **eBPF 驱动**: 利用 eBPF 实现低开销的内核级可观测性
-- **Kubernetes 感知**: 自动关联容器和 Pod 元数据
-- **多种 Gadgets**: 网络、进程、文件系统、安全等多领域工具
-- **本地和远程**: 支持 kubectl 插件和独立 CLI
-- **可编程**: 支持自定义 eBPF 程序
-- **跨平台**: 支持 Linux 内核 5.4+
+- **Kubernetes 感知**: 自动关联容器和 Pod 元数据（命名空间、Pod 名、容器名）
+- **丰富 Gadgets**: 网络（DNS、TCP）、进程（exec、fork）、文件系统（open、reads）、安全（capabilities、seccomp）
+- **kubectl 插件**: 通过 `kubectl gadget` 命令直接使用
+- **可编程**: 支持自定义 eBPF 程序和 Gadgets
+- **跨平台**: 支持 Linux 内核 5.4+，兼容多种 CNI 和容器运行时
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[kubernetes-architecture-overview|Kubernetes 架构]] 中无缝运行。^[inferred]
+Inspektor Gadget 采用 DaemonSet + CLI 架构。Gadget DaemonSet 以特权模式部署在每个节点上，负责加载 eBPF 程序和收集数据。`kubectl-gadget` CLI 通过 Kubernetes API 与各节点的 Gadget Daemon 通信，下发 Gadgets 配置和收集结果。每个 Gadget 是一个独立的 eBPF 程序，挂载到特定的内核跟踪点（tracepoint、kprobe、uprobe）。当内核触发跟踪点时，eBPF 程序捕获事件数据，附加容器元数据后通过 ringbuffer 传递到用户空间。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **资源开销**: eBPF 程序运行在内核空间，开销极低
-- **权限控制**: Gadget DaemonSet 需要特权权限
-- **过滤优化**: 使用过滤器减少数据量
-- **安全审计**: 使用 capabilities 和 seccomp 追踪进行安全审计
-- **故障排查**: 结合多个 gadget 进行综合分析
-- **内核版本**: 确保内核版本 >= 5.4
+Inspektor Gadget 通过 DaemonSet 部署在所有节点。CLI 作为 kubectl 插件运行，通过 Kubernetes API 路由请求到目标节点。Gadgets 自动关联 Kubernetes 元数据——将内核事件中的 cgroup ID 映射到 Pod/Container 名称。支持按命名空间、Pod 标签、容器名过滤事件。与 CNI 无关——在内核层采集，兼容 Calico、Cilium、Flannel 等所有网络插件。
+
+## 生产使用场景
+
+1. **网络调试**: 使用 dns gadget 排查 DNS 解析问题，tcpdump gadget 抓取容器流量
+2. **安全审计**: 使用 audit-seccomp 生成 seccomp Profile，capabilities gadget 审计容器权限
+3. **性能分析**: 使用 profile gadget 生成 CPU 火焰图，分析应用性能瓶颈
+4. **文件追踪**: 使用 tracesnoop/fis 监控文件读写操作，排查 IO 问题
+
+## 安装
+
+```bash
+# 安装 kubectl 插件
+kubectl krew install gadget
+# 部署到集群
+kubectl gadget deploy
+# 使用 Gadgets
+kubectl gadget top pods --sort cpu       # Pod CPU 排行
+kubectl gadget advise seccomp monitor    # 生成 seccomp Profile
+kubectl gadget profile cpu --node node1  # CPU 火焰图
+kubectl gadget trace dns --pod web       # DNS 追踪
+kubectl gadget trace exec --namespace prod  # 进程执行追踪
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Inspektor Gadget** | 多功能 Gadget 集、kubectl 原生 | 特权 DaemonSet |
+| Pixie | 零侵入、PxL 强大 | 仅关注协议层可观测性 |
+| Cilium Hubble | eBPF 网络可观测优秀 | 仅 Cilium 环境 |
+| bpftrace | eBPF 编程灵活 | 非 K8s 原生 |
 
 ## 架构定位
 
-在 CNCF 生态中，inspektor-gadget 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Inspektor Gadget 属于 **Observability / Debugging** 类别，是 Kubernetes eBPF 调试工具箱的代表性项目。它与 Pixie、Cilium 互补，更偏向开发和排障场景。
 
 ## 参考链接
 

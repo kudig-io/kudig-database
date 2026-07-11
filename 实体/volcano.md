@@ -15,7 +15,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -36,36 +36,48 @@ prerequisites:
 
 
 
-
 # Volcano
 
 > **CNCF 状态**: Incubating | **类别**: Orchestration | **主要语言**: Go
 
 ## 概述
 
-description: '## 项目概述'
+Volcano（原 kube-batch）是一个 CNCF 孵化项目，由华为开源，是 Kubernetes 上的高性能批处理工作负载调度器。它专为 AI/ML 训练、大数据分析、HPC（高性能计算）等批处理场景设计，提供了 gang scheduling（成组调度）、公平调度、队列管理、任务依赖等 K8s 默认调度器不具备的高级调度能力。Volcano 已被众多企业用于 GPU 集群管理和大规模 ML 训练平台。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Gang Scheduling**：成组调度，确保所有相关 Pod 同时被调度或全部等待
+- **Queue 管理**：支持多级队列、权重和抢占，实现公平资源分配
+- **任务依赖**：支持 DAG 依赖关系，定义步骤间执行顺序
+- **插件化调度算法**：提供多种调度插件（DRF、Binpack、Spread、Topology）
+- **GPU 共享**：支持 GPU 细粒度共享和切分，提升 GPU 利用率
+- **Job 控制器**：Volcano Job CRD 支持任务重试、生命周期管理
+
+## 架构与工作原理
+
+Volcano 由三个核心组件构成：Volcano Controller 负责管理 Volcano Job CRD 的生命周期，处理任务状态转换；Volcano Scheduler 作为独立调度器，通过调度插件链（Action/Plugin）执行调度决策；Volcano Admission Webhook 负责 API 校验和默认值填充。调度器支持多种调度插件组合，通过 YAML 配置灵活定义调度策略。Volcano 通过 MutatingWebhook 将 Pod 绑定到自身调度器。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Volcano 通过 CRD 与 Kubernetes 集成：Volcano Job（vcjob）定义批处理任务，支持 minAvailable、policies、tasks 等高级配置；Volcano Queue 定义资源队列，支持权重和公平调度；Volcano PodGroup 将相关 Pod 组织成调度单元。通过指定 schedulerName: volcano 将 Pod 交给 Volcano 调度器处理。Volcano 复用 K8s 的 Node/PV/PVC 等资源模型。
 
-## 生产部署要点
+## 生产用例
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **分布式 ML 训练**：使用 Gang Scheduling 确保 TensorFlow/PyTorch 训练任务的所有 Worker 同时启动
+- **Spark/Flink 批处理**：为大数据分析任务提供公平调度和资源排队
+- **HPC 计算**：科学计算、基因测序等高性能计算场景
+- **CI/CD 并行任务**：大规模并行构建和测试任务调度
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，volcano 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+helm repo add volcano-sh https://volcano-sh.github.io/helm-charts
+helm install volcano volcano-sh/volcano -n volcano-system --create-namespace
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[operator-pattern]]
-- [[pod-lifecycle]]
-- [[实体/kube-scheduler.md|kube-scheduler]]
+相比 K8s 默认调度器，Volcano 提供了 Gang Scheduling 和高级队列管理能力，专为批处理工作负载优化。相比 Yarn/Mesos，Volcano 原生运行在 K8s 上，可无缝与容器化应用共存。
 
 ## Related
 

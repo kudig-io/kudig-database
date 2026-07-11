@@ -16,7 +16,7 @@ tags:
 - rbac
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -46,33 +46,54 @@ prerequisites:
 
 ## 概述
 
-description: '## 项目概述'
+Harbor 是由 VMware 开源的企业级容器镜像仓库（Registry），2018 年加入 CNCF，2020 年成为 CNCF 毕业项目。Harbor 提供镜像管理、安全扫描、访问控制、镜像复制和企业级治理能力，是目前最广泛使用的开源容器 Registry 之一。它支持 OCI 标准镜像格式，并与 Kubernetes、Helm、Cosign 等云原生工具链深度集成，帮助企业在混合云和多云环境中安全地管理容器镜像生命周期。
 
-## 核心能力
+## 核心特性
 
-- **镜像管理**: 支持 Docker 和 OCI 镜像格式
-- **安全扫描**: 集成 [[Trivy|Trivy]] 漏洞扫描
-- **访问控制**: RBAC 和项目级权限
-- **镜像复制**: 跨仓库镜像同步
-- **内容签名**: Cosign/Notation 镜像签名
-- **Helm Chart**: Helm Chart 仓库支持
+- **镜像管理**: 支持 Docker 和 OCI 镜像格式，提供项目（Project）级隔离
+- **安全扫描**: 集成 [[Trivy|Trivy]] 漏洞扫描，支持自动化扫描策略和合规报告
+- **访问控制**: 基于 RBAC 的权限管理和项目级隔离，支持 OIDC/LDAP 集成
+- **镜像复制**: 跨仓库/跨地域镜像同步，支持策略驱动的自动复制
+- **内容签名**: 支持 Cosign 和 Notation 镜像签名验证，保障供应链安全
+- **Helm Chart**: 内置 Helm Chart 仓库能力，统一管理应用制品
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Harbor 采用微服务架构，核心组件包括：Core（API 和 Web UI）、JobService（异步任务处理）、Registry（基于 Distribution 的镜像存储）、Portal（前端界面）、Trivy Adapter（安全扫描）、Notary/Sigstore（签名验证）。数据层使用 PostgreSQL 存储元数据，Redis 存储会话和缓存。所有组件容器化部署，支持 Helm Chart 方式在 Kubernetes 上运行。存储后端支持 S3、GCS、Azure Blob、Swift 和本地文件系统。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- 使用外部 PostgreSQL 和 Redis
-- 配置对象存储后端（S3、GCS）
-- 启用 HTTPS 和证书
-- 配置高可用部署
-- 使用 CDN 加速镜像分发
-- 配置镜像缓存代理
+Harbor 通过 Helm Chart 部署到 Kubernetes 集群，各组件以 Deployment 形式运行。它通过 Operator 模式管理配置和升级，支持与 Kubernetes RBAC 集成实现统一身份认证。Harbor 可作为集群内部的私有 Registry，配合镜像拉取凭证（ImagePullSecrets）为工作负载提供安全的镜像分发。同时支持基于策略的镜像自动复制，实现多集群间的镜像同步。
+
+## 生产使用场景
+
+1. **企业私有 Registry**: 在数据中心部署 Harbor 作为统一的镜像管理平台，集成 LDAP/OIDC 身份认证
+2. **供应链安全**: 启用 Cosign 签名和 Trivy 扫描，在 CI/CD 流水线中自动拦截包含高危漏洞的镜像
+3. **多云镜像同步**: 利用复制策略在多个区域的 Harbor 实例间同步镜像，实现就近拉取加速
+4. **合规审计**: 通过操作日志和访问审计满足 SOC2、等保等合规要求
+
+## 安装
+
+```bash
+helm repo add harbor https://helm.goharbor.io
+helm install harbor harbor/harbor \
+  --set expose.ingress.hosts.core=harbor.example.com \
+  --set externalURL=https://harbor.example.com \
+  --set persistence.persistentVolumeClaim.registry.size=100Gi
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Harbor** | 企业级功能全面、CNCF 毕业、社区活跃 | 资源占用较大、部署复杂 |
+| Distribution | 轻量级、简单易用 | 缺乏安全扫描和访问控制 |
+| Quay (Red Hat) | 与 OpenShift 深度集成 | 商业产品为主、社区版功能有限 |
+| JFrog Artifactory | 多语言制品管理 | 商业产品、成本高 |
 
 ## 架构定位
 
-在 CNCF 生态中，harbor 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Harbor 属于 **Storage / Supply Chain** 类别，是云原生供应链安全的核心组件。它与 Trivy、Cosign、OPA 等项目协同工作，构建从镜像构建到部署的完整安全链路。
 
 ## 参考链接
 

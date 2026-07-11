@@ -13,7 +13,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,36 +34,49 @@ prerequisites:
 
 
 
-
 # SlimToolkit
 
 > **CNCF 状态**: Sandbox | **类别**: Image | **主要语言**: Go
 
 ## 概述
 
-SlimToolkit（原名 DockerSlim）是一个容器镜像优化工具，能够自动分析和瘦身容器镜像，将镜像大小缩减高达 30 倍，同时提升安全性。它通过动态分析识别应用实际需要的文件，移除不必要的组件，生成最小化、安全加固的生产镜像。
+SlimToolkit（原名 DockerSlim）是一个 CNCF 沙箱项目，由 Kyle Quest 创建。它是一个容器镜像分析和优化工具，能够通过动态分析自动识别应用实际依赖的文件，将臃肿的容器镜像缩减高达 30 倍，同时生成非 root 用户运行的最小化安全镜像。SlimToolkit 支持 Docker 和 OCI 镜像格式，可集成到 CI/CD 流水线中实现镜像优化自动化。项目自 2015 年开源以来，已被数千个组织用于优化生产镜像。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **自动镜像瘦身**：通过运行时动态分析，智能识别并保留应用实际所需的文件和依赖
+- **安全加固**：自动生成非 root 用户镜像，移除 shell、包管理器等攻击面工具
+- **多格式支持**：兼容 Docker 镜像和 OCI 镜像标准
+- **HTTP 探测**：自动发送 HTTP 请求探测应用运行时依赖，确保功能完整性
+- **镜像分析报告**：生成详细的镜像层、文件、端口、进程分析报告
+- **CI/CD 集成**：提供 CLI 和 HTTP API，支持 Pipeline 自动化集成
+
+## 架构与工作原理
+
+SlimToolkit 工作原理分三个阶段：首先对原始镜像进行静态分析，提取镜像元数据、文件清单和配置信息；然后基于目标镜像启动临时容器，通过 HTTP 探测和动态追踪（基于 ptrace/seccomp）记录运行时实际访问的文件、网络端口和进程；最后根据收集的数据生成优化后的最小化镜像，仅包含必要的文件和依赖。整个过程完全自动化，无需修改 Dockerfile。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+SlimToolkit 优化后的镜像可直接部署到 Kubernetes 集群。在 CI/CD 流水线中，通常在镜像构建阶段调用 slim build 命令优化镜像，然后将瘦身后的镜像推送到 Registry。优化后的镜像因体积更小、攻击面更小，特别适合在 K8s 中大规模部署，可显著加快 Pod 启动速度和镜像拉取效率，降低节点存储压力。
 
-## 生产部署要点
+## 生产用例
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **CI/CD 镜像优化**：在流水线构建阶段自动瘦身镜像，减少镜像仓库存储和拉取时间
+- **安全合规加固**：生成不含调试工具和 shell 的最小化镜像，降低容器逃逸风险
+- **边缘计算部署**：为带宽受限的边缘节点生成超小体积镜像
+- **遗留镜像优化**：分析和优化历史遗留的大型镜像，无需修改 Dockerfile
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，slimtoolkit 属于 **Image** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+curl -sL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo bash
+# 优化镜像
+slim build --target your-app:latest --tag your-app:slim
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[概念/secrets-management.md|secrets-management]]
-- [[概念/security-defense-depth.md|security-defense-depth]]
-- [[概念/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
+相比多阶段构建（Multi-stage Build）需要手动指定保留文件，SlimToolkit 通过自动化动态分析实现零配置优化。相比 Dive（只读分析工具），SlimToolkit 不仅能分析还能自动生成优化镜像。
 
 ## Related
 

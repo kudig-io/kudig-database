@@ -13,7 +13,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,41 +34,50 @@ prerequisites:
 
 
 
-
 # KubeStellar
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
 ## 概述
 
-KubeStellar 是一个多集群配置管理和工作负载分发平台，专注于将 Kubernetes 资源从中心控制面高效地分发到大量边缘集群。它采用 kcp（Kubernetes-like Control Plane）作为核心，支持管理数千个集群，特别适合边缘计算、零售、IoT 等需要管理大量分布式集群的场景。
+KubeStellar 是一个 CNCF 沙箱项目，由 IBM 和 Red Hat 联合推动，是一个 Kubernetes 多集群管理工具。与传统的 Hub-Spoke 模式不同，KubeStelar 采用独特的「multi-cluster flexible control plane」设计，允许在任何集群上运行控制平面，管理工作负载到任意数量目标集群的分发。它支持在不需要额外控制平面节点的情况下，实现跨集群的工作负载编排和配置同步。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **灵活控制平面**：无需独立 Hub，任意 K8s 集群可作为控制平面
+- **工作负载分发**：将 K8s 资源分发到多个目标集群
+- **Binding 模式**：通过 Binding CRD 灵活定义资源到集群的映射
+- **差异化配置**：通过 Transformation Pipeline 支持不同集群的定制化
+- **WebSocket 隧道**：支持通过 WebSocket 穿透网络限制连接目标集群
+- **边缘友好**：支持边缘集群的离线操作和增量同步
+
+## 架构与工作原理
+
+KubeStellar 引入了 Control Plane 和 Workload Space 分离的概念。在任意 K8s 集群上安装 KubeStellar 控制器后，该集群成为管理多个 Workload Space 的控制平面。通过 Placement CRD 定义工作负载分发策略，通过 Binding CRD 将资源绑定到目标集群。Transport Controller 通过 K8s API（或 WebSocket 隧道）将工作负载推送到各目标集群。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+KubeStelar 在核心集群上通过 CRD 扩展 Kubernetes API：Placement CRD 定义分发策略（目标集群选择器、同步规则）；Binding CRD 定义资源与目标集群的映射。Workload Description Object 定义需要分发的工作负载资源。Transport Controller 在后台管理各目标集群的连接和工作负载同步，支持 K8s 原生 API 和 WebSocket 隧道两种传输方式。
 
-## 生产部署要点
+## 生产用例
 
-- **集群标签**: 建立统一的边缘集群标签体系（location, type, tier）
-- **渐进分发**: 使用 BindingPolicy 的集群选择器逐步扩大分发范围
-- **状态监控**: 配置状态汇总，在控制面统一监控所有边缘集群状态
-- **断网设计**: 边缘应用设计为可在断网情况下独立运行
-- **版本控制**: 使用 Workspace 隔离不同版本的工作负载配置
+- **多集群应用分发**：将工作负载分发到大量边缘和数据中心集群
+- **分层管理**：中心集群管理区域集群，区域集群管理边缘集群
+- **混合云编排**：跨本地和公有云的工作负载管理
+- **边缘 IoT**：大规模 IoT 边缘节点的应用分发
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，kubestellar 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+kubectl apply -f https://github.com/kubestellar/kubestellar/releases/latest/download/kubestellar.yaml
+# 或使用 kubeflex
+kubeflex init
+kubeflex create controlplane ks-management
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[deployment]]
-- [[概念/controller-pattern.md|controller-pattern]]
-- [[概念/gitops-principles.md|gitops-principles]]
-- [[概念/secrets-management.md|secrets-management]]
+相比 Karmada（需要独立控制平面），KubeStelar 更灵活——任意集群可作为控制平面。相比 KubeFleet，KubeStelar 更关注边缘场景和灵活拓扑。
 
 ## Related
 

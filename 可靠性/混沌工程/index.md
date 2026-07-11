@@ -21,4 +21,7 @@ last_updated: 2026-07
 - [[可靠性/混沌工程/02-chaos-mesh-deployment.md|Chaos Mesh Deployment]]
 - [[可靠性/混沌工程/03-chaos-experiment-design.md|Chaos Experiment Design]]
 - [[可靠性/混沌工程/04-litmus-practices.md|Litmus Practices]]
+- [[可靠性/混沌工程/05-chaos-experiment-automation.md|Chaos Experiment Automation]]
+- [[可靠性/混沌工程/06-game-day-runbook-template.md|Game Day Runbook Template]]
+- [[可靠性/混沌工程/07-blast-radius-control.md|Blast Radius Control]]
 

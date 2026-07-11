@@ -21,4 +21,7 @@ last_updated: 2026-07
 - [[可靠性/SRE实践/02-release-gate-slo-based.md|Release Gate Slo Based]]
 - [[可靠性/SRE实践/03-incident-command-system.md|Incident Command System]]
 - [[可靠性/SRE实践/04-toil-reduction-automation.md|Toil Reduction Automation]]
+- [[可靠性/SRE实践/05-error-budget-automation.md|Error Budget Automation]]
+- [[可靠性/SRE实践/06-slo-dashboard-design.md|Slo Dashboard Design]]
+- [[可靠性/SRE实践/07-incident-command-field-guide.md|Incident Command Field Guide]]
 

@@ -12,7 +12,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -42,32 +42,78 @@ prerequisites:
 
 ## 概述
 
-External Secrets Operator (ESO) 将外部密钥管理系统（如 AWS Secrets Manager、HashiCorp Vault、Azure Key Vault）的密钥同步到 Kubernetes Secrets，实现安全的密钥管理和自动轮换。
+External Secrets Operator（ESO）是一个 Kubernetes 原生的密钥同步工具，2021 年加入 CNCF Sandbox。它将外部密钥管理系统（如 AWS Secrets Manager、HashiCorp Vault、Azure Key Vault、Google Secret Manager、1Password 等 20+ 提供商）的密钥自动同步到 Kubernetes Secrets，实现安全的密钥管理和自动轮换。ESO 解决了将密钥硬编码在 K8s Secret 或 Git 仓库中的安全问题。
 
-## 核心能力
+## 核心特性
 
-- **多后端支持**: AWS、Azure、GCP、Vault、1Password 等 20+ 提供商
-- **自动同步**: 定期从外部系统同步密钥到 K8s
-- **密钥模板**: 支持模板化生成 Secret 内容
-- **密钥轮换**: 自动检测和同步密钥更新
-- **多租户**: 支持命名空间级别的隔离
-- **推送模式**: 支持将 K8s Secret 推送到外部系统
+- **20+ 后端**: AWS、Azure、GCP、Vault、1Password、CyberArk、Pulumi 等
+- **声明式同步**: 通过 SecretStore 和 ExternalSecret CRD 声明密钥映射
+- **自动轮换**: 定期从外部系统拉取最新密钥值并更新 K8s Secret
+- **模板化生成**: 支持 templated output，动态生成 Secret 内容
+- **多租户隔离**: 命名空间级 SecretStore 和集群级 ClusterSecretStore
+- **推送模式**: 支持将 K8s Secret 推送到外部系统（PushSecret）
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+ESO 以 Operator 模式运行。Controller（Deployment）监听 ExternalSecret 和 SecretStore CRD。SecretStore 定义外部密钥系统的连接配置和认证凭证。ExternalSecret 定义从外部系统到 K8s Secret 的映射（哪个外部密钥的哪个字段 → K8s Secret 的哪个 key）。Controller 定期（refreshInterval）调用 Provider API 拉取密钥值，创建或更新对应的 Kubernetes Secret。Provider 实现标准接口（GetSecret、GetSecretMap），每个 Provider 对接一个外部系统。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **最小权限**: 为 ESO 配置最小必需的云平台权限
-- **命名空间隔离**: 使用 SecretStore 而非 ClusterSecretStore 实现隔离
-- **刷新间隔**: 根据安全需求设置合理的 refreshInterval
-- **密钥轮换**: 在外部系统轮换密钥后，ESO 会自动同步
-- **监控**: 监控同步状态和错误
+ESO 通过 CRD 声明式管理密钥同步。SecretStore CRD 定义连接信息，存储在命名空间中（命名空间级隔离）。ExternalSecret CRD 定义映射规则，Controller 根据规则创建标准 K8s Secret。创建的 Secret 与手动创建的 Secret 行为完全一致，Pod 可正常挂载为环境变量或卷。支持 Secret 推送（PushSecret），将 K8s Secret 同步到外部系统。通过 RBAC 和 SecretStore 作用域实现多租户隔离。
+
+## 生产使用场景
+
+1. **云密钥管理集成**: 将 AWS Secrets Manager 的密钥自动同步到 K8s Secret
+2. **Vault 密钥同步**: 不修改应用代码，将 Vault 中的密钥同步为 K8s Secret
+3. **密钥自动轮换**: 在云平台轮换密钥后，ESO 自动更新集群中的 Secret
+4. **GitOps 兼容**: SecretStore/ExternalSecret YAML 可安全提交到 Git（不含密钥值）
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add external-secrets https://charts.external-secrets.io
+helm install external-secrets external-secrets/external-secrets \
+  -n external-secrets --create-namespace
+# 配置密钥源
+kubectl apply -f - <<EOF
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata: { name: aws-secrets }
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: us-east-1
+      auth:
+        jwt:
+          serviceAccountRef: { name: external-secrets-sa }
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata: { name: db-password }
+spec:
+  refreshInterval: 1h
+  secretStoreRef: { name: aws-secrets, kind: SecretStore }
+  target: { name: db-password-secret }
+  data:
+  - secretKey: password
+    remoteRef: { key: prod/db/password }
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **ESO** | CNCF 项目、20+ 提供商 | 仅同步（非注入） |
+| Sealed Secrets | GitOps 原生、简单 | 密钥仍存储在 Git 中 |
+| Vault CSI Provider | CSI 原生文件挂载 | 仅支持 Vault |
+| SOPS | 加密 YAML、GitOps 友好 | 需手动或脚本解密 |
 
 ## 架构定位
 
-在 CNCF 生态中，external-secrets 属于 **Supply Chain** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，ESO 属于 **Supply Chain / Security** 类别，是密钥管理标准化同步的领先方案。它与 Vault、AWS Secrets Manager、Sealed Secrets 等互补。
 
 ## 参考链接
 

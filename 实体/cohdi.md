@@ -14,7 +14,7 @@ tags:
 - rag
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -36,42 +36,47 @@ prerequisites:
 
 
 
-
 # Cohdi
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 
 ## 概述
 
-CoHDI（Composable Hyperconverged Disaggregated Infrastructure）是一个 Kubernetes Operator，用于在分解式基础设施中动态组合和管理硬件资源。它支持通过 CXL（Compute Express Link）和 PCIe 总线动态地将远端 GPU、内存、存储等设备组合分配给 Kubernetes Pod，使得计算节点可以按...
+Cohdi 是一个 CNCF 沙箱项目，旨在提供 Kubernetes 上的轻量级工作负载编排和部署自动化能力。它专注于简化应用从开发到生产的多环境部署流程，通过声明式配置管理多集群应用分发。Cohdi 特别关注边缘计算和混合云场景下的工作负载编排，提供低资源占用的 Agent 和灵活的部署策略。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **多集群部署**：将应用工作负载分发到多个 K8s 集群
+- **环境差异管理**：通过 Overlay 和 Patch 管理不同环境的配置差异
+- **渐进式发布**：支持跨集群的蓝绿部署和金丝雀发布
+- **轻量级 Agent**：边缘节点上的低资源占用代理
+- **GitOps 集成**：基于 Git 仓库的应用配置管理
+- **策略引擎**：部署位置和时机的策略控制
+
+## 架构与工作原理
+
+Cohdi 采用 Hub-Spoke 架构：Hub 组件运行在中心集群，管理应用部署配置和分发策略；Spoke Agent 运行在目标集群（包括边缘节点），接收部署指令并协调本地工作负载。部署配置通过声明式 YAML 定义，支持环境 Overlay、健康检查和回滚策略。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Cohdi 通过 CRD 与 Kubernetes 集成：DeploymentPolicy CRD 定义应用的部署目标和策略；ClusterSet CRD 定义目标集群集合。Hub Controller 管理这些 CRD 并分发工作负载清单到各目标集群。Spoke Agent 在目标集群中以 Deployment 部署，监听 Hub 的部署指令。
 
-## 生产部署要点
+## 生产用例
 
-- **硬件规划**: 确保网络结构支持 CXL/PCIe Fabric，合理规划交换机拓扑
-- **资源池分级**: 按性能等级划分资源池，高优先级任务使用高性能设备
-- **亲和性策略**: 为延迟敏感任务配置拓扑亲和性，减少跨交换机访问
-- **容量规划**: 监控资源池利用率，及时扩展物理设备
-- **故障隔离**: 配置设备健康检查，自动隔离问题设备
+- **边缘应用分发**：将应用部署到大量边缘节点
+- **多环境管理**：统一管理 dev/staging/prod 的应用部署
+- **混合云部署**：跨本地数据中心和公有云的应用分发
+- **渐进式发布**：跨集群的金丝雀发布
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，cohdi 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+kubectl apply -f https://github.com/cohdi/cohdi/releases/latest/download/cohdi.yaml
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[实体/crd-custom-resources.md|crd-custom-resources]]
-- [[operator-pattern]]
-- [[概念/storage-model.md|storage-model]]
-- [[概念/secrets-management.md|secrets-management]]
-- [[pod-lifecycle]]
+相比 KubeFed v2（已归档），Cohdi 更轻量且专注于应用分发。相比 ArgoCD（单集群 GitOps），Cohdi 支持多集群应用编排。
 
 ## Related
 

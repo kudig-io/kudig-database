@@ -1,7 +1,7 @@
 ---
 title: SchemaHero (entities)
 description: '## 概述'
-summary: 'SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采用声明式方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 自动计算并执行所需的 DDL 变更。支持 PostgreSQL、MySQL、CockroachDB、SQLite 等数据库。'
+summary: 'SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采用声明式方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 自动计算并执行所需的 DDL 变更。'
 category: entities
 tags:
 - k8s
@@ -16,7 +16,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,34 +39,75 @@ prerequisites:
 
 
 
-
 # SchemaHero
 
 > **CNCF 状态**: Sandbox | **类别**: Database | **主要语言**: Go
 
 ## 概述
 
-SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具。它采用声明式方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 自动计算并执行所需的 DDL 变更。支持 PostgreSQL、MySQL、CockroachDB、SQLite 等数据库。
+SchemaHero 是一个 Kubernetes 原生的数据库 Schema 迁移工具，由 Replicated 团队开发，2021 年加入 CNCF 沙箱。它采用声明式（Declarative）方法管理数据库表结构，开发者只需定义期望的 Schema 状态，SchemaHero 控制器自动计算当前状态与目标状态的差异（diff），并生成和执行所需的 DDL 变更语句。这一理念与 Kubernetes 的 reconcile 模式一致，让数据库 Schema 管理像管理 Deployment 一样简单。SchemaHero 支持 PostgreSQL、MySQL、CockroachDB、SQLite、Cassandra、MongoDB 等主流数据库，可与 ArgoCD/Flux 等 GitOps 工具无缝集成。
 
 ## 核心能力
 
-- 详见源文档获取完整信息 ^[inferred]
+- **声明式 Schema 管理**: 通过 Table CRD 定义期望的表结构，控制器自动计算并执行 DDL
+- **多数据库支持**: PostgreSQL、MySQL、CockroachDB、SQLite、Cassandra、MongoDB、Spanner
+- **审批流程**: 生产环境可启用 Approval 机制，DDL 变更需人工审查后才能执行
+- **GitOps 集成**: 将 Table CRD 存储在 Git 中，通过 ArgoCD/Flux 实现自动化部署
+- **版本控制**: 每个 Schema 变更都有版本记录，支持回滚
+- **SQL 预览**: 在执行前生成可预览的 SQL 语句，便于审查
+
+## 架构
+
+SchemaHero 采用 Kubernetes Operator 模式：
+
+- **SchemaHero Manager**: 部署在集群中的控制器，监听 Database 和 Table CRD
+- **Database CRD**: 定义数据库连接信息（通过 Kubernetes Secret 引用）
+- **Table CRD**: 声明期望的表结构（列、类型、索引、约束）
+- **Schema Reconciler**: 核心调谐逻辑，连接数据库获取当前 Schema，与 Table CRD 比对，生成 DDL
+- **Migration Job**: 实际执行 DDL 的 Kubernetes Job，使用对应数据库的专用镜像
+
+调谐流程：`Table CRD → Reconciler (diff) → Plan → Approval → Migration Job (DDL) → 数据库`
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+SchemaHero 以 Kubernetes Operator 原生运行，通过 CRD（`Database`、`Table`）声明式管理数据库 Schema。Database CRD 通过 Kubernetes Secret 引用数据库连接字符串，Table CRD 定义表结构。控制器根据 Table CRD 与数据库实际状态的差异自动生成 Migration 计划，通过 Kubernetes Job 执行 DDL。可与 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中的 ArgoCD/Flux GitOps 流程深度集成，实现 Schema 变更的全自动部署和审计。
 
-## 生产部署要点
+## 生产场景
 
-- **声明式管理**: 只定义期望的 Schema 状态，让 SchemaHero 计算变更
-- **审批流程**: 生产环境始终启用审批流程，审查 DDL 后再执行
-- **GitOps**: 将 Table CRD 存储在 Git 中，通过 ArgoCD/Flux 管理
-- **增量变更**: 每次只修改一个表结构，便于追踪和回滚
-- **数据库密钥**: 使用 Kubernetes Secret 管理数据库连接字符串
+1. **GitOps Schema 管理**: 将所有 Table CRD 存储在 Git 仓库，通过 ArgoCD 自动同步到集群
+2. **多环境 Schema 一致性**: 开发环境自动执行 DDL，生产环境启用 Approval 人工审查
+3. **微服务数据库自治**: 每个微服务团队管理自己的 Table CRD，减少 DBA 介入
+4. **灾难恢复 Schema 重建**: 通过 Git 中存储的 Table CRD 完整重建数据库 Schema
+
+## 安装
+
+```bash
+# 安装 SchemaHero Operator
+kubectl apply -f https://raw.githubusercontent.com/schemahero/schemahero/main/install.yaml
+
+# 安装 schemahero CLI
+curl -sL https://get.schemahero.io | sh
+
+# 或使用 krew
+kubectl krew install schemahero
+
+# 创建数据库连接
+schemahero databases add --name mydb --driver postgres \
+  --uri "postgresql://user:pass@host:5432/dbname"
+```
+
+## 对比
+
+| 特性 | SchemaHero | Flyway | Liquibase | Atlas |
+|------|-----------|--------|-----------|-------|
+| 声明式 | ✅ 期望状态 | ❌ 命令式 | ⚠️ 混合 | ✅ 期望状态 |
+| K8s 原生 | ✅ CRD + Operator | ❌ CLI | ❌ CLI | ⚠️ 有限 |
+| GitOps | ✅ 原生 | ⚠️ 需脚本 | ⚠️ 需脚本 | ⚠️ 有限 |
+| 审批流程 | ✅ Approval | ❌ | ❌ | ⚠️ 有限 |
 
 ## 架构定位
 
-在 CNCF 生态中，schemahero 属于 **Database** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，SchemaHero 属于 **Database** 类别，为云原生应用提供声明式数据库 Schema 管理能力。
 
 ## 参考链接
 

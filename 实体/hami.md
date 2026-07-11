@@ -16,7 +16,7 @@ tags:
 - gpu
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,27 +48,65 @@ prerequisites:
 
 ## 概述
 
-HAMi（原 vGPU_4k8s）是一个异构计算设备虚拟化中间件，为 Kubernetes 提供 GPU、NPU 等加速器的共享和虚拟化能力。它允许多个 Pod 共享同一块物理 GPU，并提供显存和算力的精细化隔离，有效提升 GPU 利用率。HAMi 支持 NVIDIA GPU、AMD GPU、华为 Ascend NPU、寒武纪 MLU 等多种异构设备。
+HAMi（原 vGPU_4k8s）是一个异构计算设备虚拟化中间件，为 Kubernetes 提供 GPU、NPU 等加速器的共享和虚拟化能力。它允许多个 Pod 共享同一块物理 GPU，并提供显存和算力的精细化隔离，有效提升 GPU 利用率。HAMi 支持 NVIDIA GPU、AMD GPU、华为 Ascend NPU、寒武纪 MLU 等多种异构设备，在 AI/ML 工作负载场景中显著降低 GPU 硬件成本。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **GPU 共享**: 多个 Pod 共享同一块物理 GPU，支持显存隔离和算力隔离
+- **多设备支持**: NVIDIA、AMD、华为 Ascend NPU、寒武纪 MLU
+- **硬隔离**: 基于 GPU 硬件虚拟化技术（vGPU/MIG）实现显存和算力隔离
+- **调度扩展**: 扩展 Kubernetes 调度器，支持 GPU 细粒度资源调度
+- **监控集成**: 导出 GPU 使用率、显存占用等 Prometheus 指标
+- **设备分片**: 支持 deviceSplitCount 控制每张 GPU 的最大共享数
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+HAMi 通过 device plugin 和调度器扩展实现 GPU 虚拟化。核心组件包括：HAMi Scheduler（扩展 Kubernetes 调度器，感知 GPU 细粒度资源）、HAMi Device Plugin（替代原生 NVIDIA device plugin，上报虚拟化后的 GPU 资源）、HAMi Webhook（拦截 Pod 创建请求，注入 GPU 虚拟化配置）。设备层通过劫持 CUDA 调用或利用硬件虚拟化能力（如 NVIDIA MIG、vGPU）实现资源隔离。调度器维护全局 GPU 资源视图，根据 Pod 的 GPU 请求进行细粒度分配。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **资源规划**: 根据模型的实际显存和算力需求设置 limits，避免过度超分
-- **监控告警**: 部署 GPU 监控面板，对显存使用率和 OOM 事件设置告警
-- **拓扑感知**: 多 GPU 训练任务启用拓扑感知调度，优先分配 NVLink 连接的 GPU
-- **分级策略**: 推理服务使用 GPU 共享提升利用率，训练任务使用独占模式保证性能
-- **设备分片**: 根据业务需求合理设置 deviceSplitCount，避免过多碎片化
+HAMi 通过 Kubernetes Device Plugin Framework 上报虚拟化后的 GPU 资源（如 `nvidia.com/gpu.mem`、`nvidia.com/gpu.cores`），扩展调度器（Scheduler Extender 或 KubeSchedulerPlugin）实现细粒度 GPU 调度。Mutating Webhook 自动为 Pod 注入 GPU 虚拟化运行时配置。用户通过在 Pod spec 中添加 GPU 资源请求（如 `nvidia.com/gpu: 1` + `nvidia.com/gpu.mem: 2000`）来申请共享 GPU 资源。
+
+## 生产使用场景
+
+1. **推理服务共享 GPU**: 多个推理 Pod 共享一张 GPU，提升利用率降低成本
+2. **开发/测试环境**: 多个开发者共享 GPU 资源进行模型调试
+3. **多租户 GPU 隔离**: 不同团队的 GPU 任务实现资源隔离
+4. **混合调度**: 推理任务使用 GPU 共享，训练任务使用 GPU 独占
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add hami https://project-hami.github.io/HAMi
+helm install hami hami/hami --set devicePlugin.deviceMemoryScaling=2 \
+  --set scheduler.kubeScheduler.imageTag=v0.28.9
+# 使用 GPU 共享
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: app
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+        nvidia.com/gpumem: 2000
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **HAMi** | 多设备支持、显存隔离 | 非官方方案、稳定性待验证 |
+| NVIDIA GPU Operator | 官方支持、MIG 集成 | 仅 NVIDIA、功能较基础 |
+| Volcano GPU 调度 | 批处理调度、队列管理 | 无显存虚拟化 |
+| Run:AI | 企业级 GPU 管理 | 商业产品 |
 
 ## 架构定位
 
-在 CNCF 生态中，hami 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，HAMi 属于 **Scheduling / AI Infrastructure** 类别，解决了 Kubernetes GPU 资源粒度过粗的问题。它与 Volcano、Kueue 等批处理调度器互补。
 
 ## 参考链接
 

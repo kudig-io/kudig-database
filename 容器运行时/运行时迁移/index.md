@@ -24,6 +24,7 @@ last_updated: 2026-07
 
 - [[容器运行时/运行时迁移/01-docker-to-containerd-migration.md|Docker To Containerd Migration]]
 - [[容器运行时/运行时迁移/02-containerd-to-cri-o-migration.md|Containerd To Cri O Migration]]
+- [[容器运行时/运行时迁移/02-runtime-class-configuration.md|Runtime Class Configuration]]
 
 
 

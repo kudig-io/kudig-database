@@ -14,7 +14,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -44,33 +44,68 @@ prerequisites:
 
 ## 概述
 
-MetalLB 是为裸金属 Kubernetes 集群提供的负载均衡器实现。在云环境中，Kubernetes LoadBalancer 类型的 [[Service|Service]] 由云提供商自动配置。MetalLB 填补了裸金属环境的空白，通过 Layer 2 (ARP/NDP) 或 BGP 协议为 Service 分配和公告外部 IP 地址。
+MetalLB 是为裸金属 Kubernetes 集群提供的 LoadBalancer 实现，2021 年加入 CNCF Sandbox，后晋升为 Incubating。在云环境中，Kubernetes LoadBalancer 类型的 [[Service|Service]] 由云提供商自动配置。MetalLB 填补了裸金属环境的空白，通过 Layer 2（ARP/NDP）或 BGP 协议为 Service 分配和公告外部 IP 地址。它是裸金属集群使用 LoadBalancer Service 的标准方案。
 
-## 核心能力
+## 核心特性
 
-- **Layer 2 模式**: 使用 ARP (IPv4) 或 NDP (IPv6) 响应本地网络请求
-- **BGP 模式**: 与网络路由器建立 BGP 会话公告服务 IP
-- **IP 地址池**: 灵活配置可分配的 IP 地址范围
+- **Layer 2 模式**: 使用 ARP（IPv4）/ NDP（IPv6）响应本地网络请求
+- **BGP 模式**: 与网络路由器建立 BGP 会话公告 Service IP
+- **IP 地址池**: 灵活配置可分配的 IP 地址范围和分配策略
 - **自动故障转移**: Leader 选举确保 L2 模式高可用
 - **双栈支持**: 同时支持 IPv4 和 IPv6
-- **CRD 配置**: 使用 Kubernetes 原生资源配置
+- **CRD 配置**: 使用 IPAddressPool、L2Advertisement、BGPAdvertisement CRD
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+MetalLB 由两个组件组成。MetalLB Controller（Deployment，集群级单实例）监听 Kubernetes Service 变更，当发现 `type: LoadBalancer` 的 Service 时，从 IPAddressPool 中分配一个 IP 并更新 Service 的 `status.loadBalancer.ingress`。MetalLB Speaker（DaemonSet，每个节点一个）负责公告 IP 地址。Layer 2 模式下，Leader 节点的 Speaker 发送 Gratuitous ARP/NDP 响应，使局域网将流量发到该节点。BGP 模式下，所有 Speaker 节点与上游路由器建立 BGP 会话，公告 Service VIP，路由器通过 ECMP 将流量分发到多个节点。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **网络规划**: 确保 IP 地址池与现有网络不冲突
-- **L2 限制**: Layer 2 模式下单节点承载所有流量，考虑带宽瓶颈
-- **BGP 优先**: 生产环境推荐 BGP 模式实现真正负载均衡
-- **故障排查**: 使用 `speaker` Pod 日志排查网络公告问题
-- **IP 预留**: 为关键服务预分配固定 IP
-- **监控告警**: 配置 IP 池耗尽告警
+MetalLB 通过 CRD 和 Cloud Controller Manager 接口集成。IPAddressPool CRD 定义 IP 地址池。L2Advertisement/BGPAdvertisement CRD 定义公告模式。Controller 作为 Kubernetes Service 的 LoadBalancer Controller 运行，自动为 `type: LoadBalancer` Service 分配 IP。Speaker 通过 DaemonSet 运行。支持与 kube-proxy 协同工作——MetalLB 负责将外部流量引入集群节点，kube-proxy 负责将流量路由到目标 Pod。
+
+## 生产使用场景
+
+1. **裸金属集群入口**: 为裸金属 K8s 集群的 Ingress Controller 提供 LoadBalancer IP
+2. **BGP 负载均衡**: 与数据中心交换机建立 BGP，实现多节点流量分发
+3. **多 VIP 管理**: 为多个服务分配和管理外部 IP
+4. **混合网络**: 在非云环境中实现类似云 ELB 的流量入口
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add metallb https://metallb.github.io/metallb
+helm install metallb metallb/metallb -n metallb-system --create-namespace
+# 配置 IP 地址池和公告模式
+kubectl apply -f - <<EOF
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata: { name: default-pool }
+spec:
+  addresses: ["192.168.1.240-192.168.1.250"]
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata: { name: default }
+spec:
+  ipAddressPools: ["default-pool"]
+EOF
+# 创建 LoadBalancer Service
+kubectl expose deployment web --port=80 --type=LoadBalancer
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **MetalLB** | CNCF Incubating、L2+BGP | L2 单节点瓶颈 |
+| kube-vip | 轻量、双用途 | BGP 不如 MetalLB |
+| Porter (VXLAN) | VXLAN 隧道 | 功能单一 |
+| Cloud LB (ELB/SLB) | 云原生、成熟 | 仅限云环境 |
 
 ## 架构定位
 
-在 CNCF 生态中，metallb 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，MetalLB 属于 **Networking / Load Balancing** 类别，是裸金属 Kubernetes 集群 LoadBalancer 的事实标准。
 
 ## 参考链接
 

@@ -16,7 +16,7 @@ tags:
 - agent
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,27 +48,56 @@ prerequisites:
 
 ## 概述
 
-Clusternet 是一个多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[Service|Service]]、Helm Release 等）智能分发到多个子集群。Clusternet 特别适合边缘计算和混合云场景，即使子集群位于 NAT 或防火墙后面也...
+Clusternet 是由华为开源的多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计，2021 年加入 CNCF Sandbox。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[Service|Service]]、Helm Release 等）智能分发到多个子集群。Clusternet 特别适合边缘计算和混合云场景，即使子集群位于 NAT 或防火墙后面也能通过 Pull 模式注册连接。
 
-## 核心能力
+## 核心特性
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Hub-Agent 架构**: Hub 集群集中管理，Agent 部署在子集群主动连接
+- **Pull/Push 双模式**: Pull 模式适配 NAT 后的边缘集群，Push 模式适配云上集群
+- **Subscription 模型**: 类似 Kubernetes 的 Label Selector，按标签选择目标集群
+- **Helm 分发**: 支持将 Helm Chart 分发到多个集群并管理 Release
+- **Override 策略**: 为不同集群定制差异化的配置覆盖
+- **多集群调度**: 按权重或策略将工作负载分发到多个集群
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Clusternet 由 Hub 和 Agent 两部分组成。Hub 集群运行 Clusternet Hub（API 聚合层、Webhook、Controller），通过 `clusters.clusternet.io` CRD 管理注册的子集群。Agent（clusternet-agent）以 Deployment 运行在子集群中，通过 Pull 模式注册到 Hub 并建立 WebSocket 连接。用户创建 Subscription（定义分发内容和目标集群选择器）后，Controller 生成 Base 和 Localization（Override）资源，Agent 通过 FeedIn（安全隧道）将资源应用到本地集群。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **边缘优先 Pull 模式**: 边缘集群通常位于 NAT 后，使用 Agent 主动连接 Hub
-- **标签规范**: 统一集群标签体系 (location, tier, env)，便于 Subscription 选择
-- **Hub 高可用**: Hub 集群部署多副本，配置持久化存储
-- **渐进式分发**: 先通过标签选择少量集群验证，再扩大分发范围
-- **监控 Agent 状态**: 监控 ManagedCluster 的 conditions，及时发现断连集群
+Clusternet 通过 CRD（ManagedCluster、Subscription、Base、Localization、FeedIn、HelmChart）实现多集群管理。Hub 聚合了所有子集群的 API 访问能力，通过 FeedIn（基于 WebSocket 的反向代理）安全访问 NAT 后的子集群。Subscription CRD 类似 Deployment 的多集群扩展，定义 What（分发什么）和 Where（分发到哪里）。Override 策略支持 JSON Patch 实现差异化配置。
+
+## 生产使用场景
+
+1. **边缘集群管理**: 管理大量位于 NAT 后的边缘 Kubernetes 集群
+2. **混合云分发**: 将应用统一分发到公有云和私有数据中心集群
+3. **多环境部署**: 按标签选择开发/测试/生产集群，差异化配置
+4. **渐进式发布**: 先分发到灰度集群验证，再扩大到全量集群
+
+## 安装
+
+```bash
+# Hub 集群
+helm repo add clusternet https://clusternet.github.io/charts
+helm install clusternet-hub clusternet/clusternet-hub
+# 注册子集群
+helm install clusternet-agent clusternet/clusternet-agent \
+  --set hubURL=https://hub.example.com \
+  --set parentAPIServerToken=<token>
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Clusternet** | 边缘场景适配好、Pull 模式 | 社区较小 |
+| OCM (Open Cluster Management) | Red Hat 支持、API 清晰 | 不支持边缘 Pull |
+| Karmada | CNCF Incubating、调度强 | 架构较重 |
+| ArgoCD + ApplicationSet | GitOps 原生 | 非专门的多集群平台 |
 
 ## 架构定位
 
-在 CNCF 生态中，clusternet 属于 **Orchestration** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Clusternet 属于 **Orchestration / Multi-Cluster** 类别，专注于边缘计算和混合云场景的多集群管理。
 
 ## 参考链接
 

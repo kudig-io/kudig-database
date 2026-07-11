@@ -15,7 +15,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -37,38 +37,56 @@ prerequisites:
 
 
 
-
 # containerd 安全加固
 
 > **CNCF 状态**: Graduated | **类别**: Runtime | **主要语言**: Go
 
 ## 概述
 
-title: containerd 安全加固生产指南
+Containerd 安全加固是一套针对 containerd 容器运行时的安全最佳实践和配置指南。它涵盖运行时二进制文件保护、套接字权限控制、镜像内容信任、Seccomp/AppArmor/SELinux 策略配置、审计日志、容器镜像扫描等多个维度。通过系统性加固，可将 containerd 从默认配置提升到满足生产级安全合规要求的水平，防御容器逃逸、提权攻击等安全威胁。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **套接字权限控制**：限制 containerd.sock 文件权限，仅允许 root 或特定组访问
+- **内容信任**：启用 containerd image verification 和 Cosign/Notary 签名验证
+- **Seccomp 默认策略**：通过默认 seccomp profile 限制系统调用
+- **AppArmor/SELinux**：通过 MAC 策略限制容器进程行为
+- **审计日志**：启用 containerd audit log 记录所有容器操作
+- **镜像扫描**：集成 Trivy/Grype 进行容器镜像漏洞扫描
+
+## 架构与工作原理
+
+安全加固从多个层面实施：二进制层面（只读文件系统、文件完整性监控）；配置层面（最小权限配置、禁用不必要功能）；运行时层面（Seccomp/AppArmor/SELinux 策略约束容器行为）；网络层面（限制 containerd gRPC 端口暴露）；镜像层面（签名验证、漏洞扫描）。通过纵深防御策略，在各层建立安全控制点。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+在 Kubernetes 中，containerd 安全加固通过 KubeletConfiguration（如 protectKernelDefaults、seccompDefault）、Pod Security Admission（seccompProfile、apparmorProfile）以及节点级配置文件（config.toml）实现。CRI 支持将 seccomp 和 AppArmor profile 通过 Pod SecurityContext 传递给 containerd。
 
-## 生产部署要点
+## 生产用例
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **生产环境合规**：满足 CIS Benchmark 和等保 2.0 对容器运行时的安全要求
+- **多租户集群安全**：防止容器逃逸和横向移动攻击
+- **金融/政府场景**：满足严格的安全审计和访问控制要求
+- **安全事件防御**：通过运行时安全策略减少攻击面和影响范围
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，03-containerd-security-hardening 属于 **Runtime** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+# 检查 containerd 配置
+containerd config dump | grep -E 'security|seccomp|apparmor'
 
-## 参考链接
+# 应用加固配置
+cat > /etc/containerd/config.toml << 'EOF'
+[plugins."io.containerd.grpc.v1.cri"]
+  enable_unprivileged_ports = false
+  enable_unprivileged_icmp = false
+EOF
+systemctl restart containerd
+```
 
-- [[containerd]]
-- [[实体/cni-plugins.md|cni-plugins]]
-- [[falco]]
-- [[实体/trivy.md|[[Trivy|trivy]]]]
-- [[实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
+## 对比替代方案
+
+相比 Docker 运行时，containerd 默认更精简且攻击面更小。相比 CRI-O，两者安全模型类似，但 containerd 生态更成熟。
 
 ## Related
 
@@ -79,5 +97,6 @@ title: containerd 安全加固生产指南
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - 03-containerd-security-hardening
+
 
 <!-- risk-assessed -->

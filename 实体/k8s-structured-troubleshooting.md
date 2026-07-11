@@ -16,7 +16,7 @@ tags:
 - containerd
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -41,53 +41,52 @@ prerequisites:
 
 
 
-
 # 结构化排障方法论
 
-## 配置优先原则
+> **CNCF 状态**: 方法论 | **类别**: Troubleshooting | **主要语言**: Markdown, YAML
 
-经验统计：**80% 的 K8s 问题源于配置错误**，而非代码 Bug。
+## 概述
 
-排障顺序：
-1. **配置检查**：YAML 清单是否正确、资源限制是否合理
-2. **事件检查**：`kubectl describe` 查看 Events
-3. **日志检查**：`kubectl logs` 查看容器日志
-4. **指标检查**：CPU/Memory/Network 是否异常
-5. **深度排查**：系统调用追踪、网络抓包
+Kubernetes 结构化故障排查是一套系统化的故障诊断方法论，为 K8s 生产环境提供标准化的排障流程。它将复杂的分布式系统故障分解为可管理的诊断步骤，涵盖分层排查（Pod → Node → Network → Control Plane）、证据收集、假设验证和根因定位。该方法论整合了 SRE 最佳实践、K8s 资源模型知识和运维工具链，帮助工程师在面对复杂故障时保持清晰的诊断思路，避免盲目试错。
 
-## 全组件排障清单
+## Key Features（核心能力）
 
-### 控制平面
-- etcd 健康状态、磁盘空间、Leader 选举
-- API Server 请求延迟、错误率
-- Scheduler 调度失败原因
-- KCM 控制器日志
+- **分层排查模型**：从应用层到基础设施层逐层诊断（Pod → Service → Network → Node → Control Plane）
+- **证据收集清单**：标准化的诊断命令和检查项清单
+- **时间线分析**：基于 Events 时间线重建故障发生过程
+- **假设验证框架**：系统化的假设生成和验证流程
+- **自动化工具集成**：与 kubectl、k9s、HolmesGPT 等工具集成
+- **知识库积累**：将故障案例转化为可复用的诊断模式
 
-### 节点
-- kubelet 状态、证书过期
-- 容器运行时（containerd/CRI-O）状态
-- 资源压力（Memory/Disk/PID）
+## 架构与工作原理
 
-### 网络
-- CoreDNS 解析延迟/失败
-- Service Endpoint 一致性
-- CNI 插件状态
-- NetworkPolicy 冲突
+结构化排查方法论遵循 PDCA（Plan-Do-Check-Act）循环：Plan 阶段根据故障现象确定排查方向和优先级；Do 阶段执行诊断命令收集证据（Pod Status、Events、日志、指标）；Check 阶段分析证据验证或排除假设；Act 阶段确定根因并执行修复。排查从最上层（用户感知的问题）开始，逐步向下钻取到根本原因。每一步的证据都记录在诊断报告中，便于协作和复盘。
 
-### 存储
-- PV/PVC 绑定状态
-- CSI 驱动日志
-- 挂载点权限
+## K8s 集成
 
-### 工作负载
-- Pod 状态（Pending/CrashLoopBackOff/ImagePullBackOff）
-- Init Container 失败
-- 探针配置错误
-- 资源请求超过节点容量
+排查流程直接操作 K8s API 对象：从 kubectl describe pod 检查 Pod Status 和 Events 开始；通过 kubectl logs 查看应用日志；通过 kubectl get events 重建事件时间线；通过 kubectl exec 进入 Pod 测试网络连通性；通过 kubectl top 和 kubectl get nodes 检查资源使用和节点健康。对于控制平面问题，检查 kube-apiserver、etcd、scheduler 的日志和指标。
 
----
+## 生产用例
 
-> 来源：.zread/wiki/drafts/15-jie-gou-hua-gu-zhang-pai-cha-*.md
+- **Pod 启动失败**：系统化排查 ImagePullBackOff、CrashLoopBackOff、OOMKilled 等常见问题
+- **网络不可达**：DNS 解析、Service Endpoints、NetworkPolicy 的分层诊断
+- **性能降级**：从应用延迟到资源争用的性能瓶颈定位
+- **控制平面异常**：API Server 延迟、etcd 性能、调度器问题的诊断
+
+## 安装与快速开始
+
+```bash
+# 标准排查命令链
+kubectl get pods -n <ns> -o wide
+kubectl describe pod <pod> -n <ns>
+kubectl logs <pod> -n <ns> --previous
+kubectl get events -n <ns> --sort-by=.lastTimestamp
+kubectl top pods -n <ns>
+```
+
+## 对比替代方案
+
+相比「试错式」排障，结构化方法论提供可重复、可追溯的诊断流程。相比纯自动化工具（HolmesGPT），方法论指导人工和 AI 协同排查。
 
 ## Related
 

@@ -16,7 +16,7 @@ tags:
 - rbac
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,42 +39,51 @@ prerequisites:
 
 
 
-
 # 供应链安全、YAML 配置清单与速查表
 
-## 供应链安全
+> **CNCF 状态**: 参考文档 | **类别**: Supply Chain Security | **主要语言**: YAML
 
-三道防线：
+## 概述
 
-1. **SBOM（Software Bill of Materials）**：软件物料清单
-   - 工具：Syft, Trivy SBOM, SPDX/CycloneDX 格式
-2. **SLSA（Supply-chain Levels for Software Artifacts）**：构建安全等级
-   - Level 1-4，从基本到最高保障
-3. **Sigstore**：无密钥签名
-   - Cosign（镜像签名）、Rekor（透明日志）、Fulcio（证书颁发）
+Kubernetes 供应链安全 YAML 速查表是一份涵盖 K8s 供应链安全各环节配置的快速参考文档。它整合了 SLSA 框架、Sigstore 签名验证、SBOM 生成、镜像策略准入、GitOps 安全配置等关键供应链安全实践的 YAML 配置示例。该文档为 DevSecOps 团队提供从代码提交到生产部署全链条的安全配置参考，帮助实施 SLSA Level 1-4 的供应链安全控制。
 
-## YAML 配置清单
+## Key Features（核心能力）
 
-KUDIG 提供全资源类型的 YAML 字段参考：
-- 核心资源：Pod, Service, Deployment, ConfigMap, Secret
-- 存储：PV, PVC, StorageClass
-- 网络：Ingress, NetworkPolicy
-- RBAC：Role, RoleBinding, ServiceAccount
-- 扩展：CRD, Webhook
+- **SLSA 合规配置**：SLSA Build Level 1-4 的构建来源验证和完整性证明配置
+- **镜像签名验证**：Cosign/Notation 的镜像签名和 Admission Controller 验证策略
+- **SBOM 生成**：Synergy/CycloneDX 的 SBOM 生成和存储配置
+- **策略准入**：Kyverno/Cosign Gatekeeper 的镜像安全策略 YAML
+- **GitOps 安全**：ArgoCD/Flux 的安全配置和签名验证策略
+- **密钥管理**：Sealed Secrets/SOPS 的加密配置 YAML
 
-## 速查表
+## 架构与工作原理
 
-覆盖六大工具链：
-- **kubectl**：常用命令 Top 50
-- **Linux**：排障命令集
-- **Docker**：镜像/容器操作
-- **PromQL**：指标查询语法
-- **Git**：分支管理
-- **SQL**：基础查询
+供应链安全配置覆盖四个阶段：Source（代码来源验证、提交签名）、Build（构建来源证明、SBOM 生成、镜像签名）、Package（Registry 策略、镜像扫描）、Deploy（准入验证、策略执行）。每个阶段的 YAML 配置通过 K8s CRD 或控制器配置实施，形成从代码到生产的安全链条。
 
----
+## K8s 集成
 
-> 来源：.zread/wiki/drafts/28-*.md, .zread/wiki/drafts/29-*.md, .zread/wiki/drafts/30-*.md
+在 K8s 中，供应链安全通过多种 API 对象实施：ValidatingWebhookConfiguration 执行镜像签名验证策略；ClusterPolicy（Kyverno CRD）定义镜像来源限制；ConfigMap 承载 Cosign 公钥和验证规则；Secret 存储签名密钥。CI/CD 流水线中的 Cosign 签名步骤和 K8s 部署时的验证策略通过共享的公钥/策略配置关联。
+
+## 生产用例
+
+- **DevSecOps 流水线**：在 CI/CD 中实施镜像签名和安全扫描
+- **合规要求实施**：满足 SLSA、NIST SSDF 供应链安全框架要求
+- **镜像来源控制**：限制集群仅部署经过签名的可信镜像
+- **安全审计准备**：快速配置和验证供应链安全控制措施
+
+## 安装与快速开始
+
+```bash
+# Cosign 镜像签名
+cosign sign --key cosign.key my-registry/app:v1
+
+# Kyverno 镜像签名验证策略
+kubectl apply -f https://raw.githubusercontent.com/kyverno/policies/main/verify_images/verify-image-signatures/verify-image-signatures.yaml
+```
+
+## 对比替代方案
+
+相比传统供应链安全方案，K8s 原生方案利用 Admission Controller 实现运行时强制验证。相比商业方案，开源方案（Sigstore + Kyverno）更灵活但需要更多配置工作。
 
 ## Related
 

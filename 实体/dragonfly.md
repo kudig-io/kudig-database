@@ -16,7 +16,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,37 +39,48 @@ prerequisites:
 
 
 
-
 # Dragonfly
 
 > **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
 
 ## 概述
 
-description: '## 项目概述'
+Dragonfly（蜻蜓）是一个 CNCF 孵化项目，由阿里巴巴开源，是一个基于 P2P 技术的智能文件分发系统。它旨在解决大规模容器集群中镜像分发和文件下载的带宽瓶颈问题。在数千节点的集群中，传统的镜像拉取方式会导致 Registry 带宽被打满，Dragonfly 通过 P2P 协议让节点间互相分享数据，将带宽消耗从集中式变为分布式，显著提升大规模部署的效率。
 
-## 核心能力
+## Key Features（核心能力）
 
-- regx: ".*\\.example\\.com.*"
-- regx: ".*internal.*"
+- **P2P 文件分发**：通过 P2P 协议将文件分发负载分散到所有节点
+- **镜像预热**：支持在部署前预热镜像到所有节点，加速 Pod 启动
+- **多源支持**：支持从 Registry、HTTP、NAS 等多种数据源分发文件
+- **智能限速**：支持基于主机级别的速率限制，避免影响业务流量
+- **主机级缓存**：通过本地缓存避免重复下载相同文件
+- **安全传输**：支持 TLS 加密和镜像签名验证
+
+## 架构与工作原理
+
+Dragonfly v2 架构包含三个核心组件：Scheduler（调度器）负责 P2P 网络的节点管理和调度决策；Seed Peer（种子节点）作为 P2P 网络中的数据源，从 Registry 拉取数据并分发给其他 Peer；Dfdaemon（守护进程）作为 DaemonSet 运行在每个节点，拦截镜像拉取请求并利用 P2P 网络加速下载。通过 Manager 组件提供统一的管理控制台。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Dragonfly 通过 Dfget 代理拦截 containerd/docker 的镜像拉取请求。在 K8s 中以 DaemonSet 方式部署 dfdaemon，配置 containerd 使用 Dragonfly 作为镜像代理。Dragonfly 支持 K8s 原生的 Pod 安全策略和 RBAC。Manager 组件通过 Deployment 部署，提供 Web UI 和 API 管理界面。
 
-## 生产部署要点
+## 生产用例
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **大规模镜像分发**：数千节点集群的镜像拉取加速，避免 Registry 带宽瓶颈
+- **边缘计算节点更新**：在带宽受限的边缘场景高效分发镜像
+- **CI/CD 并发部署**：大规模并行构建和部署的镜像拉取加速
+- **软件包分发**：大规模集群的软件包和配置文件分发
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，dragonfly 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+helm repo add dragonfly https://dragonflyoss.github.io/helm-charts
+helm install dragonfly dragonfly/dragonfly -n dragonfly-system --create-namespace
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[实体/prometheus-grafana.md|prometheus-grafana]]
-- [[containerd]]
-- [[实体/kube-scheduler.md|kube-scheduler]]
+相比 Kraken（Uber 开源的 P2P 分发系统），Dragonfly 更活跃且 CNCF 社区支持更好。相比直接从 Registry 拉取，Dragonfly 在大规模集群中可将分发时间缩短数倍。
 
 ## Related
 

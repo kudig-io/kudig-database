@@ -16,7 +16,7 @@ tags:
 - serverless
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -47,32 +47,68 @@ prerequisites:
 
 ## 概述
 
-Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源项目，通过 Kubernetes Operator 模式简化 Kafka 集群的部署、配置和管理。它提供了声明式配置、自动化运维和无缝扩展能力。
+Strimzi 是在 Kubernetes 上运行 Apache Kafka 的开源 Operator，由 Red Hat 开发并开源，2022 年加入 CNCF Incubating。它通过 Kubernetes Operator 模式简化 Kafka 集群的部署、配置和管理，提供了声明式配置、自动化运维和无缝扩展能力。Strimzi 覆盖了 Kafka 全生态组件（Broker、ZooKeeper/KRaft、Connect、MirrorMaker、Bridge），是目前 Kafka on Kubernetes 最成熟的开源方案。
 
-## 核心能力
+## 核心特性
 
-- **Kubernetes 原生**: 使用 CRD 声明式管理 Kafka 集群
-- **全组件覆盖**: Kafka Broker、ZooKeeper/KRaft、Connect、MirrorMaker、Bridge
-- **自动化运维**: 滚动更新、自动恢复、证书轮换
-- **安全集成**: TLS 加密、SASL 认证、OAuth 2.0、ACL 授权
-- **监控集成**: Prometheus 指标导出、Grafana 仪表盘
-- **多租户支持**: 命名空间隔离、资源配额管理
+- **全组件管理**: Kafka Broker、ZooKeeper/KRaft、Kafka Connect、MirrorMaker 2、Kafka Bridge
+- **CRD 声明式**: Kafka、KafkaTopic、KafkaUser、KafkaConnect 等 CRD 管理
+- **滚动升级**: 零停机的 Kafka 版本升级和配置变更
+- **安全集成**: TLS 加密、SASL/SCRAM 认证、OAuth 2.0、ACL 授权
+- **监控集成**: 内置 Prometheus 指标和 Grafana 仪表盘
+- **Topic/User 管理**: 通过 CRD 声明式管理 Kafka Topic 和用户
 
-## K8s 集成
+## 架构
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Strimzi 的核心是 Cluster Operator，监听 Kafka CRD，管理 Kafka 集群的全生命周期。架构包含：Cluster Operator（管理 Kafka/ZooKeeper/Connect 集群）、Topic Operator（管理 KafkaTopic CRD 到 Topic 的同步）、User Operator（管理 KafkaUser CRD 到用户/ACL 的同步）。Kafka Broker 以 StatefulSet 运行，数据存储在 PVC 上。每个 Pod 包含 Kafka 进程和 Stunnel（TLS 代理）、Cruise Control（分区重平衡）。Entity Operator（Topic + User Operator）作为单独的 Deployment 运行。
 
-## 生产部署要点
+## Kubernetes 集成
 
-- **存储配置**: 使用高性能 SSD 存储，配置合适的 IOPS
-- **资源隔离**: 为 Kafka 和 ZooKeeper 配置专用节点池
-- **网络策略**: 限制 Kafka 集群的网络访问
-- **备份策略**: 使用 MirrorMaker 2 进行跨集群复制
-- **版本升级**: 使用 Strimzi 的滚动升级能力，零停机更新
+Strimzi 完全基于 Kubernetes CRD。Kafka CRD 定义集群规格（Broker 数、存储、网络、安全）。KafkaTopic CRD 声明式创建和管理 Topic（分区数、副本数、配置）。KafkaUser CRD 管理用户认证和 ACL 权限。Operator 通过 Kubernetes API Server 管理资源，无需外部工具。StorageClass 配置决定数据持久化方式。支持 PodAntiAffinity 实现跨可用区分布。
+
+## 生产使用场景
+
+1. **事件流平台**: 在 Kubernetes 上运行 Kafka 作为微服务的事件流基础设施
+2. **CDC 数据管道**: 使用 Kafka Connect 连接数据库变更数据
+3. **跨集群复制**: 使用 MirrorMaker 2 实现灾备和多区域复制
+4. **Kafka 即服务**: 为多团队提供 Kafka 实例的自服务平台
+
+## 安装
+
+```bash
+# Helm 安装
+helm repo add strimzi https://strimzi.io/charts/
+helm install strimzi strimzi/strimzi-kafka-operator --namespace kafka --create-namespace
+# 创建 Kafka 集群
+kubectl apply -f - <<EOF
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata: { name: my-cluster }
+spec:
+  kafka:
+    replicas: 3
+    storage: { type: jbod, volumes: [{ id: 0, type: persistent-claim, size: 100Gi }] }
+  zookeeper:
+    replicas: 3
+    storage: { type: persistent-claim, size: 10Gi }
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+EOF
+```
+
+## 替代方案
+
+| 项目 | 优势 | 劣势 |
+|------|------|------|
+| **Strimzi** | CNCF Incubating、Red Hat 支持 | 资源开销大 |
+| Confluent for K8s | Confluent 官方、功能丰富 | 商业许可 |
+| Koperator (Banzaicloud) | 轻量级 | 社区较小 |
+| Bitnami Kafka Chart | 简单快速 | 运维自动化能力弱 |
 
 ## 架构定位
 
-在 CNCF 生态中，strimzi 属于 **Streaming** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Strimzi 属于 **Streaming** 类别，是 Kafka on Kubernetes 的标杆项目。它将复杂的 Kafka 运维转化为声明式的 K8s 资源管理。
 
 ## 参考链接
 

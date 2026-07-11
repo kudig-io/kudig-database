@@ -26,9 +26,14 @@ last_updated: 2026-07
 
 ## 子目录
 
-- 清单模式/01-yaml-reference/
-- 清单模式/02-kustomize-patterns/
-- 清单模式/03-helm-values-patterns/
+- 清单模式/YAML参考/
+- 清单模式/Kustomize模式/
+- 清单模式/Helm值模式/
+- [[清单模式/Operator模式/index.md|Operator模式]]
+- [[清单模式/04-gitops-patterns/index.md|GitOps Patterns]]
+- [[清单模式/05-security-patterns/index.md|Security Patterns]]
+- [[清单模式/06-ai-ml-patterns/index.md|AI/ML Patterns]]
+- [[清单模式/07-resilience-patterns/index.md|Resilience Patterns]]
 - [[清单模式/98-merged-indexes/index.md|Merged Indexes]]
 
 ## 文档

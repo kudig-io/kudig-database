@@ -1,7 +1,7 @@
 ---
 title: bpfman (entities)
 description: '## 概述'
-summary: 'bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes Operator，用于集中加载、管理和监控 eBPF 程序。它解决了多个应用同时使用 eBPF 时的管理混乱问题，提供统一的 eBPF 程序生命周期管理、多程序共享挂载点、权限控制和可观测性，使 eBPF 程序的部署和运维更加安全和可控。'
+summary: 'bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes Operator，用于集中加载、管理和监控 eBPF 程序。'
 category: entities
 tags:
 - k8s
@@ -15,7 +15,7 @@ tags:
 - ebpf
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,34 +39,86 @@ prerequisites:
 
 
 
-
 # bpfman
 
 > **CNCF 状态**: Sandbox | **类别**: Networking | **主要语言**: Rust
 
 ## 概述
 
-bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes Operator，用于集中加载、管理和监控 eBPF 程序。它解决了多个应用同时使用 eBPF 时的管理混乱问题，提供统一的 eBPF 程序生命周期管理、多程序共享挂载点、权限控制和可观测性，使 eBPF 程序的部署和运维更加安全和可控。
+bpfman 是一个 eBPF 程序管理器，由 Red Hat 推动开发，2023 年加入 CNCF 沙箱。它提供系统守护进程和 Kubernetes Operator，用于集中加载、管理和监控 eBPF 程序。bpfman 解决了多个应用（如 Cilium、Falco、Tetragon）同时使用 eBPF 时的管理混乱问题——这些程序各自加载 eBPF bytecode，可能导致 hook 冲突和资源竞争。bpfman 提供统一的 eBPF 程序生命周期管理、多程序共享挂载点、权限控制和可观测性。它支持将 eBPF bytecode 打包为 OCI 镜像通过 Registry 分发，实现了 eBPF 程序的云原生部署和版本管理。
 
 ## 核心能力
 
-- 详见源文档获取完整信息 ^[inferred]
+- **统一 eBPF 管理**: 集中加载、卸载和监控所有 eBPF 程序，避免冲突
+- **OCI 镜像分发**: 将 eBPF bytecode 打包为 OCI 镜像，通过 Registry 管理版本
+- **Kubernetes Operator**: 通过 CRD 声明式管理 eBPF 程序部署
+- **程序类型支持**: XDP、TC、Tracepoint、Kprobe、Uprobe、Perf Event 等
+- **优先级控制**: 为多个 eBPF 程序设置执行优先级，确保关键程序优先
+- **可观测性**: 暴露 Prometheus 指标，跟踪 eBPF 程序加载状态和错误
+
+## 架构
+
+bpfman 采用守护进程 + Operator 双模式架构：
+
+- **bpfman (守护进程)**: 运行在每个节点上的系统守护进程，负责实际的 eBPF 程序加载和管理
+- **bpfman-agent**: 运行在节点上的 gRPC 接口，接收来自 Kubernetes 的指令
+- **bpfman-operator**: Kubernetes Operator，通过 CRD 管理集群范围的 eBPF 程序部署
+- **BpfProgram CRD**: 声明式定义 eBPF 程序（bytecode 来源、挂载点、参数）
+- **OCI Image**: eBPF bytecode 以 OCI 镜像格式存储在 Registry 中
+- **Map 管理**: 共享 eBPF Maps，支持多程序间通信
+
+管理流程：`BpfProgram CRD → Operator → bpfman-agent → bpfman → 加载 eBPF bytecode 到内核`
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+bpfman 通过 Kubernetes Operator 深度集成集群管理。bpfman-operator 监听 `BpfProgram` CRD，将期望的 eBPF 程序分发到目标节点（通过 nodeSelector/affinity 控制）。每个节点运行 bpfman 守护进程和 bpfman-agent，agent 通过 gRPC 与 Operator 通信。eBPF bytecode 以 OCI 镜像形式存储在 Registry（如 Harbor）中，节点拉取后通过 bpfman 加载到内核。与 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中的 DaemonSet 模式类似，确保所有目标节点都运行指定的 eBPF 程序。
 
-## 生产部署要点
+## 生产场景
 
-- **OCI 打包**: 将 eBPF bytecode 打包为 OCI 镜像，通过 Registry 管理版本
-- **优先级设置**: 合理设置程序优先级，确保关键程序优先执行
-- **节点选择器**: 使用 nodeSelector 控制 eBPF 程序的部署范围
-- **监控**: 监控 bpfman 暴露的指标，跟踪 eBPF 程序的加载状态和错误
-- **内核版本**: 确保节点内核版本支持所需的 eBPF 程序类型
+1. **安全监控部署**: 统一部署 Tetragon/Falco 类安全 eBPF 程序，避免与 CNI 的 eBPF 程序冲突
+2. **网络观测**: 部署 XDP/TC eBPF 程序进行网络流量监控和过滤
+3. **性能分析**: 动态部署 perf event eBPF 程序进行性能 profiling，无需重启节点
+4. **多团队 eBPF 共存**: 不同团队（网络、安全、可观测性）的 eBPF 程序通过 bpfman 统一管理
+
+## 安装
+
+```bash
+# 安装 bpfman Operator
+kubectl apply -f https://github.com/bpfman/bpfman/releases/latest/download/bpfman-operator.yaml
+
+# 部署 eBPF 程序（OCI 镜像方式）
+kubectl apply -f - <<EOF
+apiVersion: bpfman.io/v1alpha1
+kind: BpfProgram
+metadata:
+  name: xdp-drop-example
+spec:
+  type: xdp
+  interfaceSelector:
+    primary: true
+  bytecode: quay.io/bpfman/xdp-drop:latest
+  section: drop
+  mapownerselector:
+    matchLabels:
+      myapp: drop-map
+EOF
+
+# 查看已加载的 eBPF 程序
+kubectl get bpfprograms -A
+```
+
+## 对比
+
+| 特性 | bpfman | Cilium (内置) | Inspektor Gadget | bpfd |
+|------|--------|---------------|-----------------|------|
+| 统一管理 | ✅ 多源 | ❌ 仅自身 | ⚠️ 工具集 | ✅ |
+| OCI 分发 | ✅ | ❌ | ❌ | ✅ |
+| K8s Operator | ✅ | ❌ | ✅ | ✅ |
+| 语言 | Rust | Go | Go | Rust |
 
 ## 架构定位
 
-在 CNCF 生态中，bpfman 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，bpfman 属于 **Networking** 类别，为云原生应用提供统一的 eBPF 程序生命周期管理能力。
 
 ## 参考链接
 

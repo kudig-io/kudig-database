@@ -12,7 +12,7 @@ tags:
 - operator
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,39 +34,52 @@ prerequisites:
 
 
 
-
 # Serverless Workflow
 
 > **CNCF 状态**: Sandbox | **类别**: Serverless | **主要语言**: Go
 
 ## 概述
 
-Serverless Workflow 是一个厂商中立的开源工作流规范，用于定义和编排 Serverless 应用的工作流程。该规范由 CNCF Serverless Working Group 维护，旨在提供一种标准化的、声明式的方式来描述复杂的业务流程、事件驱动的工作流和微服务编排。
+Serverless Workflow 是一个 CNCF 孵化项目（规范），定义了一种厂商中立的工作流定义 DSL（Domain Specific Language）。它使用 JSON/YAML 格式描述事件驱动的 Serverless 应用工作流，支持状态、操作、事件、错误处理等抽象。该规范由 Red Hat、Google、IBM、NEC 等公司共同推动，目标是解决不同 Serverless 和 Workflow 平台（AWS Step Functions、Azure Logic Apps、Zeebe 等）之间的厂商锁定问题。开发者只需编写一次工作流定义，即可在任何兼容平台上运行。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **厂商中立 DSL**：标准化的 JSON/YAML 工作流定义语言
+- **状态机模型**：支持 Operation、Event、Switch、Parallel、ForEach、Delay 等状态类型
+- **事件驱动**：原生支持 CloudEvents 格式的事件触发和处理
+- **错误处理**：内置 Retry、Compensation、Error Handler 机制
+- **函数即操作**：可将 Serverless Function 定义为工作流操作
+- **多 SDK**：提供 Java、Go、TypeScript、Python SDK
+
+## 架构与工作原理
+
+Serverless Workflow 规范定义了一套结构化的工作流描述模型：Workflow 是顶级容器，包含 States（状态）、Functions（函数定义）、Events（事件定义）、Retries（重试策略）。State 是工作流执行的基本单元，每个 State 定义了进入/退出操作和到下一个 State 的转移条件。Runtime 负责解析工作流定义并驱动状态机执行，可以是任何兼容的实现。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Serverless Workflow 规范的 K8s 原生实现包括 SonataFlow（原 Kogito Serverless Workflow），通过 CRD 在 K8s 上部署和管理工作流。工作流定义以 JSON/YAML 格式存储在 ConfigMap 或独立的 CRD 中。与 Knative 集成可以将每个工作流操作映射为 Knative Service，实现自动伸缩。
 
-## 生产部署要点
+## 生产用例
 
-- **幂等性**: 确保操作可重复执行
-- **补偿机制**: 为关键操作设计回滚逻辑
-- **超时处理**: 为所有等待状态设置超时
-- **错误边界**: 明确定义错误处理策略
-- **数据最小化**: 只传递必要的数据
-- name: ProcessPayment
+- **跨云工作流迁移**：一次编写，在 AWS Step Functions 或本地平台运行
+- **事件驱动业务流程**：基于 CloudEvents 的订单处理、审批流
+- **微服务编排**：将多个微服务编排为复杂业务流程
+- **自动化运维流水线**：基础设施部署和配置的工作流编排
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，serverless-workflow 属于 **Serverless** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+# Java SDK
+<dependency>
+  <groupId>io.serverlessworkflow</groupId>
+  <artifactId>serverlessworkflow-api</artifactId>
+  <version>4.0.0</version>
+</dependency>
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[概念/secrets-management.md|secrets-management]]
+相比 Argo Workflow（K8s 原生但非标准），Serverless Workflow 提供厂商中立的规范，避免平台锁定。相比 AWS Step Functions DSL，Serverless Workflow 是开放标准，不绑定云厂商。
 
 ## Related
 

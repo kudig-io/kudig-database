@@ -13,7 +13,7 @@ tags:
 - operator
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -34,34 +34,93 @@ prerequisites:
 
 
 
-
 # K8GB
 
 > **CNCF 状态**: Sandbox | **类别**: Networking | **主要语言**: Go
 
 ## 概述
 
-K8GB 是一个 Kubernetes 原生的全局负载均衡解决方案，基于 DNS 实现跨集群的流量调度。它使用 Kubernetes CRD (GslbStrategy) 定义全局负载均衡策略，通过 CoreDNS 和 ExternalDNS 实现多集群间的 DNS 基础的流量管理，支持轮询、地理位置和故障转移策略。
+K8GB（Kubernetes Global Balancer）是一个 Kubernetes 原生的**全局负载均衡（Global Server Load Balancing, GSLB）**解决方案，2020 年进入 CNCF Sandbox。它基于 DNS 实现跨多个 Kubernetes 集群的流量调度，使用标准的 Kubernetes CRD（`GslbStrategy`）定义全局负载均衡策略。K8GB 通过 CoreDNS 和 ExternalDNS 在多集群间同步 DNS 记录，实现轮询（RoundRobin）、地理位置（GeoIP）和故障转移（Failover）策略。
 
-## 核心能力
+K8GB 解决了多集群场景下的全局流量管理痛点：传统 GSLB 解决方案（F5 GTM、AWS Route53）昂贵且与 K8s 割裂，K8GB 提供完全开源、K8s 原生的替代方案。它与 Ingress Controller 配合工作，在 DNS 层面实现跨集群的流量分发和故障切换。
 
-- 详见源文档获取完整信息 ^[inferred]
+## Key Features
+
+- **全局负载均衡**：跨多个 K8s 集群的 DNS 流量调度
+- **多策略支持**：轮询（RoundRobin）、地理位置（GeoIP）、故障转移（Failover）
+- **K8s 原生 CRD**：通过 `Gslb` CRD 声明式定义全局负载均衡策略
+- **CoreDNS 集成**：使用 CoreDNS 的 DNATS 插件实现多集群 DNS 记录同步
+- **健康检查**：基于 Ingress 后端健康状态自动调整 DNS 记录
+- **脑裂保护**：通过 `splitBrainThresholdSeconds` 防止网络分区导致的误判
+
+## Architecture
+
+K8GB 由 **K8GB Operator**（管理 Gslb CRD，协调 DNS 记录）、**CoreDNS**（运行在每个集群中的 DNS 服务器，响应 GSLB 查询）、**Infoblox/ExternalDNS**（可选，同步 DNS 记录到外部 DNS 供应商）和 **DNATs 同步层**（跨集群 DNS 记录状态同步）组成。当客户端查询 `app.gslb.example.com` 时，CoreDNS 根据策略和健康状态返回最合适的集群 IP 地址。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+K8GB 通过 `Gslb` CRD 扩展 Kubernetes API。一个 Gslb 资源关联一个标准的 Ingress，定义全局策略和参与集群的地理标签（geoTag）。Operator 监控关联 Ingress 的后端健康状态，健康/不健康自动更新 DNS 记录。CoreDNS 作为集群 DNS 的上游解析器，处理 GSLB 域名的智能应答。
 
 ## 生产部署要点
 
-- **DNS 委托**: 正确配置 DNS 委托，将 gslb 子域委托给 K8GB 管理的 CoreDNS
-- **TTL 配置**: 设置合理的 DNS TTL，平衡故障切换速度和 DNS 缓存效率
-- **健康检查**: 确保后端服务有适当的健康检查端点
-- **脑裂保护**: 配置 splitBrainThresholdSeconds 防止网络分区导致的脑裂
-- **地理标签**: 为每个集群配置准确的地理标签（geoTag）
+- **DNS 委托**：正确配置 DNS 委托，将 gslb 子域委托给 K8GB 管理的 CoreDNS
+- **TTL 配置**：设置合理的 DNS TTL，平衡故障切换速度和 DNS 缓存效率
+- **健康检查**：确保后端服务有适当的健康检查端点
+- **脑裂保护**：配置 splitBrainThresholdSeconds 防止网络分区导致的脑裂
+- **地理标签**：为每个集群配置准确的地理标签（geoTag）
 
-## 架构定位
+## 生产场景
 
-在 CNCF 生态中，k8gb 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+1. **多区域高可用**：应用部署在多区域集群，K8GB 自动将用户路由到最近/健康的区域
+2. **故障自动转移**：主集群故障时，DNS 自动将流量切换到备用集群
+3. **金丝雀多集群发布**：通过 DNS 权重逐步将流量迁移到新集群
+4. **蓝绿多集群部署**：新旧集群同时运行，DNS 切换实现秒级流量切换
+
+## 安装
+
+```bash
+# Helm 安装 K8GB
+helm repo add k8gb https://www.k8gb.io
+helm repo update
+helm install k8gb k8gb/k8gb -n k8gb --create-namespace \
+  --set k8gb.clusterGeoTag=us-east-1 \
+  --set k8gb.extGslbClustersGeoTags=eu-west-1,ap-southeast-1 \
+  --set k8gb.edgeDNSZone=gslb.example.com \
+  --set coredns.enabled=true
+
+# 创建 Gslb 资源
+kubectl apply -f - <<EOF
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: myapp-gslb
+spec:
+  ingress:
+    rules:
+      - host: myapp.gslb.example.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: myapp
+                  port:
+                    number: 80
+  strategy:
+    type: roundRobin
+    splitBrainThresholdSeconds: 300
+EOF
+```
+
+## 对比
+
+| 特性 | K8GB | AWS Route53 | F5 GTM | GlobalNet (Submariner) |
+|------|------|-------------|--------|----------------------|
+| 开源 | ✅ | ❌ | ❌ | ✅ |
+| K8s 原生 | ✅ | ❌ | ❌ | ✅ |
+| DNS 层 GSLB | ✅ | ✅ | ✅ | ❌ 网络层 |
+| 成本 | 免费 | 按查询付费 | 高昂许可 | 免费 |
 
 ## 参考链接
 

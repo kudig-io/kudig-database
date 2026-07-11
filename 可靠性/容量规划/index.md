@@ -20,6 +20,8 @@ last_updated: 2026-07
 - [[可靠性/容量规划/01-capacity-planning-framework.md|Capacity Planning Framework]]
 - [[可靠性/容量规划/02-hpa-vpa-cluster-autoscaler-karpenter.md|Hpa Vpa Cluster Autoscaler Karpenter]]
 - [[可靠性/容量规划/03-resource-quota-limitrange.md|Resource Quota Limitrange]]
+- [[可靠性/容量规划/06-autoscaling-best-practices.md|Autoscaling Best Practices]]
+- [[可靠性/容量规划/07-resource-right-sizing-guide.md|Resource Right Sizing Guide]]
 - [[可靠性/容量规划/24-capacity-planning-forecasting.md|Capacity Planning Forecasting]]
 - [[可靠性/容量规划/25-ai-driven-capacity-planning-cost-optimization-2025.md|Ai Driven Capacity Planning Cost Optimization 2025]]
 

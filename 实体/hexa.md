@@ -15,7 +15,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -38,38 +38,47 @@ prerequisites:
 
 
 
-
 # Hexa
 
 > **CNCF 状态**: Sandbox | **类别**: Security | **主要语言**: Go
 
 ## 概述
 
-Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language) 作为通用策略语言，实现跨多个云平台和授权系统的访问控制策略管理。它支持将策略从一个授权系统（如 AWS IAM、Azure RBAC、Google IAP）翻译和同步到另一个系统，避免了在不同平台上重复维护相似策略的问题。
+Hexa 是一个 CNCF 沙箱项目，旨在提供 Kubernetes 多集群应用编排和策略管理能力。它专注于解决多集群环境下的应用一致性部署、配置同步和生命周期管理问题。Hexa 通过统一的控制平面管理跨集群的应用部署状态，支持基于策略的工作负载分发和差异化配置。项目特别关注多租户和多团队场景下的集群资源管理。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **多集群应用编排**：将应用部署到多个 K8s 集群并保持一致性
+- **策略驱动分发**：基于标签、容量、地域的策略控制部署目标
+- **配置同步**：跨集群的 ConfigMap、Secret 等配置资源同步
+- **健康监控**：监控多集群应用部署健康状态
+- **差异化配置**：支持不同集群的定制化配置覆盖
+- **GitOps 兼容**：与 Git 仓库集成的声明式管理
+
+## 架构与工作原理
+
+Hexa 采用 Hub-Spoke 控制平面架构：Hub Controller 运行在管理集群，监听应用部署 CRD 并根据分发策略将工作负载推送到目标集群；Spoke Agent 运行在目标集群，接收部署指令并协调本地 K8s 资源。分发策略通过 Policy CRD 定义，支持基于集群标签、资源容量和地理位置的智能分发。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+Hexa 通过 CRD 与 Kubernetes 集成：ApplicationDistribution CRD 定义应用的多集群部署配置；ClusterPolicy CRD 定义分发策略。Hub Controller 管理这些 CRD 的生命周期，通过 K8s API 连接到各目标集群，推送工作负载配置。Spoke Agent 在目标集群中执行实际的资源创建和状态上报。
 
-## 生产部署要点
+## 生产用例
 
-- **统一策略定义**: 使用 IDQL 作为策略的唯一真相源，避免在各平台分别维护
-- **版本控制**: 将 IDQL 策略文件纳入 Git 管理，启用策略变更审计
-- **渐进式迁移**: 先发现已有策略，验证翻译正确性后再同步
-- **最小权限**: IDQL 策略设计遵循最小权限原则，默认拒绝
-- **条件表达式**: 善用 condition 字段实现 IP 限制、时间窗口等动态策略
+- **多集群应用部署**：将应用一致性部署到生产、DR、边缘集群
+- **多租户资源管理**：为不同团队分配集群资源并管理部署
+- **灾难恢复**：跨集群的应用快速切换和恢复
+- **地理分布部署**：按地域策略将应用部署到最近的集群
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，hexa 属于 **Security** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+kubectl apply -f https://github.com/hexa-org/hexa/releases/latest/download/hexa-operator.yaml
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
+相比 Karmada（CNCF 孵化），Hexa 更轻量但功能集更小。相比 KubeFed v2（已归档），Hexa 设计更现代化且维护活跃。
 
 ## Related
 

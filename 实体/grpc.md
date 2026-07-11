@@ -15,7 +15,7 @@ tags:
 - argocd
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -39,35 +39,51 @@ prerequisites:
 
 
 
-
 # gRPC
 
 > **CNCF 状态**: Incubating | **类别**: Networking | **主要语言**: C++, Go, Java, Python 等
 
 ## 概述
 
-description: '## 项目概述'
+gRPC 是一个 CNCF 孵化项目，由 Google 开源，是高性能的远程过程调用（RPC）框架。它基于 HTTP/2 和 Protocol Buffers，支持双向流式通信、强类型接口定义和跨语言互操作。gRPC 已成为云原生微服务通信的事实标准，被 Netflix、Square、Cisco、Slack 等数万家公司采用。在 Kubernetes 生态中，gRPC 被广泛用于服务间通信、API Server 扩展（Aggregated API Server）和 CSI/CRI/CNI 接口。
 
-## 核心能力
+## Key Features（核心能力）
 
-- 详见源文档获取完整信息 ^[inferred]
+- **Protocol Buffers**：基于 IDL（.proto 文件）定义强类型接口，自动生成多语言代码
+- **HTTP/2 传输**：利用 HTTP/2 多路复用、流式传输和头部压缩实现高效通信
+- **四种流模式**：Unary、Server Streaming、Client Streaming、Bidirectional Streaming
+- **跨语言支持**：官方支持 C++, Go, Java, Python, Node.js, C#, PHP 等 10+ 语言
+- **健康检查**：内置 gRPC Health Checking Protocol 标准化服务健康检测
+- **拦截器**：支持客户端和服务端拦截器实现认证、日志、指标等横切关注点
+
+## 架构与工作原理
+
+gRPC 架构基于 Protocol Buffers IDL 和 HTTP/2 协议。开发者通过 .proto 文件定义服务接口和消息类型，protoc 编译器生成客户端 Stub 和服务端骨架代码。运行时，gRPC Core（C 核心库）处理 HTTP/2 连接管理、流复用和 Protobuf 序列化/反序列化。上层语言绑定封装 gRPC Core 提供语言原生的 API。gRPC 还定义了标准的服务发现、健康检查、负载均衡等扩展协议。
 
 ## K8s 集成
 
-该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[概念/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+在 Kubernetes 中，gRPC 广泛用于多个层面：API Server 扩展（Aggregated API Server、Admission Webhook）；CRI/CSI/CNI 接口通信；etcd 与 API Server 通信。对于 gRPC 微服务部署，需要特别注意负载均衡——gRPC 基于 HTTP/2 长连接，K8s 默认的 iptables 模式 Service 在连接建立后不会重新负载均衡。解决方案包括使用 client-side load balancing、gRPC xDS（Envoy）或 headless service + DNS 轮询。
 
-## 生产部署要点
+## 生产用例
 
-- 建议参考官方文档获取最新部署指南 ^[inferred]
+- **微服务间通信**：高性能低延迟的服务间 RPC 调用
+- **流式数据处理**：实时数据流的 Server/Client Streaming 模式
+- **API 网关后端**：gRPC-JSON 转换网关为前端提供 RESTful API
+- **移动端 API**：高效的 Protobuf 编码节省移动网络带宽
 
-## 架构定位
+## 安装与快速开始
 
-在 CNCF 生态中，grpc 属于 **Networking** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+```bash
+# Go
+protoc --go_out=. --go-grpc_out=. hello.proto
+# Python
+pip install grpcio grpcio-tools
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. hello.proto
+```
 
-## 参考链接
+## 对比替代方案
 
-- [[etcd]]
-- [[istio]]
+相比 REST/JSON，gRPC 提供更强的类型安全、更低的延迟和更高的吞吐。相比 Thrift（Apache），gRPC 基于 HTTP/2 生态更丰富。相比 Connect-RPC（Buf），gRPC 更成熟但 Connect 对 HTTP/1.1 友好。
 
 ## Related
 
