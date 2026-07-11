@@ -3,19 +3,19 @@
 KUDIG Embedding Pipeline — 全库向量化索引构建
 
 功能：
-  1. 读取 corpus-config/profiles/*.yaml 配置
+  1. 读取 元数据/corpus-config/profiles/*.yaml 配置
   2. 按策略分块（by_h2 / by_h3 / by_section / full_doc）
   3. 提取并增强元数据（frontmatter + domain + path）
   4. 调用 Embedding Provider 生成向量
   5. 输出 JSONL chunks + manifest（支持增量更新）
 
 用法：
-  python3 scripts/embedding-pipeline.py --profile corpus-config/profiles/rag-sre-profile.yaml
-  python3 scripts/embedding-pipeline.py --profile corpus-config/profiles/rag-full-profile.yaml --incremental
+  python3 脚本/embedding-pipeline.py --profile 元数据/corpus-config/profiles/rag-sre-profile.yaml
+  python3 脚本/embedding-pipeline.py --profile 元数据/corpus-config/profiles/rag-full-profile.yaml --incremental
   python3 scripts/embedding-pipeline.py --search "node notready" --top-k 5
 
 输出：
-  corpus-config/profiles/.vector-cache/<profile-name>/
+  元数据/corpus-config/profiles/.vector-cache/<profile-name>/
     ├── chunks.jsonl        # 所有 chunk（文本 + 元数据）
     ├── embeddings.npy      # 向量矩阵（float32, N×D）
     ├── manifest.json       # 文件 hash 映射（增量更新用）
@@ -47,7 +47,7 @@ import yaml
 
 # ========== 常量 ==========
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CACHE_DIR = PROJECT_ROOT / "corpus-config" / "profiles" / ".vector-cache"
+CACHE_DIR = PROJECT_ROOT / "元数据" / "corpus-config" / "profiles" / ".vector-cache"
 DEFAULT_EMBEDDING_DIM = 1024  # BAAI/bge-m3
 
 

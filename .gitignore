@@ -1,12 +1,6 @@
-# Astro 构建产物（Astro outDir 配置为 ../site）
+# Web UI（已拆分为独立 repo，见 kudig-webui）
+站点/
 site/
-
-# Web 服务运行时文件
-.web-server.pid
-.web-server.log
-
-# 根目录跳转页（由本地脚本自动生成）
-index.html
 
 # macOS
 .DS_Store
@@ -20,13 +14,8 @@ __pycache__/
 # 视频生成产物
 video-output/
 
-# RAG 向量化 Pipeline 本地缓存（由 scripts/embedding-pipeline.py 生成，含 >100MB 大文件）
-corpus-config/profiles/.vector-cache/
-
-# Node.js（站点/ Astro 项目，原 web/）
-站点/node_modules/
-站点/.astro/
-站点/dist/
+# RAG 向量化 Pipeline 本地缓存（由 脚本/embedding-pipeline.py 生成，含 >100MB 大文件）
+元数据/corpus-config/profiles/.vector-cache/
 
 # 源码/（原 code/，内含 Kubernetes/terway 等 vendor 源码树，不入库）
 源码/

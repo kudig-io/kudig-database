@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>KUDIG Workspace | 云原生语料数据库</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f7f8fb;--bg2:#ffffff;--bg3:#eef1f6;--t1:#1a1f36;--t2:#525f7f;--t3:#8898aa;--pri:#2d5ea8;--cyan:#0e7490;--violet:#7c3aed;--emerald:#059669;--amber:#d97706;--rose:#db2777;--bdr:#e3e8ee;--fm:'SF Mono','Fira Code',monospace;--fb:'Helvetica Neue','PingFang SC',sans-serif;--fd:'Georgia','Noto Serif SC',serif;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);--shadow-lg:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04)}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);color:var(--t1);background:var(--bg);line-height:1.6;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(45,94,168,.2);color:#1a1f36}
+a{color:inherit;text-decoration:none}
+/* Reading progress */
+.reading-progress{position:fixed;top:0;left:0;height:3px;background:var(--pri);z-index:200;opacity:.8}
+
+/* Header */
+.header{text-align:center;padding:5rem 2rem 2rem}
+.logo{display:inline-flex;align-items:center;gap:.85rem;margin-bottom:1.25rem}
+.logo-mark{width:52px;height:52px;flex-shrink:0;filter:drop-shadow(0 2px 10px rgba(45,94,168,.16))}
+.logo-word{font-family:var(--fm);font-size:1.6rem;font-weight:700;letter-spacing:5px;color:var(--t1);position:relative}
+.logo-word::after{content:'DATABASE';display:block;font-size:.5rem;font-weight:500;letter-spacing:3px;color:var(--t3);margin-top:.15rem}
+.header h1{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;line-height:1.2;margin-bottom:.6rem;color:var(--t1)}
+.header h1 span{background:linear-gradient(135deg,var(--pri),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{color:var(--t2);font-size:1rem;max-width:560px;margin:0 auto}
+
+/* Grid */
+.grid{max-width:1100px;margin:2rem auto 0;padding:0 1.5rem 4rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem}
+.card{position:relative;border:1px solid var(--bdr);border-radius:16px;background:var(--bg2);padding:1.8rem;transition:all .35s cubic-bezier(.22,1,.36,1);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .35s}
+.card:hover{border-color:#cdd5e0;transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card:hover::before{opacity:1}
+.card:nth-child(1)::before{background:linear-gradient(90deg,var(--cyan),var(--pri))}
+.card:nth-child(2)::before{background:linear-gradient(90deg,var(--violet),var(--rose))}
+.card:nth-child(3)::before{background:linear-gradient(90deg,var(--pri),var(--cyan))}
+.card:nth-child(4)::before{background:linear-gradient(90deg,var(--emerald),var(--cyan))}
+.card:nth-child(5)::before{background:linear-gradient(90deg,var(--amber),var(--emerald))}
+.card:nth-child(6)::before{background:linear-gradient(90deg,var(--rose),var(--violet))}
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem;border:1px solid var(--bdr)}
+.card:nth-child(1) .card-icon{background:#e6f6f8;border-color:#b2e0e8}
+.card:nth-child(2) .card-icon{background:#f0ebfe;border-color:#d4c5f9}
+.card:nth-child(3) .card-icon{background:#e8eef6;border-color:#c0d0e8}
+.card:nth-child(4) .card-icon{background:#e6f5ef;border-color:#b2e0ca}
+.card:nth-child(5) .card-icon{background:#fef3e2;border-color:#f5d5a0}
+.card:nth-child(6) .card-icon{background:#fce7f3;border-color:#f5b8d8}
+.card h2{font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+.card .sub{font-family:var(--fm);font-size:.65rem;color:var(--t3);letter-spacing:.5px;margin-bottom:.7rem}
+.card p{font-size:.875rem;color:var(--t2);line-height:1.65;flex:1}
+.card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.9rem}
+.card-tags span{padding:.18rem .5rem;border-radius:4px;font-size:.65rem;background:var(--bg);color:var(--t2);border:1px solid var(--bdr);font-family:var(--fm)}
+.card-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;padding:.4rem .9rem;border-radius:8px;font-size:.78rem;color:var(--pri);border:1px solid var(--bdr);transition:all .2s;align-self:flex-start;font-weight:500}
+.card-link:hover{border-color:var(--pri);background:#e8eef6}
+.dark-toggle{position:fixed;top:1rem;right:1rem;background:none;border:1px solid var(--bdr);border-radius:6px;padding:.4rem .6rem;cursor:pointer;font-size:.8rem;transition:all .2s;z-index:100}
+.dark-toggle:hover{background:var(--bg3)}
+:root.dark-mode{--bg:#0f172a;--bg2:#1e293b;--bg3:#334155;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--bdr:#334155}
+.card-link .arrow{font-size:.7rem;transition:transform .2s}.card-link:hover .arrow{transform:translateX(3px)}
+.badge-new{position:absolute;top:1rem;right:1rem;padding:.18rem .55rem;border-radius:4px;font-size:.6rem;font-family:var(--fm);font-weight:600;letter-spacing:.5px;background:#e6f5ef;color:var(--emerald);border:1px solid #b2e0ca}
+
+/* Footer */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--bdr);font-size:.72rem;color:var(--t3);font-family:var(--fm);letter-spacing:.5px}
+footer a{color:var(--pri);transition:color .2s}footer a:hover{color:var(--t1)}
+</style>
+</head>
+<body>
+<div class="reading-progress" id="reading-progress"></div>
+<button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">◐</button>
+
+<header class="header">
+  <div class="logo">
+    <svg class="logo-mark" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="lbg" x1="0" y1="0" x2="48" y2="48"><stop offset="0%" stop-color="#2d5ea8"/><stop offset="100%" stop-color="#1c3968"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lbg)"/><path d="M16 11V37" stroke="#4a7cba" stroke-width="2.2" stroke-linecap="round"/><path d="M16 24L33 11" stroke="#4a7cba" stroke-width="2.2" stroke-linecap="round"/><path d="M16 24L33 37" stroke="#4a7cba" stroke-width="2.2" stroke-linecap="round"/><path d="M33 11V37" stroke="#375f93" stroke-width="1" stroke-dasharray="2 3.5"/><circle cx="16" cy="11" r="3.5" fill="#dce8f8"/><circle cx="16" cy="24" r="4.5" fill="#ffffff"/><circle cx="16" cy="37" r="3.5" fill="#dce8f8"/><circle cx="33" cy="11" r="3.5" fill="#5eead4"/><circle cx="33" cy="37" r="3.5" fill="#c4b5fd"/></svg>
+    <span class="logo-word">KUDIG</span>
+  </div>
+  <h1>云原生 <span>语料数据库</span></h1>
+  <p>Kubernetes 生产运维全域知识库 · 交互式可视化 · 学习评估 · 技能百科</p>
+</header>
+
+<main class="grid">
+  <a href="../gitbook/book/index.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0e7490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+    <h2>K8s 全域生产语料库</h2>
+    <div class="sub">Knowledge Base Reader</div>
+    <p>Kubernetes 生产运维全域知识库在线文档。涵盖 40+ 技术领域、500+ 篇深度文档，支持全文搜索、侧边栏导航与主题切换。</p>
+    <div class="card-tags"><span>mdBook</span><span>40+ Domains</span><span>Full-Text Search</span></div>
+    <div class="card-link">进入阅读 <span class="arrow">→</span></div>
+  </a>
+
+  <a href="knowledge-graph.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+    <h2>云原生知识图谱 Explorer</h2>
+    <div class="sub">D3.js Force Graph</div>
+    <p>基于 D3.js 力导向图的知识域拓扑可视化，展示 40+ 领域、500+ 文档之间的关联关系。支持搜索、缩放、节点拖拽交互。</p>
+    <div class="card-tags"><span>D3.js v7</span><span>Force Simulation</span><span>Interactive</span></div>
+    <div class="card-link">进入工具 <span class="arrow">→</span></div>
+  </a>
+
+  <a href="d3-domain-explorer.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d5ea8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+    <h2>D3 领域知识地图</h2>
+    <div class="sub">Interactive Domain Map</div>
+    <p>基于 D3.js 的交互式领域知识地图。通过力导向图展示五大技术领域及其核心主题的关联网络，支持聚类展开、悬停高亮和路径探索。</p>
+    <div class="card-tags"><span>D3.js v7</span><span>Cluster Layout</span><span>Cross-Domain</span></div>
+    <div class="card-link">进入工具 <span class="arrow">→</span></div>
+  </a>
+
+  <a href="learning-methodology.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+    <h2>循环学习方法论</h2>
+    <div class="sub">Write → Read → Ask → Iterate</div>
+    <p>以语料仓库为核心的循环学习引擎可视化。展示写·读·问·改四环节、五大领域生态、Agent 协作模式与方法论设计原则。</p>
+    <div class="card-tags"><span>SVG Animation</span><span>5 Domains</span><span>Agent Model</span></div>
+    <div class="card-link">进入工具 <span class="arrow">→</span></div>
+  </a>
+
+  <a href="self-learning.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16v-4"/><path d="M11 16V8"/><path d="M15 16v-6"/><path d="M19 16v-2"/></svg></div>
+    <h2>自主学习评估</h2>
+    <div class="sub">Self-Assessment & Progress</div>
+    <p>交互式学习进度自评工具。通过雷达图可视化五大领域能力评分，追踪知识点掌握状态，生成个性化学习建议。数据自动保存至本地。</p>
+    <div class="card-tags"><span>Radar Chart</span><span>localStorage</span><span>Self-Paced</span></div>
+    <div class="card-link">进入工具 <span class="arrow">→</span></div>
+  </a>
+
+  <a href="../gitbook/book/topic-skills/index.html" class="card">
+    <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#db2777" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+    <h2>云原生 Skills 大全</h2>
+    <div class="sub">Cloud-Native Skill Encyclopedia</div>
+    <p>云原生生产环境排障技能百科。覆盖 Node NotReady、Pod CrashLoop、DNS 故障、证书过期等 20+ 核心运维场景，每篇含完整排查流程与修复方案。</p>
+    <div class="card-tags"><span>20+ Skills</span><span>Troubleshooting</span><span>Production</span></div>
+    <div class="card-link">进入百科 <span class="arrow">→</span></div>
+  </a>
+</main>
+
+<footer>kudig-database · Kubernetes 生产运维全域知识库 · <a href="https://github.com/kudig-io/kudig-database">GitHub</a></footer>
+<script>function toggleDarkMode(){const d=document.documentElement;d.classList.toggle('dark-mode');const isDark=d.classList.contains('dark-mode');localStorage.setItem('kd-dark',isDark?'1':'0')}function initDarkMode(){const saved=localStorage.getItem('kd-dark');if(saved==='1'){document.documentElement.classList.add('dark-mode')}else if(saved===null&&window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.classList.add('dark-mode')}}initDarkMode();
+(function(){var bar=document.getElementById('reading-progress');function update(){var t=window.scrollY,s=document.documentElement.scrollHeight-h.innerHeight,p=s>0?(t/s)*100:0;bar.style.width=Math.min(100,p)+'%'}window.addEventListener('scroll',update,{passive:true});update();})();</script>
+<script>document.addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey){var t=document.activeElement.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if(document.activeElement.isContentEditable)return;e.preventDefault()}});</script>
+</body>
+</html>
