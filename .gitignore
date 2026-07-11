@@ -60,3 +60,6 @@ secrets/
 .understand-anything/
 .zcode/
 .zread/
+
+# 大文件排除 — 防止 zip 归档文件入库
+*.zip
