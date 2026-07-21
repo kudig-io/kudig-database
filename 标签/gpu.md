@@ -1,17 +1,37 @@
 ---
 title: gpu
-description: All pages tagged with gpu
+description: GPU 调度标签枢纽 — 涵盖 GPU 调度、共享、MIG 分区、AI 推理、GPU 监控、设备插件、GPU Operator 等全部 GPU 领域知识
 category: tag-index
 tags:
 - gpu
-tier: supporting
+- nvidia
+- cuda
+- device-plugin
+- gpu-sharing
+tier: core
+difficulty: intermediate-to-advanced
+domain: ai-infrastructure
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # gpu Tag Hub
 
 > GPU 相关页面 — GPU 调度、共享、MIG 分区、AI 推理、GPU 监控、设备插件等。
+
+## 核心定义
+
+**GPU 调度**是 Kubernetes 中管理 GPU 资源分配的核心能力，通过 Device Plugin 机制将 GPU 暴露为可扩展资源（nvidia.com/gpu），支持独占、共享、MIG 分区等多种分配模式。
+
+### GPU 调度模式
+
+| 模式 | 描述 | 适用场景 |
+|------|------|----------|
+| 独占 (Exclusive) | 整卡分配给单个 Pod | 训练、大模型推理 |
+| 共享 (Time-slicing) | 多 Pod 时间片轮转 | 开发、小模型推理 |
+| MIG 分区 | 硬件级切分 (A100/H100) | 多租户隔离 |
+| vGPU | 虚拟化切分 | 云环境 |
+
 
 ## AI 基础设施 (AI Infrastructure)
 

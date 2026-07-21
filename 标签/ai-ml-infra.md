@@ -1,17 +1,40 @@
 ---
 title: ai-ml-infra
-description: All pages tagged with ai-ml-infra
+description: AI/ML 基础设施标签枢纽 — 涵盖 GPU 调度、分布式训练、LLM 推理、MLOps、AI Agent、向量数据库、模型服务等全部 AI 基础设施知识
 category: tag-index
 tags:
 - ai-ml-infra
-tier: supporting
+- mlops
+- llm
+- inference
+- training
+- agent
+tier: core
+difficulty: intermediate-to-advanced
+domain: ai-infrastructure
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # ai-ml-infra Tag Hub
 
 > AI/ML 基础设施页面 — GPU 调度、分布式训练、LLM 推理、MLOps、AI Agent、向量数据库等。
+
+## 核心定义
+
+**AI/ML 基础设施**是在 Kubernetes 上构建 AI 工作负载运行环境的系统化实践，涵盖 GPU 资源管理、分布式训练编排、模型推理服务、MLOps 流水线、AI Agent 运行时等核心能力。
+
+### AI 基础设施能力矩阵
+
+| 能力域 | 描述 | 关键工具 |
+|--------|------|----------|
+| GPU 调度 | GPU 资源分配与管理 | GPU Operator, Device Plugin |
+| 分布式训练 | 多节点/多卡训练编排 | Kubeflow Training, PyTorchJob |
+| 模型推理 | 在线/批量推理服务 | vLLM, Triton, KServe |
+| MLOps | ML 生命周期管理 | Kubeflow, MLflow, Argo |
+| AI Agent | 智能体运行时 | LangChain, AgentScope |
+| 向量数据库 | 语义检索与 RAG | Milvus, Weaviate, Qdrant |
+
 
 ## AI 基础设施 (AI Infrastructure)
 

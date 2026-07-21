@@ -1,17 +1,39 @@
 ---
 title: operator
-description: All pages tagged with operator
+description: Operator 模式标签枢纽 — 涵盖 CRD、控制器模式、调和循环、Finalizer、Webhook、Leader Election、Operator SDK 等全部 Operator 领域知识
 category: tag-index
 tags:
 - operator
-tier: supporting
+- crd
+- controller
+- reconciliation
+- kubebuilder
+tier: core
+difficulty: advanced
+domain: platform-engineering
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # operator Tag Hub
 
 > Operator 模式页面 — CRD、控制器模式、调和循环、Finalizer、Webhook、Leader Election 等。
+
+## 核心定义
+
+**Operator 模式**是 Kubernetes 的扩展机制，通过 CRD（Custom Resource Definition）+ 自定义控制器将领域知识编码为软件，实现复杂有状态应用的自动化运维。Operator 封装了安装、升级、备份、故障恢复等运维操作。
+
+### Operator 核心组件
+
+| 组件 | 职责 |
+|------|------|
+| CRD | 定义自定义资源的 Schema |
+| Controller | Watch → Compare → Act 调和循环 |
+| Webhook | 准入控制（Validating/Mutating） |
+| Finalizer | 资源删除前的清理逻辑 |
+| Status | 报告资源实际状态 |
+| Owner Reference | 级联删除与 GC |
+
 
 ## Operator 清单模式 (Operator Manifest Patterns)
 

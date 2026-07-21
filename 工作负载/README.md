@@ -1,9 +1,7 @@
 ---
 title: Workloads & Applications
-description: 整合原 工作负载 和 工作负载
-  的工作负载与应用知识，涵盖 K8s 原生工作负载、Java on K8s 和应用架构模式。
-summary: 整合原 工作负载 和 工作负载 的工作负载与应用知识，涵盖
-  K8s 原生工作负载、Java on K8s 和应用架构模式。
+description: Kubernetes 工作负载与应用知识域 — 核心工作负载控制器、多语言运行时垂直栈实践、应用架构模式
+summary: 工作负载知识域入口，涵盖 K8s 原生工作负载、Java/Node.js/Go/Python 垂直栈实践和应用架构模式
 category: domain
 tags:
 - workloads
@@ -11,39 +9,30 @@ tags:
 - statefulset
 - daemonset
 - java
+- nodejs
 - applications
 - job
 - gpu
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Workloads & Applications 是什么
-- 如何 Workloads & Applications
-- Kubernetes 02 workloads applications 最佳实践
-trigger_keywords:
-- Workloads
-- Applications
-- workloads
-- applications
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- gpu-scheduling-basics
 ---
 # 工作负载 Workloads
 
-> Kubernetes 核心工作负载与 Java-on-K8s 等垂直栈实践。
+> Kubernetes 核心工作负载控制器与多语言运行时垂直栈实践。
 
 ## 二级子目录
 
-- [[工作负载/Java-on-K8s/README.md|Java-on-K8s]]
-- [[工作负载/核心工作负载/README.md|核心工作负载]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[工作负载/核心工作负载/index.md\|核心工作负载/]] | K8s 原生控制器 | Pod/Deployment/StatefulSet/DaemonSet/Job/HPA |
+| [[工作负载/Java-on-K8s/README.md\|Java-on-K8s/]] | Java 垂直栈 | Spring Boot/JVM GC/Operator SDK/Quarkus |
+| [[工作负载/Node-js-on-K8s/index.md\|Node-js-on-K8s/]] | Node.js 垂直栈 | 内存管理/优雅关闭/Event Loop/可观测性 |
+| [[工作负载/多语言运行 时/index.md\|多语言运行时/]] | 多语言实践 | Go/Python/Rust/GPU/多集群 |
 
 ## 跨域导航
 

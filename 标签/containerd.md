@@ -1,17 +1,47 @@
 ---
 title: containerd
-description: All pages tagged with containerd
+description: 容器运行时标签枢纽 — 涵盖 containerd、CRI-O、Docker、CRI 接口、镜像管理、安全沙箱、运行时迁移等全部容器运行时领域知识
 category: tag-index
 tags:
 - containerd
-tier: supporting
+- cri-o
+- docker
+- container-runtime
+- oci
+tier: core
+difficulty: intermediate-to-advanced
+domain: container-runtime
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # containerd Tag Hub
 
 > containerd 及容器运行时页面 — 运行时配置、CRI、镜像管理、安全沙箱、运行时迁移等。
+
+## 核心定义
+
+**容器运行时（Container Runtime）** 是 Kubernetes 中负责实际运行容器的底层组件。自 Kubernetes 1.24 移除 Dockershim 后，containerd 和 CRI-O 成为主流选择。它们通过 CRI（Container Runtime Interface）与 kubelet 交互。
+
+### 运行时架构分层
+
+| 层级 | 组件 | 职责 |
+|------|------|------|
+| CRI 接口 | kubelet ↔ CRI gRPC | Pod/容器生命周期管理 |
+| 高级运行时 | containerd / CRI-O | 镜像管理、容器编排 |
+| 低级运行时 | runc / crun / kata | 实际创建容器进程 |
+| OCI 规范 | runtime-spec / image-spec | 标准化接口 |
+
+### 运行时对比
+
+| 运行时 | 特色 | 适用场景 |
+|--------|------|----------|
+| containerd | CNCF 毕业、生态完善 | 通用生产环境 |
+| CRI-O | 轻量、K8s 专用 | 纯 K8s 环境 |
+| Docker | 开发体验好 | 开发/构建（非 K8s 运行时） |
+| Kata Containers | VM 级隔离 | 多租户安全 |
+| gVisor | 用户态内核 | 不可信工作负载 |
+
 
 ## 容器运行时 (Container Runtime)
 

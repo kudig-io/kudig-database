@@ -266,6 +266,202 @@ kubectl get csidrivers
 ---
 
 <!-- chunk: 参考链接 -->
+## 升级决策矩阵
+
+### 版本跨度风险评估
+
+| 升级路径 | 风险 | 关键破坏性变更 | 建议 |
+|----------|------|----------------|------|
+| v1.25 → v1.26 | 低 | FlowSchema v1beta1 移除 | 直接升级 |
+| v1.26 → v1.27 | 低 | CSIStorageCapacity v1beta1 移除 | 直接升级 |
+| v1.27 → v1.28 | 低 | 无重大破坏 | 直接升级 |
+| v1.28 → v1.29 | 低 | FlowSchema v1beta2 移除 | 检查 APF 配置 |
+| v1.29 → v1.30 | 中 | in-tree 存储驱动弃用警告 | 确认 CSI 迁移 |
+| v1.30 → v1.31 | 中 | kubelet --cloud-provider 弃用 | 确认外部 CCM |
+| v1.31 → v1.32 | 低 | 无重大破坏 | 直接升级 |
+| v1.32 → v1.33 | 低 | DRA GA、nftables Beta | 直接升级 |
+| v1.25 → v1.33 (跨多版本) | **高** | PSP 移除 + 多个 API 废弃 | 逐版本升级 |
+
+### 升级前必检项目
+
+```bash
+#!/bin/bash
+# 🟢 只读：升级前自动化检查脚本
+TARGET_VERSION="${1:-1.33}"
+echo "=== Kubernetes 升级前检查 (目标: v$TARGET_VERSION) ==="
+
+# 1. 当前版本
+echo -n "[1/7] 当前版本: "
+kubectl version -o json | jq -r '.serverVersion.gitVersion'
+
+# 2. 已弃用 API 使用检查
+echo "[2/7] 已弃用 API 使用情况:"
+kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis | \
+  grep -v "^#" | awk '{print "  ⚠️  " $1, $2}'
+
+# 3. PSP 检查 (v1.25 移除)
+echo -n "[3/7] PodSecurityPolicy: "
+kubectl get psp 2>/dev/null && echo "  ❗ 需迁移到 PSA" || echo "✅ 无 PSP"
+
+# 4. Feature Gate 检查
+echo "[4/7] 自定义 Feature Gates:"
+for node in $(kubectl get nodes -o name | head -3); do
+  echo "  $node:"
+  kubectl get --raw "/api/v1/${node#node/}/proxy/configz" 2>/dev/null | \
+    jq -r '.kubeletconfig.featureGates // {} | to_entries[] | select(.value != null) | "    \(.key)=\(.value)"'
+done
+
+# 5. 扩展组件兼容性
+echo "[5/7] 扩展组件版本:"
+echo -n "  CoreDNS: "
+kubectl get deploy coredns -n kube-system -o jsonpath='{.spec.template.spec.containers[0].image}' 2>/dev/null || echo "N/A"
+echo ""
+echo -n "  CNI: "
+kubectl get ds -n kube-system -l k8s-app=cilium -o jsonpath='{.items[0].spec.template.spec.containers[0].image}' 2>/dev/null || echo "N/A"
+echo ""
+
+# 6. 节点内核版本
+echo "[6/7] 节点内核版本:"
+kubectl get nodes -o custom-columns=NAME:.metadata.name,KERNEL:.status.nodeInfo.kernelVersion,OS:.status.nodeInfo.osImage
+
+# 7. etcd 版本
+echo -n "[7/7] etcd 版本: "
+kubectl get pod -n kube-system -l component=etcd -o jsonpath='{.items[0].spec.containers[0].image}' 2>/dev/null || echo "N/A"
+
+echo ""
+echo "=== 检查完成 ==="
+```
+
+## 版本特定迁移指南
+
+### v1.25 关键迁移：PSP → PSA
+
+```yaml
+# 旧: PodSecurityPolicy (v1.25 移除)
+# apiVersion: policy/v1beta1
+# kind: PodSecurityPolicy
+
+# 新: Pod Security Admission (命名空间标签)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    pod-security.kubernetes.io/enforce: restricted    # 强制执行
+    pod-security.kubernetes.io/audit: restricted       # 审计记录
+    pod-security.kubernetes.io/warn: restricted        # 警告提示
+```
+
+### v1.29 关键迁移：FlowSchema v1beta2 → v1
+
+```bash
+# 🟢 只读：检查是否使用了废弃的 APF API
+kubectl get flowschemas -o yaml | grep apiVersion
+kubectl get prioritylevelconfigurations -o yaml | grep apiVersion
+
+# 🟡 中风险：导出并转换到 v1
+kubectl get flowschema -o yaml > flowschemas-backup.yaml
+kubectl get prioritylevelconfiguration -o yaml > plc-backup.yaml
+```
+
+### v1.30+ 关键迁移：in-tree 存储 → CSI
+
+```bash
+# 🟢 只读：检查 in-tree 存储驱动使用情况
+kubectl get pv -o json | jq '[.items[] | select(.spec | has("awsElasticBlockStore") or has("gcePersistentDisk") or has("azureDisk"))] | length'
+
+# 🟢 只读：检查 CSI 驱动状态
+kubectl get csidrivers
+kubectl get csinodes
+
+# 确认 CSI Migration Feature Gate 已启用
+kubectl get --raw /api/v1/nodes/NODE/proxy/configz | \
+  jq '.kubeletconfig.featureGates | {CSIMigration, CSIMigrationAWS, CSIMigrationGCE}'
+```
+
+## Feature Gate 启用指南
+
+### 安全启用流程
+
+```
+1. 查阅官方文档确认 Feature Gate 状态 (Alpha/Beta/GA)
+2. 在非生产集群验证
+3. 确认依赖组件兼容性
+4. 滚动更新控制平面组件
+5. 滚动更新 Kubelet
+6. 监控异常指标 48h
+```
+
+### 常见 Feature Gate 配置
+
+```yaml
+# kube-apiserver 配置示例
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+apiServer:
+  extraArgs:
+    feature-gates: "NFTablesProxyMode=true,NodeLogQuery=true"
+---
+# Kubelet 配置示例
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+featureGates:
+  NFTablesProxyMode: true
+  NodeLogQuery: true
+```
+
+### Feature Gate 风险分级
+
+| 状态 | 风险 | 建议 |
+|------|------|------|
+| Alpha | 高 — 可能变更/移除 | 仅开发/测试环境 |
+| Beta | 中 — 默认启用但可关闭 | 生产可用，关注变更 |
+| GA | 低 — 永久启用 | 无需配置，不可关闭 |
+| Deprecated | 警告 — 即将移除 | 尽快迁移 |
+
+## 兼容性测试检查单
+
+### 升级前测试矩阵
+
+| 测试项 | 命令/方法 | 通过标准 |
+|--------|----------|----------|
+| API 兼容性 | `kubectl api-versions` | 无缺失 API |
+| 废弃 API 扫描 | `kubectl get --raw /metrics \| grep deprecated` | 无废弃调用 |
+| 扩展组件兼容 | 检查 Operator/Controller 版本 | 支持目标版本 |
+| CNI 兼容 | 检查 CNI 版本 changelog | 支持目标版本 |
+| CSI 兼容 | 检查 CSI 驱动版本 | 支持目标版本 |
+| Webhook 兼容 | 检查 admissionReviewVersions | 包含 v1 |
+| CRD 兼容 | `kubectl get crd -o yaml \| grep apiVersion` | 无废弃 API |
+| 工作负载测试 | 在 staging 集群运行 E2E | 全部通过 |
+
+### 升级后验证
+
+```bash
+# 🟢 只读：升级后快速验证
+echo "=== 升级后验证 ==="
+
+# 控制平面健康
+kubectl get componentstatuses 2>/dev/null || kubectl get --raw /healthz
+
+# 所有节点 Ready
+kubectl get nodes | grep -v Ready
+
+# 系统 Pod 状态
+kubectl get pods -n kube-system | grep -v Running | grep -v Completed
+
+# 核心功能验证
+kubectl create namespace test-upgrade --dry-run=server -o yaml
+kubectl run test --image=busybox --restart=Never --rm -it -- echo "OK"
+
+# DNS 解析
+kubectl run dns-test --image=busybox:1.36 --restart=Never --rm -it -- \
+  nslookup kubernetes.default
+
+# 清理
+kubectl delete namespace test-upgrade --ignore-not-found
+echo "=== 验证完成 ==="
+```
+
 ## 参考链接
 
 - [K8s Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/)

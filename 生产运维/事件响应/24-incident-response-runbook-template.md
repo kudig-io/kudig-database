@@ -267,6 +267,171 @@ IC：张三 | Communicator：李四 | 时间：2026-07-01 14:32 UTC+8
 
 ---
 
+## 9. K8s 特定事故场景 Runbook
+
+### 场景 A: 控制平面不可用
+
+```bash
+# 🟢 快速诊断
+# 1. API Server 状态
+kubectl get --raw /healthz?verbose
+kubectl -n kube-system get pod -l component=kube-apiserver
+
+# 2. etcd 状态
+kubectl -n kube-system exec etcd-master-0 -- etcdctl endpoint health --cluster
+kubectl -n kube-system exec etcd-master-0 -- etcdctl endpoint status --cluster -w table
+
+# 3. 证书检查
+kubeadm certs check-expiration
+
+# 🟡 应急措施
+# API Server 无法启动: 检查静态 Pod 配置
+kubectl -n kube-system logs kube-apiserver-master-0 --tail=100
+
+# etcd 数据损坏: 从快照恢复
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-snapshot.db \
+  --data-dir=/var/lib/etcd-restore
+```
+
+### 场景 B: 节点大面积 NotReady
+
+```bash
+# 🟢 诊断
+kubectl get nodes | grep -v Ready
+kubectl describe node <node> | grep -A 5 Conditions
+
+# 检查 kubelet 状态
+kubectl debug node/<node> -it --image=busybox -- \
+  chroot /host systemctl status kubelet
+
+# 检查 CNI
+kubectl -n kube-system get pod -l k8s-app=calico-node -o wide | grep <node>
+kubectl -n kube-system logs -l k8s-app=calico-node --tail=50
+
+# 🟡 应急: 隔离故障节点
+kubectl cordon <node>
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data --timeout=300s
+
+# 扩容健康节点
+# 云厂商: 增加节点池实例数
+```
+
+### 场景 C: DNS 解析失败
+
+```bash
+# 🟢 诊断
+kubectl -n kube-system get pod -l k8s-app=kube-dns
+kubectl -n kube-system logs -l k8s-app=kube-dns --tail=50
+
+# 测试 DNS 解析
+kubectl run dns-test --rm -it --restart=Never --image=busybox:1.36 -- \
+  nslookup kubernetes.default.svc.cluster.local
+
+# 检查 CoreDNS 配置
+kubectl -n kube-system get configmap coredns -o yaml
+
+# 🟡 应急: 重启 CoreDNS
+kubectl -n kube-system rollout restart deployment/coredns
+
+# 检查 NodeLocal DNSCache
+kubectl -n kube-system get ds node-local-dns
+```
+
+### 场景 D: 存储卷挂载失败
+
+```bash
+# 🟢 诊断
+kubectl get pvc -A | grep -v Bound
+kubectl describe pvc <pvc> -n <ns>
+
+# 检查 CSI 驱动
+kubectl get csidrivers
+kubectl -n kube-system get pod -l app=csi-provisioner
+
+# 检查 PV 状态
+kubectl get pv | grep -v Available | grep -v Bound
+
+# 🟡 应急: 强制删除 Terminating PVC
+kubectl patch pvc <pvc> -n <ns> --type='json' \
+  -p='[{"op": "remove", "path": "/metadata/finalizers"}]'
+```
+
+---
+
+## 10. 事故度量与 KPI
+
+### 核心指标
+
+| 指标 | 定义 | 目标 | 计算 |
+|------|------|------|------|
+| MTTD | 平均发现时间 | < 5 分钟 | 告警触发 - 故障发生 |
+| MTTA | 平均响应时间 | < 10 分钟 | IC 接手 - 告警触发 |
+| MTTR | 平均恢复时间 | < 60 分钟 | 服务恢复 - 故障发生 |
+| 事故频率 | 每月 SEV1/2 数量 | 下降趋势 | 月度统计 |
+| 重复率 | 同根因重复发生 | < 5% | 复盘跟踪 |
+| 改进项完成率 | 复盘改进项按时关闭 | > 90% | Jira 跟踪 |
+
+### 事故报告模板
+
+```markdown
+## 月度事故报告 - 2026-XX
+
+### 概览
+- SEV1: X 起 | SEV2: X 起 | SEV3: X 起
+- MTTR: XX 分钟 (上月: XX)
+- 可用性: 99.XX%
+
+### 事故列表
+| 编号 | 等级 | 摘要 | MTTR | 根因类别 |
+|------|------|------|------|----------|
+| INC-001 | SEV1 | xxx | 45min | 发布 |
+
+### 根因分布
+- 发布变更: 40%
+- 容量: 25%
+- 外部依赖: 20%
+- 配置错误: 15%
+
+### 改进项跟踪
+| 改进项 | Owner | 截止日期 | 状态 |
+|--------|-------|----------|------|
+| xxx | @xx | 2026-XX-XX | 进行中 |
+```
+
+---
+
+## 11. 事故演练机制
+
+### GameDay 计划
+
+| 频率 | 演练内容 | 目标 |
+|------|----------|------|
+| 每月 | 单场景演练（DNS/存储/网络） | 验证 Runbook |
+| 每季度 | 全链路事故模拟 | 验证响应流程 |
+| 每半年 | 混沌工程 + 事故响应 | 发现未知风险 |
+
+### 演练检查单
+
+```markdown
+## GameDay 演练记录
+
+- **日期**: 2026-XX-XX
+- **场景**: CoreDNS 完全不可用
+- **注入方式**: kubectl scale deployment/coredns --replicas=0 -n kube-system
+- **预期 MTTD**: < 2 分钟
+- **实际 MTTD**: X 分钟
+- **预期 MTTR**: < 10 分钟
+- **实际 MTTR**: X 分钟
+- **发现问题**:
+  1. 告警延迟 3 分钟
+  2. Runbook 缺少 NodeLocal DNS 检查步骤
+- **改进项**:
+  1. 优化 CoreDNS 告警阈值
+  2. 更新 Runbook
+```
+
+---
+
 ## 9. 相关 Runbook / 推荐阅读
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维 生产就绪运维指南]]

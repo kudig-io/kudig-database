@@ -1,17 +1,36 @@
 ---
 title: multi-cluster
-description: All pages tagged with multi-cluster
+description: 多集群管理标签枢纽 — 涵盖集群联邦、多集群网络、多集群安全、多集群可观测性、DR 自动化、Fleet 管理等全部多集群领域知识
 category: tag-index
 tags:
 - multi-cluster
-tier: supporting
+- federation
+- fleet
+- cross-cluster
+tier: core
+difficulty: advanced
+domain: platform-engineering
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # multi-cluster Tag Hub
 
 > 多集群管理页面 — 集群联邦、多集群网络、多集群安全、多集群可观测性、DR 自动化等。
+
+## 核心定义
+
+**多集群管理（Multi-Cluster Management）** 是在多个 Kubernetes 集群之间实现统一治理、工作负载分发、网络互通、安全一致性的系统化实践。常见场景包括多区域高可用、多环境隔离、多租户分离等。
+
+### 多集群架构模式
+
+| 模式 | 描述 | 适用场景 |
+|------|------|----------|
+| Hub-Spoke | 中心集群管控成员集群 | 统一治理 |
+| 对等联邦 | 集群间对等互联 | 跨区域 DR |
+| 独立集群 | 各集群独立运营 | 多租户隔离 |
+| 混合云 | 公有云 + 私有云 | 合规 + 弹性 |
+
 
 ## 概念 (Concepts)
 

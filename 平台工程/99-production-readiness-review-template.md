@@ -223,7 +223,213 @@ PRR 评审完成后，应在变更工单中记录评审结论、遗留项清单�
 
 ---
 
-## 8. 相关 Runbook / 推荐阅读
+## 8. 自动化 PRR 检查脚本
+
+### 8.1 一键生产就绪检查
+
+```bash
+#!/bin/bash
+# 🟢 低风险：只读检查
+# PRR 自动化检查脚本 — 在评审会前执行，生成报告
+
+NAMESPACE=${1:-platform-system}
+REPORT="/tmp/prr-check-$(date +%Y%m%d-%H%M).txt"
+
+echo "=== PRR 自动化检查报告 ===" | tee "$REPORT"
+echo "命名空间: $NAMESPACE" | tee -a "$REPORT"
+echo "时间: $(date)" | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 1. 高可用检查
+echo "--- [架构与高可用] ---" | tee -a "$REPORT"
+REPLICAS=$(kubectl get deploy -n "$NAMESPACE" -o json | jq '[.items[] | select(.spec.replicas < 2)] | length')
+if [ "$REPLICAS" -gt 0 ]; then
+  echo "❌ 存在单副本 Deployment:" | tee -a "$REPORT"
+  kubectl get deploy -n "$NAMESPACE" -o json | jq -r '.items[] | select(.spec.replicas < 2) | "  \(.metadata.name) replicas=\(.spec.replicas)"' | tee -a "$REPORT"
+else
+  echo "✅ 所有 Deployment 副本数 ≥ 2" | tee -a "$REPORT"
+fi
+
+PDB_COUNT=$(kubectl get pdb -n "$NAMESPACE" --no-headers 2>/dev/null | wc -l)
+DEPLOY_COUNT=$(kubectl get deploy -n "$NAMESPACE" --no-headers | wc -l)
+if [ "$PDB_COUNT" -lt "$DEPLOY_COUNT" ]; then
+  echo "⚠️  PDB 覆盖不完整: $PDB_COUNT/$DEPLOY_COUNT" | tee -a "$REPORT"
+else
+  echo "✅ PDB 覆盖完整" | tee -a "$REPORT"
+fi
+
+# 2. 可观测性检查
+echo "" | tee -a "$REPORT"
+echo "--- [可观测性] ---" | tee -a "$REPORT"
+SM_COUNT=$(kubectl get servicemonitor -n "$NAMESPACE" --no-headers 2>/dev/null | wc -l)
+if [ "$SM_COUNT" -eq 0 ]; then
+  echo "❌ 无 ServiceMonitor，指标未接入 Prometheus" | tee -a "$REPORT"
+else
+  echo "✅ ServiceMonitor 已配置: $SM_COUNT 个" | tee -a "$REPORT"
+fi
+
+RULE_COUNT=$(kubectl get prometheusrules -n "$NAMESPACE" --no-headers 2>/dev/null | wc -l)
+if [ "$RULE_COUNT" -eq 0 ]; then
+  echo "❌ 无 PrometheusRule，告警未配置" | tee -a "$REPORT"
+else
+  echo "✅ PrometheusRule 已配置: $RULE_COUNT 个" | tee -a "$REPORT"
+fi
+
+# 3. 安全检查
+echo "" | tee -a "$REPORT"
+echo "--- [安全与合规] ---" | tee -a "$REPORT"
+NP_COUNT=$(kubectl get networkpolicy -n "$NAMESPACE" --no-headers 2>/dev/null | wc -l)
+if [ "$NP_COUNT" -eq 0 ]; then
+  echo "❌ 无 NetworkPolicy，网络未隔离" | tee -a "$REPORT"
+else
+  echo "✅ NetworkPolicy 已配置: $NP_COUNT 个" | tee -a "$REPORT"
+fi
+
+# 检查是否有 Pod 使用 default ServiceAccount
+DEFAULT_SA=$(kubectl get pods -n "$NAMESPACE" -o json | jq '[.items[] | select(.spec.serviceAccountName == "default" or .spec.serviceAccountName == null)] | length')
+if [ "$DEFAULT_SA" -gt 0 ]; then
+  echo "⚠️  $DEFAULT_SA 个 Pod 使用 default ServiceAccount" | tee -a "$REPORT"
+else
+  echo "✅ 所有 Pod 使用专用 ServiceAccount" | tee -a "$REPORT"
+fi
+
+# 4. 变更与回滚检查
+echo "" | tee -a "$REPORT"
+echo "--- [变更与回滚] ---" | tee -a "$REPORT"
+if command -v argocd &>/dev/null; then
+  ARGO_STATUS=$(argocd app list -l namespace="$NAMESPACE" --format json 2>/dev/null | jq -r '.[].status.sync.status' 2>/dev/null)
+  if [ -n "$ARGO_STATUS" ]; then
+    echo "✅ Argo CD 管理: $ARGO_STATUS" | tee -a "$REPORT"
+  fi
+fi
+
+HELM_RELEASES=$(helm list -n "$NAMESPACE" --no-headers 2>/dev/null | wc -l)
+if [ "$HELM_RELEASES" -gt 0 ]; then
+  echo "✅ Helm Release 数: $HELM_RELEASES" | tee -a "$REPORT"
+  helm list -n "$NAMESPACE" -o json | jq -r '.[] | "  \(.name) revision=\(.revision) status=\(.status)"' | tee -a "$REPORT"
+fi
+
+echo "" | tee -a "$REPORT"
+echo "=== 检查完成，报告已保存至: $REPORT ===" | tee -a "$REPORT"
+```
+
+### 8.2 容量规划验证
+
+```bash
+#!/bin/bash
+# 🟢 低风险：只读检查
+# 容量规划验证 — 确认资源预留充足
+
+NAMESPACE=${1:-platform-system}
+
+echo "=== 容量规划检查 ==="
+
+# 节点资源余量
+echo "--- 节点资源余量 ---"
+kubectl top nodes --sort-by=cpu 2>/dev/null | head -5
+echo ""
+kubectl top nodes --sort-by=memory 2>/dev/null | head -5
+
+# 命名空间资源使用
+echo ""
+echo "--- 命名空间资源使用 ---"
+kubectl top pods -n "$NAMESPACE" --sort-by=cpu 2>/dev/null | head -10
+
+# ResourceQuota 使用率
+echo ""
+echo "--- ResourceQuota 使用率 ---"
+kubectl get resourcequota -n "$NAMESPACE" -o json | jq -r '
+  .items[] |
+  "\(.metadata.name):",
+  (.status.hard // {} | to_entries[] | "  \(.key): used=\(.value)"),
+  ""
+'
+
+# HPA 状态
+echo "--- HPA 状态 ---"
+kubectl get hpa -n "$NAMESPACE" -o custom-columns=\
+NAME:.metadata.name,\
+MIN:.spec.minReplicas,\
+MAX:.spec.maxReplicas,\
+CURRENT:.status.currentReplicas,\
+CPU%:.status.currentMetrics[0].resource.current.averageUtilization
+```
+
+## 9. SLI/SLO 验证检查单
+
+### 9.1 上线前 SLO 确认
+
+| SLI 指标 | SLO 目标 | 测量方法 | 当前值 | 状态 |
+|----------|----------|----------|--------|------|
+| 可用性 | 99.95% | `1 - (error_requests / total_requests)` | ___ | □ |
+| P99 延迟 | < 500ms | `histogram_quantile(0.99, ...)` | ___ | □ |
+| 错误率 | < 0.1% | `rate(http_requests_total{code=~"5.."}[5m])` | ___ | □ |
+| 吐吐量 | > 1000 QPS | `sum(rate(http_requests_total[5m]))` | ___ | □ |
+| 恢复时间 (RTO) | < 5min | 故障切换演练计时 | ___ | □ |
+| 数据丢失 (RPO) | < 1min | 备份频率与同步延迟 | ___ | □ |
+
+### 9.2 告警规则验证
+
+```bash
+# 🟢 低风险：验证告警规则是否生效
+# 检查 PrometheusRule 是否被加载
+kubectl get prometheusrules -n <ns> -o json | jq -r '
+  .items[].spec.groups[].rules[] |
+  select(.alert != null) |
+  "\(.alert) severity=\(.labels.severity // "none") for=\(.for // "0s")"
+'
+
+# 模拟告警触发（通过 promtool）
+# promtool test rules /tmp/alert-test.yaml
+# 确认 Alertmanager 路由正确
+# amtool config routes show
+```
+
+## 10. 上线后监控与复盘
+
+### 10.1 上线后 72 小时监控检查单
+
+| 时间点 | 检查项 | 命令/方法 | 结果 |
+|--------|--------|----------|------|
+| +5min | Pod 全部 Ready | `kubectl get pods -n <ns>` | □ |
+| +15min | 无 CrashLoopBackOff | `kubectl get pods -n <ns> \| grep -v Running` | □ |
+| +30min | 告警无异常触发 | Alertmanager UI | □ |
+| +1h | SLO 指标达标 | Grafana Dashboard | □ |
+| +4h | 资源使用稳定 | `kubectl top pods -n <ns>` | □ |
+| +24h | 无内存泄漏趋势 | Grafana 内存趋势图 | □ |
+| +72h | 复盘会召开 | 会议纪要 | □ |
+
+### 10.2 回滚决策矩阵
+
+| 触发条件 | 决策 | 回滚方式 | 时限 |
+|----------|------|----------|------|
+| 可用性 < 99.5% 持续 5min | 立即回滚 | `helm rollback` / `argocd app rollback` | 5min 内 |
+| P99 延迟 > SLO 3倍 持续 10min | 立即回滚 | 同上 | 5min 内 |
+| 错误率 > 5% 持续 3min | 立即回滚 | 同上 | 3min 内 |
+| 数据不一致 | 评估后决策 | 回滚 + 数据修复 | 30min 内 |
+| 资源使用异常但未影响 SLO | 观察 30min | 扩容/调参 | 1h 内 |
+| 单一非关键告警 | 记录并跟踪 | 不回滚 | 下一工作日 |
+
+### 10.3 PRR 评分体系
+
+| 维度 | 权重 | 评分标准 | 得分 |
+|------|------|----------|------|
+| 架构与高可用 | 25% | 多副本+PDB+反亲和+降级方案 | /25 |
+| 可观测性 | 25% | RED指标+告警+Dashboard+日志 | /25 |
+| 安全与合规 | 20% | RBAC+NetworkPolicy+Secret+镜像 | /20 |
+| 变更与回滚 | 20% | GitOps+版本保留+回滚验证+窗口 | /20 |
+| 容量与性能 | 10% | 资源预留+HPA+压测报告 | /10 |
+| **总分** | **100%** | **≥ 80 分方可上线** | **/100** |
+
+**评分规则**：
+- 90-100：优秀，可直接上线
+- 80-89：良好，可上线但需跟踪遗留项
+- 70-79：待改进，需补充后重新评审
+- < 70：不通过，禁止上线
+
+---
+
+## 11. 相关 Runbook / 推荐阅读
 
 - [[平台工程/99-production-readiness-operations-guide.md|平台工程生产就绪运维指南]]
 - [[平台工程/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩展实践指南]]

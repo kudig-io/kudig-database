@@ -1,7 +1,7 @@
 ---
 title: Landscape & References
-description: Landscape & References — Kubernetes 生产运维知识库
-summary: Landscape & References — Kubernetes 生产运维知识库
+description: 生态参考知识域 — CNCF 全景图、学术论文、领域索引、开源项目参考
+summary: 生态参考知识域入口，涵盖 CNCF 毕业/孵化/沙箱项目参考、云原生论文、各技术领域索引
 category: domain
 tags:
 - cncf
@@ -9,29 +9,13 @@ tags:
 - reference
 - landscape
 - ecosystem
-- daemonset
-- gpu
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Landscape & References 是什么
-- 如何 Landscape & References
-- Kubernetes 19 landscape references 最佳实践
-trigger_keywords:
-- Landscape
-- References
-- landscape
-- references
-prerequisites:
-- kubectl-basics
-- cncf-ecosystem
-- gpu-scheduling-basics
 ---
 # 生态参考 Ecosystem
 
@@ -39,9 +23,11 @@ prerequisites:
 
 ## 二级子目录
 
-- [[生态参考/CNCF全景/README.md|CNCF全景]]
-- [[生态参考/论文/README.md|论文]]
-- [[生态参考/领域索引/README.md|领域索引]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[生态参考/CNCF全景/index.md\|CNCF全景/]] | CNCF 项目 | 毕业/孵化/沙箱项目参考、成熟度评估 |
+| [[生态参考/论文/index.md\|论文/]] | 学术论文 | Raft/Borg/Omega/Kubernetes 设计论文 |
+| [[生态参考/领域索引/index.md\|领域索引/]] | 技术索引 | 各技术领域的全局索引与知识图谱 |
 
 ## 跨域导航
 

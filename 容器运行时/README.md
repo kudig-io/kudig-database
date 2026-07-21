@@ -1,37 +1,23 @@
 ---
 title: Container Runtime
-description: 整合原 容器运行时/22 的容器运行时知识，涵盖 Docker、镜像管理和镜像仓库。
-summary: 整合原 容器运行时/22 的容器运行时知识，涵盖 Docker、镜像管理和镜像仓库。
+description: 容器运行时知识域 — Docker、containerd/CRI-O、镜像管理、镜像构建、运行时迁移、安全沙箱
+summary: 容器运行时知识域入口，涵盖 Docker 架构与运维、containerd/CRI-O 对比、镜像仓库(Harbor)、多阶段构建、Dockershim 迁移、安全沙箱对比
 category: domain
 tags:
 - docker
+- containerd
 - container
 - image
 - registry
 - harbor
 - supply-chain
-- daemonset
-- gpu
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Container Runtime 是什么
-- 如何 Container Runtime
-- Kubernetes 13 container runtime 最佳实践
-trigger_keywords:
-- Container
-- Runtime
-- container
-- runtime
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
 ---
 # 容器运行时 Container Runtime
 
@@ -39,11 +25,13 @@ prerequisites:
 
 ## 二级子目录
 
-- [[容器运行时/Docker/README.md|Docker]]
-- [[容器运行时/containerd-CRI-O/README.md|containerd-CRI-O]]
-- [[容器运行时/运行时迁移/README.md|运行时迁移]]
-- [[容器运行时/镜像构建/README.md|镜像构建]]
-- [[容器运行时/镜像管理/README.md|镜像管理]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[容器运行时/Docker/index.md\|Docker/]] | Docker 架构与运维 | Docker Engine/Compose/网络/存储/安全 |
+| [[容器运行时/containerd-CRI-O/index.md\|containerd-CRI-O/]] | 轻量运行时 | containerd vs CRI-O、CRI 接口、RuntimeClass |
+| [[容器运行时/镜像管理/index.md\|镜像管理/]] | 镜像仓库 | Harbor/Registry/镜像策略/供应链安全 |
+| [[容器运行时/镜像构建/index.md\|镜像构建/]] | 构建优化 | 多阶段构建/BuildKit/Kaniko/distroless |
+| [[容器运行时/运行时迁 移/index.md\|运行时迁移/]] | 迁移实践 | Dockershim 移除/Docker→containerd 迁移 |
 
 ## 跨域导航
 

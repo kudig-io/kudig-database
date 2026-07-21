@@ -215,6 +215,344 @@ kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes
 | v1.28 | API优先级和公平性增强 |
 | v1.29 | 聚合层性能优化 |
 
+<!-- chunk: APIService 高可用部署 -->
+## APIService 高可用部署
+
+### 生产级 Extension API Server 部署
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-metrics-apiserver
+  namespace: monitoring
+  labels:
+    app: custom-metrics-apiserver
+spec:
+  replicas: 2  # 生产至少 2 副本
+  selector:
+    matchLabels:
+      app: custom-metrics-apiserver
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: custom-metrics-apiserver
+                topologyKey: kubernetes.io/hostname
+      serviceAccountName: custom-metrics-apiserver
+      containers:
+        - name: apiserver
+          image: custom-metrics-apiserver:v1.0.0
+          args:
+            - --secure-port=6443
+            - --tls-cert-file=/certs/tls.crt
+            - --tls-private-key-file=/certs/tls.key
+            - --v=4
+          ports:
+            - containerPort: 6443
+              name: https
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 6443
+              scheme: HTTPS
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 6443
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: certs
+              mountPath: /certs
+              readOnly: true
+      volumes:
+        - name: certs
+          secret:
+            secretName: custom-metrics-apiserver-certs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: custom-metrics-apiserver
+  namespace: monitoring
+spec:
+  selector:
+    app: custom-metrics-apiserver
+  ports:
+    - port: 443
+      targetPort: 6443
+      protocol: TCP
+```
+
+### 证书管理（cert-manager）
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: custom-metrics-apiserver-certs
+  namespace: monitoring
+spec:
+  secretName: custom-metrics-apiserver-certs
+  dnsNames:
+    - custom-metrics-apiserver.monitoring.svc
+    - custom-metrics-apiserver.monitoring.svc.cluster.local
+  issuerRef:
+    name: kube-ca-issuer
+    kind: ClusterIssuer
+  duration: 8760h    # 1 年
+  renewBefore: 720h  # 提前 30 天续期
+```
+
+<!-- chunk: 聚合层安全加固 -->
+## 聚合层安全加固
+
+### 安全配置检查清单
+
+| 检查项 | 配置 | 说明 |
+|--------|------|------|
+| TLS 强制 | `spec.caBundle` 必须配置 | 禁止使用 `insecureSkipTLSVerify` |
+| 证书轮换 | cert-manager 自动续期 | 避免证书过期导致服务中断 |
+| RBAC 最小权限 | 专用 ServiceAccount | 禁止使用 cluster-admin |
+| 网络隔离 | NetworkPolicy 限制访问 | 仅允许 kube-apiserver 访问 |
+| 审计日志 | 记录所有 API 请求 | 便于事后追溯 |
+
+### RBAC 配置示例
+
+```yaml
+# Extension API Server 的 ServiceAccount 权限
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: custom-metrics-apiserver
+rules:
+  # 允许访问自定义资源
+  - apiGroups: ["custom.metrics.company.com"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  # 允许访问核心资源（只读）
+  - apiGroups: [""]
+    resources: ["namespaces", "pods", "services"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: custom-metrics-apiserver
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: custom-metrics-apiserver
+subjects:
+  - kind: ServiceAccount
+    name: custom-metrics-apiserver
+    namespace: monitoring
+```
+
+### 用户访问授权
+
+```yaml
+# 允许用户访问聚合 API
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: custom-metrics-reader
+rules:
+  - apiGroups: ["custom.metrics.company.com"]
+    resources: ["*"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: developer-custom-metrics
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: custom-metrics-reader
+subjects:
+  - kind: Group
+    name: developers
+    apiGroup: rbac.authorization.k8s.io
+```
+
+<!-- chunk: 自定义指标 API 实战 -->
+## 自定义指标 API 实战
+
+### Prometheus Adapter 配置
+
+```yaml
+# 将 Prometheus 指标暴露为 K8s 自定义指标
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-adapter-config
+  namespace: monitoring
+data:
+  config.yaml: |
+    rules:
+      # 将 http_requests_total 暴露为自定义指标
+      - seriesQuery: 'http_requests_total{namespace!="",pod!=""}'
+        resources:
+          overrides:
+            namespace: {resource: "namespace"}
+            pod: {resource: "pod"}
+        name:
+          matches: "^(.*)$"
+          as: "http_requests"
+        metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
+      
+      # 将队列长度暴露为外部指标（用于 KEDA）
+      - seriesQuery: 'queue_length{queue!=""}'
+        resources:
+          overrides:
+            namespace: {resource: "namespace"}
+        name:
+          as: "queue_length"
+        metricsQuery: '<<.Series>>{<<.LabelMatchers>>}'
+```
+
+### 使用自定义指标进行 HPA
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-app
+  minReplicas: 2
+  maxReplicas: 20
+  metrics:
+    # 基于自定义指标 http_requests
+    - type: Pods
+      pods:
+        metric:
+          name: http_requests
+        target:
+          type: AverageValue
+          averageValue: "100"  # 每 Pod 100 QPS
+    # 基于外部指标 queue_length
+    - type: External
+      external:
+        metric:
+          name: queue_length
+          selector:
+            matchLabels:
+              queue: "processing"
+        target:
+          type: Value
+          value: "50"  # 队列长度超过 50 时扩容
+```
+
+<!-- chunk: 聚合层监控告警 -->
+## 聚合层监控告警
+
+### PrometheusRule
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: api-aggregation-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: api-aggregation
+      rules:
+        - alert: APIServiceUnavailable
+          expr: |
+            apiservice_available == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "APIService {{ $labels.name }} 不可用"
+            runbook: "检查后端服务状态、证书有效性、网络连通性"
+
+        - alert: APIServiceHighLatency
+          expr: |
+            histogram_quantile(0.99,
+              sum(rate(apiserver_request_duration_seconds_bucket{verb!="WATCH"}[5m])) by (le, group, version)
+            ) > 1
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "API {{ $labels.group }}/{{ $labels.version }} P99 延迟 > 1s"
+
+        - alert: APIServiceHighErrorRate
+          expr: |
+            sum(rate(apiserver_request_total{code=~"5.."}[5m])) by (group, version) /
+            sum(rate(apiserver_request_total[5m])) by (group, version) > 0.05
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "API {{ $labels.group }}/{{ $labels.version }} 错误率 > 5%"
+```
+
+### 关键监控指标
+
+| 指标 | 说明 | 告警阈值 |
+|------|------|----------|
+| `apiservice_available` | APIService 可用性 | == 0 |
+| `apiserver_request_duration_seconds` | 请求延迟 | P99 > 1s |
+| `apiserver_request_total{code=~"5.."}` | 5xx 错误 | > 5% |
+| `apiserver_current_inflight_requests` | 并发请求数 | > 80% 限制 |
+| `aggregator_openapi_v2_regeneration_count` | OpenAPI 重新生成 | 异常增长 |
+
+<!-- chunk: 生产部署检查清单 -->
+## 生产部署检查清单
+
+### 上线前检查
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| APIService 状态 | `kubectl get apiservices` | Available=True |
+| 后端 Pod 就绪 | `kubectl get pods -n <ns>` | Ready |
+| 证书有效性 | `openssl x509 -in tls.crt -noout -dates` | 未过期 |
+| RBAC 配置 | `kubectl auth can-i --as=system:serviceaccount:<ns>:<sa>` | 权限正确 |
+| 网络连通性 | `kubectl exec -it <pod> -- curl -k https://<svc>` | 200 OK |
+| 资源限制 | `kubectl get deploy -o yaml` | 已配置 |
+| PDB 配置 | `kubectl get pdb -n <ns>` | 已配置 |
+| 监控告警 | Prometheus/Grafana | 已配置 |
+
+### 故障恢复流程
+
+```
+APIService 不可用
+├── 1. 检查后端 Pod 状态
+│   └── kubectl get pods -n <ns> -l app=<apiserver>
+├── 2. 检查证书
+│   └── kubectl get secret <certs> -o yaml | grep ca.crt | base64 -d | openssl x509 -noout -dates
+├── 3. 检查网络
+│   └── kubectl exec -it <pod> -- curl -k https://<service>.<ns>.svc:443/healthz
+├── 4. 检查 RBAC
+│   └── kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
+└── 5. 查看 kube-apiserver 日志
+    └── kubectl logs -n kube-system kube-apiserver-<node> | grep -i "aggregat"
+```
+
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

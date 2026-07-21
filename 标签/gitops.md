@@ -1,17 +1,46 @@
 ---
 title: gitops
-description: All pages tagged with gitops
+description: GitOps 标签枢纽 — 涵盖 ArgoCD、Flux、渐进式交付、CI/CD 管道、声明式基础设施、多集群 GitOps 等全部 GitOps 领域知识
 category: tag-index
 tags:
 - gitops
-tier: supporting
+- argocd
+- flux
+- progressive-delivery
+- ci-cd
+- declarative
+tier: core
+difficulty: intermediate
+domain: release-management
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # gitops Tag Hub
 
 > GitOps 领域页面 — ArgoCD、Flux、GitOps 模式、渐进式交付、CI/CD 管道等。
+
+## 核心定义
+
+**GitOps** 是一种以 Git 仓库为唯一事实来源（Single Source of Truth）来管理基础设施和应用的运维方法论。通过声明式配置 + 自动化调和循环，实现可审计、可回滚、可重现的持续交付。
+
+### GitOps 四大原则
+
+| 原则 | 描述 |
+|------|------|
+| 声明式 | 系统期望状态以声明式方式定义 |
+| 版本化 | 期望状态存储在 Git 中，可追溯 |
+| 自动调和 | 持续将实际状态向期望状态收敛 |
+| 可审计 | 所有变更通过 Git 历史可审计 |
+
+### GitOps 工具对比
+
+| 工具 | 模式 | 多集群 | 渐进式交付 | 特色 |
+|------|------|--------|------------|------|
+| ArgoCD | Pull | 支持 | Argo Rollouts | UI 友好、Application CRD |
+| Flux | Pull | 支持 | Flagger | 轻量、Kustomize 原生 |
+| Fleet | Pull | 原生 | 支持 | Rancher 生态、大规模 |
 
 ## GitOps 平台 (GitOps Platforms)
 

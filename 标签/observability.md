@@ -1,17 +1,72 @@
 ---
 title: observability
-description: All pages tagged with observability
+description: 可观测性标签枢纽 — 涵盖 Prometheus、Grafana、Loki、Jaeger、OpenTelemetry、SLO/SLI、告警管理、eBPF 可观测等全部可观测性领域知识
 category: tag-index
 tags:
 - observability
-tier: supporting
+- prometheus
+- grafana
+- opentelemetry
+- logging
+- tracing
+- slo
+tier: core
+difficulty: intermediate-to-advanced
+domain: observability
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # observability Tag Hub
 
 > 可观测性领域页面 — Prometheus、Grafana、Loki、Jaeger、OpenTelemetry、SLO/SLI 等。
+
+## 核心定义
+
+**可观测性（Observability）** 是通过系统的外部输出（指标、日志、追踪）来理解系统内部状态的能力。在 Kubernetes 环境中，可观测性是生产运营、故障诊断、性能优化的基础。
+
+### 三大支柱 (Three Pillars)
+
+| 支柱 | 数据特征 | 典型工具 | 适用场景 |
+|------|----------|----------|----------|
+| 指标 (Metrics) | 数值型、聚合、时间序列 | Prometheus, Thanos, VictoriaMetrics | 趋势、告警、SLO |
+| 日志 (Logs) | 事件型、离散、文本 | Loki, ELK, Fluent Bit | 错误详情、审计 |
+| 追踪 (Traces) | 因果型、分布式、调用链 | Jaeger, Tempo, Zipkin | 延迟分析、依赖拓扑 |
+
+### 可观测性架构全景
+
+```
+应用层:    OpenTelemetry SDK / eBPF 探针
+              │            │            │
+采集层:    Prometheus    Fluent Bit    OTel Collector
+              │            │            │
+存储层:    Thanos/Mimir    Loki        Tempo
+              │            │            │
+展示层:    Grafana (统一可视化 + 关联查询)
+              │
+决策层:    Alertmanager → On-Call → SLO 决策
+```
+
+## 生产实践要点
+
+### 监控关键指标 (USE/RED)
+
+| 方法 | 指标 | 适用对象 |
+|------|------|----------|
+| USE | Utilization, Saturation, Errors | 基础设施 (节点/磁盘/网络) |
+| RED | Rate, Errors, Duration | 服务 (API/微服务) |
+| Four Golden Signals | Latency, Traffic, Errors, Saturation | 全局 |
+
+### 告警最佳实践
+
+| 原则 | 描述 |
+|------|------|
+| 可操作 | 每条告警必须有 Runbook |
+| 分级 | P1(立即) / P2(尽快) / P3(工作日) |
+| 基于 SLO | 用错误预算消耗率触发 |
+| 避免告警风暴 | 分组、抑制、静默 |
+| 定期审计 | 删除无人处理的告警 |
 
 ## 总览 (Overview)
 

@@ -1,17 +1,51 @@
 ---
 title: reliability
-description: All pages tagged with reliability
+description: 可靠性工程标签枢纽 — 涵盖 SLO/SLI、混沌工程、灾难恢复、容量规划、事后复盘、性能测试、备份恢复等全部可靠性领域知识
 category: tag-index
 tags:
 - reliability
-tier: supporting
+- slo
+- chaos-engineering
+- disaster-recovery
+- capacity-planning
+- resilience
+tier: core
+difficulty: intermediate-to-advanced
+domain: reliability
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # reliability Tag Hub
 
 > 可靠性领域页面 — SLO、混沌工程、灾备、容量规划、事后复盘、性能测试等。
+
+## 核心定义
+
+**可靠性工程（Reliability Engineering）** 是确保系统在约定服务水平内持续可用、可恢复的系统化实践。它通过 SLO 驱动决策、混沌工程验证韧性、灾难恢复保障业务连续性。
+
+### 可靠性核心能力
+
+| 能力域 | 描述 | 关键工具/方法 |
+|--------|------|---------------|
+| SLO 工程 | 定义、度量、决策 | Prometheus + Sloth |
+| 混沌工程 | 主动注入故障验证韧性 | Chaos Mesh, LitmusChaos |
+| 灾难恢复 | 备份、切换、恢复 | Velero, etcd backup |
+| 容量规划 | 资源预测与扩缩容 | 历史数据 + 预测模型 |
+| 事后复盘 | 无责复盘与改进 | Blameless Postmortem |
+| 性能测试 | 负载、压力、耐久测试 | k6, Locust, wrk2 |
+| 备份恢复 | 数据保护与恢复演练 | Velero, VolumeSnapshot |
+
+### 可靠性指标体系
+
+| 指标 | 定义 | 典型目标 |
+|------|------|----------|
+| 可用性 (Availability) | 系统可用时间比例 | 99.9% (年停机 < 8.76h) |
+| RTO | 恢复时间目标 | < 30 分钟 |
+| RPO | 恢复点目标 | < 5 分钟 |
+| MTTR | 平均修复时间 | < 15 分钟 |
+| MTBF | 平均故障间隔 | > 720 小时 |
 
 ## SRE 实践 (SRE Practices)
 

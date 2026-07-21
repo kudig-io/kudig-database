@@ -1,7 +1,7 @@
 ---
 title: Production Operations
-description: 原 生产运维 精简后的生产运维知识，聚焦 FinOps、治理、事件响应和绿色计算。
-summary: 原 生产运维 精简后的生产运维知识，聚焦 FinOps、治理、事件响应和绿色计算。
+description: 生产运维知识域 — FinOps 成本治理、集群治理、事件响应、绿色计算、工单案例、回复话术
+summary: 生产运维知识域入口，涵盖成本优化与 FinOps、集群治理与合规、事件响应与 On-Call、绿色计算、工单案例库、回复话术模板
 category: domain
 tags:
 - finops
@@ -9,29 +9,16 @@ tags:
 - incident-response
 - governance
 - green-computing
-- daemonset
-- gpu
+- operations
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
+- SRE
 - 所有工程师
+- 平台团队
 estimated_read_time: 5min
-intent_queries:
-- Production Operations 是什么
-- 如何 Production Operations
-- Kubernetes 11 production operations 最佳实践
-trigger_keywords:
-- Production
-- Operations
-- production
-- operations
-prerequisites:
-- kubectl-basics
-- gpu-ml-basics
-- gpu-scheduling-basics
 ---
 # 生产运维 Production Ops
 
@@ -39,12 +26,14 @@ prerequisites:
 
 ## 二级子目录
 
-- [[生产运维/事件响应/README.md|事件响应]]
-- [[生产运维/回复话术/README.md|回复话术]]
-- [[生产运维/工单案例/README.md|工单案例]]
-- [[生产运维/成本治理/README.md|成本治理]]
-- [[生产运维/绿色计算/README.md|绿色计算]]
-- [[生产运维/集群治理/README.md|集群治理]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[生产运维/成本治理/README.md\|成本治理/]] | FinOps | 资源右调优、Spot/RI、成本分摊、Kubecost |
+| [[生产运维/集群治理/README.md\|集群治理/]] | 治理 | OPA/Gatekeeper、准入控制、合规审计 |
+| [[生产运维/事件响应/README.md\|事件响应/]] | 事件 | On-Call 流程、严重级定义、升级路径、复盘 |
+| [[生产运维/绿色计算/README.md\|绿色计算/]] | 绿色 | 碳排放监控、能效优化、调度策略 |
+| [[生产运维/工单案例/README.md\|工单案例/]] | 工单 | 典型故障工单、处理流程、知识沉淀 |
+| [[生产运维/回复话术/README.md\|回复话术/]] | 话术 | 客户沟通模板、状态通报、SLA 说明 |
 
 ## 跨域导航
 

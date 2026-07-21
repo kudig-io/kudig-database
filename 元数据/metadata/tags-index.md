@@ -1,51 +1,25 @@
 ---
-title: 标签索引 (Tags Index) [metadata]
-description: '- domain-1: 架构概览、核心组件、性能调优'
-summary: '- domain-1: 架构概览、核心组件、性能调优'
-category: general
+title: 标签索引 (Tags Index)
+description: 按技术标签聚合的文档索引，支持按主题快速检索知识库内容
+summary: 按核心技术组件、网络、存储、安全、可观测性、AI/ML、方法论等维度聚合的文档索引
+category: references
 tags:
-- k8s
-- etcd
-- apiserver
-- scheduler
-- prometheus
-- ingress
-- gateway
-- rbac
-- networkpolicy
-- gpu
-tier: peripheral
+- tags-index
+- meta
+- navigation
+- search
+tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+last_updated: '2026-07-21'
+difficulty: beginner
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- 标签索引 (Tags Index) 是什么
-- 如何 标签索引 (Tags Index)
-trigger_keywords:
-- 标签索引
-- Tags
-- Index
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- etcd-basics
-- gpu-scheduling-basics
 ---
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
 
 # 标签索引 (Tags Index)
 
-> 按技术标签聚合的文档索引，便于按主题快速检索
+> 按技术标签聚合的文档索引，便于按主题快速检索。标签定义见 [[元数据/taxonomy.md|Tag Taxonomy]]。
 
 ---
 
@@ -178,7 +152,49 @@ prerequisites:
 
 ---
 
-> 本索引将随文档 Frontmatter 的逐步添加而自动化生成
+## 平台与工程
 
+### gitops
+- [[发布变更/GitOps/]] — GitOps 工作流、ArgoCD、Flux
+- [[标签/gitops|gitops 标签枢纽]]
 
-<!-- risk-assessed -->
+### helm
+- [[清单模式/Helm值模式/]] — Helm Chart 配置参考
+- [[标签/helm|helm 标签枢纽]]
+
+### operator
+- [[数据库中间件/Operator管理/]] — Operator 开发与管理
+- [[标签/operator|operator 标签枢纽]]
+
+---
+
+## 容器运行时
+
+### docker
+- [[容器运行时/Docker/]] — Docker 架构与运维
+- [[标签/containerd|containerd 标签枢纽]]
+
+### containerd
+- [[容器运行时/containerd-CRI-O/]] — containerd/CRI-O 运行时
+
+---
+
+## 可靠性
+
+### sre
+- [[可靠性/SRE实践/]] — SRE 方法论与实践
+- [[标签/sre|sre 标签枢纽]]
+
+### chaos-engineering
+- [[可靠性/混沌工程/]] — 混沌工程实践
+
+---
+
+> 本索引将随文档 Frontmatter 的逐步添加而自动化生成。
+> 标签定义权威源：[[元数据/taxonomy.md|Tag Taxonomy]]
+
+## Related
+
+- [[元数据/taxonomy.md|Tag Taxonomy]] — 标签定义权威源
+- [[元数据/metadata/difficulty-index.md|难度分级索引]] — 按难度检索
+- [[元数据/metadata/knowledge-map.md|知识图谱]] — 模块依赖关系

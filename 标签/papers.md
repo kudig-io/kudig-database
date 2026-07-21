@@ -1,17 +1,28 @@
 ---
-title: #papers Tag Hub
-category: tags
-tags: [papers, meta, visibility/public]
-sources: []
-created: "2026-06-26"
-updated: "2026-06-26"
-summary: "Hub page collecting all pages tagged with #papers."
+title: papers
+description: 论文研究标签枢纽 — 收集所有标记为 papers 的学术论文解读、技术白皮书分析、行业报告等
+category: tag-index
+tags:
+- papers
+- meta
+- academic
 tier: supporting
+created: '2026-06-26'
+last_updated: '2026-07-21'
 ---
 
-# #papers Tag Hub
+# papers Tag Hub
 
-> 共 21 个页面带有 `#papers` 标签。
+> 论文研究文档集合 — 学术论文解读、技术白皮书分析、行业报告等。
+
+## 标签定义
+
+**papers** 标签用于标识基于学术论文、技术白皮书、行业报告等权威来源的深度分析文档。这类文档通常包含：
+- 论文核心观点提炼
+- 技术原理深度解析
+- 生产环境落地方案
+- 与现有实践的对比分析
+
 
 ## Pages
 

@@ -1,45 +1,27 @@
 ---
 title: AI 语料库配置 (Corpus Config)
-description: '# AI 语料库配置 (Corpus Config)'
-summary: '# AI 语料库配置 (Corpus Config)'
-category: general
+description: 面向 RAG/NotebookLM/AI Agent 的语料配置和最佳实践，含分块策略、Embedding 选型、场景化 Profile
+summary: KUDIG 知识库作为 AI 语料的配置指南，涵盖分块策略、Embedding 模型选型、场景化 Profile 配置和向量化 Pipeline
+category: references
 tags:
-- k8s
 - rag
+- embedding
+- corpus-config
 - agent
-- daemonset
-- gpu
-tier: peripheral
+- pipeline
+tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- AI 语料库配置 (Corpus Config) 是什么
-- 如何 AI 语料库配置 (Corpus Config)
-trigger_keywords:
-- AI
-- 语料库配置
-- Corpus
-- Config
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
+- AI 工程师
+- 平台工程师
+estimated_read_time: 8min
 ---
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
 
 # AI 语料库配置 (Corpus Config)
 
-> 面向 NotebookLM / IMA / RAG 等 AI 场景的语料配置和最佳实践
+> 面向 NotebookLM / IMA / RAG / AI Agent 等场景的语料配置和最佳实践。本目录定义了如何将 KUDIG 知识库转化为高质量的向量化语料。
 
 ---
 
@@ -78,28 +60,29 @@ _meta/corpus-config/
 | K8s 学习助手 | topic-learn + topic-cheat-sheet + domain-1~6 | [rag-learning-profile.yaml](./profiles/rag-learning-profile.yaml) |
 | 全知识库 | 全部目录 | [rag-full-profile.yaml](./profiles/rag-full-profile.yaml) |
 
+## 语料质量保障
+
+### 质量检查清单
+
+| 检查项 | 标准 | 工具 |
+|--------|------|------|
+| Frontmatter 完整性 | title + tags + category 必填 | `--evaluate` 模式 |
+| 标题层级规范 | H1 唯一，H2/H3 递进 | Markdown lint |
+| 内容完整性 | 无空章节、无 TODO | 手动审计 |
+| 交叉引用有效性 | wikilink 指向存在的文件 | lint/fix 流程 |
+| 分块友好性 | 每个 H2 章节可独立理解 | 分块测试 |
+
+### 语料更新流程
+
+```
+1. 内容修改 → 2. 运行 --evaluate 检查质量
+     → 3. 运行 --incremental 增量更新向量
+     → 4. 运行 --search 验证检索效果
+```
+
 ## Related
 
-- Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- 网络 MOC — Cross-reference
-- Topic 应用层架构设计最佳实践 — Cross-reference
-- topic-application-architecture MOC — Cross-reference
-- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- 发布变更 MOC — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
-- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
-
-<!-- risk-assessed -->
+- [[元数据/corpus-config/rag-chunking-strategy.md|RAG 分块策略]] — 分块方法详解
+- [[元数据/corpus-config/embedding-guide.md|Embedding Pipeline]] — 向量化完整流程
+- [[元数据/schema.md|Wiki Schema]] — Frontmatter 规范
+- [[元数据/taxonomy.md|Tag Taxonomy]] — 标签体系

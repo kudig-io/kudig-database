@@ -1,45 +1,43 @@
 ---
 title: Manifests & Patterns
-description: 原 清单模式 的 YAML 清单与资源配置参考手册。
-summary: 原 清单模式 的 YAML 清单与资源配置参考手册。
+description: 清单模式知识域 — YAML 参考、Kustomize/Helm/Operator 高级模式、GitOps/安全/AI/弹性/平台清单模式
+summary: 清单模式知识域入口，涵盖 YAML 资源规范、Kustomize 覆盖策略、Helm Chart 工程化、Operator 开发模式、GitOps 声明式清单、安全与弹性模式
+
 category: domain
 tags:
 - yaml
 - manifests
-- resource-spec
-- configuration
-- daemonset
-- gpu
+- kustomize
+- helm
+- operator
+- gitops
+- patterns
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
+- 架构师
 estimated_read_time: 5min
-intent_queries:
-- Manifests & Patterns 是什么
-- 如何 Manifests & Patterns
-- Kubernetes 18 manifests patterns 最佳实践
-trigger_keywords:
-- Manifests
-- Patterns
-- manifests
-- patterns
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
 ---
 # 清单模式 Manifests & Patterns
 
-> YAML 参考、Kustomize 模式与 Helm 值模式。
+> YAML 参考、Kustomize 模式、Helm 值模式、Operator 模式与领域专用清单模式集。
 
 ## 二级子目录
 
-- [[清单模式/Helm值模式/README.md|Helm值模式]]
-- [[清单模式/Kustomize模式/README.md|Kustomize模式]]
-- [[清单模式/YAML参考/README.md|YAML参考]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[清单模式/YAML参考/README.md\|YAML参考/]] | 资源规范 | Pod/Deployment/Service YAML 字段详解 |
+| [[清单模式/Kustomize模式/README.md\|Kustomize模式/]] | Kustomize | Base/Overlay、patchesStrategicMerge、Generator |
+| [[清单模式/Helm值模式/README.md\|Helm值模式/]] | Helm | Chart 结构、values 覆盖、模板函数、依赖管理 |
+| [[清单模式/Operator模式/README.md\|Operator模式/]] | Operator | CRD 设计、Reconcile 循环、Kubebuilder/Operator SDK |
+| [[清单模式/04-gitops-patterns/README.md\|04-gitops-patterns/]] | GitOps 清单 | ArgoCD Application、Sync Policy、App-of-Apps |
+| [[清单模式/05-security-patterns/README.md\|05-security-patterns/]] | 安全清单 | NetworkPolicy、PodSecurity、RBAC 模板 |
+| [[清单模式/06-ai-ml-patterns/README.md\|06-ai-ml-patterns/]] | AI/ML 清单 | GPU 调度、训练 Job、推理服务模板 |
+| [[清单模式/07-resilience-patterns/README.md\|07-resilience-patterns/]] | 弹性清单 | PDB、HPA/VPA、拓扑分布、优先级 |
+| [[清单模式/08-platform-patterns/README.md\|08-platform-patterns/]] | 平台清单 | Namespace 治理、ResourceQuota、LimitRange |
 
 ## 跨域导航
 

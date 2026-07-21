@@ -1,17 +1,28 @@
 ---
-title: #research Tag Hub
-category: tags
-tags: [research, meta, visibility/public]
-sources: []
-created: "2026-06-26"
-updated: "2026-06-26"
-summary: "Hub page collecting all pages tagged with #research."
+title: research
+description: 研究专题标签枢纽 — 收集所有标记为 research 的技术调研、方案对比、前沿探索等研究性文档
+category: tag-index
+tags:
+- research
+- meta
+- investigation
 tier: supporting
+created: '2026-06-26'
+last_updated: '2026-07-21'
 ---
 
-# #research Tag Hub
+# research Tag Hub
 
-> 共 43 个页面带有 `#research` 标签。
+> 研究专题文档集合 — 技术调研、方案对比、前沿探索、可行性分析等。
+
+## 标签定义
+
+**research** 标签用于标识对某一技术方向进行系统性调研的文档。这类文档通常包含：
+- 技术背景与问题定义
+- 方案对比与优劣势分析
+- 可行性验证与 PoC
+- 落地建议与路线图
+
 
 ## Pages
 

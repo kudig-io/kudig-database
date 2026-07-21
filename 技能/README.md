@@ -1,39 +1,23 @@
 ---
-title: FTA 故障树清单索引 (skills)
-description: '## 概述'
-summary: '本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：'
-category: skills
+title: Skills & Training
+description: 技能知识域 — FTA 故障树索引、故障诊断技能体系、培训路径、最佳实践
+summary: 技能知识域入口，涵盖 FTA 故障树分析索引、故障诊断技能树、培训体系、运维最佳实践
+category: domain
 tags:
-- k8s
+- skills
+- training
 - fta
 - troubleshooting
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- coredns
-- docker
-tier: peripheral
+- best-practices
+tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
+- SRE
+- 新人
 estimated_read_time: 15min
-intent_queries:
-- FTA 故障树清单索引 是什么
-- 如何 FTA 故障树清单索引
-trigger_keywords:
-- FTA
-- 故障树清单索引
-prerequisites:
-- kubectl-basics
-- ebpf-basics
-- etcd-basics
-- gpu-scheduling-basics
-- tls-basics
 ---
 
 > **生产环境安全提示**
@@ -43,9 +27,9 @@ prerequisites:
 
 
 
-# FTA 故障树清单索引
+# 技能 Skills & Training
 
-# FTA 故障树清单索引
+## FTA 故障树索引
 
 > **文档数量**: 36 个故障树 | **总大小**: ~1.2 MB | **最后更新**: 2026-03-02
 

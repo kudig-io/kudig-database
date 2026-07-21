@@ -1,17 +1,84 @@
 ---
 title: networking
-description: All pages tagged with networking
+description: 网络技术标签枢纽 — 涵盖 CNI、Service Mesh、Ingress、DNS、eBPF、Gateway API、网络策略、多集群网络等全部网络领域知识
 category: tag-index
 tags:
 - networking
-tier: supporting
+- cni
+- service-mesh
+- ingress
+- dns
+- ebpf
+- gateway-api
+tier: core
+difficulty: intermediate-to-advanced
+domain: networking
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # networking Tag Hub
 
 > 网络领域页面 — CNI、Service Mesh、Ingress、DNS、eBPF、Gateway API、网络策略等。
+
+## 核心定义
+
+**Kubernetes 网络**是容器编排平台中最复杂的子系统之一，负责 Pod 间通信、服务发现、外部流量入口、网络策略隔离等核心功能。它基于 CNI（Container Network Interface）插件体系，支持多种网络实现方案。
+
+### 网络模型核心原则
+
+1. **每个 Pod 拥有独立 IP**：Pod 内所有容器共享网络命名空间
+2. **Pod 间无 NAT 通信**：任何 Pod 可直接通过 IP 访问其他 Pod
+3. **节点与 Pod 无 NAT**：节点可直接通过 Pod IP 访问 Pod
+4. **Service 抽象**：通过虚拟 IP 提供稳定的服务访问入口
+
+### 网络技术栈全景
+
+| 层级 | 技术 | 功能 |
+|------|------|------|
+| L2/L3 网络 | CNI (Calico/Cilium/Flannel/Terway) | Pod 网络连通性 |
+| L4 负载均衡 | kube-proxy (iptables/IPVS/nftables) | Service 流量分发 |
+| L7 入口 | Ingress Controller / Gateway API | HTTP/gRPC 路由 |
+| 服务网格 | Istio / Linkerd / Cilium Mesh | mTLS、流量管理、可观测 |
+| DNS | CoreDNS / NodeLocal DNS | 服务发现 |
+| 网络策略 | NetworkPolicy / CiliumNetworkPolicy | 微分段隔离 |
+| 多集群 | Submariner / Cilium Cluster Mesh | 跨集群连通 |
+| 可编程网络 | eBPF / XDP | 高性能数据平面 |
+
+### CNI 插件对比
+
+| CNI | 数据平面 | 网络策略 | 性能 | 特色 |
+|-----|----------|----------|------|------|
+| Cilium | eBPF | L3/L4/L7 | 极高 | Hubble 可观测、Tetragon 安全 |
+| Calico | BGP/VXLAN | L3/L4 | 高 | Felix+Typha 架构、企业版 |
+| Flannel | VXLAN/host-gw | 无 | 中 | 简单稳定、无策略能力 |
+| Terway | ENI/ENIIP | L3/L4 | 高 | 阿里云原生、VPC 直通 |
+| Weave | VXLAN | L3/L4 | 中 | 加密、多集群 |
+| Antrea | OVS | L3/L4/L7 | 高 | 企业网络特性 |
+
+## 生产实践要点
+
+### 网络性能基准
+
+| 指标 | 目标 | 度量工具 |
+|------|------|----------|
+| Pod-to-Pod 延迟 | < 1ms (同节点), < 2ms (跨节点) | netperf, iperf3 |
+| Service 转发延迟 | < 0.5ms (IPVS) | curl -w |
+| DNS 解析延迟 | < 5ms (P99) | dig, nslookup |
+| Ingress 吐吐量 | > 10K RPS (Nginx) | wrk, k6 |
+| 网络策略延迟 | < 0.1ms (eBPF) | cilium metrics |
+
+### 常见网络故障快速定位
+
+| 症状 | 可能原因 | 排查命令 |
+|------|----------|----------|
+| Pod 无法解析 DNS | CoreDNS 异常/NodeLocal DNS 未部署 | `kubectl logs -n kube-system -l k8s-app=kube-dns` |
+| Service 无法访问 | Endpoint 为空/kube-proxy 异常 | `kubectl get ep <svc>` |
+| 跨节点 Pod 不通 | CNI 路由/MTU 问题 | `ip route`, `ping -s 1472` |
+| Ingress 502 | 后端 Pod 未就绪/超时 | `kubectl logs -n ingress-nginx` |
+| NetworkPolicy 不生效 | CNI 不支持/标签不匹配 | `kubectl describe networkpolicy` |
+| 外部无法访问 LB | 云 LB 健康检查失败 | 检查 nodePort + 安全组 |
 
 ## K8s 网络核心 (K8s Networking Core)
 

@@ -1,50 +1,39 @@
 ---
 title: AI/ML Infrastructure
-description: 整合原 AI基础设施/41 的 AI 基础设施知识，涵盖 GPU 调度、分布式训练、AI Agent 和 MLOps。
-summary: 整合原 AI基础设施/41 的 AI 基础设施知识，涵盖 GPU 调度、分布式训练、AI Agent 和 MLOps。
+description: AI 基础设施知识域 — GPU 调度、分布式训练、MLOps、AI Agent、推理服务、RAG、AI 编码
+summary: AI 基础设施知识域入口，涵盖 GPU 调度与资源管理、分布式训练框架、MLOps 流水线、AI Agent 架构、推理服务部署、RAG 系统、AI 编码工具
 category: domain
 tags:
 - ai
 - ml
 - gpu
-- scheduling
+- mlops
 - distributed-training
 - agent
 - rag
-- daemonset
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+last_updated: '2026-07-21'
+difficulty: advanced
 audience:
-- 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- AI/ML Infrastructure 是什么
-- 如何 AI/ML Infrastructure
-- Kubernetes 14 ai ml infra 最佳实践
-trigger_keywords:
-- AI
-- ML
-- Infrastructure
-- ai
-- ml
-- infra
-prerequisites:
-- kubectl-basics
-- gpu-scheduling-basics
+- AI 工程师
+- 平台团队
+- 架构师
+estimated_read_time: 10min
 ---
 # AI 基础设施 AI Infra
 
-> AI 基础设施、AI-Agents、Agent 运行时与 AI 编码。
+> GPU 调度、分布式训练、MLOps、AI Agent、推理服务与 AI 编码。
 
 ## 二级子目录
 
-- [[AI基础设施/AI-Agents/README.md|AI-Agents]]
-- [[AI基础设施/AI编码/README.md|AI编码]]
-- [[AI基础设施/Agent运行时/README.md|Agent运行时]]
-- [[AI基础设施/基础设施/README.md|基础设施]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[AI基础设施/基础设施/README.md\|基础设施/]] | GPU/硬件 | GPU 调度、NCCL、存储、网络拓扑 |
+| [[AI基础设施/K8s-AI基础设施/README.md\|K8s-AI基础设施/]] | K8s AI | Volcano/Kueue、Training Operator、MIG |
+| [[AI基础设施/AI-Agents/README.md\|AI-Agents/]] | Agent | LLM Agent、多智能体、Tool Use、Memory |
+| [[AI基础设施/Agent运行时/README.md\|Agent运行时/]] | 运行时 | Agent 容器化、沙箱、资源隔离、调度 |
+| [[AI基础设施/AI编码/README.md\|AI编码/]] | AI 编码 | Copilot/Cursor、代码生成、AI 辅助开发 |
 
 ## 跨域导航
 

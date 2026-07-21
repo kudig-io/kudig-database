@@ -1,19 +1,22 @@
 ---
-title: Synthesis 目录索引
-summary: Synthesis 目录索引
-category: index
+title: Concepts & Synthesis
+description: 概念知识域 — 跨域综合分析、概念交叉知识、案例研究、生产故障分析
+summary: 概念知识域入口，涵盖 K8s 核心概念交叉分析、apiserver/etcd 关联知识、安全/可观测性/发布综合文档、生产案例研究
+category: domain
 tags:
-- index
+- concepts
 - synthesis
 - cross-cutting
-- visibility/public
-tier: supporting
-sources:
-- synthesis/
-created: 2026-05-24
-updated: 2026-05-24
-last_updated: 2026-05-24
-status: reviewed
+- case-studies
+tier: core
+created: '2026-05-24'
+last_updated: '2026-07-21'
+difficulty: advanced
+audience:
+- 所有工程师
+- 架构师
+- SRE
+estimated_read_time: 15min
 ---
 
 > **生产环境安全提示**
@@ -23,7 +26,7 @@ status: reviewed
 
 
 
-# Synthesis 目录索引
+# 概念 Concepts & Synthesis
 
 > 跨领域综合分析页面，连接多个概念和域的交叉知识。
 

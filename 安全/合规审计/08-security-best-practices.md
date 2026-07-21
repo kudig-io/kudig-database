@@ -211,7 +211,198 @@ kubectl logs -f job/kube-bench
 ```
 ---
 
-**安全原则**: 纵深防御，最小权限，持续审计
+## 供应链安全
+
+| 实践领域 | 最佳实践 | 实施工具 | 优先级 | 说明 |
+|---------|---------|---------|--------|------|
+| **镜像签名** | 所有镜像必须签名 | Cosign/Notary | P0 | 防止镜像篡改 |
+| **镜像扫描** | CI 中自动扫描漏洞 | Trivy/Grype | P0 | 阻断高危漏洞 |
+| **基础镜像** | 使用最小化基础镜像 | distroless/alpine | P1 | 减少攻击面 |
+| **SBOM** | 生成软件物料清单 | Syft/cosign | P1 | 依赖追溯 |
+| **构建可重现** | 固定依赖版本 | go.sum/package-lock | P1 | 防止供应链注入 |
+| **私有 Registry** | 不直接拉取公网镜像 | Harbor/ECR/ACR | P0 | 控制镜像来源 |
+| **准入验证** | 拒绝未签名镜像 | Kyverno/cosign-webhook | P0 | 强制签名验证 |
+
+### 镜像签名与验证
+
+```bash
+# 签名镜像
+cosign sign --key cosign.key registry.example.com/app:v1.0.0
+
+# 验证签名
+cosign verify --key cosign.pub registry.example.com/app:v1.0.0
+
+# Kyverno 策略：拒绝未签名镜像
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: verify-image-signature
+# spec:
+#   validationFailureAction: Enforce
+#   rules:
+#     - name: verify-signature
+#       match:
+#         resources:
+#           kinds: ["Pod"]
+#       verifyImages:
+#         - imageReferences: ["registry.example.com/*"]
+#           attestors:
+#             - entries:
+#                 - keys:
+#                     publicKeys: |-
+#                       -----BEGIN PUBLIC KEY-----
+#                       ...
+#                       -----END PUBLIC KEY-----
+```
+
+## 运行时安全
+
+| 实践领域 | 最佳实践 | 实施工具 | 优先级 | 说明 |
+|---------|---------|---------|--------|------|
+| **只读根文件系统** | readOnlyRootFilesystem: true | PSA Restricted | P0 | 防止写入恶意文件 |
+| **禁止特权容器** | privileged: false | PSA/Kyverno | P0 | 防止容器逃逸 |
+| **限制 Capabilities** | drop ALL, add 必要 | PSA Restricted | P0 | 最小内核权限 |
+| **Seccomp** | RuntimeDefault profile | PSA | P1 | 限制系统调用 |
+| **运行时检测** | 异常行为检测 | Falco/Tetragon | P1 | 实时威胁发现 |
+| **文件完整性** | 关键文件监控 | AIDE/Tetragon | P2 | 篡改检测 |
+
+### Falco 运行时检测规则
+
+```yaml
+# 自定义 Falco 规则
+- rule: Detect Shell in Container
+  desc: 检测容器内启动 Shell
+  condition: >
+    spawned_process and container and
+    proc.name in (bash, sh, zsh, csh)
+  output: >
+    Shell opened in container
+    (user=%user.name container=%container.name
+     shell=%proc.name parent=%proc.pname
+     cmdline=%proc.cmdline)
+  priority: WARNING
+  tags: [container, shell, mitre_execution]
+
+- rule: Detect Sensitive File Access
+  desc: 检测访问敏感文件
+  condition: >
+    open_read and container and
+    fd.name in (/etc/shadow, /etc/passwd, /root/.ssh/*)
+  output: >
+    Sensitive file accessed in container
+    (user=%user.name file=%fd.name container=%container.name)
+  priority: CRITICAL
+  tags: [container, filesystem, mitre_credential_access]
+
+- rule: Detect Outbound Connection to Crypto Pool
+  desc: 检测到挖矿池的出站连接
+  condition: >
+    outbound and container and
+    fd.sip in (mining_pool_ips)
+  output: >
+    Outbound connection to crypto mining pool
+    (container=%container.name ip=%fd.sip port=%fd.sport)
+  priority: CRITICAL
+  tags: [container, network, crypto, mitre_impact]
+```
+
+## 安全扫描自动化
+
+### CI/CD 安全门禁
+
+```yaml
+# GitHub Actions 安全扫描流水线
+name: Security Gate
+on: [pull_request]
+
+jobs:
+  image-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Image
+        run: docker build -t app:${{ github.sha }} .
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: app:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          exit-code: '1'  # 发现高危则失败
+      - name: Secret Scan
+        run: trivy fs --scanners secret --exit-code 1 .
+
+  manifest-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: K8s Config Scan
+        run: trivy config --exit-code 1 --severity HIGH,CRITICAL k8s/
+      - name: Policy Check
+        run: conftest test k8s/ --policy policies/
+```
+
+### 定期安全审计
+
+```bash
+#!/bin/bash
+# security-audit.sh — 周度安全审计
+
+echo "=== 安全审计 $(date) ==="
+
+# 1. 检查特权容器
+echo "--- 特权容器 ---"
+kubectl get pods -A -o json | jq -r '.items[] |
+  select(.spec.containers[].securityContext.privileged == true) |
+  "\(.metadata.namespace)/\(.metadata.name)"'
+
+# 2. 检查使用 default SA 的 Pod
+echo "--- 使用 default SA ---"
+kubectl get pods -A -o json | jq -r '.items[] |
+  select(.spec.serviceAccountName == "default" or .spec.serviceAccountName == null) |
+  "\(.metadata.namespace)/\(.metadata.name)"' | head -20
+
+# 3. 检查无资源限制的 Pod
+echo "--- 无资源限制 ---"
+kubectl get pods -A -o json | jq -r '.items[] |
+  select(.spec.containers[].resources.limits == null) |
+  "\(.metadata.namespace)/\(.metadata.name)"' | head -20
+
+# 4. 检查 cluster-admin 绑定
+echo "--- cluster-admin 绑定 ---"
+kubectl get clusterrolebindings -o json | jq -r '.items[] |
+  select(.roleRef.name == "cluster-admin") |
+  "\(.metadata.name): \(.subjects[]?.name)"'
+
+# 5. 检查过期证书
+echo "--- 证书状态 ---"
+kubectl get certificates -A -o json 2>/dev/null | jq -r '.items[] |
+  select(.status.conditions[]?.type == "Ready") |
+  select(.status.conditions[]?.status != "True") |
+  "\(.metadata.namespace)/\(.metadata.name): NOT READY"'
+
+echo "=== 审计完成 ==="
+```
+
+## 安全成熟度模型
+
+```
+Level 1: 基础安全
+└── PSA baseline + 基本 RBAC + 镜像扫描
+
+Level 2: 标准化安全
+└── PSA restricted + NetworkPolicy + Secret 加密 + 签名验证
+
+Level 3: 深度防御
+└── 运行时检测 + 策略即代码 + 供应链安全 + mTLS
+
+Level 4: 零信任
+└── 持续验证 + 微分段 + SPIFFE 身份 + 自动修复
+
+Level 5: 自适应安全
+└── AI 威胁检测 + 自动响应 + 混沌安全演练 + 合规自动化
+```
+
+**安全原则**: 纵深防御，最小权限，持续审计，零信任
 
 ---
 

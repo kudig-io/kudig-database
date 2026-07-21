@@ -1,16 +1,28 @@
 ---
-title: "Archives 归档索引"
-category: index
-tags: ["index", "archives", "historical", "visibility/public"]
-sources: ["_archives/"]
-created: 2026-05-24
-updated: 2026-05-24
-status: reviewed
+title: Archives
+description: 归档知识域 — 历史文档、旧版内容、发布计划、故障诊断历史版本
+category: domain
+tags:
+- archives
+- historical
+- legacy
+tier: peripheral
+created: '2026-05-24'
+last_updated: '2026-07-21'
 ---
+# 归档 Archives
 
-# Archives 归档索引
+> 历史归档文件和旧版内容，保留供参考。
 
-> 历史归档文件和旧版内容。
+## 二级子目录
+
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[归档/topic-publish/README.md\|topic-publish/]] | 发布计划 | 内容发布路线图、视频脚本 |
+| [[归档/troubleshooting-diagnostics/README.md\|troubleshooting-diagnostics/]] | 故障诊断 | FEBM/结构化排障历史版本 |
+| [[归档/domain-indexes/README.md\|domain-indexes/]] | 域索引 | 历史域索引文件 |
+| [[归档/release-notes/README.md\|release-notes/]] | 发布说明 | 历史版本发布说明 |
+| [[归档/pending-topics/README.md\|pending-topics/]] | 待处理 | 待整理话题 |
 
 - [[归档/topic-publish/01-plan-ai-infra-series|01-plan-ai-infra-series]]
 - [[归档/topic-publish/02-plan-k8s-ack-series|02-plan-k8s-ack-series]]

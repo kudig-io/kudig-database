@@ -1,7 +1,7 @@
 ---
 title: Storage & Data
-description: 整合原 存储/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
-summary: 整合原 存储/16 的存储知识，涵盖 K8s 存储体系、PV/PVC/CSI 和存储基础原理。
+description: Kubernetes 存储知识域 — K8s 存储原语、存储基础、分布式存储、存储网络、云存储对比、有状态应用存储
+summary: 存储知识域入口，涵盖 PV/PVC/CSI 核心概念、SAN/NAS 存储网络、分布式存储、云存储对比、AI 存储与有状态应用实践
 category: domain
 tags:
 - storage
@@ -9,41 +9,31 @@ tags:
 - pvc
 - csi
 - distributed-storage
-- rag
-- daemonset
-- gpu
+- san
+- nas
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Storage & Data 是什么
-- 如何 Storage & Data
-- Kubernetes 04 storage data 最佳实践
-trigger_keywords:
-- Storage
-- Data
-- storage
-- data
-prerequisites:
-- kubectl-basics
-- storage-basics
-- gpu-scheduling-basics
 ---
 # 存储 Storage
 
-> K8s 存储原语、存储基础、分布式存储与有状态应用存储。
+> K8s 存储原语、存储基础、分布式存储、存储网络与有状态应用存储。
 
 ## 二级子目录
 
-- [[存储/K8s存储/README.md|K8s存储]]
-- [[存储/分布式存储/README.md|分布式存储]]
-- [[存储/存储基础/README.md|存储基础]]
-- [[存储/有状态应用存储/README.md|有状态应用存储]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[存储/K8s存储/index.md\|K8s存储/]] | K8s 存储原语 | PV/PVC/StorageClass/CSI/快照/加密 |
+| [[存储/存储基础/index.md\|存储基础/]] | 存储技术基础 | 块/文件/对象存储、RAID、IOPS |
+| [[存储/分布式存储/index.md\|分布式存储/]] | 分布式存储系统 | Ceph/Longhorn/OpenEBS/JuiceFS/NFS |
+| [[存储/有状态应用存储/index.md\|有状态应用存储/]] | 有状态应用 | MySQL/PostgreSQL/Kafka/Redis StatefulSet |
+| [[存储/AI存储与高级/index.md\|AI存储与高级/]] | AI 存储与高级 | MinIO/WEKA/Lustre/数据分层/混沌工程 |
+| [[存储/存储网络/index.md\|存储网络/]] | 存储网络架构 | SAN/NAS/iSCSI/FC/NFS/NVMe-oF |
+| [[存储/云存储对比/index.md\|云存储对比/]] | 云存储对比 | AWS/GCP/Azure/阿里云存储服务对比 |
 
 ## 跨域导航
 

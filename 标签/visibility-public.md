@@ -1,17 +1,28 @@
 ---
-title: #visibility/public Tag Hub
-category: tags
-tags: [visibility/public, meta, visibility/public]
-sources: []
-created: "2026-06-26"
-updated: "2026-06-26"
-summary: "Hub page collecting all pages tagged with #visibility/public."
+title: visibility-public
+description: 公开可见标签枢纽 — 收集所有标记为 visibility/public 的可对外公开文档
+category: tag-index
+tags:
+- visibility-public
+- meta
+- public
 tier: supporting
+created: '2026-06-26'
+last_updated: '2026-07-21'
 ---
 
-# #visibility/public Tag Hub
+# visibility-public Tag Hub
 
-> 共 121 个页面带有 `#visibility/public` 标签。
+> 公开可见文档集合 — 可对外分享、发布的技术文档。
+
+## 标签定义
+
+**visibility-public** 标签用于标识可以对外公开分享的文档。这类文档：
+- 不包含内部敏感信息
+- 不包含生产环境凭证/密钥
+- 适合对外技术分享、博客发布
+- 可用于培训、演讲材料
+
 
 ## Pages
 

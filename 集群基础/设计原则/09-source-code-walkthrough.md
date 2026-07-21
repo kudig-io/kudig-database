@@ -318,6 +318,247 @@ hack/local-up-cluster.sh
 - 08 - 高可用架构模式 (HA Patterns)
 - 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
+## controller-runtime 深度解析
+
+### 核心架构
+
+```
+Manager
+├── Client (API 读写)
+├── Cache (Informer 缓存)
+│   ├── Informer (List-Watch)
+│   └── Indexer (本地索引)
+├── Webhook Server (准入控制)
+├── Health/Ready Probes
+└── Controller(s)
+    ├── Reconciler (业务逻辑)
+    ├── WorkQueue (事件队列)
+    └── Predicates (事件过滤)
+```
+
+### Manager 初始化源码路径
+
+```go
+// sigs.k8s.io/controller-runtime/pkg/manager/manager.go
+func New(config *rest.Config, options Options) (Manager, error) {
+    // 1. 创建 Cache (Informer 工厂)
+    cache, err := cache.New(config, options.Cache)
+    
+    // 2. 创建 Client (带缓存读取)
+    client, err := client.New(config, client.Options{
+        Cache: &client.CacheOptions{Reader: cache},
+    })
+    
+    // 3. 创建 Manager
+    cm := &controllerManager{
+        cluster: cluster,  // 包含 cache + client
+        webhooks:  webhooks,
+        healthz:   healthz,
+    }
+    return cm, nil
+}
+```
+
+### Reconcile 循环源码路径
+
+```go
+// sigs.k8s.io/controller-runtime/pkg/internal/controller/controller.go
+func (c *Controller) processNextWorkItem(ctx context.Context) bool {
+    // 1. 从队列取出请求
+    req, quit := c.Queue.Get()
+    
+    // 2. 调用 Reconcile
+    result, err := c.Do.Reconcile(ctx, req.(reconcile.Request))
+    
+    // 3. 处理结果
+    if err != nil {
+        c.Queue.AddRateLimited(req)  // 失败重试
+    } else if result.RequeueAfter > 0 {
+        c.Queue.AddAfter(req, result.RequeueAfter)  // 延迟重入队
+    } else if result.Requeue {
+        c.Queue.AddRateLimited(req)  // 重新入队
+    } else {
+        c.Queue.Forget(req)  // 成功，清除重试计数
+    }
+    return true
+}
+```
+
+### 关键源码文件索引
+
+| 功能 | 文件路径 | 说明 |
+|------|----------|------|
+| Manager 启动 | `pkg/manager/manager.go` | 组件编排 |
+| Controller 循环 | `pkg/internal/controller/controller.go` | 工作队列处理 |
+| Cache 实现 | `pkg/cache/internal/informers.go` | Informer 管理 |
+| Client 实现 | `pkg/client/client.go` | API 读写 |
+| Webhook | `pkg/webhook/admission/webhook.go` | 准入处理 |
+| Builder | `pkg/builder/controller.go` | 控制器构建器 |
+| Leader Election | `pkg/leaderelection/leader_election.go` | 领导者选举 |
+
+## 代码生成工具链
+
+### 生成器全景
+
+| 工具 | 用途 | 触发方式 |
+|------|------|----------|
+| `controller-gen` | CRD/RBAC/Webhook YAML | `// +kubebuilder:*` 注释 |
+| `client-gen` | 类型化 Clientset | `// +genclient` 注释 |
+| `informer-gen` | Informer 工厂 | `// +genclient` 注释 |
+| `lister-gen` | Lister 接口 | `// +genclient` 注释 |
+| `deepcopy-gen` | DeepCopy 方法 | `// +k8s:deepcopy-gen` 注释 |
+| `conversion-gen` | 版本转换函数 | `// +k8s:conversion-gen` 注释 |
+| `openapi-gen` | OpenAPI 规范 | `// +k8s:openapi-gen` 注释 |
+
+### 典型 Makefile 集成
+
+```makefile
+# Makefile — Operator 项目代码生成
+CONTROLLER_GEN = $(shell pwd)/bin/controller-gen
+
+.PHONY: generate
+ generate: ## 生成 DeepCopy 方法
+	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./..."
+
+.PHONY: manifests
+manifests: ## 生成 CRD/RBAC/Webhook YAML
+	$(CONTROLLER_GEN) crd rbac:roleName=manager-role webhook \
+		paths="./..." output:crd:artifacts:config=config/crd/bases
+
+.PHONY: fmt
+fmt: ## 格式化代码
+	go fmt ./...
+
+.PHONY: vet
+vet: ## 静态检查
+	go vet ./...
+
+.PHONY: test
+test: generate fmt vet ## 运行测试
+	go test ./... -coverprofile cover.out
+```
+
+## 性能分析与调试
+
+### pprof 性能分析
+
+```bash
+# 🟢 只读：API Server 性能分析
+# CPU Profile (30s)
+curl -o cpu.prof http://localhost:6060/debug/pprof/profile?seconds=30
+go tool pprof -http=:8080 cpu.prof
+
+# 内存分析
+curl -o mem.prof http://localhost:6060/debug/pprof/heap
+go tool pprof -http=:8080 mem.prof
+
+# Goroutine 泄漏检查
+curl http://localhost:6060/debug/pprof/goroutine?debug=2 > goroutines.txt
+
+# Scheduler 延迟
+curl -o sched.prof http://localhost:6060/debug/pprof/sched?seconds=10
+```
+
+### 组件调试端口
+
+| 组件 | 默认端口 | 端点 |
+|------|----------|------|
+| kube-apiserver | 6060 | /debug/pprof/ |
+| kube-scheduler | 10259 | /debug/pprof/ (HTTPS) |
+| kube-controller-manager | 10257 | /debug/pprof/ (HTTPS) |
+| kubelet | 10250 | /debug/pprof/ (HTTPS) |
+| kube-proxy | 10249 | /debug/pprof/ |
+
+### Delve 远程调试
+
+```bash
+# 本地调试 kube-scheduler
+# 1. 构建带调试符号的二进制
+go build -gcflags="all=-N -l" -o _output/bin/kube-scheduler ./cmd/kube-scheduler
+
+# 2. 启动 Delve
+dlv exec _output/bin/kube-scheduler -- \
+  --kubeconfig=~/.kube/config \
+  --leader-elect=false \
+  -v=4
+
+# 3. 设置断点
+(dlv) break pkg/scheduler/scheduler.go:scheduleOne
+(dlv) continue
+```
+
+## 源码阅读路线图
+
+### 按角色推荐阅读顺序
+
+| 角色 | 推荐路径 | 时间 |
+|------|----------|------|
+| Operator 开发者 | client-go → controller-runtime → kubebuilder | 2-3 周 |
+| 调度器开发者 | pkg/scheduler/framework → plugins → queue | 3-4 周 |
+| 网络开发者 | pkg/proxy → CNI 插件 → kubelet 网络 | 3-4 周 |
+| 存储开发者 | pkg/volume → CSI → kubelet volumemanager | 3-4 周 |
+| 控制平面 SRE | cmd/ → pkg/controlplane → etcd 交互 | 2-3 周 |
+
+### 推荐阅读顺序（通用）
+
+```
+第 1 周: 基础抽象
+  staging/src/k8s.io/apimachinery/pkg/runtime/    → Object 接口
+  staging/src/k8s.io/apimachinery/pkg/apis/meta/  → TypeMeta/ObjectMeta
+  staging/src/k8s.io/client-go/tools/cache/       → Informer/Reflector/DeltaFIFO
+
+第 2 周: 控制器模式
+  pkg/controller/replicaset/replica_set.go        → 最简单的控制器
+  pkg/controller/deployment/deployment_controller.go → 级联控制器
+  staging/src/k8s.io/controller-runtime/          → 现代框架
+
+第 3 周: API Server
+  cmd/kube-apiserver/app/server.go                → 启动流程
+  staging/src/k8s.io/apiserver/pkg/endpoints/     → 请求处理链
+  staging/src/k8s.io/apiserver/pkg/admission/     → 准入控制
+
+第 4 周: 调度器 + Kubelet
+  pkg/scheduler/schedule_one.go                   → 单次调度流程
+  pkg/scheduler/framework/plugins/                → 插件实现
+  pkg/kubelet/kubelet.go                          → syncLoop
+```
+
+## 贡献指南
+
+### 开发环境搭建
+
+```bash
+# 1. Fork & Clone
+git clone https://github.com/YOUR_NAME/kubernetes.git
+cd kubernetes
+
+# 2. 安装依赖
+go install golang.org/dl/go1.23.0@latest
+
+# 3. 构建
+make WHAT=cmd/kubectl
+
+# 4. 运行单元测试
+make test WHAT=./pkg/scheduler/...
+
+# 5. 运行集成测试
+make test-integration WHAT=./test/integration/scheduler
+
+# 6. 本地集群验证
+hack/local-up-cluster.sh
+```
+
+### PR 提交规范
+
+| 要求 | 说明 |
+|------|------|
+| CLA | 必须签署 CNCF CLA |
+| 测试 | 新功能必须附带单元测试 |
+| 文档 | API 变更需更新文档 |
+| 原子性 | 一个 PR 解决一个问题 |
+| 标签 | 使用 `/kind bug` `/kind feature` 等 |
+| Review | 至少 2 个 APPROVE |
+
 ## See Also
 
 - 07-distributed-consensus-etcd

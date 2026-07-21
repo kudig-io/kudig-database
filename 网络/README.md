@@ -1,9 +1,7 @@
 ---
 title: Networking & Traffic
-description: 整合原 网络/15/26/35/40 的网络知识，涵盖 K8s 网络、CNI、Service
-  Mesh、API Gateway 和 eBPF。
-summary: 整合原 网络/15/26/35/40 的网络知识，涵盖 K8s 网络、CNI、Service
-  Mesh、API Gateway 和 eBPF。
+description: 网络知识域 — K8s 网络核心、CNI 对比、Service Mesh、API Gateway、eBPF、Terway
+summary: 网络知识域入口，涵盖 Pod 网络模型、CNI 插件对比、Istio/Envoy 服务网格、Ingress/Gateway API、eBPF 网络编程、Terway 阿里云网络
 category: domain
 tags:
 - networking
@@ -13,33 +11,15 @@ tags:
 - cilium
 - api-gateway
 - ebpf
-- envoy
-- ingress
-- gateway
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
-estimated_read_time: 5min
-intent_queries:
-- Networking & Traffic 是什么
-- 如何 Networking & Traffic
-- Kubernetes 03 networking traffic 最佳实践
-trigger_keywords:
-- Networking
-- Traffic
-- networking
-- traffic
-prerequisites:
-- kubectl-basics
-- networking-basics
-- service-mesh-basics
-- ebpf-basics
-- cilium-basics
-- gpu-scheduling-basics
+- 网络工程师
+- SRE
+estimated_read_time: 10min
 ---
 # 网络 Networking
 
@@ -47,13 +27,15 @@ prerequisites:
 
 ## 二级子目录
 
-- [[网络/API网关/README.md|API网关]]
-- [[网络/K8s网络核心/README.md|K8s网络核心]]
-- [[网络/Terway/README.md|Terway]]
-- [[网络/eBPF/README.md|eBPF]]
-- [[网络/服务网格/README.md|服务网格]]
-- [[网络/网络基础/README.md|网络基础]]
-- [[网络/附件/README.md|附件]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[网络/K8s网络核心/README.md\|K8s网络核心/]] | Pod 网络 | CNI 规范、Service/DNS、NetworkPolicy |
+| [[网络/网络基础/README.md\|网络基础/]] | 协议 | TCP/IP、负载均衡、DNS 原理 |
+| [[网络/服务网格/README.md\|服务网格/]] | Mesh | Istio/Envoy/Linkerd、流量管理、mTLS |
+| [[网络/API网关/README.md\|API网关/]] | 网关 | Ingress Controller、Gateway API、Kong/APISIX |
+| [[网络/eBPF/README.md\|eBPF/]] | eBPF | Cilium、XDP、网络可观测、性能优化 |
+| [[网络/Terway/README.md\|Terway/]] | Terway | 阿里云 ENI、Trunk、固定 IP |
+| [[网络/附件/README.md\|附件/]] | 附件 | 网络拓扑图、配置模板、参考数据 |
 
 ## 跨域导航
 

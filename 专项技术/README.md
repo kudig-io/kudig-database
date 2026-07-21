@@ -1,7 +1,7 @@
 ---
 title: Specialized Technologies
-description: Specialized Technologies — Kubernetes 生产运维知识库
-summary: Specialized Technologies — Kubernetes 生产运维知识库
+description: 专项技术知识域 — 边缘计算、WebAssembly、K8s 扩展机制、无服务器架构
+summary: 专项技术知识域入口，涵盖边缘计算(KubeEdge/OpenYurt)、WebAssembly(SpinKube/wasmCloud)、扩展机制(CRD/Operator/Webhook)、无服务器(Knative/OpenFaaS)
 category: domain
 tags:
 - edge-computing
@@ -10,42 +10,28 @@ tags:
 - extensions
 - crd
 - operator
-- helm
-- containerd
-- webhook
-- daemonset
+- serverless
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+last_updated: '2026-07-21'
+difficulty: advanced
 audience:
-- 所有工程师
+- 平台工程师
+- 架构师
 estimated_read_time: 5min
-intent_queries:
-- Specialized Technologies 是什么
-- 如何 Specialized Technologies
-- Kubernetes 15 specialized tech 最佳实践
-trigger_keywords:
-- Specialized
-- Technologies
-- specialized
-- tech
-prerequisites:
-- kubectl-basics
-- helm-basics
-- gpu-scheduling-basics
 ---
 # 专项技术 Specialized
 
-> 边缘计算、WebAssembly、扩展机制与无服务器。
+> 边缘计算、WebAssembly、扩展机制与无服务器 — Kubernetes 生态的前沿技术域。
 
 ## 二级子目录
 
-- [[专项技术/WebAssembly/README.md|WebAssembly]]
-- [[专项技术/扩展机制/README.md|扩展机制]]
-- [[专项技术/无服务器/README.md|无服务器]]
-- [[专项技术/边缘计算/README.md|边缘计算]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[专项技术/边缘计算/index.md\|边缘计算/]] | 云边协同 | KubeEdge/OpenYurt/SuperEdge/边缘AI/设备管理 |
+| [[专项技术/WebAssembly/index.md\|WebAssembly/]] | Wasm 云原生 | WASI/SpinKube/wasmCloud/组件模型/安全沙箱 |
+| [[专项技术/扩展机制/index.md\|扩展机制/]] | K8s 扩展 | CRD/Operator/Webhook/Aggregated API/Scheduler |
+| [[专项技术/无服务器/index.md\|无服务器/]] | Serverless | Knative/OpenFaaS/KEDA/缩容到零 |
 
 ## 跨域导航
 

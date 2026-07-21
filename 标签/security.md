@@ -1,17 +1,78 @@
 ---
 title: security
-description: All pages tagged with security
+description: 安全治理标签枢纽 — 涵盖 RBAC、NetworkPolicy、Pod Security、供应链安全、运行时安全、合规审计、零信任架构等全部安全领域知识
 category: tag-index
 tags:
 - security
-tier: supporting
+- rbac
+- pod-security
+- supply-chain
+- runtime-security
+- compliance
+- zero-trust
+tier: core
+difficulty: intermediate-to-advanced
+domain: security
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # security Tag Hub
 
 > 安全领域页面 — RBAC、NetworkPolicy、Pod Security、供应链安全、运行时安全、合规审计等。
+
+## 核心定义
+
+**Kubernetes 安全**是保护容器化应用和基础设施免受威胁的系统化实践，覆盖身份认证、访问控制、网络隔离、运行时防护、供应链安全、合规审计等多个层面。它遵循纵深防御（Defense in Depth）原则，在每一层都建立安全屏障。
+
+### 安全分层模型
+
+| 层级 | 关注点 | 关键技术 |
+|------|--------|----------|
+| 云平台/基础设施 | 节点安全、网络隔离 | 安全组、VPC、节点加固 |
+| 集群控制平面 | API 安全、etcd 加密 | TLS、审计日志、加密存储 |
+| 身份与访问 | 认证、授权、密钥管理 | RBAC、OIDC、Vault |
+| 网络隔离 | 微分段、加密通信 | NetworkPolicy、mTLS |
+| Pod 安全 | 容器权限、沙箱 | Pod Security Standards、gVisor |
+| 运行时防护 | 威胁检测、响应 | Falco、Tetragon |
+| 供应链 | 镜像签名、漏洞扫描 | Sigstore、Trivy、SBOM |
+| 合规审计 | 策略执行、审计报告 | Kyverno、OPA、CIS Benchmark |
+
+### 4C 安全模型
+
+```
+Cloud (云平台) → Cluster (集群) → Container (容器) → Code (代码)
+    │                  │                  │                │
+    └── 基础设施安全 ──┴── 集群安全 ────┴── 容器安全 ──┴── 应用安全
+```
+
+## 生产实践要点
+
+### 安全检查清单
+
+| 检查项 | 状态 | 工具 |
+|--------|------|------|
+| RBAC 最小权限 | 必须 | `kubectl auth can-i --list` |
+| Pod Security Standards | 必须 | restricted 级别 |
+| NetworkPolicy 默认拒绝 | 必须 | default-deny-all |
+| 镜像漏洞扫描 | 必须 | Trivy / Grype |
+| Secret 加密存储 | 必须 | etcd encryption / Vault |
+| 审计日志开启 | 必须 | --audit-log-path |
+| 镜像签名验证 | 建议 | Cosign + admission |
+| 运行时威胁检测 | 建议 | Falco / Tetragon |
+| CIS Benchmark 合规 | 建议 | kube-bench |
+
+### 常见安全反模式
+
+| 反模式 | 风险 | 正确做法 |
+|---------|------|----------|
+| 使用 privileged 容器 | 完全控制节点 | 使用最小权限 + capabilities |
+| 明文存储 Secret | 泄露敏感数据 | etcd 加密 + 外部密钥管理 |
+| cluster-admin 滥用 | 权限过大 | 按角色分配最小权限 |
+| 忽略镜像漏洞 | 已知漏洞被利用 | CI/CD 中集成扫描 |
+| 无网络策略 | 横向移动无限制 | 默认拒绝 + 白名单 |
+| 使用 hostNetwork | 绕过网络隔离 | 使用 Pod 网络 |
 
 ## 身份与访问 (Identity & Access)
 

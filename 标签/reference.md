@@ -1,17 +1,29 @@
 ---
-title: #reference Tag Hub
-category: tags
-tags: [reference, meta, visibility/public]
-sources: []
-created: "2026-06-26"
-updated: "2026-06-26"
-summary: "Hub page collecting all pages tagged with #reference."
+title: reference
+description: 参考资料标签枢纽 — 收集所有标记为 reference 的参考手册、命令参考、API 参考、配置参考等
+category: tag-index
+tags:
+- reference
+- meta
+- documentation
 tier: supporting
+created: '2026-06-26'
+last_updated: '2026-07-21'
 ---
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+# reference Tag Hub
+
+> 参考资料文档集合 — 参考手册、命令参考、API 参考、配置参考、速查表等。
+
+## 标签定义
+
+**reference** 标签用于标识提供快速查阅的参考性文档。这类文档通常包含：
+- 命令/参数完整列表
+- 配置字段说明
+- API 接口参考
+- 速查表 (Cheat Sheet)
+- 版本兼容性矩阵
+
 
 
 # #reference Tag Hub

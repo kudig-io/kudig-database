@@ -1,17 +1,37 @@
 ---
 title: helm
-description: All pages tagged with helm
+description: Helm 包管理标签枢纽 — 涵盖 Helm Charts 管理、高级运维、Hooks、值模式、库 Chart、OCI Registry 等全部 Helm 领域知识
 category: tag-index
 tags:
 - helm
-tier: supporting
+- charts
+- package-management
+- templating
+tier: core
+difficulty: intermediate
+domain: release-management
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # helm Tag Hub
 
 > Helm 相关页面 — Helm Charts 管理、高级运维、Hooks、值模式、库 Chart 等。
+
+## 核心定义
+
+**Helm** 是 Kubernetes 的包管理器，通过 Chart（模板化 YAML + 默认值 + 依赖管理）实现应用的可重复部署、版本管理和配置参数化。Helm 3 移除了 Tiller，直接通过 kubeconfig 与 API Server 交互。
+
+### Helm 核心概念
+
+| 概念 | 描述 |
+|------|------|
+| Chart | 模板化 K8s 资源包（templates/ + values.yaml + Chart.yaml） |
+| Release | Chart 的一次部署实例 |
+| Repository | Chart 的远程存储（OCI / HTTP） |
+| Values | 参数化配置，覆盖默认值 |
+| Hooks | 生命周期钩子（pre-install, post-upgrade 等） |
+
 
 ## Helm 清单模式 (Helm Manifest Patterns)
 

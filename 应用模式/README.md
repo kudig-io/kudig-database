@@ -1,36 +1,22 @@
 ---
 title: Application Patterns
-description: 原 应用模式 的业务应用架构参考库，涵盖电商、小程序、IM、教育等场景架构。
-summary: 原 应用模式 的业务应用架构参考库，涵盖电商、小程序、IM、教育等场景架构。
+description: 应用模式知识域 — 微服务子模式、生产级模式、行业架构案例（电商/小程序/IM/教育）
+summary: 应用模式知识域入口，涵盖 Sidecar/Ambassador/Scatter-Gather 子模式、生产级部署模式、电商/金融/教育行业架构案例
 category: domain
 tags:
 - application-architecture
-- ecommerce
 - microservices
 - patterns
-- daemonset
-- gpu
-tier: supporting
+- ecommerce
+- production
+tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
+- 架构师
 estimated_read_time: 5min
-intent_queries:
-- Application Patterns 是什么
-- 如何 Application Patterns
-- Kubernetes 20 application patterns 最佳实践
-trigger_keywords:
-- Application
-- Patterns
-- application
-- patterns
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- gpu-scheduling-basics
 ---
 # 应用模式 Application Patterns
 
@@ -38,9 +24,11 @@ prerequisites:
 
 ## 二级子目录
 
-- [[应用模式/子模式/README.md|子模式]]
-- [[应用模式/生产模式/README.md|生产模式]]
-- [[应用模式/行业架构/README.md|行业架构]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[应用模式/子模式/README.md\|子模式/]] | 微服务模式 | Sidecar/Ambassador/Scatter-Gather/CQRS |
+| [[应用模式/生产模式/README.md\|生产模式/]] | 生产 | 蓝绿/金丝雀/滚动发布、健康检查、优雅关闭 |
+| [[应用模式/行业架构/README.md\|行业架构/]] | 行业 | 电商/小程序/IM/教育/金融场景架构 |
 
 ## 跨域导航
 

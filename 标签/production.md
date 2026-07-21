@@ -1,17 +1,51 @@
 ---
 title: production
-description: All pages tagged with production
+description: 生产运营标签枢纽 — 涵盖生产就绪、日常巡检、值班手册、事件响应、变更管理、FinOps、集群治理、绿色计算等全部生产运营知识
 category: tag-index
 tags:
 - production
-tier: supporting
+- operations
+- incident-response
+- finops
+- runbook
+- change-management
+tier: core
+difficulty: intermediate-to-advanced
+domain: production-operations
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # production Tag Hub
 
 > 生产运营页面 — 生产就绪、日常巡检、值班手册、事件响应、变更管理、FinOps 等。
+
+## 核心定义
+
+**生产运营（Production Operations）** 是确保 Kubernetes 集群及其上运行的业务系统持续稳定、安全、高效运行的系统化实践。它涵盖日常巡检、事件响应、变更管理、容量规划、成本治理、安全运营等多个维度。
+
+### 生产运营核心能力
+
+| 能力域 | 描述 | 关键产出 |
+|--------|------|----------|
+| 生产就绪 | 上线前的全面评估与检查 | 就绪检查清单 |
+| 日常巡检 | 集群健康状态的定期检查 | 巡检报告 |
+| 事件响应 | 故障发现、定位、修复、复盘 | Runbook + Postmortem |
+| 变更管理 | 变更申请、审批、执行、回滚 | 变更窗口 + 冻结策略 |
+| 容量规划 | 资源预测、扩缩容决策 | 容量报告 |
+| 成本治理 | 资源利用率优化、费用分配 | FinOps 报告 |
+| 安全运营 | 漏洞修复、合规审计、应急响应 | 安全报告 |
+
+### 生产运营成熟度
+
+| 级别 | 特征 | 典型表现 |
+|------|------|----------|
+| L1 教火式 | 被动响应、无流程 | 故障后才知道 |
+| L2 可重复 | 有基本 Runbook | 按手册操作 |
+| L3 已定义 | 标准化流程 + 自动化 | 告警自动触发 Runbook |
+| L4 已管理 | 度量驱动 + 持续优化 | SLO 驱动决策 |
+| L5 优化型 | AIOps + 自愈 | 自动检测、自动修复 |
 
 ## 生产运维核心 (Production Ops Core)
 

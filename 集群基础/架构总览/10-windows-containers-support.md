@@ -312,6 +312,307 @@ Get-EventLog -LogName Application -Newest 50
 - 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 - 09 - 边缘计算集成架构 (KubeEdge/OpenYurt)
 
+## Windows HostProcess 容器
+
+### 概述与用途
+
+HostProcess 容器是 Windows 上的特权容器替代方案（v1.26 GA），用于运行需要主机访问的系统级工作负载。
+
+```yaml
+# HostProcess 容器 — 类似 Linux 特权容器
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-monitoring-agent
+  namespace: monitoring
+spec:
+  securityContext:
+    windowsOptions:
+      hostProcess: true      # 启用 HostProcess
+      runAsUserName: "NT AUTHORITY\\SYSTEM"
+  hostNetwork: true          # HostProcess 必须 hostNetwork
+  nodeSelector:
+    kubernetes.io/os: windows
+  tolerations:
+    - key: os
+      value: windows
+      effect: NoSchedule
+  containers:
+    - name: agent
+      image: registry.internal/monitoring/windows-agent:2.1
+      securityContext:
+        windowsOptions:
+          hostProcess: true
+      volumeMounts:
+        - name: host-fs
+          mountPath: /host
+  volumes:
+    - name: host-fs
+      hostPath:
+        path: C:\
+```
+
+### HostProcess vs Linux 特权容器对比
+
+| 能力 | Linux privileged | Windows HostProcess |
+|------|-----------------|--------------------|
+| 主机文件系统访问 | ✅ | ✅ (通过 hostPath) |
+| 主机网络 | ✅ | ✅ (必须 hostNetwork) |
+| 设备访问 | ✅ | ❌ |
+| 内核模块加载 | ✅ | ❌ |
+| 运行 Windows 服务 | N/A | ✅ |
+| 修改注册表 | N/A | ✅ |
+
+## Windows 监控与日志
+
+### Prometheus 指标采集
+
+```yaml
+# Windows 节点监控 — windows_exporter DaemonSet
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: windows-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: windows-exporter
+  template:
+    metadata:
+      labels:
+        app: windows-exporter
+    spec:
+      securityContext:
+        windowsOptions:
+          hostProcess: true
+          runAsUserName: "NT AUTHORITY\\SYSTEM"
+      hostNetwork: true
+      nodeSelector:
+        kubernetes.io/os: windows
+      tolerations:
+        - key: os
+          value: windows
+          effect: NoSchedule
+      containers:
+        - name: exporter
+          image: ghcr.io/prometheus-community/windows-exporter:latest
+          ports:
+            - containerPort: 9182
+              name: metrics
+          args:
+            - --collectors.enabled=cpu,cs,logical_disk,net,os,system,container
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: windows-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: windows-exporter
+  endpoints:
+    - port: metrics
+      interval: 30s
+```
+
+### 关键监控指标
+
+| 指标 | 告警阈值 | 含义 |
+|------|----------|------|
+| `windows_os_physical_memory_free_bytes` | < 500MB | 内存不足 |
+| `windows_logical_disk_free_bytes{volume="C:"}` | < 10% | 系统盘将满 |
+| `windows_cpu_time_total{mode="idle"}` | < 10% | CPU 过载 |
+| `windows_container_count` | > 50/node | 容器密度过高 |
+| `windows_system_system_up_time` | < 1h | 节点刚重启 |
+
+## Windows 性能调优
+
+### 资源管理最佳实践
+
+```yaml
+# Windows Pod 资源配置建议
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: windows-app
+spec:
+  template:
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: app
+          image: mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-ltsc2022
+          resources:
+            requests:
+              cpu: 500m        # Windows CPU 调度粒度较大
+              memory: 512Mi    # 基础镜像占用较大
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          # Windows 特有: 资源预留考虑基础镜像开销
+          # NanoServer 基础 ~100MB, ServerCore ~2GB
+```
+
+### Windows 节点资源预留
+
+| 资源 | 建议预留 | 说明 |
+|------|----------|------|
+| CPU | 1-2 核 | Windows OS + kubelet + containerd |
+| 内存 | 2-4 GiB | Windows 系统占用较大 |
+| 磁盘 | 50+ GB | 镜像层占用大（ServerCore ~2GB/层） |
+
+### 镜像拉取优化
+
+```yaml
+# Kubelet 配置 — Windows 优化
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+maxParallelImagePulls: 5        # 并行拉取（Windows 镜像大）
+imageMinimumGCAge: 10m
+imageGCHighThresholdPercent: 90  # Windows 镜像占用大，延迟清理
+serializeImagePulls: false
+```
+
+## Windows 故障排查
+
+### 诊断命令集
+
+```powershell
+# 🟢 只读：Windows 节点诊断
+# 检查 kubelet 状态
+Get-Service kubelet
+Get-EventLog -LogName Application -Source kubelet -Newest 20
+
+# 检查 containerd 状态
+Get-Service containerd
+crictl ps
+
+# 检查网络
+ipconfig /all
+Get-HNSNetwork | Format-Table Name, Type, Subnets
+Get-HNSEndpoint | Select-Object Name, IPAddress, MacAddress
+
+# 检查磁盘空间
+Get-PSDrive -PSProvider FileSystem
+
+# 检查 Windows 更新状态
+Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 5
+
+# 检查容器日志
+Get-EventLog -LogName Application -Source "Docker" -Newest 10 2>$null
+Get-WinEvent -LogName "Microsoft-Windows-Containers*" -MaxEvents 20
+```
+
+### 常见问题排查表
+
+| 问题 | 可能原因 | 排查命令 | 解决方案 |
+|------|----------|----------|----------|
+| Pod CrashLoopBackOff | 镜像版本不匹配 | `kubectl describe pod` | 确认 Build 号匹配 |
+| 网络不通 | HNS 网络异常 | `Get-HNSNetwork` | 重启 HNS 服务 |
+| 镜像拉取失败 | 磁盘空间不足 | `Get-PSDrive C` | 清理镜像/扩容 |
+| 节点 NotReady | kubelet 崩溃 | `journalctl -u kubelet` | 重启 kubelet |
+| DNS 解析失败 | CoreDNS 兼容性 | `nslookup kubernetes.default` | 检查 DNS 配置 |
+| 存储挂载失败 | CSI 驱动不兼容 | `kubectl describe pvc` | 确认 CSI 支持 Windows |
+
+### Windows 版本兼容性矩阵
+
+| 宿主机 Build | 容器 Build | Process 隔离 | Hyper-V 隔离 |
+|-------------|-----------|------------|------------|
+| 10.0.17763 (2019) | 10.0.17763 | ✅ | ✅ |
+| 10.0.20348 (2022) | 10.0.20348 | ✅ | ✅ |
+| 10.0.20348 (2022) | 10.0.17763 | ❌ | ✅ |
+| 10.0.17763 (2019) | 10.0.20348 | ❌ | ❌ |
+
+> **关键规则**: Process 隔离要求宿主机 Build ≥ 容器 Build。Hyper-V 隔离可向下兼容。
+
+## Windows 安全加固
+
+### 安全最佳实践
+
+```yaml
+# Windows Pod 安全配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-windows-app
+spec:
+  nodeSelector:
+    kubernetes.io/os: windows
+  securityContext:
+    windowsOptions:
+      gmsaCredentialSpecName: webapp-gmsa  # GMSA 身份
+  containers:
+    - name: app
+      image: registry.internal/app:latest
+      securityContext:
+        windowsOptions:
+          runAsUserName: "ContainerUser"  # 非管理员运行
+      # Windows 不支持: seccomp, AppArmor, SELinux
+      # 使用 GMSA 代替 Linux 的 ServiceAccount 集成
+```
+
+### Windows 安全限制与替代方案
+
+| Linux 安全机制 | Windows 替代 | 说明 |
+|--------------|------------|------|
+| seccomp | ❌ 无替代 | 依赖 Hyper-V 隔离 |
+| AppArmor | ❌ 无替代 | 使用 Windows Defender |
+| SELinux | ❌ 无替代 | 使用 Windows ACL |
+| runAsNonRoot | runAsUserName | 指定非管理员用户 |
+| ServiceAccount | GMSA | 域身份认证 |
+| NetworkPolicy | Calico/Azure | 部分 CNI 支持 |
+
+## 混合集群最佳实践
+
+### 架构设计原则
+
+```
+┌──────────────────────────────────────────────┐
+│          混合集群 (Linux + Windows)          │
+│                                              │
+│  ┌────────────────┐  ┌────────────────┐  │
+│  │ Linux 节点池   │  │ Windows 节点池  │  │
+│  │ • API/微服务    │  │ • .NET 应用     │  │
+│  │ • 中间件        │  │ • IIS/ASP.NET   │  │
+│  │ • 监控/日志     │  │ • SQL Server    │  │
+│  │ • Ingress       │  │ • 传统应用      │  │
+│  └────────────────┘  └────────────────┘  │
+│                                              │
+│  关键规则:                                    │
+│  1. 控制平面必须 Linux                        │
+│  2. nodeSelector 强制分离                     │
+│  3. DaemonSet 需加 nodeAffinity              │
+│  4. CNI 必须支持双平台                        │
+└──────────────────────────────────────────────┘
+```
+
+### DaemonSet 跨平台兼容
+
+```yaml
+# DaemonSet 仅运行在 Linux 节点
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-collector
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/os
+                    operator: In
+                    values: ["linux"]
+      containers:
+        - name: collector
+          image: fluent/fluent-bit:latest
+```
+
 ## See Also
 
 - 08-multi-tenancy-architecture

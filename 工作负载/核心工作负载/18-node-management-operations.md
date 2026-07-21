@@ -139,6 +139,377 @@ spec:
 
 > **生产建议**: 将系统/组件预留总和控制在节点容量的 10%~20%, 对大节点适当上浮。
 
+<!-- chunk: 节点健康检查自动化 -->
+## 节点健康检查自动化
+
+### 一键节点健康检查脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：只读检查
+# 节点健康综合检查
+
+NODE=${1:-$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')}
+
+echo "=== 节点健康检查: $NODE ==="
+
+# 1. 节点状态
+echo "--- 1. 节点状态 ---"
+kubectl get node "$NODE" -o custom-columns=\
+NAME:.metadata.name,\
+STATUS:.status.conditions[-1].type,\
+READY:.status.conditions[?(@.type=="Ready")].status,\
+AGE:.metadata.creationTimestamp
+
+# 2. 节点 Conditions 检查
+echo ""
+echo "--- 2. Conditions 详情 ---"
+kubectl get node "$NODE" -o json | jq -r '
+  .status.conditions[] |
+  "\(.type): \(.status) (\(.reason // "N/A")) - \(.message // "")"
+'
+
+# 3. 资源使用情况
+echo ""
+echo "--- 3. 资源使用 ---"
+kubectl top node "$NODE" 2>/dev/null || echo "metrics-server 不可用"
+
+# 4. 节点容量与可分配
+echo ""
+echo "--- 4. 容量与可分配 ---"
+kubectl get node "$NODE" -o json | jq -r '
+  "Capacity:",
+  "  CPU: \(.status.capacity.cpu)",
+  "  Memory: \(.status.capacity.memory)",
+  "  Pods: \(.status.capacity.pods)",
+  "Allocatable:",
+  "  CPU: \(.status.allocatable.cpu)",
+  "  Memory: \(.status.allocatable.memory)",
+  "  Pods: \(.status.allocatable.pods)"
+'
+
+# 5. 节点上的 Pod 数量
+echo ""
+echo "--- 5. Pod 分布 ---"
+POD_COUNT=$(kubectl get pods -A --field-selector=spec.nodeName="$NODE" --no-headers | wc -l)
+echo "节点上 Pod 数量: $POD_COUNT"
+
+# 6. 节点标签与污点
+echo ""
+echo "--- 6. 标签与污点 ---"
+echo "标签:"
+kubectl get node "$NODE" -o json | jq -r '.metadata.labels | to_entries[] | "  \(.key)=\(.value)"' | head -10
+echo "污点:"
+kubectl get node "$NODE" -o jsonpath='{.spec.taints}' | jq -r '.[]? | "  \(.key)=\(.value):\(.effect)"' 2>/dev/null || echo "  无污点"
+
+# 7. kubelet 版本
+echo ""
+echo "--- 7. 组件版本 ---"
+kubectl get node "$NODE" -o jsonpath='kubelet: {.status.nodeInfo.kubeletVersion}, OS: {.status.nodeInfo.osImage}, Kernel: {.status.nodeInfo.kernelVersion}'
+echo ""
+```
+
+### 节点健康 PrometheusRule
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-health-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: node-health
+      rules:
+        - alert: NodeNotReady
+          expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "节点 {{ $labels.node }} NotReady 超过 5 分钟"
+            runbook: "检查 kubelet 状态、网络连通性、资源压力"
+
+        - alert: NodeHighCPU
+          expr: |
+            100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.instance }} CPU 使用率 > 90%"
+
+        - alert: NodeHighMemory
+          expr: |
+            (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 90
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.instance }} 内存使用率 > 90%"
+
+        - alert: NodeDiskPressure
+          expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "节点 {{ $labels.node }} 磁盘压力"
+            runbook: "清理镜像/日志，扩容磁盘"
+
+        - alert: NodePodCapacityNearFull
+          expr: |
+            kubelet_running_pods / kube_node_status_capacity{resource="pods"} > 0.9
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.node }} Pod 数量接近上限 (>90%)"
+```
+
+<!-- chunk: 节点自动修复 -->
+## 节点自动修复 (Node Auto-Repair)
+
+### 修复策略对比
+
+| 修复方式 | 触发条件 | 修复动作 | 适用场景 |
+|----------|----------|----------|----------|
+| kubelet 自恢复 | kubelet 进程崩溃 | systemd 自动重启 | 所有环境 |
+| Node Problem Detector | 内核错误/硬件故障 | 标记节点 + 告警 | 生产环境 |
+| Cluster Autoscaler 替换 | 节点 NotReady > 10min | 删除并重建节点 | 云环境 |
+| ACK 自动修复 | 节点异常 | 重启/替换 ECS | 阿里云 ACK |
+| 手动 Drain + 替换 | 硬件故障确认 | 人工介入 | 裸金属/特殊场景 |
+
+### Node Problem Detector 部署
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-problem-detector
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: node-problem-detector
+  template:
+    spec:
+      containers:
+        - name: node-problem-detector
+          image: registry.k8s.io/node-problem-detector/node-problem-detector:v0.8.18
+          command:
+            - /node-problem-detector
+            - --logtostderr
+            - --config.system-log-monitor=/config/kernel-monitor.json,/config/docker-monitor.json
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          volumeMounts:
+            - name: log
+              mountPath: /var/log
+              readOnly: true
+            - name: config
+              mountPath: /config
+              readOnly: true
+      volumes:
+        - name: log
+          hostPath:
+            path: /var/log
+        - name: config
+          configMap:
+            name: node-problem-detector-config
+```
+
+<!-- chunk: 节点升级策略 -->
+## 节点升级策略
+
+### 滚动升级流程
+
+```
+1. 准备工作
+   ├── 确认目标版本兼容性
+   ├── 备份关键配置
+   └── 通知相关团队
+
+2. 逐节点升级（每次 1-2 个节点）
+   ├── kubectl cordon <node>          # 标记不可调度
+   ├── kubectl drain <node> \         # 驱逐 Pod
+   │     --ignore-daemonsets \
+   │     --delete-emptydir-data \
+   │     --grace-period=60
+   ├── 执行节点升级（OS/kubelet）
+   ├── systemctl restart kubelet
+   ├── kubectl uncordon <node>        # 恢复调度
+   └── 验证节点状态与 Pod 运行
+
+3. 升级后验证
+   ├── 检查所有节点版本一致
+   ├── 验证关键服务运行正常
+   └── 监控告警无异常
+```
+
+### 升级命令参考
+
+```bash
+# 🟡 中风险：会修改节点状态
+# 1. 标记节点不可调度
+kubectl cordon node-1
+
+# 2. 驱逐 Pod（尊重 PDB）
+kubectl drain node-1 \
+  --ignore-daemonsets \
+  --delete-emptydir-data \
+  --grace-period=60 \
+  --timeout=300s
+
+# 3. 升级完成后恢复调度
+kubectl uncordon node-1
+
+# 4. 验证节点状态
+kubectl get node node-1 -o wide
+kubectl get pods -A --field-selector=spec.nodeName=node-1
+```
+
+<!-- chunk: 节点池容量规划 -->
+## 节点池容量规划
+
+### 容量规划公式
+
+```
+所需节点数 = ceil(总 Pod 资源请求 / 单节点可分配资源 × 冗余系数)
+
+冗余系数建议：
+- 生产环境: 1.3 - 1.5 (预留 30-50% 缓冲)
+- 测试环境: 1.1 - 1.2
+- 开发环境: 1.0 - 1.1
+```
+
+### 节点规格选型表
+
+| 业务类型 | 推荐规格 | CPU:内存比 | 适用场景 |
+|----------|----------|------------|----------|
+| Web/API 服务 | 4C8G / 8C16G | 1:2 | 通用微服务 |
+| 计算密集型 | 8C16G / 16C32G | 1:2 | 视频转码/科学计算 |
+| 内存密集型 | 4C16G / 8C32G | 1:4 | 缓存/内存数据库 |
+| GPU 计算 | 8C32G + V100/A100 | - | AI 训练/推理 |
+| 存储密集型 | 4C16G + 大磁盘 | 1:4 | 日志/监控存储 |
+
+### 容量监控 Dashboard PromQL
+
+```promql
+# 集群整体资源使用率
+sum(kube_pod_container_resource_requests{resource="cpu"}) /
+sum(kube_node_status_allocatable{resource="cpu"}) * 100
+
+# 按节点池分组的使用率
+sum by (node_pool) (
+  kube_pod_container_resource_requests{resource="cpu"}
+) /
+sum by (node_pool) (
+  kube_node_status_allocatable{resource="cpu"}
+) * 100
+
+# 预测资源耗尽时间
+predict_linear(
+  sum(kube_pod_container_resource_requests{resource="cpu"})[7d:1h],
+  7 * 24 * 3600
+) > sum(kube_node_status_allocatable{resource="cpu"})
+```
+
+<!-- chunk: 节点故障排查 -->
+## 节点故障排查
+
+### 故障排查决策树
+
+```
+节点 NotReady
+├── kubelet 状态检查
+│   ├── systemctl status kubelet → 服务是否运行
+│   ├── journalctl -u kubelet -f → 查看日志
+│   └── kubelet 证书是否过期
+├── 网络连通性
+│   ├── ping 控制平面 VIP
+│   ├── curl -k https://<apiserver>:6443/healthz
+│   └── 检查 CNI 插件状态
+├── 资源压力
+│   ├── df -h → 磁盘使用率
+│   ├── free -m → 内存使用率
+│   └── top → CPU 负载
+└── 系统组件
+    ├── containerd/docker 状态
+    ├── 内核日志 dmesg | tail -50
+    └── 时间同步 chronyc tracking
+```
+
+### 常见节点故障修复表
+
+| 故障现象 | 可能原因 | 排查命令 | 修复措施 |
+|----------|----------|----------|----------|
+| NotReady | kubelet 崩溃 | `systemctl status kubelet` | `systemctl restart kubelet` |
+| NotReady | 证书过期 | `openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates` | 重新签发证书 |
+| DiskPressure | 镜像/日志占满 | `df -h /var/lib/containerd` | `crictl rmi --prune` 清理镜像 |
+| MemoryPressure | Pod 内存泄漏 | `kubectl top pods --sort-by=memory` | 驱逐异常 Pod |
+| PIDPressure | 进程数超限 | `cat /proc/sys/kernel/pid_max` | 调大 pid_max 或限制 Pod 进程数 |
+| 网络不通 | CNI 异常 | `kubectl logs -n kube-system -l app=calico-node` | 重启 CNI DaemonSet |
+| 时间不同步 | NTP 异常 | `chronyc tracking` | `chronyc makestep` |
+
+<!-- chunk: 节点安全加固 -->
+## 节点安全加固
+
+### 安全加固检查清单
+
+| 检查项 | 命令 | 期望结果 |
+|--------|------|----------|
+| SSH 禁用密码登录 | `grep PasswordAuthentication /etc/ssh/sshd_config` | no |
+| 禁用 root 远程登录 | `grep PermitRootLogin /etc/ssh/sshd_config` | no |
+| kubelet 只读端口关闭 | `grep readOnlyPort /var/lib/kubelet/config.yaml` | 0 |
+| kubelet 匿名认证关闭 | `grep anonymous /var/lib/kubelet/config.yaml` | enabled: false |
+| 容器运行时版本 | `containerd --version` | 最新稳定版 |
+| 内核参数加固 | `sysctl net.ipv4.ip_forward` | 1 (K8s 需要) |
+| 审计日志开启 | `grep audit /etc/kubernetes/manifests/kube-apiserver.yaml` | 已配置 |
+
+### 节点安全加固脚本
+
+```bash
+#!/bin/bash
+# 🟡 中风险：会修改节点配置
+# 节点安全加固（生产环境谨慎执行）
+
+echo "=== 节点安全加固 ==="
+
+# 1. 内核参数加固
+cat >> /etc/sysctl.d/99-kubernetes-hardening.conf << EOF
+# 禁用 ICMP 重定向
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.send_redirects = 0
+
+# 禁用源路由
+net.ipv4.conf.all.accept_source_route = 0
+
+# 启用 SYN Cookie
+net.ipv4.tcp_syncookies = 1
+
+# 反向路径过滤
+net.ipv4.conf.all.rp_filter = 1
+EOF
+
+sysctl --system
+
+# 2. 文件权限加固
+chmod 644 /etc/kubernetes/admin.conf 2>/dev/null || true
+chmod 644 /etc/kubernetes/kubelet.conf 2>/dev/null || true
+chmod 600 /var/lib/kubelet/pki/*.pem 2>/dev/null || true
+
+echo "=== 加固完成 ==="
+```
+
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

@@ -1,40 +1,39 @@
 ---
-title: Domain 02 Workloads Applications
-description: Domain 02 Workloads Applications 目录索引
-summary: Domain 02 Workloads Applications 目录索引
+title: 工作负载目录索引
+description: Kubernetes 工作负载与应用知识域 — 核心工作负载控制器、多语言运行时、Java/Node.js/Go/Python 垂直栈实践
+summary: 工作负载知识域索引，涵盖 Pod/Deployment/StatefulSet/DaemonSet/Job 核心控制器、多语言运行时实践、应用架构模式
 category: index
 tags:
 - index
-tier: supporting
+- workloads
+- deployment
+- applications
+tier: core
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
+# 工作负载 (Workloads & Applications)
 
-# Domain 02 Workloads Applications
-
-> 本页为 `工作负载` 目录的自动索引。
-
-## 概览
-
-- [[工作负载/README.md|Readme]]
+> Kubernetes 核心工作负载控制器与多语言运行时垂直栈实践。
 
 ## 子目录
 
-- 工作负载/00-core-workloads/
-- [[工作负载/98-merged-indexes/index.md|Merged Indexes]]
-- 工作负载/topic-functions/
-- 工作负载/topic-java-kubernetes/
+| 子目录 | 内容 | 文件数 |
+|--------|------|--------|
+| [[工作负载/核心工作负载/index.md\|核心工作负载/]] | Pod/Deployment/StatefulSet/DaemonSet/Job 深度实践 | 23+ |
+| [[工作负载/Java-on-K8s/index.md\|Java-on-K8s/]] | Spring Boot/JVM/Operator SDK/Quarkus | 8 |
+| [[工作负载/多语言运行 时/index.md\|多语言运行时/]] | Go/Python/Rust/GPU/多集群 | 6 |
+| [[工作负载/Node-js-on-K8s/index.md\|Node-js-on-K8s/]] | Node.js/Deno/Bun 运行时实践 | 新增 |
 
-## 文档
+## 根目录文档（架构与模式）
 
-- [[工作负载/02-spring-boot-kubernetes-production.md|Spring Boot Kubernetes Production]]
-- [[工作负载/03-jvm-gc-container-tuning.md|Jvm Gc Container Tuning]]
-- [[工作负载/04-java-operator-sdk-development.md|Java Operator Sdk Development]]
-- [[工作负载/05-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
-- [[工作负载/06-java-cicd-tekton-argocd.md|Java Cicd Tekton Argocd]]
-- [[工作负载/07-java-observability-kubernetes.md|Java Observability Kubernetes]]
-- [[工作负载/99-kubernetes-deployment-patterns-architecture.md|Kubernetes Deployment Patterns Architecture]]
-- [[工作负载/99-kubernetes-multi-tenant-architecture.md|Kubernetes Multi Tenant Architecture]]
-- [[工作负载/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[工作负载/99-kubernetes-deployment-patterns-architecture.md|部署模式与架构]]
+- [[工作负载/99-kubernetes-multi-tenant-architecture.md|多租户架构]]
+- [[工作负载/99-production-readiness-operations-guide.md|生产就绪运维指南]]
 
+## 知识域导航
+
+- [[工作负载/README.md|README]] — 域入口与跨域导航
+- [[标签/k8s|k8s 标签枢纽]] — Kubernetes 核心知识
+- [[标签/production|production 标签枢纽]] — 生产实践

@@ -240,13 +240,314 @@ rules:
 ## ACK合规支持
 
 | 合规项 | ACK支持 | 配置方式 |
-|-------|--------|---------|
+|-------|--------|--------|
 | **等保2.0** | 三级支持 | 安全加固版 |
 | **审计日志** | SLS集成 | 控制台开启 |
 | **etcd加密** | 托管自动 | Pro版 |
 | **网络隔离** | 安全组+NetworkPolicy | 配置 |
 | **漏洞扫描** | ACR集成 | 企业版 |
 | **合规报告** | 配置审计 | 云安全中心 |
+
+---
+
+## 自动化合规扫描 Pipeline
+
+### CI/CD 集成架构
+
+```
+代码提交 → CI Pipeline → 合规检查门禁 → 合并 → 部署 → 运行时合规
+    │           │              │                      │           │
+    │           │              ├─ Trivy (镜像)       │           ├─ Falco
+    │           │              ├─ kube-bench (CIS)  │           ├─ kube-bench CronJob
+    │           │              ├─ Polaris (配置)    │           ├─ Trivy Operator
+    │           │              ├─ conftest (策略)   │           └─ 审计日志
+    │           │              └─ kubescape (NSA)  │
+    │           └─ 构建 + 签名 (Cosign)     └─ GitOps Sync
+    └─ 本地 pre-commit (可选)
+```
+
+### GitHub Actions 合规扫描
+
+```yaml
+# .github/workflows/compliance-scan.yaml
+name: Compliance Scan
+on:
+  pull_request:
+    paths: ['manifests/**', 'Dockerfile*', 'charts/**']
+  schedule:
+    - cron: '0 3 * * *'  # 每天凌晨 3 点
+
+jobs:
+  image-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t app:${{ github.sha }} .
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: app:${{ github.sha }}
+          format: sarif
+          output: trivy-results.sarif
+          severity: CRITICAL,HIGH
+          exit-code: 1  # 发现高危漏洞则失败
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-results.sarif
+
+  config-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Polaris Config Audit
+        run: |
+          curl -sL https://github.com/FairwindsOps/polaris/releases/latest/download/polaris_linux_amd64.tar.gz | tar xz
+          ./polaris audit --audit-path ./manifests/ --format=json > polaris.json
+          # 检查 danger 级别问题
+          DANGERS=$(cat polaris.json | jq '[.results[] | select(.severity == "danger")] | length')
+          if [ "$DANGERS" -gt 0 ]; then
+            echo "::error::发现 $DANGERS 个危险配置问题"
+            exit 1
+          fi
+
+  cluster-scan:
+    if: github.event_name == 'schedule'
+    runs-on: self-hosted
+    steps:
+      - name: kube-bench CIS
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
+          kubectl wait --for=condition=complete job/kube-bench --timeout=300s
+          kubectl logs job/kube-bench > cis-report.txt
+          kubectl delete job kube-bench
+          # 检查 FAIL 数量
+          FAILS=$(grep -c '\[FAIL\]' cis-report.txt || true)
+          echo "CIS 检查失败项: $FAILS"
+      - name: kubescape NSA
+        run: |
+          kubescape scan framework nsa \
+            --exclude-namespaces kube-system,gatekeeper-system \
+            --format json --output nsa-report.json
+          SCORE=$(cat nsa-report.json | jq '.summaryDetails.complianceScore')
+          echo "NSA 合规分数: $SCORE%"
+```
+
+---
+
+## 持续合规监控
+
+### 集群内合规扫描 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: compliance-scanner
+  namespace: security
+spec:
+  schedule: "0 4 * * *"  # 每天 4:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: compliance-scanner
+          containers:
+            - name: scanner
+              image: aquasec/kube-bench:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  kube-bench run --targets=node,policies \
+                    --json > /reports/cis-$(date +%Y%m%d).json
+                  # 发送报告到合规平台
+                  FAIL_COUNT=$(cat /reports/cis-*.json | jq '[.Controls[].tests[].results[] | select(.status == "FAIL")] | length')
+                  echo "CIS 失败项: $FAIL_COUNT"
+                  if [ "$FAIL_COUNT" -gt 10 ]; then
+                    echo "🔴 合规偏差过大，发送告警"
+                    # curl -X POST $ALERT_WEBHOOK ...
+                  fi
+              volumeMounts:
+                - name: reports
+                  mountPath: /reports
+          volumes:
+            - name: reports
+              emptyDir: {}
+          restartPolicy: OnFailure
+```
+
+### 合规指标监控
+
+```yaml
+# PrometheusRule: 合规告警
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: compliance-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: compliance.rules
+      rules:
+        # 特权容器检测
+        - alert: PrivilegedContainerRunning
+          expr: |
+            kube_pod_container_info{image!=""} * on(pod,namespace)
+            group_left() (kube_pod_container_status_running == 1)
+            * on(pod,namespace) group_left()
+            (kube_pod_container_security_context_privileged == 1) > 0
+          for: 5m
+          labels:
+            severity: critical
+            compliance: cis-5.2.1
+          annotations:
+            summary: "特权容器运行中: {{ $labels.namespace }}/{{ $labels.pod }}"
+
+        # 无资源限制
+        - alert: ContainerWithoutLimits
+          expr: |
+            kube_pod_container_resource_limits{resource="memory"} == 0
+          for: 30m
+          labels:
+            severity: warning
+            compliance: cis-5.4.1
+          annotations:
+            summary: "容器未设置资源限制"
+
+        # 审计日志异常
+        - alert: AuditLogDisabled
+          expr: |
+            apiserver_audit_event_total == 0
+          for: 10m
+          labels:
+            severity: critical
+            compliance: cis-1.2.16
+          annotations:
+            summary: "审计日志未产生事件"
+```
+
+---
+
+## 合规修复自动化
+
+### 自动修复策略
+
+```yaml
+# Kyverno 自动修复: 强制资源限制
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: mutate-resource-limits
+spec:
+  rules:
+    - name: add-default-limits
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - production
+                - staging
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+              - (name): "*"
+                resources:
+                  requests:
+                    memory: "128Mi"
+                    cpu: "100m"
+                  limits:
+                    memory: "512Mi"
+                    cpu: "1000m"
+---
+# 自动添加安全上下文
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: mutate-security-context
+spec:
+  rules:
+    - name: add-security-context
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            securityContext:
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+            containers:
+              - (name): "*"
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: true
+                  capabilities:
+                    drop: ["ALL"]
+```
+
+### 合规修复工作流
+
+```
+发现违规 → 分类 → 自动修复? → 执行 → 验证 → 记录
+    │         │         │           │        │       │
+    │         │         ├─ 是: Kyverno mutate  │       ├─ 合规报告
+    │         │         └─ 否: 创建工单    │       └─ 审计日志
+    │         │                           │
+    │         ├─ P0: 立即修复        └─ 重新扫描确认
+    │         ├─ P1: 24h 内修复
+    │         └─ P2: 下个迭代
+    └─ 来源: kube-bench / Trivy / Falco / Polaris
+```
+
+---
+
+## 合规成熟度模型
+
+| 级别 | 名称 | 特征 | 工具 | 建议时间 |
+|------|------|------|------|----------|
+| L1 | 无合规 | 无扫描、无审计 | 无 | - |
+| L2 | 手动检查 | 年度手动运行 kube-bench | kube-bench CLI | 1 周 |
+| L3 | 定期扫描 | CI 集成镜像扫描 + 配置审计 | Trivy + Polaris | 1 月 |
+| L4 | 持续监控 | 运行时检测 + 自动告警 | Falco + Prometheus | 3 月 |
+| L5 | 自动修复 | 策略强制 + 自动修复 + 报告 | Kyverno + 全套 | 6 月 |
+| L6 | 合规即代码 | 全自动化 + 证据链 + 审计追踪 | 完整体系 | 12 月 |
+
+### 快速启动路线图
+
+```
+第 1 周: 运行 kube-bench，生成基线报告
+    └── 识别 Top 10 失败项
+
+第 2 周: 修复 P0 问题
+    ├── 禁用匿名认证
+    ├── 启用审计日志
+    └── 配置 etcd 加密
+
+第 3-4 周: CI 集成
+    ├── Trivy 镜像扫描
+    ├── Polaris 配置审计
+    └── 设置质量门禁
+
+第 2 月: 运行时检测
+    ├── 部署 Falco
+    ├── 配置告警规则
+    └── 建立响应流程
+
+第 3 月: 策略强制
+    ├── 部署 Kyverno/Gatekeeper
+    ├── 先 audit 后 enforce
+    └── 自动修复策略
+
+持续: 合规报告 + 审计追踪 + 年度认证
+```
 
 ---
 

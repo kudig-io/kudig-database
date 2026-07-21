@@ -1,17 +1,82 @@
 ---
 title: storage
-description: All pages tagged with storage
+description: 存储体系标签枢纽 — 涵盖 CSI、PV/PVC、StorageClass、卷快照、分布式存储、有状态应用、备份恢复、存储性能调优等全部存储领域知识
 category: tag-index
 tags:
 - storage
-tier: supporting
+- csi
+- persistent-volume
+- storageclass
+- distributed-storage
+- backup
+tier: core
+difficulty: intermediate-to-advanced
+domain: storage
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # storage Tag Hub
 
 > 存储领域页面 — CSI、PVC、PV、StorageClass、Snapshot、分布式存储、备份恢复等。
+
+## 核心定义
+
+**Kubernetes 存储**是容器编排平台中管理数据持久化的子系统，通过 PV/PVC/StorageClass 抽象和 CSI（Container Storage Interface）插件体系，为有状态应用提供可靠、高性能的存储能力。
+
+### 存储架构分层
+
+| 层级 | 组件 | 职责 |
+|------|------|------|
+| 用户接口 | PVC (PersistentVolumeClaim) | 用户声明存储需求 |
+| 控制平面 | PV Controller + CSI External Provisioner | 动态供给、绑定、回收 |
+| 驱动接口 | CSI Driver (Controller + Node) | 与存储后端交互 |
+| 存储后端 | 云磁盘/分布式存储/本地盘 | 实际数据存储 |
+| 数据保护 | VolumeSnapshot + Velero | 快照、备份、恢复 |
+
+### 存储类型对比
+
+| 类型 | 访问模式 | 性能 | 典型场景 | 示例 |
+|------|----------|------|----------|------|
+| 块存储 | RWO | 极高 IOPS | 数据库、有状态应用 | AWS EBS, 阿里云 ESSD |
+| 文件存储 | RWX | 中等 | 共享文件、日志 | NFS, EFS, NAS |
+| 对象存储 | HTTP API | 高吞吐 | AI 训练、备份、归档 | S3, OSS, MinIO |
+| 本地存储 | RWO | 极高 | 缓存、临时数据 | local-path, LVM |
+
+### CSI 驱动生态
+
+| CSI 驱动 | 存储后端 | 特色 |
+|----------|----------|------|
+| alibaba-cloud-csi | 阿里云 ESSD/NAS/OSS | 云原生、多协议 |
+| aws-ebs-csi | AWS EBS | GP3/IO2 支持 |
+| gcp-compute-csi | GCP PD | 区域持久化磁盘 |
+| rook-ceph | Ceph | 开源分布式、块/文件/对象 |
+| longhorn | Longhorn | 轻量级、UI 友好 |
+| openebs | OpenEBS | 多引擎、简单部署 |
+| nfs-csi | NFS Server | 共享存储、RWX |
+
+## 生产实践要点
+
+### 存储性能基准
+
+| 指标 | SSD 目标 | HDD 目标 | 度量工具 |
+|------|----------|----------|----------|
+| IOPS (4K随机读) | > 50,000 | > 200 | fio |
+| 吐吐量 (1M顺序) | > 500 MB/s | > 150 MB/s | fio |
+| 延迟 (4K随机写) | < 1ms | < 10ms | fio |
+| PVC 绑定时间 | < 10s | < 30s | kubectl |
+| 快照创建 | < 5s | < 30s | kubectl |
+
+### 常见存储故障快速定位
+
+| 症状 | 可能原因 | 排查命令 |
+|------|----------|----------|
+| PVC Pending | SC 不存在/配额不足/驱动异常 | `kubectl describe pvc` |
+| Pod 挂载失败 | 节点 CSI 插件异常/卷被占用 | `kubectl logs -n kube-system csi-plugin` |
+| IO 延迟高 | 磁盘 IOPS 耗尽/网络拥塞 | `iostat -x 1`, `fio` |
+| 卷扩容失败 | 文件系统不支持/SC 未开启 | `kubectl get sc -o yaml` |
+| 快照失败 | VolumeSnapshotClass 缺失 | `kubectl get volumesnapshotclass` |
 
 ## K8s 存储 (K8s Storage)
 

@@ -293,6 +293,403 @@ metadata:
 - 09 - Kubernetes 源码结构与阅读指南 (Source Code)
 - 10 - CAP 定理与分布式系统基础 (CAP Theorem)
 
+## etcd 压缩调优与 410 Gone 深度诊断
+
+### etcd Compaction 机制
+
+```
+etcd MVCC 存储模型:
+
+  Revision 100: pod/nginx spec.image = "nginx:1.25"
+  Revision 101: pod/nginx spec.image = "nginx:1.26"  ← 当前
+  Revision 102: pod/nginx status.phase = "Running"
+  ...
+  Revision 200: 当前最新 revision
+
+  Compaction (revision < 150 删除):
+  [X] Rev 100  [X] Rev 101  ...  [✓] Rev 150+ 保留
+
+  如果客户端持有 RV=100 尝试 Watch:
+  → 410 Gone: "too old resource version"
+```
+
+### etcd 压缩参数调优
+
+```bash
+# 🟢 只读：查看当前 etcd 配置
+kubectl -n kube-system get pod etcd-master-0 -o yaml | grep -A5 "command"
+
+# 关键参数:
+# --auto-compaction-mode=periodic   # 或 revision
+# --auto-compaction-retention=5m    # periodic 模式: 保留 5 分钟历史
+# --auto-compaction-retention=10000 # revision 模式: 保留 10000 个版本
+```
+
+| 参数 | 默认值 | 建议值 | 说明 |
+|------|--------|--------|------|
+| auto-compaction-mode | periodic | periodic | 按时间压缩更可控 |
+| auto-compaction-retention | 5m | 5m-15m | 增大可减少 410 Gone |
+| quota-backend-bytes | 2GB | 4-8GB | 大集群建议增大 |
+| snapshot-count | 10000 | 10000 | 快照触发阈值 |
+
+### 410 Gone 故障排查流程
+
+```bash
+# 🟢 只读：检查 API Server 日志中的 410 错误
+kubectl logs -n kube-system kube-apiserver-master-0 --tail=500 | grep "410"
+
+# 🟢 只读：查看当前 etcd revision
+kubectl exec -n kube-system etcd-master-0 -- etcdctl \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  endpoint status --write-out=table
+
+# 🟢 只读：检查哪些客户端触发了 410
+kubectl logs -n kube-system kube-apiserver-master-0 --tail=2000 | \
+  grep "too old resource version" | \
+  awk '{print $NF}' | sort | uniq -c | sort -rn | head -10
+
+# 🟢 只读：检查 etcd 压缩历史
+kubectl exec -n kube-system etcd-master-0 -- etcdctl \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  get / --prefix --keys-only --limit=1 -w json | jq '.header.revision'
+```
+
+### 410 Gone 常见原因与修复
+
+| 原因 | 症状 | 修复方案 |
+|------|------|----------|
+| 客户端处理太慢 | 单个控制器频繁 410 | 优化 Handler 吐吐量，增加并发 worker |
+| 压缩窗口太短 | 多个客户端同时 410 | 增大 auto-compaction-retention |
+| 网络分区 | 客户端恢复后 410 | 实现自动 Re-List 逻辑 |
+| etcd 性能瓶颈 | 全局延迟增高 | 优化 etcd 磁盘 IOPS |
+| 大量 List 请求 | API Server 压力大 | 使用 RV="0" 从缓存读取 |
+
+## Watch Bookmark 机制详解
+
+### Bookmark 工作原理
+
+```
+无 Bookmark 场景:
+  Client RV=100 ──── Watch ────> [30min 无事件]
+  etcd Compaction 删除 RV<150
+  Client 尝试继续 Watch RV=100 → 410 Gone!
+
+有 Bookmark 场景:
+  Client RV=100 ──── Watch ────> [Bookmark RV=120]
+                                 [Bookmark RV=140]
+                                 [Bookmark RV=160]  ← 客户端更新 RV
+  etcd Compaction 删除 RV<150
+  Client Watch RV=160 → ✅ 成功继续
+```
+
+### 启用 Bookmark
+
+```go
+// 客户端启用 Bookmark
+import "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+listOptions := metav1.ListOptions{
+    ResourceVersion:      "",  // 从最新开始
+    AllowWatchBookmarks:  true, // 启用 Bookmark
+}
+
+watcher, err := client.CoreV1().Pods("").Watch(ctx, listOptions)
+for event := range watcher.ResultChan() {
+    switch event.Type {
+    case watch.Bookmark:
+        // 更新本地 RV，不处理业务逻辑
+        lastRV = event.Object.(*v1.Pod).ResourceVersion
+        log.Debugf("Bookmark received, RV updated to %s", lastRV)
+    case watch.Added, watch.Modified, watch.Deleted:
+        // 正常业务处理
+        handleEvent(event)
+        lastRV = event.Object.(*v1.Pod).ResourceVersion
+    }
+}
+```
+
+### Bookmark 监控指标
+
+```promql
+# API Server Bookmark 发送率
+rate(apiserver_watch_events_sizes_sum{resource="pods"}[5m])
+
+# Watch 缓存命中率
+apiserver_watch_cache_events_dispatched_total
+
+# 410 Gone 错误率
+rate(apiserver_request_total{code="410"}[5m])
+```
+
+## 大规模集群 RV 管理
+
+### 性能基准
+
+| 集群规模 | 对象数 | etcd Revision 增速 | 压缩窗口建议 |
+|----------|--------|-------------------|------------|
+| 小型 (<100 节点) | <50K | ~100 rev/s | 5m |
+| 中型 (100-500 节点) | 50K-500K | ~500 rev/s | 10m |
+| 大型 (500-2000 节点) | 500K-2M | ~2000 rev/s | 15m |
+| 超大型 (>2000 节点) | >2M | >5000 rev/s | 15m + 分片 |
+
+### 大规模集群优化策略
+
+```yaml
+# API Server 优化配置 (kubeadm)
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+apiServer:
+  extraArgs:
+    watch-cache-sizes: "pods=1000,nodes=100,configmaps=200"
+    default-watch-cache-size: "100"
+    max-requests-inflight: "400"
+    max-mutating-requests-inflight: "200"
+    # 启用 API Priority and Fairness
+    enable-priority-and-fairness: "true"
+```
+
+### APF 对 Watch 的保护
+
+```yaml
+# 为控制器 Watch 请求设置优先级
+apiVersion: flowcontrol.apiserver.k8s.io/v1
+kind: FlowSchema
+metadata:
+  name: controller-watch-protection
+spec:
+  priorityLevelConfiguration:
+    name: workload-high
+  matchingPrecedence: 800
+  rules:
+    - subjects:
+        - kind: ServiceAccount
+          serviceAccount:
+            name: "*"
+            namespace: kube-system
+      resourceRules:
+        - verbs: ["watch", "list"]
+          apiGroups: ["*"]
+          resources: ["*"]
+          namespaces: ["*"]
+```
+
+## controller-runtime 冲突处理模式
+
+### 标准 Reconcile 冲突处理
+
+```go
+import (
+    "context"
+    ctrl "sigs.k8s.io/controller-runtime"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+    "k8s.io/client-go/util/retry"
+)
+
+func (r *MyReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    // 1. 获取当前状态
+    var app v1.MyApp
+    if err := r.Get(ctx, req.NamespacedName, &app); err != nil {
+        return ctrl.Result{}, client.IgnoreNotFound(err)
+    }
+
+    // 2. 检查 Generation 是否需要调谐
+    if app.Status.ObservedGeneration >= app.Generation {
+        return ctrl.Result{}, nil // 无需处理
+    }
+
+    // 3. 执行业务逻辑
+    desiredState := computeDesiredState(&app)
+
+    // 4. 更新状态（带冲突重试）
+    err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+        var current v1.MyApp
+        if err := r.Get(ctx, req.NamespacedName, &current); err != nil {
+            return err
+        }
+        current.Status.ObservedGeneration = current.Generation
+        current.Status.State = desiredState
+        return r.Status().Update(ctx, &current)
+    })
+    if err != nil {
+        return ctrl.Result{}, err
+    }
+
+    return ctrl.Result{}, nil
+}
+```
+
+### 多控制器字段所有权管理
+
+```go
+// 控制器 A: 只管理 spec.replicas
+func (r *ReplicaController) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    patch := client.MergeFrom(original.DeepCopy())
+    
+    // 使用 SSA 避免与其他控制器冲突
+    obj := &appsv1.Deployment{
+        ObjectMeta: metav1.ObjectMeta{
+            Name:      req.Name,
+            Namespace: req.Namespace,
+        },
+        Spec: appsv1.DeploymentSpec{
+            Replicas: pointer.Int32(desiredReplicas),
+        },
+    }
+    
+    err := r.Patch(ctx, obj, client.Apply, 
+        client.FieldOwner("replica-controller"),
+        client.ForceOwnership,
+    )
+    return ctrl.Result{}, err
+}
+
+// 控制器 B: 只管理 spec.template.spec.containers[].image
+func (r *ImageController) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    obj := &appsv1.Deployment{
+        ObjectMeta: metav1.ObjectMeta{
+            Name:      req.Name,
+            Namespace: req.Namespace,
+        },
+        Spec: appsv1.DeploymentSpec{
+            Template: corev1.PodTemplateSpec{
+                Spec: corev1.PodSpec{
+                    Containers: []corev1.Container{
+                        {Name: "app", Image: newImage},
+                    },
+                },
+            },
+        },
+    }
+    
+    err := r.Patch(ctx, obj, client.Apply,
+        client.FieldOwner("image-controller"),
+    )
+    return ctrl.Result{}, err
+}
+```
+
+### SSA 冲突检测与解决
+
+```bash
+# 🟢 只读：查看对象字段所有权
+kubectl get deployment nginx -o jsonpath='{.metadata.managedFields}' | jq '.'
+
+# 🟢 只读：查看特定字段的管理者
+kubectl get deployment nginx -o json | jq '.metadata.managedFields[] | {manager, fieldsV1}'
+
+# 🟡 中风险：强制接管字段所有权
+kubectl apply --server-side --field-manager=my-controller --force-conflicts -f deploy.yaml
+
+# 🟢 只读：检查 SSA 冲突（dry-run）
+kubectl apply --server-side --field-manager=new-controller --dry-run=server -f deploy.yaml
+```
+
+## 诊断命令集
+
+```bash
+# 🟢 只读：查看对象当前 ResourceVersion
+kubectl get pod nginx -o jsonpath='{.metadata.resourceVersion}'
+
+# 🟢 只读：查看对象 Generation
+kubectl get deployment nginx -o jsonpath='{.metadata.generation}'
+
+# 🟢 只读：查看 ObservedGeneration
+kubectl get deployment nginx -o jsonpath='{.status.observedGeneration}'
+
+# 🟢 只读：检查控制器是否落后
+kubectl get deployment nginx -o json | \
+  jq '{generation: .metadata.generation, observed: .status.observedGeneration}'
+
+# 🟢 只读：查看 etcd 当前 revision
+kubectl exec -n kube-system etcd-master-0 -- etcdctl \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  endpoint status -w table
+
+# 🟢 只读：API Server Watch 缓存状态
+kubectl get --raw /metrics | grep apiserver_watch
+
+# 🟢 只读：检查 409/410 错误率
+kubectl get --raw /metrics | grep -E "apiserver_request_total.*code=\"(409|410)\""
+
+# 🟢 只读：查看对象 managedFields
+kubectl get pod nginx -o jsonpath='{.metadata.managedFields[*].manager}'
+
+# 🟡 中风险：强制重新触发调谐
+kubectl annotate deployment nginx kubectl.kubernetes.io/restartedAt=$(date -u +%Y-%m-%dT%H:%M:%SZ) --overwrite
+```
+
+## 监控告警
+
+### PrometheusRule — RV 与并发控制
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rv-concurrency-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: resource-version
+      rules:
+        - alert: HighConflictRate
+          expr: |
+            rate(apiserver_request_total{code="409"}[5m]) > 10
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "API 冲突率过高 ({{ $value | printf \"%.1f\" }}/s)，检查控制器竞争"
+
+        - alert: WatchGoneErrors
+          expr: |
+            rate(apiserver_request_total{code="410", resource="pods"}[5m]) > 1
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Watch 410 Gone 错误频繁，检查 etcd 压缩配置或客户端性能"
+
+        - alert: ControllerReconcileLag
+          expr: |
+            kube_deployment_status_observed_generation < kube_deployment_metadata_generation
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} 控制器落后 >15min"
+
+        - alert: EtcdHighRevisionGrowth
+          expr: |
+            rate(etcd_server_proposals_committed_total[5m]) > 5000
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "etcd revision 增速过快 ({{ $value }}/s)，检查是否有异常写入"
+```
+
+## 最佳实践总结
+
+| 场景 | 推荐方案 | 避免 |
+|------|----------|------|
+| 单控制器更新 | 乐观锁 + RetryOnConflict | 忽略 409 错误 |
+| 多控制器管理同一对象 | SSA + FieldOwner | 全量 Update 覆盖 |
+| 高频 List | RV="0" 从缓存读 | 每次 List 都走 etcd |
+| 长连接 Watch | 启用 Bookmark | 不处理 Bookmark 事件 |
+| 控制器调谐 | 检查 Generation | 每次事件都全量计算 |
+| 大规模集群 | APF + Watch Cache 调优 | 默认配置不变 |
+| 紧急修复 | --force-conflicts | 生产环境随意 force |
+
 ## See Also
 
 - 04-watch-list-mechanism

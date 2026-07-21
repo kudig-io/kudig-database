@@ -1,17 +1,51 @@
 ---
 title: best-practices
-description: All pages tagged with best-practices
+description: 最佳实践标签枢纽 — 覆盖安全、运维、网络、存储、可观测性、部署、性能调优等全领域的生产级最佳实践参考
 category: tag-index
 tags:
 - best-practices
-tier: supporting
+- production-ready
+- hardening
+- optimization
+- anti-patterns
+tier: core
+difficulty: all-levels
+domain: cross-domain
+k8s_versions: ["1.28", "1.30", "1.32", "1.34"]
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 # best-practices Tag Hub
 
 > 最佳实践页面 — 覆盖安全、运维、网络、存储、可观测性、部署等全领域的最佳实践参考。
+
+## 核心定义
+
+**最佳实践（Best Practices）** 是在生产环境中经过验证的、能够确保系统稳定性、安全性、可维护性的标准化做法。它包含“应该做什么”和“不应该做什么”两个方面。
+
+### 最佳实践分层
+
+| 层级 | 关注点 | 典型实践 |
+|------|--------|----------|
+| 架构层 | 高可用、可扩展 | 多 AZ、多副本、PDB |
+| 安全层 | 最小权限、纵深防御 | RBAC、Pod Security、NetworkPolicy |
+| 运维层 | 可观测、可恢复 | 监控、备份、Runbook |
+| 性能层 | 资源优化、调优 | requests/limits、HPA |
+| 交付层 | 可重现、可回滚 | GitOps、金丝雀发布 |
+
+### 通用生产检查清单
+
+| 检查项 | 要求 |
+|--------|------|
+| 资源限制 | 所有容器必须设置 requests/limits |
+| 健康检查 | 配置 liveness + readiness + startup probes |
+| 副本数 | 生产至少 2 副本 + PDB |
+| 镜像版本 | 禁止 latest，使用语义化版本 |
+| 日志规范 | 结构化日志 (JSON) + 关联 ID |
+| 优雅关闭 | preStop hook + terminationGracePeriodSeconds |
+| 反亲和 | 跨节点/跨 AZ 分散 |
+| 配置外部化 | ConfigMap/Secret，禁止硬编码 |
 
 ## 技能库最佳实践 (Skills Best Practices)
 

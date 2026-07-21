@@ -267,6 +267,342 @@ diagnose_pending_pods "production"
 ```
 通过系统性的故障诊断方法和工具，可以显著提升故障处理效率，减少业务中断时间，保障生产环境的稳定运行。
 
+<!-- chunk: 控制平面故障排查 -->
+## 控制平面故障排查
+
+### API Server 故障
+
+```bash
+# 🟢 低风险：只读检查
+# API Server 状态检查
+kubectl get componentstatuses 2>/dev/null || kubectl get --raw /healthz
+
+# API Server 日志
+kubectl logs -n kube-system -l component=kube-apiserver --tail=100
+
+# 检查 API Server 指标
+curl -k https://<apiserver>:6443/metrics | grep apiserver_request
+
+# 常见 API Server 问题
+# 1. 证书过期
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
+
+# 2. etcd 连接问题
+etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/apiserver-etcd-client.crt \
+  --key=/etc/kubernetes/pki/apiserver-etcd-client.key \
+  endpoint health
+
+# 3. 请求延迟高
+kubectl get --raw /metrics | grep apiserver_request_duration_seconds
+```
+
+### etcd 故障排查
+
+```bash
+# 🟢 低风险：只读检查
+# etcd 集群状态
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  endpoint status --write-out=table
+
+# etcd 磁盘使用
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  endpoint status --write-out=table | awk '{print $4}'
+
+# etcd 告警
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt \
+  --key=/etc/kubernetes/pki/etcd/healthcheck-client.key \
+  alarm list
+
+# 磁盘碎片整理（🟡 中风险）
+# ETCDCTL_API=3 etcdctl defrag --cluster
+```
+
+### 控制器/调度器故障
+
+```bash
+# 🟢 低风险：只读检查
+# 控制器状态
+kubectl get pods -n kube-system -l component=kube-controller-manager
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=50
+
+# 调度器状态
+kubectl get pods -n kube-system -l component=kube-scheduler
+kubectl logs -n kube-system -l component=kube-scheduler --tail=50
+
+# 检查 Pending Pod（调度失败）
+kubectl get pods -A --field-selector=status.phase=Pending
+kubectl describe pod <pending-pod> -n <ns> | grep -A 20 "Events:"
+```
+
+<!-- chunk: 网络故障排查 -->
+## 网络故障排查
+
+### DNS 故障排查
+
+```bash
+# 🟢 低风险：只读检查
+# CoreDNS 状态
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
+
+# DNS 解析测试
+kubectl run dns-test --image=busybox:1.36 --rm -it --restart=Never -- \
+  nslookup kubernetes.default.svc.cluster.local
+
+# CoreDNS 指标
+kubectl exec -n kube-system -l k8s-app=kube-dns -- \
+  wget -qO- http://localhost:9153/metrics | grep coredns_dns
+
+# 检查 CoreDNS 配置
+kubectl get configmap coredns -n kube-system -o yaml
+```
+
+### Service 连通性排查
+
+```bash
+# 🟢 低风险：只读检查
+# 检查 Service 和 Endpoints
+kubectl get svc -n <ns>
+kubectl get endpoints -n <ns>
+
+# 检查 kube-proxy 状态
+kubectl get pods -n kube-system -l k8s-app=kube-proxy
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50
+
+# 测试 Service 连通性
+kubectl run curl-test --image=curlimages/curl --rm -it --restart=Never -- \
+  curl -v http://<service>.<ns>.svc.cluster.local:port
+
+# 检查 iptables/ipvs 规则
+kubectl exec -n kube-system <kube-proxy-pod> -- iptables -t nat -L -n | grep <service>
+```
+
+### CNI 故障排查
+
+```bash
+# 🟢 低风险：只读检查
+# Calico 状态
+kubectl get pods -n kube-system -l k8s-app=calico-node
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=50
+
+# Calico 节点状态
+kubectl exec -n kube-system <calico-node-pod> -- calicoctl node status
+
+# Cilium 状态
+kubectl get pods -n kube-system -l k8s-app=cilium
+kubectl exec -n kube-system <cilium-pod> -- cilium status
+kubectl exec -n kube-system <cilium-pod> -- cilium endpoint list
+
+# 跨节点 Pod 连通性测试
+kubectl run net-test-1 --image=busybox:1.36 --rm -it --restart=Never -- sleep 3600 &
+kubectl run net-test-2 --image=busybox:1.36 --rm -it --restart=Never -- sleep 3600 &
+kubectl exec net-test-1 -- ping <net-test-2-pod-ip>
+```
+
+<!-- chunk: 存储故障排查 -->
+## 存储故障排查
+
+### PVC/PV 故障排查
+
+```bash
+# 🟢 低风险：只读检查
+# PVC 状态
+kubectl get pvc -A | grep -v Bound
+
+# PVC 事件
+kubectl describe pvc <pvc-name> -n <ns>
+
+# PV 状态
+kubectl get pv | grep -v Bound
+
+# CSI Driver 状态
+kubectl get csidrivers
+kubectl get csinodes
+kubectl get pods -n kube-system -l app=*csi*
+
+# 卷挂载问题
+kubectl describe pod <pod-name> -n <ns> | grep -A 10 "Events:"
+kubectl logs -n kube-system -l app=*csi-node* --tail=50
+```
+
+### 存储性能问题
+
+```bash
+# 🟢 低风险：只读检查
+# 节点磁盘 I/O
+kubectl exec -it <pod> -- iostat -x 1 5
+
+# 磁盘使用率
+kubectl exec -it <pod> -- df -h
+
+# 文件系统 inode 使用
+kubectl exec -it <pod> -- df -i
+
+# 存储 I/O 延迟（需要节点访问）
+# iostat -x 1
+# await > 10ms 表示延迟较高
+```
+
+<!-- chunk: 自动化诊断工具 -->
+## 自动化诊断工具
+
+### 一键诊断脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：只读检查
+# 集群健康一键诊断
+
+REPORT="/tmp/cluster-diagnosis-$(date +%Y%m%d-%H%M).txt"
+
+echo "=== 集群健康诊断报告 ===" | tee "$REPORT"
+echo "时间: $(date)" | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 1. 节点状态
+echo "--- 1. 节点状态 ---" | tee -a "$REPORT"
+kubectl get nodes -o wide | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 2. 系统组件状态
+echo "--- 2. 系统组件 ---" | tee -a "$REPORT"
+kubectl get pods -n kube-system --field-selector=status.phase!=Running | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 3. 异常 Pod
+echo "--- 3. 异常 Pod ---" | tee -a "$REPORT"
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 4. 资源使用 Top 10
+echo "--- 4. CPU Top 10 ---" | tee -a "$REPORT"
+kubectl top pods -A --sort-by=cpu 2>/dev/null | head -11 | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+echo "--- 5. Memory Top 10 ---" | tee -a "$REPORT"
+kubectl top pods -A --sort-by=memory 2>/dev/null | head -11 | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 6. 最近告警事件
+echo "--- 6. 最近告警事件 ---" | tee -a "$REPORT"
+kubectl get events -A --sort-by='.lastTimestamp' 2>/dev/null | grep -i "warning\|error" | tail -20 | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+# 7. PVC 状态
+echo "--- 7. PVC 状态 ---" | tee -a "$REPORT"
+kubectl get pvc -A | grep -v Bound | tee -a "$REPORT"
+echo "" | tee -a "$REPORT"
+
+echo "=== 诊断完成，报告已保存至: $REPORT ===" | tee -a "$REPORT"
+```
+
+### kubectl 诊断插件
+
+```bash
+# 安装诊断插件
+kubectl krew install doctor
+kubectl krew install resource-capacity
+kubectl krew install view-utilization
+
+# 使用
+kubectl doctor
+kubectl resource-capacity
+kubectl view-utilization
+```
+
+<!-- chunk: 事故响应流程 -->
+## 事故响应流程
+
+### 事故分级
+
+| 级别 | 定义 | 响应时间 | 通知范围 |
+|------|------|----------|----------|
+| P0 | 核心业务完全不可用 | 5 分钟内 | 全员 + 管理层 |
+| P1 | 核心业务部分降级 | 15 分钟内 | On-Call + 相关团队 |
+| P2 | 非核心业务受影响 | 30 分钟内 | On-Call |
+| P3 | 潜在风险/性能下降 | 4 小时内 | 相关团队 |
+
+### 事故响应检查清单
+
+```
+事故发生
+├── 1. 确认影响范围
+│   ├── 受影响服务/用户
+│   ├── 业务影响程度
+│   └── 确定事故级别
+├── 2. 组建响应团队
+│   ├── 事故指挥官 (IC)
+│   ├── 技术负责人
+│   └── 沟通负责人
+├── 3. 缓解措施
+│   ├── 回滚最近变更
+│   ├── 扩容/降级
+│   └── 流量切换
+├── 4. 根因分析
+│   ├── 日志分析
+│   ├── 指标关联
+│   └── 变更追溯
+├── 5. 修复验证
+│   ├── 服务恢复确认
+│   ├── 监控指标正常
+│   └── 用户反馈确认
+└── 6. 事后复盘
+    ├── 时间线记录
+    ├── 根因报告
+    └── 改进措施
+```
+
+### 事故复盘模板
+
+```markdown
+# 事故复盘报告
+
+## 基本信息
+- 事故级别: P?
+- 发生时间: YYYY-MM-DD HH:MM
+- 恢复时间: YYYY-MM-DD HH:MM
+- 持续时长: ? 分钟
+- 影响范围: ?
+
+## 时间线
+| 时间 | 事件 |
+|------|------|
+| HH:MM | 告警触发 |
+| HH:MM | On-Call 响应 |
+| HH:MM | 初步定位 |
+| HH:MM | 执行修复 |
+| HH:MM | 服务恢复 |
+
+## 根因分析
+### 直接原因
+?
+
+### 根本原因（5 Whys）
+1. Why: ?
+2. Why: ?
+3. Why: ?
+4. Why: ?
+5. Why: ?
+
+## 改进措施
+| 措施 | 负责人 | 截止日期 | 状态 |
+|------|--------|----------|------|
+| ? | ? | ? | □ |
+
+## 经验教训
+?
+```
+
 ---
 
 <!-- chunk: Obsidian 相关文档 -->

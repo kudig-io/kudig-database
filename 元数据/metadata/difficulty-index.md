@@ -1,47 +1,26 @@
 ---
-title: 难度分级索引 (Difficulty Index) [metadata]
-description: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
-summary: '| **中级** | intermediate | 原理理解、日常运维 | 1-2 年经验 |'
-category: general
+title: 难度分级索引 (Difficulty Index)
+description: 按难度分级的文档索引，帮助读者选择合适的学习内容
+summary: 将知识库内容按 beginner/intermediate/advanced/expert 四级分类，提供渐进式学习路径指引
+category: references
 tags:
-- k8s
-- docker
-- ingress
-- gateway
-- operator
-- ebpf
-- llm
-- rag
-tier: peripheral
+- difficulty-index
+- meta
+- learning-path
+- navigation
+tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+last_updated: '2026-07-21'
+difficulty: beginner
 audience:
 - 所有工程师
+- 新人入职
 estimated_read_time: 5min
-intent_queries:
-- 难度分级索引 (Difficulty Index) 是什么
-- 如何 难度分级索引 (Difficulty Index)
-trigger_keywords:
-- 难度分级索引
-- Difficulty
-- Index
-prerequisites:
-- kubectl-basics
-- ebpf-basics
 ---
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
 
 # 难度分级索引 (Difficulty Index)
 
-> 按难度分级的文档索引，帮助读者选择合适的学习内容
+> 按难度分级的文档索引，帮助读者选择合适的学习内容。难度定义见 frontmatter `difficulty` 字段。
 
 ---
 
@@ -121,7 +100,22 @@ prerequisites:
 
 ---
 
-> 本索引为手动维护的参考分级，将随 Frontmatter 体系完善后自动化生成
+## 学习建议
 
+| 当前水平 | 建议起步 | 进阶方向 |
+|----------|----------|----------|
+| 零基础 | beginner 入门级 + 速查卡 | 4 周学习路径 |
+| 1-2 年 | intermediate 核心技术 | 故障诊断实战 |
+| 3-5 年 | advanced 生产实践 | FTA/FEBM 方法论 |
+| 5+ 年 | expert 源码与架构 | 平台工程 + AI 基础设施 |
 
-<!-- risk-assessed -->
+---
+
+> 本索引为手动维护的参考分级，将随 Frontmatter 体系完善后自动化生成。
+> 难度定义权威源：[[元数据/schema.md|Wiki Schema]] 中的 `difficulty` 字段规范。
+
+## Related
+
+- [[元数据/metadata/knowledge-map.md|知识图谱]] — 模块依赖与学习路径
+- [[元数据/metadata/tags-index.md|标签索引]] — 按主题检索
+- [[元数据/schema.md|Wiki Schema]] — 难度字段定义

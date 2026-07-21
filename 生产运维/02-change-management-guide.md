@@ -118,6 +118,290 @@ kubectl apply -f configmap-backup.yaml
 - [ ] 无新错误日志产生
 - [ ] 用户投诉渠道无新增反馈
 
+## 变更请求模板
+
+```markdown
+# 变更请求: CR-2026-XXXX
+
+## 基本信息
+- 提交人: <姓名>
+- 日期: 2026-XX-XX
+- 风险等级: 低/中/高/极高
+- 变更类型: 配置/版本/扩缩容/架构
+- 影响服务: <服务列表>
+- 计划窗口: 2026-XX-XX HH:MM - HH:MM
+
+## 变更描述
+<具体变更内容>
+
+## 影响分析
+- 上游依赖: <调用方>
+- 下游依赖: <被调用方>
+- 影响用户数: <估算>
+- 数据影响: 有/无
+
+## 执行步骤
+| 步骤 | 操作 | 验证命令 | 预期结果 |
+|------|------|----------|----------|
+| 1 | <操作> | <命令> | <结果> |
+| 2 | ... | ... | ... |
+
+## 回滚方案
+| 步骤 | 操作 | 验证命令 | 预期结果 |
+|------|------|----------|----------|
+| 1 | <回滚操作> | <命令> | <结果> |
+
+## 验证用例
+- [ ] 核心 API 健康检查通过
+- [ ] 业务场景 1: <描述>
+- [ ] 业务场景 2: <描述>
+- [ ] 监控指标无异常
+
+## 审批
+- [ ] 技术审核: <审核人> <日期>
+- [ ] 风险确认: <负责人> <日期>
+```
+
+## GitOps 变更管理
+
+### Git 驱动的变更流程
+
+```
+开发者提交 PR → CI 自动检查 → 代码审查 → 合并到 main
+                                              │
+                                              ▼
+                                    ArgoCD/Flux 检测变更
+                                              │
+                                              ▼
+                                    自动同步到集群 (Dev)
+                                              │
+                                              ▼
+                                    验证通过 → Promotion
+                                              │
+                                              ▼
+                                    Staging → Production
+                                    (自动)     (审批/金丝雀)
+```
+
+### 变更审计（Git 历史）
+
+```bash
+# 🟢 查看最近变更历史
+git log --oneline --since="24 hours ago" -- apps/
+
+# 查看具体变更内容
+git diff HEAD~1 -- apps/order-service/overlays/production/
+
+# 回滚变更（Git revert）
+git revert <commit-sha>
+git push  # ArgoCD 自动同步回滚
+
+# ArgoCD 变更历史
+argocd app history order-service-production
+argocd app rollback order-service-production <revision>
+```
+
+### 自动化变更验证
+
+```yaml
+# ArgoCD Sync Wave（有序变更）
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: order-service
+  annotations:
+    # 变更前后钩子
+    argocd.argoproj.io/hook: PreSync
+spec:
+  source:
+    path: apps/order-service/overlays/production
+  syncPolicy:
+    syncOptions:
+      - Validate=true  # 同步前验证
+---
+# PreSync Hook: 变更前检查
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pre-sync-check
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: check
+          image: bitnami/kubectl
+          command:
+            - /bin/sh
+            - -c
+            - |
+              # 检查当前服务健康
+              kubectl get pods -n production -l app=order-service
+              # 检查资源余量
+              kubectl top nodes
+              echo "✅ Pre-sync check passed"
+      restartPolicy: Never
+---
+# PostSync Hook: 变更后验证
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-sync-verify
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: verify
+          image: curlimages/curl
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sleep 30  # 等待 Pod 就绪
+              # 健康检查
+              curl -sf http://order-service.production:8080/health || exit 1
+              # 业务验证
+              curl -sf http://order-service.production:8080/api/v1/status || exit 1
+              echo "✅ Post-sync verification passed"
+      restartPolicy: Never
+```
+
+## 渐进式交付（Progressive Delivery）
+
+### Argo Rollouts 金丝雀
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: order-service
+  namespace: production
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+        - setWeight: 5
+        - pause: { duration: 5m }   # 观察 5 分钟
+        - analysis:                   # 自动分析
+            templates:
+              - templateName: success-rate
+        - setWeight: 25
+        - pause: { duration: 10m }
+        - analysis:
+            templates:
+              - templateName: success-rate
+              - templateName: latency-p99
+        - setWeight: 50
+        - pause: { duration: 15m }
+        - setWeight: 100
+      canaryService: order-service-canary
+      stableService: order-service-stable
+---
+# 分析模板（自动回滚条件）
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  metrics:
+    - name: success-rate
+      interval: 2m
+      successCondition: result[0] >= 0.99
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus.monitoring:9090
+          query: |
+            sum(rate(http_requests_total{app="order-service",status!~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total{app="order-service"}[5m]))
+```
+
+## 数据库变更安全
+
+### 向前兼容迁移原则
+
+```
+安全变更顺序（可回滚）:
+
+1. 添加新列（不删旧列）
+   ALTER TABLE orders ADD COLUMN new_status VARCHAR(50);
+
+2. 双写（新旧列同时写）
+   UPDATE orders SET new_status = status;  -- 数据迁移
+
+3. 切换读取到新列
+   -- 应用代码修改读取 new_status
+
+4. 停止写旧列
+   -- 应用代码移除旧列写入
+
+5. 删除旧列（下一个版本）
+   ALTER TABLE orders DROP COLUMN status;
+
+危险操作（禁止直接执行）:
+- ❌ 直接删列
+- ❌ 修改列类型
+- ❌ 添加 NOT NULL 无默认值
+- ❌ 大表 DDL（无 pt-osc/gh-ost）
+```
+
+### K8s 中的数据库迁移 Job
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-v2-3
+  namespace: production
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      containers:
+        - name: migrate
+          image: registry.example.com/order-service:v2.3.0
+          command: ["./migrate", "up"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: url
+      restartPolicy: Never
+```
+
+## 变更度量与报告
+
+### DORA 指标
+
+| 指标 | 目标 (Elite) | 计算 | 改进方向 |
+|------|-------------|------|----------|
+| 部署频率 | 每日+ | 月度部署次数 | 自动化/小批量 |
+| 变更前置时间 | < 1h | 提交→生产 | CI/CD 优化 |
+| 变更失败率 | < 5% | 回滚次数/总部署 | 测试/金丝雀 |
+| 恢复时间 | < 1h | 故障→恢复 | 回滚速度/监控 |
+
+### 变更质量审查（月度）
+
+```bash
+# 统计本月变更
+argocd app list -o json | jq '[.[] | select(.status.sync.status=="Synced")] | length'
+
+# 统计回滚次数
+argocd app list -o json | jq '[.[] | select(.status.operationState.phase=="Failed")] | length'
+
+# 变更失败率
+echo "scale=2; $FAILED / $TOTAL * 100" | bc
+```
+
 ## 远程顾问指导要点
 
 远程顾问无法直接执行变更，但可以通过以下方式为客户提供专业保障：
@@ -129,6 +413,7 @@ kubectl apply -f configmap-backup.yaml
 2. **风险评估**：使用风险评估矩阵与客户共同判定风险等级，必要时建议拆分为多次低风险变更
 3. **在线护航**：变更执行期间保持实时沟通，每完成一步由客户报告状态，顾问确认后再进入下一步
 4. **事后复盘**：变更完成后 24h 内收集监控数据，验证变更效果，输出变更总结
+5. **模式识别**：分析变更失败模式，提出系统性改进（如加强测试、改进金丝雀策略）
 
 > 远程顾问的核心价值在于降低变更风险，而非替代客户执行操作。建立标准化的审核清单和沟通机制是关键。
 
@@ -137,6 +422,8 @@ kubectl apply -f configmap-backup.yaml
 - [[生产运维/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[概念/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
 - [[发布变更/98-merged-indexes/index.md|gitops-deployment-patterns]] — GitOps 部署模式
+- [[发布变更/02-release-engineering-strategy.md|发布工程策略]] — 版本管理与发布流水线
+- [[发布变更/Progressive-Delivery/index.md|Progressive Delivery]] — 渐进式交付
 - [[生产运维/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
 
 ## Related

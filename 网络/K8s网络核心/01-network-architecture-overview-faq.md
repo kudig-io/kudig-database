@@ -190,6 +190,228 @@ cross_refs:
 
 ---
 
+<!-- chunk: 问题16：Service Mesh 与 Ingress/Gateway 如何分工？什么场景需要引入 Mesh？ -->
+## 问题16：Service Mesh 与 Ingress/Gateway 如何分工？什么场景需要引入 Mesh？
+- **答案**：Ingress/Gateway 负责**南北向流量**（外部进入集群），Service Mesh 负责**东西向流量**（集群内服务间通信）。  
+  引入 Mesh 的典型场景：
+  - 需要 mTLS 加密所有服务间通信（零信任网络）。
+  - 需要细粒度流量治理（重试、熔断、超时、流量镜像）。
+  - 需要分布式追踪与可观测性（无需修改应用代码）。
+  - 多语言微服务需要统一的流量策略。  
+  注意：Mesh 引入额外延迟（约 1-3ms）与资源开销（每 Pod 约 100m CPU / 128Mi 内存），小规模服务可能不需要。
+
+<!-- chunk: 问题17：Kubernetes 双栈（IPv4/IPv6）网络如何部署？有哪些注意事项？ -->
+## 问题17：Kubernetes 双栈（IPv4/IPv6）网络如何部署？有哪些注意事项？
+- **答案**：Kubernetes 1.23+ 正式支持双栈。关键配置：
+  - kube-apiserver: `--service-cluster-ip-range=10.96.0.0/16,fd00::/108`
+  - kube-controller-manager: `--cluster-cidr=10.244.0.0/16,fd00:10:244::/56`
+  - CNI 必须支持双栈（Calico/Cilium 已支持，Flannel 部分支持）。  
+  注意事项：
+  - Service 可指定 `ipFamilyPolicy: PreferDualStack` 或 `RequireDualStack`。
+  - 节点必须同时具备 IPv4 和 IPv6 地址。
+  - 部分云厂商 LB 对 IPv6 支持有限，需确认。
+  - NetworkPolicy 在双栈下需同时匹配 IPv4 和 IPv6 CIDR。
+
+<!-- chunk: 问题18：Pod 网络性能不达预期时如何调优？ -->
+## 问题18：Pod 网络性能不达预期时如何调优？
+- **答案**：分层排查与调优：
+  1. **基线测试**：`iperf3 -c <target-pod-ip> -t 30 -P 4` 确认实际带宽。
+  2. **CNI 层**：确认 MTU 配置正确（通常 1450 for overlay，1500 for ENI/routing）。
+  3. **节点层**：`sysctl net.core.rmem_max`、`net.core.wmem_max` 调大缓冲区。
+  4. **conntrack**：`sysctl net.netfilter.nf_conntrack_max` 防止表满丢包。
+  5. **中断亲和**：确认网卡中断分散到多 CPU（`irqbalance` 或手动设置）。
+  6. **eBPF 加速**：Cilium 的 eBPF 模式绕过 iptables，性能提升 20-40%。
+
+```bash
+# 🟢 低风险：网络性能基线测试
+# Pod 间带宽测试
+kubectl run iperf-server --image=networkstatic/iperf3 --restart=Never -- iperf3 -s
+kubectl run iperf-client --image=networkstatic/iperf3 --restart=Never --rm -it -- \
+  iperf3 -c <server-pod-ip> -t 30 -P 4
+
+# 检查 MTU
+kubectl exec -it <pod> -- ip link show eth0 | grep mtu
+
+# 检查 conntrack 表使用率
+# 🟢 低风险
+kubectl exec -it -n kube-system <calico-node-pod> -- \
+  conntrack -C 2>/dev/null || cat /proc/sys/net/netfilter/nf_conntrack_count
+```
+
+<!-- chunk: 问题19：如何为多租户集群设计网络隔离？ -->
+## 问题19：如何为多租户集群设计网络隔离？
+- **答案**：多租户网络隔离分层实施：
+  1. **Namespace 级**：每个租户独立 Namespace + 默认拒绝 NetworkPolicy。
+  2. **NetworkPolicy**：租户间完全隔离，仅允许共享服务（DNS、监控）访问。
+  3. **CNI 高级特性**：Calico GlobalNetworkPolicy / Cilium CiliumNetworkPolicy 支持 L7 策略。
+  4. **节点隔离**：关键租户使用专用节点池（nodeSelector + taint）。
+  5. **Ingress 隔离**：每租户独立 IngressClass 或 Gateway，避免路由冲突。
+
+```yaml
+# 🟡 中风险：会修改网络策略
+# 租户隔离 NetworkPolicy 模板
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-isolation
+  namespace: tenant-a
+spec:
+  podSelector: {}  # 匹配所有 Pod
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              tenant: tenant-a  # 仅允许同租户
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53  # 允许 DNS
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              tenant: tenant-a
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+```
+
+<!-- chunk: 问题20：kube-proxy 的 iptables 与 IPVS 模式如何选择？ -->
+## 问题20：kube-proxy 的 iptables 与 IPVS 模式如何选择？
+- **答案**：
+  - **iptables（默认）**：适合 Service 数量 < 1000 的集群，规则线性增长，大规模时延迟增加。
+  - **IPVS**：适合 Service > 1000 的大规模集群，基于哈希表查找，性能恒定；支持多种负载均衡算法（rr/lc/dh/sh/sed/nq）。  
+  切换注意事项：
+  - IPVS 需要节点加载内核模块：`ip_vs`、`ip_vs_rr`、`ip_vs_wrr`、`ip_vs_sh`、`nf_conntrack`。
+  - 切换需滚动重启 kube-proxy DaemonSet。
+  - Cilium eBPF 模式可完全替代 kube-proxy（KPR），性能最优。
+
+```bash
+# 🟢 低风险：检查当前 kube-proxy 模式
+kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
+# 检查 IPVS 模块是否加载
+# 🟢 低风险
+lsmod | grep ip_vs
+```
+
+<!-- chunk: 问题21：DNS 解析延迟高或间歇性失败如何排查？ -->
+## 问题21：DNS 解析延迟高或间歇性失败如何排查？
+- **答案**：DNS 问题分层排查：
+  1. **确认现象**：`kubectl exec -it <pod> -- nslookup kubernetes.default` 多次测试。
+  2. **CoreDNS 状态**：`kubectl get pods -n kube-system -l k8s-app=kube-dns` 确认副本数与健康。
+  3. **CoreDNS 指标**：`coredns_dns_request_duration_seconds` P99 > 100ms 则异常。
+  4. **conntrack 竞争**：UDP 并发查询触发 conntrack 插入冲突（`insert_failed`），解决方案：NodeLocal DNSCache 或 `single-request-reopen`。
+  5. **上游 DNS**：检查 `/etc/resolv.conf` 中上游服务器可达性。
+
+```bash
+# 🟢 低风险：DNS 诊断命令集
+# 测试 DNS 解析延迟
+kubectl exec -it <pod> -- sh -c '
+  for i in $(seq 1 10); do
+    time nslookup kubernetes.default.svc.cluster.local
+  done
+'
+
+# CoreDNS 日志检查
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50 | grep -i "SERVFAIL\|timeout\|error"
+
+# 检查 ndots 配置影响
+kubectl exec -it <pod> -- cat /etc/resolv.conf
+# ndots:5 意味着域名中 < 5 个点会先尝试 search domain 拼接
+```
+
+<!-- chunk: 问题22：如何设计生产级 Ingress 高可用架构？ -->
+## 问题22：如何设计生产级 Ingress 高可用架构？
+- **答案**：生产 Ingress 架构要点：
+  1. **多副本 + 反亲和**：Ingress Controller ≥ 2 副本，跨 AZ 分布。
+  2. **LB 健康检查**：云 LB 配置主动健康检查（HTTP /healthz）。
+  3. **优雅关闭**：`terminationGracePeriodSeconds: 300` + preStop hook 等待连接排干。
+  4. **资源预留**：根据 QPS 设置 requests/limits，避免 OOM。
+  5. **限流与熔断**：`nginx.ingress.kubernetes.io/limit-rps` 防止后端过载。
+
+```yaml
+# 生产级 Nginx Ingress Controller 配置片段
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  replicas: 3
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: ingress-nginx
+              topologyKey: topology.kubernetes.io/zone
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: controller
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/wait-shutdown"]
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+```
+
+---
+
+## 网络架构决策树
+
+```
+服务暴露需求
+├── 集群内部访问
+│   ├── 无状态服务 → ClusterIP + Deployment
+│   ├── 有状态服务 → Headless Service + StatefulSet
+│   └── 需要固定 Pod DNS → Headless Service + StatefulSet
+├── 外部访问
+│   ├── HTTP/HTTPS 七层 → Ingress / Gateway API
+│   ├── TCP/UDP 四层 → LoadBalancer / NodePort
+│   └── gRPC → Ingress (gRPC 支持) / Gateway API
+├── 多租户隔离
+│   ├── 网络层 → NetworkPolicy (default-deny + 白名单)
+│   ├── 入口层 → 独立 IngressClass / Gateway
+│   └── 服务间 → Service Mesh mTLS + AuthorizationPolicy
+└── 性能优化
+    ├── 同 AZ 优先 → Topology Aware Hints
+    ├── 绕过 iptables → Cilium eBPF / IPVS
+    └── DNS 加速 → NodeLocal DNSCache
+```
+
+## 生产网络配置检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| CoreDNS 副本数 | `kubectl get deploy coredns -n kube-system` | ≥ 2 |
+| CoreDNS 资源限制 | `kubectl get deploy coredns -n kube-system -o yaml` | 有 requests/limits |
+| kube-proxy 模式 | `kubectl get cm kube-proxy -n kube-system -o yaml` | IPVS (大规模) |
+| conntrack 表大小 | `cat /proc/sys/net/netfilter/nf_conntrack_max` | ≥ 1048576 |
+| MTU 一致性 | `ip link show` 各节点 | 统一值 |
+| NetworkPolicy 覆盖 | `kubectl get networkpolicy -A` | 所有 ns 有 default-deny |
+| Ingress 副本数 | `kubectl get deploy -n ingress-nginx` | ≥ 2 |
+| DNS ndots 配置 | Pod /etc/resolv.conf | 生产建议 ndots:2 |
+
+---
+
 <!-- chunk: Obsidian 相关文档 -->
 ## Obsidian 相关文档
 

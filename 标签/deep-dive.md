@@ -1,17 +1,29 @@
 ---
-title: #deep-dive Tag Hub
-category: tags
-tags: [deep-dive, meta, visibility/public]
-sources: []
-created: "2026-06-26"
-updated: "2026-06-26"
-summary: "Hub page collecting all pages tagged with #deep-dive."
+title: deep-dive
+description: 深度解析标签枢纽 — 收集所有标记为 deep-dive 的深度技术解析文档，包含原理分析、架构设计、生产实践等
+category: tag-index
+tags:
+- deep-dive
+- meta
+- technical-analysis
 tier: supporting
+created: '2026-06-26'
+last_updated: '2026-07-21'
 ---
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+# deep-dive Tag Hub
+
+> 深度解析文档集合 — 包含原理分析、架构设计、生产实践、性能调优等深度技术内容。
+
+## 标签定义
+
+**deep-dive** 标签用于标识对某一技术主题进行全面、深入解析的文档。这类文档通常包含：
+- 核心原理与架构设计
+- 生产级配置与操作指南
+- 故障排查与性能调优
+- 最佳实践与反模式
+- 命令示例与 YAML 参考
+
 
 
 # #deep-dive Tag Hub

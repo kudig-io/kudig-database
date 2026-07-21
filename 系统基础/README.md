@@ -1,37 +1,22 @@
 ---
 title: System Foundation
-description: '| 01-linux/ | Linux 架构、进程管理、文件系统、网络配置 |'
-summary: '| 01-linux/ | Linux 架构、进程管理、文件系统、网络配置 |'
+description: 系统基础知识域 — Linux 架构、硬件基础设施、K8s 事件、速查卡、知识字典
+summary: 系统基础知识域入口，涵盖 Linux 进程/文件系统/网络、硬件服务器/GPU/网络设备、K8s Events 全域事件、运维速查卡
 category: domain
 tags:
 - linux
 - hardware
 - kernel
-- filesystem
 - kubernetes-events
-- daemonset
-- gpu
+- sysadmin
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
+- SRE
 estimated_read_time: 5min
-intent_queries:
-- System Foundation 是什么
-- 如何 System Foundation
-- Kubernetes 17 system foundation 最佳实践
-trigger_keywords:
-- System
-- Foundation
-- system
-- foundation
-prerequisites:
-- kubectl-basics
-- cloud-provider-basics
-- gpu-scheduling-basics
 ---
 # 系统基础 System Foundation
 
@@ -39,11 +24,13 @@ prerequisites:
 
 ## 二级子目录
 
-- [[系统基础/K8s事件/README.md|K8s事件]]
-- [[系统基础/Linux/README.md|Linux]]
-- [[系统基础/知识字典/README.md|知识字典]]
-- [[系统基础/硬件/README.md|硬件]]
-- [[系统基础/速查卡/README.md|速查卡]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[系统基础/Linux/README.md\|Linux/]] | Linux | 进程管理、文件系统、网络配置、内核参数 |
+| [[系统基础/硬件/README.md\|硬件/]] | 硬件 | 服务器、GPU、网络设备、存储硬件 |
+| [[系统基础/K8s事件/README.md\|K8s事件/]] | 事件 | K8s Events 全域事件大全、事件分析 |
+| [[系统基础/速查卡/README.md\|速查卡/]] | 速查 | kubectl/网络/存储/安全速查表 |
+| [[系统基础/知识字典/README.md\|知识字典/]] | 字典 | 术语定义、缩写解释、概念映射 |
 
 ## 跨域导航
 

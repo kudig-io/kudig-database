@@ -240,7 +240,204 @@ curl -s 'http://alertmanager:9093/api/v1/alerts' | \
 
 ---
 
-## 7. 风险与注意事项
+## 7. 多窗口 Burn-Rate 告警体系
+
+### 完整告警矩阵
+
+| 窗口 | Burn Rate | 消耗预算 | 响应 | 级别 |
+|------|-----------|----------|------|------|
+| 5m | 14.4x | 2% in 1h | 立即响应 | Critical (Page) |
+| 30m | 6x | 5% in 6h | 尽快响应 | Critical (Page) |
+| 2h | 3x | 10% in 2d | 工作时间内 | Warning (Ticket) |
+| 6h | 1x | 10% in 30d | 观察 | Info |
+
+### 完整 PrometheusRule
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: api-slo-complete
+  namespace: monitoring
+spec:
+  groups:
+    - name: api.slo.recording
+      interval: 30s
+      rules:
+        # SLI 计算
+        - record: sli:api_availability:ratio_rate5m
+          expr: |
+            sum(rate(http_requests_total{job="api",code!~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total{job="api"}[5m]))
+        - record: sli:api_availability:ratio_rate30m
+          expr: |
+            sum(rate(http_requests_total{job="api",code!~"5.."}[30m]))
+            /
+            sum(rate(http_requests_total{job="api"}[30m]))
+        - record: sli:api_availability:ratio_rate2h
+          expr: |
+            sum(rate(http_requests_total{job="api",code!~"5.."}[2h]))
+            /
+            sum(rate(http_requests_total{job="api"}[2h]))
+        - record: sli:api_availability:ratio_rate30d
+          expr: |
+            sum(rate(http_requests_total{job="api",code!~"5.."}[30d]))
+            /
+            sum(rate(http_requests_total{job="api"}[30d]))
+        # 错误预算剩余
+        - record: slo:api_error_budget_remaining:ratio
+          expr: |
+            1 - (
+              (1 - sli:api_availability:ratio_rate30d)
+              /
+              (1 - 0.999)
+            )
+
+    - name: api.slo.alerts
+      rules:
+        # 快速燃烧 (Critical - Page)
+        - alert: APIErrorBudgetFastBurn
+          expr: |
+            sli:api_availability:ratio_rate5m < (1 - (1-0.999)*14.4)
+            and
+            sli:api_availability:ratio_rate1h:availability < (1 - (1-0.999)*14.4)
+          for: 2m
+          labels:
+            severity: critical
+            slo: api-availability
+            team: platform
+          annotations:
+            summary: "API 错误预算快速燃烧 (14.4x)"
+            description: "当前错误率将在 1h 内消耗 2% 错误预算"
+            runbook: "https://runbooks.example.com/api-slo"
+
+        # 中速燃烧 (Critical - Page)
+        - alert: APIErrorBudgetMediumBurn
+          expr: |
+            sli:api_availability:ratio_rate30m < (1 - (1-0.999)*6)
+          for: 15m
+          labels:
+            severity: critical
+            slo: api-availability
+          annotations:
+            summary: "API 错误预算中速燃烧 (6x)"
+
+        # 慢速燃烧 (Warning - Ticket)
+        - alert: APIErrorBudgetSlowBurn
+          expr: |
+            sli:api_availability:ratio_rate2h < (1 - (1-0.999)*3)
+          for: 1h
+          labels:
+            severity: warning
+            slo: api-availability
+          annotations:
+            summary: "API 错误预算慢速燃烧 (3x)"
+```
+
+## 8. 错误预算政策与执行
+
+### 预算耗尽时的决策框架
+
+```
+错误预算剩余 > 50%:
+└── 正常发布节奏，鼓励创新
+
+错误预算剩余 25-50%:
+└── 加强变更审查，金丝雀时间加倍
+
+错误预算剩余 10-25%:
+└── 仅允许可靠性修复，暂停功能发布
+
+错误预算剩余 < 10%:
+└── 发布冻结，全力修复可靠性问题
+└── 必须完成复盘 + 改进计划后才解冻
+```
+
+### 自动化预算检查（发布门禁）
+
+```yaml
+# Argo Rollouts AnalysisTemplate — 发布前检查错误预算
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: error-budget-check
+spec:
+  metrics:
+    - name: error-budget-remaining
+      interval: 5m
+      successCondition: result[0] > 0.1  # 剩余 > 10% 才允许发布
+      failureCondition: result[0] <= 0.1
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://prometheus.monitoring:9090
+          query: |
+            1 - (
+              (1 - sum(rate(http_requests_total{job="api",code!~"5.."}[30d]))
+              / sum(rate(http_requests_total{job="api"}[30d])))
+              /
+              (1 - 0.999)
+            )
+```
+
+## 9. SLO 报告与审查
+
+### 月度 SLO 报告模板
+
+```markdown
+# SLO 月报 — 2026-07
+
+## 总览
+| 服务 | SLO 目标 | 实际达成 | 错误预算剩余 | 趋势 |
+|------|----------|----------|--------------|------|
+| API Gateway | 99.9% | 99.95% | 52% | ↑ |
+| Order Service | 99.9% | 99.87% | -3% | ↓ |
+| Payment | 99.99% | 99.99% | 78% | → |
+
+## 错误预算消耗事件
+| 日期 | 服务 | 消耗 | 原因 | 改进 |
+|------|------|------|------|------|
+| 07-05 | Order | 8% | DB 连接池耗尽 | 增加池大小+告警 |
+| 07-12 | API | 3% | 上游超时 | 调整超时配置 |
+
+## 告警质量
+- 总告警数: 47
+- 真实告警: 38 (81%)
+- 误报: 9 (19%)
+- 行动: 调整 3 个告警阈值
+
+## 下月重点
+- [ ] Order Service 连接池监控加强
+- [ ] 新增延迟 SLO (P99 < 500ms)
+- [ ] 告警误报率降至 < 10%
+```
+
+### 审查节奏
+
+| 频率 | 内容 | 参与者 | 输出 |
+|------|------|--------|------|
+| 每日 | 错误预算消耗检查 | 值班 SRE | 异常记录 |
+| 每周 | 告警质量审查 | SRE 团队 | 阈值调整 |
+| 每月 | SLO 达成报告 | SRE + 产品 | 月报 + 改进项 |
+| 每季 | SLO 目标校准 | 全团队 | SLO 调整决策 |
+
+## 10. 不同服务类型的 SLO 示例
+
+| 服务 | SLI | SLO | 窗口 | 备注 |
+|------|-----|-----|------|------|
+| 用户 API | 可用性 | 99.9% | 30d | 排除计划维护 |
+| 用户 API | P99 延迟 | < 500ms | 30d | 排除缓存未命中 |
+| 支付服务 | 成功率 | 99.99% | 30d | 含重试后成功 |
+| 消息队列 | 消费延迟 | P95 < 5s | 7d | 端到端 |
+| 批处理 | 完成率 | > 99.5% | 7d | 含重试成功 |
+| 数据库 | 查询延迟 | P99 < 50ms | 30d | 排除慢查询 |
+| DNS | 解析成功率 | 99.99% | 30d | 内部 DNS |
+| Ingress | 5xx 率 | < 0.1% | 30d | 排除后端 5xx |
+
+---
+
+## 11. 风险与注意事项
 
 - **SLO 不是越高越好**: 99.999% 的成本可能远超业务价值，应基于用户可感知影响设定。
 - **错误预算不可无限累积**: 未使用的预算不代表可以任意挥霍，应作为发布与创新的安全缓冲。

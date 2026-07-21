@@ -103,15 +103,101 @@ cross_refs:
   - `apiserver_request_duration_seconds` (P99 < 1s)
   - `apiserver_current_inflight_requests` (APF 限制检查)
 - **常见原因**：etcd 性能瓶颈、APF 限流、大流量 Webhook 阻塞。
+- **诊断命令**：
+  ```bash
+  # 🟢 检查 API Server 健康
+  kubectl get --raw /healthz?verbose
+  kubectl get --raw /livez?verbose
+  kubectl get --raw /readyz?verbose
+  
+  # 🟢 检查 API 请求延迟
+  kubectl get --raw /metrics | grep apiserver_request_duration_seconds_bucket | head -20
+  
+  # 🟢 检查 APF 限流
+  kubectl get --raw /metrics | grep apiserver_flowcontrol_rejected_requests_total
+  
+  # 🟢 检查 Webhook 延迟
+  kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration_seconds
+  
+  # 🟡 检查慢请求审计日志
+  kubectl logs -n kube-system kube-apiserver-<node> | grep "slow" | tail -20
+  ```
+- **修复方案**：
+  - Webhook 超时：调整 `timeoutSeconds`（默认 10s → 5s）
+  - APF 限流：调整 `PriorityLevelConfiguration` 为核心组件预留带宽
+  - etcd 瓶颈：参见 2.2 节
 
 ### 2.2 etcd 性能问题
 - **现象**：Leader 频繁切换，写入延迟高。
 - **诊断命令**：
   ```bash
+  # 🟢 集群状态
   etcdctl endpoint status --write-out=table
+  etcdctl endpoint health --cluster
+  
+  # 🟢 性能检查
   etcdctl check perf
+  
+  # 🟢 磁盘延迟（关键指标）
+  # etcd_disk_wal_fsync_duration_seconds P99 应 < 10ms
+  # etcd_disk_backend_commit_duration_seconds P99 应 < 25ms
+  kubectl get --raw /metrics | grep etcd_disk
+  
+  # 🟢 数据库大小
+  etcdctl endpoint status --write-out=table | awk '{print $4}'
+  
+  # 🟡 压缩和碎片整理
+  etcdctl compact $(etcdctl endpoint status --write-out=json | jq '.[0].Status.header.revision')
+  etcdctl defrag --cluster
   ```
-- **优化点**：磁盘 IOPS (推荐 NVMe)、Heartbeat 间隔、Leaner 节点应用。
+- **优化点**：
+  - 磁盘 IOPS：推荐 NVMe SSD，IOPS > 10,000
+  - Heartbeat 间隔：跨 AZ 部署时调大 `--heartbeat-interval=500`
+  - 数据库大小：定期压缩，保持 < 4GB
+  - Learner 节点：新成员先作为 Learner 加入
+
+### 2.3 调度器问题
+- **现象**：Pod 长时间 Pending。
+- **诊断命令**：
+  ```bash
+  # 🟢 查看调度失败原因
+  kubectl describe pod <pod> | grep -A10 "Events"
+  kubectl get events --field-selector reason=FailedScheduling --sort-by='.lastTimestamp'
+  
+  # 🟢 检查节点可分配资源
+  kubectl describe nodes | grep -A5 "Allocated resources"
+  
+  # 🟢 检查调度器吐吐
+  kubectl get --raw /metrics | grep scheduler_scheduling_attempt_total
+  kubectl get --raw /metrics | grep scheduler_scheduling_duration_seconds
+  ```
+- **常见原因**：
+  - 资源不足：requests 超过节点可分配量
+  - 亲和性冲突：nodeSelector/affinity 无匹配节点
+  - 污点未容忍：Taint 无对应 Toleration
+  - PVC 未绑定：StorageClass 无可用 Provisioner
+
+### 2.4 Kubelet 问题
+- **现象**：节点 NotReady，Pod 无法启动。
+- **诊断命令**：
+  ```bash
+  # SSH 到节点后:
+  # 🟢 检查 kubelet 状态
+  systemctl status kubelet
+  journalctl -u kubelet --since "10 min ago" --no-pager | tail -50
+  
+  # 🟢 检查节点条件
+  kubectl describe node <node> | grep -A20 "Conditions"
+  
+  # 🟢 检查容器运行时
+  crictl ps
+  crictl info | jq '.conditions'
+  
+  # 🟢 检查磁盘/内存压力
+  df -h /var/lib/kubelet
+  free -h
+  dmesg | tail -20
+  ```
 
 ---
 
@@ -158,6 +244,65 @@ cross_refs:
 - **诊断**：`etcd_disk_wal_fsync_duration_seconds` 超过 50ms。
 - **解决**：迁移 etcd 数据目录到专用 SSD，并设置内核 `ionice`。
 
+### 5.3 案例：Webhook 超时导致所有 Deployment 失败
+- **现象**：任何 `kubectl apply` 都返回 `context deadline exceeded`。
+- **诊断**：
+  ```bash
+  # 检查所有 Webhook 状态
+  kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
+  # 检查 Webhook 服务 Endpoints
+  kubectl get endpoints -n <webhook-ns>
+  ```
+- **根因**：某 Webhook 服务 Pod 崩溃，但 Webhook 配置未设置 `failurePolicy: Ignore`。
+- **解决**：紧急删除故障 Webhook 配置，修复服务后重新注册。
+- **预防**：所有非关键 Webhook 设置 `failurePolicy: Ignore` + `timeoutSeconds: 5`。
+
+### 5.4 案例：CoreDNS 内存泄漏导致集群 DNS 间歇性失败
+- **现象**：Pod 内 `nslookup` 随机超时，重启 CoreDNS 后暂时恢复。
+- **诊断**：
+  ```bash
+  kubectl -n kube-system top pods -l k8s-app=kube-dns
+  kubectl -n kube-system logs -l k8s-app=kube-dns --tail=100 | grep -i "memory\|oom"
+  ```
+- **根因**：CoreDNS 版本 Bug 导致缓存未释放。
+- **解决**：升级 CoreDNS 到最新补丁版本 + 设置资源 limits 防止 OOM 影响节点。
+
+### 5.5 案例：节点 IP 耗尽导致新 Pod 无法调度
+- **现象**：Pod Pending，事件显示 `failed to allocate IP`。
+- **诊断**：
+  ```bash
+  # 检查节点 IP 池（Cilium）
+  kubectl get ciliumnodes -o json | jq '.items[].status.ipam'
+  # 检查子网剩余 IP（云环境）
+  # AWS: aws ec2 describe-subnets --subnet-ids <id> --query 'Subnets[0].AvailableIpAddressCount'
+  ```
+- **解决**：扩展子网 CIDR / 增加节点 / 调整 Pod CIDR 分配。
+
+---
+
+## 六、预防性监控与告警
+
+### 控制平面关键告警
+
+| 指标 | 阈值 | 级别 | 含义 |
+|------|------|------|------|
+| `apiserver_request_duration_seconds` P99 | > 1s | Warning | API 响应慢 |
+| `etcd_disk_wal_fsync_duration_seconds` P99 | > 10ms | Critical | etcd 磁盘慢 |
+| `etcd_server_leader_changes_seen_total` | > 3/h | Critical | Leader 不稳定 |
+| `scheduler_scheduling_attempt_total{result="error"}` | > 0 | Warning | 调度失败 |
+| `kubelet_node_status_condition{condition="Ready"}` | != 1 | Critical | 节点异常 |
+| `rest_client_requests_total{code=~"5.."}` | 突增 | Warning | 组件通信异常 |
+
+### 数据平面关键告警
+
+| 指标 | 阈值 | 级别 | 含义 |
+|------|------|------|------|
+| `container_memory_working_set_bytes / limits` | > 90% | Warning | 内存即将 OOM |
+| `container_cpu_cfs_throttled_periods_total` | 突增 | Warning | CPU 被限流 |
+| `kube_pod_container_status_restarts_total` | > 3/h | Warning | 频繁重启 |
+| `kube_pod_status_phase{phase="Pending"}` | 持续 > 5min | Warning | 调度失败 |
+| `node_filesystem_avail_bytes / size_bytes` | < 15% | Critical | 磁盘即将满 |
+
 ---
 
 **维护者**: Kusheet SRE Team | **作者**: Allen Galler
@@ -185,6 +330,230 @@ cross_refs:
 - [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[故障诊断/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+
+## 七、自动化诊断脚本
+
+### 集群健康一键检查
+
+```bash
+#!/bin/bash
+# 🟢 只读：K8s 集群健康一键检查
+echo "=== K8s 集群健康检查 $(date) ==="
+
+# 1. 控制平面
+echo -n "[1/8] API Server: "
+kubectl get --raw /healthz 2>/dev/null && echo "" || echo "❌ 不可达"
+
+echo -n "[2/8] etcd: "
+kubectl get --raw /healthz/etcd 2>/dev/null && echo "" || echo "❌"
+
+echo -n "[3/8] 调度器: "
+kubectl get --raw /healthz/scheduler 2>/dev/null && echo "" || echo "❌"
+
+# 2. 节点状态
+echo -n "[4/8] 节点状态: "
+NOT_READY=$(kubectl get nodes --no-headers | grep -v " Ready" | wc -l | tr -d ' ')
+TOTAL=$(kubectl get nodes --no-headers | wc -l | tr -d ' ')
+echo "$((TOTAL - NOT_READY))/$TOTAL Ready"
+
+# 3. 系统 Pod
+echo -n "[5/8] 系统 Pod: "
+UNHEALTHY=$(kubectl get pods -n kube-system --no-headers | grep -v Running | grep -v Completed | wc -l | tr -d ' ')
+echo "$UNHEALTHY 个异常"
+
+# 4. 资源压力
+echo "[6/8] 资源压力:"
+kubectl get nodes -o custom-columns=
+  NAME:.metadata.name,CPU:.status.conditions[?(@.type=="MemoryPressure")].status,MEM:.status.conditions[?(@.type=="DiskPressure")].status \
+  --no-headers | grep -v "False" | head -5
+
+# 5. Pending Pod
+echo -n "[7/8] Pending Pod: "
+kubectl get pods -A --field-selector status.phase=Pending --no-headers | wc -l | tr -d ' '
+
+# 6. 最近告警事件
+echo "[8/8] 最近警告事件:"
+kubectl get events -A --field-selector type=Warning --sort-by='.lastTimestamp' --no-headers | tail -5
+
+echo ""
+echo "=== 检查完成 ==="
+```
+
+### Pod 故障快速诊断
+
+```bash
+#!/bin/bash
+# 🟢 只读：Pod 故障快速诊断
+POD=$1
+NS=${2:-default}
+
+echo "=== Pod 诊断: $NS/$POD ==="
+
+# 状态概览
+echo "[1] 状态:"
+kubectl get pod $POD -n $NS -o custom-columns=
+  STATUS:.status.phase,RESTARTS:.status.containerStatuses[0].restartCount,NODE:.spec.nodeName
+
+# 事件
+echo "[2] 事件:"
+kubectl get events -n $NS --field-selector involvedObject.name=$POD --sort-by='.lastTimestamp' | tail -10
+
+# 容器状态
+echo "[3] 容器状态:"
+kubectl get pod $POD -n $NS -o jsonpath='{range .status.containerStatuses[*]}{.name}: {.state}{"\n"}{end}'
+
+# 最近日志
+echo "[4] 最近日志:"
+kubectl logs $POD -n $NS --tail=20 2>/dev/null || echo "  无法获取日志"
+
+# 资源使用
+echo "[5] 资源使用:"
+kubectl top pod $POD -n $NS 2>/dev/null || echo "  metrics 不可用"
+
+echo "=== 诊断完成 ==="
+```
+
+## 八、事故复盘模板
+
+### Post-Mortem 结构
+
+```markdown
+# 事故复盘: [事故标题]
+
+## 概要
+- **日期**: YYYY-MM-DD HH:MM - HH:MM (UTC)
+- **影响范围**: [受影响的服务/用户数]
+- **严重级别**: SEV-1/2/3/4
+- **发现方式**: 告警/用户报告/巡检
+
+## 时间线
+| 时间 | 事件 |
+|------|------|
+| HH:MM | 告警触发 |
+| HH:MM | On-call 确认 |
+| HH:MM | 根因定位 |
+| HH:MM | 修复执行 |
+| HH:MM | 服务恢复 |
+
+## 根因分析 (5 Whys)
+1. Why: 服务不可用 → Pod CrashLoopBackOff
+2. Why: Pod 崩溃 → OOMKilled
+3. Why: 内存溢出 → 内存泄漏
+4. Why: 泄漏原因 → 缓存未设置上限
+5. Why: 未设置上限 → 代码审查遗漏
+
+## 修复措施
+- **即时**: [紧急修复动作]
+- **短期**: [1-2 周内完成]
+- **长期**: [架构/流程改进]
+
+## 经验教训
+- **做得好**: ...
+- **待改进**: ...
+- **行动项**: [Owner + Deadline]
+```
+
+## 九、混沌工程验证
+
+### 故障注入测试矩阵
+
+| 故障场景 | 注入方式 | 预期行为 | 验证指标 |
+|----------|----------|----------|----------|
+| 节点宕机 | `kubectl cordon` + drain | Pod 迁移到其他节点 | 恢复时间 < 5min |
+| API Server 不可用 | 停止 apiserver Pod | 已运行 Pod 不受影响 | 数据平面持续服务 |
+| etcd Leader 切换 | 停止 Leader | 自动选举新 Leader | 切换 < 10s |
+| DNS 失败 | 删除 CoreDNS Pod | 已缓存解析正常 | 新解析延迟 < 30s |
+| 网络分区 | iptables 隔离节点 | 节点标记 NotReady | Pod 重调度 < 5min |
+| 磁盘压力 | 填充磁盘 | 节点 DiskPressure | Pod 被驱逐 |
+
+### LitmusChaos 实验示例
+
+```yaml
+# 节点 CPU 压力实验
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosExperiment
+metadata:
+  name: node-cpu-hog
+spec:
+  definition:
+    scope: Namespaced
+    permissions:
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["create", "delete", "get", "list"]
+    image: litmuschaos/go-runner:latest
+    args:
+      - -c
+      - ./experiments -name node-cpu-hog
+    env:
+      - name: TOTAL_CHAOS_DURATION
+        value: "60"       # 60秒
+      - name: NODE_CPU_CORE
+        value: "2"        # 压力 2 核
+---
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: node-cpu-engine
+  namespace: staging
+spec:
+  appinfo:
+    appns: staging
+    applabel: app=web
+  experiments:
+    - name: node-cpu-hog
+      spec:
+        probe:
+          - name: check-pod-health
+            type: ContinuousProbe
+            mode: Continuous
+            runProperties:
+              probeTimeout: 5
+              interval: 2
+            cmdProbe:
+              command: "kubectl get pods -n staging -l app=web -o jsonpath='{.items[*].status.phase}'"
+              comparator:
+                type: string
+                criteria: equals
+                value: Running
+```
+
+## 十、可观测性驱动调试
+
+### Trace-Log-Metric 关联查询
+
+```promql
+# 1. 发现异常: API 延迟突增
+histogram_quantile(0.99, rate(apiserver_request_duration_seconds_bucket{verb="GET"}[5m]))
+
+# 2. 定位范围: 哪个资源类型慢
+sum by (resource) (rate(apiserver_request_duration_seconds_sum{verb="GET"}[5m]))
+/ sum by (resource) (rate(apiserver_request_duration_seconds_count{verb="GET"}[5m]))
+
+# 3. 关联 etcd: 是否存储层慢
+histogram_quantile(0.99, rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m]))
+
+# 4. 关联节点: 是否资源压力
+kube_node_status_condition{condition="MemoryPressure", status="true"} == 1
+```
+
+### 分层排查决策树
+
+```
+服务异常
+├── 控制平面可达?
+│   ├── No → API Server/etcd/网络
+│   └── Yes
+│       ├── Pod 状态正常?
+│       │   ├── No → 调度/资源/镜像/探针
+│       │   └── Yes
+│       │       ├── 网络连通?
+│       │       │   ├── No → CNI/Service/DNS/NetworkPolicy
+│       │       │   └── Yes
+│       │       │       ├── 应用日志有错误?
+│       │       │       │   ├── Yes → 应用层 Bug
+│       │       │       │   └── No → 性能/容量问题
+```
 
 ## See Also
 

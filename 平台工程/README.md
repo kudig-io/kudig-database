@@ -1,37 +1,24 @@
 ---
 title: Platform Engineering
-description: 整合原 平台工程/36 的平台知识，涵盖平台构建(IDP/Backstage)、平台运维执行和平台治理。
-summary: 整合原 平台工程/36 的平台知识，涵盖平台构建(IDP/Backstage)、平台运维执行和平台治理。
+description: 平台工程知识域 — IDP/Backstage、构建系统、平台运维、治理、开发体验、代码分析
+summary: 平台工程知识域入口，涵盖内部开发者平台(IDP)、Backstage、CI/CD 构建、平台运维自动化、治理策略、开发者体验优化
 category: domain
 tags:
 - platform-engineering
 - idp
 - backstage
 - devops
-- platform-ops
-- daemonset
-- gpu
+- governance
+- developer-experience
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
+- 平台团队
+- 架构师
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Platform Engineering 是什么
-- 如何 Platform Engineering
-- Kubernetes 07 platform engineering 最佳实践
-trigger_keywords:
-- Platform
-- Engineering
-- platform
-- engineering
-prerequisites:
-- kubectl-basics
-- platform-engineering-basics
-- gpu-scheduling-basics
 ---
 # 平台工程 Platform Engineering
 
@@ -39,11 +26,13 @@ prerequisites:
 
 ## 二级子目录
 
-- [[平台工程/代码分析/README.md|代码分析]]
-- [[平台工程/开发体验/README.md|开发体验]]
-- [[平台工程/构建/README.md|构建]]
-- [[平台工程/治理/README.md|治理]]
-- [[平台工程/运维/README.md|运维]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[平台工程/构建/README.md\|构建/]] | CI/CD | Tekton/Argo Workflows、构建优化、制品管理 |
+| [[平台工程/运维/README.md\|运维/]] | 平台运维 | 自动化运维、Day-2 操作、平台 SRE |
+| [[平台工程/治理/README.md\|治理/]] | 治理 | 策略引擎、合规、多租户、配额管理 |
+| [[平台工程/开发体验/README.md\|开发体验/]] | DX | IDP/Backstage、自助服务、Golden Path |
+| [[平台工程/代码分析/README.md\|代码分析/]] | 分析 | 代码质量、技术债务、依赖审计 |
 
 ## 跨域导航
 

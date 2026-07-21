@@ -1,25 +1,32 @@
 ---
-title: Tencent Tke
-description: Tencent Tke 目录索引
-summary: Tencent Tke 目录索引
-category: index
+title: Tencent Cloud TKE
+description: 腾讯云 TKE 知识域 — VPC CNI 网络、CBS/CFS 存储、CAM 集成、故障排查、集群管理
+category: subdomain
 tags:
-- index
+- tke
+- tencent-cloud
+- cbs
+- cam
+- vpc-cni
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
+# 腾讯云 TKE
 
+> 腾讯云容器服务 — 国内主流托管 K8s 平台。
 
-# Tencent Tke
+## 文档索引
 
-> 本页为 `云厂商/06-tencent-tke` 目录的自动索引。
+| 文档 | 主题 | 难度 |
+|------|------|------|
+| [[云厂商/腾讯云TKE/tencent-tke-overview.md\|TKE 概览]] | 架构/集群类型/定价 | beginner |
+| [[云厂商/腾讯云TKE/02-tke-networking-vpc-cni.md\|VPC CNI 网络]] | 网络模式与配置 | intermediate |
+| [[云厂商/腾讯云TKE/03-tke-storage-cbs-cfs.md\|CBS/CFS 存储]] | 块存储/文件存储 CSI | intermediate |
+| [[云厂商/腾讯云TKE/04-tke-iam-cam-integration.md\|CAM 集成]] | 身份认证与权限 | advanced |
+| [[云厂商/腾讯云TKE/05-tke-troubleshooting-playbook.md\|故障排查]] | TKE 常见问题处理 | advanced |
 
-## 文档
+## Related
 
-- [[云厂商/腾讯云TKE/02-tke-networking-vpc-cni.md|Tke Networking Vpc Cni]]
-- [[云厂商/腾讯云TKE/03-tke-storage-cbs-cfs.md|Tke Storage Cbs Cfs]]
-- [[云厂商/腾讯云TKE/04-tke-iam-cam-integration.md|Tke Iam Cam Integration]]
-- [[云厂商/腾讯云TKE/05-tke-troubleshooting-playbook.md|Tke Troubleshooting Playbook]]
-- [[云厂商/腾讯云TKE/tencent-tke-overview.md|Tencent Tke Overview]]
-
+- [[云厂商/华为云CCE/index.md|华为云 CCE]]
+- [[云厂商/index.md|云厂商总索引]]

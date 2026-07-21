@@ -283,6 +283,277 @@ compactor:
 - **SLO 目标应切合实际**：目标过高达不到会失去信任，目标过低则无法驱动改进。
 - **跨团队对齐**：SLI/SLO 的定义需要业务、开发与 SRE 共同认可，避免监控指标与业务目标脱节。
 
+---
+
+## 8. 可观测性组件自监控
+
+### 自监控架构
+
+```
+外部探测 (Blackbox)          内部自监控
+┌─────────────────┐    ┌─────────────────────┐
+│ Blackbox Exporter │    │ Prometheus /metrics │
+│ (外部集群)       │    │ Grafana /metrics    │
+│ - HTTP 探测      │    │ Loki /metrics       │
+│ - DNS 探测       │    │ Tempo /metrics      │
+│ - TCP 探测       │    │ Alertmanager /metrics│
+└────────┬────────┘    └──────────┬──────────┘
+         │                       │
+         └───────────┬───────────┘
+                     ▼
+         ┌─────────────────┐
+         │ 独立 Prometheus  │
+         │ (监控集群)       │
+         └─────────────────┘
+```
+
+### 关键自监控指标
+
+```yaml
+# PrometheusRule: 可观测性组件自监控
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: observability-self-monitoring
+  namespace: monitoring
+spec:
+  groups:
+    - name: prometheus.rules
+      rules:
+        - alert: PrometheusDown
+          expr: up{job="prometheus-k8s"} == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Prometheus 不可用"
+
+        - alert: PrometheusHighCardinality
+          expr: prometheus_tsdb_head_series > 5000000
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Prometheus 时间序列数过高: {{ $value }}"
+
+        - alert: PrometheusRuleEvaluationSlow
+          expr: |
+            prometheus_rule_evaluation_duration_seconds{quantile="0.99"} > 10
+          for: 10m
+          labels:
+            severity: warning
+
+    - name: alertmanager.rules
+      rules:
+        - alert: AlertmanagerDown
+          expr: up{job="alertmanager"} == 0
+          for: 2m
+          labels:
+            severity: critical
+
+        - alert: AlertmanagerNotificationFailing
+          expr: |
+            rate(alertmanager_notifications_failed_total[5m]) > 0
+          for: 5m
+          labels:
+            severity: warning
+
+    - name: grafana.rules
+      rules:
+        - alert: GrafanaDown
+          expr: up{job="grafana"} == 0
+          for: 5m
+          labels:
+            severity: warning
+```
+
+### Blackbox 外部探测
+
+```yaml
+# 从外部集群探测可观测性组件可用性
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: observability-endpoints
+  namespace: monitoring
+spec:
+  interval: 30s
+  module: http_2xx
+  prober:
+    url: blackbox-exporter.external:9115
+  targets:
+    staticConfig:
+      static:
+        - https://grafana.example.com/api/health
+        - https://prometheus.example.com/-/healthy
+        - https://alertmanager.example.com/-/healthy
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: blackbox-alerts
+spec:
+  groups:
+    - name: blackbox.rules
+      rules:
+        - alert: ObservabilityEndpointDown
+          expr: probe_success{job="probe/observability-endpoints"} == 0
+          for: 3m
+          labels:
+            severity: critical
+          annotations:
+            summary: "可观测性端点不可达: {{ $labels.instance }}"
+```
+
+---
+
+## 9. 多集群可观测性治理
+
+### 架构模式
+
+| 模式 | 适用 | 优势 | 劣势 |
+|------|------|------|------|
+| 每集群独立 | 小集群 | 简单、无跨集群依赖 | 无全局视图 |
+| Thanos/Cortex 汇聚 | 中大规模 | 全局查询、去重 | 复杂度高 |
+| VictoriaMetrics 集群 | 大规模 | 高性能、低存储 | 商业版功能 |
+| Grafana Cloud | 全托管 | 零运维 | 成本、数据出境 |
+
+### 多集群 Prometheus 联邦
+
+```yaml
+# 全局 Prometheus 配置 (Thanos Query)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thanos-query-config
+  namespace: monitoring
+data:
+  stores.yaml: |
+    stores:
+      - dnssrv+_grpc._tcp.thanos-store.prod-cn.svc:10901
+      - dnssrv+_grpc._tcp.thanos-store.prod-us.svc:10901
+      - dnssrv+_grpc._tcp.thanos-store.staging.svc:10901
+```
+
+### 全局告警去重
+
+```yaml
+# Thanos Ruler 全局告警规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: global-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: global.rules
+      rules:
+        # 跨集群去重：同一告警只触发一次
+        - alert: ServiceDownGlobal
+          expr: |
+            count by (service) (
+              up{job=~".*-service"} == 0
+            ) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "服务 {{ $labels.service }} 在多个集群中不可用"
+```
+
+---
+
+## 10. 可观测性成本优化
+
+### 成本分布分析
+
+| 组件 | 主要成本驱动 | 优化策略 | 潜在节省 |
+|------|------------|----------|----------|
+| Prometheus | 时间序列数 × 保留期 | 降低基数、缩短保留 | 40-60% |
+| Loki | 日志量 × 保留期 | 采样、过滤、分级 | 50-70% |
+| Tempo | Span 量 × 保留期 | 尾部采样 | 60-80% |
+| Grafana | 查询频率 | 缓存、降低刷新率 | 20-30% |
+
+### 指标基数治理
+
+```bash
+# 🟢 查看 Top 高基数指标
+curl -s 'http://prometheus:9090/api/v1/label/__name__/values' | \
+  jq -r '.data[]' | while read metric; do
+    count=$(curl -s "http://prometheus:9090/api/v1/query?query=count($metric)" | \
+      jq '.data.result[0].value[1]')
+    echo "$count $metric"
+  done | sort -rn | head -20
+
+# 🟢 查看高基数标签
+curl -s 'http://prometheus:9090/api/v1/series?match[]=http_requests_total' | \
+  jq '.data | length'
+```
+
+### Recording Rules 降低查询成本
+
+```yaml
+# 预计算常用查询，降低实时查询压力
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cost-optimization-rules
+spec:
+  groups:
+    - name: recording.rules
+      interval: 30s
+      rules:
+        - record: job:http_requests:rate5m
+          expr: sum(rate(http_requests_total[5m])) by (job)
+        - record: job:http_errors:ratio5m
+          expr: |
+            sum(rate(http_requests_total{code=~"5.."}[5m])) by (job)
+            /
+            sum(rate(http_requests_total[5m])) by (job)
+        - record: namespace:cpu_usage:rate5m
+          expr: |
+            sum(rate(container_cpu_usage_seconds_total{
+              container!="POD",container!=""
+            }[5m])) by (namespace)
+```
+
+---
+
+## 11. 可观测性容量规划
+
+### 容量估算公式
+
+```
+Prometheus 存储 = 时间序列数 × 每样本字节 × 采样频率 × 保留时间
+               = series × 1.5B × (1/scrape_interval) × retention
+
+示例: 500K 序列, 30s 采样, 30天保留
+= 500,000 × 1.5 × (1/30) × 30×24×3600
+≈ 64.8 GB (压缩前)
+≈ 10-15 GB (压缩后, ~5:1)
+```
+
+### 容量监控告警
+
+```yaml
+- alert: PrometheusStorageFull
+  expr: |
+    predict_linear(prometheus_tsdb_storage_retentions_total[6h], 72*3600) >
+    prometheus_tsdb_storage_retentions_total
+  for: 30m
+  labels:
+    severity: warning
+  annotations:
+    summary: "Prometheus 存储预计 3 天内耗尽"
+
+- alert: LokiIngestionLagging
+  expr: |
+    loki_ingester_streams_created_total - loki_ingester_streams_removed_total > 100000
+  for: 15m
+  labels:
+    severity: warning
+```
+
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[生产运维/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]

@@ -180,6 +180,235 @@ kubectl apply -f new-larger-pvc.yaml
 
 > 存储扩容涉及数据安全，任何操作前务必确认备份已完成。远程顾问应要求客户提供扩容前后的 `df -h` 和 `kubectl get pvc` 输出作为验证依据。
 
+## 自动化容量监控与告警
+
+### PrometheusRule — PVC 容量告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pvc-capacity-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: pvc-capacity
+      rules:
+        - alert: PVCSpaceRunningLow
+          expr: |
+            kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes < 0.15
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} 剩余空间 < 15%"
+            runbook_url: "https://wiki.internal/runbooks/pvc-expansion"
+
+        - alert: PVCSpaceCritical
+          expr: |
+            kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes < 0.05
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "❗ PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} 即将写满 (< 5%)"
+
+        - alert: PVCExpansionInProgress
+          expr: |
+            kube_persistentvolumeclaim_status_condition{condition="FileSystemResizePending"} == 1
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "PVC {{ $labels.persistentvolumeclaim }} 文件系统扩容等待 >30min"
+
+        - alert: PVCInodeExhaustion
+          expr: |
+            kubelet_volume_stats_inodes_used / kubelet_volume_stats_inodes > 0.9
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "PVC {{ $labels.persistentvolumeclaim }} inode 使用率 > 90%"
+```
+
+### 容量趋势预测
+
+```promql
+# 预测 PVC 何时写满（线性回归）
+predict_linear(
+  kubelet_volume_stats_available_bytes{namespace="production"}[7d],
+  7 * 24 * 3600  # 预测 7 天后
+) < 0
+
+# 按命名空间统计存储使用
+sum by (namespace) (kubelet_volume_stats_used_bytes) / 1024^3  # GiB
+
+# Top 10 容量使用 PVC
+topk(10,
+  kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes
+)
+```
+
+## StatefulSet 批量扩容
+
+### 批量扩容脚本
+
+```bash
+#!/bin/bash
+# 🟡 中风险：StatefulSet PVC 批量扩容
+STS_NAME=$1
+NEW_SIZE=$2
+NS=${3:-default}
+
+if [ -z "$STS_NAME" ] || [ -z "$NEW_SIZE" ]; then
+  echo "用法: $0 <statefulset-name> <new-size> [namespace]"
+  echo "示例: $0 postgres 200Gi production"
+  exit 1
+fi
+
+echo "=== StatefulSet PVC 批量扩容 ==="
+echo "目标: $STS_NAME → $NEW_SIZE"
+
+# 1. 检查 StorageClass 是否支持扩容
+SC=$(kubectl get pvc -n $NS -l app=$STS_NAME -o jsonpath='{.items[0].spec.storageClassName}')
+EXPANDABLE=$(kubectl get sc $SC -o jsonpath='{.allowVolumeExpansion}')
+if [ "$EXPANDABLE" != "true" ]; then
+  echo "❌ StorageClass $SC 不支持扩容 (allowVolumeExpansion=$EXPANDABLE)"
+  exit 1
+fi
+echo "✅ StorageClass $SC 支持扩容"
+
+# 2. 获取所有 PVC
+PVCS=$(kubectl get pvc -n $NS -l app=$STS_NAME -o name)
+COUNT=$(echo "$PVCS" | wc -l | tr -d ' ')
+echo "找到 $COUNT 个 PVC"
+
+# 3. 逐个扩容
+for pvc in $PVCS; do
+  NAME=${pvc#persistentvolumeclaim/}
+  CURRENT=$(kubectl get pvc $NAME -n $NS -o jsonpath='{.spec.resources.requests.storage}')
+  echo "  扩容 $NAME: $CURRENT → $NEW_SIZE"
+  kubectl patch pvc $NAME -n $NS \
+    -p "{\"spec\":{\"resources\":{\"requests\":{\"storage\":\"$NEW_SIZE\"}}}}"
+done
+
+# 4. 等待扩容完成
+echo ""
+echo "等待扩容完成..."
+sleep 10
+kubectl get pvc -n $NS -l app=$STS_NAME -o custom-columns=
+  NAME:.metadata.name,SIZE:.spec.resources.requests.storage,STATUS:.status.phase
+
+echo "=== 完成 ==="
+```
+
+## 扩容验证检查单
+
+```bash
+#!/bin/bash
+# 🟢 只读：PVC 扩容后验证
+PVC=$1
+NS=${2:-default}
+
+echo "=== PVC 扩容验证: $NS/$PVC ==="
+
+# 1. PVC 状态
+echo "[1/5] PVC 状态:"
+kubectl get pvc $PVC -n $NS -o custom-columns=
+  NAME:.metadata.name,CAPACITY:.status.capacity.storage,PHASE:.status.phase
+
+# 2. 条件检查
+echo "[2/5] 扩容条件:"
+kubectl get pvc $PVC -n $NS -o jsonpath='{range .status.conditions[*]}{.type}: {.status} ({.reason}){"\n"}{end}'
+
+# 3. PV 实际容量
+echo "[3/5] PV 实际容量:"
+PV=$(kubectl get pvc $PVC -n $NS -o jsonpath='{.spec.volumeName}')
+kubectl get pv $PV -o jsonpath='{.spec.capacity.storage}'
+echo ""
+
+# 4. 文件系统容量（需要 Pod 运行中）
+echo "[4/5] 文件系统容量:"
+POD=$(kubectl get pods -n $NS -o jsonpath='{.items[0].metadata.name}' -l app=$PVC 2>/dev/null)
+if [ -n "$POD" ]; then
+  kubectl exec $POD -n $NS -- df -h 2>/dev/null | grep -v tmpfs | head -5
+else
+  echo "  无运行中的 Pod，跳过"
+fi
+
+# 5. 事件检查
+echo "[5/5] 最近事件:"
+kubectl get events -n $NS --field-selector involvedObject.name=$PVC --sort-by='.lastTimestamp' | tail -5
+
+echo "=== 验证完成 ==="
+```
+
+## 容量规划与自动扩容
+
+### 容量规划公式
+
+```
+所需容量 = 当前使用量 / 目标利用率 × 增长系数
+
+示例:
+- 当前使用: 80Gi
+- 目标利用率: 70%
+- 6 个月增长系数: 1.5
+- 所需容量 = 80 / 0.7 × 1.5 ≈ 172Gi → 申请 200Gi
+```
+
+### KEDA 自动扩容 PVC（概念）
+
+```yaml
+# 基于容量使用率触发扩容的 CronJob
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pvc-auto-expander
+  namespace: platform
+spec:
+  schedule: "0 */6 * * *"  # 每 6 小时检查
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: pvc-expander
+          containers:
+            - name: expander
+              image: bitnami/kubectl:latest
+              env:
+                - name: THRESHOLD
+                  value: "85"  # 使用率阈值 %
+                - name: EXPANSION_FACTOR
+                  value: "1.5"  # 扩容倍数
+                - name: MAX_SIZE_GI
+                  value: "2000"  # 最大容量
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "检查 PVC 容量使用率..."
+                  kubectl get pvc -A -o json | jq -r '
+                    .items[] |
+                    select(.status.capacity.storage != null) |
+                    "\(.metadata.namespace) \(.metadata.name) \(.status.capacity.storage)"
+                  ' | while read NS PVC CAP; do
+                    USED=$(kubectl exec -n $NS $(kubectl get pods -n $NS -o name | head -1) -- \
+                      df -B1 /data 2>/dev/null | tail -1 | awk '{print $3}')
+                    if [ -n "$USED" ]; then
+                      PCT=$((USED * 100 / ${CAP%Gi} / 1073741824))
+                      if [ $PCT -gt $THRESHOLD ]; then
+                        NEW_SIZE=$(echo "${CAP%Gi} * $EXPANSION_FACTOR / 1" | bc)
+                        echo "扩容 $NS/$PVC: ${CAP} → ${NEW_SIZE}Gi (使用率 ${PCT}%)"
+                        kubectl patch pvc $PVC -n $NS \
+                          -p "{\"spec\":{\"resources\":{\"requests\":{\"storage\":\"${NEW_SIZE}Gi\"}}}}"
+                      fi
+                    fi
+                  done
+          restartPolicy: OnFailure
+```
+
 ## 相关链接
 
 - [[storage-tool-evolution]] — 存储工具的演进

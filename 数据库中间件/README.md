@@ -1,7 +1,7 @@
 ---
 title: Database & Middleware
-description: '| 05-operator-management/ | 数据库 Operator 设计模式与对比 |'
-summary: '| 05-operator-management/ | 数据库 Operator 设计模式与对比 |'
+description: 数据库与中间件知识域 — 关系型/NoSQL 数据库、缓存、消息队列、时序数据库、搜索引擎、Operator 管理、数据流
+summary: 数据库与中间件知识域入口，涵盖 MySQL/PostgreSQL/MongoDB、Redis、Kafka/Pulsar、Prometheus/InfluxDB、Elasticsearch、Operator 管理与数据流
 category: domain
 tags:
 - database
@@ -10,44 +10,32 @@ tags:
 - time-series
 - operator
 - streaming
-- prometheus
-- flux
-- rag
-- daemonset
+- search-engine
+- cache
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Database & Middleware 是什么
-- 如何 Database & Middleware
-- Kubernetes 16 database middleware 最佳实践
-trigger_keywords:
-- Database
-- Middleware
-- database
-- middleware
-prerequisites:
-- kubectl-basics
-- prometheus-basics
-- gpu-scheduling-basics
 ---
 # 数据库中间件 Database & Middleware
 
-> 数据库、缓存、消息队列、时序数据库、Operator 管理与数据流。
+> 数据库、缓存、消息队列、时序数据库、搜索引擎、Operator 管理与数据流。
 
 ## 二级子目录
 
-- [[数据库中间件/Operator管理/README.md|Operator管理]]
-- [[数据库中间件/数据库/README.md|数据库]]
-- [[数据库中间件/数据流/README.md|数据流]]
-- [[数据库中间件/时序数据库/README.md|时序数据库]]
-- [[数据库中间件/消息队列/README.md|消息队列]]
-- [[数据库中间件/缓存/README.md|缓存]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[数据库中间件/数据库/index.md\|数据库/]] | 关系型/NoSQL | MySQL/PostgreSQL/MongoDB/TiDB |
+| [[数据库中间件/缓存/index.md\|缓存/]] | 缓存系统 | Redis/Memcached/缓存策略 |
+| [[数据库中间件/消息队列/index.md\|消息队列/]] | 消息与事件 | Kafka/Pulsar/NATS/RabbitMQ |
+| [[数据库中间件/时序数据库/index.md\|时序数据库/]] | 时序数据 | Prometheus/InfluxDB/VictoriaMetrics/Thanos |
+| [[数据库中间件/搜索引擎/index.md\|搜索引擎/]] | 搜索与分析 | Elasticsearch/OpenSearch/向量搜索 |
+| [[数据库中间件/Operator管理/index.md\|Operator管理/]] | Operator 模式 | 数据库 Operator 设计与对比 |
+| [[数据库中间件/数据流/index.md\|数据流/]] | 流处理 | Flink/Spark Streaming/CDC |
+| [[数据库中间件/新型数 据库/index.md\|新型数据库/]] | 新型数据库 | NewSQL/图数据库/向量数据库 |
 
 ## 跨域导航
 

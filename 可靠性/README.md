@@ -1,40 +1,24 @@
 ---
 title: Reliability Engineering
-description: '| 05-chaos-engineering/ | 混沌工程原则、Chaos Mesh、Litmus、实验设计 |'
-summary: '| 05-chaos-engineering/ | 混沌工程原则、Chaos Mesh、Litmus、实验设计 |'
+description: 可靠性工程知识域 — SRE 实践、混沌工程、灾难恢复、容量规划、事后复盘、性能测试、GameDay
+summary: 可靠性工程知识域入口，涵盖 SLO/SLI/Error Budget、Chaos Mesh/Litmus 混沌工程、备份恢复、DR Playbook、GameDay 演练
 category: domain
 tags:
 - sre
 - slo
 - disaster-recovery
-- backup
-- capacity-planning
 - chaos-engineering
 - postmortem
-- performance-testing
-- daemonset
-- gpu
+- capacity-planning
+- gameday
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-07-21'
 difficulty: intermediate
-reading_level: intermediate
 audience:
+- SRE
 - 所有工程师
 estimated_read_time: 5min
-intent_queries:
-- Reliability Engineering 是什么
-- 如何 Reliability Engineering
-- Kubernetes 09 reliability engineering 最佳实践
-trigger_keywords:
-- Reliability
-- Engineering
-- reliability
-- engineering
-prerequisites:
-- kubectl-basics
-- sre-practices
-- gpu-scheduling-basics
 ---
 # 可靠性 Reliability
 
@@ -42,13 +26,15 @@ prerequisites:
 
 ## 二级子目录
 
-- [[可靠性/SRE实践/README.md|SRE实践]]
-- [[可靠性/事后复盘/README.md|事后复盘]]
-- [[可靠性/备份恢复/README.md|备份恢复]]
-- [[可靠性/容量规划/README.md|容量规划]]
-- [[可靠性/性能测试/README.md|性能测试]]
-- [[可靠性/混沌工程/README.md|混沌工程]]
-- [[可靠性/灾难恢复/README.md|灾难恢复]]
+| 子目录 | 内容 | 核心话题 |
+|--------|------|----------|
+| [[可靠性/SRE实践/index.md\|SRE实践/]] | SRE 方法论 | SLO/SLI/Error Budget/Toil 消除/On-Call |
+| [[可靠性/混沌工程/index.md\|混沌工程/]] | 混沌实验 | Chaos Mesh/Litmus/实验设计/GameDay |
+| [[可靠性/灾难恢复/index.md\|灾难恢复/]] | DR | DR Playbook/RTO-RPO/切换演练 |
+| [[可靠性/备份恢复/index.md\|备份恢复/]] | 备份 | Velero/etcd 快照/跨集群备份 |
+| [[可靠性/容量规划/index.md\|容量规划/]] | 容量 | 资源预测/右调优/成本平衡 |
+| [[可靠性/事后复盘/index.md\|事后复盘/]] | 复盘 | Blameless Postmortem/模板/改进跟踪 |
+| [[可靠性/性能测试/index.md\|性能测试/]] | 压测 | 负载测试/基准测试/性能回归 |
 
 ## 跨域导航
 

@@ -1,27 +1,28 @@
 ---
 title: Tags
-description: Tags 目录索引
-summary: Tags 目录索引
+description: 标签体系索引 — 知识库全域标签分类与知识图谱导航
 category: index
 tags:
 - index
+- tag-system
+- knowledge-graph
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-07-21'
 ---
 
 
 # Tags
 
-> 本页为 `tags` 目录的自动索引。
+> 本页为 `标签` 目录的完整索引。标签体系是知识库的知识图谱导航层，通过标签枢纽页将分散在各知识域中的相关内容聚合为可发现的知识网络。
 
 ## 原有标签 (Original Tags)
 
-- [[标签/deep-dive.md|Deep Dive]]
-- [[标签/papers.md|Papers]]
-- [[标签/reference.md|Reference]]
-- [[标签/research.md|Research]]
-- [[标签/visibility-public.md|Visibility Public]]
+- [[标签/deep-dive|Deep Dive — 深度解析]]
+- [[标签/papers|Papers — 论文研究]]
+- [[标签/reference|Reference — 参考资料]]
+- [[标签/research|Research — 研究专题]]
+- [[标签/visibility-public|Visibility Public — 公开可见]]
 
 ## 核心领域标签 (Domain Tags)
 
@@ -43,4 +44,10 @@ last_updated: 2026-07
 - [[标签/multi-cluster|multi-cluster — 多集群管理]]
 - [[标签/production|production — 生产运营]]
 - [[标签/best-practices|best-practices — 最佳实践]]
+
+## 方法论与运营标签 (Methodology & Operations Tags)
+
+- [[标签/troubleshooting|troubleshooting — 故障诊断 (FTA/FEBM/排障工具链)]]
+- [[标签/platform-engineering|platform-engineering — 平台工程 (IDP/GitOps/治理)]]
+- [[标签/sre|sre — 站点可靠性工程 (SLO/事件管理/混沌工程)]]
 
