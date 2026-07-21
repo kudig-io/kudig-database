@@ -151,7 +151,327 @@ resource "grafana_dashboard" "slo_api" {
 }
 ```
 
-仪表盘纳入 Git 仓库，PR 评审变更，避免"谁的 Grafana 谁改"导致的标准漂移。
+仪表盘纳入 Git 仓库，PR 评审变更，避免“谁的 Grafana 谁改”导致的标准漂移。
+
+## 完整 Grafana Dashboard JSON
+
+```json
+{
+  "title": "SLO: ${service}",
+  "tags": ["slo", "sre", "production"],
+  "timezone": "browser",
+  "refresh": "30s",
+  "time": {"from": "now-30d", "to": "now"},
+  "templating": {
+    "list": [
+      {
+        "name": "service",
+        "type": "query",
+        "datasource": "Prometheus",
+        "query": "label_values(http_requests_total, job)",
+        "refresh": 2
+      },
+      {
+        "name": "slo_target",
+        "type": "custom",
+        "options": [
+          {"text": "99.9%", "value": "0.999"},
+          {"text": "99.95%", "value": "0.9995"},
+          {"text": "99.99%", "value": "0.9999"}
+        ],
+        "current": {"text": "99.9%", "value": "0.999"}
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "错误预算剩余",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 0.25},
+              {"color": "green", "value": 0.5}
+            ]
+          }
+        }
+      },
+      "targets": [{
+        "expr": "1 - (sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[30d])) / sum(rate(http_requests_total{job=\"$service\"}[30d]))) / (1 - $slo_target)"
+      }]
+    },
+    {
+      "id": 2,
+      "title": "SLI 达成率 (30d)",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "thresholds": {
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 0.999},
+              {"color": "green", "value": 0.9995}
+            ]
+          }
+        }
+      },
+      "targets": [{
+        "expr": "1 - (sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[30d])) / sum(rate(http_requests_total{job=\"$service\"}[30d])))"
+      }]
+    },
+    {
+      "id": 3,
+      "title": "错误预算燃烧率",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {"expr": "(sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[1h])) / sum(rate(http_requests_total{job=\"$service\"}[1h]))) / (1 - $slo_target)", "legendFormat": "1h burn rate"},
+        {"expr": "(sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[6h])) / sum(rate(http_requests_total{job=\"$service\"}[6h]))) / (1 - $slo_target)", "legendFormat": "6h burn rate"},
+        {"expr": "(sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[1d])) / sum(rate(http_requests_total{job=\"$service\"}[1d]))) / (1 - $slo_target)", "legendFormat": "1d burn rate"}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "延迟分位线",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [
+        {"expr": "histogram_quantile(0.50, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"$service\"}[5m])))", "legendFormat": "P50"},
+        {"expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"$service\"}[5m])))", "legendFormat": "P95"},
+        {"expr": "histogram_quantile(0.99, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"$service\"}[5m])))", "legendFormat": "P99"}
+      ]
+    },
+    {
+      "id": 5,
+      "title": "请求量 (RPS)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {"expr": "sum(rate(http_requests_total{job=\"$service\",code=~\"2..\"}[5m]))", "legendFormat": "2xx"},
+        {"expr": "sum(rate(http_requests_total{job=\"$service\",code=~\"4..\"}[5m]))", "legendFormat": "4xx"},
+        {"expr": "sum(rate(http_requests_total{job=\"$service\",code=~\"5..\"}[5m]))", "legendFormat": "5xx"}
+      ]
+    }
+  ]
+}
+```
+
+## 多服务 SLO 聚合视图
+
+### 服务健康总览
+
+```yaml
+# 多服务 SLO 状态面板
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: slo-services-config
+  namespace: monitoring
+data:
+  services.yaml: |
+    services:
+      - name: api-gateway
+        slo_target: 0.999
+        tier: critical
+      - name: order-service
+        slo_target: 0.999
+        tier: critical
+      - name: payment-service
+        slo_target: 0.9995
+        tier: critical
+      - name: user-service
+        slo_target: 0.995
+        tier: standard
+      - name: notification-service
+        slo_target: 0.99
+        tier: best-effort
+```
+
+### 聚合 PromQL
+
+```promql
+# 所有服务 SLO 状态
+sum by (job) (
+  1 - (
+    sum by (job) (rate(http_requests_total{code=~"5.."}[30d]))
+    /
+    sum by (job) (rate(http_requests_total[30d]))
+  )
+)
+
+# 违反 SLO 的服务
+(
+  1 - (
+    sum by (job) (rate(http_requests_total{code=~"5.."}[30d]))
+    /
+    sum by (job) (rate(http_requests_total[30d]))
+  )
+) < on(job) group_left() slo_target
+
+# 错误预算消耗最快的服务
+topk(5,
+  (sum by (job) (rate(http_requests_total{code=~"5.."}[1h])) / sum by (job) (rate(http_requests_total[1h])))
+  /
+  (1 - slo_target)
+)
+```
+
+## 告警规则集成
+
+### PrometheusRule 与仪表盘联动
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: slo-dashboard-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: slo.burn_rate.rules
+      rules:
+        # 快速燃烧 (1h 窗口)
+        - alert: ErrorBudgetFastBurn
+          expr: |
+            (
+              sum(rate(http_requests_total{code=~"5.."}[1h]))
+              / sum(rate(http_requests_total[1h]))
+            ) / (1 - 0.999) > 14.4
+            and
+            (
+              sum(rate(http_requests_total{code=~"5.."}[5m]))
+              / sum(rate(http_requests_total[5m]))
+            ) / (1 - 0.999) > 14.4
+          for: 2m
+          labels:
+            severity: critical
+            slo_window: 1h
+          annotations:
+            summary: "🚨 错误预算快速燃烧 (1h 窗口)"
+            dashboard: "https://grafana.example.com/d/slo-api?var-service={{ $labels.job }}"
+
+        # 中速燃烧 (6h 窗口)
+        - alert: ErrorBudgetMediumBurn
+          expr: |
+            (
+              sum(rate(http_requests_total{code=~"5.."}[6h]))
+              / sum(rate(http_requests_total[6h]))
+            ) / (1 - 0.999) > 6
+          for: 15m
+          labels:
+            severity: warning
+            slo_window: 6h
+          annotations:
+            summary: "⚠️ 错误预算中速燃烧 (6h 窗口)"
+
+        # 慢速燃烧 (3d 窗口)
+        - alert: ErrorBudgetSlowBurn
+          expr: |
+            (
+              sum(rate(http_requests_total{code=~"5.."}[3d]))
+              / sum(rate(http_requests_total[3d]))
+            ) / (1 - 0.999) > 3
+          for: 1h
+          labels:
+            severity: info
+            slo_window: 3d
+          annotations:
+            summary: "ℹ️ 错误预算慢速燃烧 (3d 窗口)"
+```
+
+## 仪表盘即代码 (Dashboard as Code)
+
+### Jsonnet 模板
+
+```jsonnet
+// dashboards/slo.libsonnet
+local grafana = import 'grafonnet/grafana.libsonnet';
+local dashboard = grafana.dashboard;
+local row = grafana.row;
+local prometheus = grafana.prometheus;
+
+local sloDashboard(service, sloTarget) =
+  dashboard.new(
+    'SLO: ' + service,
+    tags=['slo', 'sre'],
+    time_from='now-30d',
+  )
+  .addTemplate(
+    grafana.template.new(
+      'service',
+      datasource='Prometheus',
+      query='label_values(http_requests_total, job)',
+    )
+  )
+  .addPanel(
+    grafana.statPanel.new(
+      title='错误预算剩余',
+      datasource='Prometheus',
+    )
+    .addTarget(
+      prometheus.target(
+        '1 - (sum(rate(http_requests_total{job="$service",code=~"5.."}[30d])) / sum(rate(http_requests_total{job="$service"}[30d]))) / (1 - ' + sloTarget + ')'
+      )
+    ),
+    gridPos={h: 4, w: 6, x: 0, y: 0}
+  );
+
+// 生成所有服务仪表盘
+{
+  'slo-api': sloDashboard('api-gateway', '0.999'),
+  'slo-order': sloDashboard('order-service', '0.999'),
+  'slo-payment': sloDashboard('payment-service', '0.9995'),
+}
+```
+
+### CI/CD 集成
+
+```yaml
+# .github/workflows/dashboards.yml
+name: Deploy Dashboards
+on:
+  push:
+    paths:
+      - 'dashboards/**'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate dashboards
+        run: |
+          jsonnet -J vendor -m out/ dashboards/main.jsonnet
+      - name: Deploy to Grafana
+        run: |
+          for f in out/*.json; do
+            curl -X POST -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $GRAFANA_TOKEN" \
+              -d @"$f" \
+              https://grafana.example.com/api/dashboards/db
+          done
+        env:
+          GRAFANA_TOKEN: ${{ secrets.GRAFANA_TOKEN }}
+```
+
+## 最佳实践
+
+| 实践 | 说明 |
+|-----|------|
+| **一个 SLO 一个仪表盘** | 避免信息过载，用变量切换服务 |
+| **错误预算置顶** | 决策依据永远在最显眼位置 |
+| **30 天滚动窗口** | 与 SLO 定义一致，避免日历月重置错觉 |
+| **叠加 annotations** | 发布/扩缩容/混沌实验/Incident 全标注 |
+| **告警与面板一致** | 仪表盘变红 = PagerDuty 响铃 |
+| **仪表盘即代码** | Git 管理，PR 评审，避免配置漂移 |
+| **定期审查** | 每月检查面板是否仍有价值 |
 
 ## 相关
 

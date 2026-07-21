@@ -134,6 +134,285 @@ T+0:40  进入下一场景 或 结束
 3. **只测不修**：发现问题进备忘录就完了——必须开工单排期，下个 Game Day 验证修复。
 4. **.prod 演练不通知客户**：除非有变更窗口豁免，否则务必状态页预告，避免被当真实事故响应。
 
+## 场景库详解
+
+### 基础场景（入门级）
+
+| 场景 | 注入方式 | 预期结果 | 验证点 |
+|-----|---------|---------|--------|
+| Pod 随机杀死 | Chaos Mesh PodChaos | 自动重启，无感知 | 重启时间 < 30s |
+| CPU 压力 | StressChaos | HPA 扩容 | 扩容触发 < 2min |
+| 内存压力 | StressChaos | 无 OOM | 内存使用 < 80% |
+| 网络延迟 | NetworkChaos | 延迟增加但可用 | P99 < 1s |
+| DNS 故障 | DNSChaos | 服务发现降级 | 缓存生效 |
+
+### 中级场景
+
+| 场景 | 注入方式 | 预期结果 | 验证点 |
+|-----|---------|---------|--------|
+| 数据库主从切换 | 手动/脚本 | 自动重连 | 中断 < 30s |
+| 缓存失效 | 清空 Redis | 降级到 DB | 无 5xx |
+| 依赖服务超时 | NetworkChaos | 熔断生效 | 快速失败 |
+| 磁盘 IO 压力 | IOChaos | 限流生效 | 无数据损坏 |
+| 节点 NotReady | 停止 kubelet | Pod 迁移 | 迁移 < 5min |
+
+### 高级场景
+
+| 场景 | 注入方式 | 预期结果 | 验证点 |
+|-----|---------|---------|--------|
+| AZ 故障 | 多节点同时故障 | 跨 AZ 切换 | 服务不中断 |
+| 区域故障 | 多 AZ 同时故障 | 跨区域切换 | RTO < 15min |
+| 数据损坏 | 注入错误数据 | 检测并告警 | 告警 < 5min |
+| 级联故障 | 多服务同时故障 | 降级保核心 | 核心可用 |
+
+## 自动化编排
+
+### Argo Workflow Game Day 编排
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: game-day-automation
+  namespace: chaos
+spec:
+  entrypoint: game-day
+  templates:
+    - name: game-day
+      steps:
+        - - name: capture-baseline
+            template: baseline
+        - - name: start-load
+            template: load-test
+        - - name: inject-chaos
+            template: chaos
+        - - name: observe
+            template: observe
+            arguments:
+              parameters:
+                - name: duration
+                  value: "300s"
+        - - name: stop-chaos
+            template: cleanup
+        - - name: verify-recovery
+            template: verify
+        - - name: generate-report
+            template: report
+
+    - name: baseline
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 采集基线 ==="
+            kubectl get pods -n production -o wide > /tmp/baseline-pods.txt
+            curl -s 'http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,rate(http_request_duration_seconds_bucket[5m]))' > /tmp/baseline-latency.json
+
+    - name: load-test
+      container:
+        image: grafana/k6:latest
+        command: [k6, run, /scripts/load.js]
+        volumeMounts:
+          - name: scripts
+            mountPath: /scripts
+
+    - name: chaos
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 注入故障 ==="
+            kubectl apply -f /chaos/experiment.yaml
+
+    - name: observe
+      inputs:
+        parameters:
+          - name: duration
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 观察期: {{inputs.parameters.duration}} ==="
+            sleep {{inputs.parameters.duration}}
+
+    - name: cleanup
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 清理故障 ==="
+            kubectl delete -f /chaos/experiment.yaml --ignore-not-found
+
+    - name: verify
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 验证恢复 ==="
+            kubectl get pods -n production -o wide > /tmp/recovery-pods.txt
+            # 对比基线与恢复后状态
+
+    - name: report
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 生成报告 ==="
+            cat > /tmp/game-day-report.md <<EOF
+            # Game Day 报告
+            - 日期: $(date)
+            - 场景: $SCENARIO
+            - 结果: $RESULT
+            EOF
+```
+
+## 证据采集
+
+### 指标采集脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：Game Day 证据采集脚本
+set -euo pipefail
+
+GAME_DAY_ID=${1:?"Usage: $0 <game-day-id>"}
+OUTPUT_DIR="/tmp/game-day-$GAME_DAY_ID"
+mkdir -p $OUTPUT_DIR
+
+echo "=== Game Day 证据采集: $GAME_DAY_ID ==="
+
+# 1. 系统状态快照
+echo "[1] 系统状态..."
+kubectl get nodes -o wide > $OUTPUT_DIR/nodes.txt
+kubectl get pods -n production -o wide > $OUTPUT_DIR/pods.txt
+kubectl get events -n production --sort-by='.lastTimestamp' > $OUTPUT_DIR/events.txt
+
+# 2. 监控指标
+echo "[2] 监控指标..."
+# 错误率
+curl -s 'http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~"5.."}[1m]))/sum(rate(http_requests_total[1m]))' > $OUTPUT_DIR/error-rate.json
+# P99 延迟
+curl -s 'http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,rate(http_request_duration_seconds_bucket[5m]))' > $OUTPUT_DIR/latency-p99.json
+# CPU/内存
+curl -s 'http://prometheus:9090/api/v1/query?query=sum(rate(container_cpu_usage_seconds_total[5m]))' > $OUTPUT_DIR/cpu.json
+curl -s 'http://prometheus:9090/api/v1/query?query=sum(container_memory_working_set_bytes)' > $OUTPUT_DIR/memory.json
+
+# 3. Grafana 截图
+echo "[3] Grafana 截图..."
+# 使用 Grafana API 或手动截图
+
+# 4. 日志
+echo "[4] 关键日志..."
+kubectl logs -n production -l app=api --tail=1000 > $OUTPUT_DIR/api-logs.txt
+
+echo "=== 采集完成: $OUTPUT_DIR ==="
+ls -la $OUTPUT_DIR
+```
+
+### 证据清单
+
+| 证据类型 | 内容 | 保留期限 |
+|---------|------|----------|
+| 系统快照 | 节点/Pod/事件状态 | 90 天 |
+| 监控指标 | 错误率/延迟/资源 | 90 天 |
+| Grafana 截图 | 关键面板截图 | 90 天 |
+| 日志 | 相关服务日志 | 30 天 |
+| 演练记录 | 时间线/操作记录 | 永久 |
+| 复盘文档 | 问题/改进措施 | 永久 |
+
+## 演练后跟踪
+
+### 问题跟踪看板
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-day-issues
+  namespace: chaos
+data:
+  issues.yaml: |
+    game_day: GD-2026-07-11
+    issues:
+      - id: GD-001
+        title: "P99 延迟超标"
+        severity: high
+        owner: "@sre-team"
+        due: "2026-07-25"
+        status: in_progress
+        
+      - id: GD-002
+        title: "熔断阈值过高"
+        severity: medium
+        owner: "@dev-team"
+        due: "2026-07-20"
+        status: pending
+```
+
+### 跟踪 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: game-day-issue-tracker
+  namespace: chaos
+spec:
+  schedule: "0 9 * * 1"  # 每周一 9:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: tracker
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "=== Game Day 问题跟踪 ==="
+                  
+                  # 检查逾期问题
+                  ISSUES=$(kubectl get configmap game-day-issues -n chaos -o yaml | \
+                    yq '.data.issues' | \
+                    yq '.issues[] | select(.due < now and .status != "done")')
+                  
+                  if [ -n "$ISSUES" ]; then
+                    echo "⚠️ 以下问题已逾期:"
+                    echo "$ISSUES"
+                    # 发送提醒
+                  fi
+```
+
+## 成熟度评估
+
+### Game Day 成熟度模型
+
+| 级别 | 特征 | 频率 | 范围 |
+|-----|------|------|------|
+| **1. 无演练** | 从未进行过 Game Day | - | - |
+| **2. 初级** | 偶尔进行，无标准流程 | 季度 | Staging |
+| **3. 规范化** | 有模板、有流程 | 月度 | Staging + Prod 小流量 |
+| **4. 自动化** | 自动化编排、持续演练 | 双周 | Prod |
+| **5. 持续** | 集成到 CI/CD、常态化 | 每周 | 全环境 |
+
+### 评估问卷
+
+| 问题 | 1分 | 3分 | 5分 |
+|-----|-----|-----|-----|
+| 演练频率 | 从不 | 季度 | 月度+ |
+| 场景覆盖 | 单一 | 3-5 个 | 10+ |
+| 自动化程度 | 手动 | 半自动 | 全自动 |
+| 问题跟踪 | 无 | 手动 | 自动 |
+| 团队参与 | 少数人 | 部分团队 | 全团队 |
+
 ## 相关
 
 - [[可靠性/混沌工程/06-game-day-runbook-template.md|self]]

@@ -73,9 +73,151 @@ Terway 深度依赖以下阿里云基础设施和服务：
 | **RAM 角色** | 阿里云 RAM | Terway 通过 ECS 实例角色 (Instance RAM Role) 获取访问云资源的临时凭证 | 必需 |
 | **安
 
+### 产品定位
 
+Terway 是阿里云容器服务 ACK (Alibaba Cloud Container Service for Kubernetes) 的官方 CNI 插件，深度集成阿里云 VPC 网络基础设施，为 Kubernetes Pod 提供原生 VPC 网络接入能力。
 
-## 与 K8s 网络模型的关系
+**核心价值**:
+- **原生 VPC 集成**: Pod IP 直接来自 VPC 地址段，无需 Overlay 封装
+- **高性能网络**: ENI 直通模式性能接近物理机 (95%+)
+- **云原生安全**: 直接复用阿里云安全组、网络 ACL 等能力
+- **弹性 IP 管理**: 支持 ENI 辅助 IP，提高 IP 利用率
+
+### 与其他 CNI 对比
+
+| 特性 | Terway | Flannel | Calico | Cilium |
+|-----|--------|---------|--------|--------|
+| **网络模式** | VPC 原生 | Overlay (VXLAN) | BGP/Overlay | eBPF/Overlay |
+| **Pod IP 来源** | VPC 地址段 | 独立 CIDR | 独立 CIDR | 独立 CIDR |
+| **性能** | 95%+ | 70-80% | 85-90% | 90%+ |
+| **NetworkPolicy** | ✅ 安全组 | ❌ | ✅ | ✅ eBPF |
+| **云集成** | 深度集成 | 无 | 无 | 无 |
+| **多网卡** | ✅ Multus | ❌ | ❌ | ✅ |
+| **固定 IP** | ✅ | ❌ | ❌ | ❌ |
+| **适用场景** | 阿里云 ACK | 通用 | 通用 | 高性能/安全 |
+
+### 网络模式选择指南
+
+```
+[选择网络模式]
+    │
+    ├── [需要最高性能?]
+    │       │
+    │       ├── 是 → [节点规模 < 50?]
+    │       │           │
+    │       │           ├── 是 → ENI 独占模式
+    │       │           │
+    │       │           └── 否 → ENI 多 IP 模式 (ENIIP)
+    │       │
+    │       └── 否 → 继续
+    │
+    ├── [需要高密度?]
+    │       │
+    │       ├── 是 → ENI 多 IP 模式 (ENIIP) 或 IPVlan
+    │       │
+    │       └── 否 → 继续
+    │
+    ├── [内核版本 >= 4.19?]
+    │       │
+    │       ├── 是 → IPVlan 模式 (高性能 + 高密度)
+    │       │
+    │       └── 否 → ENI 多 IP 模式 (ENIIP)
+    │
+    └── [兼容性优先?]
+            │
+            └── 是 → VPC 模式 (类似 Flannel)
+```
+
+### 典型使用场景
+
+| 场景 | 推荐模式 | 说明 |
+|-----|---------|------|
+| **Web 应用** | ENIIP | 平衡性能与密度 |
+| **数据库** | ENI 独占 | 需要稳定 IP 和高性能 |
+| **微服务** | ENIIP | 高密度部署 |
+| **大数据** | IPVlan | 高吞吐需求 |
+| **边缘计算** | VPC | 资源受限环境 |
+| **多租户** | ENI 独占 | 网络隔离需求 |
+
+### 部署与配置
+
+#### 安装 Terway
+
+Terway 作为 ACK 集群的默认 CNI，在创建集群时自动安装：
+
+```bash
+# 🟢 低风险：检查 Terway 安装状态
+kubectl get pods -n kube-system -l app=terway-eniip
+
+# 🟢 低风险：查看 Terway 版本
+kubectl get ds -n kube-system terway-eniip -o jsonpath='{.spec.template.spec.containers[0].image}'
+
+# 🟢 低风险：查看 Terway 配置
+kubectl get cm -n kube-system eni-config -o yaml
+```
+
+#### 核心配置项
+
+```yaml
+# eni-config ConfigMap 关键配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eni-config
+  namespace: kube-system
+data:
+  eni_conf: |
+    {
+      "version": "1",
+      "max_pool_size": 5,        # IP 池最大大小
+      "min_pool_size": 1,        # IP 池最小大小
+      "vswitches": {             # vSwitch 配置
+        "cn-hangzhou-h": ["vsw-bp1234567890abcdef"],
+        "cn-hangzhou-i": ["vsw-bp0987654321fedcba"]
+      },
+      "security_group": "sg-bp1234567890abcdef",
+      "service_cidr": "172.16.0.0/16",
+      "enable_trunk": false,     # 是否启用 Trunk ENI
+      "enable_ipvlan": false,    # 是否启用 IPVlan
+      "enable_ebpf": true        # 是否启用 eBPF
+    }
+```
+
+### 版本兼容性
+
+| Terway 版本 | ACK 版本 | Kubernetes 版本 | 主要特性 |
+|------------|---------|----------------|----------|
+| v1.5.x | 1.24+ | 1.24-1.26 | 基础 ENI/ENIIP 支持 |
+| v1.6.x | 1.26+ | 1.26-1.28 | IPVlan 模式、eBPF 策略 |
+| v1.7.x | 1.28+ | 1.28+ | Trunk ENI、多网卡增强 |
+| v1.8.x | 1.30+ | 1.30+ | 性能优化、稳定性增强 |
+
+### 配额与限制
+
+| 资源 | 默认配额 | 说明 |
+|-----|---------|------|
+| ENI 数量/实例 | 4-8 (视规格) | 可提工单扩容 |
+| 辅助 IP/ENI | 10-20 (视规格) | 可提工单扩容 |
+| vSwitch IP | 取决于 CIDR | 建议 /20 或更大 |
+| 安全组规则 | 200 条/安全组 | 可提工单扩容 |
+
+### 监控与运维
+
+```bash
+# 🟢 低风险：查看 Terway 指标
+kubectl exec -n kube-system <terway-pod> -- curl -s http://localhost:19090/metrics
+
+# 🟢 低风险：查看 ENI 使用情况
+kubectl get podeni -A -o custom-columns=NAME:.metadata.name,ENI:.spec.eniId,IP:.spec.ipAddress,STATUS:.status.phase
+
+# 🟢 低风险：查看节点 IP 池状态
+kubectl exec -n kube-system <terway-pod> -- terway-cli mapping
+
+# 🟢 低风险：查看 Terway 日志
+kubectl logs -n kube-system -l app=terway-eniip --tail=100
+```
+
+## 参考链接
 
 Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
 
