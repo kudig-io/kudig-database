@@ -328,6 +328,402 @@ kubectl patch cronjob my-cronjob -n production -p '{"spec":{"suspend":true}}'
 
 ---
 
+## 七、容量规划与成本优化
+
+生产环境的工作负载容量规划需要平衡性能、成本与可靠性。以下提供从资源评估到成本优化的完整方法论。
+
+### 7.1 资源评估方法
+
+| 评估维度 | 数据来源 | 计算方法 | 安全系数 |
+|---------|---------|---------|----------|
+| CPU requests | 历史 P95 使用量 | `max(7d P95) × 1.2` | 1.2x |
+| CPU limits | 峰值使用量 | `max(7d max) × 1.5` | 1.5x |
+| Memory requests | 历史 P95 + 堆外 | `P95 × 1.3 + 200Mi` | 1.3x + buffer |
+| Memory limits | OOM 阈值 | `requests × 1.5` | 1.5x |
+| 副本数 | 流量预测 | `peak_qps / per_pod_qps × 1.3` | 1.3x |
+
+### 7.2 容量规划 PromQL
+
+```promql
+# 工作负载实际资源使用率
+sum by (deployment) (
+  rate(container_cpu_usage_seconds_total{namespace="production", container!="POD"}[5m])
+) / sum by (deployment) (
+  kube_pod_container_resource_requests{namespace="production", resource="cpu"}
+) * 100
+
+# 节点资源碎片率（已分配但未使用）
+1 - (
+  sum(kube_pod_container_resource_requests{resource="cpu"}) by (node)
+  / sum(kube_node_status_allocatable{resource="cpu"}) by (node)
+)
+
+# HPA 扩容预测（基于历史趋势）
+predict_linear(
+  sum(rate(http_requests_total{namespace="production"}[5m]))[1h:5m],
+  3600 * 4  # 预测 4 小时后
+)
+```
+
+### 7.3 成本优化策略
+
+| 策略 | 适用场景 | 节省比例 | 实施难度 |
+|-----|---------|---------|----------|
+| 资源右sizing | 过度配置的工作负载 | 20-40% | 低 |
+|  spot/抢占式实例 | 无状态/容错工作负载 | 60-80% | 中 |
+| 自动缩容到零 | 开发/测试环境 | 50-70% | 低 |
+| 混合实例类型 | 不同优先级工作负载 | 30-50% | 中 |
+| 存储分层 | 冷热数据分离 | 40-60% | 中 |
+| 镜像瘦身 | 所有工作负载 | 10-20% | 低 |
+
+### 7.4 成本监控 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cost-report
+  namespace: monitoring
+spec:
+  schedule: "0 8 * * 1"  # 每周一 8:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: reporter
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "=== 周度成本报告 $(date) ==="
+                  
+                  # 1. 资源使用率 Top 10
+                  echo "[1] CPU 使用率 Top 10:"
+                  kubectl top pods -A --sort-by=cpu | head -11
+                  
+                  # 2. 过度配置检测
+                  echo "[2] 过度配置检测 (requests > 2x actual):"
+                  kubectl get pods -n production -o json | jq -r '
+                    .items[] |
+                    select(.spec.containers[].resources.requests.cpu != null) |
+                    "\(.metadata.name): requests=\(.spec.containers[].resources.requests.cpu)"'
+                  
+                  # 3. 未使用 PVC
+                  echo "[3] 未绑定 PVC:"
+                  kubectl get pvc -A --field-selector=status.phase!=Bound
+                  
+                  # 4. 低使用率节点
+                  echo "[4] 节点资源使用率:"
+                  kubectl top nodes
+                  
+                  echo "=== 报告完成 ==="
+```
+
+---
+
+## 八、变更管理与发布策略
+
+### 8.1 变更分级
+
+| 级别 | 定义 | 审批要求 | 回滚时限 | 示例 |
+|-----|------|---------|---------|------|
+| P0 紧急 | 生产故障修复 | 值班 SRE 口头确认 | 5min | 热修复、回滚 |
+| P1 重要 | 功能发布、配置变更 | 变更评审会 | 30min | 新版本发布、HPA 调整 |
+| P2 常规 | 基础设施变更 | 工单审批 | 2h | 节点扩容、存储扩容 |
+| P3 低危 | 文档、标签变更 | 自动审批 | N/A | 标签更新、注释修改 |
+
+### 8.2 发布检查清单
+
+| 阶段 | 检查项 | 验证方法 |
+|-----|--------|----------|
+| 发布前 | 镜像已扫描无高危漏洞 | Trivy/Grype 扫描报告 |
+| 发布前 | 资源请求已更新 | 对比压测结果 |
+| 发布前 | 回滚方案已准备 | 确认上一版本镜像可用 |
+| 发布前 | 监控告警已配置 | 检查 PrometheusRule |
+| 发布中 | 灰度比例逐步扩大 | 5% → 25% → 50% → 100% |
+| 发布中 | 错误率/延迟无异常 | Grafana 实时观察 |
+| 发布后 | 72h 稳定性观察 | SLO 达标率 |
+| 发布后 | 资源使用符合预期 | kubectl top + Prometheus |
+
+### 8.3 渐进式交付配置
+
+```yaml
+# Argo Rollouts 渐进式交付示例
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: production-api
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+        - setWeight: 5
+        - pause: { duration: 10m }
+        - analysis:
+            templates:
+              - templateName: success-rate
+        - setWeight: 25
+        - pause: { duration: 10m }
+        - setWeight: 50
+        - pause: { duration: 10m }
+        - setWeight: 100
+      canaryService: api-canary
+      stableService: api-stable
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: myregistry/api:v1.2.3
+---
+# 自动分析模板
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  metrics:
+    - name: success-rate
+      interval: 5m
+      successCondition: result[0] >= 0.99
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus:9090
+          query: |
+            sum(rate(http_requests_total{status=~"5.."}[5m]))
+            / sum(rate(http_requests_total[5m]))
+```
+
+---
+
+## 九、灾备与恢复演练
+
+### 9.1 备份策略
+
+| 资源类型 | 备份工具 | 频率 | 保留期 | RPO |
+|---------|---------|------|-------|-----|
+| etcd | etcdctl snapshot | 每小时 | 7 天 | 1h |
+| PVC 数据 | Velero + CSI Snapshot | 每日 | 30 天 | 24h |
+| 集群配置 | GitOps 仓库 | 实时 | 永久 | 0 |
+| Secret | external-secrets + Vault | 实时 | 永久 | 0 |
+| 应用数据 | 应用级备份 | 按业务 | 按合规 | 按业务 |
+
+### 9.2 恢复演练检查清单
+
+| 序号 | 演练项 | 频率 | 成功标准 |
+|-----|--------|------|----------|
+| 1 | etcd 恢复 | 季度 | 集群正常启动，数据完整 |
+| 2 | PVC 恢复 | 月度 | 数据一致，应用正常 |
+| 3 | 命名空间级恢复 | 月度 | 所有资源恢复，服务正常 |
+| 4 | 集群级恢复 | 半年度 | 全集群重建，RTO < 4h |
+| 5 | 跨区域故障转移 | 年度 | 流量切换，RTO < 1h |
+
+### 9.3 Velero 备份配置
+
+```yaml
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: production-daily
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"  # 每日 2:00
+  template:
+    includedNamespaces:
+      - production
+      - staging
+    includedResources:
+      - deployments
+      - statefulsets
+      - configmaps
+      - secrets
+      - persistentvolumeclaims
+    storageLocation: default
+    volumeSnapshotLocations:
+      - default
+    ttl: 720h  # 30 天保留
+---
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: k8s-backups
+    prefix: production
+  config:
+    region: cn-hangzhou
+```
+
+---
+
+## 十、自动化运维工具链
+
+### 10.1 生产就绪自动化检查脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生产就绪自动化检查
+set -euo pipefail
+
+NAMESPACE=${1:-production}
+PASS=0
+FAIL=0
+
+check() {
+  local desc="$1"
+  local result="$2"
+  if [ "$result" = "true" ]; then
+    echo "✓ $desc"
+    ((PASS++))
+  else
+    echo "✗ $desc"
+    ((FAIL++))
+  fi
+}
+
+echo "=== 生产就绪检查: $NAMESPACE ==="
+
+# 1. 资源限制检查
+NO_LIMITS=$(kubectl get pods -n $NAMESPACE -o json | jq '[.items[] | select(.spec.containers[].resources.limits == null)] | length')
+check "所有 Pod 已设置资源限制" "$([ "$NO_LIMITS" -eq 0 ] && echo true || echo false)"
+
+# 2. 探针检查
+NO_PROBES=$(kubectl get pods -n $NAMESPACE -o json | jq '[.items[] | select(.spec.containers[].readinessProbe == null)] | length')
+check "所有 Pod 已配置 Readiness 探针" "$([ "$NO_PROBES" -eq 0 ] && echo true || echo false)"
+
+# 3. PDB 检查
+PDB_COUNT=$(kubectl get pdb -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+check "PDB 已配置" "$([ "$PDB_COUNT" -gt 0 ] && echo true || echo false)"
+
+# 4. HPA 检查
+HPA_COUNT=$(kubectl get hpa -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+check "HPA 已配置" "$([ "$HPA_COUNT" -gt 0 ] && echo true || echo false)"
+
+# 5. NetworkPolicy 检查
+NP_COUNT=$(kubectl get networkpolicy -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+check "NetworkPolicy 已配置" "$([ "$NP_COUNT" -gt 0 ] && echo true || echo false)"
+
+# 6. 安全上下文检查
+PRIVILEGED=$(kubectl get pods -n $NAMESPACE -o json | jq '[.items[] | select(.spec.containers[].securityContext.privileged == true)] | length')
+check "无特权容器" "$([ "$PRIVILEGED" -eq 0 ] && echo true || echo false)"
+
+# 7. 镜像标签检查
+LATEST=$(kubectl get pods -n $NAMESPACE -o json | jq '[.items[] | select(.spec.containers[].image | endswith(":latest"))] | length')
+check "无 :latest 标签镜像" "$([ "$LATEST" -eq 0 ] && echo true || echo false)"
+
+echo ""
+echo "=== 结果: $PASS 通过, $FAIL 失败 ==="
+[ "$FAIL" -eq 0 ] && exit 0 || exit 1
+```
+
+### 10.2 日常运维自动化
+
+| 任务 | 频率 | 工具 | 自动化程度 |
+|-----|------|------|------------|
+| 资源使用报告 | 每日 | CronJob + Prometheus | 全自动 |
+| 镜像漏洞扫描 | 每次发布 | Trivy + CI | 全自动 |
+| 证书轮换 | 自动 | cert-manager | 全自动 |
+| 备份验证 | 每周 | Velero + CronJob | 半自动 |
+| 容量审计 | 每月 | 自定义脚本 | 半自动 |
+| 灾备演练 | 每季 | 手动 + 脚本 | 手动 |
+
+---
+
+## 十一、生产就绪评分体系
+
+### 评分维度与权重
+
+| 维度 | 权重 | 满分 | 评分标准 |
+|-----|------|------|----------|
+| 资源配置 | 20% | 20 | requests/limits 合理、QoS 正确 |
+| 高可用 | 20% | 20 | 多副本、跨 AZ、PDB、HPA |
+| 可观测性 | 20% | 20 | 日志/指标/追踪完整、告警覆盖 |
+| 安全合规 | 20% | 20 | 最小权限、安全上下文、网络策略 |
+| 运维就绪 | 20% | 20 | 回滚方案、备份、文档、演练 |
+
+### 评分等级
+
+| 等级 | 分数范围 | 含义 | 发布决策 |
+|-----|---------|------|----------|
+| A | 90-100 | 生产就绪 | 可直接发布 |
+| B | 75-89 | 基本就绪 | 需补充缺失项后发布 |
+| C | 60-74 | 部分就绪 | 需整改后重新评估 |
+| D | <60 | 未就绪 | 禁止发布 |
+
+### 评分计算脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生产就绪评分计算
+set -euo pipefail
+
+NAMESPACE=${1:-production}
+SCORE=0
+
+echo "=== 生产就绪评分: $NAMESPACE ==="
+
+# 维度 1: 资源配置 (20分)
+echo "[1] 资源配置 (20分)"
+# 检查资源限制
+HAS_LIMITS=$(kubectl get pods -n $NAMESPACE -o json | jq '[.items[] | select(.spec.containers[].resources.limits != null)] | length * 100 / (.items | length)')
+echo "  资源限制覆盖率: ${HAS_LIMITS}%"
+SCORE=$((SCORE + HAS_LIMITS / 5))  # 20分制
+
+# 维度 2: 高可用 (20分)
+echo "[2] 高可用 (20分)"
+REPLICAS=$(kubectl get deploy -n $NAMESPACE -o json | jq '[.items[] | select(.spec.replicas >= 2)] | length * 100 / (.items | length)')
+echo "  多副本部署比例: ${REPLICAS}%"
+PDB=$(kubectl get pdb -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+echo "  PDB 数量: $PDB"
+SCORE=$((SCORE + REPLICAS / 10 + (PDB > 0 ? 5 : 0)))
+
+# 维度 3: 可观测性 (20分)
+echo "[3] 可观测性 (20分)"
+# 检查 ServiceMonitor
+SM=$(kubectl get servicemonitor -n $NAMESPACE --no-headers 2>/dev/null | wc -l || echo 0)
+echo "  ServiceMonitor 数量: $SM"
+SCORE=$((SCORE + (SM > 0 ? 10 : 0)))
+
+# 维度 4: 安全合规 (20分)
+echo "[4] 安全合规 (20分)"
+NP=$(kubectl get networkpolicy -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+echo "  NetworkPolicy 数量: $NP"
+SCORE=$((SCORE + (NP > 0 ? 10 : 0)))
+
+# 维度 5: 运维就绪 (20分)
+echo "[5] 运维就绪 (20分)"
+HPA=$(kubectl get hpa -n $NAMESPACE --no-headers 2>/dev/null | wc -l)
+echo "  HPA 数量: $HPA"
+SCORE=$((SCORE + (HPA > 0 ? 10 : 0)))
+
+echo ""
+echo "=== 总分: $SCORE / 100 ==="
+if [ $SCORE -ge 90 ]; then
+  echo "等级: A (生产就绪)"
+elif [ $SCORE -ge 75 ]; then
+  echo "等级: B (基本就绪)"
+elif [ $SCORE -ge 60 ]; then
+  echo "等级: C (部分就绪)"
+else
+  echo "等级: D (未就绪，禁止发布)"
+fi
+```
+
+---
+
 本指南将随着 KUDIG 知识库持续迭代。当你在生产环境中验证了新检查项或发现新的高频故障模式时，请将经验补充到同域故障排查手册与长期记忆文档中，以便整个团队共享。
 
 

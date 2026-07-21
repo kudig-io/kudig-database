@@ -284,6 +284,456 @@ kubectl run test --image=nginx --runtime-class=gvisor --rm -it -- cat /proc/vers
 | v1.27 | 用户命名空间支持 |
 | v1.29 | Wasm运行时支持改进 |
 
+<!-- chunk: RuntimeClass治理与准入控制 -->
+## RuntimeClass治理与准入控制
+
+在多租户集群中，需要限制用户可选择的运行时，防止未经批准的 RuntimeClass 被使用。
+
+### 治理策略对比
+
+| 方案 | 适用场景 | 优势 | 劣势 |
+|-----|---------|------|------|
+| OPA/Gatekeeper | 企业级多租户 | 灵活策略语言、审计日志 | 学习曲线较陡 |
+| Kyverno | 云原生原生 | YAML 策略、K8s 风格 | 社区相对年轻 |
+| Pod Security Admission | 基础安全 | 内置、零依赖 | 粒度有限 |
+| 自定义 Admission Webhook | 特殊需求 | 完全自定义 | 维护成本高 |
+
+### OPA/Gatekeeper 准入策略
+
+```yaml
+# 限制只允许使用已批准的 RuntimeClass
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRuntimeClasses
+metadata:
+  name: restrict-runtime-classes
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    excludedNamespaces: ["kube-system", "monitoring"]
+  parameters:
+    allowedRuntimeClasses:
+      - runc
+      - gvisor
+      - nvidia
+---
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sallowedruntimeclasses
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sAllowedRuntimeClasses
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedRuntimeClasses:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sallowedruntimeclasses
+
+        violation[{"msg": msg}] {
+          input.review.object.spec.runtimeClassName
+          not allowed_runtime
+          msg := sprintf("RuntimeClass '%v' is not allowed. Approved: %v", [
+            input.review.object.spec.runtimeClassName,
+            input.parameters.allowedRuntimeClasses
+          ])
+        }
+
+        allowed_runtime {
+          input.review.object.spec.runtimeClassName == input.parameters.allowedRuntimeClasses[_]
+        }
+```
+
+### Kyverno 准入策略
+
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-runtimeclass
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-runtimeclass
+      match:
+        any:
+          - resources:
+              kinds: ["Pod"]
+      exclude:
+        any:
+          - resources:
+              namespaces: ["kube-system", "monitoring", "ingress-nginx"]
+      validate:
+        message: >-
+          Only approved RuntimeClasses (runc, gvisor, nvidia) are allowed.
+        pattern:
+          spec:
+            =(runtimeClassName): "runc | gvisor | nvidia"
+```
+
+<!-- chunk: 多租户运行时隔离策略 -->
+## 多租户运行时隔离策略
+
+### 运行时选择决策树
+
+```
+工作负载安全评估
+├── 是否运行不可信代码？
+│   ├── 是 → 是否需要完整 Linux 兼容性？
+│   │   ├── 是 → Kata Containers（VM 级隔离）
+│   │   └── 否 → gVisor（用户空间内核，性能更优）
+│   └── 否 → 是否需要 GPU 加速？
+│       ├── 是 → NVIDIA Runtime + GPU Operator
+│       └── 否 → 默认 runc
+├── 是否为边缘/IoT 场景？
+│   ├── 是 → WasmEdge（超轻量、快速冷启动）
+│   └── 否 → 标准运行时
+└── 合规要求？
+    ├── 金融/医疗 → Kata + 加密存储
+    └── 通用 → runc + Pod Security Standards
+```
+
+### 多租户节点池配置
+
+```yaml
+# 安全沙箱专用节点池
+apiVersion: v1
+kind: Node
+metadata:
+  labels:
+    runtime: gvisor
+    tenant-tier: secure
+    node-pool: secure-sandbox
+spec:
+  taints:
+    - key: runtime
+      value: gvisor
+      effect: NoSchedule
+---
+# 对应的 RuntimeClass 绑定调度约束
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: gvisor-secure
+  labels:
+    tier: production
+handler: runsc
+overhead:
+  podFixed:
+    cpu: "250m"
+    memory: "120Mi"
+scheduling:
+  nodeSelector:
+    runtime: gvisor
+    tenant-tier: secure
+  tolerations:
+    - key: runtime
+      value: gvisor
+      effect: NoSchedule
+---
+# GPU 专用节点池
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: nvidia-a100
+handler: nvidia
+scheduling:
+  nodeSelector:
+    nvidia.com/gpu.product: "A100-SXM4-80GB"
+    node-pool: gpu-compute
+  tolerations:
+    - key: nvidia.com/gpu
+      operator: Exists
+      effect: NoSchedule
+```
+
+### 租户运行时配额
+
+```yaml
+# 限制租户只能使用特定 RuntimeClass
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tenant-runtime-quota
+  namespace: tenant-a
+spec:
+  hard:
+    # 限制 gVisor Pod 数量
+    pods: "50"
+  scopeSelector:
+    matchExpressions:
+      - operator: In
+        scopeName: PriorityClass
+        values: ["standard"]
+---
+# 配合 LimitRange 设置默认运行时开销
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: runtime-overhead-limits
+  namespace: tenant-a
+spec:
+  limits:
+    - type: Pod
+      max:
+        cpu: "8"
+        memory: 32Gi
+    - type: Container
+      default:
+        cpu: "1"
+        memory: 2Gi
+      defaultRequest:
+        cpu: "250m"
+        memory: 512Mi
+```
+
+<!-- chunk: 运行时监控与告警 -->
+## 运行时监控与告警
+
+### 关键监控指标
+
+| 指标 | 含义 | 告警阈值 | PromQL |
+|-----|------|---------|--------|
+| `container_runtime_operations_total` | 运行时操作计数 | - | `rate(...[5m])` |
+| `container_runtime_operations_errors_total` | 操作错误数 | >5/min | `rate(...[5m]) > 0.08` |
+| `container_runtime_operations_duration_seconds` | 操作延迟 | P99>5s | `histogram_quantile(0.99, ...)` |
+| `kubelet_runtime_operations_total` | kubelet 运行时调用 | - | `sum by (operation_type)` |
+| `container_start_time_seconds` | 容器启动时间 | >30s | `time() - container_start_time_seconds` |
+
+### PrometheusRule 告警配置
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: runtime-class-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: runtime.rules
+      rules:
+        - alert: ContainerRuntimeHighErrorRate
+          expr: |
+            rate(container_runtime_operations_errors_total{job="kubelet"}[5m])
+            / rate(container_runtime_operations_total{job="kubelet"}[5m]) > 0.05
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.node }} 容器运行时错误率超过 5%"
+            runbook: "检查 containerd 日志: journalctl -u containerd --since '10min ago'"
+
+        - alert: ContainerRuntimeOperationSlow
+          expr: |
+            histogram_quantile(0.99,
+              rate(container_runtime_operations_duration_seconds_bucket{job="kubelet"}[5m])
+            ) > 5
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.node }} 运行时操作 P99 延迟超过 5s"
+
+        - alert: RuntimeClassPodSchedulingFailed
+          expr: |
+            kube_pod_status_reason{reason="FailedScheduling"} == 1
+            and on(pod, namespace) kube_pod_spec_runtime_class_name != ""
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 因 RuntimeClass 调度失败"
+
+        - alert: GVisorOverheadExcessive
+          expr: |
+            container_memory_working_set_bytes{container!="POD"}
+            / on(pod, namespace) group_left
+            kube_pod_container_resource_limits{resource="memory"} > 0.95
+            and on(pod, namespace)
+            kube_pod_spec_runtime_class_name{runtime_class="gvisor"} == 1
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "gVisor Pod {{ $labels.pod }} 内存接近限制（含 overhead）"
+```
+
+### Grafana Dashboard 面板布局
+
+| 面板 | 数据源 | 用途 |
+|-----|--------|------|
+| Runtime Operations Rate | Prometheus | 各节点运行时操作速率 |
+| Runtime Error Ratio | Prometheus | 错误率趋势（按节点/操作类型） |
+| Pod Startup Latency | Prometheus | 容器启动延迟分布 |
+| RuntimeClass Distribution | kube-state-metrics | 各 RuntimeClass 使用分布 |
+| Node Runtime Health | Node Exporter | 节点级运行时健康状态 |
+
+<!-- chunk: 运行时性能基准测试 -->
+## 运行时性能基准测试
+
+### 自动化基准测试 Job
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: runtime-benchmark
+  namespace: benchmarking
+spec:
+  template:
+    spec:
+      runtimeClassName: gvisor  # 切换测试不同运行时
+      restartPolicy: Never
+      containers:
+        - name: bench
+          image: polinux/stress:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "=== Runtime Benchmark ==="
+              echo "Runtime: $(cat /proc/version)"
+              echo "--- CPU Benchmark ---"
+              time dd if=/dev/zero of=/dev/null bs=1M count=10000
+              echo "--- Memory Benchmark ---"
+              time stress --vm 2 --vm-bytes 256M --timeout 30s
+              echo "--- I/O Benchmark ---"
+              time dd if=/dev/zero of=/tmp/testfile bs=4k count=100000 oflag=direct
+              echo "--- Syscall Benchmark ---"
+              time strace -c -e trace=all ls / > /dev/null 2>&1
+              echo "=== Done ==="
+          resources:
+            requests:
+              cpu: "2"
+              memory: 4Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+  backoffLimit: 0
+```
+
+### 性能基准对比表
+
+| 测试项 | runc (基线) | gVisor | Kata | WasmEdge |
+|-------|------------|--------|------|----------|
+| CPU 密集 (sysbench) | 100% | 85-95% | 90-95% | N/A |
+| 内存带宽 (STREAM) | 100% | 90-95% | 92-97% | N/A |
+| 磁盘 I/O (fio 4k rand) | 100% | 60-80% | 80-90% | N/A |
+| 网络吞吐 (iperf3) | 100% | 70-85% | 85-92% | N/A |
+| 系统调用延迟 (getpid) | ~80ns | ~2000ns | ~500ns | N/A |
+| 冷启动时间 | <100ms | <500ms | 1-2s | <50ms |
+| 内存 Footprint | ~5MB | ~50MB | ~100MB | ~2MB |
+
+> **结论**: gVisor 适合安全优先、I/O 不敏感的场景；Kata 适合需要完整 Linux 兼容性的强隔离场景；WasmEdge 适合轻量级边缘函数。
+
+<!-- chunk: 运行时故障排查决策树 -->
+## 运行时故障排查决策树
+
+```
+Pod 创建/启动失败
+├── 事件显示 "no runtime for class" ?
+│   ├── 是 → RuntimeClass 资源不存在或 handler 名称不匹配
+│   │   ├── kubectl get runtimeclass（确认资源存在）
+│   │   ├── crictl info | jq '.config.containerd.runtimes'（确认 handler 配置）
+│   │   └── 修复：创建 RuntimeClass 或修正 handler 名称
+│   └── 否 → 继续
+├── 事件显示 "FailedScheduling" + nodeSelector ?
+│   ├── 是 → 无匹配节点
+│   │   ├── kubectl get nodes -l runtime=gvisor（检查节点标签）
+│   │   └── 修复：添加节点标签或调整 scheduling 配置
+│   └── 否 → 继续
+├── 容器启动后立即退出 ?
+│   ├── 是 → 运行时兼容性问题
+│   │   ├── kubectl logs --previous（查看退出日志）
+│   │   ├── gVisor: 检查不支持的系统调用 (dmesg | grep runsc)
+│   │   └── 修复：切换运行时或调整应用
+│   └── 否 → 继续
+└── 性能异常（延迟高、吞吐低）?
+    ├── 检查 overhead 是否正确计入资源限制
+    ├── 对比 runc 基线性能
+    └── 考虑切换到更低开销的运行时
+```
+
+### 常见故障修复表
+
+| 故障现象 | 根因 | 诊断命令 | 修复方案 |
+|---------|------|---------|----------|
+| `runtimeclass not found` | RuntimeClass 未创建 | `kubectl get runtimeclass` | 创建对应 RuntimeClass 资源 |
+| `no runtime handler` | containerd 未配置 handler | `crictl info` | 编辑 config.toml 添加 handler |
+| Pod Pending + 无匹配节点 | nodeSelector 无匹配 | `kubectl get nodes --show-labels` | 添加节点标签或修改 scheduling |
+| gVisor 应用崩溃 | 不支持的系统调用 | `dmesg \| grep -i runsc` | 检查 gVisor 兼容性列表 |
+| Kata 启动超时 | VM 资源不足 | `journalctl -u containerd` | 增加节点 CPU/内存或调整 overhead |
+| GPU 容器无法访问设备 | nvidia-container-toolkit 异常 | `nvidia-smi` + `kubectl describe pod` | 重启 nvidia-device-plugin |
+
+<!-- chunk: 生产部署检查清单 -->
+## 生产部署检查清单
+
+### 上线前检查
+
+| 序号 | 检查项 | 验证命令 | 通过标准 |
+|-----|--------|---------|----------|
+| 1 | RuntimeClass 资源已创建 | `kubectl get runtimeclass` | 所有需要的 class 存在 |
+| 2 | containerd handler 已配置 | `crictl info \| jq '.config.containerd.runtimes'` | handler 名称匹配 |
+| 3 | 节点标签正确 | `kubectl get nodes -l runtime=<name>` | 有足够可用节点 |
+| 4 | overhead 已声明 | `kubectl get runtimeclass -o yaml` | podFixed 字段非空 |
+| 5 | 准入策略已生效 | 尝试创建未批准的 RuntimeClass Pod | 被拒绝 |
+| 6 | 监控告警已配置 | 检查 PrometheusRule | 告警规则存在且有效 |
+| 7 | 性能基准已通过 | 运行 benchmark Job | 满足 SLA 要求 |
+| 8 | 回滚方案已准备 | 确认默认 runc 可用 | 可快速切换回 runc |
+
+### 运行时切换回滚流程
+
+```bash
+#!/bin/bash
+# 🟡 中风险：运行时切换回滚脚本
+# 将指定 Deployment 从安全运行时回滚到默认 runc
+set -euo pipefail
+
+DEPLOYMENT=${1:?"Usage: $0 <deployment> [namespace]"}
+NAMESPACE=${2:-default}
+
+echo "=== 运行时回滚: ${NAMESPACE}/${DEPLOYMENT} ==="
+
+# 1. 记录当前状态
+CURRENT_RUNTIME=$(kubectl get deployment "$DEPLOYMENT" -n "$NAMESPACE" \
+  -o jsonpath='{.spec.template.spec.runtimeClassName}')
+echo "当前运行时: ${CURRENT_RUNTIME:-runc(default)}"
+
+# 2. 移除 runtimeClassName（回滚到默认）
+kubectl patch deployment "$DEPLOYMENT" -n "$NAMESPACE" \
+  --type='json' \
+  -p='[{"op": "remove", "path": "/spec/template/spec/runtimeClassName"}]' 2>/dev/null || \
+  echo "runtimeClassName 已为默认"
+
+# 3. 等待滚动更新完成
+echo "等待滚动更新..."
+kubectl rollout status deployment/"$DEPLOYMENT" -n "$NAMESPACE" --timeout=300s
+
+# 4. 验证
+echo "=== 验证 ==="
+kubectl get pods -n "$NAMESPACE" -l app="$DEPLOYMENT" \
+  -o custom-columns='NAME:.metadata.name,RUNTIME:.spec.runtimeClassName,STATUS:.status.phase'
+
+echo "=== 回滚完成 ==="
+```
+
 ---
 
 **表格底部标记**: Kusheet Project, 作者 Allen Galler (allengaller@gmail.com)

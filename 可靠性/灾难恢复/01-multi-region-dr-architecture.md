@@ -152,6 +152,397 @@ spec:
 3. **只测切换不测回切**：回切才是真正考验数据一致性的环节。
 4. **DNS TTL 太长**：TTL=1小时意味着切换后 1 小时内仍有流量去旧区，等于没切。
 
+## 灾备自动化编排
+
+### 切换流程自动化
+
+```yaml
+# Argo Workflow 灾备切换编排
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: dr-failover
+  namespace: dr-automation
+spec:
+  entrypoint: failover-steps
+  templates:
+    - name: failover-steps
+      steps:
+        - - name: verify-dr-health
+            template: check-dr-region
+        - - name: scale-up-dr
+            template: scale-dr-workloads
+        - - name: switch-dns
+            template: dns-failover
+        - - name: verify-traffic
+            template: verify-traffic-flow
+        - - name: notify-stakeholders
+            template: send-notification
+
+    - name: check-dr-region
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 检查备区健康状态 ==="
+            # 检查备区集群状态
+            kubectl --context=region-b get nodes
+            # 检查关键服务就绪状态
+            kubectl --context=region-b get pods -n production -l tier=critical
+            # 检查数据库复制延迟
+            kubectl --context=region-b exec -n database deploy/postgres -- \
+              psql -c "SELECT now() - pg_last_xact_replay_timestamp() AS replication_lag;"
+
+    - name: scale-dr-workloads
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 扩容备区工作负载 ==="
+            # 扩容无状态服务
+            kubectl --context=region-b scale deploy/api-gateway -n production --replicas=10
+            kubectl --context=region-b scale deploy/payment-service -n production --replicas=6
+            # 等待 Pod 就绪
+            kubectl --context=region-b rollout status deploy/api-gateway -n production --timeout=300s
+
+    - name: dns-failover
+      container:
+        image: amazon/aws-cli:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 执行 DNS 切换 ==="
+            # 更新 Route53 故障转移记录
+            aws route53 change-resource-record-sets \
+              --hosted-zone-id $HOSTED_ZONE_ID \
+              --change-batch '{
+                "Changes": [{
+                  "Action": "UPSERT",
+                  "ResourceRecordSet": {
+                    "Name": "api.example.com",
+                    "Type": "A",
+                    "SetIdentifier": "primary",
+                    "Failover": "PRIMARY",
+                    "HealthCheckId": "'$DR_HEALTH_CHECK_ID'",
+                    "AliasTarget": {
+                      "HostedZoneId": "'$REGION_B_ZONE_ID'",
+                      "DNSName": "'$REGION_B_LB_DNS'",
+                      "EvaluateTargetHealth": true
+                    }
+                  }
+                }]
+              }'
+
+    - name: verify-traffic-flow
+      container:
+        image: curlimages/curl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 验证流量切换 ==="
+            sleep 60  # 等待 DNS 传播
+            # 检查流量是否到达备区
+            curl -s https://api.example.com/health | jq .
+            # 检查错误率
+            curl -s "http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[1m]))"
+
+    - name: send-notification
+      container:
+        image: curlimages/curl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 发送通知 ==="
+            curl -X POST -H 'Content-type: application/json' \
+              --data '{"text":"🚨 灾备切换已执行，流量已切换到备区"}' \
+              $SLACK_WEBHOOK_URL
+```
+
+### 回切自动化
+
+```bash
+#!/bin/bash
+# 🔴 高风险：灾备回切脚本
+set -euo pipefail
+
+echo "=== 灾备回切流程 ==="
+
+# 1. 检查主区健康
+echo "[1] 检查主区健康状态..."
+kubectl --context=region-a get nodes
+kubectl --context=region-a get pods -n production
+
+# 2. 建立反向复制
+echo "[2] 建立反向复制（备区→主区）..."
+kubectl --context=region-a exec -n database deploy/postgres -- \
+  psql -c "SELECT pg_start_backup('failback', true);"
+# 配置主区为备区的从库
+
+# 3. 等待数据追平
+echo "[3] 等待数据追平..."
+while true; do
+  LAG=$(kubectl --context=region-a exec -n database deploy/postgres -- \
+    psql -t -c "SELECT EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp()))::int;")
+  if [ "$LAG" -eq 0 ]; then
+    echo "✓ 数据已追平"
+    break
+  fi
+  echo "  复制延迟: ${LAG}s"
+  sleep 10
+done
+
+# 4. 执行 DNS 回切
+echo "[4] 执行 DNS 回切..."
+# 更新 Route53 记录
+
+# 5. 验证
+echo "[5] 验证流量..."
+sleep 60
+curl -s https://api.example.com/health
+
+echo "=== 回切完成 ==="
+```
+
+## 数据一致性保障
+
+### 复制延迟监控
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: dr-replication-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: dr.replication.rules
+      rules:
+        - alert: ReplicationLagHigh
+          expr: |
+            pg_replication_lag_seconds > 60
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "数据库复制延迟超过 60s，RPO 风险"
+            description: "当前复制延迟: {{ $value }}s"
+
+        - alert: ReplicationBroken
+          expr: |
+            pg_replication_is_replica == 0 and pg_replication_lag_seconds == -1
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "数据库复制中断"
+
+        - alert: DRRegionUnhealthy
+          expr: |
+            kube_deployment_status_replicas_available{cluster="region-b"} 
+            < kube_deployment_status_replicas{cluster="region-b"} * 0.8
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "备区工作负载可用副本不足 80%"
+```
+
+### 数据一致性检查 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dr-consistency-check
+  namespace: dr-automation
+spec:
+  schedule: "0 */6 * * *"  # 每 6 小时
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: checker
+              image: postgres:16
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "=== 数据一致性检查 $(date) ==="
+                  
+                  # 1. 检查复制延迟
+                  echo "[1] 复制延迟:"
+                  PGPASSWORD=$DB_PASSWORD psql -h $PRIMARY_DB -U repl -c \
+                    "SELECT client_addr, state, sent_lsn, replay_lsn, 
+                     pg_wal_lsn_diff(sent_lsn, replay_lsn) AS lag_bytes
+                     FROM pg_stat_replication;"
+                  
+                  # 2. 检查关键表行数一致性
+                  echo "[2] 关键表行数对比:"
+                  PRIMARY_COUNT=$(PGPASSWORD=$DB_PASSWORD psql -h $PRIMARY_DB -U app -t -c \
+                    "SELECT COUNT(*) FROM orders WHERE created_at > now() - interval '1 hour';")
+                  DR_COUNT=$(PGPASSWORD=$DB_PASSWORD psql -h $DR_DB -U app -t -c \
+                    "SELECT COUNT(*) FROM orders WHERE created_at > now() - interval '1 hour';")
+                  echo "  主区: $PRIMARY_COUNT, 备区: $DR_COUNT"
+                  
+                  # 3. 检查点数据校验
+                  echo "[3] 校验和对比:"
+                  PRIMARY_CHECKSUM=$(PGPASSWORD=$DB_PASSWORD psql -h $PRIMARY_DB -U app -t -c \
+                    "SELECT md5(string_agg(id::text || amount::text, ',' ORDER BY id)) FROM orders WHERE created_at > now() - interval '1 hour';")
+                  DR_CHECKSUM=$(PGPASSWORD=$DB_PASSWORD psql -h $DR_DB -U app -t -c \
+                    "SELECT md5(string_agg(id::text || amount::text, ',' ORDER BY id)) FROM orders WHERE created_at > now() - interval '1 hour';")
+                  
+                  if [ "$PRIMARY_CHECKSUM" = "$DR_CHECKSUM" ]; then
+                    echo "  ✓ 数据一致"
+                  else
+                    echo "  ✗ 数据不一致！主区: $PRIMARY_CHECKSUM, 备区: $DR_CHECKSUM"
+                  fi
+                  
+                  echo "=== 检查完成 ==="
+```
+
+## 灾备演练自动化
+
+### Game Day 自动化脚本
+
+```bash
+#!/bin/bash
+# 🟡 中风险：灾备演练自动化脚本
+set -euo pipefail
+
+DRILL_TYPE=${1:-"full"}  # full | dns-only | app-only
+
+echo "=== 灾备演练开始: $DRILL_TYPE ==="
+echo "时间: $(date)"
+
+# 1. 演练前检查
+echo "[1] 演练前检查..."
+# 检查备区健康
+kubectl --context=region-b get nodes -o wide
+kubectl --context=region-b get pods -n production --field-selector=status.phase!=Running
+
+# 检查复制延迟
+LAG=$(kubectl --context=region-b exec -n database deploy/postgres -- \
+  psql -t -c "SELECT EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp()))::int;")
+echo "  复制延迟: ${LAG}s"
+if [ "$LAG" -gt 60 ]; then
+  echo "❌ 复制延迟过高，中止演练"
+  exit 1
+fi
+
+# 2. 记录基线指标
+echo "[2] 记录基线指标..."
+BASELINE_ERROR_RATE=$(curl -s 'http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~"5.."}[5m]))/sum(rate(http_requests_total[5m]))' | jq -r '.data.result[0].value[1]')
+echo "  基线错误率: $BASELINE_ERROR_RATE"
+
+# 3. 执行切换
+echo "[3] 执行切换..."
+if [ "$DRILL_TYPE" = "full" ] || [ "$DRILL_TYPE" = "dns-only" ]; then
+  # DNS 切换
+  echo "  执行 DNS 切换..."
+fi
+
+if [ "$DRILL_TYPE" = "full" ] || [ "$DRILL_TYPE" = "app-only" ]; then
+  # 应用扩容
+  echo "  扩容备区应用..."
+  kubectl --context=region-b scale deploy/api-gateway -n production --replicas=10
+fi
+
+# 4. 验证
+echo "[4] 验证切换结果..."
+sleep 60
+CURRENT_ERROR_RATE=$(curl -s 'http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~"5.."}[5m]))/sum(rate(http_requests_total[5m]))' | jq -r '.data.result[0].value[1]')
+echo "  当前错误率: $CURRENT_ERROR_RATE"
+
+# 5. 生成报告
+echo "[5] 生成演练报告..."
+cat > /tmp/dr-drill-report.md <<EOF
+# 灾备演练报告
+- 日期: $(date)
+- 类型: $DRILL_TYPE
+- 基线错误率: $BASELINE_ERROR_RATE
+- 切换后错误率: $CURRENT_ERROR_RATE
+- 复制延迟: ${LAG}s
+- 状态: $([ "$CURRENT_ERROR_RATE" = "$BASELINE_ERROR_RATE" ] && echo "✅ 成功" || echo "⚠️ 需关注")
+EOF
+
+echo "=== 演练完成 ==="
+cat /tmp/dr-drill-report.md
+```
+
+## 成本优化策略
+
+### 灾备成本构成
+
+| 成本项 | Active-Passive | Active-Active | Pilot-Light | 优化建议 |
+|-------|---------------|---------------|-------------|----------|
+| 计算资源 | 100% 冷备 | 100% 双活 | 20% 热备 | Pilot-Light 性价比最高 |
+| 存储复制 | 异步复制 | 双向复制 | 异步复制 | 压缩+增量备份 |
+| 网络流量 | 复制流量 | 双向流量 | 复制流量 | 专线 vs 公网权衡 |
+| 许可费用 | 双倍 | 双倍 | 最小 | 使用开源组件 |
+
+### 成本优化配置
+
+```yaml
+# 备区资源缩减配置（Pilot-Light 模式）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: production
+  annotations:
+    # 备区默认最小副本
+    dr.region-b/replicas: "2"
+    # 切换时扩容目标
+    dr.region-b/failover-replicas: "10"
+spec:
+  replicas: 2  # 平时最小运行
+  template:
+    spec:
+      containers:
+        - name: api
+          resources:
+            requests:
+              cpu: "500m"  # 备区降低请求
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+---
+# 使用 Spot/抢占式实例（备区无状态服务）
+apiVersion: v1
+kind: Node
+metadata:
+  labels:
+    topology.kubernetes.io/zone: region-b
+    node.kubernetes.io/lifecycle: spot
+spec:
+  taints:
+    - key: node.kubernetes.io/lifecycle
+      value: spot
+      effect: PreferNoSchedule
+```
+
+## 灾备检查清单
+
+### 架构就绪检查
+
+| 序号 | 检查项 | 验证方法 | 通过标准 |
+|-----|--------|---------|----------|
+| 1 | RTO/RPO 已明确定义 | 检查文档 | 有量化目标 |
+| 2 | 数据复制已配置 | 检查复制状态 | 延迟 < RPO |
+| 3 | DNS 切换已配置 | 检查健康检查 | TTL ≤ 60s |
+| 4 | 备区工作负载已部署 | 检查 Deployment | 最小副本运行 |
+| 5 | 缓存预热脚本已准备 | 检查脚本 | 可执行 |
+| 6 | 监控告警已配置 | 检查 PrometheusRule | 复制延迟告警 |
+| 7 | 切换流程已自动化 | 检查 Workflow | 可一键执行 |
+| 8 | 回切流程已验证 | 检查文档+演练 | 有数据追平步骤 |
+| 9 | 演练已定期执行 | 检查演练记录 | 季度演练 |
+| 10 | 成本已优化 | 检查资源使用 | 备区资源缩减 |
+
 ## 相关
 
 - [[可靠性/灾难恢复/02-dr-automation-playbook.md|02 dr automation playbook]]

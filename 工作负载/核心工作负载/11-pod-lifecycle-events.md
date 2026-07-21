@@ -292,6 +292,498 @@ kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.m
 # 检查OOMKilled的Pod
 kubectl get pods -A -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{range .status.containerStatuses[*]}{.lastState.terminated.reason}{"\t"}{end}{"\n"}{end}' | grep OOMKilled
 ```
+
+<!-- chunk: Pod生命周期异常诊断实战 -->
+## Pod生命周期异常诊断实战
+
+### 诊断流程（五步法）
+
+```
+Step 1: 确认 Pod Phase
+  kubectl get pod <pod> -o jsonpath='{.status.phase}'
+  └── Pending → Step 2
+  └── Running 但 Not Ready → Step 3
+  └── Failed → Step 4
+  └── Unknown → Step 5
+
+Step 2: Pending 诊断
+  kubectl describe pod <pod> | grep -A 20 "Events"
+  └── FailedScheduling → 检查资源/污点/亲和性
+  └── FailedMount → 检查 PVC/Secret/ConfigMap
+  └── 长时间 ContainerCreating → 检查镜像拉取/CNI
+
+Step 3: Running 但 Not Ready
+  kubectl get pod <pod> -o jsonpath='{.status.conditions[?(@.type=="Ready")]}'
+  └── readinessProbe 失败 → 检查探针配置与应用健康端点
+  └── 容器重启中 → kubectl logs --previous
+  └── Init 容器未完成 → kubectl logs -c <init-container>
+
+Step 4: Failed 诊断
+  kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].state.terminated}'
+  └── Exit Code 1 → 应用错误
+  └── Exit Code 137 → OOMKilled/SIGKILL
+  └── Exit Code 143 → SIGTERM（正常终止）
+  └── Reason: DeadlineExceeded → Job 超时
+
+Step 5: Unknown 诊断
+  kubectl get node <node> -o jsonpath='{.status.conditions}'
+  └── 节点 NotReady → 检查 kubelet/网络
+  └── 节点已删除 → Pod 残留，手动清理
+```
+
+### 异常状态快速修复表
+
+| 异常状态 | 快速诊断 | 修复操作 | 风险等级 |
+|---------|---------|---------|----------|
+| Pending > 5min | `kubectl describe pod` 查看事件 | 调整资源/污点/PVC | 🟢 |
+| ImagePullBackOff | `crictl pull <image>` 测试 | 修复镜像名/凭证/网络 | 🟢 |
+| CrashLoopBackOff | `kubectl logs --previous` | 修复应用/探针配置 | 🟡 |
+| OOMKilled | `kubectl describe pod` 查看 lastState | 增大 memory limit | 🟡 |
+| Evicted | `kubectl describe pod` 查看原因 | 调整资源请求/节点容量 | 🟡 |
+| Terminating 卡住 | `kubectl get pod -o yaml` 查看 finalizers | 移除 finalizer/强制删除 | 🔴 |
+| Unknown | `kubectl get nodes` 检查节点 | 修复节点/清理残留 Pod | 🟡 |
+
+### 强制删除卡住的 Pod
+
+```bash
+# 🔴 高风险：强制删除可能导致数据不一致，仅在 Pod 确认无法恢复时使用
+# 先尝试正常删除
+kubectl delete pod <pod> -n <ns> --grace-period=30
+
+# 若超过 grace period 仍为 Terminating，强制删除
+kubectl delete pod <pod> -n <ns> --grace-period=0 --force
+
+# 若因 finalizer 卡住，移除 finalizer
+kubectl patch pod <pod> -n <ns> -p '{"metadata":{"finalizers":null}}'
+```
+
+<!-- chunk: 容器重启自动化治理 -->
+## 容器重启自动化治理
+
+### 重启原因分类与响应
+
+| 重启原因 | 自动响应 | 人工介入条件 | 预防措施 |
+|---------|---------|-------------|----------|
+| OOMKilled | 自动重启 + 告警 | 连续 3 次 OOM | 调整 memory limit、修复内存泄漏 |
+| 应用崩溃 (Exit 1) | 自动重启 + 日志采集 | 连续 5 次崩溃 | 修复代码、添加错误处理 |
+| 探针失败 | 自动重启 | 重启后仍失败 | 调整探针参数、检查依赖 |
+| 节点故障 | 重新调度 | 多节点同时故障 | 配置 PDB、跨 AZ 部署 |
+| 抢占 | 重新调度 | 频繁被抢占 | 提高优先级、增加资源 |
+
+### 重启次数监控告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-lifecycle-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: pod.lifecycle.rules
+      rules:
+        - alert: PodCrashLooping
+          expr: |
+            rate(kube_pod_container_status_restarts_total{job="kube-state-metrics"}[15m]) * 60 * 15 > 3
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 频繁重启"
+            description: "15分钟内重启超过 3 次，当前重启总数: {{ $value }}"
+
+        - alert: PodOOMKilled
+          expr: |
+            kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} == 1
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} 被 OOMKilled"
+            description: "容器 {{ $labels.container }} 因内存超限被终止"
+
+        - alert: PodPendingTooLong
+          expr: |
+            kube_pod_status_phase{phase="Pending"} == 1
+            and on(pod, namespace)
+            (time() - kube_pod_created) > 300
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} Pending 超过 5 分钟"
+
+        - alert: PodTerminatingStuck
+          expr: |
+            kube_pod_status_phase{phase="Running"} == 1
+            and on(pod, namespace)
+            kube_pod_deletion_timestamp > 0
+            and on(pod, namespace)
+            (time() - kube_pod_deletion_timestamp) > 120
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} Terminating 卡住超过 2 分钟"
+
+        - alert: ContainerWaitingHigh
+          expr: |
+            kube_pod_container_status_waiting_reason{reason!="ContainerCreating"} == 1
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "容器 {{ $labels.container }} 处于 {{ $labels.reason }} 状态超过 10 分钟"
+```
+
+### 自动修复 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pod-health-remediation
+  namespace: kube-system
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: pod-remediator
+          restartPolicy: OnFailure
+          containers:
+            - name: remediator
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "=== Pod 健康巡检 $(date) ==="
+                  
+                  # 1. 清理 Evicted Pod
+                  EVICTED=$(kubectl get pods -A --field-selector=status.phase=Failed \
+                    -o jsonpath='{range .items[?(@.status.reason=="Evicted")]}{.metadata.namespace} {.metadata.name}{"\n"}{end}')
+                  if [ -n "$EVICTED" ]; then
+                    echo "清理 Evicted Pod:"
+                    echo "$EVICTED" | while read ns name; do
+                      kubectl delete pod "$name" -n "$ns" --grace-period=0
+                      echo "  已删除: $ns/$name"
+                    done
+                  fi
+                  
+                  # 2. 清理 Succeeded 的 Job Pod（超过 1 小时）
+                  kubectl get pods -A --field-selector=status.phase=Succeeded \
+                    -o json | jq -r '.items[] | select((now - (.metadata.creationTimestamp | fromdateiso8601)) > 3600) | "\(.metadata.namespace) \(.metadata.name)"' | \
+                  while read ns name; do
+                    kubectl delete pod "$name" -n "$ns"
+                    echo "  清理已完成 Pod: $ns/$name"
+                  done
+                  
+                  # 3. 报告高重启次数 Pod
+                  echo "=== 高重启 Pod 报告 ==="
+                  kubectl get pods -A -o json | jq -r '
+                    .items[] |
+                    select(.status.containerStatuses != null) |
+                    select(.status.containerStatuses[].restartCount > 10) |
+                    "\(.metadata.namespace)/\(.metadata.name) restarts=\(.status.containerStatuses[].restartCount)"'
+                  
+                  echo "=== 巡检完成 ==="
+```
+
+<!-- chunk: 生命周期钩子高级用法 -->
+## 生命周期钩子高级用法
+
+### postStart 与 preStop 对比
+
+| 特性 | postStart | preStop |
+|-----|-----------|----------|
+| 触发时机 | 容器创建后 | 容器终止前 |
+| 与 ENTRYPOINT 关系 | 并行执行，不保证顺序 | 在 SIGTERM 之前执行 |
+| 失败影响 | 容器被杀死 | 继续终止流程 |
+| 典型用途 | 注册服务、预热缓存 | 注销服务、排空连接 |
+| 超时 | 无独立超时 | 计入 terminationGracePeriodSeconds |
+
+### 生产级 preStop 配置
+
+```yaml
+# 场景 1: HTTP 服务优雅下线
+spec:
+  terminationGracePeriodSeconds: 60
+  containers:
+    - name: api-server
+      lifecycle:
+        preStop:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                # 1. 通知负载均衡器停止发送新流量
+                curl -s -X POST http://localhost:8080/admin/drain || true
+                # 2. 等待现有请求完成（最多 30 秒）
+                sleep 15
+                # 3. 等待 Service Endpoints 更新传播
+                sleep 5
+---
+# 场景 2: 消息队列消费者优雅下线
+spec:
+  terminationGracePeriodSeconds: 120
+  containers:
+    - name: consumer
+      lifecycle:
+        preStop:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                # 1. 停止消费新消息
+                curl -s -X POST http://localhost:9090/consumer/pause || true
+                # 2. 等待当前消息处理完成（最多 90 秒）
+                timeout 90 sh -c 'while curl -s http://localhost:9090/consumer/active | grep -q "processing"; do sleep 2; done'
+                echo "Consumer drained"
+---
+# 场景 3: 数据库连接池优雅关闭
+spec:
+  terminationGracePeriodSeconds: 45
+  containers:
+    - name: app
+      lifecycle:
+        preStop:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                # 1. 标记为不健康，触发 Readiness 失败
+                touch /tmp/shutting-down
+                # 2. 等待 Endpoints 移除（kubelet 同步周期）
+                sleep 10
+                # 3. 等待活跃事务完成
+                sleep 20
+```
+
+### postStart 初始化示例
+
+```yaml
+spec:
+  containers:
+    - name: app
+      lifecycle:
+        postStart:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - |
+                # 预热连接池
+                curl -s http://localhost:8080/warmup || true
+                # 注册到服务发现
+                curl -s -X POST http://service-registry:8500/v1/agent/service/register \
+                  -d '{"Name":"app","Port":8080}' || true
+```
+
+> **注意**: postStart 与容器 ENTRYPOINT 并行执行，不保证先后顺序。若初始化必须在应用启动前完成，应使用 Init Container。
+
+<!-- chunk: Pod状态转换监控 -->
+## Pod状态转换监控
+
+### 状态转换时序图
+
+```
+创建 Pod
+   │
+   ▼
+Pending ─────────────────────────────────────┐
+   │                                          │
+   ├─ Scheduled (PodScheduled=True)           │
+   ├─ Init Containers 运行                    │
+   ├─ Initialized=True                        │
+   ├─ 拉取镜像 (Pulling → Pulled)              │
+   ├─ 创建容器 (Created)                       │
+   ├─ 启动容器 (Started)                       │
+   │                                          │
+   ▼                                          │
+Running ─────────────────────────────────────┤
+   │                                          │
+   ├─ Readiness 探针通过                       │
+   ├─ Ready=True                              │
+   ├─ 加入 Service Endpoints                  │
+   ├─ 接收流量                                │
+   │                                          │
+   ├─── 正常终止 ────────────────────────────┤
+   │    ├─ preStop 钩子                       │
+   │    ├─ SIGTERM                            │
+   │    ├─ 等待 grace period                  │
+   │    ├─ SIGKILL (若超时)                    │
+   │    └─ Succeeded/Failed                   │
+   │                                          │
+   └─── 异常终止 ────────────────────────────┘
+        ├─ OOMKilled (Exit 137)
+        ├─ 应用崩溃 (Exit 1)
+        ├─ 探针失败 → 重启
+        └─ 节点故障 → 重新调度
+```
+
+### 关键状态转换指标
+
+| 指标 | 含义 | 正常范围 | 异常信号 |
+|-----|------|---------|----------|
+| Pending → Running 时间 | 调度+拉取+启动总耗时 | < 30s | > 60s 需排查 |
+| Running → Ready 时间 | 应用启动+探针通过 | < 10s | > 30s 需优化 |
+| Terminating → 删除 时间 | 优雅终止耗时 | < grace period | 接近/超过 grace period |
+| 重启间隔 | 两次重启之间的时间 | 稳定增长(退避) | 固定短间隔=持续崩溃 |
+
+<!-- chunk: 优雅终止生产配置 -->
+## 优雅终止生产配置
+
+### 不同工作负载类型的终止策略
+
+| 工作负载类型 | 推荐 grace period | preStop 策略 | 注意事项 |
+|-------------|------------------|-------------|----------|
+| 无状态 API | 30-60s | sleep 10-15s + drain | 等待 Endpoints 传播 |
+| WebSocket 服务 | 120-300s | 通知客户端重连 | 长连接需特殊处理 |
+| 消息消费者 | 60-120s | 暂停消费 + 等待处理完 | 避免消息丢失 |
+| 批处理 Job | 300-600s | 保存检查点 | 支持断点续传 |
+| 数据库 | 300-600s | 刷盘 + 关闭连接 | StatefulSet 顺序终止 |
+| 缓存服务 | 60s | 持久化热数据 | 避免缓存雪崩 |
+
+### 完整优雅终止配置模板
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-api
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: api
+          image: myregistry/api:v1.2.3
+          ports:
+            - containerPort: 8080
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    # 阶段 1: 停止接收新流量
+                    echo "$(date) - Starting graceful shutdown" >> /var/log/shutdown.log
+                    # 标记为不健康（触发 Readiness 失败）
+                    touch /tmp/shutting-down
+                    # 等待 kubelet 更新 Endpoints
+                    sleep 10
+                    # 阶段 2: 排空现有连接
+                    # 发送 SIGUSR1 触发应用内部优雅关闭
+                    kill -USR1 1 || true
+                    # 等待活跃请求完成
+                    sleep 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+            # 关键: 检查 shutting-down 标记
+            # 应用应在 /ready 中检查 /tmp/shutting-down 是否存在
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+```
+
+### 终止流程验证脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：验证优雅终止配置是否正确
+set -euo pipefail
+
+POD=${1:?"Usage: $0 <pod-name> [namespace]"}
+NS=${2:-default}
+
+echo "=== 优雅终止配置验证: ${NS}/${POD} ==="
+
+# 1. 检查 terminationGracePeriodSeconds
+GRACE=$(kubectl get pod "$POD" -n "$NS" -o jsonpath='{.spec.terminationGracePeriodSeconds}')
+echo "✓ terminationGracePeriodSeconds: ${GRACE:-30(default)}"
+
+# 2. 检查 preStop 钩子
+PRESTOP=$(kubectl get pod "$POD" -n "$NS" -o jsonpath='{.spec.containers[0].lifecycle.preStop.exec.command}')
+if [ -n "$PRESTOP" ]; then
+  echo "✓ preStop 钩子已配置: $PRESTOP"
+else
+  echo "⚠️ 未配置 preStop 钩子"
+fi
+
+# 3. 检查 Readiness 探针
+READINESS=$(kubectl get pod "$POD" -n "$NS" -o jsonpath='{.spec.containers[0].readinessProbe.httpGet.path}')
+echo "✓ Readiness 探针路径: ${READINESS:-未配置}"
+
+# 4. 检查 PDB
+PDB=$(kubectl get pdb -n "$NS" -o jsonpath='{range .items[?(@.spec.selector.matchLabels.app)]}{.metadata.name}{end}')
+echo "✓ PDB: ${PDB:-未配置}"
+
+# 5. 检查 Pod 优先级
+PRIORITY=$(kubectl get pod "$POD" -n "$NS" -o jsonpath='{.spec.priorityClassName}')
+echo "✓ PriorityClass: ${PRIORITY:-default}"
+
+echo "=== 验证完成 ==="
+```
+
+<!-- chunk: Pod生命周期检查清单 -->
+## Pod生命周期检查清单
+
+### 生产环境必检项
+
+| 序号 | 检查项 | 验证方法 | 通过标准 |
+|-----|--------|---------|----------|
+| 1 | 三种探针均已配置 | `kubectl get pod -o yaml` | liveness + readiness + startup |
+| 2 | startupProbe 给足启动时间 | 检查 failureThreshold × periodSeconds | ≥ 应用最大启动时间 |
+| 3 | terminationGracePeriodSeconds 合理 | 检查配置值 | ≥ preStop 时间 + 排空时间 |
+| 4 | preStop 钩子已配置 | 检查 lifecycle.preStop | 有 sleep 或 drain 逻辑 |
+| 5 | PDB 已配置 | `kubectl get pdb` | minAvailable 或 maxUnavailable |
+| 6 | 重启策略正确 | 检查 restartPolicy | Always(长期服务)/OnFailure(Job) |
+| 7 | 资源请求与限制已设置 | 检查 resources | requests ≤ 实际使用 ≤ limits |
+| 8 | 优先级已设置 | 检查 priorityClassName | 关键服务有明确优先级 |
+| 9 | 拓扑分布已配置 | 检查 topologySpreadConstraints | 跨 AZ/节点分布 |
+| 10 | 监控告警已覆盖 | 检查 PrometheusRule | 重启/OOM/Pending 告警 |
+
+### 常见配置错误与修复
+
+| 错误配置 | 后果 | 正确做法 |
+|---------|------|----------|
+| liveness 检查依赖服务 | 依赖故障导致级联重启 | liveness 只检查自身存活 |
+| readiness 与 liveness 相同 | 无法区分"未就绪"和"已死亡" | readiness 检查依赖，liveness 检查自身 |
+| 未配置 startupProbe | 慢启动应用被 liveness 杀死 | 配置 startupProbe，liveness 在其后生效 |
+| grace period 过短 | 请求被截断、数据丢失 | 根据业务特点设置足够时间 |
+| preStop 中无 sleep | Endpoints 未更新即终止 | sleep 10-15s 等待 Endpoints 传播 |
+| 未配置 PDB | 节点维护时全部 Pod 同时终止 | 配置 minAvailable 或 maxUnavailable |
+
 ---
 
 **生命周期原则**: 正确配置探针，设置PDB，处理优雅终止
