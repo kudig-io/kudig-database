@@ -145,6 +145,136 @@ kubectl get rs -l app=webapp -n production -o custom-columns=NAME:.metadata.name
 - **级联删除误伤**：删 RS 默认级联删除其 Pod；用 `--cascade=orphan` 保留 Pod（用于迁移）。
 - **RS 残留占用 Endpoints**：旧 RS 副本虽为 0，但其 selector 仍可能匹配手工误打的 Pod。
 
+## 源码实现分析
+
+### ReplicaSet Controller 对账逻辑
+
+```go
+// k8s.io/kubernetes/pkg/controller/replicaset/replica_set.go
+func (rsc *ReplicaSetController) syncReplicaSet(ctx context.Context, rs *apps.ReplicaSet) error {
+    // 1. 通过 selector 获取所有匹配的 Pod
+    selector, _ := metav1.LabelSelectorAsSelector(rs.Spec.Selector)
+    allPods := rsc.podLister.List(selector)
+    // 2. 过滤属于本 RS 的 Pod（OwnerReference 匹配）
+    ownedPods := filterOwnedPods(allPods, rs.UID)
+    // 3. 计算当前副本数 vs 期望副本数
+    activePods := filterActivePods(ownedPods) // 排除 Succeeded/Failed
+    diff := int(*rs.Spec.Replicas) - len(activePods)
+    // 4. 扩容：创建新 Pod
+    if diff > 0 {
+        for i := 0; i < diff; i++ {
+            pod := rsc.createPod(rs) // 使用 RS 的 Pod Template
+            // 设置 OwnerReference 指向 RS
+            ctrl.SetControllerReference(rs, pod, rsc.scheme)
+            rsc.kubeClient.CoreV1().Pods(ns).Create(ctx, pod)
+        }
+    }
+    // 5. 缩容：删除多余 Pod（按创建时间排序，删最新的）
+    if diff < 0 {
+        podsToDelete := getPodsToDelete(activePods, -diff)
+        for _, pod := range podsToDelete {
+            rsc.kubeClient.CoreV1().Pods(ns).Delete(ctx, pod.Name)
+        }
+    }
+    // 6. 更新 Status
+    rs.Status.Replicas = int32(len(ownedPods))
+    rs.Status.ReadyReplicas = countReady(ownedPods)
+    rsc.kubeClient.AppsV1().ReplicaSets(ns).UpdateStatus(ctx, rs)
+    return nil
+}
+```
+
+### ReplicaSet 与 Deployment 关系
+
+```
+┌──────────────────────────────────────────────────────────┐
+│          Deployment → ReplicaSet → Pod 层次关系       │
+├──────────────────────────────────────────────────────────┤
+│  Deployment (webapp)                                     │
+│    │  管理多个 RS 版本，控制滚动更新/回滚            │
+│    ├─ ReplicaSet (webapp-7b9c4d) [replicas=3] ← 当前  │
+│    │     ├─ Pod (webapp-7b9c4d-abc12)                   │
+│    │     ├─ Pod (webapp-7b9c4d-def34)                   │
+│    │     └─ Pod (webapp-7b9c4d-ghi56)                   │
+│    ├─ ReplicaSet (webapp-6a8b3c) [replicas=0] ← 旧版  │
+│    └─ ReplicaSet (webapp-5z7x2v) [replicas=0] ← 更旧  │
+│                                                          │
+│  滚动更新时：新 RS 逐步扩容，旧 RS 逐步缩容          │
+│  回滚时：旧 RS 重新扩容，新 RS 缩容到 0              │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：观察滚动更新中的 RS 变化
+
+```bash
+# 🟢 低风险：只读观察
+# 触发滚动更新
+kubectl set image deployment/webapp webapp=registry/webapp:v2.0.0 -n production
+# 观察 RS 变化（新 RS 扩容，旧 RS 缩容）
+kubectl get rs -n production -w
+# 查看 RS 事件
+kubectl describe rs webapp-7b9c4d -n production | grep -A20 Events
+# 查看 Pod 归属
+kubectl get pods -n production -o custom-columns=NAME:.metadata.name,RS:.metadata.ownerReferences[0].name,STATUS:.status.phase
+```
+
+### 场景二：清理历史 ReplicaSet
+
+```bash
+# 🟡 中风险：删除 RS 会级联删除其 Pod
+# 查看 Deployment 的 revisionHistoryLimit
+kubectl get deployment webapp -o jsonpath='{.spec.revisionHistoryLimit}'
+# 手动清理旧 RS（副本数为 0 的）
+kubectl get rs -n production -o json | \
+  jq -r '.items[] | select(.spec.replicas==0) | .metadata.name' | \
+  xargs -I{} kubectl delete rs {} -n production  # 🟡 删除操作
+# 或者设置 revisionHistoryLimit 自动清理
+kubectl patch deployment webapp -p '{"spec":{"revisionHistoryLimit":3}}'
+```
+
+### 场景三：排查 RS 副本数不收敛
+
+```bash
+# 🟢 低风险：只读诊断
+# 检查 RS 状态
+kubectl get rs webapp-7b9c4d -o yaml | grep -A10 status
+# 检查是否有 Pod 创建失败
+kubectl get events -n production --field-selector reason=FailedCreate
+# 检查资源配额是否超限
+kubectl get resourcequota -n production -o yaml
+# 检查节点资源是否充足
+kubectl describe nodes | grep -A5 "Allocated resources"
+# 检查 Pod 是否 Pending
+kubectl get pods -n production --field-selector=status.phase=Pending
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | 可以直接管理 ReplicaSet | 应通过 Deployment 管理；直接操作 RS 会被 Deployment 控制器覆盖 |
+| 2 | 修改 RS 的 Pod Template 会更新现有 Pod | RS 不会重建已存在的 Pod；必须通过 Deployment 滚动更新或手动删 Pod |
+| 3 | selector 可以随意修改 | RS 创建后 selector 不可变（API 校验）；修改需删除重建 |
+| 4 | 多个 RS 可以有相同 selector | selector 重叠会导致 Pod 被多个 RS 认领，副本数不可预测 |
+| 5 | 删除 RS 不会影响 Pod | 默认级联删除 Pod；用 --cascade=orphan 保留 Pod（用于迁移） |
+| 6 | HPA 启用后可以手动 scale | HPA 会立即覆盖手动 scale 操作；应通过调整 HPA 参数控制副本数 |
+
+## 面试要点
+
+1. **Q: ReplicaSet 的对账逻辑是怎样的？**
+   A: ① 通过 label selector 获取所有匹配 Pod；② 通过 OwnerReference 过滤属于本 RS 的 Pod；③ 计算 activePods（排除 Succeeded/Failed）与期望副本数的差值；④ 差值>0 则创建新 Pod（设置 OwnerReference）；⑤ 差值<0 则删除多余 Pod（按创建时间排序，优先删最新）；⑥ 更新 Status（replicas/readyReplicas/availableReplicas）。整个过程是 level-triggered，幂等可重复。
+
+2. **Q: Deployment 和 ReplicaSet 的关系是什么？为什么不直接用 RS？**
+   A: Deployment 是 RS 的上层抽象：① 版本管理：每次 Pod Template 变更创建新 RS，旧 RS 保留（revisionHistoryLimit）；② 滚动更新：控制新 RS 扩容和旧 RS 缩容的节奏（maxSurge/maxUnavailable）；③ 回滚：将旧 RS 重新扩容到期望副本数；④ 暂停/恢复：支持金丝雀发布的暂停观察。直接用 RS 会失去版本历史、回滚、滚动策略等能力。
+
+3. **Q: ReplicaSet 如何确保 Pod 副本数正确？**
+   A: Level-triggered 机制：① Informer Watch Pod 变化（创建/删除/标签变更）；② 任何变化触发 syncReplicaSet 重新对账；③ 通过 OwnerReference 确认 Pod 归属（避免误删其他控制器的 Pod）；④ 缩容时按创建时间排序删除最新 Pod（保留稳定运行的旧 Pod）；⑤ 考虑 PodDisruptionBudget 避免驱逐过多 Pod；⑥ 考虑节点故障时的 Pod 重建（node lifecycle controller 配合）。
+
+4. **Q: 什么情况下 ReplicaSet 副本数会不收敛？**
+   A: ① 资源不足：节点 CPU/内存不足导致新 Pod Pending；② 配额超限：ResourceQuota 限制 Pod 数量或资源总量；③ 镜像拉取失败：ImagePullBackOff 导致 Pod 无法 Running；④ 调度约束：nodeSelector/affinity/taint 无匹配节点；⑤ PDB 保护：缩容时 PodDisruptionBudget 阻止删除；⑥ 准入拒绝：Webhook 拒绝 Pod 创建请求。排查：kubectl get events + describe rs + describe pods。
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

@@ -65,21 +65,192 @@ in-toto 在 Kubernetes 供应链安全中与 Sigstore/Cosign 配合使用。CI/C
 - **安全审计**：为每次构建提供可追溯的审计链
 - **防篡改保护**：防止构建过程中的恶意代码注入
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 安装 in-toto CLI
 pip3 install in-toto
-# 定义 Layout
-in-toto-layout
-# 执行步骤
-in-toto-run --step-name build --command make
-# 验证
-in-toto-verify --layout root.layout --verification-keys owner.pub
+
+# 🟢 验证安装
+in-toto-verify --help
+
+# 🟢 生成密钥对
+in-toto-keygen owner
+in-toto-keygen build-step
+in-toto-keygen package-step
+
+# 🟢 定义 Layout (供应链布局)
+in-toto-layout \
+  --layout-name "myapp-supply-chain" \
+  --steps build-step package-step \
+  --keys build-step.pub package-step.pub \
+  --signing-key owner
+
+# 🟢 执行步骤并生成 Link
+in-toto-run \
+  --step-name build \
+  --key build-step \
+  --materials src/ \
+  --products dist/ \
+  --command make build
+
+in-toto-run \
+  --step-name package \
+  --key package-step \
+  --materials dist/ \
+  --products release/myapp.tar.gz \
+  --command make package
+
+# 🟢 验证供应链
+in-toto-verify \
+  --layout root.layout \
+  --verification-keys owner.pub \
+  --link-dir ./links/
 ```
+
+### Layout 文件示例
+
+```json
+{
+  "_type": "layout",
+  "expires": "2027-01-01T00:00:00Z",
+  "steps": [
+    {
+      "name": "build",
+      "pubkeys": ["build-step-public-key"],
+      "expected_command": ["make", "build"],
+      "expected_materials": [["MATCH", "src/*", "IN", "src/"]],
+      "expected_products": [["CREATE", "dist/*"]],
+      "threshold": 1
+    },
+    {
+      "name": "package",
+      "pubkeys": ["package-step-public-key"],
+      "expected_command": ["make", "package"],
+      "expected_materials": [["MATCH", "dist/*", "IN", "dist/"]],
+      "expected_products": [["CREATE", "release/myapp.tar.gz"]],
+      "threshold": 1
+    }
+  ],
+  "inspect": [
+    {
+      "name": "verify-release",
+      "expected_command": ["sha256sum", "release/myapp.tar.gz"]
+    }
+  ]
+}
+```
+
+### CI/CD 集成 (GitHub Actions)
+
+```yaml
+name: Supply Chain Verification
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install in-toto
+      run: pip install in-toto
+    - name: Build with attestation
+      run: |
+        in-toto-run \
+          --step-name build \
+          --key ${{ secrets.BUILD_KEY }} \
+          --materials . \
+          --products dist/ \
+          --command make build
+    - name: Upload attestation
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-link
+        path: build.link
+  verify:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Verify supply chain
+      run: |
+        in-toto-verify \
+          --layout root.layout \
+          --verification-keys owner.pub
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 验证供应链完整性
+in-toto-verify --layout root.layout --verification-keys owner.pub --link-dir ./links/
+
+# 🟢 查看 Link 元数据
+cat build.link | jq .
+
+# 🟢 检查产物哈希
+in-toto-record --step-name build --key build-step stop
+
+# 🟢 验证单个 Link 签名
+in-toto-verify-link --link build.link --key build-step.pub
+
+# 🟢 生成 SLSA Provenance
+in-toto-run --step-name build --slsa-provenance \
+  --command make build
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 验证失败 | 步骤未按 Layout 执行 | `in-toto-verify --verbose` | 检查 Link 与 Layout 匹配 |
+| 签名无效 | 密钥不匹配 | 检查 Link 签名和公钥 | 使用正确的密钥对 |
+| 产物哈希不匹配 | 产物被篡改 | 对比 Link 中的哈希 | 重新执行构建步骤 |
+| 缺少 Link | 步骤未执行 | `ls *.link` | 重新执行缺失步骤 |
+| Layout 过期 | expires 字段过期 | 检查 Layout expires | 更新 Layout 有效期 |
+
+### 排查流程
+
+```
+1. in-toto-verify --verbose → 查看验证详情
+2. 检查每个步骤的 Link 文件是否存在
+3. 验证 Link 签名与 Layout 中的公钥匹配
+4. 对比 Link 中的 materials/products 哈希
+5. 检查 Layout 有效期和步骤顺序
+```
+
+## 生产案例
+
+### 案例1: SLSA Level 3 合规
+- **场景**: 金融软件需要满足 SLSA Level 3 构建来源验证
+- **方案**: in-toto 记录每个构建步骤，生成完整 attestation 链
+- **效果**: 通过 SLSA Level 3 审计，实现完整供应链可追溯
+
+### 案例2: 防止构建注入攻击
+- **场景**: 担心 CI 环境被入侵后注入恶意代码
+- **方案**: in-toto 验证每步执行的命令和产物，检测异常
+- **效果**: 即使 CI 被入侵，篡改的构建产物无法通过验证
 
 ## 对比替代方案
 
-相比 TUF（保护仓库级完整性），in-toto 关注供应链过程（每一步的执行验证）。相比 SLSA 框架（指导性规范），in-toto 提供具体的验证工具和格式。
+| 维度 | in-toto | TUF | SLSA | Sigstore |
+|------|---------|-----|------|----------|
+| 关注点 | 构建过程 | 仓库完整性 | 框架规范 | 签名透明 |
+| 验证粒度 | 每步骤 | 仓库级 | 级别化 | 个体制品 |
+| 工具支持 | CLI+库 | 多语言库 | 规范文档 | CLI+服务 |
+| 防篡改 | 过程级 | 仓库级 | 指导 | 签名级 |
+| CNCF | Graduated | Graduated | 非 CNCF | Graduated |
+
+## 检查清单
+
+- [ ] Layout 定义了完整的供应链步骤
+- [ ] 每个步骤使用独立密钥 (职责分离)
+- [ ] CI/CD 集成 in-toto-run 生成 Link
+- [ ] 部署前执行 in-toto-verify 验证
+- [ ] Layout 有效期合理且定期更新
+- [ ] 密钥安全存储 (HSM/密钥管理服务)
+- [ ] 与 SLSA 框架对齐
+- [ ] 审计日志保留完整
 
 ## Related
 

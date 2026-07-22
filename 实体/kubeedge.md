@@ -80,12 +80,13 @@ KubeEdge 以 Kubernetes 原生方式扩展集群。边缘节点通过 keadm 工�
 3. **智能交通**: 在路侧边缘设备运行 AI 推理应用（车牌识别、交通流量分析）
 4. **离线自治场景**: 网络不稳定的远程站点（油井、船舶）保证业务连续性
 
-## 安装
+## 安装与配置
 
 ```bash
 # 云端：安装 keadm
 wget https://github.com/kubeedge/kubeedge/releases/download/v1.15.0/keadm-v1.15.0-linux-amd64.tar.gz
 tar -xzf keadm-*.tar.gz && mv keadm /usr/local/bin/
+keadm version
 
 # 初始化云端
 keadm init --advertise-address=$CLOUD_IP --kubeedge-version=v1.15.0
@@ -96,9 +97,11 @@ keadm join --cloudcore-ipport=$CLOUD_IP:10000 \
 
 # 获取边缘节点状态
 kubectl get nodes --selector=node-role.kubernetes.io/edge=
+```
 
-# 部署应用到边缘节点
-kubectl apply -f - <<EOF
+### 边缘应用部署
+
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -115,20 +118,110 @@ spec:
     spec:
       nodeSelector:
         node-role.kubernetes.io/edge: ""
+      tolerations:
+      - key: node.kubeedge.io/unreachable
+        operator: Exists
+        effect: NoExecute
+        tolerationSeconds: 600
       containers:
       - name: app
         image: nginx:latest
-EOF
 ```
+
+### 设备管理 CRD
+
+```yaml
+apiVersion: devices.kubeedge.io/v1beta1
+kind: Device
+metadata:
+  name: temperature-sensor
+spec:
+  deviceModelRef:
+    name: sensor-model
+  protocol:
+    modbus:
+      slaveID: 1
+---
+apiVersion: devices.kubeedge.io/v1beta1
+kind: DeviceModel
+metadata:
+  name: sensor-model
+spec:
+  properties:
+  - name: temperature
+    type: INT
+    accessMode: ReadOnly
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看边缘节点
+kubectl get nodes -l node-role.kubernetes.io/edge=
+
+# 🟢 查看 CloudCore 状态
+kubectl get pods -n kubeedge
+kubectl logs -n kubeedge -l app=cloudcore --tail=50
+
+# 🟡 添加新边缘节点
+keadm join --cloudcore-ipport=$CLOUD_IP:10000 --edgenode-id=edge-node-2
+
+# 🟡 更新边缘应用
+kubectl apply -f edge-app-updated.yaml
+
+# 🔴 移除边缘节点
+keadm reset --edgenode-id=edge-node-1
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 边缘节点 NotReady | CloudCore 连接断开 | `kubectl get nodes` | 检查网络和 CloudCore |
+| 应用未下发 | nodeSelector 不匹配 | `kubectl describe pod` | 确认节点标签 |
+| EdgeCore 崩溃 | 证书过期 | `journalctl -u edgecore` | 重新注册节点 |
+| 设备数据不上报 | 协议配置错误 | `kubectl describe device` | 检查 Device CRD |
+| 云边同步延迟 | WebSocket 不稳定 | `kubectl logs cloudcore` | 检查网络质量 |
+
+```
+排查流程:
+├── 边缘节点离线
+│   ├── 检查边缘节点网络连通性
+│   ├── journalctl -u edgecore → EdgeCore 日志
+│   └── 确认 CloudCore 服务健康
+├── 应用下发失败
+│   ├── kubectl describe pod → 查看调度事件
+│   ├── 确认 nodeSelector/toleration 配置
+│   └── 检查边缘节点资源充足
+└── 设备管理异常
+    ├── kubectl get devices → 查看设备状态
+    ├── kubectl describe device → 查看协议配置
+    └── 检查边缘节点设备连接
+```
+
+## 生产案例
+
+### 案例 1: 智能交通边缘 AI
+
+- **场景**: 100+ 路侧设备运行车牌识别 AI，需要离线自治
+- **方案**: 部署 KubeEdge，边缘节点运行推理 Pod；设备通过 Device CRD 管理；网络中断时本地继续工作
+- **效果**: 识别延迟 <50ms，网络故障时业务不中断
+
+### 案例 2: 远程站点离线自治
+
+- **场景**: 海上平台网络不稳定，需要保证监控服务连续
+- **方案**: 边缘节点启用自治模式；本地缓存 Pod 状态；网络恢复后自动同步
+- **效果**: 网络中断 24h 内业务完全不受影响
 
 ## 对比
 
-| 特性 | KubeEdge | OpenYurt | Akri | k3s |
-|------|----------|----------|------|-----|
-| 离线自治 | ✅ | ✅ | ❌ | ✅ |
-| 设备管理 | ✅ Device CRD | ⚠️ via EdgeX | ✅ | ❌ |
-| 云边分离 | ✅ | ✅ | ❌ | ❌ |
-| CNCF 状态 | Graduated | Incubating | Sandbox | 非 CNCF |
+| 特性 | KubeEdge | OpenYurt | Akri | k3s | 适用场景 |
+|------|----------|----------|------|-----|----------|
+| 离线自治 | ✅ | ✅ | ❌ | ✅ | 网络不稳定 |
+| 设备管理 | ✅ Device CRD | ⚠️ via EdgeX | ✅ | ❌ | IoT |
+| 云边分离 | ✅ | ✅ | ❌ | ❌ | 架构 |
+| 轻量级 | ⚠️ | ⚠️ | ✅ | ✅ | 资源受限 |
+| CNCF 状态 | Graduated | Incubating | Sandbox | 非 CNCF | 生态 |
 
 ## 架构定位
 

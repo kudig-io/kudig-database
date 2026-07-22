@@ -76,20 +76,30 @@ K8GB 通过 `Gslb` CRD 扩展 Kubernetes API。一个 Gslb 资源关联一个标
 3. **金丝雀多集群发布**：通过 DNS 权重逐步将流量迁移到新集群
 4. **蓝绿多集群部署**：新旧集群同时运行，DNS 切换实现秒级流量切换
 
-## 安装
+## 安装与配置
+
+### Helm 部署
 
 ```bash
-# Helm 安装 K8GB
+# 添加 Helm 仓库
 helm repo add k8gb https://www.k8gb.io
 helm repo update
+
+# 安装 K8GB（主集群 us-east-1）
 helm install k8gb k8gb/k8gb -n k8gb --create-namespace \
   --set k8gb.clusterGeoTag=us-east-1 \
   --set k8gb.extGslbClustersGeoTags=eu-west-1,ap-southeast-1 \
   --set k8gb.edgeDNSZone=gslb.example.com \
   --set coredns.enabled=true
 
-# 创建 Gslb 资源
-kubectl apply -f - <<EOF
+# 验证部署
+kubectl get pods -n k8gb
+kubectl get crd gslbs.k8gb.absa.oss
+```
+
+### Gslb 资源配置
+
+```yaml
 apiVersion: k8gb.absa.oss/v1beta1
 kind: Gslb
 metadata:
@@ -110,17 +120,101 @@ spec:
   strategy:
     type: roundRobin
     splitBrainThresholdSeconds: 300
-EOF
+    dnsTtlSeconds: 30
+    primaryGeoTag: us-east-1
+---
+# failover 策略示例
+apiVersion: k8gb.absa.oss/v1beta1
+kind: Gslb
+metadata:
+  name: critical-app-gslb
+spec:
+  ingress:
+    rules:
+      - host: critical.gslb.example.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: critical-app
+                  port:
+                    number: 443
+  strategy:
+    type: failover
+    primaryGeoTag: us-east-1
+    splitBrainThresholdSeconds: 180
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 GSLB 状态
+kubectl get gslb -A
+kubectl describe gslb myapp-gslb
+
+# 🟢 检查 DNS 解析
+kubectl exec -n k8gb deploy/coredns -- nslookup myapp.gslb.example.com 127.0.0.1
+
+# 🟢 查看各集群健康状态
+kubectl get gslb myapp-gslb -o jsonpath='{.status.healthyRecords}'
+
+# 🟡 修改 GSLB 策略
+kubectl patch gslb myapp-gslb --type merge -p '{"spec":{"strategy":{"type":"failover"}}}'
+
+# 🟡 模拟故障转移（删除主集群 Pod）
+kubectl scale deployment myapp --replicas=0
+
+# 🔴 删除 Gslb 资源
+kubectl delete gslb myapp-gslb
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| DNS 解析失败 | CoreDNS 未就绪 | `kubectl get pods -n k8gb -l app=coredns` | 检查 CoreDNS 配置和日志 |
+| 故障转移未触发 | splitBrainThreshold 未到 | `kubectl describe gslb <name>` | 等待超时或调整阈值 |
+| 跨集群同步失败 | 集群间网络不通 | `kubectl logs -n k8gb -l app=k8gb` | 检查集群间 DNS 和网络 |
+| 流量未均衡 | 策略配置错误 | `kubectl get gslb -o yaml` | 检查 strategy.type 和 geoTag |
+| 脑裂 | 多集群同时认为自己是主 | `kubectl get gslb -A -o wide` | 检查 splitBrainThreshold 和网络分区 |
+
+**排查流程：**
+```
+GSLB 故障转移失败
+├── 检查 Gslb CR 状态 → kubectl describe gslb <name>
+├── 检查健康检查 → kubectl get endpoints <svc>
+├── 检查 CoreDNS 记录 → nslookup <host> <coredns-ip>
+├── 检查集群间通信 → kubectl logs -n k8gb
+└── 检查 DNS TTL → 确认客户端未缓存旧记录
+```
+
+## 生产案例
+
+### 案例一：多区域故障转移
+
+- **场景**: 电商应用部署在 3 个区域（US/EU/AP），需要 DNS 层自动故障转移
+- **排查**: 使用 K8GB failover 策略，主区域故障后 30s 内切换
+- **方案**: 3 个集群各部署 K8GB，配置 failover 策略，主区域 US，故障时自动切换到 EU
+- **效果**: RTO < 60s，无需人工介入，年度可用性从 99.9% 提升至 99.99%
+
+### 案例二：全球流量均衡
+
+- **场景**: SaaS 服务需要全球用户就近接入，降低延迟
+- **排查**: 使用 K8GB roundRobin 策略，结合 GeoDNS 实现就近接入
+- **方案**: 各区域 K8GB 互相感知健康状态，DNS 返回所有健康集群 IP
+- **效果**: 全球用户平均延迟从 200ms 降至 50ms，单集群故障无感知
 
 ## 对比
 
-| 特性 | K8GB | AWS Route53 | F5 GTM | GlobalNet (Submariner) |
-|------|------|-------------|--------|----------------------|
-| 开源 | ✅ | ❌ | ❌ | ✅ |
-| K8s 原生 | ✅ | ❌ | ❌ | ✅ |
-| DNS 层 GSLB | ✅ | ✅ | ✅ | ❌ 网络层 |
-| 成本 | 免费 | 按查询付费 | 高昂许可 | 免费 |
+| 特性 | K8GB | AWS Route53 | F5 GTM | GlobalNet (Submariner) | 适用场景 |
+|------|------|-------------|--------|----------------------|----------|
+| 开源 | ✅ | ❌ | ❌ | ✅ | - |
+| K8s 原生 | ✅ | ❌ | ❌ | ✅ | K8GB 首选 |
+| DNS 层 GSLB | ✅ | ✅ | ✅ | ❌ 网络层 | - |
+| 成本 | 免费 | 按查询付费 | 高昂许可 | 免费 | - |
+| 多集群感知 | ✅ | ❌ | ❌ | ✅ | - |
 
 ## 参考链接
 

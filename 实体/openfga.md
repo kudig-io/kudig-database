@@ -77,22 +77,134 @@ OpenFGA 通过 Helm Chart 或 Operator 部署在 Kubernetes 上，支持 Postgre
 3. **API 网关授权**: 在 Envoy/Kong 网关层集成 OpenFGA，对每个请求执行权限检查
 4. **微服务间授权**: 服务网格场景下，基于服务身份和资源关系控制跨服务访问
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 OpenFGA
 helm repo add openfga https://openfga.github.io/helm-charts
 helm install openfga openfga/openfga \
+  --namespace openfga --create-namespace \
   --set datastore.engine=postgres \
-  --set datastore.uri=postgresql://user:pass@postgres:5432/openfga \
-  --namespace openfga --create-namespace
+  --set datastore.uri="postgresql://user:pass@postgres:5432/openfga" \
+  --set replicaCount=3
 
 # 安装 CLI
 brew install openfga/tap/fga
 
-# 创建授权模型
-fga model create --store-id $STORE_ID --file model.fga
+# 等待就绪
+kubectl wait --for=condition=available deployment/openfga -n openfga --timeout=120s
 ```
+
+```yaml
+# FGA 授权模型示例 (model.fga)
+model
+  schema 1.1
+
+type user
+
+type organization
+  relations
+    define admin: [user]
+    define member: [user] or admin
+
+type document
+  relations
+    define owner: [user]
+    define editor: [user] or owner
+    define viewer: [user, organization#member] or editor
+    define can_edit: editor
+    define can_view: viewer
+
+type folder
+  relations
+    define parent: [folder]
+    define owner: [user] or owner from parent
+    define editor: [user] or owner
+    define viewer: [user, organization#member] or editor
+```
+
+```bash
+# 创建 Store 和授权模型
+export FGA_URL=http://localhost:8080
+STORE_ID=$(fga store create --name "my-app" --json | jq -r '.store.id')
+fga model create --store-id $STORE_ID --file model.fga
+
+# 写入关系元组
+fga tuple write --store-id $STORE_ID "user:alice" "editor" "document:report-2024"
+fga tuple write --store-id $STORE_ID "user:bob" "viewer" "document:report-2024"
+fga tuple write --store-id $STORE_ID "user:charlie" "admin" "organization:acme"
+
+# 权限检查
+fga check --store-id $STORE_ID "user:alice" "can_edit" "document:report-2024"  # true
+fga check --store-id $STORE_ID "user:bob" "can_edit" "document:report-2024"   # false
+
+# 列出用户有权限的对象
+fga list-objects --store-id $STORE_ID "user:alice" "can_view" "document"
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看 Store 列表
+fga store list
+
+# 🟢 低风险：权限检查
+curl -X POST $FGA_URL/stores/$STORE_ID/check -d '{
+  "tuple_key": {"user": "user:alice", "relation": "can_edit", "object": "document:report"}
+}'
+
+# 🟡 中风险：写入/删除关系元组
+fga tuple write --store-id $STORE_ID "user:dave" "editor" "document:new-doc"
+fga tuple delete --store-id $STORE_ID "user:dave" "editor" "document:new-doc"
+
+# 🟡 中风险：更新授权模型
+fga model create --store-id $STORE_ID --file updated-model.fga
+
+# 🔴 高风险：删除 Store（所有权限数据丢失）
+fga store delete --store-id $STORE_ID
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Check 返回错误 | 模型未创建/不匹配 | `fga model list --store-id $ID` | 确认授权模型已创建 |
+| 延迟过高 | 关系图遍历深/缓存未命中 | 检查 OpenFGA metrics | 增加 Redis 缓存，优化模型层级 |
+| 连接失败 | PostgreSQL 不可达 | `kubectl logs deploy/openfga -n openfga` | 检查 datastore.uri 和网络 |
+| 权限结果错误 | 模型定义逻辑错误 | `fga check --verbose` | 使用 Playground 调试模型 |
+| 写入失败 | Tuple 冲突/格式错误 | 检查 API 响应错误信息 | 确认 tuple 格式符合模型定义 |
+
+```
+排查流程：
+├── 服务不可用？
+│   ├── kubectl get pods -n openfga → 检查 Pod 状态
+│   ├── kubectl logs → 查看启动错误
+│   └── 检查 PostgreSQL 连接
+├── 权限结果异常？
+│   ├── fga check --verbose → 查看详细推理过程
+│   ├── 使用 OpenFGA Playground 调试模型
+│   └── 检查关系元组是否正确写入
+└── 性能问题？
+    ├── 检查 Prometheus 指标（check_latency）
+    ├── 确认 Redis 缓存已启用
+    └── 优化模型层级深度
+```
+
+## 生产案例
+
+### 案例 1：SaaS 多租户细粒度权限
+
+- **场景**：协作平台需要实现类 Google Docs 的权限模型（所有者/编辑者/查看者 + 组织继承）
+- **排查**：传统 RBAC 无法表达"用户 A 是文档 X 的编辑者，且组织成员自动获得查看权限"
+- **方案**：使用 OpenFGA ReBAC 模型，定义 document 类型的 owner/editor/viewer 关系，支持组织继承
+- **效果**：权限检查延迟 < 5ms，支持 100万用户 + 10亿关系元组
+
+### 案例 2：API 网关层统一授权
+
+- **场景**：微服务架构中每个服务自行实现权限检查，逻辑分散且不一致
+- **排查**：15 个服务各自实现权限逻辑，安全审计发现多处不一致
+- **方案**：在 Envoy Gateway 集成 OpenFGA 外部授权，所有请求在网关层统一执行权限检查
+- **效果**：消除服务内权限代码，安全审计通过率 100%，权限变更集中管理
 
 ## 对比
 

@@ -83,15 +83,18 @@ OpenChoreo 完全基于 Kubernetes CRD 构建。核心 CRD 包括 `Organization`
 3. **多环境流水线**：应用自动从 dev → staging → prod 晋级
 4. **合规治理**：OPA 策略确保所有部署满足安全和合规要求
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 OpenChoreo
 helm repo add openchoreo https://openchoreo.github.io/charts/
 helm install openchoreo openchoreo/openchoreo -n openchoreo-system --create-namespace
+kubectl get pods -n openchoreo-system
+```
 
-# 创建组织和项目
-kubectl apply -f - <<EOF
+### 组织与项目配置
+
+```yaml
 apiVersion: core.openchoreo.io/v1
 kind: Organization
 metadata:
@@ -103,10 +106,7 @@ metadata:
   name: my-project
 spec:
   organizationRef: my-org
-EOF
-
-# 创建应用组件
-kubectl apply -f - <<EOF
+---
 apiVersion: core.openchoreo.io/v1
 kind: Component
 metadata:
@@ -119,17 +119,108 @@ spec:
       branch: main
   build:
     template: java-springboot
-EOF
+  deployment:
+    replicas: 2
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: "1"
+        memory: 1Gi
 ```
+
+### 环境流水线配置
+
+```yaml
+apiVersion: core.openchoreo.io/v1
+kind: Pipeline
+metadata:
+  name: payment-pipeline
+spec:
+  componentRef: payment-service
+  stages:
+    - name: dev
+      autoDeploy: true
+    - name: staging
+      approval: auto
+      healthCheck:
+        path: /health
+        timeout: 120s
+    - name: production
+      approval: manual
+      strategy:
+        type: canary
+        steps: [10, 50, 100]
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看组织和项目
+kubectl get organizations,projects,components -A
+
+# 🟢 查看组件部署状态
+kubectl describe component payment-service
+
+# 🟡 触发重新部署
+kubectl annotate component payment-service openchoreo.io/redeploy=$(date +%s) --overwrite
+
+# 🟡 回滚到上一版本
+kubectl patch component payment-service --type=merge -p '{"spec":{"deployment":{"revision":"previous"}}}'
+
+# 🔴 删除组件（影响所有环境）
+kubectl delete component payment-service
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 组件构建失败 | Git 仓库不可达 | `kubectl describe component` | 检查 Git URL 和凭据 |
+| 部署超时 | 资源不足/镜像拉取失败 | `kubectl get events` | 检查节点资源和 imagePullSecrets |
+| 流水线卡住 | 审批未通过/健康检查失败 | `kubectl describe pipeline` | 手动审批/修复健康检查 |
+| 环境晋级失败 | OPA 策略拒绝 | `kubectl logs openchoreo-controller` | 检查策略规则 |
+| Portal 无法访问 | Ingress 配置错误 | `kubectl get ingress -n openchoreo-system` | 修复 Ingress 规则 |
+
+```
+排查流程:
+├── 构建失败
+│   ├── kubectl describe component → 查看 Build 状态
+│   ├── kubectl logs build-pod → 构建日志
+│   └── 确认 Git 仓库可访问、分支存在
+├── 部署异常
+│   ├── kubectl get pods → 检查 Pod 状态
+│   ├── kubectl describe deployment → 查看事件
+│   └── 检查资源配额和节点容量
+└── 流水线异常
+    ├── kubectl describe pipeline → 查看各阶段状态
+    └── kubectl logs controller → 查看编排错误
+```
+
+## 生产案例
+
+### 案例 1: 开发者自助部署效率提升
+
+- **场景**: 开发团队每次部署需要平台团队协助，等待时间 2-4h
+- **方案**: 部署 OpenChoreo，开发者通过 Portal 创建组件、触发部署；平台团队仅维护模板和策略
+- **效果**: 部署等待时间从 2-4h 缩短到 <5min，平台团队工单减少 80%
+
+### 案例 2: 多环境晋级合规治理
+
+- **场景**: 生产部署缺少审批流程，多次发生未经验证的代码上线
+- **方案**: 配置 Pipeline 三阶段(dev→staging→prod)；prod 阶段强制手动审批 + OPA 策略检查
+- **效果**: 生产事故率下降 60%，所有部署有完整审计记录
 
 ## 对比
 
-| 特性 | OpenChoreo | Backstage | KubeVela | Humanitec |
-|------|-----------|-----------|----------|-----------|
-| 类型 | IDP 平台 | IDP 框架 | 应用交付 | SaaS IDP |
-| GitOps | ✅ ArgoCD/Flux | ⚠️ 插件 | ✅ | ✅ |
-| 策略治理 | ✅ OPA | ⚠️ | ⚠️ | ✅ |
-| 开源 | ✅ | ✅ | ✅ | ❌ |
+| 特性 | OpenChoreo | Backstage | KubeVela | Humanitec | 适用场景 |
+|------|-----------|-----------|----------|-----------|----------|
+| 类型 | IDP 平台 | IDP 框架 | 应用交付 | SaaS IDP | 平台工程 |
+| GitOps | ✅ ArgoCD/Flux | ⚠️ 插件 | ✅ | ✅ | 持续交付 |
+| 策略治理 | ✅ OPA | ⚠️ | ⚠️ | ✅ | 合规 |
+| 开源 | ✅ | ✅ | ✅ | ❌ | 自主可控 |
+| 开发者门户 | ✅ | ✅ 核心 | ⚠️ | ✅ | 自助服务 |
 
 ## 参考链接
 

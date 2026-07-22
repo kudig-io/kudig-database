@@ -1,0 +1,211 @@
+{
+  "id": "2026-07-22-152932",
+  "generated_at": "2026-07-22T07:29:32.911028Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei",
+      "title": "项目概览：阿里云 CSI 驱动核心价值与定位",
+      "file": "1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu",
+      "title": "快速开始：编译构建与容器化部署",
+      "file": "2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor",
+      "title": "开发环境搭建与依赖管理（Go Modules / Vendor）",
+      "file": "3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi",
+      "title": "项目整体架构总览与核心组件关系",
+      "file": "4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu",
+      "title": "CSI 接口规范详解（Identity / Controller / Node 三组服务）",
+      "file": "5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md",
+      "section": "深度解析",
+      "group": "CSI 协议与 gRPC 通信",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-grpc-fu-wu-duan-shi-xian-yu-unix-socket-tong-xin-ji-zhi",
+      "title": "gRPC 服务端实现与 Unix Socket 通信机制",
+      "file": "6-grpc-fu-wu-duan-shi-xian-yu-unix-socket-tong-xin-ji-zhi.md",
+      "section": "深度解析",
+      "group": "CSI 协议与 gRPC 通信",
+      "level": "Advanced"
+    },
+    {
+      "slug": "7-csi-lib-utils-gong-ju-ku-yu-protobuf-xiao-xi-chu-li",
+      "title": "csi-lib-utils 工具库与 Protobuf 消息处理",
+      "file": "7-csi-lib-utils-gong-ju-ku-yu-protobuf-xiao-xi-chu-li.md",
+      "section": "深度解析",
+      "group": "CSI 协议与 gRPC 通信",
+      "level": "Advanced"
+    },
+    {
+      "slug": "8-yun-pan-cun-chu-ecs-block-storage-juan-sheng-ming-zhou-qi-guan-li",
+      "title": "云盘存储（ECS Block Storage）卷生命周期管理",
+      "file": "8-yun-pan-cun-chu-ecs-block-storage-juan-sheng-ming-zhou-qi-guan-li.md",
+      "section": "深度解析",
+      "group": "阿里云存储服务集成",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "9-nas-wen-jian-xi-tong-cun-chu-ji-cheng-yu-gua-zai",
+      "title": "NAS 文件系统存储集成与挂载",
+      "file": "9-nas-wen-jian-xi-tong-cun-chu-ji-cheng-yu-gua-zai.md",
+      "section": "深度解析",
+      "group": "阿里云存储服务集成",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "10-ens-bian-yuan-jie-dian-cun-chu-yu-eflo-dan-xing-wang-luo-gua-pei",
+      "title": "ENS 边缘节点存储与 Eflo 弹性网络适配",
+      "file": "10-ens-bian-yuan-jie-dian-cun-chu-yu-eflo-dan-xing-wang-luo-gua-pei.md",
+      "section": "深度解析",
+      "group": "阿里云存储服务集成",
+      "level": "Advanced"
+    },
+    {
+      "slug": "11-dfs-fen-bu-shi-wen-jian-xi-tong-dui-jie-yu-kuai-zhao-guan-li",
+      "title": "DFS 分布式文件系统对接与快照管理",
+      "file": "11-dfs-fen-bu-shi-wen-jian-xi-tong-dui-jie-yu-kuai-zhao-guan-li.md",
+      "section": "深度解析",
+      "group": "阿里云存储服务集成",
+      "level": "Advanced"
+    },
+    {
+      "slug": "12-ji-yu-client-go-de-kubernetes-api-ke-hu-duan-jiao-hu",
+      "title": "基于 client-go 的 Kubernetes API 客户端交互",
+      "file": "12-ji-yu-client-go-de-kubernetes-api-ke-hu-duan-jiao-hu.md",
+      "section": "深度解析",
+      "group": "Kubernetes 生态交互",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-storageclass-pv-pvc-kong-zhi-qi-gong-zuo-liu",
+      "title": "StorageClass、PV / PVC 控制器工作流",
+      "file": "13-storageclass-pv-pvc-kong-zhi-qi-gong-zuo-liu.md",
+      "section": "深度解析",
+      "group": "Kubernetes 生态交互",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-volumesnapshot-juan-kuai-zhao-kong-zhi-qi-yu-crd-ke-hu-duan",
+      "title": "VolumeSnapshot 卷快照控制器与 CRD 客户端",
+      "file": "14-volumesnapshot-juan-kuai-zhao-kong-zhi-qi-yu-crd-ke-hu-duan.md",
+      "section": "深度解析",
+      "group": "Kubernetes 生态交互",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-kubelet-volume-stats-yu-rong-liang-jian-kong-shang-bao",
+      "title": "Kubelet Volume Stats 与容量监控上报",
+      "file": "15-kubelet-volume-stats-yu-rong-liang-jian-kong-shang-bao.md",
+      "section": "深度解析",
+      "group": "Kubernetes 生态交互",
+      "level": "Advanced"
+    },
+    {
+      "slug": "16-mount-utils-wen-jian-xi-tong-gua-zai-yu-xie-zai-ji-zhi",
+      "title": "mount-utils 文件系统挂载与卸载机制",
+      "file": "16-mount-utils-wen-jian-xi-tong-gua-zai-yu-xie-zai-ji-zhi.md",
+      "section": "深度解析",
+      "group": "存储核心操作",
+      "level": "Advanced"
+    },
+    {
+      "slug": "17-juan-kuo-rong-volume-expansion-yu-wen-jian-xi-tong-diao-zheng",
+      "title": "卷扩容（Volume Expansion）与文件系统调整",
+      "file": "17-juan-kuo-rong-volume-expansion-yu-wen-jian-xi-tong-diao-zheng.md",
+      "section": "深度解析",
+      "group": "存储核心操作",
+      "level": "Advanced"
+    },
+    {
+      "slug": "18-wang-luo-pei-zhi-nftables-netlink-zai-csi-cha-jian-zhong-de-ying-yong",
+      "title": "网络配置：nftables / netlink 在 CSI 插件中的应用",
+      "file": "18-wang-luo-pei-zhi-nftables-netlink-zai-csi-cha-jian-zhong-de-ying-yong.md",
+      "section": "深度解析",
+      "group": "存储核心操作",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-a-li-yun-ping-zheng-guan-li-credentials-go-duo-chong-ren-zheng-fang-shi",
+      "title": "阿里云凭证管理（credentials-go 多种认证方式）",
+      "file": "19-a-li-yun-ping-zheng-guan-li-credentials-go-duo-chong-ren-zheng-fang-shi.md",
+      "section": "深度解析",
+      "group": "安全与认证",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-sts-lin-shi-ling-pai-yu-ram-jiao-se-quan-xian-kong-zhi",
+      "title": "STS 临时令牌与 RAM 角色权限控制",
+      "file": "20-sts-lin-shi-ling-pai-yu-ram-jiao-se-quan-xian-kong-zhi.md",
+      "section": "深度解析",
+      "group": "安全与认证",
+      "level": "Advanced"
+    },
+    {
+      "slug": "21-prometheus-zhi-biao-cai-ji-yu-bao-lu",
+      "title": "Prometheus 指标采集与暴露",
+      "file": "21-prometheus-zhi-biao-cai-ji-yu-bao-lu.md",
+      "section": "深度解析",
+      "group": "可观测性与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "22-klog-zap-opentelemetry-tong-ri-zhi-yu-lian-lu-zhui-zong",
+      "title": "klog / Zap / OpenTelemetry 统一日志与链路追踪",
+      "file": "22-klog-zap-opentelemetry-tong-ri-zhi-yu-lian-lu-zhui-zong.md",
+      "section": "深度解析",
+      "group": "可观测性与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-feature-gate-te-xing-kai-guan-yu-hui-du-fa-bu-guan-li",
+      "title": "Feature Gate 特性开关与灰度发布管理",
+      "file": "23-feature-gate-te-xing-kai-guan-yu-hui-du-fa-bu-guan-li.md",
+      "section": "深度解析",
+      "group": "可观测性与运维",
+      "level": "Advanced"
+    },
+    {
+      "slug": "24-cobra-ming-ling-xing-kuang-jia-yu-duo-zi-ming-ling-jia-gou-she-ji",
+      "title": "Cobra 命令行框架与多子命令架构设计",
+      "file": "24-cobra-ming-ling-xing-kuang-jia-yu-duo-zi-ming-ling-jia-gou-she-ji.md",
+      "section": "深度解析",
+      "group": "工程实践",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-ce-shi-ti-xi-testify-duan-yan-yu-gomock-mo-ni-kuang-jia",
+      "title": "测试体系：testify 断言与 gomock 模拟框架",
+      "file": "25-ce-shi-ti-xi-testify-duan-yan-yu-gomock-mo-ni-kuang-jia.md",
+      "section": "深度解析",
+      "group": "工程实践",
+      "level": "Beginner"
+    },
+    {
+      "slug": "26-vendor-yi-lai-suo-ding-yu-go-ban-ben-jian-rong-xing-ce-lue",
+      "title": "vendor 依赖锁定与 Go 版本兼容性策略",
+      "file": "26-vendor-yi-lai-suo-ding-yu-go-ban-ben-jian-rong-xing-ce-lue.md",
+      "section": "深度解析",
+      "group": "工程实践",
+      "level": "Advanced"
+    }
+  ]
+}

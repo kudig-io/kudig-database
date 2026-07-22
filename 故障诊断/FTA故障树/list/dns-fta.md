@@ -74,6 +74,93 @@ base_confidence: 0.7
 | UP2 | 上游超时/丢包 | `kubectl logs
 ...(截断)
 
+## 生产案例
+
+### 案例1: CoreDNS OOMKilled 导致全集群 DNS 解析失败
+
+**时间线**:
+- 10:30 业务上线大量 Service，DNS 查询量激增 3x
+- 10:35 CoreDNS Pod 内存超过 170Mi limit，触发 OOMKilled
+- 10:35-10:38 所有 Pod 内 DNS 解析超时，服务间调用失败
+- 10:38 CoreDNS 重启，但缓存冷启动导致延迟高
+- 10:45 完全恢复
+
+**根因链**:
+```
+Service数量激增 → DNS查询量超过缓存容量 → 内存持续增长
+→ 超过memory limit → OOMKilled → 全集群DNS中断
+```
+
+**修复**:
+```bash
+# 🟡 调高 CoreDNS 内存限制
+kubectl patch deployment coredns -n kube-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"coredns","resources":{"limits":{"memory":"512Mi"},"requests":{"memory":"256Mi"}}}]}}}}'
+# 🟢 验证 CoreDNS 状态
+kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+```
+
+### 案例2: ndots 配置导致外部域名解析慢
+
+**现象**: Pod 内访问外部 API 延迟 5-10s，`nslookup api.external.com` 正常但应用内 HTTP 调用慢
+
+**根因**: `/etc/resolv.conf` 中 `ndots:5`，外部域名先尝试 5 个 search domain 后缀才回退到绝对解析
+
+**修复**:
+```yaml
+# 🟡 Pod DNS 策略优化
+spec:
+  dnsConfig:
+    options:
+    - name: ndots
+      value: "2"
+    - name: single-request-reopen
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: dns-alerts
+  rules:
+  - alert: CoreDNSDown
+    expr: up{job="coredns"} == 0
+    for: 1m
+    labels:
+      severity: critical
+  - alert: CoreDNSHighLatency
+    expr: histogram_quantile(0.99, rate(coredns_dns_request_duration_seconds_bucket[5m])) > 0.5
+    for: 5m
+    labels:
+      severity: warning
+  - alert: CoreDNSMemoryHigh
+    expr: container_memory_working_set_bytes{container="coredns"} / container_spec_memory_limit_bytes{container="coredns"} > 0.85
+    for: 5m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| CoreDNS 多副本 + 反亲和 | 至少 2 副本分布在不同节点 | P0 |
+| 内存限制充足 | 根据 Service 数量调整，建议 512Mi+ | P0 |
+| NodeLocal DNSCache | 节点级缓存减少 CoreDNS 压力 | P1 |
+| ndots 优化 | 外部调用多的 Pod 设置 ndots:2 | P1 |
+
+## 面试要点
+
+1. **Q: K8s 集群 DNS 解析的完整链路？**
+   A: Pod /etc/resolv.conf → NodeLocal DNS(如有) → CoreDNS Service(ClusterIP) → CoreDNS Pod → 集群内直接解析 / 外部 forward 到上游 DNS
+
+2. **Q: CoreDNS 性能优化方案？**
+   A: 启用 NodeLocal DNSCache → 调整副本数(autoscaler) → 优化 forward 策略 → 启用 autopath 插件 → 合理设置缓存 TTL
+
+3. **Q: DNS 解析慢的排查步骤？**
+   A: 确认 ndots/search domain 配置 → 检查 CoreDNS 负载 → 查看上游 DNS 延迟 → 确认网络连通性(UDP 53) → 检查 conntrack 表
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

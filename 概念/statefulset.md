@@ -177,6 +177,110 @@ kubectl delete sts postgres --cascade=orphan
 - **更新慢**：默认 OrderedReady 逐个串行，30 副本更新非常慢，用 partition + Parallel 优化。
 - **PVC 存储类不支持动态扩容**：`allowVolumeExpansion: false` 的 StorageClass 无法 resize PVC。
 
+## 源码实现分析
+
+### StatefulSet Controller 有序管理
+
+```go
+// k8s.io/kubernetes/pkg/controller/stateful/stateful_set_control.go
+// StatefulSet 核心控制逻辑
+func (ssc *defaultStatefulSetControl) UpdateStatefulSet(ctx context.Context, set *apps.StatefulSet, pods []*v1.Pod) (*apps.StatefulSetStatus, error) {
+    // 1. 按序号排序 Pod（pod-0, pod-1, pod-2...）
+    replicas := getOrdinalReplicas(set)
+    
+    // 2. 扩容：按序号递增创建（0→1→2）
+    for i := len(pods); i < replicas; i++ {
+        ssc.createPod(ctx, set, i)
+        // 等待 Pod Ready 后才创建下一个
+        if !isRunningAndReady(pods[i]) { return } // 阻塞等待
+    }
+    
+    // 3. 缩容：按序号递减删除（N→N-1→...）
+    for i := len(pods) - 1; i >= replicas; i-- {
+        ssc.deletePod(ctx, set, pods[i])
+        // 等待 Pod 完全删除后才继续
+    }
+    
+    // 4. 更新：RollingUpdate 从最大序号开始（N→N-1→...→0）
+    if updateStrategy.Type == apps.RollingUpdateStatefulSetStrategyType {
+        for i := len(pods) - 1; i >= partition; i-- {
+            ssc.updatePod(ctx, set, pods[i])
+            // 等待新 Pod Ready 后才更新下一个
+        }
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     StatefulSet 有序管理模型                        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  扩容 (replicas: 2→4):                                 │
+│    pod-0 ✓ → pod-1 ✓ → pod-2 (create) → pod-3 (create)│
+│    严格顺序，前一个 Ready 才创建下一个              │
+│                                                         │
+│  缩容 (replicas: 4→2):                                 │
+│    pod-3 (delete) → pod-2 (delete) → pod-1 ✓ → pod-0 ✓│
+│    严格逆序，前一个删除完才删下一个              │
+│                                                         │
+│  更新 (RollingUpdate, partition=0):                    │
+│    pod-3 (update) → pod-2 (update) → pod-1 → pod-0    │
+│    从最大序号开始，保证主节点最后更新              │
+│                                                         │
+│  稳定标识: pod-0 永远是 pod-0，不会变              │
+│  稳定存储: PVC 与 Pod 序号绑定，重建后重新挂载    │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：StatefulSet 故障诊断
+
+```bash
+# 🟢 检查 StatefulSet 状态
+kubectl get statefulset -A
+kubectl describe statefulset <name> -n <ns>
+
+# 🟢 检查 Pod 序号和状态
+kubectl get pods -n <ns> -l app=<app> -o wide
+
+# 🟡 强制删除卡住的 Pod（PVC 保留）
+kubectl delete pod <name>-0 -n <ns> --force --grace-period=0
+# 🔴 强制删除有状态 Pod 可能导致数据不一致
+
+# 🟢 检查 PVC 状态
+kubectl get pvc -n <ns> -l app=<app>
+
+# 🟡 使用 partition 控制更新范围（金丝雀更新）
+kubectl patch statefulset <name> -n <ns> -p \
+  '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
+# 只更新 pod-2 及以上，pod-0/1 保持旧版本
+```
+
+## 面试要点
+
+1. **StatefulSet 与 Deployment 的核心区别？**
+   - 稳定网络标识：pod-0 永远是 pod-0（Headless Service + hostname）
+   - 稳定存储：PVC 与 Pod 序号绑定，重建后重新挂载同一 PVC
+   - 有序操作：扩容顺序、缩容逆序、更新从大到小
+   - Deployment 的 Pod 是无状态可互换的
+
+2. **StatefulSet 的更新策略有哪些？**
+   - RollingUpdate：从最大序号开始逐个更新（默认）
+   - OnDelete：手动删除 Pod 才触发更新
+   - partition：只更新序号 ≥ partition 的 Pod（金丝雀）
+   - 生产建议：数据库用 partition 先更新从节点
+
+3. **为什么 StatefulSet 需要 Headless Service？**
+   - 提供稳定的 DNS：pod-0.svc.ns.svc.cluster.local
+   - 每个 Pod 有独立 DNS 记录，而非 ClusterIP 负载均衡
+   - 有状态应用需要直接访问特定 Pod（如 MySQL 主从）
+
+4. **StatefulSet 缩容时 PVC 会怎样？**
+   - 默认保留！缩容删除 Pod 但不删除 PVC
+   - 数据保留，扩容时重新挂载
+   - 需要手动清理或设置 persistentVolumeClaimRetentionPolicy
+   - 生产注意：缩容后 PVC 仍占用存储费用
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

@@ -80,45 +80,128 @@ WasmEdge 通过 containerd 的 runwasi shim 与 Kubernetes 集成。节点上安
 3. **微服务轻量化**: 将高频短任务从容器迁移到 Wasm，减少镜像拉取和启动开销
 4. **安全沙箱执行**: 利用 Wasm 内存安全特性运行不可信代码（如用户脚本）
 
-## 安装
+## 安装与配置
+
+### 独立安装
 
 ```bash
 # 安装 WasmEdge
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+source ~/.bashrc
+
+# 验证安装
+wasmedge --version
 
 # AOT 编译优化
 wasmedgec app.wasm app_aot.wasm
 
 # 运行 Wasm 应用
 wasmedge app.wasm
+```
 
-# 在 Kubernetes 中使用 WasmEdge（通过 Kwasm）
+### Kubernetes 集成（Kwasm）
+
+```bash
+# 安装 Kwasm Operator
 helm repo add kwasm http://kwasm.sh/kwasm-operator/
 helm install kwasm kwasm/kwasm-operator -n kwasm --create-namespace
+
+# 标记节点支持 Wasm
 kubectl annotate node <node-name> kwasm.sh/kwasm-node=true
 
-# 创建 Wasm Pod
-kubectl apply -f - <<EOF
+# 验证 RuntimeClass
+kubectl get runtimeclass wasmedge
+```
+
+### Wasm Pod 配置
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
   name: wasm-app
+  annotations:
+    module.wasm.image/variant: compat-smart
 spec:
   runtimeClassName: wasmedge
   containers:
   - name: app
     image: wasmregistry/wasmedge-http-server:latest
-EOF
+    ports:
+    - containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Wasm Pod 状态
+kubectl get pod wasm-app -o wide
+kubectl logs wasm-app
+
+# 🟢 测试 Wasm 服务
+curl http://wasm-app:8080
+
+# 🟡 部署新的 Wasm 应用
+kubectl apply -f wasm-app.yaml
+
+# 🔴 删除 Wasm Pod
+kubectl delete pod wasm-app
+
+# 🔴 移除节点 Wasm 支持
+kubectl annotate node <node-name> kwasm.sh/kwasm-node-
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 创建失败: runtime not found | RuntimeClass 未创建 | `kubectl get runtimeclass` | 检查 Kwasm Operator |
+| Wasm 模块加载失败 | 镜像格式错误 | `kubectl describe pod wasm-app` | 确认镜像为 Wasm 格式 |
+| 性能不佳 | 未使用 AOT 编译 | 检查镜像构建方式 | 使用 wasmedgec AOT 编译 |
+| 节点不支持 | 未标记节点 | `kubectl get node <node> -o yaml` | 添加 kwasm annotation |
+
+**排查流程：**
+```
+Wasm Pod 启动失败
+├── 检查 RuntimeClass → kubectl get runtimeclass wasmedge
+├── 检查节点标记 → kubectl get node <node> --show-labels
+├── 检查 Kwasm Operator → kubectl get pods -n kwasm
+├── 检查镜像格式 → crictl inspecti <image>
+└── 查看 Pod 事件 → kubectl describe pod wasm-app
+```
+
+## 生产案例
+
+### 案例一：边缘 AI 推理
+
+- **场景**: 边缘设备运行量化 LLM，资源受限
+- **排查**: WasmEdge + WASI NN 支持在边缘运行量化模型
+- **方案**: 使用 WasmEdge 运行 Llama 2 量化版，内存占用 < 1GB
+- **效果**: 边缘推理延迟 < 200ms，无需 GPU
+
+### 案例二：Serverless 函数极速启动
+
+- **场景**: FaaS 平台需要毫秒级冷启动
+- **排查**: 容器冷启动 100ms+，Wasm < 1ms
+- **方案**: 将高频函数迁移到 WasmEdge，容器用于复杂服务
+- **效果**: 冷启动从 100ms 降至 < 1ms，资源占用降低 90%
 
 ## 对比
 
-| 特性 | WasmEdge | Wasmer | Wasmtime | Lucet |
-|------|----------|--------|----------|-------|
-| AOT 编译 | ✅ | ⚠️ | ✅ | ✅ |
-| 冷启动 | <1ms | ~1ms | ~1ms | <1ms |
-| K8s 集成 | ✅ containerd | ⚠️ | ⚠️ | ❌ |
-| LLM 推理 | ✅ WASI NN | ❌ | ❌ | ❌ |
+| 特性 | WasmEdge | Wasmer | Wasmtime | Lucet | 适用场景 |
+|------|----------|--------|----------|-------|----------|
+| AOT 编译 | ✅ | ⚠️ | ✅ | ✅ | - |
+| 冷启动 | <1ms | ~1ms | ~1ms | <1ms | - |
+| K8s 集成 | ✅ containerd | ⚠️ | ⚠️ | ❌ | WasmEdge 最佳 |
+| LLM 推理 | ✅ WASI NN | ❌ | ❌ | ❌ | AI 场景 |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF | - |
 
 ## 架构定位
 

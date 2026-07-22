@@ -78,7 +78,7 @@ OpenTofu 通过 Kubernetes Provider 与 Kubernetes 集群集成。可以在 HCL 
 3. **多环境基础设施**: 通过 module 和 tfvars 实现 dev/staging/prod 的基础设施差异管理
 4. **GitOps IaC**: 在 CI/CD 中运行 OpenTofu plan/apply，实现基础设施的版本控制和自动化
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 OpenTofu
@@ -139,6 +139,107 @@ tofu plan
 # 应用变更
 tofu apply
 ```
+
+### 远程状态后端
+
+```hcl
+# backend.tf - S3 后端
+terraform {
+  backend "s3" {
+    bucket         = "opentofu-state"
+    key            = "production/k8s/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "opentofu-locks"
+    encrypt        = true
+  }
+}
+
+# 或使用 Kubernetes Secret 后端
+terraform {
+  backend "kubernetes" {
+    secret_suffix    = "opentofu-state"
+    namespace        = "opentofu-system"
+    in_cluster_config = true
+  }
+}
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看当前状态
+tofu show
+tofu state list
+tofu output
+
+# 🟢 预览变更（不执行）
+tofu plan -out=plan.tfplan
+tofu show -json plan.tfplan | jq '.resource_changes[]'
+
+# 🟡 应用变更
+tofu apply plan.tfplan
+tofu apply -target=kubernetes_deployment.example
+
+# 🟡 导入已有资源
+tofu import kubernetes_namespace.example my-app
+
+# 🟡 移除状态中的资源（不删除实际资源）
+tofu state rm kubernetes_deployment.example
+
+# 🔴 销毁所有资源
+tofu destroy
+
+# 🔴 强制解锁状态
+tofu force-unlock <lock-id>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| State lock 冲突 | 并发执行/上次崩溃 | `tofu force-unlock <id>` | 确认无并发后解锁 |
+| Provider 下载失败 | 网络/Registry 不可达 | `tofu init -upgrade` | 配置镜像源/代理 |
+| Plan 显示意外删除 | 状态与实际不一致 | `tofu refresh` | 先 refresh 再 plan |
+| Apply 超时 | API Server 响应慢 | `kubectl get --raw /healthz` | 检查集群健康 |
+| 状态文件损坏 | 存储后端异常 | `tofu state pull > backup.json` | 从备份恢复 |
+
+```
+排查流程:
+├── 初始化失败
+│   ├── tofu init -upgrade → 重新下载 Provider
+│   ├── 检查网络/代理 → Registry 可达性
+│   └── 检查 .terraform.lock.hcl → 版本锁定
+├── 状态异常
+│   ├── tofu state list → 当前状态资源
+│   ├── tofu refresh → 同步实际状态
+│   └── tofu state pull → 导出状态备份
+└── Apply 失败
+    ├── tofu plan -detailed-exitcode → 变更预览
+    ├── kubectl get events → K8s 事件
+    └── 检查 RBAC → Provider 权限
+```
+
+## 生产案例
+
+### 案例1: 状态文件并发写入导致损坏
+
+- **场景**: 两个 CI Job 同时执行 `tofu apply`，状态文件写入冲突导致 JSON 损坏
+- **排查**: `tofu plan` 报错 "state file is corrupt"，无法解析
+- **方案**:
+  1. 从 S3 版本控制恢复上一版状态文件
+  2. 配置 DynamoDB 状态锁防止并发
+  3. CI/CD 添加 `concurrency` 限制确保串行执行
+- **效果**: 状态损坏事故归零，并发安全得到保障
+
+### 案例2: 从 Terraform 迁移至 OpenTofu
+
+- **场景**: Terraform BSL 许可证变更，公司要求迁移至开源替代方案
+- **排查**: 评估 200+ 模块的兼容性，确认 Provider 生态支持
+- **方案**:
+  1. `tofu init` 直接读取现有 .tf 文件和状态
+  2. CI/CD 中 `terraform` 命令替换为 `tofu`
+  3. 状态后端保持不变（S3 + DynamoDB）
+- **效果**: 200+ 模块 2 周内完成迁移，零功能损失
 
 ## 对比
 

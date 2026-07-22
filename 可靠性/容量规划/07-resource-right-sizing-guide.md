@@ -162,6 +162,333 @@ kubectl describe vpa api-vpa | grep -A5 Recommendation
 3. **limits = requests**：看似"精确"，实际是放弃了 burst 缓冲，瞬时峰值就 OOM。
 4. **调一次就不管**：负载会漂移，右调优是持续工程，不是一次性项目。
 
+## 自动化右调优脚本
+
+### 批量采集 VPA 建议
+
+```bash
+#!/bin/bash
+# 🟢 低风险：批量采集 VPA 建议
+set -euo pipefail
+
+NAMESPACE=${1:-production}
+OUTPUT_FILE="/tmp/vpa-recommendations-$(date +%Y%m%d).csv"
+
+echo "=== 采集 VPA 建议: $NAMESPACE ==="
+
+echo "Deployment,Current_CPU,Recommended_CPU,Current_Memory,Recommended_Memory,CPU_Savings,Memory_Savings" > $OUTPUT_FILE
+
+# 获取所有 Deployment
+for deploy in $(kubectl get deploy -n $NAMESPACE -o name | cut -d'/' -f2); do
+  # 获取当前配置
+  CURRENT_CPU=$(kubectl get deploy $deploy -n $NAMESPACE -o jsonpath='{.spec.template.spec.containers[0].resources.requests.cpu}')
+  CURRENT_MEM=$(kubectl get deploy $deploy -n $NAMESPACE -o jsonpath='{.spec.template.spec.containers[0].resources.requests.memory}')
+  
+  # 获取 VPA 建议
+  VPA_NAME="${deploy}-vpa"
+  REC_CPU=$(kubectl get vpa $VPA_NAME -n $NAMESPACE -o jsonpath='{.status.recommendation.containerRecommendations[0].target.cpu}' 2>/dev/null || echo "N/A")
+  REC_MEM=$(kubectl get vpa $VPA_NAME -n $NAMESPACE -o jsonpath='{.status.recommendation.containerRecommendations[0].target.memory}' 2>/dev/null || echo "N/A")
+  
+  # 计算节省 (简化计算)
+  CPU_SAVINGS="N/A"
+  MEM_SAVINGS="N/A"
+  
+  echo "$deploy,$CURRENT_CPU,$REC_CPU,$CURRENT_MEM,$REC_MEM,$CPU_SAVINGS,$MEM_SAVINGS" >> $OUTPUT_FILE
+done
+
+echo "=== 采集完成: $OUTPUT_FILE ==="
+cat $OUTPUT_FILE
+```
+
+### 自动生成调整 PR
+
+```bash
+#!/bin/bash
+# 🟡 中风险：自动生成资源调整 PR
+set -euo pipefail
+
+NAMESPACE=${1:-production}
+GIT_REPO=${2:-"git@github.com:org/k8s-configs.git"}
+
+echo "=== 生成资源调整 PR ==="
+
+# 1. 克隆仓库
+TEMP_DIR=$(mktemp -d)
+git clone $GIT_REPO $TEMP_DIR
+cd $TEMP_DIR
+
+# 2. 创建分支
+git checkout -b right-sizing-$(date +%Y%m%d)
+
+# 3. 遍历 VPA 建议
+for vpa in $(kubectl get vpa -n $NAMESPACE -o name | cut -d'/' -f2); do
+  DEPLOY=$(kubectl get vpa $vpa -n $NAMESPACE -o jsonpath='{.spec.targetRef.name}')
+  REC_CPU=$(kubectl get vpa $vpa -n $NAMESPACE -o jsonpath='{.status.recommendation.containerRecommendations[0].target.cpu}')
+  REC_MEM=$(kubectl get vpa $vpa -n $NAMESPACE -o jsonpath='{.status.recommendation.containerRecommendations[0].target.memory}')
+  
+  if [ -n "$REC_CPU" ] && [ -n "$REC_MEM" ]; then
+    echo "调整 $DEPLOY: CPU=$REC_CPU, Memory=$REC_MEM"
+    # 使用 yq 或 sed 修改 YAML 文件
+    # yq -i ".spec.template.spec.containers[0].resources.requests.cpu = \"$REC_CPU\"" deployments/$DEPLOY.yaml
+    # yq -i ".spec.template.spec.containers[0].resources.requests.memory = \"$REC_MEM\"" deployments/$DEPLOY.yaml
+  fi
+done
+
+# 4. 提交并创建 PR
+git add .
+git commit -m "chore: right-sizing resource requests based on VPA recommendations"
+git push origin right-sizing-$(date +%Y%m%d)
+
+# 5. 创建 PR (使用 gh CLI)
+gh pr create --title "Right-sizing resource requests" --body "基于 VPA 建议自动生成的资源调整"
+
+echo "=== PR 创建完成 ==="
+```
+
+## 成本节省报告
+
+### 月度报告生成
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生成成本节省报告
+set -euo pipefail
+
+REPORT_DATE=$(date +%Y-%m)
+OUTPUT_FILE="/tmp/cost-savings-report-$REPORT_DATE.md"
+
+echo "=== 生成成本节省报告 ==="
+
+cat > $OUTPUT_FILE <<EOF
+# 资源右调优成本节省报告
+
+**报告月份**: $REPORT_DATE
+**生成时间**: $(date)
+
+## 总体节省
+
+| 指标 | 调优前 | 调优后 | 节省 |
+|-----|-------|-------|------|
+| CPU 请求总量 | 100 cores | 65 cores | 35% |
+| 内存请求总量 | 200 Gi | 140 Gi | 30% |
+| 月度成本 | ¥50,000 | ¥35,000 | ¥15,000 |
+
+## 服务级别明细
+
+| 服务 | CPU 节省 | 内存节省 | 月度节省 |
+|-----|---------|---------|----------|
+| api-gateway | 40% | 35% | ¥3,000 |
+| order-service | 30% | 25% | ¥2,500 |
+| user-service | 45% | 40% | ¥2,000 |
+
+## 建议
+
+1. 继续监控调优后的服务稳定性
+2. 下个月重点关注新上线服务
+3. 考虑将节省的预算用于混沌工程实验
+
+---
+*本报告由自动化脚本生成*
+EOF
+
+echo "报告已生成: $OUTPUT_FILE"
+cat $OUTPUT_FILE
+```
+
+## 多环境策略
+
+### 环境差异化配置
+
+| 环境 | 策略 | CPU 建议 | 内存 建议 |
+|-----|------|---------|----------|
+| **Development** | 激进节省 | P50 用量 | P50 用量 |
+| **Staging** | 平衡 | P90 用量 | P90 用量 |
+| **Production** | 保守稳定 | P99 用量 + 20% buffer | P99 用量 + 30% buffer |
+
+### 环境特定 VPA 配置
+
+```yaml
+# Production VPA - 保守策略
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: api-vpa-prod
+  namespace: production
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api
+  updatePolicy:
+    updateMode: "Off"  # 仅推荐
+  resourcePolicy:
+    containerPolicies:
+      - containerName: '*'
+        controlledResources: ["cpu", "memory"]
+        minAllowed:
+          cpu: 100m
+          memory: 128Mi
+        maxAllowed:
+          cpu: 8
+          memory: 16Gi
+---
+# Staging VPA - 平衡策略
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: api-vpa-staging
+  namespace: staging
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api
+  updatePolicy:
+    updateMode: "Auto"  # 自动调整
+  resourcePolicy:
+    containerPolicies:
+      - containerName: '*'
+        controlledResources: ["cpu", "memory"]
+```
+
+## 特殊工作负载处理
+
+### 批处理作业
+
+```yaml
+# 批处理作业使用固定资源，不用 VPA
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-processing
+spec:
+  template:
+    spec:
+      containers:
+        - name: processor
+          image: data-processor:latest
+          resources:
+            requests:
+              cpu: 2
+              memory: 4Gi
+            limits:
+              cpu: 4
+              memory: 8Gi
+      restartPolicy: OnFailure
+```
+
+### 有状态服务 (StatefulSet)
+
+```yaml
+# 数据库等 StatefulSet 需要更保守的配置
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  template:
+    spec:
+      containers:
+        - name: postgres
+          resources:
+            requests:
+              cpu: 2
+              memory: 8Gi
+            limits:
+              # 数据库不建议设 CPU limit
+              memory: 16Gi
+```
+
+### GPU 工作负载
+
+```yaml
+# GPU 工作负载的资源配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-inference
+spec:
+  template:
+    spec:
+      containers:
+        - name: inference
+          image: ml-inference:latest
+          resources:
+            requests:
+              cpu: 4
+              memory: 16Gi
+              nvidia.com/gpu: 1
+            limits:
+              cpu: 8
+              memory: 32Gi
+              nvidia.com/gpu: 1
+```
+
+## 监控与告警
+
+### PrometheusRule 资源告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: resource-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: resource.rules
+      rules:
+        # CPU 使用率过高
+        - alert: ContainerCPUHigh
+          expr: |
+            rate(container_cpu_usage_seconds_total{container!="POD",container!=""}[5m])
+            /
+            kube_pod_container_resource_requests{resource="cpu"}
+            > 0.9
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "容器 {{ $labels.container }} CPU 使用率超过 90%"
+
+        # 内存使用率过高
+        - alert: ContainerMemoryHigh
+          expr: |
+            container_memory_working_set_bytes{container!="POD",container!=""}
+            /
+            kube_pod_container_resource_requests{resource="memory"}
+            > 0.9
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "容器 {{ $labels.container }} 内存使用率超过 90%"
+
+        # OOMKilled 频繁
+        - alert: ContainerOOMKilled
+          expr: |
+            increase(kube_pod_container_status_terminated_reason{reason="OOMKilled"}[1h]) > 0
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: "容器 {{ $labels.container }} 发生 OOMKilled"
+
+        # 资源请求与实际使用偏差过大
+        - alert: ResourceRequestMismatch
+          expr: |
+            abs(
+              kube_pod_container_resource_requests{resource="cpu"}
+              -
+              rate(container_cpu_usage_seconds_total[1h])
+            ) / kube_pod_container_resource_requests{resource="cpu"} > 0.5
+          for: 24h
+          labels:
+            severity: info
+          annotations:
+            summary: "容器 {{ $labels.container }} CPU 请求与实际使用偏差超过 50%，建议右调优"
+```
+
 ## 相关
 
 - [[可靠性/容量规划/06-autoscaling-best-practices.md|06 autoscaling best practices]]

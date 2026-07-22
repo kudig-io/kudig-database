@@ -78,15 +78,23 @@ Stacker 构建的 OCI 镜像与标准 Kubernetes 完全兼容。也特别适合�
 3. **嵌入式/WASM 构建**：跨平台镜像构建（ARM/RISC-V/WASM）
 4. **供应链安全**：内容寻址 + 签名，确保镜像供应链可审计
 
-## 安装
+## 安装与配置
+
+### CLI 安装
 
 ```bash
 # 下载 stacker 二进制
 wget https://github.com/project-stacker/stacker/releases/latest/download/stacker-linux-amd64
 chmod +x stacker-linux-amd64 && sudo mv stacker-linux-amd64 /usr/local/bin/stacker
 
-# 创建 stacker.yaml
-cat > stacker.yaml <<EOF
+# 验证安装
+stacker --version
+```
+
+### stacker.yaml 配置
+
+```yaml
+# stacker.yaml - 多阶段构建
 build-env:
   build-only: true
   from:
@@ -108,22 +116,86 @@ myapp:
   run: |
     chmod +x /usr/bin/myapp
   entrypoint: ["/usr/bin/myapp"]
-EOF
+  labels:
+    org.opencontainers.image.source: "https://github.com/example/myapp"
+```
 
+### 构建与发布
+
+```bash
 # 构建镜像（非特权模式）
 stacker build
+
+# 查看构建结果
+stacker inspect myapp
+
 # 推送到 OCI Registry
 stacker publish --url docker://registry.example.com --tag latest
+
+# 清理构建缓存
+stacker clean
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看构建历史
+stacker inspect <layer-name>
+
+# 🟡 重新构建（无缓存）
+stacker build --no-cache
+
+# 🟡 发布到指定 Registry
+stacker publish --url docker://harbor.example.com/project --tag v1.0.0
+
+# 🔴 清理所有构建产物
+stacker clean --all
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 构建失败: import not found | 导入路径错误 | 检查 stacker.yaml import 配置 | 修正 path 和 dest |
+| 发布失败: unauthorized | Registry 认证失败 | `stacker login registry.example.com` | 重新登录 |
+| 构建慢 | 缓存未命中 | `stacker build --no-cache` 对比 | 优化 layer 顺序 |
+| Overlay 挂载失败 | 内核不支持 | `lsmod \| grep overlay` | 加载 overlay 内核模块 |
+
+**排查流程：**
+```
+构建失败
+├── 检查 stacker.yaml 语法 → stacker build --dry-run
+├── 检查导入文件 → ls ./src
+├── 检查基础镜像 → stacker inspect build-env
+├── 检查磁盘空间 → df -h
+└── 检查内核支持 → lsmod | grep overlay
+```
+
+## 生产案例
+
+### 案例一：CI/CD 非特权构建
+
+- **场景**: K8s CI 流水线中构建镜像，不能使用特权容器
+- **排查**: Docker-in-Docker 需要特权，存在安全风险
+- **方案**: 使用 stacker 非特权构建，在普通 Pod 中完成镜像构建
+- **效果**: 无需特权容器，构建安全性提升，符合零信任架构
+
+### 案例二：可重现构建
+
+- **场景**: 合规要求镜像构建可重现、可审计
+- **排查**: stacker.yaml 声明式配置 + 内容寻址，确保构建可重现
+- **方案**: stacker.yaml 纳入 Git 管理，每次构建生成可审计的 layer 链
+- **效果**: 满足供应链安全要求，任何构建可完整重现
 
 ## 对比
 
-| 特性 | Stacker | Dockerfile/BuildKit | Kaniko | ko |
-|------|---------|---------------------|--------|-----|
-| 非 root 构建 | ✅ | ❌ 需 daemon | ✅ | ✅ |
-| 声明式 YAML | ✅ stacker.yaml | ✅ Dockerfile | ❌ | ❌ |
-| Overlay 构建 | ✅ | ✅ | ✅ | ❌ |
-| K8s 友好 | ✅ 非特权 | ⚠️ | ✅ | ✅ |
+| 特性 | Stacker | Dockerfile/BuildKit | Kaniko | ko | 适用场景 |
+|------|---------|---------------------|--------|-----|----------|
+| 非 root 构建 | ✅ | ❌ 需 daemon | ✅ | ✅ | Stacker/Kaniko |
+| 声明式 YAML | ✅ stacker.yaml | ✅ Dockerfile | ❌ | ❌ | - |
+| Overlay 构建 | ✅ | ✅ | ✅ | ❌ | - |
+| K8s 友好 | ✅ 非特权 | ⚠️ | ✅ | ✅ | - |
+| 多阶段构建 | ✅ | ✅ | ✅ | ⚠️ | - |
 
 ## 参考链接
 

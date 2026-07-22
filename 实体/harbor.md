@@ -82,6 +82,99 @@ helm install harbor harbor/harbor \
   --set persistence.persistentVolumeClaim.registry.size=100Gi
 ```
 
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 Harbor Pod
+kubectl get pods -n harbor
+
+# 🟢 查看 Harbor 日志
+kubectl logs -n harbor -l app=harbor,component=core --tail=50
+
+# 🟢 Docker 登录 Harbor
+docker login harbor.example.com -u admin -p <password>
+
+# 🟢 推送镜像
+docker tag myapp:v1 harbor.example.com/project/myapp:v1
+docker push harbor.example.com/project/myapp:v1
+
+# 🟢 拉取镜像
+docker pull harbor.example.com/project/myapp:v1
+
+# 🟢 Helm Chart 推送
+helm push mychart-0.1.0.tgz oci://harbor.example.com/charts
+
+# 🟢 查看项目 (API)
+curl -u admin:<password> https://harbor.example.com/api/v2.0/projects
+
+# 🟢 查看镜像标签 (API)
+curl -u admin:<password> https://harbor.example.com/api/v2.0/projects/library/repositories/myapp/artifacts
+
+# 🟡 触发扫描 (API)
+curl -X POST -u admin:<password> https://harbor.example.com/api/v2.0/projects/library/repositories/myapp/artifacts/v1/scan
+```
+
+### K8s ImagePullSecret 配置
+
+```yaml
+# 创建 Docker Registry Secret
+kubectl create secret docker-registry harbor-creds \
+  --docker-server=harbor.example.com \
+  --docker-username=robot$pull \
+  --docker-password=<token> \
+  -n default
+---
+# 在 Pod 中使用
+spec:
+  imagePullSecrets:
+  - name: harbor-creds
+  containers:
+  - name: app
+    image: harbor.example.com/project/myapp:v1
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 推送失败 401 | 认证失败 | 检查用户名/密码/Robot 账户 |
+| 拉取失败 | ImagePullSecret 缺失 | 配置 imagePullSecrets |
+| 磁盘空间不足 | 镜像堆积 | 配置 GC 策略 |
+| 扫描失败 | Trivy 更新失败 | 检查网络/离线库 |
+| 复制失败 | 目标不可达 | 检查网络和凭据 |
+| 性能下降 | 并发拉取高 | 扩容/使用 CDN |
+
+### 垃圾回收 (GC)
+
+```bash
+# 通过 API 触发 GC
+curl -X POST -u admin:<password> \
+  -H "Content-Type: application/json" \
+  -d '{"schedule":{"type":"Weekly","cron":"0 0 * * 6"},"parameters":{"delete_untagged":true}}' \
+  https://harbor.example.com/api/v2.0/system/gc/schedule
+```
+
+## 生产最佳实践
+
+1. **使用 Robot 账户** - CI/CD 拉取/推送用 Robot，不用 admin
+2. **启用镜像签名** - Cosign 签名 + 准入控制验证
+3. **配置自动扫描** - 推送时自动扫描，阻断高危漏洞
+4. **定期 GC** - 清理未打标签的镜像
+5. **多副本复制** - 跨区域镜像同步
+6. **RBAC 最小权限** - 项目级权限控制
+7. **监控告警** - 磁盘、扫描状态、复制状态
+
+## 检查清单
+
+- [ ] 理解 Harbor 架构 (Core/Registry/JobService)
+- [ ] 掌握 Docker/Helm 推送拉取
+- [ ] 能配置 ImagePullSecret
+- [ ] 理解安全扫描和签名
+- [ ] 掌握故障排查流程
+- [ ] 了解 GC 和复制策略
+
 ## 替代方案
 
 | 项目 | 优势 | 劣势 |

@@ -77,7 +77,7 @@ Clusterpedia 的 API Server 实现 Kubernetes API 规范，因此可以配置为
 3. **资源清单汇总**：统计所有集群的 Deployment/Service 总数和分布
 4. **合规性检查**：查找缺少必要标签或安全配置的工作负载
 
-## 安装
+## 安装与配置
 
 ```bash
 # 使用 Helm 安装 Clusterpedia
@@ -106,14 +106,77 @@ kubectl config set-cluster clusterpedia --server=https://clusterpedia.clusterped
 kubectl --context=clusterpedia get pods --all-clusters
 ```
 
+## 运维操作
+
+```bash
+# 🟢 查看已注册集群
+kubectl get pediacluster
+
+# 🟢 跨集群查询 Pod
+kubectl --context=clusterpedia get pods --all-clusters
+
+# 🟢 按集群过滤
+kubectl --context=clusterpedia get pods -l clusterpedia.io/cluster-name=cluster-prod
+
+# 🟢 按标签搜索
+kubectl --context=clusterpedia get deployments --all-clusters -l app=nginx
+
+# 🟢 分页查询
+kubectl --context=clusterpedia get pods --all-clusters --limit=100 --continue=<token>
+
+# 🟢 查看同步状态
+kubectl get pediacluster cluster-prod -o yaml | grep -A10 status
+
+# 🟡 添加新的同步资源类型
+kubectl patch pediacluster cluster-prod --type=merge -p '
+  {"spec":{"syncResources":[{"group":"batch","resources":["jobs","cronjobs"]}]}}'
+
+# 🔴 删除注册集群
+kubectl delete pediacluster cluster-prod
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 集群未同步 | kubeconfig 过期 | `kubectl get pediacluster -o yaml` | 更新 kubeconfig |
+| 查询结果不完整 | 资源类型未同步 | 检查 syncResources 配置 | 添加缺失的资源类型 |
+| 查询延迟高 | 存储后端压力大 | 检查 PostgreSQL 性能 | 优化索引/增加资源 |
+| 连接失败 | 网络不通 | 检查集群间网络 | 确认 API Server 可达 |
+| 数据不一致 | 同步延迟 | 对比源集群和查询结果 | 检查 informer 状态 |
+
+## 生产案例
+
+### 案例1: 多集群安全审计
+
+**场景**: 安全团队需查找所有集群中使用漏洞镜像的 Pod  
+**方案**: Clusterpedia 跨集群搜索 + 镜像标签过滤  
+**效果**: 从数小时手动排查缩短到 1 分钟完成  
+
+### 案例2: 跨集群故障关联分析
+
+**场景**: 某服务在多个集群同时异常，需快速确认影响范围  
+**方案**: Clusterpedia 查询所有集群中该服务的 Pod 状态  
+**效果**: 30秒内确认影响 5 个集群中的 3 个  
+
 ## 对比
 
 | 特性 | Clusterpedia | Karmada | KubeFed |
-|------|-------------|---------|---------|
+|------|-------------|---------|----------|
 | 功能定位 | 多集群查询/搜索 | 多集群编排/调度 | 多集群联邦 |
 | 资源同步 | 只读同步 | 读写管理 | 读写管理 |
 | kubectl 兼容 | ✅ | ✅ | ⚠️ |
 | 存储后端 | PostgreSQL/MySQL | etcd | etcd |
+| 对源集群影响 | 极小（只读） | 较大 | 较大 |
+
+## 检查清单
+
+- [ ] 只同步需要查询的资源类型
+- [ ] 大规模场景使用 PostgreSQL 后端
+- [ ] 配置 RBAC 限制可查询集群范围
+- [ ] 监控同步延迟和存储使用
+- [ ] 定期轮换源集群 kubeconfig
+- [ ] 配置存储后端高可用
 
 ## 参考链接
 
@@ -124,7 +187,7 @@ kubectl --context=clusterpedia get pods --all-clusters
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- index/cluster-index|Cluster 集群知识图谱索引]]
+- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 

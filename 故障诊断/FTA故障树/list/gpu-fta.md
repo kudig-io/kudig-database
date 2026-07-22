@@ -148,6 +148,98 @@ flowchart TD
 | **事件** | `FailedScheduling (Insufficient nvidia.com/gpu)`、Device Plugin Pod 重启事件、`nvidia-smi` Xid 错误事件 |
 | **关键指标** | `kube_node_status_
 
+## 生产案例
+
+### 案例1: GPU Device Plugin 崩溃导致 Pod 无法调度
+
+**时间线**:
+- 08:00 节点重启后 nvidia-device-plugin Pod CrashLoopBackOff
+- 08:05 新 GPU Pod 调度失败: `Insufficient nvidia.com/gpu`
+- 08:10 确认根因: NVIDIA 驱动未正确加载(nvidia-smi 失败)
+- 08:20 重新加载驱动模块，Device Plugin 恢复
+
+**根因链**:
+```
+节点重启 → NVIDIA驱动模块未自动加载 → nvidia-smi失败
+→ Device Plugin无法枚举GPU → 节点无nvidia.com/gpu资源
+→ Pod调度失败(Insufficient nvidia.com/gpu)
+```
+
+**修复**:
+```bash
+# 🟢 检查 GPU 状态
+nvidia-smi
+lsmod | grep nvidia
+# 🟡 重新加载驱动
+modprobe nvidia
+modprobe nvidia_uvm
+# 🟡 重启 Device Plugin
+kubectl delete pod -n kube-system -l name=nvidia-device-plugin-ds
+# 🟢 验证节点 GPU 资源
+kubectl describe node ${NODE} | grep nvidia.com/gpu
+```
+
+### 案例2: GPU Xid 错误导致训练任务失败
+
+**现象**: 训练 Pod 突然被 Kill，`dmesg` 显示 `NVRM: Xid 79: GPU has fallen off the bus`
+
+**根因**: GPU 硬件故障或 PCIe 连接不稳定
+
+**修复**:
+```bash
+# 🟢 检查 Xid 错误
+dmesg | grep -i "xid\|nvrm"
+# 🔴 重置 GPU (高风险)
+nvidia-smi --gpu-reset -i ${GPU_ID}
+# 如硬件故障，需更换节点并排除调度
+kubectl cordon ${NODE}
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: gpu-alerts
+  rules:
+  - alert: GPUDevicePluginDown
+    expr: kube_pod_status_ready{condition="true"} * on(pod) group_left() kube_pod_labels{label_name="nvidia-device-plugin-ds"} == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: GPUXidError
+    expr: increase(nvidia_gpu_xid_errors_total[5m]) > 0
+    for: 1m
+    labels:
+      severity: critical
+  - alert: GPUMemoryHigh
+    expr: nvidia_gpu_memory_used_bytes / nvidia_gpu_memory_total_bytes > 0.95
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 驱动自动加载 | /etc/modules-load.d/nvidia.conf | P0 |
+| GPU 健康检查 | NPD + DCGM exporter 监控 Xid | P0 |
+| 故障节点自动排除 | 检测到 Xid 79 自动 cordon | P1 |
+| 驱动版本管理 | 使用 GPU Operator 统一管理 | P1 |
+
+## 面试要点
+
+1. **Q: K8s 中 GPU 调度的工作原理？**
+   A: NVIDIA Device Plugin 向 kubelet 注册 nvidia.com/gpu 扩展资源 → Pod requests GPU → 调度器分配节点 → Device Plugin 分配具体 GPU 设备 → 容器挂载 GPU
+
+2. **Q: GPU Pod 调度失败的排查步骤？**
+   A: 检查 Device Plugin Pod 状态 → nvidia-smi 验证驱动 → 确认节点 allocatable GPU 数量 → 检查 Pod requests 配置 → 查看调度器事件
+
+3. **Q: 常见 GPU Xid 错误及处理？**
+   A: Xid 31(内存页错误,重启容器) / Xid 48(双位 ECC,更换GPU) / Xid 79(GPU脱落,检查PCIe) / Xid 13(图形引擎异常,重置GPU)
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

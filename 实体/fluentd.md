@@ -68,18 +68,271 @@ Fluentd 的事件处理流水线由 Input、Parser、Filter、Buffer、Output �
 - **日志流处理**：实时过滤敏感信息、解析结构化日志、添加元数据
 - **合规日志归档**：将审计日志长期存储到 S3/对象存储满足合规要求
 
-## 安装与快速开始
+## 安装与配置
+
+### Helm 部署 Fluentd
 
 ```bash
+# 🟢 添加 Helm 仓库
 helm repo add fluent https://fluent.github.io/helm-charts
-helm install fluentd fluent/fluentd -n logging --create-namespace
-# 或使用 Fluent Bit 轻量版
-helm install fluent-bit fluent/fluent-bit -n logging --create-namespace
+helm repo update
+
+# 🟢 安装 Fluentd (DaemonSet 模式)
+helm install fluentd fluent/fluentd \
+  -n logging --create-namespace \
+  --set kind=DaemonSet \
+  --set resources.requests.memory=256Mi \
+  --set resources.limits.memory=512Mi \
+  --set persistence.enabled=true \
+  --set persistence.size=10Gi
+
+# 🟢 或安装 Fluent Bit（轻量采集层）
+helm install fluent-bit fluent/fluent-bit \
+  -n logging --create-namespace \
+  --set config.outputs="[OUTPUT]\n    Name es\n    Match *\n    Host elasticsearch\n    Port 9200"
+
+# 🟢 验证部署
+kubectl get pods -n logging -l app.kubernetes.io/name=fluentd
+kubectl logs -n logging -l app.kubernetes.io/name=fluentd --tail=20
 ```
+
+### Fluentd 配置示例 (fluent.conf)
+
+```conf
+# 输入：采集容器日志
+<source>
+  @type tail
+  path /var/log/containers/*.log
+  pos_file /var/log/fluentd-containers.log.pos
+  tag kubernetes.*
+  read_from_head true
+  <parse>
+    @type cri
+  </parse>
+</source>
+
+# 过滤：添加 K8s 元数据
+<filter kubernetes.**>
+  @type kubernetes_metadata
+  @id filter_kube_metadata
+  kubernetes_url "#{ENV['KUBERNETES_SERVICE_HOST']}"
+  cache_size 1000
+  watch true
+</filter>
+
+# 过滤：解析 JSON 日志
+<filter kubernetes.**>
+  @type parser
+  key_name log
+  reserve_data true
+  remove_key_name_field true
+  <parse>
+    @type multi_format
+    <pattern>
+      format json
+    </pattern>
+    <pattern>
+      format none
+    </pattern>
+  </parse>
+</filter>
+
+# 过滤：移除敏感字段
+<filter kubernetes.**>
+  @type record_transformer
+  remove_keys $.kubernetes.annotations."kubectl.kubernetes.io/last-applied-configuration"
+</filter>
+
+# 路由：按命名空间分流
+<match kubernetes.var.log.containers.**kube-system**>
+  @type relabel
+  @label @SYSTEM_LOGS
+</match>
+
+<match kubernetes.**>
+  @type relabel
+  @label @APP_LOGS
+</match>
+
+# 输出：应用日志到 Elasticsearch
+<label @APP_LOGS>
+  <match **>
+    @type elasticsearch
+    host elasticsearch.logging.svc
+    port 9200
+    logstash_format true
+    logstash_prefix app-logs
+    include_tag_key true
+    type_name _doc
+    <buffer>
+      @type file
+      path /var/log/fluentd-buffers/app.buffer
+      flush_mode interval
+      flush_interval 5s
+      chunk_limit_size 8M
+      total_limit_size 2G
+      retry_max_interval 30
+      retry_forever false
+      retry_max_times 5
+      overflow_action block
+    </buffer>
+  </match>
+</label>
+
+# 输出：系统日志到 S3 归档
+<label @SYSTEM_LOGS>
+  <match **>
+    @type s3
+    s3_bucket k8s-system-logs
+    s3_region us-east-1
+    path system-logs/%Y/%m/%d/
+    <buffer time>
+      @type file
+      path /var/log/fluentd-buffers/s3.buffer
+      timekey 1h
+      timekey_wait 10m
+      timekey_use_utc true
+    </buffer>
+  </match>
+</label>
+```
+
+### Fluent Bit 轻量采集配置
+
+```yaml
+# Fluent Bit ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: logging
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush         5
+        Log_Level     info
+        Daemon        off
+        Parsers_File  parsers.conf
+        HTTP_Server   On
+        HTTP_Listen   0.0.0.0
+        HTTP_Port     2020
+
+    [INPUT]
+        Name              tail
+        Tag               kube.*
+        Path              /var/log/containers/*.log
+        Parser            cri
+        DB                /var/log/flb_kube.db
+        Mem_Buf_Limit     50MB
+        Skip_Long_Lines   On
+        Refresh_Interval  10
+
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Kube_URL            https://kubernetes.default.svc:443
+        Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
+        Merge_Log           On
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude On
+
+    [OUTPUT]
+        Name            forward
+        Match           *
+        Host            fluentd.logging.svc
+        Port            24224
+```
+
+## 运维操作
+
+```bash
+# 🟢 检查 Fluentd 状态
+kubectl get pods -n logging -l app.kubernetes.io/name=fluentd
+kubectl top pods -n logging
+
+# 🟢 查看日志处理指标
+curl -s http://fluentd:24231/api/plugins.json | jq '.plugins[] | select(.type=="output") | {type, buffer_queue_length, buffer_total_queued_size}'
+
+# 🟢 检查缓冲区状态
+kubectl exec -n logging fluentd-0 -- ls -la /var/log/fluentd-buffers/
+kubectl exec -n logging fluentd-0 -- du -sh /var/log/fluentd-buffers/
+
+# 🟢 测试配置语法
+kubectl exec -n logging fluentd-0 -- fluentd --dry-run -c /fluentd/etc/fluent.conf
+
+# 🟡 重新加载配置（无需重启）
+kill -HUP $(kubectl exec -n logging fluentd-0 -- cat /var/run/fluentd/fluentd.pid)
+
+# 🟢 查看 Fluent Bit 指标
+curl -s http://fluent-bit:2020/api/v1/metrics | jq '.input.records, .output.records'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 日志延迟 > 5min | 缓冲区积压/输出端慢 | 检查 buffer_queue_length | 增加 flush 并发/扩容输出端 |
+| 日志丢失 | 缓冲区溢出/磁盘满 | `du -sh buffers/`; `df -h` | 增大 total_limit_size/清理磁盘 |
+| Pod OOMKilled | 内存缓冲过大 | `kubectl describe pod` | 调整 Mem_Buf_Limit/resources |
+| 元数据缺失 | K8s API 连接失败 | 检查 ServiceAccount/RBAC | 修复 RBAC 权限 |
+| 解析错误 | 日志格式不匹配 | 查看 fluentd 错误日志 | 调整 parser 配置 |
+
+### 排查流程
+
+```
+日志采集异常
+├── 日志完全缺失？
+│   ├── Fluentd Pod 运行？→ kubectl get pods -n logging
+│   ├── 日志文件存在？→ ls /var/log/containers/
+│   ├── pos_file 位置正确？→ 检查是否跳过了旧日志
+│   └── 输出端可达？→ curl elasticsearch:9200/_cluster/health
+├── 日志延迟高？
+│   ├── 缓冲区积压？→ 检查 buffer metrics
+│   ├── 输出端慢？→ 检查 ES/Kafka 负载
+│   └── 采集速率过高？→ 检查 input 指标
+└── 日志内容异常？
+    ├── 元数据缺失 → 检查 kubernetes_metadata_filter
+    ├── 解析失败 → 检查 parser 配置
+    └── 重复日志 → 检查 pos_file 是否丢失
+```
+
+## 生产案例
+
+### 案例1：大规模集群日志采集延迟
+
+- **场景**：200 节点集群，高峰期日志延迟超过 10 分钟
+- **排查**：Fluentd buffer_queue_length 持续增长；ES 写入速度跟不上采集速度
+- **方案**：采用 Fluent Bit（采集）+ Fluentd（聚合）分层架构；增加 Fluentd 副本数；ES 增加 data 节点
+- **效果**：延迟降至 < 10s，采集层 CPU 降低 60%
+
+### 案例2：节点磁盘被日志缓冲区填满
+
+- **场景**：输出端 ES 宕机 2 小时，Fluentd 缓冲区将节点磁盘写满，导致节点 NotReady
+- **排查**：`df -h` 显示 /var/log 100%；Fluentd 缓冲区文件占用 50GB
+- **方案**：设置 `total_limit_size 2G` 限制缓冲上限；`overflow_action drop_oldest_chunk`；添加磁盘使用率告警
+- **效果**：即使输出端故障，缓冲区也不会超过 2GB，保护节点磁盘
 
 ## 对比替代方案
 
-相比 Logstash（Elastic），Fluentd 更轻量、插件更丰富且支持非 Elastic 后端。相比 Vector（Rust），Fluentd 生态更成熟但性能稍逊。Fluent Bit 是其轻量级版本，适合边缘和资源受限场景。
+| 方案 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| Fluentd | 插件丰富(800+)、生态成熟 | Ruby 性能较低、内存占用大 | 复杂日志处理/聚合层 |
+| Fluent Bit | 轻量(C语言)、低资源 | 插件较少、处理能力有限 | 边缘/采集层 |
+| Vector (Rust) | 高性能、单二进制、VRL转换 | 生态较新、插件少 | 高性能场景 |
+| Logstash | ELK原生、功能强大 | JVM重、资源占用大 | 纯 Elastic 环境 |
+| OTel Collector | 统一遥测数据、CNCF标准 | 日志功能较新 | 统一可观测性 |
+
+## 检查清单
+
+- [ ] Fluentd/Fluent Bit DaemonSet 在所有节点运行
+- [ ] 缓冲区配置了大小限制和溢出策略
+- [ ] 输出端连接配置了重试和超时
+- [ ] K8s 元数据富化已启用
+- [ ] 敏感信息过滤已配置
+- [ ] 监控指标已接入 Prometheus
+- [ ] 磁盘使用率告警已配置
+- [ ] 配置变更有 dry-run 验证流程
 
 ## Related
 

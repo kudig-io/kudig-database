@@ -66,20 +66,225 @@ Serverless Workflow 规范的 K8s 原生实现包括 SonataFlow（原 Kogito Ser
 - **微服务编排**：将多个微服务编排为复杂业务流程
 - **自动化运维流水线**：基础设施部署和配置的工作流编排
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# Java SDK
-<dependency>
-  <groupId>io.serverlessworkflow</groupId>
-  <artifactId>serverlessworkflow-api</artifactId>
-  <version>4.0.0</version>
-</dependency>
+# 🟢 安装 SonataFlow Operator (K8s 实现)
+kubectl apply -f https://github.com/apache/incubator-kie-kogito-serverless-operator/releases/latest/download/sonataflow-operator.yaml
+
+# 🟢 验证安装
+kubectl get pods -n sonataflow-operator-system
+
+# 🟢 Java SDK 集成
+# pom.xml:
+# <dependency>
+#   <groupId>io.serverlessworkflow</groupId>
+#   <artifactId>serverlessworkflow-api</artifactId>
+#   <version>4.0.0</version>
+# </dependency>
+
+# 🟢 Go SDK
+go get github.com/serverlessworkflow/sdk-go/v4
 ```
+
+### 工作流定义示例 (JSON)
+
+```json
+{
+  "id": "order-processing",
+  "version": "1.0",
+  "name": "Order Processing Workflow",
+  "start": "ValidateOrder",
+  "states": [
+    {
+      "name": "ValidateOrder",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "validate",
+          "functionRef": "validateOrder"
+        }
+      ],
+      "transition": "ProcessPayment"
+    },
+    {
+      "name": "ProcessPayment",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "charge",
+          "functionRef": "processPayment"
+        }
+      ],
+      "transition": "ShipOrder",
+      "onErrors": [
+        {
+          "errorRef": "PaymentError",
+          "transition": "HandlePaymentError"
+        }
+      ]
+    },
+    {
+      "name": "ShipOrder",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "ship",
+          "functionRef": "shipOrder"
+        }
+      ],
+      "end": true
+    },
+    {
+      "name": "HandlePaymentError",
+      "type": "operation",
+      "actions": [
+        {
+          "name": "notify",
+          "functionRef": "sendNotification"
+        }
+      ],
+      "end": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "validateOrder",
+      "operation": "http://order-service:8080/api/validate#POST"
+    },
+    {
+      "name": "processPayment",
+      "operation": "http://payment-service:8080/api/charge#POST"
+    },
+    {
+      "name": "shipOrder",
+      "operation": "http://shipping-service:8080/api/ship#POST"
+    },
+    {
+      "name": "sendNotification",
+      "operation": "http://notification-service:8080/api/notify#POST"
+    }
+  ],
+  "retries": [
+    {
+      "name": "defaultRetry",
+      "maxAttempts": 3,
+      "delay": "PT1S",
+      "multiplier": 2.0
+    }
+  ]
+}
+```
+
+### K8s CRD 部署
+
+```yaml
+apiVersion: sonataflow.org/v1alpha08
+kind: SonataFlow
+metadata:
+  name: order-workflow
+  namespace: workflows
+spec:
+  flow:
+    id: order-processing
+    version: "1.0"
+    start: ValidateOrder
+    states:
+    - name: ValidateOrder
+      type: operation
+      actions:
+      - name: validate
+        functionRef: validateOrder
+      transition: ProcessPayment
+    - name: ProcessPayment
+      type: operation
+      actions:
+      - name: charge
+        functionRef: processPayment
+      end: true
+  resources:
+    configMaps:
+    - configMap:
+        name: order-functions
+      workflowPath: /functions
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看工作流
+kubectl get sonataflow -A
+kubectl describe sonataflow order-workflow -n workflows
+
+# 🟢 查看工作流 Pod
+kubectl get pods -n workflows -l app=order-workflow
+
+# 🟢 查看工作流日志
+kubectl logs -n workflows -l app=order-workflow --tail=50
+
+# 🟡 触发工作流执行
+curl -X POST http://order-workflow.workflows.svc:8080 \
+  -H 'Content-Type: application/json' \
+  -d '{"orderId": "12345", "amount": 99.99}'
+
+# 🟢 查看工作流执行状态
+curl http://order-workflow.workflows.svc:8080/management/processes
+
+# 🟡 删除工作流
+kubectl delete sonataflow order-workflow -n workflows
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 工作流未部署 | CRD 格式错误 | `kubectl describe sonataflow` | 检查 JSON/YAML 语法 |
+| 状态转换失败 | 函数不可达 | 查看工作流日志 | 检查函数服务端点 |
+| 重试耗尽 | 下游服务故障 | 查看执行历史 | 修复下游服务/调整重试 |
+| Pod 未就绪 | 资源不足/镜像拉取失败 | `kubectl describe pod` | 检查资源和镜像配置 |
+
+### 排查流程
+
+```
+1. kubectl get sonataflow → 确认工作流状态
+2. kubectl describe sonataflow → 查看部署状态
+3. kubectl logs -l app=<workflow> → 查看执行日志
+4. 检查函数服务端点可达性
+5. 验证工作流定义语法
+```
+
+## 生产案例
+
+### 案例1: 跨云工作流迁移
+- **场景**: 工作流从 AWS Step Functions 迁移到本地 K8s
+- **方案**: 使用 Serverless Workflow 规范重写，部署到 SonataFlow
+- **效果**: 消除云厂商锁定，工作流可在任何兼容平台运行
+
+### 案例2: 事件驱动订单处理
+- **场景**: 订单事件触发多步骤处理流程
+- **方案**: Serverless Workflow + CloudEvents 事件触发
+- **效果**: 标准化工作流定义，支持多种事件源
 
 ## 对比替代方案
 
-相比 Argo Workflow（K8s 原生但非标准），Serverless Workflow 提供厂商中立的规范，避免平台锁定。相比 AWS Step Functions DSL，Serverless Workflow 是开放标准，不绑定云厂商。
+| 维度 | Serverless Workflow | Argo Workflow | AWS Step Functions | Temporal |
+|------|--------------------|--------------|-------------------|----------|
+| 标准化 | CNCF 规范 | K8s 原生 | AWS 专有 | 开源 |
+| 厂商锁定 | 无 | 无 | AWS | 无 |
+| 事件驱动 | CloudEvents | 有限 | EventBridge | 有限 |
+| 状态类型 | 丰富 | DAG | 丰富 | 代码 |
+| 学习曲线 | 中 | 低 | 中 | 中 |
+
+## 检查清单
+
+- [ ] 工作流定义符合规范语法
+- [ ] 函数服务端点已配置并可达
+- [ ] 错误处理和重试策略已定义
+- [ ] 工作流执行有监控和日志
+- [ ] 测试覆盖了正常和异常路径
+- [ ] 与 CloudEvents 集成已验证 (事件驱动场景)
 
 ## Related
 

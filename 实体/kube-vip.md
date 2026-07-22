@@ -66,32 +66,199 @@ kube-vip 以单一 Pod/进程运行在每个节点上。控制平面 HA 模式�
 3. **BGP 负载均衡**: 大规模集群通过 BGP 实现真正的多节点负载均衡
 4. **边缘集群**: 轻量级 VIP 方案适配边缘场景
 
-## 安装
+## 安装与配置
 
 ```bash
 # 控制平面 HA（Static Pod）
 KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases/latest | grep tag_name | cut -d '"' -f 4)
 alias kube-vip="ctr image pull ghcr.io/kube-vip/kube-vip:$KVVERSION; \
   ctr run --rm --net-host ghcr.io/kube-vip/kube-vip:$KVVERSION vip /kube-vip"
+
+# 生成控制平面 VIP 清单
 kube-vip manifest pod --address 192.168.1.100 --controlplane \
   --services --arp --leaderElection | tee /etc/kubernetes/manifests/kube-vip.yaml
-# Service LoadBalancer 模式
+
+# Service LoadBalancer 模式 (DaemonSet)
 kubectl apply -f https://kube-vip.io/manifests/kube-vip-cloud-controller.yaml
 kubectl apply -f https://kube-vip.io/manifests/kube-vip.yaml
+
+# BGP 模式
+kube-vip manifest pod --address 192.168.1.100 --controlplane \
+  --bgp --peerAS 65000 --peerAddress 192.168.1.1 \
+  --localAS 65001 --bgpRouterID 192.168.1.10
 ```
 
-## 替代方案
+```yaml
+# kube-vip Static Pod 清单示例 (/etc/kubernetes/manifests/kube-vip.yaml)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-vip
+  namespace: kube-system
+spec:
+  containers:
+    - name: kube-vip
+      image: ghcr.io/kube-vip/kube-vip:v0.7.0
+      args:
+        - manager
+      env:
+        - name: vip_arp
+          value: "true"
+        - name: address
+          value: "192.168.1.100"
+        - name: port
+          value: "6443"
+        - name: vip_leaderelection
+          value: "true"
+        - name: vip_leasename
+          value: "plndr-cp-lock"
+        - name: vip_leaseduration
+          value: "15"
+        - name: vip_renewdeadline
+          value: "10"
+        - name: vip_retryperiod
+          value: "2"
+      securityContext:
+        capabilities:
+          add: ["NET_ADMIN", "NET_RAW", "SYS_TIME"]
+      volumeMounts:
+        - name: kubeconfig
+          mountPath: /etc/kubernetes/admin.conf
+  hostNetwork: true
+  volumes:
+    - name: kubeconfig
+      hostPath:
+        path: /etc/kubernetes/admin.conf
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **kube-vip** | 双用途（HA + LB）、轻量 | BGP 功能不如 MetalLB 成熟 |
-| MetalLB | BGP 成熟、功能丰富 | 仅 LB，无控制平面 HA |
-| Keepalived | 经典 VIP 方案 | 非 K8s 原生 |
-| HAProxy + Keepalived | 成熟稳定 | 运维复杂 |
+```yaml
+# Service LoadBalancer IP 地址池 (KubeVIPIPSet CRD)
+apiVersion: kube-vip.io/v1alpha1
+kind: KubeVIPIPSet
+metadata:
+  name: production-pool
+spec:
+  addresses:
+    - 192.168.1.200-192.168.1.220
+    - 10.10.10.50
+---
+# 使用特定 IP 的 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-lb
+  annotations:
+    kube-vip.io/loadbalancerIPs: "192.168.1.200"
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 8080
+```
 
-## 架构定位
+## 运维操作
 
-在 CNCF 生态中，kube-vip 属于 **Networking** 类别，是裸金属 Kubernetes 集群 VIP 和负载均衡的一体化轻量级方案。
+```bash
+# 🟢 检查 kube-vip Pod 状态
+kubectl get pods -n kube-system -l app.kubernetes.io/name=kube-vip
+kubectl logs -n kube-system -l app.kubernetes.io/name=kube-vip --tail=30
+
+# 🟢 检查 VIP 分配
+kubectl get svc -A -o wide | grep LoadBalancer
+kubectl get kubevipippool -A  # 查看 IP 池
+
+# 🟢 检查 Leader 选举状态
+kubectl get lease -n kube-system plndr-cp-lock -o yaml
+kubectl get lease -n kube-system plndr-svcs-lock -o yaml
+
+# 🟢 检查 ARP 公告 (Layer 2)
+arping -I eth0 192.168.1.100  # 验证 VIP MAC 地址
+ip addr show | grep 192.168.1.100  # 确认 VIP 在哪个节点
+
+# 🟢 检查 BGP 状态 (Layer 3)
+kubectl logs -n kube-system -l app.kubernetes.io/name=kube-vip | grep -i bgp
+
+# 🟡 重启 kube-vip DaemonSet
+kubectl rollout restart daemonset/kube-vip-ds -n kube-system
+
+# 🔴 删除 VIP Service (外部 IP 将不可用)
+kubectl delete svc web-lb -n production
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| API Server 不可达 | VIP Leader 丢失 | `kubectl get lease plndr-cp-lock` | 检查 Master 节点状态 |
+| VIP 未分配给 Service | IP 池耗尽 | `kubectl get kubevipippool -o yaml` | 扩大 IP 池范围 |
+| ARP 公告失败 | 缺少 NET_ADMIN 权限 | 检查 Pod SecurityContext | 添加 NET_ADMIN capability |
+| Leader 频繁切换 | 网络报动/Lease 超时 | 检查 kube-vip 日志 | 调整 leaseduration/retryperiod |
+| BGP 对等失败 | AS 号/密码配置错误 | 检查 BGP 日志 | 核对路由器配置 |
+| Service ExternalIP 不生效 | Cloud Controller 未运行 | `kubectl get pods -n kube-system` | 部署 kube-vip-cloud-controller |
+
+### 排查流程
+
+```
+VIP 异常
+├── 控制平面 VIP 不可达
+│   ├── 检查所有 Master 节点 kube-vip Pod 状态
+│   ├── 检查 Lease (plndr-cp-lock) 持有者
+│   ├── 在 Leader 节点: ip addr | grep <VIP>
+│   ├── 检查 ARP: arping -I <iface> <VIP>
+│   └── 检查防火墙: iptables -L | grep 6443
+├── Service LoadBalancer 无 ExternalIP
+│   ├── 检查 kube-vip-cloud-controller Pod
+│   ├── 检查 IP 池是否有可用地址
+│   ├── 检查 Service annotations
+│   └── 检查 kube-vip DaemonSet 日志
+└── VIP 频繁漂移
+    ├── 检查 Lease renewdeadline 配置
+    ├── 检查节点间网络延迟
+    └── 检查节点资源压力 (CPU/内存)
+```
+
+## 生产案例
+
+### 案例 1: 裸金属集群 API Server HA
+
+- **场景**: 3 Master 裸金属集群，kubeadm 部署，需要 API Server 高可用
+- **排查**: 单 Master 故障时 kubectl 无法连接，因为 kubeconfig 指向固定 IP
+- **方案**: 部署 kube-vip 控制平面模式，VIP 192.168.1.100；kubeconfig 指向 VIP；Leader 选举基于 K8s Lease
+- **效果**: Master 故障后 VIP 在 5 秒内漂移到新 Leader，kubectl 无感知切换
+
+### 案例 2: 裸金属 LoadBalancer 替代 MetalLB
+
+- **场景**: 边缘集群需要 LoadBalancer Service，但 MetalLB BGP 与现有网络设备不兼容
+- **排查**: MetalLB BGP 会话无法与旧型号交换机建立
+- **方案**: 使用 kube-vip ARP 模式替代；配置 IP 池 192.168.1.200-220；Service 自动获取 ExternalIP
+- **效果**: LoadBalancer Service 正常工作，无需 BGP 支持，运维复杂度降低
+
+## 对比与替代方案
+
+| 维度 | kube-vip | MetalLB | Keepalived | HAProxy+KA |
+|------|----------|---------|------------|------------|
+| 控制平面 HA | ✅ | ❌ | ✅ | ✅ |
+| Service LB | ✅ | ✅ | ❌ | ✅ |
+| ARP (L2) | ✅ | ✅ | ✅ | ❌ |
+| BGP (L3) | ✅ | ✅ | ❌ | ❌ |
+| K8s 原生 | ✅ | ✅ | ❌ | ❌ |
+| 资源占用 | 极低 (~20MB) | 低 | 低 | 中 |
+| 成熟度 | 中 | 高 | 高 | 高 |
+| 适用场景 | 裸金属一体化 | 裸金属 LB | 传统 VIP | 复杂 LB |
+
+## 检查清单
+
+- [ ] kube-vip Pod 在所有目标节点 Running
+- [ ] 控制平面 VIP 可从所有客户端访问
+- [ ] Leader 选举稳定（无频繁切换）
+- [ ] ARP/BGP 公告正常（网络可达）
+- [ ] IP 池地址充足且无冲突
+- [ ] 防火墙允许 VRRP/ARP 协议
+- [ ] kubeconfig 指向 VIP 而非单节点 IP
+- [ ] 监控覆盖 kube-vip Pod 状态和 Leader 切换事件
+- [ ] 故障切换时间 < 15 秒 (leaseduration 配置)
 
 ## 参考链接
 
@@ -105,15 +272,9 @@ kubectl apply -f https://kube-vip.io/manifests/kube-vip.yaml
 
 - [[opencost]] — OpenCost
 - [[slimfaas]] — SlimFaas
-- [[tuf]] — TUF
-- [[kcl]] — KCL (Kusion Configuration Language)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- kube-vip
 - [[实体/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
 - [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-
 
 <!-- risk-assessed -->

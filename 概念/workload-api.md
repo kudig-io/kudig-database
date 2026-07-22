@@ -166,6 +166,123 @@ for {
 - **StatefulSet 滚动更新卡住**：如果某个 Pod 不健康（readinessProbe 失败），OrderedReady 策略下后续 Pod 不会更新
 - **CronJob 时区问题**：CronJob 默认使用控制平面节点时区，多区域集群需注意时区一致性
 
+## 源码实现分析
+
+### Deployment Controller 调谐循环
+
+```go
+// k8s.io/kubernetes/pkg/controller/deployment/deployment_controller.go
+// Deployment Controller 通过多级控制器实现滚动更新
+func (dc *DeploymentController) syncDeployment(ctx context.Context, key string) {
+    d, _ := dc.dLister.Deployments(ns).Get(name)
+    
+    // 1. 获取所有关联的 ReplicaSet
+    rsList := dc.getReplicaSetsForDeployment(d)
+    
+    // 2. 根据策略执行更新
+    switch d.Spec.Strategy.Type {
+    case apps.RollingUpdateDeploymentStrategyType:
+        // 滚动更新：创建新 RS，缩放旧 RS
+        dc.rolloutRolling(ctx, d, rsList)
+    case apps.RecreateDeploymentStrategyType:
+        // 重建：先缩容到 0，再扩容新版本
+        dc.rolloutRecreate(ctx, d, rsList)
+    }
+    
+    // 3. 清理旧 ReplicaSet（保留 revisionHistoryLimit）
+    dc.cleanupDeployment(d, rsList)
+}
+```
+
+### 工作负载控制器层级
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          工作负载控制器层级                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Deployment (无状态)                                     │
+│    └→ ReplicaSet Controller → Pod                       │
+│       策略: RollingUpdate / Recreate                    │
+│                                                           │
+│  StatefulSet (有状态)                                    │
+│    └→ 直接管理 Pod (pod-0, pod-1, ...)                 │
+│       策略: OrderedReady / Parallel / OnDelete          │
+│       特性: 稳定网络标识 + 持久存储                  │
+│                                                           │
+│  DaemonSet (每节点一个)                                  │
+│    └→ 直接管理 Pod (每节点一个)                       │
+│       用途: 日志/监控/网络代理                        │
+│                                                           │
+│  Job / CronJob (批处理)                                  │
+│    └→ 管理 Pod 到完成 (completions/parallelism)       │
+│       CronJob: 定时创建 Job                            │
+│                                                           │
+│  共同模式:                                               │
+│  所有控制器都遵循 Reconcile Loop:                     │
+│  观察实际状态 → 对比期望状态 → 执行差异修复       │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 工作负载选型示例（🟡 部署到集群）
+
+```yaml
+# 有状态应用：StatefulSet + volumeClaimTemplates
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres-headless
+  replicas: 3
+  podManagementPolicy: Parallel  # 不需要严格顺序时加速部署
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 100Gi
+```
+
+## 面试要点
+
+1. **Deployment vs StatefulSet 的核心区别？**
+   - Deployment：无状态，Pod 可互换，滚动更新
+   - StatefulSet：有状态，稳定网络标识 + 持久存储
+   - 关键：StatefulSet Pod 有固定名称（pod-0, pod-1）
+
+2. **工作负载控制器的 Reconcile Loop 是什么？**
+   - 观察实际状态（当前 Pod 数/版本）
+   - 对比期望状态（spec 中的 replicas/template）
+   - 执行差异修复（创建/删除/更新 Pod）
+   - 持续循环直到实际 = 期望
+
+3. **Job 的 completions 和 parallelism 的区别？**
+   - completions：总共需要成功完成的 Pod 数
+   - parallelism：同时运行的最大 Pod 数
+   - 例：completions=10, parallelism=3 → 最多 3 个并行，总共 10 个
+
+4. **DaemonSet 与 Deployment 的区别？**
+   - DaemonSet：每个节点恰好一个 Pod
+   - Deployment：按 replicas 数量调度
+   - DaemonSet 用途：日志/监控/网络代理等节点级服务
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

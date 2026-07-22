@@ -81,31 +81,198 @@ Spin 通过 **SpinKube** 项目（CNCF Sandbox）与 Kubernetes 深度集成。S
 3. **实时数据管道**：Redis 触发器驱动的事件处理组件
 4. **插件化扩展**：安全沙箱中运行第三方代码，宿主系统不受影响
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Spin CLI
 curl -fsSL https://developer.fermyon.com/downloads/install.sh | bash
 sudo mv spin /usr/local/bin/
-# 创建新应用
+spin --version
+
+# 安装模板
 spin templates install --git https://github.com/fermyon/spin
+
+# 创建新应用
 spin new http-rust myapp
-cd myapp && spin build && spin up
+cd myapp
+
+# 构建和运行
+spin build
+spin up
+# 访问 http://localhost:3000
+
+# 推送到 OCI Registry
+spin registry push ghcr.io/myorg/myapp:v1.0
+
+# 从 Registry 运行
+spin up --from-registry ghcr.io/myorg/myapp:v1.0
 ```
 
-## 对比
+```toml
+# spin.toml 应用清单示例
+spin_manifest_version = 2
 
-| 特性 | Spin | wasmCloud | WasmEdge |
-|------|------|-----------|---------|
-| 开发模型 | 应用框架 | 分布式平台 | 嵌入式运行时 |
-| 触发器 | HTTP/Redis/Timer | NATS | 命令行/API |
-| Kubernetes | SpinKube | wasmCloud Operator | Kubernetes |
-| 冷启动 | < 1ms | < 1ms | < 1ms |
+[application]
+name = "my-web-app"
+version = "1.0.0"
+description = "A simple web application"
+
+[[trigger.http]]
+route = "/..."
+component = "api"
+
+[component.api]
+source = "target/wasm32-wasi/release/api.wasm"
+allowed_outbound_hosts = ["https://api.example.com"]
+
+[component.api.variables]
+database_url = "sqlite://data.db"
+
+[[trigger.http]]
+route = "/static/..."
+component = "static"
+
+[component.static]
+source = "target/wasm32-wasi/release/static.wasm"
+files = [{ source = "assets", destination = "/" }]
+```
+
+```yaml
+# SpinKube 部署 (Kubernetes)
+apiVersion: core.spinkube.dev/v1alpha1
+kind: SpinApp
+metadata:
+  name: my-web-app
+  namespace: wasm
+spec:
+  image: ghcr.io/myorg/myapp:v1.0
+  executor: containerd-shim-spin
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 128Mi
+---
+apiVersion: core.spinkube.dev/v1alpha1
+kind: SpinAppExecutor
+metadata:
+  name: containerd-shim-spin
+  namespace: wasm
+spec:
+  deploymentTemplate:
+    spec:
+      runtimeClassName: wasmtime-spin
+```
+
+## 运维操作
+
+```bash
+# 🟢 本地运行 Spin 应用
+spin up
+spin up --listen 0.0.0.0:8080
+
+# 🟢 构建应用
+spin build
+spin build --up  # 构建并运行
+
+# 🟢 推送到 Registry
+spin registry push ghcr.io/myorg/myapp:v1.0
+
+# 🟢 检查 SpinKube 状态
+kubectl get spinapps -A
+kubectl get spinappexecutors -A
+kubectl get pods -n wasm -l core.spinkube.dev/app-name=my-web-app
+
+# 🟢 查看应用日志
+kubectl logs -n wasm -l core.spinkube.dev/app-name=my-web-app
+
+# 🟡 扩展副本数
+kubectl scale spinapp my-web-app -n wasm --replicas=5
+
+# 🟡 更新应用版本
+kubectl set image spinapp/my-web-app *=ghcr.io/myorg/myapp:v1.1 -n wasm
+
+# 🟢 检查 RuntimeClass
+kubectl get runtimeclass wasmtime-spin
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| spin build 失败 | 依赖缺失/编译错误 | 检查构建日志 | 安装 Rust/Go 工具链 |
+| spin up 无响应 | 端口冲突/路由错误 | 检查 spin.toml 配置 | 修改路由/端口 |
+| SpinApp Pending | RuntimeClass 未配置 | `kubectl get runtimeclass` | 安装 containerd-shim-spin |
+| Wasm 模块崩溃 | 内存不足/panic | 检查 Pod 日志 | 增加内存限制 |
+| 外部 HTTP 失败 | allowed_outbound_hosts 未配置 | 检查 spin.toml | 添加允许的主机 |
+| Registry 推送失败 | 认证问题 | `spin registry login` | 配置 Registry 凭证 |
+
+### 排查流程
+
+```
+Spin 应用异常
+├── 本地开发问题
+│   ├── spin build → 检查编译错误
+│   ├── spin up --log-dir ./logs → 查看详细日志
+│   ├── 检查 spin.toml 路由配置
+│   └── 检查 allowed_outbound_hosts
+├── Kubernetes 部署问题
+│   ├── kubectl get spinapps → 检查状态
+│   ├── kubectl describe spinapp → 查看事件
+│   ├── kubectl get pods → 检查 Pod 状态
+│   └── kubectl get runtimeclass → 确认运行时
+└── 运行时问题
+    ├── 检查 Wasm 模块日志
+    ├── 检查内存/CPU 限制
+    └── 检查外部依赖可达性
+```
+
+## 生产案例
+
+### 案例 1: Serverless API 零冷启动
+
+- **场景**: API 服务需要快速响应，但传统容器冷启动 1-2 秒
+- **排查**: 容器冷启动导致首次请求延迟高；用户等待体验差
+- **方案**: 将 API 服务编译为 Wasm 组件；Spin 运行时亚毫秒冷启动；SpinKube 部署到 K8s
+- **效果**: 冷启动从 1.5s 降至 <1ms；P99 延迟降低 80%；资源占用减少 90%
+
+### 案例 2: 边缘 IoT 数据处理
+
+- **场景**: 50 个边缘节点需要运行数据处理逻辑，资源受限 (1C2G)
+- **排查**: 传统容器每实例需 128MB+ 内存；边缘节点无法承载多个服务
+- **方案**: Spin Wasm 组件每实例仅 5-10MB；单节点运行 20+ 个 Wasm 组件；Redis 触发器驱动事件处理
+- **效果**: 单节点服务密度提升 10 倍；内存占用降低 95%
+
+## 对比与替代方案
+
+| 维度 | Spin | wasmCloud | WasmEdge | Knative |
+|------|------|-----------|----------|----------|
+| 开发模型 | 应用框架 | 分布式平台 | 嵌入式运行时 | 容器 Serverless |
+| 触发器 | HTTP/Redis/Timer | NATS | 命令行/API | HTTP/Kafka |
+| 冷启动 | <1ms | <1ms | <1ms | ~1s |
+| 内存占用 | ~5MB | ~10MB | ~5MB | ~128MB |
+| K8s 集成 | SpinKube | Operator | Kubernetes | 原生 |
+| 多语言 | ✅ SDK | ✅ WIT | ✅ | ✅ 容器 |
+| 适用场景 | Serverless/边缘 | 分布式 Wasm | 嵌入式/AI | 容器 Serverless |
+
+## 检查清单
+
+- [ ] Spin CLI 已安装
+- [ ] spin.toml 配置正确
+- [ ] allowed_outbound_hosts 已配置 (最小权限)
+- [ ] Wasm 模块已优化 (wasm-opt)
+- [ ] OCI Registry 认证已配置
+- [ ] SpinKube RuntimeClass 已配置 (K8s)
+- [ ] 资源限制已设置
+- [ ] 监控覆盖应用健康状态
 
 ## 参考链接
 
 - [[containerd]]
-- [[实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[实体/argocd.md|argocd]]
 - [[operator-pattern]]
 
 ## Related
@@ -113,11 +280,7 @@ cd myapp && spin build && spin up
 - [[spinkube]] — SpinKube
 - [[wasmedge]] — WasmEdge
 - [[实体/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
-- [[04-containerd-upgrade-migration]] — containerd 升级迁移
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- 03-spinkube-framework
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-
+- [[实体/wasmcloud.md|wasmcloud]] — wasmCloud
 
 <!-- risk-assessed -->

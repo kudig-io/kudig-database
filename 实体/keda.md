@@ -73,16 +73,199 @@ KEDA 深度集成 Kubernetes HPA 机制。ScaledObject CRD 定义目标 Deployme
 - **基于自定义指标伸缩**：使用 Prometheus 指标（如 QPS）而非 CPU/内存进行伸缩
 - **数据库批处理**：根据待处理任务数动态调整 Worker 数量
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 添加 Helm 仓库
 helm repo add kedacore https://kedacore.github.io/charts
-helm install keda kedacore/keda -n keda-system --create-namespace
+helm repo update
+
+# 🟢 安装 KEDA
+helm install keda kedacore/keda \
+  -n keda-system --create-namespace \
+  --set resources.operator.limits.memory=256Mi \
+  --set resources.metricServer.limits.memory=256Mi
+
+# 🟢 验证安装
+kubectl get pods -n keda-system
+kubectl get crd | grep keda.sh
+
+# 🟢 查看可用 Scalers
+kubectl get scaledobjects -A
 ```
+
+### ScaledObject CRD 示例
+
+```yaml
+# 基于 Kafka 队列深度伸缩
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: kafka-consumer-scaler
+  namespace: production
+spec:
+  scaleTargetRef:
+    name: kafka-consumer
+  pollingInterval: 15
+  cooldownPeriod: 300
+  minReplicaCount: 0
+  maxReplicaCount: 100
+  triggers:
+    - type: kafka
+      metadata:
+        bootstrapServers: kafka-0.kafka:9092
+        consumerGroup: my-consumer-group
+        topic: orders
+        lagThreshold: "100"
+        offsetResetPolicy: latest
+---
+# 基于 Prometheus 指标伸缩
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: prometheus-scaler
+  namespace: production
+spec:
+  scaleTargetRef:
+    name: web-frontend
+  minReplicaCount: 2
+  maxReplicaCount: 20
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus:9090
+        metricName: http_requests_per_second
+        threshold: "100"
+        query: |
+          sum(rate(http_requests_total{service="web-frontend"}[2m]))
+---
+# 基于 Redis 队列伸缩
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: redis-queue-scaler
+  namespace: production
+spec:
+  scaleTargetRef:
+    name: redis-worker
+  minReplicaCount: 0
+  maxReplicaCount: 50
+  triggers:
+    - type: redis
+      metadata:
+        address: redis-master:6379
+        password: ""
+        listName: task-queue
+        listLength: "50"
+        databaseIndex: "0"
+---
+# ScaledJob（批处理任务）
+apiVersion: keda.sh/v1alpha1
+kind: ScaledJob
+metadata:
+  name: batch-processor
+  namespace: production
+spec:
+  jobTargetRef:
+    template:
+      spec:
+        containers:
+          - name: processor
+            image: myorg/batch-processor:v1
+        restartPolicy: Never
+    backoffLimit: 3
+  pollingInterval: 30
+  maxReplicaCount: 10
+  triggers:
+    - type: rabbitmq
+      metadata:
+        host: amqp://rabbitmq:5672
+        queueName: batch-tasks
+        queueLength: "5"
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 ScaledObject 状态
+kubectl get scaledobject -A
+kubectl describe scaledobject kafka-consumer-scaler -n production
+
+# 🟢 查看 KEDA 创建的 HPA
+kubectl get hpa -A | grep keda
+
+# 🟢 查看 KEDA 日志
+kubectl logs -n keda-system -l app=keda-operator --tail=100
+
+# 🟡 暂停伸缩
+kubectl patch scaledobject kafka-consumer-scaler -n production --type=merge -p \
+  '{"spec":{"triggers":[]}}'
+
+# 🟡 调整最大副本数
+kubectl patch scaledobject kafka-consumer-scaler -n production --type=merge -p \
+  '{"spec":{"maxReplicaCount":200}}'
+
+# 🔴 删除 ScaledObject（会删除对应的 HPA）
+kubectl delete scaledobject kafka-consumer-scaler -n production
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| 未伸缩 | Scaler 连接失败 | `kubectl describe scaledobject` | 检查事件源连接配置 |
+| Scale-to-Zero 失败 | cooldownPeriod 未到 | 查看 ScaledObject events | 等待 cooldown 或调整参数 |
+| HPA 未创建 | KEDA Operator 异常 | `kubectl get pods -n keda-system` | 重启 KEDA Operator |
+| 指标查询失败 | Prometheus 不可达 | 查看 Metrics Adapter 日志 | 检查 Prometheus 地址 |
+
+```bash
+# 排查流程
+# 1. 检查 KEDA 组件状态
+kubectl get pods -n keda-system
+kubectl logs -n keda-system -l app=keda-operator --tail=50
+
+# 2. 检查 ScaledObject 事件
+kubectl describe scaledobject <name> -n <ns> | grep -A10 Events
+
+# 3. 检查 HPA 状态
+kubectl get hpa -n <ns> | grep keda
+kubectl describe hpa keda-hpa-<name> -n <ns>
+
+# 4. 检查外部指标
+kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1" | jq .
+```
+
+## 生产案例
+
+### 案例1：Kafka 消费者自动伸缩
+- **场景**：订单处理服务需要根据 Kafka 队列深度自动伸缩，空闲时缩到 0
+- **方案**：KEDA ScaledObject + Kafka Scaler；lagThreshold=100 触发扩容；cooldownPeriod=5min 后缩容；minReplicaCount=0 实现 Serverless
+- **效果**：资源成本降低 60%（空闲时零 Pod），峰值处理能力 100 副本
+
+### 案例2：基于 QPS 的 Web 服务伸缩
+- **场景**：Web 前端需要根据实际 QPS 而非 CPU 进行伸缩
+- **方案**：KEDA + Prometheus Scaler；基于 rate(http_requests_total[2m]) 指标；threshold=100 QPS/副本
+- **效果**：伸缩响应时间从 5min(HPA) 缩短到 30s，用户体验显著改善
 
 ## 对比替代方案
 
-相比 K8s 原生 HPA（仅支持 CPU/内存/自定义指标），KEDA 提供了 60+ 预置事件源和 Scale-to-Zero 能力。相比 Knative Serving（专注 Serverless 平台），KEDA 更轻量且保持 Deployment 原生形态。
+| 维度 | KEDA | K8s HPA | Knative | 自定义 Operator |
+|------|------|---------|---------|---------------|
+| 事件源 | 60+ | CPU/Mem/Custom | 有限 | 自定义 |
+| Scale-to-Zero | 支持 | 不支持 | 支持 | 自定义 |
+| 学习曲线 | 低 | 低 | 中 | 高 |
+| 保持 Deployment | 是 | 是 | 否 | 自定义 |
+| 批处理任务 | ScaledJob | 无 | 无 | 自定义 |
+
+## 检查清单
+
+- [ ] KEDA 已部署且所有组件 Running
+- [ ] ScaledObject 已在测试环境验证
+- [ ] 事件源连接已验证（Kafka/Redis/Prometheus）
+- [ ] minReplicaCount/maxReplicaCount 已合理设置
+- [ ] cooldownPeriod 已配置（避免频繁伸缩）
+- [ ] 监控告警已配置（伸缩事件/失败）
+- [ ] Scale-to-Zero 场景已验证冷启动时间
 
 ## Related
 

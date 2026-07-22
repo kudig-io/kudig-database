@@ -74,27 +74,144 @@ KServe 通过 InferenceService CRD 声明式管理推理服务。InferenceServic
 3. **GPU 成本优化**: 使用 Scale-to-Zero 在无请求时释放 GPU 资源
 4. **多模型部署**: 在同一 GPU 上部署多个模型共享计算资源
 
-## 安装
+## 安装与配置
 
 ```bash
-# 安装 Knative（KServe 依赖）
+# 安装 Knative Serving（KServe 依赖）
 kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.14.0/serving-core.yaml
+kubectl apply -f https://github.com/knative/net-istio/releases/download/knative-v1.14.0/net-istio.yaml
+
+# 安装 cert-manager（KServe 依赖）
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.0/cert-manager.yaml
+
 # 安装 KServe
-kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.12.1/kserve.yaml
-# 部署推理服务
-kubectl apply -f - <<EOF
+kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.13.0/kserve.yaml
+kubectl apply -f https://github.com/kserve/kserve/releases/download/v0.13.0/kserve-cluster-resources.yaml
+
+# 等待就绪
+kubectl wait --for=condition=available deployment/kserve-controller-manager -n kserve --timeout=180s
+```
+
+```yaml
+# InferenceService CRD 完整示例
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
-metadata: { name: iris-classifier }
+metadata:
+  name: fraud-detection
+  namespace: ml-serving
 spec:
   predictor:
     minReplicas: 1
+    maxReplicas: 10
+    scaleTarget: 10  # 每 Pod 10 并发请求
+    scaleMetric: concurrency
     pytorch:
-      storageUri: s3://models/iris
+      storageUri: s3://ml-models/fraud-detection/v2
       resources:
-        limits: { nvidia.com/gpu: 1 }
-EOF
+        requests:
+          cpu: "2"
+          memory: 4Gi
+          nvidia.com/gpu: 1
+        limits:
+          cpu: "4"
+          memory: 8Gi
+          nvidia.com/gpu: 1
+    tolerations:
+    - key: nvidia.com/gpu
+      operator: Exists
+      effect: NoSchedule
+  transformer:
+    containers:
+    - name: preprocess
+      image: my-registry.io/preprocessor:v1
+      resources:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+  explainer:
+    alibi:
+      type: AnchorTabular
+      storageUri: s3://ml-models/fraud-detection/explainer
+---
+# 金丝雀发布（10% 流量到新版本）
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: fraud-detection-canary
+spec:
+  predictor:
+    canaryTrafficPercent: 10
+    pytorch:
+      storageUri: s3://ml-models/fraud-detection/v3
 ```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看推理服务状态
+kubectl get inferenceservices -A
+kubectl describe inferenceservice fraud-detection -n ml-serving
+
+# 🟢 低风险：测试推理端点
+SERVICE_URL=$(kubectl get inferenceservice fraud-detection -n ml-serving -o jsonpath='{.status.url}')
+curl -X POST "${SERVICE_URL}/v1/models/fraud-detection:predict" -d '{"instances": [[1,2,3]]}'
+
+# 🟢 低风险：查看模型 Pod 日志
+kubectl logs -l serving.kserve.io/inferenceservice=fraud-detection -n ml-serving -c kserve-container
+
+# 🟡 中风险：更新模型版本
+kubectl patch inferenceservice fraud-detection -n ml-serving --type merge \
+  -p '{"spec":{"predictor":{"pytorch":{"storageUri":"s3://ml-models/fraud-detection/v3"}}}}'
+
+# 🟡 中风险：扩缩容
+kubectl patch inferenceservice fraud-detection -n ml-serving --type merge \
+  -p '{"spec":{"predictor":{"minReplicas":2,"maxReplicas":20}}}'
+
+# 🔴 高风险：删除推理服务
+kubectl delete inferenceservice fraud-detection -n ml-serving
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| InferenceService 未就绪 | 模型下载失败 | `kubectl describe isvc <name>` | 检查 storageUri 和 S3 凭据 |
+| Pod Pending | GPU 资源不足 | `kubectl describe pod -l serving.kserve.io/inferenceservice=<name>` | 检查 GPU 节点可用性 |
+| 推理超时 | 模型加载慢/显存不足 | `kubectl logs <pod> -c kserve-container` | 增加内存/GPU，优化模型大小 |
+| 冷启动延迟高 | Scale-to-Zero 后重新拉起 | `kubectl get revision -n ml-serving` | 设置 minReplicas=1 避免缩零 |
+| 金丝雀未生效 | 流量配置错误 | `kubectl get virtualservice -n ml-serving` | 检查 canaryTrafficPercent 配置 |
+
+```
+排查流程：
+├── 服务未就绪？
+│   ├── kubectl get isvc → 检查 Ready 状态
+│   ├── kubectl describe isvc → 查看 Conditions
+│   └── 检查模型存储访问（S3/GCS/PVC）
+├── 推理失败？
+│   ├── 检查 Pod 日志中的模型加载错误
+│   ├── 验证输入数据格式
+│   └── 检查资源限制（GPU 显存）
+└── 性能问题？
+    ├── 检查 Knative 自动扩缩配置
+    ├── 查看并发指标
+    └── 调整 scaleTarget 和 maxReplicas
+```
+
+## 生产案例
+
+### 案例 1：GPU 成本优化（Scale-to-Zero）
+
+- **场景**：20+ ML 模型部署在 GPU 节点，但大部分时间无请求，GPU 利用率 < 10%
+- **排查**：每个模型独占 1 GPU，月成本 $15000+
+- **方案**：启用 KServe Scale-to-Zero，无请求时释放 GPU，流量到达时 3s 内拉起
+- **效果**：GPU 成本降低 70%，月节省 $10500，P99 冷启动延迟 < 5s
+
+### 案例 2：模型金丝雀发布
+
+- **场景**：风控模型更新需要验证新版本的准确率和延迟
+- **排查**：全量切换风险高，回滚影响大
+- **方案**：使用 KServe canaryTrafficPercent=10，将 10% 流量导入新模型，监控准确率和延迟 24h 后全量切换
+- **效果**：发现新模型在特定场景准确率下降 3%，及时回滚避免业务损失
 
 ## 替代方案
 

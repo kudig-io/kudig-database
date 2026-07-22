@@ -157,6 +157,121 @@ kubectl describe node <node> | grep -i runtime
 - **磁盘写满触发 GC 误删**：低阈值设得太低，频繁 GC 影响启动延迟，建议 high=85%、low=80%。
 - **Docker 兼容性误区**：v1.24+ 不再有 dockershim，遗留集群需迁移至 containerd（可用 `crictl` 替代 `docker` 命令）。
 
+## 源码实现分析
+
+### containerd CRI 插件架构
+
+```go
+// github.com/containerd/containerd/pkg/cri/server/service.go
+// containerd CRI 插件：实现 K8s CRI 接口
+func (c *criService) RunPodSandbox(ctx context.Context, r *runtime.RunPodSandboxRequest) {
+    config := r.GetConfig()
+    // 1. 创建 sandbox 容器（pause 容器）
+    sandbox := c.createSandboxContainer(ctx, config)
+    // 2. 调用 CNI 设置网络命名空间
+    c.setupPodNetwork(ctx, sandbox, config.GetMetadata().GetNamespace())
+    // 3. 创建并启动 task
+    task, _ := sandbox.NewTask(ctx, cio.NewCreator(cio.WithStdio))
+    task.Start(ctx)
+    // 4. 返回 sandbox ID
+    return &runtime.RunPodSandboxResponse{PodSandboxId: sandbox.ID()}
+}
+
+func (c *criService) CreateContainer(ctx context.Context, r *runtime.CreateContainerRequest) {
+    // 1. 获取 sandbox
+    sandbox := c.getSandbox(r.GetPodSandboxId())
+    // 2. 拉取镜像（如果本地没有）
+    image := c.ensureImage(ctx, config.GetImage().GetImage())
+    // 3. 创建容器（配置 OCI spec）
+    container, _ := c.client.NewContainer(ctx, id,
+        containerd.WithImage(image),
+        containerd.WithSpec(ociSpec),  // OCI runtime spec
+        containerd.WithRuntime("io.containerd.runc.v2"),
+    )
+    return &runtime.CreateContainerResponse{ContainerId: id}
+}
+```
+
+### 容器运行时架构对比
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          容器运行时架构对比                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  kubelet                                                  │
+│    │  CRI gRPC                                           │
+│    ▼                                                      │
+│  containerd / CRI-O  (高级运行时)                      │
+│    │  镜像管理 + 容器生命周期 + CNI 调用             │
+│    ▼                                                      │
+│  runc / kata / gVisor  (低级运行时)                   │
+│    │  实际创建容器进程                              │
+│    ▼                                                      │
+│  Linux Kernel                                             │
+│    ├─ namespaces (PID/NET/MNT/UTS/IPC/USER)            │
+│    ├─ cgroups v2 (CPU/Memory/IO)                       │
+│    ├─ seccomp-bpf (系统调用过滤)                     │
+│    └─ capabilities (权限控制)                          │
+│                                                           │
+│  运行时对比:                                             │
+│  runc:    共享内核，轻量，标准隔离                  │
+│  kata:    独立内核(microVM)，强隔离，开销较大      │
+│  gVisor:  用户态内核，中等隔离，syscall 受限      │
+└───────────────────────────────────────────────────────────┘
+```
+
+### RuntimeClass 使用示例（🟡 部署到集群）
+
+```yaml
+# 定义 RuntimeClass
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: kata
+handler: kata  # 对应 containerd config 中的 runtime handler
+scheduling:
+  nodeSelector:
+    katacontainers.io/kata-runtime: "true"
+---
+# 使用 RuntimeClass 运行强隔离 Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: untrusted-workload
+spec:
+  runtimeClassName: kata  # 使用 Kata microVM 隔离
+  containers:
+  - name: app
+    image: untrusted-app:latest
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+```
+
+## 面试要点
+
+1. **CRI 架构中高级运行时和低级运行时的区别？**
+   - 高级（containerd/CRI-O）：镜像管理、容器生命周期、CNI 调用
+   - 低级（runc/kata/gVisor）：实际创建容器进程、内核交互
+   - kubelet 通过 CRI gRPC 与高级运行时通信
+
+2. **containerd vs CRI-O 如何选型？**
+   - containerd：生态更广、Docker 兼容、插件丰富
+   - CRI-O：专为 K8s 设计、更轻量、Red Hat 支持
+   - 生产环境两者都成熟，按团队熟悉度选择
+
+3. **runc/kata/gVisor 的隔离级别对比？**
+   - runc：共享内核，namespace+cgroup 隔离，开销最小
+   - kata：独立 microVM 内核，强隔离，~100ms 启动
+   - gVisor：用户态内核，中等隔离，syscall 兼容性有限
+
+4. **dockershim 移除的影响和迁移？**
+   - K8s 1.24 移除 dockershim，不再原生支持 Docker
+   - 迁移：切换到 containerd（Docker 底层也是 containerd）
+   - 影响：kubectl 操作无变化，只是节点运行时配置变更
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

@@ -308,6 +308,33 @@ kubectl get service myservice -o yaml | grep topology
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| 拓扑感知未生效 | 注解未配置 | `kubectl get svc <svc> -o yaml` | 添加 topology-mode: Auto |
+| 跨 Zone 流量高 | 端点分布不均 | `kubectl get endpointslices -l kubernetes.io/service-name=<svc>` | 调整 Pod 拓扑分布 |
+| EndpointSlice 为空 | Pod 未就绪 | `kubectl get pods -l app=<app>` | 检查 readinessProbe |
+| internalTrafficPolicy 失效 | 节点无本地端点 | `kubectl get endpointslices -o wide` | 确保每节点有 Pod |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **拓扑感知** | 多 AZ 集群启用 Auto | 减少跨 Zone 流量成本 |
+| **端点分布** | 使用 topologySpreadConstraints | 确保各 Zone 均衡 |
+| **流量策略** | 延迟敏感用 Local | 避免跨节点延迟 |
+| **监控** | 部署 EndpointSlice 指标 | 实时掌握端点状态 |
+| **版本** | K8s 1.27+ | 拓扑感知 GA |
+
+## 相关工具
+
+| 工具 | 用途 |
+|------|------|
+| `kubectl` | EndpointSlice 管理 |
+| `dig` | DNS 解析验证 |
+| `curl` | 服务连通性测试 |
+
 ## See Also
 
 - 06-service-concepts-types

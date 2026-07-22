@@ -145,6 +145,147 @@ kubectl debug-pod() { kubectl describe pod $1; echo "--- LOGS ---"; kubectl logs
 - **依赖单一节点**：apiserver/etcd 单点，故障 MTTR 极长，必须多副本 + 跨 AZ。
 - **升级窗口同时变更**：升级与其他变更叠加，故障定位难（不知是哪个变更引起）。
 
+## 源码实现分析
+
+### Prometheus Alertmanager 告警生命周期
+
+```go
+// github.com/prometheus/alertmanager/dispatch/dispatch.go
+// Alertmanager 告警状态机：firing → acknowledged → resolved
+func (d *Dispatcher) processAlert(alert *types.Alert) {
+    // T1: 告警触发，开始计时 MTTD
+    if alert.Status() == model.AlertFiring {
+        d.metrics.AlertReceived.WithLabelValues("firing").Inc()
+        // 路由到对应 receiver（PagerDuty/Slack/Webhook）
+        d.route(alert)
+    }
+    // T5: 告警解决，计算 MTTR = resolved_at - fired_at
+    if alert.Status() == model.AlertResolved {
+        d.metrics.AlertResolved.WithLabelValues().Observe(
+            time.Since(alert.StartsAt).Seconds(),
+        )
+    }
+}
+```
+
+### MTTR 度量架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│              MTTR 度量与优化架构                        │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  故障源          检测层           响应层          修复层  │
+│  ─────          ─────           ─────          ─────  │
+│  Pod Crash  →  Prometheus   →  Alertmanager → 自愈控制器 │
+│  Node Down  →  Node Exporter →  PagerDuty   → Runbook  │
+│  Disk Full  →  kubelet     →  Slack       → 自动扩容  │
+│  Cert Expire→  blackbox    →  Email       → cert-manager│
+│                                                           │
+│  度量指标:                                                │
+│  MTTD = T(alert_fired) - T(fault_start)                   │
+│  MTTA = T(ack) - T(alert_fired)                           │
+│  MTTR = T(resolved) - T(alert_fired)                      │
+└───────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：MTTR 度量仪表盘（🟢 只读查询）
+
+```yaml
+# PrometheusRule: MTTR 度量告警规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mttr-slo
+  namespace: monitoring
+spec:
+  groups:
+  - name: mttr.rules
+    rules:
+    - alert: HighMTTR
+      expr: |
+        avg_over_time(
+          (ALERTS{alertstate="resolved"} - ALERTS{alertstate="firing"})[1h:5m]
+        ) > 1800
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "MTTR 超过 30 分钟 SLO"
+        runbook_url: "https://wiki.internal/runbooks/high-mttr"
+```
+
+### 场景二：自动化故障诊断（🟡 修改集群状态）
+
+```bash
+#!/bin/bash
+# 自动诊断脚本：收集故障上下文，缩短 MTTI
+POD=$1; NS=${2:-default}
+echo "=== Pod Events ==="
+kubectl get events -n $NS --field-selector involvedObject.name=$POD --sort-by='.lastTimestamp'
+echo "=== Previous Logs ==="
+kubectl logs $POD -n $NS --previous --tail=100 2>/dev/null || echo "No previous logs"
+echo "=== Resource Usage ==="
+kubectl top pod $POD -n $NS --containers 2>/dev/null
+echo "=== Node Conditions ==="
+NODE=$(kubectl get pod $POD -n $NS -o jsonpath='{.spec.nodeName}')
+kubectl describe node $NODE | grep -A5 "Conditions:"
+```
+
+### 场景三：自动回滚降低 MTTR（🔴 影响生产流量）
+
+```yaml
+# Argo Rollouts 自动回滚配置
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: web-app
+spec:
+  strategy:
+    canary:
+      steps:
+      - setWeight: 10
+      - pause: {duration: 5m}
+      - analysis:
+          templates:
+          - templateName: success-rate
+      - setWeight: 50
+      - pause: {duration: 10m}
+      analysis:
+        templates:
+        - templateName: success-rate
+        args:
+        - name: service-name
+          value: web-app
+      # 分析失败自动回滚，MTTR < 2min
+```
+
+## 面试要点
+
+1. **MTTR 的分层组成及优化杠杆？**
+   - MTTD（检测）：监控覆盖率 + 告警精准度
+   - MTTA（响应）：On-Call 机制 + 告警路由
+   - MTTI（定位）：可观测性 + 自动根因分析
+   - MTTR（修复）：预案 + 自愈 + 自动回滚
+
+2. **K8s 哪类问题 MTTR 最长？为什么？**
+   - 控制平面问题（30-120min）：影响面大、组件耦合复杂
+   - 存储层问题（15-60min）：数据安全性约束、不能简单重启
+   - Pod 层最短（5-15min）：日志明确、控制器自愈
+
+3. **如何将 MTTR 从小时级压到分钟级？**
+   - 自动化检测：黄金四信号 + SLO 告警
+   - 自动化诊断：集中式日志 + 分布式追踪
+   - 自动化修复：自愈控制器 + 自动回滚 + Runbook 即代码
+
+4. **如何度量 MTTR 并持续改进？**
+   - Prometheus 记录告警 firing/resolved 时间戳
+   - Grafana 仪表盘趋势分析
+   - 每次 Tier-1 故障 blameless postmortem
+   - 混沌工程验证预案有效性
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

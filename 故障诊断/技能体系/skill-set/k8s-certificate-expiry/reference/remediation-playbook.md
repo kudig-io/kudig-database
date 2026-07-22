@@ -117,6 +117,50 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 cp -r /etc/kubernetes/pki.bak.20260101 /etc/kubernetes/pki
 systemctl restart kubelet
 ```
+
+## 验证方法
+
+``` bash
+# 🟢 低风险：验证证书续期成功
+# 1. 检查 apiserver 证书有效期
+openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates
+
+# 2. 检查 kubelet 客户端证书
+openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
+
+# 3. 验证集群通信正常
+kubectl get nodes
+kubectl cluster-info
+
+# 4. 检查所有控制平面组件状态
+kubectl get pods -n kube-system -l tier=control-plane
+```
+
+## 升级决策点
+
+- **P0（立即处理）**：apiserver 证书已过期，kubectl 无法连接集群
+- **P1（24小时内）**：证书将在 7 天内过期，需安排变更窗口续期
+- **P2（计划内）**：证书 30 天内过期，纳入下次维护窗口处理
+
+## 生产注意事项
+
+1. 续期前必须备份整个 `/etc/kubernetes/pki/` 目录
+2. kubeadm 集群使用 `kubeadm certs renew all` 续期，会更新所有控制平面证书
+3. 续期后需重启控制平面组件（kube-apiserver、kube-controller-manager、kube-scheduler）
+4. kubelet 客户端证书由 controller-manager 自动轮换，无需手动处理
+5. 建议配置证书过期监控：`apiserver_client_certificate_expiration_seconds` 指标
+
+## 面试要点
+
+1. **Q: Kubernetes 集群中有哪些证书？分别用于什么？**
+   A: ① CA 证书（签发其他证书）；② apiserver serving 证书（HTTPS 服务端）；③ apiserver-kubelet-client（apiserver 访问 kubelet）；④ front-proxy 证书（API 聚合层）；⑤ etcd 证书（etcd 通信）；⑥ kubelet 客户端证书（kubelet 身份认证）；⑦ ServiceAccount 签名密钥对。
+
+2. **Q: 证书过期后如何紧急恢复？**
+   A: ① SSH 到控制平面节点；② 备份 pki 目录；③ `kubeadm certs renew all`；④ 重启静态 Pod（`crictl stop` 或移动 manifest）；⑤ 验证 `kubectl get nodes`；⑥ 检查 kubelet 证书自动轮换状态。若 CA 过期则需更复杂的 CA 重签流程。
+
+3. **Q: 如何实现证书自动轮换？**
+   A: kubelet 客户端证书由 kube-controller-manager 的 CSR 控制器自动签发轮换（默认 1 年）。控制平面证书可用 kubeadm 定期 renew + cronjob 自动化。生产建议：① 部署 cert-manager 管理应用层证书；② 监控证书剩余有效期 <30天告警；③ 将证书续期纳入集群升级流程。
+
 ## 参见
 
 - [[remediation-playbook]] — reference 领域核心页面

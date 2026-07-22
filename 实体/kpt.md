@@ -74,7 +74,7 @@ kpt 通过 ResourceGroup CRD 与 Kubernetes 集成。`kpt live apply` 将包中�
 3. **GitOps 配置管理**: 配合 ArgoCD，使用 kpt 渲染 + GitOps 同步实现声明式部署
 4. **配置合规验证**: 在 CI/CD 中运行 validator 函数，拦截不符合安全/合规标准的配置
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 kpt CLI
@@ -93,6 +93,86 @@ kpt live init
 kpt live apply
 ```
 
+### Kptfile 配置示例
+
+```yaml
+# Kptfile - 包元数据和函数管道定义
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: my-app
+  annotations:
+    config.kubernetes.io/local-config: "true"
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/set-namespace:v0.4
+      configMap:
+        namespace: production
+    - image: gcr.io/kpt-fn/set-labels:v0.2
+      configMap:
+        app.kubernetes.io/managed-by: kpt
+    - image: gcr.io/kpt-fn/apply-replacements:v0.1
+      configMap:
+        replicas: "3"
+  validators:
+    - image: gcr.io/kpt-fn/gatekeeper:v0.3
+      configMap:
+        constraint: require-labels
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看包状态
+kpt pkg tree
+kpt pkg diff
+
+# 🟡 更新上游包
+kpt pkg update @v1.1
+
+# 🟡 渲染函数管道
+kpt fn render
+
+# 🟢 查看资源状态
+kpt live status
+
+# 🟡 应用到集群
+kpt live apply --reconcile-timeout=5m
+
+# 🟡 预览变更（dry-run）
+kpt live apply --dry-run
+
+# 🔴 删除包中所有资源
+kpt live destroy
+
+# 🟢 查看 ResourceGroup
+kubectl get resourcegroup -A
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| fn render 失败 | 函数镜像拉取失败 | `kpt fn render --stack-trace` | 检查网络和镜像仓库 |
+| live apply 失败 | 资源冲突 | `kpt live apply --dry-run` | 检查集群中已有资源 |
+| 包更新冲突 | 本地修改与上游冲突 | `kpt pkg diff` | 手动解决冲突 |
+| ResourceGroup 不匹配 | inventory 模板变更 | `kubectl get resourcegroup` | 重新 `kpt live init` |
+| 函数验证失败 | 配置不符合策略 | 查看 validator 输出 | 修复配置使其符合策略 |
+
+## 生产案例
+
+### 案例1: 平台配置标准化分发
+
+**场景**: 10+ 团队需要统一的 Namespace 配置（RBAC、NetworkPolicy、ResourceQuota）  
+**方案**: 封装为 kpt 包 + 函数管道参数化 + Git 分发  
+**效果**: 新团队环境配置从 3天缩短到 10分钟  
+
+### 案例2: 配置合规验证
+
+**场景**: 生产集群需要确保所有 Deployment 配置资源限制  
+**方案**: 在 kpt pipeline 中添加 gatekeeper validator，CI 中拦截不合规配置  
+**效果**: 不合规配置在提交前即被拦截  
+
 ## 对比
 
 | 特性 | kpt | Helm | Kustomize | Carvel ytt |
@@ -101,10 +181,21 @@ kpt live apply
 | 函数可编程 | ✅ KRM Functions | ⚠️ 模板函数 | ❌ | ✅ Starlark |
 | Git 原生 | ✅ | ⚠️ Chart Repo | ⚠️ | ⚠️ |
 | 资源管理 | ✅ kpt live | ⚠️ helm install | ❌ 需 kubectl | ❌ 需 kubectl |
+| 学习曲线 | 中等 | 低 | 低 | 中等 |
+| ArgoCD 集成 | ✅ 原生 | ✅ | ✅ | ⚠️ |
 
 ## 架构定位
 
 在 CNCF 生态中，kpt 属于 **Config** 类别，为云原生应用提供以 Git 为中心的配置包管理能力。
+
+## 检查清单
+
+- [ ] 配置包纳入 Git 版本控制
+- [ ] 函数管道包含 validator 验证
+- [ ] 使用 kpt live 管理资源生命周期
+- [ ] 配置上游包版本锁定
+- [ ] CI 中运行 kpt fn render 验证
+- [ ] 生产环境使用 kpt live apply --dry-run 预览
 
 ## 参考链接
 
@@ -118,10 +209,7 @@ kpt live apply
 - [[opengemini]] — openGemini
 - [[kmesh]] — Kmesh
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- kpt
 - [[实体/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 

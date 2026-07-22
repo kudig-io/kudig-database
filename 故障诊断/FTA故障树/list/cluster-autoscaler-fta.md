@@ -177,6 +177,87 @@ flowchart TD
 
   %% ========== 4. 调度信号异常
 
+## 生产案例
+
+### 案例1: Cluster Autoscaler 未触发扩容
+
+**时间线**:
+- 16:00 大量 Pod Pending，但 CA 未扩容
+- 16:05 CA 日志: `pod didn't trigger scale-up: 1 max node group size reached`
+- 16:10 确认根因: 节点池已达到 maxSize 限制
+- 16:15 调高 maxSize 后 CA 触发扩容
+
+**根因链**:
+```
+Pod Pending → CA评估需要扩容 → 节点池已达maxSize
+→ 扩容被拒绝 → Pod持续Pending
+```
+
+**修复**:
+```bash
+# 🟢 检查 CA 状态
+kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100 | grep -i "scale-up\|max\|failed"
+# 🟢 检查节点池配置
+kubectl get nodepool -o wide
+# 🟡 调整 maxSize
+kubectl patch nodepool ${POOL} -p '{"spec":{"maxSize":100}}'
+```
+
+### 案例2: CA 缩容导致服务中断
+
+**现象**: 低峰期节点被缩容，但上面的 Pod 未正常迁移
+
+**根因**: 缩容时未考虑 PDB，强制驱逐导致服务短暂不可用
+
+**修复**:
+```bash
+# 🟡 配置 CA 缩容保护
+# --scale-down-grace-period=600
+# --skip-nodes-with-local-storage=false
+# 确保关键服务配置 PDB
+kubectl apply -f pdb.yaml
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: cluster-autoscaler-alerts
+  rules:
+  - alert: CAScaleUpFailed
+    expr: increase(cluster_autoscaler_failed_scale_ups_total[15m]) > 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: CAPendingPodsHigh
+    expr: cluster_autoscaler_unschedulable_pods_count > 20
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| maxSize 充足 | 根据峰值预留 50% | P0 |
+| 缩容保护 | PDB + scale-down-grace-period | P0 |
+| 多节点池 | 不同规格/可用区分散风险 | P1 |
+| 缩容冷却期 | scale-down-unneeded-time=10m | P1 |
+
+## 面试要点
+
+1. **Q: Cluster Autoscaler 的扩容决策流程？**
+   A: 检测 Pending Pod → 模拟调度找到合适节点池 → 检查 maxSize/配额 → 调用云 API 创建实例 → 新节点 Ready → Pod 调度成功
+
+2. **Q: CA 不扩容的常见原因？**
+   A: 节点池达 maxSize → 云资源库存不足 → Pod 有 nodeSelector/affinity 不匹配 → 资源请求超过单节点容量 → CA Pod 本身异常
+
+3. **Q: 如何避免 CA 缩容导致服务中断？**
+   A: 配置 PDB → 设置 scale-down-grace-period → 关键 Pod 添加 safe-to-evict=false 注解 → 缩容冷却期 → 多副本分散
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

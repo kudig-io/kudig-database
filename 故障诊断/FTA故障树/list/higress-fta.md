@@ -84,6 +84,85 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 ```
 ---
 
+## 生产案例
+
+### 案例1: Higress 网关 503 - 上游服务不可用
+
+**时间线**:
+- 09:30 业务发布新版本，Pod 滚动更新中
+- 09:31 Higress 返回大量 503，日志显示 `no healthy upstream`
+- 09:33 确认根因: 新 Pod 未 Ready 但旧 Pod 已终止，Endpoint 短暂为空
+- 09:35 新 Pod Ready，流量恢复
+
+**根因链**:
+```
+滚动更新 → 旧Pod终止 → 新Pod未Ready → Endpoint为空
+→ Higress无健康上游 → 503 Service Unavailable
+```
+
+**修复**:
+```bash
+# 🟢 检查 Higress 日志
+kubectl logs -n higress-system -l app=higress-gateway --tail=100 | grep -i "503\|unhealthy\|no_healthy"
+# 🟡 配置重试和熔断
+# 在 Higress 路由规则中添加 retry policy 和 outlier detection
+```
+
+### 案例2: Higress 配置下发失败
+
+**现象**: 新增路由规则不生效，Higress Controller 日志显示 `xDS push timeout`
+
+**根因**: Istio Pilot 组件内存不足，xDS 推送延迟
+
+**修复**:
+```bash
+# 🟢 检查 Higress Controller 状态
+kubectl get pods -n higress-system -l app=higress-controller
+kubectl logs -n higress-system -l app=higress-controller --tail=50 | grep -i error
+# 🟡 调整资源限制
+kubectl patch deployment higress-controller -n higress-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"higress-controller","resources":{"limits":{"memory":"2Gi"}}}]}}}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: higress-alerts
+  rules:
+  - alert: HigressHigh5xxRate
+    expr: rate(envoy_cluster_upstream_rq{response_code_class="5"}[5m]) > 10
+    for: 3m
+    labels:
+      severity: critical
+  - alert: HigressGatewayDown
+    expr: up{job="higress-gateway"} == 0
+    for: 1m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 网关多副本 | 至少 2 副本 + 反亲和 | P0 |
+| 优雅关闭 | preStop + 足够的 drain 时间 | P0 |
+| xDS 推送监控 | 监控配置同步延迟 | P1 |
+| 熔断配置 | outlier detection 自动剔除不健康上游 | P1 |
+
+## 面试要点
+
+1. **Q: Higress 与 Nginx Ingress 的区别？**
+   A: Higress 基于 Envoy + Istio，支持 xDS 动态配置；Nginx Ingress 需 reload；Higress 支持 Wasm 插件扩展；性能上 Envoy 连接管理更优
+
+2. **Q: Higress 503 的排查思路？**
+   A: 检查上游 Endpoint 是否健康 → 查看 Higress 日志(no_healthy_upstream) → 确认路由配置 → 检查熔断/重试策略 → 验证服务发现
+
+3. **Q: Higress 的架构组件？**
+   A: higress-gateway(Envoy数据面) + higress-controller(控制面，基于Istio Pilot) + higress-console(管理控制台)
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

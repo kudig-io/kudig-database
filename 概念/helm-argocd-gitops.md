@@ -173,6 +173,108 @@ spec:
 - **ArgoCD selfHeal 与 Helm 价值观冲突**：开启 selfHeal 后，任何手动 `kubectl` 修改都会被回滚——需要团队充分理解这一行为
 - **Chart 仓库缓存延迟**：ArgoCD 默认缓存 Helm 仓库索引，新版本 chart 可能不会立即被检测到——需要配置合理的 `helm.repos` 缓存刷新间隔
 
+## 源码实现分析
+
+### ArgoCD Application Controller 调谐循环
+
+```go
+// github.com/argoproj/argo-cd/controller/appcontroller.go
+// ArgoCD 核心调谐逻辑
+func (ctrl *ApplicationController) processAppRefreshQueueItem() {
+    // 1. 获取期望状态（Git 仓库中的 manifests）
+    targetObjs, _, err := ctrl.appStateManager.GetComparisonSettings(app)
+    
+    // 2. 获取实际状态（集群中的资源）
+    liveObjs := ctrl.getResourceTree(app)
+    
+    // 3. 三方对比（Git vs Live vs Previous）
+    comparison := ctrl.appStateManager.CompareAppState(app, targetObjs, liveObjs)
+    // OutOfSync: Git 与集群不一致
+    // Degraded: 资源健康检查失败
+    
+    // 4. 自动同步（如果启用 auto-sync）
+    if app.Spec.SyncPolicy != nil && app.Spec.SyncPolicy.Automated != nil {
+        ctrl.autoSync(app, comparison)
+        // 执行 kubectl apply --prune 将集群收敛到 Git 状态
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│         Helm + ArgoCD GitOps 流水线                    │
+├─────────────────────────────────────────────────────────┤
+│  Developer                                              │
+│       │ git push                                        │
+│       ▼                                                 │
+│  ┌────────────┐    ┌───────────────┐  │
+│  │  Git Repo   │───▶│  ArgoCD Watch  │  │
+│  │ (Helm Chart)│    │  (3min poll)   │  │
+│  └────────────┘    └───────────────┘  │
+│                           │                   │
+│                    helm template              │
+│                           │                   │
+│                           ▼                   │
+│                    ┌─────────────┐          │
+│                    │  3-way diff  │          │
+│                    │ Git vs Live  │          │
+│                    └─────────────┘          │
+│                           │                   │
+│                    OutOfSync? ──▶ Auto Sync   │
+│                           │                   │
+│                           ▼                   │
+│                    ┌─────────────┐          │
+│                    │  K8s Cluster │          │
+│                    └─────────────┘          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：GitOps 故障诊断
+
+```bash
+# 🟢 检查 ArgoCD 应用同步状态
+argocd app list
+argocd app get <app-name> --show-params
+
+# 🟢 查看同步差异
+argocd app diff <app-name>
+
+# 🟡 手动触发同步
+argocd app sync <app-name> --prune
+# 🔴 --prune 会删除 Git 中不存在的资源，生产慎用
+
+# 🟢 检查 Helm release 状态
+helm list -A
+helm history <release> -n <ns>
+
+# 🟡 回滚 Helm release
+helm rollback <release> <revision> -n <ns>
+```
+
+## 面试要点
+
+1. **ArgoCD 如何检测集群漂移（drift）？**
+   - 每 3 分钟 poll Git 仓库（或 Webhook 触发）
+   - 三方对比：Git 期望状态 vs 集群实际状态 vs 上次同步状态
+   - OutOfSync 表示有人手动修改了集群资源（kubectl apply）
+   - 启用 auto-sync + self-heal 可自动修复漂移
+
+2. **Helm 在 GitOps 中的角色是什么？**
+   - Helm Chart 作为应用打包格式，支持参数化部署
+   - ArgoCD 原生支持 Helm：自动执行 helm template 渲染
+   - values.yaml 分环境管理（dev/staging/prod）
+   - Helm hooks 处理迁移/回滚逻辑
+
+3. **GitOps 中如何处理 Secret？**
+   - 明文 Secret 不能存 Git，使用 Sealed Secrets / SOPS / External Secrets
+   - Sealed Secrets：加密后的 Secret 可安全存 Git，Controller 解密
+   - External Secrets：从 Vault/AWS SSM 动态拉取，Git 只存引用
+
+4. **ArgoCD 与 Flux 的对比？**
+   - ArgoCD：有 UI，多集群管理强，适合大团队
+   - Flux：纯 CLI/CRD，轻量，与 Helm 集成更紧密
+   - 两者都是 CNCF 毕业项目，核心原理相同（Git 为唯一真相源）
+
 ## 相关页面
 
 - [[helm]] — Helm Chart 管理

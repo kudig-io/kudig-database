@@ -336,6 +336,128 @@ spec:
 | 6 | 改进行动已分配 | ☐ |
 | 7 | 报告已归档 | ☐ |
 
+## 场景演练记录模板
+
+```markdown
+# DR 场景演练记录
+
+## 演练信息
+- **场景**: 单 AZ 故障
+- **日期**: 2026-07-21
+- **时间窗口**: 10:00 - 12:00
+- **参与者**: @sre-lead, @dba-oncall, @dev-lead
+
+## 演练目标
+1. 验证节点故障自动检测 (< 2min)
+2. 验证 Pod 自动重新调度 (< 5min)
+3. 验证服务恢复 (< 10min)
+
+## 注入方式
+```bash
+# 模拟节点故障
+kubectl cordon node-1
+kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
+```
+
+## 演练结果
+
+| 指标 | 目标 | 实际 | 状态 |
+|-----|------|------|------|
+| 检测时间 | < 2min | 45s | ✅ |
+| Pod 重调度 | < 5min | 3min | ✅ |
+| 服务恢复 | < 10min | 8min | ✅ |
+
+## 发现的问题
+1. 部分 Pod 未配置 PDB，导致同时驱逐
+2. 监控告警延迟 30s
+
+## 改进行动
+| 行动 | 负责人 | 截止日期 |
+|-----|-------|----------|
+| 为核心服务配置 PDB | @sre | 07-25 |
+| 优化告警规则 | @sre | 07-22 |
+```
+
+## 持续改进
+
+### 场景库维护
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dr-scenarios-catalog
+  namespace: dr-system
+data:
+  scenarios.yaml: |
+    scenarios:
+      - id: DR-SCN-001
+        name: 单 AZ 故障
+        category: infrastructure
+        priority: P0
+        last_drill: 2026-07-21
+        next_drill: 2026-08-21
+        rto_target: 5min
+        rpo_target: 0
+        status: validated
+        
+      - id: DR-SCN-002
+        name: etcd 数据损坏
+        category: infrastructure
+        priority: P0
+        last_drill: 2026-06-15
+        next_drill: 2026-09-15
+        rto_target: 30min
+        rpo_target: 5min
+        status: validated
+        
+      - id: DR-SCN-003
+        name: 数据库主节点故障
+        category: application
+        priority: P0
+        last_drill: 2026-07-01
+        next_drill: 2026-08-01
+        rto_target: 5min
+        rpo_target: 0
+        status: needs_improvement
+        improvements:
+          - 优化 Patroni 切换时间
+          - 增加连接池重试
+```
+
+### 场景覆盖率仪表板
+
+```json
+{
+  "dashboard": {
+    "title": "DR 场景覆盖率",
+    "panels": [
+      {
+        "title": "场景验证状态",
+        "type": "stat",
+        "targets": [
+          { "expr": "count(dr_scenario_status == 1)" }
+        ]
+      },
+      {
+        "title": "逾期演练",
+        "type": "table",
+        "targets": [
+          { "expr": "time() - dr_scenario_last_drill_timestamp > dr_scenario_drill_interval" }
+        ]
+      },
+      {
+        "title": "RTO 达标率",
+        "type": "gauge",
+        "targets": [
+          { "expr": "sum(dr_scenario_rto_achieved) / count(dr_scenario_rto_achieved) * 100" }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## 相关
 
 - 可靠性/02-disaster-recovery/README.md

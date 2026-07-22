@@ -76,7 +76,9 @@ Kuadrant 通过 Gateway API 的 Policy Attachment 模式与 Kubernetes 集成。
 3. **多区域流量调度**: 通过 DNSPolicy 实现多区域部署的就近访问和故障转移
 4. **零信任 API**: 对内部微服务间的 API 调用进行 mTLS 认证和授权
 
-## 安装
+## 安装与配置
+
+### Operator 部署
 
 ```bash
 # 安装 Kuadrant Operator
@@ -85,8 +87,15 @@ kubectl apply -f https://github.com/Kuadrant/kuadrant-operator/releases/latest/d
 # 等待 Operator 就绪
 kubectl wait --for=condition=Available deployment/kuadrant-operator-controller-manager -n kuadrant-system
 
+# 验证部署
+kubectl get pods -n kuadrant-system
+kubectl get crd | grep kuadrant
+```
+
+### Kuadrant 实例与策略配置
+
+```yaml
 # 创建 Kuadrant 实例
-kubectl apply -f - <<EOF
 apiVersion: kuadrant.io/v1beta1
 kind: Kuadrant
 metadata:
@@ -94,10 +103,8 @@ metadata:
   namespace: kuadrant-system
 spec:
   gatewaySelector: {}
-EOF
-
-# 附加 AuthPolicy 到 HTTPRoute
-kubectl apply -f - <<EOF
+---
+# AuthPolicy - JWT 认证
 apiVersion: kuadrant.io/v1beta2
 kind: AuthPolicy
 metadata:
@@ -112,17 +119,86 @@ spec:
       jwt:
         issuer: "https://my-idp.com"
         audiences: ["my-api"]
-EOF
+---
+# RateLimitPolicy - 限流
+apiVersion: kuadrant.io/v1beta2
+kind: RateLimitPolicy
+metadata:
+  name: my-ratelimit
+spec:
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: my-route
+  limits:
+    - name: per-user
+      rates:
+        - limit: 100
+          duration: 60
+          unit: seconds
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看策略状态
+kubectl get authpolicy -A
+kubectl get ratelimitpolicy -A
+kubectl describe authpolicy my-auth
+
+# 🟡 应用新策略
+kubectl apply -f auth-policy.yaml
+
+# 🟡 更新限流配置
+kubectl patch ratelimitpolicy my-ratelimit --type merge -p '{"spec":{"limits":[{"name":"per-user","rates":[{"limit":200,"duration":60,"unit":"seconds"}]}]}}'
+
+# 🔴 删除策略
+kubectl delete authpolicy my-auth
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 策略未生效 | targetRef 不匹配 | `kubectl describe authpolicy <name>` | 检查 targetRef 配置 |
+| 认证失败 | JWT issuer 错误 | 检查 AuthPolicy rules | 确认 issuer 和 audiences |
+| 限流未触发 | 配置未同步 | `kubectl get ratelimitpolicy -o yaml` | 检查 limits 配置 |
+| Operator CrashLoop | CRD 版本不匹配 | `kubectl logs -n kuadrant-system` | 重新应用 CRD |
+
+**排查流程：**
+```
+策略未生效
+├── 检查 Operator 状态 → kubectl get pods -n kuadrant-system
+├── 检查策略状态 → kubectl describe authpolicy <name>
+├── 检查 targetRef → 确认 HTTPRoute 存在
+├── 检查 Gateway → kubectl get gateway
+└── 查看日志 → kubectl logs -n kuadrant-system -l app=kuadrant
+```
+
+## 生产案例
+
+### 案例一：API 网关统一认证
+
+- **场景**: 多个微服务通过 Gateway API 暴露，需要统一 JWT 认证
+- **排查**: 使用 Kuadrant AuthPolicy 在网关层统一认证，无需每个服务单独实现
+- **方案**: 为每个 HTTPRoute 配置 AuthPolicy，JWT 验证在网关层完成
+- **效果**: 服务无需关心认证逻辑，安全策略集中管理
+
+### 案例二：API 限流保护
+
+- **场景**: 公开 API 需要限流保护，防止滥用
+- **排查**: 使用 Kuadrant RateLimitPolicy 在网关层限流
+- **方案**: 按用户/API Key 限流，每分钟 100 次请求
+- **效果**: 后端服务免受流量冲击，无需修改应用代码
 
 ## 对比
 
-| 特性 | Kuadrant | Kong | Tyk | APISIX |
-|------|----------|------|-----|--------|
-| Gateway API | ✅ 原生 | ⚠️ | ⚠️ | ⚠️ |
-| Policy Attachment | ✅ | ❌ | ❌ | ❌ |
-| OpenFGA AuthZ | ✅ | ❌ | ❌ | ❌ |
-| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF |
+| 特性 | Kuadrant | Kong | Tyk | APISIX | 适用场景 |
+|------|----------|------|-----|--------|----------|
+| Gateway API | ✅ 原生 | ⚠️ | ⚠️ | ⚠️ | Kuadrant 首选 |
+| Policy Attachment | ✅ | ❌ | ❌ | ❌ | - |
+| OpenFGA AuthZ | ✅ | ❌ | ❌ | ❌ | 细粒度授权 |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF | - |
 
 ## 架构定位
 

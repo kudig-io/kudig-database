@@ -76,7 +76,7 @@ k0s 是 100% 上游 Kubernetes 兼容发行版，通过 CNCF 一致性认证。�
 3. **开发测试**: 快速创建本地开发集群，零配置启动
 4. **Air-gap 环境**: 单二进制 + 离线镜像包适配隔离网络环境
 
-## 安装
+## 安装与配置
 
 ```bash
 # 单节点安装
@@ -87,6 +87,173 @@ sudo k0s start
 curl -sSLf https://github.com/k0sproject/k0sctl/releases/latest/download/k0sctl-linux-x64 -o k0sctl
 k0sctl apply --config cluster.yaml
 ```
+
+### k0sctl 集群配置示例
+
+```yaml
+# cluster.yaml
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: prod-k0s-cluster
+spec:
+  k0s:
+    version: "1.30.2+k0s.0"
+    config:
+      apiVersion: k0s.k0sproject.io/v1beta1
+      kind: ClusterConfig
+      spec:
+        network:
+          provider: calico
+          calico:
+            mode: vxlan
+        storage:
+          type: etcd
+        telemetry:
+          enabled: false
+  hosts:
+    - role: controller+etcd
+      count: 3
+      ssh:
+        address: 10.0.1.1
+        user: root
+        keyPath: ~/.ssh/id_rsa
+    - role: worker
+      count: 5
+      ssh:
+        address: 10.0.2.1
+        user: root
+        keyPath: ~/.ssh/id_rsa
+```
+
+### 获取 kubeconfig
+
+```bash
+# 从 k0sctl 获取
+k0sctl kubeconfig > kubeconfig
+export KUBECONFIG=./kubeconfig
+kubectl get nodes
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+k0s status
+
+# 🟢 查看节点信息
+kubectl get nodes -o wide
+
+# 🟢 查看控制平面组件状态
+kubectl get componentstatuses
+kubectl get pods -n kube-system
+
+# 🟡 添加 Worker 节点
+k0s token create --role=worker > worker-token
+# 在新节点执行:
+curl -sSLf https://get.k0s.sh | sudo sh
+sudo k0s install worker --token-file worker-token
+sudo k0s start
+
+# 🟡 滚动升级集群
+k0sctl apply --config cluster-upgraded.yaml
+# 或使用 Autopilot
+k0s autopilot
+
+# 🔴 移除节点
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubectl delete node <node>
+
+# 🟢 查看 etcd 健康状态
+k0s etcd leave --help  # 仅查看
+etcdctl --endpoints=https://127.0.0.1:2379 endpoint health
+
+# 🟡 备份 etcd
+k0s etcd snapshot save /backup/etcd-$(date +%Y%m%d).db
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 节点 NotReady | kubelet 未启动 | `systemctl status k0scontroller` | `sudo k0s start` |
+| API Server 无响应 | 证书过期 | `k0s status` | 重新生成证书 |
+| etcd 集群不健康 | 多数节点失联 | `etcdctl endpoint health` | 恢复失联节点或移除成员 |
+| Pod Pending | CNI 未就绪 | `kubectl get pods -n kube-system -l k8s-app=calico-node` | 检查 Calico DaemonSet |
+| 升级失败 | 版本跳跃过大 | `k0s version` | 逐版本升级 |
+| Worker 加入失败 | Token 过期 | `k0s token create --role=worker` | 重新生成 Token |
+
+### 排查流程
+
+```
+k0s 集群异常
+├─ 控制平面不可用？
+│  ├─ k0s status 报错 → 检查 systemd 服务状态
+│  ├─ API Server 无响应 → 检查证书有效期、端口 6443
+│  └─ etcd 异常 → etcdctl endpoint status
+├─ Worker 节点 NotReady？
+│  ├─ kubelet 未运行 → systemctl status k0sworker
+│  ├─ 容器运行时异常 → crictl ps / journalctl -u k0sworker
+│  └─ 网络不通 → 检查 CNI Pod 和路由表
+└─ 升级失败？
+   ├─ Autopilot 报错 → kubectl get updateconfigs -n kube-system
+   └─ 版本不兼容 → 确认升级路径（最多跳 2 个 minor）
+```
+
+## 生产案例
+
+### 案例 1: 边缘工厂 Air-gap 环境部署
+
+**场景**: 某制造企业在无外网的工厂环境部署 K8s 管理产线 IoT 设备。
+
+**方案**:
+1. 在有网环境下载 k0s 二进制 + 离线镜像包
+2. 使用 k0s airgap install 安装
+3. 配置私有 Registry 镜像源
+```bash
+# 离线安装
+sudo k0s install controller --single --disable-components=konnectivity-server
+sudo k0s start
+# 导入离线镜像
+k0s image import airgap-images.tar
+```
+
+**效果**: 30 分钟内完成单节点部署，稳定运行 18 个月无故障。
+
+### 案例 2: 从 kubeadm 迁移到 k0s
+
+**场景**: 运维团队希望简化 50 节点裸金属集群的运维复杂度。
+
+**方案**:
+1. 新建 k0s 集群（3 Controller + 5 Worker 先行）
+2. 逐步将工作负载迁移到新集群
+3. 旧节点重新以 Worker 角色加入 k0s 集群
+4. 使用 k0sctl 管理全集群生命周期
+
+**效果**: 升级时间从 4 小时缩短到 30 分钟，运维人力减少 60%。
+
+## 对比与替代方案
+
+| 维度 | k0s | k3s | Talos Linux | kubeadm |
+|------|-----|-----|-------------|----------|
+| 部署方式 | 单二进制 | 单二进制 | 不可变 OS | 多组件 |
+| 上游兼容性 | 100% | 替换部分组件 | 100% | 100% |
+| 存储后端 | etcd | SQLite/Dqlite/etcd | etcd | etcd |
+| 管理工具 | k0sctl | Rancher | talosctl | kubeadm |
+| 自动升级 | Autopilot | System Upgrade Controller | 内置 | 手动 |
+| 最小资源 | 512MB RAM | 512MB RAM | 1GB RAM | 2GB RAM |
+| 社区规模 | 中 | 大 | 中 | 官方 |
+
+## 检查清单
+
+- [ ] 控制平面节点数为奇数（3/5）确保 etcd 多数派
+- [ ] k0sctl 配置文件已纳入版本控制
+- [ ] etcd 定期备份已配置（cron + 远程存储）
+- [ ] 升级路径已验证（不超过 2 个 minor 版本跳跃）
+- [ ] Air-gap 环境离线镜像包已准备
+- [ ] Worker Token 安全存储，定期轮换
+- [ ] 监控告警：API Server/etcd/kubelet 健康检查
+- [ ] 节点自动恢复策略已配置
 
 ## 替代方案
 

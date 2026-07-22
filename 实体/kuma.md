@@ -81,21 +81,22 @@ Kuma 通过 Helm Chart 以 Kubernetes 原生方式部署。kuma-cp 作为 Deploy
 3. **多区域容灾**: Multi-Zone 架构提供跨区域的服务发现和流量管理
 4. **渐进式迁移**: 从部分服务开始纳入网格，逐步扩展到全集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Kuma
 helm repo add kuma https://kumahq.github.io/charts
 helm install kuma kuma/kuma -n kuma-system --create-namespace
 
-# 等待控制面就绪
 kubectl wait --for=condition=available deployment/kuma-control-plane -n kuma-system
 
 # 为命名空间启用 Sidecar 注入
 kubectl annotate namespace default kuma.io/sidecar-injection=enabled
+```
 
-# 创建 Mesh 策略（启用 mTLS）
-kubectl apply -f - <<EOF
+### Mesh 策略配置
+
+```yaml
 apiVersion: kuma.io/v1alpha1
 kind: Mesh
 metadata:
@@ -126,21 +127,83 @@ spec:
       kind: Mesh
     default:
       action: Allow
-EOF
+```
 
+```bash
 # 访问 Kuma GUI
 kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681
 ```
 
+## 运维操作
+
+```bash
+# 🟢 查看 Mesh 状态
+kubectl get meshes
+kubectl describe mesh default
+
+# 🟢 查看数据平面代理
+kubectl get dataplanes -A
+kumactl inspect dataplanes
+
+# 🟡 更新 Mesh 策略
+kubectl apply -f mesh-updated.yaml
+
+# 🟡 添加流量规则
+kubectl apply -f traffic-permission.yaml
+
+# 🔴 删除 Mesh（影响所有服务）
+kubectl delete mesh default
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Sidecar 未注入 | namespace 未标注 | `kubectl get ns -o yaml` | 添加 injection annotation |
+| mTLS 失败 | 证书过期 | `kumactl inspect meshes` | 轮换 CA 证书 |
+| 服务不可达 | TrafficPermission 拒绝 | `kubectl get meshtrafficpermission` | 调整访问策略 |
+| 控制平面异常 | 资源不足 | `kubectl get pods -n kuma-system` | 增加资源 |
+| 多区域同步失败 | Zone 连接断开 | `kumactl inspect zones` | 检查 Zone 网络 |
+
+```
+排查流程:
+├── 网格异常
+│   ├── kubectl get pods -n kuma-system → 控制平面状态
+│   ├── kumactl inspect meshes → Mesh 配置
+│   └── kubectl logs kuma-control-plane → 日志
+├── 服务通信失败
+│   ├── kumactl inspect dataplanes → 代理状态
+│   ├── 检查 MeshTrafficPermission
+│   └── 确认 mTLS 配置正确
+└── 性能问题
+    ├── kumactl inspect traffic → 流量指标
+    ├── 检查 Envoy 代理资源
+    └── 确认后端服务健康
+```
+
+## 生产案例
+
+### 案例 1: K8s + VM 混合网格
+
+- **场景**: 部分服务运行在 K8s，部分在 VM，需要统一网格管理
+- **方案**: Kuma 同时管理 K8s Pod 和 VM 上的 Sidecar；统一 mTLS 和流量策略
+- **效果**: 混合环境统一治理，服务间通信全部加密
+
+### 案例 2: 多区域服务发现
+
+- **场景**: 服务分布在 3 个区域，需要跨区域服务发现和容灾
+- **方案**: 部署 Multi-Zone 架构；每个区域一个 Zone CP；全局控制平面统一策略
+- **效果**: 跨区域服务发现自动完成，区域故障时流量自动切换
+
 ## 对比
 
-| 特性 | Kuma | Istio | Linkerd | Consul Connect |
-|------|------|-------|---------|----------------|
-| 多网格 | ✅ | ❌ | ❌ | ⚠️ |
-| VM 支持 | ✅ | ⚠️ | ❌ | ✅ |
-| 多区域 | ✅ | ⚠️ | ❌ | ✅ |
-| 底层引擎 | Envoy | Envoy | Linkerd2-proxy | Envoy/HAProxy |
-| CNCF 状态 | Sandbox | Graduated | Graduated | 非 CNCF |
+| 特性 | Kuma | Istio | Linkerd | Consul Connect | 适用场景 |
+|------|------|-------|---------|----------------|----------|
+| 多网格 | ✅ | ❌ | ❌ | ⚠️ | 多租户 |
+| VM 支持 | ✅ | ⚠️ | ❌ | ✅ | 混合环境 |
+| 多区域 | ✅ | ⚠️ | ❌ | ✅ | 多区域 |
+| 底层引擎 | Envoy | Envoy | Linkerd2-proxy | Envoy/HAProxy | 性能 |
+| CNCF 状态 | Sandbox | Graduated | Graduated | 非 CNCF | 生态 |
 
 ## 架构定位
 

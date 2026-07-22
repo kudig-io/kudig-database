@@ -73,7 +73,7 @@ Distribution 可作为集群内的私有 Registry 部署。通过 Helm Chart 或
 3. **CI/CD 制品仓库**: 存储 CI/CD 构建的 OCI 镜像和 Helm Chart
 4. **Harbor 后端**: Distribution 是 Harbor 的底层 Registry 引擎
 
-## 安装
+## 安装与配置
 
 ```bash
 # Docker 快速启动
@@ -86,6 +86,163 @@ kubectl expose deployment registry --port=5000
 helm repo add twuni https://helm.twun.io
 helm install registry twuni/docker-registry
 ```
+
+### 生产配置示例
+
+```yaml
+# registry-config.yml
+version: 0.1
+log:
+  level: info
+  formatter: json
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+  delete:
+    enabled: true
+  cache:
+    blobdescriptor: inmemory
+  maintenance:
+    uploadpurging:
+      enabled: true
+      age: 168h
+      interval: 24h
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+auth:
+  htpasswd:
+    realm: "Registry Realm"
+    path: /auth/htpasswd
+notifications:
+  events:
+    includereferences: true
+  endpoints:
+    - name: webhook-listener
+      url: https://hooks.internal.com/registry
+      headers:
+        Authorization: [Bearer <token>]
+```
+
+### Pull-Through 缓存配置
+
+```yaml
+# pull-through-cache.yml
+version: 0.1
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry-cache
+proxy:
+  remoteurl: https://registry-1.docker.io
+  username: <docker-hub-user>
+  password: <docker-hub-token>
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看仓库中的镜像列表
+curl -s http://registry:5000/v2/_catalog
+
+# 🟢 查看镜像 Tag 列表
+curl -s http://registry:5000/v2/myapp/tags/list
+
+# 🟢 查看镜像 Manifest
+curl -s -H "Accept: application/vnd.oci.image.manifest.v1+json" \
+  http://registry:5000/v2/myapp/manifests/latest
+
+# 🟡 删除镜像 Tag
+curl -X DELETE http://registry:5000/v2/myapp/manifests/<digest>
+
+# 🟡 执行垃圾回收
+registry garbage-collect /etc/docker/registry/config.yml
+
+# 🟢 检查存储使用情况
+du -sh /var/lib/registry/docker/registry/v2/
+
+# 🟡 配置客户端使用私有 Registry
+# /etc/docker/daemon.json
+# {"insecure-registries": ["registry.internal:5000"]}
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Push 失败 401 | 认证配置错误 | `curl -v http://registry:5000/v2/` | 检查 htpasswd/Token 配置 |
+| Pull 超时 | 存储后端慢 | `iostat -x 1` | 检查磁盘 I/O 或切换 S3 |
+| 磁盘空间不足 | GC 未执行 | `du -sh /var/lib/registry` | 执行 garbage-collect |
+| TLS 错误 | 证书配置问题 | `openssl s_client -connect registry:5000` | 更新证书或配置 insecure-registries |
+| 缓存未命中 | Pull-Through 配置错 | `curl http://cache:5000/v2/_catalog` | 检查 proxy.remoteurl |
+
+### 排查流程
+
+```
+Registry 异常
+├─ 无法访问？
+│  ├─ 连接拒绝 → 检查服务状态和端口
+│  ├─ TLS 错误 → 检查证书链和 SAN
+│  └─ 401 未授权 → 检查认证配置
+├─ Push/Pull 失败？
+│  ├─ 存储后端错误 → 检查磁盘/云存储状态
+│  ├─ 超时 → 检查网络带宽和存储 I/O
+│  └─ Manifest 错误 → 检查 OCI 版本兼容性
+└─ 磁盘空间告警？
+   ├─ 执行 GC → registry garbage-collect
+   └─ 配置自动清理 → uploadpurging + 定期 GC cron
+```
+
+## 生产案例
+
+### 案例 1: 离线环境镜像缓存代理
+
+**场景**: 企业内网无法直接访问 Docker Hub，需在内网部署镜像缓存。
+
+**方案**:
+1. 在 DMZ 区部署 Distribution Pull-Through Cache
+2. 内网节点配置 daemon.json 指向缓存
+3. 首次拉取自动从 Docker Hub 下载并缓存
+```json
+// /etc/docker/daemon.json
+{"registry-mirrors": ["http://registry-cache.internal:5000"]}
+```
+
+**效果**: 外网流量减少 90%，镜像拉取速度提升 5x。
+
+### 案例 2: CI/CD 制品仓库
+
+**场景**: 开发团队需要存储 CI 构建的 OCI 镜像和 Helm Chart。
+
+**方案**:
+1. 部署 Distribution + S3 存储后端
+2. 配置 Webhook 通知触发部署流水线
+3. 定期 GC 清理过期镜像
+
+**效果**: 制品存储统一管理，部署触发延迟 < 5s。
+
+## 对比与替代方案
+
+| 维度 | Distribution | Harbor | Quay | zot |
+|------|-------------|--------|------|-----|
+| UI | ❌ | ✅ 丰富 | ✅ | ❌ |
+| 安全扫描 | ❌ | ✅ Trivy | ✅ | ❌ |
+| RBAC | ❌ | ✅ | ✅ | ❌ |
+| 复制 | ❌ | ✅ | ✅ | ❌ |
+| 资源占用 | 极低 | 高 | 中 | 低 |
+| OCI 兼容 | ✅ 参考实现 | ✅ | ✅ | ✅ |
+| 部署复杂度 | 极低 | 高 | 中 | 低 |
+
+## 检查清单
+
+- [ ] 存储后端已配置（S3/PVC）并启用 delete
+- [ ] 认证已配置（htpasswd/Token）
+- [ ] TLS 证书已配置（生产环境必须）
+- [ ] 垃圾回收 cron 已配置（每周执行）
+- [ ] 监控告警：磁盘使用率 > 80%
+- [ ] Webhook 通知已配置（如需事件驱动）
+- [ ] 客户端 daemon.json 已配置 insecure-registries 或 CA 证书
+- [ ] 备份策略已制定（S3 版本控制或定期快照）
 
 ## 替代方案
 

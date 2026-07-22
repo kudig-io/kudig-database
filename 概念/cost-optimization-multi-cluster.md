@@ -176,6 +176,100 @@ OpenCost 基于这些标签将节点、存储、网络成本分摊到各个维�
 - **Spot 实例无中断处理**：直接将关键服务调度到 Spot 节点而不配置中断处理器，导致服务在实例回收时突然中断
 - **忽视跨区数据传输成本**：多集群多区域部署时，集群间同步流量可能产生高额跨区费用——应优化数据架构减少跨区调用
 
+## 源码实现分析
+
+### Kubecost 成本计算引擎
+
+```go
+// github.com/kubecost/cost-model/pkg/costmodel/costmodel.go
+// Kubecost 成本计算核心
+func (cm *CostModel) ComputeCostData(cli *kubernetes.Clientset) (map[string]*CostData, error) {
+    // 1. 采集所有 Pod 的资源使用
+    pods := cm.getPodMetrics()  // 从 metrics-server/Prometheus
+    
+    // 2. 计算每个 Pod 的成本
+    for _, pod := range pods {
+        cpuCost := pod.CPUUsage * nodePrice.CPUHourly * hours
+        ramCost := pod.RAMUsage * nodePrice.RAMGiBHourly * hours
+        gpuCost := pod.GPUUsage * nodePrice.GPUHourly * hours
+        
+        // 3. 按 label/namespace/deployment 聚合
+        // 支持 idle cost 分配（未使用资源成本分摊）
+        costData[pod.Key] = &CostData{
+            CPU: cpuCost, RAM: ramCost, GPU: gpuCost,
+            Total: cpuCost + ramCost + gpuCost,
+        }
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     多集群成本优化架构                              │
+├─────────────────────────────────────────────────────────┤
+│  Cluster-1 (prod)    Cluster-2 (staging)   Cluster-3    │
+│       │                    │                  │         │
+│       ▼                    ▼                  ▼         │
+│  ┌─────────┐        ┌─────────┐      ┌─────────┐  │
+│  │Kubecost  │        │Kubecost  │      │Kubecost  │  │
+│  │ Agent    │        │ Agent    │      │ Agent    │  │
+│  └─────────┘        └─────────┘      └─────────┘  │
+│       │                    │                  │         │
+│       └────────────────┼────────────────┘         │
+│                        ▼                                │
+│              ┌───────────────────┐              │
+│              │  Kubecost Enterprise │              │
+│              │  (聚合视图 + 告警)   │              │
+│              └───────────────────┘              │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：成本优化操作
+
+```bash
+# 🟢 查看节点资源利用率（识别过度配置）
+kubectl top nodes --sort-by=cpu
+kubectl top pods -A --sort-by=memory | head -20
+
+# 🟢 检查资源请求与实际使用差异
+kubectl get pods -n prod -o json | jq '.items[].spec.containers[].resources.requests'
+
+# 🟡 调整过度配置的 requests
+kubectl set resources deployment/<name> -n <ns> \
+  --requests=cpu=250m,memory=256Mi --limits=cpu=1,memory=1Gi
+# 🔴 生产环境调整前必须确认实际使用量，避免 OOM
+
+# 🟢 检查未使用的 PVC/PV（存储成本浪费）
+kubectl get pvc -A | grep -v Bound
+kubectl get pv | grep Released
+```
+
+## 面试要点
+
+1. **K8s 成本优化的核心策略有哪些？**
+   - Right-sizing：根据实际使用调整 requests/limits
+   - 自动扩缩容：HPA/VPA/KEDA 根据负载动态调整
+   - Spot/抢占式实例：无状态工作负载使用低成本节点
+   - 资源装箱：提高节点利用率，减少空闲资源
+
+2. **多集群成本分摊如何实现？**
+   - 按 namespace/team label 分摊共享资源成本
+   - Idle cost 分配：未使用资源按比例分摊给各团队
+   - 共享服务（监控/日志）成本按使用量分配
+   - Kubecost/OpenCost 提供开箱即用的分摊模型
+
+3. **VPA 和 HPA 在成本优化中的角色？**
+   - HPA：水平扩缩（Pod 副本数），适合无状态服务
+   - VPA：垂直扩缩（单 Pod 资源），适合有状态服务
+   - VPA recommendation 模式：只建议不执行，用于 right-sizing
+   - 两者不能同时对同一指标使用
+
+4. **如何建立 FinOps 实践？**
+   - 可视化：每团队/服务的成本仪表板
+   - 优化：定期审查过度配置、未使用资源
+   - 运营：成本预算告警、异常检测
+   - 工具：Kubecost / OpenCost / 云厂商原生工具
+
 ## 相关 Domain
 
 - 生产运维/01-finops/01-cost-governance

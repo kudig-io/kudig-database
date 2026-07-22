@@ -72,32 +72,196 @@ K8sGPT 通过 Kubernetes API Server 读取集群资源状态（Pod、Service、I
 3. **告警增强**: 将 K8sGPT 结果集成到 AlertManager，在告警中附加 AI 解释
 4. **新人培训**: 利用 AI 生成的解释帮助新 SRE 理解集群问题
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 CLI
 brew install k8sgpt
+# 或
+curl -fsSL https://get.k8sgpt.ai | bash
+
 # 初始化（配置 AI 后端）
-k8sgpt auth
+k8sgpt auth add --backend openai --model gpt-4
+# 或使用本地 LLM (Ollama)
+k8sgpt auth add --backend localai --model llama2 --endpoint http://localhost:8080
+
 # 扫描集群
-k8sgpt analyze --explain
+k8sgpt analyze
+k8sgpt analyze --explain  # 带 AI 解释
+k8sgpt analyze --filter=Pod,Service  # 过滤资源类型
+k8sgpt analyze --namespace=production
+k8sgpt analyze --output json  # JSON 输出
+
 # Operator 模式
 helm repo add k8sgpt https://charts.k8sgpt.ai/
-helm install k8sgpt k8sgpt/k8sgpt-operator -n k8sgpt-system --create-namespace
+helm install k8sgpt k8sgpt/k8sgpt-operator \
+  -n k8sgpt-system --create-namespace \
+  --set backend=openai \
+  --set model=gpt-4
+
+# 验证安装
+kubectl get pods -n k8sgpt-system
+kubectl get k8sgpt -A
 ```
 
-## 替代方案
+```yaml
+# K8sGPT CRD 示例 (Operator 模式)
+apiVersion: core.k8sgpt.ai/v1alpha1
+kind: K8sGPT
+metadata:
+  name: k8sgpt-sample
+  namespace: k8sgpt-system
+spec:
+  backend:
+    backend: openai
+    model: gpt-4
+    baseUrl: ""  # 自定义 API 端点
+  filters:
+    - Pod
+    - Service
+    - Ingress
+    - Deployment
+    - StatefulSet
+  sink:
+    type: slack
+    webhook: "https://hooks.slack.com/services/xxx"
+  extraOptions:
+    backstage:
+      enabled: false
+---
+# Result CRD (自动生成)
+apiVersion: core.k8sgpt.ai/v1alpha1
+kind: Result
+metadata:
+  name: pod-crashloop-abc123
+  namespace: production
+spec:
+  kind: Pod
+  name: payment-service-xyz
+  error:
+    - text: "Pod is in CrashLoopBackOff state"
+      sensitive:
+        - unmasked: "payment-service-xyz"
+  details: "Container 'payment' is crashing repeatedly..."
+  parentObject: "Deployment/payment-service"
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **K8sGPT** | AI 驱动、解释易懂、社区活跃 | 依赖外部 LLM API、成本考量 |
-| HolmesGPT | 与 Robusta 集成更深 | 生态较小 |
-| Robusta | 全面的自动化诊断平台 | 架构更重、部署复杂 |
-| Prometheus Alerts | 无 AI 依赖、成熟稳定 | 仅提供指标告警，无根因分析 |
+## 运维操作
 
-## 架构定位
+```bash
+# 🟢 运行集群扫描
+k8sgpt analyze
+k8sgpt analyze --explain --language=Chinese
 
-在 CNCF 生态中，K8sGPT 属于 **Platform / AIOps** 类别，代表了 AI 与 Kubernetes 运维结合的趋势。它与 Prometheus、Grafana 等监控工具互补，为可观测性增加智能诊断维度。
+# 🟢 查看特定资源问题
+k8sgpt analyze --filter=Pod --namespace=production
+k8sgpt analyze --filter=Service,Ingress
+
+# 🟢 查看 Operator 状态
+kubectl get pods -n k8sgpt-system
+kubectl get k8sgpt -A
+kubectl get results -A
+
+# 🟢 查看扫描结果
+kubectl get results -n production -o yaml
+kubectl get results -A --field-selector spec.kind=Pod
+
+# 🟢 检查 AI 后端连接
+k8sgpt auth list
+k8sgpt auth test
+
+# 🟡 触发重新扫描 (Operator)
+kubectl delete results -A --all  # 清除旧结果，触发重新扫描
+
+# 🟢 导出报告
+k8sgpt analyze --output json > cluster-report.json
+k8sgpt analyze --output json | jq '.results[] | select(.severity=="critical")'
+```
+
+## 内置分析器
+
+| 分析器 | 检测问题 | 严重级别 |
+|--------|----------|----------|
+| Pod | CrashLoopBackOff, ImagePullBackOff, OOMKilled | High/Critical |
+| Service | 无 Endpoint, 端口不匹配 | Medium |
+| Ingress | 后端不存在, TLS 配置错误 | Medium |
+| Deployment | 副本不足, 滚动更新卡住 | High |
+| StatefulSet | PVC 未绑定, Pod 未就绪 | High |
+| Node | NotReady, 资源压力 | Critical |
+| NetworkPolicy | 策略冲突, 无匹配 Pod | Low |
+| HPA | 指标不可用, 达到上限 | Medium |
+| PVC | 未绑定, 容量不足 | High |
+| Log | 错误日志模式识别 | Medium |
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| AI 解释不可用 | LLM API 连接失败 | `k8sgpt auth test` | 检查 API Key/网络 |
+| 扫描无结果 | 集群无问题/过滤器错误 | `k8sgpt analyze --filter=Pod` | 调整过滤器 |
+| Operator 未生成 Result | CRD 未安装 | `kubectl get crd \| grep k8sgpt` | 重新安装 Operator |
+| 扫描超时 | 集群资源过多 | 检查 API Server 负载 | 缩小扫描范围 |
+| 解释质量低 | 模型能力不足 | 尝试更强模型 | 使用 gpt-4 或本地大模型 |
+| 敏感信息泄露 | 未配置脱敏 | 检查 Result 内容 | 配置 sensitive 字段脱敏 |
+
+### 排查流程
+
+```
+K8sGPT 异常
+├── CLI 扫描失败
+│   ├── k8sgpt auth test → 检查 AI 后端连接
+│   ├── kubectl cluster-info → 检查集群连接
+│   ├── 检查 kubeconfig 权限
+│   └── 检查网络连接 (LLM API)
+├── Operator 模式异常
+│   ├── kubectl get pods -n k8sgpt-system → Pod 状态
+│   ├── kubectl logs → 检查错误日志
+│   ├── kubectl get k8sgpt → 检查 CR 状态
+│   └── 检查 RBAC 权限
+└── 结果质量问题
+    ├── 尝试不同 LLM 模型
+    ├── 调整过滤器缩小范围
+    └── 结合人工判断使用
+```
+
+## 生产案例
+
+### 案例 1: 日常巡检自动化
+
+- **场景**: SRE 团队每天手动检查集群状态，耗时 30 分钟
+- **排查**: 手动检查容易遗漏；新人不熟悉常见问题模式
+- **方案**: 部署 K8sGPT Operator 持续扫描；CronJob 每天生成报告；Slack 推送关键问题
+- **效果**: 巡检时间从 30 分钟降至 5 分钟；问题发现率提升 60%
+
+### 案例 2: 告警增强与根因分析
+
+- **场景**: Prometheus 告警只告知“什么坏了”，不告知“为什么”
+- **排查**: 告警风暴时 SRE 难以快速定位根因
+- **方案**: K8sGPT 结果集成到 AlertManager；告警中附加 AI 生成的根因分析和修复建议
+- **效果**: MTTR 降低 40%；新人上手时间缩短
+
+## 对比与替代方案
+
+| 维度 | K8sGPT | HolmesGPT | Robusta | Prometheus Alerts |
+|------|--------|-----------|---------|-------------------|
+| AI 驱动 | ✅ | ✅ | 部分 | ❌ |
+| 根因分析 | ✅ | ✅ | ✅ | ❌ |
+| 自然语言解释 | ✅ | ✅ | 部分 | ❌ |
+| 多 LLM 支持 | ✅ | 部分 | ❌ | ❌ |
+| K8s Operator | ✅ | ❌ | ✅ | N/A |
+| 开源 | ✅ | ✅ | ✅ | ✅ |
+| 适用场景 | 智能诊断 | 告警分析 | 全面可观测 | 指标告警 |
+
+## 检查清单
+
+- [ ] K8sGPT CLI/Operator 已安装
+- [ ] AI 后端已配置并连接正常
+- [ ] 过滤器已配置 (避免扫描过多资源)
+- [ ] 敏感信息脱敏已配置
+- [ ] 扫描结果已接入告警系统
+- [ ] 定期扫描已配置 (CronJob/Operator)
+- [ ] LLM API 成本已监控
+- [ ] 结果已验证 (AI 建议需人工确认)
 
 ## 参考链接
 
@@ -114,10 +278,5 @@ helm install k8sgpt k8sgpt/k8sgpt-operator -n k8sgpt-system --create-namespace
 - [[实体/cncf-edge-ai.md|cncf-edge-ai]] — CNCF 边缘计算与 AI/ML 项目全景
 - [[confidential-containers]] — Confidential Containers (CoCo)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- k8sgpt
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
 
 <!-- risk-assessed -->

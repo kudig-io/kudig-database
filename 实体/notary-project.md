@@ -76,42 +76,183 @@ Notary Project 在 Kubernetes 生态中通过策略控制器实现镜像准入�
 3. **合规供应链**: 满足 SLSA Level 3 要求，制品签名+验证+审计闭环
 4. **多团队镜像安全**: 不同团队使用不同证书签名，通过信任策略控制
 
-## 安装
+## 安装与配置
+
+### Notation CLI 安装
 
 ```bash
-# 安装 Notation CLI
+# Linux/macOS 安装
 curl -L https://github.com/notaryproject/notation/releases/latest/download/notation_$(uname -s)_$(uname -m).tar.gz | tar xz
 mv notation /usr/local/bin/
 
-# 生成签名证书
+# 验证安装
+notation version
+
+# 生成测试签名证书（仅开发环境）
 notation cert generate-test --default "my-cert"
 
+# 查看信任存储
+notation cert ls
+```
+
+### 签名与验证操作
+
+```bash
 # 签名 OCI 镜像
 notation sign myregistry.io/myapp:v1.0.0
+
+# 使用 KMS 签名（AWS KMS 示例）
+notation sign --plugin com.amazonaws.signer --id arn:aws:signer:us-east-1:123456:/signing-profiles/MyProfile myregistry.io/myapp:v1.0.0
 
 # 验证签名
 notation verify myregistry.io/myapp:v1.0.0
 
-# 配置 Kubernetes 镜像验证（通过 Ratify）
-helm install ratify ratify/ratify --namespace gatekeeper-system
-kubectl apply -f - <<EOF
+# 查看镜像签名列表
+notation ls myregistry.io/myapp:v1.0.0
+```
+
+### Kubernetes 集成（Ratify + Gatekeeper）
+
+```bash
+# 安装 Ratify（Notary 验证器）
+helm repo add ratify https://ratify.github.io/ratify
+helm install ratify ratify/ratify --namespace gatekeeper-system --create-namespace
+```
+
+```yaml
+# Notary V2 Store 配置
 apiVersion: config.ratify.deislabs.io/v1alpha1
 kind: Store
 metadata:
   name: store-notary
 spec:
   name: notaryv2
-EOF
+  parameters:
+    verificationCerts:
+      - /usr/local/ratify-certs/notary/truststore
+---
+# Gatekeeper 约束模板 - 要求镜像签名
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sVerifyImageSignature
+metadata:
+  name: require-signed-images
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - production
+  parameters:
+    verifier: notaryv2
+    trustPolicyDoc:
+      version: "1.0"
+      trustPolicies:
+        - name: default
+          registryScopes: ["*"]
+          signatureVerification:
+            level: strict
+          trustStores: ["ca:my-ca"]
+          trustedIdentities: ["*"]
 ```
+
+### 信任策略配置
+
+```json
+// ~/.config/notation/trustpolicy.json
+{
+  "version": "1.0",
+  "trustPolicies": [
+    {
+      "name": "production-policy",
+      "registryScopes": ["myregistry.io/production/*"],
+      "signatureVerification": { "level": "strict" },
+      "trustStores": ["ca:production-ca"],
+      "trustedIdentities": ["x509.subject: CN=ProdSigner,O=MyCorp"]
+    },
+    {
+      "name": "dev-policy",
+      "registryScopes": ["myregistry.io/dev/*"],
+      "signatureVerification": { "level": "permissive" },
+      "trustStores": ["ca:dev-ca"],
+      "trustedIdentities": ["*"]
+    }
+  ]
+}
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看已签名镜像列表
+notation ls myregistry.io/myapp
+
+# 🟢 验证镜像签名详情
+notation verify --output json myregistry.io/myapp:v1.0.0
+
+# 🟡 添加受信任证书到信任存储
+notation cert add --type ca --store production-ca ./ca-cert.pem
+
+# 🟡 删除信任存储中的证书
+notation cert delete --type ca --store production-ca "cert-name"
+
+# 🟡 配置 KMS 插件
+notation plugin install --url https://github.com/notaryproject/notation-plugin-aws-signer/releases/latest/download/notation-aws-signer-linux-amd64.tar.gz
+
+# 🔴 移除镜像签名（谨慎操作）
+notation sign --signature-manifest myregistry.io/myapp:v1.0.0 --delete
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| verify 失败: certificate expired | 签名证书过期 | `openssl x509 -in cert.pem -noout -dates` | 使用新证书重新签名 |
+| verify 失败: untrusted identity | 信任策略不匹配 | `notation verify --debug <image>` | 更新 trustpolicy.json |
+| sign 失败: unauthorized | Registry 认证失败 | `notation login myregistry.io` | 重新登录或更新凭证 |
+| Ratify 拒绝 Pod | Webhook 验证失败 | `kubectl logs -n gatekeeper-system -l app=ratify` | 检查 Store/Verifier 配置 |
+| KMS 签名超时 | 网络/KMS 权限问题 | `aws kms list-keys --region us-east-1` | 检查 IAM 策略和网络连通性 |
+
+**排查流程：**
+```
+签名验证失败
+├── 检查证书有效性 → openssl x509 -dates
+├── 检查信任策略 → cat ~/.config/notation/trustpolicy.json
+├── 检查 Registry 认证 → notation login
+├── 检查签名是否存在 → notation ls <image>
+└── K8s 环境
+    ├── 检查 Ratify 日志 → kubectl logs -n gatekeeper-system
+    ├── 检查 Gatekeeper 约束 → kubectl get constraints
+    └── 检查 Webhook → kubectl get validatingwebhookconfigurations
+```
+
+## 生产案例
+
+### 案例一：供应链攻击防护
+
+- **场景**: 某金融企业要求所有生产镜像必须经过签名验证，防止 Registry 被入侵后部署恶意镜像
+- **排查**: 使用 Notary V2 + AWS KMS 签名，Ratify + Gatekeeper 在准入层验证
+- **方案**: CI 流水线中构建后自动签名（KMS 密钥），集群配置 strict 信任策略，仅允许特定 CN 的证书
+- **效果**: 满足 SLSA Level 3 合规要求，阻止了 3 次未签名镜像的部署尝试
+
+### 案例二：多团队证书管理
+
+- **场景**: 5 个开发团队共用一个 Registry，需要区分各团队签名并控制部署权限
+- **排查**: 各团队使用独立证书签名，通过 trustpolicy 的 trustedIdentities 区分
+- **方案**: 每个团队独立 CA 签发证书，Namespace 级别 Gatekeeper 约束匹配对应团队证书
+- **效果**: 团队 A 的签名镜像无法部署到团队 B 的 Namespace，实现细粒度访问控制
 
 ## 对比
 
-| 特性 | Notary V2 | Cosign (Sigstore) | Docker Content Trust |
-|------|-----------|-------------------|---------------------|
-| 签名格式 | OCI Manifest | OCI Manifest | TUF |
-| 密钥体系 | X.509 PKI | KMS/Keyless | TUF PKI |
-| Keyless | ❌ | ✅ (Fulcio) | ❌ |
-| 透明日志 | ❌ | ✅ (Rekor) | ❌ |
+| 特性 | Notary V2 | Cosign (Sigstore) | Docker Content Trust | 适用场景 |
+|------|-----------|-------------------|---------------------|----------|
+| 签名格式 | OCI Manifest | OCI Manifest | TUF | - |
+| 密钥体系 | X.509 PKI | KMS/Keyless | TUF PKI | - |
+| Keyless 签名 | ❌ | ✅ (Fulcio) | ❌ | Cosign 适合开源 |
+| 透明日志 | ❌ | ✅ (Rekor) | ❌ | Cosign 可审计 |
+| 企业 KMS | ✅ 原生 | ✅ 插件 | ❌ | Notary 企业首选 |
+| HSM 支持 | ✅ PKCS#11 | ⚠️ 有限 | ❌ | 高安全场景 |
+| 学习曲线 | 中等 | 低 | 高 | - |
 
 ## 架构定位
 

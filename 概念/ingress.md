@@ -171,6 +171,137 @@ kubectl describe certificate webapp-tls -n production
 - **后端获取真实客户端 IP**：默认 X-Forwarded-For 链路，需后端信任 Controller；externalTrafficPolicy 影响 LB→Controller 这一段。
 - **单点故障**：Controller 只跑一个副本，挂了整站不可达，务必多副本 + 反亲和。
 
+## 源码实现分析
+
+### Ingress Controller 调谐循环
+
+```go
+// k8s.io/ingress-nginx/internal/ingress/controller/nginx.go
+// NGINX Ingress Controller 核心调谐
+func (n *NGINXController) syncIngress(interface{}) error {
+    // 1. 从 apiserver 获取所有 Ingress 资源
+    ings := n.store.ListIngresses()
+    
+    // 2. 按 IngressClass 过滤，生成 server/location 配置
+    servers := n.createServers(ings)
+    for _, server := range servers {
+        for _, loc := range server.Locations {
+            // 3. 生成 nginx.conf 中的 proxy_pass 指令
+            loc.ProxyPass = fmt.Sprintf("http://%s.%s.svc.cluster.local:%d",
+                loc.Backend.Service, loc.Backend.Namespace, loc.Backend.Port)
+        }
+    }
+    
+    // 4. 渲染 nginx.tmpl → nginx.conf
+    // 5. nginx -t 验证 → nginx -s reload 热加载
+    n.configureDynamically(pcfg)
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│         Ingress 流量路径                                │
+├─────────────────────────────────────────────────────────┤
+│  Client Request                                         │
+│       │                                                 │
+│       ▼                                                 │
+│  ┌────────────┐    ┌─────────────────┐  │
+│  │  LB/NodePort │───▶│ Ingress Controller│  │
+│  └────────────┘    │  (nginx/envoy)    │  │
+│                    └─────────────────┘  │
+│                           │                   │
+│                    TLS termination            │
+│                    Path routing               │
+│                           │                   │
+│                           ▼                   │
+│                    ┌─────────────┐          │
+│                    │   Service    │          │
+│                    │  (ClusterIP) │          │
+│                    └─────────────┘          │
+│                           │                   │
+│                           ▼                   │
+│                    ┌─────────────┐          │
+│                    │  Pod (app)   │          │
+│                    └─────────────┘          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产配置：TLS + 路由
+
+```yaml
+# 生产级 Ingress 配置示例
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/rate-limit: "100"  # req/s
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts: [app.example.com]
+    secretName: app-tls
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-svc
+            port: {number: 8080}
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-svc
+            port: {number: 80}
+```
+
+### 生产运维：Ingress 故障诊断
+
+```bash
+# 🟢 检查 Ingress 资源和事件
+kubectl get ingress -A
+kubectl describe ingress <name> -n <ns>
+
+# 🟢 检查 Controller 日志
+kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50
+
+# 🟢 验证生成的 nginx.conf
+kubectl exec -n ingress-nginx <controller-pod> -- cat /etc/nginx/nginx.conf | grep -A5 "server_name"
+
+# 🟡 检查后端 Service 是否有 Endpoints
+kubectl get endpoints <svc-name> -n <ns>
+# 无 Endpoints = selector 不匹配或 Pod 未 Ready
+```
+
+## 面试要点
+
+1. **Ingress 和 Service 的关系是什么？**
+   - Service 提供集群内部服务发现和负载均衡（L4）
+   - Ingress 提供外部 HTTP/HTTPS 路由（L7），后端指向 Service
+   - Ingress 不能替代 LoadBalancer Service，但可以减少 LB 数量
+
+2. **Ingress Controller 如何感知配置变更？**
+   - Watch Ingress/Service/Endpoints 资源变更
+   - 重新生成 nginx.conf 并执行 reload（零停机）
+   - 大规模集群注意：频繁 reload 导致连接重置，可用动态配置（如 Envoy xDS）
+
+3. **如何实现多租户 Ingress 隔离？**
+   - 每个租户独立 IngressClass + 独立 Controller 实例
+   - 或使用单 Controller + namespace 隔离 + RBAC 限制 Ingress 创建权限
+   - 注意：同 Controller 下不同 namespace 的 Ingress 不能定义相同 host+path
+
+4. **Ingress 与 Gateway API 的对比？**
+   - Ingress：注解驱动，功能受限于 Controller 实现，无流量分割
+   - Gateway API：角色分离（Infra Provider / Cluster Operator / App Developer）
+   - Gateway API 原生支持流量分割、Header 路由、TCP/UDP，是 Ingress 的继任者
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

@@ -157,6 +157,88 @@ flowchart TD
     { "name": "类别: 控制器异常", "action": "category", "step": "cat_ctrl", "next_step": "gate_ctrl_or" },
     { "name": "控制器 OR 
 
+## 生产案例
+
+### 案例1: PV 挂载失败 - 云盘被其他节点占用
+
+**时间线**:
+- 09:00 Pod 被调度到新节点，PVC 状态 Pending
+- 09:05 事件: `Multi-Attach error for volume: volume is already attached to node-1`
+- 09:10 确认根因: 旧节点上的 Pod 未完全终止，云盘未 detach
+- 09:15 强制删除旧 Pod 后云盘 detach，新 Pod 挂载成功
+
+**根因链**:
+```
+Pod调度到新节点 → 云盘需detach旧节点+attach新节点
+→ 旧Pod未完全终止(Terminating) → 云盘未detach
+→ Multi-Attach错误 → 新Pod挂载失败
+```
+
+**修复**:
+```bash
+# 🟢 检查 PV/PVC 状态
+kubectl get pv,pvc -n ${NS} -o wide
+kubectl describe pvc ${PVC_NAME} -n ${NS}
+# 🟡 强制删除 Terminating Pod
+kubectl delete pod ${OLD_POD} -n ${NS} --force --grace-period=0
+# 🟢 检查 CSI driver 日志
+kubectl logs -n kube-system -l app=csi-attacher --tail=50
+```
+
+### 案例2: CSI Driver 崩溃导致所有存储操作失败
+
+**现象**: 新 PVC 无法绑定，已有 PV 无法扩容
+
+**根因**: CSI controller Pod OOMKilled，无法处理 VolumeAttachment
+
+**修复**:
+```bash
+# 🟢 检查 CSI controller 状态
+kubectl get pods -n kube-system -l app=csi-provisioner
+# 🟡 调整资源并重启
+kubectl patch deployment csi-provisioner -n kube-system -p '{"spec":{"template":{"spec":{"containers":[{"name":"csi-provisioner","resources":{"limits":{"memory":"512Mi"}}}]}}}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: csi-alerts
+  rules:
+  - alert: CSIDriverDown
+    expr: up{job=~".*csi.*"} == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: PVCPendingTooLong
+    expr: kube_persistentvolumeclaim_status_phase{phase="Pending"} == 1
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| CSI Driver 高可用 | controller 至少 2 副本 | P0 |
+| 存储配额监控 | 监控云盘配额使用率 | P0 |
+| PV 回收策略 | 生产用 Retain 避免误删 | P1 |
+| 定期备份 | VolumeSnapshot 定时备份 | P1 |
+
+## 面试要点
+
+1. **Q: CSI 的核心组件和工作流程？**
+   A: CSI Controller(Provisioner/Attacher) + CSI Node Plugin(每节点) + External Snapshotter；流程: PVC创建→Provisioner创建PV→Attacher挂载→Node Plugin格式化挂载
+
+2. **Q: PVC 一直 Pending 的排查？**
+   A: 检查 StorageClass 是否存在 → 查看 Provisioner 日志 → 确认存储配额 → 检查 CSI driver 状态 → 验证云 API 凭证
+
+3. **Q: Multi-Attach 错误的处理？**
+   A: 确认旧 Pod 是否完全终止 → 强制删除 Terminating Pod → 检查 VolumeAttachment 状态 → 必要时手动 detach → 确认 RWO 访问模式限制
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

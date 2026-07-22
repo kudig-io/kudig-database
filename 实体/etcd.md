@@ -76,6 +76,168 @@ Every write increments a global revision number. Watch streams track from a spec
 - **Defragmentation**: Regular `etcdctl defrag` to reclaim space after compaction
 - **Monitoring**: Watch disk commit duration, db size, leader changes, proposal failures
 
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看集群状态
+ETCDCTL_API=3 etcdctl endpoint status --cluster -w table
+
+# 🟢 查看集群成员
+etcdctl member list -w table
+
+# 🟢 查看健康状态
+etcdctl endpoint health --cluster
+
+# 🟢 查看 Leader
+etcdctl endpoint status --cluster -w table | grep -v false
+
+# 🟢 查看数据库大小
+etcdctl endpoint status --cluster -w json | jq '.[].Status.dbSize'
+
+# 🟢 查看告警
+etcdctl alarm list
+
+# 🟡 压缩历史版本
+etcdctl compact $(etcdctl endpoint status --cluster -w json | jq '.[0].Status.header.revision')
+
+# 🟡 碎片整理 (会短暂阻塞)
+etcdctl defrag --cluster
+
+# 🔴 快照备份
+etcdctl snapshot save /backup/etcd-$(date +%Y%m%d).db
+
+# 🔴 快照恢复
+etcdctl snapshot restore /backup/etcd-xxx.db \
+  --data-dir=/var/lib/etcd-restored \
+  --name=etcd-1 \
+  --initial-cluster=etcd-1=https://10.0.1.1:2380
+
+# 🔴 移除成员
+etcdctl member remove <member-id>
+
+# 🔴 添加成员
+etcdctl member add etcd-4 --peer-urls=https://10.0.1.4:2380
+```
+
+### K8s 中的 etcd 操作
+
+```bash
+# 🟢 查看 etcd Pod
+kubectl get pods -n kube-system -l component=etcd
+
+# 🟢 查看 etcd 日志
+kubectl logs -n kube-system etcd-<node-name> --tail=50
+
+# 🟢 通过 kube-apiserver 查看 etcd 健康
+kubectl get --raw /healthz/etcd
+
+# 🟢 查看 etcd 指标
+kubectl exec -n kube-system etcd-<node> -- \
+  curl -s --cert /etc/kubernetes/pki/etcd/server.crt \
+  --key /etc/kubernetes/pki/etcd/server.key \
+  https://127.0.0.1:2379/metrics | grep etcd_disk
+```
+
+## 故障排查
+
+### 常见问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Leader 频繁切换 | 磁盘 IO 慢/网络抖动 | 检查磁盘延迟、网络 |
+| 数据库空间不足 | 未压缩/未碎片整理 | compact + defrag |
+| 写入延迟高 | 磁盘 fsync 慢 | 使用 SSD/NVMe |
+| 成员不健康 | 证书过期/网络断开 | 检查证书和网络 |
+| NOSPACE 告警 | 超过 quota | 压缩+碎片+增大 quota |
+| 数据丢失 | 多数节点失败 | 从快照恢复 |
+
+### 排查流程
+
+```
+1. 检查集群健康
+   etcdctl endpoint health --cluster
+       │
+2. 检查 Leader 和成员状态
+   etcdctl endpoint status --cluster -w table
+       │
+3. 检查告警
+   etcdctl alarm list
+       │
+4. 检查磁盘延迟
+   etcdctl endpoint status --cluster -w json | jq '.[].Status.dbSize'
+   # 查看 metrics: etcd_disk_wal_fsync_duration_seconds
+       │
+5. 检查日志
+   journalctl -u etcd --since "10 min ago"
+```
+
+## 监控指标
+
+### 关键指标与告警
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| etcd_disk_wal_fsync_duration_seconds | WAL fsync 延迟 | P99 > 10ms |
+| etcd_disk_backend_commit_duration_seconds | Backend 提交延迟 | P99 > 25ms |
+| etcd_server_proposals_failed_total | 提案失败 | > 0 |
+| etcd_server_leader_changes_seen_total | Leader 切换 | > 3/hour |
+| etcd_mvcc_db_total_size_in_bytes | 数据库大小 | > 80% quota |
+| etcd_network_peer_round_trip_time_seconds | Peer RTT | P99 > 50ms |
+
+### Prometheus 告警规则
+
+```yaml
+groups:
+- name: etcd-alerts
+  rules:
+  - alert: EtcdHighDiskLatency
+    expr: histogram_quantile(0.99, rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m])) > 0.01
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "etcd WAL fsync P99 延迟超过 10ms"
+
+  - alert: EtcdDatabaseSpaceLow
+    expr: etcd_mvcc_db_total_size_in_bytes / etcd_server_quota_backend_bytes > 0.8
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "etcd 数据库空间使用超过 80%"
+
+  - alert: EtcdLeaderChanges
+    expr: rate(etcd_server_leader_changes_seen_total[1h]) > 3
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "etcd Leader 频繁切换"
+```
+
+## 生产最佳实践
+
+1. **使用 SSD/NVMe** - etcd 对磁盘延迟极其敏感
+2. **独立部署** - 不与其他工作负载共享磁盘
+3. **定期备份** - 每小时快照，异地存储
+4. **自动压缩** - `--auto-compaction-retention=1h`
+5. **定期碎片整理** - 压缩后执行 defrag
+6. **监控告警** - 磁盘延迟、Leader 切换、空间使用
+7. **奇数节点** - 3/5/7 节点，容忍 1/2/3 失败
+8. **网络隔离** - Peer 通信使用专用网络
+
+## 检查清单
+
+- [ ] 理解 Raft 共识算法
+- [ ] 掌握 etcdctl 常用命令
+- [ ] 能执行备份和恢复
+- [ ] 掌握故障排查流程
+- [ ] 理解压缩和碎片整理
+- [ ] 能配置监控告警
+- [ ] 了解生产最佳实践
+
 ## Related
 - [[概念/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
 - [[概念/etcd × 可观测性.md|etcd × 可观测性]] — 综合

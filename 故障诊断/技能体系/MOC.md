@@ -151,5 +151,41 @@ version: 1.0.0
 - [[存储/K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 - [[生态参考/领域索引/MOC.md|topic-index MOC]] — Cross-reference
 
+## 技能分级体系
+
+| 级别 | 定义 | 典型技能 | 考核方式 |
+|------|------|----------|----------|
+| L1 | 基础操作，可按 SOP 执行 | Pod 日志查看、基本 describe | 实操考核 |
+| L2 | 独立诊断，能定位常见根因 | DNS 排障、HPA 修复、证书续期 | 场景模拟 |
+| L3 | 复杂诊断，能处理多故障并发 | 级联故障、控制平面异常 | 生产实战 |
+| L4 | 专家级，能设计诊断体系和工具 | FEBM 体系建设、自动化诊断平台 | 架构评审 |
+
+## 技能依赖关系
+
+```
+kubectl-basics (L1)
+├─ pod-troubleshooting (L1)
+│   ├─ crashloop-diagnosis (L2)
+│   └─ oom-analysis (L2)
+├─ networking-basics (L1)
+│   ├─ dns-failure (L2)
+│   ├─ service-connectivity (L2)
+│   └─ network-policy (L2)
+├─ scheduling-basics (L1)
+│   ├─ hpa-diagnosis (L2)
+│   └─ resource-management (L2)
+└─ release-management (L1)
+    ├─ canary-deployment (L2)
+    ├─ blue-green-deployment (L2)
+    └─ helm-chart-failure (L2)
+```
+
+## 培训建议
+
+1. **新人入职**：先完成 L1 所有技能，熱练掌握 kubectl 基本操作
+2. **月度演练**：每月模拟 1-2 个 L2 场景，保持手感
+3. **事后复盘**：每次生产事故后提取新技能点，更新技能库
+4. **交叉培训**：鼓励团队成员互相分享擅长领域的排障经验
+
 
 <!-- risk-assessed -->

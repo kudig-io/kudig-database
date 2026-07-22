@@ -71,19 +71,196 @@ Kubernetes 供应链安全 YAML 速查表是一份涵盖 K8s 供应链安全各�
 - **镜像来源控制**：限制集群仅部署经过签名的可信镜像
 - **安全审计准备**：快速配置和验证供应链安全控制措施
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# Cosign 镜像签名
+# 🟢 安装 Cosign
+GOFLAGS="-tags=e2e" go install github.com/sigstore/cosign/v2/cmd/cosign@latest
+# 或
+curl -LO https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64
+chmod +x cosign-linux-amd64 && mv cosign-linux-amd64 /usr/local/bin/cosign
+
+# 🟢 生成签名密钥对
+cosign generate-key-pair
+
+# 🟢 签名镜像
 cosign sign --key cosign.key my-registry/app:v1
 
-# Kyverno 镜像签名验证策略
-kubectl apply -f https://raw.githubusercontent.com/kyverno/policies/main/verify_images/verify-image-signatures/verify-image-signatures.yaml
+# 🟢 验证签名
+cosign verify --key cosign.pub my-registry/app:v1
+
+# 🟢 安装 Kyverno
+helm repo add kyverno https://kyverno.github.io/kyverno/
+helm install kyverno kyverno/kyverno -n kyverno --create-namespace
+
+# 🟢 应用镜像签名验证策略
+kubectl apply -f verify-image-policy.yaml
+
+# 🟢 生成 SBOM
+syft my-registry/app:v1 -o cyclonedx-json > sbom.json
+cosign attach sbom --sbom sbom.json my-registry/app:v1
 ```
+
+### Kyverno 镜像签名验证策略
+
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signatures
+spec:
+  validationFailureAction: Enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  rules:
+    - name: verify-cosign-signature
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      verifyImages:
+        - imageReferences:
+            - "my-registry.com/*"
+          attestors:
+            - count: 1
+              entries:
+                - keys:
+                    publicKeys: |-
+                      -----BEGIN PUBLIC KEY-----
+                      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
+                      -----END PUBLIC KEY-----
+---
+# 镜像来源限制策略
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-image-registries
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: validate-registries
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Images must come from approved registries only"
+        pattern:
+          spec:
+            containers:
+              - image: "my-registry.com/* | ghcr.io/myorg/*"
+```
+
+### CI/CD 签名流水线示例
+
+```yaml
+# GitHub Actions 示例
+name: Build and Sign
+on: [push]
+jobs:
+  build-sign:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Image
+        run: docker build -t my-registry.com/app:${{ github.sha }} .
+      - name: Push Image
+        run: docker push my-registry.com/app:${{ github.sha }}
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+      - name: Sign with Keyless
+        run: cosign sign --yes my-registry.com/app:${{ github.sha }}
+      - name: Generate SBOM
+        run: |
+          syft my-registry.com/app:${{ github.sha }} -o cyclonedx-json > sbom.json
+          cosign attach sbom --sbom sbom.json my-registry.com/app:${{ github.sha }}
+```
+
+## 运维操作
+
+```bash
+# 🟢 验证集群中所有镜像签名
+kubectl get pods -A -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}{end}{end}' | sort -u | while read img; do
+  echo "Verifying: $img"
+  cosign verify --key cosign.pub $img 2>/dev/null && echo "  ✅ Signed" || echo "  ❌ Unsigned"
+done
+
+# 🟢 查看 Kyverno 策略状态
+kubectl get clusterpolicy
+kubectl get policyreport -A
+
+# 🟢 查看被拒绝的部署
+kubectl get events -A --field-selector reason=PolicyViolation
+
+# 🟡 临时切换策略为 Audit 模式
+kubectl patch clusterpolicy verify-image-signatures --type=merge -p \
+  '{"spec":{"validationFailureAction":"Audit"}}'
+
+# 🔴 删除策略（允许未签名镜像部署）
+kubectl delete clusterpolicy verify-image-signatures
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| Pod 被拒绝部署 | 镜像未签名 | `kubectl get events` | 签名镜像或调整策略 |
+| 签名验证失败 | 公钥不匹配 | `cosign verify --key` | 更新策略中的公钥 |
+| Kyverno 未生效 | Webhook 未注册 | `kubectl get validatingwebhookconfigurations` | 重启 Kyverno |
+| SBOM 缺失 | CI 未生成 | `cosign download sbom <img>` | 修复 CI 流水线 |
+
+```bash
+# 排查流程
+# 1. 检查 Kyverno 状态
+kubectl get pods -n kyverno
+kubectl logs -n kyverno -l app.kubernetes.io/name=kyverno --tail=50
+
+# 2. 检查策略违规事件
+kubectl get events -A --field-selector reason=PolicyViolation --sort-by='.lastTimestamp'
+
+# 3. 验证镜像签名
+cosign verify --key cosign.pub <image>:<tag>
+
+# 4. 检查 Webhook 配置
+kubectl get validatingwebhookconfigurations | grep kyverno
+```
+
+## 生产案例
+
+### 案例1：全链路供应链安全
+- **场景**：金融企业需要确保生产集群只部署经过签名和扫描的镜像
+- **方案**：CI 中 Cosign 签名 + Trivy 扫描 + SBOM 生成；K8s Kyverno 强制验证签名和扫描结果；未签名镜像自动拒绝
+- **效果**：未授权镜像部署事件降为 0，通过 SLSA Level 3 审计
+
+### 案例2：紧急漏洞响应
+- **场景**：发现基础镜像 CVE 漏洞，需要快速识别受影响工作负载
+- **方案**：通过 SBOM 查询包含漏洞组件的镜像；Kyverno 策略禁止包含漏洞镜像的新部署；批量更新受影响工作负载
+- **效果**：受影响工作负载识别时间从 2天 缩短到 10分钟
 
 ## 对比替代方案
 
-相比传统供应链安全方案，K8s 原生方案利用 Admission Controller 实现运行时强制验证。相比商业方案，开源方案（Sigstore + Kyverno）更灵活但需要更多配置工作。
+| 维度 | Sigstore+Kyverno | Notation+Gatekeeper | 商业方案(Sysdig) | 无控制 |
+|------|-----------------|--------------------|--------------|--------|
+| 开源 | 是 | 是 | 否 | - |
+| K8s 原生 | 强 | 强 | 中 | - |
+| Keyless 签名 | 支持 | 不支持 | 支持 | - |
+| SBOM | 支持 | 部分 | 支持 | - |
+| 学习曲线 | 中 | 中 | 低 | - |
+
+## 检查清单
+
+- [ ] 镜像签名已在 CI/CD 中配置
+- [ ] Kyverno/Gatekeeper 验证策略已部署
+- [ ] 策略已设为 Enforce 模式（生产）
+- [ ] SBOM 生成已集成到 CI
+- [ ] 镜像来源限制策略已配置
+- [ ] 公钥已安全存储和分发
+- [ ] 策略违规告警已配置
 
 ## Related
 

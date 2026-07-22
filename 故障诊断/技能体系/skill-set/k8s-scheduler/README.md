@@ -75,6 +75,52 @@ kubectl get node <node-name> -o jsonpath='{.spec.taints}{.metadata.labels}'
 - 对关键业务配置 Cluster Autoscaler 和优先级抢占，避免资源不足导致长期 Pending
 - 建立节点标签与污点管理规范，防止非预期排斥
 
+## 生产案例
+
+### 案例 1：Pod Anti-Affinity 导致新 Pod 无法调度
+
+**背景**：某微服务配置了 `requiredDuringScheduling` Pod Anti-Affinity（topologyKey: kubernetes.io/hostname），3 副本集群中 3 个节点已被占满，第 4 个副本永远 Pending。
+
+**根因**：硬性反亲和性要求每个节点最多 1 个该服务 Pod，节点数 = 副本数时无法扩容。
+
+**修复**：
+``` bash
+# 🟡 中风险：将硬性反亲和改为软性
+kubectl patch deploy web -n prod --type json -p '[{"op":"replace","path":"/spec/template/spec/affinity/podAntiAffinity/requiredDuringSchedulingIgnoredDuringExecution","value":[]}]'
+# 或添加新节点
+kubectl scale nodepool default --replicas=5  # 云厂商 CLI
+```
+
+### 案例 2：节点 Taint 未正确配置导致批量 Pending
+
+**背景**：节点池升级后自动添加了 `node.kubernetes.io/unschedulable:NoSchedule` taint，新 Pod 全部 Pending。
+
+**根因**：升级流程中节点被 cordon 但未 uncordon，或升级失败后 taint 未清除。
+
+**修复**：
+``` bash
+# 🟡 中风险：移除节点 taint
+kubectl taint nodes <node> node.kubernetes.io/unschedulable:NoSchedule-
+kubectl uncordon <node>
+```
+
+## 升级决策点
+
+- **P0（立即处理）**：核心业务 Pod Pending 超过 10min，服务副本不足影响可用性
+- **P1（30分钟内）**：非核心 Pod Pending，当前副本数仍可支撑业务
+- **P2（下一工作日）**：批处理/测试 Pod Pending，不影响在线服务
+
+## 面试要点
+
+1. **Q: kube-scheduler 的调度流程是什么？**
+   A: 分为 Filter（过滤）和 Score（评分）两阶段。Filter 排除不满足约束的节点（资源不足、taint、亲和性、PVC 拓扑等），Score 对剩余节点打分（LeastAllocated、BalancedAllocation、ImageLocality 等插件），选择最高分节点。最后 Bind 将 Pod 绑定到节点。
+
+2. **Q: Pod Pending 的常见原因和排查思路？**
+   A: ① `kubectl describe pod` 查看 Events 中的 FailedScheduling 消息；② 资源不足（Insufficient cpu/memory）→ 扩容或降低 request；③ taint/toleration 不匹配 → 添加 toleration；④ PVC 未绑定 → 检查 StorageClass/PV；⑤ 亲和性冲突 → 调整约束或增加节点。
+
+3. **Q: 如何扩展 kube-scheduler？**
+   A: 通过 Scheduling Framework 插件机制：在 Filter/Score/Reserve/Bind 等扩展点插入自定义逻辑。配置通过 KubeSchedulerConfiguration 的 profiles 字段定义。常见扩展：GPU 调度（nvidia device plugin）、容量调度（Capacity Scheduler）、Gang Scheduling（Coscheduling）。
+
 ## 相关概念
 
 - [[概念/kube-scheduler.md|Kube Scheduler]] — Kubernetes 调度器原理、算法与扩展机制

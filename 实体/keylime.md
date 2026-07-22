@@ -69,22 +69,179 @@ Keylime 可集成到 Kubernetes 节点准入流程中。Node Bootstrapping 阶�
 - **供应链安全**：验证节点启动链未被篡改
 - **机密计算**：为安全敏感工作负载提供可信执行环境验证
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# 安装 Keylime
+# 🟢 安装 Keylime
 pip3 install keylime
-# 启动 Verifier
-keylime_verifier
-# 启动 Registrar
-keylime_registrar
-# 节点上启动 Agent
-keylime_agent
+
+# 🟢 验证 TPM 可用性
+ls /dev/tpm*
+keylime_tpm_check
+
+# 🟢 启动 Registrar（注册服务）
+keylime_registrar &
+
+# 🟢 启动 Verifier（验证服务）
+keylime_verifier &
+
+# 🟢 在被验证节点启动 Agent
+keylime_agent &
+
+# 🟢 注册节点并设置验证策略
+keylime_tenant -c -t 192.168.1.10 \
+  --uuid node-01 \
+  --allowlist /etc/keylime/allowlist.json \
+  --ima-signature-verification-key /etc/keylime/ima-key.pub
+
+# 🟢 查看节点验证状态
+keylime_tenant -l
 ```
+
+### IMA 策略配置
+
+```json
+{
+  "release": 0,
+  "digests": {
+    "/usr/bin/kubelet": ["sha256:abc123..."],
+    "/usr/bin/containerd": ["sha256:def456..."],
+    "/etc/kubernetes/kubelet.conf": ["sha256:789abc..."],
+    "/usr/lib/systemd/system/kubelet.service": ["sha256:012def..."]
+  },
+  "excludes": [
+    "/tmp/.*",
+    "/var/log/.*",
+    "/run/.*"
+  ]
+}
+```
+
+### K8s 节点准入集成
+
+```yaml
+# Keylime Agent DaemonSet
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: keylime-agent
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: keylime-agent
+  template:
+    metadata:
+      labels:
+        app: keylime-agent
+    spec:
+      hostPID: true
+      hostNetwork: true
+      containers:
+        - name: keylime-agent
+          image: quay.io/keylime/keylime-agent:latest
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: tpm
+              mountPath: /dev/tpm0
+            - name: ima
+              mountPath: /sys/kernel/security/ima
+            - name: keylime-conf
+              mountPath: /etc/keylime
+      volumes:
+        - name: tpm
+          hostPath:
+            path: /dev/tpm0
+        - name: ima
+          hostPath:
+            path: /sys/kernel/security/ima
+        - name: keylime-conf
+          configMap:
+            name: keylime-agent-config
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看已注册节点
+keylime_tenant -l
+
+# 🟢 查看节点验证状态
+curl -s https://verifier:8881/v2.1/agents/node-01 | jq .
+
+# 🟢 查看 IMA 度量日志
+cat /sys/kernel/security/ima/ascii_runtime_measurements | tail -20
+
+# 🟡 更新允许列表
+keylime_tenant -u -t 192.168.1.10 --uuid node-01 \
+  --allowlist /etc/keylime/allowlist-updated.json
+
+# 🟡 重新注册节点
+keylime_tenant -d -t 192.168.1.10 --uuid node-01
+keylime_tenant -c -t 192.168.1.10 --uuid node-01
+
+# 🔴 吊销节点（节点将被标记为不可信）
+keylime_tenant -d -t 192.168.1.10 --uuid node-01
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| Agent 注册失败 | TPM 不可用 | `ls /dev/tpm*` | 检查 TPM 硬件/驱动 |
+| 验证失败 | 文件被修改 | 查看 Verifier 日志 | 更新允许列表或恢复文件 |
+| PCR 值不匹配 | 引导链变更 | `tpm2_pcrread` | 更新基准 PCR 值 |
+| 密钥分发失败 | 验证未通过 | 检查 Agent 状态 | 修复完整性问题 |
+
+```bash
+# 排查流程
+# 1. 检查 TPM 状态
+tpm2_getcap properties-fixed
+ls -la /dev/tpm*
+
+# 2. 检查 IMA 状态
+cat /sys/kernel/security/ima/runtime_measurements_count
+dmesg | grep -i ima
+
+# 3. 检查 Verifier 日志
+journalctl -u keylime_verifier --since "10 min ago"
+
+# 4. 检查 Agent 状态
+curl -s https://registrar:8890/v2.1/agents/node-01 | jq .
+```
+
+## 生产案例
+
+### 案例1：零信任 K8s 集群节点准入
+- **场景**：政府云环境要求所有 K8s 节点必须通过硬件级完整性验证
+- **方案**：Keylime Agent 部署在每个节点；IMA 监控关键系统文件；未通过验证的节点自动 Taint 禁止调度
+- **效果**：通过 NIST 800-155 审计，节点篡改检测实时化
+
+### 案例2：供应链攻击检测
+- **场景**：检测到某次更新后节点二进制文件被篡改
+- **方案**：IMA 度量日志记录所有文件访问；Keylime 检测到 PCR 值异常；自动触发告警并隔离节点
+- **效果**：供应链攻击在 5分钟内 被检测并隔离，未影响工作负载
 
 ## 对比替代方案
 
-相比软件级安全工具（Falco/Tracee），Keylime 基于硬件 TPM 提供更底层的完整性保证。相比 AWS Nitro Enclaves，Keylime 是开源的且不锁定云厂商。
+| 维度 | Keylime | Falco | AWS Nitro | 无保护 |
+|------|---------|-------|----------|--------|
+| 硬件信任根 | TPM 2.0 | 无 | Nitro Chip | 无 |
+| 引导验证 | 强 | 无 | 强 | 无 |
+| 运行时监控 | IMA | eBPF | 有限 | 无 |
+| 开源 | 是 | 是 | 否 | - |
+| K8s 集成 | 支持 | 原生 | 仅 AWS | - |
+
+## 检查清单
+
+- [ ] 节点 TPM 2.0 已启用且可访问
+- [ ] IMA 已在内核中启用
+- [ ] Keylime Verifier/Registrar 已部署
+- [ ] Agent 已在所有节点运行
+- [ ] 允许列表已配置且覆盖关键文件
+- [ ] 验证失败告警已配置
+- [ ] 节点准入策略已配置（未验证节点禁止调度）
 
 ## Related
 

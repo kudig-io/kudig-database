@@ -67,19 +67,191 @@ Cedar 可集成到 Kubernetes Admission Webhook 中作为授权策略引擎，�
 - **应用层授权**：微服务间调用的细粒度权限控制
 - **合规审计**：策略可分析和可审计性满足合规要求
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# Rust crate
-cargo add cedar-policy
-
-# CLI
+# 🟢 安装 Cedar CLI
 cargo install cedar-policy-cli
+
+# 🟢 或使用预编译二进制
+curl -L https://github.com/cedar-policy/cedar/releases/latest/download/cedar-cli-linux-x86_64 -o cedar
+chmod +x cedar && mv cedar /usr/local/bin/
+
+# 🟢 验证安装
+cedar --version
+
+# 🟢 Rust SDK 集成
+# Cargo.toml: cedar-policy = "4.0"
 ```
+
+### 策略示例
+
+```cedar
+// Schema 定义
+namespace MyApp {
+  entity User in [UserGroup];
+  entity UserGroup;
+  entity Document in [Folder];
+  entity Folder;
+  
+  action read appliesTo {
+    principal: [User],
+    resource: [Document]
+  };
+  action write appliesTo {
+    principal: [User],
+    resource: [Document]
+  };
+  action delete appliesTo {
+    principal: [User],
+    resource: [Document]
+  };
+}
+
+// 策略: 允许 admin 组用户读取所有文档
+permit (
+  principal in MyApp::UserGroup::"admins",
+  action == MyApp::Action::"read",
+  resource
+);
+
+// 策略: 允许文档所有者读写自己的文档
+permit (
+  principal,
+  action in [MyApp::Action::"read", MyApp::Action::"write"],
+  resource
+) when {
+  resource.owner == principal
+};
+
+// 策略: 禁止删除标记为“受保护”的文档
+forbid (
+  principal,
+  action == MyApp::Action::"delete",
+  resource
+) when {
+  resource.protected == true
+};
+
+// 策略: 仅允许工作时间访问
+permit (
+  principal,
+  action,
+  resource
+) when {
+  context.hour >= 9 && context.hour <= 18
+};
+```
+
+### 策略评估示例 (Go)
+
+```go
+package main
+
+import (
+    "fmt"
+    "github.com/cedar-policy/cedar-go"
+)
+
+func main() {
+    // 加载策略
+    policy := `
+    permit (
+        principal == User::"alice",
+        action == Action::"read",
+        resource == Document::"report.pdf"
+    );`
+    
+    // 创建评估器
+    authorizer := cedar.NewAuthorizer()
+    authorizer.AddPolicy(cedar.MustParsePolicy(policy))
+    
+    // 评估请求
+    request := cedar.Request{
+        Principal: cedar.Entity("User::\"alice\""),
+        Action:    cedar.Entity("Action::\"read\""),
+        Resource:  cedar.Entity("Document::\"report.pdf\""),
+    }
+    
+    decision := authorizer.IsAuthorized(request)
+    fmt.Printf("Decision: %s\n", decision.Decision) // Allow
+}
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 验证策略语法
+cedar check-parse --policies policy.cedar
+
+# 🟢 验证 Schema
+cedar check-schema --schema schema.json
+
+# 🟢 评估策略 (测试)
+cedar evaluate \
+  --policies policy.cedar \
+  --entities entities.json \
+  --request '{"principal": "User::\"alice\"", "action": "Action::\"read\"", "resource": "Document::\"doc1\""}'
+
+# 🟢 策略分析 (冲突检测)
+cedar analyze --policies policy.cedar --schema schema.json
+
+# 🟢 格式化策略
+cedar format --policies policy.cedar
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 策略解析失败 | 语法错误 | `cedar check-parse` | 修正策略语法 |
+| 评估结果错误 | 实体层级不匹配 | `cedar evaluate --verbose` | 检查实体关系和 Schema |
+| 性能问题 | 策略过多/实体层级深 | 分析策略复杂度 | 优化策略结构 |
+| Schema 不匹配 | 实体类型未定义 | `cedar check-schema` | 更新 Schema 定义 |
+
+### 排查流程
+
+```
+1. cedar check-parse → 验证策略语法
+2. cedar check-schema → 验证 Schema 一致性
+3. cedar evaluate --verbose → 详细评估日志
+4. cedar analyze → 策略冲突和冗余分析
+5. 检查实体层级关系是否正确
+```
+
+## 生产案例
+
+### 案例1: 多租户 API 授权
+- **场景**: SaaS 平台需要细粒度的租户级 API 授权
+- **方案**: Cedar 定义租户隔离策略，集成到 API Gateway
+- **效果**: 替代硬编码权限检查，策略变更无需重新部署
+
+### 案例2: K8s Admission 增强
+- **场景**: 原生 RBAC 无法满足基于标签的条件授权
+- **方案**: Cedar 集成到 Admission Webhook，基于资源标签授权
+- **效果**: 实现“仅允许删除非生产环境资源”等复杂策略
 
 ## 对比替代方案
 
-相比 OPA/Rego，Cedar 提供更强的类型安全和形式化验证能力。相比 K8s 原生 RBAC，Cedar 能表达更丰富的条件策略。相比 AWS IAM Policy，Cedar 是开源的、可本地部署的。
+| 维度 | Cedar | OPA/Rego | K8s RBAC | AWS IAM |
+|------|-------|----------|----------|--------|
+| 语言类型 | 声明式 | 逻辑式 | YAML | JSON |
+| 类型安全 | Schema 驱动 | 无 | 无 | 无 |
+| 形式化验证 | 支持 | 不支持 | 不支持 | 不支持 |
+| 性能 | 亚毫秒 | 毫秒级 | 快 | 快 |
+| 学习曲线 | 中 | 陡峭 | 低 | 中 |
+| 开源 | 是 | 是 | 是 | 否 |
+
+## 检查清单
+
+- [ ] Schema 定义了完整的实体类型和层级
+- [ ] 策略经过 cedar analyze 分析无冲突
+- [ ] 评估性能满足要求 (亚毫秒级)
+- [ ] 策略变更有版本控制和审计
+- [ ] 测试覆盖了 permit 和 forbid 场景
+- [ ] 与现有 RBAC 策略无冲突
 
 ## Related
 

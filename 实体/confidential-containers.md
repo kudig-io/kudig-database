@@ -72,7 +72,7 @@ CoCo 通过 Kubernetes RuntimeClass 集成。用户在 Pod Spec 中指定 `runti
 3. **多方安全计算**: 多个组织在不暴露原始数据的情况下进行联合分析
 4. **AI 模型保护**: 保护专有 AI 模型权重不被云提供商或攻击者获取
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 CoCo Operator
@@ -81,13 +81,151 @@ kubectl apply -k "github.com/confidential-containers/operator/config/release?ref
 kubectl apply -f - <<EOF
 apiVersion: confidentialcontainers.org/v1beta1
 kind: CcRuntime
-metadata: { name: coco-runtime }
+metadata:
+  name: coco-runtime
+  namespace: confidential-containers-system
 spec:
   runtimeName: kata
+  config:
+    attestation:
+      url: "http://kbs:8080"
+    image:
+      encrypted: true
 EOF
 # 使用 TEE 运行 Pod
-kubectl run secret-app --image=encrypted-app:latest --overrides='{"spec":{"runtimeClassName":"kata-qemu"}}'
+kubectl run secret-app --image=encrypted-app:latest \
+  --overrides='{"spec":{"runtimeClassName":"kata-qemu"}}'
 ```
+
+### 加密镜像构建
+
+```bash
+# 使用 image-rs 加密镜像
+image-rs encrypt \
+  --source docker.io/myorg/secret-app:v1 \
+  --target registry.internal/encrypted/secret-app:v1 \
+  --key-provider ocicrypt \
+  --recipient jwe:pubkey.pem
+
+# 配置 KBS 密钥分发
+curl -X POST http://kbs:8080/kbs/v0/resource \
+  -d '{"path": "/default/key/secret-app", "data": "<base64-key>"}'
+```
+
+### 证明策略配置
+
+```yaml
+# OPA 证明策略
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: attestation-policy
+data:
+  policy.rego: |
+    package policy
+    default allow = false
+    allow {
+      input.tee == "sev-snp"
+      input.measurement == "expected-hash"
+      input.timestamp > time.now_ns() - 3600000000000
+    }
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 CoCo Runtime 状态
+kubectl get ccruntime -n confidential-containers-system
+
+# 🟢 查看 TEE Pod 状态
+kubectl get pods -o custom-columns=NAME:.metadata.name,RUNTIME:.spec.runtimeClassName
+
+# 🟢 检查节点 TEE 硬件支持
+kubectl get nodes -o custom-columns=NAME:.metadata.name,TEE:.status.allocatable.'tee\.confidentialcontainers\.org'
+
+# 🟢 查看 KBS 状态
+kubectl get pods -l app=kbs -n confidential-containers-system
+
+# 🟢 查看证明日志
+kubectl logs -n confidential-containers-system -l app=attestation-agent
+
+# 🟡 更新证明策略
+kubectl apply -f attestation-policy.yaml
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod Pending | 节点无 TEE 硬件 | `kubectl describe pod` | 调度到支持 TEE 的节点 |
+| 镜像解密失败 | KBS 不可达 | `kubectl logs attestation-agent` | 检查 KBS Service 地址 |
+| 证明失败 | TEE 度量不匹配 | 检查证明日志 | 更新期望的度量哈希 |
+| 性能下降 | TEE 加密开销 | `kubectl top pod` | 评估可接受的性能损失 |
+| RuntimeClass 不存在 | Operator 未安装 | `kubectl get runtimeclass` | 重新安装 CoCo Operator |
+
+### 排查流程
+
+```
+CoCo 异常
+├─ Pod 无法调度？
+│  ├─ 无 TEE 节点 → 检查硬件支持 (AMD SEV/Intel TDX)
+│  ├─ RuntimeClass 缺失 → 检查 Operator 状态
+│  └─ 资源不足 → TEE VM 需要额外内存
+├─ 镜像拉取失败？
+│  ├─ 解密失败 → 检查 KBS 连接和密钥
+│  ├─ 证明失败 → 检查 TEE 度量值
+│  └─ 网络问题 → 检查 Registry 连通性
+└─ 运行时异常？
+   ├─ Kata 错误 → 检查 kata-runtime 日志
+   └─ TEE 崩溃 → 检查固件版本和 BIOS 设置
+```
+
+## 生产案例
+
+### 案例 1: 金融数据云端安全处理
+
+**场景**: 某银行需在公有云上处理客户敏感数据，监管要求数据在处理时不得被云商访问。
+
+**方案**:
+1. 使用 AMD SEV-SNP 节点部署 CoCo
+2. 数据处理应用以加密镜像形式部署
+3. 远程证明确保 TEE 可信后才分发解密密钥
+4. 审计日志记录所有证明事件
+
+**效果**: 满足监管合规要求，数据在处理时全程加密，云商无法访问明文。
+
+### 案例 2: AI 模型权重保护
+
+**场景**: AI 公司需在客户环境部署推理服务，但不能暴露模型权重。
+
+**方案**:
+1. 模型文件加密打包到容器镜像
+2. 使用 CoCo 在客户环境的 TEE 中解密运行
+3. 客户无法提取模型权重
+
+**效果**: 模型权重全程保护，客户可使用但无法获取原始模型。
+
+## 对比与替代方案
+
+| 维度 | CoCo | Enarx | Gramine | Occlum |
+|------|------|-------|---------|--------|
+| K8s 原生 | ✅ | ❌ | ❌ | ❌ |
+| 硬件支持 | SEV/TDX/SE | 多架构 | 仅 x86 | 仅 SGX |
+| 镜像加密 | ✅ | ❌ | ❌ | ❌ |
+| 远程证明 | ✅ | ✅ | 部分 | ✅ |
+| 性能开销 | 中 (VM) | 低 | 低 | 低 |
+| 成熟度 | 中 | 低 | 中 | 中 |
+
+## 检查清单
+
+- [ ] 节点硬件支持 TEE（AMD SEV-SNP / Intel TDX）
+- [ ] BIOS 中已启用 TEE 功能
+- [ ] CoCo Operator 已安装并运行
+- [ ] RuntimeClass 已创建（kata-qemu）
+- [ ] KBS 已部署并可访问
+- [ ] 证明策略已配置并测试
+- [ ] 加密镜像构建流程已建立
+- [ ] 性能开销已评估可接受
 
 ## 替代方案
 

@@ -142,6 +142,186 @@ Kratix (Promises)                        云资源 / K8s 集群
 GitOps (ArgoCD / Flux)
 ```
 
+## 源码实现分析
+
+### Backstage 插件架构
+
+```typescript
+// backstage/packages/core-plugin-api/src/extension.ts
+// Backstage 插件系统：每个功能是独立插件，通过 ExtensionPoint 组合
+export function createPlugin<T extends RouteRef>(options: {
+  id: string;
+  routes: { [key: string]: T };
+  apis: AnyApiRef[];
+}): BackstagePlugin {
+  return {
+    id: options.id,
+    // 插件注册 Extension（页面、卡片、导航项）
+    provide: (extension) => registerExtension(options.id, extension),
+    // 插件消费其他插件的 API
+    consume: (apiRef) => getApi(apiRef),
+  };
+}
+
+// 自定义插件示例：服务目录集成
+export const serviceCatalogPlugin = createPlugin({
+  id: 'service-catalog',
+  routes: { root: rootRouteRef },
+  apis: [discoveryApiRef, identityApiRef],
+});
+```
+
+### Crossplane Composition 引擎
+
+```go
+// github.com/crossplane/crossplane/internal/controller/apiextensions/composite.go
+// Crossplane 将 XR (Composite Resource) 调谐为底层云资源
+func (r *Reconciler) Reconcile(ctx context.Context, req reconcile.Request) {
+    // 1. 获取 Composite Resource (XR)
+    xr := r.getCompositeResource(req)
+    // 2. 查找对应的 Composition
+    comp := r.selectComposition(xr)
+    // 3. 渲染 Patch 和 Transform，生成底层资源
+    for _, resource := range comp.Spec.Resources {
+        composed := r.renderComposedResource(xr, resource)
+        // 4. 创建/更新底层资源（RDS/S3/VPC...）
+        r.apply(ctx, composed)
+    }
+    // 5. 回写 XR Status
+    r.updateStatus(xr)
+}
+```
+
+### IDP 架构全景
+
+```
+┌───────────────────────────────────────────────────────────┐
+│              IDP 平台架构全景                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  开发者层                                                │
+│  ─────────                                              │
+│  Backstage 门户 → 自助服务目录 / Golden Path 模板    │
+│       │                                                  │
+│  抽象层                                                  │
+│  ─────────                                              │
+│  Score/Kratix → 工作负载抽象 → 环境无关描述       │
+│       │                                                  │
+│  控制平面层                                              │
+│  ─────────                                              │
+│  Crossplane → 云资源编排 / Compositions / XRs      │
+│       │                                                  │
+│  交付层                                                  │
+│  ─────────                                              │
+│  ArgoCD/Flux → GitOps 同步 → 多集群部署            │
+│       │                                                  │
+│  基础设施层                                              │
+│  ─────────                                              │
+│  K8s 集群 / 云资源 / 网络 / 存储 / 安全基线       │
+└───────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：Backstage 服务模板（🟢 自助服务）
+
+```yaml
+# Backstage Software Template: 创建新微服务
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-microservice
+spec:
+  parameters:
+  - title: 服务信息
+    properties:
+      serviceName:
+        type: string
+        title: 服务名称
+      team:
+        type: string
+        title: 负责团队
+  steps:
+  - id: fetch-template
+    action: fetch:template
+    input:
+      url: ./skeleton
+      values:
+        serviceName: ${{ parameters.serviceName }}
+  - id: publish
+    action: publish:github
+    input:
+      repoUrl: github.com/org/${{ parameters.serviceName }}
+  - id: register
+    action: catalog:register
+    input:
+      repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+```
+
+### 场景二：Crossplane 数据库自助（🟡 创建云资源）
+
+```yaml
+# 开发者只需提交 XR，平台自动编排底层资源
+apiVersion: platform.example.org/v1alpha1
+kind: PostgreSQLInstance
+metadata:
+  name: my-app-db
+spec:
+  version: "15"
+  size: small  # 抽象层：开发者无需知道具体实例类型
+  region: us-east-1
+---
+# Composition 自动创建：RDS + SecurityGroup + ParameterGroup + Backup
+# 开发者无需接触 AWS 细节
+```
+
+### 场景三：平台 SLO 监控（🟢 只读）
+
+```bash
+# 平台工程团队内部 SLO 检查
+# 自助操作完成率
+curl -s https://backstage.internal/api/metrics | \
+  jq '.scaffolder_completed_total / .scaffolder_started_total'
+
+# Golden Path 覆盖率
+kubectl get services -A -l 'backstage.io/managed=true' --no-headers | wc -l
+kubectl get services -A --no-headers | wc -l
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| IDP 就是 Backstage | Backstage 只是门户层，IDP 包含完整工具链 |
+| 平台工程 = DevOps 重命名 | 平台工程强调产品化思维、内部客户、SLO |
+| 必须一次性全部建设 | 应渐进式采用，先解决最痛的问题 |
+| 平台团队不需要 PM | 必须有产品经理角色，否则变成工单团队 |
+| 强制所有团队使用 | 平台应通过体验吸引采用，而非强制 |
+| 平台不需要 SLO | 平台本身需要 SLO：自助操作 <5min、可用性 >99.9% |
+
+## 面试要点
+
+1. **IDP 与 DevOps 的核心区别？**
+   - DevOps：文化 + 实践，开发者自己运维
+   - IDP：产品化平台，抽象复杂性，开发者自助服务
+   - 核心：降低认知负荷、Golden Path、内部客户思维
+
+2. **平台工程团队如何组织？**
+   - 双轨：Infrastructure PE + DevEx PE
+   - 不超过 8-12 人，必须有 PM 角色
+   - 内部 SLO + 季度 NPS 调查
+
+3. **Backstage 在 IDP 中的角色？**
+   - 统一门户：服务目录 + 模板 + 文档 + 插件
+   - 不是 IDP 全部，而是开发者交互层
+   - 插件架构允许扩展任意功能
+
+4. **如何衡量平台工程的成功？**
+   - 开发者满意度（NPS）
+   - 自助操作完成率（>80%）
+   - 新服务上线时间（周→小时）
+   - 平台可用性 SLO（>99.9%）
+
 ## 相关概念
 
 - developer experience tooling：开发者体验工具链

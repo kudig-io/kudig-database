@@ -92,6 +92,117 @@ prerequisites:
 3. **IAM 认证**：IRSA → Workload Identity 需调整 Pod 配置
 4. **Ingress/Gateway**：云厂商 Ingress 实现不同，建议使用标准 Ingress/Gateway API
 
+## 运维操作
+
+### 通用集群检查命令
+
+```bash
+# 🟢 检查集群版本和健康状态
+kubectl version --short 2>/dev/null || kubectl version
+kubectl get nodes -o wide
+kubectl get componentstatuses 2>/dev/null || kubectl get --raw /healthz?verbose
+
+# 🟢 检查云厂商 CSI 驱动
+kubectl get csidrivers
+kubectl get storageclass
+
+# 🟢 检查云厂商 LoadBalancer 集成
+kubectl get svc -A --field-selector spec.type=LoadBalancer
+
+# 🟢 检查节点实例类型
+kubectl get nodes -o custom-columns=NAME:.metadata.name,INSTANCE:.metadata.labels.'node\.kubernetes\.io/instance-type',ZONE:.metadata.labels.'topology\.kubernetes\.io/zone'
+```
+
+### 各厂商 CLI 工具
+
+```bash
+# AWS EKS
+aws eks describe-cluster --name my-cluster --region us-east-1
+aws eks update-kubeconfig --name my-cluster --region us-east-1
+
+# Azure AKS
+az aks show --resource-group my-rg --name my-cluster
+az aks get-credentials --resource-group my-rg --name my-cluster
+
+# Google GKE
+gcloud container clusters describe my-cluster --zone us-central1-a
+gcloud container clusters get-credentials my-cluster --zone us-central1-a
+
+# 阿里云 ACK
+aliyun cs DescribeClusterDetail --ClusterId <id>
+aliyun cs GET /k8s/<id>/user_config
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| LB Service 无外部 IP | 云配额不足/子网无可用IP | `kubectl describe svc` | 检查云控制台配额 |
+| 节点无法加入 | 安全组/子网配置 | 检查云控制台节点组 | 修正安全组规则 |
+| PV 挂载失败 | CSI 驱动异常/AZ不匹配 | `kubectl get pods -n kube-system` | 检查 CSI Pod/存储类 |
+| 集群升级失败 | 版本跳跃/插件不兼容 | 检查云控制台升级日志 | 逐版本升级/更新插件 |
+| Pod 网络不通 | VPC CIDR 冲突/安全组 | 检查 VPC 配置 | 修正 CIDR/安全组规则 |
+
+### 跨云迁移检查清单
+
+```
+跨云迁移流程
+├── 评估阶段
+│   ├── 盘点云厂商特有 API 依赖
+│   ├── 检查存储 CSI 兼容性
+│   ├── 检查 IAM/认证方式差异
+│   └── 检查网络模型差异
+├── 改造阶段
+│   ├── 替换云厂商特有 Ingress 为 Gateway API
+│   ├── 使用标准 CSI StorageClass
+│   ├── 替换 IRSA/Workload Identity 为目标云方案
+│   └── 移除云厂商特有 annotation
+├── 验证阶段
+│   ├── 功能测试（LB/存储/DNS）
+│   ├── 性能基准测试
+│   └── 故障转移测试
+└── 切换阶段
+    ├── DNS 切换/流量迁移
+    ├── 监控确认
+    └── 回滚方案就绪
+```
+
+## 生产案例
+
+### 案例1：AWS EKS 迁移到阿里云 ACK
+
+- **场景**：业务进入中国市场，需从 AWS EKS 迁移到阿里云 ACK
+- **挑战**：IRSA → RRSA、ALB Ingress → ACK ALB、EBS CSI → 云盘 CSI
+- **方案**：使用 KubeVela 抽象应用层；逐步替换云厂商特有组件；DNS 权重切换
+- **效果**：2 周内完成迁移，零停机
+
+### 案例2：多云容灾架构
+
+- **场景**：金融客户要求双云容灾，RPO < 1min，RTO < 5min
+- **方案**：AWS EKS + Azure AKS 双活；使用 Submariner 跨云网络互通；Velero 备份到共享 S3；全局 DNS 故障转移
+- **效果**：单云故障时 3 分钟内自动切换，满足金融合规
+
+## 成本优化建议
+
+| 策略 | 适用厂商 | 节省比例 | 注意事项 |
+|------|----------|----------|----------|
+| Spot/抢占式实例 | 所有 | 60-90% | 需处理中断 |
+| 预留实例/承诺使用 | AWS/Azure/GCP | 30-50% | 1-3年承诺 |
+| Autopilot/Serverless | GKE/EKS Fargate | 变动 | 按实际使用计费 |
+| 自动伸缩 (Cluster Autoscaler) | 所有 | 20-40% | 缩容延迟 |
+| 资源右 sizing | 所有 | 20-30% | 需监控数据支撑 |
+
+## 检查清单
+
+- [ ] 已评估业务对云厂商特有服务的依赖
+- [ ] 网络模型已规划（CIDR 不冲突）
+- [ ] 存储使用标准 CSI 接口
+- [ ] 认证方式使用标准 OIDC（便于迁移）
+- [ ] Ingress 使用标准 Gateway API
+- [ ] 备份和容灾策略已配置
+- [ ] 成本优化策略已实施
+- [ ] 集群升级策略已制定
+
 ---
 
 > 来源：.zread/wiki/drafts/22-yun-han-shang-tuo-guan-*.md

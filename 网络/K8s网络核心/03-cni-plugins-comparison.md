@@ -314,6 +314,25 @@ iptables -t filter -L -n -v
 - Flannel Windows 节点支持
 - Flannel 多集群场景与子网冲突处理
 
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **选型** | 根据场景选择 | 通用 Calico/高性能 Cilium/云原生 Terway |
+| **版本** | 使用稳定版本 | 参考兼容性矩阵 |
+| **监控** | 部署 CNI 指标 | 实时掌握网络状态 |
+| **升级** | 滚动升级 | 先测试环境验证 |
+| **备份** | 定期备份配置 | 便于灾难恢复 |
+| **安全** | 启用 NetworkPolicy | 默认拒绝 + 显式放行 |
+
+## 相关工具
+
+| 工具 | 用途 |
+|------|------|
+| `calicoctl` | Calico 管理 |
+| `cilium` | Cilium CLI |
+| `helm` | CNI 部署管理 |
+
 ## See Also
 
 - 01-network-architecture-overview

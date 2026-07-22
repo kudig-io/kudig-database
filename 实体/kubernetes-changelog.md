@@ -87,11 +87,119 @@ prerequisites:
 
 此外，还包含 19 个 RELEASE-NOTES 文件（v0.4 - v1.1），记录了 Kubernetes 早期版本的关键变更。
 
+## 重大版本里程碑
+
+### 安全与访问控制演进
+
+| 版本 | 变更 | 影响 | 迁移方案 |
+|------|------|------|----------|
+| v1.8 | RBAC GA | 默认启用 RBAC | 所有集群必须配置 RBAC |
+| v1.21 | PSP 弃用 | 警告日志 | 迁移到 PSA/OPA/Kyverno |
+| v1.25 | PSP 移除 | API 不可用 | 必须完成 PSA 迁移 |
+| v1.25 | PSA GA | 替代 PSP | 配置 Namespace 级 PSA 标签 |
+| v1.29 | CEL 验证 | ValidatingAdmissionPolicy GA | 替代部分 Webhook 验证 |
+
+### 容器运行时演进
+
+| 版本 | 变更 | 影响 | 迁移方案 |
+|------|------|------|----------|
+| v1.20 | dockershim 弃用警告 | 日志警告 | 开始评估 containerd/CRI-O |
+| v1.24 | dockershim 移除 | Docker 不可直接使用 | 切换到 containerd 或 cri-dockerd |
+| v1.26 | Sidecar alpha | 原生 Sidecar 容器 | 测试 initContainers.restartPolicy=Always |
+| v1.28 | Sidecar beta | 生产可用 | 迁移 Sidecar 模式到原生支持 |
+
+### 网络与存储演进
+
+| 版本 | 变更 | 影响 | 迁移方案 |
+|------|------|------|----------|
+| v1.10 | CSI beta | 存储插件标准化 | 迁移 in-tree 到 CSI |
+| v1.11 | CoreDNS GA | 替代 kube-dns | 升级集群 DNS 到 CoreDNS |
+| v1.20 | in-tree 云提供商弃用 | 警告 | 迁移到 cloud-provider 外部 |
+| v1.26 | in-tree 存储插件移除 | 必须使用 CSI | 确认所有存储使用 CSI 驱动 |
+
+## 升级前检查命令
+
+```bash
+# 🟢 检查当前集群版本
+kubectl version --short
+
+# 🟢 检查已弃用 API 使用情况
+kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+
+# 🟢 使用 kubent 检查弃用 API
+kubent
+
+# 🟢 使用 pluto 扫描弃用 API
+pluto detect-all-in-cluster
+
+# 🟡 检查节点就绪状态
+kubectl get nodes -o wide
+
+# 🟢 检查 etcd 健康状态
+etcdctl --endpoints=https://etcd:2379 endpoint health
+
+# 🟡 模拟升级（dry-run）
+kubeadm upgrade plan v1.30.0
+```
+
+## 升级最佳实践
+
+### 升级顺序
+
+```
+1. 备份 etcd 数据
+2. 升级控制平面（API Server → Controller Manager → Scheduler）
+3. 逐个升级 Worker 节点（cordon → drain → upgrade → uncordon）
+4. 升级 kubectl 客户端
+5. 验证集群状态
+```
+
+### 版本兼容矩阵
+
+| 组件 | 版本偏差规则 |
+|------|----------------|
+| kubectl | 与 API Server 偏差 ≤ 1 个 minor |
+| kubelet | 与 API Server 偏差 ≤ 2 个 minor |
+| kube-proxy | 与 kubelet 同版本 |
+| etcd | 与 K8s 版本配套（参考官方文档） |
+| CoreDNS | 与 K8s 版本配套 |
+
+### 升级回滚策略
+
+```bash
+# 🔴 etcd 备份（升级前必做）
+ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-pre-upgrade.db \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+
+# 🔴 回滚 etcd（升级失败时）
+ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-pre-upgrade.db \
+  --data-dir=/var/lib/etcd-restore
+
+# 🟡 回滚 kubeadm 升级
+kubeadm upgrade apply v1.29.0 --force
+```
+
 ## 使用方式
 
 1. 参考 [[概念/kubernetes-version-evolution.md|Kubernetes 版本演进]] 了解里程碑版本的关键变更
 2. 查看具体 CHANGELOG 文件了解某个版本的完整变更详情
 3. 关注弃用和移除的 API，在升级前做好准备
+4. 使用 `pluto` 和 `kubent` 工具自动检测弃用 API
+5. 每次升级前执行完整的备份和检查流程
+
+## 检查清单
+
+- [ ] 升级前备份 etcd 数据
+- [ ] 使用 pluto/kubent 扫描弃用 API
+- [ ] 确认版本偏差在兼容范围内
+- [ ] 在非生产环境验证升级流程
+- [ ] 制定回滚方案并测试
+- [ ] 升级后验证所有节点 Ready
+- [ ] 升级后检查核心服务运行状态
+- [ ] 更新 kubectl 客户端版本
 
 ## 来源文档
 
@@ -104,6 +212,7 @@ prerequisites:
 - [[实体/statefulset.md|statefulset]] — StatefulSet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
+- [[概念/kubernetes-version-evolution.md|Kubernetes 版本演进]]
 
 
 <!-- risk-assessed -->

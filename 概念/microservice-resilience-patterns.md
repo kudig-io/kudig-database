@@ -98,6 +98,125 @@ Istio circuit breaker (OutlierDetection):
 - baseEjectionTime: 30s (minimum ejection duration)
 - maxEjectionPercent: 50 (never eject more than 50% of endpoints)
 
+## 源码实现分析
+
+### Envoy 熔断器实现
+
+```cpp
+// envoy/source/common/upstream/outlier_detection_impl.cc
+void DetectorImpl::onConsecutiveError(Http::Code code) {
+    // 每个上游主机维护独立的错误计数器
+    host->outlierDetector().incConsecutiveError();
+    
+    if (host->outlierDetector().consecutiveError() >= threshold_) {
+        // 触发熔断: 将主机从负载均衡池中移除
+        host->healthFlag(HealthFlag::FAILED_OUTLIER_CHECK);
+        // baseEjectionTime 后尝试半开（Half-Open）
+        timer_.enableTimer(baseEjectionTime_);
+    }
+}
+// 半开状态: 允许少量请求通过，成功则恢复，失败则继续熔断
+```
+
+### 韧性模式状态机
+
+```
+熔断器状态机:
+┌────────┐  连续失败 ≥ N  ┌────────┐
+│ Closed │───────────────►│  Open  │
+│(正常)  │                │(熔断)  │
+└────┬───┘                └────┬───┘
+     │                         │ 等待超时
+     │ 试探成功                ▼
+     │                    ┌──────────┐
+     └───────────────────│ Half-Open│
+                         │(试探)    │
+                         └──────────┘
+                         试探失败 → 回到 Open
+```
+
+## 使用场景
+
+### 场景一：Istio 完整韧性配置
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: payment-service
+spec:
+  host: payment.default.svc.cluster.local
+  trafficPolicy:
+    connectionPool:           # Bulkhead
+      tcp:
+        maxConnections: 100
+      http:
+        h2UpgradePolicy: DEFAULT
+        http1MaxPendingRequests: 50
+        http2MaxRequests: 200
+    outlierDetection:         # Circuit Breaker
+      consecutive5xxErrors: 3
+      interval: 10s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 50
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: payment-routes
+spec:
+  hosts: [payment.default.svc.cluster.local]
+  http:
+  - route:
+    - destination:
+        host: payment.default.svc.cluster.local
+    timeout: 3s              # Layered Timeout
+    retries:
+      attempts: 3            # Retry with Backoff
+      perTryTimeout: 1s
+      retryOn: 5xx,reset,connect-failure
+```
+
+### 场景二：应用层 Resilience4j
+
+```java
+// Spring Boot + Resilience4j
+@CircuitBreaker(name = "paymentService", fallbackMethod = "fallback")
+@Retry(name = "paymentService")
+@TimeLimiter(name = "paymentService")
+public CompletableFuture<Payment> processPayment(Order order) {
+    return CompletableFuture.supplyAsync(() -> 
+        paymentClient.charge(order));
+}
+
+// 配置: application.yml
+// resilience4j.circuitbreaker.instances.paymentService:
+//   failureRateThreshold: 50
+//   waitDurationInOpenState: 30s
+//   slidingWindowSize: 10
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 重试次数越多越好 | 重试放大流量（retry storm），只重试幂等 GET，且只在一层配置 |
+| 熔断后所有请求失败 | 熔断是快速失败（fail-fast），避免级联故障，配合 fallback 降级 |
+| 超时设置越短越好 | 超时应分层（外>内），太短导致正常请求被截断 |
+| Mesh 层和应用层都配重试 | 双层重试导致指数级放大（3×3=9次），只在一层配置 |
+| 限流只保护服务端 | 限流也保护客户端（避免队列积压），应在多层配置 |
+| Bulkhead 只是线程池 | 还包括连接池、信号量、资源配额等多维度隔离 |
+
+## 面试要点
+
+1. **熔断器三种状态如何转换？** — Closed（正常，统计失败率）→ 失败率超阈值 → Open（熔断，快速失败）→ 等待超时 → Half-Open（允许少量试探）→ 成功则 Closed，失败则 Open。核心目的：防止级联故障。
+
+2. **Mesh 层与应用层韧性如何分工？** — Mesh（Istio/Envoy）：mTLS、连接池、节点级熔断、全局重试（仅 GET）；应用（Resilience4j）：业务级熔断、方法级超时、线程隔离、业务降级、自定义重试条件。原则：重试只配一层，超时外>内。
+
+3. **如何避免 Retry Storm？** — 指数退避 + 随机抨动（jitter）；只重试幂等操作；限制重试次数（≤3）；只在一层配置；配合熔断器（失败率高时停止重试）；服务端返回 429 时客户端应退避。
+
+4. **生产环境韧性设计检查清单？** — 每个服务调用都有超时；重试只用于幂等 GET；熔断器配置 fallback；连接池有上限；多层限流（网关+Mesh+应用）；健康检查 + 就绪探针；优雅关闭（drain 存量请求）。
+
 ## Related
 
 - [[istio]] — Istio

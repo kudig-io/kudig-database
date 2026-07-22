@@ -76,34 +76,153 @@ Aeraki Mesh 作为 Istio 的扩展部署。它监听 Kubernetes API 中的 MetaR
 3. **Kafka 流量管理**: 对 Kafka 消息流量进行限流和监控
 4. **Thrift 服务治理**: 为 PHP/Thrift 服务提供熔断和超时能力
 
-## 安装
+## 安装与配置
 
 ```bash
 # 前置: Istio 已安装
-istioctl install --set profile=default
-# 安装 Aeraki
+istioctl install --set profile=default -y
+# 安装 Aeraki Mesh
 kubectl apply -f https://raw.githubusercontent.com/aeraki-mesh/aeraki/main/deploy/aeraki.yaml
-# 配置 Dubbo 路由
-kubectl apply -f - <<EOF
-apiVersion: metaprotocol.aeraki.io/v1beta1
-kind: MetaRouter
-metadata: { name: dubbo-router }
-spec:
-  hosts: ["org.apache.dubbo.demo.DemoService..*..*"]
-  routes:
-  - match: { metadata: { method: { exact: "sayHello" } } }
-    route: { cluster: outbound|20880||dubbo-demo.v1 }
-EOF
+# 验证部署
+kubectl get pods -n istio-system | grep aeraki
+kubectl get crd | grep metaprotocol
 ```
 
-## 替代方案
+```yaml
+# Dubbo 路由规则 (MetaRouter)
+apiVersion: metaprotocol.aeraki.io/v1beta1
+kind: MetaRouter
+metadata:
+  name: dubbo-router
+  namespace: default
+spec:
+  hosts:
+    - "org.apache.dubbo.demo.DemoService..*..*"
+  routes:
+  - name: v1-route
+    match:
+      metadata:
+        method:
+          exact: "sayHello"
+    route:
+      cluster: outbound|20880||dubbo-demo-provider.default.svc.cluster.local
+      subset: v1
+  - name: v2-canary
+    match:
+      metadata:
+        method:
+          exact: "sayHello"
+      app: "canary"
+    route:
+      cluster: outbound|20880||dubbo-demo-provider.default.svc.cluster.local
+      subset: v2
+---
+# Redis 读写分离
+apiVersion: metaprotocol.aeraki.io/v1beta1
+kind: MetaRouter
+metadata:
+  name: redis-route
+spec:
+  hosts:
+    - "redis.default.svc.cluster.local"
+  routes:
+  - name: read-replica
+    match:
+      metadata:
+        command:
+          exact: "GET"
+    route:
+      cluster: outbound|6379||redis-replica.default.svc.cluster.local
+  - name: write-master
+    route:
+      cluster: outbound|6379||redis-master.default.svc.cluster.local
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Aeraki Mesh** | 多协议管理、Istio 兼容 | 社区较小 |
-| Istio 原生 | HTTP/gRPC 全面支持 | 非 HTTP 协议支持有限 |
-| Spring Cloud | Java 原生治理 | 需引入 Spring Cloud SDK |
-| Envoy Filter 手动配置 | 完全自定义 | 维护成本极高 |
+```bash
+# Service 端口命名触发协议识别
+kubectl label svc dubbo-demo-provider app=dubbo-demo
+kubectl annotate svc dubbo-demo-provider aeraki.io/protocol=dubbo
+# 或端口命名: tcp-dubbo, tcp-redis, tcp-thrift, tcp-kafka
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Aeraki 控制面状态
+kubectl get pods -n istio-system -l app=aeraki
+kubectl logs -n istio-system -l app=aeraki --tail=50
+
+# 🟢 查看 MetaRouter 规则
+kubectl get metarouters -A
+kubectl describe metarouter <name>
+
+# 🟢 检查 Envoy Filter 是否生成
+kubectl get envoyfilters -A | grep aeraki
+istioctl proxy-config filter <pod> | grep meta_protocol
+
+# 🟡 更新路由规则
+kubectl apply -f metarouter.yaml
+# 验证规则下发
+istioctl proxy-config route <pod> | grep <service>
+
+# 🟡 重启 Aeraki 控制面
+kubectl rollout restart deployment/aeraki -n istio-system
+
+# 🔴 卸载 Aeraki（影响所有非 HTTP 协议治理）
+kubectl delete -f https://raw.githubusercontent.com/aeraki-mesh/aeraki/main/deploy/aeraki.yaml
+kubectl delete crd metarouters.metaprotocol.aeraki.io
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| MetaRouter 不生效 | 端口命名/注解不正确 | `kubectl get svc <name> -o yaml` | 确保端口名为 tcp-dubbo 或添加 aeraki.io/protocol 注解 |
+| Envoy Filter 未生成 | Aeraki 未监听到 CRD | `kubectl logs -n istio-system -l app=aeraki` | 检查 Aeraki Pod 状态和 RBAC |
+| Dubbo 路由失败 | 服务名不匹配 | `istioctl proxy-config cluster <pod>` | 核对 MetaRouter hosts 与实际服务名 |
+| Redis 读写分离失效 | 命令解析失败 | `kubectl logs <envoy-sidecar>` | 确认 Redis 协议版本兼容 |
+| 与 Istio 升级冲突 | Envoy Filter 版本不兼容 | `istioctl analyze` | 升级 Aeraki 至匹配 Istio 版本 |
+
+```
+排查流程：
+├─ 路由不生效
+│  ├─ 检查 Service 端口命名/注解是否触发协议识别
+│  ├─ 检查 MetaRouter hosts 是否匹配
+│  └─ istioctl proxy-config 确认 Filter 已下发
+├─ 协议解析失败
+│  ├─ 检查 Envoy 日志中的协议错误
+│  ├─ 确认协议版本与 Aeraki 支持范围
+│  └─ 检查 mTLS 是否影响协议解析
+└─ 控制面异常
+   ├─ Aeraki Pod 日志检查
+   └─ 确认与 Istio 版本兼容性
+```
+
+## 生产案例
+
+### 案例 1：大型 Java 微服务 Dubbo 网格化
+
+- **场景**: 200+ Dubbo 微服务需要纳入服务网格，实现灰度发布和流量控制
+- **排查**: 传统 Spring Cloud 方案需要修改代码引入 SDK，改造成本巨大
+- **方案**: 部署 Aeraki Mesh，通过 MetaRouter 实现 Dubbo 方法级路由和流量比例控制
+- **效果**: 零代码改造实现 Dubbo 服务网格化，灰度发布时间从小时级降至分钟级
+
+### 案例 2：Redis 读写分离自动化
+
+- **场景**: 应用直连 Redis Master，读压力大导致写延迟升高
+- **排查**: 应用代码中读写未分离，修改代码涉及多个团队
+- **方案**: Aeraki Redis Proxy 自动解析命令，GET 路由到 Replica，SET 路由到 Master
+- **效果**: 零代码修改实现读写分离，Master 负载降低 60%
+
+## 替代方案对比
+
+| 维度 | Aeraki Mesh | Istio 原生 | Spring Cloud | Envoy Filter 手动 |
+|------|-------------|------------|--------------|------------------|
+| 协议支持 | Dubbo/Thrift/Redis/Kafka | HTTP/gRPC | Java 生态 | 任意 |
+| 侵入性 | 零侵入(Sidecar) | 零侵入 | 需 SDK | 零侵入 |
+| 路由粒度 | 方法级 | 路径级 | 方法级 | 自定义 |
+| 维护成本 | 低(CRD) | 低 | 中 | 极高 |
+| 适用场景 | 非 HTTP 协议治理 | HTTP 服务 | Java 微服务 | 特殊需求 |
 
 ## 架构定位
 

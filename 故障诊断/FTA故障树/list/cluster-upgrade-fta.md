@@ -166,6 +166,88 @@ flowchart TD
   PLUG_CNI --> PLUG_CNI_OR
   PLUG_CN
 
+## 生产案例
+
+### 案例1: 集群升级后 CNI 不兼容导致网络中断
+
+**时间线**:
+- 22:00 执行集群从 1.26 升级到 1.27
+- 22:10 控制平面升级成功，开始升级 worker 节点
+- 22:15 升级后的节点 Pod 网络不通
+- 22:20 确认根因: CNI 插件版本与 1.27 不兼容
+- 22:30 升级 CNI 插件后网络恢复
+
+**根因链**:
+```
+集群升级1.27 → CNI插件未同步升级 → API不兼容
+→ 节点网络配置失败 → Pod跨节点通信中断
+```
+
+**修复**:
+```bash
+# 🟢 检查 CNI 状态
+kubectl get pods -n kube-system -l k8s-app=calico-node
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=50 | grep -i error
+# 🟡 升级 CNI 插件
+kubectl apply -f calico-${NEW_VERSION}.yaml
+# 🟢 验证网络恢复
+kubectl run test --rm -it --image=busybox -- ping ${REMOTE_POD_IP}
+```
+
+### 案例2: 升级过程中 etcd 数据不一致
+
+**现象**: 升级后部分节点状态异常，apiserver 返回不一致数据
+
+**根因**: 升级过程中 etcd 集群未完全同步即开始下一步
+
+**修复**:
+```bash
+# 🟢 检查 etcd 集群健康
+kubectl exec -n kube-system etcd-master-0 -- etcdctl endpoint status --cluster -w table
+# 🔴 必要时从快照恢复
+etcdctl snapshot restore ${SNAPSHOT} --name=master-0 ...
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: upgrade-alerts
+  rules:
+  - alert: ClusterVersionMismatch
+    expr: count(kube_node_info{kernel_version!=""}) > 0 and count(kube_node_info) != count(kube_node_info{kernel_version=""})
+    for: 30m
+    labels:
+      severity: warning
+  - alert: NodeUpgradeStuck
+    expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+    for: 30m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 升级前兼容性检查 | 确认 CNI/CSI/插件兼容新版本 | P0 |
+| 分批升级 | 先 staging 再生产 | P0 |
+| etcd 备份 | 升级前必须备份 | P0 |
+| 回滚预案 | 保留旧版本镜像和配置 | P1 |
+
+## 面试要点
+
+1. **Q: K8s 集群升级的完整步骤？**
+   A: 备份 etcd → 升级控制平面(kubeadm upgrade apply) → 逐个升级 worker(drain+upgrade+uncordon) → 升级 CNI/插件 → 验证
+
+2. **Q: 升级失败的常见原因？**
+   A: CNI/CSI 不兼容 → etcd 版本不匹配 → 证书过期 → 资源不足 → API 废弃字段未迁移
+
+3. **Q: 升级后如何验证集群健康？**
+   A: 所有节点 Ready → 核心组件 Running → Pod 网络连通 → DNS 解析正常 → 业务服务无异常 → 监控告警正常
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

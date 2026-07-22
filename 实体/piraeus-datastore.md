@@ -78,7 +78,7 @@ Piraeus 通过 Piraeus Operator 部署在 Kubernetes 集群中。Operator 管理
 3. **灾难恢复**: 通过异步复制将数据同步到远端集群
 4. **合规加密**: 使用 LUKS 加密满足数据加密合规要求
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Piraeus Operator
@@ -87,9 +87,12 @@ helm install piraeus piraeus/piraeus -n piraeus-datastore --create-namespace
 
 # 确保节点已加载 DRBD 内核模块
 # modprobe drbd
+kubectl get pods -n piraeus-datastore
+```
 
-# 创建 LINSTOR StorageClass
-kubectl apply -f - <<EOF
+### StorageClass 配置
+
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -100,10 +103,25 @@ parameters:
   autoPlace: "2"
   replication: "sync"
   encryption: "false"
-EOF
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+---
+# 加密版本
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: piraeus-encrypted
+provisioner: piraeus.csidriver.io
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+  autoPlace: "3"
+  replication: "sync"
+  encryption: "true"
+```
 
-# 创建 PVC
-kubectl apply -f - <<EOF
+### PVC 创建
+
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -114,17 +132,76 @@ spec:
   resources:
     requests:
       storage: 50Gi
-EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 LINSTOR 资源状态
+kubectl exec -n piraeus-datastore deploy/piraeus-controller -- linstor resource list
+
+# 🟢 查看存储池
+kubectl exec -n piraeus-datastore deploy/piraeus-controller -- linstor storage-pool list
+
+# 🟡 扩容 PVC
+kubectl patch pvc piraeus-pvc -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
+
+# 🟡 添加存储节点
+kubectl apply -f new-node.yaml
+
+# 🔴 删除资源（数据不可恢复）
+kubectl exec -n piraeus-datastore deploy/piraeus-controller -- linstor resource delete <node> <resource>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| PVC Pending | DRBD 模块未加载 | `lsmod | grep drbd` | `modprobe drbd` |
+| 复制失败 | 节点间网络不通 | `linstor resource list` | 检查节点间网络 |
+| IO 延迟高 | 磁盘过载 | `iostat -x 1` | 检查磁盘健康/扩容 |
+| CSI Pod CrashLoop | 内核版本不兼容 | `kubectl logs csi-pod` | 升级内核/DRBD |
+| 卷挂载失败 | 资源未就绪 | `kubectl describe pvc` | 检查 LINSTOR 状态 |
+
+```
+排查流程:
+├── PVC 无法绑定
+│   ├── kubectl describe pvc → Events
+│   ├── lsmod | grep drbd → 确认内核模块
+│   └── kubectl logs -n piraeus-datastore → Operator 日志
+├── 复制异常
+│   ├── linstor resource list → 查看同步状态
+│   ├── 检查节点间网络连通性
+│   └── dmesg | grep drbd → 内核日志
+└── 性能问题
+    ├── iostat -x 1 → 磁盘 IO
+    ├── linstor resource list → 查看资源分布
+    └── 确认副本数满足要求
+```
+
+## 生产案例
+
+### 案例 1: 数据库高可用存储
+
+- **场景**: PostgreSQL 需要 RPO=0 的同步复制存储
+- **方案**: 使用 Piraeus 同步复制(autoPlace=2)；PostgreSQL 主备分别调度到不同节点；DRBD 保证数据实时同步
+- **效果**: 节点故障时数据零丢失，故障转移时间 <30s
+
+### 案例 2: 加密合规存储
+
+- **场景**: 金融业务要求数据静态加密(LUKS)
+- **方案**: 创建 encryption=true 的 StorageClass；所有敏感数据 PVC 使用该 SC
+- **效果**: 通过合规审计，数据加密透明无感知
 
 ## 对比
 
-| 特性 | Piraeus | Longhorn | OpenEBS | Ceph RBD |
-|------|---------|----------|---------|----------|
-| 同步复制 | ✅ DRBD | ✅ | ⚠️ | ✅ |
-| RPO | 0 | 0 | >0 | 0 |
-| 性能 | 高（内核态） | 中 | 中 | 中 |
-| CNCF 状态 | Sandbox | CNCF | Sandbox | Graduated |
+| 特性 | Piraeus | Longhorn | OpenEBS | Ceph RBD | 适用场景 |
+|------|---------|----------|---------|----------|----------|
+| 同步复制 | ✅ DRBD | ✅ | ⚠️ | ✅ | RPO=0 |
+| 性能 | 高（内核态） | 中 | 中 | 中 | 高性能 |
+| 加密 | ✅ LUKS | ⚠️ | ❌ | ✅ | 合规 |
+| 复杂度 | 中 | 低 | 中 | 高 | 运维成本 |
+| CNCF 状态 | Sandbox | CNCF | Sandbox | Graduated | 生态 |
 
 ## 架构定位
 

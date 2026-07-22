@@ -78,44 +78,55 @@ Parsec 以 **DaemonSet** 形式运行在每个节点上。容器中的 Pod 通�
 3. **IoT 设备认证**：边缘设备的身份密钥存储在 TrustZone 中
 4. **数据库加密**：数据库透明加密（TDE）的主密钥存储在 HSM 中
 
-## 安装
+## 安装与配置
 
 ```bash
-# 在 Linux 节点上安装 Parsec Daemon
-# Ubuntu/Debian
+# Ubuntu/Debian 安装
 sudo apt install parsec
 
 # 或从源码构建（Rust）
 cargo install parsec-tool
 
-# 配置 Parsec（使用 TPM 后端）
-cat > /etc/parsec/config.toml <<EOF
+# 启动 Parsec
+sudo systemctl start parsec
+sudo systemctl status parsec
+```
+
+### 配置文件 (TPM 后端)
+
+```toml
+# /etc/parsec/config.toml
 [core_settings]
 listen_socket = "unix:/run/parsec/parsec.sock"
+log_level = "info"
 
 [provider]
 [provider.tpm]
 provider_type = "tpm"
 tcti = "mssim:host=localhost,port=2321"
-EOF
 
-# 启动 Parsec
-sudo systemctl start parsec
+[provider.pkcs11]
+provider_type = "pkcs11"
+library_path = "/usr/lib/softhsm/libsofthsm2.so"
+slot_number = 0
+```
 
-# 使用 parsec-tool 测试
-parsec-tool create-ecc-key --key-name mykey
-parsec-tool sign --key-name mykey --algorithm ecdsa-sha256 "hello"
-parsec-tool list-keys
+### K8s DaemonSet 部署
 
-# K8s DaemonSet 部署
-kubectl apply -f - <<EOF
+```yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: parsec
   namespace: parsec-system
 spec:
+  selector:
+    matchLabels:
+      app: parsec
   template:
+    metadata:
+      labels:
+        app: parsec
     spec:
       hostNetwork: true
       containers:
@@ -135,17 +146,83 @@ spec:
       - name: tpm-device
         hostPath:
           path: /dev/tpm0
-EOF
 ```
+
+```bash
+# 使用 parsec-tool 测试
+parsec-tool create-ecc-key --key-name mykey
+parsec-tool sign --key-name mykey --algorithm ecdsa-sha256 "hello"
+parsec-tool list-keys
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看密钥列表
+parsec-tool list-keys
+
+# 🟢 查看服务状态
+sudo systemctl status parsec
+
+# 🟡 创建密钥
+parsec-tool create-ecc-key --key-name app-signing-key
+
+# 🟡 签名操作
+parsec-tool sign --key-name app-signing-key --algorithm ecdsa-sha256 <data>
+
+# 🔴 删除密钥（不可恢复）
+parsec-tool destroy-key --key-name mykey
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 服务启动失败 | TPM 设备不可用 | `ls /dev/tpm*` | 检查 TPM 硬件/驱动 |
+| 密钥创建失败 | 后端配置错误 | `journalctl -u parsec` | 检查 config.toml |
+| Socket 连接失败 | 权限不足 | `ls -la /run/parsec/` | 调整 socket 权限 |
+| K8s Pod CrashLoop | TPM 设备未挂载 | `kubectl describe pod` | 检查 hostPath 配置 |
+| 签名验证失败 | 密钥不匹配 | `parsec-tool list-keys` | 确认使用正确密钥 |
+
+```
+排查流程:
+├── 服务异常
+│   ├── systemctl status parsec → 服务状态
+│   ├── journalctl -u parsec → 详细日志
+│   └── 检查 config.toml 配置
+├── 硬件问题
+│   ├── ls /dev/tpm* → 确认设备存在
+│   ├── tpm2_getcap properties-fixed → TPM 状态
+│   └── 检查内核模块加载
+└── K8s 部署问题
+    ├── kubectl logs parsec-pod → 容器日志
+    ├── 确认 hostPath 挂载正确
+    └── 检查 securityContext 权限
+```
+
+## 生产案例
+
+### 案例 1: 容器镜像签名硬件根信任
+
+- **场景**: 镜像签名密钥存储在软件中，存在泄露风险
+- **方案**: 使用 Parsec + TPM 存储签名密钥；私钥永不离开硬件；通过 PSA API 进行签名操作
+- **效果**: 密钥安全等级提升到硬件级，通过安全审计
+
+### 案例 2: 边缘设备统一密钥管理
+
+- **场景**: 1000+ 边缘设备需要唯一设备证书，密钥管理复杂
+- **方案**: 每台设备部署 Parsec + TPM；设备证书私钥存储在 TPM 中；统一 PSA API 接口
+- **效果**: 设备身份不可伪造，密钥管理自动化
 
 ## 对比
 
-| 特性 | Parsec | PKCS#11 | TPM2-TSS | Vault Transit |
-|------|--------|---------|----------|--------------|
-| 硬件抽象 | ✅ 多后端 | ❌ HSM only | ❌ TPM only | ❌ 软件 |
-| API 统一性 | ✅ PSA API | ❌ C API | ❌ C API | ✅ REST |
-| K8s 部署 | ✅ DaemonSet | ⚠️ | ⚠️ | ✅ |
-| 硬件安全 | ✅ TPM/HSM | ✅ HSM | ✅ TPM | ❌ |
+| 特性 | Parsec | PKCS#11 | TPM2-TSS | Vault Transit | 适用场景 |
+|------|--------|---------|----------|--------------|----------|
+| 硬件抽象 | ✅ 多后端 | ❌ HSM only | ❌ TPM only | ❌ 软件 | 统一接口 |
+| API 统一性 | ✅ PSA API | ❌ C API | ❌ C API | ✅ REST | 开发效率 |
+| K8s 部署 | ✅ DaemonSet | ⚠️ | ⚠️ | ✅ | 云原生 |
+| 硬件安全 | ✅ TPM/HSM | ✅ HSM | ✅ TPM | ❌ | 安全等级 |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF | 生态 |
 
 ## 参考链接
 

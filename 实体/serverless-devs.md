@@ -80,14 +80,14 @@ Serverless Devs 支持 Kubernetes 上的 Serverless 部署。通过 `kubeless` �
 3. **定时任务**：Cron 触发的数据同步和报表生成函数
 4. **API 后端**：Serverless 化的 RESTful API，按需弹性扩缩
 
-## 安装
+## 安装与配置
 
 ```bash
-# 安装 Serverless Devs CLI（npm）
+# 安装 Serverless Devs CLI
 npm install -g @serverless-devs/s
-
 # 或使用安装脚本
 curl -fsSL https://serverless-ai.oss-cn-hangzhou.aliyuncs.com/install.sh | bash
+s version
 
 # 配置云厂商密钥
 s config add --AccessKeyID xxx --AccessKeySecret yyy -a default
@@ -95,9 +95,11 @@ s config add --AccessKeyID xxx --AccessKeySecret yyy -a default
 # 初始化新项目
 s init devsapp/start-fc-http-nodejs14
 cd start-fc-http-nodejs14
+```
 
-# 编辑 s.yaml
-cat > s.yaml <<EOF
+### s.yaml 配置示例
+
+```yaml
 edition: 3.0.0
 name: my-app
 access: default
@@ -107,28 +109,102 @@ resources:
   hello_world:
     component: fc3
     props:
-      region: \${vars.region}
+      region: ${vars.region}
       functionName: hello-world
       runtime: nodejs18
       handler: index.handler
       code:
         source: ./code
-EOF
+      memorySize: 256
+      timeout: 30
+      triggers:
+        - triggerName: http-trigger
+          triggerType: http
+          triggerConfig:
+            authType: anonymous
+            methods: ["GET", "POST"]
+```
 
+```bash
 # 部署
 s deploy
 # 调用
 s invoke
+# 查看日志
+s logs --tail
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看函数状态
+s info
+
+# 🟢 查看实时日志
+s logs --tail
+
+# 🟡 部署函数（更新代码/配置）
+s deploy
+
+# 🟡 本地调用测试
+s invoke --event '{"key":"value"}'
+
+# 🟡 回滚到上一版本
+s rollback
+
+# 🔴 删除函数及触发器
+s remove
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| deploy 失败 | 密钥过期/权限不足 | `s config get -a default` | 更新 AccessKey |
+| 函数超时 | 内存不足/代码死循环 | `s logs` | 增加 memorySize/修复代码 |
+| 触发器无响应 | 触发器配置错误 | `s info` | 检查 trigger 配置 |
+| 冷启动慢 | 依赖包过大 | 检查 code 目录大小 | 精简依赖/使用层 |
+| 网络访问失败 | VPC 配置缺失 | 检查函数 VPC 配置 | 添加 VPC 绑定 |
+
+```
+排查流程:
+├── 部署失败
+│   ├── s deploy --debug → 详细错误
+│   ├── 检查 s.yaml 语法
+│   └── 确认云账号权限充足
+├── 函数执行异常
+│   ├── s logs --tail → 实时日志
+│   ├── s invoke → 手动触发测试
+│   └── 检查 runtime 版本兼容性
+└── 性能问题
+    ├── 检查冷启动时间
+    ├── 优化依赖包大小
+    └── 考虑预留实例数
+```
+
+## 生产案例
+
+### 案例 1: 多云函数统一管理
+
+- **场景**: 团队同时使用阿里云 FC 和 AWS Lambda，管理工具分散
+- **方案**: 使用 Serverless Devs 统一管理，通过不同 access 配置多云凭据；统一 s.yaml 规范
+- **效果**: 部署流程统一，新函数上线时间从 2h 缩短到 15min
+
+### 案例 2: CI/CD 集成自动化部署
+
+- **场景**: 函数代码更新后需要手动部署，容易遗漏
+- **方案**: GitHub Actions 集成 `s deploy`；PR 合并后自动部署到生产；添加 `s invoke` 烟雾测试
+- **效果**: 部署自动化 100%，发布事故减少 90%
 
 ## 对比
 
-| 特性 | Serverless Devs | Serverless Framework | SAM | funcraft |
-|------|----------------|---------------------|-----|----------|
-| 多云 | ✅ 阿里云/AWS/腾讯 | ✅ 多云 | ❌ AWS only | ❌ 阿里云 only |
-| 开源 | ✅ | ⚠️ 核心 | ✅ | ✅ |
-| 组件生态 | ✅ Registry | ✅ Plugins | ⚠️ | ❌ |
-| K8s 支持 | ⚠️ | ✅ | ❌ | ❌ |
+| 特性 | Serverless Devs | Serverless Framework | SAM | funcraft | 适用场景 |
+|------|----------------|---------------------|-----|----------|----------|
+| 多云 | ✅ 阿里云/AWS/腾讯 | ✅ 多云 | ❌ AWS only | ❌ 阿里云 only | 多云管理 |
+| 开源 | ✅ | ⚠️ 核心 | ✅ | ✅ | 自主可控 |
+| 组件生态 | ✅ Registry | ✅ Plugins | ⚠️ | ❌ | 扩展能力 |
+| K8s 支持 | ⚠️ | ✅ | ❌ | ❌ | 混合部署 |
+| 阿里云优化 | ✅ 原生 | ⚠️ | ❌ | ✅ | 阿里云用户 |
 
 ## 参考链接
 

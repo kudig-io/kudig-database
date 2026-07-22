@@ -190,6 +190,127 @@ spec:
 更多部署排错方法请参考 [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[概念/blue-green-deployment.md|blue-green-deployment]]。
 
 
+## 源码实现分析
+
+### Argo Rollouts 金丝雀控制器
+
+```go
+// github.com/argoproj/argo-rollouts/rollout/canary.go
+// Argo Rollouts 金丝雀发布核心
+func (c *RolloutContext) reconcileCanary() error {
+    // 1. 获取当前 step 配置
+    // canary.steps: [{setWeight: 10}, {pause: {duration: 5m}}, {setWeight: 50}...]
+    currentStep := rollout.Spec.Strategy.Canary.Steps[rollout.Status.CurrentStepIndex]
+    
+    // 2. 调整流量权重
+    if currentStep.SetWeight != nil {
+        // 修改 Service selector 或 Istio VirtualService weight
+        c.setCanaryWeight(*currentStep.SetWeight)
+        // stable Service → 90% 流量
+        // canary Service → 10% 流量
+    }
+    
+    // 3. 暂停等待（人工确认或定时）
+    if currentStep.Pause != nil {
+        // 等待 duration 或手动 promote
+        return c.pauseRollout()
+    }
+    
+    // 4. 分析指标（AnalysisRun）
+    if currentStep.Analysis != nil {
+        // 执行 Prometheus 查询，检查错误率/延迟
+        // 失败则自动回滚
+        c.runAnalysis()
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     金丝雀发布流量控制                              │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Step 1: setWeight 10%                                  │
+│    stable (v1) ── 90% ──▶ [Pod-v1 x 9]                │
+│    canary (v2) ── 10% ──▶ [Pod-v2 x 1]                │
+│                                                         │
+│  Step 2: pause 5m + analysis                            │
+│    检查: error_rate < 1%, p99_latency < 200ms          │
+│    失败 → 自动回滚 (abort)                             │
+│                                                         │
+│  Step 3: setWeight 50%                                  │
+│    stable (v1) ── 50% ──▶ [Pod-v1 x 5]                │
+│    canary (v2) ── 50% ──▶ [Pod-v2 x 5]                │
+│                                                         │
+│  Step 4: setWeight 100% (promote)                       │
+│    canary (v2) ── 100% ─▶ [Pod-v2 x 10]               │
+│    stable (v1) ── 删除                                  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产配置：Argo Rollouts 金丝雀
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: api-server
+spec:
+  replicas: 10
+  strategy:
+    canary:
+      canaryService: api-canary
+      stableService: api-stable
+      trafficRouting:
+        istio:
+          virtualService:
+            name: api-vs
+      steps:
+      - setWeight: 10
+      - pause: {duration: 5m}
+      - analysis:
+          templates:
+          - templateName: success-rate
+      - setWeight: 50
+      - pause: {duration: 10m}
+      - setWeight: 100
+  selector:
+    matchLabels: {app: api}
+  template:
+    metadata:
+      labels: {app: api}
+    spec:
+      containers:
+      - name: api
+        image: api:v2.1.0
+```
+
+## 面试要点
+
+1. **金丝雀发布与蓝绿发布的区别？**
+   - 金丝雀：渐进式流量切换（10%→50%→100%），可回滚
+   - 蓝绿：一次性全量切换，需要双倍资源
+   - 金丝雀风险更低，但发布周期更长
+   - 蓝绿切换更快，但回滚也是全量
+
+2. **如何实现基于流量的金丝雀（而非副本数）？**
+   - 副本数金丝雀：简单但不精确（10 Pod 中 1 个 = 10%）
+   - 流量金丝雀：通过 Istio/Nginx/Gateway API 控制实际流量比例
+   - Argo Rollouts 支持 Istio/Nginx/ALB/Gateway API 流量路由
+   - 流量金丝雀更精确，但需要 Service Mesh 或 Ingress 支持
+
+3. **金丝雀发布中的自动分析如何工作？**
+   - AnalysisRun CRD 定义 Prometheus 查询
+   - 检查指标：错误率、延迟 P99、业务指标
+   - 失败自动回滚（abort），成功继续下一步
+   - 支持 Webhook 通知和人工审批
+
+4. **Flagger 与 Argo Rollouts 的对比？**
+   - Flagger：轻量，专注金丝雀/蓝绿，与 Istio/Linkerd 集成
+   - Argo Rollouts：功能更全，支持实验（Experiment）、A/B 测试
+   - Flagger 配置更简单，Argo Rollouts 更灵活
+   - 两者都是 CNCF 项目
+
 ## 参见
 
 - [[kubernetes]] — core-concept 领域核心页面

@@ -73,6 +73,70 @@ kubectl describe networkpolicy <policy-name> -n <namespace>
 - 使用命名空间标签而非名称进行跨命名空间放行，减少策略变更频率
 - 在测试环境预先验证 deny-all + allow-list 组合是否符合预期连通性
 
+## 生产案例
+
+### 案例 1：Flannel 环境下 NetworkPolicy 完全不生效
+
+**背景**：团队在 Flannel CNI 集群中部署了 deny-all NetworkPolicy，但安全扫描发现所有 Pod 间流量仍未被拦截。
+
+**根因**：Flannel 不支持 NetworkPolicy 执行，策略对象被 apiserver 接受但无任何组件执行。需迁移到 Calico/Cilium 或添加 Calico policy-only 模式。
+
+**修复**：
+``` bash
+# 🟡 中风险：安装 Calico policy 组件（与 Flannel 共存）
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/manifests/canal.yaml
+# 等待 Canal Pod 就绪后验证策略生效
+kubectl run test --rm -it --image=busybox -- wget -qO- --timeout=3 http://<target-pod-ip>
+```
+
+### 案例 2：Egress 策略阻断 DNS 导致全业务不可用
+
+**背景**：应用 egress deny-all 策略后未放行 CoreDNS，所有 Pod 无法解析域名。
+
+**根因**：egress 规则中未包含 UDP 53 端口放行规则，且未指定 CoreDNS 的 namespaceSelector。
+
+**修复**：
+``` bash
+# 🟡 中风险：添加 DNS egress 放行规则
+kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: prod
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+EOF
+```
+
+## 升级决策点
+
+- **P0（立即处理）**：NetworkPolicy 误配置导致核心业务流量被阻断
+- **P1（30分钟内）**：策略未生效但安全合规要求必须生效，存在安全风险
+- **P2（下一工作日）**：非关键命名空间的策略调整，不影响业务
+
+## 面试要点
+
+1. **Q: NetworkPolicy 的默认行为是什么？**
+   A: 默认情况下 Pod 允许所有入站和出站流量（全开放）。一旦某个 Pod 被任何 NetworkPolicy 的 podSelector 匹配，该 Pod 就变为“白名单模式”，仅允许被策略显式放行的流量。未被任何策略匹配的 Pod 仍保持全开放。
+
+2. **Q: 哪些 CNI 支持 NetworkPolicy？实现原理有何不同？**
+   A: Calico（默认用 Linux iptables，新版本支持 eBPF）、Cilium（eBPF 实现，L3/L4/L7）、Weave（NPC 组件用 iptables）、Antrea（OVS 流表）。Flannel 不支持。Calico iptables 模式性能随策略数线性下降，eBPF 模式性能更优。
+
+3. **Q: 如何测试 NetworkPolicy 是否符合预期？**
+   A: ① 使用 `kubectl run test --rm -it` 创建测试 Pod 验证连通性；② 使用 Cilium 的 `cilium policy trace` 命令模拟策略执行；③ 使用 Calico 的 `calicoctl get networkpolicy -o yaml` 检查渲染结果；④ 在 CI/CD 中使用网络策略测试框架（如 Cyclonus）自动化验证。
+
 ## 相关概念
 
 - [[概念/network-policy.md|Network Policy]] — NetworkPolicy 规则语义、CNI 实现与标签匹配原理

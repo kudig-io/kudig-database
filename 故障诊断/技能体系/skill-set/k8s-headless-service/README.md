@@ -79,6 +79,49 @@ kubectl get networkpolicy -n <namespace>
 - 在 CI 流水线中加入 DNS 解析冒烟测试，覆盖 Pod FQDN 与 SRV 记录
 - 对需要提前发现的集群，显式启用 `publishNotReadyAddresses: true`
 
+## 生产案例
+
+### 案例 1：StatefulSet Pod FQDN 解析失败导致集群初始化失败
+
+**背景**：某 Elasticsearch 集群使用 StatefulSet + Headless Service，新节点加入时无法解析 `es-0.es-headless.default.svc.cluster.local`，集群无法形成。
+
+**根因**：Headless Service 的 selector 中 `app: elasticsearch` 与 StatefulSet Pod 模板标签 `app: es` 不匹配，导致 DNS A 记录未生成。
+
+**修复**：
+``` bash
+# 🟡 中风险：修正 Headless Service selector
+kubectl patch svc es-headless -n default -p '{"spec":{"selector":{"app":"es"}}}'
+# 验证 DNS 解析
+kubectl run test --rm -it --image=busybox -- nslookup es-0.es-headless.default.svc.cluster.local
+```
+
+### 案例 2：publishNotReadyAddresses 未设置导致滚动更新死锁
+
+**背景**：Cassandra StatefulSet 滚动更新时，新 Pod 启动需要发现其他节点，但其他 Pod 也在重启中（Not Ready），Headless Service 不返回 Not Ready Pod 的 IP，导致所有节点互相等待。
+
+**修复**：
+``` bash
+# 🟡 中风险：启用 publishNotReadyAddresses
+kubectl patch svc cassandra-headless -n prod -p '{"spec":{"publishNotReadyAddresses":true}}'
+```
+
+## 升级决策点
+
+- **P0（立即处理）**：Headless Service DNS 完全失效，StatefulSet 集群无法形成/通信
+- **P1（30分钟内）**：部分 Pod FQDN 解析失败，影响数据同步但服务仍可用
+- **P2（下一工作日）**：仅新 Pod 发现异常，当前集群运行正常
+
+## 面试要点
+
+1. **Q: Headless Service 与普通 Service 的区别是什么？**
+   A: Headless Service 设置 `clusterIP: None`，不分配虚拟 IP，不经过 kube-proxy 转发。DNS 查询直接返回后端 Pod 的 A 记录（每个 Pod 一个 IP），适用于 StatefulSet 需要稳定网络标识的场景（如数据库集群、消息队列）。
+
+2. **Q: StatefulSet 的 DNS 记录格式是什么？**
+   A: Pod 记录：`<pod-name>.<svc-name>.<namespace>.svc.cluster.local`。SRV 记录：`_<port-name>._<protocol>.<svc-name>.<namespace>.svc.cluster.local`。普通 Headless Service 查询返回所有匹配 Pod 的 A 记录。
+
+3. **Q: publishNotReadyAddresses 的作用和适用场景？**
+   A: 默认 Headless Service 仅返回 Ready Pod 的 DNS 记录。设置 `publishNotReadyAddresses: true` 后，即使 Pod 未就绪也会返回其 IP。适用于：分布式系统初始化发现（如 ZooKeeper、Cassandra 节点互相发现）、滚动更新期间保持集群通信。
+
 ## 相关概念
 
 - [[概念/headless-service.md|Headless Service]] — Headless Service DNS 解析与 StatefulSet 网络标识

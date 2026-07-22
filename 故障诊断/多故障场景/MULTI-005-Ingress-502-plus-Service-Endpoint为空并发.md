@@ -60,6 +60,46 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 11:00 | 滚动更新开始，新 Pod 启动中 | 🟢 `kubectl rollout status deployment/${DEPLOY} -n prod` |
+| 11:02 | 新 Pod readinessProbe 失败(DB连接池未预热) | 🟢 `kubectl describe pod ${POD} -n prod \| grep -A5 Events` |
+| 11:03 | 旧 Pod 被终止，Endpoint 为空 | 🟢 `kubectl get endpoints ${SVC} -n prod` |
+| 11:04 | Ingress 返回 502 | 🟢 `curl -I https://${DOMAIN}` |
+| 11:08 | 确认根因: readinessProbe 超时 + maxUnavailable 配置错误 | 🟢 `kubectl get deployment ${DEPLOY} -n prod -o yaml \| grep -A5 strategy` |
+| 11:12 | 修复 Probe + 调整策略，Pod Ready | 🟡 `kubectl patch deployment ...` |
+| 11:15 | Endpoint 恢复，502 消失 | 🟢 `kubectl get endpoints ${SVC} -n prod -w` |
+
+## 故障关联图
+
+```
+readinessProbe配置不当(根因)
+    ├── 新Pod未Ready
+    │       └── 旧Pod被终止(maxUnavailable配置错误)
+    │               └── Endpoint为空
+    │                       └── Ingress无后端 → 502
+    └── 影响: 该服务所有外部访问失败
+```
+
+## 关键教训
+
+1. **readinessProbe 设计**: 未考虑应用预热时间
+2. **滚动更新策略**: maxUnavailable=0 时新 Pod 失败会导致服务中断
+3. **Endpoint 监控**: 未监控 Endpoint 可用性
+
+## 面试要点
+
+1. **Q: Ingress 502 和 Endpoint 为空的关联排查？**
+   A: 检查 Endpoint 是否为空 → 确认 Pod 是否 Ready → 查看 readinessProbe 失败原因 → 检查滚动更新策略 → 修复 Probe
+
+2. **Q: 如何避免滚动更新时 502？**
+   A: maxUnavailable≥1 → readinessProbe 充分预热 → preStop hook 优雅关闭 → PDB 保护最小可用数
+
+3. **Q: Endpoint 为空的常见原因？**
+   A: Pod 未 Ready → selector 不匹配 → 所有 Pod 被终止 → Service 无对应 Pod → kube-proxy 规则清除
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

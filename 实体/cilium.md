@@ -74,6 +74,173 @@ Hubble provides network flow observability:
 
 Cilium can replace kube-proxy entirely using eBPF for Service load balancing. Benefits: higher throughput, lower latency, no iptables/IPVS rules to manage.
 
+## 安装与配置
+
+```bash
+# 🟢 使用 cilium CLI 安装
+cilium install --version 1.15.0 \
+  --set kubeProxyReplacement=true \
+  --set k8sServiceHost=10.0.1.1 \
+  --set k8sServicePort=6443
+
+# 🟢 验证安装
+cilium status
+cilium connectivity test
+
+# 🟢 查看 Cilium 配置
+kubectl get configmap cilium-config -n kube-system -o yaml
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 Cilium 状态
+cilium status
+kubectl get pods -n kube-system -l k8s-app=cilium
+
+# 🟢 查看网络策略
+cilium policy get
+kubectl get ciliumnetworkpolicy -A
+
+# 🟢 查看端点 (Pod 网络)
+cilium endpoint list
+
+# 🟢 查看 Service 负载均衡
+cilium service list
+
+# 🟢 查看连接跟踪
+cilium bpf ct list global
+
+# 🟢 监控网络流量
+cilium monitor --type trace
+cilium monitor --type drop
+
+# 🟢 Hubble 流量观察
+hubble observe --namespace default
+hubble observe --type drop
+hubble observe --from-namespace team-a --to-namespace team-b
+
+# 🟢 连通性测试
+cilium connectivity test
+cilium connectivity test --namespace default
+
+# 🟢 查看 eBPF 程序
+cilium bpf policy get <endpoint-id>
+```
+
+### CiliumNetworkPolicy 示例
+
+```yaml
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: api-policy
+  namespace: default
+spec:
+  endpointSelector:
+    matchLabels:
+      app: api
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        app: frontend
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      rules:
+        http:
+        - method: GET
+          path: /api/.*
+        - method: POST
+          path: /api/orders
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        app: database
+    toPorts:
+    - ports:
+      - port: "5432"
+        protocol: TCP
+  - toCIDR:
+    - 0.0.0.0/0
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Pod 网络不通 | eBPF 程序未加载 | 检查内核版本、Cilium 日志 |
+| DNS 解析失败 | CoreDNS 策略阻断 | 检查 egress DNS 规则 |
+| Service 不可达 | eBPF LB 异常 | `cilium service list` |
+| 策略不生效 | 标签不匹配 | `cilium policy trace` |
+| 性能下降 | eBPF map 满 | 检查 map 大小 |
+| Hubble 无数据 | Relay 异常 | 检查 Hubble 组件 |
+
+### 排查流程
+
+```
+1. Cilium 状态检查
+   cilium status
+       │
+2. 连通性测试
+   cilium connectivity test
+       │
+3. 流量监控
+   cilium monitor --type drop
+       │
+4. 策略跟踪
+   cilium policy trace --src-namespace default --src-pod <pod> --dst-namespace default --dst-pod <pod>
+       │
+5. Hubble 观察
+   hubble observe --pod <pod-name>
+```
+
+## Cilium vs 其他 CNI
+
+| 特性 | Cilium | Calico | Flannel |
+|------|--------|--------|--------|
+| 数据平面 | eBPF | iptables/eBPF | VXLAN |
+| L7 策略 | 支持 | 不支持 | 不支持 |
+| kube-proxy 替代 | 完整 | 部分 | 不支持 |
+| 可观测性 | Hubble | 基本 | 无 |
+| 加密 | WireGuard/IPSec | IPSec | 无 |
+| 性能 | 极高 | 高 | 中 |
+| 复杂度 | 中-高 | 中 | 低 |
+
+## 生产案例
+
+### 案例1：eBPF 程序未加载
+
+**症状：** Pod 创建后无网络
+
+**根因：** 内核版本 < 5.10，不支持 BTF
+
+**解决：** 升级内核到 5.15+
+
+### 案例2：DNS 被策略阻断
+
+**症状：** 部署 CiliumNetworkPolicy 后 DNS 失败
+
+**根因：** egress 策略未允许 UDP:53 到 CoreDNS
+
+**解决：** 添加 DNS egress 规则
+
+## 检查清单
+
+- [ ] 理解 Cilium eBPF 架构
+- [ ] 掌握 CiliumNetworkPolicy 编写
+- [ ] 能使用 Hubble 观察流量
+- [ ] 掌握故障排查流程
+- [ ] 理解 kube-proxy 替代模式
+- [ ] 了解 Cilium vs Calico vs Flannel
+
 ## Related
 - [[概念/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]] — 综合
 

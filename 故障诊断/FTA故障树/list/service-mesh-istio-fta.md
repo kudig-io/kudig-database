@@ -159,6 +159,96 @@ flowchart TD
 |------|---------|
 | **事件** | Sidecar 注入 Webhook 失败事件、Pod 
 
+## 生产案例
+
+### 案例1: Sidecar 注入失败导致 Pod 无法启动
+
+**时间线**:
+- 10:00 部署新版本 Pod，但 Pod 一直 Init:0/1
+- 10:05 事件显示 `FailedCreate: Internal error occurred: failed calling webhook "sidecar-injector.istio.io"`
+- 10:10 确认根因: istiod Pod 不可用，注入 Webhook 无响应
+- 10:15 修复 istiod 后 Pod 正常启动
+
+**根因链**:
+```
+istiod Pod不可用 → sidecar-injector webhook无响应
+→ Pod创建被拦截 → Init容器无法完成 → Pod卡在Init:0/1
+```
+
+**修复**:
+```bash
+# 🟢 检查 istiod 状态
+kubectl get pods -n istio-system -l app=istiod
+kubectl logs -n istio-system -l app=istiod --tail=50 | grep -i error
+# 🟡 紧急跳过注入(临时)
+kubectl label namespace ${NS} istio-injection=disabled --overwrite
+# 🟡 修复 istiod
+kubectl rollout restart deployment istiod -n istio-system
+```
+
+### 案例2: mTLS 不匹配导致服务间 503
+
+**现象**: 部分服务间调用返回 `RBAC: access denied` 或 `connection reset`
+
+**根因**: 发送方使用 PLAINTEXT 但接收方要求 STRICT mTLS
+
+**修复**:
+```bash
+# 🟢 检查 PeerAuthentication
+kubectl get peerauthentication -A -o wide
+# 🟡 统一 mTLS 策略
+kubectl apply -f - <<EOF
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: ${NS}
+spec:
+  mtls:
+    mode: PERMISSIVE
+EOF
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: istio-alerts
+  rules:
+  - alert: IstiodDown
+    expr: up{job="istiod"} == 0
+    for: 2m
+    labels:
+      severity: critical
+  - alert: IstioProxyNotReady
+    expr: kube_pod_status_ready{condition="true"} * on(pod) group_left() kube_pod_labels{label_istio_io_rev="default"} == 0
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| istiod 高可用 | 至少 2 副本 + 反亲和 | P0 |
+| Webhook 容错 | failurePolicy: Ignore (非关键命名空间) | P0 |
+| mTLS 渐进式 | 先 PERMISSIVE 再 STRICT | P1 |
+| Sidecar 资源限制 | 设置合理的 CPU/Memory | P1 |
+
+## 面试要点
+
+1. **Q: Istio Sidecar 注入的原理？**
+   A: MutatingAdmissionWebhook 拦截 Pod 创建请求 → istiod 注入 init-container(istio-init) + sidecar(istio-proxy) → iptables 重定向流量到 Envoy
+
+2. **Q: Istio 503 的排查思路？**
+   A: 检查目标 Pod 是否 Ready → 查看 Envoy 日志 → 确认 mTLS 模式匹配 → 检查 DestinationRule → 验证 AuthorizationPolicy
+
+3. **Q: Istio 与 Linkerd 的对比？**
+   A: Istio 功能丰富但复杂；Linkerd 轻量(Rust proxy)；Istio 多协议支持；Linkerd 资源开销小；Istio 生态更大
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

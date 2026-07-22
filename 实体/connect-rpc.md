@@ -76,21 +76,25 @@ Connect RPC 服务作为标准 HTTP/gRPC 服务运行在 Kubernetes Pod 中。�
 3. **gRPC 兼容迁移**: 从 gRPC 迁移到 Connect，获得 HTTP/1.1 和浏览器支持
 4. **移动端 API**: iOS（Swift）和 Android（Kotlin）客户端直连 Connect 服务
 
-## 安装
+## 安装与配置
+
+### Go 服务端
 
 ```bash
-# Go 服务端示例
+# 安装依赖
 go get connectrpc.com/connect@latest
 go get connectrpc.com/bufconnect@latest
 
-# 生成 Connect 代码（需要 protoc + buf）
+# 生成 Connect 代码（需要 buf）
 buf generate
+```
 
-# Go 服务端
-cat > main.go <<'GO'
+```go
+// main.go - Go 服务端示例
 package main
 
 import (
+    "context"
     "net/http"
     "connectrpc.com/connect"
     "gen/ping/v1/pingconnect"
@@ -107,23 +111,107 @@ func main() {
     pingv1.RegisterPingServiceHandler(mux, &PingServer{})
     http.ListenAndServe(":8080", mux)
 }
-GO
-
-# TypeScript 客户端（浏览器直连）
-# import { createClient } from "@connectrpc/connect";
-# import { createGrpcWebTransport } from "@connectrpc/connect-web";
-# const client = createClient(PingService, createGrpcWebTransport({ baseUrl: "https://api.example.com" }));
-# const res = await client.ping({ name: "world" });
 ```
+
+### TypeScript 客户端
+
+```typescript
+// 浏览器直连（无需代理）
+import { createClient } from "@connectrpc/connect";
+import { createGrpcWebTransport } from "@connectrpc/connect-web";
+
+const client = createClient(
+  PingService,
+  createGrpcWebTransport({ baseUrl: "https://api.example.com" })
+);
+
+const res = await client.ping({ name: "world" });
+console.log(res.msg); // "pong"
+```
+
+### Protobuf 定义
+
+```protobuf
+// ping/v1/ping.proto
+syntax = "proto3";
+package ping.v1;
+
+service PingService {
+  rpc Ping(PingRequest) returns (PingResponse) {}
+  rpc ServerStream(ServerStreamRequest) returns (stream ServerStreamResponse) {}
+}
+
+message PingRequest {
+  string name = 1;
+}
+
+message PingResponse {
+  string msg = 1;
+}
+```
+
+## 运维操作
+
+```bash
+# 🟢 测试服务连通性
+curl -X POST http://localhost:8080/ping.v1.PingService/Ping \
+  -H "Content-Type: application/json" \
+  -d '{"name":"test"}'
+
+# 🟢 查看服务健康状态
+curl http://localhost:8080/health
+
+# 🟡 部署到 K8s
+kubectl apply -f connect-service.yaml
+
+# 🔴 删除服务
+kubectl delete -f connect-service.yaml
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 连接失败 | 服务未启动 | `curl http://localhost:8080/health` | 检查服务状态 |
+| 浏览器 CORS 错误 | 未配置 CORS | 检查服务端 CORS 配置 | 添加 CORS 中间件 |
+| 流式连接断开 | 代理超时 | 检查 Ingress/代理配置 | 增加超时时间 |
+| 序列化错误 | proto 版本不匹配 | 检查 buf.gen.yaml | 重新生成代码 |
+
+**排查流程：**
+```
+Connect 服务异常
+├── 检查服务状态 → curl http://localhost:8080/health
+├── 检查 proto 定义 → buf lint
+├── 检查生成代码 → buf generate
+├── 检查网络连通 → curl -v http://service:8080
+└── 检查 CORS 配置 → 浏览器 DevTools Network
+```
+
+## 生产案例
+
+### 案例一：浏览器直连 gRPC
+
+- **场景**: 前端需要直接调用后端 gRPC 服务，无需 Envoy 代理
+- **排查**: 传统 gRPC-Web 需要 Envoy 代理，增加复杂度
+- **方案**: Connect 支持浏览器直连，HTTP/1.1 兼容，无需代理
+- **效果**: 移除 Envoy 代理，架构简化，延迟降低 20ms
+
+### 案例二：多协议兼容
+
+- **场景**: 同一服务需要支持 gRPC、gRPC-Web、HTTP/JSON 三种协议
+- **排查**: Connect 自动支持三种协议，无需额外配置
+- **方案**: 服务端使用 Connect，客户端根据环境选择协议
+- **效果**: 一套代码支持所有客户端，维护成本降低 60%
 
 ## 对比
 
-| 特性 | Connect | gRPC | gRPC-Web | Twirp |
-|------|---------|------|----------|-------|
-| 浏览器直连 | ✅ | ❌ | ⚠️ 需代理 | ✅ |
-| HTTP/1.1 | ✅ | ❌ | ❌ | ✅ |
-| gRPC 兼容 | ✅ | ✅ | ⚠️ | ❌ |
-| 流式 | ✅ | ✅ | ⚠️ 有限 | ❌ |
+| 特性 | Connect | gRPC | gRPC-Web | Twirp | 适用场景 |
+|------|---------|------|----------|-------|----------|
+| 浏览器直连 | ✅ | ❌ | ⚠️ 需代理 | ✅ | Connect 最佳 |
+| HTTP/1.1 | ✅ | ❌ | ❌ | ✅ | - |
+| gRPC 兼容 | ✅ | ✅ | ⚠️ | ❌ | - |
+| 流式 | ✅ | ✅ | ⚠️ 有限 | ❌ | - |
+| 多协议 | ✅ | ❌ | ❌ | ❌ | Connect 独有 |
 
 ## 架构定位
 

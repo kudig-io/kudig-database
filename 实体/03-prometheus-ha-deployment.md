@@ -71,16 +71,246 @@ Prometheus 高可用部署是关于在生产环境中部署和运维高可用 Pr
 - **多集群监控联邦**：统一查询多个集群的监控指标
 - **高可用告警**：确保告警系统不因单点故障中断
 
-## 安装与快速开始
+## 安装与配置
+
+### Prometheus Operator + Thanos 部署
 
 ```bash
-# Prometheus Operator + Thanos
-helm install kube-prometheus prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --set prometheus.thanos.create=true
+# 🟢 安装 kube-prometheus-stack（含 Thanos Sidecar）
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install kube-prometheus prometheus-community/kube-prometheus-stack \
+  -n monitoring --create-namespace \
+  --set prometheus.thanos.create=true \
+  --set prometheus.prometheusSpec.replicas=2 \
+  --set prometheus.prometheusSpec.retention=6h \
+  --set prometheus.prometheusSpec.retentionSize=50GB \
+  --set alertmanager.alertmanagerSpec.replicas=3
+
+# 🟢 安装 Thanos Query + Store Gateway
+helm install thanos prometheus-community/thanos \
+  -n monitoring \
+  --set query.enabled=true \
+  --set storeGateway.enabled=true \
+  --set compactor.enabled=true \
+  --set bucket.type=S3 \
+  --set bucket.config.bucket=thanos-metrics \
+  --set bucket.config.endpoint=s3.internal:9000
+
+# 🟢 验证部署
+kubectl get pods -n monitoring
+kubectl get prometheus -n monitoring
 ```
+
+### Prometheus CRD 配置（双副本 + Thanos）
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s-ha
+  namespace: monitoring
+spec:
+  replicas: 2  # 双实例冗余
+  replicaExternalLabelName: prometheus_replica
+  externalLabels:
+    cluster: prod-east
+    environment: production
+  retention: 6h  # 本地短期存储，长期由 Thanos 管理
+  retentionSize: 50GB
+  thanos:
+    image: quay.io/thanos/thanos:v0.35.0
+    objectStorageConfig:
+      name: thanos-objstore-secret
+      key: objstore.yml
+    version: v0.35.0
+  resources:
+    requests:
+      cpu: "2"
+      memory: 8Gi
+    limits:
+      cpu: "4"
+      memory: 16Gi
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: fast-ssd
+        resources:
+          requests:
+            storage: 100Gi
+  serviceMonitorSelector:
+    matchLabels:
+      team: platform
+  podDisruptionBudget:
+    minAvailable: 1
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: prometheus
+        topologyKey: kubernetes.io/hostname
+```
+
+### AlertManager 集群配置
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: ha-cluster
+  namespace: monitoring
+spec:
+  replicas: 3  # Gossip 集群
+  configSecret: alertmanager-config
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 10Gi
+---
+# AlertManager 路由配置
+apiVersion: v1
+kind: Secret
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+stringData:
+  alertmanager.yaml: |
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ['alertname', 'namespace']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 4h
+      receiver: default
+      routes:
+      - match:
+          severity: critical
+        receiver: pagerduty-critical
+        repeat_interval: 1h
+    receivers:
+    - name: default
+      webhook_configs:
+      - url: http://alertmanager-webhook:8080/alert
+    - name: pagerduty-critical
+      pagerduty_configs:
+      - service_key: <pd-key>
+```
+
+### Thanos 对象存储配置
+
+```yaml
+# thanos-objstore-secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: thanos-objstore-secret
+  namespace: monitoring
+stringData:
+  objstore.yml: |
+    type: S3
+    config:
+      bucket: thanos-metrics
+      endpoint: minio.storage.svc:9000
+      access_key: ${MINIO_ACCESS_KEY}
+      secret_key: ${MINIO_SECRET_KEY}
+      insecure: true
+```
+
+## 运维操作
+
+```bash
+# 🟢 检查 Prometheus 实例状态
+kubectl get prometheus -n monitoring
+kubectl get pods -n monitoring -l app.kubernetes.io/name=prometheus
+
+# 🟢 检查 Thanos 组件
+kubectl get pods -n monitoring -l app.kubernetes.io/name=thanos-query
+kubectl get pods -n monitoring -l app.kubernetes.io/name=thanos-store-gateway
+
+# 🟢 检查 AlertManager 集群状态
+curl -s http://alertmanager:9093/api/v2/status | jq '.cluster'
+
+# 🟢 查询指标（通过 Thanos Query 全局视图）
+curl -s 'http://thanos-query:9090/api/v1/query?query=up'
+
+# 🟡 强制刷新 Prometheus 配置
+kubectl rollout restart statefulset/prometheus-k8s-ha -n monitoring
+
+# 🟢 检查存储使用情况
+kubectl exec -n monitoring prometheus-k8s-ha-0 -- du -sh /prometheus/
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 指标查询无数据 | Target 发现失败 | `curl :9090/api/v1/targets` | 检查 ServiceMonitor/label |
+| Thanos Store 不可用 | 对象存储连接失败 | `kubectl logs thanos-store-*` | 检查 S3 凭据/网络 |
+| 告警重复发送 | AlertManager 集群分裂 | `curl :9093/api/v2/status` | 检查 Gossip 端口 9094 |
+| Prometheus OOM | 高基数指标/内存不足 | `kubectl top pod`; `tsdb status` | 调整 retentionSize/增加内存 |
+| 指标延迟 > 5min | 采集负载过高 | `prometheus_tsdb_head_samples_appended_total` | 分片采集/减少 target |
+
+### 排查流程
+
+```
+监控数据异常
+├── 指标缺失？
+│   ├── 检查 Target: curl :9090/api/v1/targets
+│   ├── 检查 ServiceMonitor: kubectl get servicemonitor -A
+│   └── 检查 RBAC: kubectl auth can-i list pods --as=system:serviceaccount:monitoring:prometheus-k8s
+├── Thanos 查询无历史数据？
+│   ├── 检查 Sidecar: kubectl logs prometheus-*-thanos-sidecar
+│   ├── 检查对象存储: mc ls minio/thanos-metrics/
+│   └── 检查 Store Gateway: kubectl logs thanos-store-*
+└── 告警异常？
+    ├── 告警未触发 → 检查 AlertRule/PrometheusRule
+    ├── 告警重复 → 检查 AlertManager 集群状态
+    └── 告警丢失 → 检查 AlertManager 副本数/PDB
+```
+
+## 生产案例
+
+### 案例1：Prometheus 单实例宕机导致监控盲区
+
+- **场景**：Prometheus Pod 因节点故障宕机，30分钟内无监控数据和告警
+- **排查**：单实例部署无冗余；PVC 在故障节点上无法重新挂载
+- **方案**：部署双副本 Prometheus + Thanos；AlertManager 3 节点集群；PDB 保证最小可用
+- **效果**：单实例故障时另一个继续采集和告警，无监控盲区
+
+### 案例2：高基数指标导致 Prometheus OOM
+
+- **场景**：新上线服务暴露了带 user_id label 的指标，基数爆炸导致 OOM
+- **排查**：`prometheus_tsdb_head_series` 从 50万飙升到 5000万；`tsdb status` 显示 top series
+- **方案**：通过 metric_relabel_configs 丢弃高基数 label；设置 `--storage.tsdb.max-block-duration=2h`；增加内存限制
+- **效果**：series 回落到 100万，内存稳定在 8GB 以内
 
 ## 对比替代方案
 
-相比单实例 Prometheus，双实例+Thanos 方案提供高可用和长期存储但运维复杂度更高。相比 Cortex/Mimir，Thanos 更简单但扩展性稍弱。
+| 方案 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| 双副本 + Thanos | 简单可靠、长期存储、全局查询 | 写入重复、Thanos组件运维 | 中大规模集群 |
+| Cortex/Mimir | 真正水平扩展、多租户 | 架构复杂、组件多 | 超大规模/多租户 |
+| VictoriaMetrics | 高性能、单二进制部署简单 | 生态较新、社区较小 | 追求性能/简单部署 |
+| Datadog/New Relic | 全托管、零运维 | 成本高、数据出境 | 小团队/合规允许 |
+
+## 检查清单
+
+- [ ] Prometheus 副本数 >= 2，配置 PodAntiAffinity
+- [ ] Thanos Sidecar/Query/StoreGateway/Compactor 已部署
+- [ ] 对象存储已配置且可访问
+- [ ] AlertManager 副本数 >= 3，Gossip 端口互通
+- [ ] PodDisruptionBudget 已配置
+- [ ] 指标保留策略已定义（本地 + 远程）
+- [ ] 高基数指标防护已配置（relabel/drop）
+- [ ] 监控自身的监控（meta-monitoring）已配置
 
 ## Related
 

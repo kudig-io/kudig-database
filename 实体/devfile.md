@@ -75,48 +75,187 @@ Devfile 通过 **DevWorkspace Operator**（CNCF 项目）与 Kubernetes 集成�
 3. **多语言微服务**：每个微服务仓库自带 Devfile，定义特定语言的工具链
 4. **CI/CD 预览环境**：PR 创建时基于 Devfile 启动临时环境用于预览
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 odo CLI
 brew install odo
+# 或 Linux
+curl -fsSL https://odo.dev/install.sh | sh
 
 # 创建新项目时自动生成 devfile.yaml
 odo init --name my-app --devfile nodejs
 
 # 或在已有项目中创建
-cat > devfile.yaml <<EOF
+cat > devfile.yaml <<'EOF'
 schemaVersion: 2.2.0
 metadata:
   name: my-app
+  version: 1.0.0
 components:
   - name: runtime
     container:
-      image: registry.access.redhat.com/ubi8/nodejs-16:latest
+      image: registry.access.redhat.com/ubi8/nodejs-18:latest
       memoryLimit: 1Gi
+      cpuLimit: "1"
+      env:
+        - name: NODE_ENV
+          value: development
       endpoints:
         - name: http
           targetPort: 3000
+        - name: debug
+          targetPort: 9229
+          exposure: none
+  - name: postgres
+    container:
+      image: postgres:15
+      memoryLimit: 512Mi
+      env:
+        - name: POSTGRES_PASSWORD
+          value: dev-password
+      endpoints:
+        - name: postgres
+          targetPort: 5432
+          exposure: none
 commands:
   - id: install
     exec:
       component: runtime
       commandLine: npm install
+      workingDir: ${PROJECT_SOURCE}
   - id: run
     exec:
       component: runtime
       commandLine: npm start
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: run
+        isDefault: true
+  - id: test
+    exec:
+      component: runtime
+      commandLine: npm test
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: test
+        isDefault: true
+  - id: debug
+    exec:
+      component: runtime
+      commandLine: npm run debug
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: debug
+events:
+  preStart:
+    - install
 EOF
+
+# 启动开发环境
+odo dev
 ```
+
+```yaml
+# 使用 Parent Devfile 继承模板
+schemaVersion: 2.2.0
+metadata:
+  name: my-spring-app
+parent:
+  uri: https://registry.devfile.io/devfiles/java-springboot/latest
+components:
+  - name: runtime
+    container:
+      image: eclipse-temurin:17-jdk
+      memoryLimit: 2Gi
+commands:
+  - id: build
+    exec:
+      component: runtime
+      commandLine: ./mvnw clean package -DskipTests
+      group:
+        kind: build
+        isDefault: true
+```
+
+## 运维操作
+
+```bash
+# 🟢 验证 devfile.yaml 语法
+odo validate
+
+# 🟢 查看可用 Devfile 模板
+odo registry list
+
+# 🟡 启动开发环境
+odo dev
+
+# 🟡 部署到集群
+odo deploy
+
+# 🟢 查看 Workspace 状态
+kubectl get devworkspace -A
+
+# 🟡 停止 Workspace
+odo dev --stop
+
+# 🔴 删除 Workspace（清除所有数据）
+kubectl delete devworkspace my-app -n user-dev
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| odo dev 启动失败 | 镜像拉取失败或资源不足 | `kubectl describe devworkspace` | 检查镜像地址和资源配额 |
+| 命令执行失败 | 工作目录或命令语法错误 | `odo dev --verbose` | 检查 commandLine 和 workingDir |
+| 端口无法访问 | Endpoint 配置错误或防火墙 | `kubectl get devworkspace -o yaml` | 检查 endpoints 配置 |
+| Parent Devfile 拉取失败 | Registry 不可达或 URI 错误 | `curl -s <registry-uri>` | 检查网络和 URI 正确性 |
+| 环境变量未生效 | env 配置位置错误 | `kubectl exec -it <pod> -- env` | 检查 env 在正确 component 下 |
+
+```
+排查流程：
+├── Workspace 启动失败
+│   ├── kubectl describe devworkspace 查看事件
+│   ├── 检查容器镜像是否可拉取
+│   ├── 确认资源配额足够
+│   └── 查看 DevWorkspace Operator 日志
+├── 命令执行问题
+│   ├── odo dev --verbose 查看详细日志
+│   ├── 确认 workingDir 存在
+│   ├── 检查命令语法和依赖
+│   └── 确认组件容器正在运行
+└── 网络连接问题
+    ├── 检查 endpoints 配置
+    ├── 确认 Service/Ingress 已创建
+    └── 检查防火墙和 NetworkPolicy
+```
+
+## 生产案例
+
+### 案例 1：企业标准化开发环境
+
+- **场景**：200+ 开发者，每人本地环境配置不同，"在我机器上能跑"问题频发
+- **排查**：新成员环境搭建需要 2-3 天，环境不一致导致 bug 难以复现
+- **方案**：每个仓库内置 devfile.yaml，使用 OpenShift Dev Spaces 提供云端开发环境
+- **效果**：新成员环境搭建从 3 天降至 10 分钟，环境一致性问题减少 95%
+
+### 案例 2：PR 预览环境自动化
+
+- **场景**：前端团队需要为每个 PR 创建预览环境，之前手动部署耗时且容易出错
+- **排查**：手动部署预览环境需要 30 分钟，经常配置错误导致预览失败
+- **方案**：PR 创建时自动基于 devfile.yaml 启动临时 Workspace，PR 合并后自动清理
+- **效果**：预览环境创建从 30 分钟降至 2 分钟，配置错误归零，产品验收效率提升 50%
 
 ## 对比
 
-| 特性 | Devfile | Tilt | Skaffold |
-|------|---------|------|----------|
-| 声明式环境 | ✅ devfile.yaml | ✅ Tiltfile | ✅ skaffold.yaml |
-| 云端 IDE | ✅ Eclipse Che/Dev Spaces | ❌ | ❌ |
-| 标准 | ✅ 开放标准 | ❌ | ❌ |
-| Registry | ✅ Devfile Registry | ❌ | ✅ |
+| 特性 | Devfile | Tilt | Skaffold | 适用场景 |
+|------|---------|------|----------|----------|
+| 声明式环境 | ✅ devfile.yaml | ✅ Tiltfile | ✅ skaffold.yaml | 环境即代码 |
+| 云端 IDE | ✅ Eclipse Che/Dev Spaces | ❌ | ❌ | 远程开发 |
+| 开放标准 | ✅ CNCF 标准 | ❌ | ❌ | 工具互操作 |
+| Registry | ✅ Devfile Registry | ❌ | ✅ | 模板共享 |
+| 生产成熟度 | 中 | 高 | 高 | 稳定性要求 |
 
 ## 参考链接
 

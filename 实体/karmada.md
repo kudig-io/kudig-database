@@ -80,7 +80,7 @@ Karmada 的控制面本身就是一个标准的 Kubernetes API 服务器。用�
 3. **边缘多区域**: 将应用分发到不同地理区域的边缘集群
 4. **弹性跨集群扩容**: 主集群资源不足时，自动将工作负载溢出到备用集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 karmadactl CLI
@@ -136,6 +136,81 @@ spec:
         name: nginx
 EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl get clusters
+kubectl describe cluster member1
+karmadactl get clusters
+
+# 🟢 查看资源分发状态
+kubectl get resourcebindings
+kubectl get clusterresourcebindings
+kubectl get works -A
+
+# 🟡 更新分发策略
+kubectl apply -f updated-propagation-policy.yaml
+
+# 🟡 故障转移（手动）
+kubectl patch cluster member1 --type=merge -p '{"spec":{"taints":[{"key":"cluster.karmada.io/unreachable","effect":"NoExecute"}]}}'
+
+# 🔴 移除 Member Cluster
+karmadactl unjoin member1 --cluster-kubeconfig=/path/to/member1.kubeconfig
+
+# 🔴 删除 Karmada 控制面
+karmadactl deinit
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 集群状态 NotReady | 网络断开/Agent 崩溃 | `kubectl describe cluster member1` | 检查网络和 Agent Pod |
+| 资源未分发 | PropagationPolicy 不匹配 | `kubectl get resourcebindings` | 检查 resourceSelectors |
+| 副本分配不均 | 调度策略配置错误 | `kubectl get works -A` | 调整 weightPreference |
+| 故障转移未触发 | 阈值未达标 | `kubectl get clusters -o yaml` | 检查 taint 和 toleration |
+| 控制面异常 | etcd 集群不健康 | `etcdctl endpoint health --cluster` | 修复 etcd 集群 |
+
+```
+排查流程:
+├── 分发异常
+│   ├── kubectl get clusters → 集群状态
+│   ├── kubectl get resourcebindings → 绑定状态
+│   ├── kubectl get works -n member1 → Work 状态
+│   └── kubectl logs karmada-controller-manager → 控制器日志
+├── 集群连接问题
+│   ├── karmadactl get clusters → 集群健康
+│   ├── 检查 Agent Pod → kubectl get pods -n karmada-system
+│   └── 网络连通性 → ping/curl member API
+└── 故障转移问题
+    ├── 检查 taint 配置 → cluster spec
+    ├── 检查 Failover 策略 → ClusterPropagationPolicy
+    └── 查看事件 → kubectl get events -n karmada-system
+```
+
+## 生产案例
+
+### 案例1: 跨地域多活部署
+
+- **场景**: 电商应用需要在华北、华东、华南三个区域集群同时提供服务
+- **排查**: 初始用单集群 + CDN，区域故障时全站不可用
+- **方案**:
+  1. 部署 Karmada 控制面管理 3 个区域集群
+  2. 配置 Divided 调度策略，按权重分配副本
+  3. 启用 Failover 策略，集群故障时自动迁移工作负载
+- **效果**: 单区域故障时服务自动切换，RTO < 30s，可用性达 99.99%
+
+### 案例2: 混合云弹性扩容
+
+- **场景**: 私有云集群资源不足，大促期间需溢出到公有云
+- **排查**: 私有云 500 节点已满，公有云集群空闲
+- **方案**:
+  1. 将公有云集群加入 Karmada 管理
+  2. 配置 ClusterAffinity 优先级：私有云 > 公有云
+  3. 设置 OverridePolicy 调整公有云副本的资源配置
+- **效果**: 大促期间自动溢出 200 副本到公有云，成本降低 40%
 
 ## 对比
 

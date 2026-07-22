@@ -75,7 +75,105 @@ description: '## 项目概述'
 
 ## 架构定位
 
-在 CNCF 生态中，envoy 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+Envoy 是云原生生态中最核心的代理组件，广泛用于：
+- **Ingress Controller**: Contour, Gloo, Emissary
+- **Service Mesh**: Istio, Linkerd (数据平面)
+- **API Gateway**: Envoy Gateway, Kong
+- **内部代理**: 微服务间通信
+
+## xDS 动态配置
+
+| xDS 类型 | 用途 | 说明 |
+|----------|------|------|
+| LDS | Listener Discovery | 动态添加/修改监听器 |
+| RDS | Route Discovery | 动态路由规则 |
+| CDS | Cluster Discovery | 动态上游集群 |
+| EDS | Endpoint Discovery | 动态端点列表 |
+| SDS | Secret Discovery | 动态证书 |
+
+## 运维操作
+
+### Admin API
+
+```bash
+# 🟢 查看配置
+curl localhost:9901/config_dump
+
+# 🟢 查看集群状态
+curl localhost:9901/clusters
+
+# 🟢 查看统计
+curl localhost:9901/stats
+curl localhost:9901/stats | grep upstream_rq
+
+# 🟢 查看服务器信息
+curl localhost:9901/server_info
+
+# 🟢 查看监听器
+curl localhost:9901/listeners
+
+# 🟢 查看路由表
+curl localhost:9901/config_dump | jq '.configs[] | select(."@type"=="type.googleapis.com/envoy.admin.v3.RoutesConfigDump")'
+
+# 🟡 开启/关闭日志
+curl -X POST localhost:9901/logging?level=debug
+curl -X POST localhost:9901/logging?level=info
+
+# 🟡 健康检查
+curl localhost:9901/ready
+```
+
+### K8s 中的 Envoy 操作
+
+```bash
+# 🟢 查看 Envoy Pod
+kubectl get pods -l app=envoy
+
+# 🟢 查看 Envoy 日志
+kubectl logs <envoy-pod> --tail=50
+
+# 🟢 进入 Envoy Pod
+kubectl exec -it <envoy-pod> -- sh
+
+# 🟢 查看访问日志
+kubectl logs <envoy-pod> -c istio-proxy --tail=100
+
+# 🟢 查看 Envoy 统计 (Istio)
+istioctl proxy-config stats <pod>
+istioctl proxy-config clusters <pod>
+istioctl proxy-config routes <pod>
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 503 UC | 上游无健康主机 | 检查后端 Pod 状态 |
+| 503 UH | 无健康上游 | 检查健康检查配置 |
+| 504 UT | 上游超时 | 调整 timeout 配置 |
+| 连接拒绝 | 端口未监听 | 检查后端服务 |
+| TLS 失败 | 证书不匹配 | 检查 SDS/证书 |
+| 高延迟 | 连接池耗尽 | 调整连接池大小 |
+
+### 关键统计指标
+
+| 指标 | 含义 |
+|------|------|
+| upstream_rq_total | 上游请求总数 |
+| upstream_rq_5xx | 上游 5xx 响应 |
+| upstream_cx_active | 活跃上游连接 |
+| downstream_rq_active | 活跃下游请求 |
+| cluster_manager.cluster_added | 集群添加 |
+| http.ingress_http.downstream_rq_time | 请求延迟 |
+
+## 检查清单
+
+- [ ] 理解 Envoy xDS 动态配置
+- [ ] 掌握 Admin API 使用
+- [ ] 能排查 503/504 错误
+- [ ] 理解连接池配置
+- [ ] 掌握访问日志分析
+- [ ] 了解 Envoy 在 Istio/Contour 中的角色
 
 ## 参考链接
 

@@ -106,6 +106,89 @@ Kubernetes 的核心设计模式是**声明式 API + 控制器调谐**：
 3. 网络模型 → 存储模型 → 安全模型
 4. 高级主题：调度、扩缩容、多集群、服务网格
 
+## 运维操作
+
+```bash
+# 🟢 查看控制平面组件状态
+kubectl get componentstatuses
+kubectl get --raw /healthz?verbose
+
+# 🟢 查看 API Server 状态
+kubectl get --raw /version
+kubectl get --raw /metrics | grep apiserver_request_total
+
+# 🟢 查看 etcd 健康状态
+etcdctl --endpoints=https://etcd:2379 endpoint health
+etcdctl --endpoints=https://etcd:2379 endpoint status --write-out=table
+
+# 🟢 查看调度器状态
+kubectl get --raw /metrics | grep scheduler_scheduling_attempt_total
+kubectl get events --field-selector reason=Scheduled -A
+
+# 🟢 查看控制器状态
+kubectl get --raw /metrics | grep workqueue_depth
+
+# 🟢 查看 kubelet 状态
+kubectl get nodes -o wide
+kubectl describe node <node-name>
+
+# 🟡 查看 API 请求延迟
+kubectl get --raw /metrics | grep apiserver_request_duration_seconds
+
+# 🟢 查看集群事件
+kubectl get events -A --sort-by=.lastTimestamp | tail -20
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| API Server 无响应 | 证书过期/资源不足 | `kubectl get --raw /healthz` | 检查证书有效期、资源使用 |
+| etcd 延迟高 | 磁盘 I/O 不足 | `etcdctl endpoint status` | 使用 SSD、检查 fsync 延迟 |
+| 节点 NotReady | kubelet 异常 | `systemctl status kubelet` | 检查 kubelet 日志和证书 |
+| 调度延迟 | 大量 Pending Pod | `kubectl get pods --field-selector status.phase=Pending` | 检查调度器资源和配置 |
+| 控制器积压 | workqueue 深度大 | 检查 controller metrics | 增加 controller-manager 资源 |
+| 证书即将过期 | 未轮换 | `kubeadm certs check-expiration` | `kubeadm certs renew all` |
+
+### 排查流程
+
+```
+集群异常 → 检查控制平面健康
+  ├─ API Server 不可用 → 检查证书/资源/etcd 连接
+  ├─ etcd 异常 → 检查磁盘/网络/Raft 状态
+  ├─ 调度异常 → 检查节点资源/污点/亲和性
+  └─ 节点异常 → 检查 kubelet/容器运行时/网络
+      ├─ kubelet 停止 → 检查证书轮换、磁盘空间
+      └─ 容器运行时异常 → 检查 containerd/CRI-O 状态
+```
+
+## 生产案例
+
+### 案例1: etcd 磁盘延迟导致集群不稳定
+
+**场景**: 集群周期性出现 API 请求超时，影响所有工作负载  
+**排查**: etcd metrics 显示 fsync 延迟 > 100ms，磁盘 I/O 争用  
+**方案**: 迁移 etcd 到独立 SSD，调整 --quota-backend-bytes  
+**效果**: API 延迟稳定在 < 50ms，消除超时事件  
+
+### 案例2: 证书过期导致节点失联
+
+**场景**: 多个节点同时变为 NotReady  
+**排查**: kubelet 日志显示证书验证失败，kubeadm 证书已过期  
+**方案**: `kubeadm certs renew all` + 重启 kubelet，配置证书过期监控告警  
+**效果**: 节点恢复，建立证书自动轮换机制  
+
+## 检查清单
+
+- [ ] 控制平面组件配置健康检查监控
+- [ ] etcd 使用独立 SSD 存储
+- [ ] 配置证书过期告警（提前 30 天）
+- [ ] 定期备份 etcd 数据
+- [ ] API Server 配置审计日志
+- [ ] 监控 workqueue 深度和调度延迟
+- [ ] 配置 API Server 请求限流
+- [ ] 生产环境控制平面 3+ 节点高可用
+
 ---
 
 > 来源：.zread/wiki/drafts/1-xiang-mu-zong-lan-kudig-database-quan-yu-zhi-shi-ku.md, .zread/wiki/drafts/5-jia-gou-ji-chu-yu-he-xin-zu-jian-yuan-li.md
@@ -117,6 +200,7 @@ Kubernetes 的核心设计模式是**声明式 API + 控制器调谐**：
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[实体/kube-scheduler.md|kube-scheduler]] — K8s 调度器
 
 
 <!-- risk-assessed -->

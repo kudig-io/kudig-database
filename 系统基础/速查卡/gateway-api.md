@@ -248,7 +248,243 @@ kubectl describe httproute web-routes -n production
 
 # 检查 Route 是否被 Gateway 接受
 kubectl get httproute web-routes -n production -o jsonpath='{.status.parents}'
+
+# 查看 Gateway 关联的 Route
+kubectl get httproutes -A -o json | jq '.items[] | select(.spec.parentRefs[].name=="production-gateway")'
+
+# 检查 Gateway 条件
+kubectl get gateway production-gateway -n infra -o jsonpath='{.status.conditions}'
+
+# 查看后端服务状态
+kubectl get svc -l app=myapp -n production
+kubectl get endpoints myapp -n production
 ```
+
+## 高级配置示例
+
+### TLS 终止与证书
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: tls-gateway
+  namespace: infra
+spec:
+  gatewayClassName: cilium
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      hostname: "*.example.com"
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: wildcard-cert
+            kind: Secret
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              gateway-access: "true"
+```
+
+### 流量分割（金丝雀发布）
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: canary-route
+  namespace: production
+spec:
+  parentRefs:
+    - name: production-gateway
+      namespace: infra
+  rules:
+    - backendRefs:
+        - name: myapp-stable
+          port: 8080
+          weight: 90
+        - name: myapp-canary
+          port: 8080
+          weight: 10
+```
+
+### Header 基于路由
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: header-routing
+  namespace: production
+spec:
+  parentRefs:
+    - name: production-gateway
+      namespace: infra
+  rules:
+    - matches:
+        - headers:
+            - name: x-api-version
+              value: v2
+      backendRefs:
+        - name: myapp-v2
+          port: 8080
+    - matches:
+        - headers:
+            - name: x-canary
+              value: "true"
+      backendRefs:
+        - name: myapp-canary
+          port: 8080
+    - backendRefs:
+        - name: myapp-v1
+          port: 8080
+```
+
+### 请求重定向与重写
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: redirect-route
+  namespace: production
+spec:
+  parentRefs:
+    - name: production-gateway
+      namespace: infra
+  rules:
+    # HTTP → HTTPS 重定向
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+    # 路径重写
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api/v1
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: myapp
+          port: 8080
+```
+
+### 请求/响应头修改
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: header-modify
+  namespace: production
+spec:
+  parentRefs:
+    - name: production-gateway
+      namespace: infra
+  rules:
+    - filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Request-ID
+                value: "generated"
+            add:
+              - name: X-Forwarded-Proto
+                value: https
+            remove:
+              - X-Internal-Header
+        - type: ResponseHeaderModifier
+          responseHeaderModifier:
+            set:
+              - name: X-Frame-Options
+                value: DENY
+              - name: X-Content-Type-Options
+                value: nosniff
+      backendRefs:
+        - name: myapp
+          port: 8080
+```
+
+### GRPCRoute
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: GRPCRoute
+metadata:
+  name: grpc-route
+  namespace: production
+spec:
+  parentRefs:
+    - name: production-gateway
+      namespace: infra
+  rules:
+    - matches:
+        - method:
+            service: myapp.v1.UserService
+            method: GetUser
+      backendRefs:
+        - name: user-service
+          port: 9090
+    - backendRefs:
+        - name: grpc-default
+          port: 9090
+```
+
+## 故障排查流程
+
+```
+1. Gateway 是否就绪?
+   kubectl get gateway -A
+   kubectl describe gateway <name> -n <ns>
+   # 检查 conditions: Accepted, Programmed
+
+2. GatewayClass 是否存在?
+   kubectl get gatewayclasses
+   # 检查 controller 是否正确
+
+3. Route 是否被接受?
+   kubectl get httproute <name> -o yaml
+   # 检查 status.parents[].conditions
+
+4. 后端服务是否就绪?
+   kubectl get svc <name> -n <ns>
+   kubectl get endpoints <name> -n <ns>
+   # Endpoints 为空 = 选择器不匹配或 Pod 未就绪
+
+5. 控制器日志
+   # Cilium: kubectl logs -n kube-system -l k8s-app=cilium
+   # Envoy Gateway: kubectl logs -n envoy-gateway-system -l app=envoy-gateway
+   # Istio: kubectl logs -n istio-system -l app=istiod
+
+6. 从 Pod 内测试
+   kubectl exec -it <pod> -- curl -sv http://<gateway-address>/path
+```
+
+## 版本兼容矩阵
+
+| 组件 | 版本 | K8s 兼容 | 状态 |
+|------|------|----------|------|
+| Gateway API | v1.2 | 1.28+ | GA (HTTPRoute/Gateway) |
+| GRPCRoute | v1.2 | 1.28+ | GA |
+| TLSRoute | v1.2 | 1.28+ | Experimental |
+| TCPRoute | v1.2 | 1.28+ | Experimental |
+| UDPRoute | v1.2 | 1.28+ | Experimental |
+| BackendTLSPolicy | v1.2 | 1.28+ | Experimental |
+
 ## 交叉引用
 
 - [Ingress](ingress.md) — 被 Gateway API 取代的旧方案

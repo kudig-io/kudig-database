@@ -161,6 +161,104 @@ Deployment 通过 ReplicaSet 间接管理 Pod。核心关注点：
 5. **发布策略**：生产环境推荐金丝雀或蓝绿发布，避免直接全量更新
 6. **删除操作**：删除前务必备份 etcd 快照，reset 后手动清理网络规则
 
+## 源码实现分析
+
+### kubeadm init 执行流程
+
+```go
+// k8s.io/kubernetes/cmd/kubeadm/app/cmd/init.go
+// kubeadm init 执行阶段
+func (i *initData) Run() error {
+    // Phase 1: preflight checks（系统要求检查）
+    // - 内核版本、cgroup 驱动、端口占用、swap 状态
+    
+    // Phase 2: certs（生成 PKI 证书体系）
+    // - CA 证书、apiserver 证书、kubelet 客户端证书
+    // - 存储在 /etc/kubernetes/pki/
+    
+    // Phase 3: kubeconfig（生成各组件 kubeconfig）
+    // - admin.conf / controller-manager.conf / scheduler.conf / kubelet.conf
+    
+    // Phase 4: control-plane（启动控制平面静态 Pod）
+    // - /etc/kubernetes/manifests/ 下生成 yaml
+    // - kubelet 自动拉起 apiserver/controller-manager/scheduler
+    
+    // Phase 5: etcd（启动 etcd 静态 Pod）
+    
+    // Phase 6: addon（安装 CoreDNS + kube-proxy）
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     kubeadm 集群生命周期操作                        │
+├─────────────────────────────────────────────────────────┤
+│  创建: kubeadm init → join (worker) → join (control-plane)│
+│  升级: kubeadm upgrade plan → apply → node upgrade    │
+│  证书: kubeadm certs check-expiration → renew all     │
+│  删除: kubeadm reset → 清理 iptables/CNI/etcd        │
+│                                                         │
+│  关键文件:                                             │
+│  /etc/kubernetes/manifests/ (静态 Pod)                │
+│  /etc/kubernetes/pki/ (证书)                          │
+│  /etc/kubernetes/*.conf (kubeconfig)                  │
+│  /var/lib/etcd/ (etcd 数据)                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：kubeadm 关键操作
+
+```bash
+# 🟢 检查集群状态
+kubectl get nodes -o wide
+kubectl get pods -n kube-system
+
+# 🟢 检查证书过期
+kubeadm certs check-expiration
+
+# 🟡 更新证书（控制平面节点执行）
+kubeadm certs renew all
+systemctl restart kubelet
+# 🔴 证书更新后必须重启 kubelet，否则新证书不生效
+
+# 🟡 升级控制平面
+kubeadm upgrade plan
+kubeadm upgrade apply v1.30.0
+# 🔴 升级前必须备份 etcd，且只能跳一个次版本
+
+# 🟡 升级节点
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubeadm upgrade node
+systemctl restart kubelet
+kubectl uncordon <node>
+```
+
+## 面试要点
+
+1. **kubeadm init 做了哪些事情？**
+   - 预检查（内核/cgroup/端口/swap）
+   - 生成 PKI 证书体系（CA + apiserver + kubelet + etcd）
+   - 生成 kubeconfig 文件
+   - 创建控制平面静态 Pod（apiserver/cm/scheduler/etcd）
+   - 安装 CoreDNS 和 kube-proxy addon
+
+2. **kubeadm 集群证书过期如何处理？**
+   - `kubeadm certs check-expiration` 检查过期时间
+   - `kubeadm certs renew all` 更新所有证书
+   - 更新后必须重启 kubelet 和控制平面组件
+   - 生产建议：设置证书过期告警（提前 30 天）
+
+3. **kubeadm 升级的注意事项？**
+   - 只能跳一个次版本（v1.29→v1.30，不能 v1.28→v1.30）
+   - 升级前必须备份 etcd
+   - 先升级控制平面，再逐节点升级 kubelet
+   - 使用 pluto/kube-no-trouble 扫描弃用 API
+
+4. **kubeadm 与托管集群（EKS/GKE）的对比？**
+   - kubeadm：完全控制，但需自己管理升级/HA/证书
+   - 托管集群：控制平面由云厂商管理，只关心节点
+   - 生产建议：能力允许时优先用托管集群，减少运维负担
+
 ## 相关文档
 
 - [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]

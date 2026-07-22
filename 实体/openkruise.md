@@ -77,15 +77,18 @@ OpenKruise 以标准 Kubernetes CRD + Controller 方式部署。Kruise Manager �
 3. **镜像预热加速发布**: 大规模发布前使用 ImagePullJob 预拉取镜像到所有节点
 4. **有状态应用灰度发布**: Advanced StatefulSet 支持按序号灰度升级指定 Pod
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 OpenKruise
 helm repo add kruise https://openkruise.github.io/charts/
 helm install kruise kruise/kruise -n kruise-system --create-namespace
+kubectl get pods -n kruise-system
+```
 
-# 创建 CloneSet（原地升级）
-kubectl apply -f - <<EOF
+### CloneSet 原地升级
+
+```yaml
 apiVersion: apps.kruise.io/v1alpha1
 kind: CloneSet
 metadata:
@@ -107,10 +110,15 @@ spec:
       containers:
       - name: main
         image: my-app:v1
-EOF
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+```
 
-# 创建 SidecarSet（自动注入 Sidecar）
-kubectl apply -f - <<EOF
+### SidecarSet 自动注入
+
+```yaml
 apiVersion: apps.kruise.io/v1alpha1
 kind: SidecarSet
 metadata:
@@ -129,17 +137,79 @@ spec:
   - name: host-log
     hostPath:
       path: /var/log
-EOF
+  updateStrategy:
+    type: RollingUpdate
+    maxUnavailable: 1
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 CloneSet 状态
+kubectl get cloneset -A
+kubectl describe cloneset my-app
+
+# 🟡 原地升级镜像
+kubectl patch cloneset my-app --type=merge -p '{"spec":{"template":{"spec":{"containers":[{"name":"main","image":"my-app:v2"}]}}}}'
+
+# 🟡 灰度发布（partition 控制）
+kubectl patch cloneset my-app --type=merge -p '{"spec":{"updateStrategy":{"partition":2}}}'
+
+# 🟡 更新 SidecarSet
+kubectl apply -f sidecarset-updated.yaml
+
+# 🔴 删除 CloneSet
+kubectl delete cloneset my-app
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 原地升级失败 | 容器不支持 in-place | `kubectl describe cloneset` | 改用 Recreate 策略 |
+| Sidecar 未注入 | selector 不匹配 | `kubectl get sidecarset` | 检查标签选择器 |
+| 灰度不生效 | partition 配置错误 | `kubectl get cloneset -o yaml` | 调整 partition 值 |
+| Pod 重建而非原地 | init container 变更 | 检查 template diff | 仅修改主容器镜像 |
+| 镜像预热失败 | 节点网络问题 | `kubectl describe imagepulljob` | 检查节点 Registry 连通 |
+
+```
+排查流程:
+├── 升级异常
+│   ├── kubectl describe cloneset → 查看 Conditions
+│   ├── kubectl get events → 查看事件
+│   └── 确认 updateStrategy 配置正确
+├── Sidecar 问题
+│   ├── kubectl get sidecarset → 查看状态
+│   ├── kubectl get pod -o yaml → 确认注入
+│   └── 检查 selector 匹配
+└── 性能问题
+    ├── 检查 maxUnavailable 配置
+    └── 确认节点资源充足
+```
+
+## 生产案例
+
+### 案例 1: 大规模原地升级
+
+- **场景**: 1000+ Pod 需要升级镜像，重建方式耗时 30min+
+- **方案**: 使用 CloneSet InPlaceIfPossible 策略；仅重启容器不重建 Pod；maxUnavailable=10% 控制并发
+- **效果**: 升级时间从 30min 缩短到 5min，IP 不变无需服务发现更新
+
+### 案例 2: Sidecar 统一升级
+
+- **场景**: 200+ 应用的日志采集 sidecar 需要统一升级
+- **方案**: 使用 SidecarSet 统一管理；滚动更新 maxUnavailable=5；自动注入到所有匹配 Pod
+- **效果**: 一次操作完成 200+ 应用 sidecar 升级，无需逐个修改 Deployment
 
 ## 对比
 
-| 特性 | OpenKruise | 原生 K8s | Argo Rollouts | Flagger |
-|------|-----------|----------|---------------|---------|
-| 原地升级 | ✅ | ❌ | ❌ | ❌ |
-| Sidecar 管理 | ✅ SidecarSet | ❌ | ❌ | ❌ |
-| 镜像预热 | ✅ | ❌ | ❌ | ❌ |
-| CNCF 状态 | Incubating | Graduated | 非 CNCF | 非 CNCF |
+| 特性 | OpenKruise | 原生 K8s | Argo Rollouts | Flagger | 适用场景 |
+|------|-----------|----------|---------------|---------|----------|
+| 原地升级 | ✅ | ❌ | ❌ | ❌ | 大规模升级 |
+| Sidecar 管理 | ✅ SidecarSet | ❌ | ❌ | ❌ | 统一 sidecar |
+| 镜像预热 | ✅ | ❌ | ❌ | ❌ | 加速发布 |
+| 灰度发布 | ✅ partition | ⚠️ | ✅ | ✅ | 渐进交付 |
+| CNCF 状态 | Incubating | Graduated | 非 CNCF | 非 CNCF | 生态 |
 
 ## 架构定位
 

@@ -61,3 +61,57 @@ estimated_read_time: 10min
 - [[系统基础/README.md|系统基础]]
 - [[网络/README.md|网络]]
 - [[集群基础/README.md|集群基础]]
+
+## 故障诊断方法论
+
+### FEBM 法医鉴定循证方法
+
+| 阶段 | 核心活动 | 输出物 |
+|------|----------|--------|
+| 证据收集 | 日志、事件、指标、拓扑快照 | 证据链清单 |
+| 假设形成 | 基于证据提出可能根因 | 假设列表（按概率排序） |
+| 假设验证 | 逐一验证/排除假设 | 确认根因 |
+| 修复执行 | 最小影响修复 + 验证 | 修复报告 |
+| 复盘归档 | 时间线、根因链、预防措施 | 事故报告 |
+
+### 快速决策树
+
+```
+故障发生
+├─ 服务完全不可用？
+│   ├─ 是 → P0 立即响应，检查控制平面 + 节点状态
+│   └─ 否 → 影响范围评估
+│       ├─ >50% 用户 → P0
+│       ├─ 10-50% → P1，30min 内响应
+│       └─ <10% → P2，计划内处理
+├─ 是否由变更引起？
+│   ├─ 是 → 立即回滚变更
+│   └─ 否 → 进入 FEBM 流程
+└─ 是否级联故障？
+    ├─ 是 → 切断级联源（熔断/限流/隔离）
+    └─ 否 → 单点故障排查
+```
+
+## 严重级别分类
+
+| 级别 | 定义 | 响应时间 | 升级路径 |
+|------|------|----------|----------|
+| P0 | 核心业务完全不可用，数据丢失风险 | 5min | 值班→主管→CTO |
+| P1 | 部分服务降级，有 workaround | 30min | 值班→团队 Lead |
+| P2 | 非关键路径，影响可控 | 4h | 工单跟踪 |
+| P3 | 潜在风险，无当前影响 | 下一迭代 | Backlog |
+
+## 常用诊断命令速查
+
+``` bash
+# 🟢 集群健康总览
+kubectl get nodes && kubectl get pods -A --field-selector=status.phase!=Running
+kubectl top nodes && kubectl top pods -A --sort-by=cpu | head -20
+
+# 🟢 事件查看（最近 1 小时）
+kubectl get events -A --sort-by='.lastTimestamp' | tail -50
+
+# 🟢 控制平面状态
+kubectl get pods -n kube-system -l tier=control-plane
+kubectl -n kube-system logs -l component=kube-apiserver --tail=20
+```

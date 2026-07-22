@@ -164,6 +164,274 @@ groups:
 3. **没考虑级联失败**：杀一个 pod 本没事，但 HPA 来不及扩容 → 上游超时 → 雪崩。爆炸半径不止是"直接影响的 pod 数"。
 4. **依赖同样被注入**：注入延迟时连监控/告警链路一起延迟了，告警发不出来。监控链路必须免疫。
 
+## 网络隔离策略
+
+### 网络分区实验
+
+```yaml
+# 使用 NetworkChaos 实现网络分区
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-partition
+  namespace: production
+spec:
+  action: partition
+  mode: fixed-percent
+  value: "10"  # 仅影响 10% Pod
+  selector:
+    namespaces: ["production"]
+    labelSelectors:
+      app: api-service
+      chaos-enable: "true"
+  direction: both
+  target:
+    selector:
+      namespaces: ["production"]
+      labelSelectors:
+        app: database
+    mode: all
+  duration: "60s"
+```
+
+### 带宽限制实验
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: bandwidth-limit
+  namespace: production
+spec:
+  action: bandwidth
+  mode: fixed
+  value: "1"
+  selector:
+    namespaces: ["production"]
+    labelSelectors:
+      app: api-service
+      chaos-enable: "true"
+  bandwidth:
+    rate: "10mbps"  # 限制带宽
+    limit: 1000
+    buffer: 10000
+  duration: "120s"
+```
+
+## 时间窗口控制
+
+### 实验时间窗口
+
+```yaml
+# 使用 Schedule 控制实验时间窗口
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: business-hours-chaos
+  namespace: production
+spec:
+  schedule: "0 10 * * 1-5"  # 仅工作日 10:00
+  historyLimit: 5
+  concurrencyPolicy: Forbid
+  podChaos:
+    selector:
+      namespaces: ["production"]
+      labelSelectors:
+        app: api-service
+        chaos-enable: "true"
+    action: pod-kill
+    mode: fixed
+    value: "1"
+    duration: "30s"
+```
+
+### 黑名单时间窗口
+
+```yaml
+# 使用 Webhook 拒绝特定时间的实验
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: chaos-time-window
+webhooks:
+  - name: chaos-time-window.chaos-mesh.org
+    clientConfig:
+      service:
+        name: chaos-mesh-controller-manager
+        namespace: chaos-mesh
+        path: /validate-chaos-experiment
+    rules:
+      - apiGroups: ["chaos-mesh.org"]
+        apiVersions: ["v1alpha1"]
+        operations: ["CREATE"]
+        resources: ["podchaos", "networkchaos", "stresschaos"]
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+```
+
+## 依赖保护
+
+### 关键依赖豁免
+
+```yaml
+# 保护关键依赖不被注入
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: api-pod-kill
+  namespace: production
+spec:
+  selector:
+    namespaces: ["production"]
+    labelSelectors:
+      app: api-service
+      chaos-enable: "true"
+    # 排除关键依赖
+    expressionSelectors:
+      - key: app
+        operator: NotIn
+        values:
+          - database
+          - cache
+          - message-queue
+  action: pod-kill
+  mode: fixed
+  value: "1"
+  duration: "30s"
+```
+
+### 监控链路保护
+
+```yaml
+# 监控组件永远不参与混沌实验
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    chaos-mesh.org/exclude: "true"  # 排除标签
+---
+# 在 Chaos Mesh 配置中排除
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chaos-mesh-config
+  namespace: chaos-mesh
+data:
+  excludedNamespaces: |
+    - monitoring
+    - logging
+    - chaos-mesh
+    - kube-system
+```
+
+## 实验审计
+
+### 审计日志配置
+
+```yaml
+# 实验审计日志
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chaos-audit-config
+  namespace: chaos-mesh
+data:
+  audit.yaml: |
+    audit:
+      enabled: true
+      logLevel: info
+      destinations:
+        - type: file
+          path: /var/log/chaos/audit.log
+        - type: webhook
+          url: http://audit-collector:8080/chaos-events
+      events:
+        - experiment_start
+        - experiment_end
+        - experiment_abort
+        - target_selected
+```
+
+### 审计查询
+
+```bash
+# 🟢 低风险：查询实验历史
+kubectl get events -n production --field-selector reason=ChaosExperimentStart
+
+# 🟢 低风险：查看实验记录
+kubectl get podchaos -n production -o custom-columns=\
+NAME:.metadata.name,\
+START:.status.startTime,\
+END:.status.endTime,\
+TARGETS:.status.experiment.pods
+
+# 🟢 低风险：查看特定时间的实验
+kubectl get events -n production \
+  --field-selector reason=ChaosExperimentStart,involvedObject.name=api-pod-kill
+```
+
+## 紧急恢复程序
+
+### 一键停止所有实验
+
+```bash
+#!/bin/bash
+# 🔴 高风险：紧急停止所有混沌实验
+set -euo pipefail
+
+echo "=== 紧急停止所有混沌实验 ==="
+
+# 1. 删除所有 Chaos 资源
+kubectl delete podchaos --all -A --wait=false
+kubectl delete networkchaos --all -A --wait=false
+kubectl delete stresschaos --all -A --wait=false
+kubectl delete iochaos --all -A --wait=false
+kubectl delete kernelchaos --all -A --wait=false
+kubectl delete httpchaos --all -A --wait=false
+kubectl delete dnschaos --all -A --wait=false
+
+# 2. 等待清理完成
+sleep 10
+
+# 3. 验证清理
+REMAINING=$(kubectl get podchaos,networkchaos,stresschaos -A --no-headers 2>/dev/null | wc -l)
+if [ "$REMAINING" -gt 0 ]; then
+  echo "⚠️ 仍有 $REMAINING 个实验未清理"
+else
+  echo "✓ 所有实验已停止"
+fi
+
+# 4. 检查 Pod 状态
+echo "检查 Pod 状态..."
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded
+
+echo "=== 紧急停止完成 ==="
+```
+
+### 恢复验证检查清单
+
+| 序号 | 检查项 | 命令 | 通过标准 |
+|-----|--------|------|----------|
+| 1 | 所有实验已停止 | `kubectl get podchaos -A` | 无资源 |
+| 2 | Pod 全部 Running | `kubectl get pods -A` | 无 Pending/Failed |
+| 3 | 错误率正常 | 检查 Prometheus | < 1% |
+| 4 | 延迟正常 | 检查 P99 | < 500ms |
+| 5 | 服务可访问 | `curl http://api/health` | HTTP 200 |
+
+## 爆炸半径评估矩阵
+
+| 实验类型 | 直接影响 | 级联风险 | 可逆性 | 风险等级 |
+|---------|---------|---------|--------|----------|
+| Pod Kill (1个) | 低 | 低 | 高 (自动重建) | 🟢 低 |
+| Pod Kill (30%) | 中 | 中 | 高 | 🟡 中 |
+| 网络延迟 | 中 | 中 | 高 (删除即恢复) | 🟡 中 |
+| 网络分区 | 高 | 高 | 中 | 🔴 高 |
+| CPU 压力 | 中 | 中 | 高 | 🟡 中 |
+| 磁盘 IO | 高 | 高 | 中 | 🔴 高 |
+| 节点宕机 | 高 | 高 | 中 | 🔴 高 |
+| AZ 故障 | 极高 | 极高 | 低 | 🔴 极高 |
+
 ## 相关
 
 - [[可靠性/混沌工程/05-chaos-experiment-automation.md|05 chaos experiment automation]]

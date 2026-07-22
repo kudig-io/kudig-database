@@ -78,38 +78,124 @@ Podman Desktop 深度集成 Kubernetes 工作流。可以将 Podman Pod 一键�
 3. **多集群测试**：使用 Kind 创建多个本地集群，测试多集群场景
 4. **安全开发**：Rootless 模式确保开发环境不影响宿主系统
 
-## 安装
+## 安装与配置
 
 ```bash
 # macOS
 brew install --cask podman-desktop
-
 # Windows (winget)
 winget install RedHat.Podman-Desktop
-
 # Linux (Flatpak)
 flatpak install flathub io.podman_desktop.PodmanDesktop
 
+# 安装 Podman 引擎并初始化 Machine
+brew install podman
+podman machine init --cpus 4 --memory 8192 --disk-size 50
+podman machine start
+podman info  # 验证连接
+```
+
+```bash
 # 从源码构建（开发模式）
 git clone https://github.com/containers/podman-desktop
 cd podman-desktop
 yarn install
 yarn dev
 
-# 安装 Podman 引擎并初始化 Machine
-brew install podman
-podman machine init
-podman machine start
+# 常用 Podman 命令（与 Docker 兼容）
+podman run -d --name web -p 8080:80 nginx:latest
+podman pod create --name mypod -p 8080:80
+podman run -d --pod mypod --name app nginx:latest
+podman generate kube mypod > mypod.yaml  # 导出 K8s YAML
 ```
+
+```bash
+# Kind 集群管理（通过 Podman Desktop UI 或 CLI）
+kind create cluster --name dev-cluster
+kind load docker-image myapp:latest --name dev-cluster
+kubectl apply -f mypod.yaml
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看容器/Pod 状态
+podman ps -a
+podman pod ls
+podman images
+
+# 🟢 查看容器日志和资源使用
+podman logs -f <container>
+podman stats
+podman inspect <container> | jq '.[0].State'
+
+# 🟢 管理 Podman Machine
+podman machine list
+podman machine info
+
+# 🟡 清理未使用资源
+podman system prune -a --volumes
+podman machine stop && podman machine start  # 重启 Machine
+
+# 🟡 导出/导入镜像
+podman save -o myapp.tar myapp:latest
+podman load -i myapp.tar
+
+# 🔴 删除 Machine（丢失所有容器和镜像）
+podman machine rm <name>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Podman Machine 无法启动 | 虚拟化未启用/资源不足 | `podman machine info` | 启用 VT-x/AMD-V，增加资源 |
+| 容器无法拉取镜像 | 网络代理/Registry 不可达 | `podman pull nginx --log-level=debug` | 配置代理或镜像源 |
+| 端口映射失败 | 端口被占用/Machine 网络异常 | `podman port <container>` | 检查端口占用或重启 Machine |
+| Rootless 权限错误 | UID 映射不足/subuid 未配置 | `cat /etc/subuid` | 配置 subuid/subgid 映射 |
+| Kind 集群创建失败 | Machine 资源不足 | `kind create cluster -v 5` | 增加 Machine CPU/内存 |
+
+```
+排查流程：
+├─ Machine 问题
+│  ├─ podman machine info 检查状态
+│  ├─ 检查虚拟化支持 (VT-x/AMD-V)
+│  └─ 重建 Machine (podman machine rm + init)
+├─ 容器运行问题
+│  ├─ podman logs 查看容器日志
+│  ├─ podman inspect 检查配置
+│  └─ 检查网络/存储配置
+└─ K8s 集成问题
+   ├─ kubectl cluster-info 验证连接
+   └─ kind export kubeconfig 重新导出配置
+```
+
+## 生产案例
+
+### 案例 1：开发团队 Docker Desktop 替代
+
+- **场景**: 企业需要替代 Docker Desktop（大企业需付费许可），寻找免费替代方案
+- **排查**: 评估 Podman Desktop + Kind 方案，确认与现有 CI/CD 流程兼容
+- **方案**: 全员迁移至 Podman Desktop，使用 Rootless 模式 + Kind 本地集群
+- **效果**: 年节省 Docker Desktop 许可费用 $50K+，安全性提升（Rootless）
+
+### 案例 2：本地开发到 K8s 部署无缝衔接
+
+- **场景**: 开发者本地构建的镜像无法直接部署到 K8s 集群
+- **排查**: 使用 Podman Pod 开发，通过 `podman generate kube` 生成 K8s YAML
+- **方案**: Podman Desktop 一键导出 Pod 为 K8s Deployment，通过 Kind 本地测试后部署生产
+- **效果**: 本地开发到 K8s 部署流程从 30min 缩短至 5min
 
 ## 对比
 
-| 特性 | Podman Desktop | Docker Desktop | Rancher Desktop | OrBStack |
+| 维度 | Podman Desktop | Docker Desktop | Rancher Desktop | OrbStack |
 |------|---------------|----------------|-----------------|----------|
 | 开源 | ✅ Apache 2.0 | ❌ 商业 | ✅ Apache 2.0 | ❌ |
-| Rootless | ✅ | ❌ | ⚠️ | ✅ |
-| 扩展系统 | ✅ | ✅ Extensions | ⚠️ | ❌ |
-| 商业许可 | ❌ 无限制 | ✅ 大企业付费 | ❌ | ❌ |
+| Rootless | ✅ 原生 | ❌ | ⚠️ 部分 | ✅ |
+| 扩展系统 | ✅ 插件化 | ✅ Extensions | ⚠️ 有限 | ❌ |
+| 商业许可 | 无限制 | 大企业付费 | 无限制 | 个人免费 |
+| K8s 集成 | Kind/Minikube | Docker K8s | K3s/多版本 | 无 |
+| 适用场景 | 安全开发/企业 | 通用开发 | K8s 开发 | macOS 轻量 |
 
 ## 参考链接
 

@@ -96,6 +96,30 @@ FEBM 取证 — 问题事件取证方法文档
 
 *本文档由 scripts/generate-mocs.py 自动生成，最后更新 2026-05-21。*
 
+## 学习路径建议
+
+| 阶段 | 目标 | 推荐文档 |
+|------|------|----------|
+| 入门 | 理解 FEBM 核心思想 | 01-febm-theory-foundations |
+| 实践 | 掌握技术实现 | 02-febm-technical-implementation |
+| 进阶 | 生产环境应用 | 08-febm-production-quick-start |
+| 精通 | 体系建设与演进 | 05-febm-construction-methodology + 06-febm-future-evolution |
+| 融合 | FTA+FEBM 联合诊断 | fta-febm-joint-diagnosis |
+
+## FEBM 核心原则
+
+1. **证据优先**：先收集证据再形成假设，避免先入为主
+2. **可重现性**：每个诊断步骤必须可重复执行
+3. **证据链完整性**：从现象→证据→假设→验证→根因，每步有据可查
+4. **最小侵入**：诊断操作不应影响生产环境
+5. **时间线还原**：建立精确的事件时间线是根因分析的基础
+
+## 与其他模块的关系
+
+- **FTA 故障树**：提供结构化的故障分解路径，FEBM 提供循证验证方法
+- **技能体系**：将 FEBM 方法论落地为可执行的诊断技能
+- **多故障场景**：复杂场景需要 FEBM 方法论指导证据收集和因果分析
+
 ## Related
 
 - [[实体/kubernetes.md|kubernetes]]

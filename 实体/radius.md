@@ -72,7 +72,7 @@ Radius 完全基于 Kubernetes 构建。Application、Environment、Component �
 3. **应用依赖可视化**：Application Graph 清晰展示应用的组件和资源依赖
 4. **新项目脚手架**：开发者通过 `rad init` 快速创建标准化的云原生应用
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 rad CLI
@@ -85,35 +85,130 @@ rad install kubernetes
 
 # 创建 Environment
 rad env create dev --namespace default
+rad env create prod --namespace production
 rad env set dev
 
-# 创建 Recipe（平台团队）
+# 注册 Recipe（平台团队）
 rad recipe register redis \
   --env dev \
   --template-kind terraform \
   --template-path "ghcr.io/radius-project/recipes/local-dev/redis"
 
-# 部署应用
-cat > app.bicep <<EOF
-import radius as radius
-
-resource app 'Applications.Core/applications@2023-10-01-preview' = {
-  name: 'myapp'
-  properties: {
-    environment: 'dev'
-  }
-}
-
-resource web 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'web'
-  properties: {
-    application: app.name
-    container: { image: 'nginx:latest' }
-  }
-}
-EOF
-rad deploy app.bicep
+rad recipe register redis \
+  --env prod \
+  --template-kind bicep \
+  --template-path "ghcr.io/myorg/recipes/prod/azure-redis"
 ```
+
+```yaml
+# rad.yaml 应用定义示例
+application:
+  name: myapp
+  environment: dev
+resources:
+  web:
+    type: Applications.Core/containers
+    properties:
+      container:
+        image: my-registry.io/myorg/web:v1.2
+        ports:
+        - containerPort: 8080
+      environment:
+        REDIS_HOST: "{{.resources.cache.host}}"
+        REDIS_PORT: "{{.resources.cache.port}}"
+  cache:
+    type: Applications.Datastores/redisCaches
+    properties:
+      environment: dev
+      recipe:
+        name: redis
+  db:
+    type: Applications.Datastores/mongoDatabases
+    properties:
+      environment: dev
+      recipe:
+        name: mongodb
+```
+
+```bash
+# 部署应用
+rad deploy rad.yaml
+
+# 查看应用图
+rad app show myapp
+rad app graph myapp
+
+# 切换环境部署
+rad env set prod
+rad deploy rad.yaml  # 同一应用定义，不同 Recipe 实现
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看应用状态
+rad app list
+rad app show myapp
+rad app graph myapp  # 可视化应用图
+
+# 🟢 低风险：查看环境和 Recipe
+rad env list
+rad recipe list --env dev
+
+# 🟡 中风险：更新应用
+rad deploy rad.yaml
+
+# 🟡 中风险：切换环境
+rad env set prod
+
+# 🔴 高风险：删除应用（删除所有关联资源）
+rad app delete myapp --yes
+
+# 🟢 低风险：查看资源详情
+rad resource show cache --app myapp
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 部署失败 | Recipe 执行错误 | `rad deploy rad.yaml --verbose` | 检查 Terraform/Bicep 模板 |
+| 资源未创建 | Recipe 未注册 | `rad recipe list --env <env>` | 注册对应环境的 Recipe |
+| 应用图不完整 | 资源依赖未声明 | `rad app graph myapp` | 检查 rad.yaml 中的资源引用 |
+| 环境切换失败 | 目标环境未配置 | `rad env list` | 创建目标 Environment |
+| 连接信息未注入 | 资源未就绪 | `rad resource show <name> --app myapp` | 等待资源 Ready |
+
+```
+排查流程：
+├── 部署失败？
+│   ├── rad deploy --verbose → 查看详细错误
+│   ├── 检查 Recipe 模板是否有效
+│   └── 确认 K8s 集群连接正常
+├── 资源未创建？
+│   ├── rad recipe list → 确认 Recipe 已注册
+│   ├── 检查 Terraform/Bicep 执行日志
+│   └── 确认云厂商凭据配置
+└── 应用运行异常？
+    ├── rad app graph → 检查依赖关系
+    ├── kubectl get pods → 检查 Pod 状态
+    └── 检查环境变量注入
+```
+
+## 生产案例
+
+### 案例 1：多环境应用可移植性
+
+- **场景**：应用需要在 dev（本地 K8s）、staging（AWS）、prod（Azure）三个环境部署
+- **排查**：每个环境的基础设施配置不同，维护三套部署配置工作量大
+- **方案**：使用 Radius Portable Resource 抽象依赖，为每个环境注册不同 Recipe（dev: 本地 Redis，prod: Azure Cache）
+- **效果**：应用定义零修改跨环境部署，新环境配置从 3 天缩短至 2 小时
+
+### 案例 2：平台工程自助服务
+
+- **场景**：开发团队频繁请求平台团队创建数据库、缓存等基础设施
+- **排查**：平台团队成为瓶颈，平均等待 3 天
+- **方案**：平台团队定义标准 Recipe 模板，开发者通过 rad.yaml 声明式使用，自动供给
+- **效果**：基础设施供给从 3 天缩短至 10 分钟，平台团队工作量减少 70%
 
 ## 对比
 

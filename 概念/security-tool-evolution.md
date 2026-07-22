@@ -160,6 +160,135 @@ cert-manager 自动化 Kubernetes 中的 TLS 证书管理。
 运行时安全：Falco（系统调用监控）
 ```
 
+## 源码实现分析
+
+### Falco 系统调用监控
+
+```c
+// falco/userspace/falco/falco.cpp
+// Falco 通过 eBPF/内核模块捕获系统调用，匹配规则引擎
+void falco_processor::process_event(sinsp_evt *evt) {
+    // 1. 从 eBPF probe 获取系统调用事件
+    uint16_t type = evt->get_type();  // PPME_SYSCALL_OPEN_E, etc.
+    
+    // 2. 匹配规则引擎
+    for (auto &rule : m_rules) {
+        if (rule.matches(evt)) {
+            // 3. 触发告警
+            emit_alert(rule, evt);
+            // 例: "Terminal shell in container"
+            // evt: open() by uid=0 in container nginx
+        }
+    }
+}
+
+// Falco 规则示例 (YAML)
+// - rule: Terminal shell in container
+//   desc: A shell was used as the entrypoint/exec point into a container
+//   condition: >
+//     spawned_process and container and
+//     proc.name in (bash, sh, zsh)
+//   output: "Shell opened in container (user=%user.name container=%container.name)"
+//   priority: WARNING
+```
+
+### 安全工具架构对比
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          安全工具架构对比                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  供应链安全 (CI/CD 阶段)                                │
+│  ────────────────────                                    │
+│  Trivy: 镜像扫描 (CVE/密钥/配置)                    │
+│       → 集成到 CI 流水线，阻断高危镜像             │
+│  cert-manager: 自动证书管理 (Let's Encrypt/内部 CA) │
+│       → Certificate CRD → 自动签发/续期             │
+│                                                           │
+│  准入安全 (部署阶段)                                    │
+│  ────────────────────                                    │
+│  OPA/Gatekeeper: 策略即代码 (Rego)                   │
+│       → ConstraintTemplate + Constraint              │
+│       → 拒绝不合规资源 (privileged/无 limit)       │
+│                                                           │
+│  运行时安全 (运行阶段)                                  │
+│  ────────────────────                                    │
+│  Falco: 系统调用监控 (eBPF/内核模块)               │
+│       → 实时检测异常行为 (shell/文件篡改)         │
+│       → 告警到 Slack/PagerDuty                       │
+│                                                           │
+│  安全层次:                                               │
+│  供应链 → 准入 → 运行时 (纵深防御)                │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产安全配置示例（🟡 部署到集群）
+
+```yaml
+# Gatekeeper Constraint: 禁止特权容器
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPPrivilegedContainer
+metadata:
+  name: no-privileged-containers
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    excludedNamespaces: ["kube-system"]  # 系统组件除外
+---
+# Falco 规则: 检测容器内 shell
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: falco-custom-rules
+data:
+  custom_rules.yaml: |
+    - rule: Shell in Production Container
+      condition: >
+        spawned_process and container and
+        proc.name in (bash, sh, zsh) and
+        k8s.ns.name = production
+      output: "Shell in prod container (user=%user.name ns=%k8s.ns.name)"
+      priority: CRITICAL
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 镜像扫描一次就够了 | 新 CVE 不断披露，需持续扫描运行中镜像 |
+| Gatekeeper 可以替代 PSA | PSA 是内置基础策略，Gatekeeper 补充复杂策略 |
+| Falco 无性能开销 | eBPF 模式开销小，内核模块模式有可观开销 |
+| 安全工具装了就行 | 必须配置告警路由和响应流程，否则无意义 |
+| cert-manager 不需要监控 | 证书签发失败会导致服务中断，必须监控 |
+| 安全是安全团队的事 | 安全是每个人的责任，DevSecOps 文化 |
+
+## 面试要点
+
+1. **安全工具链的层次和分工？**
+   - 供应链：Trivy（镜像扫描）+ cert-manager（证书）
+   - 准入：OPA/Gatekeeper（策略准入）
+   - 运行时：Falco（系统调用监控）
+   - 纵深防御：每层都有独立防护
+
+2. **OPA/Gatekeeper 的工作原理？**
+   - ConstraintTemplate：定义策略模板（Rego 语言）
+   - Constraint：实例化策略，应用到集群
+   - 准入 Webhook：拦截不合规资源
+
+3. **Falco 与 PSA 的区别？**
+   - PSA：内置准入策略，阻止不合规 Pod 创建
+   - Falco：运行时检测，发现异常行为
+   - 互补：PSA 防于未然，Falco 检测于运行时
+
+4. **生产环境安全工具部署顺序？**
+   - 1. cert-manager（证书基础设施）
+   - 2. Trivy（CI/CD 镜像扫描）
+   - 3. Gatekeeper（准入策略）
+   - 4. Falco（运行时监控）
+
 ## 来源文档
 
 - 生态参考/_archived-release-notes/security/falco/（43 个文件）

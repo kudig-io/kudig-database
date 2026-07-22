@@ -73,6 +73,50 @@ kubectl get nodes -o jsonpath='{.items[*].status.allocatable}'
 - 配置 behavior.scaleDown.stabilizationWindowSeconds 防止流量抖动导致频繁缩容
 - 监控 `kube_hpa_status_condition{condition="ScalingActive"}` 提前发现 HPA 失效
 
+## 生产案例
+
+### 案例 1：Metrics Server 证书过期导致 HPA 完全失效
+
+**背景**：某金融平台集群 Metrics Server 的 TLS 证书过期，HPA 无法获取指标，大促期间 Pod 未扩容导致服务崩溃。
+
+**时间线**：
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 10:00 | 大促流量开始，CPU 升至 85% | 🟢 `kubectl top pods -n prod` |
+| 10:05 | HPA 事件: failed to get metrics | 🟢 `kubectl describe hpa web-hpa -n prod` |
+| 10:10 | 服务响应超时，错误率飙升 | 🟢 `kubectl get pods -n prod \| grep -c Running` |
+| 10:12 | 确认 Metrics Server 证书过期 | 🟢 `kubectl logs -n kube-system -l k8s-app=metrics-server --tail=20` |
+| 10:15 | 手动扩容 + 修复证书 | 🟡 `kubectl scale deploy web -n prod --replicas=20` |
+
+**根因**：Metrics Server 的 serving 证书由集群 CA 签发，有效期 1 年，过期后 apiserver 无法通过 APIService 聚合层获取指标。
+
+### 案例 2：未设置 resources.requests 导致 HPA 计算异常
+
+**根因**：Deployment 未设置 `resources.requests.cpu`，HPA 无法计算 CPU 利用率百分比，`currentMetrics` 显示 `<unknown>`。
+
+**修复**：
+``` bash
+# 🟡 中风险：添加 resources.requests
+kubectl patch deployment web -n prod --type json -p '[{"op":"add","path":"/spec/template/spec/containers/0/resources/requests","value":{"cpu":"250m","memory":"256Mi"}}]'
+```
+
+## 升级决策点
+
+- **P0（立即处理）**：HPA 失效 + 流量突增，服务已过载，需立即手动扩容
+- **P1（30分钟内）**：HPA 异常但当前负载未达上限，有时间排查修复
+- **P2（下一工作日）**：HPA 配置不当但当前副本数足够，不影响业务
+
+## 面试要点
+
+1. **Q: HPA 的扩缩容算法是什么？**
+   A: `desiredReplicas = ceil[currentReplicas × (currentMetricValue / desiredMetricValue)]`。例如当前 3 副本，CPU 80%，目标 50%，则期望 = ceil[3 × (80/50)] = 5。扩容立即执行，缩容受 stabilizationWindowSeconds（默认 300s）保护。
+
+2. **Q: HPA 与 VPA 能否同时使用？为什么？**
+   A: 不能同时对同一指标使用。HPA 调整副本数，VPA 调整单 Pod 资源，同时使用会产生冲突（VPA 增加资源→CPU%下降→HPA 缩容）。可以组合使用：HPA 基于 CPU/内存，VPA 基于自定义指标或仅用于 recommendation 模式。
+
+3. **Q: 如何监控 HPA 健康状态？**
+   A: ① `kube_hpa_status_condition{condition="ScalingActive"}==0` 告警；② `kube_hpa_status_current_replicas == kube_hpa_spec_max_replicas` 持续 5min 告警（触顶）；③ 对比 `kube_hpa_status_desired_replicas` 与 `current_replicas` 差异；④ 监控 Metrics Server 可用性和延迟。
+
 ## 相关概念
 
 - [[概念/horizontal-pod-autoscaler.md|Horizontal Pod Autoscaler]] — HPA 指标采集、扩缩容算法与配置

@@ -310,6 +310,35 @@ pilot:
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| Sidecar 注入失败 | Namespace 未标记 | `kubectl get ns <ns> --show-labels` | 添加 istio-injection=enabled |
+| 503 错误 | 上游服务不可用 | `kubectl logs <pod> -c istio-proxy` | 检查目标服务健康 |
+| 流量未拦截 | iptables 规则异常 | `iptables -t nat -L -n \| grep ISTIO` | 重启 istio-init |
+| mTLS 失败 | 证书过期/不匹配 | `istioctl proxy-config secret <pod>` | 检查证书有效期 |
+| 性能下降 | Sidecar 资源不足 | `kubectl top pod <pod> -c istio-proxy` | 调整 resources limits |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **模式选择** | 大规模用 Ambient | 降低资源开销 70%+ |
+| **资源限制** | 为 Sidecar 设置 limits | 避免资源竞争 |
+| **mTLS** | 生产环境启用 STRICT | 零信任安全 |
+| **升级** | 滚动升级，先测试环境 | 避免全集群故障 |
+| **监控** | 部署 Kiali + Prometheus | 可视化流量拓扑 |
+| **版本** | Istio 1.24+ | Ambient GA |
+
+## 相关工具
+
+| 工具 | 用途 |
+|------|------|
+| `istioctl` | Istio 管理 |
+| `kiali` | 流量可视化 |
+| `helm` | 部署管理 |
+
 ## See Also
 
 - 28-coredns-troubleshooting-optimization

@@ -74,17 +74,175 @@ Clusternet 通过 CRD（ManagedCluster、Subscription、Base、Localization、Fe
 3. **多环境部署**: 按标签选择开发/测试/生产集群，差异化配置
 4. **渐进式发布**: 先分发到灰度集群验证，再扩大到全量集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # Hub 集群
 helm repo add clusternet https://clusternet.github.io/charts
-helm install clusternet-hub clusternet/clusternet-hub
+helm install clusternet-hub clusternet/clusternet-hub \
+  -n clusternet-system --create-namespace
 # 注册子集群
 helm install clusternet-agent clusternet/clusternet-agent \
+  -n clusternet-system --create-namespace \
   --set hubURL=https://hub.example.com \
   --set parentAPIServerToken=<token>
 ```
+
+### Subscription 分发示例
+
+```yaml
+apiVersion: apps.clusternet.io/v1alpha1
+kind: Subscription
+metadata:
+  name: nginx-multi-cluster
+  namespace: default
+spec:
+  subscribers:
+    - clusterAffinity:
+        matchLabels:
+          env: production
+      schedulerStrategy:
+        dividingScheduling:
+          dividingType: Dynamic
+          preferredClusters:
+            - cluster-1
+  feeds:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx
+      namespace: default
+    - apiVersion: v1
+      kind: Service
+      name: nginx-svc
+      namespace: default
+```
+
+### Override 差异化配置
+
+```yaml
+apiVersion: apps.clusternet.io/v1alpha1
+kind: Localization
+metadata:
+  name: nginx-override-edge
+spec:
+  clusterID: edge-cluster-01
+  overrides:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: nginx
+      jsonPatch:
+        - op: replace
+          path: /spec/replicas
+          value: 1
+        - op: add
+          path: /spec/template/spec/tolerations
+          value:
+            - key: edge
+              operator: Exists
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看已注册子集群
+kubectl get managedclusters -n clusternet-system
+
+# 🟢 查看集群连接状态
+kubectl get managedclusters -o custom-columns=NAME:.metadata.name,STATUS:.status.conditions[0].type
+
+# 🟢 查看 Subscription 分发状态
+kubectl get subscriptions -A
+kubectl describe subscription nginx-multi-cluster
+
+# 🟢 查看 FeedIn 资源状态
+kubectl get feedin -A
+
+# 🟡 创建新的 Subscription 分发应用
+kubectl apply -f subscription.yaml
+
+# 🟡 更新 Override 策略
+kubectl apply -f localization.yaml
+
+# 🔴 注销子集群
+kubectl delete managedcluster <cluster-name> -n clusternet-system
+
+# 🟢 查看 Helm Release 分发状态
+kubectl get helmreleases -A
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 子集群未注册 | Agent 无法连接 Hub | `kubectl logs -n clusternet-system deploy/clusternet-agent` | 检查 Hub URL 和 Token |
+| 分发失败 | Subscription 选择器无匹配 | `kubectl describe subscription <name>` | 检查 clusterAffinity 标签 |
+| FeedIn 超时 | WebSocket 连接中断 | `kubectl get feedin -A` | 检查网络连通性 |
+| Override 未生效 | JSON Patch 路径错误 | `kubectl describe localization <name>` | 验证 Patch 路径与资源结构匹配 |
+| Helm Release 失败 | Chart 仓库不可达 | `kubectl logs deploy/clusternet-agent \| grep helm` | 检查 Chart 仓库 URL 和认证 |
+
+### 排查流程
+
+```
+Clusternet 分发异常
+├─ 子集群未注册？
+│  ├─ Agent Pod 未运行 → 检查资源/RBAC
+│  ├─ Hub URL 不可达 → 检查 DNS/防火墙
+│  └─ Token 无效 → 重新生成 ServiceAccount Token
+├─ 分发未触发？
+│  ├─ Subscription 无匹配集群 → 检查标签选择器
+│  └─ Controller 异常 → 检查 Hub 组件日志
+└─ 资源应用失败？
+   ├─ FeedIn 报错 → 检查子集群 RBAC 权限
+   └─ 资源冲突 → 检查命名空间/名称冲突
+```
+
+## 生产案例
+
+### 案例 1: 运营商 5G 边缘集群管理
+
+**场景**: 某电信运营商需管理 200+ 位于基站侧的边缘 K8s 集群，均在 NAT 后。
+
+**方案**:
+1. 中心机房部署 Clusternet Hub
+2. 边缘集群通过 Pull 模式注册（Agent 主动连接 Hub）
+3. 使用 Subscription 统一分发 5G UPF 工作负载
+4. Override 策略为不同区域配置差异化参数
+
+**效果**: 单团队管理 200+ 集群，应用发布时间从 2 天缩短到 10 分钟。
+
+### 案例 2: 混合云多集群渐进式发布
+
+**场景**: 企业应用需同时部署到 AWS、阿里云和私有数据中心。
+
+**方案**:
+1. 按环境标签分组集群（canary/stable）
+2. 先分发到 canary 集群验证
+3. 确认无问题后扩大到 stable 集群
+4. 使用 Override 为不同云配置不同的 StorageClass 和 Ingress
+
+**效果**: 多云发布全流程自动化，回滚时间 < 1 分钟。
+
+## 对比与替代方案
+
+| 维度 | Clusternet | OCM | Karmada | ArgoCD AppSet |
+|------|------------|-----|---------|---------------|
+| 边缘适配 | ✅ Pull 模式 | ❌ Push | 部分 | ❌ |
+| 调度能力 | 中 | 低 | 强 | 低 |
+| Helm 分发 | ✅ | ✅ | ✅ | ✅ |
+| Override | JSON Patch | 有限 | 强 | 有限 |
+| CNCF 状态 | Sandbox | Incubating | Incubating | Graduated |
+| 架构复杂度 | 中 | 低 | 高 | 低 |
+
+## 检查清单
+
+- [ ] Hub 集群高可用部署（多副本）
+- [ ] 子集群 Agent 使用 Pull 模式（NAT 环境）
+- [ ] ServiceAccount Token 定期轮换
+- [ ] Subscription 标签选择器已测试验证
+- [ ] Override 策略已在非生产环境验证
+- [ ] WebSocket 连接监控告警已配置
+- [ ] 分发失败自动重试策略已配置
+- [ ] 集群注册/注销审计日志已开启
 
 ## 替代方案
 

@@ -287,7 +287,110 @@ Secret 轮换应尽量在业务低峰期执行，并预先在 staging 环境验�
 
 ---
 
-## 六、推荐阅读
+## 六、平台级监控与告警
+
+### PrometheusRule 平台组件告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: platform-engineering-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: platform.gitops.rules
+      rules:
+        - alert: ArgoCDAppOutOfSync
+          expr: argocd_app_info{sync_status="OutOfSync"} == 1
+          for: 30m
+          labels:
+            severity: warning
+          annotations:
+            summary: "ArgoCD 应用 {{ $labels.name }} 长时间未同步"
+            
+        - alert: ArgoCDAppDegraded
+          expr: argocd_app_info{health_status="Degraded"} == 1
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "ArgoCD 应用 {{ $labels.name }} 健康状态异常"
+
+    - name: platform.autoscaling.rules
+      rules:
+        - alert: KarpenterNodePoolNearLimit
+          expr: |
+            karpenter_nodepool_usage / karpenter_nodepool_limit > 0.9
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "NodePool {{ $labels.nodepool }} 接近资源上限"
+            
+        - alert: KEDAScalerFailing
+          expr: keda_scaler_errors > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "KEDA Scaler {{ $labels.scaler }} 报错"
+
+    - name: platform.certificates.rules
+      rules:
+        - alert: CertificateExpiringSoon
+          expr: |
+            certmanager_certificate_expiration_timestamp_seconds - time() < 30*24*3600
+          labels:
+            severity: warning
+          annotations:
+            summary: "证书 {{ $labels.name }} 将在 30 天内过期"
+            
+        - alert: CertificateExpiringCritical
+          expr: |
+            certmanager_certificate_expiration_timestamp_seconds - time() < 7*24*3600
+          labels:
+            severity: critical
+          annotations:
+            summary: "证书 {{ $labels.name }} 将在 7 天内过期"
+```
+
+### Grafana Dashboard 概览
+
+```json
+{
+  "dashboard": {
+    "title": "平台工程概览",
+    "panels": [
+      {
+        "title": "GitOps 同步状态",
+        "type": "stat",
+        "targets": [
+          { "expr": "count(argocd_app_info{sync_status=\"Synced\"})" }
+        ]
+      },
+      {
+        "title": "节点池使用率",
+        "type": "gauge",
+        "targets": [
+          { "expr": "sum(karpenter_nodepool_usage) / sum(karpenter_nodepool_limit) * 100" }
+        ]
+      },
+      {
+        "title": "证书健康状态",
+        "type": "table",
+        "targets": [
+          { "expr": "certmanager_certificate_expiration_timestamp_seconds - time()" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 七、推荐阅读
 
 ### 同域关键文档
 

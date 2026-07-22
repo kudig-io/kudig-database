@@ -66,17 +66,167 @@ SlimToolkit 优化后的镜像可直接部署到 Kubernetes 集群。在 CI/CD �
 - **边缘计算部署**：为带宽受限的边缘节点生成超小体积镜像
 - **遗留镜像优化**：分析和优化历史遗留的大型镜像，无需修改 Dockerfile
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 安装 SlimToolkit
 curl -sL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo bash
-# 优化镜像
+
+# 🟢 验证安装
+slim --version
+
+# 🟢 基本镜像优化
 slim build --target your-app:latest --tag your-app:slim
+
+# 🟢 带 HTTP 探测的优化 (Web 应用)
+slim build --target web-app:latest \
+  --http-probe \
+  --http-probe-cmd GET:/health \
+  --http-probe-cmd GET:/api/v1/status \
+  --tag web-app:slim
+
+# 🟢 查看镜像分析报告
+slim xray your-app:latest
+
+# 🟢 对比原始和优化后镜像
+slim build --target your-app:latest --tag your-app:slim --show-clogs
 ```
+
+### CI/CD 集成示例
+
+```yaml
+# GitHub Actions 示例
+name: Optimize Image
+on: [push]
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build image
+      run: docker build -t myapp:${{ github.sha }} .
+    - name: Install SlimToolkit
+      run: curl -sL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo bash
+    - name: Optimize image
+      run: |
+        slim build \
+          --target myapp:${{ github.sha }} \
+          --tag myapp:${{ github.sha }}-slim \
+          --http-probe \
+          --continue-after 10
+    - name: Push optimized image
+      run: |
+        docker tag myapp:${{ github.sha }}-slim registry.example.com/myapp:${{ github.sha }}
+        docker push registry.example.com/myapp:${{ github.sha }}
+```
+
+### 高级选项
+
+```bash
+# 🟢 保留特定文件
+slim build --target app:latest \
+  --include-path /app/config \
+  --include-path /app/data \
+  --tag app:slim
+
+# 🟢 排除特定路径
+slim build --target app:latest \
+  --exclude-path /tmp \
+  --exclude-path /var/cache \
+  --tag app:slim
+
+# 🟢 指定运行用户
+slim build --target app:latest \
+  --new-user appuser \
+  --tag app:slim
+
+# 🟢 生成 Dockerfile (可审查)
+slim build --target app:latest \
+  --generate-dockerfile \
+  --tag app:slim
+
+# 🟢 查看镜像层分析
+slim xray --changes app:latest
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 分析镜像
+slim xray your-app:latest
+
+# 🟢 查看镜像层信息
+slim xray --changes your-app:latest
+
+# 🟢 查看镜像大小对比
+docker images | grep your-app
+
+# 🟢 测试优化后镜像
+docker run --rm your-app:slim
+
+# 🟢 查看优化报告
+cat slim.report.json | jq .
+
+# 🟢 批量优化 (脚本)
+for img in $(cat images.txt); do
+  slim build --target $img --tag ${img}-slim
+done
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 优化后应用崩溃 | 缺少运行时依赖 | `slim build --show-clogs` | 使用 --include-path 添加缺失文件 |
+| HTTP 探测失败 | 应用启动慢/端口错误 | 检查探测日志 | 增加 --continue-after 或调整探测命令 |
+| 优化效果不佳 | 镜像本身已很小 | `slim xray <image>` | 检查是否有多余层 |
+| 构建失败 | Docker 未运行/权限不足 | `docker info` | 确保 Docker 运行且有权限 |
+| 网络功能异常 | 缺少网络库 | 检查应用日志 | 添加 --include-path /etc/ssl 等 |
+
+### 排查流程
+
+```
+1. slim xray <image> → 分析原始镜像结构
+2. slim build --show-clogs → 查看详细构建日志
+3. docker run <slim-image> → 测试优化后镜像
+4. 对比原始和优化后镜像的文件差异
+5. 使用 --include-path 添加缺失依赖
+```
+
+## 生产案例
+
+### 案例1: Node.js 应用镜像优化
+- **场景**: Node.js 应用镜像 1.2GB，拉取和启动慢
+- **方案**: SlimToolkit 自动分析并优化
+- **效果**: 镜像从 1.2GB 降至 85MB (缩减 14x)，启动时间从 30s 降至 5s
+
+### 案例2: Python ML 服务安全加固
+- **场景**: ML 服务镜像包含完整 Python 环境，攻击面大
+- **方案**: SlimToolkit 优化 + 非 root 用户
+- **效果**: 移除 shell 和包管理器，攻击面减少 90%
 
 ## 对比替代方案
 
-相比多阶段构建（Multi-stage Build）需要手动指定保留文件，SlimToolkit 通过自动化动态分析实现零配置优化。相比 Dive（只读分析工具），SlimToolkit 不仅能分析还能自动生成优化镜像。
+| 维度 | SlimToolkit | 多阶段构建 | Distroless | Alpine |
+|------|------------|-----------|-----------|--------|
+| 自动化 | 全自动 | 手动 | 手动 | 手动 |
+| 缩减比例 | 10-30x | 2-5x | 5-10x | 2-3x |
+| 安全加固 | 自动 | 手动 | 内置 | 无 |
+| 修改 Dockerfile | 不需要 | 需要 | 需要 | 需要 |
+| 动态分析 | 支持 | 无 | 无 | 无 |
+| 学习曲线 | 低 | 中 | 中 | 低 |
+
+## 检查清单
+
+- [ ] 优化后镜像经过完整功能测试
+- [ ] HTTP 探测覆盖了关键 API 端点
+- [ ] 优化后镜像以非 root 用户运行
+- [ ] CI/CD 集成自动化优化步骤
+- [ ] 监控优化后镜像大小变化
+- [ ] 定期重新优化 (依赖更新后)
+- [ ] 保留原始镜像用于回滚
 
 ## Related
 

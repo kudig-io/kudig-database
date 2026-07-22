@@ -139,6 +139,187 @@ Velero（前身为 Heptio Ark）是 Kubernetes 备份和灾难恢复工具。
 | 备份与灾难恢复 | Velero |
 | 完整存储方案 | Rook + Velero |
 
+## 源码实现分析
+
+### Rook Operator 调谐循环
+
+```go
+// github.com/rook/rook/pkg/operator/ceph/cluster/controller.go
+// Rook Operator 监听 CephCluster CR，编排 Ceph 组件生命周期
+func (c *ClusterController) reconcileCluster(cluster *cephv1.CephCluster) error {
+    // 1. 验证集群配置
+    if err := c.validateCluster(cluster); err != nil {
+        return err
+    }
+    // 2. 创建/更新 Ceph MON（监控守护进程）
+    if err := c.mons.Start(cluster); err != nil {
+        return errors.Wrap(err, "failed to start mons")
+    }
+    // 3. 创建 OSD（对象存储守护进程）
+    if err := c.osds.Start(cluster); err != nil {
+        return errors.Wrap(err, "failed to start osds")
+    }
+    // 4. 更新 CephCluster Status
+    c.updateStatus(cluster, cephv1.ConditionReady)
+    return nil
+}
+```
+
+### Velero 备份流程
+
+```go
+// github.com/vmware-tanzu/velero/pkg/backup/backup.go
+// Velero 备份控制器：序列化 K8s 资源 + 卷快照
+func (b *kubernetesBackupper) Backup(backup *api.Backup) error {
+    // 1. 收集所有需要备份的资源
+    resources := b.itemCollector.GetItems(backup.Spec)
+    // 2. 序列化每个资源为 YAML/JSON
+    for _, item := range resources {
+        b.backupItem(tarWriter, item)
+    }
+    // 3. 对 PVC 触发 VolumeSnapshotter 插件
+    for _, pvc := range pvcs {
+        snapshotID := b.volumeSnapshotter.CreateSnapshot(pv)
+        b.backupStore.PutSnapshot(backup, snapshotID)
+    }
+    // 4. 上传到对象存储（S3/GCS/Azure Blob）
+    b.backupStore.PutBackup(backup)
+}
+```
+
+### 存储工具架构对比
+
+```
+┌───────────────────────────────────────────────────────────┐
+│              存储工具架构对比                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Rook (Operator 模式)                                    │
+│  ────────────────────                                    │
+│  CephCluster CR → Rook Operator → MON/OSD/MDS Pods     │
+│       │                                                  │
+│       └→ CSI Driver → PVC/PV → Pod 挂载                 │
+│                                                           │
+│  Longhorn (微服务模式)                                   │
+│  ────────────────────                                    │
+│  LonghornManager DaemonSet → 每卷独立 Engine/Replica   │
+│       │                                                  │
+│       └→ CSI Driver → iSCSI/NFS → Pod 挂载              │
+│                                                           │
+│  Velero (备份模式)                                       │
+│  ────────────────────                                    │
+│  Backup CR → Velero Server → 序列化资源 + 卷快照       │
+│       │                                                  │
+│       └→ 对象存储 (S3/GCS/Azure) → Restore 恢复        │
+└───────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：Rook Ceph 集群部署（🔴 生产存储基础设施）
+
+```yaml
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v18.2
+  dataDirHostPath: /var/lib/rook
+  mon:
+    count: 3
+    allowMultiplePerNode: false
+  storage:
+    useAllNodes: false
+    nodes:
+    - name: storage-node-1
+      devices:
+      - name: /dev/sdb
+      - name: /dev/sdc
+  resources:
+    osd:
+      requests:
+        cpu: "2"
+        memory: 4Gi
+      limits:
+        memory: 8Gi
+```
+
+### 场景二：Velero 定时备份（🟡 创建备份任务）
+
+```bash
+# 创建每日凌晨 2 点的全集群备份
+velero schedule create daily-backup \
+  --schedule="0 2 * * *" \
+  --include-namespaces="production,staging" \
+  --snapshot-volumes=true \
+  --ttl=168h  # 保留 7 天
+
+# 🟢 查看备份状态
+velero backup get
+velero schedule get daily-backup -o yaml
+
+# 🔴 从备份恢复（影响生产）
+velero restore create --from-backup daily-backup-20260711
+```
+
+### 场景三：Longhorn 卷快照与恢复（🟡 修改存储状态）
+
+```bash
+# 🟢 查看 Longhorn 卷状态
+kubectl get volumes.longhorn.io -n longhorn-system
+
+# 🟡 创建卷快照
+kubectl apply -f - <<EOF
+apiVersion: longhorn.io/v1beta2
+kind: Snapshot
+metadata:
+  name: pre-upgrade-snap
+  namespace: longhorn-system
+spec:
+  volume: pvc-abc123
+EOF
+
+# 🔴 从快照恢复（会覆盖当前数据）
+# 先停止 Pod，再恢复卷，最后重启 Pod
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| Rook 就是 Ceph | Rook 是编排器，还支持其他存储后端 |
+| Longhorn 不适合生产 | v1.4+ 已支持企业级 HA 和备份 |
+| Velero 只备份 YAML | 还支持 PV 快照、Restic/Kopia 文件备份 |
+| 备份不需要测试恢复 | 必须定期恢复演练，否则备份无意义 |
+| Rook 升级无风险 | Ceph 升级需严格按版本顺序，跳版本可能损坏 |
+| 存储工具不需要监控 | 必须监控 OSD 状态、卷健康、备份成功率 |
+
+## 面试要点
+
+1. **Rook 与直接使用 Ceph 的区别？**
+   - Rook 是 K8s Operator，自动化 Ceph 生命周期管理
+   - 自部署 Ceph 需手动管理 MON/OSD/MDS 配置
+   - Rook 提供自愈、滚动升级、CSI 集成
+
+2. **Velero 备份架构的核心组件？**
+   - Velero Server：备份控制器 + 调度器
+   - VolumeSnapshotter 插件：卷快照抽象
+   - ObjectStore 插件：S3/GCS/Azure 存储后端
+   - Restic/Kopia：文件级备份（无需 CSI 快照）
+
+3. **Longhorn vs Rook 如何选型？**
+   - Longhorn：轻量、简单、小团队、块存储为主
+   - Rook/Ceph：企业级、多存储类型、大规模、复杂需求
+   - 关键因素：团队能力、规模、存储类型需求
+
+4. **生产环境存储备份策略如何设计？**
+   - 3-2-1 原则：3 份副本、2 种介质、1 份异地
+   - Velero 定时备份 + 卷快照 + 异地复制
+   - 定期恢复演练（至少季度一次）
+
 ## 来源文档
 
 - 生态参考/_archived-release-notes/storage/rook/（29 个文件）

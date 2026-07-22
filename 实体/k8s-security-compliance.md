@@ -73,19 +73,268 @@ Kubernetes 安全合规实践是一个涵盖集群安全加固、合规审计、
 - **供应链安全**：在 CI/CD 中强制镜像签名验证和安全扫描
 - **安全事件响应**：通过审计日志和运行时检测快速定位和响应安全事件
 
-## 安装与快速开始
+## 安装与配置
+
+### 安全工具链部署
 
 ```bash
-# kube-bench CIS Benchmark 扫描
+# 🟢 kube-bench CIS Benchmark 扫描
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
+kubectl logs job/kube-bench -f
 
-# Kyverno 策略引擎
-kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.12.0/install.yaml
+# 🟢 Kyverno 策略引擎
+helm repo add kyverno https://kyverno.github.io/kyverno/
+helm install kyverno kyverno/kyverno \
+  -n kyverno --create-namespace \
+  --set replicaCount=3 \
+  --set admissionController.replicas=3
+
+# 🟢 Falco 运行时安全检测
+helm repo add falcosecurity https://falcosecurity.github.io/charts
+helm install falco falcosecurity/falco \
+  -n falco --create-namespace \
+  --set driver.kind=ebpf \
+  --set falcosidekick.enabled=true
+
+# 🟢 Trivy 镜像扫描
+helm install trivy-operator aqua-security/trivy-operator \
+  -n trivy-system --create-namespace
 ```
+
+### Kyverno 安全策略示例
+
+```yaml
+# 禁止特权容器
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-privileged-containers
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: deny-privileged
+    match:
+      any:
+      - resources:
+          kinds: ["Pod"]
+    validate:
+      message: "特权容器被禁止。设置 securityContext.privileged=false"
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              privileged: false
+---
+# 强制只读根文件系统
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-readonly-rootfs
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: check-readonly-rootfs
+    match:
+      any:
+      - resources:
+          kinds: ["Pod"]
+          namespaces: ["production", "staging"]
+    validate:
+      message: "容器必须设置 readOnlyRootFilesystem=true"
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              readOnlyRootFilesystem: true
+---
+# 要求镜像签名验证
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signatures
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: verify-cosign-signature
+    match:
+      any:
+      - resources:
+          kinds: ["Pod"]
+    verifyImages:
+    - imageReferences:
+      - "registry.example.com/*"
+      attestors:
+      - count: 1
+        entries:
+        - keys:
+            publicKeys: |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
+              -----END PUBLIC KEY-----
+```
+
+### NetworkPolicy 默认拒绝
+
+```yaml
+# 默认拒绝所有入站流量
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes: [Ingress]
+---
+# 允许特定服务间通信
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes: [Ingress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+```
+
+### 审计策略配置
+
+```yaml
+# /etc/kubernetes/audit-policy.yaml
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+# 记录所有对 Secret 的访问（不记录内容）
+- level: Metadata
+  resources:
+  - group: ""
+    resources: ["secrets", "configmaps"]
+  verbs: ["get", "list", "watch"]
+# 记录所有认证失败
+- level: Metadata
+  userGroups: ["system:unauthenticated"]
+# 记录所有删除操作
+- level: RequestResponse
+  verbs: ["delete"]
+  resources:
+  - group: ""
+    resources: ["pods", "services", "namespaces"]
+# 记录 RBAC 变更
+- level: RequestResponse
+  resources:
+  - group: "rbac.authorization.k8s.io"
+    resources: ["clusterroles", "clusterrolebindings", "roles", "rolebindings"]
+# 其他请求仅记录元数据
+- level: Metadata
+  omitStages: ["RequestReceived"]
+```
+
+## 运维操作
+
+```bash
+# 🟢 检查集群安全状态
+kubectl get clusterpolicy -o custom-columns=NAME:.metadata.name,ACTION:.spec.validationFailureAction
+kubectl get networkpolicy -A
+kubectl get psp 2>/dev/null || echo "PSA mode"
+
+# 🟢 检查命名空间安全级别
+kubectl get ns -o custom-columns=NAME:.metadata.name,ENFORCE:.metadata.labels.'pod-security\.kubernetes\.io/enforce'
+
+# 🟢 检查 RBAC 权限
+kubectl auth can-i --list --as=system:serviceaccount:default:my-sa
+kubectl get clusterrolebindings -o custom-columns=NAME:.metadata.name,ROLE:.roleRef.name,SUBJECT:.subjects[0].name
+
+# 🟢 检查镜像漏洞报告
+kubectl get vulnerabilityreports -A
+kubectl get clustercompliancereports
+
+# 🟢 Falco 告警查看
+kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=50 | grep -i "warning\|critical"
+
+# 🟢 检查 Pod 安全上下文
+kubectl get pods -n production -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.securityContext}{"\n"}{end}'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 被拒绝创建 | Kyverno/PSA 策略拦截 | `kubectl describe pod`; `kubectl get events` | 调整 Pod spec 符合策略 |
+| 网络不通 | NetworkPolicy 过严 | `kubectl get netpol -n <ns>` | 添加允许的 ingress/egress 规则 |
+| 权限不足 | RBAC 配置缺失 | `kubectl auth can-i <verb> <resource>` | 创建 Role/RoleBinding |
+| Falco 误报 | 规则过于敏感 | 检查 Falco 日志 | 调整规则优先级/添加例外 |
+| 审计日志缺失 | Audit Policy 未配置 | 检查 apiserver 参数 | 配置 --audit-policy-file |
+
+### 安全事件响应流程
+
+```
+安全告警触发
+├── 确认告警真实性（误报 vs 真实攻击）
+│   ├── Falco 告警 → 检查对应 Pod/进程行为
+│   └── 审计日志 → 确认操作来源和意图
+├── 遏制影响
+│   ├── 🔴 隔离受影响 Pod（NetworkPolicy deny-all）
+│   ├── 🔴 撤销相关 ServiceAccount token
+│   └── 🟡 暂停相关 Deployment 滚动
+├── 根因分析
+│   ├── 审计日志回溯操作时间线
+│   ├── 检查镜像来源和签名
+│   └── 检查 RBAC 权限链路
+└── 修复与预防
+    ├── 修复漏洞/更新策略
+    ├── 加强监控告警
+    └── 更新安全基线
+```
+
+## 生产案例
+
+### 案例1：供应链攻击防御
+
+- **场景**：CI/CD 被入侵，攻击者尝试部署包含后门的镜像
+- **排查**：Kyverno verifyImages 策略拒绝未签名镜像部署；Falco 检测到异常 outbound 连接
+- **方案**：强制 Cosign 签名验证 + SBOM 检查 + 镜像来源白名单
+- **效果**：未签名镜像无法部署，攻击链被截断
+
+### 案例2：多租户网络隔离
+
+- **场景**：租户 A 的 Pod 能够访问租户 B 的 Service，存在数据泄露风险
+- **排查**：命名空间未配置默认拒绝 NetworkPolicy；CNI 插件未启用 NetworkPolicy 支持
+- **方案**：每个租户命名空间部署 default-deny + 显式允许规则；启用 Cilium NetworkPolicy
+- **效果**：租户间完全网络隔离，满足合规要求
 
 ## 对比替代方案
 
-相比传统主机安全方案，K8s 安全合规实践需要覆盖声明式 API、动态调度、网络抽象等云原生特性。相比单个安全工具，该体系强调多工具协同和纵深防御策略。
+| 方案 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| Kyverno | K8s原生、YAML策略、易上手 | 仅K8s资源 | K8s 策略执行 |
+| OPA Gatekeeper | 通用策略引擎、Rego强大 | 学习曲线陡 | 复杂策略/多系统 |
+| Falco | 运行时检测、eBPF | 仅检测不阻断 | 安全监控/审计 |
+| KubeArmor | 运行时强制、阻断 | 较新、社区小 | 强隔离需求 |
+| Istio mTLS | 服务间加密、零信任 | 资源开销大 | 服务网格安全 |
+
+## 检查清单
+
+- [ ] CIS Benchmark 扫描通过（kube-bench）
+- [ ] PSA enforce 设置为 restricted（生产命名空间）
+- [ ] 默认拒绝 NetworkPolicy 已部署
+- [ ] Kyverno/Gatekeeper 策略引擎已部署
+- [ ] 镜像签名验证已启用
+- [ ] 运行时安全检测已部署（Falco/Tetragon）
+- [ ] 审计日志已配置并发送到 SIEM
+- [ ] Secret 加密存储已启用（EncryptionConfiguration）
+- [ ] RBAC 最小权限原则已执行
+- [ ] 安全事件响应流程已制定
 
 ## Related
 

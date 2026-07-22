@@ -71,9 +71,139 @@ description: '## 项目概述'
 - 使用 `--atomic` 保证原子性部署
 - 合理设置 `--timeout` 超时时间
 
+## 安装与配置
+
+```bash
+# 安装 Helm 3
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# 添加常用仓库
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+# 部署示例（原子性安装）
+helm install my-nginx bitnami/nginx \
+  --namespace web --create-namespace \
+  --atomic --timeout 5m \
+  --values production-values.yaml
+```
+
+### Chart 结构规范
+
+```yaml
+# Chart.yaml
+apiVersion: v2
+name: my-service
+description: A production-ready microservice chart
+type: application
+version: 1.2.0
+appVersion: "2.1.0"
+dependencies:
+- name: redis
+  version: "17.x"
+  repository: https://charts.bitnami.com/bitnami
+  condition: redis.enabled
+
+# values.yaml 分层管理
+# values.yaml          → 默认值
+# values-staging.yaml  → 预发环境
+# values-production.yaml → 生产环境
+```
+
+### 私有 Chart 仓库
+
+```bash
+# 使用 ChartMuseum 搭建私有仓库
+helm plugin install https://github.com/chartmuseum/helm-push
+helm cm-push my-chart/ https://chartmuseum.internal.company.com
+
+# OCI 仓库（Helm 3.8+）
+helm registry login registry.company.com
+helm push my-chart-1.2.0.tgz oci://registry.company.com/charts
+helm pull oci://registry.company.com/charts/my-chart --version 1.2.0
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看已部署 Release
+helm list -A
+helm status my-release -n web
+helm history my-release -n web
+
+# 🟢 渲染模板（不实际部署）
+helm template my-release ./chart -f values.yaml --debug
+
+# 🟢 查看当前 values
+helm get values my-release -n web
+helm get manifest my-release -n web
+
+# 🟡 升级 Release
+helm upgrade my-release ./chart -f values-production.yaml --atomic -n web
+
+# 🟡 回滚到指定版本
+helm rollback my-release 3 -n web
+
+# 🔴 卸载 Release（删除所有资源）
+helm uninstall my-release -n web
+
+# 🔴 卸载并保留 CRD
+helm uninstall my-release -n web --keep-history
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Install 超时 | 资源未 Ready/拉镜像失败 | `kubectl get events -n web` | 检查镜像地址和资源配额 |
+| Upgrade 失败回滚 | 模板渲染错误 | `helm template ./chart --debug` | 修复模板语法 |
+| Hook 执行失败 | Job 权限不足 | `kubectl logs job/pre-install-hook` | 检查 RBAC 配置 |
+| 依赖解析失败 | 仓库不可达/版本不存在 | `helm dependency update ./chart` | 检查网络和版本号 |
+| Release 状态 pending | 上次操作未完成 | `helm history my-release` | `helm rollback` 后重试 |
+
+```
+排查流程:
+├── 部署失败
+│   ├── helm status → Release 状态
+│   ├── kubectl get events → Pod 创建失败原因
+│   ├── helm template --debug → 模板渲染验证
+│   └── helm get manifest → 实际提交的资源
+├── 升级异常
+│   ├── helm diff upgrade → 变更差异预览
+│   ├── helm history → 版本历史
+│   └── helm rollback → 回滚到稳定版本
+└── 依赖问题
+    ├── helm dependency list → 依赖状态
+    ├── helm repo update → 刷新仓库索引
+    └── 检查 Chart.lock → 版本锁定
+```
+
+## 生产案例
+
+### 案例1: Helm Upgrade 导致生产服务中断
+
+- **场景**: 升级 ingress chart 时因模板错误导致 Ingress 规则被删除，外部流量中断 5 分钟
+- **排查**: `helm history` 显示 upgrade 状态 failed，`kubectl get ingress` 确认规则丢失
+- **方案**:
+  1. 立即 `helm rollback my-release 5` 回滚
+  2. 后续升级强制使用 `--atomic` 参数（失败自动回滚）
+  3. CI/CD 中添加 `helm template --validate` 预检查
+- **效果**: 服务 2 分钟恢复，后续升级零事故
+
+### 案例2: 多环境 Values 管理混乱
+
+- **场景**: 50+ 微服务 × 3 环境 = 150+ values 文件，配置漂移严重
+- **排查**: 对比发现 staging 和 production 的资源配置不一致
+- **方案**:
+  1. 采用基础 values + 环境 overlay 分层架构
+  2. 使用 Helmfile 统一管理多环境部署
+  3. GitOps 仓库存储所有 values，PR 审批变更
+- **效果**: 配置一致率达 100%，变更可审计
+
 ## 架构定位
 
-在 CNCF 生态中，helm 属于 **Storage** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，Helm 属于 **Application Definition & Image Build** 类别，是 Kubernetes 应用包管理的事实标准。
 
 ## 参考链接
 

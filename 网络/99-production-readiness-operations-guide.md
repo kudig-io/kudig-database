@@ -334,5 +334,34 @@ iperf3 -c <server-ip> -t 30 -P 4
 - [[../故障诊断/FTA故障树/list/dns-fta.md|DNS 故障树]]
 - [[../故障诊断/FTA故障树/list/ingress-fta.md|Ingress 故障树]]
 
+## 7. 快速检查脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：网络域生产就绪快速检查
+
+echo "=== CNI 状态 ==="
+kubectl get pods -n kube-system -l k8s-app=cilium -o wide 2>/dev/null || \
+kubectl get pods -n kube-system -l k8s-app=calico-node -o wide 2>/dev/null || \
+kubectl get pods -n kube-system -l app=terway-eniip -o wide
+
+echo -e "\n=== CoreDNS 状态 ==="
+kubectl get pods,svc,ep -n kube-system -l k8s-app=kube-dns
+
+echo -e "\n=== Ingress 状态 ==="
+kubectl get pods -n ingress-nginx -o wide 2>/dev/null || \
+kubectl get pods -n istio-system -l app=istio-ingressgateway -o wide 2>/dev/null
+
+echo -e "\n=== 空 Endpoints 检查 ==="
+kubectl get endpoints -A | grep '<none>'
+
+echo -e "\n=== conntrack 使用率 ==="
+for n in $(kubectl get nodes -o name | head -3); do
+  echo "Node: $n"
+  kubectl debug $n -it --image=nicolaka/netshoot -- cat /proc/sys/net/netfilter/nf_conntrack_count 2>/dev/null
+done
+
+echo -e "\n=== 检查完成 ==="
+```
 
 <!-- risk-assessed -->

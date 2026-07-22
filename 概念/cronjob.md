@@ -150,6 +150,167 @@ kubectl patch cronjob db-backup -p '{"spec":{"schedule":"*/30 * * * *"}}' -n pro
 - **容器退出码非 0 仍标记成功**：检查 `command` 是否吞掉错误（如 `set -e` 缺失）。
 - **大任务 OOMKilled**：批量处理内存峰值未评估，limit 设得太低。
 
+## 源码实现分析
+
+### CronJob Controller 调度逻辑
+
+```go
+// k8s.io/kubernetes/pkg/controller/cronjob/cronjob_controller.go
+func (jm *Controller) syncCronJob(ctx context.Context, cj *batch.CronJob) error {
+    // 1. 解析 cron schedule（支持时区）
+    sched, err := cron.ParseStandard(cj.Spec.Schedule)
+    // 2. 计算上次应调度时间
+    var earliestTime time.Time
+    if cj.Status.LastScheduleTime != nil {
+        earliestTime = cj.Status.LastScheduleTime.Time
+    } else {
+        earliestTime = cj.CreationTimestamp.Time
+    }
+    // 3. 检查是否错过调度窗口
+    if cj.Spec.StartingDeadlineSeconds != nil {
+        // 错过超过 startingDeadlineSeconds 则跳过
+        if time.Since(earliestTime) > time.Duration(*cj.Spec.StartingDeadlineSeconds)*time.Second {
+            return nil // 跳过本次执行
+        }
+    }
+    // 4. 检查并发策略
+    activeJobs := jm.getActiveJobs(cj)
+    if cj.Spec.ConcurrencyPolicy == batch.ForbidConcurrent && len(activeJobs) > 0 {
+        return nil // 禁止并发，跳过
+    }
+    if cj.Spec.ConcurrencyPolicy == batch.ReplaceConcurrent {
+        // 删除当前运行的 Job，创建新的
+        jm.deleteActiveJobs(activeJobs)
+    }
+    // 5. 创建新 Job
+    job := jm.getJobFromTemplate(cj, scheduledTime)
+    jm.kubeClient.BatchV1().Jobs(ns).Create(ctx, job)
+    // 6. 更新 Status.LastScheduleTime
+    cj.Status.LastScheduleTime = &metav1.Time{Time: scheduledTime}
+    jm.kubeClient.BatchV1().CronJobs(ns).UpdateStatus(ctx, cj)
+    return nil
+}
+```
+
+### CronJob → Job → Pod 层次关系
+
+```
+┌──────────────────────────────────────────────────────────┐
+│          CronJob → Job → Pod 层次关系                 │
+├──────────────────────────────────────────────────────────┤
+│  CronJob (db-backup, schedule: "0 2 * * *")              │
+│    │  每次触发创建一个 Job                              │
+│    ├─ Job (db-backup-28712345) [完成]                    │
+│    │     └─ Pod (db-backup-28712345-x7k2p) [Succeeded]  │
+│    ├─ Job (db-backup-28712346) [完成]                    │
+│    │     └─ Pod (db-backup-28712346-m3n8q) [Succeeded]  │
+│    └─ Job (db-backup-28712347) [运行中]                  │
+│          └─ Pod (db-backup-28712347-p5r1s) [Running]    │
+│                                                          │
+│  关键参数:                                              │
+│  • successfulJobsHistoryLimit: 保留成功 Job 数 (默认 3) │
+│  • failedJobsHistoryLimit: 保留失败 Job 数 (默认 1)     │
+│  • concurrencyPolicy: Allow/Forbid/Replace              │
+│  • startingDeadlineSeconds: 错过窗口后跳过            │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：生产级定时备份任务
+
+```yaml
+# 🟡 中风险：创建定时任务影响集群资源
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+  namespace: production
+spec:
+  schedule: "0 2 * * *"  # 每天凌晨 2点
+  timeZone: "Asia/Shanghai"  # K8s 1.27+ 显式时区
+  concurrencyPolicy: Forbid  # 禁止并发
+  startingDeadlineSeconds: 600  # 错过 10分钟则跳过
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 3600  # 1小时超时
+      backoffLimit: 2  # 失败重试 2 次
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: backup
+            image: registry/db-backup:v1.2.0
+            command: ["/backup.sh"]
+            resources:
+              requests: {cpu: "500m", memory: "1Gi"}
+              limits: {cpu: "2", memory: "4Gi"}
+            env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+```
+
+### 场景二：手动触发与调试
+
+```bash
+# 🟡 中风险：手动创建 Job 消耗资源
+# 手动触发一次（不影响 CronJob 调度）
+kubectl create job --from=cronjob/db-backup db-backup-manual-$(date +%s) -n production
+# 查看执行日志
+kubectl logs -l job-name=db-backup-manual-1719000000 -n production -f
+# 检查失败原因
+kubectl describe job db-backup-28712347 -n production | grep -A10 Events
+kubectl get pods -l job-name=db-backup-28712347 -n production
+# 临时挂起（维护期间）
+kubectl patch cronjob db-backup -p '{"spec":{"suspend":true}}' -n production
+# 恢复
+kubectl patch cronjob db-backup -p '{"spec":{"suspend":false}}' -n production
+```
+
+### 场景三：清理历史 Job 堆积
+
+```bash
+# 🟡 中风险：删除 Job 会级联删除 Pod
+# 检查历史 Job 数量
+kubectl get jobs -n production | wc -l
+# 清理已完成的历史 Job
+kubectl get jobs -n production -o json | \
+  jq -r '.items[] | select(.status.succeeded==1) | .metadata.name' | \
+  tail -n +4 | xargs -I{} kubectl delete job {} -n production
+# 或者调整 historyLimit 自动清理
+kubectl patch cronjob db-backup -p '{"spec":{"successfulJobsHistoryLimit":3,"failedJobsHistoryLimit":2}}' -n production
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | CronJob 保证精确执行 | 调度有延迟（controller-manager 周期）；错过 startingDeadlineSeconds 则跳过 |
+| 2 | 默认禁止并发 | 默认 concurrencyPolicy=Allow，长任务会叠加；生产应设 Forbid |
+| 3 | 时区默认是本地时间 | 默认 UTC！K8s 1.27+ 支持 timeZone 字段；之前版本需手动换算 |
+| 4 | 任务失败会自动重试 | Job 默认 backoffLimit=6，但 CronJob 不会重新触发；需配置 backoffLimit |
+| 5 | 历史 Job 自动清理 | 默认只保留 3 个成功 + 1 个失败；大量失败时会堆积，需监控 |
+| 6 | 容器退出码 0 就是成功 | 脚本缺少 set -e 可能吐掉错误；确保错误时返回非 0 退出码 |
+
+## 面试要点
+
+1. **Q: CronJob 的调度流程是怎样的？错过执行会怎样？**
+   A: ① CronJob Controller 每 10s 检查所有 CronJob；② 解析 schedule 计算上次应调度时间；③ 检查 concurrencyPolicy（Allow/Forbid/Replace）；④ 创建 Job（从 jobTemplate 生成）；⑤ 更新 LastScheduleTime。错过处理：若错过时间 > startingDeadlineSeconds，跳过本次执行（不补执行）；若 controller-manager 曾停机，重启后会检查所有错过的调度点。
+
+2. **Q: concurrencyPolicy 三种策略的区别和适用场景？**
+   A: ① Allow（默认）：允许多个 Job 并发运行；适用：无状态、幂等任务（如日志清理）。② Forbid：上一个 Job 未完成则跳过新调度；适用：数据库备份、ETL 等不能并发的任务。③ Replace：删除当前运行的 Job，创建新的；适用：实时性要求高、旧执行无价值的任务（如指标采集）。生产默认用 Forbid 最安全。
+
+3. **Q: 如何设计一个可靠的定时任务？**
+   A: ① 幂等性：任务可重复执行无副作用（带时间戳文件名、先查后删）；② 超时控制：activeDeadlineSeconds 防止卡死；③ 重试策略：backoffLimit=2-3，避免无限重试；④ 资源限制：requests/limits 防止吃光节点；⑤ 失败告警：Prometheus 监控 kube_job_status_failed；⑥ 日志结构化：JSON 格式便于检索；⑦ 凭据安全：用 Secret 而非环境变量明文。
+
+4. **Q: CronJob 与外部调度器（Airflow/Argo Workflows）如何选择？**
+   A: K8s CronJob：简单定时任务（备份、清理、报表），无依赖关系，无需可视化。Argo Workflows：DAG 工作流（多步骤依赖、条件分支、参数传递），可视化执行历史。Airflow：复杂数据管道（数百任务依赖、回填、重试策略、丰富插件）。原则：简单任务用 CronJob；复杂编排用专业工具。
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

@@ -160,6 +160,96 @@ flowchart TD
   CTRL_DC_OR{{OR}}
   CTR
 
+## 生产案例
+
+### 案例1: PDB 阻止节点维护导致升级卡住
+
+**时间线**:
+- 22:00 计划节点滚动升级，执行 `kubectl drain node-1`
+- 22:05 drain 卡住，提示 `Cannot evict pod as it would violate the pod's disruption budget`
+- 22:10 确认根因: PDB minAvailable=3 但只有 3 个副本，无法驱逐任何 Pod
+- 22:15 临时调整 PDB 后 drain 成功
+
+**根因链**:
+```
+节点维护drain → 尝试驱逐Pod → PDB minAvailable=3
+→ 当前可用=3，驱逐后<3 → 违反PDB → 驱逐被拒绝 → drain卡住
+```
+
+**修复**:
+```bash
+# 🟢 检查 PDB 状态
+kubectl get pdb -A -o wide
+kubectl describe pdb ${PDB_NAME} -n ${NS}
+# 🟡 临时调整 PDB (维护窗口)
+kubectl patch pdb ${PDB_NAME} -n ${NS} -p '{"spec":{"minAvailable":1}}'
+# 维护完成后恢复
+kubectl patch pdb ${PDB_NAME} -n ${NS} -p '{"spec":{"minAvailable":3}}'
+```
+
+### 案例2: PDB 配置错误导致服务不可用
+
+**现象**: 滚动更新时所有 Pod 同时被终止，服务短暂不可用
+
+**根因**: 未配置 PDB，且 maxUnavailable 设置过大
+
+**修复**:
+```bash
+# 🟡 创建 PDB
+kubectl apply -f - <<EOF
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ${DEPLOY}-pdb
+  namespace: ${NS}
+spec:
+  minAvailable: "50%"
+  selector:
+    matchLabels:
+      app: ${DEPLOY}
+EOF
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: pdb-alerts
+  rules:
+  - alert: PDBBlockingEviction
+    expr: kube_poddisruptionbudget_status_disruptions_allowed == 0
+    for: 30m
+    labels:
+      severity: warning
+  - alert: PDBNotHealthy
+    expr: kube_poddisruptionbudget_status_current_healthy < kube_poddisruptionbudget_status_desired_healthy
+    for: 15m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 关键服务必配 PDB | 生产服务必须配置 PDB | P0 |
+| 副本数与 PDB 匹配 | 确保副本数 > minAvailable | P0 |
+| 维护窗口预案 | drain 前检查 PDB 状态 | P1 |
+| 使用百分比 | minAvailable: "50%" 更灵活 | P1 |
+
+## 面试要点
+
+1. **Q: PDB 的作用和限制？**
+   A: 保护自愿驱逐(节点维护/升级)时最小可用数；不影响非自愿驱逐(节点宕机/OOM)；不能阻止所有 Pod 被终止
+
+2. **Q: PDB 与 maxUnavailable 的关系？**
+   A: PDB 是集群级保护，maxUnavailable 是 Deployment 级；两者取更严格的约束；PDB 优先级更高
+
+3. **Q: drain 被 PDB 阻塞的处理？**
+   A: 检查 PDB 状态 → 确认当前可用副本数 → 临时调整 PDB → 或先扩容副本数 → drain 完成后恢复
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

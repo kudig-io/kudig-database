@@ -79,7 +79,7 @@ SchemaHero 以 Kubernetes Operator 原生运行，通过 CRD（`Database`、`Tab
 3. **微服务数据库自治**: 每个微服务团队管理自己的 Table CRD，减少 DBA 介入
 4. **灾难恢复 Schema 重建**: 通过 Git 中存储的 Table CRD 完整重建数据库 Schema
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 SchemaHero Operator
@@ -87,14 +87,145 @@ kubectl apply -f https://raw.githubusercontent.com/schemahero/schemahero/main/in
 
 # 安装 schemahero CLI
 curl -sL https://get.schemahero.io | sh
-
 # 或使用 krew
 kubectl krew install schemahero
 
 # 创建数据库连接
-schemahero databases add --name mydb --driver postgres \
-  --uri "postgresql://user:pass@host:5432/dbname"
+kubectl create secret generic mydb-credentials \
+  --from-literal=uri="postgresql://user:pass@host:5432/dbname"
 ```
+
+```yaml
+# Database CRD
+apiVersion: databases.schemahero.io/v1alpha4
+kind: Database
+metadata:
+  name: mydb
+  namespace: production
+spec:
+  connection:
+    postgres:
+      uri:
+        valueFrom:
+          secretKeyRef:
+            name: mydb-credentials
+            key: uri
+---
+# Table CRD 示例
+apiVersion: schemas.schemahero.io/v1alpha4
+kind: Table
+metadata:
+  name: users
+  namespace: production
+spec:
+  database: mydb
+  name: users
+  schema:
+    postgres:
+      columns:
+      - name: id
+        type: uuid
+        constraints:
+          primaryKey: true
+      - name: email
+        type: varchar(255)
+        constraints:
+          notNull: true
+          unique: true
+      - name: created_at
+        type: timestamptz
+        default: now()
+      - name: status
+        type: varchar(20)
+        default: "'active'"
+      indexes:
+      - columns: [email]
+        isUnique: true
+      - columns: [status, created_at]
+---
+# 启用审批流程（生产环境）
+apiVersion: databases.schemahero.io/v1alpha4
+kind: Database
+metadata:
+  name: mydb-prod
+spec:
+  connection:
+    postgres:
+      uri:
+        valueFrom:
+          secretKeyRef:
+            name: mydb-credentials
+            key: uri
+  enableShellCommand: true
+  # 启用审批：DDL 需人工确认
+  immediateDeploy: false
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看数据库和表状态
+kubectl get databases -A
+kubectl get tables -A
+kubectl describe table users -n production
+
+# 🟢 低风险：查看待执行的迁移
+kubectl krew schemahero plan --database mydb
+
+# 🟡 中风险：批准待执行的 DDL
+kubectl krew schemahero approve --database mydb
+
+# 🟡 中风险：手动触发调谐
+kubectl annotate table users -n production schemahero.io/reconcile=true --overwrite
+
+# 🔴 高风险：删除 Table CRD（可能触发 DROP TABLE）
+kubectl delete table users -n production
+
+# 🟢 低风险：查看迁移历史
+kubectl get migrations -A --sort-by=.metadata.creationTimestamp
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Table CRD 未调谐 | 数据库连接失败 | `kubectl describe database mydb` | 检查 Secret 中的连接串 |
+| DDL 执行失败 | SQL 语法不兼容 | `kubectl get migrations -o yaml` | 查看 migration 错误信息，修正 Table spec |
+| 审批流程卡住 | 无人批准 DDL | `kubectl krew schemahero plan --database mydb` | 执行 approve 或配置自动审批 |
+| 索引创建超时 | 大表加索引锁表 | `SELECT * FROM pg_stat_activity` | 使用 CONCURRENTLY 选项 |
+| Schema 漂移 | 手动修改了数据库 | `kubectl krew schemahero plan` | 审查差异，决定回滚或更新 CRD |
+
+```
+排查流程：
+├── Table 未同步？
+│   ├── kubectl describe table → 查看 Events
+│   ├── kubectl describe database → 检查连接状态
+│   └── 确认 Secret 中的 URI 正确
+├── DDL 执行失败？
+│   ├── kubectl get migrations → 查看失败记录
+│   ├── 检查 SQL 与数据库版本兼容性
+│   └── 查看 Migration Job 日志
+└── Schema 不一致？
+    ├── schemahero plan → 查看待执行变更
+    ├── 对比 Table CRD 与实际数据库
+    └── 决定更新 CRD 或回滚数据库
+```
+
+## 生产案例
+
+### 案例 1：微服务团队自助 Schema 管理
+
+- **场景**：15 个微服务团队频繁需要修改数据库 Schema，DBA 成为瓶颈
+- **排查**：每次 Schema 变更需要 DBA 审查 + 手动执行，平均等待 2 天
+- **方案**：引入 SchemaHero，每个团队管理自己的 Table CRD，开发环境自动执行，生产环境启用 Approval
+- **效果**：Schema 变更从 2 天缩短至 10 分钟，DBA 工作量减少 80%
+
+### 案例 2：GitOps 驱动的 Schema 变更审计
+
+- **场景**：金融公司要求所有数据库变更必须有完整审计跟踪
+- **排查**：手动执行 DDL 缺乏审计记录，无法追溯变更历史
+- **方案**：Table CRD 存储在 Git，通过 ArgoCD 同步，每次变更自动创建 PR 审查，Migration 记录完整审计日志
+- **效果**：通过 SOC 2 审计，所有 Schema 变更 100% 可追溯
 
 ## 对比
 

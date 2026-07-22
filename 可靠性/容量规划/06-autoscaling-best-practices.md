@@ -161,6 +161,340 @@ value: -1
 - [ ] 扩缩容震荡？→ 检查 `stabilizationWindowSeconds` 与指标抖动
 - [ ] VPA 不工作？→ 确认 `updateMode` 不是 Off，且没与 HPA 争 CPU
 
+## 监控与告警
+
+### PrometheusRule 扩缩容告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: autoscaling-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: autoscaling.rules
+      rules:
+        # HPA 达到最大副本数
+        - alert: HPAMaxedOut
+          expr: |
+            kube_horizontalpodautoscaler_status_current_replicas
+            ==
+            kube_horizontalpodautoscaler_spec_max_replicas
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "HPA {{ $labels.horizontalpodautoscaler }} 已达到最大副本数"
+
+        # HPA 无法扩容
+        - alert: HPAUnableToScale
+          expr: |
+            kube_horizontalpodautoscaler_status_condition{condition="AbleToScale", status="false"} == 1
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "HPA {{ $labels.horizontalpodautoscaler }} 无法扩容"
+
+        # Pod Pending 过多
+        - alert: TooManyPendingPods
+          expr: |
+            count(kube_pod_status_phase{phase="Pending"} == 1) > 10
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "集群中有 {{ $value }} 个 Pending Pod"
+
+        # 节点资源不足
+        - alert: NodeResourcePressure
+          expr: |
+            (sum(kube_pod_container_resource_requests{resource="cpu"}) by (node)
+            /
+            sum(kube_node_status_allocatable{resource="cpu"}) by (node)) > 0.9
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "节点 {{ $labels.node }} CPU 请求率超过 90%"
+
+        # Karpenter 节点供给失败
+        - alert: KarpenterProvisioningFailed
+          expr: |
+            rate(karpenter_provisioner_scheduling_duration_seconds_count{result="error"}[5m]) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Karpenter 节点供给失败"
+```
+
+### Grafana Dashboard 面板
+
+| 面板 | PromQL | 用途 |
+|-----|--------|------|
+| HPA 副本数趋势 | `kube_horizontalpodautoscaler_status_current_replicas` | 观察扩缩容行为 |
+| HPA 目标达成率 | `current_replicas / desired_replicas` | 判断是否卡住 |
+| Pod Pending 数量 | `kube_pod_status_phase{phase="Pending"}` | 节点资源不足信号 |
+| 节点资源利用率 | `instance:node_cpu_utilisation:rate5m` | 容量规划依据 |
+| Karpenter 节点数 | `karpenter_nodes_count` | 节点供给趋势 |
+
+## 成本优化
+
+### Spot 实例策略
+
+```yaml
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: spot-workers
+spec:
+  template:
+    spec:
+      requirements:
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot"]  # 仅使用 Spot
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: ["m6i.large", "m6i.xlarge", "c6i.large", "c6i.xlarge"]
+      taints:
+        - key: spot-instance
+          value: "true"
+          effect: PreferNoSchedule
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 30s
+  limits:
+    cpu: 500
+    memory: 2000Gi
+```
+
+### 成本监控
+
+```bash
+# 🟢 低风险：查看节点成本分布
+kubectl cost namespace --show-cpu --show-memory
+
+# 🟢 低风险：查看 Spot 节点比例
+kubectl get nodes -l karpenter.sh/capacity-type=spot --no-headers | wc -l
+kubectl get nodes --no-headers | wc -l
+
+# 🟢 低风险：查看资源利用率
+kubectl top nodes --sort-by=cpu
+kubectl top pods -A --sort-by=cpu | head -20
+```
+
+## 多集群扩缩容
+
+### 联邦 HPA 配置
+
+```yaml
+# 使用 KEDA 实现基于外部指标的扩缩容
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: api-scaledobject
+  namespace: production
+spec:
+  scaleTargetRef:
+    name: api
+  minReplicaCount: 3
+  maxReplicaCount: 100
+  triggers:
+    # 基于 Prometheus 指标
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus:9090
+        metricName: http_requests_per_second
+        query: |
+          sum(rate(http_requests_total{job="api"}[1m]))
+        threshold: "1000"
+    # 基于队列长度
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus:9090
+        metricName: queue_length
+        query: |
+          sum(job_queue_length{job="api"})
+        threshold: "100"
+```
+
+### 跨集群流量调度
+
+```yaml
+# 使用 Istio 实现跨集群流量调度
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: api-remote
+  namespace: production
+spec:
+  hosts:
+    - api.remote.cluster.local
+  location: MESH_EXTERNAL
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: api
+  namespace: production
+spec:
+  hosts:
+    - api
+  http:
+    - route:
+        - destination:
+            host: api
+            subset: local
+          weight: 80
+        - destination:
+            host: api.remote.cluster.local
+            subset: remote
+          weight: 20
+```
+
+## 故障排查详解
+
+### HPA 不工作排查流程
+
+```
+[HPA 不工作]
+    │
+    ├── [检查 HPA 状态]
+    │   kubectl describe hpa <name>
+    │       │
+    │       ├── AbleToScale=False → 检查 RBAC / maxReplicas
+    │       │
+    │       ├── ScalingActive=False → 检查指标源
+    │       │   - metrics-server 是否正常?
+    │       │   - 自定义指标适配器是否正常?
+    │       │
+    │       └── 指标获取失败 → 检查 Prometheus Adapter
+    │
+    ├── [检查指标]
+    │   kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1"
+    │       │
+    │       └── 指标不存在 → 检查 KEDA / Prometheus Adapter
+    │
+    └── [检查目标]
+        kubectl get deployment <name> -o yaml
+            │
+            └── replicas 被手动修改 → HPA 会覆盖手动修改
+```
+
+### Pod Pending 排查
+
+```bash
+# 🟢 低风险：查看 Pending Pod 原因
+kubectl get pods -A --field-selector=status.phase=Pending
+
+# 🟢 低风险：查看调度失败事件
+kubectl describe pod <pod-name> -n <namespace> | grep -A10 Events
+
+# 常见原因:
+# 1. Insufficient cpu/memory → 扩容节点或调整 requests
+# 2. node(s) didn't match node selector → 检查 nodeSelector
+# 3. node(s) had taint → 检查 tolerations
+# 4. pod has unbound PVC → 检查 PV/PVC
+```
+
+### 扩缩容震荡排查
+
+```bash
+# 🟢 低风险：查看 HPA 事件
+kubectl describe hpa <name> | grep -A20 Events
+
+# 震荡特征:
+# - 频繁 scale up/down
+# - 副本数在 min/max 之间波动
+
+# 解决方案:
+# 1. 增加 stabilizationWindowSeconds
+# 2. 调整指标阈值 (避免在阈值附近波动)
+# 3. 使用 behavior.policies 限制扩缩速度
+```
+
+## 生产配置模板
+
+### 完整 HPA 配置
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-production
+  namespace: production
+  labels:
+    app: api
+    tier: critical
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: api
+  minReplicas: 5
+  maxReplicas: 100
+  metrics:
+    # CPU 利用率
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 65
+    # 内存利用率
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 75
+    # 自定义指标: RPS
+    - type: Pods
+      pods:
+        metric:
+          name: http_requests_per_second
+        target:
+          type: AverageValue
+          averageValue: "500"
+    # 外部指标: 队列长度
+    - type: External
+      external:
+        metric:
+          name: queue_length
+          selector:
+            matchLabels:
+              queue: api-queue
+        target:
+          type: AverageValue
+          averageValue: "50"
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 30
+        - type: Pods
+          value: 10
+          periodSeconds: 30
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Percent
+          value: 10
+          periodSeconds: 60
+      selectPolicy: Min
+```
+
 ## 相关
 
 - [[可靠性/容量规划/02-hpa-vpa-cluster-autoscaler-karpenter.md|02 hpa vpa cluster autoscaler karpenter]]

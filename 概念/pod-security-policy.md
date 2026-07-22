@@ -83,6 +83,163 @@ PSA 通过命名空间标签启用，相比 PSP 的 RBAC 绑定机制更易理�
 
 安全合规相关内容参见 [[安全/98-merged-indexes/index.md|security-compliance]]。
 
+## 实践示例
+
+### PSA 命名空间配置
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    # 强制执行 restricted 级别
+    pod-security.kubernetes.io/enforce: restricted
+    # 审计 baseline 级别违规
+    pod-security.kubernetes.io/audit: baseline
+    # 警告 restricted 级别违规
+    pod-security.kubernetes.io/warn: restricted
+```
+
+### 符合 Restricted 级别的 Pod
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-app
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: app
+    image: myapp:1.0
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: ["ALL"]
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+```
+
+## 源码实现分析
+
+### PSA 准入控制器实现
+
+```go
+// k8s.io/pod-security-admission/admission/admission.go
+// PSA 是内置准入插件，拦截 Pod 创建/更新请求
+func (p *Plugin) ValidatePod(ctx context.Context, attrs admission.Attributes) error {
+    // 1. 获取 Namespace 的 PSA 标签
+    ns := p.getNamespace(attrs.GetNamespace())
+    enforceLevel := ns.Labels["pod-security.kubernetes.io/enforce"]
+    
+    // 2. 根据级别评估 Pod 安全上下文
+    switch enforceLevel {
+    case "restricted":
+        // 检查：runAsNonRoot, seccompProfile, capabilities, 特权容器
+        if !isRestricted(pod) {
+            return admission.NewForbidden(attrs,
+                fmt.Errorf("violates restricted policy: %s", violations))
+        }
+    case "baseline":
+        // 检查：特权容器、hostNetwork、hostPID、危险 capabilities
+        if !isBaseline(pod) {
+            return admission.NewForbidden(attrs, ...)
+        }
+    }
+    return nil
+}
+```
+
+### PSA 架构流程
+
+```
+┌───────────────────────────────────────────────────────────┐
+│              PSA 准入控制流程                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  kubectl apply pod.yaml                                  │
+│       │                                                  │
+│       ▼                                                  │
+│  kube-apiserver 接收请求                                │
+│       │                                                  │
+│       ▼                                                  │
+│  准入链: MutatingAdmission → ValidatingAdmission       │
+│       │                                                  │
+│       ▼                                                  │
+│  PodSecurity 准入插件                                   │
+│       │  读取 Namespace 标签:                           │
+│       │  pod-security.kubernetes.io/enforce=restricted   │
+│       ▼                                                  │
+│  评估 Pod spec:                                         │
+│    ✓ runAsNonRoot: true                                 │
+│    ✓ seccompProfile: RuntimeDefault                     │
+│    ✓ allowPrivilegeEscalation: false                    │
+│    ✓ capabilities.drop: [ALL]                           │
+│       │                                                  │
+│       ▼                                                  │
+│  通过 → 创建 Pod / 拒绝 → 返回 403 Forbidden        │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产迁移场景（🟡 修改命名空间标签）
+
+```bash
+# 第一步：audit 模式观察违规（🟢 无副作用）
+kubectl label namespace production \
+  pod-security.kubernetes.io/audit=restricted \
+  pod-security.kubernetes.io/warn=restricted
+
+# 观察 1-2 周，修复所有违规工作负载
+kubectl get events -n production --field-selector reason=PodSecurity
+
+# 第二步：确认无违规后启用 enforce（🟡 影响 Pod 创建）
+kubectl label namespace production \
+  pod-security.kubernetes.io/enforce=restricted \
+  --overwrite
+
+# 🔴 注意：enforce 后不合规 Pod 将无法创建
+# 确保所有 DaemonSet/Job/CronJob 已兼容
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| PSP 还能在 v1.25+ 使用 | PSP 已在 v1.25 彻底移除 |
+| PSA 需要额外安装 | PSA 是内置准入插件，默认启用 |
+| baseline 就是安全的 | baseline 仅防止已知高危，restricted 才最严格 |
+| 设置 enforce 就够了 | 建议同时配置 audit + warn 多层监控 |
+| PSA 能替代所有策略 | 复杂场景需 OPA/Kyverno 补充 |
+
+## 面试要点
+
+1. **PSP 为什么被废弃？**
+   - RBAC 绑定机制复杂，易配置错误
+   - 策略粒度不够灵活
+   - 与命名空间耦合不直观
+
+2. **PSA 的三个级别分别适用什么场景？**
+   - privileged: 系统组件 (kube-system)
+   - baseline: 内部应用，防止已知高危
+   - restricted: 生产环境，最严格安全
+
+3. **如何平滑迁移 PSP 到 PSA？**
+   - 先 audit 模式观察违规
+   - 修复工作负载兼容性问题
+   - 再切换 enforce 强制执行
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

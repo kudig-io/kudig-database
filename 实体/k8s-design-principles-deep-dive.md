@@ -114,6 +114,88 @@ etcd 使用 Raft 共识协议保证分布式一致性：
 - 排查问题时从 etcd 状态出发，通过 `kubectl get --raw` 检查底层状态
 - 性能调优时关注 Watch 缓存命中率和 etcd 写延迟
 
+## 运维操作
+
+```bash
+# 🟢 观察声明式 API 行为
+kubectl apply -f deployment.yaml   # 声明期望状态
+kubectl get deploy -w              # 观察控制器调谐过程
+kubectl rollout status deploy/web  # 等待最终一致
+
+# 🟢 查看控制器调谐状态
+kubectl get events -A --sort-by='.lastTimestamp' | tail -20
+kubectl get rs -l app=web          # 查看 ReplicaSet 调谐结果
+
+# 🟢 检查 Watch 机制
+kubectl get --raw /metrics | grep apiserver_watch_events_sizes
+kubectl get --raw /metrics | grep reflector_items_per_watch
+
+# 🟢 etcd 集群状态检查
+etcdctl endpoint status --write-out=table
+etcdctl endpoint health
+etcdctl alarm list
+
+# 🟡 检查 resourceVersion 和乐观锁
+kubectl get pod <name> -o jsonpath='{.metadata.resourceVersion}'
+kubectl get --raw /metrics | grep apiserver_request_total | grep 409
+
+# 🟡 etcd 压缩和碎片整理
+etcdctl compact $(etcdctl endpoint status --write-out=json | jq '.[0].Status.header.revision')
+etcdctl defrag --cluster
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 控制器不调谐 | Watch 连接断开/Informer 异常 | `kubectl logs -n kube-system -l component=kube-controller-manager` | 重启 KCM 或检查 API Server |
+| 409 Conflict 频繁 | 多控制器竞争更新同一资源 | `kubectl get --raw /metrics \| grep 409` | 检查控制器逻辑或调整更新策略 |
+| etcd Leader 频繁切换 | 磁盘延迟高/网络不稳定 | `etcdctl endpoint status` | 优化磁盘或网络 |
+| Watch 事件丢失 | resourceVersion 过旧被压缩 | 检查 API Server 日志 | 调整 etcd compaction 策略 |
+| 状态不一致 | 控制器崩溃后未重新调谐 | `kubectl get events --field-selector reason=FailedCreate` | 重启控制器或手动触发调谐 |
+
+```
+排查流程：
+├─ 调谐异常
+│  ├─ 检查控制器是否 Running
+│  ├─ 查看事件日志确认调谐是否触发
+│  └─ 检查 RBAC 权限是否足够
+├─ etcd 问题
+│  ├─ etcdctl endpoint health 检查健康
+│  ├─ 检查磁盘延迟 (fio benchmark)
+│  └─ 检查 Raft 日志复制延迟
+└─ Watch 问题
+   ├─ 检查 API Server watch cache 命中率
+   ├─ 确认 resourceVersion 未被压缩
+   └─ 检查网络连接稳定性
+```
+
+## 生产案例
+
+### 案例 1：控制器调谐风暴导致 API Server 过载
+
+- **场景**: 批量更新 5000 个 Deployment 触发大量调谐事件，API Server QPS 飙升
+- **排查**: Watch 事件队列积压，控制器并发数过高
+- **方案**: 启用 API Priority and Fairness + 调整控制器 --concurrent-deployment-syncs
+- **效果**: API Server QPS 稳定在可接受范围，调谐延迟 <5s
+
+### 案例 2：etcd 磁盘延迟导致集群不可用
+
+- **场景**: 生产集群 etcd commit latency 突增至 2s，所有写操作超时
+- **排查**: 磁盘 IOPS 被其他进程抢占，Raft 日志复制超时触发 Leader 重选
+- **方案**: etcd 专用 NVMe SSD + ionice 隔离 + 调整 heartbeat-interval
+- **效果**: commit latency 稳定 <5ms，Leader 切换归零
+
+## 检查清单
+
+- [ ] 理解声明式 API 的幂等性和自愈能力
+- [ ] Operator 开发遵循 Level Triggered 调谐模式
+- [ ] etcd 集群 3/5 节点 + SSD 磁盘
+- [ ] etcd auto-compaction 已配置
+- [ ] Watch 缓存命中率 > 90%
+- [ ] API Priority and Fairness 已启用
+- [ ] 控制器并发数已调优
+
 ---
 
 > 来源：.zread/wiki/drafts/6-she-ji-yuan-li-sheng-ming-shi-api-kong-zhi-qi-mo-shi-yu-etcd-gong-shi.md

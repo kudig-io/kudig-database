@@ -66,18 +66,205 @@ ContainerSSH 由 SSH Server 和后端执行器两部分组成。SSH Server 接�
 - **CI/CD 构建节点**：通过 SSH 提供 CI/CD 构建环境
 - **调试环境**：为开发者提供临时的容器化 Shell 环境
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-docker run -p 2222:2222 -v $(pwd)/config.yaml:/config.yaml containerssh/containerssh
-# K8s 部署
+# 🟢 Docker 快速启动
+docker run -p 2222:2222 \
+  -v $(pwd)/config.yaml:/config.yaml \
+  containerssh/containerssh
+
+# 🟢 Helm 部署到 K8s
 helm repo add containerssh https://containerssh.github.io/helm-charts/
-helm install containerssh containerssh/containerssh -n containerssh --create-namespace
+helm repo update
+helm install containerssh containerssh/containerssh \
+  -n containerssh --create-namespace \
+  --set config.backend=kubernetes \
+  --set config.audit.enable=true
+
+# 🟢 验证安装
+kubectl get pods -n containerssh
+kubectl get svc -n containerssh
+
+# 🟢 测试 SSH 连接
+ssh -p 2222 user@containerssh-host
+
+# 🟢 创建认证服务（HTTP Auth Backend）
+kubectl apply -f auth-backend.yaml
 ```
+
+### ContainerSSH 配置示例
+
+```yaml
+# config.yaml
+log:
+  level: info
+  format: ljson
+
+ssh:
+  hostkeys:
+    - /etc/containerssh/host.key
+  port: 2222
+  ciphers:
+    - chacha20-poly1305@openssh.com
+    - aes256-gcm@openssh.com
+
+authentication:
+  password:
+    enabled: true
+    passwordBackend:
+      url: http://auth-backend:8080/password
+  publicKey:
+    enabled: true
+    publicKeyBackend:
+      url: http://auth-backend:8080/pubkey
+
+backend:
+  kubernetes:
+    host: https://kubernetes.default.svc
+    cacert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearerTokenPath: /var/run/secrets/kubernetes.io/serviceaccount/token
+    namespace: containerssh-sessions
+    pod:
+      spec:
+        containers:
+          - name: shell
+            image: ubuntu:22.04
+            command: ["/bin/bash"]
+            resources:
+              limits:
+                cpu: "1"
+                memory: 512Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
+        serviceAccountName: containerssh-session
+        automountServiceAccountToken: false
+
+audit:
+  enable: true
+  format: ljson
+  storage: file
+  file:
+    directory: /var/log/containerssh/audit
+  intercept:
+    stdin:
+      enabled: true
+    stdout:
+      enabled: true
+```
+
+### RBAC 配置
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: containerssh-pod-manager
+  namespace: containerssh-sessions
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec", "pods/log"]
+    verbs: ["create", "get", "list", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: containerssh-pod-manager
+  namespace: containerssh-sessions
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: containerssh-pod-manager
+subjects:
+  - kind: ServiceAccount
+    name: containerssh
+    namespace: containerssh
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看活跃 SSH 会话
+kubectl get pods -n containerssh-sessions
+
+# 🟢 查看 ContainerSSH 日志
+kubectl logs -n containerssh -l app=containerssh --tail=100
+
+# 🟢 查看审计日志
+kubectl exec -n containerssh deploy/containerssh -- ls /var/log/containerssh/audit/
+
+# 🟡 强制断开用户会话（删除 Pod）
+kubectl delete pod -n containerssh-sessions -l containerssh.io/username=<user>
+
+# 🟡 更新容器镜像配置
+kubectl edit configmap containerssh-config -n containerssh
+kubectl rollout restart deploy/containerssh -n containerssh
+
+# 🔴 清除所有活跃会话
+kubectl delete pods -n containerssh-sessions --all
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| SSH 连接被拒绝 | 认证服务不可用 | `kubectl logs -l app=containerssh` | 检查 Auth Backend URL |
+| Pod 创建失败 | RBAC 权限不足 | `kubectl get events -n containerssh-sessions` | 检查 Role/RoleBinding |
+| 会话立即断开 | 容器镜像缺少 shell | 查看 Pod 日志 | 确保镜像包含 /bin/bash |
+| 审计日志缺失 | 存储卷未挂载 | `kubectl describe pod containerssh` | 检查 PVC/Volume 配置 |
+
+```bash
+# 排查流程
+# 1. 检查 ContainerSSH 服务状态
+kubectl get pods -n containerssh
+kubectl get svc -n containerssh
+
+# 2. 检查认证服务连通性
+kubectl exec -n containerssh deploy/containerssh -- wget -qO- http://auth-backend:8080/health
+
+# 3. 检查会话 Pod 事件
+kubectl get events -n containerssh-sessions --sort-by='.lastTimestamp' | tail -20
+
+# 4. 检查 RBAC 权限
+kubectl auth can-i create pods -n containerssh-sessions --as=system:serviceaccount:containerssh:containerssh
+```
+
+## 生产案例
+
+### 案例1：大学编程教学平台
+- **场景**：500+ 学生同时通过 SSH 登录进行 Linux 编程实验
+- **方案**：ContainerSSH + K8s 后端；每学生获得独立 Pod（Ubuntu + GCC/Python）；资源限制防止单用户耗尽集群；审计日志记录所有操作
+- **效果**：环境一致性 100%，学生无法影响其他用户，环境准备时间从 30min 降到 5s
+
+### 案例2：安全审计 Shell 访问
+- **场景**：金融企业需要为外部审计员提供受控的 SSH 访问
+- **方案**：ContainerSSH + 只读容器镜像；完整 TTY 录制；会话超时自动断开；所有操作可回放审计
+- **效果**：通过安全审计，审计员访问完全可追溯，零安全风险
 
 ## 对比替代方案
 
-相比传统 SSH（共享主机），ContainerSSH 提供容器级隔离，安全性更高。相比 Teleport（SSH 代理），ContainerSSH 不只是代理而是创建全新容器环境。
+| 维度 | ContainerSSH | Teleport | 传统 SSH | Gotty/Wetty |
+|------|-------------|----------|---------|------------|
+| 隔离级别 | 容器级 | 主机级 | 主机级 | 进程级 |
+| 审计能力 | 强(TTY录制) | 强 | 弱 | 弱 |
+| 多租户 | 原生 | 支持 | 无 | 无 |
+| 资源控制 | K8s limits | 无 | cgroup | 无 |
+| 部署复杂度 | 中 | 高 | 低 | 低 |
+
+## 检查清单
+
+- [ ] ContainerSSH 已部署且 Pod Running
+- [ ] 认证服务已配置且可达
+- [ ] RBAC 权限已正确配置（Pod 创建/删除）
+- [ ] 容器镜像包含所需工具和 shell
+- [ ] 资源限制已配置（CPU/内存）
+- [ ] 审计日志已启用且存储已配置
+- [ ] 会话超时已设置
+- [ ] 网络策略已配置（限制 Pod 出站访问）
 
 ## Related
 

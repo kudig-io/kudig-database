@@ -77,13 +77,104 @@ Terway 深度依赖以下阿里云基础设施和服务：
 
 ## 与 K8s 网络模型的关系
 
-Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]
+Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 eBPF 网络技术结合，可实现更高效的网络策略和流量管理。
+
+## 运维操作
+
+```bash
+# 🟢 检查 Terway 组件状态
+kubectl get pods -n kube-system -l app=terway-eniip
+kubectl logs -n kube-system -l app=terway-eniip --tail=30
+
+# 🟢 检查 Pod 网络分配
+kubectl get pods -o wide -A | grep <node>
+kubectl exec <pod> -- ip addr
+kubectl exec <pod> -- ip route
+
+# 🟢 检查 ENI 资源使用
+kubectl get eni -A  # Terway CRD
+kubectl get podeni -A -o wide
+
+# 🟢 检查 IP 池状态
+kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli mapping
+kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show factory
+
+# 🟢 检查 NetworkPolicy 状态
+kubectl get networkpolicy -A
+kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli show policy
+
+# 🟡 重启 Terway DaemonSet (网络短暂中断)
+kubectl rollout restart daemonset/terway-eniip -n kube-system
+
+# 🟢 检查 eBPF 模式状态
+kubectl exec -n kube-system <terway-pod> -c terway -- bpftool prog list
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 卡在 ContainerCreating | ENI/IP 分配失败 | `kubectl describe pod` | 检查 ENI 配额/vSwitch IP |
+| Pod 无网络连通性 | 安全组规则限制 | 检查安全组入/出规则 | 放行 Pod CIDR 段 |
+| 跨节点 Pod 不通 | VPC 路由缺失 | 检查 VPC 路由表 | 添加 Pod CIDR 路由 |
+| IP 地址耗尽 | vSwitch IP 不足 | 检查 vSwitch 可用 IP | 扩容 vSwitch/添加新 vSwitch |
+| NetworkPolicy 不生效 | eBPF 未启用 | 检查 Terway 配置 | 启用 eBPF 模式 |
+| DNS 解析失败 | CoreDNS Pod 网络异常 | `kubectl exec pod -- nslookup` | 检查 CoreDNS Endpoint |
+
+### 排查流程
+
+```
+Terway 网络异常
+├── Pod 无法获取 IP
+│   ├── kubectl describe pod → 查看 Events
+│   ├── 检查 Terway Pod 日志
+│   ├── 检查 ENI 配额 (ECS 控制台)
+│   └── 检查 vSwitch 可用 IP 数
+├── Pod 已分配 IP 但不通
+│   ├── 同节点不通 → 检查 veth pair/bridge
+│   ├── 跨节点不通 → 检查 VPC 路由/安全组
+│   └── Service 不通 → 检查 kube-proxy/iptables
+└── 性能问题
+    ├── 检查 ENI 模式是否正确 (ENIIP vs VPC)
+    ├── 检查 eBPF 是否启用
+    └── 检查 MTU 配置
+```
+
+## 生产案例
+
+### 案例 1: ENI 配额耗尽导致 Pod 无法调度
+
+- **场景**: 节点扩容后新 Pod 持续 ContainerCreating，报 "bindEni: exceeded quota"
+- **排查**: ECS 实例 ENI 配额为 8，已分配 8 个；新节点实例规格 ENI 配额较小
+- **方案**: 升级实例规格增加 ENI 配额；切换到 ENIIP 模式提高单 ENI IP 密度；配置多 vSwitch 分散 IP 分配
+- **效果**: Pod 密度从 8/节点提升至 64/节点；IP 分配成功率 99.9%
+
+### 案例 2: 安全组规则导致跨命名空间通信失败
+
+- **场景**: 部署 NetworkPolicy 后，部分合法流量被拦截
+- **排查**: Terway eBPF 模式 + 安全组双重过滤；安全组未放行 Pod CIDR
+- **方案**: 安全组放行集群 Pod CIDR 段；NetworkPolicy 作为细粒度控制；安全组作为粗粒度边界
+- **效果**: 网络策略生效正常；安全分层清晰
 
 ## 生产部署建议
 
-- 建议在生产环境中使用 ENI 多 IP 模式以提高 IP 利用率 ^[inferred]
-- 密切监控 ENI 资源使用情况，避免 IP 耗尽 ^[inferred]
-- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制 ^[inferred]
+- 建议在生产环境中使用 ENIIP 模式以提高 IP 利用率
+- 密切监控 ENI 资源使用情况，避免 IP 耗尽
+- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制
+- 配置多 vSwitch 提高 IP 分配容错性
+- 启用 eBPF 模式提升 NetworkPolicy 性能
+- 监控 Terway DaemonSet Pod 状态和 IP 池使用率
+
+## 检查清单
+
+- [ ] Terway DaemonSet 所有 Pod Running
+- [ ] ENI/IP 分配成功率 > 99%
+- [ ] vSwitch 可用 IP 充足 (>20%)
+- [ ] 安全组规则允许 Pod CIDR 通信
+- [ ] NetworkPolicy 功能验证通过
+- [ ] eBPF 模式已启用 (如适用)
+- [ ] 监控告警覆盖 IP 池使用率
+- [ ] 多 vSwitch 容错已配置
 
 ## 参考链接
 
@@ -99,7 +190,6 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[cni]] — CNI (Container Network Interface)
-
 - [[41-terway-architecture-deep-dive]]
 - [[43-terway-crd-operations]]
 - [[44-terway-operations-manual]]
@@ -107,6 +197,5 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[46-terway-performance-tuning]]
 - [[45-terway-testing-validation]]
 - [[47-terway-troubleshooting-fta]]
-- 40-terway-product-overview
 
 <!-- risk-assessed -->

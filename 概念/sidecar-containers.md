@@ -154,6 +154,126 @@ kubectl delete pod webapp-xxx && kubectl get pod webapp-xxx -w
 - **Mesh 性能开销**：每个 hop 多一层 Envoy，P99 延迟可能增加，关键路径评估 eBPF 模式（Cilium Service Mesh）。
 - **日志卷打满节点**：emptyDir 默认无限制，应用疯狂写日志时占满节点 ephemeral storage。
 
+## 源码实现分析
+
+### K8s 1.29+ Sidecar Init Container 实现
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_manager.go
+// 1.29+ sidecar 通过 init container + restartPolicy=Always 实现
+func (m *kubeGenericRuntimeManager) computePodActions(ctx context.Context, pod *v1.Pod) {
+    // 1. 先启动所有 init containers（包括 sidecar init）
+    for _, initContainer := range pod.Spec.InitContainers {
+        if initContainer.RestartPolicy != nil && *initContainer.RestartPolicy == v1.ContainerRestartPolicyAlways {
+            // Sidecar init: 启动后不等待其退出，继续下一个
+            m.startContainer(ctx, initContainer)  // 异步启动
+            // 等待其 startup probe 通过，然后继续
+            m.waitForStartupProbe(initContainer)
+        } else {
+            // 普通 init: 等待其退出
+            m.startContainerAndWait(ctx, initContainer)
+        }
+    }
+    // 2. 启动主容器
+    m.startContainer(ctx, mainContainer)
+}
+
+// 优雅停止：主容器先停，sidecar 最后停
+func (m *kubeGenericRuntimeManager) killPod(ctx context.Context, pod *v1.Pod) {
+    // 1. 先停止主容器
+    m.killContainer(mainContainer)
+    // 2. 再停止 sidecar init containers（反序）
+    for _, sidecar := range sidecarInits {
+        m.killContainer(sidecar)
+    }
+}
+```
+
+### Sidecar 生命周期对比
+
+```
+┌───────────────────────────────────────────────────────────┐
+│        Sidecar 生命周期：旧模式 vs 1.29+             │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  旧模式 (普通容器):                                      │
+│  ────────────────────                                    │
+│  Pod Start → [sidecar + app 并行启动] ← 竞态!        │
+│  Pod Stop  → [app 停止, sidecar 仍活] ← 卡住!        │
+│                                                           │
+│  1.29+ (sidecar init):                                   │
+│  ────────────────────                                    │
+│  Pod Start → sidecar init 先启动并就绪 → app 启动    │
+│  Pod Stop  → app 先停止 → sidecar 最后停止          │
+│                                                           │
+│  关键配置:                                               │
+│  spec.initContainers:                                    │
+│  - name: envoy-sidecar                                   │
+│    restartPolicy: Always  ← 关键！使其成为 sidecar   │
+│    image: envoy:v1.28                                    │
+│    startupProbe:          ← 就绪后才启动主容器     │
+│      httpGet: {path: /ready, port: 15021}               │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产配置示例（🟡 部署到集群）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-sidecar
+spec:
+  initContainers:
+  - name: log-collector
+    image: fluent-bit:3.0
+    restartPolicy: Always  # 1.29+ sidecar 标识
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+    volumeMounts:
+    - name: logs
+      mountPath: /var/log/app
+    startupProbe:
+      exec:
+        command: ["pgrep", "fluent-bit"]
+      periodSeconds: 2
+      failureThreshold: 5
+  containers:
+  - name: app
+    image: my-app:1.0
+    volumeMounts:
+    - name: logs
+      mountPath: /var/log/app
+  volumes:
+  - name: logs
+    emptyDir:
+      sizeLimit: 1Gi  # 防止打满节点
+```
+
+## 面试要点
+
+1. **K8s 1.29 sidecar init 解决了什么问题？**
+   - 启动顺序：sidecar 先就绪，主应用再启动
+   - 优雅停止：主应用先停，sidecar 最后停
+   - 关键：`restartPolicy: Always` 在 initContainers 中
+
+2. **sidecar 模式 vs 1.29 sidecar init 的区别？**
+   - 旧模式：普通容器，并行启动，停止顺序不可控
+   - 新模式：init container + restartPolicy=Always
+   - 兼容性：1.29+ 才支持，老集群仍用旧模式
+
+3. **生产环境 sidecar 资源管理要点？**
+   - 必须设 limits（CPU + 内存）
+   - 多 sidecar 累加资源可观（Envoy ~100m/128Mi）
+   - emptyDir 设 sizeLimit 防止打满节点
+
+4. **Service Mesh sidecar 的性能影响？**
+   - 每 hop 增加 ~1-3ms P99 延迟
+   - 替代方案：eBPF (Cilium)、Ambient Mesh (无 sidecar)
+   - 评估：关键路径是否可接受额外延迟
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

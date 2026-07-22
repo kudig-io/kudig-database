@@ -158,6 +158,83 @@ flowchart TD
   AUTH_API_OR --> AUTH_API1[准入控制器未启用]
   AUTH_API_OR --> AUTH_API2[PodSecurity 准入控制器配置错误]
 
+## 生产案例
+
+### 案例1: PodSecurity 策略阻止 Pod 创建
+
+**时间线**:
+- 16:00 命名空间应用 `restricted` PodSecurity 标签
+- 16:02 多个 Pod 创建失败: `violates PodSecurity "restricted": allowPrivilegeEscalation != false`
+- 16:05 确认根因: 业务容器未设置 securityContext，不符合 restricted 策略
+- 16:15 修复 securityContext 后 Pod 正常创建
+
+**根因链**:
+```
+命名空间应用restricted策略 → Pod未设置securityContext
+→ 违反allowPrivilegeEscalation=false → 准入拒绝 → Pod创建失败
+```
+
+**修复**:
+```bash
+# 🟢 检查命名空间 PodSecurity 标签
+kubectl get ns ${NS} -o jsonpath='{.metadata.labels}' | grep pod-security
+# 🟡 修复 Pod securityContext
+# spec.containers[].securityContext:
+#   allowPrivilegeEscalation: false
+#   runAsNonRoot: true
+#   seccompProfile: {type: RuntimeDefault}
+#   capabilities: {drop: ["ALL"]}
+```
+
+### 案例2: SCC 权限不足导致 OpenShift Pod 失败
+
+**现象**: Pod 创建失败 `Error creating: pods "xxx" is forbidden: unable to validate against any security context constraint`
+
+**根因**: ServiceAccount 未绑定到合适的 SCC
+
+**修复**:
+```bash
+# 🟢 检查可用 SCC
+oc get scc -o wide
+# 🟡 绑定 SCC 到 ServiceAccount
+oc adm policy add-scc-to-user restricted -z ${SA_NAME} -n ${NS}
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: podsecurity-alerts
+  rules:
+  - alert: PodSecurityViolation
+    expr: increase(pod_security_evaluations_total{decision="deny"}[5m]) > 10
+    for: 5m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 渐进式应用 | 先 audit 再 warn 最后 enforce | P0 |
+| CI 验证 | 提交前 kube-linter 检查 securityContext | P0 |
+| 豁免机制 | 特殊工作负载用豁免标签 | P1 |
+| 培训 | 开发团队了解 restricted 要求 | P1 |
+
+## 面试要点
+
+1. **Q: PSP 到 PodSecurity Admission 的迁移？**
+   A: PSP 在 1.25 移除 → 用命名空间级 PodSecurity 标签替代 → 三个级别: privileged/baseline/restricted → 三个模式: enforce/audit/warn
+
+2. **Q: restricted 策略的核心要求？**
+   A: runAsNonRoot=true → allowPrivilegeEscalation=false → seccompProfile=RuntimeDefault → capabilities drop ALL → 禁止 hostNamespace/hostPort
+
+3. **Q: Pod 被 PodSecurity 拒绝的排查？**
+   A: 查看拒绝消息中的具体规则 → 检查命名空间标签 → 修复 securityContext → 或调整策略级别 → 或添加豁免
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

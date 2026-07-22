@@ -67,16 +67,201 @@ Tinkerbell 本身运行在 Kubernetes 上，所有组件以 Deployment/DaemonSet
 - **私有云建设**：替代传统裸机管理工具（如 Foreman/MaaS）
 - **OS 批量部署**：大规模数据中心的操作系统自动化安装
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 添加 Helm 仓库
 helm repo add tinkerbell https://tinkerbell.github.io/helm
-helm install tinkerbell tinkerbell/tinkerbell-stack -n tinkerbell --create-namespace
+helm repo update
+
+# 🟢 安装 Tinkerbell Stack
+helm install tinkerbell tinkerbell/tinkerbell-stack \
+  -n tinkerbell --create-namespace \
+  --set boots.enabled=true \
+  --set hegel.enabled=true \
+  --set tink.controller.enabled=true \
+  --set tink.worker.enabled=true
+
+# 🟢 验证安装
+kubectl get pods -n tinkerbell
+kubectl get crd | grep tinkerbell.org
+
+# 🟢 配置 DHCP 服务（Boots）
+kubectl edit configmap boots-config -n tinkerbell
+
+# 🟢 查看可用硬件
+kubectl get hardware -A
 ```
+
+### Hardware + Workflow CRD 示例
+
+```yaml
+apiVersion: tinkerbell.org/v1alpha1
+kind: Hardware
+metadata:
+  name: server-01
+  namespace: tinkerbell
+spec:
+  bmc:
+    address: 192.168.1.101
+    username: admin
+    passwordRef:
+      name: server-01-bmc-creds
+  interfaces:
+    - netboot:
+        allowPXE: true
+        allowWorkflow: true
+      dhcp:
+        mac: "aa:bb:cc:dd:ee:01"
+        ip:
+          address: 192.168.1.51
+          netmask: 255.255.255.0
+          gateway: 192.168.1.1
+        hostname: server-01
+      metadata:
+        instance:
+          operating_system:
+            distro: ubuntu
+            version: "22.04"
+---
+apiVersion: tinkerbell.org/v1alpha1
+kind: Template
+metadata:
+  name: ubuntu-2204-install
+  namespace: tinkerbell
+spec:
+  data: |
+    version: "0.1"
+    name: ubuntu-install
+    global_timeout: 1800
+    tasks:
+      - name: "os-install"
+        worker: "{{.device_1}}"
+        volumes:
+          - /dev:/dev
+          - /dev/console:/dev/console
+          - /lib/firmware:/lib/firmware:ro
+        actions:
+          - name: "stream-ubuntu-image"
+            image: quay.io/tinkerbell-actions/image2disk:v1.0.0
+            timeout: 600
+            environment:
+              DEST_DISK: /dev/sda
+              IMG_URL: "http://images.internal/ubuntu-22.04.raw.gz"
+              COMPRESSED: true
+          - name: "install-grub"
+            image: quay.io/tinkerbell-actions/writefile:v1.0.0
+            timeout: 90
+            environment:
+              DEST_DISK: /dev/sda
+              FS_TYPE: ext4
+              DEST_PATH: /boot/grub/grub.cfg
+              CONTENTS: |
+                set default=0
+                set timeout=5
+                menuentry 'Ubuntu' {
+                  linux /boot/vmlinuz root=/dev/sda1 ro
+                  initrd /boot/initrd.img
+                }
+---
+apiVersion: tinkerbell.org/v1alpha1
+kind: Workflow
+metadata:
+  name: provision-server-01
+  namespace: tinkerbell
+spec:
+  templateRef: ubuntu-2204-install
+  hardwareRef: server-01
+  hardwareMap:
+    device_1: aa:bb:cc:dd:ee:01
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看硬件清单
+kubectl get hardware -A -o wide
+
+# 🟢 查看工作流状态
+kubectl get workflow -A
+kubectl describe workflow provision-server-01 -n tinkerbell
+
+# 🟢 查看模板列表
+kubectl get template -A
+
+# 🟡 重新触发工作流（重启服务器 PXE）
+kubectl patch hardware server-01 -n tinkerbell --type=merge -p \
+  '{"spec":{"interfaces":[{"netboot":{"allowPXE":true,"allowWorkflow":true}}]}}'
+
+# 🟡 取消运行中的工作流
+kubectl delete workflow provision-server-01 -n tinkerbell
+
+# 🔴 清除硬件注册（服务器将无法 PXE 启动）
+kubectl delete hardware server-01 -n tinkerbell
+
+# 🟢 查看 Boots DHCP 日志
+kubectl logs -n tinkerbell -l app=boots --tail=50
+
+# 🟢 查看 Hegel metadata 服务
+kubectl logs -n tinkerbell -l app=hegel --tail=50
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| 服务器未 PXE 启动 | DHCP/Boots 配置错误 | `kubectl logs -l app=boots` | 检查 DHCP 范围和 MAC 匹配 |
+| Workflow 卡在 Action | 镜像下载失败 | `kubectl describe workflow <name>` | 检查 IMG_URL 可达性 |
+| Hardware 状态 Unknown | BMC 连接失败 | 检查 BMC 地址和凭据 | 验证 IPMI 连通性 |
+| 磁盘写入失败 | 磁盘路径错误 | 查看 Action 日志 | 确认 DEST_DISK 路径 |
+
+```bash
+# 排查流程
+# 1. 检查 DHCP 服务是否正常
+kubectl logs -n tinkerbell -l app=boots --tail=100 | grep -i dhcp
+
+# 2. 检查 iPXE 引导链
+kubectl logs -n tinkerbell -l app=boots --tail=100 | grep -i ipxe
+
+# 3. 检查 Workflow Action 状态
+kubectl get workflow provision-server-01 -n tinkerbell -o jsonpath='{.status}' | jq .
+
+# 4. 检查 Hegel metadata 响应
+kubectl exec -n tinkerbell deploy/hegel -- curl -s http://localhost:50061/healthcheck
+```
+
+## 生产案例
+
+### 案例1：裸机 K8s 集群自动化部署
+- **场景**：私有云数据中心需要批量部署 50 台物理服务器作为 K8s 节点
+- **方案**：使用 Tinkerbell + Cluster API (CAPMVM)；定义标准化 Ubuntu 22.04 + kubeadm 工作流；通过 Hardware CRD 批量注册服务器 BMC 信息
+- **效果**：50 台服务器从零到 K8s Ready 仅需 2小时，替代原来 2天 的手工安装
+
+### 案例2：边缘数据中心远程配置
+- **场景**：运营商 100+ 边缘机房需要远程重装服务器 OS
+- **方案**：Tinkerbell 部署在中心集群；通过 BMC IPMI 远程触发 PXE 重启；自定义 Workflow 包含 OS 安装 + 网络配置 + 监控 Agent
+- **效果**：无需现场工程师，远程完成 OS 重装，单次操作从 4小时 缩短到 30分钟
 
 ## 对比替代方案
 
-相比 MAAS（Canonical 的裸机管理工具），Tinkerbell 是 K8s 原生的且更轻量。相比 Foreman，Tinkerbell 专注于自动化工作流而非完整的 IT 资产管理。
+| 维度 | Tinkerbell | MAAS | Foreman | Metal³ |
+|------|-----------|------|---------|--------|
+| K8s 原生 | 是 | 否 | 否 | 是 |
+| 工作流引擎 | 强 | 中 | 中 | 弱 |
+| 社区 | CNCF | Canonical | Red Hat | CNCF |
+| 学习曲线 | 中 | 低 | 高 | 中 |
+| 资产管理 | 弱 | 强 | 强 | 弱 |
+| 边缘场景 | 强 | 中 | 中 | 强 |
+
+## 检查清单
+
+- [ ] Tinkerbell Stack 已部署且所有 Pod Running
+- [ ] DHCP/TFTP 服务已正确配置（Boots）
+- [ ] BMC 凭据已创建为 K8s Secret
+- [ ] Hardware CRD 已正确注册服务器信息
+- [ ] Workflow Template 已在测试服务器验证
+- [ ] OS 镜像 URL 可访问
+- [ ] 网络规划已完成（PXE 网络与业务网络隔离）
 
 ## Related
 

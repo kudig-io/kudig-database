@@ -217,6 +217,102 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli mapping
 kubectl logs -n kube-system -l app=terway-eniip --tail=100
 ```
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| Pod 无法获取 IP | ENI 配额耗尽 | `kubectl get podeni -A` | 提工单扩容或释放闲置 ENI |
+| Pod 启动超时 | vSwitch IP 不足 | `kubectl describe pod <pod>` | 扩大 vSwitch CIDR 或添加新 vSwitch |
+| 网络不通 | 安全组规则缺失 | `kubectl get podeni <pod> -o yaml` | 检查安全组入站/出站规则 |
+| Terway Pod CrashLoop | 配置错误/权限不足 | `kubectl logs -n kube-system -l app=terway-eniip` | 检查 eni-config 和 RAM 角色 |
+| 固定 IP 失效 | Pod 重建后 IP 变化 | `kubectl get podnetworking -A` | 配置 `k8s.aliyun.com/pod-with-eip: "true"` |
+| 跨节点通信失败 | VPC 路由表异常 | `ip route show` | 检查 VPC 路由条目 |
+
+## 监控告警
+
+### PrometheusRule 配置
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: terway-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: terway.rules
+    rules:
+    - alert: TerwayENIPoolLow
+      expr: terway_eni_ip_pool_available < 5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "ENI IP 池可用数量不足"
+        description: "节点 {{ $labels.node }} 可用 IP 少于 5 个"
+    - alert: TerwayENIQuotaExhausted
+      expr: terway_eni_quota_remaining == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "ENI 配额已耗尽"
+    - alert: TerwayPodNotReady
+      expr: kube_pod_status_ready{condition="false"} * on(pod) group_left() kube_pod_labels{label_app="terway-eniip"} == 1
+      for: 10m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Terway Pod 未就绪"
+```
+
+### 关键指标
+
+```bash
+# 🟢 低风险：查看 Terway 指标端点
+kubectl exec -n kube-system <terway-pod> -- curl -s http://localhost:19090/metrics
+
+# 关键指标说明：
+# terway_eni_ip_pool_available - IP 池可用数量
+# terway_eni_ip_pool_total - IP 池总容量
+# terway_eni_quota_remaining - ENI 配额剩余
+# terway_ipam_request_duration_seconds - IPAM 请求延迟
+```
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **vSwitch 规划** | 使用 /20 或更大 CIDR | 避免 IP 耗尽 |
+| **多可用区** | 配置多个 vSwitch | 提高可用性 |
+| **IP 池大小** | min_pool_size=1, max_pool_size=5 | 平衡预热与资源占用 |
+| **安全组** | 最小权限原则 | 仅开放必要端口 |
+| **固定 IP** | 数据库/有状态服务启用 | 避免 IP 变化影响连接 |
+| **监控** | 部署 Prometheus + 告警 | 实时掌握 ENI 使用情况 |
+| **升级** | 滚动升级，先测试环境 | 避免全集群故障 |
+| **备份** | 定期备份 eni-config | 便于灾难恢复 |
+
+## 容量规划计算
+
+```
+# 单节点最大 Pod 数计算
+
+ENI 独占模式:
+  Max Pods = ENI 配额 - 1 (主 ENI 保留)
+  示例: 8 ENI 配额 → 7 Pods/节点
+
+ENIIP 模式:
+  Max Pods = (ENI 配额 - 1) × 每 ENI 辅助 IP 数
+  示例: 8 ENI × 20 IP = 140 Pods/节点
+
+IPVlan 模式:
+  Max Pods = ENIIP 模式 × 1.5 (性能优化)
+  示例: 140 × 1.5 = 210 Pods/节点
+
+# 集群总容量
+Cluster Capacity = 节点数 × Pods/节点 × 0.8 (预留 20% 缓冲)
+```
+
 ## 参考链接
 
 Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod 直接接入 VPC 网络，提供与 [[cilium|Cilium]] 类似的高性能网络方案。与 networking.md|eBPF 网络]] 技术结合，可实现更高效的网络策略和流量管理。^[inferred]

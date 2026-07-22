@@ -79,7 +79,7 @@ OpenCost 作为 Deployment 部署在 Kubernetes 集群中。通过 Kubernetes AP
 3. **Spot 实例策略**：分析 Spot/按需实例的成本效益，优化实例类型组合
 4. **FinOps 报告**：向管理层定期报告 Kubernetes 基础设施成本趋势
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 OpenCost（依赖 Prometheus）
@@ -97,14 +97,78 @@ kubectl port-forward svc/opencost 9003 -n opencost
 curl http://localhost:9003/allocation/compute?window=1d&aggregate=namespace
 ```
 
+## 运维操作
+
+```bash
+# 🟢 查看 OpenCost 状态
+kubectl get pods -n opencost
+kubectl logs -n opencost -l app=opencost --tail=50
+
+# 🟢 查询成本分配（按命名空间）
+curl "http://opencost:9003/allocation/compute?window=7d&aggregate=namespace"
+
+# 🟢 查询成本分配（按标签）
+curl "http://opencost:9003/allocation/compute?window=7d&aggregate=label:team"
+
+# 🟢 查询闲置资源
+curl "http://opencost:9003/allocation/compute?window=7d&idle=true"
+
+# 🟢 查询资产成本
+curl "http://opencost:9003/assets?window=30d"
+
+# 🟢 Prometheus 查询成本指标
+# container_cpu_allocation_seconds{namespace="production"}
+# container_memory_allocation_bytes{namespace="production"}
+# node_gpu_hourly_cost
+
+# 🟡 配置自定义定价
+kubectl create configmap pricing-config \
+  --from-file=pricing.json -n opencost
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 成本数据为空 | Prometheus 连接失败 | 检查 OpenCost 日志 | 确认 Prometheus URL 正确 |
+| 价格显示为 0 | 云 API Key 未配置 | 检查 Secret | 配置云厂商 API Key |
+| 数据延迟大 | Prometheus 采集间隔长 | 检查 scrape interval | 调整为 1m 采集间隔 |
+| 节点成本不准确 | 定价数据过期 | 检查 pricing source | 更新云厂商定价 API |
+| GPU 成本缺失 | GPU 指标未采集 | 检查 DCGM exporter | 安装 GPU 监控组件 |
+
+## 生产案例
+
+### 案例1: 团队成本分摊与优化
+
+**场景**: 5个团队共享集群，无法确定各团队实际成本  
+**方案**: OpenCost 按 team 标签分配 + Grafana 仪表盘 + 周报  
+**效果**: 识别 30% 闲置资源，年度节省 50万+  
+
+### 案例2: Spot 实例成本优化
+
+**场景**: 全量使用按需实例，成本居高不下  
+**方案**: OpenCost 分析工作负载模式，识别可迁移到 Spot 的服务  
+**效果**: 60% 工作负载迁移到 Spot，成本降低 45%  
+
 ## 对比
 
 | 特性 | OpenCost | Kubecost | CloudZero | Vantage |
-|------|----------|----------|-----------|---------|
+|------|----------|----------|-----------|----------|
 | 开源 | ✅ Apache 2.0 | ⚠️ 部分 | ❌ | ❌ |
 | 多云 | ✅ | ✅ | ✅ | ✅ |
 | K8s 原生 | ✅ | ✅ | ⚠️ | ⚠️ |
 | 自托管 | ✅ | ✅ | ❌ | ❌ |
+| GPU 成本 | ✅ | ✅ | ⚠️ | ⚠️ |
+| 成本预测 | ⚠️ | ✅ | ✅ | ✅ |
+
+## 检查清单
+
+- [ ] 配置统一的团队/项目标签策略
+- [ ] 配置云厂商 API Key 获取准确定价
+- [ ] 配置 Grafana 成本仪表盘
+- [ ] 设置成本异常告警
+- [ ] 每周审查闲置资源报告
+- [ ] 结合成本数据优化 requests/limits
 
 ## 参考链接
 
@@ -121,10 +185,7 @@ curl http://localhost:9003/allocation/compute?window=1d&aggregate=namespace
 - [[parsec]] — Parsec
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- opencost
-- observability|CNCF 可观测性项目全景]] — Cross-reference
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
 
 
 <!-- risk-assessed -->

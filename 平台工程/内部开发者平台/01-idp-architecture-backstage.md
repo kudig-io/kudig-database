@@ -341,6 +341,15 @@ platform_metrics:
 5. **文档即产品**：TechDocs 与代码同步更新
 6. **渐进式抽象**：先标准化，再自动化，最后智能化
 
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Backstage 无法启动 | 数据库连接失败 | 检查 PostgreSQL 状态和凭据 |
+| 服务目录为空 | catalog 配置错误 | 检查 `catalog.locations` 配置 |
+| 模板执行失败 | GitHub Token 权限不足 | 检查 Token 权限范围 |
+| 插件加载失败 | 版本不兼容 | 检查插件与 Backstage 版本兼容性 |
+
 ## Related
 
 - [[平台工程/index.md|平台工程总索引]]

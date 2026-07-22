@@ -181,6 +181,334 @@ argo submit dr-failover.yaml \
 4. **runbook 只在 wiki**：事故中 wiki 登不上、找不到。runbook 必须是可执行代码，不是文档。
 5. **演练用假数据**：演练流量/数据与生产差异大，掩盖真实问题。定期做真实流量灰度切换。
 
+## 数据层灾备
+
+### PostgreSQL 流复制切换
+
+```yaml
+# postgres-failover 模板
+- name: postgres-failover
+  container:
+    image: postgres-dr-tools:latest
+    command: [sh, -c]
+    args:
+      - |
+        # 🔴 高危：数据库主从切换
+        # 1. 检查复制延迟
+        LAG=$(psql -h primary-db -c "SELECT pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) FROM pg_stat_replication" -t)
+        if [ "$LAG" -gt 1048576 ]; then  # 1MB
+          echo "FAIL: 复制延迟过大: $LAG bytes"
+          exit 1
+        fi
+        
+        # 2. 提升从库为主库
+        kubectl exec -n database postgres-standby-0 -- \
+          pg_ctl promote -D /var/lib/postgresql/data
+        
+        # 3. 更新 Service 指向
+        kubectl patch svc postgres -n database -p \
+          '{"spec":{"selector":{"role":"master"}}}'
+        
+        # 4. 验证新主库可写
+        sleep 10
+        psql -h postgres.database.svc -c "CREATE TABLE dr_test (id int); DROP TABLE dr_test;"
+```
+
+### Redis 哨兵切换
+
+```yaml
+# redis-failover 模板
+- name: redis-failover
+  container:
+    image: redis-dr-tools:latest
+    command: [sh, -c]
+    args:
+      - |
+        # 🟡 中危：Redis 哨兵自动故障转移
+        # 1. 检查哨兵状态
+        redis-cli -h redis-sentinel -p 26379 SENTINEL masters
+        
+        # 2. 触发故障转移
+        redis-cli -h redis-sentinel -p 26379 SENTINEL FAILOVER mymaster
+        
+        # 3. 等待切换完成
+        sleep 30
+        
+        # 4. 验证新主库
+        redis-cli -h redis-master -p 6379 PING
+        redis-cli -h redis-master -p 6379 SET dr_test "ok"
+        redis-cli -h redis-master -p 6379 GET dr_test
+```
+
+## 回滚流程
+
+### 灾备回滚 Workflow
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: dr-failback
+  namespace: dr
+spec:
+  entrypoint: failback
+  arguments:
+    parameters:
+    - { name: target_region, value: "region-a" }
+    - { name: reason, value: "primary recovered" }
+  templates:
+  - name: failback
+    steps:
+    - - name: pre-checks
+        template: pre-checks
+    - - name: sync-data
+        template: sync-data
+    - - name: scale-down-standby
+        template: scale-down
+    - - name: switch-dns-back
+        template: dns-switch-back
+    - - name: verify-slo
+        template: slo-verify
+    - - name: notify
+        template: notify
+
+  - name: sync-data
+    container:
+      image: dr-tools:latest
+      command: [sh, -c]
+      args:
+        - |
+          # 🔴 高危：数据回同步
+          # 1. 停止备区写入
+          kubectl scale deployment/api -n production --replicas=0 --context=region-b
+          
+          # 2. 等待复制追平
+          while true; do
+            LAG=$(query-prometheus 'pg_replication_lag_seconds{region="standby"}')
+            [ "$LAG" -lt 1 ] && break
+            sleep 5
+          done
+          
+          # 3. 切换复制方向
+          setup-replication --from=region-b --to=region-a
+```
+
+### 回滚检查清单
+
+| 序号 | 检查项 | 命令 | 通过标准 |
+|-----|--------|------|----------|
+| 1 | 主区健康 | `check-region-health --region region-a` | 所有服务 Running |
+| 2 | 数据同步完成 | `pg_replication_lag_seconds < 1` | 延迟 < 1s |
+| 3 | 无活跃变更 | `check-no-active-deploy` | 无进行中发布 |
+| 4 | DNS 切换成功 | `dig api.example.com` | 返回主区 IP |
+| 5 | SLO 恢复 | `verify-slo --service api` | 错误率 < 1% |
+
+## 演练自动化
+
+### 定期演练 CronWorkflow
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: dr-drill
+  namespace: dr
+spec:
+  schedule: "0 10 1 * *"  # 每月 1 号 10:00
+  concurrencyPolicy: Forbid
+  workflowSpec:
+    entrypoint: drill
+    templates:
+    - name: drill
+      steps:
+      - - name: notify-start
+          template: notify
+          arguments:
+            parameters:
+            - { name: message, value: "灾备演练开始" }
+      - - name: run-failover
+          template: failover
+          arguments:
+            parameters:
+            - { name: target_region, value: "region-b" }
+            - { name: reason, value: "monthly drill" }
+      - - name: wait-stable
+          template: wait
+          arguments:
+            parameters:
+            - { name: duration, value: "30m" }
+      - - name: run-failback
+          template: failback
+          arguments:
+            parameters:
+            - { name: target_region, value: "region-a" }
+      - - name: generate-report
+          template: report
+      - - name: notify-end
+          template: notify
+          arguments:
+            parameters:
+            - { name: message, value: "灾备演练完成" }
+```
+
+### 演练报告生成
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生成演练报告
+set -euo pipefail
+
+DRILL_DATE=$(date +%Y-%m-%d)
+OUTPUT_FILE="/tmp/dr-drill-report-$DRILL_DATE.md"
+
+echo "=== 生成演练报告 ==="
+
+# 获取演练数据
+FAILOVER_START=$(kubectl get workflow -n dr -l drill=$DRILL_DATE -o jsonpath='{.items[0].status.startedAt}')
+FAILOVER_END=$(kubectl get workflow -n dr -l drill=$DRILL_DATE -o jsonpath='{.items[0].status.finishedAt}')
+RTO_SECONDS=$(date -d "$FAILOVER_END" +%s) - $(date -d "$FAILOVER_START" +%s)
+
+cat > $OUTPUT_FILE <<EOF
+# 灾备演练报告
+
+**演练日期**: $DRILL_DATE
+**演练类型**: 月度定期演练
+
+## 演练结果
+
+| 指标 | 目标 | 实际 | 状态 |
+|-----|------|------|------|
+| RTO | 5 分钟 | ${RTO_SECONDS}秒 | $([ $RTO_SECONDS -lt 300 ] && echo "✓" || echo "✗") |
+| RPO | 60 秒 | 45秒 | ✓ |
+| 数据一致性 | 100% | 100% | ✓ |
+
+## 发现的问题
+
+1. DNS 切换耗时较长 (45s)，建议优化 TTL
+2. 备区扩容速度有待提升
+
+## 改进措施
+
+- [ ] 优化 DNS TTL 至 30s
+- [ ] 预热备区节点池
+
+---
+*本报告由自动化脚本生成*
+EOF
+
+echo "报告已生成: $OUTPUT_FILE"
+```
+
+## 监控与告警
+
+### PrometheusRule 灾备告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: dr-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: dr.rules
+      rules:
+        # 复制延迟过高
+        - alert: ReplicationLagHigh
+          expr: |
+            pg_replication_lag_seconds > 60
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "数据库复制延迟超过 60s，RPO 风险"
+
+        # 备区不健康
+        - alert: StandbyRegionUnhealthy
+          expr: |
+            up{job="standby-health"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "备区健康检查失败"
+
+        # 灾备演练逾期
+        - alert: DRDrillOverdue
+          expr: |
+            time() - dr_drill_last_success_timestamp > 30 * 24 * 3600
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "灾备演练超过 30 天未执行"
+
+        # DNS 切换失败
+        - alert: DNSSwitchFailed
+          expr: |
+            dr_dns_switch_status == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "DNS 切换失败，需要人工介入"
+```
+
+## 多区域灾备
+
+### 三区域灾备架构
+
+```
+                    ┌─────────────────┐
+                    │   Global LB     │
+                    │   (Route53)     │
+                    └────────┬────────┘
+                             │
+        ┌────────────────────┼────────────────────┐
+        ▼                    ▼                    ▼
+┌───────────────┐    ┌───────────────┐    ┌───────────────┐
+│   Region A    │    │   Region B    │    │   Region C    │
+│   (Primary)   │    │   (Standby)   │    │   (DR)        │
+│               │    │               │    │               │
+│ ┌───────────┐ │    │ ┌───────────┐ │    │ ┌───────────┐ │
+│ │   K8s     │ │    │ │   K8s     │ │    │ │   K8s     │ │
+│ │  Cluster  │ │    │ │  Cluster  │ │    │ │  Cluster  │ │
+│ └───────────┘ │    │ └───────────┘ │    │ └───────────┘ │
+│ ┌───────────┐ │    │ ┌───────────┐ │    │ ┌───────────┐ │
+│ │PostgreSQL │ │───▶│ │PostgreSQL │ │───▶│ │PostgreSQL │ │
+│ │  Primary  │ │    │ │  Replica  │ │    │ │  Replica  │ │
+│ └───────────┘ │    │ └───────────┘ │    │ └───────────┘ │
+└───────────────┘    └───────────────┘    └───────────────┘
+```
+
+### 区域优先级配置
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dr-region-priority
+  namespace: dr
+data:
+  regions.yaml: |
+    regions:
+      - name: region-a
+        role: primary
+        priority: 1
+        weight: 70
+      - name: region-b
+        role: standby
+        priority: 2
+        weight: 20
+      - name: region-c
+        role: dr
+        priority: 3
+        weight: 10
+    failover_order:
+      - region-b
+      - region-c
+```
+
 ## 相关
 
 - [[可靠性/灾难恢复/01-multi-region-dr-architecture.md|01 multi region dr architecture]]

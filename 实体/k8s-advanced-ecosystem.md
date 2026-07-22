@@ -110,6 +110,78 @@ Platform Engineering 是 K8s 生态的最新演进方向：
 - **GitOps**：ArgoCD/FluxCD 声明式持续交付
 - **FinOps**：OpenCost/Kubecost 成本可视化和优化
 
+## 运维操作
+
+```bash
+# 🟢 硬件故障排查
+# CPU 温度和状态
+sensors
+lscpu
+cat /sys/class/thermal/thermal_zone*/temp
+
+# 内存 ECC 错误
+edac-util -v
+mcelog --client
+dmesg | grep -i "hardware error"
+
+# 磁盘 SMART 状态
+smartctl -a /dev/sda
+smartctl -H /dev/nvme0n1
+iostat -xz 1 5
+
+# 网卡错误统计
+ethtool -S eth0 | grep -i error
+ethtool -S eth0 | grep -i drop
+
+# 🟢 eBPF 工具
+# 网络追踪
+bpftrace -e 'tracepoint:syscalls:sys_enter_connect { printf("%s -> %s\n", comm, str(args->uservaddr)); }'
+
+# Cilium 状态
+cilium status
+cilium endpoint list
+hubble observe --last 100
+
+# 🟢 边缘节点状态
+kubectl get nodes -l node-role.kubernetes.io/edge
+kubectl get nodepool -A  # OpenYurt
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 节点随机重启 | 内存 ECC 错误 | `mcelog --client` | 更换故障 DIMM |
+| I/O 延迟突增 | 磁盘坏道 | `smartctl -a /dev/sda` | 迁移 Pod、更换磁盘 |
+| 网络丢包 | 网卡 CRC 错误 | `ethtool -S eth0` | 更换网线/网卡 |
+| CPU 降频 | 过热保护 | `sensors` | 检查散热/机房温度 |
+| eBPF 程序加载失败 | 内核版本不兼容 | `uname -r` | 升级内核到 5.10+ |
+| 边缘节点失联 | 网络中断 | 检查边缘自治状态 | 确认离线自治配置 |
+
+## 生产案例
+
+### 案例1: 内存 ECC 错误导致 Pod 随机崩溃
+
+**场景**: 某节点上多个 Pod 随机 OOMKilled 和 CrashLoop  
+**排查**: `mcelog` 显示大量 corrected ECC 错误，`edac-util` 定位到 DIMM A1  
+**方案**: 迁移 Pod 到健康节点，更换故障 DIMM  
+**效果**: 消除随机崩溃，建立硬件健康监控告警  
+
+### 案例2: eBPF 替代 iptables 提升网络性能
+
+**场景**: 5000+ Service 的集群，iptables 规则同步延迟导致服务发现慢  
+**方案**: 迁移到 Cilium eBPF 数据平面，禁用 kube-proxy  
+**效果**: 服务发现延迟从 5s 降到 < 100ms，CPU 使用降低 30%  
+
+## 检查清单
+
+- [ ] 节点配置硬件健康监控（SMART/ECC/温度）
+- [ ] 建立硬件故障自动迁移 Pod 机制
+- [ ] eBPF 工具链纳入运维工具箱
+- [ ] 边缘场景配置离线自治
+- [ ] 定期审查 CNCF 生态新项目
+- [ ] 平台工程路线图规划（IDP/GitOps/FinOps）
+
 ---
 
 > 来源：.zread/wiki/drafts/25-*.md, .zread/wiki/drafts/26-*.md, .zread/wiki/drafts/27-*.md
@@ -121,8 +193,8 @@ Platform Engineering 是 K8s 生态的最新演进方向：
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[argo]] — Argo Workflows
-
-- [[helm]]
-- digest-2026-05-21-full
+- [[helm]] — Helm
+- [[cilium]] — Cilium
+- [[实体/kubeedge.md|KubeEdge]] — 边缘计算
 
 <!-- risk-assessed -->

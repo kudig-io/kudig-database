@@ -85,40 +85,142 @@ Kube-burner 作为标准 Kubernetes 客户端工具运行，通过 kubeconfig �
 3. **SLO 验证**：验证 Pod 创建延迟是否满足 P99 < 5s 的 SLO
 4. **CNI/CSI 性能对比**：不同网络/存储插件的性能基准测试
 
-## 安装
+## 安装与配置
+
+### CLI 安装
 
 ```bash
 # 安装 Kube-burner CLI
 wget https://github.com/cloud-bulldozer/kube-burner/releases/latest/download/kube-burner-$(uname)-x86_64.tar.gz
 tar xzf kube-burner-*.tar.gz && sudo mv kube-burner /usr/local/bin/
 
-# 运行节点密度测试（每节点创建 250 个 Pod）
+# 验证安装
+kube-burner version
+```
+
+### 内置工作负载测试
+
+```bash
+# 节点密度测试（每节点创建 250 个 Pod）
 kube-burner init --metrics-endpoint=http://prometheus:9090 \
   --es-endpoint=https://elasticsearch:9200 \
   --workload=node-density \
   --pods-per-node=250
 
-# 自定义工作负载
-cat > my-workload.yml <<EOF
-name: stress-test
-iterations: 10
-namespacedIterations: true
-templates:
-  - file: deployment-template.yml
-    inputVars:
-      replicas: 50
-EOF
-kube-burner init --workload=my-workload.yml
+# 集群密度测试
+kube-burner init --workload=cluster-density \
+  --namespaces=10 \
+  --iterations=100
+
+# API 压力测试
+kube-burner init --workload=api-intensive \
+  --qps=20 --burst=20
 ```
+
+### 自定义工作负载
+
+```yaml
+# my-workload.yml
+name: stress-test
+global:
+  gc: true
+  gcMetrics: true
+  measurements:
+    - name: podLatency
+      esIndex: kube-burner
+jobs:
+  - name: create-deployments
+    jobType: create
+    jobIterations: 10
+    qps: 5
+    burst: 10
+    namespacedIterations: true
+    namespace: stress-test
+    objects:
+      - objectTemplate: deployment-template.yml
+        replicas: 50
+        inputVars:
+          cpuRequest: 100m
+          memRequest: 128Mi
+  - name: delete-all
+    jobType: delete
+    objects:
+      - kind: Namespace
+        labelSelector: {kube-burner-job: create-deployments}
+```
+
+```bash
+# 执行自定义工作负载
+kube-burner init --workload=my-workload.yml \
+  --metrics-endpoint=http://prometheus:9090
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看测试结果指标
+kube-burner init --workload=node-density --dry-run
+
+# 🟡 执行压力测试（会创建大量资源）
+kube-burner init --workload=node-density --pods-per-node=100
+
+# 🟡 指定 Prometheus 指标采集
+kube-burner init --workload=cluster-density \
+  --metrics-endpoint=http://prometheus:9090 \
+  --metrics-profile=metrics-aggregated.yml
+
+# 🔴 清理测试资源（gc: true 自动清理）
+kube-burner destroy --workload=my-workload.yml
+
+# 🔴 删除测试创建的命名空间
+kubectl delete ns -l kube-burner-uuid=<uuid>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 测试超时 | 集群资源不足 | `kubectl get events --sort-by=.lastTimestamp` | 降低 iterations 或增加节点 |
+| Pod 大量 Pending | 节点资源耗尽 | `kubectl describe node \| grep -A5 Allocated` | 减少 pods-per-node |
+| Prometheus 指标丢失 | 指标端点不可达 | `curl http://prometheus:9090/-/healthy` | 检查 Prometheus 服务和网络 |
+| etcd 延迟飙升 | API 请求过多 | `etcdctl endpoint status` | 降低 QPS/Burst 参数 |
+| 测试结果不准确 | 节点负载不均 | `kubectl top nodes` | 使用 nodeSelector 固定测试节点 |
+
+**排查流程：**
+```
+压力测试异常
+├── 检查集群健康 → kubectl get nodes && kubectl get cs
+├── 检查资源余量 → kubectl top nodes
+├── 检查 API Server 延迟 → kubectl get --raw /healthz?verbose
+├── 检查 etcd 状态 → etcdctl endpoint health
+└── 检查测试配置 → 确认 QPS/Burst/iterations 合理
+```
+
+## 生产案例
+
+### 案例一：集群容量规划
+
+- **场景**: 新集群上线前需验证能承载 5000 个 Pod 的目标容量
+- **排查**: 使用 kube-burner node-density 逐步增加每节点 Pod 数，观察调度延迟和 API 响应
+- **方案**: 从 100 Pod/节点开始，每次增加 50，记录 P99 调度延迟，找到拐点
+- **效果**: 确定最优密度为 250 Pod/节点，超过后 P99 延迟超过 SLO（5s）
+
+### 案例二：K8s 版本升级基准对比
+
+- **场景**: 从 K8s 1.28 升级到 1.30，需验证性能无回退
+- **排查**: 升级前后分别运行相同 kube-burner 工作负载，对比指标
+- **方案**: 使用 cluster-density 工作负载，对比 Pod 创建 P50/P95/P99 延迟、API 吐吐量
+- **效果**: 确认 1.30 调度性能提升 12%，无回退，安全升级
 
 ## 对比
 
-| 特性 | Kube-burner | k6 | Kwok |kind |
-|------|------------|-----|------|------|
-| K8s 对象压力 | ✅ | ⚠️ | ✅ | ❌ |
-| 指标采集 | ✅ Prometheus | ✅ | ❌ | ❌ |
-| 模拟节点 | ❌ | ❌ | ✅ | ❌ |
-| 结果存储 | ✅ ES | ✅ | ❌ | ❌ |
+| 特性 | Kube-burner | k6 | Kwok | kind | 适用场景 |
+|------|------------|-----|------|------|----------|
+| K8s 对象压力 | ✅ | ⚠️ | ✅ | ❌ | kube-burner 专业 |
+| 指标采集 | ✅ Prometheus | ✅ | ❌ | ❌ | - |
+| 模拟节点 | ❌ | ❌ | ✅ | ❌ | Kwok 大规模模拟 |
+| 结果存储 | ✅ ES | ✅ | ❌ | ❌ | - |
+| 自定义工作负载 | ✅ YAML | ✅ JS | ⚠️ | ❌ | - |
 
 ## 参考链接
 

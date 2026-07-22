@@ -66,19 +66,181 @@ TUF 在 Kubernetes 生态中的主要实现是 Notary / Notation，用于容器�
 - **IoT 设备更新**：保护物联网设备的 OTA 固件更新安全
 - **包管理器安全**：保护 PyPI、NPM 等包管理器的软件分发安全
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# Notation CLI（基于 TUF 规范）
+# 🟢 安装 Notation CLI（基于 TUF 规范）
 brew install notation
+# 或 Linux
+curl -Lo notation.tar.gz https://github.com/notaryproject/notation/releases/download/v1.1.0/notation_1.1.0_linux_amd64.tar.gz
+tar -xzf notation.tar.gz && mv notation /usr/local/bin/
 
-# Python TUF 参考
+# 🟢 安装 Python TUF 参考实现
 pip install tuf
+
+# 🟢 验证 Notation 安装
+notation version
+
+# 🟢 生成签名密钥
+notation cert generate-test --default "wabbit-networks.io"
+
+# 🟢 签名镜像
+notation sign registry.example.com/myapp:v1
+
+# 🟢 验证镜像签名
+notation verify registry.example.com/myapp:v1
+
+# 🟢 查看信任策略
+notation policy show
 ```
+
+### TUF 元数据结构
+
+```
+仓库元数据层次:
+┌─────────────────────────────────────────────────────┐
+│  root.json (根角色 - 管理所有密钥)              │
+│  ├── targets.json (目标角色 - 定义文件哈希)       │
+│  │   └── delegated roles (委托角色)             │
+│  ├── snapshot.json (快照角色 - 冻结版本)         │
+│  └── timestamp.json (时间戳角色 - 新鲜度保证)   │
+└─────────────────────────────────────────────────────┘
+
+客户端验证流程:
+1. 获取并验证 root.json (密钥信任链)
+2. 获取并验证 timestamp.json (新鲜度)
+3. 获取并验证 snapshot.json (一致性)
+4. 获取并验证 targets.json (文件完整性)
+5. 下载并验证目标文件
+```
+
+### K8s Admission Controller 集成
+
+```yaml
+# 使用 Connaisseur 验证镜像签名
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connaisseur
+  namespace: connaisseur
+spec:
+  template:
+    spec:
+      containers:
+      - name: connaisseur
+        image: connaisseur:latest
+        env:
+        - name: NOTATION_TRUST_POLICY
+          value: |
+            {
+              "version": "1.0",
+              "trustPolicies": [{
+                "name": "default",
+                "registryScopes": ["*"],
+                "signatureVerification": {"level": "strict"},
+                "trustStores": ["ca:my-ca"]
+              }]
+            }
+---
+# 或使用 Sigstore Policy Controller
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: require-signed-images
+spec:
+  images:
+  - glob: "registry.example.com/**"
+  authorities:
+  - keyless:
+      url: https://fulcio.sigstore.dev
+      identities:
+      - issuer: https://token.actions.githubusercontent.com
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看信任策略
+notation policy show
+
+# 🟢 查看证书存储
+notation cert ls
+
+# 🟢 添加信任证书
+notation cert add --type ca --name my-ca /path/to/ca.crt
+
+# 🟢 签名镜像
+notation sign registry.example.com/myapp:v1 \
+  --signature-format cose
+
+# 🟢 验证镜像
+notation verify registry.example.com/myapp:v1
+
+# 🟢 查看镜像签名信息
+notation manifest registry.example.com/myapp:v1
+
+# 🟡 更新信任策略
+notation policy import /path/to/trustpolicy.json
+
+# 🟢 检查 TUF 元数据新鲜度
+curl -s https://tuf-repo.example.com/timestamp.json | jq .signed.expires
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 签名验证失败 | 证书不匹配/过期 | `notation verify <image>` | 更新信任证书 |
+| 元数据过期 | TUF 仓库未更新 | 检查 timestamp.json expires | 刷新 TUF 元数据 |
+| Pod 被拒绝 | Admission 策略拒绝 | `kubectl describe pod <name>` | 检查镜像签名和策略 |
+| 密钥泄露 | 根密钥被盗 | 审计 TUF 仓库访问日志 | 轮换根密钥 (root rotation) |
+| 降级攻击检测 | 版本号回退 | 对比 snapshot 版本 | 拒绝旧版本元数据 |
+
+### 排查流程
+
+```
+1. notation verify <image> → 验证镜像签名
+2. notation policy show → 检查信任策略
+3. notation cert ls → 确认证书配置
+4. kubectl describe pod → 查看 Admission 拒绝原因
+5. 检查 TUF 仓库元数据新鲜度
+```
+
+## 生产案例
+
+### 案例1: 容器镜像供应链安全
+- **场景**: 镜像仓库被入侵，攻击者替换了合法镜像
+- **方案**: TUF/Notation 签名 + Admission Controller 验证
+- **效果**: 未签名镜像无法部署，攻击被拦截
+
+### 案例2: CI/CD 签名流水线
+- **场景**: 需要确保只有 CI 构建的镜像才能部署到生产
+- **方案**: CI 流水线中 Notation 签名，部署时验证
+- **效果**: 实现完整的软件供应链可追溯性
 
 ## 对比替代方案
 
-相比 Sigstore（Cosign），TUF 提供更强的仓库级完整性保护（防降级攻击），而 Sigstore 更侧重于个体镜像的透明日志签名。TUF 是规范框架，Sigstore 是实现方案。
+| 维度 | TUF/Notation | Sigstore/Cosign | Docker Content Trust | 无签名 |
+|------|-------------|----------------|---------------------|--------|
+| 防降级攻击 | 支持 | 不支持 | 支持 | 无 |
+| 密钥管理 | 分层密钥 | 无密钥 (keyless) | 分层密钥 | 无 |
+| 透明度日志 | 无 | Rekor | 无 | 无 |
+| 仓库级保护 | 支持 | 个体签名 | 支持 | 无 |
+| 复杂度 | 中 | 低 | 高 | 无 |
+| CNCF | Graduated | Graduated | 非 CNCF | N/A |
+
+## 检查清单
+
+- [ ] 信任策略已配置并测试
+- [ ] 签名证书已添加到信任存储
+- [ ] Admission Controller 已部署并配置
+- [ ] CI/CD 流水线集成签名步骤
+- [ ] TUF 元数据定期刷新
+- [ ] 根密钥安全存储 (HSM/离线)
+- [ ] 监控签名验证失败事件
+- [ ] 制定密钥轮换和应急响应计划
 
 ## Related
 

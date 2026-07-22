@@ -84,6 +84,106 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 5. **SIGKILL** sent if still running
 6. Resources cleaned up by [[kubelet|kubelet]]
 
+## 源码实现分析
+
+### kubelet Pod 启动流程
+
+```go
+// kubernetes/pkg/kubelet/kubelet.go
+func (kl *Kubelet) syncPod(pod *v1.Pod, podStatus *kubecontainer.PodStatus) {
+    // 1. 创建 Pod 数据目录
+    kl.makePodDataDirs(pod)
+    
+    // 2. 挂载 Volume（CSI）
+    kl.volumeManager.WaitForAttachAndMount(pod)
+    
+    // 3. 拉取 Secret/ConfigMap
+    kl.secretManager.GetSecrets(pod)
+    
+    // 4. 调用 CRI 创建 Pod Sandbox + 容器
+    result := kl.containerRuntime.SyncPod(pod, podStatus)
+    // 内部: RunPodSandbox → PullImage → CreateContainer → StartContainer
+    
+    // 5. 启动探针监控
+    kl.probeManager.AddPod(pod)
+    // startupProbe → livenessProbe → readinessProbe
+}
+```
+
+### Pod 状态机
+
+```
+┌─────────┐   调度成功   ┌─────────┐   容器启动   ┌─────────┐
+│ Pending │───────────►│ Running │───────────►│ Running │
+│(未调度) │            │(启动中) │            │(就绪)   │
+└─────────┘            └─────────┘            └────┬────┘
+                                                  │ 删除/失败
+                                                  ▼
+┌─────────┐   优雅终止   ┌──────────────┐
+│ Succeeded│◄───────────│ Terminating  │
+│ / Failed │            │(PreStop+TERM)│
+└─────────┘            └──────────────┘
+```
+
+## 使用场景
+
+### 场景一：优雅终止配置
+
+```yaml
+apiVersion: v1
+kind: Pod
+spec:
+  terminationGracePeriodSeconds: 60  # 给应用 60s 清理
+  containers:
+  - name: app
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "sleep 5 && /app/graceful-shutdown"]
+          # sleep 5: 等待 kube-proxy 更新 iptables 规则
+          # graceful-shutdown: 排干存量请求
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5
+```
+
+### 场景二：诊断 Pod 状态
+
+```bash
+# 🟢 低风险 - 查看 Pod 事件时间线
+kubectl describe pod <pod> | grep -A 30 Events
+
+# 🟢 低风险 - 查看容器状态转换
+kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[*].state}'
+
+# 🟢 低风险 - 查看 Pod 条件
+kubectl get pod <pod> -o jsonpath='{.status.conditions}' | jq .
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| Pod 删除立即终止 | 先标记 Terminating，执行 PreStop + SIGTERM，等待 grace period |
+| readinessProbe 失败重启容器 | 失败只从 Service Endpoints 移除，不重启（liveness 才重启） |
+| startupProbe 和 initialDelay 相同 | startupProbe 更灵活：失败多次才杀，不影响运行后探针 |
+| Pod IP 在重启后不变 | 容器重启 IP 不变，但 Pod 删除重建后 IP 会变 |
+| initContainer 失败不影响 Pod | init 失败导致 Pod 停在 Init 状态，不会启动主容器 |
+| terminationGracePeriod 总是等待 | 超过 grace period 后 SIGKILL 强杀，不管是否完成清理 |
+
+## 面试要点
+
+1. **Pod 从创建到运行的完整链路？** — API Server 写入 etcd → Scheduler Watch 到未调度 Pod → Filter+Score 选节点 → Bind → kubelet Watch 到新 Pod → 创建 Volume → CRI 创建 Sandbox(pause) → CNI 配置网络 → 拉取镜像 → 创建容器 → 启动探针监控 → Ready。
+
+2. **优雅终止为什么需要 sleep？** — Pod 删除与 Endpoints 更新是并行的。sleep 5 等待 kube-proxy 更新 iptables/IPVS 规则，确保新流量不再路由到该 Pod，然后再排干存量请求。否则最后几个请求可能失败。
+
+3. **三种探针的作用和区别？** — startupProbe：启动期检测，失败则重启（替代 initialDelaySeconds）；livenessProbe：运行期健康检测，失败则重启容器；readinessProbe：就绪检测，失败则从 Service 移除（不重启）。
+
+4. **Pod 的 QoS 如何影响生命周期？** — Guaranteed（requests=limits）最后被驱逐；BestEffort（无 requests）最先被驱逐。节点内存压力时，kubelet 按 QoS 优先级驱逐 Pod。
+
 ## Related
 - [[概念/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
 - [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合

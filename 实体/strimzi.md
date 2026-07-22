@@ -73,29 +73,182 @@ Strimzi 完全基于 Kubernetes CRD。Kafka CRD 定义集群规格（Broker 数�
 3. **跨集群复制**: 使用 MirrorMaker 2 实现灾备和多区域复制
 4. **Kafka 即服务**: 为多团队提供 Kafka 实例的自服务平台
 
-## 安装
+## 安装与配置
 
 ```bash
-# Helm 安装
+# Helm 安装 Strimzi Operator
 helm repo add strimzi https://strimzi.io/charts/
-helm install strimzi strimzi/strimzi-kafka-operator --namespace kafka --create-namespace
-# 创建 Kafka 集群
-kubectl apply -f - <<EOF
+helm install strimzi strimzi/strimzi-kafka-operator \
+  --namespace kafka --create-namespace \
+  --set watchAnyNamespace=true
+# 等待 Operator 就绪
+kubectl wait --for=condition=available deployment/strimzi-cluster-operator -n kafka --timeout=120s
+```
+
+```yaml
+# Kafka 集群 CRD（KRaft 模式，无 ZooKeeper）
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
-metadata: { name: my-cluster }
+metadata:
+  name: production-cluster
+  namespace: kafka
 spec:
   kafka:
+    version: 3.7.0
     replicas: 3
-    storage: { type: jbod, volumes: [{ id: 0, type: persistent-claim, size: 100Gi }] }
-  zookeeper:
-    replicas: 3
-    storage: { type: persistent-claim, size: 10Gi }
+    listeners:
+    - name: plain
+      port: 9092
+      type: internal
+      tls: false
+    - name: tls
+      port: 9093
+      type: internal
+      tls: true
+      authentication:
+        type: scram-sha-512
+    - name: external
+      port: 9094
+      type: loadbalancer
+      tls: true
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      min.insync.replicas: 2
+      default.replication.factor: 3
+      log.retention.hours: 168
+      log.segment.bytes: 1073741824
+    storage:
+      type: jbod
+      volumes:
+      - id: 0
+        type: persistent-claim
+        size: 500Gi
+        class: fast-ssd
+        deleteClaim: false
+    resources:
+      requests:
+        cpu: "2"
+        memory: 4Gi
+      limits:
+        cpu: "4"
+        memory: 8Gi
   entityOperator:
-    topicOperator: {}
-    userOperator: {}
-EOF
+    topicOperator:
+      reconciliationIntervalSeconds: 60
+    userOperator:
+      reconciliationIntervalSeconds: 60
+  cruiseControl:
+    config:
+      default.goals: >
+        com.linkedin.kafka.cruisecontrol.analyzer.goals.RackAwareGoal,
+        com.linkedin.kafka.cruisecontrol.analyzer.goals.MinTopicLeadersPerBrokerGoal
+---
+# KafkaTopic CRD
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: orders
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: production-cluster
+spec:
+  partitions: 12
+  replicas: 3
+  config:
+    retention.ms: 604800000
+    min.insync.replicas: 2
+---
+# KafkaUser CRD（SCRAM 认证 + ACL）
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: order-service
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: production-cluster
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+    - resource:
+        type: topic
+        name: orders
+      operations: [Read, Write, Describe]
+    - resource:
+        type: group
+        name: order-service-group
+      operations: [Read]
 ```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看 Kafka 集群状态
+kubectl get kafka -A
+kubectl describe kafka production-cluster -n kafka
+kubectl get kafkatopics -n kafka
+kubectl get kafkausers -n kafka
+
+# 🟢 低风险：查看 Broker 日志
+kubectl logs production-cluster-kafka-0 -n kafka -c kafka --tail=50
+
+# 🟡 中风险：滚动重启 Broker
+kubectl annotate kafka production-cluster -n kafka strimzi.io/manual-rolling-update=true
+
+# 🟡 中风险：扩容 Broker
+kubectl patch kafka production-cluster -n kafka --type merge -p '{"spec":{"kafka":{"replicas":5}}}'
+
+# 🟡 中风险：触发 Topic 重平衡（Cruise Control）
+kubectl annotate kafka production-cluster -n kafka strimzi.io/rebalance=true
+
+# 🔴 高风险：删除 Kafka 集群（数据丢失）
+kubectl delete kafka production-cluster -n kafka
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Kafka 集群未就绪 | PVC 未绑定/存储不足 | `kubectl get pvc -n kafka` | 检查 StorageClass 和容量 |
+| Broker Pod CrashLoop | 内存不足/JVM OOM | `kubectl logs <broker-pod> -c kafka` | 增加 resources.limits.memory |
+| Topic 未创建 | Entity Operator 未运行 | `kubectl get pods -l app.kubernetes.io/name=entity-operator` | 检查 entityOperator 配置 |
+| 客户端连接失败 | TLS/SCRAM 配置错误 | `kubectl get secret <user-name> -n kafka` | 检查证书和凭据 |
+| 消息延迟高 | 分区不均衡 | `kubectl get kafka production-cluster -o yaml` | 触发 Cruise Control rebalance |
+
+```
+排查流程：
+├── 集群未就绪？
+│   ├── kubectl describe kafka → 查看 Conditions
+│   ├── kubectl get pvc → 检查存储
+│   └── kubectl get pods -n kafka → 检查 Pod 状态
+├── 客户端连接失败？
+│   ├── 检查 Listener 配置和端口
+│   ├── 验证 TLS 证书和 SCRAM 凭据
+│   └── 检查 NetworkPolicy 是否阻止
+└── 性能问题？
+    ├── 检查 Broker 日志中的 GC 停顿
+    ├── 查看 Cruise Control 指标
+    └── 考虑增加 Broker 或调整分区数
+```
+
+## 生产案例
+
+### 案例 1：Kafka 零停机升级
+
+- **场景**：生产 Kafka 集群需要从 3.5 升级到 3.7，业务不允许停机
+- **排查**：手动升级需要逐个 Broker 操作，风险高且耗时
+- **方案**：修改 Kafka CRD 的 version 字段，Strimzi 自动执行滚动升级（逐个 Broker 重启，确保 ISR 满足）
+- **效果**：升级全程零停机，耗时 15 分钟，无需人工干预
+
+### 案例 2：多团队 Kafka 即服务
+
+- **场景**：20+ 团队需要独立的 Kafka Topic 和用户，传统方式需要运维团队手动创建
+- **排查**：每次新 Topic 申请需要 1-2 天等待，且权限管理混乱
+- **方案**：团队通过 KafkaTopic/KafkaUser CRD 自助申请，GitOps 自动同步，ACL 自动配置
+- **效果**：Topic 创建从 2 天缩短至 5 分钟，权限 100% 自动化管理
 
 ## 替代方案
 

@@ -264,6 +264,264 @@ spec:
 □ 实验时间避开高峰期
 ```
 
+## 实验结果分析
+
+### 结果分类
+
+| 结果类型 | 含义 | 后续行动 |
+|---------|------|----------|
+| **假设验证** | 系统按预期处理故障 | 记录成功，提升实验强度 |
+| **假设否定** | 系统未达预期，发现问题 | 开 Incident，修复后重测 |
+| **实验无效** | 实验未实际注入故障 | 检查实验配置，重新执行 |
+| **实验中止** | 触发中止条件，提前结束 | 分析中止原因，调整参数 |
+
+### 结果分析脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：分析实验结果
+set -euo pipefail
+
+EXPERIMENT_NAME=${1:-"dependency-timeout"}
+NAMESPACE=${2:-"production"}
+
+echo "=== 实验结果分析: $EXPERIMENT_NAME ==="
+
+# 获取实验状态
+STATUS=$(kubectl get podchaos,networkchaos,stresschaos $EXPERIMENT_NAME -n $NAMESPACE -o jsonpath='{.status.phase}' 2>/dev/null || echo "Unknown")
+START_TIME=$(kubectl get podchaos,networkchaos,stresschaos $EXPERIMENT_NAME -n $NAMESPACE -o jsonpath='{.status.startTime}' 2>/dev/null || echo "N/A")
+END_TIME=$(kubectl get podchaos,networkchaos,stresschaos $EXPERIMENT_NAME -n $NAMESPACE -o jsonpath='{.status.endTime}' 2>/dev/null || echo "N/A")
+
+# 获取指标数据
+P99_BEFORE=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=histogram_quantile(0.99, sum by(le)(rate(http_request_duration_seconds_bucket{job="api"}[5m] offset 10m)))' \
+  | jq -r '.data.result[0].value[1]')
+
+P99_DURING=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=histogram_quantile(0.99, sum by(le)(rate(http_request_duration_seconds_bucket{job="api"}[5m])))' \
+  | jq -r '.data.result[0].value[1]')
+
+ERROR_RATE=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=sum(rate(http_requests_total{job="api",code=~"5.."}[5m]))/sum(rate(http_requests_total{job="api"}[5m]))' \
+  | jq -r '.data.result[0].value[1]')
+
+echo "实验状态: $STATUS"
+echo "开始时间: $START_TIME"
+echo "结束时间: $END_TIME"
+echo ""
+echo "=== 指标对比 ==="
+echo "P99 延迟 (实验前): ${P99_BEFORE}s"
+echo "P99 延迟 (实验中): ${P99_DURING}s"
+echo "错误率: ${ERROR_RATE}"
+echo ""
+
+# 判断结果
+if (( $(echo "$ERROR_RATE > 0.05" | bc -l) )); then
+  echo "❌ 结果: 假设否定 - 错误率超过 5%"
+  echo "建议: 开 Incident 调查，修复后重测"
+elif (( $(echo "$P99_DURING > $P99_BEFORE * 2" | bc -l) )); then
+  echo "⚠️ 结果: 部分验证 - 延迟显著增加但未超限"
+  echo "建议: 优化超时配置，增加重试"
+else
+  echo "✅ 结果: 假设验证 - 系统按预期处理故障"
+  echo "建议: 提升实验强度，扩大爆炸半径"
+fi
+```
+
+## 实验报告模板
+
+```markdown
+# 混沌实验报告
+
+## 实验信息
+
+| 项目 | 内容 |
+|-----|------|
+| 实验名称 | dependency-timeout |
+| 实验类型 | 网络延迟注入 |
+| 目标服务 | order-service → payment-service |
+| 执行时间 | 2026-07-21 14:00 - 14:30 |
+| 执行人 | @sre-team |
+
+## 稳态假设
+
+> 在正常情况下，order-service 的 P99 延迟 < 200ms，错误率 < 0.1%。
+> 当 payment-service 增加 500ms 延迟时，order-service 应通过超时和降级保持 P99 < 400ms，错误率 < 1%。
+
+## 实验配置
+
+```yaml
+action: delay
+latency: 500ms
+duration: 5m
+target: payment-service
+```
+
+## 实验结果
+
+| 指标 | 实验前 | 实验中 | 阈值 | 结果 |
+|-----|-------|-------|------|------|
+| P99 延迟 | 180ms | 350ms | < 400ms | ✅ 通过 |
+| 错误率 | 0.05% | 0.8% | < 1% | ✅ 通过 |
+| RPS | 1200 | 1150 | > 1000 | ✅ 通过 |
+
+## 发现的问题
+
+1. 超时配置为 3s，过长，建议调整为 1s
+2. 缺少熔断机制，连续失败时未快速失败
+
+## 改进行动
+
+| 行动 | 负责人 | 截止日期 | 状态 |
+|-----|-------|---------|------|
+| 调整超时配置为 1s | @dev-team | 7/25 | ☐ |
+| 增加熔断器 | @dev-team | 7/31 | ☐ |
+| 重新执行实验验证 | @sre-team | 8/1 | ☐ |
+
+## 结论
+
+✅ 假设验证：系统基本按预期处理故障，但存在优化空间。
+```
+
+## 实验优先级矩阵
+
+| 实验类型 | 影响范围 | 实施难度 | 发现价值 | 优先级 |
+|---------|---------|---------|---------|--------|
+| Pod Kill | 低 | 低 | 高 | 🔴 P0 |
+| 网络延迟 | 中 | 低 | 高 | 🔴 P0 |
+| CPU 压力 | 中 | 低 | 中 | 🟡 P1 |
+| 依赖超时 | 中 | 中 | 高 | 🔴 P0 |
+| 网络分区 | 高 | 中 | 高 | 🟡 P1 |
+| 磁盘 IO | 中 | 中 | 中 | 🟡 P1 |
+| 数据库故障 | 高 | 高 | 高 | 🟡 P1 |
+| AZ 故障 | 极高 | 高 | 极高 | 🟢 P2 |
+
+### 实验路线图
+
+```
+第 1 个月 (基础):
+  - Pod Kill (单副本)
+  - 网络延迟 (100ms)
+  - CPU 压力 (50%)
+
+第 2 个月 (进阶):
+  - Pod Kill (30% 副本)
+  - 网络延迟 (500ms)
+  - 依赖超时
+  - 网络分区
+
+第 3 个月 (高级):
+  - 数据库故障转移
+  - AZ 故障模拟
+  - 级联故障实验
+```
+
+## 与 CI/CD 集成
+
+### GitHub Actions 集成
+
+```yaml
+# .github/workflows/chaos-gate.yml
+name: Chaos Gate
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  chaos-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to staging
+        run: |
+          argocd app sync api-staging
+          kubectl rollout status deployment/api -n staging --timeout=5m
+      
+      - name: Run chaos experiment
+        run: |
+          kubectl apply -f chaos-experiments/pod-kill.yaml -n staging
+          kubectl wait podchaos/api-pod-kill --for=condition=complete --timeout=5m -n staging
+      
+      - name: Verify SLO
+        run: |
+          ERROR_RATE=$(curl -sG "$PROM/api/v1/query" \
+            --data-urlencode 'query=sum(rate(http_requests_total{job="api",code=~"5.."}[2m]))/sum(rate(http_requests_total{job="api"}[2m]))' \
+            | jq -r '.data.result[0].value[1]')
+          
+          if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )); then
+            echo "::error::错误率 $ERROR_RATE 超过 1%"
+            exit 1
+          fi
+      
+      - name: Cleanup
+        if: always()
+        run: |
+          kubectl delete podchaos api-pod-kill -n staging --ignore-not-found
+```
+
+### Argo Rollouts 集成
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: chaos-analysis
+spec:
+  args:
+    - name: service-name
+  metrics:
+    - name: chaos-test
+      interval: 5m
+      count: 1
+      provider:
+        job:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: chaos-test
+                    image: chaos-runner:latest
+                    command: [sh, -c]
+                    args:
+                      - |
+                        kubectl apply -f chaos-experiments/pod-kill.yaml -n staging
+                        kubectl wait podchaos/api-pod-kill --for=condition=complete --timeout=5m
+                        
+                        # 验证 SLO
+                        verify-slo --service {{args.service-name}} --window 2m
+                restartPolicy: Never
+```
+
+## 故障排查
+
+### 实验未生效排查
+
+```bash
+# 🟢 低风险：检查实验状态
+kubectl get podchaos,networkchaos,stresschaos -A
+
+# 🟢 低风险：查看实验事件
+kubectl describe podchaos <name> -n <namespace>
+
+# 🟢 低风险：检查 Chaos Mesh 组件
+kubectl get pods -n chaos-mesh
+kubectl logs -n chaos-mesh -l app=chaos-mesh-controller-manager --tail=100
+
+# 🟢 低风险：检查目标 Pod 标签
+kubectl get pods -n <namespace> --show-labels | grep <app-label>
+```
+
+### 常见问题诊断
+
+| 问题 | 可能原因 | 解决方案 |
+|-----|---------|----------|
+| 实验一直 Pending | RBAC 权限不足 | 检查 ServiceAccount 权限 |
+| 实验未影响目标 | 标签选择器不匹配 | 验证 labelSelectors 配置 |
+| 实验立即结束 | duration 设置过短 | 调整 duration 参数 |
+| 实验无法停止 | finalizer 阻塞 | 手动删除 finalizer |
+| 指标无变化 | 实验未实际注入 | 检查 Chaos Mesh 日志 |
+
 ## 相关
 
 - [[可靠性/混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]

@@ -75,19 +75,23 @@ SlimFaas 直接使用 Kubernetes API 管理目标 Deployment 的 `spec.replicas`
 3. **后台数据处理**：异步处理上传文件、图片转换等间歇性任务
 4. **开发/测试环境**：非关键服务自动缩容到零，降低开发集群成本
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 SlimFaas
 helm repo add slimfaas https://slimfaas.github.io/slimfaas/
 helm install slimfaas slimfaas/slimfaas -n slimfaas --create-namespace
+# 验证部署
+kubectl get pods -n slimfaas
+```
 
-# 配置一个函数（通过 ConfigMap）
-kubectl apply -f - <<EOF
+```yaml
+# 函数配置 (ConfigMap)
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: slimfaas-config
+  namespace: slimfaas
 data:
   functions.yaml: |
     functions:
@@ -98,18 +102,127 @@ data:
         maxReplicas: 3
         scaleDownTimeout: 300
         port: 8080
-EOF
+      - name: webhook-handler
+        deployment: webhook-proc
+        namespace: default
+        replicas: 1
+        maxReplicas: 5
+        scaleDownTimeout: 120
+        port: 3000
+        type: async-function
+---
+# 目标函数 Deployment（初始副本数为 0）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: report-gen
+  namespace: default
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: report-gen
+  template:
+    metadata:
+      labels:
+        app: report-gen
+    spec:
+      containers:
+      - name: app
+        image: my-report-app:latest
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
 ```
+
+```bash
+# 调用函数
+curl http://slimfaas.slimfaas.svc/function/report-generator
+# 预热函数
+curl http://slimfaas.slimfaas.svc/wake-function/report-generator
+# 异步调用
+curl -X POST http://slimfaas.slimfaas.svc/async-function/webhook-handler
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 SlimFaas 状态
+kubectl get pods -n slimfaas
+kubectl logs -n slimfaas -l app=slimfaas --tail=50
+
+# 🟢 查看函数 Deployment 状态
+kubectl get deploy -A | grep -E 'report-gen|webhook-proc'
+kubectl get deploy report-gen -o jsonpath='{.spec.replicas}'
+
+# 🟢 检查函数调用日志
+kubectl logs -n slimfaas -l app=slimfaas | grep "report-generator"
+
+# 🟡 手动扩容函数
+kubectl scale deploy report-gen --replicas=2
+
+# 🟡 更新函数配置
+kubectl edit configmap slimfaas-config -n slimfaas
+kubectl rollout restart deployment/slimfaas -n slimfaas
+
+# 🔴 卸载 SlimFaas
+helm uninstall slimfaas -n slimfaas
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 函数调用 502/503 | 冷启动超时/Pod 未就绪 | `kubectl logs -n slimfaas -l app=slimfaas` | 增加 readinessProbe initialDelaySeconds |
+| 函数未缩容到零 | scaleDownTimeout 配置错误 | 检查 ConfigMap 配置 | 调整 scaleDownTimeout 值 |
+| 请求丢失 | 扩容期间请求未缓冲 | 检查 SlimFaas 日志 | 使用 async-function 模式 |
+| 函数无法发现 | ConfigMap 配置错误 | `kubectl get cm slimfaas-config -o yaml` | 核对 deployment 名称和 namespace |
+| 内存溢出 | 函数未设置资源限制 | `kubectl top pod -n default` | 添加 resources.limits |
+
+```
+排查流程：
+├─ 函数调用失败
+│  ├─ 检查 SlimFaas Pod 是否 Running
+│  ├─ 检查 ConfigMap 函数配置
+│  └─ 检查目标 Deployment 是否存在
+├─ 冷启动问题
+│  ├─ 检查 readinessProbe 配置
+│  ├─ 使用 wake-function 预热
+│  └─ 优化镜像大小减少启动时间
+└─ 缩容问题
+   ├─ 检查 scaleDownTimeout 配置
+   └─ 确认无持续请求保持活跃
+```
+
+## 生产案例
+
+### 案例 1：Webhook 处理器零资源消耗
+
+- **场景**: GitHub/Stripe Webhook 每天仅几十次调用，但需要即时响应
+- **排查**: 传统 Deployment 持续占用资源，利用率 <1%
+- **方案**: SlimFaas 包装 Webhook 处理器，空闲时缩容到零，请求到达时自动扩容
+- **效果**: 非高峰期零资源消耗，年节省计算成本 80%
+
+### 案例 2：开发环境自动缩容
+
+- **场景**: 开发集群 50+ 服务，非工作时间无人使用但持续占用资源
+- **排查**: 开发集群夜间资源利用率 <5%
+- **方案**: 所有非关键服务通过 SlimFaas 管理，30 分钟无请求自动缩容到零
+- **效果**: 夜间资源消耗降低 90%，集群成本减半
 
 ## 对比
 
-| 特性 | SlimFaas | Knative | OpenFaaS | Fission |
-|------|----------|---------|----------|---------|
+| 维度 | SlimFaas | Knative | OpenFaaS | KEDA |
+|------|----------|---------|----------|------|
 | 复杂度 | ⭐ 极简 | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
 | Scale-to-Zero | ✅ | ✅ | ✅ | ✅ |
 | CRD 依赖 | ❌ 无 | ✅ 多个 | ✅ | ✅ |
-| 资源占用 | < 50MB | ~500MB+ | ~200MB | ~300MB |
-| 适用规模 | 小/中 | 大 | 中 | 中 |
+| 资源占用 | <50MB | ~500MB+ | ~200MB | ~100MB |
+| 适用规模 | 小/中 | 大 | 中 | 中/大 |
 
 ## 参考链接
 

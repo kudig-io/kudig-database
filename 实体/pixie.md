@@ -77,31 +77,117 @@ Pixie 通过 DaemonSet 在每个节点部署 PEM。PEM 以特权模式运行以�
 3. **安全合规**: 数据不出集群，适合金融/医疗等敏感场景
 4. **CPU 分析**: 自动采集 CPU 火焰图，定位性能瓶颈
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Pixie CLI
 brew install pixie
-# 部署到集群
+# 部署到集群（交互式）
 px deploy
-# 查看数据
-px live   # 实时交互式界面
-px script run px/service_stats   # 运行预置脚本
-# PxL 脚本示例
+# 非交互式部署（指定集群）
+px deploy --cluster_name=prod-cluster --deploy_key=$PIXIE_DEPLOY_KEY
+# 验证部署状态
+px status
+```
+
+```yaml
+# Vizier 自定义配置（px deploy --set 参数）
+# 限制 PEM 资源使用
+pemMemoryLimit: 2Gi
+pemMemoryRequest: 1Gi
+# 数据保留时间（默认24h）
+dataRetention: 12h
+# 禁用自动更新
+disableAutoUpdate: true
+```
+
+```pxl
+# PxL 脚本示例：服务延迟分析
 import px
 df = px.DataFrame(table='http_events', start_time='-5m')
-df = df.groupby(['service', 'req_path']).agg(latency_p99=('latency', px.percentile(99)))
+df = df.groupby(['service', 'req_path']).agg(
+    latency_p99=('latency', px.percentile(99)),
+    req_count=('latency', px.count)
+)
+df = df[px.column('req_count') > 100]
 display(df)
 ```
 
-## 替代方案
+## 运维操作
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Pixie** | 零侵入、eBPF、PxL | 数据保留短期、功能受限 |
-| Jaeger | 分布式追踪标准 | 需手动 instrumentation |
-| Cilium Hubble | eBPF 网络可观测 | 仅网络层 |
-| Honeycomb | 强大分析能力 | 商业产品、数据外传 |
+```bash
+# 🟢 查看 Vizier 状态
+px status
+kubectl get pods -n px
+
+# 🟢 运行预置 PxL 脚本
+px script run px/service_stats
+px script run px/http_data
+px script run px/dns_data
+
+# 🟢 查看集群资源使用
+px script run px/cluster_stats
+
+# 🟡 重启 Vizier 组件
+kubectl rollout restart daemonset/vizier-pem -n px
+kubectl rollout restart deployment/vizier-query-broker -n px
+
+# 🟡 更新 Pixie 版本
+px deploy --redeploy
+
+# 🔴 卸载 Pixie（清除所有采集数据）
+px delete
+kubectl delete namespace px
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| PEM Pod CrashLoopBackOff | 内核版本不兼容/权限不足 | `kubectl logs -n px ds/vizier-pem` | 确认内核≥4.14，检查 privileged 权限 |
+| 无 HTTP 数据 | 应用使用 HTTPS/非标准端口 | `px script run px/http_data` | 配置 TLS 证书或指定端口 |
+| 查询超时 | Kelvin 资源不足 | `kubectl top pod -n px` | 增加 Kelvin 副本或资源限制 |
+| DNS 数据缺失 | CoreDNS 使用非标准端口 | `px script run px/dns_data` | 配置 DNS 追踪端口 |
+| eBPF 程序加载失败 | 内核配置缺少 BPF 支持 | `dmesg \| grep bpf` | 启用 CONFIG_BPF_SYSCALL |
+
+```
+排查流程：
+├─ px status 检查组件健康
+│  ├─ PEM 异常 → kubectl logs ds/vizier-pem
+│  │  ├─ 内核不兼容 → 升级内核或切换节点
+│  │  └─ OOM → 增加 pemMemoryLimit
+│  └─ Query Broker 异常 → 检查资源使用
+├─ 数据缺失
+│  ├─ 特定协议 → 确认协议版本/端口配置
+│  └─ 全部缺失 → 检查 eBPF 挂载点
+└─ 性能问题 → 调整 dataRetention 和采样率
+```
+
+## 生产案例
+
+### 案例 1：金融系统零侵入全链路监控
+
+- **场景**: 某银行核心交易系统无法修改代码注入 SDK，需要全链路可观测性
+- **排查**: 部署 Pixie 后通过 HTTP/gRPC 自动追踪发现支付网关 P99 延迟异常
+- **方案**: 使用 PxL 脚本定位到数据库连接池耗尽，数据全程不出集群满足金融合规
+- **效果**: 零代码变更实现全链路监控，满足银保监会数据驻留要求
+
+### 案例 2：微服务 DNS 解析延迟定位
+
+- **场景**: 多个微服务间歇性超时，传统 APM 无法定位
+- **排查**: 通过 `px/dns_data` 脚本发现 CoreDNS 响应延迟 P99 达 500ms
+- **方案**: 定位到 NodeLocal DNSCache 未启用，启用后 DNS 延迟降至 1ms
+- **效果**: 服务超时率从 2% 降至 0.01%
+
+## 替代方案对比
+
+| 维度 | Pixie | Jaeger | Cilium Hubble | OpenTelemetry |
+|------|-------|--------|---------------|---------------|
+| 侵入性 | 零侵入(eBPF) | 需 SDK | 零侵入 | 需 SDK |
+| 数据位置 | 集群内 | 外部存储 | 集群内 | 外部存储 |
+| 协议解析 | HTTP/gRPC/DB/DNS | HTTP/gRPC | L3-L7 | 自定义 |
+| 查询语言 | PxL | Jaeger UI | Hubble UI | 各后端 |
+| 适用场景 | 即时诊断/合规 | 长期追踪 | 网络可观测 | 标准化遥测 |
 
 ## 架构定位
 

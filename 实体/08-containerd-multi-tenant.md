@@ -72,28 +72,281 @@ Containerd 多租户实践是关于在共享的 containerd 运行时上安全地
 - **安全合规环境**：通过 Kata Containers 或 gVisor 提供硬件级隔离
 - **开发测试平台**：为不同项目提供隔离但共享基础设施的容器环境
 
-## 安装与快速开始
+## 安装与配置
+
+### RuntimeClass 配置
 
 ```bash
-# 查看 containerd namespaces
+# 🟢 查看 containerd namespaces
 ctr namespace list
 
-# 创建隔离 namespace
+# 🟢 创建隔离 namespace
 ctr namespace create tenant-a
+ctr namespace create tenant-b
+```
 
-# 配置 RuntimeClass for Kata
-kubectl apply -f - <<EOF
+```yaml
+# Kata Containers RuntimeClass
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
   name: kata-containers
 handler: kata
-EOF
+scheduling:
+  nodeSelector:
+    runtime.kubernetes.io/kata: "true"
+---
+# gVisor RuntimeClass
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: gvisor
+handler: runsc
+scheduling:
+  nodeSelector:
+    runtime.kubernetes.io/gvisor: "true"
+---
+# 标准 runc RuntimeClass
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: runc
+handler: runc
 ```
+
+### containerd 多运行时配置
+
+```toml
+# /etc/containerd/config.toml
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+
+  # 标准 runc 运行时
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      SystemdCgroup = true
+
+  # Kata Containers 运行时
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata]
+    runtime_type = "io.containerd.kata.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata.options]
+      ConfigPath = "/opt/kata/share/defaults/kata-containers/configuration.toml"
+
+  # gVisor 运行时
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
+    runtime_type = "io.containerd.runsc.v1"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc.options]
+      TypeUrl = "io.containerd.runsc.v1"
+      ConfigPath = "/etc/containerd/runsc.toml"
+```
+
+### 租户隔离策略
+
+```yaml
+# 租户命名空间资源配额
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tenant-a-quota
+  namespace: tenant-a
+spec:
+  hard:
+    requests.cpu: "20"
+    requests.memory: 40Gi
+    limits.cpu: "40"
+    limits.memory: 80Gi
+    pods: "50"
+    services: "10"
+    persistentvolumeclaims: "10"
+---
+# LimitRange 默认限制
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: tenant-a-limits
+  namespace: tenant-a
+spec:
+  limits:
+  - default:
+      cpu: "1"
+      memory: 1Gi
+    defaultRequest:
+      cpu: 100m
+      memory: 128Mi
+    max:
+      cpu: "4"
+      memory: 8Gi
+    type: Container
+---
+# 租户网络隔离
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-isolation
+  namespace: tenant-a
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - podSelector: {}  # 仅允许同命名空间
+  egress:
+  - to:
+    - podSelector: {}
+  - to:  # 允许 DNS
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+```
+
+### 镜像策略 (Kyverno)
+
+```yaml
+# 限制租户只能从指定仓库拉取镜像
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-tenant-images
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: validate-image-registry
+    match:
+      any:
+      - resources:
+          kinds: ["Pod"]
+          namespaces: ["tenant-a", "tenant-b"]
+    validate:
+      message: "仅允许从 registry.example.com 拉取镜像"
+      pattern:
+        spec:
+          containers:
+          - image: "registry.example.com/*"
+```
+
+### 租户 Pod 示例
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-app
+  namespace: tenant-a
+spec:
+  runtimeClassName: kata-containers  # 使用 Kata 强隔离
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: app
+    image: registry.example.com/tenant-a/app:v1.0
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: ["ALL"]
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: "1"
+        memory: 1Gi
+```
+
+## 运维操作
+
+```bash
+# 🟢 检查 RuntimeClass
+kubectl get runtimeclass
+
+# 🟢 检查租户资源使用
+kubectl top pods -n tenant-a
+kubectl describe resourcequota -n tenant-a
+
+# 🟢 检查 containerd namespace 隔离
+ctr -n k8s.io containers ls | head -10
+ctr -n tenant-a containers ls 2>/dev/null
+
+# 🟢 检查网络隔离
+kubectl get networkpolicy -n tenant-a
+kubectl exec -n tenant-a pod -- curl -s http://tenant-b-svc.tenant-b:80  # 应失败
+
+# 🟢 检查安全上下文
+kubectl get pods -n tenant-a -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.runtimeClassName}{"\n"}{end}'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 无法使用 Kata | RuntimeClass 未创建/节点不支持 | `kubectl get runtimeclass`; `kubectl describe pod` | 创建 RuntimeClass/添加节点标签 |
+| 租户间网络互通 | NetworkPolicy 缺失 | `kubectl get netpol -n <ns>` | 部署租户隔离策略 |
+| 资源超限 | ResourceQuota 未配置 | `kubectl describe resourcequota` | 配置配额和 LimitRange |
+| 镜像拉取被拒 | 镜像策略过严 | `kubectl get events` | 调整 Kyverno 策略 |
+| Kata 启动慢 | VM 初始化开销 | `kubectl describe pod` 查看启动时间 | 预热 VM/调整配置 |
+
+### 排查流程
+
+```
+多租户隔离异常
+├── 租户间可互通？
+│   ├── NetworkPolicy 存在？→ kubectl get netpol
+│   ├── CNI 支持？→ 检查 Calico/Cilium
+│   └── 策略正确？→ 检查 podSelector/namespaceSelector
+├── 资源隔离失效？
+│   ├── ResourceQuota 配置？→ kubectl describe quota
+│   ├── LimitRange 存在？→ kubectl get limitrange
+│   └── Pod 设置了 limits？→ kubectl get pod -o yaml
+└── 运行时隔离失效？
+    ├── RuntimeClass 正确？→ kubectl get runtimeclass
+    ├── 节点支持？→ 检查节点标签
+    └── containerd 配置？→ 检查 runtimes 配置
+```
+
+## 生产案例
+
+### 案例1：SaaS 平台多租户强隔离
+
+- **场景**：SaaS 平台为 100+ 客户提供独立环境，需防止容器逃逸和横向移动
+- **方案**：每个客户一个 Namespace + Kata Containers RuntimeClass + default-deny NetworkPolicy + 镜像白名单
+- **效果**：客户间 VM 级隔离，通过 SOC2 审计
+
+### 案例2：开发平台资源共享
+
+- **场景**：50 个开发团队共享 20 节点集群，需要公平资源分配
+- **方案**：每团队一个 Namespace + ResourceQuota + LimitRange + PriorityClass；普通工作负载用 runc，安全测试用 gVisor
+- **效果**：资源公平分配，无团队能独占集群
 
 ## 对比替代方案
 
-相比虚拟机级别的多租户隔离，containerd 多租户实践更轻量但隔离性较弱。结合 Kata Containers 可获得接近 VM 级别的隔离强度。
+| 方案 | 隔离级别 | 性能开销 | 适用场景 |
+|------|----------|----------|----------|
+| Namespace + RBAC + NetPol | 逻辑隔离 | 无 | 内部团队/信任环境 |
+| + Kata Containers | VM级隔离 | ~5% | 多租户/不可信工作负载 |
+| + gVisor | 用户态内核 | ~10-20% | 安全敏感/syscall过滤 |
+| 独立集群 | 完全隔离 | 资源浪费 | 强合规/大客户 |
+| vCluster | 虚拟集群 | 低 | 多团队共享控制平面 |
+
+## 检查清单
+
+- [ ] 每个租户有独立 Namespace
+- [ ] RuntimeClass 已配置（runc/kata/gvisor）
+- [ ] NetworkPolicy 默认拒绝已部署
+- [ ] ResourceQuota 和 LimitRange 已配置
+- [ ] 镜像拉取策略已限制
+- [ ] Pod Security Admission 设置为 restricted
+- [ ] RBAC 限制租户仅访问自己的 Namespace
+- [ ] 审计日志已启用
 
 ## Related
 

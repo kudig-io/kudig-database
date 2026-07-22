@@ -77,7 +77,7 @@ bootc 特别适合作为 Kubernetes 节点操作系统。通过将节点 OS 打�
 3. **安全合规基线**：将安全基线（CIS Benchmark）固化到系统镜像中，确保合规
 4. **快速灾难恢复**：系统损坏时直接从 Registry 拉取新镜像恢复，无需手动重建
 
-## 安装
+## 安装与配置
 
 ```bash
 # 构建自定义 bootc 镜像（Containerfile 示例）
@@ -95,6 +95,142 @@ bootc install to-disk /dev/sda --img quay.io/myorg/my-bootc:v1
 bootc upgrade              # 拉取新镜像
 bootc switch --img quay.io/myorg/my-bootc:v2  # 切换版本
 ```
+
+### K8s 节点镜像构建示例
+
+```dockerfile
+# Containerfile.k8s-node
+FROM quay.io/centos-bootc/centos-bootc:stream9
+
+# 安装容器运行时和 K8s 组件
+RUN dnf install -y containerd kubelet kubeadm kubectl \
+    && dnf clean all \
+    && systemctl enable kubelet containerd
+
+# 安全加固
+RUN sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# 内核参数优化
+COPY sysctl-k8s.conf /etc/sysctl.d/99-k8s.conf
+
+# 标记为 bootc 兼容
+LABEL org.opencontainers.image.base.name="centos-bootc:stream9"
+```
+
+### 零接触安装配置
+
+```toml
+# /usr/lib/bootc/install/00-custom.toml
+[install.filesystem]
+root = { type = "xfs" }
+
+[install.network]
+method = "dhcp"
+
+[install.kargs]
+append = ["console=ttyS0", "rd.neednet=1"]
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看当前部署状态
+bootc status
+
+# 🟢 查看可用部署（回滚目标）
+bootc usr-overlay
+ostree admin status
+
+# 🟡 升级到最新版本
+bootc upgrade
+
+# 🟡 切换到指定版本
+bootc switch --img quay.io/myorg/my-bootc:v2
+
+# 🔴 回滚到上一版本
+bootc rollback
+
+# 🟢 查看当前镜像信息
+bootc inspect
+
+# 🟡 构建并推送新镜像
+podman build -t quay.io/myorg/my-bootc:v2 .
+podman push quay.io/myorg/my-bootc:v2
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 升级失败 | Registry 不可达 | `bootc upgrade 2>&1` | 检查网络和 Registry 认证 |
+| 启动失败 | 新镜像损坏 | `ostree admin status` | `bootc rollback` |
+| 服务未启动 | systemd unit 未启用 | `systemctl status kubelet` | 在 Containerfile 中 enable |
+| 磁盘空间不足 | 旧 deployment 未清理 | `ostree admin cleanup` | 清理旧部署 |
+| 镜像签名验证失败 | 公钥未配置 | `podman pull --verify` | 配置 cosign/sigstore 公钥 |
+
+### 排查流程
+
+```
+bootc 异常
+├─ 升级失败？
+│  ├─ 网络问题 → 检查 Registry 连通性
+│  ├─ 认证失败 → 检查 /etc/containers/auth.json
+│  └─ 磁盘空间 → ostree admin cleanup
+├─ 启动失败？
+│  ├─ 新镜像问题 → bootc rollback
+│  └─ 内核不兼容 → 检查基础镜像内核版本
+└─ 服务异常？
+   ├─ systemd unit 未启用 → 修改 Containerfile
+   └─ 配置未生效 → 检查 /etc 是否被覆盖
+```
+
+## 生产案例
+
+### 案例 1: 500 节点 K8s 集群统一 OS 管理
+
+**场景**: 企业 500 个 K8s 节点使用不同版本的 CentOS，安全补丁管理混乱。
+
+**方案**:
+1. 构建统一的 bootc K8s 节点镜像
+2. 通过 CI/CD 流水线自动构建和测试
+3. 使用 Fleet/Ansible 触发批量 `bootc upgrade`
+4. 分批滚动升级，每批 50 节点
+
+**效果**: 全集群 OS 版本一致性 100%，安全补丁部署时间从 2 周缩短到 4 小时。
+
+### 案例 2: 边缘设备零接触部署
+
+**场景**: 1000+ 边缘网关需预装 OS 并远程管理。
+
+**方案**:
+1. 工厂预刷 bootc 基础镜像
+2. 设备上线后自动从 Registry 拉取最新配置
+3. 远程通过 `bootc switch` 推送更新
+4. 失败自动回滚
+
+**效果**: 现场部署时间从 2 小时/台缩短到 10 分钟/台，远程升级成功率 99.5%。
+
+## 对比与替代方案
+
+| 维度 | bootc | Flatcar | Talos Linux | NixOS |
+|------|-------|---------|-------------|-------|
+| 容器镜像作为 OS | ✅ | ❌ | ❌ | ❌ |
+| 回滚机制 | OSTree | A/B 分区 | API 驱动 | 声明式 |
+| Dockerfile 构建 | ✅ | ❌ | ❌ | ❌ |
+| K8s 节点优化 | ✅ | ✅ | ✅ | ⚠️ |
+| 不可变性 | 部分 | ✅ | ✅ | ✅ |
+| 生态成熟度 | 新兴 | 成熟 | 成熟 | 成熟 |
+
+## 检查清单
+
+- [ ] 基础镜像使用官方 bootc 镜像
+- [ ] Containerfile 已纳入版本控制
+- [ ] CI/CD 流水线已配置镜像构建和测试
+- [ ] 镜像签名已配置（cosign/sigstore）
+- [ ] 回滚策略已测试验证
+- [ ] 分批升级策略已制定
+- [ ] 监控告警：升级失败/节点异常
+- [ ] 安全基线已固化到镜像中
 
 ## 对比
 

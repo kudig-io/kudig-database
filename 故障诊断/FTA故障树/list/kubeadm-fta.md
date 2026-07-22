@@ -164,6 +164,85 @@ flowchart TD
   B_OR --> B4["B4. 网络插件初始化失败<br/>CNI 配置冲突 / calico 节点状态"]
   B_OR --> B5["B5. n
 
+## 生产案例
+
+### 案例1: kubeadm init 失败 - 端口被占用
+
+**时间线**:
+- 09:00 执行 `kubeadm init` 初始化控制平面
+- 09:02 失败: `port 6443 is already in use`
+- 09:05 确认根因: 上次失败的 init 残留进程占用端口
+- 09:10 `kubeadm reset` 后重新 init 成功
+
+**根因链**:
+```
+上次init失败 → 残留进程占用6443端口 → 未执行reset
+→ 再次init时端口冲突 → 初始化失败
+```
+
+**修复**:
+```bash
+# 🟡 重置 kubeadm 状态
+kubeadm reset -f
+rm -rf /etc/kubernetes/manifests /var/lib/etcd
+systemctl restart kubelet
+# 🟡 重新初始化
+kubeadm init --config kubeadm-config.yaml
+```
+
+### 案例2: kubeadm join 失败 - token 过期
+
+**现象**: `kubeadm join` 报错 `token has expired`
+
+**根因**: kubeadm init 生成的 token 默认 24h 过期
+
+**修复**:
+```bash
+# 🟡 重新生成 token
+kubeadm token create --print-join-command
+# 在新节点上执行输出的 join 命令
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: kubeadm-alerts
+  rules:
+  - alert: KubeletClientCertExpiring
+    expr: apiserver_client_certificate_expiration_seconds_bucket{le="604800"} > 0
+    for: 1h
+    labels:
+      severity: warning
+  - alert: ControlPlaneComponentDown
+    expr: up{job=~"kube-apiserver|kube-controller-manager|kube-scheduler"} == 0
+    for: 2m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 证书自动轮转 | 启用 rotateCertificates | P0 |
+| init 前检查 | 确认端口/进程/磁盘干净 | P0 |
+| 配置文件管理 | 用 kubeadm-config.yaml 而非命令行参数 | P1 |
+| 多控制平面 | 生产至少 3 个 master | P1 |
+
+## 面试要点
+
+1. **Q: kubeadm init 的完整流程？**
+   A: 预检查(PreFlight) → 生成证书 → 生成 kubeconfig → 启动静态 Pod → 应用 CoreDNS/kube-proxy → 生成 join token
+
+2. **Q: kubeadm init 失败的排查？**
+   A: 查看错误消息 → 检查端口占用 → 确认系统要求(内核模块/swap) → 检查镜像拉取 → `kubeadm reset` 后重试
+
+3. **Q: kubeadm 集群升级的步骤？**
+   A: 升级 kubeadm → `kubeadm upgrade plan` → `kubeadm upgrade apply` → 升级 kubelet/kubectl → `kubectl drain` + 重启 kubelet → `kubectl uncordon`
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

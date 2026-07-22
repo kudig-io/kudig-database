@@ -115,6 +115,104 @@ kubectl exec -it deployment/cortex-querier -n cortex -- \
 # Header: X-Scope-OrgID: tenant-1
 ```
 
+## 运维操作
+
+```bash
+# 🟢 查看 Cortex 组件状态
+kubectl get pods -n cortex
+
+# 🟢 检查 Ingester 状态
+kubectl exec -n cortex deploy/cortex-ingester -- curl -s localhost:8080/ingester/ring
+
+# 🟢 查看租户数据
+kubectl exec -n cortex deploy/cortex-querier -- \
+  wget -qO- --header="X-Scope-OrgID: tenant-1" \
+  "http://localhost:9009/api/v1/label/__name__/values"
+
+# 🟢 检查对象存储连接
+kubectl exec -n cortex deploy/cortex-compactor -- \
+  curl -s localhost:8080/compactor/ring
+
+# 🟡 强制压缩
+kubectl exec -n cortex deploy/cortex-compactor -- \
+  curl -X POST localhost:8080/compactor/force
+
+# 🟢 查看查询性能
+kubectl logs -n cortex deploy/cortex-query-frontend | grep -i "slow query"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| remote_write 失败 | Distributor 不可用 | `kubectl logs deploy/cortex-distributor` | 检查 Distributor 副本数 |
+| 查询超时 | Ingester 压力大 | `kubectl top pod -n cortex` | 扩展 Ingester 副本 |
+| 数据丢失 | 对象存储故障 | 检查 S3/GCS 连接 | 检查存储凭据和网络 |
+| 租户隔离失效 | Header 未设置 | 检查请求 Header | 确保 X-Scope-OrgID 存在 |
+| 内存溢出 | Ingester 缓存过大 | `kubectl describe pod` | 调整内存 limits |
+
+### 排查流程
+
+```
+Cortex 异常
+├─ 数据写入失败？
+│  ├─ Distributor 错误 → 检查 remote_write URL
+│  ├─ Ingester 拒绝 → 检查 Ingester 状态和磁盘
+│  └─ 对象存储错误 → 检查 S3/GCS 凭据
+├─ 查询异常？
+│  ├─ 无数据 → 检查租户 ID 和时间范围
+│  ├─ 超时 → 扩展 Querier/Query Frontend
+│  └─ 错误结果 → 检查 Compactor 状态
+└─ 组件崩溃？
+   ├─ OOM → 增加内存 limits
+   └─ 存储连接失败 → 检查网络和凭据
+```
+
+## 生产案例
+
+### 案例 1: 多集群监控聚合
+
+**场景**: 企业 50+ K8s 集群需统一监控视图。
+
+**方案**:
+1. 每个集群 Prometheus 配置 remote_write 到中央 Cortex
+2. 按集群/环境划分租户
+3. Grafana 通过 Cortex 提供全局查询
+
+**效果**: 单一入口查询所有集群指标，数据保留 1 年。
+
+### 案例 2: SaaS 多租户监控
+
+**场景**: SaaS 平台需为每个客户提供隔离的监控数据。
+
+**方案**:
+1. 每个客户分配独立的 X-Scope-OrgID
+2. Cortex 多租户隔离保证数据安全
+3. 客户通过 Grafana 查询自己的数据
+
+**效果**: 完全租户隔离，无数据泄露风险。
+
+## 对比与替代方案
+
+| 维度 | Cortex | Mimir | Thanos | VictoriaMetrics |
+|------|--------|-------|--------|------------------|
+| 多租户 | ✅ | ✅ | ❌ | ⚠️ |
+| 水平扩展 | ✅ 微服务 | ✅ 微服务 | ⚠️ Sidecar | 单节点/集群 |
+| 对象存储 | ✅ | ✅ | ✅ | ✅ |
+| 部署复杂度 | 高 | 高 | 中 | 低 |
+| CNCF 状态 | Incubating | 非 CNCF | Incubating | 非 CNCF |
+
+## 检查清单
+
+- [ ] 对象存储已配置并有足够容量
+- [ ] Ingester 多副本部署（至少 3）
+- [ ] 租户隔离已配置（X-Scope-OrgID）
+- [ ] remote_write 已配置并测试
+- [ ] Grafana 数据源已指向 Cortex
+- [ ] 监控告警：组件健康/存储使用率
+- [ ] Compactor 定期运行压缩数据
+- [ ] 查询性能已优化（缓存/分片）
+
 ## 对比
 
 | 特性 | Cortex | Mimir | Thanos | VictoriaMetrics |

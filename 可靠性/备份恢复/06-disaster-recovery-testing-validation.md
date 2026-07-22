@@ -278,6 +278,454 @@ echo "=== DR 演练完成 ==="
 | 演练频率 | 按 Tier 定义 | 日历 |
 | Runbook 覆盖率 | 100% Tier-0/1 | 文档审计 |
 
+## 数据一致性验证
+
+### 数据库一致性检查脚本
+
+```bash
+#!/bin/bash
+# validate-data-consistency.sh — 验证主从数据一致性
+set -euo pipefail
+
+PRIMARY_DB="postgres-primary.database.svc"
+STANDBY_DB="postgres-standby.database.svc"
+DB_USER="postgres"
+DB_NAME="production"
+
+echo "=== 数据一致性验证 $(date) ==="
+
+# 1. 表数量对比
+PRIMARY_TABLES=$(psql -h $PRIMARY_DB -U $DB_USER -d $DB_NAME -t -c \
+  "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public';")
+STANDBY_TABLES=$(psql -h $STANDBY_DB -U $DB_USER -d $DB_NAME -t -c \
+  "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public';")
+
+echo "主库表数量: $PRIMARY_TABLES"
+echo "从库表数量: $STANDBY_TABLES"
+
+if [ "$PRIMARY_TABLES" != "$STANDBY_TABLES" ]; then
+  echo "❌ 表数量不一致"
+  exit 1
+fi
+
+# 2. 关键表行数对比
+CRITICAL_TABLES=("users" "orders" "payments" "products")
+
+for table in "${CRITICAL_TABLES[@]}"; do
+  PRIMARY_COUNT=$(psql -h $PRIMARY_DB -U $DB_USER -d $DB_NAME -t -c \
+    "SELECT COUNT(*) FROM $table;")
+  STANDBY_COUNT=$(psql -h $STANDBY_DB -U $DB_USER -d $DB_NAME -t -c \
+    "SELECT COUNT(*) FROM $table;")
+  
+  DIFF=$((PRIMARY_COUNT - STANDBY_COUNT))
+  
+  if [ "$DIFF" -eq 0 ]; then
+    echo "✅ $table: 一致 ($PRIMARY_COUNT 行)"
+  elif [ "$DIFF" -lt 10 ]; then
+    echo "⚠️ $table: 轻微差异 (主库 $PRIMARY_COUNT, 从库 $STANDBY_COUNT)"
+  else
+    echo "❌ $table: 显著差异 (主库 $PRIMARY_COUNT, 从库 $STANDBY_COUNT)"
+  fi
+done
+
+# 3. 校验和对比 (抽样)
+echo "--- 校验和验证 ---"
+PRIMARY_CHECKSUM=$(psql -h $PRIMARY_DB -U $DB_USER -d $DB_NAME -t -c \
+  "SELECT md5(string_agg(id::text || updated_at::text, ',' ORDER BY id)) FROM users WHERE id % 100 = 0;")
+STANDBY_CHECKSUM=$(psql -h $STANDBY_DB -U $DB_USER -d $DB_NAME -t -c \
+  "SELECT md5(string_agg(id::text || updated_at::text, ',' ORDER BY id)) FROM users WHERE id % 100 = 0;")
+
+if [ "$PRIMARY_CHECKSUM" == "$STANDBY_CHECKSUM" ]; then
+  echo "✅ 抽样校验和一致"
+else
+  echo "❌ 抽样校验和不一致"
+  echo "主库: $PRIMARY_CHECKSUM"
+  echo "从库: $STANDBY_CHECKSUM"
+fi
+
+echo "=== 验证完成 ==="
+```
+
+### 对象存储一致性验证
+
+```bash
+#!/bin/bash
+# validate-object-storage.sh — 验证对象存储备份一致性
+set -euo pipefail
+
+SOURCE_BUCKET="s3://prod-backups"
+DR_BUCKET="s3://dr-backups"
+DATE=$(date -d yesterday +%Y%m%d)
+
+echo "=== 对象存储一致性验证 ==="
+
+# 1. 文件数量对比
+SOURCE_COUNT=$(aws s3 ls $SOURCE_BUCKET/$DATE/ --recursive | wc -l)
+DR_COUNT=$(aws s3 ls $DR_BUCKET/$DATE/ --recursive | wc -l)
+
+echo "源桶文件数: $SOURCE_COUNT"
+echo "DR 桶文件数: $DR_COUNT"
+
+# 2. 总大小对比
+SOURCE_SIZE=$(aws s3 ls $SOURCE_BUCKET/$DATE/ --recursive --summarize | tail -1 | awk '{print $3}')
+DR_SIZE=$(aws s3 ls $DR_BUCKET/$DATE/ --recursive --summarize | tail -1 | awk '{print $3}')
+
+echo "源桶总大小: $SOURCE_SIZE bytes"
+echo "DR 桶总大小: $DR_SIZE bytes"
+
+# 3. 抽样校验和对比
+SAMPLE_FILES=$(aws s3 ls $SOURCE_BUCKET/$DATE/ --recursive | head -10 | awk '{print $4}')
+
+for file in $SAMPLE_FILES; do
+  SOURCE_MD5=$(aws s3api head-object --bucket prod-backups --key $file | jq -r '.ETag')
+  DR_MD5=$(aws s3api head-object --bucket dr-backups --key $file | jq -r '.ETag' 2>/dev/null || echo "missing")
+  
+  if [ "$SOURCE_MD5" == "$DR_MD5" ]; then
+    echo "✅ $file: 一致"
+  else
+    echo "❌ $file: 不一致或缺失"
+  fi
+done
+
+echo "=== 验证完成 ==="
+```
+
+## 演练自动化编排
+
+### Argo Workflow 演练编排
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: dr-validation-workflow
+  namespace: dr-system
+spec:
+  entrypoint: main
+  templates:
+    - name: main
+      steps:
+        - - name: pre-checks
+            template: pre-checks
+        - - name: backup-validation
+            template: validate-backup
+        - - name: restore-test
+            template: test-restore
+        - - name: data-consistency
+            template: check-consistency
+        - - name: failover-drill
+            template: drill-failover
+        - - name: generate-report
+            template: report
+        - - name: cleanup
+            template: cleanup
+    
+    - name: pre-checks
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 前置检查 ==="
+            # 检查 DR 集群健康
+            kubectl --context=dr-cluster get nodes
+            kubectl --context=dr-cluster get pods -A --field-selector status.phase!=Running
+            
+            # 检查备份状态
+            velero backup get -n velero | grep -v Completed && exit 1
+            
+            # 检查复制延迟
+            LAG=$(kubectl exec -n database postgres-standby-0 -- \
+              psql -U postgres -t -c "SELECT EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp()));")
+            [ "$LAG" -lt 60 ] || exit 1
+    
+    - name: validate-backup
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 备份验证 ==="
+            # 验证最新备份可恢复
+            LATEST_BACKUP=$(velero backup get -n velero -o name | head -1)
+            velero restore create validation-$(date +%s) \
+              --from-backup $LATEST_BACKUP \
+              --namespace-mappings production:validation-tmp \
+              --wait --timeout 15m
+    
+    - name: test-restore
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 恢复测试 ==="
+            # 验证恢复的资源
+            kubectl get all -n validation-tmp
+            
+            # 运行冒烟测试
+            kubectl run smoke-test --image=curlimages/curl --rm -i --restart=Never -- \
+              curl -sf http://api.validation-tmp.svc:8080/health
+    
+    - name: check-consistency
+      container:
+        image: postgres:15
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 数据一致性检查 ==="
+            ./validate-data-consistency.sh
+    
+    - name: drill-failover
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 故障转移演练 ==="
+            # 执行 DNS 切换
+            ./dr-drill.sh
+    
+    - name: report
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 生成报告 ==="
+            ./generate-dr-report.sh
+    
+    - name: cleanup
+      container:
+        image: bitnami/kubectl:latest
+        command: [sh, -c]
+        args:
+          - |
+            echo "=== 清理 ==="
+            kubectl delete ns validation-tmp --wait=false --ignore-not-found
+```
+
+### 定期演练 CronWorkflow
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: monthly-dr-validation
+  namespace: dr-system
+spec:
+  schedule: "0 10 1 * *"  # 每月 1 号 10:00
+  concurrencyPolicy: Forbid
+  workflowSpec:
+    entrypoint: main
+    templates:
+      - name: main
+        steps:
+          - - name: run-validation
+              template: validation
+          - - name: notify
+              template: notify
+    
+    - name: validation
+      container:
+        image: dr-tools:latest
+        command: [sh, -c]
+        args:
+          - |
+            ./run-full-dr-validation.sh
+    
+    - name: notify
+      container:
+        image: curlimages/curl
+        command: [sh, -c]
+        args:
+          - |
+            curl -X POST $SLACK_WEBHOOK -d '{"text":"Monthly DR validation completed"}'
+```
+
+## 监控与告警
+
+### PrometheusRule DR 验证告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: dr-validation-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: dr-validation.rules
+      rules:
+        # 备份验证失败
+        - alert: BackupValidationFailed
+          expr: |
+            backup_validation_success == 0
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: "备份验证失败，备份可能不可恢复"
+
+        # 数据一致性检查失败
+        - alert: DataConsistencyCheckFailed
+          expr: |
+            data_consistency_check_success == 0
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: "数据一致性检查失败，主从数据可能不一致"
+
+        # DR 演练逾期
+        - alert: DRDrillOverdue
+          expr: |
+            time() - dr_drill_last_success_timestamp > 30 * 24 * 3600
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "DR 演练超过 30 天未执行"
+
+        # 复制延迟过高
+        - alert: ReplicationLagHigh
+          expr: |
+            pg_replication_lag_seconds > 60
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "数据库复制延迟超过 60s，RPO 风险"
+
+        # 恢复时间超标
+        - alert: RestoreTimeExceeded
+          expr: |
+            dr_restore_duration_seconds > 300
+          for: 0m
+          labels:
+            severity: warning
+          annotations:
+            summary: "恢复时间超过 5 分钟，RTO 风险"
+```
+
+### Grafana Dashboard
+
+```json
+{
+  "dashboard": {
+    "title": "DR 验证概览",
+    "panels": [
+      {
+        "title": "备份验证成功率",
+        "type": "stat",
+        "targets": [
+          { "expr": "sum(rate(backup_validation_success_total[1d])) / sum(rate(backup_validation_attempt_total[1d])) * 100" }
+        ]
+      },
+      {
+        "title": "数据一致性检查",
+        "type": "stat",
+        "targets": [
+          { "expr": "data_consistency_check_success" }
+        ]
+      },
+      {
+        "title": "RTO 趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "dr_rto_seconds" }
+        ]
+      },
+      {
+        "title": "RPO 趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "dr_rpo_seconds" }
+        ]
+      },
+      {
+        "title": "复制延迟",
+        "type": "graph",
+        "targets": [
+          { "expr": "pg_replication_lag_seconds" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## 持续改进
+
+### 演练后复盘模板
+
+```markdown
+# DR 演练复盘报告
+
+## 演练信息
+- 演练日期: __________
+- 演练类型: □ 备份验证 □ 恢复测试 □ 故障转移 □ 全面演练
+- 参与人员: __________
+
+## 演练结果
+| 指标 | 目标 | 实际 | 状态 |
+|-----|------|------|------|
+| RTO | < 5 min | ___ min | □ 达标 □ 未达标 |
+| RPO | < 60 s | ___ s | □ 达标 □ 未达标 |
+| 数据一致性 | 100% | ___% | □ 达标 □ 未达标 |
+
+## 发现的问题
+1. __________
+2. __________
+3. __________
+
+## 改进行动
+| 行动 | 负责人 | 截止日期 | 状态 |
+|-----|-------|---------|------|
+| __________ | __________ | __________ | ☐ |
+| __________ | __________ | __________ | ☐ |
+
+## 下次演练计划
+- 日期: __________
+- 重点: __________
+```
+
+### 改进项跟踪
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dr-improvements
+  namespace: dr-system
+data:
+  improvements.yaml: |
+    improvements:
+      - id: DR-IMP-2026-001
+        title: 优化 DNS TTL 加速切换
+        owner: @platform-team
+        due_date: 2026-08-15
+        status: in_progress
+        priority: high
+        source: 演练发现
+        
+      - id: DR-IMP-2026-002
+        title: 预热 DR 集群节点池
+        owner: @sre-team
+        due_date: 2026-08-31
+        status: pending
+        priority: medium
+        source: RTO 超标分析
+        
+      - id: DR-IMP-2026-003
+        title: 自动化数据一致性检查
+        owner: @sre-team
+        due_date: 2026-09-15
+        status: pending
+        priority: high
+        source: 手动检查耗时过长
+```
+
 ## Related
 
 - [[可靠性/备份恢复/index.md|备份恢复]]

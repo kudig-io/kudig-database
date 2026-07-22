@@ -149,6 +149,105 @@ spec:
 3. 旧 ReplicaSet 保留（按 `revisionHistoryLimit` 限制数量）
 4. 滚动更新：逐步扩容新 RS，缩容旧 RS
 
+## 源码实现分析
+
+### Deployment Controller 调谐核心
+
+```go
+// k8s.io/kubernetes/pkg/controller/deployment/deployment_controller.go
+// Deployment Controller 核心调谐
+func (dc *DeploymentController) syncDeployment(ctx context.Context, key string) error {
+    // 1. 获取 Deployment 和其所有 ReplicaSet
+    deployment, err := dc.dLister.Deployments(ns).Get(name)
+    allRSs := dc.getReplicaSetsForDeployment(deployment)
+    
+    // 2. 根据 strategy 执行不同逻辑
+    switch deployment.Spec.Strategy.Type {
+    case apps.RollingUpdateDeploymentStrategyType:
+        // 滚动更新：按 maxSurge/maxUnavailable 控制节奏
+        dc.rolloutRolling(ctx, deployment, allRSs)
+    case apps.RecreateDeploymentStrategyType:
+        // 重建：先缩容旧 RS 到 0，再扩容新 RS
+        dc.rolloutRecreate(ctx, deployment, allRSs)
+    }
+    
+    // 3. 清理旧 ReplicaSet（revisionHistoryLimit）
+    dc.cleanupDeployment(ctx, allRSs, deployment)
+}
+
+// 滚动更新核心：按比例缩放新旧 RS
+func (dc *DeploymentController) rolloutRolling(ctx context.Context, d *apps.Deployment, allRSs []*apps.ReplicaSet) {
+    newRS, oldRSs := findNewAndOldRSs(d, allRSs)
+    // maxSurge=25%: 新 RS 可超出期望副本数 25%
+    // maxUnavailable=25%: 旧 RS 可低于期望副本数 25%
+    scaledUp := dc.scaleUpNewReplicaSetForRollingUpdate(newRS, d)
+    scaledDown := dc.scaleDownOldReplicaSetsForRollingUpdate(oldRSs, d)
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     Deployment 滚动更新状态机                        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Deployment (replicas=4, maxSurge=1, maxUnavail=1)     │
+│       │                                                 │
+│       ▼                                                 │
+│  RS-v1 (4 replicas) ────▶ RS-v1 (3) ──▶ RS-v1 (0)    │
+│  RS-v2 (0 replicas) ────▶ RS-v2 (2) ──▶ RS-v2 (4)    │
+│                                                         │
+│  约束: 总 Pod 数 ∈ [replicas-maxUnavail, replicas+surge]│
+│  即: [3, 5]，任何时刻可用 Pod ≥ 3                    │
+│                                                         │
+│  完成条件: newRS.ReadyReplicas == replicas              │
+│           && oldRS.Replicas == 0                        │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：Deployment 故障诊断
+
+```bash
+# 🟢 检查 Deployment 滚动更新状态
+kubectl rollout status deployment/<name> -n <ns>
+kubectl describe deployment <name> -n <ns> | grep -A10 "Conditions"
+
+# 🟢 查看 ReplicaSet 历史
+kubectl get rs -n <ns> -l app=<app-name>
+
+# 🟡 回滚到上一版本
+kubectl rollout undo deployment/<name> -n <ns>
+# 🟡 回滚到指定版本
+kubectl rollout undo deployment/<name> -n <ns> --to-revision=3
+
+# 🟢 检查更新卡住原因
+kubectl get events -n <ns> --field-selector reason=FailedCreate
+kubectl get pods -n <ns> -l app=<app> | grep -v Running
+```
+
+## 面试要点
+
+1. **Deployment 滚动更新的 maxSurge 和 maxUnavailable 如何工作？**
+   - maxSurge：更新期间允许超出期望副本数的最大 Pod 数（默认 25%）
+   - maxUnavailable：更新期间允许不可用的最大 Pod 数（默认 25%）
+   - 两者不能同时为 0，保证更新进度
+   - 生产建议：maxSurge=1, maxUnavailable=0 保证零停机
+
+2. **Deployment 卡住更新的常见原因？**
+   - 新 Pod 无法通过 readinessProbe（应用启动失败）
+   - 资源不足（节点 CPU/内存不够）
+   - progressDeadlineSeconds 超时（默认 600s）
+   - ImagePullBackOff（镜像不存在或拉取失败）
+
+3. **Deployment 与 StatefulSet 的控制器区别？**
+   - Deployment：Pod 无状态、可互换、并行更新
+   - StatefulSet：Pod 有稳定标识、有序更新（默认 RollingUpdate partition）
+   - Deployment 通过 ReplicaSet 管理，StatefulSet 直接管理 Pod
+
+4. **revisionHistoryLimit 的作用和影响？**
+   - 默认保留 10 个旧 ReplicaSet，用于回滚
+   - 设为 0 则无法回滚，但减少 etcd 存储压力
+   - 生产建议保留 5-10，配合 GitOps 可不依赖 K8s 回滚
+
 ## 相关概念
 
 - [[技能/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]

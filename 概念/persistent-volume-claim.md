@@ -174,6 +174,115 @@ spec:
 
 更多存储排错方法请参考 [[故障诊断/资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]，备份恢复策略参见 [[概念/data-protection-k8s.md|data-protection-k8s]]。
 
+## 源码实现分析
+
+### PV Controller 绑定流程
+
+```go
+// k8s.io/kubernetes/pkg/controller/volume/persistentvolume/pv_controller.go
+// PVC 绑定核心逻辑
+func (ctrl *PersistentVolumeController) bind(ctx context.Context, volume *v1.PersistentVolume, claim *v1.PersistentVolumeClaim) error {
+    // 1. 检查 PV 和 PVC 是否匹配（storageClass + accessModes + capacity）
+    if !ctrl.isVolumeMatchToClaim(volume, claim) {
+        return nil // 不匹配，跳过
+    }
+    
+    // 2. 更新 PV.ClaimRef 指向 PVC
+    volume.Spec.ClaimRef = &v1.ObjectReference{
+        Kind: "PersistentVolumeClaim",
+        Name: claim.Name, Namespace: claim.Namespace,
+        UID:  claim.UID,
+    }
+    
+    // 3. 更新 PVC.Status.Phase = Bound
+    claim.Status.Phase = v1.ClaimBound
+    claim.Spec.VolumeName = volume.Name
+    // 绑定后 PVC 不可再修改 spec（immutable）
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│           PVC 绑定与动态供给流程                        │
+├─────────────────────────────────────────────────────────┤
+│  PVC Created (Pending)                                  │
+│       │                                                 │
+│       ├─── 静态绑定 ──▶ 匹配已有 PV (storageClass匹配)  │
+│       │                                                 │
+│       └─── 动态供给 ──▶ Provisioner Watch PVC           │
+│                │                                        │
+│                ▼                                        │
+│         CSI CreateVolume RPC                            │
+│                │                                        │
+│                ▼                                        │
+│         PV Created ──▶ PVC Bound ──▶ Pod Mount          │
+│                                                         │
+│  关键事件: ProvisioningSucceeded / FailedBinding         │
+└─────────────────────────────────────────────────────────┘
+```
+
+### CSI 驱动挂载路径
+
+```go
+// k8s.io/kubernetes/pkg/volume/csi/csi_attacher.go
+// CSI 卷挂载到节点
+func (c *csiAttacher) Attach(spec *volume.Spec, nodeName types.NodeName) (string, error) {
+    // 1. 调用 CSI Controller: ControllerPublishVolume
+    // 云盘 attach 到 VM（如 AWS EBS AttachVolume）
+    
+    // 2. kubelet 调用 NodeStageVolume（格式化 + 挂载到全局目录）
+    // /var/lib/kubelet/plugins/kubernetes.io/csi/pv/<pv-name>/globalmount
+    
+    // 3. kubelet 调用 NodePublishVolume（bind mount 到 Pod 目录）
+    // /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pv-name>/mount
+}
+```
+
+### 生产运维：PVC 故障诊断
+
+```bash
+# 🟢 检查 PVC 状态和事件
+kubectl get pvc -A | grep -v Bound
+kubectl describe pvc <name> -n <ns>  # 查看 Events
+
+# 🟢 检查 PV 状态
+kubectl get pv | grep -E "Released|Failed|Available"
+
+# 🟡 强制删除卡在 Terminating 的 PVC（确认 Pod 已停止）
+kubectl patch pvc <name> -n <ns> -p '{"metadata":{"finalizers":null}}'
+# 🔴 强制删除可能导致数据丢失，必须先确认无 Pod 使用
+
+# 🟢 检查 CSI 驱动状态
+kubectl get csidrivers
+kubectl get csinodes
+kubectl logs -n kube-system -l app=csi-provisioner --tail=50
+```
+
+## 面试要点
+
+1. **PVC Pending 的常见原因有哪些？**
+   - StorageClass 不存在或拼写错误
+   - WaitForFirstConsumer 模式下 Pod 未调度（PV 等待 Pod 确定节点）
+   - 动态供给失败（CSI Provisioner 日志查看具体错误）
+   - 容量/访问模式不匹配（静态绑定时）
+
+2. **PV 的 reclaimPolicy 有什么区别？**
+   - Delete：PVC 删除后自动删除 PV 和底层存储（云盘被删除）
+   - Retain：PVC 删除后 PV 变为 Released，数据保留需手动清理
+   - Recycle：已弃用，仅 NFS 场景使用
+   - 生产建议：重要数据用 Retain + 定期快照
+
+3. **CSI 驱动的 Attach/Mount 流程是什么？**
+   - ControllerPublishVolume：云盘 attach 到节点（类似 AWS AttachVolume）
+   - NodeStageVolume：格式化 + 挂载到全局目录（每节点一次）
+   - NodePublishVolume：bind mount 到 Pod 目录（每 Pod 一次）
+   - 故障排查：检查 CSINode 注册、kubelet CSI socket、云 API 配额
+
+4. **WaitForFirstConsumer 和 Immediate 绑定模式的区别？**
+   - Immediate：PVC 创建即绑定 PV，可能跨可用区导致挂载失败
+   - WaitForFirstConsumer：等 Pod 调度确定后再绑定，保证同 AZ
+   - 云环境必须用 WaitForFirstConsumer，本地存储可用 Immediate
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

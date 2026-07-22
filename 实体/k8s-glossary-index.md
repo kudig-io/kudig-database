@@ -89,6 +89,127 @@ prerequisites:
 - [[实体/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] - 存储生态
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] - 标签字典
 
+## 高频术语速查
+
+### 核心架构术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| 控制平面 | Control Plane | K8s 集群的管理层，包含 API Server、etcd、Scheduler、Controller Manager | [[实体/fundamentals-terms.md]] |
+| 数据平面 | Data Plane | 运行工作负载的节点层，包含 kubelet、kube-proxy、容器运行时 | [[实体/fundamentals-terms.md]] |
+| API Server | kube-apiserver | 集群前端代理，所有操作的唯一入口 | [[实体/kube-apiserver.md]] |
+| etcd | etcd | 分布式 KV 存储，保存集群所有状态 | [[实体/etcd.md]] |
+| 调度器 | kube-scheduler | 负责将 Pod 分配到合适节点 | [[实体/scheduling-terms.md]] |
+
+### 工作负载术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| Pod | Pod | K8s 最小调度单元，包含一个或多个容器 | [[实体/workloads-terms.md]] |
+| Deployment | Deployment | 无状态应用管理器，支持滚动更新和回滚 | [[实体/workloads-terms.md]] |
+| StatefulSet | StatefulSet | 有状态应用管理器，提供稳定网络标识和存储 | [[实体/workloads-terms.md]] |
+| DaemonSet | DaemonSet | 确保每个节点运行一个 Pod 副本 | [[实体/workloads-terms.md]] |
+| Job/CronJob | Job/CronJob | 一次性/定时任务执行器 | [[实体/workloads-terms.md]] |
+| HPA | Horizontal Pod Autoscaler | 基于指标自动调整 Pod 副本数 | [[实体/scheduling-terms.md]] |
+
+### 网络术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| Service | Service | 稳定的网络端点，负载均衡到后端 Pod | [[实体/networking-terms.md]] |
+| Ingress | Ingress | HTTP/HTTPS 路由规则，外部流量入口 | [[实体/networking-terms.md]] |
+| CNI | Container Network Interface | 容器网络插件标准 | [[实体/networking-terms.md]] |
+| NetworkPolicy | NetworkPolicy | Pod 级别的网络访问控制策略 | [[实体/networkpolicy.md]] |
+| EndpointSlice | EndpointSlice | Service 后端端点的分片表示 | [[实体/networking-terms.md]] |
+| Gateway API | Gateway API | 下一代流量管理 API，替代 Ingress | [[实体/networking-terms.md]] |
+
+### 存储术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| PV | PersistentVolume | 集群级别的存储资源 | [[实体/storage-terms.md]] |
+| PVC | PersistentVolumeClaim | 用户对存储资源的申请 | [[实体/storage-terms.md]] |
+| StorageClass | StorageClass | 定义存储类型和动态供给参数 | [[实体/storage-terms.md]] |
+| CSI | Container Storage Interface | 容器存储插件标准 | [[实体/storage-terms.md]] |
+| VolumeSnapshot | VolumeSnapshot | 存储卷的时间点快照 | [[实体/storage-terms.md]] |
+
+### 安全术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| RBAC | Role-Based Access Control | 基于角色的访问控制 | [[security-terms]] |
+| Pod Security | Pod Security Standards | Pod 安全级别约束（Privileged/Baseline/Restricted） | [[security-terms]] |
+| ServiceAccount | ServiceAccount | Pod 内进程的身份标识 | [[security-terms]] |
+| NetworkPolicy | NetworkPolicy | 网络层微分段策略 | [[security-terms]] |
+| Seccomp | Secure Computing | 系统调用过滤机制 | [[security-terms]] |
+| mTLS | Mutual TLS | 双向 TLS 认证，服务间零信任 | [[security-terms]] |
+
+### 可观测性术语
+
+| 术语 | 英文 | 定义 | 关联页面 |
+|------|------|------|----------|
+| Metrics | Metrics | 时序数值指标（Prometheus 格式） | [[实体/observability-terms.md]] |
+| Tracing | Distributed Tracing | 分布式调用链追踪 | [[实体/observability-terms.md]] |
+| Logging | Logging | 结构化日志收集和分析 | [[实体/observability-terms.md]] |
+| SLO | Service Level Objective | 服务级别目标（可用性/延迟） | [[实体/observability-terms.md]] |
+| OpenTelemetry | OTel | CNCF 统一可观测性数据采集框架 | [[实体/observability-terms.md]] |
+
+## 术语学习路径
+
+### 初级工程师（0-1年）
+
+1. 先掌握 [[实体/fundamentals-terms.md|基础概念术语]]（24个）
+2. 再学习 [[实体/workloads-terms.md|工作负载术语]]（33个）
+3. 然后理解 [[实体/networking-terms.md|网络术语]]（17个）
+4. 最后了解 [[实体/storage-terms.md|存储术语]]（17个）
+
+### 中级工程师（1-3年）
+
+1. 深入 [[实体/scheduling-terms.md|调度术语]]（16个）
+2. 掌握 [[security-terms|安全术语]]（27个）
+3. 学习 [[实体/observability-terms.md|可观测性术语]]（10个）
+4. 理解 [[实体/operations-terms.md|运维运营术语]]（20个）
+
+### 高级工程师/架构师（3年+）
+
+1. 精通 [[实体/platform-engineering-terms.md|平台工程术语]]（19个）
+2. 研究 [[实体/multi-cloud-terms.md|多云架构术语]]（3个）
+3. 探索 [[实体/specialized-workloads-terms.md|专用工作负载术语]]（10个）
+4. 整合 [[实体/configuration-terms.md|配置管理]] + [[实体/tooling-terms.md|工具链]]
+
+## 术语使用规范
+
+### 文档中术语引用格式
+
+```markdown
+<!-- 首次出现时给出完整定义 -->
+水平Pod自动扩缩（Horizontal Pod Autoscaler, HPA）是...
+
+<!-- 后续使用缩写 -->
+HPA 根据 CPU 利用率自动调整副本数...
+
+<!-- 链接到术语表 -->
+参见 [[实体/scheduling-terms.md#hpa|HPA 术语定义]]
+```
+
+### 常见术语误用
+
+| 误用 | 正确用法 | 说明 |
+|------|----------|------|
+| “容器”指代 Pod | Pod 包含一个或多个容器 | Pod 是调度单元，容器是运行单元 |
+| “重启 Pod” | 删除 Pod 由控制器重建 | Pod 本身不支持 restart |
+| “Service IP 固定” | ClusterIP 在 Service 生命周期内固定 | 删除重建后 IP 会变 |
+| “ConfigMap 加密” | ConfigMap 明文，Secret 才加密 | 敏感数据必须用 Secret |
+| “DaemonSet 每节点一个” | 受 nodeSelector/taint 影响 | 不是所有节点都会运行 |
+
+## 术语更新日志
+
+| 版本 | 日期 | 变更内容 |
+|------|------|----------|
+| v2.1 | 2026-07 | 新增 Gateway API、CEL、Sidecar Containers 术语 |
+| v2.0 | 2026-05 | 重构为 13 个领域分类，总计 205+ 术语 |
+| v1.0 | 2026-03 | 初始版本，基础术语 80+ |
+
 ## Related
 
 - [[实体/kudig-quality-indexes.md|kudig-quality-indexes]] — KUDIG 质量评估与索引体系

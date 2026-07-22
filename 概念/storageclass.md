@@ -175,6 +175,146 @@ kubectl describe pvc db-data    # 看 Events: failed to provision / no matching 
 - **本地盘误用**：local-volume 跨节点不可迁移，Pod 漂移后挂载失败，需配合 nodeAffinity 固定。
 - **默认 SC 被误改**：切换默认 SC 影响所有未指定 SC 的 PVC，谨慎操作。
 
+## 源码实现分析
+
+### External Provisioner 动态供给流程
+
+```go
+// sigs.k8s.io/sig-storage-lib-external-provisioner/controller/controller.go
+// CSI External Provisioner 核心逻辑
+func (p *csiProvisioner) Provision(ctx context.Context, options controller.ProvisionOptions) (*v1.PersistentVolume, error) {
+    // 1. 从 StorageClass 获取 provisioner 名称和参数
+    sc := options.StorageClass
+    // provisioner: ebs.csi.aws.com / pd.csi.storage.gke.io
+    
+    // 2. 调用 CSI CreateVolume RPC
+    req := &csi.CreateVolumeRequest{
+        Name:               pvName,
+        CapacityRange:      &csi.CapacityRange{RequiredBytes: size},
+        VolumeCapabilities: volCaps,  // RWO/RWX
+        Parameters:         sc.Parameters,  // type: gp3, iops: 3000
+    }
+    resp, err := p.csiClient.CreateVolume(ctx, req)
+    
+    // 3. 构建 PV 对象并返回
+    pv := &v1.PersistentVolume{
+        Spec: v1.PersistentVolumeSpec{
+            Capacity: v1.ResourceList{v1.ResourceStorage: qty},
+            PersistentVolumeSource: v1.PersistentVolumeSource{
+                CSI: &v1.CSIPersistentVolumeSource{
+                    Driver: sc.Provisioner,
+                    VolumeHandle: resp.Volume.VolumeId,
+                },
+            },
+        },
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     StorageClass 动态供给架构                        │
+├─────────────────────────────────────────────────────────┤
+│  PVC Created (storageClassName: gp3-ssd)               │
+│       │                                                 │
+│       ▼                                                 │
+│  ┌───────────────────┐                      │
+│  │ External Provisioner │ (Watch PVC)            │
+│  └───────────────────┘                      │
+│       │                                         │
+│       ▼                                         │
+│  CSI CreateVolume RPC                           │
+│       │                                         │
+│       ▼                                         │
+│  ┌───────────────────┐                      │
+│  │  CSI Driver (node)  │                      │
+│  │  ebs.csi.aws.com    │                      │
+│  └───────────────────┘                      │
+│       │                                         │
+│       ▼                                         │
+│  Cloud API: CreateVolume (gp3, 100Gi, 3000 IOPS)│
+│       │                                         │
+│       ▼                                         │
+│  PV Created ──▶ PVC Bound                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产配置：多层级 StorageClass
+
+```yaml
+# 高性能 SSD（数据库）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3-ssd
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  iops: "3000"
+  throughput: "125"
+  encrypted: "true"
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+---
+# 低成本 HDD（日志/备份）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: st1-hdd
+provisioner: ebs.csi.aws.com
+parameters:
+  type: st1
+  encrypted: "true"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+```
+
+### 生产运维：StorageClass 故障诊断
+
+```bash
+# 🟢 查看 StorageClass 和默认标记
+kubectl get sc
+kubectl describe sc <name>
+
+# 🟢 检查 Provisioner 状态
+kubectl get pods -n kube-system -l app=csi-provisioner
+kubectl logs -n kube-system -l app=csi-provisioner --tail=30
+
+# 🟢 检查 PVC 动态供给事件
+kubectl describe pvc <name> -n <ns> | grep -A5 Events
+
+# 🟡 修改默认 StorageClass
+kubectl patch sc <old> -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+kubectl patch sc <new> -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+## 面试要点
+
+1. **StorageClass 的 volumeBindingMode 有什么区别？**
+   - Immediate：PVC 创建即触发供给，不考虑 Pod 调度位置
+   - WaitForFirstConsumer：等 Pod 调度确定后再供给，保证同 AZ
+   - 云环境必须用 WaitForFirstConsumer，否则可能跨 AZ 挂载失败
+
+2. **allowVolumeExpansion 如何工作？**
+   - 允许用户修改 PVC.spec.resources.requests.storage 触发扩容
+   - CSI 驱动调用 ControllerExpandVolume RPC
+   - 块存储扩容后需文件系统 resize（kubelet 自动执行）
+   - 注意：只能扩不能缩
+
+3. **reclaimPolicy 对生产的影响？**
+   - Delete：PVC 删除后云盘自动删除（数据不可恢复）
+   - Retain：PVC 删除后 PV 保留，需手动清理（安全但占资源）
+   - 生产建议：数据库用 Retain，临时工作负载用 Delete
+
+4. **如何设计多层级存储方案？**
+   - 按性能/成本分层：SSD（数据库）/ HDD（日志）/ 对象存储（备份）
+   - 每个层级一个 StorageClass，通过参数区分
+   - 配合 VolumeSnapshot 实现跨层级迁移
+
 ## 相关链接
 
 - [[概念/pv.md|PersistentVolume]] — 持久化卷

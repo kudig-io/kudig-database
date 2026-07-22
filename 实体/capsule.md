@@ -79,7 +79,7 @@ Capsule 以 Kubernetes Operator 方式运行，通过 Tenant CRD 管理多租户
 3. **成本优化**: 用单集群替代多集群方案，减少控制面开销和运维成本
 4. **合规隔离**: 满足不同业务线的网络和资源隔离要求
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Capsule
@@ -88,8 +88,12 @@ helm install capsule capsule/capsule \
   --namespace capsule-system --create-namespace \
   --set manager.options.forceTenantPrefix=true
 
-# 创建租户
-kubectl apply -f - <<EOF
+kubectl get pods -n capsule-system
+```
+
+### 租户配置
+
+```yaml
 apiVersion: capsule.clastix.io/v1beta2
 kind: Tenant
 metadata:
@@ -98,6 +102,8 @@ spec:
   owners:
   - name: alice
     kind: User
+  - name: team-gas
+    kind: Group
   resourceQuotas:
     scope: Tenant
     items:
@@ -105,6 +111,7 @@ spec:
         limits.cpu: "8"
         limits.memory: 16Gi
         persistentvolumeclaims: "10"
+        services.loadbalancers: "2"
   networkPolicies:
     items:
     - egress:
@@ -113,20 +120,96 @@ spec:
       - from:
         - podSelector: {}
       podSelector: {}
-EOF
+  limitRanges:
+    items:
+    - limits:
+      - default:
+          cpu: 500m
+          memory: 512Mi
+        defaultRequest:
+          cpu: 100m
+          memory: 128Mi
+        type: Container
+  imagePullPolicies:
+    - Always
+  containerRegistries:
+    allowed:
+      - registry.internal.com
+```
 
+```bash
 # 租户属主自助创建命名空间
 kubectl create namespace gas-prod --as=alice
+kubectl create namespace gas-staging --as=alice
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看租户状态
+kubectl get tenants
+kubectl describe tenant gas-station
+
+# 🟢 查看租户命名空间
+kubectl get namespaces -l capsule.clastix.io/tenant=gas-station
+
+# 🟡 修改租户配额
+kubectl patch tenant gas-station --type=merge -p '{"spec":{"resourceQuotas":{"items":[{"hard":{"limits.cpu":"16"}}]}}}'
+
+# 🟡 添加租户属主
+kubectl patch tenant gas-station --type=json -p '[{"op":"add","path":"/spec/owners/-","value":{"name":"bob","kind":"User"}}]'
+
+# 🔴 删除租户（级联删除所有命名空间）
+kubectl delete tenant gas-station
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 无法创建 Namespace | 非租户属主 | `kubectl auth can-i create ns --as=alice` | 确认 owners 配置 |
+| 配额未生效 | ResourceQuota 未同步 | `kubectl get resourcequota -n gas-prod` | 检查 Tenant spec |
+| 网络隔离失效 | NetworkPolicy 未应用 | `kubectl get networkpolicy -n gas-prod` | 确认 CNI 支持 NP |
+| 镜像拉取被拒绝 | registry 不在白名单 | `kubectl describe pod -n gas-prod` | 添加到 containerRegistries |
+| 租户前缀强制失败 | forceTenantPrefix 未启用 | 检查 Helm values | 重新配置 --set |
+
+```
+排查流程:
+├── 租户创建失败
+│   ├── kubectl get tenants → 检查状态
+│   ├── kubectl logs -n capsule-system → controller 日志
+│   └── 确认 CRD 版本匹配
+├── 权限问题
+│   ├── kubectl auth can-i --as=<user> → 检查权限
+│   └── 确认 RBAC 和 owners 配置
+└── 隔离失效
+    ├── kubectl get networkpolicy → 确认 NP 存在
+    └── 确认 CNI 插件支持 NetworkPolicy
+```
+
+## 生产案例
+
+### 案例 1: 多团队单集群整合
+
+- **场景**: 5 个业务团队各自维护独立集群，资源利用率低、运维成本高
+- **方案**: 部署 Capsule 实现单集群多租户；每个团队一个 Tenant，自助管理 Namespace；统一配额和网络策略
+- **效果**: 集群数量从 5 减少到 1，资源利用率提升 40%，运维成本降低 60%
+
+### 案例 2: 租户资源超卖防护
+
+- **场景**: 某团队突发负载占满集群资源，影响其他团队
+- **方案**: 配置 Tenant 级别 ResourceQuota 和 LimitRange；设置 Pod 优先级和抢占策略
+- **效果**: 资源隔离有效，单团队突发不再影响其他租户
 
 ## 对比
 
-| 特性 | Capsule | vCluster | Kiosk | Multi-tenancy Bench |
-|------|---------|----------|-------|---------------------|
-| 隔离方式 | Namespace 聚合 | 虚拟集群 | Namespace | 多种方案 |
-| 自助 Namespace | ✅ | ✅ | ✅ | ⚠️ |
-| 无额外开销 | ✅ | ❌ 控制面 | ✅ | ✅ |
-| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | WG |
+| 特性 | Capsule | vCluster | Kiosk | Multi-tenancy Bench | 适用场景 |
+|------|---------|----------|-------|---------------------|----------|
+| 隔离方式 | Namespace 聚合 | 虚拟集群 | Namespace | 多种方案 | 架构选择 |
+| 自助 Namespace | ✅ | ✅ | ✅ | ⚠️ | 开发者自助 |
+| 无额外开销 | ✅ | ❌ 控制面 | ✅ | ✅ | 性能敏感 |
+| 网络隔离 | ✅ NP | ✅ 完全 | ⚠️ | ✅ | 安全合规 |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | WG | 生态成熟度 |
 
 ## 架构定位
 

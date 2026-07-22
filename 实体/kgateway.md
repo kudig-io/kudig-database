@@ -79,7 +79,7 @@ kgateway 通过标准 Gateway API CRD 与 Kubernetes 集成。用户创建 `Gate
 3. **混合云流量管理**：流量路由到 K8s Service 和外部遗留服务
 4. **多租户 API**：基于 Host 和 Path 的多租户 API 路由和认证隔离
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 kgateway
@@ -87,18 +87,31 @@ helm repo add kgateway https://kgateway.io/charts
 helm repo update
 helm install kgateway kgateway/kgateway -n kgateway-system --create-namespace
 
-# 创建 Gateway 和 HTTPRoute
-kubectl apply -f - <<EOF
+# 验证安装
+kubectl get pods -n kgateway-system
+kubectl get gatewayclass kgateway
+```
+
+### Gateway + HTTPRoute 配置
+
+```yaml
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: my-gateway
+  namespace: default
 spec:
   gatewayClassName: kgateway
   listeners:
     - name: http
       port: 80
       protocol: HTTP
+    - name: https
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - name: my-tls-secret
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -118,17 +131,102 @@ spec:
         - name: myapp-canary
           port: 8080
           weight: 10
-EOF
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            add:
+              - name: X-Gateway-Version
+                value: "kgateway-v2"
 ```
+
+### Upstream 自定义路由
+
+```yaml
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: Upstream
+metadata:
+  name: legacy-service
+spec:
+  static:
+    hosts:
+      - addr: 10.0.1.100
+        port: 8443
+  sslConfig:
+    verifySubjectAltNames: ["legacy.internal"]
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Gateway 状态
+kubectl get gateways -A
+kubectl describe gateway my-gateway
+
+# 🟢 查看路由状态
+kubectl get httproutes -A
+kubectl describe httproute myapp-route
+
+# 🟢 查看 Envoy 代理 Pod
+kubectl get pods -n kgateway-system -l app=kgateway-proxy
+
+# 🟡 更新 Gateway 配置（触发 Envoy 热更新）
+kubectl apply -f gateway.yaml
+
+# 🟡 调整副本数
+kubectl scale deployment kgateway-proxy -n kgateway-system --replicas=3
+
+# 🔴 删除 Gateway（影响所有关联路由）
+kubectl delete gateway my-gateway
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Gateway 未分配地址 | GatewayClass 未就绪 | `kubectl get gatewayclass kgateway -o yaml` | 检查 controller 日志 |
+| HTTPRoute 未生效 | parentRef 不匹配 | `kubectl describe httproute` | 确认 hostname/listener 匹配 |
+| 503 错误 | 后端 Service 无 Endpoints | `kubectl get endpoints myapp-service` | 检查 Pod 标签选择器 |
+| TLS 握手失败 | 证书 Secret 不存在 | `kubectl get secret my-tls-secret` | 创建/更新 TLS Secret |
+| 路由权重不生效 | 多个 Route 冲突 | `kubectl get httproutes -o wide` | 检查 priority 和 hostname 冲突 |
+
+```
+排查流程:
+├── Gateway 状态异常
+│   ├── kubectl get gatewayclass → 检查 Accepted
+│   └── kubectl logs -n kgateway-system -l app=kgateway-controller
+├── 路由不生效
+│   ├── kubectl describe httproute → 检查 Conditions
+│   └── 确认 parentRef.name 与 Gateway 名称匹配
+└── 后端不可达
+    ├── kubectl get endpoints → 确认有活跃端点
+    └── kubectl exec proxy-pod -- curl -v backend:port
+```
+
+## 生产案例
+
+### 案例 1: Gateway API 迁移导致流量中断
+
+- **场景**: 从 Ingress 迁移到 Gateway API，切换期间部分流量 404
+- **排查**: HTTPRoute 的 hostname 与 Gateway listener 的 hostname 不匹配
+- **方案**: 在 Gateway listener 中移除 hostname 限制，由 HTTPRoute 控制路由；灰度期间保留 Ingress 和 Gateway 双活
+- **效果**: 零中断完成迁移，回滚时间从 15min 缩短到 1min
+
+### 案例 2: 金丝雀发布权重漂移
+
+- **场景**: 配置 90/10 权重但实际流量比例偏差大
+- **排查**: 两个 backendRef 指向同一 Service 的不同端口，Envoy 连接池复用导致统计偏差
+- **方案**: 使用独立的 canary Service 和独立的 Pod 标签；配置 outlierDetection 排除异常端点
+- **效果**: 流量比例精确控制在 ±2% 以内
 
 ## 对比
 
-| 特性 | kgateway | Envoy Gateway | Contour | Istio Gateway |
-|------|----------|---------------|---------|--------------|
-| Gateway API | ✅ 完整 | ✅ | ✅ | ✅ |
-| Lambda 路由 | ✅ | ❌ | ❌ | ❌ |
-| Service Mesh | ✅ Ambient | ❌ | ❌ | ✅ 核心 |
-| 自定义 CRD | ✅ Upstream | ❌ | ⚠️ | ❌ |
+| 特性 | kgateway | Envoy Gateway | Contour | Istio Gateway | 适用场景 |
+|------|----------|---------------|---------|--------------|----------|
+| Gateway API | ✅ 完整 | ✅ | ✅ | ✅ | 标准入口 |
+| Lambda 路由 | ✅ | ❌ | ❌ | ❌ | Serverless 集成 |
+| Service Mesh | ✅ Ambient | ❌ | ❌ | ✅ 核心 | 服务网格 |
+| 自定义 CRD | ✅ Upstream | ❌ | ⚠️ | ❌ | 混合云路由 |
+| CNCF 状态 | Sandbox | Incubating | Graduated | Graduated | 生态成熟度 |
 
 ## 参考链接
 

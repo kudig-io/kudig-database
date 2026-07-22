@@ -70,16 +70,203 @@ BFE 可作为 Kubernetes 的 Ingress Controller 使用。通过 CRD 定义 BFE �
 - **协议适配**：前端 HTTPS 到后端 gRPC 的协议转换
 - **灰度发布**：基于请求特征的细粒度流量分配
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 Helm 安装
 helm repo add bfe https://bfenetworks.github.io/bfe-helm-charts/
 helm install bfe bfe/bfe -n bfe-system --create-namespace
+
+# 🟢 验证安装
+kubectl get pods -n bfe-system
+kubectl get svc -n bfe-system
+
+# 🟢 测试连接
+curl -v http://bfe.bfe-system.svc/health
+
+# 🟢 查看 BFE 状态 API
+curl http://bfe.bfe-system.svc:8080/monitor/proxy_state
 ```
+
+### 租户和路由配置
+
+```json
+{
+  "Version": "1.0",
+  "DefaultNext": "error_page",
+  "ProductRule": {
+    "example_product": {
+      "Cond": "req_host_in(\"www.example.com\")",
+      "BasicRule": [
+        {
+          "Cond": "req_path_prefix_in(\"/api\", false)",
+          "ClusterName": "api_backend"
+        },
+        {
+          "Cond": "req_path_prefix_in(\"/static\", false)",
+          "ClusterName": "static_backend"
+        }
+      ]
+    }
+  }
+}
+```
+
+### 集群配置
+
+```json
+{
+  "Version": "1.0",
+  "Config": {
+    "api_backend": {
+      "Backend": [
+        {
+          "Name": "api-1",
+          "Addr": "10.0.1.10:8080",
+          "Weight": 5
+        },
+        {
+          "Name": "api-2",
+          "Addr": "10.0.1.11:8080",
+          "Weight": 5
+        }
+      ],
+      "CheckConf": {
+        "Schem": "http",
+        "Uri": "/health",
+        "Host": "api.example.com",
+        "StatusCode": 200
+      },
+      "GslbBasic": {
+        "RetryLevel": 0,
+        "HashConf": {
+          "HashStrategy": 0,
+          "HashFactor": 0
+        }
+      }
+    }
+  }
+}
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 BFE Pod
+kubectl get pods -n bfe-system -o wide
+
+# 🟢 查看 BFE 日志
+kubectl logs -n bfe-system -l app=bfe --tail=50
+
+# 🟢 查看代理状态
+curl http://bfe.bfe-system.svc:8080/monitor/proxy_state
+
+# 🟢 查看连接状态
+curl http://bfe.bfe-system.svc:8080/monitor/connection_state
+
+# 🟢 查看后端集群状态
+curl http://bfe.bfe-system.svc:8080/monitor/cluster_state
+
+# 🟢 查看路由统计
+curl http://bfe.bfe-system.svc:8080/monitor/route_state
+
+# 🟡 热加载配置 (无需重启)
+curl -X POST http://bfe.bfe-system.svc:8080/reload?name=route_rule
+
+# 🟢 查看 Prometheus 指标
+curl http://bfe.bfe-system.svc:8080/metrics
+
+# 🟡 滚动重启
+kubectl rollout restart deployment/bfe -n bfe-system
+```
+
+### K8s Ingress 集成
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bfe-ingress
+  annotations:
+    kubernetes.io/ingress.class: bfe
+    bfe.io/product: "example_product"
+spec:
+  rules:
+  - host: www.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-service
+            port:
+              number: 80
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 502 Bad Gateway | 后端不可达 | `curl :8080/monitor/cluster_state` | 检查后端 Pod 和健康检查 |
+| 路由不生效 | 路由规则配置错误 | `curl :8080/monitor/route_state` | 检查 Cond 表达式语法 |
+| 高延迟 | 后端响应慢/连接池耗尽 | 查看 Prometheus 指标 | 优化后端/调整连接池 |
+| TLS 握手失败 | 证书配置错误 | 检查 BFE 日志 | 更新证书配置 |
+| 配置加载失败 | JSON 格式错误 | `kubectl logs -l app=bfe` | 修正配置文件格式 |
+
+### 排查流程
+
+```
+1. kubectl get pods -n bfe-system → 确认 BFE Pod 状态
+2. curl :8080/monitor/proxy_state → 查看代理状态
+3. curl :8080/monitor/cluster_state → 查看后端状态
+4. kubectl logs -l app=bfe → 查看错误日志
+5. 检查路由规则和后端健康检查配置
+```
+
+## 生产案例
+
+### 案例1: 百度内部流量接入
+- **场景**: 百度内部每秒数百万请求的前端接入
+- **方案**: BFE 多租户架构，按业务线隔离流量
+- **效果**: 单实例处理 100万+ QPS，多业务线共享无干扰
+
+### 案例2: 多租户 API 网关
+- **场景**: SaaS 平台需要为每个租户提供独立流量策略
+- **方案**: BFE 租户隔离 + 细粒度限流
+- **效果**: 租户间流量完全隔离，单租户异常不影响其他
 
 ## 对比替代方案
 
-相比 Nginx，BFE 提供更强的多租户隔离和 Go 语言的可扩展性。相比 Envoy，BFE 更专注于流量接入场景且运维体验更好，但生态和社区不如 Envoy 活跃。
+| 维度 | BFE | Nginx | Envoy | HAProxy |
+|------|-----|-------|-------|--------|
+| 多租户 | 原生支持 | 不支持 | 有限 | 不支持 |
+| 语言 | Go | C | C++ | C |
+| 热加载 | 支持 | 支持 | xDS | 支持 |
+| 协议支持 | 丰富 | 丰富 | 最丰富 | 丰富 |
+| K8s Ingress | 支持 | 支持 | 支持 | 支持 |
+| 社区活跃度 | 中 | 极高 | 极高 | 高 |
+| 扩展性 | Go 插件 | Lua/C | Wasm/Lua | Lua |
+
+## 检查清单
+
+- [ ] BFE 副本数 >= 2，配置 PDB
+- [ ] 健康检查配置正确
+- [ ] 路由规则已测试验证
+- [ ] TLS 证书已配置且自动续期
+- [ ] Prometheus 指标已接入监控
+- [ ] 配置了合理的限流策略
+- [ ] 日志级别适当 (生产用 WARN+)
+- [ ] 定期备份配置文件
 
 ## Related
 

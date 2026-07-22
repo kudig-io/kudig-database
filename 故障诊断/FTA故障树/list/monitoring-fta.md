@@ -157,6 +157,92 @@ flowchart TD
 |------|---------|
 | **事件** | Prometheus Operator PrometheusRule 同步事件、ServiceMonitor 
 
+## 生产案例
+
+### 案例1: Prometheus OOMKilled 导致监控数据丢失
+
+**时间线**:
+- 06:00 业务扩容，新增 500 个 ServiceMonitor target
+- 06:30 Prometheus Pod OOMKilled，内存超过 8Gi limit
+- 06:30-06:45 监控数据断点，告警规则无法评估
+- 06:45 Prometheus 重启，但 WAL 恢复耗时 10 分钟
+
+**根因链**:
+```
+ServiceMonitor数量激增 → 采集target过多 → 内存持续增长
+→ 超过memory limit → OOMKilled → 监控中断 + 告警失效
+```
+
+**修复**:
+```bash
+# 🟢 检查 Prometheus 状态
+kubectl get pods -n monitoring -l app.kubernetes.io/name=prometheus -o wide
+# 🟡 调整资源限制
+kubectl patch prometheus k8s -n monitoring --type=merge -p '{"spec":{"resources":{"requests":{"memory":"16Gi"},"limits":{"memory":"16Gi"}}}}'
+# 🟢 检查活跃 target 数
+kubectl port-forward -n monitoring svc/prometheus 9090:9090 &
+curl -s http://localhost:9090/api/v1/targets | jq '.data.activeTargets | length'
+```
+
+### 案例2: Alertmanager 告警未发送
+
+**现象**: Prometheus 规则触发但无通知发出
+
+**根因**: Alertmanager 的 SMTP 配置密码过期，发送失败但无告警
+
+**修复**:
+```bash
+# 🟢 检查 Alertmanager 日志
+kubectl logs -n monitoring -l app.kubernetes.io/name=alertmanager --tail=50 | grep -i "error\|failed"
+# 🟡 更新 SMTP 凭证
+kubectl create secret generic alertmanager-smtp --from-literal=password=${NEW_PASS} -n monitoring --dry-run=client -o yaml | kubectl apply -f -
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: monitoring-self-alerts
+  rules:
+  - alert: PrometheusDown
+    expr: up{job="prometheus"} == 0
+    for: 2m
+    labels:
+      severity: critical
+  - alert: PrometheusHighMemory
+    expr: container_memory_working_set_bytes{container="prometheus"} / container_spec_memory_limit_bytes{container="prometheus"} > 0.85
+    for: 10m
+    labels:
+      severity: warning
+  - alert: AlertmanagerNotificationFailed
+    expr: rate(alertmanager_notifications_failed_total[5m]) > 0
+    for: 5m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| Prometheus 内存规划 | 按 target 数量 × 时间序列估算 | P0 |
+| 监控自监控 | 用独立 Prometheus 监控主 Prometheus | P0 |
+| Alertmanager 高可用 | 至少 2 副本 + gossip 去重 | P1 |
+| 通知渠道验证 | 定期发送测试告警 | P1 |
+
+## 面试要点
+
+1. **Q: Prometheus 内存不足的优化方案？**
+   A: 减少时间序列(删除无用指标) → 调整采集间隔 → 启用远程存储(Thanos/Cortex) → 分片(多 Prometheus) → 调整 retention
+
+2. **Q: 告警未触发的排查步骤？**
+   A: 检查 Prometheus 规则加载状态 → 确认表达式是否正确 → 查看 Alertmanager 状态 → 验证通知渠道配置 → 检查 inhibition/silence
+
+3. **Q: Prometheus Operator 的核心组件？**
+   A: Prometheus CRD(管理实例) + ServiceMonitor(采集配置) + PrometheusRule(告警规则) + Alertmanager CRD + ThanosRuler
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

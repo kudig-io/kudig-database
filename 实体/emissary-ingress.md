@@ -80,7 +80,7 @@ Emissary-Ingress 以 Helm Chart 或 Operator 方式部署。Emissary Controller 
 3. **gRPC API 代理**: 为 gRPC 微服务提供负载均衡和超时控制
 4. **多租户 API**: 通过 Host CRD 为不同租户提供独立的虚拟主机和 TLS
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Emissary-Ingress
@@ -88,11 +88,13 @@ helm repo add datawire https://app.getambassador.io
 helm install emissary-ingress datawire/emissary-ingress -n emissary-system --create-namespace \
   --set service.type=LoadBalancer
 
-# 等待就绪
 kubectl wait --for=condition=available deployment/emissary-ingress -n emissary-system
+kubectl get svc -n emissary-system
+```
 
-# 创建路由映射
-kubectl apply -f - <<EOF
+### Mapping 路由配置
+
+```yaml
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
@@ -101,25 +103,27 @@ spec:
   hostname: "*"
   prefix: /backend/
   service: backend-service.default:8080
-  rate_limits:
-  - resources:
-    - "backend"
+  timeout_ms: 5000
+  retry_policy:
+    retry_on: "5xx"
+    num_retries: 3
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: default-host
 spec:
-  hostname: "*"
+  hostname: "api.example.com"
   mappingSelector:
     matchLabels:
       ambassador: default
   tls:
     context: default-tls
-EOF
+```
 
-# 金丝雀发布（10% 流量到新版本）
-kubectl apply -f - <<EOF
+### 金丝雀发布
+
+```yaml
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
@@ -129,17 +133,76 @@ spec:
   prefix: /backend/
   service: backend-service-v2.default:8080
   weight: 10
-EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看路由状态
+kubectl get mappings -A
+kubectl describe mapping backend
+
+# 🟢 查看诊断信息
+kubectl port-forward svc/emissary-ingress-admin -n emissary-system 8877:8877
+# 访问 http://localhost:8877/ambassador/v0/diag/
+
+# 🟡 更新路由配置
+kubectl apply -f mapping-updated.yaml
+
+# 🟡 调整副本数
+kubectl scale deployment emissary-ingress -n emissary-system --replicas=3
+
+# 🔴 删除路由
+kubectl delete mapping backend
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 503 错误 | 后端 Service 无 Endpoints | `kubectl get endpoints` | 检查 Pod 标签 |
+| 路由不生效 | Mapping 配置错误 | `kubectl describe mapping` | 检查 prefix/hostname |
+| TLS 失败 | 证书 Secret 缺失 | `kubectl get secret` | 创建 TLS Secret |
+| 超时 | 后端响应慢 | 查看诊断页面 | 调整 timeout_ms |
+| 金丝雀不生效 | weight 配置错误 | `kubectl get mappings` | 确认 weight 值 |
+
+```
+排查流程:
+├── 路由异常
+│   ├── kubectl get mappings → 确认路由存在
+│   ├── 访问诊断页面 → 查看 Envoy 配置
+│   └── kubectl logs emissary-pod → 查看错误
+├── 后端不可达
+│   ├── kubectl get endpoints → 确认有活跃端点
+│   └── kubectl exec emissary-pod -- curl backend:port
+└── TLS 问题
+    ├── kubectl get secret → 确认证书存在
+    └── openssl s_client -connect host:443 → 测试证书
+```
+
+## 生产案例
+
+### 案例 1: API 网关统一入口
+
+- **场景**: 20+ 微服务需要统一入口，包含认证、限流、日志
+- **方案**: 部署 Emissary 作为 API 网关；每个服务一个 Mapping；配置 RateLimit 和 JWT 认证 Filter
+- **效果**: API 管理统一，新服务接入从 2h 缩短到 10min
+
+### 案例 2: 金丝雀发布零风险
+
+- **场景**: 新版本上线需要逐步放量，手动切换风险高
+- **方案**: 创建 canary Mapping weight=10；观察错误率；逐步调整 weight 10→50→100
+- **效果**: 发布风险可控，回滚时间 <10s（删除 canary Mapping）
 
 ## 对比
 
-| 特性 | Emissary | nginx-ingress | Contour | Kong |
-|------|----------|--------------|---------|------|
-| 底层引擎 | Envoy | nginx | Envoy | nginx/OpenResty |
-| API Gateway | ✅ | ⚠️ | ⚠️ | ✅ |
-| CRD 配置 | ✅ Mapping | ⚠️ annotation | ✅ | ✅ |
-| CNCF 状态 | Incubating | 非 CNCF | Graduated | 非 CNCF |
+| 特性 | Emissary | nginx-ingress | Contour | Kong | 适用场景 |
+|------|----------|--------------|---------|------|----------|
+| 底层引擎 | Envoy | nginx | Envoy | OpenResty | 性能 |
+| API Gateway | ✅ | ⚠️ | ⚠️ | ✅ | 全功能 |
+| CRD 配置 | ✅ Mapping | ⚠️ annotation | ✅ | ✅ | 云原生 |
+| 金丝雀 | ✅ weight | ⚠️ | ⚠️ | ✅ | 灰度发布 |
+| CNCF 状态 | Incubating | 非 CNCF | Graduated | 非 CNCF | 生态 |
 
 ## 架构定位
 

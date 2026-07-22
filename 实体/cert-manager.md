@@ -59,15 +59,216 @@ description: '## 项目概述'
 
 ## 架构定位
 
-在 CNCF 生态中，cert-manager 属于 **Security** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+cert-manager 是 Kubernetes 原生的证书管理控制器，自动签发、续期、管理 TLS 证书，支持 Let's Encrypt、Vault、自签 CA 等多种 Issuer。
+
+## 架构设计
+
+```
+┌─────────────────────────────────────────────────────┐
+│              cert-manager Controller                │
+│                                                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
+│  │Certificate│  │  Order   │  │Challenge │    │
+│  │Controller│→│Controller│→│Controller│    │
+│  └──────────┘  └──────────┘  └──────────┘    │
+│       │              │              │            │
+│       ▼              ▼              ▼            │
+│  ┌────────────────────────────────────────┐  │
+│  │           Issuer / ClusterIssuer        │  │
+│  │  (Let's Encrypt / Vault / CA / Self)   │  │
+│  └────────────────────────────────────────┘  │
+│       │                                         │
+│       ▼                                         │
+│  ┌────────────────────────────────────────┐  │
+│  │        Secret (TLS 证书)              │  │
+│  └────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+## 核心资源
+
+| 资源 | 作用域 | 说明 |
+|------|--------|------|
+| Issuer | Namespace | 命名空间级证书签发者 |
+| ClusterIssuer | Cluster | 集群级证书签发者 |
+| Certificate | Namespace | 证书请求 |
+| Order | Namespace | ACME 订单 |
+| Challenge | Namespace | ACME 挑战 |
+
+## 安装与配置
+
+```bash
+# 🟢 Helm 安装
+helm repo add jetstack https://charts.jetstack.io
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --set crds.enabled=true
+
+# 🟢 验证安装
+kubectl get pods -n cert-manager
+kubectl get crd | grep cert-manager.io
+```
+
+### Let's Encrypt ClusterIssuer
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: admin@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
+    # 或使用 DNS01 验证 (支持通配符)
+    # - dns01:
+    #     route53:
+    #       region: us-east-1
+```
+
+### Certificate 资源
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app-cert
+  namespace: default
+spec:
+  secretName: app-tls
+  dnsNames:
+  - app.example.com
+  - "*.app.example.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  renewBefore: 720h  # 到期前 30 天续期
+  duration: 2160h    # 有效期 90 天
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+```
+
+### 自签 CA (内部服务)
+
+```yaml
+# 根 CA
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+---
+# CA 证书
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: internal-ca
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: internal-ca
+  secretName: internal-ca-secret
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+---
+# CA Issuer
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: internal-ca-issuer
+spec:
+  ca:
+    secretName: internal-ca-secret
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看证书状态
+kubectl get certificates -A
+kubectl get certificaterequests -A
+kubectl get orders -A
+kubectl get challenges -A
+
+# 🟢 查看证书详情
+kubectl describe certificate app-cert -n default
+
+# 🟢 查看 Issuer 状态
+kubectl get clusterissuers
+kubectl describe clusterissuer letsencrypt-prod
+
+# 🟢 查看证书 Secret
+kubectl get secret app-tls -o yaml
+kubectl get secret app-tls -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates
+
+# 🟢 查看 cert-manager 日志
+kubectl logs -n cert-manager -l app=cert-manager --tail=50
+
+# 🟡 强制续期
+kubectl cert-manager renew app-cert -n default
+
+# 🟡 删除并重建证书
+kubectl delete certificate app-cert -n default
+kubectl apply -f certificate.yaml
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Certificate Pending | Issuer 未就绪 | 检查 Issuer 状态 |
+| Order Failed | ACME 验证失败 | 检查 Challenge |
+| Challenge Failed | DNS/HTTP 验证不通过 | 检查 DNS/Ingress |
+| 续期失败 | Let's Encrypt 限流 | 等待/使用 staging |
+| Secret 未创建 | 权限不足 | 检查 RBAC |
+| 证书过期 | renewBefore 太短 | 调整 renewBefore |
+
+### 排查流程
+
+```
+1. 检查 Certificate 状态
+   kubectl describe certificate <name>
+       │
+2. 检查 CertificateRequest
+   kubectl get certificaterequests
+       │
+3. 检查 Order
+   kubectl describe order <name>
+       │
+4. 检查 Challenge
+   kubectl describe challenge <name>
+       │
+5. 检查 Issuer
+   kubectl describe clusterissuer <name>
+```
+
+## 检查清单
+
+- [ ] 理解 cert-manager 架构
+- [ ] 能配置 Let's Encrypt Issuer
+- [ ] 掌握 Certificate 资源配置
+- [ ] 能排查证书签发失败
+- [ ] 理解自动续期机制
+- [ ] 了解自签 CA 配置
 
 ## 参考链接
 
-- [[实体/vault.md|[[HashiCorp Vault|vault]]]]
-- [[实体/crd-custom-resources.md|crd-custom-resources]]
-- [[概念/controller-pattern.md|controller-pattern]]
-- [[概念/secrets-management.md|secrets-management]]
-- [[pod-lifecycle]]
+- [[实体/vault.md|HashiCorp Vault]]
+- [[实体/crd-custom-resources.md|CRD]]
+- [[概念/controller-pattern.md|Controller Pattern]]
+- [[概念/secrets-management.md|Secrets Management]]
 
 ## Related
 

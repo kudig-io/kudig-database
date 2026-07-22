@@ -87,33 +87,113 @@ Inspektor Gadget 通过 DaemonSet 部署在所有节点。CLI 作为 kubectl 插
 3. **性能分析**: 使用 profile gadget 生成 CPU 火焰图，分析应用性能瓶颈
 4. **文件追踪**: 使用 tracesnoop/fis 监控文件读写操作，排查 IO 问题
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 kubectl 插件
 kubectl krew install gadget
 # 部署到集群
 kubectl gadget deploy
-# 使用 Gadgets
-kubectl gadget top pods --sort cpu       # Pod CPU 排行
-kubectl gadget advise seccomp monitor    # 生成 seccomp Profile
-kubectl gadget profile cpu --node node1  # CPU 火焰图
-kubectl gadget trace dns --pod web       # DNS 追踪
-kubectl gadget trace exec --namespace prod  # 进程执行追踪
 ```
+
+### 常用 Gadgets 命令
+
+```bash
+# 🟢 Pod 资源排行
+kubectl gadget top pods --sort cpu
+kubectl gadget top pods --sort memory -n production
+
+# 🟢 DNS 追踪
+kubectl gadget trace dns --pod web-abc123
+kubectl gadget trace dns --namespace production
+
+# 🟢 进程执行追踪
+kubectl gadget trace exec --namespace prod
+kubectl gadget trace exec --pod web-abc123
+
+# 🟢 TCP 连接追踪
+kubectl gadget trace tcp --namespace default
+
+# 🟢 文件操作追踪
+kubectl gadget trace open --pod db-0
+
+# 🟡 CPU 火焰图
+kubectl gadget profile cpu --node node1 --duration 30
+
+# 🟡 生成 seccomp Profile
+kubectl gadget advise seccomp monitor -n production --pod web
+
+# 🟢 网络流可视化
+kubectl gadget network-graph
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Gadget DaemonSet 状态
+kubectl get pods -n gadget -l app=gadget
+
+# 🟢 查看可用 Gadgets
+kubectl gadget --help
+
+# 🟢 按标签过滤
+kubectl gadget trace exec -l app=nginx
+
+# 🟢 输出为 JSON
+kubectl gadget trace dns --output json
+
+# 🟡 自定义 eBPF 程序
+kubectl gadget run my-custom-gadget.wasm
+
+# 🟢 查看内核版本要求
+kubectl gadget version
+uname -r  # 需要 5.4+
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Gadget 无法加载 | 内核版本过低 | `uname -r` | 升级内核到 5.4+ |
+| 无事件输出 | 过滤器不匹配 | 检查 namespace/pod 参数 | 确认过滤条件正确 |
+| DaemonSet 未运行 | 权限不足 | `kubectl describe pod -n gadget` | 检查特权模式配置 |
+| 元数据缺失 | cgroup 映射失败 | 检查容器运行时 | 确认 containerd 版本 |
+| 性能开销大 | 高频事件采集 | 检查 eBPF 程序 | 减少采集频率/范围 |
+
+## 生产案例
+
+### 案例1: DNS 解析故障排查
+
+**场景**: 微服务周期性 DNS 解析超时  
+**方案**: `kubectl gadget trace dns` 捕获所有 DNS 请求和响应时间  
+**效果**: 定位到 CoreDNS Pod 资源不足，扩容后解决  
+
+### 案例2: 安全审计 - 异常进程检测
+
+**场景**: 需检测容器中是否有异常进程执行  
+**方案**: `kubectl gadget trace exec` 持续监控 + 告警规则  
+**效果**: 发现并阻止了加密货币挖矿程序  
 
 ## 替代方案
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Inspektor Gadget** | 多功能 Gadget 集、kubectl 原生 | 特权 DaemonSet |
-| Pixie | 零侵入、PxL 强大 | 仅关注协议层可观测性 |
-| Cilium Hubble | eBPF 网络可观测优秀 | 仅 Cilium 环境 |
-| bpftrace | eBPF 编程灵活 | 非 K8s 原生 |
+| 项目 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| **Inspektor Gadget** | 多功能、kubectl 原生 | 特权 DaemonSet | 调试/排障 |
+| Pixie | 零侵入、PxL 强大 | 仅协议层 | 应用可观测 |
+| Cilium Hubble | eBPF 网络优秀 | 仅 Cilium | 网络可观测 |
+| bpftrace | 编程灵活 | 非 K8s 原生 | 高级追踪 |
 
 ## 架构定位
 
 在 CNCF 生态中，Inspektor Gadget 属于 **Observability / Debugging** 类别，是 Kubernetes eBPF 调试工具箱的代表性项目。它与 Pixie、Cilium 互补，更偏向开发和排障场景。
+
+## 检查清单
+
+- [ ] 确认节点内核版本 >= 5.4
+- [ ] 生产环境限制 Gadget DaemonSet 权限
+- [ ] 仅在需要时启用高频 Gadgets
+- [ ] 将常用 Gadgets 纳入运维工具箱
+- [ ] 配置安全审计 Gadgets 持续运行
 
 ## 参考链接
 
@@ -125,7 +205,8 @@ kubectl gadget trace exec --namespace prod  # 进程执行追踪
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[cilium]] — Cilium
+- [[实体/pixie.md|Pixie]] — eBPF 可观测性
 
 
 <!-- risk-assessed -->

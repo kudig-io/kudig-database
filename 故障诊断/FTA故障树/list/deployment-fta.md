@@ -171,6 +171,89 @@ flowchart TD
 
     { "name": "ReplicaSet 协同异常", "
 
+## 生产案例
+
+### 案例1: Deployment 滚动更新卡住 - 新 Pod 无法 Ready
+
+**时间线**:
+- 11:00 触发 Deployment 滚动更新
+- 11:05 新 ReplicaSet 的 Pod 一直未 Ready，更新卡住
+- 11:10 检查发现新 Pod readinessProbe 失败(依赖服务未就绪)
+- 11:15 修复依赖服务后新 Pod Ready，更新继续
+
+**根因链**:
+```
+滚动更新 → 新Pod启动 → readinessProbe检查依赖服务
+→ 依赖服务不可用 → Probe失败 → Pod未Ready
+→ 旧Pod不终止(maxUnavailable=0) → 更新卡住
+```
+
+**修复**:
+```bash
+# 🟢 检查 Deployment 状态
+kubectl rollout status deployment/${DEPLOY} -n ${NS}
+kubectl describe deployment ${DEPLOY} -n ${NS} | grep -A10 "Conditions"
+# 🟡 回滚
+kubectl rollout undo deployment/${DEPLOY} -n ${NS}
+# 🟢 查看新 Pod 事件
+kubectl get events -n ${NS} --sort-by='.lastTimestamp' | grep ${DEPLOY} | tail -10
+```
+
+### 案例2: Deployment 副本数不一致
+
+**现象**: 期望 5 副本但实际只有 3 个 Running
+
+**根因**: 节点资源不足，2 个 Pod Pending
+
+**修复**:
+```bash
+# 🟢 检查 ReplicaSet 状态
+kubectl get rs -n ${NS} -l app=${DEPLOY}
+# 🟢 查看 Pending Pod 原因
+kubectl get pods -n ${NS} -l app=${DEPLOY} --field-selector=status.phase=Pending -o wide
+kubectl describe pod ${PENDING_POD} -n ${NS} | grep -A5 "Events"
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: deployment-alerts
+  rules:
+  - alert: DeploymentReplicasMismatch
+    expr: kube_deployment_spec_replicas != kube_deployment_status_available_replicas
+    for: 15m
+    labels:
+      severity: warning
+  - alert: DeploymentRolloutStuck
+    expr: kube_deployment_status_condition{condition="Progressing",status="False"} == 1
+    for: 30m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 合理的更新策略 | maxUnavailable≥1 避免卡死 | P0 |
+| progressDeadlineSeconds | 设置超时自动失败 | P0 |
+| readinessProbe | 确保新 Pod 真正就绪 | P0 |
+| 回滚预案 | 保留 revisionHistoryLimit | P1 |
+
+## 面试要点
+
+1. **Q: Deployment 滚动更新的流程？**
+   A: 创建新 ReplicaSet → 按 maxSurge 创建新 Pod → 新 Pod Ready 后按 maxUnavailable 终止旧 Pod → 旧 RS 缩容到 0 → 更新完成
+
+2. **Q: Deployment 更新卡住的排查？**
+   A: `kubectl rollout status` → 检查新 Pod 事件 → 查看 readinessProbe 失败原因 → 确认资源是否充足 → 检查 Webhook 是否阻塞
+
+3. **Q: Deployment vs StatefulSet vs DaemonSet 的选择？**
+   A: Deployment: 无状态服务；StatefulSet: 有状态(稳定网络标识+持久存储)；DaemonSet: 每节点一个(日志/监控 Agent)
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

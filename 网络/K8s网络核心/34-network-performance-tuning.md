@@ -304,6 +304,37 @@ groups:
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| 吞吐量低 | 带宽不足/MTU 不匹配 | `iperf3 -c <server>` | 调整 MTU/升级带宽 |
+| 高延迟 | 路由跳数多/队列积压 | `mtr <target>` | 优化路由/调整队列 |
+| 丢包 | conntrack 满/网卡队列溢出 | `conntrack -L \| wc -l` | 扩容 conntrack/多队列 |
+| 连接失败 | 端口耗尽 | `ss -s` | 扩大 ip_local_port_range |
+| TCP 重传高 | 网络拥塞/缓冲区小 | `netstat -s \| grep retrans` | 调整 tcp_rmem/wmem |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **内核参数** | 使用优化镜像/ConfigMap | 统一节点配置 |
+| **网卡队列** | 启用多队列 + IRQ 亲和 | 提升并发处理 |
+| **MTU** | 根据网络类型调整 | VXLAN 用 1450 |
+| **监控** | 部署网络指标告警 | 实时发现瓶颈 |
+| **测试** | 定期 iperf3 基准测试 | 建立性能基线 |
+| **eBPF** | 大规模集群考虑 Cilium | 绕过 iptables 性能瓶颈 |
+
+## 相关工具
+
+| 工具 | 用途 |
+|------|------|
+| `iperf3` | 带宽测试 |
+| `mtr` | 链路质量诊断 |
+| `ss` | 连接状态查看 |
+| `ethtool` | 网卡配置 |
+| `tcpdump` | 抓包分析 |
+
 ## See Also
 
 - 32-multi-cluster-networking

@@ -73,6 +73,283 @@ Istio Ambient replaces sidecars with:
 
 Benefits: lower resource overhead, simpler operations, no sidecar injection issues.
 
+## 安装与配置
+
+```bash
+# 🟢 使用 istioctl 安装 (推荐)
+istioctl install --set profile=default -y
+
+# 🟢 验证安装
+istioctl verify-install
+kubectl get pods -n istio-system
+
+# 🟢 启用 Sidecar 注入
+kubectl label namespace default istio-injection=enabled
+
+# 🟢 Ambient 模式安装
+istioctl install --set profile=ambient -y
+kubectl label namespace default istio.io/dataplane-mode=ambient
+
+# 🟡 卸载 Istio
+istioctl uninstall --purge -y
+kubectl delete namespace istio-system
+```
+
+### IstioOperator 配置示例
+
+```yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: production-istio
+  namespace: istio-system
+spec:
+  profile: default
+  meshConfig:
+    accessLogFile: /dev/stdout
+    enableTracing: true
+    defaultConfig:
+      proxyMetadata:
+        ISTIO_META_DNS_CAPTURE: "true"
+      holdApplicationUntilProxyStarts: true
+    outboundTrafficPolicy:
+      mode: REGISTRY_ONLY
+  components:
+    pilot:
+      k8s:
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2Gi
+        hpaSpec:
+          maxReplicas: 5
+          minReplicas: 2
+    ingressGateways:
+    - name: istio-ingressgateway
+      enabled: true
+      k8s:
+        hpaSpec:
+          maxReplicas: 5
+          minReplicas: 2
+  values:
+    global:
+      proxy:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+```
+
+## 流量管理
+
+### VirtualService 金丝雀发布
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews-route
+spec:
+  hosts:
+  - reviews.prod.svc.cluster.local
+  http:
+  - match:
+    - headers:
+        x-canary:
+          exact: "true"
+    route:
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v2
+  - route:
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v1
+      weight: 90
+    - destination:
+        host: reviews.prod.svc.cluster.local
+        subset: v2
+      weight: 10
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+      retryOn: 5xx,reset,connect-failure
+    timeout: 10s
+```
+
+### DestinationRule 连接池与熔断
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews-dest
+spec:
+  host: reviews.prod.svc.cluster.local
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+        connectTimeout: 30ms
+      http:
+        h2UpgradePolicy: DEFAULT
+        http1MaxPendingRequests: 100
+        http2MaxRequests: 1000
+        maxRequestsPerConnection: 10
+    outlierDetection:
+      consecutive5xxErrors: 5
+      interval: 10s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 50
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 Sidecar 注入状态
+kubectl get pods -n default -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .spec.containers[*]}{.name}{" "}{end}{"\n"}{end}'
+
+# 🟢 查看 Envoy 配置 (proxy-config)
+istioctl proxy-config listeners <pod-name> -n <namespace>
+istioctl proxy-config clusters <pod-name> -n <namespace>
+istioctl proxy-config routes <pod-name> -n <namespace>
+istioctl proxy-config endpoints <pod-name> -n <namespace>
+istioctl proxy-config secrets <pod-name> -n <namespace>
+
+# 🟢 查看 Sidecar 日志
+kubectl logs <pod-name> -c istio-proxy -n <namespace>
+
+# 🟢 分析配置问题
+istioctl analyze -n <namespace>
+istioctl analyze --all-namespaces
+
+# 🟢 查看 xDS 同步状态
+istioctl proxy-status
+
+# 🟡 手动触发 Sidecar 重启
+kubectl rollout restart deployment/<name> -n <namespace>
+
+# 🟢 查看 Istio 版本
+istioctl version --remote
+
+# 🟢 查看 mTLS 状态
+istioctl authn tls-check
+
+# 🟢 流量镜像配置验证
+kubectl get virtualservice -o yaml | grep -A5 mirror
+```
+
+### 升级策略
+
+```bash
+# 🟡 原地升级 (canary upgrade 推荐)
+istioctl install --set profile=default --set revision=1-29-0
+kubectl label namespace default istio.io/rev=1-29-0 --overwrite
+# 逐步迁移 namespace 后删除旧版本
+istioctl uninstall --revision 1-28-0
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Sidecar 未注入 | Namespace 未标记/标签冲突 | `kubectl get ns <ns> --show-labels` | 添加 istio-injection=enabled |
+| 503 UC (no healthy upstream) | 上游服务不可达 | `istioctl proxy-config endpoints <pod>` | 检查后端 Pod 就绪状态 |
+| 503 UH (no healthy upstream) | 熔断触发 | 查看 DestinationRule outlierDetection | 调整熔断阈值 |
+| mTLS 握手失败 | PeerAuthentication 不匹配 | `istioctl authn tls-check` | 统一 mTLS 模式 |
+| 路由不生效 | VirtualService 匹配规则冲突 | `istioctl analyze` | 检查 host/match 优先级 |
+| Sidecar OOM | 大集群 endpoints 过多 | `kubectl top pod -c istio-proxy` | 使用 Sidecar 资源限制导出 |
+| DNS 解析失败 | ISTIO_META_DNS_CAPTURE 未启用 | `istioctl proxy-config listeners <pod> --port 15053` | 启用 DNS 代理 |
+| 延迟增加 | Sidecar 额外跳转 | `istioctl proxy-config routes` | 评估 Ambient 模式 |
+
+### 排查流程
+
+```
+1. istioctl proxy-status → 确认 xDS 同步 (SYNCED)
+2. istioctl analyze → 检查配置错误
+3. istioctl proxy-config all <pod> → 验证下发配置
+4. kubectl logs <pod> -c istio-proxy → 查看 Envoy 日志
+5. istioctl proxy-config secrets <pod> → 验证证书状态
+6. curl -v http://service:port → 确认连通性
+```
+
+## 生产案例
+
+### 案例1: 大集群 Sidecar 内存溢出
+- **场景**: 5000+ Service 集群，Sidecar 内存超过 1GB
+- **根因**: 默认配置下 Envoy 缓存所有 Service 的 endpoints
+- **解决**: 使用 Sidecar 资源限制导出范围
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: default
+  namespace: my-app
+spec:
+  egress:
+  - hosts:
+    - "./*"  # 本命名空间
+    - "istio-system/*"
+    - "dependency-ns/*"  # 仅依赖的命名空间
+```
+
+### 案例2: 升级导致流量中断
+- **场景**: 从 1.27 升级到 1.28 时部分服务 503
+- **根因**: 新旧版本 Envoy filter 不兼容
+- **解决**: 使用 Canary Upgrade，逐 namespace 迁移 revision
+
+### 案例3: mTLS STRICT 模式导致 Job 失败
+- **场景**: CronJob 连接外部数据库超时
+- **根因**: STRICT mTLS 阻止了非 mesh 流量
+- **解决**: 为特定 workload 设置 PERMISSIVE 或使用 ServiceEntry
+
+## Istio vs Linkerd vs Consul Connect
+
+| 维度 | Istio | Linkerd | Consul Connect |
+|------|-------|---------|----------------|
+| 数据面 | Envoy (C++) | linkerd2-proxy (Rust) | Envoy |
+| 控制面 | istiod | linkerd-control-plane | Consul Server |
+| 资源开销 | 高 (~100MB/sidecar) | 低 (~30MB/sidecar) | 中 |
+| 功能丰富度 | 最完整 | 简洁 | 中 |
+| 学习曲线 | 陡峭 | 平缓 | 中等 |
+| Ambient 模式 | 支持 (GA) | 不支持 | 不支持 |
+| 多集群 | 原生支持 | 支持 | 原生支持 |
+| CNCF 状态 | Graduated | Graduated | 非 CNCF |
+
+## 版本兼容矩阵
+
+| Istio 版本 | K8s 版本 | Envoy 版本 | 关键特性 |
+|-----------|----------|-----------|----------|
+| 1.29 | 1.28-1.32 | 1.32 | Ambient GA |
+| 1.28 | 1.27-1.31 | 1.31 | Waypoint 增强 |
+| 1.27 | 1.26-1.30 | 1.30 | Telemetry API GA |
+| 1.26 | 1.25-1.29 | 1.29 | ztunnel 稳定 |
+
+## 检查清单
+
+- [ ] istiod 副本数 >= 2，配置 PDB
+- [ ] Sidecar 资源 requests/limits 已设置
+- [ ] PeerAuthentication 策略已明确 (STRICT/PERMISSIVE)
+- [ ] AuthorizationPolicy 已配置默认拒绝
+- [ ] VirtualService 超时和重试已设置
+- [ ] DestinationRule 熔断阈值已配置
+- [ ] 使用 Sidecar 资源限制导出范围 (大集群)
+- [ ] 启用访问日志用于审计
+- [ ] 升级使用 Canary Upgrade 策略
+- [ ] 监控 istiod 和 Sidecar 资源使用
+
 ## Related
 
 - [[技能/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践

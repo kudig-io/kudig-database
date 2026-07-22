@@ -152,6 +152,89 @@ flowchart TD
 | **事件** | ArgoCD Application status（Synced/OutOfSync/Degraded/Unknown）、Sync 操作事件、Hook Job 状态 |
 | **关键指标** | `argocd_app_info{sync_status="OutOfSync"}`、`argocd_app_sync_total{phase="Error"}`、`argocd_app_reconcile_count`、`argocd_git_request_total
 
+## 生产案例
+
+### 案例1: ArgoCD Sync 失败 - Helm 渲染错误
+
+**时间线**:
+- 13:00 开发提交 Helm values 变更到 Git
+- 13:02 ArgoCD 自动 Sync 失败，状态 `OutOfSync` + `Degraded`
+- 13:05 错误: `helm template failed: values don't meet the requirements of the schema`
+- 13:10 确认根因: values.yaml 中新增字段与 Chart schema 不兼容
+- 13:15 修复 values 后 Sync 成功
+
+**根因链**:
+```
+Git提交values变更 → ArgoCD自动Sync → Helm template渲染
+→ schema验证失败 → Sync Error → 应用未更新
+```
+
+**修复**:
+```bash
+# 🟢 检查 ArgoCD Application 状态
+kubectl get applications -n argocd -o wide
+argocd app get ${APP_NAME} --show-params
+# 🟢 查看 Sync 错误详情
+argocd app get ${APP_NAME} -o json | jq '.status.conditions'
+# 🟡 手动重试 Sync
+argocd app sync ${APP_NAME} --retry-limit 3
+```
+
+### 案例2: ArgoCD Repo Server 超时
+
+**现象**: 所有 Application 状态 Unknown，Repo Server Pod CPU 100%
+
+**根因**: Git 仓库过大(含大量历史)，clone 超时
+
+**修复**:
+```bash
+# 🟢 检查 Repo Server 日志
+kubectl logs -n argocd -l app.kubernetes.io/component=repo-server --tail=50 | grep -i "timeout\|error"
+# 🟡 配置 shallow clone
+kubectl edit configmap argocd-cm -n argocd
+# 添加: repo.server.git.shallow.clone: "true"
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: argocd-alerts
+  rules:
+  - alert: ArgoCDAppOutOfSync
+    expr: argocd_app_info{sync_status="OutOfSync"} == 1
+    for: 30m
+    labels:
+      severity: warning
+  - alert: ArgoCDSyncFailed
+    expr: argocd_app_sync_total{phase="Error"} > 0
+    for: 10m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| CI 预验证 | 提交前 helm template/lint 验证 | P0 |
+| 仓库瘦身 | 避免大文件，使用 shallow clone | P0 |
+| 自动修复 | 配置 selfHeal + autoSync | P1 |
+| Repo Server 扩容 | 多副本分担渲染压力 | P1 |
+
+## 面试要点
+
+1. **Q: ArgoCD Sync 失败的排查步骤？**
+   A: 查看 Application conditions → 检查 Helm/Kustomize 渲染错误 → 验证 Git 仓库可达性 → 确认 RBAC/Secret 权限 → 检查目标集群连通性
+
+2. **Q: ArgoCD 与 Flux 的核心差异？**
+   A: ArgoCD 有 UI + 多集群管理；Flux 纯声明式 + OCI 支持更好；ArgoCD ApplicationSet 批量管理；Flux 更轻量
+
+3. **Q: GitOps 漂移检测的原理？**
+   A: ArgoCD 定期(3min)对比 Git 期望状态与集群实际状态 → 发现差异标记 OutOfSync → 可选自动 selfHeal 或手动 Sync
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

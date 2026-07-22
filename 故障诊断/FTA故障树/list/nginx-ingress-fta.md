@@ -90,6 +90,93 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 ```
 ---
 
+## 生产案例
+
+### 案例1: Nginx Ingress reload 失败导致配置不生效
+
+**时间线**:
+- 10:00 新增 Ingress 规则，但访问返回 404
+- 10:05 检查 Ingress Controller 日志: `nginx: [emerg] invalid server name`
+- 10:08 确认根因: 某个 Ingress 的 host 字段包含非法字符，导致整个 nginx reload 失败
+- 10:12 修复非法 host 后 reload 成功，新规则生效
+
+**根因链**:
+```
+Ingress host字段含非法字符 → nginx配置生成错误
+→ reload失败 → 所有新Ingress规则不生效 → 404
+```
+
+**修复**:
+```bash
+# 🟢 检查 Ingress Controller 日志
+kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50 | grep -i "emerg\|error\|invalid"
+# 🟢 查看当前生效的 nginx 配置
+kubectl exec -n ingress-nginx ${POD} -- cat /etc/nginx/nginx.conf | grep server_name
+# 🟡 修复非法 Ingress
+kubectl patch ingress ${INGRESS} -n ${NS} -p '{"spec":{"rules":[{"host":"correct.example.com"}]}}'
+```
+
+### 案例2: Nginx Ingress 连接数耗尽
+
+**现象**: 部分请求超时，nginx error.log 显示 `worker_connections are not enough`
+
+**根因**: 默认 worker_connections 16384，高峰期连接数超过限制
+
+**修复**:
+```bash
+# 🟡 调整 worker_connections
+kubectl edit configmap ingress-nginx-controller -n ingress-nginx
+# 添加:
+# data:
+#   max-worker-connections: "65536"
+#   max-worker-open-files: "65536"
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: nginx-ingress-alerts
+  rules:
+  - alert: NginxIngressReloadFailed
+    expr: nginx_ingress_controller_config_last_reload_successful == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: NginxIngressHighLatency
+    expr: histogram_quantile(0.99, rate(nginx_ingress_controller_request_duration_seconds_bucket[5m])) > 2
+    for: 5m
+    labels:
+      severity: warning
+  - alert: NginxIngressConnectionsHigh
+    expr: nginx_ingress_controller_nginx_process_connections{state="active"} > 10000
+    for: 5m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 配置变更验证 | CI 中验证 Ingress YAML 合法性 | P0 |
+| 连接数规划 | 根据峰值流量调整 worker_connections | P0 |
+| 多副本部署 | 至少 2 副本 + Pod 反亲和 | P0 |
+| reload 监控 | 监控配置 reload 成功状态 | P1 |
+
+## 面试要点
+
+1. **Q: Nginx Ingress 配置不生效的排查步骤？**
+   A: 检查 Controller 日志是否有 reload 错误 → 验证 Ingress 资源状态 → 确认 nginx.conf 是否包含新规则 → 检查后端 Service/Endpoint → 验证网络连通性
+
+2. **Q: Nginx Ingress 性能优化方案？**
+   A: 调整 worker_connections/worker_processes → 启用 keepalive → 配置 proxy_buffer → 使用 Lua 插件减少 reload → HPA 自动扩容
+
+3. **Q: Nginx Ingress 与 Envoy 类网关的对比？**
+   A: Nginx 配置变更需 reload(有短暂中断)；Envoy xDS 动态更新无中断；Nginx 生态成熟；Envoy 可观测性更强；大规模场景 Envoy 更优
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

@@ -158,6 +158,122 @@ kubectl run debug --image=busybox -it --rm --restart=Never -- \
 - **init 容器看不到应用环境变量**：envFrom/env 在每个容器独立声明，init 需要的变量要重复定义。
 - **v1.29 前 sidecar 优雅停止问题**：sidecar 在应用容器退出后不会自动退出，导致 Pod 卡在 Terminating。
 
+## 源码实现分析
+
+### kubelet Init Container 执行流程
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_manager.go
+// kubelet 按顺序执行 init containers，每个必须成功退出
+func (m *kubeGenericRuntimeManager) computePodActions(ctx context.Context, pod *v1.Pod) {
+    // 1. 找到下一个未完成的 init container
+    for i, initContainer := range pod.Spec.InitContainers {
+        status := findContainerStatus(initContainer)
+        if status == nil {
+            // 未启动：启动这个 init container
+            return startContainer(initContainer)
+        }
+        if status.State.Terminated != nil && status.State.Terminated.ExitCode != 0 {
+            // 失败：重启这个 init container（CrashLoopBackOff）
+            return startContainer(initContainer)
+        }
+        if status.State.Running != nil {
+            // 正在运行：等待其完成
+            return wait
+        }
+        // 成功完成：继续下一个
+    }
+    // 2. 所有 init 完成后，启动主容器
+    startMainContainers()
+}
+```
+
+### Init Container 执行流程
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          Init Container 执行流程                      │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Pod 创建                                                │
+│    │                                                      │
+│    ▼                                                      │
+│  init-1: wait-for-db (nc -z db 5432)                    │
+│    │  exit 0 → 继续                                     │
+│    ▼                                                      │
+│  init-2: db-migrate (flyway migrate)                    │
+│    │  exit 0 → 继续                                     │
+│    ▼                                                      │
+│  init-3: config-gen (生成配置文件到 emptyDir)          │
+│    │  exit 0 → 继续                                     │
+│    ▼                                                      │
+│  主容器启动 (app)                                       │
+│                                                           │
+│  关键规则:                                               │
+│  • 严格顺序执行，前一个成功才启动下一个             │
+│  • 任何一个失败 → Pod 重启时重新执行所有 init      │
+│  • init 必须幂等（重复执行不产生副作用）            │
+│  • 资源调度：取所有 init 中最大的 requests          │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产配置示例（🟡 部署到集群）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-init
+spec:
+  initContainers:
+  # 等待数据库就绪（带超时）
+  - name: wait-for-db
+    image: busybox:1.36
+    command: ['sh', '-c',
+      'for i in $(seq 1 30); do nc -z postgres-svc 5432 && exit 0; sleep 2; done; exit 1']
+    resources:
+      limits:
+        cpu: 50m
+        memory: 32Mi
+  # 数据库迁移（幂等）
+  - name: db-migrate
+    image: my-app:1.0
+    command: ['./migrate', '--idempotent']
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+  containers:
+  - name: app
+    image: my-app:1.0
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+```
+
+## 面试要点
+
+1. **Init Container 的执行规则？**
+   - 严格顺序执行，前一个成功才启动下一个
+   - 任何一个失败，Pod 重启时重新执行所有 init
+   - 必须幂等，因为可能被重复执行
+
+2. **Init Container 与主容器的资源计算区别？**
+   - 调度时：取所有 init 中最大的 requests（因为顺序执行）
+   - 运行时：init 和主容器不同时运行
+   - limits：每个容器独立设置
+
+3. **1.29 sidecar init 与普通 init 的区别？**
+   - 普通 init：运行完退出，然后下一个
+   - sidecar init：restartPolicy=Always，启动后不退出
+   - 用途：envoy/log-collector 等常驻 sidecar
+
+4. **init 容器等待依赖的最佳实践？**
+   - 用 nc -z / curl 主动探测，不用 sleep
+   - 必须设超时（for 循环 + 计数器）
+   - 失败时打印可读错误信息
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

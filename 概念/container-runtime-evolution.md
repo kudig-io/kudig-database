@@ -138,6 +138,132 @@ Sandbox API: kubelet → CRI → containerd Sandbox Controller
 - **镜像懒加载的首次访问延迟**：懒加载将镜像拉取延迟到运行时，首次文件访问可能变慢——不适合启动时加载大量文件的应用
 - **机密容器性能开销**：TEE 加密/解密有 5-15% 性能损耗——需要评估是否值得安全收益
 
+## 源码实现分析
+
+### CRI 接口与 kubelet 集成
+
+```go
+// k8s.io/cri-api/pkg/apis/runtime/v1/api.pb.go
+// CRI v1 接口定义（kubelet ↔ containerd/CRI-O）
+type RuntimeServiceClient interface {
+    // Pod Sandbox 管理
+    RunPodSandbox(ctx context.Context, in *RunPodSandboxRequest) (*RunPodSandboxResponse, error)
+    StopPodSandbox(ctx context.Context, in *StopPodSandboxRequest) (*StopPodSandboxResponse, error)
+    // 容器生命周期
+    CreateContainer(ctx context.Context, in *CreateContainerRequest) (*CreateContainerResponse, error)
+    StartContainer(ctx context.Context, in *StartContainerRequest) (*StartContainerResponse, error)
+    StopContainer(ctx context.Context, in *StopContainerRequest) (*StopContainerResponse, error)
+    // 镜像管理
+    PullImage(ctx context.Context, in *PullImageRequest) (*PullImageResponse, error)
+    // 运行时状态
+    Status(ctx context.Context, in *StatusRequest) (*StatusResponse, error)
+}
+// kubelet 通过 Unix Socket 连接 containerd:
+// /run/containerd/containerd.sock (CRI v1)
+```
+
+### 容器运行时演进时间线
+
+```
+┌──────────────────────────────────────────────────────────┐
+│            容器运行时演进时间线                        │
+├──────────────────────────────────────────────────────────┤
+│  2013 │ Docker 发布（单体架构）                       │
+│  2015 │ OCI 标准成立（runtime/image/distribution）     │
+│  2016 │ containerd/CRI-O 独立项目                     │
+│  2017 │ CRI v1alpha1（kubelet 对接多运行时）           │
+│  2020 │ K8s 宣布弃用 dockershim                      │
+│  2022 │ K8s 1.24 移除 dockershim                     │
+│  2023 │ containerd 2.0 + Sandbox API                  │
+│  2024 │ K8s 1.32 CRI v1 唯一 + DRA beta              │
+│  2025+│ WASM 运行时 / 机密容器 / 懒加载              │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：检查节点运行时版本
+
+```bash
+# 🟢 低风险：只读检查
+kubectl get nodes -o wide  # 查看 CONTAINER-RUNTIME 列
+crictl version  # 查看 CRI 版本
+crictl info | jq '.config.containerd'  # containerd 配置
+# 检查运行时健康状态
+crictl stats  # 容器资源使用
+crictl images  # 已拉取镜像
+systemctl status containerd  # 服务状态
+```
+
+### 场景二：多运行时节点配置
+
+```toml
+# /etc/containerd/config.toml
+# 🟡 中风险：修改后需重启 containerd
+version = 2
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+  # runc 运行时（默认）
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      SystemdCgroup = true
+  # Kata Containers（安全隔离）
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata]
+    runtime_type = "io.containerd.kata.v2"
+  # WASM 运行时
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.wasm]
+    runtime_type = "io.containerd.wasm.v1"
+```
+
+### 场景三：从 Docker 迁移到 containerd
+
+```bash
+# 🟠 高危：影响节点上所有容器
+# 1. 排干节点
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+# 2. 停止 Docker
+systemctl stop docker docker.socket containerd
+# 3. 安装/配置 containerd
+apt install containerd.io
+containerd config default > /etc/containerd/config.toml
+# 修改 SystemdCgroup = true
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+# 4. 启动 containerd
+systemctl enable --now containerd
+# 5. 修改 kubelet 配置指向 containerd
+# /var/lib/kubelet/kubeadm-flags.env:
+# --container-runtime-endpoint=unix:///run/containerd/containerd.sock
+systemctl restart kubelet
+# 6. 恢复调度
+kubectl uncordon <node>
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | 移除 Docker 后不能用 Docker 命令 | nerdctl 提供完全兼容的 CLI；docker build 可用 BuildKit/kaniko 替代 |
+| 2 | containerd 2.0 与 1.x 完全兼容 | 2.0 移除 v1alpha2 CRI、改变配置格式；升级需检查配置兼容性 |
+| 3 | 所有节点必须用同一运行时 | RuntimeClass 允许不同节点池用不同运行时（runc/kata/wasm） |
+| 4 | WASM 可以替代容器 | WASM 适合轻量级函数；复杂应用（多进程、特权操作）仍需容器 |
+| 5 | 懒加载没有缺点 | 懒加载将拉取延迟转为运行时 I/O；启动时加载大量文件的应用反而更慢 |
+| 6 | 升级 K8s 不需要升级运行时 | K8s 1.32+ 要求 containerd 2.0+；必须先升级运行时再升级 K8s |
+
+## 面试要点
+
+1. **Q: 容器运行时从 Docker 到 containerd 的演进原因是什么？**
+   A: ① 架构简化：Docker 单体架构（dockerd→containerd→runc）冗余；直接使用 containerd 减少一层调用。② 标准化：CRI 接口让 kubelet 不依赖特定运行时。③ 维护成本：dockershim 在 kubelet 内部，Docker API 变化需同步适配。④ 性能：移除 dockershim 后 Pod 启动延迟降低 ~20%。⑤ 安全：减少攻击面（无需 dockerd 守护进程）。
+
+2. **Q: containerd 2.0 Sandbox API 解决什么问题？**
+   A: 传统 CRI 中 Pod sandbox 管理耦合在 kubelet 中，无法支持非传统 sandbox（如 Kata VM、WASM 实例）。Sandbox API 将 sandbox 生命周期抽象为独立控制器，支持可插拔 sandbox 实现。优势：① sandbox 创建/销毁独立于容器管理；② 支持自定义 sandbox 实现（机密容器、WASM）；③ 更好的资源计量（Pod Overhead）。
+
+3. **Q: 生产环境如何选择和配置容器运行时？**
+   A: ① 默认节点：containerd 2.x + runc（SystemdCgroup=true）；② 多租户/安全敏感：Kata Containers（VM 级隔离）+ RuntimeClass + Pod Overhead；③ 边缘/Serverless：WASM shim（亚毫秒启动）；④ ARM 节点：crun 替代 runc（更轻量）。关键：升级 K8s 前先升级运行时；监控运行时健康状态。
+
+4. **Q: 镜像懒加载（Nydus/eStargz）的原理和适用场景？**
+   A: 原理：将镜像层转为可按需读取的格式（Nydus 用 RAFS 文件系统，eStargz 用 gzip+TOC），容器启动时只拉取启动必需文件，其余按需从 registry 读取。适用：AI/ML 大镜像（>1GB）冷启动从分钟级降至秒级。不适用：启动时加载大量文件的应用（首次访问延迟高）。配合 P2P 分发（Dragonfly）效果更佳。
+
 ## 相关页面
 
 - [[概念/specialized-k8s-technologies.md|K8S 专项技术]] — WASM 与边缘计算

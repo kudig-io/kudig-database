@@ -155,7 +155,293 @@ L4 → L5 (12+ 个月)
 1. **跨级跳跃**：从 L2 直接追 L4，跳过基础监控和 runbook → SLO 无数据支撑。逐级走。
 2. **维度失衡**：混沌工程冲到 L5，但事件管理还 L2 → 实验出事处理不了。各维度差距应 < 2 级。
 3. **评分自欺**：自己打 L4 但实际没人遵守错误预算。自评必须配合客观证据（如"冻结是否真的被执行"）。
-4. **成熟度 = 目标**：成熟度是手段不是目的。最终衡量标准是"用户感知的可靠性"，不是等级数字。
+4. **成熟度 = 目标**：成熟度是手段不是目的。最终衡量标准是“用户感知的可靠性”，不是等级数字。
+
+## 评估问卷
+
+### SLO/SLI 实践评估
+
+```markdown
+## SLO/SLI 实践评估问卷
+
+### L1 无意识
+- [ ] 没有定义任何 SLO
+- [ ] 用“感觉”判断服务好坏
+- [ ] 没有 SLI 指标收集
+
+### L2 被动
+- [ ] 定义了 SLO 但未文档化
+- [ ] SLO 未约束发布决策
+- [ ] 偶尔查看 SLO 仪表盘
+
+### L3 主动
+- [ ] SLO 有正式文档和仪表盘
+- [ ] 定期评审 SLO (月度)
+- [ ] SLO 与告警关联
+
+### L4 量化
+- [ ] SLO 驱动发布决策
+- [ ] 错误预算自动化执行
+- [ ] 多窗口燃烧率告警
+
+### L5 优化
+- [ ] SLO 自适应调整
+- [ ] 按用户旅程多维度细化
+- [ ] SLO 即代码 (SLO-as-Code)
+```
+
+### 事件管理评估
+
+```markdown
+## 事件管理评估问卷
+
+### L1 无意识
+- [ ] 无正式事件响应流程
+- [ ] 谁在线谁处理
+- [ ] 无事件记录
+
+### L2 被动
+- [ ] 有 on-call 轮值
+- [ ] 无 Sev 分级
+- [ ] 事后补写记录
+
+### L3 主动
+- [ ] 有 Sev 分级标准
+- [ ] 有 IC 角色
+- [ ] 有事件时间线记录
+
+### L4 量化
+- [ ] 标准化 IC 手册
+- [ ] 通讯节奏规范
+- [ ] 自动化升级机制
+
+### L5 优化
+- [ ] 复盘闭环跟踪
+- [ ] 改进项自动跟踪
+- [ ] 知识沉淀到系统
+```
+
+## 改进计划模板
+
+### 季度改进计划
+
+```markdown
+# 可靠性改进计划 Q3 2026
+
+## 当前状态
+
+| 维度 | 当前级 | 目标级 | 差距 |
+|-----|-------|-------|------|
+| SLO/SLI | L2 | L4 | 2 |
+| 监控 | L3 | L4 | 1 |
+| 事件管理 | L2 | L3 | 1 |
+| 混沌工程 | L1 | L3 | 2 |
+| 容量规划 | L2 | L3 | 1 |
+| 灾备 | L2 | L3 | 1 |
+
+## 优先级排序
+
+1. **SLO/SLI** (差距 2，影响核心服务)
+2. **混沌工程** (差距 2，预防性投入)
+3. **事件管理** (差距 1，快速见效)
+
+## 行动计划
+
+### SLO/SLI (L2 → L4)
+
+| 任务 | 负责人 | 截止日期 | 状态 |
+|-----|-------|---------|------|
+| 定义核心服务 SLO | @sre-team | 7/15 | ☐ |
+| 部署 SLO 仪表盘 | @sre-team | 7/31 | ☐ |
+| 配置错误预算告警 | @sre-team | 8/15 | ☐ |
+| 发布门控集成 | @platform | 8/31 | ☐ |
+
+### 混沌工程 (L1 → L3)
+
+| 任务 | 负责人 | 截止日期 | 状态 |
+|-----|-------|---------|------|
+| 部署 Chaos Mesh | @sre-team | 7/15 | ☐ |
+| 设计首个实验 | @sre-team | 7/31 | ☐ |
+| 首次 Game Day | @sre-team | 8/15 | ☐ |
+| 建立实验库 | @sre-team | 8/31 | ☐ |
+
+## 资源需求
+
+- 1 名 SRE 全职投入
+- 工具预算: ¥50,000
+- 培训预算: ¥20,000
+
+## 成功指标
+
+- SLO 覆盖率: 100% 核心服务
+- MTTR: 从 2h 降至 30min
+- 混沌实验: 每月至少 1 次
+```
+
+## 成熟度指标收集
+
+### 自动化指标收集脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：收集成熟度指标
+set -euo pipefail
+
+OUTPUT_FILE="/tmp/maturity-metrics-$(date +%Y%m%d).json"
+
+echo "=== 收集成熟度指标 ==="
+
+# SLO 覆盖率
+TOTAL_SERVICES=$(kubectl get deploy -A --no-headers | wc -l)
+SLO_SERVICES=$(kubectl get slo -A --no-headers 2>/dev/null | wc -l)
+SLO_COVERAGE=$(echo "scale=2; $SLO_SERVICES / $TOTAL_SERVICES * 100" | bc)
+
+# 监控覆盖率
+MONITORED_SERVICES=$(kubectl get servicemonitor -A --no-headers 2>/dev/null | wc -l)
+MONITOR_COVERAGE=$(echo "scale=2; $MONITORED_SERVICES / $TOTAL_SERVICES * 100" | bc)
+
+# 混沌实验频率
+CHAOS_EXPERIMENTS=$(kubectl get podchaos,networkchaos -A --no-headers 2>/dev/null | wc -l)
+
+# 事件响应指标
+MTTR=$(query-prometheus 'avg(incident_resolution_time_seconds) / 60')
+
+# 灾备演练
+LAST_DR_DRILL=$(kubectl get cronworkflow dr-drill -n dr -o jsonpath='{.status.lastScheduleTime}' 2>/dev/null || echo "never")
+
+cat > $OUTPUT_FILE <<EOF
+{
+  "timestamp": "$(date -Iseconds)",
+  "metrics": {
+    "slo_coverage_percent": $SLO_COVERAGE,
+    "monitor_coverage_percent": $MONITOR_COVERAGE,
+    "chaos_experiments_count": $CHAOS_EXPERIMENTS,
+    "mttr_minutes": $MTTR,
+    "last_dr_drill": "$LAST_DR_DRILL"
+  },
+  "maturity_estimate": {
+    "slo_sli": "L$([ $(echo "$SLO_COVERAGE > 80" | bc) -eq 1 ] && echo 4 || echo 2)",
+    "monitoring": "L$([ $(echo "$MONITOR_COVERAGE > 80" | bc) -eq 1 ] && echo 4 || echo 3)",
+    "chaos_engineering": "L$([ $CHAOS_EXPERIMENTS -gt 0 ] && echo 3 || echo 1)"
+  }
+}
+EOF
+
+echo "指标已收集: $OUTPUT_FILE"
+cat $OUTPUT_FILE
+```
+
+### PrometheusRule 成熟度指标
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: maturity-metrics
+  namespace: monitoring
+spec:
+  groups:
+    - name: maturity.rules
+      rules:
+        # SLO 覆盖率
+        - record: maturity:slo_coverage:ratio
+          expr: |
+            count(slo_target{}) / count(up{job=~".*-api"})
+
+        # 监控覆盖率
+        - record: maturity:monitor_coverage:ratio
+          expr: |
+            count(servicemonitor{}) / count(up{job=~".*-api"})
+
+        # 混沌实验频率
+        - record: maturity:chaos_frequency:monthly
+          expr: |
+            count(increase(chaos_experiment_total[30d]))
+
+        # MTTR
+        - record: maturity:mttr:minutes
+          expr: |
+            avg(incident_resolution_time_seconds) / 60
+```
+
+## 组织变革管理
+
+### 变革阻力应对
+
+| 阻力类型 | 表现 | 应对策略 |
+|---------|------|----------|
+| 认知阻力 | “我们不需要 SLO” | 用事故数据说话，展示 MTTR 与收入损失 |
+| 资源阻力 | “没人没时间” | 从小处着手，证明 ROI 后再扩大 |
+| 技术阻力 | “工具太复杂” | 提供模板和培训，降低门槛 |
+| 文化阻力 | “出错就追责” | 建立无责复盘文化，强调学习而非惩罚 |
+
+### 沟通计划
+
+```markdown
+## 可靠性改进沟通计划
+
+### 第 1 周: 启动会
+- 受众: 全体工程团队
+- 内容: 为什么做、目标、路线图
+- 形式: 全员大会 + Q&A
+
+### 第 2-4 周: 培训
+- 受众: SRE + 核心开发
+- 内容: SLO 定义、监控配置、事件响应
+- 形式: 工作坊 + 实操
+
+### 第 5-8 周: 试点
+- 受众: 1-2 个试点团队
+- 内容: 实际落地 SLO、混沌实验
+- 形式: 一对一辅导
+
+### 第 9-12 周: 推广
+- 受众: 全体团队
+- 内容: 试点经验分享、全面推广
+- 形式: 分享会 + 文档
+```
+
+## 案例研究
+
+### 案例 1: 电商平台从 L2 到 L4
+
+**背景**: 某电商平台，年 GMV 100亿，大促期间频繁宕机。
+
+**初始状态 (L2)**:
+- 有基础监控，但无 SLO
+- 事件响应靠英雄，无标准流程
+- 无混沌实验，问题靠生产发现
+
+**改进措施**:
+1. 定义核心交易链路 SLO (99.95%)
+2. 建立错误预算机制，超预算冻结发布
+3. 每月 Game Day，模拟大促流量
+4. 自动化事件响应，MTTR 从 2h 降至 15min
+
+**结果 (L4)**:
+- 可用性从 99.5% 提升至 99.95%
+- 大促零宕机
+- 发布频率从每周 1 次提升至每日多次
+
+### 案例 2: SaaS 公司混沌工程落地
+
+**背景**: 某 B2B SaaS，客户对可用性要求极高 (SLA 99.9%)。
+
+**初始状态 (L1)**:
+- 无混沌实验
+- 故障靠客户报告发现
+- 恢复时间不可预测
+
+**改进措施**:
+1. 部署 Chaos Mesh，从 Staging 开始
+2. 每周自动化实验 (Pod Kill、网络延迟)
+3. 实验失败阻断发布
+4. 季度 Game Day，全员参与
+
+**结果 (L3)**:
+- 主动发现并修复 20+ 潜在问题
+- MTTR 从 1h 降至 10min
+- 客户投诉减少 80%
 
 ## 相关
 

@@ -141,6 +141,86 @@ flowchart TD
 | **关键日志** | cloud-controller-manager 日志（API call errors / throttling）、CSI driver 日志（disk attach/detach）、kube-controller-manager 日志（node lifecycle）、云平台操作审计日志 |
 | **配置核对** | CCM 部署配置（--cloud-provider / cloud-config）、云凭证 Secret、Service annotations（LB 配置）、StorageClass paramete
 
+## 生产案例
+
+### 案例1: Cloud Controller Manager 凭证过期导致 LB 创建失败
+
+**时间线**:
+- 09:00 创建 LoadBalancer 类型 Service
+- 09:05 Service 一直处于 Pending 状态，无外部 IP 分配
+- 09:10 CCM 日志: `AuthenticationFailed: invalid access key`
+- 09:15 确认根因: 云 API 凭证(AK/SK)已轮转但 CCM Secret 未更新
+- 09:20 更新 Secret 后 LB 创建成功
+
+**根因链**:
+```
+云API凭证轮转 → CCM Secret未同步更新 → API调用认证失败
+→ LB创建失败 → Service Pending(无ExternalIP)
+```
+
+**修复**:
+```bash
+# 🟢 检查 CCM 日志
+kubectl logs -n kube-system -l component=cloud-controller-manager --tail=50 | grep -i "auth\|denied\|invalid"
+# 🟡 更新云凭证 Secret
+kubectl create secret generic cloud-config --from-file=cloud.conf=./cloud.conf -n kube-system --dry-run=client -o yaml | kubectl apply -f -
+# 🟡 重启 CCM
+kubectl rollout restart deployment cloud-controller-manager -n kube-system
+```
+
+### 案例2: 云 API 限流导致节点注册延迟
+
+**现象**: 新节点加入集群后长时间 NotReady，CCM 日志大量 `Throttling: Request limit exceeded`
+
+**根因**: 批量扩容触发云 API 限流，CCM 无法完成节点初始化
+
+**修复**:
+```bash
+# 🟡 调整 CCM API 限流参数
+# --concurrent-node-synces=1 (降低并发)
+# 配置云 API 重试和退避策略
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: cloud-provider-alerts
+  rules:
+  - alert: CCMAPIErrors
+    expr: rate(cloud_provider_api_request_duration_seconds_count{code=~"4..|5.."}[5m]) > 5
+    for: 5m
+    labels:
+      severity: warning
+  - alert: LoadBalancerPending
+    expr: kube_service_status_load_balancer_ingress == 0 and kube_service_spec_type{type="LoadBalancer"} == 1
+    for: 10m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 凭证自动轮转 | 使用 IRSA/Workload Identity 代替静态 AK | P0 |
+| API 限流保护 | 配置合理的并发和重试策略 | P0 |
+| CCM 高可用 | 多副本 + leader election | P1 |
+| 云资源监控 | 监控 LB/EIP 配额使用率 | P1 |
+
+## 面试要点
+
+1. **Q: Cloud Controller Manager 的职责？**
+   A: 节点生命周期管理(初始化/删除) → Service LB 管理 → 路由表维护 → 云资源同步；将云平台逻辑从 kube-controller-manager 解耦
+
+2. **Q: LoadBalancer Service 一直 Pending 的排查？**
+   A: 检查 CCM 日志 → 验证云凭证有效性 → 确认 LB 配额 → 检查子网/安全组配置 → 查看云 API 限流
+
+3. **Q: 如何避免云 API 凭证过期？**
+   A: 使用 IRSA/Workload Identity 无密钥方案 → 如用静态凭证则配置自动轮转 → 监控凭证有效期 → 多凭证容灾
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

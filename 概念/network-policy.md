@@ -88,6 +88,163 @@ NetworkPolicy 的生效完全依赖 CNI 插件的实现。若 CNI 不支持，�
 
 更多排查细节可参考 [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|network-policy-troubleshooting]] 与 [[实体/cilium.md|cilium-network-policy]]。远程顾问应指导用户先确认 CNI 类型，再逐条核对策略规则，避免在错误的假设上消耗排查时间。
 
+## 源码实现分析
+
+### Calico Felix 策略下发
+
+Calico 的 Felix 组件负责将 NetworkPolicy 转换为 iptables/eBPF 规则：
+
+```go
+// calico/felix/policy.go 简化逻辑
+func (d *Dataplane) ApplyPolicy(profileID string, rules []Rule) {
+    // 1. 将 K8s NetworkPolicy 转换为 Calico Profile
+    // 2. 生成 iptables chain: cali-pro-<profileID>
+    // 3. 每条规则映射为一条 iptables 匹配+动作
+    for _, rule := range rules {
+        match := iptables.Match{}
+        if rule.SrcSelector != "" {
+            match.SetSrcIPSet(rule.SrcSelector)  // ipset 匹配源 Pod
+        }
+        if rule.DstPorts != nil {
+            match.SetDstPorts(rule.DstPorts)     // 端口匹配
+        }
+        chain.AppendRule(match, rule.Action)     // ACCEPT/DROP/LOG
+    }
+}
+```
+
+### Cilium eBPF 策略执行
+
+Cilium 使用 eBPF 在内核层面执行策略，避免 iptables 性能退化：
+
+```
+┌─────────────────────────────────────────────────┐
+│  Pod A (endpoint 1234)                          │
+│  ┌───────────────────────────────────────────┐  │
+│  │ cilium_from_container (eBPF prog)         │  │
+│  │  → PolicyMap lookup: dst=Pod B, port=80   │  │
+│  │  → Identity-based: allow if identity=5678 │  │
+│  │  → Drop + metric increment if denied      │  │
+│  └───────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────┘
+         │ (eBPF tail call)
+         ▼
+┌─────────────────────────────────────────────────┐
+│  Pod B (endpoint 5678)                          │
+│  ┌───────────────────────────────────────────┐  │
+│  │ cilium_to_container (eBPF prog)           │  │
+│  │  → Verify ingress policy for identity 1234│  │
+│  │  → Accept → deliver to Pod B veth         │  │
+│  └───────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：微服务间最小权限通信
+
+```yaml
+# 仅允许 frontend 访问 backend:8080
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-ingress
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+```
+
+### 场景二：限制 Pod 出站（防止数据外泄）
+
+```yaml
+# 仅允许访问集群内 DNS 和指定外部 API
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restricted-egress
+spec:
+  podSelector:
+    matchLabels:
+      app: data-processor
+  policyTypes:
+  - Egress
+  egress:
+  - to: []           # 允许集群内所有 Pod
+    ports:
+    - protocol: UDP
+      port: 53       # DNS
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8    # 内网 API 网关
+    ports:
+    - protocol: TCP
+      port: 443
+```
+
+### 场景三：命名空间隔离（多租户）
+
+```yaml
+# 租户 A 的 Pod 只能与同命名空间 Pod 通信
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-isolation
+  namespace: tenant-a
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          tenant: tenant-a
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          tenant: tenant-a
+  - ports:           # 放行 DNS
+    - protocol: UDP
+      port: 53
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 创建 NetworkPolicy 即生效 | 必须 CNI 支持（Calico/Cilium），Flannel 下策略无效 |
+| deny-all 后 Pod 仍能访问外网 | 需同时声明 Egress policyType 并配置 egress 规则 |
+| 多条策略有优先级顺序 | NetworkPolicy 无优先级，多条策略取并集（白名单叠加） |
+| namespaceSelector 用名称匹配 | 必须用标签匹配，需提前给 namespace 打标签 |
+| 策略拒绝会返回错误 | 拒绝为静默丢包（无 RST），应用层只看到连接超时 |
+| ipBlock 可以匹配 Pod IP | ipBlock 匹配的是节点/外部网段，Pod 间应用 podSelector |
+
+## 面试要点
+
+1. **NetworkPolicy 如何生效？** — NetworkPolicy 本身只是 API 对象，实际执行依赖 CNI 插件。Calico 通过 Felix 将策略转为 iptables/ipset 规则；Cilium 编译为 eBPF 程序挂载到 veth/TC 层面，性能更优。
+
+2. **如何实现零信任网络？** — 先创建 deny-all（Ingress+Egress），再逐条添加 allow 策略。关键注意点：必须放行 DNS（53/UDP+TCP）到 kube-dns/CoreDNS Pod，否则所有域名解析失败。
+
+3. **NetworkPolicy 与 Service Mesh 的关系？** — NetworkPolicy 工作在 L3/L4（IP+端口），Service Mesh（Istio/Linkerd）提供 L7 策略（HTTP method/path/header）。生产环境建议两者结合：NetworkPolicy 做粗粒度隔离，Mesh 做细粒度授权。
+
+4. **大规模集群 NetworkPolicy 性能问题？** — iptables 规则数随策略线性增长（O(n)匹配），1000+策略时延迟显著。Cilium eBPF 使用 PolicyMap（hash lookup O(1)）避免此问题；Calico eBPF 模式同理。
+
 ## 相关概念
 
 - [[cni-networking-model]] — CNI 网络模型与插件对比

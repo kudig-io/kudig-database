@@ -71,37 +71,141 @@ Metal3 以 Kubernetes Operator 方式运行。管理集群中部署 Metal3 BareM
 3. **裸金属回收**: 节点下线时自动清除数据并恢复到可用状态
 4. **多租户裸金属**: 为不同团队分配专用裸金属服务器，通过 BMC 物理隔离
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Metal3 baremetal-operator
 kubectl apply -f https://github.com/metal3-io/baremetal-operator/releases/latest/download/baremetal-operator.yaml
 
-# 注册裸金属服务器
-kubectl apply -f - <<EOF
-apiVersion: metal3.io/v1alpha1
-kind: BareMetalHost
-metadata:
-  name: worker-1
-spec:
-  bmc:
-    address: ipmi://192.168.1.100
-    credentialsName: bmc-credentials
-  bootMACAddress: 00:11:22:33:44:55
-  online: true
-  image:
-    url: http://image-server/centos.qcow2
-    checksum: sha256:abc123...
-  userData:
-    namespace: metal3
-    name: worker-user-data
-    key: userData
-EOF
+# 等待 Operator 就绪
+kubectl wait --for=condition=available deployment/baremetal-operator-controller-manager -n baremetal-operator-system --timeout=180s
 
 # 创建 BMC 凭据
 kubectl create secret generic bmc-credentials \
-  --from-literal=username=admin --from-literal=password=password
+  --from-literal=username=admin --from-literal=password='SecureP@ss!' \
+  -n metal3
 ```
+
+```yaml
+# BareMetalHost CRD 完整示例
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: worker-node-01
+  namespace: metal3
+  labels:
+    hardware-type: compute
+    rack: A-12
+spec:
+  online: true
+  bmc:
+    address: redfish+https://192.168.1.100/redfish/v1/Systems/1
+    credentialsName: bmc-credentials
+    disableCertificateVerification: false
+  bootMACAddress: 00:11:22:33:44:55
+  bootMode: UEFI
+  rootDeviceHints:
+    deviceName: /dev/sda
+  image:
+    url: http://image-server.internal/ubuntu-22.04-metal.qcow2
+    checksum: sha256:a1b2c3d4e5f6...
+    checksumType: sha256
+  userData:
+    namespace: metal3
+    name: worker-user-data
+  networkData:
+    namespace: metal3
+    name: worker-network-config
+---
+# 网络配置 Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: worker-network-config
+  namespace: metal3
+stringData:
+  networkData: |
+    links:
+    - id: eno1
+      type: phy
+      ethernet_mac_address: 00:11:22:33:44:55
+    networks:
+    - id: provision
+      type: ipv4
+      link: eno1
+      ip_address: 10.0.1.11/24
+    services:
+      dns:
+      - 10.0.0.1
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看裸金属主机状态
+kubectl get baremetalhosts -A
+kubectl describe baremetalhost worker-node-01 -n metal3
+
+# 🟢 低风险：查看供应进度
+kubectl get baremetalhost worker-node-01 -n metal3 -o jsonpath='{.status.provisioning.state}'
+
+# 🟡 中风险：开机/关机裸金属服务器
+kubectl patch baremetalhost worker-node-01 -n metal3 --type merge -p '{"spec":{"online":true}}'
+kubectl patch baremetalhost worker-node-01 -n metal3 --type merge -p '{"spec":{"online":false}}'
+
+# 🔴 高风险：重装操作系统（数据丢失）
+kubectl annotate baremetalhost worker-node-01 -n metal3 inspect.metal3.io= --overwrite
+kubectl patch baremetalhost worker-node-01 -n metal3 --type merge \
+  -p '{"spec":{"image":{"url":"http://image-server/ubuntu-24.04.qcow2","checksum":"sha256:new..."}}}'
+
+# 🔴 高风险：删除 BareMetalHost（服务器回收）
+kubectl delete baremetalhost worker-node-01 -n metal3
+
+# 🟢 低风险：查看 Ironic 日志
+kubectl logs -l app=ironic -n metal3-system -f
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| BMH 卡在 Registering | BMC 地址不可达 | `ipmitool -I lanplus -H 192.168.1.100 -U admin -P pass power status` | 检查 BMC 网络、凭据、防火墙 |
+| 供应失败 (Provisioning Error) | PXE 启动失败 | `kubectl logs -l app=ironic-conductor` | 检查 DHCP/TFTP 配置、bootMACAddress |
+| 镜像下载失败 | 镜像服务器不可达 | `curl -I http://image-server/image.qcow2` | 检查镜像 URL、网络、checksum |
+| BMH 状态为 Error | Ironic 内部错误 | `kubectl describe bmh <name> -o yaml` | 查看 status.errorMessage，重启 Ironic |
+| 节点未加入 K8s 集群 | cloud-init 失败 | 登录节点 `journalctl -u cloud-init` | 检查 userData Secret 内容 |
+
+```
+排查流程：
+├── BMC 连接失败？
+│   ├── ipmitool/redfish 手动测试 BMC 连通性
+│   ├── 检查 bmc-credentials Secret
+│   └── 确认防火墙允许 IPMI(623)/Redfish(443)
+├── PXE 启动失败？
+│   ├── 检查 DHCP 配置（next-server、filename）
+│   ├── 确认 bootMACAddress 正确
+│   └── 查看 Ironic conductor 日志
+└── OS 安装后节点未就绪？
+    ├── 检查 userData/cloud-init 配置
+    ├── SSH 登录节点查看 cloud-init 日志
+    └── 确认 kubeadm join 参数正确
+```
+
+## 生产案例
+
+### 案例 1：裸金属集群自动化扩容
+
+- **场景**：私有云 K8s 集群需要在大促前扩容 10 个裸金属 Worker 节点
+- **排查**：手动 PXE + OS 安装需要 2 天，无法满足业务时间窗口
+- **方案**：使用 Metal3 + Cluster API，定义 MachineDeployment replicas=10，自动发现、供应、加入集群
+- **效果**：10 个节点从裸金属到 K8s Ready 仅需 45 分钟，全程无人工干预
+
+### 案例 2：BMC 凭据泄露紧急响应
+
+- **场景**：安全扫描发现 BMC 默认密码未修改，存在远程管理风险
+- **排查**：扫描 200 台服务器，发现 35 台使用默认 BMC 凭据
+- **方案**：通过 Metal3 批量更新 bmc-credentials Secret，启用 Redfish 证书认证，禁用 IPMI v1.5
+- **效果**：30 分钟内完成全部 BMC 凭据轮换，消除远程管理攻击面
 
 ## 对比
 

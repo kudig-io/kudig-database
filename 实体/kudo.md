@@ -76,7 +76,7 @@ KUDO Manager 以 Deployment 运行在 Kubernetes 集群中，通过监听 Operat
 3. **多版本管理**: 通过 Operator 版本管理实现平滑升级和回滚
 4. **GitOps 集成**: 将 Operator 和 Instance YAML 存储在 Git 中，通过 GitOps 工具管理
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 KUDO CLI
@@ -88,7 +88,10 @@ curl -s https://kudo.dev/install.sh | bash
 kubectl kudo init
 
 # 安装预制 Operator（以 Kafka 为例）
-kubectl kudo install kafka --instance=my-kafka
+kubectl kudo install kafka --instance=my-kafka \
+  -p BROKER_COUNT=3 \
+  -p BROKER_CPUS=2000m \
+  -p BROKER_MEM=4096Mi
 
 # 查看安装进度
 kubectl kudo plan status --instance=my-kafka
@@ -96,6 +99,146 @@ kubectl kudo plan status --instance=my-kafka
 # 执行备份 Plan
 kubectl kudo plan trigger backup --instance=my-kafka
 ```
+
+```yaml
+# Operator 定义示例（operator.yaml）
+apiVersion: kudo.dev/v1beta1
+kind: Operator
+metadata:
+  name: redis-cluster
+spec:
+  maintainer:
+  - name: Platform Team
+  url: https://internal.example.com/redis-operator
+  kubernetesVersion: 1.28.0
+---
+# 参数定义（params.yaml）
+apiVersion: kudo.dev/v1beta1
+kind: Parameter
+metadata:
+  name: redis-cluster
+spec:
+  parameters:
+  - name: NODE_COUNT
+    default: "6"
+    description: "Redis 集群节点数"
+  - name: MEMORY
+    default: "512Mi"
+    description: "每个节点内存"
+  - name: PERSISTENCE_ENABLED
+    default: "true"
+    enum: ["true", "false"]
+---
+# Plan 定义（plans/deploy.yaml）
+apiVersion: kudo.dev/v1beta1
+kind: Plan
+metadata:
+  name: deploy
+spec:
+  strategy: serial
+  phases:
+  - name: init-config
+    strategy: serial
+    steps:
+    - name: create-configmap
+      tasks: [configmap]
+  - name: deploy-nodes
+    strategy: parallel
+    steps:
+    - name: deploy-redis
+      tasks: [statefulset]
+  - name: cluster-init
+    strategy: serial
+    steps:
+    - name: init-cluster
+      tasks: [cluster-init-job]
+```
+
+```yaml
+# Instance CRD（部署实例）
+apiVersion: kudo.dev/v1beta1
+kind: Instance
+metadata:
+  name: my-redis
+  namespace: production
+  labels:
+    operator: redis-cluster
+spec:
+  operatorVersion:
+    name: redis-cluster-1.0.0
+    namespace: kudo-system
+  parameters:
+    NODE_COUNT: "6"
+    MEMORY: "1024Mi"
+    PERSISTENCE_ENABLED: "true"
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看 Operator 和 Instance 状态
+kubectl get operators -A
+kubectl get instances -A
+kubectl kudo plan status --instance=my-redis -n production
+
+# 🟡 中风险：触发 Plan 执行
+kubectl kudo plan trigger upgrade --instance=my-redis -n production
+kubectl kudo plan trigger backup --instance=my-redis -n production
+
+# 🟡 中风险：更新参数（触发重新部署）
+kubectl kudo update --instance=my-redis -n production -p NODE_COUNT=8
+
+# 🟢 低风险：查看 Plan 执行历史
+kubectl kudo plan history --instance=my-redis -n production
+
+# 🔴 高风险：删除 Instance（删除所有托管资源）
+kubectl kudo uninstall --instance=my-redis -n production
+
+# 🟢 低风险：查看 Operator 仓库
+kubectl kudo list --repo https://kudo-repo.example.com
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Plan 卡在 PENDING | 前置 Plan 未完成 | `kubectl kudo plan status --instance=<name>` | 等待前置 Plan 完成或手动触发 |
+| Step 执行失败 | 资源模板渲染错误 | `kubectl describe instance <name>` | 检查参数值和模板语法 |
+| Instance 未创建 | Operator 版本不存在 | `kubectl get operatorversions -A` | 确认 operatorVersion 引用正确 |
+| 升级失败 | 参数不兼容 | `kubectl kudo plan history --instance=<name>` | 回滚到上一版本 |
+| Pod 未就绪 | 资源不足/配置错误 | `kubectl describe pod -l instance=<name>` | 调整参数或节点资源 |
+
+```
+排查流程：
+├── Plan 执行异常？
+│   ├── kubectl kudo plan status → 查看当前进度
+│   ├── kubectl describe instance → 查看 Events
+│   └── 检查 Step 对应的 Pod/Job 状态
+├── 参数更新无效？
+│   ├── kubectl get instance -o yaml → 确认参数已更新
+│   ├── 检查是否触发了正确的 Plan
+│   └── kubectl kudo plan trigger deploy → 手动触发
+└── 升级/回滚失败？
+    ├── kubectl kudo plan history → 查看历史
+    ├── 检查 OperatorVersion 兼容性
+    └── kubectl kudo update --operator-version=<old> → 回滚
+```
+
+## 生产案例
+
+### 案例 1：Kafka 集群标准化运维
+
+- **场景**：运维团队管理 20+ Kafka 集群，升级/扩容流程不统一，常出事故
+- **排查**：每次升级需要手动执行 10+ 步骤，不同工程师操作顺序不一致
+- **方案**：使用 KUDO Kafka Operator，将升级流程编排为 Plan（滚动重启 Broker → 更新配置 → 验证），一键执行
+- **效果**：升级时间从 4h 缩短至 30min，零事故升级
+
+### 案例 2：数据库 Operator 快速开发
+
+- **场景**：需要为内部 PostgreSQL 集群构建 Operator，团队无 Go 开发经验
+- **排查**：使用 Kubebuilder 开发 Operator 需要 2 个月，团队不熟悉 Go
+- **方案**：使用 KUDO 纯 YAML 定义 Operator，包含 deploy/backup/restore/upgrade Plan，2 周完成
+- **效果**：开发时间从 2 月缩短至 2 周，运维团队可自主维护
 
 ## 对比
 

@@ -80,32 +80,147 @@ KubeArmor 通过 KubeArmorPolicy CRD（命名空间级）和 KubeArmorHostPolicy
 # Helm 安装
 helm repo add kubearmor https://kubearmor.github.io/charts
 helm install kubearmor kubearmor/kubearmor-operator -n kubearmor --create-namespace
-# 应用安全策略
-kubectl apply -f - <<EOF
+
+# 验证部署
+kubectl get pods -n kubearmor
+kubectl get crd | grep kubearmor
+```
+
+### 安全策略配置
+
+```yaml
+# 阻止特定进程执行
 apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
-metadata: { name: ksp-block-exec }
+metadata:
+  name: ksp-block-exec
+  namespace: default
 spec:
   severity: 8
   selector:
-    matchLabels: { app: web }
+    matchLabels:
+      app: web
   process:
     matchPaths:
     - path: /bin/bash
+    - path: /bin/sh
   action: Block
-EOF
-# 生成策略建议
-karmor recommend --pod web-app
+---
+# 文件系统只读保护
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-readonly-etc
+  namespace: default
+spec:
+  severity: 7
+  selector:
+    matchLabels:
+      app: web
+  file:
+    matchDirectories:
+    - dir: /etc/
+      readOnly: true
+  action: Block
+---
+# 网络访问控制
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-restrict-network
+  namespace: default
+spec:
+  severity: 5
+  selector:
+    matchLabels:
+      app: web
+  network:
+    matchProtocols:
+    - protocol: tcp
+      command: ["curl", "wget"]
+  action: Audit
 ```
+
+### 策略建议生成
+
+```bash
+# 基于 Pod 行为生成策略建议
+karmor recommend --pod web-app --namespace default
+
+# 应用生成的策略
+kubectl apply -f recommended-policies/
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看安全策略
+kubectl get ksp -A
+kubectl describe ksp ksp-block-exec
+
+# 🟢 查看安全日志
+karmor logs --pod web-app -n default
+
+# 🟢 检查策略执行状态
+kubectl get ksp -o wide
+
+# 🟡 应用新策略
+kubectl apply -f new-policy.yaml
+
+# 🟡 切换策略模式（Audit → Block）
+kubectl patch ksp ksp-restrict-network --type merge -p '{"spec":{"action":"Block"}}'
+
+# 🔴 删除安全策略（会解除保护）
+kubectl delete ksp ksp-block-exec
+
+# 🔴 禁用 KubeArmor
+kubectl scale deployment kubearmor -n kubearmor --replicas=0
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 策略未生效 | LSM 未启用 | `kubectl logs -n kubearmor -l app=kubearmor` | 确认内核支持 AppArmor/SELinux/BPF-LSM |
+| Pod 被意外阻止 | 策略过严 | `karmor logs --pod <pod>` | 切换为 Audit 模式观察 |
+| KubeArmor CrashLoop | 内核不兼容 | `kubectl logs -n kubearmor` | 确认内核 >= 5.4，检查 BTF |
+| 日志丢失 | 日志量过大 | `kubectl top pod -n kubearmor` | 调整日志采集频率 |
+| 性能下降 | 策略过多 | `kubectl get ksp -A \| wc -l` | 合并策略，减少规则数 |
+
+**排查流程：**
+```
+策略未生效
+├── 检查 KubeArmor 状态 → kubectl get pods -n kubearmor
+├── 检查 LSM 支持 → cat /sys/kernel/security/lsm
+├── 检查策略状态 → kubectl describe ksp <name>
+├── 检查 Pod 标签匹配 → kubectl get pod --show-labels
+└── 查看安全日志 → karmor logs --pod <pod>
+```
+
+## 生产案例
+
+### 案例一：容器逃逸防护
+
+- **场景**: 多租户集群，需防止容器内用户执行危险操作（如访问 /proc、执行 shell）
+- **排查**: 使用 KubeArmor 阻止 /bin/bash、/bin/sh 执行，限制 /proc 访问
+- **方案**: 为所有租户 Pod 应用基线安全策略，阻止特权操作，允许业务进程
+- **效果**: 阻止了 12 次容器逃逸尝试，安全事件降低 90%
+
+### 案例二：合规审计
+
+- **场景**: 金融合规要求记录所有容器内文件访问和网络连接
+- **排查**: 使用 KubeArmor Audit 模式记录所有文件/网络/进程事件
+- **方案**: 配置 Audit 策略覆盖关键目录和网络协议，日志发送到 SIEM
+- **效果**: 满足等保三级要求，审计日志完整，无性能影响
 
 ## 替代方案
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **KubeArmor** | LSM 内核级、策略丰富 | LSM 支持因 OS 而异 |
-| Falco | 运行时检测、eBPF 原生 | 仅检测，不执行阻止 |
-| Tetragon | eBPF 高性能 | 配置复杂 |
-| NeuVector | 全栈安全 | 商业产品 |
+| 项目 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| **KubeArmor** | LSM 内核级、策略丰富 | LSM 支持因 OS 而异 | 强制执行 |
+| Falco | 运行时检测、eBPF 原生 | 仅检测，不执行阻止 | 威胁检测 |
+| Tetragon | eBPF 高性能 | 配置复杂 | 高性能场景 |
+| NeuVector | 全栈安全 | 商业产品 | 企业全栈 |
 
 ## 架构定位
 

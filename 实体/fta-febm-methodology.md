@@ -73,16 +73,147 @@ FTA + FEBM 联合方法论的工作流：当故障发生时，首先使用 FTA �
 ## 安装与快速开始
 
 ```bash
-# K8s 证据收集命令模板
+# 🟢 K8s 证据收集命令模板
 kubectl describe pod <name> -n <ns>     # Pod 状态和 Events
 kubectl get events -n <ns> --sort-by=.lastTimestamp  # 事件时间线
 kubectl top pod -n <ns>               # 资源使用
 kubectl logs <pod> -n <ns> --previous # 崩溃前日志
 ```
 
+## FTA 故障树示例：Pod 启动失败
+
+```mermaid
+graph TB
+    TOP[Pod 启动失败] --> OR1[OR]
+    OR1 --> IMG[镜像拉取失败]
+    OR1 --> RES[资源不足]
+    OR1 --> CFG[配置错误]
+    OR1 --> NET[网络问题]
+    IMG --> IMG1[ImagePullBackOff]
+    IMG --> IMG2[镜像不存在]
+    IMG --> IMG3[认证失败]
+    RES --> RES1[CPU/Memory 不足]
+    RES --> RES2[节点不可调度]
+    RES --> RES3[PVC 未绑定]
+    CFG --> CFG1[环境变量错误]
+    CFG --> CFG2[ConfigMap/Secret 缺失]
+    CFG --> CFG3[健康检查配置错误]
+    NET --> NET1[DNS 解析失败]
+    NET --> NET2[CNI 插件异常]
+```
+
+## FEBM 证据收集框架
+
+### 证据分类体系
+
+| 证据类型 | 来源 | 收集命令 | 分析要点 |
+|----------|------|----------|----------|
+| Pod 状态 | K8s API | `kubectl get pod -o yaml` | conditions, containerStatuses |
+| 事件 | K8s Events | `kubectl get events --sort-by=.lastTimestamp` | 时间线、频率、关联对象 |
+| 日志 | 容器 stdout | `kubectl logs --previous` | 错误模式、时间戳、堆栈 |
+| 指标 | Prometheus | `promql: rate(container_cpu_usage_seconds_total[5m])` | 趋势、突变、阈值 |
+| 节点状态 | Node API | `kubectl describe node` | conditions, taints, pressure |
+| 网络 | Service/Endpoints | `kubectl get endpoints <svc>` | 端点是否就绪 |
+
+### FEBM 执行流程
+
+```bash
+# 阶段1：证据收集（只读，无副作用）
+# 🟢 收集 Pod 完整状态
+kubectl get pod <name> -n <ns> -o yaml > /tmp/evidence-pod.yaml
+kubectl describe pod <name> -n <ns> > /tmp/evidence-describe.txt
+
+# 🟢 收集事件时间线
+kubectl get events -n <ns> --sort-by=.lastTimestamp > /tmp/evidence-events.txt
+
+# 🟢 收集日志（当前 + 上次崩溃）
+kubectl logs <pod> -n <ns> --tail=200 > /tmp/evidence-logs-current.txt
+kubectl logs <pod> -n <ns> --previous --tail=200 > /tmp/evidence-logs-previous.txt
+
+# 🟢 收集资源使用
+kubectl top pod <pod> -n <ns> > /tmp/evidence-resources.txt
+
+# 🟢 收集节点状态
+kubectl describe node $(kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.nodeName}') > /tmp/evidence-node.txt
+
+# 阶段2：假设生成与验证
+# 基于证据生成假设，然后执行验证命令：
+
+# 假设: 镜像拉取失败
+kubectl get events -n <ns> --field-selector reason=Failed | grep -i pull
+
+# 假设: OOMKilled
+kubectl get pod <pod> -n <ns> -o jsonpath='{.status.containerStatuses[0].lastState.terminated.reason}'
+
+# 假设: 探针配置错误
+kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[0].livenessProbe}'
+
+# 假设: 资源不足
+kubectl describe node <node> | grep -A5 "Allocated resources"
+```
+
+## AI Agent 集成模式
+
+```yaml
+# FTA 知识库结构示例
+fault_trees:
+  - id: pod-startup-failure
+    top_event: "Pod 无法进入 Running 状态"
+    gates:
+      - type: OR
+        children:
+          - type: BASIC
+            id: image-pull-failure
+            evidence_commands:
+              - "kubectl get events -n {ns} --field-selector reason=Failed"
+              - "kubectl describe pod {pod} -n {ns} | grep -A5 'Events'"
+            fix_actions:
+              - "检查镜像名称和 tag 是否正确"
+              - "检查 imagePullSecrets 配置"
+              - "检查节点到 Registry 的网络连通性"
+          - type: BASIC
+            id: oom-killed
+            evidence_commands:
+              - "kubectl get pod {pod} -n {ns} -o jsonpath='{.status.containerStatuses[0].lastState}'"
+              - "kubectl top pod {pod} -n {ns}"
+            fix_actions:
+              - "增加 memory limits"
+              - "检查应用内存泄漏"
+```
+
+## 生产案例
+
+### 案例1：复杂网络故障定位
+- **场景**：微服务间调用间歇性超时，影响多个服务
+- **FTA 应用**：从“服务调用超时”顶层事件分解：DNS 解析 / 连接建立 / 数据传输 / 服务端处理
+- **FEBM 验证**：收集 CoreDNS 日志发现 NXDOMAIN；检查 Service Endpoints 发现部分 Pod 未就绪；最终定位为 CNI 插件 Bug 导致部分 Pod IP 未注册
+- **效果**：故障定位时间从 2小时 缩短到 15分钟
+
+### 案例2：性能降级根因分析
+- **场景**：API 响应时间从 50ms 逐渐升高到 2s
+- **FTA 应用**：从“响应延迟”分解：CPU 争用 / 内存压力 / 磁盘 I/O / 网络延迟 / 依赖服务慢
+- **FEBM 验证**：Prometheus 指标显示 CPU throttling；cgroup 统计确认 CPU limit 过低；结合部署时间线确认是新版本资源需求增加
+- **效果**：建立可复用的性能故障树，后续类似问题 5分钟内定位
+
 ## 对比替代方案
 
-相比传统的「试错式」排障，FTA+FEBM 方法论提供系统化、可追溯的推理框架。相比五为什么（5 Whys），FTA 提供更完整的因果图谱覆盖。
+| 维度 | FTA+FEBM | 5 Whys | 试错法 | AIOps |
+|------|---------|--------|--------|-------|
+| 系统性 | 强 | 中 | 弱 | 强 |
+| 可追溯 | 强 | 中 | 弱 | 中 |
+| 学习曲线 | 中 | 低 | 低 | 高 |
+| 复杂故障 | 强 | 弱 | 弱 | 强 |
+| 可复用 | 强 | 弱 | 无 | 中 |
+| 自动化 | 支持 | 无 | 无 | 核心 |
+
+## 检查清单
+
+- [ ] 常见故障场景已建立 FTA 故障树
+- [ ] FEBM 证据收集命令模板已准备
+- [ ] 证据收集脚本已自动化（只读命令）
+- [ ] 故障案例已积累到知识库
+- [ ] AI Agent 已集成 FTA 知识库（可选）
+- [ ] 团队已培训 FTA+FEBM 方法论
 
 ## Related
 

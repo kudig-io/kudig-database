@@ -73,34 +73,158 @@ Keycloak 通过 Keycloak Operator 或 Helm Chart 部署到 Kubernetes。Operator
 3. **API 网关认证**: 在 API Gateway 层集成 Keycloak 进行请求认证
 4. **多租户 SaaS**: 使用 Realm 隔离为不同租户提供独立的身份管理
 
-## 安装
+## 安装与配置
 
 ```bash
-# Helm 安装
+# Helm 安装（Bitnami Chart）
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install keycloak bitnami/keycloak \
+helm install keycloak bitnami/keycloak -n keycloak --create-namespace \
   --set auth.adminUser=admin \
   --set auth.adminPassword=secure-password \
-  --set global.postgresql.auth.postgresPassword=pg-password
-# 或使用 Operator
+  --set global.postgresql.auth.postgresPassword=pg-password \
+  --set replicaCount=2 \
+  --set production=true \
+  --set proxy=edge
+
+# 等待就绪
+kubectl wait --for=condition=available statefulset/keycloak -n keycloak --timeout=180s
+
+# 或使用 Keycloak Operator
 kubectl apply -f https://raw.githubusercontent.com/keycloak/keycloak-k8s-resources/latest/kubernetes/keycloaks.k8s.keycloak.org-v1.yml
 kubectl apply -f - <<EOF
 apiVersion: k8s.keycloak.org/v2alpha1
 kind: Keycloak
+metadata:
+  name: prod-keycloak
+  namespace: keycloak
 spec:
-  instances: 2
-  db: { vendor: postgres, host: pg-svc }
+  instances: 3
+  db:
+    vendor: postgres
+    host: pg-primary.database.svc
+    port: 5432
+    database: keycloak
+    usernameSecret:
+      name: keycloak-db-secret
+      key: username
+    passwordSecret:
+      name: keycloak-db-secret
+      key: password
+  http:
+    tlsSecret: keycloak-tls
+  hostname:
+    hostname: auth.company.com
+  features:
+    enabled:
+      - token-exchange
+      - admin-fine-grained-authz
 EOF
 ```
 
+```yaml
+# K8s API Server OIDC 集成配置
+# kube-apiserver 启动参数：
+# --oidc-issuer-url=https://auth.company.com/realms/kubernetes
+# --oidc-client-id=kubernetes
+# --oidc-username-claim=preferred_username
+# --oidc-groups-claim=groups
+---
+# kubectl OIDC 客户端配置 (kubelogin)
+apiVersion: client.authentication.k8s.io/v1beta1
+kind: ExecCredential
+spec:
+  exec:
+    apiVersion: client.authentication.k8s.io/v1beta1
+    command: kubectl-oidc_login
+    args:
+      - get-token
+      - --oidc-issuer-url=https://auth.company.com/realms/kubernetes
+      - --oidc-client-id=kubernetes
+      - --oidc-client-secret=<secret>
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Keycloak 实例状态
+kubectl get keycloak -n keycloak
+kubectl get pods -n keycloak -l app=keycloak
+
+# 🟢 查看 Realm 列表
+kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kcadm.sh get realms \
+  --server http://localhost:8080 --realm master --user admin --password $ADMIN_PASS
+
+# 🟡 导出 Realm 配置（备份）
+kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kc.sh export \
+  --dir /tmp/realm-export --realm production
+kubectl cp keycloak/keycloak-0:/tmp/realm-export ./keycloak-backup/
+
+# 🟡 导入 Realm 配置（恢复）
+kubectl cp ./keycloak-backup/ keycloak/keycloak-0:/tmp/realm-import/
+kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kc.sh import --dir /tmp/realm-import
+
+# 🔴 强制重置管理员密码（紧急场景）
+kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kcadm.sh update \
+  users/<user-id>/reset-password -r master \
+  -s type=password -s value=new-password -s temporary=false
+
+# 🟢 查看活跃会话
+kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kcadm.sh get \
+  realms/production/sessions --server http://localhost:8080 --realm master --user admin
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod CrashLoopBackOff | 数据库连接失败或内存不足 | `kubectl logs keycloak-0 -n keycloak` | 检查 DB 连接串和 JVM 内存参数 |
+| 登录失败 502 | 反向代理配置错误或 TLS 证书问题 | `curl -vk https://auth.company.com` | 检查 Ingress TLS 和 proxy 设置 |
+| Token 验证失败 | 时钟不同步或 Realm 配置错误 | `date -u` 对比各节点时间 | 同步 NTP，检查 issuer-url |
+| 集群 Session 丢失 | Infinispan 缓存未同步 | `kubectl logs keycloak-0` 查看 JGroups | 检查节点间 7800 端口连通性 |
+| LDAP 同步失败 | LDAP 服务器不可达或凭据过期 | `kubectl exec keycloak-0 -- ldapsearch -H ldap://...` | 检查 LDAP 连接和 Bind DN 密码 |
+
+```
+排查流程：
+├── Pod 无法启动
+│   ├── kubectl logs 查看启动日志
+│   ├── 检查 PostgreSQL 连接（host/port/credentials）
+│   ├── 检查 JVM 内存配置（-Xmx/-Xms）
+│   └── 确认 PVC 存储充足
+├── 认证流程异常
+│   ├── 检查 Realm 的 issuer URL 是否可访问
+│   ├── 确认客户端 redirect_uri 配置正确
+│   ├── 检查时钟同步（NTP）
+│   └── 查看 Keycloak 事件日志（Events）
+└── 集群问题
+    ├── 检查 JGroups 集群成员（jgroups-7800 端口）
+    ├── 确认所有实例使用相同数据库
+    └── 检查负载均衡器 sticky session 配置
+```
+
+## 生产案例
+
+### 案例 1：K8s 多集群统一身份认证
+
+- **场景**：企业 5 个 K8s 集群，之前使用静态 Token 认证，无法审计、无法撤销、无 MFA
+- **排查**：安全审计发现 Token 泄露风险，无法实现 RBAC 与 AD 组映射，离职员工 Token 未清理
+- **方案**：部署 Keycloak 作为 OIDC Provider，集成 AD，配置 --oidc-issuer-url，通过 Group Claim 映射 K8s RBAC
+- **效果**：实现 SSO + MFA，离职员工自动失效，RBAC 与 AD 组自动同步，安全审计合规
+
+### 案例 2：微服务 API 网关统一认证
+
+- **场景**：50+ 微服务通过 API Gateway 暴露，每个服务自行实现认证逻辑，不一致且难维护
+- **排查**：各服务认证实现不统一，部分服务存在认证绕过漏洞，Token 验证逻辑分散
+- **方案**：Keycloak 作为统一 IdP，API Gateway (Envoy) 集成 ext_authz，服务只验证 JWT 签名
+- **效果**：认证逻辑集中管理，安全漏洞修复从周级降至分钟级，新服务接入认证从 2 天降至 10 分钟
+
 ## 替代方案
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Keycloak** | CNCF Incubating、Red Hat 支持 | Java 资源开销大 |
-| Dex | 轻量级、K8s 原生 | 功能少（仅 OIDC 桥接） |
-| Authentik | Python、灵活 | 社区较小 |
-| Auth0 | SaaS、零运维 | 商业产品 |
+| 项目 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| **Keycloak** | CNCF Incubating、Red Hat 支持、功能全面 | Java 资源开销大 | 企业级全功能 IAM |
+| Dex | 轻量级、K8s 原生、Go 实现 | 功能少（仅 OIDC 桥接） | K8s 集群认证 |
+| Authentik | Python、灵活、UI 友好 | 社区较小 | 中小企业 SSO |
+| Auth0 | SaaS、零运维 | 商业产品、数据出境 | 快速上线无运维团队 |
 
 ## 架构定位
 

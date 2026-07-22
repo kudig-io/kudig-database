@@ -69,25 +69,147 @@ Contour 通过 CRD（HTTPProxy）和标准 Ingress 资源与 Kubernetes 集成�
 ## 安装与快速开始
 
 ```bash
-helm install contour oci://ghcr.io/projectcontour/contour/contour -n projectcontour --create-namespace
+# 🟢 Helm 安装
+helm install contour oci://ghcr.io/projectcontour/contour/contour \
+  -n projectcontour --create-namespace
+
+# 🟢 验证安装
+kubectl get pods -n projectcontour
+kubectl get httpproxy -A
+
+# 🟢 查看 Envoy Service
+kubectl get svc -n projectcontour envoy
 ```
+
+### HTTPProxy 示例
+
+```yaml
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: app-proxy
+  namespace: default
+spec:
+  virtualhost:
+    fqdn: app.example.com
+    tls:
+      secretName: app-tls
+  routes:
+  - conditions:
+    - prefix: /api
+    services:
+    - name: api-service
+      port: 8080
+      weight: 90
+    - name: api-service-canary
+      port: 8080
+      weight: 10  # 10% 金丝雀
+  - conditions:
+    - prefix: /
+    services:
+    - name: frontend-service
+      port: 80
+    timeoutPolicy:
+      response: 30s
+      idle: 5m
+    retryPolicy:
+      count: 3
+      retryOn:
+      - 5xx
+      - connect-failure
+```
+
+### 跨命名空间委托
+
+```yaml
+# 根 HTTPProxy (平台团队管理)
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: root-proxy
+  namespace: ingress
+spec:
+  virtualhost:
+    fqdn: "*.example.com"
+  includes:
+  - name: team-a-routes
+    namespace: team-a
+    conditions:
+    - prefix: /team-a
+---
+# 团队 HTTPProxy (团队自己管理)
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: team-a-routes
+  namespace: team-a
+spec:
+  routes:
+  - services:
+    - name: team-a-service
+      port: 8080
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 HTTPProxy 状态
+kubectl get httpproxy -A
+kubectl describe httpproxy <name> -n <ns>
+
+# 🟢 查看 Contour 日志
+kubectl logs -n projectcontour -l app=contour --tail=50
+
+# 🟢 查看 Envoy 日志
+kubectl logs -n projectcontour -l app=envoy --tail=50
+
+# 🟢 查看 Envoy 配置 (xDS)
+kubectl exec -n projectcontour <envoy-pod> -- curl -s localhost:9001/config_dump | jq
+
+# 🟢 查看 Envoy 统计
+kubectl exec -n projectcontour <envoy-pod> -- curl -s localhost:9001/stats
+
+# 🟢 查看 Envoy 集群
+kubectl exec -n projectcontour <envoy-pod> -- curl -s localhost:9001/clusters
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| HTTPProxy 无效 | 配置错误/冲突 | `kubectl describe httpproxy` |
+| 503 错误 | 后端无健康端点 | 检查 Service/Endpoints |
+| 路由不生效 | 条件冲突/优先级 | 检查 conditions 和 includes |
+| TLS 失败 | Secret 不存在/过期 | 检查 TLS Secret |
+| Envoy 配置未更新 | Contour 异常 | 检查 Contour 日志 |
 
 ## 对比替代方案
 
-相比 NGINX Ingress Controller，Contour 基于 Envoy 提供更现代的数据平面和动态配置能力。相比 Istio Gateway，Contour 更专注于 Ingress 场景，部署和配置更简单。
+| 特性 | Contour | Nginx Ingress | Istio Gateway | Traefik |
+|------|---------|---------------|---------------|--------|
+| 数据平面 | Envoy | Nginx | Envoy | Traefik |
+| 配置方式 | HTTPProxy CRD | Ingress + annotations | VirtualService | IngressRoute CRD |
+| 动态配置 | xDS (实时) | reload | xDS | 实时 |
+| 复杂度 | 中 | 低 | 高 | 低 |
+| 金丝雀 | 原生权重 | 注解 | 原生 | 原生 |
+| gRPC | 原生 | 需配置 | 原生 | 原生 |
+
+## 检查清单
+
+- [ ] 理解 Contour 架构 (Control Plane + Envoy)
+- [ ] 掌握 HTTPProxy CRD 配置
+- [ ] 能配置加权路由 (金丝雀)
+- [ ] 理解跨命名空间委托
+- [ ] 掌握故障排查流程
+- [ ] 了解 Contour vs Nginx vs Istio 选型
 
 ## Related
 
-- [[cloud-custodian]] — Cloud Custodian
-- [[kuadrant]] — Kuadrant
-- [[notary-project]] — Notary Project
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- contour
-- [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
+- [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]]
 - [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
 
 <!-- risk-assessed -->

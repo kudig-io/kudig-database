@@ -132,15 +132,79 @@ argocd app get my-app
 # View sync history
 argocd app history my-app
 
-# Force re-sync
-argocd app sync my-app --force
-
 # View diff (live vs desired)
 argocd app diff my-app
 
 # Check controller logs
 kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller
+
+# 🟡 中风险：修改集群状态
+# Force re-sync
+argocd app sync my-app --force
+
+# 回滚到指定版本
+argocd app rollback my-app <revision>
+
+# 暂停自动同步
+argocd app set my-app --sync-policy none
+
+# 🔴 高风险：可能造成服务中断
+# 硬删除应用（保留资源）
+argocd app delete my-app --cascade=false
+
+# 硬删除应用（级联删除资源）
+argocd app delete my-app --cascade
 ```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Application OutOfSync | Git 与集群状态不一致 | `argocd app diff my-app` | 执行 sync 或修正手动变更 |
+| Sync 卡住 Progressing | 资源未达 Healthy | `argocd app get my-app --show-params` | 检查 Pod 事件和资源配额 |
+| repo-server 连接失败 | Git 凭据过期/网络问题 | `kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server` | 更新 Secret/检查网络策略 |
+| Controller OOM | 管理应用过多 | `kubectl top pods -n argocd` | 增加资源/分片 Controller |
+| Webhook 不触发 | Secret 配置错误 | `kubectl logs -n argocd argocd-notifications-controller-*` | 重新配置 webhook secret |
+
+```
+排查流程:
+├── 同步异常
+│   ├── argocd app get → Sync/Health 状态
+│   ├── argocd app diff → 期望与实际差异
+│   ├── kubectl get events → 资源创建失败原因
+│   └── argocd app logs → 控制器日志
+├── 连接问题
+│   ├── kubectl get pods -n argocd → 组件状态
+│   ├── 检查 repo-server Secret → Git 凭据有效性
+│   └── curl Git 仓库 → 网络可达性
+└── 性能问题
+    ├── kubectl top pods -n argocd → 资源使用
+    ├── argocd app list --selector → 应用数量
+    └── Controller 分片配置 → 负载均衡
+```
+
+## 生产案例
+
+### 案例1: 大规模 ApplicationSet 导致 Controller OOM
+
+- **场景**: 500+ 微服务通过 ApplicationSet 生成，Controller 内存持续增长至 OOMKilled
+- **排查**: `kubectl top pods -n argocd` 显示 Controller 内存 8Gi 达上限，reconcile 队列积压 2000+
+- **方案**:
+  1. Controller 启用分片（`--application-controller-shard-replicas=4`）
+  2. 调整 `--status-processors` 和 `--operation-processors` 参数
+  3. ApplicationSet 启用 progressive sync 限制并发
+- **效果**: 内存稳定在 2Gi/分片，reconcile 延迟从 5min 降至 10s
+
+### 案例2: Git Webhook 失效导致配置漂移
+
+- **场景**: 开发团队反馈 Git push 后 ArgoCD 未自动同步，手动检查发现 3 天未更新
+- **排查**: GitHub webhook 返回 502，repo-server Pod 重启后 webhook secret 丢失
+- **方案**:
+  1. 将 webhook secret 存入 Vault，通过 ExternalSecrets 同步
+  2. 配置 `argocd app sync --retry-limit=3` 自动重试
+  3. 添加 Prometheus 告警：`argocd_app_info{sync_status="OutOfSync"} > 0` 持续 10min
+- **效果**: 配置漂移检测时间从 3 天缩短至 10 分钟
+
 ## Integration Points
 
 - Integrates with [[supply-chain-security|Supply Chain Security]] via image updater for automated tag tracking

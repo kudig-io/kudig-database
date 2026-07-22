@@ -59,6 +59,44 @@ ServiceAccount缺少imagePullSecret导致镜像拉取失败，同时缺少create
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 09:00 | 新部署的 Operator Pod 无法拉取镜像 | 🟢 `kubectl describe pod ${POD} -n ${NS} \| grep -A5 Events` |
+| 09:02 | 手动修复 imagePullSecret 后仍失败 | 🟢 `kubectl get secret -n ${NS} \| grep regcred` |
+| 09:05 | 发现 ServiceAccount 缺少拉取 Secret 的权限 | 🟢 `kubectl auth can-i get secrets -n ${NS} --as=system:serviceaccount:${NS}:${SA}` |
+| 09:08 | 确认根因: RBAC 策略变更 + Secret 命名空间错误 | 🟢 `kubectl get rolebinding -n ${NS} -o wide` |
+| 09:12 | 修复 RBAC + 重新创建 Secret | 🟡 `kubectl apply -f rolebinding.yaml` |
+| 09:15 | Pod 正常拉取镜像并启动 | 🟢 `kubectl get pods -n ${NS} -w` |
+
+## 故障关联图
+
+```
+RBAC策略变更(根因1) + Secret配置错误(根因2)
+    ├── ServiceAccount无权访问Secret
+    │       └── imagePullSecrets无法读取
+    │               └── 镜像拉取失败(unauthorized)
+    └── 影响: Operator无法部署，CR无人协调
+```
+
+## 关键教训
+
+1. **RBAC 变更影响评估**: 未评估对现有工作负载的影响
+2. **多根因并发**: 两个独立问题同时存在增加排查难度
+3. **权限验证**: 部署前未验证 ServiceAccount 权限
+
+## 面试要点
+
+1. **Q: RBAC 和镜像拉取同时失败的排查思路？**
+   A: 分别验证两个问题 → `kubectl auth can-i` 检查权限 → 检查 Secret 是否存在 → 确认 imagePullSecrets 引用正确 → 逐个修复
+
+2. **Q: 如何避免 RBAC 变更影响业务？**
+   A: 变更前影响评估 → 使用 `kubectl auth can-i --list` 审计 → 渐进式应用 → 回滚预案
+
+3. **Q: imagePullSecrets 的工作原理？**
+   A: Pod spec 引用 Secret → kubelet 用 Secret 中的凭证认证仓库 → 拉取镜像；也可通过 ServiceAccount 自动挂载
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

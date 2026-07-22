@@ -166,7 +166,363 @@ kubectl get testrun -n perf -w   # 等待 completed
 1. **从本机压生产**：本机出口带宽与延迟会扭曲结果，永远从集群内压。
 2. **thresholds 设太松**：`p(99)<2000ms` 这种阈值永远过，等于没设。与 SLO 对齐。
 3. **只测 happy path**：忘了测登录/支付等慢路径，掩盖真实瓶颈。
-4. **没 baseline**：没有基线就没法判断"这次结果是变好还是变差"。每次发版前先跑基线。
+4. **没 baseline**：没有基线就没法判断“这次结果是变好还是变差”。每次发版前先跑基线。
+
+## 高级测试场景
+
+### 多场景测试脚本
+
+```javascript
+// k6-multi-scenario.js — 多场景测试
+import http from 'k6/http';
+import { check, sleep, group } from 'k6';
+import { Rate, Trend } from 'k6/metrics';
+
+const errorRate = new Rate('errors');
+const apiLatency = new Trend('api_latency');
+const dbLatency = new Trend('db_latency');
+
+export const options = {
+  scenarios: {
+    // 场景 1: 常规浏览
+    browse: {
+      executor: 'ramping-vus',
+      startVUs: 0,
+      stages: [
+        { duration: '2m', target: 100 },
+        { duration: '5m', target: 100 },
+        { duration: '2m', target: 0 },
+      ],
+      exec: 'browseScenario',
+      tags: { scenario: 'browse' },
+    },
+    // 场景 2: 高并发 API
+    api_stress: {
+      executor: 'constant-arrival-rate',
+      rate: 500,
+      timeUnit: '1s',
+      duration: '5m',
+      preAllocatedVUs: 50,
+      maxVUs: 200,
+      exec: 'apiScenario',
+      startTime: '1m',
+      tags: { scenario: 'api' },
+    },
+    // 场景 3: 突发流量
+    spike: {
+      executor: 'shared-iterations',
+      vus: 100,
+      iterations: 10000,
+      maxDuration: '5m',
+      exec: 'spikeScenario',
+      startTime: '3m',
+      tags: { scenario: 'spike' },
+    },
+  },
+  thresholds: {
+    http_req_failed: ['rate<0.01'],
+    http_req_duration: ['p(99)<500'],
+    'api_latency': ['p(95)<300'],
+    'db_latency': ['p(95)<100'],
+  },
+};
+
+export function browseScenario() {
+  group('Browse Products', () => {
+    const res = http.get('http://api.default.svc/products');
+    errorRate.add(res.status !== 200);
+    apiLatency.add(res.timings.duration);
+    check(res, { 'status 200': (r) => r.status === 200 });
+  });
+  sleep(Math.random() * 3);
+}
+
+export function apiScenario() {
+  const res = http.post('http://api.default.svc/orders', JSON.stringify({
+    items: [{ sku: 'A1', qty: 1 }],
+  }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+  errorRate.add(res.status >= 400);
+  apiLatency.add(res.timings.duration);
+}
+
+export function spikeScenario() {
+  const res = http.get('http://api.default.svc/health');
+  errorRate.add(res.status !== 200);
+}
+```
+
+### 数据参数化测试
+
+```javascript
+// k6-parameterized.js — 数据驱动测试
+import http from 'k6/http';
+import { SharedArray } from 'k6/data';
+import { check } from 'k6';
+
+// 从 ConfigMap 加载测试数据
+const users = new SharedArray('users', function () {
+  return JSON.parse(open('/data/users.json'));
+});
+
+const products = new SharedArray('products', function () {
+  return JSON.parse(open('/data/products.json'));
+});
+
+export default function () {
+  const user = users[Math.floor(Math.random() * users.length)];
+  const product = products[Math.floor(Math.random() * products.length)];
+
+  // 登录
+  const loginRes = http.post('http://api.default.svc/login', JSON.stringify({
+    username: user.username,
+    password: user.password,
+  }));
+
+  const token = loginRes.json('token');
+
+  // 浏览商品
+  const browseRes = http.get(`http://api.default.svc/products/${product.id}`, {
+    headers: { 'Authorization': `Bearer ${token}` },
+  });
+
+  check(browseRes, {
+    'status 200': (r) => r.status === 200,
+    'has product': (r) => r.json('id') === product.id,
+  });
+}
+```
+
+## 监控与告警
+
+### PrometheusRule 压测告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: k6-load-testing-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: k6.rules
+      rules:
+        # 压测进行中
+        - alert: K6LoadTestRunning
+          expr: |
+            k6_vus{testid=~".+"} > 0
+          for: 1m
+          labels:
+            severity: info
+          annotations:
+            summary: "压测 {{ $labels.testid }} 正在进行，当前 VU: {{ $value }}"
+
+        # 压测失败率过高
+        - alert: K6HighErrorRate
+          expr: |
+            rate(k6_http_req_failed_total[1m]) > 0.05
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "压测失败率超过 5%"
+
+        # 压测延迟过高
+        - alert: K6HighLatency
+          expr: |
+            histogram_quantile(0.99, rate(k6_http_req_duration_seconds_bucket[1m])) > 1
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "压测 P99 延迟超过 1s"
+```
+
+### Grafana Dashboard
+
+```json
+{
+  "dashboard": {
+    "title": "k6 压测监控",
+    "panels": [
+      {
+        "title": "VU 数量",
+        "type": "graph",
+        "targets": [
+          { "expr": "k6_vus" }
+        ]
+      },
+      {
+        "title": "RPS",
+        "type": "graph",
+        "targets": [
+          { "expr": "rate(k6_http_reqs_total[1m])" }
+        ]
+      },
+      {
+        "title": "P99 延迟",
+        "type": "graph",
+        "targets": [
+          { "expr": "histogram_quantile(0.99, rate(k6_http_req_duration_seconds_bucket[1m]))" }
+        ]
+      },
+      {
+        "title": "错误率",
+        "type": "graph",
+        "targets": [
+          { "expr": "rate(k6_http_req_failed_total[1m])" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## 测试报告生成
+
+### 自动生成报告脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生成压测报告
+set -euo pipefail
+
+TEST_NAME=${1:-"api-load-test"}
+NAMESPACE=${2:-"perf"}
+OUTPUT_FILE="/tmp/k6-report-$(date +%Y%m%d-%H%M%S).md"
+
+echo "=== 生成压测报告 ==="
+
+# 获取测试结果
+STATUS=$(kubectl get testrun $TEST_NAME -n $NAMESPACE -o jsonpath='{.status.stage}')
+START_TIME=$(kubectl get testrun $TEST_NAME -n $NAMESPACE -o jsonpath='{.status.startTime}')
+END_TIME=$(kubectl get testrun $TEST_NAME -n $NAMESPACE -o jsonpath='{.status.completionTime}')
+
+# 从 Prometheus 获取指标
+P99_LATENCY=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=histogram_quantile(0.99, sum by(le)(rate(k6_http_req_duration_seconds_bucket[5m])))' \
+  | jq -r '.data.result[0].value[1]')
+
+ERROR_RATE=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=sum(rate(k6_http_req_failed_total[5m]))' \
+  | jq -r '.data.result[0].value[1]')
+
+RPS=$(curl -sG "$PROM/api/v1/query" \
+  --data-urlencode 'query=sum(rate(k6_http_reqs_total[5m]))' \
+  | jq -r '.data.result[0].value[1]')
+
+cat > $OUTPUT_FILE <<EOF
+# k6 压测报告
+
+**测试名称**: $TEST_NAME
+**执行时间**: $START_TIME - $END_TIME
+**测试状态**: $STATUS
+
+## 性能指标
+
+| 指标 | 结果 | 阈值 | 状态 |
+|-----|------|------|------|
+| P99 延迟 | ${P99_LATENCY}s | < 0.5s | $([ $(echo "$P99_LATENCY < 0.5" | bc) -eq 1 ] && echo "✓" || echo "✗") |
+| 错误率 | ${ERROR_RATE} | < 0.01 | $([ $(echo "$ERROR_RATE < 0.01" | bc) -eq 1 ] && echo "✓" || echo "✗") |
+| RPS | ${RPS} | > 1000 | $([ $(echo "$RPS > 1000" | bc) -eq 1 ] && echo "✓" || echo "✗") |
+
+## 建议
+
+- 继续监控生产环境指标
+- 下次压测建议增加并发数
+
+---
+*本报告由自动化脚本生成*
+EOF
+
+echo "报告已生成: $OUTPUT_FILE"
+cat $OUTPUT_FILE
+```
+
+## 性能基线管理
+
+### 基线存储 ConfigMap
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-baseline
+  namespace: perf
+data:
+  baseline.json: |
+    {
+      "version": "v1.2.3",
+      "timestamp": "2026-07-01T10:00:00Z",
+      "metrics": {
+        "p99_latency_ms": 450,
+        "error_rate": 0.005,
+        "rps": 1200,
+        "concurrent_users": 500
+      }
+    }
+```
+
+### 基线对比脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：对比基线
+set -euo pipefail
+
+BASELINE=$(kubectl get configmap k6-baseline -n perf -o jsonpath='{.data.baseline\.json}')
+CURRENT_P99=${1:-0.5}
+
+BASELINE_P99=$(echo $BASELINE | jq -r '.metrics.p99_latency_ms')
+
+DIFF=$(echo "($CURRENT_P99 * 1000 - $BASELINE_P99) / $BASELINE_P99 * 100" | bc)
+
+echo "=== 基线对比 ==="
+echo "基线 P99: ${BASELINE_P99}ms"
+echo "当前 P99: $(echo "$CURRENT_P99 * 1000" | bc)ms"
+echo "变化: ${DIFF}%"
+
+if (( $(echo "$DIFF > 20" | bc -l) )); then
+  echo "⚠️ 性能下降超过 20%，需要调查"
+  exit 1
+elif (( $(echo "$DIFF < -20" | bc -l) )); then
+  echo "✓ 性能提升超过 20%，建议更新基线"
+else
+  echo "✓ 性能在正常范围内"
+fi
+```
+
+## 故障排查
+
+### 常见问题诊断
+
+| 问题 | 可能原因 | 解决方案 |
+|-----|---------|----------|
+| TestRun 一直 Pending | 资源不足 | 检查节点资源，调整 runner resources |
+| 压测 RPS 上不去 | runner CPU 瓶颈 | 增加 parallelism 或 runner CPU |
+| 结果不准确 | 网络延迟 | 确保 runner 与被测服务同集群 |
+| 阈值总是失败 | 阈值设置不合理 | 与 SLO 对齐，调整阈值 |
+| Operator 不工作 | RBAC 权限 | 检查 ServiceAccount 权限 |
+
+### 调试命令
+
+```bash
+# 🟢 低风险：查看 TestRun 状态
+kubectl get testrun -n perf -o wide
+
+# 🟢 低风险：查看 runner 日志
+kubectl logs -n perf -l app=k6-runner --tail=100
+
+# 🟢 低风险：查看 runner 资源使用
+kubectl top pods -n perf -l app=k6-runner
+
+# 🟢 低风险：查看 Operator 日志
+kubectl logs -n k6-operator-system -l app=k6-operator --tail=100
+
+# 🟢 低风险：检查 Prometheus 指标
+curl -sG "$PROM/api/v1/query" --data-urlencode 'query=k6_vus' | jq
+```
 
 ## 相关
 

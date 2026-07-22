@@ -255,6 +255,218 @@ dependencies:
 | release 状态异常 | `helm history my-release` + `helm rollback` |
 | 资源冲突 | `kubectl get events -n my-ns --sort-by='.lastTimestamp'` |
 | 卸载残留 | `helm uninstall --no-hooks` 或手动清理 CRD |
+| 依赖下载失败 | `helm dependency update` + 检查仓库连通性 |
+| Values 不生效 | `helm get values <release>` 确认实际值 |
+| Hook 失败 | `kubectl get pods -l app.kubernetes.io/managed-by=Helm` |
+
+## 高级 Chart 开发
+
+### 模板函数速查
+
+```yaml
+# 字符串操作
+{{ .Values.name | upper }}
+{{ .Values.name | lower }}
+{{ .Values.name | title }}
+{{ .Values.name | trunc 63 }}
+{{ .Values.name | trimSuffix "-" }}
+{{ printf "%s-%s" .Release.Name .Chart.Name }}
+{{ .Values.name | default "myapp" }}
+{{ .Values.name | quote }}
+{{ .Values.name | b64enc }}
+
+# 条件判断
+{{- if .Values.ingress.enabled }}
+...
+{{- else if .Values.gateway.enabled }}
+...
+{{- else }}
+...
+{{- end }}
+
+# 循环
+{{- range $key, $value := .Values.env }}
+- name: {{ $key }}
+  value: {{ $value | quote }}
+{{- end }}
+
+{{- range .Values.containers }}
+- name: {{ .name }}
+  image: {{ .image }}
+{{- end }}
+
+# 包含与模板
+{{ include "mychart.fullname" . }}
+{{- define "mychart.labels" -}}
+app.kubernetes.io/name: {{ .Chart.Name }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+# 类型转换
+{{ .Values.replicas | int }}
+{{ .Values.enabled | toString }}
+{{ .Values.config | toYaml | nindent 4 }}
+{{ .Values.data | toJson }}
+```
+
+### _helpers.tpl 常用模板
+
+```yaml
+{{/* 生成完整名称 */}}
+{{- define "mychart.fullname" -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+
+{{/* 通用标签 */}}
+{{- define "mychart.labels" -}}
+helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+{{ include "mychart.selectorLabels" . }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/* 选择器标签 */}}
+{{- define "mychart.selectorLabels" -}}
+app.kubernetes.io/name: {{ .Chart.Name }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+```
+
+### Chart.yaml 完整示例
+
+```yaml
+apiVersion: v2
+name: myapp
+description: A Helm chart for MyApp
+type: application
+version: 1.2.0        # Chart 版本
+appVersion: "2.5.1"   # 应用版本
+kubeVersion: ">=1.25.0-0"
+home: https://github.com/org/myapp
+sources:
+  - https://github.com/org/myapp
+maintainers:
+  - name: Team
+    email: team@example.com
+dependencies:
+  - name: postgresql
+    version: "15.x.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled
+  - name: redis
+    version: "18.x.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: redis.enabled
+```
+
+## Helm 插件
+
+```bash
+# 安装插件
+helm plugin install https://github.com/databus23/helm-diff
+helm plugin install https://github.com/jkroepke/helm-secrets
+helm plugin install https://github.com/helm-unittest/helm-unittest
+helm plugin list
+
+# helm-diff: 升级前对比
+helm diff upgrade myapp ./chart -f values.yaml
+
+# helm-secrets: 加密 values
+helm secrets encrypt secrets.yaml > secrets.yaml.enc
+helm secrets install myapp ./chart -f secrets.yaml.enc
+
+# helm-unittest: 单元测试
+helm unittest ./mychart
+```
+
+## OCI 仓库操作
+
+```bash
+# 登录 OCI 仓库
+helm registry login registry.example.com
+
+# 推送 Chart
+helm package ./mychart
+helm push mychart-1.0.0.tgz oci://registry.example.com/charts
+
+# 拉取 Chart
+helm pull oci://registry.example.com/charts/mychart --version 1.0.0
+
+# 安装
+helm install myapp oci://registry.example.com/charts/mychart --version 1.0.0
+```
+
+## 生产故障排查流程
+
+```
+1. 检查 Release 状态
+   helm status myapp -n production
+   helm history myapp -n production
+
+2. 查看渲染结果
+   helm get manifest myapp -n production
+   helm get values myapp -n production
+
+3. 检查 K8s 资源
+   kubectl get all -l app.kubernetes.io/instance=myapp -n production
+   kubectl get events -n production --sort-by=.metadata.creationTimestamp
+
+4. 模板调试
+   helm template myapp ./chart -f values-prod.yaml --debug
+   helm template myapp ./chart --show-only templates/deployment.yaml
+
+5. 回滚
+   helm rollback myapp <revision> -n production
+   helm rollback myapp 0 -n production  # 回滚到上一版本
+```
+
+## 多环境 Values 管理
+
+```
+chart/
+├── values.yaml           # 默认值
+├── values-dev.yaml       # 开发环境
+├── values-staging.yaml   # 预发环境
+└── values-prod.yaml      # 生产环境
+
+# 使用
+helm install myapp ./chart -f values.yaml -f values-prod.yaml
+helm upgrade myapp ./chart -f values-prod.yaml --set image.tag=v2.0
+```
+
+**Values 优先级**（从低到高）：
+1. Chart 内 values.yaml
+2. -f 指定的文件（后面的覆盖前面的）
+3. --set 参数
+4. --set-string / --set-json
+
+## 版本兼容矩阵
+
+| Helm 版本 | K8s 兼容 | 关键特性 |
+|----------|----------|----------|
+| 3.16 | 1.25+ | OCI GA、性能优化 |
+| 3.15 | 1.25+ | --force-conflicts SSA |
+| 3.14 | 1.24+ | 改进的依赖管理 |
+| 3.13 | 1.24+ | 插件系统增强 |
+| 3.12 | 1.23+ | 改进的 --wait 逻辑 |
+
+## 安全检查清单
+
+- [ ] Chart 来源可信（官方仓库/内部仓库）
+- [ ] 使用 `helm lint` 检查 Chart 质量
+- [ ] 生产升级前执行 `helm diff upgrade`
+- [ ] 敏感值使用 helm-secrets 加密
+- [ ] 限制 Helm ServiceAccount 的 RBAC 权限
+- [ ] 设置 `--history-max` 避免 Secret 堆积
+- [ ] 使用 `--atomic` 确保失败自动回滚
+- [ ] 定期清理失败的 Release
+- [ ] Chart 版本化，避免覆盖已发布版本
+- [ ] 使用 `--wait` 确保资源就绪
 
 ## Related
 

@@ -67,7 +67,153 @@ description: '## 项目概述'
 
 ## 架构定位
 
-在 CNCF 生态中，coredns 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+CoreDNS 是 Kubernetes 集群的默认 DNS 服务器，负责集群内服务发现和域名解析。它是 K8s 网络的关键基础设施。
+
+## Corefile 配置
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health {
+            lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
+        }
+        prometheus :9153
+        forward . /etc/resolv.conf {
+            max_concurrent 1000
+        }
+        cache 30 {
+            success 9984 30
+            denial 9984 5
+            prefetch 10 60m 10%
+        }
+        loop
+        reload
+        loadbalance
+    }
+```
+
+### 插件详解
+
+| 插件 | 功能 | 配置要点 |
+|------|------|----------|
+| kubernetes | 集群内 Service/Pod 解析 | `pods insecure`, `ttl 30` |
+| forward | 转发到上游 DNS | `max_concurrent 1000` |
+| cache | 缓存 DNS 响应 | `success 9984 30` |
+| loop | 检测转发环路 | 启动时检测 |
+| reload | 热加载 Corefile | 30s 检查 |
+| loadbalance | 轮询 A/AAAA | 默认启用 |
+| autopath | 优化 search 路径 | 减少无效查询 |
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 CoreDNS Pod
+kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+
+# 🟢 查看 CoreDNS 日志
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=50
+
+# 🟢 查看 CoreDNS Service
+kubectl get svc -n kube-system kube-dns
+
+# 🟢 查看 CoreDNS 配置
+kubectl get configmap coredns -n kube-system -o yaml
+
+# 🟢 测试 DNS 解析
+kubectl exec -it <pod> -- nslookup kubernetes.default.svc.cluster.local
+kubectl exec -it <pod> -- dig nginx.default.svc.cluster.local +short
+
+# 🟢 查看 CoreDNS 指标
+kubectl exec -n kube-system <coredns-pod> -- wget -qO- http://localhost:9153/metrics | grep coredns
+
+# 🟡 重启 CoreDNS
+kubectl rollout restart deployment coredns -n kube-system
+
+# 🟢 查看 CoreDNS 资源使用
+kubectl top pods -n kube-system -l k8s-app=kube-dns
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| DNS 解析超时 | CoreDNS 过载/上游不可达 | 扩容/检查上游 |
+| NXDOMAIN | Service 不存在 | 检查名称/命名空间 |
+| 间歇性失败 | conntrack UDP 竞态 | NodeLocal DNSCache |
+| CoreDNS CrashLoop | 配置错误 | 检查 Corefile |
+| 解析慢 | ndots + search | 降低 ndots |
+| OOMKilled | 缓存膨胀 | 调整缓存大小/增加内存 |
+
+### 排查流程
+
+```
+1. 检查 CoreDNS Pod 状态
+   kubectl get pods -n kube-system -l k8s-app=kube-dns
+       │
+2. 测试 DNS 解析
+   kubectl exec <pod> -- nslookup kubernetes.default
+       │
+3. 检查 CoreDNS 日志
+   kubectl logs -n kube-system -l k8s-app=kube-dns
+       │
+4. 检查 Service/Endpoints
+   kubectl get svc,endpoints -n kube-system kube-dns
+       │
+5. 检查 Pod DNS 配置
+   kubectl exec <pod> -- cat /etc/resolv.conf
+```
+
+## 性能优化
+
+### NodeLocal DNSCache
+
+```yaml
+# 部署 NodeLocal DNSCache 减少 CoreDNS 压力
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-local-dns
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+      - name: node-cache
+        image: registry.k8s.io/dns/k8s-dns-node-cache:1.22.28
+        args: ["-localip", "169.254.20.10", "-conf", "/etc/Corefile"]
+```
+
+### 优化建议
+
+1. **启用缓存** - `cache 30` 减少上游查询
+2. **部署 NodeLocal DNSCache** - 本地缓存，减少跨节点查询
+3. **调整 ndots** - 减少无效 search 查询
+4. **自动扩缩** - HPA 基于 CPU/请求量
+5. **监控告警** - 延迟、错误率、Pod 状态
+
+## 检查清单
+
+- [ ] 理解 CoreDNS 插件架构
+- [ ] 掌握 Corefile 配置
+- [ ] 能排查 DNS 解析问题
+- [ ] 了解 NodeLocal DNSCache
+- [ ] 掌握性能优化技巧
+- [ ] 能配置监控告警
 
 ## 参考链接
 

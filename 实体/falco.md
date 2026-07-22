@@ -66,6 +66,116 @@ Falco is the de facto runtime security threat detection engine for cloud native 
 
 Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all container syscalls. Recommended configuration uses eBPF driver (safer than kernel module).
 
+```bash
+# Helm 安装 Falco（eBPF 驱动）
+helm repo add falcosecurity https://falcosecurity.github.io/charts
+helm install falco falcosecurity/falco \
+  -n falco --create-namespace \
+  --set driver.kind=ebpf \
+  --set falcosidekick.enabled=true \
+  --set falcosidekick.config.slack.webhookurl="https://hooks.slack.com/..."
+
+# 验证部署
+kubectl get pods -n falco
+kubectl logs -l app.kubernetes.io/name=falco -n falco --tail=20
+```
+
+```yaml
+# 自定义规则示例（ConfigMap）
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: falco-custom-rules
+  namespace: falco
+data:
+  custom_rules.yaml: |
+    - rule: Detect kubectl in container
+      desc: Detect kubectl execution inside containers
+      condition: >
+        spawned_process and container and
+        proc.name = "kubectl"
+      output: >
+        kubectl executed in container
+        (user=%user.name container=%container.name image=%container.image.repository
+        command=%proc.cmdline)
+      priority: WARNING
+      tags: [container, mitre_execution]
+    - rule: Detect crypto mining
+      desc: Detect cryptocurrency mining processes
+      condition: >
+        spawned_process and container and
+        (proc.name in (xmrig, minerd, cpuminer) or
+         proc.cmdline contains "stratum+tcp")
+      output: >
+        Crypto mining detected
+        (user=%user.name container=%container.name process=%proc.name)
+      priority: CRITICAL
+      tags: [container, mitre_impact]
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看 Falco 告警
+kubectl logs -l app.kubernetes.io/name=falco -n falco -f | jq 'select(.priority=="Critical")'
+
+# 🟢 低风险：检查 Falco 状态
+kubectl get pods -n falco -o wide
+falcoctl artifact list  # 查看已安装规则集
+
+# 🟡 中风险：更新规则集
+falcoctl artifact update falco-rules
+kubectl rollout restart daemonset/falco -n falco
+
+# 🟡 中风险：调整告警级别
+kubectl edit configmap falco -n falco  # 修改 rules_files
+
+# 🔴 高风险：禁用 Falco（失去运行时安全监控）
+kubectl scale daemonset/falco -n falco --replicas=0
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Falco Pod CrashLoop | eBPF 驱动不兼容 | `kubectl logs -l app=falco -n falco` | 检查内核版本，切换为 kernel module |
+| 告警过多（噪音） | 规则未调优 | `kubectl logs falco -n falco \| jq .rule` | 添加例外或调整规则优先级 |
+| 无告警输出 | 规则未加载 | `falco --validate /etc/falco/falco_rules.yaml` | 检查 rules_files 配置 |
+| 性能影响 | 高 syscall 率 | `top -p $(pgrep falco)` | 调整 buffer_size，启用 modern-bpf |
+| Sidekick 未转发 | Webhook 配置错误 | `kubectl logs -l app=falcosidekick -n falco` | 检查输出配置（Slack/PagerDuty） |
+
+```
+排查流程：
+├── Falco 未运行？
+│   ├── kubectl get pods -n falco → 检查 Pod 状态
+│   ├── kubectl logs → 查看启动错误
+│   └── 检查内核版本和 eBPF 支持
+├── 告警异常？
+│   ├── 检查规则文件是否加载
+│   ├── falco --validate → 验证规则语法
+│   └── 检查输出配置（stdout/file/webhook）
+└── 性能问题？
+    ├── 检查 CPU/内存使用
+    ├── 调整 syscall buffer 大小
+    └── 考虑使用 modern-bpf 驱动
+```
+
+## 生产案例
+
+### 案例 1：检测容器逃逸攻击
+
+- **场景**：安全团队发现某容器尝试挂载宿主机 /proc 目录
+- **排查**：Falco 触发 "Container mounted host filesystem" 告警，定位到特定 Pod
+- **方案**：立即隔离 Pod，审查 SecurityContext，添加 PodSecurityPolicy 禁止 hostPath 挂载
+- **效果**：5 分钟内发现并遏制攻击，后续零容器逃逸事件
+
+### 案例 2：加密货币挖矿检测
+
+- **场景**：节点 CPU 异常飙高，怀疑被植入挖矿程序
+- **排查**：Falco 触发 "Crypto mining detected" 告警，定位到被入侵的容器（通过漏洞利用植入 xmrig）
+- **方案**：删除恶意 Pod，修补应用漏洞，添加 NetworkPolicy 限制出站连接，启用 Falco 自动响应（杀死恶意 Pod）
+- **效果**：从发现到清除 < 10min，后续通过 Falco + NetworkPolicy 双重防护零复发
+
 ## Related
 
 - [[kuasar]] — Kuasar

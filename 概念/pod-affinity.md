@@ -156,9 +156,132 @@ kubectl describe pod webapp-xxx | grep -A20 Events
 - **Pod 一直 Pending**：硬反亲和 + 节点不足；副本数 > 节点数必然 Pending，改用软约束。
 - **topologyKey 标签不全**：部分节点没打 zone 标签，调度器把副本堆到有标签的少数节点。
 - **大规模集群调度慢**：required 反亲和在 1000+ Pod 时 O(n²) 计算，用软约束或 topologySpread。
-- **调度后标签变化不迁移**："IgnoredDuringExecution"意味着节点 label 变化不会驱逐已调度 Pod，需 descheduler。
+- **调度后标签变化不迁移**：“IgnoredDuringExecution”意味着节点 label 变化不会驱逐已调度 Pod，需 descheduler。
 - **跨 NS 反亲和失效**：未声明 `namespaces` 时只看本 NS，跨 NS 重复副本不会被避开。
 - **与 node-taint 冲突**：Taint 过滤掉节点后，反亲和可能把副本挤到剩余节点，副本集中。
+
+## 源码实现分析
+
+### 调度器亲和性插件
+
+```go
+// k8s.io/kubernetes/pkg/scheduler/framework/plugins/interpodaffinity/filtering.go
+// InterPodAffinity 插件在 Filter 阶段评估 Pod 间亲和/反亲和
+func (pl *InterPodAffinity) Filter(ctx context.Context, state *framework.CycleState,
+    pod *v1.Pod, nodeInfo *framework.NodeInfo) *framework.Status {
+    
+    // 1. 检查 Pod 的亲和性规则
+    affinity := pod.Spec.Affinity
+    if affinity == nil || affinity.PodAntiAffinity == nil {
+        return nil  // 无规则，通过
+    }
+    
+    // 2. 遍历节点上所有现有 Pod
+    for _, existingPod := range nodeInfo.Pods {
+        for _, term := range affinity.PodAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution {
+            // 3. 检查 topologyKey 是否匹配
+            if topologyMatches(term.TopologyKey, pod, existingPod) {
+                // 4. 检查 label selector 是否匹配
+                if term.LabelSelector.Matches(existingPod.Labels) {
+                    // 硬反亲和匹配：拒绝调度到此节点
+                    return framework.NewStatus(framework.Unschedulable,
+                        "pod anti-affinity conflict")
+                }
+            }
+        }
+    }
+    return nil
+}
+```
+
+### 调度流程中的亲和性评估
+
+```
+┌───────────────────────────────────────────────────────────┐
+│        Pod 调度中亲和性评估流程                      │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Pod 待调度                                              │
+│    │                                                      │
+│    ▼                                                      │
+│  PreFilter: 收集亲和性信息                              │
+│    │                                                      │
+│    ▼                                                      │
+│  Filter (每个候选节点):                                  │
+│    ├─ NodeAffinity: 节点标签是否匹配                  │
+│    ├─ PodAffinity: 目标 Pod 是否在同一拓扑域        │
+│    ├─ PodAntiAffinity: 目标 Pod 是否不在同一拓扑域  │
+│    └─ Taint/Toleration: 节点污点是否可容忍          │
+│    │                                                      │
+│    ▼                                                      │
+│  Score (软约束打分):                                     │
+│    ├─ preferred PodAffinity: +weight                    │
+│    ├─ preferred PodAntiAffinity: -weight                │
+│    └─ TopologySpread: 均匀分布加分                   │
+│    │                                                      │
+│    ▼                                                      │
+│  选择最高分节点 → Bind                                  │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产配置示例（🟡 部署到集群）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 3
+  template:
+    spec:
+      affinity:
+        # 硬反亲和：副本必须跨可用区
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: web-app
+            topologyKey: topology.kubernetes.io/zone
+        # 软反亲和：尽量跨节点
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: web-app
+              topologyKey: kubernetes.io/hostname
+      # 更精细的均匀分布（1.19+）
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: web-app
+```
+
+## 面试要点
+
+1. **Pod 亲和性与节点亲和性的区别？**
+   - 节点亲和性：Pod 对节点标签的约束（替代 nodeSelector）
+   - Pod 亲和性：Pod 对其他 Pod 位置的约束
+   - 两者可组合使用
+
+2. **硬约束 vs 软约束的选择？**
+   - 硬（required）：必须满足，不满足则 Pending
+   - 软（preferred）：尽量满足，不满足仍可调度
+   - 生产建议：跨 AZ 用硬，跨节点用软
+
+3. **topologySpreadConstraints vs podAntiAffinity？**
+   - topologySpread：控制副本均匀分布（maxSkew）
+   - podAntiAffinity：只表达“不要在一起”
+   - 1.19+ 推荐用 topologySpread，更精细且性能更好
+
+4. **大规模集群中亲和性的性能影响？**
+   - required 反亲和是 O(n²)（遍历所有 Pod）
+   - 1000+ Pod 时明显变慢
+   - 解决：用 preferred 或 topologySpread 替代
 
 ## 参见
 

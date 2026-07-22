@@ -118,6 +118,167 @@ kubectl delete namespace prod-app
 
 ```
 
+## 8. 源码实现分析
+
+### 命令风险自动评估引擎
+
+```go
+// 命令风险分级决策引擎（概念实现）
+func AssessCommandRisk(cmd string) RiskLevel {
+    // 1. 解析命令动词和资源
+    verb, resource, flags := parseCommand(cmd)
+    // 2. 灾难性规则匹配
+    if verb == "delete" && resource == "namespace" {
+        return Catastrophic // 🔴 不可逆
+    }
+    if verb == "delete" && hasFlag(flags, "--all") {
+        return Catastrophic // 🔴 批量删除
+    }
+    if verb == "snapshot" && subcommand == "restore" {
+        return Catastrophic // 🔴 etcd 覆盖
+    }
+    // 3. 高危规则匹配
+    if verb == "drain" || verb == "cordon" {
+        return High // 🟠 影响业务流量
+    }
+    if verb == "scale" && getReplicas(flags) == 0 {
+        return High // 🟠 立即停服
+    }
+    // 4. 中危规则匹配
+    if verb == "apply" || verb == "create" || verb == "patch" {
+        return Medium // 🟡 可回滚
+    }
+    // 5. 默认低危
+    return Low // 🟢 只读
+}
+```
+
+### 风险分级决策树
+
+```
+┌──────────────────────────────────────────────────────────┐
+│              命令风险分级决策树                        │
+├──────────────────────────────────────────────────────────┤
+│  命令输入                                                │
+│    │                                                    │
+│    ├─ 是否不可逆/全局破坏/数据丢失？                    │
+│    │   YES → 🔴 灾难性（变更窗口+双人+备份+回滚）       │
+│    │                                                    │
+│    ├─ 是否影响业务流量/节点状态/内核？                  │
+│    │   YES → 🟠 高危（工单+影响评估+计划回滚）          │
+│    │                                                    │
+│    ├─ 是否变更集群资源状态（可重建）？                  │
+│    │   YES → 🟡 中危（确认目标+dry-run）                │
+│    │                                                    │
+│    ├─ 是否只读查询？                                    │
+│    │   YES → 🟢 低危（无审批）                          │
+│    │                                                    │
+│    └─ 无状态命令（echo/export）？                       │
+│        YES → ⚪ 无风险                                  │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 9. 使用场景
+
+### 场景一：变更前风险评估检查
+
+```bash
+# 🟢 低风险：只读检查
+# 执行 drain 前检查 PDB 和副本数
+kubectl get pdb -A  # 确认 PodDisruptionBudget
+kubectl get deployment -n production -o json | \
+  jq '.items[] | {name: .metadata.name, replicas: .spec.replicas, available: .status.availableReplicas}'
+# 执行 delete 前确认资源范围
+kubectl get all,cm,secret,pvc -n target-ns  # 🟢 确认命名空间内容
+kubectl delete ns target-ns --dry-run=server  # 🟡 dry-run 预览影响
+```
+
+### 场景二：etcd 快照恢复流程（🔴 灾难性）
+
+```bash
+# 🔴 灾难性：覆盖 etcd 数据目录，集群状态强制回退
+# 前置条件：
+# 1. 停止所有 kube-apiserver
+# 2. 确认快照时间点正确
+# 3. 备份当前 etcd 数据目录
+ETCD_DATA="/var/lib/etcd"
+cp -r ${ETCD_DATA} ${ETCD_DATA}.bak.$(date +%Y%m%d%H%M%S)  # 备份当前数据
+systemctl stop kubelet  # 停止本节点 kubelet
+# 执行恢复
+etcdctl snapshot restore /backup/etcd-snapshot.db \
+  --name etcd-node1 \
+  --initial-cluster etcd-node1=https://10.0.1.1:2380 \
+  --data-dir ${ETCD_DATA}-restored
+mv ${ETCD_DATA} ${ETCD_DATA}.old
+mv ${ETCD_DATA}-restored ${ETCD_DATA}
+systemctl start kubelet
+```
+
+### 场景三：自动化风险拦截（Admission Webhook）
+
+```yaml
+# 🟡 中风险：部署拦截策略
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: block-dangerous-operations
+spec:
+  validationFailureAction: Enforce
+  background: false
+  rules:
+  - name: block-namespace-deletion
+    match:
+      resources:
+        kinds: ["Namespace"]
+        operations: ["DELETE"]
+    validate:
+      message: "生产环境禁止删除命名空间，请走变更工单流程"
+      deny:
+        conditions:
+          all:
+          - key: "{{request.object.metadata.labels.env}}"
+            operator: Equals
+            value: "production"
+  - name: block-force-delete-pods
+    match:
+      resources:
+        kinds: ["Pod"]
+        operations: ["DELETE"]
+    validate:
+      message: "禁止强制删除 Pod，请使用正常优雅终止"
+      deny:
+        conditions:
+          all:
+          - key: "{{request.operationOptions.gracePeriodSeconds}}"
+            operator: Equals
+            value: "0"
+```
+
+## 10. 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | dry-run 能完全替代风险评估 | dry-run 不检查业务影响（如 PDB、流量中断）；仍需人工评估 |
+| 2 | 只读命令永远安全 | `kubectl logs` 可能触发大量 I/O；`kubectl exec` 是只读入口但可执行写操作 |
+| 3 | 测试环境不需要风险分级 | 测试环境也可能连接生产数据库/外部服务；分级习惯应在所有环境养成 |
+| 4 | 有回滚方案就可以随意执行 | 回滚方案是最后保障，不是执行理由；仍需最小影响原则 |
+| 5 | 自动化脚本不需要审批 | 自动化脚本可能批量执行高危命令；更需严格审批和 dry-run |
+| 6 | 风险分级只针对 kubectl | 所有运维命令都需分级：sysctl/systemctl/iptables/docker/helm/etcdctl |
+
+## 11. 面试要点
+
+1. **Q: 如何设计一个命令风险分级体系？**
+   A: 五级分类：🔴 灾难性（不可逆/全局破坏）、🟠 高危（影响业务/节点）、🟡 中危（可回滚变更）、🟢 低危（只读）、⚪ 无风险。每级对应不同审批流程：灾难性需变更窗口+双人复核+事前备份+回滚方案；高危需工单+影响评估；中危建议 dry-run；低危无审批。
+
+2. **Q: 为什么 `kubectl delete namespace` 是最高风险操作？**
+   A: 因为它是级联删除：删除命名空间会永久删除其下所有资源（Deployment/Service/PVC/Secret/ConfigMap），且不可恢复。PVC 删除可能触发存储后端数据清除。唯一恢复方式是从 etcd 快照或备份恢复。生产环境应通过 Admission Webhook 禁止删除带 production 标签的命名空间。
+
+3. **Q: 如何在组织中落地命令风险管控？**
+   A: 三层防线：① 技术层：Admission Webhook 拦截危险操作（禁止 delete ns、禁止 force delete）；② 流程层：变更工单系统（审批+影响评估+回滚方案）；③ 文化层：Runbook 标准化（每个高危命令标注风险等级+前置检查+回滚步骤）。配合审计日志追溯所有操作。
+
+4. **Q: `--force --grace-period=0` 为什么危险？什么情况下可以使用？**
+   A: 危险原因：跳过优雅终止（preStop hook、SIGTERM、数据刷盘），可能导致数据丢失、连接未正常关闭、StatefulSet 状态不一致。可用场景：① Pod 卡在 Terminating 且确认无状态；② 节点已完全失联且 Pod 无本地数据；③ 紧急隔离恶意容器。使用前必须确认 Pod 无状态或可容忍数据丢失。
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

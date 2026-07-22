@@ -74,6 +74,120 @@ Multiple tenants share one cluster, isolated by:
 7. Audit logging to track cross-tenant access attempts
 8. OPA/Gatekeeper policies to prevent privilege escalation
 
+## 实践示例
+
+### 完整租户隔离配置
+
+```yaml
+# 1. 命名空间 + 标签
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: team-alpha
+  labels:
+    tenant: team-alpha
+    pod-security.kubernetes.io/enforce: restricted
+---
+# 2. 资源配额
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: team-alpha-quota
+  namespace: team-alpha
+spec:
+  hard:
+    requests.cpu: "20"
+    requests.memory: 40Gi
+    limits.cpu: "40"
+    limits.memory: 80Gi
+    persistentvolumeclaims: "10"
+    services.loadbalancers: "2"
+---
+# 3. 默认资源限制
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: team-alpha-limits
+  namespace: team-alpha
+spec:
+  limits:
+  - default:
+      cpu: "1"
+      memory: 1Gi
+    defaultRequest:
+      cpu: 100m
+      memory: 128Mi
+    type: Container
+---
+# 4. 网络隔离
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-cross-namespace
+  namespace: team-alpha
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          tenant: team-alpha
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          tenant: team-alpha
+  - to:  # 允许 DNS
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+---
+# 5. RBAC
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: team-alpha-admin
+  namespace: team-alpha
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- kind: Group
+  name: team-alpha@company.com
+  apiGroup: rbac.authorization.k8s.io
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| Namespace 就是安全边界 | Namespace 仅是逻辑隔离，不是安全边界 |
+| RBAC 就够了 | 需要 NetworkPolicy + PSS + Quota 多层防御 |
+| 同集群租户可以互信 | 零信任原则，默认拒绝所有跨租户流量 |
+| ResourceQuota 防止资源耗尽 | 还需 LimitRange 防止单 Pod 过大 |
+| vCluster 等于完全隔离 | vCluster 共享底层节点，内核级隔离需 gVisor/Kata |
+
+## 面试要点
+
+1. **Kubernetes 多租户隔离有哪些层次？**
+   - 逻辑隔离: Namespace + RBAC + ResourceQuota
+   - 网络隔离: NetworkPolicy + ServiceMesh mTLS
+   - 安全隔离: Pod Security Standards + OPA
+   - 硬隔离: vCluster / 独立集群 / gVisor
+
+2. **如何实现默认拒绝的网络策略？**
+   - 创建 deny-all NetworkPolicy
+   - 显式允许同租户流量
+   - 允许 DNS 和必要的基础设施访问
+
+3. **软隔离 vs 硬隔离如何选择？**
+   - 内部团队: 软隔离 (Namespace) 成本效益高
+   - 外部客户/合规要求: 硬隔离 (vCluster/独立集群)
+   - 混合: 控制面硬隔离 + 数据面软隔离
+
 ## Related
 
 - [[opa]] — OPA (Open Policy Agent)

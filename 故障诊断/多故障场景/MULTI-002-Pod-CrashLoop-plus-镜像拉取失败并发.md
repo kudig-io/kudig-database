@@ -60,6 +60,45 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 10:00 | 业务发布新版本，Pod 进入 ImagePullBackOff | 🟢 `kubectl get pods -n prod -o wide` |
+| 10:02 | 旧 Pod 被终止，新 Pod 无法拉取镜像 | 🟢 `kubectl describe pod ${POD} -n prod \| grep -A5 Events` |
+| 10:03 | 服务完全不可用，CrashLoopBackOff | 🟢 `kubectl logs ${POD} -n prod --previous` |
+| 10:08 | 确认根因: 私有仓库 Secret 过期 | 🟢 `kubectl get secret regcred -n prod -o yaml` |
+| 10:12 | 更新 Secret，Pod 拉取成功 | 🟡 `kubectl create secret docker-registry regcred ... \| kubectl apply -f -` |
+| 10:15 | 服务恢复 | 🟢 `kubectl get pods -n prod -w` |
+
+## 故障关联图
+
+```
+镜像仓库Secret过期(根因)
+    ├── 新Pod ImagePullBackOff
+    │       └── 滚动更新卡住
+    │               └── 旧Pod被终止(maxSurge配置不当)
+    │                       └── 服务完全不可用
+    └── 影响范围: 该服务所有用户
+```
+
+## 关键教训
+
+1. **Secret 生命周期管理**: 镜像拉取凭证未配置自动轮转
+2. **滚动更新策略**: maxUnavailable=0 时新 Pod 失败会导致服务中断
+3. **镜像预热**: 未在新节点预拉取镜像即开始更新
+
+## 面试要点
+
+1. **Q: ImagePullBackOff 和 CrashLoopBackOff 同时出现的排查？**
+   A: 先解决镜像拉取(根因) → 检查 Secret/网络/仓库状态 → 确认镜像 tag 存在 → 修复后 CrashLoop 自然解决
+
+2. **Q: 如何避免发布时服务中断？**
+   A: 配置合理的 maxUnavailable → readinessProbe 确保新 Pod 就绪 → 镜像预拉取 → Secret 自动轮转
+
+3. **Q: 私有镜像仓库凭证管理最佳实践？**
+   A: 使用云厂商 IRSA/Workload Identity → 或配置自动轮转 CronJob → 监控 Secret 有效期 → 多仓库容灾
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

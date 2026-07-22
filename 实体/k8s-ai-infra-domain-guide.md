@@ -88,6 +88,95 @@ Distilled from domain-11-ai-infra (37 documents, Kubernetes v1.28-v1.32).
 - Model quantization to reduce inference GPU requirements
 - Cost monitoring with Kubecost
 
+## 运维操作
+
+```bash
+# 🟢 检查 GPU 节点状态
+kubectl get nodes -o custom-columns=NAME:.metadata.name,GPU:.status.allocatable.'nvidia\.com/gpu'
+kubectl describe node <gpu-node> | grep -A5 "Allocatable" | grep nvidia
+
+# 🟢 检查 GPU Operator 状态
+kubectl get pods -n gpu-operator
+kubectl get clusterpolicy  # NVIDIA ClusterPolicy
+
+# 🟢 查看训练任务
+kubectl get pytorchjob,mpijob -A
+kubectl describe pytorchjob <name> -n <ns>
+kubectl logs <job>-master-0 -f
+
+# 🟢 检查推理服务
+kubectl get inferenceservice -A
+kubectl get pods -l serving.kserve.io/inferenceservice=<name>
+curl -s http://<ingress>/v1/models
+
+# 🟢 GPU 利用率监控
+kubectl exec -it <gpu-pod> -- nvidia-smi
+kubectl exec -it <gpu-pod> -- nvidia-smi dmon -s u -d 1  # 实时监控
+
+# 🟡 删除失败训练任务
+kubectl delete pytorchjob <name> -n <ns> --force --grace-period=0
+
+# 🟢 检查 RDMA/InfiniBand
+kubectl get sriovnetworknodestate -A
+ibstat  # 在节点上检查 IB 状态
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| GPU Pod Pending | GPU 资源不足/节点污点 | `kubectl describe pod` | 扩容 GPU 节点/检查 toleration |
+| NCCL 通信超时 | RDMA/网络配置错误 | 查看训练日志 NCCL 部分 | 检查 SR-IOV/IB 配置 |
+| CUDA OOM | 显存不足 | `nvidia-smi`; Pod 日志 | 减小 batch/启用 gradient checkpoint |
+| 训练速度异常慢 | IO 瓶颈/GPU 降频 | `iostat -x 1`; `nvidia-smi -q -d CLOCK` | 使用缓存存储/检查散热 |
+| 推理 503 | 模型加载失败 | `kubectl logs <isvc-pod>` | 检查模型路径/显存配置 |
+| GPU 不可见 | Device Plugin 异常 | `kubectl get pods -n gpu-operator` | 重启 Device Plugin Pod |
+
+### 排查流程
+
+```
+AI 工作负载异常
+├── GPU 不可用？
+│   ├── nvidia-smi 在节点上工作？
+│   ├── Device Plugin Pod 运行？
+│   └── 节点标签/污点正确？
+├── 训练失败？
+│   ├── NCCL 错误 → 检查节点间网络/RDMA
+│   ├── OOM → 调整 batch size/gradient accumulation
+│   └── 数据读取超时 → 检查存储后端
+└── 推理异常？
+    ├── 503 → 检查模型加载日志
+    ├── 延迟高 → 检查 GPU 利用率/并发
+    └── 自动伸缩不触发 → 检查 KPA 配置
+```
+
+## 生产案例
+
+### 案例1：GPU 利用率低（数据 IO 瓶颈）
+
+- **场景**：32 卡 A100 训练 LLaMA-13B，GPU 利用率仅 40%
+- **排查**：`nvidia-smi dmon` 显示 GPU 频繁等待数据；NFS 读取延迟 200ms+
+- **方案**：部署 JuiceFS 替代 NFS + 100GB SSD 缓存；数据预处理为 WebDataset 格式
+- **效果**：GPU 利用率 92%，训练时间缩短 55%
+
+### 案例2：推理服务显存溢出
+
+- **场景**：vLLM 处理长文本时 OOM，Pod CrashLoop
+- **排查**：KV Cache 分配失败；max-model-len=8192 占用过多显存
+- **方案**：`--max-model-len=4096` + `--gpu-memory-utilization=0.85` + readinessProbe
+- **效果**：服务稳定，HPA 水平扩展处理峰值
+
+## 检查清单
+
+- [ ] GPU Operator 已安装且所有节点 GPU 可识别
+- [ ] Training Operator CRD 已注册
+- [ ] 分布式存储已配置且 PVC Bound
+- [ ] RDMA/InfiniBand 已验证（多节点训练）
+- [ ] 训练任务配置了资源限制和容错
+- [ ] 推理服务配置了健康检查和自动伸缩
+- [ ] GPU 监控 (DCGM Exporter) 已部署
+- [ ] 检查点存储已配置
+
 ## Related
 
 - [[reference|#reference Hub]] — tag hub

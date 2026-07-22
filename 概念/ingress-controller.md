@@ -97,6 +97,132 @@ spec:
 
 更多排查细节可参考 [[故障诊断/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]] 与技能页面 [[故障诊断/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|k8s-ingress-gateway]]。
 
+## 源码实现分析
+
+### NGINX Ingress Controller 工作流
+
+```go
+// ingress-nginx/internal/ingress/controller/controller.go
+func (n *NGINXController) syncIngress(interface{}) error {
+    // 1. 从 Informer 缓存获取所有 Ingress 资源
+    ings := n.store.ListIngresses()
+    
+    // 2. 按 ingressClassName 过滤，生成内部配置模型
+    servers := n.createServers(ings)  // host → paths → backends
+    
+    // 3. 生成 nginx.conf
+    cfg := n.generateTemplate(servers)
+    // 包含: upstream 块、server 块、location 块、TLS 配置
+    
+    // 4. 热加载（无需重启）
+    n.command.ExecCommand("-s", "reload")
+    // nginx: 新 worker 进程加载新配置，旧 worker 优雅退出
+}
+```
+
+### 请求处理链路
+
+```
+Client → DNS (app.example.com → LB IP)
+    │
+    ▼
+LoadBalancer Service (NodePort/LB)
+    │
+    ▼
+NGINX Ingress Controller Pod
+    │ 1. TLS 终止（证书来自 Secret）
+    │ 2. Host 匹配 → server 块
+    │ 3. Path 匹配 → location 块
+    │ 4. Annotations 处理（rewrite/rate-limit/auth）
+    ▼
+upstream → Service ClusterIP → kube-proxy → Pod
+```
+
+## 使用场景
+
+### 场景一：TLS + 路径路由 + 限流
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: production-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rate-limit: "100"      # 100 req/s
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts: [app.example.com]
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 3000
+```
+
+### 场景二：Gateway API 替代 Ingress
+
+```yaml
+# Gateway API 提供更细粒度的流量控制
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: api-routes
+spec:
+  parentRefs:
+  - name: main-gateway
+  hostnames: ["app.example.com"]
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/v2
+    backendRefs:
+    - name: api-v2-service
+      port: 8080
+      weight: 90
+    - name: api-v3-service   # 金丝雀: 10% 到 v3
+      port: 8080
+      weight: 10
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 创建 Ingress 即生效 | 必须有对应的 Ingress Controller 运行，否则 Ingress 无效 |
+| Ingress 支持 TCP/UDP | 标准 Ingress 只支持 HTTP/HTTPS，TCP/UDP 需 ConfigMap 或 Gateway API |
+| annotations 跨控制器通用 | 每个控制器的 annotations 独立，迁移时需逐条转换 |
+| Ingress 可以替代 Service Mesh | Ingress 只做南北向流量，Mesh 处理东西向 + L7 治理 |
+| 多个 Ingress Controller 自动分流 | 需通过 ingressClassName 明确指定，否则可能冲突 |
+| TLS 终止后后端自动加密 | 默认后端明文 HTTP，需配置 backend-protocol: HTTPS |
+
+## 面试要点
+
+1. **Ingress 与 Gateway API 的区别？** — Ingress：简单 HTTP 路由，扩展依赖 annotations（不可移植）；Gateway API：角色分离（GatewayClass/Gateway/HTTPRoute）、原生支持 TCP/UDP/gRPC、内置流量分割、跨命名空间引用。Gateway API 是 Ingress 的演进替代。
+
+2. **NGINX Ingress Controller 如何热加载配置？** — Watch Ingress 资源变化 → 重新生成 nginx.conf → 执行 `nginx -s reload`。新 worker 加载新配置，旧 worker 处理完存量请求后退出。零停机更新。
+
+3. **生产环境 Ingress 高可用如何保证？** — Controller 多副本（≥ 2）+ PodAntiAffinity 跨节点；前置 LB（云 LB/Keepalived）；健康检查（/healthz）；资源限制（避免 OOM）；监控 4xx/5xx 率、延迟 P99。
+
+4. **Ingress TLS 证书管理最佳实践？** — cert-manager 自动签发/续期 Let's Encrypt 证书；通配符证书减少管理复杂度；内部服务用自签 CA + trust bundle；监控证书过期时间（prometheus cert-expiry exporter）。
+
 ## 相关概念
 
 - [[service-networking]] — Kubernetes Service 网络模型

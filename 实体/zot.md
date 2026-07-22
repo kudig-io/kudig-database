@@ -81,44 +81,133 @@ zot 作为标准 OCI Registry 在 Kubernetes 中运行。容器运行时（conta
 3. **供应链安全**：签名验证 + 漏洞扫描，只允许安全镜像部署
 4. **多租户镜像管理**：按命名空间隔离不同团队的镜像
 
-## 安装
+## 安装与配置
+
+### 二进制安装
 
 ```bash
-# 直接下载二进制运行
+# 下载 zot
 wget https://github.com/project-zot/zot/releases/latest/download/zot-linux-amd64
 chmod +x zot-linux-amd64
-./zot-linux-amd64 serve config.json
 
-# Kubernetes Helm 部署
+# 验证
+./zot-linux-amd64 --version
+```
+
+### Kubernetes Helm 部署
+
+```bash
 helm repo add zot https://zotregistry.io/charts
 helm install zot zot/zot -n zot --create-namespace \
   --set persistence.enabled=true \
   --set persistence.size=100Gi
 
-# 配置文件示例
-cat > config.json <<EOF
+# 验证部署
+kubectl get pods -n zot
+kubectl port-forward svc/zot 5000:5000 -n zot
+```
+
+### 配置文件
+
+```json
 {
   "distSpecVersion": "1.1.0",
-  "storage": { "rootDirectory": "/var/lib/registry" },
-  "http": { "address": "0.0.0.0", "port": "5000" },
+  "storage": {
+    "rootDirectory": "/var/lib/registry",
+    "gc": true,
+    "dedupe": true
+  },
+  "http": {
+    "address": "0.0.0.0",
+    "port": "5000",
+    "auth": {
+      "htpasswd": {
+        "path": "/etc/zot/htpasswd"
+      }
+    }
+  },
   "extensions": {
     "search": { "enable": true },
     "lint": { "enable": true },
-    "scrub": { "enable": true },
+    "scrub": { "enable": true, "interval": "24h" },
     "mgmt": { "enable": true }
-  }
+  },
+  "log": { "level": "info" }
 }
-EOF
 ```
+
+```bash
+# 启动 zot
+./zot-linux-amd64 serve config.json
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Registry 状态
+curl http://zot:5000/v2/_catalog
+
+# 🟢 搜索镜像
+curl http://zot:5000/v2/search?query=myapp
+
+# 🟢 查看镜像标签
+curl http://zot:5000/v2/myapp/tags/list
+
+# 🟡 推送镜像
+docker tag myapp:latest zot.example.com/myapp:v1.0.0
+docker push zot.example.com/myapp:v1.0.0
+
+# 🔴 删除镜像
+curl -X DELETE http://zot:5000/v2/myapp/manifests/<digest>
+
+# 🔴 触发 GC
+curl -X POST http://zot:5000/v2/_gc
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 推送失败: unauthorized | 认证配置错误 | 检查 config.json auth | 配置 htpasswd |
+| 存储不足 | 磁盘空间耗尽 | `df -h /var/lib/registry` | 扩容或清理 |
+| 搜索无结果 | search 扩展未启用 | 检查 config.json extensions | 启用 search |
+| 性能下降 | 镜像过多 | 检查镜像数量 | 启用 GC 和 scrub |
+
+**排查流程：**
+```
+zot 服务异常
+├── 检查服务状态 → curl http://zot:5000/v2/
+├── 检查存储 → df -h /var/lib/registry
+├── 检查配置 → cat config.json
+├── 检查日志 → journalctl -u zot
+└── 检查网络 → curl -v http://zot:5000/v2/_catalog
+```
+
+## 生产案例
+
+### 案例一：边缘镜像缓存
+
+- **场景**: 边缘节点网络不稳定，需要本地镜像缓存
+- **排查**: 使用 zot 作为边缘 Registry，同步主 Registry 镜像
+- **方案**: 边缘部署 zot，配置镜像同步，离线时从本地拉取
+- **效果**: 边缘部署不受网络影响，镜像拉取延迟 < 1s
+
+### 案例二：供应链安全
+
+- **场景**: 需要确保部署的镜像无漏洞
+- **排查**: zot 集成 Trivy 扫描，自动检测漏洞
+- **方案**: 启用 scrub 扩展，定期扫描所有镜像，阻止高危镜像部署
+- **效果**: 漏洞发现时间从 天级降至 小时级
 
 ## 对比
 
-| 特性 | zot | Harbor | Distribution (Registry) | Quay |
-|------|-----|--------|------------------------|------|
-| 外部依赖 | ❌ 无 | ✅ PG+Redis | ❌ 无 | ✅ PG+Redis |
-| 漏洞扫描 | ✅ Trivy | ✅ Trivy | ❌ | ✅ Clair |
-| 镜像搜索 | ✅ GraphQL | ✅ API | ❌ | ✅ |
-| 多存储后端 | ✅ | ✅ S3/Azure | ✅ S3 | ✅ |
+| 特性 | zot | Harbor | Distribution (Registry) | Quay | 适用场景 |
+|------|-----|--------|------------------------|------|----------|
+| 外部依赖 | ❌ 无 | ✅ PG+Redis | ❌ 无 | ✅ PG+Redis | zot 最简 |
+| 漏洞扫描 | ✅ Trivy | ✅ Trivy | ❌ | ✅ Clair | - |
+| 镜像搜索 | ✅ GraphQL | ✅ API | ❌ | ✅ | - |
+| 多存储后端 | ✅ | ✅ S3/Azure | ✅ S3 | ✅ | - |
+| OCI 1.1 | ✅ | ✅ | ✅ | ✅ | - |
 
 ## 参考链接
 

@@ -166,6 +166,117 @@ groups:
 - **成本分摊粒度过细导致开销过高**：过度精细的标签策略会增加管理和计算开销——建议保持在 5-7 个核心标签维度
 - **忽视 Spot 实例中断对成本的影响**：Spot 中断可能导致频繁重新调度和镜像拉取，间接增加网络和存储成本——需要评估 Spot 节省 vs 间接成本
 
+## 源码实现分析
+
+### Kubecost 成本采集架构
+
+```go
+// github.com/kubecost/cost-model/pkg/costmodel/costmodel.go
+// Kubecost 从 Prometheus 采集资源使用数据，结合价格 API 计算成本
+func (cm *CostModel) ComputeCostData(cli prometheus.Client) (*CostData, error) {
+    // 1. 查询 Prometheus 获取实际资源使用
+    cpuUsed := cli.Query(`rate(container_cpu_usage_seconds_total[5m])`)
+    memUsed := cli.Query(`container_memory_working_set_bytes`)
+    gpuUsed := cli.Query(`DCGM_FI_DEV_GPU_UTIL`)
+    
+    // 2. 获取资源请求（用于闲置计算）
+    cpuReq := cli.Query(`kube_pod_container_resource_requests{resource="cpu"}`)
+    
+    // 3. 结合云价格 API 计算成本
+    for _, pod := range pods {
+        cost := cpuUsed * cpuPrice + memUsed * memPrice + gpuUsed * gpuPrice
+        // 4. 按标签分摊到团队/项目
+        allocateCost(pod.Labels["team"], cost)
+    }
+}
+```
+
+### FinOps 可观测性架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          FinOps 可观测性架构                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  数据采集层                                              │
+│  ─────────                                              │
+│  Prometheus → 资源使用指标 (CPU/内存/GPU)           │
+│  kube-state-metrics → 资源请求/限制                 │
+│  云价格 API → 实时单价 (AWS/GCP/Azure)            │
+│                                                           │
+│  计算层                                                  │
+│  ─────────                                              │
+│  Kubecost / OpenCost → 成本计算 + 分摊              │
+│  • 实际使用成本 = usage × price                    │
+│  • 闲置成本 = (request - usage) × price            │
+│  • 按标签分摊: team/project/env                    │
+│                                                           │
+│  展示层                                                  │
+│  ─────────                                              │
+│  Grafana 成本看板 → 团队/项目/环境维度           │
+│  告警: 成本突增 / 闲置率 > 40% / GPU 低利用     │
+│                                                           │
+│  优化层                                                  │
+│  ─────────                                              │
+│  VPA 推荐 → 调整 requests                          │
+│  HPA 优化 → 降低 minReplicas                       │
+│  Spot 实例 → 无状态工作负载                        │
+│  存储分层 → 冷数据迁移到低成本存储             │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 成本优化查询示例（🟢 只读）
+
+```bash
+# 查看集群资源闲置率
+kubectl top nodes
+echo "---"
+kubectl get nodes -o json | jq -r '
+  .items[] | "\(.metadata.name): \(.status.allocatable.cpu) CPU, \(.status.allocatable.memory) Mem"'
+
+# Prometheus 查询：CPU 闲置率
+# 1 - (sum(rate(container_cpu_usage_seconds_total[5m])) by (pod)
+#      / sum(kube_pod_container_resource_requests{resource="cpu"}) by (pod))
+
+# Kubecost API 查询团队成本
+# curl http://kubecost:9090/model/allocation?window=7d&aggregate=team
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 成本优化就是缩容 | 优化是合理配置，不是简单减少资源 |
+| 可观测性免费 | 监控/日志/追踪本身产生显著成本 |
+| 只看总成本 | 必须按团队/项目分摊，否则无人负责 |
+| request 设大点更安全 | 过大 request 导致闲置浪费和调度困难 |
+| Spot 实例总是省钱 | 需评估中断导致的间接成本 |
+| FinOps 是财务的事 | FinOps 是工程文化，开发者需理解成本 |
+
+## 面试要点
+
+1. **FinOps 的核心理念是什么？**
+   - 可见性：每个团队看到自己的成本
+   - 优化：基于数据调整资源配置
+   - 运营：持续审视和改进
+   - 文化：成本是每个人的责任
+
+2. **如何计算 K8s 工作负载的成本？**
+   - 实际使用 × 单价 = 使用成本
+   - (request - 实际使用) × 单价 = 闲置成本
+   - 按标签（team/project/env）分摊
+
+3. **可观测性数据本身的成本如何控制？**
+   - 指标降采样（Thanos/Cortex）
+   - 日志保留策略（Loki 30天 + 归档）
+   - 只采集必要标签，避免高基数
+
+4. **成本优化的 ROI 排序？**
+   - 1. 调整 requests（最快见效）
+   - 2. 缩容闲置工作负载
+   - 3. Spot 实例（无状态负载）
+   - 4. 存储分层（冷数据迁移）
+
 ## 相关 Domain
 
 - [[系统基础/知识字典/observability/observability.md|observability]]/02-metrics/02-[[技能/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]

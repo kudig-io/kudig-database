@@ -84,7 +84,7 @@ Knative 完全基于 Kubernetes CRD 构建。Service 资源自动生成 Deployme
 3. **CI/CD 触发**：Git Push 事件通过 Eventing 触发构建流水线
 4. **ML 推理端点**：结合 KServe，提供按需扩展的模型推理服务
 
-## 安装
+## 安装与配置
 
 ```bash
 # 使用 Knative Operator 安装
@@ -97,17 +97,142 @@ kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
+spec:
+  ingress:
+    kourier:
+      enabled: true
 EOF
+# 验证安装
+kubectl get pods -n knative-serving
+kubectl get ksvc -A
 ```
+
+```yaml
+# Knative Service 示例
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-app
+  namespace: default
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        autoscaling.knative.dev/target: "100"  # 每 Pod 100 并发
+    spec:
+      containers:
+      - image: gcr.io/knative-samples/helloworld-go
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TARGET
+          value: "Knative"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+  traffic:
+  - percent: 90
+    latestRevision: true
+  - percent: 10
+    revisionName: hello-app-00001  # 金丝雀 10%
+```
+
+```bash
+# 部署并测试
+kubectl apply -f hello-app.yaml
+kubectl get ksvc hello-app
+# 获取 URL 并测试
+curl $(kubectl get ksvc hello-app -o jsonpath='{.status.url}')
+# 观察 Scale-to-Zero
+kubectl get pods -w  # 等待无流量后 Pod 缩为 0
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Knative Service 状态
+kubectl get ksvc -A
+kubectl get revisions -A
+kubectl get routes -A
+
+# 🟢 查看自动扩缩状态
+kubectl get pods -l serving.knative.dev/service=hello-app
+kubectl get podautoscaler -A
+kubectl logs -n knative-serving -l app=autoscaler --tail=50
+
+# 🟢 查看 Eventing 状态
+kubectl get brokers -A
+kubectl get triggers -A
+kubectl get sources -A
+
+# 🟡 调整自动扩缩参数
+kubectl patch configmap config-autoscaler -n knative-serving \
+  --type merge -p '{"data":{"max-scale-up-rate":"1000","scale-down-delay":"5m"}}'
+
+# 🟡 流量分割调整
+kubectl patch ksvc hello-app --type merge -p '{"spec":{"traffic":[{"percent":100,"latestRevision":true}]}}'
+
+# 🔴 删除 Knative Service
+kubectl delete ksvc hello-app
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Service 无法访问 | Ingress/Activator 异常 | `kubectl get pods -n knative-serving` | 检查 Kourier/Istio 状态 |
+| Scale-to-Zero 后无法唤醒 | Activator 异常/冷启动超时 | `kubectl logs -n knative-serving -l app=activator` | 检查 Activator 资源和超时配置 |
+| 扩容不及时 | Autoscaler 配置保守 | `kubectl logs -n knative-serving -l app=autoscaler` | 调整 target 和 max-scale-up-rate |
+| Revision 创建失败 | 镜像拉取失败/资源不足 | `kubectl describe revision <name>` | 检查镜像和资源配额 |
+| Eventing 事件丢失 | Broker/Trigger 配置错误 | `kubectl describe trigger <name>` | 检查 filter 和 subscriber 配置 |
+
+```
+排查流程：
+├─ Service 不可用
+│  ├─ kubectl get ksvc 检查 Ready 状态
+│  ├─ kubectl get revision 检查最新 Revision
+│  └─ 检查 Ingress 和 Activator 状态
+├─ 自动扩缩问题
+│  ├─ 检查 Autoscaler 日志
+│  ├─ 检查 config-autoscaler 配置
+│  └─ 确认 Metrics 采集正常
+└─ Eventing 问题
+   ├─ 检查 Broker 是否 Ready
+   ├─ 检查 Trigger filter 规则
+   └─ 检查 Channel 消息投递状态
+```
+
+## 生产案例
+
+### 案例 1：突发流量 API Serverless 化
+
+- **场景**: 报告生成 API 每天仅高峰期 2 小时有流量，其余时间空闲
+- **排查**: 传统 Deployment 持续占用 4 Pod 资源，利用率 <10%
+- **方案**: 迁移至 Knative Service，Scale-to-Zero + 基于并发自动扩容
+- **效果**: 空闲时零资源消耗，高峰期自动扩至 20 Pod，年节省成本 75%
+
+### 案例 2：事件驱动数据处理管道
+
+- **场景**: Kafka 消息需要触发处理函数，传统方案需要常驻消费者
+- **排查**: 消费者空闲时浪费资源，高峰时处理能力不足
+- **方案**: Knative Eventing + Kafka Source，消息触发 Knative Service 处理
+- **效果**: 按需消费，无消息时零 Pod，高峰时自动扩容处理
 
 ## 对比
 
-| 特性 | Knative | OpenFaaS | KEDA |
-|------|---------|----------|------|
-| Scale-to-Zero | ✅ 原生 | ✅ | ✅（配合 Deployment） |
-| 事件驱动 | ✅ Eventing | ⚠️ 有限 | ✅ 核心能力 |
-| 流量管理 | ✅ Revision | ❌ | ❌ |
-| CNCF 状态 | Graduated | 活跃 | Graduated |
+| 维度 | Knative | OpenFaaS | KEDA | Fission |
+|------|---------|----------|------|---------|
+| Scale-to-Zero | ✅ 原生 | ✅ | ✅(配合 Deploy) | ✅ |
+| 事件驱动 | ✅ Eventing | ⚠️ 有限 | ✅ 核心 | ⚠️ |
+| 流量管理 | ✅ Revision | ❌ | ❌ | ❌ |
+| CNCF 状态 | Graduated | 活跃 | Graduated | 非 CNCF |
+| 适用场景 | 全功能 Serverless | 轻量 FaaS | 事件扩缩 | 轻量 FaaS |
 
 ## 参考链接
 

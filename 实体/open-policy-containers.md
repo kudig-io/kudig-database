@@ -80,17 +80,22 @@ OPCR 打包的策略镜像可以被 Kubernetes 中的 OPA 或 Gatekeeper 消费�
 3. **合规策略管理**: 将 PCI-DSS/SOC 2 合规策略打包版本化，审计可追溯
 4. **策略市场**: 在组织内共享通用安全策略包
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 opcr CLI
 curl -L https://github.com/opcr-io/opcr/releases/latest/download/opcr_$(uname -s)_$(uname -m).tar.gz | tar xz
 mv opcr /usr/local/bin/
+opcr version
 
 # 登录 Registry
 opcr login myregistry.io -u username -p password
+```
 
-# 构建策略镜像
+### 策略构建与发布
+
+```bash
+# 创建策略文件
 cat > policy.rego <<'REGO'
 package k8srequiredlabels
 
@@ -103,6 +108,7 @@ violation[{"msg": msg, "details": {"missing_labels": missing}}] {
 }
 REGO
 
+# 构建策略镜像
 opcr build -t myregistry.io/policies/k8s-required-labels:v1.0.0 .
 
 # 推送到 Registry
@@ -115,14 +121,100 @@ cosign sign --key cosign.key myregistry.io/policies/k8s-required-labels:v1.0.0
 opcr pull myregistry.io/policies/k8s-required-labels:v1.0.0
 ```
 
+### CI/CD 集成示例
+
+```yaml
+# GitHub Actions - 策略发布流水线
+name: Policy Release
+on:
+  push:
+    paths: ['policies/**']
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OPCR
+        run: curl -L https://github.com/opcr-io/opcr/releases/latest/download/opcr_linux_amd64.tar.gz | tar xz
+      - name: Build & Push
+        run: |
+          echo "${{ secrets.REGISTRY_TOKEN }}" | opcr login myregistry.io -u bot --password-stdin
+          opcr build -t myregistry.io/policies/${{ github.event.repository.name }}:${{ github.sha }} ./policies
+          opcr push myregistry.io/policies/${{ github.event.repository.name }}:${{ github.sha }}
+      - name: Sign
+        run: cosign sign --key env://COSIGN_KEY myregistry.io/policies/${{ github.event.repository.name }}:${{ github.sha }}
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看本地策略镜像
+opcr list
+
+# 🟢 拉取策略到本地
+opcr pull myregistry.io/policies/k8s-required-labels:v1.0.0
+
+# 🟢 检查策略内容
+opcr inspect myregistry.io/policies/k8s-required-labels:v1.0.0
+
+# 🟡 构建并推送新版本
+opcr build -t myregistry.io/policies/k8s-required-labels:v1.1.0 .
+opcr push myregistry.io/policies/k8s-required-labels:v1.1.0
+
+# 🟡 删除本地策略镜像
+opcr rmi myregistry.io/policies/k8s-required-labels:v1.0.0
+
+# 🔴 删除远程策略（不可恢复）
+# 通过 Registry API 删除 manifest
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| build 失败 | Rego 语法错误 | `opa check policy.rego` | 修复 Rego 语法 |
+| push 认证失败 | Token 过期 | `opcr login` 重新认证 | 更新 Registry 凭据 |
+| pull 超时 | 网络/Registry 不可达 | `curl -v https://myregistry.io/v2/` | 检查网络和防火墙 |
+| 签名验证失败 | 密钥不匹配 | `cosign verify --key cosign.pub <image>` | 确认使用正确密钥对 |
+| Gatekeeper 未加载策略 | 拉取失败 | `kubectl logs -n gatekeeper-system` | 检查 imagePullSecrets |
+
+```
+排查流程:
+├── 构建失败
+│   ├── opa check *.rego → 语法检查
+│   └── 确认 policy.rego 在构建上下文根目录
+├── 推送/拉取失败
+│   ├── opcr login → 重新认证
+│   └── 检查 Registry TLS 证书有效性
+└── 策略未生效
+    ├── kubectl get constraints → 确认 Constraint 已创建
+    └── kubectl logs gatekeeper-controller → 查看加载错误
+```
+
+## 生产案例
+
+### 案例 1: 策略版本回滚
+
+- **场景**: 新版标签策略误判合法 Pod，导致部署被拒绝
+- **排查**: 新 Rego 规则未考虑带前缀的标签格式
+- **方案**: 使用 OCI tag 回滚到上一版本 `opcr pull ...:v1.0.0`；Gatekeeper 重新加载旧策略
+- **效果**: 5min 内恢复部署能力，后续增加策略单元测试
+
+### 案例 2: 多集群策略分发
+
+- **场景**: 50+ 集群需要统一安全策略，手动同步成本高
+- **方案**: 策略打包为 OCI 镜像，通过 CI/CD 自动推送到各区域 Registry；集群侧 Gatekeeper 定时拉取
+- **效果**: 策略同步时间从 2h 缩短到 5min，版本一致性 100%
+
 ## 对比
 
-| 特性 | OPCR | OPA Bundles | Kyverno Policies | Gatekeeper Constraints |
-|------|------|-------------|------------------|------------------------|
-| OCI 打包 | ✅ | ❌ | ❌ | ❌ |
-| Registry 分发 | ✅ | ⚠️ HTTP | ❌ | ❌ |
-| 签名验证 | ✅ cosign | ❌ | ❌ | ❌ |
-| CNCF 状态 | Sandbox | Graduated | Incubating | Incubating |
+| 特性 | OPCR | OPA Bundles | Kyverno Policies | Gatekeeper Constraints | 适用场景 |
+|------|------|-------------|------------------|------------------------|----------|
+| OCI 打包 | ✅ | ❌ | ❌ | ❌ | 统一分发 |
+| Registry 分发 | ✅ | ⚠️ HTTP | ❌ | ❌ | 多集群 |
+| 签名验证 | ✅ cosign | ❌ | ❌ | ❌ | 供应链安全 |
+| 版本管理 | ✅ tag | ⚠️ | ❌ | ❌ | 回滚能力 |
+| CNCF 状态 | Sandbox | Graduated | Incubating | Incubating | 生态成熟度 |
 
 ## 架构定位
 

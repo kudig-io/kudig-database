@@ -295,6 +295,213 @@ flux trace my-app -n production
 | RBAC | Argo CD RBAC 精细化到 project/app 级别 |
 | 备份 | Velero 备份 Argo CD / Flux 的 CRD 资源 |
 
+## Argo CD 故障排查
+
+```bash
+# 检查 Application 状态
+kubectl get applications -n argocd
+kubectl describe application myapp -n argocd
+
+# 查看同步状态
+argocd app get myapp
+argocd app get myapp --show-params
+argocd app get myapp -o json | jq '.status.conditions'
+
+# 强制同步
+argocd app sync myapp --force
+argocd app sync myapp --prune
+argocd app sync myapp --replace
+
+# 回滚
+argocd app rollback myapp <revision>
+argocd app history myapp
+
+# 查看日志
+kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server --tail=100
+kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller --tail=100
+
+# 常见问题
+# 1. OutOfSync: 集群状态与 Git 不一致
+argocd app diff myapp  # 查看差异
+argocd app sync myapp  # 同步
+
+# 2. Degraded: 资源不健康
+kubectl get pods -l app.kubernetes.io/instance=myapp
+kubectl describe pod <pod-name>
+
+# 3. 同步卡住
+argocd app terminate-op myapp  # 终止当前操作
+argocd app sync myapp --force  # 强制重新同步
+```
+
+## Flux CD 故障排查
+
+```bash
+# 检查 Kustomization 状态
+flux get kustomizations -A
+flux get kustomizations myapp -n flux-system
+
+# 查看协调状态
+flux reconcile kustomization myapp --with-source
+flux logs --kind=Kustomization --name=myapp
+
+# 强制协调
+flux reconcile kustomization myapp --force
+flux reconcile source git myapp
+
+# 暂停/恢复
+flux suspend kustomization myapp
+flux resume kustomization myapp
+
+# 查看事件
+flux events --for Kustomization/myapp
+kubectl get events -n flux-system --sort-by=.metadata.creationTimestamp
+
+# 常见问题
+# 1. Git 拉取失败
+flux get sources git
+kubectl describe gitrepository myapp -n flux-system
+# 检查: SSH key、网络连通性、分支名
+
+# 2. 应用失败
+flux logs --kind=Kustomization --name=myapp --level=error
+kubectl get kustomization myapp -o yaml | grep -A5 conditions
+
+# 3. 漂移检测
+flux diff kustomization myapp
+```
+
+## ApplicationSet 多集群管理
+
+```yaml
+# Argo CD ApplicationSet 示例
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-multi-cluster
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            env: production
+  template:
+    metadata:
+      name: 'myapp-{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/org/gitops.git
+        targetRevision: main
+        path: 'apps/myapp/overlays/{{metadata.labels.region}}'
+      destination:
+        server: '{{server}}'
+        namespace: production
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+```
+
+## 渐进式交付
+
+```yaml
+# Argo Rollouts 金丝雀发布
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: myapp
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {duration: 5m}
+        - setWeight: 40
+        - pause: {duration: 5m}
+        - setWeight: 60
+        - pause: {duration: 5m}
+        - setWeight: 80
+        - pause: {duration: 5m}
+      analysis:
+        templates:
+          - templateName: success-rate
+        startingStep: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: registry/myapp:v2.0.0
+```
+
+```bash
+# Argo Rollouts 命令
+kubectl argo rollouts status myapp
+kubectl argo rollouts get rollout myapp
+kubectl argo rollouts promote myapp    # 推进到下一步
+kubectl argo rollouts abort myapp      # 中止并回滚
+kubectl argo rollouts undo myapp       # 回滚
+kubectl argo rollouts restart myapp    # 重启
+```
+
+## Git 仓库结构最佳实践
+
+```
+gitops-repo/
+├── apps/                    # 应用定义
+│   ├── myapp/
+│   │   ├── base/           # 基础配置
+│   │   │   ├── deployment.yaml
+│   │   │   ├── service.yaml
+│   │   │   └── kustomization.yaml
+│   │   └── overlays/       # 环境差异
+│   │       ├── dev/
+│   │       ├── staging/
+│   │       └── production/
+│   └── platform/
+│       ├── ingress/
+│       ├── monitoring/
+│       └── logging/
+├── infrastructure/          # 基础设施
+│   ├── cluster-config/
+│   ├── namespaces/
+│   └── rbac/
+└── clusters/                # 集群级配置
+    ├── cluster-a/
+    └── cluster-b/
+```
+
+## 版本兼容矩阵
+
+| 组件 | 当前版本 | K8s 兼容 | 关键变更 |
+|------|---------|----------|----------|
+| Argo CD | 2.13 | 1.25+ | ApplicationSet GA |
+| Flux | 2.4 | 1.25+ | OCI 仓库支持 |
+| Argo Rollouts | 1.7 | 1.25+ | 插件系统 |
+| Flagger | 1.38 | 1.25+ | Gateway API 支持 |
+| Sealed Secrets | 0.27 | 1.25+ | 性能优化 |
+
+## 安全检查清单
+
+- [ ] Git 仓库访问使用 SSH key 或细粒度 Token
+- [ ] 生产分支启用保护（禁止直接 push）
+- [ ] Argo CD/Flux ServiceAccount 最小权限
+- [ ] 敏感值使用 Sealed Secrets/External Secrets
+- [ ] 生产变更必须经过 PR 审批
+- [ ] 启用自动同步的 selfHeal 防止配置漂移
+- [ ] 定期审计 Git 提交历史
+- [ ] 备份 GitOps 工具的 CRD 资源
+
 ```
 
 <!-- risk-assessed -->

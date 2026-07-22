@@ -66,6 +66,89 @@ severity: high
 | KP2B | 配置错误 | `kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=50 | grep -iE "error|invalid|failed"` | 错误日志 | 检查配置问题
 ...(截断)
 
+## 生产案例
+
+### 案例1: Endpoint 不同步导致服务中断
+
+**时间线**:
+- 14:02 运维执行 Deployment 滚动更新（v2.1→v2.2）
+- 14:03 新 Pod 启动但 readinessProbe 超时（数据库连接池未预热）
+- 14:05 旧 Pod 被终止，新 Pod 仍未 Ready → Endpoint 列表为空
+- 14:05-14:12 所有流量返回 502，持续 7 分钟
+- 14:12 新 Pod Ready，Endpoint 恢复，流量恢复
+
+**根因链**:
+```
+滚动更新 → 新Pod readinessProbe失败 → 旧Pod被终止(maxSurge=1,maxUnavailable=0配置错误)
+→ Endpoint为空 → kube-proxy清除iptables规则 → 502
+```
+
+**修复**:
+```bash
+# 🟡 修正滚动更新策略
+kubectl patch deployment ${DEPLOY} -n ${NS} -p '{"spec":{"strategy":{"rollingUpdate":{"maxUnavailable":"25%"}}}}'
+# 🟢 验证 Endpoint 恢复
+kubectl get endpoints ${SVC} -n ${NS} -w
+```
+
+### 案例2: kube-proxy conntrack 表满
+
+**现象**: 间歇性连接超时，`dmesg` 出现 `nf_conntrack: table full, dropping packet`
+
+**根因**: 高并发场景下 conntrack 默认 65536 不够，UDP 超时 30s 导致条目堆积
+
+**修复**:
+```bash
+# 🔴 调整 conntrack 表大小（节点级）
+sysctl -w net.netfilter.nf_conntrack_max=262144
+sysctl -w net.netfilter.nf_conntrack_udp_timeout_stream=10
+# 🟢 验证
+conntrack -C
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+# Prometheus 告警
+groups:
+- name: service-alerts
+  rules:
+  - alert: ServiceNoEndpoints
+    expr: kube_endpoint_address_available == 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Service {{ $labels.namespace }}/{{ $labels.endpoint }} 无可用 Endpoint"
+  - alert: KubeProxyConntrackNearFull
+    expr: node_nf_conntrack_entries / node_nf_conntrack_entries_limit > 0.8
+    for: 5m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 配置合理的滚动更新策略 | maxUnavailable≥1 避免全部不可用 | P0 |
+| readinessProbe 预热 | 应用启动后预热连接池再标记 Ready | P0 |
+| conntrack 容量规划 | 按峰值 QPS × 平均连接时长估算 | P1 |
+| EndpointSlice 监控 | 监控 Endpoint 变化事件 | P1 |
+
+## 面试要点
+
+1. **Q: Service 无 Endpoint 的排查路径？**
+   A: 检查 Pod 是否 Ready → 验证 selector 匹配 → 查看 EndpointSlice 同步状态 → 检查 kube-proxy 日志 → 确认 RBAC 权限
+
+2. **Q: kube-proxy iptables 模式和 IPVS 模式的区别？**
+   A: iptables 线性匹配 O(n)，IPVS 哈希表 O(1)；IPVS 支持更多负载均衡算法；大规模集群(>1000 Service)建议 IPVS
+
+3. **Q: ClusterIP 不通的完整排查链？**
+   A: Pod内→Service ClusterIP→kube-proxy规则→后端Pod→NetworkPolicy→CNI路由→节点iptables
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

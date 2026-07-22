@@ -164,6 +164,85 @@ flowchart TD
     {
       "name": "底事件: 扩
 
+## 生产案例
+
+### 案例1: 节点池扩容失败 - 云资源库存不足
+
+**时间线**:
+- 14:00 Cluster Autoscaler 触发扩容，新节点池需加 5 个节点
+- 14:05 扩容失败: `InstanceCreationFailed: insufficient inventory in zone-a`
+- 14:10 确认根因: 目标可用区 GPU 实例库存不足
+- 14:15 配置多可用区回退，从 zone-b 扩容成功
+
+**根因链**:
+```
+CA触发扩容 → 云API创建实例 → 目标可用区库存不足
+→ 创建失败 → 节点池扩容失败 → Pod持续Pending
+```
+
+**修复**:
+```bash
+# 🟢 检查节点池状态
+kubectl get nodepool -o wide
+kubectl describe nodepool ${POOL_NAME}
+# 🟡 配置多可用区
+kubectl patch nodepool ${POOL} -p '{"spec":{"zones":["zone-a","zone-b","zone-c"]}}'
+```
+
+### 案例2: 节点池升级导致批量节点 NotReady
+
+**现象**: 节点池滚动升级时多个节点同时 NotReady
+
+**根因**: maxUnavailable 设置过大(50%)，同时升级节点过多
+
+**修复**:
+```bash
+# 🟡 调整升级策略
+kubectl patch nodepool ${POOL} -p '{"spec":{"rollingUpdate":{"maxUnavailable":1}}}'
+# 🟢 检查节点状态
+kubectl get nodes -l pool=${POOL} -o wide
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: nodepool-alerts
+  rules:
+  - alert: NodePoolScaleUpFailed
+    expr: cluster_autoscaler_failed_scale_ups_total > 0
+    for: 10m
+    labels:
+      severity: critical
+  - alert: NodePoolNotReady
+    expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+    for: 10m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 多可用区配置 | 避免单可用区库存不足 | P0 |
+| 升级策略保守 | maxUnavailable=1 | P0 |
+| 容量预留 | 保持 20% 资源余量 | P1 |
+| 多实例规格 | 配置备选实例类型 | P1 |
+
+## 面试要点
+
+1. **Q: 节点池扩容失败的排查步骤？**
+   A: 检查 CA 日志 → 确认云资源库存 → 验证配额限制 → 检查子网 IP 可用性 → 确认安全组规则
+
+2. **Q: Cluster Autoscaler 的工作原理？**
+   A: 监控 Pending Pod → 模拟调度找到合适节点池 → 调用云 API 创建实例 → 新节点加入集群 → Pod 调度成功
+
+3. **Q: 节点池升级的最佳实践？**
+   A: maxUnavailable=1 → 先 cordon+drain → 滚动替换 → PDB 保护 → 分批升级 → 验证业务正常
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

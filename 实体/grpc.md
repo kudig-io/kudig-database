@@ -71,19 +71,301 @@ gRPC 架构基于 Protocol Buffers IDL 和 HTTP/2 协议。开发者通过 .prot
 - **API 网关后端**：gRPC-JSON 转换网关为前端提供 RESTful API
 - **移动端 API**：高效的 Protobuf 编码节省移动网络带宽
 
-## 安装与快速开始
+## 安装与配置
+
+### 工具链安装
 
 ```bash
-# Go
-protoc --go_out=. --go-grpc_out=. hello.proto
-# Python
+# 🟢 安装 protoc 编译器
+# Linux
+PROTOC_VERSION="27.0"
+curl -LO "https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip"
+unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local bin/protoc
+
+# macOS
+brew install protobuf
+
+# 🟢 安装 Go 插件
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+# 🟢 安装 Python 工具
 pip install grpcio grpcio-tools
-python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. hello.proto
+
+# 🟢 安装 grpcurl（调试工具）
+go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+
+# 🟢 安装 buf（现代 Protobuf 工具链）
+go install github.com/bufbuild/buf/cmd/buf@latest
 ```
+
+### Proto 文件定义示例
+
+```protobuf
+syntax = "proto3";
+package orderservice.v1;
+
+option go_package = "github.com/example/orderservice/api/v1;v1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// 订单服务定义
+service OrderService {
+  // Unary RPC
+  rpc CreateOrder(CreateOrderRequest) returns (Order);
+  rpc GetOrder(GetOrderRequest) returns (Order);
+  // Server Streaming
+  rpc ListOrders(ListOrdersRequest) returns (stream Order);
+  // Client Streaming
+  rpc BatchCreateOrders(stream CreateOrderRequest) returns (BatchCreateResponse);
+  // Bidirectional Streaming
+  rpc WatchOrderUpdates(WatchRequest) returns (stream OrderEvent);
+}
+
+message Order {
+  string id = 1;
+  string customer_id = 2;
+  repeated OrderItem items = 3;
+  OrderStatus status = 4;
+  double total_amount = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message OrderItem {
+  string sku = 1;
+  int32 quantity = 2;
+  double unit_price = 3;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_PENDING = 1;
+  ORDER_STATUS_CONFIRMED = 2;
+  ORDER_STATUS_SHIPPED = 3;
+  ORDER_STATUS_DELIVERED = 4;
+  ORDER_STATUS_CANCELLED = 5;
+}
+
+message CreateOrderRequest {
+  string customer_id = 1;
+  repeated OrderItem items = 2;
+}
+
+message GetOrderRequest {
+  string id = 1;
+}
+
+message ListOrdersRequest {
+  string customer_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message BatchCreateResponse {
+  int32 success_count = 1;
+  repeated string errors = 2;
+}
+
+message WatchRequest {
+  string customer_id = 1;
+}
+
+message OrderEvent {
+  string order_id = 1;
+  OrderStatus new_status = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+```
+
+### 代码生成
+
+```bash
+# 🟢 Go 代码生成
+protoc --go_out=. --go_opt=paths=source_relative \
+       --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+       api/v1/order_service.proto
+
+# 🟢 Python 代码生成
+python -m grpc_tools.protoc -I. \
+  --python_out=. --grpc_python_out=. --pyi_out=. \
+  api/v1/order_service.proto
+
+# 🟢 使用 buf 生成（推荐）
+buf generate
+```
+
+### K8s gRPC 服务部署
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: grpc-server
+        image: registry.example.com/order-service:v1.2
+        ports:
+        - containerPort: 50051
+          name: grpc
+        readinessProbe:
+          grpc:
+            port: 50051
+          initialDelaySeconds: 5
+        livenessProbe:
+          grpc:
+            port: 50051
+          initialDelaySeconds: 15
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 50051
+    targetPort: 50051
+    name: grpc
+    appProtocol: grpc  # 重要：声明协议
+```
+
+### gRPC 负载均衡方案
+
+```yaml
+# 方案 1: Headless Service + 客户端负载均衡
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service-headless
+spec:
+  clusterIP: None  # Headless
+  selector:
+    app: order-service
+  ports:
+  - port: 50051
+    name: grpc
+---
+# 方案 2: Envoy/Istio 代理负载均衡
+# Istio DestinationRule
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: order-service
+spec:
+  host: order-service.default.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_REQUEST  # gRPC 推荐
+    connectionPool:
+      http2:
+        maxRequestsPerConnection: 100
+```
+
+## 运维操作
+
+```bash
+# 🟢 使用 grpcurl 测试服务
+grpcurl -plaintext order-service:50051 list
+grpcurl -plaintext order-service:50051 list orderservice.v1.OrderService
+grpcurl -plaintext -d '{"customer_id": "cust-001"}' \
+  order-service:50051 orderservice.v1.OrderService/ListOrders
+
+# 🟢 检查服务健康状态
+grpcurl -plaintext order-service:50051 grpc.health.v1.Health/Check
+
+# 🟢 查看服务反射信息
+grpcurl -plaintext order-service:50051 describe orderservice.v1.Order
+
+# 🟢 检查 Pod gRPC 端口
+kubectl exec -it <pod> -- grpc_health_probe -addr=:50051
+
+# 🟢 监控 gRPC 指标
+kubectl port-forward svc/order-service 50051:50051
+# Prometheus 指标: grpc_server_handled_total, grpc_server_handling_seconds
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| UNAVAILABLE | 服务不可达/未就绪 | `grpcurl -plaintext svc:port list` | 检查 Service/Pod/NetworkPolicy |
+| DEADLINE_EXCEEDED | 超时/下游慢 | 检查服务端日志/指标 | 增加超时/优化处理 |
+| 负载不均 | HTTP/2 长连接 | 检查各 Pod 请求数 | 使用 headless svc/xDS |
+| INTERNAL | 序列化错误/panic | 检查服务端日志 | 检查 proto 版本一致性 |
+| 连接重置 | keepalive 配置不匹配 | 检查客户端/服务端 keepalive | 统一 keepalive 参数 |
+
+### 排查流程
+
+```
+gRPC 调用失败
+├── UNAVAILABLE？
+│   ├── DNS 解析正常？→ nslookup svc.ns.svc.cluster.local
+│   ├── Pod 就绪？→ kubectl get endpoints
+│   └── 端口正确？→ kubectl describe svc
+├── 性能问题？
+│   ├── 负载不均 → 检查 LB 策略（HTTP/2 长连接问题）
+│   ├── 延迟高 → 检查服务端处理时间/下游依赖
+│   └── 吐吐低 → 检查连接池/并发设置
+└── 序列化错误？
+    ├── proto 版本不一致 → 统一 .proto 文件
+    └── 字段编号冲突 → 检查 proto 变更历史
+```
+
+## 生产案例
+
+### 案例1：gRPC 负载不均导致单 Pod 过载
+
+- **场景**：3 副本 gRPC 服务，90% 流量集中在 1 个 Pod
+- **排查**：K8s Service (iptables) 仅在连接建立时负载均衡，HTTP/2 多路复用导致单连接承载所有请求
+- **方案**：改用 Headless Service + 客户端 round_robin 负载均衡；或部署 Envoy sidecar
+- **效果**：流量均匀分布到 3 个 Pod，P99 延迟降低 40%
+
+### 案例2：gRPC keepalive 不匹配导致连接断开
+
+- **场景**：客户端报 "transport is closing" 错误，间歇性发生
+- **排查**：客户端 keepalive ping 间隔 10s，服务端 ENFORCE_MIN_PING_TIME 为 5min，服务端主动断开
+- **方案**：统一 keepalive 参数：客户端 Time=30s, Timeout=10s；服务端 MinTime=20s, PermitWithoutStream=true
+- **效果**：连接断开问题消失
 
 ## 对比替代方案
 
-相比 REST/JSON，gRPC 提供更强的类型安全、更低的延迟和更高的吞吐。相比 Thrift（Apache），gRPC 基于 HTTP/2 生态更丰富。相比 Connect-RPC（Buf），gRPC 更成熟但 Connect 对 HTTP/1.1 友好。
+| 方案 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| gRPC | 高性能、强类型、流式 | 浏览器支持需代理、调试不便 | 微服务间通信 |
+| REST/JSON | 简单、浏览器原生、易调试 | 性能低、无类型安全 | 公开 API/前端 |
+| Connect-RPC (Buf) | 兼容 gRPC+HTTP/1.1、浏览器友好 | 生态较新 | 需要浏览器直连 |
+| Apache Thrift | 成熟、多语言 | 无 HTTP/2、生态较小 | 已有 Thrift 环境 |
+| GraphQL | 灵活查询、前端友好 | 性能开销、N+1问题 | 复杂前端查询 |
+
+## 检查清单
+
+- [ ] proto 文件有版本管理（buf/protolint）
+- [ ] 服务实现了 Health Checking Protocol
+- [ ] K8s Service 声明了 appProtocol: grpc
+- [ ] 负载均衡方案已解决 HTTP/2 长连接问题
+- [ ] keepalive 参数客户端/服务端一致
+- [ ] 超时和重试策略已配置
+- [ ] TLS/mTLS 已启用（生产环境）
+- [ ] gRPC 指标已接入 Prometheus
 
 ## Related
 

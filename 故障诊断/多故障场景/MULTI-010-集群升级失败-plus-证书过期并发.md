@@ -60,6 +60,46 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 22:00 | 执行集群升级 1.26→1.27 | 🟢 `kubeadm upgrade plan` |
+| 22:05 | 控制平面升级失败: 证书过期 | 🟢 `kubeadm certs check-expiration` |
+| 22:08 | apiserver 不可用，kubectl 超时 | 🟢 `kubectl get nodes` (timeout) |
+| 22:10 | 确认根因: 证书即将过期 + 升级过程触发证书验证失败 | 🟢 `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates` |
+| 22:15 | 先续期证书再重试升级 | 🟡 `kubeadm certs renew all` |
+| 22:20 | 重启控制平面组件 | 🟡 `crictl pods --name kube-apiserver -q \| xargs crictl stopp` |
+| 22:25 | 重新执行升级成功 | 🟡 `kubeadm upgrade apply v1.27.x` |
+| 22:40 | 集群升级完成，所有节点 Ready | 🟢 `kubectl get nodes -o wide` |
+
+## 故障关联图
+
+```
+证书即将过期(根因) + 升级操作(触发因素)
+    ├── 升级过程触发证书验证 → 证书过期
+    │       └── apiserver TLS失败 → API不可用
+    │               └── 升级中断 → 集群处于中间状态
+    └── 影响: 集群不可用 + 升级未完成
+```
+
+## 关键教训
+
+1. **升级前检查不充分**: 未先执行 `kubeadm certs check-expiration`
+2. **升级窗口选择**: 应在证书充足有效期内升级
+3. **回滚预案**: 升级失败后无明确回滚步骤
+
+## 面试要点
+
+1. **Q: 集群升级前必须检查哪些项？**
+   A: 证书有效期 → etcd 健康 → CNI/CSI 兼容性 → API 废弃字段 → 备份 etcd → 确认 PDB 状态
+
+2. **Q: 升级失败后集群处于中间状态如何恢复？**
+   A: 检查哪个组件失败 → 修复根因(证书/配置) → 重启失败组件 → 重新执行升级 → 验证集群状态
+
+3. **Q: 如何避免升级和证书问题并发？**
+   A: 升级前先续期证书 → 启用自动轮转 → 升级前全面预检 → 选择证书充足有效期窗口
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

@@ -79,18 +79,21 @@ OpenYurt 通过 yurtctl 工具将标准 Kubernetes 集群一键转换为 OpenYur
 3. **车联网边缘**: 在路侧单元（RSU）运行 AI 推理应用
 4. **离线边缘节点**: 网络不稳定的远程站点保证业务连续性
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 yurtctl
 wget https://github.com/openyurtio/openyurt/releases/latest/download/yurtctl
 chmod +x yurtctl && mv yurtctl /usr/local/bin/
+yurtctl version
 
 # 将标准 K8s 集群转换为 OpenYurt
 yurtctl convert --cloud-nodes master1 --provider kubeadm
+```
 
-# 创建 NodePool（边缘节点池）
-kubectl apply -f - <<EOF
+### NodePool 配置
+
+```yaml
 apiVersion: apps.openyurt.io/v1alpha1
 kind: NodePool
 metadata:
@@ -99,13 +102,13 @@ spec:
   type: Edge
   labels:
     region: beijing
-EOF
+  annotations:
+    nodepool.openyurt.io/enable-autonomy: "true"
+```
 
-# 将节点加入 NodePool
-kubectl label node edge-node-1 openyurt.io/node-pool=beijing-edge
+### YurtAppSet 跨池部署
 
-# 跨 NodePool 部署应用
-kubectl apply -f - <<EOF
+```yaml
 apiVersion: apps.openyurt.io/v1alpha1
 kind: YurtAppSet
 metadata:
@@ -125,18 +128,84 @@ spec:
   topology:
     pools:
     - name: beijing-edge
+      replicas: 2
     - name: shanghai-edge
-EOF
+      replicas: 3
 ```
+
+```bash
+# 将节点加入 NodePool
+kubectl label node edge-node-1 openyurt.io/node-pool=beijing-edge
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 NodePool 状态
+kubectl get nodepools
+kubectl describe nodepool beijing-edge
+
+# 🟢 查看边缘节点自治状态
+kubectl get nodes -l openyurt.io/node-pool=beijing-edge
+
+# 🟡 添加边缘节点
+yurtctl join --node-name edge-node-2 --provider kubeadm
+
+# 🟡 更新边缘应用
+kubectl apply -f yurtappset-updated.yaml
+
+# 🔴 删除 NodePool
+kubectl delete nodepool beijing-edge
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 边缘节点 NotReady | 网络断开/自治未启用 | `kubectl get nodes` | 检查 YurtHub 状态 |
+| 应用未下发到边缘 | NodePool 标签不匹配 | `kubectl describe yurtappset` | 确认 topology 配置 |
+| YurtHub 异常 | 证书过期 | `kubectl logs yurthub-pod` | 轮换证书 |
+| 边缘自治失败 | 本地缓存不足 | 检查节点 /var/lib/openyurt | 增加缓存空间 |
+| 节点转换失败 | 集群版本不兼容 | `yurtctl convert --help` | 检查版本兼容性 |
+
+```
+排查流程:
+├── 边缘节点离线
+│   ├── 检查节点网络连通性
+│   ├── kubectl logs yurthub → YurtHub 状态
+│   └── 确认 autonomy annotation 已启用
+├── 应用下发异常
+│   ├── kubectl describe yurtappset → 查看状态
+│   ├── 确认 NodePool 存在且标签正确
+│   └── 检查边缘节点资源充足
+└── 转换失败
+    ├── yurtctl convert --help → 检查参数
+    └── 确认集群版本兼容
+```
+
+## 生产案例
+
+### 案例 1: CDN 边缘节点管理
+
+- **场景**: 全国 200+ 边缘节点运行 CDN 服务，网络不稳定
+- **方案**: 部署 OpenYurt，按地域创建 NodePool；启用边缘自治，网络断开时本地服务不中断
+- **效果**: 网络故障时业务连续性 99.99%，运维效率提升 5x
+
+### 案例 2: 无侵入边缘化改造
+
+- **场景**: 已有标准 K8s 集群需要扩展边缘能力，不能影响现有业务
+- **方案**: 使用 `yurtctl convert` 无侵入转换；边缘节点通过 YurtHub 缓存实现自治
+- **效果**: 零停机完成边缘化改造，现有业务完全不受影响
 
 ## 对比
 
-| 特性 | OpenYurt | KubeEdge | k3s | Akri |
-|------|----------|----------|-----|------|
-| 无侵入转换 | ✅ | ❌ | ❌ | ❌ |
-| 边缘自治 | ✅ YurtHub | ✅ | ✅ | ❌ |
-| NodePool | ✅ | ❌ | ❌ | ❌ |
-| CNCF 状态 | Incubating | Graduated | 非 CNCF | Sandbox |
+| 特性 | OpenYurt | KubeEdge | k3s | Akri | 适用场景 |
+|------|----------|----------|-----|------|----------|
+| 无侵入转换 | ✅ | ❌ | ❌ | ❌ | 存量集群 |
+| 边缘自治 | ✅ YurtHub | ✅ | ✅ | ❌ | 离线场景 |
+| NodePool | ✅ | ❌ | ❌ | ❌ | 多地域 |
+| 设备管理 | ⚠️ | ✅ | ❌ | ✅ | IoT |
+| CNCF 状态 | Incubating | Graduated | 非 CNCF | Sandbox | 生态 |
 
 ## 架构定位
 

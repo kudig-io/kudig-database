@@ -150,6 +150,195 @@ kubectl exec webapp-xxx -- sh -c 'ls -la /etc/podinfo/'
 - **字段名拼错**：`metadata.labels['x']` 而非 `metadata.label.x`，引号和括号格式严格。
 - **与 cloud metadata 混淆**：Downward API 是 Pod 视角，节点云元数据（实例 ID/类型）要走 cloud metadata 服务。
 
+## 源码实现分析
+
+### kubelet Downward API 注入机制
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_container.go
+func (m *kubeGenericRuntimeManager) containerRuntimeSpec(pod *v1.Pod, container *v1.Container) (*runtimeapi.ContainerConfig, error) {
+    // 1. 处理环境变量中的 Downward API 引用
+    for _, env := range container.Env {
+        if env.ValueFrom != nil && env.ValueFrom.FieldRef != nil {
+            // 解析 fieldRef: metadata.name, status.podIP, spec.nodeName 等
+            value := m.getFieldValue(pod, env.ValueFrom.FieldRef.FieldPath)
+            resolvedEnv = append(resolvedEnv, &runtimeapi.KeyValue{
+                Key: env.Name, Value: value,
+            })
+        }
+        if env.ValueFrom != nil && env.ValueFrom.ResourceFieldRef != nil {
+            // 解析 resourceFieldRef: limits.cpu, requests.memory 等
+            value := m.getResourceValue(container, env.ValueFrom.ResourceFieldRef)
+            // divisor 控制单位：1=core, 1m=milli, 1Mi=MiB
+        }
+    }
+    // 2. 处理 Volume 中的 Downward API 投影
+    // downwardAPI volume → 创建文件（labels/annotations/name/namespace）
+    // kubelet 定期同步文件内容（labels/annotations 变化时更新）
+}
+// 关键区别：
+// - env 注入：Pod 创建时一次性解析，不会动态更新
+// - volume 注入：kubelet 定期同步，支持 labels/annotations 热更新
+```
+
+### Downward API 数据流
+
+```
+┌──────────────────────────────────────────────────────────┐
+│            Downward API 数据流架构                    │
+├──────────────────────────────────────────────────────────┤
+│  Pod Spec (metadata/spec/status)                         │
+│       │                                                  │
+│       ├──── env.valueFrom.fieldRef ───▶ 环境变量       │
+│       │     • metadata.name                              │
+│       │     • status.podIP                               │
+│       │     • spec.nodeName                              │
+│       │     • spec.serviceAccountName                    │
+│       │     ❗ 创建时一次性注入，不更新              │
+│       │                                                  │
+│       ├──── env.valueFrom.resourceFieldRef ─▶ 环境变量 │
+│       │     • limits.cpu / limits.memory                 │
+│       │     • requests.cpu / requests.memory             │
+│       │     ❗ divisor 控制单位                       │
+│       │                                                  │
+│       └──── downwardAPI volume ───▶ 文件               │
+│             • metadata.labels                            │
+│             • metadata.annotations                       │
+│             ✅ kubelet 定期同步，支持热更新          │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：日志中添加 Pod 标识
+
+```yaml
+# 🟢 低风险：只影响 Pod 环境变量
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+    version: v2
+spec:
+  containers:
+  - name: app
+    image: registry/webapp:v2.0.0
+    env:
+    - name: POD_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    - name: POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    # 应用日志中输出这些字段，便于 Loki/ELK 中精确定位
+```
+
+### 场景二：资源限制自适应（JVM）
+
+```yaml
+# 🟢 低风险：只影响 Pod 环境变量
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: java-app
+    image: registry/java-app:v1.0
+    env:
+    - name: CPU_LIMIT
+      valueFrom:
+        resourceFieldRef:
+          containerName: java-app
+          resource: limits.cpu
+          divisor: "1"     # 单位：core（如 2 = 2核）
+    - name: MEM_LIMIT_MI
+      valueFrom:
+        resourceFieldRef:
+          containerName: java-app
+          resource: limits.memory
+          divisor: 1Mi     # 单位：MiB（如 512 = 512MB）
+    resources:
+      limits:
+        cpu: "2"
+        memory: 512Mi
+    # JVM 启动参数：-XX:MaxRAMPercentage=75.0
+    # 或应用代码读取 MEM_LIMIT_MI 设置堆大小
+```
+
+### 场景三：动态标签热更新（Volume 模式）
+
+```yaml
+# 🟢 低风险：只影响 Pod 文件挂载
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: webapp
+    env: production
+  annotations:
+    prometheus.io/port: "9090"
+spec:
+  containers:
+  - name: app
+    image: registry/webapp:v2.0.0
+    volumeMounts:
+    - name: podinfo
+      mountPath: /etc/podinfo
+      readOnly: true
+  volumes:
+  - name: podinfo
+    downwardAPI:
+      items:
+      - path: "labels"
+        fieldRef:
+          fieldPath: metadata.labels
+      - path: "annotations"
+        fieldRef:
+          fieldPath: metadata.annotations
+      - path: "cpu_limit"
+        resourceFieldRef:
+          containerName: app
+          resource: limits.cpu
+          divisor: "1m"  # 单位：millicore
+# 应用用 fsnotify 监听 /etc/podinfo/labels 变化实现热更新
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | env 中的 Downward API 会动态更新 | env 是创建时一次性注入，Pod 生命周期内不变；动态数据用 Volume |
+| 2 | resourceFieldRef 不需要 containerName | 多容器 Pod 必须指定 containerName，否则引用错误容器 |
+| 3 | CPU 单位默认是 millicore | 默认 divisor=1 得到 core 小数（如 0.5）；用 divisor="1m" 得 millicore |
+| 4 | Volume 文件立即可读 | Volume 挂载有短暂延迟（kubelet 同步周期）；应用应处理文件不存在的情况 |
+| 5 | annotations 可以无限大 | annotations 总大小限制 256KB；过多标签会擑大 Volume 文件 |
+| 6 | Downward API 可以获取节点云元数据 | Downward API 只有 Pod 视角；节点实例 ID/类型需走 cloud metadata 服务 |
+
+## 面试要点
+
+1. **Q: Downward API 的两种注入方式有何区别？分别适用什么场景？**
+   A: ① 环境变量（env.valueFrom）：Pod 创建时一次性解析，生命周期内不变。适用：Pod 名称、节点名、命名空间、资源限制等不变信息。② Volume 文件（downwardAPI volume）：kubelet 定期同步文件内容，支持 labels/annotations 热更新。适用：需要动态读取的元数据（如服务发现标签、配置注解）。关键区别：env 不可更新，Volume 可更新。
+
+2. **Q: 为什么 JVM 应用应该用 Downward API 获取内存限制？**
+   A: 容器内 JVM 默认读取宿主机总内存（/proc/meminfo），而非 cgroup 限制。若不感知容器 limit，JVM 会设置过大的堆导致 OOM Kill。解决：① 通过 Downward API 注入 MEM_LIMIT 环境变量；② JVM 11+ 支持 -XX:+UseContainerSupport 直接读 cgroup；③ 或用 -XX:MaxRAMPercentage=75.0 按 cgroup 比例设置。Downward API 是显式传递 limit 的可靠方式。
+
+3. **Q: Downward API 支持哪些字段？有什么限制？**
+   A: fieldRef 支持：metadata.name/namespace/labels/annotations/uid、spec.nodeName/serviceAccountName/containers[].resources、status.podIP/hostIP。resourceFieldRef 支持：limits.cpu/memory、requests.cpu/memory。限制：① 不支持任意字段（只有白名单）；② labels/annotations 只能用 Volume 模式；③ env 模式不支持动态更新；④ 节点云元数据不可用（需 cloud metadata API）。
+
+4. **Q: 如何用 Downward API 实现服务注册/发现？**
+   A: 模式：① Pod 启动时读取 POD_IP + POD_NAME 环境变量；② 向服务注册中心（Consul/Eureka）注册自身地址；③ 通过 Volume 挂载 labels 获取服务元数据（版本、环境）；④ preStop hook 中注销服务（配合 terminationGracePeriod）。优势：无需硬编码 IP，Pod 重建后自动重新注册。配合 headless Service 也可实现 DNS 发现。
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

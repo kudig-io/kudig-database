@@ -105,6 +105,98 @@ NetworkPolicy 是 Kubernetes 零信任安全的基础。生产建议：默认 De
 - **Cilium Cluster Mesh**：基于 eBPF 的多集群服务发现和路由
 - **Meshery Multi-cluster**：统一管理面
 
+## 运维操作
+
+```bash
+# 🟢 查看 CNI 插件状态
+kubectl get pods -n kube-system -l k8s-app=cilium
+kubectl get pods -n kube-system -l k8s-app=calico-node
+
+# 🟢 查看 Service 和 Endpoints
+kubectl get svc -A
+kubectl get endpoints -A
+kubectl describe svc <name> -n <ns>
+
+# 🟢 查看 NetworkPolicy
+kubectl get networkpolicy -A
+kubectl describe networkpolicy <name> -n <ns>
+
+# 🟢 查看 Gateway API 资源
+kubectl get gatewayclass,gateway,httproute -A
+kubectl describe httproute <name> -n <ns>
+
+# 🟢 DNS 排查
+kubectl exec -it <pod> -- nslookup kubernetes.default
+kubectl exec -it <pod> -- cat /etc/resolv.conf
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+
+# 🟢 查看 kube-proxy 模式
+kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
+
+# 🟡 测试 Pod 网络连通性
+kubectl exec -it <pod> -- wget -qO- http://<svc>.<ns>.svc.cluster.local
+kubectl exec -it <pod> -- curl -v http://<pod-ip>:<port>
+
+# 🟢 Cilium 网络诊断
+cilium status
+cilium endpoint list
+hubble observe --namespace <ns>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 无法访问 Service | Endpoints 为空 | `kubectl get endpoints <svc>` | 检查 selector 和 Pod 标签 |
+| DNS 解析失败 | CoreDNS 异常 | `kubectl get pods -n kube-system -l k8s-app=kube-dns` | 重启 CoreDNS、检查配置 |
+| 跨节点 Pod 不通 | CNI 隧道问题 | `cilium status` / `calicoctl node status` | 检查 CNI Pod 和网络配置 |
+| NetworkPolicy 不生效 | CNI 不支持 | 确认 CNI 插件支持 NetworkPolicy | 更换支持 NP 的 CNI |
+| Ingress 502 | 后端服务不可达 | 检查 Ingress Controller 日志 | 确认 Service/Endpoints 正常 |
+| 外部无法访问 LoadBalancer | 云 LB 未就绪 | `kubectl describe svc <lb-svc>` | 检查云凭证和 LB 状态 |
+
+### 排查流程
+
+```
+网络异常 → 确定问题范围
+  ├─ Pod 内部 → 检查应用监听端口
+  ├─ Pod 到 Service → 检查 Endpoints 和 kube-proxy 规则
+  │   ├─ Endpoints 为空 → 检查 selector 匹配
+  │   └─ Endpoints 正常 → 检查 kube-proxy/IPVS 规则
+  ├─ Pod 到 Pod（跨节点）→ 检查 CNI 插件状态
+  │   ├─ CNI Pod 异常 → 重启 CNI DaemonSet
+  │   └─ CNI 正常 → 检查节点网络/MTU/路由
+  └─ 外部到集群 → 检查 Ingress/Gateway/LB
+      ├─ Ingress 异常 → 检查 Ingress Controller 日志
+      └─ LB 异常 → 检查云 LB 状态/安全组
+```
+
+## 生产案例
+
+### 案例1: CoreDNS 延迟导致服务超时
+
+**场景**: 微服务间调用周期性超时，重试后成功  
+**排查**: CoreDNS Pod 资源不足，ndots:5 导致多次 DNS 查询  
+**方案**: 扩容 CoreDNS + 配置 ndots:2 + 使用 FQDN（加尾部点）  
+**效果**: DNS 解析延迟从 200ms 降到 < 5ms  
+
+### 案例2: NetworkPolicy 导致服务中断
+
+**场景**: 应用 NetworkPolicy 后部分服务无法访问  
+**排查**: 默认 Deny All 策略未允许 DNS 出站流量  
+**方案**: 添加允许 DNS (UDP/TCP 53) 的 Egress 规则，按服务逐步启用  
+**效果**: 安全隔离生效且不影响业务  
+
+## 检查清单
+
+- [ ] 生产环境使用支持 NetworkPolicy 的 CNI（Cilium/Calico）
+- [ ] 配置默认 Deny All NetworkPolicy，按需 Allow
+- [ ] CoreDNS 配置资源限制和 HPA
+- [ ] 大规模场景使用 IPVS 模式 kube-proxy
+- [ ] 配置 DNS 缓存（NodeLocal DNSCache）
+- [ ] 外部流量入口配置 TLS 终止
+- [ ] 监控 CNI 插件健康状态
+- [ ] 多集群场景评估 Submariner/Cilium Mesh
+
 ---
 
 > 来源：.zread/wiki/drafts/9-wang-luo-ti-xi-cni-service-ingress-gateway-api-yu-duo-ji-qun-wang-luo.md
@@ -116,7 +208,7 @@ NetworkPolicy 是 Kubernetes 零信任安全的基础。生产建议：默认 De
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
-
 - [[概念/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
+- [[实体/coredns.md|CoreDNS]] — 集群 DNS
 
 <!-- risk-assessed -->

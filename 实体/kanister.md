@@ -78,7 +78,7 @@ Kanister 以 Operator 模式部署在 Kubernetes 集群中。Blueprint CRD 定�
 3. **数据迁移**: 将一个集群的数据库备份恢复到另一个集群
 4. **备份验证**: 定期执行备份+恢复验证，确保备份可用性
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Kanister Operator
@@ -134,6 +134,82 @@ EOF
 # 查看备份状态
 kubectl describe actionset pg-backup
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 ActionSet 状态
+kubectl get actionsets
+kubectl describe actionset pg-backup
+
+# 🟢 查看 Blueprint 列表
+kubectl get blueprints -n kanister
+
+# 🟡 触发备份
+kanctl create actionset --action backup --namespace default \
+  --blueprint postgres-blueprint --profile s3-backup \
+  --objects statefulset.apps/postgres
+
+# 🟡 触发恢复
+kanctl create actionset --action restore --namespace default \
+  --blueprint postgres-blueprint --profile s3-backup \
+  --objects statefulset.apps/postgres \
+  --artifacts backupID=<backup-artifact-id>
+
+# 🔴 删除备份数据
+kanctl create actionset --action delete --namespace default \
+  --blueprint postgres-blueprint --profile s3-backup \
+  --artifacts backupID=<backup-artifact-id>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| ActionSet 卡住 | Pod 执行超时 | `kubectl describe actionset pg-backup` | 检查 Pod 事件和资源 |
+| S3 上传失败 | 凭据过期/网络问题 | `kubectl logs -l job-name=pg-backup-*` | 更新 Secret/检查网络 |
+| 恢复失败 | 备份工件损坏 | `kanctl get actionset -o yaml` | 从其他备份恢复 |
+| Blueprint 不匹配 | 应用版本变更 | `kubectl get blueprint -o yaml` | 更新 Blueprint 脚本 |
+| Operator 未响应 | Pod CrashLoop | `kubectl get pods -n kanister` | 检查日志和资源 |
+
+```
+排查流程:
+├── 备份失败
+│   ├── kubectl get actionsets → 状态检查
+│   ├── kubectl describe actionset → 事件和错误
+│   ├── kubectl logs job/<backup-job> → 执行日志
+│   └── 检查 S3 连接 → 凭据和网络
+├── 恢复失败
+│   ├── 确认 backupID 有效 → 工件存在性
+│   ├── 检查目标 PVC → 容量和状态
+│   └── 查看恢复 Job 日志 → 具体错误
+└── Operator 问题
+    ├── kubectl get pods -n kanister → Pod 状态
+    ├── kubectl logs kanister-operator → 控制器日志
+    └── 检查 CRD 版本 → API 兼容性
+```
+
+## 生产案例
+
+### 案例1: 数据库应用级一致性备份
+
+- **场景**: PostgreSQL 集群需要应用一致性备份，纯磁盘快照无法保证事务一致性
+- **排查**: Velero 快照恢复后数据库报 WAL 不一致错误
+- **方案**:
+  1. 使用 Kanister Blueprint 定义 pg_dump + WAL 归档流程
+  2. 备份前执行 `SELECT pg_backup_start()` 确保一致性
+  3. 配置 CronActionSet 每日自动备份
+- **效果**: 备份恢复成功率 100%，RPO < 1h
+
+### 案例2: 多集群备份统一管理
+
+- **场景**: 5 个生产集群的有状态服务需要统一备份策略
+- **排查**: 各集群独立备份，管理复杂，恢复演练困难
+- **方案**:
+  1. 所有集群使用统一 S3 存储桶（按集群前缀隔离）
+  2. 标准化 Blueprint 模板（PostgreSQL/MySQL/MongoDB）
+  3. 每月自动恢复演练验证备份有效性
+- **效果**: 备份管理人力降低 80%，恢复演练通过率 100%
 
 ## 对比
 

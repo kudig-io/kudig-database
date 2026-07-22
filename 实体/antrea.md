@@ -72,36 +72,160 @@ Antrea 作为标准 CNI 插件集成。通过 antrea-agent Pod（DaemonSet）监
 3. **网络诊断**: 使用 Traceflow 快速定位 Pod 间通信问题
 4. **多集群互联**: 使用 Antrea Multi-cluster 打通多个集群的 Pod 网络
 
-## 安装
+## 安装与配置
 
 ```bash
 # 一键安装
 kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.16.0/antrea.yml
 # 验证安装
 kubectl get pods -n kube-system | grep antrea
-# 查看 NetworkPolicy
-kubectl get acnp -A
-kubectl apply -f - <<EOF
+kubectl get nodes -o wide  # 确认所有节点 Ready
+```
+
+```yaml
+# ClusterNetworkPolicy 示例：默认拒绝 + 允许特定流量
 apiVersion: crd.antrea.io/v1beta1
 kind: ClusterNetworkPolicy
-metadata: { name: default-deny }
+metadata:
+  name: default-deny-ingress
 spec:
-  tier: default
+  tier: emergency
   priority: 100
   appliedTo:
   - podSelector: {}
   ingress: []
-EOF
+---
+apiVersion: crd.antrea.io/v1beta1
+kind: ClusterNetworkPolicy
+metadata:
+  name: allow-dns
+spec:
+  tier: securityops
+  priority: 10
+  appliedTo:
+  - podSelector: {}
+  egress:
+  - action: Allow
+    to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+---
+# Egress CRD：固定出站 IP
+apiVersion: crd.antrea.io/v1beta1
+kind: Egress
+metadata:
+  name: egress-prod
+spec:
+  appliedTo:
+    namespaceSelector:
+      matchLabels:
+        env: production
+  egressIP: 10.10.0.100
 ```
 
-## 替代方案
+```bash
+# Traceflow 网络诊断
+kubectl apply -f - <<EOF
+apiVersion: crd.antrea.io/v1beta1
+kind: Traceflow
+metadata:
+  name: tf-test
+spec:
+  source:
+    namespace: default
+    pod: web-1
+  destination:
+    namespace: default
+    pod: api-1
+  packet:
+    ipHeader:
+      protocol: 6
+    transportHeader:
+      tcp:
+        dstPort: 8080
+EOF
+kubectl get traceflow tf-test -o yaml
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Antrea** | OVS 高性能、策略丰富 | OVS 运维复杂 |
-| Calico | 高性能、BGP 原生 | 无 Egress 功能 |
-| Cilium | eBPF 高性能、可观测强 | 内核版本要求高 |
-| Flannel | 简单轻量 | 无 NetworkPolicy |
+## 运维操作
+
+```bash
+# 🟢 查看 Antrea 组件状态
+kubectl get pods -n kube-system -l app=antrea
+kubectl get pods -n kube-system -l app=antrea-agent
+
+# 🟢 查看 NetworkPolicy 状态
+kubectl get networkpolicies -A
+kubectl get acnp -A  # Antrea ClusterNetworkPolicy
+kubectl get anp -A   # Antrea NetworkPolicy
+
+# 🟢 查看 OVS 流表
+kubectl exec -n kube-system <antrea-agent-pod> -c antrea-ovs -- ovs-ofctl dump-flows br-int
+
+# 🟢 查看流量记录
+kubectl get egress -A
+kubectl logs -n kube-system -l app=antrea -c antrea-agent --tail=50
+
+# 🟡 重启 Antrea Agent
+kubectl rollout restart daemonset/antrea-agent -n kube-system
+
+# 🔴 卸载 Antrea（影响所有 Pod 网络）
+kubectl delete -f antrea.yml
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 间通信失败 | OVS 流表缺失/隧道异常 | `ovs-ofctl dump-flows br-int` | 重启 antrea-agent |
+| NetworkPolicy 不生效 | ACNP 优先级冲突 | `kubectl get acnp -o yaml` | 检查 tier 和 priority |
+| 跨节点流量丢失 | Geneve 隧道被防火墙拦截 | `iptables -L -n \| grep 6081` | 开放 UDP 6081 端口 |
+| Egress IP 不生效 | IP 未分配/路由缺失 | `kubectl get egress -o yaml` | 检查 Egress CRD 状态 |
+| antrea-agent CrashLoop | OVS 版本不兼容 | `kubectl logs -n kube-system <agent>` | 检查 OVS 版本兼容性 |
+
+```
+排查流程：
+├─ Pod 网络不通
+│  ├─ Traceflow 诊断流量路径
+│  ├─ 检查 OVS 流表是否正确
+│  └─ 检查 Geneve 隧道状态
+├─ NetworkPolicy 问题
+│  ├─ kubectl get acnp 检查策略状态
+│  ├─ 检查 tier/priority 优先级
+│  └─ 确认 appliedTo 选择器匹配
+└─ Egress 问题
+   ├─ 检查 Egress CRD 状态
+   ├─ 确认 egressIP 可路由
+   └─ 检查节点网络配置
+```
+
+## 生产案例
+
+### 案例 1：企业多租户网络隔离
+
+- **场景**: 多团队共享集群，需要严格的网络隔离和审计
+- **排查**: 标准 NetworkPolicy 不支持跨 Namespace 全局策略
+- **方案**: Antrea ClusterNetworkPolicy + Tier 实现分层策略（Emergency/SecurityOps/App）
+- **效果**: 统一网络安全策略管理，审计合规通过率 100%
+
+### 案例 2：网络故障快速定位
+
+- **场景**: 微服务间歇性超时，传统工具无法定位网络层问题
+- **排查**: 使用 Antrea Traceflow 追踪数据包路径，发现某节点 OVS 流表异常
+- **方案**: 重启异常节点 antrea-agent，启用 Flow Exporter 持续监控
+- **效果**: 网络故障定位时间从小时级降至分钟级
+
+## 替代方案对比
+
+| 维度 | Antrea | Calico | Cilium | Flannel |
+|------|--------|--------|--------|----------|
+| 数据平面 | OVS | BGP/VXLAN | eBPF | VXLAN |
+| NetworkPolicy | ✅ + ACNP | ✅ | ✅ + CiliumNP | ❌ |
+| Egress 网关 | ✅ | ❌ | ✅ | ❌ |
+| 可观测性 | Traceflow/IPFIX | 基础 | Hubble | 无 |
+| 适用场景 | 企业高级网络 | 高性能路由 | eBPF 全功能 | 简单场景 |
 
 ## 架构定位
 

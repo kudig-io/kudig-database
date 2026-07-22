@@ -69,19 +69,211 @@ Cartography 可以作为 CronJob 部署到 Kubernetes，定期同步各云平台
 - **合规审计**：验证资产配置符合安全策略和合规要求
 - **资产盘点**：实时了解全组织的基础设施资产清单
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 安装 Cartography CLI
 pip3 install cartography
-# 运行同步
-cartography --neo4j-uri bolt://localhost:7687 --target aws
-# 或使用 Docker
-docker run lyft/cartography --neo4j-uri bolt://neo4j:7687 --target k8s
+
+# 🟢 部署 Neo4j（图数据库后端）
+helm repo add neo4j https://neo4j.github.io/helm-charts/
+helm install neo4j neo4j/neo4j \
+  -n cartography --create-namespace \
+  --set auth.enabled=true \
+  --set auth.password=<secure-password>
+
+# 🟢 运行 AWS 同步
+cartography --neo4j-uri bolt://neo4j:7687 \
+  --neo4j-password-env-var NEO4J_PASSWORD \
+  --aws-sync-all-regions
+
+# 🟢 运行 K8s 同步
+cartography --neo4j-uri bolt://neo4j:7687 \
+  --neo4j-password-env-var NEO4J_PASSWORD \
+  --k8s-sync
+
+# 🟢 验证数据同步
+# 在 Neo4j Browser 中执行:
+# MATCH (n) RETURN labels(n), count(*) ORDER BY count(*) DESC LIMIT 20
 ```
+
+### K8s CronJob 部署示例
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cartography-sync
+  namespace: cartography
+spec:
+  schedule: "0 */6 * * *"  # 每6小时同步一次
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cartography
+              image: lyft/cartography:latest
+              args:
+                - --neo4j-uri
+                - bolt://neo4j.cartography.svc:7687
+                - --neo4j-password-env-var
+                - NEO4J_PASSWORD
+                - --aws-sync-all-regions
+                - --k8s-sync
+              env:
+                - name: NEO4J_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: neo4j-creds
+                      key: password
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: aws-creds
+                      key: access-key-id
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: aws-creds
+                      key: secret-access-key
+              resources:
+                requests:
+                  cpu: 500m
+                  memory: 1Gi
+                limits:
+                  cpu: "2"
+                  memory: 4Gi
+          restartPolicy: OnFailure
+          serviceAccountName: cartography-sync
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cartography-sync
+  namespace: cartography
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cartography-cluster-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view  # 只读权限
+subjects:
+  - kind: ServiceAccount
+    name: cartography-sync
+    namespace: cartography
+```
+
+### 安全分析查询示例 (Cypher)
+
+```cypher
+// 查找公网暴露的 EC2 实例
+MATCH (instance:EC2Instance)
+WHERE instance.publicdnsname IS NOT NULL
+RETURN instance.id, instance.publicdnsname, instance.instancetype
+
+// 查找具有 admin 权限的 IAM 用户
+MATCH (user:AWSUser)-[:MEMBER_OF]->(group:AWSGroup)
+WHERE group.arn CONTAINS 'admin'
+RETURN user.name, group.arn
+
+// 查找 K8s 中具有 cluster-admin 的 ServiceAccount
+MATCH (sa:KubernetesServiceAccount)-[:BOUND_TO]->(crb:KubernetesClusterRoleBinding)
+WHERE crb.rolename = 'cluster-admin'
+RETURN sa.name, sa.namespace, crb.name
+
+// 攻击路径：公网暴露 -> IAM 角色 -> 敏感数据
+MATCH path = (instance:EC2Instance)-[:INSTANCE_PROFILE]->(profile:InstanceProfile)
+  -[:HAS_ROLE]->(role:AWSRole)-[:MEMBER_OF]->(policy:AWSPolicy)
+WHERE instance.publicdnsname IS NOT NULL
+  AND policy.document CONTAINS 's3:GetObject'
+RETURN path
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Neo4j 状态
+kubectl get pods -n cartography
+kubectl exec -n cartography deploy/neo4j -- neo4j status
+
+# 🟢 查看同步任务状态
+kubectl get cronjob -n cartography
+kubectl get jobs -n cartography --sort-by='.status.startTime'
+
+# 🟢 查看图谱统计
+kubectl exec -n cartography deploy/neo4j -- cypher-shell \
+  "MATCH (n) RETURN labels(n)[0] AS type, count(*) AS count ORDER BY count DESC LIMIT 10"
+
+# 🟡 手动触发同步
+kubectl create job --from=cronjob/cartography-sync cartography-manual-$(date +%s) -n cartography
+
+# 🟡 清除过期数据
+kubectl exec -n cartography deploy/neo4j -- cypher-shell \
+  "MATCH (n) WHERE n.lastupdated < timestamp() - 86400000*7 DETACH DELETE n"
+
+# 🔴 重置图数据库
+kubectl exec -n cartography deploy/neo4j -- cypher-shell "MATCH (n) DETACH DELETE n"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| 同步任务失败 | 云 API 凭据过期 | `kubectl logs job/<name>` | 更新 Secret 中的凭据 |
+| Neo4j 连接失败 | 服务未就绪 | `kubectl get pods -n cartography` | 检查 Neo4j Pod 状态 |
+| 数据不完整 | 部分区域同步失败 | 查看同步日志 | 检查区域权限配置 |
+| 内存 OOM | 大规模资产同步 | `kubectl describe pod` | 增加内存限制 |
+
+```bash
+# 排查流程
+# 1. 检查同步任务日志
+kubectl logs -n cartography job/cartography-sync-<id> --tail=100
+
+# 2. 检查 Neo4j 健康
+kubectl exec -n cartography deploy/neo4j -- wget -qO- http://localhost:7474/
+
+# 3. 检查云凭据有效性
+kubectl exec -n cartography job/cartography-sync-<id> -- aws sts get-caller-identity
+
+# 4. 检查资源使用
+kubectl top pods -n cartography
+```
+
+## 生产案例
+
+### 案例1：多云安全态势管理
+- **场景**：企业使用 AWS + GCP + K8s，安全团队需要统一视图发现风险
+- **方案**：Cartography CronJob 每 6小时同步所有数据源；预置 50+ 安全分析查询；集成 Slack 告警发现新风险
+- **效果**：安全风险发现时间从“审计时”缩短到 6小时内，攻击路径可视化
+
+### 案例2：K8s 权限审计
+- **场景**：安全团队需要发现 K8s 集群中过度授权的 ServiceAccount
+- **方案**：Cartography 同步 K8s RBAC 数据；Cypher 查询发现 cluster-admin 绑定的 SA；追踪使用该 SA 的 Pod 和工作负载
+- **效果**：发现 15 个过度授权的 SA，权限收敛后攻击面减少 60%
 
 ## 对比替代方案
 
-相比传统 CSPM 工具（如 AWS Security Hub），Cartography 支持多云且以图谱方式建模资产关系。相比商业 CSPM（Wiz/Orca），Cartography 是开源的但需要自行维护和配置。
+| 维度 | Cartography | Wiz | Orca | AWS Security Hub |
+|------|------------|-----|------|------------------|
+| 开源 | 是 | 否 | 否 | 否 |
+| 多云 | 20+源 | 支持 | 支持 | 仅 AWS |
+| 图谱分析 | 强 | 中 | 中 | 弱 |
+| 部署复杂度 | 中 | 低 | 低 | 低 |
+| 成本 | 免费 | 高 | 高 | 中 |
+
+## 检查清单
+
+- [ ] Neo4j 已部署且有足够内存（建议 8GB+）
+- [ ] 云 API 凭据已配置为 K8s Secret
+- [ ] CronJob 已配置且定期运行成功
+- [ ] K8s ServiceAccount 只有只读权限
+- [ ] 安全分析查询已配置告警
+- [ ] 数据保留策略已配置（清理过期节点）
+- [ ] Neo4j 备份已配置
 
 ## Related
 

@@ -229,6 +229,148 @@ data:
   encryption: "wireguard"
 ```
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| Pod 无法获取 IP | CNI 插件未就绪 | `kubectl get pods -n kube-system -l k8s-app=cilium` | 重启 CNI DaemonSet |
+| 跨节点 Pod 不通 | 路由/隧道配置错误 | `ip route show` / `cilium status` | 检查节点间路由 |
+| Service 无法访问 | kube-proxy/eBPF 异常 | `iptables -t nat -L -n` / `cilium service list` | 重启 kube-proxy 或 Cilium |
+| 网络策略不生效 | 策略引擎未启用 | `kubectl get networkpolicy -A` | 确认 CNI 支持 NetworkPolicy |
+| DNS 解析失败 | CoreDNS 网络不通 | `kubectl exec -it <pod> -- nslookup kubernetes.default` | 检查 Pod 到 CoreDNS 连通性 |
+| 高延迟/丢包 | MTU 不匹配 | `ping -s 1472 -M do <target>` | 调整 CNI MTU 配置 |
+
+## 监控指标
+
+### Cilium 关键指标
+
+```yaml
+# PrometheusRule - Cilium 告警
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cilium-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: cilium.rules
+    rules:
+    - alert: CiliumAgentDown
+      expr: up{job="cilium"} == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Cilium Agent 不可用"
+        description: "节点 {{ $labels.instance }} 的 Cilium Agent 已停止 5 分钟"
+    - alert: CiliumEndpointNotReady
+      expr: cilium_endpoint_state{state="ready"} == 0
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Cilium Endpoint 未就绪"
+    - alert: CiliumPolicyDropsHigh
+      expr: rate(cilium_drop_count_total{reason="POLICY_DENIED"}[5m]) > 100
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "策略拒绝流量过高"
+```
+
+### Calico 关键指标
+
+```bash
+# 🟢 低风险：查看 Calico 节点状态
+calicoctl node status
+
+# 🟢 低风险：查看 BGP Peer 状态
+calicoctl get bgppeer -o wide
+
+# 🟢 低风险：查看 Felix 指标
+curl -s http://localhost:9091/metrics | grep felix
+
+# 🟢 低风险：查看 iptables 规则数量
+iptables -t filter -L -n | wc -l
+```
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **版本管理** | 使用 Helm 管理 CNI | 便于升级和回滚 |
+| **资源预留** | 为 CNI Pod 设置 requests/limits | 避免资源竞争 |
+| **日志级别** | 生产环境使用 INFO | DEBUG 仅用于排障 |
+| **健康检查** | 配置 liveness/readiness probe | 自动恢复异常节点 |
+| **监控告警** | 部署 Prometheus + Grafana | 实时掌握网络状态 |
+| **备份配置** | 定期备份 CNI ConfigMap | 便于灾难恢复 |
+| **升级策略** | 滚动升级，先测试环境 | 避免全集群故障 |
+
+## 升级与回滚
+
+### Cilium 升级
+
+```bash
+# 🟡 中风险：升级 Cilium
+# 1. 备份当前配置
+kubectl get cm -n kube-system cilium-config -o yaml > cilium-config-backup.yaml
+
+# 2. 升级（使用 Helm）
+helm upgrade cilium cilium/cilium \
+  --namespace kube-system \
+  --version 1.15.0 \
+  --reuse-values
+
+# 3. 验证升级
+kubectl rollout status ds/cilium -n kube-system
+cilium status --wait
+
+# 4. 连通性测试
+cilium connectivity test
+```
+
+### 回滚操作
+
+```bash
+# 🔴 高风险：回滚 CNI（可能导致短暂网络中断）
+# 1. 回滚 Helm Release
+helm rollback cilium <revision> -n kube-system
+
+# 2. 重启所有 CNI Pod
+kubectl rollout restart ds/cilium -n kube-system
+
+# 3. 验证回滚
+kubectl get pods -n kube-system -l k8s-app=cilium
+cilium status
+```
+
+## 容量规划
+
+### 节点规模与 CNI 选择
+
+| 集群规模 | 推荐 CNI | 配置要点 |
+|---------|---------|----------|
+| < 50 节点 | Flannel/Calico | 默认配置即可 |
+| 50-500 节点 | Calico/Cilium | 调整 BPF Map 大小 |
+| 500-2000 节点 | Cilium | 启用 eBPF，禁用 kube-proxy |
+| > 2000 节点 | Cilium | 集群分片，ClusterMesh 联邦 |
+
+### IP 地址规划
+
+```yaml
+# 示例：大规模集群 IP 规划
+# Pod CIDR: 10.0.0.0/8 (16M IPs)
+# 每节点 /24 (254 Pods)
+# 最多支持 65536 节点
+
+# Service CIDR: 172.16.0.0/12 (1M IPs)
+# 每 Service 1 IP
+
+# 节点 CIDR: 192.168.0.0/16 (65K IPs)
+# 每节点 1 IP
+```
+
 ## Related
 
 - [[网络/eBPF/index.md|eBPF 网络]]

@@ -83,6 +83,94 @@ base_confidence: 0.7
 | `evt_kubelet_cert` | 证书/鉴权失败 | `ssh 
 ...(截断)
 
+## 生产案例
+
+### 案例1: 节点 NotReady - kubelet 证书过期
+
+**时间线**:
+- 03:00 凌晨告警: 3 个节点 NotReady
+- 03:05 检查 kubelet 日志: `certificate has expired`
+- 03:10 确认根因: kubeadm 签发的 kubelet 客户端证书 1 年过期
+- 03:15 执行证书轮转，节点恢复 Ready
+
+**根因链**:
+```
+kubeadm签发证书(1年有效期) → 未配置自动轮转 → 证书过期
+→ kubelet无法连接apiserver → 节点NotReady → Pod被驱逐
+```
+
+**修复**:
+```bash
+# 🟡 手动轮转 kubelet 证书
+kubeadm certs renew all
+systemctl restart kubelet
+# 🟢 验证节点状态
+kubectl get nodes -w
+# 🟡 启用自动证书轮转
+# kubelet 配置: rotateCertificates: true
+```
+
+### 案例2: 节点磁盘压力导致 Pod 被驱逐
+
+**现象**: 大量 Pod 被 Evicted，`kubectl describe node` 显示 `DiskPressure=True`
+
+**根因**: 容器日志未轮转，/var/lib/docker 磁盘使用率超过 85% 触发 kubelet 驱逐
+
+**修复**:
+```bash
+# 🟢 检查磁盘使用
+df -h /var/lib/docker /var/lib/kubelet
+# 🟡 清理无用镜像和容器
+crictl rmi --prune
+# 🟡 配置日志轮转
+# /etc/docker/daemon.json: {"log-opts": {"max-size": "100m", "max-file": "3"}}
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: node-alerts
+  rules:
+  - alert: NodeNotReady
+    expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: NodeDiskPressure
+    expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+    for: 5m
+    labels:
+      severity: warning
+  - alert: NodeHighCPU
+    expr: 1 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance) > 0.9
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 证书自动轮转 | 启用 rotateCertificates + serverTLSBootstrap | P0 |
+| 磁盘监控 | /var/lib/docker 和 /var/lib/kubelet 单独分区 | P0 |
+| 日志轮转 | 容器日志限制大小和数量 | P0 |
+| 节点健康检查 | NPD(Node Problem Detector) | P1 |
+
+## 面试要点
+
+1. **Q: 节点 NotReady 的排查路径？**
+   A: 检查 kubelet 状态(systemctl status kubelet) → 查看 kubelet 日志 → 验证证书有效期 → 检查网络连通性(apiserver) → 确认资源压力(Disk/Memory/PID)
+
+2. **Q: kubelet 驱逐机制的触发条件？**
+   A: memory.available < 100Mi / nodefs.available < 10% / imagefs.available < 15%；按 QoS 优先级驱逐: BestEffort > Burstable > Guaranteed
+
+3. **Q: 如何避免节点证书过期？**
+   A: 启用 kubelet rotateCertificates → 配置 kubeadm 自动审批 CSR → 监控证书剩余有效期 → 定期执行 kubeadm certs check-expiration
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

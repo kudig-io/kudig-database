@@ -171,6 +171,98 @@ Calico 提供网络策略和 CNI 实现。
 2. **统一控制面**：Istio v1.5+ istiod 单一进程
 3. **扩展性**：WebAssembly 过滤器、自定义扩展
 
+## 源码实现分析
+
+### Istio Sidecar 流量劫持
+
+```go
+// istio.io/istio/pilot/pkg/networking/core/v1alpha3/listener.go
+// Istio 流量劫持核心逻辑
+func (configgen *ConfigGeneratorImpl) buildSidecarListeners(proxy *model.Proxy) []*listener.Listener {
+    // 1. iptables 劫持所有入站流量到 15006 端口
+    // 2. iptables 劫持所有出站流量到 15001 端口
+    
+    // 3. Envoy 根据 VirtualService/DestinationRule 路由
+    for _, service := range configgen.Services(proxy) {
+        // 生成 Envoy cluster 配置
+        cluster := buildCluster(service)
+        // 负载均衡策略: ROUND_ROBIN / LEAST_REQUEST / RING_HASH
+        cluster.LbPolicy = getLbPolicy(destinationRule)
+    }
+    
+    // 4. mTLS 自动加密服务间通信
+    // PeerAuthentication 控制 STRICT/PERMISSIVE/DISABLE
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     Service Mesh 演进路线                              │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Gen 1: Sidecar Proxy (2017-2021)                      │
+│    Istio + Envoy sidecar                                │
+│    └─ 问题: 资源开销大、延迟增加、升级复杂          │
+│                                                         │
+│  Gen 2: Sidecarless (2022-2024)                        │
+│    Cilium Service Mesh / Linkerd2-proxy                 │
+│    └─ eBPF 内核态处理 L3/L4，减少 sidecar 开销     │
+│                                                         │
+│  Gen 3: Ambient Mesh (2023+)                           │
+│    Istio Ambient: ztunnel (L4) + waypoint (L7)         │
+│    └─ 无 sidecar，按需部署 L7 代理                  │
+│                                                         │
+│  趋势: eBPF + Wasm + 无 Sidecar                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：Service Mesh 诊断
+
+```bash
+# 🟢 Istio 状态检查
+istioctl proxy-status
+istioctl analyze -A
+
+# 🟢 检查 sidecar 注入
+kubectl get pods -n <ns> -o jsonpath='{.items[*].spec.containers[*].name}' | grep istio-proxy
+
+# 🟢 Envoy 配置调试
+istioctl proxy-config clusters <pod> -n <ns>
+istioctl proxy-config routes <pod> -n <ns>
+
+# 🟡 检查 mTLS 状态
+istioctl authn tls-check <pod>.<ns>.svc.cluster.local
+
+# 🟢 查看服务间流量
+kubectl exec -n <ns> <pod> -c istio-proxy -- curl -s localhost:15000/stats | grep upstream_rq
+```
+
+## 面试要点
+
+1. **Service Mesh 的核心价值是什么？**
+   - 将网络策略（重试/超时/熔断）从应用代码下沉到基础设施
+   - 统一的可观测性（流量指标/分布式追踪）
+   - 零信任安全（mTLS 自动加密）
+   - 流量管理（金丝雀/流量镜像/故障注入）
+
+2. **Istio Ambient Mesh 与 Sidecar 模式的区别？**
+   - Sidecar：每 Pod 一个 Envoy，资源开销大（~100m CPU/Pod）
+   - Ambient：ztunnel（每节点）处理 L4 + waypoint（按需）处理 L7
+   - Ambient 减少资源开销 50%+，升级不影响业务 Pod
+   - 但 L7 策略需要部署 waypoint proxy
+
+3. **Cilium Service Mesh 与传统 Mesh 的区别？**
+   - 无 sidecar：eBPF 在内核态处理 L3/L4 策略
+   - 性能更好：无额外网络跳转，延迟增加 < 1ms
+   - L7 策略通过 Envoy 代理（按需部署）
+   - 与 CNI 深度集成，无需额外网络层
+
+4. **如何评估是否需要 Service Mesh？**
+   - 需要：微服务 > 20 个、多语言、需要 mTLS、复杂流量管理
+   - 不需要：服务少、单语言、简单拓扑、团队规模小
+   - 替代方案：Ingress + NetworkPolicy + SDK（如 Spring Cloud）
+   - 评估维度：复杂度收益比、团队能力、性能影响
+
 ## 来源文档
 
 - 生态参考/_archived-release-notes/networking/istio/（38 个文件）

@@ -278,6 +278,63 @@ kubectl run test --image=busybox --rm -it -- wget -qO- <service-ip>
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| Service 无法访问 | Endpoints 为空 | `kubectl get endpoints <svc>` | 检查 Pod selector 匹配 |
+| ClusterIP 不通 | kube-proxy 异常 | `kubectl get pods -n kube-system -l k8s-app=kube-proxy` | 重启 kube-proxy |
+| NodePort 无法访问 | 防火墙/安全组 | `curl http://<node-ip>:<nodeport>` | 开放节点端口 |
+| LoadBalancer Pending | 云厂商配额不足 | `kubectl describe svc <svc>` | 检查 SLB 配额 |
+| DNS 解析失败 | CoreDNS 异常 | `kubectl exec -it <pod> -- nslookup <svc>` | 检查 CoreDNS 状态 |
+| 会话保持失效 | sessionAffinity 未配置 | `kubectl get svc <svc> -o yaml` | 配置 ClientIP 亲和 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **模式选择** | 大规模使用 IPVS/eBPF | 避免 iptables 性能瓶颈 |
+| **健康检查** | 配置 readinessProbe | 确保流量只到健康 Pod |
+| **外部流量** | 生产用 externalTrafficPolicy: Local | 保留客户端真实 IP |
+| **资源限制** | 为 kube-proxy 设置 limits | 避免资源竞争 |
+| **监控告警** | 部署 Service 指标监控 | 实时掌握 Endpoints 状态 |
+| **超时配置** | 合理设置 sessionAffinity timeout | 平衡会话保持与负载均衡 |
+
+## 性能调优
+
+```bash
+# 🟢 低风险：检查 kube-proxy 模式
+kubectl get cm -n kube-system kube-proxy -o yaml | grep mode
+
+# 🟢 低风险：查看 IPVS 规则
+ipvsadm -Ln
+
+# 🟢 低风险：检查 conntrack 使用
+conntrack -L | wc -l
+cat /proc/sys/net/netfilter/nf_conntrack_max
+
+# 🟡 中风险：调整 conntrack 大小
+echo 1048576 > /proc/sys/net/netfilter/nf_conntrack_max
+```
+
+## 版本兼容性
+
+| Kubernetes 版本 | kube-proxy 模式 | EndpointSlice | 拓扑感知 |
+|----------------|----------------|---------------|----------|
+| v1.25-v1.27 | iptables/IPVS | GA | Beta |
+| v1.28-v1.29 | iptables/IPVS/nftables | GA | GA |
+| v1.30+ | iptables/IPVS/nftables/eBPF | GA | GA + TrafficDistribution |
+
+## 相关工具
+
+| 工具 | 用途 | 安装 |
+|------|------|------|
+| `ipvsadm` | IPVS 规则管理 | `yum install ipvsadm` |
+| `conntrack` | 连接跟踪管理 | `yum install conntrack-tools` |
+| `kubectl` | K8s 资源管理 | 官方文档 |
+| `dig` | DNS 解析验证 | `yum install bind-utils` |
+| `curl` | 服务连通性测试 | 系统内置 |
+
 ## See Also
 
 - 05-terway-advanced-guide

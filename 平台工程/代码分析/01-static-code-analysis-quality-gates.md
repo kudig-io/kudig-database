@@ -317,6 +317,95 @@ rules:
 | 豁免机制 | 有审批的例外流程 |
 | 度量趋势 | 追踪质量指标变化 |
 
+## 故障排查
+
+### 常见问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| kube-linter 报错过多 | 规则太严格 | 调整 `.kube-linter.yaml` 排除规则 |
+| Trivy 扫描超时 | 镜像太大 | 使用 `--timeout 10m` 增加超时 |
+| conftest 策略不生效 | 策略语法错误 | `conftest verify` 验证策略 |
+| CI 流水线太慢 | 扫描步骤串行 | 并行执行 lint/security 任务 |
+| 误报太多 | 规则不适合项目 | 添加豁免注释或调整策略 |
+
+### 豁免机制
+
+```yaml
+# 临时豁免（带过期时间）
+# kube-linter:ignore {"checks":["no-latest-image"],"reason":"测试环境","expiry":"2026-08-01"}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: myapp:latest  # 临时使用 latest
+```
+
+```rego
+# OPA 策略豁免
+package main
+
+import future.keywords.if
+
+# 豁免列表
+exempt_namespaces := {"kube-system", "monitoring", "logging"}
+
+is_exempt if {
+    input.metadata.namespace in exempt_namespaces
+}
+
+deny[msg] if {
+    not is_exempt
+    # ... 检查逻辑
+}
+```
+
+## 质量度量仪表板
+
+### Prometheus 指标
+
+```yaml
+# 质量门禁指标
+quality_gate_checks_total{tool="kube-linter",status="pass|fail"}
+quality_gate_checks_total{tool="trivy",status="pass|fail"}
+quality_gate_checks_total{tool="conftest",status="pass|fail"}
+
+# 问题趋势
+quality_gate_issues_total{severity="critical|high|medium|low"}
+quality_gate_fix_rate  # 修复率
+```
+
+### Grafana Dashboard
+
+```json
+{
+  "dashboard": {
+    "title": "代码质量概览",
+    "panels": [
+      {
+        "title": "质量门禁通过率",
+        "type": "stat",
+        "targets": [
+          { "expr": "sum(rate(quality_gate_checks_total{status=\"pass\"}[7d])) / sum(rate(quality_gate_checks_total[7d])) * 100" }
+        ]
+      },
+      {
+        "title": "问题趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "sum(quality_gate_issues_total) by (severity)" }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Related
 
 - [[平台工程/代码分析/index.md|代码分析]]

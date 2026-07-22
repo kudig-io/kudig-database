@@ -266,15 +266,321 @@ Kubernetes 工具生态是云原生开发运维的效率倍增器，包括：
 专家: 自定义 CLI 插件 → Operator SDK → 工具链集成
 ```
 
+## 深度技术解析
+
+### Helm 架构与工作原理
+
+Helm 3 采用无 Tiller 架构，核心组件：
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Helm Client                           │
+├─────────────────────────────────────────────────────────┤
+│  Chart Loader → Template Engine → K8s Client Library    │
+│       │              │                    │              │
+│  values.yaml    Go templates      REST API calls        │
+│  Chart.yaml     _helpers.tpl      Release tracking      │
+│  templates/     NOTES.txt         History management    │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Release 存储机制**：Helm 3 将 Release 信息存储为 Secret（默认）或 ConfigMap：
+
+```bash
+# 查看 Release 存储
+kubectl get secrets -n <namespace> -l owner=helm
+# 解码 Release 数据
+kubectl get secret sh.helm.release.v1.myapp.v1 -o jsonpath='{.data.release}' | base64 -d | base64 -d | gunzip
+```
+
+**模板渲染流程**：
+1. 加载 Chart.yaml + values.yaml + 用户 --set/--values
+2. 合并 Values（优先级：--set > -f > Chart defaults）
+3. 执行 Go template 渲染 templates/ 目录
+4. 调用 K8s API 创建/更新资源
+5. 记录 Release 历史（Secret/ConfigMap）
+
+### Kustomize 工作原理
+
+Kustomize 通过 kustomization.yaml 定义配置转换管道：
+
+```yaml
+# kustomization.yaml 核心字段
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:              # 基础配置（已废弃，用 resources 替代）
+  - ../../base
+
+resources:          # 资源列表
+  - deployment.yaml
+  - service.yaml
+
+patches:            # 补丁（Strategic Merge / JSON Patch）
+  - path: patch.yaml
+    target:
+      kind: Deployment
+      name: myapp
+
+transformers:       # 转换器
+  - name-prefix: prod-
+  - namespace: production
+
+images:             # 镜像标签覆盖
+  - name: myapp
+    newTag: v2.0.0
+
+configMapGenerator: # 自动生成 ConfigMap
+  - name: app-config
+    files:
+      - config.properties
+```
+
+**Helm vs Kustomize 深度对比**：
+
+| 维度 | Helm | Kustomize |
+|------|------|----------|
+| 模板引擎 | Go templates | 无模板，纯 YAML 叠加 |
+| 学习曲线 | 中等（模板语法） | 低（纯 YAML） |
+| 生态 | Chart 仓库、Artifact Hub | K8s 内置（kubectl -k） |
+| 复杂逻辑 | 支持条件/循环 | 不支持（需外部工具） |
+| 调试 | helm template --debug | kustomize build |
+| 版本管理 | Chart 版本 + App 版本 | Git 版本控制 |
+| 适用场景 | 通用应用分发 | 环境差异化配置 |
+
+### 镜像构建流水线
+
+生产级镜像构建流水线架构：
+
+```
+源码提交 → CI 触发 → 构建镜像 → 扫描 → 签名 → 推送 → 部署
+   │          │         │        │       │       │       │
+  Git      GitHub    BuildKit  Trivy  Cosign  Harbor  ArgoCD
+  Push     Actions   Kaniko    Grype  Notary  ACR     Flux
+```
+
+**BuildKit 高级特性**：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+# 缓存挂载 - 加速依赖下载
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/go/pkg/mod \
+    go build -o /app .
+
+# 密钥挂载 - 不泄露到镜像层
+RUN --mount=type=secret,id=npm_token \
+    npm ci --registry=https://$(cat /run/secrets/npm_token)@registry.example.com
+
+# SSH 挂载 - 私有仓库访问
+RUN --mount=type=ssh git clone git@github.com:org/private-repo.git
+```
+
+### Harbor 企业级架构
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                      Harbor                              │
+├──────────┬──────────┬──────────┬──────────┬─────────────┤
+│  Core    │ Registry │  DB      │  Redis   │  Trivy      │
+│  (API)   │ (存储)   │(Postgres)│ (缓存)   │ (扫描)      │
+├──────────┴──────────┴──────────┴──────────┴─────────────┤
+│  功能: RBAC | 复制 | 扫描 | 签名 | 垃圾回收 | 配额      │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Harbor 生产配置要点**：
+- 存储后端：S3/GCS/Azure Blob（生产）vs 本地文件系统（开发）
+- 高可用：Core 多副本 + 外部 PostgreSQL + 外部 Redis
+- 复制策略：Push-based（主动推送）vs Pull-based（被动拉取）
+- 垃圾回收：定期执行，避免存储膨胀
+
+## 生产案例
+
+### 案例 1：Helm Chart 模板渲染失败
+
+**现象**：`helm upgrade` 报错 `template: mychart/templates/deployment.yaml:25: unexpected "{" in operand`
+
+**根因**：values.yaml 中包含 Go template 特殊字符 `{}`，未正确转义
+
+**解决**：
+```yaml
+# 错误：直接包含花括号
+config: |
+  server { listen 80; }
+
+# 正确：使用 toYaml 或 nindent
+config: |
+  {{ .Values.nginxConfig | nindent 4 }}
+```
+
+### 案例 2：Kind 集群 DNS 解析超时
+
+**现象**：Pod 内 DNS 查询偶尔超时，影响服务发现
+
+**根因**：Kind 使用 Docker 网络，ndots 默认值 5 导致过多 DNS 查询
+
+**解决**：
+```yaml
+# Pod DNS 配置优化
+dnsConfig:
+  options:
+    - name: ndots
+      value: "2"
+    - name: single-request-reopen
+```
+
+### 案例 3：镜像构建缓存失效
+
+**现象**：CI 构建时间从 2 分钟增长到 15 分钟
+
+**根因**：COPY 指令顺序不当，代码变更导致依赖层缓存失效
+
+**解决**：
+```dockerfile
+# 先复制依赖文件，利用缓存
+COPY go.mod go.sum ./
+RUN go mod download
+# 再复制源码
+COPY . .
+RUN go build -o /app .
+```
+
+## 命令速查
+
+### kubectl 高级用法
+
+```bash
+# 自定义输出列
+kubectl get pods -o custom-columns='NAME:.metadata.name,CPU:.spec.containers[0].resources.requests.cpu'
+
+# 批量操作
+kubectl get pods -l app=myapp -o name | xargs -I{} kubectl delete {}
+
+# 实时资源使用
+kubectl top pods --sort-by=memory -n production
+
+# 调试容器
+kubectl debug -it pod/myapp --image=nicolaka/netshoot --target=myapp
+
+# 服务端 dry-run
+kubectl apply -f deploy.yaml --dry-run=server -o yaml
+
+# 查看 API 资源
+kubectl api-resources --verbs=list --namespaced -o name
+```
+
+### Helm 运维命令
+
+```bash
+# 查看 Release 历史
+helm history myapp -n production
+
+# 回滚到指定版本
+helm rollback myapp 3 -n production
+
+# 渲染模板（不安装）
+helm template myapp ./chart -f values-prod.yaml --debug
+
+# 查看 Chart 依赖
+helm dependency list ./chart
+
+# 搜索 Artifact Hub
+helm search hub wordpress --max-col-width 80
+
+# 导出 Chart 值
+helm show values bitnami/redis > redis-values.yaml
+```
+
+### 镜像管理命令
+
+```bash
+# BuildKit 构建（启用缓存）
+DOCKER_BUILDKIT=1 docker build --cache-from=registry/myapp:latest -t myapp:v1 .
+
+# 多平台构建
+docker buildx build --platform linux/amd64,linux/arm64 -t myapp:v1 --push .
+
+# 镜像瘦身检查
+docker history myapp:v1 --no-trunc --format '{{.Size}}\t{{.CreatedBy}}'
+
+# Trivy 扫描
+trivy image --severity HIGH,CRITICAL myapp:v1
+
+# Cosign 签名
+cosign sign --key cosign.key registry.example.com/myapp:v1
+cosign verify --key cosign.pub registry.example.com/myapp:v1
+```
+
+## FAQ
+
+**Q: Helm 和 Kustomize 能否结合使用？**
+A: 可以。Helm 负责应用打包和分发，Kustomize 负责环境差异化。常见模式：`helm template` 输出作为 Kustomize base，再用 overlay 定制环境参数。Helm 3 也支持 post-renderer 调用 Kustomize。
+
+**Q: Kind 和 Minikube 如何选择？**
+A: Kind 更适合 CI/CD（启动快、资源少、多节点模拟）；Minikube 更适合本地开发学习（驱动丰富、插件生态、Dashboard）。生产模拟选 Kind，功能探索选 Minikube。
+
+**Q: 镜像仓库如何选型？**
+A: 企业级选 Harbor（功能全面、CNCF 毕业）；轻量级选 Zot（纯 Go、OCI 原生）；云环境优先用云厂商托管（ACR/ECR/GCR）；大规模分发加 Dragonfly P2P 加速。
+
+**Q: Skaffold 和 Tilt 如何对比？**
+A: Skaffold 更成熟（Google 维护、与 Cloud Code 集成）；Tilt 更现代（实时 UI、Starlark 扩展、多服务编排）。简单项目选 Skaffold，复杂微服务选 Tilt。
+
+## 版本兼容矩阵
+
+| 工具 | 当前稳定版 | K8s 兼容 | 关键变更 |
+|------|-----------|----------|----------|
+| kubectl | 1.31 | ±1 版本偏差 | kubectl apply --server-side 默认 |
+| Helm | 3.16 | 1.25+ | OCI Registry 支持 GA |
+| Kustomize | 5.5 | 1.31 | kubectl -k 内置 |
+| Kind | 0.24 | 1.31 | 多节点网络改进 |
+| Minikube | 1.34 | 1.31 | containerd 默认运行时 |
+| k3s | 1.31 | - | SQLite→etcd 可选 |
+| Harbor | 2.12 | - | OCI Artifact 支持 |
+| Skaffold | 2.13 | 1.25+ | 远程开发支持 |
+| Buildpacks | 0.36 | - | SBOM 生成 |
+| Podman | 5.3 | - | Quadlet 系统服务 |
+
+## 缩略语表
+
+| 缩略语 | 全称 | 说明 |
+|--------|------|------|
+| CLI | Command Line Interface | 命令行界面 |
+| IaC | Infrastructure as Code | 基础设施即代码 |
+| OCI | Open Container Initiative | 开放容器标准 |
+| CRD | Custom Resource Definition | 自定义资源定义 |
+| SBOM | Software Bill of Materials | 软件物料清单 |
+| CVE | Common Vulnerabilities and Exposures | 通用漏洞披露 |
+| CRI | Container Runtime Interface | 容器运行时接口 |
+| CNI | Container Network Interface | 容器网络接口 |
+| CSI | Container Storage Interface | 容器存储接口 |
+| CDK | Cloud Development Kit | 云开发工具包 |
+
+## 检查清单
+
+### 工具链就绪检查
+
+- [ ] kubectl 版本与集群版本偏差 ≤ 1
+- [ ] kubeconfig 配置正确（`kubectl config current-context`）
+- [ ] Helm 仓库已更新（`helm repo update`）
+- [ ] 镜像仓库认证配置（docker config / imagePullSecrets）
+- [ ] 本地开发集群资源充足（CPU ≥ 4核, 内存 ≥ 8GB）
+- [ ] 镜像扫描工具已集成 CI（Trivy/Grype）
+- [ ] 镜像签名工具已配置（Cosign/Notary）
+- [ ] 构建缓存策略已优化（BuildKit cache mount）
+
 ## 参考链接
 
 - https://kubernetes.io/docs/reference/kubectl/
-- https://helm.sh/
+- https://helm.sh/docs/
 - https://kubectl.docs.kubernetes.io/
 - https://minikube.sigs.k8s.io/
 - https://kind.sigs.k8s.io/
-- https://goharbor.io/
+- https://goharbor.io/docs/
 - https://skaffold.dev/
+- https://buildpacks.io/
+- https://docs.docker.com/build/buildkit/
+- https://github.com/GoogleContainerTools/jib
 
 ## Related
 

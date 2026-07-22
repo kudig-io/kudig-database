@@ -75,54 +75,132 @@ KitOps 与 Kubernetes 通过推理框架（KServe、vLLM、Triton）集成。Mod
 3. **模型审计**：通过 ModelKit 的 OCI 签名验证模型完整性，满足合规审计
 4. **团队协作**：数据科学家通过 Registry 共享 ModelKit，推理工程师拉取部署
 
-## 安装
+## 安装与配置
+
+### CLI 安装
 
 ```bash
-# 安装 kit CLI
+# macOS
 brew tap kitops/kitops
 brew install kitops
-# 或
+
+# Linux
 curl -fsSL https://github.com/kitops-ml/kitops/releases/latest/download/kit-linux-amd64 -o kit
 chmod +x kit && sudo mv kit /usr/local/bin/
 
-# 创建 Kitfile
-cat > Kitfile <<EOF
+# 验证安装
+kit version
+```
+
+### Kitfile 配置
+
+```yaml
+# Kitfile - 模型打包配置
 manifestVersion: 1.0.0
 package:
   name: sentiment-bert
   version: 1.0.0
   description: BERT sentiment analysis model
+  authors:
+    - ml-team@example.com
 model:
   name: bert-base-sentiment
   path: ./model/
   framework: pytorch
+  license: Apache-2.0
 code:
   - path: ./src/inference.py
     description: Inference script
+  - path: ./src/preprocess.py
+    description: Data preprocessing
 datasets:
   - name: training-data
     path: ./data/train.csv
+    description: Training dataset
 docs:
   - path: ./README.md
-EOF
+```
 
+### 打包与分发
+
+```bash
 # 打包 ModelKit
 kit pack .
+
 # 推送到 OCI Registry
 kit push sentiment-bert:1.0.0 registry.example.com/models/sentiment-bert:1.0.0
+
 # 在部署环境拉取
 kit pull registry.example.com/models/sentiment-bert:1.0.0
+
+# 解包到指定目录
 kit unpack sentiment-bert:1.0.0 --destdir /app/model
+
+# 查看 ModelKit 内容
+kit inspect sentiment-bert:1.0.0
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看本地 ModelKit
+kit list
+
+# 🟢 检查 ModelKit 内容
+kit inspect sentiment-bert:1.0.0
+
+# 🟡 更新 ModelKit 版本
+kit pack . --tag sentiment-bert:1.1.0
+kit push sentiment-bert:1.1.0 registry.example.com/models/sentiment-bert:1.1.0
+
+# 🔴 删除本地 ModelKit
+kit rmi sentiment-bert:1.0.0
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| pack 失败 | Kitfile 语法错误 | `kit pack . --dry-run` | 检查 Kitfile YAML 语法 |
+| push 失败 | Registry 认证失败 | `kit login registry.example.com` | 重新登录 |
+| unpack 失败 | 磁盘空间不足 | `df -h` | 清理磁盘 |
+| 模型文件缺失 | path 配置错误 | 检查 Kitfile model.path | 修正路径 |
+
+**排查流程：**
+```
+ModelKit 操作失败
+├── 检查 Kitfile 语法 → kit pack . --dry-run
+├── 检查文件存在 → ls ./model/ ./src/
+├── 检查 Registry 连接 → kit login
+├── 检查磁盘空间 → df -h
+└── 查看详细日志 → kit pack . --verbose
+```
+
+## 生产案例
+
+### 案例一：MLOps 模型版本管理
+
+- **场景**: ML 团队需要管理多个模型版本，确保模型+代码+数据一致性
+- **排查**: 之前模型、代码、数据分散存储，版本不匹配
+- **方案**: KitOps 将模型+代码+数据打包为 ModelKit，OCI Registry 统一管理
+- **效果**: 模型部署一致性 100%，版本回滚 < 1min
+
+### 案例二：模型分发与部署
+
+- **场景**: 训练环境和推理环境分离，需要安全分发模型
+- **排查**: 使用 OCI Registry 分发，复用现有容器基础设施
+- **方案**: 训练环境 kit push，推理环境 kit pull + unpack，集成 K8s 部署
+- **效果**: 模型分发时间从 30min 降至 2min，无需额外基础设施
 
 ## 对比
 
-| 特性 | KitOps | MLflow | DVC | Weights & Biases |
-|------|--------|--------|-----|-----------------|
-| OCI 打包 | ✅ | ❌ | ❌ | ❌ |
-| 模型+代码+数据一体 | ✅ | ⚠️ | ⚠️ | ❌ |
-| Registry 分发 | ✅ 标准 OCI | ❌ | ⚠️ | ❌ |
-| 开源 | ✅ | ✅ | ✅ | ❌ |
+| 特性 | KitOps | MLflow | DVC | Weights & Biases | 适用场景 |
+|------|--------|--------|-----|-----------------|----------|
+| OCI 打包 | ✅ | ❌ | ❌ | ❌ | KitOps 独有 |
+| 模型+代码+数据一体 | ✅ | ⚠️ | ⚠️ | ❌ | - |
+| Registry 分发 | ✅ 标准 OCI | ❌ | ⚠️ | ❌ | 复用现有基础设施 |
+| 开源 | ✅ | ✅ | ✅ | ❌ | - |
+| K8s 集成 | ✅ | ⚠️ | ❌ | ❌ | 云原生 |
 
 ## 参考链接
 

@@ -102,13 +102,110 @@ prerequisites:
 - [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
+## 升级前检查命令
+
+```bash
+# 🟢 检查当前集群版本
+kubectl version --short 2>/dev/null || kubectl version
+
+# 🟢 检查已弃用 API 使用情况
+kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+
+# 🟢 使用 kubent 检测弃用 API
+kubent  # 扫描集群中使用的弃用 API
+
+# 🟢 使用 pluto 检测弃用 API
+pluto detect-all-in-cluster
+
+# 🟢 检查节点版本一致性
+kubectl get nodes -o custom-columns=NAME:.metadata.name,VERSION:.status.nodeInfo.kubeletVersion
+
+# 🟢 检查控制平面组件版本
+kubectl get pods -n kube-system -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image | grep -E 'apiserver|scheduler|controller'
+
+# 🟢 检查 CRD API 版本
+kubectl get crd -o custom-columns=NAME:.metadata.name,VERSIONS:.spec.versions[*].name | head -20
+
+# 🟢 检查 PodSecurityPolicy (v1.25 前)
+kubectl get psp -A 2>/dev/null || echo "PSP not available (v1.25+)"
+
+# 🟢 检查 Pod Security Admission (v1.25+)
+kubectl get namespaces -o custom-columns=NAME:.metadata.name,PSA:.metadata.labels | grep pod-security
+```
+
+## 版本升级路径建议
+
+| 当前版本 | 目标版本 | 升级策略 | 关键注意事项 |
+|----------|----------|----------|----------------|
+| v1.24 | v1.25 | 滚动升级 | PSP 移除，迁移到 PSA |
+| v1.25 | v1.26 | 滚动升级 | CRI v1alpha2 移除 |
+| v1.26 | v1.27 | 滚动升级 | SeccompDefault 默认启用 |
+| v1.27 | v1.28 | 滚动升级 | 无重大 Breaking |
+| v1.28 | v1.29 | 滚动升级 | FlowSchema GA |
+| v1.29 | v1.30 | 滚动升级 | Sidecar 容器 alpha |
+| v1.30+ | 最新 | 滚动升级 | 检查弃用 API |
+
+## 升级操作流程
+
+```
+Kubernetes 版本升级
+├── 1. 升级前评估
+│   ├── 阅读目标版本 CHANGELOG
+│   ├── 运行 kubent/pluto 检测弃用 API
+│   ├── 检查插件兼容性 (CNI/CSI/Ingress)
+│   └── 备份 etcd 数据
+├── 2. 测试环境验证
+│   ├── 在测试集群执行升级
+│   ├── 运行全量回归测试
+│   └── 验证关键业务功能
+├── 3. 生产环境升级
+│   ├── 升级控制平面 (Master)
+│   ├── 逐批升级 Worker 节点
+│   ├── 每批验证业务正常
+│   └── 更新 kubectl 客户端
+└── 4. 升级后验证
+    ├── kubectl get nodes → 所有节点 Ready
+    ├── kubectl get pods -A → 无异常 Pod
+    ├── 业务功能验证
+    └── 监控指标正常
+```
+
+## 弃用 API 迁移指南
+
+| 弃用 API | 替代 API | 移除版本 | 迁移命令 |
+|----------|----------|----------|----------|
+| extensions/v1beta1 Ingress | networking.k8s.io/v1 | v1.22 | `kubectl convert` |
+| policy/v1beta1 PSP | Pod Security Admission | v1.25 | 迁移到 PSA 标签 |
+| batch/v1beta1 CronJob | batch/v1 | v1.25 | 更新 apiVersion |
+| discovery.k8s.io/v1beta1 | discovery.k8s.io/v1 | v1.25 | 更新 apiVersion |
+| flowcontrol/v1beta1 | flowcontrol/v1 | v1.29 | 更新 apiVersion |
+
+## 版本兼容性矩阵
+
+| K8s 版本 | kubectl 兼容 | etcd 版本 | containerd | CNI 版本 |
+|----------|-------------|----------|------------|----------|
+| v1.28 | ±1 版本 | 3.5.x | 1.7.x | 1.0 |
+| v1.29 | ±1 版本 | 3.5.x | 1.7.x | 1.0 |
+| v1.30 | ±1 版本 | 3.5.x | 1.7.x+ | 1.0 |
+| v1.31 | ±1 版本 | 3.5.x | 2.0.x | 1.0 |
+| v1.32+ | ±1 版本 | 3.5.x+ | 2.0.x | 1.0+ |
+
+## 检查清单
+
+- [ ] 已阅读目标版本 CHANGELOG 和 Breaking Changes
+- [ ] 已运行 kubent/pluto 检测弃用 API
+- [ ] 已验证插件兼容性 (CNI/CSI/Ingress/Monitoring)
+- [ ] 已备份 etcd 数据
+- [ ] 已在测试环境验证升级
+- [ ] 升级窗口已通知相关团队
+- [ ] 回滚方案已准备
+- [ ] 监控告警已配置
+
 ## Related
 
 - [[生态参考/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
-- [[实体/kudig-contribution-guide.md|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
-- [[生态参考/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
+- [[实体/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
 
 <!-- risk-assessed -->

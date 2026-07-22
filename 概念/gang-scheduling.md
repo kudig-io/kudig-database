@@ -168,6 +168,140 @@ spec:
 
 Kueue 会等待集群有足够资源时才准入 Workload，实现公平排队和资源分配。
 
+## 源码实现分析
+
+### Volcano Coscheduling 插件
+
+```go
+// volcano.sh/volcano/pkg/scheduler/plugins/coscheduling/coscheduling.go
+// Volcano Coscheduling 插件实现 gang 调度
+func (cs *Coscheduling) OnSessionOpen(ssn *framework.Session) {
+    // 1. 收集所有 PodGroup
+    podGroups := ssn.PodGroups()
+    
+    // 2. 对每个 PodGroup 检查 minAvailable
+    for _, pg := range podGroups {
+        minAvailable := pg.Spec.MinMember
+        pendingPods := ssn.PendingPods(pg)
+        
+        if len(pendingPods) < minAvailable {
+            // 资源不足，不调度，等待
+            ssn.AddPodGroupStatus(pg, v1beta1.PodGroupInqueue)
+            continue
+        }
+        
+        // 3. 尝试为所有 Pod 找节点（两阶段提交）
+        assignments := cs.tryAllocate(ssn, pendingPods)
+        if len(assignments) >= minAvailable {
+            // 4. 原子绑定所有 Pod
+            cs.bindAll(ssn, assignments)
+        } else {
+            // 回滚已预留的资源
+            cs.rollback(ssn, assignments)
+        }
+    }
+}
+```
+
+### Gang 调度架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          Gang 调度架构对比                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Volcano (专用调度器)                                    │
+│  ────────────────────                                    │
+│  PodGroup CR → Volcano Scheduler → Coscheduling 插件  │
+│       → 两阶段提交 (Reserve + Bind)                   │
+│       → 支持抢占、公平分享、队列                    │
+│                                                           │
+│  Kueue (队列管理器)                                      │
+│  ────────────────────                                    │
+│  Workload CR → ClusterQueue → LocalQueue              │
+│       → 资源配额检查 → 准入控制                     │
+│       → 与默认调度器配合使用                        │
+│                                                           │
+│  Scheduler Framework (原生)                              │
+│  ────────────────────                                    │
+│  K8s 1.32+ PodGroup API → Coscheduling 插件          │
+│       → 无需额外调度器，原生支持                    │
+│                                                           │
+│  适用场景:                                               │
+│  • AI 分布式训练 (PyTorch DDP / Horovod)              │
+│  • MPI 并行计算                                        │
+│  • Spark/Flink 批处理                                  │
+│  • 任何需要“全部或无”语义的工作负载              │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产配置示例（🟡 部署到集群）
+
+```yaml
+# Volcano PodGroup + Job 配置
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: PodGroup
+metadata:
+  name: training-job
+spec:
+  minMember: 4  # 至少 4 个 Pod 同时就绪
+  queue: gpu-queue
+  priorityClassName: high-priority
+---
+apiVersion: batch.volcano.sh/v1alpha1
+kind: Job
+metadata:
+  name: pytorch-training
+spec:
+  minAvailable: 4
+  schedulerName: volcano
+  tasks:
+  - replicas: 4
+    name: worker
+    template:
+      spec:
+        containers:
+        - name: pytorch
+          image: pytorch/pytorch:2.2
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+        restartPolicy: Never
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| Gang 调度适合所有工作负载 | 只适合“全部或无”场景，在线服务不应用 |
+| minMember 等于 replicas | minMember 可以小于 replicas，允许部分调度 |
+| Gang 调度不会死锁 | 多 gang 竞争资源可能死锁，需抢占机制 |
+| Kueue 可以替代 Volcano | Kueue 是队列管理，Volcano 是完整调度器 |
+| Gang 调度无性能开销 | 等待整组资源会增加调度延迟 |
+| Spot 实例适合 gang 调度 | Spot 回收导致级联失败，需特别配置 PDB |
+
+## 面试要点
+
+1. **Gang 调度解决什么问题？**
+   - 分布式训练需要所有 worker 同时就绪
+   - 避免部分 Pod 调度成功但无法开始工作
+   - “全部或无”语义，避免资源浪费
+
+2. **Volcano 与 Kueue 的区别和关系？**
+   - Volcano：完整调度器，替代默认调度器
+   - Kueue：队列管理器，与默认调度器配合
+   - Kueue 1.32+ 支持 PodGroup API，可与 Volcano 互补
+
+3. **Gang 调度的死锁问题如何解决？**
+   - 优先级抢占：高优先级 gang 可抢占低优先级 Pod
+   - Volcano reclaimAction：自动回收资源
+   - 合理设置队列配额，避免过度竞争
+
+4. **AI 训练场景如何配置 gang 调度？**
+   - PodGroup minMember = worker 数量
+   - 配合 GPU 资源请求（nvidia.com/gpu）
+   - 设置合理超时，避免无限等待
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

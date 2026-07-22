@@ -148,6 +148,110 @@ Kubernetes Audit Logging 提供四个级别：
 - **AI/ML 基础设施** → [[概念/k8s-ai-ml-infrastructure.md|k8s ai ml infrastructure]]：GPU 虚拟化、KSM 内存去重、NUMA 拓扑管理直接支撑 AI 训练/推理调度。
 - **安全合规** → [[概念/k8s-security-compliance.md|k8s security compliance]]：User Namespaces GA、机密计算、审计日志是合规基线的核心组件。
 
+## 源码实现分析
+
+### cgroup v2 资源控制
+
+```c
+// kernel/cgroup/cgroup.c
+// cgroup v2 统一层级：所有控制器在同一棵树
+static struct cgroup_subsys_state *css_create(struct cgroup *cgrp) {
+    // 创建 cgroup 目录：/sys/fs/cgroup/<path>/
+    // 写入资源限制：
+    // cpu.max: "100000 100000" (1 CPU)
+    // memory.max: "536870912" (512Mi)
+    // io.max: "8:0 rbps=1048576 wbps=1048576"
+}
+
+// kubelet 通过 cgroupfs 驱动设置 Pod 资源限制
+// /sys/fs/cgroup/kubepods.slice/kubepods-pod<uid>.slice/
+//   ├── cpu.max          ← CPU limit
+//   ├── memory.max       ← Memory limit
+//   └── memory.high      ← Memory throttle 阈值
+```
+
+### NUMA 拓扑感知调度
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/cm/topologymanager/topology_manager.go
+// Topology Manager 确保 CPU/内存/设备在同一 NUMA 节点
+func (m *manager) AddContainer(pod *v1.Pod, container *v1.Container, containerID int) error {
+    // 1. 收集各 Hint Provider 的拓扑提示
+    hints := m.collectHints(pod, container)
+    // CPU Manager: NUMA node 0
+    // Device Manager (GPU): NUMA node 0
+    // Memory Manager: NUMA node 0
+    
+    // 2. 合并策略：single-numa-node / restricted / best-effort
+    merged := m.mergeHints(hints)
+    if !merged.IsCompatible() {
+        return fmt.Errorf("topology affinity conflict")
+    }
+    // 3. 分配资源到同一 NUMA 节点
+    m.allocateResources(merged)
+}
+```
+
+### 硬件与容器交互架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          硬件/内核与容器交互架构                    │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  应用层: Pod / Container                                  │
+│    │                                                      │
+│  运行时层: containerd + runc / kata / gVisor            │
+│    │                                                      │
+│  内核层:                                                 │
+│    ├─ cgroup v2: CPU/内存/IO 资源限制                 │
+│    ├─ namespaces: PID/NET/MNT/USER 隔离               │
+│    ├─ eBPF: 网络/安全/可观测 (Cilium/Falco)          │
+│    ├─ NUMA: 拓扑感知调度 (AI/GPU 场景)              │
+│    └─ User Namespaces: UID 映射隔离 (1.30 GA)        │
+│    │                                                      │
+│  硬件层:                                                 │
+│    ├─ CPU: ARM (Graviton4/AmpereOne) / x86 (Sapphire)  │
+│    ├─ GPU: NVIDIA H100/B200 + MIG 虚拟化             │
+│    ├─ DPU: BlueField-3/4 网络卸载                    │
+│    ├─ 内存: CXL 2.0/3.0 内存池化                     │
+│    └─ 存储: NVMe-oF / 计算存储                       │
+└───────────────────────────────────────────────────────────┘
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| cgroup v1 和 v2 可以混用 | 同一系统只能用一个版本，v2 是统一层级 |
+| NUMA 对所有工作负载都重要 | 只有延迟敏感/GPU 场景需要，普通 Web 无需关注 |
+| ARM 服务器不成熟 | Graviton4/AmpereOne 已广泛用于生产 |
+| DPU 只是智能网卡 | DPU 可卸载网络/存储/安全，释放 CPU 算力 |
+| User Namespaces 无开销 | UID 映射有微小开销，但安全性大幅提升 |
+| CXL 内存可以替代本地 DRAM | CXL 延迟高于本地 DRAM，适合分层/池化场景 |
+
+## 面试要点
+
+1. **cgroup v2 相比 v1 的核心改进？**
+   - 统一层级：所有控制器在同一棵树，避免 v1 多树冲突
+   - 更好的资源协调：memory.high + memory.max 分级限制
+   - PSI（Pressure Stall Information）：精确反映资源压力
+
+2. **NUMA 拓扑感知调度在 AI 场景的作用？**
+   - GPU + CPU + 内存在同一 NUMA 节点，避免跨节点访问
+   - Topology Manager 策略：single-numa-node 最严格
+   - 影响：AI 训练吐量可提升 20-40%
+
+3. **DPU 在云原生架构中的价值？**
+   - 卸载：网络（OVS/eBPF）、存储（NVMe-oF）、安全（加密）
+   - 释放主机 CPU 给应用负载
+   - 代表：NVIDIA BlueField、AWS Nitro、Intel IPU
+
+4. **User Namespaces 对容器安全的意义？**
+   - 容器内 root (UID 0) 映射为宿主机普通用户
+   - 即使容器逃逸也无法获得宿主机 root
+   - K8s 1.30 GA，需内核 6.3+ 支持
+
 ---
 
 ## 五、参考来源

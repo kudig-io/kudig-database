@@ -162,6 +162,85 @@ flowchart TD
   %% 3.3 配置冲突
   CONF_CON
 
+## 生产案例
+
+### 案例1: ResourceQuota 阻止 Pod 创建
+
+**时间线**:
+- 10:00 业务扩容，新建 10 个 Pod
+- 10:01 5 个 Pod 创建失败: `exceeded quota: compute-quota, requested: cpu=4`
+- 10:05 确认根因: 命名空间 CPU 配额已用尽
+- 10:10 调整配额后 Pod 创建成功
+
+**根因链**:
+```
+业务扩容 → Pod requests CPU → 命名空间ResourceQuota检查
+→ 已用+请求 > 配额上限 → 准入拒绝 → Pod创建失败
+```
+
+**修复**:
+```bash
+# 🟢 检查配额使用情况
+kubectl describe quota -n ${NS}
+kubectl get resourcequota -n ${NS} -o yaml
+# 🟡 调整配额
+kubectl patch resourcequota compute-quota -n ${NS} -p '{"spec":{"hard":{"requests.cpu":"100","requests.memory":"200Gi"}}}'
+```
+
+### 案例2: LimitRange 默认值导致资源超预期
+
+**现象**: Pod 实际资源使用远超预期，触发配额告警
+
+**根因**: 未设置 resources 的 Pod 被 LimitRange 赋予了较大的默认值
+
+**修复**:
+```bash
+# 🟢 检查 LimitRange
+kubectl get limitrange -n ${NS} -o yaml
+# 🟡 调整默认值
+kubectl patch limitrange ${LR_NAME} -n ${NS} -p '{"spec":{"limits":[{"default":{"cpu":"500m","memory":"512Mi"},"defaultRequest":{"cpu":"100m","memory":"128Mi"},"type":"Container"}]}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: quota-alerts
+  rules:
+  - alert: ResourceQuotaNearLimit
+    expr: kube_resourcequota{type="used"} / kube_resourcequota{type="hard"} > 0.85
+    for: 10m
+    labels:
+      severity: warning
+  - alert: ResourceQuotaExceeded
+    expr: kube_resourcequota{type="used"} >= kube_resourcequota{type="hard"}
+    for: 5m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 配额容量规划 | 根据业务增长预留 30% 余量 | P0 |
+| LimitRange 合理默认 | 避免默认值过大 | P0 |
+| 配额使用监控 | 80% 时告警 | P1 |
+| 多命名空间隔离 | 按团队分配配额 | P1 |
+
+## 面试要点
+
+1. **Q: ResourceQuota 与 LimitRange 的区别？**
+   A: ResourceQuota 是命名空间级总量限制；LimitRange 是单个 Pod/Container 的默认值/上下限；两者配合使用
+
+2. **Q: 配额不足导致 Pod 创建失败的处理？**
+   A: `kubectl describe quota` 查看使用情况 → 调整配额 → 或优化 Pod requests → 或清理无用资源
+
+3. **Q: 多租户配额管理最佳实践？**
+   A: 每团队独立命名空间 + ResourceQuota + LimitRange + NetworkPolicy 隔离 + RBAC 权限控制
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

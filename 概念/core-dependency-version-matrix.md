@@ -131,12 +131,146 @@ runc 是 OCI 容器运行时的参考实现，被 containerd 和 CRI-O 底层使
 | v1.31 | v3.5.x | v1.7.x | v1.11.x |
 | v1.32 | v3.5.x | v1.7.x | v1.11.x |
 
-### 升级注意事项
+## 升级注意事项
 
 1. **etcd 备份**：升级 etcd 前务必备份数据
 2. **containerd 兼容性**：确保 containerd 版本支持目标 K8s 版本的 CRI API
 3. **CoreDNS 迁移**：从 kube-dns 迁移到 CoreDNS 需要规划
 4. **runc 安全**：关注 runc 的 CVE 修复版本（如 CVE-2019-5736）
+
+## 源码实现分析
+
+### CRI 接口版本演进
+
+```go
+// k8s.io/cri-api/pkg/apis/runtime/v1/api.proto
+// CRI v1 接口（K8s 1.26+ 默认，containerd 1.7+ 支持）
+service RuntimeService {
+    // Pod 沙箱生命周期
+    rpc RunPodSandbox(RunPodSandboxRequest) returns (RunPodSandboxResponse);
+    rpc StopPodSandbox(StopPodSandboxRequest) returns (StopPodSandboxResponse);
+    rpc RemovePodSandbox(RemovePodSandboxRequest) returns (RemovePodSandboxResponse);
+    // 容器生命周期
+    rpc CreateContainer(CreateContainerRequest) returns (CreateContainerResponse);
+    rpc StartContainer(StartContainerRequest) returns (StartContainerResponse);
+    rpc StopContainer(StopContainerRequest) returns (StopContainerResponse);
+}
+
+// containerd 内部 CRI 插件实现
+// github.com/containerd/containerd/pkg/cri/server/sandbox_run.go
+func (c *criService) RunPodSandbox(ctx context.Context, r *runtime.RunPodSandboxRequest) {
+    // 1. 创建 sandbox 容器（pause 容器）
+    sandbox := c.createSandboxContainer(config)
+    // 2. 设置网络命名空间（调用 CNI）
+    c.setupPodNetwork(ctx, sandbox)
+    // 3. 启动 sandbox
+    task, _ := sandbox.NewTask(ctx, cio.NewCreator())
+    task.Start(ctx)
+}
+```
+
+### 版本依赖关系图
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          K8s 核心依赖版本关系                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Kubernetes v1.32                                        │
+│    ├─ etcd v3.5.x    ← 状态存储（必须先行升级）       │
+│    ├─ containerd v1.7.x ← 容器运行时（CRI v1）        │
+│    │    └─ runc v1.1.x  ← OCI 运行时（安全关键）     │
+│    ├─ CoreDNS v1.11.x ← 集群 DNS                      │
+│    └─ CNI plugins v1.4+ ← 网络插件                    │
+│                                                           │
+│  升级顺序（严格）:                                       │
+│  etcd → containerd/runc → kubelet → apiserver → CoreDNS │
+│                                                           │
+│  禁止操作:                                               │
+│  ✗ 跳过 etcd 小版本（如 3.4→3.6）                     │
+│  ✗ containerd 降级（可能导致容器丢失）                │
+│  ✗ kubelet 超过 apiserver 2 个小版本                  │
+└───────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：升级前版本兼容性检查（🟢 只读）
+
+```bash
+# 检查当前集群各组件版本
+kubectl get nodes -o wide  # kubelet 版本
+kubectl exec -n kube-system etcd-master -- etcd --version
+kubectl exec -n kube-system coredns-xxx -- coredns -version
+crictl version  # containerd + runc 版本
+
+# 检查 CRI 版本兼容性
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{": "}{.status.nodeInfo.containerRuntimeVersion}{"\n"}{end}'
+```
+
+### 场景二：etcd 升级前备份（🔴 关键操作）
+
+```bash
+# 🔴 升级前必须备份 etcd
+ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-pre-upgrade.db \
+  --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+
+# 验证备份完整性
+ETCDCTL_API=3 etcdctl snapshot status /backup/etcd-pre-upgrade.db --write-out=table
+```
+
+### 场景三：containerd 升级流程（🔴 影响节点上所有容器）
+
+```bash
+# 1. 驱逐节点上所有 Pod
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+
+# 2. 升级 containerd
+apt-get update && apt-get install -y containerd.io=1.7.*
+systemctl restart containerd
+
+# 3. 验证运行时状态
+crictl info | jq '.config.containerd.runtimes'
+crictl ps  # 确认容器恢复
+
+# 4. 恢复调度
+kubectl uncordon <node>
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| K8s 升级只需升级 apiserver | 必须同步升级 etcd/kubelet/CoreDNS/运行时 |
+| etcd 可以跳版本升级 | etcd 必须逐小版本升级，跳版本会损坏数据 |
+| containerd 升级不影响运行容器 | 重启 containerd 会短暂中断容器，必须先 drain |
+| runc 版本无关紧要 | runc CVE 可直接逃逸容器，必须及时更新 |
+| CoreDNS 升级无风险 | CoreDNS 配置不兼容会导致全集群 DNS 失败 |
+| kubelet 可以比 apiserver 新 | kubelet 最多落后 apiserver 2 个小版本，不能超前 |
+
+## 面试要点
+
+1. **K8s 核心依赖的升级顺序是什么？**
+   - etcd → containerd/runc → kubelet → kube-apiserver → CoreDNS
+   - 原因：下层依赖必须先就绪，否则上层无法正常工作
+
+2. **CRI v1alpha2 和 CRI v1 的区别？**
+   - v1alpha2 在 K8s 1.26 废弃，v1 成为默认
+   - containerd 1.7+ 和 CRI-O 1.26+ 支持 CRI v1
+   - 主要变化：移除冗余字段、统一错误码
+
+3. **runc CVE-2019-5736 的影响和修复？**
+   - 容器内进程可覆盖宿主机 runc 二进制
+   - 修复：升级 runc ≥1.0.0-rc6，使用只读 runc 挂载
+   - 影响：所有使用 runc 的运行时（Docker/containerd/CRI-O）
+
+4. **如何设计集群版本升级策略？**
+   - 测试环境先行验证 → 生产滚动升级
+   - 每次只升级一个小版本，不跳版
+   - 升级前备份 etcd，升级后验证全组件健康
 
 ## 来源文档
 

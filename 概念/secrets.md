@@ -179,6 +179,104 @@ done
 - **超大 Secret**：1.5MB 上限，且全量写回 etcd 压力大，证书链尤其注意。
 - **跨命名空间共享**：Secret 是 Namespace 作用域，跨 NS 需复制或用 ExternalSecrets 引用。
 
+## 源码实现分析
+
+### Secret 存储与加密机制
+
+```go
+// k8s.io/kubernetes/pkg/registry/core/secret/storage/storage.go
+// Secret 写入 etcd 的加密路径
+func (r *REST) Create(ctx context.Context, obj runtime.Object) (runtime.Object, error) {
+    secret := obj.(*api.Secret)
+    // 1. Secret 数据在 apiserver 内存中为明文
+    // 2. 写入 etcd 前经过 EncryptionConfiguration 处理
+    // 3. 默认无加密（base64 不是加密！）
+    // 4. 配置 aescbc/aesgcp/kms provider 后真正加密
+    return r.Store.Create(ctx, obj)
+}
+
+// k8s.io/apiserver/pkg/server/options/encryptionconfig/config.go
+// EncryptionConfiguration 解析
+// apiVersion: apiserver.config.k8s.io/v1
+// kind: EncryptionConfiguration
+// resources:
+//   - resources: [secrets]
+//     providers:
+//       - aescbc:          # 静态密钥加密
+//           keys: [{name: key1, secret: <base64>}]
+//       - identity: {}     # 回退：无加密
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     Secret 安全架构                                    │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  应用 Pod                                               │
+│    │ volume mount / env var                             │
+│    ▼                                                    │
+│  kubelet (tmpfs 内存文件系统)                          │
+│    │ gRPC                                               │
+│    ▼                                                    │
+│  kube-apiserver                                         │
+│    │ EncryptionConfiguration                            │
+│    ▼                                                    │
+│  etcd (加密存储 / 默认明文 base64)                    │
+│                                                         │
+│  安全增强方案:                                         │
+│  1. etcd 加密 (EncryptionConfiguration)                │
+│  2. 外部密钥管理 (Vault/External Secrets)             │
+│  3. RBAC 限制 Secret 读取权限                         │
+│  4. Sealed Secrets (加密后存 Git)                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：Secret 安全管理
+
+```bash
+# 🟢 检查 Secret 列表（不显示内容）
+kubectl get secrets -A
+kubectl get secret <name> -n <ns> -o jsonpath='{.type}'
+
+# 🟡 查看 Secret 内容（敏感操作）
+kubectl get secret <name> -n <ns> -o jsonpath='{.data.password}' | base64 -d
+# 🔴 生产环境避免直接查看 Secret，使用审计日志记录访问
+
+# 🟢 检查 etcd 加密配置
+kubectl get pods -n kube-system -l component=kube-apiserver -o yaml | grep encryption-provider-config
+
+# 🟡 轮换 Secret（触发 Pod 重启）
+kubectl create secret generic <name> --from-literal=key=new-value \
+  --dry-run=client -o yaml | kubectl apply -f -
+kubectl rollout restart deployment/<app> -n <ns>
+```
+
+## 面试要点
+
+1. **K8s Secret 默认是否加密？**
+   - 默认不加密！base64 只是编码，不是加密
+   - etcd 中存储的是 base64 编码的明文
+   - 必须配置 EncryptionConfiguration 才能加密存储
+   - 生产必须启用 etcd 加密 + RBAC 限制访问
+
+2. **Secret 的 type 有哪些？**
+   - Opaque：通用密钥（默认）
+   - kubernetes.io/tls：TLS 证书
+   - kubernetes.io/dockerconfigjson：镜像拉取凭证
+   - kubernetes.io/service-account-token：SA token（已弃用）
+
+3. **External Secrets Operator 如何工作？**
+   - 定义 ExternalSecret CRD 引用外部密钥存储（Vault/AWS SSM/GCP SM）
+   - Operator Watch ExternalSecret → 从外部拉取 → 创建 K8s Secret
+   - 支持自动轮换、审计日志、细粒度权限
+   - 避免 Secret 明文存 Git 或 etcd
+
+4. **如何安全地在 CI/CD 中使用 Secret？**
+   - 不要硬编码在 YAML 中，使用 Sealed Secrets 或 SOPS
+   - CI 中使用 OIDC 短期 token 而非长期凭证
+   - Vault Agent Injector 动态注入 Secret 到 Pod
+   - 启用审计日志记录所有 Secret 访问
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

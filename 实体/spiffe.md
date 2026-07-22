@@ -68,16 +68,201 @@ SPIFFE 的参考实现 SPIRE 采用 Server-Agent 架构：SPIRE Server 负责签
 - **多云互连**：跨 AWS、GCP、Azure 的服务建立统一身份和信任关系
 - **合规要求**：满足零信任架构（ZTA）和金融级安全合规要求
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 Helm 安装 SPIRE
 helm repo add spiffe https://spiffe.github.io/helm-charts/
-helm install spire spiffe/spire -n spire-system --create-namespace
+helm install spire spiffe/spire -n spire-system --create-namespace \
+  --set server.replicaCount=3 \
+  --set server.dataStorage.size=10Gi
+
+# 🟢 验证安装
+kubectl get pods -n spire-system
+kubectl get crd | grep spire
+
+# 🟢 检查 SPIRE Server 状态
+kubectl exec -n spire-system spire-server-0 -- spire-server healthcheck
+
+# 🟢 查看已注册的 Workload
+kubectl exec -n spire-system spire-server-0 -- spire-server entry show
+
+# 🟢 查看 Agent 状态
+kubectl exec -n spire-system spire-server-0 -- spire-server agent show
 ```
+
+### SPIRE Server 配置
+
+```yaml
+# spire-server ConfigMap 核心配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spire-server
+  namespace: spire-system
+data:
+  server.conf: |
+    server {
+      bind_address = "0.0.0.0"
+      bind_port = "8081"
+      trust_domain = "example.org"
+      data_dir = "/run/spire/data"
+      log_level = "INFO"
+      ca_ttl = "24h"
+      default_x509_svid_ttl = "1h"
+      default_jwt_svid_ttl = "5m"
+    }
+    
+    plugins {
+      DataStore "sql" {
+        plugin_data {
+          database_type = "postgres"
+          connection_string = "host=spire-db dbname=spire user=spire password=${DB_PASS}"
+        }
+      }
+      KeyManager "disk" {
+        plugin_data {
+          keys_path = "/run/spire/data/keys.json"
+        }
+      }
+      NodeAttestor "k8s_psat" {
+        plugin_data {
+          clusters = {
+            "production" = {
+              service_account_allow_list = ["spire-system:spire-agent"]
+            }
+          }
+        }
+      }
+    }
+```
+
+### Workload 注册
+
+```bash
+# 🟡 注册 Workload (基于 ServiceAccount)
+kubectl exec -n spire-system spire-server-0 -- \
+  spire-server entry create \
+  -spiffeID spiffe://example.org/ns/default/sa/myapp \
+  -parentID spiffe://example.org/agent/k8s \
+  -selector k8s:ns:default \
+  -selector k8s:sa:myapp \
+  -x509SVIDTTL 1h
+
+# 🟢 查看注册条目
+kubectl exec -n spire-system spire-server-0 -- spire-server entry show
+
+# 🟡 删除注册条目
+kubectl exec -n spire-system spire-server-0 -- spire-server entry delete -entryID <entry-id>
+```
+
+### Workload API 使用
+
+```bash
+# 在 Pod 中通过 Unix Socket 获取 SVID
+# 挂载 spire-agent socket
+# volumes:
+# - name: spire-agent-socket
+#   hostPath:
+#     path: /run/spire/agent-sockets
+#     type: Directory
+
+# 获取 X.509 SVID
+spire-agent api fetch x509
+
+# 获取 JWT SVID
+spire-agent api fetch jwt -audience my-service
+
+# 获取信任 Bundle
+spire-agent api fetch x509 --write /tmp/svid
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 SPIRE Server 日志
+kubectl logs -n spire-system -l app=spire-server --tail=50
+
+# 🟢 查看 SPIRE Agent 日志
+kubectl logs -n spire-system -l app=spire-agent --tail=50
+
+# 🟢 检查 Server 健康
+kubectl exec -n spire-system spire-server-0 -- spire-server healthcheck
+
+# 🟢 查看 Agent 列表
+kubectl exec -n spire-system spire-server-0 -- spire-server agent show
+
+# 🟡 驱逐异常 Agent
+kubectl exec -n spire-system spire-server-0 -- spire-server agent evict -spiffeID spiffe://example.org/agent/k8s/<node>
+
+# 🟢 查看 Bundle
+kubectl exec -n spire-system spire-server-0 -- spire-server bundle show
+
+# 🟡 创建联邦信任
+kubectl exec -n spire-system spire-server-0 -- \
+  spire-server bundle set -id spiffe://partner.org -path /tmp/partner-bundle.pem
+
+# 🟢 查看 Token (用于 Agent 注册)
+kubectl exec -n spire-system spire-server-0 -- spire-server token generate -spiffeID spiffe://example.org/agent/k8s
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Workload 无法获取 SVID | 未注册/Selector 不匹配 | `spire-server entry show` | 创建匹配的注册条目 |
+| Agent 未连接 | 节点认证失败 | `spire-server agent show` | 检查 PSAT 配置和 RBAC |
+| SVID 过期 | TTL 过短/轮转失败 | `spire-agent api fetch x509` | 调整 TTL 配置 |
+| 联邦信任失败 | Bundle 不匹配 | `spire-server bundle show -id <domain>` | 更新联邦 Bundle |
+| Server 不可用 | 数据库连接失败 | `kubectl logs spire-server-0` | 检查 PostgreSQL 连接 |
+| Socket 不可访问 | 挂载路径错误 | `ls /run/spire/agent-sockets` | 检查 hostPath 配置 |
+
+### 排查流程
+
+```
+1. kubectl get pods -n spire-system → 确认组件状态
+2. spire-server healthcheck → Server 健康检查
+3. spire-server agent show → Agent 连接状态
+4. spire-server entry show → 注册条目检查
+5. spire-agent api fetch x509 → 测试 SVID 获取
+6. kubectl logs spire-server-0 → 查看服务日志
+```
+
+## 生产案例
+
+### 案例1: 多集群 Zero Trust
+- **场景**: 3个 K8s 集群间服务需要 mTLS 互信
+- **方案**: 每个集群部署 SPIRE，通过联邦信任建立跨集群互信
+- **效果**: 无需共享 CA，各集群独立管理身份，实现 Zero Trust
+
+### 案例2: 混合云工作负载身份
+- **场景**: K8s + VM + 裸机服务需要统一身份
+- **方案**: SPIRE 统一管理所有工作负载身份，Envoy 使用 SVID 进行 mTLS
+- **效果**: 统一身份框架，消除 IP 白名单依赖
 
 ## 对比替代方案
 
-相比传统 PKI/CA 系统，SPIFFE 为云原生工作负载设计了自动化身份管理和短期凭证轮转。相比服务网格自带的 mTLS（如 Istio），SPIFFE 提供跨网格、跨平台的统一身份。
+| 维度 | SPIFFE/SPIRE | Istio mTLS | Vault PKI | 传统 CA |
+|------|-------------|-----------|-----------|--------|
+| 身份标准 | SPIFFE ID | 自定义 | 自定义 | X.509 |
+| 自动轮转 | 支持 | 支持 | 支持 | 手动 |
+| 跨平台 | K8s/VM/裸机 | 仅 Mesh | 通用 | 通用 |
+| 联邦信任 | 原生支持 | 有限 | 无 | 复杂 |
+| 工作负载 API | 原生 | Sidecar | API | 无 |
+| 复杂度 | 中 | 高 | 中 | 低 |
+
+## 检查清单
+
+- [ ] SPIRE Server 副本数 >= 3 (HA)
+- [ ] 使用外部数据库 (PostgreSQL) 而非内存存储
+- [ ] Agent 以 DaemonSet 部署在所有节点
+- [ ] Workload 注册条目已配置
+- [ ] SVID TTL 合理 (建议 1h)
+- [ ] 联邦信任已配置 (跨集群场景)
+- [ ] 监控 SPIRE Server 和 Agent 健康状态
+- [ ] 定期审计注册条目和 Agent 列表
 
 ## Related
 

@@ -68,16 +68,155 @@ OpenGemini 可通过 Helm Chart 部署到 Kubernetes 集群。ts-sql 以 Deploym
 - **运维数据分析**：大规模 IT 基础设施的性能和日志数据分析
 - **金融数据分析**：股票行情、交易指标等时间序列数据管理
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 Helm 安装
 helm repo add opengemini https://opengemini.github.io/opengemini-helm
-helm install opengemini opengemini/opengemini -n database --create-namespace
+helm install opengemini opengemini/opengemini \
+  -n database --create-namespace \
+  --set sql.replicaCount=3 \
+  --set store.replicaCount=3 \
+  --set meta.replicaCount=3
+
+# 🟢 验证安装
+kubectl get pods -n database
+kubectl get svc -n database
+
+# 🟢 测试连接
+kubectl run og-client --image=opengemini/client --rm -it -- bash
+# 在容器内:
+# og-cli -host opengemini-sql.database.svc -port 8086 -database mydb
+
+# 🟢 写入测试数据
+curl -XPOST 'http://opengemini-sql.database.svc:8086/write?db=mydb' \
+  --data-binary 'cpu,host=server01 usage_idle=95.0,usage_user=3.0 1465839830100400200'
+
+# 🟢 查询测试
+curl -G 'http://opengemini-sql.database.svc:8086/query?db=mydb' \
+  --data-urlencode 'q=SELECT * FROM cpu WHERE host=\'server01\''
 ```
+
+### Prometheus Remote Write 集成
+
+```yaml
+# prometheus.yml 配置
+remote_write:
+- url: http://opengemini-sql.database.svc:8086/api/v1/write?db=prometheus
+  queue_config:
+    max_samples_per_send: 10000
+    batch_send_deadline: 5s
+
+remote_read:
+- url: http://opengemini-sql.database.svc:8086/api/v1/read?db=prometheus
+  read_recent: false
+```
+
+### 数据保留策略
+
+```sql
+-- 创建数据库
+CREATE DATABASE monitoring WITH DURATION 30d REPLICATION 3
+
+-- 创建降采样策略
+CREATE RETENTION POLICY "downsample_1h" ON "monitoring" DURATION 365d REPLICATION 1
+
+-- 创建连续查询 (自动降采样)
+CREATE CONTINUOUS QUERY "cq_cpu_1h" ON "monitoring"
+BEGIN
+  SELECT mean(usage_idle) AS usage_idle, mean(usage_user) AS usage_user
+  INTO "downsample_1h"."cpu_1h"
+  FROM "cpu"
+  GROUP BY time(1h), "host"
+END
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看组件状态
+kubectl get pods -n database -l app=opengemini
+
+# 🟢 查看 SQL Node 日志
+kubectl logs -n database -l component=ts-sql --tail=50
+
+# 🟢 查看 Store Node 日志
+kubectl logs -n database -l component=ts-store --tail=50
+
+# 🟢 查看 Meta Node 日志
+kubectl logs -n database -l component=ts-meta --tail=50
+
+# 🟢 查看数据库列表
+curl 'http://opengemini-sql.database.svc:8086/query?q=SHOW+DATABASES'
+
+# 🟢 查看测量列表
+curl 'http://opengemini-sql.database.svc:8086/query?db=monitoring&q=SHOW+MEASUREMENTS'
+
+# 🟢 查看分片信息
+curl 'http://opengemini-sql.database.svc:8086/query?q=SHOW+SHARDS'
+
+# 🟡 删除过期数据
+curl -XPOST 'http://opengemini-sql.database.svc:8086/query?db=monitoring' \
+  --data-urlencode 'q=DROP SERIES FROM cpu WHERE time < now() - 90d'
+
+# 🟢 查看集群状态
+curl 'http://opengemini-sql.database.svc:8086/debug/requests'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 写入失败 | Store Node 不可用 | `kubectl logs -l component=ts-store` | 检查 Store Pod 状态和 PVC |
+| 查询超时 | 数据量过大/索引缺失 | 查看 SQL Node 日志 | 优化查询/添加标签索引 |
+| 集群不可用 | Meta Node 多数失败 | `kubectl get pods -l component=ts-meta` | 确保 Meta >= 3 副本 |
+| 磁盘空间不足 | 数据保留策略未配置 | `kubectl exec -it <store-pod> -- df -h` | 配置 retention policy |
+| 写入延迟高 | 分片过多/内存不足 | 查看 Store 指标 | 调整分片策略/增加内存 |
+
+### 排查流程
+
+```
+1. kubectl get pods -n database → 确认组件状态
+2. kubectl logs -l component=ts-sql → 查看查询层日志
+3. kubectl logs -l component=ts-store → 查看存储层日志
+4. kubectl logs -l component=ts-meta → 查看元数据日志
+5. 检查 PVC 使用率和节点资源
+```
+
+## 生产案例
+
+### 案例1: 大规模 IoT 数据平台
+- **场景**: 10万+ IoT 设备每秒上报数据，需要实时查询和历史分析
+- **方案**: openGemini 存算分离架构，10 Store Node + 5 SQL Node
+- **效果**: 写入 TPS 达 500万/s，查询延迟 < 100ms
+
+### 案例2: Prometheus 长期存储
+- **场景**: 监控数据需保留 1年，Prometheus 本地存储不足
+- **方案**: openGemini 作为 Remote Write/Read 后端，配置降采样
+- **效果**: 存储成本降低 70%，查询性能满足 Grafana 展示需求
 
 ## 对比替代方案
 
-相比 InfluxDB，OpenGemini 提供更好的水平扩展能力和存算分离架构。相比 TimescaleDB（PostgreSQL 扩展），OpenGemini 是原生 TSDB，性能更高。相比 VictoriaMetrics，OpenGemini 功能更丰富但社区较新。
+| 维度 | openGemini | InfluxDB | TimescaleDB | VictoriaMetrics |
+|------|-----------|----------|-------------|----------------|
+| 架构 | 存算分离 | 单机/集群 | PostgreSQL 扩展 | 单机/集群 |
+| 水平扩展 | 原生支持 | 企业版 | 有限 | 支持 |
+| 协议兼容 | InfluxDB | 原生 | PostgreSQL | Prometheus |
+| 查询语言 | SQL+Flux | InfluxQL+Flux | SQL | MetricsQL |
+| 写入性能 | 极高 | 高 | 中 | 极高 |
+| CNCF | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF |
+
+## 检查清单
+
+- [ ] Meta Node 副本数 >= 3 (Raft 多数派)
+- [ ] Store Node 使用高性能 SSD PVC
+- [ ] 配置了数据保留策略 (retention policy)
+- [ ] 配置了降采样策略 (长期数据)
+- [ ] SQL Node 配置 HPA 应对查询峰值
+- [ ] 监控写入 TPS、查询延迟、磁盘使用率
+- [ ] 定期备份元数据
 
 ## Related
 

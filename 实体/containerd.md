@@ -65,20 +65,135 @@ containerd is an industry-standard [[概念/container-runtime.md|container runti
 
 containerd exposes the Container Runtime Interface (CRI) via gRPC. kubelet communicates directly with containerd without intermediate shim layers. Key configuration: sandbox_image (pause container), SystemdCgroup (use systemd for cgroups), registry mirrors.
 
-## Debugging
+## 安装与配置
 
-``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
-# Check containerd status
-systemctl status containerd
+```bash
+# 🟢 低风险：安装 containerd（apt/yum）
+apt-get install -y containerd.io  # Debian/Ubuntu
+yum install -y containerd.io      # RHEL/CentOS
 
-# List containers
-ctr -n k8s.io containers list
-crictl ps
+# 🟡 中风险：生成默认配置
+containerd config default > /etc/containerd/config.toml
 
-# View containerd logs
-journalctl -u containerd -f
+# 🟡 中风险：启用 systemd cgroup（K8s 必须）
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+systemctl restart containerd
 ```
+
+```toml
+# /etc/containerd/config.toml 生产配置示例
+version = 2
+root = "/var/lib/containerd"
+state = "/run/containerd"
+
+[grpc]
+  address = "/run/containerd/containerd.sock"
+  uid = 0
+  gid = 0
+
+[plugins."io.containerd.grpc.v1.cri"]
+  sandbox_image = "registry.k8s.io/pause:3.9"
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    default_runtime_name = "runc"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+      runtime_type = "io.containerd.runc.v2"
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+        SystemdCgroup = true
+  [plugins."io.containerd.grpc.v1.cri".registry]
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+      [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+        endpoint = ["https://mirror.example.com", "https://registry-1.docker.io"]
+    [plugins."io.containerd.grpc.v1.cri".registry.configs]
+      [plugins."io.containerd.grpc.v1.cri".registry.configs."harbor.internal.com".tls]
+        insecure_skip_verify = false
+        ca_file = "/etc/containerd/certs.d/harbor-ca.crt"
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：检查 containerd 状态
+systemctl status containerd
+ctr version
+crictl info
+
+# 🟢 低风险：查看容器和镜像
+ctr -n k8s.io containers list
+crictl ps -a
+crictl images
+
+# 🟢 低风险：查看 containerd 日志
+journalctl -u containerd -f --since "10min ago"
+
+# 🟡 中风险：拉取/删除镜像
+crictl pull registry.k8s.io/pause:3.9
+crictl rmi <image-id>
+
+# 🟡 中风险：重启 containerd（会短暂影响节点上所有 Pod）
+systemctl restart containerd
+
+# 🔴 高风险：清理未使用镜像（可能删除正在使用的层）
+ctr -n k8s.io images prune
+
+# 🟢 低风险：检查运行时健康
+crictl stats
+crictl inspect <container-id>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 卡在 ContainerCreating | 镜像拉取失败/registry 不可达 | `crictl pull <image>` | 检查网络、认证、镜像名 |
+| kubelet 报 CRI 连接失败 | containerd socket 不存在 | `ls /run/containerd/containerd.sock` | `systemctl restart containerd` |
+| 容器 OOMKilled 频繁 | cgroup 配置错误 | `cat /sys/fs/cgroup/memory/...` | 检查 SystemdCgroup 配置 |
+| 磁盘空间不足 | 镜像层/容器日志累积 | `du -sh /var/lib/containerd/` | 清理无用镜像、配置日志轮转 |
+| 容器启动超时 | runc 挂起/内核锁竞争 | `ctr -n k8s.io tasks list` | 检查 dmesg、升级内核 |
+| 镜像拉取 401 | registry 认证过期 | `ctr -n k8s.io images pull --user u:p <img>` | 更新 registry credentials |
+
+```
+排查流程：
+├── kubelet 无法连接 CRI？
+│   ├── systemctl status containerd → 检查服务状态
+│   ├── ls /run/containerd/containerd.sock → 确认 socket 存在
+│   └── journalctl -u containerd → 查看启动错误
+├── 容器创建失败？
+│   ├── crictl ps -a → 查看容器状态
+│   ├── crictl inspect <id> → 查看详细错误
+│   └── dmesg | tail → 检查内核错误（OOM、cgroup）
+└── 性能问题？
+    ├── crictl stats → 查看资源使用
+    ├── iostat -x 1 → 检查磁盘 IO
+    └── ctr -n k8s.io content ls → 检查内容存储
+```
+
+## 生产案例
+
+### 案例 1：containerd 升级导致节点 NotReady
+
+- **场景**：批量升级 containerd 1.6→1.7，部分节点 kubelet 报 CRI 连接超时
+- **排查**：journalctl 显示新版 config.toml 不兼容（`version = 2` 字段变更），containerd 启动失败
+- **方案**：回滚 containerd 版本，使用 `containerd config migrate` 迁移配置文件，分批灰度升级
+- **效果**：制定升级 SOP：先 migrate config → 单节点验证 → 分批滚动，后续零故障
+
+### 案例 2：镜像层累积导致磁盘告警
+
+- **场景**：生产节点 /var/lib/containerd 使用率达 92%，触发磁盘告警
+- **排查**：`ctr -n k8s.io images ls` 发现 200+ 历史镜像未清理，大量 `<none>` 标签的悬空层
+- **方案**：配置 kubelet imageGCHighThresholdPercent=80 自动 GC，同时部署 CronJob 定期执行 `crictl rmi --prune`
+- **效果**：磁盘使用率稳定在 60% 以下，消除磁盘告警
+
+## 替代方案
+
+| 维度 | containerd | CRI-O | Docker (containerd) |
+|------|-----------|-------|--------------------|
+| CNCF 状态 | Graduated | CNCF | 非 CNCF |
+| 架构 | 单体+插件 | 模块化 | 多层封装 |
+| 内存占用 | ~100MB | ~80MB | ~300MB+ |
+| K8s 集成 | CRI 原生 | CRI 原生 | 需 shim |
+| 多租户 | Namespace 隔离 | 有限 | 有限 |
+| 适用场景 | 通用生产 | 纯 K8s | 开发/兼容 |
+
 ## Related
 
 - [[概念/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation

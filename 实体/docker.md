@@ -65,6 +65,118 @@ Docker is the platform that popularized containerization. Since K8s v1.24 remove
 
 Use Docker for development and image building. Use containerd or CRI-O for K8s production nodes. Docker-built images run on any OCI-compliant runtime.
 
+## 镜像构建最佳实践
+
+### 多阶段构建
+
+```dockerfile
+# 构建阶段
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 go build -o /app/server
+
+# 运行阶段
+FROM gcr.io/distroless/static:nonroot
+COPY --from=builder /app/server /server
+USER nonroot:nonroot
+ENTRYPOINT ["/server"]
+```
+
+### BuildKit 高级特性
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN --mount=type=cache,target=/go/pkg/mod \
+    go mod download
+COPY . .
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    CGO_ENABLED=0 go build -o /app/server
+```
+
+### 镜像优化检查清单
+
+- [ ] 使用多阶段构建
+- [ ] 基础镜像用 alpine/distroless
+- [ ] 合并 RUN 指令减少层数
+- [ ] .dockerignore 排除无关文件
+- [ ] 非 root 用户运行
+- [ ] 固定镜像 tag (不用 latest)
+- [ ] 扫描漏洞 (trivy)
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 镜像管理
+docker images
+docker pull nginx:1.25
+docker build -t myapp:v1 .
+docker push registry.example.com/myapp:v1
+docker tag myapp:v1 registry.example.com/myapp:v1
+
+# 🟢 容器管理
+docker ps -a
+docker run -d --name app -p 8080:80 nginx:1.25
+docker exec -it app sh
+docker logs -f app
+docker stop app && docker rm app
+
+# 🟢 网络
+docker network ls
+docker network create mynet
+docker network inspect mynet
+
+# 🟢 存储
+docker volume ls
+docker volume create data
+docker volume inspect data
+
+# 🟡 清理
+docker system prune -a --volumes  # 🔴 危险!
+docker image prune -a
+docker container prune
+
+# 🟢 资源使用
+docker stats
+docker system df
+```
+
+## 故障排查
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| 构建失败 | 网络/依赖问题 | 检查网络、使用镜像源 |
+| 容器启动失败 | 配置错误 | `docker logs` 查看 |
+| 磁盘空间不足 | 镜像/容器堆积 | `docker system prune` |
+| 网络不通 | 网络配置错误 | `docker network inspect` |
+| 性能下降 | 资源限制 | 调整 CPU/Memory |
+
+## Docker vs Podman vs nerdctl
+
+| 特性 | Docker | Podman | nerdctl |
+|------|--------|--------|--------|
+| Daemon | 有 (dockerd) | 无 (Rootless) | 无 (containerd) |
+| Rootless | 支持 | 原生 | 支持 |
+| Compose | 支持 | 支持 | 支持 |
+| K8s 兼容 | 仅构建 | Pod 导出 | 原生 |
+| 安全性 | 中 | 高 | 高 |
+
+## 检查清单
+
+- [ ] 理解 Docker 架构 (CLI/dockerd/containerd/runc)
+- [ ] 掌握多阶段构建
+- [ ] 了解 BuildKit 高级特性
+- [ ] 掌握镜像优化技巧
+- [ ] 理解 Docker 在 K8s 中的角色变化
+- [ ] 了解 Docker vs Podman vs nerdctl
+
 ## Related
 
 - [[实体/container-runtime.md|container-runtime]] — Container Runtime

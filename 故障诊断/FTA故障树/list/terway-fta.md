@@ -77,6 +77,84 @@ base_confidence: 0.7
 
 ...(截断)
 
+## 生产案例
+
+### 案例1: Terway ENI 分配失败导致 Pod Pending
+
+**时间线**:
+- 08:30 业务扩容，新建 30 个 Pod
+- 08:31 10 个 Pod Pending，事件显示 `failed to allocate ENI: quota exceeded`
+- 08:35 确认 ECS 实例 ENI 配额已满（默认 8 个）
+- 08:40 提交工单提升 ENI 配额，新 Pod 调度成功
+
+**根因链**:
+```
+Pod扩容 → Terway分配ENI → ECS实例ENI配额耗尽
+→ 分配失败 → Pod持续Pending(CreateContainerError)
+```
+
+**修复**:
+```bash
+# 🟢 检查 Terway 日志
+kubectl logs -n kube-system -l app=terway-eniip --tail=100 | grep -i "quota\|limit\|failed"
+# 🟢 查看节点 ENI 使用情况
+kubectl get nodes -o json | jq '.items[].status.allocatable | {"pods": .pods, "aliyun/eni": .["aliyun/eni"]}'
+```
+
+### 案例2: Terway IP 池耗尽
+
+**现象**: 新 Pod 无法获取 IP，Terway 日志 `no available vSwitch IP`
+
+**根因**: VSwitch 可用 IP 地址耗尽，子网 CIDR 规划过小
+
+**修复**:
+```bash
+# 🟢 检查 VSwitch 剩余 IP
+aliyun vpc DescribeVSwitchAttributes --VSwitchId ${VSWITCH_ID} | jq '.AvailableIpAddressCount'
+# 🟡 扩展 VSwitch 或添加新 VSwitch 到 Terway 配置
+kubectl edit configmap eni-config -n kube-system
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: terway-alerts
+  rules:
+  - alert: TerwayENIQuotaLow
+    expr: terway_eni_allocated / terway_eni_quota > 0.85
+    for: 5m
+    labels:
+      severity: warning
+  - alert: TerwayIPPoolExhausted
+    expr: terway_vswitch_available_ip == 0
+    for: 2m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| ENI 配额提前规划 | 根据 Pod 密度提升 ECS ENI 配额 | P0 |
+| VSwitch CIDR 充足 | 每个 VSwitch 至少预留 /20 | P0 |
+| 多 VSwitch 容灾 | 配置多个可用区 VSwitch | P1 |
+| Terway 多副本 | DaemonSet 确保每节点一个 | P1 |
+
+## 面试要点
+
+1. **Q: Terway 与 Flannel 在阿里云上的区别？**
+   A: Terway 使用 ENI/辅助IP 实现 Pod 原生 VPC 网络，性能接近裸机；Flannel 使用 Overlay(VXLAN) 有封装开销；Terway 支持安全组级别网络策略
+
+2. **Q: Terway ENI 分配失败的排查步骤？**
+   A: 检查 ECS ENI 配额 → 查看 VSwitch 可用 IP → 确认安全组规则 → 检查 Terway Pod 日志 → 验证 RAM 权限
+
+3. **Q: Terway 的三种网络模式？**
+   A: ENI独占(高性能) / ENI多 IP(默认，平衡) / IPVLAN(轻量)，根据 Pod 密度和性能需求选择
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

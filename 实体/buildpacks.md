@@ -77,7 +77,7 @@ Cloud Native Buildpacks 在 Kubernetes 中通过 Shipwright 框架使用。Shipw
 3. **安全补丁加速**: 通过 Rebase 秒级更新所有镜像的 OS 基础层，无需重新构建
 4. **SBOM 合规**: 自动生成 SBOM，满足供应链安全合规要求
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 pack CLI
@@ -86,22 +86,136 @@ brew install buildpacks/tap/pack
 curl -fsSL https://github.com/buildpacks/pack/releases/latest/download/pack-$(uname -s)-$(uname -m) -o /usr/local/bin/pack
 chmod +x /usr/local/bin/pack
 
+# 设置默认 Builder
+pack config default-builder paketobuildpacks/builder-jammy-base
+
 # 从源码构建镜像（无需 Dockerfile）
 cd my-nodejs-app
-pack build my-registry.io/myorg/app:latest --builder paketobuildpacks/builder:base
+pack build my-registry.io/myorg/app:latest
 
 # 选择 Builder（tiny = 最小镜像，base = 标准，full = 完整）
-pack build my-registry.io/myorg/app:latest --builder paketobuildpacks/builder:tiny
+pack build my-registry.io/myorg/app:latest --builder paketobuildpacks/builder-jammy-tiny
 
 # Rebase 更新基础镜像（秒级完成）
-pack rebase my-registry.io/myorg/app:latest --run-image paketobuildpacks/run:tiny
+pack rebase my-registry.io/myorg/app:latest
 
 # 查看 SBOM
-pack inspect my-registry.io/myorg/app:latest --bom
+pack sbom download my-registry.io/myorg/app:latest -o sbom.json
 
 # 在 Tekton 中使用
 kubectl apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/buildpacks/0.4/buildpacks.yaml
 ```
+
+```toml
+# project.toml 项目配置示例
+[_]
+schema-version = "0.2"
+id = "com.example.myapp"
+name = "My Application"
+version = "1.0.0"
+
+[build]
+builder = "paketobuildpacks/builder-jammy-base"
+
+[[build.env]]
+name = "BP_NODE_VERSION"
+value = "20.*"
+
+[[build.env]]
+name = "BP_JVM_VERSION"
+value = "21"
+
+[io.buildpacks]
+exclude = [".git", "node_modules", "*.test.js"]
+```
+
+```yaml
+# Tekton Pipeline 中使用 Buildpacks
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: buildpacks-pipeline
+spec:
+  params:
+  - name: APP_IMAGE
+    type: string
+  workspaces:
+  - name: source
+  tasks:
+  - name: build
+    taskRef:
+      name: buildpacks
+    params:
+    - name: APP_IMAGE
+      value: $(params.APP_IMAGE)
+    - name: BUILDER_IMAGE
+      value: paketobuildpacks/builder-jammy-base
+    workspaces:
+    - name: source
+      workspace: source
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看构建信息
+pack builder inspect paketobuildpacks/builder-jammy-base
+pack inspect my-registry.io/myorg/app:latest
+
+# 🟡 中风险：构建并推送镜像
+pack build my-registry.io/myorg/app:v1.2.3 --publish
+
+# 🟢 低风险：Rebase 更新基础层（秒级）
+pack rebase my-registry.io/myorg/app:v1.2.3 --publish
+
+# 🟢 低风险：查看 SBOM
+pack sbom download my-registry.io/myorg/app:v1.2.3
+
+# 🟡 中风险：创建自定义 Builder
+pack builder create my-builder:latest -b builder.toml
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| detect 失败 | 未识别应用类型 | `pack build -v app:latest` | 检查项目结构，确认 Buildpack 支持 |
+| 构建超时 | 依赖下载慢 | `pack build --env HTTP_PROXY=... app` | 配置代理或镜像源 |
+| Rebase 失败 | 基础镜像不兼容 | `pack inspect app:latest` | 确认 run-image 版本匹配 |
+| 镜像过大 | 使用了 full Builder | `pack build --builder ...:tiny app` | 切换到 tiny/base Builder |
+| Tekton 构建失败 | 权限不足 | `kubectl logs <taskrun-pod>` | 检查 ServiceAccount 和 Registry 凭据 |
+
+```
+排查流程：
+├── 构建失败？
+│   ├── pack build -v → 查看详细日志
+│   ├── 检查 detect 阶段输出
+│   └── 确认项目结构和依赖文件存在
+├── 镜像问题？
+│   ├── pack inspect → 查看镜像层信息
+│   ├── pack sbom download → 检查 SBOM
+│   └── 对比不同 Builder 的镜像大小
+└── CI/CD 集成问题？
+    ├── 检查 Tekton TaskRun 日志
+    ├── 确认 Registry 凭据配置
+    └── 检查网络策略是否阻止推送
+```
+
+## 生产案例
+
+### 案例 1：多语言微服务统一构建流程
+
+- **场景**：50+ 微服务（Java/Node.js/Python/Go），每个服务维护独立 Dockerfile，安全补丁更新慢
+- **排查**：每次 OS 漏洞需要重新构建所有镜像，耗时 4+ 小时
+- **方案**：迁移到 Buildpacks，统一使用 Paketo Builder，漏洞修复通过 `pack rebase` 秒级更新
+- **效果**：安全补丁应用从 4h 缩短至 5min，消除所有 Dockerfile 维护工作
+
+### 案例 2：SBOM 供应链合规
+
+- **场景**：客户审计要求提供所有生产镜像的软件物料清单
+- **排查**：手动维护 SBOM 工作量大且易过时
+- **方案**：Buildpacks 自动生成 SBOM（CycloneDX 格式），CI 中自动上传到依赖跟踪平台
+- **效果**：100% 镜像有自动 SBOM，审计准备时间从 1 周缩短至 1 小时
 
 ## 对比
 

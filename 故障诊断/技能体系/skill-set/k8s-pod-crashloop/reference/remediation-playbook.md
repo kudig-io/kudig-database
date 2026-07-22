@@ -116,6 +116,31 @@ startupProbe:
 - [ ] 应用日志无 ERROR/FATAL
 - [ ] 服务响应正常
 
+## 升级决策点
+
+- **P0（立即升级）**：核心服务所有 Pod CrashLoop，服务完全不可用
+- **P1（30分钟内升级）**：部分 Pod CrashLoop，服务降级但可用
+- **P2（观察）**：仅单个非关键 Pod 异常，有充分副本支撑
+
+## 生产注意事项
+
+1. 查看上一次崩溃日志：`kubectl logs <pod> --previous` 获取崩溃前的关键信息
+2. 使用 `kubectl debug` 创建临时调试容器，避免修改生产 Pod
+3. 修改 livenessProbe 时注意：过短的 `initialDelaySeconds` 会导致慢启动应用反复被杀
+4. OOMKilled 时检查 `kubectl describe pod` 中的 Last State 确认退出码 137
+5. 配置变更导致的 CrashLoop 可用 `kubectl rollout undo` 快速回滚
+
+## 面试要点
+
+1. **Q: CrashLoopBackOff 的退避机制是什么？**
+   A: 容器每次崩溃后等待时间指数增长：10s、20s、40s、80s、160s、300s（封顶 5min）。状态显示为 CrashLoopBackOff 时实际是在等待下次重启。通过 `kubectl get pod -o jsonpath='{.status.containerStatuses[0].lastState}'` 查看上次崩溃原因。
+
+2. **Q: 如何区分应用崩溃和探针失败导致的重启？**
+   A: 查看 `kubectl describe pod` 的 Last State：Reason=Error 表示应用自己退出（非零退出码）；Reason=OOMKilled 表示内存超限；Events 中有 "Liveness probe failed" 表示探针失败被 kubelet 杀死。退出码 137=SIGKILL（OOM或探针），139=段错误，1=应用错误。
+
+3. **Q: 生产环境如何快速定位 CrashLoop 根因？**
+   A: ① `kubectl logs --previous` 查看崩溃前日志；② `kubectl describe pod` 查看 Events 和 Last State；③ 检查最近变更（`kubectl rollout history`）；④ 检查依赖服务状态（DB/Redis/MQ）；⑤ 使用 `kubectl debug` 创建临时容器检查文件系统/网络。
+
 ## Related
 
 - [[reference|#reference Hub]] — tag hub

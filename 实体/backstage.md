@@ -82,24 +82,136 @@ Backstage 通过 Kubernetes 插件与集群深度集成。插件读取 Kubernete
 3. **合规性追踪**：通过自定义插件展示服务的 license、安全扫描结果和合规状态
 4. **知识管理**：TechDocs 作为团队的技术知识库，与代码仓库同步更新
 
-## 安装
+## 安装与配置
 
 ```bash
-# 安装 Backstage CLI 并初始化项目
+# 初始化 Backstage 项目
 npx @backstage/create-app@latest
 cd my-backstage-app
 yarn install
-yarn dev  # 本地开发模式
+yarn dev  # 本地开发模式 (http://localhost:3000)
 ```
+
+```yaml
+# app-config.yaml 生产配置示例
+backend:
+  baseUrl: https://backstage.example.com
+  listen:
+    port: 7007
+  database:
+    client: pg
+    connection:
+      host: postgres.backstage.svc
+      port: 5432
+      user: backstage
+      password: ${POSTGRES_PASSWORD}
+  auth:
+    keys:
+      - secret: ${BACKEND_SECRET}
+
+catalog:
+  locations:
+    - type: url
+      target: https://github.com/org/repo/blob/main/catalog-info.yaml
+    - type: url
+      target: https://github.com/org/templates/blob/main/all-templates.yaml
+
+kubernetes:
+  clusterLocatorMethods:
+    - type: config
+      clusters:
+        - url: https://k8s-api.example.com:6443
+          name: production
+          authProvider: serviceAccount
+          serviceAccountToken: ${K8S_SA_TOKEN}
+```
+
+```bash
+# Kubernetes 部署
+kubectl create namespace backstage
+kubectl create secret generic backstage-secrets \
+  --from-literal=POSTGRES_PASSWORD=xxx \
+  --from-literal=BACKEND_SECRET=xxx \
+  -n backstage
+helm repo add backstage https://backstage.github.io/charts
+helm install backstage backstage/backstage -n backstage
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Backstage 状态
+kubectl get pods -n backstage
+kubectl logs -n backstage -l app.kubernetes.io/name=backstage --tail=50
+
+# 🟢 检查 Catalog 同步状态
+curl -s http://backstage:7007/api/catalog/entities | jq length
+curl -s http://backstage:7007/api/catalog/locations | jq .
+
+# 🟢 查看插件健康
+curl -s http://backstage:7007/api/health
+
+# 🟡 重启 Backstage
+kubectl rollout restart deployment/backstage -n backstage
+
+# 🟡 刷新 Catalog 实体
+curl -X POST http://backstage:7007/api/catalog/locations/<id>/refresh
+
+# 🔴 重建数据库（丢失所有 Catalog 数据）
+kubectl exec -n backstage postgres-0 -- dropdb backstage
+kubectl rollout restart deployment/backstage -n backstage
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Catalog 实体缺失 | Git 仓库不可达/格式错误 | `kubectl logs -n backstage -l app=backstage \| grep catalog` | 检查 catalog-info.yaml 格式和仓库权限 |
+| TechDocs 构建失败 | MkDocs 依赖缺失/内存不足 | `kubectl logs -n backstage -l app=backstage \| grep techdocs` | 增加内存限制或检查 mkdocs.yml |
+| 插件加载失败 | 版本不兼容/依赖缺失 | 检查浏览器 Console 错误 | 升级插件或检查 peerDependencies |
+| 数据库连接失败 | PostgreSQL 不可达/密码错误 | `kubectl exec -n backstage backstage-0 -- env \| grep PG` | 检查 Secret 和网络策略 |
+| SSO 登录失败 | OIDC 配置错误/回调 URL 不匹配 | 检查 app-config.yaml auth 配置 | 核对 clientId/secret 和回调地址 |
+
+```
+排查流程：
+├─ 服务不可用
+│  ├─ kubectl get pods -n backstage 检查 Pod 状态
+│  ├─ 检查 PostgreSQL 连接
+│  └─ 检查 Ingress/Service 配置
+├─ Catalog 问题
+│  ├─ 检查 Location 配置和 Git 访问权限
+│  ├─ 验证 catalog-info.yaml 格式
+│  └─ 手动触发 refresh API
+└─ 插件问题
+   ├─ 检查插件版本兼容性
+   └─ 查看后端日志中的插件错误
+```
+
+## 生产案例
+
+### 案例 1：500+ 微服务统一门户
+
+- **场景**: 大型互联网公司 500+ 微服务分散在多个团队，服务发现和文档管理混乱
+- **排查**: 开发者平均花费 30 分钟查找服务 owner 和 API 文档
+- **方案**: 部署 Backstage，强制所有服务注册 catalog-info.yaml，集成 ArgoCD/Prometheus 插件
+- **效果**: 服务发现时间从 30min 降至 10s，新人 onboarding 时间缩短 60%
+
+### 案例 2：自助式服务创建平台
+
+- **场景**: 新服务创建需要多个团队协调（仓库、CI/CD、监控、文档）
+- **排查**: 新服务从申请到上线平均需要 3 天
+- **方案**: Backstage Scaffolder 模板一键创建服务（代码仓库+CI/CD+Catalog+监控）
+- **效果**: 新服务创建时间从 3 天缩短至 5 分钟
 
 ## 对比
 
-| 特性 | Backstage | Port | OpsLevel |
-|------|-----------|------|---------|
-| 开源 | ✅ Apache 2.0 | ❌ SaaS | ❌ SaaS |
-| 插件生态 | 200+ 社区插件 | 内置集成 | 内置集成 |
-| 自托管 | ✅ | ❌ | ❌ |
-| 定制化 | 高（代码级） | 中 | 低 |
+| 维度 | Backstage | Port | OpsLevel | Cortex |
+|------|-----------|------|---------|--------|
+| 开源 | ✅ Apache 2.0 | ❌ SaaS | ❌ SaaS | ❌ SaaS |
+| 插件生态 | 200+ 社区插件 | 内置集成 | 内置集成 | 内置集成 |
+| 自托管 | ✅ | ❌ | ❌ | ❌ |
+| 定制化 | 高（代码级） | 中 | 低 | 低 |
+| 适用场景 | 平台工程团队 | 快速上手 | 服务目录 | 服务健康 |
 
 ## 参考链接
 

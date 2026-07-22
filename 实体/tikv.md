@@ -80,15 +80,18 @@ TiKV 通过 TiDB Operator（或独立的 TiKV Operator）与 Kubernetes 集成�
 3. **实时分析**: 配合 TiFlash 列式存储，实现 HTAP（事务+分析）混合负载
 4. **消息队列存储**: 作为 Kafka/Pulsar 的底层持久化存储
 
-## 安装
+## 安装与配置
 
 ```bash
-# 安装 TiDB Operator（包含 TiKV 管理）
+# 安装 TiDB Operator
 helm repo add pingcap https://charts.pingcap.org/
 helm install tidb-operator pingcap/tidb-operator -n tidb-admin --create-namespace
+kubectl get pods -n tidb-admin
+```
 
-# 部署 TiDB 集群（包含 TiKV）
-kubectl apply -f - <<EOF
+### TiDB 集群配置（包含 TiKV）
+
+```yaml
 apiVersion: pingcap.com/v1alpha1
 kind: TidbCluster
 metadata:
@@ -101,7 +104,6 @@ spec:
     replicas: 3
     requests:
       storage: "10Gi"
-    config: {}
   tikv:
     replicas: 3
     requests:
@@ -109,12 +111,15 @@ spec:
     config:
       storage:
         engine: raftkv
+      raftstore:
+        sync-log: true
   tidb:
     replicas: 2
-EOF
+```
 
-# 部署独立 TiKV 集群（RawKV 模式）
-kubectl apply -f - <<EOF
+### 独立 TiKV 集群 (RawKV)
+
+```yaml
 apiVersion: tikv.org/v1alpha1
 kind: TikvCluster
 metadata:
@@ -127,17 +132,76 @@ spec:
     replicas: 3
     requests:
       storage: "100Gi"
-EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl get tc -n tidb-cluster
+kubectl exec -n tidb-cluster basic-tidb-0 -- tiup client
+
+# 🟢 查看 TiKV 节点状态
+kubectl get pods -n tidb-cluster -l app.kubernetes.io/component=tikv
+
+# 🟡 扩容 TiKV
+kubectl patch tc basic -n tidb-cluster --type=merge -p '{"spec":{"tikv":{"replicas":5}}}'
+
+# 🟡 滚动升级
+kubectl patch tc basic -n tidb-cluster --type=merge -p '{"spec":{"version":"v7.6.0"}}'
+
+# 🔴 缩容 TiKV（需先驱逐 leader）
+kubectl patch tc basic -n tidb-cluster --type=merge -p '{"spec":{"tikv":{"replicas":2}}}'
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| TiKV Pod CrashLoop | 磁盘空间不足 | `kubectl describe pod tikv-pod` | 扩容 PVC |
+| Region 不可用 | 多数副本丢失 | `pd-ctl region check` | 恢复节点/重建副本 |
+| 写入延迟高 | Raft 日志同步慢 | `tikv-ctl --host tikv:20160 metrics` | 检查磁盘 IO |
+| PD 调度异常 | Leader 不均衡 | `pd-ctl store` | 手动调度/检查网络 |
+| 连接超时 | TiKV 过载 | `kubectl top pod` | 扩容/限流 |
+
+```
+排查流程:
+├── 集群异常
+│   ├── kubectl get tc -o yaml → 查看状态
+│   ├── kubectl logs tikv-pod → TiKV 日志
+│   └── pd-ctl cluster → PD 集群状态
+├── 性能问题
+│   ├── Grafana TiKV 面板 → 延迟/吞吐
+│   ├── tikv-ctl metrics → 内部指标
+│   └── 检查磁盘 IO 和网络延迟
+└── 数据异常
+    ├── pd-ctl region check → Region 状态
+    └── 确认副本数和分布
+```
+
+## 生产案例
+
+### 案例 1: 在线扩容零停机
+
+- **场景**: 业务增长需要扩容 TiKV 从 3 节点到 6 节点
+- **方案**: 通过 TiDB Operator patch replicas；PD 自动调度 Region 到新节点；监控 rebalance 进度
+- **效果**: 扩容全程业务无感知，Region 均衡时间 2h
+
+### 案例 2: 磁盘故障数据恢复
+
+- **场景**: 单节点磁盘故障，该节点上 200+ Region 副本丢失
+- **方案**: Raft 多副本自动恢复；PD 调度补充副本；替换故障磁盘后重新加入
+- **效果**: 数据零丢失，完全恢复时间 4h
 
 ## 对比
 
-| 特性 | TiKV | etcd | Redis Cluster | Cassandra |
-|------|------|------|---------------|-----------|
-| 事务 | ✅ ACID | ⚠️ 简单 | ❌ | ⚠️ 轻量 |
-| 强一致性 | ✅ | ✅ | ❌ 最终 | ⚠️ |
-| 水平分片 | ✅ 自动 | ❌ | ✡ 手动 | ✅ |
-| CNCF 状态 | Graduated | Graduated | 非 CNCF | 非 CNCF |
+| 特性 | TiKV | etcd | Redis Cluster | Cassandra | 适用场景 |
+|------|------|------|---------------|-----------|----------|
+| 事务 | ✅ ACID | ⚠️ 简单 | ❌ | ⚠️ 轻量 | 强一致 |
+| 强一致性 | ✅ | ✅ | ❌ 最终 | ⚠️ | 金融 |
+| 水平分片 | ✅ 自动 | ❌ | ✡ 手动 | ✅ | 大规模 |
+| 容量 | PB 级 | GB 级 | TB 级 | PB 级 | 数据量 |
+| CNCF 状态 | Graduated | Graduated | 非 CNCF | 非 CNCF | 生态 |
 
 ## 架构定位
 

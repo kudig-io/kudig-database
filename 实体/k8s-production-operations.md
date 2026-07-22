@@ -72,19 +72,189 @@ K8s 生产运维直接操作集群核心资源：通过 kubeadm/kops/EKS/GKE 管
 - **灾难恢复**：制定和执行集群级别的灾难恢复计划
 - **合规审计**：满足生产环境的安全合规和审计要求
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
-# kubeadm 集群初始化
-kubeadm init --control-plane-endpoint "vip:6443" --upload-certs --pod-network-cidr=10.244.0.0/16
+# 🟢 kubeadm 集群初始化（HA 模式）
+kubeadm init --control-plane-endpoint "vip:6443" \
+  --upload-certs \
+  --pod-network-cidr=10.244.0.0/16 \
+  --service-cidr=10.96.0.0/12 \
+  --apiserver-advertise-address=0.0.0.0
 
-# 安装 Velero 备份工具
-velero install --provider aws --bucket k8s-backup --backup-location-config region=us-east-1
+# 🟢 安装 Velero 备份工具
+velero install --provider aws \
+  --bucket k8s-backup \
+  --backup-location-config region=us-east-1 \
+  --snapshot-location-config region=us-east-1 \
+  --use-volume-snapshots
+
+# 🟢 验证备份工具
+velero backup create test-backup --wait
+velero backup get
+
+# 🟢 安装 Prometheus 监控栈
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install monitoring prometheus-community/kube-prometheus-stack \
+  -n monitoring --create-namespace \
+  --set prometheus.prometheusSpec.retention=30d \
+  --set alertmanager.enabled=true
+
+# 🟢 安装 Cluster Autoscaler
+kubectl apply -f cluster-autoscaler.yaml
 ```
+
+### 备份策略配置
+
+```yaml
+# Velero 定时备份
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-full-backup
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"  # 每天凌晨2点
+  template:
+    includedNamespaces:
+      - "*"
+    excludedNamespaces:
+      - kube-system
+      - velero
+    includeClusterResources: true
+    storageLocation: default
+    ttl: 168h  # 保留7天
+    snapshotVolumes: true
+---
+# 备份存储位置
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: k8s-backup
+    prefix: prod-cluster
+  config:
+    region: us-east-1
+```
+
+### 变更管理流程
+
+```yaml
+# GitOps 变更流程 (Flux)
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: production-apps
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./clusters/production
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  validation: server
+  # 变更审批（通过 PR 合并触发）
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-vars
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: critical-app
+      namespace: production
+```
+
+## 运维操作
+
+```bash
+# 🟢 集群健康检查
+kubectl get componentstatuses
+kubectl get nodes -o wide
+kubectl top nodes
+
+# 🟢 查看集群资源使用
+kubectl top pods -A --sort-by=cpu | head -20
+kubectl top pods -A --sort-by=memory | head -20
+
+# 🟢 检查待处理 PVC
+kubectl get pvc -A --field-selector=status.phase!=Bound
+
+# 🟡 执行集群备份
+velero backup create pre-upgrade-$(date +%Y%m%d) --wait
+
+# 🟡 滚动升级 K8s 版本
+kubeadm upgrade plan
+kubeadm upgrade apply v1.30.0
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubectl uncordon <node>
+
+# 🔴 灾难恢复（从备份恢复）
+velero restore create --from-backup daily-full-backup-20260701 --wait
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| 节点 NotReady | kubelet 异常 | `kubectl describe node <node>` | 检查 kubelet 日志和证书 |
+| etcd 延迟高 | 磁盘 I/O 不足 | `etcdctl endpoint status` | 升级 SSD 或分离 etcd |
+| 备份失败 | 存储后端不可用 | `velero backup logs <name>` | 检查 S3 连接和权限 |
+| 升级失败 | 版本不兼容 | `kubeadm upgrade plan` | 检查版本跳跃和插件兼容 |
+
+```bash
+# 排查流程
+# 1. 控制平面健康
+kubectl get --raw /healthz?verbose
+etcdctl endpoint health --cluster
+
+# 2. 节点状态检查
+kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.conditions[-1].type,REASON:.status.conditions[-1].reason
+
+# 3. 系统 Pod 状态
+kubectl get pods -n kube-system -o wide | grep -v Running
+
+# 4. 资源压力检查
+kubectl describe nodes | grep -A5 "Conditions"
+```
+
+## 生产案例
+
+### 案例1：集群升级零停机
+- **场景**：生产集群从 K8s 1.28 升级到 1.30，要求零业务中断
+- **方案**：先备份（Velero）；控制平面滚动升级；工作节点逐个 drain/upgrade/uncordon；PDB 确保应用可用性
+- **效果**：升级全程零停机，回滚方案就绪（备份 + 旧节点池）
+
+### 案例2：灾难恢复演练
+- **场景**：验证集群级别灾难恢复能力（RTO < 1h, RPO < 5min）
+- **方案**：Velero 定时备份 + etcd 快照；恢复流程自动化脚本；季度 DR 演练
+- **效果**：实际恢复时间 45min，满足 RTO 要求；发现并修复 3 个恢复流程缺陷
 
 ## 对比替代方案
 
-相比手工运维，基于 Cluster API 和 GitOps 的自动化运维更可靠、可重复。相比托管 K8s（EKS/GKE），自建集群运维更复杂但控制力更强。
+| 维度 | 自建运维 | 托管 K8s (EKS/GKE) | Rancher | Cluster API |
+|------|----------|-------------------|---------|------------|
+| 控制力 | 完全 | 受限 | 中 | 完全 |
+| 运维复杂度 | 高 | 低 | 中 | 中 |
+| 成本 | 中 | 高 | 中 | 低 |
+| 多集群 | 手动 | 单云 | 强 | 强 |
+| 学习曲线 | 高 | 低 | 中 | 中 |
+
+## 检查清单
+
+- [ ] 集群多 Master 高可用已配置
+- [ ] etcd 定期备份已配置（每日）
+- [ ] Velero 备份策略已配置且验证可恢复
+- [ ] 监控告警已覆盖控制平面和工作节点
+- [ ] 升级流程已文档化且在测试环境验证
+- [ ] 变更管理流程已建立（GitOps/审批）
+- [ ] 灾难恢复计划已制定且定期演练
+- [ ] 容量规划已制定（节点/存储/网络）
 
 ## Related
 

@@ -62,6 +62,45 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 08:00 | 节点故障 NotReady，StatefulSet Pod 被驱逐 | 🟢 `kubectl get nodes -o wide` |
+| 08:02 | Pod 重新调度但 PVC 无法绑定(云盘在旧节点) | 🟢 `kubectl describe pvc ${PVC} -n ${NS}` |
+| 08:05 | Multi-Attach 错误: 云盘仍 attach 在旧节点 | 🟢 `kubectl get volumeattachment -o wide` |
+| 08:10 | 确认根因: 旧节点未完全下线，云盘未 detach | 🟢 `kubectl get nodes ${OLD_NODE} -o jsonpath='{.spec.taints}'` |
+| 08:15 | 强制删除旧 Pod + 等待云盘 detach | 🟡 `kubectl delete pod ${POD} -n ${NS} --force --grace-period=0` |
+| 08:20 | PVC 绑定成功，Pod 启动 | 🟢 `kubectl get pods -n ${NS} -w` |
+
+## 故障关联图
+
+```
+节点故障(触发因素)
+    ├── 节点NotReady → Pod被驱逐
+    │       └── 云盘未detach(旧节点未完全下线)
+    │               └── Multi-Attach错误
+    │                       └── PVC无法绑定到新节点
+    └── StatefulSet有序部署阻塞 → 后续Pod不更新
+```
+
+## 关键教训
+
+1. **云盘 detach 延迟**: 节点故障后云盘 detach 需要时间(6min 默认)
+2. **StatefulSet 有序性**: 一个 Pod 卡住会阻塞整个更新
+3. **存储高可用**: 单节点故障不应影响数据可用性
+
+## 面试要点
+
+1. **Q: 节点故障后 StatefulSet Pod 无法重新调度的处理？**
+   A: 等待云盘自动 detach(6min) → 或强制删除旧 Pod → 检查 VolumeAttachment → 确认 PVC 绑定 → Pod 重新调度
+
+2. **Q: Multi-Attach 错误的根因和解决？**
+   A: 云盘仍 attach 在旧节点 → 等待自动 detach → 或手动 detach → 确认 RWO 访问模式限制
+
+3. **Q: 如何加速节点故障后的 Pod 恢复？**
+   A: 配置 pod-eviction-timeout → 使用分布式存储(无 attach 限制) → 配置 node-problem-detector 快速检测
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

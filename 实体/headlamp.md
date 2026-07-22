@@ -73,28 +73,128 @@ Headlamp 通过标准 Kubernetes API 交互。使用 ServiceAccount Token 或 OI
 3. **多集群管理**: 统一界面管理开发/测试/生产多个集群
 4. **自定义面板**: 通过插件集成内部工具和 CRD 管理界面
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 部署到集群
 helm repo add headlamp https://headlamp-k8s.github.io/headlamp/
-helm install headlamp headlamp/headlamp -n kube-system
+helm install headlamp headlamp/headlamp -n headlamp --create-namespace
 # 创建 ServiceAccount 和 Token
-kubectl create serviceaccount headlamp-admin -n kube-system
-kubectl create token headlamp-admin
+kubectl create serviceaccount headlamp-admin -n headlamp
+kubectl create clusterrolebinding headlamp-admin --clusterrole=cluster-admin --serviceaccount=headlamp:headlamp-admin
+kubectl create token headlamp-admin -n headlamp
+# 访问 UI
+kubectl port-forward svc/headlamp -n headlamp 8080:80
 # 或桌面应用
 brew install --cask headlamp
-# 访问 http://localhost:3000
 ```
 
-## 替代方案
+```yaml
+# Ingress 暴露 Headlamp
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: headlamp
+  namespace: headlamp
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - headlamp.example.com
+    secretName: headlamp-tls
+  rules:
+  - host: headlamp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: headlamp
+            port:
+              number: 80
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Headlamp** | 开源、插件化、Web 原生 | 社区较小 |
-| Lens | 功能丰富、用户体验好 | 非 Web 原生、闭源功能 |
-| KubeDash | Google 出品 | 功能较少、维护缓慢 |
-| Rancher Dashboard | 企业级 | 较重、Rancher 绑定 |
+```bash
+# 插件安装
+# 将插件放入 /plugins 目录或通过 ConfigMap 挂载
+kubectl create configmap headlamp-plugins \
+  --from-file=./my-plugin/ \
+  -n headlamp
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Headlamp 状态
+kubectl get pods -n headlamp
+kubectl logs -n headlamp -l app.kubernetes.io/name=headlamp --tail=50
+
+# 🟢 检查集群连接
+kubectl get configmap headlamp -n headlamp -o yaml
+
+# 🟡 重启 Headlamp
+kubectl rollout restart deployment/headlamp -n headlamp
+
+# 🟡 更新 Token
+kubectl create token headlamp-admin -n headlamp --duration=8760h
+
+# 🔴 卸载 Headlamp
+helm uninstall headlamp -n headlamp
+kubectl delete namespace headlamp
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 无法登录 | Token 过期/无效 | 重新创建 Token | `kubectl create token` 生成新 Token |
+| 资源不显示 | RBAC 权限不足 | 检查 ServiceAccount 权限 | 调整 ClusterRole 权限 |
+| 插件加载失败 | 插件格式错误/版本不兼容 | 检查浏览器 Console | 检查插件 API 版本兼容性 |
+| 集群连接失败 | kubeconfig 无效/网络不通 | 检查 Headlamp 日志 | 更新集群配置或检查网络 |
+| WebSocket 断开 | Ingress 超时配置 | 检查 Nginx 代理配置 | 增加 proxy-read-timeout |
+
+```
+排查流程：
+├─ 登录问题
+│  ├─ 重新生成 ServiceAccount Token
+│  ├─ 检查 RBAC 权限
+│  └─ 检查 OIDC 配置（如使用）
+├─ 资源显示问题
+│  ├─ 检查用户权限是否足够
+│  ├─ 确认集群连接正常
+│  └─ 检查 CRD 是否已注册
+└─ 插件问题
+   ├─ 检查插件目录挂载
+   └─ 查看浏览器 Console 错误
+```
+
+## 生产案例
+
+### 案例 1：开发团队自助服务门户
+
+- **场景**: 开发者频繁请求运维团队执行 kubectl 操作，运维成为瓶颈
+- **排查**: 统计发现 80% 的请求是简单的查看日志、重启 Pod 等操作
+- **方案**: 部署 Headlamp + RBAC 限制开发者只能操作自己的 Namespace
+- **效果**: 运维工单减少 70%，开发者自助完成日常操作
+
+### 案例 2：多集群统一管理界面
+
+- **场景**: 5 个集群（dev/staging/prod×3）需要统一管理视图
+- **排查**: 团队频繁切换 kubeconfig context，操作错误风险高
+- **方案**: Headlamp 多集群配置，单一界面切换集群，RBAC 限制生产操作
+- **效果**: 集群切换时间归零，误操作风险降低 90%
+
+## 替代方案对比
+
+| 维度 | Headlamp | Lens | KubeDash | Rancher Dashboard |
+|------|----------|------|----------|-------------------|
+| 开源 | ✅ Apache 2.0 | ⚠️ 部分 | ✅ | ✅ |
+| 部署方式 | Web/桌面 | 桌面 | Web | Web |
+| 插件系统 | ✅ TS/JS | ✅ | ❌ | ✅ |
+| 多集群 | ✅ | ✅ | ❌ | ✅ |
+| 适用场景 | 轻量 Web UI | 功能丰富 | 简单查看 | 企业级 |
 
 ## 架构定位
 

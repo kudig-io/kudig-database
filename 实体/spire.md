@@ -68,17 +68,166 @@ SPIRE 采用 Server-Agent 架构。SPIRE Server 负责签发 SVID、管理信任
 - **合规审计**：提供细粒度的工作负载身份和访问审计
 - **混合云安全**：统一管理 K8s、VM、Serverless 工作负载的身份
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 Helm 安装 SPIRE
 helm repo add spiffe https://spiffe.github.io/helm-charts/
-helm install spire-crds spiffe/spire-crds -n spire-server
-helm install spire spiffe/spire -n spire-server
+helm install spire-crds spiffe/spire-crds -n spire-server --create-namespace
+helm install spire spiffe/spire -n spire-server \
+  --set server.replicaCount=3 \
+  --set server.dataStorage.size=10Gi
+
+# 🟢 验证安装
+kubectl get pods -n spire-server
+kubectl get crd | grep spire
+
+# 🟢 检查 Server 健康
+kubectl exec -n spire-server spire-server-0 -- spire-server healthcheck
+
+# 🟢 查看 Agent 状态
+kubectl exec -n spire-server spire-server-0 -- spire-server agent show
+
+# 🟢 查看注册条目
+kubectl exec -n spire-server spire-server-0 -- spire-server entry show
 ```
+
+### Workload 注册示例
+
+```bash
+# 🟡 注册基于 ServiceAccount 的 Workload
+kubectl exec -n spire-server spire-server-0 -- \
+  spire-server entry create \
+  -spiffeID spiffe://example.org/ns/default/sa/myapp \
+  -parentID spiffe://example.org/agent/k8s \
+  -selector k8s:ns:default \
+  -selector k8s:sa:myapp \
+  -x509SVIDTTL 1h \
+  -jwtSVIDTTL 5m
+
+# 🟡 注册 DNS 名称
+kubectl exec -n spire-server spire-server-0 -- \
+  spire-server entry create \
+  -spiffeID spiffe://example.org/ns/istio-system/sa/istio-ingressgateway \
+  -parentID spiffe://example.org/agent/k8s \
+  -selector k8s:ns:istio-system \
+  -selector k8s:sa:istio-ingressgateway \
+  -dns ingress.example.com
+```
+
+### Pod 挂载 Workload API Socket
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    volumeMounts:
+    - name: spire-agent-socket
+      mountPath: /run/spire/agent-sockets
+      readOnly: true
+  volumes:
+  - name: spire-agent-socket
+    hostPath:
+      path: /run/spire/agent-sockets
+      type: Directory
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 Server 日志
+kubectl logs -n spire-server -l app=spire-server --tail=50
+
+# 🟢 查看 Agent 日志
+kubectl logs -n spire-system -l app=spire-agent --tail=50
+
+# 🟢 检查健康状态
+kubectl exec -n spire-server spire-server-0 -- spire-server healthcheck
+
+# 🟢 查看 Agent 列表
+kubectl exec -n spire-server spire-server-0 -- spire-server agent show
+
+# 🟡 驱逐异常 Agent
+kubectl exec -n spire-server spire-server-0 -- \
+  spire-server agent evict -spiffeID spiffe://example.org/agent/k8s/<node-id>
+
+# 🟢 查看 Bundle
+kubectl exec -n spire-server spire-server-0 -- spire-server bundle show
+
+# 🟡 生成 Agent 加入 Token
+kubectl exec -n spire-server spire-server-0 -- \
+  spire-server token generate -spiffeID spiffe://example.org/agent/k8s
+
+# 🟡 创建联邦信任
+kubectl exec -n spire-server spire-server-0 -- \
+  spire-server bundle set -id spiffe://partner.org -path /tmp/partner-bundle.pem
+
+# 🟢 查看注册条目详情
+kubectl exec -n spire-server spire-server-0 -- spire-server entry show -spiffeID spiffe://example.org/ns/default/sa/myapp
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Workload 无法获取 SVID | 未注册/Selector 不匹配 | `spire-server entry show` | 创建匹配的注册条目 |
+| Agent 未连接 | 节点认证失败 | `spire-server agent show` | 检查 PSAT 配置和 RBAC |
+| SVID 过期 | TTL 过短/轮转失败 | `spire-agent api fetch x509` | 调整 TTL 配置 |
+| Server 不可用 | 数据库连接失败 | `kubectl logs spire-server-0` | 检查 PostgreSQL 连接 |
+| Socket 不可访问 | 挂载路径错误 | `ls /run/spire/agent-sockets` | 检查 hostPath 配置 |
+| 联邦信任失败 | Bundle 不匹配 | `spire-server bundle show -id <domain>` | 更新联邦 Bundle |
+
+### 排查流程
+
+```
+1. kubectl get pods -n spire-server → 确认组件状态
+2. spire-server healthcheck → Server 健康检查
+3. spire-server agent show → Agent 连接状态
+4. spire-server entry show → 注册条目检查
+5. spire-agent api fetch x509 → 测试 SVID 获取
+6. kubectl logs spire-server-0 → 查看服务日志
+```
+
+## 生产案例
+
+### 案例1: 多集群 Zero Trust 网络
+- **场景**: 3个 K8s 集群 + VM 工作负载需要统一身份
+- **方案**: 每集群部署 SPIRE，通过联邦信任建立跨集群互信
+- **效果**: 消除 IP 白名单，实现真正的 Zero Trust
+
+### 案例2: Envoy mTLS 无 Sidecar
+- **场景**: 不想部署完整 Service Mesh，但需要 mTLS
+- **方案**: SPIRE + Envoy SDS，直接从 Workload API 获取证书
+- **效果**: 轻量级 mTLS，无需 Istio 全套组件
 
 ## 对比替代方案
 
-相比 HashiCorp Vault（密钥管理），SPIRE 专注于工作负载身份而非密钥。相比 Istio 自带的 mTLS，SPIRE 提供跨平台、跨网格的身份标准化。
+| 维度 | SPIRE | Vault PKI | Istio mTLS | cert-manager |
+|------|-------|-----------|-----------|-------------|
+| 专注领域 | 工作负载身份 | 密钥管理 | 服务网格 | 证书管理 |
+| 自动轮转 | 支持 | 支持 | 支持 | 支持 |
+| 跨平台 | K8s/VM/裸机 | 通用 | 仅 Mesh | 仅 K8s |
+| 联邦信任 | 原生 | 无 | 有限 | 无 |
+| 复杂度 | 中 | 中 | 高 | 低 |
+
+## 检查清单
+
+- [ ] SPIRE Server 副本数 >= 3 (HA)
+- [ ] 使用外部数据库 (PostgreSQL) 而非内存
+- [ ] Agent DaemonSet 在所有节点运行
+- [ ] Workload 注册条目已配置
+- [ ] SVID TTL 合理 (X.509: 1h, JWT: 5m)
+- [ ] 联邦信任已配置 (跨集群场景)
+- [ ] 监控 Server 和 Agent 健康状态
+- [ ] 定期审计注册条目和 Agent 列表
 
 ## Related
 

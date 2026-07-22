@@ -81,15 +81,25 @@ PipeCD 的 Piped 代理在 Kubernetes 集群中运行，通过 kubeconfig 操作
 3. **多环境流水线**：dev → staging → prod 自动晋级，关键阶段人工审批
 4. **隔离网络部署**：网络隔离的环境中通过 Piped 代理安全部署
 
-## 安装
+## 安装与配置
+
+### Control Plane 部署
 
 ```bash
-# 安装 PipeCD Control Plane（Helm）
+# 安装 PipeCD Control Plane
 helm repo add pipecd https://pipe-cd.github.io/charts
 helm install pipecd pipecd/pipecd -n pipecd --create-namespace \
   --set controller.enabled=true \
   --set mysql.enabled=true
 
+# 验证部署
+kubectl get pods -n pipecd
+kubectl port-forward svc/pipecd 8080:8080 -n pipecd
+```
+
+### Piped Agent 安装
+
+```bash
 # 在目标集群安装 Piped Agent
 helm install piped pipecd/piped -n pipecd \
   --set config.apiAddress=https://pipecd.example.com \
@@ -97,30 +107,121 @@ helm install piped pipecd/piped -n pipecd \
   --set config.pipedId=piped-cluster-1 \
   --set config.pipedKeySecret=piped-key
 
-# 在应用仓库中创建 app.pipecd.yaml
-cat > app.pipecd.yaml <<EOF
+# 验证 Piped 连接状态
+kubectl get pods -n pipecd -l app=piped
+```
+
+### 应用配置
+
+```yaml
+# app.pipecd.yaml - 应用仓库中的部署配置
 apiVersion: pipecd.dev/v1beta1
 kind: KubernetesApp
 spec:
   name: myapp
+  labels:
+    team: backend
   pipeline:
     stages:
       - name: K8S_CANARY_ROLLOUT
         with:
           replicas: 10%
+          wait: 5m
+      - name: ANALYSIS
+        with:
+          duration: 5m
+          metrics:
+            - name: error-rate
+              provider: prometheus
+              query: rate(http_requests_total{status=~"5.."}[5m])
+              threshold: 0.01
       - name: WAIT_APPROVAL
+        with:
+          approvers: ["admin@example.com"]
       - name: K8S_PRIMARY_ROLLOUT
-EOF
+---
+# Terraform 应用示例
+apiVersion: pipecd.dev/v1beta1
+kind: TerraformApp
+spec:
+  name: infrastructure
+  pipeline:
+    stages:
+      - name: TERRAFORM_PLAN
+      - name: WAIT_APPROVAL
+      - name: TERRAFORM_APPLY
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看应用部署状态
+kubectl get applications -n pipecd
+
+# 🟢 查看 Piped 连接状态
+kubectl get pipeds -n pipecd
+
+# 🟡 手动触发部署
+pipectl application sync --app-id=<app-id>
+
+# 🟡 回滚到上一版本
+pipectl application rollback --app-id=<app-id>
+
+# 🟡 跳过当前阶段
+pipectl application skip-stage --app-id=<app-id> --stage-id=<stage-id>
+
+# 🔴 取消正在进行的部署
+pipectl application cancel --app-id=<app-id>
+
+# 🔴 删除应用配置
+kubectl delete application <app-id> -n pipecd
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Piped 断连 | API 地址不可达 | `kubectl logs -n pipecd -l app=piped` | 检查 apiAddress 和网络 |
+| 部署卡在 ANALYSIS | Prometheus 查询失败 | `pipectl application get --app-id=<id>` | 检查 Prometheus 连接和查询语句 |
+| 金丝雀回滚 | 错误率超阈值 | 查看 PipeCD Web UI 日志 | 检查应用日志修复错误 |
+| Helm 安装失败 | Chart 仓库不可达 | `kubectl logs -n pipecd -l app=piped` | 检查 Helm repo URL 和认证 |
+| 审批超时 | 审批人未响应 | PipeCD Web UI | 配置超时自动处理 |
+
+**排查流程：**
+```
+部署失败
+├── 检查 Piped 状态 → kubectl get pipeds -n pipecd
+├── 查看应用日志 → pipectl application get --app-id=<id>
+├── 检查 Piped 日志 → kubectl logs -n pipecd -l app=piped
+├── 检查目标集群 → kubectl get pods -n <target-ns>
+└── 检查 Git 源 → 确认 app.pipecd.yaml 配置正确
+```
+
+## 生产案例
+
+### 案例一：多平台统一交付
+
+- **场景**: 团队同时管理 K8s 微服务、AWS Lambda 和 Terraform 基础设施，需要统一交付平台
+- **排查**: 之前使用 3 个不同工具，流程不一致，审批分散
+- **方案**: PipeCD 统一管理，K8s 用金丝雀发布，Lambda 用流量切换，Terraform 用 plan+approval
+- **效果**: 交付流程统一，审批集中，部署频率从每周 2 次提升至每天 5 次
+
+### 案例二：隔离网络安全部署
+
+- **场景**: 生产集群在隔离网络中，无法从外部直接访问
+- **排查**: ArgoCD/Flux 需要集群可访问，无法用于隔离环境
+- **方案**: 使用 PipeCD Piped 代理架构，Piped 主动向外连接 Control Plane，无需入站连接
+- **效果**: 隔离网络集群安全纳管，无需开放任何入站端口
 
 ## 对比
 
-| 特性 | PipeCD | ArgoCD | Flux | Spinnaker |
-|------|--------|--------|------|-----------|
-| 多平台 | ✅ K8s/Lambda/Terraform | ❌ K8s only | ❌ K8s only | ✅ |
-| 代理架构 | ✅ Piped | ❌ 直连 | ❌ 直连 | ✅ |
-| 自动分析 | ✅ Prometheus | ⚠️ Argo Rollouts | ❌ | ✅ Kayenta |
-| 复杂度 | ⭐⭐ | ⭐ | ⭐ | ⭐⭐⭐ |
+| 特性 | PipeCD | ArgoCD | Flux | Spinnaker | 适用场景 |
+|------|--------|--------|------|-----------|----------|
+| 多平台 | ✅ K8s/Lambda/Terraform | ❌ K8s only | ❌ K8s only | ✅ | PipeCD 多平台 |
+| 代理架构 | ✅ Piped | ❌ 直连 | ❌ 直连 | ✅ | 隔离网络 |
+| 自动分析 | ✅ Prometheus | ⚠️ Argo Rollouts | ❌ | ✅ Kayenta | - |
+| 复杂度 | ⭐⭐ | ⭐ | ⭐ | ⭐⭐⭐ | - |
+| 审批流程 | ✅ 内置 | ⚠️ 插件 | ❌ | ✅ | - |
 
 ## 参考链接
 

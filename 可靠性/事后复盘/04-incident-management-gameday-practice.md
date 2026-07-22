@@ -294,6 +294,173 @@ spec:
 | Action Item 完成率 | > 90% 在截止日前 | 项目管理工具 |
 | 重复事件率 | < 5% | 事件分类统计 |
 
+## 事件通讯模板
+
+### 内部通知模板
+
+```markdown
+## 🚨 [P0] 事件通知 - {service_name}
+
+**状态**: 🔴 进行中 / 🟡 监控中 / 🟢 已解决
+**开始时间**: 2026-07-21 14:05 UTC+8
+**影响范围**: 约 15,000 用户无法下单
+**IC**: @sre-lead
+
+### 当前状况
+- 订单服务 5xx 错误率 > 50%
+- 数据库连接池耗尽
+
+### 已采取行动
+- 14:07 IC 确认 P0，开启事件频道
+- 14:12 定位根因：数据库迁移锁表
+- 14:25 决策：回滚部署
+
+### 下一步
+- 验证回滚完成
+- 确认服务恢复
+- 30 分钟内发布更新
+
+### 沟通节奏
+- 每 15 分钟更新一次
+- 下次更新: 14:45
+```
+
+### 外部状态页模板
+
+```markdown
+## 服务状态更新
+
+**服务**: 订单服务
+**状态**: 部分中断 (Partial Outage)
+**开始时间**: 2026-07-21 14:05 UTC+8
+
+### 影响
+部分用户可能无法完成下单操作。我们的团队正在积极处理此问题。
+
+### 更新时间线
+- **14:05** - 我们检测到订单服务异常
+- **14:10** - 已确认问题并启动应急响应
+- **14:30** - 已实施修复措施，服务正在恢复
+- **14:49** - 服务已完全恢复
+
+### 后续
+我们将在 48 小时内发布详细的事后分析报告。
+```
+
+## 改进项跟踪
+
+### 改进项 ConfigMap
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: incident-improvements
+  namespace: monitoring
+data:
+  improvements.yaml: |
+    improvements:
+      - id: INC-2026-001-A1
+        incident: INC-2026-001
+        title: CI 添加迁移锁检测
+        owner: @dba
+        due_date: 2026-07-25
+        status: completed
+        priority: P0
+        
+      - id: INC-2026-001-A2
+        incident: INC-2026-001
+        title: 大表迁移使用 gh-ost
+        owner: @dba
+        due_date: 2026-08-01
+        status: in_progress
+        priority: P0
+        
+      - id: INC-2026-001-A3
+        incident: INC-2026-001
+        title: 连接池监控告警
+        owner: @sre
+        due_date: 2026-07-22
+        status: completed
+        priority: P1
+```
+
+### 改进项跟踪 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: improvement-tracker
+  namespace: monitoring
+spec:
+  schedule: "0 9 * * 1"  # 每周一 9:00
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: tracker
+              image: improvement-tracker:latest
+              command: [sh, -c]
+              args:
+                - |
+                  # 检查逾期改进项
+                  OVERDUE=$(kubectl get configmap incident-improvements -n monitoring -o yaml | \
+                    yq '.data."improvements.yaml"' | \
+                    yq '.improvements[] | select(.due_date < "'$(date +%Y-%m-%d)'" and .status != "completed")')
+                  
+                  if [ -n "$OVERDUE" ]; then
+                    echo "发现逾期改进项:"
+                    echo "$OVERDUE"
+                    # 发送提醒
+                    curl -X POST $SLACK_WEBHOOK -d '{"text":"⚠️ 发现逾期改进项，请相关负责人跟进"}'
+                  fi
+          restartPolicy: OnFailure
+```
+
+## 事件指标仪表板
+
+### Grafana Dashboard 配置
+
+```json
+{
+  "dashboard": {
+    "title": "事件管理概览",
+    "panels": [
+      {
+        "title": "MTTD 趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "avg(incident_detection_time_seconds) / 60" }
+        ]
+      },
+      {
+        "title": "MTTR 趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "avg(incident_resolution_time_seconds) / 60" }
+        ]
+      },
+      {
+        "title": "事件数量 (按等级)",
+        "type": "bargauge",
+        "targets": [
+          { "expr": "count by (severity) (incidents_total)" }
+        ]
+      },
+      {
+        "title": "改进项完成率",
+        "type": "stat",
+        "targets": [
+          { "expr": "sum(incident_improvements_completed) / sum(incident_improvements_total) * 100" }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Related
 
 - [[可靠性/事后复盘/index.md|事后复盘]]

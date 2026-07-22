@@ -78,14 +78,13 @@ kcp 本身就是一个精简版的 Kubernetes API 服务器，完全兼容 [[系
 3. **自定义控制器平台**: 在 kcp 上运行业务控制器，无需完整 Kubernetes 集群
 4. **混合云管理**: 通过 Syncer 将工作负载分发到不同云厂商的物理集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 kcp
 kubectl krew install kcp
 kcp start
-
-# 或者从源码安装
+# 或从源码安装
 git clone https://github.com/kcp-dev/kcp.git
 cd kcp && make build
 ./bin/kcp start
@@ -95,14 +94,102 @@ export KUBECONFIG=$(pwd)/.kcp/admin.kubeconfig
 kubectl get workspaces
 ```
 
+```bash
+# 创建 Workspace
+kubectl kcp workspace create my-team --type=universal
+kubectl kcp workspace use my-team
+
+# 在 Workspace 中创建资源
+kubectl create namespace app
+kubectl apply -f deployment.yaml
+
+# APIExport/APIBinding 示例
+kubectl apply -f - <<EOF
+apiVersion: apis.kcp.io/v1alpha1
+kind: APIExport
+metadata:
+  name: my-platform-api
+spec:
+  latestResourceSchemas:
+    - widgets.myplatform.io
+EOF
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Workspace 状态
+kubectl get workspaces
+kubectl kcp workspace tree
+
+# 🟢 查看 API 导出和绑定
+kubectl get apiexports -A
+kubectl get apibindings -A
+
+# 🟢 检查 etcd 状态
+etcdctl --endpoints=http://localhost:2379 endpoint health
+etcdctl --endpoints=http://localhost:2379 endpoint status --write-out=table
+
+# 🟡 切换 Workspace
+kubectl kcp workspace use <workspace-name>
+
+# 🟡 重启 kcp
+# Ctrl+C 停止后重新 kcp start
+
+# 🔴 删除 Workspace（级联删除所有资源）
+kubectl delete workspace <name>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Workspace 无法访问 | 权限不足/Workspace 不存在 | `kubectl get workspaces` | 检查 RBAC 和 Workspace 名称 |
+| APIBinding 失败 | APIExport 不存在/版本不匹配 | `kubectl describe apibinding <name>` | 检查 APIExport 和 ResourceSchema |
+| Syncer 同步失败 | 物理集群不可达/RBAC 不足 | `kubectl logs -n kcp-syncer` | 检查 kubeconfig 和权限 |
+| etcd 连接失败 | 内嵌 etcd 未启动 | 检查 kcp 启动日志 | 重启 kcp 或检查端口占用 |
+| CRD 注册失败 | Workspace 类型不支持 | `kubectl api-resources` | 确认 Workspace 类型支持 CRD |
+
+```
+排查流程：
+├─ Workspace 问题
+│  ├─ kubectl get workspaces 检查状态
+│  ├─ 检查当前 Workspace 上下文
+│  └─ 检查 RBAC 权限
+├─ API 共享问题
+│  ├─ 检查 APIExport 是否 Ready
+│  ├─ 检查 APIBinding 状态
+│  └─ 确认 ResourceSchema 版本匹配
+└─ Syncer 问题
+   ├─ 检查 Syncer Pod 状态
+   ├─ 检查物理集群连接
+   └─ 检查同步资源 RBAC
+```
+
+## 生产案例
+
+### 案例 1：SaaS 平台多租户控制面
+
+- **场景**: SaaS 平台需要为 1000+ 租户提供独立的 API 视图，传统方案需 1000 个 K8s 集群
+- **排查**: 评估 vCluster/Capsule，均需要宿主集群且资源开销大
+- **方案**: 使用 kcp 单进程运行 1000+ Workspace，通过 APIExport 统一管理平台 API
+- **效果**: 单节点承载所有租户控制面，资源成本降低 95%
+
+### 案例 2：混合云工作负载分发
+
+- **场景**: 工作负载需要分发到 AWS/GCP/本地 3 个物理集群
+- **排查**: 传统多集群管理复杂度高，需要统一控制面
+- **方案**: kcp 作为逻辑控制面，通过 Syncer 将工作负载同步到各物理集群
+- **效果**: 统一 API 视图管理多云工作负载，运维复杂度降低 70%
+
 ## 对比
 
-| 特性 | kcp | vCluster | Capsule |
-|------|-----|----------|---------|
-| 隔离方式 | 逻辑 Workspace | 虚拟集群 | Namespace 聚合 |
-| 原生 API | ✅ 完全兼容 | ✅ 完全兼容 | ⚠️ 共享 API |
-| 无需物理集群 | ✅ 单进程 | ❌ 需宿主集群 | ❌ 需宿主集群 |
-| 适合场景 | API 平台 | 开发测试 | 多租户隔离 |
+| 维度 | kcp | vCluster | Capsule | KubeStellar |
+|------|-----|----------|---------|-------------|
+| 隔离方式 | 逻辑 Workspace | 虚拟集群 | Namespace 聚合 | 多集群分发 |
+| 原生 API | ✅ 完全兼容 | ✅ 完全兼容 | ⚠️ 共享 API | ✅ |
+| 无需物理集群 | ✅ 单进程 | ❌ 需宿主 | ❌ 需宿主 | ❌ 需多集群 |
+| 适用场景 | API 平台 | 开发测试 | 多租户隔离 | 多集群管理 |
 
 ## 架构定位
 

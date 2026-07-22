@@ -60,6 +60,46 @@ metrics-server问题导致HPA无法获取CPU指标，同时节点日志堆积导
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 14:00 | 流量激增，HPA 应触发扩容 | 🟢 `kubectl get hpa -n prod -o wide` |
+| 14:02 | HPA 显示 `FailedGetResourceMetric` | 🟢 `kubectl describe hpa ${HPA} -n prod` |
+| 14:03 | 节点 CPU >95%，Memory Pressure | 🟢 `kubectl top nodes` |
+| 14:05 | metrics-server OOMKilled | 🟢 `kubectl get pods -n kube-system -l k8s-app=metrics-server` |
+| 14:10 | 确认根因: 节点资源压力导致 metrics-server 被驱逐 | 🟢 `kubectl describe node ${NODE} \| grep -A5 Conditions` |
+| 14:15 | 修复 metrics-server + 扩容节点 | 🟡 `kubectl rollout restart deployment metrics-server -n kube-system` |
+| 14:20 | HPA 正常扩容，服务恢复 | 🟢 `kubectl get hpa -n prod -w` |
+
+## 故障关联图
+
+```
+流量激增(触发因素)
+    ├── 节点资源压力增大
+    │       └── metrics-server OOMKilled
+    │               └── HPA无法获取指标
+    │                       └── 扩容失败
+    └── 现有Pod过载 → 响应变慢 → 用户体验下降
+```
+
+## 关键教训
+
+1. **metrics-server 单点**: 未配置多副本和反亲和
+2. **资源预留不足**: 节点未预留系统组件资源
+3. **HPA 容错**: 未配置备用指标源(Prometheus Adapter)
+
+## 面试要点
+
+1. **Q: HPA 和节点资源压力同时出现的处理优先级？**
+   A: 先恢复 metrics-server(让 HPA 能工作) → 再扩容节点(解决资源压力) → 最后验证 HPA 正常扩容
+
+2. **Q: 如何避免 metrics-server 单点故障？**
+   A: 多副本 + 反亲和 + 资源预留 + 备用指标源(Prometheus Adapter) + 监控自监控
+
+3. **Q: 节点资源压力的紧急处理？**
+   A: 识别压力源(Disk/Memory/PID) → 清理无用资源 → 驱逐低优先级 Pod → 扩容节点 → 配置资源预留
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

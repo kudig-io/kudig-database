@@ -101,6 +101,131 @@ Security controls map to regulatory requirements:
 - **Pod Security Standards**: Three pre-defined levels (Privileged, Baseline, Restricted) enforced via namespace labels
 - **Minimum Pod Security**: runAsNonRoot=true, readOnlyRootFilesystem=true, capabilities drop ALL, allowPrivilegeEscalation=false, seccompProfile=RuntimeDefault
 
+## 源码实现分析
+
+### 纵深防御层次架构
+
+```
+┌─────────────────────────────────────────────────┐
+│  Layer 1: 供应链安全                          │
+│  ├── 镜像签名验证 (Cosign/Sigstore)          │
+│  ├── SBOM 生成与扫描 (Syft + Trivy)         │
+│  └── 准入策略 (Kyverno verifyImages)         │
+├─────────────────────────────────────────────────┤
+│  Layer 2: 运行时安全                          │
+│  ├── Pod Security Standards (Restricted)      │
+│  ├── seccomp + AppArmor/SELinux              │
+│  └── 只读文件系统 + drop ALL capabilities    │
+├─────────────────────────────────────────────────┤
+│  Layer 3: 网络安全                            │
+│  ├── NetworkPolicy default-deny              │
+│  ├── mTLS (Istio/Linkerd)                    │
+│  └── 服务间授权 (AuthorizationPolicy)        │
+├─────────────────────────────────────────────────┤
+│  Layer 4: 数据安全                            │
+│  ├── Secret 加密 (etcd encryption at rest)    │
+│  ├── 动态凭证 (Vault)                        │
+│  └── 外部 Secret 管理 (ESO)                  │
+├─────────────────────────────────────────────────┤
+│  Layer 5: 检测与响应                          │
+│  ├── 运行时威胁检测 (Falco)                  │
+│  ├── 审计日志 (K8s Audit + SIEM)             │
+│  └── 合规扫描 (kube-bench + Trivy)           │
+└─────────────────────────────────────────────────┘
+```
+
+### Kyverno 镜像验证策略
+
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signatures
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: verify-cosign-signature
+    match:
+      resources:
+        kinds: ["Pod"]
+    verifyImages:
+    - imageReferences:
+      - "registry.example.com/*"
+      attestors:
+      - entries:
+        - keys:
+            publicKeys: |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
+              -----END PUBLIC KEY-----
+```
+
+## 使用场景
+
+### 场景一：安全基线检查
+
+```bash
+# 🟢 低风险 - CIS Benchmark 扫描
+kubectl apply -f kube-bench-job.yaml
+kubectl logs job/kube-bench
+
+# 🟢 低风险 - 检查 Pod 安全配置
+kubectl get pods -A -o json | jq '.items[] | select(.spec.securityContext.runAsNonRoot != true) | .metadata.name'
+
+# 🟢 低风险 - 检查特权容器
+kubectl get pods -A -o json | jq '.items[].spec.containers[] | select(.securityContext.privileged == true)'
+```
+
+### 场景二：网络隔离实施
+
+```yaml
+# 默认拒绝所有 + 放行 DNS + 允许特定服务
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+  - ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 有防火墙就安全 | 防火墙只是网络层，需多层防御（供应链+运行时+网络+数据+检测） |
+| 内网不需要加密 | 零信任原则：内网也需 mTLS，防止横向移动 |
+| Secret 在 K8s 中是加密的 | 默认 base64 编码（非加密），必须启用 etcd encryption at rest |
+| 镜像扫描一次就够 | 需持续扫描（新漏洞不断发现），CI + 运行时 + 定期重扫 |
+| RBAC 配置好就安全 | RBAC 只是授权层，还需 PSA、NetworkPolicy、审计日志等 |
+| 安全是安全团队的事 | DevSecOps：安全左移，开发/运维/安全共同负责 |
+
+## 面试要点
+
+1. **云原生纵深防御的层次？** — 供应链（镜像签名+SBOM+扫描）→ 运行时（PSA+seccomp+MAC）→ 网络（NetworkPolicy+mTLS）→ 数据（加密+动态凭证）→ 检测（Falco+审计）。每层独立生效，层层递进。
+
+2. **零信任网络如何实现？** — 永不信任、始终验证。NetworkPolicy default-deny（L3/L4）+ Service Mesh mTLS（L7）+ AuthorizationPolicy（细粒度授权）。每次通信都经过身份验证和授权。
+
+3. **供应链安全的关键环节？** — 可重现构建（SLSA provenance）→ SBOM 生成（Syft）→ 漏洞扫描（Trivy）→ 镜像签名（Cosign）→ 准入验证（Kyverno verifyImages）→ 运行时监控（Falco）。
+
+4. **生产环境安全合规检查清单？** — CIS Benchmark（kube-bench）；PSA Restricted；etcd 加密；审计日志启用；镜像签名验证；NetworkPolicy default-deny；定期漏洞扫描；Secret 轮换；RBAC 最小权限审计。
+
 ## Related
 
 - [[实体/trivy.md|trivy]] — Trivy

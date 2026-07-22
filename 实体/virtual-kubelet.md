@@ -69,29 +69,195 @@ Virtual Kubelet 通过 Kubernetes Node API 注册为集群节点，具有特定�
 3. **混合调度**: 关键服务运行在自管节点，非关键任务运行在虚拟节点
 4. **边缘扩展**: 在边缘集群中使用 Virtual Kubelet 连接云端无服务器后端
 
-## 安装
+## 安装与配置
 
 ```bash
 # Azure ACI Provider
 helm repo add virtual-kubelet https://virtual-kubelet.github.io
 helm install virtual-kubelet virtual-kubelet/virtual-kubelet \
-  --set provider=azure --set env.azureSubscriptionId=<id>
-# 或使用 CLI
-vkubelet --provider azure --nodeName virtual-node-aci
+  --set provider=azure \
+  --set env.azureSubscriptionId=<id> \
+  --set env.azureTenantId=<tenant> \
+  --set env.azureClientId=<client> \
+  --set env.azureClientKey=<secret>
+
+# AWS Fargate Provider (EKS 原生支持，无需单独安装)
+# 通过 EKS Fargate Profile 配置
+
+# 通用 CLI 方式
+vkubelet --provider azure \
+  --nodeName virtual-node-aci \
+  --nodename virtual-node-aci \
+  --kubeconfig ~/.kube/config
 ```
 
-## 替代方案
+```yaml
+# Pod 调度到虚拟节点的 Toleration + NodeSelector
+apiVersion: v1
+kind: Pod
+metadata:
+  name: burst-pod
+  labels:
+    app: burst-worker
+spec:
+  nodeSelector:
+    kubernetes.io/role: agent
+    type: virtual-kubelet
+  tolerations:
+    - key: virtual-kubelet.io/provider
+      operator: Exists
+      effect: NoSchedule
+  containers:
+    - name: worker
+      image: myapp/worker:v1.0
+      resources:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Virtual Kubelet** | 标准化接口、多 Provider | 部分功能受限（存储/网络） |
-| KEDA + Jobs | 事件驱动、原生 K8s | 仅支持缩容到零，不能扩展节点 |
-| Karpenter | 自动节点供给、高性能 | 仅支持节点级扩展，非无服务器 |
-| ACK (Alibaba) | 云厂商深度集成 | 厂商绑定 |
+```yaml
+# HPA 配合 Virtual Kubelet 实现弹性扩展
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web
+  minReplicas: 3
+  maxReplicas: 100
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+  behavior:
+    scaleUp:
+      policies:
+        - type: Pods
+          value: 20
+          periodSeconds: 60
+```
 
-## 架构定位
+## 运维操作
 
-在 CNCF 生态中，Virtual Kubelet 属于 **Runtime / Orchestration** 类别，是 Kubernetes 与无服务器计算之间的桥梁。它扩展了 Kubernetes 的弹性能力边界。
+```bash
+# 🟢 检查虚拟节点状态
+kubectl get nodes -l type=virtual-kubelet
+kubectl describe node virtual-node-aci
+
+# 🟢 检查运行在虚拟节点上的 Pod
+kubectl get pods -A --field-selector spec.nodeName=virtual-node-aci
+
+# 🟢 检查 Virtual Kubelet Pod 状态
+kubectl get pods -n kube-system -l app=virtual-kubelet
+kubectl logs -n kube-system -l app=virtual-kubelet --tail=50
+
+# 🟢 检查节点 Taint 和 Condition
+kubectl get node virtual-node-aci -o jsonpath='{.spec.taints}'
+kubectl get node virtual-node-aci -o jsonpath='{.status.conditions}'
+
+# 🟡 删除虚拟节点上的 Pod (触发重新调度)
+kubectl delete pod <pod-name> -n <ns>
+
+# 🔴 删除虚拟节点 (所有 Pod 将被终止)
+kubectl delete node virtual-node-aci
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod Pending 无法调度到虚拟节点 | 缺少 Toleration/NodeSelector | `kubectl describe pod` | 添加正确的 toleration |
+| 虚拟节点 NotReady | Provider 连接失败 | `kubectl describe node` | 检查云凭证/网络 |
+| Pod 创建后长时间 Unknown | 后端服务响应慢 | 检查 Provider 日志 | 检查云服务商配额 |
+| Pod 日志无法获取 | Provider 不支持 logs API | `kubectl logs <pod>` | 使用云平台控制台查看 |
+| 存储卷挂载失败 | 后端不支持 PVC | `kubectl describe pod` | 使用 emptyDir 或云平台存储 |
+| 虚拟节点消失 | VK Pod 崩溃 | `kubectl get pods -n kube-system` | 重启 VK Deployment |
+
+### 排查流程
+
+```
+虚拟节点异常
+├── 节点不存在
+│   ├── 检查 VK Deployment 状态
+│   ├── 检查 VK Pod 日志
+│   └── 检查 RBAC 权限 (nodes/create)
+├── 节点 NotReady
+│   ├── 检查云服务商凭证有效性
+│   ├── 检查网络连通性 (API endpoint)
+│   └── 检查云服务商配额限制
+└── Pod 调度失败
+    ├── 检查 Toleration 配置
+    ├── 检查 NodeSelector/NodeAffinity
+    ├── 检查资源请求是否超出 Provider 支持
+    └── 检查 Pod Spec 兼容性 (hostPath 等不支持)
+```
+
+## 生产案例
+
+### 案例 1: 电商大促流量突发弹性扩展
+
+- **场景**: 电商大促期间流量增长 10 倍，自管节点无法快速扩容
+- **排查**: HPA 触发扩容但节点资源不足，Pod Pending
+- **方案**: 配置 Virtual Kubelet (ACI) 作为溢出节点；HPA 扩容的 Pod 通过 toleration 调度到 ACI；大促结束后自动缩容
+- **效果**: 扩容时间从 10 分钟(节点)降至 30 秒(ACI)，成本降低 60%
+
+### 案例 2: CI/CD 构建任务隔离
+
+- **场景**: Jenkins Agent Pod 占用大量集群资源，影响业务服务
+- **排查**: 构建高峰期节点 CPU 使用率 >90%，业务 Pod 被驱逐
+- **方案**: 将 CI/CD 命名空间的 Pod 通过 PriorityClass + Toleration 调度到 Fargate；业务 Pod 保留在自管节点
+- **效果**: 业务服务稳定性提升，构建任务不受节点资源限制
+
+## Provider 接口
+
+```go
+// Provider 核心接口定义
+type PodLifecycleHandler interface {
+    CreatePod(ctx context.Context, pod *v1.Pod) error
+    UpdatePod(ctx context.Context, pod *v1.Pod) error
+    DeletePod(ctx context.Context, pod *v1.Pod) error
+    GetPod(ctx context.Context, namespace, name string) (*v1.Pod, error)
+    GetPodStatus(ctx context.Context, namespace, name string) (*v1.PodStatus, error)
+    GetPods(ctx context.Context) ([]*v1.Pod, error)
+}
+
+type PodHandler interface {
+    PodLifecycleHandler
+    GetContainerLogs(ctx context.Context, namespace, podName, containerName string, opts ContainerLogOpts) (io.ReadCloser, error)
+    RunInContainer(ctx context.Context, namespace, podName, containerName string, cmd []string, attach AttachIO) error
+}
+```
+
+## 对比与替代方案
+
+| 维度 | Virtual Kubelet | KEDA + Jobs | Karpenter | ACK ECI |
+|------|----------------|-------------|-----------|----------|
+| 扩展粒度 | Pod 级 | Pod 级 | 节点级 | Pod 级 |
+| 启动速度 | ~30s | ~10s | ~2min | ~20s |
+| 成本模型 | 按 Pod 计费 | 按 Pod 计费 | 按节点计费 | 按 Pod 计费 |
+| K8s 兼容性 | 部分 API | 完整 | 完整 | 部分 API |
+| 存储支持 | 有限 | 完整 | 完整 | 有限 |
+| 网络支持 | 有限 | 完整 | 完整 | VPC 集成 |
+| 适用场景 | 突发溢出 | 事件驱动 | 节点自动供给 | 阿里云 |
+
+## 检查清单
+
+- [ ] 云服务商凭证有效且权限充足
+- [ ] 虚拟节点状态 Ready
+- [ ] Pod Toleration 和 NodeSelector 配置正确
+- [ ] 资源请求在 Provider 支持范围内
+- [ ] 不使用 hostPath/hostNetwork 等不支持的特性
+- [ ] 监控覆盖虚拟节点 Pod 状态
+- [ ] 成本告警配置 (避免无限制扩展)
+- [ ] 网络连通性验证 (Pod 可访问集群内 Service)
+- [ ] 日志收集方案确认 (Provider 可能不支持 kubectl logs)
 
 ## 参考链接
 
@@ -104,14 +270,9 @@ vkubelet --provider azure --nodeName virtual-node-aci
 ## Related
 
 - [[openfeature]] — OpenFeature
-- tools]] — Podman Desktop
 - [[k3s]] — k3s 轻量级 Kubernetes
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- virtual-kubelet
 - [[实体/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
 
 <!-- risk-assessed -->

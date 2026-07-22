@@ -75,14 +75,17 @@ OpenFeature 通过 Flagd 组件实现 Kubernetes 原生集成。Flagd 可以作�
 3. **紧急降级**: 发现问题时通过 Flag 快速关闭问题功能，无需重新部署
 4. **多环境配置**: 不同环境（dev/staging/prod）使用不同 Flag 配置
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 OpenFeature Operator
 kubectl apply -f https://github.com/open-feature/open-feature-operator/releases/download/v0.2.45/install.yaml
+kubectl get pods -n open-feature-operator-system
+```
 
-# 创建 FeatureFlagConfiguration CRD
-kubectl apply -f - <<EOF
+### FeatureFlag CRD 配置
+
+```yaml
 apiVersion: core.openfeature.dev/v1alpha2
 kind: FeatureFlagConfiguration
 metadata:
@@ -98,13 +101,28 @@ spec:
             "off": false
           },
           "defaultVariant": "off"
+        },
+        "checkout-flow": {
+          "state": "ENABLED",
+          "variants": {
+            "v1": "classic",
+            "v2": "express"
+          },
+          "defaultVariant": "v1",
+          "targeting": {
+            "if": [
+              {"in": ["beta-user", {"var": "userGroup"}]},
+              "v2", "v1"
+            ]
+          }
         }
       }
     }
-EOF
+```
 
-# 在应用 Pod 中启用 Flagd 注入
-kubectl apply -f - <<EOF
+### Pod 注入 Flagd Sidecar
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -116,17 +134,81 @@ spec:
   containers:
   - name: app
     image: myapp:latest
-EOF
+    env:
+    - name: FLAGD_HOST
+      value: "localhost"
+    - name: FLAGD_PORT
+      value: "8013"
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 FeatureFlag 配置
+kubectl get featureflagconfiguration -A
+kubectl describe featureflagconfiguration my-flags
+
+# 🟢 检查 Flagd sidecar 状态
+kubectl get pods -l openfeature.dev/enabled=true
+kubectl logs <pod> -c flagd
+
+# 🟡 更新 Flag 配置（实时生效）
+kubectl apply -f updated-flags.yaml
+
+# 🟡 启用/禁用特定 Flag
+kubectl patch featureflagconfiguration my-flags --type=merge -p '{"spec":{"featureFlagSpec":"{...updated...}"}}'
+
+# 🔴 删除 Flag 配置（影响所有引用 Pod）
+kubectl delete featureflagconfiguration my-flags
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Flag 未注入 | annotation 缺失 | `kubectl get pod -o yaml` | 添加 openfeature.dev annotations |
+| Flagd 连接失败 | sidecar 未启动 | `kubectl logs pod -c flagd` | 检查 Operator 状态 |
+| Flag 值不更新 | 配置未同步 | `kubectl describe featureflagconfiguration` | 检查 CRD 状态 |
+| 应用获取默认值 | targeting 规则错误 | 检查 JSON targeting 语法 | 修复 targeting 表达式 |
+| Operator CrashLoop | CRD 版本不兼容 | `kubectl logs -n open-feature-operator-system` | 升级 Operator 版本 |
+
+```
+排查流程:
+├── Flag 未生效
+│   ├── kubectl get pod -o yaml → 确认 annotations
+│   ├── kubectl logs pod -c flagd → sidecar 日志
+│   └── curl localhost:8013/flagd.evaluation.v1.Service/ResolveBoolean → 测试解析
+├── Operator 异常
+│   ├── kubectl get pods -n open-feature-operator-system
+│   └── kubectl logs operator → 查看错误
+└── 配置同步延迟
+    ├── kubectl describe featureflagconfiguration → 检查 status
+    └── 确认 flagd 轮询间隔配置
+```
+
+## 生产案例
+
+### 案例 1: 渐进式功能发布
+
+- **场景**: 新结账流程需要按用户组渐进开放
+- **方案**: 使用 targeting 规则按 userGroup 变量分流；先开放 5% beta 用户，观察指标后逐步扩大到 100%
+- **效果**: 功能发布风险可控，回滚时间从部署回滚 10min 缩短到 Flag 切换 <1s
+
+### 案例 2: 多团队 Flag 管理冲突
+
+- **场景**: 多个团队共用一个 FeatureFlagConfiguration，修改互相影响
+- **方案**: 按团队拆分 FeatureFlagConfiguration CRD；Pod annotation 引用多个配置；建立 Flag 命名规范
+- **效果**: 消除团队间冲突，Flag 变更影响范围可控
 
 ## 对比
 
-| 特性 | OpenFeature | LaunchDarkly | Unleash | Flagsmith |
-|------|-------------|-------------|---------|-----------|
-| 开放标准 | ✅ CNCF | ❌ | ❌ | ❌ |
-| 供应商无关 | ✅ | ❌ | ❌ | ❌ |
-| 自托管 | ✅ Flagd | ❌ | ✅ | ✅ |
-| CNCF 状态 | Incubating | 非 CNCF | 非 CNCF | 非 CNCF |
+| 特性 | OpenFeature | LaunchDarkly | Unleash | Flagsmith | 适用场景 |
+|------|-------------|-------------|---------|-----------|----------|
+| 开放标准 | ✅ CNCF | ❌ | ❌ | ❌ | 供应商无关 |
+| 自托管 | ✅ Flagd | ❌ | ✅ | ✅ | 数据主权 |
+| 多语言 SDK | ✅ | ✅ | ✅ | ✅ | 多语言项目 |
+| K8s 原生 | ✅ CRD | ❌ | ❌ | ❌ | 云原生 |
+| CNCF 状态 | Incubating | 非 CNCF | 非 CNCF | 非 CNCF | 生态成熟度 |
 
 ## 架构定位
 

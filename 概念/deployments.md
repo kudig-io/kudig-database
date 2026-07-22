@@ -146,6 +146,164 @@ kubectl rollout restart deployment/webapp
 - **Recreate 策略导致停机**：单实例或不支持并行的应用用 Recreate 必有 downtime，建议改 RollingUpdate 并配 PDB。
 - **HPA 与手动 scale 冲突**：HPA 启用后不要手动 `kubectl scale`，否则下一次伸缩会被 HPA 覆盖。
 
+## 源码实现分析
+
+### Deployment Controller 滚动更新核心逻辑
+
+```go
+// k8s.io/kubernetes/pkg/controller/deployment/sync.go
+func (dc *DeploymentController) syncDeployment(ctx context.Context, d *apps.Deployment) error {
+    // 1. 获取所有关联的 ReplicaSet
+    rsList := dc.getAllReplicaSets(d)
+    // 2. 计算新 RS 的期望副本数
+    newRS := dc.getNewReplicaSet(d, rsList)
+    if d.Spec.Strategy.Type == apps.RollingUpdateDeploymentStrategyType {
+        // 3. 滚动更新逻辑
+        maxSurge := d.Spec.Strategy.RollingUpdate.MaxSurge       // 默认 25%
+        maxUnavailable := d.Spec.Strategy.RollingUpdate.MaxUnavailable // 默认 25%
+        // 4. 扩容新 RS（不超过 replicas + maxSurge）
+        newReplicas := calculateNewReplicas(d, newRS, maxSurge)
+        dc.scaleReplicaSet(newRS, newReplicas)
+        // 5. 缩容旧 RS（不低于 replicas - maxUnavailable）
+        for _, oldRS := range oldRSList {
+            oldReplicas := calculateOldReplicas(d, oldRS, maxUnavailable)
+            dc.scaleReplicaSet(oldRS, oldReplicas)
+        }
+    }
+    // 6. 检查是否完成（新 RS 就绪 + 旧 RS 缩容到 0）
+    if dc.deploymentComplete(d, newRS) {
+        // 清理旧 RS（保留 revisionHistoryLimit 个）
+        dc.cleanupOldReplicaSets(rsList, d.Spec.RevisionHistoryLimit)
+    }
+    return nil
+}
+```
+
+### Deployment 滚动更新状态机
+
+```
+┌──────────────────────────────────────────────────────────┐
+│          Deployment 滚动更新状态机                    │
+├──────────────────────────────────────────────────────────┤
+│  kubectl set image deployment/webapp app=v2              │
+│         │                                                │
+│         ▼                                                │
+│  ┌─────────────┐     ┌─────────────┐              │
+│  │ 创建新 RS    │────▶│ 扩容新 RS    │              │
+│  │ (replicas=0) │     │ (+maxSurge)  │              │
+│  └─────────────┘     └──────┬──────┘              │
+│                              │ 新 Pod Ready?            │
+│                              ▼                          │
+│                       ┌─────────────┐              │
+│                       │ 缩容旧 RS    │              │
+│                       │ (-maxUnavail)│              │
+│                       └──────┬──────┘              │
+│                              │ 旧 Pod 全部终止?        │
+│                              ▼                          │
+│                       ┌─────────────┐              │
+│                       │ 完成/清理    │              │
+│                       │ 旧 RS 保留   │              │
+│                       └─────────────┘              │
+│  异常: progressDeadlineSeconds 超时 → Failed          │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：零停机滚动更新配置
+
+```yaml
+# 🟡 中风险：修改 Deployment 策略影响发布行为
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 6
+  revisionHistoryLimit: 5  # 保留 5 个版本用于回滚
+  progressDeadlineSeconds: 600  # 10分钟超时标记 Failed
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%        # 最多多创建 25% Pod
+      maxUnavailable: 0    # 零不可用（严格零停机）
+  template:
+    spec:
+      terminationGracePeriodSeconds: 60  # 优雅终止时间
+      containers:
+      - name: webapp
+        image: registry/webapp:v2.0.0
+        readinessProbe:  # 必须配置！否则 Pod 创建即 Ready
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        lifecycle:
+          preStop:  # 优雅关闭：等待连接排干
+            exec:
+              command: ["sh", "-c", "sleep 10"]
+```
+
+### 场景二：发布监控与自动回滚
+
+```bash
+# 🟡 中风险：生产发布操作
+# 触发发布
+kubectl set image deployment/webapp webapp=registry/webapp:v2.1.0 -n production
+# 监控发布进度
+kubectl rollout status deployment/webapp -n production --timeout=300s
+# 发布期间观察关键指标
+kubectl get pods -n production -w  # 观察 Pod 状态变化
+# 异常时立即回滚
+kubectl rollout undo deployment/webapp -n production  # 🟡 回滚到上一版本
+kubectl rollout undo deployment/webapp --to-revision=3 -n production  # 回滚到指定版本
+# 确认回滚成功
+kubectl rollout status deployment/webapp -n production
+kubectl get rs -n production  # 确认 RS 副本数正确
+```
+
+### 场景三：金丝雀发布（暂停/恢复）
+
+```bash
+# 🟡 中风险：金丝雀发布
+# 更新镜像并立即暂停
+kubectl set image deployment/webapp webapp=registry/webapp:v3.0.0 -n production
+kubectl rollout pause deployment/webapp -n production
+# 此时只有 maxSurge 数量的新 Pod 运行（金丝雀）
+kubectl get rs -n production  # 观察新旧 RS 副本数
+# 观察 15 分钟关键指标：错误率、延迟、资源使用
+# 确认无异常后继续发布
+kubectl rollout resume deployment/webapp -n production
+# 或者发现问题回滚
+kubectl rollout undo deployment/webapp -n production
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | 不配 readinessProbe 也能零停机 | 无 readinessProbe 时 Pod 创建即 Ready，流量立即打入（应用可能未初始化完成） |
+| 2 | maxUnavailable=0 就绝对零停机 | 还需 readinessProbe + preStop + 足够 terminationGracePeriod 配合 |
+| 3 | 回滚总是安全的 | 若新版本有数据库 migration，回滚代码可能导致数据不兼容 |
+| 4 | revisionHistoryLimit=0 节省资源 | 设为 0 则无法回滚！生产至少保留 3-5 个版本 |
+| 5 | Recreate 策略无停机 | Recreate 先杀旧 Pod 再建新 Pod，必有 downtime；只适合单实例/开发环境 |
+| 6 | HPA 和手动 scale 可以共存 | HPA 启用后手动 scale 会被立即覆盖；应通过 HPA 参数控制 |
+
+## 面试要点
+
+1. **Q: Deployment 滚动更新的完整流程是什么？**
+   A: ① 用户更新 Pod Template（如镜像版本）；② Deployment Controller 创建新 ReplicaSet（replicas=0）；③ 按 maxSurge 扩容新 RS（如 25% → 最多 7-8 个 Pod）；④ 新 Pod 通过 readinessProbe 后加入 Service Endpoints；⑤ 按 maxUnavailable 缩容旧 RS（如 25% → 最少 4-5 个可用）；⑥ 重复③⑤直到新 RS 达到期望副本、旧 RS 缩容到 0；⑦ 清理超出 revisionHistoryLimit 的旧 RS。
+
+2. **Q: 如何实现真正的零停机发布？**
+   A: 五个必要条件：① maxUnavailable: 0（始终有足够副本）；② readinessProbe（确保新 Pod 真正就绪才接收流量）；③ preStop hook + sleep（等待 kube-proxy 更新 iptables，避免连接打到已终止 Pod）；④ 足够的 terminationGracePeriodSeconds（等待现有请求处理完成）；⑤ 应用支持优雅关闭（处理 SIGTERM，完成进行中的请求）。
+
+3. **Q: Deployment 发布卡住（不收敛）如何排查？**
+   A: ① kubectl rollout status 查看当前状态；② kubectl get rs 检查新旧 RS 副本数；③ kubectl get pods 查看新 Pod 状态（Pending/ImagePullBackOff/CrashLoopBackOff）；④ kubectl describe pod 查看事件（调度失败/资源不足/探针失败）；⑤ 检查 progressDeadlineSeconds 是否超时标记 Failed；⑥ 常见原因：资源不足、镜像拉取失败、readinessProbe 配置错误、PDB 阻止缩容。
+
+4. **Q: Deployment 与 StatefulSet/DaemonSet 如何选择？**
+   A: Deployment：无状态应用（Web 服务、API），Pod 可互换、随机调度、滚动更新。StatefulSet：有状态应用（数据库、消息队列），需要稳定网络标识、持久存储、有序部署/扩缩。DaemonSet：每节点一个（日志采集、监控 agent、网络插件），节点加入自动部署。关键区别：Deployment 的 Pod 是无状态可替换的；StatefulSet 的 Pod 有身份和状态。
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

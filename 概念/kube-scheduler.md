@@ -91,6 +91,121 @@ Pod 长期处于 Pending 状态是远程顾问模式下的经典问题。排查�
 
 更多排查细节可参考 [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|scheduler-troubleshooting]] 与 [[node-notready]]。
 
+## 源码实现分析
+
+### 调度主循环
+
+```go
+// kubernetes/pkg/scheduler/scheduler.go
+func (sched *Scheduler) scheduleOne(ctx context.Context) {
+    // 1. 从优先队列取出最高优先级 Pod
+    pod := sched.NextPod()
+    
+    // 2. 调度框架执行 Filter + Score
+    scheduleResult, err := sched.Algorithm.Schedule(ctx, pod)
+    // 内部流程：
+    //   RunPreFilterPlugins → RunFilterPlugins → RunScorePlugins → SelectHost
+    
+    // 3. 异步绑定（不阻塞下一个 Pod 调度）
+    go func() {
+        sched.bind(ctx, pod, scheduleResult.SuggestedHost)
+    }()
+}
+```
+
+### Filter 插件示例（NodeResourcesFit）
+
+```go
+// kubernetes/pkg/scheduler/framework/plugins/noderesources/fit.go
+func (f *Fit) Filter(ctx context.Context, state *CycleState,
+    pod *v1.Pod, nodeInfo *framework.NodeInfo) *framework.Status {
+    // 计算节点可分配资源 - 已请求资源
+    allocatable := nodeInfo.Allocatable
+    requested := nodeInfo.Requested  // 所有 Pod 的 requests 累加
+    
+    if requested.MilliCPU + podRequest.MilliCPU > allocatable.MilliCPU {
+        return framework.NewStatus(framework.Unschedulable,
+            "Insufficient cpu")  // 过滤失败
+    }
+    // 内存、存储、扩展资源同理检查
+    return nil  // 通过
+}
+```
+
+## 使用场景
+
+### 场景一：GPU 专用节点调度
+
+```yaml
+# 节点打污点
+# kubectl taint nodes gpu-node-1 nvidia.com/gpu=true:NoSchedule
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ml-training
+spec:
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Exists
+    effect: NoSchedule
+  nodeSelector:
+    accelerator: nvidia-a100
+  containers:
+  - name: trainer
+    image: pytorch:2.1
+    resources:
+      limits:
+        nvidia.com/gpu: 4    # Device Plugin 提供
+```
+
+### 场景二：拓扑感知调度（跨 AZ 分散）
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  replicas: 6
+  template:
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: web
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: web
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 调度器看 limit 决定节点 | 调度器只看 requests，limit 不影响调度决策 |
+| nodeSelector 和 affinity 互斥 | 两者可同时使用，必须同时满足（AND 关系） |
+| Pod Pending 一定是资源不足 | 可能是 Taint、亲和性冲突、PVC 未绑定、插件拦截 |
+| 调度器一次只调度一个 Pod | 并行调度（parallelism=16），同时处理多个 Pod |
+| PreferNoSchedule 完全无效 | 它是 Score 阶段软约束，降低节点得分但不排除 |
+| 抢占会立即杀死低优先级 Pod | 抢占有优雅终止期，且需等被抢占 Pod 完全退出 |
+
+## 面试要点
+
+1. **调度器两阶段设计的原因？** — Filter（硬性约束）先淘汰不可用节点，Score（软性偏好）再对剩余节点打分。分离关注点：Filter 保证正确性，Score 优化质量。并行 Filter 提升吐量，打分可自定义权重。
+
+2. **Scheduling Framework 扩展点有哪些？** — QueueSort → PreFilter → Filter → PostFilter → PreScore → Score → Reserve → Permit → PreBind → Bind → PostBind。每个点可插入自定义插件，无需 fork 调度器。
+
+3. **抢占（Preemption）如何工作？** — 高优先级 Pod 无法调度时，PostFilter 插件寻找“牺牲”低优先级 Pod 后能满足的节点，标记 `pod.Status.NominatedNodeName`，低优先级 Pod 优雅终止后重新调度。
+
+4. **生产环境调度性能优化？** — 增大 parallelism（默认16）；减少不必要的 PodAffinity（跨节点查询开销大）；使用 topologySpreadConstraints 替代复杂 Anti-Affinity；大规模集群考虑调度器分片（scheduler sharding）。
+
 ## 相关概念
 
 - [[scheduling-algorithm]] — 调度算法详解

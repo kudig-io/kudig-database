@@ -61,6 +61,46 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 00:00 | 告警: apiserver 证书过期 | 🟢 `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates` |
+| 00:02 | kube-controller-manager 崩溃 | 🟢 `kubectl get pods -n kube-system -l component=kube-controller-manager` |
+| 00:03 | kube-scheduler 崩溃 | 🟢 `crictl ps -a \| grep kube-scheduler` |
+| 00:05 | 集群完全不可用，无法创建/更新任何资源 | 🟢 `kubectl get nodes` (timeout) |
+| 00:10 | 确认根因: CA 证书过期导致所有组件证书失效 | 🟢 `kubeadm certs check-expiration` |
+| 00:15 | 续期证书并重启组件 | 🟡 `kubeadm certs renew all` |
+| 00:20 | 控制平面恢复 | 🟢 `kubectl get componentstatuses` |
+
+## 故障关联图
+
+```
+CA证书过期(根因)
+    ├── apiserver TLS失败 → API不可用
+    ├── controller-manager 证书验证失败 → 崩溃
+    ├── scheduler 证书验证失败 → 崩溃
+    └── kubelet 证书验证失败 → 节点NotReady
+            └── 影响: 集群完全不可用
+```
+
+## 关键教训
+
+1. **证书监控缺失**: 未配置证书到期提前告警
+2. **单点故障**: CA 证书过期影响所有组件
+3. **自动轮转未启用**: 未配置 kubelet rotateCertificates
+
+## 面试要点
+
+1. **Q: 控制平面全部崩溃的紧急恢复？**
+   A: 检查证书有效期 → `kubeadm certs renew all` → 重启静态 Pod → 验证组件状态 → 配置自动轮转
+
+2. **Q: 如何避免证书过期导致集群不可用？**
+   A: 启用 rotateCertificates → 30天前告警 → 定期 `kubeadm certs check-expiration` → 自动化续期流程
+
+3. **Q: K8s 证书体系结构？**
+   A: CA根证书 → apiserver/kubelet/etcd 各自证书 → front-proxy 证书 → SA 签名密钥；每个都有独立有效期
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

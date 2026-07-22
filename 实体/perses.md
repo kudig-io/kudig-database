@@ -78,40 +78,160 @@ Perses 通过 Perses Operator 和 CRD 实现与 Kubernetes 的深度集成。`Pe
 3. **团队 Dashboard 共享**: 通过 Git 分享 Dashboard 定义，团队成员可复用和修改
 4. **监控即代码**: 在 CI/CD 流水线中自动生成和部署监控仪表板
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Perses
 helm repo add perses https://perses.github.io/helm-charts
-helm install perses perses/perses -n perses --create-namespace
+helm install perses perses/perses -n perses --create-namespace \
+  --set config.database.type=file \
+  --set config.database.file.folder=/data/perses
 
 # 安装 Perses Operator
 helm install perses-operator perses/perses-operator -n perses
 
-# 创建 Prometheus 数据源
-kubectl apply -f - <<EOF
+# 等待就绪
+kubectl wait --for=condition=available deployment/perses -n perses --timeout=120s
+
+# 访问 Perses UI
+kubectl port-forward svc/perses 8080:8080 -n perses
+# 打开 http://localhost:8080
+```
+
+```yaml
+# Prometheus 数据源 CRD
 apiVersion: perses.dev/v1alpha1
 kind: PersesDatasource
 metadata:
   name: prometheus
   namespace: perses
 spec:
-  proxy:
-    url: http://prometheus-server.monitoring.svc.cluster.local:9090
-EOF
-
-# 创建 Dashboard
-kubectl apply -f my-dashboard.yaml
+  default: true
+  plugin:
+    kind: PrometheusDatasource
+    spec:
+      directUrl: http://prometheus-server.monitoring.svc:9090
+---
+# Dashboard CRD 示例
+apiVersion: perses.dev/v1alpha1
+kind: PersesDashboard
+metadata:
+  name: k8s-cluster-overview
+  namespace: monitoring
+spec:
+  display:
+    name: K8s Cluster Overview
+  variables:
+  - name: namespace
+    type: ListVariable
+    spec:
+      plugin:
+        kind: PrometheusLabelValuesVariable
+        spec:
+          labelName: namespace
+  panels:
+    cpu-usage:
+      spec:
+        display:
+          name: CPU Usage by Namespace
+        plugin:
+          kind: TimeSeriesChart
+          spec:
+            queries:
+            - spec:
+                plugin:
+                  kind: PrometheusTimeSeriesQuery
+                  spec:
+                    query: sum(rate(container_cpu_usage_seconds_total[5m])) by (namespace)
+  layouts:
+  - kind: Grid
+    spec:
+      items:
+      - x: 0
+        y: 0
+        width: 12
+        height: 8
+        content: $ref: '#/spec/panels/cpu-usage'
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Dashboard 列表
+kubectl get persesdashboard -A
+
+# 🟢 查看数据源配置
+kubectl get persesdatasource -A
+
+# 🟡 更新 Dashboard（通过 GitOps 或直接 apply）
+kubectl apply -f dashboards/k8s-overview.yaml
+
+# 🟢 查看 Perses Server 日志
+kubectl logs -n perses -l app=perses --tail=50
+
+# 🟡 重启 Perses Server
+kubectl rollout restart deployment/perses -n perses
+
+# 🟢 导出 Dashboard 为 JSON
+curl -s http://perses:8080/api/v1/projects/default/dashboards/k8s-overview | jq .
+
+# 🔴 删除 Dashboard
+kubectl delete persesdashboard k8s-cluster-overview -n monitoring
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Dashboard 不显示 | CRD 未同步或 Perses Server 异常 | `kubectl get persesdashboard` | 检查 Operator 日志 |
+| 数据源连接失败 | Prometheus 不可达 | `kubectl logs -n perses` | 检查数据源 URL 和网络 |
+| 图表无数据 | PromQL 查询错误或无匹配指标 | 在 Perses UI 中测试查询 | 修正 PromQL 查询 |
+| Operator 未同步 | CRD 版本不匹配或 RBAC 问题 | `kubectl logs -n perses -l app=perses-operator` | 检查 CRD 版本和 RBAC |
+| GitOps 同步失败 | ArgoCD 未配置或 CRD 未注册 | `kubectl get crd persesdashboards.perses.dev` | 确认 CRD 已安装 |
+
+```
+排查流程：
+├── Dashboard 不显示
+│   ├── kubectl get persesdashboard 确认 CRD 存在
+│   ├── 检查 Perses Operator 日志
+│   ├── 确认 Perses Server 正常运行
+│   └── 检查 Dashboard YAML 格式
+├── 数据源问题
+│   ├── 检查 PersesDatasource CRD 配置
+│   ├── 确认 Prometheus/Loki 服务可达
+│   ├── 在 Perses UI 中测试数据源连接
+│   └── 检查 RBAC 和 ServiceAccount
+└── GitOps 同步问题
+    ├── 确认 ArgoCD/Flux 已配置
+    ├── 检查 CRD 是否已注册
+    └── 查看 GitOps 工具同步日志
+```
+
+## 生产案例
+
+### 案例 1：GitOps 监控仪表板管理
+
+- **场景**：50+ 微服务的监控 Dashboard 分散在 Grafana 中，无版本控制，变更无审计
+- **排查**：Dashboard 变更无记录，误删后无法恢复，多环境 Dashboard 不一致
+- **方案**：迁移到 Perses，所有 Dashboard 以 YAML 存储在 Git，通过 ArgoCD 自动同步
+- **效果**：Dashboard 变更可追溯，多环境一致性 100%，误删可从 Git 恢复
+
+### 案例 2：平台工程标准化监控
+
+- **场景**：平台团队为 20+ 业务团队提供标准化监控模板，但 Grafana 模板维护困难
+- **排查**：各团队自行修改 Dashboard，标准化模板被破坏，无法统一升级
+- **方案**：Perses CRD 定义标准化模板，业务团队只能覆盖变量不能修改结构
+- **效果**：标准化模板统一维护，业务团队自助修改变量，模板升级一键同步
 
 ## 对比
 
-| 特性 | Perses | Grafana | Kibana | Apache Superset |
-|------|--------|---------|--------|-----------------|
-| Dashboard 即代码 | ✅ 原生 | ⚠️ 需插件 | ❌ | ⚠️ 有限 |
-| GitOps | ✅ CRD | ⚠️ 需插件 | ❌ | ❌ |
-| K8s 原生 | ✅ | ⚠️ | ❌ | ❌ |
-| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF |
+| 特性 | Perses | Grafana | Kibana | Apache Superset | 适用场景 |
+|------|--------|---------|--------|-----------------|----------|
+| Dashboard 即代码 | ✅ 原生 | ⚠️ 需插件 | ❌ | ⚠️ 有限 | GitOps 管理 |
+| GitOps | ✅ CRD | ⚠️ 需插件 | ❌ | ❌ | K8s 原生工作流 |
+| K8s 原生 | ✅ | ⚠️ | ❌ | ❌ | 云原生环境 |
+| CNCF 状态 | Sandbox | 非 CNCF | 非 CNCF | 非 CNCF | 开源生态 |
+| 生产成熟度 | 中（新项目） | 高 | 高 | 高 | 稳定性要求 |
 
 ## 架构定位
 

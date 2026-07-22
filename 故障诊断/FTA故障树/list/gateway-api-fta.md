@@ -87,6 +87,88 @@ base_confidence: 0.7
 | evt_route_not_accepted | Route 未被 Accepted | `kubectl get httproute ${ROUTE_NA
 ...(截断)
 
+## 生产案例
+
+### 案例1: HTTPRoute 未被 Accepted - GatewayClass 未就绪
+
+**时间线**:
+- 14:00 创建 HTTPRoute 绑定到 Gateway
+- 14:02 HTTPRoute 状态显示 `Accepted: False`，原因 `GatewayClassNotReady`
+- 14:05 确认根因: GatewayClass 的 controllerName 与实际安装的控制器不匹配
+- 14:10 修正 controllerName 后 Route 被接受
+
+**根因链**:
+```
+HTTPRoute引用Gateway → Gateway引用GatewayClass
+→ GatewayClass controllerName不匹配 → 无控制器处理
+→ Route未被Accepted → 流量无法路由
+```
+
+**修复**:
+```bash
+# 🟢 检查 GatewayClass 状态
+kubectl get gatewayclass -o wide
+kubectl describe gatewayclass ${GC_NAME} | grep -A5 "Conditions"
+# 🟢 检查 HTTPRoute 状态
+kubectl get httproute ${ROUTE} -n ${NS} -o jsonpath='{.status.conditions}' | jq .
+# 🟡 修正 controllerName
+kubectl patch gatewayclass ${GC_NAME} -p '{"spec":{"controllerName":"gateway.envoyproxy.io/gatewayclass-controller"}}'
+```
+
+### 案例2: Gateway Listener 端口冲突
+
+**现象**: Gateway 创建成功但 Listener 状态 `Conflicted`，流量无法进入
+
+**根因**: 同一节点上多个 Gateway 使用相同端口，且未配置端口共享
+
+**修复**:
+```bash
+# 🟢 检查 Gateway Listener 状态
+kubectl get gateway ${GW} -n ${NS} -o jsonpath='{.status.listeners}' | jq .
+# 🟡 调整端口或合并 Gateway
+kubectl patch gateway ${GW} -n ${NS} --type=merge -p '{"spec":{"listeners":[{"name":"https","port":8443,"protocol":"HTTPS"}]}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: gateway-api-alerts
+  rules:
+  - alert: GatewayNotProgrammed
+    expr: kube_gateway_status_condition{type="Programmed",status="True"} == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: HTTPRouteNotAccepted
+    expr: kube_httproute_status_condition{type="Accepted",status="True"} == 0
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| GatewayClass 验证 | 部署前确认 controllerName 正确 | P0 |
+| 端口规划 | 避免多 Gateway 端口冲突 | P0 |
+| RBAC 配置 | 确保控制器有足够权限 | P1 |
+| 状态监控 | 监控 Gateway/Route 状态变化 | P1 |
+
+## 面试要点
+
+1. **Q: Gateway API 的核心资源关系？**
+   A: GatewayClass → Gateway → HTTPRoute/TCPRoute；角色分离: 平台管理员管 GatewayClass，集群管理员管 Gateway，开发者管 Route
+
+2. **Q: HTTPRoute 不被接受的排查步骤？**
+   A: 检查 GatewayClass 状态 → 确认 Gateway Listener 配置 → 验证 Route parentRefs → 检查 RBAC 权限 → 查看控制器日志
+
+3. **Q: Gateway API 相比 Ingress 的优势？**
+   A: 支持多协议(HTTP/TCP/UDP/gRPC) → 角色分离 → 跨命名空间引用 → 丰富的流量管理(镜像/重试/超时) → 可扩展的 Policy Attachment
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

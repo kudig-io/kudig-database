@@ -60,6 +60,44 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 15:00 | 安全团队应用 default-deny NetworkPolicy | 🟢 `kubectl get networkpolicy -n prod -o wide` |
+| 15:02 | 服务间调用失败(connection refused) | 🟢 `kubectl exec ${POD} -- curl -s http://backend:8080` |
+| 15:03 | DNS 解析也失败(UDP 53 被阻断) | 🟢 `kubectl exec ${POD} -- nslookup kubernetes.default` |
+| 15:08 | 确认根因: default-deny 未放行 DNS 和服务间流量 | 🟢 `kubectl get networkpolicy -n prod -o yaml` |
+| 15:12 | 添加 DNS 和服务间允许策略 | 🟡 `kubectl apply -f allow-dns-and-internal.yaml` |
+| 15:15 | 服务间调用和 DNS 恢复 | 🟢 `kubectl exec ${POD} -- nslookup kubernetes.default` |
+
+## 故障关联图
+
+```
+default-deny策略未配套放行(根因)
+    ├── UDP 53被阻断 → DNS解析失败
+    │       └── 服务发现失败 → 所有依赖DNS的调用失败
+    └── TCP服务端口被阻断 → 服务间直接调用失败
+            └── 影响: 命名空间内所有服务不可用
+```
+
+## 关键教训
+
+1. **策略变更审批**: NetworkPolicy 变更未与业务团队确认
+2. **DNS 放行遗漏**: default-deny 必须配套放行 DNS(UDP/TCP 53)
+3. **渐进式应用**: 应先 audit 模式观察再强制
+
+## 面试要点
+
+1. **Q: NetworkPolicy 导致 DNS 失败的排查？**
+   A: 检查是否有 default-deny → 确认是否放行 UDP/TCP 53 到 kube-dns → 添加 DNS 允许策略 → 验证解析恢复
+
+2. **Q: default-deny 必须配套哪些放行策略？**
+   A: DNS(UDP/TCP 53 到 kube-system) → 服务间必要流量 → 健康检查端口 → 监控系统采集端口
+
+3. **Q: 如何安全地实施 NetworkPolicy？**
+   A: 先审计模式(Cilium audit) → 梳理服务依赖 → 配套放行策略 → 分批应用 → 监控拒绝事件 → 回滚预案
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

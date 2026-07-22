@@ -169,6 +169,104 @@ kubectl uncordon <node>    # 恢复调度
 - **ImagePullBackOff**：镜像仓库鉴权失败（缺 imagePullSecrets）或镜像 tag 不存在。
 - **升级后 API 弃用**：v1.22 移除 batch/v1beta1 CronJob 等，需提前迁移清单。
 
+## 源码实现分析
+
+### kube-apiserver 请求处理链
+
+```go
+// k8s.io/kubernetes/cmd/kube-apiserver/app/server.go
+// apiserver 请求处理管线
+func (s *completedOptions) New() (*GenericAPIServer, error) {
+    // 请求处理链（由外到内）：
+    // 1. Authentication（认证）：X.509 / Token / OIDC / Webhook
+    // 2. Authorization（授权）：RBAC / ABAC / Webhook
+    // 3. Admission Control（准入）：Mutating → Validating
+    // 4. Storage（存储）：etcd 读写
+}
+
+// k8s.io/apiserver/pkg/endpoints/handlers/create.go
+func createHandler(r rest.Creater, scope *RequestScope, admit admission.Interface) http.HandlerFunc {
+    return func(w http.ResponseWriter, req *http.Request) {
+        // 解码 → 默认值填充 → Mutating Admission → 验证 → Validating Admission → etcd 写入
+        obj, err := runtime.Decode(scheme.Codecs.UniversalDeserializer(), body)
+        obj = s.defaulter.Default(obj)  // 填充默认值
+        admit.Admit(ctx, obj, attributes) // 准入控制
+        result, err := r.Create(ctx, obj) // 写入 etcd
+    }
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│         Kubernetes 控制平面架构                        │
+├─────────────────────────────────────────────────────────┤
+│  kubectl / client-go                                    │
+│       │                                                 │
+│       ▼                                                 │
+│  ┌────────────────────────────────────────┐  │
+│  │         kube-apiserver                  │  │
+│  │  Auth → Authz → Admission → etcd       │  │
+│  └────────────────────────────────────────┘  │
+│       │              │              │         │
+│       ▼              ▼              ▼         │
+│  ┌────────┐  ┌────────────┐  ┌─────────┐  │
+│  │  etcd  │  │  scheduler │  │controller│  │
+│  │(state) │  │  (bind)    │  │ -manager │  │
+│  └────────┘  └────────────┘  └─────────┘  │
+│                                    │         │
+│                                    ▼         │
+│                              ┌─────────┐    │
+│                              │  kubelet  │    │
+│                              │ (node)    │    │
+│                              └─────────┘    │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：集群健康检查
+
+```bash
+# 🟢 检查控制平面组件状态
+kubectl get componentstatuses 2>/dev/null || kubectl get --raw /healthz?verbose
+kubectl get nodes -o wide
+kubectl get cs  # 已弃用，用 /healthz 替代
+
+# 🟢 检查 etcd 集群健康
+etcdctl endpoint health --cluster
+etcdctl endpoint status --write-out=table
+
+# 🟡 检查证书过期时间
+kubeadm certs check-expiration
+# 🔴 证书更新需要重启控制平面组件
+kubeadm certs renew all && systemctl restart kubelet
+
+# 🟢 检查集群事件（异常事件排查）
+kubectl get events -A --sort-by='.lastTimestamp' | tail -20
+```
+
+## 面试要点
+
+1. **Kubernetes 控制平面的核心组件及职责？**
+   - kube-apiserver：唯一与 etcd 交互的组件，所有请求入口
+   - etcd：分布式 KV 存储，集群状态唯一真相源
+   - kube-scheduler：Watch 未绑定 Pod，执行调度算法绑定节点
+   - controller-manager：运行所有内置控制器（Deployment/ReplicaSet/Node 等）
+
+2. **一个 kubectl apply 请求的完整链路？**
+   - kubectl → apiserver（认证→授权→Mutating Admission→验证→Validating Admission→etcd 写入）
+   - etcd 写入成功后返回，控制器异步 Watch 并执行实际操作
+   - 这是声明式 API 的核心：用户声明期望状态，控制器负责收敛
+
+3. **Kubernetes 如何保证高可用？**
+   - apiserver 无状态，多副本 + LB
+   - etcd 3/5 节点 Raft 集群，多数派存活即可用
+   - scheduler/controller-manager 通过 leader election 保证单活
+   - kubelet 本地缓存保证 apiserver 不可用时 Pod 继续运行
+
+4. **Level-triggered vs Edge-triggered 在 K8s 中的体现？**
+   - K8s 控制器是 level-triggered：每次 reconcile 对比实际状态与期望状态
+   - 即使错过事件，下次 resync 也能发现差异并修复
+   - 这保证了系统的最终一致性和自愈能力
+
 ## 相关概念
 
 - [[概念/kubernetes-architecture-overview.md|Kubernetes 架构概览]]

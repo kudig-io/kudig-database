@@ -80,20 +80,36 @@ Inclavare 通过 containerd-shim 与 Kubernetes 集成。Pod 标注需要 Enclav
 3. **AI 模型保护**：珍贵的 AI 模型权重在 SGX 中推理，防止模型窃取
 4. **区块链智能合约**：智能合约在 Enclave 中执行，保证执行可信
 
-## 安装
+## 安装与配置
+
+### 前提条件
 
 ```bash
-# 前提：节点需要支持 Intel SGX 硬件和驱动
+# 节点需要支持 Intel SGX 硬件和驱动
 # 安装 SGX 驱动和 SDK（Ubuntu 示例）
 sudo apt install linux-modules-extra-$(uname -r)
 sudo modprobe sgx
 
-# 在 K8s 中部署 Inclavare（Helm）
+# 验证 SGX 支持
+ls /dev/sgx_enclave /dev/sgx_provision
+dmesg | grep -i sgx
+```
+
+### K8s 部署
+
+```bash
+# Helm 安装 Inclavare
 helm repo add inclavare https://inclavare-containers.github.io/charts
 helm install inclavare inclavare/inclavare -n inclavare-system --create-namespace
 
-# 运行一个 SGX Enclave Pod
-kubectl apply -f - <<EOF
+# 验证组件状态
+kubectl get pods -n inclavare-system
+kubectl get runtimeclass rune
+```
+
+### SGX Enclave Pod 配置
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -111,17 +127,97 @@ spec:
     env:
     - name: OCCLUM_RELEASE_ENCLAVE
       value: "1"
-EOF
+---
+# SGX 设备插件 DaemonSet
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sgx-device-plugin
+  namespace: inclavare-system
+spec:
+  selector:
+    matchLabels:
+      app: sgx-device-plugin
+  template:
+    spec:
+      containers:
+      - name: sgx-plugin
+        image: intel/intel-sgx-plugin:latest
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: dev-sgx
+          mountPath: /dev/sgx
+      volumes:
+      - name: dev-sgx
+        hostPath:
+          path: /dev/sgx_enclave
 ```
+
+## 运维操作
+
+```bash
+# 🟢 检查节点 SGX 资源可用性
+kubectl describe node <node> | grep sgx.intel.com/epc
+
+# 🟢 查看 Enclave Pod 运行状态
+kubectl get pod sgx-app -o wide
+kubectl logs sgx-app
+
+# 🟡 部署新的 Enclave 应用
+kubectl apply -f sgx-app.yaml
+
+# 🔴 删除 Enclave Pod（释放 EPC 内存）
+kubectl delete pod sgx-app
+
+# 🔴 重启 Inclavare 组件
+kubectl rollout restart deployment -n inclavare-system
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod Pending: Insufficient sgx.intel.com/epc | EPC 内存不足 | `kubectl describe node <node> \| grep sgx` | 减少 EPC 请求或扩容节点 |
+| Enclave 创建失败 | SGX 驱动未加载 | `dmesg \| grep sgx` | 加载 sgx 内核模块 |
+| 远程证明失败 | 网络无法连接 IAS/DCAP | `curl -v https://api.trustedservices.intel.com` | 配置代理或离线证明 |
+| containerd rune 运行时错误 | OCI runtime 未配置 | `cat /etc/containerd/config.toml \| grep rune` | 配置 containerd runtime handler |
+
+**排查流程：**
+```
+Enclave Pod 启动失败
+├── 检查硬件支持 → ls /dev/sgx_enclave
+├── 检查驱动加载 → dmesg | grep sgx
+├── 检查 RuntimeClass → kubectl get runtimeclass rune
+├── 检查 EPC 资源 → kubectl describe node | grep sgx
+└── 检查 containerd 配置 → containerd config dump | grep rune
+```
+
+## 生产案例
+
+### 案例一：金融数据加密计算
+
+- **场景**: 银行需要在不可信云环境中运行风控模型，确保客户数据不被云平台窃取
+- **排查**: 使用 Inclavare Containers + Intel SGX，模型推理在 Enclave 中执行
+- **方案**: 风控模型打包为 OCI 镜像，通过 Occlum LibOS 运行在 SGX 中，远程证明确保环境可信
+- **效果**: 满足金融监管要求，数据在内存中加密，即使 root 权限也无法窃取
+
+### 案例二：AI 模型保护
+
+- **场景**: AI 公司提供模型即服务（MaaS），需防止模型权重被窃取
+- **排查**: 模型权重在 SGX Enclave 中加载和推理，外部无法访问内存
+- **方案**: 使用 Inclavare + Occlum，模型加密存储，仅在 Enclave 内解密执行
+- **效果**: 模型权重完全保护，客户可验证运行环境（远程证明）
 
 ## 对比
 
-| 特性 | Inclavare Containers | Confidential Containers (CoCo) | Gramine | Occlum |
-|------|---------------------|-------------------------------|---------|--------|
-| TEE 类型 | SGX/TrustZone/SEV | SGX/SEV/SNP/TDX | SGX | SGX |
-| LibOS | Occlum/Skeleton | Kata + TEE | ✅ | ✅ |
-| OCI 兼容 | ✅ | ✅ | ❌ | ❌ |
-| K8s 集成 | ✅ | ✅ | ⚠️ | ⚠️ |
+| 特性 | Inclavare Containers | Confidential Containers (CoCo) | Gramine | Occlum | 适用场景 |
+|------|---------------------|-------------------------------|---------|--------|----------|
+| TEE 类型 | SGX/TrustZone/SEV | SGX/SEV/SNP/TDX | SGX | SGX | CoCo 最全面 |
+| LibOS | Occlum/Skeleton | Kata + TEE | ✅ | ✅ | - |
+| OCI 兼容 | ✅ | ✅ | ❌ | ❌ | Inclavare/CoCo |
+| K8s 集成 | ✅ | ✅ | ⚠️ | ⚠️ | 云原生首选 |
+| 成熟度 | Sandbox | Incubating | 独立项目 | 独立项目 | - |
 
 ## 参考链接
 

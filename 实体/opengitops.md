@@ -93,6 +93,130 @@ OpenGitOps 原则在 Kubernetes 生态中最佳体现。ArgoCD 和 Flux 是遵�
 - [ ] 是否使用不可变标签（digest）而非 latest？
 ```
 
+## 实践指南
+
+### 原则 1: 声明式实施
+
+```yaml
+# ✅ 正确: 声明式描述期望状态
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    spec:
+      containers:
+        - name: web
+          image: myapp@sha256:abc123...  # 不可变 digest
+```
+
+```bash
+# ❌ 错误: 命令式操作
+kubectl scale deployment web-app --replicas=3
+kubectl set image deployment/web-app web=myapp:latest
+```
+
+### 原则 2: 版本化和不可变
+
+```bash
+# Git 仓库结构示例
+gitops-repo/
+├─ base/              # 基础配置
+│  ├─ deployment.yaml
+│  ├─ service.yaml
+│  └─ kustomization.yaml
+├─ overlays/          # 环境差异
+│  ├─ dev/
+│  ├─ staging/
+│  └─ production/
+└─ clusters/          # 集群特定配置
+   ├─ cluster-a/
+   └─ cluster-b/
+```
+
+### 原则 3: 自动拉取实施
+
+```yaml
+# ArgoCD Application 示例
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-app
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/org/gitops-repo
+    targetRevision: main
+    path: overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true  # 自动纠正漂移
+```
+
+### 原则 4: 持续协调实施
+
+```yaml
+# Flux Kustomization 示例
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: web-app
+spec:
+  interval: 5m        # 每 5 分钟协调
+  path: ./overlays/production
+  prune: true         # 删除 Git 中不存在的资源
+  sourceRef:
+    kind: GitRepository
+    name: gitops-repo
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: web-app
+      namespace: production
+```
+
+## 组织采纳路线图
+
+| 阶段 | 目标 | 关键活动 | 成功指标 |
+|------|------|----------|----------|
+| 1. 评估 | 理解现状 | 对照 4 原则审计现有流程 | 差距分析报告 |
+| 2. 试点 | 验证可行性 | 选择 1-2 个应用实施 GitOps | 部署频率提升 |
+| 3. 扩展 | 规模化 | 所有应用迁移到 GitOps | 手动部署 < 5% |
+| 4. 优化 | 持续改进 | 自动化测试、策略即代码 | MTTR < 5min |
+
+## 工具合规性对比
+
+| 原则 | ArgoCD | Flux | Jenkins X | Rancher Fleet |
+|------|--------|------|-----------|---------------|
+| 声明式 | ✅ | ✅ | ✅ | ✅ |
+| Git 版本化 | ✅ | ✅ | ✅ | ✅ |
+| 自动拉取 | ✅ | ✅ | ✅ | ✅ |
+| 持续协调 | ✅ | ✅ | ✅ | ✅ |
+| 多集群 | ✅ | ✅ | ⚠️ | ✅ |
+| Helm 支持 | ✅ | ✅ | ✅ | ✅ |
+| Kustomize | ✅ | ✅ | ⚠️ | ✅ |
+| CNCF 状态 | Graduated | Graduated | Sandbox | Sandbox |
+
+## 检查清单
+
+- [ ] 所有 K8s 资源已声明式 YAML 化
+- [ ] 配置存储在 Git 并通过 PR 审核
+- [ ] 使用不可变镜像标签（digest）
+- [ ] 集群内 Agent 自动拉取配置
+- [ ] 持续协调和自愈已启用
+- [ ] 状态漂移告警已配置
+- [ ] 回滚通过 Git revert 实现
+- [ ] 审计日志可从 Git 历史追溯
+
 ## 对比
 
 | 特性 | OpenGitOps | ArgoCD | Flux | Rancher Fleet |

@@ -60,6 +60,45 @@ last_updated: 2026-05-23
 3. 定期进行混沌工程演练模拟并发问题
 4. 维护问题关联矩阵（哪些问题容易并发出现）
 
+## 时间线还原
+
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 06:00 | 业务扩容，新增 300 个 ServiceMonitor target | 🟢 `kubectl get servicemonitor -A \| wc -l` |
+| 06:30 | Prometheus OOMKilled，内存超过 8Gi | 🟢 `kubectl get pods -n monitoring -o wide` |
+| 06:31 | 告警规则停止评估，无新告警发出 | 🟢 `kubectl logs -n monitoring -l app=alertmanager --tail=20` |
+| 06:32 | Fluentd DaemonSet 因无法连接 Prometheus 而堆积日志 | 🟢 `kubectl logs -n logging -l app=fluentd --tail=20` |
+| 06:40 | 确认根因: 采集 target 过多导致内存溢出 | 🟢 `curl -s localhost:9090/api/v1/targets \| jq '.data.activeTargets \| length'` |
+| 06:45 | 调高内存 + 清理无用 target | 🟡 `kubectl patch prometheus k8s -n monitoring -p '{"spec":{"resources":{"limits":{"memory":"16Gi"}}}}'` |
+| 07:00 | 监控和日志采集恢复 | 🟢 `kubectl get pods -n monitoring,logging -o wide` |
+
+## 故障关联图
+
+```
+采集target过多(根因)
+    ├── Prometheus内存溢出 → OOMKilled
+    │       ├── 告警规则停止评估 → 监控盲区
+    │       └── 日志采集依赖Prometheus → 堆积/中断
+    └── 影响: 监控+日志双失，无法发现其他故障
+```
+
+## 关键教训
+
+1. **监控自监控缺失**: Prometheus 自身未被独立监控
+2. **资源规划不足**: 未随 target 增长调整内存
+3. **耦合设计**: 日志采集不应依赖 Prometheus 可用性
+
+## 面试要点
+
+1. **Q: 监控系统自身故障的影响和应对？**
+   A: 影响: 告警失效+日志丢失 → 应对: 独立监控实例 + 资源充足 + 解耦设计 + 定期验证
+
+2. **Q: Prometheus 内存优化方案？**
+   A: 减少无用 target → 调整采集间隔 → 远程存储(Thanos) → 分片 → 调高内存限制
+
+3. **Q: 如何保证监控高可用？**
+   A: Prometheus 多副本 + 独立 Alertmanager + 监控自监控 + 资源充足 + 日志采集独立运行
+
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub

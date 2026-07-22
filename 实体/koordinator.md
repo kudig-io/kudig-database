@@ -79,16 +79,24 @@ Koordinator 作为标准 Kubernetes 调度器插件运行。通过 Pod 的 label
 3. **CI/CD 批处理混部**：构建任务（BE）利用集群空闲资源，不额外采购机器
 4. **弹性配额管理**：多团队共享集群，弹性 Quota 自动借用/归还资源
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Koordinator
 helm repo add koordinator-sh https://koordinator-sh.github.io/charts/
 helm repo update
-helm install koordinator koordinator-sh/koordinator -n koordinator-system --create-namespace
+helm install koordinator koordinator-sh/koordinator -n koordinator-system --create-namespace \
+  --set scheduler.replicas=2 \
+  --set koordlet.enabled=true \
+  --set descheduler.enabled=true
 
-# 标记 Pod 为 BE QoS（批处理任务）
-kubectl apply -f - <<EOF
+# 等待组件就绪
+kubectl wait --for=condition=available deployment/koord-scheduler -n koordinator-system --timeout=120s
+kubectl get pods -n koordinator-system
+```
+
+```yaml
+# BE 工作负载示例（批处理任务使用超卖资源）
 apiVersion: v1
 kind: Pod
 metadata:
@@ -104,17 +112,125 @@ spec:
       limits:
         kubernetes.io/batch-cpu: "4"
         kubernetes.io/batch-memory: "8Gi"
-EOF
+---
+# GPU 共享调度示例（多 Pod 共享 GPU）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: inference-svc
+  labels:
+    koordinator.sh/qos-class: LS
+spec:
+  schedulerName: koordinator-scheduler
+  containers:
+  - name: model-server
+    image: triton-inference:latest
+    resources:
+      limits:
+        kubernetes.io/gpu-core: "50"   # 50% GPU 算力
+        kubernetes.io/gpu-memory: "4Gi"  # 4Gi 显存
+---
+# 弹性 Quota 配置
+apiVersion: scheduling.sigs.k8s.io/v1alpha1
+kind: ElasticQuota
+metadata:
+  name: team-ml
+  namespace: ml-team
+spec:
+  max:
+    cpu: "100"
+    memory: 200Gi
+  min:
+    cpu: "20"
+    memory: 40Gi
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看节点资源超卖情况
+kubectl get nodes -o custom-columns=NAME:.metadata.name,BATCH-CPU:.status.allocatable.kubernetes\.io/batch-cpu,BATCH-MEM:.status.allocatable.kubernetes\.io/batch-memory
+
+# 🟢 查看 GPU 设备分配
+kubectl get device -A
+kubectl get pods -o custom-columns=NAME:.metadata.name,GPU:.spec.containers[0].resources.limits.kubernetes\.io/gpu-core
+
+# 🟡 调整节点超卖比例
+kubectl annotate node node-1 koordinator.sh/colocation-profile='{"cpuReclaimThresholdPercent":60,"memoryReclaimThresholdPercent":70}' --overwrite
+
+# 🟡 触发 Pod 迁移（解决资源热点）
+kubectl apply -f - <<EOF
+apiVersion: scheduling.koordinator.sh/v1alpha1
+kind: PodMigrationJob
+metadata:
+  name: migrate-hot-pod
+spec:
+  podRef:
+    namespace: production
+    name: hot-pod-xxx
+  mode: EvictThenMigrate
+EOF
+
+# 🟢 查看 Koordlet 采集的资源画像
+kubectl get nodemetrics node-1 -o yaml | grep -A5 cpuUsage
+
+# 🔴 禁用混部（紧急场景，停止所有 BE 任务）
+kubectl annotate node node-1 koordinator.sh/colocation-enabled=false --overwrite
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| BE Pod 无法调度 | 节点无可超卖资源 | `kubectl describe pod <be-pod>` | 降低 LS 工作负载或添加节点 |
+| GPU 共享失败 | Device CRD 未创建或 GPU 驱动异常 | `kubectl get device` | 检查 koordlet 日志和 GPU 驱动 |
+| LS 服务延迟抨动 | BE 任务抢占 CPU 资源 | `kubectl top pod -n production` | 调高 cpuReclaimThreshold |
+| 弹性 Quota 不生效 | Quota CRD 未正确配置 | `kubectl get elasticquota -A` | 检查 min/max 配置和命名空间关联 |
+| Koordlet CrashLoop | 节点 cgroup 版本不兼容 | `kubectl logs -n koordinator-system -l app=koordlet` | 确认 cgroup v2 并更新 koordlet |
+
+```
+排查流程：
+├── BE Pod 调度失败
+│   ├── kubectl describe pod 查看调度事件
+│   ├── 检查节点 batch-cpu/batch-memory 可分配量
+│   ├── 确认 koordinator-scheduler 正常运行
+│   └── 检查节点是否禁用了混部
+├── LS 服务 SLO 违规
+│   ├── 检查 Koordlet 的 CPU 压制日志
+│   ├── 确认 QoS 级别标记正确
+│   ├── 检查 CPU Burst 是否启用
+│   └── 调整 cpuReclaimThresholdPercent
+└── GPU 共享异常
+    ├── kubectl get device 确认 GPU 设备已注册
+    ├── 检查 GPU 驱动和 CUDA 版本兼容性
+    └── 查看 koord-scheduler 日志中的 GPU 分配记录
+```
+
+## 生产案例
+
+### 案例 1：电商大促混部提升利用率
+
+- **场景**：电商集群 500 节点，平时 CPU 利用率仅 15%，大促时需要 3 倍资源，非大促时大量资源浪费
+- **排查**：固定资源分配导致非大促时 85% 资源空闲，大促前需提前 2 周扩容机器
+- **方案**：在线服务标记为 LS，数据分析/CI 构建标记为 BE，利用 Koordinator 混部填充空闲资源
+- **效果**：集群利用率从 15% 提升至 65%，年度服务器采购减少 40%，大促前无需提前扩容
+
+### 案例 2：GPU 共享推理降本
+
+- **场景**：AI 推理服务 20+ 个模型，每个模型独占 1 张 A100 GPU，平均 GPU 利用率仅 25%
+- **排查**：低 QPS 模型独占 GPU 造成巨大浪费，A100 单价 10万+，成本压力巨大
+- **方案**：使用 Koordinator GPU 共享调度，按 gpu-core 和 gpu-memory 分配，多模型共享同一 GPU
+- **效果**：GPU 利用率从 25% 提升至 75%，GPU 数量从 20 张减至 8 张，年度 GPU 成本节省 120 万
 
 ## 对比
 
-| 特性 | Koordinator | Volcano | YuniKorn | 默认 Scheduler |
-|------|------------|---------|---------|---------------|
-| 混部（Co-location） | ✅ 核心能力 | ⚠️ | ⚠️ | ❌ |
-| GPU 共享 | ✅ | ⚠️ | ❌ | ❌ |
-| QoS 分级 | ✅ 4 级 | ❌ | ✅ 3 级 | ❌ |
-| 批处理队列 | ⚠️ | ✅ | ✅ | ❌ |
+| 特性 | Koordinator | Volcano | YuniKorn | 默认 Scheduler | 适用场景 |
+|------|------------|---------|---------|---------------|----------|
+| 混部（Co-location） | ✅ 核心能力 | ⚠️ | ⚠️ | ❌ | 提升利用率 |
+| GPU 共享 | ✅ | ⚠️ | ❌ | ❌ | AI 推理降本 |
+| QoS 分级 | ✅ 4 级 | ❌ | ✅ 3 级 | ❌ | 多优先级工作负载 |
+| 批处理队列 | ⚠️ | ✅ | ✅ | ❌ | 大数据/AI 训练 |
+| 生产成熟度 | 高（阿里） | 高（华为） | 中 | 高 | 企业级稳定性 |
 
 ## 参考链接
 

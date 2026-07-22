@@ -328,6 +328,23 @@ spec:
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| 跨集群 Pod 不通 | CIDR 重叠/防火墙 | `subctl show connections` | 使用 GlobalCIDR/放行端口 |
+| 跨集群 Service 无法解析 | ServiceExport 未创建 | `kubectl get serviceexport -A` | 创建 ServiceExport |
+| 连接间歇中断 | Gateway 不稳定 | `kubectl get gateways -A` | 固定 Gateway 节点 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| **CIDR 规划** | 建集群时规划不重叠网段 | 避免 NAT 复杂度 |
+| **加密** | 跨公网必须启用 IPSec/WireGuard | 安全合规 |
+| **高可用** | 多 Gateway 主备 | 避免单点故障 |
+| **监控** | 跨集群链路延迟/丢包告警 | 实时掌握状态 |
+
 ## See Also
 
 - 30-service-mesh-deep-dive

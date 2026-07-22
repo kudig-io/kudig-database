@@ -75,6 +75,46 @@ curl -H "Host: <domain>" http://<lb-ip>/version
 - 保留蓝环境至少一个业务周期（如 30 分钟）后再清理，确保回滚窗口可用
 - 使用自动化脚本执行 selector 切换，减少手动修改导致的拼写错误
 
+## 生产案例
+
+### 案例 1：绿环境 Pod 未全部就绪即切换导致 502
+
+**背景**：某 SaaS 平台执行蓝绿切换时，绿环境 10 个 Pod 中仅 6 个 Ready，切换后 40% 请求返回 502。
+
+**时间线**：
+| 时间 | 事件 | 操作 |
+|------|------|------|
+| 09:00 | 绿环境 Deployment 创建，10 副本 | 🟢 `kubectl get deploy -n prod -l version=green` |
+| 09:03 | 6/10 Pod Ready，运维人员误判全部就绪 | 🟢 `kubectl get pods -n prod -l version=green \| grep Running` |
+| 09:04 | 切换 Service selector 到 green | 🟡 `kubectl patch svc web -n prod -p '{"spec":{"selector":{"version":"green"}}}'` |
+| 09:05 | 40% 请求 502，触发告警 | 🟢 `curl -I https://app.example.com` |
+| 09:06 | 立即回滚 selector 到 blue | 🟡 `kubectl patch svc web -n prod -p '{"spec":{"selector":{"version":"blue"}}}'` |
+
+**根因**：绿环境 Pod 启动需要连接数据库预热（~60s），运维未等待全部 Ready 即切换。
+
+### 案例 2：数据库 Schema 不兼容导致回滚失败
+
+**背景**：绿环境执行了数据库 migration（删除旧字段），切换后发现 bug 需回滚，但蓝环境代码依赖已删除字段。
+
+**教训**：蓝绿部署的数据库变更必须向前兼容（expand-contract 模式），切换后至少保留蓝环境一个完整业务周期。
+
+## 升级决策点
+
+- **P0（立即回滚）**：切换后核心业务不可用，错误率 >5%
+- **P1（评估回滚）**：切换后部分功能异常，错误率 1-5%，评估影响后决定
+- **P2（观察）**：仅性能微降，无功能影响，继续观察
+
+## 面试要点
+
+1. **Q: 蓝绿部署如何处理数据库 Schema 变更？**
+   A: 采用 expand-contract 模式：① expand 阶段添加新字段/表（兼容旧代码）；② 绿环境使用新 Schema；③ 确认绿环境稳定后，contract 阶段清理旧字段。绝不能在切换前执行破坏性 migration。
+
+2. **Q: 蓝绿部署与滚动更新的区别和适用场景？**
+   A: 滚动更新逐步替换 Pod，资源开销小但回滚慢；蓝绿需要双倍资源但切换/回滚瞬时完成。蓝绿适合：重大版本升级、需要完整验证的场景、对回滚速度要求极高的核心服务。
+
+3. **Q: 如何确保蓝绿切换的原子性？**
+   A: ① 使用单次 `kubectl patch` 修改 selector（原子操作）；② 切换前确认绿环境所有 Pod Ready；③ 使用自动化工具（Argo Rollouts）而非手动操作；④ 切换后立即验证 Endpoints 和流量；⑤ 保留蓝环境作为快速回滚窗口。
+
 ## 相关概念
 
 - [[概念/blue-green-deployment.md|蓝绿部署]] — 蓝绿发布切换机制、流量路由与回滚策略

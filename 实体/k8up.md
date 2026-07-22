@@ -72,33 +72,159 @@ K8up 完全基于 Kubernetes 原生 API。通过 CRD 定义备份策略，通过
 3. **跨集群备份**: 将备份推送到 S3，在另一个集群恢复
 4. **合规归档**: 将备份归档到冷存储满足合规要求
 
-## 安装
+## 安装与配置
 
 ```bash
 helm repo add appuio https://charts.appuio.ch
-helm install k8up appuio/k8up
-# 创建备份计划
-kubectl apply -f - <<EOF
+helm install k8up appuio/k8up -n k8up-system --create-namespace
+# 验证部署
+kubectl get pods -n k8up-system
+kubectl get crd | grep k8up
+```
+
+```yaml
+# 备份仓库 Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backup-credentials
+  namespace: default
+type: Opaque
+stringData:
+  password: "restic-repo-password"
+  aws-access-key-id: "AKIA..."
+  aws-secret-access-key: "xxx"
+---
+# 定时备份计划
 apiVersion: k8up.io/v1
 kind: Schedule
-metadata: { name: daily-backup }
+metadata:
+  name: daily-backup
+  namespace: default
 spec:
+  backend:
+    repoPasswordSecretRef:
+      name: backup-credentials
+      key: password
+    s3:
+      endpoint: https://s3.amazonaws.com
+      bucket: my-k8s-backups
+      accessKeyIDSecretRef:
+        name: backup-credentials
+        key: aws-access-key-id
+      secretAccessKeySecretRef:
+        name: backup-credentials
+        key: aws-secret-access-key
   backup:
     schedule: '0 2 * * *'
   prune:
     schedule: '0 4 * * *'
-    retention: { keepDaily: 7 }
+    retention:
+      keepDaily: 7
+      keepWeekly: 4
+      keepMonthly: 6
+---
+# 数据库一致性备份（Pod 注解）
+# metadata.annotations:
+#   k8up.io/backupcommand: 'pg_dump -U postgres mydb'
+#   k8up.io/file-extension: '.sql'
+```
+
+```bash
+# 手动触发备份
+kubectl apply -f - <<EOF
+apiVersion: k8up.io/v1
+kind: Backup
+metadata:
+  name: manual-backup-$(date +%Y%m%d)
+spec:
+  backend:
+    repoPasswordSecretRef:
+      name: backup-credentials
+      key: password
+    s3:
+      endpoint: https://s3.amazonaws.com
+      bucket: my-k8s-backups
 EOF
 ```
 
-## 替代方案
+## 运维操作
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **K8up** | Restic 引擎、声明式、轻量 | 仅 PV 级别备份 |
-| Velero | 功能全面（资源+PV）、CNCF 生态主流 | 较重、插件依赖多 |
-| Kasten K10 | 企业级、应用感知备份 | 商业产品 |
-| Longhorn Backup | 与 Longhorn 深度集成 | 仅限 Longhorn 存储 |
+```bash
+# 🟢 查看备份状态
+kubectl get backups -A
+kubectl get schedules -A
+kubectl get restores -A
+
+# 🟢 查看备份 Job 日志
+kubectl get jobs -n default -l k8up.io/owned-by
+kubectl logs job/<backup-job-name>
+
+# 🟢 检查 Prometheus 指标
+curl -s http://k8up-operator:8080/metrics | grep k8up
+
+# 🟡 手动触发恢复
+kubectl apply -f restore.yaml
+
+# 🟡 查看 Restic 仓库状态
+kubectl exec -it <backup-pod> -- restic -r s3:https://s3.amazonaws.com/my-k8s-backups snapshots
+
+# 🔴 删除备份数据（不可恢复）
+kubectl delete backup <name>
+# 注意：仅删除 CRD，Restic 仓库数据需通过 Prune 清理
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Backup Job 失败 | S3 凭据错误/网络不通 | `kubectl logs job/<name>` | 检查 Secret 和网络连接 |
+| PVC 未被备份 | PVC 缺少注解/命名空间不匹配 | `kubectl get pvc -o yaml \| grep k8up` | 添加 k8up.io/backup 注解 |
+| 数据库备份不一致 | preBackupCommand 未执行 | 检查 Pod 注解 | 添加 k8up.io/backupcommand 注解 |
+| Restore 失败 | 仓库密码错误/数据损坏 | `kubectl logs job/<restore-job>` | 核对密码或从其他快照恢复 |
+| Prune 未清理旧备份 | 保留策略配置错误 | `kubectl get schedule <name> -o yaml` | 调整 retention 配置 |
+
+```
+排查流程：
+├─ 备份失败
+│  ├─ kubectl get backups 查看状态
+│  ├─ kubectl logs job/<name> 查看错误
+│  ├─ 检查 S3/GCS 凭据和网络
+│  └─ 检查 PVC 注解是否正确
+├─ 恢复失败
+│  ├─ 确认 Restic 仓库密码正确
+│  ├─ 检查目标 PVC 是否存在
+│  └─ 检查快照列表是否完整
+└─ 调度问题
+   ├─ 检查 Schedule CRD 配置
+   └─ 检查 Operator 日志
+```
+
+## 生产案例
+
+### 案例 1：PostgreSQL 数据库每日备份
+
+- **场景**: 生产 PostgreSQL 需要每日一致性备份，RPO < 24h
+- **排查**: 直接备份 PV 文件无法保证数据库一致性
+- **方案**: K8up + preBackupCommand 执行 `pg_dump`，备份到 S3，保留 7 天
+- **效果**: 每日自动备份，恢复测试 RTO < 10min
+
+### 案例 2：多集群备份归档
+
+- **场景**: 3 个集群的有状态应用需要统一备份和合规归档
+- **排查**: 各集群独立备份，无统一管理视图
+- **方案**: K8up 统一备份到 S3，Archive CRD 将旧备份归档到 Glacier
+- **效果**: 统一备份管理，满足 7 年合规保留要求
+
+## 替代方案对比
+
+| 维度 | K8up | Velero | Kasten K10 | Longhorn Backup |
+|------|------|--------|-----------|----------------|
+| 备份范围 | PV 级别 | 资源+PV | 应用感知 | 仅 Longhorn |
+| 引擎 | Restic | Restic/Kopia | 自研 | 自研 |
+| 复杂度 | 低 | 中 | 高 | 低 |
+| 开源 | ✅ | ✅ | ❌ 商业 | ✅ |
+| 适用场景 | 轻量 PV 备份 | 全面备份 | 企业级 | Longhorn 用户 |
 
 ## 架构定位
 

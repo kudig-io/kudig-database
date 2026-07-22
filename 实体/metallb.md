@@ -70,38 +70,138 @@ MetalLB 通过 CRD 和 Cloud Controller Manager 接口集成。IPAddressPool CRD
 3. **多 VIP 管理**: 为多个服务分配和管理外部 IP
 4. **混合网络**: 在非云环境中实现类似云 ELB 的流量入口
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装
 helm repo add metallb https://metallb.github.io/metallb
 helm install metallb metallb/metallb -n metallb-system --create-namespace
-# 配置 IP 地址池和公告模式
-kubectl apply -f - <<EOF
+# 验证部署
+kubectl get pods -n metallb-system
+```
+
+```yaml
+# Layer 2 模式配置
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
-metadata: { name: default-pool }
+metadata:
+  name: production-pool
+  namespace: metallb-system
 spec:
-  addresses: ["192.168.1.240-192.168.1.250"]
+  addresses:
+    - 192.168.1.240-192.168.1.250
+  autoAssign: true
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
-metadata: { name: default }
+metadata:
+  name: l2-adv
+  namespace: metallb-system
 spec:
-  ipAddressPools: ["default-pool"]
-EOF
-# 创建 LoadBalancer Service
-kubectl expose deployment web --port=80 --type=LoadBalancer
+  ipAddressPools: ["production-pool"]
+  nodeSelectors:
+    - matchLabels:
+        node-role.kubernetes.io/worker: "true"
+---
+# BGP 模式配置
+apiVersion: metallb.io/v1beta1
+kind: BGPPeer
+metadata:
+  name: router-peer
+  namespace: metallb-system
+spec:
+  myASN: 64512
+  peerASN: 64513
+  peerAddress: 10.0.0.1
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: bgp-adv
+  namespace: metallb-system
+spec:
+  ipAddressPools: ["production-pool"]
+  aggregationLength: 32
 ```
 
-## 替代方案
+```bash
+# 创建 LoadBalancer Service
+kubectl expose deployment web --port=80 --type=LoadBalancer
+kubectl get svc web -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **MetalLB** | CNCF Incubating、L2+BGP | L2 单节点瓶颈 |
-| kube-vip | 轻量、双用途 | BGP 不如 MetalLB |
-| Porter (VXLAN) | VXLAN 隧道 | 功能单一 |
-| Cloud LB (ELB/SLB) | 云原生、成熟 | 仅限云环境 |
+## 运维操作
+
+```bash
+# 🟢 查看 IP 分配状态
+kubectl get ipaddresspools -n metallb-system
+kubectl get svc -A -o wide | grep LoadBalancer
+
+# 🟢 查看 Speaker 状态和 Leader 选举
+kubectl get pods -n metallb-system -l app=metallb,component=speaker
+kubectl logs -n metallb-system -l component=speaker --tail=50
+
+# 🟢 检查 BGP 会话状态
+kubectl logs -n metallb-system -l component=speaker | grep -i bgp
+
+# 🟡 强制释放 Service IP
+kubectl annotate svc <name> metallb.io/address-pool- --overwrite
+
+# 🟡 重启 Speaker（触发重新选举）
+kubectl rollout restart daemonset/speaker -n metallb-system
+
+# 🔴 删除 IPAddressPool（影响已分配 Service）
+kubectl delete ipaddresspool <name> -n metallb-system
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Service 无 External IP | IP 池耗尽/未创建 | `kubectl get ipaddresspools -n metallb-system` | 扩展地址范围或新建 Pool |
+| L2 模式流量中断 | Leader 节点宕机/ARP 未刷新 | `kubectl logs -l component=speaker` | 等待重新选举或重启 Speaker |
+| BGP 会话未建立 | ASN/密码配置错误 | `kubectl logs -l component=speaker \| grep bgp` | 核对 BGPPeer CRD 配置 |
+| IP 冲突 | 地址池与现有 IP 重叠 | `arping -I eth0 <vip>` | 调整 IPAddressPool 范围 |
+| 多节点流量不均 | BGP ECMP 未启用 | 检查路由器 ECMP 配置 | 启用路由器 ECMP 或用 L2 模式 |
+
+```
+排查流程：
+├─ Service 无 IP
+│  ├─ 检查 IPAddressPool 是否存在且 autoAssign=true
+│  └─ 检查 Controller 日志是否有分配错误
+├─ IP 已分配但不可达
+│  ├─ L2: 检查 Leader Speaker 是否运行 + ARP 响应
+│  └─ BGP: 检查 BGP 会话状态 + 路由表
+└─ 间歇性中断
+   ├─ 检查 Speaker Pod 是否频繁重启
+   └─ 检查节点网络接口是否稳定
+```
+
+## 生产案例
+
+### 案例 1：裸金属集群 Ingress 入口高可用
+
+- **场景**: 3 节点裸金属集群，需要为 Nginx Ingress 提供稳定 VIP
+- **排查**: L2 模式下单节点故障导致 30s 流量中断（ARP 缓存过期时间）
+- **方案**: 切换为 BGP 模式 + ECMP，3 节点同时公告 VIP，单节点故障 <1s 切换
+- **效果**: 入口可用性从 99.9% 提升至 99.99%
+
+### 案例 2：多租户 IP 地址池隔离
+
+- **场景**: 多团队共享集群，需要不同 Namespace 使用不同 IP 段
+- **排查**: 默认 Pool 被某团队大量 Service 耗尽
+- **方案**: 创建多个 IPAddressPool + L2Advertisement，通过 namespaceSelector 隔离
+- **效果**: 各团队 IP 资源独立管理，互不影响
+
+## 替代方案对比
+
+| 维度 | MetalLB | kube-vip | Porter | Cloud LB |
+|------|---------|----------|--------|----------|
+| 协议支持 | L2+BGP | L2+BGP | VXLAN | 云私有 |
+| CNCF 状态 | Incubating | 非 CNCF | Sandbox | N/A |
+| 多节点 LB | BGP ECMP | 仅 Active | 有限 | 原生 |
+| 配置复杂度 | CRD 声明式 | 简单 | 简单 | 自动 |
+| 适用场景 | 裸金属生产 | 轻量/双用途 | 简单场景 | 云环境 |
 
 ## 架构定位
 

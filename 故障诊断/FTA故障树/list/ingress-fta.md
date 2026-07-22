@@ -83,6 +83,86 @@ base_confidence: 0.7
 | TLS1A | 证书过期 | `kubectl get secret ${TLS_SECR
 ...(截断)
 
+## 生产案例
+
+### 案例1: Ingress TLS 证书过期导致 HTTPS 不可用
+
+**时间线**:
+- 00:00 凌晨告警: 多个域名 HTTPS 访问返回证书错误
+- 00:05 检查发现 cert-manager 未自动续期（ACME challenge 失败）
+- 00:10 确认根因: DNS01 challenge 的 CloudDNS 凭证过期
+- 00:20 更新凭证后手动触发续期，证书恢复
+
+**根因链**:
+```
+DNS提供商凭证过期 → cert-manager ACME challenge失败
+→ 证书未续期 → 过期后HTTPS不可用 → 用户看到证书错误
+```
+
+**修复**:
+```bash
+# 🟢 检查证书状态
+kubectl get certificates -A -o wide | grep -v "True"
+# 🟡 手动触发续期
+kubectl delete certificaterequest -n ${NS} ${CERT_NAME}-xxxxx
+# 🟢 验证
+curl -vI https://${DOMAIN} 2>&1 | grep "expire date"
+```
+
+### 案例2: Ingress Controller 过载导致 502
+
+**现象**: 高峰期大量 502 错误，nginx-ingress Pod CPU 超过 90%
+
+**根因**: 单副本 nginx-ingress 无法承载峰值流量，且未配置 HPA
+
+**修复**:
+```bash
+# 🟡 扩容 Ingress Controller
+kubectl scale deployment ingress-nginx-controller -n ingress-nginx --replicas=3
+# 🟡 配置 HPA
+kubectl autoscale deployment ingress-nginx-controller -n ingress-nginx --min=2 --max=10 --cpu-percent=70
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: ingress-alerts
+  rules:
+  - alert: IngressCertExpiringSoon
+    expr: certmanager_certificate_expiration_timestamp_seconds - time() < 14 * 24 * 3600
+    for: 1h
+    labels:
+      severity: warning
+  - alert: IngressHigh5xxRate
+    expr: rate(nginx_ingress_controller_requests{status=~"5.."}[5m]) / rate(nginx_ingress_controller_requests[5m]) > 0.05
+    for: 5m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 证书自动续期 | cert-manager + 提前30天告警 | P0 |
+| Ingress Controller 高可用 | 至少 2 副本 + 反亲和 | P0 |
+| HPA 自动扩容 | 基于 CPU/连接数自动扩展 | P1 |
+| 后端健康检查 | 配置 upstream health check | P1 |
+
+## 面试要点
+
+1. **Q: Ingress 返回 502 的排查路径？**
+   A: 检查后端 Service/Endpoint 是否有可用 Pod → 查看 Ingress Controller 日志 → 确认后端响应超时 → 检查 NetworkPolicy → 验证 Pod 端口配置
+
+2. **Q: Ingress 与 Gateway API 的区别？**
+   A: Ingress 功能有限(仅HTTP路由)；Gateway API 支持 TCP/UDP/gRPC、角色分离、跨命名空间引用、更丰富的流量管理
+
+3. **Q: TLS 证书管理最佳实践？**
+   A: cert-manager 自动续期 + DNS01/HTTP01 challenge + 提前告警 + 多 CA 容灾 + 定期验证证书链完整性
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

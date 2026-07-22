@@ -154,6 +154,86 @@ flowchart TD
 | **事件** | Velero `Backup`/`Restore` 资源状态（Completed/PartiallyFailed/Failed）；etcd snapshot 定时任务状态；VolumeSnapshot 事件 |
 | **关键指标
 
+## 生产案例
+
+### 案例1: Velero 备份失败 - 对象存储凭证过期
+
+**时间线**:
+- 02:00 定时备份任务触发
+- 02:10 备份状态 `PartiallyFailed`，部分 PV 快照失败
+- 02:15 错误: `AccessDenied: The AWS Access Key Id you provided does not exist`
+- 02:20 确认根因: S3 存储桶的 IAM 凭证已轮转
+- 02:30 更新凭证后备份成功
+
+**根因链**:
+```
+IAM凭证轮转 → Velero Secret未同步 → S3上传认证失败
+→ PV快照失败 → 备份PartiallyFailed
+```
+
+**修复**:
+```bash
+# 🟢 检查备份状态
+velero backup describe ${BACKUP_NAME} --details
+kubectl get backups -n velero -o wide
+# 🟡 更新存储凭证
+velero backup-location set default --credential=${NEW_CRED_FILE}
+# 🟢 验证
+velero backup create test-backup --wait
+```
+
+### 案例2: etcd 快照恢复失败
+
+**现象**: 从 etcd 快照恢复集群失败，`etcdctl snapshot restore` 报错 `member count mismatch`
+
+**根因**: 快照来自 3 节点集群但尝试恢复到 1 节点
+
+**修复**:
+```bash
+# 🔴 etcd 快照恢复(高风险)
+ETCDCTL_API=3 etcdctl snapshot restore ${SNAPSHOT} --name=master-0 --initial-cluster=master-0=https://10.0.0.1:2380 --initial-advertise-peer-urls=https://10.0.0.1:2380
+# 恢复后重启 etcd 和 kube-apiserver
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: backup-alerts
+  rules:
+  - alert: VeleroBackupFailed
+    expr: velero_backup_failure_total > 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: VeleroBackupOverdue
+    expr: time() - velero_backup_last_successful_timestamp > 26 * 3600
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 备份恢复演练 | 每月至少一次恢复测试 | P0 |
+| 凭证自动轮转 | 使用 IRSA 代替静态 AK | P0 |
+| 多副本快照 | 备份存储跨区域复制 | P1 |
+| 备份完整性验证 | 恢复后验证数据一致性 | P1 |
+
+## 面试要点
+
+1. **Q: K8s 集群备份的核心内容？**
+   A: etcd 数据(所有集群状态) + PV 数据(应用持久化) + 集群配置(CNI/CSI/证书)；etcd 是最关键的
+
+2. **Q: Velero 的工作原理？**
+   A: 备份: 读取 K8s API 对象 + 调用 CSI 快照 → 存储到对象存储；恢复: 从对象存储读取 → 重建 API 对象 + 恢复 PV
+
+3. **Q: etcd 备份恢复的注意事项？**
+   A: 停止所有 etcd 实例 → 所有节点从同一快照恢复 → 保持集群成员一致 → 恢复后验证数据完整性 → 先启动 etcd 再启动 apiserver
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

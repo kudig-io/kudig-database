@@ -83,23 +83,129 @@ KubeClipper 的管理面本身就是一个 Kubernetes API 服务器（内置 etc
 3. **离线环境部署**: 在完全断网的机房环境中部署 Kubernetes 集群
 4. **多集群运维**: 统一管理开发、测试、生产多套 Kubernetes 集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # 下载 kcctl CLI
 curl -sfL https://oss.kubeclipper.io/kcctl-install.sh | KC_VERSION=v1.4.0 bash -
 
-# 初始化 KubeClipper 管理节点
-kcctl deploy --user root --passwd $SERVER_PASSWORD --pkg kc.tar.gz \
-  --ip 10.0.0.1
+# 初始化 KubeClipper 管理节点（离线模式）
+kcctl deploy --user root --passwd $SERVER_PASSWORD \
+  --pkg kc.tar.gz --ip 10.0.0.1
 
 # 访问 Web UI
-echo "https://$(hostname -I | awk '{print $1}')"
+echo "https://10.0.0.1"
+
+# 添加节点（安装 kc-agent）
+kcctl join --agent 10.0.0.2,10.0.0.3,10.0.0.4,10.0.0.5,10.0.0.6 \
+  --user root --passwd $NODE_PASSWORD
 
 # 创建集群
-kcctl create cluster --name prod-cluster --master 10.0.0.2,10.0.0.3,10.0.0.4 \
-  --worker 10.0.0.5,10.0.0.6 --cni calico
+kcctl create cluster --name prod-cluster \
+  --master 10.0.0.2,10.0.0.3,10.0.0.4 \
+  --worker 10.0.0.5,10.0.0.6 \
+  --cni calico --cri containerd \
+  --k8s-version v1.29.2
 ```
+
+```yaml
+# 集群配置示例（YAML 模式）
+apiVersion: core.kubeclipper.io/v1
+kind: Cluster
+metadata:
+  name: prod-cluster
+spec:
+  kubernetesVersion: v1.29.2
+  containerRuntime:
+    type: containerd
+    version: 1.7.13
+  networking:
+    cni:
+      type: calico
+      version: v3.27.0
+    podSubnet: 10.244.0.0/16
+    serviceSubnet: 10.96.0.0/12
+  etcd:
+    dataDir: /var/lib/etcd
+  masters:
+  - id: node-01
+  - id: node-02
+  - id: node-03
+  workers:
+  - id: node-04
+  - id: node-05
+  addons:
+  - name: metrics-server
+  - name: ingress-nginx
+  - name: prometheus-stack
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看集群和节点状态
+kcctl get cluster
+kcctl get node
+kcctl describe cluster prod-cluster
+
+# 🟡 中风险：扩容 Worker 节点
+kcctl join --cluster prod-cluster --worker 10.0.0.7,10.0.0.8
+
+# 🟡 中风险：升级集群版本
+kcctl upgrade cluster prod-cluster --k8s-version v1.30.0
+
+# 🟡 中风险：备份 etcd
+kcctl backup cluster prod-cluster --backup-name pre-upgrade
+
+# 🔴 高风险：删除集群
+kcctl delete cluster prod-cluster --force
+
+# 🟢 低风险：查看操作日志
+kcctl get operation --cluster prod-cluster
+kcctl describe operation <operation-id>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 节点添加失败 | Agent 安装失败 | `kcctl describe node <id>` | 检查节点网络和 SSH 凭据 |
+| 集群创建失败 | 组件安装错误 | `kcctl describe operation <id>` | 查看 Step 日志，修复具体步骤 |
+| 升级失败 | 版本不兼容 | `kcctl get operation --cluster <name>` | 回滚到上一版本 |
+| 节点 NotReady | kc-agent 断开 | `systemctl status kc-agent` | 重启 agent，检查 gRPC 连接 |
+| 离线部署失败 | 镜像包不完整 | 检查离线包 checksum | 重新下载完整离线包 |
+
+```
+排查流程：
+├── 集群操作失败？
+│   ├── kcctl describe operation → 查看失败 Step
+│   ├── 登录目标节点查看日志
+│   └── 检查节点资源（磁盘/内存）
+├── 节点异常？
+│   ├── systemctl status kc-agent → 检查 Agent
+│   ├── 检查节点与 kc-server 的 gRPC 连接
+│   └── 查看 kubelet 日志
+└── 离线环境问题？
+    ├── 确认离线包完整性
+    ├── 检查本地 Registry 可用性
+    └── 验证镜像列表完整
+```
+
+## 生产案例
+
+### 案例 1：离线机房批量部署 K8s 集群
+
+- **场景**：金融行业 5 个离线机房，每个需要部署 3 套 K8s 集群（dev/staging/prod）
+- **排查**：传统 Kubespray 需要配置 Ansible + SSH，离线环境配置复杂
+- **方案**：使用 KubeClipper 离线包 + Agent 架构，无需 SSH，通过 Web UI 批量创建集群
+- **效果**：15 套集群部署从 2 周缩短至 2 天，全程 Web UI 操作
+
+### 案例 2：国产化信创环境集群管理
+
+- **场景**：政府项目要求在麒麟 OS + 鲲鹏 ARM 上运行 K8s
+- **排查**：主流工具对 ARM + 麒麟 OS 支持不完善
+- **方案**：KubeClipper 原生支持 ARM64 + 麒麟 OS，提供完整的离线部署和生命周期管理
+- **效果**：顺利通过信创验收，集群稳定运行 12 个月零故障
 
 ## 对比
 

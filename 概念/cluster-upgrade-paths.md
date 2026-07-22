@@ -170,6 +170,115 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-xxx.db \
 - **节点 drain 卡住**：PDB 阻止驱逐或裸 Pod 无 controller，加 `--disable-eviction` 临时绕过。
 - **证书过期**：升级同时忘记 renew 证书，升级后不久 apiserver 证书过期集群宕机。
 
+## 源码实现分析
+
+### kubeadm 升级流程
+
+```go
+// k8s.io/kubernetes/cmd/kubeadm/app/cmd/upgrade/apply.go
+// kubeadm upgrade apply 执行控制平面升级
+func (a *apply) Run() error {
+    // 1. 预检查：版本兼容性、API 弃用扫描
+    if err := preflight.Checks(a.cfg); err != nil {
+        return err
+    }
+    // 2. 升级 etcd（如果是自管 etcd）
+    if a.cfg.Etcd.IsExternal() == false {
+        upgradeEtcd(a.cfg.Etcd.Local.ImageTag)
+    }
+    // 3. 升级 kube-apiserver 静态 Pod 镜像
+    upgradeControlPlane(a.cfg, "kube-apiserver")
+    upgradeControlPlane(a.cfg, "kube-controller-manager")
+    upgradeControlPlane(a.cfg, "kube-scheduler")
+    // 4. 升级 kubelet 配置
+    upgradeKubeletConfig(a.cfg)
+    // 5. 验证集群健康
+    waitForClusterHealthy()
+}
+```
+
+### 升级流程架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          K8s 集群升级流程                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  升级前准备:                                             │
+│  ─────────                                              │
+│  1. 扫描弃用 API (pluto/kube-no-trouble)              │
+│  2. 备份 etcd (etcdctl snapshot save)                  │
+│  3. 测试环境验证完整升级链路                         │
+│  4. 确认 CNI/CRI 版本兼容性                          │
+│                                                           │
+│  控制平面升级 (严格顺序):                              │
+│  ─────────                                              │
+│  etcd → kube-apiserver → controller-manager           │
+│       → kube-scheduler → kubelet (逐节点)            │
+│                                                           │
+│  节点升级 (逐个):                                      │
+│  ─────────                                              │
+│  kubectl cordon <node>                                  │
+│  kubectl drain <node> --ignore-daemonsets             │
+│  升级 kubelet + containerd                             │
+│  systemctl restart kubelet                             │
+│  kubectl uncordon <node>                               │
+│                                                           │
+│  升级后验证:                                             │
+│  ─────────                                              │
+│  kubectl get nodes (all Ready)                         │
+│  kubectl get pods -A (no CrashLoop)                    │
+│  kubectl get componentstatuses                         │
+│  证书有效期检查 (kubeadm certs check-expiration)     │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 升级前检查脚本（🟢 只读）
+
+```bash
+#!/bin/bash
+# 升级前检查脚本
+echo "=== 当前版本 ==="
+kubectl version --short 2>/dev/null || kubectl version
+
+echo "=== 弃用 API 扫描 ==="
+# pluto detect-all-in-cluster
+kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+
+echo "=== etcd 健康 ==="
+kubectl exec -n kube-system etcd-master -- etcdctl endpoint health --cluster
+
+echo "=== 证书有效期 ==="
+kubeadm certs check-expiration 2>/dev/null || \
+  openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate
+
+echo "=== 节点状态 ==="
+kubectl get nodes -o wide
+```
+
+## 面试要点
+
+1. **K8s 集群升级的严格顺序？**
+   - etcd → kube-apiserver → controller-manager → scheduler
+   - 然后逐节点升级 kubelet
+   - 原因：下层依赖必须先就绪
+
+2. **为什么不能跨版本升级？**
+   - API 弃用：旧 API 可能在新版本移除
+   - etcd 数据格式：新版本可能写入不兼容格式
+   - kubelet 兼容性：最多落后 apiserver 2 个小版本
+
+3. **升级前必须做哪些检查？**
+   - 弃用 API 扫描（pluto/kube-no-trouble）
+   - etcd 备份 + 验证恢复
+   - CNI/CRI 版本兼容性确认
+   - 证书有效期检查
+
+4. **升级失败如何回滚？**
+   - 控制平面：从 etcd 快照恢复 + 回滚静态 Pod 镜像
+   - 节点：回滚 kubelet/containerd 版本
+   - 关键：升级前必须备份 etcd
+
 ## 参见
 
 - [[kubernetes]] — core-concept 领域核心页面

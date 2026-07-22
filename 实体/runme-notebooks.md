@@ -75,7 +75,7 @@ Runme 可以直接在 Markdown 中执行 Kubernetes 命令。配合 VS Code Kube
 3. **Kubernetes 运维手册**：将 kubectl 操作序列保存为可执行的 Markdown 文档
 4. **CI 文档验证**：GitHub Actions 中自动执行文档命令，确保文档不过时
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Runme CLI
@@ -92,6 +92,72 @@ runme fmt --filename=README.md     # 格式化 Markdown
 runme list                         # 列出所有可执行单元格
 ```
 
+### CI/CD 集成配置
+
+```yaml
+# GitHub Actions 中使用 Runme 验证文档
+name: Validate Runbooks
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Runme
+        run: curl -fsSL https://runme.dev/install.sh | bash
+      - name: Execute runbook
+        run: runme run --filename=docs/runbook.md --yes
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+```
+
+## 运维操作
+
+```bash
+# 🟢 列出文档中所有可执行单元格
+runme list --filename=ops-runbook.md
+
+# 🟡 执行指定单元格
+runme run --filename=ops-runbook.md --cell="check-cluster-status"
+
+# 🟡 批量执行所有命令
+runme run --filename=ops-runbook.md --yes
+
+# 🟢 格式化 Markdown 文档
+runme fmt --filename=README.md
+
+# 🟢 查看执行历史
+runme history
+
+# 🟡 导出执行结果为 JSON
+runme run --filename=ops.md --output=json > results.json
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 命令执行失败 | 环境变量未设置 | 检查 .env 文件 | 配置 Runme 环境变量 |
+| kubectl 命令无权限 | kubeconfig 未配置 | `kubectl cluster-info` | 设置 KUBECONFIG 环境变量 |
+| 单元格无法识别 | Markdown 格式不正确 | `runme list` | 使用 `runme fmt` 修复格式 |
+| 执行超时 | 命令阻塞等待输入 | 检查命令是否需要交互 | 添加 --yes 或非交互标志 |
+| 输出未保存 | 序列化器问题 | 检查 VS Code 扩展版本 | 更新 Runme 扩展到最新版 |
+
+## 生产案例
+
+### 案例1: SRE 团队 Runbook 标准化
+
+**场景**: 故障处理文档过时，值班工程师无法确认命令是否有效  
+**排查**: Wiki 文档中 30% 的命令已过时或参数错误  
+**方案**: 迁移到 Runme Notebook + CI 自动验证 + 版本控制  
+**效果**: 文档有效率 100%，MTTR 降低 40%  
+
+### 案例2: 新成员 Onboarding 自动化
+
+**场景**: 新工程师环境配置需 2 天，步骤经常遗漏  
+**方案**: 将环境配置文档转为 Runme Notebook，每步可执行可验证  
+**效果**: Onboarding 时间从 2天缩短到 2小时  
+
 ## 对比
 
 | 特性 | Runme | Jupyter Notebook | Quarto |
@@ -101,6 +167,16 @@ runme list                         # 列出所有可执行单元格
 | VS Code 集成 | ✅ 深度 | ✅ | ⚠️ |
 | Git 友好 | ✅ 纯文本 | ❌ JSON | ✅ |
 | 运维场景 | ✅ 核心场景 | ❌ | ⚠️ |
+| CI/CD 集成 | ✅ GitHub Actions | ⚠️ | ⚠️ |
+
+## 检查清单
+
+- [ ] 运维 Runbook 纳入版本控制
+- [ ] CI 中配置文档自动验证
+- [ ] 配置环境变量隔离不同环境
+- [ ] 保存执行结果用于审计
+- [ ] 定期运行文档验证确保命令有效
+- [ ] 团队统一使用 Runme 格式规范
 
 ## 参考链接
 
@@ -111,12 +187,9 @@ runme list                         # 列出所有可执行单元格
 ## Related
 
 - [[kpt]] — kpt
-- [[logging-operator]] — Loggingng Operator|Logging Operator]]
+- [[logging-operator]] — Logging Operator
 - [[kubeclipper]] — KubeClipper
-- [[README]] — FTA 故障树清单索引
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- runme-notebooks
 - [[实体/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

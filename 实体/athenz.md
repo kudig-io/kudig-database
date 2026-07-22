@@ -77,28 +77,181 @@ Athenz 提供 **Athenz SIA for Kubernetes**，通过 Admission Webhook 或 Init 
 3. **跨团队资源访问**：通过域间信任关系实现跨团队资源的细粒度授权
 4. **合规审计**：所有授权决策可审计，满足金融/医疗行业的合规要求
 
-## 安装
+## 安装与配置
 
 ```bash
 # 使用 Helm 在 K8s 中部署 Athenz
 helm repo add athenz https://athenz.github.io/athenz
-helm install athenz-zms athenz/zms -n athenz --create-namespace
-helm install athenz-zts athenz/zts -n athenz
+helm install athenz-zms athenz/zms -n athenz --create-namespace \
+  --set replicaCount=3 \
+  --set persistence.enabled=true
+helm install athenz-zts athenz/zts -n athenz \
+  --set replicaCount=3
 
 # 安装 SIA Admission Controller
 helm install athenz-sia athenz/sia -n athenz
-# 为 Pod 自动注入身份证书（annotation 示例）
-# athenz.io/domain: "myteam.myservice"
+
+# 验证部署
+kubectl get pods -n athenz
+kubectl get svc -n athenz
 ```
 
-## 对比
+```yaml
+# Pod 自动注入身份证书 (annotation)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: production
+spec:
+  template:
+    metadata:
+      annotations:
+        athenz.io/domain: "myteam.payment"
+        athenz.io/service: "payment-api"
+        athenz.io/cert-refresh-interval: "24h"
+    spec:
+      serviceAccountName: payment-sa
+      containers:
+        - name: payment
+          image: myorg/payment:v2.0
+          volumeMounts:
+            - name: athenz-certs
+              mountPath: /var/run/athenz
+              readOnly: true
+      volumes:
+        - name: athenz-certs
+          emptyDir:
+            medium: Memory
+---
+# Athenz 域和策略定义
+apiVersion: athenz.io/v1
+kind: Domain
+metadata:
+  name: myteam.payment
+spec:
+  roles:
+    - name: admin
+      members:
+        - user.john
+        - user.jane
+    - name: readers
+      members:
+        - myteam.billing.billing-svc
+  policies:
+    - name: access
+      assertions:
+        - role: myteam.payment:role.readers
+          resource: myteam.payment:data.transactions
+          action: read
+        - role: myteam.payment:role.admin
+          resource: myteam.payment:*
+          action: *
+```
 
-| 特性 | Athenz | SPIRE | Keycloak |
-|------|--------|-------|---------|
-| 身份类型 | X.509 SVID | X.509/JWT SVID | OAuth2/OIDC |
-| 授权模型 | RBAC/ABAC + ZPE | 身份签发 | RBAC/UMA |
-| 去中心化 | ✅ ZPE 本地 | ❌ | ❌ |
-| 适用场景 | 服务间零信任 | 服务身份 | 用户身份 |
+## 运维操作
+
+```bash
+# 🟢 检查 Athenz 组件状态
+kubectl get pods -n athenz
+kubectl get svc -n athenz
+
+# 🟢 检查 ZMS 健康状态
+curl -sk https://athenz-zms.athenz.svc:4443/v1/status
+
+# 🟢 检查 ZTS 健康状态
+curl -sk https://athenz-zts.athenz.svc:4443/v1/status
+
+# 🟢 查看域列表
+curl -sk -H "Authorization: Bearer <token>" \
+  https://athenz-zms.athenz.svc:4443/v1/domain
+
+# 🟢 查看特定域的策略
+curl -sk -H "Authorization: Bearer <token>" \
+  https://athenz-zms.athenz.svc:4443/v1/domain/myteam.payment/policy
+
+# 🟢 检查 Pod 证书状态
+kubectl exec <pod> -- cat /var/run/athenz/ntoken
+kubectl exec <pod> -- openssl x509 -in /var/run/athenz/cert.pem -noout -dates
+
+# 🟡 手动触发证书轮换
+kubectl exec <pod> -- /usr/bin/sia -force-refresh
+
+# 🟢 检查 SIA Admission Webhook
+kubectl get validatingwebhookconfigurations | grep athenz
+kubectl get mutatingwebhookconfigurations | grep athenz
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod 无法获取证书 | SIA Webhook 未运行 | `kubectl get pods -n athenz` | 检查 SIA Pod 状态 |
+| 证书过期 | 自动轮换失败 | `openssl x509 -dates` | 手动触发刷新/检查 ZTS |
+| 授权拒绝 | 策略未配置/缓存过期 | 检查 ZPE 日志 | 更新策略/强制刷新缓存 |
+| mTLS 握手失败 | 证书链不完整 | `openssl s_client -connect` | 检查 CA 证书配置 |
+| ZMS 不可用 | 数据库连接失败 | 检查 ZMS 日志 | 检查 MySQL/PostgreSQL 连接 |
+| 跨域访问失败 | 域间信任未配置 | 检查域策略 | 配置跨域角色委托 |
+
+### 排查流程
+
+```
+Athenz 身份/授权异常
+├── 证书获取失败
+│   ├── 检查 SIA Pod 状态和日志
+│   ├── 检查 Pod annotation 配置
+│   ├── 检查 ZTS 可达性
+│   └── 检查 ServiceAccount 到域的映射
+├── 授权决策失败
+│   ├── 检查 ZPE 策略缓存是否最新
+│   ├── 检查域/角色/策略定义
+│   ├── 检查调用方身份 (SVID)
+│   └── 强制刷新 ZPE 缓存
+└── mTLS 通信失败
+    ├── 检查证书有效期
+    ├── 检查 CA 证书链完整性
+    ├── 检查 SAN (Subject Alternative Name)
+    └── 检查证书轮换配置
+```
+
+## 生产案例
+
+### 案例 1: 微服务零信任身份体系
+
+- **场景**: 200+ 微服务需要互相认证，传统 API Key 管理混乱
+- **排查**: API Key 泄露事件频发；无法追踪哪个服务调用了哪个 API
+- **方案**: 部署 Athenz；每个服务通过 SIA 自动获取 X.509 SVID；所有服务间通信使用 mTLS；ZPE 本地授权
+- **效果**: 消除 API Key 泄露风险；所有调用可审计；授权延迟 <1ms (ZPE 本地)
+
+### 案例 2: 跨团队资源访问控制
+
+- **场景**: 数据团队需要访问支付团队的交易数据，但需要细粒度控制
+- **排查**: 传统 RBAC 无法表达“数据团队只能读取脱敏后的交易数据”
+- **方案**: 创建跨域角色委托；支付域创建 `data-readers` 角色，委托给数据域；策略限制只能访问 `data.transactions.masked` 资源
+- **效果**: 细粒度跨团队授权；所有访问可审计；无需共享凭证
+
+## 对比与替代方案
+
+| 维度 | Athenz | SPIRE | Keycloak | OPA |
+|------|--------|-------|----------|-----|
+| 身份类型 | X.509 SVID | X.509/JWT SVID | OAuth2/OIDC | ❌ |
+| 授权模型 | RBAC/ABAC + ZPE | 身份签发 | RBAC/UMA | Rego 策略 |
+| 去中心化 | ✅ ZPE 本地 | ❌ | ❌ | ✅ 本地 |
+| 证书管理 | ✅ 自动轮换 | ✅ 自动轮换 | ❌ | ❌ |
+| 适用场景 | 服务间零信任 | 服务身份 | 用户身份 | 策略引擎 |
+| 规模验证 | 10万+ 服务 | 大规模 | 中规模 | 大规模 |
+
+## 检查清单
+
+- [ ] ZMS/ZTS 多副本部署且健康
+- [ ] SIA Admission Webhook 正常工作
+- [ ] Pod 自动获取证书且自动轮换
+- [ ] 域规划清晰，策略最小权限
+- [ ] ZPE 本地授权延迟 <5ms
+- [ ] 审计日志已启用并接入 SIEM
+- [ ] 证书有效期和轮换策略已配置
+- [ ] 跨域信任关系已验证
+- [ ] 监控覆盖 ZMS/ZTS/SIA 健康状态
 
 ## 参考链接
 
@@ -107,15 +260,10 @@ helm install athenz-sia athenz/sia -n athenz
 
 ## Related
 
-- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kubestellar]] — KubeStellar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- athenz
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
 
 <!-- risk-assessed -->

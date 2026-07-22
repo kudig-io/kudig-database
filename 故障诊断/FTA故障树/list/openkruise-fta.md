@@ -78,6 +78,90 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 ```
 ---
 
+## 生产案例
+
+### 案例1: CloneSet 滚动更新卡住
+
+**时间线**:
+- 11:00 发布 CloneSet 新版本，partition 设为 50%
+- 11:05 前 50% Pod 更新成功，但剩余 Pod 未继续更新
+- 11:10 检查发现 kruise-controller-manager 日志报错: webhook 超时
+- 11:15 确认根因: 自定义 Admission Webhook 服务不可用，阻塞了 Pod 创建
+- 11:20 修复 Webhook 后更新继续
+
+**根因链**:
+```
+CloneSet滚动更新 → 创建新Pod → Admission Webhook拦截
+→ Webhook服务不可用(timeout) → Pod创建失败 → 更新卡住
+```
+
+**修复**:
+```bash
+# 🟢 检查 kruise-controller 状态
+kubectl get pods -n kruise-system -l control-plane=controller-manager
+kubectl logs -n kruise-system -l control-plane=controller-manager --tail=50 | grep -i error
+# 🟡 检查并修复 Webhook
+kubectl get validatingwebhookconfigurations | grep kruise
+kubectl get mutatingwebhookconfigurations | grep kruise
+```
+
+### 案例2: DaemonSet 升级导致节点服务中断
+
+**现象**: 使用 OpenKruise DaemonSet 滚动升级日志采集 Agent，部分节点采集中断超过 10 分钟
+
+**根因**: surge 策略配置不当，同时升级节点过多，且新 Pod 启动慢(需加载大量配置)
+
+**修复**:
+```yaml
+# 🟡 调整滚动策略
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      partition: 0
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: openkruise-alerts
+  rules:
+  - alert: KruiseControllerDown
+    expr: up{job="kruise-controller-manager"} == 0
+    for: 2m
+    labels:
+      severity: critical
+  - alert: CloneSetUpdateStuck
+    expr: kruise_cloneset_status_updated_replicas < kruise_cloneset_status_replicas
+    for: 30m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| Webhook 高可用 | kruise webhook 至少 2 副本 | P0 |
+| 分批发布 | partition 控制每批更新比例 | P0 |
+| 回滚预案 | 保留旧版本镜像，快速回滚 | P1 |
+| 资源预留 | 更新时预留足够资源给新 Pod | P1 |
+
+## 面试要点
+
+1. **Q: OpenKruise CloneSet 与原生 Deployment 的区别？**
+   A: CloneSet 支持原地升级(in-place update)避免 Pod 重建；支持指定 Pod 删除；partition 控制更精细；支持流式扩容
+
+2. **Q: OpenKruise 原地升级的原理？**
+   A: 只更新容器镜像并重启容器，保持 Pod IP/挂载卷/节点不变；通过 CRI 接口重建容器而非删除 Pod
+
+3. **Q: OpenKruise 更新卡住的排查思路？**
+   A: 检查 kruise-controller 日志 → 验证 Webhook 可用性 → 确认资源是否充足 → 检查 partition/selector 配置 → 查看 Pod 事件
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

@@ -71,31 +71,160 @@ Meshery 通过 kubeconfig 或 ServiceAccount 连接 Kubernetes 集群，使用�
 3. **性能回归**: 定期运行性能测试，检测网格升级后的性能退化
 4. **架构可视化**: 通过 MeshModel 可视化整个云原生架构的组件关系
 
-## 安装
+## 安装与配置
 
 ```bash
 # Docker 快速启动
 docker run -d --name meshery -l meshery \
   -v meshery_config:/home/meshery/.meshery/config \
   -p 9081:9081 -p 10080:10080 layer5/meshery:stable
+
 # Helm 部署到 Kubernetes
 helm repo add meshery https://meshery.io/charts
-helm install meshery meshery/meshery -n meshery --create-namespace
+helm install meshery meshery/meshery -n meshery --create-namespace \
+  --set meshery-server.service.type=LoadBalancer
+
+# 安装 meshctl CLI
+curl -L https://meshery.io/install | bash -
+meshctl version
+
+# 连接 Kubernetes 集群
+meshctl context create my-cluster --kubeconfig ~/.kube/config
+meshctl context switch my-cluster
+
 # 访问 http://localhost:9081
 ```
 
-## 替代方案
+```yaml
+# Meshery Helm values 自定义
+# values.yaml
+meshery-server:
+  replicas: 1
+  service:
+    type: LoadBalancer
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Meshery** | 多网格统一管理、MeshModel | 学习曲线较陡 |
-| Istio Dashboard | Istio 官方、轻量 | 仅限 Istio |
-| Kiali | 服务网格可视化优秀 | 仅限 Istio，无多网格能力 |
-| Cilium Hubble | eBPF 原生可观测性 | 仅限 Cilium |
+meshery-broker:
+  enabled: true
 
-## 架构定位
+adapters:
+  meshery-istio:
+    enabled: true
+  meshery-linkerd:
+    enabled: true
+  meshery-cilium:
+    enabled: false
+```
 
-在 CNCF 生态中，Meshery 属于 **Platform / Management Plane** 类别，是云原生基础设施管理的统一入口。它通过 MeshModel 标准化了多网格和多基础设施的管理方式。
+## 运维操作
+
+```bash
+# 🟢 检查 Meshery 组件状态
+kubectl get pods -n meshery
+kubectl get svc -n meshery
+
+# 🟢 查看已连接的集群
+meshctl context list
+
+# 🟢 查看已安装的网格
+meshctl system list
+
+# 🟡 安装服务网格 (Istio)
+meshctl system install istio --version 1.20.0
+
+# 🟡 卸载服务网格
+meshctl system uninstall istio
+
+# 🟢 运行性能测试
+meshctl perf apply --url http://service:8080 --qps 100 --duration 30s --load-generator wrk2
+
+# 🟢 查看性能测试结果
+meshctl perf list
+meshctl perf view <test-id>
+
+# 🟢 查看 MeshModel 组件
+meshctl model list
+meshctl model view kubernetes
+
+# 🟢 导出设计模式
+meshctl pattern export -f pattern.yaml
+
+# 🟡 应用设计模式
+meshctl pattern apply -f pattern.yaml
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| Meshery UI 无法访问 | Service 未暴露/Pod 未就绪 | `kubectl get pods,svc -n meshery` | 检查 Pod 状态和 Service 类型 |
+| 集群连接失败 | kubeconfig 无效/权限不足 | `meshctl context list` | 更新 kubeconfig/RBAC |
+| Adapter 连接失败 | Adapter Pod 崩溃 | `kubectl logs -n meshery adapter-pod` | 重启 Adapter |
+| 网格安装失败 | Helm Chart 下载失败 | 检查 Meshery Server 日志 | 检查网络/Helm repo |
+| 性能测试超时 | 目标服务不可达 | 检查测试 URL 可达性 | 确认 URL 和端口正确 |
+| MeshModel 数据缺失 | 组件未同步 | 检查 Server 日志 | 触发重新同步 |
+
+### 排查流程
+
+```
+Meshery 异常
+├── UI 无法访问
+│   ├── kubectl get pods -n meshery → 检查 Pod 状态
+│   ├── kubectl get svc -n meshery → 检查 Service 暴露
+│   └── kubectl logs meshery-server → 检查启动日志
+├── 集群连接问题
+│   ├── 验证 kubeconfig 有效性
+│   ├── 检查 RBAC 权限 (cluster-admin)
+│   └── 检查网络连通性
+└── 网格管理失败
+    ├── 检查对应 Adapter Pod 状态
+    ├── 检查 Helm 版本兼容性
+    └── 查看 Adapter 日志定位具体错误
+```
+
+## 生产案例
+
+### 案例 1: 服务网格选型性能对比
+
+- **场景**: 架构团队需要评估 Istio vs Linkerd 的性能差异
+- **排查**: 使用 Meshery 内置性能测试工具，相同负载下对比 P50/P99 延迟和吞吐量
+- **方案**: 部署两个测试集群，分别安装 Istio 和 Linkerd；运行 wrk2 负载测试 1000 QPS 持续 5 分钟
+- **效果**: Linkerd P99 延迟低 40%，但 Istio L7 功能更丰富；根据业务需求选择 Istio
+
+### 案例 2: 多集群网格统一管理
+
+- **场景**: 3 个区域集群各自使用不同版本的 Istio，配置管理混乱
+- **排查**: 各集群 Istio 版本不一致 (1.17/1.19/1.20)，VirtualService 配置分散
+- **方案**: 部署 Meshery 作为统一管理平面；通过 MeshModel 标准化配置；GitOps 方式同步配置
+- **效果**: 配置变更时间从 2 小时降至 10 分钟；版本统一升级一次完成
+
+## 对比与替代方案
+
+| 维度 | Meshery | Kiali | Istio Dashboard | Hubble |
+|------|---------|-------|-----------------|--------|
+| 多网格支持 | ✅ 10+ | ❌ 仅 Istio | ❌ 仅 Istio | ❌ 仅 Cilium |
+| 性能测试 | ✅ 内置 | ❌ | ❌ | ❌ |
+| 配置管理 | ✅ | 部分 | 部分 | ❌ |
+| 可视化 | ✅ | ✅ 优秀 | ✅ | ✅ |
+| 多集群 | ✅ | 部分 | ❌ | ❌ |
+| 学习曲线 | 中 | 低 | 低 | 低 |
+| 适用场景 | 多网格管理 | Istio 可观测 | Istio 监控 | Cilium 监控 |
+
+## 检查清单
+
+- [ ] Meshery Server Pod Running 且可访问
+- [ ] 目标集群已连接且 RBAC 权限充足
+- [ ] 所需 Adapter 已部署且连接正常
+- [ ] 性能测试目标服务可达
+- [ ] 设计模式已验证并可应用
+- [ ] 监控覆盖 Meshery 组件健康状态
+- [ ] 定期备份 Meshery 配置数据
 
 ## 参考链接
 
@@ -111,10 +240,6 @@ helm install meshery meshery/meshery -n meshery --create-namespace
 - [[kuma]] — Kuma
 - [[linkerd]] — Linkerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- meshery
-- [[实体/cncf-networking.md|[[CNCF 网络与服务网格项目全景|CNCF 网络与服务网格项目全景]]]] — Cross-reference
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
+- [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 
 <!-- risk-assessed -->

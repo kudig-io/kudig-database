@@ -82,27 +82,148 @@ Vitess 通过 **Vitess Operator** 实现与 Kubernetes 的深度集成。Operato
 3. **零停机数据库迁移**: 使用 VReplication 在不同分片策略之间迁移数据，无需停服
 4. **云原生 MySQL 高可用**: 在 Kubernetes 上运行 MySQL，借助 Operator 实现自动化运维
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Vitess Operator
 kubectl apply -f https://raw.githubusercontent.com/planetscale/vitess-operator/v2.10.0/deploy/operator.yaml
-
 # 部署示例集群
 kubectl apply -f https://raw.githubusercontent.com/planetscale/vitess-operator/v2.10.0/examples/local/example.yaml
+# 验证部署
+kubectl get pods -n vitess
+kubectl get vitessclusters
 
 # 安装 vtctlclient CLI
 brew install vitess
+# 连接集群
+vtctlclient --server localhost:15999 ListAllTablets
 ```
+
+```yaml
+# VitessCluster CRD 示例
+apiVersion: planetscale.com/v2
+kind: VitessCluster
+metadata:
+  name: prod-cluster
+spec:
+  cells:
+    - name: zone1
+      gateway:
+        replicas: 2
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+  keyspaces:
+    - name: commerce
+      turndownPolicy: RequireIdle
+      partitionings:
+        - equal:
+            parts: 2
+            shardTemplate:
+              databaseInitScriptSecret:
+                name: commerce-schema
+                key: init_db.sql
+              tabletPools:
+                - cell: zone1
+                  type: replica
+                  replicas: 2
+                  vttablet:
+                    resources:
+                      requests:
+                        cpu: "1"
+                        memory: 1Gi
+                  mysqld:
+                    resources:
+                      requests:
+                        cpu: "1"
+                        memory: 2Gi
+```
+
+```bash
+# 连接 VTGate 执行 SQL
+mysql -h <vtgate-svc> -P 15306 -u app_user
+> SELECT * FROM users WHERE id = 1;
+> SHOW VITESS_SHARDS;
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl get vitessclusters
+kubectl get vitesskeyspaces
+kubectl get vitessshards
+vtctlclient --server localhost:15999 GetSchema commerce
+
+# 🟢 查看分片和 Tablet 状态
+vtctlclient --server localhost:15999 ListAllTablets
+vtctlclient --server localhost:15999 GetShard commerce/-80
+
+# 🟢 检查复制状态
+vtctlclient --server localhost:15999 ShardReplicationPositions commerce/-80
+
+# 🟡 在线 DDL
+vtctlclient --server localhost:15999 ApplySchema -sql="ALTER TABLE users ADD COLUMN email VARCHAR(255)" -ddl_strategy=online commerce
+
+# 🟡 分片重平衡 (Reshard)
+vtctlclient --server localhost:15999 Reshard commerce/-80,80- commerce/-40,40-80,80-c0,c0-
+
+# 🔴 故障转移 (PlannedReparentShard)
+vtctlclient --server localhost:15999 PlannedReparentShard -keyspace_shard commerce/-80
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 查询路由错误 | VSchema 配置不正确 | `vtctlclient GetVSchema commerce` | 更新 VSchema 分片键 |
+| Tablet 不可用 | MySQL 崩溃/资源不足 | `kubectl get pods -n vitess` | 检查 Pod 状态和资源限制 |
+| 复制延迟高 | 大事务/网络延迟 | `vtctlclient ShardReplicationPositions` | 检查大事务和网络 |
+| VTGate 连接拒绝 | VTGate Pod 未就绪 | `kubectl logs -n vitess -l app=vtgate` | 检查 VTGate 资源和配置 |
+| 备份失败 | 存储后端不可达 | `kubectl logs -n vitess -l app=vtbackup` | 检查 S3/GCS 凭据和网络 |
+
+```
+排查流程：
+├─ 查询问题
+│  ├─ 检查 VSchema 分片键配置
+│  ├─ vtctlclient Validate 验证拓扑
+│  └─ 检查 VTGate 日志
+├─ Tablet/MySQL 问题
+│  ├─ kubectl get pods 检查 Pod 状态
+│  ├─ 检查 MySQL 复制状态
+│  └─ 检查磁盘空间和资源
+└─ 高可用问题
+   ├─ 检查 VTOrc 状态
+   ├─ 检查 etcd Topology 一致性
+   └─ 验证故障转移流程
+```
+
+## 生产案例
+
+### 案例 1：YouTube 级别 MySQL 分片
+
+- **场景**: 单表数据量达 10TB，单机 MySQL 无法承载
+- **排查**: 评估分片方案，需要透明分片不修改应用代码
+- **方案**: Vitess 水平分片为 16 个 shard，VTGate 透明路由查询
+- **效果**: 查询延迟保持 <10ms，支撑数十亿日查询
+
+### 案例 2：零停机分片拆分
+
+- **场景**: 业务增长需要将 2 个 shard 拆分为 4 个，不能停服
+- **排查**: 传统分片拆分需要停服迁移数据
+- **方案**: Vitess VReplication + Reshard 在线拆分，双写期间自动同步
+- **效果**: 零停机完成分片拆分，业务无感知
 
 ## 对比
 
-| 特性 | Vitess | ProxySQL | MySQL Router |
-|------|--------|----------|--------------|
-| 分片能力 | ✅ 原生水平分片 | ❌ 仅代理 | ❌ 仅代理 |
-| 在线 DDL | ✅ 支持 | ❌ 不支持 | ❌ 不支持 |
-| 多租户 | ✅ 原生支持 | ⚠️ 有限 | ❌ 不支持 |
-| CNCF 状态 | Graduated | 非 CNCF | 非 CNCF |
+| 维度 | Vitess | ProxySQL | MySQL Router | TiDB |
+|------|--------|----------|--------------|------|
+| 分片能力 | ✅ 原生水平分片 | ❌ 仅代理 | ❌ 仅代理 | ✅ 分布式 |
+| 在线 DDL | ✅ 支持 | ❌ | ❌ | ✅ |
+| MySQL 兼容 | ✅ 完全 | ✅ | ✅ | ⚠️ 部分 |
+| CNCF 状态 | Graduated | 非 CNCF | 非 CNCF | 非 CNCF |
+| 适用场景 | 大规模 MySQL | 读写分离 | 简单路由 | 分布式 HTAP |
 
 ## 架构定位
 

@@ -134,6 +134,135 @@ kubectl auth can-i create pods/ephemeralcontainers -n production
 - **RBAC 不足**：默认开发者角色无 ephemeralcontainers 权限，需管理员授予。
 - **Pod 已删除临时容器消失**：复现问题时 Pod 被控制器重建，调试上下文丢失，考虑用 `--copy-to`。
 
+## 源码实现分析
+
+### kubectl debug 实现机制
+
+```go
+// k8s.io/kubectl/pkg/cmd/debug/debug.go
+func (o *DebugOptions) generatePodDebug() (*v1.Pod, error) {
+    // 模式一：注入临时容器到现有 Pod
+    if o.copyTo == "" {
+        // 1. 获取目标 Pod
+        pod := o.getPod(o.podName)
+        // 2. 构建 EphemeralContainer 规格
+        ec := v1.EphemeralContainer{
+            EphemeralContainerCommon: v1.EphemeralContainerCommon{
+                Name:  "debugger-" + rand.String(5),
+                Image: o.image, // 如 nicolaka/netshoot
+                Command: []string{"/bin/bash"},
+                Stdin: true, TTY: true,
+                // 注意：不支持 resources/ports/livenessProbe
+            },
+            TargetContainerName: o.targetContainer, // 共享目标容器 PID
+        }
+        // 3. 调用 API Server 的 ephemeralcontainers 子资源
+        pod.Spec.EphemeralContainers = append(pod.Spec.EphemeralContainers, ec)
+        o.client.CoreV1().Pods(ns).UpdateEphemeralContainers(ctx, pod.Name, pod)
+    }
+    // 模式二：复制 Pod（--copy-to）
+    // 复制原 Pod spec，修改启动命令，添加调试工具
+    return debugPod, nil
+}
+```
+
+### 临时容器与 Pod 生命周期关系
+
+```
+┌──────────────────────────────────────────────────────────┐
+│          临时容器在 Pod 生命周期中的位置              │
+├──────────────────────────────────────────────────────────┤
+│  Pod Created                                             │
+│    │                                                    │
+│    ├─ Init Containers (order 1..N)                      │
+│    ├─ Sidecar Containers (restartPolicy=Always)         │
+│    ├─ Main Containers                                   │
+│    │     │                                              │
+│    │     ├─ Running...                                  │
+│    │     │     │                                        │
+│    │     │     ├─ kubectl debug 注入 EphemeralContainer │
+│    │     │     │   • 不影响现有容器                    │
+│    │     │     │   • 不可重启/不可删除(单独)          │
+│    │     │     │   • 无 resources/probes/ports          │
+│    │     │     │                                        │
+│    │     │     └─ Pod 删除时临时容器一起消失          │
+│    │     │                                              │
+│    └─ Pod Terminated                                    │
+└──────────────────────────────────────────────────────────┘
+```
+
+## 使用场景
+
+### 场景一：调试 Distroless 镜像 Pod
+
+```bash
+# 🟡 中风险：向生产 Pod 注入调试容器
+# 目标 Pod 使用 distroless 镜像（无 shell/工具）
+kubectl debug -it webapp-abc123 --image=nicolaka/netshoot --target=app -- /bin/bash
+# 注入后可以：
+# - tcpdump 抓包分析网络问题
+# - curl 测试服务连通性
+# - nslookup/dig 排查 DNS
+# - ip route 检查路由表
+# - strace -p 1 跟踪业务进程系统调用（需 shareProcessNamespace）
+```
+
+### 场景二：复制 Pod 做破坏性调试
+
+```bash
+# 🟡 中风险：创建调试副本（不影响原 Pod）
+kubectl debug webapp-abc123 --copy-to=webapp-debug --container=app \
+  --image=nicolaka/netshoot -- /bin/bash
+# 复制的 Pod 可以：
+# - 修改启动命令（如用 sleep 替代主进程）
+# - 添加挂载点查看数据
+# - 修改环境变量测试配置
+# 调试完成后删除
+kubectl delete pod webapp-debug  # 🟡 清理调试 Pod
+```
+
+### 场景三：节点级调试
+
+```bash
+# 🟠 高危：创建特权 Pod 挂载宿主机文件系统
+kubectl debug node/worker-01 -it --image=ubuntu:22.04 -- /bin/bash
+# 进入后宿主机文件系统在 /host 下
+chroot /host
+# 可以检查：
+# - kubelet 日志和配置
+# - CNI 网络插件状态
+# - 内核日志 (dmesg)
+# - OOM killer 记录
+# 完成后必须删除！
+exit
+kubectl delete pod node-debugger-worker-01  # 🔴 必须清理特权 Pod
+```
+
+## 常见误区
+
+| # | 误区 | 正确理解 |
+|---|------|----------|
+| 1 | 临时容器可以单独删除 | 临时容器一旦注入无法单独移除，只能随 Pod 删除消失 |
+| 2 | 临时容器支持 resources 限制 | API 会拒绝 ephemeralcontainers 中的 resources/ports/probes 字段 |
+| 3 | ps 能看到业务进程 | 默认 PID namespace 隔离；需 shareProcessNamespace=true 或 --target |
+| 4 | 复制的 Pod 会调度到同一节点 | --copy-to 不保证同节点；需手动添加 nodeSelector/nodeName |
+| 5 | 节点 debug Pod 会自动清理 | 不会！忘记删除会留下 privileged Pod，成为安全隐患 |
+| 6 | 任何角色都可以 kubectl debug | 需要 pods/ephemeralcontainers create 权限；默认开发者角色无此权限 |
+
+## 面试要点
+
+1. **Q: 临时容器（Ephemeral Container）与普通容器有何区别？**
+   A: ① 生命周期：临时容器在 Pod 运行中动态注入，不能单独删除，随 Pod 消失；② 功能限制：不支持 resources、ports、liveness/readiness probe、startup probe；③ 用途：专为调试设计（distroless 镜像无 shell 时注入工具）；④ 权限：需要 pods/ephemeralcontainers RBAC 权限；⑤ 不影响现有容器的运行。
+
+2. **Q: kubectl debug 的三种模式分别适用什么场景？**
+   A: ① 注入模式（默认）：向现有 Pod 注入调试容器，适合快速网络/DNS 排查，不影响业务；② 复制模式（--copy-to）：创建 Pod 副本做破坏性调试（改启动命令、加挂载），不影响生产 Pod；③ 节点模式（node/）：创建特权 Pod 挂载宿主机文件系统，排查 kubelet/CNI/内核问题。注意节点模式必须及时清理。
+
+3. **Q: 生产环境使用临时容器的安全注意事项？**
+   A: ① RBAC 严格管控：ephemeralcontainers 权限只授给 SRE 角色，按 Namespace 限制；② 审计日志：记录谁在何时对哪个 Pod 注入了什么镜像；③ 镜像白名单：通过 Admission Webhook 限制只能用预审批的调试镜像；④ 节点 debug 必须清理：privileged Pod 残留 = 后门；⑤ 避免在临时容器中执行写操作（影响业务状态）。
+
+4. **Q: 如何调试一个 CrashLoopBackOff 的 distroless 容器？**
+   A: ① 先查日志：kubectl logs <pod> --previous（查看崩溃前日志）；② 查事件：kubectl describe pod（查看退出码、OOM 等）；③ 复制调试：kubectl debug <pod> --copy-to=debug-pod --container=app --image=nicolaka/netshoot -- sleep 3600（用 sleep 替代主进程保持运行）；④ 进入调试：kubectl exec -it debug-pod -- /bin/bash（检查文件系统、配置、依赖）；⑤ 手动执行原命令观察报错。
+
 ## 相关链接
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心概念

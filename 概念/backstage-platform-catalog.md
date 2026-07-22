@@ -176,6 +176,96 @@ Backstage Kubernetes 插件读取:
 - **Catalog 数据与实际不一致**：catalog-info.yaml 在仓库中但服务实际已下线，需配置定期清理策略（如 entity 过期自动删除）
 - **插件选型过多导致维护负担**：Backstage 生态有大量社区插件，但每个插件都需要维护和升级——优先选择核心插件和高活跃度社区插件
 
+## 源码实现分析
+
+### Backstage Catalog 实体模型
+
+```typescript
+// packages/catalog-model/src/entity.ts
+// Backstage 核心实体模型
+export interface Entity {
+  apiVersion: string;  // 'backstage.io/v1alpha1'
+  kind: string;        // Component | API | Resource | System | Domain
+  metadata: {
+    name: string;
+    namespace?: string;
+    annotations: Record<string, string>;
+    // 关键注解:
+    // 'backstage.io/kubernetes-id': 关联 K8s 资源
+    // 'github.com/project-slug': 关联 GitHub 仓库
+  };
+  spec: {
+    type: string;      // service | website | library
+    owner: string;     // team:platform-engineering
+    lifecycle: string; // production | experimental
+    system?: string;   // 所属系统
+  };
+}
+// Catalog 通过 Processor 链解析 catalog-info.yaml
+// KubernetesDiscoveryProcessor: 自动发现集群中的 K8s 资源
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     Backstage 平台架构                                │
+├─────────────────────────────────────────────────────────┤
+│  Developer Portal (React Frontend)                      │
+│       │                                                 │
+│       ▼                                                 │
+│  ┌────────────────────────────────────────┐  │
+│  │  Backend (Node.js)                          │  │
+│  │  Catalog │ Scaffolder │ TechDocs │ Search │  │
+│  └────────────────────────────────────────┘  │
+│       │              │              │         │
+│       ▼              ▼              ▼         │
+│  ┌────────┐  ┌──────────┐  ┌─────────┐  │
+│  │Catalog DB│  │K8s Cluster│  │Git Repos│  │
+│  │(SQLite/PG)│  │(discovery)│  │(TechDocs)│  │
+│  └────────┘  └──────────┘  └─────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：Backstage 部署与配置
+
+```bash
+# 🟢 检查 Backstage 健康状态
+kubectl get pods -n backstage
+kubectl logs -n backstage -l app=backstage --tail=30
+
+# 🟢 验证 Catalog 实体注册
+curl -s http://backstage.internal/api/catalog/entities | jq '.[].metadata.name'
+
+# 🟡 触发 Catalog 重新处理
+curl -X POST http://backstage.internal/api/catalog/refresh \
+  -H 'Content-Type: application/json' \
+  -d '{"entityRef": "component:default/my-service"}'
+```
+
+## 面试要点
+
+1. **Backstage 的 Software Catalog 解决什么问题？**
+   - 解决微服务架构下“谁拥有什么服务”的可见性问题
+   - 通过 catalog-info.yaml 声明式描述服务元数据
+   - 自动发现 K8s 资源、GitHub 仓库、CI/CD 状态
+   - 提供统一的服务目录和所有权视图
+
+2. **Backstage 与 K8s 的集成方式？**
+   - Kubernetes 插件：通过 ServiceAccount 连接集群 API
+   - 自动发现 Deployment/Service/Ingress 等资源
+   - 通过注解 `backstage.io/kubernetes-id` 关联实体与 K8s 资源
+   - 支持多集群、多 namespace 发现
+
+3. **如何设计 Backstage 的 Software Templates？**
+   - 使用 Scaffolder 插件提供自助服务模板
+   - 模板步骤：获取输入 → 渲染模板 → 发布 Git → 注册 Catalog → 触发 CI/CD
+   - 降低开发者认知负担，标准化服务创建流程
+
+4. **Backstage 的插件架构如何工作？**
+   - 前端：React 插件，通过 Extension Point 注入页面/卡片
+   - 后端：Node.js 插件，提供 REST API
+   - 核心插件：Catalog / Scaffolder / TechDocs / Search / Kubernetes
+   - 社区插件生态丰富（200+ 插件）
+
 ## 相关 Domain
 
 - 平台工程/01-idp/01-internal-developer-platform

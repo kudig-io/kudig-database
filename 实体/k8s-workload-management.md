@@ -90,6 +90,81 @@ helm install keda kedacore/keda --namespace keda-system --create-namespace
 helm install prometheus-adapter prometheus-community/prometheus-adapter -n monitoring
 ```
 
+## 运维操作
+
+```bash
+# 🟢 查看工作负载状态
+kubectl get deployments,statefulsets,daemonsets -A
+kubectl get pods -o wide --sort-by=.status.startTime
+
+# 🟢 查看 HPA 状态
+kubectl get hpa -A
+kubectl describe hpa <name> -n <ns>
+
+# 🟡 手动扩缩容
+kubectl scale deployment/<name> --replicas=5 -n <ns>
+
+# 🟡 滚动更新
+kubectl set image deployment/<name> <container>=<image>:<tag> -n <ns>
+kubectl rollout status deployment/<name> -n <ns>
+
+# 🟡 回滚部署
+kubectl rollout undo deployment/<name> -n <ns>
+kubectl rollout history deployment/<name> -n <ns>
+
+# 🟢 查看调度事件
+kubectl get events --field-selector reason=FailedScheduling -A
+kubectl describe pod <pod-name> -n <ns> | grep -A5 Events
+
+# 🟢 查看节点资源分配
+kubectl describe nodes | grep -A10 "Allocated resources"
+kubectl top nodes
+
+# 🔴 驱逐节点上的 Pod（维护）
+kubectl drain <node> --ignore-daemonsets --delete-emptydir-data
+kubectl uncordon <node>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Pod Pending | 资源不足/调度约束 | `kubectl describe pod` | 检查节点资源、亲和性、污点 |
+| HPA 不触发 | 指标未就绪 | `kubectl get hpa` | 检查 metrics-server 和指标注册 |
+| 滚动更新卡住 | 新 Pod 未就绪 | `kubectl rollout status` | 检查 readinessProbe 配置 |
+| Pod 频繁重启 | livenessProbe 过严 | `kubectl get events` | 调整探针参数 |
+| 节点压力驱逐 | 资源超用 | `kubectl describe node` | 检查 requests/limits 配置 |
+| 抢占发生 | 优先级冲突 | `kubectl get events --field-selector reason=Preempted` | 调整 PriorityClass |
+
+### 排查流程
+
+```
+Pod 异常 → kubectl describe pod 查看状态和事件
+  ├─ Pending → 检查调度失败原因
+  │   ├─ Insufficient cpu/memory → 扩容节点或调整 requests
+  │   ├─ node(s) didn't match affinity → 检查亲和性配置
+  │   └─ node(s) had taint → 添加 toleration 或移除 taint
+  ├─ ContainerCreating → 检查镜像拉取/存储挂载
+  ├─ CrashLoopBackOff → 检查容器日志
+  └─ Running 但异常 → 检查探针配置和应用日志
+```
+
+## 生产案例
+
+### 案例1: HPA 无法触发扩容
+
+**场景**: 流量突增但 HPA 未触发扩容，服务响应变慢  
+**排查**: `kubectl get hpa` 显示 `<unknown>` 指标，metrics-server Pod CrashLoop  
+**方案**: 修复 metrics-server（添加 --kubelet-insecure-tls），配置多指标 HPA  
+**效果**: HPA 正常工作，扩容延迟 < 30s  
+
+### 案例2: 滚动更新零停机失败
+
+**场景**: 滚动更新期间部分用户收到 502 错误  
+**排查**: 新 Pod 未完全就绪就接收流量，readinessProbe 配置不当  
+**方案**: 添加 preStop hook (sleep 5) + 调整 readinessProbe initialDelaySeconds  
+**效果**: 实现真正零停机滚动更新  
+
 ## 对比
 
 | 伸缩组件 | 维度 | 触发条件 | 适用场景 |
@@ -108,6 +183,17 @@ QoS 优先级（OOM 时驱逐顺序）：
 
 HPA 经典公式：`目标副本数 = ceil(当前副本数 × (当前指标值 / 目标指标值))`
 
+## 检查清单
+
+- [ ] 所有生产 Pod 配置 requests 和 limits
+- [ ] 配置 livenessProbe + readinessProbe + startupProbe
+- [ ] 关键服务配置 PodDisruptionBudget
+- [ ] 使用 topologySpreadConstraints 跨可用区分布
+- [ ] 配置 HPA 并验证指标采集正常
+- [ ] 滚动更新配置 maxSurge/maxUnavailable
+- [ ] 配置 preStop hook 确保优雅关闭
+- [ ] 关键服务使用 Guaranteed QoS
+
 ---
 
 > 来源：.zread/wiki/drafts/8-gong-zuo-fu-zai-guan-li-pod-sheng-ming-zhou-qi-diao-du-ce-lue-yu-dan-xing-shen-suo.md
@@ -115,7 +201,8 @@ HPA 经典公式：`目标副本数 = ceil(当前副本数 × (当前指标值 /
 ## Related
 
 - [[keda]] — KEDA
-
 - [[平台工程/代码分析/deployment-create/08-hpa-integration.md|Deployment 与 HPA 集成源码分析]]
+- [[实体/kube-scheduler.md|kube-scheduler]] — K8s 调度器
+- [[概念/controller-pattern.md|controller-pattern]] — 控制器模式
 
 <!-- risk-assessed -->

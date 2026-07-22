@@ -105,13 +105,99 @@ prerequisites:
 - [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
+## 存储组件升级检查
+
+```bash
+# 🟢 检查 Longhorn 版本
+kubectl get pods -n longhorn-system -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image | head -5
+kubectl get settings.longhorn.io current-version -n longhorn-system
+
+# 🟢 检查 Rook-Ceph 版本
+kubectl get pods -n rook-ceph -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image | grep operator
+kubectl get cephcluster -n rook-ceph -o jsonpath='{.items[0].status.ceph.version}'
+
+# 🟢 检查 Velero 版本
+velero version
+kubectl get deployment velero -n velero -o jsonpath='{.spec.template.spec.containers[0].image}'
+
+# 🟢 检查 CSI Driver 版本
+kubectl get csidrivers -o custom-columns=NAME:.metadata.name
+kubectl get pods -n kube-system -l app=csi-plugin -o wide
+
+# 🟢 检查 PV/PVC 状态
+kubectl get pv | grep -v Bound
+kubectl get pvc -A | grep -v Bound
+
+# 🟢 检查 StorageClass
+kubectl get storageclass
+kubectl describe storageclass <default-sc>
+```
+
+## 存储组件升级路径
+
+| 组件 | 当前版本 | 目标版本 | 关键注意事项 |
+|------|----------|----------|----------------|
+| Longhorn | v1.5 | v1.7+ | 存储引擎格式变更，需滚动升级 |
+| Longhorn | v1.7 | v1.11 | 数据引擎 v2 (SPDK)，备份格式变更 |
+| Rook | v1.12 | v1.16+ | CRD API 版本升级 |
+| Rook | v1.16 | v1.19 | Ceph Reef 支持，OSD 升级流程 |
+| Velero | v1.12 | v1.15+ | 插件接口变更 |
+| Velero | v1.15 | v1.18 | 备份存储位置 API 变更 |
+
+## 升级前备份检查
+
+```bash
+# 🟢 Velero 备份状态检查
+velero backup get
+velero schedule get
+velero backup describe <latest-backup> --details
+
+# 🟢 检查备份存储位置可访问性
+velero backup-location get
+velero backup-location get -o yaml | grep -A5 status
+
+# 🟢 检查 CSI 快照状态
+kubectl get volumesnapshot -A
+kubectl get volumesnapshotclass
+kubectl get volumesnapshotcontent
+
+# 🟢 检查 Longhorn 备份
+kubectl get backups.longhorn.io -n longhorn-system
+kubectl get recurringjobs.longhorn.io -n longhorn-system
+
+# 🟢 检查 Ceph 集群健康
+kubectl exec -n rook-ceph deploy/rook-ceph-tools -- ceph status
+kubectl exec -n rook-ceph deploy/rook-ceph-tools -- ceph df
+```
+
+## 存储故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| PVC Pending | StorageClass 不存在/配额不足 | `kubectl describe pvc` | 检查 SC/扩容配额 |
+| PV 无法挂载 | CSI Driver 未运行 | `kubectl get pods -n kube-system -l app=csi` | 重启 CSI Pod |
+| 数据丢失 | 备份未执行/备份失败 | `velero backup get` | 检查备份策略 |
+| Ceph 集群降级 | OSD 故障 | `ceph status` | 替换故障 OSD |
+| Longhorn 副本不足 | 节点故障 | `kubectl get volumes.longhorn.io` | 检查节点/重建副本 |
+| 快照失败 | CSI 快照控制器未安装 | `kubectl get volumesnapshotclass` | 安装 snapshot-controller |
+
+## 检查清单
+
+- [ ] 存储组件版本已确认
+- [ ] 升级前备份已完成并验证
+- [ ] CSI Driver 所有 Pod Running
+- [ ] PV/PVC 全部 Bound
+- [ ] 备份策略已配置并定期执行
+- [ ] 存储容量使用率 < 80%
+- [ ] 升级回滚方案已准备
+- [ ] 监控告警覆盖存储健康状态
+
 ## Related
 
-- [[生态参考/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
 - [[实体/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
-- [[生态参考/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn
-
+- [[生态参考/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
+- [[生态参考/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
 
 <!-- risk-assessed -->

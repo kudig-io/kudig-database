@@ -73,7 +73,7 @@ OpenEBS 通过 CSI Driver 与 Kubernetes 集成。部署为 DaemonSet（mayastor
 3. **Dev/Test 环境**: 在共享集群上为每个团队提供隔离的存储空间
 4. **Kafka/Elasticsearch**: 为分布式消息队列和搜索引擎提供复制存储
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装
@@ -83,7 +83,8 @@ helm install openebs openebs/openebs -n openebs --create-namespace
 kubectl apply -f - <<EOF
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
-metadata: { name: openebs-local }
+metadata:
+  name: openebs-local
 provisioner: openebs.io/local
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
@@ -91,6 +92,160 @@ EOF
 # 或使用 Mayastor
 kubectl apply -f https://raw.githubusercontent.com/openebs/mayastor/master/deploy/mayastor.yaml
 ```
+
+### Mayastor 高性能存储配置
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mayastor-replicated
+provisioner: io.openebs.csi-mayastor
+parameters:
+  protocol: nvmf
+  repl_count: "3"  # 3 副本
+  ioTimeout: "30"
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+---
+# PVC 示例
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+spec:
+  storageClassName: mayastor-replicated
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+```
+
+### 存储池配置
+
+```yaml
+apiVersion: openebs.io/v1beta2
+kind: DiskPool
+metadata:
+  name: pool-1
+  namespace: openebs
+spec:
+  node: worker-1
+  disks:
+    - /dev/sdb
+    - /dev/sdc
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看存储池状态
+kubectl get diskpools -n openebs
+
+# 🟢 查看 PV 状态
+kubectl get pvc -A
+kubectl describe pvc postgres-data
+
+# 🟢 查看 Mayastor 卷
+kubectl get msv -n openebs
+
+# 🟢 检查 CSI 插件状态
+kubectl get pods -n openebs -l app=openebs
+
+# 🟡 扩容 PVC
+kubectl patch pvc postgres-data -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+
+# 🟡 创建快照
+kubectl apply -f - <<EOF
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: postgres-snap
+spec:
+  volumeSnapshotClassName: mayastor-snapshot
+  source:
+    persistentVolumeClaimName: postgres-data
+EOF
+
+# 🟢 查看存储指标
+kubectl exec -n openebs deploy/mayastor-api-rest -- curl -s localhost:8080/v0/nexus
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| PVC Pending | 无可用存储池 | `kubectl describe pvc` | 创建 DiskPool 或检查节点 |
+| Pod 挂载失败 | CSI 插件异常 | `kubectl logs -n openebs ds/mayastor` | 重启 CSI DaemonSet |
+| I/O 延迟高 | 网络拥塞 | `kubectl exec deploy/mayastor-api-rest -- ...` | 检查 NVMe-oF 网络 |
+| 副本不同步 | 节点故障 | `kubectl get msv -o yaml` | 检查副本状态和节点健康 |
+| 扩容失败 | 存储池空间不足 | `kubectl get diskpools -o yaml` | 添加磁盘或扩展存储池 |
+
+### 排查流程
+
+```
+OpenEBS 存储异常
+├─ PVC 无法绑定？
+│  ├─ StorageClass 不存在 → 检查 SC 名称
+│  ├─ 无可用存储池 → 创建 DiskPool
+│  └─ 容量不足 → 扩展存储池
+├─ Pod 挂载失败？
+│  ├─ CSI 插件异常 → 检查 DaemonSet 状态
+│  ├─ 节点无磁盘 → 检查 DiskPool 节点分配
+│  └─ 权限问题 → 检查 SecurityContext
+└─ 性能问题？
+   ├─ IOPS 低 → 检查 NVMe/SSD 和 SPDK 配置
+   ├─ 延迟高 → 检查网络（NVMe-oF）
+   └─ 副本同步慢 → 检查节点间带宽
+```
+
+## 生产案例
+
+### 案例 1: PostgreSQL 高可用存储
+
+**场景**: 生产 PostgreSQL 需要高性能、高可用的持久存储。
+
+**方案**:
+1. 使用 Mayastor 3 副本存储
+2. NVMe-oF 协议提供低延迟
+3. VolumeSnapshot 实现定期备份
+4. PVC Clone 快速创建测试环境
+
+**效果**: IOPS 达 100K+，故障切换 < 30s，备份恢复 < 5min。
+
+### 案例 2: Kafka 本地存储加速
+
+**场景**: Kafka 需要极高吐吐量的本地存储。
+
+**方案**:
+1. 使用 Local PV (Hostpath) 直连 NVMe
+2. 零网络开销，最大化 I/O 性能
+3. 依赖 Kafka 自身副本机制保证可用性
+
+**效果**: 吐吐量提升 3x，延迟降低 50%。
+
+## 对比与替代方案
+
+| 维度 | OpenEBS | Longhorn | Rook/Ceph | TopoLVM |
+|------|---------|----------|-----------|----------|
+| 存储引擎 | 多引擎 | 块存储 | Ceph | LVM |
+| 性能 | 高 (Mayastor) | 中 | 中 | 高 |
+| 部署复杂度 | 中 | 低 | 高 | 低 |
+| 快照/克隆 | ✅ | ✅ | ✅ | ✅ |
+| 多租户 | ✅ | ❌ | ✅ | ❌ |
+| UI | ❌ | ✅ | ✅ | ❌ |
+
+## 检查清单
+
+- [ ] 存储引擎选择已评估（Local PV vs Mayastor）
+- [ ] DiskPool 已创建并有足够容量
+- [ ] StorageClass 已配置并测试
+- [ ] 副本数已配置（生产建议 3）
+- [ ] VolumeSnapshot 已配置定期备份
+- [ ] 监控告警：存储池使用率 > 80%
+- [ ] 扩容流程已测试
+- [ ] 故障恢复演练已完成
 
 ## 替代方案
 

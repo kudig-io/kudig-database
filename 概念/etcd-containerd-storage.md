@@ -167,6 +167,117 @@ df -h /var/lib/containerd /var/log/pods
 - **etcd 磁盘满了导致集群不可用**：超过 `--quota-backend-bytes` 后 etcd 变为只读，必须 compact + defrag 恢复，操作前务必先做快照备份
 - **containerd 快照目录残留**：Pod 删除后如果容器清理不完整，overlayfs 挂载点残留会持续占用磁盘空间，需要手动 `umount` 清理
 
+## 源码实现分析
+
+### etcd MVCC 存储引擎与磁盘 I/O 路径
+
+```go
+// go.etcd.io/etcd/server/storage/mvcc/kvstore_txn.go
+// etcd 写操作最终落盘路径
+func (tw *storeTxnWrite) put(key, value []byte) {
+    // 1. 写入 B+Tree 索引（内存 boltdb 映射）
+    rev := tw.beginRev + 1
+    tw.s.kvindex.Put(key, revision{main: rev})
+    
+    // 2. 序列化为 KeyValue protobuf
+    kv := mvccpb.KeyValue{Key: key, Value: value, ModRevision: rev}
+    d, _ := kv.Marshal()
+    
+    // 3. 写入 BoltDB 事务（触发 fsync）
+    tw.tx.UnsafeSeqPut(keyBucketName, ibytes, d)
+    // BoltDB commit → fdatasync() → NVMe 写完成
+    // ⚠️ fsync 延迟 > 10ms 时触发 slow fdatasync 告警
+}
+```
+
+```
+┌─────────────────────────────────────────────────────┐
+│              etcd 存储 I/O 架构                       │
+├─────────────────────────────────────────────────────┤
+│  Client Write Request                               │
+│       │                                             │
+│       ▼                                             │
+│  ┌──────────┐    ┌──────────────┐                   │
+│  │ Raft Log │───▶│  WAL fsync   │ ← 第一次磁盘写    │
+│  └──────────┘    └──────────────┘                   │
+│       │                                             │
+│       ▼ (apply)                                     │
+│  ┌──────────┐    ┌──────────────┐                   │
+│  │  MVCC    │───▶│ BoltDB commit│ ← 第二次磁盘写    │
+│  │  B+Tree  │    │   fsync      │                   │
+│  └──────────┘    └──────────────┘                   │
+│                                                     │
+│  关键指标: wal_fsync_duration / backend_commit_duration│
+│  告警阈值: P99 > 10ms → 磁盘性能不足               │
+└─────────────────────────────────────────────────────┘
+```
+
+### containerd 快照存储驱动
+
+```go
+// github.com/containerd/containerd/snapshots/overlay/overlay.go
+// containerd overlayfs 快照管理
+func (o *snapshotter) Prepare(ctx context.Context, key, parent string) ([]mount.Mount, error) {
+    // 1. 创建 upper/work 目录
+    td, err := o.prepareDirectory(ctx, key, parent)
+    
+    // 2. 生成 overlayfs 挂载参数
+    // lowerdir=父镜像层(只读):upperdir=容器可写层:workdir=原子操作目录
+    return []mount.Mount{{
+        Type:   "overlay",
+        Source: "overlay",
+        Options: []string{
+            "lowerdir=" + strings.Join(parentDirs, ":"),
+            "upperdir=" + filepath.Join(td, "fs"),
+            "workdir="  + filepath.Join(td, "work"),
+        },
+    }}, nil
+    // ⚠️ 层数过多(>128)导致 mount 参数超长，内核拒绝挂载
+}
+```
+
+### 生产运维：etcd 磁盘性能诊断
+
+```bash
+# 🟢 检查 etcd 磁盘延迟（只读）
+etcdctl endpoint status --write-out=table
+etcdctl check perf --load="s" --prefix="/registry"
+
+# 🟡 手动 compact + defrag（维护窗口执行）
+rev=$(etcdctl endpoint status --write-out=json | jq '.[0].Status.header.revision')
+etcdctl compact $rev
+etcdctl defrag --cluster
+# 🔴 defrag 期间该节点不可服务，必须逐节点执行
+
+# 🟢 检查 containerd 磁盘占用
+crictl images | wc -l
+du -sh /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/
+```
+
+## 面试要点
+
+1. **etcd 为什么对磁盘 I/O 如此敏感？**
+   - Raft 共识要求多数节点持久化日志后才确认写入（WAL fsync）
+   - BoltDB 每次事务 commit 也需要 fsync
+   - 一次写操作至少两次 fsync，P99 延迟直接决定集群可用性
+   - 推荐独占 NVMe SSD，IOPS ≥ 3000，fsync P99 < 10ms
+
+2. **containerd overlayfs 快照的 GC 机制是什么？**
+   - containerd 通过 lease 机制追踪镜像/容器引用
+   - 无 lease 引用的快照由 GC goroutine 异步清理
+   - 常见泄漏：容器异常退出后 snapshot 未释放，需 `crictl rmp` 清理
+
+3. **etcd quota-backend-bytes 触发后如何恢复？**
+   - 默认 2GB，超过后 etcd 进入 alarm（NOSPACE）只读模式
+   - 恢复步骤：compact 历史版本 → defrag 回收空间 → alarm disarm
+   - 生产建议设置 8GB 并监控 db_size 趋势
+
+4. **如何诊断 containerd 镜像拉取慢？**
+   - 检查 registry mirror 配置（/etc/containerd/config.toml）
+   - `crictl pull` 测试单镜像拉取时间
+   - 关注并发拉取导致磁盘 I/O 争用（大量 Pod 同时调度到同一节点）
+   - 使用镜像预热（DaemonSet + initContainer）或 P2P 分发（Dragonfly）
+
 ## 相关页面
 
 - [[etcd]] — etcd 运维

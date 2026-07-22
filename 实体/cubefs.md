@@ -81,7 +81,7 @@ CubeFS 通过 CSI Driver（CubeFS CSI）与 Kubernetes 集成。StorageClass 定
 3. **容器持久化**: 数据库和消息队列通过 PVC 使用 CubeFS 块存储
 4. **对象存储替代**: 应用通过 S3 SDK 访问 CubeFS，替代 AWS S3
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 CubeFS
@@ -91,15 +91,18 @@ helm install cubefs cubefs/cubefs -n cubefs --create-namespace \
   --set metanode.replicas=3 \
   --set datanode.replicas=5
 
-# 安装 CubeFS CSI Driver
+# 安装 CSI Driver
 kubectl apply -f https://github.com/cubefs/cubefs-csi/releases/latest/download/csi-driver.yaml
+kubectl get pods -n cubefs
+```
 
-# 创建 StorageClass
-kubectl apply -f - <<EOF
+### StorageClass 配置
+
+```yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: cubefs-sc
+  name: cubefs-replicate
 provisioner: cubefs.csi.driver
 parameters:
   masterAddr: "cubefs-master.cubefs.svc:17010"
@@ -107,31 +110,104 @@ parameters:
   volumeType: "replicate"
   capacity: "100GB"
   replicaNum: "3"
-EOF
+allowVolumeExpansion: true
+---
+# 纠删码版本（大文件场景）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cubefs-ec
+provisioner: cubefs.csi.driver
+parameters:
+  masterAddr: "cubefs-master.cubefs.svc:17010"
+  ownerName: "k8s"
+  volumeType: "ec"
+  capacity: "500GB"
+```
 
-# 创建 PVC
-kubectl apply -f - <<EOF
+### PVC 创建
+
+```yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: cubefs-pvc
 spec:
   accessModes: ["ReadWriteMany"]
-  storageClassName: cubefs-sc
+  storageClassName: cubefs-replicate
   resources:
     requests:
       storage: 100Gi
-EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl exec -n cubefs deploy/cubefs-master -- cfs-cli cluster info
+
+# 🟢 查看卷状态
+kubectl exec -n cubefs deploy/cubefs-master -- cfs-cli volume list
+
+# 🟡 扩容卷
+kubectl patch pvc cubefs-pvc -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+
+# 🟡 添加 DataNode
+kubectl scale statefulset cubefs-datanode -n cubefs --replicas=7
+
+# 🔴 删除卷（数据不可恢复）
+kubectl exec -n cubefs deploy/cubefs-master -- cfs-cli volume delete <vol-name> --yes
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| PVC Pending | Master 不可达 | `kubectl get pods -n cubefs` | 检查 Master 状态 |
+| 挂载失败 | CSI 插件异常 | `kubectl logs csi-pod` | 重启 CSI Pod |
+| IO 延迟高 | DataNode 过载 | `cfs-cli cluster info` | 扩容 DataNode |
+| 副本不足 | 节点故障 | `cfs-cli volume info <vol>` | 修复/替换节点 |
+| 容量不足 | 集群空间耗尽 | `cfs-cli cluster stat` | 添加磁盘/节点 |
+
+```
+排查流程:
+├── PVC 无法绑定
+│   ├── kubectl describe pvc → Events
+│   ├── kubectl get pods -n cubefs → 组件状态
+│   └── kubectl logs csi-provisioner → CSI 日志
+├── 性能问题
+│   ├── cfs-cli cluster stat → 集群负载
+│   ├── 检查 DataNode 磁盘 IO
+│   └── 确认副本数和网络带宽
+└── 数据异常
+    ├── cfs-cli volume info → 卷状态
+    ├── 检查 MetaNode 健康
+    └── 确认副本同步状态
+```
+
+## 生产案例
+
+### 案例 1: AI 训练数据共享
+
+- **场景**: 多个 GPU Pod 需要同时读取 10TB+ 训练数据集
+- **方案**: 使用 CubeFS RWX PVC 共享挂载；数据预加载到 CubeFS；多 Pod 并行读取
+- **效果**: 数据加载速度提升 3x，GPU 利用率从 40% 提升到 85%
+
+### 案例 2: 替代 HDFS 统一存储
+
+- **场景**: 大数据和容器平台维护两套存储，成本高
+- **方案**: CubeFS 同时提供 HDFS 接口和 CSI 接口；Spark 通过 HDFS 协议访问，容器通过 PVC
+- **效果**: 存储集群合并，运维成本降低 50%，数据无需复制
 
 ## 对比
 
-| 特性 | CubeFS | Ceph | JuiceFS | MinIO |
-|------|--------|------|---------|-------|
-| POSIX | ✅ | ✅ CephFS | ✅ | ❌ |
-| S3 | ✅ | ✅ RGW | ⚠️ | ✅ |
-| HDFS | ✅ | ❌ | ❌ | ❌ |
-| CNCF 状态 | Graduated | Graduated | 非 CNCF | 非 CNCF |
+| 特性 | CubeFS | Ceph | JuiceFS | MinIO | 适用场景 |
+|------|--------|------|---------|-------|----------|
+| POSIX | ✅ | ✅ CephFS | ✅ | ❌ | 文件共享 |
+| S3 | ✅ | ✅ RGW | ⚠️ | ✅ | 对象存储 |
+| HDFS | ✅ | ❌ | ❌ | ❌ | 大数据 |
+| RWX | ✅ | ✅ | ✅ | ❌ | 多 Pod 共享 |
+| CNCF 状态 | Graduated | Graduated | 非 CNCF | 非 CNCF | 生态 |
 
 ## 架构定位
 

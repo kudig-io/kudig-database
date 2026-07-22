@@ -67,23 +67,169 @@ Longhorn 通过 CSI（Container Storage Interface）与 Kubernetes 集成，自�
 3. **跨集群 DR**: 利用 S3 备份实现跨集群数据恢复，构建灾备方案
 4. **边缘计算**: 轻量级部署，为边缘集群提供持久化能力
 
-## 安装
+## 安装与配置
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.7.2/deploy/longhorn.yaml
-# 或使用 Helm
+# Helm 安装 Longhorn
 helm repo add longhorn https://charts.longhorn.io
-helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
+helm repo update
+helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace \
+  --set defaultSettings.defaultReplicaCount=3 \
+  --set defaultSettings.backupTarget=s3://backup-bucket@us-east-1/ \
+  --set persistence.defaultClassReplicaCount=3
+
+# 等待组件就绪
+kubectl wait --for=condition=available deployment/longhorn-driver-deployer -n longhorn-system --timeout=180s
+kubectl get pods -n longhorn-system
+
+# 访问 Longhorn UI
+kubectl port-forward svc/longhorn-frontend 8080:80 -n longhorn-system
+# 打开 http://localhost:8080
 ```
+
+```yaml
+# StorageClass 配置
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: longhorn-encrypted
+provisioner: driver.longhorn.io
+parameters:
+  numberOfReplicas: "3"
+  staleReplicaTimeout: "2880"
+  fromBackup: ""
+  encrypted: "true"
+  fsType: "ext4"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+---
+# 定时快照和备份
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: daily-backup
+  namespace: longhorn-system
+spec:
+  cron: "0 2 * * *"  # 每天凌晨2点
+  task: "backup"
+  groups:
+  - default
+  retain: 7  # 保留7天
+  concurrency: 2
+---
+# PVC 示例
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: longhorn-encrypted
+  resources:
+    requests:
+      storage: 50Gi
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看卷状态
+kubectl get volumes.longhorn.io -n longhorn-system
+kubectl get replicas.longhorn.io -n longhorn-system
+
+# 🟢 查看节点磁盘状态
+kubectl get nodes.longhorn.io -n longhorn-system -o yaml
+
+# 🟡 在线扩容 PVC
+kubectl patch pvc postgres-data -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
+
+# 🟡 手动创建快照
+kubectl apply -f - <<EOF
+apiVersion: longhorn.io/v1beta2
+kind: Snapshot
+metadata:
+  name: pre-upgrade-snap
+  namespace: longhorn-system
+spec:
+  volume: pvc-xxxx
+EOF
+
+# 🟡 从备份恢复卷
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: restored-data
+spec:
+  storageClassName: longhorn
+  dataSource:
+    name: backup-xxxx
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 50Gi
+EOF
+
+# 🔴 删除卷（数据不可恢复）
+kubectl delete volumes.longhorn.io pvc-xxxx -n longhorn-system
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 卷 Degraded | 副本数不足（节点故障） | `kubectl get volumes.longhorn.io -o yaml` | 等待自动重建或添加节点 |
+| 卷 Detached | Engine Pod 崩溃 | `kubectl get pods -n longhorn-system` | 重启 Engine Pod |
+| 备份失败 | S3/NFS 不可达或凭据过期 | `kubectl logs -n longhorn-system -l app=longhorn-manager` | 检查备份目标和凭据 |
+| IO 性能下降 | 节点磁盘 IO 瓶颈或副本重建中 | `kubectl top nodes` + `iostat -x 1` | 等待重建完成或添加磁盘 |
+| PVC 扩容失败 | 文件系统不支持或卷状态异常 | `kubectl describe pvc` | 确认卷 Attached 且 fsType 支持扩容 |
+
+```
+排查流程：
+├── 卷状态异常
+│   ├── kubectl get volumes.longhorn.io 查看状态
+│   ├── 检查 Engine 和 Replica Pod 是否运行
+│   ├── 查看 Longhorn UI 中的卷详情
+│   └── 检查节点磁盘剩余空间
+├── 副本重建失败
+│   ├── 确认目标节点有足够磁盘空间
+│   ├── 检查节点间网络连通性
+│   ├── 查看 Replica 重建进度
+│   └── 调整 replicaReplenishmentWaitInterval
+└── 性能问题
+    ├── iostat -x 1 检查磁盘 IO 利用率
+    ├── 确认副本分布在不同节点
+    ├── 检查是否正在重建（占用 IO）
+    └── 考虑使用 SSD 节点
+```
+
+## 生产案例
+
+### 案例 1：中小集群数据库持久化
+
+- **场景**：10 节点 K8s 集群运行 PostgreSQL、Redis、RabbitMQ，需要可靠的持久化存储，无专业存储团队
+- **排查**：之前使用 hostPath，节点故障后数据丢失，Pod 无法调度到其他节点
+- **方案**：部署 Longhorn 3 副本，定时 S3 备份，StatefulSet 使用 Longhorn PVC
+- **效果**：节点故障后数据零丢失，Pod 自动迁移恢复 < 2 分钟，运维复杂度极低
+
+### 案例 2：跨集群灾难恢复
+
+- **场景**：生产集群和 DR 集群，需要实现数据库级别的跨集群恢复，RPO < 1 小时
+- **排查**：之前无 DR 方案，集群级故障将导致所有数据永久丢失
+- **方案**：Longhorn 定时备份到 S3，DR 集群从 S3 恢复卷，定期演练恢复流程
+- **效果**：RPO < 1 小时，RTO < 30 分钟，年度 DR 演练成功率 100%
 
 ## 替代方案
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **Longhorn** | 易于部署、内置备份、UI 友好 | 性能不如 Ceph、节点规模有限 |
-| Rook/Ceph | 成熟稳定、高性能、大规模支持 | 运维复杂、资源开销大 |
-| OpenEBS | 多引擎选择、CSI 原生 | 功能分散、文档不够统一 |
-| Linstor/DRBD | 高性能块复制 | 配置复杂、社区较小 |
+| 项目 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| **Longhorn** | 易部署、内置备份、UI 友好 | 性能不如 Ceph、规模有限 | 中小集群/边缘 |
+| Rook/Ceph | 成熟稳定、高性能、大规模 | 运维复杂、资源开销大 | 大规模生产 |
+| OpenEBS | 多引擎选择、CSI 原生 | 功能分散、文档不统一 | 灵活场景 |
+| Linstor/DRBD | 高性能块复制 | 配置复杂、社区较小 | 高性能复制 |
 
 ## 架构定位
 

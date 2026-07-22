@@ -80,7 +80,7 @@ Fluid 通过 CRD 扩展 Kubernetes，深度集成调度器。Dataset CRD 定义�
 3. **多模型推理**: 多个推理 Pod 共享同一模型文件的缓存，减少重复下载
 4. **边缘数据同步**: 在边缘节点缓存中心数据，支持离线推理
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Fluid
@@ -141,6 +141,80 @@ spec:
       claimName: training-data
 EOF
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Dataset 状态
+kubectl get datasets
+kubectl describe dataset training-data
+
+# 🟢 查看缓存命中率
+kubectl exec alluxio-master-0 -- alluxio fs cat /alluxio-metrics.properties
+kubectl exec alluxio-master-0 -- alluxio monitor master
+
+# 🟢 查看数据分布
+kubectl exec alluxio-master-0 -- alluxio fs ls /training-data
+
+# 🟡 手动数据预热
+kubectl exec alluxio-master-0 -- alluxio fs distributedLoad --replication 2 /training-data
+
+# 🟡 扩容缓存 Worker
+kubectl scale statefulset training-data-worker --replicas=5
+
+# 🔴 删除 Dataset（清除缓存）
+kubectl delete dataset training-data
+kubectl delete alluxioruntime training-data
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Dataset Bound 失败 | 存储后端不可达 | `kubectl describe dataset training-data` | 检查 S3/HDFS 连接配置 |
+| 缓存命中率低 | 预热未完成/容量不足 | `alluxio fs cat /metrics` | 执行 distributedLoad |
+| Pod 挂载失败 | PVC 未创建 | `kubectl get pvc` | 检查 Runtime 状态 |
+| Worker Pod OOM | 内存缓存超出配额 | `kubectl top pods -l app=alluxio` | 调整 tieredstore quota |
+| 数据一致性异常 | 底层数据更新未同步 | `alluxio fs ls -R /` | 执行 `alluxio fs free` 刷新 |
+
+```
+排查流程:
+├── Dataset 异常
+│   ├── kubectl get datasets → Bound 状态
+│   ├── kubectl describe dataset → 事件和条件
+│   ├── kubectl get alluxioruntime → Runtime 状态
+│   └── kubectl logs fluid-controller → 控制器日志
+├── 缓存性能问题
+│   ├── alluxio monitor master → 缓存命中率
+│   ├── kubectl top pods → Worker 资源使用
+│   └── 检查 tieredstore 配置 → 容量是否充足
+└── 数据访问问题
+    ├── kubectl get pvc → PVC 状态
+    ├── kubectl exec pod -- ls /data → 挂载验证
+    └── 检查 FUSE Pod → 挂载进程状态
+```
+
+## 生产案例
+
+### 案例1: AI 训练数据加载加速 10 倍
+
+- **场景**: GPU 训练集群从 S3 读取 500GB 数据集，每次训练前下载耗时 40min
+- **排查**: GPU 利用率仅 30%，大量时间等待 I/O
+- **方案**:
+  1. 部署 Fluid + Alluxio 缓存层，配置 100Gi SSD + 20Gi MEM 分层缓存
+  2. 训练前执行 distributedLoad 预热
+  3. 配置数据感知调度，Pod 优先调度到有缓存的节点
+- **效果**: 数据加载时间从 40min 降至 4min，GPU 利用率提升至 85%
+
+### 案例2: 多团队共享模型缓存
+
+- **场景**: 10 个推理服务共享同一 50GB 模型文件，每次 Pod 重启都重新下载
+- **排查**: S3 带宽被重复下载占满，影响其他业务
+- **方案**:
+  1. 创建共享 Dataset 挂载模型文件
+  2. 配置 replication=3 确保多副本缓存
+  3. 设置缓存 TTL 与模型版本同步
+- **效果**: S3 带宽降低 90%，Pod 启动时间从 5min 降至 10s
 
 ## 对比
 

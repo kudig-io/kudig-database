@@ -73,38 +73,135 @@ CloudNativePG 通过 Cluster CRD 定义 PostgreSQL 集群（副本数、存储�
 3. **合规备份**: 连续 WAL 归档 + 定期全量备份，支持 PITR
 4. **读写分离**: Primary 处理写请求，Replica 分担读请求
 
-## 安装
+## 安装与配置
 
 ```bash
 kubectl apply -f \
   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.24/cnpg-1.24.1.yaml
-# 创建集群
-kubectl apply -f - <<EOF
+```
+
+### Cluster CRD 配置示例
+
+```yaml
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
-metadata: { name: pg-cluster }
+metadata:
+  name: pg-cluster
+  namespace: database
 spec:
   instances: 3
-  storage: { size: 50Gi, storageClass: fast-ssd }
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.2
+  storage:
+    size: 100Gi
+    storageClass: fast-ssd
+  walStorage:
+    size: 20Gi
+  postgresql:
+    parameters:
+      max_connections: "200"
+      shared_buffers: "2GB"
+      effective_cache_size: "6GB"
   backup:
     barmanObjectStore:
-      destinationPath: s3://backups/
-      s3Credentials: { ... }
-EOF
+      destinationPath: s3://pg-backups/cluster1/
+      s3Credentials:
+        accessKeyId:
+          name: s3-creds
+          key: ACCESS_KEY
+        secretAccessKey:
+          name: s3-creds
+          key: SECRET_KEY
+    retentionPolicy: "30d"
+  affinity:
+    topologyKey: topology.kubernetes.io/zone
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "2"
+    limits:
+      memory: "8Gi"
+      cpu: "4"
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl get cluster -n database
+kubectl describe cluster pg-cluster -n database
+
+# 🟢 查看实例 Pod
+kubectl get pods -n database -l cnpg.io/cluster=pg-cluster
+
+# 🟢 查看复制状态
+kubectl exec -n database pg-cluster-1 -- psql -U postgres -c "SELECT * FROM pg_stat_replication;"
+
+# 🟡 手动触发备份
+kubectl cnpg backup pg-cluster -n database
+
+# 🟡 手动切换 Primary
+kubectl cnpg promote pg-cluster-2 -n database
+
+# 🟢 查看备份列表
+kubectl cnpg status pg-cluster -n database
+
+# 🟢 连接数据库
+kubectl exec -it pg-cluster-1 -n database -- psql -U postgres
+
+# 🟡 创建只读副本
+kubectl patch cluster pg-cluster -n database \
+  --type=merge -p '{"spec":{"instances":4}}'
+
+# 🔴 时间点恢复 (PITR)
+kubectl cnpg recovery pg-cluster --target-time "2024-01-15 10:30:00" -n database
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 集群未就绪 | PVC 未绑定 | `kubectl get pvc -n database` | 检查 StorageClass 和容量 |
+| 复制延迟大 | 网络/负载问题 | `SELECT * FROM pg_stat_replication` | 检查网络和 WAL 生成速率 |
+| 故障转移失败 | Lease 未释放 | 查看 Operator 日志 | 检查 RBAC 和 Lease 状态 |
+| 备份失败 | S3 凭证问题 | 检查备份 Job 日志 | 更新 S3 凭证 Secret |
+| 连接数耗尽 | 连接池未配置 | `SELECT count(*) FROM pg_stat_activity` | 配置 PgBouncer 连接池 |
+
+## 生产案例
+
+### 案例1: 自动故障转移
+
+**场景**: Primary 节点宕机，需要自动切换  
+**排查**: Operator 检测到 Lease 未续约，自动提升 Replica  
+**效果**: 故障切换时间 < 30s，应用无感知  
+
+### 案例2: PITR 恢复误删数据
+
+**场景**: 开发人员误删生产表数据  
+**方案**: 使用 PITR 恢复到删除前 1 分钟的状态  
+**效果**: 15分钟内完成恢复，数据零丢失  
 
 ## 替代方案
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **CloudNativePG** | 无外部依赖、EDB 支持 | 仅支持 PostgreSQL |
-| CrunchyData PGO | 功能全面、企业级 | 依赖较多、架构复杂 |
-| Zalando Postgres Operator | 成熟稳定、AWS 深度优化 | 架构较旧、Fork 分歧 |
-| StackGres | 全功能、连接池内置 | 社区较小 |
+| 项目 | 优势 | 劣势 | 适用场景 |
+|------|------|------|----------|
+| **CloudNativePG** | 无外部依赖、EDB 支持 | 仅 PostgreSQL | 通用 PG 部署 |
+| CrunchyData PGO | 功能全面 | 架构复杂 | 企业级 |
+| Zalando Operator | 成熟稳定 | 架构较旧 | AWS 环境 |
+| StackGres | 全功能 | 社区较小 | 多数据库 |
 
 ## 架构定位
 
-在 CNCF 生态中，CloudNativePG 属于 **Database** 类别，是 PostgreSQL 在 Kubernetes 上的首选 Operator。它代表了"无需外部依赖"的云原生数据库管理理念。
+在 CNCF 生态中，CloudNativePG 属于 **Database** 类别，是 PostgreSQL 在 Kubernetes 上的首选 Operator。它代表了“无需外部依赖”的云原生数据库管理理念。
+
+## 检查清单
+
+- [ ] 生产环境至少 3 个实例
+- [ ] 配置跨可用区 PodAntiAffinity
+- [ ] 配置连续 WAL 归档 + 定期全量备份
+- [ ] 配置 PgBouncer 连接池
+- [ ] 监控复制延迟和 WAL 生成速率
+- [ ] 定期测试故障转移和 PITR 恢复
+- [ ] 配置 TLS 加密和证书自动轮换
 
 ## 参考链接
 
@@ -121,12 +218,7 @@ EOF
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- 99-cloudnativepg-enterprise-guide
-- cloudnativepg
-- storage|CNCF 存储与数据库项目全景]] — Cross-reference
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[实体/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
 
 
 <!-- risk-assessed -->

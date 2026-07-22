@@ -171,6 +171,90 @@ flowchart TD
     { "name": "顶事件: StatefulSet 异常", "action": "event", "step": "event_sts_abnormal", "description": "Pod 未就绪/有序部署卡住/PVC 异常", "next_step": "gate_root_or" },
     { "name": "根因 OR 门", "action": "gate_or", "step": "gate_root_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["cat_pvc", "cat_pod", "cat_order", "cat_net",
 
+## 生产案例
+
+### 案例1: StatefulSet 滚动更新卡住 - 有序部署阻塞
+
+**时间线**:
+- 15:00 StatefulSet 滚动更新，从 pod-2 开始
+- 15:05 pod-2 更新成功，但 pod-1 一直未 Ready
+- 15:10 确认根因: pod-1 的 PVC 挂载失败(存储后端故障)
+- 15:20 存储恢复后 pod-1 Ready，更新继续到 pod-0
+
+**根因链**:
+```
+StatefulSet滚动更新(逆序) → pod-1 PVC挂载失败
+→ pod-1未Ready → 有序部署阻塞(等待pod-1)
+→ pod-0未更新 → 整个更新卡住
+```
+
+**修复**:
+```bash
+# 🟢 检查 StatefulSet 状态
+kubectl get statefulset ${STS} -n ${NS} -o wide
+kubectl rollout status statefulset/${STS} -n ${NS}
+# 🟢 检查卡住的 Pod
+kubectl describe pod ${STS}-1 -n ${NS} | grep -A10 "Events"
+# 🟡 强制继续(跳过等待)
+kubectl patch statefulset ${STS} -n ${NS} -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
+```
+
+### 案例2: StatefulSet PVC 未释放导致扩容失败
+
+**现象**: 缩容后重新扩容，新 Pod 挂载了旧数据
+
+**根因**: StatefulSet 缩容不会自动删除 PVC，重新扩容时复用旧 PVC
+
+**修复**:
+```bash
+# 🟢 检查 PVC 状态
+kubectl get pvc -n ${NS} -l app=${STS}
+# 🔴 删除旧 PVC (数据将丢失!)
+kubectl delete pvc data-${STS}-${ORDINAL} -n ${NS}
+# 🟢 验证新 Pod 状态
+kubectl get pod ${STS}-${ORDINAL} -n ${NS} -w
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: statefulset-alerts
+  rules:
+  - alert: StatefulSetUpdateStuck
+    expr: kube_statefulset_status_current_revision != kube_statefulset_status_update_revision
+    for: 30m
+    labels:
+      severity: warning
+  - alert: StatefulSetReplicasMismatch
+    expr: kube_statefulset_status_replicas_ready != kube_statefulset_status_replicas
+    for: 15m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 存储高可用 | 使用分布式存储避免单点 | P0 |
+| 更新策略 | partition 控制分批更新 | P0 |
+| PVC 管理 | 缩容前确认数据处理 | P1 |
+| 健康检查 | readinessProbe 确保服务可用 | P1 |
+
+## 面试要点
+
+1. **Q: StatefulSet 与 Deployment 的核心区别？**
+   A: 稳定网络标识(pod-0/1/2) → 稳定持久存储(每 Pod 独立 PVC) → 有序部署/缩容 → 有序滚动更新(逆序)
+
+2. **Q: StatefulSet 更新卡住的排查？**
+   A: 检查当前更新到哪个序号 → 查看卡住 Pod 事件 → 确认 PVC 挂载 → 检查 readinessProbe → 确认存储后端健康
+
+3. **Q: StatefulSet 缩容后 PVC 如何处理？**
+   A: 缩容不自动删除 PVC(保护数据) → 手动删除或保留 → 重新扩容会复用旧 PVC → 1.27+ 支持 persistentVolumeClaimRetentionPolicy
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

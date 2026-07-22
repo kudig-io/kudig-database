@@ -80,7 +80,7 @@ LoxiLB 通过 **kube-loxilb** 组件与 Kubernetes 集成。kube-loxilb 以 Depl
 3. **多集群流量调度**: 通过 BGP Anycast 实现跨集群的流量调度和容灾
 4. **DSR 高吞吐场景**: 视频流、大文件传输等回程流量大的场景，通过 DSR 降低 LB 节点压力
 
-## 安装
+## 安装与配置
 
 ```bash
 # 方式一：Helm 安装（集群内模式）
@@ -96,22 +96,112 @@ kubectl apply -f https://github.com/loxilb-io/kube-loxilb/raw/main/manifest/kube
 kubectl expose deployment my-app --port=80 --type=LoadBalancer
 ```
 
+### Service Annotation 配置
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-lb
+  annotations:
+    loxilb.io/lbmode: "dsr"          # DSR 模式
+    loxilb.io/bgp: "true"            # 启用 BGP 广播
+    loxilb.io/rr-mode: "ecmp"        # ECMP 多路径
+    loxilb.io/probetype: "http"      # HTTP 健康检查
+    loxilb.io/probeport: "8080"      # 健康检查端口
+    loxilb.io/probepath: "/health"   # 健康检查路径
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: my-app
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 LoxiLB 状态
+kubectl get pods -n kube-system -l app=loxilb
+kubectl get pods -n kube-system -l app=kube-loxilb
+
+# 🟢 查看 LB 规则
+kubectl exec -n kube-system loxilb-0 -- loxicmd get lb
+
+# 🟢 查看 BGP 邻居状态
+kubectl exec -n kube-system loxilb-0 -- loxicmd get bgp
+
+# 🟢 查看健康检查状态
+kubectl exec -n kube-system loxilb-0 -- loxicmd get ep
+
+# 🟢 查看 NAT 规则
+kubectl exec -n kube-system loxilb-0 -- loxicmd get nat
+
+# 🟡 手动添加 LB 规则
+kubectl exec -n kube-system loxilb-0 -- loxicmd create lb 10.0.0.100 --tcp=80:8080 --endpoints=10.244.1.10:1,10.244.2.10:1
+
+# 🟢 查看 eBPF 程序状态
+kubectl exec -n kube-system loxilb-0 -- bpftool prog list
+
+# 🟢 查看 Service External IP
+kubectl get svc -l loxilb.io/managed=true
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| External IP 未分配 | kube-loxilb 异常 | `kubectl logs -n kube-system -l app=kube-loxilb` | 检查 kube-loxilb Pod 状态 |
+| 流量不通 | eBPF 规则未加载 | `loxicmd get lb` | 检查 LB 规则和后端状态 |
+| BGP 邻居未建立 | 网络/AS 配置错误 | `loxicmd get bgp` | 检查 BGP 配置和网络连通性 |
+| 健康检查失败 | 后端服务异常 | `loxicmd get ep` | 检查后端 Pod 健康状态 |
+| DSR 回包异常 | 路由配置问题 | 检查后端节点路由 | 配置正确的回程路由 |
+| 性能下降 | eBPF Map 溢出 | `bpftool map list` | 调整 Map 容量配置 |
+
+## 生产案例
+
+### 案例1: 裸金属集群 LoadBalancer 替代
+
+**场景**: 私有云裸金属 K8s 集群无云 LB，需要外部可达的 VIP  
+**方案**: LoxiLB + BGP 广播 VIP，上游路由器自动学习路由  
+**效果**: 替代硬件 F5，吐量提升 3倍，成本降低 80%  
+
+### 案例2: 5G UPF 高性能负载均衡
+
+**场景**: 电信 5G UPF 需要 40Gbps L4 负载均衡  
+**方案**: LoxiLB eBPF/XDP + DSR + ECMP 多路径  
+**效果**: 单节点 40Gbps 线速转发，延迟 < 10μs  
+
 ## 对比
 
 | 特性 | LoxiLB | MetalLB | kube-vip | Cilium LB |
-|------|--------|---------|----------|-----------|
+|------|--------|---------|----------|----------|
 | 数据面 | eBPF/XDP | iptables/IPVS | iptables/arpping | eBPF |
 | 性能 | 极高（线速） | 中 | 中 | 高 |
 | BGP | ✅ | ✅ | ⚠️ 有限 | ❌ |
 | DSR | ✅ | ❌ | ❌ | ⚠️ 有限 |
+| ECMP | ✅ | ❌ | ❌ | ❌ |
+| NAT46/64 | ✅ | ❌ | ❌ | ❌ |
+| 适用场景 | 高性能/电信 | 通用裸金属 | 简单 VIP | Cilium 用户 |
 
 ## 架构定位
 
 在 CNCF 生态中，LoxiLB 属于 **Networking** 类别，为云原生应用提供基于 eBPF 的高性能 L4 负载均衡能力。
 
+## 检查清单
+
+- [ ] 生产环境配置 BGP 实现 VIP 高可用
+- [ ] 配置主动健康检查自动剔除不健康后端
+- [ ] 高吞吐场景使用 DSR 模式
+- [ ] 监控 eBPF Map 使用率
+- [ ] 配置多 LoxiLB 节点实现 LB 高可用
+- [ ] 测试故障切换时间符合 SLA
+
 ## 参考链接
 
 - [[概念/cilium-ebpf-networking.md|cilium-ebpf-networking]]
+- [[实体/cilium.md|Cilium]]
 
 ## Related
 
@@ -120,8 +210,6 @@ kubectl expose deployment my-app --port=80 --type=LoadBalancer
 - [[serverless-devs]] — Serverless Devs
 - [[sermant]] — Sermant
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-
-- loxilb
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 
 

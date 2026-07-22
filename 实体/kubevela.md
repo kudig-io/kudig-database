@@ -82,20 +82,23 @@ KubeVela 以 Kubernetes Controller 方式运行。Application CRD 定义应用�
 3. **Helm 应用管理**: 通过 KubeVela 管理 Helm 组件，统一多应用交付流程
 4. **多云应用部署**: 将应用部署到阿里云 ACK、AWS EKS 等多个云的集群
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 KubeVela CLI
 curl -fsSl https://kubevela.net/script/install.sh | bash
+vela version
 
 # 安装 Vela Controller
 vela install
 
 # 安装 VelaUX (管理界面)
 vela addon enable velaux
+```
 
-# 部署应用
-vela up -f - <<EOF
+### Application CRD 配置
+
+```yaml
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
@@ -107,26 +110,115 @@ spec:
     properties:
       image: crccheck/hello-world
       port: 8000
+      cpu: "0.5"
+      memory: 256Mi
     traits:
     - type: ingress
       properties:
         domain: testsvc.example.com
         http:
           "/": 8000
-EOF
+    - type: scaler
+      properties:
+        replicas: 3
+    - type: gateway
+      properties:
+        class: nginx
+  workflow:
+    steps:
+    - name: deploy-dev
+      type: deploy
+      properties:
+        policies: ["dev-cluster"]
+    - name: approve
+      type: suspend
+    - name: deploy-prod
+      type: deploy
+      properties:
+        policies: ["prod-cluster"]
+```
+
+```bash
+# 部署应用
+vela up -f app.yaml
 
 # 查看应用状态
 vela status first-vela-app
+vela logs first-vela-app
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看应用状态
+vela status first-vela-app
+vela list
+
+# 🟢 查看应用日志
+vela logs first-vela-app
+
+# 🟡 更新应用
+vela up -f app-updated.yaml
+
+# 🟡 回滚应用
+vela rollback first-vela-app --revision 2
+
+# 🟡 启用/禁用插件
+vela addon enable fluxcd
+vela addon disable velaux
+
+# 🔴 删除应用
+vela delete first-vela-app
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 应用部署失败 | 组件类型未注册 | `vela status <app>` | 安装对应 addon |
+| Workflow 卡住 | suspend 步骤未审批 | `vela status <app> -o yaml` | `vela workflow resume` |
+| 多集群部署失败 | 集群未纳管 | `vela cluster list` | `vela cluster join` |
+| Trait 不生效 | TraitDefinition 缺失 | `vela traits` | 安装对应 trait |
+| VelaUX 无法访问 | Service/Ingress 配置 | `kubectl get svc -n vela-system` | 检查网络配置 |
+
+```
+排查流程:
+├── 应用异常
+│   ├── vela status <app> → 查看各组件状态
+│   ├── vela logs <app> → 查看日志
+│   └── kubectl describe application <app> → 详细事件
+├── Workflow 异常
+│   ├── vela workflow status <app>
+│   ├── vela workflow resume <app> → 恢复暂停
+│   └── 检查 policy 和 cluster 配置
+└── 插件问题
+    ├── vela addon list → 查看插件状态
+    └── kubectl logs -n vela-system → controller 日志
+```
+
+## 生产案例
+
+### 案例 1: 多集群灰度发布
+
+- **场景**: 应用需要从 dev 集群验证后发布到 prod 集群，手动操作易出错
+- **方案**: 配置 Workflow 三步(deploy-dev → suspend审批 → deploy-prod)；结合 canary 策略逐步放量
+- **效果**: 发布流程标准化，人为操作失误归零，回滚时间 <2min
+
+### 案例 2: 开发者自助应用交付
+
+- **场景**: 开发者不熟悉 K8s YAML，每次部署需要平台团队协助
+- **方案**: 部署 VelaUX 门户；定义 webservice/database 等简化组件类型；开发者通过 UI 填写参数即可部署
+- **效果**: 开发者自助部署率从 0 提升到 90%，平台团队工单减少 75%
 
 ## 对比
 
-| 特性 | KubeVela | ArgoCD | Flux | Crossplane |
-|------|----------|--------|------|-----------|
-| OAM 模型 | ✅ | ❌ | ❌ | ❌ |
-| 工作流 | ✅ | ⚠️ Argo Workflow | ❌ | ❌ |
-| 多集群 | ✅ | ⚠️ ApplicationSet | ⚠️ | ✅ |
-| CNCF 状态 | Incubating | Graduated | Graduated | Incubating |
+| 特性 | KubeVela | ArgoCD | Flux | Crossplane | 适用场景 |
+|------|----------|--------|------|-----------|----------|
+| OAM 模型 | ✅ | ❌ | ❌ | ❌ | 应用抽象 |
+| 工作流 | ✅ | ⚠️ Argo Workflow | ❌ | ❌ | 复杂发布 |
+| 多集群 | ✅ | ⚠️ ApplicationSet | ⚠️ | ✅ | 多云 |
+| 开发者门户 | ✅ VelaUX | ❌ | ❌ | ❌ | 自助服务 |
+| CNCF 状态 | Incubating | Graduated | Graduated | Incubating | 生态 |
 
 ## 架构定位
 

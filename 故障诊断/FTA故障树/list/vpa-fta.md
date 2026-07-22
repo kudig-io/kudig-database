@@ -177,6 +177,86 @@ flowchart TD
   OBJ --> OBJ_OR
   OBJ_OR --> OBJ_TARGET[目标
 
+## 生产案例
+
+### 案例1: VPA 推荐值导致 Pod OOMKilled
+
+**时间线**:
+- 10:00 VPA updateMode=Auto，自动调整 Pod 资源
+- 10:05 VPA 将 memory limit 从 2Gi 降低到 512Mi
+- 10:06 Pod 重启后 OOMKilled
+- 10:10 确认根因: VPA 基于历史低峰期数据推荐，未考虑峰值
+- 10:15 设置 minAllowed 后恢复
+
+**根因链**:
+```
+VPA基于历史数据推荐 → 低峰期数据导致推荐值偏低
+→ Auto模式自动应用 → memory limit降低 → Pod OOMKilled
+```
+
+**修复**:
+```bash
+# 🟢 检查 VPA 推荐值
+kubectl get vpa ${VPA_NAME} -n ${NS} -o jsonpath='{.status.recommendation}'
+# 🟡 设置资源下限
+kubectl patch vpa ${VPA_NAME} -n ${NS} -p '{"spec":{"resourcePolicy":{"containerPolicies":[{"containerName":"*","minAllowed":{"cpu":"100m","memory":"512Mi"}}]}}}'
+# 🟡 或切换为 Off 模式(仅推荐不执行)
+kubectl patch vpa ${VPA_NAME} -n ${NS} -p '{"spec":{"updatePolicy":{"updateMode":"Off"}}}'
+```
+
+### 案例2: VPA 与 HPA 冲突导致扩缩容异常
+
+**现象**: Pod 副本数频繁变化，资源也在不断调整
+
+**根因**: VPA 和 HPA 同时基于 CPU 指标，产生反馈循环
+
+**修复**:
+```bash
+# 🟡 VPA 使用 Off 模式或基于不同指标
+# HPA 基于 CPU，VPA 基于 Memory
+# 或使用 MultidimPodAutoscaler (K8s 1.27+)
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: vpa-alerts
+  rules:
+  - alert: VPARecommendationExtreme
+    expr: vpa_recommender_recommendation_target_cpu_cores > 8 or vpa_recommender_recommendation_target_memory_bytes > 16e9
+    for: 30m
+    labels:
+      severity: warning
+  - alert: VPAEvictionLoop
+    expr: increase(vpa_updater_evicted_pods_total[1h]) > 5
+    for: 10m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 设置 minAllowed/maxAllowed | 避免推荐值极端 | P0 |
+| 避免 VPA+HPA 同指标 | 使用不同指标或 Off 模式 | P0 |
+| 渐进式应用 | 先 Off 观察再 Auto | P1 |
+| 驱逐窗口 | 配置合理的驱逐间隔 | P1 |
+
+## 面试要点
+
+1. **Q: VPA 的三种更新模式？**
+   A: Off(仅推荐) → Initial(仅新建时应用) → Auto(自动驱逐重建)；生产建议先 Off 观察
+
+2. **Q: VPA 与 HPA 的区别和冲突解决？**
+   A: VPA 调整单 Pod 资源，HPA 调整副本数；不应基于同一指标；可用 MultidimPodAutoscaler 统一
+
+3. **Q: VPA 推荐值不合理的处理？**
+   A: 检查历史数据是否代表性 → 设置 minAllowed/maxAllowed → 调整推荐窗口 → 切换为 Off 模式手动应用
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

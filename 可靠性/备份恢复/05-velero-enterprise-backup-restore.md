@@ -326,6 +326,213 @@ velero snapshot-location get
 6. **监控覆盖**：备份成功率、恢复时间、存储用量
 7. **文档化**：恢复流程 Runbook 定期更新
 
+## 备份验证自动化
+
+### 自动验证 CronJob
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-validation
+  namespace: velero
+spec:
+  schedule: "0 6 * * *"  # 每天早 6 点
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: velero
+          containers:
+            - name: validate
+              image: velero/velero:v1.13
+              command: [sh, -c]
+              args:
+                - |
+                  echo "=== 备份验证 $(date) ==="
+                  
+                  # 1. 检查最新备份状态
+                  LATEST_BACKUP=$(velero backup get -o name | head -1)
+                  STATUS=$(velero backup get -o json | jq -r '.items[0].status.phase')
+                  
+                  if [ "$STATUS" != "Completed" ]; then
+                    echo "ERROR: 最新备份状态异常: $STATUS"
+                    curl -X POST $ALERT_WEBHOOK -d '{"text":"备份验证失败"}'
+                    exit 1
+                  fi
+                  
+                  # 2. 测试恢复到临时命名空间
+                  velero restore create validation-$(date +%s) \
+                    --from-backup $LATEST_BACKUP \
+                    --namespace-mappings production:validation-tmp \
+                    --wait --timeout 10m
+                  
+                  # 3. 验证恢复的资源
+                  POD_COUNT=$(kubectl get pods -n validation-tmp --no-headers | wc -l)
+                  if [ "$POD_COUNT" -eq 0 ]; then
+                    echo "ERROR: 恢复后无 Pod"
+                    exit 1
+                  fi
+                  
+                  # 4. 清理
+                  kubectl delete ns validation-tmp --wait=false
+                  
+                  echo "✅ 备份验证成功"
+          restartPolicy: OnFailure
+```
+
+### 备份完整性检查脚本
+
+```bash
+#!/bin/bash
+# validate-backup-integrity.sh — 备份完整性检查
+set -euo pipefail
+
+BACKUP_NAME=${1:-$(velero backup get -o name | head -1)}
+
+echo "=== 备份完整性检查: $BACKUP_NAME ==="
+
+# 1. 检查备份元数据
+velero backup describe $BACKUP_NAME --details
+
+# 2. 检查备份日志
+velero backup logs $BACKUP_NAME | tail -50
+
+# 3. 检查卷快照
+velero backup describe $BACKUP_NAME --details | grep -A20 "Volume snapshots"
+
+# 4. 验证对象存储文件
+BACKUP_BUCKET=$(velero backup-location get -o json | jq -r '.items[0].spec.objectStorage.bucket')
+aws s3 ls s3://$BACKUP_BUCKET/backups/$BACKUP_NAME/ --recursive | wc -l
+
+# 5. 检查备份大小
+BACKUP_SIZE=$(velero backup describe $BACKUP_NAME -o json | jq -r '.status.volumeSnapshotsAttempted')
+echo "卷快照数量: $BACKUP_SIZE"
+
+echo "=== 检查完成 ==="
+```
+
+## 成本优化
+
+### 备份存储成本分析
+
+| 存储类型 | 成本 (每月) | 适用场景 |
+|---------|------------|----------|
+| S3 Standard | ~$0.023/GB | 频繁访问的备份 |
+| S3 IA | ~$0.0125/GB | 30 天以上备份 |
+| S3 Glacier | ~$0.004/GB | 90 天以上归档 |
+| EBS 快照 | ~$0.05/GB | 卷快照 |
+
+### 生命周期策略
+
+```yaml
+# S3 生命周期策略示例
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backup-lifecycle-policy
+  namespace: velero
+data:
+  lifecycle.json: |
+    {
+      "Rules": [
+        {
+          "ID": "BackupLifecycle",
+          "Status": "Enabled",
+          "Transitions": [
+            {
+              "Days": 30,
+              "StorageClass": "STANDARD_IA"
+            },
+            {
+              "Days": 90,
+              "StorageClass": "GLACIER"
+            }
+          ],
+          "Expiration": {
+            "Days": 365
+          }
+        }
+      ]
+    }
+```
+
+### 备份去重与压缩
+
+```bash
+# 启用备份压缩
+velero backup create compressed-backup \
+  --include-namespaces production \
+  --snapshot-volumes \
+  --default-volumes-to-fs-backup
+
+# 使用 Restic/Kopia 进行文件级备份（支持去重）
+velero backup create fs-backup \
+  --include-namespaces production \
+  --default-volumes-to-fs-backup
+```
+
+## 多集群备份管理
+
+### 集中式备份存储
+
+```yaml
+# 多集群共享备份存储
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: central-backup
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: central-k8s-backups
+    prefix: cluster-prod-1
+  config:
+    region: ap-southeast-1
+---
+# 跨集群恢复
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: cross-cluster-restore
+  namespace: velero
+spec:
+  backupName: prod-1-backup-20260721
+  includedNamespaces:
+    - production
+  namespaceMapping:
+    production: production-restored
+```
+
+### 备份联邦管理
+
+```bash
+#!/bin/bash
+# multi-cluster-backup.sh — 多集群备份管理
+set -euo pipefail
+
+CLUSTERS=("prod-1" "prod-2" "staging")
+
+for cluster in "${CLUSTERS[@]}"; do
+  echo "=== 备份集群: $cluster ==="
+  
+  # 切换到目标集群
+  kubectl config use-context $cluster
+  
+  # 创建备份
+  velero backup create ${cluster}-backup-$(date +%Y%m%d) \
+    --include-namespaces production,database \
+    --snapshot-volumes \
+    --wait
+  
+  # 验证备份
+  velero backup get | head -5
+done
+
+echo "=== 所有集群备份完成 ==="
+```
+
 ## Related
 
 - [[可靠性/灾难恢复/index.md|灾难恢复]]

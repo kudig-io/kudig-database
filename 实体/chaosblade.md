@@ -78,28 +78,33 @@ ChaosBlade 通过 ChaosBlade Operator 实现 Kubernetes 原生集成。用户创
 3. **微服务容错**: 注入 Dubbo/HTTP 调用超时，验证熔断器和服务降级
 4. **演练前置验证**: 在生产环境混沌实验前，先在测试环境验证故障注入效果和影响
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 ChaosBlade CLI
 wget https://github.com/chaosblade-io/chaosblade/releases/download/v1.7.0/chaosblade-1.7.0-linux-amd64.tar.gz
 tar -xzf chaosblade-*.tar.gz && cd chaosblade-1.7.0
+./blade version
 
 # 在 Kubernetes 中安装 Operator
 kubectl apply -f https://github.com/chaosblade-io/chaosblade-operator/releases/download/v1.7.0/chaosblade-operator-v1.7.0.yaml
+kubectl get pods -n chaosblade
+```
 
-# 创建混沌实验（网络延迟）
-kubectl apply -f - <<EOF
+### 混沌实验 CRD 配置
+
+```yaml
+# 网络延迟实验
 apiVersion: chaosblade.io/v1alpha1
 kind: ChaosBlade
 metadata:
-  name: network-delay
+  name: network-delay-pod
 spec:
   experiments:
   - scope: container
     target: network
     action: delay
-    desc: "inject 100ms network delay"
+    desc: "inject 100ms network delay to target pod"
     matchers:
     - name: time
       value: ["100"]
@@ -107,20 +112,113 @@ spec:
       value: ["eth0"]
     - name: names
       value: ["my-app-pod"]
-EOF
+    - name: namespace
+      value: ["production"]
+---
+# CPU 满载实验
+apiVersion: chaosblade.io/v1alpha1
+kind: ChaosBlade
+metadata:
+  name: cpu-fullload-node
+spec:
+  experiments:
+  - scope: node
+    target: cpu
+    action: fullload
+    desc: "node CPU fullload for 60s"
+    matchers:
+    - name: cpu-percent
+      value: ["80"]
+    - name: time
+      value: ["60"]
+    - name: names
+      value: ["worker-node-01"]
+```
+
+### CLI 直接执行
+
+```bash
+# 创建网络丢包实验
+./blade create network loss --percent 30 --interface eth0
+
+# 查看实验状态
+./blade status <experiment-id>
 
 # 销毁实验
-kubectl delete chaosblade network-delay
+./blade destroy <experiment-id>
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看实验状态
+kubectl get chaosblade -A
+kubectl describe chaosblade network-delay-pod
+
+# 🟢 查看 Operator 日志
+kubectl logs -n chaosblade -l app=chaosblade-operator --tail=50
+
+# 🟡 创建混沌实验（影响目标 Pod/Node）
+kubectl apply -f experiment.yaml
+
+# 🟡 销毁实验（恢复故障）
+kubectl delete chaosblade network-delay-pod
+
+# 🔴 批量销毁所有实验
+kubectl delete chaosblade --all
+
+# 🔴 强制清理（实验残留）
+kubectl patch chaosblade <name> -p '{"metadata":{"finalizers":null}}' --type=merge
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 实验未执行 | Operator 未就绪 | `kubectl get pods -n chaosblade` | 检查 Operator 状态 |
+| Pod 未被注入 | matcher 不匹配 | `kubectl get pod -l app=my-app` | 确认 Pod 名称/命名空间 |
+| 实验无法销毁 | finalizer 阻塞 | `kubectl get chaosblade -o yaml` | 移除 finalizer |
+| 节点实验失败 | blade agent 未安装 | `kubectl get ds -n chaosblade` | 检查 DaemonSet 状态 |
+| 网络实验无效 | 接口名错误 | `ip link show` | 确认正确的网络接口名 |
+
+```
+排查流程:
+├── 实验未触发
+│   ├── kubectl get chaosblade → 检查 Phase 状态
+│   ├── kubectl describe chaosblade → 查看 Events
+│   └── kubectl logs operator → 查看执行错误
+├── 实验无法恢复
+│   ├── kubectl delete chaosblade <name>
+│   └── 手动清理: 进入 Pod 执行 ./blade destroy <id>
+└── 节点级实验异常
+    ├── 检查 chaosblade-tool DaemonSet 状态
+    └── 确认目标节点上 blade agent 进程存活
+```
+
+## 生产案例
+
+### 案例 1: 混沌实验导致生产事故
+
+- **场景**: 测试环境网络延迟实验误匹配生产 Pod
+- **排查**: matcher 中 namespace 未限制，匹配了所有同名 Pod
+- **方案**: 立即 `kubectl delete chaosblade --all`；后续强制要求所有实验指定 namespace matcher；添加准入控制禁止在 production ns 创建 ChaosBlade CR
+- **效果**: 建立混沌实验安全规范，生产环境零误注入
+
+### 案例 2: 微服务韧性验证
+
+- **场景**: 验证订单服务在下游支付服务 500ms 延迟下的表现
+- **方案**: 创建 network delay 实验，matcher 指定支付服务 Pod；观察订单服务超时/重试/降级行为
+- **效果**: 发现订单服务超时设置过短(200ms)，调整为 1s + 重试 + 降级，系统韧性显著提升
 
 ## 对比
 
-| 特性 | ChaosBlade | Chaos Mesh | LitmusChaos | Krkn |
-|------|-----------|------------|-------------|------|
-| 中间件故障 | ✅ 丰富 | ⚠️ 有限 | ⚠️ | ⚠️ |
-| K8s 原生 | ✅ CRD | ✅ CRD | ✅ CRD | ⚠️ |
-| CLI | ✅ blade | ✡ chaos | ✡ litmusctl | ⚠️ |
-| CNCF 状态 | Sandbox | Incubating | Incubating | 非 CNCF |
+| 特性 | ChaosBlade | Chaos Mesh | LitmusChaos | Krkn | 适用场景 |
+|------|-----------|------------|-------------|------|----------|
+| 中间件故障 | ✅ 丰富 | ⚠️ 有限 | ⚠️ | ⚠️ | Java/微服务 |
+| K8s 原生 | ✅ CRD | ✅ CRD | ✅ CRD | ⚠️ | 云原生 |
+| CLI | ✅ blade | ✡ chaos | ✡ litmusctl | ⚠️ | 命令行操作 |
+| 节点级实验 | ✅ | ✅ | ✅ | ✅ | 基础设施 |
+| CNCF 状态 | Sandbox | Incubating | Incubating | 非 CNCF | 生态成熟度 |
 
 ## 架构定位
 

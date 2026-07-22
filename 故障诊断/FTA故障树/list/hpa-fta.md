@@ -182,6 +182,86 @@ flowchart TD
     { "name": "开始", "action": "start", "step": "start_hpa_fta", "next_step": "event_hpa_abnormal" },
     { "name": "顶事件: HPA 扩缩容异常", "action": "event", "step": "event_hpa_abnormal", "description": "扩缩容停滞/震荡/失败", "next_s
 
+## 生产案例
+
+### 案例1: HPA 无法获取指标导致扩容失败
+
+**时间线**:
+- 14:00 流量激增，HPA 应触发扩容
+- 14:05 HPA 状态显示 `FailedGetResourceMetric: unable to get metrics for resource cpu`
+- 14:10 确认根因: metrics-server Pod 不可用
+- 14:15 修复 metrics-server 后 HPA 正常扩容
+
+**根因链**:
+```
+metrics-server不可用 → HPA无法获取CPU指标
+→ 无法计算期望副本数 → 扩容失败 → 服务过载
+```
+
+**修复**:
+```bash
+# 🟢 检查 HPA 状态
+kubectl get hpa -n ${NS} -o wide
+kubectl describe hpa ${HPA_NAME} -n ${NS}
+# 🟢 检查 metrics-server
+kubectl get pods -n kube-system -l k8s-app=metrics-server
+kubectl top nodes  # 验证指标可用
+# 🟡 修复 metrics-server
+kubectl rollout restart deployment metrics-server -n kube-system
+```
+
+### 案例2: HPA 扩缩容震荡
+
+**现象**: Pod 副本数在 3 和 10 之间频繁波动
+
+**根因**: 扩容后 CPU 立即下降触发缩容，缩容后 CPU 又升高触发扩容
+
+**修复**:
+```bash
+# 🟡 配置稳定窗口和容差
+kubectl patch hpa ${HPA_NAME} -n ${NS} --type=merge -p '{"spec":{"behavior":{"scaleDown":{"stabilizationWindowSeconds":300,"policies":[{"type":"Percent","value":10,"periodSeconds":60}]},"scaleUp":{"stabilizationWindowSeconds":60}}}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: hpa-alerts
+  rules:
+  - alert: HPAMaxReplicasReached
+    expr: kube_horizontalpodautoscaler_status_current_replicas == kube_horizontalpodautoscaler_spec_max_replicas
+    for: 15m
+    labels:
+      severity: critical
+  - alert: HPAMetricsUnavailable
+    expr: kube_horizontalpodautoscaler_status_condition{condition="ScalingActive",status="False"} == 1
+    for: 10m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| metrics-server 高可用 | 至少 2 副本 | P0 |
+| 稳定窗口 | scaleDown 至少 300s | P0 |
+| 合理阈值 | targetCPU 60-80%，避免过低 | P1 |
+| 自定义指标 | 用 QPS/延迟代替纯 CPU | P1 |
+
+## 面试要点
+
+1. **Q: HPA 的工作原理？**
+   A: 定期(15s)从 metrics API 获取指标 → 计算 期望副本 = ceil(当前副本 × 当前值/目标值) → 应用 behavior 策略 → 调整 replicas
+
+2. **Q: HPA 不扩容的排查？**
+   A: 检查 metrics-server 状态 → 确认 Pod 设置了 requests → 查看 HPA conditions → 确认未达 maxReplicas → 检查 behavior 配置
+
+3. **Q: 如何避免 HPA 震荡？**
+   A: 配置 stabilizationWindowSeconds → 设置合理的容差(--horizontal-pod-autoscaler-tolerance) → scaleDown 策略限制缩容速度 → 使用自定义指标
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

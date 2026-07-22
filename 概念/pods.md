@@ -167,6 +167,147 @@ kubectl top pod webapp --containers
 - **多容器争抢 CPU**：未设 requests 时，sidecar 可能抢占主容器 CPU；用 cpuset / requests 隔离。
 - **共享卷写冲突**：多个容器同时写同一个 emptyDir 可能数据损坏，约定单一写入者。
 
+## 源码实现分析
+
+### kubelet Pod 生命周期管理
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_manager.go
+// kubelet 通过 CRI 管理 Pod 生命周期
+func (m *kubeGenericRuntimeManager) SyncPod(ctx context.Context, pod *v1.Pod, podStatus *kubecontainer.PodStatus) {
+    // 1. 创建 Pod 沙箱（pause 容器 + 网络命名空间）
+    sandboxID := m.createPodSandbox(ctx, pod)
+    
+    // 2. 执行 Init Containers（顺序）
+    for _, initContainer := range pod.Spec.InitContainers {
+        m.startContainer(ctx, initContainer, sandboxID)
+        m.waitForExit(initContainer)  // 等待完成
+    }
+    
+    // 3. 启动主容器
+    for _, container := range pod.Spec.Containers {
+        m.startContainer(ctx, container, sandboxID)
+    }
+    
+    // 4. 启动探针监控
+    m.startProbers(pod)  // liveness + readiness + startup
+}
+
+// Pod 终止流程
+func (m *kubeGenericRuntimeManager) killPod(ctx context.Context, pod *v1.Pod) {
+    // 1. 发送 SIGTERM
+    m.killContainer(container, gracePeriod)
+    // 2. 等待 terminationGracePeriodSeconds
+    // 3. 超时后发送 SIGKILL
+    // 4. 清理沙箱和网络
+}
+```
+
+### Pod 生命周期状态机
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          Pod 生命周期状态机                            │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  Pending → Running → Succeeded/Failed                    │
+│    │          │                                           │
+│    │          ├─ 容器启动中 (Waiting)                  │
+│    │          ├─ 容器运行中 (Running)                  │
+│    │          └─ 容器终止 (Terminated)                 │
+│    │                                                      │
+│    ├─ 调度中: 等待节点分配                           │
+│    ├─ 拉取镜像: ImagePullBackOff 可能卡住            │
+│    └─ Init 执行: Init:0/2, Init:CrashLoopBackOff    │
+│                                                           │
+│  探针机制:                                               │
+│  • startupProbe: 启动期间检测，失败则重启           │
+│  • livenessProbe: 运行期检测，失败则重启            │
+│  • readinessProbe: 控制是否接收流量                  │
+│                                                           │
+│  优雅终止:                                               │
+│  1. Pod 标记为 Terminating                              │
+│  2. 从 Endpoints 移除（停止接收新流量）            │
+│  3. 执行 preStop hook                                   │
+│  4. 发送 SIGTERM                                        │
+│  5. 等待 terminationGracePeriodSeconds (默认 30s)  │
+│  6. 发送 SIGKILL                                        │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产 Pod 配置示例（🟡 部署到集群）
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: production-app
+spec:
+  terminationGracePeriodSeconds: 60  # 优雅停止时间
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+  - name: app
+    image: my-app@sha256:abc123  # 使用 digest
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+    startupProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      failureThreshold: 30
+      periodSeconds: 2
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 8080
+      periodSeconds: 5
+    lifecycle:
+      preStop:
+        exec:
+          command: ["sh", "-c", "sleep 5"]  # 等待流量排干
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: ["ALL"]
+```
+
+## 面试要点
+
+1. **Pod 的生命周期状态有哪些？**
+   - Pending：调度中/拉取镜像中
+   - Running：至少一个容器在运行
+   - Succeeded/Failed：所有容器终止
+   - Unknown：状态无法获取
+
+2. **三种探针的作用和区别？**
+   - startupProbe：启动期间检测，失败则重启
+   - livenessProbe：运行期检测，失败则重启
+   - readinessProbe：控制是否接收流量，失败则从 Endpoints 移除
+
+3. **Pod 优雅终止的流程？**
+   - 标记 Terminating → 移除 Endpoints → preStop hook
+   - SIGTERM → 等待 grace period → SIGKILL
+   - 关键：preStop sleep 等待流量排干
+
+4. **为什么生产环境不用裸 Pod？**
+   - 裸 Pod 不受控制器保护，节点故障不会重建
+   - 应用 Deployment/StatefulSet/DaemonSet 管理
+   - 控制器提供自愈、滚动更新、扩缩容
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]] — 核心平台

@@ -114,6 +114,96 @@ kube-controller-manager（KCM）内含 30+ 独立控制器，核心控制器包�
 - 调度器性能：关注 scheduling throughput、pending pods
 - etcd 性能：关注 commit latency、proposal rate
 
+## 运维操作
+
+```bash
+# 🟢 查看控制平面组件状态
+kubectl get componentstatuses
+kubectl get --raw /healthz?verbose
+kubectl get pods -n kube-system -l tier=control-plane
+
+# 🟢 API Server 请求延迟监控
+curl -sk https://<apiserver>:6443/metrics | grep apiserver_request_duration_seconds
+kubectl get --raw /metrics | grep apiserver_current_inflight_requests
+
+# 🟢 调度器状态检查
+kubectl get events -A --field-selector reason=FailedScheduling
+kubectl logs -n kube-system -l component=kube-scheduler --tail=50
+
+# 🟢 etcd 健康检查
+etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  endpoint health
+etcdctl endpoint status --write-out=table
+
+# 🟡 查看 API Server 审计日志
+kubectl logs -n kube-system -l component=kube-apiserver --tail=100
+# 检查准入控制器配置
+cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep admission
+
+# 🟡 检查 CRI/CSI/CNI 状态
+crictl ps                    # CRI: 查看运行容器
+crictl pods                  # CRI: 查看 Pod
+kubectl get csidrivers       # CSI: 查看存储驱动
+kubectl get pods -n kube-system -l k8s-app=calico-node  # CNI
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| API Server 响应慢 | etcd 延迟高/watch 过多 | `etcdctl endpoint status` | 优化 etcd 磁盘/减少 watch |
+| Pod 长时间 Pending | 调度器过滤失败/资源不足 | `kubectl describe pod <name>` | 检查节点资源和调度约束 |
+| 节点 NotReady | kubelet 与 API Server 断连 | `kubectl describe node <name>` | 检查网络/证书/kubelet 状态 |
+| CSI 挂载失败 | 存储后端不可达/驱动异常 | `kubectl describe pvc <name>` | 检查 CSI driver Pod 和存储后端 |
+| CNI 网络不通 | CNI 插件异常/IP 耗尽 | `kubectl logs -n kube-system -l k8s-app=calico-node` | 重启 CNI Pod 或扩展 IP 池 |
+
+```
+排查流程：
+├─ 控制平面异常
+│  ├─ kubectl get componentstatuses 检查组件健康
+│  ├─ API Server 异常 → 检查 etcd 连接和证书
+│  ├─ Scheduler 异常 → 检查调度器日志和配置
+│  └─ KCM 异常 → 检查控制器日志
+├─ 调度问题
+│  ├─ kubectl describe pod 查看调度失败原因
+│  ├─ 检查节点资源/污点/亲和性
+│  └─ 检查 PV/PVC 状态（VolumeZone）
+└─ CRI/CSI/CNI 问题
+   ├─ CRI: crictl ps + crictl logs
+   ├─ CSI: kubectl describe pvc + CSI driver 日志
+   └─ CNI: 检查 CNI Pod + 节点网络配置
+```
+
+## 生产案例
+
+### 案例 1：API Server 延迟飙升导致集群不可用
+
+- **场景**: 生产集群 API Server P99 延迟从 50ms 飙升至 5s，kubectl 操作超时
+- **排查**: etcd commit latency 从 5ms 升至 500ms，磁盘 IOPS 达到上限
+- **方案**: etcd 迁移至 NVMe SSD，启用 API Priority and Fairness 限制大客户端
+- **效果**: API Server P99 恢复至 80ms，etcd commit <10ms
+
+### 案例 2：调度器吐量不足导致 Pod 积压
+
+- **场景**: 批量创建 1000 个 Pod，调度器处理速度仅 50 pods/s，积压严重
+- **排查**: 调度器日志显示大量 Filter 失败（NodeResourcesFit），节点资源磎片化
+- **方案**: 启用 Cluster Autoscaler + 调整调度器并发数（--kube-api-qps）
+- **效果**: 调度吐量提升至 200 pods/s，Pod 积压清空
+
+## 检查清单
+
+- [ ] API Server 证书有效期 > 30 天
+- [ ] etcd 集群健康且 commit latency < 10ms
+- [ ] 调度器无持续 Pending Pod
+- [ ] KCM 所有控制器正常运行
+- [ ] CRI 运行时版本与 K8s 兼容
+- [ ] CSI 驱动健康且 PV 可用
+- [ ] CNI 插件正常且 IP 池充足
+- [ ] API Priority and Fairness 已配置
+
 ---
 
 > 来源：.zread/wiki/drafts/7-kong-zhi-ping-mian-shen-du-pou-xi-api-server-scheduler-kcm-yu-cri-csi-cni.md

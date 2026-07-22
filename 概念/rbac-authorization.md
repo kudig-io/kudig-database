@@ -93,6 +93,128 @@ Kubernetes 预定义了四个高频使用的 ClusterRole，平台团队可直接
 
 更多排查细节可参考 [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|rbac-troubleshooting]] 与技能页面 [[故障诊断/技能体系/skill-set/k8s-rbac-quota/SKILL.md|k8s-rbac-quota]]。
 
+## 源码实现分析
+
+### RBAC 授权决策流程
+
+```go
+// kubernetes/plugin/pkg/auth/authorizer/rbac/rbac.go
+func (r *RBACAuthorizer) Authorize(ctx context.Context,
+    requestAttributes authorizer.Attributes) (authorizer.Decision, error) {
+    // 1. 获取请求主体（User/Group/ServiceAccount）
+    subject := requestAttributes.GetUser()
+    
+    // 2. 查找所有匹配的 RoleBinding/ClusterRoleBinding
+    bindings := r.getBindings(subject)  // 按 subject 索引
+    
+    // 3. 遍历每个 binding 的 rules 检查是否允许
+    for _, binding := range bindings {
+        for _, rule := range binding.Role.Rules {
+            if ruleMatches(rule, requestAttributes) {
+                // verb + resource + apiGroup + namespace 全部匹配
+                return authorizer.DecisionAllow, nil
+            }
+        }
+    }
+    // 4. 无匹配规则 → 拒绝（默认拒绝）
+    return authorizer.DecisionNoOpinion, nil
+}
+```
+
+### 权限检查命令链路
+
+```
+kubectl auth can-i create pods --as=system:serviceaccount:dev:deployer
+    │
+    ▼
+API Server → SubjectAccessReview API
+    │
+    ▼
+RBACAuthorizer.Authorize()
+    │
+    ▼
+查找 RoleBinding (namespace=default, subject=deployer)
+    │
+    ▼
+匹配 Role rules: verbs=[create], resources=[pods]
+    │
+    ▼
+返回: allowed=true/false
+```
+
+## 使用场景
+
+### 场景一：开发人员命名空间权限
+
+```yaml
+# 开发团队只能操作 dev 命名空间的工作负载
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-team-edit
+  namespace: dev
+subjects:
+- kind: Group
+  name: dev-team@example.com    # OIDC group
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: edit                    # 内置角色：读写工作负载
+  apiGroup: rbac.authorization.k8s.io
+```
+
+### 场景二：CI/CD ServiceAccount 最小权限
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deployer-role
+  namespace: production
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "patch"]   # 仅允许更新镜像
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]            # 只读检查状态
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ci-deployer
+  namespace: production
+subjects:
+- kind: ServiceAccount
+  name: ci-deployer
+  namespace: cicd
+roleRef:
+  kind: Role
+  name: deployer-role
+  apiGroup: rbac.authorization.k8s.io
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 没有规则就是允许 | RBAC 默认拒绝，必须显式授权（白名单模式） |
+| Role 可以跨命名空间 | Role 只在定义它的 namespace 生效，跨 ns 需 ClusterRole |
+| ClusterRoleBinding 可绑定 Role | 只能绑定 ClusterRole，RoleBinding 才能绑定 Role |
+| ServiceAccount 自动有权限 | SA 创建时无任何权限，必须显式绑定 Role |
+| 删除 RoleBinding 立即生效 | RBAC 变更即时生效（无缓存），但已建立的连接不受影响 |
+| view 角色可以看 Secret | 内置 view 角色明确排除了 Secret 读取权限 |
+
+## 面试要点
+
+1. **RBAC 与 ABAC 的区别？** — RBAC 基于角色（Role→Subject 绑定），管理简单、易审计；ABAC 基于属性（用户属性+资源属性+环境条件），灵活但复杂。K8s 默认用 RBAC，ABAC 已不推荐。
+
+2. **如何实现多租户权限隔离？** — 每个租户一个 Namespace + RoleBinding（绑定 edit/view）；NetworkPolicy 网络隔离；ResourceQuota 资源配额；LimitRange 默认资源约束。ClusterRole 通过 RoleBinding 引用可限定在特定 ns。
+
+3. **ServiceAccount 安全最佳实践？** — 每个应用独立 SA（不用 default）；设置 `automountServiceAccountToken: false`（不需要时）；最小权限原则；定期审计 ClusterRoleBinding（避免 cluster-admin 泛滥）。
+
+4. **如何审计集群权限？** — `kubectl auth can-i --list --as=<user>`；审计日志搜索 403 响应；`kubectl get clusterrolebindings -o wide` 检查 cluster-admin 绑定；工具：rbac-lookup、kubectl-who-can、Paranoid。
+
 ## 相关概念
 
 - [[kubernetes-pki-certificate-system]] — Kubernetes PKI 与证书体系

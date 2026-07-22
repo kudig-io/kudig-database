@@ -167,6 +167,90 @@ flowchart TD
   SVC_NET_OR{{OR}}
   SVC_NET --> SV
 
+## 生产案例
+
+### 案例1: Admission Webhook 不可用导致所有 Pod 创建失败
+
+**时间线**:
+- 09:00 Webhook 服务 Pod 被误删
+- 09:01 所有新 Pod 创建失败: `failed calling webhook: connection refused`
+- 09:05 确认根因: MutatingWebhookConfiguration 的 failurePolicy=Fail
+- 09:10 恢复 Webhook Pod 后恢复正常
+
+**根因链**:
+```
+Webhook Pod被删 → apiserver调用Webhook失败
+→ failurePolicy=Fail → 拒绝所有匹配的请求
+→ 全集群Pod创建/更新失败
+```
+
+**修复**:
+```bash
+# 🟢 检查 Webhook 配置
+kubectl get mutatingwebhookconfigurations -o wide
+kubectl get validatingwebhookconfigurations -o wide
+# 🔴 紧急: 临时删除 Webhook 配置(高风险)
+kubectl delete mutatingwebhookconfiguration ${WEBHOOK_NAME}
+# 🟡 恢复 Webhook 服务
+kubectl apply -f webhook-deployment.yaml
+# 恢复后重新创建 Webhook 配置
+kubectl apply -f webhook-configuration.yaml
+```
+
+### 案例2: Webhook 超时导致 API 请求慢
+
+**现象**: kubectl 命令响应慢，apiserver 日志显示 webhook 调用超时
+
+**根因**: Webhook 服务负载过高，响应时间超过 timeoutSeconds
+
+**修复**:
+```bash
+# 🟢 检查 Webhook 响应时间
+kubectl get --raw /metrics | grep apiserver_admission_webhook_admission_duration
+# 🟡 调整超时和 failurePolicy
+kubectl patch mutatingwebhookconfiguration ${NAME} -p '{"webhooks":[{"name":"${WH}","timeoutSeconds":5,"failurePolicy":"Ignore"}]}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: webhook-alerts
+  rules:
+  - alert: WebhookHighFailureRate
+    expr: rate(apiserver_admission_webhook_rejection_count[5m]) > 5
+    for: 5m
+    labels:
+      severity: critical
+  - alert: WebhookHighLatency
+    expr: histogram_quantile(0.99, rate(apiserver_admission_webhook_admission_duration_seconds_bucket[5m])) > 2
+    for: 5m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| Webhook 高可用 | 至少 2 副本 + 反亲和 | P0 |
+| failurePolicy 策略 | 非关键用 Ignore，关键用 Fail | P0 |
+| 超时配置 | timeoutSeconds 不超过 10s | P1 |
+| namespaceSelector | 排除 kube-system 避免影响核心组件 | P1 |
+
+## 面试要点
+
+1. **Q: Admission Webhook 的工作原理？**
+   A: apiserver 在持久化前调用 Webhook → Mutating(修改对象) → Validating(验证对象) → 任一拒绝则请求失败
+
+2. **Q: Webhook 导致集群不可用的紧急恢复？**
+   A: 删除 WebhookConfiguration → 或恢复 Webhook 服务 → 或修改 failurePolicy 为 Ignore → 验证 API 恢复
+
+3. **Q: Webhook 最佳实践？**
+   A: 高可用部署 + 合理超时 + 排除系统命名空间 + 监控延迟和失败率 + 幂等性设计
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

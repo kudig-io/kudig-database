@@ -75,6 +75,150 @@ cdk8s (Cloud Development Kit for Kubernetes) 是一个开源软件开发框架�
 
 在 CNCF 生态中，cdk8s 属于 **Config** 类别，为云原生应用提供关键基础设施能力。^[inferred]
 
+## 安装与配置
+
+```bash
+# 🟢 安装 cdk8s CLI
+npm install -g cdk8s-cli
+
+# 🟢 初始化 TypeScript 项目
+mkdir my-cdk8s-app && cd my-cdk8s-app
+cdk8s init typescript-app
+
+# 🟢 初始化 Python 项目
+cdk8s init python-app
+
+# 🟢 初始化 Go 项目
+cdk8s init go-app
+
+# 🟢 生成 YAML 清单
+cdk8s synth
+
+# 🟢 应用到集群
+cdk8s synth && kubectl apply -f dist/
+
+# 🟢 导入 CRD 生成类型
+cdk8s import crd.yaml -o src/generated
+```
+
+### Construct 示例 (TypeScript)
+
+```typescript
+import { Construct } from 'constructs';
+import { App, Chart, ChartProps } from 'cdk8s';
+import { KubeDeployment, KubeService } from 'cdk8s-plus-27';
+
+// 可复用的 Web 服务 Construct
+export class WebService extends Construct {
+  constructor(scope: Construct, id: string, props: {
+    image: string;
+    replicas: number;
+    port: number;
+  }) {
+    super(scope, id);
+
+    const deployment = new KubeDeployment(this, 'deployment', {
+      spec: {
+        replicas: props.replicas,
+        selector: { matchLabels: { app: id } },
+        template: {
+          metadata: { labels: { app: id } },
+          spec: {
+            containers: [{
+              name: 'main',
+              image: props.image,
+              ports: [{ containerPort: props.port }],
+              resources: {
+                requests: { cpu: '100m', memory: '128Mi' },
+                limits: { cpu: '500m', memory: '512Mi' },
+              },
+            }],
+          },
+        },
+      },
+    });
+
+    new KubeService(this, 'service', {
+      spec: {
+        selector: { app: id },
+        ports: [{ port: 80, targetPort: props.port }],
+      },
+    });
+  }
+}
+
+// 使用 Construct
+const app = new App();
+const chart = new Chart(app, 'my-app');
+new WebService(chart, 'frontend', {
+  image: 'myorg/frontend:v1',
+  replicas: 3,
+  port: 8080,
+});
+app.synth();
+```
+
+## 运维操作
+
+```bash
+# 🟢 生成并查看 YAML
+cdk8s synth
+cat dist/my-app.k8s.yaml
+
+# 🟢 运行测试
+npm test  # TypeScript
+pytest    # Python
+
+# 🟡 更新 K8s API 版本
+npm install cdk8s-plus-28  # 升级到 K8s 1.28 API
+
+# 🟡 导入新的 CRD
+cdk8s import https://raw.githubusercontent.com/org/crd.yaml -o src/generated
+
+# 🟢 应用到集群
+cdk8s synth && kubectl apply -f dist/ --dry-run=server
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方法 |
+|------|----------|----------|----------|
+| synth 失败 | 类型错误 | `npm run build` | 修复 TypeScript 类型错误 |
+| 生成的 YAML 无效 | API 版本不匹配 | `kubectl apply --dry-run` | 更新 cdk8s-plus 版本 |
+| CRD 导入失败 | CRD 格式错误 | `cdk8s import --debug` | 验证 CRD YAML 格式 |
+| 测试失败 | 快照变更 | `npm test -- -u` | 审查并更新快照 |
+
+## 生产案例
+
+### 案例1：平台工程 Construct 库
+- **场景**：平台团队需要为 20+ 业务团队提供标准化的 K8s 部署模板
+- **方案**：将 Deployment+Service+HPA+PDB 封装为 Construct；发布为内部 npm 包；业务团队只需传入镜像和副本数
+- **效果**：新服务接入时间从 2天 缩短到 30分钟，配置一致性 100%
+
+### 案例2：多环境配置管理
+- **场景**：同一应用需要部署到 dev/staging/prod，配置差异大
+- **方案**：cdk8s Construct + 环境参数化；通过环境变量控制副本数、资源限制、镜像 tag；单元测试验证各环境配置
+- **效果**：环境配置错误减少 90%，配置变更可追溯
+
+## 对比替代方案
+
+| 维度 | cdk8s | Helm | Kustomize | Pulumi |
+|------|-------|------|-----------|--------|
+| 语言 | TS/Py/Go/Java | Go模板 | YAML | TS/Py/Go |
+| 类型安全 | 强 | 无 | 无 | 强 |
+| 测试 | 单元+快照 | 无 | 无 | 单元 |
+| 复用性 | Construct | Chart | Overlay | Component |
+| 学习曲线 | 中 | 中 | 低 | 中 |
+
+## 检查清单
+
+- [ ] cdk8s CLI 已安装且版本正确
+- [ ] 项目已初始化且可 synth
+- [ ] 单元测试和快照测试已配置
+- [ ] CRD 导入已验证
+- [ ] CI/CD 中已集成 synth + test
+- [ ] Construct 库已发布供团队复用
+
 ## 参考链接
 
 - [[deployment]]

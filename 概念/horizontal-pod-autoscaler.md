@@ -92,6 +92,126 @@ behavior:
 
 更多排查细节可参考 [[故障诊断/资源排障/17-hpa-vpa-troubleshooting.md|hpa-vpa-troubleshooting]] 与技能页面 [[故障诊断/资源排障/17-hpa-vpa-troubleshooting.md|k8s-hpa-vpa]]。
 
+## 源码实现分析
+
+### HPA Controller 调谐循环
+
+```go
+// kubernetes/pkg/controller/podautoscaler/horizontal.go
+func (a *HorizontalController) reconcileKey(ctx context.Context, key string) error {
+    // 1. 获取 HPA 对象
+    hpa := a.hpaLister.Get(key)
+    
+    // 2. 获取当前指标值
+    currentReplicas := a.getReplicas(hpa)  // Deployment.Status.Replicas
+    metricsStatuses := a.computeReplicasForMetrics(hpa, currentReplicas)
+    // 内部调用: metricsClient.GetResourceMetric("cpu", namespace, selector)
+    // → Metrics Server API → kubelet Summary API
+    
+    // 3. 计算期望副本数（取所有指标的最大值）
+    desiredReplicas := max(allMetricReplicas)
+    // 公式: ceil(currentReplicas * currentMetric / targetMetric)
+    
+    // 4. 应用 behavior 约束（稳定窗口 + 速率限制）
+    desiredReplicas = a.normalizeDesiredReplicas(hpa, currentReplicas, desiredReplicas)
+    
+    // 5. 更新 Deployment.Spec.Replicas
+    a.updateReplicas(hpa, desiredReplicas)
+}
+```
+
+### 指标获取链路
+
+```
+kubelet (cAdvisor) → Summary API (/stats/summary)
+    │
+    ▼
+Metrics Server (聚合所有节点) → metrics.k8s.io API
+    │
+    ▼
+HPA Controller (每 15s 查询一次)
+    │
+    ▼
+计算 desiredReplicas → 更新 Deployment.Spec.Replicas
+```
+
+## 使用场景
+
+### 场景一：基于 CPU 的标准 HPA
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # 缩容等待 5 分钟
+      policies:
+      - type: Percent
+        value: 10          # 每次最多缩 10%
+        periodSeconds: 60
+```
+
+### 场景二：基于自定义指标（Prometheus Adapter）
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: worker-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: queue-worker
+  minReplicas: 2
+  maxReplicas: 50
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: rabbitmq_queue_messages_ready  # Prometheus 指标名
+      target:
+        type: AverageValue
+        averageValue: "10"   # 每 Pod 平均队列深度 ≤ 10
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| HPA 可以没有 requests | 必须设置 CPU/内存 requests，否则无法计算利用率 |
+| HPA 和 VPA 可同时用于同一指标 | 同一指标不能同时用 HPA+VPA，会冲突（可用不同指标） |
+| 缩容是立即执行的 | 默认 300s 稳定窗口，防止流量波动导致频繁缩容 |
+| HPA 能缩到 0 | HPA minReplicas 最小为 1，缩到 0 需 KEDA |
+| 多指标取平均值 | 多指标取计算结果的“最大值”，确保所有指标都满足 |
+| HPA 直接创建/删除 Pod | HPA 只修改 replicas 字段，由 Deployment/RS 控制器管理 Pod |
+
+## 面试要点
+
+1. **HPA 的扩缩容公式？** — `desiredReplicas = ceil[currentReplicas × (currentMetric / targetMetric)]`。多指标取最大值。若指标不可用，HPA 保持当前副本不变（安全回退）。
+
+2. **HPA 与 Cluster Autoscaler 的关系？** — HPA 调整 Pod 副本数（水平扩展），CA 调整节点数（基础设施层）。HPA 扩容后若节点资源不足，Pod Pending 触发 CA 添加节点。两者协同工作但独立运行。
+
+3. **如何避免 HPA 抱动（flapping）？** — 配置 behavior.scaleDown.stabilizationWindowSeconds（默认300s）；设置合理的扩容阈值（不要贴近实际负载）；使用 Percent 策略限制每次缩容幅度；避免指标源抨动（Prometheus 平滑窗口）。
+
+4. **KEDA 与 HPA 的区别？** — HPA 最小副本为 1，KEDA 支持缩到 0（事件驱动）；KEDA 提供 60+ 外部触发器（Kafka/SQS/Cron）；KEDA 本质是生成 HPA 对象 + 管理 ScaledObject CRD。
+
 ## 相关概念
 
 - [[autoscaling-strategies]] — Kubernetes 自动伸缩策略总览

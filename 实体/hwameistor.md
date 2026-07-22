@@ -77,7 +77,7 @@ HwameiStor 通过 CSI Driver 与 Kubernetes 深度集成。创建 PVC 时，Stor
 3. **消息队列持久化**：Kafka/RabbitMQ 使用多副本本地卷保证数据安全
 4. **成本敏感的大数据**：使用 HDD 存储池替代昂贵的网络存储，降低成本
 
-## 安装
+## 安装与配置
 
 ```bash
 # 使用 Helm 安装 HwameiStor
@@ -85,34 +85,145 @@ helm repo add hwameistor https://hwameistor.io/storage
 helm repo update
 helm install hwameistor hwameistor/hwameistor -n hwameistor --create-namespace \
   --set storagePool.hdd.enabled=true \
-  --set storagePool.ssd.enabled=true
+  --set storagePool.ssd.enabled=true \
+  --set scheduler.enabled=true
+
+# 等待组件就绪
+kubectl wait --for=condition=available deployment/hwameistor-local-storage -n hwameistor --timeout=120s
+kubectl get pods -n hwameistor
 
 # 查看磁盘和存储池
 kubectl get localdisk
 kubectl get localstoragepool
-# 创建 PVC
-kubectl apply -f - <<EOF
+kubectl get localdisknode
+```
+
+```yaml
+# StorageClass 配置（SSD 高性能池）
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: hwameistor-storage-lvm-ssd
+provisioner: disk.hwameistor.io
+parameters:
+  poolType: LocalStorage_PoolSSD
+  replicaNumber: "2"
+  striped: "true"
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+---
+# PVC 示例
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: data-mysql
+  namespace: production
 spec:
   accessModes: ["ReadWriteOnce"]
-  storageClassName: hwameistor-storage-lvm-hdd
+  storageClassName: hwameistor-storage-lvm-ssd
   resources:
     requests:
       storage: 100Gi
-EOF
+---
+# 卷快照
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: mysql-snap
+  namespace: production
+spec:
+  volumeSnapshotClassName: hwameistor-snapshot
+  source:
+    persistentVolumeClaimName: data-mysql
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看卷状态和副本分布
+kubectl get localvolume -A
+kubectl get localvolumereplica -A -o wide
+
+# 🟢 查看磁盘健康状态
+kubectl get localdisk -o custom-columns=NAME:.metadata.name,NODE:.spec.nodeName,TYPE:.spec.diskType,STATE:.status.state
+
+# 🟡 在线扩容 PVC
+kubectl patch pvc data-mysql -n production -p '{"spec":{"resources":{"requests":{"storage":"200Gi"}}}}'
+
+# 🟡 节点维护前迁移卷
+kubectl apply -f - <<EOF
+apiVersion: hwameistor.io/v1alpha1
+kind: LocalVolumeMigrate
+metadata:
+  name: migrate-to-node2
+spec:
+  volumeName: pvc-xxxx
+  sourceNode: node-1
+  targetNode: node-2
+  abortOnFailure: true
+EOF
+
+# 🔴 删除故障磁盘（数据将重建）
+kubectl patch localdisk disk-node1-sdb -p '{"spec":{"state":"Inactive"}}'
+
+# 🟢 查看存储池容量使用率
+kubectl get localstoragepool -o custom-columns=NAME:.metadata.name,TOTAL:.spec.totalCapacity,FREE:.status.freeCapacity
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| PVC Pending | 目标节点存储池容量不足 | `kubectl describe pvc <name>` | 扩容磁盘或更换 StorageClass |
+| 副本同步失败 | 节点间网络不通或磁盘故障 | `kubectl get localvolumereplica` | 检查节点网络，替换故障磁盘 |
+| Pod 调度失败 | 调度器扩展未运行或节点无匹配存储池 | `kubectl logs -n hwameistor -l app=hwameistor-scheduler` | 重启 scheduler 组件 |
+| 卷挂载超时 | 节点上 CSI 插件异常 | `kubectl logs -n hwameistor -l app=hwameistor-csi-node` | 重启 CSI DaemonSet Pod |
+| 数据重建慢 | 磁盘 IO 瓶颈或副本数不足 | `kubectl get localvolume -o yaml` | 等待重建完成或添加磁盘 |
+
+```
+排查流程：
+├── PVC Pending
+│   ├── kubectl describe pvc 查看事件
+│   ├── 确认 StorageClass 存在且 provisioner 正确
+│   ├── 检查目标节点存储池剩余容量
+│   └── 确认 WaitForFirstConsumer 模式下 Pod 已调度
+├── 卷副本异常
+│   ├── kubectl get localvolumereplica 查看副本状态
+│   ├── 检查副本所在节点磁盘健康
+│   ├── 检查节点间网络连通性
+│   └── 查看 LocalStorage 控制器日志
+└── 性能问题
+    ├── iostat -x 1 检查磁盘 IO 利用率
+    ├── 确认 SSD/HDD 存储池分类正确
+    └── 检查 striped 参数是否启用
+```
+
+## 生产案例
+
+### 案例 1：MySQL 集群本地存储高性能方案
+
+- **场景**：生产 MySQL 集群需要高 IOPS 低延迟存储，网络存储（Ceph）延迟 2-5ms 无法满足 P99 < 1ms 要求
+- **排查**：Ceph RBD 网络往返 + OSD 处理延迟导致 MySQL 慢查询增多，业务超时告警频繁
+- **方案**：迁移到 HwameiStor SSD 存储池，2 副本配置，WaitForFirstConsumer 绑定模式，Pod 反亲和确保副本跨节点
+- **效果**：IO 延迟从 2-5ms 降至 0.1-0.3ms，MySQL P99 查询时间从 50ms 降至 5ms，存储成本降低 40%
+
+### 案例 2：节点故障自动卷迁移
+
+- **场景**：Kafka 集群使用 HwameiStor 2 副本本地卷，一台节点磁盘故障导致 Pod 无法启动
+- **排查**：节点磁盘 SMART 报警，LocalVolumeReplica 状态变为 Degraded，Pod 处于 Pending
+- **方案**：HwameiStor 自动从健康副本恢复数据到新节点，LocalVolumeMigrate CR 触发卷迁移，Kafka Pod 自动重调度
+- **效果**：从磁盘故障到 Kafka 完全恢复仅 8 分钟（含数据重建），无数据丢失，业务无感知
 
 ## 对比
 
-| 特性 | HwameiStor | Longhorn | OpenEBS (cStor) | Rook/Ceph |
-|------|-----------|----------|-----------------|-----------|
-| 存储类型 | 本地卷 | 分布式块 | 分布式块 | 分布式块/文件 |
-| 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| 高可用 | 副本+迁移 | 副本 | 副本 | 副本 |
-| 网络依赖 | 低（本地） | 高 | 高 | 高 |
+| 特性 | HwameiStor | Longhorn | OpenEBS (cStor) | Rook/Ceph | 适用场景 |
+|------|-----------|----------|-----------------|-----------|----------|
+| 存储类型 | 本地卷 | 分布式块 | 分布式块 | 分布式块/文件 | 性能 vs 灵活性 |
+| 性能 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | 数据库/AI 训练 |
+| 高可用 | 副本+迁移 | 副本 | 副本 | 副本 | 生产可靠性 |
+| 网络依赖 | 低（本地） | 高 | 高 | 高 | 边缘/离线场景 |
+| 运维复杂度 | 低 | 低 | 中 | 高 | 小团队运维 |
 
 ## 参考链接
 

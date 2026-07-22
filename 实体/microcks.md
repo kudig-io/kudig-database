@@ -79,10 +79,10 @@ Microcks 通过 **Microcks Operator**（Helm Chart）部署到 Kubernetes。Oper
 3. **异步 API Mock**：模拟 Kafka 消息生产者，测试消费者逻辑
 4. **API 文档 + Mock 一体化**：API 规范同时作为文档和 Mock 来源
 
-## 安装
+## 安装与配置
 
 ```bash
-# Helm 安装 Microcks Operator
+# Helm 安装 Microcks
 helm repo add microcks https://microcks.io/helm
 helm repo update
 helm install microcks microcks/microcks -n microcks --create-namespace \
@@ -92,20 +92,150 @@ helm install microcks microcks/microcks -n microcks --create-namespace \
   --set features.async.kafka.enabled=true \
   --set features.async.kafka.url=kafka.kafka.svc:9092
 
+# 等待就绪
+kubectl wait --for=condition=available deployment/microcks -n microcks --timeout=180s
+
 # 访问 Microcks UI
 kubectl port-forward svc/microcks 8080:8080 -n microcks
 # 打开 http://localhost:8080
+```
 
+```yaml
+# OpenAPI 规范示例（自动生成 Mock）
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+paths:
+  /users/{id}:
+    get:
+      operationId: getUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                default:
+                  value:
+                    id: "123"
+                    name: "Alice"
+                    email: "alice@example.com"
+  /users:
+    post:
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+```
+
+```bash
 # 通过 REST API 导入 OpenAPI 规范
 curl -X POST http://microcks.microcks.svc/api/artifact/upload \
   -H "Authorization: Bearer <token>" \
-  -F "name=my-api" \
+  -F "name=user-service" \
   -F "version=1.0.0" \
   -F "specification=@openapi.yaml"
 
 # 调用自动生成的 Mock 端点
-curl http://microcks.microcks.svc/rest/my-api/1.0.0/users/123
+curl http://microcks.microcks.svc/rest/user-service/1.0.0/users/123
+# 返回: {"id": "123", "name": "Alice", "email": "alice@example.com"}
+
+# 运行契约测试
+curl -X POST http://microcks.microcks.svc/api/tests \
+  -H "Content-Type: application/json" \
+  -d '{"serviceId": "user-service:1.0.0", "testEndpoint": "http://actual-service:8080"}'
 ```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看 Microcks 状态
+kubectl get pods -n microcks
+kubectl logs deploy/microcks -n microcks --tail=50
+
+# 🟢 低风险：查看已导入的 API
+kubectl port-forward svc/microcks 8080:8080 -n microcks &
+curl http://localhost:8080/api/services
+
+# 🟡 中风险：更新 API 规范（重新上传）
+curl -X POST http://localhost:8080/api/artifact/upload \
+  -H "Authorization: Bearer <token>" \
+  -F "specification=@updated-openapi.yaml"
+
+# 🟡 中风险：触发契约测试
+curl -X POST http://localhost:8080/api/tests \
+  -d '{"serviceId": "user-service:1.0.0", "testEndpoint": "http://svc:8080"}'
+
+# 🔴 高风险：删除 API 服务
+curl -X DELETE http://localhost:8080/api/services/<service-id>
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Mock 返回 404 | API 规范未导入 | `curl /api/services` | 重新上传 API 规范 |
+| Mock 响应不匹配 | 示例数据缺失 | 检查 OpenAPI examples 字段 | 添加完整的请求/响应示例 |
+| 契约测试失败 | 服务实现不符合规范 | 查看测试报告详情 | 修复服务实现或更新规范 |
+| Kafka Mock 不工作 | Kafka 连接失败 | `kubectl logs deploy/microcks` | 检查 Kafka URL 配置 |
+| UI 无法访问 | Keycloak 未就绪 | `kubectl get pods -n microcks` | 等待 Keycloak Pod Ready |
+
+```
+排查流程：
+├── Mock 不工作？
+│   ├── 确认 API 规范已导入
+│   ├── 检查规范中的 examples 是否完整
+│   └── 验证 Mock URL 路径正确
+├── 契约测试失败？
+│   ├── 查看测试报告中的失败用例
+│   ├── 对比实际响应与规范期望
+│   └── 修复服务实现或更新规范
+└── 异步 Mock 失败？
+    ├── 检查 Kafka 连接配置
+    ├── 确认 AsyncAPI 规范格式正确
+    └── 查看 Microcks 日志中的错误
+```
+
+## 生产案例
+
+### 案例 1：前后端并行开发加速
+
+- **场景**：前端团队等待后端 API 开发完成才能开始联调，项目延期 2 周
+- **排查**：后端 API 开发需要 3 周，前端只能等待
+- **方案**：先定义 OpenAPI 规范，导入 Microcks 自动生成 Mock，前端立即开始开发
+- **效果**：前后端完全并行，项目提前 1.5 周交付，联调时间从 1 周缩短至 2 天
+
+### 案例 2：CI/CD 契约测试门禁
+
+- **场景**：微服务更新后频繁破坏 API 契约，导致下游服务故障
+- **排查**：缺乏自动化契约验证，问题在生产环境才被发现
+- **方案**：在 CI 中集成 Microcks 契约测试，每次 PR 自动验证服务是否符合 OpenAPI 规范
+- **效果**：契约破坏在 CI 阶段 100% 拦截，生产 API 故障减少 95%
 
 ## 对比
 

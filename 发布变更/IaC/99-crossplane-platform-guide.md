@@ -288,6 +288,75 @@ spec:
 - Azure Resource Manager (ARM) Enterprise 深度实践
 - Crossplane Enterprise Infrastructure Orchestration 深度实践
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|---------|
+| Composite Resource 一直 Pending | Composition 未匹配或 XR spec 字段错误 | `kubectl describe xr <name>` | 检查 Composition claimNames 与 XR apiVersion 匹配 |
+| Managed Resource 创建失败 | Provider 凭证过期或权限不足 | `kubectl get events -n crossplane-system` | 更新 ProviderConfig Secret，检查云 API 权限 |
+| Provider Pod CrashLoopBackOff | 资源不足或版本不兼容 | `kubectl logs -n crossplane-system -l pkg.crossplane.io/provider` | 增加 memory limit，降级 Provider 版本 |
+| Composition 更新后 XR 未同步 | Revision 未激活或 watch 断开 | `kubectl get compositionrevision` | 删除旧 Revision，重启 crossplane Pod |
+| 资源漂移未自动修复 | drift-detection 间隔过长或 disabled | `kubectl get providerconfig -o yaml` | 设置 `spec.pollInterval: 10m` |
+| 删除 XR 后云资源残留 | finalizer 卡住或云 API 超时 | `kubectl get xr -o jsonpath='{.items[*].metadata.finalizers}'` | 手动移除 finalizer 后在云端清理 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| Provider 版本 | 锁定版本 + 定期升级 | 避免 `latest` tag，使用 `spec.package: xpkg.upbound.io/...:v0.42.0` |
+| Composition 设计 | 一个 Composition 对应一个平台能力 | 避免过度抽象，保持 1:1 映射 |
+| 资源配额 | 为 crossplane-system 设置 PriorityClass | 确保控制面资源不被驱逐 |
+| 多集群 | Hub-Spoke 模式，Hub 运行 Crossplane | Spoke 集群通过 GitOps 同步 XR |
+| 安全 | ProviderConfig 使用 IRSA/Workload Identity | 避免静态 AK/SK |
+| 可观测性 | 启用 crossplane_metrics_port | 接入 Prometheus 监控 reconcile 延迟 |
+| 灾难恢复 | 定期导出 XR + Composition 到 Git | etcd 备份 + Git 双保险 |
+| 升级策略 | 先升级 Provider CRD，再升级 Provider Pod | 避免 CRD 不兼容导致 reconcile 失败 |
+
+## 关键指标与告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: crossplane-alerts
+  namespace: crossplane-system
+spec:
+  groups:
+  - name: crossplane.rules
+    rules:
+    - alert: CrossplaneReconcileErrors
+      expr: rate(crossplane_reconcile_errors_total[5m]) > 0.1
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Crossplane reconcile 错误率过高"
+    - alert: CrossplaneManagedResourceNotReady
+      expr: crossplane_managed_resource_ready == 0
+      for: 30m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Managed Resource {{ $labels.name }} 30min 未就绪"
+    - alert: CrossplaneProviderHealthFalse
+      expr: crossplane_provider_healthy == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Provider {{ $labels.name }} 不健康"
+```
+
+## 相关工具
+
+| 工具 | 用途 | 地址 |
+|------|------|------|
+| crossplane CLI | 本地 XR 渲染与验证 | github.com/crossplane/crossplane-cli |
+| upjet | 从 Terraform Provider 生成 Crossplane Provider | github.com/crossplane/upjet |
+| provider-family-aws | AWS 全量 Provider 家族包 | marketplace.upbound.io |
+| crossplane-contrib/provider-kubernetes | 管理集群内 K8s 资源 | github.com/crossplane-contrib |
+| function-patch-and-transform | Composition 函数式转换 | github.com/crossplane-contrib |
+
 ## See Also
 
 - 04-azure-resource-manager-enterprise

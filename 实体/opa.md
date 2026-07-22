@@ -62,7 +62,139 @@ title: Open Policy Agent (OPA)
 
 ## 架构定位
 
-在 CNCF 生态中，opa 属于 **Security** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+在 CNCF 生态中，OPA 属于 **Security** 类别，为云原生应用提供统一的策略引擎能力。
+
+## 安装与配置
+
+```bash
+# 安装 Gatekeeper（OPA 的 K8s 实现）
+kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml
+
+# 或使用 Helm
+helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
+helm install gatekeeper gatekeeper/gatekeeper -n gatekeeper-system --create-namespace
+
+# 创建 ConstraintTemplate
+kubectl apply -f - <<EOF
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredlabels
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredLabels
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            labels:
+              type: array
+              items:
+                type: string
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |
+      package k8srequiredlabels
+      violation[{"msg": msg}] {
+        provided := {label | input.review.object.metadata.labels[label]}
+        required := {label | label := input.parameters.labels[_]}
+        missing := required - provided
+        count(missing) > 0
+        msg := sprintf("Missing required labels: %v", [missing])
+      }
+EOF
+
+# 创建 Constraint
+kubectl apply -f - <<EOF
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: require-team-label
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Namespace"]
+  parameters:
+    labels: ["team", "environment"]
+EOF
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看策略状态
+kubectl get constrainttemplates
+kubectl get constraints
+kubectl get k8srequiredlabels -o yaml
+
+# 🟢 查看违规资源
+kubectl get k8srequiredlabels require-team-label -o jsonpath='{.status.violations}'
+
+# 🟢 测试 Rego 策略
+opa test policy_test.rego policy.rego
+opa eval -d policy.rego -i input.json 'data.k8srequiredlabels'
+
+# 🟡 切换为强制执行模式
+kubectl patch k8srequiredlabels require-team-label --type=merge -p '{"spec":{"enforcementAction":"deny"}}'
+
+# 🟡 排除特定命名空间
+kubectl patch k8srequiredlabels require-team-label --type=merge -p '{"spec":{"match":{"excludedNamespaces":["kube-system","gatekeeper-system"]}}}'
+
+# 🔴 删除策略（停止执行）
+kubectl delete constraint k8srequiredlabels require-team-label
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 策略未生效 | ConstraintTemplate 编译错误 | `kubectl get constrainttemplate -o yaml` | 检查 Rego 语法 |
+| 合法请求被拒绝 | 策略过于严格 | `kubectl logs -n gatekeeper-system -l control-plane=controller-manager` | 调整为 dryrun 模式 |
+| API Server 延迟增加 | Webhook 响应慢 | `kubectl get validatingwebhookconfigurations` | 增加超时/减少策略数 |
+| 升级后策略丢失 | CRD 不兼容 | `kubectl get crd \| grep gatekeeper` | 重新应用 CRD |
+| Audit 未运行 | Pod 资源不足 | `kubectl top pods -n gatekeeper-system` | 增加资源配额 |
+
+```
+排查流程:
+├── 策略不生效
+│   ├── kubectl get constrainttemplates → 编译状态
+│   ├── kubectl get constraints → 执行状态
+│   ├── opa eval → 本地测试 Rego
+│   └── 检查 enforcementAction → deny/dryrun
+├── 误拦截问题
+│   ├── kubectl logs gatekeeper → 拒绝日志
+│   ├── 检查 match 规则 → 作用范围
+│   └── 切换为 dryrun → 观察违规
+└── 性能问题
+    ├── webhook 超时配置 → timeoutSeconds
+    ├── 策略数量 → 合并相似策略
+    └── 节点资源 → 扩容 Gatekeeper Pod
+```
+
+## 生产案例
+
+### 案例1: 多租户标签强制策略
+
+- **场景**: 200+ 团队共享集群，资源缺少 team 标签导致成本无法分摊
+- **排查**: 60% 的 Namespace 缺少必要标签，成本报告不完整
+- **方案**:
+  1. 创建 K8sRequiredLabels ConstraintTemplate
+  2. 先以 dryrun 模式运行 2 周，收集违规报告
+  3. 通知团队整改后切换为 deny 模式
+- **效果**: 标签合规率从 40% 提升至 100%，成本分摊完整
+
+### 案例2: 禁止特权容器策略
+
+- **场景**: 安全审计发现多个生产 Pod 以 privileged 模式运行
+- **排查**: 开发团队为调试方便设置了 privileged: true
+- **方案**:
+  1. 创建 K8sPSPPrivilegedContainer Constraint
+  2. 生产命名空间强制执行，开发命名空间仅告警
+  3. 提供替代方案文档（securityContext capabilities）
+- **效果**: 生产环境特权容器归零，安全审计通过
 
 ## 参考链接
 

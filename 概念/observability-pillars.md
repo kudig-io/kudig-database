@@ -97,6 +97,111 @@ Request-level trace across microservices.
 - **SLA** (Service Level Agreement): Contract with consequences for missing SLO
 - **Error Budget**: 100% - SLO; the room for failure before breaching SLA
 
+## 源码实现分析
+
+### Prometheus 指标采集链路
+
+```
+┌─────────────────────────────────────────────────┐
+│  kube-apiserver /metrics (HTTP)              │
+│  kubelet /metrics (cAdvisor)                 │
+│  etcd /metrics                               │
+│  node-exporter :9100/metrics                 │
+│  app /metrics (custom)                       │
+└─────────────────┬───────────────────────────────┘
+                  │ HTTP scrape (every 15-30s)
+                  ▼
+┌─────────────────────────────────────────────────┐
+│  Prometheus Server                             │
+│  ├── Service Discovery (K8s SD)              │
+│  ├── TSDB (time-series storage)              │
+│  ├── PromQL (query engine)                   │
+│  └── Alertmanager (alert routing)            │
+└─────────────────┬───────────────────────────────┘
+                  │ PromQL / Grafana DataSource
+                  ▼
+┌─────────────────────────────────────────────────┐
+│  Grafana (可视化) + Alertmanager (告警)      │
+└─────────────────────────────────────────────────┘
+```
+
+### OpenTelemetry 统一采集模型
+
+```go
+// OTel SDK 统一 Traces + Metrics + Logs
+// 应用代码:
+tracer := otel.Tracer("my-service")
+ctx, span := tracer.Start(ctx, "process-order")
+defer span.End()
+
+// OTel Collector 配置:
+// receivers:  [otlp, prometheus, jaeger]
+// processors: [batch, memory_limiter]
+// exporters:  [prometheus, jaeger, loki]
+// 统一收集 → 统一处理 → 多后端导出
+```
+
+## 使用场景
+
+### 场景一：K8s 集群关键指标监控
+
+```yaml
+# PrometheusRule: 控制平面告警
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: control-plane-alerts
+spec:
+  groups:
+  - name: apiserver
+    rules:
+    - alert: APIServerHighLatency
+      expr: histogram_quantile(0.99, rate(apiserver_request_duration_seconds_bucket{verb!="WATCH"}[5m])) > 1
+      for: 5m
+      labels:
+        severity: warning
+    - alert: EtcdHighCommitLatency
+      expr: histogram_quantile(0.99, rate(etcd_disk_backend_commit_duration_seconds_bucket[5m])) > 0.25
+      for: 5m
+      labels:
+        severity: critical
+```
+
+### 场景二：分布式追踪查询
+
+```bash
+# 🟢 低风险 - 通过 Jaeger UI 查询慢请求
+# 访问 http://jaeger.internal:16686
+# Service: order-service
+# Operation: POST /api/orders
+# Min Duration: 2s
+# Tags: http.status_code=500
+
+# 🟢 低风险 - 通过 OTel CLI 查询
+kubectl -n observability port-forward svc/jaeger-query 16686:16686
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 有监控就有可观测性 | 监控是预定义图表，可观测性是能探索未知问题（需三支柱结合） |
+| 日志越多越好 | 结构化日志 + 合理级别，过多日志增加成本和噪声 |
+| Metrics 可以替代 Tracing | Metrics 看聚合趋势，Tracing 看单请求链路，互补不可替代 |
+| SLO 就是 100% 可用 | SLO 应平衡可靠性与迭代速度，Error Budget 允许合理失败 |
+| Prometheus 可以存储日志 | Prometheus 是时序指标数据库，日志应用 Loki/ES |
+| 告警越多越安全 | 告警疲劳导致忽略真正问题，应只告警可操作的事件 |
+
+## 面试要点
+
+1. **可观测性三支柱如何协同？** — Metrics 发现问题（“什么异常”）→ Tracing 定位问题（“哪个环节”）→ Logs 确认根因（“具体错误”）。三者通过 trace_id 关联，实现从告警到根因的完整链路。
+
+2. **Prometheus 在 K8s 中如何工作？** — Service Discovery 自动发现 Pod（通过 annotations）；每 15-30s HTTP 拉取 /metrics；TSDB 存储时序数据；PromQL 查询；Alertmanager 路由告警。Operator 模式管理（ServiceMonitor/PrometheusRule CRD）。
+
+3. **SLO 如何制定和运营？** — SLI 选择（可用性/延迟/吐量）→ SLO 目标（99.9%）→ Error Budget（0.1%）→ 告警（多窗口多燃烧率）→ 复盘（Error Budget 耗尽时冻结发布）。工具：Sloth、OpenSLO。
+
+4. **OpenTelemetry 的价值？** — 统一 Traces/Metrics/Logs 的采集标准，避免厂商锁定；SDK 自动埋点（HTTP/gRPC/DB）；Collector 统一收集→处理→导出多后端；与 Prometheus/Jaeger/Loki 无缝集成。
+
 ## Related
 - [[概念/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]] — 综合
 - [[概念/控制器模式 × 可观测性.md|控制器模式 × 可观测性]] — 综合

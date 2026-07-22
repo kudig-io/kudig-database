@@ -83,7 +83,7 @@ OAuth2 Proxy 作为反向代理部署在后端应用前面。当未认证用户�
 3. **多团队访问控制**：基于 GitHub 组织/AD 组控制不同团队的访问权限
 4. **零信任网络**：作为零信任架构中的身份验证网关
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 OAuth2 Proxy
@@ -92,24 +92,123 @@ helm install oauth2-proxy oauth2-proxy/oauth2-proxy \
   -n oauth2-proxy --create-namespace \
   --set config.clientID="your-client-id" \
   --set config.clientSecret="your-client-secret" \
-  --set config.cookieSecret="$(openssl rand -base64 32)" \
-  --set extraArgs.provider=github \
-  --set extraArgs.email-domains="*"
-
-# Ingress 集成（Nginx Ingress）
-kubectl annotate ingress my-dashboard \
-  nginx.ingress.kubernetes.io/auth-url="https://oauth2-proxy.oauth2-proxy.svc/oauth2/auth" \
-  nginx.ingress.kubernetes.io/auth-signin="https://auth.example.com/oauth2/start?rd=https://$host$request_uri"
+  --set config.cookieSecret="$(openssl rand -base64 32 | head -c 32 | base64)" \
+  --set extraArgs.provider=oidc \
+  --set extraArgs.oidc-issuer-url="https://keycloak.example.com/realms/myrealm" \
+  --set extraArgs.email-domains="*" \
+  --set extraArgs.cookie-secure=true \
+  --set extraArgs.cookie-httponly=true
+# 验证部署
+kubectl get pods -n oauth2-proxy
 ```
+
+```yaml
+# Ingress 集成（Nginx Ingress auth-url 模式）
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-protected
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.oauth2-proxy.svc/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.example.com/oauth2/start?rd=https://$host$request_uri"
+    nginx.ingress.kubernetes.io/auth-response-headers: "X-Auth-Request-Email,X-Auth-Request-User"
+spec:
+  rules:
+  - host: grafana.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              number: 3000
+```
+
+```yaml
+# Redis 会话存储配置（多副本部署）
+extraArgs:
+  session-store-type: redis
+  redis-connection-url: redis://redis.oauth2-proxy.svc:6379
+  cookie-refresh: 1h
+  cookie-expire: 24h
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 OAuth2 Proxy 状态
+kubectl get pods -n oauth2-proxy
+kubectl logs -n oauth2-proxy -l app.kubernetes.io/name=oauth2-proxy --tail=50
+
+# 🟢 检查认证指标
+curl -s http://oauth2-proxy:44180/metrics | grep oauth2_proxy
+
+# 🟢 测试认证端点
+curl -I https://auth.example.com/oauth2/auth
+
+# 🟡 重启 OAuth2 Proxy
+kubectl rollout restart deployment/oauth2-proxy -n oauth2-proxy
+
+# 🟡 更新配置
+helm upgrade oauth2-proxy oauth2-proxy/oauth2-proxy -n oauth2-proxy --set ...
+
+# 🔴 卸载 OAuth2 Proxy（所有受保护应用失去认证）
+helm uninstall oauth2-proxy -n oauth2-proxy
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 无限重定向循环 | Cookie 域名不匹配/secure 设置错误 | 检查浏览器 Cookie | 调整 cookie-domain 和 cookie-secure |
+| 403 Forbidden | 邮箱域/组不匹配 | `kubectl logs -n oauth2-proxy` | 检查 email-domains 和 allowed-group |
+| 会话过期频繁 | Cookie 有效期过短 | 检查 cookie-expire 配置 | 增加 cookie-expire 和 cookie-refresh |
+| 多副本会话丢失 | 未使用 Redis 存储 | 检查 session-store-type | 配置 Redis 会话存储 |
+| IdP 回调失败 | redirect-url 配置错误 | 检查 IdP 应用配置 | 核对 redirect-url 与 IdP 回调地址 |
+
+```
+排查流程：
+├─ 认证失败
+│  ├─ 检查 OAuth2 Proxy 日志
+│  ├─ 验证 IdP 配置（clientID/secret）
+│  └─ 检查 redirect-url 是否正确
+├─ 会话问题
+│  ├─ 检查 Cookie 设置（domain/secure/httponly）
+│  ├─ 多副本检查 Redis 连接
+│  └─ 检查 cookie-expire 配置
+└─ 访问控制问题
+   ├─ 检查 email-domains 配置
+   ├─ 检查 allowed-group 配置
+   └─ 验证 IdP 返回的 groups claim
+```
+
+## 生产案例
+
+### 案例 1：内部工具统一 SSO
+
+- **场景**: 20+ 内部工具（Grafana/Kibana/Jenkins/ArgoCD）需要统一认证
+- **排查**: 各工具独立认证管理复杂，无法统一离职回收
+- **方案**: OAuth2 Proxy + Keycloak OIDC，所有工具通过 Ingress auth-url 保护
+- **效果**: 统一 SSO 登录，离职一键回收所有工具访问权限
+
+### 案例 2：基于组的细粒度访问控制
+
+- **场景**: 不同团队只能访问各自的 Dashboard，生产环境仅 SRE 可访问
+- **排查**: 传统方案需要每个工具单独配置权限
+- **方案**: OAuth2 Proxy allowed-group + Keycloak 组管理，Ingress 级别控制
+- **效果**: 统一组权限管理，新工具接入仅需添加 Ingress 注解
 
 ## 对比
 
-| 特性 | OAuth2 Proxy | Authelia | vouch-proxy | Keycloak Gatekeeper |
-|------|-------------|----------|-------------|-------------------|
-| 多 IdP | ✅ | ✅ | ✅ | ⚠️ Keycloak only |
-| Redis 会话 | ✅ | ✅ | ❌ | ⚠️ |
-| Helm Chart | ✅ | ✅ | ❌ | ⚠️ |
-| 社区活跃度 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| 维度 | OAuth2 Proxy | Authelia | vouch-proxy | Pomerium |
+|------|-------------|----------|-------------|----------|
+| 多 IdP | ✅ | ✅ | ✅ | ✅ |
+| Redis 会话 | ✅ | ✅ | ❌ | ✅ |
+| 零信任 | ❌ | ❌ | ❌ | ✅ |
+| 社区活跃度 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| 适用场景 | 通用 SSO | 家庭/小团队 | 轻量 | 企业零信任 |
 
 ## 参考链接
 

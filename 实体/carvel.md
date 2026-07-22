@@ -77,32 +77,147 @@ Carvel 的工具链形成完整的 Kubernetes 应用生命周期管理闭环：*
 3. **安全镜像锁定**：用 kbld 将所有 `latest` 标签解析为 digest，确保不可变部署
 4. **内嵌 GitOps**：kapp-controller 在集群内运行 GitOps，无需外部 CD 工具
 
-## 安装
+## 安装与配置
 
 ```bash
-# 安装所有 Carvel 工具（一键脚本）
+# 安装所有 Carvel 工具
 wget -O- https://carvel.dev/install.sh | bash
-
-# 或单独安装工具
+# 或单独安装
 brew tap carvel-dev/carvel
 brew install ytt kbld kapp imgpkg vendir kapp-controller
-
-# 示例工作流
-# 1. vendir 拉取依赖
-vendir sync
-
-# 2. ytt 渲染模板
-ytt -f config/ -v namespace=production > rendered.yaml
-
-# 3. kbld 构建并锁定镜像
-kbld -f rendered.yaml --images-annotation=false > locked.yaml
-
-# 4. kapp 部署
-kapp deploy -a myapp -f locked.yaml
 
 # 安装 kapp-controller 到集群
 kapp deploy -a kc -f https://github.com/carvel-dev/kapp-controller/releases/latest/download/release.yml
 ```
+
+```yaml
+# ytt 模板示例（config/deployment.yaml）
+#@ load("@ytt:data", "data")
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #@ data.values.app_name
+  namespace: #@ data.values.namespace
+spec:
+  replicas: #@ data.values.replicas
+  selector:
+    matchLabels:
+      app: #@ data.values.app_name
+  template:
+    metadata:
+      labels:
+        app: #@ data.values.app_name
+    spec:
+      containers:
+      - name: app
+        image: #@ data.values.image
+        resources:
+          requests:
+            cpu: #@ data.values.cpu
+            memory: #@ data.values.memory
+---
+# values.yaml
+#@data/values
+---
+app_name: my-service
+namespace: production
+replicas: 3
+image: my-registry.io/myorg/app:latest
+cpu: 100m
+memory: 128Mi
+```
+
+```yaml
+# kapp-controller App CRD（GitOps）
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: my-app
+  namespace: default
+spec:
+  serviceAccountName: kapp-controller-sa
+  fetch:
+  - git:
+      url: https://github.com/myorg/k8s-config
+      ref: origin/main
+      subPath: apps/my-app
+  template:
+  - ytt: {}
+  - kbld: {}
+  deploy:
+  - kapp:
+      inspect:
+        namespaces: [production]
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：ytt 渲染模板
+ytt -f config/ -v namespace=production -v replicas=3 > rendered.yaml
+
+# 🟢 低风险：kbld 锁定镜像 digest
+kbld -f rendered.yaml > locked.yaml
+
+# 🟡 中风险：kapp 部署应用
+kapp deploy -a myapp -f locked.yaml --yes
+
+# 🟢 低风险：查看应用状态
+kapp inspect -a myapp
+kapp ls
+
+# 🟡 中风险：kapp 回滚
+kapp deploy -a myapp --diff-changes -f previous.yaml
+
+# 🔴 高风险：删除应用
+kapp delete -a myapp
+
+# 🟢 低风险：imgpkg 打包/拉取 Bundle
+imgpkg push -b my-registry.io/bundles/myapp:v1.0 -f config/
+imgpkg pull -b my-registry.io/bundles/myapp:v1.0 -o /tmp/app
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| ytt 渲染失败 | Starlark 语法错误 | `ytt -f config/ --debug` | 检查模板语法和 data.values |
+| kapp 部署失败 | 资源冲突/权限不足 | `kapp deploy -a app -f f.yaml --diff-changes` | 检查 RBAC 和资源状态 |
+| kbld 构建失败 | 镜像仓库不可达 | `kbld -f rendered.yaml --debug` | 检查 Registry 认证和网络 |
+| App CRD 未调谐 | fetch 失败 | `kubectl describe app my-app` | 检查 Git URL 和 Secret |
+| Bundle 拉取失败 | OCI 认证过期 | `imgpkg pull -b <bundle> --debug` | 更新 Registry 凭据 |
+
+```
+排查流程：
+├── 模板渲染失败？
+│   ├── ytt -f config/ --debug → 查看详细错误
+│   ├── 检查 values.yaml 是否完整
+│   └── 确认 Starlark 语法正确
+├── 部署失败？
+│   ├── kapp deploy --diff-changes → 查看变更
+│   ├── kubectl get events → 检查集群事件
+│   └── 检查 RBAC 权限
+└── GitOps 未同步？
+    ├── kubectl describe app → 查看调谐状态
+    ├── 检查 fetch 配置（Git URL、分支、Secret）
+    └── 查看 kapp-controller 日志
+```
+
+## 生产案例
+
+### 案例 1：替代 Helm 的精细化配置管理
+
+- **场景**：Helm 模板的 Go template 语法复杂且难以测试，多环境配置管理混乱
+- **排查**：Helm 的 `_helpers.tpl` 和条件逻辑难以维护，values 文件膨胀
+- **方案**：迁移到 ytt，使用 Starlark 编写可测试的模板逻辑，通过 overlay 分离环境配置
+- **效果**：模板代码减少 40%，配置错误减少 90%，支持单元测试
+
+### 案例 2：可重定位应用分发
+
+- **场景**：软件厂商需要将应用分发给多个客户环境，每个环境 Registry 不同
+- **排查**：硬编码镜像地址导致每次分发需要修改配置
+- **方案**：使用 imgpkg 打包应用为 OCI Bundle（包含配置+镜像引用），客户通过 `imgpkg copy` 重定位到自己的 Registry
+- **效果**：分发时间从 2h 缩短至 10min，零配置修改
 
 ## 对比
 

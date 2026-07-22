@@ -80,26 +80,148 @@ Kuberhealthy 以 Helm Chart 部署在 Kubernetes 集群中。Controller 以 Depl
 3. **自定义业务检查**: 编写自定义检查镜像验证特定业务逻辑（如"数据库连接是否正常"）
 4. **多集群健康对比**: 在多个集群部署 Kuberhealthy，对比各集群的健康指标
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装 Kuberhealthy
 helm repo add kuberhealthy https://kuberhealthy.github.io/kuberhealthy/helm-repos
-helm install kuberhealthy kuberhealthy/kuberhealthy -n kuberhealthy --create-namespace
+helm install kuberhealthy kuberhealthy/kuberhealthy \
+  -n kuberhealthy --create-namespace \
+  --set prometheus.enabled=true
 
-# 部署 DNS 检查
+# 部署内置检查
 kubectl apply -f https://raw.githubusercontent.com/kuberhealthy/kuberhealthy/master/cmd/dns-resolution-check/dns-check.yaml
-
-# 部署 Deployment 检查
 kubectl apply -f https://raw.githubusercontent.com/kuberhealthy/kuberhealthy/master/cmd/deployment-check/deployment-check.yaml
+kubectl apply -f https://raw.githubusercontent.com/kuberhealthy/kuberhealthy/master/cmd/daemonset-check/daemonset-check.yaml
 
 # 查看检查状态
 kubectl get khstate -A
-
-# 查看检查指标
-kubectl port-forward svc/kuberhealthy -n kuberhealthy 8080:80
-curl http://localhost:8080/metrics | grep kuberhealthy
 ```
+
+```yaml
+# 自定义 khcheck CRD 示例
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: database-connectivity
+  namespace: kuberhealthy
+spec:
+  runInterval: 5m
+  timeout: 2m
+  podSpec:
+    containers:
+    - name: db-check
+      image: my-registry.io/checks/db-connectivity:v1
+      env:
+      - name: DB_HOST
+        value: postgres.production.svc.cluster.local
+      - name: DB_PORT
+        value: "5432"
+      - name: DB_NAME
+        valueFrom:
+          secretKeyRef:
+            name: db-check-credentials
+            key: dbname
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
+    restartPolicy: Never
+    serviceAccountName: kuberhealthy-check-sa
+---
+# DNS 检查示例
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: dns-resolution-internal
+  namespace: kuberhealthy
+spec:
+  runInterval: 2m
+  timeout: 1m
+  podSpec:
+    containers:
+    - name: dns-check
+      image: kuberhealthy/dns-resolution-check:v1.5.0
+      env:
+      - name: HOSTNAME
+        value: kubernetes.default.svc.cluster.local
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看所有检查状态
+kubectl get khcheck -A
+kubectl get khstate -A
+kubectl describe khstate dns-resolution-internal -n kuberhealthy
+
+# 🟢 低风险：查看检查指标
+kubectl port-forward svc/kuberhealthy -n kuberhealthy 8080:80 &
+curl -s http://localhost:8080/metrics | grep kuberhealthy_check
+
+# 🟡 中风险：手动触发检查
+kubectl annotate khcheck database-connectivity -n kuberhealthy \
+  comcast.github.io/check-run=$(date +%s) --overwrite
+
+# 🟡 中风险：暂停检查
+kubectl patch khcheck database-connectivity -n kuberhealthy \
+  --type merge -p '{"spec":{"paused":true}}'
+
+# 🔴 高风险：删除检查
+kubectl delete khcheck database-connectivity -n kuberhealthy
+
+# 🟢 低风险：查看检查 Pod 日志
+kubectl logs -l kuberhealthy-check-name=database-connectivity -n kuberhealthy
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 检查持续失败 | 目标服务不可用 | `kubectl describe khstate <name>` | 检查目标服务和网络连通性 |
+| Check Pod 未创建 | RBAC 权限不足 | `kubectl logs deploy/kuberhealthy -n kuberhealthy` | 检查 ServiceAccount 权限 |
+| 检查超时 | Pod 启动慢/资源不足 | `kubectl get pods -n kuberhealthy` | 增加 timeout 或资源请求 |
+| 指标未导出 | Prometheus 配置错误 | `curl svc/kuberhealthy:80/metrics` | 检查 ServiceMonitor/PodMonitor |
+| 误报（假阳性） | 检查逻辑不严谨 | `kubectl logs <check-pod>` | 调整检查参数或增加重试 |
+
+```
+排查流程：
+├── 检查失败？
+│   ├── kubectl get khstate → 查看状态和错误信息
+│   ├── kubectl logs <check-pod> → 查看检查日志
+│   └── 手动执行检查命令验证
+├── 检查未运行？
+│   ├── kubectl get khcheck → 确认检查存在且未暂停
+│   ├── kubectl logs deploy/kuberhealthy → 查看控制器日志
+│   └── 检查 RBAC 和命名空间权限
+└── 指标异常？
+    ├── curl metrics endpoint → 确认指标导出
+    ├── 检查 Prometheus scrape 配置
+    └── 对比 khstate 与指标一致性
+```
+
+## 生产案例
+
+### 案例 1：集群功能 SLA 监控
+
+- **场景**：平台团队需要向业务团队提供集群功能 SLA 报告（DNS、存储、部署能力）
+- **排查**：传统监控只能被动发现故障，无法证明"部署一个应用"是否成功
+- **方案**：部署 Kuberhealthy 检查（DNS + Deployment + DaemonSet + PVC），每 2 分钟执行一次，结果接入 Grafana SLA 仪表盘
+- **效果**：SLA 报告自动化，提前发现 3 次 DNS 故障（影响 < 5min）
+
+### 案例 2：自定义业务健康检查
+
+- **场景**：金融交易系统需要验证"数据库连接 + 消息队列 + 缓存"全链路可用
+- **排查**：单一组件监控无法反映端到端业务可用性
+- **方案**：编写自定义检查镜像，模拟完整交易流程（连接 DB → 发送 MQ → 读取缓存），作为 khcheck 部署
+- **效果**：业务可用性从 99.5% 提升至 99.95%，故障发现时间从 10min 缩短至 2min
 
 ## 对比
 

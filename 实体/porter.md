@@ -82,7 +82,7 @@ Porter 通过 Kubernetes Mixin 或 Helm Mixin 与 Kubernetes 集成。Kubernetes
 3. **版本管理**: Bundle 版本化管理，确保可复现的环境部署
 4. **跨环境迁移**: 同一 Bundle 通过不同参数部署到 dev/staging/prod
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Porter CLI
@@ -97,6 +97,163 @@ porter install myapp --reference ghcr.io/myorg/myapp:v0.1.0 \
   --param db_password=$DB_PASSWORD \
   --credential-set azure-prod
 ```
+
+### porter.yaml 示例
+
+```yaml
+# porter.yaml
+name: my-web-app
+version: 1.0.0
+description: "Web app with database and ingress"
+
+mixins:
+  - helm
+  - kubernetes
+  - exec
+
+parameters:
+  - name: namespace
+    type: string
+    default: default
+  - name: db_password
+    type: string
+    sensitive: true
+
+credentials:
+  - name: kubeconfig
+    path: /root/.kube/config
+
+install:
+  - helm:
+      description: "Install PostgreSQL"
+      chart: bitnami/postgresql
+      version: "13.2.0"
+      name: postgres
+      namespace: "{{ bundle.parameters.namespace }}"
+      set:
+        auth.postgresPassword: "{{ bundle.parameters.db_password }}"
+  - helm:
+      description: "Install web application"
+      chart: ./charts/web-app
+      name: web-app
+      namespace: "{{ bundle.parameters.namespace }}"
+
+upgrade:
+  - helm:
+      description: "Upgrade web application"
+      chart: ./charts/web-app
+      name: web-app
+      namespace: "{{ bundle.parameters.namespace }}"
+
+uninstall:
+  - helm:
+      description: "Remove web application"
+      name: web-app
+      namespace: "{{ bundle.parameters.namespace }}"
+  - helm:
+      description: "Remove PostgreSQL"
+      name: postgres
+      namespace: "{{ bundle.parameters.namespace }}"
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看已安装的 Bundle
+porter installations list
+
+# 🟢 查看 Bundle 详情
+porter show myapp
+
+# 🟡 升级 Bundle
+porter upgrade myapp --reference ghcr.io/myorg/myapp:v0.2.0
+
+# 🔴 卸载 Bundle
+porter uninstall myapp
+
+# 🟢 查看 Bundle 日志
+porter logs --installation myapp
+
+# 🟡 创建凭证集
+porter credentials create azure-prod \
+  --credential kubeconfig=$HOME/.kube/config
+
+# 🟢 发布 Bundle 到 OCI Registry
+porter publish --archive myapp.tgz --reference ghcr.io/myorg/myapp:v1.0.0
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| 构建失败 | Mixin 未安装 | `porter mixins list` | `porter mixins install <name>` |
+| 安装超时 | 依赖服务不可用 | `porter logs --installation myapp` | 检查 Helm Chart 依赖 |
+| 凭证错误 | Credential Set 未配置 | `porter credentials list` | 创建/更新凭证集 |
+| 发布失败 | Registry 认证失败 | `docker login ghcr.io` | 检查 Registry 凭据 |
+| 升级失败 | 版本不兼容 | `porter show myapp` | 检查升级路径 |
+
+### 排查流程
+
+```
+Porter 异常
+├─ 构建失败？
+│  ├─ Mixin 缺失 → porter mixins install
+│  ├─ YAML 语法错 → porter lint
+│  └─ 依赖缺失 → 检查 Chart/Module 引用
+├─ 安装/升级失败？
+│  ├─ 凭证问题 → 检查 Credential Set
+│  ├─ 依赖服务 → 检查目标集群状态
+│  └─ 参数错误 → 检查参数类型和默认值
+└─ 发布失败？
+   ├─ 认证失败 → docker login
+   └─ 网络问题 → 检查 Registry 连通性
+```
+
+## 生产案例
+
+### 案例 1: SaaS 产品一键部署
+
+**场景**: SaaS 厂商需为客户提供私有化部署，包含 K8s 应用 + 数据库 + 监控。
+
+**方案**:
+1. 使用 Porter 打包 Helm Charts + Terraform + 配置脚本
+2. 发布为 OCI Bundle 到客户 Registry
+3. 客户执行 `porter install` 一键部署
+
+**效果**: 部署时间从 2 天缩短到 30 分钟，客户无需 K8s 专家。
+
+### 案例 2: 多环境一致性部署
+
+**场景**: 开发团队需确保 dev/staging/prod 环境配置一致。
+
+**方案**:
+1. 单一 Bundle 定义，通过参数区分环境
+2. 不同环境使用不同 Credential Set
+3. CI/CD 自动触发 porter install/upgrade
+
+**效果**: 环境差异导致的问题减少 95%，部署可完全复现。
+
+## 对比与替代方案
+
+| 维度 | Porter | Helm | ArgoCD AppSet | Terraform |
+|------|--------|------|---------------|------------|
+| K8s 资源 | ✅ | ✅ | ✅ | 部分 |
+| 云资源 | ✅ | ❌ | ❌ | ✅ |
+| 多步骤编排 | ✅ | ❌ | ❌ | ✅ |
+| OCI 分发 | ✅ | ✅ | N/A | ❌ |
+| CNAB 标准 | ✅ | ❌ | ❌ | ❌ |
+| 学习曲线 | 中 | 低 | 中 | 中 |
+
+## 检查清单
+
+- [ ] Porter CLI 版本为最新
+- [ ] 所需 Mixin 已安装
+- [ ] porter.yaml 已通过 `porter lint` 验证
+- [ ] Credential Set 已安全配置
+- [ ] Bundle 已发布到 OCI Registry
+- [ ] 升级和卸载流程已测试
+- [ ] 参数和输出已文档化
+- [ ] CI/CD 集成已配置
 
 ## 替代方案
 

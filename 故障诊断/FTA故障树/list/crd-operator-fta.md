@@ -152,6 +152,87 @@ flowchart TD
 
   %% ======== F. 依赖/控制面 =======
 
+## 生产案例
+
+### 案例1: Operator CrashLoopBackOff 导致 CR 无人协调
+
+**时间线**:
+- 11:00 Operator Pod 升级后 CrashLoopBackOff
+- 11:05 CR 状态停止更新，业务无感知
+- 11:30 用户报告 CR 变更未生效
+- 11:35 确认根因: 新版本 CRD schema 不兼容，Operator 启动时 panic
+- 11:40 回滚 Operator 版本，恢复正常
+
+**根因链**:
+```
+Operator升级 → CRD schema不兼容 → 启动时反序列化panic
+→ CrashLoopBackOff → CR无人协调 → 变更不生效
+```
+
+**修复**:
+```bash
+# 🟢 检查 Operator 日志
+kubectl logs -n ${OPERATOR_NS} -l app=${OPERATOR_NAME} --previous --tail=50
+# 🟡 回滚 Operator
+kubectl rollout undo deployment/${OPERATOR_NAME} -n ${OPERATOR_NS}
+# 🟢 验证 CR 状态恢复
+kubectl get ${CR_KIND} -A -o wide
+```
+
+### 案例2: CRD 版本升级导致 API 不可用
+
+**现象**: `kubectl get myresources` 返回 `the server could not find the requested resource`
+
+**根因**: CRD 从 v1beta1 升级到 v1 时未保留旧版本，已存储的对象无法读取
+
+**修复**:
+```bash
+# 🟢 检查 CRD 版本
+kubectl get crd ${CRD_NAME} -o jsonpath='{.spec.versions[*].name}'
+# 🟡 添加旧版本为 deprecated 但 served
+kubectl patch crd ${CRD_NAME} --type=merge -p '{"spec":{"versions":[{"name":"v1beta1","served":true,"storage":false}]}}'
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: operator-alerts
+  rules:
+  - alert: OperatorDown
+    expr: up{job=~".*operator.*"} == 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: CRReconcileStuck
+    expr: operator_reconcile_errors_total > 0
+    for: 15m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| CRD 版本兼容 | 升级时保留旧版本 served | P0 |
+| Operator 升级测试 | staging 环境先验证 | P0 |
+| 回滚预案 | 保留旧版本镜像 | P1 |
+| CR 状态监控 | 监控 reconcile 错误率 | P1 |
+
+## 面试要点
+
+1. **Q: Operator 模式的核心原理？**
+   A: CRD 定义期望状态 + Controller 监听变更 + Reconcile 循环实际状态向期望状态收敛；Level-triggered 而非 Edge-triggered
+
+2. **Q: CRD 升级的最佳实践？**
+   A: 多版本共存(served) → conversion webhook 转换 → 先升级 CRD 再升级 Operator → 保留旧版本一段时间 → 最终移除
+
+3. **Q: Operator 不协调的排查步骤？**
+   A: 检查 Operator Pod 状态 → 查看日志(reconcile error) → 确认 RBAC 权限 → 检查 CRD 版本兼容 → 验证 Webhook 可用性
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

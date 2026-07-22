@@ -75,7 +75,7 @@ ko 与 Kubernetes 深度集成。`ko apply -f config/` 自动构建 YAML 中引�
 3. **GitOps 镜像构建**: `ko resolve` 输出 YAML + 镜像地址，存入 Git 供 ArgoCD 同步
 4. **供应链安全**: 配合 cosign 和 SBOM 生成实现完整的供应链安全
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 ko
@@ -89,18 +89,140 @@ export KO_DOCKER_REPO=ghcr.io/myorg
 # 构建并推送镜像
 ko build ./cmd/server
 
-# 构建并部署到 Kubernetes（自动替换 ko:// 引用）
+# 构建并部署到 Kubernetes
 ko apply -f config/
 
-# 只渲染 YAML（不部署，用于 GitOps）
+# 只渲染 YAML（用于 GitOps）
 ko resolve -f config/ > rendered.yaml
 
 # 多平台构建
 ko build --platform=linux/amd64,linux/arm64 ./cmd/server
 
 # 启用 SBOM 和 cosign 签名
-ko build --sbom=spdx --image-label=org.opencontainers.image.sign=cosign ./cmd/server
+ko build --sbom=spdx ./cmd/server
+cosign sign ghcr.io/myorg/server@sha256:...
 ```
+
+```yaml
+# .ko.yaml 项目配置示例
+baseImageOverrides:
+  github.com/myorg/myapp/cmd/server: gcr.io/distroless/static-debian12
+  github.com/myorg/myapp/cmd/worker: gcr.io/distroless/base-debian12
+
+builds:
+- id: server
+  dir: ./cmd/server
+  env:
+  - CGO_ENABLED=0
+  ldflags:
+  - -s -w
+  - -X main.version={{.GitVersion}}
+  - -X main.commit={{.GitCommit}}
+  flags:
+  - -trimpath
+
+defaultBaseImage: gcr.io/distroless/static-debian12
+
+# 镜像标签策略
+defaultTags:
+  latest: "{{.GitShortCommit}}"
+```
+
+```yaml
+# Kubernetes Deployment 中使用 ko:// 引用
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-server
+  template:
+    metadata:
+      labels:
+        app: my-server
+    spec:
+      containers:
+      - name: server
+        image: ko://github.com/myorg/myapp/cmd/server
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
+```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：构建镜像（不部署）
+ko build ./cmd/server
+ko build --bare ./cmd/server  # 最小镜像
+
+# 🟡 中风险：构建并部署
+ko apply -f config/
+ko apply -f config/ --watch  # 监听文件变化自动重新部署
+
+# 🟢 低风险：渲染 YAML（不部署）
+ko resolve -f config/ > rendered.yaml
+
+# 🟢 低风险：本地运行（不推送）
+ko build --local ./cmd/server
+
+# 🟡 中风险：删除部署的资源
+ko delete -f config/
+
+# 🟢 低风险：查看构建信息
+ko version
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 构建失败 | Go 编译错误 | `go build ./cmd/server` | 修复 Go 代码编译错误 |
+| 推送失败 | Registry 认证过期 | `docker login ghcr.io` | 更新 KO_DOCKER_REPO 和认证 |
+| ko:// 未解析 | import path 不匹配 | `ko resolve -f config/ -v` | 确认 ko:// 后的路径与 go.mod 一致 |
+| 镜像过大 | 未使用 distroless | `ko build --bare ./cmd/server` | 配置 .ko.yaml baseImage |
+| 多平台构建失败 | 依赖 CGO | `CGO_ENABLED=0 ko build --platform=...` | 禁用 CGO 或使用交叉编译工具链 |
+
+```
+排查流程：
+├── 构建失败？
+│   ├── go build ./... → 确认 Go 编译正常
+│   ├── 检查 .ko.yaml 配置
+│   └── ko build -v → 查看详细日志
+├── 推送失败？
+│   ├── 检查 KO_DOCKER_REPO 环境变量
+│   ├── 确认 Registry 认证有效
+│   └── 检查网络连接和代理设置
+└── 部署失败？
+    ├── ko resolve -f config/ → 检查渲染结果
+    ├── 确认 ko:// import path 正确
+    └── kubectl describe pod → 查看 Pod 事件
+```
+
+## 生产案例
+
+### 案例 1：Go 微服务 CI/CD 流水线优化
+
+- **场景**：30+ Go 微服务的 CI 流水线使用 Docker build，每次构建需要 5-8 分钟
+- **排查**：Docker build 包含大量无关层（apt-get、依赖安装），且需要 Docker-in-Docker
+- **方案**：迁移到 ko build，消除 Dockerfile 和 DinD 依赖，配合 GitHub Actions 缓存 Go 编译
+- **效果**：构建时间从 6min 降至 45s，CI 资源成本降低 60%
+
+### 案例 2：供应链安全合规
+
+- **场景**：安全团队要求所有生产镜像必须有 SBOM 和签名
+- **排查**：手动为每个镜像生成 SBOM 和 cosign 签名，流程繁琐且易遗漏
+- **方案**：在 ko build 中启用 `--sbom=spdx`，CI 中自动 cosign sign，准入控制器验证签名
+- **效果**：100% 镜像有 SBOM + 签名，通过供应链安全审计
 
 ## 对比
 

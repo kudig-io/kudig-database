@@ -171,6 +171,138 @@ EOF
 - **策略被空 podSelector 误伤**：`podSelector: {}` 表示选中所有 Pod，撰写时要小心。
 - **CNI 升级策略丢失**：部分 CNI 的扩展 CRD（GlobalNetworkPolicy）在迁移到原生 NetworkPolicy 时需同步。
 
+## 源码实现分析
+
+### Cilium NetworkPolicy 实现（eBPF）
+
+```go
+// github.com/cilium/cilium/pkg/policy/repository.go
+// Cilium 策略编译流程
+func (repo *PolicyRepository) regeneratePolicy(ctx *policyCtx) {
+    // 1. 解析 NetworkPolicy → 内部 EndpointPolicy
+    for _, np := range repo.networkPolicies {
+        // 将 podSelector/namespaceSelector 转换为 endpoint 集合
+        endpoints := resolveSelector(np.Spec.PodSelector, np.Namespace)
+        
+        // 2. 编译为 eBPF map 条目
+        for _, rule := range np.Spec.Ingress {
+            for _, from := range rule.From {
+                // 生成 BPF_MAP_TYPE_HASH 条目
+                // key: {src_ip, src_port, protocol}
+                // value: {action: ALLOW/DENY}
+                policyMap.Update(key, allowEntry)
+            }
+        }
+    }
+    // 3. 通过 BPF syscall 加载到内核
+    // 每个 endpoint 有独立的 policy map
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     NetworkPolicy 实现架构对比                        │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Cilium (eBPF):                                        │
+│    Pod veth ─▶ tc hook ─▶ eBPF policy map ─▶ ALLOW/DROP│
+│    优势: 内核态执行，无 iptables 规则膨胀              │
+│                                                         │
+│  Calico (iptables/nftables):                           │
+│    Pod veth ─▶ iptables chain ─▶ per-policy rule       │
+│    优势: 无需 eBPF 支持，兼容老内核                  │
+│                                                         │
+│  默认行为: 无策略 = 全放行 (allow-all)              │
+│  一旦有策略选中 Pod → 未明确允许 = 拒绝 (deny-all)  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产配置：微服务网络隔离
+
+```yaml
+# 默认拒绝所有入站 + 允许特定服务访问
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-deny-all-allow-frontend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: api-server
+  policyTypes: [Ingress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 8080
+---
+# 允许 DNS 解析（常被遗漏！）
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: production
+spec:
+  podSelector: {}  # 所有 Pod
+  policyTypes: [Egress]
+  egress:
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+```
+
+### 生产运维：NetworkPolicy 故障诊断
+
+```bash
+# 🟢 检查策略是否被 CNI 支持
+kubectl get networkpolicy -A
+kubectl get pods -n kube-system -l k8s-app=cilium  # 确认 CNI 运行
+
+# 🟢 Cilium 策略调试
+kubectl exec -n kube-system <cilium-pod> -- cilium policy trace --src-labels app=frontend --dst-labels app=api --dport 8080
+
+# 🟢 Calico 策略调试
+calicoctl get networkpolicy -A -o wide
+calicoctl node status
+
+# 🟡 临时禁用策略排查连通性问题
+kubectl delete networkpolicy <name> -n <ns>
+# 🔴 生产环境删除策略前必须确认影响范围
+```
+
+## 面试要点
+
+1. **NetworkPolicy 的默认行为是什么？**
+   - 无任何策略时：所有 Pod 间流量全放行（allow-all）
+   - 一旦有策略选中某 Pod：该 Pod 变为默认拒绝，只允许策略明确放行的流量
+   - 这是白名单模型，生产建议每个 namespace 都有 default-deny 策略
+
+2. **哪些 CNI 支持 NetworkPolicy？**
+   - 支持：Cilium（eBPF）、Calico（iptables/eBPF）、Weave、Antrea
+   - 不支持：Flannel（裸装）、AWS VPC CNI（需 Calico 插件）
+   - 判断方法：创建策略后测试连通性，或查看 CNI 文档
+
+3. **为什么限制 Egress 后 DNS 会断？**
+   - CoreDNS 运行在 kube-system namespace 的 Pod 中
+   - 限制 Egress 后必须显式放行 UDP/TCP 53 到 kube-system
+   - 这是生产中最常见的 NetworkPolicy 故障
+
+4. **Cilium 和 Calico 实现 NetworkPolicy 的区别？**
+   - Cilium：eBPF map 内核态匹配，O(1) 复杂度，无规则膨胀
+   - Calico：iptables chain 线性匹配，策略多时性能下降
+   - Cilium 额外支持 L7 策略（HTTP method/path）和 FQDN 策略
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

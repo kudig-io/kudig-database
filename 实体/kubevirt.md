@@ -66,18 +66,180 @@ KubeVirt 深度集成 Kubernetes 生态系统：VM 以 CRD 形式存在，可通
 - **开发测试环境**：为需要完整 VM 环境的开发团队提供自助式 K8s 原生虚拟机服务
 - **安全隔离场景**：多租户环境中利用 VM 级别的强隔离，满足合规要求
 
-## 安装与快速开始
+## 安装与配置
 
 ```bash
+# 🟢 安装 KubeVirt Operator
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/v1.2.0/kubevirt-operator.yaml
 kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/v1.2.0/kubevirt-cr.yaml
-# 等待部署完成
+
+# 🟢 等待部署完成
 kubectl wait --for=condition=Available kv/kubevirt -n kubevirt --timeout=300s
+
+# 🟢 验证安装
+kubectl get pods -n kubevirt
+kubectl get crd | grep kubevirt.io
+
+# 🟢 安装 virtctl CLI
+curl -L https://github.com/kubevirt/kubevirt/releases/download/v1.2.0/virtctl-v1.2.0-linux-amd64 -o virtctl
+chmod +x virtctl && mv virtctl /usr/local/bin/
+
+# 🟢 安装 CDI (Containerized Data Importer)
+kubectl apply -f https://github.com/kubevirt/containerized-data-importer/releases/download/v1.58.0/cdi-operator.yaml
+kubectl apply -f https://github.com/kubevirt/containerized-data-importer/releases/download/v1.58.0/cdi-cr.yaml
 ```
+
+### VirtualMachine CRD 示例
+
+```yaml
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: ubuntu-vm
+  namespace: default
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        app: ubuntu-vm
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        memory:
+          guest: 4Gi
+        devices:
+          disks:
+          - name: rootdisk
+            disk:
+              bus: virtio
+          - name: cloudinit
+            disk:
+              bus: virtio
+          interfaces:
+          - name: default
+            masquerade: {}
+        resources:
+          requests:
+            memory: 4Gi
+      networks:
+      - name: default
+        pod: {}
+      volumes:
+      - name: rootdisk
+        containerDisk:
+          image: quay.io/kubevirt/ubuntu-22.04-container-disk
+      - name: cloudinit
+        cloudInitNoCloud:
+          userData: |
+            #cloud-config
+            password: ubuntu
+            chpasswd:
+              expire: false
+            ssh_authorized_keys:
+            - ssh-rsa AAAA...
+```
+
+## 运维操作
+
+### 常用命令
+
+```bash
+# 🟢 查看 VM 列表
+kubectl get vm -A
+kubectl get vmi -A  # 运行中的实例
+
+# 🟢 查看 VM 详情
+kubectl describe vm ubuntu-vm
+kubectl describe vmi ubuntu-vm
+
+# 🟡 启动/停止 VM
+virtctl start ubuntu-vm
+virtctl stop ubuntu-vm
+
+# 🟢 控制台访问
+virtctl console ubuntu-vm
+
+# 🟢 VNC 访问
+virtctl vnc ubuntu-vm
+
+# 🟡 热迁移
+virtctl migrate ubuntu-vm
+
+# 🟢 查看迁移状态
+kubectl get vmim -A  # VirtualMachineInstanceMigration
+
+# 🟡 强制停止 (graceful 失败时)
+virtctl stop ubuntu-vm --force --grace-period=0
+
+# 🟢 查看 virt-handler 日志
+kubectl logs -n kubevirt -l kubevirt.io=virt-handler --tail=50
+
+# 🟢 查看 virt-controller 日志
+kubectl logs -n kubevirt -l kubevirt.io=virt-controller --tail=50
+
+# 🟡 创建快照
+virtctl vm-snapshot create ubuntu-vm --name snapshot-1
+
+# 🟡 恢复快照
+virtctl vm-snapshot restore ubuntu-vm --name snapshot-1
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| VM 无法启动 | 节点不支持 KVM/资源不足 | `kubectl describe vmi <name>` | 检查 /dev/kvm 存在，确认节点资源 |
+| VMI Pending | PVC 未绑定/调度失败 | `kubectl describe vmi <name>` | 检查 StorageClass 和节点亲和 |
+| 热迁移失败 | 共享存储未配置/网络问题 | `kubectl get vmim -o yaml` | 确认使用共享存储 (RWX PVC) |
+| 控制台无响应 | virt-launcher Pod 异常 | `kubectl logs virt-launcher-<vm>-<id>` | 检查 QEMU 进程状态 |
+| 网络不通 | CNI 配置问题 | `kubectl exec -it <pod> -- ip addr` | 检查 masquerade/bridge 配置 |
+| 磁盘导入失败 | CDI 配置错误/源不可达 | `kubectl describe datavolume <name>` | 检查 CDI 日志和源 URL |
+
+### 排查流程
+
+```
+1. kubectl get vm/vmi → 确认状态 (Running/Pending/Failed)
+2. kubectl describe vmi <name> → 查看 Events 和 Conditions
+3. kubectl logs virt-launcher-<vm>-<id> → 查看 QEMU 日志
+4. kubectl logs -l kubevirt.io=virt-handler → 查看节点级日志
+5. kubectl get events --sort-by=.lastTimestamp → 查看集群事件
+```
+
+## 生产案例
+
+### 案例1: Windows 工作负载迁移
+- **场景**: 企业有 50+ Windows Server 应用无法容器化
+- **方案**: 使用 KubeVirt + CDI 导入 Windows 镜像，通过 virtio 驱动优化性能
+- **效果**: 统一管理容器和 VM，运维成本降低 40%
+
+### 案例2: GPU 直通 AI 推理
+- **场景**: AI 推理服务需要 GPU 直通和完整 OS 环境
+- **方案**: KubeVirt + NVIDIA Device Plugin，GPU 直通给 VM
+- **效果**: VM 内 GPU 性能接近裸机，统一 K8s 调度
 
 ## 对比替代方案
 
-相比传统虚拟化管理平台（如 OpenStack、oVirt），KubeVirt 不需要独立的控制平面，完全复用 K8s 基础设施。相比 Kata Containers（轻量级 VM 替代容器运行时），KubeVirt 提供完整的 VM 体验而非容器替代方案。
+| 维度 | KubeVirt | OpenStack | Kata Containers | oVirt |
+|------|----------|-----------|-----------------|-------|
+| 管理平台 | K8s 原生 | 独立控制面 | K8s 原生 | 独立控制面 |
+| VM 体验 | 完整 VM | 完整 VM | 轻量 VM | 完整 VM |
+| 容器共存 | 同一集群 | 需集成 | 同一 Pod | 不支持 |
+| 热迁移 | 支持 | 支持 | 不支持 | 支持 |
+| GPU 直通 | 支持 | 支持 | 有限 | 支持 |
+| 学习曲线 | 低 (K8s用户) | 高 | 低 | 中 |
+
+## 检查清单
+
+- [ ] 节点支持硬件虚拟化 (VT-x/AMD-V) 且 /dev/kvm 存在
+- [ ] virt-handler DaemonSet 在所有目标节点运行
+- [ ] 共享存储 (RWX) 已配置用于热迁移
+- [ ] CDI 已安装用于磁盘导入
+- [ ] VM 资源 requests/limits 已设置
+- [ ] 网络策略已配置 (masquerade/bridge)
+- [ ] 监控 virt-controller 和 virt-handler 健康状态
+- [ ] 定期创建 VM 快照用于备份
 
 ## Related
 

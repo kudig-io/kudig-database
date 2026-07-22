@@ -83,7 +83,7 @@ Jaeger 通过 Jaeger Operator 以 Kubernetes 原生方式部署。Jaeger CRD 定
 3. **服务拓扑发现**: 自动构建微服务依赖关系图，发现意外的服务耦合
 4. **性能基准测试**: 在压测中追踪请求链路，量化各服务的处理延迟
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Jaeger Operator
@@ -128,6 +128,155 @@ kubectl port-forward svc/production-query -n observability 16686:16686
 # 打开 http://localhost:16686
 ```
 
+### 采样策略配置
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: production
+  namespace: observability
+spec:
+  strategy: production
+  collector:
+    maxReplicas: 5
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 2Gi
+  query:
+    replicas: 2
+  sampling:
+    options:
+      default_strategy:
+        type: probabilistic
+        param: 0.01
+      service_strategies:
+      - service: payment-service
+        type: probabilistic
+        param: 0.1
+        operation_strategies:
+        - operation: /api/checkout
+          type: probabilistic
+          param: 1.0
+      - service: frontend
+        type: ratelimiting
+        param: 100
+```
+
+### OTel Collector 集成
+
+```yaml
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+  namespace: observability
+spec:
+  mode: daemonset
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+      batch:
+        timeout: 5s
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 512
+    exporters:
+      otlp/jaeger:
+        endpoint: jaeger-collector-headless.observability.svc:4317
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [otlp/jaeger]
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Jaeger 实例状态
+kubectl get jaeger -n observability
+kubectl describe jaeger production -n observability
+
+# 🟢 查看 Collector 指标
+curl http://jaeger-collector.observability.svc:14269/metrics | grep jaeger_collector
+
+# 🟢 检查 ES 存储健康
+curl http://elasticsearch:9200/_cluster/health?pretty
+
+# 🟡 调整采样率
+kubectl patch jaeger production -n observability --type=merge -p '{"spec":{"sampling":{"options":{"default_strategy":{"type":"probabilistic","param":0.05}}}}}'
+
+# 🟡 扩容 Collector
+kubectl scale deployment production-collector -n observability --replicas=5
+
+# 🔴 清理过期索引（ES 后端）
+curl -X DELETE "http://elasticsearch:9200/jaeger-span-$(date -d '-7 days' +%Y.%m.%d)"
+
+# 🔴 删除 Jaeger 实例
+kubectl delete jaeger production -n observability
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| UI 无 Trace 数据 | 采样率过低/Collector 异常 | `kubectl logs -l app.kubernetes.io/component=collector -n observability` | 调整采样率或修复 Collector |
+| Collector OOM | 流量突增超出内存限制 | `kubectl top pods -n observability` | 增加 memory limits |
+| ES 写入超时 | 索引过多/磁盘满 | `curl ES:9200/_cat/indices?v` | 清理旧索引，扩容磁盘 |
+| 服务未上报 Span | SDK 配置错误 | 检查 `OTEL_EXPORTER_OTLP_ENDPOINT` 环境变量 | 修正 OTLP endpoint |
+| Query 响应慢 | ES 查询超时 | `kubectl logs production-query -n observability` | 优化索引/增加资源 |
+
+```
+排查流程:
+├── Trace 数据缺失
+│   ├── kubectl get pods -n observability → 组件运行状态
+│   ├── 检查应用 OTEL_EXPORTER 环境变量 → SDK 配置
+│   ├── kubectl logs collector → 接收端错误
+│   └── curl ES/_cluster/health → 存储健康
+├── 性能问题
+│   ├── kubectl top pods → 资源使用
+│   ├── ES _nodes/stats → JVM 堆使用率
+│   └── jaeger_collector_spans_received_total → 流量指标
+└── 存储问题
+    ├── ES _cat/indices → 索引数量和大小
+    ├── ES _cluster/allocation/explain → 分片分配
+    └── 磁盘使用率 → 清理或扩容
+```
+
+## 生产案例
+
+### 案例1: 电商大促期间 Trace 数据丢失
+
+- **场景**: 双十一期间订单量激增 10 倍，Jaeger UI 显示大量 Trace 缺失
+- **排查**: Collector Pod 频繁 OOMKilled，`jaeger_collector_spans_dropped_total` 指标飙升
+- **方案**: 
+  1. Collector 扩容至 10 副本，memory limits 提升至 4Gi
+  2. 启用 Kafka 缓冲层（strategy: streaming），解耦 Collector 与存储
+  3. 非核心服务采样率降至 0.001，核心支付链路保持 1.0
+- **效果**: Trace 完整率从 60% 恢复至 99.5%，Collector 零 OOM
+
+### 案例2: ES 索引膨胀导致查询超时
+
+- **场景**: 运行 3 个月后 Jaeger Query 响应时间从 2s 退化至 30s+
+- **排查**: ES 集群累积 900+ 索引，总数据量 2TB，JVM GC 频繁
+- **方案**:
+  1. 部署 Curator 每日清理 7 天前索引
+  2. 启用 ILM（Index Lifecycle Management）自动 rollover
+  3. 热温冷架构：7天内 SSD，7-30天 HDD
+- **效果**: 查询 P99 恢复至 3s，存储成本降低 70%
+
 ## 对比
 
 | 特性 | Jaeger | Zipkin | Tempo | Datadog APM |
@@ -136,6 +285,8 @@ kubectl port-forward svc/production-query -n observability 16686:16686
 | 存储后端 | Cassandra/ES/Kafka | MySQL/ES | 对象存储 | SaaS |
 | 火焰图 | ✅ | ⚠️ | ✅ | ✅ |
 | OTel 兼容 | ✅ | ✅ | ✅ | ✅ |
+| 运维复杂度 | 中 | 低 | 低 | 无 |
+| 适用场景 | 大规模生产追踪 | 轻量开发调试 | Grafana 生态 | 全托管企业 |
 
 ## 架构定位
 

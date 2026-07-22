@@ -241,7 +241,387 @@ kubectl annotate deployment/web chaos-mesh.org/experiment-active="true" --overwr
 - **[[集群基础/README.md|集群基础域]]**：控制平面、etcd、节点生命周期由集群域负责，SRE 负责基于这些基座构建上层可靠性能力（PDB、拓扑分布、升级回滚）。
 - **[[存储/README.md|存储数据域]]**：有状态应用 DR 的底层能力（快照、备份、跨区复制）由存储域提供，SRE 负责编排应用级恢复流程与 RTO/RPO 验证。
 
-## 6. 推荐阅读
+## 6. 自动化检查脚本
+
+### 生产就绪检查脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：生产就绪自动化检查
+set -euo pipefail
+
+OUTPUT_FILE="/tmp/prr-check-$(date +%Y%m%d).md"
+
+echo "=== 生产就绪检查 $(date) ==="
+
+cat > $OUTPUT_FILE <<EOF
+# 生产就绪检查报告
+
+**检查时间**: $(date)
+**集群**: $(kubectl config current-context)
+
+## 检查结果
+
+| 编号 | 检查项 | 状态 | 备注 |
+|-----|--------|------|------|
+EOF
+
+# 1. 控制平面高可用
+API_SERVER_REPLICAS=$(kubectl get pods -n kube-system -l component=kube-apiserver --no-headers | wc -l)
+ETCD_REPLICAS=$(kubectl get pods -n kube-system -l component=etcd --no-headers | wc -l)
+if [ "$API_SERVER_REPLICAS" -ge 2 ] && [ "$ETCD_REPLICAS" -ge 3 ]; then
+  echo "| 1 | 控制平面高可用 | ✅ | API Server: $API_SERVER_REPLICAS, etcd: $ETCD_REPLICAS |" >> $OUTPUT_FILE
+else
+  echo "| 1 | 控制平面高可用 | ❌ | API Server: $API_SERVER_REPLICAS, etcd: $ETCD_REPLICAS |" >> $OUTPUT_FILE
+fi
+
+# 2. 节点跨 AZ 分布
+AZ_COUNT=$(kubectl get nodes -L topology.kubernetes.io/zone --no-headers | awk '{print $NF}' | sort -u | wc -l)
+if [ "$AZ_COUNT" -ge 3 ]; then
+  echo "| 2 | 节点跨 AZ 分布 | ✅ | $AZ_COUNT 个 AZ |" >> $OUTPUT_FILE
+else
+  echo "| 2 | 节点跨 AZ 分布 | ⚠️ | 仅 $AZ_COUNT 个 AZ |" >> $OUTPUT_FILE
+fi
+
+# 3. PDB 配置
+PDB_COUNT=$(kubectl get pdb -A --no-headers | wc -l)
+DEPLOY_COUNT=$(kubectl get deploy -A --no-headers | wc -l)
+if [ "$PDB_COUNT" -gt 0 ]; then
+  echo "| 3 | PDB 配置 | ✅ | $PDB_COUNT/$DEPLOY_COUNT 个 Deployment 有 PDB |" >> $OUTPUT_FILE
+else
+  echo "| 3 | PDB 配置 | ❌ | 无 PDB 配置 |" >> $OUTPUT_FILE
+fi
+
+# 4. 资源配额
+QUOTA_NS=$(kubectl get resourcequota -A --no-headers | awk '{print $1}' | sort -u | wc -l)
+TOTAL_NS=$(kubectl get ns --no-headers | wc -l)
+echo "| 4 | 资源配额 | ⚠️ | $QUOTA_NS/$TOTAL_NS 个命名空间有配额 |" >> $OUTPUT_FILE
+
+# 5. 备份状态
+VELERO_BACKUPS=$(velero backup get -n velero --no-headers 2>/dev/null | wc -l || echo 0)
+if [ "$VELERO_BACKUPS" -gt 0 ]; then
+  echo "| 5 | 备份配置 | ✅ | $VELERO_BACKUPS 个备份 |" >> $OUTPUT_FILE
+else
+  echo "| 5 | 备份配置 | ❌ | 无备份 |" >> $OUTPUT_FILE
+fi
+
+# 6. 证书有效期
+EXPIRING_CERTS=$(kubectl get certificates -A -o json 2>/dev/null | jq '[.items[] | select(.status.notAfter < "'$(date -d '+30 days' -Iseconds)'")] | length' || echo 0)
+if [ "$EXPIRING_CERTS" -eq 0 ]; then
+  echo "| 6 | 证书有效期 | ✅ | 无 30 天内过期证书 |" >> $OUTPUT_FILE
+else
+  echo "| 6 | 证书有效期 | ❌ | $EXPIRING_CERTS 个证书 30 天内过期 |" >> $OUTPUT_FILE
+fi
+
+echo "" >> $OUTPUT_FILE
+echo "## 建议" >> $OUTPUT_FILE
+echo "" >> $OUTPUT_FILE
+echo "- 定期执行此检查（建议每周）" >> $OUTPUT_FILE
+echo "- 将检查集成到 CI/CD 流水线" >> $OUTPUT_FILE
+echo "- 未通过项应在下次发布前闭环" >> $OUTPUT_FILE
+
+echo "报告已生成: $OUTPUT_FILE"
+cat $OUTPUT_FILE
+```
+
+### 证书生命周期监控
+
+```bash
+#!/bin/bash
+# 🟢 低风险：证书生命周期检查
+set -euo pipefail
+
+echo "=== 证书生命周期检查 ==="
+
+# 1. kubeadm 证书
+echo "--- kubeadm 证书 ---"
+kubeadm certs check-expiration
+
+# 2. cert-manager 证书
+echo "--- cert-manager 证书 ---"
+kubectl get certificates -A -o custom-columns=\
+NAMESPACE:.metadata.namespace,\
+NAME:.metadata.name,\
+READY:.status.conditions[?(@.type=="Ready")].status,\
+EXPIRY:.status.notAfter
+
+# 3. Ingress TLS 证书
+echo "--- Ingress TLS 证书 ---"
+for secret in $(kubectl get ingress -A -o jsonpath='{range .items[*]}{.spec.tls[*].secretName}{"\n"}{end}' | sort -u); do
+  if [ -n "$secret" ]; then
+    EXPIRY=$(kubectl get secret $secret -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+    echo "$secret: $EXPIRY"
+  fi
+done
+
+# 4. 告警规则检查
+echo "--- 证书告警规则 ---"
+kubectl get prometheusrules -A -o yaml | grep -A5 "cert" | head -20
+```
+
+## 7. 生产就绪评审流程
+
+### 评审检查清单
+
+```markdown
+# 生产就绪评审 (PRR) 检查清单
+
+## 服务信息
+- 服务名称: __________
+- 服务等级: □ Tier-0 □ Tier-1 □ Tier-2 □ Tier-3
+- 评审日期: __________
+- 评审人: __________
+
+## 架构评审
+- [ ] 无单点故障
+- [ ] 跨 AZ 部署
+- [ ] 依赖服务已识别并评估
+- [ ] 容量规划已完成
+
+## 可观测性评审
+- [ ] SLO/SLI 已定义
+- [ ] 监控仪表盘已创建
+- [ ] 告警规则已配置
+- [ ] 日志聚合已接入
+- [ ] 链路追踪已启用
+
+## 发布评审
+- [ ] 金丝雀/蓝绿策略已配置
+- [ ] 回滚流程已验证
+- [ ] 发布门控已生效
+- [ ] 错误预算策略已定义
+
+## 灾备评审
+- [ ] 备份策略已配置
+- [ ] 恢复流程已验证
+- [ ] DR 演练已完成
+- [ ] RTO/RPO 已达标
+
+## 安全评审
+- [ ] 证书生命周期监控已配置
+- [ ] Secret 轮换策略已定义
+- [ ] 网络策略已配置
+- [ ] RBAC 权限已最小化
+
+## 评审结论
+- [ ] 通过，可以上线
+- [ ] 有条件通过，需在 ___ 前闭环
+- [ ] 不通过，需重新评审
+```
+
+### 评审流程
+
+```
+服务开发完成
+    │
+    ▼
+自评检查清单
+    │
+    ▼
+提交 PRR 评审申请
+    │
+    ▼
+SRE 团队评审 (2-3 人)
+    │
+    ├── 通过 → 上线
+    │
+    ├── 有条件通过 → 限期整改 → 复评 → 上线
+    │
+    └── 不通过 → 整改 → 重新评审
+```
+
+## 8. 可靠性指标仪表板
+
+### Grafana Dashboard 配置
+
+```json
+{
+  "dashboard": {
+    "title": "生产就绪概览",
+    "panels": [
+      {
+        "title": "SLO 达成率",
+        "type": "stat",
+        "targets": [
+          { "expr": "avg(slo_sli_ratio{}) * 100" }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "steps": [
+                { "color": "red", "value": 0 },
+                { "color": "yellow", "value": 99 },
+                { "color": "green", "value": 99.9 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "title": "错误预算消耗",
+        "type": "gauge",
+        "targets": [
+          { "expr": "1 - avg(slo_sli_ratio{})" }
+        ]
+      },
+      {
+        "title": "MTTR 趋势",
+        "type": "graph",
+        "targets": [
+          { "expr": "avg(incident_resolution_time_seconds) / 60" }
+        ]
+      },
+      {
+        "title": "备份成功率",
+        "type": "stat",
+        "targets": [
+          { "expr": "sum(rate(velero_backup_success_total[1d])) / sum(rate(velero_backup_attempt_total[1d])) * 100" }
+        ]
+      },
+      {
+        "title": "证书过期倒计时",
+        "type": "table",
+        "targets": [
+          { "expr": "cert_manager_certificate_expiration_timestamp_seconds - time()" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### PrometheusRule 可靠性告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: reliability-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: reliability.rules
+      rules:
+        # SLO 错误预算快速消耗
+        - alert: ErrorBudgetFastBurn
+          expr: |
+            (1 - slo_sli_ratio{}) > 0.02
+            and
+            rate(slo_sli_ratio{}[1h]) < -0.01
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: "错误预算快速消耗，1 小时内消耗超过 1%"
+
+        # 备份失败
+        - alert: BackupFailed
+          expr: |
+            velero_backup_failure_total > 0
+          for: 0m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Velero 备份失败"
+
+        # 证书即将过期
+        - alert: CertificateExpiringSoon
+          expr: |
+            cert_manager_certificate_expiration_timestamp_seconds - time() < 30 * 24 * 3600
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: "证书 {{ $labels.name }} 30 天内过期"
+
+        # PDB 未配置
+        - alert: PDBNotConfigured
+          expr: |
+            kube_deployment_status_replicas_available > 2
+            and
+            absent(kube_poddisruptionbudget_status_expected_pods)
+          for: 24h
+          labels:
+            severity: info
+          annotations:
+            summary: "Deployment {{ $labels.deployment }} 副本数 > 2 但未配置 PDB"
+```
+
+## 9. 持续改进机制
+
+### 月度可靠性评审
+
+```markdown
+# 月度可靠性评审议程
+
+## 1. SLO 回顾 (15 min)
+- 各服务 SLO 达成情况
+- 错误预算消耗趋势
+- 未达标服务根因分析
+
+## 2. 事件回顾 (15 min)
+- 本月 P0/P1 事件汇总
+- MTTR/MTTD 趋势
+- 复盘改进项跟踪
+
+## 3. 容量回顾 (10 min)
+- 资源使用率趋势
+- 容量预测与规划
+- 成本优化机会
+
+## 4. 灾备回顾 (10 min)
+- 备份成功率
+- DR 演练结果
+- RTO/RPO 达标情况
+
+## 5. 混沌工程回顾 (10 min)
+- 实验执行情况
+- 发现的问题与修复
+- 下月实验计划
+
+## 6. 行动项 (10 min)
+- 新增行动项
+- 历史行动项跟踪
+- 优先级排序
+```
+
+### 改进项跟踪
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reliability-improvements
+  namespace: monitoring
+data:
+  improvements.yaml: |
+    improvements:
+      - id: IMP-2026-001
+        title: 优化 API 超时配置
+        owner: @dev-team
+        due_date: 2026-07-31
+        status: in_progress
+        priority: high
+        source: 混沌实验发现
+        
+      - id: IMP-2026-002
+        title: 增加数据库连接池监控
+        owner: @sre-team
+        due_date: 2026-08-15
+        status: pending
+        priority: medium
+        source: 生产事件复盘
+        
+      - id: IMP-2026-003
+        title: 完善证书自动续期
+        owner: @platform-team
+        due_date: 2026-08-31
+        status: pending
+        priority: high
+        source: PRR 评审发现
+```
+
+## 10. 推荐阅读
 
 ### 本域核心参考
 

@@ -78,7 +78,7 @@ Podman Desktop 深度集成 Kubernetes 工作流：可以将 Podman Pod 一键�
 3. **多集群测试**：使用 Kind 创建多个本地集群，测试多集群场景
 4. **安全开发**：Rootless 模式确保开发环境不影响宿主系统
 
-## 安装
+## 安装与配置
 
 ```bash
 # macOS
@@ -96,14 +96,102 @@ podman machine init
 podman machine start
 ```
 
+### Podman Machine 配置
+
+```bash
+# 配置虚拟机资源
+podman machine set --cpus 4 --memory 8192 --disk-size 50
+
+# 查看 Machine 状态
+podman machine list
+podman machine inspect
+
+# 配置镜像加速
+podman machine ssh
+sudo vi /etc/containers/registries.conf
+# 添加 mirror 配置
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看容器状态
+podman ps -a
+podman pod ps
+
+# 🟢 查看镜像
+podman images
+podman image tree <image>
+
+# 🟡 构建镜像
+podman build -t myapp:latest -f Containerfile .
+podman build --platform linux/amd64,linux/arm64 -t myapp:latest .
+
+# 🟡 生成 Kubernetes YAML
+podman generate kube mypod > deployment.yaml
+
+# 🟡 运行容器
+podman run -d --name web -p 8080:80 nginx:latest
+podman run -it --rm alpine sh
+
+# 🟢 查看容器日志
+podman logs web
+podman logs --follow web
+
+# 🔴 清理未使用资源
+podman system prune -a --volumes
+
+# 🟡 Pod 操作
+podman pod create --name mypod -p 8080:80
+podman run -d --pod mypod --name app nginx:latest
+podman pod stop mypod
+podman pod rm mypod
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| Machine 无法启动 | 虚拟化未启用 | `podman machine info` | 启用 VT-x/AMD-V |
+| 容器无法联网 | DNS 配置问题 | `podman exec <c> cat /etc/resolv.conf` | 检查 DNS 配置 |
+| 镜像拉取失败 | 网络/仓库问题 | `podman pull --debug <image>` | 配置镜像加速 |
+| 端口映射失败 | 端口被占用 | `podman port <container>` | 检查端口冲突 |
+| 磁盘空间不足 | 镜像/卷堆积 | `podman system df` | `podman system prune` |
+| Rootless 权限问题 | UID 映射不足 | `podman info \| grep -A5 rootless` | 配置 /etc/subuid |
+
+## 生产案例
+
+### 案例1: 开发环境 Docker Desktop 替代
+
+**场景**: 企业需替代 Docker Desktop（商业许可限制）  
+**方案**: 全员迁移到 Podman Desktop + Kind 本地集群  
+**效果**: 消除许可费用，Rootless 模式提升安全性  
+
+### 案例2: 从 Podman Pod 到 K8s 部署
+
+**场景**: 开发者本地验证多容器应用，需迁移到 K8s  
+**方案**: `podman pod create` 本地测试 → `podman generate kube` 生成 YAML → 部署到 Kind 验证  
+**效果**: 开发到部署流程无缝衔接  
+
 ## 对比
 
 | 特性 | Podman Desktop | Docker Desktop | Rancher Desktop |
-|------|---------------|----------------|-----------------|
+|------|---------------|----------------|------------------|
 | 开源 | ✅ Apache 2.0 | ❌ 商业 | ✅ Apache 2.0 |
-| Rootless | ✅ | ❌ | ⚠️ |
+| Rootless | ✅ 原生 | ❌ | ⚠️ |
 | Podman 引擎 | ✅ | ❌ | ✅ |
 | 商业许可限制 | ❌ 无 | ✅ 大企业需付费 | ❌ 无 |
+| K8s YAML 生成 | ✅ podman generate | ❌ | ❌ |
+| 扩展系统 | ✅ 插件化 | ⚠️ | ⚠️ |
+
+## 检查清单
+
+- [ ] 使用 Rootless 模式运行容器
+- [ ] 配置 Podman Machine 合理资源限制
+- [ ] 配置镜像加速仓库
+- [ ] 定期清理未使用镜像和卷
+- [ ] 使用 Containerfile 而非 Dockerfile 命名
+- [ ] 多架构构建使用 --platform 参数
 
 ## 参考链接
 
@@ -119,9 +207,7 @@ podman machine start
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[podman-desktop]] — Podman Desktop
-
-- podman-container-tools
-- [[实体/cncf-runtime.md|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
+- [[实体/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 
 
 <!-- risk-assessed -->

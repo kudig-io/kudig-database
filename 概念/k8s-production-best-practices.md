@@ -143,6 +143,117 @@ prerequisites:
 
 未验证备份有效性会导致灾难恢复失败和数据丢失。应定期验证备份有效性，执行恢复演练，记录和改进恢复流程 ^[inferred]。
 
+## 源码实现分析
+
+### Deployment 滚动更新控制器
+
+```go
+// k8s.io/kubernetes/pkg/controller/deployment/sync.go
+// Deployment Controller 实现滚动更新和回滚
+func (dc *DeploymentController) syncDeployment(ctx context.Context, d *apps.Deployment) {
+    // 1. 创建新 ReplicaSet
+    newRS := dc.createNewReplicaSet(d)
+    // 2. 按 maxSurge/maxUnavailable 缩放
+    // maxSurge=25%: 最多多启动 25% Pod
+    // maxUnavailable=25%: 最多允许 25% Pod 不可用
+    dc.scaleUp(newRS, d.Spec.Strategy.RollingUpdate.MaxSurge)
+    dc.scaleDown(oldRS, d.Spec.Strategy.RollingUpdate.MaxUnavailable)
+    // 3. 检查进度，超时则标记 ProgressDeadlineExceeded
+    if time.Since(d.Status.Conditions[last].LastUpdateTime) > deadline {
+        dc.markProgressDeadlineExceeded(d)
+    }
+}
+```
+
+### 生产最佳实践架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          K8s 生产最佳实践架构                        │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  发布层                                                  │
+│  ─────────                                              │
+│  GitOps (ArgoCD) → 滚动更新 → 自动回滚 → 金丝雀    │
+│                                                           │
+│  资源层                                                  │
+│  ─────────                                              │
+│  requests/limits → PDB → HPA/VPA → 资源配额         │
+│                                                           │
+│  可观测层                                                │
+│  ─────────                                              │
+│  Prometheus + Grafana + Loki + Tempo + Alertmanager   │
+│                                                           │
+│  安全层                                                  │
+│  ─────────                                              │
+│  PSA restricted + NetworkPolicy + RBAC + 供应链安全  │
+│                                                           │
+│  备份层                                                  │
+│  ─────────                                              │
+│  Velero 定时备份 + etcd 快照 + 恢复演练            │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产就绪检查清单（🟢 只读审计）
+
+```bash
+#!/bin/bash
+# 生产就绪审计脚本
+echo "=== 资源限制检查 ==="
+kubectl get pods -A -o json | jq -r '
+  .items[] | select(.spec.containers[].resources.limits == null) |
+  "\(.metadata.namespace)/\(.metadata.name): 缺少 limits"'
+
+echo "=== 探针检查 ==="
+kubectl get pods -A -o json | jq -r '
+  .items[] | select(.spec.containers[].livenessProbe == null) |
+  "\(.metadata.namespace)/\(.metadata.name): 缺少 livenessProbe"'
+
+echo "=== PDB 检查 ==="
+kubectl get pdb -A --no-headers | wc -l
+
+echo "=== 单副本 Deployment ==="
+kubectl get deploy -A -o json | jq -r '
+  .items[] | select(.spec.replicas == 1) |
+  "\(.metadata.namespace)/\(.metadata.name): 单副本"'
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 设置 limits 就够了 | requests 决定调度，limits 决定上限，两者都要设 |
+| HPA 可以解决所有扩容 | HPA 基于指标扩容，突发流量需预留 buffer |
+| 滚动更新不会丢请求 | 必须配合 preStop hook + graceful shutdown |
+| 备份了就安全 | 必须定期恢复演练，否则备份无意义 |
+| 监控越多越好 | 告警噪声比无监控更危险，要精准分级 |
+| 安全是安全团队的事 | 安全是每个人的责任，PSA/RBAC/供应链都要管 |
+
+## 面试要点
+
+1. **生产环境 Pod 必须配置哪些字段？**
+   - resources (requests + limits)
+   - livenessProbe + readinessProbe + startupProbe
+   - securityContext (runAsNonRoot, readOnlyRootFilesystem)
+   - terminationGracePeriodSeconds
+
+2. **滚动更新如何保证零停机？**
+   - readinessProbe 确保新 Pod 就绪后才接收流量
+   - preStop hook 等待存量请求处理完
+   - maxUnavailable=0 确保不减少可用副本
+   - PDB 保护最小可用数
+
+3. **生产环境备份策略如何设计？**
+   - etcd 每日快照 + Velero 定时备份
+   - 3-2-1 原则：3份副本、2种介质、1份异地
+   - 每季度恢复演练，验证备份有效性
+
+4. **如何设计告警策略避免告警疲劳？**
+   - 分级：P1(PagerDuty) / P2(Slack) / P3(邮件)
+   - 基于 SLO 而非绝对阈值
+   - 每个告警必须有 Runbook
+   - 定期审查告警有效性，删除无效告警
+
 ## 相关资源
 
 - [[技能/k8s-cluster-configuration-guide.md|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]]

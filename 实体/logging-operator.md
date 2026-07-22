@@ -75,30 +75,170 @@ Logging Operator 通过 CRD 声明式管理日志管道。`logging` CRD 定义�
 3. **热温冷分层**: 热数据发往 Elasticsearch/Loki，冷数据归档到 S3
 4. **Kafka 管道**: 将日志发送到 Kafka，由下游消费者异步处理
 
-## 安装
+## 安装与配置
 
 ```bash
-# Helm 安装
+# Helm 安装 Logging Operator
 helm repo add banzaicloud-stable https://kubernetes-charts.banzaicloud.com
-helm install logging-operator banzaicloud-stable/logging-operator
-# 配置日志管道
-kubectl apply -f - <<EOF
+helm install logging-operator banzaicloud-stable/logging-operator \
+  -n logging --create-namespace \
+  --set monitoring.serviceMonitor.enabled=true
+
+# 等待 Operator 就绪
+kubectl wait --for=condition=available deployment/logging-operator -n logging --timeout=120s
+```
+
+```yaml
+# Logging CRD（全局配置）
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: Logging
+metadata:
+  name: cluster-logging
 spec:
-  fluentd: {}
-  fluentbit: {}
+  fluentd:
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 2Gi
+    bufferStorageVolume:
+      pvc:
+        spec:
+          accessModes: [ReadWriteOnce]
+          resources:
+            requests:
+              storage: 20Gi
+  fluentbit:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
   controlNamespace: logging
 ---
+# Flow CRD（命名空间级日志管道）
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: app-logs
+  namespace: production
+spec:
+  match:
+  - select:
+      labels:
+        app: payment-service
+  filters:
+  - parser:
+      key_name: log
+      parse:
+        type: json
+  - record_modifier:
+      records:
+      - cluster: prod-cluster
+      - environment: production
+  localOutputRefs:
+  - loki-output
+  - s3-archive
+---
+# Output CRD（Loki 输出）
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: Output
-metadata: { name: loki-output }
+metadata:
+  name: loki-output
+  namespace: production
 spec:
   loki:
     url: http://loki.logging.svc:3100
-    labels: { app: "{{.kubernetes.labels.app}}" }
-EOF
+    labels:
+      app: "{{.kubernetes.labels.app}}"
+      namespace: "{{.kubernetes.namespace_name}}"
+    buffer:
+      type: file
+      path: /buffers/loki
+      flush_interval: 10s
+      retry_max_interval: 300s
+---
+# ClusterOutput（S3 归档）
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterOutput
+metadata:
+  name: s3-archive
+spec:
+  s3:
+    s3_bucket: company-logs-archive
+    s3_region: us-east-1
+    path: "logs/%Y/%m/%d/"
+    buffer:
+      timekey: 1h
+      timekey_wait: 10m
 ```
+
+## 运维操作
+
+```bash
+# 🟢 低风险：查看日志管道状态
+kubectl get logging -A
+kubectl get flows -A
+kubectl get outputs -A
+kubectl get clusterflows -A
+
+# 🟢 低风险：查看 Fluentd/Fluent Bit 状态
+kubectl get pods -n logging -l app.kubernetes.io/name=fluentd
+kubectl get pods -n logging -l app.kubernetes.io/name=fluent-bit
+kubectl logs -l app.kubernetes.io/name=fluentd -n logging --tail=50
+
+# 🟡 中风险：更新 Flow 配置
+kubectl apply -f updated-flow.yaml
+
+# 🟡 中风险：重启 Fluentd（重新加载配置）
+kubectl rollout restart statefulset/fluentd -n logging
+
+# 🔴 高风险：删除 Logging（停止所有日志收集）
+kubectl delete logging cluster-logging
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 日志未收集 | Flow match 不匹配 | `kubectl describe flow <name> -n <ns>` | 检查 labels 选择器 |
+| Fluentd OOMKilled | 缓冲区过大/内存不足 | `kubectl describe pod -l app=fluentd` | 增加 memory limits |
+| 输出失败 | 后端不可达 | `kubectl logs -l app=fluentd -n logging` | 检查 Output URL 和网络 |
+| 日志延迟高 | 缓冲区积压 | `kubectl exec fluentd-0 -- du -sh /buffers/` | 增加 flush 频率或后端容量 |
+| Fluent Bit 重启 | 配置错误 | `kubectl logs -l app=fluent-bit -n logging --previous` | 检查 Logging CRD 配置 |
+
+```
+排查流程：
+├── 日志未到达后端？
+│   ├── kubectl get flows → 确认 Flow 存在且匹配
+│   ├── kubectl logs fluentd → 查看处理错误
+│   └── 检查 Output 连接配置
+├── 日志丢失？
+│   ├── 检查缓冲区是否溢出
+│   ├── 确认 PVC 持久化缓冲已配置
+│   └── 检查 Fluent Bit 采集状态
+└── 性能问题？
+    ├── 检查 Fluentd CPU/内存使用
+    ├── 调整 buffer flush_interval
+    └── 考虑增加 Fluentd 副本
+```
+
+## 生产案例
+
+### 案例 1：多租户日志隔离
+
+- **场景**：SaaS 平台 50+ 租户，每个租户的日志需要发送到独立的 Elasticsearch 索引
+- **排查**：手动为每个命名空间配置 Fluentd 配置文件，维护成本极高
+- **方案**：每个租户命名空间创建独立的 Flow + Output CRD，自动路由到对应 ES 索引
+- **效果**：新租户日志配置从 2h 缩短至 5min，零手动 Fluentd 配置
+
+### 案例 2：日志管道缓冲保护
+
+- **场景**：Elasticsearch 维护期间 2h 不可用，恢复后大量日志丢失
+- **排查**：Fluentd 使用内存缓冲，ES 不可用时缓冲溢出导致日志丢弃
+- **方案**：配置 PVC 持久化缓冲区（20Gi），设置 retry_max_interval=300s，ES 恢复后自动重发
+- **效果**：后续 ES 维护期间零日志丢失，缓冲自动消化
 
 ## 替代方案
 

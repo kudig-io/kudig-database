@@ -106,6 +106,133 @@ A service mesh is an infrastructure layer that handles service-to-service commun
 - Multi-cluster: Istio (most mature)
 - Small team: Linkerd (easiest to operate)
 
+## 源码实现分析
+
+### Istio Sidecar 注入机制
+
+```go
+// istio/pilot/pkg/kube/inject/webhook.go
+func (wh *Webhook) inject(pod *v1.Pod, namespace string) (*v1.Pod, error) {
+    // 1. MutatingWebhookConfiguration 拦截 Pod 创建请求
+    // 2. 检查 namespace 是否有 istio-injection=enabled 标签
+    // 3. 注入 Envoy sidecar 容器
+    pod.Spec.Containers = append(pod.Spec.Containers, v1.Container{
+        Name:  "istio-proxy",
+        Image: "docker.io/istio/proxyv2:" + version,
+        Args:  []string{"proxy", "sidecar"},
+        Env: []v1.EnvVar{
+            {Name: "ISTIO_META_POD_NAME", Value: pod.Name},
+            {Name: "ISTIO_META_MESH_ID", Value: meshID},
+        },
+    })
+    // 4. 注入 initContainer (istio-init) 配置 iptables 重定向
+    // 所有入站/出站流量 → 15001/15006 → Envoy
+    return pod, nil
+}
+```
+
+### 流量拦截链路
+
+```
+Client Pod (App Container)
+    │ localhost:8080
+    ▼
+Envoy Sidecar (outbound)
+    │ 1. mTLS 加密
+    │ 2. 路由规则 (VirtualService)
+    │ 3. 重试/超时/熔断
+    ▼
+Network (mTLS encrypted)
+    │
+    ▼
+Server Pod Envoy Sidecar (inbound)
+    │ 1. mTLS 解密 + 身份验证
+    │ 2. AuthorizationPolicy 检查
+    │ 3. 指标采集 (Prometheus)
+    ▼
+Server App Container (localhost:8080)
+```
+
+## 使用场景
+
+### 场景一：金丝雀发布（流量分割）
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: web-routes
+spec:
+  hosts: [web.default.svc.cluster.local]
+  http:
+  - route:
+    - destination:
+        host: web.default.svc.cluster.local
+        subset: v1
+      weight: 90          # 90% 到稳定版
+    - destination:
+        host: web.default.svc.cluster.local
+        subset: v2
+      weight: 10          # 10% 到新版本
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: web-subsets
+spec:
+  host: web.default.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+```
+
+### 场景二：服务间授权
+
+```yaml
+# 仅允许 frontend 访问 backend 的 GET /api/*
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: backend-policy
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/frontend"]
+    to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/api/*"]
+```
+
+## 常见误区
+
+| 误区 | 正确理解 |
+|------|----------|
+| 所有服务都需要 Mesh | <10 个服务用 K8s 原生即可，Mesh 增加复杂度 |
+| Mesh 零性能开销 | 每跳增加 0.3-2ms 延迟 + ~50-100MB 内存/Pod |
+| Mesh 替代 NetworkPolicy | Mesh 做 L7 授权，NetworkPolicy 做 L3/L4 隔离，互补 |
+| 安装 Mesh 即自动 mTLS | 需配置 PeerAuthentication 启用 STRICT mTLS |
+| Sidecar 注入无侵入 | 修改 Pod spec、增加资源消耗、影响启动时间 |
+| Mesh 解决所有网络问题 | DNS、内核参数、网络策略等基础问题 Mesh 无法解决 |
+
+## 面试要点
+
+1. **Service Mesh 的核心价值？** — 将网络治理（重试/超时/熔断/路由）从应用代码下沉到基础设施层。三大能力：流量管理（金丝雀/蓝绿）、安全（mTLS+授权）、可观测性（自动指标/追踪）。应用无感知。
+
+2. **Istio 与 Linkerd 如何选择？** — Istio：功能全面、多集群成熟、生态丰富，但复杂度高、资源消耗大；Linkerd：轻量（Rust proxy）、简单、低延迟，但功能较少。小团队选 Linkerd，大企业选 Istio。
+
+3. **Sidecar 模式的优缺点？** — 优点：语言无关、应用无侵入、统一策略；缺点：每 Pod 额外资源消耗、增加延迟、调试复杂度增加。替代方案：Sidecarless（Ambient Mesh）、eBPF（Cilium）。
+
+4. **mTLS 如何工作？** — 每个服务获得 SPIFFE 身份（基于 ServiceAccount）；证书由 Istiod CA 签发（默认 24h TTL 自动轮换）；Envoy 自动加密所有服务间通信；零信任：即使内网也加密+验证身份。
+
 ## Related
 
 - [[概念/deployment-controller-architecture.md|deployment-controller-architecture]]

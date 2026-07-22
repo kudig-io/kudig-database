@@ -166,6 +166,118 @@ helm install prometheus-adapter prometheus-community/prometheus-adapter
 - **聚合层未开启**：APIService 处于 False，Metrics API 路由不到 metrics-server。
 - **Pod 未设 requests**：HPA 按 utilization 算时除 0，需每个容器都有 requests。
 
+## 源码实现分析
+
+### Metrics Server 数据采集流程
+
+```go
+// sigs.k8s.io/metrics-server/pkg/scraper/client/summary/client.go
+// Metrics Server 从每个节点的 kubelet Summary API 采集指标
+func (c *client) GetSummary(ctx context.Context, node string) (*stats.Summary, error) {
+    // 1. 调用 kubelet /stats/summary 端点
+    url := fmt.Sprintf("https://%s:10250/stats/summary", node)
+    resp, err := c.httpClient.Get(url)
+    // 返回：节点 CPU/内存 + 每个 Pod 的 CPU/内存
+}
+
+// sigs.k8s.io/metrics-server/pkg/server/server.go
+// Metrics Server 暴露 Metrics API (metrics.k8s.io/v1beta1)
+func (s *server) GetPodMetrics(ctx context.Context, ns string) (*metrics.PodMetricsList, error) {
+    // 2. 从内存缓存中查询最新指标
+    pods := s.storage.GetPods(ns)
+    for _, pod := range pods {
+        // 3. 返回每个容器的 CPU/内存使用量
+        metrics = append(metrics, metrics.PodMetrics{
+            Containers: pod.Containers,  // cpu: nanocores, memory: bytes
+        })
+    }
+    return &metrics.PodMetricsList{Items: metrics}
+}
+```
+
+### Metrics Server 架构
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          Metrics Server 架构                          │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  kubectl top / HPA / VPA                                 │
+│    │  metrics.k8s.io/v1beta1 API                         │
+│    ▼                                                      │
+│  kube-apiserver (聚合层)                                │
+│    │  APIService: v1beta1.metrics.k8s.io                 │
+│    ▼                                                      │
+│  Metrics Server Pod(s)                                   │
+│    │  每 60s 采集一次                                    │
+│    ▼                                                      │
+│  kubelet /stats/summary (每个节点)                      │
+│    │  cAdvisor 采集容器指标                            │
+│    ▼                                                      │
+│  cgroup (CPU/内存实际使用量)                            │
+│                                                           │
+│  关键特性:                                               │
+│  • 只保留最新数据点，无历史                          │
+│  • 不是监控系统，不能替代 Prometheus               │
+│  • 通过 APIService 聚合层注册到 apiserver           │
+│  • HPA 每 15s 查询一次 Metrics API                    │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产部署示例（🟡 部署到集群）
+
+```yaml
+# metrics-server 高可用部署
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-server
+  namespace: kube-system
+spec:
+  replicas: 2  # 高可用
+  selector:
+    matchLabels:
+      k8s-app: metrics-server
+  template:
+    spec:
+      containers:
+      - name: metrics-server
+        image: registry.k8s.io/metrics-server/metrics-server:v0.7.1
+        args:
+        - --metric-resolution=60s
+        - --kubelet-preferred-address-types=InternalIP
+        # 生产环境不用 --kubelet-insecure-tls
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            memory: 512Mi  # 大集群需调大
+```
+
+## 面试要点
+
+1. **Metrics Server 与 Prometheus 的区别？**
+   - Metrics Server：只保留最新数据点，供 HPA/kubectl top
+   - Prometheus：历史数据存储、告警、可视化
+   - 两者互补，不是替代关系
+
+2. **HPA 如何获取指标？**
+   - HPA Controller 每 15s 查询 Metrics API
+   - Metrics API 由 Metrics Server 通过 APIService 聚合层提供
+   - 自定义指标需 Prometheus Adapter 或 KEDA
+
+3. **Metrics Server 的数据采集流程？**
+   - 每 60s 从每个节点的 kubelet /stats/summary 采集
+   - kubelet 通过 cAdvisor 读取 cgroup 数据
+   - Metrics Server 聚合后通过 Metrics API 暴露
+
+4. **生产环境 Metrics Server 注意事项？**
+   - 多副本高可用（≥2）
+   - 不用 --kubelet-insecure-tls，修复 kubelet 证书
+   - 大集群调大资源限制
+   - Pod 必须设 requests，否则 HPA 无法计算 utilization
+
 ## 参见
 
 - [[kubernetes]] — k8s 领域核心页面

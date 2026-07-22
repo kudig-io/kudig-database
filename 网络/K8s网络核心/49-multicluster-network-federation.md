@@ -326,6 +326,24 @@ spec:
 
 ---
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|----------|
+| 跨集群 DNS 解析失败 | ServiceExport 未创建 | `kubectl get serviceexport -A` | 创建 ServiceExport 资源 |
+| 跨集群 Pod 不通 | CIDR 重叠/防火墙 | `subctl show connections` | 使用 GlobalCIDR/放行端口 |
+| 连接间歇中断 | Gateway 不稳定 | `kubectl get gateways -A` | 固定 Gateway 节点/多副本 |
+| 证书错误 | CA 未同步/时间不同步 | `cilium clustermesh status` | 重新 connect/NTP 同步 |
+| 性能下降 | 隧道 MTU 不匹配 | `ping -M do -s 1400 <target>` | 调整 MTU |
+
+## 相关工具
+
+| 工具 | 用途 |
+|------|------|
+| `subctl` | Submariner 管理 |
+| `cilium` | ClusterMesh 管理 |
+| `liqoctl` | Liqo 管理 |
+
 ## Related
 
 - [[网络/K8s网络核心/32-multi-cluster-networking.md|多集群网络]]

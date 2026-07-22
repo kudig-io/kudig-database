@@ -79,7 +79,7 @@ Kubean 的管理面是一个已有的 Kubernetes 集群。Cluster CRD 定义目�
 3. **版本升级管理**: 声明式升级多个集群的 K8s 版本，自动执行 etcd 备份
 4. **国产化部署**: 在麒麟 OS + 鲲鹏 ARM 架构上部署 Kubernetes
 
-## 安装
+## 安装与配置
 
 ```bash
 # 安装 Kubean Operator
@@ -135,6 +135,90 @@ EOF
 # 查看部署进度
 kubectl logs job/my-cluster-install -n kubean-system
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看集群状态
+kubectl get clusters.kubean.io
+kubectl get clusteroperations.kubean.io
+kubectl describe cluster my-cluster
+
+# 🟢 查看操作日志
+kubectl logs -l app=kubean -n kubean-system --tail=100
+
+# 🟡 添加 Worker 节点
+kubectl patch cluster my-cluster --type=merge -p '{"spec":{"hostsConf":{"confs":[{"address":"192.168.1.21","port":22,"user":"root","roles":["worker"]}]}}}'
+kubectl apply -f scale-operation.yaml
+
+# 🟡 升级 K8s 版本
+kubectl apply -f - <<EOF
+apiVersion: kubean.io/v1alpha1
+kind: ClusterOperation
+metadata:
+  name: my-cluster-upgrade
+spec:
+  cluster: my-cluster
+  image: ghcr.io/kubean-io/spray-job:v2.23.0
+  actionType: playbook
+  action: upgrade-cluster.yml
+  extraArgs:
+    kube_version: v1.29.2
+EOF
+
+# 🔴 删除集群（仅移除管理，不销毁节点）
+kubectl delete cluster my-cluster
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| ClusterOperation 卡住 | SSH 连接失败 | `kubectl logs job/<op-name> -n kubean-system` | 检查 SSH Secret 和网络 |
+| 节点加入失败 | 端口未开放/防火墙 | `ssh root@node "systemctl status kubelet"` | 开放 6443/10250 端口 |
+| etcd 集群异常 | 节点数不足/磁盘慢 | `etcdctl endpoint health --cluster` | 确保奇数节点+SSD |
+| 离线部署失败 | 镜像/包未同步 | 检查本地 registry 和 yum/apt 源 | 重新同步离线包 |
+| Operator 未响应 | Pod CrashLoop | `kubectl get pods -n kubean-system` | 检查资源/日志 |
+
+```
+排查流程:
+├── 部署失败
+│   ├── kubectl get clusteroperations → 操作状态
+│   ├── kubectl logs job/<name> → Ansible 执行日志
+│   ├── ssh 目标节点 → 网络可达性
+│   └── 检查 SSH Secret → 凭据正确性
+├── 升级异常
+│   ├── etcdctl snapshot save → 备份 etcd
+│   ├── 检查 kubelet 状态 → 节点健康
+│   └── 回滚 playbook → 版本回退
+└── 离线环境
+    ├── 检查本地 registry → 镜像完整性
+    ├── 检查 yum/apt 源 → 包可用性
+    └── 对比在线/离线包列表 → 缺失组件
+```
+
+## 生产案例
+
+### 案例1: 金融行业离线环境批量集群部署
+
+- **场景**: 银行数据中心无外网，需同时部署 20 个 K8s 集群（信创环境）
+- **排查**: 初始方案用 Kubespray 手动执行，单集群耗时 2h，人工干预多
+- **方案**:
+  1. 部署 Kubean 管理集群，配置离线镜像仓库和本地 yum 源
+  2. 通过 Cluster CRD 声明式定义 20 个集群配置
+  3. 批量创建 ClusterOperation 并行部署
+- **效果**: 单集群部署时间从 2h 降至 25min，20 集群并行完成，零人工干预
+
+### 案例2: 集群版本批量升级
+
+- **场景**: 安全漏洞要求 48h 内将 15 个集群从 v1.27 升级至 v1.28
+- **排查**: 手动升级需逐节点操作，预估耗时 5 天
+- **方案**:
+  1. 先在测试集群验证 upgrade-cluster.yml playbook
+  2. 修改 Cluster CRD 中 kube_version 字段
+  3. 分批创建 ClusterOperation（每批 5 个，间隔 30min）
+  4. 每次升级前自动 etcd 快照备份
+- **效果**: 15 个集群 36h 内全部升级完成，零业务中断
 
 ## 对比
 

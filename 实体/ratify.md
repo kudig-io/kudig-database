@@ -79,7 +79,7 @@ Ratify 通过 Gatekeeper 的 External Data 机制与 Kubernetes API Server 集�
 3. **漏洞准入**：拒绝部署存在严重（Critical/High）CVE 的镜像
 4. **供应链审计**：记录所有镜像验证决策，满足 SLSA/SSDF 合规审计
 
-## 安装
+## 安装与配置
 
 ```bash
 # 前提：需要已安装 OPA Gatekeeper
@@ -90,27 +90,38 @@ helm install gatekeeper gatekeeper/gatekeeper -n gatekeeper-system --create-name
 helm repo add ratify https://deislabs.github.io/ratify
 helm install ratify ratify/ratify -n gatekeeper-system \
   --set featureFlags.AlphaGatekeeperExternalData=true
+kubectl get pods -n gatekeeper-system
+```
 
-# 配置签名验证（Cosign）
-kubectl apply -f - <<EOF
+### 签名验证配置 (Cosign)
+
+```yaml
 apiVersion: config.ratify.deislabs.io/v1alpha1
+kind: Store
+metadata:
+  name: store-oras
 spec:
-  store:
-    name: oras
-    parameters:
-      cosignEnabled: true
-  verifier:
-    - name: cosign
-      artifactTypes: application/vnd.dev.cosign.artifact.sig.v1+json
-      parameters:
-        key: |
-          -----BEGIN PUBLIC KEY-----
-          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
-          -----END PUBLIC KEY-----
-EOF
+  name: oras
+  parameters:
+    cosignEnabled: true
+---
+apiVersion: config.ratify.deislabs.io/v1alpha1
+kind: Verifier
+metadata:
+  name: verifier-cosign
+spec:
+  name: cosign
+  artifactTypes: application/vnd.dev.cosign.artifact.sig.v1+json
+  parameters:
+    key: |
+      -----BEGIN PUBLIC KEY-----
+      MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
+      -----END PUBLIC KEY-----
+```
 
-# 创建 Gatekeeper Constraint（拒绝未签名镜像）
-kubectl apply -f - <<EOF
+### Gatekeeper Constraint
+
+```yaml
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sAllowedImageSignatures
 metadata:
@@ -121,17 +132,79 @@ spec:
     kinds:
       - apiGroups: [""]
         kinds: ["Pod"]
-EOF
+    excludedNamespaces: ["kube-system", "gatekeeper-system"]
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Ratify 状态
+kubectl get pods -n gatekeeper-system -l app=ratify
+kubectl logs -n gatekeeper-system -l app=ratify --tail=50
+
+# 🟢 测试镜像验证
+curl -X POST http://ratify.gatekeeper-system:6001/ratify/gatekeeper/v1/verify \
+  -d '{"subject":"myregistry.io/app:v1.0"}'
+
+# 🟡 更新验证器配置
+kubectl apply -f verifier-updated.yaml
+
+# 🟡 切换到 warn 模式（调试用）
+kubectl patch constraint k8sallowedsignatures require-signed-images \
+  --type=merge -p '{"spec":{"enforcementAction":"warn"}}'
+
+# 🔴 删除 Constraint（停止强制）
+kubectl delete constraint k8sallowedsignatures require-signed-images
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 合法镜像被拒绝 | 公钥不匹配 | `kubectl logs ratify` | 更新 Verifier 公钥 |
+| Ratify Pod CrashLoop | 配置语法错误 | `kubectl describe pod ratify` | 修复 Store/Verifier YAML |
+| Gatekeeper 超时 | Ratify 服务不可达 | `kubectl get svc -n gatekeeper-system` | 检查 Service 和端口 |
+| 未签名镜像通过 | Constraint 未生效 | `kubectl get constraints` | 确认 enforcementAction=deny |
+| SBOM 验证失败 | 验证器未配置 | 检查 Verifier 配置 | 添加 SBOM verifier |
+
+```
+排查流程:
+├── 验证失败
+│   ├── kubectl logs ratify → 查看验证错误
+│   ├── 确认镜像已签名 (cosign verify)
+│   └── 检查公钥配置正确
+├── Constraint 不生效
+│   ├── kubectl get constraints → 确认存在
+│   ├── kubectl describe constraint → 查看 violations
+│   └── 确认 Gatekeeper 和 Ratify Pod 健康
+└── 性能问题
+    ├── 检查 Ratify 缓存配置
+    └── 确认 Registry 连接正常
+```
+
+## 生产案例
+
+### 案例 1: 供应链安全强制
+
+- **场景**: 开发者使用未签名镜像部署，存在供应链攻击风险
+- **方案**: 部署 Ratify + Gatekeeper，强制所有生产命名空间镜像必须经 cosign 签名；CI/CD 中自动签名
+- **效果**: 未签名镜像 100% 拦截，供应链安全合规
+
+### 案例 2: 渐进式策略上线
+
+- **场景**: 直接启用 deny 模式导致大量存量 Pod 无法重建
+- **方案**: 先用 warn 模式观察 2 周；修复所有未签名镜像；再切换到 deny；排除系统命名空间
+- **效果**: 零中断完成策略上线，存量问题全部修复
 
 ## 对比
 
-| 特性 | Ratify | Connaisseur | Kyverno（verifyImages） | Sigstore Policy Controller |
-|------|--------|-------------|------------------------|-------------------------|
-| 多签名格式 | ✅ Notary+Cosign | ⚠️ Cosign | ✅ Cosign | ✅ Cosign |
-| Gatekeeper 集成 | ✅ | ❌ | ❌ | ❌ |
-| SBOM 验证 | ✅ | ❌ | ❌ | ❌ |
-| 可插拔验证器 | ✅ | ❌ | ❌ | ⚠️ |
+| 特性 | Ratify | Connaisseur | Kyverno verifyImages | Sigstore Policy Controller | 适用场景 |
+|------|--------|-------------|------------------------|-------------------------|----------|
+| 多签名格式 | ✅ Notary+Cosign | ⚠️ Cosign | ✅ Cosign | ✅ Cosign | 多格式 |
+| Gatekeeper 集成 | ✅ | ❌ | ❌ | ❌ | OPA 生态 |
+| SBOM 验证 | ✅ | ❌ | ❌ | ❌ | 供应链 |
+| 可插拔验证器 | ✅ | ❌ | ❌ | ⚠️ | 扩展性 |
+| CNCF 状态 | Sandbox | 非 CNCF | Incubating | 非 CNCF | 生态 |
 
 ## 参考链接
 

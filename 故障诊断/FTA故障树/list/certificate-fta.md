@@ -162,6 +162,88 @@ flowchart TD
   CHAIN_MISMATCH_OR --> CHAIN_MISMATCH2[证书 SAN 不包含当前域名]
   CHA
 
+## 生产案例
+
+### 案例1: apiserver 证书过期导致集群不可用
+
+**时间线**:
+- 00:00 凌晨告警: 所有 kubectl 命令返回 `x509: certificate has expired`
+- 00:05 确认 apiserver 服务证书已过期
+- 00:10 执行 `kubeadm certs renew apiserver`
+- 00:12 重启 apiserver 静态 Pod，集群恢复
+
+**根因链**:
+```
+kubeadm签发证书(1年) → 未配置自动轮转 → 证书过期
+→ apiserver TLS失败 → 所有API请求失败 → 集群不可用
+```
+
+**修复**:
+```bash
+# 🟡 检查证书有效期
+kubeadm certs check-expiration
+# 🟡 续期所有证书
+kubeadm certs renew all
+# 🟡 重启控制平面组件
+# 静态 Pod 会自动重启，或手动:
+crictl pods --name kube-apiserver -q | xargs crictl stopp
+```
+
+### 案例2: kubelet 客户端证书过期导致节点 NotReady
+
+**现象**: 多个节点 NotReady，kubelet 日志 `certificate has expired`
+
+**根因**: 未启用 kubelet 证书自动轮转
+
+**修复**:
+```bash
+# 🟡 启用自动轮转
+# /var/lib/kubelet/config.yaml: rotateCertificates: true
+systemctl restart kubelet
+# 🟢 验证
+kubectl get nodes -w
+```
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: certificate-alerts
+  rules:
+  - alert: K8sCertExpiringSoon
+    expr: apiserver_client_certificate_expiration_seconds_bucket{le="2592000"} > 0
+    for: 1h
+    labels:
+      severity: warning
+  - alert: K8sCertExpired
+    expr: kubelet_certificate_manager_client_ttl_seconds < 0
+    for: 1m
+    labels:
+      severity: critical
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 自动轮转 | rotateCertificates + serverTLSBootstrap | P0 |
+| 定期监控 | 每周检查证书剩余有效期 | P0 |
+| 提前告警 | 30天前告警 | P0 |
+| 多 CA 容灾 | 中间 CA 分离 | P1 |
+
+## 面试要点
+
+1. **Q: K8s 集群中有哪些证书？**
+   A: CA 根证书 → apiserver 服务证书 → kubelet 客户端证书 → etcd 证书 → front-proxy 证书 → ServiceAccount 签名密钥
+
+2. **Q: 证书过期的紧急恢复？**
+   A: `kubeadm certs renew all` → 重启控制平面 → 检查 kubelet 证书 → 验证集群连通性 → 配置自动轮转避免复发
+
+3. **Q: 如何避免证书过期？**
+   A: 启用 rotateCertificates → 监控证书 TTL → 定期执行 `kubeadm certs check-expiration` → 自动化续期流程
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

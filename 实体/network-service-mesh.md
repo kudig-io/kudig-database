@@ -75,32 +75,126 @@ NSM 通过 Mutating Webhook 自动为 Pod 注入 NSC init container，配置额�
 3. **网络功能链**: 将流量按顺序通过防火墙、负载均衡等网络功能
 4. **传统应用迁移**: 为需要 L2 网络的传统应用提供连通性
 
-## 安装
+## 安装与配置
 
 ```bash
 # Helm 安装
 helm repo add networkservicemesh https://networkservicemesh.github.io/charts
 helm install nsm networkservicemesh/nsm \
   --set spire.enabled=true \
-  --set forwarder.type=kernel
-# 注册 NSE
-kubectl apply -f - <<EOF
-apiVersion: networkservicemesh.io/v1
-kind: NetworkService
-metadata: { name: secure-intranet }
-spec:
-  payload: IP
-EOF
+  --set forwarder.type=kernel \
+  -n nsm-system --create-namespace
+# 验证部署
+kubectl get pods -n nsm-system
+kubectl get networkServices -A
 ```
 
-## 替代方案
+```yaml
+# 定义 NetworkService
+apiVersion: networkservicemesh.io/v1
+kind: NetworkService
+metadata:
+  name: secure-intranet
+  namespace: nsm-system
+spec:
+  payload: IP
+  containerImage: ghcr.io/networkservicemesh/cmd-nse-firewall:latest
+---
+# NSC Pod 配置（通过注解注入）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-nsm
+  annotations:
+    networkservicemesh.io: 'kernel://secure-intranet/nsm-1'
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+```
 
-| 项目 | 优势 | 劣势 |
-|------|------|------|
-| **NSM** | L2/L3 连接、灵活拓扑 | 社区小、文档少 |
-| Submariner | 跨集群 Pod 通信、成熟 | 仅跨集群，非通用 L2/L3 |
-| Cilium Cluster Mesh | eBPF 高性能 | 仅 Cilium 环境 |
-| Tailscale/Kubelet | 简单 VPN | 非 K8s 原生 |
+```bash
+# 检查 NSC 连接状态
+kubectl exec -it app-with-nsm -- ip addr show nsm-1
+kubectl exec -it app-with-nsm -- ping <nse-ip>
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 NSMgr 和 Forwarder 状态
+kubectl get pods -n nsm-system -l app=nsmgr
+kubectl get pods -n nsm-system -l app=forwarder-vpp
+
+# 🟢 查看网络连接状态
+kubectl get networkserviceendpoints -A
+kubectl logs -n nsm-system -l app=nsmgr --tail=50
+
+# 🟢 检查数据平面连接
+kubectl exec -it <nsc-pod> -- ip route show
+kubectl exec -it <nsc-pod> -- cat /proc/net/dev
+
+# 🟡 重启 Forwarder（影响节点上所有连接）
+kubectl rollout restart daemonset/forwarder-vpp -n nsm-system
+
+# 🟡 重新注册 NSE
+kubectl delete pod -l app=nse-firewall -n nsm-system
+
+# 🔴 卸载 NSM（断开所有网络服务连接）
+helm uninstall nsm -n nsm-system
+kubectl delete namespace nsm-system
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| NSC Pod 无额外网卡 | Webhook 未注入/注解错误 | `kubectl describe pod <nsc>` | 检查注解格式和 Webhook 状态 |
+| 连接超时 | Forwarder 未运行/路由缺失 | `kubectl logs -n nsm-system -l app=forwarder-vpp` | 重启 Forwarder 或检查内核模块 |
+| NSE 未注册 | NSE Pod 异常/标签不匹配 | `kubectl get networkserviceendpoints -A` | 检查 NSE Pod 日志和标签 |
+| 跨节点连接失败 | VXLAN/Geneve 隧道被防火墙拦截 | `iptables -L -n \| grep 4789` | 开放 UDP 4789/6081 端口 |
+| SPIFFE 认证失败 | SPIRE Agent 未就绪 | `kubectl logs -n spire ds/spire-agent` | 检查 SPIRE 注册和证书 |
+
+```
+排查流程：
+├─ NSC 连接失败
+│  ├─ 检查 Pod 注解格式是否正确
+│  ├─ 检查 NSMgr 是否 Running
+│  └─ 检查 Forwarder 日志是否有连接错误
+├─ 数据平面不通
+│  ├─ ip addr 确认网卡已创建
+│  ├─ ip route 确认路由已添加
+│  └─ 检查节点间隧道端口是否开放
+└─ 跨集群连接
+   ├─ 检查 Interdomain DNS 配置
+   └─ 确认远端集群 NSMgr 可达
+```
+
+## 生产案例
+
+### 案例 1：金融系统安全隧道
+
+- **场景**: 银行交易系统需要 Pod 间加密 L2 连接，传统 VPN 方案无法动态扩展
+- **排查**: 使用 NSM + SPIFFE 为每对 Pod 建立 mTLS 加密隧道
+- **方案**: 定义 NetworkService 为加密隧道类型，NSE 提供 IPsec 网关功能
+- **效果**: 动态按需建立加密连接，无需预配置静态 VPN
+
+### 案例 2：多集群网络功能链
+
+- **场景**: 跨 3 个集群的流量需要经过防火墙→负载均衡→IDS 链
+- **排查**: 传统方案需要静态路由配置，无法适应 Pod 动态调度
+- **方案**: NSM 定义 NetworkServiceChain，流量自动按序通过各 NSE
+- **效果**: 网络功能链随 Pod 动态编排，运维复杂度降低 70%
+
+## 替代方案对比
+
+| 维度 | NSM | Submariner | Cilium Cluster Mesh | Tailscale |
+|------|-----|------------|--------------------|-----------| 
+| 网络层级 | L2/L3 | L3 Pod 通信 | L3/L4 | L3 VPN |
+| 动态拓扑 | ✅ NSE 模型 | 有限 | 有限 | ❌ |
+| 跨集群 | ✅ | ✅ 核心功能 | ✅ | ✅ |
+| 数据平面 | Kernel/VPP | 内核 | eBPF | WireGuard |
+| 适用场景 | 复杂网络服务 | 多集群互通 | Cilium 环境 | 简单 VPN |
 
 ## 架构定位
 

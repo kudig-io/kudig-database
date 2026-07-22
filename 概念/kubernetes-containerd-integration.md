@@ -176,6 +176,100 @@ crictl info                              # 检查 CRI 连接
 - **sandbox image 拉取失败**：pause 镜像（registry.k8s.io/pause）拉取失败导致 Pod 无法创建——需要配置 mirror 或预拉取
 - **容器日志被截断**：默认 max_container_log_line_size 为 16KB，超长日志行会被截断——需根据应用调整
 
+## 源码实现分析
+
+### CRI 接口与 kubelet-containerd 通信
+
+```go
+// k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_manager.go
+// kubelet 通过 CRI gRPC 与 containerd 通信
+func (m *kubeGenericRuntimeManager) SyncPod(ctx context.Context, pod *v1.Pod, podStatus *kubecontainer.PodStatus) {
+    // 1. 创建 Pod Sandbox（pause 容器）
+    podSandboxID, err := m.createPodSandbox(ctx, pod)
+    // CRI: RunPodSandbox RPC → containerd 创建 network namespace
+    
+    // 2. 拉取镜像
+    m.imagePuller.EnsureImageExists(ctx, pod, container)
+    // CRI: PullImage RPC → containerd 从 registry 拉取
+    
+    // 3. 启动容器
+    containerID, err := m.startContainer(ctx, podSandboxID, container)
+    // CRI: CreateContainer + StartContainer RPC
+    // containerd: 创建 OCI spec → runc create/start
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     kubelet → containerd → runc 调用链              │
+├─────────────────────────────────────────────────────────┤
+│  kubelet                                                │
+│    │ CRI gRPC (unix:///run/containerd/containerd.sock)  │
+│    ▼                                                    │
+│  containerd                                             │
+│    │ 管理容器生命周期、镜像、快照              │
+│    │ OCI Runtime Spec                                   │
+│    ▼                                                    │
+│  runc (OCI runtime)                                     │
+│    │ clone() + namespaces + cgroups                     │
+│    ▼                                                    │
+│  容器进程 (PID 1 in new namespaces)                    │
+│                                                         │
+│  关键 socket:                                           │
+│  /run/containerd/containerd.sock (CRI)                  │
+│  /run/containerd/io.containerd.runtime.v2.task/ (shim) │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：CRI 故障诊断
+
+```bash
+# 🟢 检查 containerd 服务状态
+systemctl status containerd
+crictl info | jq '.config.containerd'
+
+# 🟢 检查 CRI socket 连通性
+crictl --runtime-endpoint unix:///run/containerd/containerd.sock ps
+
+# 🟢 查看容器和 Pod 状态
+crictl pods
+crictl ps -a
+crictl inspect <container-id> | jq '.status'
+
+# 🟡 重启 containerd（会重启所有容器）
+systemctl restart containerd
+# 🔴 生产环境重启 containerd 会导致节点上所有 Pod 重启
+
+# 🟢 检查 kubelet CRI 配置
+cat /var/lib/kubelet/config.yaml | grep containerRuntimeEndpoint
+```
+
+## 面试要点
+
+1. **CRI 接口的核心 RPC 有哪些？**
+   - RuntimeService：RunPodSandbox / StopPodSandbox / CreateContainer / StartContainer
+   - ImageService：PullImage / ListImages / RemoveImage
+   - 通过 gRPC over Unix Socket 通信
+   - kubelet 不直接操作容器，全部通过 CRI 抽象
+
+2. **从 kubectl apply 到容器运行的完整链路？**
+   - apiserver 写入 etcd → scheduler 绑定节点 → kubelet Watch 到 Pod
+   - kubelet → CRI RunPodSandbox（创建 network ns + pause 容器）
+   - kubelet → CRI PullImage → CreateContainer → StartContainer
+   - containerd → runc → clone() + namespaces + cgroups → 容器进程
+
+3. **containerd 和 Docker 在 K8s 中的区别？**
+   - Docker：kubelet → dockershim → dockerd → containerd → runc（多层）
+   - containerd：kubelet → CRI → containerd → runc（直接）
+   - K8s 1.24 移除 dockershim，减少一层抽象，性能更好
+   - 容器镜像格式不变（OCI），应用无感知
+
+4. **containerd shim 的作用是什么？**
+   - 每个容器一个 containerd-shim-runc-v2 进程
+   - 解耦 containerd 主进程与容器生命周期
+   - containerd 重启不影响已运行容器
+   - shim 负责收集容器退出码、管理 stdio
+
 ## 相关页面
 
 - [[kubernetes]] — 集群整体架构

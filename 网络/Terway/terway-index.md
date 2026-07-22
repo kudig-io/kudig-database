@@ -257,5 +257,116 @@ graph LR
 
 > 维护说明：本索引由人工维护，新增 Terway 资源时请同步更新本文件。
 
+---
+
+## 7. 快速导航
+
+### 按主题分类
+
+| 主题 | 核心文件 | 补充阅读 |
+|------|---------|----------|
+| **产品与架构** | [01-product](./01-product.md), [02-architecture](./02-architecture.md) | [05-advanced](../网络/05-terway-advanced-guide.md) |
+| **部署与配置** | [03-usage](./03-usage.md), [03b-crd-operations](./03b-crd-operations.md) | [242-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) |
+| **运维与监控** | [04-operations](./04-operations.md), [38-gc](../网络/38-terway-gc-mechanism.md) | [06-performance](./06-performance.md) |
+| **测试与验证** | [05-testing](./05-testing.md) | [06-performance](./06-performance.md) |
+| **故障排查** | [07-troubleshooting-fta](./07-troubleshooting-fta.md), [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) | [07-terway-troubleshooting](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) |
+| **培训材料** | [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | [day-24-terway-cni](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) |
+
+### 按难度分级
+
+| 级别 | 适用人群 | 推荐文件 |
+|------|---------|----------|
+| 🟢 入门 | 新人/开发者 | [day-24-terway-cni](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) → [01-product](./01-product.md) → [03-usage](./03-usage.md) |
+| 🟡 进阶 | SRE/运维 | [02-architecture](./02-architecture.md) → [04-operations](./04-operations.md) → [07-troubleshooting-fta](./07-troubleshooting-fta.md) |
+| 🔴 专家 | 架构师/网络工程师 | [02-architecture](./02-architecture.md) → [06-performance](./06-performance.md) → [38-gc](../网络/38-terway-gc-mechanism.md) → [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) |
+
+---
+
+## 8. 常见问题 FAQ
+
+### Q1: Terway 与 Flannel 有什么区别？
+
+| 维度 | Terway | Flannel |
+|------|--------|----------|
+| 网络模式 | VPC 原生 (ENI) | Overlay (VXLAN) |
+| Pod IP | VPC 地址段 | 独立 CIDR |
+| 性能 | 95%+ | 70-80% |
+| NetworkPolicy | ✅ 安全组 | ❌ |
+| 固定 IP | ✅ | ❌ |
+| 适用场景 | 阿里云 ACK | 通用/开发测试 |
+
+### Q2: 如何选择 Terway 网络模式？
+
+```
+需要最高性能？
+├── 是 → 节点 < 50？→ ENI 独占
+│        节点 ≥ 50？→ ENIIP
+└── 否 → 需要高密度？
+         ├── 是 → 内核 ≥ 4.19？→ IPVlan
+         │        内核 < 4.19？→ ENIIP
+         └── 否 → VPC 模式 (兼容优先)
+```
+
+### Q3: ENI 配额不足怎么办？
+
+1. **短期**: 释放闲置 ENI (`kubectl delete podeni <name>`)
+2. **中期**: 调整 IP 池大小 (`max_pool_size`)
+3. **长期**: 提工单申请扩容 ECS 实例 ENI 配额
+
+### Q4: 如何排查 Pod 无法获取 IP？
+
+```bash
+# 1. 检查 Terway Pod 状态
+kubectl get pods -n kube-system -l app=terway-eniip
+
+# 2. 查看 Terway 日志
+kubectl logs -n kube-system -l app=terway-eniip --tail=100
+
+# 3. 检查 ENI 配额
+kubectl exec -n kube-system <terway-pod> -- terway-cli mapping
+
+# 4. 检查 vSwitch IP 使用
+aliyun vpc DescribeVSwitchAttributes --VSwitchId vsw-xxx
+```
+
+### Q5: Terway 支持 IPv6 吗？
+
+支持。Terway v1.6+ 支持 IPv6 双栈模式：
+
+```yaml
+# Pod 配置 IPv6
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.aliyun.com/ipv6: "true"
+spec:
+  containers:
+  - name: app
+    image: nginx
+```
+
+---
+
+## 9. 版本更新日志
+
+| 版本 | 发布日期 | 主要更新 |
+|------|---------|----------|
+| v1.8.x | 2026-Q1 | 性能优化、稳定性增强、K8s 1.30 支持 |
+| v1.7.x | 2025-Q3 | Trunk ENI、多网卡增强、K8s 1.28 支持 |
+| v1.6.x | 2025-Q1 | IPVlan 模式、eBPF 策略、K8s 1.26 支持 |
+| v1.5.x | 2024-Q3 | 基础 ENI/ENIIP 支持、K8s 1.24 支持 |
+
+---
+
+## 10. 相关工具
+
+| 工具 | 用途 | 安装方式 |
+|------|------|----------|
+| `terway-cli` | Terway 诊断工具 | Terway Pod 内置 |
+| `kubectl` | K8s 资源管理 | [官方文档](https://kubernetes.io/docs/tasks/tools/) |
+| `aliyun-cli` | 阿里云资源管理 | `brew install aliyun-cli` |
+| `helm` | Terway 部署管理 | `brew install helm` |
+| `prometheus` | 监控指标采集 | Helm Chart 部署 |
 
 <!-- risk-assessed -->

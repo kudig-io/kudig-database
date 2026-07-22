@@ -161,6 +161,115 @@ kubectl port-forward svc/webapp 8080:80 -n production
 - **会话保持导致负载不均**：sessionAffinity=ClientIP 在 NAT 后地址集中时流量倾斜。
 - **Service 与 Mesh 冲突**：启用 Istio/Linkerd 时注意协议探测，建议显式声明端口 name（http/tcp）。
 
+## 源码实现分析
+
+### EndpointSlice Controller
+
+```go
+// k8s.io/kubernetes/pkg/controller/endpointslice/endpointslice_controller.go
+// EndpointSlice Controller 监听 Pod 变化，更新 EndpointSlice
+func (c *Controller) syncPod(ctx context.Context, key string) error {
+    // 1. 获取 Pod 信息
+    pod := c.getPod(key)
+    // 2. 查找匹配的 Service（通过 selector）
+    services := c.getMatchingServices(pod)
+    for _, svc := range services {
+        // 3. 检查 Pod 是否 Ready
+        ready := isPodReady(pod)
+        // 4. 更新 EndpointSlice
+        slice := c.getOrCreateEndpointSlice(svc)
+        if ready {
+            slice.Endpoints = append(slice.Endpoints, v1.Endpoint{
+                Addresses: []string{pod.Status.PodIP},
+                Conditions: v1.EndpointConditions{Ready: &ready},
+                NodeName:   &pod.Spec.NodeName,
+                Zone:       &pod.Labels["topology.kubernetes.io/zone"],
+            })
+        }
+        c.client.Update(ctx, slice)
+    }
+}
+```
+
+### Service 类型与数据路径
+
+```
+┌───────────────────────────────────────────────────────────┐
+│          Service 类型与数据路径                        │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  ClusterIP (默认):                                       │
+│  Pod → ClusterIP:port → kube-proxy → Pod IP:targetPort │
+│                                                           │
+│  NodePort:                                               │
+│  外部 → NodeIP:30000-32767 → kube-proxy → Pod IP     │
+│                                                           │
+│  LoadBalancer:                                           │
+│  外部 → 云 LB → NodePort → kube-proxy → Pod IP       │
+│                                                           │
+│  ExternalName:                                           │
+│  Pod → DNS CNAME → 外部域名 (无 kube-proxy)          │
+│                                                           │
+│  Headless (clusterIP: None):                             │
+│  Pod → DNS A记录 → 直接返回所有 Pod IP              │
+│                                                           │
+│  关键组件:                                               │
+│  • EndpointSlice Controller: Pod → EndpointSlice       │
+│  • kube-proxy: Service → iptables/IPVS 规则          │
+│  • CoreDNS: Service 名 → ClusterIP 解析             │
+└───────────────────────────────────────────────────────────┘
+```
+
+### 生产配置示例（🟡 部署到集群）
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+  annotations:
+    # 云 LB 注解（AWS 示例）
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local  # 保留源 IP
+  selector:
+    app: web-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  - name: metrics
+    port: 9090
+    targetPort: 9090
+  sessionAffinity: None
+```
+
+## 面试要点
+
+1. **Service 的四种类型及适用场景？**
+   - ClusterIP：内部服务间通信（默认）
+   - NodePort：无云 LB 的外部访问（开发/测试）
+   - LoadBalancer：生产环境外部流量
+   - ExternalName：外部服务 DNS 别名
+
+2. **Service 如何发现后端 Pod？**
+   - EndpointSlice Controller 监听 Pod 变化
+   - 通过 Service selector 匹配 Pod labels
+   - 只有 Ready 的 Pod 才加入 Endpoints
+
+3. **externalTrafficPolicy Local vs Cluster？**
+   - Cluster：流量可跨节点转发，会 SNAT 丢失源 IP
+   - Local：只转发到本节点 Pod，保留源 IP
+   - Local 需保证每节点有 Pod，否则流量丢失
+
+4. **Service 与 Ingress 的区别？**
+   - Service：L4（TCP/UDP）负载均衡
+   - Ingress：L7（HTTP）路由、TLS 终止、路径匹配
+   - 生产：Service + Ingress 组合使用
+
 ## 相关概念
 
 - [[概念/kubernetes.md|Kubernetes]]

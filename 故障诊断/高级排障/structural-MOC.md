@@ -173,5 +173,29 @@ prerequisites:
 - [[存储/K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
 - [[存储/K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 
+## 高级排障场景分类
+
+| 分类 | 典型问题 | 难度 | 关键工具 |
+|------|----------|------|----------|
+| 控制平面 | apiserver 崩溃、etcd 数据损坏、scheduler 异常 | L3-L4 | etcdctl、kube-apiserver 日志 |
+| 证书与认证 | 证书过期、RBAC 配置错误、Webhook 拒绝 | L2-L3 | openssl、kubectl auth can-i |
+| 网络深层 | CNI 插件崩溃、iptables 规则泄漏、MTU 不匹配 | L3 | tcpdump、iptables-save、cilium status |
+| 存储故障 | PV 挂载失败、CSI 驱动异常、数据卷损坏 | L2-L3 | csi-provisioner 日志、fsck |
+| 升级失败 | 集群升级中断、API 废弃、组件不兼容 | L3 | kubeadm upgrade plan、API deprecation check |
+
+## 排障优先级矩阵
+
+```
+影响范围
+│  高 │ P0-控制平面  │ P1-网络深层  │
+│     │ (etcd/apiserver) │ (CNI崩溃)     │
+│  中 │ P1-证书过期  │ P2-存储异常  │
+│     │ (全局影响)   │ (部分Pod)    │
+│  低 │ P2-Webhook  │ P3-升级规划  │
+│     │ (单个准入)   │ (计划内)     │
+└─────┴────────────┴────────────┘
+      高紧迫度        低紧迫度
+```
+
 
 <!-- risk-assessed -->

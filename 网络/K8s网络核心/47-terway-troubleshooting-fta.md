@@ -335,6 +335,24 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 - [[实体/networkpolicy.md|networkpolicy]]
 - [[实体/crd-custom-resources.md|crd-custom-resources]]
 
+## 快速诊断脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：Terway 快速诊断
+
+echo "=== Terway Pod 状态 ==="
+kubectl get pods -n kube-system -l app=terway-eniip -o wide
+
+echo -e "\n=== ENI 使用情况 ==="
+kubectl get podeni -A --no-headers | wc -l
+
+echo -e "\n=== 最近日志 ==="
+kubectl logs -n kube-system -l app=terway-eniip --tail=20
+
+echo -e "\n=== 诊断完成 ==="
+```
+
 ## Related
 
 - [[技能/ts-networking.md|ts-networking]] — 网络故障排查

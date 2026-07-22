@@ -71,7 +71,7 @@ Hyperlight 可作为 Kubernetes 中 AI Agent 和 Serverless 函数的安全沙�
 3. **多租户隔离**: 在共享集群中为每个租户提供硬件级隔离
 4. **安全计算**: 运行不可信代码（如用户提交的脚本）的沙箱
 
-## 安装
+## 安装与配置
 
 ```bash
 # Rust SDK
@@ -83,6 +83,138 @@ let result = sandbox.call_guest_function("add", &[1, 2])?;
 # Kubernetes 集成
 kubectl apply -f https://github.com/hyperlight-dev/hyperlight/deploy/kubernetes.yaml
 ```
+
+### Guest 函数示例
+
+```rust
+// guest/src/main.rs
+use hyperlight_guest::guest_function;
+
+#[guest_function]
+fn process_data(input: &[u8]) -> Vec<u8> {
+    // 在隔离的 micro-VM 中安全处理数据
+    input.iter().map(|b| b.wrapping_add(1)).collect()
+}
+
+fn main() {
+    hyperlight_guest::entrypoint!(process_data);
+}
+```
+
+### Host 调用示例
+
+```rust
+// host/src/main.rs
+use hyperlight_host::sandbox::{Sandbox, SandboxPool};
+
+fn main() -> anyhow::Result<()> {
+    // 创建 Sandbox Pool 复用 VM
+    let pool = SandboxPool::new(10, "guest.wasm")?;
+    
+    // 从池中获取 Sandbox
+    let mut sandbox = pool.acquire()?;
+    
+    // 调用 Guest 函数
+    let result = sandbox.call_guest_function("process_data", &[1, 2, 3])?;
+    println!("Result: {:?}", result);
+    
+    // 归还到池中
+    pool.release(sandbox)?;
+    Ok(())
+}
+```
+
+## 运维操作
+
+```bash
+# 🟢 查看 Hyperlight 运行时状态
+kubectl get pods -l app=hyperlight-runtime
+
+# 🟢 查看 micro-VM 池状态
+kubectl exec deploy/hyperlight-runtime -- curl -s localhost:8080/pool/status
+
+# 🟢 检查 Hypervisor 支持
+kubectl exec deploy/hyperlight-runtime -- dmesg | grep -i "hypervisor\|kvm"
+
+# 🟡 调整 Sandbox Pool 大小
+kubectl patch deploy/hyperlight-runtime -p '{"spec":{"replicas":5}}'
+
+# 🟢 查看 Guest 执行日志
+kubectl logs deploy/hyperlight-runtime | grep -i "guest\|sandbox"
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 诊断命令 | 修复方案 |
+|------|----------|----------|----------|
+| VM 创建失败 | Hypervisor 不可用 | `dmesg \| grep kvm` | 启用 KVM/Hyper-V |
+| Guest 崩溃 | 内存不足 | 检查 Guest 日志 | 增加 VM 内存分配 |
+| 启动慢 | 池未预热 | 检查 Pool 状态 | 增大 Pool 大小 |
+| Host 调用失败 | 函数签名不匹配 | 检查 Guest 导出函数 | 确认函数名和参数类型 |
+| 性能下降 | VM 复用率低 | 监控 Pool 命中率 | 调整 Pool 配置 |
+
+### 排查流程
+
+```
+Hyperlight 异常
+├─ VM 无法创建？
+│  ├─ Hypervisor 不可用 → 检查 KVM/Hyper-V
+│  ├─ 权限不足 → 检查 /dev/kvm 权限
+│  └─ 资源不足 → 检查节点内存
+├─ Guest 执行失败？
+│  ├─ 函数未找到 → 检查 Guest 导出
+│  ├─ 参数错误 → 检查序列化格式
+│  └─ 内存溢出 → 增加 VM 内存
+└─ 性能问题？
+   ├─ 启动慢 → 使用 SandboxPool
+   └─ 调用延迟 → 检查 Host-Guest 通信
+```
+
+## 生产案例
+
+### 案例 1: AI Agent 安全沙箱
+
+**场景**: AI Agent 需执行用户提供的代码，但不能影响主机安全。
+
+**方案**:
+1. 用户代码编译为 Guest 二进制
+2. 在 Hyperlight micro-VM 中执行
+3. 通过 Host Function 受控访问资源
+4. 执行完成后销毁 VM
+
+**效果**: 硬件级隔离，启动 < 2ms，无容器逃逸风险。
+
+### 案例 2: Serverless 函数平台
+
+**场景**: FaaS 平台需毫秒级冷启动和强隔离。
+
+**方案**:
+1. SandboxPool 预热 VM 实例
+2. 函数调用时从池中获取 VM
+3. 执行完成后归还复用
+
+**效果**: 冷启动 < 5ms，内存开销 < 5MB/VM，支持高并发。
+
+## 对比与替代方案
+
+| 维度 | Hyperlight | Firecracker | gVisor | Kata Containers |
+|------|------------|-------------|--------|------------------|
+| 启动时间 | 1-2ms | ~125ms | ~100ms | ~500ms |
+| 内存开销 | 2-5MB | ~5MB | ~50MB | ~100MB |
+| 隔离级别 | 硬件 VM | 硬件 VM | 用户态内核 | 硬件 VM |
+| 兼容性 | 专用 Guest | 完整 Linux | 部分系统调用 | 完整 Linux |
+| 成熟度 | 新兴 | 生产验证 | 生产验证 | 生产验证 |
+
+## 检查清单
+
+- [ ] 节点支持 Hypervisor（KVM/Hyper-V）
+- [ ] /dev/kvm 权限已配置
+- [ ] SandboxPool 大小已优化
+- [ ] Guest 二进制已编译并测试
+- [ ] Host Function 回调已实现
+- [ ] 监控告警：VM 创建失败/执行超时
+- [ ] 资源限制已配置（CPU/内存）
+- [ ] 安全策略已定义（允许的系统调用）
 
 ## 替代方案
 

@@ -329,6 +329,49 @@ sum(rate(backstage_scaffolder_template_executions_total[7d]))
 | 季度 | 平台路线图规划 | 全组织 |
 | 季度 | GameDay / 混沌演练 | SRE + 开发 |
 
+## 故障排查
+
+### 常见问题
+
+| 问题 | 原因 | 解决方案 |
+|------|------|----------|
+| Golden Path 模板创建失败 | 参数验证不通过 | 检查 `pattern` 正则表达式 |
+| 策略拒绝合法资源 | 策略太严格 | 调整 `excludedNamespaces` |
+| 成熟度评分不准确 | 检测脚本未覆盖所有场景 | 更新 `check-maturity.sh` |
+| Backstage 模板不显示 | 权限或注册问题 | 检查 `catalog-info.yaml` |
+| OPA 策略不生效 | ConstraintTemplate 未应用 | `kubectl get constrainttemplate` |
+
+### 调试命令
+
+```bash
+# 检查 Gatekeeper 状态
+kubectl get pods -n gatekeeper-system
+kubectl get constrainttemplate
+kubectl get constraints
+
+# 检查 Kyverno 状态
+kubectl get pods -n kyverno
+kubectl get clusterpolicy
+kubectl get policy -A
+
+# 测试策略
+kubectl apply --dry-run=server -f test-deployment.yaml
+
+# 查看策略拒绝事件
+kubectl get events -A --field-selector reason=FailedValidation
+```
+
+## 最佳实践
+
+| 实践 | 说明 |
+|------|------|
+| 渐进式强制 | 新策略先 Audit 后 Enforce |
+| 豁免机制 | 为特殊场景提供审批豁免 |
+| 开发者反馈 | 定期收集 Golden Path 使用体验 |
+| 自动化检测 | 成熟度评分自动化运行 |
+| 文档同步 | 策略变更同步更新文档 |
+| 度量驱动 | 用数据证明平台价值 |
+
 ## Related
 
 - [[平台工程/内部开发者平台/01-idp-architecture-backstage.md|IDP 架构]]

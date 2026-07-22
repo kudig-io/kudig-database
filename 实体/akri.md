@@ -75,10 +75,12 @@ Akri 以 Helm Chart 方式部署在 Kubernetes 集群中。Akri Agent 作为 Dae
 3. **USB 设备管理**: 在 K8s 中管理 USB 加密狗、传感器等设备
 4. **边缘 AI**: 在边缘集群中自动发现 GPU/NPU 设备并调度推理 Pod
 
-## 安装
+## 安装与配置
+
+### Helm 部署
 
 ```bash
-# Helm 安装 Akri
+# 安装 Akri
 helm repo add akri-helm-charts https://project-akri.github.io/akri/
 helm install akri akri-helm-charts/akri \
   --set onvif.discovery.enabled=true \
@@ -86,11 +88,21 @@ helm install akri akri-helm-charts/akri \
   --set onvif.configuration.brokerPod.image.repository=ghcr.io/project-akri/akri/onvif-broker \
   --namespace akri-system --create-namespace
 
+# 验证部署
+kubectl get pods -n akri-system
+kubectl get crd | grep akri
+```
+
+### 设备发现与使用
+
+```bash
 # 查看发现的设备
 kubectl get akrii -A
+kubectl describe akrii <device-name>
+```
 
-# 创建使用设备的 Pod
-kubectl apply -f - <<EOF
+```yaml
+# 使用设备的 Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -100,23 +112,102 @@ spec:
     matchLabels:
       app: video-processor
   template:
+    metadata:
+      labels:
+        app: video-processor
     spec:
       containers:
       - name: processor
         image: video-processing:latest
+        resources:
+          limits:
+            akri.sh/onvif-camera: "1"
       nodeSelector:
         akri.io/onvif-camera: "true"
-EOF
+---
+# udev 设备发现配置
+apiVersion: akri.sh/v0
+kind: Configuration
+metadata:
+  name: udev-serial
+spec:
+  discoveryHandler:
+    name: udev
+    discoveryDetails: |
+      groupRecursive: false
+      udevRules:
+        - 'KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403"'
+  brokerProperties:
+    SERIAL_NUMBER: "{{devnode}}"
 ```
+
+## 运维操作
+
+```bash
+# 🟢 查看已发现的设备实例
+kubectl get akrii -A -o wide
+
+# 🟢 查看设备配置
+kubectl get akric -A
+
+# 🟢 检查 Agent 状态
+kubectl get pods -n akri-system -l app=akri-agent
+
+# 🟡 添加新的设备配置
+kubectl apply -f udev-config.yaml
+
+# 🔴 删除设备配置（会释放设备资源）
+kubectl delete akric udev-serial
+
+# 🔴 重启 Akri Agent
+kubectl rollout restart daemonset/akri-agent -n akri-system
+```
+
+## 故障排查
+
+| 症状 | 可能原因 | 排查命令 | 修复方案 |
+|------|----------|----------|----------|
+| 设备未发现 | Agent 未运行 | `kubectl get pods -n akri-system -l app=akri-agent` | 检查 Agent DaemonSet 状态 |
+| 设备不可用 | 设备被其他 Pod 占用 | `kubectl get akrii <name> -o yaml` | 检查设备分配状态 |
+| udev 规则不匹配 | 规则语法错误 | `udevadm test /sys/class/...` | 修正 udevRules 配置 |
+| 网络设备发现失败 | 网络不可达 | `ping <device-ip>` | 检查网络连通性和防火墙 |
+| Pod Pending: Insufficient akri.sh/... | 设备资源不足 | `kubectl describe node \| grep akri` | 确认设备已发现并注册 |
+
+**排查流程：**
+```
+设备未被发现
+├── 检查 Agent 状态 → kubectl get pods -n akri-system
+├── 检查设备物理连接 → lsusb / ls /dev/ttyUSB*
+├── 检查 udev 规则 → udevadm info /dev/<device>
+├── 检查 Configuration → kubectl get akric -o yaml
+└── 检查 Agent 日志 → kubectl logs -n akri-system -l app=akri-agent
+```
+
+## 生产案例
+
+### 案例一：工业摄像头管理
+
+- **场景**: 工厂 50+ 个 ONVIF 摄像头需要被 K8s 上的视频分析 Pod 访问
+- **排查**: 手动配置设备 IP 和端口，设备更换后需重新配置
+- **方案**: Akri 自动发现 ONVIF 摄像头，Pod 通过资源请求自动分配设备
+- **效果**: 设备即插即用，更换设备无需修改 Pod 配置，运维工作量降低 80%
+
+### 案例二：边缘传感器集群
+
+- **场景**: 边缘节点连接多个 USB 传感器，需要动态分配给数据处理 Pod
+- **排查**: 使用 Akri udev 发现规则自动识别 USB 传感器
+- **方案**: 配置 udev 规则匹配特定 vendor ID，Pod 通过资源限制请求传感器
+- **效果**: 传感器热插拔自动感知，Pod 自动迁移到有新传感器的节点
 
 ## 对比
 
-| 特性 | Akri | Device Plugin | EdgeX Foundry | KubeEdge Device |
-|------|------|--------------|----------------|-----------------|
-| 设备发现 | ✅ 自动 | ❌ 手动 | ✅ | ✅ |
-| 网络设备 | ✅ | ❌ 仅本地 | ✅ | ✅ |
-| K8s 原生 | ✅ CRD | ✅ | ❌ | ✅ CRD |
-| CNCF 状态 | Sandbox | K8s 内置 | 非 CNCF | Graduated |
+| 特性 | Akri | Device Plugin | EdgeX Foundry | KubeEdge Device | 适用场景 |
+|------|------|--------------|----------------|-----------------|----------|
+| 设备发现 | ✅ 自动 | ❌ 手动 | ✅ | ✅ | Akri 最简单 |
+| 网络设备 | ✅ | ❌ 仅本地 | ✅ | ✅ | - |
+| K8s 原生 | ✅ CRD | ✅ | ❌ | ✅ CRD | - |
+| CNCF 状态 | Sandbox | K8s 内置 | 非 CNCF | Graduated | - |
+| 轻量级 | ✅ | ✅ | ❌ 重量级 | ⚠️ | 边缘场景 |
 
 ## 架构定位
 

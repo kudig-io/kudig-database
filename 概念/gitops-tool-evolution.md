@@ -179,6 +179,101 @@ Tekton 是云原生 CI/CD Pipeline 框架，基于 Kubernetes CRD 构建。
 - 生态参考/_archived-release-notes/cicd-gitops/flux/（51 个文件）
 - 生态参考/_archived-release-notes/cicd-gitops/tekton/（80 个文件）
 
+## 源码实现分析
+
+### Flux Reconciler 调谐引擎
+
+```go
+// github.com/fluxcd/source-controller/controllers/gitrepository_controller.go
+// Flux Source Controller 核心调谐
+func (r *GitRepositoryReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    // 1. 获取 GitRepository 资源
+    obj := &sourcev1.GitRepository{}
+    r.Get(ctx, req.NamespacedName, obj)
+    
+    // 2. Git clone/pull（使用 go-git 或 libgit2）
+    commit, err := r.checkout(ctx, obj)
+    
+    // 3. 生成 Artifact（tar.gz）并存储
+    artifact := r.buildArtifact(commit)
+    obj.Status.Artifact = artifact
+    
+    // 4. 通知下游 Kustomize/Helm Controller
+    // 通过 Condition 变更触发 Watch
+    obj.Status.Conditions = []meta.Condition{{
+        Type: "Ready", Status: "True",
+        Reason: "Succeeded", Message: commit.Message,
+    }}
+}
+```
+
+```
+┌─────────────────────────────────────────────────────────┐
+│     GitOps 工具演进路线                              │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Gen 1: kubectl apply + CI script (2015-2018)          │
+│    └─ 问题: 无漂移检测、无回滚、无审计              │
+│                                                         │
+│  Gen 2: ArgoCD / Flux v1 (2018-2020)                   │
+│    └─ 进步: 自动同步、漂移检测、Git 为真相源        │
+│                                                         │
+│  Gen 3: Flux v2 / ArgoCD 2.x (2020-2023)              │
+│    └─ 进步: 多租户、OCI 支持、Kustomize 原生        │
+│                                                         │
+│  Gen 4: Crossplane / Cluster API (2023+)               │
+│    └─ 进步: 基础设施也 GitOps、控制平面即代码    │
+│                                                         │
+│  趋势: GitOps + Policy as Code + Progressive Delivery  │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 生产运维：GitOps 工具诊断
+
+```bash
+# 🟢 Flux 状态检查
+flux get all -A
+flux get sources git -A
+flux get kustomizations -A
+
+# 🟢 ArgoCD 状态检查
+argocd app list
+argocd app get <app> --show-params
+
+# 🟡 强制重新调谐
+flux reconcile source git <name> -n flux-system
+flux reconcile kustomization <name> -n flux-system
+
+# 🟢 检查调谐日志
+kubectl logs -n flux-system -l app=source-controller --tail=30
+kubectl logs -n flux-system -l app=kustomize-controller --tail=30
+```
+
+## 面试要点
+
+1. **Flux v2 和 ArgoCD 的核心区别？**
+   - Flux：纯 CRD 驱动，无 UI，轻量，与 Helm 深度集成
+   - ArgoCD：有 Web UI，多集群管理强，Application CRD
+   - Flux 更适合“set and forget”，ArgoCD 更适合需要可视化的团队
+   - 两者都是 CNCF 毕业项目
+
+2. **GitOps 的核心原则是什么？**
+   - 声明式：系统状态用声明式配置描述
+   - 版本化：Git 为唯一真相源，可审计可回滚
+   - 自动拉取：控制器自动将集群收敛到 Git 状态
+   - 持续调谐：检测并修复漂移
+
+3. **如何处理 GitOps 中的紧急回滚？**
+   - git revert：最安全，有完整审计记录
+   - ArgoCD UI 回滚：快速但绕过 Git（下次同步会覆盖）
+   - 生产建议：始终通过 Git 操作，保证审计完整性
+
+4. **Progressive Delivery 如何与 GitOps 结合？**
+   - Argo Rollouts / Flagger 实现金丝雀/蓝绿发布
+   - Git 触发部署，但发布策略由 Rollout CRD 控制
+   - 自动分析指标（Prometheus）决定是否继续/回滚
+   - 实现“自动部署 + 安全发布”
+
 ## Related
 
 - [[helm]] — Helm
