@@ -74,6 +74,47 @@ base_confidence: 0.7
 | UP2 | 上游超时/丢包 | `kubectl logs
 ...(截断)
 
+## 生产案例
+
+### 案例 1: CoreDNS Pod OOMKilled 导致集群 DNS 全面不可用
+
+| 时间 | 事件 |
+|------|------|
+| 09:15 | 业务高峰期 DNS 查询量暴增 3x |
+| 09:16 | CoreDNS Pod OOMKilled，剩余 Pod 过载 |
+| 09:17 | 全集群服务发现失败，业务 503 |
+| 09:20 | 🟡 扩容 CoreDNS replicas 2→6，调高 memory limit 170Mi→512Mi |
+| 09:25 | DNS 恢复，业务逐步恢复 |
+
+**根因**: CoreDNS 默认 memory limit 170Mi，业务增长后未同步调整。启用 `autopath` 插件减少无效查询。
+
+### 案例 2: ndots:5 导致外部域名解析超时
+
+**现象**: Pod 内访问 `api.external.com` 延迟 10s+，但 `api.external.com.` 正常。
+
+**诊断**: `kubectl exec pod -- cat /etc/resolv.conf` → ndots:5 → 先尝试 4 次 search 域拼接
+
+**修复**: 🟢 Deployment 中设置 `dnsConfig.options: [{name: ndots, value: "2"}]`，外部域名用 FQDN 加点结尾
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 集群 DNS 完全不可用 | 立即重启 CoreDNS + 扩容 |
+| P1 | 部分域名解析失败 | 15min 内检查 Corefile 配置 |
+| P2 | 解析延迟偏高 | 优化 ndots/cache 配置 |
+
+## 面试要点
+
+1. **Q: CoreDNS 的 Corefile 配置结构是怎样的？**
+   A: Corefile 采用 server-block 结构，每个 block 定义监听域+插件链。典型: `.:53 { errors; health; kubernetes cluster.local; forward . /etc/resolv.conf; cache 30; loop; reload; loadbalance }`。
+
+2. **Q: Pod DNS 策略 ClusterFirst 的解析顺序是什么？**
+   A: 先查 search 域拼接(cluster.local→svc.cluster.local→namespace.svc.cluster.local)，ndots 决定何时直接解析原始域名。外部域名建议用 FQDN+点结尾绕过 search。
+
+3. **Q: 如何监控 CoreDNS 性能？**
+   A: 启用 prometheus 插件暴露 :9153 指标，关注 coredns_dns_request_duration_seconds、coredns_cache_misses、coredns_forward_request_duration_seconds。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

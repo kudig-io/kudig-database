@@ -310,6 +310,39 @@ spec:
 7. **审计追踪**：Git 历史 = 完整变更审计日志
 8. **灾难恢复**：Git 仓库 + etcd 备份 = 完整恢复能力
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| Application 一直 OutOfSync | 集群中有手动修改或 webhook 失效 | `argocd app diff <name>` | 启用 selfHeal 或手动 Sync |
+| Sync 失败 `ComparisonError` | RBAC 权限不足或 CRD 缺失 | `argocd app get <name> -o yaml` | 检查 argocd-server ClusterRole |
+| Flux HelmRelease 卡住 | Helm chart 仓库不可达 | `kubectl describe helmrelease -n flux-system` | 检查 HelmRepository URL 和 Secret |
+| 自动同步循环触发 | 资源有 mutating webhook 修改 | `argocd app get <name> --show-params` | 添加 ignoreDifferences 配置 |
+| Git 凭证过期 | Token 轮换或 Secret 未更新 | `kubectl get secret -n argocd -o yaml` | 更新 repo-credentials Secret |
+| 多集群同步延迟 | 网络抨动或 agent 断开 | `argocd cluster list` | 检查集群连接状态，重启 agent |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 仓库结构 | App-of-Apps 或 Kustomize overlay | 按环境/集群分层 |
+| 同步策略 | staging 自动，prod 手动审批 | 降低生产风险 |
+| 回滚 | Git revert + 自动同步 | 保持简单，< 2min |
+| 安全 | 最小权限 ServiceAccount | 按 Project 隔离 RBAC |
+| 可观测性 | 启用 ArgoCD metrics + 告警 | 监控 sync 失败率 |
+| 备份 | Git 仓库 + etcd 定期快照 | 双保险恢复 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| ArgoCD | 声明式 GitOps CD | 多集群多环境管理 |
+| Flux CD | 轻量级 GitOps | 单集群/边缘场景 |
+| argocd-image-updater | 自动镜像版本追踪 | 非生产环境自动升级 |
+| kubeconform | PR 中 Schema 校验 | 防止非法 YAML 合入 |
+| SOPS / age | Secret 加密存储 | Git 中安全管理凭证 |
+| Helm | 参数化部署 | 复杂应用 Chart 管理 |
+
 ## Related
 
 - [[发布变更/变更管理/index.md|变更管理]]

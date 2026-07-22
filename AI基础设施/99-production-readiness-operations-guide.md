@@ -223,6 +223,82 @@ AI/ML 基础设施的生产就绪不能孤立完成，需要与以下域紧密�
 - **[[生产运维/README.md|生产运维]]**：负责 GPU FinOps、Spot/按需实例混合策略、事件响应与值班 Runbook。AI 平台应提供按团队/项目的 GPU 使用量报表，支撑成本分摊。
 - **[[容器运行时/README.md|容器运行时]]**：负责 NVIDIA Container Toolkit/CDI、GPU 镜像分层与缓存、镜像仓库高可用与签名验证。AI 镜像应遵循容器运行时团队定义的基础镜像与扫描策略。
 
+## 5.5 GPU 资源监控与告警
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ai-infra-alerts
+  namespace: monitoring
+spec:
+  groups:
+  - name: gpu.rules
+    rules:
+    - alert: GPUMemoryNearFull
+      expr: DCGM_FI_DEV_FB_USED / DCGM_FI_DEV_FB_FREE > 0.95
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "GPU {{ $labels.gpu }} 显存使用率 > 95%"
+    - alert: GPUTemperatureHigh
+      expr: DCGM_FI_DEV_GPU_TEMP > 85
+      for: 3m
+      labels:
+        severity: critical
+      annotations:
+        summary: "GPU {{ $labels.gpu }} 温度过高: {{ $value }}°C"
+    - alert: GPUUtilizationLow
+      expr: DCGM_FI_DEV_GPU_UTIL < 10
+      for: 30m
+      labels:
+        severity: info
+      annotations:
+        summary: "GPU {{ $labels.gpu }} 利用率过低，可能空闲浪费"
+    - alert: InferenceLatencyHigh
+      expr: histogram_quantile(0.99, rate(inference_request_duration_seconds_bucket[5m])) > 5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "推理服务 P99 延迟 > 5s"
+```
+
+## 5.6 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| GPU 调度 | 启用 GPU 拓扑感知调度 | 减少 NVLink/PCIe 跨节点通信 |
+| 镜像管理 | 基础镜像 + 分层构建 | CUDA/cuDNN 层复用，减少拉取时间 |
+| 推理服务 | 多副本 + 负载均衡 | 避免单点故障 |
+| 训练任务 | Checkpoint 定期保存 | 防止长时间训练中断丢失 |
+| 资源配额 | 按团队/项目设置 GPU quota | 避免资源争抢 |
+| 安全 | 模型文件加密存储 | 防止知识产权泄漏 |
+| 成本 | 空闲 GPU 自动缩零 | 结合 KEDA + Karpenter |
+| 可观测性 | DCGM Exporter + Grafana | 全量 GPU 指标可视化 |
+
+## 5.7 容量规划
+
+| 场景 | GPU 型号 | 显存需求 | 并发能力 |
+|------|---------|---------|--------|
+| 7B 模型推理 | A10G (24GB) | ~16GB | ~30 QPS |
+| 13B 模型推理 | A100 (40GB) | ~30GB | ~15 QPS |
+| 70B 模型推理 | A100×2 (80GB) | ~60GB | ~5 QPS |
+| 7B 模型微调 | A100 (40GB) | ~35GB | 单任务 |
+| 分布式训练 | H100×8 | 全量 | 按集群规模 |
+
+## 5.8 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| DCGM Exporter | GPU 指标采集 | Prometheus 监控 |
+| vLLM | 高性能推理引擎 | LLM 服务化 |
+| Triton Inference Server | 多模型推理 | 生产级推理服务 |
+| Kubeflow | ML 工作流编排 | 训练/推理 Pipeline |
+| NVIDIA GPU Operator | GPU 驱动管理 | K8s 集群 GPU 自动化 |
+| Ray Serve | 分布式推理 | 复杂模型服务化 |
+
 ## 6. 推荐阅读
 
 以下文档可与本指南配合使用，覆盖从 GPU 调度、训练推理到 AI Agent 部署与安全治理的完整链路。
@@ -250,7 +326,26 @@ AI/ML 基础设施的生产就绪不能孤立完成，需要与以下域紧密�
 
 ---
 
-*本指南依据 2026-07-01 域内容缺口分析中的 `AI基础设施` 建议项编写，重点补齐生产就绪检查清单、风险缓解、日常运维与故障排查速查。*
+## 7. 变更日志
+
+| 版本 | 日期 | 变更内容 |
+|------|------|--------|
+| v1.3.0 | 2026-07 | 新增 GPU 监控告警和容量规划 |
+| v1.2.0 | 2026-06 | 增加推理服务最佳实践 |
+| v1.1.0 | 2026-05 | 补充故障排查速查表 |
+| v1.0.0 | 2026-04 | 初始版本 |
+
+## 8. 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| GPU 利用率低怎么办？ | 检查批处理大小，启用动态批处理 |
+| 推理延迟高如何优化？ | 使用 vLLM/TensorRT，启用量化 |
+| 训练任务中断如何恢复？ | 从最近 Checkpoint 恢复 |
+| 如何控制 GPU 成本？ | 空闲缩零 + Spot 实例 + 配额管理 |
+| 模型安全如何保障？ | 加密存储 + 访问控制 + 审计日志 |
+
+*本指南依据 2026-07-01 域内容缺口分析中的 `AI基础设施` 建议项编写，重点补齐生产 就绪检查清单、风险缓解、日常运维与故障排查速查。*
 
 
 <!-- risk-assessed -->

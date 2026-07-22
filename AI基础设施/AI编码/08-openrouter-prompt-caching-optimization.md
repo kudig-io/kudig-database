@@ -285,7 +285,36 @@ console.log('Remaining:', keyInfo.data.limit_remaining);
 
 > **注意**：账户余额为负时，即使 `:free` 模型也会返回 402 错误。
 
----
+## 缓存效果监控
+
+```bash
+# 查看缓存命中率
+curl -s https://openrouter.ai/api/v1/generation \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" | jq '{
+    cached_tokens: .usage.cache_read_input_tokens,
+    total_tokens: .usage.total_tokens,
+    hit_rate: (.usage.cache_read_input_tokens / .usage.total_tokens * 100)
+  }'
+```
+
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
+|---------|---------|---------|--------|
+| 缓存命中率低 | 提示词前缀频繁变化 | 对比请求中的 system prompt | 稳定化前缀，动态部分后置 |
+| 缓存未生效 | 模型不支持 prompt caching | 检查模型文档 | 切换到支持缓存的模型 |
+| 费用未降低 | 缓存读取仍计费 | 查看账单明细 | 确认 cache_read 价格折扣 |
+| 响应质量下降 | 缓存内容过期 | 对比缓存前后输出 | 调整 TTL 或强制刷新 |
+| 首次请求慢 | 缓存未预热 | 监控 TTFT 指标 | 定时发送预热请求 |
+
+## 缓存策略对比
+
+| 策略 | 适用场景 | 节省比例 | 注意事项 |
+|------|---------|---------|--------|
+| System Prompt 缓存 | 固定角色设定 | 60-90% | 保持前缀不变 |
+| Few-shot 缓存 | 固定示例集 | 40-70% | 示例顺序固定 |
+| 文档上下文缓存 | RAG 场景 | 50-80% | 文档分块稳定 |
+| 对话历史缓存 | 多轮对话 | 30-60% | 历史追加不修改 |
 
 ## 关联文档
 
@@ -297,6 +326,24 @@ console.log('Remaining:', keyInfo.data.limit_remaining);
 | [11 - 安全与隐私](./11-openrouter-[[安全/README.md|security]]-privacy.md) | BYOK 与数据治理 |
 
 ---
+
+## 版本兼容性
+
+| OpenRouter 版本 | 缓存特性 | 支持模型 |
+|----------------|---------|--------|
+| 2026-07 | 自动缓存 + TTL 控制 | Claude/GPT-4o |
+| 2026-04 | 显式缓存标记 | Claude 3.5+ |
+| 2026-01 | Prompt Caching GA | Anthropic only |
+| 2025-10 | Beta | 有限模型 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 缓存如何计费？ | 缓存读取通常 90% 折扣 |
+| 缓存 TTL 多长？ | 默认 5 分钟，可配置 |
+| 如何强制刷新？ | 修改前缀或等待 TTL 过期 |
+| 哪些模型支持？ | Claude 3.5+、GPT-4o 系列 |
 
 *本文档基于 OpenRouter 官方文档（openrouter.ai/docs/guides/features/prompt-caching）整理。*
 

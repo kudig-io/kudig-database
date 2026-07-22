@@ -157,6 +157,46 @@ flowchart TD
 |------|---------|
 | **事件** | Prometheus Operator PrometheusRule 同步事件、ServiceMonitor 
 
+## 生产案例
+
+### 案例 1: Prometheus 磁盘写满导致监控数据丢失
+
+| 时间 | 事件 |
+|------|------|
+| 04:00 | 告警规则全部停止触发，Grafana 无数据 |
+| 04:05 | `kubectl exec prometheus-0 -- df -h` 显示 /prometheus 100% |
+| 04:10 | 🔴 紧急扩容 PVC + 清理旧数据(WAL) |
+| 04:20 | Prometheus 恢复采集 |
+
+**根因**: 监控目标增加 3x 后未调整 retention 和磁盘容量。
+
+### 案例 2: ServiceMonitor 未生效导致新服务无监控
+
+**现象**: 新部署的服务在 Prometheus targets 中不存在。
+
+**诊断**: ServiceMonitor 的 namespaceSelector 未包含新服务的 namespace
+
+**修复**: 🟢 更新 ServiceMonitor namespaceSelector 或添加匹配 label
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 监控完全不可用 | 检查 Prometheus Pod + 存储 |
+| P1 | 部分目标采集失败 | 检查 ServiceMonitor/Endpoints |
+| P2 | 告警规则未触发 | 检查规则语法和阈值 |
+
+## 面试要点
+
+1. **Q: Prometheus 的架构和数据流？**
+   A: Prometheus Server 通过 HTTP pull 从 targets 拉取指标 → 存入本地 TSDB → PromQL 查询 → Alertmanager 处理告警。配合 ServiceMonitor(CRD) 自动发现 K8s 内目标。
+
+2. **Q: Prometheus 高可用方案有哪些？**
+   A: ① 双副本(相同配置，Alertmanager 去重) ② Thanos(全局视图+长期存储) ③ Cortex/Mimir(水平扩展+多租户) ④ VictoriaMetrics(高性能替代)。
+
+3. **Q: 如何避免 Prometheus 磁盘写满？**
+   A: ① 设置合理的 retention.time(15d) 和 retention.size ② 监控磁盘使用率告警(80%) ③ 使用 remote_write 卸载长期数据 ④ 定期审查高基数指标。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

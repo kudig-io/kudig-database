@@ -167,6 +167,47 @@ flowchart TD
   SVC_NET_OR{{OR}}
   SVC_NET --> SV
 
+## 生产案例
+
+### 案例 1: Admission Webhook 超时导致所有资源创建失败
+
+| 时间 | 事件 |
+|------|------|
+| 17:00 | 所有 kubectl apply 报错: "connection refused" 或 "context deadline exceeded" |
+| 17:05 | `kubectl get validatingwebhookconfigurations` 发现 webhook 服务不可达 |
+| 17:08 | Webhook Pod CrashLoopBackOff |
+| 17:12 | 🟡 设置 failurePolicy: Ignore 或修复 Webhook Pod |
+| 17:15 | 资源创建恢复 |
+
+**根因**: Webhook 服务 OOMKilled，failurePolicy=Fail 导致所有请求被拒绝。
+
+### 案例 2: Webhook 规则过广导致循环调用
+
+**现象**: Webhook Pod 反复重启，日志显示 "too many redirects"。
+
+**诊断**: Webhook 拦截了自身 namespace 的资源创建，形成循环
+
+**修复**: 🟢 添加 namespaceSelector 排除 webhook 自身 namespace
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | Webhook 导致集群不可用 | 删除/禁用问题 Webhook |
+| P1 | 部分资源创建失败 | 检查 failurePolicy 和 Webhook 状态 |
+| P2 | Webhook 延迟偏高 | 优化 timeoutSeconds 和规则范围 |
+
+## 面试要点
+
+1. **Q: Mutating 与 Validating Admission Webhook 的执行顺序？**
+   A: 请求先经过所有 Mutating Webhook(可修改对象)，再经过所有 Validating Webhook(只能拒绝)。两者内部按 name 字母序执行，失败则拒绝请求。
+
+2. **Q: failurePolicy 的 Fail 与 Ignore 如何选择？**
+   A: Fail: Webhook 不可用时拒绝请求，保证策略强制执行(安全类)；Ignore: Webhook 不可用时放行，保证可用性(非关键策略)。生产安全类用 Fail，其他用 Ignore。
+
+3. **Q: 如何避免 Webhook 影响自身组件？**
+   A: ① namespaceSelector 排除 kube-system 和 webhook 自身 ns ② objectSelector 排除特定 label ③ 设置合理的 timeoutSeconds(默认 10s) ④ 使用 reinvocationPolicy 避免循环。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

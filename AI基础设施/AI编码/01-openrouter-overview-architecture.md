@@ -254,7 +254,38 @@ graph TB
 | **企业合规** | EU Data Residency + Zero Data Retention | ZDR、EU Routing |
 | **Agent 工具后端** | 为 Aider、Cline、OpenCode 等 Agent 提供统一 LLM 后端 | OpenAI 兼容、BYOK |
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| 401 Unauthorized | API Key 无效或未设置 | `echo $OPENROUTER_API_KEY` | 重新生成 Key |
+| 402 Payment Required | 余额不足 | 查看 Dashboard 余额 | 充值或切换到免费模型 |
+| 429 Rate Limited | 超过速率限制 | 检查响应头 Retry-After | 实现指数退避 |
+| 502/503 | 上游 Provider 故障 | 检查 OpenRouter 状态页 | 配置 fallback 模型 |
+| 响应格式异常 | 模型不支持请求的参数 | 检查模型 supported parameters | 移除不支持的参数 |
+| 延迟突然增加 | Provider 路由变化 | 对比不同 Provider 延迟 | 指定首选 Provider |
+
+## 架构组件
+
+| 组件 | 职责 | 说明 |
+|------|------|------|
+| API Gateway | 统一入口 | OpenAI 兼容 API 格式 |
+| Router | 智能路由 | 根据模型/价格/延迟选择 Provider |
+| Provider Pool | 上游管理 | 聚合 200+ 模型 |
+| Billing | 计费 | 统一 Token 计费 |
+| Prompt Cache | 缓存 | 减少重复计算费用 |
+| Moderation | 内容审核 | 可选安全过滤 |
+
+## 与直接调用 Provider 对比
+
+| 维度 | OpenRouter | 直接调用 |
+|------|-----------|--------|
+| 模型切换 | 一行代码 | 需改 SDK/端点 |
+| 价格 | 透明统一 | 各家不同 |
+| Fallback | 自动 | 需自建 |
+| 账单 | 统一 | 多个账户 |
+| 延迟 | +10-50ms | 最低 |
+| 新模型 | 即时可用 | 需集成 |
 
 ## 关联文档
 
@@ -266,6 +297,54 @@ graph TB
 | [topic-coding/03](../topic-coding/03-opencode-providers-models.md) | OpenCode 中配置 OpenRouter Provider |
 
 ---
+
+## 版本兼容性
+
+| OpenRouter API | 主要变化 | 兼容性 |
+|---------------|--------|--------|
+| 2026-07 | 新增 Gemini 2.5、Claude 4 | 向后兼容 |
+| 2026-04 | Prompt Caching GA | 向后兼容 |
+| 2026-01 | 统一计费模型 | 破坏性变更 |
+| 2025-10 | OpenAI 兼容 v2 | 向后兼容 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| openrouter-cli | 命令行测试 | 快速验证 API |
+| LiteLLM | 本地代理 | 统一多 Provider 接口 |
+| Portkey | AI 网关 | 企业级路由和监控 |
+| Helicone | 可观测性 | LLM 调用分析 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何降低延迟？ | 指定首选 Provider，启用 Prompt Caching |
+| 如何控制成本？ | 使用免费模型 + 缓存，设置用量上限 |
+| 如何保证高可用？ | 配置 fallback 模型，多 Provider 冗余 |
+| 数据安全如何保障？ | 启用 ZDR，使用 EU Routing |
+| 如何监控用量？ | Dashboard + API 查询 + 告警 |
+
+## 最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 模型选择 | 根据任务类型选择 | 代码用 Claude，问答用 GPT-4o-mini |
+| 成本控制 | 启用缓存 + 免费模型 | 降低 60-90% 费用 |
+| 高可用 | 配置 fallback | 主模型失败自动切换 |
+| 安全 | 启用 ZDR | 零数据保留 |
+| 监控 | 设置用量告警 | 防止异常消费 |
+| 延迟 | 指定 Provider | 减少路由跳数 |
+| 版本管理 | 锁定模型版本 | 避免自动升级导致行为变化 |
+
+## 相关工具
+
+| 工具 | 用途 | 安装 |
+|------|------|------|
+| openrouter-cli | 命令行调用 | `npm i -g openrouter-cli` |
+| openrouter-python | Python SDK | `pip install openrouter` |
+| openrouter-go | Go SDK | `go get github.com/openrouter/sdk-go` |
 
 *本文档基于 OpenRouter 官方文档（openrouter.ai/docs）和高质量社区实践整理。*
 

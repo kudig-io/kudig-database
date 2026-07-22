@@ -282,7 +282,37 @@ mkdir -p ~/.config/opencode/themes
 { "keys": "shift+enter", "id": "User.sendInput.ShiftEnterCustom" }
 ```
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查方法 | 解决方案 |
+|---------|---------|---------|--------|
+| 主题不生效 | 配置文件路径错误 | `cat ~/.config/opencode/theme.json` | 确认文件路径和 JSON 语法 |
+| 快捷键冲突 | 与终端默认绑定重叠 | 检查终端模拟器设置 | 修改终端或 OpenCode 绑定 |
+| Shift+Enter 无效 | 终端未配置转义序列 | 检查终端 keybinding 配置 | 按文档配置终端转义 |
+| 颜色显示异常 | 终端不支持 TrueColor | `echo $TERM` 检查 | 设置 TERM=xterm-256color |
+| TUI 布局错乱 | 终端窗口太小 | 调整窗口大小 | 最小 80x24 终端 |
+
+## 主题配置示例
+
+```json
+{
+  "theme": {
+    "name": "custom-dark",
+    "colors": {
+      "primary": "#7c3aed",
+      "secondary": "#06b6d4",
+      "background": "#0f172a",
+      "surface": "#1e293b",
+      "text": "#f8fafc",
+      "muted": "#94a3b8",
+      "success": "#22c55e",
+      "error": "#ef4444"
+    },
+    "border": "rounded",
+    "padding": 1
+  }
+}
+```
 
 ## 关联文档
 
@@ -292,6 +322,31 @@ mkdir -p ~/.config/opencode/themes
 | [01 - 概述与架构](./01-opencode-overview-architecture.md) | TUI 在架构中的位置 |
 
 ---
+
+## 版本兼容性
+
+| OpenCode 版本 | TUI 特性 | 主题支持 |
+|--------------|---------|--------|
+| 0.5+ | 自定义主题 + 快捷键 | JSON 主题文件 |
+| 0.4+ | 基础主题切换 | 内置 3 套 |
+| 0.3+ | 固定暗色主题 | 无 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| tmux | 终端复用 | 多窗口管理 |
+| kitty | GPU 加速终端 | TrueColor 支持 |
+| alacritty | 高性能终端 | 低延迟渲染 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何自定义主题？ | 创建 JSON 主题文件，配置颜色 |
+| 快捷键冲突怎么办？ | 修改终端或 OpenCode 绑定 |
+| 支持哪些终端？ | 支持 TrueColor 的终端（kitty/alacritty） |
+| 如何重置配置？ | 删除 `~/.config/opencode/theme.json` |
 
 *本文档基于 OpenCode 官方文档（opencode.ai/docs/keybinds、opencode.ai/docs/themes）整理。*
 

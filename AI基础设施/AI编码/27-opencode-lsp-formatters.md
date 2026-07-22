@@ -268,7 +268,58 @@ ripgrep（grep/glob/list 底层引擎）默认遵守 `.gitignore`。若需搜索
 
 `!` 前缀表示**取消忽略**，允许 ripgrep 搜索这些目录。
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| LSP 未启动 | 语言服务器未安装 | `which gopls` / `which typescript-language-server` | 安装对应 LSP 服务器 |
+| 代码补全无响应 | LSP 初始化超时 | `opencode --debug` 查看 LSP 日志 | 增加初始化超时时间 |
+| Formatter 未生效 | 配置文件未指定 formatter | 检查 `.opencode.json` 中 formatter 字段 | 添加 formatter 配置 |
+| 格式化结果异常 | Formatter 版本不兼容 | 检查 formatter 版本 | 升级到最新稳定版 |
+| .ignore 未生效 | 文件路径匹配规则错误 | 检查 .ignore 语法 | 使用 glob 模式而非正则 |
+| 多语言项目 LSP 冲突 | 文件类型检测错误 | 检查文件扩展名映射 | 显式配置 languageId |
+
+## LSP 服务器配置示例
+
+```json
+{
+  "lsp": {
+    "go": {
+      "command": "gopls",
+      "args": ["serve"],
+      "filePatterns": ["*.go"]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"],
+      "filePatterns": ["*.ts", "*.tsx"]
+    },
+    "python": {
+      "command": "pylsp",
+      "filePatterns": ["*.py"]
+    }
+  },
+  "formatters": {
+    "go": "gofmt",
+    "typescript": "prettier",
+    "python": "black",
+    "rust": "rustfmt"
+  }
+}
+```
+
+## 支持的 Formatter 列表
+
+| 语言 | Formatter | 安装命令 |
+|------|-----------|--------|
+| Go | gofmt | Go 工具链自带 |
+| TypeScript/JS | prettier | `npm i -g prettier` |
+| Python | black | `pip install black` |
+| Rust | rustfmt | `rustup component add rustfmt` |
+| YAML | prettier | `npm i -g prettier` |
+| JSON | jq / prettier | `brew install jq` |
+| Shell | shfmt | `brew install shfmt` |
+| Markdown | prettier | `npm i -g prettier` |
 
 ## 关联文档
 
@@ -279,6 +330,23 @@ ripgrep（grep/glob/list 底层引擎）默认遵守 `.gitignore`。若需搜索
 | [12 - 进阶话题](./12-opencode-advanced-topics.md) | 故障排查 |
 
 ---
+
+## 版本兼容性
+
+| OpenCode 版本 | LSP 支持 | Formatter 支持 |
+|--------------|---------|-------------|
+| 0.5+ | 多语言并行 | 20+ 内置 |
+| 0.4+ | 单语言 | 10+ 内置 |
+| 0.3+ | 基础补全 | gofmt/prettier |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何安装 LSP？ | 安装对应语言服务器（如 gopls） |
+| 如何配置 Formatter？ | 在 `.opencode.json` 中指定 |
+| 支持哪些语言？ | Go/TS/Python/Rust/YAML 等 20+ |
+| .ignore 语法？ | 与 .gitignore 相同的 glob 模式 |
 
 *本文档基于 OpenCode 官方文档（opencode.ai/docs/lsp、opencode.ai/docs/formatters）整理。*
 

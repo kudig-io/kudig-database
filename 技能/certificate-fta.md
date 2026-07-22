@@ -162,6 +162,46 @@ flowchart TD
   CHAIN_MISMATCH_OR --> CHAIN_MISMATCH2[证书 SAN 不包含当前域名]
   CHA
 
+## 生产案例
+
+### 案例 1: API Server 证书过期导致 kubectl 全部失败
+
+| 时间 | 事件 |
+|------|------|
+| 06:00 | 所有 kubectl 命令报错: "x509: certificate has expired or is not yet valid" |
+| 06:05 | `openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -dates` 确认过期 |
+| 06:10 | 🔴 `kubeadm certs renew apiserver` + `systemctl restart kubelet` |
+| 06:15 | 控制平面恢复，kubectl 正常 |
+
+**根因**: kubeadm 证书默认 1 年有效期，未配置自动轮换或未设置续期提醒。
+
+### 案例 2: Webhook 证书不匹配导致 Admission 拒绝所有请求
+
+**现象**: 创建任何资源均失败: "x509: certificate signed by unknown authority"。
+
+**诊断**: MutatingWebhookConfiguration 中 caBundle 与实际 CA 不匹配
+
+**修复**: 🟡 更新 caBundle 或重启 cert-manager 重新注入证书
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | API Server 证书过期 | 立即 kubeadm certs renew |
+| P1 | Webhook 证书异常 | 更新 caBundle |
+| P2 | 证书即将过期(30天内) | 计划续期 |
+
+## 面试要点
+
+1. **Q: Kubernetes 集群中有哪些关键证书？**
+   A: ① CA 根证书(ca.crt/key) ② API Server 服务证书 ③ kubelet 客户端证书 ④ etcd 证书 ⑤ front-proxy 证书 ⑥ ServiceAccount 签名密钥。kubeadm 管理前 5 种。
+
+2. **Q: 如何实现证书自动轮换？**
+   A: kubelet: --rotate-certificates=true 自动向 API Server 申请新证书；kubeadm: `kubeadm certs renew all`；Webhook: 使用 cert-manager 自动签发和注入。
+
+3. **Q: 证书过期前的监控告警如何配置？**
+   A: 使用 kubelet 暴露的 apiserver_client_certificate_expiration_seconds 指标，或定期执行 `kubeadm certs check-expiration`，设置 30 天预警。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

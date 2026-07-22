@@ -166,6 +166,46 @@ flowchart TD
   PLUG_CNI --> PLUG_CNI_OR
   PLUG_CN
 
+## 生产案例
+
+### 案例 1: 控制平面升级失败导致 API Server 不可用
+
+| 时间 | 事件 |
+|------|------|
+| 02:00 | 执行 `kubeadm upgrade apply v1.30.0` |
+| 02:05 | API Server Pod CrashLoopBackOff，etcd 版本不兼容 |
+| 02:10 | 🔴 `kubeadm upgrade apply v1.29.5` 回滚控制平面 |
+| 02:20 | API Server 恢复，集群回到原版本 |
+
+**根因**: 未先升级 etcd 到兼容版本，直接跳版本升级导致不兼容。
+
+### 案例 2: 节点升级后 kubelet 与 API Server 版本偏差过大
+
+**现象**: 升级控制平面到 1.30 后，未升级的 1.27 节点出现 API 弃用警告和偶发失败。
+
+**诊断**: `kubectl get nodes -o wide` 显示版本偏差 3 个 minor
+
+**修复**: 🟡 按顺序升级所有节点 kubelet，保持偏差 ≤1 minor
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 控制平面升级失败 | 立即回滚 kubeadm |
+| P1 | 节点升级后异常 | cordon + 回滚 kubelet |
+| P2 | 升级后弃用 API 警告 | 更新工作负载 manifest |
+
+## 面试要点
+
+1. **Q: Kubernetes 版本升级的正确顺序？**
+   A: ① 备份 etcd ② 升级控制平面(kubeadm upgrade apply) ③ 逐个升级节点(kubeadm upgrade node + kubelet) ④ 升级 kubectl ⑤ 验证。版本偏差最多 1 minor。
+
+2. **Q: 升级前必须检查哪些事项？**
+   A: ① 检查弃用 API 使用情况(kubent/pluto) ② 备份 etcd ③ 确认版本兼容性 ④ 检查 addon 兼容性 ⑤ 测试环境先升级 ⑥ 确认回滚方案。
+
+3. **Q: 升级失败的回滚策略？**
+   A: 控制平面: etcd 快照恢复 + kubeadm 回滚；节点: 降级 kubelet 包 + 重启；工作负载: 通常无需回滚(向后兼容)。建议每次只升级一个 minor。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

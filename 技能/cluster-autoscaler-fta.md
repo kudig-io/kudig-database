@@ -177,6 +177,46 @@ flowchart TD
 
   %% ========== 4. 调度信号异常
 
+## 生产案例
+
+### 案例 1: Cluster Autoscaler 无法扩容——云 API 配额耗尽
+
+| 时间 | 事件 |
+|------|------|
+| 22:00 | HPA 触发扩容，Pod Pending: Insufficient cpu |
+| 22:05 | `kubectl logs -n kube-system -l app=cluster-autoscaler` 显示 "failed to increase node group size: quota exceeded" |
+| 22:10 | 云控制台提升 ECS 实例配额 |
+| 22:15 | Autoscaler 自动重试，新节点加入 |
+
+**根因**: 云账号 vCPU 配额未随业务增长提前调整。
+
+### 案例 2: 节点缩容导致有状态 Pod 被驱逐
+
+**现象**: 缩容时数据库 Pod 被驱逐，服务中断 30s。
+
+**诊断**: 未配置 `cluster-autoscaler.kubernetes.io/safe-to-evict: "false"` annotation
+
+**修复**: 🟢 为有状态 Pod 添加 safe-to-evict=false，或配置 PDB
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 扩容失败且业务受损 | 手动创建节点 + 检查云配额 |
+| P1 | Autoscaler Pod 异常 | 检查 RBAC 和云凭据 |
+| P2 | 缩容过于激进 | 调整 scale-down-utilization-threshold |
+
+## 面试要点
+
+1. **Q: Cluster Autoscaler 的扩容触发条件？**
+   A: 当存在 Pending Pod 且调度器确认无可用节点时，Autoscaler 模拟调度找到合适的 NodeGroup，调用云 API 扩容。触发条件: Pod 有 FailedScheduling 事件 + 现有节点无法容纳。
+
+2. **Q: 缩容的决策逻辑？**
+   A: 节点利用率 < threshold(默认 50%) 持续 scale-down-delay(默认 10min)，且无 PDB 保护、无 local storage、非 kube-system 关键 Pod，则标记为可缩容，驱逐 Pod 后删除节点。
+
+3. **Q: Cluster Autoscaler 与 Karpenter 的区别？**
+   A: CA: 基于 NodeGroup/ASG 扩缩，粒度粗；Karpenter: 直接创建最优实例，无 NodeGroup 概念，支持更灵活的实例类型选择和更快的扩容速度。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

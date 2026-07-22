@@ -280,6 +280,66 @@ helm install myrelease oci://registry.example.com/charts/mychart
 - 07-helm-advanced-operations
 - 08-cicd-pipelines
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| `helm install` 超时 | CRD 未就绪或 Pod 拉取镜像失败 | `helm install --debug --dry-run` | 先手动 apply CRD，检查 imagePullSecrets |
+| `helm upgrade` 后 Pod CrashLoop | values 覆盖不完整或版本不兼容 | `helm diff upgrade` / `kubectl logs` | 对比 values 差异，回滚到上一版本 |
+| Chart 依赖解析失败 | 仓库不可达或版本约束冲突 | `helm dependency update --debug` | 检查 Chart.yaml 中 repository URL |
+| Secret 渲染明文泄漏 | template 中未使用 b64enc | `helm template . --debug` | 使用 `lookup` 函数或 Sealed Secrets |
+| Hook 执行失败阻塞发布 | Job 权限不足或超时 | `kubectl get jobs -l app.kubernetes.io/managed-by=Helm` | 增加 hook 超时，检查 RBAC |
+| 多环境 values 漂移 | 手动修改未回写 Git | `diff values-staging.yaml values-prod.yaml` | 统一用 GitOps 管理 values |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 版本管理 | Chart 版本与应用版本分离 | ChartVersion 语义化，appVersion 跟踪上游 |
+| 仓库 | 私有 ChartMuseum/Harbor | 避免依赖公网仓库 |
+| 测试 | `helm unittest` + `helm lint` | CI 中强制执行 |
+| 回滚 | `helm rollback <release> <rev>` | 保留 revisionHistory >= 10 |
+| 安全 | 避免在 values 中存储明文 Secret | 使用 vault/sealed-secrets 集成 |
+| 可观测性 | 启用 `--wait --timeout 5m` | 确保发布后资源就绪 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| helm-diff | 升级前对比差异 | 防止意外变更 |
+| helm-unittest | Chart 单元测试 | CI 中验证模板渲染 |
+| helmfile | 多 Release 声明式管理 | 多环境批量部署 |
+| ChartMuseum | 私有 Chart 仓库 | 内网 Chart 分发 |
+| helm-secrets | SOPS 加密 values | 安全管理敏感配置 |
+
+## Chart 开发规范
+
+```yaml
+# Chart.yaml 最佳实践示例
+apiVersion: v2
+name: my-service
+description: A Helm chart for my-service
+version: 1.2.0        # Chart 版本，语义化
+appVersion: "2.4.1"   # 应用版本
+type: application
+maintainers:
+  - name: platform-team
+    email: platform@example.com
+dependencies:
+  - name: common
+    version: "^1.0.0"
+    repository: "https://charts.internal.example.com"
+```
+
+## 版本兼容性矩阵
+
+| Helm 版本 | K8s 版本 | 主要变化 |
+|-----------|-----------|--------|
+| 3.14+ | 1.28+ | OCI registry 默认支持 |
+| 3.12+ | 1.26+ | `helm template --validate` 增强 |
+| 3.10+ | 1.24+ | 移除 PSP 支持 |
+| 3.8+ | 1.22+ | CRD 管理改进 |
+
 ## Related
 
 - [[生态参考/领域索引/helm-index.md|Helm 全局索引]]

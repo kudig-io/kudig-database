@@ -327,5 +327,36 @@ EOF
 - [[容器运行时/README.md|容器运行时域]]
 - [[安全/README.md|安全合规域]]
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| Wasm Pod 启动失败 | runtime handler 未配置 | `kubectl describe pod <name>` | 确认 RuntimeClass 和 containerd shim 配置 |
+| 模块加载 OOM | 线性内存设置过大 | `crictl inspect <container>` | 调整 wasm max_memory 参数 |
+| WASI 文件系统访问拒绝 | 预开放目录未配置 | 检查 Spin/runwasi 配置 | 配置 allowed_directories 映射 |
+| 网络调用失败 | WASI 网络支持未启用 | 检查 runtime 版本和 feature flags | 升级到支持 wasi-nn/wasi-sockets 的版本 |
+| 性能低于预期 | 未启用 SIMD 或 JIT | 对比 native 基准测试 | 启用 wasmtime SIMD/JIT 编译 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 运行时选择 | containerd + runwasi shim | K8s 原生集成最佳 |
+| 安全 | 默认拒绝所有 capability | Wasm 沙箱 + 最小权限 |
+| 镜像 | 使用 OCI artifact 分发 | 复用现有 registry 基础设施 |
+| 可观测性 | 启用 OpenTelemetry SDK | 统一 traces/metrics 采集 |
+| 资源 | 设置明确的 memory limit | Wasm 线性内存可预测 |
+| 版本 | 锁定 wasmtime/wasmedge 版本 | 避免运行时不兼容 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| SpinKube | Wasm 应用编排 | K8s 上运行 Spin 应用 |
+| runwasi | containerd Wasm shim | 容器运行时集成 |
+| Wasmtime | 高性能 Wasm 运行时 | 服务端执行引擎 |
+| wasmCloud | 分布式 Wasm 平台 | 多云/边缘部署 |
+| TinyGo | Go 编译到 Wasm | 用 Go 写 Wasm 模块 |
+
 
 <!-- risk-assessed -->

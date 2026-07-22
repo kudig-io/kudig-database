@@ -154,6 +154,47 @@ flowchart TD
 | **事件** | Velero `Backup`/`Restore` 资源状态（Completed/PartiallyFailed/Failed）；etcd snapshot 定时任务状态；VolumeSnapshot 事件 |
 | **关键指标
 
+## 生产案例
+
+### 案例 1: etcd 备份恢复失败——版本不匹配
+
+| 时间 | 事件 |
+|------|------|
+| 03:00 | 误删 namespace，尝试从 etcd 快照恢复 |
+| 03:05 | `etcdctl snapshot restore` 报错: "database version mismatch" |
+| 03:10 | 确认备份时 etcd 3.5.9，当前 etcd 3.5.12 |
+| 03:15 | 🔴 使用相同版本 etcd 二进制执行恢复 |
+| 03:30 | 集群恢复，但丢失备份后的 2h 数据 |
+
+**根因**: 备份脚本未记录 etcd 版本，恢复时使用了不同版本。
+
+### 案例 2: Velero 备份超时——大规模集群资源过多
+
+**现象**: Velero Backup 状态长时间 InProgress，最终 Failed。
+
+**诊断**: `velero backup describe` 显示超时，集群 50000+ 资源
+
+**修复**: 🟡 增加 --default-volumes-to-fs-backup-timeout，按 namespace 分批备份
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 数据丢失且无可用备份 | 联系存储厂商尝试底层恢复 |
+| P1 | 备份任务失败 | 检查存储空间和网络 |
+| P2 | 备份延迟偏高 | 优化备份策略和范围 |
+
+## 面试要点
+
+1. **Q: etcd 备份恢复的完整流程？**
+   A: 备份: `etcdctl snapshot save --endpoints --certs`；恢复: 停止所有控制平面 → `etcdctl snapshot restore --data-dir` → 更新 kube-apiserver etcd 地址 → 重启控制平面 → 验证。
+
+2. **Q: Velero 的备份机制？**
+   A: Velero 通过 API Server 读取资源对象序列化为 JSON 存储到对象存储(S3/OSS)；支持 namespace 级别/全集群备份、定时备份、Hook 脚本、卷快照(FSBackup/CSI Snapshot)。
+
+3. **Q: 生产环境备份策略建议？**
+   A: ① etcd 每 30min 自动快照 ② Velero 每日全量 + 每 4h 增量 ③ 备份存储跨区域复制 ④ 定期恢复演练(每月) ⑤ 监控备份成功率告警。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

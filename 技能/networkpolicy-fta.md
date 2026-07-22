@@ -83,6 +83,47 @@ base_confidence: 0.7
 | evt_sync_delay | 策略同步延迟 | `kubectl get networkpolicy ${NP_NAME} -n ${NAMESPACE} -o jsonpa
 ...(截断)
 
+## 生产案例
+
+### 案例 1: 默认拒绝策略导致服务间通信中断
+
+| 时间 | 事件 |
+|------|------|
+| 13:00 | 安全团队应用 default-deny NetworkPolicy 到所有 namespace |
+| 13:01 | 微服务间调用全部失败，业务 503 |
+| 13:05 | `kubectl get networkpolicy -A` 发现 default-deny-all |
+| 13:10 | 🟡 添加允许服务间通信的 ingress 规则 |
+| 13:15 | 服务恢复 |
+
+**根因**: 应用 default-deny 前未梳理服务间依赖关系，未提前配置白名单规则。
+
+### 案例 2: CNI 不支持 NetworkPolicy 导致策略无效
+
+**现象**: 配置了 NetworkPolicy 但流量未被拦截。
+
+**诊断**: 集群使用 Flannel(不支持 NetworkPolicy)，需 Calico/Cilium
+
+**修复**: 🟡 部署 Calico 或 Cilium 作为 NetworkPolicy 执行引擎
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 策略导致核心业务中断 | 立即删除问题 NetworkPolicy |
+| P1 | 部分服务不可达 | 检查策略规则和 Pod label |
+| P2 | 策略未生效 | 确认 CNI 支持 NetworkPolicy |
+
+## 面试要点
+
+1. **Q: NetworkPolicy 的默认行为是什么？**
+   A: 默认无任何 NetworkPolicy 时，所有 Pod 间流量允许。一旦某 Pod 被任何 NetworkPolicy 的 podSelector 匹配，则该 Pod 变为“白名单模式”，只允许策略明确允许的流量。
+
+2. **Q: 哪些 CNI 支持 NetworkPolicy？**
+   A: Calico(完整支持)、Cilium(支持+L7)、Weave Net(支持)；Flannel(不支持，需配合 Calico policy-only 模式)、AWS VPC CNI(需 Calico 插件)。
+
+3. **Q: 如何安全地实施 default-deny？**
+   A: ① 先梳理服务依赖图 ② 在测试环境验证 ③ 按 namespace 分批实施 ④ 先应用 deny + 立即应用已知白名单 ⑤ 监控拒绝日志。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

@@ -159,6 +159,46 @@ flowchart TD
 |------|---------|
 | **事件** | Sidecar 注入 Webhook 失败事件、Pod 
 
+## 生产案例
+
+### 案例 1: Istio Sidecar 注入失败导致服务无流量管理
+
+| 时间 | 事件 |
+|------|------|
+| 11:00 | 新部署的服务无 mTLS，无法被其他 mesh 服务访问 |
+| 11:05 | `kubectl get pod -o jsonpath='{.spec.containers[*].name}'` 无 istio-proxy |
+| 11:08 | namespace 缺少 `istio-injection=enabled` label |
+| 11:10 | 🟢 添加 label，重新部署 Pod |
+
+**根因**: 新 namespace 创建时未添加 istio-injection label。
+
+### 案例 2: Istio 配置推送延迟导致路由规则不生效
+
+**现象**: 更新 VirtualService 后 5min 内流量分配未变化。
+
+**诊断**: `istioctl proxy-status` 显示部分 proxy STALE
+
+**修复**: 🟡 重启 istiod 或检查 xDS 连接状态
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | istiod 崩溃导致全 mesh 不可用 | 立即重启 istiod |
+| P1 | 部分服务 mTLS 失败 | 检查 PeerAuthentication |
+| P2 | 配置推送延迟 | 检查 istiod 资源 |
+
+## 面试要点
+
+1. **Q: Istio 的核心架构组件？**
+   A: ① istiod(控制平面: Pilot+xDS+Citadel+Galley 合一) ② Envoy Sidecar(数据平面代理) ③ 可选: Istio Ingress/Egress Gateway。通过 xDS 协议下发配置。
+
+2. **Q: Istio mTLS 的工作原理？**
+   A: istiod 内置 CA 为每个工作负载签发 SPIFFE 证书，Envoy 自动进行双向 TLS 握手；PeerAuthentication 控制 STRICT(强制)/PERMISSIVE(兼容)/DISABLE 模式。
+
+3. **Q: Service Mesh 的性能开销如何优化？**
+   A: ① 调整 sidecar 资源限制 ② 使用 Sidecar CRD 限制配置推送范围 ③ 启用 Envoy 连接池 ④ 评估 Ambient Mesh(无 sidecar) 方案 ⑤ 减少不必要的 VirtualService 规则。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

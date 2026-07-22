@@ -307,6 +307,56 @@ export default function () {
 5. **Flaky 测试零容忍**：不稳定测试立即修复或隔离
 6. **生产验证**：金丝雀分析 + 合成监控确认发布质量
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| CI 测试超时 | 资源不足或依赖服务不可用 | `kubectl get pods -n ci --field-selector=status.phase!=Running` | 增加 runner 资源，添加依赖健康检查 |
+| Flaky 测试反复失败 | 时序依赖/共享状态/网络抨动 | 查看测试日志中的随机失败模式 | 隔离到 quarantine suite，限期修复 |
+| 覆盖率门禁阻塞 PR | 新增代码未写测试 | `go test -coverprofile=cover.out && go tool cover -func=cover.out` | 补充单元测试，或调整门禁阈值 |
+| 集成测试环境不稳定 | 共享环境被其他 PR 干扰 | `kubectl get ns -l test-env=true` | 使用临时 Namespace 或独立集群 |
+| 金丝雀分析误报 | 指标采集窗口太短或基线异常 | `kubectl get analysisrun -o yaml` | 增加分析窗口，确认基线健康 |
+| 负载测试数据污染生产 | 测试数据库未隔离 | 检查 DB 连接串配置 | 严格环境隔离，测试使用独立实例 |
+
+## 质量门禁流水线示例
+
+```yaml
+# .github/workflows/quality-gates.yml
+name: Quality Gates
+on: [pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make lint
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test-unit
+      - name: Coverage Gate
+        run: |
+          COV=$(go tool cover -func=cover.out | grep total | awk '{print $3}' | tr -d '%')
+          [ $(echo "$COV >= 80" | bc) -eq 1 ] || exit 1
+  integration-test:
+    needs: [lint, unit-test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make test-integration
+```
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| kubeconform | K8s YAML Schema 验证 | PR 中检查清单合法性 |
+| kube-score | 静态分析 K8s 对象 | 发现资源配置缺陷 |
+| SonarQube | 代码质量门禁 | 覆盖率/复杂度/安全漏洞 |
+| k6 / Locust | 负载测试 | 发布前性能基线验证 |
+| Litmus / Chaos Mesh | 混沌测试 | 验证容错与恢复能力 |
+
 ## Related
 
 - [[发布变更/变更管理/index.md|变更管理]]

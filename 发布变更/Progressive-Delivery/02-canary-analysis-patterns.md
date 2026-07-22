@@ -323,6 +323,26 @@ steps:
 - ✅ 回滚后**通知相关人员**
 - ❌ 避免回滚后再次自动触发发布
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| AnalysisRun 一直 Running | 指标查询无数据或超时 | `kubectl get analysisrun -o yaml` | 检查 Prometheus 连接和 metric 名称 |
+| 金丝雀始终失败回滚 | 分析阈值设置过严 | 查看 AnalysisRun 中的 measurements | 调整 failureLimit 或阈值 |
+| 金丝雀流量为 0 | Istio VirtualService 未配置权重 | `kubectl get vs -o yaml` | 确认 Rollout 与 VS 关联正确 |
+| 指标抨动导致误判 | 采集窗口太短或流量太低 | 检查 AnalysisTemplate 中 interval | 增加 interval 和 sampleSize |
+| 回滚后 Pod 未完全恢复 | 旧版本 ReplicaSet 被清理 | `kubectl get rs -l app=<name>` | 设置 revisionHistoryLimit >= 3 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| Argo Rollouts | 金丝雀控制器 | 自动化渐进式发布 |
+| Flagger | 指标驱动 Promotion | 无需 Rollout CRD 的场景 |
+| Istio | 流量分割 | 精确百分比控制 |
+| Kayenta | 统计金丝雀分析 | Netflix 开源的对比分析引擎 |
+| Prometheus | 指标采集 | 提供 AnalysisRun 数据源 |
+
 ## Related
 
 - [[发布变更/Progressive-Delivery/index.md|Progressive Delivery 索引]]

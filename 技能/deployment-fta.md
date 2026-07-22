@@ -171,6 +171,47 @@ flowchart TD
 
     { "name": "ReplicaSet 协同异常", "
 
+## 生产案例
+
+### 案例 1: 滚动更新卡住导致新版本无法上线
+
+| 时间 | 事件 |
+|------|------|
+| 16:00 | 执行 `kubectl rollout status deployment/web` 显示 "waiting for rollout to finish" |
+| 16:05 | `kubectl get rs -l app=web` 新 ReplicaSet DESIRED=3 CURRENT=1 |
+| 16:08 | 新 Pod ImagePullBackOff: 镜像 tag 拼写错误 |
+| 16:10 | 🟡 修正镜像 tag，`kubectl rollout resume deployment/web` |
+| 16:15 | 滚动更新完成 |
+
+**根因**: CI 构建的镜像 tag 为 `v2.1.0-rc1`，但 Deployment 中写为 `v2.1.0-rc.1`。
+
+### 案例 2: maxSurge/maxUnavailable 配置不当导致更新期间服务降级
+
+**现象**: 更新期间可用副本数从 10 降至 3，大量 503。
+
+**诊断**: `kubectl get deployment web -o jsonpath='{.spec.strategy}'` → maxUnavailable=70%
+
+**修复**: 🟢 调整为 maxSurge=25% maxUnavailable=25%，确保更新期间最少 75% 可用
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 更新导致服务完全不可用 | 立即 `kubectl rollout undo` 回滚 |
+| P1 | 更新卡住超过 10min | 检查新 Pod 状态和事件 |
+| P2 | 更新缓慢但正常进行 | 等待完成或调整策略 |
+
+## 面试要点
+
+1. **Q: Deployment 滚动更新的内部机制？**
+   A: Deployment Controller 创建新 ReplicaSet，按 maxSurge 扩容新 RS、按 maxUnavailable 缩容旧 RS，直到新 RS 副本数=spec.replicas、旧 RS=0。通过 revision 历史支持回滚。
+
+2. **Q: Recreate 与 RollingUpdate 策略的适用场景？**
+   A: RollingUpdate: 无状态服务默认策略，零停机；Recreate: 有状态服务或不兼容并行运行的场景(如数据库迁移)，先停旧再启新，有短暂停机。
+
+3. **Q: 如何确保 Deployment 更新失败时自动回滚？**
+   A: 设置 `progressDeadlineSeconds`(默认 600s)，超时后 Deployment condition 标记为 ProgressDeadlineExceeded；配合 Argo Rollouts/Flagger 实现自动分析和回滚。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

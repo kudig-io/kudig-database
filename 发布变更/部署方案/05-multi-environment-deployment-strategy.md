@@ -294,6 +294,67 @@ spec:
 | 数据隔离 | 环境间数据不互通 |
 | 成本意识 | Dev 缩零、Spot 实例 |
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|---------|
+| Staging 正常但 Prod 异常 | 配置差异/资源规格不同 | `diff <(kubectl get deploy -n staging -o yaml) <(kubectl get deploy -n prod -o yaml)` | 统一基础模板，仅 overlay 差异 |
+| Promotion 流水线卡住 | 审批未通过或 Gate 失败 | `kubectl get analysisrun -A` / CI 面板 | 检查审批人、补充测试覆盖 |
+| 环境间镜像版本不一致 | 镜像 tag 被覆盖或缓存 | `kubectl get deploy -o jsonpath='{.spec.template.spec.containers[0].image}'` | 使用不可变 tag（SHA digest） |
+| Dev 环境资源浪费 | 缩零策略未配置 | `kubectl get pods -n dev --field-selector=status.phase=Running` | 配置 CronHPA 非工作时间缩零 |
+| 数据库迁移阻塞部署 | 长事务锁表 | `SELECT * FROM pg_stat_activity WHERE state='active'` | 使用 expand-contract 模式，避免锁表 |
+| 环境 DNS 解析错误 | Service 名称或 Namespace 硬编码 | `nslookup <svc>.<ns>.svc.cluster.local` | 使用 Kustomize 变量替换 |
+
+## 环境 Promotion 流水线设计
+
+```
+┌─────────┐    自动     ┌─────────┐   审批+金丝雀  ┌─────────┐
+│   Dev   │──────────▶│ Staging │──────────────▶│   Prod  │
+└─────────┘  PR merge  └─────────┘  AnalysisRun  └─────────┘
+     │                      │                        │
+  缩零策略             持久运行                  蓝绿/金丝雀
+  Spot 实例           脱敏数据                  全量监控
+```
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 镜像策略 | 不可变镜像 + SHA digest | 杜绝 tag 覆盖导致环境不一致 |
+| 配置管理 | Kustomize overlay / Helm values | 基础模板 + 环境差异层 |
+| 数据管理 | 独立数据库实例，禁止跨环境访问 | 防止 Dev 误操作影响 Prod |
+| 资源规划 | Prod 固定节点池，Dev 使用 Spot | 成本优化同时保障生产稳定 |
+| 网络隔离 | NetworkPolicy 限制跨 Namespace 通信 | 环境间零信任 |
+| 发布窗口 | Prod 变更避开业务高峰 | 结合 Change Freeze 日历 |
+| 回滚 SLA | 任何环境 < 2min 完成回滚 | 预置回滚脚本 + 演练 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| Kustomize | 多环境配置 overlay | 无模板引擎的声明式差异 |
+| Helm | 参数化部署 | 复杂应用的值文件管理 |
+| ArgoCD Image Updater | 自动镜像版本追踪 | Dev/Staging 自动升级 |
+| Flagger | 金丝雀 Promotion 自动化 | Prod 渐进式发布 |
+| kubeseal | 加密 Secret 跨环境共享 | 安全地同步凭证 |
+| Skaffold | 本地开发到集群部署 | 开发环境快速迭代 |
+| Tilt | 开发环境实时同步 | 微服务本地联调 |
+
+## 快速检查脚本
+
+```bash
+#!/bin/bash
+# 多环境一致性检查
+echo "=== 镜像版本对比 ==="
+for ns in dev staging prod; do
+  echo "[$ns] $(kubectl get deploy -n $ns -o jsonpath='{.items[*].spec.template.spec.containers[*].image}' 2>/dev/null)"
+done
+echo "=== 副本数对比 ==="
+for ns in dev staging prod; do
+  echo "[$ns] $(kubectl get deploy -n $ns -o jsonpath='{.items[*].spec.replicas}' 2>/dev/null)"
+done
+```
+
 ## Related
 
 - [[发布变更/部署方案/index.md|部署方案]]

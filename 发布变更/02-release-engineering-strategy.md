@@ -316,6 +316,36 @@ kubectl rollout undo deployment/app -n production --to-revision=5
 | 变更日志 | 自动生成 CHANGELOG |
 | 版本锁定 | 生产环境固定版本 |
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| 发布后 SLO 下降 | 新版本引入性能回退 | 对比发布前后 Grafana 面板 | 立即回滚，分析 p99 变化 |
+| 回滚失败 | 数据库迁移不可逆 | `kubectl rollout undo deploy/<name>` | 使用 expand-contract 模式 |
+| 变更日志缺失 | CI 未配置自动生成 | 检查 CI pipeline 中的 changelog step | 集成 conventional-commits + auto-changelog |
+| 发布窗口冲突 | 多团队同时发布 | 查看发布日历/变更管理系统 | 建立发布列车（Release Train）机制 |
+| 特性开关泄漏 | 开关未清理 | 搜索代码中 `feature_flag` 引用 | 定期清理已全量开关 |
+
+## 发布策略对比
+
+| 策略 | 风险 | 回滚速度 | 适用场景 |
+|------|------|---------|--------|
+| 滚动更新 | 中 | 快 | 无状态服务默认 |
+| 蓝绿部署 | 低 | 极快(切流) | 有状态/数据库变更 |
+| 金丝雀发布 | 极低 | 快 | 高流量核心服务 |
+| A/B 测试 | 极低 | 快 | 用户体验验证 |
+| 暗影流量 | 无 | N/A | 新版本预热验证 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| Argo Rollouts | 渐进式发布控制器 | 金丝雀/蓝绿自动化 |
+| Flagger | 自动化金丝雀分析 | 基于指标自动 Promotion |
+| LaunchDarkly | 特性开关平台 | 解耦部署与发布 |
+| semantic-release | 自动版本管理 | 基于 commit 生成版本号 |
+| Spinnaker | 多环境发布编排 | 企业级复杂发布流程 |
+
 ## Related
 
 - [[发布变更/index.md|发布变更]]

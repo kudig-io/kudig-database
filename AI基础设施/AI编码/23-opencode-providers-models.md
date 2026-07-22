@@ -294,7 +294,37 @@ OpenCode 还支持：302.AI、Baseten、Cerebras、Cloudflare AI Gateway、OpenR
 
 适用场景：企业代理网关、自托管 LLM（如 vLLM + OpenAI 兼容 API）、Cloudflare AI Gateway。
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| Provider 连接失败 | API Key 无效或网络不通 | `opencode --debug` 查看日志 | 检查环境变量和网络代理 |
+| 模型响应超时 | 上游服务过载 | 检查 Provider 状态页 | 配置 timeout 和 retry |
+| 模型切换后行为异常 | 不同模型提示词兼容性差异 | 对比不同模型的输出 | 为每个模型调整 system prompt |
+| 自定义 Base URL 不生效 | 配置文件格式错误 | `cat ~/.config/opencode/config.json` | 检查 JSON 语法和字段名 |
+| Token 计费异常 | 模型定价变更 | 查看 Provider 定价页 | 设置用量告警阈值 |
+
+## 模型配置示例
+
+```json
+{
+  "providers": {
+    "openrouter": {
+      "apiKey": "${OPENROUTER_API_KEY}",
+      "models": {
+        "default": "anthropic/claude-sonnet-4",
+        "fast": "openai/gpt-4o-mini",
+        "reasoning": "anthropic/claude-sonnet-4"
+      }
+    }
+  },
+  "agent": {
+    "model": "default",
+    "temperature": 0.1,
+    "maxTokens": 8192
+  }
+}
+```
 
 ## 关联文档
 
@@ -305,6 +335,15 @@ OpenCode 还支持：302.AI、Baseten、Cerebras、Cloudflare AI Gateway、OpenR
 | [12 - 进阶话题](./12-opencode-advanced-topics.md) | 成本控制策略 |
 
 ---
+
+## 版本兼容性
+
+| OpenCode 版本 | 支持 Provider | 主要变化 |
+|--------------|-------------|--------|
+| 0.5+ | OpenRouter/Anthropic/OpenAI | Per-Agent 模型配置 |
+| 0.4+ | + 自定义 Base URL | 私有部署支持 |
+| 0.3+ | + Ollama | 本地模型支持 |
+| 0.2+ | OpenRouter only | 初始多模型支持 |
 
 *本文档基于 OpenCode 官方文档（opencode.ai/docs/providers）整理。*
 

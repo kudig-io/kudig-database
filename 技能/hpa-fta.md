@@ -182,6 +182,47 @@ flowchart TD
     { "name": "开始", "action": "start", "step": "start_hpa_fta", "next_step": "event_hpa_abnormal" },
     { "name": "顶事件: HPA 扩缩容异常", "action": "event", "step": "event_hpa_abnormal", "description": "扩缩容停滞/震荡/失败", "next_s
 
+## 生产案例
+
+### 案例 1: metrics-server 不可用导致 HPA 无法扩容
+
+| 时间 | 事件 |
+|------|------|
+| 20:00 | 流量高峰，HPA 未触发扩容，Pod CPU 95% |
+| 20:05 | `kubectl get hpa` 显示 TARGETS: <unknown>/70% |
+| 20:08 | `kubectl get pods -n kube-system -l k8s-app=metrics-server` 显示 CrashLoopBackOff |
+| 20:12 | 🔴 修复 metrics-server(证书问题)，HPA 恢复指标获取 |
+| 20:15 | HPA 触发扩容，业务恢复 |
+
+**根因**: metrics-server 的 TLS 证书过期，无法从 kubelet 获取指标。
+
+### 案例 2: HPA 与 VPA 冲突导致 Pod 频繁重启
+
+**现象**: Pod 反复被 OOMKill 然后 HPA 扩容，形成恶性循环。
+
+**诊断**: HPA 基于 CPU 扩容，VPA 调整 memory limit，两者同时操作同一工作负载
+
+**修复**: 🟡 移除 VPA 或设置为仅推荐模式，避免 HPA+VPA 同时控制同一资源
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 流量高峰且 HPA 完全失效 | 手动 `kubectl scale` 紧急扩容 |
+| P1 | HPA 指标获取失败 | 检查 metrics-server |
+| P2 | 扩容过慢 | 调整 behavior.scaleUp 策略 |
+
+## 面试要点
+
+1. **Q: HPA 的扩缩容算法是怎样的？**
+   A: desiredReplicas = ceil[currentReplicas × (currentMetricValue / desiredMetricValue)]。例如当前 3 副本，CPU 80%，目标 50%，则期望 = ceil(3×80/50) = 5。
+
+2. **Q: HPA v2 支持哪些指标源？**
+   A: ① Resource(cpu/memory) ② Pods(自定义 Pod 指标) ③ Object(集群对象指标如 Ingress QPS) ④ External(外部指标如消息队列深度)。通过 metrics.k8s.io 和 custom.metrics.k8s.io API 获取。
+
+3. **Q: 如何防止 HPA 频繁扩缩(抖动)？**
+   A: ① 设置 stabilizationWindowSeconds(默认 300s) ② 配置 behavior.scaleDown.policies 限制缩容速率 ③ 使用多指标取最大值 ④ 设置合理的 minReplicas 下限。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

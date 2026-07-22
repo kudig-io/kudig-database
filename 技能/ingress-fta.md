@@ -83,6 +83,46 @@ base_confidence: 0.7
 | TLS1A | 证书过期 | `kubectl get secret ${TLS_SECR
 ...(截断)
 
+## 生产案例
+
+### 案例 1: Ingress 证书过期导致 HTTPS 全量 502
+
+| 时间 | 事件 |
+|------|------|
+| 08:00 | 用户报告网站无法访问，浏览器显示证书错误 |
+| 08:05 | `kubectl get secret tls-secret -n prod -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates` 确认已过期 |
+| 08:10 | 🔴 更新 TLS Secret，Ingress Controller 自动重载 |
+| 08:12 | HTTPS 恢复正常 |
+
+**根因**: 证书 1 年有效期到期，未配置 cert-manager 自动续期。
+
+### 案例 2: Ingress 后端 Service 端口不匹配导致 503
+
+**现象**: Ingress 规则配置正确但访问返回 503 Service Unavailable。
+
+**诊断**: `kubectl describe ingress` 后端端口 8080，但 Service targetPort 实际为 80
+
+**修复**: 🟢 修正 Ingress backend port 与 Service port 一致
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 全部域名不可访问 | 检查 Ingress Controller Pod 状态 |
+| P1 | 单域名/路径异常 | 检查 Ingress 规则和后端 Service |
+| P2 | 证书即将过期 | 配置 cert-manager 自动续期 |
+
+## 面试要点
+
+1. **Q: Ingress Controller 的工作原理是什么？**
+   A: Ingress Controller watch Ingress 资源变更，将规则转换为反向代理配置(nginx.conf)，通过 reload 或动态更新生效。流量路径: Client → LB → Ingress Pod → Service → Pod。
+
+2. **Q: Ingress 与 Gateway API 的主要区别？**
+   A: Ingress: 简单 HTTP 路由，扩展性差(annotations)；Gateway API: 角色分离(Infra Provider/Cluster Operator/App Developer)，支持 TCP/UDP/gRPC，原生流量分割、Header 匹配。
+
+3. **Q: Ingress TLS 证书管理的最佳实践？**
+   A: 使用 cert-manager + Let's Encrypt/ACME 自动签发续期，配置 ClusterIssuer，Secret 存储在对应 namespace，启用 HSTS 和自动重定向。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

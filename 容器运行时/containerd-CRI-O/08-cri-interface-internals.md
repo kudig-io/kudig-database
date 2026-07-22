@@ -119,6 +119,83 @@ containerd 1.6+ 同时实现 v1 与 v1alpha2；1.7 起默认 v1。升级 kubelet
 - [ ] 已通过 `crictl info` 验证 `RuntimeHandler` 列表
 - [ ] ImageService 拉取错误已接入告警
 
+## 故障排查
+
+| 问题 | 可能原因 | 诊断命令 | 解决方案 |
+|------|----------|----------|----------|
+| Pod 卡在 ContainerCreating | CRI 调用超时 | `crictl pods --state ready` | 检查 containerd 日志，确认 shim 进程状态 |
+| ImagePull 失败 | ImageService 连接异常 | `crictl pull <image> -v` | 检查 registry 认证和网络连通性 |
+| kubelet 报 CRI version mismatch | 版本不兼容 | `crictl version` | 升级 containerd 或调整 kubelet 配置 |
+| Exec/Attach 失败 | stream server 不可达 | `curl -k https://localhost:10010/info` | 检查 stream_server_address 配置 |
+| 容器频繁 OOM | cgroup 配置异常 | `crictl inspect <id> | jq .info.runtimeSpec.linux.resources` | 确认 memory limit 设置正确 |
+| RunPodSandbox 超时 | 网络插件未就绪 | `journalctl -u containerd -f` | 检查 CNI 插件安装和配置 |
+| ListContainers 返回空 | CRI 连接断开 | `systemctl status containerd` | 重启 containerd 服务 |
+| StopContainer 无响应 | shim 进程挂起 | `ps aux | grep shim` | kill shim 进程，containerd 会自动清理 |
+
+## CRI 版本兼容性矩阵
+
+| Kubernetes 版本 | CRI API 版本 | containerd 最低版本 | CRI-O 最低版本 |
+|----------------|-------------|-------------------|----------------|
+| 1.26 | v1alpha2 | 1.6.x | 1.26.x |
+| 1.27 | v1 | 1.7.x | 1.27.x |
+| 1.28 | v1 | 1.7.x | 1.28.x |
+| 1.29 | v1 | 1.7.x | 1.29.x |
+| 1.30 | v1 | 1.7.x | 1.30.x |
+| 1.31 | v1 | 1.7.x | 1.31.x |
+| 1.32 | v1 | 2.0.x | 1.32.x |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 版本对齐 | kubelet 与 containerd CRI 版本严格匹配 | 避免 v1alpha2/v1 混用 |
+| 超时配置 | 设置合理的 CRI 调用超时 | 默认 2min，大镜像拉取需调大 |
+| 监控 | 监控 CRI 调用延迟 P99 | 超过 5s 告警 |
+| 日志 | 开启 CRI 调用日志 | 便于问题追溯 |
+| 升级 | 先升级 containerd 再升级 kubelet | 保证向后兼容 |
+| 备份 | 升级前备份 /etc/containerd/config.toml | 便于回滚 |
+| 测试 | 升级后执行 crictl 全量验证 | 确保所有接口正常 |
+| 网络 | stream server 使用节点本地地址 | 避免跨节点访问问题 |
+
+## CRI 接口调用时序
+
+```text
+Pod 创建完整时序：
+kubelet → RunPodSandbox() → 创建 pause 容器 + 网络命名空间
+kubelet → PullImage() → 拉取容器镜像
+kubelet → CreateContainer() → 创建容器（未启动）
+kubelet → StartContainer() → 启动容器
+kubelet → ListContainers() → 定期状态同步
+kubelet → StopContainer() → 停止容器
+kubelet → RemoveContainer() → 清理容器
+kubelet → StopPodSandbox() → 停止 Pod 沙箱
+kubelet → RemovePodSandbox() → 清理 Pod 沙箱
+```
+
+## 相关工具
+
+| 工具 | 用途 | 安装/使用 |
+|------|------|----------|
+| crictl | CRI 命令行调试 | 随 kubelet 分发，`crictl info` |
+| grpcurl | gRPC 接口直接调用 | `brew install grpcurl` |
+| cri-tools | CRI 测试套件 | `go install github.com/kubernetes-sigs/cri-tools/cmd/crictl@latest` |
+| containerd-shim-runc-v2 | 默认 shim 实现 | 随 containerd 安装 |
+| ctr | containerd 原生 CLI | 随 containerd 安装 |
+| nerdctl | Docker 兼容 CLI | 单独安装 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| CRI v1alpha2 和 v1 有何区别？ | v1 移除了部分废弃字段，API 更稳定，K8s 1.27+ 强制 v1 |
+| 如何查看 CRI 调用日志？ | `journalctl -u containerd` 过滤 `grpc` 关键字 |
+| crictl 和 kubectl 的关系？ | crictl 直接调用 CRI，kubectl 通过 API Server → kubelet → CRI |
+| 如何测试 CRI 接口连通性？ | `crictl info` 返回 JSON 即表示连通 |
+| RuntimeHandler 是什么？ | 指定运行时实现（runc/kata/gvisor），通过 RuntimeClass 选择 |
+| stream server 的作用？ | 处理 exec/attach/port-forward 的 WebSocket 流 |
+| 如何升级 CRI 版本？ | 升级 containerd 到对应版本，kubelet 自动协商 |
+| CRI 调用超时如何调整？ | kubelet `--runtime-request-timeout` 参数 |
+
 ## 相关文档
 
 - [[容器运行时/containerd-CRI-O/07-containerd-configuration-deep-guide.md|containerd 配置深度指南]]

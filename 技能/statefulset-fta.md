@@ -171,6 +171,47 @@ flowchart TD
     { "name": "顶事件: StatefulSet 异常", "action": "event", "step": "event_sts_abnormal", "description": "Pod 未就绪/有序部署卡住/PVC 异常", "next_step": "gate_root_or" },
     { "name": "根因 OR 门", "action": "gate_or", "step": "gate_root_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["cat_pvc", "cat_pod", "cat_order", "cat_net",
 
+## 生产案例
+
+### 案例 1: StatefulSet 更新卡住——Pod 未 Ready 阻止后续滚动
+
+| 时间 | 事件 |
+|------|------|
+| 14:00 | 更新 StatefulSet 镜像版本 |
+| 14:05 | Pod-2 更新后 CrashLoopBackOff，Pod-1/Pod-0 未更新 |
+| 14:10 | `kubectl rollout status sts/db` 显示 "waiting for partition" |
+| 14:15 | 修复 Pod-2 配置问题，`kubectl rollout resume sts/db` |
+| 14:25 | 按序号 2→1→0 顺序更新完成 |
+
+**根因**: StatefulSet 默认 OrderedReady 策略，必须等当前 Pod Ready 才更新下一个。
+
+### 案例 2: PVC 未释放导致缩容后数据残留
+
+**现象**: StatefulSet 从 5 缩容到 3，但 PVC-3/PVC-4 仍存在并占用存储。
+
+**诊断**: `kubectl get pvc -l app=db` 显示 5 个 PVC，StatefulSet 缩容不自动删除 PVC
+
+**修复**: 🟡 手动删除多余 PVC: `kubectl delete pvc data-db-3 data-db-4`，或配置 `persistentVolumeClaimRetentionPolicy`
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 数据库主节点 Pod 不可用 | 检查 PVC 绑定 + Pod 事件 |
+| P1 | 更新卡住超过 15min | 检查当前 Pod 状态 |
+| P2 | 缩容后 PVC 残留 | 清理多余 PVC |
+
+## 面试要点
+
+1. **Q: StatefulSet 与 Deployment 的核心区别？**
+   A: StatefulSet 提供: ① 稳定的网络标识(pod-name = sts-name-ordinal) ② 稳定的持久化存储(每个 Pod 独立 PVC) ③ 有序部署/扩缩/滚动更新 ④ 适合数据库、消息队列等有状态应用。
+
+2. **Q: StatefulSet 的更新策略有哪些？**
+   A: RollingUpdate(默认): 按序号从大到小逐个更新，等待 Ready；OnDelete: 手动删除 Pod 触发重建；partition: 只更新序号 >= partition 的 Pod，用于金丝雀发布。
+
+3. **Q: Headless Service 在 StatefulSet 中的作用？**
+   A: Headless Service(clusterIP: None) 为每个 Pod 创建 DNS A 记录(pod-name.svc-name.ns.svc.cluster.local)，提供稳定的网络标识，客户端可通过 DNS 发现所有副本。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

@@ -267,7 +267,37 @@ Session
 5. **Custom Tools**：TypeScript 定义自定义工具，扩展 Agent 能力边界
 6. **Agent Skill**：SKILL.md 规范定义可复用行为，项目级 + 全局级
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| 启动崩溃 | 配置文件损坏或版本不兼容 | `opencode --debug` | 重置配置文件 |
+| 工具调用失败 | 权限不足或命令不存在 | 查看工具执行日志 | 检查 PATH 和权限 |
+| 会话历史丢失 | 数据库文件损坏 | `ls ~/.local/share/opencode/` | 备份后重建数据库 |
+| 响应截断 | maxTokens 设置过低 | 检查配置中 maxTokens | 增加到 8192+ |
+| 文件编辑冲突 | 并发修改同一文件 | 检查 git status | 使用 git 解决冲突 |
+| 网络代理不生效 | 环境变量未设置 | `echo $HTTPS_PROXY` | 配置 HTTP_PROXY/HTTPS_PROXY |
+
+## 架构组件概览
+
+| 组件 | 职责 | 技术栈 |
+|------|------|--------|
+| TUI | 终端用户界面 | Bubble Tea (Go) |
+| Agent Core | 推理与工具编排 | Go + LLM API |
+| LSP Client | 代码智能 | 多语言 LSP 协议 |
+| Session Store | 会话持久化 | SQLite |
+| Config | 配置管理 | JSON/TOML |
+| Server | HTTP/WebSocket API | Go net/http |
+
+## 与竞品对比
+
+| 特性 | OpenCode | Cursor | Aider | Claude Code |
+|------|----------|--------|-------|-------------|
+| 开源 | ✅ | ❌ | ✅ | ❌ |
+| 终端原生 | ✅ | ❌ | ✅ | ✅ |
+| 多模型 | ✅ | 部分 | ✅ | ❌ |
+| LSP 集成 | ✅ | ✅ | ❌ | ❌ |
+| 自托管 | ✅ | ❌ | ✅ | ❌ |
 
 ## 关联文档
 
@@ -279,6 +309,43 @@ Session
 | [AI基础设施/02-ai-agents/23](../AI基础设施/AI-Agents/23-agent-cli-fundamentals.md) | Agent CLI 通用理论框架 |
 
 ---
+
+## 版本兼容性
+
+| OpenCode 版本 | Go 版本 | 主要特性 |
+|--------------|---------|--------|
+| 0.5+ | 1.22+ | Server API + mDNS |
+| 0.4+ | 1.21+ | 自定义工具 + LSP |
+| 0.3+ | 1.21+ | 多 Provider 支持 |
+| 0.2+ | 1.20+ | 基础 TUI + Agent |
+| 0.1+ | 1.20+ | 初始发布 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| Bubble Tea | TUI 框架 | 终端界面渲染 |
+| SQLite | 会话存储 | 本地持久化 |
+| ripgrep | 代码搜索 | 快速文件内容检索 |
+| tree-sitter | 语法解析 | 代码结构理解 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何安装 OpenCode？ | `go install github.com/opencode-ai/opencode@latest` |
+| 如何配置 Provider？ | 编辑 `~/.config/opencode/config.json` |
+| 如何自定义工具？ | 在项目根目录创建 `.opencode/tools/` |
+| 如何启用 LSP？ | 安装对应语言服务器，自动检测 |
+| 如何调试问题？ | `opencode --debug` 查看详细日志 |
+
+## 相关工具
+
+| 工具 | 用途 | 安装 |
+|------|------|------|
+| opencode-lsp | 语言服务器集成 | 随 opencode 内置 |
+| opencode-themes | 主题包 | `opencode theme install` |
+| opencode-plugins | 插件管理 | `opencode plugin list` |
 
 *本文档基于 OpenCode 官方文档（opencode.ai/docs）和源码分析整理。*
 

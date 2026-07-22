@@ -305,7 +305,27 @@ curl "https://openrouter.ai/api/v1/models/count?output_modalities=image"
 | `presence_penalty` | 存在惩罚 |
 | `seed` | 确定性输出 |
 
----
+## 模型选择决策矩阵
+
+| 场景 | 推荐模型 | 原因 |
+|------|---------|------|
+| 代码生成 | Claude Sonnet / GPT-4o | 代码质量高，工具调用稳定 |
+| 长文档分析 | Claude 3.5 / Gemini Pro | 200K+ 上下文窗口 |
+| 快速问答 | GPT-4o-mini / Llama 3 | 低延迟低成本 |
+| 多语言翻译 | GPT-4o / Claude | 多语言能力均衡 |
+| 结构化输出 | GPT-4o (JSON mode) | 原生 JSON Schema 支持 |
+
+## Provider 健康监控
+
+```bash
+# 检查 Provider 状态
+curl -s https://openrouter.ai/api/v1/models | jq '.data[] | select(.id | contains("anthropic")) | {id, context_length}'
+
+# 监控延迟
+curl -w "time_total: %{time_total}s\n" -o /dev/null -s https://openrouter.ai/api/v1/chat/completions \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -d '{"model":"openai/gpt-4o-mini","messages":[{"role":"user","content":"hi"}]}'
+```
 
 ## 关联文档
 
@@ -317,6 +337,15 @@ curl "https://openrouter.ai/api/v1/models/count?output_modalities=image"
 | [12 - 企业级高级实践](./12-openrouter-enterprise-advanced.md) | 成本控制策略 |
 
 ---
+
+## 版本兼容性
+
+| OpenRouter API | 支持模型数 | 主要变化 |
+|---------------|-----------|--------|
+| 2026-07 | 300+ | 新增 Gemini 2.5 系列 |
+| 2026-04 | 280+ | Claude 4 系列上线 |
+| 2026-01 | 250+ | Prompt Caching GA |
+| 2025-10 | 200+ | OpenAI 兼容 API v2 |
 
 *本文档基于 OpenRouter 官方文档（openrouter.ai/docs/models）整理。*
 

@@ -288,7 +288,26 @@ for await (const event of events) {
 
 适用于移动设备远程访问、多台开发机协作等场景。
 
----
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| Server 启动失败 | 端口被占用或配置错误 | `lsof -i :8080` | 更换端口或终止占用进程 |
+| API 响应 401 | 认证 Token 未配置或过期 | 检查请求 Header | 重新生成 API Token |
+| WebSocket 断开 | 网络不稳定或超时 | 检查客户端重连日志 | 配置 heartbeat 和 auto-reconnect |
+| mDNS 发现失败 | 防火墙阻止 5353 端口 | `avahi-browse -a` | 开放 mDNS 端口 |
+| SDK 生成代码编译失败 | OpenAPI spec 版本不兼容 | 检查生成的 SDK 版本 | 更新代码生成器 |
+
+## API 端点概览
+
+| 端点 | 方法 | 功能 |
+|------|------|------|
+| `/api/chat` | POST | 发送消息并获取响应 |
+| `/api/sessions` | GET | 列出所有会话 |
+| `/api/sessions/:id` | DELETE | 删除指定会话 |
+| `/api/config` | GET/PUT | 读取/更新配置 |
+| `/api/tools` | GET | 列出可用工具 |
+| `/ws` | WebSocket | 实时事件流 |
 
 ## 关联文档
 
@@ -299,6 +318,32 @@ for await (const event of events) {
 | [12 - 进阶话题](./12-opencode-advanced-topics.md) | 非交互模式与安全 |
 
 ---
+
+## 版本兼容性
+
+| OpenCode 版本 | Server 特性 | API 版本 |
+|--------------|-----------|--------|
+| 0.5+ | WebSocket + mDNS | v2 |
+| 0.4+ | HTTP REST API | v1 |
+| 0.3+ | 基础 HTTP | v0 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| curl | API 测试 | 快速验证端点 |
+| websocat | WebSocket 调试 | 实时事件流测试 |
+| openapi-generator | SDK 生成 | 多语言客户端 |
+| avahi-browse | mDNS 发现 | 局域网服务发现 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何启动 Server？ | `opencode server --port 8080` |
+| 如何认证？ | Bearer Token 或 API Key |
+| 支持哪些协议？ | HTTP REST + WebSocket |
+| 如何发现服务？ | mDNS 自动发现或手动配置 |
 
 *本文档基于 OpenCode 官方文档（opencode.ai/docs/server）整理。*
 

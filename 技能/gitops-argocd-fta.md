@@ -152,6 +152,46 @@ flowchart TD
 | **事件** | ArgoCD Application status（Synced/OutOfSync/Degraded/Unknown）、Sync 操作事件、Hook Job 状态 |
 | **关键指标** | `argocd_app_info{sync_status="OutOfSync"}`、`argocd_app_sync_total{phase="Error"}`、`argocd_app_reconcile_count`、`argocd_git_request_total
 
+## 生产案例
+
+### 案例 1: ArgoCD 同步失败——Git 仓库不可达
+
+| 时间 | 事件 |
+|------|------|
+| 10:00 | ArgoCD 所有 Application 显示 Unknown/OutOfSync |
+| 10:05 | `kubectl logs -n argocd -l app.kubernetes.io/name=argocd-repo-server` 显示 "connection timed out" |
+| 10:10 | Git 仓库网络策略变更，阻断了 ArgoCD 出口流量 |
+| 10:15 | 🟡 恢复网络策略，ArgoCD 自动重新同步 |
+
+**根因**: 安全组规则更新未考虑 ArgoCD 对 Git 仓库的访问需求。
+
+### 案例 2: ArgoCD 自动同步导致意外覆盖手动修改
+
+**现象**: 手动 kubectl patch 的配置被 ArgoCD 自动回滚。
+
+**诊断**: Application 配置了 `syncPolicy.automated`，持续将集群状态向 Git 对齐
+
+**修复**: 🟢 将修改提交到 Git，或临时禁用 auto-sync
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | ArgoCD 控制平面不可用 | 检查 argocd-server/repo-server Pod |
+| P1 | 同步失败影响发布 | 检查 Git 连接和 manifest 有效性 |
+| P2 | 同步延迟 | 调整 refresh interval |
+
+## 面试要点
+
+1. **Q: ArgoCD 的架构组件有哪些？**
+   A: ① argocd-server(API/UI) ② argocd-repo-server(Git 克隆+manifest 生成) ③ argocd-application-controller(状态对比+同步) ④ redis(缓存) ⑤ dex(SSO)。
+
+2. **Q: ArgoCD 的同步机制是怎样的？**
+   A: Controller 定期(默认 3min)对比 Git 中的期望状态与集群实际状态，发现差异后标记 OutOfSync；手动或自动触发 Sync，按资源依赖顺序应用变更。
+
+3. **Q: ArgoCD 与 Flux 的主要区别？**
+   A: ArgoCD: 有 UI、多集群支持、Application CRD、内置健康检查；Flux: 轻量、原生 K8s operator、GitOps Toolkit 可组合、无 UI(依赖第三方)。企业多集群选 ArgoCD，单集群自动化选 Flux。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

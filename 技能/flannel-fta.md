@@ -76,6 +76,46 @@ ping -M do -s 1400 <target-ip>
 ```
 ---
 
+## 生产案例
+
+### 案例 1: Flannel VXLAN 封包导致 MTU 不匹配引发间歇性超时
+
+| 时间 | 事件 |
+|------|------|
+| 11:00 | 部分大报文请求超时，小报文正常 |
+| 11:10 | `ping -s 1472 pod-ip` 失败，`ping -s 1400` 成功 |
+| 11:15 | 确认 VXLAN 封包开销 50 bytes，Pod MTU 应为 1450 |
+| 11:20 | 🟡 修改 Flannel 配置 `--iface-mtu=1450`，重启 flannel DaemonSet |
+
+**根因**: 节点 MTU 1500，VXLAN 封包后实际 MTU 1450，Pod 未设置 MTU 导致大包被丢弃。
+
+### 案例 2: flannel.1 接口丢失导致节点 Pod 网络全断
+
+**现象**: 单节点上所有 Pod 无法通信，`ip link show flannel.1` 接口不存在。
+
+**诊断**: `journalctl -u kube-flannel` 显示 "failed to create vxlan interface"
+
+**修复**: 🔴 重启 flannel Pod: `kubectl delete pod -n kube-system -l app=flannel --field-selector spec.nodeName=<node>`
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 多节点 Pod 网络全断 | 立即检查 flannel DaemonSet 状态 |
+| P1 | 单节点网络异常 | 重启该节点 flannel Pod |
+| P2 | MTU 相关间歇性问题 | 调整 MTU 配置 |
+
+## 面试要点
+
+1. **Q: Flannel 的三种后端模式有何区别？**
+   A: VXLAN(默认): 内核态封包，性能好；host-gw: 直接路由，无封包开销但要求二层互通；UDP(已废弃): 用户态封包，性能最差。生产推荐 VXLAN 或 host-gw。
+
+2. **Q: Flannel 的 IP 分配机制是怎样的？**
+   A: flanneld 从配置的 Network CIDR(如 10.244.0.0/16) 中为每个节点分配一个 /24 子网，存储在 etcd 或 K8s Subnet CRD 中，确保跨节点不重叠。
+
+3. **Q: Flannel 与 Calico 的主要差异？**
+   A: Flannel 纯 Overlay 网络，无网络策略支持；Calico 支持 BGP 路由(无封包) + NetworkPolicy + 安全组，功能更丰富但复杂度更高。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

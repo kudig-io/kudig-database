@@ -157,6 +157,47 @@ flowchart TD
     { "name": "类别: 控制器异常", "action": "category", "step": "cat_ctrl", "next_step": "gate_ctrl_or" },
     { "name": "控制器 OR 
 
+## 生产案例
+
+### 案例 1: CSI Driver Pod 崩溃导致 PVC 挂载失败
+
+| 时间 | 事件 |
+|------|------|
+| 09:00 | 新 Pod 启动失败，Events: "FailedMount: timeout waiting for volume" |
+| 09:05 | `kubectl get pods -n kube-system -l app=csi-plugin` 显示 CrashLoopBackOff |
+| 09:10 | 日志: "failed to connect to CSI socket: no such file" |
+| 09:15 | 🔴 重启 CSI DaemonSet，检查 /var/lib/kubelet/plugins 目录 |
+| 09:20 | 卷挂载恢复 |
+
+**根因**: 节点重启后 CSI socket 文件未重新创建，kubelet 与 CSI driver 通信失败。
+
+### 案例 2: PV 容量扩展失败——StorageClass 不支持
+
+**现象**: `kubectl edit pvc` 增大容量后，PVC 状态仍为原始大小。
+
+**诊断**: `kubectl get sc -o jsonpath='{.items[*].allowVolumeExpansion}'` → false
+
+**修复**: 🟡 修改 StorageClass `allowVolumeExpansion: true`，重新编辑 PVC
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 多节点卷挂载失败 | 检查 CSI Driver DaemonSet |
+| P1 | 单 Pod 卷挂载超时 | 检查 PV/PVC 状态和事件 |
+| P2 | 卷性能下降 | 检查存储后端健康状态 |
+
+## 面试要点
+
+1. **Q: CSI 架构的三大组件是什么？**
+   A: ① CSI Controller(通常 Deployment/StatefulSet): 处理卷创建/删除/扩容 ② CSI Node Plugin(DaemonSet): 处理卷挂载/卸载 ③ CSI Identity: 提供插件信息。通过 gRPC 与 kubelet/external-provisioner 通信。
+
+2. **Q: PVC 从创建到可用的完整流程？**
+   A: PVC 创建 → external-provisioner 调用 CSI CreateVolume → PV 创建并绑定 → Pod 调度 → kubelet 调用 CSI NodeStageVolume(格式化) → NodePublishVolume(挂载到 Pod 目录)。
+
+3. **Q: 动态 PV 与静态 PV 的区别？**
+   A: 动态: PVC 创建时 StorageClass 触发 CSI 自动创建卷；静态: 管理员预先创建 PV，PVC 通过 label selector 或 storageClassName 绑定。生产推荐动态供给。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

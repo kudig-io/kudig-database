@@ -148,6 +148,47 @@ flowchart TD
 | **事件** | `FailedScheduling (Insufficient nvidia.com/gpu)`、Device Plugin Pod 重启事件、`nvidia-smi` Xid 错误事件 |
 | **关键指标** | `kube_node_status_
 
+## 生产案例
+
+### 案例 1: NVIDIA Device Plugin 崩溃导致 GPU Pod 无法调度
+
+| 时间 | 事件 |
+|------|------|
+| 15:00 | 新提交的训练任务 Pod Pending，提示 "0/10 nodes: Insufficient nvidia.com/gpu" |
+| 15:05 | `kubectl get nodes -o json | jq '.items[].status.allocatable["nvidia.com/gpu"]'` 显示所有节点为 0 |
+| 15:10 | `kubectl get pods -n kube-system -l name=nvidia-device-plugin-ds` 显示 CrashLoopBackOff |
+| 15:15 | 日志显示 "Failed to initialize NVML: could not load NVML library" |
+| 15:20 | 🔴 重启 nvidia-device-plugin DaemonSet，GPU 资源重新注册 |
+
+**根因**: 节点驱动升级后未重启 device-plugin，NVML 库路径变更。
+
+### 案例 2: GPU 显存 OOM 导致训练任务反复重启
+
+**现象**: Pod 运行 10min 后 OOMKilled，但 `kubectl describe pod` 显示 memory limit 未超。
+
+**诊断**: `nvidia-smi` 显示 GPU 显存 100%，容器内 `CUDA_VISIBLE_DEVICES` 配置正确但 batch size 过大
+
+**修复**: 🟢 调整训练参数 batch_size，或设置 `nvidia.com/gpu-memory` 资源限制
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 全集群 GPU 资源不可用 | 检查 device-plugin + 驱动状态 |
+| P1 | 单节点 GPU 异常 | 检查该节点 nvidia-smi + 驱动 |
+| P2 | GPU 利用率低 | 优化调度策略和资源共享 |
+
+## 面试要点
+
+1. **Q: Kubernetes GPU 调度的工作原理？**
+   A: NVIDIA Device Plugin 以 DaemonSet 运行，通过 NVML 发现 GPU 并注册为扩展资源(nvidia.com/gpu)，kubelet 通过 gRPC 与 plugin 通信分配设备，容器通过 /dev/nvidia* 设备文件访问 GPU。
+
+2. **Q: GPU 共享的几种方案？**
+   A: ① 时间片共享(Time-slicing): 多 Pod 共享同一 GPU，无隔离 ② MIG(Multi-Instance GPU): A100 硬件分区，强隔离 ③ vGPU: 虚拟化层切分 ④ MPS: CUDA 多进程服务。
+
+3. **Q: 如何监控 GPU 资源使用？**
+   A: DCGM Exporter 暴露 Prometheus 指标(gpu_temp/gpu_utilization/gpu_memory_used)，配合 Grafana 仪表盘，设置显存使用率 >90% 告警。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]

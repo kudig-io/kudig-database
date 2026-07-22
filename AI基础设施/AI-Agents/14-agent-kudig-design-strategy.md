@@ -324,6 +324,25 @@ Agent:
 - [[AI基础设施/AI-Agents/09-production-deployment-guide.md|生产部署指南：K8s 上运行 Agent 服务]]
 - [[AI基础设施/AI-Agents/10-security-guardrails.md|安全护栏、提示注入防护与合规]]
 
+## 设计决策记录
+
+| 决策 | 选择 | 理由 |
+|------|------|------|
+| Agent 架构 | ReAct + Tool-Use | 可解释性强，工具调用可审计 |
+| 知识库集成 | 双层架构（提炼层+源文档层） | 平衡检索精度与覆盖广度 |
+| 安全护栏 | 输入/输出双向过滤 | 防止提示注入和敏感信息泄漏 |
+| 记忆管理 | 分层（短期/长期/工作） | 避免上下文窗口溢出 |
+| 评估体系 | 任务完成率 + 幻觉率 | 双维度衡量 Agent 质量 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| AgentScope | 多 Agent 编排框架 | 复杂任务分解与协作 |
+| LangGraph | 状态机 Agent 工作流 | 条件分支与循环控制 |
+| Ragas | RAG 质量评估 | 检索精度与答案忠实度 |
+| Promptfoo | 提示词测试 | 回归测试提示词变更 |
+
 ## See Also
 
 - 12-enterprise-case-studies

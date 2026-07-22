@@ -315,6 +315,37 @@ kubectl describe scaledobject <name> -n <ns>
 kubectl logs -n keda -l app=keda-operator --tail=50
 ```
 
+## 故障排查表
+
+| 问题现象 | 可能原因 | 排查命令 | 解决方案 |
+|---------|---------|---------|--------|
+| 缩零后冷启动超时 | 镜像太大或初始化慢 | `kubectl get rev -o yaml` / 查看 Pod events | 使用 distroless 镜像，预热策略 |
+| KEDA ScaledObject 不生效 | trigger 认证失败或指标名错误 | `kubectl describe scaledobject <name>` | 检查 triggerAuthentication 和 metric 名称 |
+| Knative Service 一直 Pending | activator 未就绪或 quota 不足 | `kubectl get ksvc -o yaml` | 检查 knative-serving 组件状态 |
+| 流量突增时扩容滞后 | 并发阈值设置过高 | `kubectl get podautoscaler -o yaml` | 降低 target 并发数，增加初始副本 |
+| 缩零后消息丢失 | 事件源未持久化 | 检查 Kafka/PubSub 消费位点 | 使用持久化队列作为缓冲 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 冷启动 | 镜像 < 100MB，预热连接池 | 减少缩零后延迟 |
+| 并发控制 | 设置 containerConcurrency | 避免单 Pod 过载 |
+| 缩零策略 | 生产环境保留 minScale >= 1 | 核心服务避免冷启动 |
+| 事件源 | 使用持久化队列 | 防止缩零期间消息丢失 |
+| 可观测性 | 监控 scale_from_zero 延迟 | 设置 P99 < 3s 告警 |
+| 资源 | 设置合理的 request/limit | 避免缩零后资源争抢 |
+
+## 相关工具
+
+| 工具 | 用途 | 场景 |
+|------|------|------|
+| Knative Serving | HTTP 缩零 | 请求驱动的无服务器 |
+| KEDA | 事件驱动缩放 | 队列/指标触发缩放 |
+| OpenFaaS | 函数即服务 | 轻量级 FaaS 平台 |
+| Dapr | 分布式应用运行时 | 事件驱动 + 状态管理 |
+| Karpenter | 节点级缩零 | 基础设施层成本优化 |
+
 ## Related
 
 - [[专项技术/无服务器/index.md|无服务器]]

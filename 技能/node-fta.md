@@ -83,6 +83,47 @@ base_confidence: 0.7
 | `evt_kubelet_cert` | 证书/鉴权失败 | `ssh 
 ...(截断)
 
+## 生产案例
+
+### 案例 1: kubelet 证书过期导致节点 NotReady
+
+| 时间 | 事件 |
+|------|------|
+| 03:00 | 监控告警: 3 个节点 NotReady |
+| 03:05 | `kubectl describe node` 显示 "KubeletNotReady" condition |
+| 03:10 | SSH 登录节点，`journalctl -u kubelet` 显示 x509 certificate has expired |
+| 03:15 | 🔴 `kubeadm certs renew all` + `systemctl restart kubelet` |
+| 03:20 | 节点恢复 Ready，Pod 重新调度 |
+
+**根因**: 集群初始化时未配置 kubelet 证书自动轮换 (`--rotate-certificates=true`)，1 年后证书过期。
+
+### 案例 2: 节点磁盘压力导致批量 Pod 驱逐
+
+**现象**: 节点上 20+ Pod 被 Evicted，`kubectl describe node` 显示 DiskPressure=True。
+
+**诊断**: `df -h` → /var/lib/docker 95% → 容器日志未轮转占满磁盘
+
+**修复**: 🟡 配置 containerLogMaxSize=100Mi + containerLogMaxFiles=5，清理旧日志
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 多节点同时 NotReady，业务受损 | 立即检查控制平面 + 节点 kubelet |
+| P1 | 单节点 NotReady，Pod 已重调度 | 30min 内排查节点问题 |
+| P2 | 节点资源压力告警 | 规划扩容或清理 |
+
+## 面试要点
+
+1. **Q: 节点 NotReady 的常见原因有哪些？**
+   A: ① kubelet 进程崩溃/挂起 ② 证书过期 ③ 网络分区(apiserver 不可达) ④ 磁盘/内存压力 ⑤ CNI 插件异常 ⑥ 节点时间偏移超过证书容忍。
+
+2. **Q: kubelet 的节点租约(Lease)机制是如何工作的？**
+   A: kubelet 每 10s 更新 Lease 对象(node-lease-namespace)，controller-manager 检查 lease 超时(node-monitor-grace-period=40s)，超时后标记 NotReady 并触发 Pod 驱逐(pod-eviction-timeout=5min)。
+
+3. **Q: 如何安全地维护一个节点？**
+   A: `kubectl cordon node` (禁止新调度) → `kubectl drain node --ignore-daemonsets --delete-emptydir-data` (驱逐 Pod) → 维护 → `kubectl uncordon node` (恢复调度)。
+
 ## 相关链接
 
 - [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
