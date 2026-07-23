@@ -185,6 +185,33 @@ last_updated: '2026-07-21'
 - [[实体/cncf-observability|CNCF Observability]]
 - [[实体/k8s-observability-ecosystem|Kubernetes Observability Ecosystem]]
 
+## 可观测性全景
+
+### 三大支柱
+
+| 支柱 | 说明 | 工具 |
+|---|---|---|
+| 指标 | 数值型时间序列 | Prometheus, Grafana |
+| 日志 | 事件记录 | ELK, Loki |
+| 追踪 | 请求链路 | Jaeger, Tempo |
+
+### 可观测性成熟度
+
+```
+L1: 基础监控 → L2: 集中日志 → L3: 分布式追踪 → L4: SLO 驱动 → L5: AIOps
+```
+
+## 面试要点
+
+1. **Q：可观测性 vs 监控的区别？**
+   A：监控：已知问题的告警。可观测性：从外部输出推断内部状态，支持未知问题探索。
+
+2. **Q：OpenTelemetry 的价值？**
+   A：统一标准、厂商无关、自动埋点、多语言支持、社区活跃。
+
+3. **Q：SLO 驱动的监控如何实施？**
+   A：定义 SLI→设定 SLO→配置 error budget→burn rate 告警→定期回顾。
+
 ## Related Tags
 
 - [[标签/k8s|k8s]]

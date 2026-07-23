@@ -1,3 +1,0 @@
-message: Now cookie names are validated against RFC 6265, which allows more characters than the previous validation.
-type: bugfix
-scope: Core

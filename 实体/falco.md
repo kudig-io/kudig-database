@@ -235,8 +235,8 @@ kubectl scale daemonset/falco -n falco --replicas=0
 - RELEASE-NOTES-0.31
 - [[实体/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
 - [[生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[概念/security-tool-evolution.md|安全工具演进]] — Cross-reference
 - [[实体/trivy.md|Trivy]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference

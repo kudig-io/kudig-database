@@ -35,7 +35,7 @@ relationships:
   type: uses
 - target: '[[系统基础/速查卡/k8s.md]]'
   type: related_to
-- target: '[[技能/best-practices/best-practices/infrastructure/storage.md]]'
+- target: '[[最佳实践/best-practices/infrastructure/storage.md]]'
   type: related_to
 ---
 
@@ -210,7 +210,7 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd-20260711.db \
 ## 相关 Domain
 
 - 可靠性/01-backup-recovery/01-backup-strategies
-- domain-04-[[技能/best-practices/best-practices/infrastructure/storage.md|storage]]-data/03-csi/01-csi-snapshot
+- domain-04-[[最佳实践/best-practices/infrastructure/storage.md|storage]]-data/03-csi/01-csi-snapshot
 
 ## 相关页面
 

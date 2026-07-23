@@ -77,7 +77,7 @@ IaC 把基础设施变成"代码仓库里的产物"，Crossplane 把基础设施
 - [[实体/carvel.md|Carvel]]
 - [[实体/cdk8s.md|cdk8s]]
 - [[概念/infrastructure-as-code.md|基础设施即代码]]
-- [[概念/IaC x 多集群管理.md|IaC × 多集群管理]]
+- [[概念/IaC × 多集群管理.md|IaC × 多集群管理]]
 - [[概念/controller-pattern.md|控制器模式]]
 - [[概念/declarative-api.md|声明式 API]]
 - [[综合/argocd-gitops.md|ArgoCD × GitOps]]

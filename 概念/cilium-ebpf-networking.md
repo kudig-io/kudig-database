@@ -1,7 +1,7 @@
 ---
 title: Cilium eBPF Networking
-description: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
-summary: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+description: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -274,7 +274,7 @@ EOF
 - [[cilium|Cilium]]
 - [[实体/tetragon.md|Tetragon]]
 - Hubble
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis
 
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8

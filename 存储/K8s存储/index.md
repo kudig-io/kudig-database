@@ -35,6 +35,8 @@ last_updated: 2026-07
 - [[存储/K8s存储/16-csi-migration-in-tree-to-csi.md|Csi Migration In Tree To Csi]]
 - [[存储/K8s存储/17-volume-snapshot-scheduling.md|Volume Snapshot Scheduling]]
 - [[存储/K8s存储/18-storage-encryption-at-rest.md|Storage Encryption At Rest]]
+- [[存储/K8s存储/19-volume-attachment-controller.md|Volume Attachment Controller]]
+- [[存储/K8s存储/20-csi-storage-capacity-tracking.md|Csi Storage Capacity Tracking]]
 - [[存储/K8s存储/completion-summary.md|Completion Summary]]
 - [[存储/K8s存储/quality-check-report.md|Quality Check Report]]
 

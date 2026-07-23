@@ -1,3 +1,0 @@
-message: "Performance optimization to avoid unnecessary creations and garbage-collections of spans"
-type: "performance"
-scope: "PDK"

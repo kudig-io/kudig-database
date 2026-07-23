@@ -1,7 +1,7 @@
 ---
 title: Multi-Tenancy Isolation
-description: '- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
-summary: '- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
+description: '- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
+summary: '- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -198,8 +198,8 @@ subjects:
 - [[概念/security-defense-depth.md|Defense-in-Depth Security]]
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[技能/audit-rbac-configurations.md|Audit RBAC Configurations]]
-- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
-- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis
+- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis
+- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — synthesis
 
 
 <!-- risk-assessed -->

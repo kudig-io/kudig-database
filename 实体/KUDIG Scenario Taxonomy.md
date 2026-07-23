@@ -120,7 +120,7 @@ User input: "How do I set up ArgoCD for my cluster?"
 - [[etcd]] — etcd
 - [[实体/argocd.md|argocd]] — ArgoCD
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 - [[实体/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
 - [[文档/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]
 

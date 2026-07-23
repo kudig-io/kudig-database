@@ -1,7 +1,7 @@
 ---
 title: Infrastructure as Code
-description: '- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
-summary: '- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis'
+description: '- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — synthesis'
+summary: '- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -217,7 +217,7 @@ spec:
 - [[概念/gitops-principles.md|GitOps Principles]]
 - [[概念/platform-engineering-idp.md|Platform Engineering and IDP]]
 - [[crossplane|Crossplane]]
-- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — synthesis
+- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — synthesis
 
 - 05-crossplane-enterprise-orchestration
 - 99-crossplane-platform-guide

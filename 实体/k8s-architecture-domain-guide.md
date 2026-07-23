@@ -190,7 +190,7 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get 
 - [[概念/high-availability-patterns.md|High Availability Patterns]]
 - [[概念/security-defense-depth.md|Defense-in-Depth Security]]
 - [[概念/observability-pillars.md|Observability Pillars]]
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview

@@ -206,6 +206,146 @@ ENTRYPOINT ["/server"]
 | 如何确认镜像是否真正无 shell？ | `crane export <image> - | tar -t | grep -E "sh|bash"` |
 | nonroot 变体的作用？ | 默认以 uid 65532 运行，无需额外配置 USER |
 
+## 性能调优
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| 镜像过大 | 静态编译 | CGO_ENABLED=0 + -ldflags="-s -w" |
+| 拉取慢 | 减小体积 | 多阶段构建 + distroless |
+| 启动慢 | 精简入口 | 直接执行二进制，无 shell |
+| 扫描报漏洞 | 更新 base | 定期更新 distroless 镜像 |
+| 构建慢 | 缓存依赖 | go mod download 单独层 |
+| TLS 失败 | 缺少证书 | 复制 ca-certificates |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| image_size_bytes | 镜像体积 | > 50MB (Go 应用) |
+| vulnerability_count | 漏洞数 | HIGH/CRITICAL > 0 |
+| build_duration | 构建耗时 | P99 > 5min |
+| pull_duration | 拉取耗时 | P99 > 30s |
+| container_start_duration | 启动耗时 | P99 > 2s |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 用户 | 以 nonroot 运行 | uid 65532 |
+| 文件系统 | readOnlyRootFilesystem | 防止写入 |
+| 扫描 | CI 强制 Trivy | HIGH/CRITICAL 阻断 |
+| 签名 | cosign 签名 | 供应链验证 |
+| 更新 | 定期更新 base | 修复已知漏洞 |
+| 最小化 | 仅包含必要文件 | 减小攻击面 |
+
+## 版本兼容性
+
+| distroless 版本 | Debian 基础 | 支持架构 | 说明 |
+|----------------|------------|----------|------|
+| static-debian11 | Debian 11 | amd64/arm64 | 稳定版 |
+| static-debian12 | Debian 12 | amd64/arm64/s390x | 推荐 |
+| base-debian12 | Debian 12 | amd64/arm64 | 含 glibc |
+| cc-debian12 | Debian 12 | amd64/arm64 | C/C++ |
+| python3-debian12 | Debian 12 | amd64/arm64 | Python |
+| java-debian12 | Debian 12 | amd64/arm64 | Java |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| alpine | distroless/static | 静态编译 + 复制 CA 证书 |
+| ubuntu | distroless/base | 确认 glibc 依赖 |
+| 完整镜像 | scratch | 完全静态链接 + 所有依赖打包 |
+| node:alpine | distroless/nodejs | 调整 ENTRYPOINT |
+| python:slim | distroless/python3 | 调整依赖安装方式 |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| 静态编译 | `file /app/binary` | statically linked |
+| 无 shell | `crane export <image> - | tar -t | grep sh` | 无结果 |
+| 非 root | `docker inspect <image> | jq .Config.User` | 65532 |
+| CA 证书 | `ls /etc/ssl/certs/` | 存在 ca-certificates.crt |
+| 体积 | `crane manifest <image>` | < 20MB (Go) |
+| 漏洞 | `trivy image <image>` | 无 HIGH/CRITICAL |
+
+## 架构对比
+
+```text
+镜像体积对比（Go 应用）：
+
+完整 ubuntu:    ~800MB
+ubuntu + app:  ~820MB
+alpine + app:  ~25MB
+distroless:    ~12MB
+scratch:       ~8MB
+
+安全攻击面：
+完整 OS > alpine > distroless > scratch
+```
+
+## 容量规划
+
+| 场景 | 建议基础镜像 | 最终体积 |
+|------|------------|----------|
+| Go 微服务 | distroless/static | < 15MB |
+| Go + gRPC | distroless/base | < 25MB |
+| Python 服务 | distroless/python3 | < 60MB |
+| Java 服务 | distroless/java | < 120MB |
+| Node.js | distroless/nodejs | < 90MB |
+| C/C++ | distroless/cc | < 35MB |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| distroless 初始 | 2017 | Google 发布 |
+| nonroot 变体 | 2019 | 默认非 root |
+| debian12 | 2023 | 更新基础 |
+| 多架构 | 2024 | s390x 支持 |
+
+## 常见问题 FAQ（补充）
+
+| 问题 | 解答 |
+|------|------|
+| distroless 镜像如何调试？ | 使用 `kubectl debug` 注入调试容器，或构建时保留 debug 变体 |
+| 没有 shell 如何执行命令？ | 通过 `kubectl exec` 配合 debug 容器，或在镜像中嵌入静态编译的诊断工具 |
+| distroless 与 Alpine 如何选择？ | 安全优先选 distroless，需要包管理选 Alpine |
+| 如何添加 CA 证书？ | 在构建阶段 COPY 到 `/etc/ssl/certs/`，或使用 distroless 内置的 ca-certificates 变体 |
+| 支持哪些语言运行时？ | 官方提供 base、java、nodejs、python、static 变体 |
+| 镜像签名如何验证？ | 使用 cosign 验证 `cosign verify --key cosign.pub <image>` |
+| 如何处理时区数据？ | 使用 `gcr.io/distroless/base` 自带 tzdata，或构建时 COPY |
+| nonroot 变体有何限制？ | 无法绑定 < 1024 端口，无法写入系统目录 |
+| 如何扫描漏洞？ | 使用 Trivy/Grype，distroless 通常零 CVE |
+| 与 scratch 镜像区别？ | distroless 包含 glibc 和 CA 证书，scratch 完全空白 |
+
+## 生产部署建议
+
+| 场景 | 推荐基础镜像 | 注意事项 |
+|------|-------------|----------|
+| Go 服务 | `gcr.io/distroless/static-debian12` | 静态编译 CGO_ENABLED=0 |
+| Java 服务 | `gcr.io/distroless/java17-debian12` | 匹配 JDK 版本 |
+| Node.js 服务 | `gcr.io/distroless/nodejs20-debian12` | 仅支持纯 JS，不支持 native addon |
+| Python 服务 | `gcr.io/distroless/python3-debian12` | 注意依赖的 C 扩展兼容性 |
+| Rust 服务 | `gcr.io/distroless/static-debian12` | musl 静态链接 |
+| 多语言 sidecar | `gcr.io/distroless/base-debian12` | 包含 glibc 和 openssl |
+
+## 安全加固要点
+
+| 措施 | 说明 |
+|------|------|
+| 最小权限 | 使用 nonroot 变体，设置 `runAsNonRoot: true` |
+| 只读文件系统 | `readOnlyRootFilesystem: true` + emptyDir 挂载 |
+| 禁止提权 | `allowPrivilegeEscalation: false` |
+| 删除 capabilities | `drop: ["ALL"]` |
+| 镜像签名 | cosign 签名 + admission webhook 验签 |
+| 漏洞扫描 | CI 中集成 Trivy，阻断含 CVE 的镜像 |
+| SBOM 生成 | `syft <image> -o spdx-json` 生成软件物料清单 |
+| 网络策略 | NetworkPolicy 限制出入站流量 |
+| 资源限制 | 设置 CPU/Memory requests 和 limits |
+| 审计日志 | 启用 Kubernetes audit log 记录镜像拉取事件 |
+
 ## 相关文档
 
 - [[容器运行时/镜像构建/04-multi-arch-build-guide.md|多架构构建指南]]

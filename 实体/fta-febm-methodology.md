@@ -218,7 +218,7 @@ fault_trees:
 ## Related
 
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Structural Troubleshooting Framework
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Production Troubleshooting Playbook
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Production Troubleshooting Playbook
 
 - [[README]]
 - [[nginx-ingress-fta]]

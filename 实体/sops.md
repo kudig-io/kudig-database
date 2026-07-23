@@ -314,8 +314,8 @@ sops -d secrets.enc.yaml | kubectl apply -f -
 
 - sops
 - [[实体/ratify.md|Ratify]]
-- [[概念/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/IaC × 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

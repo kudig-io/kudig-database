@@ -252,13 +252,13 @@ groups:
 
 ## 相关链接
 
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
 - [[技能/skills-run-README.md|skills-run-README]] — Skills Demo — 本地运行工单诊断技能
-- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
+- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Symptom Vector Matching Engine
 - [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
 - [[gpu-fta]] — GPU 异常故障树分析
 - [[技能/ts-workloads.md|ts-workloads]] — 工作负载故障排查

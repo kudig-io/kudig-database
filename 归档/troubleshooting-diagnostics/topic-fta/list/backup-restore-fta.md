@@ -823,7 +823,7 @@ flowchart TD
 
 ## Related
 
-- [[技能/Symptom Vector Matching Engine|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[技能/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
 - [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]

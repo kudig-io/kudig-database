@@ -155,5 +155,5 @@ Phase 4: 清理收尾（1 周）
 ## Related
 
 - [[综合/ebpf-observability.md|eBPF × 可观测性]]
-- [[概念/networkpolicy.md|NetworkPolicy 概念]]
+- [[概念/network-policy.md|NetworkPolicy 概念]]
 - [[研究/gateway-api-vs-ingress.md|Gateway API vs Ingress 研究]]

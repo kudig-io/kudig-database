@@ -1,3 +1,0 @@
-message: "**Plugin Server**: fix an issue where every request causes a new plugin instance to be created"
-type: bugfix
-scope: PDK

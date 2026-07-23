@@ -1,4 +1,0 @@
-default:
-some:
-  nested:
-    string_val: value1

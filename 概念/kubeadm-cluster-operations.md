@@ -40,7 +40,7 @@ relationships:
   type: uses
 - target: '[[实体/deployment.md]]'
   type: uses
-- target: '[[概念/etcd x 高可用模式.md]]'
+- target: '[[概念/etcd × 高可用模式.md]]'
   type: uses
 ---
 
@@ -273,7 +273,7 @@ kubectl uncordon <node>
 
 ## Related
 
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]]
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]]
 
 - [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]]
 

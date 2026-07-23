@@ -137,13 +137,13 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 - [[概念/high-availability-patterns.md|high availability patterns]]
 - [[概念/observability-pillars.md|observability pillars]]
 - [[技能/backup-restore-etcd.md|backup restore etcd]]
-- [[概念/Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
+- [[归档/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[概念/etcd x 高可用模式.md|etcd x 高可用模式]]
+- [[概念/etcd × 高可用模式.md|etcd x 高可用模式]]
 - [[概念/etcd × Operator 模式.md|etcd × Operator 模式]]
 - [[概念/kubeadm-cluster-operations.md|kubeadm-cluster-operations]]
 - [[概念/可观测性支柱 × Prometheus-Grafana.md|可观测性支柱 × Prometheus-Grafana]]

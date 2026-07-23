@@ -105,8 +105,8 @@ last_updated: '2026-07-21'
 ## 技能 (Skills)
 
 - [[技能/gitops-argocd-fta|GitOps ArgoCD FTA]]
-- [[技能/ts-gitops-devops|GitOps/DevOps 排障]]
-- [[技能/best-practices/scenarios/gitops-workflow|GitOps 工作流最佳实践]]
+- [[技能/排障实战/gitops-devops/ts-gitops-devops.md|GitOps/DevOps 排障]]
+- [[最佳实践/scenarios/gitops-workflow|GitOps 工作流最佳实践]]
 
 ## 平台工程 (Platform Engineering)
 
@@ -144,6 +144,36 @@ last_updated: '2026-07-21'
 - [[系统基础/知识字典/operations/pipecd|PipeCD]]
 - [[系统基础/知识字典/platform-engineering/gitops-and-continuous-delivery|GitOps 与持续交付]]
 - [[系统基础/速查卡/gitops|GitOps 速查卡]]
+
+## GitOps 技术全景
+
+### GitOps 核心原则
+
+| 原则 | 说明 |
+|---|---|
+| 声明式 | 系统状态以声明式配置描述 |
+| 版本化 | 配置存储在 Git 中，可追溯 |
+| 自动同步 | 自动将实际状态向期望状态调和 |
+| 持续调和 | 检测漂移并自动修复 |
+
+### GitOps 工具对比
+
+| 工具 | 特点 | 适用场景 |
+|---|---|---|
+| ArgoCD | UI 丰富、多集群 | 复杂环境 |
+| Flux | 轻量、原生 K8s | 简单环境 |
+| Jenkins X | CI/CD 集成 | 全流程 |
+
+## 面试要点
+
+1. **Q：GitOps 的核心价值？**
+   A：可审计、可回滚、一致性、自动化、协作友好。
+
+2. **Q：ArgoCD vs Flux 如何选择？**
+   A：ArgoCD：需要 UI、多集群、应用集。Flux：轻量、Helm 集成、简单环境。
+
+3. **Q：GitOps 的安全控制？**
+   A：分支保护、PR 审批、镜像签名、RBAC、审计日志、Secret 加密。
 
 ## Related Tags
 

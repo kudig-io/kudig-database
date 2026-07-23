@@ -38,6 +38,7 @@ last_updated: 2026-07
 ## 文档
 
 - [[集群基础/01-production-architecture-design-principles.md|Production Architecture Design Principles]]
+- [[集群基础/37-kubespray-production-guide.md|Kubespray Production Guide]]
 - [[集群基础/99-kubernetes-production-architecture-blueprint.md|Kubernetes Production Architecture Blueprint]]
 - [[集群基础/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

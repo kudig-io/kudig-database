@@ -1,7 +1,0 @@
-csi:
-  bmcpfs:
-    enabled: true
-    controller:
-      enabled: true
-  disk:
-    enabled: true

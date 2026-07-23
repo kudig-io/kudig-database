@@ -1,4 +1,0 @@
-message: |
-  **correlation-id**: Fixed an issue where the plugin would not work if we explicitly set the `generator` to `null`.
-scope: Plugin
-type: bugfix

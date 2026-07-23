@@ -1,4 +1,0 @@
-message: | 
-  **Core**: Added `tls.disable_http2_alpn()` function needed patch for disabling HTTP/2 ALPN when tls handshake.
-type: feature
-scope: Core

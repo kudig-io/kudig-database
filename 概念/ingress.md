@@ -306,7 +306,7 @@ kubectl get endpoints <svc-name> -n <ns>
 
 - [[概念/kubernetes.md|Kubernetes]]
 - [[概念/service.md|Service]] — Ingress 的后端
-- [[概念/networkpolicy.md|NetworkPolicy]]
+- [[概念/network-policy.md|NetworkPolicy]]
 - [[概念/kubernetes-architecture-overview.md|Kubernetes 架构概览]]
 - [[README]]
 

@@ -124,7 +124,7 @@ KUDIG covers Kubernetes v1.25 through v1.32, including:
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]]
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
 

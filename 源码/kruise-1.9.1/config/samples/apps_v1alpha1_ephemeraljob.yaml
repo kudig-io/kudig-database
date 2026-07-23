@@ -1,7 +1,0 @@
-apiVersion: apps.kruise.io/v1alpha1
-kind: EphemeralJob
-metadata:
-  name: ephemeraljob-sample
-spec:
-  # Add fields here
-  foo: bar

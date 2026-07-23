@@ -236,19 +236,19 @@ groups:
 
 ## 相关链接
 
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
-- Index.md|[[技能/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
+- Index.md|[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[故障诊断/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]

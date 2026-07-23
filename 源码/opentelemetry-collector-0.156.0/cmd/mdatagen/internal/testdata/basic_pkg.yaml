@@ -1,6 +1,0 @@
-type: test
-
-status:
-  class: pkg
-  stability:
-    beta: [logs]

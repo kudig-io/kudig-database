@@ -108,8 +108,8 @@ last_updated: '2026-07-21'
 
 ## 可观测性 (Observability)
 
-- [[技能/best-practices/best-practices/observability/monitoring|监控最佳实践]]
-- [[技能/best-practices/best-practices/observability/tracing|追踪最佳实践]]
+- [[最佳实践/best-practices/observability/monitoring|监控最佳实践]]
+- [[最佳实践/best-practices/observability/tracing|追踪最佳实践]]
 - [[清单模式/Operator模式/07-operator-metrics-observability|Operator 指标可观测性]]
 
 ## 研究 (Research)
@@ -146,6 +146,37 @@ last_updated: '2026-07-21'
 - [[应用模式/行业架构/07-iot-platform-architecture|IoT 平台架构]]
 - [[应用模式/行业架构/08-ai-ml-inference-architecture|AI/ML 推理架构]]
 - [[应用模式/行业架构/09-gaming-backend-architecture|游戏后端架构]]
+
+## Operator 技术全景
+
+### Operator 设计模式
+
+| 模式 | 说明 | 示例 |
+|---|---|---|
+| 基础 Operator | CRUD + Reconcile | etcd-operator |
+| 有状态 Operator | 备份/恢复/升级 | prometheus-operator |
+| 多集群 Operator | 跨集群管理 | cluster-api |
+| Day-2 Operator | 运维自动化 | strimzi-kafka |
+
+### Operator 开发框架
+
+| 框架 | 语言 | 特点 |
+|---|---|---|
+| Operator SDK | Go/Ansible/Helm | 官方推荐 |
+| Kubebuilder | Go | 轻量级 |
+| Metacontroller | 任意语言 | Webhook 方式 |
+| KEDA | YAML | 事件驱动 |
+
+## 面试要点
+
+1. **Q：Operator 的核心价值？**
+   A：将运维知识代码化、自动化复杂操作、提供声明式 API、实现自愈能力。
+
+2. **Q：Operator vs Helm 的区别？**
+   A：Helm：包管理、一次性部署。Operator：持续调和、Day-2 运维、状态管理。
+
+3. **Q：如何设计高质量的 Operator？**
+   A：明确 CRD 语义、实现幂等 Reconcile、完善状态报告、支持升级回滚、充分测试。
 
 ## Related Tags
 

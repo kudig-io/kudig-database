@@ -91,7 +91,7 @@ last_updated: '2026-07-21'
 
 ## 调度 (Scheduling)
 
-- [[技能/learn-15-scheduling-basics|调度基础]]
+- [[技能/培训学习/learning-path/learn-15-scheduling-basics.md|调度基础]]
 - [[工作负载/核心工作负载/16-runtime-class-configuration|RuntimeClass 配置]]
 - [[工作负载/核心工作负载/05-job-cronjob-advanced|Job/CronJob 高级]]
 
@@ -148,6 +148,37 @@ last_updated: '2026-07-21'
 
 - [[生态参考/领域索引/ai-gpu-index|AI/GPU 索引]]
 - [[生态参考/论文/17-kubernetes-aiml-gpu-scheduling-llm-inference|AI/ML GPU 调度与 LLM 推理]]
+
+## GPU 技术全景
+
+### GPU 在 K8s 中的管理
+
+| 组件 | 功能 |
+|---|---|
+| Device Plugin | GPU 资源注册与分配 |
+| GPU Operator | 驱动/运行时自动部署 |
+| DCGM Exporter | GPU 指标导出 |
+| MPS | 多进程共享 GPU |
+
+### GPU 调度策略
+
+| 策略 | 说明 | 适用场景 |
+|---|---|---|
+| 整卡分配 | 独占 GPU | 训练任务 |
+| GPU 共享 | 多 Pod 共享 | 推理服务 |
+| 拓扑感知 | NVLink 优先 | 分布式训练 |
+| 抢占调度 | 优先级抢占 | 混合负载 |
+
+## 面试要点
+
+1. **Q：K8s 中 GPU 资源如何管理？**
+   A：Device Plugin 注册→调度器分配→kubelet 挂载→容器使用。nvidia.com/gpu 资源类型。
+
+2. **Q：GPU 共享方案有哪些？**
+   A：MPS(多进程)、MIG(多实例)、vGPU(虚拟化)、时间片轮转。
+
+3. **Q：GPU 集群调度的挑战？**
+   A：拓扑感知(NVLink)、显存管理、故障检测、资源碎片、多租户隔离。
 
 ## Related Tags
 

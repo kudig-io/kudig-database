@@ -87,7 +87,7 @@ DevEx 的核心指标是"从想法到生产的时间"和"认知负荷"。平台�
 - [[概念/platform-engineering-idp.md|平台工程与 IDP]]
 - [[概念/platform-engineering-sre.md|平台工程与 SRE]]
 - [[概念/backstage-platform-catalog.md|Backstage 平台目录]]
-- [[概念/GitOps x 平台工程.md|GitOps × 平台工程]]
+- [[概念/GitOps × 平台工程.md|GitOps × 平台工程]]
 - [[综合/argocd-gitops.md|ArgoCD × GitOps]]
 
 

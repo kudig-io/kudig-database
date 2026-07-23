@@ -264,7 +264,7 @@ kubectl get validatingwebhookconfigurations | grep kyverno
 
 ## Related
 
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
 - [[docker]] — Docker
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment

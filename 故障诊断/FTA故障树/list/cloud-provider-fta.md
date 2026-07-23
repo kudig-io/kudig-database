@@ -223,8 +223,8 @@ groups:
 
 ## 相关链接
 
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
@@ -235,7 +235,7 @@ groups:
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
 - [[故障诊断/FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
-- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 

@@ -46,53 +46,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 02-多云混合部署策略
-description: '# 02-多云混合部署策略'
-category: production-operations
-tags:
-- k8s
-- production
-- operations
-- best-practices
-- [[Prometheus|prometheus]]
-- grafana
-- [[Istio|istio]]
-- [[ArgoCD|argocd]]
-- docker
-- harbor
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 平台工程师
-estimated_read_time: 5min
-intent_queries:
-- 多云混合部署策略 是什么
-- 如何 多云混合部署策略
-- Kubernetes 18 production operations 最佳实践
-trigger_keywords:
-- 多云混合部署策略
-- production
-- operations
-cross_refs:
-- type: fta
-  path: ../故障诊断/topic-fta/list/deployment-fta.md
-  label: '故障树: deployment'
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # 02-多云混合部署策略
 
 > **适用范围**: Kubernetes v1.25-v1.32 | **维护状态**: 🔧 持续更新中 | **专家级别**: ⭐⭐⭐⭐⭐

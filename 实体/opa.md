@@ -304,7 +304,7 @@ kubectl delete constraint k8srequiredlabels require-team-label
 - RELEASE-NOTES-0.60
 - RELEASE-NOTES-0.31
 - [[实体/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[概念/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
 - [[概念/multi-tenancy-isolation.md|Multi-Tenancy Isolation]] — Cross-reference
 - [[概念/security-tool-evolution.md|安全工具演进]] — Cross-reference

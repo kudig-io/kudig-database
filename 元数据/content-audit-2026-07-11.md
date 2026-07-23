@@ -323,7 +323,7 @@ created: 2026-07-11
 
 **深度抽检**
 - `云厂商/AWS-EKS/aws-eks-overview.md`: deep
-- `云厂商/阿里云/ack/99-alicloud-ack-production-runbook.md`: deep / 生产手册
+- `云厂商/阿里云/公有云-ACK/99-alicloud-ack-production-runbook.md`: deep / 生产手册
 - `云厂商/多云混合/08-multicloud-federation-karmada.md`: deep
 
 **问题与机会**

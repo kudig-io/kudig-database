@@ -275,7 +275,7 @@ spec:
 - [[概念/kubernetes.md|Kubernetes]]
 - [[概念/pods.md|Pod]] — Service 的后端
 - [[概念/ingress.md|Ingress]] — 七层入口
-- [[概念/networkpolicy.md|NetworkPolicy]] — 流量控制
+- [[概念/network-policy.md|NetworkPolicy]] — 流量控制
 - [[概念/kubernetes-architecture-overview.md|Kubernetes 架构概览]]
 - [[README]]
 

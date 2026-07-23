@@ -33,6 +33,7 @@ last_updated: '2026-07-21'
 | [[云厂商/Google-GKE/04-gke-storage-filestore-gcs.md\|存储集成]] | Filestore/GCS CSI | intermediate |
 | [[云厂商/Google-GKE/05-gke-workload-identity-security.md\|Workload Identity]] | 无密钥身份认证 | advanced |
 | [[云厂商/Google-GKE/06-gke-troubleshooting-playbook.md\|故障排查]] | GKE 常见问题处理 | advanced |
+| [[云厂商/Google-GKE/99-gke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

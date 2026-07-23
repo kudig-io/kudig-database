@@ -277,7 +277,7 @@ helm uninstall my-release -n web --keep-history
 - [[实体/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
 - [[实体/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference
 - [[概念/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[概念/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
 - [[概念/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference

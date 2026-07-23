@@ -183,6 +183,37 @@ last_updated: '2026-07-21'
 - [[生态参考/领域索引/storage-index|存储索引]]
 - [[生态参考/论文/07-kubernetes-csi-storage-deep-practice|Kubernetes CSI 深度实践]]
 
+## 存储标签全景
+
+### K8s 存储架构
+
+| 组件 | 功能 |
+|---|---|
+| PV/PVC | 存储抽象与申请 |
+| StorageClass | 动态供给配置 |
+| CSI | 存储插件接口 |
+| VolumeSnapshot | 快照与恢复 |
+
+### 存储类型对比
+
+| 类型 | 适用场景 | 示例 |
+|---|---|---|
+| 块存储 | 数据库、高性能 | EBS, 云盘 |
+| 文件存储 | 共享、日志 | EFS, NAS |
+| 对象存储 | 备份、静态资源 | S3, OSS |
+| 本地存储 | 临时、缓存 | local-path |
+
+## 面试要点
+
+1. **Q：PV/PVC/StorageClass 的关系？**
+   A：StorageClass 定义存储类型，PVC 是申请，PV 是实际资源。动态供给自动创建 PV。
+
+2. **Q：CSI 的工作原理？**
+   A：Controller Plugin(供给/删除) + Node Plugin(挂载/卸载)。通过 gRPC 通信。
+
+3. **Q：有状态应用存储的最佳实践？**
+   A：使用 StatefulSet、配置备份、监控容量、测试恢复、考虑性能。
+
 ## Related Tags
 
 - [[标签/k8s|k8s]]

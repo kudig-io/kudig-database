@@ -38,7 +38,7 @@ relationships:
   type: uses
 - target: '[[实体/kubernetes.md]]'
   type: uses
-- target: '[[技能/best-practices/best-practices/security/pod-security.md]]'
+- target: '[[最佳实践/best-practices/security/pod-security.md]]'
   type: uses
 ---
 
@@ -142,7 +142,7 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 - **Secret 的 GitOps 困境**：GitOps 要求所有配置存储在 Git 中，但 Secret 不应该以明文形式提交。Sealed Secrets、SOPS、External Secrets Operator 等方案各有取舍，但没有一个成为事实标准。GitOps 工作流中的 Secret 管理最佳实践是什么？
 - **Deployment 的 Secret 引用审计**：如何审计一个集群中所有 Deployment 引用了哪些 Secret？kubectl get deployments -A 不直接显示 Secret 引用，需要遍历 Pod 模板。生产环境是否应该有自动化的 Secret 引用图谱？
 - **跨命名空间 Secret 引用**：K8s 不支持跨命名空间引用 Secret。ServiceAccount 的 imagePullSecrets 和 Pod 的 envFrom 都只能引用同命名空间的 Secret。跨命名共享 Secret 需要复制或使用 External Secrets Operator，增加了复杂度
-- **Secret 与 Pod 安全标准的冲突**：[[技能/best-practices/best-practices/security/pod-security.md|Pod Security]] Standards（Restricted）禁止以 root 运行、要求只读根文件系统。但某些旧版应用读取 Secret 文件时需要特定权限，导致安全策略与应用需求的冲突
+- **Secret 与 Pod 安全标准的冲突**：[[最佳实践/best-practices/security/pod-security.md|Pod Security]] Standards（Restricted）禁止以 root 运行、要求只读根文件系统。但某些旧版应用读取 Secret 文件时需要特定权限，导致安全策略与应用需求的冲突
 
 ## 相关
 
@@ -160,7 +160,7 @@ K8s Secret 被更新后，已运行的 Pod 不会自动感知变更。这意味�
 - [[deployment]]
 - [[实体/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
 - [[实体/kubernetes.md|kubernetes]]-events/13-security-admission-rbac-events|13 - 安全、准入控制与 RBAC 事件]] — Cross-reference
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[概念/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]] — Cross-reference
 
 

@@ -119,7 +119,7 @@ prerequisites:
 - [[概念/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
 - [[pod-lifecycle]] — Pod Lifecycle
 - [[概念/declarative-api.md|declarative-api]] — Declarative API
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]]
 - [[实体/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 

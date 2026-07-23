@@ -236,11 +236,11 @@ description: '## 项目概述'
 - [[实体/operations-terms.md|K8s 运维运营术语参考]] — Cross-reference
 - [[实体/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
 - [[概念/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
-- [[概念/etcd x 高可用模式.md|etcd × 高可用模式]] — Cross-reference
+- [[概念/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
 - [[概念/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[概念/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
 - [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[概念/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Cross-reference
@@ -258,7 +258,7 @@ description: '## 项目概述'
 - [[概念/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
 - [[概念/linux-sysctl-tuning.md|Linux Sysctl Tuning for Kubernetes]] — Cross-reference
 - [[概念/storage-tool-evolution.md|存储工具演进]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[概念/bp-README.md|Kubernetes 最佳实践指南]] — Cross-reference
 - [[概念/eventual-consistency.md|Eventual Consistency in Kubernetes]] — Cross-reference
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
@@ -300,7 +300,7 @@ description: '## 项目概述'
 - [[技能/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
 - [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
 - [[技能/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
 - [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
 - [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
 - [[技能/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]] — Cross-reference

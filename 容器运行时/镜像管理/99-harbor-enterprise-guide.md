@@ -309,6 +309,40 @@ spec:
 - GitLab Container Registry Enterprise 深度实践
 - Amazon ECR (Elastic Container Registry) Enterprise 深度实践
 
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| Harbor 和 Docker Registry 如何选择？ | 企业级选 Harbor（RBAC/扫描/复制），简单场景用 Registry |
+| Harbor 如何高可用？ | PostgreSQL 集群 + Redis 哨兵 + 多副本部署 |
+| 如何配置镜像复制？ | 项目级别配置复制规则，支持 push/pull 模式 |
+| 漏洞扫描如何集成？ | 内置 Trivy，推送时自动扫描 |
+| 如何限制镜像拉取？ | 项目级别 RBAC + 机器人账户 |
+| 存储后端如何选择？ | 生产用 S3/GCS，测试用 filesystem |
+| 如何升级 Harbor？ | 使用官方迁移工具，先备份数据库 |
+| GC 如何配置？ | 定时任务清理无引用 blob，避免磁盘占满 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 高可用 | PostgreSQL 集群 + Redis 哨兵 | 避免单点故障 |
+| 存储 | 生产用 S3/GCS 后端 | 无限扩展，避免本地磁盘瓶颈 |
+| 安全 | 启用镜像签名 + 漏洞扫描 | cosign + Trivy |
+| 复制 | 多区域配置复制规则 | 就近拉取，降低延迟 |
+| 备份 | 定期备份数据库和配置 | 便于灾难恢复 |
+| 监控 | 监控存储使用率和拉取延迟 | 超过 80% 告警 |
+| 升级 | 使用官方迁移工具 | 先备份再升级 |
+| RBAC | 项目级别权限控制 | 最小权限原则 |
+
+## 版本兼容性
+
+| Harbor 版本 | 说明 | 关键特性 |
+|------------|------|----------|
+| 2.8.x | 稳定版 | Trivy 集成、复制 |
+| 2.9.x | 推荐 | 改进的 GC、SBOM |
+| 2.10.x | 最新 | OCI 1.1 支持 |
+
 ## See Also
 
 - 05-gitlab-container-registry-enterprise

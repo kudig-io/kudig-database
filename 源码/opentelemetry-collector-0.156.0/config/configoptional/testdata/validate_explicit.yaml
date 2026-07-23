@@ -1,5 +1,0 @@
-default:
-  string_val: valid
-some:
-  nested:
-    string_val: valid

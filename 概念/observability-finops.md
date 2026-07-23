@@ -29,7 +29,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 relationships:
-- target: '[[技能/best-practices/best-practices/observability/monitoring.md]]'
+- target: '[[最佳实践/best-practices/observability/monitoring.md]]'
   type: related_to
 - target: '[[系统基础/知识字典/observability/observability.md]]'
   type: related_to
@@ -279,7 +279,7 @@ kubectl get nodes -o json | jq -r '
 
 ## 相关 Domain
 
-- [[系统基础/知识字典/observability/observability.md|observability]]/02-metrics/02-[[技能/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
+- [[系统基础/知识字典/observability/observability.md|observability]]/02-metrics/02-[[最佳实践/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
 - 生产运维/01-finops/01-cost-governance
 
 ## 相关页面

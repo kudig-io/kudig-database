@@ -49,52 +49,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: Google GKE 企业级多云管理深度实践
-description: '# Google GKE 企业级多云管理深度实践'
-category: multi-cloud-hybrid
-tags:
-- k8s
-- multi-cloud
-- hybrid-cloud
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
-- calico
-- containerd
-- redis
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- 云架构师
-- SRE
-- 平台工程师
-estimated_read_time: 5min
-intent_queries:
-- Google GKE 企业级多云管理深度实践 是什么
-- 如何 Google GKE 企业级多云管理深度实践
-- Kubernetes 27 multi cloud hybrid 最佳实践
-trigger_keywords:
-- Google
-- GKE
-- 企业级多云管理深度实践
-- multi
-- cloud
-- hybrid
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # Google GKE 企业级多云管理深度实践
 
 <!-- chunk: 概述 -->## 概述

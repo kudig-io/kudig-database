@@ -188,8 +188,8 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[技能/ts-control-plane.md|控制平面故障排查]]
 
 ## Related

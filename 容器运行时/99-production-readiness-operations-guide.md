@@ -308,9 +308,52 @@ sudo systemctl restart systemd-journald
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — 运行时指标接入与告警治理。
 - [[故障诊断/README.md|故障诊断]] — 统一排障框架与技能库。
 
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何评估容器运行时生产就绪？ | 检查监控、告警、备份、升级、回滚五大维度 |
+| containerd 升级最佳策略？ | 滚动升级，先测试环境验证，再生产分批 |
+| 如何监控容器运行时健康？ | Prometheus + containerd metrics + 自定义告警 |
+| 镜像安全如何保障？ | Trivy 扫描 + cosign 签名 + admission webhook |
+| 多运行时如何管理？ | RuntimeClass + 专用节点池 + 统一监控 |
+| 磁盘空间如何管理？ | 镜像 GC + 日志轮转 + 独立数据盘 |
+| 如何制定客灾方案？ | 定期备份配置 + 镜像多副本 + 快速重建流程 |
+| 生产环境常见故障？ | 磁盘满、shim 泄漏、镜像拉取失败、cgroup 错误 |
+
+## 相关工具
+
+| 工具 | 用途 | 使用方式 |
+|------|------|----------|
+| crictl | CRI 调试 | `crictl ps/pods/info` |
+| ctr | containerd 原生 CLI | `ctr images ls` |
+| nerdctl | Docker 兼容 CLI | `nerdctl run/build` |
+| Trivy | 镜像扫描 | `trivy image <image>` |
+| cosign | 镜像签名 | `cosign verify <image>` |
+| Prometheus | 监控 | containerd metrics 接入 |
+
+## 版本兼容性
+
+| 组件 | 推荐版本 | 说明 |
+|------|----------|------|
+| containerd | 1.7.x / 2.0.x | 稳定版 |
+| runc | 1.1.x / 1.2.x | 与 containerd 匹配 |
+| K8s | 1.28+ | CRI v1 |
+| 内核 | 5.15+ | 完整功能支持 |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| containerd | `systemctl status containerd` | active |
+| CRI | `crictl info` | 返回 JSON |
+| 镜像 | `crictl pull <image>` | 成功 |
+| 监控 | Prometheus 查询 | 指标正常 |
+| 告警 | 触发测试 | 正常通知 |
+
 ---
 
-*本指南聚焦容器运行时域的“生产就绪”状态，建议结合具体集群版本与云厂商实践进行裁剪和演练。*
+*本指南聚焦容器运行时域的“生产就绪”状态，建议结合具体集群版本与云厂商实践进行裁 剪和演练。*
 
 
 <!-- risk-assessed -->

@@ -58,6 +58,7 @@ last_updated: 2026-07
 - [[集群基础/控制平面/33-kubelet-eviction-thresholds.md|Kubelet Eviction Thresholds]]
 - [[集群基础/控制平面/34-certificate-pki-lifecycle-runbook.md|Certificate Pki Lifecycle Runbook]]
 - [[集群基础/控制平面/35-cluster-upgrade-runbook.md|Cluster Upgrade Runbook]]
+- [[集群基础/控制平面/36-node-maintenance-cordon-drain-shutdown.md|Node Maintenance Cordon Drain Shutdown]]
 - [[集群基础/控制平面/final-completion-check.md|Final Completion Check]]
 - [[集群基础/控制平面/quality-report.md|Quality Report]]
 

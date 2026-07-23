@@ -274,7 +274,7 @@ Clusternet 分发异常
 - [[helm]] — Helm
 
 - clusternet
-- [[概念/etcd x 高可用模式.md|etcd × 高可用模式]] — Cross-reference
+- [[概念/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
 - [[实体/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

@@ -35,5 +35,8 @@ last_updated: 2026-07
 - [[集群基础/设计原则/16-observability-design-principles.md|Observability Design Principles]]
 - [[集群基础/设计原则/17-security-design-patterns.md|Security Design Patterns]]
 - [[集群基础/设计原则/18-performance-optimization-principles.md|Performance Optimization Principles]]
+- [[集群基础/设计原则/19-garbage-collection-owner-reference.md|Garbage Collection Owner Reference]]
+- [[集群基础/设计原则/20-server-side-apply-field-ownership.md|Server Side Apply Field Ownership]]
+- [[集群基础/设计原则/21-resource-overcommit-qos-eviction.md|Resource Overcommit Qos Eviction]]
 - [[集群基础/设计原则/99-kubernetes-v1.33-design-principles-evolution.md|Kubernetes V1.33 Design Principles Evolution]]
 

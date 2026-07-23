@@ -25,6 +25,8 @@ last_updated: '2026-07-21'
 | [[云厂商/腾讯云TKE/03-tke-storage-cbs-cfs.md\|CBS/CFS 存储]] | 块存储/文件存储 CSI | intermediate |
 | [[云厂商/腾讯云TKE/04-tke-iam-cam-integration.md\|CAM 集成]] | 身份认证与权限 | advanced |
 | [[云厂商/腾讯云TKE/05-tke-troubleshooting-playbook.md\|故障排查]] | TKE 常见问题处理 | advanced |
+| [[云厂商/腾讯云TKE/06-tke-production-best-practices.md\|生产最佳实践]] | 集群创建/网络/存储/安全 | advanced |
+| [[云厂商/腾讯云TKE/99-tencent-tke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

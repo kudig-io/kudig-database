@@ -1,3 +1,0 @@
-message: add ngx_brotli module to kong prebuild nginx
-type: feature
-scope: Core

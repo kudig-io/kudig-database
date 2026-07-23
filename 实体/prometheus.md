@@ -209,7 +209,7 @@ description: '## 项目概述'
 - [[概念/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
 - [[概念/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
 - [[概念/storage-tool-evolution.md|存储工具演进]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[概念/bp-README.md|Kubernetes 最佳实践指南]] — Cross-reference
 - [[概念/production-operations-best-practices.md|Production Operations Best Practices]] — Cross-reference
 - [[概念/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
@@ -217,7 +217,7 @@ description: '## 项目概述'
 - [[技能/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
 - [[技能/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
 - [[技能/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
 - [[技能/learn-03-oncall-handoff.md|Day 3: 值班交接 SOP]] — Cross-reference
 - [[技能/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
 - [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference

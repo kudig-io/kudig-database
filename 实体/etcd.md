@@ -302,8 +302,8 @@ groups:
 - [[实体/version-upgrade-guide.md|版本升级指南]] — Cross-reference
 - [[实体/operations-terms.md|K8s 运维运营术语参考]] — Cross-reference
 - [[概念/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
-- [[概念/etcd x 高可用模式.md|etcd × 高可用模式]] — Cross-reference
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[概念/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[概念/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
@@ -315,7 +315,7 @@ groups:
 - [[概念/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
 - [[概念/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
 - [[概念/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[概念/eventual-consistency.md|Eventual Consistency in Kubernetes]] — Cross-reference
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference

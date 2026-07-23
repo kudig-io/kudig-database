@@ -1,3 +1,0 @@
-message: "**ACME**: Fixed migration of redis configuration."
-type: bugfix
-scope: Plugin

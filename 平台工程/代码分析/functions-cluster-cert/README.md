@@ -264,7 +264,7 @@ func CreateAsCA(cfg *kubeadmapi.InitConfiguration) (*x509.Certificate, crypto.Si
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference

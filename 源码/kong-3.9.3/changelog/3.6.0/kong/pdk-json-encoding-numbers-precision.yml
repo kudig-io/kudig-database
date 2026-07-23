@@ -1,3 +1,0 @@
-message: Increase the precision of JSON number encoding from 14 to 16 decimals
-type: feature
-scope: PDK

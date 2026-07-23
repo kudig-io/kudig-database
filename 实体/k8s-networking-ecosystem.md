@@ -203,7 +203,7 @@ hubble observe --namespace <ns>
 
 ## Related
 
-- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
+- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
 - [[实体/k8s-networking-domain-guide.md|k8s-networking-domain-guide]] — Kubernetes Networking Domain Guide
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cilium]] — Cilium

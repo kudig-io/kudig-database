@@ -231,7 +231,7 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[技能/best-practices/scenarios/security-incident.md|security incident]]
+- [[最佳实践/scenarios/security-incident.md|security incident]]
 
 - k8s-namespace-quota
 

@@ -1,7 +1,7 @@
 ---
 title: Software Supply Chain Security
-description: '- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
-summary: '- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+description: '- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
+summary: '- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -243,7 +243,7 @@ diff <(jq '.components[].name' sbom-old.json | sort) <(jq '.components[].name' s
 - [[实体/trivy.md|Trivy]]
 - Cosign/Sigstore
 - [[kyverno|Kyverno]]
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
 
 - 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
 - [[安全/00-open-source-projects-index.md|00-open-source-projects-index]]
@@ -260,7 +260,7 @@ diff <(jq '.components[].name' sbom-old.json | sort) <(jq '.components[].name' s
 - 09-policy-controller-verification
 - 安全 MOC
 - 99-slsa-supply-chain-security-guide
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[实体/argocd.md|ArgoCD]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]

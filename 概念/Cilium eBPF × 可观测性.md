@@ -124,7 +124,7 @@ eBPF 的突破性在于：**它在处理网络数据包的同一个 eBPF 程序�
 - [[概念/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 - [[概念/CRD × 可观测性.md|CRD × 可观测性]]
 - [[实体/deployment.md|Deployment]] × Secret 管理.md|Deployment × Secret 管理]]
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]]
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]]
 ## Related
 
 - [[概念/Deployment × Secret 管理.md|[[deployment]] × Secret 管理]]

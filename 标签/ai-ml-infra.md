@@ -135,7 +135,7 @@ last_updated: '2026-07-21'
 
 - [[故障诊断/高级排障/structural-10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting|AI/ML 工作负载排障]]
 - [[故障诊断/高级排障/structural-09-dra-troubleshooting|DRA 排障]]
-- [[技能/ts-ai-ml-workloads|AI/ML 工作负载排障技能]]
+- [[技能/排障实战/ai-ml-workloads/ts-ai-ml-workloads.md|AI/ML 工作负载排障技能]]
 - [[技能/gpu-fta|GPU FTA]]
 
 ## 知识字典 (Knowledge Dictionary)
@@ -183,6 +183,34 @@ last_updated: '2026-07-21'
 ## 综合 (Synthesis)
 
 - [[综合/gpu-scheduling-cost|GPU 调度与成本]]
+
+## AI/ML 基础设施全景
+
+### AI 基础设施组件
+
+| 组件 | 功能 | 工具 |
+|---|---|---|
+| GPU 调度 | 资源分配 | Volcano, Kueue |
+| 训练框架 | 分布式训练 | PyTorch, TensorFlow |
+| 推理服务 | 模型部署 | KServe, Triton |
+| 数据管理 | 数据集编排 | JuiceFS, Alluxio |
+
+### MLOps 流程
+
+```
+数据准备 → 训练 → 评估 → 部署 → 监控 → 迭代
+```
+
+## 面试要点
+
+1. **Q：K8s 上运行 AI 工作负载的挑战？**
+   A：GPU 资源管理、大文件存储、长时任务容错、高带宽网络、资源调度。
+
+2. **Q：GPU 调度策略？**
+   A：整卡分配、GPU 共享、拓扑感知、抢占调度、队列管理。
+
+3. **Q：推理服务的高可用设计？**
+   A：多副本、自动扩缩、健康检查、流量控制、模型版本管理。
 
 ## Related Tags
 

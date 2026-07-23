@@ -1,4 +1,0 @@
-resources:
-- csi-sanity-disk.yaml
-patches:
-- path: coverage.yaml

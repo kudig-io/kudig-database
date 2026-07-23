@@ -329,8 +329,8 @@ Flux 同步失败
 - RELEASE-NOTES-0.31
 - [[实体/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
 - [[实体/k8s-production-operations.md|生产运维：GitOps、FinOps、灾备恢复与变更管理]] — Cross-reference
-- [[概念/IaC x 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/IaC × 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
 - [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

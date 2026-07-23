@@ -40,9 +40,9 @@ prerequisites:
 relationships:
 - target: '[[实体/prometheus.md]]'
   type: uses
-- target: '[[概念/eBPF x 运行时安全.md]]'
+- target: '[[概念/eBPF × 运行时安全.md]]'
   type: related_to
-- target: '[[概念/etcd x 高可用模式.md]]'
+- target: '[[概念/etcd × 高可用模式.md]]'
   type: uses
 - target: '[[概念/etcd × 可观测性.md]]'
   type: uses

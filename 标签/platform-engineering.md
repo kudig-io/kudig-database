@@ -129,6 +129,34 @@ last_updated: '2026-07-21'
 - [[实体/crossplane|Crossplane]]
 - [[实体/cluster-api|Cluster API]]
 
+## 平台工程全景
+
+### 平台工程核心组件
+
+| 组件 | 功能 | 工具 |
+|---|---|---|
+| IDP | 内部开发者平台 | Backstage, Port |
+| IaC | 基础设施即代码 | Terraform, Pulumi |
+| CI/CD | 持续集成/部署 | GitHub Actions, ArgoCD |
+| 自助服务 | 资源自助申请 | Crossplane, KubeVela |
+
+### 平台工程成熟度模型
+
+```
+L1: 手动运维 → L2: 脚本自动化 → L3: 平台化 → L4: 自助服务 → L5: 智能运维
+```
+
+## 面试要点
+
+1. **Q：平台工程的核心价值？**
+   A：降低认知负载、提升开发效率、标准化最佳实践、自助服务、可观测性。
+
+2. **Q：IDP 的核心功能？**
+   A：服务目录、模板化创建、自助部署、可观测性集成、文档中心、成本可视化。
+
+3. **Q：如何衡量平台工程效果？**
+   A：DORA 指标、开发者满意度、自助服务率、部署频率、故障恢复时间。
+
 ## Related Tags
 
 - [[标签/k8s|k8s — Kubernetes 核心]]

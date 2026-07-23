@@ -33,7 +33,7 @@ relationships:
   type: related_to
 - target: '[[系统基础/速查卡/gitops.md]]'
   type: related_to
-- target: '[[概念/GitOps x 平台工程.md]]'
+- target: '[[概念/GitOps × 平台工程.md]]'
   type: related_to
 ---
 

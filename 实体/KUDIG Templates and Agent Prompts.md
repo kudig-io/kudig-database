@@ -124,8 +124,8 @@ tags: [k8s, skills, sop, ...]
 - [[技能/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
 - [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[实体/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[技能/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 
 - [[kudig-templates-catalog]]
 

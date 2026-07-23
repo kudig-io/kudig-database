@@ -25,6 +25,8 @@ last_updated: '2026-07-21'
 | [[云厂商/华为云CCE/03-cce-storage-evs-sfs.md\|EVS/SFS 存储]] | 块存储/文件存储 CSI | intermediate |
 | [[云厂商/华为云CCE/04-cce-iam-aad-integration.md\|IAM 集成]] | 身份认证与权限 | advanced |
 | [[云厂商/华为云CCE/05-cce-troubleshooting-playbook.md\|故障排查]] | CCE 常见问题处理 | advanced |
+| [[云厂商/华为云CCE/06-cce-production-best-practices.md\|生产最佳实践]] | 集群类型/网络/特色功能 | advanced |
+| [[云厂商/华为云CCE/99-huawei-cce-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

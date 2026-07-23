@@ -146,6 +146,203 @@ jobs:
 - [ ] 启用 BuildKit `cache-from/to` 加速重复构建
 - [ ] 多架构 base image 自身支持目标架构（如 alpine/arm64）
 
+## 故障排查
+
+| 问题 | 可能原因 | 诊断命令 | 解决方案 |
+|------|----------|----------|----------|
+| QEMU 构建极慢 | 模拟执行性能低 | `docker buildx ls` | 使用原生多节点 builder |
+| manifest 缺少架构 | 构建未指定 platform | `docker manifest inspect <image>` | 确认 --platform 参数 |
+| arm64 构建失败 | 基础镜像不支持 | `docker pull --platform linux/arm64 <base>` | 确认 base image 支持目标架构 |
+| buildx 未安装 | Docker 版本过旧 | `docker buildx version` | 升级 Docker 或安装 buildx 插件 |
+| 缓存未命中 | 架构不同缓存不共享 | `docker buildx build --cache-from` | 使用 per-platform 缓存 |
+| 交叉编译失败 | CGO 依赖 | `CGO_ENABLED=0 go build` | 禁用 CGO 或使用交叉工具链 |
+| 推送失败 | registry 不支持 manifest list | `crane manifest <image>` | 升级 registry 或使用 OCI index |
+| 运行时架构不匹配 | 拉取了错误架构 | `uname -m` vs `docker inspect` | 确认节点架构与镜像匹配 |
+
+## 多架构构建方式对比
+
+| 方式 | 性能 | 复杂度 | 适用场景 |
+|------|------|--------|----------|
+| QEMU 模拟 | 低 | 低 | 开发/小规模 CI |
+| 原生多节点 builder | 高 | 中 | 大规模 CI/CD |
+| 交叉编译 | 高 | 中 | Go/Rust 静态二进制 |
+| 远程 builder | 高 | 高 | 企业级多区域构建 |
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 构建 | 大规模 CI 使用原生多节点 builder | 避免 QEMU 性能瓶颈 |
+| 缓存 | 启用 BuildKit cache-from/to | 加速重复构建 |
+| 基础镜像 | 确认 base image 支持目标架构 | alpine/debian 均支持 |
+| 验证 | 构建后验证 manifest 包含所有架构 | `imagetools inspect` |
+| 标签 | 添加 OCI 架构标签 | 便于自动化管理 |
+| 测试 | 每个架构独立测试 | 避免架构特定 bug |
+| 发布 | 使用 manifest list 或 OCI index | 自动拉取对应架构 |
+| 监控 | 监控构建时间和失败率 | 按架构分别统计 |
+
+## 相关工具
+
+| 工具 | 用途 | 安装/使用 |
+|------|------|----------|
+| docker buildx | 多架构构建 | Docker 内置插件 |
+| crane | manifest 检查 | `go install github.com/google/go-containerregistry/cmd/crane@latest` |
+| regctl | registry 操作 | `brew install regclient` |
+| imagetools | 镜像工具 | `docker buildx imagetools inspect` |
+| ko | Go 多架构构建 | `go install github.com/google/ko@latest` |
+| buildctl | BuildKit CLI | 随 BuildKit 安装 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| 如何查看镜像支持的架构？ | `docker manifest inspect <image>` 或 `crane manifest` |
+| QEMU 和原生构建如何选择？ | 小规模用 QEMU，大规模 CI 用原生 |
+| Go 交叉编译需要 QEMU 吗？ | 不需要，CGO_ENABLED=0 + GOARCH 即可 |
+| manifest list 和 OCI index 的区别？ | 功能相同，OCI index 是 OCI 标准 |
+| 如何添加新架构支持？ | 在 --platform 中添加新架构，确认 base 支持 |
+| 构建缓存如何跨架构共享？ | 不能共享，每个架构独立缓存 |
+| Apple Silicon 如何构建 amd64？ | `docker buildx build --platform linux/amd64` |
+| 如何自动化多架构发布？ | CI 中 buildx + manifest push + tag |
+
+## 多架构构建配置示例
+
+```yaml
+# GitHub Actions 多架构构建示例
+name: Multi-arch Build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: registry.internal/app:${{ github.sha }}
+          cache-from: type=registry,ref=registry.internal/app:cache
+          cache-to: type=registry,ref=registry.internal/app:cache,mode=max
+```
+
+## 性能调优
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| QEMU 构建慢 | 原生节点 | 使用 ARM 原生 runner |
+| 缓存未命中 | per-platform 缓存 | 每个架构独立缓存 key |
+| 推送失败 | 重试机制 | CI 配置 retry |
+| 基础镜像不支持 | 多架构 base | 确认 base 支持目标架构 |
+| 交叉编译失败 | 禁用 CGO | CGO_ENABLED=0 |
+| 构建超时 | 并行构建 | 多节点 builder |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| build_duration_seconds | 构建耗时 | P99 > 15min |
+| build_failure_rate | 构建失败率 | > 5% |
+| image_size_bytes | 镜像体积 | 异常增长 > 20% |
+| push_duration_seconds | 推送耗时 | P99 > 5min |
+| cache_hit_rate | 缓存命中率 | < 50% |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 基础镜像 | 使用官方多架构镜像 | 避免第三方不可信源 |
+| 构建环境 | 隔离构建环境 | 避免供应链攻击 |
+| 签名 | 构建后签名 | cosign sign |
+| 扫描 | 每个架构独立扫描 | Trivy per-platform |
+| 来源 | 记录构建元数据 | SLSA provenance |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| 单架构 | 多架构 | 添加 --platform 参数 |
+| QEMU | 原生 builder | 配置多节点 builder |
+| docker build | buildx | 安装 buildx 插件 |
+| 手动 manifest | 自动 | CI 中 buildx --push |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| 架构支持 | `docker manifest inspect <image>` | 包含所有目标架构 |
+| buildx | `docker buildx version` | 已安装 |
+| builder | `docker buildx ls` | 包含目标架构 |
+| 构建 | `docker buildx build --platform linux/amd64,linux/arm64 .` | 成功 |
+| 推送 | `docker buildx build --push` | 成功 |
+| 验证 | `crane manifest <image>` | 多架构 |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| Docker 18.09 | 2018 | buildx 实验性 |
+| Docker 20.10 | 2020 | buildx 稳定 |
+| BuildKit 0.12 | 2023 | 多平台缓存优化 |
+| Docker 25.0 | 2024 | buildx 默认 |
+
+## 架构对比
+
+```text
+多架构构建流程：
+
+QEMU 模拟：
+  buildx → QEMU → 模拟执行 → 镜像
+  优点：简单，无需额外硬件
+  缺点：慢（5-10x）
+
+原生多节点：
+  buildx → node1 (amd64) → 镜像
+         → node2 (arm64) → 镜像
+         → manifest merge
+  优点：快，原生性能
+  缺点：需要多架构节点
+
+交叉编译：
+  buildx → CGO_ENABLED=0 GOARCH=arm64 → 镜像
+  优点：最快，无需模拟
+  缺点：仅限静态编译语言
+```
+
+## 容量规划
+
+| 场景 | 建议配置 | 说明 |
+|------|----------|------|
+| 开发 | QEMU | 简单 |
+| CI | 原生 builder | 性能 |
+| 企业 | 多区域 builder | 就近构建 |
+| Go 项目 | 交叉编译 | 最快 |
+
+## 检查清单（补充）
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| QEMU | `docker run --rm --privileged multiarch/qemu-user-static --reset` | 成功 |
+| builder | `docker buildx ls` | 包含目标架构 |
+| 构建 | `docker buildx build --platform linux/amd64,linux/arm64 .` | 成功 |
+| 验证 | `crane manifest <image>` | 多架构 |
+
+## 常见问题 FAQ（补充）
+
+| 问题 | 解答 |
+|------|------|
+| QEMU 模拟性能如何？ | 比原生慢 5-10x，建议用原生节点或远程 builder |
+| 如何验证多架构 manifest？ | `docker manifest inspect` 或 `crane manifest` |
+| buildx 与 docker build 区别？ | buildx 支持多平台、缓存导出、远程 builder |
+| 如何处理架构特定依赖？ | 使用 `TARGETARCH` 构建参数条件化安装 |
+| CI 中如何加速多架构构建？ | 使用原生 ARM 节点 + buildx 远程 builder |
+| manifest list 与 image index 区别？ | 同一概念，OCI 规范称 image index |
+
 ## 相关文档
 
 - [[容器运行时/镜像构建/01-buildkit-production-guide.md|BuildKit 生产指南]]

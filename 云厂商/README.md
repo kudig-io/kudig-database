@@ -28,14 +28,14 @@ estimated_read_time: 5min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[云厂商/阿里云/index.md\|阿里云/]] | ACK/Apsara | ACK 集群管理、Terway 网络、专有云 |
+| [[云厂商/阿里云/index.md\|阿里云/]] | ACK / Apsara Stack | ACK 集群管理、Terway 网络、专有云（天基/盘古/合规加固/故障手册） |
 | [[云厂商/AWS-EKS/index.md\|AWS-EKS/]] | EKS | EKS 架构、Fargate、IRSA、Add-ons |
 | [[云厂商/Google-GKE/index.md\|Google-GKE/]] | GKE | Autopilot/Standard、Workload Identity |
 | [[云厂商/Azure-AKS/index.md\|Azure-AKS/]] | AKS | AKS 架构、AAD 集成、Virtual Nodes |
 | [[云厂商/腾讯云TKE/index.md\|腾讯云TKE/]] | TKE | TKE 集群、超级节点、弹性容器 |
 | [[云厂商/华为云CCE/index.md\|华为云CCE/]] | CCE | CCE Turbo、Volcano 调度、鲲鹏 |
 | [[云厂商/多云混合/index.md\|多云混合/]] | 多云架构 | 多云管理、混合云连接、一致性 |
-| [[云厂商/其他云/index.md\|其他云/]] | 其他 | DigitalOcean/Linode/Oracle/裸金属 |
+| [[云厂商/其他云/index.md\|其他云/]] | 其他 | 天翼云/移动云/IBM/Oracle/UCloud/火山引擎 |
 
 ## 跨域导航
 

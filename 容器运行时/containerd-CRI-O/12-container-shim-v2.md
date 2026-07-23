@@ -198,6 +198,152 @@ containerd daemon
 | 如何强制清理 shim？ | `kill -9 <shim-pid>`，containerd 会自动清理关联资源 |
 | 多运行时如何共存？ | 配置多个 runtime_type，每个对应不同 shim |
 
+## Shim 配置示例
+
+```toml
+# /etc/containerd/config.toml - 多运行时 shim 配置
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+
+  # runc shim
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      SystemdCgroup = true
+      BinaryName = "/usr/bin/runc"
+
+  # kata shim
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata]
+    runtime_type = "io.containerd.kata.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata.options]
+      ConfigPath = "/opt/kata/share/defaults/kata-containers/configuration.toml"
+
+  # gvisor shim
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
+    runtime_type = "io.containerd.runsc.v1"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc.options]
+      TypeUrl = "io.containerd.runsc.v1.options"
+```
+
+## 性能调优
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| shim 启动慢 | 预热二进制 | 节点初始化时预加载 |
+| 内存占用高 | 检查泄漏 | 监控 VmRSS，升级版本 |
+| ttrpc 超时 | 调整超时 | 修改 containerd 配置 |
+| 大量 shim 进程 | 检查泄漏 | 定期清理僵尸进程 |
+| exec 延迟高 | 检查 ttrpc | 确认 socket 连通性 |
+| 日志过大 | 调整级别 | 生产用 info，排障用 debug |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| shim_count | shim 进程总数 | > 容器数 * 1.2 |
+| shim_memory_bytes | shim 内存使用 | > 50MB/进程 |
+| shim_cpu_seconds | shim CPU 使用 | 持续 > 50% |
+| shim_start_duration | shim 启动耗时 | P99 > 2s |
+| orphan_shim_count | 孤儿 shim 数 | > 0 |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 二进制权限 | 755，仅 root 可写 | 避免篡改 |
+| cgroup 隔离 | shim 独立 cgroup | 避免被容器 OOM 连带 |
+| 日志审计 | 记录关键操作 | 便于安全审计 |
+| 版本管理 | 及时更新 | 修复已知漏洞 |
+| 最小权限 | 移除不必要能力 | 减小攻击面 |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| shim v1 | shim v2 | 升级 containerd→自动使用 v2 |
+| runc shim | kata shim | 安装 kata→配置 runtime_type |
+| runc shim | gvisor shim | 安装 runsc→配置 runtime_type |
+| 单 shim | 多 shim | 配置多个 runtime 块 |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| shim 二进制 | `which containerd-shim-runc-v2` | 存在 |
+| shim 版本 | `containerd-shim-runc-v2 --version` | 与 containerd 匹配 |
+| shim 进程数 | `ps aux | grep shim | wc -l` | ≈ 容器数 |
+| shim 内存 | `cat /proc/<pid>/status | grep VmRSS` | < 50MB |
+| 僵尸进程 | `ps -eo stat | grep Z` | 无 |
+| containerd 重启 | `systemctl restart containerd` | 容器不受影响 |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| shim v1 | containerd 1.0-1.3 | 每容器一个进程，gRPC |
+| shim v2 | containerd 1.4+ | ttrpc，更高效 |
+| shim v2 (2.0) | containerd 2.0+ | 新插件接口 |
+
+## 架构对比
+
+```text
+Shim v1 vs v2 对比：
+
+Shim v1 (gRPC):
+  containerd → gRPC → shim (per-container)
+  缺点：gRPC 开销大，每容器一个监听器
+
+Shim v2 (ttrpc):
+  containerd → ttrpc → shim (per-container)
+  优点：轻量级协议，更少资源占用
+
+多运行时 shim：
+  containerd
+    ├── shim-runc-v2 → runc → 容器
+    ├── shim-kata-v2 → kata → microVM
+    └── shim-runsc-v1 → runsc → gVisor
+```
+
+## 容量规划
+
+| 场景 | 建议配置 | 说明 |
+|------|----------|------|
+| 小集群 | 默认 | 足够 |
+| 大集群 | 监控 shim 进程数 | 避免泄漏 |
+| 多运行时 | 多个 shim 二进制 | 隔离 |
+| 高密度 | 监控内存 | 每容器 5-15MB |
+
+## 检查清单（补充）
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| ttrpc 连接 | `ls /run/containerd/` | socket 存在 |
+| shim 日志 | `journalctl -u containerd` | 无 shim 错误 |
+| 容器重启 | `systemctl restart containerd` | 容器不受影响 |
+| 多运行时 | `crictl info` | 包含多个 runtime |
+
+## 常见问题 FAQ（补充）
+
+| 问题 | 解答 |
+|------|------|
+| shim v2 与 v1 区别？ | v2 使用 ttrpc 替代 gRPC，每个容器一个 shim 进程，资源开销更低 |
+| shim 崩溃会影响容器吗？ | 不会，shim 独立于 containerd，重启后自动重连 |
+| 如何查看 shim 进程？ | `ps aux | grep containerd-shim` |
+| ttrpc 与 gRPC 区别？ | ttrpc 更轻量，无 HTTP/2 开销，适合本地通信 |
+| 如何自定义 shim？ | 实现 ttrpc service 接口，注册为 containerd 插件 |
+| shim 日志在哪？ | `/run/containerd/io.containerd.runtime.v2.task/` 下 |
+| 多 shim 如何管理？ | containerd 自动管理生命周期，无需手动干预 |
+| shim 资源占用多少？ | 每个 shim 约 5-10MB 内存，远低于 v1 |
+
+## 性能调优参数
+
+| 参数 | 默认值 | 生产建议 | 说明 |
+|------|--------|----------|------|
+| `shim_cgroup` | 无 | 独立 cgroup | 限制 shim 资源 |
+| `io_uid` | 0 | 按需 | I/O 管道用户 |
+| `io_gid` | 0 | 按需 | I/O 管道组 |
+| `binary_name` | containerd-shim-runc-v2 | 按运行时 | shim 二进制路径 |
+
 ## 相关文档
 
 - [[容器运行时/containerd-CRI-O/09-container-runtime-lifecycle.md|容器运行时生命周期]]

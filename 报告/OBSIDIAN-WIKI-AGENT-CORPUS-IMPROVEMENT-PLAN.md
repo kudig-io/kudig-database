@@ -484,7 +484,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 ## Related
 
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[文档/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
 - [[文档/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
 - [[文档/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]

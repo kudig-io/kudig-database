@@ -206,7 +206,7 @@ kubectl -n argocd get application production-apps -o jsonpath='{.status.sync.sta
 - [[概念/ci-cd-pipeline-patterns.md|CI/CD Pipeline Patterns]]
 - [[实体/argocd.md|ArgoCD]]
 - [[flux|Flux]]
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — synthesis
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — synthesis
 
 
 <!-- risk-assessed -->

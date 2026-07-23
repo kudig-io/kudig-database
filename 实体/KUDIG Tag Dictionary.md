@@ -181,7 +181,7 @@ Unified tagging system for 3,337+ documents in the KUDIG knowledge base. Ensures
 - [[概念/infrastructure-as-code.md|infrastructure-as-code]] — Infrastructure as Code
 - [[概念/service-networking.md|service-networking]] — Service Networking
 - [[实体/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 - [[实体/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
 - [[文档/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
 

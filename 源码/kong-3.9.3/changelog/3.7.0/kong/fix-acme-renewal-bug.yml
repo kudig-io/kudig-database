@@ -1,3 +1,0 @@
-message: "**ACME**: Fixed an issue where the certificate was not successfully renewed during ACME renewal."
-type: bugfix
-scope: Plugin

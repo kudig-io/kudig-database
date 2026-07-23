@@ -182,6 +182,38 @@ etcdctl endpoint health --cluster
 
 - [[实体/k8s-production-operations|Kubernetes Production Operations]]
 
+## 故障排查全景
+
+### 排查方法论
+
+| 方法 | 说明 |
+|---|---|
+| FTA | 故障树分析，自上而下 |
+| FEBM | 基于证据，自下而上 |
+| 二分法 | 逐步缩小范围 |
+| 对比法 | 正常/异常对比 |
+
+### 排查工具链
+
+| 层次 | 工具 |
+|---|---|
+| 集群 | kubectl, kubectx |
+| 节点 | ssh, journalctl |
+| 网络 | tcpdump, curl |
+| 日志 | kubectl logs, stern |
+| 监控 | Prometheus, Grafana |
+
+## 面试要点
+
+1. **Q：故障排查的核心原则？**
+   A：观察现象→形成假设→验证假设→确认根因→修复验证→复盘归档。
+
+2. **Q：如何加速故障定位？**
+   A：完善监控、FTA 故障树、历史案例、自动化工具、经验积累。
+
+3. **Q：故障复盘的关键要素？**
+   A：时间线、根因、影响、修复过程、改进措施、责任认定(无责文化)。
+
 ## Related Tags
 
 - [[标签/k8s|k8s — Kubernetes 核心]]

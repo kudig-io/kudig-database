@@ -1,7 +1,7 @@
 ---
 title: Service Mesh Architecture
-description: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
-summary: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+description: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -248,8 +248,8 @@ spec:
 - [[istio|Istio]]
 - [[linkerd|Linkerd]]
 - [[envoy|Envoy Proxy]]
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
-- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis
+- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis
 
 - 14-service-mesh-architecture
 

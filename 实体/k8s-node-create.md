@@ -486,7 +486,7 @@ Cluster Autoscaler 工作循环:
 
 - [[技能/troubleshoot-node-issues.md|节点故障排查]]
 - [[技能/ts-node-components.md|节点组件排查]]
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

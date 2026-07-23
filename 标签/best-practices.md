@@ -49,71 +49,71 @@ last_updated: '2026-07-21'
 
 ## 技能库最佳实践 (Skills Best Practices)
 
-- [[技能/best-practices/README|最佳实践索引]]
-- [[技能/best-practices/common-best-practices|Kubernetes 通用最佳实践]]
-- [[技能/best-practices/MOC|最佳实践 MOC]]
+- [[最佳实践/README|最佳实践索引]]
+- [[最佳实践/common-best-practices|Kubernetes 通用最佳实践]]
+- [[最佳实践/MOC|最佳实践 MOC]]
 
 ## 部署 (Deployment)
 
-- [[技能/best-practices/deployment/01-local-demo-deployment|本地演示部署最佳实践]]
-- [[技能/best-practices/deployment/02-single-node-deployment|单节点部署最佳实践]]
-- [[技能/best-practices/deployment/03-development-environment-deployment|开发环境部署最佳实践]]
-- [[技能/best-practices/deployment/04-production-environment-deployment|生产环境部署最佳实践]]
+- [[最佳实践/deployment/01-local-demo-deployment|本地演示部署最佳实践]]
+- [[最佳实践/deployment/02-single-node-deployment|单节点部署最佳实践]]
+- [[最佳实践/deployment/03-development-environment-deployment|开发环境部署最佳实践]]
+- [[最佳实践/deployment/04-production-environment-deployment|生产环境部署最佳实践]]
 
 ## 基础设施 (Infrastructure)
 
-- [[技能/best-practices/infrastructure/kubernetes-cluster|Kubernetes 集群基础设施]]
-- [[技能/best-practices/infrastructure/networking|网络基础设施]]
-- [[技能/best-practices/infrastructure/storage|存储基础设施]]
+- [[最佳实践/infrastructure/kubernetes-cluster|Kubernetes 集群基础设施]]
+- [[最佳实践/infrastructure/networking|网络基础设施]]
+- [[最佳实践/infrastructure/storage|存储基础设施]]
 
 ## 安全 (Security)
 
-- [[技能/best-practices/security/network-security|网络安全最佳实践]]
-- [[技能/best-practices/security/pod-security|Pod 安全最佳实践]]
-- [[技能/best-practices/security/secrets-management|密钥管理最佳实践]]
+- [[最佳实践/security/network-security|网络安全最佳实践]]
+- [[最佳实践/security/pod-security|Pod 安全最佳实践]]
+- [[最佳实践/security/secrets-management|密钥管理最佳实践]]
 
 ## 可观测性 (Observability)
 
-- [[技能/best-practices/observability/logging|日志最佳实践]]
-- [[技能/best-practices/observability/monitoring|监控最佳实践]]
-- [[技能/best-practices/observability/tracing|追踪最佳实践]]
+- [[最佳实践/observability/logging|日志最佳实践]]
+- [[最佳实践/observability/monitoring|监控最佳实践]]
+- [[最佳实践/observability/tracing|追踪最佳实践]]
 
 ## 运维 (Operations)
 
-- [[技能/best-practices/operations/deployment|部署运维最佳实践]]
-- [[技能/best-practices/operations/scaling|伸缩运维最佳实践]]
+- [[最佳实践/operations/deployment|部署运维最佳实践]]
+- [[最佳实践/operations/scaling|伸缩运维最佳实践]]
 
 ## 场景 (Scenarios)
 
-- [[技能/best-practices/scenarios/ai-infra-ops|AI 基础设施运维]]
-- [[技能/best-practices/scenarios/app-deployment|应用部署]]
-- [[技能/best-practices/scenarios/backup-restore|备份恢复]]
-- [[技能/best-practices/scenarios/capacity-planning|容量规划]]
-- [[技能/best-practices/scenarios/cluster-deployment|集群部署]]
-- [[技能/best-practices/scenarios/compliance-audit|合规审计]]
-- [[技能/best-practices/scenarios/cost-optimization|成本优化]]
-- [[技能/best-practices/scenarios/daily-ops|日常运维]]
-- [[技能/best-practices/scenarios/gitops-workflow|GitOps 工作流]]
-- [[技能/best-practices/scenarios/monitoring-alerting|监控告警]]
-- [[技能/best-practices/scenarios/multi-cluster|多集群]]
-- [[技能/best-practices/scenarios/network-diagnosis|网络诊断]]
-- [[技能/best-practices/scenarios/performance-tuning|性能调优]]
-- [[技能/best-practices/scenarios/security-hardening|安全加固]]
-- [[技能/best-practices/scenarios/storage-issues|存储问题]]
-- [[技能/best-practices/scenarios/troubleshooting|故障排查]]
-- [[技能/best-practices/scenarios/upgrade-migration|升级迁移]]
+- [[最佳实践/scenarios/ai-infra-ops|AI 基础设施运维]]
+- [[最佳实践/scenarios/app-deployment|应用部署]]
+- [[最佳实践/scenarios/backup-restore|备份恢复]]
+- [[最佳实践/scenarios/capacity-planning|容量规划]]
+- [[最佳实践/scenarios/cluster-deployment|集群部署]]
+- [[最佳实践/scenarios/compliance-audit|合规审计]]
+- [[最佳实践/scenarios/cost-optimization|成本优化]]
+- [[最佳实践/scenarios/daily-ops|日常运维]]
+- [[最佳实践/scenarios/gitops-workflow|GitOps 工作流]]
+- [[最佳实践/scenarios/monitoring-alerting|监控告警]]
+- [[最佳实践/scenarios/multi-cluster|多集群]]
+- [[最佳实践/scenarios/network-diagnosis|网络诊断]]
+- [[最佳实践/scenarios/performance-tuning|性能调优]]
+- [[最佳实践/scenarios/security-hardening|安全加固]]
+- [[最佳实践/scenarios/storage-issues|存储问题]]
+- [[最佳实践/scenarios/troubleshooting|故障排查]]
+- [[最佳实践/scenarios/upgrade-migration|升级迁移]]
 
 ## 迁移 (Migration)
 
-- [[技能/best-practices/migration/01-migration-assessment-planning|迁移评估规划]]
-- [[技能/best-practices/migration/02-ack-target-cluster-design|ACK 目标集群设计]]
-- [[技能/best-practices/migration/03-application-workload-migration|应用工作负载迁移]]
-- [[技能/best-practices/migration/04-storage-data-migration|存储数据迁移]]
-- [[技能/best-practices/migration/05-network-migration-traffic-cutover|网络迁移流量切换]]
-- [[技能/best-practices/migration/07-observability-security-migration|可观测性安全迁移]]
-- [[技能/best-practices/migration/08-validation-cutover-decommission|验证切换退役]]
-- [[技能/best-practices/migration/09-migration-toolchain|迁移工具链]]
-- [[技能/best-practices/migration/10-real-world-case-study|真实案例研究]]
+- [[最佳实践/migration/01-migration-assessment-planning|迁移评估规划]]
+- [[最佳实践/migration/02-ack-target-cluster-design|ACK 目标集群设计]]
+- [[最佳实践/migration/03-application-workload-migration|应用工作负载迁移]]
+- [[最佳实践/migration/04-storage-data-migration|存储数据迁移]]
+- [[最佳实践/migration/05-network-migration-traffic-cutover|网络迁移流量切换]]
+- [[最佳实践/migration/07-observability-security-migration|可观测性安全迁移]]
+- [[最佳实践/migration/08-validation-cutover-decommission|验证切换退役]]
+- [[最佳实践/migration/09-migration-toolchain|迁移工具链]]
+- [[最佳实践/migration/10-real-world-case-study|真实案例研究]]
 
 ## 概念 (Concepts)
 
@@ -174,6 +174,37 @@ last_updated: '2026-07-21'
 
 - [[生态参考/论文/01-kubernetes-production-readiness-assessment|生产就绪性评估框架]]
 - [[报告/quality/QUALITY_REPORT_v4.0|质量报告 v4.0]]
+
+## 最佳实践全景
+
+### 最佳实践分类
+
+| 类别 | 内容 |
+|---|---|
+| 部署 | 滚动更新、蓝绿、金丝雀 |
+| 安全 | RBAC、PSS、网络策略 |
+| 性能 | 资源调优、缓存、批处理 |
+| 可靠性 | 冗余、熔断、限流 |
+| 成本 | 右sizing、抢占式、共享 |
+
+### 最佳实践落地步骤
+
+1. **识别场景**：确定需要最佳实践的领域
+2. **学习参考**：阅读文档、案例、论文
+3. **小范围试点**：在测试环境验证
+4. **逐步推广**：灰度发布、监控验证
+5. **持续优化**：定期回顾、迭代改进
+
+## 面试要点
+
+1. **Q：如何建立最佳实践体系？**
+   A：文档化→工具化→自动化→制度化→文化化。
+
+2. **Q：最佳实践的常见误区？**
+   A：生搬硬套、忽略上下文、过度设计、缺乏验证、不及时更新。
+
+3. **Q：如何评估最佳实践效果？**
+   A：DORA 指标、SLO 达成率、故障率、成本、团队满意度。
 
 ## Related Tags
 

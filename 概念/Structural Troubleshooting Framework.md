@@ -36,9 +36,9 @@ prerequisites:
 relationships:
 - target: '[[系统基础/知识字典/workloads/deployments.md]]'
   type: uses
-- target: '[[技能/Kubernetes Diagnostic Skills Overview.md]]'
+- target: '[[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md]]'
   type: uses
-- target: '[[技能/FTA Methodology and Core Principles.md]]'
+- target: '[[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md]]'
   type: related_to
 - target: '[[脚本/man/INSTALL.md]]'
   type: related_to
@@ -161,10 +161,10 @@ spec:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
-- [[技能/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 

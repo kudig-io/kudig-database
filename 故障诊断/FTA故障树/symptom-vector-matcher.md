@@ -55,7 +55,7 @@ severity: critical
 
 
 
-title: 症状向量匹配引擎 ([[技能/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
+title: 症状向量匹配引擎 ([[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
 description: '<!-- chunk: 一、设计目标' -->## 一、设计目标'
 category: fta
 tags:

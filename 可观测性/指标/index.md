@@ -38,6 +38,9 @@ last_updated: '2026-07-21'
 | [[可观测性/指标/15-enterprise-scale-monitoring.md\|企业级监控]] | 大规模监控架构 | advanced |
 | [[可观测性/指标/16-multi-cluster-monitoring-governance.md\|多集群监控治理]] | 联邦/远程写入/统一视图 | advanced |
 | [[可观测性/指标/17-monitoring-cost-optimization.md\|监控成本优化]] | 指标瘦身/降采样/存储策略 | intermediate |
+| [[可观测性/指标/18-cost-optimization-observability.md\|可观测性成本优化]] | 成本治理与策略 | intermediate |
+| [[可观测性/指标/19-kube-state-metrics-deep-dive.md\|kube-state-metrics]] | 对象状态指标 pipeline | advanced |
+| [[可观测性/指标/20-cadvisor-kubelet-metrics.md\|cAdvisor 与 kubelet 指标]] | 容器级资源指标采集 | advanced |
 | [[可观测性/指标/99-prometheus-enterprise-guide.md\|Prometheus 指南]] | 生产环境完整指南 | advanced |
 
 ## Prometheus 生产检查清单

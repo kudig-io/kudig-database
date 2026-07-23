@@ -236,5 +236,5 @@ spec:
 ## Related
 
 - [[综合/networkpolicy-service-mesh.md|NetworkPolicy × Service Mesh]]
-- [[概念/networkpolicy.md|NetworkPolicy 概念]]
+- [[概念/network-policy.md|NetworkPolicy 概念]]
 - [[研究/ebpf-networking-revolution.md|eBPF 网络革命]]

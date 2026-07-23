@@ -53,9 +53,9 @@ tags:
 - command
 - mapping
 relationships:
-- target: "[[技能/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]"
+- target: "[[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]"
   type: related_to
-- target: "[[技能/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]"
+- target: "[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]"
   type: related_to
 - target: "[[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]"
   type: related_to
@@ -145,8 +145,8 @@ tier: peripheral---
 
 ## Related
 
-- [[技能/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 
 

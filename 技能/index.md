@@ -1,177 +1,279 @@
 ---
-title: Skills
-description: Skills 目录索引
-summary: Skills 目录索引
+title: 技能库索引
+description: KUDIG 运维技能库完整索引，按故障域/功能域分类，标注工单高频与最佳实践高频技能
+summary: 技能库总索引，含高频标记（工单TOP/最佳实践TOP/产品高频），覆盖故障诊断、排障实战、运维操作、最佳实践、培训评估全域
 category: index
 tags:
+- skills
 - index
-tier: supporting
-created: '2026-07-02'
-last_updated: 2026-07
+- fta
+- troubleshooting
+- best-practices
+tier: core
+created: '2026-07-23'
+last_updated: '2026-07-23'
+difficulty: intermediate
+audience:
+- 所有工程师
+- SRE
+- 技术支持
+- 新人
+estimated_read_time: 10min
 ---
 
-> **生产环境安全提示**
+# 技能库索引
+
+> **高频标记说明**
 >
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+> | 标记 | 含义 |
+> |:---|:---|
+> | 🔴 `工单TOP` | 工单问题处理中最高频遇到 |
+> | 🔵 `最佳实践TOP` | 最佳实践/配置中最高频使用 |
+> | 🟢 `产品高频` | 产品日常使用中最高频操作 |
 
+---
 
+## 一、故障诊断（FTA 故障树 + 诊断技能）
 
-# Skills
+### 1.1 工作负载故障诊断 `故障诊断-工作负载/`
 
-> 本页为 `skills` 目录的自动索引。
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [pod/](故障诊断-工作负载/pod/) | CrashLoopBackOff、OOMKilled、Pending、ImagePullBackOff、Evicted | 🔴 工单TOP |
+| [deployment/](故障诊断-工作负载/deployment/) | Deployment 滚动更新失败、副本异常、选择器冲突、发布策略 | 🟢 产品高频 |
+| [statefulset/](故障诊断-工作负载/statefulset/) | StatefulSet 有序部署、持久卷绑定、网络标识、扩缩容 | |
+| [daemonset/](故障诊断-工作负载/daemonset/) | DaemonSet 节点调度、污点容忍、滚动更新、资源竞争 | |
+| [job-cronjob/](故障诊断-工作负载/job-cronjob/) | Job/CronJob 调度失败、并发控制、超时、完成策略 | |
+| [hpa-vpa/](故障诊断-工作负载/hpa-vpa/) | HPA 扩缩容异常、VPA 推荐、PDB 中断预算 | 🟢 产品高频 |
 
-## 概览
+### 1.2 网络故障诊断 `故障诊断-网络/`
 
-- [[技能/README.md|Readme]]
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [dns/](故障诊断-网络/dns/) | CoreDNS 异常、NXDOMAIN、解析超时、缓存污染 | 🔴 工单TOP |
+| [service/](故障诊断-网络/service/) | Service 不通、Endpoints 为空、kube-proxy 异常、会话亲和 | 🔴 工单TOP |
+| [ingress/](故障诊断-网络/ingress/) | Ingress/Nginx/Higress 路由失败、TLS 终止、后端健康检查 | 🟢 产品高频 |
+| [networkpolicy/](故障诊断-网络/networkpolicy/) | NetworkPolicy 入站/出站阻断、选择器错误、CNI 兼容 | |
+| [cni/](故障诊断-网络/cni/) | Terway/Calico/Cilium/Flannel IP 分配、路由、安全组 | 🔴 工单TOP |
+| [gateway-api/](故障诊断-网络/gateway-api/) | Gateway API/HTTPRoute/GRPCRoute/TLSRoute | |
+| [service-mesh/](故障诊断-网络/service-mesh/) | Istio Sidecar 注入、流量管理、mTLS | |
 
-## 子目录
+### 1.3 控制面故障诊断 `故障诊断-控制面/`
 
-- skills/best-practices/
-- skills/training-lecturer/
-- skills/training-public/
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [apiserver/](故障诊断-控制面/apiserver/) | API Server 认证/授权/准入/限流/etcd 连接 | 🔴 工单TOP |
+| [scheduler/](故障诊断-控制面/scheduler/) | 调度失败、过滤/打分异常、抢占、扩展点 | |
+| [controller-manager/](故障诊断-控制面/controller-manager/) | Leader 选举、控制器同步、限速 | |
+| [etcd/](故障诊断-控制面/etcd/) | etcd 集群/Raft/存储/快照/备份恢复 | 🔴 工单TOP |
+| [crd-operator/](故障诊断-控制面/crd-operator/) | CRD 注册、Operator Reconcile 异常 | |
 
-## 文档
+### 1.4 存储故障诊断 `故障诊断-存储/`
 
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[技能/FTA Diagnostic Execution Engine.md|Fta Diagnostic Execution Engine]]
-- [[技能/FTA Methodology and Core Principles.md|Fta Methodology And Core Principles]]
-- [[技能/FTA-Driven Runbook Automation.md|Fta Driven Runbook Automation]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[技能/Kubernetes FTA Top Events Index.md|Kubernetes Fta Top Events Index]]
-- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/apiserver-fta.md|Apiserver Fta]]
-- [[技能/assessment-daily-check-quiz.md|Assessment Daily Check Quiz]]
-- [[技能/assessment-k8s-fundamentals-quiz-answers.md|Assessment K8S Fundamentals Quiz Answers]]
-- [[技能/assessment-k8s-fundamentals-quiz.md|Assessment K8S Fundamentals Quiz]]
-- [[技能/assessment-troubleshooting-lab-exam.md|Assessment Troubleshooting Lab Exam]]
-- [[技能/audit-rbac-configurations.md|Audit Rbac Configurations]]
-- [[技能/backup-restore-etcd.md|Backup Restore Etcd]]
-- [[技能/backup-restore-fta.md|Backup Restore Fta]]
-- [[技能/calico-fta.md|Calico Fta]]
-- [[技能/certificate-fta.md|Certificate Fta]]
-- [[技能/cilium-fta.md|Cilium Fta]]
-- [[技能/cloud-provider-fta.md|Cloud Provider Fta]]
-- [[技能/cluster-autoscaler-fta.md|Cluster Autoscaler Fta]]
-- [[技能/cluster-upgrade-fta.md|Cluster Upgrade Fta]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
-- [[技能/controller-manager-fta.md|Controller Manager Fta]]
-- [[技能/crd-operator-fta.md|Crd Operator Fta]]
-- [[技能/csi-fta.md|Csi Fta]]
-- [[技能/daemonset-fta.md|Daemonset Fta]]
-- [[技能/deployment-canary-and-bluegreen.md|Deployment Canary And Bluegreen]]
-- [[技能/deployment-fta.md|Deployment Fta]]
-- [[技能/deployment-rolling-update.md|Deployment Rolling Update]]
-- [[技能/deployment-workload-selection.md|Deployment Workload Selection]]
-- [[技能/develop-crd-operator.md|Develop Crd Operator]]
-- [[技能/dns-fta.md|Dns Fta]]
-- [[技能/etcd-fta.md|Etcd Fta]]
-- [[技能/flannel-fta.md|Flannel Fta]]
-- [[技能/gateway-api-fta.md|Gateway Api Fta]]
-- [[技能/gitops-argocd-fta.md|Gitops Argocd Fta]]
-- [[技能/gpu-fta.md|Gpu Fta]]
-- [[技能/helm-fta.md|Helm Fta]]
-- [[技能/higress-fta.md|Higress Fta]]
-- [[技能/hpa-fta.md|Hpa Fta]]
-- [[技能/ingress-fta.md|Ingress Fta]]
-- [[技能/job-cronjob-fta.md|Job Cronjob Fta]]
-- [[技能/k8s-cluster-configuration-guide.md|K8S Cluster Configuration Guide]]
-- [[技能/k8s-deployment-strategies-guide.md|K8S Deployment Strategies Guide]]
-- [[技能/k8s-disaster-recovery-guide.md|K8S Disaster Recovery Guide]]
-- [[技能/k8s-distributed-tracing-guide.md|K8S Distributed Tracing Guide]]
-- [[技能/k8s-logging-management-guide.md|K8S Logging Management Guide]]
-- [[技能/k8s-monitoring-guide.md|K8S Monitoring Guide]]
-- [[技能/k8s-network-configuration-guide.md|K8S Network Configuration Guide]]
-- [[技能/k8s-network-security-guide.md|K8S Network Security Guide]]
-- [[技能/k8s-pod-security-guide.md|K8S Pod Security Guide]]
-- [[技能/k8s-scaling-guide.md|K8S Scaling Guide]]
-- [[技能/k8s-storage-configuration-guide.md|K8S Storage Configuration Guide]]
-- [[技能/kubeadm-cluster-deletion.md|Kubeadm Cluster Deletion]]
-- [[技能/kubeadm-cluster-lifecycle.md|Kubeadm Cluster Lifecycle]]
-- [[技能/kubeadm-fta.md|Kubeadm Fta]]
-- [[技能/kubeadm-ha-cluster-setup.md|Kubeadm Ha Cluster Setup]]
-- [[技能/kubelet-certificate-rotation.md|Kubelet Certificate Rotation]]
-- [[技能/kubelet-eviction-mechanism.md|Kubelet Eviction Mechanism]]
-- [[技能/kudig-agent-specs-collection.md|Kudig Agent Specs Collection]]
-- [[技能/kudig-prompts-catalog.md|Kudig Prompts Catalog]]
-- [[技能/learn-01-day-one-checklist.md|Learn 01 Day One Checklist]]
-- [[技能/learn-01-what-is-kubernetes.md|Learn 01 What Is Kubernetes]]
-- [[技能/learn-02-first-ticket-guide.md|Learn 02 First Ticket Guide]]
-- [[技能/learn-02-pod-basics.md|Learn 02 Pod Basics]]
-- [[技能/learn-03-deployment-basics.md|Learn 03 Deployment Basics]]
-- [[技能/learn-03-oncall-handoff.md|Learn 03 Oncall Handoff]]
-- [[技能/learn-04-debug-tools-setup.md|Learn 04 Debug Tools Setup]]
-- [[技能/learn-04-service-basics.md|Learn 04 Service Basics]]
-- [[技能/learn-05-ingress-basics.md|Learn 05 Ingress Basics]]
-- [[技能/learn-06-configmap-secret.md|Learn 06 Configmap Secret]]
-- [[技能/learn-07-namespace-resource-quota.md|Learn 07 Namespace Resource Quota]]
-- [[技能/learn-08-pv-pvc-basics.md|Learn 08 Pv Pvc Basics]]
-- [[技能/learn-09-hpa-basics.md|Learn 09 Hpa Basics]]
-- [[技能/learn-10-health-check.md|Learn 10 Health Check]]
-- [[技能/learn-11-job-cronjob.md|Learn 11 Job Cronjob]]
-- [[技能/learn-12-common-problems.md|Learn 12 Common Problems]]
-- [[技能/learn-13-daemonset-basics.md|Learn 13 Daemonset Basics]]
-- [[技能/learn-14-statefulset-basics.md|Learn 14 Statefulset Basics]]
-- [[技能/learn-15-scheduling-basics.md|Learn 15 Scheduling Basics]]
-- [[技能/learn-README.md|Learn Readme]]
-- [[技能/learn-analogy-dictionary.md|Learn Analogy Dictionary]]
-- [[技能/learn-decision-tree-mermaid.md|Learn Decision Tree Mermaid]]
-- [[技能/learn-inner-training.md|Learn Inner Training]]
-- [[技能/learn-lecturer-persona.md|Learn Lecturer Persona]]
-- [[技能/learn-oncall-quick-qa.md|Learn Oncall Quick Qa]]
-- [[技能/learn-public-training.md|Learn Public Training]]
-- [[技能/learn-root.md|Learn Root]]
-- [[技能/manage-persistent-storage.md|Manage Persistent Storage]]
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[技能/monitoring-fta.md|Monitoring Fta]]
-- [[技能/networkpolicy-fta.md|Networkpolicy Fta]]
-- [[技能/nginx-ingress-fta.md|Nginx Ingress Fta]]
-- [[技能/node-drain-and-maintenance.md|Node Drain And Maintenance]]
-- [[技能/node-fta.md|Node Fta]]
-- [[技能/nodepool-fta.md|Nodepool Fta]]
-- [[技能/openkruise-fta.md|Openkruise Fta]]
-- [[技能/pdb-fta.md|Pdb Fta]]
-- [[技能/pod-fta.md|Pod Fta]]
-- [[技能/psp-scc-fta.md|Psp Scc Fta]]
-- [[技能/rbac-fta.md|Rbac Fta]]
-- [[技能/resource-quota-fta.md|Resource Quota Fta]]
-- [[技能/scheduler-fta.md|Scheduler Fta]]
-- [[技能/service-fta.md|Service Fta]]
-- [[技能/service-mesh-istio-fta.md|Service Mesh Istio Fta]]
-- [[技能/skill-19-node-resource-pressure.md|Skill 19 Node Resource Pressure]]
-- [[技能/skill-20-networkpolicy-connectivity.md|Skill 20 Networkpolicy Connectivity]]
-- [[技能/skill-21-statefulset-failure.md|Skill 21 Statefulset Failure]]
-- [[技能/skill-22-daemonset-failure.md|Skill 22 Daemonset Failure]]
-- [[技能/skill-23-job-cronjob-failure.md|Skill 23 Job Cronjob Failure]]
-- [[技能/skill-MOC.md|Skill Moc]]
-- [[技能/skill-README.md|Skill Readme]]
-- [[技能/skill-assets-escalation-template.md|Skill Assets Escalation Template]]
-- [[技能/skill-k8s-node-notready-SKILL.md|Skill K8S Node Notready Skill]]
-- [[技能/skill-k8s-node-notready-USAGE-GUIDE.md|Skill K8S Node Notready Usage Guide]]
-- [[技能/skill-reference-diagnostic-workflow.md|Skill Reference Diagnostic Workflow]]
-- [[技能/skill-reference-remediation-playbook.md|Skill Reference Remediation Playbook]]
-- [[技能/skill-reference-root-cause-catalog.md|Skill Reference Root Cause Catalog]]
-- [[技能/skill-reference-version-matrix.md|Skill Reference Version Matrix]]
-- [[技能/skills-run-README.md|Skills Run Readme]]
-- [[技能/statefulset-fta.md|Statefulset Fta]]
-- [[技能/terway-fta.md|Terway Fta]]
-- [[技能/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[技能/ts-ai-ml-workloads.md|Ts Ai Ml Workloads]]
-- [[技能/ts-cloud-provider.md|Ts Cloud Provider]]
-- [[技能/ts-cluster-operations.md|Ts Cluster Operations]]
-- [[技能/ts-command-output.md|Ts Command Output]]
-- [[技能/ts-control-plane.md|Ts Control Plane]]
-- [[技能/ts-gitops-devops.md|Ts Gitops Devops]]
-- [[技能/ts-monitoring-observability.md|Ts Monitoring Observability]]
-- [[技能/ts-networking.md|Ts Networking]]
-- [[技能/ts-node-components.md|Ts Node Components]]
-- [[技能/ts-resources-scheduling.md|Ts Resources Scheduling]]
-- [[技能/ts-security-auth.md|Ts Security Auth]]
-- [[技能/ts-storage.md|Ts Storage]]
-- [[技能/ts-workloads.md|Ts Workloads]]
-- [[技能/vpa-fta.md|Vpa Fta]]
-- [[技能/webhook-admission-fta.md|Webhook Admission Fta]]
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [csi-storage/](故障诊断-存储/csi-storage/) | CSI 驱动异常、PV/PVC 挂载失败、存储后端、持久存储管理 | 🔴 工单TOP |
 
+### 1.5 安全故障诊断 `故障诊断-安全/`
 
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [rbac/](故障诊断-安全/rbac/) | RBAC 权限不足、Role/Binding 配置、审计 | 🟢 产品高频 |
+| [certificate/](故障诊断-安全/certificate/) | 证书过期、轮换失败、CA 链断裂、kubelet 证书 | 🔴 工单TOP |
+| [webhook-admission/](故障诊断-安全/webhook-admission/) | Webhook 超时、TLS 错误、失败策略 | |
+| [pod-security/](故障诊断-安全/pod-security/) | PSP/SCC/PSA 策略迁移、安全上下文 | |
+| [resource-quota/](故障诊断-安全/resource-quota/) | ResourceQuota/LimitRange 配额超限 | |
 
-<!-- risk-assessed -->
+### 1.6 节点故障诊断 `故障诊断-节点/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [node/](故障诊断-节点/node/) | NotReady、MemoryPressure、DiskPressure、kubelet 异常 | 🔴 工单TOP |
+| [nodepool/](故障诊断-节点/nodepool/) | 节点池扩缩失败、配置漂移 | |
+| [gpu/](故障诊断-节点/gpu/) | GPU 调度失败、设备插件异常、驱动兼容 | |
+
+### 1.7 可观测性故障诊断 `故障诊断-可观测性/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [monitoring/](故障诊断-可观测性/monitoring/) | 监控指标缺失、告警规则异常、指标采集 | 🔵 最佳实践TOP |
+
+### 1.8 集群运维故障诊断 `故障诊断-集群运维/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [cluster-upgrade/](故障诊断-集群运维/cluster-upgrade/) | 集群升级失败、版本兼容 | |
+| [cluster-autoscaler/](故障诊断-集群运维/cluster-autoscaler/) | 自动扩缩容异常、节点池联动 | |
+| [cloud-provider/](故障诊断-集群运维/cloud-provider/) | Cloud Controller 异常、SLB/ECS 联动 | |
+| [gitops-argocd/](故障诊断-集群运维/gitops-argocd/) | ArgoCD 同步失败、Application 状态异常 | |
+| [helm/](故障诊断-集群运维/helm/) | Helm Release 失败、Chart 渲染错误 | 🟢 产品高频 |
+| [openkruise/](故障诊断-集群运维/openkruise/) | OpenKruise 高级工作负载异常 | |
+
+---
+
+## 二、排障实战（命令输出解读式）`排障实战/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [workloads/](排障实战/workloads/) | Pod/Deployment/StatefulSet 排障实战 | 🔴 工单TOP |
+| [networking/](排障实战/networking/) | 网络连通性排障实战 | 🔴 工单TOP |
+| [storage/](排障实战/storage/) | 存储挂载排障实战 | |
+| [control-plane/](排障实战/control-plane/) | 控制面组件排障实战 | |
+| [node-components/](排障实战/node-components/) | 节点组件排障实战 | 🔴 工单TOP |
+| [security-auth/](排障实战/security-auth/) | 安全认证排障实战 | |
+| [monitoring-observability/](排障实战/monitoring-observability/) | 监控可观测性排障实战 | |
+| [ai-ml-workloads/](排障实战/ai-ml-workloads/) | AI/ML 工作负载排障 | |
+| [cloud-provider/](排障实战/cloud-provider/) | 云厂商集成排障 | |
+| [cluster-operations/](排障实战/cluster-operations/) | 集群运维操作排障 | |
+| [gitops-devops/](排障实战/gitops-devops/) | GitOps/DevOps 流程排障 | |
+| [resources-scheduling/](排障实战/resources-scheduling/) | 资源调度排障 | |
+| [command-output/](排障实战/command-output/) | kubectl 命令输出解读 | 🟢 产品高频 |
+
+---
+
+## 三、运维操作 `运维操作/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [health-probes/](运维操作/health-probes/) | 健康探针配置（liveness/readiness/startup） | 🟢 产品高频 |
+| [node-maintenance/](运维操作/node-maintenance/) | 节点排水、维护、驱逐机制 | 🔴 工单TOP |
+| [deployment-operations/](运维操作/deployment-operations/) | 滚动更新、金丝雀、蓝绿发布操作 | 🟢 产品高频 |
+| [crd-operator-dev/](运维操作/crd-operator-dev/) | CRD/Operator 开发 | |
+| [kubeadm/](运维操作/kubeadm/) | 集群生命周期、HA 搭建、集群清理 | 🔵 最佳实践TOP |
+
+---
+
+## 四、FTA 方法论与诊断引擎 `fta-方法论/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [methodology/](fta-方法论/methodology/) | FTA 方法论与核心原则 | |
+| [execution-engine/](fta-方法论/execution-engine/) | FTA 诊断执行引擎 | |
+| [runbook-automation/](fta-方法论/runbook-automation/) | FTA 驱动的 Runbook 自动化 | |
+| [top-events-index/](fta-方法论/top-events-index/) | Kubernetes FTA 顶层事件索引 | |
+| [symptom-matching/](fta-方法论/symptom-matching/) | 症状向量匹配引擎 | |
+| [diagnostic-overview/](fta-方法论/diagnostic-overview/) | Kubernetes 诊断技能总览 | |
+
+---
+
+## 五、Skill 参考资料 `skill-参考资料/`
+
+| 技能文件夹 | 覆盖场景 |
+|:---|:---|
+| [diagnostic-workflow/](skill-参考资料/diagnostic-workflow/) | 标准诊断工作流 |
+| [remediation-playbook/](skill-参考资料/remediation-playbook/) | 修复操作手册 |
+| [root-cause-catalog/](skill-参考资料/root-cause-catalog/) | 根因分类目录 |
+| [version-matrix/](skill-参考资料/version-matrix/) | K8s 版本兼容矩阵 |
+
+---
+
+## 六、最佳实践指南 `最佳实践指南/`
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [monitoring/](最佳实践指南/monitoring/) | 监控体系配置指南 | 🔵 最佳实践TOP |
+| [networking/](最佳实践指南/networking/) | 网络配置指南 | 🔵 最佳实践TOP |
+| [network-security/](最佳实践指南/network-security/) | 网络安全指南 | |
+| [pod-security/](最佳实践指南/pod-security/) | Pod 安全指南 | |
+| [storage/](最佳实践指南/storage/) | 存储配置指南 | 🔵 最佳实践TOP |
+| [scaling/](最佳实践指南/scaling/) | 扩缩容指南 | 🔵 最佳实践TOP |
+| [disaster-recovery/](最佳实践指南/disaster-recovery/) | 灾备恢复指南 | 🔵 最佳实践TOP |
+| [deployment-strategies/](最佳实践指南/deployment-strategies/) | 发布策略指南 | 🟢 产品高频 |
+| [distributed-tracing/](最佳实践指南/distributed-tracing/) | 分布式链路追踪指南 | |
+| [logging/](最佳实践指南/logging/) | 日志管理指南 | 🔵 最佳实践TOP |
+| [cluster-configuration/](最佳实践指南/cluster-configuration/) | 集群配置指南 | 🔵 最佳实践TOP |
+
+---
+
+## 七、培训学习 `培训学习/`
+
+| 技能文件夹 | 覆盖场景 |
+|:---|:---|
+| [learning-path/](培训学习/learning-path/) | K8s 基础 15 课学习路径（Pod→Deployment→Service→Ingress→存储→HPA→调度） |
+| [oncall-training/](培训学习/oncall-training/) | 新人 OnCall 培训（Day-1 清单、首单指南、交接流程） |
+| [training-lecturer/](培训学习/training-lecturer/) | 内部培训讲师体系 |
+| [training-public/](培训学习/training-public/) | 公开培训与学习路线图 |
+| [tools/](培训学习/tools/) | 教学工具（类比词典、决策树、讲师人设） |
+
+---
+
+## 八、能力评估 `能力评估/`
+
+| 技能文件夹 | 覆盖场景 |
+|:---|:---|
+| [daily-check-quiz/](能力评估/daily-check-quiz/) | 日常巡检知识测验 |
+| [k8s-fundamentals-quiz/](能力评估/k8s-fundamentals-quiz/) | K8s 基础知识测验（含答案） |
+| [troubleshooting-lab-exam/](能力评估/troubleshooting-lab-exam/) | 排障实操考核 |
+
+---
+
+## 九、Agent 编排 `agent-编排/`
+
+| 技能文件夹 | 覆盖场景 |
+|:---|:---|
+| [orchestration-patterns/](agent-编排/orchestration-patterns/) | Agent 编排模式 |
+| [specs-collection/](agent-编排/specs-collection/) | KUDIG Agent 规格集合 |
+| [prompts-catalog/](agent-编排/prompts-catalog/) | 提示词目录 |
+
+---
+
+## 十、专项技能
+
+| 技能文件夹 | 覆盖场景 | 高频标记 |
+|:---|:---|:---|
+| [skill-k8s-node-notready/](skill-k8s-node-notready/) | Node NotReady 完整诊断技能（SKILL + 使用指南 + 升级模板） | 🔴 工单TOP |
+| [best-practices/](best-practices/) | 生产运维最佳实践合集（部署/迁移/场景/安全/可观测） | 🔵 最佳实践TOP |
+| [技能建设最佳实践/](技能建设最佳实践/) | 技能文件编写规范与质量指南 | |
+
+---
+
+## 快速诊断入口
+
+```bash
+# 🟢 低风险：只读/信息收集
+# Pod 异常
+kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded
+kubectl describe pod <name> -n <ns> | tail -30
+kubectl logs <pod> --previous -n <ns> --tail=50
+
+# 节点异常
+kubectl get nodes -o wide
+kubectl describe node <name>
+journalctl -u kubelet --since "10min ago"
+
+# 网络诊断
+kubectl exec <pod> -- nslookup kubernetes.default
+kubectl get endpoints <svc> -n <ns>
+
+# 存储诊断
+kubectl get pv,pvc -A
+kubectl describe pvc <name> -n <ns>
+```
+
+---
+
+## 学习路径导航
+
+| 阶段 | 内容 | 入口 |
+|:---|:---|:---|
+| L1 新人 | K8s 基础 15 课 + OnCall 培训 | [培训学习/learning-path/](培训学习/learning-path/) |
+| L2 进阶 | 排障实战 + FTA 故障树 | [排障实战/](排障实战/) |
+| L3 高级 | FTA 方法论 + 最佳实践指南 | [fta-方法论/](fta-方法论/) |
+| L4 专家 | Agent 编排 + 技能建设 | [agent-编排/](agent-编排/) |
+
+---
+
+## 工单 TOP 10 高频技能速查
+
+| # | 场景 | 对应技能 |
+|:---|:---|:---|
+| 1 | Pod CrashLoopBackOff / OOMKilled | [故障诊断-工作负载/pod/](故障诊断-工作负载/pod/) |
+| 2 | Pod Pending（调度失败） | [故障诊断-工作负载/pod/](故障诊断-工作负载/pod/) |
+| 3 | Node NotReady | [skill-k8s-node-notready/](skill-k8s-node-notready/) + [故障诊断-节点/node/](故障诊断-节点/node/) |
+| 4 | DNS 解析失败 | [故障诊断-网络/dns/](故障诊断-网络/dns/) |
+| 5 | Service 不通 | [故障诊断-网络/service/](故障诊断-网络/service/) |
+| 6 | PVC 挂载失败 | [故障诊断-存储/csi-storage/](故障诊断-存储/csi-storage/) |
+| 7 | 证书过期 | [故障诊断-安全/certificate/](故障诊断-安全/certificate/) |
+| 8 | CNI/网络插件异常 | [故障诊断-网络/cni/](故障诊断-网络/cni/) |
+| 9 | API Server 异常 | [故障诊断-控制面/apiserver/](故障诊断-控制面/apiserver/) |
+| 10 | etcd 集群异常 | [故障诊断-控制面/etcd/](故障诊断-控制面/etcd/) |

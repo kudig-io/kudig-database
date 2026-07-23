@@ -38,6 +38,7 @@ last_updated: 2026-07
 - [[专项技术/扩展机制/14-multi-cluster-management.md|Multi Cluster Management]]
 - [[专项技术/扩展机制/15-monitoring-alerting-system.md|Monitoring Alerting System]]
 - [[专项技术/扩展机制/16-security-compliance-management.md|Security Compliance Management]]
+- [[专项技术/扩展机制/17-operator-sdk-go-helm-ansible-types.md|Operator SDK Go Helm Ansible Types]]
 - [[专项技术/扩展机制/99-graalvm-native-image-guide.md|Graalvm Native Image Guide]]
 - [[专项技术/扩展机制/99-quarkus-micronaut-cloud-native-java-guide.md|Quarkus Micronaut Cloud Native Java Guide]]
 - [[专项技术/扩展机制/99-serverless-faas-guide.md|Serverless Faas Guide]]

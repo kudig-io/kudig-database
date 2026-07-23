@@ -160,11 +160,11 @@ Step 3: kubectl exec -it <pod> -- curl <service-ip>
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[cni]] — CNI (Container Network Interface)
 - [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[技能/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 
 - [[脚本/templates/decision-tree-template.md|decision-tree-template]]
 - [[文档/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference

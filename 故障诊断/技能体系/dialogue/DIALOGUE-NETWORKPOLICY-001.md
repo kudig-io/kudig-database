@@ -233,7 +233,7 @@ kubectl exec <source-pod> -n <namespace> -- ping -c 4 <target-ip>
 
 - [[概念/network-policy.md|NetworkPolicy]]
 - [[实体/cni.md|CNI 插件]]
-- [[技能/best-practices/best-practices/security/pod-security.md|Pod 安全策略]]
+- [[最佳实践/best-practices/security/pod-security.md|Pod 安全策略]]
 
 ## Related
 

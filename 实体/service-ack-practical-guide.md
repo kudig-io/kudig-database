@@ -44,55 +44,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: [[Kubernetes|Kubernetes]] [[Service|Service]] ACK 实战指南
-description: '# Kubernetes Service ACK 实战指南'
-category: cloud-provider
-tags:
-- k8s
-- cloud
-- eks
-- gke
-- aks
-- ack
-- [[etcd|etcd]]
-- apiserver
-- scheduler
-- [[CoreDNS|coredns]]
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 云架构师
-- 运维工程师
-estimated_read_time: 5min
-intent_queries:
-- Kubernetes Service ACK 实战指南 是什么
-- 如何 Kubernetes Service ACK 实战指南
-- Kubernetes 17 cloud provider 最佳实践
-trigger_keywords:
-- Kubernetes
-- Service
-- ACK
-- 实战指南
-- cloud
-- provider
-cross_refs:
-- type: fta
-  path: ../故障诊断/topic-fta/list/service-fta.md
-  label: '故障树: service'
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # Kubernetes Service ACK 实战指南
 
 > **文档类型**: 技术实践文档 | **适用环境**: 阿里云ACK/专有云 | **Kubernetes版本**: v1.25-v1.32  
@@ -410,10 +361,10 @@ spec:
 
 ## See Also
 
-- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
-- [[云厂商/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[云厂商/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[云厂商/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[云厂商/阿里云/公有云-ACK/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[云厂商/阿里云/公有云-ACK/alicloud-ack-overview.md|alicloud-ack-overview]]
+- [[云厂商/阿里云/公有云-ACK/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[云厂商/阿里云/公有云-ACK/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 
 <!-- risk-assessed -->

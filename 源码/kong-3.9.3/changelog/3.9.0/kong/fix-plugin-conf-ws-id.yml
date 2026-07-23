@@ -1,3 +1,0 @@
-message: Fixed an issue where the workspace id was not included in the plugin config in the plugins iterator.
-type: bugfix
-scope: Core

@@ -338,7 +338,7 @@ kubectl get deployments -A -o jsonpath='{range .items[*]}{@.metadata.namespace}{
 
 ### 本域必读
 
-- [[云厂商/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK 概述]] — ACK 托管版/专有版架构、Terway 网络、RRSA 身份与安全加固。
+- [[云厂商/阿里云/公有云-ACK/alicloud-ack-overview.md|阿里云 ACK 概述]] — ACK 托管版/专有版架构、Terway 网络、RRSA 身份与安全加固。
 - [[云厂商/多云混合/00-multi-cloud-hybrid-deployment-strategy.md|多云混合部署策略]] — 主备/主主模式、跨云数据同步、故障切换与统一监控。
 - [[云厂商/AWS-EKS/aws-eks-overview.md|AWS EKS 概述]] — EKS 架构、IRSA、托管节点组与 Fargate 模式。
 - [[云厂商/Google-GKE/google-cloud-gke-overview.md|Google GKE 概述]] — GKE Autopilot/Standard、Workload Identity、Backup for GKE。

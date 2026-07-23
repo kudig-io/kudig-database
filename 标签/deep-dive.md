@@ -84,9 +84,38 @@ last_updated: '2026-07-21'
 - [[云厂商/腾讯云TKE/tencent-tke-overview|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[平台工程/代码分析/node-create/总览|节点生命周期总览 (topic-code-analysis)]]
 - [[实体/alicloud-ack-overview|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
-- [[云厂商/阿里云/ack/alicloud-ack-overview|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
+- [[云厂商/阿里云/公有云-ACK/alicloud-ack-overview|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
 - [[实体/alicloud-apsara-ack-overview|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
-- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
+- [[云厂商/阿里云/专有云-Apsara/alicloud-apsara-ack-overview|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
+
+## 深度解析标签指南
+
+### 深度解析文章特征
+
+| 特征 | 说明 |
+|---|---|
+| 源码分析 | 深入核心代码实现 |
+| 原理探讨 | 设计思想、架构决策 |
+| 性能数据 | 基准测试、对比分析 |
+| 生产案例 | 真实问题、解决方案 |
+
+### 阅读建议
+
+1. **前置知识**：确保理解基础概念
+2. **实践验证**：结合实验环境验证
+3. **源码对照**：打开源码同步阅读
+4. **总结笔记**：记录关键点和疑问
+
+## 面试要点
+
+1. **Q：如何写出高质量的深度解析文章？**
+   A：深入源码、结合实践、数据支撑、清晰结构、图文并茂。
+
+2. **Q：深度解析 vs 入门指南的区别？**
+   A：入门：概念+使用。深度：原理+源码+优化+案例。
+
+3. **Q：如何进行源码分析？**
+   A：入口点→核心流程→关键数据结构→设计模式→扩展点。
 
 ## Related Tags
 

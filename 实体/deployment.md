@@ -125,7 +125,7 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - [[工作负载/核心工作负载/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
 - [[工作负载/核心工作负载/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
 - [[工作负载/核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
 - [[概念/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference

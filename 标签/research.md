@@ -70,6 +70,36 @@ last_updated: '2026-07-21'
 - [[概念/Research: Kubernetes Storage 2025-2026|Research: Kubernetes 存储深度研究 2025-2026]]
 - [[概念/Research: Kubernetes Production Operations 2025-2026|Research: Kubernetes 生产运营深度研究 2025-2026]]
 
+## 研究标签使用指南
+
+### 研究领域分类
+
+| 领域 | 热点方向 | 关键项目 |
+|---|---|---|
+| 调度 | GPU 调度、拓扑感知 | Volcano, YuniKorn |
+| 网络 | eBPF、服务网格 | Cilium, Istio |
+| 存储 | CSI 扩展、数据编排 | Rook, OpenEBS |
+| 安全 | 零信任、供应链 | Falco, Sigstore |
+| AI | 训练框架、推理优化 | KubeRay, KServe |
+
+### 研究方法论
+
+1. **文献调研**：论文、博客、会议演讲
+2. **实验验证**：PoC、基准测试
+3. **生产实践**：灰度发布、A/B 测试
+4. **总结分享**：技术博客、内部分享
+
+## 面试要点
+
+1. **Q：如何进行技术调研？**
+   A：明确目标→广泛收集→深入分析→实验验证→总结报告。
+
+2. **Q：K8s 当前研究热点？**
+   A：AI 基础设施、eBPF、Wasm、边缘计算、平台工程、FinOps。
+
+3. **Q：如何评估新技术？**
+   A：技术成熟度、社区活跃度、生产案例、学习曲线、与现有架构兼容性。
+
 ## Related Tags
 
 - #research

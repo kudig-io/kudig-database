@@ -224,8 +224,8 @@ prerequisites:
 - [[云厂商/AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[云厂商/Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
 - [[云厂商/Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[云厂商/阿里云/ack/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
-- [[云厂商/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
+- [[云厂商/阿里云/公有云-ACK/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
+- [[云厂商/阿里云/公有云-ACK/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
 - [[云厂商/腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[云厂商/华为云CCE/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]
 - [[云厂商/其他云/UCloud-UK8S/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
@@ -234,7 +234,7 @@ prerequisites:
 - [[云厂商/其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
 - [[云厂商/其他云/天翼云-TKE/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
 - [[云厂商/其他云/移动云-CKE/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
-- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
+- [[云厂商/阿里云/专有云-Apsara/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
 
 ## 生产运维
 

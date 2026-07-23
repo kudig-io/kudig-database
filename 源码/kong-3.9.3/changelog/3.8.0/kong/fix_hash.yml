@@ -1,3 +1,0 @@
-message: Fixed an inefficiency issue in the Luajit hashing algorithm
-type: performance
-scope: Performance

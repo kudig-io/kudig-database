@@ -35,9 +35,9 @@ prerequisites:
 relationships:
 - target: '[[概念/etcd Operational Reference.md]]'
   type: uses
-- target: '[[技能/Kubernetes FTA Top Events Index.md]]'
+- target: '[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md]]'
   type: uses
-- target: '[[技能/FTA Methodology and Core Principles.md]]'
+- target: '[[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md]]'
   type: related_to
 - target: '[[文档/indexes/INDEX.md]]'
   type: related_to
@@ -122,7 +122,7 @@ relationships:
 - FTA Methodology and Core Principles.md|FTA 方法论与核心原则]]
 - [[文档/indexes/INDEX.md|Index]]|Kubernetes FTA Top Events Index]].md|Kubernetes FTA 顶事件索引]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]].md|etcd 运维参考]]
-- [[概念/Production Troubleshooting Playbook.md|生产排障手册]]
+- [[故障诊断/Production Troubleshooting Playbook.md|生产排障手册]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 

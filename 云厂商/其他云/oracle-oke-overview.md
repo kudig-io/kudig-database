@@ -46,54 +46,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: Oracle OKE (Oracle Container Engine for [[Kubernetes|Kubernetes]]) 企业级深度解析
-description: '# Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析'
-category: cloud-provider
-tags:
-- k8s
-- cloud
-- eks
-- gke
-- aks
-- ack
-- [[kubelet|kubelet]]
-- flannel
-- [[StatefulSet|statefulset]]
-- job
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 云架构师
-- 运维工程师
-estimated_read_time: 5min
-intent_queries:
-- Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析 是什么
-- 如何 Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析
-- Kubernetes 17 cloud provider 最佳实践
-trigger_keywords:
-- Oracle
-- OKE
-- Oracle
-- Container
-- Engine
-- for
-- Kubernetes
-- 企业级深度解析
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析
 
 ## 产品概述与定位

@@ -97,8 +97,8 @@ prerequisites:
 
 ### 生产实践
 - [[实体/kubectl Scenario Quick Reference.md|平台运维全系列]]
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论体系]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|18 个诊断-修复 Skill]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论体系]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|18 个诊断-修复 Skill]]
 
 ---
 
@@ -110,7 +110,7 @@ prerequisites:
 - [[概念/kubernetes-architecture-overview.md|控制平面源码级分析]]
 
 ### 方法论
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论体系]]
+- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论体系]]
 
 ### 前沿技术
 - [[概念/cilium-ebpf-networking.md|eBPF 技术]]

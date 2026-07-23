@@ -1,4 +1,0 @@
-storage:
-  tsdb:
-    retention:
-      size: -1GB

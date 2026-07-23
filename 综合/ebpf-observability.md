@@ -80,7 +80,7 @@ eBPF 把可观测性的采集点从"应用边界"下移到"系统调用边界"�
 - [[实体/kepler.md|Kepler]]
 - [[概念/cilium-ebpf-networking.md|Cilium eBPF 网络]]
 - [[概念/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]
-- [[概念/eBPF x 运行时安全.md|eBPF × 运行时安全]]
+- [[概念/eBPF × 运行时安全.md|eBPF × 运行时安全]]
 - [[概念/observability-pillars.md|可观测性支柱]]
 - [[概念/k8s-observability-stack.md|K8s 可观测性栈]]
 - [[综合/cilium-service-mesh.md|Cilium × Service Mesh]]

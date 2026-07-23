@@ -35,6 +35,7 @@ last_updated: '2026-07-21'
 | [[云厂商/Azure-AKS/04-aks-storage-managed-disk.md\|存储集成]] | Managed Disk/File CSI | intermediate |
 | [[云厂商/Azure-AKS/05-aks-identity-workload-identity.md\|Workload Identity]] | 无密钥身份认证 | advanced |
 | [[云厂商/Azure-AKS/06-aks-troubleshooting-playbook.md\|故障排查]] | AKS 常见问题处理 | advanced |
+| [[云厂商/Azure-AKS/99-azure-aks-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

@@ -1,4 +1,0 @@
-message: |
-  **AI Plugins**: Fixed AI upstream URL trailing being empty.
-type: bugfix
-scope: Plugin

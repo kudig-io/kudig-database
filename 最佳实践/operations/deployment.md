@@ -1,0 +1,207 @@
+---
+title: Deployment
+description: '- [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: '- [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+category: entities
+tags:
+- k8s
+- deployment
+- workload
+- replica-set
+- rolling-update
+- stateless
+- prometheus
+- hpa
+- statefulset
+- agent
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Deployment 是什么
+- 如何 Deployment
+trigger_keywords:
+- Deployment
+prerequisites:
+- kubectl-basics
+- prometheus-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Deployment
+
+## Role
+
+Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[Pods|Pods]].
+
+## Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Declarative management** | Define desired replica count, update strategy, Pod template |
+| **Rolling updates** | Replace old Pods with new Pods gradually (maxSurge, maxUnavailable) |
+| **Rollback** | Revert to any previous [[ReplicaSet|ReplicaSet]] via `kubectl rollout undo` |
+| **Scaling** | Change replica count with `kubectl scale` or HPA |
+| **Revision history** | Track changes via `revisionHistoryLimit` (default 10) |
+
+## Update Strategy
+
+| Strategy | Behavior | Use Case |
+|----------|----------|----------|
+| **RollingUpdate** | Gradually replace Pods (default) | Most production workloads |
+| **Recreate** | Kill all old Pods, then create new | Stateful or incompatible versions |
+
+RollingUpdate parameters:
+- `maxSurge`: Extra Pods above desired count during update (default 25%)
+- `maxUnavailable`: Pods below desired count during update (default 25%)
+
+For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
+
+## Conditions
+
+[[Deployments|Deployments]] report these conditions:
+- **Available**: Minimum replicas are ready
+- **Progressing**: Deployment is making progress (new Pods created or old Pods terminated)
+
+## Related
+- [[概念/Pod 生命周期 × Secret 管理.md|[[Pod 生命周期 × Secret 管理|Pod 生命周期 × Secret 管理]]]] — 综合
+- [[概念/控制器模式 × Deployment.md|控制器模式 × Deployment]] — 综合
+
+- [[概念/Deployment × Secret 管理.md|Deployment × Secret 管理]]
+
+- [[技能/故障诊断-工作负载/deployment/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
+- [[技能/最佳实践指南/deployment-strategies/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[技能/故障诊断-工作负载/deployment/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]] — 金丝雀与蓝绿发布
+- [[实体/statefulset.md|statefulset]] — StatefulSet
+- [[概念/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
+- [[实体/statefulset.md|StatefulSet]]
+- ReplicaSet
+- [[pod-lifecycle|Pod Lifecycle]]
+- [[概念/autoscaling-strategies.md|Autoscaling Strategies]]
+
+- 04-kubernetes-multi-cloud-hybrid-deployment
+- 99-kubernetes-deployment-patterns-architecture
+- 07-deployment-replicaset-events
+- 03-prometheus-ha-deployment
+- 03-backstage-deployment
+- 04-deployment-replicaset
+- 25-multi-cloud-hybrid-deployment
+- 24-production-deployment-best-practices
+- 11-vercel-frontend-deployment-platform
+- 22-agentscope-production-deployment
+- 09-production-deployment-guide
+- 02-multi-cloud-hybrid-deployment-strategy
+- 03-edge-computing-production-deployment
+- 02-deployment-production-patterns
+- 09-edge-computing-deployment
+- 03-kubeedge-architecture-deployment
+- 12-cluster-deployment-patterns
+- 10-model-deployment-management
+- [[故障诊断/资源排障/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
+- [[故障诊断/FTA故障树/list/deployment-fta.md|Deployment 异常故障树分析]]
+- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[实体/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
+- [[实体/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
+- [[实体/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
+- [[实体/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[实体/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]] — Cross-reference
+- [[实体/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
+- [[实体/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference
+- [[实体/k8s-ai-agent-engineering.md|AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署]] — Cross-reference
+- [[实体/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[实体/k8s-supply-chain-yaml-cheatsheet.md|供应链安全、YAML 配置清单与速查表]] — Cross-reference
+- [[实体/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
+- [[工作负载/核心工作负载/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
+- [[工作负载/核心工作负载/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
+- [[工作负载/核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[概念/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
+- [[概念/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
+- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[概念/bp-infrastructure.md|最佳实践：Infrastructure]] — Cross-reference
+- [[概念/bp-operations.md|最佳实践：Operations]] — Cross-reference
+- [[概念/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
+- [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
+- [[技能/培训学习/oncall-training/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[技能/最佳实践指南/scaling/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[技能/运维操作/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/能力评估/k8s-fundamentals-quiz/assessment-k8s-fundamentals-quiz.md|K8S Fundamentals Quiz]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[技能/故障诊断-工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-10-health-check.md|第八课：健康检查 - Probe 详解]] — Cross-reference
+- [[技能/培训学习/tools/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-07-namespace-resource-quota.md|第七课：Namespace 与资源隔离]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-09-hpa-basics.md|第九课：HPA - 自动伸缩]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-11-job-cronjob.md|第九课：Job 和 CronJob - 任务调度]] — Cross-reference
+- [[技能/培训学习/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-14-statefulset-basics.md|第14课：StatefulSet - 有状态应用管理]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[技能/培训学习/tools/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/故障诊断-工作负载/deployment/deployment-rolling-update.md|Deployment 滚动更新策略]] — Cross-reference
+- [[技能/fta-方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-03-deployment-basics.md|第三课：Deployment - 应用部署管理器]] — Cross-reference
+- [[技能/培训学习/learning-path/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[技能/fta-方法论/runbook-automation/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[技能/培训学习/tools/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[实体/metal3-io.md|Metal3]] — Cross-reference
+- [[实体/clusterpedia.md|Clusterpedia]] — Cross-reference
+- [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
+
+
+## 部署运维最佳实践
+
+### 部署前检查清单
+
+| 检查项 | 命令/方法 | 风险 |
+|---|---|---|
+| 镜像扫描 | trivy image <image> | 🟢 |
+| 配置验证 | kubectl apply --dry-run=server | 🟢 |
+| 资源检查 | kubectl describe nodes | 🟢 |
+| 备份确认 | velero backup get | 🟢 |
+
+### 部署中监控
+
+```bash
+# 🟢 监控部署进度
+kubectl rollout status deploy/<name> -w
+# 🟢 检查 Pod 状态
+kubectl get pods -l app=<name> -w
+# 🟢 查看事件
+kubectl get events --sort-by='.lastTimestamp' | tail -20
+```
+
+### 部署后验证
+
+1. 功能验证：核心功能测试
+2. 性能确认：响应时间、吞吐量
+3. 日志检查：无异常错误
+4. 监控确认：指标正常
+
+## 面试要点
+
+1. **Q：生产部署的关键原则？**
+   A：可回滚、可观察、渐进式、自动化、文档化。
+
+2. **Q：如何保证部署零停机？**
+   A：readinessProbe、preStop hook、PDB、滚动更新、健康检查。
+
+3. **Q：部署失败如何快速恢复？**
+   A：kubectl rollout undo、自动回滚触发、蓝绿切换、金丝雀权重归零。
+
+<!-- risk-assessed -->

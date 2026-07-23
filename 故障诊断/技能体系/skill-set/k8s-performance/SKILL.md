@@ -250,7 +250,7 @@ agent_execution_mode: L2-semi-auto
 
 - k8s-autoscaling
 
-- [[技能/best-practices/scenarios/monitoring-alerting.md|monitoring alerting]]
+- [[最佳实践/scenarios/monitoring-alerting.md|monitoring alerting]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

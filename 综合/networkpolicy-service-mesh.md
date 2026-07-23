@@ -75,7 +75,7 @@ NetworkPolicy 回答"这两个 Pod 能不能通"，服务网格回答"通了之�
 - [[实体/istio.md|Istio]]
 - [[实体/linkerd.md|Linkerd]]
 - [[概念/network-policy.md|网络策略]]
-- [[概念/networkpolicy.md|NetworkPolicy]]
+- [[概念/network-policy.md|NetworkPolicy]]
 - [[概念/service-mesh-architecture.md|服务网格架构]]
 - [[概念/service-mesh-zero-trust-security.md|服务网格零信任]]
 - [[概念/service-mesh-security-governance.md|服务网格安全治理]]

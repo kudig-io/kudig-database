@@ -102,11 +102,11 @@ last_updated: '2026-07-21'
 
 ## 技能 (Skills)
 
-- [[技能/best-practices/best-practices/common-best-practices|通用最佳实践]]
-- [[技能/best-practices/deployment/02-single-node-deployment|单节点部署]]
-- [[技能/best-practices/deployment/04-production-environment-deployment|生产环境部署]]
-- [[技能/ts-cluster-operations|集群运维排障]]
-- [[技能/learn-04-debug-tools-setup|调试工具配置]]
+- [[最佳实践/best-practices/common-best-practices|通用最佳实践]]
+- [[最佳实践/deployment/02-single-node-deployment|单节点部署]]
+- [[最佳实践/deployment/04-production-environment-deployment|生产环境部署]]
+- [[技能/排障实战/cluster-operations/ts-cluster-operations.md|集群运维排障]]
+- [[技能/培训学习/tools/learn-04-debug-tools-setup.md|调试工具配置]]
 
 ## 容器运行时 (Container Runtime)
 
@@ -158,6 +158,41 @@ last_updated: '2026-07-21'
 - [[生态参考/领域索引/helm-index|Helm 索引]]
 - [[生态参考/论文/05-kubernetes-gitops-complete-practice-guide|GitOps 完整实践指南]]
 - [[生态参考/论文/21-kubernetes-platform-engineering-internal-developer-platform|平台工程与内部开发者平台]]
+
+## Helm 技术全景
+
+### Helm 核心概念
+
+| 概念 | 说明 |
+|---|---|
+| Chart | 应用打包格式 |
+| Release | Chart 的一次部署实例 |
+| Repository | Chart 存储仓库 |
+| Values | 配置参数化 |
+
+### Helm 常用命令
+
+```bash
+# 🟢 搜索 Chart
+helm search repo <keyword>
+# 🟡 安装/升级
+helm upgrade --install <release> <chart> -f values.yaml
+# 🟢 查看历史
+helm history <release>
+# 🔴 回滚
+helm rollback <release> <revision>
+```
+
+## 面试要点
+
+1. **Q：Helm 的核心价值？**
+   A：包管理、参数化配置、版本管理、依赖管理、回滚能力。
+
+2. **Q：Helm 2 vs Helm 3 的区别？**
+   A：Helm 3 移除 Tiller、原生 K8s API、支持 CRD、更安全。
+
+3. **Q：如何设计高质量的 Chart？**
+   A：参数化配置、完善文档、合理默认值、依赖管理、测试覆盖。
 
 ## Related Tags
 

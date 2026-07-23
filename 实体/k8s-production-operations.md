@@ -258,8 +258,8 @@ kubectl describe nodes | grep -A5 "Conditions"
 
 ## Related
 
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — GitOps x 平台工程
-- [[概念/IaC x 多集群管理.md|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — GitOps x 平台工程
+- [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — 基础设施即代码 x 多集群管理
 - [[flux]] — Flux
 - [[etcd]] — etcd
 - [[argo]] — Argo Workflows

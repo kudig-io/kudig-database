@@ -26,6 +26,7 @@ last_updated: 2026-07
 - [[平台工程/运维/11-disaster-recovery-business-continuity.md|Disaster Recovery Business Continuity]]
 - [[平台工程/运维/12-backup-recovery-strategy.md|Backup Recovery Strategy]]
 - [[平台工程/运维/13-multi-cluster-management.md|Multi Cluster Management]]
+- [[平台工程/运维/14-cluster-api-deep-dive.md|Cluster API Deep Dive]]
 - [[平台工程/运维/15-production-troubleshooting.md|Production Troubleshooting]]
 - [[平台工程/运维/16-platform-upgrade-migration.md|Platform Upgrade Migration]]
 - [[平台工程/运维/18-platform-observability-practice.md|Platform Observability Practice]]

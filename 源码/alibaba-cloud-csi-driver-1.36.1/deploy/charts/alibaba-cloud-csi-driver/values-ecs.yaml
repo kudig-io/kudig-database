@@ -1,4 +1,0 @@
-deploy:
-  accessKey:
-    enabled: true
-  ack: false

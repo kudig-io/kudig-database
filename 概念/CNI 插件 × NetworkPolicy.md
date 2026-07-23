@@ -136,13 +136,13 @@ NetworkPolicy 依赖 CNI 插件正确实现策略。但 CNI 插件本身：
 - [[概念/security-defense-depth.md|security defense depth]]
 - [[实体/cilium.md|cilium]]
 - [[概念/cilium-ebpf-networking.md|cilium ebpf networking]]
-- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]]
+- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 
 ## See Also
 
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]]
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]]
 - [[概念/CI-CD 流水线 × Secret 管理.md|CI-CD 流水线 × Secret 管理]]
 - [[概念/CRD × 可观测性.md|CRD × 可观测性]]
 - [[概念/Cilium eBPF × 可观测性.md|Cilium eBPF × 可观测性]]

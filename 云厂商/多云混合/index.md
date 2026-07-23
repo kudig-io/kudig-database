@@ -18,7 +18,7 @@ last_updated: 2026-07
 
 # Multi Cloud
 
-> 本页为 `云厂商/08-multi-cloud` 目录的自动索引。
+> 本页为 `云厂商/多云混合` 目录的自动索引。
 
 ## 文档
 
@@ -33,6 +33,7 @@ last_updated: 2026-07
 - [[云厂商/多云混合/08-multicloud-federation-karmada.md|Multicloud Federation Karmada]]
 - [[云厂商/多云混合/09-multicloud-network-interconnect.md|Multicloud Network Interconnect]]
 - [[云厂商/多云混合/10-multicloud-disaster-recovery.md|Multicloud Disaster Recovery]]
+- [[云厂商/多云混合/11-multicloud-comparison-decision-matrix.md|Multicloud Comparison Decision Matrix]]
 
 
 

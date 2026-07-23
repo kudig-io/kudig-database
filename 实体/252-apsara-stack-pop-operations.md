@@ -39,51 +39,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
-description: '# 专有云 (Apsara Stack) - POP 平台运维 (ASOP)'
-category: cloud-provider
-tags:
-- k8s
-- cloud
-- eks
-- gke
-- aks
-- ack
-- gateway
-- webhook
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 云架构师
-- 运维工程师
-estimated_read_time: 5min
-intent_queries:
-- 专有云 (Apsara Stack) - POP 平台运维 (ASOP) 是什么
-- 如何 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
-- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
-trigger_keywords:
-- 专有云
-- Apsara
-- Stack
-- POP
-- 平台运维
-- ASOP
-- cloud
-- provider
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # 专有云 (Apsara Stack) - POP 平台运维 (ASOP)
 
 > **环境**: Apsara Stack 企业版/精简版 | **最后更新**: 2026-01
@@ -198,10 +153,10 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 ## See Also
 
-- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/专有云-Apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
 - logging.md|251-apsara-stack-sls-logging]]
-- [[云厂商/阿里云/apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/专有云-Apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[云厂商/阿里云/专有云-Apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
 
 
 <!-- risk-assessed -->

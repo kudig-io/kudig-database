@@ -1,3 +1,0 @@
-message: display a warning message when Kong Manager is enabled but the Admin API is not enabled
-type: feature
-scope: Configuration

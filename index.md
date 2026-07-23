@@ -95,4 +95,4 @@ trigger_keywords:
 
 - [[实体/k8s-glossary-index.md|K8s 术语表索引]]
 - [[实体/k8s-knowledge-map.md|Kubernetes Knowledge Map]]
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]

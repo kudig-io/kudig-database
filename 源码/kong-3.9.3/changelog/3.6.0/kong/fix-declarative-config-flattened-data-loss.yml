@@ -1,3 +1,0 @@
-message: fix error data loss caused by weakly typed of function in declarative_config_flattened function
-type: bugfix
-scope: Configuration

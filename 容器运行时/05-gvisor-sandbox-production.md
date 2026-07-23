@@ -169,6 +169,179 @@ ls /var/run/runsc/<container-id>/
 - [ ] 业务应用已过 gVisor 兼容性测试
 - [ ] 文件密集负载启用 overlay 缓存
 
+## 故障排查
+
+| 问题 | 可能原因 | 诊断命令 | 解决方案 |
+|------|----------|----------|----------|
+| 容器启动失败 | runsc 二进制缺失 | `which runsc` | 安装 gVisor 并配置 PATH |
+| 系统调用不支持 | gVisor 未实现该 syscall | `runsc debug --strace` | 检查兼容性列表或切换运行时 |
+| 性能下降明显 | 文件 I/O 密集 | `runsc --overlay2` | 启用 overlay 缓存 |
+| 网络异常 | netstack 兼容性问题 | `runsc debug --network` | 检查网络配置或切换 hostnet |
+| 内核版本不兼容 | 内核过旧 | `uname -r` | 升级到 4.15+ |
+| 内存使用异常 | sentry 内存泄漏 | `runsc debug --profile=heap` | 升级到已修复版本 |
+| GPU 不可用 | gVisor 不支持 GPU | `nvidia-smi` | GPU 工作负载用 runc |
+| 文件权限问题 | gofer 进程异常 | `ps aux | grep gofer` | 检查 gofer 配置和权限 |
+
+## gVisor 架构详解
+
+```text
+gVisor 架构层次：
+
+应用容器进程
+  └── Sentry（用户态内核）
+       ├── 系统调用拦截和模拟
+       ├── VFS（虚拟文件系统）
+       ├── Netstack（用户态网络栈）
+       └── 平台层（ptrace/KVM/systrap）
+            └── Gofer（文件代理进程）
+                 └── 宿主机文件系统
+```
+
+## 生产最佳实践
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 兼容性 | 业务应用先过 gVisor 兼容性测试 | 避免生产故障 |
+| 节点池 | RuntimeClass + nodeSelector 隔离 | 专用节点运行 gVisor |
+| 文件 I/O | 文件密集负载启用 overlay 缓存 | 显著提升性能 |
+| 平台 | 生产使用 systrap 平台 | 性能和稳定性最佳 |
+| 监控 | 监控 sentry 内存和 CPU | 异常及时告警 |
+| 升级 | 随 containerd 一起升级 runsc | 保持版本一致 |
+| 回滚 | 保留 runc 作为默认运行时 | 问题时可快速切回 |
+| 测试 | 定期运行 gVisor 兼容性测试套件 | 确保新版本兼容 |
+
+## 相关工具
+
+| 工具 | 用途 | 安装/使用 |
+|------|------|----------|
+| runsc | gVisor 运行时 | 随 gVisor 安装 |
+| runsc debug | 调试工具 | `runsc debug --strace <id>` |
+| containerd-shim-runsc-v1 | K8s 集成 shim | 随 gVisor 安装 |
+| kubectl | RuntimeClass 管理 | `kubectl get runtimeclass` |
+| crictl | 容器调试 | `crictl info` |
+| gvisor-tap-vsock | 网络工具 | 随 gVisor 分发 |
+
+## 常见问题 FAQ
+
+| 问题 | 解答 |
+|------|------|
+| gVisor 支持哪些系统调用？ | 大部分 Linux syscall，查看官方兼容性列表 |
+| 性能开销多大？ | CPU 密集 5-10%，I/O 密集 20-40% |
+| 需要硬件虚拟化吗？ | 不需要，ptrace/systrap 模式无需 KVM |
+| 如何查看不支持的 syscall？ | `runsc debug --strace` 查看 UNSUPPORTED |
+| gVisor 和 Kata 如何选择？ | 无 KVM 环境选 gVisor，强隔离选 Kata |
+| 如何调试 gVisor 容器？ | `runsc debug --strace` 或查看 sentry 日志 |
+| 支持 GPU 吗？ | 不支持，GPU 工作负载用 runc |
+| 如何升级 runsc？ | 下载新版本替换二进制，重启 containerd |
+
+## gVisor 配置示例
+
+```toml
+# /etc/containerd/config.toml - gVisor 运行时配置
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
+  runtime_type = "io.containerd.runsc.v1"
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc.options]
+    TypeUrl = "io.containerd.runsc.v1.options"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc.options.config]
+      # 使用 systrap 平台（推荐）
+      platform = "systrap"
+      # 启用 overlay 缓存（文件 I/O 密集场景）
+      overlay2 = "all"
+      # 网络配置
+      network = "sandbox"
+      # 调试模式（仅排障用）
+      debug = false
+      strace = false
+```
+
+## 性能调优
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| 文件 I/O 慢 | overlay 缓存 | 配置 overlay2 = "all" |
+| 网络延迟 | 网络模式 | 评估 hostnet vs sandbox |
+| CPU 密集 | 平台选择 | 使用 systrap 平台 |
+| 启动慢 | 预热 | 节点初始化时预加载 runsc |
+| 内存占用 | 监控 sentry | 检查内存泄漏 |
+| 兼容性 | 测试套件 | 运行前过兼容性测试 |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| sentry_memory_bytes | Sentry 内存 | > 512MB |
+| sentry_cpu_seconds | Sentry CPU | 持续 > 80% |
+| gofer_requests | Gofer 请求数 | 异常增长 |
+| syscall_unsupported | 不支持的 syscall | > 0 |
+| container_start_duration | 启动耗时 | P99 > 1s |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 平台 | 使用 systrap | 比 ptrace 更安全 |
+| 网络 | sandbox 模式 | 完全隔离网络栈 |
+| 文件 | overlay 只读 | 防止容器内修改 |
+| 升级 | 及时更新 runsc | 修复已知漏洞 |
+| 测试 | 定期兼容性测试 | 确保新版本兼容 |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| runc | gVisor | 安装 runsc→配置 containerd→RuntimeClass |
+| ptrace | systrap | 修改配置 platform = "systrap" |
+| 无 overlay | overlay | 配置 overlay2 = "all" |
+| 单节点 | 多节点 | 配置专用节点池 |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| runsc 二进制 | `which runsc` | 存在 |
+| runsc 版本 | `runsc --version` | 最新稳定版 |
+| shim | `which containerd-shim-runsc-v1` | 存在 |
+| RuntimeClass | `kubectl get runtimeclass gvisor` | 存在 |
+| Pod 生效 | `kubectl get pod -o jsonpath='{.status.runtimeHandler}'` | runsc |
+| 兼容性 | 运行测试套件 | 通过 |
+| 性能 | 基准测试 | 在预期范围 |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| gVisor 2018 | 2018 | 初始发布 |
+| systrap 平台 | 2023 | 替代 ptrace，性能提升 |
+| overlay2 | 2022 | 文件 I/O 优化 |
+| netstack 改进 | 2024 | 网络性能提升 |
+
+## 架构对比
+
+```text
+gVisor vs runc vs Kata：
+
+runc:
+  容器进程 → 宿主机内核 (共享)
+  隔离：namespace + cgroup
+
+gVisor:
+  容器进程 → Sentry (用户态内核) → 宿主机内核
+  隔离：系统调用拦截
+
+Kata:
+  容器进程 → Guest 内核 → Hypervisor → 宿主机
+  隔离：硬件虚拟化
+```
+
+## 容量规划
+
+| 场景 | 建议配置 | 说明 |
+|------|----------|------|
+| 多租户 | systrap + overlay | 性能 + 安全 |
+| 文件密集 | overlay2=all | I/O 优化 |
+| 网络密集 | 评估 hostnet | 性能权衡 |
+| 通用 | 默认配置 | 足够 |
+
 ## 相关文档
 
 - [[容器运行时/运行时迁移/02-runtime-class-configuration.md|RuntimeClass 配置]]

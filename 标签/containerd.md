@@ -190,6 +190,41 @@ last_updated: '2026-07-21'
 
 - [[综合/container-runtime-image-security|容器运行时与镜像安全]]
 
+## containerd 技术全景
+
+### containerd 架构
+
+| 组件 | 功能 |
+|---|---|
+| containerd | 容器运行时守护进程 |
+| runc | OCI 运行时 |
+| ctr | 调试 CLI |
+| crictl | CRI 调试工具 |
+
+### 常用命令
+
+```bash
+# 🟢 查看容器
+crictl ps
+# 🟢 查看镜像
+crictl images
+# 🟡 拉取镜像
+crictl pull <image>
+# 🟢 查看日志
+crictl logs <container-id>
+```
+
+## 面试要点
+
+1. **Q：containerd vs Docker 的区别？**
+   A：Docker：完整平台(构建/编排)。containerd：轻量运行时。K8s 1.24+ 移除 dockershim。
+
+2. **Q：CRI 的工作原理？**
+   A：kubelet 通过 CRI gRPC 调用 containerd。RuntimeService(容器) + ImageService(镜像)。
+
+3. **Q：containerd 故障排查？**
+   A：systemctl status containerd→journalctl→crictl 检查→配置文件→重启。
+
 ## Related Tags
 
 - [[标签/k8s|k8s]]

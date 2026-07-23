@@ -1,3 +1,0 @@
-message: "add scan_count to redis storage schema"
-type: feature
-scope: Plugin

@@ -1,3 +1,0 @@
-message: "Expose metrics for serviceless routes"
-type: bugfix
-scope: Plugin

@@ -1,9 +1,0 @@
-.box {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-
-  span {
-    margin-right: 10px;
-  }
-}

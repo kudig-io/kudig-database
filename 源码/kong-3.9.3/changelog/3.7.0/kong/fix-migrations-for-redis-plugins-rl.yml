@@ -1,3 +1,0 @@
-message: "**Rate-Limiting**: Fixed migration of redis configuration."
-type: bugfix
-scope: Plugin

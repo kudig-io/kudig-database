@@ -289,7 +289,7 @@ spec:
 - [[实体/k8s-networking-ecosystem.md|网络体系：CNI、Service、Ingress、Gateway API 与多集群网络]] — Cross-reference
 - [[实体/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - [[实体/k8s-networking-domain-guide.md|Kubernetes Networking Domain Guide]] — Cross-reference
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[概念/service-mesh-evolution.md|服务网格演进]] — Cross-reference
 - [[概念/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference

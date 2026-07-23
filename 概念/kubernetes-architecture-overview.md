@@ -190,7 +190,7 @@ kubectl get --raw='/metrics' | grep apiserver_watch_events
 - [[实体/kube-apiserver.md|kube-apiserver]]
 - [[实体/kube-scheduler.md|kube-scheduler]]
 - [[实体/kubelet.md|kubelet]]
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 
 - Kubernetes 架构全景图

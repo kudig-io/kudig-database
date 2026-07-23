@@ -233,7 +233,7 @@ kubectl rollout restart deployment/backstage -n backstage
 - 99-backstage-idp-guide
 - 05-backstage-scaffolder-templates
 - backstage
-- [[概念/GitOps x 平台工程.md|GitOps x 平台工程]] — Cross-reference
+- [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[概念/platform-engineering-idp.md|Platform Engineering and Internal Developer Platforms]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

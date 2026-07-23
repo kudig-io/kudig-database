@@ -275,7 +275,7 @@ Registry 异常
 
 - 02-docker-registry-enterprise-distribution
 - distribution
-- [[概念/etcd x 高可用模式.md|[[etcd × 高可用模式|etcd × 高可用模式]]]] — Cross-reference
+- [[概念/etcd × 高可用模式.md|[[etcd × 高可用模式|etcd × 高可用模式]]]] — Cross-reference
 - [[实体/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
 
 

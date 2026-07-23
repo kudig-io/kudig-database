@@ -48,54 +48,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
-description: '# 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析'
-category: cloud-provider
-tags:
-- k8s
-- cloud
-- eks
-- gke
-- aks
-- ack
-- [[etcd|etcd]]
-- mysql
-- [[StatefulSet|statefulset]]
-- [[DaemonSet|daemonset]]
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 云架构师
-- 运维工程师
-estimated_read_time: 5min
-intent_queries:
-- 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析 是什么
-- 如何 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
-- [[Kubernetes|Kubernetes]] 17 cloud provider 最佳实践
-trigger_keywords:
-- 阿里云专有版
-- ACK
-- Apsara
-- Stack
-- ACK
-- 金融级深度解析
-- cloud
-- provider
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # 阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析
 
 ## 产品概述与定位
@@ -722,10 +674,10 @@ echo "诊断报告已保存到: $REPORT_FILE"
 
 ## See Also
 
-- [[云厂商/阿里云/apsara/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
-- [[云厂商/阿里云/apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[云厂商/阿里云/apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
-- [[云厂商/阿里云/apsara/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- [[云厂商/阿里云/专有云-Apsara/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
+- [[云厂商/阿里云/专有云-Apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[云厂商/阿里云/专有云-Apsara/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]
+- [[云厂商/阿里云/专有云-Apsara/251-apsara-stack-sls-logging.md|251-apsara-stack-sls-logging]]
 
 
 <!-- risk-assessed -->

@@ -182,6 +182,38 @@ Cloud (云平台) → Cluster (集群) → Container (容器) → Code (代码)
 - [[实体/tetragon|Tetragon]]
 - [[实体/k8s-security-compliance|Kubernetes Security Compliance]]
 
+## 安全标签全景
+
+### K8s 安全分层
+
+| 层次 | 内容 |
+|---|---|
+| 集群 | API Server、etcd、RBAC |
+| 节点 | kubelet、容器运行时 |
+| 应用 | Pod Security、网络策略 |
+| 数据 | Secret 加密、备份 |
+| 供应链 | 镜像签名、漏洞扫描 |
+
+### 安全工具链
+
+| 类别 | 工具 |
+|---|---|
+| 策略 | OPA Gatekeeper, Kyverno |
+| 运行时 | Falco, Sysdig |
+| 扫描 | Trivy, Clair |
+| 密钥 | Vault, Sealed Secrets |
+
+## 面试要点
+
+1. **Q：K8s 安全的核心原则？**
+   A：最小权限、纵深防御、零信任、持续验证、安全左移。
+
+2. **Q：Pod Security Standards 的级别？**
+   A：Privileged(无限制)、Baseline(基本防护)、Restricted(严格限制)。
+
+3. **Q：供应链安全如何保障？**
+   A：镜像签名、漏洞扫描、SBOM、私有仓库、构建可重现。
+
 ## Related Tags
 
 - [[标签/k8s|k8s]]

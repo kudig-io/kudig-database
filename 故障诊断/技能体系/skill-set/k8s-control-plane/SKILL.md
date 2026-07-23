@@ -154,7 +154,7 @@ API [[实体/etcd.md|etcd]]/Scheduler 问题的诊断与修复 Skill。
 
 - [[脚本/video-scripts/node-notready.md|node notready]]
 
-- [[技能/best-practices/scenarios/security-incident.md|security incident]]
+- [[最佳实践/scenarios/security-incident.md|security incident]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

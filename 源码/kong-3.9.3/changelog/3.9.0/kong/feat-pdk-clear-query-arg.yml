@@ -1,3 +1,0 @@
-message: Added `kong.service.request.clear_query_arg(name)` to PDK.
-type: feature
-scope: PDK

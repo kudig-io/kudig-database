@@ -187,6 +187,160 @@ sudo rm -rf /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs
 | rootless 为什么不能用 overlayfs？ | 需要内核 5.11+ 或 unprivileged_userns_clone=1 |
 | 镜像层数上限是多少？ | overlayfs 默认 128 层，超过需合并 |
 
+## Snapshotter 配置示例
+
+```toml
+# /etc/containerd/config.toml - overlayfs 配置
+version = 2
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  snapshotter = "overlayfs"
+  disable_snapshot_annotations = false
+
+# devmapper 配置示例
+[plugins."io.containerd.snapshotter.v1.devmapper"]
+  pool_name = "containerd-pool"
+  root_path = "/var/lib/containerd/devmapper"
+  base_image_size = "10GB"
+  discard_blocks = true
+
+# stargz 懒加载配置
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  snapshotter = "stargz"
+[proxy_plugins.stargz]
+  type = "snapshot"
+  address = "/run/containerd-stargz-grpc/containerd-stargz-grpc.sock"
+```
+
+## 性能调优指南
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| 镜像拉取慢 | 减少层数 | 合并 Dockerfile RUN 指令 |
+| 容器启动慢 | 懒加载 | 配置 stargz/nydus snapshotter |
+| 磁盘 I/O 高 | 独立数据盘 | 将 /var/lib/containerd 挂载到 SSD |
+| 空间不足 | 及时清理 | 配置 kubelet image GC 阈值 |
+| 大镜像场景 | 按需加载 | nydus/stargz 只拉取需要的层 |
+| 高并发拉取 | 并行度调优 | 调整 containerd max_concurrent_downloads |
+
+## 版本兼容性
+
+| containerd 版本 | 支持的 snapshotter | 说明 |
+|----------------|-------------------|------|
+| 1.6.x | overlayfs/native/devmapper/zfs/btrfs | 稳定版 |
+| 1.7.x | + stargz/nydus (proxy plugin) | 懒加载支持 |
+| 2.0.x | 全部 + 新插件接口 | 新架构 |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| containerd_snapshot_count | 快照总数 | > 1000 |
+| disk_usage_percent | 磁盘使用率 | > 80% |
+| snapshot_create_duration | 快照创建耗时 | P99 > 5s |
+| image_pull_duration | 镜像拉取耗时 | P99 > 60s |
+| gc_reclaimed_bytes | GC 回收空间 | 持续为 0 需检查 |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| 数据目录 | 独立挂载，权限 700 | 避免信息泄露 |
+| 镜像验证 | 启用签名验证 | cosign + admission |
+| 清理 | 定期 GC | 避免磁盘占满 |
+| 监控 | 磁盘使用率告警 | > 80% 告警 |
+| 备份 | 关键镜像多副本 | 避免单点故障 |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| native | overlayfs | 停容器→改配置→重启→重拉镜像 |
+| overlayfs | stargz | 安装 stargz-snapshotter→配置 proxy plugin |
+| overlayfs | devmapper | 创建 thin pool→配置→重启 |
+| overlayfs | nydus | 安装 nydusd→配置→重启 |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| 当前 snapshotter | `crictl info` | 显示预期值 |
+| 磁盘使用 | `du -sh /var/lib/containerd/` | < 80% 容量 |
+| 镜像层数 | `ctr images ls` | < 128 层 |
+| GC 状态 | `journalctl -u containerd` | 无错误 |
+| 性能 | `crictl pull` 计时 | < 60s |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| containerd 1.0 | 2017 | overlayfs 默认 |
+| containerd 1.4 | 2020 | devmapper 稳定 |
+| containerd 1.6 | 2022 | stargz 插件支持 |
+| containerd 1.7 | 2023 | nydus 插件支持 |
+| containerd 2.0 | 2024 | 新插件接口 |
+
+## 架构对比
+
+```text
+Snapshotter 架构层次：
+
+overlayfs:
+  upperdir (writable) → merged → container rootfs
+  lowerdir (read-only layers)
+
+devmapper:
+  thin pool → thin volume → container rootfs
+
+stargz/nydus (lazy loading):
+  registry → on-demand fetch → FUSE mount → container rootfs
+```
+
+## 容量规划
+
+| 场景 | 建议容量 | 说明 |
+|------|----------|------|
+| 小集群 (<50 节点) | 100GB/节点 | 基础容量 |
+| 中集群 (50-200) | 200GB/节点 | 含镜像缓存 |
+| 大集群 (>200) | 500GB/节点 | 含多版本镜像 |
+| 大镜像场景 | 1TB/节点 | AI/ML 工作负载 |
+
+## 故障排查（补充）
+
+| 问题 | 可能原因 | 诊断命令 | 解决方案 |
+|------|----------|----------|----------|
+| overlayfs 挂载失败 | 内核不支持 | `dmesg | grep overlay` | 升级内核或加载模块 |
+| devmapper 初始化失败 | thin pool 不存在 | `dmsetup ls` | 创建 thin pool |
+| stargz 拉取失败 | registry 不支持 range | `curl -I -r 0-1 <url>` | 确认 registry 配置 |
+| nydus 挂载失败 | nydusd 未启动 | `systemctl status nydusd` | 启动 nydusd |
+| 磁盘 I/O 高 | 层数过多 | `iostat -x 1` | 优化镜像层数 |
+| 空间不足 | GC 未触发 | `du -sh /var/lib/containerd/` | 手动 GC 或调阈值 |
+| 权限拒绝 | 目录权限错误 | `ls -la /var/lib/containerd/` | 修正权限 |
+| 性能下降 | 磁盘碎片 | `filefrag /var/lib/containerd/` | 整理或更换磁盘 |
+
+## 常见问题 FAQ（补充）
+
+| 问题 | 解答 |
+|------|------|
+| overlayfs 与 devmapper 如何选择？ | 通用场景用 overlayfs，需要块级隔离用 devmapper |
+| stargz 懒加载如何启用？ | 配置 stargz snapshotter 插件，镜像需转换为 estargz 格式 |
+| nydus 与 stargz 区别？ | nydus 支持去重和 P2P，stargz 更轻量且兼容 OCI |
+| 如何查看当前 snapshotter？ | `containerd config dump | grep snapshotter` |
+| 切换 snapshotter 需要重启吗？ | 是，且已有容器需重建 |
+| overlayfs 层数限制？ | 内核默认 128 层，建议镜像 < 50 层 |
+| devmapper thin pool 如何创建？ | `lvcreate` 创建 thin pool 或使用 loopback 文件 |
+| 如何监控 snapshotter 性能？ | containerd metrics + node_exporter diskstats |
+
+## 性能调优参数
+
+| 参数 | 默认值 | 生产建议 | 说明 |
+|------|--------|----------|------|
+| `root_path` | /var/lib/containerd | SSD 路径 | 数据目录 |
+| `sync_remove` | false | true | 删除时同步刷盘 |
+| `upperdir_label` | false | true | 支持 SELinux 标签 |
+| `max_open_files` | 1024 | 65535 | 高并发场景调大 |
+| `discard_blocks` | false | true (SSD) | SSD 启用 TRIM |
+| `io_priority` | 无 | best-effort | I/O 调度优先级 |
+
 ## 相关文档
 
 - [[容器运行时/containerd-CRI-O/07-containerd-configuration-deep-guide.md|containerd 配置深度指南]]

@@ -191,8 +191,8 @@ Agent 响应异常 → 检查 Agent Pod 状态
 
 ## Related
 
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
-- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — 纵深防御 x 供应链安全
+- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — 服务网格 x 零信任安全
 - [[实体/k8s-security-compliance.md|k8s-security-compliance]] — 安全合规
 - [[deployment]] — Deployment
 - [[实体/milvus.md|Milvus]] — 向量数据库

@@ -31,7 +31,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 relationships:
-- target: '[[技能/best-practices/best-practices/observability/monitoring.md]]'
+- target: '[[最佳实践/best-practices/observability/monitoring.md]]'
   type: related_to
 - target: '[[系统基础/知识字典/observability/observability.md]]'
   type: related_to
@@ -217,7 +217,7 @@ spec:
 ## 相关 Domain
 
 - [[可观测性/SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]]
-- [[系统基础/知识字典/observability/observability.md|observability]]/02-metrics/02-[[技能/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
+- [[系统基础/知识字典/observability/observability.md|observability]]/02-metrics/02-[[最佳实践/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
 - 发布变更/01-[[系统基础/速查卡/gitops.md|gitops]]/01-gitops-principles
 
 ## 相关页面

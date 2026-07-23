@@ -326,7 +326,7 @@ kubectl apply -f certificate.yaml
 - [[概念/security-tool-evolution.md|安全工具演进]] — Cross-reference
 - [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
 - [[技能/ts-security-auth.md|安全认证故障排查]] — Cross-reference
-- [[技能/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
 - [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference
 - [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference

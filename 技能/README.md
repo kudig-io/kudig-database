@@ -11,7 +11,7 @@ tags:
 - best-practices
 tier: core
 created: '2026-05-23'
-last_updated: '2026-07-21'
+last_updated: '2026-07-23'
 difficulty: intermediate
 audience:
 - 所有工程师
@@ -24,35 +24,42 @@ estimated_read_time: 15min
 >
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
-
-
-
 # 技能 Skills & Training
 
-## FTA 故障树索引
-
-> **文档数量**: 36 个故障树 | **总大小**: ~1.2 MB | **最后更新**: 2026-03-02
+> 完整索引（含高频标记）请参阅 **[index.md](index.md)**
 
 ---
 
-## 概述
+## 目录结构
 
-本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：
-- 完整的 Mermaid 故障树图（OR/AND 门结构）
-- 底事件详细定义（severity/probability/MTTR/detection/remediation）
-- JSON 工作流（支持 Agent 自动化遍历）
-- K8s 版本兼容说明（1.19–1.30）
-
----
-
-## 文件大小分布
-
-| 分类 | 文件数 | 大小范围 |
-|:---|:---:|:---|
-| 大型 (>40 KB) | 8 | 44.0 KB – 58.8 KB |
-| 中型 (25–40 KB) | 15 | 25.9 KB – 38.9 KB |
-| 标准 (20–25 KB) | 9 | 20.3 KB – 24.9 KB |
-| 紧凑 (<20 KB) | 4 | 14.8 KB – 18.9 KB |
+```
+技能/
+├── index.md                     # 完整索引（含工单TOP/最佳实践TOP/产品高频标记）
+├── README.md                    # 本文件
+│
+├── 故障诊断-工作负载/            # Pod/Deployment/StatefulSet/DaemonSet/Job/HPA
+├── 故障诊断-网络/                # DNS/Service/Ingress/CNI/Gateway API/Mesh
+├── 故障诊断-控制面/              # APIServer/Scheduler/KCM/etcd/CRD
+├── 故障诊断-存储/                # CSI/PV/PVC
+├── 故障诊断-安全/                # RBAC/证书/Webhook/PSA/Quota
+├── 故障诊断-节点/                # Node/NodePool/GPU
+├── 故障诊断-可观测性/            # 监控/日志/链路
+├── 故障诊断-集群运维/            # 升级/Autoscaler/CloudProvider/GitOps/Helm
+│
+├── 排障实战/                     # ts-* 命令输出解读式排障（13 个子域）
+├── 运维操作/                     # 可执行操作技能（探针/节点维护/发布/kubeadm）
+├── fta-方法论/                   # FTA 方法论、诊断引擎、症状匹配
+├── skill-参考资料/               # 诊断工作流/修复手册/根因目录/版本矩阵
+│
+├── 最佳实践指南/                 # k8s-*-guide 系列（11 个配置指南）
+├── best-practices/              # 生产运维最佳实践合集（部署/迁移/场景）
+├── 技能建设最佳实践/             # 技能文件编写规范
+│
+├── 培训学习/                     # 学习路径/OnCall培训/讲师/公开课
+├── 能力评估/                     # 测验/考核
+├── agent-编排/                   # Agent 编排模式/规格/提示词
+└── skill-k8s-node-notready/     # Node NotReady 完整诊断技能
+```
 
 ---
 
@@ -60,139 +67,92 @@ estimated_read_time: 15min
 
 ### 1. 核心工作负载
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [pod-fta.md](pod-fta.md) | 58.8 KB | Pod 全生命周期异常（调度/镜像/运行时/健康检查/网络/存储/安全/节点/控制面） | ~80 |
-| [deployment-fta.md]([[故障诊断/FTA故障树/list/deployment-fta.md|deployment-fta]].md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
-| [statefulset-fta.md]([[故障诊断/FTA故障树/list/statefulset-fta.md|statefulset-fta]].md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
-| [daemonset-fta.md]([[故障诊断/FTA故障树/list/daemonset-fta.md|daemonset-fta]].md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
-| [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
+| 文件夹 | 覆盖范围 |
+|:---|:---|
+| [故障诊断-工作负载/pod/](故障诊断-工作负载/pod/) | Pod 全生命周期异常（~80 底事件） |
+| [故障诊断-工作负载/deployment/](故障诊断-工作负载/deployment/) | Deployment 滚动更新/副本/选择器/发布策略 |
+| [故障诊断-工作负载/statefulset/](故障诊断-工作负载/statefulset/) | StatefulSet 有序部署/持久卷/网络标识 |
+| [故障诊断-工作负载/daemonset/](故障诊断-工作负载/daemonset/) | DaemonSet 节点调度/污点/滚动更新 |
+| [故障诊断-工作负载/job-cronjob/](故障诊断-工作负载/job-cronjob/) | Job/CronJob 调度/并发/超时 |
+| [故障诊断-工作负载/hpa-vpa/](故障诊断-工作负载/hpa-vpa/) | HPA/VPA/PDB 弹性伸缩 |
 
 ### 2. 网络与流量
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [dns-fta.md](dns-fta.md) | 24.2 KB | CoreDNS/集群 DNS/外部 DNS 解析/缓存/NXDOMAIN | ~28 |
-| [service-fta.md](service-fta.md) | 25.9 KB | Service 类型/Endpoints/kube-proxy/负载均衡/会话亲和 | ~30 |
-| [ingress-fta.md]([[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]].md) | 26.3 KB | Ingress Controller/TLS 终止/路由/后端健康/注解 | ~30 |
-| [networkpolicy-fta.md]([[故障诊断/FTA故障树/list/networkpolicy-fta.md|networkpolicy-fta]].md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
-| [gateway-api-fta.md]([[故障诊断/FTA故障树/list/gateway-api-fta.md|gateway-api-fta]].md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
-| [terway-fta.md]([[故障诊断/FTA故障树/list/terway-fta.md|terway-fta]].md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
+| 文件夹 | 覆盖范围 |
+|:---|:---|
+| [故障诊断-网络/dns/](故障诊断-网络/dns/) | CoreDNS/集群DNS/外部解析/缓存 |
+| [故障诊断-网络/service/](故障诊断-网络/service/) | Service/Endpoints/kube-proxy/负载均衡 |
+| [故障诊断-网络/ingress/](故障诊断-网络/ingress/) | Ingress/Nginx/Higress/TLS/路由 |
+| [故障诊断-网络/cni/](故障诊断-网络/cni/) | Terway/Calico/Cilium/Flannel |
+| [故障诊断-网络/gateway-api/](故障诊断-网络/gateway-api/) | Gateway API/HTTPRoute/GRPCRoute |
+| [故障诊断-网络/service-mesh/](故障诊断-网络/service-mesh/) | Istio Sidecar/流量管理/mTLS |
 
 ### 3. 控制面组件
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [apiserver-fta.md](apiserver-fta.md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
-| [scheduler-fta.md](scheduler-fta.md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
-| [controller-manager-fta.md]([[故障诊断/FTA故障树/list/controller-manager-fta.md|controller-manager-fta]].md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
-| [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
+| 文件夹 | 覆盖范围 |
+|:---|:---|
+| [故障诊断-控制面/apiserver/](故障诊断-控制面/apiserver/) | 认证/授权/准入/etcd连接/限流 |
+| [故障诊断-控制面/scheduler/](故障诊断-控制面/scheduler/) | 过滤/打分/抢占/亲和性/扩展点 |
+| [故障诊断-控制面/controller-manager/](故障诊断-控制面/controller-manager/) | Leader选举/控制器/同步/限速 |
+| [故障诊断-控制面/etcd/](故障诊断-控制面/etcd/) | Raft/存储/快照/备份恢复 |
 
-### 4. 存储
+### 4. 存储 / 安全 / 节点
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [csi-fta.md](csi-fta.md) | 18.9 KB | CSI Controller/Node Plugin/卷挂载/性能/认证/后端 | ~22 |
+| 文件夹 | 覆盖范围 |
+|:---|:---|
+| [故障诊断-存储/csi-storage/](故障诊断-存储/csi-storage/) | CSI/PV/PVC/挂载/后端 |
+| [故障诊断-安全/rbac/](故障诊断-安全/rbac/) | RBAC 权限/审计 |
+| [故障诊断-安全/certificate/](故障诊断-安全/certificate/) | 证书签发/轮换/过期 |
+| [故障诊断-节点/node/](故障诊断-节点/node/) | NotReady/资源压力/kubelet |
 
-### 5. 安全与准入
+---
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [rbac-fta.md](rbac-fta.md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
-| [certificate-fta.md](certificate-fta.md) | 52.6 KB | 证书签发/轮换/过期/CA 链/cert-manager/TLS | ~60 |
-| [webhook-admission-fta.md](webhook-admission-fta.md) | 50.5 KB | Webhook 超时/TLS/失败策略/副作用/匹配规则 | ~58 |
-| [psp-scc-fta.md](psp-scc-fta.md) | 44.0 KB | PSP/SCC/PSA 策略迁移/安全上下文/特权容器 | ~50 |
-| [resource-quota-fta.md](resource-quota-fta.md) | 38.9 KB | ResourceQuota/LimitRange/配额计算/命名空间限制 | ~45 |
+## 技能域使用指南
 
-### 6. 节点与基础设施
+### 学习路径
 
-| 文件 | 大小 | 覆盖范围 | 底事件数 |
-|:---|---:|:---|:---:|
-| [node-fta.md](node-fta.md) | 27.4 KB | 节点状态/kubelet/容器运行时/磁盘/内存/网络 | ~32 |
-| [nodepool-fta.md](nodepool-fta.md) |
+| 阶段 | 内容 | 前置要求 |
+|------|------|----------|
+| L1 基础 | [培训学习/learning-path/](培训学习/learning-path/) — 15 课入门 | Linux 基础 |
+| L2 进阶 | [排障实战/](排障实战/) — 命令输出解读式排障 | L1 + K8s 架构 |
+| L3 高级 | [fta-方法论/](fta-方法论/) + [最佳实践指南/](最佳实践指南/) | L2 + 生产经验 |
+| L4 专家 | [agent-编排/](agent-编排/) + 架构设计 | L3 + 多领域经验 |
+
+### 文件分类统计
+
+| 类型 | 目录 | 数量 | 用途 |
+|------|------|------|------|
+| FTA 故障树 | 故障诊断-*/ | 36 | 结构化故障诊断 |
+| 排障实战 | 排障实战/ | 15 | 命令输出解读 |
+| 操作技能 | 运维操作/ | 7 | 可执行运维操作 |
+| 最佳实践 | 最佳实践指南/ + best-practices/ | 30+ | 配置和操作指南 |
+| 培训材料 | 培训学习/ | 25+ | 培训课程 |
+| 评估考核 | 能力评估/ | 4 | 能力评估 |
+
+### 常用命令速查
+
+```bash
+# Pod 故障排查
+kubectl get pods -A --field-selector=status.phase!=Running
+kubectl describe pod <name> -n <ns>
+kubectl logs <pod> --previous -n <ns>
+
+# 节点故障排查
+kubectl get nodes -o wide
+kubectl describe node <name>
+journalctl -u kubelet --since "10min ago"
+
+# 网络诊断
+kubectl exec <pod> -- nslookup kubernetes.default
+kubectl get endpoints <svc> -n <ns>
+```
 
 ## 相关链接
 
-- [[技能/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-
-## Related
-
-- [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
-- [[service-fta]] — Service 异常故障树分析
-- [[resource-quota-fta]] — ResourceQuota 异常故障树分析
-- [[psp-scc-fta]] — PSP/SCC 异常故障树分析
-- [[nodepool-fta]] — NodePool 异常故障树分析
-
-- [[系统基础/README.md|Domain-33: Kubernetes Events 全域事件大全]]
-- [[工作负载/README.md|Java on Kubernetes 综合实践指南]]
-- [[容器运行时/README.md|Docker 容器技术深度解析]]
-- [[安全/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
-- [[发布变更/README.md|Domain 08: 基础设施即代码 (Infrastructure as Code)]]
-- [[网络/README.md|Domain 03: 企业级服务网格与微服务治理 (Enterprise Service Mesh & Microservices Governance)]]
-- [[发布变更/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
-- [[生态参考/README.md|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)]]
-- [[网络/README.md|Domain-15: 网络基础]]
-- [[清单模式/README.md|Domain-32: Kubernetes YAML 配置完整参考手册]]
-- [[集群基础/README.md|Domain-3: Kubernetes控制平面]]
-- [[平台工程/README.md|Domain 07: 平台工程 (Platform Engineering)]]
-- [[可观测性/README.md|Observability Domain (可观测性领域)]]
-- [[云厂商/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
-- [[生态参考/README.md|Domain-34: CNCF Landscape 开源项目]]
-- [[平台工程/README.md|Platform Ops Domain (平台运维领域)]]
+- [[故障诊断/README.md|Domain-12 故障排查]]
+- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析方法论]]
+- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 循证方法论]]
+- [[生产运维/README.md|Domain 11: 生产环境运维最佳实践]]
 - [[AI基础设施/README.md|AI Agent 工程专题]]
-- [[生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- README-old
-- [[工作负载/README.md|Domain-4: Kubernetes工作负载管理]]
-- [[可观测性/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
-- [[可观测性/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
-- [[系统基础/README.md|Domain-14: Linux 基础知识体系]]
-- [[集群基础/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
-- [[专项技术/README.md|Domain 15: 边缘计算 (Edge Computing)]]
-- [[应用模式/README.md|Topic 应用层架构设计最佳实践]]
-- [[存储/README.md|Storage Domain 存储领域知识库]]
-- [[网络/README.md|Domain 03: Networking 网络]]
-- [[存储/README.md|Domain-16: 存储基础]]
-- [[可靠性/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]]
-- [[数据库中间件/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Operations)]]
-- [[集群基础/README.md|Domain-1: Kubernetes架构基础]]
-- [[安全/README.md|Security Domain]]
-- [[专项技术/README.md|Domain-10: Kubernetes 扩展生态]]
-- [[安全/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
-- [[AI基础设施/README.md|Domain-11: AI基础设施]]
-- [[故障诊断/README.md|Domain-12 故障排查 (Troubleshooting)]]
-- [[云厂商/README.md|Domain 12: 多云与混合云架构管理]]
-- [[容器运行时/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
-- [[网络/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technology Stack)]]
-- [[网络/README.md|Domain 03: eBPF 技术体系 (eBPF Technology Stack)]]
-- [[专项技术/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
-- [[发布变更/README.md|Domain 08: 自动化测试与质量保障 (Automated Testing & Quality Assurance)]]
-- [[系统基础/README.md|Domain 31 - 硬件基础设施]]
-- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/工具/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/list/README.md|FTA 故障树清单索引]]
-- Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- 网络 MOC — Cross-reference
-- Topic 应用层架构设计最佳实践 — Cross-reference
-- topic-application-architecture MOC — Cross-reference
-- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- 发布变更 MOC — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
-- Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
 
 <!-- risk-assessed -->

@@ -149,6 +149,38 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 
 - [[实体/k8s-production-operations|Kubernetes Production Operations]]
 
+## SRE 实践全景
+
+### SRE 核心原则
+
+| 原则 | 说明 |
+|---|---|
+| SLO 驱动 | 以服务水平目标为导向 |
+| 消除 Toil | 自动化重复性工作 |
+| 拥抱风险 | Error Budget 平衡创新与稳定 |
+| 可观测性 | 监控/日志/追踪三大支柱 |
+
+### SRE 工具链
+
+| 类别 | 工具 |
+|---|---|
+| 监控 | Prometheus, Grafana, Datadog |
+| 日志 | ELK, Loki, Fluentd |
+| 追踪 | Jaeger, Zipkin, Tempo |
+| 告警 | Alertmanager, PagerDuty |
+| 混沌 | Chaos Mesh, Litmus |
+
+## 面试要点
+
+1. **Q：SRE 与 DevOps 的区别？**
+   A：DevOps：文化/理念。SRE：具体实践/工程方法。SRE 是 DevOps 的一种实现。
+
+2. **Q：SLO/SLI/Error Budget 的关系？**
+   A：SLI：指标(成功率/延迟)。SLO：目标(99.9%)。Error Budget：1-SLO，允许失败的余量。
+
+3. **Q：如何消除 Toil？**
+   A：识别重复工作→自动化→平台化→持续优化。目标：Toil < 50% 工作时间。
+
 ## Related Tags
 
 - [[标签/k8s|k8s — Kubernetes 核心]]

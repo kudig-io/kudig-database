@@ -1,3 +1,0 @@
-message: Add missing WWW-Authenticate headers to 401 response in basic auth plugin.
-type: bugfix
-scope: Plugin

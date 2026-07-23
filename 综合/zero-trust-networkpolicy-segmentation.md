@@ -345,7 +345,7 @@ NetworkPolicy 允许了流量，但 Service Mesh AuthorizationPolicy 拒绝（�
 ## Related
 
 - [[概念/network-policy.md|网络策略]]
-- [[概念/networkpolicy.md|NetworkPolicy]]
+- [[概念/network-policy.md|NetworkPolicy]]
 - [[概念/service-mesh-zero-trust-security.md|服务网格零信任安全]]
 - [[实体/cilium.md|Cilium]]
 - [[概念/cilium-ebpf-networking.md|Cilium eBPF 网络]]

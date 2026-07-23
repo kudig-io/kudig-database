@@ -159,7 +159,7 @@ last_updated: '2026-07-21'
 - [[云厂商/AWS-EKS/99-aws-eks-production-runbook|AWS EKS 生产 Runbook]]
 - [[云厂商/Azure-AKS/99-azure-aks-production-runbook|Azure AKS 生产 Runbook]]
 - [[云厂商/Google-GKE/99-gke-production-runbook|GKE 生产 Runbook]]
-- [[云厂商/阿里云/ack/99-alicloud-ack-production-runbook|阿里云 ACK 生产 Runbook]]
+- [[云厂商/阿里云/公有云-ACK/99-alicloud-ack-production-runbook|阿里云 ACK 生产 Runbook]]
 - [[云厂商/华为云CCE/99-huawei-cce-production-runbook|华为云 CCE 生产 Runbook]]
 - [[云厂商/腾讯云TKE/99-tencent-tke-production-runbook|腾讯云 TKE 生产 Runbook]]
 
@@ -179,6 +179,38 @@ last_updated: '2026-07-21'
 ## 系统基础 (System Foundation)
 
 - [[系统基础/Linux/13-k8s-node-os-image-hardening-baseline|K8s 节点 OS 镜像加固基线]]
+
+## 生产环境全景
+
+### 生产就绪检查清单
+
+| 类别 | 检查项 |
+|---|---|
+| 高可用 | 多副本、PDB、跨 AZ |
+| 可观测 | 监控、日志、追踪、告警 |
+| 安全 | RBAC、PSS、网络策略、Secret 加密 |
+| 备份 | etcd 备份、PV 快照、恢复演练 |
+| 性能 | 资源限制、HPA、缓存 |
+
+### 生产环境关键指标
+
+| 指标 | 目标 |
+|---|---|
+| 可用性 | 99.9%+ |
+| P99 延迟 | <500ms |
+| 错误率 | <0.1% |
+| 恢复时间 | <5min |
+
+## 面试要点
+
+1. **Q：生产环境的核心要求？**
+   A：高可用、可观测、安全、可恢复、性能达标、成本可控。
+
+2. **Q：生产事故应急响应流程？**
+   A：发现→评估→止血→修复→验证→复盘。关键是快速止血。
+
+3. **Q：如何保证生产变更安全？**
+   A：变更审批、灰度发布、监控验证、回滚预案、变更窗口。
 
 ## Related Tags
 

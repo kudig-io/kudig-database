@@ -1,3 +1,0 @@
-message: "**Schema**: Added a deprecation field attribute to identify deprecated fields"
-type: feature
-scope: Configuration

@@ -255,7 +255,7 @@ spec:
 - [[实体/networking-terms.md|K8s 网络术语参考]] — Cross-reference
 - [[实体/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[实体/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
-- [[概念/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
+- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[概念/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
 - [[概念/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference

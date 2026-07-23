@@ -1,7 +1,7 @@
 ---
 title: Defense-in-Depth Security
-description: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
-summary: '- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+description: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
+summary: '- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis'
 category: concepts
 tags:
 - k8s
@@ -248,9 +248,9 @@ kubectl get rolebindings,clusterrolebindings -A -o json | \
 - [[实体/networkpolicy.md|NetworkPolicy]]
 - [[技能/audit-rbac-configurations.md|Audit RBAC Configurations]]
 - [[概念/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
-- [[概念/eBPF x 运行时安全.md|eBPF x 运行时安全]] — synthesis
-- [[概念/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
-- [[概念/服务网格 x 零信任安全.md|服务网格 x 零信任安全]] — synthesis
+- [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis
+- [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — synthesis
+- [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis
 
 - [[概念/Deployment × Secret 管理.md|Deployment × Secret 管理]]
 

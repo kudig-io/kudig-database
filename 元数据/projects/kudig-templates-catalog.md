@@ -96,7 +96,7 @@ Skill 文档是最核心的运维操作模板，包含 12 个标准章节：
 
 - [[实体/KUDIG Templates and Agent Prompts.md|原版模板集合]]
 - [[kudig-prompts-catalog|AI Prompt 模板]]
-- [[技能/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
 
 ## Related
 

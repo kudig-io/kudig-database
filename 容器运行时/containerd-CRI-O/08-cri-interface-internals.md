@@ -196,6 +196,151 @@ kubelet → RemovePodSandbox() → 清理 Pod 沙箱
 | 如何升级 CRI 版本？ | 升级 containerd 到对应版本，kubelet 自动协商 |
 | CRI 调用超时如何调整？ | kubelet `--runtime-request-timeout` 参数 |
 
+## CRI 配置示例
+
+```toml
+# /etc/containerd/config.toml - CRI 插件配置
+[plugins."io.containerd.grpc.v1.cri"]
+  # stream server 配置
+  stream_server_address = "127.0.0.1"
+  stream_server_port = "0"
+  # 沙箱镜像
+  sandbox_image = "registry.k8s.io/pause:3.9"
+  # 运行时配置
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    default_runtime_name = "runc"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+      runtime_type = "io.containerd.runc.v2"
+  # 镜像拉取配置
+  [plugins."io.containerd.grpc.v1.cri".registry]
+    max_concurrent_downloads = 10
+```
+
+## 性能调优
+
+| 场景 | 优化方向 | 具体操作 |
+|------|----------|----------|
+| Pod 创建慢 | 预拉取 pause 镜像 | 节点初始化时预加载 |
+| 镜像拉取超时 | 调大超时时间 | kubelet --runtime-request-timeout=5m |
+| 高并发创建 | 调整并发度 | max_concurrent_downloads |
+| exec 延迟高 | 检查 stream server | 确认本地地址可达 |
+| 状态同步慢 | 调整 kubelet 同步周期 | --sync-frequency 参数 |
+| gRPC 连接失败 | 检查 socket 权限 | 确认 /run/containerd/containerd.sock |
+
+## 监控指标
+
+| 指标 | 含义 | 告警阈值 |
+|------|------|----------|
+| cri_request_duration_seconds | CRI 调用延迟 | P99 > 5s |
+| cri_request_errors_total | CRI 调用错误 | > 10/min |
+| image_pull_duration_seconds | 镜像拉取耗时 | P99 > 120s |
+| container_create_duration | 容器创建耗时 | P99 > 10s |
+| sandbox_create_duration | 沙箱创建耗时 | P99 > 5s |
+| running_containers | 运行中容器数 | > 节点容量 90% |
+
+## 安全加固
+
+| 维度 | 建议 | 说明 |
+|------|------|------|
+| socket 权限 | 仅 root 可访问 | chmod 600 containerd.sock |
+| stream server | 使用 TLS | 避免明文传输 |
+| RBAC | 限制 crictl 访问 | 仅运维人员可用 |
+| 审计 | 记录 CRI 调用 | 便于安全审计 |
+| 网络 | stream server 本地监听 | 避免远程访问 |
+
+## 迁移指南
+
+| 从 | 到 | 关键步骤 |
+|------|------|----------|
+| CRI v1alpha2 | CRI v1 | 升级 containerd 1.7+→升级 kubelet |
+| Docker shim | 直接 CRI | 移除 dockershim→配置 containerd |
+| 单运行时 | 多运行时 | 配置多个 runtime_type |
+
+## 检查清单
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| CRI 版本 | `crictl version` | v1 |
+| 接口连通 | `crictl info` | 返回 JSON |
+| 运行时列表 | `crictl info | jq .config` | 包含预期 runtime |
+| 镜像拉取 | `crictl pull <image>` | 成功 |
+| 容器创建 | `crictl runp` | 成功 |
+| stream server | `curl -k https://localhost:10010/info` | 可达 |
+| 日志 | `journalctl -u containerd` | 无错误 |
+
+## 版本历史
+
+| 版本 | 时间 | 关键变化 |
+|------|------|----------|
+| v1alpha2 | K8s 1.7-1.26 | 初始 CRI 接口 |
+| v1 | K8s 1.27+ | 移除废弃字段，API 稳定 |
+| v1 (containerd 2.0) | K8s 1.32+ | 新插件架构 |
+
+## 架构对比
+
+```text
+CRI 架构层次：
+
+kubelet
+  └── CRI gRPC Client
+       └── /run/containerd/containerd.sock
+            └── containerd CRI Plugin
+                 ├── RuntimeService
+                 │    ├── RunPodSandbox
+                 │    ├── CreateContainer
+                 │    ├── StartContainer
+                 │    └── Exec/Attach
+                 └── ImageService
+                      ├── PullImage
+                      ├── ListImages
+                      └── RemoveImage
+```
+
+## 容量规划
+
+| 场景 | 建议配置 | 说明 |
+|------|----------|------|
+| 小集群 | 默认超时 | 足够 |
+| 大镜像 | timeout=5m | 避免拉取超时 |
+| 高并发 | max_concurrent=10 | 并行拉取 |
+| 排障 | debug 日志 | 临时开启 |
+
+## 检查清单（补充）
+
+| 检查项 | 命令/方法 | 期望结果 |
+|--------|----------|----------|
+| gRPC 延迟 | `crictl info` 计时 | < 1s |
+| 镜像拉取 | `crictl pull` 计时 | < 60s |
+| 容器创建 | `crictl runp` 计时 | < 5s |
+| exec | `crictl exec` | 成功 |
+| 日志 | `journalctl -u containerd` | 无 gRPC 错误 |
+
+## 常见问题 FAQ（补充）
+
+| 问题 | 解答 |
+|------|------|
+| CRI 与 OCI 的关系？ | CRI 定义 K8s 与运行时的接口，OCI 定义容器镜像和运行时规范 |
+| crictl 与 kubectl 区别？ | crictl 直接调用 CRI，kubectl 通过 kubelet 间接调用 |
+| 如何查看 CRI 版本？ | `crictl version` 或 `crictl info` 查看 runtime 信息 |
+| CRI 支持哪些操作？ | 镜像管理、Pod sandbox、容器生命周期、exec/attach/port-forward |
+| 如何调试 CRI 调用？ | 设置 containerd 日志级别为 debug，观察 gRPC 调用 |
+| streaming 如何实现？ | kubelet 启动 streaming server，CRI 返回 URL 重定向 |
+| CRI 性能瓶颈在哪？ | 镜像拉取和容器创建是主要延迟来源 |
+| 如何监控 CRI 调用？ | containerd metrics 插件 + Prometheus 拉取 |
+
+## 性能调优参数
+
+| 参数 | 默认值 | 生产建议 | 说明 |
+|------|--------|----------|------|
+| `max_concurrent_downloads` | 3 | 5-10 | 并行镜像拉取数 |
+| `image_pull_progress_timeout` | 1m | 5m | 大镜像拉取超时 |
+| `sandbox_image` | pause:3.9 | 与集群一致 | Pod sandbox 基础镜像 |
+| `enable_selinux` | false | 按需 | SELinux 环境启用 |
+| `max_container_log_line_size` | 16384 | 32768 | 日志行大小限制 |
+| `stream_server_address` | 127.0.0.1 | 节点 IP | streaming 服务监听地址 |
+| `enable_tls_streaming` | false | 生产启用 | streaming TLS 加密 |
+| `stats_collect_period` | 10s | 10-30s | 容器统计采集间隔 |
+
 ## 相关文档
 
 - [[容器运行时/containerd-CRI-O/07-containerd-configuration-deep-guide.md|containerd 配置深度指南]]

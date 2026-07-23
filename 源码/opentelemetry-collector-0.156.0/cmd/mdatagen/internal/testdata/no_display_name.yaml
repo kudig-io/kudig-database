@@ -1,6 +1,0 @@
-type: nodisplayname
-
-status:
-  class: receiver
-  stability:
-    beta: [logs]
