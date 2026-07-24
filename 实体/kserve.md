@@ -245,7 +245,7 @@ kubectl delete inferenceservice fraud-detection -n ml-serving
 - kserve
 - [[实体/specialized-workloads-terms.md|K8s 专用工作负载术语参考]] — Cross-reference
 - [[实体/root-terms.md|K8s Root术语参考]] — Cross-reference
-- [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
 - [[实体/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]

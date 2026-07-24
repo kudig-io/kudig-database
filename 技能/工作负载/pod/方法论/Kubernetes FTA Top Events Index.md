@@ -199,10 +199,10 @@ bottom_event:
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]]
 - [[归档/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
 - [[文档/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference

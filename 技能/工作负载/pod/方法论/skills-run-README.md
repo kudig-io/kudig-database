@@ -41,9 +41,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 技能运行环境说明
 
@@ -87,7 +87,7 @@ kubectl cluster-info
 
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
-- Index.md|[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
+- Index.md|[[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]]] — Kubernetes FTA Top Events Index
 - [[backup-restore-fta]] — 备份/恢复异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

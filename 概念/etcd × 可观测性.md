@@ -137,7 +137,7 @@ etcd 的写入负载与 K8s 集群规模呈非线性关系：
 - [[实体/prometheus-grafana.md|prometheus grafana]]
 - [[概念/high-availability-patterns.md|high availability patterns]]
 - [[概念/observability-pillars.md|observability pillars]]
-- [[技能/backup-restore-etcd.md|backup restore etcd]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup restore etcd]]
 - [[归档/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

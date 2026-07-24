@@ -294,8 +294,8 @@ spec:
 - [[概念/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
 - [[概念/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
-- [[技能/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[技能/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[技能/网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference

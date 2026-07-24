@@ -148,12 +148,12 @@ Learning Loop (probability updates, new pattern discovery)
 
 - [[cloud-provider-fta]] — 云平台集成异常故障树分析
 - [[backup-restore-fta]] — 备份/恢复异常故障树分析
-- [[技能/skills-run-README.md|skills-run-README]] — Skills Demo — 本地运行工单诊断技能
+- [[技能/工作负载/pod/方法论/skills-run-README.md|skills-run-README]] — Skills Demo — 本地运行工单诊断技能
 - [[INDEX]] — Wiki Index
 - [[score]] — Score
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 
 

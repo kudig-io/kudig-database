@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/public-training/one-month/README.md|Readme]]
+- [[技能/工作负载/pod/培训/public-one-month/README.md|Readme]]
 
 ## 子目录
 
@@ -30,5 +30,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/one-month/public-one-month-training.md|Public One Month Training]]
+- [[技能/工作负载/pod/培训/public-one-month/public-one-month-training.md|Public One Month Training]]
 

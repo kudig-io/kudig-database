@@ -121,7 +121,7 @@ CoreDNS 配置不当会导致 Service 发现失败。应检查 CoreDNS Pod 状�
 - [[概念/service-networking.md|Service Networking]]
 - [[实体/cni-plugins.md|CNI Plugins]]
 - [[实体/networkpolicy.md|NetworkPolicy]]
-- [[技能/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
+- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
 
 ## 生产案例
 

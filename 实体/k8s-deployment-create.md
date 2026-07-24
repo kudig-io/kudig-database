@@ -516,9 +516,9 @@ web.production.svc.cluster.local
 
 ## 相关链接
 
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
-- [[技能/ts-workloads.md|工作负载故障排查]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/诊断排障/ts-workloads.md|工作负载故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

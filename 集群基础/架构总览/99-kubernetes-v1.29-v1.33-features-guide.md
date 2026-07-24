@@ -183,7 +183,7 @@ resources:
 | 弃用项 | 替代方案 | 操作 |
 |:---|:---|:---|
 | Node v1beta1 metrics | Node v1 metrics | 更新 [[Prometheus|Prometheus]] 查询 |
-| in-tree [[技能/ts-cloud-provider.md|cloud providers]] | 外部云控制器管理器 (CCM) | 迁移至 CCM |
+| in-tree [[技能/集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|cloud providers]] | 外部云控制器管理器 (CCM) | 迁移至 CCM |
 | flowcontrol.apiserver.k8s.io/v1beta2 | v1 | 更新 FlowSchema |
 
 ---

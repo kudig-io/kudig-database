@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-3-node-workload/day-15-node-basics/01-node-basics-hands-on.md|Node Basics Hands On]]
+- [[技能/节点/node/培训/day-15-node-basics/01-node-basics-hands-on.md|Node Basics Hands On]]
 

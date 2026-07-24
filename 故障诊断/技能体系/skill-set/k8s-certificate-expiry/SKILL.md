@@ -198,7 +198,7 @@ last_updated: 2026-05-23
 
 本Skill诊断过程中可能涉及的其他Skill：
 
-- [[技能/排障实战/control-plane/ts-control-plane.md|ts control plane]]
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 

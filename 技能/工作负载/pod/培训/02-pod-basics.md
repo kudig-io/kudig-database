@@ -464,7 +464,7 @@ kubectl logs <pod-name> --previous
 
 ## 参见
 
-- [[技能/training-lecturer/02-getting-started/02-pod-basics.md|讲师版]]
+- [[技能/工作负载/pod/培训/lecturer/02-pod-basics.md|讲师版]]
 
 
 <!-- risk-assessed -->

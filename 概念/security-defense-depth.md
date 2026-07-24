@@ -247,7 +247,7 @@ kubectl get rolebindings,clusterrolebindings -A -o json | \
 - [[概念/multi-tenancy-isolation.md|multi-tenancy-isolation]] — Multi-Tenancy Isolation
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[实体/networkpolicy.md|NetworkPolicy]]
-- [[技能/audit-rbac-configurations.md|Audit RBAC Configurations]]
+- [[技能/安全/rbac/audit-rbac-configurations.md|Audit RBAC Configurations]]
 - [[概念/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
 - [[概念/eBPF × 运行时安全.md|eBPF x 运行时安全]] — synthesis
 - [[概念/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — synthesis

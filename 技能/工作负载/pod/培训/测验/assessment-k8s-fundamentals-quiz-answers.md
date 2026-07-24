@@ -97,9 +97,9 @@ kubectl describe pod | grep -A5 "ImagePull"
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 答案解析指南
 
@@ -131,11 +131,11 @@ kubectl describe pod | grep -A5 "ImagePull"
 
 ## Related
 
-- [[技能/ts-node-components.md|ts-node-components]] — 节点组件故障排查
+- [[技能/节点/node/诊断排障/ts-node-components.md|ts-node-components]] — 节点组件故障排查
 - [[apiserver-fta]] — API Server 异常故障树分析
 - [[scheduler-fta]] — Scheduler 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
 
 
 <!-- risk-assessed -->

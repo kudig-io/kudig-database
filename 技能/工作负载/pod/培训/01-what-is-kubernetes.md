@@ -387,7 +387,7 @@ MySQL - 关系型数据库(本课示例)
 
 ## 参见
 
-- [[技能/training-lecturer/01-introduction/01-what-is-kubernetes.md|讲师版]]
+- [[技能/工作负载/pod/培训/lecturer/01-what-is-kubernetes.md|讲师版]]
 
 
 <!-- risk-assessed -->

@@ -11,7 +11,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/cilium.md]]'
   type: uses
@@ -470,7 +470,7 @@ kubectl logs <pod-name> -n <namespace> --tail=50
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 我需要你执行更详细的诊断命令，包括节点级别检查
-> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-STORE-001
+> 2. **升级至存储专家** → 如果涉及数据库/消息队列等有状态服务，我将转接至 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-STORE-001
 > 3. **升级至节点专家** → 如果怀疑是节点/内核级别问题，我将转接至 SKILL-NODE-001
 > 4. **升级至工作负载专家** → 如果涉及复杂的 Deployment/StatefulSet 编排问题，我将转接至 SKILL-WORK-001
 

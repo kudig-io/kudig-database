@@ -132,10 +132,10 @@ prerequisites:
 
 ## See Also
 
-- [[技能/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
-- [[技能/learn-public-training.md|learn-public-training]]
-- [[技能/manage-persistent-storage.md|manage-persistent-storage]]
-- [[技能/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]]
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
+- [[技能/工作负载/pod/培训/learn-public-training.md|learn-public-training]]
+- [[技能/存储/csi-storage/manage-persistent-storage.md|manage-persistent-storage]]
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]]
 
 
 <!-- risk-assessed -->

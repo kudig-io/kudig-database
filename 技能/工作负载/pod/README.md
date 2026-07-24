@@ -306,9 +306,9 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/排障实战/workloads/ts-workloads.md|工作负载故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/诊断排障/ts-workloads.md|工作负载故障排查]]
 - [[故障诊断/README.md|Domain-12 故障排查]]
 - [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
 

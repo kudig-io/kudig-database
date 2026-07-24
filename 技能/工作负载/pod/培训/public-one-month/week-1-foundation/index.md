@@ -22,18 +22,18 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/public-training/one-month/week-1-foundation/README.md|Readme]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/README.md|Readme]]
 
 ## 文档
 
-- [[技能/training-public/public-training/one-month/week-1-foundation/checkpoint.md|Checkpoint]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-1-docker-basics.md|Day 1 Docker Basics]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-2-docker-advanced.md|Day 2 Docker Advanced]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-3-linux-core.md|Day 3 Linux Core]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-4-linux-network.md|Day 4 Linux Network]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-5-k8s-architecture.md|Day 5 K8S Architecture]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-6-k8s-cluster.md|Day 6 K8S Cluster]]
-- [[技能/training-public/public-training/one-month/week-1-foundation/day-7-review-practice.md|Day 7 Review Practice]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/checkpoint.md|Checkpoint]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-1-docker-basics.md|Day 1 Docker Basics]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-2-docker-advanced.md|Day 2 Docker Advanced]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-3-linux-core.md|Day 3 Linux Core]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-4-linux-network.md|Day 4 Linux Network]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-5-k8s-architecture.md|Day 5 K8S Architecture]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-6-k8s-cluster.md|Day 6 K8S Cluster]]
+- [[技能/工作负载/pod/培训/public-one-month/week-1-foundation/day-7-review-practice.md|Day 7 Review Practice]]
 
 
 

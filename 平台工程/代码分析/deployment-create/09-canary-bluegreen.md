@@ -70,7 +70,7 @@ related_topics:
 
 
 
-# Deployment [[技能/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
+# Deployment [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]]模式
 
 ## 函数签名
 

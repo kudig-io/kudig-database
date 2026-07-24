@@ -213,7 +213,7 @@ subctl verify --kubeconfig cluster-a.kubeconfig --to-kubeconfig cluster-b.kubeco
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - submariner
-- [[技能/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
+- [[技能/集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 
 

@@ -167,10 +167,10 @@ kubeadm 采用最小化设计，以下组件需要手动安装：
 
 ## 相关技能
 
-- [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
+- [[技能/集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
 - [[概念/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[技能/configure-health-probes.md|配置健康探针]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|配置健康探针]]
 - [[deployment|Deployment]]
 
 ## 生产案例

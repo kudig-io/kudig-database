@@ -121,7 +121,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 - [[实体/argocd.md|argocd]] — ArgoCD
 - [[实体/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 - [[kudig-man-pages-index]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 
 
 <!-- risk-assessed -->

@@ -196,8 +196,8 @@ spec:
 
 ## 相关技能
 
-- [[技能/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[技能/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
 - [[实体/statefulset.md|StatefulSet]]
 

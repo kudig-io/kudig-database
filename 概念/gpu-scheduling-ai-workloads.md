@@ -25,7 +25,7 @@ created: 2026-05-21 14:00:00+00:00
 updated: 2026-05-21 14:00:00+00:00
 last_updated: 2026-05-21 14:00:00+00:00
 relationships:
-- target: '[[技能/training-public/inner-training/week-3-node-workload/checkpoint.md]]'
+- target: '[[技能/工作负载/pod/培训/inner-training/week-3-node-workload/checkpoint.md]]'
   type: related_to
 - target: '[[实体/kubelet.md]]'
   type: uses
@@ -493,7 +493,7 @@ spec:
           periodSeconds: 60  # 每分钟最多缩容 10%
 ```
 
-### 5. 成本优化：Spot GPU + [[技能/training-public/inner-training/week-3-node-workload/checkpoint.md|Checkpoint]]
+### 5. 成本优化：Spot GPU + [[技能/工作负载/pod/培训/inner-training/week-3-node-workload/checkpoint.md|Checkpoint]]
 
 ```yaml
 # 使用 Spot 实例的 Training Job

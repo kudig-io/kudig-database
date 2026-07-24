@@ -172,9 +172,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 生产案例
 
@@ -222,7 +222,7 @@ prerequisites:
 - [[实体/kudig-metadata-index.md|README]]]] — FTA 故障树清单索引
 - networking.md|ts-networking]] — 网络故障排查
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

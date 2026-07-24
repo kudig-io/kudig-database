@@ -117,7 +117,7 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 - [[概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[deployment|Deployment]]
-- [[技能/configure-health-probes.md|[[Configure Health Probes|Configure Health Probes]]]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|[[Configure Health Probes|Configure Health Probes]]]]
 - [[概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]ps Principles and Practice|GitOps Principles]]]]
 
 ## 生产案例
@@ -162,8 +162,8 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 ## Related
 
-- [[技能/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
-- [[技能/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[技能/工作负载/deployment/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践

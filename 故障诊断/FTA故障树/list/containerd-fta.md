@@ -182,8 +182,8 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[实体/containerd.md|containerd]] — containerd
 - [[故障诊断/高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
 - [[容器运行时/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]

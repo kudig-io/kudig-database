@@ -159,7 +159,7 @@ spec:
 - [[概念/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
 - [[概念/linux-sysctl-tuning.md|Linux Sysctl Tuning]]
 - [[概念/linux-container-foundation.md|Linux Container Foundation]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 
 ```
 

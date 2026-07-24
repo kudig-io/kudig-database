@@ -160,7 +160,7 @@ kubectl auth can-i --list --as=system:anonymous
 ## Related
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
-- [[技能/certificate-fta.md|certificate-fta]]
+- [[技能/安全/certificate/certificate-fta.md|certificate-fta]]
 - [[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]]
 
 

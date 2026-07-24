@@ -387,8 +387,8 @@ kubectl delete pvc <pvc-name>
 ## Related
 
 - [[实体/fundamentals-terms.md|fundamentals-terms]] — K8s 基础概念术语参考
-- [[技能/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/培训/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 
 
 <!-- risk-assessed -->

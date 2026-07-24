@@ -402,9 +402,9 @@ kubeadm 支持两种高可用 etcd 拓扑：
 
 ## 相关链接
 
-- [[技能/troubleshoot-node-issues.md|节点故障排查]]
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|节点故障排查]]
 - [[实体/k8s-knowledge-map.md|K8s 知识图谱]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

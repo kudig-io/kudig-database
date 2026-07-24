@@ -566,10 +566,10 @@ kubectl delete cronjob <name>
 
 ## Related
 
-- [[技能/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
-- [[技能/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
-- [[技能/learn-root.md|learn-root]] — Kubernetes 培训：Root
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/培训/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
+- [[技能/工作负载/statefulset/培训/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+- [[技能/工作负载/pod/培训/learn-root.md|learn-root]] — Kubernetes 培训：Root
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
 
 

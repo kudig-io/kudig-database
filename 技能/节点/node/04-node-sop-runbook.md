@@ -684,11 +684,11 @@ spec:
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
-- [[技能/故障诊断-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
-- [[技能/故障诊断-节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
-- [[技能/故障诊断-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
-- [[技能/故障诊断-节点/node/reference/node-version-differences.md|版本差异对比]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[技能/节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
+- [[技能/节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
+- [[技能/节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
+- [[技能/节点/node/reference/node-version-differences.md|版本差异对比]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 - [[故障诊断/核心排障/06-node-notready-diagnosis.md|Node NotReady 深度诊断（原始文件）]]

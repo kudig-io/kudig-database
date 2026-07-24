@@ -81,7 +81,7 @@ related_topics:
 | ⭐2 | `../../云厂商/04-alicloud-ack/205-ack-cluster-types.md` | 集群类型对比 |
 | 📖3 | `../../云厂商/04-alicloud-ack/280-ack-acr-integration.md` | ACR 镜像服务集成 |
 
-### [[技能/training-public/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api.md|Day 2: ACK SDK & API]]
+### [[技能/工作负载/pod/培训/inner-training/week-1-ack-acr-lifecycle/day-2-ack-sdk-api.md|Day 2: ACK SDK & API]]
 
 | 序号 | 文档 | 重点 |
 |:---:|------|------|

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/03-networking/03-service-basics.md|Service Basics]]
+- [[技能/网络/service/培训/lecturer/03-service-basics.md|Service Basics]]
 

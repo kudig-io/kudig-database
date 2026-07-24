@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/oncall-qa/oncall-quick-qa.md|Oncall Quick Qa]]
+- [[技能/工作负载/pod/培训/oncall-qa/oncall-quick-qa.md|Oncall Quick Qa]]
 

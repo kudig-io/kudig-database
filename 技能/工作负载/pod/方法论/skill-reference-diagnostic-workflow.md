@@ -164,9 +164,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 诊断工作流详解
 
@@ -213,7 +213,7 @@ prerequisites:
 
 ## Related
 
-- [[技能/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[实体/container-runtime.md|container-runtime]] — Container Runtime
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd

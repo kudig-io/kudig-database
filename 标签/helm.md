@@ -105,8 +105,8 @@ last_updated: '2026-07-21'
 - [[最佳实践/best-practices/common-best-practices|通用最佳实践]]
 - [[最佳实践/deployment/02-single-node-deployment|单节点部署]]
 - [[最佳实践/deployment/04-production-environment-deployment|生产环境部署]]
-- [[技能/排障实战/cluster-operations/ts-cluster-operations.md|集群运维排障]]
-- [[技能/培训学习/tools/learn-04-debug-tools-setup.md|调试工具配置]]
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维排障]]
+- [[技能/工作负载/pod/培训/learn-04-debug-tools-setup.md|调试工具配置]]
 
 ## 容器运行时 (Container Runtime)
 

@@ -1352,7 +1352,7 @@ kubectl rollout restart deployment/coredns -n kube-system
 
 ## 参见
 
-- [[技能/training-lecturer/11-oncall-qa/oncall-quick-qa.md|讲师版]]
+- [[技能/工作负载/pod/培训/lecturer/oncall-quick-qa.md|讲师版]]
 
 
 <!-- risk-assessed -->

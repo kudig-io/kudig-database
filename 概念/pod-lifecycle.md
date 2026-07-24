@@ -190,15 +190,15 @@ kubectl get pod <pod> -o jsonpath='{.status.conditions}' | jq .
 - [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
 - [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]] — 综合
 
-- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
 - [[概念/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[概念/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[技能/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
 - [[deployment|Deployment]]
 - [[实体/statefulset.md|StatefulSet]]
 - [[概念/high-availability-patterns.md|High Availability Patterns]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[实体/kubelet.md|kubelet]]
 
 - Pod 生命周期事件表
@@ -209,9 +209,9 @@ kubectl get pod <pod> -o jsonpath='{.status.conditions}' | jq .
 - [[实体/k8s-architecture-domain-guide.md|Kubernetes Architecture Domain Guide]] — Cross-reference
 - [[实体/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - [[概念/scheduling-algorithm.md|Scheduling Algorithm]] — Cross-reference
-- [[技能/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
-- [[技能/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
-- [[技能/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
+- [[技能/节点/node/运维操作/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
 - [[实体/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
 - [[实体/container-runtime.md|Container Runtime]] — Cross-reference
 - [[实体/clusterpedia.md|Clusterpedia]] — Cross-reference

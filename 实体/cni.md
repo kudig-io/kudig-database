@@ -139,22 +139,22 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[概念/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
-- [[技能/ts-node-components.md|节点组件故障排查]] — Cross-reference
-- [[技能/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
-- [[技能/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[技能/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
-- [[技能/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
-- [[技能/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
-- [[技能/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
-- [[技能/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[技能/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[技能/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
-- [[技能/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[技能/工作负载/daemonset/培训/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
+- [[技能/网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]

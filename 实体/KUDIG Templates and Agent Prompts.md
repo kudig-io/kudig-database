@@ -119,13 +119,13 @@ tags: [k8s, skills, sop, ...]
 ## Related
 
 - [[INDEX]] — Wiki Index
-- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[技能/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
-- [[技能/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/工作负载/pod/方法论/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[技能/集群运维/cluster-upgrade/reference/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[实体/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
 - [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 
 - [[kudig-templates-catalog]]
 

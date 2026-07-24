@@ -74,10 +74,10 @@ last_updated: 2026-06-26
 | `_reports/broken-links-fix-2026-06-26.md` | `[[概念/service-mesh-architecture.md|service mesh architecture]]` |
 | `_reports/broken-links-fix-2026-06-26.md` | `[[概念/declarative-api.md|declarative api]]` |
 | `_reports/broken-links-fix-2026-06-26.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/configure-health-probes.md|configure health probes]]` |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/troubleshoot-node-issues.md|troubleshoot node issues]]` |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` |
 | `_reports/broken-links-fix-2026-06-26.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` |
 | `_reports/broken-links-fix-2026-06-26.md` | `[[实体/oscal-compass.md|oscal compass]]` |
 | `_reports/ticket-agent-corpus-execution-summary-2026-06-26.md` | `_reports/ticket-agent-corpus-comprehensive-supplement-summary-2026-06-26.md` |
@@ -102,13 +102,13 @@ last_updated: 2026-06-26
 | `concepts/microservice-resilience-patterns.md` | `[[概念/service-mesh-architecture.md|service mesh architecture]]` |
 | `concepts/Kubernetes Core Concepts.md` | `[[概念/declarative-api.md|declarative api]]` |
 | `concepts/watch-mechanism.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
-| `skills/manage-persistent-storage.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
-| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/configure-health-probes.md|configure health probes]]` |
+| `skills/manage-persistent-storage.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
+| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
+| `skills/troubleshoot-pod-issues.md` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` |
+| `skills/troubleshoot-pod-issues.md` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` |
 | `skills/learn-01-what-is-kubernetes.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
-| `skills/skill-reference-version-matrix.md` | `[[技能/troubleshoot-node-issues.md|troubleshoot node issues]]` |
-| `skills/configure-health-probes.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
+| `skills/skill-reference-version-matrix.md` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` |
+| `skills/configure-health-probes.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` |
 | `skills/skill-assets-escalation-template.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` |
 | `entities/slimtoolkit.md` | `[[实体/oscal-compass.md|oscal compass]]` |
 | `entities/flatcar.md` | `[[实体/serverless-devs.md|serverless devs]]` |
@@ -118,12 +118,12 @@ last_updated: 2026-06-26
 | `生产运维/ticket-cases/ticket-case-042-pod-pending-resource-taint.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
 | `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | `[[生产运维/工单案例/ticket-case-013-configmap-secret-update-not-effective.md|ticket case 013 configmap secret update not effective]]` |
 | `生产运维/ticket-cases/ticket-case-008-coredns-vpc-dns-forward.md` | `[[概念/service-networking.md|service networking]]` |
-| `生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md` | `[[技能/kubelet-certificate-rotation.md|kubelet certificate rotation]]` |
+| `生产运维/ticket-cases/ticket-case-005-kubelet-cert-expired.md` | `[[技能/安全/certificate/kubelet-certificate-rotation.md|kubelet certificate rotation]]` |
 | `生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md` | `[[生产运维/工单案例/ticket-case-020-cluster-autoscaler-scale-failure.md|ticket case 020 cluster autoscaler scale failure]]` |
 | `生产运维/ticket-cases/ticket-case-045-cluster-autoscaler-scaleup-fail.md` | `[[概念/autoscaling-strategies.md|autoscaling strategies]]` |
 | `生产运维/ticket-cases/ticket-case-015-prometheus-data-loss-slow-query.md` | `[[概念/bp-observability.md|bp observability]]` |
 | `生产运维/ticket-cases/ticket-case-018-node-diskpressure.md` | `[[生产运维/工单案例/ticket-case-014-node-disk-pressure.md|ticket case 014 node disk pressure]]` |
-| `生产运维/ticket-cases/ticket-case-006-image-pull-acr-timeout.md` | `[[技能/deployment-rolling-update.md|deployment rolling update]]` |
+| `生产运维/ticket-cases/ticket-case-006-image-pull-acr-timeout.md` | `[[技能/工作负载/deployment/deployment-rolling-update.md|deployment rolling update]]` |
 | `生产运维/ticket-cases/ticket-case-022-pod-pending-resource-taint-affinity.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
 | `生产运维/ticket-cases/ticket-case-035-node-diskpressure-eviction.md` | `[[生产运维/工单案例/ticket-case-017-pod-pending-resource-exhaustion.md|ticket case 017 pod pending resource exhaustion]]` |
 | `故障诊断/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md` | `[[实体/inspektor-gadget.md|inspektor gadget]]` |

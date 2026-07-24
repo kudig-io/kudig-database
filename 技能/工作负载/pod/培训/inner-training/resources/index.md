@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/inner-training/resources/commands-cheatsheet.md|Commands Cheatsheet]]
-- [[技能/training-public/inner-training/resources/knowledge-map.md|Knowledge Map]]
-- [[技能/training-public/inner-training/resources/reading-sequence.md|Reading Sequence]]
+- [[技能/工作负载/pod/培训/inner-training/resources/commands-cheatsheet.md|Commands Cheatsheet]]
+- [[技能/工作负载/pod/培训/inner-training/resources/knowledge-map.md|Knowledge Map]]
+- [[技能/工作负载/pod/培训/inner-training/resources/reading-sequence.md|Reading Sequence]]
 

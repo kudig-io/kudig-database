@@ -257,8 +257,8 @@ resources:
 
 ## Related
 
-- [[技能/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
-- [[技能/node-drain-and-maintenance.md|node-drain-and-maintenance]] — 节点驱逐与维护
+- [[技能/工作负载/pod/培训/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
+- [[技能/节点/node/运维操作/node-drain-and-maintenance.md|node-drain-and-maintenance]] — 节点驱逐与维护
 - [[概念/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
 - [[概念/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
 - [[实体/kubelet.md|kubelet]] — kubelet

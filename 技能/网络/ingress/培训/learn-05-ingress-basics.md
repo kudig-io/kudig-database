@@ -408,11 +408,11 @@ kubectl delete ingress my-ingress
 
 ## Related
 
-- [[技能/learn-03-deployment-basics.md|learn-03-deployment-basics]]
+- [[技能/工作负载/deployment/培训/learn-03-deployment-basics.md|learn-03-deployment-basics]]
 
-- [[技能/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|learn-oncall-quick-qa]]
 
-- [[技能/learn-public-training.md|learn-public-training]]
+- [[技能/工作负载/pod/培训/learn-public-training.md|learn-public-training]]
 
 - [[故障诊断/FTA故障树/list/monitoring-fta.md|monitoring-fta]]
 
@@ -422,11 +422,11 @@ kubectl delete ingress my-ingress
 
 - [[故障诊断/FTA故障树/list/hpa-fta.md|hpa-fta]]
 
-- [[技能/learn-01-what-is-kubernetes.md|learn-01-what-is-kubernetes]]
+- [[技能/工作负载/pod/培训/learn-01-what-is-kubernetes.md|learn-01-what-is-kubernetes]]
 
-- [[技能/kudig-agent-specs-collection.md|kudig-agent-specs-collection]]
+- [[技能/工作负载/pod/方法论/agent/kudig-agent-specs-collection.md|kudig-agent-specs-collection]]
 
-- [[技能/learn-13-daemonset-basics.md|learn-13-daemonset-basics]]
+- [[技能/工作负载/daemonset/培训/learn-13-daemonset-basics.md|learn-13-daemonset-basics]]
 
 - [[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]]
 
@@ -436,12 +436,12 @@ kubectl delete ingress my-ingress
 
 - [[openkruise-fta]]
 
-- [[技能/ts-ai-ml-workloads.md|ts-ai-ml-workloads]]
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|ts-ai-ml-workloads]]
 
 - [[kubeadm-fta]]
 
-- [[技能/learn-01-day-one-checklist.md|learn-01-day-one-checklist]] — Day 1: 新人首日检查清单
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/培训/learn-01-day-one-checklist.md|learn-01-day-one-checklist]] — Day 1: 新人首日检查清单
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[istio]] — Istio
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

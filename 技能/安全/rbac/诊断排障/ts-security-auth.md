@@ -241,12 +241,12 @@ Pod 安全问题
 
 ## 相关链接
 
-- [[技能/audit-rbac-configurations.md|RBAC 审计配置]]
-- [[技能/ts-security-auth.md|安全认证排查]]
+- [[技能/安全/rbac/audit-rbac-configurations.md|RBAC 审计配置]]
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证排查]]
 
 ## Related
 
-- [[技能/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
+- [[技能/集群运维/cluster-upgrade/reference/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
 - [[实体/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager

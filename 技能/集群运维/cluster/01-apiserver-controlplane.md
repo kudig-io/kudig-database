@@ -355,10 +355,10 @@ mv /tmp/kube-apiserver.yaml /etc/kubernetes/manifests/
 
 ## 相关链接
 
-- [[技能/故障诊断-集群运维/cluster/README.md|Cluster 集群级故障诊断技能集]]
-- [[技能/故障诊断-集群运维/cluster/02-etcd-troubleshooting.md|etcd 故障诊断]]
-- [[技能/故障诊断-集群运维/cluster/03-cluster-cert-upgrade.md|证书与升级]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/集群运维/cluster/README.md|Cluster 集群级故障诊断技能集]]
+- [[技能/集群运维/cluster/02-etcd-troubleshooting.md|etcd 故障诊断]]
+- [[技能/集群运维/cluster/03-cluster-cert-upgrade.md|证书与升级]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

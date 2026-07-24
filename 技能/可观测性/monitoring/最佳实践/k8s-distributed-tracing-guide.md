@@ -113,8 +113,8 @@ prerequisites:
 
 - [[概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[概念/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
-- [[技能/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
-- [[技能/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
 
 ## 生产案例
 

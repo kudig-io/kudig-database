@@ -186,14 +186,14 @@ kubectl uncordon <node-name>
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[概念/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[技能/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
 - [[实体/kubelet.md|kubelet]]
 - [[实体/container-runtime.md|Container Runtime]]
 - [[概念/resource-management.md|Resource Management]]
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[技能/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

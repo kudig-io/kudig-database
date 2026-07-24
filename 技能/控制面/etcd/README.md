@@ -152,10 +152,10 @@ kubectl get --raw /healthz?verbose | grep -v ok
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
-- [[技能/故障诊断-控制面/apiserver/apiserver-fta.md|API Server 故障树]] — 同域关联
-- [[技能/故障诊断-控制面/scheduler/scheduler-fta.md|Scheduler 故障树]] — 同域关联
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
+- [[技能/控制面/apiserver/apiserver-fta.md|API Server 故障树]] — 同域关联
+- [[技能/控制面/scheduler/scheduler-fta.md|Scheduler 故障树]] — 同域关联
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
 - [[生态参考/领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引

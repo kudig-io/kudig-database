@@ -74,9 +74,9 @@ E. 升级集群版本
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 评分标准
 
@@ -116,9 +116,9 @@ kubectl describe nodes | grep -A5 "Conditions"
 
 ## Related
 
-- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
 - [[gpu-fta]] — GPU 异常故障树分析
-- [[技能/ts-workloads.md|ts-workloads]] — 工作负载故障排查
+- [[技能/工作负载/pod/诊断排障/ts-workloads.md|ts-workloads]] — 工作负载故障排查
 - [[pdb-fta]] — PDB 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

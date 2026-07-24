@@ -14,7 +14,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/helm.md]]'
   type: uses
@@ -609,7 +609,7 @@ kubectl logs -n kube-system deployment/cluster-autoscaler --tail=50 | grep -i 's
 
 > **升级路径选择**：
 > 1. **继续深入排查** → 需要检查 prometheus-adapter 或自定义指标适配器配置
-> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-MON-001
+> 2. **升级至监控专家** → 如果涉及 Prometheus/Thanos/Grafana 等监控系统，转接至 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-MON-001
 > 3. **升级至控制平面专家** → 如果怀疑 apiserver 或 kubelet 指标接口异常，转接至 SKILL-CONT-001
 > 4. **升级至平台工程专家** → 如果涉及多租户配额策略或复杂的资源调度策略
 

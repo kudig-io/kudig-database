@@ -153,7 +153,7 @@ Learning Feedback Loop
 - [[supply-chain-security]] — Software Supply Chain Security
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
 - [[实体/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 - [[实体/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
 
 - [[README]]

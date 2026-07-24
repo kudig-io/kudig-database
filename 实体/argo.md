@@ -288,8 +288,8 @@ kubectl argo rollouts abort my-app -n production
 - [[实体/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
 - [[实体/version-upgrade-guide.md|版本升级指南]] — Cross-reference
 - [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
-- [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
-- [[技能/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[实体/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]

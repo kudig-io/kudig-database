@@ -237,7 +237,7 @@ agent_execution_mode: L1-advisory
 
 - k8s-rbac-quota
 
-- [[技能/ts-control-plane.md|ts control plane]]
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|ts control plane]]
 
 - k8s-ingress-gateway
 

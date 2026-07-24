@@ -105,7 +105,7 @@ last_updated: '2026-07-21'
 ## 技能 (Skills)
 
 - [[技能/gitops-argocd-fta|GitOps ArgoCD FTA]]
-- [[技能/排障实战/gitops-devops/ts-gitops-devops.md|GitOps/DevOps 排障]]
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排障]]
 - [[最佳实践/scenarios/gitops-workflow|GitOps 工作流最佳实践]]
 
 ## 平台工程 (Platform Engineering)

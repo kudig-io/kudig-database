@@ -332,7 +332,7 @@ Flux 同步失败
 - [[概念/IaC × 多集群管理.md|基础设施即代码 x 多集群管理]] — Cross-reference
 - [[概念/GitOps × 平台工程.md|GitOps x 平台工程]] — Cross-reference
 - [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
-- [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/helm-index.md|Helm 全局索引]]

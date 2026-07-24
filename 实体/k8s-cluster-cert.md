@@ -492,9 +492,9 @@ func createKubeAPIServerConfig(
 
 ## 相关链接
 
-- [[技能/ts-security-auth.md|安全认证排查]]
-- [[技能/backup-restore-etcd.md|etcd 备份恢复]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证排查]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|etcd 备份恢复]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

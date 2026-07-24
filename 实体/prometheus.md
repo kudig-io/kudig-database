@@ -213,22 +213,22 @@ description: '## 项目概述'
 - [[概念/bp-README.md|Kubernetes 最佳实践指南]] — Cross-reference
 - [[概念/production-operations-best-practices.md|Production Operations Best Practices]] — Cross-reference
 - [[概念/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
-- [[技能/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
-- [[技能/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
-- [[技能/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[技能/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
-- [[技能/learn-03-oncall-handoff.md|Day 3: 值班交接 SOP]] — Cross-reference
-- [[技能/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
-- [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference
-- [[技能/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
-- [[技能/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
-- [[技能/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
-- [[技能/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
-- [[技能/ts-storage.md|存储故障排查]] — Cross-reference
-- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
+- [[技能/网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-03-oncall-handoff.md|Day 3: 值班交接 SOP]] — Cross-reference
+- [[技能/可观测性/monitoring/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
+- [[技能/节点/node/运维操作/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[技能/存储/csi-storage/诊断排障/ts-storage.md|存储故障排查]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference

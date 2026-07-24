@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/11-scheduling/12-scheduling-basics.md|Scheduling Basics]]
+- [[技能/控制面/scheduler/培训/lecturer/12-scheduling-basics.md|Scheduling Basics]]
 

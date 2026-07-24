@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/09-troubleshooting/09-common-problems.md|Common Problems]]
-- [[技能/training-lecturer/09-troubleshooting/09-health-check.md|Health Check]]
+- [[技能/工作负载/pod/培训/lecturer/09-common-problems.md|Common Problems]]
+- [[技能/工作负载/pod/培训/lecturer/09-health-check.md|Health Check]]
 

@@ -1,7 +1,7 @@
 ---
 title: Usage Guide
-description: '- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]'
-summary: '- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]'
+description: '- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]'
+summary: '- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]'
 category: skills
 tags:
 - k8s
@@ -74,9 +74,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 使用指南
 
@@ -124,8 +124,8 @@ kubectl get pods -o wide --field-selector spec.nodeName=<node>
 
 ## Related
 
-- [[技能/ts-security-auth.md|ts-security-auth]] — 安全认证故障排查
-- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|ts-security-auth]] — 安全认证故障排查
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[故障诊断/FTA故障树/list/node-fta.md|node-fta]] — node-fta
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

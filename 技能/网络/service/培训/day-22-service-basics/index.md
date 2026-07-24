@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-4-network-storage/day-22-service-basics/01-service-basics-hands-on.md|Service Basics Hands On]]
+- [[技能/网络/service/培训/day-22-service-basics/01-service-basics-hands-on.md|Service Basics Hands On]]
 

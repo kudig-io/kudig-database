@@ -230,7 +230,7 @@ linkerd install --crds | kubectl delete -f -
 - [[实体/kudig-ecosystem-guide.md|KUDIG 开源生态指南与深度研究指南]] — Cross-reference
 - [[概念/service-mesh-evolution.md|服务网格演进]] — Cross-reference
 - [[概念/bp-security.md|最佳实践：Security]] — Cross-reference
-- [[技能/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
+- [[技能/集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]

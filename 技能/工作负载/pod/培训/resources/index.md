@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/resources/analogy-dictionary.md|Analogy Dictionary]]
-- [[技能/training-public/resources/lecturer-persona.md|Lecturer Persona]]
-- [[技能/training-public/resources/promotion-copy-v1.md|Promotion Copy V1]]
+- [[技能/工作负载/pod/培训/resources/analogy-dictionary.md|Analogy Dictionary]]
+- [[技能/工作负载/pod/培训/resources/lecturer-persona.md|Lecturer Persona]]
+- [[技能/工作负载/pod/培训/resources/promotion-copy-v1.md|Promotion Copy V1]]
 

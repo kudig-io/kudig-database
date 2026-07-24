@@ -14,7 +14,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/cilium.md]]'
   type: uses
@@ -579,7 +579,7 @@ kubectl run netshoot --rm -it --image nicolaka/netshoot -- /bin/bash
 
 ### 升级话术
 
-顾问："当前情况已超出本 [[技能/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
+顾问："当前情况已超出本 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|Skill]] 的自主修复范围，建议立即升级。
 
 **请执行以下操作**：
 1. 通知值班经理 / 高级 SRE 团队

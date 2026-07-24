@@ -246,11 +246,11 @@ groups:
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[概念/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[技能/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[概念/watch-mechanism.md|Watch Mechanism]]
 - [[概念/high-availability-patterns.md|High Availability Patterns]]
-- [[技能/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
 - [[实体/kube-apiserver.md|kube-apiserver]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]]
 
@@ -320,27 +320,27 @@ groups:
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
 - [[概念/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
 - [[概念/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
-- [[技能/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
-- [[技能/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
-- [[技能/ts-node-components.md|节点组件故障排查]] — Cross-reference
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
-- [[技能/ts-security-auth.md|安全认证故障排查]] — Cross-reference
-- [[技能/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
-- [[技能/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
-- [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
-- [[技能/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
-- [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
-- [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
-- [[技能/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[技能/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[技能/skill-MOC.md|topic-skills MOC]] — Cross-reference
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
-- [[技能/ts-storage.md|存储故障排查]] — Cross-reference
-- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
-- [[技能/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[技能/控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[技能/节点/node/运维操作/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[技能/存储/csi-storage/诊断排障/ts-storage.md|存储故障排查]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[技能/节点/node/skill-notready/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
 - [[集群基础/控制平面/11-etcd-deep-dive.md|etcd 深度解析]] — Cross-reference
 - [[集群基础/控制平面/12-apiserver-deep-dive.md|kube-apiserver 深度解析]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference

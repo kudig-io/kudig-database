@@ -405,8 +405,8 @@ kubectl exec <pod> -- nvcc --version
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
-- [[技能/故障诊断-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
-- [[技能/故障诊断-节点/node/reference/node-version-differences.md|版本差异对比]]
+- [[技能/节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[技能/节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
+- [[技能/节点/node/reference/node-version-differences.md|版本差异对比]]
 - [[故障诊断/高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 排障原始文件]]

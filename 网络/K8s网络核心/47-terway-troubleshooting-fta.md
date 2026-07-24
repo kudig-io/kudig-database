@@ -355,7 +355,7 @@ echo -e "\n=== 诊断完成 ==="
 
 ## Related
 
-- [[技能/ts-networking.md|ts-networking]] — 网络故障排查
+- [[技能/网络/service/诊断排障/ts-networking.md|ts-networking]] — 网络故障排查
 - [[k8gb]] — K8GB
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cni]] — CNI (Container Network Interface)

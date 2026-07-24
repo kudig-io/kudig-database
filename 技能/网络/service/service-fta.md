@@ -109,16 +109,16 @@ severity: high
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
 
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
 - [[calico-fta]] — Calico Fta
-- [[技能/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[故障诊断/FTA故障树/list/service-fta.md|Service 异常故障树分析]]

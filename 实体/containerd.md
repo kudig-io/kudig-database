@@ -234,12 +234,12 @@ crictl inspect <container-id>
 - [[概念/linux-sysctl-tuning.md|Linux Sysctl Tuning for Kubernetes]] — Cross-reference
 - [[概念/overlayfs-storage.md|OverlayFS Storage]] — Cross-reference
 - [[概念/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
-- [[技能/ts-node-components.md|节点组件故障排查]] — Cross-reference
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
-- [[技能/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
-- [[技能/skill-reference-diagnostic-workflow.md|Diagnostic Workflow]] — Cross-reference
-- [[技能/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
-- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|Diagnostic Workflow]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
 - [[实体/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference
 - [[实体/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[实体/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference

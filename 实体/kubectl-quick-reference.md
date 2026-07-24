@@ -148,13 +148,13 @@ ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot.db --endpoints=https:/
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[技能/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
 - [[实体/kube-apiserver.md|kube-apiserver]]
 - [[etcd|etcd]]
 

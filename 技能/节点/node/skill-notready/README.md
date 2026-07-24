@@ -14,6 +14,6 @@ Node NotReady 状态的完整诊断技能包，包含 SKILL.md（Agent 可执行
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 - [[故障诊断/FTA故障树/list/node-fta.md|Node 故障树分析]]

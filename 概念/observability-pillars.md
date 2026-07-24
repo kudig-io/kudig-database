@@ -213,8 +213,8 @@ kubectl -n observability port-forward svc/jaeger-query 16686:16686
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[概念/high-availability-patterns.md|High Availability Patterns]]
 
 - [[概念/Operator 模式 × 可观测性.md|Operator 模式 × 可观测性]]

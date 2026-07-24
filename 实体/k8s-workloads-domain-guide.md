@@ -166,7 +166,7 @@ kubectl describe node <node> | grep -A10 "Allocated resources"
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[deployment|Deployment]]
 - [[实体/statefulset.md|StatefulSet]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 
 - [[概念/Deployment × Secret 管理.md|Deployment × Secret 管理]]
 

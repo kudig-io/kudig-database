@@ -110,7 +110,7 @@ audience: [SRE, 运维工程师]  - name: KUDIG Team
 
 ## Related
 
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]

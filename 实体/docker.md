@@ -216,10 +216,10 @@ docker system df
 - [[概念/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
 - [[概念/overlayfs-storage.md|OverlayFS Storage]] — Cross-reference
 - [[概念/linux-container-foundation.md|Linux Container Foundation]] — Cross-reference
-- [[技能/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[技能/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
-- [[技能/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
-- [[技能/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[技能/工作负载/daemonset/培训/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference
 - [[实体/kubernetes-changelog.md|Kubernetes 变更日志索引]] — Cross-reference
 - [[实体/cncf-storage.md|CNCF 存储与数据库项目全景]] — Cross-reference

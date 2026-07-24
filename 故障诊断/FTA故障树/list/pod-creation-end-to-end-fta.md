@@ -204,8 +204,8 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[集群基础/架构总览/05-pod-creation-end-to-end-flow.md|Pod 创建端到端流程与组件联动排障]]
 - [[故障诊断/FTA故障树/list/pod-fta.md|Pod 异常故障树分析]]
 - [[故障诊断/FTA故障树/list/service-fta.md|Service 异常故障树分析]]

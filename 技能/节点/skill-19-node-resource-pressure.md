@@ -146,9 +146,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 生产案例
 
@@ -193,10 +193,10 @@ prerequisites:
 
 ## Related
 
-- [[技能/skill-assets-escalation-template.md|skill-assets-escalation-template]] — Escalation Template
-- [[技能/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
-- [[技能/ts-storage.md|ts-storage]] — 存储故障排查
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-assets-escalation-template.md|skill-assets-escalation-template]] — Escalation Template
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[技能/存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] — 存储故障排查
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

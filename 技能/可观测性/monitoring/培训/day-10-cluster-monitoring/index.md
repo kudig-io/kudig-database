@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-2-security-monitoring/day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md|Cluster Monitoring Hands On]]
+- [[技能/可观测性/monitoring/培训/day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md|Cluster Monitoring Hands On]]
 

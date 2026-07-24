@@ -36,7 +36,7 @@ relationships:
   type: uses
 - target: '[[实体/kubelet.md]]'
   type: uses
-- target: '[[技能/training-public/inner-training/week-3-node-workload/checkpoint.md]]'
+- target: '[[技能/工作负载/pod/培训/inner-training/week-3-node-workload/checkpoint.md]]'
   type: related_to
 - target: '[[系统基础/速查卡/k8s.md]]'
   type: related_to
@@ -126,7 +126,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 
 ## 开放问题
 
-- **Volume 快照与 Pod 一致性**：CSI 快照操作在存储后端执行，但应用可能正在写入数据。如何保证快照的崩溃一致性？是否需要应用层面的冻结机制（如 fsfreeze 或数据库的 [[技能/training-public/inner-training/week-3-node-workload/checkpoint.md|checkpoint]]）？
+- **Volume 快照与 Pod 一致性**：CSI 快照操作在存储后端执行，但应用可能正在写入数据。如何保证快照的崩溃一致性？是否需要应用层面的冻结机制（如 fsfreeze 或数据库的 [[技能/工作负载/pod/培训/inner-training/week-3-node-workload/checkpoint.md|checkpoint]]）？
 - **跨可用区迁移的数据成本**：当 Pod 因节点问题被调度到不同可用区时，如果 PV 不能跨可用区挂载，需要创建新的 PV 并复制数据。这种隐性数据迁移成本在大规模集群中如何评估和优化？
 - **本地存储与调度的死锁**：Local PV 绑定到特定节点，但 Pod 的调度受资源、亲和性、污点等多重约束。如果唯一满足调度条件的节点没有可用的 Local PV，Pod 将永远 Pending。如何在这种死锁中优雅降级？
 - **Sidecar 容器的 Volume 语义**：K8s v1.28+ 的 Sidecar 容器（restartPolicy: Always）在 Pod 终止时是否应该在主容器之前卸载 Volume？当前 CSI 的 unmount 顺序是否考虑了 Sidecar 的持久化需求？
@@ -139,7 +139,7 @@ StorageClass 的 volumeBindingMode: WaitForFirstConsumer 是 Pod 生命周期与
 - [[实体/csi-drivers.md|csi drivers]]
 - [[实体/statefulset.md|statefulset]]
 - [[概念/resource-management.md|resource management]]
-- [[技能/manage-persistent-storage.md|manage persistent storage]]
+- [[技能/存储/csi-storage/manage-persistent-storage.md|manage persistent storage]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 

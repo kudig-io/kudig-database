@@ -148,12 +148,12 @@ ip route show | grep -E "flannel|cali|172\.|10\.244"
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
-- [[技能/故障诊断-网络/service/service-fta.md|Service 故障树]] — 同域关联
-- [[技能/故障诊断-网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 故障树]] — 同域关联
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
-- [[技能/排障实战/networking/ts-networking.md|网络排障实战]] — 实战参考
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
+- [[技能/网络/service/service-fta.md|Service 故障树]] — 同域关联
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 故障树]] — 同域关联
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
+- [[技能/网络/service/诊断排障/ts-networking.md|网络排障实战]] — 实战参考
 
 ## Related
 

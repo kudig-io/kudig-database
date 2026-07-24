@@ -211,9 +211,9 @@ ip link delete flannel.1 2>/dev/null || true
 ```
 ## 相关技能
 
-- [[技能/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
-- [[技能/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[技能/backup-restore-etcd.md|备份和恢复 etcd]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[技能/节点/node/运维操作/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
 - [[概念/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
 - [[etcd|etcd]]
 

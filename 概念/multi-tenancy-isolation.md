@@ -195,10 +195,10 @@ subjects:
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[概念/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[技能/audit-rbac-configurations.md|audit-rbac-configurations]] — Audit RBAC Configurations
+- [[技能/安全/rbac/audit-rbac-configurations.md|audit-rbac-configurations]] — Audit RBAC Configurations
 - [[概念/security-defense-depth.md|Defense-in-Depth Security]]
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[技能/audit-rbac-configurations.md|Audit RBAC Configurations]]
+- [[技能/安全/rbac/audit-rbac-configurations.md|Audit RBAC Configurations]]
 - [[概念/服务网格 × 零信任安全.md|服务网格 x 零信任安全]] — synthesis
 - [[概念/IaC × 多集群管理.md|IaC x 多集群管理]] — synthesis
 

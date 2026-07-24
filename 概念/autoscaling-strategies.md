@@ -262,7 +262,7 @@ spec:
 - [[概念/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[概念/scheduling-algorithm.md|scheduling-algorithm]] — Scheduling Algorithm
 - [[概念/resource-management.md|Resource Management]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[概念/scheduling-algorithm.md|Scheduling Algorithm]]
 
 

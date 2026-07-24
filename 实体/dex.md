@@ -278,7 +278,7 @@ kubectl delete refreshtokens.dex.coreos.com --all -n dex
 - 00-open-source-projects-index
 - [[故障诊断/FTA故障树/fta-index.md|fta-index]]
 - dex
-- [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

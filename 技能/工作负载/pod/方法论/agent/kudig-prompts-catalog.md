@@ -126,14 +126,14 @@ prerequisites:
 
 ## Related
 
-- [[技能/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
 - [[故障诊断/FTA故障树/list/pod-fta.md|pod-fta]] — pod-fta
 - [[故障诊断/FTA故障树/list/dns-fta.md|dns-fta]] — dns-fta
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
 - observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
 - [[可观测性/总览/25-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
-- [[技能/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
+- [[技能/节点/node/skill-notready/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
 - [[集群基础/控制平面/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
 - [[平台工程/运维/15-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
 

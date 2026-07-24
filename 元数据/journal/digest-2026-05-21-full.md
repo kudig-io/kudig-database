@@ -282,7 +282,7 @@ prerequisites:
 | backup-restore-fta | 备份恢复异常 |
 | cluster-upgrade-fta | 集群升级异常 |
 | [[故障诊断/FTA故障树/list/cluster-autoscaler-fta.md|cluster-autoscaler-fta]] | 自动伸缩异常 |
-| [[技能/cloud-provider-fta.md|cloud-provider-fta]] | 云平台集成异常 |
+| [[技能/集群运维/cloud-provider/cloud-provider-fta.md|cloud-provider-fta]] | 云平台集成异常 |
 | ... | （共 44 棵） |
 
 ---

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/README.md|Readme]]
+- [[技能/工作负载/pod/培训/training-public-README.md|Readme]]
 
 ## 子目录
 
@@ -33,7 +33,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/00-beginner-learning-roadmap.md|Beginner Learning Roadmap]]
-- [[技能/training-public/00-learning-gaps-analysis.md|Learning Gaps Analysis]]
-- [[技能/training-public/MOC.md|Moc]]
+- [[技能/工作负载/pod/培训/00-beginner-learning-roadmap.md|Beginner Learning Roadmap]]
+- [[技能/工作负载/pod/培训/00-learning-gaps-analysis.md|Learning Gaps Analysis]]
+- [[技能/工作负载/pod/培训/training-public-MOC.md|Moc]]
 

@@ -236,9 +236,9 @@ kubelet 异常排查
 - 20-kubelet-configuration
 - [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
 - virtual-kubelet
-- [[技能/node-fta.md|Node 异常故障树分析]] — Cross-reference
-- [[技能/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

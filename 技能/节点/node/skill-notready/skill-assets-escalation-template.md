@@ -85,9 +85,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 升级模板使用指南
 
@@ -135,7 +135,7 @@ prerequisites:
 
 - troubleshooting.md|k8s-structured-troubleshooting]] — 结构化排障方法论：配置优先、全组件排障指南
 - [[kudig-prompts-catalog]] — [[实体/kudig-prompts-catalog.md|KUDIG Prompts Catalog]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

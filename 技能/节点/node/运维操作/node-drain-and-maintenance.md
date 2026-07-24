@@ -185,14 +185,14 @@ spec:
 
 ## 相关技能
 
-- [[技能/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
-- [[技能/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
-- [[技能/backup-restore-etcd.md|备份和恢复 etcd]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
+- [[技能/节点/node/运维操作/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
 - [[概念/resource-management.md|资源管理]]
 
 ## Related
 
-- [[技能/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
 - [[实体/statefulset.md|[[StatefulSet|statefulset]]]] — StatefulSet
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd

@@ -133,7 +133,7 @@ Operator 协调：
 - [[实体/crd-custom-resources.md|crd-custom-resources]]
 - [[概念/observability-pillars.md|observability-pillars]]
 - [[概念/controller-pattern.md|controller-pattern]]
-- [[技能/develop-crd-operator.md|develop-crd-operator]]
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|develop-crd-operator]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 

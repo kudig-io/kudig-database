@@ -118,7 +118,7 @@ graph TD
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
 - [[概念/infrastructure-as-code.md|infrastructure-as-code]]
-- [[技能/helm-fta.md|helm-fta]]
+- [[技能/集群运维/helm/helm-fta.md|helm-fta]]
 - [[系统基础/速查卡/helm.md|[[Helm|helm]]]]
 - [[系统基础/速查卡/gitops.md|gitops]]
 

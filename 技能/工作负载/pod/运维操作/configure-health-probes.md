@@ -119,10 +119,10 @@ For a typical web application with 30s startup time:
 
 ## Related
 
-- [[技能/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[pod-lifecycle|[[Pod Lifecycle|Pod Lifecycle]]]]
 - [[deployment|Deployment]]
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 
 
 <!-- risk-assessed -->

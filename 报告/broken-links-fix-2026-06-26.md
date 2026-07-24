@@ -49,15 +49,15 @@ last_updated: 2026-06-26
 | `concepts/Kubernetes Core Concepts.md` | `[[概念/declarative-api.md|declarative api]]` | `[[概念/declarative-api.md|declarative api]]` | exact |
 | `concepts/storage-model.md` | `[[实体/csi-drivers.md|csi drivers]]` | `entities/csi-drivers.md` | exact |
 | `concepts/watch-mechanism.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
-| `skills/manage-persistent-storage.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
-| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/manage-persistent-storage.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
 | `skills/troubleshoot-pod-issues.md` | `[[系统基础/知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | `[[技能/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | exact |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/configure-health-probes.md|configure health probes]]` | `[[技能/configure-health-probes.md|configure health probes]]` | exact |
+| `skills/troubleshoot-pod-issues.md` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | exact |
+| `skills/troubleshoot-pod-issues.md` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | exact |
 | `skills/learn-01-what-is-kubernetes.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
-| `skills/skill-reference-version-matrix.md` | `[[技能/troubleshoot-node-issues.md|troubleshoot node issues]]` | `[[技能/troubleshoot-node-issues.md|troubleshoot node issues]]` | exact |
+| `skills/skill-reference-version-matrix.md` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | exact |
 | `skills/troubleshoot-node-issues.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `skills/configure-health-probes.md` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/configure-health-probes.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
 | `skills/skill-reference-diagnostic-workflow.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
 | `skills/skill-assets-escalation-template.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
 | `平台工程/12-automated-operations-toolchain.md` | `_reports/release-notes/22-production-checklist.md` | `_reports/release-notes/22-production-checklist.md` | exact |

@@ -292,12 +292,12 @@ kubectl get pods -n kube-system | grep -E "cloud-contro
 
 ## 相关链接
 
-- [[技能/manage-persistent-storage.md|持久化存储管理]]
-- [[技能/backup-restore-etcd.md|etcd 备份恢复]]
+- [[技能/存储/csi-storage/manage-persistent-storage.md|持久化存储管理]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|etcd 备份恢复]]
 
 ## Related
 
-- [[技能/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

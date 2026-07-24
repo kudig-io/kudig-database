@@ -159,13 +159,13 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/ts-networking.md|网络故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/网络/service/诊断排障/ts-networking.md|网络故障排查]]
 
 ## Related
 
-- [[技能/skill-MOC.md|skill-MOC]] — topic-skills MOC
+- [[技能/工作负载/pod/方法论/skill-MOC.md|skill-MOC]] — topic-skills MOC
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[实体/kubelet.md|kubelet]] — kubelet
@@ -207,7 +207,7 @@ flowchart TD
 - [[归档/release-notes/networking/calico/RELEASE-NOTES-3.21.md|RELEASE-NOTES-3.21]]
 - RELEASE-NOTES-3.9
 - RELEASE-NOTES-3.8
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[归档/release-notes/networking/calico/RELEASE-NOTES-3.28.md|RELEASE-NOTES-3.28]]
 - [[归档/release-notes/networking/calico/RELEASE-NOTES-3.29.md|RELEASE-NOTES-3.29]]
 - [[归档/release-notes/networking/calico/RELEASE-NOTES-3.26.md|RELEASE-NOTES-3.26]]

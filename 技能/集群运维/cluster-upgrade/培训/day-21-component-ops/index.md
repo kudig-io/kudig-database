@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-3-node-workload/day-21-component-ops/01-component-ops-hands-on.md|Component Ops Hands On]]
+- [[技能/集群运维/cluster-upgrade/培训/day-21-component-ops/01-component-ops-hands-on.md|Component Ops Hands On]]
 

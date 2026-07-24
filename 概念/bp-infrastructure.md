@@ -250,8 +250,8 @@ graph TB
 
 ## Related
 
-- [[技能/k8s-cluster-configuration-guide.md|k8s-cluster-configuration-guide]] — Kubernetes 集群配置最佳实践
-- [[技能/k8s-storage-configuration-guide.md|k8s-storage-configuration-guide]] — Kubernetes 存储配置最佳实践
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|k8s-cluster-configuration-guide]] — Kubernetes 集群配置最佳实践
+- [[技能/存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|k8s-storage-configuration-guide]] — Kubernetes 存储配置最佳实践
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

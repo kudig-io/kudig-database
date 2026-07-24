@@ -268,7 +268,7 @@ kubectl get volumesnapshotcontent
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/storage-model.md|Persistent Storage Model]]
-- [[技能/manage-persistent-storage.md|Manage Persistent Storage]]
+- [[技能/存储/csi-storage/manage-persistent-storage.md|Manage Persistent Storage]]
 - [[实体/statefulset.md|StatefulSet]]
 
 <!-- risk-assessed -->

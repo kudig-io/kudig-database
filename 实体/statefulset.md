@@ -263,8 +263,8 @@ kubectl exec -it postgresql-0 -n database -- nslookup postgresql-0.postgresql-he
 ## Related
 - [[概念/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
 
-- [[技能/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
-- [[技能/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[技能/工作负载/deployment/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 - [[INDEX]] — Wiki Index
 - [[deployment]] — Deployment
 - [[概念/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
@@ -279,7 +279,7 @@ kubectl exec -it postgresql-0 -n database -- nslookup postgresql-0.postgresql-he
 - [[故障诊断/资源排障/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
 - [[故障诊断/FTA故障树/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
 - [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

@@ -312,7 +312,7 @@ kubectl delete jaeger production -n observability
 - [[实体/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference
 - [[概念/bp-observability.md|最佳实践：Observability]] — Cross-reference
 - [[概念/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
-- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
 - [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
 - [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 - [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

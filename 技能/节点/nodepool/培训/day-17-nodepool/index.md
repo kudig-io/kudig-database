@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-3-node-workload/day-17-nodepool/01-nodepool-basics-hands-on.md|Nodepool Basics Hands On]]
+- [[技能/节点/nodepool/培训/day-17-nodepool/01-nodepool-basics-hands-on.md|Nodepool Basics Hands On]]
 

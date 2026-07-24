@@ -482,13 +482,13 @@ helm upgrade myapp ./chart -f values-prod.yaml --set image.tag=v2.0
 - [[概念/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
 - [[概念/infrastructure-as-code.md|Infrastructure as Code]] — Cross-reference
 - [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
-- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[技能/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
-- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
-- [[技能/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[技能/网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[实体/argocd.md|ArgoCD]] — Cross-reference
 - [[实体/cncf-orchestration.md|CNCF 编排与应用管理项目全景]] — Cross-reference

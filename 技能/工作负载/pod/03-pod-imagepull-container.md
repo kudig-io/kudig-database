@@ -359,10 +359,10 @@ kube_pod_container_status_waiting_reason{reason="ErrImagePull"} == 1
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
-- [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
-- [[技能/故障诊断-工作负载/pod/04-pod-sop-runbook.md|Pod SOP/Runbook]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
+- [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
+- [[技能/工作负载/pod/04-pod-sop-runbook.md|Pod SOP/Runbook]]
 
 ## Related
 

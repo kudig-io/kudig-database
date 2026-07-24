@@ -207,8 +207,8 @@ kubectl api-versions
 - [[deployment]] — Deployment
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
 - [[实体/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
 

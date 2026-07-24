@@ -135,7 +135,7 @@ last_updated: '2026-07-21'
 
 - [[故障诊断/高级排障/structural-10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting|AI/ML 工作负载排障]]
 - [[故障诊断/高级排障/structural-09-dra-troubleshooting|DRA 排障]]
-- [[技能/排障实战/ai-ml-workloads/ts-ai-ml-workloads.md|AI/ML 工作负载排障技能]]
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排障技能]]
 - [[技能/gpu-fta|GPU FTA]]
 
 ## 知识字典 (Knowledge Dictionary)

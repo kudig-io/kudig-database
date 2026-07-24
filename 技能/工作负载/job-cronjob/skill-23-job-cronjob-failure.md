@@ -155,9 +155,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 生产案例
 
@@ -202,9 +202,9 @@ prerequisites:
 ## Related
 
 - [[rbac-fta]] — RBAC 异常故障树分析
-- [[技能/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-- [[技能/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] — FTA Diagnostic Execution Engine
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] — FTA Diagnostic Execution Engine
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

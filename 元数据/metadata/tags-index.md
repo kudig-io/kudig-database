@@ -68,7 +68,7 @@ estimated_read_time: 5min
 ### ingress
 - 网络/27: Ingress 基础
 - 故障诊断/15: Ingress 故障排查
-- 故障诊断/FTA故障树/[[技能/ingress-fta.md|ingress-fta]].md
+- 故障诊断/FTA故障树/[[技能/网络/ingress/ingress-fta.md|ingress-fta]].md
 
 ### gateway-api
 - 网络/35: Gateway API 概览

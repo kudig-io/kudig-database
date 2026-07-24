@@ -608,7 +608,7 @@ flowchart TD
 
 ## 参见
 
-- [[技能/training-lecturer/12-decision-tree/decision-tree-mermaid.md|讲师版]]
+- [[技能/工作负载/pod/培训/lecturer/decision-tree-mermaid.md|讲师版]]
 
 
 <!-- risk-assessed -->

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-2-security-monitoring/day-11-risk-assessment/01-risk-assessment-hands-on.md|Risk Assessment Hands On]]
+- [[技能/安全/rbac/培训/day-11-risk-assessment/01-risk-assessment-hands-on.md|Risk Assessment Hands On]]
 

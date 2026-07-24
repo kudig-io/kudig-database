@@ -17,13 +17,13 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/best-practices/deployment/README.md|Readme]]
+- [[技能/工作负载/deployment/README.md|Readme]]
 
 ## 文档
 
-- [[技能/best-practices/deployment/01-local-demo-deployment.md|Local Demo Deployment]]
-- [[技能/best-practices/deployment/02-single-node-deployment.md|Single Node Deployment]]
-- [[技能/best-practices/deployment/03-development-environment-deployment.md|Development Environment Deployment]]
-- [[技能/best-practices/deployment/04-production-environment-deployment.md|Production Environment Deployment]]
-- [[技能/best-practices/deployment/MOC.md|Moc]]
+- [[技能/集群运维/cluster-deployment/01-local-demo-deployment.md|Local Demo Deployment]]
+- [[技能/集群运维/cluster-deployment/02-single-node-deployment.md|Single Node Deployment]]
+- [[技能/集群运维/cluster-deployment/03-development-environment-deployment.md|Development Environment Deployment]]
+- [[技能/集群运维/cluster-deployment/04-production-environment-deployment.md|Production Environment Deployment]]
+- [[技能/集群运维/cluster-deployment/MOC.md|Moc]]
 

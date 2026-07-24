@@ -184,20 +184,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
 
 ## Related
 
 - [[calico-fta]] — Calico Fta
-- [[技能/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[service-fta]] — Service 异常故障树分析
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
 - [[故障诊断/FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
-- [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
 
 

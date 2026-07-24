@@ -16,7 +16,7 @@ rounds: 3
 branches_per_round: 3+
 last_updated: 2026-05-23
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[概念/case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
   type: uses
@@ -94,7 +94,7 @@ kubectl get events --all-namespaces --field-selector type=Warning | tail -30
 > 【如果无法获取全集群事件】改为 `kubectl get events -n <ns> --field-selector type=Warning | tail -20`
 > 【如果 kubectl get nodes 不可用】请从监控平台确认：是否有节点离线、集群总节点数是否减少、是否有网络告警。
 
-**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
+**升级决策点**：若确认多节点或控制平面异常，立即：1) 通知值班主管；2) 启动集群问题排查（[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001）；3) 评估是否启动灾难恢复。
 
 ---
 

@@ -272,8 +272,8 @@ groups:
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
-- [[技能/故障诊断-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[技能/节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
 - [[故障诊断/FTA故障树/list/nodepool-fta.md|NodePool FTA 原始文件]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]

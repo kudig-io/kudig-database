@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-4-network-storage/day-28-comprehensive-review/01-comprehensive-review.md|Comprehensive Review]]
+- [[技能/工作负载/pod/培训/day-28-comprehensive-review/01-comprehensive-review.md|Comprehensive Review]]
 

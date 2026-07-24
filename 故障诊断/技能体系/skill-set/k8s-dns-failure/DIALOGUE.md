@@ -15,7 +15,7 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/coredns.md]]'
   type: uses
@@ -387,7 +387,7 @@ relationships:
 >    **如果无法执行** → `kubectl get pods -n kube-system`，把非 Running 的 Pod 告诉我
 
 **分支决策**：
-- **I1**：CNI Pod 异常 → 升级决策点（网络深度诊断 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-003）
+- **I1**：CNI Pod 异常 → 升级决策点（网络深度诊断 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-003）
 - **I2**：只有 CoreDNS 受影响 → 检查 CoreDNS 亲和性/反亲和性配置
 - **I3**：节点上大量 Pod 异常 → 节点级网络问题，Round 3 — 分支 M（节点恢复）
 

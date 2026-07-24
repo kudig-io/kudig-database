@@ -115,7 +115,7 @@ output_pattern:
 
 ## 相关链接
 
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
 
 ## 命令输出解读指南
 
@@ -164,10 +164,10 @@ kubectl top pods -A --sort-by=memory
 ## Related
 
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[技能/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+- [[技能/工作负载/daemonset/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[helm-fta]] — Helm 发布异常故障树分析
-- [[技能/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
 
 
 <!-- risk-assessed -->

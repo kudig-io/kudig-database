@@ -263,13 +263,13 @@ spec:
 
 ## 相关技能
 
-- [[技能/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[技能/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[技能/工作负载/deployment/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
 - [[deployment|Deployment]]
 
 ## Related
 
-- [[技能/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
 - [[deployment]] — Deployment
 - [[istio]] — Istio
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

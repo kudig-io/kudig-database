@@ -141,17 +141,17 @@ For Java applications in containers:
 
 ## Related
 
-- [[技能/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[技能/configure-health-probes.md|configure-health-probes]] — [[技能/configure-health-probes.md|Configure Health Probes]]
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[技能/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
 - [[pod-lifecycle|Pod Lifecycle]]
 - [[概念/resource-management.md|Resource Management]]
-- [[技能/configure-health-probes.md|Configure Health Probes]]
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
+- [[技能/工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 
 
 <!-- risk-assessed -->

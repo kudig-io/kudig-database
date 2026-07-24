@@ -395,12 +395,12 @@ kube_pod_status_phase{phase="Pending"} == 1
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
-- [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
-- [[技能/故障诊断-工作负载/pod/03-pod-imagepull-container.md|镜像拉取诊断]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
+- [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
+- [[技能/工作负载/pod/03-pod-imagepull-container.md|镜像拉取诊断]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 

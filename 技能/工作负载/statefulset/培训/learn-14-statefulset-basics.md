@@ -612,9 +612,9 @@ kubectl delete statefulset <name>
 
 ## Related
 
-- [[技能/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：Service - 让应用可以被访问
-- [[技能/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/网络/service/培训/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：Service - 让应用可以被访问
+- [[技能/工作负载/pod/培训/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[实体/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 

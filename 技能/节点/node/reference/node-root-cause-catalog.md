@@ -451,7 +451,7 @@ RC-006 (网络不通) ←→ RC-007 (证书过期)
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
-- [[技能/故障诊断-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
-- [[技能/故障诊断-节点/node/reference/node-conditions-reference.md|Node Conditions 参考]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[技能/节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
+- [[技能/节点/node/reference/node-conditions-reference.md|Node Conditions 参考]]

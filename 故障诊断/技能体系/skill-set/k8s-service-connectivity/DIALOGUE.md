@@ -15,7 +15,7 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/cilium.md]]'
   type: uses
@@ -142,7 +142,7 @@ relationships:
 
 **分支决策**：
 - **B1**：kube-proxy Pod 异常或部分节点缺失 → Round 2 — 分支 D（kube-proxy 修复）
-- **B2**：CoreDNS Pod 异常 → 升级至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
+- **B2**：CoreDNS Pod 异常 → 升级至 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **B3**：CNI Pod 异常 → 升级至 SKILL-NET-003（网络深度诊断）
 - **B4**：节点 NotReady → 升级至 SKILL-NODE-001（节点问题诊断）
 

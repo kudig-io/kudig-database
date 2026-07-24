@@ -702,7 +702,7 @@ flowchart TD
 
 ## Related
 
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[技能/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 - [[生态参考/topic-index/terway-index|Terway 知识图谱索引]]
 

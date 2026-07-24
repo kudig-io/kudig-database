@@ -163,8 +163,8 @@ kubeadm init --config=cluster-config.yaml
 ## Related
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
-- [[技能/apiserver-fta.md|apiserver-fta]]
-- [[技能/etcd-fta.md|etcd-fta]]
+- [[技能/控制面/apiserver/apiserver-fta.md|apiserver-fta]]
+- [[技能/控制面/etcd/etcd-fta.md|etcd-fta]]
 - [[实体/kubernetes.md|kubernetes]]
 
 

@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/best-practices/infrastructure/kubernetes-cluster.md|Kubernetes Cluster]]
-- [[技能/best-practices/infrastructure/networking.md|Networking]]
-- [[技能/best-practices/infrastructure/storage.md|Storage]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/infra-kubernetes-cluster.md|Kubernetes Cluster]]
+- [[技能/网络/cni/最佳实践/networking.md|Networking]]
+- [[技能/存储/csi-storage/最佳实践/storage.md|Storage]]
 

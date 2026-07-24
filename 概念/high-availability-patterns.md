@@ -288,12 +288,12 @@ spec:
 - [[概念/eventual-consistency.md|eventual-consistency]] — Eventual Consistency in Kubernetes
 - [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[概念/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[技能/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
 - [[etcd]] — etcd
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[概念/eventual-consistency.md|Eventual Consistency]]
 - [[概念/security-defense-depth.md|Defense-in-Depth Security]]
-- [[技能/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
 
 - 08-high-availability-patterns
 

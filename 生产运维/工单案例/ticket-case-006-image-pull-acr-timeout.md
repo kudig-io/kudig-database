@@ -58,7 +58,7 @@ relationships:
   type: related_to
 - target: '[[系统基础/知识字典/operations/rolling-update.md]]'
   type: related_to
-- target: '[[技能/deployment-rolling-update.md]]'
+- target: '[[技能/工作负载/deployment/deployment-rolling-update.md]]'
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-009-etcd-disk-full-apiserver-slow.md]]'
   type: related_to
@@ -288,10 +288,10 @@ curl -s http://order-service.trade-core.svc.cluster.local:8080/actuator/health |
 
 - Deployment
 - 滚动更新
-- [[技能/deployment-rolling-update.md|Deployment 滚动更新策略]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|Deployment 滚动更新策略]]
 - 阿里云专有云 etcd 数据目录磁盘满导致 apiserver 响应慢
 - 滚动更新
-- [[技能/deployment-rolling-update.md|Deployment 滚动更新策略]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|Deployment 滚动更新策略]]
 - 阿里云专有云 etcd 数据目录磁盘满导致 apiserver 响应慢
 
 

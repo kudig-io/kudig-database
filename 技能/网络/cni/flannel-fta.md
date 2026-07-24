@@ -97,7 +97,7 @@ severity: high
 
 ### 排除标准
 
-- 若 `kubectl get nodes` 显示节点 NotReady → 转 [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- 若 `kubectl get nodes` 显示节点 NotReady → 转 [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
 - 若仅 Service ClusterIP 不通但 Pod IP 直连正常 → 转 kube-proxy 排查
 - 若同节点 Pod 也不通 → 可能是 CNI 配置/容器运行时问题，非纯 Flannel 故障
 
@@ -380,11 +380,11 @@ kubectl get configmap -n kube-system kube-flannel-cfg -o jsonpath='{.data.net-co
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
-- [[技能/故障诊断-网络/cni/terway-fta.md|Terway CNI 异常诊断]] — 同域技能
-- [[技能/故障诊断-网络/cni/calico-fta.md|Calico 网络异常诊断]] — 同域技能
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
+- [[技能/网络/cni/terway-fta.md|Terway CNI 异常诊断]] — 同域技能
+- [[技能/网络/cni/calico-fta.md|Calico 网络异常诊断]] — 同域技能
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
 - [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

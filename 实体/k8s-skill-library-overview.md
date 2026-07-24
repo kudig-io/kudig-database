@@ -114,10 +114,10 @@ Skill 库深度集成 Kubernetes 运维。诊断步骤使用 `kubectl`、`crictl
 ## Related
 
 - [[实体/k8s-ai-agent-engineering.md|k8s-ai-agent-engineering]] — AI Agent 工程：RAG、多 Agent 编排、安全护栏与生产部署
-- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[技能/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
-- [[技能/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/工作负载/pod/方法论/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 
 
 <!-- risk-assessed -->

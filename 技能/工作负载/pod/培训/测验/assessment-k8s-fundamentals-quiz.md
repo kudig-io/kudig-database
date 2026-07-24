@@ -51,9 +51,9 @@ E. 创建新的 Deployment
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 评分标准
 
@@ -84,8 +84,8 @@ E. 创建新的 Deployment
 
 ## Related
 
-- [[技能/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
-- [[技能/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+- [[技能/工作负载/pod/培训/测验/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
+- [[技能/网络/networkpolicy/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 - [[deployment]] — Deployment
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -464,7 +464,7 @@ kubectl logs <pod-name> --previous
 
 ## 参见
 
-- [[技能/training-public/fundamentals/02-pod-basics.md|公开版]]
+- [[技能/工作负载/pod/培训/public-fundamentals-02-pod-basics.md|公开版]]
 
 
 <!-- risk-assessed -->

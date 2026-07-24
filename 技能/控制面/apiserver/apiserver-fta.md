@@ -182,21 +182,21 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/ts-control-plane.md|控制平面故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]]
 
 ## Related
 
-- [[技能/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
-- [[技能/ts-cloud-provider.md|ts-cloud-provider]] — 云服务商集成排查
-- [[技能/ts-node-components.md|ts-node-components]] — 节点组件故障排查
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[技能/集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|ts-cloud-provider]] — 云服务商集成排查
+- [[技能/节点/node/诊断排障/ts-node-components.md|ts-node-components]] — 节点组件故障排查
 - [[实体/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - [[nginx-ingress-fta]]
 - [[故障诊断/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[技能/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
 
 
 <!-- risk-assessed -->

@@ -15,13 +15,13 @@ agent_role: 远程顾问
 execution_mode: L1-advisory
 last_updated: 2026-05-23
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/etcd.md]]'
   type: uses
 - target: '[[实体/kubelet.md]]'
   type: uses
-- target: '[[技能/kubelet-certificate-rotation.md]]'
+- target: '[[技能/安全/certificate/kubelet-certificate-rotation.md]]'
   type: uses
 ---
 
@@ -190,7 +190,7 @@ relationships:
 > - **替代方案 B**：查看 `/var/log/messages` 或 `/var/log/syslog`
 > - **替代方案 C**：`kubectl debug node/<node> -it --image=busybox`
 >
-> 这可能需要引导至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001（节点问题诊断）。
+> 这可能需要引导至 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-NODE-001（节点问题诊断）。
 
 ### Round 2 — 分支 B：只能 SSH 到节点，手动检查
 
@@ -323,7 +323,7 @@ relationships:
 
 ### Round 3 — 分支 C：kubelet 证书问题 — CSR 处理
 
-**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[技能/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]（自动/手动）。
+**顾问**：确认是 kubelet 证书问题。请先确认集群的 [[技能/安全/certificate/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]（自动/手动）。
 > **自动轮换场景**，请执行：
 > ```bash
 > kubectl get csr

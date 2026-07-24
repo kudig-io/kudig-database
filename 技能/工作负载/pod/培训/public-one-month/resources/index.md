@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/one-month/resources/commands-cheatsheet.md|Commands Cheatsheet]]
-- [[技能/training-public/public-training/one-month/resources/knowledge-map.md|Knowledge Map]]
-- [[技能/training-public/public-training/one-month/resources/reading-sequence.md|Reading Sequence]]
+- [[技能/工作负载/pod/培训/public-one-month/resources/commands-cheatsheet.md|Commands Cheatsheet]]
+- [[技能/工作负载/pod/培训/public-one-month/resources/knowledge-map.md|Knowledge Map]]
+- [[技能/工作负载/pod/培训/public-one-month/resources/reading-sequence.md|Reading Sequence]]
 

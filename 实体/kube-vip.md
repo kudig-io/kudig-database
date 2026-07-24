@@ -274,7 +274,7 @@ VIP 异常
 - [[slimfaas]] — SlimFaas
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[实体/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
-- [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 
 <!-- risk-assessed -->

@@ -477,11 +477,11 @@ containerLogMaxFiles: 5
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
-- [[技能/故障诊断-节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
-- [[技能/故障诊断-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
-- [[技能/故障诊断-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
-- [[技能/故障诊断-节点/node/reference/node-version-differences.md|版本差异对比]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[技能/节点/node/03-node-component-troubleshooting.md|节点组件故障排查]]
+- [[技能/节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
+- [[技能/节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
+- [[技能/节点/node/reference/node-version-differences.md|版本差异对比]]
 - [[故障诊断/FTA故障树/list/node-fta.md|Node 故障树分析]]
 - [[故障诊断/高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南（原始文件）]]

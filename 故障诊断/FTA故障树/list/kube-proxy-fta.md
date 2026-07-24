@@ -160,8 +160,8 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[实体/kube-proxy.md|kube-proxy]] — kube-proxy
 - [[故障诊断/高级排障/structural-02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
 - [[故障诊断/FTA故障树/list/service-fta.md|Service 异常故障树分析]]

@@ -15,7 +15,7 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/deployment.md]]'
   type: uses
@@ -673,7 +673,7 @@ EOF
 | 后端存储数据损坏 | **存储专家** | 需要 ES/Loki 数据恢复 |
 | 日志代理持续崩溃 | **Operator 维护团队** | 可能是 Bug 或根本性配置错误 |
 | 多节点同时日志异常 | **基础设施团队** | 底层存储/网络问题 |
-| 安全策略限制 | **[[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-SEC-003** | RBAC/PSP/OPA 相关 |
+| 安全策略限制 | **[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-SEC-003** | RBAC/PSP/OPA 相关 |
 | 高日志量无法优化 | **可观测性架构师** | 架构调整 |
 | 合规审计日志中断 | **合规团队** | 需要审计追溯 |
 

@@ -37,9 +37,9 @@ relationships:
   type: uses
 - target: '[[实体/kubernetes.md]]'
   type: uses
-- target: '[[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md]]'
+- target: '[[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md]]'
   type: uses
-- target: '[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md]]'
+- target: '[[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md]]'
   type: uses
 ---
 
@@ -54,7 +54,7 @@ relationships:
 
 ## Symptom-to-Diagnosis Mapping
 
-This playbook synthesizes information from the [[实体/kubernetes.md|Kubernetes]] Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]], and Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
+This playbook synthesizes information from the [[实体/kubernetes.md|Kubernetes]] Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]], [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]], and Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]] into an actionable troubleshooting flow.
 
 ### Tier 1: Immediate Assessment (First 2 Minutes)
 
@@ -135,7 +135,7 @@ After every P0/P1 incident:
 2. If new: propose a new FTA path in PROPOSED state
 3. If existing but missed: update observability for the bottom event
 4. If existing but slow to fix: improve the remediation runbook
-5. Update probability weights in the [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] based on outcome
+5. Update probability weights in the [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] based on outcome
 
 ## Related
 
@@ -146,10 +146,10 @@ After every P0/P1 incident:
 - [[etcd]] — etcd
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
 - [[实体/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
 - [[系统基础/知识字典/networking/service.md|Service]]

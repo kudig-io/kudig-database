@@ -164,9 +164,9 @@ kubectl describe lease kube-scheduler -n kube-system
 
 ## 相关技能
 
-- [[技能/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 - [[概念/high-availability-patterns.md|高可用模式]]
-- [[技能/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
 - [[etcd|etcd]]
 - [[实体/kube-apiserver.md|kube-apiserver]]
 
@@ -213,7 +213,7 @@ kubectl describe lease kube-scheduler -n kube-system
 
 ## Related
 
-- [[技能/k8s-cluster-configuration-guide.md|k8s-cluster-configuration-guide]] — Kubernetes 集群配置最佳实践
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|k8s-cluster-configuration-guide]] — Kubernetes 集群配置最佳实践
 - [[实体/kube-scheduler.md|kube-scheduler]] — kube-scheduler
 - [[kube-vip]] — kube-vip
 - [[etcd]] — etcd

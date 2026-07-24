@@ -17,21 +17,21 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/topic-presentations/README.md|Readme]]
+- [[技能/工作负载/pod/培训/presentations/README.md|Readme]]
 
 ## 文档
 
-- [[技能/training-public/topic-presentations/MOC.md|Moc]]
-- [[技能/training-public/topic-presentations/kubernetes-architecture-fundamentals-presentation.md|Kubernetes Architecture Fundamentals Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-coredns-presentation.md|Kubernetes Coredns Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-ingress-presentation.md|Kubernetes Ingress Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-observability-presentation.md|Kubernetes Observability Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-scheduling-presentation.md|Kubernetes Scheduling Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-security-rbac-presentation.md|Kubernetes Security Rbac Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-service-presentation.md|Kubernetes Service Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-storage-presentation.md|Kubernetes Storage Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-terway-presentation.md|Kubernetes Terway Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes Troubleshooting Methodology Presentation]]
-- [[技能/training-public/topic-presentations/kubernetes-workload-presentation.md|Kubernetes Workload Presentation]]
-- [[技能/training-public/topic-presentations/presentation-template.md|Presentation Template]]
+- [[技能/工作负载/pod/培训/presentations/MOC.md|Moc]]
+- [[技能/控制面/apiserver/培训/kubernetes-architecture-fundamentals-presentation.md|Kubernetes Architecture Fundamentals Presentation]]
+- [[技能/网络/dns/培训/kubernetes-coredns-presentation.md|Kubernetes Coredns Presentation]]
+- [[技能/网络/ingress/培训/kubernetes-ingress-presentation.md|Kubernetes Ingress Presentation]]
+- [[技能/可观测性/monitoring/培训/kubernetes-observability-presentation.md|Kubernetes Observability Presentation]]
+- [[技能/控制面/scheduler/培训/kubernetes-scheduling-presentation.md|Kubernetes Scheduling Presentation]]
+- [[技能/安全/rbac/培训/kubernetes-security-rbac-presentation.md|Kubernetes Security Rbac Presentation]]
+- [[技能/网络/service/培训/kubernetes-service-presentation.md|Kubernetes Service Presentation]]
+- [[技能/存储/csi-storage/培训/kubernetes-storage-presentation.md|Kubernetes Storage Presentation]]
+- [[技能/网络/cni/培训/kubernetes-terway-presentation.md|Kubernetes Terway Presentation]]
+- [[技能/工作负载/pod/培训/presentations/kubernetes-troubleshooting-methodology-presentation.md|Kubernetes Troubleshooting Methodology Presentation]]
+- [[技能/工作负载/pod/培训/presentations/kubernetes-workload-presentation.md|Kubernetes Workload Presentation]]
+- [[技能/工作负载/pod/培训/presentations/presentation-template.md|Presentation Template]]
 

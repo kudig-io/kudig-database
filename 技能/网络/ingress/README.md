@@ -14,5 +14,5 @@ Ingress Controller（Nginx Ingress、Higress）路由失败、TLS 终止异常�
 
 ## 相关链接
 
-- [[技能/故障诊断-网络/gateway-api/gateway-api-fta.md|Gateway API 故障树]]
-- [[技能/故障诊断-网络/service/service-fta.md|Service 故障树]]
+- [[技能/网络/gateway-api/gateway-api-fta.md|Gateway API 故障树]]
+- [[技能/网络/service/service-fta.md|Service 故障树]]

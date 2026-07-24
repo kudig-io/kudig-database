@@ -118,7 +118,7 @@ labels:
 - [[概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[概念/security-defense-depth.md|Defense-in-Depth Security]]
 - [[概念/secrets-management.md|[[Secrets Management|Secrets Management]]]]
-- [[技能/audit-rbac-configurations.md|Audit RBAC Configurations]]
+- [[技能/安全/rbac/audit-rbac-configurations.md|Audit RBAC Configurations]]
 
 ## 生产案例
 

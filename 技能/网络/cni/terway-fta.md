@@ -99,7 +99,7 @@ severity: high
 
 ### 排除标准
 
-- 若 `kubectl get nodes` 显示节点 NotReady → 转 [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- 若 `kubectl get nodes` 显示节点 NotReady → 转 [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
 - 若仅 Service ClusterIP 不通但 Pod IP 直连正常 → 转 Service/kube-proxy 排查
 - 若 DNS 解析失败但 IP 连通正常 → 转 CoreDNS 排查
 
@@ -377,10 +377,10 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli check      # 健康检查
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
-- [[技能/故障诊断-网络/cni/flannel-fta.md|Flannel 网络异常诊断]] — 同域技能
-- [[技能/故障诊断-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
+- [[技能/网络/cni/flannel-fta.md|Flannel 网络异常诊断]] — 同域技能
+- [[技能/节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
 - [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

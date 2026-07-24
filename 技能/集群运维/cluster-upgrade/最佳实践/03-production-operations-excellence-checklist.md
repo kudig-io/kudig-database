@@ -380,7 +380,7 @@ kubectl get resourcequota -A -o custom-columns=NS:.metadata.namespace,NAME:.meta
 
 ## Related
 
-- [[技能/best-practices/index.md|最佳实践]]
-- [[技能/best-practices/common-best-practices.md|通用最佳实践]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/bp-index.md|最佳实践]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/common-best-practices.md|通用最佳实践]]
 - [[生产运维/index.md|生产运维]]
 - [[安全/策略治理/index.md|策略治理]]

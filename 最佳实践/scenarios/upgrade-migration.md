@@ -155,7 +155,7 @@ kubectl apply -f updated-manifests.yaml
 ## Related
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
-- [[技能/cluster-upgrade-fta.md|cluster-upgrade-fta]]
+- [[技能/集群运维/cluster-upgrade/cluster-upgrade-fta.md|cluster-upgrade-fta]]
 - 07-upgrade-paths-strategy
 
 

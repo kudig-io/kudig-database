@@ -117,9 +117,9 @@ prerequisites:
 - [[概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[概念/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
 - [[实体/prometheus-grafana.md|Prometheus + Grafana]]
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[技能/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
-- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
 
 ## 生产案例
 
@@ -167,7 +167,7 @@ prerequisites:
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/observability-pillars.md|observability-pillars]] — Observability Pillars
 - [[概念/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[技能/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — Monitor Kubernetes Metrics
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — Monitor Kubernetes Metrics
 
 
 <!-- risk-assessed -->

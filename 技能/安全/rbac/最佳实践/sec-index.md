@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/best-practices/security/network-security.md|Network Security]]
-- [[技能/best-practices/security/pod-security.md|Pod Security]]
-- [[技能/best-practices/security/secrets-management.md|Secrets Management]]
+- [[技能/网络/networkpolicy/最佳实践/network-security.md|Network Security]]
+- [[技能/安全/pod-security/最佳实践/pod-security.md|Pod Security]]
+- [[技能/安全/rbac/最佳实践/secrets-management.md|Secrets Management]]
 

@@ -15,7 +15,7 @@ version: 1.0.0
 role: remote-consultant
 language: zh
 relationships:
-- target: '[[技能/skill-k8s-node-notready-SKILL.md]]'
+- target: '[[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
 - target: '[[实体/deployment.md]]'
   type: uses
@@ -217,7 +217,7 @@ relationships:
 > **如果无法创建临时 Pod** → `kubectl exec -it <pod-name> -n <namespace> -- nslookup <registry-host>`
 
 **分支决策**：
-- **C1**：DNS 解析失败 → 升级至 [[技能/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
+- **C1**：DNS 解析失败 → 升级至 [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]]-NET-001（DNS 问题诊断）
 - **C2**：DNS 正常但 HTTP 超时，多节点受影响 → Round 3 — 分支 M（镜像仓库/代理排查）
 - **C3**：DNS 正常但 HTTP 超时，仅单节点受影响 → Round 3 — 分支 N（单节点网络排查）
 

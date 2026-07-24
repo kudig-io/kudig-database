@@ -215,12 +215,12 @@ kubectl top pods -A --sort-by=cpu -o json | jq '.items[:10]'
 - [[概念/gitops-principles.md|GitOps Principles]]
 - [[概念/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]]
 - [[概念/microservice-resilience-patterns.md|Microservice Resilience Patterns]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
 
 - 17-production-operations-best-practices
 

@@ -65,7 +65,7 @@ prerequisites:
 | 9 | [[故障诊断/技能体系/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
 | 10 | [[故障诊断/技能体系/10-image-pull-failure.md|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
 | 11 | [[故障诊断/技能体系/11-control-plane-failure.md|11-control-plane-failure]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 技能体系架构
 
@@ -115,7 +115,7 @@ L1 基础技能
 ## Related
 
 - [[gitops-argocd-fta]] — GitOps(ArgoCD) 异常故障树分析
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

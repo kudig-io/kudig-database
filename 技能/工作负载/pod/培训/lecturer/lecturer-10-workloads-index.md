@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/10-workloads/10-job-cronjob.md|Job Cronjob]]
+- [[技能/工作负载/job-cronjob/培训/lecturer/10-job-cronjob.md|Job Cronjob]]
 

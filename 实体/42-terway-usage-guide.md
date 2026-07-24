@@ -132,7 +132,7 @@ kubectl logs -n kube-system terway-daemon-xxxxx --tail=20
 ## Related
 
 - [[bfe]] — BFE
-- [[技能/skill-k8s-node-notready-USAGE-GUIDE.md|skill-k8s-node-notready-USAGE-GUIDE]] — Usage Guide
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-USAGE-GUIDE.md|skill-k8s-node-notready-USAGE-GUIDE]] — Usage Guide
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -262,15 +262,15 @@ kubectl uncordon <node>
 
 ## 相关文档
 
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
-- [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]]
+- [[技能/集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]]
 - [[概念/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[技能/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
+- [[技能/安全/certificate/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
 - [[概念/node-lifecycle-management.md|节点生命周期管理]]
-- [[技能/deployment-rolling-update.md|Deployment 滚动更新策略]]
-- [[技能/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]]
-- [[技能/deployment-workload-selection.md|工作负载控制器选型]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|Deployment 滚动更新策略]]
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]]
+- [[技能/工作负载/deployment/deployment-workload-selection.md|工作负载控制器选型]]
 
 ## Related
 

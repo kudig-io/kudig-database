@@ -507,11 +507,11 @@ time() - kube_node_status_condition{condition="Ready"} > 40
 
 ## 相关链接
 
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
-- [[技能/故障诊断-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
-- [[技能/故障诊断-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
-- [[技能/故障诊断-节点/node/reference/node-version-differences.md|版本差异对比]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
+- [[技能/节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
+- [[技能/节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
+- [[技能/节点/node/reference/node-version-differences.md|版本差异对比]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 - [[故障诊断/FTA故障树/list/node-fta.md|Node 故障树分析]]
 - [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析（原始文件）]]

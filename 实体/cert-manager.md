@@ -324,11 +324,11 @@ kubectl apply -f certificate.yaml
 - [[概念/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]] — Cross-reference
 - [[概念/cloud-native-defense-in-depth.md|Cloud Native Defense in Depth]] — Cross-reference
 - [[概念/security-tool-evolution.md|安全工具演进]] — Cross-reference
-- [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
-- [[技能/ts-security-auth.md|安全认证故障排查]] — Cross-reference
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
-- [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]

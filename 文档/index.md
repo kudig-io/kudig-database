@@ -58,7 +58,7 @@ AI Agent、AI Coding、技能手册、问题排查等专题资源。
 - [[实体/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
 - [[实体/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
 - [[实体/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 
 
 <!-- risk-assessed -->

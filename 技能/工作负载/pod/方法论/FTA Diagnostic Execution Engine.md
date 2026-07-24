@@ -1,7 +1,7 @@
 ---
 title: FTA Diagnostic Execution Engine
-description: '- [[技能/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
-summary: '- [[技能/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
+description: '- [[技能/控制面/scheduler/诊断排障/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
+summary: '- [[技能/控制面/scheduler/诊断排障/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查'
 category: skill
 tags:
 - k8s
@@ -189,15 +189,15 @@ execution_config:
 
 ## Related
 
-- [[技能/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查
+- [[技能/控制面/scheduler/诊断排障/ts-resources-scheduling.md|ts-resources-scheduling]] — 资源调度故障排查
 - [[rbac-fta]] — RBAC 异常故障树分析
-- [[技能/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-- [[技能/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|skill-21-statefulset-failure]] — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot-node-issues]] — Troubleshoot Node Issues
 - [[score]] — Score
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 
@@ -206,19 +206,19 @@ execution_config:
 - [[文档/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
 - [[文档/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference
 - [[文档/API-DOC-MAP.md|KUDIG API → 文档映射]] — Cross-reference
-- [[技能/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
-- [[技能/node-fta.md|Node 异常故障树分析]] — Cross-reference
-- [[技能/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
-- [[技能/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
-- [[技能/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
-- [[技能/vpa-fta.md|VPA 异常故障树分析]] — Cross-reference
-- [[技能/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
-- [[技能/controller-manager-fta.md|Controller Manager 异常故障树分析]] — Cross-reference
-- [[技能/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] — Cross-reference
-- [[技能/terway-fta.md|Terway 异常故障树分析]] — Cross-reference
-- [[技能/gateway-api-fta.md|Gateway API 异常故障树分析]] — Cross-reference
-- [[技能/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
+- [[技能/网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[技能/节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[技能/网络/service-mesh/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/hpa-vpa/vpa-fta.md|VPA 异常故障树分析]] — Cross-reference
+- [[技能/可观测性/monitoring/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
+- [[技能/控制面/controller-manager/controller-manager-fta.md|Controller Manager 异常故障树分析]] — Cross-reference
+- [[技能/集群运维/cluster-autoscaler/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] — Cross-reference
+- [[技能/网络/cni/terway-fta.md|Terway 异常故障树分析]] — Cross-reference
+- [[技能/网络/gateway-api/gateway-api-fta.md|Gateway API 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/daemonset/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

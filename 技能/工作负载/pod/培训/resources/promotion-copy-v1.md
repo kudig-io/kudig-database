@@ -79,8 +79,8 @@ AI 秒级扫描完全库，输出了一份《缺口分析报告》，然后**当
 ---
 
 **关联文档**:
-- [[技能/training-public/00-learning-gaps-analysis.md|00 learning gaps analysis]] — 缺口分析报告原文
-- [[技能/training-public/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 多路径学习路线图
+- [[技能/工作负载/pod/培训/00-learning-gaps-analysis.md|00 learning gaps analysis]] — 缺口分析报告原文
+- [[技能/工作负载/pod/培训/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 多路径学习路线图
 
 
 ## 推广效果评估

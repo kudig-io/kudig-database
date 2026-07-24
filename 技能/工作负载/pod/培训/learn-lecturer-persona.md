@@ -213,9 +213,9 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 
 ## Related
 
-- [[技能/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
-- [[技能/learn-15-scheduling-basics.md|learn-15-scheduling-basics]] — 第15课：调度与亲和性
-- [[技能/learn-inner-training.md|learn-inner-training]] — Kubernetes 培训：Inner Training
+- [[技能/安全/resource-quota/培训/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
+- [[技能/控制面/scheduler/培训/learn-15-scheduling-basics.md|learn-15-scheduling-basics]] — 第15课：调度与亲和性
+- [[技能/工作负载/pod/培训/learn-inner-training.md|learn-inner-training]] — Kubernetes 培训：Inner Training
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

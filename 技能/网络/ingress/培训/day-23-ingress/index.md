@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-4-network-storage/day-23-ingress/01-ingress-hands-on.md|Ingress Hands On]]
+- [[技能/网络/ingress/培训/day-23-ingress/01-ingress-hands-on.md|Ingress Hands On]]
 

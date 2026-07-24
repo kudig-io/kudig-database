@@ -109,7 +109,7 @@ Diagnostic skills are the **operationalized form** of FTA bottom events. Each sk
 - Maps to specific FTA paths (TE -> IE -> BE)
 - Provides the `observable` data (metrics, logs, events) for each BE
 - Implements the `diagnosis_commands` and `healing_actions` defined in FTA
-- Feeds execution results back to the [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] learning loop
+- Feeds execution results back to the [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]] learning loop
 
 ## 诊断技能全景图
 
@@ -146,12 +146,12 @@ Diagnostic skills are the **operationalized form** of FTA bottom events. Each sk
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
-- [[技能/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/工作负载/pod/方法论/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[实体/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[实体/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
 

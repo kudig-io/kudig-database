@@ -204,15 +204,15 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/ts-security-auth.md|安全认证排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证排查]]
 
 ## Related
 
-- [[技能/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
-- [[技能/ts-storage.md|ts-storage]] — 存储故障排查
-- [[技能/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
+- [[技能/存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] — 存储故障排查
+- [[技能/节点/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[cert-manager]] — cert-manager
 

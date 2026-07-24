@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-4-network-storage/day-25-flannel/01-flannel-hands-on.md|Flannel Hands On]]
+- [[技能/网络/cni/培训/day-25-flannel/01-flannel-hands-on.md|Flannel Hands On]]
 

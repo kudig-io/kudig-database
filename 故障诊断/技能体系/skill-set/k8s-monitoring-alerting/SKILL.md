@@ -235,7 +235,7 @@ agent_execution_mode: L2-semi-auto
 
 - k8s-performance
 
-- [[技能/ts-control-plane.md|ts control plane]]
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|ts control plane]]
 
 
 当本Skill的诊断步骤无法定位根因时，建议按上述顺序排查相关Skill。

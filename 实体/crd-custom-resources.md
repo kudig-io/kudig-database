@@ -307,7 +307,7 @@ kubectl api-resources | grep example.com
 - [[实体/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]]
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/develop-crd-operator.md|Develop CRD Operator]]
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]]
 - [[概念/declarative-api.md|Declarative API]]
 - [[概念/CRD × 可观测性.md|CRD × 可观测性]]
 

@@ -248,7 +248,7 @@ chaosctl debug pod-kill-experiment -n chaos-testing
 
 - digest-2026-05-21 — Wiki 全量知识库摘要 — 2026-05-21
 - [[实体/k8s-advanced-ecosystem.md|k8s-advanced-ecosystem]] — 硬件知识体系、CNCF 全景生态与 eBPF 平台工程
-- [[技能/Agent Orchestration Patterns.md|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|[[Agent Orchestration Patterns for FTA|Agent Orchestration Patterns]]]] — Agent Orchestration Patterns for FTA
 - observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

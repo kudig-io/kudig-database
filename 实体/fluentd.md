@@ -346,8 +346,8 @@ curl -s http://fluent-bit:2020/api/v1/metrics | jq '.input.records, .output.reco
 - fluentd
 - [[实体/k8s-observability-ecosystem.md|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
 - [[概念/bp-observability.md|最佳实践：Observability]] — Cross-reference
-- [[技能/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
-- [[技能/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
 - [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
 - [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 

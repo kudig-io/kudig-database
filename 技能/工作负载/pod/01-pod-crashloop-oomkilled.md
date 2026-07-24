@@ -531,11 +531,11 @@ Agent 完成诊断后按"现象 → 根因 → 修复 → 验证 → 预防"输�
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
-- [[技能/故障诊断-工作负载/pod/reference/pod-exit-codes.md|容器退出码参考]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/故障诊断-工作负载/pod/pod-fta.md|Pod 异常故障树分析]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
+- [[技能/工作负载/pod/reference/pod-exit-codes.md|容器退出码参考]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/pod-fta.md|Pod 异常故障树分析]]
 
 ## Related
 

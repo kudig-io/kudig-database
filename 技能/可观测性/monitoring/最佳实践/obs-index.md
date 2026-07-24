@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/best-practices/observability/logging.md|Logging]]
-- [[技能/best-practices/observability/monitoring.md|Monitoring]]
-- [[技能/best-practices/observability/tracing.md|Tracing]]
+- [[技能/可观测性/monitoring/最佳实践/logging.md|Logging]]
+- [[技能/可观测性/monitoring/最佳实践/monitoring.md|Monitoring]]
+- [[技能/可观测性/monitoring/最佳实践/tracing.md|Tracing]]
 

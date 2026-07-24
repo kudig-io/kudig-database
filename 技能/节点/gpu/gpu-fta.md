@@ -191,20 +191,20 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
-- [[技能/ts-node-components.md|节点组件排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件排查]]
 
 ## Related
 
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
-- [[技能/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]] — Symptom Vector Matching Engine
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|skill-reference-root-cause-catalog]] — Root Cause Catalog
 - [[实体/container-runtime.md|container-runtime]] — Container Runtime
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 
 - [[故障诊断/FTA故障树/list/gpu-fta.md|GPU 异常故障树分析]]
-- [[技能/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
 
 
 <!-- risk-assessed -->

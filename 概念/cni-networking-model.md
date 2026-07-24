@@ -212,7 +212,7 @@ Pod 内应用发起 DNS 查询:
 
 - networking.md|Service 网络]]
 - [[实体/cni-plugins.md|CNI 插件]]
-- [[技能/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 - [[实体/kube-apiserver.md|kube-apiserver]]
 
 ## Related

@@ -458,7 +458,7 @@ kubectl delete deployment my-app
 
 ## 参见
 
-- [[技能/training-public/fundamentals/03-deployment-basics.md|公开版]]
+- [[技能/工作负载/deployment/培训/03-deployment-basics.md|公开版]]
 
 
 <!-- risk-assessed -->

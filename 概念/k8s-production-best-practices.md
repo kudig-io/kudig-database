@@ -51,21 +51,21 @@ status: reviewed
 
 ### 最小权限原则
 
-仅授予完成工作所需的最小权限。使用 [[概念/security-defense-depth.md|RBAC]] 限制访问，配置 [[技能/k8s-pod-security-guide.md|安全上下文]]，定期审查权限配置。
+仅授予完成工作所需的最小权限。使用 [[概念/security-defense-depth.md|RBAC]] 限制访问，配置 [[技能/安全/pod-security/最佳实践/k8s-pod-security-guide.md|安全上下文]]，定期审查权限配置。
 
 ### 纵深防御原则
 
-多层安全防护，避免单点问题。实施网络策略、[[技能/k8s-pod-security-guide.md|Pod 安全]]、[[概念/secrets-management.md|密钥管理]]，进行安全扫描和渗透测试。
+多层安全防护，避免单点问题。实施网络策略、[[技能/安全/pod-security/最佳实践/k8s-pod-security-guide.md|Pod 安全]]、[[概念/secrets-management.md|密钥管理]]，进行安全扫描和渗透测试。
 
 ### 零信任原则
 
-不信任任何内部或外部请求。实施服务间 mTLS、[[技能/k8s-network-security-guide.md|网络策略]]、身份验证，记录访问日志和安全审计。
+不信任任何内部或外部请求。实施服务间 mTLS、[[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|网络策略]]、身份验证，记录访问日志和安全审计。
 
 ## 可靠性原则
 
 ### 高可用原则
 
-避免单点问题，确保服务连续性。[[技能/k8s-cluster-configuration-guide.md|多副本部署]]、跨可用区分布，进行问题演练和恢复测试。
+避免单点问题，确保服务连续性。[[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|多副本部署]]、跨可用区分布，进行问题演练和恢复测试。
 
 ### 容错性原则
 
@@ -73,7 +73,7 @@ status: reviewed
 
 ### 可恢复性原则
 
-系统能够从问题中快速恢复。建立 [[技能/k8s-disaster-recovery-guide.md|备份策略]]、恢复流程、[[技能/k8s-disaster-recovery-guide.md|灾难恢复]]，进行恢复演练和 RTO/RPO 测试。
+系统能够从问题中快速恢复。建立 [[技能/控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|备份策略]]、恢复流程、[[技能/控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|灾难恢复]]，进行恢复演练和 RTO/RPO 测试。
 
 ## 可观测性原则
 
@@ -93,7 +93,7 @@ status: reviewed
 
 ### 自动化原则
 
-尽可能自动化重复性工作。实施 CI/CD、[[概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]]]、[[技能/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
+尽可能自动化重复性工作。实施 CI/CD、[[概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]]]、[[技能/工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
 
 ### 标准化原则
 
@@ -257,22 +257,22 @@ kubectl get deploy -A -o json | jq -r '
 
 ## 相关资源
 
-- [[技能/k8s-cluster-configuration-guide.md|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]]
-- [[技能/k8s-network-configuration-guide.md|[[Kubernetes 网络配置最佳实践|Kubernetes 网络配置最佳实践]]]]
-- [[技能/k8s-storage-configuration-guide.md|[[Kubernetes 存储配置最佳实践|Kubernetes 存储配置最佳实践]]]]
-- [[技能/k8s-logging-management-guide.md|[[Kubernetes 日志管理最佳实践|Kubernetes 日志管理最佳实践]]]]
-- [[技能/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
-- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
-- [[技能/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]]
-- [[技能/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]]
-- [[技能/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]]
-- [[技能/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
-- [[技能/k8s-pod-security-guide.md|Kubernetes Pod 安全最佳实践]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]]
+- [[技能/网络/cni/最佳实践/k8s-network-configuration-guide.md|[[Kubernetes 网络配置最佳实践|Kubernetes 网络配置最佳实践]]]]
+- [[技能/存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|[[Kubernetes 存储配置最佳实践|Kubernetes 存储配置最佳实践]]]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|[[Kubernetes 日志管理最佳实践|Kubernetes 日志管理最佳实践]]]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
+- [[技能/可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]]
+- [[技能/工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]]
+- [[技能/控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]]
+- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
+- [[技能/安全/pod-security/最佳实践/k8s-pod-security-guide.md|Kubernetes Pod 安全最佳实践]]
 
 ## Related
 
-- [[技能/k8s-logging-management-guide.md|k8s-logging-management-guide]] — Kubernetes 日志管理最佳实践
-- [[技能/k8s-storage-configuration-guide.md|k8s-storage-configuration-guide]] — Kubernetes 存储配置最佳实践
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|k8s-logging-management-guide]] — Kubernetes 日志管理最佳实践
+- [[技能/存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|k8s-storage-configuration-guide]] — Kubernetes 存储配置最佳实践
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

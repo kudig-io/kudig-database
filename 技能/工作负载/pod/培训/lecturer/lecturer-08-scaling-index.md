@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/08-scaling/08-hpa-basics.md|Hpa Basics]]
+- [[技能/工作负载/hpa-vpa/培训/lecturer/08-hpa-basics.md|Hpa Basics]]
 

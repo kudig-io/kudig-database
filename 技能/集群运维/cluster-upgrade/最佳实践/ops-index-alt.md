@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/best-practices/best-practices/operations/deployment.md|Deployment]]
-- [[技能/best-practices/best-practices/operations/disaster-recovery.md|Disaster Recovery]]
-- [[技能/best-practices/best-practices/operations/scaling.md|Scaling]]
+- [[技能/工作负载/deployment/最佳实践/deployment.md|Deployment]]
+- [[技能/控制面/etcd/最佳实践/disaster-recovery.md|Disaster Recovery]]
+- [[技能/工作负载/hpa-vpa/最佳实践/scaling.md|Scaling]]
 

@@ -108,7 +108,7 @@ prerequisites:
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
 - [[实体/kube-apiserver.md|kube-apiserver]]
 - [[etcd|etcd]]
-- [[技能/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
+- [[技能/网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
 
 ## 生产案例
 

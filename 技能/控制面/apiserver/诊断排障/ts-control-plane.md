@@ -488,8 +488,8 @@ APF 问题
 
 ## 相关链接
 
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
-- [[技能/backup-restore-etcd.md|etcd 备份恢复]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断引擎]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|etcd 备份恢复]]
 
 ## Related
 

@@ -126,7 +126,7 @@ etcd 快照是灾难恢复的基础，但快照操作会短暂增加磁盘 I/O �
 - [[概念/high-availability-patterns.md|high-availability-patterns]]
 - [[概念/eventual-consistency.md|eventual-consistency]]
 - [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]]
-- [[技能/backup-restore-etcd.md|backup-restore-etcd]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]]
 - Kubernetes Fault Distribution and MTTR.md|Kubernetes Fault Distribution and MTTR]]
 - [[实体/armada.md|Armada (entities)]]
 - [[log|Wiki Log]]

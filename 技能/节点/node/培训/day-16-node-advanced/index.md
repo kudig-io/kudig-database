@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-3-node-workload/day-16-node-advanced/01-node-advanced-hands-on.md|Node Advanced Hands On]]
+- [[技能/节点/node/培训/day-16-node-advanced/01-node-advanced-hands-on.md|Node Advanced Hands On]]
 

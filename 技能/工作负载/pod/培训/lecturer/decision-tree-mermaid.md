@@ -608,7 +608,7 @@ flowchart TD
 
 ## 参见
 
-- [[技能/training-public/troubleshooting/decision-tree-mermaid.md|公开版]]
+- [[技能/工作负载/pod/培训/troubleshooting/decision-tree-mermaid.md|公开版]]
 
 
 <!-- risk-assessed -->

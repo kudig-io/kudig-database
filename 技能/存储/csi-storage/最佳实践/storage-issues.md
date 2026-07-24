@@ -116,7 +116,7 @@ graph TD
 ## Related
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
-- [[技能/csi-fta.md|csi-fta]]
+- [[技能/存储/csi-storage/csi-fta.md|csi-fta]]
 - storage
 
 

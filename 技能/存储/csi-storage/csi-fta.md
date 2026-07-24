@@ -101,7 +101,7 @@ severity: high
 ### 排除标准
 
 - 若 Pod 因 ImagePull 失败而非存储 → 转镜像拉取排查
-- 若节点 DiskPressure 导致驱逐 → 转 [[技能/故障诊断-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
+- 若节点 DiskPressure 导致驱逐 → 转 [[技能/节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
 - 若仅应用层报 "Permission denied" → 可能是 fsGroup/SELinux 问题，非 CSI 层面
 
 ---
@@ -396,10 +396,10 @@ kubectl get sc -o wide
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
-- [[技能/故障诊断-存储/csi-storage/manage-persistent-storage.md|PV/PVC 存储管理]] — 同域技能
-- [[技能/故障诊断-节点/node/02-node-resource-pressure.md|节点资源压力诊断]] — 跨域关联
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
+- [[技能/存储/csi-storage/manage-persistent-storage.md|PV/PVC 存储管理]] — 同域技能
+- [[技能/节点/node/02-node-resource-pressure.md|节点资源压力诊断]] — 跨域关联
 - [[生态参考/领域索引/csi-index.md|CSI 知识图谱索引]] — 知识索引
 - [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]] — 知识索引
 

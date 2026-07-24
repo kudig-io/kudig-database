@@ -251,14 +251,14 @@ webhooks:
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[实体/argocd.md|argocd]] — ArgoCD
-- [[技能/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|develop-crd-operator]] — Develop CRD Operator
 - [[实体/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
 - [[概念/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
 - [[概念/controller-pattern.md|Controller Pattern]]
 - [[概念/declarative-api.md|Declarative API]]
 - [[实体/crd-custom-resources.md|CRD Custom Resources]]
 - Admission Webhooks
-- [[技能/develop-crd-operator.md|Develop CRD Operator]]
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]]
 - Wiki Digest — Daily (2026-05-21) — Cross-reference
 - [[实体/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]] — Cross-reference
 - [[实体/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference

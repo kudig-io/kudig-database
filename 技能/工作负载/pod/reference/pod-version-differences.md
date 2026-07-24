@@ -240,9 +240,9 @@ kubectl get pods -n kube-system -l component=kube-scheduler -o jsonpath='{.items
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff & OOMKilled 诊断]]
-- [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 与调度失败诊断]]
-- [[技能/故障诊断-工作负载/pod/03-pod-imagepull-container.md|镜像拉取与容器创建诊断]]
-- [[技能/故障诊断-工作负载/pod/04-pod-sop-runbook.md|Pod 诊断 SOP/Runbook]]
-- [[技能/故障诊断-工作负载/pod/reference/pod-exit-codes.md|容器退出码参考]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff & OOMKilled 诊断]]
+- [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 与调度失败诊断]]
+- [[技能/工作负载/pod/03-pod-imagepull-container.md|镜像拉取与容器创建诊断]]
+- [[技能/工作负载/pod/04-pod-sop-runbook.md|Pod 诊断 SOP/Runbook]]
+- [[技能/工作负载/pod/reference/pod-exit-codes.md|容器退出码参考]]

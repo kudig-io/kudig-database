@@ -91,7 +91,7 @@ last_updated: '2026-07-21'
 
 ## 调度 (Scheduling)
 
-- [[技能/培训学习/learning-path/learn-15-scheduling-basics.md|调度基础]]
+- [[技能/控制面/scheduler/培训/learn-15-scheduling-basics.md|调度基础]]
 - [[工作负载/核心工作负载/16-runtime-class-configuration|RuntimeClass 配置]]
 - [[工作负载/核心工作负载/05-job-cronjob-advanced|Job/CronJob 高级]]
 

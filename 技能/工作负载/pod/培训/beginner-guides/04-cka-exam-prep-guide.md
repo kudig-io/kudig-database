@@ -677,7 +677,7 @@ kubectl get nodes
 ---
 
 **关联文档**:
-- [[技能/training-public/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 完整学习路线图
+- [[技能/工作负载/pod/培训/00-beginner-learning-roadmap.md|00 beginner learning roadmap]] — 完整学习路线图
 - ../../故障诊断/ — 故障排查深度文档
 - [[02-local-lab-environment]] — 本地实验环境搭建
 

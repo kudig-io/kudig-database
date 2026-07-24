@@ -540,8 +540,8 @@ cat /run/flannel/subnet.env
 
 ## 相关链接
 
-- [[技能/ts-networking.md|网络故障排查总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/网络/service/诊断排障/ts-networking.md|网络故障排查总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related
 
@@ -550,8 +550,8 @@ cat /run/flannel/subnet.env
 - [[envoy]] — Envoy
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
-- [[技能/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[技能/网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[技能/网络/service-mesh/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
 
 ```
 

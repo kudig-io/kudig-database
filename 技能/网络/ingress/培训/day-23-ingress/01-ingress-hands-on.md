@@ -48,7 +48,7 @@ prerequisites:
 
 
 
-# [[技能/training-public/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
+# [[技能/工作负载/pod/培训/inner-training/week-4-network-storage/day-23-ingress.md|Day 23: Ingress]]ss|Ingress]] 实操
 
 > **日期**: Week 4 Day 2 | **主题**: Ingress 路由规则与控制器配置 | **版本**: K8s 1.28-1.33
 

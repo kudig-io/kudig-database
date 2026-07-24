@@ -312,10 +312,10 @@ authors:
 **关联文档**:
 - [[00-learning-gaps-analysis]] — 本路线图的缺口分析依据
 - [[README]] — topic-learn 总入口
-- [[技能/training-public/beginner-guides/01-cloud-native-evolution-story.md|01 cloud native evolution story]] — 推荐第一课
-- [[技能/training-public/beginner-guides/02-local-lab-environment.md|02 local lab environment]] — 本地实验环境搭建
-- [[技能/training-public/beginner-guides/03-end-to-end-project.md|03 end to end project]] — 端到端完整项目
-- [[技能/training-public/beginner-guides/04-cka-exam-prep-guide.md|04 cka exam prep guide]] — CKA 备考指南
+- [[技能/工作负载/pod/培训/beginner-guides/01-cloud-native-evolution-story.md|01 cloud native evolution story]] — 推荐第一课
+- [[技能/工作负载/pod/培训/beginner-guides/02-local-lab-environment.md|02 local lab environment]] — 本地实验环境搭建
+- [[技能/工作负载/pod/培训/beginner-guides/03-end-to-end-project.md|03 end to end project]] — 端到端完整项目
+- [[技能/工作负载/pod/培训/beginner-guides/04-cka-exam-prep-guide.md|04 cka exam prep guide]] — CKA 备考指南
 
 
 <!-- risk-assessed -->

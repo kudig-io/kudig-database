@@ -193,25 +193,25 @@ Example for etcd:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]]
 - [[概念/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[技能/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
-- [[技能/node-fta.md|Node 异常故障树分析]] — Cross-reference
-- [[技能/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
-- [[技能/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
-- [[技能/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
-- [[技能/vpa-fta.md|VPA 异常故障树分析]] — Cross-reference
-- [[技能/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
-- [[技能/controller-manager-fta.md|Controller Manager 异常故障树分析]] — Cross-reference
-- [[技能/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] — Cross-reference
-- [[技能/terway-fta.md|Terway 异常故障树分析]] — Cross-reference
-- [[技能/gateway-api-fta.md|Gateway API 异常故障树分析]] — Cross-reference
-- [[技能/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
+- [[技能/网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[技能/节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[技能/网络/service-mesh/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/hpa-vpa/vpa-fta.md|VPA 异常故障树分析]] — Cross-reference
+- [[技能/可观测性/monitoring/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
+- [[技能/控制面/controller-manager/controller-manager-fta.md|Controller Manager 异常故障树分析]] — Cross-reference
+- [[技能/集群运维/cluster-autoscaler/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] — Cross-reference
+- [[技能/网络/cni/terway-fta.md|Terway 异常故障树分析]] — Cross-reference
+- [[技能/网络/gateway-api/gateway-api-fta.md|Gateway API 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/daemonset/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

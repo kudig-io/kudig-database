@@ -273,7 +273,7 @@ kubectl get pods -n kube-system | grep csi
 ```
 ## 相关链接
 
-- [[技能/develop-crd-operator.md|CRD/Operator 开发]]
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|CRD/Operator 开发]]
 
 ## Related
 

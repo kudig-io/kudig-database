@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-3-node-workload/day-20-pod-advanced/01-pod-advanced-hands-on.md|Pod Advanced Hands On]]
+- [[技能/工作负载/pod/培训/day-20-pod-advanced/01-pod-advanced-hands-on.md|Pod Advanced Hands On]]
 

@@ -201,19 +201,19 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
 - [[gpu-fta]] — GPU 异常故障树分析
-- [[技能/ts-workloads.md|ts-workloads]] — 工作负载故障排查
+- [[技能/工作负载/pod/诊断排障/ts-workloads.md|ts-workloads]] — 工作负载故障排查
 - [[pdb-fta]] — PDB 异常故障树分析
-- [[技能/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
+- [[技能/工作负载/pod/培训/测验/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[opa]] — OPA (Open Policy Agent)
 
 - [[故障诊断/FTA故障树/list/psp-scc-fta.md|PSP/SCC 异常故障树分析]]
-- [[技能/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
 - [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
 
 

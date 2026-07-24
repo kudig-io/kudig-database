@@ -15,6 +15,6 @@ Deployment 滚动更新失败、副本异常、选择器冲突、发布策略（
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/最佳实践指南/deployment-strategies/k8s-deployment-strategies-guide.md|发布策略最佳实践]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|发布策略最佳实践]]

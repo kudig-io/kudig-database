@@ -162,14 +162,14 @@ kubectl get lease -n kube-node-lease <node-name> -o jsonpath='{.spec.renewTime}'
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
 - [[故障诊断/FTA故障树/list/node-fta.md|Node 异常故障树分析]]
 - [[故障诊断/FTA故障树/list/nodepool-fta.md|NodePool 异常故障树分析]]
 - [[故障诊断/技能体系/skill-set/k8s-node-notready/SKILL.md|Node NotReady Skill]]
-- [[技能/troubleshoot-node-issues.md|节点故障排查基础]]
-- [[技能/ts-node-components.md|节点组件结构化排障]]
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|节点故障排查基础]]
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件结构化排障]]
 
 ## Related
 

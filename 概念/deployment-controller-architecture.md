@@ -251,8 +251,8 @@ kubectl get pods -n <ns> -l app=<app> | grep -v Running
 
 ## 相关概念
 
-- [[技能/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[技能/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[技能/工作负载/deployment/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
 - [[概念/controller-pattern.md|控制器模式]]
 - [[概念/watch-mechanism.md|Watch 机制]]

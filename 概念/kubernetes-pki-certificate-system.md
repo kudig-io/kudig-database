@@ -203,11 +203,11 @@ sudo ntpdate -u pool.ntp.org
 
 ## 相关概念
 
-- [[技能/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[技能/安全/certificate/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
 - [[概念/security-defense-depth.md|安全纵深防御]]
 - [[概念/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
-- [[技能/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[技能/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
 
 ## Related
 

@@ -150,8 +150,8 @@ kubectl rollout undo deployment/nginx --to-revision=2
 
 ## 相关技能
 
-- [[技能/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
-- [[技能/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[技能/工作负载/deployment/deployment-workload-selection.md|[[工作负载控制器选型|工作负载控制器选型]]]]
 - [[deployment|Deployment]]
 - [[概念/controller-pattern.md|控制器模式]]
 

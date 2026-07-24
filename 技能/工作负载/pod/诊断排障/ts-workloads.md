@@ -371,8 +371,8 @@ ConfigMap/Secret 问题
 ```
 ## 相关链接
 
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
-- [[技能/troubleshoot-node-issues.md|节点故障排查]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|节点故障排查]]
 
 ## Related
 
@@ -381,9 +381,9 @@ ConfigMap/Secret 问题
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
-- [[技能/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
-- [[技能/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
-- [[技能/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/daemonset/daemonset-fta.md|DaemonSet 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

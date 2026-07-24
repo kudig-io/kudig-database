@@ -248,8 +248,8 @@ systemctl stop crio
 - [[概念/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
 - [[概念/docker-architecture.md|Docker Architecture and Container Runtime]] — Cross-reference
 - [[概念/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
-- [[技能/ts-node-components.md|节点组件故障排查]] — Cross-reference
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
 - [[实体/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[实体/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[实体/container-runtime.md|Container Runtime]] — Cross-reference

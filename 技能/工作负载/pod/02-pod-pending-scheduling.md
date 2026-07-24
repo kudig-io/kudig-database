@@ -401,10 +401,10 @@ sum(kube_pod_container_resource_requests{resource="cpu"}) by (node)
 
 ## 相关链接
 
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
-- [[技能/故障诊断-工作负载/pod/03-pod-imagepull-container.md|镜像拉取诊断]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/工作负载/pod/01-pod-crashloop-oomkilled.md|CrashLoopBackOff 诊断]]
+- [[技能/工作负载/pod/03-pod-imagepull-container.md|镜像拉取诊断]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

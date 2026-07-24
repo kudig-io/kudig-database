@@ -157,8 +157,8 @@ systemctl restart kubelet
 ## Related
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
-- [[技能/backup-restore-fta.md|backup-restore-fta]]
-- [[技能/etcd-fta.md|etcd-fta]]
+- [[技能/控制面/etcd/backup-restore-fta.md|backup-restore-fta]]
+- [[技能/控制面/etcd/etcd-fta.md|etcd-fta]]
 
 - 13-backup-demo-video
 

@@ -291,7 +291,7 @@ NetworkPolicy 导致连接失败
 - [[故障诊断/资源排障/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
 - [[故障诊断/FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]]
 - [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[技能/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
+- [[技能/网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
 
 
 <!-- risk-assessed -->

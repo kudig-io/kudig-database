@@ -127,7 +127,7 @@ VPA 和 HPA 同时配置到同一 Deployment 会导致扩缩容行为异常。�
 - [[概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
 - [[概念/autoscaling-strategies.md|[[Autoscaling Strategies|Autoscaling Strategies]]]]
 - [[概念/resource-management.md|[[Resource Management (Requests, Limits, QoS)|Resource Management]]]]
-- [[技能/k8s-deployment-strategies-guide.md|[[Kubernetes 部署策略最佳实践|Kubernetes 部署策略最佳实践]]]]
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|[[Kubernetes 部署策略最佳实践|Kubernetes 部署策略最佳实践]]]]
 
 ## 生产案例
 

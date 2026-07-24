@@ -164,7 +164,7 @@ kubectl rollout restart ds kube-flannel-ds -n kube-system
 
 - [[实体/kudig-metadata-index.md|README]].md|README]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[技能/service-fta.md|service-fta]]
+- [[技能/网络/service/service-fta.md|service-fta]]
 - [[故障诊断/FTA故障树/list/dns-fta.md|dns-fta]]
 - [[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]]
 

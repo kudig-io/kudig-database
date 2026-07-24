@@ -209,7 +209,7 @@ velero restore create --from-backup pre-migration \
 ## Related
 
 - [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查指南 [topic-structural-trouble-shooting]]]
-- [[技能/helm-fta.md|Helm 发布异常故障树分析 (skills)]]
+- [[技能/集群运维/helm/helm-fta.md|Helm 发布异常故障树分析 (skills)]]
 
 
 <!-- risk-assessed -->

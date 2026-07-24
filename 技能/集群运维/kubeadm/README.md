@@ -14,5 +14,5 @@
 
 ## 相关链接
 
-- [[技能/故障诊断-集群运维/cluster-upgrade/cluster-upgrade-fta.md|集群升级 FTA]]
-- [[技能/最佳实践指南/cluster-configuration/k8s-cluster-configuration-guide.md|集群配置指南]]
+- [[技能/集群运维/cluster-upgrade/cluster-upgrade-fta.md|集群升级 FTA]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|集群配置指南]]

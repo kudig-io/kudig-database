@@ -154,14 +154,14 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/ts-cluster-operations.md|集群运维排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维排查]]
 
 ## Related
 
 - [[flannel-fta]] — Flannel 网络异常故障树分析
-- [[技能/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+- [[技能/工作负载/daemonset/skill-22-daemonset-failure.md|skill-22-daemonset-failure]] — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 - [[csi-fta]] — CSI 存储异常故障树分析
 - [[flux]] — Flux
 - [[helm]] — Helm
@@ -209,7 +209,7 @@ flowchart TD
 - RELEASE-NOTES-2.9
 - RELEASE-NOTES-2.11
 - [[归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
-- [[技能/ts-command-output.md|命令输出根因解析]] — Cross-reference
+- [[技能/工作负载/pod/reference/ts-command-output.md|命令输出根因解析]] — Cross-reference
 - [[生态参考/领域索引/helm-index.md|Helm 全局索引]]
 
 

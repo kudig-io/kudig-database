@@ -123,13 +123,13 @@ prerequisites:
 | [05-service-mesh-istio-troubleshooting.md](03-networking/05-service-mesh-istio-troubleshooting.md) | Service Mesh (Istio) 故障排查 | Sidecar 注入失败、mTLS 问题、流量路由异常、Gateway 不可用 |
 | [06-gateway-api-troubleshooting.md](03-networking/06-gateway-api-troubleshooting.md) | Gateway API 故障排查 | GatewayClass/Gateway/HTTPRoute 配置、跨 namespace 路由、TLS 配置 |
 | [07-terway-troubleshooting.md](03-networking/07-terway-troubleshooting.md) | Terway（阿里云 CNI）故障排查 | ENI/IPVlan 模式、IPAM、安全组、跨节点通信、网络策略 |
-| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel [[技能/ts-networking.md|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
+| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel [[技能/网络/service/诊断排障/ts-networking.md|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
 
 ### 04-storage（存储）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[技能/ts-storage.md|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
+| [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[技能/存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
 | [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动问题、卷创建/挂载/扩容问题 |
 | [03-snapshot-backup-troubleshooting.md](04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
 | [04-storage-performance-troubleshooting.md](04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
@@ -168,7 +168,7 @@ prerequisites:
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[技能/ts-cluster-operations.md|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
+| [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
 | [02-logging-monitoring-troubleshooting.md](08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 问题、告警问题、Grafana 异常 |
 | [03-helm-troubleshooting.md](08-cluster-operations/03-helm-troubleshooting.md) | Helm 部署故障排查 | Release 失败、模板错误、升级回滚问题 |
 | [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面问题、etcd 恢复、备份还原、灾难恢复 |
@@ -469,8 +469,8 @@ prerequisites:
 - [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
 - [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference

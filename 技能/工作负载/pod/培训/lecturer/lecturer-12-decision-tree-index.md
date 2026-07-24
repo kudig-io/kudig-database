@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/12-decision-tree/decision-tree-mermaid.md|Decision Tree Mermaid]]
+- [[技能/工作负载/pod/培训/lecturer/decision-tree-mermaid.md|Decision Tree Mermaid]]
 

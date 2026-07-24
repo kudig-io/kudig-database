@@ -411,8 +411,8 @@ kubectl logs <pod-name> --previous
 
 ## Related
 
-- [[技能/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：[[Service|Service]] - 让应用可以被访问
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/网络/service/培训/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：[[Service|Service]] - 让应用可以被访问
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[docker]] — Docker
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

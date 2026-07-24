@@ -545,7 +545,7 @@ cat /var/lib/cni/*            # IPAM 记录
 - [[系统基础/速查卡/networking.md|networking]]
 - [[系统基础/速查卡/linux.md|linux]]
 - [[系统基础/速查卡/k8s.md|k8s]]
-- [[技能/ts-networking.md|ts-networking]]
+- [[技能/网络/service/诊断排障/ts-networking.md|ts-networking]]
 
 
 <!-- risk-assessed -->

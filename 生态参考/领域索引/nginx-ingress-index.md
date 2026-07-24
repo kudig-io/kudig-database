@@ -113,7 +113,7 @@ prerequisites:
 ### 学习培训
 - Ingress 学习路径
 - 网络与存储周
-- [[技能/training-public/inner-training/week-4-network-storage/day-23-ingress.md|day 23 ingress]]
+- [[技能/工作负载/pod/培训/inner-training/week-4-network-storage/day-23-ingress.md|day 23 ingress]]
 
 
 <!-- risk-assessed -->

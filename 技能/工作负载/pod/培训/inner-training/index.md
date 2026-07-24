@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/inner-training/README.md|Readme]]
+- [[技能/工作负载/pod/培训/inner-training/README.md|Readme]]
 
 ## 子目录
 
@@ -30,5 +30,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/inner-training/inner-one-month-training.md|Inner One Month Training]]
+- [[技能/工作负载/pod/培训/inner-training/inner-one-month-training.md|Inner One Month Training]]
 

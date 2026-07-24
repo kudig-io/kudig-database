@@ -47,7 +47,7 @@ severity: medium
 
 <!-- condition: kubectl get events -A | grep -E 'exceeded quota|forbidden.*quota' 显示配额超限 -->
 
-# [[技能/resource-quota-fta.md|ResourceQuota 异常 FTA 树]]
+# [[技能/安全/resource-quota/resource-quota-fta.md|ResourceQuota 异常 FTA 树]]
 
 ## 适用范围与说明
 - **目标**：覆盖资源配额耗尽、配额计算异常与误拦截的关键成因与路径。
@@ -204,19 +204,19 @@ flowchart TD
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 
 ## Related
 
 - [[webhook-admission-fta]] — Admission Webhook 异常 FTA 树
 - [[calico-fta]] — Calico Fta
-- [[技能/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|ts-gitops-devops]] — GitOps/DevOps 排查
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[service-fta]] — Service 异常故障树分析
 
 - [[故障诊断/FTA故障树/list/resource-quota-fta.md|ResourceQuota 异常故障树分析]]
-- [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 
 
 <!-- risk-assessed -->

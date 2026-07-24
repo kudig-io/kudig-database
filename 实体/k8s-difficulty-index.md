@@ -82,8 +82,8 @@ prerequisites:
 - [[概念/security-defense-depth.md|认证授权、网络安全、运行时安全]]
 
 ### 日常运维
-- [[技能/troubleshoot-pod-issues.md|Pod 故障诊断]]
-- [[技能/troubleshoot-node-issues.md|Node 故障诊断]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障诊断]]
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|Node 故障诊断]]
 
 ---
 
@@ -97,8 +97,8 @@ prerequisites:
 
 ### 生产实践
 - [[实体/kubectl Scenario Quick Reference.md|平台运维全系列]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论体系]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|18 个诊断-修复 Skill]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论体系]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|18 个诊断-修复 Skill]]
 
 ---
 
@@ -106,11 +106,11 @@ prerequisites:
 
 ### 源码与架构
 - [[概念/kubernetes-architecture-overview.md|K8s 源码架构]]
-- [[技能/develop-crd-operator.md|Operator 开发指南]]
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Operator 开发指南]]
 - [[概念/kubernetes-architecture-overview.md|控制平面源码级分析]]
 
 ### 方法论
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论体系]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论体系]]
 
 ### 前沿技术
 - [[概念/cilium-ebpf-networking.md|eBPF 技术]]

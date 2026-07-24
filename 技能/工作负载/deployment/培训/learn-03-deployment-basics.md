@@ -405,10 +405,10 @@ kubectl delete deployment my-app
 
 ## Related
 
-- [[技能/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
-- [[技能/learn-08-pv-pvc-basics.md|learn-08-pv-pvc-basics]] — 第八课：存储 - PV 和 PVC
-- [[技能/learn-12-common-problems.md|learn-12-common-problems]] — 第十课：常见问题排查
-- [[技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[技能/工作负载/pod/培训/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
+- [[技能/存储/csi-storage/培训/learn-08-pv-pvc-basics.md|learn-08-pv-pvc-basics]] — 第八课：存储 - PV 和 PVC
+- [[技能/工作负载/pod/培训/learn-12-common-problems.md|learn-12-common-problems]] — 第十课：常见问题排查
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment
 
 

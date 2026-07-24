@@ -56,7 +56,7 @@ relationships:
   type: related_to
 - target: '[[生产运维/工单案例/ticket-case-002-java-oom-essd-iohang.md]]'
   type: related_to
-- target: '[[技能/kubelet-certificate-rotation.md]]'
+- target: '[[技能/安全/certificate/kubelet-certificate-rotation.md]]'
   type: related_to
 ---
 
@@ -258,7 +258,7 @@ Kubernetes 节点证书体系包括 kubelet 客户端证书、kubelet 服务器�
 - kubelet
 - 节点 NotReady：Terway ENI IP 耗尽
 - Pod 持续 CrashLoopBackOff：Java OOM + ESSD IO hang
-- [[技能/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
+- [[技能/安全/certificate/kubelet-certificate-rotation.md|kubelet 证书轮换机制]]
 
 
 <!-- risk-assessed -->

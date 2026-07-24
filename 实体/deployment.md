@@ -80,9 +80,9 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 
 - [[概念/Deployment × Secret 管理.md|Deployment × Secret 管理]]
 
-- [[技能/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
-- [[技能/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
-- [[技能/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]] — 金丝雀与蓝绿发布
+- [[技能/工作负载/deployment/deployment-workload-selection.md|deployment-workload-selection]] — 工作负载控制器选型
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|k8s-deployment-strategies-guide]] — Kubernetes 部署策略最佳实践
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|deployment-canary-and-bluegreen]] — 金丝雀与蓝绿发布
 - [[实体/statefulset.md|statefulset]] — StatefulSet
 - [[概念/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
 - [[实体/statefulset.md|StatefulSet]]
@@ -134,31 +134,31 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - [[概念/bp-operations.md|最佳实践：Operations]] — Cross-reference
 - [[概念/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
-- [[技能/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
-- [[技能/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
-- [[技能/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
-- [[技能/assessment-k8s-fundamentals-quiz.md|K8S Fundamentals Quiz]] — Cross-reference
-- [[技能/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
-- [[技能/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
-- [[技能/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
-- [[技能/learn-10-health-check.md|第八课：健康检查 - Probe 详解]] — Cross-reference
-- [[技能/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
-- [[技能/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
-- [[技能/learn-07-namespace-resource-quota.md|第七课：Namespace 与资源隔离]] — Cross-reference
-- [[技能/learn-09-hpa-basics.md|第九课：HPA - 自动伸缩]] — Cross-reference
-- [[技能/learn-11-job-cronjob.md|第九课：Job 和 CronJob - 任务调度]] — Cross-reference
-- [[技能/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
-- [[技能/learn-14-statefulset-basics.md|第14课：StatefulSet - 有状态应用管理]] — Cross-reference
-- [[技能/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
-- [[技能/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
-- [[技能/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[技能/deployment-rolling-update.md|Deployment 滚动更新策略]] — Cross-reference
-- [[技能/skill-MOC.md|topic-skills MOC]] — Cross-reference
-- [[技能/learn-03-deployment-basics.md|第三课：Deployment - 应用部署管理器]] — Cross-reference
-- [[技能/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
-- [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
-- [[技能/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[技能/工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
+- [[技能/工作负载/daemonset/培训/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz.md|K8S Fundamentals Quiz]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-06-configmap-secret.md|第六课：ConfigMap 和 Secret - 配置管理]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-10-health-check.md|第八课：健康检查 - Probe 详解]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
+- [[技能/控制面/scheduler/培训/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
+- [[技能/安全/resource-quota/培训/learn-07-namespace-resource-quota.md|第七课：Namespace 与资源隔离]] — Cross-reference
+- [[技能/工作负载/hpa-vpa/培训/learn-09-hpa-basics.md|第九课：HPA - 自动伸缩]] — Cross-reference
+- [[技能/工作负载/job-cronjob/培训/learn-11-job-cronjob.md|第九课：Job 和 CronJob - 任务调度]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
+- [[技能/工作负载/statefulset/培训/learn-14-statefulset-basics.md|第14课：StatefulSet - 有状态应用管理]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[技能/网络/service/培训/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-rolling-update.md|Deployment 滚动更新策略]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[技能/工作负载/deployment/培训/learn-03-deployment-basics.md|第三课：Deployment - 应用部署管理器]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
 - [[实体/metal3-io.md|Metal3]] — Cross-reference
 - [[实体/clusterpedia.md|Clusterpedia]] — Cross-reference
 - [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference

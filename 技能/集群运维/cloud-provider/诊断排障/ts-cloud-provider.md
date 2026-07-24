@@ -215,7 +215,7 @@ kubectl get pv -o wide
 
 ## Related
 
-- [[技能/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
 - [[实体/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[submariner]] — Submariner
 - [[istio]] — Istio

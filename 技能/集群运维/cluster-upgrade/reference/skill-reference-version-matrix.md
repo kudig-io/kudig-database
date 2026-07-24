@@ -96,9 +96,9 @@ prerequisites:
 
 ## 相关链接
 
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
-- [[技能/troubleshoot-pod-issues.md|Pod 故障排查]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 版本兼容性矩阵
 
@@ -141,9 +141,9 @@ prerequisites:
 
 ## Related
 
-- [[技能/troubleshoot-node-issues.md|troubleshoot-node-issues]] — [[技能/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
-- [[技能/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
+- [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot-node-issues]] — [[技能/节点/node/诊断排障/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
+- [[技能/工作负载/job-cronjob/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
 - [[实体/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

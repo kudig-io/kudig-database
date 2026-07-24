@@ -1,8 +1,8 @@
 ---
 title: Istio (entities)
-description: '- [[技能/k8s-network-security-guide.md|k8s-network-security-guide]]
+description: '- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|k8s-network-security-guide]]
   — Kubernetes 网络安全最佳实践'
-summary: '- [[技能/k8s-network-security-guide.md|k8s-network-security-guide]] —
+summary: '- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|k8s-network-security-guide]] —
   Kubernetes 网络安全最佳实践'
 category: entities
 tags:
@@ -352,7 +352,7 @@ spec:
 
 ## Related
 
-- [[技能/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
+- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
 - [[03-istio-security-hardening]] — Istio 安全加固
 - [[envoy]] — Envoy
 - [[概念/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
@@ -412,10 +412,10 @@ spec:
 - [[实体/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[概念/service-mesh-evolution.md|服务网格演进]] — Cross-reference
 - [[概念/bp-security.md|最佳实践：Security]] — Cross-reference
-- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[技能/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
-- [[技能/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
-- [[技能/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
+- [[技能/网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/网络/service-mesh/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]] — Cross-reference
+- [[技能/集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|云服务商集成排查]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[实体/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference

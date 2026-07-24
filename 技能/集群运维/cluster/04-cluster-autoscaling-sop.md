@@ -79,7 +79,7 @@ fta_path: TE-C -> IE-C.5 -> BE-C.6
 
 **覆盖范围**：CA 检测到 Pending 却不扩容、扩容超时、缩容不生效或误缩、节点池配额/权限/污点导致的扩容失败；并汇总集群级故障的统一 SOP。
 
-**边界**：单 Pod 因资源不足 Pending（非集群容量问题）→ [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]。
+**边界**：单 Pod 因资源不足 Pending（非集群容量问题）→ [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]。
 
 ---
 
@@ -339,12 +339,12 @@ kubectl annotate pod <pod> -n <ns> \
 
 ## 相关链接
 
-- [[技能/故障诊断-集群运维/cluster/README.md|Cluster 集群级故障诊断技能集]]
-- [[技能/故障诊断-集群运维/cluster/01-apiserver-controlplane.md|控制平面不可用诊断]]
-- [[技能/故障诊断-集群运维/cluster/02-etcd-troubleshooting.md|etcd 故障诊断]]
-- [[技能/故障诊断-工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/集群运维/cluster/README.md|Cluster 集群级故障诊断技能集]]
+- [[技能/集群运维/cluster/01-apiserver-controlplane.md|控制平面不可用诊断]]
+- [[技能/集群运维/cluster/02-etcd-troubleshooting.md|etcd 故障诊断]]
+- [[技能/工作负载/pod/02-pod-pending-scheduling.md|Pod Pending 诊断]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 
 ## Related
 

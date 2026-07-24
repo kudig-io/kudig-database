@@ -87,8 +87,8 @@ prerequisites:
 
 **边界**（不在本技能集范围）：
 
-- 单 Pod 崩溃/调度失败 → 转 [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- 单节点 NotReady/资源压力 → 转 [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
+- 单 Pod 崩溃/调度失败 → 转 [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- 单节点 NotReady/资源压力 → 转 [[技能/节点/node/README.md|Node 异常诊断技能集]]
 
 ---
 
@@ -166,12 +166,12 @@ kubeadm certs check-expiration
 
 ## 相关链接
 
-- [[技能/技能建设最佳实践/技能建设最佳实践.md|技能建设最佳实践（生产标准）]]
-- [[技能/故障诊断-工作负载/pod/README.md|Pod 异常诊断技能集]]
-- [[技能/故障诊断-节点/node/README.md|Node 异常诊断技能集]]
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[技能/故障诊断-集群运维/kubeadm-fta.md|kubeadm 故障树分析]]
+- [[技能/工作负载/pod/方法论/技能建设最佳实践.md|技能建设最佳实践（生产标准）]]
+- [[技能/工作负载/pod/README.md|Pod 异常诊断技能集]]
+- [[技能/节点/node/README.md|Node 异常诊断技能集]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
+- [[技能/集群运维/kubeadm-fta.md|kubeadm 故障树分析]]
 
 ## Related
 

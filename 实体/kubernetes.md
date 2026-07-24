@@ -270,69 +270,69 @@ description: '## 项目概述'
 - [[概念/watch-mechanism.md|Watch Mechanism (List-Watch)]] — Cross-reference
 - [[概念/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
 - [[概念/linux-security-modules.md|Linux Security Modules for Containers]] — Cross-reference
-- [[技能/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[技能/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
-- [[技能/k8s-storage-configuration-guide.md|Kubernetes 存储配置最佳实践]] — Cross-reference
-- [[技能/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
-- [[技能/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
-- [[技能/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
-- [[技能/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/node-fta.md|Node 异常故障树分析]] — Cross-reference
-- [[技能/kubelet-certificate-rotation.md|kubelet 证书轮换机制]] — Cross-reference
-- [[技能/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
-- [[技能/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
-- [[技能/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
-- [[技能/ts-node-components.md|节点组件故障排查]] — Cross-reference
-- [[技能/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
-- [[技能/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
-- [[技能/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
-- [[技能/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
-- [[技能/assessment-troubleshooting-lab-exam.md|Troubleshooting Lab Exam]] — Cross-reference
-- [[技能/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
-- [[技能/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
-- [[技能/skill-k8s-node-notready-USAGE-GUIDE.md|Usage Guide]] — Cross-reference
-- [[技能/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
-- [[技能/ts-security-auth.md|安全认证故障排查]] — Cross-reference
-- [[技能/skill-reference-version-matrix.md|Version Matrix]] — Cross-reference
-- [[技能/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
-- [[技能/skill-23-job-cronjob-failure.md|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
-- [[技能/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
-- [[技能/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
-- [[技能/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
-- [[技能/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
-- [[技能/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]] — Cross-reference
-- [[技能/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
-- [[技能/skill-reference-diagnostic-workflow.md|Diagnostic Workflow]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/ts-control-plane.md|控制平面故障排查]] — Cross-reference
-- [[技能/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
-- [[技能/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
-- [[技能/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
-- [[技能/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
-- [[技能/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
-- [[技能/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
-- [[技能/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
-- [[技能/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[技能/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
-- [[技能/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
-- [[技能/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
-- [[技能/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
-- [[技能/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
-- [[技能/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
-- [[技能/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
-- [[技能/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
-- [[技能/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[技能/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[技能/skill-MOC.md|topic-skills MOC]] — Cross-reference
-- [[技能/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[技能/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
-- [[技能/skill-19-node-resource-pressure.md|节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation]] — Cross-reference
-- [[技能/ts-storage.md|存储故障排查]] — Cross-reference
-- [[技能/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
-- [[技能/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
+- [[技能/网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[技能/存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|Kubernetes 存储配置最佳实践]] — Cross-reference
+- [[技能/工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
+- [[技能/控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
+- [[技能/节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[技能/网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[技能/安全/certificate/kubelet-certificate-rotation.md|kubelet 证书轮换机制]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
+- [[技能/网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
+- [[技能/节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[技能/工作负载/daemonset/培训/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
+- [[技能/网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-troubleshooting-lab-exam.md|Troubleshooting Lab Exam]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
+- [[技能/节点/node/skill-notready/skill-k8s-node-notready-USAGE-GUIDE.md|Usage Guide]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[技能/安全/rbac/诊断排障/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/reference/skill-reference-version-matrix.md|Version Matrix]] — Cross-reference
+- [[技能/控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[技能/工作负载/job-cronjob/skill-23-job-cronjob-failure.md|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/节点/node/运维操作/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
+- [[技能/可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[技能/集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
+- [[技能/工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|Diagnostic Workflow]] — Cross-reference
+- [[技能/工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
+- [[技能/控制面/scheduler/培训/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
+- [[技能/工作负载/pod/培训/测验/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[技能/工作负载/deployment/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
+- [[技能/网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[技能/网络/service/培训/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
+- [[技能/集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[技能/工作负载/pod/方法论/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[技能/节点/skill-19-node-resource-pressure.md|节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation]] — Cross-reference
+- [[技能/存储/csi-storage/诊断排障/ts-storage.md|存储故障排查]] — Cross-reference
+- [[技能/集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[技能/节点/node/skill-notready/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
 - [[实体/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
 - [[实体/kube-apiserver.md|kube-apiserver]] — Cross-reference
 - [[实体/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference

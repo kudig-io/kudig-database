@@ -193,10 +193,10 @@ FTA 故障树
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
-- [[技能/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
-- [[技能/fta-方法论/diagnostic-overview/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]]
+- [[技能/工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
+- [[技能/工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
+- [[技能/工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
 - [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 - [[概念/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
 

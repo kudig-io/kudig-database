@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-lecturer/01-introduction/01-what-is-kubernetes.md|What Is Kubernetes]]
+- [[技能/工作负载/pod/培训/lecturer/01-what-is-kubernetes.md|What Is Kubernetes]]
 

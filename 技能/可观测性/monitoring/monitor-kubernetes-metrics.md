@@ -135,8 +135,8 @@ Apply the four golden signals to application monitoring:
 - [[概念/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[概念/observability-pillars.md|Observability Pillars]]
 - [[概念/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
-- [[技能/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[技能/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
 
 
 <!-- risk-assessed -->

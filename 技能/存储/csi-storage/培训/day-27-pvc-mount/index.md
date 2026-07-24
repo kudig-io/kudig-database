@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/training-public/public-training/week-4-network-storage/day-27-pvc-mount/01-pvc-mount-hands-on.md|Pvc Mount Hands On]]
+- [[技能/存储/csi-storage/培训/day-27-pvc-mount/01-pvc-mount-hands-on.md|Pvc Mount Hands On]]
 

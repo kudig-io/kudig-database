@@ -38,7 +38,7 @@ prerequisites:
 relationships:
 - target: '[[概念/etcd Operational Reference.md]]'
   type: uses
-- target: '[[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md]]'
+- target: '[[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md]]'
   type: uses
 - target: '[[系统基础/知识字典/workloads/pods.md]]'
   type: uses
@@ -77,7 +77,7 @@ Based on production data across the industry:
 
 3. **Network issues are hardest to diagnose**: 60-minute MTTR despite only 18% frequency indicates significant diagnostic challenge. FTA needs extensive diagnostic branching for DNS, CNI, and policy-related failures.
 
-4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[技能/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]].
+4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]].
 
 ## etcd FMEA Risk Priority Numbers
 
@@ -127,7 +127,7 @@ Based on production data across the industry:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 - Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[概念/etcd Operational Reference.md|etcd Operational Reference]].md|etcd Operational Reference]]
 - [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]

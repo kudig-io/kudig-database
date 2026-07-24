@@ -260,15 +260,15 @@ spec:
 - [[概念/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
 - [[概念/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
 - [[概念/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
-- [[技能/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[技能/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
-- [[技能/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
-- [[技能/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
-- [[技能/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
-- [[技能/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
-- [[技能/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
+- [[技能/网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/工作负载/statefulset/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[技能/网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[技能/网络/service/培训/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[技能/工作负载/pod/培训/learn-analogy-dictionary.md|K8S 概念类比词典]] — Cross-reference
 - [[实体/cncf-networking.md|CNCF 网络与服务网格项目全景]] — Cross-reference
 - [[实体/kubernetes-changelog.md|Kubernetes 变更日志索引]] — Cross-reference
 - [[实体/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference

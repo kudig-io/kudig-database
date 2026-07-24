@@ -175,12 +175,12 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ �
 - [[概念/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
 - [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
 - [[etcd|etcd]]
 - [[归档/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
-- [[技能/backup-restore-etcd.md|Backup and Restore etcd]]
-- [[技能/fta-方法论/top-events-index/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[kudig-man-pages-index]]
 
 - RELEASE-NOTES-0.2

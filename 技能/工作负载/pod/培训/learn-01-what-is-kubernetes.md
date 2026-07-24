@@ -334,7 +334,7 @@ MySQL - 关系型数据库(本课示例)
 
 ## Related
 
-- [[技能/learn-06-configmap-secret.md|learn-06-configmap-secret]] — 第六课：ConfigMap 和 Secret - 配置管理
+- [[技能/工作负载/pod/培训/learn-06-configmap-secret.md|learn-06-configmap-secret]] — 第六课：ConfigMap 和 Secret - 配置管理
 - [[docker]] — Docker
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

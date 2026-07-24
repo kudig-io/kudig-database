@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/training-public/public-training/README.md|Readme]]
+- [[技能/工作负载/pod/培训/public-training-README.md|Readme]]
 
 ## 子目录
 

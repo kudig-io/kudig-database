@@ -118,7 +118,7 @@ etcd 是集群状态的核心，必须单独备份。可使用 `etcdctl snapshot
 ## 相关资源
 
 - [[概念/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[技能/backup-restore-etcd.md|Backup and Restore etcd]]
+- [[技能/控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
 - [[概念/high-availability-patterns.md|High Availability Patterns]]
 
 ## 生产案例
@@ -168,7 +168,7 @@ etcd 是集群状态的核心，必须单独备份。可使用 `etcdctl snapshot
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 - [[概念/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
-- [[技能/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
+- [[技能/控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
 
 
 <!-- risk-assessed -->

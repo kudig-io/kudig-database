@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[技能/best-practices/best-practices/README.md|Readme]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/bp-README-alt.md|Readme]]
 
 ## 子目录
 
@@ -28,5 +28,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[技能/best-practices/best-practices/common-best-practices.md|Common Best Practices]]
+- [[技能/集群运维/cluster-upgrade/最佳实践/common-best-practices.md|Common Best Practices]]
 

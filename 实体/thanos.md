@@ -291,7 +291,7 @@ Thanos 异常
 - [[实体/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
 - [[实体/k8s-observability-ecosystem.md|可观测性体系：指标、日志、链路追踪与混沌工程]] — Cross-reference
 - [[概念/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
-- [[技能/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
+- [[技能/可观测性/monitoring/monitoring-fta.md|监控与告警异常故障树分析]] — Cross-reference
 - [[实体/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
 - [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 

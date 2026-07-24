@@ -223,11 +223,11 @@ kubectl get pvc postgres-data -o jsonpath='{.status.conditions}'
 - [[kanister]] — Kanister
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[概念/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[技能/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
+- [[技能/存储/csi-storage/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
 - [[实体/csi-drivers.md|csi-drivers]] — CSI Drivers
 - [[实体/csi-drivers.md|CSI Drivers]]
 - [[实体/statefulset.md|StatefulSet]]
-- [[技能/manage-persistent-storage.md|Manage Persistent Storage]]
+- [[技能/存储/csi-storage/manage-persistent-storage.md|Manage Persistent Storage]]
 - [[概念/resource-management.md|Resource Management]]
 
 - [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
