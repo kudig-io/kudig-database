@@ -1,21 +1,18 @@
 ---
-title: 第三章：FEBM 最佳实践 [故障诊断]
-description: 'title: 第三章：FEBM 最佳实践'
-summary: 'title: 第三章：FEBM 最佳实践'
+title: 第三章：FEBM 最佳实践
+description: '# 第三章：FEBM 最佳实践'
 category: febm
 tags:
-- febm
-- troubleshooting
-- best-practice
+- k8s
+- forensics
+- evidence-based
+- methodology
 - apiserver
 - prometheus
 - grafana
 - jaeger
 - containerd
 - cri-o
-- docker
-tier: core
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -23,18 +20,13 @@ audience:
 - SRE
 - 运维专家
 - 技术支持
-estimated_read_time: 90min
+estimated_read_time: 10min
 intent_queries:
 - 第三章：FEBM 最佳实践 是什么
 - 如何 第三章：FEBM 最佳实践
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第三章：FEBM 最佳实践 故障排查
-- 第三章：FEBM 最佳实践 排障步骤
 trigger_keywords:
 - 第三章：FEBM
 - 最佳实践
-- troubleshooting
-- diagnostics
 - febm
 prerequisites:
 - kubectl-basics
@@ -52,58 +44,16 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 第三章：FEBM 最佳实践
-description: '# 第三章：FEBM 最佳实践'
-category: febm
-tags:
-- k8s
-- forensics
-- evidence-based
-- methodology
-- apiserver
-- [[Prometheus|prometheus]]
-- grafana
-- [[Jaeger|jaeger]]
-- [[containerd|containerd]]
-- cri-o
-last_updated: 2026-05
-difficulty: expert
-reading_level: expert
-audience:
-- SRE
-- 运维专家
-- 技术支持
-estimated_read_time: 10min
-intent_queries:
-- 第三章：FEBM 最佳实践 是什么
-- 如何 第三章：FEBM 最佳实践
-trigger_keywords:
-- 第三章：FEBM
-- 最佳实践
-- febm
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # 第三章：FEBM 最佳实践
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
-> **上一章**: [第二章：FEBM 技术实现体系](./[[故障诊断/FEBM方法论/02-febm-technical-implementation.md|02-febm-technical-implementation]].md)  
-> **下一章**: 第四章：FEBM 对云平台工单智能体托管的意义](./[[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]].md)
+> **上一章**: [第二章：FEBM 技术实现体系](./02-febm-technical-implementation.md)  
+> **下一章**: [第四章：FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md)
 
 ---
 
-<!-- chunk: 概述 -->## 概述
+## 概述
 
 本章详细阐述 FEBM 在 Kubernetes 云原生环境中的实施最佳实践。从可观测性基础设施建设到证据采集策略，从事件响应流程到取证即代码（Forensics as Code），本章提供可操作的指导和实战经验总结。
 
@@ -116,9 +66,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 3.1 可观测性基础设施建设 -->## 3.1 可观测性基础设施建设
+## 3.1 可观测性基础设施建设
 
-## 3.1.1 五层可观测性架构
+### 3.1.1 五层可观测性架构
 
 FEBM 方法论依赖于完善的可观测性基础设施。我们提出五层架构模型，确保证据从生成到分析的完整链路：
 
@@ -157,7 +107,7 @@ FEBM 方法论依赖于完善的可观测性基础设施。我们提出五层架
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Layer 2: Collection & Aggregation                │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐             │
-│  │  Prometheus  │  │  Fluentd/    │  │  OpenTelemetry│            │
+│  │  Prometheus  │  │  [[fluentd|Fluentd]]/    │  │  OpenTelemetry│            │
 │  │  Exporters   │  │  Fluent Bit  │  │  Collector    │            │
 │  └──────────────┘  └──────────────┘  └──────────────┘             │
 │  ┌──────────────┐  ┌──────────────┐                               │
@@ -181,9 +131,9 @@ FEBM 方法论依赖于完善的可观测性基础设施。我们提出五层架
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-## 3.1.2 各层详细说明
+### 3.1.2 各层详细说明
 
-## Layer 1: 数据生产层
+#### Layer 1: 数据生产层
 
 **职责**：生成原始可观测性数据和取证证据源
 
@@ -309,7 +259,7 @@ falco:
     - fd.name
 ```
 
-## Layer 2: 采集与聚合层
+#### Layer 2: 采集与聚合层
 
 **职责**：收集、预处理、路由可观测性数据
 
@@ -442,7 +392,7 @@ service:
       exporters: [otlp/tempo]
 ```
 
-## Layer 3: 存储与索引层
+#### Layer 3: 存储与索引层
 
 **职责**：持久化证据数据，支持高效检索
 
@@ -555,7 +505,7 @@ service:
 | Network Flows | 3 天 | 7 天 | 30 天 | 30 天 | 成本优化 |
 | Container Checkpoints | - | 7 天 | 30 天 | 30 天 | 按需触发 |
 
-## Layer 4: 检测与告警层
+#### Layer 4: 检测与告警层
 
 **职责**：实时分析证据流，检测异常，触发响应
 
@@ -606,20 +556,22 @@ route:
   
   routes:
     # FEBM 高优先级：安全事件
-    - matchers:
-      - severity="critical"
-      - category="security"
-      receiver: febm-security-team
+    - match:
+        severity: critical
+        category: security
+      receiver: 'febm-security-team'
       group_wait: 0s
       repeat_interval: 5m
       continue: true  # 同时发送到其他 receiver
+    
     # FEBM 中优先级：性能异常
-    - matchers:
-      - severity="warning"
-      - category="performance"
-      receiver: febm-sre-team
+    - match:
+        severity: warning
+        category: performance
+      receiver: 'febm-sre-team'
       group_wait: 30s
       repeat_interval: 1h
+
 receivers:
   - name: 'febm-security-team'
     webhook_configs:
@@ -628,7 +580,7 @@ receivers:
         http_config:
           bearer_token: '<secret>'
     pagerduty_configs:
-      - routing_key: '<pagerduty-key>'
+      - service_key: '<pagerduty-key>'
         severity: 'critical'
 
   - name: 'febm-sre-team'
@@ -640,11 +592,11 @@ receivers:
 
 inhibit_rules:
   # 抑制低优先级告警（当高优先级告警已触发）
-  - source_matchers:
-    - severity="critical"
-    - target_match=""
-    - severity="warning"
-    - equal="['alertname', 'namespace', 'pod']"
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'namespace', 'pod']
 ```
 
 **自定义检测规则示例（Prometheus）**：
@@ -701,7 +653,7 @@ groups:
           febm_action: "Trigger container checkpoint before next restart"
 ```
 
-## Layer 5: 取证分析层
+#### Layer 5: 取证分析层
 
 **职责**：交互式证据分析，假设验证，报告生成
 
@@ -964,7 +916,7 @@ if __name__ == "__main__":
     fig.savefig('timeline.png')
 ```
 
-## 3.1.3 工具选型对比表
+### 3.1.3 工具选型对比表
 
 | 层级 | 能力域 | 工具选项 | FEBM 推荐 | 推荐理由 |
 |------|--------|---------|-----------|---------|
@@ -977,7 +929,7 @@ if __name__ == "__main__":
 | L4 检测层 | Real-time | Falco / Prometheus Alerts | **Both** | 互补：系统调用 + 指标阈值 |
 | L5 分析层 | Visualization | Grafana / Kibana | **Grafana** | 统一界面、支持多数据源 |
 
-## 3.1.4 高可用性配置
+### 3.1.4 高可用性配置
 
 **关键原则**：证据基础设施本身不能成为单点问题
 
@@ -1031,7 +983,7 @@ spec:
 | Elasticsearch | 15 分钟 | 0 (WORM 存储) | 集群模式 + 快照 |
 | Falco | 1 分钟 | 5 分钟 | DaemonSet + 本地缓冲 |
 
-## 3.1.5 反模式：可观测性盲区
+### 3.1.5 反模式：可观测性盲区
 
 **Anti-Pattern 1: 短保留期导致证据丢失**
 
@@ -1097,11 +1049,11 @@ logger.info(f"User {user_id} logged in")
 
 ---
 
-<!-- chunk: 3.2 证据采集策略 -->## 3.2 证据采集策略
+## 3.2 证据采集策略
 
-## 3.2.1 核心原则
+### 3.2.1 核心原则
 
-## 原则 1：按挥发性优先级分层采集
+#### 原则 1：按挥发性优先级分层采集
 
 **挥发性金字塔**：
 
@@ -1172,7 +1124,7 @@ logger.info(f"User {user_id} logged in")
     └──────────────────────┘  └─────────────────────────┘
 ```
 
-## 原则 2：持续取证（Continuous Forensics）
+#### 原则 2：持续取证（Continuous Forensics）
 
 **传统方法 vs FEBM 方法**：
 
@@ -1390,7 +1342,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-## 原则 3：证据完整性保障
+#### 原则 3：证据完整性保障
 
 **完整性保障全链路**：
 
@@ -1471,9 +1423,6 @@ data:
 ```
 
 **验证时间同步状态**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1777,7 +1726,7 @@ custody.record_transfer(CustodyTransfer(
 print(custody.export_for_legal())
 ```
 
-## 原则 4：数据质量优于数量
+#### 原则 4：数据质量优于数量
 
 **反模式：收集一切**
 
@@ -1841,7 +1790,7 @@ filters:
 | Cold | 历史审计日志 | 7 年 | $10/TB/月 | < 10s | 压缩归档 |
 | 丢弃 | 健康检查日志 | 0 | $0 | N/A | /healthz 请求 |
 
-## 原则 5：多层关联标识符
+#### 原则 5：多层关联标识符
 
 **关联标识符体系**：
 
@@ -2018,9 +1967,9 @@ def reconstruct_incident_timeline(pod_uid, time_window_minutes=60):
 
 ---
 
-<!-- chunk: 3.3 事件响应流程（对齐 NIST SP 800-61） -->## 3.3 事件响应流程（对齐 NIST SP 800-61）
+## 3.3 事件响应流程（对齐 NIST SP 800-61）
 
-## 3.3.1 NIST 事件响应生命周期
+### 3.3.1 NIST 事件响应生命周期
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -2074,14 +2023,14 @@ def reconstruct_incident_timeline(pod_uid, time_window_minutes=60):
                         └──────────────────────┘
 ```
 
-## 3.3.2 Phase 1: Preparation（准备阶段）
+### 3.3.2 Phase 1: Preparation（准备阶段）
 
 **Checklist: FEBM 取证环境准备清单**
 
 ```markdown
-<!-- chunk: 1.1 基础设施部署 -->## 1.1 基础设施部署
+## 1.1 基础设施部署
 
-## 证据收集层
+### 证据收集层
 - [ ] 所有节点部署 NTP 客户端（Chrony），验证时间同步精度 < 1ms
 - [ ] 所有节点部署 Falco DaemonSet（latest stable version）
 - [ ] 验证 eBPF 探针加载成功（`kubectl logs -n falco falco-xxxxx | grep "loaded"`)
@@ -2089,7 +2038,7 @@ def reconstruct_incident_timeline(pod_uid, time_window_minutes=60):
 - [ ] 部署 Fluent Bit DaemonSet，配置日志采集过滤规则
 - [ ] 部署 OpenTelemetry Collector（HA 模式，2+ replicas）
 
-## 证据存储层
+### 证据存储层
 - [ ] 部署 Elasticsearch 集群（3+ nodes, 2 replicas per shard）
 - [ ] 配置 ILM 策略（hot 7d, warm 30d, cold 7y）
 - [ ] 启用 Elasticsearch WORM 索引设置
@@ -2099,79 +2048,79 @@ def reconstruct_incident_timeline(pod_uid, time_window_minutes=60):
 - [ ] 部署 Tempo（S3 backend for traces）
 - [ ] 配置 MinIO/S3 Object Lock（WORM for long-term archive）
 
-## 检测与告警层
+### 检测与告警层
 - [ ] 配置 Prometheus AlertManager（HA 模式）
 - [ ] 导入 FEBM 告警规则（/prometheus-rules/febm-*.yaml）
 - [ ] 配置 Falco Sidekick（路由到 AlertManager + Elasticsearch）
 - [ ] 测试告警通知（Slack/PagerDuty/Email）
 - [ ] 配置告警抑制规则（避免告警风暴）
 
-## 分析层
+### 分析层
 - [ ] 部署隔离的 Jupyter Forensics 环境
 - [ ] 配置只读访问凭证（Prometheus/Loki/Elasticsearch）
 - [ ] 预置取证分析脚本（timeline reconstruction, correlation analysis）
 - [ ] 配置 Grafana 取证仪表板
 - [ ] 部署 CRIU 容器检查点工具
 
-<!-- chunk: 1.2 Kubernetes 集群配置 -->## 1.2 Kubernetes 集群配置
+## 1.2 Kubernetes 集群配置
 
-## API Server 审计日志
+### API Server 审计日志
 - [ ] 启用 Audit Policy（RequestResponse level for critical resources）
 - [ ] 配置 Audit Webhook 后端（实时导出到 Elasticsearch）
 - [ ] 验证审计日志包含完整请求/响应体
 - [ ] 测试审计日志查询（kubectl get/create/delete 操作可见）
 
-## RBAC 与访问控制
+### RBAC 与访问控制
 - [ ] 配置取证团队专用 ServiceAccount（只读权限）
 - [ ] 限制生产环境 kubectl exec 权限（仅紧急情况 + 审批）
 - [ ] 启用 Pod Security Standards（baseline/restricted）
 - [ ] 配置 NetworkPolicy（默认拒绝，显式允许）
 
-## 容器运行时
+### 容器运行时
 - [ ] 验证 containerd/CRI-O 支持 checkpoint/restore（CRIU）
 - [ ] 配置容器运行时日志级别（info or debug）
 - [ ] 启用 seccomp 默认配置文件
 - [ ] 配置 AppArmor/SELinux 强制模式
 
-<!-- chunk: 1.3 团队与流程 -->## 1.3 团队与流程
+## 1.3 团队与流程
 
-## 人员培训
+### 人员培训
 - [ ] SRE 团队完成 FEBM 培训（取证基础、工具使用）
 - [ ] 安全团队完成 CNCF 取证课程认证
 - [ ] 开发团队完成结构化日志与 Trace Context 培训
 - [ ] 进行桌面演练（Tabletop Exercise）：模拟勒索软件攻击
 - [ ] 进行红蓝对抗演练（Red Team Exercise）
 
-## 流程文档
+### 流程文档
 - [ ] 编写事件响应 Runbook（按场景分类：RCE, 数据泄露, DDoS）
 - [ ] 定义严重性分级标准（P0/P1/P2/P3）
 - [ ] 定义升级路径（On-call SRE → Security Lead → CISO）
 - [ ] 定义 Chain of Custody 流程（证据保管链记录）
 - [ ] 制定通信计划（内部通知、客户通知、监管报告）
 
-## 工具准备
+### 工具准备
 - [ ] 准备取证工具包 Docker 镜像（包含 criu, bcc-tools, sysdig 等）
 - [ ] 创建应急响应 Job/CronJob 模板（自动证据采集）
 - [ ] 配置 Argo Workflows 取证 Pipeline
 - [ ] 准备容器镜像快照工具（Skopeo, Crane）
 - [ ] 准备网络抓包工具（tcpdump, Wireshark）
 
-<!-- chunk: 1.4 测试与验证 -->## 1.4 测试与验证
+## 1.4 测试与验证
 
-## 功能测试
+### 功能测试
 - [ ] 手动触发 Falco 告警（exec into container, write to /etc）
 - [ ] 验证告警在 1 分钟内到达 AlertManager
 - [ ] 验证证据自动采集触发（container checkpoint, enhanced logs）
 - [ ] 验证证据完整性（SHA-256 hash verification）
 - [ ] 验证时间线重建工具（timeline_analysis.py）
 
-## 性能测试
+### 性能测试
 - [ ] 验证日志采集不影响应用性能（< 5% CPU overhead）
 - [ ] 验证 Falco eBPF 探针开销（< 2% CPU per node）
 - [ ] 验证存储容量规划（每日数据增长 vs 保留期）
 - [ ] 测试存储故障恢复（模拟 Elasticsearch node crash）
 
-## 安全测试
+### 安全测试
 - [ ] 验证取证数据传输加密（TLS 1.3）
 - [ ] 验证证据存储访问控制（RBAC + audit logs）
 - [ ] 验证 WORM 存储不可篡改（尝试删除索引应失败）
@@ -2222,7 +2171,7 @@ def reconstruct_incident_timeline(pod_uid, time_window_minutes=60):
 
 ---
 
-## 3.3.3 Phase 2: Detection & Analysis（检测与分析）
+### 3.3.3 Phase 2: Detection & Analysis（检测与分析）
 
 **实时检测流程**：
 
@@ -2463,10 +2412,10 @@ spec:
           with open('/evidence/timeline.md', 'w') as f:
               f.write(f"# Incident Timeline: {{workflow.parameters.incident-id}}\n\n")
               f.write(f"**Generated**: {datetime.now().isoformat()}\n\n")
-              f.write("<!-- chunk: Events\n\n") -->## Events\n\n")
+              f.write("## Events\n\n")
               
               for _, row in df.iterrows():
-                  f.write(f"#<!-- chunk: {row['timestamp'].isoformat()}\n") -->## {row['timestamp'].isoformat()}\n")
+                  f.write(f"### {row['timestamp'].isoformat()}\n")
                   f.write(f"**Source**: {row['source']}\n")
                   f.write(f"**Event**: {row['event']}\n\n")
                   if row['source'] == 'k8s_audit':
@@ -2534,7 +2483,7 @@ spec:
 ```
 ---
 
-## 3.3.4 Phase 3: Containment, Eradication & Recovery
+### 3.3.4 Phase 3: Containment, Eradication & Recovery
 
 **隔离策略矩阵**：
 
@@ -2638,37 +2587,37 @@ spec:
 **恢复验证 Checklist**：
 
 ```markdown
-<!-- chunk: 服务恢复验证清单 -->## 服务恢复验证清单
+## 服务恢复验证清单
 
-## 1. 恶意组件已清除
+### 1. 恶意组件已清除
 - [ ] 已删除/隔离受影响的 Pod
 - [ ] 已验证新 Pod 使用干净的镜像（SHA-256 digest）
 - [ ] 已扫描镜像漏洞（Trivy/Clair scan passed）
 - [ ] 已验证无可疑进程（Falco 无告警 > 10 分钟）
 - [ ] 已验证无可疑网络连接（netstat/ss 输出正常）
 
-## 2. 漏洞已修复
+### 2. 漏洞已修复
 - [ ] 已识别攻击利用的漏洞（CVE-XXX-YYYY or 0-day）
 - [ ] 应用代码已修复（Git commit SHA: xxxxxx）
 - [ ] 依赖包已更新（requirements.txt / package.json）
 - [ ] 配置已加固（secrets 轮换、RBAC 收紧）
 - [ ] 已添加 Falco 规则检测该攻击模式
 
-## 3. 服务功能正常
+### 3. 服务功能正常
 - [ ] 健康检查通过（/healthz 返回 200）
 - [ ] 关键 API 响应正常（P50 latency < SLO）
 - [ ] 数据库连接正常（无慢查询告警）
 - [ ] 依赖服务连接正常（无 5xx 错误）
 - [ ] 监控指标恢复基线（CPU/Memory/QPS）
 
-## 4. 证据已归档
+### 4. 证据已归档
 - [ ] 所有证据已上传到 WORM 存储
 - [ ] Chain of Custody 记录完整
 - [ ] 时间线报告已生成
 - [ ] 根因分析文档已完成
 - [ ] 事件 Ticket 已更新（Jira/ServiceNow）
 
-## 5. 持续监控
+### 5. 持续监控
 - [ ] 已部署增强监控（7 天观察期）
 - [ ] 已配置告警（相同攻击模式再次出现）
 - [ ] 已通知 SOC 团队关注该服务
@@ -2677,7 +2626,7 @@ spec:
 
 ---
 
-## 3.3.5 Phase 4: Post-Incident Activity
+### 3.3.5 Phase 4: Post-Incident Activity
 
 **事件报告模板**：
 
@@ -2691,7 +2640,7 @@ spec:
 
 ---
 
-<!-- chunk: 执行摘要 -->## 执行摘要
+## 执行摘要
 
 **一句话总结**: Remote Code Execution (RCE) vulnerability in payment-api service was exploited to deploy cryptocurrency miner.
 
@@ -2704,9 +2653,9 @@ spec:
 
 ---
 
-<!-- chunk: 时间线（基于 FEBM 证据重建） -->## 时间线（基于 FEBM 证据重建）
+## 时间线（基于 FEBM 证据重建）
 
-## 09:42:15 UTC - 攻击开始
+### 09:42:15 UTC - 攻击开始
 **证据**: K8s Audit Log (auditID: 5a2b3c4d-...)
 ```json
 {
@@ -2719,7 +2668,7 @@ spec:
 ```
 **分析**: 匿名用户通过未授权的 API 端点执行命令（漏洞：CVE-2024-XXXX）
 
-## 09:42:18 UTC - 下载恶意脚本
+### 09:42:18 UTC - 下载恶意脚本
 **证据**: Falco Event
 ```
 Rule: Launch Suspicious Network Tool in Container
@@ -2727,14 +2676,14 @@ Output: Outbound connection to known malicious IP (user=root container=payment-a
         proc=curl fd.name=203.0.113.99:443)
 ```
 
-## 09:45:30 UTC - 部署加密矿机
+### 09:45:30 UTC - 部署加密矿机
 **证据**: Falco Event
 ```
 Rule: Detect crypto miners using the Stratum protocol
 Output: Crypto miner detected (proc=xmrig connection=pool.minexmr.com:4444)
 ```
 
-## 09:47:00 UTC - FEBM 自动响应触发
+### 09:47:00 UTC - FEBM 自动响应触发
 **证据**: Prometheus Alert
 ```
 Alert: HighCPUUsage + SuspiciousProcess
@@ -2745,26 +2694,26 @@ Actions Taken:
   - PagerDuty notification sent
 ```
 
-## 10:05:00 UTC - 安全团队介入
+### 10:05:00 UTC - 安全团队介入
 **证据**: Slack 消息 + Jira Ticket
 - On-call engineer acknowledged alert
 - Incident ticket created: INC-2024-02-22-001
 
-## 10:15:00 UTC - 隔离受影响 Pod
+### 10:15:00 UTC - 隔离受影响 Pod
 **证据**: K8s Audit Log
 ```
 verb: create
 objectRef: {resource: networkpolicies, name: incident-isolation-pod}
 ```
 
-## 10:30:00 UTC - 证据采集完成
+### 10:30:00 UTC - 证据采集完成
 **证据**: Argo Workflow Logs
 - Container checkpoint: ✅ (15 GB)
 - Audit logs: ✅ (2,345 entries)
 - Falco events: ✅ (127 events)
 - Application logs: ✅ (50 MB)
 
-## 11:00:00 UTC - 部署修复版本
+### 11:00:00 UTC - 部署修复版本
 **证据**: GitLab CI/CD Pipeline
 ```
 Commit: f1a2b3c4 "Fix: disable unauthenticated exec endpoint"
@@ -2772,7 +2721,7 @@ Image: payment-api:v2.3.1-security-patch
 Deployment: Rolling update completed
 ```
 
-## 11:30:00 UTC - 验证恢复
+### 11:30:00 UTC - 验证恢复
 **证据**: Prometheus Metrics
 ```
 CPU usage: back to baseline (<20%)
@@ -2782,9 +2731,9 @@ Falco alerts: none for 30 minutes
 
 ---
 
-<!-- chunk: 根因分析 -->## 根因分析
+## 根因分析
 
-## 漏洞详情
+### 漏洞详情
 **CVE**: CVE-2024-XXXX (or internal-2024-001)  
 **组件**: payment-api v2.3.0  
 **漏洞类型**: Remote Code Execution via unauthenticated /exec endpoint  
@@ -2804,14 +2753,14 @@ Internet ─┬─> LoadBalancer
                           └─> 执行任意命令
 ```
 
-## 为什么检测有效
+### 为什么检测有效
 ✅ **FEBM 多层检测成功**:
 1. Falco 检测到 `curl` 进程（非应用预期进程）
 2. Falco 检测到 Stratum 协议网络连接（加密矿机特征）
 3. Prometheus 检测到 CPU 使用率异常（10x baseline）
 4. K8s Audit 记录了未授权 `pods/exec` 操作
 
-## 为什么攻击得逞
+### 为什么攻击得逞
 ❌ **防御层失效**:
 1. ~~API Gateway 认证~~ - /debug 路径未配置认证
 2. ~~Kubernetes RBAC~~ - `system:anonymous` 有过高权限
@@ -2820,21 +2769,21 @@ Internet ─┬─> LoadBalancer
 
 ---
 
-<!-- chunk: 改进措施（按优先级） -->## 改进措施（按优先级）
+## 改进措施（按优先级）
 
-## P0 - 立即执行（24h 内）
+### P0 - 立即执行（24h 内）
 - [x] 禁用所有生产环境的 /debug 端点
 - [x] 轮换所有受影响服务的 Secrets
 - [x] 收紧 Kubernetes RBAC（移除 `system:anonymous` 的 exec 权限）
 - [x] 部署 Falco 规则检测类似攻击模式
 
-## P1 - 短期（1 周内）
+### P1 - 短期（1 周内）
 - [ ] 审计所有服务的调试端点暴露情况（自动化扫描）
 - [ ] 强制所有 API 端点启用认证（API Gateway 统一策略）
 - [ ] 实施 Pod Security Standards（Restricted 级别）
 - [ ] 对开发团队进行安全编码培训
 
-## P2 - 中期（1 个月内）
+### P2 - 中期（1 个月内）
 - [ ] 部署 Runtime Security 工具（Falco + Tetragon）到所有集群
 - [ ] 实施最小权限原则 RBAC 审计
 - [ ] 建立漏洞赏金计划（Bug Bounty）
@@ -2842,9 +2791,9 @@ Internet ─┬─> LoadBalancer
 
 ---
 
-<!-- chunk: 经验教训 -->## 经验教训
+## 经验教训
 
-## 做得好的地方
+### 做得好的地方
 ✅ **FEBM 方法论有效**:
 - 容器 checkpoint 保留了完整攻击现场
 - 多层证据交叉验证（审计日志 + Falco + 指标）
@@ -2854,7 +2803,7 @@ Internet ─┬─> LoadBalancer
 - On-call 工程师 5 分钟内确认告警
 - 证据优先原则严格执行（先采集再隔离）
 
-## 需要改进的地方
+### 需要改进的地方
 ❌ **防御层不足**:
 - 调试端点不应暴露在生产环境
 - RBAC 权限过于宽松
@@ -2866,7 +2815,7 @@ Internet ─┬─> LoadBalancer
 
 ---
 
-<!-- chunk: 指标 -->## 指标
+## 指标
 
 | 指标 | 目标 | 实际 | 评估 |
 |-----|------|------|------|
@@ -2878,7 +2827,7 @@ Internet ─┬─> LoadBalancer
 
 ---
 
-<!-- chunk: 审批 -->## 审批
+## 审批
 
 **分析师**: Alice Chen (alice@example.com) - 2024-02-22  
 **审核人**: Bob Smith (Security Lead) - 2024-02-23  
@@ -2906,9 +2855,9 @@ Post-Incident ──────────────▶ Preparation
 
 ---
 
-<!-- chunk: 3.4 取证即代码（Forensics as Code） -->## 3.4 取证即代码（Forensics as Code）
+## 3.4 取证即代码（Forensics as Code）
 
-## 3.4.1 核心理念
+### 3.4.1 核心理念
 
 取证即代码（Forensics as Code）是 FEBM 的工程化最佳实践之一，其核心理念是将取证流程版本化、可重复、可审计。这与 Infrastructure as Code 和 GitOps 理念一脉相承。
 
@@ -2931,7 +2880,7 @@ Forensics as Code 的三大原则:
      → 满足合规审计要求
 ```
 
-## 3.4.2 仓库结构
+### 3.4.2 仓库结构
 
 ```
 forensics-as-code/
@@ -2992,7 +2941,7 @@ forensics-as-code/
         └── executive-summary.md
 ```
 
-## 3.4.3 CI/CD 集成
+### 3.4.3 CI/CD 集成
 
 ```
 Forensics as Code CI/CD 流水线:
@@ -3032,9 +2981,9 @@ Forensics as Code CI/CD 流水线:
 
 ---
 
-<!-- chunk: 3.5 持续取证（Continuous Forensics） -->## 3.5 持续取证（Continuous Forensics）
+## 3.5 持续取证（Continuous Forensics）
 
-## 3.5.1 范式转变
+### 3.5.1 范式转变
 
 持续取证代表了从"被动响应"到"主动感知"的范式转变：
 
@@ -3053,7 +3002,7 @@ Forensics as Code CI/CD 流水线:
       证据已在存储中                                    丰富的上下文 ─┘
 ```
 
-## 3.5.2 智能升级机制
+### 3.5.2 智能升级机制
 
 ```
 持续取证的三级采集强度:
@@ -3085,9 +3034,9 @@ Level 3: 全量取证 (Incident-Triggered)
 
 ---
 
-<!-- chunk: 3.6 证据存储与生命周期管理 -->## 3.6 证据存储与生命周期管理
+## 3.6 证据存储与生命周期管理
 
-## 3.6.1 分层存储策略
+### 3.6.1 分层存储策略
 
 | 存储层 | 数据类型 | 保留期 | 存储介质 | 访问延迟 | 成本 |
 |-------|---------|-------|---------|---------|------|
@@ -3096,7 +3045,7 @@ Level 3: 全量取证 (Incident-Triggered)
 | 冷存储 | 30-365 天的归档证据 | 1 年 | 对象存储（低频） | < 10s | 低 |
 | 冰存储 | 法律/合规要求的长期保存 | 3-7 年 | 归档存储 | 分钟-小时 | 极低 |
 
-## 3.6.2 证据不可变性保障
+### 3.6.2 证据不可变性保障
 
 ```
 WORM (Write-Once-Read-Many) 实施:
@@ -3119,9 +3068,9 @@ WORM (Write-Once-Read-Many) 实施:
 
 ---
 
-<!-- chunk: 3.7 取证环境隔离与安全 -->## 3.7 取证环境隔离与安全
+## 3.7 取证环境隔离与安全
 
-## 3.7.1 隔离分析集群架构
+### 3.7.1 隔离分析集群架构
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -3148,7 +3097,7 @@ WORM (Write-Once-Read-Many) 实施:
 └─────────────────────────────────────────────────────┘
 ```
 
-## 3.7.2 关键安全措施
+### 3.7.2 关键安全措施
 
 | 措施 | 目的 | 实施方式 |
 |------|------|---------|
@@ -3160,9 +3109,9 @@ WORM (Write-Once-Read-Many) 实施:
 
 ---
 
-<!-- chunk: 3.8 常见陷阱与反模式 -->## 3.8 常见陷阱与反模式
+## 3.8 常见陷阱与反模式
 
-## 反模式一："事后再说"
+### 反模式一："事后再说"
 
 ```
 ❌ "等出了问题再开始采集证据"
@@ -3176,7 +3125,7 @@ WORM (Write-Once-Read-Many) 实施:
 ✓ 正确做法: 建立持续取证姿态，始终在线采集
 ```
 
-## 反模式二："采集一切"
+### 反模式二："采集一切"
 
 ```
 ❌ "把所有日志、指标、追踪都存起来，什么都不丢"
@@ -3190,7 +3139,7 @@ WORM (Write-Once-Read-Many) 实施:
 ✓ 正确做法: 分层采集，智能过滤，按易失性和价值排序
 ```
 
-## 反模式三：忽略 Chain of Custody
+### 反模式三：忽略 Chain of Custody
 
 ```
 ❌ "直接 kubectl logs 看看就行"
@@ -3204,7 +3153,7 @@ WORM (Write-Once-Read-Many) 实施:
 ✓ 正确做法: 所有证据操作记录完整的保管链
 ```
 
-## 反模式四：单源结论
+### 反模式四：单源结论
 
 ```
 ❌ "日志里说是 OOM，那就是内存不够"
@@ -3217,7 +3166,7 @@ WORM (Write-Once-Read-Many) 实施:
 ✓ 正确做法: 多源交叉验证，至少 2-3 个独立证据源指向同一结论
 ```
 
-## 反模式五：时间不同步
+### 反模式五：时间不同步
 
 ```
 ❌ "各个节点的时间差个几秒没关系"
@@ -3229,11 +3178,8 @@ WORM (Write-Once-Read-Many) 实施:
 
 ✓ 正确做法: 所有节点 NTP 同步，时间精度 < 1ms
 ```
-# 🟢 低风险：只读/信息收集，通常无副作用
-## 反模式六：修复时覆盖证据
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
+### 反模式六：修复时覆盖证据
 
 ```
 ❌ "先 kubectl delete pod 重启，再看看日志"
@@ -3246,7 +3192,7 @@ WORM (Write-Once-Read-Many) 实施:
 ✓ 正确做法: 先创建检查点/采集证据，再执行修复操作
 ```
 
-## 反模式七：工具版本不一致
+### 反模式七：工具版本不一致
 
 ```
 ❌ "不同分析师用不同版本的 Volatility 分析同一份内存转储"
@@ -3262,29 +3208,5 @@ WORM (Write-Once-Read-Many) 实施:
 ---
 
 > **导航**: [<< 上一章 - FEBM 技术实现体系](./02-febm-technical-implementation.md) | [下一章 - FEBM 对云平台工单智能体托管的意义 >>](./04-febm-agent-ticket-processing.md)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FEBM方法论/MOC.md|topic-febm MOC]]
-- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
-- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
-- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]]
-- [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]]
-- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
-- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
-
-## See Also
-
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]]
-- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|02-febm-technical-implementation]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
-- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|05-febm-construction-methodology]]
-
 
 <!-- risk-assessed -->

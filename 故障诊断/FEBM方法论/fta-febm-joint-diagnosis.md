@@ -1,51 +1,4 @@
 ---
-title: FTA-FEBM 联合诊断最佳实践 (topic-febm)
-description: 'title: FTA-FEBM 联合诊断最佳实践'
-summary: 'title: FTA-FEBM 联合诊断最佳实践'
-category: febm
-tags:
-- febm
-- troubleshooting
-- kubelet
-- istio
-- envoy
-- hpa
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: expert
-reading_level: expert
-audience:
-- SRE
-- 运维专家
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- FTA-FEBM 联合诊断最佳实践 是什么
-- 如何 FTA-FEBM 联合诊断最佳实践
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- FTA-FEBM 联合诊断最佳实践 故障排查
-- FTA-FEBM 联合诊断最佳实践 排障步骤
-trigger_keywords:
-- FTA-FEBM
-- 联合诊断最佳实践
-- troubleshooting
-- diagnostics
-- febm
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: FTA-FEBM 联合诊断最佳实践
 description: '# FTA-FEBM 联合诊断最佳实践'
 category: febm
@@ -54,9 +7,9 @@ tags:
 - forensics
 - evidence-based
 - methodology
-- [[kubelet|kubelet]]
-- [[Istio|istio]]
-- [[Envoy|envoy]]
+- kubelet
+- istio
+- envoy
 - hpa
 last_updated: 2026-05
 difficulty: expert
@@ -73,16 +26,16 @@ trigger_keywords:
 - FTA-FEBM
 - 联合诊断最佳实践
 - febm
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # FTA-FEBM 联合诊断最佳实践
 
@@ -92,9 +45,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、核心概念 -->## 一、核心概念
+## 一、核心概念
 
-## 1.1 FTA vs FEBM 方法论对比
+### 1.1 FTA vs FEBM 方法论对比
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -138,7 +91,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 1.2 何时使用何种方法
+### 1.2 何时使用何种方法
 
 | 场景 | 推荐方法 | 原因 |
 |:---|:---:|:---|
@@ -154,9 +107,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 二、联合诊断架构 -->## 二、联合诊断架构
+## 二、联合诊断架构
 
-## 2.1 联合诊断流程图
+### 2.1 联合诊断流程图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -218,7 +171,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 2.2 联合诊断决策树
+### 2.2 联合诊断决策树
 
 ```
 问题发生
@@ -254,9 +207,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 三、实战案例 -->## 三、实战案例
+## 三、实战案例
 
-## 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合）
+### 3.1 案例 1：HPA 扩容后新型问题（FTA+FEBM 联合）
 
 **问题现象**:
 - 部分用户登录超时（不是全部用户）
@@ -341,7 +294,7 @@ FEBM 案例存档:
 
 ---
 
-## 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导）
+### 3.2 案例 2：ASM Istio 未知故障模式（FEBM 主导）
 
 **问题现象**:
 - Service A 调用 Service B 出现偶发性超时
@@ -355,7 +308,7 @@ FEBM 案例存档:
 匹配 TE: TE-10 ASM 服务网格问题
 
 FTA 路径遍历:
-  TE-10 → IE-10.1 数据面问题 → BE-10.1 Envoy 资源耗尽
+  TE-10 → IE-10.1 数据面问题 → BE-10.1 [[envoy|Envoy]] 资源耗尽
   TE-10 → IE-10.2 控制面问题 → BE-10.3 Istiod 配置推送失败
   TE-10 → IE-10.3 流量管理问题 → BE-10.5 灰度发布异常
 
@@ -416,7 +369,7 @@ FTA 更新:
 
 ---
 
-## 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证）
+### 3.3 案例 3：Terway ENI 复杂问题（FTA 主导 + FEBM 验证）
 
 **问题现象**:
 - 大规模 Pod 调度失败
@@ -424,9 +377,6 @@ FTA 更新:
 - 影响: 新部署完全失败
 
 **Phase 1: FTA 快速匹配**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -451,9 +401,6 @@ FTA 路径遍历:
 ```
 **Phase 2: FEBM 验证**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 FEBM 证据:
@@ -473,9 +420,9 @@ FEBM 证据:
 ```
 ---
 
-<!-- chunk: 四、联合诊断检查清单 -->## 四、联合诊断检查清单
+## 四、联合诊断检查清单
 
-## 4.1 Phase 1: FTA 快速匹配检查清单
+### 4.1 Phase 1: FTA 快速匹配检查清单
 
 ```
 □ 识别顶事件 (TE)
@@ -496,7 +443,7 @@ FEBM 证据:
   - 置信度 < 50% → 转到 FEBM
 ```
 
-## 4.2 Phase 2: FEBM 深度推理检查清单
+### 4.2 Phase 2: FEBM 深度推理检查清单
 
 ```
 □ 时间线重建
@@ -526,7 +473,7 @@ FEBM 证据:
   - 新路径的置信度是多少？
 ```
 
-## 4.3 修复与验证检查清单
+### 4.3 修复与验证检查清单
 
 ```
 □ 修复执行
@@ -547,7 +494,7 @@ FEBM 证据:
 
 ---
 
-<!-- chunk: 五、方法论选择决策表 -->## 五、方法论选择决策表
+## 五、方法论选择决策表
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -595,9 +542,9 @@ FEBM 证据:
 
 ---
 
-<!-- chunk: 六、工具与模板 -->## 六、工具与模板
+## 六、工具与模板
 
-## 6.1 FTA-FEBM 联合诊断记录模板
+### 6.1 FTA-FEBM 联合诊断记录模板
 
 ```yaml
 incident_record:
@@ -643,10 +590,7 @@ incident_record:
   lessons_learned: "经验教训"
 ```
 
-## 6.2 常用命令速查
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+### 6.2 常用命令速查
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -668,9 +612,9 @@ kubectl exec <pod> -- <diagnostic-command>
 ```
 ---
 
-<!-- chunk: 七、总结 -->## 七、总结
+## 七、总结
 
-## 7.1 联合诊断优势
+### 7.1 联合诊断优势
 
 | 优势 | 说明 |
 |:---|:---|
@@ -679,7 +623,7 @@ kubectl exec <pod> -- <diagnostic-command>
 | **完整性** | 联合使用覆盖已知+未知问题 |
 | **知识沉淀** | 发现新故障模式，持续更新 FTA |
 
-## 7.2 最佳实践
+### 7.2 最佳实践
 
 ```
 1. 优先使用 FTA 进行快速匹配
@@ -689,7 +633,7 @@ kubectl exec <pod> -- <diagnostic-command>
 5. FEBM 案例沉淀用于未来快速匹配
 ```
 
-## 7.3 适用场景总结
+### 7.3 适用场景总结
 
 ```
 FTA 主导:
@@ -715,30 +659,5 @@ FTA + FEBM 联合:
 > **版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
 > **下次更新**: 每次重大问题后补充新案例
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FEBM方法论/MOC.md|topic-febm [[KUDIG Database — Global MOC|MOC]]]]
-- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
-- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
-- [[故障诊断/FEBM方法论/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
-- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]]
-- [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]]
-- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
-
-## See Also
-
-- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|08-febm-production-quick-start]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]]
-- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|02-febm-technical-implementation]]
-
-```
 
 <!-- risk-assessed -->

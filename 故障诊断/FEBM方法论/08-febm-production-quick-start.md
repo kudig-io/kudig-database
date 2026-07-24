@@ -1,21 +1,18 @@
 ---
-title: 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 (topic-febm)
-description: 'description: ''**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'''
-summary: 'description: ''**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'''
+title: 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
+description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
 category: febm
 tags:
-- febm
-- troubleshooting
-- production
+- k8s
+- forensics
+- evidence-based
+- methodology
 - etcd
 - apiserver
 - kubelet
 - scheduler
 - controller-manager
 - prometheus
-- grafana
-tier: core
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -23,20 +20,15 @@ audience:
 - SRE
 - 运维专家
 - 技术支持
-estimated_read_time: 120min
+estimated_read_time: 5min
 intent_queries:
 - 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 是什么
 - 如何 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 故障排查
-- 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 排障步骤
 trigger_keywords:
 - 第八章：FEBM
 - 生产环境快速启动与
 - Kubernetes
 - 问题取证手册
-- troubleshooting
-- diagnostics
 - febm
 prerequisites:
 - kubectl-basics
@@ -60,50 +52,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 第八章：FEBM 生产环境快速启动与 [[Kubernetes|Kubernetes]] 问题取证手册
-description: '**目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队'
-category: febm
-tags:
-- k8s
-- forensics
-- evidence-based
-- methodology
-- [[etcd|etcd]]
-- apiserver
-- [[kubelet|kubelet]]
-- scheduler
-- controller-manager
-- [[Prometheus|prometheus]]
-last_updated: 2026-05
-difficulty: expert
-reading_level: expert
-audience:
-- SRE
-- 运维专家
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册 是什么
-- 如何 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
-trigger_keywords:
-- 第八章：FEBM
-- 生产环境快速启动与
-- Kubernetes
-- 问题取证手册
-- febm
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # 第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册
 
 > **目标读者**：需要在现有 Kubernetes 集群中快速落地 FEBM 方法论的 SRE 和安全团队  
@@ -122,17 +70,13 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 8.1 FEBM 第一周行动清单 -->## 8.1 FEBM 第一周行动清单
+## 8.1 FEBM 第一周行动清单
 
-## 8.1.1 Day 1: 部署 Falco (运行时安全监控)
+### 8.1.1 Day 1: 部署 Falco (运行时安全监控)
 
 **目标**：为所有节点部署 Falco DaemonSet，开始采集系统调用级证据。
 
-## 步骤 1: 部署 Falco
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
-> - `kubectl apply/create/replace`：创建/变更集群资源
+#### 步骤 1: 部署 Falco
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -152,7 +96,7 @@ helm install falco falcosecurity/falco \
   --set json_include_output_property=true \
   --set log_level=info
 ```
-## 步骤 2: 验证部署
+#### 步骤 2: 验证部署
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -170,7 +114,7 @@ kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=50
 # 应该看到类似输出：
 # {"output":"Notice A shell was spawned in a container...","priority":"Notice",...}
 ```
-## 步骤 3: 触发测试事件
+#### 步骤 3: 触发测试事件
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -189,11 +133,11 @@ kubectl logs -n falco -l app.kubernetes.io/name=falco --tail=5 | grep "Notice A 
 
 ---
 
-## 8.1.2 Day 2: 启用 Kubernetes 审计日志
+### 8.1.2 Day 2: 启用 Kubernetes 审计日志
 
 **目标**：配置 API Server 审计日志到 RequestResponse 级别，记录所有 API 操作证据。
 
-## 步骤 1: 准备审计策略文件
+#### 步骤 1: 准备审计策略文件
 
 ```bash
 # 创建审计策略文件 /etc/kubernetes/audit-policy.yaml
@@ -229,7 +173,7 @@ rules:
 EOF
 ```
 
-## 步骤 2: 配置 API Server
+#### 步骤 2: 配置 API Server
 
 ```bash
 # 编辑 API Server manifest (kubeadm 部署)
@@ -261,10 +205,7 @@ sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
 #   mountPath: /var/log/kubernetes
 ```
 
-## 步骤 3: 验证审计日志
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
+#### 步骤 3: 验证审计日志
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -293,15 +234,11 @@ sudo grep "audit-test" /var/log/kubernetes/audit.log | jq '.verb,.objectRef.reso
 
 ---
 
-## 8.1.3 Day 3: 部署日志聚合 (Fluent Bit → Loki)
+### 8.1.3 Day 3: 部署日志聚合 (Fluent Bit → Loki)
 
 **目标**：将分散的日志（Falco、K8s audit、容器日志）统一存储到 Loki。
 
-## 步骤 1: 部署 Loki
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
-> - `kubectl apply/create/replace`：创建/变更集群资源
+#### 步骤 1: 部署 Loki
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -322,11 +259,7 @@ helm install loki grafana/loki \
   --set singleBinary.persistence.enabled=true \
   --set singleBinary.persistence.size=50Gi
 ```
-## 步骤 2: 部署 Fluent Bit
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
-> - `kubectl apply/create/replace`：创建/变更集群资源
+#### 步骤 2: 部署 Fluent Bit
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -395,7 +328,7 @@ helm install fluent-bit grafana/fluent-bit \
   --set config.customParsers="$(kubectl get cm -n logging fluent-bit-config -o jsonpath='{.data.parsers\.conf}')" \
   --set config.outputs="$(kubectl get cm -n logging fluent-bit-config -o jsonpath='{.data.fluent-bit\.conf}' | grep -A 10 '\[OUTPUT\]')"
 ```
-## 步骤 3: 验证日志流
+#### 步骤 3: 验证日志流
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -426,14 +359,11 @@ logcli query '{job="fluentbit"}' --since=5m --limit=10
 
 ---
 
-## 8.1.4 Day 4: 部署 Prometheus + Grafana
+### 8.1.4 Day 4: 部署 Prometheus + Grafana
 
 **目标**：建立指标采集和可视化能力，支持 FEBM 跨层证据关联。
 
-## 步骤 1: 部署 kube-prometheus-stack
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
+#### 步骤 1: 部署 kube-prometheus-stack
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -447,11 +377,7 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
   --set grafana.persistence.enabled=true \
   --set grafana.persistence.size=10Gi
 ```
-## 步骤 2: 配置 Grafana 数据源
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+#### 步骤 2: 配置 Grafana 数据源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -484,10 +410,7 @@ EOF
 # 重启 Grafana 以加载新数据源
 kubectl rollout restart -n monitoring deployment/kube-prometheus-stack-grafana
 ```
-## 步骤 3: 导入 FEBM 仪表板
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
+#### 步骤 3: 导入 FEBM 仪表板
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -537,7 +460,7 @@ data:
     }
 EOF
 ```
-## 步骤 4: 验证监控栈
+#### 步骤 4: 验证监控栈
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -566,14 +489,11 @@ curl http://localhost:9090/api/v1/query?query=up | jq '.data.result | length'
 
 ---
 
-## 8.1.5 Day 5: 配置 Falcosidekick (告警路由)
+### 8.1.5 Day 5: 配置 Falcosidekick (告警路由)
 
 **目标**：将 Falco 告警实时路由到 Slack/Webhook，实现快速响应。
 
-## 步骤 1: 升级 Falco 并启用 Falcosidekick
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
+#### 步骤 1: 升级 Falco 并启用 Falcosidekick
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -586,11 +506,7 @@ helm upgrade falco falcosecurity/falco \
   --set falcosidekick.config.slack.webhookurl="YOUR_SLACK_WEBHOOK_URL" \
   --set falcosidekick.config.slack.minimumpriority=warning
 ```
-## 步骤 2: 配置告警路由规则
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+#### 步骤 2: 配置告警路由规则
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -630,7 +546,7 @@ EOF
 # 重启 Falcosidekick 加载新配置
 kubectl rollout restart -n falco deployment/falco-falcosidekick
 ```
-## 步骤 3: 测试告警流
+#### 步骤 3: 测试告警流
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -649,11 +565,7 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=20
 # 检查 Loki 中的 Falco 事件
 logcli query '{app="falco"}' --since=10m | grep "Write below binary dir"
 ```
-## 步骤 4: 配置告警静默规则（可选）
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+#### 步骤 4: 配置告警静默规则（可选）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -686,9 +598,9 @@ EOF
 
 ---
 
-## 8.1.6 Day 6-7: 集成验证和调优
+### 8.1.6 Day 6-7: 集成验证和调优
 
-## Day 6: 端到端测试
+#### Day 6: 端到端测试
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -738,7 +650,7 @@ kubectl logs -n falco -l app.kubernetes.io/name=falcosidekick --tail=20 | \
 
 echo "=== FEBM E2E 测试完成 ==="
 ```
-## Day 7: 性能调优检查清单
+#### Day 7: 性能调优检查清单
 
 ```yaml
 # FEBM 性能调优检查清单
@@ -802,14 +714,9 @@ Prometheus 调优:
 
 ---
 
-<!-- chunk: 8.2 最小化 FEBM 工具栈部署 -->## 8.2 最小化 FEBM 工具栈部署
+## 8.2 最小化 FEBM 工具栈部署
 
-## 8.2.1 一键部署脚本
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `helm upgrade/install`：部署/升级 release
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+### 8.2.1 一键部署脚本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -974,7 +881,7 @@ echo "                  http://localhost:2802"
 echo "  Prometheus:     kubectl port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9090:9090"
 echo "                  http://localhost:9090"
 ```
-## 8.2.2 资源开销明细
+### 8.2.2 资源开销明细
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1005,7 +912,7 @@ echo "                  http://localhost:9090"
   2. 配置 Prometheus 远程写入到 Thanos，降低本地存储需求
   3. 生产环境使用对象存储（S3/GCS）+ 分层存储策略
 ```
-## 8.2.3 NTP 时钟同步验证
+### 8.2.3 NTP 时钟同步验证
 
 **为什么 NTP 对 FEBM 至关重要？**
 
@@ -1071,15 +978,15 @@ NTP_CONFIG
 ```
 ---
 
-<!-- chunk: 8.3 Kubernetes 常见问题 FEBM 取证 Runbook -->## 8.3 Kubernetes 常见问题 FEBM 取证 Runbook
+## 8.3 Kubernetes 常见问题 FEBM 取证 Runbook
 
-## 8.3.1 Pod OOMKilled 取证 Runbook
+### 8.3.1 Pod OOMKilled 取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 Pod 被 Kubernetes 终止，状态显示 `OOMKilled`（Out of Memory），需要区分根因是内存泄漏、资源配置不当还是内核 Bug。
 
-## 证据采集清单
+#### 证据采集清单
 
 ```yaml
 证据类型及采集命令:
@@ -1150,7 +1057,7 @@ Pod 被 Kubernetes 终止，状态显示 `OOMKilled`（Out of Memory），需要
                   .requestObject.spec.containers[].resources.limits.memory != null)'
 ```
 
-## 证据分析决策树
+#### 证据分析决策树
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1232,7 +1139,7 @@ Pod 被 Kubernetes 终止，状态显示 `OOMKilled`（Out of Memory），需要
                     3. 咨询内核专家
 ```
 
-## 自动化取证脚本
+#### 自动化取证脚本
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1256,7 +1163,7 @@ echo "取证时间: $(date)"
 echo ""
 
 # 1. 基础信息
-echo "<!-- chunk: 1. 基础信息" -->## 1. 基础信息"
+echo "## 1. 基础信息"
 echo "---"
 kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '{
   nodeName: .spec.nodeName,
@@ -1276,7 +1183,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '{
 echo ""
 
 # 2. Prometheus 内存指标
-echo "<!-- chunk: 2. 内存使用趋势（OOM 前 1 小时）" -->## 2. 内存使用趋势（OOM 前 1 小时）"
+echo "## 2. 内存使用趋势（OOM 前 1 小时）"
 echo "---"
 PROM_URL="http://localhost:9090"  # 需要 port-forward
 QUERY="container_memory_working_set_bytes{pod=\"$POD_NAME\",namespace=\"$NAMESPACE\"}[1h]"
@@ -1287,14 +1194,14 @@ curl -s -G "$PROM_URL/api/v1/query" --data-urlencode "query=$QUERY" | \
 echo ""
 
 # 3. 应用日志
-echo "<!-- chunk: 3. 应用日志（OOM 前 50 行）" -->## 3. 应用日志（OOM 前 50 行）"
+echo "## 3. 应用日志（OOM 前 50 行）"
 echo "---"
 kubectl logs $POD_NAME -n $NAMESPACE --previous --tail=50 2>/dev/null || \
   echo "无法获取 previous 日志（容器可能未重启）"
 echo ""
 
 # 4. 内核 OOM 日志
-echo "<!-- chunk: 4. 节点内核 OOM 日志" -->## 4. 节点内核 OOM 日志"
+echo "## 4. 节点内核 OOM 日志"
 echo "---"
 NODE=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.nodeName}')
 echo "节点: $NODE"
@@ -1305,7 +1212,7 @@ kubectl debug node/$NODE -it --image=alpine -- sh -c "
 echo ""
 
 # 5. 节点内存压力
-echo "<!-- chunk: 5. 节点内存状态" -->## 5. 节点内存状态"
+echo "## 5. 节点内存状态"
 echo "---"
 kubectl top node $NODE 2>/dev/null || echo "metrics-server 未安装"
 
@@ -1315,7 +1222,7 @@ curl -s -G "$PROM_URL/api/v1/query" --data-urlencode "query=$QUERY2" | \
 echo ""
 
 # 6. 审计日志（检查最近的资源修改）
-echo "<!-- chunk: 6. 最近的资源配置修改" -->## 6. 最近的资源配置修改"
+echo "## 6. 最近的资源配置修改"
 echo "---"
 sudo grep "$POD_NAME" /var/log/kubernetes/audit.log 2>/dev/null | \
   jq -c 'select(.verb=="patch" and .objectRef.resource=="pods") | 
@@ -1324,7 +1231,7 @@ sudo grep "$POD_NAME" /var/log/kubernetes/audit.log 2>/dev/null | \
 echo ""
 
 # 7. 根因初步判断
-echo "<!-- chunk: 7. 根因初步判断" -->## 7. 根因初步判断"
+echo "## 7. 根因初步判断"
 echo "---"
 LIMIT=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[0].resources.limits.memory}')
 echo "配置的内存限制: $LIMIT"
@@ -1342,12 +1249,12 @@ echo ""
 echo "=== 取证报告结束 ==="
 echo "下一步: 根据决策树进行详细分析"
 ```
-## 处置建议模板
+#### 处置建议模板
 
 ```markdown
 # OOMKilled 处置方案
 
-<!-- chunk: 场景 A: 内存泄漏 -->## 场景 A: 内存泄漏
+## 场景 A: 内存泄漏
 
 **症状**：
 - 内存使用持续线性增长
@@ -1371,7 +1278,7 @@ echo "下一步: 根据决策树进行详细分析"
 
 ---
 
-<!-- chunk: 场景 B: 资源配置不当 -->## 场景 B: 资源配置不当
+## 场景 B: 资源配置不当
 
 **症状**：
 - 内存使用稳定但接近限制值
@@ -1392,7 +1299,7 @@ echo "下一步: 根据决策树进行详细分析"
 
 ---
 
-<!-- chunk: 场景 C: 节点资源不足 -->## 场景 C: 节点资源不足
+## 场景 C: 节点资源不足
 
 **症状**：
 - 节点内存 > 90%
@@ -1410,7 +1317,7 @@ echo "下一步: 根据决策树进行详细分析"
 
 ---
 
-<!-- chunk: 通用最佳实践 -->## 通用最佳实践
+## 通用最佳实践
 
 1. **总是设置 memory requests 和 limits**
    ```yaml
@@ -1448,18 +1355,18 @@ echo "下一步: 根据决策树进行详细分析"
 
 ---
 
-## 8.3.2 Pod CrashLoopBackOff 取证 Runbook
+### 8.3.2 Pod CrashLoopBackOff 取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 Pod 启动后反复崩溃，Kubernetes 以指数退避方式重启容器，状态显示 `CrashLoopBackOff`。
 
-## 证据采集清单
+#### 证据采集清单
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 容器状态和退出码
-kubectl describe pod <POD_NAME> -n <NAMESPACE> | grep -A 10 "State:|Last State:"
+kubectl describe pod <POD_NAME> -n <NAMESPACE> | grep -A 10 "State:\|Last State:"
 
 # 关键字段:
 # - exitCode: 退出码（0=正常，非0=异常）
@@ -1491,7 +1398,7 @@ logcli query '{app="falco",pod="<POD_NAME>"}' --since=30m
 # 8. 依赖服务健康状态（数据库、缓存等）
 kubectl get pods -n <DEPENDENCY_NAMESPACE> | grep -i <SERVICE_NAME>
 ```
-## 常见原因检查表
+#### 常见原因检查表
 
 ```yaml
 CrashLoopBackOff 常见原因及证据映射:
@@ -1553,7 +1460,7 @@ CrashLoopBackOff 常见原因及证据映射:
    退出码: 137 (OOMKilled) 或 143 (SIGTERM)
    日志特征: 可能无日志（被强制终止）
    验证: 
-     - kubectl describe pod <POD> | grep -i "OOMKilled|Evicted"
+     - kubectl describe pod <POD> | grep -i "OOMKilled\|Evicted"
      - kubectl top pod <POD>
 
 8. 启动超时 (Startup Timeout):
@@ -1564,7 +1471,7 @@ CrashLoopBackOff 常见原因及证据映射:
      - 测量实际启动时间
 ```
 
-## 自动化取证脚本
+#### 自动化取证脚本
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1586,7 +1493,7 @@ echo "取证时间: $(date)"
 echo ""
 
 # 1. 容器状态
-echo "<!-- chunk: 1. 容器状态" -->## 1. 容器状态"
+echo "## 1. 容器状态"
 echo "---"
 kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '{
   phase: .status.phase,
@@ -1597,7 +1504,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '{
 echo ""
 
 # 2. 退出码分析
-echo "<!-- chunk: 2. 退出码分析" -->## 2. 退出码分析"
+echo "## 2. 退出码分析"
 echo "---"
 EXIT_CODE=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status.containerStatuses[0].lastState.terminated.exitCode}')
 echo "退出码: $EXIT_CODE"
@@ -1631,25 +1538,25 @@ esac
 echo ""
 
 # 3. 容器日志
-echo "<!-- chunk: 3. 容器日志（最后 50 行）" -->## 3. 容器日志（最后 50 行）"
+echo "## 3. 容器日志（最后 50 行）"
 echo "---"
-echo "#<!-- chunk: 当前容器日志:" -->## 当前容器日志:"
+echo "### 当前容器日志:"
 kubectl logs $POD_NAME -n $NAMESPACE --tail=50 2>&1 | head -30
 
 echo ""
-echo "#<!-- chunk: 上一次容器日志:" -->## 上一次容器日志:"
+echo "### 上一次容器日志:"
 kubectl logs $POD_NAME -n $NAMESPACE --previous --tail=50 2>&1 | head -30
 echo ""
 
 # 4. 事件历史
-echo "<!-- chunk: 4. 相关事件" -->## 4. 相关事件"
+echo "## 4. 相关事件"
 echo "---"
 kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$POD_NAME \
   --sort-by='.lastTimestamp' | tail -10
 echo ""
 
 # 5. 健康检查配置
-echo "<!-- chunk: 5. 健康检查配置" -->## 5. 健康检查配置"
+echo "## 5. 健康检查配置"
 echo "---"
 kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '.spec.containers[0] | {
   livenessProbe: .livenessProbe,
@@ -1659,7 +1566,7 @@ kubectl get pod $POD_NAME -n $NAMESPACE -o json | jq '.spec.containers[0] | {
 echo ""
 
 # 6. 依赖服务检查
-echo "<!-- chunk: 6. 依赖服务检查" -->## 6. 依赖服务检查"
+echo "## 6. 依赖服务检查"
 echo "---"
 # 从环境变量推断依赖服务
 DEPS=$(kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[0].env[*].value}' | \
@@ -1673,17 +1580,17 @@ done
 echo ""
 
 # 7. 根因初步判断
-echo "<!-- chunk: 7. 根因初步判断" -->## 7. 根因初步判断"
+echo "## 7. 根因初步判断"
 echo "---"
 
 # 检查日志中的常见错误模式
 PREV_LOG=$(kubectl logs $POD_NAME -n $NAMESPACE --previous --tail=100 2>&1)
 
-if echo "$PREV_LOG" | grep -qi "connection refused|dial tcp"; then
+if echo "$PREV_LOG" | grep -qi "connection refused\|dial tcp"; then
     echo "⚠️  发现连接失败日志 → 可能是依赖服务不可用"
 fi
 
-if echo "$PREV_LOG" | grep -qi "panic|fatal|exception"; then
+if echo "$PREV_LOG" | grep -qi "panic\|fatal\|exception"; then
     echo "⚠️  发现应用异常日志 → 可能是代码 bug"
 fi
 
@@ -1691,7 +1598,7 @@ if echo "$PREV_LOG" | grep -qi "permission denied"; then
     echo "⚠️  发现权限错误 → 检查 securityContext 和 volume 权限"
 fi
 
-if echo "$PREV_LOG" | grep -qi "not found|no such file"; then
+if echo "$PREV_LOG" | grep -qi "not found\|no such file"; then
     echo "⚠️  发现文件未找到 → 检查 configmap/secret 挂载或镜像内容"
 fi
 
@@ -1703,11 +1610,7 @@ fi
 echo ""
 echo "=== 取证报告结束 ==="
 ```
-## 快速修复检查表
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+#### 快速修复检查表
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1757,13 +1660,13 @@ kubectl run debug-pod --image=<SAME_IMAGE> -it --rm -- /bin/sh
 ```
 ---
 
-## 8.3.3 Node NotReady 取证 Runbook
+### 8.3.3 Node NotReady 取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 节点状态变为 `NotReady`，调度器停止向该节点分配新 pod，可能由 kubelet 崩溃、网络分区或资源耗尽引起。
 
-## 证据采集清单
+#### 证据采集清单
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1814,9 +1717,9 @@ kubectl get events --all-namespaces --field-selector source=kubelet \
 
 # 8. Falco 异常检测
 logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
-  | grep -i "error|critical"
+  | grep -i "error\|critical"
 ```
-## 时间线重建模板
+#### 时间线重建模板
 
 ```markdown
 # Node NotReady 事件时间线
@@ -1826,7 +1729,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
 **恢复时间**: <TIMESTAMP> (如适用)  
 **影响范围**: <受影响的 Pod 数量>
 
-<!-- chunk: 时间线 (UTC) -->## 时间线 (UTC)
+## 时间线 (UTC)
 
 | 时间 | 证据来源 | 事件描述 | 严重性 |
 |------|----------|----------|--------|
@@ -1838,7 +1741,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
 | T-5min | Falco | High CPU usage by process 'containerd' (95%) | Warning |
 | T-0min | Kubelet Log | Kubelet stopped posting node status | Critical |
 
-<!-- chunk: 根因分析 -->## 根因分析
+## 根因分析
 
 **初步判断**: 网络 socket 耗尽导致 kubelet 无法与 API Server 通信
 
@@ -1850,7 +1753,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
 
 **根因**: 某个应用创建了大量短连接但未正确关闭，耗尽了 socket buffer
 
-<!-- chunk: 修复措施 -->## 修复措施
+## 修复措施
 
 **临时措施**:
 - 重启节点或 kubelet 服务
@@ -1863,12 +1766,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
 - 监控 socket 使用量
 ```
 
-## 根因分类决策树
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
+#### 根因分类决策树
 
 > **🔴 高风险操作警告**
 >
@@ -1938,7 +1836,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
    │     │          - df -h 显示 / 或 /var 使用率 > 85%
    │     │          - 大量容器镜像或日志占用空间
    │     │        处置:
-   │     │          1. 清理未使用的镜像: docker system prune -a  # ⚠️ 强制清理，可能杀运行中容器
+   │     │          1. 清理未使用的镜像: docker system prune -a
    │     │          2. 配置日志轮转和限制
    │     │          3. 增大磁盘或挂载额外存储
    │     │
@@ -1979,7 +1877,7 @@ logcli query '{app="falco",k8s_node_name="<NODE_NAME>"}' --since=1h \
                     2. 检查 CNI 配置文件 /etc/cni/net.d/
                     3. 验证 CNI 插件二进制文件完整性
 ```
-## 自动化取证脚本
+#### 自动化取证脚本
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1999,7 +1897,7 @@ echo "取证时间: $(date)"
 echo ""
 
 # 1. 节点状态
-echo "<!-- chunk: 1. 节点状态" -->## 1. 节点状态"
+echo "## 1. 节点状态"
 echo "---"
 kubectl get node $NODE_NAME -o json | jq '{
   status: .status.conditions[] | select(.type=="Ready") | .status,
@@ -2010,20 +1908,20 @@ kubectl get node $NODE_NAME -o json | jq '{
 echo ""
 
 # 2. 资源压力检查
-echo "<!-- chunk: 2. 资源压力" -->## 2. 资源压力"
+echo "## 2. 资源压力"
 echo "---"
 kubectl describe node $NODE_NAME | grep -A 5 "Conditions:"
 echo ""
 
 # 3. Kubelet 健康检查
-echo "<!-- chunk: 3. Kubelet 健康检查" -->## 3. Kubelet 健康检查"
+echo "## 3. Kubelet 健康检查"
 echo "---"
 echo "尝试连接 Kubelet API (需要在节点上执行):"
 echo "  curl -k https://localhost:10250/healthz"
 echo ""
 
 # 4. 资源使用趋势
-echo "<!-- chunk: 4. 资源使用趋势（过去 1 小时）" -->## 4. 资源使用趋势（过去 1 小时）"
+echo "## 4. 资源使用趋势（过去 1 小时）"
 echo "---"
 PROM_URL="http://localhost:9090"
 
@@ -2047,7 +1945,7 @@ curl -s -G "$PROM_URL/api/v1/query" \
 echo ""
 
 # 5. 网络连接测试
-echo "<!-- chunk: 5. 网络连接测试" -->## 5. 网络连接测试"
+echo "## 5. 网络连接测试"
 echo "---"
 API_SERVER=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}' | sed 's|https://||' | cut -d: -f1)
 echo "API Server: $API_SERVER"
@@ -2059,21 +1957,21 @@ kubectl debug node/$NODE_NAME -it --image=alpine -- sh -c "
 echo ""
 
 # 6. Pod 状态（运行在该节点上的）
-echo "<!-- chunk: 6. 节点上的 Pod 状态" -->## 6. 节点上的 Pod 状态"
+echo "## 6. 节点上的 Pod 状态"
 echo "---"
 kubectl get pods --all-namespaces --field-selector spec.nodeName=$NODE_NAME \
   -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,STATUS:.status.phase,RESTARTS:.status.containerStatuses[0].restartCount
 echo ""
 
 # 7. 最近的事件
-echo "<!-- chunk: 7. 相关事件（最近 20 条）" -->## 7. 相关事件（最近 20 条）"
+echo "## 7. 相关事件（最近 20 条）"
 echo "---"
 kubectl get events --all-namespaces --field-selector involvedObject.name=$NODE_NAME \
   --sort-by='.lastTimestamp' | tail -20
 echo ""
 
 # 8. 根因初步判断
-echo "<!-- chunk: 8. 根因初步判断" -->## 8. 根因初步判断"
+echo "## 8. 根因初步判断"
 echo "---"
 
 # 检查条件
@@ -2104,16 +2002,13 @@ echo "=== 取证报告结束 ==="
 ```
 ---
 
-## 8.3.4 Service 间歇性超时取证 Runbook
+### 8.3.4 Service 间歇性超时取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 Service 间歇性出现请求超时（非 100% 失败），用户报告服务不稳定，需要跨网络层、应用层和系统层关联证据。
 
-## 证据采集清单
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+#### 证据采集清单
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2146,7 +2041,7 @@ kubectl debug node/<NODE> -it --image=quay.io/iovisor/bcc -- \
 
 # 4. 应用日志模式匹配
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' --since=30m \
-  | grep -i "timeout|connection|refused"
+  | grep -i "timeout\|connection\|refused"
 
 # 统计超时错误频率
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' --since=1h \
@@ -2176,7 +2071,7 @@ kubectl top pods -n <NAMESPACE> -l <SELECTOR>
 # 从 Prometheus 查询 CPU 节流
 sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"<POD_PATTERN>"}[5m])) by (pod)
 ```
-## 跨层证据关联技术
+#### 跨层证据关联技术
 
 ```yaml
 间歇性超时跨层证据关联矩阵:
@@ -2228,10 +2123,10 @@ ALERT ServiceEndpointFlapping
 rate(http_requests_total{status="503"}[5m])
 ```
 
-## 典型故障模式和取证路径
+#### 典型故障模式和取证路径
 
 ```markdown
-<!-- chunk: 模式 1: 连接池耗尽 -->## 模式 1: 连接池耗尽
+## 模式 1: 连接池耗尽
 
 **症状**:
 - 高峰期请求超时
@@ -2241,7 +2136,7 @@ rate(http_requests_total{status="503"}[5m])
 **取证路径**:
 1. 确认连接池配置
    ```bash
-   kubectl get cm <APP_CONFIG> -o yaml | grep -i "pool|connection"
+   kubectl get cm <APP_CONFIG> -o yaml | grep -i "pool\|connection"
    ```
 
 2. 查看活跃连接数历史
@@ -2262,7 +2157,7 @@ rate(http_requests_total{status="503"}[5m])
 
 ---
 
-<!-- chunk: 模式 2: Pod 滚动更新期间流量丢失 -->## 模式 2: Pod 滚动更新期间流量丢失
+## 模式 2: Pod 滚动更新期间流量丢失
 
 **症状**:
 - 部署期间间歇性 503 错误
@@ -2309,7 +2204,7 @@ spec:
 
 ---
 
-<!-- chunk: 模式 3: DNS 解析间歇性失败 -->## 模式 3: DNS 解析间歇性失败
+## 模式 3: DNS 解析间歇性失败
 
 **症状**:
 - 间歇性 "no such host" 错误
@@ -2325,7 +2220,7 @@ spec:
 
 2. 查看 CoreDNS 错误日志
    ```bash
-   kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "error|timeout"
+   kubectl logs -n kube-system -l k8s-app=kube-dns | grep -i "error\|timeout"
    ```
 
 3. 分析 DNS 查询 QPS
@@ -2347,7 +2242,7 @@ spec:
 
 ---
 
-<!-- chunk: 模式 4: CPU 节流导致请求排队 -->## 模式 4: CPU 节流导致请求排队
+## 模式 4: CPU 节流导致请求排队
 
 **症状**:
 - P99 延迟高但 P50 正常
@@ -2368,7 +2263,7 @@ spec:
 
 3. 检查应用线程池配置
    ```bash
-   kubectl exec <POD> -- jstack <PID> | grep -i "waiting|blocked"
+   kubectl exec <POD> -- jstack <PID> | grep -i "waiting\|blocked"
    ```
 
 **根因**: CPU limits 过低导致应用被频繁节流
@@ -2385,13 +2280,13 @@ resources:
 # 🟢 低风险：只读/信息收集，通常无副作用
 ---
 
-## 8.3.5 证书过期导致服务中断取证 Runbook
+### 8.3.5 证书过期导致服务中断取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 由于证书过期导致 API Server、Kubelet 或 Ingress 等组件无法正常工作，需要快速定位过期证书并恢复服务。
 
-## 证据采集清单
+#### 证据采集清单
 
 ```bash
 # 1. 检查所有 Kubernetes 证书
@@ -2415,23 +2310,23 @@ done
 
 # 3. API Server 日志（证书错误）
 kubectl logs -n kube-system kube-apiserver-<NODE> | \
-  grep -i "certificate|tls|x509"
+  grep -i "certificate\|tls\|x509"
 
 # 4. Kubelet 日志
-journalctl -u kubelet | grep -i "certificate|tls|x509" | tail -50
+journalctl -u kubelet | grep -i "certificate\|tls\|x509" | tail -50
 
 # 5. K8s 审计日志（认证失败）
 sudo grep "Unauthorized" /var/log/kubernetes/audit.log | \
   jq 'select(.responseStatus.code == 401)'
 
 # 6. Falco 告警（TLS 错误）
-logcli query '{app="falco"}' --since=24h | grep -i "certificate|tls"
+logcli query '{app="falco"}' --since=24h | grep -i "certificate\|tls"
 
 # 7. Prometheus 告警
 curl -s http://localhost:9090/api/v1/alerts | \
   jq '.data.alerts[] | select(.labels.alertname | contains("Certificate"))'
 ```
-## 证书链验证命令
+#### 证书链验证命令
 
 ```bash
 #!/bin/bash
@@ -2503,11 +2398,7 @@ echo ""
 echo "=== 证书验证完成 ==="
 ```
 
-## 证书续期操作指南
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl apply/create/replace`：创建/变更集群资源
+#### 证书续期操作指南
 
 > **🔴 高风险操作警告**
 >
@@ -2644,16 +2535,13 @@ EOF
 ```
 ---
 
-## 8.3.6 配置漂移（静默失败）取证 Runbook
+### 8.3.6 配置漂移（静默失败）取证 Runbook
 
-## 场景描述
+#### 场景描述
 
 配置文件（ConfigMap/Secret）被意外修改或漂移，导致应用行为异常但无明显错误日志，属于"一切看起来正常但结果错误"的场景。
 
-## 证据采集清单
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+#### 证据采集清单
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2681,7 +2569,7 @@ kubectl get cm <CONFIG_NAME> -n <NAMESPACE> -o jsonpath='{.metadata.annotations}
 
 # 5. 查看应用行为异常的时间点
 logcli query '{namespace="<NAMESPACE>",app="<APP>"}' \
-  --since=24h | grep -i "error|warning|unexpected"
+  --since=24h | grep -i "error\|warning\|unexpected"
 
 # 6. 关联配置修改时间和应用异常时间
 # 从审计日志获取修改时间
@@ -2702,9 +2590,9 @@ kubectl exec <POD> -- env | grep <KEY_NAME>
 
 # 8. 检查配置热重载机制是否生效
 # 查看应用是否检测到配置变更
-kubectl logs <POD> | grep -i "config|reload"
+kubectl logs <POD> | grep -i "config\|reload"
 ```
-## 配置漂移检测脚本
+#### 配置漂移检测脚本
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -2726,7 +2614,7 @@ echo "检测时间: $(date)"
 echo ""
 
 # 1. 列出所有 ConfigMap 和 Secret
-echo "<!-- chunk: 1. 资源清单" -->## 1. 资源清单"
+echo "## 1. 资源清单"
 echo "---"
 echo "ConfigMaps:"
 kubectl get cm -n $NAMESPACE -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
@@ -2737,7 +2625,7 @@ kubectl get secret -n $NAMESPACE -o jsonpath='{range .items[*]}{.metadata.name}{
 echo ""
 
 # 2. 对比每个 ConfigMap
-echo "<!-- chunk: 2. ConfigMap 漂移检测" -->## 2. ConfigMap 漂移检测"
+echo "## 2. ConfigMap 漂移检测"
 echo "---"
 for CM in $(kubectl get cm -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}'); do
     echo "检查: $CM"
@@ -2766,9 +2654,9 @@ for CM in $(kubectl get cm -n $NAMESPACE -o jsonpath='{.items[*].metadata.name}'
 done
 
 # 3. 查询最近的配置修改操作
-echo "<!-- chunk: 3. 最近的配置修改操作（审计日志）" -->## 3. 最近的配置修改操作（审计日志）"
+echo "## 3. 最近的配置修改操作（审计日志）"
 echo "---"
-sudo grep "configmaps|secrets" /var/log/kubernetes/audit.log | \
+sudo grep "configmaps\|secrets" /var/log/kubernetes/audit.log | \
   jq -c 'select(.objectRef.namespace=="'$NAMESPACE'" and (.verb=="update" or .verb=="patch")) | 
          {time: .requestReceivedTimestamp, user: .user.username, resource: .objectRef.name, verb: .verb}' | \
   tail -10
@@ -2776,7 +2664,7 @@ sudo grep "configmaps|secrets" /var/log/kubernetes/audit.log | \
 echo ""
 echo "=== 检测完成 ==="
 ```
-## GitOps 最佳实践
+#### GitOps 最佳实践
 
 ```yaml
 # 防止配置漂移的 GitOps 配置示例 (ArgoCD)
@@ -2886,9 +2774,9 @@ spec:
 
 ---
 
-<!-- chunk: 8.4 FTA + FEBM 联合诊断实战指南 -->## 8.4 FTA + FEBM 联合诊断实战指南
+## 8.4 FTA + FEBM 联合诊断实战指南
 
-## 8.4.1 何时使用 FTA vs FEBM
+### 8.4.1 何时使用 FTA vs FEBM
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -2952,16 +2840,16 @@ spec:
    - 建立持续改进循环
 ```
 
-## 8.4.2 完整的联合诊断示例
+### 8.4.2 完整的联合诊断示例
 
 **场景**: 电商网站在促销期间出现大量 503 错误
 
-## 第 1 阶段：FTA 快速筛查（0-5 分钟）
+#### 第 1 阶段：FTA 快速筛查（0-5 分钟）
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 收集基础症状
-kubectl get pods -n production | grep -v "Running|Completed"
+kubectl get pods -n production | grep -v "Running\|Completed"
 
 # 输出:
 # order-service-abc   0/1     CrashLoopBackOff   5  3m
@@ -2985,7 +2873,7 @@ kubectl describe pod order-service-abc | grep -i "oom"
 
 # FTA 结论: 确认是 OOMKilled，但需要进一步判断是内存泄漏还是流量突增
 ```
-## 第 2 阶段：FEBM 深度取证（5-20 分钟）
+#### 第 2 阶段：FEBM 深度取证（5-20 分钟）
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3009,7 +2897,7 @@ curl -G 'http://localhost:9090/api/v1/query' \
 
 # 证据 3: 应用日志
 logcli query '{namespace="production",app="order-service"}' \
-  --since=30m | grep -i "cache|memory"
+  --since=30m | grep -i "cache\|memory"
 
 # 发现: 大量 "cache miss, fetching from database" 日志
 
@@ -3024,10 +2912,7 @@ kubectl get deploy order-service -o yaml | yq '.spec.template.spec.containers[0]
 # FEBM 结论: 
 # 根因: 促销流量激增 + 缓存失效 → 大量数据库查询 → 内存中堆积未处理的结果集
 ```
-## 第 3 阶段：根因确认和修复（20-30 分钟）
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+#### 第 3 阶段：根因确认和修复（20-30 分钟）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -3068,7 +2953,7 @@ kubectl set env deploy order-service RATE_LIMIT_QPS=500
 # 3. 实现多级缓存（本地缓存 + Redis）
 # 4. 配置服务降级策略
 ```
-## 第 4 阶段：反馈到 FTA（30+ 分钟）
+#### 第 4 阶段：反馈到 FTA（30+ 分钟）
 
 ```yaml
 # 更新 FTA 决策树
@@ -3110,12 +2995,12 @@ FEBM Runbook 归档:
   - 状态: 已归档，可复用
 ```
 
-## 8.4.3 联合诊断最佳实践
+### 8.4.3 联合诊断最佳实践
 
 ```markdown
 # FTA + FEBM 联合诊断最佳实践
 
-<!-- chunk: 1. 建立快速响应 SOP -->## 1. 建立快速响应 SOP
+## 1. 建立快速响应 SOP
 
 **0-5 分钟（FTA 阶段）**:
 - [ ] 收集基础症状（pod 状态、日志最后 20 行、退出码）
@@ -3137,7 +3022,7 @@ FEBM Runbook 归档:
 - [ ] 编写事后分析报告（Postmortem）
 - [ ] 识别预防措施并跟踪实施
 
-<!-- chunk: 2. 证据采集优先级 -->## 2. 证据采集优先级
+## 2. 证据采集优先级
 
 **P0 (必须采集)**:
 - Pod/Node 状态快照
@@ -3157,7 +3042,7 @@ FEBM Runbook 归档:
 - Heap dump / pprof
 - Kernel 日志
 
-<!-- chunk: 3. 工具选择矩阵 -->## 3. 工具选择矩阵
+## 3. 工具选择矩阵
 
 | 问题类型             | 首选 FTA | 首选 FEBM | 联合使用 |
 |---------------------|----------|-----------|----------|
@@ -3169,7 +3054,7 @@ FEBM Runbook 归档:
 | 未知性能下降         |          | ✓         | ✓        |
 | 安全事件            |          | ✓         |          |
 
-<!-- chunk: 4. 文档和知识库维护 -->## 4. 文档和知识库维护
+## 4. 文档和知识库维护
 
 **FTA 更新触发条件**:
 - 发现新的故障模式（每季度至少 1 次）
@@ -3189,9 +3074,9 @@ FEBM Runbook 归档:
 
 ---
 
-<!-- chunk: 8.5 FEBM 效果度量 KPI 仪表板 -->## 8.5 FEBM 效果度量 KPI 仪表板
+## 8.5 FEBM 效果度量 KPI 仪表板
 
-## 8.5.1 核心 KPI 定义
+### 8.5.1 核心 KPI 定义
 
 ```yaml
 FEBM 成熟度 KPI 体系:
@@ -3286,7 +3171,7 @@ FEBM 成熟度 KPI 体系:
      计算: count(distinct runbook_id) / count(distinct incident_type)
 ```
 
-## 8.5.2 Grafana 仪表板配置
+### 8.5.2 Grafana 仪表板配置
 
 ```json
 {
@@ -3495,7 +3380,7 @@ FEBM 成熟度 KPI 体系:
 }
 ```
 
-## 8.5.3 关键 PromQL 查询
+### 8.5.3 关键 PromQL 查询
 
 ```promql
 # 1. MTTR 计算 (从告警触发到恢复的时间)
@@ -3560,7 +3445,7 @@ sum(evidence_correlation_attempts_total)
 ) / 60  # 正值表示改善
 ```
 
-## 8.5.4 月度报告模板
+### 8.5.4 月度报告模板
 
 ```markdown
 # FEBM 效果月度报告
@@ -3571,15 +3456,15 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 1. 执行摘要 -->## 1. 执行摘要
+## 1. 执行摘要
 
-## 关键成果
+### 关键成果
 - ✅ MTTR 从 45 分钟降至 32 分钟 (降低 29%)
 - ✅ 自动取证率达到 75% (目标 70%)
 - ⚠️ 根因判断准确率 82% (未达标，目标 85%)
 - ❌ 新增 3 类问题未覆盖 Runbook
 
-## 问题概览
+### 问题概览
 - 总问题数: 28 起
   - P0 (Critical): 3 起
   - P1 (High): 12 起
@@ -3589,9 +3474,9 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 2. KPI 详细分析 -->## 2. KPI 详细分析
+## 2. KPI 详细分析
 
-## 2.1 响应效率指标
+### 2.1 响应效率指标
 
 | 指标 | 本月 | 上月 | 目标 | 达标 | 趋势 |
 |------|------|------|------|------|------|
@@ -3604,7 +3489,7 @@ sum(evidence_correlation_attempts_total)
 - MTTR 显著改善但未达标，主要瓶颈在 MTTI (调查时间)
 - 建议: 增加自动化根因分析脚本，减少人工判断时间
 
-## 2.2 证据质量指标
+### 2.2 证据质量指标
 
 | 指标 | 本月 | 上月 | 目标 | 达标 |
 |------|------|------|------|------|
@@ -3616,7 +3501,7 @@ sum(evidence_correlation_attempts_total)
 - 证据质量全面达标，NTP 同步优化见效
 - 仍有 8% 的证据采集不完整，主因是节点权限不足
 
-## 2.3 诊断准确性指标
+### 2.3 诊断准确性指标
 
 | 指标 | 本月 | 上月 | 目标 | 达标 |
 |------|------|------|------|------|
@@ -3630,7 +3515,7 @@ sum(evidence_correlation_attempts_total)
   2. 2月18日: 未识别证书过期前兆
 - 改进措施: 更新相关 Runbook，增加证书监控
 
-## 2.4 自动化程度指标
+### 2.4 自动化程度指标
 
 | 指标 | 本月 | 上月 | 目标 | 达标 |
 |------|------|------|------|------|
@@ -3645,9 +3530,9 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 3. 典型案例分析 -->## 3. 典型案例分析
+## 3. 典型案例分析
 
-## 案例 1: 促销流量导致 OOMKilled (P0)
+### 案例 1: 促销流量导致 OOMKilled (P0)
 
 **事件时间**: 2024-02-14 14:23  
 **影响范围**: order-service 不可用 25 分钟  
@@ -3673,7 +3558,7 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-## 案例 2: 配置漂移导致静默失败 (P1)
+### 案例 2: 配置漂移导致静默失败 (P1)
 
 **事件时间**: 2024-02-05 09:15  
 **影响范围**: payment-service 支付成功率下降至 60%  
@@ -3700,7 +3585,7 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 4. Runbook 更新记录 -->## 4. Runbook 更新记录
+## 4. Runbook 更新记录
 
 本月新增 Runbook:
 1. **配置漂移检测与恢复** (config-drift-detection.md)
@@ -3714,15 +3599,15 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 5. 下月行动计划 -->## 5. 下月行动计划
+## 5. 下月行动计划
 
-## 目标
+### 目标
 - [ ] MTTR 降至 < 30 分钟
 - [ ] 根因判断准确率提升至 > 85%
 - [ ] 自动修复率提升至 > 35%
 - [ ] Runbook 覆盖率达到 > 95%
 
-## 具体措施
+### 具体措施
 1. **自动化增强**:
    - 开发根因自动推理引擎 (基于历史数据和 ML)
    - 配置更多自愈场景 (HPA, Pod 自动替换)
@@ -3741,7 +3626,7 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 6. 资源投入 -->## 6. 资源投入
+## 6. 资源投入
 
 本月 FEBM 工具栈资源使用:
 - 计算: 2.3 Cores (目标 < 3 Cores) ✅
@@ -3751,15 +3636,15 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 7. 附录 -->## 7. 附录
+## 7. 附录
 
-## 附录 A: 本月所有问题清单
+### 附录 A: 本月所有问题清单
 (省略详细列表...)
 
-## 附录 B: 证据采集质量抽查
+### 附录 B: 证据采集质量抽查
 (省略详细数据...)
 
-## 附录 C: 下月 OKR
+### 附录 C: 下月 OKR
 - Objective 1: 提升问题响应速度
   - KR1: MTTR < 30min (当前 32min)
   - KR2: 自动取证率 > 80% (当前 75%)
@@ -3780,9 +3665,9 @@ sum(evidence_correlation_attempts_total)
 
 ---
 
-<!-- chunk: 8.6 合规快速参考 -->## 8.6 合规快速参考
+## 8.6 合规快速参考
 
-## 8.6.1 等保 2.0 合规映射
+### 8.6.1 等保 2.0 合规映射
 
 ```yaml
 等保 2.0 (GB/T 22239-2019) FEBM 控制映射:
@@ -3833,7 +3718,7 @@ sum(evidence_correlation_attempts_total)
        - 规则: Terminal shell in container, Suspicious network tool
      验证命令:
        kubectl logs -n falco -l app.kubernetes.io/name=falco | \
-         grep -i "suspicious|malicious"
+         grep -i "suspicious\|malicious"
    
    要求 8.1.4.3 - 可信验证:
      描述: 应能够检测到对重要程序的修改
@@ -3870,7 +3755,7 @@ sum(evidence_correlation_attempts_total)
        Grafana: https://grafana.example.com/d/febm-security
 ```
 
-## 8.6.2 SOC 2 Type II 合规映射
+### 8.6.2 SOC 2 Type II 合规映射
 
 ```yaml
 SOC 2 Trust Service Criteria - FEBM 控制映射:
@@ -3943,7 +3828,7 @@ SOC 2 Trust Service Criteria - FEBM 控制映射:
      - 定期权限审查记录
    审计师验证方法:
      kubectl get clusterrolebindings -o yaml
-     logcli query '{job="audit"}' | grep "rolebindings|clusterrolebindings"
+     logcli query '{job="audit"}' | grep "rolebindings\|clusterrolebindings"
 
 5. CC8.1 - 变更管理 (Change Management):
    
@@ -3963,7 +3848,7 @@ SOC 2 Trust Service Criteria - FEBM 控制映射:
      3. 检查配置漂移告警机制是否有效
 ```
 
-## 8.6.3 合规检查清单
+### 8.6.3 合规检查清单
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3975,7 +3860,7 @@ echo "支持标准: 等保 2.0 (三级), SOC 2 Type II"
 echo ""
 
 # 1. 审计日志检查
-echo "<!-- chunk: 1. 审计日志合规性" -->## 1. 审计日志合规性"
+echo "## 1. 审计日志合规性"
 echo "---"
 
 # 检查审计日志是否启用
@@ -4006,7 +3891,7 @@ fi
 echo ""
 
 # 2. 日志完整性检查
-echo "<!-- chunk: 2. 日志完整性" -->## 2. 日志完整性"
+echo "## 2. 日志完整性"
 echo "---"
 
 # 检查审计日志字段完整性
@@ -4020,7 +3905,7 @@ fi
 echo ""
 
 # 3. 监控覆盖率检查
-echo "<!-- chunk: 3. 监控覆盖率" -->## 3. 监控覆盖率"
+echo "## 3. 监控覆盖率"
 echo "---"
 
 # 检查 Prometheus 是否运行
@@ -4044,7 +3929,7 @@ fi
 echo ""
 
 # 4. 访问控制检查
-echo "<!-- chunk: 4. 访问控制" -->## 4. 访问控制"
+echo "## 4. 访问控制"
 echo "---"
 
 # 检查匿名访问是否禁用
@@ -4068,7 +3953,7 @@ fi
 echo ""
 
 # 5. 变更管理检查
-echo "<!-- chunk: 5. 变更管理 (GitOps)" -->## 5. 变更管理 (GitOps)"
+echo "## 5. 变更管理 (GitOps)"
 echo "---"
 
 # 检查 ArgoCD 是否部署
@@ -4086,7 +3971,7 @@ fi
 echo ""
 
 # 6. 事件响应能力检查
-echo "<!-- chunk: 6. 事件响应能力" -->## 6. 事件响应能力"
+echo "## 6. 事件响应能力"
 echo "---"
 
 # 检查 Runbook 数量
@@ -4108,7 +3993,7 @@ fi
 echo ""
 
 # 7. 生成合规报告摘要
-echo "<!-- chunk: 7. 合规摘要" -->## 7. 合规摘要"
+echo "## 7. 合规摘要"
 echo "---"
 
 cat <<'SUMMARY'
@@ -4145,9 +4030,9 @@ echo "报告生成时间: $(date)"
 ```
 ---
 
-<!-- chunk: 8.7 章节总结与导航 -->## 8.7 章节总结与导航
+## 8.7 章节总结与导航
 
-## 本章要点回顾
+### 本章要点回顾
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -4214,7 +4099,7 @@ echo "报告生成时间: $(date)"
   4. 进行首次模拟故障演练
   5. 启动 FTA + FEBM 联合诊断流程
 ```
-## 章节导航
+### 章节导航
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -4268,7 +4153,7 @@ echo "报告生成时间: $(date)"
   第八章 8.3 (Runbook) → 第六章 8.4 (联合诊断)
 ```
 
-## 相关资源
+### 相关资源
 
 ```yaml
 官方文档链接:
@@ -4314,12 +4199,7 @@ OPA Gatekeeper:
 
 ---
 
-<!-- chunk: 附录：常用命令速查表 -->## 附录：常用命令速查表
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+## 附录：常用命令速查表
 
 > **🔴 高风险操作警告**
 >
@@ -4495,30 +4375,5 @@ kubectl port-forward -n falco svc/falco-falcosidekick-ui 2802:2802
 ⭐ 如果本章对你有帮助，请给我们一个 Star！
 
 </div>
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FEBM方法论/MOC.md|topic-febm MOC]]
-- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
-- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|第二章:FEBM 技术实现体系]]
-- [[故障诊断/FEBM方法论/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
-- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]]
-- [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
-- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
-
-## See Also
-
-- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|06-febm-future-evolution]]
-- [[故障诊断/FEBM方法论/07-febm-appendix.md|07-febm-appendix]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
-- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
-
-```
 
 <!-- risk-assessed -->

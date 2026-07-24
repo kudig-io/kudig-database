@@ -1,21 +1,18 @@
 ---
-title: 第二章:FEBM 技术实现体系 (topic-febm)
-description: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
-summary: 'description: ''**所属系列**: FEBM 法医鉴定循证方法论深度解析'''
+title: 第二章:FEBM 技术实现体系
+description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
 category: febm
 tags:
-- febm
-- troubleshooting
+- k8s
+- forensics
+- evidence-based
+- methodology
 - etcd
 - kubelet
 - scheduler
 - prometheus
 - grafana
 - jaeger
-- istio
-- envoy
-tier: core
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -23,18 +20,13 @@ audience:
 - SRE
 - 运维专家
 - 技术支持
-estimated_read_time: 120min
+estimated_read_time: 5min
 intent_queries:
 - 第二章:FEBM 技术实现体系 是什么
 - 如何 第二章:FEBM 技术实现体系
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第二章:FEBM 技术实现体系 故障排查
-- 第二章:FEBM 技术实现体系 排障步骤
 trigger_keywords:
 - 第二章:FEBM
 - 技术实现体系
-- troubleshooting
-- diagnostics
 - febm
 prerequisites:
 - kubectl-basics
@@ -57,60 +49,18 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
-title: 第二章:FEBM 技术实现体系
-description: '**所属系列**: FEBM 法医鉴定循证方法论深度解析'
-category: febm
-tags:
-- k8s
-- forensics
-- evidence-based
-- methodology
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
-- scheduler
-- [[Prometheus|prometheus]]
-- grafana
-- [[Jaeger|jaeger]]
-last_updated: 2026-05
-difficulty: expert
-reading_level: expert
-audience:
-- SRE
-- 运维专家
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第二章:FEBM 技术实现体系 是什么
-- 如何 第二章:FEBM 技术实现体系
-trigger_keywords:
-- 第二章:FEBM
-- 技术实现体系
-- febm
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
-
 # 第二章:FEBM 技术实现体系
 
 > **所属系列**: FEBM 法医鉴定循证方法论深度解析  
 > **关联主文档**: [FEBM 方法论深度解析](./febm-methodology-deep-dive.md)  
-> **上一章**: [第一章:FEBM 方法论原理与理论基础](./[[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]].md)  
+> **上一章**: [第一章:FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md)  
 > **下一章**: [第三章:FEBM 最佳实践](./03-febm-best-practices.md)
 
 ---
 
-<!-- chunk: 2.1 证据生命周期管理 -->## 2.1 证据生命周期管理
+## 2.1 证据生命周期管理
 
-## 2.1.1 六阶段证据生命周期模型
+### 2.1.1 六阶段证据生命周期模型
 
 FEBM 将数字证据的完整生命周期划分为六个标准化阶段,每个阶段有特定的技术实践、质量控制要求和交付物:
 
@@ -152,7 +102,7 @@ FEBM 将数字证据的完整生命周期划分为六个标准化阶段,每个�
   • 完整性验证: 每次转移都进行哈希验证
 ```
 
-## 2.1.2 Phase 1: 证据识别 (Identify)
+### 2.1.2 Phase 1: 证据识别 (Identify)
 
 **核心任务**: 在 Kubernetes 环境中快速识别哪些数据源包含与事件相关的证据。
 
@@ -247,14 +197,11 @@ Kubernetes 证据源分类矩阵:
       └─ [辅助] 基础设施网络监控
 ```
 
-## 2.1.3 Phase 2: 证据采集 (Collect)
+### 2.1.3 Phase 2: 证据采集 (Collect)
 
 **核心原则**: 按易失性优先级采集,确保高易失性证据优先保存。
 
 **易失性优先级采集序列** (针对容器异常检测):
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -328,7 +275,7 @@ T+60s  ⑧ 审计日志查询
 | 指标数据 | Prometheus API | Thanos Query | Grafana API 查询 |
 | 分布式追踪 | Jaeger Query | Tempo API | TraceQL 查询 |
 
-## 2.1.4 Phase 3: 证据保全 (Preserve)
+### 2.1.4 Phase 3: 证据保全 (Preserve)
 
 **核心目标**: 确保证据的完整性、真实性和可审计性。
 
@@ -432,7 +379,7 @@ data:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 2.1.5 数据流架构
+### 2.1.5 数据流架构
 
 ```
 端到端证据数据流:
@@ -497,9 +444,9 @@ data:
 
 ---
 
-<!-- chunk: 2.2 容器检查点技术 (Container Checkpoint) -->## 2.2 容器检查点技术 (Container Checkpoint)
+## 2.2 容器检查点技术 (Container Checkpoint)
 
-## 2.2.1 CRIU 技术深度解析
+### 2.2.1 CRIU 技术深度解析
 
 **CRIU (Checkpoint/Restore In Userspace)** 是 Linux 内核的检查点/恢复机制,是容器法医鉴定的核心技术。它能够在不停止进程的情况下"冻结"整个进程树,将其完整状态保存到磁盘,随后在任意时间点完全恢复。
 
@@ -576,7 +523,7 @@ CRIU 工作原理:
 └────────────────────────────────────────────────────────────────┘
 ```
 
-## 2.2.2 检查点捕获的完整状态
+### 2.2.2 检查点捕获的完整状态
 
 **进程状态 (Process State)**:
 
@@ -731,7 +678,7 @@ IPC 机制状态:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 2.2.3 Kubernetes 1.25+ 原生 Checkpoint API
+### 2.2.3 Kubernetes 1.25+ 原生 Checkpoint API
 
 Kubernetes 1.25 引入了原生的容器检查点 API,使得 CRIU 功能可以通过标准 kubectl 命令触发:
 
@@ -776,7 +723,7 @@ message CheckpointContainerResponse {
 }
 ```
 
-## 2.2.4 自动化取证工作流
+### 2.2.4 自动化取证工作流
 
 ```yaml
 # Argo Workflow: 自动化容器检查点采集工作流
@@ -992,7 +939,7 @@ spec:
         mountPath: /mnt/evidence
 ```
 
-## 2.2.5 实战案例:检测并捕获加密货币挖矿容器
+### 2.2.5 实战案例:检测并捕获加密货币挖矿容器
 
 ```
 场景: Falco 检测到异常 CPU 使用和可疑外连
@@ -1103,7 +1050,7 @@ $ sha256sum container-fs/tmp/.xmrig
 ✓ 证据链完整,可用于合规审计和执法协助
 ```
 
-## 2.2.6 与传统"关机取证"的对比
+### 2.2.6 与传统"关机取证"的对比
 
 | 维度 | 传统关机取证 | CRIU 检查点取证 |
 |------|:---:|:---:|
@@ -1118,9 +1065,9 @@ $ sha256sum container-fs/tmp/.xmrig
 
 ---
 
-<!-- chunk: 2.3 eBPF 遥测技术 -->## 2.3 eBPF 遥测技术
+## 2.3 eBPF 遥测技术
 
-## 2.3.1 eBPF 架构概览
+### 2.3.1 eBPF 架构概览
 
 **eBPF (Extended Berkeley Packet Filter)** 是现代 Linux 内核中的革命性技术,允许在内核空间安全运行沙箱化的程序,而无需修改内核源码或加载内核模块。它是 FEBM 实时证据采集的核心技术。
 
@@ -1265,7 +1212,7 @@ max_states_per_insn 1 total_states 3 peak_states 3 mark_read 2
 verdict: ACCEPTED ✓
 ```
 
-## 2.3.2 eBPF 程序类型与取证应用
+### 2.3.2 eBPF 程序类型与取证应用
 
 ```
 eBPF 程序类型映射到取证场景:
@@ -1307,7 +1254,7 @@ eBPF 程序类型映射到取证场景:
 └────────────────┴─────────────────────────────────────────────┘
 ```
 
-## 2.3.3 监控能力矩阵
+### 2.3.3 监控能力矩阵
 
 | 监控维度 | eBPF 钩子点 | 捕获数据 | Falco 规则示例 |
 |---------|-----------|---------|---------------|
@@ -1320,7 +1267,7 @@ eBPF 程序类型映射到取证场景:
 | **DNS 查询** | kprobe/udp_sendmsg (端口 53) | 查询域名、响应 IP | 检测 DGA 域名 |
 | **Crypto 挖矿** | tracepoint/sched/sched_process_exec + CPU 指标 | 进程名匹配、CPU 使用率 | 检测 xmrig/minerd |
 
-## 2.3.4 性能开销分析
+### 2.3.4 性能开销分析
 
 ```
 eBPF 性能影响测试 (生产环境实测):
@@ -1381,7 +1328,7 @@ eBPF 方法:
   开销: < 1% CPU (内核空间处理,批量传输)
 ```
 
-## 2.3.5 Falco 检测规则深度解析
+### 2.3.5 Falco 检测规则深度解析
 
 **规则示例 1: 容器逃逸检测**
 
@@ -1488,10 +1435,10 @@ $ echo "+memory" > /sys/fs/cgroup/cgroup.subtree_control
     fd.name startswith /var/run/secrets/
 
 - macro: trusted_programs
-  condition: proc.name in (kubelet, kube-proxy, fluentd)
+  condition: proc.name in (kubelet, kube-proxy, [[fluentd|fluentd]])
 ```
 
-## 2.3.6 与传统审计框架的对比
+### 2.3.6 与传统审计框架的对比
 
 | 维度 | eBPF (Falco) | auditd | sysdig (内核模块) |
 |------|:---:|:---:|:---:|
@@ -1507,9 +1454,9 @@ $ echo "+memory" > /sys/fs/cgroup/cgroup.subtree_control
 
 ---
 
-<!-- chunk: 2.4 内存取证分析 -->## 2.4 内存取证分析
+## 2.4 内存取证分析
 
-## 2.4.1 内存取证的关键性
+### 2.4.1 内存取证的关键性
 
 在现代攻击中,**无文件恶意软件 (Fileless Malware)** 和 **内存驻留攻击 (Memory-Resident Attacks)** 越来越常见。这些攻击不会在磁盘上留下二进制文件,传统的文件系统取证完全失效。内存取证是应对此类威胁的唯一手段。
 
@@ -1537,7 +1484,7 @@ $ echo "+memory" > /sys/fs/cgroup/cgroup.subtree_control
   内存取证: ✓ PowerShell 进程内存中包含完整脚本内容
 ```
 
-## 2.4.2 Volatility Framework 容器适配
+### 2.4.2 Volatility Framework 容器适配
 
 **Volatility 3** 是开源的内存取证框架,支持 Linux 内存镜像分析。结合 CRIU 检查点,可实现容器内存的完整取证。
 
@@ -1660,13 +1607,13 @@ $ vol3 -f checkpoint/ linux.dump_map --pid 7 --vma 0x00007f9a14000000
 
 Dumped: /tmp/.evil.so.dump
 
-$ strings /tmp/.evil.so.dump | grep -i "password|key|credential"
+$ strings /tmp/.evil.so.dump | grep -i "password\|key\|credential"
   mysql_password=secretpass123
   api_key=AKIAIOSFODNN7EXAMPLE
   [发现明文凭据泄露]
 ```
 
-## 2.4.3 容器特定内存取证挑战
+### 2.4.3 容器特定内存取证挑战
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1713,7 +1660,7 @@ $ strings /tmp/.evil.so.dump | grep -i "password|key|credential"
 │ ✓ 分析内核模块和系统调用表完整性                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-## 2.4.4 实战案例:检测无文件反向 Shell
+### 2.4.4 实战案例:检测无文件反向 Shell
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -1802,9 +1749,9 @@ Step 4: 攻击链重建
 ```
 ---
 
-<!-- chunk: 2.5 时间线重建技术 -->## 2.5 时间线重建技术
+## 2.5 时间线重建技术
 
-## 2.5.1 时间线重建的重要性
+### 2.5.1 时间线重建的重要性
 
 在复杂的安全事件或问题调查中,**时间线重建 (Timeline Reconstruction)** 是理解"事件如何发生"的关键技术。它将分散在多个数据源中的事件按时间顺序排列,形成完整的因果叙事。
 
@@ -1831,7 +1778,7 @@ Step 4: 攻击链重建
 └──────────────────────────────────────────────────────────────┘
 ```
 
-## 2.5.2 多源数据关联方法论
+### 2.5.2 多源数据关联方法论
 
 Kubernetes 环境中的证据分散在多个异构数据源中,每个数据源有不同的时间戳格式、粒度和可靠性。时间线重建的核心挑战是**跨源关联**。
 
@@ -1956,7 +1903,7 @@ container_memory_usage_bytes{
 关联结果: 通过 Pod UID,我们可以将这 5 个数据源中的事件关联起来
 ```
 
-## 2.5.3 Kubernetes 审计日志:黄金数据源
+### 2.5.3 Kubernetes 审计日志:黄金数据源
 
 Kubernetes API Server 审计日志是时间线重建的**黄金数据源 (Golden Source)**,因为:
 
@@ -2033,9 +1980,6 @@ rules:
 
 **关键审计事件识别**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 安全取证中的关键审计事件:
@@ -2066,7 +2010,7 @@ rules:
 │    禁用审计)                                            │
 └───────────────────────────────────────────────────────────┘
 ```
-## 2.5.4 时间线重建工具: Timesketch + Plaso
+### 2.5.4 时间线重建工具: Timesketch + Plaso
 
 **Plaso (log2timeline)** 是开源的超级时间线生成工具,**Timesketch** 是配套的可视化分析平台。
 
@@ -2142,7 +2086,7 @@ Step 4: 分析和可视化
 └───────────────────────────────────────────────────────────┘
 ```
 
-## 2.5.5 超级时间线概念
+### 2.5.5 超级时间线概念
 
 **Super Timeline (超级时间线)** 是指将系统中所有可能包含时间戳的数据源整合到单一时间线中:
 
@@ -2185,10 +2129,7 @@ Kubernetes 层:
 结果: 数百万个时间戳事件,形成系统状态的"完整历史"
 ```
 
-## 2.5.6 跨层事件关联技术
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+### 2.5.6 跨层事件关联技术
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2288,7 +2229,7 @@ T+2min   [10:30:15] 网络层 (Cilium Hubble)
   3. 实施 NetworkPolicy (拒绝非必要外连)
   4. 启用 Pod Security Standards (restricted)
 ```
-## 2.5.7 时间同步挑战
+### 2.5.7 时间同步挑战
 
 ```
 Kubernetes 分布式环境中的时间同步问题:
@@ -2336,9 +2277,9 @@ $ promql 'abs(node_time_seconds - time()) > 1'
 
 ---
 
-<!-- chunk: 2.6 网络取证技术 -->## 2.6 网络取证技术
+## 2.6 网络取证技术
 
-## 2.6.1 Kubernetes 网络模型
+### 2.6.1 Kubernetes 网络模型
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -2380,7 +2321,7 @@ Kubernetes 网络层级模型:
 │ • 取证价值: NetFlow/VPC Flow Logs                            │
 └─────────────────────────────────────────────────────────────┘
 ```
-## 2.6.2 CNI 插件日志与流量数据
+### 2.6.2 CNI 插件日志与流量数据
 
 **Cilium + Hubble: 网络可观测性的黄金组合**
 
@@ -2473,7 +2414,7 @@ $ hubble observe --verdict DROPPED \
 $ hubble observe --to-ip 185.71.67.84
 ```
 
-## 2.6.3 Service Mesh 遥测作为证据
+### 2.6.3 Service Mesh 遥测作为证据
 
 **Istio 遥测数据的取证价值**
 
@@ -2531,7 +2472,7 @@ Istio Envoy Access Log 示例:
   ✓ 可用于检测横向移动尝试
 ```
 
-## 2.6.4 DNS 查询日志分析
+### 2.6.4 DNS 查询日志分析
 
 ```
 CoreDNS 日志插件配置:
@@ -2616,7 +2557,7 @@ detect_dga("www.google.com")
 # → False, Normal domain
 ```
 
-## 2.6.5 横向移动检测
+### 2.6.5 横向移动检测
 
 ```
 横向移动的网络证据模式:
@@ -2677,7 +2618,7 @@ sum by (source_namespace, source_pod) (
 )
 ```
 
-## 2.6.6 多租户环境网络隔离
+### 2.6.6 多租户环境网络隔离
 
 ```
 多租户网络取证挑战:
@@ -2716,9 +2657,9 @@ sum by (source_namespace, source_pod) (
 
 ---
 
-<!-- chunk: 2.7 Kubernetes 审计日志深度解析 -->## 2.7 Kubernetes 审计日志深度解析
+## 2.7 Kubernetes 审计日志深度解析
 
-## 2.7.1 审计日志结构与字段
+### 2.7.1 审计日志结构与字段
 
 ```json
 // Kubernetes 审计事件完整结构
@@ -2799,7 +2740,7 @@ sum by (source_namespace, source_pod) (
 }
 ```
 
-## 2.7.2 关键审计事件模式
+### 2.7.2 关键审计事件模式
 
 ```
 安全取证中的关键审计模式:
@@ -2903,7 +2844,7 @@ sum by (source_namespace, source_pod) (
 └──────────────────────────────────────────────────────────────┘
 ```
 
-## 2.7.3 审计后端选项
+### 2.7.3 审计后端选项
 
 ```
 Kubernetes 审计后端对比:
@@ -2964,7 +2905,7 @@ Kubernetes 审计后端对比:
 └─────────────┴────────────────────────────────────────────────┘
 ```
 
-## 2.7.4 审计日志分析模式
+### 2.7.4 审计日志分析模式
 
 ```bash
 # 取证场景分析脚本
@@ -3020,9 +2961,9 @@ cat audit.log | jq -s \
 
 ---
 
-<!-- chunk: 2.8 证据关联与多源融合 -->## 2.8 证据关联与多源融合
+## 2.8 证据关联与多源融合
 
-## 2.8.1 多源证据融合挑战
+### 2.8.1 多源证据融合挑战
 
 ```
 Kubernetes 环境中的证据碎片化问题:
@@ -3072,7 +3013,7 @@ Kubernetes 环境中的证据碎片化问题:
 └──────────────────────────────────────────────────────────────┘
 ```
 
-## 2.8.2 关联技术分类
+### 2.8.2 关联技术分类
 
 ```
 证据关联方法论:
@@ -3148,7 +3089,7 @@ Kubernetes 环境中的证据碎片化问题:
   # 验证: 每个阶段的时间差是否符合预期
 ```
 
-## 2.8.3 知识图谱方法
+### 2.8.3 知识图谱方法
 
 ```
 证据知识图谱构建:
@@ -3208,7 +3149,7 @@ ORDER BY score DESC
 LIMIT 10
 ```
 
-## 2.8.4 自动化关联工作流
+### 2.8.4 自动化关联工作流
 
 ```yaml
 # Argo Workflow: 自动化证据关联分析
@@ -3394,7 +3335,7 @@ spec:
         mountPath: /mnt/evidence
 ```
 
-## 2.8.5 实战案例: 完整攻击链重建
+### 2.8.5 实战案例: 完整攻击链重建
 
 ```
 综合案例: 从单一告警到完整攻击链的证据关联
@@ -3488,7 +3429,7 @@ Step 5: 证据完整性评估
 
 ---
 
-<!-- chunk: 结语 -->## 结语
+## 结语
 
 本章详细阐述了 FEBM 的技术实现体系,涵盖证据生命周期管理、容器检查点、eBPF 遥测、内存取证、时间线重建、网络取证、审计日志分析和多源证据关联八大核心技术领域。这些技术共同构成了云原生环境下系统化取证的完整工具箱。
 
@@ -3497,30 +3438,5 @@ Step 5: 证据完整性评估
 ---
 
 > **导航**: [<< 上一章 - FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) | [下一章 - FEBM 最佳实践 >>](./03-febm-best-practices.md)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FEBM方法论/MOC.md|topic-febm MOC]]
-- [[故障诊断/FEBM方法论/README.md|topic-febm: FEBM 法医鉴定循证方法论深度解析]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|第一章：FEBM 方法论原理与理论基础]]
-- [[故障诊断/FEBM方法论/03-febm-best-practices.md|第三章：FEBM 最佳实践]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]]
-- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]]
-- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]]
-- [[故障诊断/FEBM方法论/07-febm-appendix.md|第七章:附录]]
-- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|第八章：FEBM 生产环境快速启动与 Kubernetes 问题取证手册]]
-- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|法医鉴定循证方法论（FEBM）深度解析]]
-- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|FTA-FEBM 联合诊断最佳实践]]
-
-## See Also
-
-- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
-- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]]
-- [[故障诊断/FEBM方法论/03-febm-best-practices.md|03-febm-best-practices]]
-- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
-
-```
 
 <!-- risk-assessed -->

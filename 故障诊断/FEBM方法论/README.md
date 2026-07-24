@@ -1,7 +1,6 @@
 ---
-title: 'topic-febm: FEBM 法医鉴定循证方法论深度解析 [topic-febm]'
+title: 'topic-febm: FEBM 法医鉴定循证方法论深度解析'
 description: '# topic-febm: FEBM 法医鉴定循证方法论深度解析'
-summary: '本专题提供 FEBM（Forensic Evidence-Based Methodology）法医鉴定循证方法论的完整知识体系，从传统法医学的洛卡德交换原理到云原生 [[Kubernetes|Kubernetes]] 环境中的数字取证实践，涵盖方法论理论、技术实现、最佳实践、AI Agent 工单处理集成、体系建设方法论及生产环境快速落地。'
 category: febm
 tags:
 - k8s
@@ -13,8 +12,6 @@ tags:
 - agent
 - daemonset
 - gpu
-tier: core
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: expert
 reading_level: expert
@@ -43,8 +40,6 @@ prerequisites:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
 # topic-febm: FEBM 法医鉴定循证方法论深度解析
 
 > **文档数量**: 10 篇（8章 + 1主文档 + 1 PDF原文） | **最后更新**: 2026-02
@@ -53,7 +48,7 @@ prerequisites:
 
 ## 专题概述
 
-本专题提供 FEBM（Forensic Evidence-Based Methodology）法医鉴定循证方法论的完整知识体系，从传统法医学的洛卡德交换原理到云原生 [[Kubernetes|Kubernetes]] 环境中的数字取证实践，涵盖方法论理论、技术实现、最佳实践、AI Agent 工单处理集成、体系建设方法论及生产环境快速落地。
+本专题提供 FEBM（Forensic Evidence-Based Methodology）法医鉴定循证方法论的完整知识体系，从传统法医学的洛卡德交换原理到云原生 Kubernetes 环境中的数字取证实践，涵盖方法论理论、技术实现、最佳实践、AI Agent 工单处理集成、体系建设方法论及生产环境快速落地。
 
 FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，从假设到验证），FEBM 采用**归纳法**（自下而上，从证据到结论）。两者在成熟运维体系中共同构成完整的故障诊断和安全调查能力。
 
@@ -65,10 +60,10 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 
 | 目标 | 推荐起点 |
 |:---|:---|
-| **快速了解 FEBM** | 第一章：FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) |
+| **快速了解 FEBM** | [第一章：FEBM 方法论原理与理论基础](./01-febm-theory-foundations.md) |
 | **快速落地 FEBM** | [第八章：生产环境快速启动与 K8s 问题取证手册](./08-febm-production-quick-start.md) |
 | **技术实现深度** | [第二章：FEBM 技术实现体系](./02-febm-technical-implementation.md) |
-| **AI Agent 工单处理** | 第四章：FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) |
+| **AI Agent 工单处理** | [第四章：FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) |
 | **FTA vs FEBM** | [FTA-vs-FEBM.pdf](./FTA-vs-FEBM.pdf)（原始论文） |
 | **总纲概览** | [FEBM 方法论深度解析](./febm-methodology-deep-dive.md) |
 
@@ -98,7 +93,7 @@ FEBM 与 FTA 形成方法论互补：FTA 采用**演绎法**（自上而下，�
 | 4 | [FEBM 对云平台工单智能体托管的意义](./04-febm-agent-ticket-processing.md) | Agent 工单处理架构、七大核心能力模型、FTA+FEBM 融合模式、三个完整案例（连接池耗尽/容器逃逸/静默失败）、人机协同分级、知识进化机制 | 2,690 |
 | 5 | [FEBM 体系建设方法论](./05-febm-construction-methodology.md) | 五级成熟度模型、分阶段建设路线（Phase 1-5）、工具链参考、组织角色矩阵、实施建议、预算规划、合规法律考量 | 2,873 |
 | 6 | [未来演进方向](./06-febm-future-evolution.md) | AI/ML 增强混合方法、云原生取证基础设施（OSDFIR）、DevSecOps 融合、意图模型协同、数字孪生、量子计算影响、标准化 | 3,916 |
-| 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、[[实体/falco.md|[[Falco|Falco]]]] 检测规则模板、事件响应 Checklist | 1,267 |
+| 7 | [附录](./07-febm-appendix.md) | 50+ 术语表、参考标准与规范（NIST/ISO/RFC）、40+ 工具速查表、K8s 审计策略模板、Falco 检测规则模板、事件响应 Checklist | 1,267 |
 | 8 | [生产环境快速启动与 K8s 问题取证手册](./08-febm-production-quick-start.md) | **第一周行动清单**、最小化工具栈部署、6个 K8s 问题取证 Runbook（OOMKilled/CrashLoopBackOff/NodeNotReady/间歇超时/证书过期/配置漂移）、FTA+FEBM 联合诊断、KPI 仪表板、合规快速参考 | 1,600+ |
 
 ---
@@ -134,10 +129,10 @@ FTA vs FEBM:
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-fta](../故障诊断/[[故障诊断/FTA故障树/README.md|README]].md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
+| [topic-fta](../故障诊断/FTA故障树/README.md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
 | [安全](../安全/) | 安全合规知识域 |
 | [可观测性](../可观测性/) | 可观测性体系 |
-| [topic-structural-trouble-shooting](../故障诊断/[[故障诊断/高级排障/README.md|README]].md) | 结构化故障排查知识库 |
+| [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
 
 ---
 
@@ -165,39 +160,28 @@ Agent 工程师:  第四章(工单Agent) → 第五章(建设方法论) → topi
 | 对比表格 | 80+ 个 |
 | 实战案例 | 15+ 个完整案例 |
 
-## 适用场景
-
-- **生产事故响应**：P0/P1 事故中使用 FEBM 方法论指导证据收集和根因分析
-- **AI Agent 诊断**：为智能诊断引擎提供结构化的推理框架
-- **培训与考核**：作为 SRE 团队故障诊断能力培训的方法论基础
-- **事后复盘**：事故报告撰写时引用 FEBM 证据链确保分析完整性
-
 ## Related
 
-- [[README|README]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[实体/ko.md|ko]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[概念/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[实体/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
+- [[生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->
