@@ -35,6 +35,14 @@ prerequisites:
 fta_id: FTA-KUBELET-001
 component: kubelet
 severity: high
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+- '1.33'
+
 ---
 
 > **生产环境安全提示**

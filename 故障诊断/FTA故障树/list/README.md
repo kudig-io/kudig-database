@@ -13,7 +13,7 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -46,6 +46,14 @@ cross_refs:
 - type: skill
   path: ../故障诊断/topic-skills/README.md
   label: '运维技能: README'
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+- '1.33'
+
 ---
 
 > **生产环境安全提示**

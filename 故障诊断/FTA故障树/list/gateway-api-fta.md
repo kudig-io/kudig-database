@@ -14,7 +14,7 @@ tags:
 - envoy
 - argocd
 - flux
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -47,6 +47,7 @@ k8s_versions:
 - '1.30'
 - '1.31'
 - '1.32'
+- '1.33'
 authors:
 - name: KUDIG Team
   role: contributor

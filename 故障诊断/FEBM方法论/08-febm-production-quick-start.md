@@ -13,7 +13,7 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: expert
 reading_level: expert
 audience:

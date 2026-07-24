@@ -13,7 +13,7 @@ tags:
 - scheduler
 - calico
 - containerd
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -39,6 +39,14 @@ prerequisites:
 fta_id: FTA-KUBEADM-001
 component: Kubeadm
 severity: critical
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+- '1.33'
+
 ---
 
 > **生产环境安全提示**

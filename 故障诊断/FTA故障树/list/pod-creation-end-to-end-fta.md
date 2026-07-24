@@ -42,6 +42,14 @@ prerequisites:
 fta_id: FTA-POD-E2E-001
 component: Pod Lifecycle
 severity: critical
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+- '1.33'
+
 ---
 
 > **生产环境安全提示**

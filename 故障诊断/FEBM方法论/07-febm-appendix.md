@@ -13,7 +13,7 @@ tags:
 - jaeger
 - istio
 - cilium
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: expert
 reading_level: expert
 audience:
