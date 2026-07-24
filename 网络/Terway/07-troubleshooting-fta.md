@@ -835,7 +835,7 @@ auto_heal_actions:
 |------|------|------|
 | Terway 运维手册 | [04-operations.md](./04-operations.md) | 日常运维操作 |
 | FTA 完整树 (含 JSON 工作流) | [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | 完整 FTA 树定义 + 自动化工作流 |
-| 结构化排查指南 | [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 详细排查步骤与脚本 |
+| 结构化排查指南 | [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 详细排查步骤与脚本 |
 | Terway 架构 | [02-architecture.md](./02-architecture.md) | 架构与模式说明 |
 | Terway 性能调优 | [06-performance.md](./06-performance.md) | 性能优化参考 |
 

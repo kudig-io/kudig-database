@@ -1,57 +1,4 @@
 ---
-title: 集群高可用与灾备故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 集群高可用与灾备故障排查指南'
-summary: 'title: 集群高可用与灾备故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- helm
-- docker
-- pdb
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 集群高可用与灾备故障排查指南 是什么
-- 如何 集群高可用与灾备故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 集群高可用与灾备故障排查指南 故障排查
-- 集群高可用与灾备故障排查指南 排障步骤
-trigger_keywords:
-- 集群高可用与灾备故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- etcd-basics
-- backup-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 集群高可用与灾备故障排查指南
 description: '# 集群高可用与灾备故障排查指南'
 category: structural-troubleshooting
@@ -59,13 +6,13 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
 - pdb
-- [[DaemonSet|daemonset]]
+- daemonset
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -84,16 +31,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
+- backup-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 集群高可用与灾备故障排查指南
 
@@ -339,15 +287,12 @@ journalctl -u etcd --tail=100
 ```
 #### 场景：etcd 成员故障恢复
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 场景: 一个 etcd 成员永久问题，需要替换
 
 # 1. 移除问题成员
-etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
+etcdctl member remove <member-id>
 
 # 2. 在新节点上准备 etcd
 
@@ -432,9 +377,6 @@ echo "0 */6 * * * root /usr/local/bin/etcd-backup.sh" >> /etc/crontab
 
 **警告: 此操作会重置整个集群状态，请谨慎执行！**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 停止所有控制平面组件
@@ -475,11 +417,6 @@ kubectl get pods -n kube-system
 
 #### 场景：单 Master 节点问题
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl member remove`：移除 etcd 成员，误删多数派会致集群不可用/丢数据
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -503,7 +440,7 @@ kubectl delete node <failed-master>
 
 # 4. 清理 etcd 成员 (如果该节点运行 etcd)
 etcdctl member list
-etcdctl member remove <member-id>  # ⚠️ 移除 etcd 成员，可能丢数据
+etcdctl member remove <member-id>
 
 # 5. 添加新的 Master 节点
 # 在新节点执行
@@ -514,9 +451,6 @@ kubeadm join <lb-endpoint>:6443 \
   --certificate-key <cert-key>
 ```
 #### 场景：所有 Master 问题后恢复
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -549,9 +483,6 @@ kubectl get nodes
 ### 负载均衡器问题
 
 #### 场景：检查和修复 LB
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -586,10 +517,6 @@ EOF
 systemctl restart haproxy
 ```
 ### 灾难恢复演练
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -696,9 +623,6 @@ spec:
 
 ### 常用命令速查
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # etcd 操作
@@ -706,7 +630,7 @@ etcdctl endpoint health --cluster
 etcdctl endpoint status --cluster -w table
 etcdctl member list -w table
 etcdctl snapshot save /path/to/backup.db
-etcdctl snapshot restore /path/to/backup.db  # ⚠️ 覆盖 etcd 数据，集群状态回退
+etcdctl snapshot restore /path/to/backup.db
 
 # 控制平面检查
 kubectl get nodes -l node-role.kubernetes.io/control-plane=
@@ -720,23 +644,14 @@ kubeadm certs renew all
 ### 相关文档
 
 - [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [API Server 故障排查](../[[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]].md)
-- [证书故障排查](../[[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
-- [集群维护故障排查](./[[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]].md)
+- [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
+- [证书故障排查](../06-security-auth/02-certificate-troubleshooting.md)
+- [集群维护故障排查](./01-cluster-maintenance-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

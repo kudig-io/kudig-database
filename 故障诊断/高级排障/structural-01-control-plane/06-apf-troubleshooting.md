@@ -1,55 +1,4 @@
 ---
-title: API 优先级与公平性 (APF) 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: API 优先级与公平性 (APF) 故障排查指南'
-summary: 'title: API 优先级与公平性 (APF) 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- apiserver
-- scheduler
-- controller-manager
-- prometheus
-- docker
-- webhook
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- API 优先级与公平性 (APF) 故障排查指南 是什么
-- 如何 API 优先级与公平性 (APF) 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- API 优先级与公平性 (APF) 故障排查指南 故障排查
-- API 优先级与公平性 (APF) 故障排查指南 排障步骤
-trigger_keywords:
-- API
-- 优先级与公平性
-- APF
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: API 优先级与公平性 (APF) 故障排查指南
 description: '# API 优先级与公平性 (APF) 故障排查指南'
 category: structural-troubleshooting
@@ -60,7 +9,7 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -82,20 +31,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # API 优先级与公平性 (APF) 故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - APF 自 v1.20 Beta, v1.29+ GA (默认启用)
@@ -465,9 +414,6 @@ spec:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查系统组件的 FlowSchema
@@ -479,7 +425,7 @@ kubectl get flowschema system-nodes -o yaml
 
 # 步骤 3: 如果系统 FlowSchema 被意外修改，恢复默认配置
 # 删除自定义的 FlowSchema (系统会自动重建默认的)
-kubectl get flowschema -o name | grep -v "system|exempt|catch-all" | xargs kubectl delete
+kubectl get flowschema -o name | grep -v "system\|exempt\|catch-all" | xargs kubectl delete
 
 # 步骤 4: 确保系统优先级配置正确
 kubectl get prioritylevelconfiguration
@@ -524,9 +470,6 @@ kubectl get flowschema -o json | jq '.items[] | {name: .metadata.name, precedenc
 **问题现象**：需要增加整体或特定优先级的并发处理能力。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -585,9 +528,6 @@ spec:
 **问题现象**：请求队列满导致请求被丢弃。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -788,19 +728,7 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

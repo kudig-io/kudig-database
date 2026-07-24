@@ -1,52 +1,4 @@
 ---
-title: RBAC 与认证故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: RBAC 与认证故障排查指南'
-summary: 'title: RBAC 与认证故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- rbac
-- apiserver
-- docker
-- crd
-- operator
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- RBAC 与认证故障排查指南 是什么
-- 如何 RBAC 与认证故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- RBAC 与认证故障排查指南 故障排查
-- RBAC 与认证故障排查指南 排障步骤
-trigger_keywords:
-- RBAC
-- 与认证故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: RBAC 与认证故障排查指南
 description: '# RBAC 与认证故障排查指南'
 category: structural-troubleshooting
@@ -77,20 +29,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # RBAC 与认证故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
 
 ---
 
@@ -135,7 +86,7 @@ k8s_versions:
 |------|----------|----------|----------|
 | 无权限 | `Forbidden` (403) | API Server | kubectl/API 响应 |
 | 资源禁止 | `User cannot <verb> <resource>` | API Server | kubectl |
-| ServiceAccount 无权限 | `[[Pods|pods]] is forbidden` | Pod 内应用 | 应用日志 |
+| ServiceAccount 无权限 | `pods is forbidden` | Pod 内应用 | 应用日志 |
 | 命名空间权限不足 | `forbidden: User cannot...in namespace` | kubectl | kubectl |
 
 #### 1.1.3 ServiceAccount 问题
@@ -171,7 +122,7 @@ kubectl config view
 kubectl config current-context
 
 # 查看 API Server 审计日志
-cat /var/log/kubernetes/audit/audit.log | grep "403|401"
+cat /var/log/kubernetes/audit/audit.log | grep "403\|401"
 ```
 ### 1.3 影响面分析
 
@@ -243,9 +194,6 @@ kubectl auth can-i --list --as=system:serviceaccount:<ns>:<sa>
 ```
 ### 2.3 ServiceAccount 排查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 Pod 使用的 ServiceAccount
@@ -271,9 +219,6 @@ kubectl auth can-i create pods --as=system:serviceaccount:<ns>:<sa>
 ### 3.1 创建 RBAC 权限
 
 #### 3.1.1 为用户授予权限
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -337,9 +282,6 @@ EOF
 ```
 #### 3.1.2 为 ServiceAccount 授予权限
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 创建 ServiceAccount
@@ -382,9 +324,6 @@ kubectl create rolebinding <sa-name>-view \
 ### 3.2 证书问题解决
 
 #### 3.2.1 更新 kubeconfig 证书
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -438,9 +377,6 @@ kubectl config set-context <username>-context \
 ```
 
 ### 3.3 常见 RBAC 配置示例
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -522,21 +458,9 @@ EOF
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

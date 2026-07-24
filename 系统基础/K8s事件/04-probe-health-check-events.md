@@ -1518,7 +1518,7 @@ groups:
 - **Domain-2: 核心概念**: `05-pod-lifecycle.md`（Pod 生命周期详解）
 - **Domain-6: 可观测性**: `01-logging-architecture.md`（日志收集）
 - **Domain-6: 可观测性**: `02-metrics-monitoring.md`（Prometheus 监控）
-- **Topic: 故障排查**: `故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md`
+- **Topic: 故障排查**: `故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md`
 
 ## 官方文档
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)

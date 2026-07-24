@@ -20,5 +20,5 @@ last_updated: 2026-07
 - [[归档/troubleshooting-diagnostics/topic-febm/index|Topic Febm]]
 - [[归档/troubleshooting-diagnostics/topic-fta/index|Topic Fta]]
 - [[归档/troubleshooting-diagnostics/topic-qa-corpus/index|Topic Qa Corpus]]
-- [[归档/troubleshooting-diagnostics/topic-structural-trouble-shooting/index|Topic Structural Trouble Shooting]]
+- [[故障诊断/高级排障/structural-index|Topic Structural Trouble Shooting]]
 

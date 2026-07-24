@@ -1,59 +1,4 @@
 ---
-title: Webhook 与准入控制故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Webhook 与准入控制故障排查指南'
-summary: 'title: Webhook 与准入控制故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- scheduler
-- controller-manager
-- istio
-- docker
-- opa
-- hpa
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Webhook 与准入控制故障排查指南 是什么
-- 如何 Webhook 与准入控制故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Webhook 与准入控制故障排查指南 故障排查
-- Webhook 与准入控制故障排查指南 排障步骤
-trigger_keywords:
-- Webhook
-- 与准入控制故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- etcd-basics
-- tls-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Webhook 与准入控制故障排查指南
 description: '# Webhook 与准入控制故障排查指南'
 category: structural-troubleshooting
@@ -61,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[Istio|istio]]
+- istio
 - opa
 - hpa
 - rbac
@@ -87,16 +32,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
+- etcd-basics
+- tls-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Webhook 与准入控制故障排查指南
 
@@ -122,7 +70,7 @@ Kubernetes 准入控制器 (Admission Controllers) 是 API 请求处理流程中
 5. **性能与超时**：`kubectl top pod -n <ns> -l app=<webhook>`，必要时提高 Webhook 副本、HPA，或提升 `timeoutSeconds`（默认 10s，建议 ≤ 30s）。
 6. **快速缓解**：
    - 非关键拦截：临时将 `failurePolicy` 改为 `Ignore`，或收窄 `rules`/`namespaceSelector` 以放行核心流量。
-   - 证书问题：立即轮转 TLS Secret 并更新 CA Bundle；使用 cert-manager 时触发 `renewBefore`。
+   - 证书问题：立即轮转 TLS Secret 并更新 CA Bundle；使用 [[cert-manager|cert-manager]] 时触发 `renewBefore`。
    - 循环依赖：为 Webhook 自身资源添加排除标签/命名空间，必要时使用 `reinvocationPolicy=IfNeeded`。
 7. **证据留存**：保存拒绝事件、API Server Webhook 调用日志、Webhook Pod 日志、配置 diff 和 CA/证书到期时间。
 
@@ -300,9 +248,6 @@ kubectl logs -n kube-system kube-apiserver-<node> | grep <webhook-name>
 ```
 #### 2.2.5 测试 Webhook 连接
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 从集群内部测试 Webhook 服务连接
@@ -343,10 +288,6 @@ Post "https://webhook-service.default.svc:443/validate": dial tcp 10.96.x.x:443:
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 服务和 Pod 状态
@@ -381,9 +322,6 @@ failed calling webhook: x509: certificate signed by unknown authority
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Webhook 配置中的 CA Bundle
@@ -408,12 +346,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p="[{\"op\": \"
 #### 场景 3：证书过期
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -453,9 +385,6 @@ timeout: request did not complete within requested timeout 10s
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看当前超时设置
@@ -487,9 +416,6 @@ kubectl patch deployment -n <namespace> <webhook-deployment> --type='json' -p='[
 资源创建成功，但未被 Webhook 修改或验证
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -527,10 +453,6 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[
 Webhook 影响了 kube-system 等系统命名空间，导致系统组件无法工作
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -580,10 +502,6 @@ Pod 创建后没有 istio-proxy sidecar 容器
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Istio Webhook 状态
@@ -620,9 +538,6 @@ admission webhook "validation.gatekeeper.sh" denied the request:
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Gatekeeper 约束
@@ -657,11 +572,6 @@ Internal error occurred: failed calling webhook "webhook.cert-manager.io"
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 cert-manager 组件状态
@@ -693,10 +603,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 所有资源创建/更新都被 Webhook 拦截
 
 **紧急恢复步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -840,10 +746,6 @@ webhooks:
 
 ### 常用排查命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 Webhook 配置
@@ -865,22 +767,12 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 ### 相关文档
 
 - [API Server 故障排查](./01-apiserver-troubleshooting.md)
-- [证书故障排查](../[[故障诊断/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]].md)
-- [RBAC 故障排查](../[[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
+- [证书故障排查](../06-security-auth/02-certificate-troubleshooting.md)
+- [RBAC 故障排查](../06-security-auth/01-rbac-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

@@ -1,56 +1,4 @@
 ---
-title: kubectl watch 输出解析语料 [topic-structural-trouble-shooting]
-description: 'title: kubectl watch 输出解析语料'
-summary: 'title: kubectl watch 输出解析语料'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- scheduler
-- docker
-- hpa
-- job
-- ingress
-- rbac
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- kubectl watch 输出解析语料 是什么
-- 如何 kubectl watch 输出解析语料
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- kubectl watch 输出解析语料 故障排查
-- kubectl watch 输出解析语料 排障步骤
-trigger_keywords:
-- kubectl
-- watch
-- 输出解析语料
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: kubectl watch 输出解析语料
 description: '# kubectl watch 输出解析语料'
 category: structural-troubleshooting
@@ -58,11 +6,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - hpa
 - job
-- [[Ingress|ingress]]
+- ingress
 - rbac
 - agent
 last_updated: 2026-05
@@ -85,20 +33,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # kubectl watch 输出解析语料
 
-> **文档类型**: Agent 诊断语料 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05
+> **文档类型**: Agent 诊断语料 | **适用版本**: [[实体/kubernetes|k8s]] 1.28-1.33 | **最后更新**: 2026-05
 > **使用场景**: Agent 从 kubectl get --watch 实时输出中判断异常事件和状态变化
 
 ---
@@ -450,25 +397,9 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - 故障诊断/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md
-  - 故障诊断/08-pod-comprehensive-troubleshooting.md
+  - domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md
+  - domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md
 ---
 ```
-
-## Related
-
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/ko.md|ko]]
-
-## See Also
-
-- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-
 
 <!-- risk-assessed -->

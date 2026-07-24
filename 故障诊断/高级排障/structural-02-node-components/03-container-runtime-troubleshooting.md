@@ -1,51 +1,4 @@
 ---
-title: 容器运行时故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 容器运行时故障排查指南'
-summary: 'title: 容器运行时故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- containerd
-- cri-o
-- docker
-- rag
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 容器运行时故障排查指南 是什么
-- 如何 容器运行时故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 容器运行时故障排查指南 故障排查
-- 容器运行时故障排查指南 排障步骤
-trigger_keywords:
-- 容器运行时故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 容器运行时故障排查指南
 description: '# 容器运行时故障排查指南'
 category: structural-troubleshooting
@@ -53,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[containerd|containerd]]
+- kubelet
+- containerd
 - cri-o
 - docker
 - rag
@@ -76,16 +29,15 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 容器运行时故障排查指南
 
@@ -509,9 +461,6 @@ cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us
 
 #### 3.3.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -584,9 +533,6 @@ crictl pull <image-name>
 
 #### 3.4.1 解决步骤
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查空间使用
@@ -603,7 +549,7 @@ crictl rmi --prune
 ctr -n k8s.io images prune --all
 
 # Docker 方式
-docker system prune -a  # ⚠️ 强制清理，可能杀运行中容器
+docker system prune -a
 
 # 步骤 3：清理已停止的容器
 crictl rm $(crictl ps -a -q --state exited)
@@ -614,7 +560,7 @@ docker builder prune
 # 步骤 5：检查是否有悬空卷
 # Docker
 docker volume ls -f dangling=true
-docker volume prune  # ⚠️ 强制清理，可能杀运行中容器
+docker volume prune
 
 # 步骤 6：清理日志文件
 find /var/lib/containerd/ -name "*.log" -mtime +7 -delete
@@ -635,14 +581,11 @@ df -h /var/lib/containerd/
 
 #### 3.4.3 安全生产风险提示
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
-
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
 ⚠️  安全生产风险提示：
 1. 清理前确认镜像不被当前 Pod 使用
-2. docker system prune -a 会清理所有未使用资源  # ⚠️ 强制清理，可能杀运行中容器
+2. docker system prune -a 会清理所有未使用资源
 3. 考虑配置镜像垃圾回收策略
 4. 监控存储使用，设置告警
 5. 生产环境建议预留足够空间
@@ -650,9 +593,6 @@ df -h /var/lib/containerd/
 ### 3.5 cgroup 驱动不匹配
 
 #### 3.5.1 解决步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -732,9 +672,6 @@ cat /var/lib/kubelet/config.yaml | grep cgroupDriver
 
 #### 3.6.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -802,9 +739,6 @@ crictl run --help
 ### 3.7 containerd 配置优化
 
 #### 3.7.1 生产环境推荐配置
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -892,20 +826,8 @@ systemctl restart containerd
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[hot|hot]]
-- [[log|log]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

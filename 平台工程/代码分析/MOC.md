@@ -92,31 +92,31 @@ prerequisites:
 | 15 | [[平台工程/代码分析/functions-cluster-cert/15-cert-format-encoding.md|证书格式与编码详解]] |  | reference |  |
 | 16 | [[平台工程/代码分析/functions-cluster-cert/16-openssl-cookbook.md|OpenSSL 证书操作速查手册]] |  | reference |  |
 | 17 | [[平台工程/代码分析/functions-cluster-cert/17-pki-security-best-practices.md|Kubernetes PKI 安全最佳实践]] |  | reference, security, best-practice |  |
-| 18 | [[平台工程/代码分析/functions-cluster-create/01-overview.md|kubeadm init 集群初始化概览]] |  | reference, deep-dive |  |
-| 19 | [[平台工程/代码分析/functions-cluster-create/02-preflight.md|预检流程 (kubeadm preflight)]] |  | reference |  |
-| 20 | [[平台工程/代码分析/functions-cluster-create/03-certs.md|证书管理 (PKI Infrastructure)]] |  | reference |  |
-| 21 | [[平台工程/代码分析/functions-cluster-create/04-kubeconfig.md|kubeconfig 阶段 — Kubeconfig Generation 源码分析]] |  | reference, configuration |  |
-| 22 | [[平台工程/代码分析/functions-cluster-create/05-control-plane.md|控制面组件部署 (Static Pod Manifests)]] |  | reference |  |
-| 23 | [[平台工程/代码分析/functions-cluster-create/06-join.md|节点加入流程 (kubeadm join)]] |  | reference |  |
-| 24 | [[平台工程/代码分析/functions-cluster-create/07-etcd.md|etcd 静态 Pod 管理]] |  | reference |  |
-| 25 | [[平台工程/代码分析/functions-cluster-create/08-ha.md|高可用控制面搭建 — 源码分析]] |  | reference |  |
-| 26 | [[平台工程/代码分析/functions-cluster-create/09-upgrade.md|集群升级流程 (kubeadm upgrade)]] |  | reference, upgrade |  |
-| 27 | [[平台工程/代码分析/functions-cluster-create/10-cloud-comparison.md|云厂商方案与 kubeadm 对比]] |  | reference |  |
-| 28 | [[平台工程/代码分析/functions-cluster-create/11-advanced.md|集群新建进阶: 关键机制详解]] |  | reference |  |
-| 29 | [[平台工程/代码分析/functions-cluster-create/12-join-advanced.md|节点加入进阶: Discovery 与 TLS Bootstrap 详解]] |  | reference |  |
-| 30 | [[平台工程/代码分析/functions-cluster-create/13-etcd-advanced.md|etcd 进阶: HA 集群管理与性能调优]] |  | reference |  |
-| 31 | [[平台工程/代码分析/functions-cluster-create/14-ha-advanced.md|高可用进阶: 负载均衡与证书分发]] |  | reference |  |
-| 32 | [[平台工程/代码分析/functions-cluster-create/15-upgrade-advanced.md|集群升级进阶: 滚动升级与回滚策略]] |  | reference, upgrade |  |
-| 33 | [[平台工程/代码分析/functions-cluster-create/16-security.md|安全机制: ServiceAccount Token 与 Audit]] |  | reference, security |  |
-| 34 | [[平台工程/代码分析/functions-cluster-create/17-init-phases.md|init 阶段详解: mark-control-plane 与 upload-config]] |  | reference |  |
-| 35 | [[平台工程/代码分析/functions-cluster-create/18-cri-runtime.md|CRI 运行时管理 (Container Runtime Interface)]] |  | reference |  |
-| 36 | [[平台工程/代码分析/functions-cluster-create/19-cni-networking.md|CNI 网络插件与集群网络]] |  | reference, networking |  |
-| 37 | [[平台工程/代码分析/functions-cluster-create/20-node-registration.md|Node 注册与 kubeadm token 详解]] |  | reference |  |
-| 38 | [[平台工程/代码分析/functions-cluster-create/21-kube-proxy.md|kube-proxy 与 Service 负载均衡]] |  | reference |  |
-| 39 | [[平台工程/代码分析/functions-cluster-create/22-storage-volumes.md|存储与卷管理]] |  | reference, storage |  |
-| 40 | [[平台工程/代码分析/functions-cluster-create/23-scheduler.md|kube-scheduler 调度详解]] |  | reference |  |
-| 41 | [[平台工程/代码分析/functions-cluster-create/24-what-kubeadm-does-not-install.md|kubeadm 不安装的组件 (What kubeadm Does Not Install)]] |  | reference, configuration |  |
-| 42 | [[平台工程/代码分析/functions-cluster-create/25-resource-management.md|资源管理与配额控制 (Resource Management)]] |  | reference |  |
+| 18 | [[平台工程/代码分析/cluster-create/01-overview.md|kubeadm init 集群初始化概览]] |  | reference, deep-dive |  |
+| 19 | [[平台工程/代码分析/cluster-create/02-preflight.md|预检流程 (kubeadm preflight)]] |  | reference |  |
+| 20 | [[平台工程/代码分析/cluster-create/03-certs.md|证书管理 (PKI Infrastructure)]] |  | reference |  |
+| 21 | [[平台工程/代码分析/cluster-create/04-kubeconfig.md|kubeconfig 阶段 — Kubeconfig Generation 源码分析]] |  | reference, configuration |  |
+| 22 | [[平台工程/代码分析/cluster-create/05-control-plane.md|控制面组件部署 (Static Pod Manifests)]] |  | reference |  |
+| 23 | [[平台工程/代码分析/cluster-create/06-join.md|节点加入流程 (kubeadm join)]] |  | reference |  |
+| 24 | [[平台工程/代码分析/cluster-create/07-etcd.md|etcd 静态 Pod 管理]] |  | reference |  |
+| 25 | [[平台工程/代码分析/cluster-create/08-ha.md|高可用控制面搭建 — 源码分析]] |  | reference |  |
+| 26 | [[平台工程/代码分析/cluster-create/09-upgrade.md|集群升级流程 (kubeadm upgrade)]] |  | reference, upgrade |  |
+| 27 | [[平台工程/代码分析/cluster-create/10-cloud-comparison.md|云厂商方案与 kubeadm 对比]] |  | reference |  |
+| 28 | [[平台工程/代码分析/cluster-create/11-advanced.md|集群新建进阶: 关键机制详解]] |  | reference |  |
+| 29 | [[平台工程/代码分析/cluster-create/12-join-advanced.md|节点加入进阶: Discovery 与 TLS Bootstrap 详解]] |  | reference |  |
+| 30 | [[平台工程/代码分析/cluster-create/13-etcd-advanced.md|etcd 进阶: HA 集群管理与性能调优]] |  | reference |  |
+| 31 | [[平台工程/代码分析/cluster-create/14-ha-advanced.md|高可用进阶: 负载均衡与证书分发]] |  | reference |  |
+| 32 | [[平台工程/代码分析/cluster-create/15-upgrade-advanced.md|集群升级进阶: 滚动升级与回滚策略]] |  | reference, upgrade |  |
+| 33 | [[平台工程/代码分析/cluster-create/16-security.md|安全机制: ServiceAccount Token 与 Audit]] |  | reference, security |  |
+| 34 | [[平台工程/代码分析/cluster-create/17-init-phases.md|init 阶段详解: mark-control-plane 与 upload-config]] |  | reference |  |
+| 35 | [[平台工程/代码分析/cluster-create/18-cri-runtime.md|CRI 运行时管理 (Container Runtime Interface)]] |  | reference |  |
+| 36 | [[平台工程/代码分析/cluster-create/19-cni-networking.md|CNI 网络插件与集群网络]] |  | reference, networking |  |
+| 37 | [[平台工程/代码分析/cluster-create/20-node-registration.md|Node 注册与 kubeadm token 详解]] |  | reference |  |
+| 38 | [[平台工程/代码分析/cluster-create/21-kube-proxy.md|kube-proxy 与 Service 负载均衡]] |  | reference |  |
+| 39 | [[平台工程/代码分析/cluster-create/22-storage-volumes.md|存储与卷管理]] |  | reference, storage |  |
+| 40 | [[平台工程/代码分析/cluster-create/23-scheduler.md|kube-scheduler 调度详解]] |  | reference |  |
+| 41 | [[平台工程/代码分析/cluster-create/24-what-kubeadm-does-not-install.md|kubeadm 不安装的组件 (What kubeadm Does Not Install)]] |  | reference, configuration |  |
+| 42 | [[平台工程/代码分析/cluster-create/25-resource-management.md|资源管理与配额控制 (Resource Management)]] |  | reference |  |
 | 43 | [[平台工程/代码分析/functions-cluster-delete/01-overview.md|Kubernetes 集群删除逻辑 — 基于官方代码分析]] |  | reference, deep-dive |  |
 | 44 | [[平台工程/代码分析/functions-cluster-delete/02-reset.md|kubeadm reset 源码分析]] |  | reference |  |
 | 45 | [[平台工程/代码分析/functions-cluster-delete/03-delete-node.md|节点删除流程 — kubectl delete node 源码分析]] |  | reference |  |
@@ -146,12 +146,12 @@ prerequisites:
 | 主题 | 文档数 | 入口 |
 |------|--------|------|
 | 集群证书 (PKI) | 17 | [[平台工程/代码分析/functions-cluster-cert/01-pki-architecture.md|PKI 架构总览]] |
-| 集群创建 (kubeadm init) | 25 | [[平台工程/代码分析/functions-cluster-create/01-overview.md|集群初始化概览]] |
+| 集群创建 (kubeadm init) | 25 | [[平台工程/代码分析/cluster-create/01-overview.md|集群初始化概览]] |
 | 集群删除 (kubeadm reset) | 8 | [[平台工程/代码分析/functions-cluster-delete/01-overview.md|集群删除逻辑]] |
-| 集群升级 (kubeadm upgrade) | 6 | [[平台工程/代码分析/functions-cluster-create/09-upgrade.md|升级流程]] |
-| 节点管理 | 10 | [[平台工程/代码分析/functions-cluster-create/20-node-registration.md|Node 注册]] |
-| 存储与网络 | 8 | [[平台工程/代码分析/functions-cluster-create/19-cni-networking.md|CNI 网络]] |
-| 调度与资源 | 8 | [[平台工程/代码分析/functions-cluster-create/23-scheduler.md|调度详解]] |
+| 集群升级 (kubeadm upgrade) | 6 | [[平台工程/代码分析/cluster-create/09-upgrade.md|升级流程]] |
+| 节点管理 | 10 | [[平台工程/代码分析/cluster-create/20-node-registration.md|Node 注册]] |
+| 存储与网络 | 8 | [[平台工程/代码分析/cluster-create/19-cni-networking.md|CNI 网络]] |
+| 调度与资源 | 8 | [[平台工程/代码分析/cluster-create/23-scheduler.md|调度详解]] |
 
 ### 按难度分类
 
@@ -186,7 +186,7 @@ A: 主要流程：
 5. **etcd** — 初始化 etcd 集群
 6. **上传配置** — 存储集群配置到 ConfigMap
 
-详见: [[平台工程/代码分析/functions-cluster-create/01-overview.md|集群初始化概览]]
+详见: [[平台工程/代码分析/cluster-create/01-overview.md|集群初始化概览]]
 
 ### Q: 如何安全地删除节点？
 
@@ -216,7 +216,7 @@ A: 滚动升级策略：
 3. 每次升级后验证集群健康
 4. 保留回滚能力
 
-详见: [[平台工程/代码分析/functions-cluster-create/15-upgrade-advanced.md|升级进阶]]
+详见: [[平台工程/代码分析/cluster-create/15-upgrade-advanced.md|升级进阶]]
 
 ## 相关工具
 

@@ -200,7 +200,7 @@ kubectl rollout history deployment/<deployment> -n <namespace> --revision=0
 
 - Skill 源文档：故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
 - 相关 FTA：参考 故障诊断/topic-fta/
-- 深度排查：参考 故障诊断/topic-structural-trouble-shooting/
+- 深度排查：参考 故障诊断/高级排障/structural-
 
 
 <!-- risk-assessed -->

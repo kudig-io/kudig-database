@@ -14,7 +14,7 @@ tags:
 - volume
 - init-container
 sources:
-- 故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md
+- 故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md
 - 故障诊断/核心排障/08-pod-comprehensive-troubleshooting.md
 - 故障诊断/FTA故障树/list/pod-fta.md
 - code/kubernetes-release-1.20/pkg/apis/core/types.go

@@ -1,58 +1,4 @@
 ---
-title: Controller Manager 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Controller Manager 故障排查指南'
-summary: 'title: Controller Manager 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- kubelet
-- scheduler
-- controller-manager
-- prometheus
-- docker
-- pdb
-- statefulset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- Controller Manager 故障排查指南 是什么
-- 如何 Controller Manager 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Controller Manager 故障排查指南 故障排查
-- Controller Manager 故障排查指南 排障步骤
-trigger_keywords:
-- Controller
-- Manager
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Controller Manager 故障排查指南
 description: '# Controller Manager 故障排查指南'
 category: structural-troubleshooting
@@ -60,10 +6,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
+- etcd
+- kubelet
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - pdb
 - statefulset
 - daemonset
@@ -87,16 +33,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Controller Manager 故障排查指南
 
@@ -639,9 +586,6 @@ Node Controller 负责在节点 NotReady 时驱逐 Pod。
 
 #### 3.1.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：检查启动失败原因
@@ -693,9 +637,6 @@ curl -k https://127.0.0.1:10257/healthz
 
 #### 3.2.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
@@ -706,7 +647,7 @@ kubectl get rs -A -o wide
 kubectl describe deployment <name> -n <namespace>
 
 # 步骤 3：查看 CM 日志中的相关错误
-journalctl -u kube-controller-manager | grep -i "deployment|replicaset" | tail -50
+journalctl -u kube-controller-manager | grep -i "deployment\|replicaset" | tail -50
 
 # 步骤 4：检查 API 请求是否被限流
 curl -k https://127.0.0.1:10257/metrics | grep rest_client_requests_total
@@ -744,11 +685,6 @@ kubectl rollout status deployment <name> -n <namespace>
 ### 3.3 Endpoints 控制器异常
 
 #### 3.3.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -803,9 +739,6 @@ kubectl get endpoints <service-name>
 ### 3.4 Node Controller 异常
 
 #### 3.4.1 解决步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl cordon`：标记节点不可调度
 
 > **🔴 高风险操作警告**
 >
@@ -869,9 +802,6 @@ kubectl get nodes
 
 #### 3.5.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认问题
@@ -920,9 +850,6 @@ kubectl get all -A | grep <namespace>
 ### 3.6 PersistentVolume Controller 异常
 
 #### 3.6.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1352,15 +1279,11 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 #### ⚡ 应急措施
 1. **手动触发 Pod 重建**：
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-
    ```bash
    # 立即删除问题节点上的 Pod（不等待自动驱逐）
    kubectl get pods -A --field-selector spec.nodeName=node-worker-05 -o json | \
      jq -r '.items[] | "\(.metadata.namespace)/\(.metadata.name)"' | \
-     xargs -I {} kubectl delete pod {} --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
+     xargs -I {} kubectl delete pod {} --grace-period=0 --force
    
    # 验证 Pod 在新节点启动
    kubectl get pods -n production -l app=myapp -o wide
@@ -1385,10 +1308,6 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
    ```
 
 3. **验证新配置**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-
    ```bash
    # 模拟节点问题（在测试环境）
    kubectl drain test-node --ignore-daemonsets --delete-emptydir-data
@@ -1505,20 +1424,8 @@ kube-controller-manager --controllers=* --help 2>&1 | grep -A100 "controllers"
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

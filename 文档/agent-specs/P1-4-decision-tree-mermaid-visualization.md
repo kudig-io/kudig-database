@@ -649,7 +649,7 @@ flowchart TD
 
 **关联文档**:
 - [故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill
-- [故障诊断/topic-structural-trouble-shooting/](../故障诊断/高级排障/) — 63 篇问题排查文档
+- [故障诊断/高级排障/structural-](../故障诊断/高级排障/) — 63 篇问题排查文档
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)
 

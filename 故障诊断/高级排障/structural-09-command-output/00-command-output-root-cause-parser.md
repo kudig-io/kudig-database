@@ -1,70 +1,14 @@
 ---
-title: Kubernetes 命令输出 → 根因解析语料库 [topic-structural-trouble-shooting]
-description: 'title: Kubernetes 命令输出 → 根因解析语料库'
-summary: 'title: Kubernetes 命令输出 → 根因解析语料库'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- scheduler
-- envoy
-- cilium
-- flannel
-- calico
-- coredns
-- containerd
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 1h
-intent_queries:
-- Kubernetes 命令输出 → 根因解析语料库 是什么
-- 如何 Kubernetes 命令输出 → 根因解析语料库
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Kubernetes 命令输出 → 根因解析语料库 故障排查
-- Kubernetes 命令输出 → 根因解析语料库 排障步骤
-trigger_keywords:
-- Kubernetes
-- 命令输出
-- 根因解析语料库
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- cilium-basics
-- cni-basics
-- redis-basics
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Kubernetes|Kubernetes]] 命令输出 → 根因解析语料库
+title: Kubernetes 命令输出 → 根因解析语料库
 description: '# Kubernetes 命令输出 → 根因解析语料库'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Envoy|envoy]]
+- envoy
 - cilium
 - flannel
 - calico
@@ -89,16 +33,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- cilium-basics
+- cni-basics
+- redis-basics
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Kubernetes 命令输出 → 根因解析语料库
 
@@ -651,7 +598,7 @@ output_pattern:
         next_step: "检查 DATABASE_URL 环境变量和数据库服务状态"
 ```
 
-### 2.4 NGINX/Envoy 层错误
+### 2.4 [[实体/envoy|Envoy]] 层错误
 
 ```yaml
 output_pattern:
@@ -981,7 +928,6 @@ output_pattern:
       - cause: "kubelet 没有正确配置 metrics 端点"
         indicators: ["metrics not available" + APIService unavailable"]
         next_step: "检查 kubelet 配置 --authentication-webhook 和 metrics 端口"
-
 ```
 
 ---
@@ -1330,7 +1276,6 @@ output_pattern:
     severity: P0
     status: "normal"
     note: "如 Allowed disruptions 为 0，说明 PDB 保护了所有 Pod，驱逐将被阻止"
-
 ```
 
 ---
@@ -1456,7 +1401,6 @@ output_pattern:
       - cause: "K8s 1.28+ 废弃了 --to-revision 参数"
         indicators: ["cannot specify revision"]
         next_step: "使用 kubectl rollout history 查看各 revision，再通过 apply 或 set image 回退到指定版本"
-
 ```
 
 ---
@@ -1842,27 +1786,10 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - 故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md
-  - 故障诊断/topic-fta/list/pod-fta.md
-  - 故障诊断/05-pod-pending-diagnosis.md
+  - domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md
+  - domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
+  - domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md
 ---
-```
-
-## Related
-
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[log|log]]
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-
-## See Also
-
-- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[故障诊断/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
-- [[故障诊断/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-
 ```
 
 <!-- risk-assessed -->

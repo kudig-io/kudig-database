@@ -1,58 +1,4 @@
 ---
-title: 存储 I/O 性能故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 存储 I/O 性能故障排查指南'
-summary: 'title: 存储 I/O 性能故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- storage
-- performance
-- kubelet
-- scheduler
-- prometheus
-- docker
-- mysql
-- postgresql
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 存储 I/O 性能故障排查指南 是什么
-- 如何 存储 I/O 性能故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 存储 I/O 性能故障排查指南 故障排查
-- 存储 I/O 性能故障排查指南 排障步骤
-trigger_keywords:
-- 存储
-- 性能故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- mysql-basics
-- logging-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 存储 I/O 性能故障排查指南
 description: '# 存储 I/O 性能故障排查指南'
 category: structural-troubleshooting
@@ -60,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - mysql
 - postgresql
 - elasticsearch
@@ -86,20 +32,22 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- mysql-basics
+- logging-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 存储 I/O 性能故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
 
 ---
 
@@ -159,9 +107,6 @@ k8s_versions:
 | **监控数据写入丢失** | Prometheus `wal truncation` 失败 | TSDB 存储磁盘 I/O 不足 | 为 Prometheus 配置独立的高性能磁盘 |
 
 ### 1.2 报错查看方式汇总
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -290,7 +235,7 @@ echo ""
 echo "5. I/O 调度器配置:"
 for disk in $(lsblk -d -n -o NAME | grep -E "^sd|^nvme|^vd"); do
   if [ -f /sys/block/$disk/queue/scheduler ]; then
-    SCHEDULER=$(cat /sys/block/$disk/queue/scheduler | grep -oP '\[\K[^]]+')
+    SCHEDULER=$(cat /sys/block/$disk/queue/scheduler | grep -oP '\[\K[^\]]+')
     READ_AHEAD=$(cat /sys/block/$disk/queue/read_ahead_kb)
     NR_REQUESTS=$(cat /sys/block/$disk/queue/nr_requests)
     echo "  $disk: scheduler=$SCHEDULER, read_ahead=${READ_AHEAD}KB, nr_requests=$NR_REQUESTS"
@@ -526,7 +471,7 @@ if [ "$FS_TYPE" = "xfs" ]; then
 elif [ "$FS_TYPE" = "ext4" ]; then
   echo "1. ext4 文件系统调优:"
   # 关闭日志（仅适用于可重建的数据，如缓存）
-  # tune2fs -O ^has_journal /dev/$DISK
+  # tune2fs -O ^has_journal /dev/$DISK  # ⚠️ 谨慎使用
   
   # 增加预留块百分比（默认 5%，对于大容量盘可减少）
   tune2fs -m 1 /dev/$DISK
@@ -568,7 +513,7 @@ echo "  ✓ dirty_ratio=5%, dirty_background_ratio=2%"
 # 5. 验证调优结果
 echo ""
 echo "5. 调优结果验证:"
-echo "  调度器: $(cat /sys/block/$DISK/queue/scheduler | grep -oP '\[\K[^]]+')"
+echo "  调度器: $(cat /sys/block/$DISK/queue/scheduler | grep -oP '\[\K[^\]]+')"
 echo "  read_ahead: $(cat /sys/block/$DISK/queue/read_ahead_kb) KB"
 echo "  dirty_ratio: $(cat /proc/sys/vm/dirty_ratio)"
 ```
@@ -840,22 +785,9 @@ groups:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/sql.md|sql]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

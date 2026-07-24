@@ -1,58 +1,4 @@
 ---
-title: CRD 与 Operator 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: CRD 与 Operator 故障排查指南'
-summary: 'title: CRD 与 Operator 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- controller-manager
-- helm
-- docker
-- rbac
-- crd
-- operator
-- webhook
-- rag
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- CRD 与 Operator 故障排查指南 是什么
-- 如何 CRD 与 Operator 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- CRD 与 Operator 故障排查指南 故障排查
-- CRD 与 Operator 故障排查指南 排障步骤
-trigger_keywords:
-- CRD
-- Operator
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- tls-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: CRD 与 Operator 故障排查指南
 description: '# CRD 与 Operator 故障排查指南'
 category: structural-troubleshooting
@@ -61,7 +7,7 @@ tags:
 - troubleshooting
 - decision-tree
 - controller-manager
-- [[Helm|helm]]
+- helm
 - rbac
 - crd
 - operator
@@ -87,20 +33,21 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- helm-basics
+- tls-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # CRD 与 Operator 故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - v1.25+ CRD 验证表达式 (CEL) GA
@@ -114,7 +61,7 @@ k8s_versions:
 
 1. **CRD 是否存在**：`kubectl get crd | grep <kind>`，确认版本与资源可用。
 2. **Webhook 健康**：`kubectl get validatingwebhookconfigurations`，检查超时/证书问题。
-3. **Operator 存活**：`kubectl get [[Pods|pods]] -n <operator-ns>`，查看重启与日志错误。
+3. **Operator 存活**：`kubectl get pods -n <operator-ns>`，查看重启与日志错误。
 4. **Reconcile 失败**：`kubectl logs <operator-pod>`，检索 requeue/error。
 5. **Finalizer 卡住**：资源 Terminating 时查看 `metadata.finalizers`。
 6. **快速缓解**：
@@ -143,7 +90,7 @@ k8s_versions:
 │   │                Custom Resource Definitions                  │    │
 │   │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │    │
 │   │  │ certificates │  │ certificates │  │    your      │     │    │
-│   │  │ .cert-manager│  │ .k8s.io     │  │   custom     │     │    │
+│   │  │ .[[cert-manager|cert-manager]]│  │ .k8s.io     │  │   custom     │     │    │
 │   │  │    .io       │  │             │  │   resource   │     │    │
 │   │  └──────────────┘  └──────────────┘  └──────────────┘     │    │
 │   └────────────────────────────────────────────────────────────┘    │
@@ -246,9 +193,6 @@ Reconcile 循环详解:
 ## 排查方法与步骤
 
 ### 排查决策树
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -458,9 +402,6 @@ kubectl logs -n <webhook-namespace> <webhook-pod>
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 确认 CRD 是否存在
@@ -499,9 +440,6 @@ spec:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 分析拒绝原因
@@ -524,10 +462,6 @@ kubectl apply -f <fixed-cr.yaml>
 ```
 **临时禁用 Webhook（紧急情况）**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ⚠️ 警告：这会跳过所有验证，仅在紧急情况使用
@@ -547,14 +481,10 @@ kubectl delete validatingwebhookconfiguration <name>
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 查看 Operator 日志定位错误
-kubectl logs -n <operator-ns> <operator-pod> -f | grep -i "error|reconcile"
+kubectl logs -n <operator-ns> <operator-pod> -f | grep -i "error\|reconcile"
 
 # 步骤 2: 常见 Reconcile 错误分析
 
@@ -585,9 +515,6 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -600,7 +527,7 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 ``` bash
 # 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 步骤 1: 识别缺失的权限
-kubectl logs -n <operator-ns> <operator-pod> | grep -i "forbidden|cannot"
+kubectl logs -n <operator-ns> <operator-pod> | grep -i "forbidden\|cannot"
 # 示例输出: cannot create deployments.apps in namespace "xxx"
 
 # 步骤 2: 检查当前 ClusterRole
@@ -638,9 +565,6 @@ rules:
   verbs: ["create", "patch"]
 ```
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 4: 重启 Operator 使新权限生效
@@ -652,9 +576,6 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-namespace>
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查 Finalizers
@@ -664,7 +585,7 @@ kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.finali
 kubectl get <resource-type> <name> -n <namespace> -o jsonpath='{.metadata.deletionTimestamp}'
 
 # 步骤 3: 检查 Operator 是否在处理 Finalizer
-kubectl logs -n <operator-ns> <operator-pod> | grep -i "finalizer|cleanup"
+kubectl logs -n <operator-ns> <operator-pod> | grep -i "finalizer\|cleanup"
 
 # 步骤 4: 如果 Operator 正常但清理失败，检查日志找出原因
 # 常见原因:
@@ -688,9 +609,6 @@ kubectl patch <resource-type> <name> -n <namespace> --type='json' \
 **问题现象**：Operator Pod CrashLoopBackOff 或一直 Pending。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -726,9 +644,6 @@ kubectl rollout restart deployment <operator-deployment> -n <operator-ns>
 **问题现象**：CRD 版本升级后，旧版本 CR 不兼容。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -798,10 +713,6 @@ spec:
 **问题现象**：删除 namespace 时卡在 Terminating 状态，因为包含有 Finalizer 的 CR。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -915,20 +826,7 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/helm.md|helm]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

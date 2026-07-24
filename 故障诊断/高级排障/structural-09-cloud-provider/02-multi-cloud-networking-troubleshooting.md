@@ -1,69 +1,13 @@
 ---
-title: 多云/混合云网络故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 多云/混合云[[技能/ts-networking.md|ts-networking]]指南'
-summary: 'title: 多云/混合云[[技能/ts-networking.md|ts-networking]]指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- networking
-- prometheus
-- istio
-- cilium
-- calico
-- coredns
-- docker
-- opa
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 多云/混合云网络故障排查指南 是什么
-- 如何 多云/混合云网络故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 多云/混合云网络故障排查指南 故障排查
-- 多云/混合云网络故障排查指南 排障步骤
-trigger_keywords:
-- 多云
-- 混合云网络故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- cilium-basics
-- cni-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: 多云/混合云networking.md|ts-networking]]指南
+title: 多云/混合云网络故障排查指南
 description: '# 多云/混合云网络故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- prometheus
+- istio
 - cilium
 - calico
 - coredns
@@ -88,20 +32,24 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
+- prometheus-basics
+- cilium-basics
+- cni-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 多云/混合云网络故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
+> **适用版本**: [[实体/kubernetes|kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级
 
 ---
 
@@ -535,9 +483,6 @@ data:
 
 #### 方案二：Linkerd 多集群服务镜像
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -737,7 +682,6 @@ groups:
     annotations:
       summary: "Istio 远程集群连接断开"
       description: "Istiod 无法连接到远程集群 {{ $labels.cluster }}"
-
 ```
 
 ### 3.6 最佳实践
@@ -790,20 +734,5 @@ groups:
 2. 为控制平面网络配置更高的 QoS 优先级
 3. 在 DestinationRule 中配置更宽容的连接池设置
 
-## Related
-
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-
-## See Also
-
-- [[故障诊断/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

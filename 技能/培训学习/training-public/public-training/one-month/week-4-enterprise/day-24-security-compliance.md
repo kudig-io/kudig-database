@@ -76,7 +76,7 @@ related_domains:
   - 安全
 related_topics:
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[平台工程/代码分析/functions-cluster-create/16-security.md|16-security]]-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[平台工程/代码分析/cluster-create/16-security.md|16-security]]-2
   - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 

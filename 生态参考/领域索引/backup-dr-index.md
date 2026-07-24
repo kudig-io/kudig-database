@@ -86,8 +86,8 @@ prerequisites:
 
 ### etcd 备份
 
-- [[平台工程/代码分析/functions-cluster-create/07-etcd.md|etcd 集群初始化细节]]
-- [[平台工程/代码分析/functions-cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
+- [[平台工程/代码分析/cluster-create/07-etcd.md|etcd 集群初始化细节]]
+- [[平台工程/代码分析/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
 - [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
 - [[故障诊断/FTA故障树/list/etcd-fta.md|etcd 异常 FTA 树]]
 

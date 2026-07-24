@@ -1588,7 +1588,7 @@ Events:
 | Kubernetes 调度器架构 | `domain-4-workloads-scheduling/` | 调度器工作原理：过滤（Filter）→ 打分（Score）→ 绑定（Bind）流程 |
 | FTA 调度故障树 | `故障诊断/topic-fta/list/scheduler-fta.md` | 调度器问题的完整 FTA 分析模型，含概率和因果链 |
 | FTA Pod 故障树 | `故障诊断/topic-fta/list/pod-fta.md` | Pod 生命周期中所有可能的问题点 |
-| 结构化故障排查 — 调度问题 | `故障诊断/topic-structural-trouble-shooting/` | 人类可读的深度排查指南 |
+| 结构化故障排查 — 调度问题 | `故障诊断/高级排障/structural-` | 人类可读的深度排查指南 |
 | 通用故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法 |
 | 节点资源管理 | `domain-4-workloads-scheduling/` | Node allocatable、eviction threshold、resource requests/limits 的关系 |
 | 存储体系 | `存储/` | PVC/PV/StorageClass 的工作机制和常见问题 |

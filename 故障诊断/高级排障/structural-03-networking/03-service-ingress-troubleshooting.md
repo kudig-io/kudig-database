@@ -1,60 +1,5 @@
 ---
-title: Service 与 Ingress 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Service 与 Ingress 故障排查指南'
-summary: 'title: Service 与 Ingress 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- scheduler
-- controller-manager
-- prometheus
-- istio
-- docker
-- hpa
-- daemonset
-- job
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 45min
-intent_queries:
-- Service 与 Ingress 故障排查指南 是什么
-- 如何 Service 与 Ingress 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Service 与 Ingress 故障排查指南 故障排查
-- Service 与 Ingress 故障排查指南 排障步骤
-trigger_keywords:
-- Service
-- Ingress
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- tls-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Service|Service]] 与 [[Ingress|Ingress]] 故障排查指南
+title: Service 与 Ingress 故障排查指南
 description: '# Service 与 Ingress 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -63,7 +8,7 @@ tags:
 - decision-tree
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - istio
 - hpa
 - daemonset
@@ -88,16 +33,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
+- prometheus-basics
+- tls-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Service 与 Ingress 故障排查指南
 
@@ -584,10 +531,6 @@ spec:
 ```
 
 **证书更新流程**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl create secret tls tls-secret --cert=new.crt --key=new.key --dry-run=client -o yaml | kubectl apply -f -
@@ -772,10 +715,6 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 
 #### 3.1.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 selector 匹配
@@ -817,9 +756,6 @@ kubectl get endpoints <service-name>
 ### 3.2 LoadBalancer External IP Pending
 
 #### 3.2.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -863,10 +799,6 @@ kubectl get svc <service-name>
 
 #### 3.3.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查后端 Service
@@ -907,10 +839,6 @@ curl -v http://<ingress-ip> -H "Host: <hostname>"
 
 #### 3.4.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：检查 TLS Secret 存在
@@ -949,7 +877,7 @@ openssl s_client -connect <ingress-ip>:443 -servername <hostname>
 2. 证书更新会立即生效
 3. 证书域名必须匹配 Ingress host
 4. 定期检查证书有效期
-5. 考虑使用 cert-manager 自动管理
+5. 考虑使用 [[cert-manager|cert-manager]] 自动管理
 ```
 
 ---
@@ -1054,10 +982,6 @@ dmesg | grep -i ipvs
 # - 30% 节点因内核版本过低不支持 IPVS（CentOS 7.4，kernel 3.10.0-693）
 ```
 **应急措施**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 > **🔴 高风险操作警告**
 >
@@ -1203,12 +1127,6 @@ EOF
 
 **渐进式升级策略**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -1325,12 +1243,6 @@ kubectl logs -n cert-manager -l app=cert-manager --tail=100 | grep -i error
 # - 证书到期后未触发告警
 ```
 **应急措施**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1638,10 +1550,6 @@ kubectl get pods -l app=web -o wide | awk '{print $7}' | sort | uniq -c
 ```
 **应急措施**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 A：切换回 Cluster 模式（立即生效）
@@ -1842,26 +1750,14 @@ EOF
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/linux.md|linux]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
-- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

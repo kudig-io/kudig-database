@@ -1,56 +1,4 @@
 ---
-title: 节点问题专项排查指南 [topic-structural-trouble-shooting]
-description: 'title: 节点问题专项排查指南'
-summary: 'title: 节点问题专项排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- calico
-- containerd
-- docker
-- pdb
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 节点问题专项排查指南 是什么
-- 如何 节点问题专项排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 节点问题专项排查指南 故障排查
-- 节点问题专项排查指南 排障步骤
-trigger_keywords:
-- 节点问题专项排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- cni-basics
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 节点问题专项排查指南
 description: '# 节点问题专项排查指南'
 category: structural-troubleshooting
@@ -59,11 +7,11 @@ tags:
 - troubleshooting
 - decision-tree
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
 - calico
-- [[containerd|containerd]]
+- containerd
 - docker
 last_updated: 2026-05
 difficulty: advanced
@@ -83,16 +31,16 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- cni-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 节点问题专项排查指南
 
@@ -317,11 +265,11 @@ ps aux | wc -l
 cat /proc/sys/kernel/pid_max
 
 # 检查 OOM 事件
-dmesg | grep -i "oom|out of memory"
+dmesg | grep -i "oom\|out of memory"
 journalctl -k | grep -i oom
 
 # kubelet 资源预留配置
-cat /var/lib/kubelet/config.yaml | grep -A10 "eviction|system"
+cat /var/lib/kubelet/config.yaml | grep -A10 "eviction\|system"
 ```
 #### 2.2.3 调度相关检查
 
@@ -337,7 +285,7 @@ kubectl describe node <node-name> | grep -A10 Taints
 kubectl get node <node-name> -o jsonpath='{.metadata.labels}' | jq
 
 # 检查节点资源容量和可分配
-kubectl describe node <node-name> | grep -A15 "Capacity:|Allocatable:"
+kubectl describe node <node-name> | grep -A15 "Capacity:\|Allocatable:"
 
 # 检查 Pod 的 nodeSelector
 kubectl get pod <pod-name> -o jsonpath='{.spec.nodeSelector}'
@@ -381,10 +329,6 @@ cat /var/lib/kubelet/config.yaml | grep -A20 eviction
 
 **解决步骤：**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -419,7 +363,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
 df -h
 # 清理空间
 crictl rmi --prune
-docker system prune -af  # 如果使用 Docker  # ⚠️ 强制清理，可能杀运行中容器
+docker system prune -af  # 如果使用 Docker
 journalctl --vacuum-size=500M
 
 # 4. 重启 kubelet
@@ -431,10 +375,6 @@ kubectl get node <node-name> -w
 #### 场景 2：网络不可达
 
 **解决步骤：**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -468,11 +408,6 @@ Conditions:
   MemoryPressure   True
 ```
 **解决步骤：**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -524,9 +459,6 @@ systemctl restart kubelet
 
 **解决步骤：**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `docker prune/rm -f`：强制清理镜像/容器/卷，运行中容器会被杀
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查磁盘使用
@@ -547,7 +479,7 @@ truncate -s 0 /var/log/containers/*.log
 # 清理未使用的镜像
 crictl rmi --prune
 # 或
-docker system prune -af  # ⚠️ 强制清理，可能杀运行中容器
+docker system prune -af
 
 # 清理已完成的容器
 crictl rm $(crictl ps -a -q --state exited)
@@ -605,10 +537,6 @@ Events:
 
 **解决步骤：**
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl taint nodes`：变更污点影响 Pod 调度
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -655,10 +583,6 @@ Events:
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -713,10 +637,6 @@ kubectl get nodes -L topology.kubernetes.io/zone
 
 #### 场景 1：安全地维护节点
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -749,10 +669,6 @@ kubectl get pods -o wide | grep <node>
 ```
 #### 场景 2：处理节点问题
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -771,7 +687,7 @@ kubectl delete node <node>
 kubectl get pods -o wide
 
 # 3. 强制删除卡在问题节点的 Pod
-kubectl delete pod <pod-name> --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
+kubectl delete pod <pod-name> --force --grace-period=0
 
 # 4. 如果节点恢复，重新加入集群
 kubeadm token create --print-join-command
@@ -888,7 +804,6 @@ echo -e "\n--- Evicted Pods ---"
 kubectl get pods --all-namespaces --field-selector=status.phase=Failed | grep Evicted | head -10
 
 echo -e "\n=== Check Complete ==="
-
 ```
 ---
 
@@ -908,12 +823,6 @@ echo -e "\n=== Check Complete ==="
 ## 附录
 
 ### 常用命令速查
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `kubectl taint nodes`：变更污点影响 Pod 调度
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 > **🔴 高风险操作警告**
 >
@@ -951,23 +860,14 @@ kubectl get pods --field-selector spec.nodeName=<node>
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [Scheduler 故障排查](../[[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
-- [资源配额故障排查](../[[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
-- [Pod 故障排查](../[[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [Scheduler 故障排查](../01-control-plane/03-scheduler-troubleshooting.md)
+- [资源配额故障排查](../07-resources-scheduling/01-resources-quota-troubleshooting.md)
+- [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

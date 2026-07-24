@@ -1,59 +1,6 @@
 ---
-title: nginx-ingress-controller 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: nginx-ingress-controller 故障排查指南'
-summary: 'title: nginx-ingress-controller 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- prometheus
-- flannel
-- docker
-- ingress
-- gateway
-- rbac
-- networkpolicy
-- wasm
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- nginx-ingress-controller 故障排查指南 是什么
-- 如何 nginx-ingress-controller 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- nginx-ingress-controller 故障排查指南 故障排查
-- nginx-ingress-controller 故障排查指南 排障步骤
-trigger_keywords:
-- nginx-ingress-controller
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: nginx-ingress-controller 故障排查指南
-description: nginx-ingress-controller 故障排查指南，覆盖 [[Ingress|Ingress]] 配置、502/503 错误、TLS 证书、upstream
-  超时等问题场景
+description: nginx-ingress-controller 故障排查指南，覆盖 Ingress 配置、502/503 错误、TLS 证书、upstream 超时等问题场景
 category: structural-troubleshooting
 tags:
 - k8s
@@ -66,7 +13,6 @@ tags:
 - 502
 - 503
 - upstream
-- rag
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -88,16 +34,17 @@ trigger_keywords:
 - 502
 - 503
 - TLS
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # nginx-ingress-controller 故障排查指南
 
 > **适用版本**: nginx-ingress v1.9+ | **最后更新**: 2026-05 | **难度**: 高级
@@ -114,9 +61,6 @@ k8s_versions:
 ---
 
 ## 10 分钟快速诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -187,9 +131,6 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- nginx -t
 **现象**: 客户端请求返回 502
 
 **排查步骤**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -297,9 +238,6 @@ kubectl get deployment -n ingress-nginx -o yaml | grep -A5 "args"
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Secret 是否存在且正确
@@ -337,9 +275,6 @@ openssl s_client -connect <ingress-ip>:443 -tls1_2
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 annotation 是否正确配置
@@ -373,9 +308,6 @@ curl -v http://<ingress-ip>/foo/bar -H "Host: <host>"
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 upstream keepalive 配置
@@ -408,9 +340,6 @@ kubectl exec -it <nginx-pod> -n ingress-nginx -- \
 **现象**: Prometheus 无法抓取 nginx-ingress 指标
 
 **排查步骤**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -520,27 +449,15 @@ data:
 
 ## 相关文档
 
-- [nginx-ingress 完全指南](./网络/21-nginx-ingress-complete-guide.md)
-- [nginx-ingress 迁移指南](./网络/09-nginx-ingress-migration-guide.md)
-- [nginx-ingress FTA 故障树](./故障诊断/FTA故障树/list/nginx-ingress-fta.md)
-- [nginx-ingress 全局索引](./生态参考/领域索引/nginx-ingress-index.md)
-- [Ingress 通用故障排查](./[[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [nginx-ingress 完全指南](./domain-03-networking-traffic/21-nginx-ingress-complete-guide.md)
+- [nginx-ingress 迁移指南](./domain-03-networking-traffic/09-nginx-ingress-migration-guide.md)
+- [nginx-ingress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md)
+- [nginx-ingress 全局索引](./domain-19-landscape-references/topic-index/nginx-ingress-index.md)
+- [Ingress 通用故障排查](./03-service-ingress-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[index|index]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

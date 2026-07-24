@@ -33,7 +33,7 @@ last_updated: 2026-07
 - 故障诊断/topic-multi-fault-scenarios/
 - 故障诊断/topic-qa-corpus/
 - 故障诊断/topic-skills/
-- 故障诊断/topic-structural-trouble-shooting/
+- 故障诊断/高级排障/structural-
 
 ## 文档
 

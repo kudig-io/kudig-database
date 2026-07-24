@@ -1,56 +1,4 @@
 ---
-title: 集群运维与升级故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 集群运维与升级故障排查指南'
-summary: 'title: 集群运维与升级故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- helm
-- containerd
-- docker
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 集群运维与升级故障排查指南 是什么
-- 如何 集群运维与升级故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 集群运维与升级故障排查指南 故障排查
-- 集群运维与升级故障排查指南 排障步骤
-trigger_keywords:
-- 集群运维与升级故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 集群运维与升级故障排查指南
 description: '# 集群运维与升级故障排查指南'
 category: structural-troubleshooting
@@ -58,12 +6,12 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
-- [[containerd|containerd]]
+- containerd
 - pdb
 last_updated: 2026-05
 difficulty: advanced
@@ -83,22 +31,25 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 集群运维与升级故障排查指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
+
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
 
 > - v1.25+ 移除 PodSecurityPolicy，使用 PSA 替代
 > - v1.27+ 移除部分废弃 API (如 CSIStorageCapacity v1beta1)
@@ -130,11 +81,6 @@ k8s_versions:
 ## 问题现象与影响分析
 
 ### 集群升级架构与流程
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -387,9 +333,6 @@ kubectl top nodes
 ```
 #### 控制平面升级
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -433,12 +376,6 @@ systemctl restart kubelet
 ```
 #### 节点维护
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -470,8 +407,8 @@ kubectl uncordon <node-name>
 kubectl delete node <node-name>
 
 # 在节点上重置 (用于重新加入)
-kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
-rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+kubeadm reset
+rm -rf /etc/kubernetes/ /var/lib/kubelet/ /var/lib/etcd/
 
 # 生成加入 token
 kubeadm token create --print-join-command
@@ -480,9 +417,6 @@ kubeadm token create --print-join-command
 kubeadm join <api-server>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 #### etcd 备份恢复
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -538,9 +472,6 @@ kubectl get nodes
 
 #### 控制平面回滚
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -569,9 +500,6 @@ systemctl restart kubelet
 # 参考 etcd 恢复步骤
 ```
 #### 使用 etcd 备份完整回滚
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -614,11 +542,6 @@ kubectl get pdb -A
 kubectl get pdb -A -o jsonpath='{range .items[*]}{.metadata.name}: {.status.disruptionsAllowed}{"\n"}{end}'
 ```
 #### 解决方案
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -671,9 +594,6 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 ```
 
 #### kubelet 证书续期
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -803,11 +723,6 @@ echo "=== 检查完成 ==="
 
 ### 常用命令速查
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -841,7 +756,7 @@ kubeadm certs renew all
 # etcd 备份
 etcdctl snapshot save /path/to/backup.db
 etcdctl snapshot status /path/to/backup.db
-etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ 覆盖 etcd 数据，集群状态回退
+etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd
 
 # Token 管理
 kubeadm token list
@@ -858,21 +773,9 @@ kubeadm token create --print-join-command
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

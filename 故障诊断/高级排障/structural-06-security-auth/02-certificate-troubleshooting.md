@@ -1,67 +1,14 @@
 ---
-title: Kubernetes 证书故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Kubernetes 证书故障排查指南'
-summary: 'title: Kubernetes 证书故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- docker
-- gateway
-- rbac
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Kubernetes 证书故障排查指南 是什么
-- 如何 Kubernetes 证书故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Kubernetes 证书故障排查指南 故障排查
-- Kubernetes 证书故障排查指南 排障步骤
-trigger_keywords:
-- Kubernetes
-- 证书故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- etcd-basics
-- tls-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Kubernetes|Kubernetes]] 证书故障排查指南
+title: Kubernetes 证书故障排查指南
 description: '# Kubernetes 证书故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
 - gateway
@@ -85,20 +32,21 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
+- tls-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Kubernetes 证书故障排查指南
 
-> **适用版本**: Kubernetes v1.25 - v1.32, cert-manager v1.12+ | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32, [[cert-manager|cert-manager]] v1.12+ | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - v1.25+ 移除内置 ServiceAccount 令牌自动挂载
@@ -344,9 +292,6 @@ apiserver                  Jan 15, 2024 08:30 UTC   -5d     # 已过期
 
 **解决步骤：**
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -385,9 +330,6 @@ kubectl get pods -n kube-system
 ```
 #### 场景 2：单独更新特定证书
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -417,9 +359,6 @@ kubeadm certs renew admin.conf
 systemctl restart kubelet
 ```
 #### 场景 3：手动生成证书 (非 kubeadm 集群)
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -471,9 +410,6 @@ systemctl restart kube-apiserver
 - 高风险操作，建议在维护窗口执行
 
 **解决步骤：**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -556,10 +492,6 @@ node-1   NotReady   <none>   180d   v1.25.0
 ```
 **解决步骤：**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -575,7 +507,7 @@ node-1   NotReady   <none>   180d   v1.25.0
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -enddate
 
 # 2. 检查 kubelet 日志
-journalctl -u kubelet | grep -i "certificate|x509"
+journalctl -u kubelet | grep -i "certificate\|x509"
 
 # 3. 如果启用了证书轮换，重启 kubelet 应该自动申请新证书
 systemctl restart kubelet
@@ -589,14 +521,10 @@ kubectl certificate approve <csr-name>
 kubeadm token create --print-join-command
 
 # 在 worker 上重置并重新加入
-kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 #### 场景 2：启用 kubelet 证书自动轮换
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 > **🔴 高风险操作警告**
 >
@@ -652,9 +580,6 @@ transport: authentication handshake failed: x509: certificate has expired
 
 **解决步骤：**
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 1. 备份 etcd 数据
@@ -699,10 +624,6 @@ error: You must be logged in to the server (Unauthorized)
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 > **🔴 高风险操作警告**
 >
@@ -750,9 +671,6 @@ x509: certificate is valid for 10.96.0.1, not 192.168.1.100
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -925,22 +843,14 @@ kubectl certificate deny <csr>
 ### 相关文档
 
 - [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查](../[[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]].md)
-- [kubelet 故障排查](../[[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
-- [RBAC 故障排查](./[[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
+- [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
+- [kubelet 故障排查](../02-node-components/01-kubelet-troubleshooting.md)
+- [RBAC 故障排查](./01-rbac-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/领域索引/security-index.md|Security 安全知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
-- [[故障诊断/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

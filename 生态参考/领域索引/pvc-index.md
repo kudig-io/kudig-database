@@ -110,7 +110,7 @@ prerequisites:
 
 ### 功能操作
 
-- [[平台工程/代码分析/functions-cluster-create/22-storage-volumes.md|存储与卷管理]]
+- [[平台工程/代码分析/cluster-create/22-storage-volumes.md|存储与卷管理]]
 - [[平台工程/代码分析/functions-node-create/14-storage-node.md|节点存储]]
 
 ### 设计原则

@@ -989,7 +989,7 @@ BoltDB 是一个轻量级嵌入式 Key-Value 数据库, Terway 使用它存储�
 | [网络/38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解, 设计原则, 触发链路 |
 | [网络/02-cni-architecture-fundamentals.md](../网络/02-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
 | [网络/34-network-performance-tuning.md](../网络/34-network-performance-tuning.md) | 网络性能调优通用指南 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
 | [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 
 ---

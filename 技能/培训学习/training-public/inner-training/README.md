@@ -236,7 +236,7 @@ ACK/ACR 管控层 ──> ACK SDK/API ──> 控制台操作
 
 ### 故障排查体系
 - `../../故障诊断/` (42篇)
-- `../../故障诊断/topic-structural-trouble-shooting/README.md`
+- `../../故障诊断/高级排障/structural-README.md`
 
 ### 速查手册
 - `../../系统基础/topic-cheat-sheet/k8s.md`

@@ -191,7 +191,7 @@ bash scripts/verify-node.sh <node-name>
 | 诊断工作流详情 | [reference/diagnostic-workflow.md](./reference/diagnostic-workflow.md) |
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
 | 根因目录 | [reference/root-cause-catalog.md](./reference/root-cause-catalog.md) |
-| 结构化排查 | [故障诊断/topic-structural-trouble-shooting/](../../故障诊断/高级排障/) |
+| 结构化排查 | [故障诊断/高级排障/structural-](../../故障诊断/高级排障/) |
 | 单文件完整版 | [../01-node-notready.md](../01-node-notready.md) |
 
 ## Related

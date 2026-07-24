@@ -1,59 +1,4 @@
 ---
-title: Flannel 网络故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Flannel 网络故障排查指南'
-summary: 'title: Flannel 网络故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- kubelet
-- prometheus
-- cilium
-- flannel
-- calico
-- docker
-- daemonset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- Flannel 网络故障排查指南 是什么
-- 如何 Flannel 网络故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Flannel 网络故障排查指南 故障排查
-- Flannel 网络故障排查指南 排障步骤
-trigger_keywords:
-- Flannel
-- 网络故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Flannel 网络故障排查指南
 description: '# Flannel 网络故障排查指南'
 category: structural-troubleshooting
@@ -61,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- etcd
+- kubelet
+- prometheus
 - cilium
 - flannel
 - calico
@@ -87,16 +32,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Flannel 网络故障排查指南
 
@@ -236,7 +184,7 @@ kubectl get nodes -o json | jq -r '.items[] |
   "\(.metadata.name): \(.spec.podCIDR // "未分配")"'
 
 # 查看 flannel 子网分配记录
-kubectl logs -n kube-system -l app=flannel | grep -i "subnet|lease"
+kubectl logs -n kube-system -l app=flannel | grep -i "subnet\|lease"
 
 # 检查节点上的子网环境文件
 cat /run/flannel/subnet.env
@@ -252,11 +200,6 @@ cat /run/flannel/subnet.env
 - 多个集群使用相同的 Pod CIDR 且共享 etcd
 
 **修复**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1：清理 etcd 中的旧子网记录（使用 etcd 后端时）
@@ -340,10 +283,6 @@ tcpdump -i eth0 udp port 4789 -nn -e
 - VTEP MAC 冲突
 
 **修复 FDB**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 手动添加 FDB 条目（临时修复）
@@ -377,9 +316,6 @@ iptables -L -n -v | grep DROP
 
 #### 2.3.3 MTU 问题排查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 测试大包连通性
@@ -395,11 +331,6 @@ ip link show flannel.1 | grep mtu
 # 如 eth0 MTU = 1500，则 Pod MTU 应为 1450
 ```
 **修复 MTU**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -496,10 +427,6 @@ kubectl get pods -n kube-system | grep -E "flannel|calico"
 
 #### VXLAN → host-gw（同二层网络）
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -532,10 +459,6 @@ watch kubectl get pods -n kube-system -l app=flannel
 
 ### 3.2 子网分配冲突修复
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方法 1：重置所有子网（Kubernetes API 后端）
@@ -554,9 +477,6 @@ kubectl patch node <conflict-node> --type json -p '[{"op": "remove", "path": "/s
 kubectl delete pod -n kube-system -l app=flannel --field-selector spec.nodeName=<conflict-node>
 ```
 ### 3.3 CNI 配置恢复
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -774,20 +694,8 @@ fi
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[技能/ts-networking.md|ts-networking]]
-- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

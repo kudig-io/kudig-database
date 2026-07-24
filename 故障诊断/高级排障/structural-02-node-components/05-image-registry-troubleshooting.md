@@ -1,55 +1,4 @@
 ---
-title: 镜像与镜像仓库故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 镜像与镜像仓库故障排查指南'
-summary: 'title: 镜像与镜像仓库故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- containerd
-- cri-o
-- docker
-- harbor
-- daemonset
-- gpu
-- rag
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 镜像与镜像仓库故障排查指南 是什么
-- 如何 镜像与镜像仓库故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 镜像与镜像仓库故障排查指南 故障排查
-- 镜像与镜像仓库故障排查指南 排障步骤
-trigger_keywords:
-- 镜像与镜像仓库故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 镜像与镜像仓库故障排查指南
 description: '# 镜像与镜像仓库故障排查指南'
 category: structural-troubleshooting
@@ -57,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[containerd|containerd]]
+- kubelet
+- containerd
 - cri-o
 - docker
 - harbor
@@ -82,16 +31,15 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 镜像与镜像仓库故障排查指南
 
@@ -373,9 +321,6 @@ df -h /var/lib/containerd
 
 #### 场景 1：创建 imagePullSecret
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 从命令行创建
@@ -421,10 +366,6 @@ spec:
 
 #### 场景 3：为 ServiceAccount 配置默认 imagePullSecret
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方式 1: 使用 kubectl patch
@@ -445,9 +386,6 @@ EOF
 ### 3.2 网络和 TLS 问题
 
 #### 场景 1：私有仓库使用自签名证书
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -490,9 +428,6 @@ EOF
 ```
 #### 场景 2：配置镜像仓库代理/镜像
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -532,9 +467,6 @@ toomanyrequests: You have reached your pull rate limit
 
 **解决方案：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 使用认证账户 (提升限额)
@@ -572,10 +504,6 @@ spec:
 ```
 
 #### 场景 2：强制更新镜像
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -777,9 +705,6 @@ spec:
 
 ### 常用命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Pod 镜像检查
@@ -803,23 +728,14 @@ kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [容器运行时故障排查](./[[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]].md)
-- [ConfigMap/Secret 故障排查](../[[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]].md)
-- [Pod 故障排查](../[[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [容器运行时故障排查](./[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]].md)
+- [ConfigMap/Secret 故障排查](../05-workloads/06-configmap-secret-troubleshooting.md)
+- [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

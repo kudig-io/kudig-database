@@ -1,54 +1,4 @@
 ---
-title: Cluster Autoscaler 节点自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Cluster Autoscaler 节点自动扩缩容故障排查指南'
-summary: 'title: Cluster Autoscaler 节点自动扩缩容故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- docker
-- pdb
-- operator
-- gpu
-- rag
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Cluster Autoscaler 节点自动扩缩容故障排查指南 是什么
-- 如何 Cluster Autoscaler 节点自动扩缩容故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Cluster Autoscaler 节点自动扩缩容故障排查指南 故障排查
-- Cluster Autoscaler 节点自动扩缩容故障排查指南 排障步骤
-trigger_keywords:
-- Cluster
-- Autoscaler
-- 节点自动扩缩容故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Cluster Autoscaler 节点自动扩缩容故障排查指南
 description: '# Cluster Autoscaler 节点自动扩缩容故障排查指南'
 category: structural-troubleshooting
@@ -80,20 +30,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Cluster Autoscaler 节点自动扩缩容故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级
+> **适用版本**: Kubernetes v1.25 - v1.32, Cluster Autoscaler v1.25+ | **最后更新**: 2026-01 | **难度**: 高级
 >
 > **版本说明**:
 > - CA 版本需与 K8s 版本对应 (如 CA v1.30.x 对应 K8s v1.30.x)
@@ -105,7 +55,7 @@ k8s_versions:
 
 ## 0. 10 分钟快速诊断
 
-1. **CA 存活**：`kubectl get [[Pods|pods]] -n kube-system | grep cluster-autoscaler`。
+1. **CA 存活**：`kubectl get pods -n kube-system | grep cluster-autoscaler`。
 2. **Pending 原因**：`kubectl get pods -A --field-selector=status.phase=Pending`，确认是否资源不足。
 3. **节点组状态**：`kubectl get cm -n kube-system cluster-autoscaler-status -o yaml`，查看 scale up/down 记录。
 4. **云 API 错误**：查看 CA 日志中的 `authorization`/`quota`/`node group` 错误。
@@ -440,14 +390,14 @@ kubectl describe pod <pending-pod>
 # 如果原因是 Insufficient cpu/memory，CA 应该扩容
 
 # 步骤 4: 检查 CA 日志
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale up|unschedulable"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale up\|unschedulable"
 
 # 步骤 5: 检查节点组配置
 # 确认节点组最大值未达到上限
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "max size|target size"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "max size\|target size"
 
 # 步骤 6: 验证云 API 权限
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error|failed|unauthorized"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|failed\|unauthorized"
 ```
 **常见原因与解决**：
 
@@ -509,7 +459,7 @@ data:
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 3: 使用 nodeSelector 或 nodeAffinity 精确控制
-kubectl get pod <pod> -o yaml | grep -A10 "nodeSelector|affinity"
+kubectl get pod <pod> -o yaml | grep -A10 "nodeSelector\|affinity"
 ```
 **Pod 节点亲和性示例**：
 
@@ -534,9 +484,6 @@ spec:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查节点利用率
@@ -544,7 +491,7 @@ kubectl top nodes
 # 默认缩容阈值是 50%
 
 # 步骤 2: 检查是否有阻止缩容的原因
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale down|cannot|blocking"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "scale down\|cannot\|blocking"
 
 # 步骤 3: 检查节点上的 Pod
 kubectl get pods -A -o wide --field-selector spec.nodeName=<node>
@@ -588,7 +535,7 @@ metadata:
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 检查 CA 日志中的错误
-kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error|forbidden|unauthorized"
+kubectl logs -n kube-system -l app=cluster-autoscaler | grep -i "error\|forbidden\|unauthorized"
 
 # 步骤 2: 根据云平台检查权限
 ```
@@ -829,7 +776,7 @@ echo -e "\n=== 节点组信息 ==="
 kubectl get nodes -o custom-columns=NAME:.metadata.name,INSTANCE-TYPE:.metadata.labels."node\.kubernetes\.io/instance-type"
 
 echo -e "\n=== CA 最近日志 ==="
-kubectl logs -n kube-system -l app=cluster-autoscaler --tail=20 2>/dev/null | grep -i "scale|error" | tail -10
+kubectl logs -n kube-system -l app=cluster-autoscaler --tail=20 2>/dev/null | grep -i "scale\|error" | tail -10
 
 echo -e "\n=== 阻止缩容的节点 ==="
 kubectl get nodes -o json | jq -r '.items[] | select(.metadata.annotations["cluster-autoscaler.kubernetes.io/scale-down-disabled"] == "true") | .metadata.name'
@@ -876,21 +823,9 @@ containers:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
-- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

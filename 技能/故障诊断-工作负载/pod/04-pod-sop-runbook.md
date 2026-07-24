@@ -13,7 +13,7 @@ tags:
 - escalation
 - evidence
 sources:
-- 故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md
+- 故障诊断/高级排障/structural-symptom-mapping-layer.md
 - 故障诊断/高级排障/43-symptom-sop-mapping.md
 - 故障诊断/FEBM方法论/08-febm-production-quick-start.md
 - 概念/Production Troubleshooting Playbook.md

@@ -1,56 +1,4 @@
 ---
-title: 云厂商集成故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 云厂商集成故障排查指南'
-summary: 'title: 云厂商集成故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- controller-manager
-- prometheus
-- docker
-- opa
-- daemonset
-- job
-- ingress
-- gateway
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- 云厂商集成故障排查指南 是什么
-- 如何 云厂商集成故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 云厂商集成故障排查指南 故障排查
-- 云厂商集成故障排查指南 排障步骤
-trigger_keywords:
-- 云厂商集成故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 云厂商集成故障排查指南
 description: '# 云厂商集成故障排查指南'
 category: structural-troubleshooting
@@ -59,9 +7,9 @@ tags:
 - troubleshooting
 - decision-tree
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - opa
-- [[DaemonSet|daemonset]]
+- daemonset
 - job
 - ingress
 - gateway
@@ -83,16 +31,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 云厂商集成故障排查指南
 
@@ -657,10 +606,6 @@ spec:
 
 #### 方案一：Workload Identity 配置
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -995,10 +940,6 @@ spec:
 
 ### 集成验证脚本
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -1189,7 +1130,7 @@ SECURITY_REPORT="/var/log/kubernetes/cloud-security-report-$(date +%Y%m%d).log"
   echo "1. 凭证安全检查:"
   
   # 检查硬编码凭证
-  if grep -r "access_key|secret_key" /etc/kubernetes/ 2>/dev/null; then
+  if grep -r "access_key\|secret_key" /etc/kubernetes/ 2>/dev/null; then
     echo "⚠ 发现可能的硬编码凭证"
   else
     echo "✓ 未发现硬编码凭证"
@@ -1250,19 +1191,7 @@ echo "安全检查报告已生成: $SECURITY_REPORT"
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
-- [[故障诊断/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

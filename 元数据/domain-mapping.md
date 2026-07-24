@@ -73,7 +73,7 @@ last_updated: '2026-07-10'
 | 事件响应归一 | `安全/07-incident-response`（5 篇） | `生产运维/事件响应/` |
 | eBPF 归一 | `专项技术/05-ebpf-programming`（4 篇） | `网络/eBPF/编程实践/` |
 | 灾后演练并入 DR | `可靠性/09-disaster-recovery-playbooks`（11 篇） | `可靠性/灾难恢复/` |
-| 结构化排障拆分 | `故障诊断/topic-structural-trouble-shooting/` | `故障诊断/资源排障/` + `故障诊断/高级排障/` |
+| 结构化排障拆分 | `故障诊断/高级排障/structural-` | `故障诊断/资源排障/` + `故障诊断/高级排障/` |
 | 其他云聚合 | `云厂商/09..14` 六个单文件目录 | `云厂商/其他云/` |
 | 空壳 topic 删除 | `工作负载/topic-functions`（内容转 `平台工程/代码分析/`）、`生态参考/topic-release-notes` | — |
 | 发布笔记归档 | `生态参考/_archived-release-notes` | `_archives/release-notes/`（扁平化） |

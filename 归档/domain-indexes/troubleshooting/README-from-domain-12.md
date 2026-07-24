@@ -184,10 +184,10 @@ tier: peripheral---
 |:---|:---|:---|:---|
 | **domain-12** (本目录) | 按组件/资源类型的完整排查指南 | 42 篇深度文档 | [本文档](#文档目录) |
 | **topic-fta** | FTA 故障树分析（演绎法推理骨架） | 36 个组件故障树 | [故障诊断/topic-fta/list/](../故障诊断/topic-fta/list/) |
-| **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [故障诊断/topic-structural-trouble-shooting/](../故障诊断/topic-structural-trouble-shooting/) |
+| **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [故障诊断/高级排障/structural-](../故障诊断/高级排障/structural-) |
 | **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [故障诊断/topic-skills/](../故障诊断/topic-skills/) |
 | **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [故障诊断/topic-febm/](../故障诊断/topic-febm/) |
-| **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md) |
+| **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../故障诊断/高级排障/structural-00-configuration-first-methodology.md) |
 
 ### 推荐使用路径
 

@@ -1490,7 +1490,7 @@ kubectl get ipinstances -A -o json | jq -r '
 
 | 文档 | 说明 |
 |:---|:---|
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
 | [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway FTA 故障树 |
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | 全栈培训演示 |
 

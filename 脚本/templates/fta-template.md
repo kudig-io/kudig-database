@@ -66,14 +66,14 @@ cross_refs:
     path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     label: "{{文档名称}}"
   - type: "structural"
-    path: "../故障诊断/topic-structural-trouble-shooting/{{component}}-*.md"
+    path: "../故障诊断/高级排障/structural-{{component}}-*.md"
     label: "结构化故障排查"
 
 related_skills:
   - "../故障诊断/topic-skills/{{NN}}-{{scenario}}.md"
 knowledge_refs:
   - "../domain-{{N}}-{{name}}/{{doc}}.md"
-  - "../故障诊断/topic-structural-trouble-shooting/{{component}}-*.md"
+  - "../故障诊断/高级排障/structural-{{component}}-*.md"
 ---
 ```
 

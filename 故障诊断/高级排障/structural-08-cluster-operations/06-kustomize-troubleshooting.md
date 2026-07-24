@@ -1,57 +1,4 @@
 ---
-title: Kustomize 部署故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Kustomize 部署故障排查指南'
-summary: 'title: Kustomize 部署故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- helm
-- docker
-- redis
-- mysql
-- rbac
-- crd
-- operator
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Kustomize 部署故障排查指南 是什么
-- 如何 Kustomize 部署故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Kustomize 部署故障排查指南 故障排查
-- Kustomize 部署故障排查指南 排障步骤
-trigger_keywords:
-- Kustomize
-- 部署故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- redis-basics
-- mysql-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Kustomize 部署故障排查指南
 description: '# Kustomize 部署故障排查指南'
 category: structural-troubleshooting
@@ -59,7 +6,7 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[Helm|helm]]
+- helm
 - redis
 - mysql
 - rbac
@@ -82,20 +29,22 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- helm-basics
+- redis-basics
+- mysql-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Kustomize 部署故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32, Kustomize v5.0+ | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: Kubernetes v1.25 - v1.32, Kustomize v5.0+ | **最后更新**: 2026-01 | **难度**: 中级
 >
 > **版本说明**:
 > - kubectl 内置 kustomize 版本可能落后，建议独立安装
@@ -127,9 +76,6 @@ k8s_versions:
 ## 问题现象与影响分析
 
 ### Kustomize 工作原理
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -231,9 +177,6 @@ Kustomize 处理阶段:
 
 ### 排查决策树
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 Kustomize 问题
@@ -298,9 +241,6 @@ Kustomize 问题
 
 #### 构建和验证
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 基本构建并查看输出
@@ -340,10 +280,6 @@ kustomize build <path> | grep "^kind:"
 yamllint kustomization.yaml
 ```
 #### 应用检查
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -856,9 +792,6 @@ components:
 
 ### 附录：快速诊断命令
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # ===== Kustomize 一键诊断脚本 =====
@@ -973,20 +906,7 @@ configMapGenerator:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|[[Go 生产环境速查卡|go]]]]
-- [[系统基础/速查卡/helm.md|helm]]
-- [[系统基础/速查卡/sql.md|sql]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

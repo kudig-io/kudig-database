@@ -1,61 +1,4 @@
 ---
-title: ConfigMap 与 Secret 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: ConfigMap 与 Secret 故障排查指南'
-summary: 'title: ConfigMap 与 Secret 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- configuration
-- etcd
-- kubelet
-- prometheus
-- docker
-- opa
-- mysql
-- daemonset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- ConfigMap 与 Secret 故障排查指南 是什么
-- 如何 ConfigMap 与 Secret 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- ConfigMap 与 Secret 故障排查指南 故障排查
-- ConfigMap 与 Secret 故障排查指南 排障步骤
-trigger_keywords:
-- ConfigMap
-- Secret
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
-- mysql-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: ConfigMap 与 Secret 故障排查指南
 description: '# ConfigMap 与 Secret 故障排查指南'
 category: structural-troubleshooting
@@ -63,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- etcd
+- kubelet
+- prometheus
 - docker
 - opa
 - mysql
@@ -90,16 +33,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
+- mysql-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # ConfigMap 与 Secret 故障排查指南
 
@@ -264,9 +211,6 @@ kubectl get secret <name> -n <namespace> -o jsonpath='{.data.\.dockerconfigjson}
 ```
 #### 2.2.3 Pod 引用检查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 Pod 的环境变量配置
@@ -288,10 +232,6 @@ kubectl exec <pod-name> -- cat /path/to/config/file
 kubectl exec <pod-name> -- ls -la /path/to/config/
 ```
 #### 2.2.4 热更新检查
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 > **🔴 高风险操作警告**
 >
@@ -341,9 +281,6 @@ Events:
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认资源是否存在
@@ -382,9 +319,6 @@ Events:
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -419,11 +353,6 @@ kubectl edit configmap app-config -n <namespace>
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 重启 Pod (推荐用于无状态应用)
@@ -448,9 +377,6 @@ kubectl patch deployment <name> -n <namespace> -p \
 修改 ConfigMap 后，Pod 内的文件内容没有变化
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -477,9 +403,6 @@ kubectl exec <pod-name> -- ls -la /path/to/config/
 
 **解决方案：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 应用支持 SIGHUP 信号重新加载
@@ -502,9 +425,6 @@ curl -X POST http://<pod-ip>:<port>/-/reload
 Secret 数据解码后是乱码或不完整
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -540,10 +460,6 @@ kubectl get secret my-secret -o jsonpath='{.data.password}' | base64 -d && echo
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 创建 docker-registry 类型的 Secret
@@ -578,9 +494,6 @@ Error: secrets "my-secret" is forbidden: User "system:serviceaccount:default:mya
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -779,12 +692,6 @@ data:
 
 ### 常用命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -818,24 +725,14 @@ kubectl rollout restart deployment <name>
 ```
 ### 相关文档
 
-- [Pod 故障排查](./[[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [RBAC 故障排查](../[[故障诊断/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]].md)
-- [kubelet 故障排查](../[[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
+- [Pod 故障排查](./01-pod-troubleshooting.md)
+- [RBAC 故障排查](../06-security-auth/01-rbac-troubleshooting.md)
+- [kubelet 故障排查](../02-node-components/01-kubelet-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

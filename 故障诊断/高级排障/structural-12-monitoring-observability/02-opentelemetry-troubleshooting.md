@@ -1,71 +1,13 @@
 ---
-title: OpenTelemetry Collector 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: OpenTelemetry Collector 故障排查指南'
-summary: 'title: OpenTelemetry Collector 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- prometheus
-- jaeger
-- docker
-- kafka
-- elasticsearch
-- hpa
-- job
-- gateway
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- OpenTelemetry Collector 故障排查指南 是什么
-- 如何 OpenTelemetry Collector 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- OpenTelemetry Collector 故障排查指南 故障排查
-- OpenTelemetry Collector 故障排查指南 排障步骤
-trigger_keywords:
-- OpenTelemetry
-- Collector
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- ebpf-basics
-- kafka-basics
-- tls-basics
-- tracing-basics
-- observability-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[OpenTelemetry|OpenTelemetry]] Collector 故障排查指南
+title: OpenTelemetry Collector 故障排查指南
 description: '# OpenTelemetry Collector 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[Prometheus|prometheus]]
-- [[Jaeger|jaeger]]
+- prometheus
+- jaeger
 - kafka
 - elasticsearch
 - hpa
@@ -91,16 +33,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- kafka-basics
+- tls-basics
+- tracing-basics
+- observability-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # OpenTelemetry Collector 故障排查指南
 
@@ -167,9 +113,6 @@ k8s_versions:
 | **跨集群 Collector 级联问题** | Region A Collector 问题后 Region B 也过载 | 未配置 exporter 失败回退 + 本地队列 | 配置 persistent_queue + 降级策略 |
 
 ### 1.2 报错查看方式汇总
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -273,9 +216,6 @@ OpenTelemetry Collector 问题
 ### 2.3 详细诊断命令
 
 #### Collector 全景诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -793,7 +733,7 @@ groups:
 2. **采样策略**：开发环境 100% 采样，生产环境使用尾部采样保留错误和慢请求
 3. **标签管控**：在 Collector 中统一添加 `cluster`、`namespace`、`environment` 等标签，禁止客户端随意添加高基数标签
 4. **队列持久化**：对关键链路启用 `persistent_queue`，使用 `file_storage` extension 防止数据丢失
-5. **证书管理**：使用 cert-manager 自动轮转 Collector 与后端之间的 mTLS 证书
+5. **证书管理**：使用 [[cert-manager|cert-manager]] 自动轮转 Collector 与后端之间的 mTLS 证书
 6. **配置验证**：使用 `otelcol validate --config=...` 在 CI 中验证配置变更
 7. **降级策略**：Exporter 配置多个后端，主后端失败时自动切换到备用 `debug` 或 `file` exporter
 
@@ -834,21 +774,8 @@ groups:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[log|log]]
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

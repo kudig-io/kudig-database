@@ -251,7 +251,7 @@ symptom_mappings:
             expected: "Reason: Evicted, Message: 节点资源压力"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
@@ -341,7 +341,7 @@ symptom_mappings:
             expected: "PendingContainer, 等待 PVC 绑定"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#四te-3-pod启动失败-p1"
@@ -401,7 +401,7 @@ symptom_mappings:
             expected: "maxConnections 固定，未随副本数扩容"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/07-oom-memory-diagnosis.md"
+      - path: "故障诊断/高级排障/structural-07-oom-memory-diagnosis.md"
         type: "structural"
         relevance: 0.98
       - path: "故障诊断/07-oom-memory-diagnosis.md"
@@ -476,7 +476,7 @@ symptom_mappings:
             expected: "Docker 磁盘占用过大"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/06-node-notready-diagnosis.md"
+      - path: "故障诊断/高级排障/structural-06-node-notready-diagnosis.md"
         type: "structural"
         relevance: 0.98
       - path: "故障诊断/06-node-notready-diagnosis.md"
@@ -537,7 +537,7 @@ symptom_mappings:
             expected: "Ingress 配置正确，后端 Service 正常"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/10-service-comprehensive-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-10-service-comprehensive-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
@@ -594,7 +594,7 @@ symptom_mappings:
             expected: "存在允许 CoreDNS 流量的策略"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-03-networking/02-dns-troubleshooting.md"
         type: "structural"
         relevance: 0.98
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1"
@@ -651,7 +651,7 @@ symptom_mappings:
             expected: "mountOptions 与文件系统兼容"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/04-storage/01-pv-pvc-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#六te-5-存储访问失败-p1"
@@ -708,7 +708,7 @@ symptom_mappings:
             expected: "证书状态 Active"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-06-security-auth/02-certificate-troubleshooting.md"
         type: "structural"
         relevance: 0.98
       - path: "故障诊断/13-certificate-troubleshooting.md"
@@ -769,7 +769,7 @@ symptom_mappings:
             expected: "etcd 指标正常"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-01-control-plane/02-etcd-troubleshooting.md"
         type: "structural"
         relevance: 0.98
       - path: "集群基础/02-etcd-troubleshooting.md"
@@ -896,7 +896,7 @@ symptom_mappings:
             expected: "mTLS 握手成功"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格问题-p1-新增"
@@ -947,7 +947,7 @@ symptom_mappings:
             expected: "ARMS Agent 进程运行中"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#九te-8-监控告警异常-p2"
@@ -1008,7 +1008,7 @@ symptom_mappings:
             expected: "证书链验证成功"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-03-networking/03-service-ingress-troubleshooting.md"
         type: "structural"
         relevance: 0.95
       - path: "故障诊断/topic-fta/list/ingress-fta.md"
@@ -1059,7 +1059,7 @@ symptom_mappings:
             expected: "max_connections 未超限"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-05-workloads/03-statefulset-troubleshooting.md"
         type: "structural"
         relevance: 0.85
       - path: "故障诊断/topic-fta/list/statefulset-fta.md"
@@ -1110,7 +1110,7 @@ symptom_mappings:
             expected: "used_memory < maxmemory"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md"
         type: "structural"
         relevance: 0.80
 
@@ -1158,7 +1158,7 @@ symptom_mappings:
             expected: "RabbitMQ 节点状态 Running"
 
     related_docs:
-      - path: "故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-05-workloads/03-statefulset-troubleshooting.md"
         type: "structural"
         relevance: 0.85
 
@@ -1209,7 +1209,7 @@ symptom_mappings:
       - path: "故障诊断/topic-fta/list/backup-restore-fta.md"
         type: "fta"
         relevance: 0.95
-      - path: "故障诊断/topic-structural-trouble-shooting/11-gitops-devops/04-backup-restore-troubleshooting.md"
+      - path: "故障诊断/高级排障/structural-11-gitops-devops/04-backup-restore-troubleshooting.md"
         type: "structural"
         relevance: 0.90
 
@@ -1302,7 +1302,7 @@ unknown_symptom_handling:
       未知症状: {symptom}
       上下文: {context}
       已尝试的匹配: {attempted_matches}
-      建议: 请人工排查，可参考 故障诊断/topic-structural-trouble-shooting/README.md
+      建议: 请人工排查，可参考 故障诊断/高级排障/structural-README.md
 ```
 
 ## 3.2 未知症状示例

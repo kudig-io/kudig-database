@@ -1,57 +1,4 @@
 ---
-title: 控制平面高可用故障处理指南 [topic-structural-trouble-shooting]
-description: 'title: 控制平面高可用故障处理指南'
-summary: 'title: 控制平面高可用故障处理指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- scheduler
-- controller-manager
-- prometheus
-- docker
-- redis
-- job
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 控制平面高可用故障处理指南 是什么
-- 如何 控制平面高可用故障处理指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 控制平面高可用故障处理指南 故障排查
-- 控制平面高可用故障处理指南 排障步骤
-trigger_keywords:
-- 控制平面高可用故障处理指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
-- redis-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 控制平面高可用故障处理指南
 description: '# 控制平面高可用故障处理指南'
 category: structural-troubleshooting
@@ -59,11 +6,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - redis
 - job
 last_updated: 2026-05
@@ -84,20 +31,22 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
+- redis-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 控制平面高可用故障处理指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境高可用保障
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 生产环境高可用保障
 
 ## 问题现象与影响分析
 
@@ -113,9 +62,6 @@ k8s_versions:
 | 证书不一致导致认证失败 | `certificate signed by unknown authority` | ⭐⭐⭐ 高 | P0 |
 
 ### 问题影响范围评估
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -176,9 +122,6 @@ done
 
 #### 1. etcd 集群故障诊断
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -214,9 +157,6 @@ for pod in $(kubectl get pods -n kube-system -l component=etcd -o name); do
 done
 ```
 #### 2. API Server 高可用诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -279,7 +219,7 @@ kubectl get leases -n kube-system -o yaml
 
 # 4. Leader 选举日志分析
 echo "4. Controller Manager Leader 选举日志:"
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "leader|election"
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "leader\|election"
 
 # 5. 频繁切换检测
 echo "5. 近期 Leader 切换统计:"
@@ -290,10 +230,6 @@ kubectl get events -n kube-system --field-selector reason=LeaderElection | tail 
 ### etcd 集群故障恢复
 
 #### 方案一：单节点故障恢复
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 > **🔴 高风险操作警告**
 >
@@ -321,7 +257,7 @@ kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https
 
 # 2. 清理问题节点数据
 echo "2. 清理问题节点数据:"
-ssh $FAILED_NODE "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
+ssh $FAILED_NODE "sudo rm -rf /var/lib/etcd/member"
 
 # 3. 重新加入集群
 echo "3. 重新加入集群:"
@@ -332,10 +268,6 @@ echo "4. 验证集群恢复状态:"
 kubectl exec -n kube-system $ETCD_POD -- ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt member list
 ```
 #### 方案二：集群脑裂恢复
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -373,14 +305,14 @@ ssh $PRIMARY_NODE "sudo systemctl stop etcd"
 ssh $PRIMARY_NODE "sudo cp -r /var/lib/etcd /var/lib/etcd.backup.$(date +%Y%m%d_%H%M%S)"
 
 # 重建集群
-ssh $PRIMARY_NODE "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
+ssh $PRIMARY_NODE "sudo rm -rf /var/lib/etcd/member"
 ssh $PRIMARY_NODE "sudo kubeadm init phase etcd local --config /etc/kubernetes/kubeadm-config.yaml"
 
 # 3. 逐步添加其他节点
 for node in "${MAJORITY_MEMBERS[@]:1}"; do
   echo "添加节点 $node 到集群:"
   ssh $node "sudo systemctl stop etcd"
-  ssh $node "sudo rm -rf /var/lib/etcd/member"  # ⚠️ 删除系统/数据文件
+  ssh $node "sudo rm -rf /var/lib/etcd/member"
   ssh $node "sudo kubeadm join-phase control-plane-join etcd --config /etc/kubernetes/kubeadm-config.yaml"
 done
 
@@ -561,9 +493,6 @@ MONITOR_LOG="/var/log/kubernetes/leader-election-monitor.log"
 
 ### 高可用验证脚本
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -693,9 +622,6 @@ highAvailability:
 
 ### 定期高可用检查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -772,20 +698,7 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

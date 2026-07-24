@@ -1,59 +1,4 @@
 ---
-title: API Server 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: API Server 故障排查指南'
-summary: 'title: API Server 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- prometheus
-- coredns
-- containerd
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- API Server 故障排查指南 是什么
-- 如何 API Server 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- API Server 故障排查指南 故障排查
-- API Server 故障排查指南 排障步骤
-trigger_keywords:
-- API
-- Server
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
-- tls-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: API Server 故障排查指南
 description: '# API Server 故障排查指南'
 category: structural-troubleshooting
@@ -61,12 +6,12 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - coredns
 last_updated: 2026-05
 difficulty: advanced
@@ -88,16 +33,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
+- tls-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # API Server 故障排查指南
 
@@ -532,7 +479,7 @@ journalctl -u kube-apiserver | grep -iE "(certificate|x509|tls)" | tail -50
 # 🔍 高级日志分析技巧
 # 提取错误模式和频率统计
 journalctl -u kube-apiserver --since "1 hour ago" | \
-  grep -i "error|failed|warning" | \
+  grep -i "error\|failed\|warning" | \
   awk '{print $NF}' | \
   sort | uniq -c | sort -nr | head -10
 
@@ -665,9 +612,6 @@ ls -la /etc/kubernetes/pki/ca.crt
 
 #### 3.2.1 预防性措施
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 🛡️ 证书监控告警配置
@@ -697,9 +641,6 @@ EOF
 kubeadm alpha certs renew --certificate-dir=/etc/kubernetes/pki
 ```
 #### 3.2.1 解决步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -813,9 +754,6 @@ kubectl get nodes
 
 #### 3.4.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认资源瓶颈
@@ -876,9 +814,6 @@ curl -k https://127.0.0.1:6443/metrics | grep -E "process_resident_memory|proces
 ### 3.5 请求限流（429 Too Many Requests）
 
 #### 3.5.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1006,9 +941,6 @@ kubectl get --raw /healthz
 ### 3.7 紧急恢复流程
 
 #### 3.7.1 完全不可用时的恢复步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -1233,10 +1165,6 @@ kubectl get pods -A
    ```
 
 2. **重启关键组件**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    # 重启 kubelet 使新证书生效
    systemctl restart kubelet
@@ -1264,10 +1192,6 @@ kubectl get pods -A
 
 #### 🛡️ 长期防护
 1. **自动化证书轮转**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
    ```bash
    # 配置 kubelet 证书自动轮转
    cat >> /var/lib/kubelet/config.yaml << EOF
@@ -1299,7 +1223,7 @@ kubectl get pods -A
 - **自动化缺失**：依赖手动续签，人为疏忽不可避免
 - **监控盲区**：未监控证书到期时间
 - **应急准备不足**：周末值班人员未掌握证书续签流程
-- **改进方向**：自动化证书管理（cert-manager）、提前 60 天告警、定期演练
+- **改进方向**：自动化证书管理（[[cert-manager|cert-manager]]）、提前 60 天告警、定期演练
 
 ---
 
@@ -1379,10 +1303,6 @@ kubectl get pods -A
 
 #### 🛡️ 长期优化
 1. **定时压缩任务**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
    ```bash
    # CronJob 每天凌晨压缩和整理
    cat << EOF | kubectl apply -f -
@@ -1426,7 +1346,6 @@ kubectl get pods -A
    
    # etcd 慢请求告警
    histogram_quantile(0.99, etcd_disk_wal_fsync_duration_seconds_bucket) > 0.1  # > 100ms
-
    ```
 
 #### 💡 经验总结
@@ -1444,11 +1363,6 @@ kubectl get pods -A
 
 #### 🔍 排查过程
 1. **现象确认**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
    ```bash
    kubectl apply -f deployment.yaml
    # Error from server (InternalError): Internal error occurred: failed calling webhook "validate.pod.com": Post "https://pod-validator.default.svc:443/validate": dial tcp 10.96.100.200:443: connect: connection refused
@@ -1466,10 +1380,6 @@ kubectl get pods -A
 
 #### ⚡ 紧急恢复
 1. **跳过 Webhook 直接修改 API Server**（高风险操作）：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
    ```bash
    # 方案 1：临时禁用 Webhook 准入控制（需重启 API Server）
    vim /etc/kubernetes/manifests/kube-apiserver.yaml
@@ -1498,7 +1408,7 @@ kubectl get pods -A
    # 删除问题配置
    ETCDCTL_API=3 etcdctl del /registry/admissionregistration.k8s.io/validatingwebhookconfigurations/pod-validator
    
- 
+   # ⚠️ 风险：直接操作 etcd 跳过 API Server 校验，可能导致数据不一致
    ```
 
 3. **修复 Webhook Pod**：
@@ -1550,22 +1460,9 @@ kubectl get pods -A
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/09-control-plane-ha-troubleshooting.md|09-control-plane-ha-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

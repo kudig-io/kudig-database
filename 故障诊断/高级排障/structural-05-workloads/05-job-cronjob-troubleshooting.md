@@ -1,66 +1,12 @@
 ---
-title: Job 与 CronJob 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Job 与 CronJob 故障排查指南'
-summary: 'title: Job 与 CronJob 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- scheduler
-- controller-manager
-- docker
-- statefulset
-- daemonset
-- job
-- cronjob
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Job 与 CronJob 故障排查指南 是什么
-- 如何 Job 与 CronJob 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Job 与 CronJob 故障排查指南 故障排查
-- Job 与 CronJob 故障排查指南 排障步骤
-trigger_keywords:
-- Job
-- CronJob
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: Job 与 [[CronJob|CronJob]] 故障排查指南
+title: Job 与 CronJob 故障排查指南
 description: '# Job 与 CronJob 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - scheduler
 - controller-manager
 - job
@@ -85,20 +31,21 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Job 与 CronJob 故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 >
 > **版本说明**:
 > - v1.25+ CronJob 时区支持 (spec.timeZone) GA
@@ -321,7 +268,7 @@ kubectl get job <name> -o jsonpath='{.spec.backoffLimit}'
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 查看 Job 控制器日志
-kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "job|cronjob"
+kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | grep -i "job\|cronjob"
 
 # 查看特定 Job 相关日志
 kubectl logs -n kube-system -l component=kube-controller-manager | grep <job-name>
@@ -353,11 +300,6 @@ Events:
   Warning  BackoffLimitExceeded  Job has reached the specified backoff limit
 ```
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -406,10 +348,6 @@ $ kubectl describe job data-export
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 activeDeadlineSeconds 设置
@@ -450,11 +388,6 @@ NAME           READY   STATUS    RESTARTS   AGE
 my-job-abc12   1/1     Running   0          2h
 ```
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -501,10 +434,6 @@ backup     0 2 * * *     False     0        25h             7d
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 CronJob 状态
@@ -536,9 +465,6 @@ kubectl logs -n kube-system -l component=kube-controller-manager | grep cronjob
 #### 场景 2：配置时区
 
 **Kubernetes 1.24+ 支持 timeZone 字段：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -580,10 +506,6 @@ backup-27893280         1/1           45m        125m
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查并发策略
@@ -608,10 +530,6 @@ kubectl patch cronjob <name> --type='json' -p='[
 ```
 #### 场景 4：取消挂起状态
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查是否挂起
@@ -628,9 +546,6 @@ kubectl create job --from=cronjob/<name> <job-name>-manual
 ### 3.3 并行执行问题
 
 #### 场景 1：配置并行任务
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -695,9 +610,6 @@ spec:
 
 #### 场景 1：清理历史 Job
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 查看所有 Job
@@ -738,9 +650,6 @@ spec:
 ```
 
 #### 场景 3：Job TTL 自动清理 (Kubernetes 1.23+)
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -900,11 +809,6 @@ spec:
 
 ### 常用排查命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Job 状态
@@ -955,23 +859,13 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 
 ### 相关文档
 
-- [Pod 故障排查](./[[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [资源配额故障排查](../[[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]].md)
-- [调度故障排查](../[[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]].md)
+- [Pod 故障排查](./01-pod-troubleshooting.md)
+- [资源配额故障排查](../07-resources-scheduling/01-resources-quota-troubleshooting.md)
+- [调度故障排查](../01-control-plane/03-scheduler-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

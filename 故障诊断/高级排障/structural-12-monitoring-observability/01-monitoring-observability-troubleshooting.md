@@ -1,61 +1,4 @@
 ---
-title: 可观测性故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 可观测性故障排查指南'
-summary: 'title: 可观测性故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- monitoring
-- observability
-- scheduler
-- prometheus
-- grafana
-- jaeger
-- docker
-- redis
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- 可观测性故障排查指南 是什么
-- 如何 可观测性故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 可观测性故障排查指南 故障排查
-- 可观测性故障排查指南 排障步骤
-trigger_keywords:
-- 可观测性故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- monitoring-basics
-- ebpf-basics
-- redis-basics
-- logging-basics
-- tracing-basics
-- observability-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 可观测性故障排查指南
 description: '# 可观测性故障排查指南'
 category: structural-troubleshooting
@@ -64,9 +7,9 @@ tags:
 - troubleshooting
 - decision-tree
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - grafana
-- [[Jaeger|jaeger]]
+- jaeger
 - docker
 - redis
 - elasticsearch
@@ -88,16 +31,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- monitoring-basics
+- redis-basics
+- logging-basics
+- tracing-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 可观测性故障排查指南
 
@@ -211,9 +158,6 @@ curl -s http://$alertmanager_url/api/v2/status && echo " ✓ AlertManager 正常
 
 #### Prometheus 故障诊断
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -277,9 +221,6 @@ PERFORMANCE_METRICS=$(kubectl exec -n monitoring $PROMETHEUS_POD -- wget -qO- ht
 echo "$PERFORMANCE_METRICS"
 ```
 #### Grafana 故障诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -347,9 +288,6 @@ echo "内存使用情况:"
 kubectl top pod -n monitoring $GRAFANA_POD
 ```
 #### Loki 故障诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -420,9 +358,6 @@ echo "最近1小时内的日志流数量:"
 echo "$STREAMS" | jq -r '.data | length'
 ```
 #### Jaeger 故障诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1382,7 +1317,7 @@ observabilityArchitecture:
         receivers:
           - name: "pagerduty"
             pagerduty_configs:
-            - routing_key: "<pagerduty-key>"
+            - service_key: "<pagerduty-key>"
           - name: "slack"
             slack_configs:
             - channel: "#alerts"
@@ -1453,9 +1388,6 @@ observabilityArchitecture:
 ```
 
 ### 可观测性数据质量管理
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1557,21 +1489,8 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 
 ## Related
 
-- 10-monitoring-metrics-prometheus
-- 99-prometheus-enterprise-guide
-- 01-observability-architecture-overview
-- 02-grafana-enterprise-observability
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

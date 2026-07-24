@@ -1,60 +1,4 @@
 ---
-title: Terway（阿里云 CNI）网络故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Terway（阿里云 CNI）网络故障排查指南'
-summary: 'title: Terway（阿里云 CNI）网络故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- prometheus
-- istio
-- flannel
-- calico
-- coredns
-- docker
-- statefulset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- Terway（阿里云 CNI）网络故障排查指南 是什么
-- 如何 Terway（阿里云 CNI）网络故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Terway（阿里云 CNI）网络故障排查指南 故障排查
-- Terway（阿里云 CNI）网络故障排查指南 排障步骤
-trigger_keywords:
-- Terway
-- 阿里云
-- CNI
-- 网络故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- ebpf-basics
-- cni-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Terway（阿里云 CNI）网络故障排查指南
 description: '# Terway（阿里云 CNI）网络故障排查指南'
 category: structural-troubleshooting
@@ -62,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- kubelet
+- prometheus
 - calico
 - coredns
 - statefulset
@@ -90,16 +34,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- ebpf-basics
+- cni-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Terway（阿里云 CNI）网络故障排查指南
 
@@ -221,9 +167,6 @@ Pod 处于 ContainerCreating，事件显示 IP 分配失败
 
 #### 2.2.2 ENI 配额不足
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看节点已分配的 ENI 和 IP 数量
@@ -249,9 +192,6 @@ curl "https://ecs.aliyuncs.com/?Action=DescribeInstanceTypes&InstanceTypes.1=<in
 
 #### 2.2.3 IP 资源池耗尽
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看 terway 资源池详情
@@ -269,9 +209,6 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli garbage-collect --dry-run
 - Terway 版本过旧，存在 IP 泄漏 Bug
 
 #### 2.2.4 固定 IP 冲突
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -307,9 +244,6 @@ kubectl logs -n kube-system <terway-pod> --tail=500 | grep -iE "api|error|fail|t
 ### 2.3 跨节点通信失败排查
 
 #### 2.3.1 VPC 路由检查
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -351,9 +285,6 @@ aliyun ecs DescribeSecurityGroupAttribute --SecurityGroupId <sg-id> --RegionId <
 - **注意**：如果 Pod 使用独立安全组（Terway 高级特性），需额外检查 Pod 级安全组规则
 
 #### 2.3.3 Terway 路由同步问题
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -408,10 +339,10 @@ kubectl logs -n kube-system <calico-node-pod> -c calico-node | grep -i "policy"
 kubectl get events --field-selector reason=Scheduled,reason=Created
 
 # 查看 terway 分配 IP 的耗时
-kubectl logs -n kube-system <terway-pod> | grep -i "allocate.*cost|duration"
+kubectl logs -n kube-system <terway-pod> | grep -i "allocate.*cost\|duration"
 
 # 检查阿里云 OpenAPI 延迟
-kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency|api.*duration"
+kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency\|api.*duration"
 ```
 **优化方向**：
 - 启用 Terway 的预分配（Pre-allocation）机制，提前准备 ENI/IP
@@ -419,9 +350,6 @@ kubectl logs -n kube-system <terway-pod> | grep -i "api.*latency|api.*duration"
 - 使用 IPVlan 模式替代 Veth 模式，减少协议栈开销
 
 #### 2.5.2 网络延迟与丢包
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -445,10 +373,6 @@ sysctl -a | grep -E "net.core.netdev_max_backlog|net.ipv4.tcp_congestion_control
 
 #### 方案一：释放 ENI/IP 资源
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete --all`：批量删除某类全部资源，波及面巨大
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -462,7 +386,7 @@ sysctl -a | grep -E "net.core.netdev_max_backlog|net.ipv4.tcp_congestion_control
 # 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 查找并删除已终止但未释放资源的 Pod
 kubectl get pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
-kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed  # ⚠️ 批量删除，波及面大
+kubectl delete pods --all-namespaces --field-selector spec.nodeName=<node-name>,status.phase=Failed
 
 # 对于使用独占 ENI 的 StatefulSet，考虑调整为共享模式
 # 修改 Terway ConfigMap
@@ -472,9 +396,6 @@ kubectl edit configmap -n kube-system eni-config
 **风险**：修改 Terway 配置后，新创建的 Pod 会使用新模式，已运行的 Pod 不受影响。建议在低峰期操作。
 
 #### 方案二：升级实例规格
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -487,9 +408,6 @@ kubectl patch nodepool <nodepool-name> --type merge -p '{"spec":{"instanceTypes"
 **风险**：升级实例规格会导致节点短暂不可用（需重启），建议通过新增节点池并迁移业务的方式平滑升级。
 
 #### 方案三：调整 ENI 辅助 IP 数量
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -509,9 +427,6 @@ kubectl edit configmap -n kube-system eni-config
 ### 3.2 跨节点通信修复
 
 #### 方案一：修复 VPC 路由
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -555,10 +470,6 @@ kubectl set image ds/calico-node -n kube-system calico-node=registry-vpc.cn-hang
 
 #### 方案一：启用 IPVlan 模式
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -585,9 +496,6 @@ kubectl rollout restart ds/terway-eniip -n kube-system
 - 不与其他依赖 macvlan 的应用共存
 
 #### 方案二：启用 ENI 预分配
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -778,9 +686,6 @@ fi
 
 ## 附录 B: Terway 常用 CLI 命令
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入 terway Pod 执行诊断
@@ -815,21 +720,8 @@ terway-cli --help
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[技能/ts-networking.md|ts-networking]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

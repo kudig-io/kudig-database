@@ -168,7 +168,7 @@ prerequisites:
 | [CSI 存储驱动排障](故障诊断/04-storage-csi-troubleshooting.md) | 513 | CSI 驱动供给/挂载/卸载/快照/扩容问题、紧急恢复脚本、Prometheus 告警 |
 | [PVC 与存储全面排障](故障诊断/14-pvc-storage-troubleshooting.md) | 827 | PVC 状态流程图、Pending 诊断、Multi-Attach 解决、扩容排障、多云命令参考 |
 
-### 结构化排障系列 (故障诊断/topic-structural-trouble-shooting/04-storage)
+### 结构化排障系列 (故障诊断/高级排障/structural-04-storage)
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
@@ -274,7 +274,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [集群存储与卷管理](平台工程/代码分析/functions-cluster-create/22-storage-volumes.md) | 275 | 存储类型概览、CSI 架构图、kubeadm 存储、Local PV、拓扑调度、卷限制 |
+| [集群存储与卷管理](平台工程/代码分析/cluster-create/22-storage-volumes.md) | 275 | 存储类型概览、CSI 架构图、kubeadm 存储、Local PV、拓扑调度、卷限制 |
 | [节点存储](平台工程/代码分析/functions-node-create/14-storage-node.md) | 393 | emptyDir/hostPath/PV/PVC、CSI Node 插件两阶段挂载、CSIDriver API、挂载传播、节点诊断脚本 |
 
 ---

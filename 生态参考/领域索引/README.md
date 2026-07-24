@@ -328,7 +328,7 @@ topic-index
     │
     ├───▶ 故障诊断/topic-skills/*.md                   (技能卡片)
     │
-    └───▶ 故障诊断/topic-structural-trouble-shooting/  (结构化排查)
+    └───▶ 故障诊断/高级排障/structural-  (结构化排查)
 ```
 
 ---

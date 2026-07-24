@@ -1,67 +1,13 @@
 ---
-title: CoreDNS/DNS 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: CoreDNS/DNS 故障排查指南'
-summary: 'title: CoreDNS/DNS 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- prometheus
-- coredns
-- docker
-- mysql
-- daemonset
-- ingress
-- networkpolicy
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- CoreDNS/DNS 故障排查指南 是什么
-- 如何 CoreDNS/DNS 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- CoreDNS/DNS 故障排查指南 故障排查
-- CoreDNS/DNS 故障排查指南 排障步骤
-trigger_keywords:
-- CoreDNS
-- DNS
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- mysql-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[CoreDNS|CoreDNS]]/DNS 故障排查指南
+title: CoreDNS/DNS 故障排查指南
 description: '# CoreDNS/DNS 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- kubelet
+- prometheus
 - coredns
 - mysql
 - daemonset
@@ -87,16 +33,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- mysql-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # CoreDNS/DNS 故障排查指南
 
@@ -159,9 +106,6 @@ k8s_versions:
 | 上游 DNS 慢 | `plugin/forward: unhealthy` | CoreDNS 日志 | CoreDNS 日志 |
 
 ### 1.2 报错查看方式汇总
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -446,9 +390,6 @@ data:
 
 **CoreDNS 水平扩展策略**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 根据集群规模设置副本数
@@ -728,10 +669,6 @@ kubectl logs -n kube-system -l k8s-app=kube-dns | grep -c "SERVFAIL"
 
 #### 3.1.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -794,11 +731,6 @@ kubectl run test --rm -it --image=busybox -- nslookup kubernetes
 ### 3.2 DNS 解析失败
 
 #### 3.2.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 > **🔴 高风险操作警告**
 >
@@ -868,11 +800,6 @@ kubectl run test --rm -it --image=busybox -- nslookup google.com
 ### 3.3 DNS 性能优化
 
 #### 3.3.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 > **🔴 高风险操作警告**
 >
@@ -962,10 +889,6 @@ time kubectl run test --rm -it --image=busybox -- nslookup kubernetes.default
 ### 3.4 Pod DNS 配置问题
 
 #### 3.4.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1071,9 +994,6 @@ kubectl exec <pod-name> -- nslookup kubernetes.default.svc.cluster.local
 
 **排查过程**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 抓取 Pod 内 DNS 查询日志
@@ -1120,10 +1040,6 @@ spec:
 # 方案 B：应用层优化（临时）
 # 在代码中使用 FQDN：pay.example.com.（末尾加点）
 ```
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1222,9 +1138,6 @@ EOF
 
 **排查过程**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 验证问题范围
@@ -1274,10 +1187,6 @@ kubectl get cm -n kube-system coredns -o yaml | grep -A3 forward
 # - 缓存机制无法覆盖未查询过的域名
 ```
 **应急措施**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 > **🔴 高风险操作警告**
 >
@@ -1567,9 +1476,6 @@ kubectl logs -n kube-system coredns-7d8f4b6c9-5xqhz | awk '{print $NF}' | sort |
 ```
 **应急措施**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -1734,26 +1640,13 @@ EOF
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/sql.md|sql]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/领域索引/flannel-index.md|Flannel 知识图谱索引]]
-- [[生态参考/领域索引/network-index.md|Network 网络知识图谱索引]]
-- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

@@ -1,61 +1,4 @@
 ---
-title: Deployment 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Deployment 故障排查指南'
-summary: 'title: Deployment 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- deployment
-- kubelet
-- scheduler
-- controller-manager
-- istio
-- helm
-- containerd
-- docker
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 1h
-intent_queries:
-- Deployment 故障排查指南 是什么
-- 如何 Deployment 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Deployment 故障排查指南 故障排查
-- Deployment 故障排查指南 排障步骤
-trigger_keywords:
-- Deployment
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- helm-basics
-- service-mesh-basics
-- redis-basics
-- gpu-scheduling-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Deployment 故障排查指南
 description: '# Deployment 故障排查指南'
 category: structural-troubleshooting
@@ -63,10 +6,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
-- [[Istio|istio]]
+- istio
 - helm
 - containerd
 - docker
@@ -89,16 +32,21 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- helm-basics
+- service-mesh-basics
+- redis-basics
+- gpu-scheduling-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Deployment 故障排查指南
 
@@ -350,10 +298,6 @@ metadata:
 
 **回滚流程详解**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看历史版本
@@ -407,9 +351,6 @@ spec:
 #### 1.1.4 金丝雀发布 (Canary Deployment)
 
 **方案 1: 手动金丝雀 (使用 Pause)**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -494,10 +435,6 @@ spec:
 ```
 
 **金丝雀流量切换流程**
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl scale --replicas=0`：缩容到 0，立即停服
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -585,11 +522,6 @@ spec:
 
 **蓝绿切换流程**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 部署绿环境 (不接收流量)
@@ -617,7 +549,6 @@ kubectl delete deployment myapp-blue
 # 7. 下次发版时，蓝绿角色互换
 # 将新版本部署到 myapp-blue (原蓝环境)
 # 从 green 切换到 blue
-
 ```
 **蓝绿部署优缺点**
 
@@ -875,10 +806,6 @@ kubectl get pods -l app=<label> -o jsonpath='{range .items[?(@.status.phase!="Ru
 ```
 #### 3.1.2 解决方案
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：暂停更新，排查问题
@@ -930,9 +857,6 @@ kubectl describe pod <pod-name> | grep -A5 "Readiness"
 ```
 #### 3.2.2 解决方案
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 调整探针参数
@@ -962,11 +886,6 @@ kubectl patch deployment <name> --type='json' -p='[
 ### 3.3 资源不足导致 Pod Pending
 
 #### 3.3.1 解决方案
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -999,11 +918,6 @@ kubectl patch deployment <name> -p '{"spec":{"template":{"spec":{"priorityClassN
 ### 3.4 镜像拉取失败
 
 #### 3.4.1 解决方案
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1106,9 +1020,6 @@ spec:
 
 ### C. 常用命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 更新镜像
@@ -1180,7 +1091,7 @@ kubectl describe deployment <name> | grep -A10 Conditions
 | Pod Pending | 资源不足/节点不匹配 | `kubectl describe pod` 查看调度失败原因 | CPU/内存不足、污点阻止 |
 | PVC 未绑定 | 存储类/PV 不可用 | `kubectl get pvc` 检查 PVC 状态 | 动态供应失败 |
 | 节点亲和性不满足 | NodeSelector/Affinity 配置错误 | 检查节点标签与 Pod 要求 | 标签拼写错误 |
-| 污点阻止调度 | Node Taint 未容忍 | `kubectl get nodes -o json | jq '.items[].spec.taints'` | GPU 节点需要 toleration |
+| 污点阻止调度 | Node Taint 未容忍 | `kubectl get nodes -o json \| jq '.items[].spec.taints'` | GPU 节点需要 toleration |
 
 **阶段 4: 容器启动 (1-5min)**
 
@@ -1248,10 +1159,6 @@ kubectl describe deployment <name> | grep -A10 Conditions
 ```
 **场景 2: PDB + 节点维护导致更新阻塞**
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `kubectl edit/patch`：修改运行中的资源
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 触发条件:
@@ -1276,10 +1183,6 @@ kubectl describe deployment <name> | grep -A10 Conditions
   - 或先完成节点维护，再更新 Deployment
 ```
 **场景 3: 配置漂移导致回滚失败**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 > **🔴 高风险操作警告**
 >
@@ -1416,10 +1319,6 @@ spec:
 
 **PDB 阻塞滚动更新的诊断**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -1449,7 +1348,7 @@ kubectl get events --field-selector=reason=EvictionBlocked
 # 临时绕过 PDB (紧急情况)
 kubectl delete pdb <pdb-name>
 # 或直接强制删除 Pod (跳过 Eviction API)
-kubectl delete pod <pod> --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
+kubectl delete pod <pod> --grace-period=0 --force
 ```
 #### 2.5.2 PDB 与滚动更新策略的冲突
 
@@ -1718,10 +1617,6 @@ $ kubectl rollout history deployment order-service --revision=1 | grep REDIS
 
 **修复方案**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1: 立即回滚 (选择此方案)
@@ -1894,11 +1789,6 @@ $ journalctl -u kubelet | tail -50
 
 **修复方案**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -1911,7 +1801,7 @@ $ journalctl -u kubelet | tail -50
 ``` bash
 # 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 紧急修复: 强制删除 Terminating Pod
-$ kubectl delete pod recommendation-engine-old-xyz-20 --grace-period=0 --force  # ⚠️ 跳过优雅终止，可能丢数据
+$ kubectl delete pod recommendation-engine-old-xyz-20 --grace-period=0 --force
 Warning: Immediate deletion does not wait for confirmation...
 pod "recommendation-engine-old-xyz-20" force deleted
 
@@ -2080,10 +1970,6 @@ $ docker history 012345678.dkr.ecr.us-west-2.amazonaws.com/api-gateway:v3.6
 4. **级联效应**: ImagePullBackOff 导致退避等待，更新停滞
 
 **修复方案**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2490,22 +2376,9 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/helm.md|helm]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/openkruise-index.md|OpenKruise 全局索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/openkruise-index|OpenKruise 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

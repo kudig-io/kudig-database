@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Monitoring Observability
 
-> 本页为 `故障诊断/topic-structural-trouble-shooting/12-monitoring-observability` 目录的自动索引。
+> 本页为 `故障诊断/高级排障/structural-12-monitoring-observability` 目录的自动索引。
 
 ## 文档
 

@@ -93,7 +93,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/05-webhook-admission-troubleshooting.md
+  path: ../故障诊断/高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md
   label: '结构化排障: 05-webhook-admission-troubleshooting'
 fta_metadata:
   fta_id: FTA-WEBHOOK-001

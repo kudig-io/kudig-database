@@ -1,58 +1,5 @@
 ---
-title: etcd 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: etcd 故障排查指南'
-summary: 'title: etcd 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- prometheus
-- docker
-- job
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- etcd 故障排查指南 是什么
-- 如何 etcd 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- etcd 故障排查指南 故障排查
-- etcd 故障排查指南 排障步骤
-trigger_keywords:
-- etcd
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[etcd|etcd]] 故障排查指南
+title: etcd 故障排查指南
 description: '# etcd 故障排查指南'
 category: structural-troubleshooting
 tags:
@@ -60,9 +7,9 @@ tags:
 - troubleshooting
 - decision-tree
 - etcd
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - job
 - cronjob
 - rag
@@ -85,16 +32,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # etcd 故障排查指南
 
@@ -598,10 +546,6 @@ etcd 对磁盘延迟极其敏感，因为它需要等待 Fsync 确认日志已�
 
 #### 3.1.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `chmod/chown -R`：递归改权限，误操作破坏系统文件访问
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 场景 1：数据目录权限问题
@@ -663,9 +607,6 @@ systemctl restart etcd
 ### 3.2 etcd 集群无 Leader
 
 #### 3.2.1 解决步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -847,10 +788,6 @@ EOF
 
 #### 3.5.1 从快照恢复（推荐）
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：获取最新的 etcd 快照
@@ -905,9 +842,6 @@ etcdctl member list
 ```
 #### 3.5.2 单节点强制恢复（最后手段）
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -929,7 +863,7 @@ mv /etc/kubernetes/manifests/*.yaml /tmp/manifests/
 cp -r /var/lib/etcd /var/lib/etcd.emergency.bak
 
 # 步骤 3：删除原数据目录
-rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件
+rm -rf /var/lib/etcd
 
 # 步骤 4：使用 --force-new-cluster 参数创建新集群
 # 修改 etcd 启动参数，添加 --force-new-cluster
@@ -1053,10 +987,6 @@ EOF
 
 #### 🔍 排查过程
 1. **现象确认**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
    ```bash
    kubectl apply -f deployment.yaml
    # Error from server: etcdserver: mvcc: database space exceeded
@@ -1122,7 +1052,7 @@ EOF
 
 3. **碎片整理回收空间**:
    ```bash
- 
+   # ⚠️ Defrag 会短暂阻塞读写,生产环境需谨慎
    # 逐个节点执行,避免全部阻塞
    
    # 节点 1
@@ -1146,10 +1076,6 @@ EOF
    ```
 
 4. **清理过期 Event**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
    ```bash
    # Event 会自动过期,但可以主动清理旧的
    # 删除 1 小时前的 Event
@@ -1157,10 +1083,6 @@ EOF
    ```
 
 5. **5 分钟后恢复正常**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
    ```bash
    kubectl apply -f deployment.yaml
    # deployment.apps/myapp created  ✅ 恢复成功
@@ -1316,10 +1238,6 @@ EOF
 
 #### ⚡ 应急措施
 1. **立即隔离问题节点**:
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    # 强制停止节点 2(少数派)
    ssh 10.0.2.1 "systemctl stop etcd"
@@ -1339,21 +1257,16 @@ EOF
    ```
 
 3. **修复网络后恢复节点**:
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-
    ```bash
    # 删除节点 2 的数据目录(避免数据冲突)
-   ssh 10.0.2.1 "rm -rf /var/lib/etcd/*"  # ⚠️ 删除系统/数据文件
+   ssh 10.0.2.1 "rm -rf /var/lib/etcd/*"
    
    # 从节点 1 创建快照
    etcdctl --endpoints=https://10.0.1.1:2379 snapshot save /backup/snapshot-recovery.db
    
    # 在节点 2 恢复快照
    scp /backup/snapshot-recovery.db 10.0.2.1:/tmp/
-   ssh 10.0.2.1 "etcdctl snapshot restore /tmp/snapshot-recovery.db --data-dir=/var/lib/etcd"  # ⚠️ 覆盖 etcd 数据，集群状态回退
+   ssh 10.0.2.1 "etcdctl snapshot restore /tmp/snapshot-recovery.db --data-dir=/var/lib/etcd"
    
    # 启动节点 2
    ssh 10.0.2.1 "systemctl start etcd"
@@ -1414,22 +1327,9 @@ EOF
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[hot|hot]]
-- [[log|log]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/01-control-plane/10-control-plane-upgrade-troubleshooting.md|10-control-plane-upgrade-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
-- [[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

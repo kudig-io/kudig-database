@@ -1,69 +1,15 @@
 ---
-title: kubelet 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: kubelet 故障排查指南'
-summary: 'title: kubelet 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- kubelet
-- scheduler
-- prometheus
-- containerd
-- cri-o
-- docker
-- daemonset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- kubelet 故障排查指南 是什么
-- 如何 kubelet 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- kubelet 故障排查指南 故障排查
-- kubelet 故障排查指南 排障步骤
-trigger_keywords:
-- kubelet
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[kubelet|kubelet]] 故障排查指南
+title: kubelet 故障排查指南
 description: '# kubelet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
+- etcd
 - kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - containerd
 - cri-o
 - docker
@@ -86,16 +32,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # kubelet 故障排查指南
 
@@ -304,7 +251,6 @@ kubelet 的稳定依赖于多个层面的健康，深入理解其内部机制是
   evictionSoftGracePeriod:
     memory.available: "1m30s"
     nodefs.available: "2m"
-
   ```
 - **驱逐顺序**：
   1. BestEffort Pod（无资源请求）
@@ -801,9 +747,6 @@ journalctl -u kubelet | grep -i "probe" | tail -30
 
 #### 3.1.1 解决步骤
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -859,9 +802,6 @@ kubectl get node $(hostname)
 ### 3.2 节点 NotReady
 
 #### 3.2.1 解决步骤
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
 
 > **🔴 高风险操作警告**
 >
@@ -921,9 +861,6 @@ kubectl get node $(hostname)
 ### 3.3 节点资源压力（DiskPressure/MemoryPressure/PIDPressure）
 
 #### 3.3.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -993,11 +930,6 @@ kubectl describe node $(hostname) | grep -A10 Conditions
 
 #### 3.4.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1：确认错误类型
@@ -1055,10 +987,6 @@ kubectl delete pod <pod-name> -n <namespace>
 ### 3.5 探针失败
 
 #### 3.5.1 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1129,9 +1057,6 @@ kubectl get pod <pod-name> -w
 
 #### 3.6.1 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认错误类型
@@ -1194,10 +1119,6 @@ kubectl delete pod <pod-name> -n <namespace>
 
 #### 3.7.1 解决步骤
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -1224,7 +1145,7 @@ kubeadm certs renew kubelet-client
 kubeadm token create --print-join-command
 
 # 在工作节点执行
-kubeadm reset  # ⚠️ 清理节点所有 K8s 配置
+kubeadm reset
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash <hash>
 
 # 步骤 4：重启 kubelet
@@ -1233,7 +1154,6 @@ systemctl restart kubelet
 # 步骤 5：验证恢复
 kubectl get node $(hostname)
 openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
-
 ```
 #### 3.7.2 执行风险
 
@@ -1245,16 +1165,13 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 #### 3.7.3 安全生产风险提示
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubeadm reset`：清理节点所有 K8s 配置/证书/CNI，节点脱离集群
-
 ```
 ⚠️  安全生产风险提示：
 1. kubelet 证书续签会短暂中断服务
 2. 建议配置自动证书轮转
 3. 在 kubelet 配置中设置 rotateCertificates: true
 4. 定期检查证书有效期，设置告警
-5. kubeadm reset 是破坏性操作，谨慎使用  # ⚠️ 清理节点所有 K8s 配置
+5. kubeadm reset 是破坏性操作，谨慎使用
 ```
 
 ---
@@ -1387,11 +1304,6 @@ systemReserved:
 
 #### ⚡ 应急措施
 1. **立即隔离问题节点**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl cordon`：标记节点不可调度
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-
    ```bash
    # 批量 cordon 机械硬盘节点
    kubectl get nodes -l disk-type=hdd -o name | xargs kubectl cordon
@@ -1415,10 +1327,6 @@ systemReserved:
    ```
 
 3. **重启 kubelet 恢复心跳**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    # 批量重启问题节点 kubelet
    for node in $(kubectl get nodes -l disk-type=hdd -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
@@ -1521,7 +1429,7 @@ systemReserved:
        labels:
          severity: warning
        annotations:
-         [[故障诊断/SUMMARY.md|SUMMARY]]: "PLEG relist 耗时过高"
+         summary: "PLEG relist 耗时过高"
          description: "节点 {{ $labels.node }} PLEG P99 耗时 {{ $value }}s，可能导致 NotReady"
      
      - alert: ContainerdSlowResponse
@@ -1614,10 +1522,6 @@ systemReserved:
 
 #### ⚡ 应急措施
 1. **统一 cgroup 驱动为 systemd**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    # 修改 containerd 配置
    ssh node-new-01
@@ -1636,10 +1540,6 @@ systemReserved:
    ```
 
 2. **重启 kubelet**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    systemctl restart kubelet
    
@@ -1648,10 +1548,6 @@ systemReserved:
    ```
 
 3. **验证 Pod 创建**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
    ```bash
    # 删除旧 Pod 触发重建
    kubectl delete pod myapp-abc123
@@ -1663,11 +1559,6 @@ systemReserved:
 
 #### 🛡️ 长期优化
 1. **全集群统一 cgroup 驱动**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    # 制定迁移计划
    # 目标：全部节点统一使用 systemd cgroup 驱动
@@ -1815,23 +1706,12 @@ systemReserved:
 - **文档缺失**：缺少节点配置标准文档，运维人员配置错误
 - **改进方向**：配置标准化、自动化验证、全集群统一迁移、监控告警
 
+
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[CHANGELOG|CHANGELOG]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

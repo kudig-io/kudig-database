@@ -1,59 +1,4 @@
 ---
-title: PV/PVC 存储深度排查与持久化治理指南 [topic-structural-trouble-shooting]
-description: 'title: PV/PVC 存储深度排查与持久化治理指南'
-summary: 'title: PV/PVC 存储深度排查与持久化治理指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- controller-manager
-- prometheus
-- docker
-- opa
-- ceph
-- mysql
-- statefulset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- PV/PVC 存储深度排查与持久化治理指南 是什么
-- 如何 PV/PVC 存储深度排查与持久化治理指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- PV/PVC 存储深度排查与持久化治理指南 故障排查
-- PV/PVC 存储深度排查与持久化治理指南 排障步骤
-trigger_keywords:
-- PV
-- PVC
-- 存储深度排查与持久化治理指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- mysql-basics
-- policy-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: PV/PVC 存储深度排查与持久化治理指南
 description: '# PV/PVC 存储深度排查与持久化治理指南'
 category: structural-troubleshooting
@@ -61,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - docker
 - opa
 - ceph
@@ -88,16 +33,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- mysql-basics
+- policy-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # PV/PVC 存储深度排查与持久化治理指南
 
@@ -113,7 +60,7 @@ k8s_versions:
 | **资深专家** | 解决大规模集群下的 I/O 瓶颈与数据一致性危机 | 深入底层：Attach/Detach 控制流、Mount 传播机制、块设备层故障诊断与专家级清理技巧。 |
 
 > **专项排查文档**：
-> - [StorageClass 配置与动态供给专项排查]([[故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]].md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
+> - [StorageClass 配置与动态供给专项排查](05-storageclass-troubleshooting.md) — StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级
 
 ---
 
@@ -354,9 +301,6 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
 ```
 **6. Reclaiming（回收阶段）**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-
 ```
 用户删除 PVC
   └─> PV 根据 persistentVolumeReclaimPolicy 处理
@@ -370,13 +314,10 @@ kubectl get --raw /api/v1/nodes/<node>/proxy/stats/summary | jq '.pods[].volume[
        │             └─> PV 对象被删除
        │
        └─ Recycle（已废弃）
-            └─> 运行 `rm -rf /volume/*` 清理数据  # ⚠️ 删除系统/数据文件
+            └─> 运行 `rm -rf /volume/*` 清理数据
 ```
 
 **Retain 策略手动回收流程**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -449,9 +390,6 @@ allowedTopologies:
 
 **调试延迟绑定问题**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. PVC 长时间 Pending
@@ -520,10 +458,6 @@ kubectl get volumeattachment
 ```
 **解决步骤**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -541,7 +475,7 @@ kubectl get node node-a
 # node-a   NotReady   <none>   10d   v1.28.0  # ← 节点问题
 
 # 2. 强制删除旧 Pod（触发卸载流程）
-kubectl delete pod app-pod-old --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
+kubectl delete pod app-pod-old --force --grace-period=0
 
 # 3. 等待旧 VolumeAttachment 自动清理（通常 6 分钟）
 # 或手动删除（谨慎操作）
@@ -594,10 +528,6 @@ kubectl get pvc data-pvc -o jsonpath='{.status.phase}'
 ```
 **扩容操作**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 修改 PVC 容量（声明式）
@@ -622,10 +552,6 @@ kubectl exec app-pod -- df -h /data
 ```
 **扩容失败排查**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 场景：PV 容量已更新，但 Pod 内容量未变
@@ -635,7 +561,7 @@ kubectl exec app-pod -- mount | grep /data
 # /dev/vdb on /data type xfs (rw,relatime)
 
 # 2. 查看 kubelet 日志
-journalctl -u kubelet | grep -i "expand|resize"
+journalctl -u kubelet | grep -i "expand\|resize"
 # Jan 01 10:05:00 kubelet[1234]: NodeExpandVolume failed for volume "pv-12345": 
 #   xfs_growfs command not found
 # ❌ 节点缺少 xfsprogs 工具
@@ -717,10 +643,6 @@ ls -R /var/lib/kubelet/pods/<pod-uid>/volumes/kubernetes.io~csi/<pv-name>/
 **策略**：强制清理。
 1. **驱逐旧节点**：确保原节点上的 Pod 确实已销毁。
 2. **清理 VolumeAttachment**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
    ```bash
    kubectl delete volumeattachment <va-name> --force --grace-period=0
    ```
@@ -826,11 +748,6 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
 ```
 **应急措施**
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -845,7 +762,7 @@ aws ec2 describe-volumes --volume-ids vol-0abc123
 # 方案 A：清理僵尸 VolumeAttachment（推荐）
 
 # 1. 强制删除旧 Pod（触发删除流程）
-kubectl delete pod mysql-0-old --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
+kubectl delete pod mysql-0-old --force --grace-period=0
 # Warning: Immediate deletion does not wait for confirmation that 
 #          the running resource has been terminated.
 # pod "mysql-0-old" force deleted
@@ -1098,9 +1015,6 @@ subjects:
 
 **排查过程**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Pod 资源使用
@@ -1151,7 +1065,7 @@ kubectl describe pvc log-data
 
 # 9. 查看 kubelet 日志
 ssh worker-1
-journalctl -u kubelet | grep -i "expand|resize" | tail -20
+journalctl -u kubelet | grep -i "expand\|resize" | tail -20
 # Jan 01 09:00:05 kubelet[1234]: E0101 09:00:05.123456 volume_manager.go:456] 
 #   NodeExpandVolume failed for volume "pvc-log-data": 
 #   rpc error: code = Internal desc = Could not resize volume: filesystem busy
@@ -1165,11 +1079,6 @@ journalctl -u kubelet | grep -i "expand|resize" | tail -20
 # - 扩容操作卡在 FileSystemResizePending 状态
 ```
 **应急措施**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1447,25 +1356,13 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[hot|hot]]
-- [[log|log]]
-- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

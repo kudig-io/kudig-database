@@ -1,57 +1,4 @@
 ---
-title: Gateway API 深度排查与下一代流量治理指南 [topic-structural-trouble-shooting]
-description: 'title: Gateway API 深度排查与下一代流量治理指南'
-summary: 'title: Gateway API 深度排查与下一代流量治理指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- istio
-- envoy
-- flannel
-- docker
-- ingress
-- gateway
-- networkpolicy
-- crd
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- Gateway API 深度排查与下一代流量治理指南 是什么
-- 如何 Gateway API 深度排查与下一代流量治理指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Gateway API 深度排查与下一代流量治理指南 故障排查
-- Gateway API 深度排查与下一代流量治理指南 排障步骤
-trigger_keywords:
-- Gateway
-- API
-- 深度排查与下一代流量治理指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Gateway API 深度排查与下一代流量治理指南
 description: '# Gateway API 深度排查与下一代流量治理指南'
 category: structural-troubleshooting
@@ -59,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[Envoy|envoy]]
-- [[Ingress|ingress]]
+- envoy
+- ingress
 - gateway
 - crd
 last_updated: 2026-05
@@ -83,16 +30,16 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Gateway API 深度排查与下一代流量治理指南
 
 > **适用版本**: Kubernetes v1.25 - v1.32, Gateway API v1.0 - v1.2 | **最后更新**: 2026-02 | **难度**: 资深专家级
@@ -115,7 +62,7 @@ k8s_versions:
 3. **跨 NS 引用**：`kubectl get referencegrant -A`，缺失时会出现 `ResolvedRefs=False`。
 4. **后端健康**：检查 Service/Endpoints/探针，排除 503/502 来自后端不可用。
 5. **TLS/证书**：确认 Listener 绑定的 Secret 存在、证书链正确；gRPC 场景核对 H2。
-6. **控制器日志**：查看 Gateway 控制器日志（如 Envoy Gateway / Nginx Gateway）定位 reconcile 失败原因。
+6. **控制器日志**：查看 Gateway 控制器日志（如 [[envoy|Envoy]] Gateway / Nginx Gateway）定位 reconcile 失败原因。
 7. **快速缓解**：
    - 回滚最近 Route/Listener 变更。
    - 临时放宽 Route 绑定限制（AllowedRoutes）以恢复流量，再逐步收敛。
@@ -288,20 +235,8 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

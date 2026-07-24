@@ -1,59 +1,4 @@
 ---
-title: eBPF 可观测性故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: eBPF 可观测性故障排查指南'
-summary: 'title: eBPF 可观测性故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- observability
-- kubelet
-- scheduler
-- prometheus
-- cilium
-- containerd
-- docker
-- daemonset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- eBPF 可观测性故障排查指南 是什么
-- 如何 eBPF 可观测性故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- eBPF 可观测性故障排查指南 故障排查
-- eBPF 可观测性故障排查指南 排障步骤
-trigger_keywords:
-- eBPF
-- 可观测性故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- ebpf-basics
-- cilium-basics
-- observability-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: eBPF 可观测性故障排查指南
 description: '# eBPF 可观测性故障排查指南'
 category: structural-troubleshooting
@@ -61,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - cilium
 - containerd
 - daemonset
@@ -87,16 +32,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- ebpf-basics
+- cilium-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # eBPF 可观测性故障排查指南
 
@@ -400,9 +347,6 @@ else
 fi
 ```
 #### Tetragon 深度诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -796,20 +740,7 @@ groups:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
-- [[故障诊断/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

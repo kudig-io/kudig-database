@@ -1,59 +1,4 @@
 ---
-title: AI/ML 工作负载故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: AI/ML 工作负载故障排查指南'
-summary: 'title: AI/ML 工作负载故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- scheduler
-- prometheus
-- docker
-- hpa
-- daemonset
-- job
-- rbac
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- AI/ML 工作负载故障排查指南 是什么
-- 如何 AI/ML 工作负载故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- AI/ML 工作负载故障排查指南 故障排查
-- AI/ML 工作负载故障排查指南 排障步骤
-trigger_keywords:
-- AI
-- ML
-- 工作负载故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- prometheus-basics
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: AI/ML 工作负载故障排查指南
 description: '# AI/ML 工作负载故障排查指南'
 category: structural-troubleshooting
@@ -61,10 +6,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- kubelet
+- prometheus
 - hpa
-- [[DaemonSet|daemonset]]
+- daemonset
 - job
 - operator
 - gpu
@@ -88,16 +33,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- prometheus-basics
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # AI/ML 工作负载故障排查指南
 
@@ -312,7 +259,7 @@ kubectl top pods -l app=model-serving --all-namespaces
 echo "5. 模型加载时间检查:"
 for pod in $(kubectl get pods -l app=model-serving --all-namespaces -o name); do
   echo "检查 $pod 模型加载时间:"
-  kubectl logs $pod --tail=200 2>/dev/null | grep -i "model loaded|loading model|loaded in" | tail -3
+  kubectl logs $pod --tail=200 2>/dev/null | grep -i "model loaded\|loading model\|loaded in" | tail -3
 done
 
 # 6. 批处理配置检查
@@ -755,10 +702,6 @@ spec:
 
 ### AI/ML 工作负载验证脚本
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -1076,9 +1019,9 @@ echo "成本优化报告已生成: $COST_REPORT"
 **相关文档**：
 | 文档类型 | 路径 | 说明 |
 |----------|------|------|
-| FTA | `故障诊断/topic-fta/list/gpu-fta.md` | GPU 工作负载故障树 |
-| Structural | `故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md` | Kubeflow 故障排查 |
-| Structural | `故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md` | MPI Operator 故障排查 |
+| FTA | `domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md` | GPU 工作负载故障树 |
+| Structural | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md` | Kubeflow 故障排查 |
+| Structural | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md` | MPI Operator 故障排查 |
 
 ---
 
@@ -1605,7 +1548,7 @@ root_cause: |
   使用 Spot 实例但未配置检查点或中断处理。
   AWS/GCP/Azure 会随时回收 Spot 实例。
 diagnosis:
-  - "检查 Pod 事件: kubectl describe pod | grep -i 'spot|preempted'"
+  - "检查 Pod 事件: kubectl describe pod | grep -i 'spot\|preempted'"
   - "查看云厂商中断通知"
 solution: |
   1. 配置训练框架检查点 (every 5 min)
@@ -1631,19 +1574,7 @@ verification: |
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[脚本/man/INSTALL.md|INSTALL]]
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
-- [[故障诊断/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|03-mpi-operator-troubleshooting]]
-- [[故障诊断/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
-- [[故障诊断/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|03-mpi-operator-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 
 
 <!-- risk-assessed -->

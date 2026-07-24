@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Node Components
 
-> 本页为 `故障诊断/topic-structural-trouble-shooting/02-node-components` 目录的自动索引。
+> 本页为 `故障诊断/高级排障/structural-02-node-components` 目录的自动索引。
 
 ## 文档
 

@@ -84,7 +84,7 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-| 维度 | 故障诊断/topic-fta/list/ | 故障诊断/topic-structural-trouble-shooting/ | **故障诊断/topic-skills/** |
+| 维度 | 故障诊断/topic-fta/list/ | 故障诊断/高级排障/structural- | **故障诊断/topic-skills/** |
 |------|----------------|-----------------------------------|-------------------|
 | **定位** | 故障树分析模型 | 人类可读深度排查指南 | Agent 可执行工单处理 Runbook |
 | **结构** | Mermaid 图 + JSON 工作流 | 决策树 + 解释性文字 | YAML 元数据 + 症状触发 + 分步诊断 + 风险分级修复 |
@@ -357,7 +357,7 @@ Agent 在执行 Skill 后应记录：
 |------|------|------|
 | FTA 故障树库 | [故障诊断/topic-fta/list/](../故障诊断/FTA故障树/list/) | 每个 Skill 对应的故障分析模型 |
 | FEBM 循证方法论 | [故障诊断/topic-febm/](../故障诊断/FEBM方法论/) | Agent 工单处理的理论基础 |
-| 结构化故障排查 | [故障诊断/topic-structural-trouble-shooting/](../故障诊断/高级排障/) | 深度排查参考指南 |
+| 结构化故障排查 | [故障诊断/高级排障/structural-](../故障诊断/高级排障/) | 深度排查参考指南 |
 | Agent 设计 | [AI基础设施/02-ai-agents/](../AI基础设施/AI-Agents/) | AI Agent 工程与架构设计 |
 | 事件管理 Runbook | [系统基础/topic-dictionary/12-incident-management-runbooks.md](../系统基础/知识字典/12-incident-management-runbooks.md) | 事件管理流程模板 |
 | 生产排障 Playbook | [系统基础/topic-dictionary/16-production-troubleshooting-playbook.md](../系统基础/知识字典/16-production-troubleshooting-playbook.md) | 生产环境排障手册 |

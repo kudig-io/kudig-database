@@ -1,57 +1,4 @@
 ---
-title: HPA 与 VPA 自动扩缩容故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: HPA 与 VPA 自动扩缩容故障排查指南'
-summary: 'title: HPA 与 VPA 自动扩缩容故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- controller-manager
-- prometheus
-- docker
-- hpa
-- vpa
-- pdb
-- statefulset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- HPA 与 VPA 自动扩缩容故障排查指南 是什么
-- 如何 HPA 与 VPA 自动扩缩容故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- HPA 与 VPA 自动扩缩容故障排查指南 故障排查
-- HPA 与 VPA 自动扩缩容故障排查指南 排障步骤
-trigger_keywords:
-- HPA
-- VPA
-- 自动扩缩容故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: HPA 与 VPA 自动扩缩容故障排查指南
 description: '# HPA 与 VPA 自动扩缩容故障排查指南'
 category: structural-troubleshooting
@@ -59,13 +6,13 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - controller-manager
-- [[Prometheus|prometheus]]
+- prometheus
 - hpa
 - vpa
 - pdb
-- [[StatefulSet|statefulset]]
+- statefulset
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -86,16 +33,16 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # HPA 与 VPA 自动扩缩容故障排查指南
 
@@ -384,9 +331,6 @@ myapp     Deployment/myapp     `<unknown>`/50%   1         10        1          
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 metrics-server 状态
@@ -420,11 +364,6 @@ kubectl get hpa -w
 #### 场景 2：修复 metrics-server
 
 **常见问题及解决：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -461,9 +400,6 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 CPU 使用率超过目标但副本数不增加
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -507,9 +443,6 @@ kubectl top pods -l <selector>
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查缩容稳定窗口
@@ -544,9 +477,6 @@ kubectl top pods -l <selector>
 副本数频繁增加减少
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -600,9 +530,6 @@ Status:
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 VPA Recommender 状态
@@ -631,10 +558,6 @@ kubectl rollout restart deployment vpa-recommender -n kube-system
 VPA 有推荐值但 Pod 资源未更新
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -665,10 +588,6 @@ kubectl get pod <new-pod-name> -o jsonpath='{.spec.containers[*].resources}'
 #### 场景 3：VPA 与 HPA 冲突
 
 **解决方案：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -879,25 +798,15 @@ kubectl scale deployment <name> --replicas=<n>
 ### 相关文档
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
-- [Controller Manager 故障排查](../[[故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]].md)
-- [Deployment 故障排查](../[[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]].md)
+- [Controller Manager 故障排查](../01-control-plane/04-controller-manager-troubleshooting.md)
+- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

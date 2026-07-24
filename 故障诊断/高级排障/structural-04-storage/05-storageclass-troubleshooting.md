@@ -1,56 +1,4 @@
 ---
-title: StorageClass 配置与动态供给故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: StorageClass 配置与动态供给故障排查指南'
-summary: 'title: StorageClass 配置与动态供给故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- storage
-- kubelet
-- scheduler
-- prometheus
-- docker
-- ceph
-- statefulset
-- job
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- StorageClass 配置与动态供给故障排查指南 是什么
-- 如何 StorageClass 配置与动态供给故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- StorageClass 配置与动态供给故障排查指南 故障排查
-- StorageClass 配置与动态供给故障排查指南 排障步骤
-trigger_keywords:
-- StorageClass
-- 配置与动态供给故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: StorageClass 配置与动态供给故障排查指南
 description: '# StorageClass 配置与动态供给故障排查指南'
 category: structural-troubleshooting
@@ -58,11 +6,11 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - ceph
-- [[StatefulSet|statefulset]]
+- statefulset
 - job
 - rag
 last_updated: 2026-05
@@ -84,16 +32,16 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # StorageClass 配置与动态供给故障排查指南
 
@@ -128,7 +76,7 @@ k8s_versions:
 | Provisioner 未找到 | `storageclass "xxx" not found` | PVC controller | `kubectl get sc` |
 | 参数错误 | `InvalidParameterValue` / `Bad Request` | CSI 驱动 / 云 API | CSI controller 日志 |
 | 后端配额耗尽 | `QuotaExceeded` / `LimitExceeded` | 云厂商 API | 云控制台 / CCM 日志 |
-| Provisioner 未运行 | `waiting for a volume to be created` | PVC Events | `kubectl get pods -n kube-system | grep csi` |
+| Provisioner 未运行 | `waiting for a volume to be created` | PVC Events | `kubectl get pods -n kube-system \| grep csi` |
 
 #### 1.1.2 绑定模式与拓扑问题
 
@@ -191,7 +139,7 @@ k8s_versions:
 kubectl get pvc <name> -o yaml | grep -A 5 volumeBindingMode
 
 # 查看 PVC 事件，确认是否等待调度
-kubectl describe pvc <name> | grep -i "wait|first|consumer|schedul"
+kubectl describe pvc <name> | grep -i "wait\|first\|consumer\|schedul"
 
 # 检查 Pod 调度状态
 kubectl get pods --all-namespaces -o wide | grep <claim-name>
@@ -364,18 +312,14 @@ kubectl get storageclass <name> -o yaml | grep -A 20 "allowedTopologies"
 # 结果：Pod 因卷在错误可用区而无法调度
 
 # 查看 PV 的可用区
-kubectl get pv <pv-name> -o yaml | grep -i "zone|topology"
+kubectl get pv <pv-name> -o yaml | grep -i "zone\|topology"
 
 # 查看 Pod 的调度失败原因
-kubectl describe pod <pod-name> | grep -i "volume|zone|affinity"
+kubectl describe pod <pod-name> | grep -i "volume\|zone\|affinity"
 
 # 修复：删除 PVC 重新创建（数据会丢失），或修改为 WaitForFirstConsumer
 ```
 **修复方案**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：修改 StorageClass 为 WaitForFirstConsumer（仅影响新 PVC）
@@ -388,9 +332,6 @@ kubectl patch storageclass <name> --type merge -p \
 ### 2.4 扩容失败排查
 
 #### 2.4.1 扩容条件检查清单
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -406,7 +347,7 @@ kubectl get pvc <name> -o jsonpath='{.spec.resources.requests.storage}'
 kubectl logs -n kube-system <csi-controller> -c csi-resizer --tail=200
 
 # 4. 检查 PVC 事件
-kubectl describe pvc <name> | grep -i "resize|expand"
+kubectl describe pvc <name> | grep -i "resize\|expand"
 
 # 5. 检查文件系统是否已扩展（进入 Pod 验证）
 kubectl exec -it <pod-name> -- df -h
@@ -422,9 +363,6 @@ kubectl exec -it <pod-name> -- df -h
 | 扩容请求被拒绝 | `kubectl describe pvc` | 检查是否超过最大容量限制 |
 
 #### 2.4.2 文件系统手动扩展
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -452,11 +390,6 @@ kubectl get storageclass -o json | \
 # 如果返回多个名称，说明存在冲突
 ```
 **修复**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 移除多余的默认标记（保留一个）
@@ -503,9 +436,6 @@ kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
 
 #### 2.6.2 性能不达标排查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认 PVC 使用的 StorageClass 类型
@@ -533,9 +463,6 @@ kubectl exec -it <pod-name> -- fio --name=test --filename=/data/test \
 
 ### 3.1 StorageClass 参数修正
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 修改 StorageClass 参数（注意：已有 PV 不受影响，仅影响新供给）
@@ -548,10 +475,6 @@ kubectl patch storageclass <name> --type merge -p \
 # 3. 修改应用使用新的 StorageClass
 ```
 ### 3.2 扩容流程
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -574,11 +497,6 @@ kubectl rollout restart deployment/<app>
 - 扩容失败时 PVC 可能处于 `Resizing` 状态，需要手动恢复
 
 ### 3.3 切换 StorageClass（数据迁移）
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -881,23 +799,11 @@ fi
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/storage-index.md|Storage 存储知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
-- [[故障诊断/高级排障/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

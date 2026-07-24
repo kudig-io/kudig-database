@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Ai Ml Workloads
 
-> 本页为 `故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads` 目录的自动索引。
+> 本页为 `故障诊断/高级排障/structural-10-ai-ml-workloads` 目录的自动索引。
 
 ## 文档
 

@@ -1,69 +1,14 @@
 ---
-title: DaemonSet 故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: DaemonSet 故障排查指南'
-summary: 'title: DaemonSet 故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- controller-manager
-- cilium
-- flannel
-- calico
-- docker
-- statefulset
-- daemonset
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- DaemonSet 故障排查指南 是什么
-- 如何 DaemonSet 故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- DaemonSet 故障排查指南 故障排查
-- DaemonSet 故障排查指南 排障步骤
-trigger_keywords:
-- DaemonSet
-- 故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- cilium-basics
-- cni-basics
-- logging-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[DaemonSet|DaemonSet]] 故障排查指南
+title: DaemonSet 故障排查指南
 description: '# DaemonSet 故障排查指南'
 category: structural-troubleshooting
 tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - controller-manager
-- [[Cilium|cilium]]
+- cilium
 - flannel
 - calico
 - daemonset
@@ -87,16 +32,19 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- cilium-basics
+- cni-basics
+- logging-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # DaemonSet 故障排查指南
 
@@ -193,7 +141,7 @@ DaemonSet 确保所有（或部分）节点运行一个 Pod 副本，常用于�
 # 🟢 低风险：只读/信息收集，通常无副作用
 $ kubectl get ds -o wide
 NAME        DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-fluentd     5         5         5       5            5           <none>          10d
+[[fluentd|fluentd]]     5         5         5       5            5           <none>          10d
 ```
 | 字段 | 含义 | 异常判断 |
 |-----|-----|---------|
@@ -352,10 +300,6 @@ monitor   0         0         0       0            0
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 DaemonSet 的 nodeSelector
@@ -390,9 +334,6 @@ Events:
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -463,9 +404,6 @@ fluentd-abc12   0/1     CrashLoopBackOff   5          10m
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 事件
@@ -509,10 +447,6 @@ Error: cannot open /var/log/containers: Permission denied
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -559,10 +493,6 @@ Waiting for daemon set "fluentd" rollout to finish: 2 out of 5 new pods have bee
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看更新状态详情
@@ -592,10 +522,6 @@ kubectl rollout status ds <name>
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认更新策略
@@ -620,9 +546,6 @@ kubectl patch ds <name> --type='json' -p='[
 #### 场景 3：回滚更新
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -655,9 +578,6 @@ Events:
 ```
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -692,9 +612,6 @@ kubectl get pods -l <label-selector> -o wide
 - Pod 间网络不通
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -731,10 +648,6 @@ kubectl run test --rm -it --image=busybox --restart=Never -- ping <other-pod-ip>
 - ClusterIP/NodePort 不通
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -881,9 +794,6 @@ spec:
 
 ### 常用排查命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # DaemonSet 状态
@@ -912,24 +822,15 @@ kubectl logs -n kube-system -l k8s-app=kube-dns
 ```
 ### 相关文档
 
-- [Pod 故障排查](./[[故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [kubelet 故障排查](../[[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]].md)
-- [CNI 故障排查](../[[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]].md)
-- [kube-proxy 故障排查](../[[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]].md)
+- [Pod 故障排查](./01-pod-troubleshooting.md)
+- [kubelet 故障排查](../02-node-components/01-kubelet-troubleshooting.md)
+- [CNI 故障排查](../03-networking/01-cni-troubleshooting.md)
+- [kube-proxy 故障排查](../02-node-components/02-kube-proxy-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

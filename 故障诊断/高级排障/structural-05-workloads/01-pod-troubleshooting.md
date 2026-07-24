@@ -1,63 +1,4 @@
 ---
-title: Pod 故障排查与运行机制深度指南 [topic-structural-trouble-shooting]
-description: 'title: Pod 故障排查与运行机制深度指南'
-summary: 'title: Pod 故障排查与运行机制深度指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- scheduler
-- prometheus
-- jaeger
-- istio
-- coredns
-- containerd
-- cri-o
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 45min
-intent_queries:
-- Pod 故障排查与运行机制深度指南 是什么
-- 如何 Pod 故障排查与运行机制深度指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Pod 故障排查与运行机制深度指南 故障排查
-- Pod 故障排查与运行机制深度指南 排障步骤
-trigger_keywords:
-- Pod
-- 故障排查与运行机制深度指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- pod-lifecycle
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- ebpf-basics
-- redis-basics
-- mysql-basics
-- gpu-scheduling-basics
-- tracing-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Pod 故障排查与运行机制深度指南
 description: '# Pod 故障排查与运行机制深度指南'
 category: structural-troubleshooting
@@ -65,10 +6,10 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Jaeger|jaeger]]
+- prometheus
+- jaeger
 - istio
 - coredns
 - containerd
@@ -91,16 +32,23 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- pod-lifecycle
+- troubleshooting-methodology
+- service-mesh-basics
+- prometheus-basics
+- ebpf-basics
+- redis-basics
+- mysql-basics
+- gpu-scheduling-basics
+- tracing-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Pod 故障排查与运行机制深度指南
 
@@ -239,10 +187,6 @@ crictl inspect <container-id> | jq '.info.runtimeSpec.linux.namespaces[] | selec
 | **Go** | `./main` 作为 PID 1 | 正常（Go runtime 内置处理） | ✅ Go 默认优雅处理信号 |
 
 **僵尸进程诊断**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 进入容器查看僵尸进程
@@ -376,7 +320,7 @@ process.wait()  # 阻塞直到子进程退出
 
 | 状态 | 含义 | 常见原因 | 观测方法 |
 |:----|:-----|:---------|:---------|
-| **Pending** | Pod 已接受但未运行 | 资源不足、污点/亲和性不匹配、PVC 未绑定 | `kubectl describe pod | grep Events` |
+| **Pending** | Pod 已接受但未运行 | 资源不足、污点/亲和性不匹配、PVC 未绑定 | `kubectl describe pod \| grep Events` |
 | **ContainerCreating** | 容器正在创建 | 镜像拉取慢、Volume 挂载慢、CNI 网络配置慢 | `kubectl get events --field-selector involvedObject.name=<pod>` |
 | **Running** | 至少一个容器运行 | - | `kubectl get pod -o wide` 查看 READY 列 |
 | **CrashLoopBackOff** | 容器启动失败，等待重试 | 应用程序 bug、配置错误、依赖服务不可用 | `kubectl logs <pod> --previous` |
@@ -395,7 +339,6 @@ process.wait()  # 阻塞直到子进程退出
 第 5 次失败：等待 80s
 第 6 次失败：等待 160s
 第 7 次失败：等待 300s (上限)
-
 ```
 
 #### 1.3.3 容器退出码详解
@@ -431,7 +374,6 @@ kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].lastState.termi
 
 # 方法 2：通过 crictl（节点上）
 crictl inspect <container-id> | jq '.status'
-
 ```
 ---
 
@@ -482,8 +424,7 @@ cat /etc/containerd/config.toml
 crictl stats
 
 # 查看 CRI 调用延迟
-journalctl -u containerd | grep "RunPodSandbox|CreateContainer" | tail -20
-
+journalctl -u containerd | grep "RunPodSandbox\|CreateContainer" | tail -20
 ```
 ---
 
@@ -495,17 +436,17 @@ journalctl -u containerd | grep "RunPodSandbox|CreateContainer" | tail -20
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod | grep "FailedScheduling"`；`kubectl describe node | grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
-| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node | grep Taints`；`kubectl get pod -o yaml | grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
-| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc | grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
-| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml | grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
+| **Pending: 资源不足** | CPU/Memory 碎片化（节点剩余资源分散），ResourceQuota 耗尽，PriorityClass 优先级不足 | `kubectl describe pod \| grep "FailedScheduling"`；`kubectl describe node \| grep -A5 "Allocated resources"` | 扩容节点；调整 requests；使用 Cluster Autoscaler |
+| **Pending: 污点/亲和性** | 节点打了 `NoSchedule` 污点，Pod 未配置容忍；`requiredDuringScheduling` 亲和性无法满足 | `kubectl describe node \| grep Taints`；`kubectl get pod -o yaml \| grep -A10 affinity` | 添加 `tolerations`；放宽亲和性为 `preferred` |
+| **Pending: PVC 未绑定** | StorageClass 不存在、后端存储配额不足、`volumeBindingMode: WaitForFirstConsumer` 延迟绑定 | `kubectl get pvc \| grep Pending`；`kubectl describe pvc` | 检查 StorageClass；扩容后端；手动创建 PV |
+| **Pending: 拓扑约束** | `topologySpreadConstraints` 约束无法满足（如强制均匀分布但节点不足） | `kubectl get pod -o yaml \| grep -A5 topologySpreadConstraints` | 放宽 `whenUnsatisfiable: DoNotSchedule` 为 `ScheduleAnyway` |
 
 #### 2.1.2 容器创建阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod | grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
-| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod | grep "CreateContainerError"`；`crictl ps -a | grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
+| **ImagePullBackOff** | 镜像不存在、Registry 凭证过期、镜像层损坏、Registry 速率限制（Docker Hub 100次/6h） | `kubectl describe pod \| grep -A5 "Failed to pull image"`；`crictl pull <image>` 测试拉取 | 检查镜像 tag；重新创建 `imagePullSecrets`；使用镜像缓存代理 |
+| **CreateContainerError** | Volume 挂载失败（PVC 不存在、CSI 驱动问题）、SecurityContext 冲突（如 `runAsUser: 0` 被 PSP 拒绝） | `kubectl describe pod \| grep "CreateContainerError"`；`crictl ps -a \| grep Error` | 检查 Volume 状态；调整 SecurityContext；查看 PSP/PSA 策略 |
 | **Init:CrashLoopBackOff** | InitContainer 失败（如数据库迁移脚本错误） | `kubectl logs <pod> -c <init-container>`；`kubectl get pod -o jsonpath='{.status.initContainerStatuses}'` | 修复 InitContainer 逻辑；临时跳过（删除 initContainers） |
 
 #### 2.1.3 运行阶段问题
@@ -513,17 +454,17 @@ journalctl -u containerd | grep "RunPodSandbox|CreateContainer" | tail -20
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
 | **CrashLoopBackOff: PID 1** | 应用程序退出（缺少环境变量、配置错误）、PID 1 未处理信号（shell 脚本陷阱）、依赖服务不可用 | `kubectl logs <pod> --previous`；`kubectl get pod -o jsonpath='{.status.containerStatuses[0].lastState.terminated}'` | 检查应用日志；使用 `tini` 作为 init；添加健康检查重试 |
-| **OOMKilled (137)** | 内存使用超过 `limits`、Java 堆外内存（DirectByteBuffer）、内存泄漏（Python/Node.js） | `kubectl describe pod | grep "OOMKilled"`；`kubectl top pod --containers`；节点上 `dmesg | grep oom` | 增加 `limits`；优化应用内存；启用内存分析（heapdump） |
-| **Liveness 探针失败** | 探针超时时间过短、应用启动慢（大型 Java 应用）、探针依赖外部服务（数据库抖动导致全部重启） | `kubectl describe pod | grep "Liveness probe failed"`；`kubectl get pod -o yaml | grep -A10 livenessProbe` | 增加 `initialDelaySeconds` 和 `timeoutSeconds`；使用 `startupProbe`；探针改为本地检查 |
-| **Readiness 探针失败** | 应用未就绪（依赖服务连接中）、探针路径错误（/health vs /healthz） | `kubectl describe pod | grep "Readiness probe failed"`；`kubectl get endpoints <service>` 确认 Pod 未加入 | 等待应用就绪；修正探针配置；临时禁用探针 |
+| **OOMKilled (137)** | 内存使用超过 `limits`、Java 堆外内存（DirectByteBuffer）、内存泄漏（Python/Node.js） | `kubectl describe pod \| grep "OOMKilled"`；`kubectl top pod --containers`；节点上 `dmesg \| grep oom` | 增加 `limits`；优化应用内存；启用内存分析（heapdump） |
+| **Liveness 探针失败** | 探针超时时间过短、应用启动慢（大型 Java 应用）、探针依赖外部服务（数据库抖动导致全部重启） | `kubectl describe pod \| grep "Liveness probe failed"`；`kubectl get pod -o yaml \| grep -A10 livenessProbe` | 增加 `initialDelaySeconds` 和 `timeoutSeconds`；使用 `startupProbe`；探针改为本地检查 |
+| **Readiness 探针失败** | 应用未就绪（依赖服务连接中）、探针路径错误（/health vs /healthz） | `kubectl describe pod \| grep "Readiness probe failed"`；`kubectl get endpoints <service>` 确认 Pod 未加入 | 等待应用就绪；修正探针配置；临时禁用探针 |
 
 #### 2.1.4 停止阶段问题
 
 | 现象分类 | 深度根因分析 | 关键观测指令 | 快速缓解策略 |
 |:--------|:------------|:------------|:------------|
-| **Terminating 卡住** | Finalizers 未清理（如 PVC 保护）、PreStop Hook 超时、Volume 卸载失败（NFS 挂死）、容器进程忽略 SIGTERM | `kubectl get pod -o yaml | grep finalizers`；`kubectl describe pod | grep "PreStop"`；节点上 `ps aux | grep <pod-uid>` | 强制删除 Finalizers：`kubectl patch pod <pod> -p '{"metadata":{"finalizers":null}}'`；强制删除：`kubectl delete pod --force --grace-period=0` |
-| **DiskPressure 驱逐** | 节点磁盘空间不足（`/var/lib/containerd` 或 `/var/log` 满）、ImageGC 未及时清理 | `kubectl describe node | grep "DiskPressure"`；节点上 `df -h`；`du -sh /var/lib/containerd/*` | 清理无用镜像：`crictl rmi --prune`；清理日志：`journalctl --vacuum-time=7d` |
-| **MemoryPressure 驱逐** | 节点内存不足，kubelet 主动驱逐低优先级 Pod（BestEffort → Burstable → Guaranteed） | `kubectl describe node | grep "MemoryPressure"`；`kubectl top node` | 扩容节点内存；调整 Pod QoS（设置 requests=limits） |
+| **Terminating 卡住** | Finalizers 未清理（如 PVC 保护）、PreStop Hook 超时、Volume 卸载失败（NFS 挂死）、容器进程忽略 SIGTERM | `kubectl get pod -o yaml \| grep finalizers`；`kubectl describe pod \| grep "PreStop"`；节点上 `ps aux \| grep <pod-uid>` | 强制删除 Finalizers：`kubectl patch pod <pod> -p '{"metadata":{"finalizers":null}}'`；强制删除：`kubectl delete pod --force --grace-period=0` |
+| **DiskPressure 驱逐** | 节点磁盘空间不足（`/var/lib/containerd` 或 `/var/log` 满）、ImageGC 未及时清理 | `kubectl describe node \| grep "DiskPressure"`；节点上 `df -h`；`du -sh /var/lib/containerd/*` | 清理无用镜像：`crictl rmi --prune`；清理日志：`journalctl --vacuum-time=7d` |
+| **MemoryPressure 驱逐** | 节点内存不足，kubelet 主动驱逐低优先级 Pod（BestEffort → Burstable → Guaranteed） | `kubectl describe node \| grep "MemoryPressure"`；`kubectl top node` | 扩容节点内存；调整 Pod QoS（设置 requests=limits） |
 
 ---
 
@@ -700,9 +641,6 @@ kubectl describe node <node-name> | grep Taints
 ### 3.2 第二阶段：容器内部环境诊断
 确认“环境是否如我所愿”。
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 验证环境变量与配置挂载
@@ -735,7 +673,6 @@ spec:
   containers:
   - name: istio-proxy
     restartPolicy: Always # 标记为 Sidecar
-
 ```
 
 ---
@@ -885,9 +822,6 @@ ls -la /var/lib/kubelet/pods/$POD_UID/volumes/
 ### 3.3 第三阶段：容器运行时诊断
 
 **目标**：深入容器内部，验证应用环境和网络连通性。
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1266,9 +1200,6 @@ jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"}
 
 **Step 1：分析 JVM 内存布局**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 重启前执行（获取完整内存映射）
@@ -1280,7 +1211,7 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 # Total:  reserved=2100MB, committed=1850MB
 #   - Heap:         reserved=1536MB, committed=1536MB  # ✅ 堆内存正常
 #   - Metaspace:    reserved=256MB,  committed=230MB   # ✅ 元空间正常
-#   - Thread:       reserved=150MB,  committed=150MB 
+#   - Thread:       reserved=150MB,  committed=150MB   # ⚠️ 线程栈
 #   - Code:         reserved=50MB,   committed=45MB
 #   - GC:           reserved=80MB,   committed=75MB
 #   - Direct:       reserved=28MB,   committed=28MB    # ❌ 堆外内存
@@ -1291,9 +1222,6 @@ kubectl exec java-app -- jcmd 1 VM.native_memory summary
 - **关键**：`Direct`（堆外内存）持续增长，从 28MB 增长至 300MB+（超出预期）
 
 **Step 2：定位堆外内存泄漏**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1426,7 +1354,6 @@ spec:
                 kubectl exec $pod -- jcmd 1 VM.native_memory summary
               done
           restartPolicy: OnFailure
-
 ```
 
 **成果**：
@@ -1539,7 +1466,6 @@ journalctl -u kubelet -f | grep nginx-abc123
 # 错误日志：
 # E0210 10:30:00 kubelet.go:1234] Failed to stop container 9876543210ab: 
 #   context deadline exceeded (timeout waiting for container to stop)
-
 ```
 **根因分析**：
 1. `kubectl delete pod` 发送 SIGTERM 给 nginx 主进程
@@ -1551,10 +1477,6 @@ journalctl -u kubelet -f | grep nginx-abc123
 #### 5.2.3 解决方案
 
 **紧急止损**（强制清理，10 分钟）：
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete pod --force`：强制删除 Pod，跳过优雅终止与数据刷盘
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -1579,7 +1501,7 @@ umount -f -l /var/lib/kubelet/pods/<uid>/volumes/kubernetes.io~nfs/nginx-data-pv
 kubectl patch pod nginx-abc123 -p '{"metadata":{"finalizers":null}}'
 
 # Step 4：强制删除 Pod
-kubectl delete pod nginx-abc123 --force --grace-period=0  # ⚠️ 跳过优雅终止，可能丢数据
+kubectl delete pod nginx-abc123 --force --grace-period=0
 
 # 验证删除成功
 kubectl get pod nginx-abc123
@@ -1761,9 +1683,6 @@ Span: user-service -> order-service
 
 **Step 1：验证 DNS 解析性能**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 在 Pod 内测试 DNS 解析
@@ -1789,9 +1708,6 @@ kubectl exec user-service-abc123 -- cat /etc/resolv.conf
 # options ndots:5  # ❌ 关键配置
 ```
 **Step 2：分析 DNS 查询链路**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2060,9 +1976,6 @@ webhooks:
 
 ## 附录：常用诊断命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看 Pod 完整状态
@@ -2110,22 +2023,9 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[hot|hot]]
-- [[log|log]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-- [[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

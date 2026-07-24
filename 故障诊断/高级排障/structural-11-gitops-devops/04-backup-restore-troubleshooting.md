@@ -1,7 +1,6 @@
 ---
-title: 备份恢复故障排查指南 [topic-structural-trouble-shooting]
+title: 备份恢复故障排查指南
 description: '# 备份恢复故障排查指南'
-summary: '1. **Velero 状态检查**：`kubectl get [[Pods|pods]] -n velero`，确认 velero [[DaemonSet|DaemonSet]] 和 Deployment 均为 Running。'
 category: structural-troubleshooting
 tags:
 - backup
@@ -14,8 +13,6 @@ tags:
 - mysql
 - statefulset
 - daemonset
-tier: core
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -56,19 +53,17 @@ authors:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
 # 备份恢复故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 - v1.32 | Velero v1.12+ | **最后更新**: 2026-05 | **难度**: 中高级
+> **适用版本**: [[实体/kubernetes|kubernetes]] v1.28 - v1.32 | Velero v1.12+ | **最后更新**: 2026-05 | **难度**: 中高级
 
 ---
 
 ## 0. 快速诊断
 
-1. **Velero 状态检查**：`kubectl get [[Pods|pods]] -n velero`，确认 velero [[DaemonSet|DaemonSet]] 和 Deployment 均为 Running。
+1. **Velero 状态检查**：`kubectl get pods -n velero`，确认 velero DaemonSet 和 Deployment 均为 Running。
 2. **备份任务状态**：`kubectl get backup -n velero`，查看 Recent Backup 的 Phase（New/InProgress/Completed/Failed）。
-3. **[[etcd|etcd]] 快照状态**：`kubectl get pods -n kube-system -l app=etcd-operator`，确认 etcd backup operator 正常运行。
+3. **etcd 快照状态**：`kubectl get pods -n kube-system -l app=etcd-operator`，确认 etcd backup operator 正常运行。
 4. **日志快速排查**：
    - Velero：`kubectl logs -n velero deployment/velero --tail=50 | grep -i error`
    - etcd-snapshot：`kubectl logs -n kube-system -l app=etcd-operator --tail=30`
@@ -188,9 +183,6 @@ kubectl logs -n kube-system -l app=etcd-operator --tail=50
 ```
 #### Step 2: 检查磁盘空间
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查 etcd 节点磁盘空间
@@ -277,9 +269,6 @@ kubectl get backup -n velero pre-drill-backup -o jsonpath='{.status.phase}'
 ```
 #### Step 2: 模拟数据丢失
 
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `kubectl delete namespace`：永久删除命名空间及全部资源，不可恢复
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -292,7 +281,7 @@ kubectl get backup -n velero pre-drill-backup -o jsonpath='{.status.phase}'
 ``` bash
 # 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 # 删除目标 Namespace（模拟灾难）
-kubectl delete namespace production  # ⚠️ 不可逆：永久删除命名空间及全部资源
+kubectl delete namespace production
 
 # 验证 Namespace 已删除
 kubectl get namespace production
@@ -320,9 +309,6 @@ echo "恢复耗时: ${DURATION} 秒"
 ```
 
 #### Step 4: 验证数据完整性
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -408,8 +394,8 @@ auto_heal_actions:
 
 | 文档类型 | 路径 | 说明 |
 |----------|------|------|
-| FTA | `故障诊断/topic-fta/list/backup-restore-fta.md` | 备份恢复异常故障树 |
-| Domain | `集群基础/11-etcd-deep-dive.md` | 11-etcd-deep-dive |
+| FTA | `domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md` | 备份恢复异常故障树 |
+| Domain | `domain-01-cluster-fundamentals/11-etcd-deep-dive.md` | etcd 深度解析 |
 
 ---
 
@@ -889,28 +875,12 @@ sla_reporting:
 > **维护团队**: SRE Team / Platform Team
 > **更新日期**: 2026-05-19
 > **下一步**: 集成到备份管理平台，支持自动备份健康度检测和 DR 演练自动化
-| Skills | `故障诊断/topic-skills/backup-restore-skill.md` | 备份恢复技能卡片 |
+| Skills | `domain-10-troubleshooting-diagnostics/topic-skills/backup-restore-skill.md` | 备份恢复技能卡片 |
 
 ---
 
 > **版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
 > **下一步**: 集成到 AI Agent 执行引擎，支持自动备份健康度检测
-
-## Related
-
-- 08-docker-troubleshooting-guide
-- [[实体/kubernetes.md|kubernetes]]
-- [[hot|hot]]
-- [[系统基础/知识字典/workloads/cronjob.md|cronjob]]
-
-## See Also
-
-- [[故障诊断/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

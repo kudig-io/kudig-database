@@ -1,59 +1,4 @@
 ---
-title: Tekton CI/CD 流水线故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Tekton CI/CD 流水线故障排查指南'
-summary: 'title: Tekton CI/CD 流水线故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- prometheus
-- flux
-- docker
-- opa
-- job
-- cronjob
-- ingress
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- Tekton CI/CD 流水线故障排查指南 是什么
-- 如何 Tekton CI/CD 流水线故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Tekton CI/CD 流水线故障排查指南 故障排查
-- Tekton CI/CD 流水线故障排查指南 排障步骤
-trigger_keywords:
-- Tekton
-- CI
-- CD
-- 流水线故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- policy-basics
-- logging-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Tekton CI/CD 流水线故障排查指南
 description: '# Tekton CI/CD 流水线故障排查指南'
 category: structural-troubleshooting
@@ -61,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- kubelet
+- prometheus
 - docker
 - opa
 - job
@@ -89,16 +34,18 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- policy-basics
+- logging-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Tekton CI/CD 流水线故障排查指南
 
@@ -753,19 +700,7 @@ groups:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[系统基础/速查卡/git.md|git]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[故障诊断/高级排障/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

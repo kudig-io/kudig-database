@@ -1,56 +1,4 @@
 ---
-title: GPU 与设备插件故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: GPU 与设备插件故障排查指南'
-summary: 'title: GPU 与设备插件故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- containerd
-- docker
-- daemonset
-- operator
-- gpu
-- cuda
-- nvidia
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- GPU 与设备插件故障排查指南 是什么
-- 如何 GPU 与设备插件故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- GPU 与设备插件故障排查指南 故障排查
-- GPU 与设备插件故障排查指南 排障步骤
-trigger_keywords:
-- GPU
-- 与设备插件故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- gpu-scheduling-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: GPU 与设备插件故障排查指南
 description: '# GPU 与设备插件故障排查指南'
 category: structural-troubleshooting
@@ -58,8 +6,8 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
-- [[containerd|containerd]]
+- kubelet
+- containerd
 - docker
 - daemonset
 - operator
@@ -84,16 +32,16 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # GPU 与设备插件故障排查指南
 
@@ -266,9 +214,6 @@ cat /etc/nvidia-container-runtime/config.toml
 
 ### 2.1 排查决策树
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 GPU/设备 Pod 问题
@@ -385,7 +330,7 @@ kubectl get pods -n gpu-operator -o wide
 kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, capacity: .status.capacity, allocatable: .status.allocatable}' | grep -A5 -B1 gpu
 
 # 详细查看单个节点
-kubectl describe node <node-name> | grep -A10 "Capacity|Allocatable|Allocated"
+kubectl describe node <node-name> | grep -A10 "Capacity\|Allocatable\|Allocated"
 
 # 查看 GPU 资源分配情况
 kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].resources.limits."nvidia.com/gpu" != null) | {namespace: .metadata.namespace, name: .metadata.name, node: .spec.nodeName, gpu: .spec.containers[].resources.limits."nvidia.com/gpu"}'
@@ -428,7 +373,7 @@ cat /etc/docker/daemon.json | jq '.runtimes'
 
 ```bash
 # kubelet 设备插件相关日志
-journalctl -u kubelet | grep -i "device|plugin|gpu|nvidia" | tail -50
+journalctl -u kubelet | grep -i "device\|plugin\|gpu\|nvidia" | tail -50
 
 # 设备分配日志
 journalctl -u kubelet | grep -i "allocate" | tail -20
@@ -454,9 +399,6 @@ journalctl -u kubelet | grep -i "ListAndWatch" | tail -20
 **问题现象**：Node 上看不到 GPU 资源，`kubectl describe node` 中 Capacity 无 `nvidia.com/gpu`。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -500,10 +442,6 @@ version = 2
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.nvidia.options]
   BinaryName = "/usr/bin/nvidia-container-runtime"
 ```
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 > **🔴 高风险操作警告**
 >
@@ -576,19 +514,16 @@ spec:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1: 查看 kubelet 日志定位具体错误
-journalctl -u kubelet | grep -i "allocate|device" | tail -50
+journalctl -u kubelet | grep -i "allocate\|device" | tail -50
 
 # 步骤 2: 检查设备插件健康状态
-kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset | grep -i "health|error|fail"
+kubectl logs -n kube-system -l app=nvidia-device-plugin-daemonset | grep -i "health\|error\|fail"
 
 # 步骤 3: 在节点上检查 GPU 设备状态
-nvidia-smi -q | grep -A5 "GPU Current Temp|Power Draw|ECC"
+nvidia-smi -q | grep -A5 "GPU Current Temp\|Power Draw\|ECC"
 
 # 步骤 4: 检查设备文件权限
 ls -la /dev/nvidia*
@@ -598,7 +533,7 @@ ls -la /dev/nvidia*
 nvidia-smi --gpu-reset -i 0  # 危险操作，会影响使用该 GPU 的所有进程
 
 # b. 检查硬件问题
-nvidia-smi -q | grep -i "retired|error"
+nvidia-smi -q | grep -i "retired\|error"
 
 # 步骤 6: 重启设备插件刷新设备列表
 kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
@@ -608,9 +543,6 @@ kubectl delete pods -n kube-system -l app=nvidia-device-plugin-daemonset
 **问题现象**：Pod 运行中，但容器内 `nvidia-smi` 失败或 CUDA 程序报错。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -660,9 +592,6 @@ spec:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 检查节点驱动版本支持的 CUDA 版本
@@ -695,10 +624,6 @@ kubectl exec <pod-name> -- nvcc --version
 **问题现象**：MIG 模式启用但设备不可用，或 MIG 实例不符合预期。
 
 **解决步骤**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl drain`：驱逐节点所有 Pod，业务流量受影响
-> - `kubectl delete`：删除资源（可由声明式清单重建）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -774,10 +699,6 @@ data:
 
 **解决步骤**：
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 步骤 1: 应用时间片配置
@@ -798,9 +719,6 @@ kubectl describe node <gpu-node> | grep nvidia.com/gpu
 **问题现象**：高性能网络设备不可用，分布式训练性能差。
 
 **解决步骤**：
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -934,24 +852,11 @@ spec:
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[系统基础/速查卡/docker.md|docker]]
-- [[生态参考/领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[生态参考/领域索引/node-index.md|Node 知识图谱索引]]
-- [[生态参考/领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/node-index|Node 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
-- [[故障诊断/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

@@ -1,57 +1,4 @@
 ---
-title: 疑难问题系统性排查方法论：配置优先（Configuration-First） [topic-structural-trouble-shooting]
-description: 'title: 疑难问题系统性排查方法论：配置优先（Configuration-First）'
-summary: 'title: 疑难问题系统性排查方法论：配置优先（Configuration-First）'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- configuration
-- etcd
-- kubelet
-- prometheus
-- coredns
-- daemonset
-- ingress
-- gateway
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 疑难问题系统性排查方法论：配置优先（Configuration-First） 是什么
-- 如何 疑难问题系统性排查方法论：配置优先（Configuration-First）
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 疑难问题系统性排查方法论：配置优先（Configuration-First） 故障排查
-- 疑难问题系统性排查方法论：配置优先（Configuration-First） 排障步骤
-trigger_keywords:
-- 疑难问题系统性排查方法论：配置优先
-- Configuration-First
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 疑难问题系统性排查方法论：配置优先（Configuration-First）
 description: '# 疑难问题系统性排查方法论：配置优先（Configuration-First）'
 category: structural-troubleshooting
@@ -59,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[etcd|etcd]]
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- etcd
+- kubelet
+- prometheus
 - coredns
 - daemonset
 - ingress
@@ -85,24 +32,25 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 疑难问题系统性排查方法论：配置优先（Configuration-First）
 
-> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级 | **定位**: 跨组件方法论
+> **适用版本**: [[实体/kubernetes|kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-04 | **难度**: 高级 | **定位**: 跨组件方法论
 
 ---
 
-<!-- chunk: 0. 方法论定位 -->## 0. 方法论定位
+## 0. 方法论定位
 
 本文档定义了面向 Kubernetes **疑难问题**的系统性排查方法论——**配置优先（Configuration-First）**。
 
@@ -110,7 +58,7 @@ k8s_versions:
 
 **核心主张**：遇到复杂疑难问题时，**先检查配置文件**，然后按照特定步骤进行深入分析。
 
-## 与现有排查体系的关系
+### 与现有排查体系的关系
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -119,10 +67,10 @@ k8s_versions:
 │  ├── 解决：排查顺序问题（先查什么？后查什么？）                              │
 │  └── 输出：结构化排查路径 + 配置验证清单                                   │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  故障诊断/topic-fta/          → 为什么出问题（故障树因果分析，演绎法）                 │
-│  故障诊断/topic-febm/         → 如何从证据推导结论（取证循证，归纳法）                 │
+│  domain-10-troubleshooting-diagnostics/topic-fta/          → 为什么出问题（故障树因果分析，演绎法）                 │
+│  domain-10-troubleshooting-diagnostics/topic-febm/         → 如何从证据推导结论（取证循证，归纳法）                 │
 │  topic-structural/   → 具体怎么查（按组件的详细排查步骤）                    │
-│  故障诊断/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
+│  domain-10-troubleshooting-diagnostics/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -135,9 +83,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 1. 方法论核心原则 -->## 1. 方法论核心原则
+## 1. 方法论核心原则
 
-## 1.1 黄金法则：配置优先
+### 1.1 黄金法则：配置优先
 
 > **在进行任何深入的系统级排查之前，必须先完成配置文件的检查和验证。**
 
@@ -156,7 +104,7 @@ k8s_versions:
 
 **近一半的问题根因是配置错误**，而配置检查是所有排查手段中成本最低、速度最快的。如果跳过配置检查直接深入网络/内核排查，平均会浪费 30-120 分钟。
 
-## 1.2 排查顺序金字塔
+### 1.2 排查顺序金字塔
 
 ```
                     ┌──────────┐
@@ -177,7 +125,7 @@ k8s_versions:
         └──────────────────────────────────┘
 ```
 
-## 1.3 方法论五步法
+### 1.3 方法论五步法
 
 ```
 Step 1: 配置验证 ──→ Step 2: 版本兼容 ──→ Step 3: 运行状态 ──→ Step 4: 网络链路 ──→ Step 5: 系统深层
@@ -195,11 +143,11 @@ Step 1: 配置验证 ──→ Step 2: 版本兼容 ──→ Step 3: 运行状�
 
 ---
 
-<!-- chunk: 2. Step 1：配置文件检查与验证 -->## 2. Step 1：配置文件检查与验证
+## 2. Step 1：配置文件检查与验证
 
 这是整个方法论的核心步骤。对于 Kubernetes 中的任何组件，配置检查应覆盖以下层次：
 
-## 2.1 配置检查四层模型
+### 2.1 配置检查四层模型
 
 ```
 ┌──────────────────────────────────────────────────────┐
@@ -217,7 +165,7 @@ Step 1: 配置验证 ──→ Step 2: 版本兼容 ──→ Step 3: 运行状�
 └──────────────────────────────────────────────────────┘
 ```
 
-## 2.2 通用配置检查清单
+### 2.2 通用配置检查清单
 
 每个组件的配置检查应回答以下问题：
 
@@ -233,21 +181,21 @@ Step 1: 配置验证 ──→ Step 2: 版本兼容 ──→ Step 3: 运行状�
 
 ---
 
-<!-- chunk: 3. 实战案例：CoreDNS 疑难问题的配置优先排查 -->## 3. 实战案例：CoreDNS 疑难问题的配置优先排查
+## 3. 实战案例：CoreDNS 疑难问题的配置优先排查
 
 以下以 CoreDNS 问题为完整示例，演示配置优先方法论的具体应用。
 
-## 3.0 场景描述
+### 3.0 场景描述
 
 **问题现象**：集群中部分 Pod 间歇性出现 DNS 解析失败，外部域名解析偶尔超时，应用日志报 `could not resolve host` 和 `i/o timeout`，但 CoreDNS Pod 状态显示 Running。
 
 **疑难点**：CoreDNS 没有明显异常（未 Crash、未 OOM），症状间歇性出现，容易误导排查方向进入网络链路排查。
 
-## 3.1 Step 1：CoreDNS 配置文件检查（首要步骤）
+### 3.1 Step 1：CoreDNS 配置文件检查（首要步骤）
 
 > **核心规定：在进行全面的网络链路排查之前，首先要检查和验证 CoreDNS 的配置文件是否正确。**
 
-## 3.1.1 检查 Corefile（CoreDNS 核心配置）
+#### 3.1.1 检查 Corefile（CoreDNS 核心配置）
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -291,10 +239,7 @@ kubectl get configmap coredns -n kube-system -o yaml
 }
 ```
 
-## 3.1.2 检查 Pod DNS 配置（resolv.conf）
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+#### 3.1.2 检查 Pod DNS 配置（resolv.conf）
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -314,12 +259,12 @@ kubectl exec <problem-pod> -- cat /etc/resolv.conf
 # 验证 kube-dns Service ClusterIP
 kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 ```
-## 3.1.3 检查 Deployment/Service 配置一致性
+#### 3.1.3 检查 Deployment/Service 配置一致性
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 检查 CoreDNS Deployment 配置
-kubectl get deployment coredns -n kube-system -o yaml | grep -A 5 'args|configMap|resources|replicas'
+kubectl get deployment coredns -n kube-system -o yaml | grep -A 5 'args\|configMap\|resources\|replicas'
 
 # 检查 CoreDNS Service selector 与 Pod label 是否匹配
 kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.selector}'
@@ -328,7 +273,7 @@ kubectl get pods -n kube-system -l k8s-app=kube-dns --show-labels
 # 检查 Endpoints 是否正常填充
 kubectl get endpoints kube-dns -n kube-system
 ```
-## 3.1.4 检查近期配置变更
+#### 3.1.4 检查近期配置变更
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -341,7 +286,7 @@ kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i dns
 # 如果有 Git 管理的集群配置，检查近期变更
 # git log --since="24 hours ago" -- '**/coredns*' '**/dns*'
 ```
-## 3.1.5 Step 1 检查结论模板
+#### 3.1.5 Step 1 检查结论模板
 
 完成 Step 1 后，填写以下结论：
 
@@ -357,7 +302,7 @@ kubectl get events -n kube-system --sort-by='.lastTimestamp' | grep -i dns
 → 根因已定位？[是：修复并验证] / [否：进入 Step 2]
 ```
 
-## 3.2 Step 2：版本与兼容性验证
+### 3.2 Step 2：版本与兼容性验证
 
 仅当 Step 1 未发现配置问题时，进入此步骤。
 
@@ -384,12 +329,9 @@ kubectl version --short
 - 是否使用了当前版本已废弃的插件或参数
 - 近期是否进行过 K8s 或 CoreDNS 升级
 
-## 3.3 Step 3：运行状态与资源检查
+### 3.3 Step 3：运行状态与资源检查
 
 仅当 Step 1-2 未发现问题时，进入此步骤。
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -412,12 +354,9 @@ kubectl exec -n kube-system <coredns-pod> -- wget -qO- http://localhost:9153/met
 - CoreDNS 日志中是否有持续性错误
 - SERVFAIL 比率是否异常偏高
 
-## 3.4 Step 4：网络链路排查
+### 3.4 Step 4：网络链路排查
 
 **仅当 Step 1-3 均未发现问题时，才进入网络链路排查。**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -439,7 +378,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 # conntrack -S | grep drop
 # sysctl net.netfilter.nf_conntrack_count net.netfilter.nf_conntrack_max
 ```
-## 3.5 Step 5：系统深层排查
+### 3.5 Step 5：系统深层排查
 
 **仅当 Step 1-4 均未发现问题时，才进入系统深层排查。**
 
@@ -462,11 +401,11 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 
 ---
 
-<!-- chunk: 4. 配置优先清单：其他常见组件 -->## 4. 配置优先清单：其他常见组件
+## 4. 配置优先清单：其他常见组件
 
 配置优先方法论不仅适用于 CoreDNS，以下是其他组件的 Step 1 配置检查要点：
 
-## 4.1 Ingress/Gateway 疑难排查
+### 4.1 Ingress/Gateway 疑难排查
 
 | 配置检查项 | 检查命令 | 常见配置错误 |
 |-----------|---------|------------|
@@ -475,7 +414,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 | Backend Service | `kubectl get svc <backend>` | Service 端口与 Ingress 配置不匹配 |
 | TLS 证书 | `kubectl get secret <tls-secret> -o yaml` | 证书过期、域名不匹配、格式错误 |
 
-## 4.2 Service 连通性疑难排查
+### 4.2 Service 连通性疑难排查
 
 | 配置检查项 | 检查命令 | 常见配置错误 |
 |-----------|---------|------------|
@@ -484,7 +423,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 | Endpoints 填充 | `kubectl get endpoints <svc>` | Endpoints 为空（Selector 错误或 Pod 未就绪） |
 | SessionAffinity | `kubectl get svc <svc> -o jsonpath='{.spec.sessionAffinity}'` | 意外的会话亲和性配置 |
 
-## 4.3 Pod 启动失败疑难排查
+### 4.3 Pod 启动失败疑难排查
 
 | 配置检查项 | 检查命令 | 常见配置错误 |
 |-----------|---------|------------|
@@ -494,7 +433,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 | 环境变量引用 | `kubectl get pod <pod> -o yaml | grep -A 3 envFrom` | 引用的 ConfigMap/Secret 不存在 |
 | SecurityContext | `kubectl get pod <pod> -o yaml | grep -A 10 securityContext` | 与 PSA 策略冲突 |
 
-## 4.4 etcd 疑难排查
+### 4.4 etcd 疑难排查
 
 | 配置检查项 | 检查命令 | 常见配置错误 |
 |-----------|---------|------------|
@@ -505,16 +444,16 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
 
 ---
 
-<!-- chunk: 5. Agent 集成指南 -->## 5. Agent 集成指南
+## 5. Agent 集成指南
 
-## 5.1 方法论在 Agent 工作流中的位置
+### 5.1 方法论在 Agent 工作流中的位置
 
 ```
 工单/告警输入
     │
     ▼
 ┌──────────────────────┐
-│ Skill 路由（症状匹配）  │  ← 故障诊断/topic-skills/ YAML front matter
+│ Skill 路由（症状匹配）  │  ← domain-10-troubleshooting-diagnostics/topic-skills/ YAML front matter
 └──────────┬───────────┘
            │
            ▼
@@ -527,16 +466,16 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
            │
            ▼
 ┌──────────────────────┐
-│ FTA 故障树遍历         │  ← 故障诊断/topic-fta/ 因果关系模型
+│ FTA 故障树遍历         │  ← domain-10-troubleshooting-diagnostics/topic-fta/ 因果关系模型
 └──────────┬───────────┘
            │
            ▼
 ┌──────────────────────┐
-│ 修复 → 验证 → 闭环    │  ← 故障诊断/topic-skills/ Section 6-7
+│ 修复 → 验证 → 闭环    │  ← domain-10-troubleshooting-diagnostics/topic-skills/ Section 6-7
 └──────────────────────┘
 ```
 
-## 5.2 Agent 执行时的配置检查优先级
+### 5.2 Agent 执行时的配置检查优先级
 
 当 Agent 执行任何 Skill 的 Phase 1（快速诊断）时，应遵循以下优先级：
 
@@ -560,7 +499,7 @@ phase_1_priority:
     time_budget: "2min"
 ```
 
-## 5.3 配置检查自动化模板
+### 5.3 配置检查自动化模板
 
 Agent 在执行配置检查时可使用以下结构化输出：
 
@@ -590,9 +529,9 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 ---
 
-<!-- chunk: 6. 反模式与陷阱 -->## 6. 反模式与陷阱
+## 6. 反模式与陷阱
 
-## 6.1 常见反模式
+### 6.1 常见反模式
 
 | # | 反模式 | 描述 | 后果 | 正确做法 |
 |---|--------|------|------|---------|
@@ -602,7 +541,7 @@ Agent 在执行配置检查时可使用以下结构化输出：
 | A4 | **忽略近期变更** | 不查变更历史就开始排查 | 70% 的问题与近期变更相关 | Step 1 必须包含变更追溯 |
 | A5 | **默认值盲区** | 假设默认配置没问题 | Kubernetes 默认值不一定适合所有场景 | 明确检查关键参数的默认值 |
 
-## 6.2 CoreDNS 特有陷阱
+### 6.2 CoreDNS 特有陷阱
 
 | 陷阱 | 现象 | 根因 | 排查捷径 |
 |------|------|------|---------|
@@ -613,11 +552,11 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 ---
 
-<!-- chunk: 7. 配置优先排查检查表（Checklist） -->## 7. 配置优先排查检查表（Checklist）
+## 7. 配置优先排查检查表（Checklist）
 
 以下检查表可在实际排查中直接使用，按顺序逐项完成：
 
-## 7.1 通用配置检查表
+### 7.1 通用配置检查表
 
 - [ ] **C1** 核心配置文件获取并审查（语法、完整性）
 - [ ] **C2** 配置文件中所有引用的资源存在且可访问（Secret、ConfigMap、Service）
@@ -627,7 +566,7 @@ Agent 在执行配置检查时可使用以下结构化输出：
 - [ ] **C6** 关键参数默认值确认（非依赖隐式默认值）
 - [ ] **C7** 多副本/多实例配置一致性
 
-## 7.2 CoreDNS 专项检查表
+### 7.2 CoreDNS 专项检查表
 
 - [ ] **CF1** Corefile 语法正确、插件链顺序正确
 - [ ] **CF2** `kubernetes` 插件域名 `cluster.local` 拼写正确
@@ -644,42 +583,24 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 ---
 
-<!-- chunk: 8. 关联资源 -->## 8. 关联资源
+## 8. 关联资源
 
 | 资源 | 路径 | 关系 |
 |------|------|------|
-| **DNS 故障树分析** | [故障诊断/topic-fta/list/dns-fta.md](../故障诊断/FTA故障树/list/dns-fta.md) | FTA 因果分析模型 |
-| **DNS 结构化排查指南** | [[故障诊断/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]].md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [[故障诊断/基础设施排障/26-dns-troubleshooting.md|26-dns-troubleshooting]].md](../故障诊断/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
-| **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../故障诊断/技能体系/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
-| **FEBM 取证方法论** | [故障诊断/topic-febm/](../故障诊断/FEBM方法论/) | 事后复盘取证分析 |
-| **FTA 方法论合集** | [故障诊断/topic-fta/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
+| **DNS 故障树分析** | [domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md) | FTA 因果分析模型 |
+| **DNS 结构化排查指南** | [03-networking/02-dns-troubleshooting.md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
+| **DNS 故障排查（domain-12）** | [domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md](../domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
+| **DNS Skill（Agent 可执行）** | [domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md](../domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
+| **FEBM 取证方法论** | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) | 事后复盘取证分析 |
+| **FTA 方法论合集** | [domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md](../domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
 
 ---
 
-<!-- chunk: 9. 版本历史 -->## 9. 版本历史
+## 9. 版本历史
 
 | 版本 | 日期 | 变更内容 |
 |------|------|---------|
 | 1.0 | 2026-04 | 初始版本：配置优先方法论、CoreDNS 完整示例、Agent 集成指南 |
 
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/高级排障/MOC.md|topic-structural-trouble-shooting MOC]]
-- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[故障诊断/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
-- [[故障诊断/高级排障/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
-
-## See Also
-
-- [[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[故障诊断/高级排障/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[故障诊断/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
-
-```
 
 <!-- risk-assessed -->

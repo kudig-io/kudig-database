@@ -130,7 +130,7 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **Istio** | (待补充) | Service Mesh 故障排查](../故障诊断/topic-structural-trouble-shooting/03-networking/06-service-mesh-troubleshooting.md) | Sidecar/流量 |
+| **Istio** | (待补充) | Service Mesh 故障排查](../故障诊断/高级排障/structural-03-networking/06-service-mesh-troubleshooting.md) | Sidecar/流量 |
 | **Linkerd** | (待补充) | - | 代理/心跳 |
 | **Envoy** | (待补充) | - | 代理配置 |
 
@@ -281,7 +281,7 @@ flowchart TD
 ### 9.3 文档存放位置
 
 - FTA 索引文档: `故障诊断/topic-fta/list/[项目名]-fta.md`
-- 故障排查指南: `故障诊断/topic-structural-trouble-shooting/[分类]/[序号]-[项目名]-troubleshooting.md`
+- 故障排查指南: `故障诊断/高级排障/structural-[分类]/[序号]-[项目名]-troubleshooting.md`
 
 ---
 

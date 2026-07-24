@@ -759,7 +759,7 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 | [网络/37-terway-resources-crud-operations.md](../网络/37-terway-resources-crud-operations.md) | Terway 实例 CRUD 操作、CRD 资源管理 |
 | [网络/38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) | Terway GC 垃圾回收机制 |
 | [网络/34-network-performance-tuning.md](../网络/34-network-performance-tuning.md) | 网络性能调优通用指南 |
-| [故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
 | [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训 |
 

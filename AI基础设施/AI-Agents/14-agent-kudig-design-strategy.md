@@ -125,7 +125,7 @@ kudig-database 已覆盖 39+ 知识域（架构、网络、存储、故障排查
 **核心能力**：
 
 - **基于 RAG 的 K8s 运维 Agent**：将所有领域文档索引至向量库，使 Agent 能基于上下文给出精准回答
-- **结构化故障排查 Agent**：`故障诊断/`（42 个文件）和 `故障诊断/topic-structural-trouble-shooting/` 提供了决策树——Agent 可以交互式地引导排查
+- **结构化故障排查 Agent**：`故障诊断/`（42 个文件）和 `故障诊断/高级排障/structural-` 提供了决策树——Agent 可以交互式地引导排查
 - **FTA 故障树驱动 Agent**：`故障诊断/topic-fta/` 包含完整的故障树分析方法论和 37 个组件级故障树，天然适合 Agent 按树结构逐步推理
 
 **典型场景**：
@@ -136,7 +136,7 @@ kudig-database 已覆盖 39+ 知识域（架构、网络、存储、故障排查
 
 Agent 工作流:
   1. 检索 故障诊断/05-pod-pending-diagnosis.md
-  2. 检索 故障诊断/topic-structural-trouble-shooting/05-workloads/ 相关决策树
+  2. 检索 故障诊断/高级排障/structural-05-workloads/ 相关决策树
   3. 向工程师追问关键信息（集群版本、节点资源、事件日志）
   4. 逐步推理检查清单
   5. 给出精确的 kubectl 诊断命令和修复建议
@@ -293,7 +293,7 @@ Agent:
 |------|---------|---------------|
 | FTA 故障树分析 | `故障诊断/topic-fta/` | Agent 推理的知识骨架 |
 | FEBM 取证循证 | `故障诊断/topic-febm/` | Agent 诊断的方法论基础 |
-| 结构化故障排查 | `故障诊断/topic-structural-trouble-shooting/` | Agent 决策树的直接输入 |
+| 结构化故障排查 | `故障诊断/高级排障/structural-` | Agent 决策树的直接输入 |
 | YAML 清单手册 | `清单模式/` | YAML 生成 Agent 的模板库 |
 | 故障排查大全 | `故障诊断/` | 排障 Agent 的核心语料 |
 | 运维词典 | `系统基础/topic-dictionary/` | Agent 的专业术语和最佳实践 |

@@ -1,66 +1,5 @@
 ---
-title: Service Mesh (Istio) 深度排查与性能调优指南 [topic-structural-trouble-shooting]
-description: 'title: Service Mesh (Istio) 深度排查与性能调优指南'
-summary: 'title: Service Mesh (Istio) 深度排查与性能调优指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- prometheus
-- grafana
-- jaeger
-- istio
-- envoy
-- helm
-- docker
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 1h
-intent_queries:
-- Service Mesh (Istio) 深度排查与性能调优指南 是什么
-- 如何 Service Mesh (Istio) 深度排查与性能调优指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Service Mesh (Istio) 深度排查与性能调优指南 故障排查
-- Service Mesh (Istio) 深度排查与性能调优指南 排障步骤
-trigger_keywords:
-- Service
-- Mesh
-- Istio
-- 深度排查与性能调优指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- service-mesh-basics
-- prometheus-basics
-- monitoring-basics
-- ebpf-basics
-- etcd-basics
-- policy-basics
-- backup-basics
-- tracing-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Service|Service]]Service Mesh）|Service Mesh]] ([[Istio|Istio]]) 深度排查与性能调优指南
+title: Service Mesh (Istio) 深度排查与性能调优指南
 description: '# Service Mesh (Istio) 深度排查与性能调优指南'
 category: structural-troubleshooting
 tags:
@@ -95,16 +34,24 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- ebpf-basics
+- etcd-basics
+- policy-basics
+- backup-basics
+- tracing-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Service Mesh (Istio) 深度排查与性能调优指南
 
@@ -116,7 +63,7 @@ k8s_versions:
 | 角色 | 目标 | 核心收获 |
 | :--- | :--- | :--- |
 | **初学者** | 解决 Sidecar 注入、404/503 报错等基础问题 | 掌握 Istio 流量模型（VS/DR/GW）与 `istioctl` 基础诊断。 |
-| **中级运维** | 优化证书管理、实施精细化流量控制 | 理解 mTLS 原理、掌握 xDS 配置同步状态分析、Envoy 日志解读。 |
+| **中级运维** | 优化证书管理、实施精细化流量控制 | 理解 mTLS 原理、掌握 xDS 配置同步状态分析、[[envoy|Envoy]] 日志解读。 |
 | **资深专家** | 解决大规模集群瓶颈与 Ambient Mesh 落地 | 深入 xDS 底层报文（LDS/RDS/CDS/EDS）、Ambient Mesh 架构问题、硬件加速（TLS Offload）与性能调优。 |
 
 ---
@@ -207,9 +154,6 @@ Istio 的控制面 `istiod` 与数据面 `Envoy` 之间通过 xDS（Discovery Se
 | **502/504 (Gateway)** | Gateway Pod 资源不足、后端应用 KeepAlive 超时小于 Envoy 超时。 | `kubectl logs -l app=istio-ingressgateway` |
 
 ### 2.2 专家工具箱
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -598,9 +542,6 @@ func (p *PilotServer) OnConfigChange(event ConfigEvent) {
 
 **证书轮换流程**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 证书轮换过程 (无需重启 Pod)
@@ -884,7 +825,6 @@ def connect_database():
             print(f"Retry {i}/10")
             time.sleep(2)
     raise Exception("Cannot connect to database")
-
 ```
 
 ---
@@ -895,7 +835,7 @@ def connect_database():
 
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
-| Proxy Status: STALE | xDS 推送阻塞或超时 | `kubectl logs -n istio-system istiod-xxx | grep "push error"` | 大规模集群 (5000+ Pod) |
+| Proxy Status: STALE | xDS 推送阻塞或超时 | `kubectl logs -n istio-system istiod-xxx \| grep "push error"` | 大规模集群 (5000+ Pod) |
 | Config 推送延迟 > 30s | Istiod CPU/内存不足 | `kubectl top pod -n istio-system` | EDS 推送风暴 |
 | VirtualService 不生效 | 配置语法错误 | `istioctl analyze -n <ns>` | 正则表达式错误 |
 | Certificate 签发失败 | CA Secret 丢失 | `kubectl get secret istio-ca-secret -n istio-system` | 误删除 Secret |
@@ -905,11 +845,11 @@ def connect_database():
 | 问题现象 | 根因分析 | 排查路径 | 典型场景 |
 |----------|----------|----------|----------|
 | 503 UH (Upstream Unhealthy) | Endpoint 未就绪 | `istioctl pc endpoint <pod> --address <ip>` | Pod 健康检查失败 |
-| 503 UC (Upstream Connection Failure) | mTLS 握手失败 | `kubectl logs <pod> -c istio-proxy | grep "TLS error"` | 证书过期/时钟偏移 |
+| 503 UC (Upstream Connection Failure) | mTLS 握手失败 | `kubectl logs <pod> -c istio-proxy \| grep "TLS error"` | 证书过期/时钟偏移 |
 | 503 UF (Upstream Failure) | 上游应用返回错误 | 查看应用日志 | 应用 Bug |
 | 404 NR (No Route) | VirtualService 未匹配 | `istioctl pc route <pod>` | 路径拼写错误 |
 | 429 RL (Rate Limited) | 触发限流 | 检查 EnvoyFilter 限流配置 | QPS 超限 |
-| 503 UO (Upstream Overflow) | 连接池耗尽 | `istioctl pc cluster <pod> | grep circuit_breakers` | 并发过高 |
+| 503 UO (Upstream Overflow) | 连接池耗尽 | `istioctl pc cluster <pod> \| grep circuit_breakers` | 并发过高 |
 
 ### 2.3.3 Gateway 问题 (Ingress/Egress)
 
@@ -926,7 +866,7 @@ def connect_database():
 |----------|----------|----------|----------|
 | Envoy CPU 100% | 路由规则过多/正则复杂 | `kubectl top pod --containers` | VirtualService 使用复杂正则 |
 | 内存持续增长 | xDS 配置过大 | `kubectl exec -c istio-proxy -- curl localhost:15000/memory` | 未使用 Sidecar 资源限制作用域 |
-| 请求延迟增加 | Envoy 过载 | `kubectl exec -c istio-proxy -- curl localhost:15000/stats | grep overload` | QPS 超过 Envoy 容量 |
+| 请求延迟增加 | Envoy 过载 | `kubectl exec -c istio-proxy -- curl localhost:15000/stats \| grep overload` | QPS 超过 Envoy 容量 |
 | 证书轮换风暴 | 大量 Pod 同时续签 | 监控 Istiod CA 负载 | 证书有效期过短 |
 
 ---
@@ -934,9 +874,6 @@ def connect_database():
 ## 3.3 深度排查脚本集
 
 ### 3.3.1 Istio 健康检查脚本
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1046,9 +983,6 @@ echo -e "\n=== Health Check Complete ==="
 ```
 ### 3.3.2 Envoy 配置调试脚本
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 #!/bin/bash
@@ -1110,9 +1044,6 @@ echo -e "\n=== Debug Complete ==="
 echo "Full config dumps saved to /tmp/*.json"
 ```
 ### 3.3.3 流量追踪脚本
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1343,9 +1274,6 @@ spec:
 ```
 **根因分析**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查 Envoy 重启原因
@@ -1455,9 +1383,6 @@ done
 
 **防护措施**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 升级前配置审计
@@ -1500,9 +1425,6 @@ istioctl pc cluster <pod> --fqdn '*' | grep -E "BlackHoleCluster|PassthroughClus
 ## 附录: Istio 专家巡检清单 (扩展版)
 
 ### 每日自动化巡检
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1586,9 +1508,6 @@ Terway ENI 模式使用阿里云弹性网卡（ENI）直接挂载到 Pod，网�
 - 流量被直接路由到 ENI，绕过了 Envoy sidecar
 
 #### 排查步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1676,14 +1595,11 @@ aliyun slb describeloadbalancer --region {region} --loadbalancer-id {lb-id}
 aliyun vpc describeRouteEntries --VpcId {vpc-id} --RouteTableId {rt-id}
 
 # Step 4: 查看 Ingress Gateway 日志
-kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip|eni"
+kubectl logs -n istio-system -l app=istio-ingressgateway --tail=50 | grep -i "eip\|eni"
 ```
 #### 解决方案
 
 **方案 A: 移除 Pod EIP 绑定，统一通过 Ingress Gateway 入口**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1781,9 +1697,6 @@ spec:
 ```
 
 ### 6.4 Terway + ASM 问题快速检测命令
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -2524,24 +2437,11 @@ verification: |
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/helm.md|helm]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[生态参考/领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
-- [[生态参考/领域索引/dns-index.md|DNS 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

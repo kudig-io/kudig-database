@@ -1,55 +1,4 @@
 ---
-title: 资源与调度故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 资源与调度故障排查指南'
-summary: 'title: 资源与调度故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- kubelet
-- scheduler
-- prometheus
-- docker
-- vpa
-- pdb
-- job
-- operator
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 资源与调度故障排查指南 是什么
-- 如何 资源与调度故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 资源与调度故障排查指南 故障排查
-- 资源与调度故障排查指南 排障步骤
-trigger_keywords:
-- 资源与调度故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 资源与调度故障排查指南
 description: '# 资源与调度故障排查指南'
 category: structural-troubleshooting
@@ -57,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - vpa
 - job
 - operator
@@ -81,20 +30,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 资源与调度故障排查指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
+> **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 
 ---
 
@@ -169,7 +118,7 @@ kubectl get pod <pod-name> -o yaml | grep -A15 resources
 
 # 查看 OOM 日志
 kubectl describe pod <pod-name> | grep -i oom
-dmesg | grep -i "oom|killed"
+dmesg | grep -i "oom\|killed"
 
 # 查看调度失败原因
 kubectl describe pod <pod-name> | grep -A10 Events
@@ -223,7 +172,7 @@ kubectl get pods -n <namespace> -o json | \
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 步骤 1：确认 OOM 事件
-kubectl describe pod <pod-name> | grep -i "oom|killed"
+kubectl describe pod <pod-name> | grep -i "oom\|killed"
 
 # 步骤 2：查看容器退出状态
 kubectl get pod <pod-name> -o yaml | grep -A10 "lastState:"
@@ -240,7 +189,7 @@ kubectl describe node <node-name> | grep -A5 "Allocated resources"
 free -h  # 在节点上执行
 
 # 步骤 6：查看系统 OOM 日志
-dmesg | grep -i "oom|killed" | tail -20
+dmesg | grep -i "oom\|killed" | tail -20
 
 # 步骤 7：分析内存使用趋势
 # 使用 Prometheus 查询
@@ -280,11 +229,6 @@ kubectl logs -n kube-system -l component=kube-scheduler | grep <pod-name>
 ### ResourceQuota 超限解决
 
 #### 解决步骤
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl delete`：删除资源（可由声明式清单重建）
-> - `kubectl edit/patch`：修改运行中的资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -356,10 +300,6 @@ EOF
 
 #### 解决步骤
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：增加内存限制
@@ -427,10 +367,6 @@ EOF
 
 #### 资源不足解决
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl edit/patch`：修改运行中的资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 方案 1：减少资源请求
@@ -497,10 +433,6 @@ kubectl patch deployment <name> -p '{
 ```
 #### 污点容忍问题解决
 
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `kubectl taint nodes`：变更污点影响 Pod 调度
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -542,9 +474,6 @@ kubectl taint nodes <node-name> <taint-key>-
 ```
 
 ### LimitRange 配置
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -611,19 +540,7 @@ EOF
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[系统基础/速查卡/go.md|go]]
-- [[系统基础/速查卡/k8s.md|k8s]]
-- [[实体/kubernetes.md|kubernetes]]
-- [[生态参考/领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
-
-## See Also
-
-- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]]
-- [[故障诊断/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
+- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

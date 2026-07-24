@@ -1,60 +1,4 @@
 ---
-title: 日志与监控故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: 日志与监控故障排查指南'
-summary: 'title: 日志与监控故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- monitoring
-- prometheus
-- grafana
-- jaeger
-- helm
-- docker
-- redis
-- elasticsearch
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 日志与监控故障排查指南 是什么
-- 如何 日志与监控故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 日志与监控故障排查指南 故障排查
-- 日志与监控故障排查指南 排障步骤
-trigger_keywords:
-- 日志与监控故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- prometheus-basics
-- monitoring-basics
-- redis-basics
-- logging-basics
-- tracing-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 日志与监控故障排查指南
 description: '# 日志与监控故障排查指南'
 category: structural-troubleshooting
@@ -62,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - decision-tree
-- [[Prometheus|prometheus]]
+- prometheus
 - grafana
-- [[Jaeger|jaeger]]
+- jaeger
 - docker
 - redis
 - elasticsearch
@@ -87,16 +31,20 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- monitoring-basics
+- redis-basics
+- logging-basics
+- tracing-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 日志与监控故障排查指南
 
@@ -105,7 +53,7 @@ k8s_versions:
 > **版本说明**:
 > - Prometheus v2.45+ 支持 native histogram
 > - Prometheus Operator v0.70+ 支持 scrapeClass
-> - Fluent Bit v2.x 推荐替代 Fluentd
+> - Fluent Bit v2.x 推荐替代 [[fluentd|Fluentd]]
 > - Loki v2.9+ 支持 TSDB 存储
 
 ## 0. 10 分钟快速诊断
@@ -226,9 +174,6 @@ Kubernetes 集群的可观测性依赖于日志收集、指标监控和告警系
 
 #### Fluentd/Fluent Bit 检查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查采集器 DaemonSet 状态
@@ -253,9 +198,6 @@ kubectl exec -n logging <fluent-bit-pod> -- ls -la /var/log/pods/
 ```
 #### Elasticsearch/OpenSearch 检查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查集群健康状态
@@ -274,9 +216,6 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/allocation?v
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/shards?v | head -20
 ```
 #### Loki 检查
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -381,11 +320,6 @@ fluent-bit-abc12    0/1     CrashLoopBackOff   5          10m
 ```
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 查看崩溃日志
@@ -417,9 +351,6 @@ kubectl get pods -n logging -l app=fluent-bit -w
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 确认日志在节点上存在
@@ -438,7 +369,7 @@ kubectl exec -n logging <fluent-bit-pod> -- cat /var/log/containers/<log-file> |
 kubectl get configmap -n logging fluent-bit-config -o yaml | grep -A10 "\[FILTER\]"
 
 # 6. 检查后端写入是否成功
-kubectl logs -n logging <fluent-bit-pod> | grep -i "error|retry|failed"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "error\|retry\|failed"
 
 # 7. 如果是 ES 写入问题，检查索引状态
 kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep red
@@ -447,16 +378,13 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cat/indices?v | grep
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl apply/create/replace`：创建/变更集群资源
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查采集器队列状态
-kubectl logs -n logging <fluent-bit-pod> | grep -i "buffer|queue|backpressure"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "buffer\|queue\|backpressure"
 
 # 2. 检查后端写入延迟
-kubectl logs -n logging <fluent-bit-pod> | grep -i "retry|timeout"
+kubectl logs -n logging <fluent-bit-pod> | grep -i "retry\|timeout"
 
 # 3. 优化 Fluent Bit 配置
 # 增加 buffer 和 flush 间隔
@@ -506,19 +434,12 @@ kubectl top pods -n logging | grep elasticsearch
 #### 场景 1：Elasticsearch 集群红色状态
 
 **问题现象：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 $ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health
 {"status":"red",...}
 ```
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -549,9 +470,6 @@ kubectl exec -n logging <es-pod> -- curl -s localhost:9200/_cluster/health | jq 
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -577,7 +495,7 @@ kubectl edit configmap loki-config -n logging
 # 调整 query_timeout, max_concurrent 等参数
 
 # 4. 检查存储后端 (如 S3/GCS)
-kubectl logs -n logging -l app=loki | grep -i "storage|s3|gcs"
+kubectl logs -n logging -l app=loki | grep -i "storage\|s3\|gcs"
 
 # 5. 考虑部署 Loki 分布式模式
 ```
@@ -591,10 +509,6 @@ kubectl logs -n logging -l app=loki | grep -i "storage|s3|gcs"
 部分服务在 Targets 页面显示 DOWN
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 > **🔴 高风险操作警告**
 >
@@ -642,9 +556,6 @@ curl -X POST http://localhost:9090/-/reload
 #### 场景 2：Prometheus OOM 或慢查询
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -708,7 +619,7 @@ kubectl get secret -n monitoring alertmanager-<name> -o jsonpath='{.data.alertma
 # 检查 Slack/Email/PagerDuty 等配置
 
 # 5. 检查 AlertManager 日志
-kubectl logs -n monitoring -l app.kubernetes.io/name=alertmanager | grep -i "error|failed"
+kubectl logs -n monitoring -l app.kubernetes.io/name=alertmanager | grep -i "error\|failed"
 
 # 6. 测试告警发送
 # 创建测试告警
@@ -727,9 +638,6 @@ curl -X POST http://localhost:9093/api/v2/alerts -H 'Content-Type: application/j
 #### 场景 2：告警风暴
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -782,10 +690,6 @@ kubectl edit prometheusrule <name> -n monitoring
 
 **解决步骤：**
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 1. 检查数据源配置
@@ -810,9 +714,6 @@ kubectl rollout restart deployment grafana -n monitoring
 #### 场景 2：Dashboard 加载缓慢
 
 **解决步骤：**
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 > **🔴 高风险操作警告**
 >
@@ -965,9 +866,6 @@ spec:
 
 ### 常用排查命令速查
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 日志系统
@@ -992,22 +890,13 @@ kubectl top pods -n monitoring
 ### 相关文档
 
 - [DaemonSet 故障排查](../05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
-- [StatefulSet 故障排查](../[[故障诊断/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]].md) (ES/Prometheus)
-- [Service 故障排查](../[[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
-- [HPA/VPA 故障排查](../[[故障诊断/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]].md) (依赖 metrics)
+- [StatefulSet 故障排查](../05-workloads/03-statefulset-troubleshooting.md) (ES/Prometheus)
+- [Service 故障排查](../03-networking/03-service-ingress-troubleshooting.md)
+- [HPA/VPA 故障排查](../07-resources-scheduling/02-autoscaling-troubleshooting.md) (依赖 metrics)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- [[生态参考/领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[故障诊断/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

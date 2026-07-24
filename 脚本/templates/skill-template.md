@@ -73,7 +73,7 @@ related_skills:                        # 关联的其他 Skill ID
 fta_refs:                              # 对应的 FTA 文件
   - "故障诊断/topic-fta/list/node-fta.md"
 knowledge_refs:                        # 深度知识参考
-  - "故障诊断/topic-structural-trouble-shooting/node-*.md"
+  - "故障诊断/高级排障/structural-node-*.md"
   - "故障诊断/"
 
 # === 统一 cross_refs ===

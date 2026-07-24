@@ -161,7 +161,7 @@ k8s_versions:
 | **症状向量匹配** | `故障诊断/topic-fta/symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
 | **FTA 诊断引擎** | `故障诊断/topic-fta/fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
 | **FTA 改进建议** | `故障诊断/topic-fta/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
-| **症状快速映射** | `故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
+| **症状快速映射** | `故障诊断/高级排障/structural-symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
 | **FTA 完整索引** | `故障诊断/topic-fta/fta-index.md` | TE-1~TE-16 完整路径索引 |
 | **FTA-FEBM 联合** | `故障诊断/topic-febm/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
 
@@ -430,7 +430,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  故障诊断/topic-structural-trouble-shooting/ (详细排查)            │
+│  故障诊断/高级排障/structural- (详细排查)            │
 │  - 63篇 结构化排查文档                                      │
 │  - 按组件/按现象                                           │
 └─────────────────────────────────────────────────────────────┘

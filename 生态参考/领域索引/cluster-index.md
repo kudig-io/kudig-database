@@ -58,16 +58,16 @@ prerequisites:
 ### 集群创建
 
 - [[实体/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](工作负载/topic-functions/cluster-create/01-overview.md)
-- [预检阶段 (Preflight Checks)](平台工程/代码分析/functions-cluster-create/02-preflight.md)
-- [证书阶段 (Certificate Generation)](平台工程/代码分析/functions-cluster-create/03-certs.md)
-- [kubeconfig 阶段 (Kubeconfig Generation)](平台工程/代码分析/functions-cluster-create/04-kubeconfig.md)
+- [预检阶段 (Preflight Checks)](平台工程/代码分析/cluster-create/02-preflight.md)
+- [证书阶段 (Certificate Generation)](平台工程/代码分析/cluster-create/03-certs.md)
+- [kubeconfig 阶段 (Kubeconfig Generation)](平台工程/代码分析/cluster-create/04-kubeconfig.md)
 - [控制面阶段 (Control Plane & Static [[系统基础/知识字典/workloads/pods.md|Pods]])](工作负载/topic-functions/cluster-create/05-control-plane.md)
 - 节点加入流程 (kubeadm join)](工作负载/topic-functions/cluster-create/06-join.md)
-- [etcd 集群初始化细节](平台工程/代码分析/functions-cluster-create/07-etcd.md)
-- [高可用控制面搭建](平台工程/代码分析/functions-cluster-create/08-ha.md)
-- [集群升级流程](平台工程/代码分析/functions-cluster-create/09-upgrade.md)
-- [CNI 网络插件与集群网络](平台工程/代码分析/functions-cluster-create/19-cni-networking.md)
-- [Node 注册与 kubeadm token 详解](平台工程/代码分析/functions-cluster-create/20-node-registration.md)
+- [etcd 集群初始化细节](平台工程/代码分析/cluster-create/07-etcd.md)
+- [高可用控制面搭建](平台工程/代码分析/cluster-create/08-ha.md)
+- [集群升级流程](平台工程/代码分析/cluster-create/09-upgrade.md)
+- [CNI 网络插件与集群网络](平台工程/代码分析/cluster-create/19-cni-networking.md)
+- [Node 注册与 kubeadm token 详解](平台工程/代码分析/cluster-create/20-node-registration.md)
 - Cluster Create — Kubernetes 集群新建源码分析](工作负载/topic-functions/cluster-create/README.md)
 
 ### 集群证书

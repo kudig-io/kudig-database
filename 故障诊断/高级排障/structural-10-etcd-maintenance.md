@@ -1,57 +1,5 @@
 ---
-title: etcd 维护专项文档 [故障诊断]
-description: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**:
-  2026-05'''
-summary: 'description: ''**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'''
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- etcd
-- prometheus
-- docker
-- job
-- rag
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- etcd 维护专项文档 是什么
-- 如何 etcd 维护专项文档
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- etcd 维护专项文档 故障排查
-- etcd 维护专项文档 排障步骤
-trigger_keywords:
-- etcd
-- 维护专项文档
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- etcd-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[etcd|etcd]] 维护专项文档
+title: etcd 维护专项文档
 description: '**文档类型**: 运维维护手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05'
 category: structural-troubleshooting
 tags:
@@ -59,7 +7,7 @@ tags:
 - troubleshooting
 - decision-tree
 - etcd
-- [[Prometheus|prometheus]]
+- prometheus
 - job
 - rag
 - agent
@@ -82,16 +30,17 @@ trigger_keywords:
 - structural
 - trouble
 - shooting
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # etcd 维护专项文档
 
@@ -100,9 +49,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 1. etcd 核心概念速查 -->## 1. etcd 核心概念速查
+## 1. etcd 核心概念速查
 
-## 1.1 关键指标
+### 1.1 关键指标
 
 | 指标 | 正常值 | 告警阈值 | 说明 |
 |------|--------|---------|------|
@@ -113,7 +62,7 @@ k8s_versions:
 | `applied_index` | 持续增长 | 停滞 | 复制状态 |
 | `commited_index` | ≥ applied_index | 差距持续扩大 | 提交状态 |
 
-## 1.2 常用诊断命令
+### 1.2 常用诊断命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -150,9 +99,9 @@ du -sh /var/lib/etcd/
 ```
 ---
 
-<!-- chunk: 2. 问题场景 -->## 2. 问题场景
+## 2. 问题场景
 
-## 2.1 磁盘空间不释放（最常见）
+### 2.1 磁盘空间不释放（最常见）
 
 **问题现象**: 删除大量历史资源后，`du -sh /var/lib/etcd/` 显示空间未减少，`db.size` 仍然很大
 
@@ -202,7 +151,7 @@ du -sh /var/lib/etcd/
 
 ---
 
-## 2.2 etcd space quota exceeded
+### 2.2 etcd space quota exceeded
 
 **问题现象**: API Server 报 "etcdserver: mvcc: database space exceeded"，写入被拒绝
 
@@ -268,7 +217,7 @@ kubectl get pods -n kube-system | grep etcd  # 确认所有 etcd pod 健康
 ```
 ---
 
-## 2.3 Leadership election 失败（leader 频繁切换）
+### 2.3 Leadership election 失败（leader 频繁切换）
 
 **问题现象**: etcd 日志显示 "raft term changed" 或 "lost leader"，集群不稳定
 
@@ -291,10 +240,6 @@ top
 # 高 CPU 导致 heartbeat 延迟
 ```
 **修复步骤**：
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # 方案 1: 降低心跳间隔（临时）
@@ -311,16 +256,11 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 ```
 ---
 
-## 2.4 Member add 失败
+### 2.4 Member add 失败
 
 **问题现象**: `etcdctl member add` 成功但新节点无法加入，日志报 "conflicting cluster ID" 或 "peer cluster not found"
 
 **排查步骤**：
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -341,7 +281,7 @@ cat /etc/kubernetes/etcd/etcd.conf.yaml | grep ETCD_INITIAL_CLUSTER
 # 确认与现有集群的 INITIAL_CLUSTER 一致
 
 # 3. 清理新节点的残留数据
-sudo rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+sudo rm -rf /var/lib/etcd/
 sudo systemctl restart etcd
 ```
 **正确的 add member 流程**：
@@ -360,20 +300,14 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
 kubeadm join phase etcd https://<existing-ip>:2379 --token <token> \
   --discovery-token-ca-cert-hash sha256:<hash> \
   --control-plane --certificate-key <cert-key>
-
 ```
 ---
 
-## 2.5 Member remove 失败（节点退役）
+### 2.5 Member remove 失败（节点退役）
 
 **问题现象**: `etcdctl member remove` 卡住或超时
 
 **排查步骤**：
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `rm -rf (系统/数据路径)`：删除系统或数据文件，可能摧毁节点或丢失全部数据
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 > **🔴 高风险操作警告**
 >
 > 下方命令属于不可逆或高影响操作，执行前请确认：
@@ -397,12 +331,12 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
   member remove <member-id> --force
 
 # 4. 在被移除的节点上清理残留
-sudo rm -rf /var/lib/etcd/  # ⚠️ 删除系统/数据文件
+sudo rm -rf /var/lib/etcd/
 sudo systemctl stop etcd
 ```
 ---
 
-## 2.6 Snapshot backup 验证失败
+### 2.6 Snapshot backup 验证失败
 
 **问题现象**: `etcdctl snapshot save` 成功，但 restore 时报错 "snapshot file is not valid"
 
@@ -425,11 +359,6 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint status -w json
 # 5. 如 cluster ID 不匹配，说明 snapshot 来自不同的集群，不能直接 restore
 ```
 **正确的 backup/restore 流程**：
-
-> ⚠️ **🔴 灾难性操作** — 含不可逆命令，执行前必须满足变更窗口+双人复核+事前备份+回滚方案
-> - `etcdctl snapshot restore`：用快照覆盖 etcd 数据目录，集群状态强制回退
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
 # ========== BACKUP ==========
@@ -467,9 +396,9 @@ ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 endpoint health
 ```
 ---
 
-<!-- chunk: 3. 性能调优 -->## 3. 性能调优
+## 3. 性能调优
 
-## 3.1 磁盘 I/O 优化
+### 3.1 磁盘 I/O 优化
 
 ```bash
 # 检查当前 I/O 延迟
@@ -482,7 +411,7 @@ iostat -x 1 10 | grep -E "avgqu-sz|avg-cpu"
 # - 隔离 WAL 日志到独立磁盘（避免写入竞争）
 ```
 
-## 3.2 网络优化
+### 3.2 网络优化
 
 ```bash
 # 检查节点间 RTT 延迟
@@ -492,7 +421,7 @@ ping -c 50 <other-etcd-node-ip> | tail -1
 # 避免跨地域部署 etcd（延迟太高影响写入性能）
 ```
 
-## 3.3 参数调优
+### 3.3 参数调优
 
 ```yaml
 # /etc/kubernetes/etcd.config.yaml 关键参数
@@ -508,9 +437,9 @@ auto-compaction-retention: "1h"  # 保留 1 小时历史
 
 ---
 
-<!-- chunk: 4. 监控指标 -->## 4. 监控指标
+## 4. 监控指标
 
-## 4.1 Prometheus 告警规则
+### 4.1 Prometheus 告警规则
 
 ```yaml
 groups:
@@ -551,7 +480,7 @@ groups:
 
 ---
 
-<!-- chunk: 5. 故障排查决策树 -->## 5. 故障排查决策树
+## 5. 故障排查决策树
 
 ```
 etcd 异常
@@ -591,35 +520,15 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - 集群基础/11-etcd-deep-dive.md
-  - 集群基础/10-plane-backup-disaster-recovery.md
-  - 故障诊断/topic-fta/list/etcd-fta.md
+  - domain-01-cluster-fundamentals/11-etcd-deep-dive.md
+  - [[domain-01-cluster-fundamentals/03-control-plane/10-plane-backup-disaster-recovery|10-plane-backup-disaster-recovery]].md
+  - domain-10-troubleshooting-diagnostics/topic-fta/list/etcd-fta.md
 ---
 ```
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/高级排障/MOC.md|topic-structural-trouble-shooting [[KUDIG Database — Global MOC|MOC]]]]
-- [[故障诊断/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
-- [[故障诊断/高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[故障诊断/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[故障诊断/高级排障/symptom-mapping-layer.md|症状快速映射层 (Symptom-SOP-RootCause Mapping)]]
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[生态参考/领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[故障诊断/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[故障诊断/高级排障/symptom-mapping-layer.md|symptom-mapping-layer]]
-- [[故障诊断/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-
-```
 
 <!-- risk-assessed -->

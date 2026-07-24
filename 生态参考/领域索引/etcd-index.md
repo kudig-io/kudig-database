@@ -92,8 +92,8 @@ prerequisites:
 
 ### 集群创建与证书
 
-- [[平台工程/代码分析/functions-cluster-create/07-etcd.md|etcd 集群初始化细节]]
-- [[平台工程/代码分析/functions-cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
+- [[平台工程/代码分析/cluster-create/07-etcd.md|etcd 集群初始化细节]]
+- [[平台工程/代码分析/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
 - [[平台工程/代码分析/functions-cluster-cert/04-etcd-cert.md|etcd 证书体系源码分析]]
 
 ### 平台运维

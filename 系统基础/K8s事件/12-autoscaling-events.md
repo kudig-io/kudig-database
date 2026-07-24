@@ -2451,7 +2451,7 @@ metadata:
 | **系统基础/05-resource-events.md** | 资源配额事件，HPA/CA 受限场景 |
 | **系统基础/11-metrics-monitoring-events.md** | Metrics Server 事件，HPA 指标源 |
 | **网络/30-service-mesh-deep-dive.md** | Service Mesh 环境下的自动扩缩容 |
-| **故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md** | Deployment 故障排查 |
+| **故障诊断/高级排障/structural-05-workloads/02-deployment-troubleshooting.md** | Deployment 故障排查 |
 
 ## 相关命令
 

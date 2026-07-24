@@ -1,56 +1,4 @@
 ---
-title: Higress 网关故障排查指南 [topic-structural-trouble-shooting]
-description: 'title: Higress 网关故障排查指南'
-summary: 'title: Higress 网关故障排查指南'
-category: structural-troubleshooting
-tags:
-- troubleshooting
-- guide
-- istio
-- envoy
-- flannel
-- docker
-- ingress
-- gateway
-- crd
-- wasm
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- Higress 网关故障排查指南 是什么
-- 如何 Higress 网关故障排查指南
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Higress 网关故障排查指南 故障排查
-- Higress 网关故障排查指南 排障步骤
-trigger_keywords:
-- Higress
-- 网关故障排查指南
-- troubleshooting
-- diagnostics
-- structural
-- trouble
-- shooting
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: Higress 网关故障排查指南
 description: Higress 云原生 API 网关故障排查指南，覆盖路由配置、xDS 推送、服务发现、Wasm 插件、AI 网关等问题场景
 category: structural-troubleshooting
@@ -58,9 +6,9 @@ tags:
 - k8s
 - troubleshooting
 - higress
-- [[Ingress|ingress]]
+- ingress
 - gateway
-- [[Envoy|envoy]]
+- envoy
 - wasm
 - nacos
 - xds
@@ -87,16 +35,17 @@ trigger_keywords:
 - Wasm
 - Nacos
 - xDS
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # Higress 网关故障排查指南
 
 > **适用版本**: Higress v1.x - v2.x | **最后更新**: 2026-05 | **难度**: 高级
@@ -113,9 +62,6 @@ k8s_versions:
 ---
 
 ## 10 分钟快速诊断
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -141,7 +87,7 @@ kubectl get mcphbridge -A
 # 7. 检查 WasmPlugin 配置
 kubectl get wasmplugin -A
 
-# 8. 查看 Envoy 配置
+# 8. 查看 [[envoy|Envoy]] 配置
 kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_dump
 ```
 ---
@@ -183,9 +129,6 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- curl localhost:15000/config_d
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Ingress 配置
@@ -222,9 +165,6 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 Istiod 状态
@@ -260,9 +200,6 @@ curl localhost:15000/config_dump?resource=dynamic_endpoints
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查 McpBridge CR 状态
@@ -296,9 +233,6 @@ kubectl get svc <service> -n <namespace> --show-labels
 
 **排查步骤**:
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # Step 1: 检查插件 OCI 镜像可访问性
@@ -330,9 +264,6 @@ kubectl exec -it <higress-gateway-pod> -c envoy -- \
 **现象**: HTTPS 请求返回 400 或握手失败
 
 **排查步骤**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -380,7 +311,7 @@ kubectl get globalrateLimit -A
 kubectl get semanticcache -A
 
 # Step 4: 查看 LLM Provider 日志
-kubectl logs -n higress-system <pod> | grep -i "openai|llm"
+kubectl logs -n higress-system <pod> | grep -i "openai\|llm"
 
 # Step 5: 检查 AI 路由规则
 kubectl get aiportal -A
@@ -456,7 +387,6 @@ spec:
     phase: REQUEST
     config:
       key: value
-
 ```
 
 ---
@@ -476,26 +406,14 @@ spec:
 
 ## 相关文档
 
-- [Higress 企业级网关实践](./网络/04-higress-enterprise-gateway.md)
-- Higress FTA 故障树](./故障诊断/topic-fta/list/higress-fta.md)
-- [Higress 全局索引](./生态参考/领域索引/higress-index.md)
-- [Ingress 通用故障排查](./[[故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]].md)
+- [Higress 企业级网关实践](./domain-03-networking-traffic/04-higress-enterprise-gateway.md)
+- [Higress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md)
+- [Higress 全局索引](./domain-19-landscape-references/topic-index/higress-index.md)
+- [Ingress 通用故障排查](./03-service-ingress-troubleshooting.md)
 
 ## Related
 
-- 08-docker-troubleshooting-guide
-- 16-troubleshooting-guide
-- [[index|index]]
-- [[系统基础/速查卡/go.md|go]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
 
-## See Also
-
-- [[故障诊断/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
-- [[故障诊断/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-
-```
 
 <!-- risk-assessed -->

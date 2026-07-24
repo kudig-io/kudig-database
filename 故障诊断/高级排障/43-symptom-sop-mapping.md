@@ -1791,7 +1791,7 @@ difficulty: intermediate
 target_roles: [sre, ops-engineer, support-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - 故障诊断/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md
+  - 故障诊断/高级排障/structural-09-command-output/00-command-output-root-cause-parser.md
   - 故障诊断/topic-fta/list/pod-fta.md
   - 故障诊断/05-pod-pending-diagnosis.md
 ---
