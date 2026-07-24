@@ -68,7 +68,7 @@ prerequisites:
 │  └── 输出：结构化排查路径 + 配置验证清单                                   │
 ├─────────────────────────────────────────────────────────────────────────┤
 │  故障诊断/FTA故障树/          → 为什么出问题（故障树因果分析，演绎法）                 │
-│  故障诊断/topic-febm/         → 如何从证据推导结论（取证循证，归纳法）                 │
+│  故障诊断/FEBM方法论/         → 如何从证据推导结论（取证循证，归纳法）                 │
 │  topic-structural/   → 具体怎么查（按组件的详细排查步骤）                    │
 │  故障诊断/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -591,7 +591,7 @@ Agent 在执行配置检查时可使用以下结构化输出：
 | **DNS 结构化排查指南** | [03-networking/02-dns-troubleshooting.md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
 | **DNS 故障排查（domain-12）** | [故障诊断/26-dns-troubleshooting.md](../故障诊断/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
 | **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../故障诊断/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
-| **FEBM 取证方法论** | [故障诊断/topic-febm/](../故障诊断/topic-febm/) | 事后复盘取证分析 |
+| **FEBM 取证方法论** | [故障诊断/FEBM方法论/](../故障诊断/FEBM方法论/) | 事后复盘取证分析 |
 | **FTA 方法论合集** | [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
 
 ---

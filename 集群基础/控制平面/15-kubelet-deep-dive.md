@@ -16,7 +16,7 @@ tags:
 - containerd
 tier: supporting
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -40,6 +40,16 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - gpu-scheduling-basics
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+- '1.33'
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**

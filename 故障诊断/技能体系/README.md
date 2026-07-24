@@ -356,7 +356,7 @@ Agent 在执行 Skill 后应记录：
 | 资源 | 路径 | 用途 |
 |------|------|------|
 | FTA 故障树库 | [故障诊断/FTA故障树/list/](../故障诊断/FTA故障树/list/) | 每个 Skill 对应的故障分析模型 |
-| FEBM 循证方法论 | [故障诊断/topic-febm/](../故障诊断/FEBM方法论/) | Agent 工单处理的理论基础 |
+| FEBM 循证方法论 | [故障诊断/FEBM方法论/](../故障诊断/FEBM方法论/) | Agent 工单处理的理论基础 |
 | 结构化故障排查 | [故障诊断/高级排障/structural-](../故障诊断/高级排障/) | 深度排查参考指南 |
 | Agent 设计 | [AI基础设施/02-ai-agents/](../AI基础设施/AI-Agents/) | AI Agent 工程与架构设计 |
 | 事件管理 Runbook | [系统基础/topic-dictionary/12-incident-management-runbooks.md](../系统基础/知识字典/12-incident-management-runbooks.md) | 事件管理流程模板 |

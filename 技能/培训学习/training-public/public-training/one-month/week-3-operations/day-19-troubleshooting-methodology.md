@@ -149,7 +149,7 @@ FEBM: 解决"怎么判断"的问题 (方法)
    - 重点: 故障树构建、根因分析
 
 3. **FEBM 理论基础**
-   - 文件: `../../故障诊断/topic-febm/01-febm-theory-foundations.md`
+   - 文件: `../../故障诊断/FEBM方法论/01-febm-theory-foundations.md`
    - 重点: 取证循证方法论
 
 ---

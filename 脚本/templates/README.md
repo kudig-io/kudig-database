@@ -32,7 +32,7 @@ last_updated: 2026-05-24
 | `domain-article-template.md` | 知识域深度文档 | `domain-*/` | ⭐⭐⭐ |
 | `fta-template.md` | FTA 故障树分析（融合附录模板） | `故障诊断/FTA故障树/list/` | ⭐⭐⭐ |
 | `skill-template.md` | Skill 工单技能（融合 Schema 完整规范） | `故障诊断/topic-skills/` | ⭐⭐⭐⭐ |
-| `febm-template.md` | FEBM 法医取证分析 | `故障诊断/topic-febm/` | ⭐⭐⭐ |
+| `febm-template.md` | FEBM 法医取证分析 | `故障诊断/FEBM方法论/` | ⭐⭐⭐ |
 | `cheat-sheet-template.md` | 技术速查卡 | `系统基础/topic-cheat-sheet/` | ⭐ |
 | `presentation-template.md` | 培训课程/演讲稿 | `生产运维/topic-presentations/` | ⭐⭐⭐ |
 

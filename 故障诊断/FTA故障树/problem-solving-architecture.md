@@ -112,7 +112,7 @@ prerequisites:
 | **FTA 改进建议** | `故障诊断/FTA故障树/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
 | **症状快速映射** | `故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
 | **FTA 完整索引** | `故障诊断/FTA故障树/fta-index.md` | TE-1~TE-16 完整路径索引 |
-| **FTA-FEBM 联合** | `故障诊断/topic-febm/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
+| **FTA-FEBM 联合** | `故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
 
 ---
 

@@ -142,7 +142,7 @@ Layer 1: 知识层 (Knowledge)      → Agent 如何检索、理解、引用知�
 | YAML 清单手册 | `清单模式/` | 36 | ~1.7M 字 | ★★★★☆ 模板生成 Agent 基础 |
 | K8s Events 大全 | `系统基础/` | 15 | ~800K 字 | ★★★★☆ 事件解读 Agent 关键 |
 | 运维词典 | `系统基础/topic-dictionary/` | 16 | ~1.4M 字 | ★★★★☆ 术语和最佳实践 |
-| FEBM 取证循证 | `故障诊断/topic-febm/` | 11 | ~1.0M 字 | ★★★★☆ 诊断方法论 |
+| FEBM 取证循证 | `故障诊断/FEBM方法论/` | 11 | ~1.0M 字 | ★★★★☆ 诊断方法论 |
 | FTA 方法论 | `故障诊断/FTA故障树/` (非 list) | 30 | ~500K 字 | ★★★★☆ Agent 编排理论 |
 | 控制平面 | `集群基础/` | 28 | ~1.1M 字 | ★★★★☆ 核心组件深度知识 |
 | 网络 | `网络/` | 41 | ~900K 字 | ★★★★☆ 网络排障 Agent |
@@ -1012,7 +1012,7 @@ Phase 4 (2-3 周) - 决策和验证层                          总工作量: ~1
 | `系统基础/topic-dictionary/` | 16 | 术语表、最佳实践 | 中 - 需分块 |
 | `系统基础/topic-cheat-sheet/` | 3 | 命令速查 | 低 - 可直接用 |
 | `发布变更/topic-migration/` | 10 | 迁移 SOP | 中 - 需 SOP 化 |
-| `故障诊断/topic-febm/` | 11 | 诊断方法论 | 中 - 需模板化 |
+| `故障诊断/FEBM方法论/` | 11 | 诊断方法论 | 中 - 需模板化 |
 
 ---
 
@@ -1060,7 +1060,7 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 | [Agent 设计思路与落地路径](./14-agent-kudig-design-strategy.md) | Agent 赋能的整体设计思路 |
 | [故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md](../故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
 | [故障诊断/FTA故障树/10-agent-orchestration-patterns.md](../故障诊断/FTA故障树/10-agent-orchestration-patterns.md) | Agent 编排模式 |
-| [故障诊断/topic-febm/04-febm-agent-ticket-processing.md](../故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
+| [故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md](../故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
 
 ---
 

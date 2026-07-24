@@ -111,7 +111,7 @@ core:
 
 # 方法论语料（推荐导入）
 methodology:
-  - path: 故障诊断/topic-febm/
+  - path: 故障诊断/FEBM方法论/
     priority: high
     chunking: by_h2
 

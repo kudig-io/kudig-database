@@ -53,16 +53,16 @@ status: reviewed
 
 ### topic-febm
 
-- [[故障诊断/topic-febm/01-febm-theory-foundations.md|01-febm-theory-foundations]]
-- [[故障诊断/topic-febm/02-febm-technical-implementation.md|02-febm-technical-implementation]]
-- [[故障诊断/topic-febm/03-febm-best-practices.md|03-febm-best-practices]]
-- [[故障诊断/topic-febm/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
-- [[故障诊断/topic-febm/05-febm-construction-methodology.md|05-febm-construction-methodology]]
-- [[故障诊断/topic-febm/06-febm-future-evolution.md|06-febm-future-evolution]]
-- [[故障诊断/topic-febm/07-febm-appendix.md|07-febm-appendix]]
-- [[故障诊断/topic-febm/08-febm-production-quick-start.md|08-febm-production-quick-start]]
-- [[故障诊断/topic-febm/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
-- [[故障诊断/topic-febm/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
+- [[故障诊断/FEBM方法论/01-febm-theory-foundations.md|01-febm-theory-foundations]]
+- [[故障诊断/FEBM方法论/02-febm-technical-implementation.md|02-febm-technical-implementation]]
+- [[故障诊断/FEBM方法论/03-febm-best-practices.md|03-febm-best-practices]]
+- [[故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md|04-febm-agent-ticket-processing]]
+- [[故障诊断/FEBM方法论/05-febm-construction-methodology.md|05-febm-construction-methodology]]
+- [[故障诊断/FEBM方法论/06-febm-future-evolution.md|06-febm-future-evolution]]
+- [[故障诊断/FEBM方法论/07-febm-appendix.md|07-febm-appendix]]
+- [[故障诊断/FEBM方法论/08-febm-production-quick-start.md|08-febm-production-quick-start]]
+- [[故障诊断/FEBM方法论/febm-methodology-deep-dive.md|febm-methodology-deep-dive]]
+- [[故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md|fta-febm-joint-diagnosis]]
 
 ### topic-fta
 

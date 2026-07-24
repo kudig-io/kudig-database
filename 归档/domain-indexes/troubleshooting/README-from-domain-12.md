@@ -186,7 +186,7 @@ tier: peripheral---
 | **topic-fta** | FTA 故障树分析（演绎法推理骨架） | 36 个组件故障树 | [故障诊断/FTA故障树/list/](../故障诊断/FTA故障树/list/) |
 | **topic-structural** | 按排障流程的结构化方法 | 12 个分类场景 | [故障诊断/高级排障/structural-](../故障诊断/高级排障/structural-) |
 | **topic-skills** | 诊断-修复闭环技能（Agent 可用） | 18 个 Skill | [故障诊断/topic-skills/](../故障诊断/topic-skills/) |
-| **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [故障诊断/topic-febm/](../故障诊断/topic-febm/) |
+| **topic-febm** | FEBM 取证循证方法论（归纳法） | 9 篇方法论 | [故障诊断/FEBM方法论/](../故障诊断/FEBM方法论/) |
 | **配置优先方法论** | 疑难问题的系统性排查策略（先配置后链路） | 方法论 + CoreDNS 示例 | [00-configuration-first-methodology.md](../故障诊断/高级排障/structural-00-configuration-first-methodology.md) |
 
 ### 推荐使用路径

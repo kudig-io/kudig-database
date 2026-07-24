@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[归档/troubleshooting-diagnostics/topic-febm/index|Topic Febm]]
+- [[故障诊断/FEBM方法论/index|Topic Febm]]
 - [[故障诊断/FTA故障树/index|Topic Fta]]
 - [[归档/troubleshooting-diagnostics/topic-qa-corpus/index|Topic Qa Corpus]]
 - [[故障诊断/高级排障/structural-index|Topic Structural Trouble Shooting]]

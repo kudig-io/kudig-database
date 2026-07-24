@@ -50,6 +50,7 @@ k8s_versions:
 - '1.30'
 - '1.31'
 - '1.32'
+- '1.33'
 authors:
 - name: KUDIG Team
   role: contributor

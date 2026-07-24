@@ -257,7 +257,7 @@ Domain15(网络基础)┘       │                 │                     │
 
 ### 故障排查体系
 - `../故障诊断/FTA故障树/23-fta-production-quick-start.md`
-- `../故障诊断/topic-febm/08-febm-production-quick-start.md`
+- `../故障诊断/FEBM方法论/08-febm-production-quick-start.md`
 - `../故障诊断/` (42篇)
 
 ### 生产运维实践

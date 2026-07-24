@@ -70,7 +70,7 @@ prerequisites:
 | **K8s 全量故障树** | [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md) |
 | **FTA + AI Agent** | [第8章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) |
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta-methodology-and-agentic-practices.md) |
-| **FTA vs FEBM 对比** | [topic-febm](../故障诊断/topic-febm/README.md) |
+| **FTA vs FEBM 对比** | [topic-febm](../故障诊断/FEBM方法论/README.md) |
 
 ## 最近更新（2026 Q2）
 - **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta-methodology-and-agentic-practices.md#二十三生产级落地基线2026q2-更新)
@@ -160,7 +160,7 @@ prerequisites:
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-febm](../故障诊断/topic-febm/README.md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
+| [topic-febm](../故障诊断/FEBM方法论/README.md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
 | [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
 | [故障诊断](../故障诊断/) | 传统故障排查文档 |
 | [可观测性](../可观测性/) | 可观测性体系 |

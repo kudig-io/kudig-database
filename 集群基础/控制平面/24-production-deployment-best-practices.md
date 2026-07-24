@@ -16,7 +16,7 @@ tags:
 - scheduler
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-07
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -126,6 +126,7 @@ k8s_versions:
 - '1.30'
 - '1.31'
 - '1.32'
+- '1.33'
 ---
 
 # 生产环境部署最佳实践 (Production Deployment Best Practices)

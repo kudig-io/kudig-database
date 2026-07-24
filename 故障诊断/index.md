@@ -28,7 +28,7 @@ last_updated: 2026-07
 - 故障诊断/04-jvm-tuning/
 - [[故障诊断/98-merged-indexes/index.md|Merged Indexes]]
 - 故障诊断/tools/
-- 故障诊断/topic-febm/
+- 故障诊断/FEBM方法论/
 - 故障诊断/FTA故障树/
 - 故障诊断/topic-multi-fault-scenarios/
 - 故障诊断/topic-qa-corpus/

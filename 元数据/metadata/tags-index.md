@@ -143,7 +143,7 @@ estimated_read_time: 5min
 - 故障诊断/FTA故障树/list: 36 个组件故障树
 
 ### febm
-- 故障诊断/topic-febm/01-08: FEBM 取证方法论
+- 故障诊断/FEBM方法论/01-08: FEBM 取证方法论
 
 ### troubleshooting
 - domain-12: 42+ 篇故障排查
