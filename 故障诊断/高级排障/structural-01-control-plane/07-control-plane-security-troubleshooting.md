@@ -557,7 +557,7 @@ LOG_FILE="/var/log/kubernetes/security-check-$(date +%Y%m%d).log"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
 
 
 <!-- risk-assessed -->

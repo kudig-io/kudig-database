@@ -57,11 +57,11 @@ prerequisites:
 
 | 用户查询关键词 | 路由目标 |
 |----------------|----------|
-| Pod 启动失败、CrashLoopBackOff、Pending | 工作负载 → 故障诊断/topic-fta/pod-fta |
-| etcd、控制平面、apiserver | 集群基础 → 故障诊断/topic-fta/apiserver-fta |
-| 网络不通、[[Service|Service]]、DNS | 网络 → 故障诊断/topic-fta/dns-fta |
-| 存储、PV、PVC | 存储 → 故障诊断/topic-fta/csi-fta |
-| 权限、RBAC、认证 | 安全 → 故障诊断/topic-fta/rbac-fta |
+| Pod 启动失败、CrashLoopBackOff、Pending | 工作负载 → 故障诊断/FTA故障树/pod-fta |
+| etcd、控制平面、apiserver | 集群基础 → 故障诊断/FTA故障树/apiserver-fta |
+| 网络不通、[[Service|Service]]、DNS | 网络 → 故障诊断/FTA故障树/dns-fta |
+| 存储、PV、PVC | 存储 → 故障诊断/FTA故障树/csi-fta |
+| 权限、RBAC、认证 | 安全 → 故障诊断/FTA故障树/rbac-fta |
 
 ## 架构评审 Prompt
 

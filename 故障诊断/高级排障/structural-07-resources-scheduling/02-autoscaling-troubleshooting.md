@@ -799,14 +799,14 @@ kubectl scale deployment <name> --replicas=<n>
 
 - [资源配额故障排查](./01-resources-quota-troubleshooting.md)
 - [Controller Manager 故障排查](../01-control-plane/04-controller-manager-troubleshooting.md)
-- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [Deployment 故障排查](../[[故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[生态参考/topic-index/pod-index|Pod 知识图谱索引]]
+- [[生态参考/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

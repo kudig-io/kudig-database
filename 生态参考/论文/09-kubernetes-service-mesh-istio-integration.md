@@ -59,7 +59,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/service-mesh-istio-fta.md
+  path: ../故障诊断/FTA故障树/list/service-mesh-istio-fta.md
   label: '故障树: service-mesh-istio'
 ---
 

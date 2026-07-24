@@ -865,7 +865,7 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
+- [[生态参考/topic-index/pod-index|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

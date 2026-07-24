@@ -56,7 +56,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/scheduler-fta.md
+  path: ../故障诊断/FTA故障树/list/scheduler-fta.md
   label: '故障树: scheduler'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md
@@ -68,7 +68,7 @@ related_docs:
 - path: ../集群基础/20-kube-scheduler-deep-dive.md
   type: depth
   desc: Scheduler 深度解析
-- path: ../故障诊断/topic-fta/list/scheduler-fta.md
+- path: ../故障诊断/FTA故障树/list/scheduler-fta.md
   type: fta
   desc: Scheduler 故障树
 ---

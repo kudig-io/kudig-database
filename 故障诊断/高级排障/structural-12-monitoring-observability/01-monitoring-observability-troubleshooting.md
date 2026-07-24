@@ -1489,8 +1489,8 @@ echo "可观测性数据质量报告已生成: $QUALITY_REPORT"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/observability-index|Observability 可观测性知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

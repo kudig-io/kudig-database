@@ -449,15 +449,15 @@ data:
 
 ## 相关文档
 
-- [nginx-ingress 完全指南](./domain-03-networking-traffic/21-nginx-ingress-complete-guide.md)
-- [nginx-ingress 迁移指南](./domain-03-networking-traffic/09-nginx-ingress-migration-guide.md)
-- [nginx-ingress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/nginx-[[domain-10-troubleshooting-diagnostics/topic-fta/list/ingress-fta|ingress-fta]].md)
-- [nginx-ingress 全局索引](./domain-19-landscape-references/topic-index/nginx-ingress-index.md)
+- [nginx-ingress 完全指南](./网络/21-nginx-ingress-complete-guide.md)
+- [nginx-ingress 迁移指南](./网络/09-nginx-ingress-migration-guide.md)
+- [nginx-ingress FTA 故障树](./故障诊断/FTA故障树/list/nginx-[[故障诊断/FTA故障树/list/ingress-fta|ingress-fta]].md)
+- [nginx-ingress 全局索引](./生态参考/topic-index/nginx-ingress-index.md)
 - [Ingress 通用故障排查](./03-service-ingress-troubleshooting.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 
 
 <!-- risk-assessed -->

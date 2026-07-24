@@ -1,52 +1,4 @@
 ---
-title: FTA 诊断执行引擎 (故障诊断)
-description: 'description: ''**定位**: 将 FTA 理论转化为可执行代码的工程化指南'''
-summary: 'description: ''**定位**: 将 FTA 理论转化为可执行代码的工程化指南'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- helm
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- FTA 诊断执行引擎 是什么
-- 如何 FTA 诊断执行引擎
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- FTA 诊断执行引擎 故障排查
-- FTA 诊断执行引擎 排障步骤
-- FTA 诊断执行引擎 根因分析
-trigger_keywords:
-- FTA
-- 诊断执行引擎
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-fta_id: FTA-FTA_EXECUTION_ENGINE-001
-component: Fta Execution Engine
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: FTA 诊断执行引擎
 description: '**定位**: 将 FTA 理论转化为可执行代码的工程化指南'
 category: fta
@@ -55,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[Helm|helm]]
+- helm
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -74,16 +26,16 @@ trigger_keywords:
 - FTA
 - 诊断执行引擎
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- helm-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # FTA 诊断执行引擎
 
@@ -93,9 +45,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、执行引擎架构 -->## 一、执行引擎架构
+## 一、执行引擎架构
 
-## 1.1 核心组件
+### 1.1 核心组件
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -134,7 +86,7 @@ k8s_versions:
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 1.2 输入 Schema
+### 1.2 输入 Schema
 
 ```yaml
 diagnosis_request:
@@ -147,7 +99,7 @@ diagnosis_request:
   secondary_symptoms: [string]     # 伴随症状
   error_logs: [string]             # 错误日志
   exit_code: integer               # 退出码
-  events: [object]                 # K8s Events
+  events: [object]                 # [[实体/kubernetes|k8s]] Events
   metrics: object                  # 实时指标
   
   # 上下文
@@ -158,7 +110,7 @@ diagnosis_request:
     environment: string             # prod/staging
 ```
 
-## 1.3 输出 Schema
+### 1.3 输出 Schema
 
 ```yaml
 diagnosis_result:
@@ -196,9 +148,9 @@ diagnosis_result:
 
 ---
 
-<!-- chunk: 二、FTA 遍历引擎实现 -->## 二、FTA 遍历引擎实现
+## 二、FTA 遍历引擎实现
 
-## 2.1 路径选择算法
+### 2.1 路径选择算法
 
 ```python
 class FTATraversalEngine:
@@ -319,7 +271,7 @@ class FTATraversalEngine:
         return pruned
 ```
 
-## 2.2 证据收集器
+### 2.2 证据收集器
 
 ```python
 class EvidenceCollector:
@@ -383,9 +335,9 @@ class EvidenceCollector:
 
 ---
 
-<!-- chunk: 三、置信度评估引擎 -->## 三、置信度评估引擎
+## 三、置信度评估引擎
 
-## 3.1 多维度置信度计算
+### 3.1 多维度置信度计算
 
 ```python
 class ConfidenceEvaluator:
@@ -448,7 +400,7 @@ class ConfidenceEvaluator:
         return combined
 ```
 
-## 3.2 贝叶斯后验概率
+### 3.2 贝叶斯后验概率
 
 ```python
 class BayesianReasoningEngine:
@@ -515,9 +467,9 @@ class BayesianReasoningEngine:
 
 ---
 
-<!-- chunk: 四、修复执行控制器 -->## 四、修复执行控制器
+## 四、修复执行控制器
 
-## 4.1 前置条件检查
+### 4.1 前置条件检查
 
 ```python
 class HealingPreconditionChecker:
@@ -599,7 +551,7 @@ class HealingPreconditionChecker:
         return CheckResult(met=True)
 ```
 
-## 4.2 修复执行流程
+### 4.2 修复执行流程
 
 ```python
 class HealingExecutor:
@@ -686,9 +638,9 @@ class HealingExecutor:
 
 ---
 
-<!-- chunk: 五、学习反馈闭环 -->## 五、学习反馈闭环
+## 五、学习反馈闭环
 
-## 5.1 FTA 学习引擎
+### 5.1 FTA 学习引擎
 
 ```python
 class FTALearningEngine:
@@ -763,7 +715,7 @@ class FTALearningEngine:
         self.create_review_task(new_node)
 ```
 
-## 5.2 学习触发机制
+### 5.2 学习触发机制
 
 ```yaml
 learning_triggers:
@@ -812,9 +764,9 @@ learning_triggers:
 
 ---
 
-<!-- chunk: 六、执行引擎配置 -->## 六、执行引擎配置
+## 六、执行引擎配置
 
-## 6.1 全局配置
+### 6.1 全局配置
 
 ```yaml
 fta_execution_engine:
@@ -863,7 +815,7 @@ fta_execution_engine:
 
 ---
 
-<!-- chunk: 七、完整诊断流程示例 -->## 七、完整诊断流程示例
+## 七、完整诊断流程示例
 
 ```
 场景: Pod CrashLoopBackOff + OOMKilled + Exit Code 137
@@ -916,30 +868,5 @@ Step 6: 学习反馈
 > **版本**: v1.0
 > **维护团队**: Platform Team / SRE
 > **下一步**: 集成到 K8sOpsAgent 实现
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta [[KUDIG Database — Global MOC|MOC]]]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/appendix-d-templates.md|appendix-d-templates]]
-- [[故障诊断/FTA故障树/fta-diagnosis-improvement.md|fta-diagnosis-improvement]]
-- [[故障诊断/FTA故障树/fta-index.md|fta-index]]
-- [[故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]
-
 
 <!-- risk-assessed -->

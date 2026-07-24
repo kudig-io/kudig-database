@@ -89,7 +89,7 @@ trigger_keywords:
 - manifests
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/deployment-fta.md
+  path: ../故障诊断/FTA故障树/list/deployment-fta.md
   label: '故障树: deployment'
 authors:
 - name: KUDIG Team

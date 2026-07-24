@@ -63,7 +63,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/etcd-fta.md
+  path: ../故障诊断/FTA故障树/list/etcd-fta.md
   label: '故障树: etcd'
 ---
 
@@ -83,7 +83,7 @@ related_docs:
   - path: "../集群基础/11-etcd-deep-dive.md"
     type: "depth"
     desc: "etcd 深度解析"
-  - path: "../故障诊断/topic-fta/list/backup-restore-fta.md"
+  - path: "../故障诊断/FTA故障树/list/backup-restore-fta.md"
     type: "fta"
     desc: "备份恢复故障树"
 ---

@@ -1,52 +1,4 @@
 ---
-title: 第十七章：行业标杆案例分析 (故障诊断)
-description: 'description: ''**所属部分**: 第五部分 - 实战案例与最佳实践'''
-summary: 'description: ''**所属部分**: 第五部分 - 实战案例与最佳实践'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- performance
-- prometheus
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第十七章：行业标杆案例分析 是什么
-- 如何 第十七章：行业标杆案例分析
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第十七章：行业标杆案例分析 故障排查
-- 第十七章：行业标杆案例分析 排障步骤
-- 第十七章：行业标杆案例分析 根因分析
-trigger_keywords:
-- 第十七章：行业标杆案例分析
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-fta_id: FTA-17_INDUSTRY_BENCHMARKS-001
-component: 17 Industry Benchmarks
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第十七章：行业标杆案例分析
 description: '**所属部分**: 第五部分 - 实战案例与最佳实践'
 category: fta
@@ -55,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[Prometheus|prometheus]]
+- prometheus
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -73,22 +25,23 @@ intent_queries:
 trigger_keywords:
 - 第十七章：行业标杆案例分析
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第十七章：行业标杆案例分析
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第十六章：团队能力建设](./16-team-capability-building.md)  
-> **下一章**: 第十八章：典型场景完整方案](./18-typical-scenarios.md)
+> **上一章**: [第十六章：团队能力建设](./16-team-capability-building.md)  
+> **下一章**: [第十八章：典型场景完整方案](./18-typical-scenarios.md)
 
 ---
 
@@ -111,7 +64,7 @@ Google SRE 的 FTA 相关实践:
    → Postmortem 中包含问题传播路径分析
    → 分析结果反馈到故障分析体系中
 
-3. Borgmon → Monarch → Prometheus
+3. Borgmon → Monarch → [[实体/prometheus|prometheus]]
    ← FTA 底事件可观测性的技术支撑
    → Google 内部监控系统的演进
    → 每个 FTA 底事件都有对应的监控指标
@@ -216,30 +169,6 @@ Netflix 的实践模型:
 ---
 
 > **导航**: [<< 上一章 - 团队能力建设](./16-team-capability-building.md) | [下一章 - 典型场景完整方案 >>](./18-typical-scenarios.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/15-fta-quality-assessment.md|15-fta-quality-assessment]]
-- [[故障诊断/FTA故障树/16-team-capability-building.md|16-team-capability-building]]
-- [[故障诊断/FTA故障树/18-typical-scenarios.md|18-typical-scenarios]]
-- [[故障诊断/FTA故障树/19-pitfalls-and-best-practices.md|19-pitfalls-and-best-practices]]
 
 
 <!-- risk-assessed -->

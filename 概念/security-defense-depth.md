@@ -33,6 +33,7 @@ prerequisites:
 - service-mesh-basics
 - ebpf-basics
 - etcd-basics
+status: reviewed
 ---
 
 > **生产环境安全提示**

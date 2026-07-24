@@ -65,7 +65,7 @@ related_docs:
 - path: 08-cicd-pipelines.md
   type: depth
   desc: CI/CD 管道
-- path: ../故障诊断/topic-fta/list/helm-fta.md
+- path: ../故障诊断/FTA故障树/list/helm-fta.md
   type: fta
   desc: Helm 故障树
 ---

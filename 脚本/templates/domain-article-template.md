@@ -57,7 +57,7 @@ cross_refs:
     path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     label: "{{说明}}"
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/{{component}}-fta.md"
+    path: "../故障诊断/FTA故障树/list/{{component}}-fta.md"
     label: "{{说明}}"
   - type: "cheatsheet"
     path: "../系统基础/topic-cheat-sheet/{{cheat-sheet}}.md"
@@ -370,7 +370,7 @@ groups:
     annotations:
       summary: "{{组件}}实例宕机"
       description: "{{组件}} {{$labels.instance}} 已宕机超过 1 分钟"
-      runbook_url: "../故障诊断/topic-fta/list/{{component}}-fta.md"
+      runbook_url: "../故障诊断/FTA故障树/list/{{component}}-fta.md"
       grafana_dashboard: "/d/{{dashboard-id}}/{{component}}-overview"
 
   - alert: {{ComponentName}}HighErrorRate

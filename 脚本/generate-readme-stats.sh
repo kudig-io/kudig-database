@@ -5,10 +5,10 @@
 # 功能: 统计 README.md 中引用的所有数字指标，支持 JSON/表格/徽章 三种输出格式
 # 用途: 每次内容更新后运行，确保 README 中的数字与实际文件保持一致
 # 用法:
-#   ./scripts/generate-readme-stats.sh             # 默认表格输出
-#   ./scripts/generate-readme-stats.sh --json      # JSON 格式（可供其他脚本消费）
-#   ./scripts/generate-readme-stats.sh --badges    # 输出 README 徽章建议
-#   ./scripts/generate-readme-stats.sh --diff      # 输出指标并与 README 当前数字比对
+#   ./脚本/generate-readme-stats.sh             # 默认表格输出
+#   ./脚本/generate-readme-stats.sh --json      # JSON 格式（可供其他脚本消费）
+#   ./脚本/generate-readme-stats.sh --badges    # 输出 README 徽章建议
+#   ./脚本/generate-readme-stats.sh --diff      # 输出指标并与 README 当前数字比对
 # 兼容: macOS bash 3.2+ / Linux bash 4+
 # ============================================================================
 
@@ -60,36 +60,37 @@ TOTAL_FILES=$(find . -name "*.md" -type f | wc -l | tr -d ' ')
 MD_DOCS=$(find "${DOMAINS[@]}" -name "*.md" -type f 2>/dev/null | wc -l | tr -d ' ')
 TOTAL_CHARS=$(LC_ALL=C find . -name "*.md" -type f -print0 | xargs -0 wc -m 2>/dev/null | tail -1 | awk '{print $1}')
 DOMAIN_COUNT=${#DOMAINS[@]}
-PRODUCT_COUNT=$(ls topic-fta/list/*-fta.md 2>/dev/null | sed 's/.*\///' | sed 's/-fta\.md$//' | sort -u | wc -l | tr -d ' ')
+PRODUCT_COUNT=$(ls 故障诊断/FTA故障树/list/*-fta.md 2>/dev/null | sed 's/.*\///' | sed 's/-fta\.md$//' | sort -u | wc -l | tr -d ' ')
 
 # ═══════════════════════════════════════════════════
 # 2. AI 相关指标
 # ═══════════════════════════════════════════════════
-AI_AGENT_DOCS=$(count_md_content "topic-ai-agent")
-FTA_TREES=$(ls topic-fta/list/*-fta.md 2>/dev/null | wc -l | tr -d ' ')
-FTA_TOTAL_DOCS=$(count_md "topic-fta")
-FEBM_DOCS=$(count_md_content "topic-febm")
-LEARN_DOCS=$(count_md "topic-learn")
-CNCF_PROJECTS=$(count_md_content "domain-34-cncf-landscape")
+AI_AGENT_DOCS=$(count_md_content "AI基础设施/AI-Agents")
+FTA_TREES=$(ls 故障诊断/FTA故障树/list/*-fta.md 2>/dev/null | wc -l | tr -d ' ')
+FTA_TOTAL_DOCS=$(count_md "故障诊断/FTA故障树")
+FEBM_DOCS=$(count_md_content "故障诊断/FEBM方法论")
+LEARN_DOCS=$(count_md "文档/learning-paths")
+CNCF_PROJECTS=$(count_md_content "生态参考/CNCF全景")
 
 # ═══════════════════════════════════════════════════
 # 3. 运维专题指标
 # ═══════════════════════════════════════════════════
-TS_D12=$(count_md "domain-12-troubleshooting")
-TS_STS=$(count_md "topic-structural-trouble-shooting")
+TS_D12=$(count_md "故障诊断")
+TS_STS=$(count_md "故障诊断/高级排障")
 TROUBLESHOOT_DOCS=$((TS_D12 + TS_STS + FTA_TOTAL_DOCS))
-SKILLS_COUNT=$(count_md_content "topic-skills")
-CHEAT_SHEET_COUNT=$(count_md_content "topic-cheat-sheet")
-PRESENTATION_COUNT=$(count_md_content "topic-presentations")
-PAPERS_COUNT=$(count_md_content "domain-19-papers")
+SKILLS_COUNT=$(count_md_content "技能")
+CHEAT_SHEET_COUNT=$(count_md_content "系统基础/速查卡")
+PRESENTATION_COUNT=$(count_md_content "技能/培训学习/training-public/topic-presentations")
+PAPERS_COUNT=$(count_md_content "生态参考/论文")
 
 # ═══════════════════════════════════════════════════
 # 4. 云厂商
 # ═══════════════════════════════════════════════════
-CLOUD_PROVIDERS=$(ls -d domain-17-cloud-provider/*/ 2>/dev/null | wc -l | tr -d ' ')
+CLOUD_PROVIDERS=$(ls -d 云厂商/*/ 2>/dev/null | wc -l | tr -d ' ')
 
 # ═══════════════════════════════════════════════════
-# 5. 各 domain / topic 分布 (macOS bash 3.2 兼容)
+# 5. 各 domain 分布 (macOS bash 3.2 兼容)
+# 注: 原 topic-* 目录已合并进各知识域，不再单独统计
 # ═══════════════════════════════════════════════════
 DOMAIN_NAMES=""
 DOMAIN_COUNTS=""
@@ -97,15 +98,6 @@ for d in "${DOMAINS[@]}"; do
     cnt=$(count_md_content "$d")
     DOMAIN_NAMES="${DOMAIN_NAMES}${d}|"
     DOMAIN_COUNTS="${DOMAIN_COUNTS}${cnt}|"
-done
-
-TOPIC_NAMES=""
-TOPIC_COUNTS=""
-for d in topic-*/; do
-    name=$(basename "$d")
-    cnt=$(count_md "$d")
-    TOPIC_NAMES="${TOPIC_NAMES}${name}|"
-    TOPIC_COUNTS="${TOPIC_COUNTS}${cnt}|"
 done
 
 # ═══════════════════════════════════════════════════
@@ -156,16 +148,6 @@ output_table() {
     for i in "${!_dn[@]}"; do
         [ -z "${_dn[$i]}" ] && continue
         printf "  %-44s %s\n" "${_dn[$i]}" "${_dc[$i]}"
-    done
-
-    echo ""
-    echo -e "${CYAN}📁 各 Topic 文档数${NC}"
-    echo "  ─────────────────────────────────────"
-    IFS='|' read -ra _tn <<< "$TOPIC_NAMES"
-    IFS='|' read -ra _tc <<< "$TOPIC_COUNTS"
-    for i in "${!_tn[@]}"; do
-        [ -z "${_tn[$i]}" ] && continue
-        printf "  %-44s %s\n" "${_tn[$i]}" "${_tc[$i]}"
     done
 
     echo ""
@@ -220,19 +202,6 @@ output_json() {
         [ -z "${_dn[$i]}" ] && continue
         $first && first=false || echo ","
         printf "    \"%s\": %s" "${_dn[$i]}" "${_dc[$i]}"
-    done
-    echo ""
-    echo "  },"
-
-    # topics
-    echo "  \"topics\": {"
-    IFS='|' read -ra _tn <<< "$TOPIC_NAMES"
-    IFS='|' read -ra _tc <<< "$TOPIC_COUNTS"
-    first=true
-    for i in "${!_tn[@]}"; do
-        [ -z "${_tn[$i]}" ] && continue
-        $first && first=false || echo ","
-        printf "    \"%s\": %s" "${_tn[$i]}" "${_tc[$i]}"
     done
     echo ""
     echo "  }"

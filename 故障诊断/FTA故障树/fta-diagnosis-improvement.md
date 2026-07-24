@@ -1,53 +1,4 @@
 ---
-title: FTA 排查逻辑改进建议 (故障诊断)
-description: 'title: FTA 排查逻辑改进建议'
-summary: 'title: FTA 排查逻辑改进建议'
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- ingress
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- FTA 排查逻辑改进建议 是什么
-- 如何 FTA 排查逻辑改进建议
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- FTA 排查逻辑改进建议 故障排查
-- FTA 排查逻辑改进建议 排障步骤
-- FTA 排查逻辑改进建议 根因分析
-trigger_keywords:
-- FTA
-- 排查逻辑改进建议
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- etcd-basics
-fta_id: FTA-FTA_DIAGNOSIS_IMPROVEMENT-001
-component: Fta Diagnosis Improvement
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: FTA 排查逻辑改进建议
 description: '# FTA 排查逻辑改进建议'
 category: fta
@@ -56,8 +7,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
-- [[Ingress|ingress]]
+- etcd
+- ingress
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -76,16 +27,16 @@ trigger_keywords:
 - FTA
 - 排查逻辑改进建议
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # FTA 排查逻辑改进建议
 
@@ -95,15 +46,15 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、当前排查逻辑分析 -->## 一、当前排查逻辑分析
+## 一、当前排查逻辑分析
 
-## 1.1 现有逻辑架构
+### 1.1 现有逻辑架构
 
 ```
 告警入口 → 意图识别 → FTA 导航 → Agent 调度 → 诊断执行 → 根因聚合 → 修复执行 → 学习反馈
 ```
 
-## 1.2 当前逻辑优势
+### 1.2 当前逻辑优势
 
 | 优势 | 说明 |
 |:---|:---|
@@ -112,7 +63,7 @@ k8s_versions:
 | 概率排序 | 基于历史数据排序诊断路径 |
 | MECE 原则 | 事件之间互斥且完备 |
 
-## 1.3 当前逻辑不足
+### 1.3 当前逻辑不足
 
 | 不足 | 影响 |
 |:---|:---|
@@ -126,9 +77,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 二、改进建议 -->## 二、改进建议
+## 二、改进建议
 
-## 2.1 动态概率调整机制
+### 2.1 动态概率调整机制
 
 **问题**: 当前 FTA 使用静态概率（如 annual_rate），但实际问题概率随时间、负载、季节等因素动态变化。
 
@@ -207,7 +158,7 @@ class DynamicProbabilityCalculator:
 
 ---
 
-## 2.2 多维度证据置信度评估
+### 2.2 多维度证据置信度评估
 
 **问题**: 当前诊断只判断"发生/未发生"，没有置信度评估。
 
@@ -287,7 +238,7 @@ class EvidenceConfidenceEvaluator:
 
 ---
 
-## 2.3 时间窗口约束
+### 2.3 时间窗口约束
 
 **问题**: 问题传播有时序要求，如"持续超过 5 分钟"才触发，但当前 FTA 无此能力。
 
@@ -351,7 +302,7 @@ class TemporalDiagnosticEngine:
 
 ---
 
-## 2.4 修复前置条件检查
+### 2.4 修复前置条件检查
 
 **问题**: 当前修复动作直接执行，忽略前置条件（如"需要人工审批"）。
 
@@ -441,7 +392,7 @@ healing_action:
 
 ---
 
-## 2.5 反馈学习机制
+### 2.5 反馈学习机制
 
 **问题**: 当前 FTA 概率需人工更新，无法从实际问题中学习。
 
@@ -528,7 +479,7 @@ learning_triggers:
 
 ---
 
-## 2.6 智能剪枝策略
+### 2.6 智能剪枝策略
 
 **问题**: 当 OR 路径并行探索时，没有剪枝机制，效率低。
 
@@ -598,7 +549,7 @@ class IntelligentPathPruner:
 ```
 场景1: OR 门并行探索
   TE-2 (Service 不可用) → OR 门
-  ├── IE-2.1 Pod 运行异常 (置信度 0.9) ✅ 已确认
+  ├── IE-2.1 [[概念/pod-lifecycle|pod]] 运行异常 (置信度 0.9) ✅ 已确认
   ├── IE-2.2 Service/Endpoint 异常 (置信度 0.6)
   └── IE-2.3 Ingress 异常 (置信度 0.2) ← 剪枝！已有确认路径
 
@@ -615,7 +566,7 @@ class IntelligentPathPruner:
 
 ---
 
-## 2.7 不确定性处理（贝叶斯推理）
+### 2.7 不确定性处理（贝叶斯推理）
 
 **问题**: 当证据不足时，当前系统可能做出错误判断。
 
@@ -702,7 +653,7 @@ FTA 先验概率:
 ```
 ---
 
-<!-- chunk: 三、改进优先级 -->## 三、改进优先级
+## 三、改进优先级
 
 | 优先级 | 改进项 | 价值 | 难度 | 影响范围 |
 |:---:|:---|:---:|:---:|:---:|
@@ -716,7 +667,7 @@ FTA 先验概率:
 
 ---
 
-<!-- chunk: 四、改进效果预期 -->## 四、改进效果预期
+## 四、改进效果预期
 
 | 指标 | 改进前 | 改进后 |
 |:---|:---:|:---:|
@@ -728,23 +679,23 @@ FTA 先验概率:
 
 ---
 
-<!-- chunk: 五、实施建议 -->## 五、实施建议
+## 五、实施建议
 
-## 5.1 第一阶段（MVP）
+### 5.1 第一阶段（MVP）
 
 实现两个最高价值改进：
 
 1. **动态概率调整** - 快速提升诊断优先级准确性
 2. **反馈学习机制** - 形成自我优化闭环
 
-## 5.2 第二阶段
+### 5.2 第二阶段
 
 扩展到更多 Agent 编排：
 
 1. **证据置信度评估** - 增强诊断判断
 2. **智能剪枝策略** - 提升并行效率
 
-## 5.3 第三阶段
+### 5.3 第三阶段
 
 完善复杂场景支持：
 
@@ -757,30 +708,5 @@ FTA 先验概率:
 > **建议版本**: v1.0
 > **维护团队**: SRE Team / Platform Team
 > **下一步**: 根据资源情况选择第一阶段实施项
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/appendix-c-references.md|appendix-c-references]]
-- [[故障诊断/FTA故障树/appendix-d-templates.md|appendix-d-templates]]
-- [[故障诊断/FTA故障树/fta-execution-engine.md|fta-execution-engine]]
-- [[故障诊断/FTA故障树/fta-index.md|fta-index]]
-
 
 <!-- risk-assessed -->

@@ -415,9 +415,9 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - domain-10-troubleshooting-diagnostics/34-upgrade-migration-troubleshooting.md
-  - domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md
-  - domain-01-cluster-fundamentals/30-dynamic-resource-allocation.md
+  - 故障诊断/34-upgrade-migration-troubleshooting.md
+  - 故障诊断/FTA故障树/list/gpu-fta.md
+  - 集群基础/30-dynamic-resource-allocation.md
 ---
 ```
 

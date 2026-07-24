@@ -1191,7 +1191,7 @@ echo "安全检查报告已生成: $SECURITY_REPORT"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
+- [[生态参考/topic-index/terway-index|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

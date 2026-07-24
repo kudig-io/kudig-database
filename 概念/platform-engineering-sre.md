@@ -28,6 +28,7 @@ prerequisites:
 relationships:
 - target: '[[系统基础/速查卡/k8s.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**
@@ -287,6 +288,7 @@ kubectl get events -A --field-selector reason=BackOff -o json | \
 
 ## Related
 
+- [[概念/platform-engineering-idp|平台工程 × IDP(开发者平台视角)]]
 - [[系统基础/知识字典/security/runtime-security.md|运行时安全]]
 
 

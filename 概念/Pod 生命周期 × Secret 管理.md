@@ -40,6 +40,7 @@ relationships:
   type: uses
 - target: '[[概念/Pod 生命周期 × 存储模型.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

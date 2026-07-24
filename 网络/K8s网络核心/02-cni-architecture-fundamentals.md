@@ -72,10 +72,10 @@ related_docs:
 - path: 06-service-concepts-types.md
   type: depth
   desc: Service 核心概念与类型
-- path: ../故障诊断/topic-fta/list/networkpolicy-fta.md
+- path: ../故障诊断/FTA故障树/list/networkpolicy-fta.md
   type: fta
   desc: 网络策略故障树
-- path: ../故障诊断/topic-fta/list/csi-fta.md
+- path: ../故障诊断/FTA故障树/list/csi-fta.md
   type: fta
   desc: CSI 故障树
 ---

@@ -27,6 +27,7 @@ prerequisites:
 relationships:
 - target: '[[实体/opencost.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**

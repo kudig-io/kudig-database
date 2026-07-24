@@ -61,7 +61,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/service-fta.md
+  path: ../故障诊断/FTA故障树/list/service-fta.md
   label: '故障树: service'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/networking.md

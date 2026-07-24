@@ -1,50 +1,4 @@
 ---
-title: 第十六章：团队能力建设 (故障诊断)
-description: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
-summary: 'description: ''**所属部分**: 第四部分 - FTA 系统工程实践'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- llm
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第十六章：团队能力建设 是什么
-- 如何 第十六章：团队能力建设
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第十六章：团队能力建设 故障排查
-- 第十六章：团队能力建设 排障步骤
-- 第十六章：团队能力建设 根因分析
-trigger_keywords:
-- 第十六章：团队能力建设
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-fta_id: FTA-16_TEAM_CAPABILITY_BUILDING-001
-component: 16 Team Capability Building
-severity: high
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第十六章：团队能力建设
 description: '**所属部分**: 第四部分 - FTA 系统工程实践'
 category: fta
@@ -71,22 +25,22 @@ intent_queries:
 trigger_keywords:
 - 第十六章：团队能力建设
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第十六章：团队能力建设
 
 > **所属部分**: 第四部分 - FTA 系统工程实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第十五章：FTA 质量评估与优化](./15-fta-quality-assessment.md)  
-> **下一章**: 第十七章：行业标杆案例分析](./17-industry-benchmarks.md)
+> **上一章**: [第十五章：FTA 质量评估与优化](./15-fta-quality-assessment.md)  
+> **下一章**: [第十七章：行业标杆案例分析](./17-industry-benchmarks.md)
 
 ---
 
@@ -132,7 +86,7 @@ k8s_versions:
 
 | 角色 | 必备技能 | 加分项 | 培养路径 |
 |------|---------|--------|---------|
-| **FTA 架构师** | 系统架构设计、可靠性工程、概率统计、[[Kubernetes|Kubernetes]] 深度 | 航空/核工业 FTA 经验、SRE 管理经验 | 资深 SRE → FTA 培训 → 认证 |
+| **FTA 架构师** | 系统架构设计、可靠性工程、概率统计、[[实体/kubernetes|kubernetes]] 深度 | 航空/核工业 FTA 经验、SRE 管理经验 | 资深 SRE → FTA 培训 → 认证 |
 | **知识工程师** | 故障分析能力、技术写作、图数据库(Neo4j)、领域知识 | 知识图谱、NLP、本体建模 | 运维工程师 → 故障分析培训 → 建模实战 |
 | **Agent 开发** | Python、Kubernetes API、LLM/AI 框架 | 强化学习、分布式系统、自然语言处理 | 后端工程师 → Agent 框架培训 → 项目实战 |
 | **平台工程师** | DevOps、CI/CD、监控系统、Kubernetes 运维 | 大规模系统运维、性能调优 | 运维工程师 → 平台工程培训 → 系统集成 |
@@ -183,30 +137,6 @@ Level 3: Agent 开发 (Agent 开发工程师)
 ---
 
 > **导航**: [<< 上一章 - FTA 质量评估与优化](./15-fta-quality-assessment.md) | [下一章 - 行业标杆案例分析 >>](./17-industry-benchmarks.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/14-fta-system-engineering.md|14-fta-system-engineering]]
-- [[故障诊断/FTA故障树/15-fta-quality-assessment.md|15-fta-quality-assessment]]
-- [[故障诊断/FTA故障树/17-industry-benchmarks.md|17-industry-benchmarks]]
-- [[故障诊断/FTA故障树/18-typical-scenarios.md|18-typical-scenarios]]
 
 
 <!-- risk-assessed -->

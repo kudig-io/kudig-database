@@ -104,7 +104,7 @@ related_docs:
 - path: 06-monitoring-alerting-system.md
   type: depth
   desc: 监控告警体系
-- path: ../故障诊断/topic-fta/list/cluster-upgrade-fta.md
+- path: ../故障诊断/FTA故障树/list/cluster-upgrade-fta.md
   type: fta
   desc: 集群升级故障树
 cross_refs:

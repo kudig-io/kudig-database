@@ -28,6 +28,7 @@ prerequisites:
 relationships:
 - target: '[[系统基础/速查卡/gitops.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**
@@ -245,6 +246,7 @@ spec:
 
 ## Related
 
+- [[概念/gitops-sre-release-gate|GitOps SRE 发布门控(深入实践)]]
 - [[实体/argo.md|Argo Workflows]]
 - [[系统基础/速查卡/git.md|Git 速查卡]]
 

@@ -114,7 +114,7 @@ last_updated: '2026-07-21'
 - [[概念/linux-container-foundation|Linux 容器基础]]
 - [[概念/etcd-containerd-storage|etcd containerd 存储]]
 - [[概念/overlayfs-storage|OverlayFS 存储]]
-- [[概念/Research: Kubernetes Container Runtime 2025-2026|容器运行时研究]]
+- [[概念/research-2025-2026/04-Container-Runtime|容器运行时研究]]
 
 ## 工作负载 (Workloads)
 

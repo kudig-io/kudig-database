@@ -78,7 +78,7 @@ last_updated: '2026-07-21'
 - [[概念/scheduling-algorithm|调度算法]]
 - [[概念/ai-ml-observability|AI/ML 可观测性]]
 - [[概念/system-foundation-hardware-kernel|系统基础硬件内核]]
-- [[概念/Research: Kubernetes AI-ML Infrastructure 2025-2026|AI/ML 基础设施研究]]
+- [[概念/research-2025-2026/01-AI-ML-Infrastructure|AI/ML 基础设施研究]]
 - [[概念/finops-greenops-practices|FinOps/GreenOps 实践]]
 
 ## 故障诊断 (Troubleshooting)

@@ -64,7 +64,7 @@ cross_refs:
   path: ../故障诊断/
   label: '相关知识域: 故障诊断'
 - type: fta
-  path: ../故障诊断/topic-fta/list/monitoring-fta.md
+  path: ../故障诊断/FTA故障树/list/monitoring-fta.md
   label: '故障树: monitoring'
 related_docs:
 - path: 01-platform-ops-overview.md

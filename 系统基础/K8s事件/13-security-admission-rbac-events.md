@@ -85,7 +85,7 @@ trigger_keywords:
 - events
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/rbac-fta.md
+  path: ../故障诊断/FTA故障树/list/rbac-fta.md
   label: '故障树: rbac'
 authors:
 - name: KUDIG Team

@@ -381,7 +381,7 @@ Terway 以 Apache 2.0 协议开源，允许自由使用、修改和分发。ACK 
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训演示 |
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Terway CNI 入门学习材料 |
 | [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树分析 |
+| [故障诊断/FTA故障树/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树分析 |
 
 ---
 

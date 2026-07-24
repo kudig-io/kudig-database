@@ -34,6 +34,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - kafka-basics
+status: stable
 ---
 
 > **生产环境安全提示**

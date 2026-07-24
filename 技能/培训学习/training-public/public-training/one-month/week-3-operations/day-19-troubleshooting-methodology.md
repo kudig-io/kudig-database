@@ -145,7 +145,7 @@ FEBM: 解决"怎么判断"的问题 (方法)
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**
-   - 文件: `../../故障诊断/topic-fta/04-fta-core-principles.md`
+   - 文件: `../../故障诊断/FTA故障树/04-fta-core-principles.md`
    - 重点: 故障树构建、根因分析
 
 3. **FEBM 理论基础**

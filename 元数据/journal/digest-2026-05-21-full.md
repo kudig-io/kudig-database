@@ -374,7 +374,7 @@ topic-application-architecture 包含 96 个完整的 K8s 生产架构设计文�
 | 页面 | 原因 |
 |---|---|
 | 故障诊断 | FTA 跨域链接的核心枢纽（144 条引用），确保方法论准确 |
-| 故障诊断/topic-fta/list/ | 44 棵故障树是整个知识库的操作核心，需逐一验证 |
+| 故障诊断/FTA故障树/list/ | 44 棵故障树是整个知识库的操作核心，需逐一验证 |
 | 生态参考 | 236 个 CNCF 项目是最大单域，确保覆盖度和准确性 |
 | 应用模式/topic-application-architecture/ | 96 个行业模式需检查是否与最新阿里云产品对齐 |
 | concepts/kubernetes-architecture-overview | Wiki 主枢纽（59 入链），所有页面依赖它 |

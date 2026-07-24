@@ -67,7 +67,7 @@ cross_refs:
   path: ../安全/
   label: '相关知识域: 安全'
 - type: fta
-  path: ../故障诊断/topic-fta/list/controller-manager-fta.md
+  path: ../故障诊断/FTA故障树/list/controller-manager-fta.md
   label: '故障树: controller-manager'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md
@@ -82,7 +82,7 @@ related_docs:
 - path: 12-apiserver-deep-dive.md
   type: depth
   desc: API Server 深度解析
-- path: ../故障诊断/topic-fta/list/controller-manager-fta.md
+- path: ../故障诊断/FTA故障树/list/controller-manager-fta.md
   type: fta
   desc: Controller Manager 故障树
 ---

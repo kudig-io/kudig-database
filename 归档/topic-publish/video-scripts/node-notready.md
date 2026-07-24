@@ -184,16 +184,16 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,STATUS:.status.condition
 
 ## 关联知识库
 
-- Skill 源文档：domain-10-troubleshooting-diagnostics/topic-skills/01-node-notready.md
-- 相关 FTA：参考 domain-10-troubleshooting-diagnostics/topic-fta/
-- 深度排查：参考 domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/
+- Skill 源文档：故障诊断/topic-skills/01-node-notready.md
+- 相关 FTA：参考 故障诊断/FTA故障树/
+- 深度排查：参考 故障诊断/topic-structural-trouble-shooting/
 
 ---
 
 ## Obsidian 相关文档
 
 - 数字人视频快速参考
-- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 - 数字人视频输出建议
 - Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
 

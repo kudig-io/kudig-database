@@ -406,14 +406,14 @@ spec:
 
 ## 相关文档
 
-- [Higress 企业级网关实践](./domain-03-networking-traffic/04-higress-enterprise-gateway.md)
-- [Higress FTA 故障树](./domain-10-troubleshooting-diagnostics/topic-fta/list/higress-fta.md)
-- [Higress 全局索引](./domain-19-landscape-references/topic-index/higress-index.md)
+- [Higress 企业级网关实践](./网络/04-higress-enterprise-gateway.md)
+- [Higress FTA 故障树](./故障诊断/FTA故障树/list/higress-fta.md)
+- [Higress 全局索引](./生态参考/topic-index/higress-index.md)
 - [Ingress 通用故障排查](./03-service-ingress-troubleshooting.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[生态参考/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

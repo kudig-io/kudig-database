@@ -1,55 +1,4 @@
 ---
-title: 第三章：FTA 符号体系与标准规范 [故障诊断]
-description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- apiserver
-- coredns
-- ingress
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 第三章：FTA 符号体系与标准规范 是什么
-- 如何 第三章：FTA 符号体系与标准规范
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第三章：FTA 符号体系与标准规范 故障排查
-- 第三章：FTA 符号体系与标准规范 排障步骤
-- 第三章：FTA 符号体系与标准规范 根因分析
-trigger_keywords:
-- 第三章：FTA
-- 符号体系与标准规范
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- etcd-basics
-fta_id: FTA-03_SYMBOL_SYSTEM_AND_STANDARDS-001
-component: 03 Symbol System And Standards
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第三章：FTA 符号体系与标准规范
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
 category: fta
@@ -58,10 +7,10 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[CoreDNS|coredns]]
-- [[Ingress|ingress]]
+- coredns
+- ingress
 - agent
 last_updated: 2026-05
 difficulty: advanced
@@ -80,23 +29,23 @@ trigger_keywords:
 - 第三章：FTA
 - 符号体系与标准规范
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 第三章：FTA 符号体系与标准规范
 
 > **所属部分**: 第一部分 - FTA 方法论理论基础  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
 > **上一章**: [第二章：FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md)  
-> **下一章**: [第四章：FTA 方法论核心原则](./[[故障诊断/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]].md)
+> **下一章**: [第四章：FTA 方法论核心原则](./04-fta-core-principles.md)
 
 ---
 
@@ -191,7 +140,7 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 
 ## 3.2 事件编号与命名规范
 
-在企业级 FTA 实践中，统一的编号和命名规范是团队协作和工具化的基础。推荐以下规范（与本知识库 [kubernetes-fta-full-analysis.md](./kubernetes-fta-full-analysis.md) 一致）：
+在企业级 FTA 实践中，统一的编号和命名规范是团队协作和工具化的基础。推荐以下规范（与本知识库 [kubernetes-fta-full-analysis.md](./[[实体/kubernetes|kubernetes]]-fta-full-analysis.md) 一致）：
 
 **编号体系**：
 
@@ -275,30 +224,6 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 ---
 
 > **导航**: [<< 上一章 - FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md) | [下一章 - FTA 方法论核心原则 >>](./04-fta-core-principles.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|05-fta-construction-process]]
 
 
 <!-- risk-assessed -->

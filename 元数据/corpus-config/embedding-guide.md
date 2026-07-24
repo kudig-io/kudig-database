@@ -105,7 +105,7 @@ description: "面向 SRE/运维的故障诊断 Agent 语料配置"
 
 # 核心语料（必须导入）
 core:
-  - path: 故障诊断/topic-fta/list/
+  - path: 故障诊断/FTA故障树/list/
     priority: critical
     chunking: by_h3
 

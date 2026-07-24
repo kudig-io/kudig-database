@@ -42,6 +42,7 @@ relationships:
   type: uses
 - target: '[[概念/etcd × 高可用模式.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

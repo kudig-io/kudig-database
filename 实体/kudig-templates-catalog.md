@@ -47,7 +47,7 @@ prerequisites:
 | 模板 | 用途 | 目标文档 |
 |------|------|---------|
 | Skill 运维技能模板 | 故障排查技能文档 | skills/ 目录下所有 Skill |
-| FTA 故障树模板 | 组件故障树分析 | 故障诊断/topic-fta/ 目录下所有 FTA |
+| FTA 故障树模板 | 组件故障树分析 | 故障诊断/FTA故障树/ 目录下所有 FTA |
 | FEBM 取证模板 | 法医取证分析 | 故障诊断/topic-febm/ 目录 |
 | MOC 导航模板 | 内容导航索引 | 各 domain/topic 的 README |
 | 领域文章模板 | 技术深度文章 | domain-*/ 目录下技术文章 |

@@ -344,7 +344,7 @@ KIND_IMAGE=kindest/node:v1.30.6 bash setup-kind-cluster.sh
 | Skill Schema | [skill-schema.md](./skill-schema.md) | Skill 文档规范模板 |
 | IDE Skill 示例 | [k8s-node-notready/](./skill-set/k8s-node-notready/) | 完整 IDE 格式 Skill |
 | Skills 索引 | [README.md](./README.md) | Skill 库总索引 |
-| FTA 故障树 | [../故障诊断/topic-fta/](../故障诊断/FTA故障树/) | 故障分析模型 |
+| FTA 故障树 | [../故障诊断/FTA故障树/](../故障诊断/FTA故障树/) | 故障分析模型 |
 
 
 <!-- risk-assessed -->

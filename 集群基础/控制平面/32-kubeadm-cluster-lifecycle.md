@@ -72,7 +72,7 @@ cross_refs:
   path: ../安全/
   label: '相关知识域: 安全'
 - type: fta
-  path: ../故障诊断/topic-fta/list/kubeadm-fta.md
+  path: ../故障诊断/FTA故障树/list/kubeadm-fta.md
   label: '故障树: kubeadm'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md

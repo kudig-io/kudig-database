@@ -76,7 +76,7 @@ related_domains:
 related_topics:
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
-  - 故障诊断/topic-fta/04-fta-core-principles
+  - 故障诊断/FTA故障树/04-fta-core-principles
 ---
 
 # Day 16: 安全体系 - Pod 安全 + 密钥管理

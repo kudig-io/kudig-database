@@ -1,73 +1,5 @@
 ---
-title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 (故障诊断)
-description: 'title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'
-summary: 'title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- kubelet
-- scheduler
-- prometheus
-- grafana
-- jaeger
-- istio
-- envoy
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 35min
-intent_queries:
-- Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 是什么
-- 如何 Kubernetes 全量故障树分析(FTA)排查手册 - 增强版
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 故障排查
-- Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 排障步骤
-- Kubernetes 全量故障树分析(FTA)排查手册 - 增强版 根因分析
-trigger_keywords:
-- Kubernetes
-- 全量故障树分析
-- FTA
-- 排查手册
-- 增强版
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- monitoring-basics
-- gitops-basics
-- cni-basics
-- etcd-basics
-- tls-basics
-- policy-basics
-- backup-basics
-- logging-basics
-- tracing-basics
-- observability-basics
-fta_id: FTA-KUBERNETES_FULL_ANALYSIS_V2-001
-component: Kubernetes Full Analysis V2
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Kubernetes|Kubernetes]]es 全量故障树分析(FTA)排查手册|Kubernetes 全量故障树分析(FTA)排查手册]] - 增强版
+title: Kubernetes 全量故障树分析(FTA)排查手册 - 增强版
 description: '# Kubernetes 全量故障树分析(FTA)排查手册 - 增强版'
 category: fta
 tags:
@@ -75,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
+- etcd
 - kubelet
 - scheduler
 - prometheus
@@ -101,16 +33,27 @@ trigger_keywords:
 - 排查手册
 - 增强版
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+- cni-basics
+- etcd-basics
+- tls-basics
+- policy-basics
+- backup-basics
+- logging-basics
+- tracing-basics
+- observability-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Kubernetes 全量故障树分析(FTA)排查手册 - 增强版
 
@@ -120,9 +63,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、故障树总览 -->## 一、故障树总览
+## 一、故障树总览
 
-## 1.1 顶部事件定义表（增强版）
+### 1.1 顶部事件定义表（增强版）
 
 | 编号 | 顶部事件 | 严重程度 | 影响范围 | 典型症状 | ACK 特有 |
 |:---|:---|:---:|:---|:---|:---|
@@ -143,7 +86,7 @@ k8s_versions:
 | TE-15 | 灾难恢复失败 | 🔴 P0 | 业务连续性 | 备份恢复失败/DR 演练失败 | 备份/DR |
 | TE-16 | 可观测性完整性缺失 | 🟡 P2 | 监控盲区 | 关键指标丢失/追踪断裂 | OTel/可观测性 |
 
-## 1.2 故障树总览图 (ASCII)
+### 1.2 故障树总览图 (ASCII)
 
 ```
                                     ┌─────────────────────────────────────────────────┐
@@ -177,9 +120,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 二、TE-1: 集群完全不可用 🔴 P0 -->## 二、TE-1: 集群完全不可用 🔴 P0
+## 二、TE-1: 集群完全不可用 🔴 P0
 
-## 2.1 完整故障树（5 层深度 + ACK IaaS 层）
+### 2.1 完整故障树（5 层深度 + ACK IaaS 层）
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -271,9 +214,9 @@ TE-1: 集群完全不可用 [OR门] 🔴 P0
 ```
 ---
 
-<!-- chunk: 三、TE-2: 应用服务不可用 🔴 P0 -->## 三、TE-2: 应用服务不可用 🔴 P0
+## 三、TE-2: 应用服务不可用 🔴 P0
 
-## 3.1 完整故障树（5 层深度 + ASM/ARMS 层）
+### 3.1 完整故障树（5 层深度 + ASM/ARMS 层）
 
 ```
 TE-2: 应用服务不可用 [OR门] 🔴 P0
@@ -371,9 +314,9 @@ TE-2: 应用服务不可用 [OR门] 🔴 P0
 
 ---
 
-<!-- chunk: 四、TE-3: Pod启动失败 🟠 P1 -->## 四、TE-3: Pod启动失败 🟠 P1
+## 四、TE-3: Pod启动失败 🟠 P1
 
-## 4.1 完整故障树
+### 4.1 完整故障树
 
 ```
 TE-3: Pod启动失败 [OR门] 🟠 P1
@@ -430,9 +373,9 @@ TE-3: Pod启动失败 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 五、TE-4: 网络通信异常 🟠 P1 -->## 五、TE-4: 网络通信异常 🟠 P1
+## 五、TE-4: 网络通信异常 🟠 P1
 
-## 5.1 完整故障树（包含 Terway 特有层）
+### 5.1 完整故障树（包含 Terway 特有层）
 
 ```
 TE-4: 网络通信异常 [OR门] 🟠 P1
@@ -503,9 +446,9 @@ TE-4: 网络通信异常 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 六、TE-5: 存储访问失败 🟠 P1 -->## 六、TE-5: 存储访问失败 🟠 P1
+## 六、TE-5: 存储访问失败 🟠 P1
 
-## 6.1 完整故障树（包含 OSS/CSI 特有层）
+### 6.1 完整故障树（包含 OSS/CSI 特有层）
 
 ```
 TE-5: 存储访问失败 [OR门] 🟠 P1
@@ -565,9 +508,9 @@ TE-5: 存储访问失败 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 七、TE-6: 资源调度异常 🟡 P2 -->## 七、TE-6: 资源调度异常 🟡 P2
+## 七、TE-6: 资源调度异常 🟡 P2
 
-## 7.1 完整故障树
+### 7.1 完整故障树
 
 ```
 TE-6: 资源调度异常 [OR门] 🟡 P2
@@ -612,9 +555,9 @@ TE-6: 资源调度异常 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 八、TE-7: 安全认证失败 🟠 P1 -->## 八、TE-7: 安全认证失败 🟠 P1
+## 八、TE-7: 安全认证失败 🟠 P1
 
-## 8.1 完整故障树
+### 8.1 完整故障树
 
 ```
 TE-7: 安全认证失败 [OR门] 🟠 P1
@@ -664,9 +607,9 @@ TE-7: 安全认证失败 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 九、TE-8: 监控告警异常 🟡 P2 -->## 九、TE-8: 监控告警异常 🟡 P2
+## 九、TE-8: 监控告警异常 🟡 P2
 
-## 9.1 完整故障树（包含 ARMS/MSP 层）
+### 9.1 完整故障树（包含 ARMS/MSP 层）
 
 ```
 TE-8: 监控告警异常 [OR门] 🟡 P2
@@ -723,7 +666,7 @@ TE-8: 监控告警异常 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 十、TE-9: Terway 网络问题 🟠 P1 （新增） -->## 十、TE-9: Terway 网络问题 🟠 P1 （新增）
+## 十、TE-9: Terway 网络问题 🟠 P1 （新增）
 
 ```
 TE-9: Terway 网络问题 [OR门] 🟠 P1
@@ -773,7 +716,7 @@ TE-9: Terway 网络问题 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 十一、TE-10: ASM 服务网格问题 🟠 P1 （新增） -->## 十一、TE-10: ASM 服务网格问题 🟠 P1 （新增）
+## 十一、TE-10: ASM 服务网格问题 🟠 P1 （新增）
 
 ```
 TE-10: ASM 服务网格问题 [OR门] 🟠 P1
@@ -832,7 +775,7 @@ TE-10: ASM 服务网格问题 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 十二、TE-11: ACK-One 多集群异常 🟠 P1 （新增） -->## 十二、TE-11: ACK-One 多集群异常 🟠 P1 （新增）
+## 十二、TE-11: ACK-One 多集群异常 🟠 P1 （新增）
 
 ```
 TE-11: ACK-One 多集群异常 [OR门] 🟠 P1
@@ -868,7 +811,7 @@ TE-11: ACK-One 多集群异常 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 十三、TE-12: 资源配额超限 🟡 P2 （新增） -->## 十三、TE-12: 资源配额超限 🟡 P2 （新增）
+## 十三、TE-12: 资源配额超限 🟡 P2 （新增）
 
 ```
 TE-12: 资源配额超限 [OR门] 🟡 P2
@@ -904,7 +847,7 @@ TE-12: 资源配额超限 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 十四、TE-13: 变更管理问题 🟠 P1 （新增） -->## 十四、TE-13: 变更管理问题 🟠 P1 （新增）
+## 十四、TE-13: 变更管理问题 🟠 P1 （新增）
 
 ```
 TE-13: 变更管理问题 [OR门] 🟠 P1
@@ -917,7 +860,7 @@ TE-13: 变更管理问题 [OR门] 🟠 P1
 │   │       └── BE-13.1.2.1 节点池升级导致 Pod 反复重启
 │   │
 │   └── BE-13.2 组件升级失败
-│       ├── BE-13.2.1 cert-manager 升级失败
+│       ├── BE-13.2.1 [[cert-manager|cert-manager]] 升级失败
 │       │   └── BE-13.2.1.1 cert-manager CRD 迁移失败
 │       └── BE-13.2.2 Ingress Controller 升级失败
 │
@@ -945,7 +888,7 @@ TE-13: 变更管理问题 [OR门] 🟠 P1
 
 ---
 
-<!-- chunk: 十五、TE-14: 容量规划失效 🟡 P2 （新增） -->## 十五、TE-14: 容量规划失效 🟡 P2 （新增）
+## 十五、TE-14: 容量规划失效 🟡 P2 （新增）
 
 ```
 TE-14: 容量规划失效 [OR门] 🟡 P2
@@ -988,7 +931,7 @@ TE-14: 容量规划失效 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 十六、TE-15: 灾难恢复失败 🔴 P0 （新增） -->## 十六、TE-15: 灾难恢复失败 🔴 P0 （新增）
+## 十六、TE-15: 灾难恢复失败 🔴 P0 （新增）
 
 ```
 TE-15: 灾难恢复失败 [OR门] 🔴 P0
@@ -1029,7 +972,7 @@ TE-15: 灾难恢复失败 [OR门] 🔴 P0
 
 ---
 
-<!-- chunk: 十七、TE-16: 可观测性完整性缺失 🟡 P2 （新增） -->## 十七、TE-16: 可观测性完整性缺失 🟡 P2 （新增）
+## 十七、TE-16: 可观测性完整性缺失 🟡 P2 （新增）
 
 ```
 TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
@@ -1075,9 +1018,9 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 十八、底事件完整索引 -->## 十八、底事件完整索引
+## 十八、底事件完整索引
 
-## 18.1 按故障域分类
+### 18.1 按故障域分类
 
 | 故障域 | 底事件数量 | 顶事件覆盖 |
 |:---|:---:|:---|
@@ -1094,7 +1037,7 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 | 变更管理 (升级/回滚/配置漂移) | 12+ | TE-13 |
 | 容量/DR (备份/恢复/扩容) | 15+ | TE-14, TE-15 |
 
-## 18.2 问题传播路径示例
+### 18.2 问题传播路径示例
 
 ```
 路径1: etcd 磁盘满 → API Server 不可用 → 集群不可用
@@ -1115,9 +1058,9 @@ TE-16: 可观测性完整性缺失 [OR门] 🟡 P2
 
 ---
 
-<!-- chunk: 十九、故障树元数据 -->## 十九、故障树元数据
+## 十九、故障树元数据
 
-## 19.1 版本信息
+### 19.1 版本信息
 
 ```yaml
 fta_metadata:
@@ -1133,7 +1076,7 @@ fta_metadata:
     multi_cluster: 80%
 ```
 
-## 19.2 维护要求
+### 19.2 维护要求
 
 ```
 更新触发条件:
@@ -1152,7 +1095,7 @@ fta_metadata:
 
 ---
 
-<!-- chunk: 二十、与现有 FTA 知识库的差异 -->## 二十、与现有 FTA 知识库的差异
+## 二十、与现有 FTA 知识库的差异
 
 | 对比项 | v1.0 (原有) | v2.0 (增强版) |
 |:---|:---|:---|
@@ -1171,31 +1114,6 @@ fta_metadata:
 > **文档版本**: v2.0 Enhanced
 > **生成日期**: 2026-05-18
 > **维护团队**: SRE Team / Platform Team
-> **关联文档**: [ack-fta-generator-v2.md](./[[故障诊断/FTA故障树/ack-fta-generator-v2.md|ack-fta-generator-v2]].md) | [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md)
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/fta-index.md|fta-index]]
-- [[故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
-- [[故障诊断/FTA故障树/problem-solving-architecture.md|problem-solving-architecture]]
-
+> **关联文档**: [ack-fta-generator-v2.md](./ack-fta-generator-v2.md) | [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md)
 
 <!-- risk-assessed -->

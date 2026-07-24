@@ -30,7 +30,7 @@ last_updated: 2026-05-24
 | 模板文件 | 用途 | 适用目录 | 复杂度 |
 |:---|:---|:---|:---:|
 | `domain-article-template.md` | 知识域深度文档 | `domain-*/` | ⭐⭐⭐ |
-| `fta-template.md` | FTA 故障树分析（融合附录模板） | `故障诊断/topic-fta/list/` | ⭐⭐⭐ |
+| `fta-template.md` | FTA 故障树分析（融合附录模板） | `故障诊断/FTA故障树/list/` | ⭐⭐⭐ |
 | `skill-template.md` | Skill 工单技能（融合 Schema 完整规范） | `故障诊断/topic-skills/` | ⭐⭐⭐⭐ |
 | `febm-template.md` | FEBM 法医取证分析 | `故障诊断/topic-febm/` | ⭐⭐⭐ |
 | `cheat-sheet-template.md` | 技术速查卡 | `系统基础/topic-cheat-sheet/` | ⭐ |
@@ -76,7 +76,7 @@ related_docs:
 
 ```bash
 # 1. 选择对应模板
-cp templates/fta-template.md 故障诊断/topic-fta/list/12-new-component-fta.md
+cp templates/fta-template.md 故障诊断/FTA故障树/list/12-new-component-fta.md
 
 # 2. 全局替换占位符
 # {{组件名称}} → 实际内容

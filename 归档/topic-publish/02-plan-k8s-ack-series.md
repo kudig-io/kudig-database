@@ -174,10 +174,10 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 1.1 | **K8S 架构全景图：控制平面 vs 数据平面的设计哲学** | domain-01-cluster-fundamentals/01 | 工单分析的架构基础 | ① K8S 架构演进历程 ② 控制平面组件详解 ③ 数据平面组件详解 ④ 两大平面交互机制 ⑤ 工单中的架构级问题 |
-| 1.2 | **核心组件深度拆解：API Server / etcd / Scheduler / CM** | domain-01-cluster-fundamentals/02 + domain-01-cluster-fundamentals/11-13 | 源码级理解，排查加速 | ① API Server 请求处理流水线 ② etcd 存储引擎原理 ③ Scheduler 调度框架 ④ Controller Manager 控制循环 ⑤ 组件间通信机制 |
-| 1.3 | **API 版本演进与 Feature Gates：为什么你的 YAML 会报错** | domain-01-cluster-fundamentals/03 | 工单高频问题：版本兼容 | ① API 版本策略（alpha/beta/GA） ② 废弃策略与迁移指南 ③ Feature Gates 机制 ④ 版本兼容性检查方法 ⑤ 工单中的版本问题 TOP5 |
-| 1.4 | **集群部署模式：高可用架构、多数据中心、DR 设计** | domain-01-cluster-fundamentals/12 + domain-01-cluster-fundamentals/03 | 架构设计能力 | ① 单主 vs 多主架构 ② 堆叠 vs 外部 etcd ③ 多数据中心设计 ④ 灾难恢复方案 ⑤ ACK 托管 vs 自建对比 |
+| 1.1 | **K8S 架构全景图：控制平面 vs 数据平面的设计哲学** | 集群基础/01 | 工单分析的架构基础 | ① K8S 架构演进历程 ② 控制平面组件详解 ③ 数据平面组件详解 ④ 两大平面交互机制 ⑤ 工单中的架构级问题 |
+| 1.2 | **核心组件深度拆解：API Server / etcd / Scheduler / CM** | 集群基础/02 + 集群基础/11-13 | 源码级理解，排查加速 | ① API Server 请求处理流水线 ② etcd 存储引擎原理 ③ Scheduler 调度框架 ④ Controller Manager 控制循环 ⑤ 组件间通信机制 |
+| 1.3 | **API 版本演进与 Feature Gates：为什么你的 YAML 会报错** | 集群基础/03 | 工单高频问题：版本兼容 | ① API 版本策略（alpha/beta/GA） ② 废弃策略与迁移指南 ③ Feature Gates 机制 ④ 版本兼容性检查方法 ⑤ 工单中的版本问题 TOP5 |
+| 1.4 | **集群部署模式：高可用架构、多数据中心、DR 设计** | 集群基础/12 + 集群基础/03 | 架构设计能力 | ① 单主 vs 多主架构 ② 堆叠 vs 外部 etcd ③ 多数据中心设计 ④ 灾难恢复方案 ⑤ ACK 托管 vs 自建对比 |
 
 > **系列定位**：展现架构级思考深度，从"处理工单的人"升级为"理解整个系统的人"。**第 1 周发布**。
 > **互动话题**："你们团队在选择 K8S 集群架构时，优先考虑的是什么？HA？成本？运维复杂度？"
@@ -188,11 +188,11 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 2.1 | **API Server 性能调优：APF 流量控制、并发限制、请求延迟优化** | domain-01-cluster-fundamentals/12,17,18 | 工单场景：API 慢/429 | ① APF（API Priority and Fairness）详解 ② 并发限制配置 ③ 请求延迟优化 ④ watch 机制优化 ⑤ 生产调优案例 |
-| 2.2 | **etcd 生产运维圣经：性能调优、备份恢复、集群维护** | domain-01-cluster-fundamentals/11,19 | 工单场景：etcd 异常 | ① etcd 性能基准与调优 ② 备份策略与自动化 ③ 恢复演练完整流程 ④ 集群扩缩容 ⑤ 常见问题与排障 |
-| 2.3 | **kube-scheduler 深度解析：调度算法、自定义调度、调度失败分析** | domain-01-cluster-fundamentals/20 | 工单场景：Pod Pending | ① 调度框架与扩展点 ② 谓词与优先级算法 ③ 自定义调度器开发 ④ 调度失败诊断 ⑤ 真实工单案例 |
-| 2.4 | **控制平面高可用与安全加固：HA 架构、TLS 配置、安全策略** | domain-01-cluster-fundamentals/03,04 | 企业级安全基线 | ① 多副本高可用架构 ② TLS 证书管理 ③ 安全加固清单 ④ 审计日志配置 ⑤ 安全基线检查 |
-| 2.5 | **控制平面升级策略：版本兼容、灰度升级、回滚自动化** | domain-01-cluster-fundamentals/07 + domain-01-cluster-fundamentals/07 | 工单场景：升级异常 | ① 版本兼容性矩阵 ② 灰度升级策略 ③ 回滚自动化方案 ④ 升级前检查清单 ⑤ 升级工单 TOP5 案例 |
+| 2.1 | **API Server 性能调优：APF 流量控制、并发限制、请求延迟优化** | 集群基础/12,17,18 | 工单场景：API 慢/429 | ① APF（API Priority and Fairness）详解 ② 并发限制配置 ③ 请求延迟优化 ④ watch 机制优化 ⑤ 生产调优案例 |
+| 2.2 | **etcd 生产运维圣经：性能调优、备份恢复、集群维护** | 集群基础/11,19 | 工单场景：etcd 异常 | ① etcd 性能基准与调优 ② 备份策略与自动化 ③ 恢复演练完整流程 ④ 集群扩缩容 ⑤ 常见问题与排障 |
+| 2.3 | **kube-scheduler 深度解析：调度算法、自定义调度、调度失败分析** | 集群基础/20 | 工单场景：Pod Pending | ① 调度框架与扩展点 ② 谓词与优先级算法 ③ 自定义调度器开发 ④ 调度失败诊断 ⑤ 真实工单案例 |
+| 2.4 | **控制平面高可用与安全加固：HA 架构、TLS 配置、安全策略** | 集群基础/03,04 | 企业级安全基线 | ① 多副本高可用架构 ② TLS 证书管理 ③ 安全加固清单 ④ 审计日志配置 ⑤ 安全基线检查 |
+| 2.5 | **控制平面升级策略：版本兼容、灰度升级、回滚自动化** | 集群基础/07 + 集群基础/07 | 工单场景：升级异常 | ① 版本兼容性矩阵 ② 灰度升级策略 ③ 回滚自动化方案 ④ 升级前检查清单 ⑤ 升级工单 TOP5 案例 |
 
 > **系列定位**：控制平面是 ACK 工单的"重灾区"，这个系列直接体现深度。**第 2 周发布**。
 > **互动话题**："你们 etcd 的备份策略是什么？多久备一次？恢复演练过吗？"
@@ -203,13 +203,13 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 3.1 | **K8S 网络架构概览：CNI 插件选型与对比（Flannel/Calico/Cilium/Terway）** | domain-03-networking-traffic/01-05 | 工单必备：网络基础 | ① K8S 网络模型 ② 四大 CNI 架构对比 ③ 性能 benchmark ④ 选型决策树 ⑤ 迁移注意事项 |
-| 3.2 | **Terway 网络方案深度指南：ACK 的 VPC 网络实践** | domain-03-networking-traffic/05,37 | ACK 特色：Terway CRUD | ① Terway 架构原理 ② VPC 网络模型 ③ ENI/IPvlan 模式 ④ 性能优化 ⑤ 常见问题排查 |
-| 3.3 | **Service 实现细节：ClusterIP/NodePort/LB 背后的 kube-proxy 原理** | domain-03-networking-traffic/06-10 | 工单场景：Service 不通 | ① kube-proxy 三种模式 ② iptables vs IPVS 深度对比 ③ ClusterIP/NodePort/LB 实现 ④ 会话保持与拓扑感知 ⑤ 排障实战 |
-| 3.4 | **CoreDNS 完整运维指南：架构原理、配置调优、故障排查** | domain-03-networking-traffic/11-15 | 工单高频：DNS 问题 | ① CoreDNS 架构与插件链 ② Corefile 配置优化 ③ 缓存策略与性能调优 ④ StubDomain/Upstream 配置 ⑤ DNS 排障手册 |
-| 3.5 | **NetworkPolicy 深度实践：零信任网络从策略到落地** | domain-03-networking-traffic/16-18 | 安全+网络交叉 | ① NetworkPolicy 语法详解 ② 常见策略模式 ③ Calico/Cilium 策略实现差异 ④ 零信任网络设计 ⑤ 策略排障 |
-| 3.6 | **Ingress 生产最佳实践：Nginx Controller、TLS 证书、高级路由** | domain-03-networking-traffic/19-26 | 工单场景：Ingress 异常 | ① Ingress Controller 选型 ② Nginx Ingress 配置优化 ③ TLS 证书自动化 ④ 高级路由规则 ⑤ 性能调优 |
-| 3.7 | **Gateway API 全解：下一代流量管理标准** | domain-03-networking-traffic/35-36 | 前瞻性 | ① Gateway API 架构设计 ② vs Ingress 对比 ③ GRPCRoute/TCPRoute/UDPRoute ④ 多团队协作模型 ⑤ 生产迁移指南 |
+| 3.1 | **K8S 网络架构概览：CNI 插件选型与对比（Flannel/Calico/Cilium/Terway）** | 网络/01-05 | 工单必备：网络基础 | ① K8S 网络模型 ② 四大 CNI 架构对比 ③ 性能 benchmark ④ 选型决策树 ⑤ 迁移注意事项 |
+| 3.2 | **Terway 网络方案深度指南：ACK 的 VPC 网络实践** | 网络/05,37 | ACK 特色：Terway CRUD | ① Terway 架构原理 ② VPC 网络模型 ③ ENI/IPvlan 模式 ④ 性能优化 ⑤ 常见问题排查 |
+| 3.3 | **Service 实现细节：ClusterIP/NodePort/LB 背后的 kube-proxy 原理** | 网络/06-10 | 工单场景：Service 不通 | ① kube-proxy 三种模式 ② iptables vs IPVS 深度对比 ③ ClusterIP/NodePort/LB 实现 ④ 会话保持与拓扑感知 ⑤ 排障实战 |
+| 3.4 | **CoreDNS 完整运维指南：架构原理、配置调优、故障排查** | 网络/11-15 | 工单高频：DNS 问题 | ① CoreDNS 架构与插件链 ② Corefile 配置优化 ③ 缓存策略与性能调优 ④ StubDomain/Upstream 配置 ⑤ DNS 排障手册 |
+| 3.5 | **NetworkPolicy 深度实践：零信任网络从策略到落地** | 网络/16-18 | 安全+网络交叉 | ① NetworkPolicy 语法详解 ② 常见策略模式 ③ Calico/Cilium 策略实现差异 ④ 零信任网络设计 ⑤ 策略排障 |
+| 3.6 | **Ingress 生产最佳实践：Nginx Controller、TLS 证书、高级路由** | 网络/19-26 | 工单场景：Ingress 异常 | ① Ingress Controller 选型 ② Nginx Ingress 配置优化 ③ TLS 证书自动化 ④ 高级路由规则 ⑤ 性能调优 |
+| 3.7 | **Gateway API 全解：下一代流量管理标准** | 网络/35-36 | 前瞻性 | ① Gateway API 架构设计 ② vs Ingress 对比 ③ GRPCRoute/TCPRoute/UDPRoute ④ 多团队协作模型 ⑤ 生产迁移指南 |
 
 > **系列定位**：网络是 K8S 工单占比最高的类别，7 篇全方位覆盖。**第 3-4 周发布**。
 > **互动话题**："Terway vs Flannel vs Calico，你们选了哪个？迁移过吗？"
@@ -220,10 +220,10 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 4.1 | **K8S 存储架构与 PV/PVC 核心机制** | domain-04-storage-data/01-03 | 存储基础 | ① 存储架构演进 ② PV/PVC 生命周期 ③ 绑定与回收策略 ④ 存储类设计 |
-| 4.2 | **StorageClass 动态供给与 CSI 驱动集成实战** | domain-04-storage-data/04-05 | 工单场景：PVC Pending | ① StorageClass 配置详解 ② CSI 驱动架构 ③ 动态供给流程 ④ 常见 CSI 驱动对比 ⑤ PVC Pending 排障 |
-| 4.3 | **存储性能调优与监控告警体系** | domain-04-storage-data/08,12 | 性能优化 | ① 存储性能基准测试 ② IOPS/吞吐/延迟优化 ③ 存储监控指标体系 ④ 告警规则设计 |
-| 4.4 | **存储安全、备份与灾难恢复方案** | domain-04-storage-data/10,13,15 | 企业级数据保护 | ① 存储安全策略 ② 备份方案设计 ③ 灾难恢复流程 ④ Velero 备份实战 |
+| 4.1 | **K8S 存储架构与 PV/PVC 核心机制** | 存储/01-03 | 存储基础 | ① 存储架构演进 ② PV/PVC 生命周期 ③ 绑定与回收策略 ④ 存储类设计 |
+| 4.2 | **StorageClass 动态供给与 CSI 驱动集成实战** | 存储/04-05 | 工单场景：PVC Pending | ① StorageClass 配置详解 ② CSI 驱动架构 ③ 动态供给流程 ④ 常见 CSI 驱动对比 ⑤ PVC Pending 排障 |
+| 4.3 | **存储性能调优与监控告警体系** | 存储/08,12 | 性能优化 | ① 存储性能基准测试 ② IOPS/吞吐/延迟优化 ③ 存储监控指标体系 ④ 告警规则设计 |
+| 4.4 | **存储安全、备份与灾难恢复方案** | 存储/10,13,15 | 企业级数据保护 | ① 存储安全策略 ② 备份方案设计 ③ 灾难恢复流程 ④ Velero 备份实战 |
 
 > **系列定位**：存储工单虽不如网络多，但每个都很痛。**第 5 周发布**。
 > **互动话题**："云盘扩容踩过坑吗？在线扩容和离线扩容的选择标准是什么？"
@@ -234,11 +234,11 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 5.1 | **认证授权体系全解：RBAC 权限矩阵、OIDC 集成、ServiceAccount** | domain-05-security-compliance/01,07 | 工单场景：权限问题 | ① 认证机制详解 ② RBAC 权限模型 ③ Role/ClusterRole 设计 ④ OIDC 集成实践 ⑤ 权限排障手册 |
-| 5.2 | **Pod 安全标准（PSS/PSA）与策略引擎（OPA/Kyverno）** | domain-05-security-compliance/05,06,14 | 工单场景：Pod 被拒绝 | ① PSS/PSA 机制详解 ② PSP 迁移指南 ③ OPA Gatekeeper 策略 ④ Kyverno 策略管理 ⑤ 策略排障 |
-| 5.3 | **证书管理与 TLS 完整指南：cert-manager、证书轮换、故障排查** | domain-05-security-compliance/10 | 工单高频：证书过期 | ① TLS 握手原理 ② cert-manager 部署与配置 ③ 证书自动轮换 ④ 私钥管理 ⑤ 证书排障手册 |
-| 5.4 | **运行时安全防护：Falco/KubeArmor 配置、威胁检测** | domain-05-security-compliance/03,15 | 安全深度 | ① 运行时威胁模型 ② Falco 规则编写 ③ KubeArmor 策略 ④ 告警联动 ⑤ 安全事件响应 |
-| 5.5 | **零信任架构实施：SPIFFE/SPIRE 身份管理、微分段** | domain-05-security-compliance/18,19 | 前沿+企业级 | ① 零信任模型原理 ② SPIFFE/SPIRE 架构 ③ 身份驱动的访问控制 ④ 微分段实现 ⑤ 落地路线图 |
+| 5.1 | **认证授权体系全解：RBAC 权限矩阵、OIDC 集成、ServiceAccount** | 安全/01,07 | 工单场景：权限问题 | ① 认证机制详解 ② RBAC 权限模型 ③ Role/ClusterRole 设计 ④ OIDC 集成实践 ⑤ 权限排障手册 |
+| 5.2 | **Pod 安全标准（PSS/PSA）与策略引擎（OPA/Kyverno）** | 安全/05,06,14 | 工单场景：Pod 被拒绝 | ① PSS/PSA 机制详解 ② PSP 迁移指南 ③ OPA Gatekeeper 策略 ④ Kyverno 策略管理 ⑤ 策略排障 |
+| 5.3 | **证书管理与 TLS 完整指南：cert-manager、证书轮换、故障排查** | 安全/10 | 工单高频：证书过期 | ① TLS 握手原理 ② cert-manager 部署与配置 ③ 证书自动轮换 ④ 私钥管理 ⑤ 证书排障手册 |
+| 5.4 | **运行时安全防护：Falco/KubeArmor 配置、威胁检测** | 安全/03,15 | 安全深度 | ① 运行时威胁模型 ② Falco 规则编写 ③ KubeArmor 策略 ④ 告警联动 ⑤ 安全事件响应 |
+| 5.5 | **零信任架构实施：SPIFFE/SPIRE 身份管理、微分段** | 安全/18,19 | 前沿+企业级 | ① 零信任模型原理 ② SPIFFE/SPIRE 架构 ③ 身份驱动的访问控制 ④ 微分段实现 ⑤ 落地路线图 |
 
 > **系列定位**：安全是 ACK 工单中最敏感的类别。**第 6 周发布**。
 > **互动话题**："证书过期导致集群崩过吗？现在怎么防的？"
@@ -249,11 +249,11 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 6.1 | **可观测性架构体系：Metrics / Logs / Traces / Profiling 一体化** | domain-06-observability/01-04 | 全栈可观测 | ① 可观测性三大支柱 ② 第四支柱：Continuous Profiling ③ 数据关联与上下文 ④ 工具选型矩阵 |
-| 6.2 | **Prometheus 监控实战：从部署到大规模集群性能优化** | domain-06-observability/10,15 | 生产级 Prometheus | ① Prometheus 架构演进 ② 大规模集群部署 ③ 性能优化实践 ④ 远程读写方案 ⑤ 联邦查询 |
-| 6.3 | **SLO/SLI 体系建设：Google SRE 方法论落地实践** | domain-06-observability/18 | SRE 体系 | ① SLI 设计原则 ② SLO 制定方法 ③ Error Budget 策略 ④ 燃烧率告警 ⑤ SLO Dashboard |
-| 6.4 | **告警管理策略：智能降噪、分级告警、应急响应** | domain-06-observability/05,06 | 工单场景：告警风暴 | ① 告警分级体系 ② 降噪策略 ③ 告警路由与升级 ④ 应急响应 SOP ⑤ On-Call 管理 |
-| 6.5 | **多集群统一监控治理与成本优化** | domain-06-observability/16,17 | 企业级治理 | ① 多集群监控架构 ② Thanos/VictoriaMetrics 方案 ③ 统一 Dashboard ④ 监控成本优化 |
+| 6.1 | **可观测性架构体系：Metrics / Logs / Traces / Profiling 一体化** | 可观测性/01-04 | 全栈可观测 | ① 可观测性三大支柱 ② 第四支柱：Continuous Profiling ③ 数据关联与上下文 ④ 工具选型矩阵 |
+| 6.2 | **Prometheus 监控实战：从部署到大规模集群性能优化** | 可观测性/10,15 | 生产级 Prometheus | ① Prometheus 架构演进 ② 大规模集群部署 ③ 性能优化实践 ④ 远程读写方案 ⑤ 联邦查询 |
+| 6.3 | **SLO/SLI 体系建设：Google SRE 方法论落地实践** | 可观测性/18 | SRE 体系 | ① SLI 设计原则 ② SLO 制定方法 ③ Error Budget 策略 ④ 燃烧率告警 ⑤ SLO Dashboard |
+| 6.4 | **告警管理策略：智能降噪、分级告警、应急响应** | 可观测性/05,06 | 工单场景：告警风暴 | ① 告警分级体系 ② 降噪策略 ③ 告警路由与升级 ④ 应急响应 SOP ⑤ On-Call 管理 |
+| 6.5 | **多集群统一监控治理与成本优化** | 可观测性/16,17 | 企业级治理 | ① 多集群监控架构 ② Thanos/VictoriaMetrics 方案 ③ 统一 Dashboard ④ 监控成本优化 |
 
 > **系列定位**：监控是预防工单的第一道防线。**第 7 周发布**。
 > **互动话题**："Prometheus 内存吃爆怎么解决的？Thanos 还是 VictoriaMetrics？"
@@ -264,15 +264,15 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 7.1 | **Pod 全状态故障排查：Pending/CrashLoop/OOM/Evicted 完整诊断** | domain-10-troubleshooting-diagnostics/05-08 | 工单 TOP1 场景 | ① Pod 生命周期与状态机 ② Pending 根因分析（资源不足/亲和性/PV） ③ CrashLoopBackOff 排查链路 ④ OOMKilled 根因与调优 ⑤ Evicted 预防与处理 |
-| 7.2 | **Node NotReady 深度诊断：从 kubelet 到容器运行时的全链路排查** | domain-10-troubleshooting-diagnostics/06,09,35 | 工单 TOP2 场景 | ① Node 状态与条件 ② kubelet 故障排查 ③ 容器运行时诊断 ④ 资源压力排查 ⑤ 硬件问题关联 |
-| 7.3 | **网络问题三剑客：CNI/DNS/Service 连通性排查手册** | domain-10-troubleshooting-diagnostics/03,25,26,10 | 工单 TOP3 场景 | ① CNI 故障排查流程 ② DNS 解析问题诊断 ③ Service 连通性测试 ④ 完整排障决策树 ⑤ 15 个真实工单案例 |
-| 7.4 | **控制平面故障排查：API Server / etcd 不可用的应急处理** | domain-10-troubleshooting-diagnostics/01,02 | 最高优先级工单 | ① API Server 不可用诊断 ② etcd 集群故障处理 ③ 控制平面恢复 SOP ④ 数据一致性验证 |
-| 7.5 | **存储故障排查：PVC Pending / 卷挂载失败 / CSI 驱动异常** | domain-10-troubleshooting-diagnostics/04,14 | 工单常见场景 | ① PVC Pending 排查流程 ② 卷挂载失败诊断 ③ CSI 驱动异常处理 ④ 数据安全与恢复 |
-| 7.6 | **安全故障排查：RBAC 权限不足 / 证书过期 / 准入控制拒绝** | domain-10-troubleshooting-diagnostics/12,13,32 | 安全类工单 | ① RBAC 权限诊断 ② 证书过期处理 ③ 准入控制拒绝分析 ④ 安全事件溯源 |
-| 7.7 | **HPA/VPA/Cluster Autoscaler 故障排查** | domain-10-troubleshooting-diagnostics/17,28 | 弹性伸缩工单 | ① HPA 不生效排查 ② VPA 行为分析 ③ CA 扩缩容异常 ④ 指标源问题诊断 |
-| 7.8 | **升级迁移故障排查：版本兼容性、滚动升级卡住、回滚策略** | domain-10-troubleshooting-diagnostics/34 | 升级类工单 | ① 版本兼容性检查 ② 滚动升级卡住诊断 ③ 回滚策略与执行 ④ 数据迁移风险 |
-| 7.9 | **企业级监控告警体系建设与混沌工程测试** | domain-10-troubleshooting-diagnostics/39,42 | 高级运维能力 | ① 监控告警体系设计 ② 混沌工程工具选型 ③ 故障注入测试 ④ 弹性验证方法 |
+| 7.1 | **Pod 全状态故障排查：Pending/CrashLoop/OOM/Evicted 完整诊断** | 故障诊断/05-08 | 工单 TOP1 场景 | ① Pod 生命周期与状态机 ② Pending 根因分析（资源不足/亲和性/PV） ③ CrashLoopBackOff 排查链路 ④ OOMKilled 根因与调优 ⑤ Evicted 预防与处理 |
+| 7.2 | **Node NotReady 深度诊断：从 kubelet 到容器运行时的全链路排查** | 故障诊断/06,09,35 | 工单 TOP2 场景 | ① Node 状态与条件 ② kubelet 故障排查 ③ 容器运行时诊断 ④ 资源压力排查 ⑤ 硬件问题关联 |
+| 7.3 | **网络问题三剑客：CNI/DNS/Service 连通性排查手册** | 故障诊断/03,25,26,10 | 工单 TOP3 场景 | ① CNI 故障排查流程 ② DNS 解析问题诊断 ③ Service 连通性测试 ④ 完整排障决策树 ⑤ 15 个真实工单案例 |
+| 7.4 | **控制平面故障排查：API Server / etcd 不可用的应急处理** | 故障诊断/01,02 | 最高优先级工单 | ① API Server 不可用诊断 ② etcd 集群故障处理 ③ 控制平面恢复 SOP ④ 数据一致性验证 |
+| 7.5 | **存储故障排查：PVC Pending / 卷挂载失败 / CSI 驱动异常** | 故障诊断/04,14 | 工单常见场景 | ① PVC Pending 排查流程 ② 卷挂载失败诊断 ③ CSI 驱动异常处理 ④ 数据安全与恢复 |
+| 7.6 | **安全故障排查：RBAC 权限不足 / 证书过期 / 准入控制拒绝** | 故障诊断/12,13,32 | 安全类工单 | ① RBAC 权限诊断 ② 证书过期处理 ③ 准入控制拒绝分析 ④ 安全事件溯源 |
+| 7.7 | **HPA/VPA/Cluster Autoscaler 故障排查** | 故障诊断/17,28 | 弹性伸缩工单 | ① HPA 不生效排查 ② VPA 行为分析 ③ CA 扩缩容异常 ④ 指标源问题诊断 |
+| 7.8 | **升级迁移故障排查：版本兼容性、滚动升级卡住、回滚策略** | 故障诊断/34 | 升级类工单 | ① 版本兼容性检查 ② 滚动升级卡住诊断 ③ 回滚策略与执行 ④ 数据迁移风险 |
+| 7.9 | **企业级监控告警体系建设与混沌工程测试** | 故障诊断/39,42 | 高级运维能力 | ① 监控告警体系设计 ② 混沌工程工具选型 ③ 故障注入测试 ④ 弹性验证方法 |
 
 > **系列定位**：这是你的"杀手锏"系列。42 篇覆盖 K8S 运维全场景，3000+ 可执行命令，250+ 自动化脚本。分 2 周发布（**第 8-9 周**），每周 4-5 篇，保持热度。
 > **互动话题**："分享一个你印象最深的线上问题和排查过程？"
@@ -283,10 +283,10 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 8.1 | **K8S YAML 配置完整参考手册：60+ 种 API 资源全字段解析** | domain-18-manifests-patterns 精选 | 配置字典，人手必备 | ① 工作负载类 YAML ② 服务发现类 YAML ③ 配置存储类 YAML ④ 安全策略类 YAML ⑤ 按使用频率排序 |
-| 8.2 | **Pod 完整规格手册：所有字段、容器规格、安全上下文、调度** | domain-18-manifests-patterns/03 | 最常用 YAML | ① Pod 完整字段树 ② 容器规格详解 ③ 安全上下文配置 ④ 调度约束配置 ⑤ 最佳实践模板 |
-| 8.3 | **RBAC + NetworkPolicy + PSS 安全配置速查** | domain-18-manifests-patterns/20-25 | 安全配置一站式 | ① RBAC 配置速查 ② NetworkPolicy 模板 ③ PSS 安全级别配置 ④ 组合安全策略 |
-| 8.4 | **K8S Events 全域速查：230+ 事件 Reason 与排查建议** | domain-17-system-foundation 全集 | 独家内容，极高工具性 | ① 事件分类体系 ② 230+ Reason 索引 ③ 排查建议映射 ④ 事件监控与告警 |
+| 8.1 | **K8S YAML 配置完整参考手册：60+ 种 API 资源全字段解析** | 清单模式 精选 | 配置字典，人手必备 | ① 工作负载类 YAML ② 服务发现类 YAML ③ 配置存储类 YAML ④ 安全策略类 YAML ⑤ 按使用频率排序 |
+| 8.2 | **Pod 完整规格手册：所有字段、容器规格、安全上下文、调度** | 清单模式/03 | 最常用 YAML | ① Pod 完整字段树 ② 容器规格详解 ③ 安全上下文配置 ④ 调度约束配置 ⑤ 最佳实践模板 |
+| 8.3 | **RBAC + NetworkPolicy + PSS 安全配置速查** | 清单模式/20-25 | 安全配置一站式 | ① RBAC 配置速查 ② NetworkPolicy 模板 ③ PSS 安全级别配置 ④ 组合安全策略 |
+| 8.4 | **K8S Events 全域速查：230+ 事件 Reason 与排查建议** | 系统基础 全集 | 独家内容，极高工具性 | ① 事件分类体系 ② 230+ Reason 索引 ③ 排查建议映射 ④ 事件监控与告警 |
 
 > **系列定位**：工具性极强的参考手册，长期被收藏和检索。**第 10 周发布**。
 > **互动话题**："K8S Events 你们会持久化吗？用什么方案？"
@@ -297,11 +297,11 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|---------|---------|
-| 9.1 | **FTA 故障树分析方法论：从贝尔实验室到 K8S 智能运维** | domain-10-troubleshooting-diagnostics/topic-fta/01-07 | 方法论创新 | ① FTA 起源与发展 ② 故障树构建方法 ③ 定性与定量分析 ④ K8S 场景适配 ⑤ 自动化故障树 |
-| 9.2 | **K8S 全量故障树：8 个顶事件、63 个底事件的完整分析手册** | domain-10-troubleshooting-diagnostics/topic-fta/kubernetes-fta-full-analysis | 独家内容 | ① 8 大顶事件定义 ② 每个顶事件的故障树 ③ 63 个底事件分析 ④ 概率评估 ⑤ 预防措施 |
-| 9.3 | **FTA + AI Agent：故障树驱动的工单智能处理架构** | domain-10-troubleshooting-diagnostics/topic-fta/08-13 | AI+运维融合 | ① 故障树数字化 ② Agent 自动遍历 ③ 工单自动分类 ④ 修复建议生成 ⑤ 系统架构设计 |
-| 9.4 | **FEBM 法医鉴定循证方法论：从证据到结论的 K8S 问题取证** | domain-10-troubleshooting-diagnostics/topic-febm/01-03 | 方法论互补 | ① FEBM 原理与框架 ② 证据收集标准 ③ 分析链构建 ④ 结论推导规则 ⑤ K8S 场景应用 |
-| 9.5 | **FTA vs FEBM：演绎法与归纳法在 K8S 运维中的适用性对比** | domain-10-troubleshooting-diagnostics/topic-febm/FTA-vs-FEBM + 总纲 | 学术深度 | ① 两种方法论的哲学基础 ② 适用场景分析 ③ 组合使用策略 ④ K8S 运维最佳实践 |
+| 9.1 | **FTA 故障树分析方法论：从贝尔实验室到 K8S 智能运维** | 故障诊断/FTA故障树/01-07 | 方法论创新 | ① FTA 起源与发展 ② 故障树构建方法 ③ 定性与定量分析 ④ K8S 场景适配 ⑤ 自动化故障树 |
+| 9.2 | **K8S 全量故障树：8 个顶事件、63 个底事件的完整分析手册** | 故障诊断/FTA故障树/kubernetes-fta-full-analysis | 独家内容 | ① 8 大顶事件定义 ② 每个顶事件的故障树 ③ 63 个底事件分析 ④ 概率评估 ⑤ 预防措施 |
+| 9.3 | **FTA + AI Agent：故障树驱动的工单智能处理架构** | 故障诊断/FTA故障树/08-13 | AI+运维融合 | ① 故障树数字化 ② Agent 自动遍历 ③ 工单自动分类 ④ 修复建议生成 ⑤ 系统架构设计 |
+| 9.4 | **FEBM 法医鉴定循证方法论：从证据到结论的 K8S 问题取证** | 故障诊断/topic-febm/01-03 | 方法论互补 | ① FEBM 原理与框架 ② 证据收集标准 ③ 分析链构建 ④ 结论推导规则 ⑤ K8S 场景应用 |
+| 9.5 | **FTA vs FEBM：演绎法与归纳法在 K8S 运维中的适用性对比** | 故障诊断/topic-febm/FTA-vs-FEBM + 总纲 | 学术深度 | ① 两种方法论的哲学基础 ② 适用场景分析 ③ 组合使用策略 ④ K8S 运维最佳实践 |
 
 > **系列定位**：最具差异化的系列，没有人在技术论坛写过这种方法论级别的内容。**第 11 周发布**。
 > **互动话题**："你们有系统性的故障分析方法吗？还是全靠经验和直觉？"
@@ -314,9 +314,9 @@ prerequisites:
 |:---:|---------|---------|---------|---------|
 | 10.1 | **K8S 结构化故障排查知识库：40 篇、8 大类、按现象快速定位** | topic-structural-trouble-shooting | 实用工具 | ① 知识库架构设计 ② 8 大分类体系 ③ 症状→原因→修复链路 ④ 使用指南 |
 | 10.2 | **工单智能体诊断 Skill 库：从症状到修复的自动化闭环** | topic-skills | AI 赋能运维 | ② Skill 架构设计 ② 6 个核心 Skill 详解 ③ 本地 Demo 部署 ④ 生产集成方案 |
-| 10.3 | **ACK 产品深度解析：Pro/Serverless/专有版架构与最佳实践** | domain-12-cloud-providers/04 | ACK 特色 | ① ACK 产品矩阵 ② Pro 版架构特点 ③ Serverless 模式 ④ 专有版场景 ⑤ 选型决策树 |
-| 10.4 | **云厂商 K8S 服务全景对比：ACK vs EKS vs GKE vs AKS** | domain-12-cloud-providers 全集 | 行业视野 | ① 13 家云厂商全景 ② 四大厂商深度对比 ③ 性能 benchmark ④ 成本对比 ⑤ 选型建议 |
-| 10.5 | **生产运维最佳实践：从架构设计到事件响应的完整 SRE 体系** | domain-11-production-operations 精选 | 体系化运维 | ① SRE 体系框架 ② 容量规划 ③ 变更管理 ④ 事件响应 SOP ⑤ 问题复盘模板 |
+| 10.3 | **ACK 产品深度解析：Pro/Serverless/专有版架构与最佳实践** | 云厂商/04 | ACK 特色 | ① ACK 产品矩阵 ② Pro 版架构特点 ③ Serverless 模式 ④ 专有版场景 ⑤ 选型决策树 |
+| 10.4 | **云厂商 K8S 服务全景对比：ACK vs EKS vs GKE vs AKS** | 云厂商 全集 | 行业视野 | ① 13 家云厂商全景 ② 四大厂商深度对比 ③ 性能 benchmark ④ 成本对比 ⑤ 选型建议 |
+| 10.5 | **生产运维最佳实践：从架构设计到事件响应的完整 SRE 体系** | 生产运维 精选 | 体系化运维 | ① SRE 体系框架 ② 容量规划 ③ 变更管理 ④ 事件响应 SOP ⑤ 问题复盘模板 |
 
 > **系列定位**：闭环收尾，从传统排障到智能运维到 ACK 产品力。**第 12 周发布**。
 > **互动话题**："AI Agent 处理工单，你觉得能替代多少人工？"
@@ -331,13 +331,13 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|----------|---------|
-| 11.1 | **声明式 API 与控制器模式：K8S 设计哲学深度拆解** | domain-01-cluster-fundamentals/01-05 | Informer/List-Watch/控制循环 | ① 声明式 vs 命令式 ② 控制器模式 ③ Informer 机制 ④ List-Watch 原理 ⑤ 调谐循环 |
-| 11.2 | **分布式共识与高可用架构：从 Raft 到脑裂预防** | domain-01-cluster-fundamentals/06-10 | etcd/MVCC/CAP 实践 | ① Raft 共识算法 ② etcd MVCC ③ CAP 理论实践 ④ 脑裂预防 ⑤ 多副本一致性 |
-| 11.3 | **Operator 开发与准入控制：扩展 K8S 的终极指南** | domain-01-cluster-fundamentals/11-13 | CRD/Webhook/CEL | ① CRD 设计原则 ② Controller 开发 ③ Webhook 准入控制 ④ CEL 验证规则 ⑤ 最佳实践 |
-| 11.4 | **工作负载全生命周期：Deployment/StatefulSet/Job 生产模式** | domain-02-workloads-applications/01-09 | 蓝绿/金丝雀/有状态运维 | ① Deployment 更新策略 ② StatefulSet 有状态管理 ③ DaemonSet/Job/CronJob ④ 蓝绿/金丝雀发布 ⑤ 工作负载排障 |
-| 11.5 | **容器运行时与调度策略：Pod 模式、亲和性、HPA/VPA** | domain-02-workloads-applications/10-23 | Sidecar/CRI/资源管理 | ① 容器运行时接口 ② Pod 高级模式 ③ 亲和性/反亲和性 ④ HPA/VPA 策略 ⑤ 资源管理最佳实践 |
+| 11.1 | **声明式 API 与控制器模式：K8S 设计哲学深度拆解** | 集群基础/01-05 | Informer/List-Watch/控制循环 | ① 声明式 vs 命令式 ② 控制器模式 ③ Informer 机制 ④ List-Watch 原理 ⑤ 调谐循环 |
+| 11.2 | **分布式共识与高可用架构：从 Raft 到脑裂预防** | 集群基础/06-10 | etcd/MVCC/CAP 实践 | ① Raft 共识算法 ② etcd MVCC ③ CAP 理论实践 ④ 脑裂预防 ⑤ 多副本一致性 |
+| 11.3 | **Operator 开发与准入控制：扩展 K8S 的终极指南** | 集群基础/11-13 | CRD/Webhook/CEL | ① CRD 设计原则 ② Controller 开发 ③ Webhook 准入控制 ④ CEL 验证规则 ⑤ 最佳实践 |
+| 11.4 | **工作负载全生命周期：Deployment/StatefulSet/Job 生产模式** | 工作负载/01-09 | 蓝绿/金丝雀/有状态运维 | ① Deployment 更新策略 ② StatefulSet 有状态管理 ③ DaemonSet/Job/CronJob ④ 蓝绿/金丝雀发布 ⑤ 工作负载排障 |
+| 11.5 | **容器运行时与调度策略：Pod 模式、亲和性、HPA/VPA** | 工作负载/10-23 | Sidecar/CRI/资源管理 | ① 容器运行时接口 ② Pod 高级模式 ③ 亲和性/反亲和性 ④ HPA/VPA 策略 ⑤ 资源管理最佳实践 |
 
-> **来源**: domain-01-cluster-fundamentals (18 篇) + domain-02-workloads-applications (23 篇)。**第 13 周发布**。
+> **来源**: 集群基础 (18 篇) + 工作负载 (23 篇)。**第 13 周发布**。
 
 ---
 
@@ -345,13 +345,13 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|----------|---------|
-| 12.1 | **平台运维成熟度模型：从零到企业级的进化路径** | domain-07-platform-engineering/01-05 | 容量规划/性能基准/指标体系 | ① 成熟度模型 ② 容量规划方法 ③ 性能基准测试 ④ 指标体系设计 ⑤ 运维自动化 |
-| 12.2 | **FinOps 成本治理与灾备恢复：钱和数据都不能丢** | domain-07-platform-engineering/09-12 | 成本优化/灾备/备份策略 | ① 成本分析方法论 ② 资源优化策略 ③ 灾备架构设计 ④ 备份策略 ⑤ 恢复演练 |
-| 12.3 | **大规模集群优化与多租户治理** | domain-07-platform-engineering/13-18 | 千节点优化/虚拟集群 | ① 大规模集群挑战 ② 性能优化策略 ③ 多租户隔离模型 ④ 虚拟集群方案 ⑤ 治理框架 |
-| 12.4 | **CRD/Operator/Helm 完整开发指南** | domain-15-specialized-tech/01-07 | Kubebuilder/Chart 开发 | ① CRD 设计模式 ② Kubebuilder 开发 ③ Helm Chart 最佳实践 ④ Operator 发布管理 |
-| 12.5 | **CI/CD + GitOps + 服务网格：现代交付体系** | domain-15-specialized-tech/08-16 | ArgoCD/Istio/多集群 | ① GitOps 原理与实践 ② ArgoCD 部署 ③ Istio 服务网格 ④ 多集群管理 ⑤ 交付流水线设计 |
+| 12.1 | **平台运维成熟度模型：从零到企业级的进化路径** | 平台工程/01-05 | 容量规划/性能基准/指标体系 | ① 成熟度模型 ② 容量规划方法 ③ 性能基准测试 ④ 指标体系设计 ⑤ 运维自动化 |
+| 12.2 | **FinOps 成本治理与灾备恢复：钱和数据都不能丢** | 平台工程/09-12 | 成本优化/灾备/备份策略 | ① 成本分析方法论 ② 资源优化策略 ③ 灾备架构设计 ④ 备份策略 ⑤ 恢复演练 |
+| 12.3 | **大规模集群优化与多租户治理** | 平台工程/13-18 | 千节点优化/虚拟集群 | ① 大规模集群挑战 ② 性能优化策略 ③ 多租户隔离模型 ④ 虚拟集群方案 ⑤ 治理框架 |
+| 12.4 | **CRD/Operator/Helm 完整开发指南** | 专项技术/01-07 | Kubebuilder/Chart 开发 | ① CRD 设计模式 ② Kubebuilder 开发 ③ Helm Chart 最佳实践 ④ Operator 发布管理 |
+| 12.5 | **CI/CD + GitOps + 服务网格：现代交付体系** | 专项技术/08-16 | ArgoCD/Istio/多集群 | ① GitOps 原理与实践 ② ArgoCD 部署 ③ Istio 服务网格 ④ 多集群管理 ⑤ 交付流水线设计 |
 
-> **来源**: domain-07-platform-engineering (25 篇) + domain-15-specialized-tech (16 篇)。**第 14 周发布**。
+> **来源**: 平台工程 (25 篇) + 专项技术 (16 篇)。**第 14 周发布**。
 
 ---
 
@@ -359,16 +359,16 @@ prerequisites:
 
 | 序号 | 帖子标题 | 对应来源 | 核心卖点 | 章节大纲 |
 |:---:|---------|---------|----------|---------|
-| 13.1 | **AI Infra 全景架构：五层模型从硬件到平台服务** | domain-14-ai-ml-infra/01-02 | AI 平台架构全景 | ① 五层架构模型 ② 各层技术选型 ③ 与 K8S 集成点 ④ 架构演进路线 |
-| 13.2 | **GPU 调度与监控：设备插件、共享机制、DCGM** | domain-14-ai-ml-infra/03-04 | GPU 调度/算力分配 | ① GPU 调度策略 ② MIG/Time-Slicing ③ DCGM 监控 ④ Prometheus 集成 |
-| 13.3 | **分布式训练与数据管道：Horovod/PyTorch-DDP** | domain-14-ai-ml-infra/05-06 | 多机多卡/弹性训练 | ① 训练框架对比 ② 弹性训练 ③ 数据管道设计 ④ Checkpoint 管理 |
-| 13.4 | **MLOps 全生命周期：实验管理→模型注册→部署→监控** | domain-14-ai-ml-infra/07-14 | MLflow/Katib/漂移监控 | ① 实验管理 ② 模型注册 ③ 部署策略 ④ 漂移监控 |
-| 13.5 | **LLM 数据工程与微调：LoRA/QLoRA/指令微调** | domain-14-ai-ml-infra/15-16 | 大模型训练侧 | ① 数据工程 ② 微调方法对比 ③ K8S 训练管理 |
-| 13.6 | **LLM 推理服务与量化压缩：vLLM/TGI/GPTQ/AWQ** | domain-14-ai-ml-infra/17-19 | 62KB+76KB 重磅文档 | ① 推理引擎对比 ② 量化技术 ③ 生产部署方案 |
-| 13.7 | **RAG 架构与向量数据库：Milvus/Weaviate/多模态** | domain-14-ai-ml-infra/20-21 | 87KB 最长文档 | ① RAG 架构 ② 向量数据库 ③ 生产实践 |
-| 13.8 | **AI 平台治理：安全合规、FinOps、绿色计算、联邦学习** | domain-14-ai-ml-infra/22-36 | 15 篇平台级内容 | ① 安全合规 ② 成本治理 ③ 绿色计算 ④ 联邦学习 ⑤ 可解释性 |
+| 13.1 | **AI Infra 全景架构：五层模型从硬件到平台服务** | AI基础设施/01-02 | AI 平台架构全景 | ① 五层架构模型 ② 各层技术选型 ③ 与 K8S 集成点 ④ 架构演进路线 |
+| 13.2 | **GPU 调度与监控：设备插件、共享机制、DCGM** | AI基础设施/03-04 | GPU 调度/算力分配 | ① GPU 调度策略 ② MIG/Time-Slicing ③ DCGM 监控 ④ Prometheus 集成 |
+| 13.3 | **分布式训练与数据管道：Horovod/PyTorch-DDP** | AI基础设施/05-06 | 多机多卡/弹性训练 | ① 训练框架对比 ② 弹性训练 ③ 数据管道设计 ④ Checkpoint 管理 |
+| 13.4 | **MLOps 全生命周期：实验管理→模型注册→部署→监控** | AI基础设施/07-14 | MLflow/Katib/漂移监控 | ① 实验管理 ② 模型注册 ③ 部署策略 ④ 漂移监控 |
+| 13.5 | **LLM 数据工程与微调：LoRA/QLoRA/指令微调** | AI基础设施/15-16 | 大模型训练侧 | ① 数据工程 ② 微调方法对比 ③ K8S 训练管理 |
+| 13.6 | **LLM 推理服务与量化压缩：vLLM/TGI/GPTQ/AWQ** | AI基础设施/17-19 | 62KB+76KB 重磅文档 | ① 推理引擎对比 ② 量化技术 ③ 生产部署方案 |
+| 13.7 | **RAG 架构与向量数据库：Milvus/Weaviate/多模态** | AI基础设施/20-21 | 87KB 最长文档 | ① RAG 架构 ② 向量数据库 ③ 生产实践 |
+| 13.8 | **AI 平台治理：安全合规、FinOps、绿色计算、联邦学习** | AI基础设施/22-36 | 15 篇平台级内容 | ① 安全合规 ② 成本治理 ③ 绿色计算 ④ 联邦学习 ⑤ 可解释性 |
 
-> **来源**: domain-14-ai-ml-infra (36 篇)。分 2 周发布（**第 15-16 周**），每周 4 篇。
+> **来源**: AI基础设施 (36 篇)。分 2 周发布（**第 15-16 周**），每周 4 篇。
 
 ---
 
@@ -376,17 +376,17 @@ prerequisites:
 
 | 系列 | 名称 | 来源 | 篇数 | 发布周 | 核心卖点 |
 |:---:|:---|:---|:---:|:---:|:---|
-| 十四 | Docker + Linux + 底层原理 | domain-13-container-runtime/14/15/16 | 5 | W17 | 系统基础补全 |
-| 十五 | 硬件基础设施 | domain-17-system-foundation | 3 | W18 | 硬件问题根因 |
-| 十六 | 企业级监控与日志 | domain-06-observability/21 | 4 | W19 | Prometheus/ELK/OTel |
-| 十七 | DevOps 工程化 | domain-03-networking-traffic/23/24 | 3 | W19 | Harbor/ArgoCD/Terraform |
-| 十八 | 服务网格与 API 网关 | domain-03-networking-traffic/40 | 4 | W20 | Istio/网关/Wasm |
-| 十九 | 多云混合与数据层 | domain-12-cloud-providers/28/29/30 | 4 | W20 | 多云/数据库/灾备 |
-| 二十 | 云原生安全与供应链 | domain-05-security-compliance/39 | 3 | W21 | Falco/SBOM/SLSA |
-| 二十一 | 前沿技术 | domain-03-networking-traffic/36/37/38 | 4 | W21 | eBPF/平台工程/边缘/Wasm |
-| 二十二 | CNCF 全景与深度论文 | domain-19-landscape-references/19 | 4 | W22 | 218 项目 + 26 论文 |
-| 二十三 | AI Agent 工程 | domain-14-ai-ml-infra/02-ai-agents/coding/openrouter | 7 | W22-23 | Agent/Harness 闭环 |
-| 二十四 | 部署迁移与收官 | domain-08-release-change-management/topic-deployment/migration | 3 | W24 | ACK 迁移 + 总结 |
+| 十四 | Docker + Linux + 底层原理 | 容器运行时/14/15/16 | 5 | W17 | 系统基础补全 |
+| 十五 | 硬件基础设施 | 系统基础 | 3 | W18 | 硬件问题根因 |
+| 十六 | 企业级监控与日志 | 可观测性/21 | 4 | W19 | Prometheus/ELK/OTel |
+| 十七 | DevOps 工程化 | 网络/23/24 | 3 | W19 | Harbor/ArgoCD/Terraform |
+| 十八 | 服务网格与 API 网关 | 网络/40 | 4 | W20 | Istio/网关/Wasm |
+| 十九 | 多云混合与数据层 | 云厂商/28/29/30 | 4 | W20 | 多云/数据库/灾备 |
+| 二十 | 云原生安全与供应链 | 安全/39 | 3 | W21 | Falco/SBOM/SLSA |
+| 二十一 | 前沿技术 | 网络/36/37/38 | 4 | W21 | eBPF/平台工程/边缘/Wasm |
+| 二十二 | CNCF 全景与深度论文 | 生态参考/19 | 4 | W22 | 218 项目 + 26 论文 |
+| 二十三 | AI Agent 工程 | AI基础设施/02-ai-agents/coding/openrouter | 7 | W22-23 | Agent/Harness 闭环 |
+| 二十四 | 部署迁移与收官 | 发布变更/topic-deployment/migration | 3 | W24 | ACK 迁移 + 总结 |
 
 ---
 

@@ -55,7 +55,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/backup-restore-fta.md
+  path: ../故障诊断/FTA故障树/list/backup-restore-fta.md
   label: '故障树: backup-restore'
 ---
 

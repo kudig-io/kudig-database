@@ -25,6 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - service-mesh-basics
+status: reviewed
 ---
 
 > **生产环境安全提示**

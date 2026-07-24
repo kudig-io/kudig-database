@@ -1,54 +1,4 @@
 ---
-title: 第十九章：避坑指南与常见误区 (故障诊断)
-description: 'title: 第十九章：避坑指南与常见误区'
-summary: 'title: 第十九章：避坑指南与常见误区'
-category: fta
-tags:
-- fta
-- troubleshooting
-- best-practice
-- kubelet
-- prometheus
-- llm
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第十九章：避坑指南与常见误区 是什么
-- 如何 第十九章：避坑指南与常见误区
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第十九章：避坑指南与常见误区 故障排查
-- 第十九章：避坑指南与常见误区 排障步骤
-- 第十九章：避坑指南与常见误区 根因分析
-trigger_keywords:
-- 第十九章：避坑指南与常见误区
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-fta_id: FTA-19_PITFALLS_AND_BEST_PRACTICES-001
-component: 19 Pitfalls And Best Practices
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第十九章：避坑指南与常见误区
 description: '# 第十九章：避坑指南与常见误区'
 category: fta
@@ -57,8 +7,8 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- kubelet
+- prometheus
 - llm
 - agent
 last_updated: 2026-05
@@ -77,21 +27,22 @@ intent_queries:
 trigger_keywords:
 - 第十九章：避坑指南与常见误区
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第十九章：避坑指南与常见误区
 
 > **所属部分**: 第五部分 - 实战案例与最佳实践  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第十八章：典型场景完整方案](./18-typical-scenarios.md)  
+> **上一章**: [第十八章：典型场景完整方案](./18-typical-scenarios.md)  
 > **下一章**: [第二十章：FTA + 大语言模型的新机遇](./20-fta-llm-opportunities.md)
 
 ---
@@ -140,7 +91,7 @@ k8s_versions:
     └── 容器运行时问题
     
   实际上，Kubelet 问题并不一定导致节点不可用
-  (kubelet 短暂重启不影响已运行的 Pod)
+  (kubelet 短暂重启不影响已运行的 [[概念/pod-lifecycle|pod]])
   
   应该是:
     "节点不可用" [OR门]
@@ -220,30 +171,6 @@ k8s_versions:
 ---
 
 > **导航**: [<< 上一章 - 典型场景完整方案](./18-typical-scenarios.md) | [下一章 - FTA + 大语言模型的新机遇 >>](./20-fta-llm-opportunities.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/17-industry-benchmarks.md|17-industry-benchmarks]]
-- [[故障诊断/FTA故障树/18-typical-scenarios.md|18-typical-scenarios]]
-- [[故障诊断/FTA故障树/20-fta-llm-opportunities.md|20-fta-llm-opportunities]]
-- [[故障诊断/FTA故障树/21-self-evolving-ops-system.md|21-self-evolving-ops-system]]
 
 
 <!-- risk-assessed -->

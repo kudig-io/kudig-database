@@ -1,66 +1,5 @@
 ---
-title: Kubernetes 全量故障树分析(FTA)排查手册 (故障诊断)
-description: 'title: Kubernetes 全量故障树分析(FTA)排查手册'
-summary: 'title: Kubernetes 全量故障树分析(FTA)排查手册'
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- controller-manager
-- prometheus
-- grafana
-- cilium
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 90min
-intent_queries:
-- Kubernetes 全量故障树分析(FTA)排查手册 是什么
-- 如何 Kubernetes 全量故障树分析(FTA)排查手册
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- Kubernetes 全量故障树分析(FTA)排查手册 故障排查
-- Kubernetes 全量故障树分析(FTA)排查手册 排障步骤
-- Kubernetes 全量故障树分析(FTA)排查手册 根因分析
-trigger_keywords:
-- Kubernetes
-- 全量故障树分析
-- FTA
-- 排查手册
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- monitoring-basics
-- cilium-basics
-- cni-basics
-- etcd-basics
-- gpu-scheduling-basics
-fta_id: FTA-KUBERNETES_FULL_ANALYSIS-001
-component: Kubernetes Full Analysis
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: [[Kubernetes|Kubernetes]] 全量故障树分析(FTA)排查手册
+title: Kubernetes 全量故障树分析(FTA)排查手册
 description: '# Kubernetes 全量故障树分析(FTA)排查手册'
 category: fta
 tags:
@@ -68,9 +7,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
 - controller-manager
 - prometheus
@@ -93,16 +32,21 @@ trigger_keywords:
 - FTA
 - 排查手册
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- monitoring-basics
+- cilium-basics
+- cni-basics
+- etcd-basics
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # Kubernetes 全量故障树分析(FTA)排查手册
 
@@ -112,9 +56,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、故障树总览 -->## 一、故障树总览
+## 一、故障树总览
 
-## 1.1 顶部事件定义表
+### 1.1 顶部事件定义表
 
 | 编号 | 顶部事件 | 严重程度 | 影响范围 | 典型症状 |
 |------|----------|----------|----------|----------|
@@ -127,7 +71,7 @@ k8s_versions:
 | TE-7 | 安全认证失败 | 🟠 P1 | 安全层面 | 认证/授权失败，证书过期 |
 | TE-8 | 监控告警异常 | 🟡 P2 | 监控层面 | 指标丢失，告警不触发 |
 
-## 1.2 故障树总览图 (ASCII)
+### 1.2 故障树总览图 (ASCII)
 
 ```
                                     ┌─────────────────────────────────────┐
@@ -301,7 +245,7 @@ TE-8: 监控告警异常 [OR门]
     └── BE-8.9 数据源连接失败
 ```
 
-## 1.3 问题传播逻辑说明
+### 1.3 问题传播逻辑说明
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -339,15 +283,15 @@ TE-8: 监控告警异常 [OR门]
 
 ---
 
-<!-- chunk: 二、顶部事件详细分解 -->## 二、顶部事件详细分解
+## 二、顶部事件详细分解
 
-## 2.1 顶部事件1: 集群完全不可用 🔴 P0
+### 2.1 顶部事件1: 集群完全不可用 🔴 P0
 
 > **问题定义**: 整个Kubernetes集群无法正常工作，kubectl无法连接，所有应用服务中断
 > **业务影响**: 所有业务完全中断，数据可能丢失
 > **响应时间**: 立即响应(15分钟内)
 
-## 中间事件 IE-1.1: 控制平面问题
+#### 中间事件 IE-1.1: 控制平面问题
 
 **问题现象**: kubectl命令超时或返回连接错误，无法获取集群资源
 
@@ -362,7 +306,7 @@ IE-1.1 控制平面问题 [OR门]
 
 ---
 
-## BE-1.1: API Server问题
+##### BE-1.1: API Server问题
 
 **问题现象**:
 - `kubectl` 命令返回 `Unable to connect to the server: dial tcp <ip>:6443: connect: connection refused`
@@ -415,7 +359,7 @@ top -p $(pgrep kube-apiserver)
 
 ---
 
-## BE-1.2: etcd集群问题
+##### BE-1.2: etcd集群问题
 
 **问题现象**:
 - API Server日志显示etcd连接错误
@@ -472,7 +416,7 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -noout -dates
 
 ---
 
-## BE-1.3: Scheduler问题
+##### BE-1.3: Scheduler问题
 
 **问题现象**:
 - 新Pod一直处于Pending状态，无法调度
@@ -512,7 +456,7 @@ kubectl describe pod <pod-name> | grep -A 10 Events
 
 ---
 
-## BE-1.4: Controller Manager问题
+##### BE-1.4: Controller Manager问题
 
 **问题现象**:
 - Deployment/ReplicaSet无法创建Pod
@@ -553,7 +497,7 @@ kubectl get rs --all-namespaces
 
 ---
 
-## 中间事件 IE-1.2: 工作节点批量问题
+#### 中间事件 IE-1.2: 工作节点批量问题
 
 **问题现象**: 多个工作节点同时变为NotReady状态，节点上的Pod无法访问
 
@@ -567,7 +511,7 @@ IE-1.2 工作节点批量问题 [AND门 - 多数节点]
 
 ---
 
-## BE-1.5: Kubelet服务问题
+##### BE-1.5: Kubelet服务问题
 
 **问题现象**:
 - 节点状态显示 `NotReady`
@@ -619,12 +563,12 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
 
 ---
 
-## BE-1.6: 容器运行时问题
+##### BE-1.6: 容器运行时问题
 
 **问题现象**:
 - Kubelet日志显示容器运行时连接错误
 - 无法创建/启动容器
-- `crictl`/`docker` 命令无法执行
+- `crictl`/`[[实体/docker|docker]]` 命令无法执行
 
 **可能原因**:
 - Docker/containerd服务停止
@@ -668,7 +612,7 @@ du -sh /var/lib/containerd
 
 ---
 
-## BE-1.7: 节点网络问题
+##### BE-1.7: 节点网络问题
 
 **问题现象**:
 - 节点网络接口异常
@@ -722,7 +666,7 @@ kubectl get node <node-name> -o jsonpath='{.spec.podCIDR}'
 
 ---
 
-## 中间事件 IE-1.3: 网络基础设施问题
+#### 中间事件 IE-1.3: 网络基础设施问题
 
 **问题现象**: 集群网络完全不可用，节点间无法通信
 
@@ -735,7 +679,7 @@ IE-1.3 网络基础设施问题 [OR门]
 
 ---
 
-## BE-1.8: CNI插件问题
+##### BE-1.8: CNI插件问题
 
 **问题现象**:
 - Pod无法分配IP地址
@@ -778,7 +722,7 @@ kubectl get configmap kube-flannel-cfg -n kube-system -o yaml
 
 ---
 
-## BE-1.9: 核心网络设备问题
+##### BE-1.9: 核心网络设备问题
 
 **问题现象**:
 - 整个集群网络中断
@@ -821,13 +765,13 @@ kubectl get ingress --all-namespaces
 
 ---
 
-## 2.2 顶部事件2: 应用服务不可用 🔴 P0
+### 2.2 顶部事件2: 应用服务不可用 🔴 P0
 
 > **问题定义**: 用户无法正常访问应用服务，HTTP请求失败或超时
 > **业务影响**: 业务功能不可用，用户体验受损
 > **响应时间**: 立即响应(30分钟内)
 
-## 中间事件 IE-2.1: Pod运行异常
+#### 中间事件 IE-2.1: Pod运行异常
 
 ```
 IE-2.1 Pod运行异常 [OR门]
@@ -840,7 +784,7 @@ IE-2.1 Pod运行异常 [OR门]
 
 ---
 
-## BE-2.1: CrashLoopBackOff
+##### BE-2.1: CrashLoopBackOff
 
 **问题现象**:
 - Pod状态显示 `CrashLoopBackOff`
@@ -857,10 +801,6 @@ IE-2.1 Pod运行异常 [OR门]
 - 权限不足无法访问文件
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod状态和重启次数
@@ -897,7 +837,7 @@ kubectl get deployment <deployment-name> -o yaml
 
 ---
 
-## BE-2.2: ImagePullBackOff
+##### BE-2.2: ImagePullBackOff
 
 **问题现象**:
 - Pod状态显示 `ImagePullBackOff` 或 `ErrImagePull`
@@ -942,7 +882,7 @@ echo <base64-encoded-auth> | base64 -d
 
 ---
 
-## BE-2.3: OOMKilled
+##### BE-2.3: OOMKilled
 
 **问题现象**:
 - Pod状态显示 `OOMKilled`
@@ -986,7 +926,7 @@ free -h
 
 ---
 
-## BE-2.4: Evicted
+##### BE-2.4: Evicted
 
 **问题现象**:
 - Pod状态显示 `Evicted`
@@ -1033,7 +973,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.priorityClassName}'
 
 ---
 
-## 中间事件 IE-2.2: Service访问异常
+#### 中间事件 IE-2.2: Service访问异常
 
 ```
 IE-2.2 Service访问异常 [OR门]
@@ -1045,7 +985,7 @@ IE-2.2 Service访问异常 [OR门]
 
 ---
 
-## BE-2.5: 无可用Endpoint
+##### BE-2.5: 无可用Endpoint
 
 **问题现象**:
 - Service无Endpoint
@@ -1078,7 +1018,7 @@ kubectl get pods -l <selector-key>=<selector-value>
 kubectl get pods --all-namespaces -o wide
 
 # 检查Pod健康检查
-kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
+kubectl describe pod <pod-name> | grep -A 5 "Liveness\|Readiness"
 ```
 **解决方案**:
 1. **Selector不匹配**: 修正Service的Selector或Pod的Label
@@ -1088,7 +1028,7 @@ kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
 
 ---
 
-## BE-2.6: 端口配置错误
+##### BE-2.6: 端口配置错误
 
 **问题现象**:
 - Service端口与Pod端口不匹配
@@ -1100,10 +1040,6 @@ kubectl describe pod <pod-name> | grep -A 5 "Liveness|Readiness"
 - Pod容器端口配置错误
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Service端口配置
@@ -1125,7 +1061,7 @@ kubectl run test --image=busybox --rm -it -- wget -O- <service-ip>:<port>
 
 ---
 
-## BE-2.7: kube-proxy问题
+##### BE-2.7: kube-proxy问题
 
 **问题现象**:
 - Service无法访问
@@ -1170,7 +1106,7 @@ kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
 
 ---
 
-## 中间事件 IE-2.3: Ingress访问异常
+#### 中间事件 IE-2.3: Ingress访问异常
 
 ```
 IE-2.3 Ingress访问异常 [OR门]
@@ -1182,7 +1118,7 @@ IE-2.3 Ingress访问异常 [OR门]
 
 ---
 
-## BE-2.8: Ingress Controller问题
+##### BE-2.8: Ingress Controller问题
 
 **问题现象**:
 - Ingress Controller Pod异常
@@ -1222,7 +1158,7 @@ kubectl get svc -n ingress-nginx
 
 ---
 
-## BE-2.9: Ingress规则配置错误
+##### BE-2.9: Ingress规则配置错误
 
 **问题现象**:
 - Ingress规则不生效
@@ -1264,7 +1200,7 @@ openssl x509 -in <(kubectl get secret <tls-secret> -o jsonpath='{.data.tls\.crt}
 
 ---
 
-## BE-2.10: 负载均衡器问题
+##### BE-2.10: 负载均衡器问题
 
 **问题现象**:
 - 外部无法访问Ingress
@@ -1303,13 +1239,13 @@ kubectl describe svc -n ingress-nginx ingress-nginx-controller | grep -A 5 "Load
 
 ---
 
-## 2.3 顶部事件3: Pod启动失败 🟠 P1
+### 2.3 顶部事件3: Pod启动失败 🟠 P1
 
 > **问题定义**: Pod无法成功启动，长时间处于Pending或其他非Running状态
 > **业务影响**: 新应用无法部署，扩容失败
 > **响应时间**: 1小时内响应
 
-## 中间事件 IE-3.1: 调度失败
+#### 中间事件 IE-3.1: 调度失败
 
 ```
 IE-3.1 调度失败 [OR门]
@@ -1322,7 +1258,7 @@ IE-3.1 调度失败 [OR门]
 
 ---
 
-## BE-3.1: 节点资源不足
+##### BE-3.1: 节点资源不足
 
 **问题现象**:
 - Pod处于Pending状态
@@ -1365,7 +1301,7 @@ kubectl describe node | grep -E "Name:|Allocated resources:|pods|cpu|memory"
 
 ---
 
-## BE-3.2: 节点选择器不匹配
+##### BE-3.2: 节点选择器不匹配
 
 **问题现象**:
 - Pod处于Pending状态
@@ -1402,7 +1338,7 @@ kubectl get nodes -l <selector-key>=<selector-value>
 
 ---
 
-## BE-3.3: 污点阻止调度
+##### BE-3.3: 污点阻止调度
 
 **问题现象**:
 - Pod处于Pending状态
@@ -1436,7 +1372,7 @@ kubectl describe pod <pod-name> | grep -i taint
 
 ---
 
-## BE-3.4: 资源配额超限
+##### BE-3.4: 资源配额超限
 
 **问题现象**:
 - Pod处于Pending状态
@@ -1473,7 +1409,7 @@ kubectl get events -n <namespace> | grep -i quota
 
 ---
 
-## 中间事件 IE-3.2: 镜像拉取失败
+#### 中间事件 IE-3.2: 镜像拉取失败
 
 ```
 IE-3.2 镜像拉取失败 [OR门]
@@ -1485,7 +1421,7 @@ IE-3.2 镜像拉取失败 [OR门]
 
 ---
 
-## BE-3.5: 镜像不存在
+##### BE-3.5: 镜像不存在
 
 **问题现象**:
 - Pod状态 `ErrImagePull` 或 `ImagePullBackOff`
@@ -1521,7 +1457,7 @@ docker pull <image>:<tag>  # 或 crictl pull
 
 ---
 
-## BE-3.6: 镜像仓库认证失败
+##### BE-3.6: 镜像仓库认证失败
 
 **问题现象**:
 - Pod状态 `ImagePullBackOff`
@@ -1559,7 +1495,7 @@ docker login <registry> -u <username> -p <password>
 
 ---
 
-## BE-3.7: 网络不可达
+##### BE-3.7: 网络不可达
 
 **问题现象**:
 - Pod状态 `ErrImagePull`
@@ -1602,7 +1538,7 @@ cat /etc/resolv.conf
 
 ---
 
-## 中间事件 IE-3.3: 容器创建失败
+#### 中间事件 IE-3.3: 容器创建失败
 
 ```
 IE-3.3 容器创建失败 [OR门]
@@ -1614,7 +1550,7 @@ IE-3.3 容器创建失败 [OR门]
 
 ---
 
-## BE-3.8: CNI配置失败
+##### BE-3.8: CNI配置失败
 
 **问题现象**:
 - Pod处于ContainerCreating状态
@@ -1658,7 +1594,7 @@ journalctl -u kubelet | grep -i cni
 
 ---
 
-## BE-3.9: 存储挂载失败
+##### BE-3.9: 存储挂载失败
 
 **问题现象**:
 - Pod处于ContainerCreating状态
@@ -1705,7 +1641,7 @@ kubectl logs -n kube-system <csi-pod-name>
 
 ---
 
-## BE-3.10: Init容器失败
+##### BE-3.10: Init容器失败
 
 **问题现象**:
 - Pod处于Init状态
@@ -1744,13 +1680,13 @@ kubectl get pod <pod-name> -o yaml | grep -A 30 initContainers
 
 ---
 
-## 2.4 顶部事件4: 网络通信异常 🟠 P1
+### 2.4 顶部事件4: 网络通信异常 🟠 P1
 
 > **问题定义**: 集群内网络通信异常，包括DNS解析、Pod间通信、外部访问等问题
 > **业务影响**: 服务间调用失败，外部访问中断
 > **响应时间**: 1小时内响应
 
-## 中间事件 IE-4.1: DNS解析异常
+#### 中间事件 IE-4.1: DNS解析异常
 
 ```
 IE-4.1 DNS解析异常 [OR门]
@@ -1762,7 +1698,7 @@ IE-4.1 DNS解析异常 [OR门]
 
 ---
 
-## BE-4.1: CoreDNS Pod问题
+##### BE-4.1: CoreDNS Pod问题
 
 **问题现象**:
 - Pod内DNS解析失败
@@ -1804,7 +1740,7 @@ kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 
 ---
 
-## BE-4.2: DNS配置错误
+##### BE-4.2: DNS配置错误
 
 **问题现象**:
 - 特定域名解析失败
@@ -1818,10 +1754,6 @@ kubectl get svc kube-dns -n kube-system -o jsonpath='{.spec.clusterIP}'
 - /etc/resolv.conf配置错误
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod的DNS配置
@@ -1846,7 +1778,7 @@ kubectl exec <pod-name> -- dig <domain>
 
 ---
 
-## BE-4.3: 网络策略阻止DNS
+##### BE-4.3: 网络策略阻止DNS
 
 **问题现象**:
 - DNS解析失败
@@ -1858,10 +1790,6 @@ kubectl exec <pod-name> -- dig <domain>
 - CNI网络策略配置错误
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看NetworkPolicy
@@ -1883,7 +1811,7 @@ kubectl exec <pod-name> -- nc -zv <dns-ip> 53
 
 ---
 
-## 中间事件 IE-4.2: Pod间通信异常
+#### 中间事件 IE-4.2: Pod间通信异常
 
 ```
 IE-4.2 Pod间通信异常 [OR门]
@@ -1895,7 +1823,7 @@ IE-4.2 Pod间通信异常 [OR门]
 
 ---
 
-## BE-4.4: CNI插件问题
+##### BE-4.4: CNI插件问题
 
 **问题现象**:
 - Pod间无法ping通
@@ -1909,10 +1837,6 @@ IE-4.2 Pod间通信异常 [OR门]
 - 底层网络问题
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查CNI Pod状态
@@ -1941,7 +1865,7 @@ ip route
 
 ---
 
-## BE-4.5: 网络策略阻止
+##### BE-4.5: 网络策略阻止
 
 **问题现象**:
 - 特定Pod间无法通信
@@ -1953,10 +1877,6 @@ ip route
 - 缺少必要的ingress/egress规则
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看所有NetworkPolicy
@@ -1979,7 +1899,7 @@ kubectl exec <source-pod> -- nc -zv <target-ip> <port>
 
 ---
 
-## BE-4.6: iptables规则错误
+##### BE-4.6: iptables规则错误
 
 **问题现象**:
 - Pod间通信异常
@@ -2019,7 +1939,7 @@ ipvsadm -Ln
 
 ---
 
-## 中间事件 IE-4.3: 集群外部访问异常
+#### 中间事件 IE-4.3: 集群外部访问异常
 
 ```
 IE-4.3 集群外部访问异常 [OR门]
@@ -2031,7 +1951,7 @@ IE-4.3 集群外部访问异常 [OR门]
 
 ---
 
-## BE-4.7: Egress配置错误
+##### BE-4.7: Egress配置错误
 
 **问题现象**:
 - Pod无法访问外部网络
@@ -2044,10 +1964,6 @@ IE-4.3 集群外部访问异常 [OR门]
 - 外部路由配置错误
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Egress NetworkPolicy
@@ -2070,7 +1986,7 @@ ip route
 
 ---
 
-## BE-4.8: NAT配置问题
+##### BE-4.8: NAT配置问题
 
 **问题现象**:
 - Pod可以ping通外部但TCP/UDP连接失败
@@ -2108,7 +2024,7 @@ ip addr
 
 ---
 
-## BE-4.9: 防火墙阻止
+##### BE-4.9: 防火墙阻止
 
 **问题现象**:
 - 外部连接被拒绝
@@ -2148,13 +2064,13 @@ ss -tlnp
 
 ---
 
-## 2.5 顶部事件5: 存储访问失败 🟠 P1
+### 2.5 顶部事件5: 存储访问失败 🟠 P1
 
 > **问题定义**: 存储卷无法正常挂载或访问，PVC绑定失败
 > **业务影响**: 有状态应用无法启动，数据无法持久化
 > **响应时间**: 1小时内响应
 
-## 中间事件 IE-5.1: PVC绑定失败
+#### 中间事件 IE-5.1: PVC绑定失败
 
 ```
 IE-5.1 PVC绑定失败 [OR门]
@@ -2166,7 +2082,7 @@ IE-5.1 PVC绑定失败 [OR门]
 
 ---
 
-## BE-5.1: StorageClass配置错误
+##### BE-5.1: StorageClass配置错误
 
 **问题现象**:
 - PVC一直处于Pending状态
@@ -2205,7 +2121,7 @@ kubectl describe pvc <pvc-name>
 
 ---
 
-## BE-5.2: PV资源不足
+##### BE-5.2: PV资源不足
 
 **问题现象**:
 - PVC无法绑定
@@ -2244,7 +2160,7 @@ kubectl get pvc <pvc-name> -o yaml | grep -A 5 resources
 
 ---
 
-## BE-5.3: CSI驱动异常
+##### BE-5.3: CSI驱动异常
 
 **问题现象**:
 - 动态供应失败
@@ -2283,7 +2199,7 @@ kubectl get storageclass <sc-name> -o jsonpath='{.provisioner}'
 
 ---
 
-## 中间事件 IE-5.2: 存储卷挂载失败
+#### 中间事件 IE-5.2: 存储卷挂载失败
 
 ```
 IE-5.2 存储卷挂载失败 [OR门]
@@ -2295,7 +2211,7 @@ IE-5.2 存储卷挂载失败 [OR门]
 
 ---
 
-## BE-5.4: 挂载参数错误
+##### BE-5.4: 挂载参数错误
 
 **问题现象**:
 - Pod处于ContainerCreating状态
@@ -2331,7 +2247,7 @@ journalctl -u kubelet | grep -i mount
 
 ---
 
-## BE-5.5: 权限不足
+##### BE-5.5: 权限不足
 
 **问题现象**:
 - 挂载成功但无法读写
@@ -2345,10 +2261,6 @@ journalctl -u kubelet | grep -i mount
 - SELinux限制
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Pod securityContext
@@ -2374,7 +2286,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext.fsGroup}'
 
 ---
 
-## BE-5.6: 文件系统损坏
+##### BE-5.6: 文件系统损坏
 
 **问题现象**:
 - 挂载失败
@@ -2410,7 +2322,7 @@ dmesg | grep -i error
 
 ---
 
-## 中间事件 IE-5.3: 存储性能/数据异常
+#### 中间事件 IE-5.3: 存储性能/数据异常
 
 ```
 IE-5.3 存储性能/数据异常 [OR门]
@@ -2422,7 +2334,7 @@ IE-5.3 存储性能/数据异常 [OR门]
 
 ---
 
-## BE-5.7: 存储后端性能下降
+##### BE-5.7: 存储后端性能下降
 
 **问题现象**:
 - 应用响应变慢
@@ -2458,7 +2370,7 @@ kubectl top pod -n kube-system | grep csi
 
 ---
 
-## BE-5.8: 数据损坏
+##### BE-5.8: 数据损坏
 
 **问题现象**:
 - 应用报告数据错误
@@ -2494,7 +2406,7 @@ kubectl get events | grep -i data
 
 ---
 
-## BE-5.9: 快照恢复失败
+##### BE-5.9: 快照恢复失败
 
 **问题现象**:
 - 快照恢复操作失败
@@ -2530,13 +2442,13 @@ kubectl describe volumesnapshot <snapshot-name>
 
 ---
 
-## 2.6 顶部事件6: 资源调度异常 🟡 P2
+### 2.6 顶部事件6: 资源调度异常 🟡 P2
 
 > **问题定义**: Pod调度行为异常，包括无法调度、调度结果不符合预期等问题
 > **业务影响**: 资源利用率低，应用部署延迟
 > **响应时间**: 4小时内响应
 
-## 中间事件 IE-6.1: Pod无法调度
+#### 中间事件 IE-6.1: Pod无法调度
 
 ```
 IE-6.1 Pod无法调度 [OR门]
@@ -2548,7 +2460,7 @@ IE-6.1 Pod无法调度 [OR门]
 
 ---
 
-## BE-6.1: 节点资源不足
+##### BE-6.1: 节点资源不足
 
 **问题现象**:
 - Pod一直处于Pending状态
@@ -2583,7 +2495,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 
 ---
 
-## BE-6.2: 亲和性冲突
+##### BE-6.2: 亲和性冲突
 
 **问题现象**:
 - Pod无法调度
@@ -2618,7 +2530,7 @@ kubectl get node <node-name> -o jsonpath='{.metadata.labels}'
 
 ---
 
-## BE-6.3: 污点不匹配
+##### BE-6.3: 污点不匹配
 
 **问题现象**:
 - Pod无法调度
@@ -2643,7 +2555,7 @@ kubectl describe pod <pod-name> | grep -i taint
 
 ---
 
-## 中间事件 IE-6.2: 调度结果不符合预期
+#### 中间事件 IE-6.2: 调度结果不符合预期
 
 ```
 IE-6.2 调度结果不符合预期 [OR门]
@@ -2654,7 +2566,7 @@ IE-6.2 调度结果不符合预期 [OR门]
 
 ---
 
-## BE-6.4: 调度器配置错误
+##### BE-6.4: 调度器配置错误
 
 **问题现象**:
 - Pod调度到不期望的节点
@@ -2690,7 +2602,7 @@ cat /etc/kubernetes/scheduler-policy-config.json
 
 ---
 
-## BE-6.5: 优先级抢占问题
+##### BE-6.5: 优先级抢占问题
 
 **问题现象**:
 - 高优先级Pod无法抢占低优先级Pod
@@ -2726,7 +2638,7 @@ kubectl get events | grep -i preempt
 
 ---
 
-## 中间事件 IE-6.3: 自定义调度器问题
+#### 中间事件 IE-6.3: 自定义调度器问题
 
 ```
 IE-6.3 自定义调度器问题 [OR门]
@@ -2737,7 +2649,7 @@ IE-6.3 自定义调度器问题 [OR门]
 
 ---
 
-## BE-6.6: 调度器插件错误
+##### BE-6.6: 调度器插件错误
 
 **问题现象**:
 - 自定义调度器插件不生效
@@ -2770,7 +2682,7 @@ kubectl logs -n kube-system kube-scheduler-<node-name>
 
 ---
 
-## BE-6.7: 扩展点配置错误
+##### BE-6.7: 扩展点配置错误
 
 **问题现象**:
 - 调度扩展点不生效
@@ -2806,13 +2718,13 @@ kubectl logs <webhook-pod>
 
 ---
 
-## 2.7 顶部事件7: 安全认证失败 🟠 P1
+### 2.7 顶部事件7: 安全认证失败 🟠 P1
 
 > **问题定义**: Kubernetes安全认证或授权失败，包括证书、RBAC、准入控制等问题
 > **业务影响**: 用户/服务无法访问集群，安全策略无法生效
 > **响应时间**: 1小时内响应
 
-## 中间事件 IE-7.1: 证书相关问题
+#### 中间事件 IE-7.1: 证书相关问题
 
 ```
 IE-7.1 证书相关问题 [OR门]
@@ -2824,7 +2736,7 @@ IE-7.1 证书相关问题 [OR门]
 
 ---
 
-## BE-7.1: 证书过期
+##### BE-7.1: 证书过期
 
 **问题现象**:
 - API Server无法启动
@@ -2860,10 +2772,6 @@ timedatectl status
 
 **解决方案**:
 1. **续期证书**: 使用kubeadm续期证书
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-
    ```bash
    kubeadm certs renew all
    systemctl restart kubelet
@@ -2874,7 +2782,7 @@ timedatectl status
 
 ---
 
-## BE-7.2: 证书链不完整
+##### BE-7.2: 证书链不完整
 
 **问题现象**:
 - TLS握手失败
@@ -2905,7 +2813,7 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text
 
 ---
 
-## BE-7.3: CA配置错误
+##### BE-7.3: CA配置错误
 
 **问题现象**:
 - 证书签名失败
@@ -2941,7 +2849,7 @@ echo '<base64-data>' | base64 -d | openssl x509 -noout -text
 
 ---
 
-## 中间事件 IE-7.2: RBAC权限问题
+#### 中间事件 IE-7.2: RBAC权限问题
 
 ```
 IE-7.2 RBAC权限问题 [OR门]
@@ -2953,7 +2861,7 @@ IE-7.2 RBAC权限问题 [OR门]
 
 ---
 
-## BE-7.4: Role配置错误
+##### BE-7.4: Role配置错误
 
 **问题现象**:
 - 用户/服务操作被拒绝
@@ -2989,7 +2897,7 @@ kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<namespace>:<sa-
 
 ---
 
-## BE-7.5: RoleBinding缺失
+##### BE-7.5: RoleBinding缺失
 
 **问题现象**:
 - 用户有Role但无法使用权限
@@ -3024,7 +2932,7 @@ kubectl get rolebinding <binding-name> -o yaml
 
 ---
 
-## BE-7.6: ServiceAccount问题
+##### BE-7.6: ServiceAccount问题
 
 **问题现象**:
 - Pod无法访问API Server
@@ -3061,7 +2969,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.serviceAccountName}'
 
 ---
 
-## 中间事件 IE-7.3: 准入控制问题
+#### 中间事件 IE-7.3: 准入控制问题
 
 ```
 IE-7.3 准入控制问题 [OR门]
@@ -3073,7 +2981,7 @@ IE-7.3 准入控制问题 [OR门]
 
 ---
 
-## BE-7.7: Webhook不可用
+##### BE-7.7: Webhook不可用
 
 **问题现象**:
 - API请求被Webhook拒绝
@@ -3117,7 +3025,7 @@ kubectl run test --image=busybox --rm -it -- wget -O- <webhook-service>.<namespa
 
 ---
 
-## BE-7.8: Validating配置错误
+##### BE-7.8: Validating配置错误
 
 **问题现象**:
 - 资源创建被错误拒绝
@@ -3153,7 +3061,7 @@ kubectl logs <webhook-pod> -n <webhook-namespace>
 
 ---
 
-## BE-7.9: Mutating配置错误
+##### BE-7.9: Mutating配置错误
 
 **问题现象**:
 - 资源被错误修改
@@ -3189,13 +3097,13 @@ kubectl get pod <pod-name> -o yaml
 
 ---
 
-## 2.8 顶部事件8: 监控告警异常 🟡 P2
+### 2.8 顶部事件8: 监控告警异常 🟡 P2
 
 > **问题定义**: 监控告警系统异常，包括数据采集、告警触发、通知发送等问题
 > **业务影响**: 无法及时发现问题，告警风暴或告警遗漏
 > **响应时间**: 4小时内响应
 
-## 中间事件 IE-8.1: 监控数据采集异常
+#### 中间事件 IE-8.1: 监控数据采集异常
 
 ```
 IE-8.1 监控数据采集异常 [OR门]
@@ -3207,7 +3115,7 @@ IE-8.1 监控数据采集异常 [OR门]
 
 ---
 
-## BE-8.1: Prometheus问题
+##### BE-8.1: Prometheus问题
 
 **问题现象**:
 - Prometheus UI无法访问
@@ -3252,7 +3160,7 @@ kubectl get prometheusrules -n monitoring
 
 ---
 
-## BE-8.2: ServiceMonitor错误
+##### BE-8.2: ServiceMonitor错误
 
 **问题现象**:
 - 特定Target无法发现
@@ -3292,7 +3200,7 @@ kubectl get pods --show-labels
 
 ---
 
-## BE-8.3: 指标丢失
+##### BE-8.3: 指标丢失
 
 **问题现象**:
 - 特定指标无法查询
@@ -3307,10 +3215,6 @@ kubectl get pods --show-labels
 - 网络问题
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 检查指标是否存在
@@ -3336,7 +3240,7 @@ kubectl exec -it prometheus-pod -- wget -O- <target>:<port>/metrics
 
 ---
 
-## 中间事件 IE-8.2: 告警系统异常
+#### 中间事件 IE-8.2: 告警系统异常
 
 ```
 IE-8.2 告警系统异常 [OR门]
@@ -3348,7 +3252,7 @@ IE-8.2 告警系统异常 [OR门]
 
 ---
 
-## BE-8.4: Alertmanager问题
+##### BE-8.4: Alertmanager问题
 
 **问题现象**:
 - 告警不发送
@@ -3387,7 +3291,7 @@ kubectl get secret alertmanager-config -n monitoring -o jsonpath='{.data.alertma
 
 ---
 
-## BE-8.5: 告警规则错误
+##### BE-8.5: 告警规则错误
 
 **问题现象**:
 - 告警不触发
@@ -3427,7 +3331,7 @@ kubectl logs prometheus-pod | grep -i rule
 
 ---
 
-## BE-8.6: 通知渠道失败
+##### BE-8.6: 通知渠道失败
 
 **问题现象**:
 - 告警发送失败
@@ -3465,7 +3369,7 @@ kubectl logs alertmanager-pod | grep -i notify
 
 ---
 
-## 中间事件 IE-8.3: 可视化系统异常
+#### 中间事件 IE-8.3: 可视化系统异常
 
 ```
 IE-8.3 可视化系统异常 [OR门]
@@ -3477,7 +3381,7 @@ IE-8.3 可视化系统异常 [OR门]
 
 ---
 
-## BE-8.7: Grafana问题
+##### BE-8.7: Grafana问题
 
 **问题现象**:
 - Grafana UI无法访问
@@ -3518,7 +3422,7 @@ kubectl get pvc -n monitoring | grep grafana
 
 ---
 
-## BE-8.8: Dashboard配置错误
+##### BE-8.8: Dashboard配置错误
 
 **问题现象**:
 - Dashboard显示错误
@@ -3554,7 +3458,7 @@ kubectl get configmap -n monitoring | grep dashboard
 
 ---
 
-## BE-8.9: 数据源连接失败
+##### BE-8.9: 数据源连接失败
 
 **问题现象**:
 - Dashboard无数据
@@ -3569,10 +3473,6 @@ kubectl get configmap -n monitoring | grep dashboard
 - 证书问题
 
 **排查命令**:
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 # 查看Grafana数据源配置
@@ -3596,9 +3496,9 @@ kubectl get secret grafana-datasources -n monitoring -o yaml
 
 ---
 
-<!-- chunk: 三、排查命令速查表 -->## 三、排查命令速查表
+## 三、排查命令速查表
 
-## 3.1 集群健康检查命令
+### 3.1 集群健康检查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3636,7 +3536,7 @@ ectcdctl --cacert=/etc/kubernetes/pki/etcd/ca.crt \
         --key=/etc/kubernetes/pki/etcd/server.key \
         endpoint health --cluster
 ```
-## 3.2 控制平面组件排查命令
+### 3.2 控制平面组件排查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3666,7 +3566,7 @@ kubectl get pods -n kube-system | grep controller-manager
 kubectl logs -n kube-system kube-controller-manager-<node-name>
 kubectl get leases -n kube-system kube-controller-manager -o yaml
 ```
-## 3.3 工作节点排查命令
+### 3.3 工作节点排查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3696,7 +3596,7 @@ kubectl top node <node-name>
 # 节点压力检查
 kubectl describe node <node-name> | grep -A 10 Conditions
 ```
-## 3.4 网络排查命令
+### 3.4 网络排查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3744,7 +3644,7 @@ kubectl logs -n ingress-nginx ingress-nginx-controller-<pod-id>
 kubectl get networkpolicy --all-namespaces
 kubectl describe networkpolicy <policy-name>
 ```
-## 3.5 存储排查命令
+### 3.5 存储排查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3780,10 +3680,7 @@ df -h
 lsblk
 mount | grep <volume>
 ```
-## 3.6 Pod排查命令
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
+### 3.6 Pod排查命令
 
 ``` bash
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -3818,7 +3715,7 @@ kubectl top pod --all-namespaces
 kubectl debug <pod-name> -it --image=busybox --target=<container-name>
 kubectl cp <pod-name>:<path> <local-path>
 ```
-## 3.7 安全排查命令
+### 3.7 安全排查命令
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3857,9 +3754,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 ```
 ---
 
-<!-- chunk: 四、故障处理优先级建议 -->## 四、故障处理优先级建议
+## 四、故障处理优先级建议
 
-## 4.1 问题严重程度分级表(P0-P3)
+### 4.1 问题严重程度分级表(P0-P3)
 
 | 级别 | 名称 | 定义 | 响应时间 | 升级条件 | 典型场景 |
 |------|------|------|----------|----------|----------|
@@ -3868,7 +3765,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 | 🟡 P2 | 中 | 部分功能受限 | 4小时 | 24小时未恢复 | 资源调度异常、监控告警异常 |
 | 🟢 P3 | 低 | 轻微影响 | 24小时 | 72小时未处理 | 性能下降、非关键功能异常 |
 
-## 4.2 故障处理标准流程图
+### 4.2 故障处理标准流程图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -3943,12 +3840,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
       └───────────────────────────────────────────────────────┘
 ```
 
-## 4.3 紧急恢复措施(P0/P1级)
-
-> ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
-> - `systemctl stop/restart`：停止/重启系统服务，影响节点上所有容器
-> - `kubectl apply/create/replace`：创建/变更集群资源
-> - `kubectl rollout undo/restart`：触发滚动变更，影响副本
+### 4.3 紧急恢复措施(P0/P1级)
 
 > **🔴 高风险操作警告**
 >
@@ -4006,7 +3898,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-## 4.4 故障排查决策树
+### 4.4 故障排查决策树
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -4074,7 +3966,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
                                 │ (IE-2.2/IE-2.3) │      │ (TE-8)          │
                                 └─────────────────┘      └─────────────────┘
 ```
-## 4.5 关键指标监控阈值
+### 4.5 关键指标监控阈值
 
 | 指标类别 | 指标名称 | 警告阈值 | 严重阈值 | 紧急阈值 | 说明 |
 |----------|----------|----------|----------|----------|------|
@@ -4099,9 +3991,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ---
 
-<!-- chunk: 五、附录 -->## 五、附录
+## 五、附录
 
-## 5.1 Kubernetes组件依赖关系图
+### 5.1 Kubernetes组件依赖关系图
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -4202,7 +4094,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
    - API Server: 获取存储相关资源
    - 存储后端: 实际存储操作
 ```
-## 5.2 故障排查检查清单
+### 5.2 故障排查检查清单
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -4283,7 +4175,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ---
 
-<!-- chunk: 文档信息 -->## 文档信息
+## 文档信息
 
 | 项目 | 内容 |
 |------|------|
@@ -4318,7 +4210,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 └───────┘   │  └───────┘         └───────┘  │  └───────┘
 ```
 
-## 4.5 关键指标监控阈值
+### 4.5 关键指标监控阈值
 
 | 指标 | 警告阈值 | 严重阈值 | 灾难阈值 |
 |------|----------|----------|----------|
@@ -4332,9 +4224,9 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 
 ---
 
-<!-- chunk: 五、附录 -->## 五、附录
+## 五、附录
 
-## 5.1 Kubernetes组件依赖关系图
+### 5.1 Kubernetes组件依赖关系图
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -4384,30 +4276,30 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 5.2 故障排查检查清单
+### 5.2 故障排查检查清单
 
-## 集群健康检查清单
+#### 集群健康检查清单
 - [ ] 所有节点状态为Ready
 - [ ] 控制平面组件运行正常
 - [ ] 核心DNS服务可用
 - [ ] 网络插件运行正常
 - [ ] 存储插件运行正常
 
-## Pod故障排查清单
+#### Pod故障排查清单
 - [ ] Pod状态不是Error或CrashLoopBackOff
 - [ ] 镜像拉取成功
 - [ ] 资源限制合理
 - [ ] 健康检查配置正确
 - [ ] 依赖服务可用
 
-## 网络故障排查清单
+#### 网络故障排查清单
 - [ ] Pod可以解析DNS
 - [ ] Pod间可以互相通信
 - [ ] Service可以访问
 - [ ] Ingress路由正常
 - [ ] 外部访问正常
 
-## 存储故障排查清单
+#### 存储故障排查清单
 - [ ] PVC已绑定
 - [ ] 存储卷可以挂载
 - [ ] 文件系统没有损坏
@@ -4420,30 +4312,5 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.securityContext}'
 **适用范围**: Kubernetes v1.20+  
 **最后更新**: 2024年
 
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md|fta-methodology-and-agentic-practices]]
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[故障诊断/FTA故障树/problem-solving-architecture.md|problem-solving-architecture]]
-- [[故障诊断/FTA故障树/symptom-vector-matcher.md|symptom-vector-matcher]]
-
-```
 
 <!-- risk-assessed -->

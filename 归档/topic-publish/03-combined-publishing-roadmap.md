@@ -326,22 +326,22 @@ prerequisites:
 
 | 阶段 | 时间 | 导入内容 | 预期影响 | 验证方式 |
 |:---:|:---:|:---|:---|:---|
-| **紧急导入** | W1 | domain-10-troubleshooting-diagnostics 故障排查精华 10 篇 | 快速降低高频工单 | 对比导入前后同类型工单量 |
-| **核心导入** | W4 | domain-10-troubleshooting-diagnostics 全量 42 篇 + topic-structural-trouble-shooting 40 篇 | 全面覆盖排障场景 | 工单自助解决率 |
+| **紧急导入** | W1 | 故障诊断 故障排查精华 10 篇 | 快速降低高频工单 | 对比导入前后同类型工单量 |
+| **核心导入** | W4 | 故障诊断 全量 42 篇 + topic-structural-trouble-shooting 40 篇 | 全面覆盖排障场景 | 工单自助解决率 |
 | **扩展导入** | W8 | topic-skills（6 个 Agent Skill） | 工单自动化处理 | Agent 自动处理成功率 |
-| **补充导入** | W12 | domain-17-system-foundation Events（230+ 事件） + domain-18-manifests-patterns YAML（60+ 资源） | 配置类问答提效 | 配置类问题自助率 |
-| **深度导入** | W16 | domain-03-networking-traffic 网络（37 篇）+ domain-05-security-compliance 安全（21 篇） | 专业领域深度 | 专业问题一次解决率 |
+| **补充导入** | W12 | 系统基础 Events（230+ 事件） + 清单模式 YAML（60+ 资源） | 配置类问答提效 | 配置类问题自助率 |
+| **深度导入** | W16 | 网络 网络（37 篇）+ 安全 安全（21 篇） | 专业领域深度 | 专业问题一次解决率 |
 | **全域导入** | W24 | 其他所有 domain 和 topic | 全域覆盖 | 知识库检索满意度 |
 
 ### 6.3 按优先级导入的语料分组
 
 | 优先级 | 导入内容 | 预期影响 | 导入时机 |
 |:---:|:---|:---|:---:|
-| P0 | domain-10-troubleshooting-diagnostics 故障排查（42 篇）+ topic-structural-trouble-shooting（40 篇） | 直接降低工单量 | W1-W4 |
+| P0 | 故障诊断 故障排查（42 篇）+ topic-structural-trouble-shooting（40 篇） | 直接降低工单量 | W1-W4 |
 | P0 | topic-skills（6 个 Agent Skill） | 工单自动化处理 | W4-W8 |
-| P1 | domain-17-system-foundation Events（15 篇，230+ 事件速查） | 加速故障定位 | W8-W12 |
-| P1 | domain-18-manifests-patterns YAML 参考（36 篇，60+ 资源） | 配置类问答 | W8-W12 |
-| P2 | domain-03-networking-traffic 网络（37 篇）+ domain-05-security-compliance 安全（21 篇） | 专业领域深度 | W12-W16 |
+| P1 | 系统基础 Events（15 篇，230+ 事件速查） | 加速故障定位 | W8-W12 |
+| P1 | 清单模式 YAML 参考（36 篇，60+ 资源） | 配置类问答 | W8-W12 |
+| P2 | 网络 网络（37 篇）+ 安全 安全（21 篇） | 专业领域深度 | W12-W16 |
 | P2 | topic-fta（29 篇）+ topic-febm（10 篇） | 方法论级别问答 | W12-W16 |
 | P3 | 其他所有 domain 和 topic | 全域覆盖 | W16-W24 |
 

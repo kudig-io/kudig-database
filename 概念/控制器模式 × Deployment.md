@@ -47,6 +47,7 @@ relationships:
   type: related_to
 - target: '[[系统基础/知识字典/workloads/daemonset.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**

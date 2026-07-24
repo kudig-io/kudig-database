@@ -31,6 +31,7 @@ prerequisites:
 relationships:
 - target: '[[实体/helm.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

@@ -180,7 +180,7 @@ Domain15(网络基础)┘       │                 │                     │
                      Domain4(工作负载)   Domain5(网络)      Domain12(故障排查)
                           │              Domain6(存储)           │
                           v                 │                    v
-                     Domain7(安全)  <───────┘             故障诊断/topic-fta/febm
+                     Domain7(安全)  <───────┘             故障诊断/FTA故障树/febm
                      Domain8(可观测性)
                           │
                           v
@@ -256,7 +256,7 @@ Domain15(网络基础)┘       │                 │                     │
 - `../集群基础/02-core-components-deep-dive.md`
 
 ### 故障排查体系
-- `../故障诊断/topic-fta/23-fta-production-quick-start.md`
+- `../故障诊断/FTA故障树/23-fta-production-quick-start.md`
 - `../故障诊断/topic-febm/08-febm-production-quick-start.md`
 - `../故障诊断/` (42篇)
 

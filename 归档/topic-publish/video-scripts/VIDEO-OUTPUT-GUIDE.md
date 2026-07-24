@@ -200,7 +200,7 @@ node-notready-20260518-heygen.mp4
 ### 目录结构
 
 ```
-domain-11-production-operations/topic-publish/video-output/
+生产运维/topic-publish/video-output/
 ├── pod-crashloop-20260518-tencent.mp4
 ├── node-notready-20260518-tencent.mp4
 ├── fta-pod-20260518-tencent.mp4
@@ -216,7 +216,7 @@ domain-11-production-operations/topic-publish/video-output/
 ```json
 {
   "title": "Pod CrashLoop 故障排查",
-  "source_script": "domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md",
+  "source_script": "生产运维/topic-publish/video-scripts/pod-crashloop.md",
   "platform": "tencent",
   "avatar": "professional-engineer",
   "duration_min": 7,
@@ -274,7 +274,7 @@ domain-11-production-operations/topic-publish/video-output/
 ## Obsidian 相关文档
 
 - 数字人视频快速参考
-- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 - 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — ...
 - Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
 

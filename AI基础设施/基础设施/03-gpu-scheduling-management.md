@@ -60,7 +60,7 @@ cross_refs:
   path: ../网络/
   label: '相关知识域: 网络'
 - type: fta
-  path: ../故障诊断/topic-fta/list/gpu-fta.md
+  path: ../故障诊断/FTA故障树/list/gpu-fta.md
   label: '故障树: gpu'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/go.md
@@ -72,7 +72,7 @@ related_docs:
 - path: 05-distributed-training-frameworks.md
   type: depth
   desc: 分布式训练框架
-- path: ../故障诊断/topic-fta/list/gpu-fta.md
+- path: ../故障诊断/FTA故障树/list/gpu-fta.md
   type: fta
   desc: GPU 故障树
 ---

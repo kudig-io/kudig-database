@@ -12,6 +12,7 @@ tier: core
 created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
+status: stable
 ---
 
 > **生产环境安全提示**
@@ -331,6 +332,7 @@ kubectl get services -A --no-headers | wc -l
 
 ## Related
 
+- [[概念/platform-engineering-sre|平台工程 × SRE(协作视角)]]
 - [[概念/gitops-production-operations.md|gitops production operations]] — GitOps 生产运维
 - [[概念/progressive-delivery-strategies.md|progressive delivery strategies]] — 渐进式交付策略
 - [[概念/finops-greenops-practices.md|finops greenops practices]] — FinOps 与绿色运维实践

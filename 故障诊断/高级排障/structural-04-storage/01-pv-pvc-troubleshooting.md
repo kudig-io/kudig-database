@@ -1356,13 +1356,13 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[生态参考/topic-index/pod-index|Pod 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[生态参考/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

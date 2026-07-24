@@ -70,7 +70,7 @@ related_docs:
 - path: 03-runtime-security-defense.md
   type: depth
   desc: 运行时安全防护
-- path: ../故障诊断/topic-fta/list/networkpolicy-fta.md
+- path: ../故障诊断/FTA故障树/list/networkpolicy-fta.md
   type: fta
   desc: 网络策略故障树
 ---

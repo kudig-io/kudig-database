@@ -49,7 +49,7 @@ RELATED = {
     "应用模式": ["工作负载", "AI基础设施"],
 }
 
-SKIP_DIRS = {"_archived-release-notes", ".git", ".venv", ".obsidian", ".claude", ".ruff_cache", ".understand-anything", ".comate", ".codebuddy"}
+SKIP_DIRS = {"归档", ".git", ".venv", ".obsidian", ".claude", ".ruff_cache", ".understand-anything", ".comate", ".codebuddy"}
 
 TOPIC_NAMES = {
     "01-architecture-overview": "架构概览",

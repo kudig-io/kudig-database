@@ -1,53 +1,4 @@
 ---
-title: 第二十章：FTA + 大语言模型的新机遇 (故障诊断)
-description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- ingress
-- gateway
-- llm
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第二十章：FTA + 大语言模型的新机遇 是什么
-- 如何 第二十章：FTA + 大语言模型的新机遇
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第二十章：FTA + 大语言模型的新机遇 故障排查
-- 第二十章：FTA + 大语言模型的新机遇 排障步骤
-- 第二十章：FTA + 大语言模型的新机遇 根因分析
-trigger_keywords:
-- 第二十章：FTA
-- 大语言模型的新机遇
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-fta_id: FTA-20_LLM_OPPORTUNITIES-001
-component: 20 Llm Opportunities
-severity: high
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第二十章：FTA + 大语言模型的新机遇
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
 category: fta
@@ -56,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[Ingress|ingress]]
+- ingress
 - gateway
 - llm
 - agent
@@ -77,22 +28,22 @@ trigger_keywords:
 - 第二十章：FTA
 - 大语言模型的新机遇
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第二十章：FTA + 大语言模型的新机遇
 
 > **所属部分**: 第六部分 - 未来展望  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)  
-> **下一章**: 第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)
+> **上一章**: [第十九章：避坑指南与常见误区](./19-pitfalls-and-best-practices.md)  
+> **下一章**: [第二十一章：自进化的智能运维系统](./21-self-evolving-ops-system.md)
 
 ---
 
@@ -118,7 +69,7 @@ LLM 增强 FTA 推理:
      FTA: 定位 → TE-4(网络) 或 TE-6(资源调度)
      
   2. 跨领域关联推理
-     FTA 覆盖的: Pod OOMKilled
+     FTA 覆盖的: [[概念/pod-lifecycle|pod]] OOMKilled
      FTA 未覆盖的: "凌晨2点的批处理任务抢占了内存"
      LLM: 关联时间模式 → 诊断出 "资源争用"
      
@@ -192,30 +143,6 @@ LLM 输出 (结构化 FTA):
 ---
 
 > **导航**: [<< 上一章 - 避坑指南与常见误区](./19-pitfalls-and-best-practices.md) | [下一章 - 自进化的智能运维系统 >>](./21-self-evolving-ops-system.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/18-typical-scenarios.md|18-typical-scenarios]]
-- [[故障诊断/FTA故障树/19-pitfalls-and-best-practices.md|19-pitfalls-and-best-practices]]
-- [[故障诊断/FTA故障树/21-self-evolving-ops-system.md|21-self-evolving-ops-system]]
-- [[故障诊断/FTA故障树/22-industry-standardization.md|22-industry-standardization]]
 
 
 <!-- risk-assessed -->

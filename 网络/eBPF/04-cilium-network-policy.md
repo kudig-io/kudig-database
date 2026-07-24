@@ -91,7 +91,7 @@ trigger_keywords:
 - Policy
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/cilium-fta.md
+  path: ../故障诊断/FTA故障树/list/cilium-fta.md
   label: '故障树: cilium'
 authors:
 - name: KUDIG Team

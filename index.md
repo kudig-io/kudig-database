@@ -44,28 +44,28 @@ trigger_keywords:
 - [[实体/index.md|entities]] — 组件实体、CNCF 工具、云产品、术语词典
 - [[技能/index.md|skills]] — 诊断排障、最佳实践、培训体系、FTA 方法
 
-## 源文档层 (Domain 1-20)
+## 源文档层 (20 个知识域)
 
-- [[集群基础/index.md|domain-01 集群基础]]
-- [[工作负载/index.md|domain-02 工作负载与应用]]
-- [[网络/index.md|domain-03 网络与流量]]
-- [[存储/index.md|domain-04 存储与数据]]
-- [[安全/index.md|domain-05 安全与合规]]
-- [[可观测性/index.md|domain-06 可观测性]]
-- [[平台工程/index.md|domain-07 平台工程]]
-- [[发布变更/index.md|domain-08 发布与变更管理]]
-- [[可靠性/index.md|domain-09 可靠性工程]]
-- [[故障诊断/index.md|domain-10 故障排查与诊断]]
-- [[生产运维/index.md|domain-11 生产运维]]
-- [[云厂商/index.md|domain-12 云厂商]]
-- [[容器运行时/index.md|domain-13 容器运行时]]
-- [[AI基础设施/index.md|domain-14 AI/ML 基础设施]]
-- [[专项技术/index.md|domain-15 专项技术]]
-- [[数据库中间件/index.md|domain-16 数据库与中间件]]
-- [[系统基础/index.md|domain-17 系统基础]]
-- [[清单模式/index.md|domain-18 清单与模式]]
-- [[生态参考/index.md|domain-19 生态参考]]
-- [[应用模式/index.md|domain-20 应用模式]]
+- [[集群基础/index.md|集群基础]]
+- [[工作负载/index.md|工作负载与应用]]
+- [[网络/index.md|网络与流量]]
+- [[存储/index.md|存储与数据]]
+- [[安全/index.md|安全与合规]]
+- [[可观测性/index.md|可观测性]]
+- [[平台工程/index.md|平台工程]]
+- [[发布变更/index.md|发布与变更管理]]
+- [[可靠性/index.md|可靠性工程]]
+- [[故障诊断/index.md|故障排查与诊断]]
+- [[生产运维/index.md|生产运维]]
+- [[云厂商/index.md|云厂商]]
+- [[容器运行时/index.md|容器运行时]]
+- [[AI基础设施/index.md|AI/ML 基础设施]]
+- [[专项技术/index.md|专项技术]]
+- [[数据库中间件/index.md|数据库与中间件]]
+- [[系统基础/index.md|系统基础]]
+- [[清单模式/index.md|清单与模式]]
+- [[生态参考/index.md|生态参考]]
+- [[应用模式/index.md|应用模式]]
 
 ## 工程与元数据
 

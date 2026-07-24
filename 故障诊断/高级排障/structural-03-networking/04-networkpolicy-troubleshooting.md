@@ -1637,11 +1637,11 @@ echo -e "\n=== Check Complete ==="
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/network-index|Network 网络知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/dns-index|DNS 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[生态参考/topic-index/network-index|Network 网络知识图谱索引]]
+- [[生态参考/topic-index/dns-index|DNS 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

@@ -33,6 +33,7 @@ prerequisites:
 - prometheus-basics
 - gpu-scheduling-basics
 - observability-basics
+status: stable
 ---
 
 > **生产环境安全提示**

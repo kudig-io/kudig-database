@@ -55,7 +55,7 @@ cross_refs:
   path: ../平台工程/
   label: '相关知识域: 平台工程'
 - type: fta
-  path: ../故障诊断/topic-fta/list/helm-fta.md
+  path: ../故障诊断/FTA故障树/list/helm-fta.md
   label: '故障树: helm'
 ---
 

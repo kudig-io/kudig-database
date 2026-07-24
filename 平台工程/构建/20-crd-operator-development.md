@@ -57,7 +57,7 @@ cross_refs:
   path: ../故障诊断/
   label: '相关知识域: 故障诊断'
 - type: fta
-  path: ../故障诊断/topic-fta/list/crd-operator-fta.md
+  path: ../故障诊断/FTA故障树/list/crd-operator-fta.md
   label: '故障树: crd-operator'
 ---
 

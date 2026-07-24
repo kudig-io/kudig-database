@@ -48,6 +48,7 @@ relationships:
   type: uses
 - target: '[[实体/cortex.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**

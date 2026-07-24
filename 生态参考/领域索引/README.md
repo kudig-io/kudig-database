@@ -66,7 +66,7 @@ prerequisites:
 │  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     │
 │  │  向量索引     │     │  意图路由     │     │  FTA 联动    │     │
 │  │              │     │              │     │              │     │
-│  │ vector-index │────▶│ hybrid-search │────▶│ 故障诊断/topic-fta/  │     │
+│  │ vector-index │────▶│ hybrid-search │────▶│ 故障诊断/FTA故障树/  │     │
 │  │  .json       │     │  -meta.json   │     │  list/*.md   │     │
 │  └──────────────┘     └──────────────┘     └──────────────┘     │
 │         │                   │                   │               │
@@ -212,7 +212,7 @@ category_to_fta = {
 
 # 加载 FTA
 fta_code = category_to_fta.get(result['category'])
-fta_path = f"故障诊断/topic-fta/list/{fta_code.lower().replace('_', '-')}.md"
+fta_path = f"故障诊断/FTA故障树/list/{fta_code.lower().replace('_', '-')}.md"
 
 # 读取 FTA 内容
 with open(fta_path) as f:
@@ -324,7 +324,7 @@ topic-index
     │
     ├───▶ P0-Knowledge-Graph-RDF-Model.md     (知识图谱)
     │
-    ├───▶ 故障诊断/topic-fta/list/*.md                  (故障树)
+    ├───▶ 故障诊断/FTA故障树/list/*.md                  (故障树)
     │
     ├───▶ 故障诊断/topic-skills/*.md                   (技能卡片)
     │

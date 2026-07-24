@@ -64,7 +64,7 @@ related_docs:
 - path: 08-cicd-pipelines.md
   type: depth
   desc: CI/CD 管道
-- path: ../故障诊断/topic-fta/list/crd-operator-fta.md
+- path: ../故障诊断/FTA故障树/list/crd-operator-fta.md
   type: fta
   desc: CRD/Operator 故障树
 ---

@@ -66,7 +66,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/helm-fta.md
+  path: ../故障诊断/FTA故障树/list/helm-fta.md
   label: '故障树: helm'
 ---
 

@@ -65,7 +65,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/cluster-upgrade-fta.md
+  path: ../故障诊断/FTA故障树/list/cluster-upgrade-fta.md
   label: 升级迁移故障树分析
 - type: domain
   path: ../故障诊断/34-upgrade-migration-troubleshooting.md

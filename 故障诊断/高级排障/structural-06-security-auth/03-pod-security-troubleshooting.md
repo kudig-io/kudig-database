@@ -720,8 +720,8 @@ capsh --decode=<hex>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pod-index|Pod 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/pod-index|Pod 知识图谱索引]]
+- [[生态参考/topic-index/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

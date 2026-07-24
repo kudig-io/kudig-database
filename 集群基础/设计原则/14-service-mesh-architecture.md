@@ -86,7 +86,7 @@ cross_refs:
   path: ../集群基础/
   label: '相关知识域: 集群基础'
 - type: fta
-  path: ../故障诊断/topic-fta/list/service-fta.md
+  path: ../故障诊断/FTA故障树/list/service-fta.md
   label: '故障树: service'
 authors:
 - name: KUDIG Team

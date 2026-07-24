@@ -52,7 +52,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/monitoring-fta.md
+  path: ../故障诊断/FTA故障树/list/monitoring-fta.md
   label: '故障树: monitoring'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/promql.md

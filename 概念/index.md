@@ -8,6 +8,7 @@ tags:
 tier: supporting
 created: '2026-07-02'
 last_updated: 2026-07
+status: reviewed
 ---
 
 > **生产环境安全提示**
@@ -26,7 +27,22 @@ last_updated: 2026-07
 
 ## 子目录
 
+> 按技术域细分的概念分层（2026-07-24 新增），每层含 index.md 导航：
+
 - concepts/case-studies/
+- concepts/research-2025-2026/
+- [[概念/核心架构/index.md|核心架构]] — 架构总览、声明式 API、控制器、GC、SSA、Operator SDK
+- [[概念/工作负载/index.md|工作负载]] — Pod/Deployment/StatefulSet/Job 等工作负载资源
+- [[概念/网络/index.md|网络]] — hostNetwork、SCTP/Multicast、CNI 插件开发
+- [[概念/存储/index.md|存储]] — VolumeAttachment、CSIStorageCapacity、CSI
+- [[概念/调度与资源/index.md|调度与资源]] — QoS、overcommit、驱逐联动
+- [[概念/安全/index.md|安全]] — Security Context、seccomp/AppArmor/SELinux、PSS
+- [[概念/可观测性/index.md|可观测性]] — kube-state-metrics、cAdvisor/kubelet 指标
+- [[概念/平台与发布/index.md|平台与发布]] — Cluster API、Kubespray、集群供给
+- [[概念/可靠性与运维/index.md|可靠性与运维]] — cordon/drain、graceful shutdown、swap
+- concepts/交叉分析/ （预留：71 篇 × 交叉矩阵待整合）
+- concepts/研究/ （预留：Research: 系列待整合）
+- concepts/最佳实践/ （预留：bp- 系列待整合）
 
 ## 文档
 
@@ -53,20 +69,20 @@ last_updated: 2026-07
 - [[概念/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]
 - [[概念/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 - [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[概念/Research: Kubernetes AI-ML Infrastructure 2025-2026.md|Research: Kubernetes Ai Ml Infrastructure 2025 2026]]
-- [[概念/Research: Kubernetes Application Patterns 2025-2026.md|Research: Kubernetes Application Patterns 2025 2026]]
-- [[概念/Research: Kubernetes Cloud Providers 2025-2026.md|Research: Kubernetes Cloud Providers 2025 2026]]
-- [[概念/Research: Kubernetes Container Runtime 2025-2026.md|Research: Kubernetes Container Runtime 2025 2026]]
-- [[概念/Research: Kubernetes Networking 2025-2026.md|Research: Kubernetes Networking 2025 2026]]
-- [[概念/Research: Kubernetes Observability 2025-2026.md|Research: Kubernetes Observability 2025 2026]]
-- [[概念/Research: Kubernetes Platform Engineering 2025-2026.md|Research: Kubernetes Platform Engineering 2025 2026]]
-- [[概念/Research: Kubernetes Production Operations 2025-2026.md|Research: Kubernetes Production Operations 2025 2026]]
-- [[概念/Research: Kubernetes Release Change Management 2025-2026.md|Research: Kubernetes Release Change Management 2025 2026]]
-- [[概念/Research: Kubernetes Reliability Engineering 2025-2026.md|Research: Kubernetes Reliability Engineering 2025 2026]]
-- [[概念/Research: Kubernetes Security Compliance 2025-2026.md|Research: Kubernetes Security Compliance 2025 2026]]
-- [[概念/Research: Kubernetes Specialized Technologies 2025-2026.md|Research: Kubernetes Specialized Technologies 2025 2026]]
-- [[概念/Research: Kubernetes Storage 2025-2026.md|Research: Kubernetes Storage 2025 2026]]
-- [[概念/Research: Kubernetes System Foundation 2025-2026.md|Research: Kubernetes System Foundation 2025 2026]]
+- [[概念/research-2025-2026/01-AI-ML-Infrastructure.md|Research: Kubernetes Ai Ml Infrastructure 2025 2026]]
+- [[概念/research-2025-2026/02-Application-Patterns.md|Research: Kubernetes Application Patterns 2025 2026]]
+- [[概念/research-2025-2026/03-Cloud-Providers.md|Research: Kubernetes Cloud Providers 2025 2026]]
+- [[概念/research-2025-2026/04-Container-Runtime.md|Research: Kubernetes Container Runtime 2025 2026]]
+- [[概念/research-2025-2026/05-Networking.md|Research: Kubernetes Networking 2025 2026]]
+- [[概念/research-2025-2026/06-Observability.md|Research: Kubernetes Observability 2025 2026]]
+- [[概念/research-2025-2026/07-Platform-Engineering.md|Research: Kubernetes Platform Engineering 2025 2026]]
+- [[概念/research-2025-2026/08-Production-Operations.md|Research: Kubernetes Production Operations 2025 2026]]
+- [[概念/research-2025-2026/09-Release-Change-Management.md|Research: Kubernetes Release Change Management 2025 2026]]
+- [[概念/research-2025-2026/10-Reliability-Engineering.md|Research: Kubernetes Reliability Engineering 2025 2026]]
+- [[概念/research-2025-2026/11-Security-Compliance.md|Research: Kubernetes Security Compliance 2025 2026]]
+- [[概念/research-2025-2026/12-Specialized-Technologies.md|Research: Kubernetes Specialized Technologies 2025 2026]]
+- [[概念/research-2025-2026/13-Storage.md|Research: Kubernetes Storage 2025 2026]]
+- [[概念/research-2025-2026/14-System-Foundation.md|Research: Kubernetes System Foundation 2025 2026]]
 - [[概念/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]]
 - [[概念/StatefulSet-×-Ingress.md|Statefulset × Ingress]]
 - [[概念/StatefulSet-×-NetworkPolicy.md|Statefulset × Networkpolicy]]

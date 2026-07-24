@@ -151,7 +151,7 @@ Level 3: 资源（按需加载）
   ▼ 知识图谱范式
 关联 kudig-database 知识库
   │  故障诊断/05-pod-pending-diagnosis.md
-  │  故障诊断/topic-fta/故障树模型
+  │  故障诊断/FTA故障树/故障树模型
   │
   ▼ 输出结论
 ```
@@ -269,7 +269,7 @@ SKILL.md 知识库关联的实际使用:
 SKILL.md 第 8 章定义:
   Pod 问题 → 故障诊断/05-pod-pending-diagnosis.md
   Node 问题 → 故障诊断/06-node-notready-diagnosis.md
-  故障树 → 故障诊断/topic-fta/ 完整故障树分析模型
+  故障树 → 故障诊断/FTA故障树/ 完整故障树分析模型
 
 Agent 输出:
   "<!-- chunk: 诊断结果 -->## 诊断结果

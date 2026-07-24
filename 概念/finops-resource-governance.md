@@ -25,6 +25,7 @@ last_updated: 2026-05-21 14:00:00+00:00
 relationships:
 - target: '[[实体/kubernetes.md]]'
   type: uses
+status: stable
 ---
 
 > **生产环境安全提示**

@@ -14,6 +14,7 @@ tier: core
 created: 2026-05-24
 updated: 2026-07
 last_updated: 2026-07
+status: stable
 ---
 
 > **生产环境安全提示**

@@ -397,8 +397,8 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md
-  - domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md
+  - 故障诊断/topic-structural-trouble-shooting/09-command-output/00-command-output-root-cause-parser.md
+  - 故障诊断/08-pod-comprehensive-troubleshooting.md
 ---
 ```
 

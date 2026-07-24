@@ -65,7 +65,7 @@ related_docs:
 - path: 19-scheduler-configuration.md
   type: depth
   desc: 调度器配置与优化
-- path: ../故障诊断/topic-fta/list/pod-fta.md
+- path: ../故障诊断/FTA故障树/list/pod-fta.md
   type: fta
   desc: Pod 故障树
 ---

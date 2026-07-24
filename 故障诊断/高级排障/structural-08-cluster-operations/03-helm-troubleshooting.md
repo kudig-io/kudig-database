@@ -709,13 +709,13 @@ helm install <release> <chart> --dry-run --debug
 ### 相关文档
 
 - [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
-- [Deployment 故障排查](../[[domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
+- [Deployment 故障排查](../[[故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting|02-deployment-troubleshooting]].md)
 - [ConfigMap/Secret 故障排查](../05-workloads/06-configmap-secret-troubleshooting.md)
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/helm-index|Helm 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

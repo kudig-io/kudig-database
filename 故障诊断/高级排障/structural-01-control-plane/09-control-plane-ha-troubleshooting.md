@@ -698,7 +698,7 @@ HEALTH_CHECK_LOG="/var/log/kubernetes/ha-health-check-$(date +%Y%m%d).log"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

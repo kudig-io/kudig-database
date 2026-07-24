@@ -60,7 +60,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/daemonset-fta.md
+  path: ../故障诊断/FTA故障树/list/daemonset-fta.md
   label: '故障树: daemonset'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md

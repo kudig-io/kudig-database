@@ -570,7 +570,7 @@ target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
   - 集群基础/15-kubelet-deep-dive.md
-  - 故障诊断/topic-fta/list/node-fta.md
+  - 故障诊断/FTA故障树/list/node-fta.md
   - 故障诊断/06-node-notready-diagnosis.md
 ---
 ```

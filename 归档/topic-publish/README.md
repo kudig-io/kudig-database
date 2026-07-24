@@ -319,7 +319,7 @@ prerequisites:
 ### 9.2 文档导航
 
 ```
-domain-11-production-operations/topic-publish/
+生产运维/topic-publish/
 ├── README.md                          ← 你正在阅读的文件（战略总纲）
 ├── 01-plan-ai-infra-series.md         ← 方案一：AI Infra 全域知识体系（9 周 36+ 篇）
 ├── 02-plan-k8s-ack-series.md          ← 方案二：K8S 生产运维全域系列（24 周 121 篇）

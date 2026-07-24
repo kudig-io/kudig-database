@@ -1146,8 +1146,8 @@ echo "最佳实践检查报告已生成: $BEST_PRACTICES_REPORT"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/helm-index|Helm 全局索引]]
-- [[domain-19-landscape-references/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[生态参考/topic-index/helm-index|Helm 全局索引]]
+- [[生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

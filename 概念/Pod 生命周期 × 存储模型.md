@@ -42,6 +42,7 @@ relationships:
   type: related_to
 - target: '[[概念/Pod 生命周期 × Secret 管理.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

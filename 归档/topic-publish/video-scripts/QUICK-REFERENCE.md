@@ -49,8 +49,8 @@ python3 scripts/video-content-generator.py --type skill --list
 python3 scripts/video-content-generator.py --type fta --list
 
 # 生成视频脚本
-python3 scripts/video-content-generator.py --type skill --topic pod-crashloop -o domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md
-python3 scripts/video-content-generator.py --type fta --topic pod-fta -o domain-11-production-operations/topic-publish/video-scripts/pod-fta.md
+python3 scripts/video-content-generator.py --type skill --topic pod-crashloop -o 生产运维/topic-publish/video-scripts/pod-crashloop.md
+python3 scripts/video-content-generator.py --type fta --topic pod-fta -o 生产运维/topic-publish/video-scripts/pod-fta.md
 
 # ===== 生成视频 =====
 
@@ -61,16 +61,16 @@ python3 scripts/video-generator.py --list-avatars --platform heygen
 # 生成视频（腾讯智影）
 python3 scripts/video-generator.py \
     --platform tencent \
-    --script domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md \
+    --script 生产运维/topic-publish/video-scripts/pod-crashloop.md \
     --avatar professional-engineer \
-    --output domain-11-production-operations/topic-publish/video-output/pod-crashloop.mp4
+    --output 生产运维/topic-publish/video-output/pod-crashloop.mp4
 
 # 批量生成
 python3 scripts/video-generator.py \
-    --batch domain-11-production-operations/topic-publish/video-scripts/ \
+    --batch 生产运维/topic-publish/video-scripts/ \
     --platform tencent \
     --avatar professional-engineer \
-    --output-dir domain-11-production-operations/topic-publish/video-output/
+    --output-dir 生产运维/topic-publish/video-output/
 ```
 
 ## Topic 优先级
@@ -119,7 +119,7 @@ python3 scripts/video-generator.py \
 ## 视频输出规范
 
 ```
-domain-11-production-operations/topic-publish/video-output/
+生产运维/topic-publish/video-output/
 ├── {topic}-{date}-{platform}.mp4
 └── metadata/
     └── {topic}-{date}.meta.json
@@ -129,13 +129,13 @@ domain-11-production-operations/topic-publish/video-output/
 
 ```bash
 # 检查视频生成状态
-ls -la domain-11-production-operations/topic-publish/video-output/
+ls -la 生产运维/topic-publish/video-output/
 
 # 查看元数据
-cat domain-11-production-operations/topic-publish/video-output/metadata/*.meta.json
+cat 生产运维/topic-publish/video-output/metadata/*.meta.json
 
 # 统计已生成视频
-ls domain-11-production-operations/topic-publish/video-output/*.mp4 | wc -l
+ls 生产运维/topic-publish/video-output/*.mp4 | wc -l
 ```
 
 ---
@@ -143,7 +143,7 @@ ls domain-11-production-operations/topic-publish/video-output/*.mp4 | wc -l
 ## Obsidian 相关文档
 
 - 数字人视频输出建议
-- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 - 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation — ...
 - Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本
 

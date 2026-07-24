@@ -113,13 +113,13 @@ related_skills:
   - "SKILL-IMAGE-001"
   - "SKILL-NODE-002"
 fta_refs:
-  - "故障诊断/topic-fta/list/daemonset-fta.md"
+  - "故障诊断/FTA故障树/list/daemonset-fta.md"
 knowledge_refs:
   - "故障诊断/20-daemonset-troubleshooting.md"
   - "工作负载/"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/daemonset-fta.md"
+    path: "../故障诊断/FTA故障树/list/daemonset-fta.md"
     label: "DaemonSet 故障树分析"
   - type: "domain"
     path: "../故障诊断/20-daemonset-troubleshooting.md"

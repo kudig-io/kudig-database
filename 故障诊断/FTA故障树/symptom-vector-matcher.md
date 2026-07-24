@@ -1,70 +1,14 @@
 ---
-title: 症状向量匹配引擎 (Symptom Vector Matching Engine) [topic-fta]
-description: 'description: ''<!-- chunk: 一、设计目标'' -->## 一、设计目标'''
-summary: 'description: ''<!-- chunk: 一、设计目标'' -->## 一、设计目标'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- kubelet
-- coredns
-- ingress
-- networkpolicy
-- gpu
-- rag
-- agent
-tier: supporting
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 症状向量匹配引擎 (Symptom Vector Matching Engine) 是什么
-- 如何 症状向量匹配引擎 (Symptom Vector Matching Engine)
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 症状向量匹配引擎 (Symptom Vector Matching Engine) 故障排查
-- 症状向量匹配引擎 (Symptom Vector Matching Engine) 排障步骤
-- 症状向量匹配引擎 (Symptom Vector Matching Engine) 根因分析
-trigger_keywords:
-- 症状向量匹配引擎
-- Symptom
-- Vector
-- Matching
-- Engine
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- gpu-scheduling-basics
-fta_id: FTA-SYMPTOM_VECTOR_MATCHER-001
-component: Symptom Vector Matcher
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
-title: 症状向量匹配引擎 ([[技能/fta-方法论/symptom-matching/Symptom Vector Matching Engine.md|[[Symptom Vector Matching Engine|Symptom Vector Matching Engine]]]])
-description: '<!-- chunk: 一、设计目标' -->## 一、设计目标'
+title: 症状向量匹配引擎 (Symptom Vector Matching Engine)
+description: '## 一、设计目标'
 category: fta
 tags:
 - k8s
 - fault-tree
 - root-cause
 - troubleshooting
-- [[kubelet|kubelet]]
-- [[CoreDNS|coredns]]
+- kubelet
+- coredns
 - ingress
 - networkpolicy
 - gpu
@@ -89,16 +33,16 @@ trigger_keywords:
 - Matching
 - Engine
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 症状向量匹配引擎 (Symptom Vector Matching Engine)
 
@@ -108,13 +52,13 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、设计目标 -->## 一、设计目标
+## 一、设计目标
 
-## 1.1 问题定义
+### 1.1 问题定义
 
 ```
 传统方式:
-  输入: "Pod CrashLoopBackOff + OOMKilled + Exit 137"
+  输入: "[[概念/pod-lifecycle|pod]] CrashLoopBackOff + OOMKilled + Exit 137"
   匹配: 精确匹配症状表
   输出: 固定映射 → BE-2.3
   
@@ -129,7 +73,7 @@ k8s_versions:
   ]
 ```
 
-## 1.2 核心能力
+### 1.2 核心能力
 
 | 能力 | 说明 |
 |:---|:---|
@@ -141,9 +85,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 二、向量化设计 -->## 二、向量化设计
+## 二、向量化设计
 
-## 2.1 特征空间定义
+### 2.1 特征空间定义
 
 ```python
 # 症状特征向量 (32维)
@@ -259,7 +203,7 @@ class SymptomVectorizer:
         return None
 ```
 
-## 2.2 已知症状模式库
+### 2.2 已知症状模式库
 
 ```yaml
 symptom_patterns:
@@ -382,9 +326,9 @@ symptom_patterns:
 
 ---
 
-<!-- chunk: 三、匹配算法实现 -->## 三、匹配算法实现
+## 三、匹配算法实现
 
-## 3.1 余弦相似度匹配
+### 3.1 余弦相似度匹配
 
 ```python
 import math
@@ -448,7 +392,7 @@ class SymptomVectorMatcher:
         return matches / len(keywords) if keywords else 0.0
 ```
 
-## 3.2 语义扩展匹配
+### 3.2 语义扩展匹配
 
 ```python
 class SemanticExpander:
@@ -502,7 +446,7 @@ class SemanticExpander:
         return expanded
 ```
 
-## 3.3 未知症状检测
+### 3.3 未知症状检测
 
 ```python
 class UnknownSymptomDetector:
@@ -557,7 +501,7 @@ class UnknownSymptomDetector:
 
 ---
 
-<!-- chunk: 四、完整匹配流程 -->## 四、完整匹配流程
+## 四、完整匹配流程
 
 ```python
 class SymptomMatchingPipeline:
@@ -646,9 +590,9 @@ class SymptomMatchingPipeline:
 
 ---
 
-<!-- chunk: 五、与 FTA 集成 -->## 五、与 FTA 集成
+## 五、与 FTA 集成
 
-## 5.1 匹配结果 → FTA 路径
+### 5.1 匹配结果 → FTA 路径
 
 ```python
 class FTARouter:
@@ -704,7 +648,7 @@ class FTARouter:
         return evidence
 ```
 
-## 5.2 集成示例
+### 5.2 集成示例
 
 ```python
 # 使用示例
@@ -738,9 +682,9 @@ print(f"\nFTA 执行请求: {fta_request}")
 
 ---
 
-<!-- chunk: 六、模式库管理 -->## 六、模式库管理
+## 六、模式库管理
 
-## 6.1 模式更新 API
+### 6.1 模式更新 API
 
 ```python
 class PatternLibraryManager:
@@ -790,7 +734,7 @@ class PatternLibraryManager:
         return new_pattern
 ```
 
-## 6.2 模式库持久化
+### 6.2 模式库持久化
 
 ```yaml
 # pattern-library.yaml
@@ -824,7 +768,7 @@ proposed_patterns:
 
 ---
 
-<!-- chunk: 七、性能指标 -->## 七、性能指标
+## 七、性能指标
 
 | 指标 | 目标值 | 说明 |
 |:---|:---:|:---|
@@ -839,30 +783,5 @@ proposed_patterns:
 > **版本**: v1.0
 > **维护团队**: Platform Team / AI Team
 > **下一步**: 集成到 K8sOpsAgent 实现
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
-- [[故障诊断/FTA故障树/problem-solving-architecture.md|problem-solving-architecture]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
-
 
 <!-- risk-assessed -->

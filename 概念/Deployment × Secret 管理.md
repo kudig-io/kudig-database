@@ -40,6 +40,7 @@ relationships:
   type: uses
 - target: '[[最佳实践/best-practices/security/pod-security.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

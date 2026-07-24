@@ -113,7 +113,7 @@ related_docs:
 - path: ../集群基础/01-plane-architecture-overview.md
   type: depth
   desc: 控制平面架构深度解析
-- path: ../故障诊断/topic-fta/list/pod-fta.md
+- path: ../故障诊断/FTA故障树/list/pod-fta.md
   type: fta
   desc: Pod 故障树分析
 - path: ../系统基础/topic-cheat-sheet/k8s.md

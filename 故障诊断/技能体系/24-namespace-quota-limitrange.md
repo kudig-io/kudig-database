@@ -115,13 +115,13 @@ related_skills:
   - "SKILL-WORK-004"
   - "SKILL-CP-001"
 fta_refs:
-  - "故障诊断/topic-fta/list/resource-quota-fta.md"
+  - "故障诊断/FTA故障树/list/resource-quota-fta.md"
 knowledge_refs:
   - "故障诊断/24-quota-limitrange-troubleshooting.md"
   - "集群基础/"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/resource-quota-fta.md"
+    path: "../故障诊断/FTA故障树/list/resource-quota-fta.md"
     label: "Quota/LimitRange 故障树分析"
   - type: "domain"
     path: "../故障诊断/24-quota-limitrange-troubleshooting.md"

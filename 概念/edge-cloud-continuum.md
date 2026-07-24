@@ -31,6 +31,7 @@ relationships:
   type: related_to
 - target: '[[系统基础/速查卡/networking.md]]'
   type: related_to
+status: reviewed
 ---
 
 > **生产环境安全提示**

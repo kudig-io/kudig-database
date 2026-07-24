@@ -46,7 +46,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/list/dns-fta.md
+  path: ../故障诊断/FTA故障树/list/dns-fta.md
   label: '故障树: dns'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/networking.md

@@ -18,7 +18,7 @@ last_updated: 2026-07
 
 # List
 
-> 本页为 `故障诊断/topic-fta/list` 目录的自动索引。
+> 本页为 `故障诊断/FTA故障树/list` 目录的自动索引。
 
 ## 概览
 

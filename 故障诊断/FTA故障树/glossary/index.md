@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Glossary
 
-> 本页为 `故障诊断/topic-fta/glossary` 目录的自动索引。
+> 本页为 `故障诊断/FTA故障树/glossary` 目录的自动索引。
 
 ## 文档
 

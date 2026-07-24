@@ -65,7 +65,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/apiserver-fta.md
+  path: ../故障诊断/FTA故障树/list/apiserver-fta.md
   label: '故障树: apiserver'
 ---
 
@@ -85,10 +85,10 @@ related_docs:
   - path: "../集群基础/12-apiserver-deep-dive.md"
     type: "depth"
     desc: "API Server 深度解析"
-  - path: "../故障诊断/topic-fta/list/apiserver-fta.md"
+  - path: "../故障诊断/FTA故障树/list/apiserver-fta.md"
     type: "fta"
     desc: "API Server 故障树"
-  - path: "../故障诊断/topic-fta/list/etcd-fta.md"
+  - path: "../故障诊断/FTA故障树/list/etcd-fta.md"
     type: "fta"
     desc: "etcd 故障树"
 ---

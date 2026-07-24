@@ -81,10 +81,10 @@ related_docs:
   - path: "../网络/02-cni-architecture-fundamentals.md"
     type: "depth"
     desc: "CNI 架构与核心原理"
-  - path: "../故障诊断/topic-fta/list/dns-fta.md"
+  - path: "../故障诊断/FTA故障树/list/dns-fta.md"
     type: "fta"
     desc: "DNS 故障树"
-  - path: "../故障诊断/topic-fta/list/terway-fta.md"
+  - path: "../故障诊断/FTA故障树/list/terway-fta.md"
     type: "fta"
     desc: "Terway 故障树"
 ---

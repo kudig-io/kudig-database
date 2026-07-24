@@ -35,6 +35,7 @@ relationships:
   type: related_to
 - target: '[[概念/GitOps × 平台工程.md]]'
   type: related_to
+status: stable
 ---
 
 
@@ -494,3 +495,8 @@ spec:
 - GitOps x 平台工程.md|GitOps x 平台工程]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
+
+
+## Related
+
+- [[概念/gitops-release-gate|GitOps 发布门控(协同模型)]]

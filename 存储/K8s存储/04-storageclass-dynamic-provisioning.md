@@ -63,7 +63,7 @@ related_docs:
 - path: 02-pv-architecture-fundamentals.md
   type: depth
   desc: PV/PVC 核心概念
-- path: ../故障诊断/topic-fta/list/csi-fta.md
+- path: ../故障诊断/FTA故障树/list/csi-fta.md
   type: fta
   desc: StorageClass 故障树
 ---

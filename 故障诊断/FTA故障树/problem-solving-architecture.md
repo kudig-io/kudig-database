@@ -1,57 +1,4 @@
 ---
-title: 问题排查体系架构文档 [故障诊断]
-description: 'title: 问题排查体系架构文档'
-summary: 'title: 问题排查体系架构文档'
-category: fta
-tags:
-- fta
-- troubleshooting
-- architecture
-- prometheus
-- grafana
-- gpu
-- rag
-- agent
-tier: supporting
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 15min
-intent_queries:
-- 问题排查体系架构文档 是什么
-- 如何 问题排查体系架构文档
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 问题排查体系架构文档 故障排查
-- 问题排查体系架构文档 排障步骤
-- 问题排查体系架构文档 根因分析
-trigger_keywords:
-- 问题排查体系架构文档
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- prometheus-basics
-- monitoring-basics
-- gpu-scheduling-basics
-fta_id: FTA-PROBLEM_SOLVING_ARCHITECTURE-001
-component: Problem Solving Architecture
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 问题排查体系架构文档
 description: '# 问题排查体系架构文档'
 category: fta
@@ -60,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[Prometheus|prometheus]]
+- prometheus
 - grafana
 - gpu
 - rag
@@ -81,16 +28,18 @@ intent_queries:
 trigger_keywords:
 - 问题排查体系架构文档
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- prometheus-basics
+- monitoring-basics
+- gpu-scheduling-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 问题排查体系架构文档
 
@@ -158,11 +107,11 @@ k8s_versions:
 
 | 模块 | 文档位置 | 核心能力 |
 |:---|:---|:---|
-| **症状向量匹配** | `故障诊断/topic-fta/symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
-| **FTA 诊断引擎** | `故障诊断/topic-fta/fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
-| **FTA 改进建议** | `故障诊断/topic-fta/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
-| **症状快速映射** | `故障诊断/高级排障/structural-symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
-| **FTA 完整索引** | `故障诊断/topic-fta/fta-index.md` | TE-1~TE-16 完整路径索引 |
+| **症状向量匹配** | `故障诊断/FTA故障树/symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
+| **FTA 诊断引擎** | `故障诊断/FTA故障树/fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
+| **FTA 改进建议** | `故障诊断/FTA故障树/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
+| **症状快速映射** | `故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
+| **FTA 完整索引** | `故障诊断/FTA故障树/fta-index.md` | TE-1~TE-16 完整路径索引 |
 | **FTA-FEBM 联合** | `故障诊断/topic-febm/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
 
 ---
@@ -171,7 +120,7 @@ k8s_versions:
 
 ### 2.1 症状向量匹配 (Symptom Vector Matcher)
 
-**文件**: `故障诊断/topic-fta/symptom-vector-matcher.md`
+**文件**: `故障诊断/FTA故障树/symptom-vector-matcher.md`
 
 **核心能力**:
 - 将问题现象转化为 32 维特征向量
@@ -214,7 +163,7 @@ result = pipeline.match(symptom, context={"cloud_provider": "ACK"})
 
 ### 2.2 FTA 执行引擎 (FTA Execution Engine)
 
-**文件**: `故障诊断/topic-fta/fta-execution-engine.md`
+**文件**: `故障诊断/FTA故障树/fta-execution-engine.md`
 
 **核心组件**:
 
@@ -243,7 +192,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 
 ### 2.3 FTA 诊断改进 (FTA Diagnosis Improvement)
 
-**文件**: `故障诊断/topic-fta/fta-diagnosis-improvement.md`
+**文件**: `故障诊断/FTA故障树/fta-diagnosis-improvement.md`
 
 **改进项**:
 
@@ -430,7 +379,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  故障诊断/高级排障/structural- (详细排查)            │
+│  故障诊断/topic-structural-trouble-shooting/ (详细排查)            │
 │  - 63篇 结构化排查文档                                      │
 │  - 按组件/按现象                                           │
 └─────────────────────────────────────────────────────────────┘
@@ -473,30 +422,5 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 
 > **维护团队**: Platform Team / SRE Team / AI Team
 > **问题反馈**: GitHub Issues
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
-- [[故障诊断/FTA故障树/symptom-vector-matcher.md|symptom-vector-matcher]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|01-fta-origin-and-evolution]]
-
 
 <!-- risk-assessed -->

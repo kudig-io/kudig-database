@@ -138,12 +138,12 @@ Layer 1: 知识层 (Knowledge)      → Agent 如何检索、理解、引用知�
 |---------|------|-------|--------|---------------|
 | 故障排查大全 | `故障诊断/` | 42 | ~1.5M 字 | ★★★★★ 排障 Agent 核心语料 |
 | 结构化排障 | `故障诊断/高级排障/structural-` | 48+ | ~600K 字 | ★★★★★ 已有决策树结构 |
-| FTA 故障树 | `故障诊断/topic-fta/list/` | 37 | ~1.5M 字 | ★★★★★ Agent 推理链直接输入 |
+| FTA 故障树 | `故障诊断/FTA故障树/list/` | 37 | ~1.5M 字 | ★★★★★ Agent 推理链直接输入 |
 | YAML 清单手册 | `清单模式/` | 36 | ~1.7M 字 | ★★★★☆ 模板生成 Agent 基础 |
 | K8s Events 大全 | `系统基础/` | 15 | ~800K 字 | ★★★★☆ 事件解读 Agent 关键 |
 | 运维词典 | `系统基础/topic-dictionary/` | 16 | ~1.4M 字 | ★★★★☆ 术语和最佳实践 |
 | FEBM 取证循证 | `故障诊断/topic-febm/` | 11 | ~1.0M 字 | ★★★★☆ 诊断方法论 |
-| FTA 方法论 | `故障诊断/topic-fta/` (非 list) | 30 | ~500K 字 | ★★★★☆ Agent 编排理论 |
+| FTA 方法论 | `故障诊断/FTA故障树/` (非 list) | 30 | ~500K 字 | ★★★★☆ Agent 编排理论 |
 | 控制平面 | `集群基础/` | 28 | ~1.1M 字 | ★★★★☆ 核心组件深度知识 |
 | 网络 | `网络/` | 41 | ~900K 字 | ★★★★☆ 网络排障 Agent |
 | 安全 | `安全/` | 21 | ~440K 字 | ★★★☆☆ 安全审计 Agent |
@@ -190,7 +190,7 @@ Layer 1: 知识层 (Knowledge)      → Agent 如何检索、理解、引用知�
 | `清单模式/` | 36 | 缺 resource_type、api_version、use_case | 严重 - YAML 生成 Agent 无法按资源类型过滤 |
 | `系统基础/` | 15 | 缺 event_type、source_component、severity | 严重 - 事件解读 Agent 无法精确匹配 |
 | `集群基础/` | 28 | 缺 component、layer、failure_mode | 高 - 控制平面诊断检索耗时长 |
-| `故障诊断/topic-fta/list/` | 37 | 缺 component、top_event、gate_count | 中 - FTA 已自带结构但缺查找入口 |
+| `故障诊断/FTA故障树/list/` | 37 | 缺 component、top_event、gate_count | 中 - FTA 已自带结构但缺查找入口 |
 
 **10 类缺失的元数据字段详述**：
 
@@ -228,7 +228,7 @@ intent_queries:
   - "no nodes available to schedule"
 requires: [D4-01, D4-19, D1-01]  # 工作负载概览、调度器配置、架构概览
 related: [D12-06, D12-07, D12-24, D33-05]  # Node NotReady, OOM, Quota, 调度事件
-fta_ref: 故障诊断/topic-fta/list/pod-fta.md  # 关联故障树
+fta_ref: 故障诊断/FTA故障树/list/pod-fta.md  # 关联故障树
 structural_ref: 故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md
 ---
 ```
@@ -355,7 +355,7 @@ sop:
 
 | 现有数据源 | 结构化程度 | 包含症状数 | Agent 可直接用？ |
 |---------|-----------|-----------|---------------|
-| `故障诊断/topic-fta/list/` 37 个故障树 | ★★★★★ 树状结构 | ~200+ | ✗ 需拕平为查找表 |
+| `故障诊断/FTA故障树/list/` 37 个故障树 | ★★★★★ 树状结构 | ~200+ | ✗ 需拕平为查找表 |
 | `故障诊断/高级排障/structural-` 48+ 篇 | ★★★★☆ 决策树 | ~150+ | ✗ 需提取为映射表 |
 | `故障诊断/` 42 篇排障文档 | ★★★☆☆ 长文叙述 | ~300+ | ✗ 需结构化提取 |
 | `系统基础/` 15 篇事件文档 | ★★★☆☆ 按事件分类 | ~100+ | ✗ 需映射到症状 |
@@ -390,7 +390,7 @@ symptom_cause_map:
           next_step: "检查容器 memory limits 和应用实际内存使用"
         fix_pattern: "调大 limits.memory 或优化应用内存"
         knowledge_ref: "故障诊断/07-oom-memory-diagnosis.md"
-        fta_ref: "故障诊断/topic-fta/list/pod-fta.md#oomkilled"
+        fta_ref: "故障诊断/FTA故障树/list/pod-fta.md#oomkilled"
       - cause: "Liveness Probe 失败"
         probability: medium
         diagnosis:
@@ -1006,7 +1006,7 @@ Phase 4 (2-3 周) - 决策和验证层                          总工作量: ~1
 |---------|-------|---------|-----------|
 | `故障诊断/` | 42 | 症状→原因映射表、SOP | 中 - 需结构化提取 |
 | `故障诊断/高级排障/structural-` | 48+ | 决策树、症状映射 | 低 - 已半结构化 |
-| `故障诊断/topic-fta/list/` | 37 | 故障树推理链 | 低 - 已结构化 |
+| `故障诊断/FTA故障树/list/` | 37 | 故障树推理链 | 低 - 已结构化 |
 | `清单模式/` | 36 | YAML 生成模板 | 低 - 已标准化 |
 | `系统基础/` | 15 | 事件解读语料 | 中 - 需提取映射 |
 | `系统基础/topic-dictionary/` | 16 | 术语表、最佳实践 | 中 - 需分块 |
@@ -1058,8 +1058,8 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 | 文档 | 说明 |
 |------|------|
 | [Agent 设计思路与落地路径](./14-agent-kudig-design-strategy.md) | Agent 赋能的整体设计思路 |
-| [故障诊断/topic-fta/09-fta-as-agent-knowledge-skeleton.md](../故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
-| [故障诊断/topic-fta/10-agent-orchestration-patterns.md](../故障诊断/FTA故障树/10-agent-orchestration-patterns.md) | Agent 编排模式 |
+| [故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md](../故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
+| [故障诊断/FTA故障树/10-agent-orchestration-patterns.md](../故障诊断/FTA故障树/10-agent-orchestration-patterns.md) | Agent 编排模式 |
 | [故障诊断/topic-febm/04-febm-agent-ticket-processing.md](../故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
 
 ---

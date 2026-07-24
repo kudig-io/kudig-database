@@ -53,7 +53,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/topic-fta/[[技能/job-cronjob-fta.md|job-cronjob-fta]].md
+  path: ../故障诊断/FTA故障树/[[技能/job-cronjob-fta.md|job-cronjob-fta]].md
   label: '故障树: job-cronjob'
 ---
 

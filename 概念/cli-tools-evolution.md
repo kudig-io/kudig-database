@@ -31,6 +31,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - helm-basics
+status: stable
 ---
 
 > **生产环境安全提示**

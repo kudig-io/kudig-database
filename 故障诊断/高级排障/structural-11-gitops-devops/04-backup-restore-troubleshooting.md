@@ -394,8 +394,8 @@ auto_heal_actions:
 
 | 文档类型 | 路径 | 说明 |
 |----------|------|------|
-| FTA | `domain-10-troubleshooting-diagnostics/topic-fta/list/backup-restore-fta.md` | 备份恢复异常故障树 |
-| Domain | `domain-01-cluster-fundamentals/11-etcd-deep-dive.md` | etcd 深度解析 |
+| FTA | `故障诊断/FTA故障树/list/backup-restore-fta.md` | 备份恢复异常故障树 |
+| Domain | `集群基础/11-etcd-deep-dive.md` | etcd 深度解析 |
 
 ---
 
@@ -875,7 +875,7 @@ sla_reporting:
 > **维护团队**: SRE Team / Platform Team
 > **更新日期**: 2026-05-19
 > **下一步**: 集成到备份管理平台，支持自动备份健康度检测和 DR 演练自动化
-| Skills | `domain-10-troubleshooting-diagnostics/topic-skills/backup-restore-skill.md` | 备份恢复技能卡片 |
+| Skills | `故障诊断/topic-skills/backup-restore-skill.md` | 备份恢复技能卡片 |
 
 ---
 

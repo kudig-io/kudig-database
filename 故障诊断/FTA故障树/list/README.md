@@ -1,7 +1,6 @@
 ---
-title: FTA 故障树清单索引 (topic-fta)
+title: FTA 故障树清单索引
 description: '## 概述'
-summary: '本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：'
 category: fta
 tags:
 - k8s
@@ -14,8 +13,6 @@ tags:
 - scheduler
 - controller-manager
 - prometheus
-tier: peripheral
-created: '2026-05-23'
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -45,9 +42,6 @@ prerequisites:
 - gpu-scheduling-basics
 - tls-basics
 - backup-basics
-fta_id: FTA-README-001
-component: Readme
-severity: critical
 cross_refs:
 - type: skill
   path: ../故障诊断/topic-skills/README.md
@@ -59,8 +53,6 @@ cross_refs:
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
 
-
-
 # FTA 故障树清单索引
 
 > **文档数量**: 36 个故障树 | **总大小**: ~1.2 MB | **最后更新**: 2026-03-02
@@ -69,11 +61,11 @@ cross_refs:
 
 ## 概述
 
-本目录包含 [[Kubernetes|Kubernetes]] 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：
+本目录包含 Kubernetes 生产环境各组件的故障树分析（FTA）文档。每个 FTA 文件提供：
 - 完整的 Mermaid 故障树图（OR/AND 门结构）
 - 底事件详细定义（severity/probability/MTTR/detection/remediation）
 - JSON 工作流（支持 Agent 自动化遍历）
-- [[系统基础/速查卡/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]] 版本兼容说明（1.19–1.30）
+- K8s 版本兼容说明（1.19–1.30）
 
 ---
 
@@ -96,8 +88,8 @@ cross_refs:
 |:---|---:|:---|:---:|
 | [pod-fta.md](pod-fta.md) | 58.8 KB | Pod 全生命周期异常（调度/镜像/运行时/健康检查/网络/存储/安全/节点/控制面） | ~80 |
 | [deployment-fta.md](deployment-fta.md) | 21.4 KB | Deployment 滚动更新/副本管理/选择器/镜像拉取 | ~25 |
-| [statefulset-fta.md](statefulset-fta.md) | 20.8 KB | [[StatefulSet|StatefulSet]] 有序部署/持久卷/网络标识/扩缩容 | ~24 |
-| [daemonset-fta.md](daemonset-fta.md) | 29.9 KB | [[DaemonSet|DaemonSet]] 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
+| [statefulset-fta.md](statefulset-fta.md) | 20.8 KB | StatefulSet 有序部署/持久卷/网络标识/扩缩容 | ~24 |
+| [daemonset-fta.md](daemonset-fta.md) | 29.9 KB | DaemonSet 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
 | [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
 
 ### 2. 网络与流量
@@ -115,8 +107,8 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [apiserver-fta.md]([[技能/apiserver-fta.md|apiserver-fta]].md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
-| [scheduler-fta.md]([[技能/scheduler-fta.md|scheduler-fta]].md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
+| [apiserver-fta.md](apiserver-fta.md) | 36.1 KB | API Server 认证/授权/准入/etcd 连接/限流/审计 | ~42 |
+| [scheduler-fta.md](scheduler-fta.md) | 30.3 KB | Scheduler 过滤/打分/抢占/亲和性/资源/扩展点 | ~35 |
 | [controller-manager-fta.md](controller-manager-fta.md) | 29.4 KB | Controller Manager Leader 选举/控制器/同步/限速 | ~34 |
 | [etcd-fta.md](etcd-fta.md) | 27.4 KB | etcd 集群/Raft/存储/快照/认证/性能 | ~32 |
 
@@ -130,7 +122,7 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [rbac-fta.md]([[技能/rbac-fta.md|rbac-fta]].md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
+| [rbac-fta.md](rbac-fta.md) | 24.2 KB | RBAC Role/ClusterRole/Binding/ServiceAccount/权限不足 | ~28 |
 | [certificate-fta.md](certificate-fta.md) | 52.6 KB | 证书签发/轮换/过期/CA 链/cert-manager/TLS | ~60 |
 | [webhook-admission-fta.md](webhook-admission-fta.md) | 50.5 KB | Webhook 超时/TLS/失败策略/副作用/匹配规则 | ~58 |
 | [psp-scc-fta.md](psp-scc-fta.md) | 44.0 KB | PSP/SCC/PSA 策略迁移/安全上下文/特权容器 | ~50 |
@@ -164,7 +156,7 @@ cross_refs:
 
 | 文件 | 大小 | 覆盖范围 | 底事件数 |
 |:---|---:|:---|:---:|
-| [helm-fta.md]([[技能/helm-fta.md|helm-fta]].md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
+| [helm-fta.md](helm-fta.md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
 | [crd-operator-fta.md](crd-operator-fta.md) | 35.9 KB | CRD 定义/Operator/控制器/Finalizer/版本转换 | ~42 |
 | [gitops-argocd-fta.md](gitops-argocd-fta.md) | 30.4 KB | ArgoCD 同步/漂移/Git 仓库/健康检查/RBAC | ~35 |
 
@@ -296,34 +288,32 @@ cross_refs:
 
 ## 相关资源
 
-- [topic-fta README](../[[README]].md) - FTA 方法论主页
+- [topic-fta README](../README.md) - FTA 方法论主页
 - [kubernetes-fta-full-analysis.md](../kubernetes-fta-full-analysis.md) - K8s 全量故障树概览
 - [23-fta-production-quick-start.md](../23-fta-production-quick-start.md) - 生产环境快速启动指南
 
 ## Related
 
-- [[README]]
-- [[README]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[概念/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[技能/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[技能/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[实体/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
+- [[生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

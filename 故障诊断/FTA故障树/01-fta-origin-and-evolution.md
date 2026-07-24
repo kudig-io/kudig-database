@@ -1,50 +1,4 @@
 ---
-title: 第一章：FTA 起源与发展史 [故障诊断]
-description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第一章：FTA 起源与发展史 是什么
-- 如何 第一章：FTA 起源与发展史
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第一章：FTA 起源与发展史 故障排查
-- 第一章：FTA 起源与发展史 排障步骤
-- 第一章：FTA 起源与发展史 根因分析
-trigger_keywords:
-- 第一章：FTA
-- 起源与发展史
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-fta_id: FTA-01_ORIGIN_AND_EVOLUTION-001
-component: 01 Origin And Evolution
-severity: high
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第一章：FTA 起源与发展史
 description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
 category: fta
@@ -71,22 +25,22 @@ trigger_keywords:
 - 第一章：FTA
 - 起源与发展史
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第一章：FTA 起源与发展史
 
 > **所属部分**: 第一部分 - FTA 方法论理论基础  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
 > **上一章**: 无  
-> **下一章**: 第二章：FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md)
+> **下一章**: [第二章：FTA 数学基础与理论模型](./02-fta-mathematical-foundations.md)
 
 ---
 
@@ -167,36 +121,12 @@ FTA 的工程应用受到一系列国际标准的规范和指导：
 |------|-------------|------|
 | **Google SRE Book** | Error Budget、Incident Management | FTA 思想体现在 SLI/SLO/SLA 体系中 |
 | **ITIL v4** | Problem Management、Known Error Database | FTA 可用于构建已知错误数据库 |
-| **CNCF Observability Whitepaper** | 可观测性三支柱 | Metrics/Logs/Traces 是 FTA 底事件的数据来源 |
+| **CNCF [[可观测性/README|observability]] Whitepaper** | 可观测性三支柱 | Metrics/Logs/Traces 是 FTA 底事件的数据来源 |
 | **Chaos Engineering Principles** | 受控实验、稳态假设 | 混沌工程验证 FTA 完整性的方法论基础 |
 
 ---
 
 > **导航**: [下一章 - FTA 数学基础与理论模型 >>](./02-fta-mathematical-foundations.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/problem-solving-architecture.md|problem-solving-architecture]]
-- [[故障诊断/FTA故障树/symptom-vector-matcher.md|symptom-vector-matcher]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|02-fta-mathematical-foundations]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|03-fta-symbol-system-and-standards]]
 
 
 <!-- risk-assessed -->

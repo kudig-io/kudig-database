@@ -114,7 +114,7 @@ cross_refs:
     path: "../domain-N-name/doc.md"
     label: "说明"
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/component-fta.md"
+    path: "../故障诊断/FTA故障树/list/component-fta.md"
     label: "说明"
 ---
 ```

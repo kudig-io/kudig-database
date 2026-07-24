@@ -129,7 +129,7 @@ last_updated: '2026-07-21'
 - [[概念/gpu-scheduling-ai-workloads|GPU 调度与 AI 工作负载]]
 - [[概念/ai-agent-ops-patterns|AI Agent 运维模式]]
 - [[概念/ai-ml-observability|AI/ML 可观测性]]
-- [[概念/Research: Kubernetes AI-ML Infrastructure 2025-2026|AI/ML 基础设施研究]]
+- [[概念/research-2025-2026/01-AI-ML-Infrastructure|AI/ML 基础设施研究]]
 
 ## 故障诊断 (Troubleshooting)
 

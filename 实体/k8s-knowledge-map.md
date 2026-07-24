@@ -118,7 +118,7 @@ graph LR
 | 存储 存储 | 存储 存储基础 | 故障诊断 排障 |
 | 可观测性 可观测 | 集群基础/4/5 | 平台工程 平台运维 |
 | AI基础设施 AI | 工作负载 工作负载 | 02-ai-agents |
-| 故障诊断 排障 | domain-1~8 任一 | 故障诊断/topic-fta/skills |
+| 故障诊断 排障 | domain-1~8 任一 | 故障诊断/FTA故障树/skills |
 | topic-fta | 故障诊断 排障基础 | topic-skills |
 | topic-skills | topic-fta + 故障诊断 | 02-ai-agents |
 

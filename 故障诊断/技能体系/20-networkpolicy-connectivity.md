@@ -108,14 +108,14 @@ related_skills:
   - "SKILL-NET-003"
   - "SKILL-SEC-002"
 fta_refs:
-  - "故障诊断/topic-fta/list/networkpolicy-fta.md"
+  - "故障诊断/FTA故障树/list/networkpolicy-fta.md"
 knowledge_refs:
   - "故障诊断/16-networkpolicy-troubleshooting.md"
   - "故障诊断/25-network-connectivity-troubleshooting.md"
   - "网络/"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/networkpolicy-fta.md"
+    path: "../故障诊断/FTA故障树/list/networkpolicy-fta.md"
     label: "NetworkPolicy 故障树分析"
   - type: "domain"
     path: "../故障诊断/16-networkpolicy-troubleshooting.md"

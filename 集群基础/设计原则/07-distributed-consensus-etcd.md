@@ -58,7 +58,7 @@ cross_refs:
   path: ../集群基础/
   label: '相关知识域: 集群基础'
 - type: fta
-  path: ../故障诊断/topic-fta/list/etcd-fta.md
+  path: ../故障诊断/FTA故障树/list/etcd-fta.md
   label: '故障树: etcd'
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+title: 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 description: 'description: ''| 数字人参数 | 形象、声音、语速、分辨率配置 |'''
 category: publish
 tags:
@@ -15,10 +15,10 @@ audience:
 - 运维工程师
 estimated_read_time: 5min
 intent_queries:
-- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本 是什么
-- 如何 domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 生产运维/topic-publish/video-scripts/ - 数字人视频脚本 是什么
+- 如何 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 trigger_keywords:
-- domain-11-production-operations
+- 生产运维
 - topic-publish
 - video-scripts
 - 数字人视频脚本
@@ -34,7 +34,7 @@ prerequisites:
 
 
 ---
-title: domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+title: 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 description: '| 数字人参数 | 形象、声音、语速、分辨率配置 |'
 category: general
 tags:
@@ -47,18 +47,18 @@ audience:
 - 所有工程师
 estimated_read_time: 5min
 intent_queries:
-- domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本 是什么
-- 如何 domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+- 生产运维/topic-publish/video-scripts/ - 数字人视频脚本 是什么
+- 如何 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 trigger_keywords:
-- domain-11-production-operations/topic-publish/video-scripts
+- 生产运维/topic-publish/video-scripts
 - 数字人视频脚本
 
 tier: peripheral---
 
-# domain-11-production-operations/topic-publish/video-scripts/ - 数字人视频脚本
+# 生产运维/topic-publish/video-scripts/ - 数字人视频脚本
 
 > 本目录存放由 `scripts/video-content-generator.py` 自动生成的数字人播报脚本。
-> 已合并到 domain-11-production-operations/topic-publish/ 下统一管理。
+> 已合并到 生产运维/topic-publish/ 下统一管理。
 > 生成的脚本可直接用于腾讯智影、HeyGen、剪映等平台生成视频。
 
 ## 工作流程
@@ -73,30 +73,30 @@ video-content-generator.py   ← 生成播报脚本
 video-generator.py            ← 调用平台 API 生成视频
     │
     ▼
-domain-11-production-operations/topic-publish/video-output/   ← 输出 MP4 视频
+生产运维/topic-publish/video-output/   ← 输出 MP4 视频
 ```
 
 ## 快速开始
 
 ```bash
 # 第一步：生成视频内容脚本（FTA 故障树）
-python3 scripts/video-content-generator.py --type fta --topic pod-crashloop --output domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md
+python3 scripts/video-content-generator.py --type fta --topic pod-crashloop --output 生产运维/topic-publish/video-scripts/pod-crashloop.md
 
 # 生成 Skills 技能视频脚本
-python3 scripts/video-content-generator.py --type skill --topic node-notready --output domain-11-production-operations/topic-publish/video-scripts/node-notready.md
+python3 scripts/video-content-generator.py --type skill --topic node-notready --output 生产运维/topic-publish/video-scripts/node-notready.md
 
 # 生成 FEBM 取证视频脚本
-python3 scripts/video-content-generator.py --type febm --topic etcd-data-integrity --output domain-11-production-operations/topic-publish/video-scripts/etcd-febm.md
+python3 scripts/video-content-generator.py --type febm --topic etcd-data-integrity --output 生产运维/topic-publish/video-scripts/etcd-febm.md
 
 # 第二步：调用平台生成视频
 python3 scripts/video-generator.py --platform tencent \
-    --script domain-11-production-operations/topic-publish/video-scripts/pod-crashloop.md \
+    --script 生产运维/topic-publish/video-scripts/pod-crashloop.md \
     --avatar professional-engineer \
-    --output domain-11-production-operations/topic-publish/video-output/pod-crashloop.mp4
+    --output 生产运维/topic-publish/video-output/pod-crashloop.mp4
 
 # 批量生成
-python3 scripts/video-generator.py --batch domain-11-production-operations/topic-publish/video-scripts/ \
-    --platform tencent --avatar professional-engineer --output-dir domain-11-production-operations/topic-publish/video-output/
+python3 scripts/video-generator.py --batch 生产运维/topic-publish/video-scripts/ \
+    --platform tencent --avatar professional-engineer --output-dir 生产运维/topic-publish/video-output/
 ```
 
 ## 查看可用 Topic

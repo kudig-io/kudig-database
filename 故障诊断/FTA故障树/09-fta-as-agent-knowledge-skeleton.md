@@ -1,60 +1,4 @@
 ---
-title: 第九章：FTA 作为 AI Agent 的知识骨架 [故障诊断]
-description: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
-summary: 'description: ''**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- prometheus
-- istio
-- ingress
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 25min
-intent_queries:
-- 第九章：FTA 作为 AI Agent 的知识骨架 是什么
-- 如何 第九章：FTA 作为 AI Agent 的知识骨架
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第九章：FTA 作为 AI Agent 的知识骨架 故障排查
-- 第九章：FTA 作为 AI Agent 的知识骨架 排障步骤
-- 第九章：FTA 作为 AI Agent 的知识骨架 根因分析
-trigger_keywords:
-- 第九章：FTA
-- 作为
-- AI
-- Agent
-- 的知识骨架
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- service-mesh-basics
-- prometheus-basics
-- etcd-basics
-fta_id: FTA-09_AS_AGENT_KNOWLEDGE_SKELETON-001
-component: 09 As Agent Knowledge Skeleton
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第九章：FTA 作为 AI Agent 的知识骨架
 description: '**所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用'
 category: fta
@@ -63,9 +7,9 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- etcd
+- prometheus
+- istio
 - ingress
 - agent
 last_updated: 2026-05
@@ -88,22 +32,24 @@ trigger_keywords:
 - Agent
 - 的知识骨架
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- service-mesh-basics
+- prometheus-basics
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # 第九章：FTA 作为 AI Agent 的知识骨架
 
 > **所属部分**: 第三部分 - FTA 在 AI Agent 智能运维中的应用  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: [第八章：AI Agent 时代的运维范式革命](./[[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]].md)  
+> **上一章**: [第八章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md)  
 > **下一章**: [第十章：Agent 编排模式与 FTA 逻辑门映射](./10-agent-orchestration-patterns.md)
 
 ---
@@ -244,7 +190,7 @@ class FTADrivenAgent:
     
     def __init__(self, fta_graph, k8s_client, metrics_client):
         self.fta = fta_graph           # FTA 知识图谱 (Neo4j)
-        self.k8s = k8s_client          # Kubernetes API 客户端
+        self.k8s = k8s_client          # [[实体/kubernetes|kubernetes]] API 客户端
         self.metrics = metrics_client  # Prometheus 客户端
         self.history = []              # 诊断历史
     
@@ -385,9 +331,6 @@ class FTADrivenAgent:
 
 **场景**：监控系统检测到生产环境 Pod 持续 CrashLoopBackOff
 
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
-
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 ═══════════════════════════════════════════════════════════════
@@ -491,30 +434,6 @@ class FTADrivenAgent:
 ---
 
 > **导航**: [<< 上一章 - AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) | [下一章 - Agent 编排模式与 FTA 逻辑门映射 >>](./10-agent-orchestration-patterns.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|07-fta-maintenance-and-evolution]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|10-agent-orchestration-patterns]]
-- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|11-fta-driven-runbook-automation]]
 
 
 <!-- risk-assessed -->

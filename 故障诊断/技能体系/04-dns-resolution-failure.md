@@ -2024,7 +2024,7 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | Kubernetes DNS 架构与 CoreDNS 原理 | `网络/` | 理解 CoreDNS 的工作原理、Corefile 配置语法、插件链机制 |
-| DNS 故障树分析 | `故障诊断/topic-fta/list/dns-fta.md` | 理解 DNS 问题的完整因果链和概率模型 |
+| DNS 故障树分析 | `故障诊断/FTA故障树/list/dns-fta.md` | 理解 DNS 问题的完整因果链和概率模型 |
 | 网络问题深度排查 | `故障诊断/高级排障/structural-` | 超出本 Skill 覆盖范围的深度网络排查方法 |
 | Kubernetes 故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法论 |
 | Service 网络问题 | `SKILL-NET-002` | DNS 正常但 Service 连接失败的场景 |

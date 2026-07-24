@@ -76,7 +76,7 @@ estimated_read_time: 5min
 - domain-9: 平台运维全系列
 - domain-18: 生产运维实践
 - topic-skills: 18 个诊断-修复 Skill
-- 故障诊断/topic-fta/list: 36 个组件故障树
+- 故障诊断/FTA故障树/list: 36 个组件故障树
 
 ---
 
@@ -89,7 +89,7 @@ estimated_read_time: 5min
 - domain-19: 技术白皮书（26 篇）
 
 ### 方法论
-- 故障诊断/topic-fta/01-23: FTA 方法论体系
+- 故障诊断/FTA故障树/01-23: FTA 方法论体系
 - topic-febm: FEBM 取证循证方法论
 
 ### 前沿技术

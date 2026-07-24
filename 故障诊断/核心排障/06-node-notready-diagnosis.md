@@ -68,7 +68,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/topic-fta/list/node-fta.md
+  path: ../故障诊断/FTA故障树/list/node-fta.md
   label: '故障树: node'
 - type: skill
   path: ../故障诊断/topic-skills/01-node-notready.md

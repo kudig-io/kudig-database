@@ -728,7 +728,7 @@ spec:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[生态参考/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -49,7 +49,7 @@ difficulty: "beginner"
 related_docs:
   - path: "../domain-{{N}}-{{name}}/{{doc}}.md"
     desc: "深度文档"
-  - path: "../故障诊断/topic-fta/list/{{component}}-fta.md"
+  - path: "../故障诊断/FTA故障树/list/{{component}}-fta.md"
     desc: "FTA 故障树"
 ---
 ```

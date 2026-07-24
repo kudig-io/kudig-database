@@ -1786,9 +1786,9 @@ difficulty: advanced
 target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
-  - domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/00-configuration-first-methodology.md
-  - domain-10-troubleshooting-diagnostics/topic-fta/list/pod-fta.md
-  - domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md
+  - 故障诊断/topic-structural-trouble-shooting/00-configuration-first-methodology.md
+  - 故障诊断/FTA故障树/list/pod-fta.md
+  - 故障诊断/05-pod-pending-diagnosis.md
 ---
 ```
 

@@ -118,7 +118,7 @@ last_updated: '2026-07-21'
 - [[概念/incident-management-patterns|事件管理模式]]
 - [[概念/K8s 故障分布与 MTTR 基准|K8s 故障分布与 MTTR 基准]]
 - [[概念/velero-disaster-recovery|Velero 灾难恢复]]
-- [[概念/Research: Kubernetes Reliability Engineering 2025-2026|可靠性工程深度研究]]
+- [[概念/research-2025-2026/10-Reliability-Engineering|可靠性工程深度研究]]
 
 ## 清单模式 (Manifest Patterns)
 

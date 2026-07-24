@@ -1,75 +1,4 @@
 ---
-title: FTA 故障树分析方法论与 AI Agent 智能运维实践 (故障诊断)
-description: 'title: FTA 故障树分析方法论与 AI Agent 智能运维实践'
-summary: 'title: FTA 故障树分析方法论与 AI Agent 智能运维实践'
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- apiserver
-- kubelet
-- scheduler
-- prometheus
-- grafana
-- jaeger
-- istio
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 120min
-intent_queries:
-- FTA 故障树分析方法论与 AI Agent 智能运维实践 是什么
-- 如何 FTA 故障树分析方法论与 AI Agent 智能运维实践
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- FTA 故障树分析方法论与 AI Agent 智能运维实践 故障排查
-- FTA 故障树分析方法论与 AI Agent 智能运维实践 排障步骤
-- FTA 故障树分析方法论与 AI Agent 智能运维实践 根因分析
-trigger_keywords:
-- FTA
-- 故障树分析方法论与
-- AI
-- Agent
-- 智能运维实践
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- helm-basics
-- service-mesh-basics
-- prometheus-basics
-- monitoring-basics
-- iac-basics
-- etcd-basics
-- kafka-basics
-- redis-basics
-- mysql-basics
-- gpu-scheduling-basics
-- tls-basics
-- policy-basics
-- logging-basics
-- tracing-basics
-- observability-basics
-fta_id: FTA-FTA_METHODOLOGY_AND_AGENTIC_PRACTICES-001
-component: Fta Methodology And Agentic Practices
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: FTA 故障树分析方法论与 AI Agent 智能运维实践
 description: '# FTA 故障树分析方法论与 AI Agent 智能运维实践'
 category: fta
@@ -78,11 +7,11 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
+- etcd
 - apiserver
-- [[kubelet|kubelet]]
+- kubelet
 - scheduler
-- [[Prometheus|prometheus]]
+- prometheus
 - grafana
 last_updated: 2026-05
 difficulty: advanced
@@ -104,16 +33,30 @@ trigger_keywords:
 - Agent
 - 智能运维实践
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- helm-basics
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- iac-basics
+- etcd-basics
+- kafka-basics
+- redis-basics
+- mysql-basics
+- gpu-scheduling-basics
+- tls-basics
+- policy-basics
+- logging-basics
+- tracing-basics
+- observability-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
 
 # FTA 故障树分析方法论与 AI Agent 智能运维实践
 
@@ -127,7 +70,7 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 目录 -->## 目录
+## 目录
 
 - [第一部分：FTA 方法论理论基础](#第一部分fta-方法论理论基础)
   - [一、FTA 起源与发展史](#一fta-起源与发展史)
@@ -172,9 +115,9 @@ k8s_versions:
 
 ---
 
-<!-- chunk: 一、FTA 起源与发展史 -->## 一、FTA 起源与发展史
+## 一、FTA 起源与发展史
 
-## 1.1 FTA 的诞生背景
+### 1.1 FTA 的诞生背景
 
 故障树分析（Fault Tree Analysis, FTA）是一种**自顶向下的演绎式系统安全分析方法**。它以系统中某个**不期望事件**（顶事件）为起点，逐层分解导致该事件发生的所有可能原因，直至找到最基本的根本原因（底事件），形成一棵逻辑清晰的"故障树"。
 
@@ -192,7 +135,7 @@ FTA 的诞生源于人类对复杂系统可靠性的严苛要求：
 | **2010s** | SRE 运动将 FTA 与运维自动化结合 | Google 发布《Site Reliability Engineering》，FTA 成为故障分析方法论之一 |
 | **2020s** | FTA + AI Agent + AIOps 融合时代 | FTA 从静态分析工具演变为智能运维系统的知识骨架 |
 
-## 1.2 FTA 在 IT 运维领域的演进路径
+### 1.2 FTA 在 IT 运维领域的演进路径
 
 FTA 从传统安全工程进入 IT 运维领域，经历了三个关键阶段：
 
@@ -231,7 +174,7 @@ FTA 从传统安全工程进入 IT 运维领域，经历了三个关键阶段：
 - Agent 从每次问题中学习，自动更新和优化 FTA 知识库
 - 代表实践：云厂商智能运维平台、开源 AIOps 项目
 
-## 1.3 核心标准体系
+### 1.3 核心标准体系
 
 FTA 的工程应用受到一系列国际标准的规范和指导：
 
@@ -256,9 +199,9 @@ FTA 的工程应用受到一系列国际标准的规范和指导：
 
 ---
 
-<!-- chunk: 二、FTA 数学基础与理论模型 -->## 二、FTA 数学基础与理论模型
+## 二、FTA 数学基础与理论模型
 
-## 2.1 布尔代数基础
+### 2.1 布尔代数基础
 
 FTA 的核心数学工具是**布尔代数**。故障树中的每个事件可被视为一个布尔变量（发生 = 1，未发生 = 0），逻辑门则对应布尔运算。
 
@@ -300,7 +243,7 @@ TE = BE₁ + BE₂ + (BE₃ · BE₄)
 含义: API Server 不可用 = 进程崩溃 OR etcd 问题 OR (证书过期 AND 自动续期失效)
 ```
 
-## 2.2 概率论在 FTA 中的应用
+### 2.2 概率论在 FTA 中的应用
 
 当每个底事件被赋予问题概率后，可以通过布尔代数计算顶事件的发生概率。
 
@@ -358,7 +301,7 @@ k/n 投票门:
   - 建议优先加固网络冗余，引入双CNI或网络多平面架构
 ```
 
-## 2.3 最小割集理论
+### 2.3 最小割集理论
 
 **最小割集（Minimal Cut Sets, MCS）** 是 FTA 定量分析的核心概念。
 
@@ -428,7 +371,7 @@ TE-2: 应用服务不可用
   - 建议所有关键组件至少部署 2 副本，跨可用区分布
 ```
 
-## 2.4 重要度分析
+### 2.4 重要度分析
 
 重要度分析用于量化每个底事件对顶事件的影响程度，指导运维资源的优先分配。
 
@@ -489,7 +432,7 @@ RPN 范围: 1 ~ 1000
 
 > **关键洞察**：证书过期的 FV 重要度较低（因为有自动续期），但 Birnbaum 重要度极高（一旦发生则全集群影响），说明应重点保障自动续期机制的可靠性。
 
-## 2.5 可靠性核心指标
+### 2.5 可靠性核心指标
 
 FTA 分析的最终目标是量化和提升系统可靠性。以下是核心可靠性指标及其在 Kubernetes 运维中的映射：
 
@@ -516,9 +459,9 @@ FTA 分析的最终目标是量化和提升系统可靠性。以下是核心可�
 
 ---
 
-<!-- chunk: 三、FTA 符号体系与标准规范 -->## 三、FTA 符号体系与标准规范
+## 三、FTA 符号体系与标准规范
 
-## 3.1 标准符号定义
+### 3.1 标准符号定义
 
 FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑关系。以下是 IEC 61025 标准定义的核心符号：
 
@@ -607,7 +550,7 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-## 3.2 事件编号与命名规范
+### 3.2 事件编号与命名规范
 
 在企业级 FTA 实践中，统一的编号和命名规范是团队协作和工具化的基础。推荐以下规范（与本知识库 [kubernetes-fta-full-analysis.md](./kubernetes-fta-full-analysis.md) 一致）：
 
@@ -650,7 +593,7 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 | 避免模糊描述 | "内存使用率超过 95%" | "内存不够" | 可量化，可设告警阈值 |
 | 包含影响范围 | "全集群 CoreDNS 解析超时" | "DNS 慢" | 影响范围明确 |
 
-## 3.3 故障树绘制规范
+### 3.3 故障树绘制规范
 
 **层次结构规范**：
 
@@ -692,9 +635,9 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 
 ---
 
-<!-- chunk: 四、FTA 方法论核心原则 -->## 四、FTA 方法论核心原则
+## 四、FTA 方法论核心原则
 
-## 4.1 演绎法（Top-Down）与归纳法（Bottom-Up）
+### 4.1 演绎法（Top-Down）与归纳法（Bottom-Up）
 
 FTA 本质上是一种**演绎法**，但在工程实践中常与**归纳法**（如 FMEA）配合使用。
 
@@ -745,7 +688,7 @@ FTA 本质上是一种**演绎法**，但在工程实践中常与**归纳法**�
 4. [定量分析] 结合 FMEA 的问题率数据进行 FTA 概率计算
 ```
 
-## 4.2 MECE 完备性原则
+### 4.2 MECE 完备性原则
 
 **MECE（Mutually Exclusive, Collectively Exhaustive）** 是 FTA 质量的核心保障。
 
@@ -792,7 +735,7 @@ Collectively Exhaustive (完备):
 | 完备性 | 与 FMEA 结果对比，检查是否有未纳入的故障模式 | FMEA-FTA 交叉验证 |
 | 完备性 | 混沌工程验证，注入超出 FTA 范围的问题 | Chaos Monkey / Litmus |
 
-## 4.3 可观测性原则
+### 4.3 可观测性原则
 
 **每个底事件必须是可观测的**。这是 FTA 从理论走向工程的关键原则。
 
@@ -823,7 +766,7 @@ Collectively Exhaustive (完备):
 | 证书过期 | ✅ 到期时间 | ✅ 错误日志 | ❌ | ✅ |
 | 存储问题 | ✅ IO 延迟 | ✅ 主要 | ❌ | ✅ PVC Event |
 
-## 4.4 层次化设计原则
+### 4.4 层次化设计原则
 
 ```
 原则: 每一层的抽象粒度应当一致
@@ -849,7 +792,7 @@ Collectively Exhaustive (完备):
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## 4.5 独立性原则
+### 4.5 独立性原则
 
 ```
 原则: 同一逻辑门下的子事件之间不应存在因果依赖
@@ -886,9 +829,9 @@ Collectively Exhaustive (完备):
 
 ---
 
-<!-- chunk: 五、FTA 构建完整流程 -->## 五、FTA 构建完整流程
+## 五、FTA 构建完整流程
 
-## 5.1 总体流程概览
+### 5.1 总体流程概览
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -912,7 +855,7 @@ Collectively Exhaustive (完备):
 - 分析深度规格     - 架构依赖图       - 逻辑关系表       - 重要度排序       - 版本变更日志
 ```
 
-## 5.2 阶段一：系统定义
+### 5.2 阶段一：系统定义
 
 系统定义是 FTA 构建的基础，决定了分析的范围和深度。
 
@@ -987,7 +930,7 @@ system_boundary:
   4. 进一步分解的收益不足以覆盖维护成本
 ```
 
-## 5.3 阶段二：故障模式识别
+### 5.3 阶段二：故障模式识别
 
 **方法 1：FMEA 协同分析**
 
@@ -1063,7 +1006,7 @@ Kubernetes 组件依赖图 → 问题传播路径:
   (单点问题扇出效应最大)
 ```
 
-## 5.4 阶段三：故障树构建
+### 5.4 阶段三：故障树构建
 
 **构建策略对比**：
 
@@ -1150,7 +1093,7 @@ bottom_event:
     auto_heal_rate: 0.70  # 自动修复成功率
 ```
 
-## 5.5 阶段四：定性/定量分析
+### 5.5 阶段四：定性/定量分析
 
 **定性分析流程**：
 
@@ -1180,7 +1123,7 @@ bottom_event:
 5. 输出: 风险优先级矩阵 + 加固建议清单
 ```
 
-## 5.6 阶段五：验证与优化
+### 5.6 阶段五：验证与优化
 
 **三重验证法**：
 
@@ -1207,9 +1150,9 @@ bottom_event:
 
 ---
 
-<!-- chunk: 六、FTA 验证与质量保证 -->## 六、FTA 验证与质量保证
+## 六、FTA 验证与质量保证
 
-## 6.1 静态验证
+### 6.1 静态验证
 
 **完备性检查**：
 
@@ -1246,7 +1189,7 @@ bottom_event:
 | 重复事件 | 同一事件在多处出现 | 去重检查，必要时使用转移符号 |
 | 层级交叉 | 底事件出现在非底层 | 检查树的拓扑结构 |
 
-## 6.2 动态验证
+### 6.2 动态验证
 
 **混沌工程验证法**：
 
@@ -1299,7 +1242,7 @@ spec:
 └──────────────┴────────────────────────┴─────────────────────────┘
 ```
 
-## 6.3 FTA 工具链
+### 6.3 FTA 工具链
 
 | 工具 | 类型 | 特点 | 适用场景 |
 |------|------|------|---------|
@@ -1366,9 +1309,9 @@ ORDER BY be.probability DESC
 
 ---
 
-<!-- chunk: 七、FTA 维护与演进策略 -->## 七、FTA 维护与演进策略
+## 七、FTA 维护与演进策略
 
-## 7.1 触发更新的场景
+### 7.1 触发更新的场景
 
 | 触发条件 | 紧急程度 | 更新范围 | 示例 |
 |---------|---------|---------|------|
@@ -1378,7 +1321,7 @@ ORDER BY be.probability DESC
 | **组织架构调整** | 🟡 计划内 | 更新 Owner 分配 | SRE 团队重组 |
 | **定期审查** | 🟢 季度 | 全面审查 | 季度 FTA Review 会议 |
 
-## 7.2 版本管理策略
+### 7.2 版本管理策略
 
 ```
 推荐: 使用 Git 管理 FTA 文档，遵循语义化版本号
@@ -1395,17 +1338,17 @@ ORDER BY be.probability DESC
   hotfix/xxx    ← 热修复（紧急补充遗漏）
 
 变更日志:
-  <!-- chunk: [2.1.0] - 2026-02-25 -->## [2.1.0] - 2026-02-25
-  #<!-- chunk: Added -->## Added
+  ## [2.1.0] - 2026-02-25
+  ### Added
   - BE-9.1: GPU 驱动问题（新增 AI 工作负载子树）
   - BE-9.2: CUDA 版本不兼容
-  #<!-- chunk: Changed -->## Changed
+  ### Changed
   - BE-2.3: OOMKilled 概率从 0.05 更新为 0.03（优化后降低）
-  #<!-- chunk: Fixed -->## Fixed
+  ### Fixed
   - IE-4.2: 修正 DNS 问题逻辑门从 AND 改为 OR
 ```
 
-## 7.3 Owner 制度
+### 7.3 Owner 制度
 
 ```
 FTA Owner 分配模型:
@@ -1436,7 +1379,7 @@ FTA Owner 分配模型:
 └──────────────────────────────────────────────────────┘
 ```
 
-## 7.4 评审流程
+### 7.4 评审流程
 
 ```
 FTA 变更评审流程 (类比代码 Code Review):
@@ -1471,9 +1414,9 @@ FTA 变更评审流程 (类比代码 Code Review):
 
 ---
 
-<!-- chunk: 八、AI Agent 时代的运维范式革命 -->## 八、AI Agent 时代的运维范式革命
+## 八、AI Agent 时代的运维范式革命
 
-## 8.1 传统运维模式的瓶颈
+### 8.1 传统运维模式的瓶颈
 
 当云原生基础设施规模持续增长、微服务架构复杂度指数上升时，传统运维模式面临系统性瓶颈：
 
@@ -1514,7 +1457,7 @@ AI Agent + FTA 打破不可能三角:
 | **P0 MTTR** | 30-120 min | 5-30 min | 1-10 min | < 5 min |
 | **自动化率** | 0% | 30-50% | 50-70% | 85-95% |
 
-## 8.2 AI Agent + FTA 的核心价值
+### 8.2 AI Agent + FTA 的核心价值
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
@@ -1547,7 +1490,7 @@ AI Agent + FTA 打破不可能三角:
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-## 8.3 为什么 FTA 是 Agent 的最佳知识表示
+### 8.3 为什么 FTA 是 Agent 的最佳知识表示
 
 在众多知识表示方法中，FTA 对于运维 Agent 具有独特优势：
 
@@ -1587,9 +1530,9 @@ AI Agent + FTA 打破不可能三角:
 
 ---
 
-<!-- chunk: 九、FTA 作为 AI Agent 的知识骨架 -->## 九、FTA 作为 AI Agent 的知识骨架
+## 九、FTA 作为 AI Agent 的知识骨架
 
-## 9.1 逻辑门 → Agent 编排策略映射
+### 9.1 逻辑门 → Agent 编排策略映射
 
 FTA 的逻辑门类型天然对应 Agent 的执行策略：
 
@@ -1647,7 +1590,7 @@ FTA 的逻辑门类型天然对应 Agent 的执行策略：
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-## 9.2 FTA 驱动的 Agent 执行引擎架构
+### 9.2 FTA 驱动的 Agent 执行引擎架构
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -1862,12 +1805,9 @@ class FTADrivenAgent:
             )
 ```
 
-## 9.3 实战案例：Pod CrashLoopBackOff 全自愈流程
+### 9.3 实战案例：Pod CrashLoopBackOff 全自愈流程
 
 **场景**：监控系统检测到生产环境 Pod 持续 CrashLoopBackOff
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl edit/patch`：修改运行中的资源
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -1971,9 +1911,9 @@ class FTADrivenAgent:
 ```
 ---
 
-<!-- chunk: 十、Agent 编排模式与 FTA 逻辑门映射 -->## 十、Agent 编排模式与 FTA 逻辑门映射
+## 十、Agent 编排模式与 FTA 逻辑门映射
 
-## 10.1 单 Agent 模式（简单问题）
+### 10.1 单 Agent 模式（简单问题）
 
 ```
 适用场景:
@@ -1991,7 +1931,7 @@ FTA 路径:
   TE: 证书过期导致服务不可用
   └── BE: TLS 证书过期
       → 检查: openssl x509 -enddate -noout -in /path/to/cert
-      → 修复: cert-manager 手动触发续期
+      → 修复: [[cert-manager|cert-manager]] 手动触发续期
 
 Agent 行为:
   1. 接收告警: "TLS handshake error"
@@ -2001,7 +1941,7 @@ Agent 行为:
   5. 验证恢复
 ```
 
-## 10.2 多 Agent 并行模式（OR 门问题）
+### 10.2 多 Agent 并行模式（OR 门问题）
 
 ```
 适用场景:
@@ -2048,7 +1988,7 @@ Agent 行为:
   T+12s: 执行修复
 ```
 
-## 10.3 多 Agent 顺序模式（AND 门问题）
+### 10.3 多 Agent 顺序模式（AND 门问题）
 
 ```
 适用场景:
@@ -2084,7 +2024,7 @@ Agent 行为:
   → 排除脑裂路径，回退到 OR 门探索其他可能
 ```
 
-## 10.4 层次化 Agent 架构
+### 10.4 层次化 Agent 架构
 
 对于大规模生产环境，推荐采用分层 Agent 架构：
 
@@ -2155,7 +2095,7 @@ Agent 间通信协议:
       "rollback_on_failure": true
     }
 ```
-## 10.5 Agent 冲突解决机制
+### 10.5 Agent 冲突解决机制
 
 ```
 场景: 两个 Agent 诊断出不同的根因，且修复动作互相矛盾
@@ -2183,9 +2123,9 @@ Agent 间通信协议:
 
 ---
 
-<!-- chunk: 十一、FTA 驱动的 Runbook 自动化 -->## 十一、FTA 驱动的 Runbook 自动化
+## 十一、FTA 驱动的 Runbook 自动化
 
-## 11.1 传统 Runbook 的局限
+### 11.1 传统 Runbook 的局限
 
 ```
 传统 Runbook 的问题:
@@ -2210,7 +2150,7 @@ Agent 间通信协议:
      ❌ 重复诊断步骤分散在多个 Runbook 中
 ```
 
-## 11.2 FTA 动态 Runbook 模型
+### 11.2 FTA 动态 Runbook 模型
 
 ```
 FTA 动态 Runbook:
@@ -2238,7 +2178,7 @@ FTA 动态 Runbook:
 └──────────────┴──────────────────┴───────────────────────────────┘
 ```
 
-## 11.3 自动生成 Runbook 算法
+### 11.3 自动生成 Runbook 算法
 
 ```python
 def generate_runbook_from_fta(top_event_id, fta_graph):
@@ -2328,7 +2268,7 @@ def generate_runbook_from_fta(top_event_id, fta_graph):
     return runbook
 ```
 
-## 11.4 自动生成 Runbook 实战：etcd 集群问题
+### 11.4 自动生成 Runbook 实战：etcd 集群问题
 
 ```yaml
 # 自动生成的 Runbook (基于 FTA TE-1 → IE-1.1 → BE-1.2 路径)
@@ -2472,9 +2412,9 @@ spec:
 
 ---
 
-<!-- chunk: 十二、FTA 与 AIOps 平台集成架构 -->## 十二、FTA 与 AIOps 平台集成架构
+## 十二、FTA 与 AIOps 平台集成架构
 
-## 12.1 企业级 AIOps 架构设计
+### 12.1 企业级 AIOps 架构设计
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -2557,7 +2497,7 @@ spec:
 │                                                                            │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
-## 12.2 核心组件设计细节
+### 12.2 核心组件设计细节
 
 **FTA 推理引擎**：
 
@@ -2670,7 +2610,7 @@ class FTAInferenceEngine:
         )
 ```
 
-## 12.3 与 Prometheus 集成
+### 12.3 与 Prometheus 集成
 
 **FTA 底事件 → Prometheus 指标映射**：
 
@@ -2731,7 +2671,7 @@ fta_event_mappings:
         severity: warning
 ```
 
-## 12.4 与工单系统集成
+### 12.4 与工单系统集成
 
 ```yaml
 # fta-ticket-integration.yaml
@@ -2745,19 +2685,19 @@ ticket_workflow:
     template:
       title: "[{{ severity }}] {{ top_event.name }} - {{ root_cause.name }}"
       description: |
-        <!-- chunk: FTA 自动诊断报告 -->## FTA 自动诊断报告
+        ## FTA 自动诊断报告
         
         **顶事件**: {{ top_event.id }} - {{ top_event.name }}
         **根因**: {{ root_cause.id }} - {{ root_cause.name }}
         **诊断路径**: {{ fta_path }}
         **置信度**: {{ confidence }}%
         
-        #<!-- chunk: 证据 -->## 证据
+        ### 证据
         {% for evidence in evidences %}
         - {{ evidence }}
         {% endfor %}
         
-        #<!-- chunk: 建议修复方案 -->## 建议修复方案
+        ### 建议修复方案
         {% for action in healing_actions %}
         - {{ action.id }}: {{ action.description }} (风险: {{ action.risk_level }})
         {% endfor %}
@@ -2782,14 +2722,14 @@ ticket_workflow:
   auto_resolve:
     condition: "Agent 修复成功 AND 验证通过"
     resolution_template: |
-      <!-- chunk: 自动修复完成 -->## 自动修复完成
+      ## 自动修复完成
       
       **修复动作**: {{ action.id }} - {{ action.description }}
       **执行结果**: 成功
       **MTTR**: {{ mttr }}
       **验证状态**: 通过
       
-      <!-- chunk: 后续建议 -->## 后续建议
+      ## 后续建议
       {{ follow_up_recommendations }}
     
   # 4. 工单升级
@@ -2805,9 +2745,9 @@ ticket_workflow:
 
 ---
 
-<!-- chunk: 十三、智能工单处理的 AI Agent 架构 -->## 十三、智能工单处理的 AI Agent 架构
+## 十三、智能工单处理的 AI Agent 架构
 
-## 13.1 工单生命周期全自动化
+### 13.1 工单生命周期全自动化
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -2832,7 +2772,7 @@ ticket_workflow:
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 13.2 NLP 意图识别与 FTA 映射
+### 13.2 NLP 意图识别与 FTA 映射
 
 ```python
 class TicketToFTAMapper:
@@ -2922,7 +2862,7 @@ Agent 决策:
   → 置信度 0.90，直接跳过中间层探索
 ```
 
-## 13.3 人机协同分级模型
+### 13.3 人机协同分级模型
 
 | 问题级别 | FTA 特征 | Agent 角色 | 人类角色 | 协同方式 | 自动化率 |
 |---------|---------|-----------|---------|---------|---------|
@@ -2969,13 +2909,9 @@ ChatOps 升级消息模板:
   ──────────────────────────────────────
 ```
 
-## 13.4 完整工单自动处理案例
+### 13.4 完整工单自动处理案例
 
 **场景**：用户工单 "数据库连接超时，应用无法正常工作"
-
-> ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
-> - `kubectl exec`：进入容器执行命令，可能改变容器状态
-> - `kubectl label/annotate`：改元数据可能影响选择器/控制器
 
 ```
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
@@ -3109,9 +3045,9 @@ ChatOps 升级消息模板:
 
 ---
 
-<!-- chunk: 十四、构建 FTA 系统的工程化方法 -->## 十四、构建 FTA 系统的工程化方法
+## 十四、构建 FTA 系统的工程化方法
 
-## 14.1 工程化实施总流程
+### 14.1 工程化实施总流程
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
@@ -3136,7 +3072,7 @@ ChatOps 升级消息模板:
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-## 14.2 技术栈选型指南
+### 14.2 技术栈选型指南
 
 | 技术层次 | 推荐技术 | 备选方案 | 选型理由 |
 |---------|---------|---------|---------|
@@ -3150,7 +3086,7 @@ ChatOps 升级消息模板:
 | **工单系统** | Jira + PagerDuty | ServiceNow, OpsGenie | API 丰富，与 ChatOps 集成成熟 |
 | **前端 Dashboard** | Grafana + 自建 | 纯自建 React 应用 | Grafana 可视化 FTA 状态，自建补充特殊需求 |
 
-## 14.3 MVP 实施路径
+### 14.3 MVP 实施路径
 
 **阶段 1：基础建设**
 
@@ -3215,7 +3151,7 @@ ChatOps 升级消息模板:
   - FTA 知识库季度自动更新
 ```
 
-## 14.4 数据模型设计
+### 14.4 数据模型设计
 
 ```cypher
 // Neo4j 数据模型 - FTA 知识图谱
@@ -3249,9 +3185,9 @@ CREATE INDEX ON :Alert(name)
 
 ---
 
-<!-- chunk: 十五、FTA 质量评估与优化 -->## 十五、FTA 质量评估与优化
+## 十五、FTA 质量评估与优化
 
-## 15.1 核心质量指标
+### 15.1 核心质量指标
 
 | 指标 | 定义 | 计算方式 | 目标值 | 数据来源 |
 |------|------|---------|-------|---------|
@@ -3263,7 +3199,7 @@ CREATE INDEX ON :Alert(name)
 | **MTTD 改善** | 平均检测时间改善比例 | (旧MTTD - 新MTTD) / 旧MTTD × 100% | > 50% | 监控系统 |
 | **MTTR 改善** | 平均修复时间改善比例 | (旧MTTR - 新MTTR) / 旧MTTR × 100% | > 60% | 工单系统 |
 
-## 15.2 质量监控 Dashboard
+### 15.2 质量监控 Dashboard
 
 ```yaml
 # Grafana Dashboard 配置 (关键面板)
@@ -3303,7 +3239,7 @@ panels:
       red: "> 0"
 ```
 
-## 15.3 持续优化方法
+### 15.3 持续优化方法
 
 **A/B 测试**：
 
@@ -3357,9 +3293,9 @@ chaos_experiment_schedule:
 
 ---
 
-<!-- chunk: 十六、团队能力建设 -->## 十六、团队能力建设
+## 十六、团队能力建设
 
-## 16.1 组织架构设计
+### 16.1 组织架构设计
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
@@ -3397,7 +3333,7 @@ chaos_experiment_schedule:
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-## 16.2 技能矩阵
+### 16.2 技能矩阵
 
 | 角色 | 必备技能 | 加分项 | 培养路径 |
 |------|---------|--------|---------|
@@ -3406,7 +3342,7 @@ chaos_experiment_schedule:
 | **Agent 开发** | Python、Kubernetes API、LLM/AI 框架 | 强化学习、分布式系统、自然语言处理 | 后端工程师 → Agent 框架培训 → 项目实战 |
 | **平台工程师** | DevOps、CI/CD、监控系统、Kubernetes 运维 | 大规模系统运维、性能调优 | 运维工程师 → 平台工程培训 → 系统集成 |
 
-## 16.3 培训体系
+### 16.3 培训体系
 
 ```
 FTA 智能运维培训路径:
@@ -3455,9 +3391,9 @@ Level 3: Agent 开发 (Agent 开发工程师)
 
 ---
 
-<!-- chunk: 十七、行业标杆案例分析 -->## 十七、行业标杆案例分析
+## 十七、行业标杆案例分析
 
-## 17.1 Google SRE 的故障分析实践
+### 17.1 Google SRE 的故障分析实践
 
 Google 是 FTA 思想在 IT 运维领域应用的先驱。其核心实践体现在以下方面：
 
@@ -3488,7 +3424,7 @@ Google SRE 的 FTA 相关实践:
   - 自动化处理覆盖 > 80% 的已知问题
 ```
 
-## 17.2 Netflix 的混沌工程 + FTA
+### 17.2 Netflix 的混沌工程 + FTA
 
 ```
 Netflix 的实践模型:
@@ -3530,7 +3466,7 @@ Netflix 的实践模型:
    - 每年发现并修复 200+ 个弹性问题
 ```
 
-## 17.3 云厂商智能运维平台参考
+### 17.3 云厂商智能运维平台参考
 
 ```
 云平台智能运维的典型架构:
@@ -3580,9 +3516,9 @@ Netflix 的实践模型:
 
 ---
 
-<!-- chunk: 十八、典型场景完整方案 -->## 十八、典型场景完整方案
+## 十八、典型场景完整方案
 
-## 18.1 多云 Kubernetes 集群故障管理
+### 18.1 多云 Kubernetes 集群故障管理
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -3619,7 +3555,7 @@ Agent 方案:
   - 调用 kubectl (自建集群)
   - 跨云问题关联分析
 ```
-## 18.2 有状态服务故障自愈
+### 18.2 有状态服务故障自愈
 
 ```
 场景: MySQL 高可用集群脑裂
@@ -3654,9 +3590,9 @@ Agent 自愈流程:
 
 ---
 
-<!-- chunk: 十九、避坑指南与常见误区 -->## 十九、避坑指南与常见误区
+## 十九、避坑指南与常见误区
 
-## 19.1 FTA 构建阶段的误区
+### 19.1 FTA 构建阶段的误区
 
 ```
 ❌ 误区 1: FTA 越详细越好
@@ -3713,7 +3649,7 @@ Agent 自愈流程:
            还是必须全部同时发生才导致问题(AND)?"
 ```
 
-## 19.2 Agent 开发阶段的误区
+### 19.2 Agent 开发阶段的误区
 
 ```
 ❌ 误区 4: 完全依赖 AI Agent，不设人工兜底
@@ -3762,7 +3698,7 @@ Agent 自愈流程:
      - 定期团队培训和知识分享
 ```
 
-## 19.3 检查清单：FTA 建设 Top 10 最佳实践
+### 19.3 检查清单：FTA 建设 Top 10 最佳实践
 
 ```
 □  1. 从最高影响的顶事件开始 (P0 优先于 P2)
@@ -3783,9 +3719,9 @@ Agent 自愈流程:
 
 ---
 
-<!-- chunk: 二十、FTA + 大语言模型的新机遇 -->## 二十、FTA + 大语言模型的新机遇
+## 二十、FTA + 大语言模型的新机遇
 
-## 20.1 LLM 增强 FTA 推理
+### 20.1 LLM 增强 FTA 推理
 
 大语言模型为 FTA 带来的核心提升：
 
@@ -3817,7 +3753,7 @@ LLM 增强 FTA 推理:
            并添加 -XX:+HeapDumpOnOutOfMemoryError 便于后续分析"
 ```
 
-## 20.2 自然语言构建 FTA
+### 20.2 自然语言构建 FTA
 
 ```
 未来愿景: 运维人员用自然语言描述问题场景，LLM 自动生成 FTA
@@ -3846,7 +3782,7 @@ LLM 输出 (结构化 FTA):
   - 人工审核确认 → 导入知识图谱
 ```
 
-## 20.3 多模态诊断
+### 20.3 多模态诊断
 
 ```
 未来方向: 日志 + 指标 + 拓扑 + 变更记录联合分析
@@ -3880,9 +3816,9 @@ LLM 输出 (结构化 FTA):
 
 ---
 
-<!-- chunk: 二十一、自进化的智能运维系统 -->## 二十一、自进化的智能运维系统
+## 二十一、自进化的智能运维系统
 
-## 21.1 强化学习优化 Agent 决策
+### 21.1 强化学习优化 Agent 决策
 
 ```
 将 FTA 导航建模为强化学习问题:
@@ -3907,7 +3843,7 @@ LLM 输出 (结构化 FTA):
   - 诊断时间从 3 分钟降到 1 分钟
 ```
 
-## 21.2 联邦学习共享 FTA 知识
+### 21.2 联邦学习共享 FTA 知识
 
 ```
 场景: 多个组织/集群之间共享 FTA 经验
@@ -3942,7 +3878,7 @@ LLM 输出 (结构化 FTA):
   - 保护数据隐私的同时共享运维智慧
 ```
 
-## 21.3 数字孪生问题仿真
+### 21.3 数字孪生问题仿真
 
 ```
 概念: 在虚拟环境中模拟生产问题，测试 FTA 和 Agent
@@ -3976,9 +3912,9 @@ LLM 输出 (结构化 FTA):
 
 ---
 
-<!-- chunk: 二十二、行业标准化建议 -->## 二十二、行业标准化建议
+## 二十二、行业标准化建议
 
-## 22.1 CNCF 标准化提议
+### 22.1 CNCF 标准化提议
 
 ```
 建议 CNCF 推动以下标准化工作:
@@ -4002,7 +3938,7 @@ LLM 输出 (结构化 FTA):
    - 安全边界的标准规范
 ```
 
-## 22.2 OpenTelemetry 集成
+### 22.2 OpenTelemetry 集成
 
 ```
 建议在 OpenTelemetry 中增加 FTA 语义约定:
@@ -4027,9 +3963,9 @@ fta.evidence: "container_memory_usage > limit"
 
 ---
 
-<!-- chunk: 第七部分：生产级落地基线与评估 -->## 第七部分：生产级落地基线与评估
+## 第七部分：生产级落地基线与评估
 
-## 二十三、生产级落地基线（2026Q2 更新）
+### 二十三、生产级落地基线（2026Q2 更新）
 
 | 域 | 目标状态 | 衡量指标 | 快速验收 | 常见缺口 |
 |:---|:---|:---|:---|:---|
@@ -4051,7 +3987,7 @@ fta.evidence: "container_memory_usage > limit"
 - `runbook_contract.yaml`: 统一 Runbook 契约（输入、幂等、超时、回滚、审计字段）。
 - `coverage_report.md`: 顶事件覆盖率、观测信号绑定率、自动化率、审计留存天数。
 
-## 23.x Kubernetes 版本适配基线（1.19-1.30）
+#### 23.x Kubernetes 版本适配基线（1.19-1.30）
 
 **适配目标**：确保 FTA 在 1.19–1.30 的生产集群中可运行、可验证、可自动化；每棵 FTA 树必须标注对应版本差异与替代路径。
 
@@ -4071,13 +4007,16 @@ fta.evidence: "container_memory_usage > limit"
 - **1.24–1.27**：
   - Dockershim 已移除，运行时以 `containerd/CRI-O` 为主，诊断与日志路径需适配。
 
+> ⚠️ **弃用警告**: `PodSecurityPolicy` 已在 Kubernetes v1.25 中正式移除。
+> 请使用 [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/) 替代。
+
   - PodSecurityPolicy 在 1.25 移除，安全策略需映射到 Pod Security Admission / OPA Gatekeeper。
   - Ingress/CronJob 等已完成 API 迁移，排查时默认以 `v1` 为准。
 - **1.28–1.30**：
   - 默认以稳定 API 为基准，历史 beta API 基本完成清理；需要在 FTA 中显式标注“已移除 API 的替代路径”。
   - 安全与准入策略以内置 PSA 与外部策略引擎并存为主，需补充策略冲突与审计链路。
 
-## 二十四、演练与证据闭环自检
+### 二十四、演练与证据闭环自检
 
 **季度演练（GameDay）模板**
 - 场景选择：至少覆盖 1 个控制面顶事件、1 个数据面顶事件、1 个安全相关顶事件。
@@ -4114,7 +4053,7 @@ fta.evidence: "container_memory_usage > limit"
 
 ---
 
-<!-- chunk: 附录 A：FTA 术语表 -->## 附录 A：FTA 术语表
+## 附录 A：FTA 术语表
 
 | 中文术语 | 英文术语 | 缩写 | 定义 |
 |---------|---------|------|------|
@@ -4145,9 +4084,9 @@ fta.evidence: "container_memory_usage > limit"
 
 ---
 
-<!-- chunk: 附录 B：工具与资源清单 -->## 附录 B：工具与资源清单
+## 附录 B：工具与资源清单
 
-## FTA 建模工具
+### FTA 建模工具
 
 | 工具名称 | 类型 | 特点 | 获取方式 |
 |---------|------|------|---------|
@@ -4157,7 +4096,7 @@ fta.evidence: "container_memory_usage > limit"
 | PTC Windchill FTA | 商业 | PLM 集成 | PTC 授权 |
 | Isograph FaultTree+ | 商业 | 全功能 FTA/ETA | https://www.isograph.com |
 
-## 知识图谱工具
+### 知识图谱工具
 
 | 工具名称 | 类型 | 用途 |
 |---------|------|------|
@@ -4166,7 +4105,7 @@ fta.evidence: "container_memory_usage > limit"
 | Cypher Query Language | 查询语言 | Neo4j 图查询 |
 | Apache TinkerPop/Gremlin | 开源 | 通用图数据库查询 |
 
-## Agent 开发框架
+### Agent 开发框架
 
 | 框架 | 特点 | 适用场景 |
 |------|------|---------|
@@ -4175,7 +4114,7 @@ fta.evidence: "container_memory_usage > limit"
 | AutoGen (Microsoft) | 多 Agent 对话 | LLM 增强推理 |
 | Semantic Kernel | .NET + Python 框架 | 企业级 Agent |
 
-## 混沌工程工具
+### 混沌工程工具
 
 | 工具 | 平台 | 特点 |
 |------|------|------|
@@ -4186,9 +4125,9 @@ fta.evidence: "container_memory_usage > limit"
 
 ---
 
-<!-- chunk: 附录 C：参考文献 -->## 附录 C：参考文献
+## 附录 C：参考文献
 
-## 标准与规范
+### 标准与规范
 
 1. IEC 61025:2006 - Fault tree analysis (FTA)
 2. IEC 61508:2010 - Functional safety of E/E/PE safety-related systems
@@ -4198,7 +4137,7 @@ fta.evidence: "container_memory_usage > limit"
 6. ARP 4761 - Guidelines for conducting the safety assessment process on civil airborne systems
 7. NIST SP 800-30 - Guide for Conducting Risk Assessments
 
-## 书籍
+### 书籍
 
 1. Kumamoto, H. & Henley, E.J. (1996). "Probabilistic Risk Assessment and Management for Engineers and Scientists"
 2. Ericson, C.A. (2015). "Hazard Analysis Techniques for System Safety" (2nd Edition)
@@ -4206,7 +4145,7 @@ fta.evidence: "container_memory_usage > limit"
 4. Beeson, B. & Murphy, N. et al. (2016). "Site Reliability Engineering" - Google/O'Reilly
 5. Beyer, B. et al. (2018). "The Site Reliability Workbook" - Google/O'Reilly
 
-## 论文与白皮书
+### 论文与白皮书
 
 1. Watson, H.A. (1961). "Launch Control Safety Study" - Bell Telephone Laboratories
 2. WASH-1400 (NUREG-75/014). "Reactor Safety Study" - U.S. Nuclear Regulatory Commission
@@ -4217,9 +4156,9 @@ fta.evidence: "container_memory_usage > limit"
 
 ---
 
-<!-- chunk: 附录 D：FTA 模板与检查表 -->## 附录 D：FTA 模板与检查表
+## 附录 D：FTA 模板与检查表
 
-## D.1 FTA 顶事件定义模板
+### D.1 FTA 顶事件定义模板
 
 ```yaml
 # 顶事件定义模板
@@ -4245,7 +4184,7 @@ top_event:
     escalation: "{升级路径}"
 ```
 
-## D.2 底事件定义模板
+### D.2 底事件定义模板
 
 ```yaml
 # 底事件定义模板
@@ -4288,7 +4227,7 @@ basic_event:
       verification: "{验证命令}"
 ```
 
-## D.3 FTA 评审检查表
+### D.3 FTA 评审检查表
 
 ```
 FTA 评审检查表 (Review Checklist)
@@ -4325,30 +4264,5 @@ Agent 友好性:
   □ 修复动作标注了自动化程度
   □ 高风险操作有审批标记
   □
-
----
-
-<!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/fta-execution-engine.md|fta-execution-engine]]
-- [[故障诊断/FTA故障树/fta-index.md|fta-index]]
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
-- [[故障诊断/FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
-
 
 <!-- risk-assessed -->

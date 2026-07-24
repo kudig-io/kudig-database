@@ -28,7 +28,7 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 
 每个编号 Domain 均提供入口级生产就绪运维指南，另有关键跨域 Runbook：
 
-- **Per-Domain 生产就绪指南**：`domain-01..20/99-production-readiness-operations-guide.md`
+- **Per-Domain 生产就绪指南**：各知识域目录下的 `99-production-readiness-operations-guide.md`
 - **证书 / PKI 生命周期 Runbook**：`集群基础/03-control-plane/34-certificate-pki-lifecycle-runbook.md`
 - **集群升级 Runbook**：`集群基础/03-control-plane/35-cluster-upgrade-runbook.md`
 - **灾难恢复与业务连续性 Runbook**：`可靠性/09-disaster-recovery-playbooks/03-disaster-recovery-bc-runbook.md`
@@ -88,7 +88,7 @@ bash scripts/start-web.sh --stop     # 停止服务
 ├── entities/        # 提炼知识：组件实体、CNCF 工具、云产品、术语词典
 ├── skills/          # 提炼知识：诊断排障、最佳实践、培训体系、FTA 方法
 ├── synthesis/       # 提炼知识：跨领域综合分析
-├── domain-01..20/   # 源文档：20 个技术域深度文档
+├── 集群基础/ ... 应用模式/   # 源文档：20 个技术域深度文档（中文目录名）
 ├── docs/            # 源文档：映射与规范文档
 ├── _meta/           # 元数据、语料配置（taxonomy、schema、corpus-config、journal）
 ├── _reports/        # 质量报告与评估、发布素材

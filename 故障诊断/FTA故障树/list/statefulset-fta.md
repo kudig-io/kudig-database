@@ -1,60 +1,64 @@
 ---
-title: StatefulSet 异常故障树分析 (skills)
+title: StatefulSet 异常故障树分析
 description: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
-summary: '- **范围**：有序部署、PVC 绑定、存储与网络、镜像与探针、控制器状态。'
-category: general
+category: fta
 tags:
-- k8s
-- etcd
-- kubelet
-- controller-manager
+- fta
+- troubleshooting
 - statefulset
-- rbac
-- rag
-tier: core
-created: '2026-05-23'
+- pvc
+- ordinal
+- volume
+- storage
+- etcd
+- apiserver
+- kubelet
 last_updated: 2026-05
-difficulty: intermediate
-reading_level: intermediate
+difficulty: advanced
+reading_level: advanced
 audience:
-- 所有工程师
+- SRE
+- 运维工程师
+- 技术支持
 estimated_read_time: 5min
 intent_queries:
 - StatefulSet 异常故障树分析 是什么
 - 如何 StatefulSet 异常故障树分析
+- StatefulSet 异常故障树分析 根因分析
+- StatefulSet 异常故障树分析 故障树
 trigger_keywords:
 - StatefulSet
 - 异常故障树分析
+- fta
 prerequisites:
 - kubectl-basics
+- troubleshooting-methodology
 - etcd-basics
 fta_id: FTA-STATEFULSET-001
 component: Statefulset
 severity: critical
+k8s_versions:
+- '1.28'
+- '1.29'
+- '1.30'
+- '1.31'
+- '1.32'
+authors:
+- name: KUDIG Team
+  role: contributor
+cross_refs:
+- type: domain
+  path: ../工作负载/03-statefulset-advanced-operations.md
+  label: '深度文档: 03-statefulset-advanced-operations'
+- type: structural
+  path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md
+  label: '结构化排障: 03-statefulset-troubleshooting'
 ---
 
 > **生产环境安全提示**
 >
 > 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
 
-
-
-
----
-title: "StatefulSet 异常故障树分析"
-category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 StatefulSet Pod 非 Running --..."
-tags: ["k8s", "fta", "troubleshooting"]
-sources: ["故障诊断/topic-fta/list/statefulset-fta.md"]
-created: 2026-05-21
-updated: 2026-05-21
-lifecycle: reviewed
-lifecycle_changed: "2026-05-21"
-tier: supporting
-base_confidence: 0.7
----
-
-# StatefulSet 异常故障树分析
 
 <!-- condition: kubectl get pods -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\"Running\")]} {.metadata.name}{\"\n\"}{end}' 显示 StatefulSet Pod 非 Running -->
 
@@ -169,103 +173,518 @@ flowchart TD
   "flow_steps": [
     { "name": "开始", "action": "start", "step": "start_sts_fta", "next_step": "event_sts_abnormal" },
     { "name": "顶事件: StatefulSet 异常", "action": "event", "step": "event_sts_abnormal", "description": "Pod 未就绪/有序部署卡住/PVC 异常", "next_step": "gate_root_or" },
-    { "name": "根因 OR 门", "action": "gate_or", "step": "gate_root_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["cat_pvc", "cat_pod", "cat_order", "cat_net",
+    { "name": "根因 OR 门", "action": "gate_or", "step": "gate_root_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["cat_pvc", "cat_pod", "cat_order", "cat_net", "cat_ctrl"] },
 
-## 生产案例
+    { "name": "PVC/存储异常", "action": "event", "step": "cat_pvc", "description": "持久化存储问题", "next_step": "gate_pvc_or" },
+    { "name": "PVC OR 门", "action": "gate_or", "step": "gate_pvc_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_pvc_bind_fail", "evt_mount_fail", "evt_expand_fail"] },
 
-### 案例1: StatefulSet 滚动更新卡住 - 有序部署阻塞
+    { "name": "PVC 绑定失败", "action": "event", "step": "evt_pvc_bind_fail", "description": "PVC 无法绑定 PV", "next_step": "gate_pvc_bind_or" },
+    { "name": "PVC 绑定 OR 门", "action": "gate_or", "step": "gate_pvc_bind_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_sc_missing", "evt_pv_insufficient", "evt_topo_conflict"] },
+    {
+      "name": "StorageClass 不存在",
+      "action": "event",
+      "step": "evt_sc_missing",
+      "severity": "critical",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": ["ProvisioningFailed"],
+        "metrics": ["kube_persistentvolumeclaim_status_phase{phase='Pending'}"],
+        "logs": ["storageclass not found"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 StorageClass 是否存在", "验证 volumeClaimTemplates 配置"],
+        "auto_actions": ["创建 StorageClass"]
+      }
+    },
+    {
+      "name": "PV 容量不足",
+      "action": "event",
+      "step": "evt_pv_insufficient",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": ["ProvisioningFailed"],
+        "metrics": ["kube_persistentvolume_status_phase"],
+        "logs": ["no persistent volumes available", "insufficient capacity"]
+      },
+      "remediation": {
+        "manual_steps": ["检查存储后端容量", "扩展存储池"],
+        "auto_actions": ["触发存储扩容"]
+      }
+    },
+    {
+      "name": "拓扑约束冲突",
+      "action": "event",
+      "step": "evt_topo_conflict",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": ["FailedScheduling"],
+        "metrics": [],
+        "logs": ["volume node affinity conflict"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 PV 拓扑约束", "验证 Pod 调度节点"],
+        "auto_actions": ["调整拓扑配置"]
+      },
+      "next_step": "gate_topo_and"
+    },
+    { "name": "拓扑 AND 门", "action": "gate_and", "step": "gate_topo_and", "control": "and_gate", "gate_type": "AND", "next_steps": ["evt_sc_no_topo", "evt_pod_wrong_zone"] },
+    {
+      "name": "存储类不支持拓扑",
+      "action": "event",
+      "step": "evt_sc_no_topo",
+      "severity": "medium",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["使用支持 WaitForFirstConsumer 的 StorageClass"],
+        "auto_actions": ["更新 StorageClass"]
+      }
+    },
+    {
+      "name": "Pod 调度到错误可用区",
+      "action": "event",
+      "step": "evt_pod_wrong_zone",
+      "severity": "medium",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["添加 topologySpreadConstraints", "配置 volumeBindingMode"],
+        "auto_actions": ["重新调度 Pod"]
+      }
+    },
 
-**时间线**:
-- 15:00 StatefulSet 滚动更新，从 pod-2 开始
-- 15:05 pod-2 更新成功，但 pod-1 一直未 Ready
-- 15:10 确认根因: pod-1 的 PVC 挂载失败(存储后端故障)
-- 15:20 存储恢复后 pod-1 Ready，更新继续到 pod-0
+    { "name": "卷挂载失败/只读", "action": "event", "step": "evt_mount_fail", "description": "卷挂载问题", "next_step": "gate_mount_or" },
+    { "name": "挂载 OR 门", "action": "gate_or", "step": "gate_mount_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_csi_fail", "evt_mount_perm", "evt_vol_corrupt"] },
+    {
+      "name": "CSI 驱动异常",
+      "action": "event",
+      "step": "evt_csi_fail",
+      "severity": "critical",
+      "probability": "medium",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": ["FailedMount", "FailedAttachVolume"],
+        "metrics": [],
+        "logs": ["csi: failed to", "driver not found"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 CSI 驱动 Pod 状态", "验证 CSI 配置"],
+        "auto_actions": ["重启 CSI 驱动"]
+      }
+    },
+    {
+      "name": "挂载权限错误",
+      "action": "event",
+      "step": "evt_mount_perm",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": ["FailedMount"],
+        "metrics": [],
+        "logs": ["permission denied", "read-only file system"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 fsGroup 和 securityContext", "验证存储权限"],
+        "auto_actions": ["调整权限配置"]
+      }
+    },
+    {
+      "name": "卷损坏/只读",
+      "action": "event",
+      "step": "evt_vol_corrupt",
+      "severity": "critical",
+      "probability": "rare",
+      "mttr_minutes": 60,
+      "detection": {
+        "events": ["VolumeResizeFailed"],
+        "metrics": [],
+        "logs": ["read-only", "I/O error", "filesystem corrupted"]
+      },
+      "remediation": {
+        "manual_steps": ["检查存储健康状态", "从备份恢复"],
+        "auto_actions": ["触发存储修复"]
+      }
+    },
 
-**根因链**:
+    {
+      "name": "存储扩容失败",
+      "action": "event",
+      "step": "evt_expand_fail",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 30,
+      "detection": {
+        "events": ["VolumeResizeFailed", "FileSystemResizeFailed"],
+        "metrics": [],
+        "logs": ["failed to expand volume"]
+      },
+      "remediation": {
+        "manual_steps": ["检查存储类是否支持扩容", "验证后端容量"],
+        "auto_actions": ["重试扩容"]
+      }
+    },
+
+    { "name": "Pod 启动异常", "action": "event", "step": "cat_pod", "description": "Pod 无法正常运行", "next_step": "gate_pod_or" },
+    { "name": "Pod OR 门", "action": "gate_or", "step": "gate_pod_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_image_fail", "evt_probe_fail", "evt_crashloop", "evt_init_fail"] },
+
+    { "name": "镜像拉取失败", "action": "event", "step": "evt_image_fail", "description": "容器镜像问题", "next_step": "gate_image_or" },
+    { "name": "镜像 OR 门", "action": "gate_or", "step": "gate_image_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_image_notfound", "evt_image_auth"] },
+    {
+      "name": "镜像不存在",
+      "action": "event",
+      "step": "evt_image_notfound",
+      "severity": "critical",
+      "probability": "common",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": ["ErrImagePull", "ImagePullBackOff"],
+        "metrics": ["kube_pod_container_status_waiting_reason{reason='ErrImagePull'}"],
+        "logs": ["manifest unknown"]
+      },
+      "remediation": {
+        "manual_steps": ["检查镜像名称和标签"],
+        "auto_actions": ["修正镜像配置"]
+      }
+    },
+    {
+      "name": "仓库认证失败",
+      "action": "event",
+      "step": "evt_image_auth",
+      "severity": "high",
+      "probability": "common",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": ["ErrImagePull"],
+        "metrics": [],
+        "logs": ["unauthorized"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 imagePullSecrets"],
+        "auto_actions": ["更新凭据"]
+      }
+    },
+
+    {
+      "name": "探针失败",
+      "action": "event",
+      "step": "evt_probe_fail",
+      "severity": "high",
+      "probability": "common",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": ["Unhealthy"],
+        "metrics": ["kube_pod_status_ready==0"],
+        "logs": ["probe failed"]
+      },
+      "remediation": {
+        "manual_steps": ["检查探针配置", "验证应用健康端点"],
+        "auto_actions": ["调整探针参数"]
+      }
+    },
+    {
+      "name": "CrashLoopBackOff",
+      "action": "event",
+      "step": "evt_crashloop",
+      "severity": "critical",
+      "probability": "common",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": ["BackOff", "CrashLoopBackOff"],
+        "metrics": ["kube_pod_container_status_waiting_reason{reason='CrashLoopBackOff'}"],
+        "logs": ["Back-off restarting"]
+      },
+      "remediation": {
+        "manual_steps": ["检查容器日志", "验证配置"],
+        "auto_actions": ["回滚版本"]
+      }
+    },
+    {
+      "name": "Init 容器失败",
+      "action": "event",
+      "step": "evt_init_fail",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": ["BackOff"],
+        "metrics": ["kube_pod_init_container_status_waiting"],
+        "logs": ["Init:"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 Init 容器日志", "验证依赖服务"],
+        "auto_actions": ["修复 Init 容器"]
+      }
+    },
+
+    { "name": "有序部署异常", "action": "event", "step": "cat_order", "description": "有序启动问题", "next_step": "gate_order_or" },
+    { "name": "有序 OR 门", "action": "gate_or", "step": "gate_order_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_order_stuck", "evt_partition_bad", "evt_policy_bad"] },
+
+    {
+      "name": "有序部署卡住",
+      "action": "event",
+      "step": "evt_order_stuck",
+      "severity": "critical",
+      "probability": "common",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": [],
+        "metrics": ["kube_statefulset_status_replicas_ready < kube_statefulset_status_replicas"],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["检查前序 Pod 状态", "考虑使用 Parallel 策略"],
+        "auto_actions": ["修复前序 Pod"]
+      },
+      "next_step": "gate_order_and"
+    },
+    { "name": "有序 AND 门", "action": "gate_and", "step": "gate_order_and", "control": "and_gate", "gate_type": "AND", "next_steps": ["evt_prev_pod_not_ready", "evt_ordered_policy"] },
+    {
+      "name": "前序 Pod 未就绪",
+      "action": "event",
+      "step": "evt_prev_pod_not_ready",
+      "severity": "high",
+      "probability": "common",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": [],
+        "metrics": ["kube_pod_status_ready{pod=~'.*-0'}==0"],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["优先修复前序 Pod"],
+        "auto_actions": ["重启前序 Pod"]
+      }
+    },
+    {
+      "name": "OrderedReady 策略生效",
+      "action": "event",
+      "step": "evt_ordered_policy",
+      "severity": "medium",
+      "probability": "common",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["评估是否可以使用 Parallel 策略"],
+        "auto_actions": ["调整 podManagementPolicy"]
+      }
+    },
+
+    { "name": "RollingUpdate 分区策略异常", "action": "event", "step": "evt_partition_bad", "description": "分区更新问题", "next_step": "gate_partition_or" },
+    { "name": "分区 OR 门", "action": "gate_or", "step": "gate_partition_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_partition_wrong", "evt_update_stuck_partition"] },
+    {
+      "name": "partition 设置错误",
+      "action": "event",
+      "step": "evt_partition_wrong",
+      "severity": "medium",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["检查 updateStrategy.rollingUpdate.partition 值"],
+        "auto_actions": ["调整 partition"]
+      }
+    },
+    {
+      "name": "更新停滞在 partition",
+      "action": "event",
+      "step": "evt_update_stuck_partition",
+      "severity": "medium",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": [],
+        "metrics": ["kube_statefulset_status_update_revision != kube_statefulset_status_current_revision"],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["逐步降低 partition 值完成更新"],
+        "auto_actions": ["设置 partition=0"]
+      }
+    },
+
+    {
+      "name": "Pod 管理策略错误",
+      "action": "event",
+      "step": "evt_policy_bad",
+      "severity": "medium",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["检查 podManagementPolicy 设置"],
+        "auto_actions": ["调整策略"]
+      }
+    },
+
+    { "name": "网络/服务依赖异常", "action": "event", "step": "cat_net", "description": "网络和服务发现问题", "next_step": "gate_net_or" },
+    { "name": "网络 OR 门", "action": "gate_or", "step": "gate_net_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_headless_bad", "evt_dns_fail", "evt_pod_comm_fail"] },
+
+    { "name": "Headless Service 配置错误", "action": "event", "step": "evt_headless_bad", "description": "Headless Service 问题", "next_step": "gate_headless_or" },
+    { "name": "Headless OR 门", "action": "gate_or", "step": "gate_headless_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_clusterip_not_none", "evt_selector_mismatch"] },
+    {
+      "name": "ClusterIP 设置非 None",
+      "action": "event",
+      "step": "evt_clusterip_not_none",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["检查 Service 的 clusterIP 是否为 None"],
+        "auto_actions": ["修正 Service 配置"]
+      }
+    },
+    {
+      "name": "Selector 不匹配",
+      "action": "event",
+      "step": "evt_selector_mismatch",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": []
+      },
+      "remediation": {
+        "manual_steps": ["检查 Service selector 与 StatefulSet labels"],
+        "auto_actions": ["修正 selector"]
+      }
+    },
+
+    {
+      "name": "DNS 解析异常",
+      "action": "event",
+      "step": "evt_dns_fail",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 15,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": ["NXDOMAIN", "could not resolve"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 CoreDNS 状态", "验证 Headless Service"],
+        "auto_actions": ["参考 dns-fta.md"]
+      }
+    },
+    {
+      "name": "Pod 间通信失败",
+      "action": "event",
+      "step": "evt_pod_comm_fail",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": [],
+        "metrics": [],
+        "logs": ["connection refused", "timeout"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 NetworkPolicy", "验证 CNI 状态"],
+        "auto_actions": ["检查网络配置"]
+      }
+    },
+
+    { "name": "控制器状态异常", "action": "event", "step": "cat_ctrl", "description": "控制器问题", "next_step": "gate_ctrl_or" },
+    { "name": "控制器 OR 门", "action": "gate_or", "step": "gate_ctrl_or", "control": "or_gate", "gate_type": "OR", "next_steps": ["evt_sts_controller", "evt_api_fail", "evt_rbac_deny"] },
+    {
+      "name": "StatefulSet 控制器异常",
+      "action": "event",
+      "step": "evt_sts_controller",
+      "severity": "critical",
+      "probability": "rare",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": [],
+        "metrics": ["kube_pod_container_status_ready{pod=~'kube-controller-manager.*'}"],
+        "logs": ["statefulset controller: error"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 kube-controller-manager 状态"],
+        "auto_actions": ["重启控制器"]
+      }
+    },
+    {
+      "name": "API Server 异常",
+      "action": "event",
+      "step": "evt_api_fail",
+      "severity": "critical",
+      "probability": "medium",
+      "mttr_minutes": 20,
+      "detection": {
+        "events": [],
+        "metrics": ["apiserver_request_total{code=~'5..'}"],
+        "logs": ["connection refused"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 API Server 状态"],
+        "auto_actions": ["参考 apiserver-fta.md"]
+      }
+    },
+    {
+      "name": "RBAC 权限不足",
+      "action": "event",
+      "step": "evt_rbac_deny",
+      "severity": "high",
+      "probability": "medium",
+      "mttr_minutes": 10,
+      "detection": {
+        "events": ["Forbidden"],
+        "metrics": [],
+        "logs": ["forbidden"]
+      },
+      "remediation": {
+        "manual_steps": ["检查 ServiceAccount 权限"],
+        "auto_actions": ["修复 RBAC"]
+      }
+    },
+
+    { "name": "结束", "action": "end", "step": "end_sts_fta" }
+  ]
+}
 ```
-StatefulSet滚动更新(逆序) → pod-1 PVC挂载失败
-→ pod-1未Ready → 有序部署阻塞(等待pod-1)
-→ pod-0未更新 → 整个更新卡住
-```
 
-**修复**:
-```bash
-# 🟢 检查 StatefulSet 状态
-kubectl get statefulset ${STS} -n ${NS} -o wide
-kubectl rollout status statefulset/${STS} -n ${NS}
-# 🟢 检查卡住的 Pod
-kubectl describe pod ${STS}-1 -n ${NS} | grep -A10 "Events"
-# 🟡 强制继续(跳过等待)
-kubectl patch statefulset ${STS} -n ${NS} -p '{"spec":{"updateStrategy":{"rollingUpdate":{"partition":2}}}}'
-```
+---
 
-### 案例2: StatefulSet PVC 未释放导致扩容失败
-
-**现象**: 缩容后重新扩容，新 Pod 挂载了旧数据
-
-**根因**: StatefulSet 缩容不会自动删除 PVC，重新扩容时复用旧 PVC
-
-**修复**:
-```bash
-# 🟢 检查 PVC 状态
-kubectl get pvc -n ${NS} -l app=${STS}
-# 🔴 删除旧 PVC (数据将丢失!)
-kubectl delete pvc data-${STS}-${ORDINAL} -n ${NS}
-# 🟢 验证新 Pod 状态
-kubectl get pod ${STS}-${ORDINAL} -n ${NS} -w
-```
-
-## 预防与监控
-
-### 告警规则
-
-```yaml
-groups:
-- name: statefulset-alerts
-  rules:
-  - alert: StatefulSetUpdateStuck
-    expr: kube_statefulset_status_current_revision != kube_statefulset_status_update_revision
-    for: 30m
-    labels:
-      severity: warning
-  - alert: StatefulSetReplicasMismatch
-    expr: kube_statefulset_status_replicas_ready != kube_statefulset_status_replicas
-    for: 15m
-    labels:
-      severity: critical
-```
-
-### 预防措施
-
-| 措施 | 说明 | 优先级 |
-|------|------|--------|
-| 存储高可用 | 使用分布式存储避免单点 | P0 |
-| 更新策略 | partition 控制分批更新 | P0 |
-| PVC 管理 | 缩容前确认数据处理 | P1 |
-| 健康检查 | readinessProbe 确保服务可用 | P1 |
-
-## 面试要点
-
-1. **Q: StatefulSet 与 Deployment 的核心区别？**
-   A: 稳定网络标识(pod-0/1/2) → 稳定持久存储(每 Pod 独立 PVC) → 有序部署/缩容 → 有序滚动更新(逆序)
-
-2. **Q: StatefulSet 更新卡住的排查？**
-   A: 检查当前更新到哪个序号 → 查看卡住 Pod 事件 → 确认 PVC 挂载 → 检查 readinessProbe → 确认存储后端健康
-
-3. **Q: StatefulSet 缩容后 PVC 如何处理？**
-   A: 缩容不自动删除 PVC(保护数据) → 手动删除或保留 → 重新扩容会复用旧 PVC → 1.27+ 支持 persistentVolumeClaimRetentionPolicy
-
-## 相关链接
-
-- [[技能/fta-方法论/methodology/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[技能/fta-方法论/execution-engine/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
-- [[ts-workloads|工作负载故障排查]]
-
-## Related
-
-- [[statefulset]] — StatefulSet
-- [[kubelet]] — kubelet
-- [[etcd]] — etcd
+## 版本适配（1.19–1.30）
+- **1.19–1.23**：关注 PVC 绑定与 Headless Service 解析路径差异；旧版 CSI 事件需补充；volumeBindingMode 设置重要。
+- **1.24–1.27**：容器运行时切换后，挂载日志路径需更新为 `containerd` 相关；minReadySeconds 字段可用。
+- **1.28–1.30**：仅保留稳定 API，滚动策略与分区字段需校验；PVC 自动删除策略可用。
+- **共性**：遵循 `fta-methodology-and-agentic-practices.md` 中的"版本适配基线"。
 
 
 <!-- risk-assessed -->

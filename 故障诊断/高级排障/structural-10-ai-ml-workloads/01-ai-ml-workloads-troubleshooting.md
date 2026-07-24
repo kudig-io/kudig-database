@@ -1019,9 +1019,9 @@ echo "成本优化报告已生成: $COST_REPORT"
 **相关文档**：
 | 文档类型 | 路径 | 说明 |
 |----------|------|------|
-| FTA | `domain-10-troubleshooting-diagnostics/topic-fta/list/gpu-fta.md` | GPU 工作负载故障树 |
-| Structural | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md` | Kubeflow 故障排查 |
-| Structural | `domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md` | MPI Operator 故障排查 |
+| FTA | `故障诊断/FTA故障树/list/gpu-fta.md` | GPU 工作负载故障树 |
+| Structural | `故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/02-kubeflow-troubleshooting.md` | Kubeflow 故障排查 |
+| Structural | `故障诊断/topic-structural-trouble-shooting/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md` | MPI Operator 故障排查 |
 
 ---
 
@@ -1574,7 +1574,7 @@ verification: |
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
+- [[生态参考/topic-index/ai-gpu-index|AI / GPU 基础设施知识图谱索引]]
 
 
 <!-- risk-assessed -->

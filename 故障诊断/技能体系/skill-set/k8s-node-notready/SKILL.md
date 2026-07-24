@@ -186,7 +186,7 @@ bash scripts/verify-node.sh <node-name>
 
 | 资源 | 路径 |
 |------|------|
-| FTA 问题树 | [故障诊断/topic-fta/list/node-fta.md](../../故障诊断/FTA故障树/list/node-fta.md) |
+| FTA 问题树 | [故障诊断/FTA故障树/list/node-fta.md](../../故障诊断/FTA故障树/list/node-fta.md) |
 | 版本兼容矩阵 | [reference/version-matrix.md](./reference/version-matrix.md) |
 | 诊断工作流详情 | [reference/diagnostic-workflow.md](./reference/diagnostic-workflow.md) |
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |

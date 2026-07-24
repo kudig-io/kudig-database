@@ -254,7 +254,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
         type: "fta"
         relevance: 0.90
       - path: "故障诊断/07-oom-memory-diagnosis.md"
@@ -344,7 +344,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#四te-3-pod启动失败-p1"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#四te-3-pod启动失败-p1"
         type: "fta"
         relevance: 0.90
 
@@ -407,7 +407,7 @@ symptom_mappings:
       - path: "故障诊断/07-oom-memory-diagnosis.md"
         type: "domain"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
         type: "fta"
         relevance: 0.90
 
@@ -540,7 +540,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-10-service-comprehensive-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#三te-2-应用服务不可用-p0"
         type: "fta"
         relevance: 0.90
 
@@ -597,7 +597,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-03-networking/02-dns-troubleshooting.md"
         type: "structural"
         relevance: 0.98
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1"
         type: "fta"
         relevance: 0.90
 
@@ -654,7 +654,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#六te-5-存储访问失败-p1"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#六te-5-存储访问失败-p1"
         type: "fta"
         relevance: 0.90
 
@@ -837,7 +837,7 @@ symptom_mappings:
       - path: "网络/42-terway-usage-guide.md"
         type: "structural"
         relevance: 0.90
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络问题-p1-新增"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#十te-9-terway-网络问题-p1-新增"
         type: "fta"
         relevance: 0.95
 
@@ -899,7 +899,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格问题-p1-新增"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#十一te-10-asm-服务网格问题-p1-新增"
         type: "fta"
         relevance: 0.95
 
@@ -950,7 +950,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/kubernetes-fta-full-analysis-v2.md#九te-8-监控告警异常-p2"
+      - path: "故障诊断/FTA故障树/kubernetes-fta-full-analysis-v2.md#九te-8-监控告警异常-p2"
         type: "fta"
         relevance: 0.90
 
@@ -1011,7 +1011,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-03-networking/03-service-ingress-troubleshooting.md"
         type: "structural"
         relevance: 0.95
-      - path: "故障诊断/topic-fta/list/ingress-fta.md"
+      - path: "故障诊断/FTA故障树/list/ingress-fta.md"
         type: "fta"
         relevance: 0.90
 
@@ -1062,7 +1062,7 @@ symptom_mappings:
       - path: "故障诊断/高级排障/structural-05-workloads/03-statefulset-troubleshooting.md"
         type: "structural"
         relevance: 0.85
-      - path: "故障诊断/topic-fta/list/statefulset-fta.md"
+      - path: "故障诊断/FTA故障树/list/statefulset-fta.md"
         type: "fta"
         relevance: 0.80
 
@@ -1206,7 +1206,7 @@ symptom_mappings:
             expected: "无错误事件"
 
     related_docs:
-      - path: "故障诊断/topic-fta/list/backup-restore-fta.md"
+      - path: "故障诊断/FTA故障树/list/backup-restore-fta.md"
         type: "fta"
         relevance: 0.95
       - path: "故障诊断/高级排障/structural-11-gitops-devops/04-backup-restore-troubleshooting.md"
@@ -1257,10 +1257,10 @@ symptom_mappings:
             expected: "VPA admission webhook Pod Running"
 
     related_docs:
-      - path: "故障诊断/topic-fta/list/hpa-fta.md"
+      - path: "故障诊断/FTA故障树/list/hpa-fta.md"
         type: "fta"
         relevance: 0.90
-      - path: "故障诊断/topic-fta/list/vpa-fta.md"
+      - path: "故障诊断/FTA故障树/list/vpa-fta.md"
         type: "fta"
         relevance: 0.85
 ```

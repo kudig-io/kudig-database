@@ -1236,7 +1236,7 @@ chmod +x terway-e2e-test.sh
 |:---|:---|
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Terway CNI 入门学习任务 |
 | [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [故障诊断/FTA故障树/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 
 ## Related
 

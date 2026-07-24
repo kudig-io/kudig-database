@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - helm-basics
 - gitops-basics
+status: reviewed
 ---
 
 > **生产环境安全提示**

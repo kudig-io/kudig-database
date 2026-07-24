@@ -117,7 +117,7 @@ python3 generate.py --priority all \
 # 2. 验证覆盖率
 python3 validators/coverage_checker.py \
   --skills-dir 故障诊断/topic-skills \
-  --fta-dir 故障诊断/topic-fta/list \
+  --fta-dir 故障诊断/FTA故障树/list \
   --corpus-dir 故障诊断/topic-qa-corpus/generated
 ```
 

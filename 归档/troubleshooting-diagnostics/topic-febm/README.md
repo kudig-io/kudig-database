@@ -129,10 +129,10 @@ FTA vs FEBM:
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-fta](../domain-10-troubleshooting-diagnostics/topic-fta/README.md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
-| [domain-05-security-compliance](../domain-05-security-compliance/) | 安全合规知识域 |
-| [domain-06-observability](../domain-06-observability/) | 可观测性体系 |
-| [topic-structural-trouble-shooting](../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
+| [topic-fta](../故障诊断/FTA故障树/README.md) | FTA 故障树分析方法论（演绎法视角，与FEBM互补） |
+| [安全](../安全/) | 安全合规知识域 |
+| [可观测性](../可观测性/) | 可观测性体系 |
+| [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
 
 ---
 
@@ -164,24 +164,24 @@ Agent 工程师:  第四章(工单Agent) → 第五章(建设方法论) → topi
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
-- domain-03-networking-traffic MOC — Cross-reference
+- 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[概念/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[元数据/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
-- domain-08-release-change-management MOC — Cross-reference
+- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- 发布变更 MOC — Cross-reference
 - [[技能/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[平台工程/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[实体/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[domain-19-landscape-references/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/terway-index|Terway 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/higress-index|Higress 知识图谱索引]]
+- [[生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[生态参考/topic-index/terway-index|Terway 知识图谱索引]]
+- [[生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[生态参考/topic-index/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -65,7 +65,7 @@ related_docs:
 - path: 04-storageclass-dynamic-provisioning.md
   type: depth
   desc: StorageClass 动态供给
-- path: ../故障诊断/topic-fta/list/csi-fta.md
+- path: ../故障诊断/FTA故障树/list/csi-fta.md
   type: fta
   desc: 持久化存储故障树
 ---

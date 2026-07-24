@@ -2,8 +2,8 @@
 """
 主生成脚本：从 Skills 和 FTA 生成命令输出→诊断 I-O 对语料
 Usage:
-    python generate.py --priority P0 --output ../../故障诊断/topic-qa-corpus/generated/
-    python generate.py --priority all --output ../../故障诊断/topic-qa-corpus/generated/
+    python generate.py --priority P0 --output ../../故障诊断/QA语料/generated/
+    python generate.py --priority all --output ../../故障诊断/QA语料/generated/
 """
 
 import argparse
@@ -207,7 +207,7 @@ def render_markdown(io_pairs: List[Dict], priority: str) -> str:
 
     lines.append("")
     lines.append("---")
-    lines.append("*本文件由 scripts/corpus-generator/generate.py 自动生成*")
+    lines.append("*本文件由 脚本/corpus-generator/generate.py 自动生成*")
     lines.append("")
 
     return "\n".join(lines)
@@ -220,13 +220,13 @@ def main():
     parser.add_argument('--output', type=str, required=True,
                         help='输出目录')
     parser.add_argument('--skills-dir', type=str,
-                        default='故障诊断/topic-skills',
+                        default='故障诊断/技能体系',
                         help='Skills 目录')
     parser.add_argument('--fta-dir', type=str,
-                        default='故障诊断/topic-fta/list',
+                        default='故障诊断/FTA故障树/list',
                         help='FTA 目录')
     parser.add_argument('--seed-dir', type=str,
-                        default='故障诊断/topic-qa-corpus/seed',
+                        default='故障诊断/QA语料/seed',
                         help='手工种子目录')
     parser.add_argument('--config', type=str, default=None,
                         help='配置文件路径')

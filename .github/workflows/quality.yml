@@ -60,8 +60,8 @@ jobs:
           python3 - <<'PY'
           import sys, pathlib, yaml
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
-          CONTENT = {'concepts', 'entities', 'skills', 'docs'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','站点','发布','源码','归档','报告','元数据','资产'}
+          CONTENT = {'概念', '实体', '技能', '综合', '文档', '最佳实践', '研究'}
           DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
           errors, checked = [], 0
           for p in sorted(ROOT.rglob('*.md')):
@@ -107,8 +107,8 @@ jobs:
           python3 - <<'PY'
           import pathlib, re
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','site','web'}
-          CONTENT = {'concepts', 'entities', 'skills', 'docs'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','站点','发布','源码','归档','报告','元数据','资产'}
+          CONTENT = {'概念', '实体', '技能', '综合', '文档', '最佳实践', '研究'}
           DOMAINS = {'集群基础','工作负载','网络','存储','安全','可观测性','平台工程','发布变更','可靠性','故障诊断','生产运维','云厂商','容器运行时','AI基础设施','专项技术','数据库中间件','系统基础','清单模式','生态参考','应用模式'}
           WL = re.compile(r'\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
           def is_content(p):

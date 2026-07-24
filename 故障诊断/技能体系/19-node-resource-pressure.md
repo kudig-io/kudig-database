@@ -114,14 +114,14 @@ related_skills:
   - "SKILL-PERF-001"
   - "SKILL-STORE-001"
 fta_refs:
-  - "故障诊断/topic-fta/list/node-fta.md"
+  - "故障诊断/FTA故障树/list/node-fta.md"
 knowledge_refs:
   - "故障诊断/07-oom-memory-diagnosis.md"
   - "故障诊断/09-node-comprehensive-troubleshooting.md"
   - "故障诊断/35-node-component-troubleshooting.md"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/node-fta.md"
+    path: "../故障诊断/FTA故障树/list/node-fta.md"
     label: "Node 故障树分析"
   - type: "domain"
     path: "../故障诊断/07-oom-memory-diagnosis.md"

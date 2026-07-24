@@ -119,7 +119,7 @@ prerequisites:
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训（从入门到专家） |
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Day 24: Terway CNI 入门学习（含实践任务） |
 | [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查（634 行） |
-| [故障诊断/topic-fta/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树（含 JSON 工作流，879 行） |
+| [故障诊断/FTA故障树/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树（含 JSON 工作流，879 行） |
 | [系统基础/topic-cheat-sheet/](../系统基础/速查卡/) | 命令速查卡 (kubectl、网络诊断等) |
 
 ---
@@ -128,7 +128,7 @@ prerequisites:
 
 ```
 新手路径:     01-product → 02-architecture → 03-usage → 05-testing
-SRE 路径:     07-troubleshooting-fta → 04-operations → 故障诊断/topic-fta/list/terway-fta → 06-performance
+SRE 路径:     07-troubleshooting-fta → 04-operations → 故障诊断/FTA故障树/list/terway-fta → 06-performance
 CRD 管理路径: 03-usage → 03b-crd-operations → 网络/37-terway-resources-crud-operations
 架构师:       全部 8 篇 → 网络/05-terway-advanced-guide → 38-terway-gc-mechanism
 培训讲师:     生产运维/topic-presentations/kubernetes-terway-presentation → 本专题精选

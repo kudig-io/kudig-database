@@ -340,7 +340,7 @@ related_topics:
   - vxlan
 related:
   - 生产运维/topic-learn/public-training/week-4-network-storage/day-24-terway/01-terway-hands-on.md
-  - 故障诊断/topic-fta/list/calico-fta.md
+  - 故障诊断/FTA故障树/list/calico-fta.md
 ---
 ```
 

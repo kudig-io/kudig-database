@@ -115,14 +115,14 @@ related_skills:
   - "SKILL-NET-001"
   - "SKILL-NET-002"
 fta_refs:
-  - "故障诊断/topic-fta/list/statefulset-fta.md"
+  - "故障诊断/FTA故障树/list/statefulset-fta.md"
 knowledge_refs:
   - "故障诊断/21-statefulset-troubleshooting.md"
   - "工作负载/"
   - "存储/"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/statefulset-fta.md"
+    path: "../故障诊断/FTA故障树/list/statefulset-fta.md"
     label: "StatefulSet 故障树分析"
   - type: "domain"
     path: "../故障诊断/21-statefulset-troubleshooting.md"

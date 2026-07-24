@@ -31,6 +31,7 @@ prerequisites:
 - kubectl-basics
 - prometheus-basics
 - backup-basics
+status: stable
 ---
 
 > **生产环境安全提示**

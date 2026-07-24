@@ -141,7 +141,7 @@ graph TD
 
 | 文档类型 | 路径 | 说明 |
 |---|---|---|
-| FTA 故障树 | ../故障诊断/topic-fta/list/{{component}}-fta.md | 完整故障树分析 |
+| FTA 故障树 | ../故障诊断/FTA故障树/list/{{component}}-fta.md | 完整故障树分析 |
 | 技能卡片 | ../故障诊断/topic-skills/{{NN}}-{{scenario}}.md | 操作技能 |
 | 域文档 | ../domain-N-name/{{doc}}.md | 深度文档 |
 

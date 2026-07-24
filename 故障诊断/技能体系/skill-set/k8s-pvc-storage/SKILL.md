@@ -375,7 +375,7 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 | Network 问题 | `故障诊断/25-network-connectivity-troubleshooting.md`, `26-dns-troubleshooting.md` |
 | Storage 问题 | `故障诊断/14-pvc-storage-troubleshooting.md`, `04-storage-csi-troubleshooting.md` |
 | 性能问题 | `故障诊断/33-performance-bottleneck-troubleshooting.md` |
-| 故障树 | `故障诊断/topic-fta/` 完整故障树分析模型 |
+| 故障树 | `故障诊断/FTA故障树/` 完整故障树分析模型 |
 
 ---
 

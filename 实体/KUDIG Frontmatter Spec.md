@@ -80,7 +80,7 @@ Defines the standardized YAML frontmatter format for all 3,337+ documents in the
 | Category | Description | Source Topics |
 |----------|-------------|--------------|
 | `docs` | Spec and dictionary documents | docs/ |
-| `fta` | Fault Tree Analysis documents | 故障诊断/topic-fta/ |
+| `fta` | Fault Tree Analysis documents | 故障诊断/FTA故障树/ |
 | `skills` | Diagnostic skill documents | 故障诊断/topic-skills/ |
 | `cheatsheet` | Quick reference cards | 系统基础/topic-cheat-sheet/ |
 | `scenario` | Production scenario guides | topic-scenarios/ |

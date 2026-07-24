@@ -32,6 +32,7 @@ prerequisites:
 - kubectl-basics
 - ebpf-basics
 - cilium-basics
+status: reviewed
 ---
 
 > **生产环境安全提示**

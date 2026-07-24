@@ -3,7 +3,7 @@
 # Command-Output Diagnosis Corpus Targets
 # =============================================================================
 
-CORPUS_DIR := scripts/corpus-generator
+CORPUS_DIR := 脚本/corpus-generator
 CORPUS_OUTPUT := 故障诊断/topic-qa-corpus/generated
 SKILLS_DIR := 故障诊断/topic-skills
 FTA_DIR := 故障诊断/topic-fta/list

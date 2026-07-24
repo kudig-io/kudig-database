@@ -57,7 +57,7 @@ cross_refs:
   path: ../存储/
   label: '相关知识域: 存储'
 - type: fta
-  path: ../故障诊断/topic-fta/list/csi-fta.md
+  path: ../故障诊断/FTA故障树/list/csi-fta.md
   label: '故障树: csi'
 ---
 

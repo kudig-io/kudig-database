@@ -620,7 +620,7 @@ mkdir -p "$LOG_DIR"
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

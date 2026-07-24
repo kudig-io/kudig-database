@@ -47,6 +47,7 @@ cross_refs:
 - type: best-practice
   path: ./pod-security.md
   label: Pod安全最佳实践
+status: stable
 ---
 
 > **生产环境安全提示**

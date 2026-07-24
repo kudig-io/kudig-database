@@ -93,7 +93,7 @@ related_docs:
 - path: 03-runtime-security-defense.md
   type: depth
   desc: 运行时安全防护
-- path: ../故障诊断/topic-fta/list/certificate-fta.md
+- path: ../故障诊断/FTA故障树/list/certificate-fta.md
   type: fta
   desc: 证书与 TLS 故障树
 cross_refs:

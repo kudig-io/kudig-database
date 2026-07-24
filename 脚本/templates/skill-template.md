@@ -71,7 +71,7 @@ prerequisites:                         # 前置知识依赖
 related_skills:                        # 关联的其他 Skill ID
   - "SKILL-POD-001"
 fta_refs:                              # 对应的 FTA 文件
-  - "故障诊断/topic-fta/list/node-fta.md"
+  - "故障诊断/FTA故障树/list/node-fta.md"
 knowledge_refs:                        # 深度知识参考
   - "故障诊断/高级排障/structural-node-*.md"
   - "故障诊断/"
@@ -79,7 +79,7 @@ knowledge_refs:                        # 深度知识参考
 # === 统一 cross_refs ===
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/node-fta.md"
+    path: "../故障诊断/FTA故障树/list/node-fta.md"
     label: "Node 故障树分析"
   - type: "domain"
     path: "../故障诊断/02-node-notready-troubleshooting.md"
@@ -245,7 +245,7 @@ kubectl ...
 - 至少覆盖 8 个根因
 - 概率分三级：高（>30% 工单为此根因）、中（10-30%）、低（<10%）
 - 诊断证据引用诊断工作流中的 Step ID
-- FTA 映射引用 故障诊断/topic-fta/list/ 中对应的底事件
+- FTA 映射引用 故障诊断/FTA故障树/list/ 中对应的底事件
 
 ---
 

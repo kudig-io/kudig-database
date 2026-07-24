@@ -110,14 +110,14 @@ related_skills:
   - "SKILL-IMAGE-001"
   - "SKILL-NODE-002"
 fta_refs:
-  - "故障诊断/topic-fta/list/job-cronjob-fta.md"
+  - "故障诊断/FTA故障树/list/job-cronjob-fta.md"
 knowledge_refs:
   - "故障诊断/18-cronjob-troubleshooting.md"
   - "故障诊断/22-job-troubleshooting.md"
   - "工作负载/"
 cross_refs:
   - type: "fta"
-    path: "../故障诊断/topic-fta/list/job-cronjob-fta.md"
+    path: "../故障诊断/FTA故障树/list/job-cronjob-fta.md"
     label: "Job/CronJob 故障树分析"
   - type: "domain"
     path: "../故障诊断/18-cronjob-troubleshooting.md"

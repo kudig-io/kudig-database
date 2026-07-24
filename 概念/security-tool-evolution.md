@@ -33,6 +33,7 @@ prerequisites:
 - ebpf-basics
 - tls-basics
 - policy-basics
+status: stable
 ---
 
 > **生产环境安全提示**

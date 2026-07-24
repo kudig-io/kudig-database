@@ -32,6 +32,7 @@ relationships:
   type: uses
 - target: '[[实体/longhorn.md]]'
   type: related_to
+status: stable
 ---
 
 > **生产环境安全提示**

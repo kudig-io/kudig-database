@@ -97,7 +97,7 @@ cross_refs:
   path: ../安全/
   label: '相关知识域: 安全'
 - type: fta
-  path: ../故障诊断/topic-fta/list/kubeadm-fta.md
+  path: ../故障诊断/FTA故障树/list/kubeadm-fta.md
   label: '故障树: kubeadm'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md
@@ -760,8 +760,8 @@ target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
   - 集群基础/32-kubeadm-cluster-bootstrap.md
-  - 故障诊断/topic-fta/list/etcd-fta.md
-  - 故障诊断/topic-fta/list/kubeadm-fta.md
+  - 故障诊断/FTA故障树/list/etcd-fta.md
+  - 故障诊断/FTA故障树/list/kubeadm-fta.md
 ---
 ```
 

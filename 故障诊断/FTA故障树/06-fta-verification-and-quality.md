@@ -1,54 +1,4 @@
 ---
-title: 第六章：FTA 验证与质量保证 (故障诊断)
-description: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
-summary: 'description: ''**所属部分**: 第二部分 - FTA 构建实践指南'''
-category: fta
-tags:
-- fta
-- troubleshooting
-- etcd
-- apiserver
-- job
-- agent
-tier: core
-created: '2026-05-23'
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 第六章：FTA 验证与质量保证 是什么
-- 如何 第六章：FTA 验证与质量保证
-- Kubernetes 10 troubleshooting diagnostics 最佳实践
-- 第六章：FTA 验证与质量保证 故障排查
-- 第六章：FTA 验证与质量保证 排障步骤
-- 第六章：FTA 验证与质量保证 根因分析
-trigger_keywords:
-- 第六章：FTA
-- 验证与质量保证
-- troubleshooting
-- diagnostics
-- fta
-prerequisites:
-- kubectl-basics
-- troubleshooting-methodology
-- etcd-basics
-fta_id: FTA-06_VERIFICATION_AND_QUALITY-001
-component: 06 Verification And Quality
-severity: critical
----
-
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 title: 第六章：FTA 验证与质量保证
 description: '**所属部分**: 第二部分 - FTA 构建实践指南'
 category: fta
@@ -57,7 +7,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[etcd|etcd]]
+- etcd
 - apiserver
 - job
 - agent
@@ -78,22 +28,23 @@ trigger_keywords:
 - 第六章：FTA
 - 验证与质量保证
 - fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+prerequisites:
+- kubectl-basics
+- troubleshooting-methodology
+- etcd-basics
 ---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
 # 第六章：FTA 验证与质量保证
 
 > **所属部分**: 第二部分 - FTA 构建实践指南  
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第五章：FTA 构建完整流程](./05-fta-construction-process.md)  
-> **下一章**: 第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)
+> **上一章**: [第五章：FTA 构建完整流程](./05-fta-construction-process.md)  
+> **下一章**: [第七章：FTA 维护与演进策略](./07-fta-maintenance-and-evolution.md)
 
 ---
 
@@ -199,7 +150,7 @@ spec:
 | **NetworkX (Python)** | 自建 | 图算法库，轻量级 | Agent 推理引擎 |
 | **Mermaid/PlantUML** | 绘图 | 代码生成图形 | 文档化 FTA |
 
-**Neo4j 建模 Kubernetes FTA 示例**：
+**Neo4j 建模 [[实体/kubernetes|kubernetes]] FTA 示例**：
 
 ```cypher
 // 创建顶事件
@@ -255,30 +206,6 @@ ORDER BY be.probability DESC
 ---
 
 > **导航**: [<< 上一章 - FTA 构建完整流程](./05-fta-construction-process.md) | [下一章 - FTA 维护与演进策略 >>](./07-fta-maintenance-and-evolution.md)
-
----
-
-## Obsidian 相关文档
-
-- [[故障诊断/FTA故障树/MOC.md|topic-fta MOC]]
-- [[故障诊断/FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
-- [[故障诊断/FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
-- [[故障诊断/FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
-- [[故障诊断/FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|第七章：FTA 维护与演进策略]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|第八章：AI Agent 时代的运维范式革命]]
-- [[故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md|第九章：FTA 作为 AI Agent 的知识骨架]]
-- [[故障诊断/FTA故障树/10-agent-orchestration-patterns.md|第十章：Agent 编排模式与 FTA 逻辑门映射]]
-- [[故障诊断/FTA故障树/11-fta-driven-runbook-automation.md|第十一章：FTA 驱动的 Runbook 自动化]]
-
-## See Also
-
-- [[故障诊断/FTA故障树/04-fta-core-principles.md|04-fta-core-principles]]
-- [[故障诊断/FTA故障树/05-fta-construction-process.md|05-fta-construction-process]]
-- [[故障诊断/FTA故障树/07-fta-maintenance-and-evolution.md|07-fta-maintenance-and-evolution]]
-- [[故障诊断/FTA故障树/08-ai-agent-ops-revolution.md|08-ai-agent-ops-revolution]]
 
 
 <!-- risk-assessed -->

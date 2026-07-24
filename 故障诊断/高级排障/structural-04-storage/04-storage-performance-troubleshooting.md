@@ -785,9 +785,9 @@ groups:
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
+- [[生态参考/topic-index/storage-index|Storage 存储知识图谱索引]]
+- [[生态参考/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

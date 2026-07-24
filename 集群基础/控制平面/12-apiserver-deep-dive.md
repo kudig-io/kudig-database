@@ -70,7 +70,7 @@ cross_refs:
   path: ../安全/
   label: '相关知识域: 安全'
 - type: fta
-  path: ../故障诊断/topic-fta/list/apiserver-fta.md
+  path: ../故障诊断/FTA故障树/list/apiserver-fta.md
   label: '故障树: apiserver'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md
@@ -85,7 +85,7 @@ related_docs:
 - path: 13-kube-controller-manager-deep-dive.md
   type: depth
   desc: KCM 深度解析
-- path: ../故障诊断/topic-fta/list/apiserver-fta.md
+- path: ../故障诊断/FTA故障树/list/apiserver-fta.md
   type: fta
   desc: API Server 故障树
 ---

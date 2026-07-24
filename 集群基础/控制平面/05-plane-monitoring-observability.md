@@ -103,7 +103,7 @@ cross_refs:
   path: ../安全/
   label: '相关知识域: 安全'
 - type: fta
-  path: ../故障诊断/topic-fta/list/monitoring-fta.md
+  path: ../故障诊断/FTA故障树/list/monitoring-fta.md
   label: '故障树: monitoring'
 - type: cheatsheet
   path: ../系统基础/topic-cheat-sheet/k8s.md

@@ -31,6 +31,7 @@ relationships:
   type: uses
 - target: '[[实体/kubernetes.md]]'
   type: uses
+status: stable
 ---
 
 > **生产环境安全提示**

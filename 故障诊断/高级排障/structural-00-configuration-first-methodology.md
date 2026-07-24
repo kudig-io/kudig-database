@@ -67,10 +67,10 @@ prerequisites:
 │  ├── 解决：排查顺序问题（先查什么？后查什么？）                              │
 │  └── 输出：结构化排查路径 + 配置验证清单                                   │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  domain-10-troubleshooting-diagnostics/topic-fta/          → 为什么出问题（故障树因果分析，演绎法）                 │
-│  domain-10-troubleshooting-diagnostics/topic-febm/         → 如何从证据推导结论（取证循证，归纳法）                 │
+│  故障诊断/FTA故障树/          → 为什么出问题（故障树因果分析，演绎法）                 │
+│  故障诊断/topic-febm/         → 如何从证据推导结论（取证循证，归纳法）                 │
 │  topic-structural/   → 具体怎么查（按组件的详细排查步骤）                    │
-│  domain-10-troubleshooting-diagnostics/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
+│  故障诊断/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -453,7 +453,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
     │
     ▼
 ┌──────────────────────┐
-│ Skill 路由（症状匹配）  │  ← domain-10-troubleshooting-diagnostics/topic-skills/ YAML front matter
+│ Skill 路由（症状匹配）  │  ← 故障诊断/topic-skills/ YAML front matter
 └──────────┬───────────┘
            │
            ▼
@@ -466,12 +466,12 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
            │
            ▼
 ┌──────────────────────┐
-│ FTA 故障树遍历         │  ← domain-10-troubleshooting-diagnostics/topic-fta/ 因果关系模型
+│ FTA 故障树遍历         │  ← 故障诊断/FTA故障树/ 因果关系模型
 └──────────┬───────────┘
            │
            ▼
 ┌──────────────────────┐
-│ 修复 → 验证 → 闭环    │  ← domain-10-troubleshooting-diagnostics/topic-skills/ Section 6-7
+│ 修复 → 验证 → 闭环    │  ← 故障诊断/topic-skills/ Section 6-7
 └──────────────────────┘
 ```
 
@@ -587,12 +587,12 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 | 资源 | 路径 | 关系 |
 |------|------|------|
-| **DNS 故障树分析** | [domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md](../domain-10-troubleshooting-diagnostics/topic-fta/list/dns-fta.md) | FTA 因果分析模型 |
+| **DNS 故障树分析** | [故障诊断/FTA故障树/list/dns-fta.md](../故障诊断/FTA故障树/list/dns-fta.md) | FTA 因果分析模型 |
 | **DNS 结构化排查指南** | [03-networking/02-dns-troubleshooting.md](./03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md](../domain-10-troubleshooting-diagnostics/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
-| **DNS Skill（Agent 可执行）** | [domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md](../domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
-| **FEBM 取证方法论** | [domain-10-troubleshooting-diagnostics/topic-febm/](../domain-10-troubleshooting-diagnostics/topic-febm/) | 事后复盘取证分析 |
-| **FTA 方法论合集** | [domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md](../domain-10-troubleshooting-diagnostics/topic-fta/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
+| **DNS 故障排查（domain-12）** | [故障诊断/26-dns-troubleshooting.md](../故障诊断/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
+| **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../故障诊断/topic-skills/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
+| **FEBM 取证方法论** | [故障诊断/topic-febm/](../故障诊断/topic-febm/) | 事后复盘取证分析 |
+| **FTA 方法论合集** | [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
 
 ---
 

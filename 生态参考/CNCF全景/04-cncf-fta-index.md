@@ -198,7 +198,7 @@ authors:
 | **Operator/CRD** | [crd-operator-fta.md](../故障诊断/FTA故障树/list/crd-operator-fta.md) | CRD/Operator |
 | **Cloud Provider** | [cloud-provider-fta.md](../故障诊断/FTA故障树/list/cloud-provider-fta.md) | 云厂商集成 |
 | **Backup/Restore** | [backup-restore-fta.md](../故障诊断/FTA故障树/list/backup-restore-fta.md) | 备份恢复 |
-| **GitOps (Argo CD)** | gitops-argocd-fta.md](../故障诊断/topic-fta/list/gitops-argocd-fta.md) | 同步失败 |
+| **GitOps (Argo CD)** | gitops-argocd-fta.md](../故障诊断/FTA故障树/list/gitops-argocd-fta.md) | 同步失败 |
 | **集群升级** | [cluster-upgrade-fta.md](../故障诊断/FTA故障树/list/cluster-upgrade-fta.md) | 版本升级 |
 
 ---
@@ -280,7 +280,7 @@ flowchart TD
 
 ### 9.3 文档存放位置
 
-- FTA 索引文档: `故障诊断/topic-fta/list/[项目名]-fta.md`
+- FTA 索引文档: `故障诊断/FTA故障树/list/[项目名]-fta.md`
 - 故障排查指南: `故障诊断/高级排障/structural-[分类]/[序号]-[项目名]-troubleshooting.md`
 
 ---

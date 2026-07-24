@@ -23,6 +23,7 @@ trigger_keywords:
 - 混沌工程与灾备演练的结合
 prerequisites:
 - kubectl-basics
+status: reviewed
 ---
 
 > **生产环境安全提示**

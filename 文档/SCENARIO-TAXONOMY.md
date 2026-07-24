@@ -134,7 +134,7 @@ last_updated: "YYYY-MM-DD"
 |---|---|---|
 | 集群部署 | 集群基础/12-cluster-deployment-patterns.md | 平台工程/*, 发布变更/topic-deployment/* |
 | 应用部署 | 工作负载/* | 清单模式/* |
-| 问题排查 | 故障诊断/* | 故障诊断/topic-fta/list/*, 故障诊断/topic-skills/* |
+| 问题排查 | 故障诊断/* | 故障诊断/FTA故障树/list/*, 故障诊断/topic-skills/* |
 | 性能调优 | 集群基础/13-performance-tuning-guide.md | 生产运维/* |
 | 安全加固 | 安全/* | 安全/*, 安全/* |
 | 监控告警 | 可观测性/* | 可观测性/*, 可观测性/* |

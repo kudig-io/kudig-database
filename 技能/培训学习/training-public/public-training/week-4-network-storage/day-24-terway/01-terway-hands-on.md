@@ -337,7 +337,7 @@ related_topics:
   - networkpolicy
 related:
   - 生产运维/topic-learn/public-training/week-4-network-storage/day-25-flannel/01-flannel-hands-on.md
-  - 故障诊断/topic-fta/list/calico-fta.md
+  - 故障诊断/FTA故障树/list/calico-fta.md
 ---
 ```
 

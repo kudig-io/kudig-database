@@ -30,6 +30,7 @@ prerequisites:
 relationships:
 - target: '[[实体/deployment.md]]'
   type: uses
+status: reviewed
 ---
 
 > **生产环境安全提示**

@@ -87,7 +87,7 @@ Each scenario page should contain:
 |----------|-------------|----------------|
 | Cluster Deployment | 集群基础/12-cluster-deployment-patterns.md | 平台工程/*, 发布变更/topic-deployment/* |
 | Application Deployment | 工作负载/* | 清单模式/* |
-| Troubleshooting | 故障诊断/* | 故障诊断/topic-fta/list/*, 故障诊断/topic-skills/* |
+| Troubleshooting | 故障诊断/* | 故障诊断/FTA故障树/list/*, 故障诊断/topic-skills/* |
 | Performance Tuning | 集群基础/13-performance-tuning-guide.md | 生产运维/* |
 | Security Hardening | 安全/* | 安全/*, 安全/* |
 | Monitoring & Alerting | 可观测性/* | 可观测性/*, 可观测性/* |

@@ -5,20 +5,20 @@ qa_pairs:
 - type: best_practice
   question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
   answer: 1) 临时增大 memory limits 到 `<new-limit>`；2) 安排应用团队修复泄漏点 `<leak-location>`。是否批准？"
-  source: domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
 - type: best_practice
   question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
   answer: 新 limit = 当前峰值内存 × 2（根据泄漏速率调整）
-  source: domain-10-troubleshooting-diagnostics/topic-skills/02-pod-crashloop-oomkilled.md
+  source: 故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
 - type: best_practice
   question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
   answer: 每 500-1000 Pod 增加 1 个 CoreDNS 副本
-  source: domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
 - type: best_practice
   question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
   answer: 生产环境 CoreDNS 副本数 ≥ 2，大规模集群（>100 nodes）建议 3-5 个副本
-  source: domain-10-troubleshooting-diagnostics/topic-skills/04-dns-resolution-failure.md
+  source: 故障诊断/topic-skills/04-dns-resolution-failure.md
 - type: best_practice
   question: 关于 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation, 有什么最佳实践?
   answer: '`<new>`）。Controller Pod 将重启。是否批准？"'
-  source: domain-10-troubleshooting-diagnostics/topic-skills/13-ingress-gateway-failure.md
+  source: 故障诊断/topic-skills/13-ingress-gateway-failure.md

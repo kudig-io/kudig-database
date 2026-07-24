@@ -369,7 +369,7 @@ pie title 底事件频率分布
 
 ---
 
-> **关联文档**: [故障诊断/topic-fta/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
+> **关联文档**: [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
 
 ## Related
 

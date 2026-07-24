@@ -849,8 +849,8 @@ kubectl certificate deny <csr>
 
 ## Related
 
-- [[domain-19-landscape-references/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[domain-19-landscape-references/topic-index/security-index|Security 安全知识图谱索引]]
+- [[生态参考/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[生态参考/topic-index/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->
