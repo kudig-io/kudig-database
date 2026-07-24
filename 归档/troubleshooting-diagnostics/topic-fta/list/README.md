@@ -300,7 +300,7 @@ cross_refs:
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[概念/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[概念/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[元数据/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
 - [[domain-14-ai-ml-infra/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference

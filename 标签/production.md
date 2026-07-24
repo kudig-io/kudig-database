@@ -115,7 +115,7 @@ last_updated: '2026-07-21'
 
 - [[概念/k8s-production-best-practices|K8s 生产最佳实践]]
 - [[概念/production-operations-best-practices|生产运营最佳实践]]
-- [[概念/Production Troubleshooting Playbook|生产故障排查 Playbook]]
+- [[故障诊断/Production Troubleshooting Playbook|生产故障排查 Playbook]]
 - [[概念/command-risk-assessment|命令风险分级与安全生产规范]]
 
 ## 案例研究 (Case Studies)

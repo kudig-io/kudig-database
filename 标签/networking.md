@@ -155,7 +155,7 @@ last_updated: '2026-07-21'
 - [[概念/cni-networking-model|CNI 网络模型]]
 - [[概念/service-networking|Service 网络]]
 - [[概念/k8s-networking-evolution|K8s 网络演进]]
-- [[概念/networkpolicy|NetworkPolicy]]
+- [[概念/network-policy|NetworkPolicy]]
 - [[概念/cilium-ebpf-networking|Cilium eBPF 网络]]
 - [[概念/ingress|Ingress]]
 

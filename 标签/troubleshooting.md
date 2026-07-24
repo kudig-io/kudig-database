@@ -174,7 +174,7 @@ etcdctl endpoint health --cluster
 ## 概念 (Concepts)
 
 - [[概念/troubleshooting-methodology|故障排查方法论]]
-- [[概念/Production Troubleshooting Playbook|生产故障排查 Playbook]]
+- [[故障诊断/Production Troubleshooting Playbook|生产故障排查 Playbook]]
 - [[概念/fault-tree-analysis|故障树分析]]
 - [[概念/root-cause-analysis|根因分析]]
 

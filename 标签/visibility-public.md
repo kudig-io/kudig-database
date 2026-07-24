@@ -65,7 +65,7 @@ last_updated: '2026-07-21'
 - [[概念/metrics-server|Metrics Server]]
 - [[故障诊断/技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook|Monitoring & Alerting Failure Remediation Playbook]]
 - [[概念/network-policy|NetworkPolicy]]
-- [[概念/networkpolicy|NetworkPolicy]]
+- [[概念/network-policy|NetworkPolicy]]
 - [[故障诊断/多故障场景/MULTI-009-NetworkPolicy阻断-plus-DNS解析失败并发|NetworkPolicy阻断 + DNS解析失败并发]]
 - [[故障诊断/技能体系/dialogue/DIALOGUE-PVC-001|PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本]]
 - [[存储/02-pvc-expansion-guide|PVC 扩容指南]]

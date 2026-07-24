@@ -76,7 +76,7 @@ last_updated: '2026-07-21'
 - [[概念/gitops-sre-release-gate|GitOps SRE 发布门禁]]
 - [[概念/gitops-tool-evolution|GitOps 工具演进]]
 - [[概念/helm-argocd-gitops|Helm ArgoCD GitOps]]
-- [[概念/GitOps x 平台工程|GitOps 与平台工程]]
+- [[概念/GitOps × 平台工程|GitOps 与平台工程]]
 - [[概念/progressive-delivery-strategies|渐进式交付策略]]
 
 ## 部署方案 (Deployment)

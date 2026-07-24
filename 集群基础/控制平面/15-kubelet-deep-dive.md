@@ -1,7 +1,7 @@
 ---
 title: kubelet 深度解析 (kubelet Deep Dive)
-description: 'title: kubelet 深度解析 (kubelet Deep Dive)'
-summary: 'title: kubelet 深度解析 (kubelet Deep Dive)'
+description: 深入解析 kubelet 的架构设计、PLEG、CRI 交互、资源管理、驱逐策略、证书轮换与生产级运维排障。
+summary: 深入解析 kubelet 的架构设计、PLEG、CRI 交互、资源管理、驱逐策略、证书轮换与生产级运维排障。
 category: general
 tags:
 - k8s
@@ -48,73 +48,6 @@ prerequisites:
 
 
 
-
-title: [[kubelet|kubelet]] 深度解析 (kubelet Deep Dive)
-description: '# kubelet 深度解析 (kubelet Deep Dive)'
-category: control-plane
-tags:
-- k8s
-- control-plane
-- [[etcd|etcd]]
-- apiserver
-- scheduler
-- controller-manager
-- kubelet
-- [[Prometheus|prometheus]]
-- [[containerd|containerd]]
-- cri-o
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 平台工程师
-- 运维工程师
-estimated_read_time: 15min
-intent_queries:
-- kubelet 深度解析 (kubelet Deep Dive) 是什么
-- 如何 kubelet 深度解析 (kubelet Deep Dive)
-- Kubernetes 3 control plane 最佳实践
-trigger_keywords:
-- kubelet
-- 深度解析
-- kubelet
-- Deep
-- Dive
-- control
-- plane
-cross_refs:
-- type: domain
-  path: ../集群基础/
-  label: '相关知识域: 集群基础'
-- type: domain
-  path: ../工作负载/
-  label: '相关知识域: 工作负载'
-- type: domain
-  path: ../网络/
-  label: '相关知识域: 网络'
-- type: domain
-  path: ../存储/
-  label: '相关知识域: 存储'
-- type: domain
-  path: ../安全/
-  label: '相关知识域: 安全'
-- type: cheatsheet
-  path: ../系统基础/topic-cheat-sheet/k8s.md
-  label: '速查卡: k8s'
-- type: cheatsheet
-  path: ../系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md
-  label: '速查卡: kubectl-scene-cheatsheet'
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 
 # kubelet 深度解析 (kubelet Deep Dive)
 

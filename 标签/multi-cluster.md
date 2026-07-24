@@ -39,7 +39,7 @@ last_updated: '2026-07-21'
 - [[概念/multi-cluster-dr-automation|多集群灾备自动化]]
 - [[概念/cost-optimization-multi-cluster|多集群成本优化]]
 - [[概念/edge-cloud-continuum|边缘云连续体]]
-- [[概念/IaC x 多集群管理|IaC 与多集群管理]]
+- [[概念/IaC × 多集群管理|IaC 与多集群管理]]
 
 ## 生产运维 (Production Operations)
 
