@@ -59,6 +59,7 @@ last_updated: 2026-07
 - [[故障诊断/FTA故障树/list/openkruise-fta.md|Openkruise Fta]]
 - [[故障诊断/FTA故障树/list/pdb-fta.md|Pdb Fta]]
 - [[故障诊断/FTA故障树/list/pod-fta.md|Pod Fta]]
+- [[故障诊断/FTA故障树/list/pod-creation-end-to-end-fta.md|Pod Creation End To End Fta]]
 - [[故障诊断/FTA故障树/list/psp-scc-fta.md|Psp Scc Fta]]
 - [[故障诊断/FTA故障树/list/rbac-fta.md|Rbac Fta]]
 - [[故障诊断/FTA故障树/list/resource-quota-fta.md|Resource Quota Fta]]
